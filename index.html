@@ -1,1635 +1,1632 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Righetto Immobiliare — Padova e Provincia</title>
-  <meta name="description" content="Agenzia immobiliare Padova e provincia. Vendita casa, affitti, valutazioni gratuite. 30 anni esperienza. Risposta in 24h. ☎ 049 884 3484">
-  <meta name="keywords" content="agenzia immobiliare Padova, vendita casa Padova, affitto Padova, valutazione immobile gratuita, immobili Padova, case in vendita Padova">
-  <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="author" content="Righetto Immobiliare — Capon Gino">
-  <link rel="canonical" href="https://www.righettoimmobiliare.it/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Righetto Immobiliare — Agenzia Immobiliare Padova">
-  <meta property="og:description" content="Vendita, affitto e valutazioni gratuite a Padova e provincia. 30 anni di esperienza.">
-  <meta property="og:url" content="https://www.righettoimmobiliare.it">
-  <meta name="twitter:card" content="summary_large_image">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Righetto Immobiliare — Padova e Provincia dal 1990</title>
+<meta name="description" content="Agenzia immobiliare a Padova. Vendita, affitto e gestione immobili in tutta la provincia di Padova dal 1990.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-/* ═══════════════════════════════════════════
-   ROOT VARIABLES
-═══════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   ROOT & RESET
+══════════════════════════════════════════ */
 :root {
-  --blu:      #3A5578;
-  --blu2:     #4A6A8C;
-  --blu3:     #5C7A9E;
-  --blu4:     #7A9AB8;
-  --blu-scuro:#1E3A5C;
-  --lime:     #CEE08F;
-  --lime2:    #e2efb8;
-  --bianco:   #fafaf5;
-  --panna:    #f5f0e8;
-  --testo:    rgba(245,240,232,.75);
-  --card-bg:  #ffffff;
-  --sfondo-chiaro: #EEF3F8;
-  --radius:   6px;
-  --ombra:    0 12px 40px rgba(30,58,92,.18);
+  --blu:    #3A5578;
+  --blu2:   #4A6A8C;
+  --blu3:   #5C7A9E;
+  --chiaro: #A8C0D6;
+  --oro:    #CEE08F;
+  --oro2:   #e2efb8;
+  --sfondo: #f5f0e8;
+  --bianco: #fafaf5;
+  --testo:  #1E3A5C;
+  --grigio: #8a9aaa;
+  --rosso:  #e74c3c;
+  --verde:  #27ae60;
+  --nav-h:  72px;
 }
-
-/* ═══════════════════════════════════════════
-   RESET & BASE
-═══════════════════════════════════════════ */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Montserrat',sans-serif;background:var(--blu3);color:var(--bianco);overflow-x:hidden;cursor:none}
-a{text-decoration:none;color:inherit}
+body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--testo);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:var(--blu-scuro)}
-::-webkit-scrollbar-thumb{background:var(--lime);border-radius:3px}
+button{font-family:inherit;cursor:pointer}
 
-/* ═══════════════════════════════════════════
-   CUSTOM CURSOR
-═══════════════════════════════════════════ */
-.cursor{
-  position:fixed;width:10px;height:10px;
-  background:var(--lime);border-radius:50%;
-  pointer-events:none;z-index:99999;
-  transform:translate(-50%,-50%);
-  transition:width .3s,height .3s,background .3s;
-  mix-blend-mode:screen;
-}
-.cursor-ring{
-  position:fixed;width:36px;height:36px;
-  border:1.5px solid rgba(206,224,143,.5);border-radius:50%;
-  pointer-events:none;z-index:99998;
-  transform:translate(-50%,-50%);
-  transition:all .18s cubic-bezier(.25,.46,.45,.94);
-}
-body:has(a:hover) .cursor{width:18px;height:18px;background:var(--lime2)}
-body:has(a:hover) .cursor-ring{width:56px;height:56px;border-color:rgba(206,224,143,.3)}
+/* ══════════════════════════════════════════
+   SCROLLBAR
+══════════════════════════════════════════ */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--sfondo)}
+::-webkit-scrollbar-thumb{background:var(--chiaro);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--blu3)}
 
-/* ═══════════════════════════════════════════
+/* ══════════════════════════════════════════
    NAVBAR
-═══════════════════════════════════════════ */
-header{
-  position:fixed;top:0;left:0;right:0;z-index:500;
-  padding:0 3rem;height:70px;
-  display:flex;align-items:center;justify-content:space-between;
-  transition:background .5s,backdrop-filter .5s,border-bottom .5s,padding .4s;
+══════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: var(--nav-h);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px;
+  background: rgba(58,85,120,0.0);
+  backdrop-filter: blur(0px);
+  transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s;
 }
-header.scrolled{
-  background:rgba(30,58,92,.96);backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(206,224,143,.18);height:60px;
+nav.scrolled {
+  background: rgba(250,250,245,0.96);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 2px 24px rgba(30,58,92,0.12);
 }
-.logo{
-  font-family:'Cormorant Garamond',serif;font-size:1.4rem;
-  font-weight:600;color:var(--bianco);letter-spacing:.04em;
-  display:flex;flex-direction:column;
+.nav-logo {
+  display: flex; flex-direction: column;
 }
-.logo em{color:var(--lime);font-style:italic;font-weight:300}
-.logo small{font-family:'Montserrat',sans-serif;font-size:.5rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,240,232,.3);margin-top:2px}
-.nav-links{display:flex;gap:.15rem;align-items:center;list-style:none}
-.nav-links a{
-  font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
-  color:rgba(245,240,232,.5);padding:.45rem .9rem;border-radius:3px;
-  transition:color .25s;font-weight:400;position:relative;
+.nav-logo-main {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 600;
+  color: white; letter-spacing: 0.5px;
+  transition: color 0.4s;
+  line-height: 1;
 }
-.nav-links a::after{
-  content:'';position:absolute;bottom:2px;left:.9rem;right:.9rem;
-  height:1px;background:var(--lime);transform:scaleX(0);
-  transition:transform .3s cubic-bezier(.25,.46,.45,.94);
+.nav-logo-sub {
+  font-size: 0.6rem; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.65);
+  transition: color 0.4s; margin-top: 2px;
 }
-.nav-links a:hover{color:var(--lime)}
-.nav-links a:hover::after{transform:scaleX(1)}
-.nav-right{display:flex;align-items:center;gap:1.2rem}
-.nav-tel{font-size:.68rem;color:rgba(245,240,232,.35);letter-spacing:.08em}
-.nav-btn{
-  border:1px solid rgba(206,224,143,.55);color:var(--lime);
-  padding:.42rem 1.2rem;font-size:.66rem;letter-spacing:.12em;
-  text-transform:uppercase;font-weight:500;border-radius:3px;
-  transition:background .25s,color .25s;
-}
-.nav-btn:hover{background:var(--lime);color:var(--blu-scuro)}
-@media(max-width:960px){.nav-links,.nav-tel,.nav-btn{display:none}}
+nav.scrolled .nav-logo-main { color: var(--blu); }
+nav.scrolled .nav-logo-sub  { color: var(--chiaro); }
 
-/* hamburger */
-.hamburger{
-  display:none;flex-direction:column;gap:5px;
-  background:none;border:none;cursor:pointer;padding:.4rem;z-index:600;
+.nav-links {
+  display: flex; align-items: center; gap: 32px; list-style: none;
 }
-.hamburger span{display:block;width:24px;height:1.5px;background:var(--bianco);transition:all .3s}
-.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
-.hamburger.open span:nth-child(2){opacity:0}
-.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-@media(max-width:960px){.hamburger{display:flex}}
+.nav-links a {
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 1px;
+  text-transform: uppercase; color: rgba(255,255,255,0.9);
+  transition: color 0.2s; position: relative; padding-bottom: 4px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px; background: var(--oro);
+  transition: width 0.25s;
+}
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-links a:hover { color: white; }
+nav.scrolled .nav-links a { color: var(--blu); }
+nav.scrolled .nav-links a:hover { color: var(--blu3); }
 
-/* mobile menu */
-.mobile-menu{
-  position:fixed;top:0;left:0;right:0;bottom:0;
-  background:rgba(20,36,65,.98);backdrop-filter:blur(24px);
-  z-index:490;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:2rem;
-  opacity:0;pointer-events:none;transition:opacity .35s;
+.nav-cta {
+  background: var(--oro); color: var(--testo) !important;
+  padding: 9px 20px; border-radius: 25px; font-weight: 700 !important;
+  transition: background 0.2s, transform 0.2s !important;
 }
-.mobile-menu.open{opacity:1;pointer-events:all}
-.mobile-menu a{
-  font-family:'Cormorant Garamond',serif;font-size:2.2rem;
-  font-weight:300;color:var(--bianco);letter-spacing:.06em;
-  transition:color .2s;
-}
-.mobile-menu a:hover{color:var(--lime)}
-.mobile-menu .mm-divider{width:60px;height:1px;background:rgba(206,224,143,.2)}
-.mobile-menu .mm-tel{font-size:.78rem;color:rgba(255,255,255,.3);letter-spacing:.1em}
-.mobile-menu .mm-btn{
-  background:var(--lime);color:var(--blu-scuro);
-  padding:.75rem 2.5rem;font-size:.68rem;letter-spacing:.15em;
-  text-transform:uppercase;font-weight:700;border-radius:3px;
-}
+.nav-cta:hover { background: var(--oro2) !important; transform: translateY(-1px); }
+.nav-cta::after { display: none !important; }
 
-/* ═══════════════════════════════════════════
-   HERO
-═══════════════════════════════════════════ */
-.hero{
-  position:relative;height:100vh;min-height:700px;
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
+.nav-burger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer;
 }
-#hero-canvas{
-  position:absolute;inset:0;width:100%;height:100%;
-  will-change:transform;transform:translateZ(0);
+.nav-burger span {
+  display: block; width: 24px; height: 2px;
+  background: white; border-radius: 2px; transition: all 0.3s;
 }
-/* grain overlay */
-.grain{
-  position:absolute;inset:0;z-index:2;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size:200px;animation:grainAnim .6s steps(2) infinite;opacity:.035;
+nav.scrolled .nav-burger span { background: var(--blu); }
+
+/* Mobile menu */
+.nav-mobile {
+  position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0;
+  background: var(--bianco); z-index: 999;
+  display: none; flex-direction: column;
+  padding: 40px 32px;
+  gap: 8px; overflow-y: auto;
+  transform: translateX(100%); transition: transform 0.3s;
 }
-@keyframes grainAnim{0%,100%{background-position:0 0}25%{background-position:50px -30px}50%{background-position:-20px 40px}75%{background-position:30px 10px}}
-.vignette{
-  position:absolute;inset:0;z-index:3;pointer-events:none;
-  background:radial-gradient(ellipse 90% 80% at 50% 50%,transparent 30%,rgba(20,36,65,.8) 100%);
-}
-/* side lines decoration */
-.hero-line{position:absolute;left:3rem;top:70px;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(168,192,214,.25) 25%,rgba(168,192,214,.25) 75%,transparent);z-index:4}
-.hero-line-r{position:absolute;right:3rem;top:70px;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(92,122,158,.1) 25%,rgba(92,122,158,.1) 75%,transparent);z-index:4}
-/* floating stat badges */
-.hero-stat{
-  position:absolute;z-index:6;
-  background:rgba(20,36,65,.75);backdrop-filter:blur(14px);
-  border:1px solid rgba(206,224,143,.2);border-radius:8px;
-  padding:1rem 1.4rem;text-align:center;
-  animation:floatY 7s ease-in-out infinite;
-}
-.hero-stat--a{right:6%;top:28%;animation-delay:0s}
-.hero-stat--b{right:16%;bottom:25%;animation-delay:2.5s}
-.hero-stat--c{left:4.5%;bottom:30%;animation-delay:5s}
-@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.hs-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--lime);line-height:1}
-.hs-lab{font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.45);margin-top:.3rem}
-/* hero content */
-.hero-content{
-  position:relative;z-index:5;
-  text-align:center;padding:0 1.5rem;max-width:1000px;
-}
-.hero-eyebrow{
-  display:flex;align-items:center;justify-content:center;gap:1.2rem;
-  margin-bottom:2rem;
-  opacity:0;animation:fadeUp .9s ease .3s forwards;
-}
-.hero-eyebrow-line{width:40px;height:1px;background:var(--lime);opacity:.6}
-.hero-eyebrow span{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--lime)}
-.hero-h1{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(3.5rem,8.5vw,7.5rem);
-  font-weight:300;line-height:1.03;color:var(--bianco);margin-bottom:.5rem;
-}
-.hero-h1 .word{display:inline-block;overflow:hidden;margin:0 .15rem}
-.hero-h1 .word-inner{
-  display:inline-block;transform:translateY(110%);
-  animation:wordReveal .9s cubic-bezier(.16,1,.3,1) forwards;
-}
-.hero-h1 .word:nth-child(1) .word-inner{animation-delay:.5s}
-.hero-h1 .word:nth-child(2) .word-inner{animation-delay:.65s}
-.hero-h1 .word:nth-child(3) .word-inner{animation-delay:.8s}
-.hero-h1 em{font-style:italic;color:var(--lime);font-weight:300}
-.hero-h1-row2 .word-inner{animation-delay:1.1s!important}
-.hero-h1-row2:nth-child(2) .word-inner{animation-delay:1.25s!important}
-.hero-h1-row2:nth-child(3) .word-inner{animation-delay:1.4s!important}
-.hero-sub{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(1rem,2.2vw,1.5rem);
-  font-style:italic;font-weight:300;
-  color:rgba(245,240,232,.55);margin-bottom:3rem;
-  opacity:0;animation:fadeUp .9s ease 1.6s forwards;
-}
-.hero-actions{
-  display:flex;align-items:center;justify-content:center;
-  gap:1.2rem;flex-wrap:wrap;
-  opacity:0;animation:fadeUp .9s ease 1.85s forwards;
-}
-.hero-bg-num{
-  position:absolute;right:4%;bottom:6%;z-index:4;
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(6rem,14vw,12rem);font-weight:700;
-  color:transparent;-webkit-text-stroke:1px rgba(206,224,143,.06);
-  user-select:none;pointer-events:none;
-  opacity:0;animation:fadeIn 2s ease 1.5s forwards;
-}
-.scroll-hint{
-  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
-  z-index:5;display:flex;flex-direction:column;align-items:center;gap:.5rem;
-  opacity:0;animation:fadeIn 1s ease 2.4s forwards;
-}
-.scroll-hint span{font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.25)}
-.scroll-mouse{width:22px;height:34px;border:1px solid rgba(255,255,255,.18);border-radius:12px;position:relative}
-.scroll-mouse::before{
-  content:'';position:absolute;left:50%;top:6px;
-  width:2px;height:6px;background:var(--lime);border-radius:2px;
-  transform:translateX(-50%);animation:scrollDot 1.8s ease infinite;
-}
-@keyframes scrollDot{0%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0;transform:translateX(-50%) translateY(12px)}}
-.hero-coords{
-  position:absolute;left:4rem;bottom:2.5rem;z-index:5;
-  font-size:.54rem;letter-spacing:.18em;color:rgba(255,255,255,.2);
-  opacity:0;animation:fadeIn 1s ease 2s forwards;
+.nav-mobile.open { display: flex; transform: translateX(0); }
+.nav-mobile a {
+  font-size: 1.2rem; font-weight: 600;
+  color: var(--testo); padding: 14px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
 }
 
-/* ═══════════════════════════════════════════
-   BUTTONS
-═══════════════════════════════════════════ */
-.btn-primary{
-  background:var(--lime);color:var(--blu-scuro);
-  padding:.9rem 2.5rem;font-size:.7rem;letter-spacing:.15em;
-  text-transform:uppercase;font-weight:700;border-radius:3px;
-  position:relative;overflow:hidden;transition:color .3s,transform .3s,box-shadow .3s;
-  box-shadow:0 4px 20px rgba(206,224,143,.3);
-  display:inline-flex;align-items:center;gap:.5rem;
+/* ══════════════════════════════════════════
+   HERO — CANVAS
+══════════════════════════════════════════ */
+#hero {
+  position: relative; height: 100vh; min-height: 640px;
+  display: flex; align-items: center; overflow: hidden;
 }
-.btn-primary::before{
-  content:'';position:absolute;inset:0;
-  background:var(--blu2);transform:translateX(-101%);
-  transition:transform .38s cubic-bezier(.16,1,.3,1);
+#hero-canvas {
+  position: absolute; inset: 0; z-index: 0;
 }
-.btn-primary:hover::before{transform:translateX(0)}
-.btn-primary:hover{color:var(--bianco);transform:translateY(-2px);box-shadow:0 8px 30px rgba(206,224,143,.2)}
-.btn-primary span{position:relative;z-index:1}
-.btn-ghost{
-  border:1.5px solid rgba(206,224,143,.5);color:var(--lime);
-  padding:.9rem 2.5rem;font-size:.7rem;letter-spacing:.15em;
-  text-transform:uppercase;font-weight:500;border-radius:3px;
-  transition:all .3s;
-  display:inline-flex;align-items:center;gap:.5rem;
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(
+    135deg,
+    rgba(30,58,92,0.80) 0%,
+    rgba(58,85,120,0.60) 50%,
+    rgba(92,122,158,0.50) 100%
+  );
 }
-.btn-ghost:hover{border-color:var(--lime);color:var(--blu-scuro);background:var(--lime)}
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 1200px; margin: 0 auto; padding: 0 40px;
+  width: 100%;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(206,224,143,0.2); border: 1px solid rgba(206,224,143,0.4);
+  color: var(--oro); padding: 6px 16px; border-radius: 20px;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 24px;
+  animation: fadeUp 0.8s ease 0.2s both;
+}
+.hero-badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--oro); animation: pulse-chat 2s infinite;
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 700; color: white; line-height: 1.1;
+  margin-bottom: 20px;
+  animation: fadeUp 0.8s ease 0.4s both;
+}
+.hero-title span { color: var(--oro); font-style: italic; }
+.hero-sub {
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem); color: rgba(255,255,255,0.80);
+  max-width: 600px; line-height: 1.7; margin-bottom: 48px;
+  animation: fadeUp 0.8s ease 0.6s both;
+}
+.hero-stats {
+  display: flex; gap: 40px; margin-bottom: 40px;
+  animation: fadeUp 0.8s ease 0.7s both;
+}
+.hero-stat h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem; font-weight: 700; color: var(--oro); line-height: 1;
+}
+.hero-stat p { font-size: 0.72rem; color: rgba(255,255,255,0.65); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+.hero-ctas {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  animation: fadeUp 0.8s ease 0.8s both;
+}
+.btn-hero {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 28px; border-radius: 30px; font-weight: 700;
+  font-size: 0.85rem; letter-spacing: 0.5px; border: none;
+  transition: all 0.25s; text-transform: uppercase;
+}
+.btn-hero-primary { background: var(--oro); color: var(--testo); }
+.btn-hero-primary:hover { background: white; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+.btn-hero-outline {
+  background: transparent; color: white;
+  border: 2px solid rgba(255,255,255,0.5);
+}
+.btn-hero-outline:hover { border-color: white; background: rgba(255,255,255,0.1); transform: translateY(-2px); }
 
-/* ═══════════════════════════════════════════
-   SEARCH SECTION
-═══════════════════════════════════════════ */
-.search-section{
-  background:var(--blu);
-  border-top:1px solid rgba(206,224,143,.12);
-  border-bottom:1px solid rgba(206,224,143,.1);
-  padding:2.8rem 2rem;position:relative;
+.hero-scroll {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: rgba(255,255,255,0.5); font-size: 0.68rem; letter-spacing: 2px;
+  text-transform: uppercase; animation: fadeUp 1s ease 1.2s both;
 }
-.search-section::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(206,224,143,.04) 0%,transparent 60%);
-  pointer-events:none;
+.hero-scroll-line {
+  width: 1px; height: 50px; background: rgba(255,255,255,0.3);
+  position: relative; overflow: hidden;
 }
-.search-inner{max-width:1220px;margin:0 auto}
-.search-tabs{
-  display:flex;gap:0;margin-bottom:1.6rem;
-  border-bottom:1px solid rgba(206,224,143,.12);
+.hero-scroll-line::after {
+  content: ''; position: absolute; top: -100%;
+  width: 1px; height: 100%; background: var(--oro);
+  animation: scrollDown 2s ease 1.5s infinite;
 }
-.stab{
-  font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
-  padding:.65rem 1.5rem;color:rgba(245,240,232,.35);
-  border-bottom:2px solid transparent;margin-bottom:-1px;
-  cursor:pointer;transition:color .2s,border-color .2s;
-  background:none;border-left:none;border-right:none;border-top:none;
-  font-family:'Montserrat',sans-serif;font-weight:400;
-}
-.stab.active{color:var(--lime);border-bottom-color:var(--lime)}
-.stab:hover{color:rgba(206,224,143,.7)}
-.search-fields{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr 1fr auto;
-  gap:1px;background:rgba(206,224,143,.1);
-  border-radius:4px;overflow:hidden;
-}
-@media(max-width:900px){.search-fields{grid-template-columns:1fr 1fr}.search-btn{grid-column:span 2}}
-@media(max-width:560px){.search-fields{grid-template-columns:1fr}.search-btn{grid-column:span 1}}
-.sf{
-  background:rgba(245,240,232,.05);padding:1rem 1.2rem;
-  display:flex;flex-direction:column;gap:.3rem;
-  transition:background .2s;
-}
-.sf:hover{background:rgba(245,240,232,.09)}
-.sf label{font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(206,224,143,.55);font-weight:500}
-.sf input,.sf select{
-  background:none;border:none;outline:none;
-  font-family:'Montserrat',sans-serif;font-size:.82rem;
-  font-weight:300;color:var(--bianco);width:100%;
-}
-.sf select option{background:var(--blu);color:var(--bianco)}
-.sf input::placeholder{color:rgba(255,255,255,.22)}
-.search-btn{
-  background:var(--lime);border:none;cursor:pointer;
-  padding:1rem 2rem;display:flex;align-items:center;justify-content:center;gap:.5rem;
-  font-family:'Montserrat',sans-serif;font-size:.65rem;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--blu-scuro);font-weight:700;
-  transition:background .25s,transform .2s;
-}
-.search-btn:hover{background:var(--lime2);transform:scale(1.02)}
-.search-btn svg{width:15px;height:15px}
+@keyframes scrollDown { 0%{top:-100%} 100%{top:100%} }
 
-/* ═══════════════════════════════════════════
-   STATS BAR
-═══════════════════════════════════════════ */
-.stats-bar{
-  background:var(--lime);
-  display:grid;grid-template-columns:repeat(4,1fr);
+/* ══════════════════════════════════════════
+   SEARCH BAR — RICERCA AVANZATA
+══════════════════════════════════════════ */
+#search-section {
+  position: relative; z-index: 10;
+  margin-top: -60px; padding: 0 40px 60px;
 }
-@media(max-width:650px){.stats-bar{grid-template-columns:1fr 1fr}}
-.stat{
-  text-align:center;padding:2.2rem 1rem;
-  border-right:1px solid rgba(30,58,92,.12);
-  transition:background .3s;
+.search-card {
+  max-width: 1100px; margin: 0 auto;
+  background: white; border-radius: 20px;
+  box-shadow: 0 24px 80px rgba(30,58,92,0.18);
+  padding: 32px 36px;
+  border: 1px solid rgba(58,85,120,0.08);
+  animation: fadeUp 0.8s ease both;
 }
-.stat:last-child{border-right:none}
-.stat:hover{background:var(--lime2)}
-.stat-n{
-  font-family:'Cormorant Garamond',serif;
-  font-size:3.2rem;font-weight:700;color:var(--blu-scuro);line-height:1;
+.search-tabs {
+  display: flex; gap: 0; margin-bottom: 28px;
+  background: var(--sfondo); border-radius: 12px; padding: 4px;
+  width: fit-content;
 }
-.stat-l{
-  font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--blu);margin-top:.4rem;font-weight:600;
+.search-tab {
+  padding: 9px 22px; border-radius: 10px; font-size: 0.8rem;
+  font-weight: 600; background: none; border: none;
+  color: var(--grigio); cursor: pointer; transition: all 0.2s;
+  letter-spacing: 0.5px;
 }
+.search-tab.active { background: var(--blu); color: white; box-shadow: 0 4px 12px rgba(58,85,120,0.3); }
+.search-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1.2fr 1fr 1fr auto;
+  gap: 14px; align-items: end;
+}
+.search-group { display: flex; flex-direction: column; gap: 6px; }
+.search-group label {
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--chiaro);
+}
+.search-group select, .search-group input {
+  padding: 12px 14px; border: 1.5px solid rgba(168,192,214,0.4);
+  border-radius: 10px; font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem; color: var(--testo); background: var(--sfondo);
+  transition: border-color 0.2s, box-shadow 0.2s; appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A8C0D6' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+  padding-right: 32px;
+}
+.search-group input {
+  background-image: none; padding-right: 14px;
+}
+.search-group select:focus, .search-group input:focus {
+  outline: none; border-color: var(--blu);
+  box-shadow: 0 0 0 3px rgba(58,85,120,0.1);
+  background-color: white;
+}
+.btn-cerca {
+  background: linear-gradient(135deg, var(--blu), var(--blu3));
+  color: white; border: none; border-radius: 10px;
+  padding: 12px 24px; font-size: 0.85rem; font-weight: 700;
+  display: flex; align-items: center; gap: 8px;
+  transition: all 0.2s; white-space: nowrap; height: 47px;
+}
+.btn-cerca:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(58,85,120,0.4); }
+.btn-cerca svg { width: 16px; height: 16px; }
 
-/* ═══════════════════════════════════════════
-   SECTION COMMON
-═══════════════════════════════════════════ */
-.sec-tag{font-size:.56rem;letter-spacing:.26em;text-transform:uppercase;color:var(--lime);margin-bottom:.6rem;font-weight:500}
-.sec-h{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;line-height:1.18;margin-bottom:.75rem}
-.sec-h strong{font-weight:600}
-.sec-p{font-size:.82rem;color:rgba(245,240,232,.6);line-height:2;font-weight:300;max-width:520px}
-
-/* ═══════════════════════════════════════════
-   EVIDENZA IMMOBILI
-═══════════════════════════════════════════ */
-.evidenza{background:var(--sfondo-chiaro);padding:7rem 2rem}
-.ev-inner{max-width:1300px;margin:0 auto}
-.ev-header{
-  display:flex;align-items:flex-end;justify-content:space-between;
-  margin-bottom:3rem;flex-wrap:wrap;gap:1rem;
-  padding-bottom:1.2rem;border-bottom:1px solid rgba(58,85,120,.1);
+/* ══════════════════════════════════════════
+   SEZIONI COMUNI
+══════════════════════════════════════════ */
+section { padding: 80px 40px; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.section-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--blu3); margin-bottom: 14px;
 }
-.ev-header .sec-tag{color:var(--blu3)}
-.ev-header .sec-h{color:var(--blu-scuro)}
-.ev-header .sec-h strong{color:var(--blu)}
-.ev-link{
-  font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--blu);border-bottom:1px solid rgba(58,85,120,.3);
-  padding-bottom:.1rem;transition:border-color .2s,color .2s;
+.section-label::before {
+  content: ''; width: 24px; height: 2px; background: var(--oro);
 }
-.ev-link:hover{color:var(--blu3);border-color:var(--blu3)}
-.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-@media(max-width:960px){.cards-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:580px){.cards-grid{grid-template-columns:1fr}}
-.pcard{
-  background:#fff;border:1px solid rgba(90,122,158,.12);
-  border-radius:var(--radius);overflow:hidden;
-  text-decoration:none;color:inherit;display:block;
-  transition:transform .38s cubic-bezier(.16,1,.3,1),box-shadow .38s,border-color .3s;
-  box-shadow:0 3px 16px rgba(58,85,120,.1);
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
+  color: var(--testo); line-height: 1.2; margin-bottom: 16px;
 }
-.pcard:hover{transform:translateY(-8px);box-shadow:0 16px 48px rgba(58,85,120,.2);border-color:rgba(92,122,158,.4)}
-.pcard-img{position:relative;aspect-ratio:4/3;overflow:hidden}
-.pcard-img-ph{
-  width:100%;height:100%;
-  background:linear-gradient(135deg,var(--blu3) 0%,var(--blu) 100%);
-  display:flex;align-items:center;justify-content:center;
-}
-.pcard-img-ph svg{width:40px;height:40px;opacity:.1}
-.pcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1)}
-.pcard:hover .pcard-img img{transform:scale(1.05)}
-.pcard-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,58,92,.75) 0%,transparent 55%)}
-.pcard-badges{position:absolute;top:.8rem;left:.8rem;z-index:2;display:flex;gap:.35rem;flex-wrap:wrap}
-.badge{font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .55rem;border-radius:3px;font-weight:700}
-.badge-v{background:var(--lime);color:var(--blu-scuro)}
-.badge-a{background:rgba(92,122,158,.9);color:#fff}
-.badge-e{background:rgba(255,255,255,.92);color:var(--blu-scuro)}
-.pcard-body{padding:1.1rem 1.2rem;background:#fff}
-.pcard-price{
-  font-family:'Cormorant Garamond',serif;font-size:1.6rem;
-  font-weight:600;color:var(--blu-scuro);margin-bottom:.3rem;
-}
-.pcard-title{font-size:.78rem;font-weight:300;color:rgba(30,58,92,.7);margin-bottom:.4rem;line-height:1.5}
-.pcard-loc{
-  font-size:.66rem;color:rgba(58,85,120,.5);
-  display:flex;align-items:center;gap:.25rem;margin-bottom:.7rem;
-}
-.pcard-loc svg{width:10px;height:10px}
-.pcard-specs{
-  display:flex;gap:.7rem;flex-wrap:wrap;font-size:.66rem;
-  color:rgba(58,85,120,.45);padding-top:.7rem;
-  border-top:1px solid rgba(58,85,120,.09);
+.section-sub {
+  font-size: 0.95rem; color: var(--grigio); max-width: 600px;
+  line-height: 1.7; margin-bottom: 48px;
 }
 
-/* ═══════════════════════════════════════════
+/* ══════════════════════════════════════════
+   IMMOBILI IN EVIDENZA
+══════════════════════════════════════════ */
+#evidenza { background: var(--sfondo); }
+.props-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px; margin-bottom: 40px;
+}
+.prop-card {
+  background: white; border-radius: 16px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(30,58,92,0.06);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer; text-decoration: none; display: block;
+  border: 1px solid rgba(58,85,120,0.06);
+}
+.prop-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(30,58,92,0.14);
+}
+.prop-img-wrap {
+  position: relative; height: 220px; overflow: hidden;
+}
+.prop-img-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.5s;
+}
+.prop-card:hover .prop-img-wrap img { transform: scale(1.05); }
+.prop-img-placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--blu), var(--blu3));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem; color: rgba(255,255,255,0.3);
+}
+.prop-badge {
+  position: absolute; top: 14px; left: 14px;
+  padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
+.prop-badge.vendita { background: var(--blu); color: white; }
+.prop-badge.affitto { background: var(--verde); color: white; }
+.prop-badge.asta { background: var(--rosso); color: white; }
+.prop-badge-ev {
+  position: absolute; top: 14px; right: 14px;
+  background: var(--oro); color: var(--testo);
+  padding: 4px 10px; border-radius: 20px; font-size: 0.65rem; font-weight: 700;
+}
+.prop-virtual {
+  position: absolute; bottom: 14px; right: 14px;
+  background: rgba(0,0,0,0.6); color: white;
+  padding: 5px 10px; border-radius: 8px; font-size: 0.7rem;
+  display: flex; align-items: center; gap: 4px; backdrop-filter: blur(4px);
+}
+.prop-body { padding: 20px; }
+.prop-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; font-weight: 700; color: var(--blu);
+  margin-bottom: 6px;
+}
+.prop-title {
+  font-size: 0.9rem; font-weight: 600; color: var(--testo);
+  margin-bottom: 8px; line-height: 1.4;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.prop-location {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 0.75rem; color: var(--grigio); margin-bottom: 16px;
+}
+.prop-location svg { width: 13px; height: 13px; flex-shrink: 0; }
+.prop-features {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  padding-top: 14px; border-top: 1px solid rgba(0,0,0,0.05);
+}
+.prop-feature {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 0.73rem; color: var(--grigio); font-weight: 500;
+}
+.prop-feature svg { width: 14px; height: 14px; }
+
+.props-more {
+  text-align: center; padding-top: 8px;
+}
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 32px; border-radius: 30px;
+  border: 2px solid var(--blu); color: var(--blu);
+  font-weight: 700; font-size: 0.85rem; letter-spacing: 0.5px;
+  text-transform: uppercase; transition: all 0.25s;
+}
+.btn-outline:hover { background: var(--blu); color: white; transform: translateY(-2px); }
+.btn-outline svg { width: 16px; height: 16px; transition: transform 0.2s; }
+.btn-outline:hover svg { transform: translateX(4px); }
+
+/* ══════════════════════════════════════════
    SERVIZI
-═══════════════════════════════════════════ */
-.servizi-sec{background:#0d1a2d;padding:7rem 2rem;position:relative;overflow:hidden}
-.servizi-sec::before{
-  content:'';position:absolute;top:-200px;right:-200px;
-  width:600px;height:600px;
-  background:radial-gradient(circle,rgba(206,224,143,.06) 0%,transparent 70%);
-  pointer-events:none;
+══════════════════════════════════════════ */
+#servizi { background: white; }
+.services-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
 }
-.srv-inner{max-width:1300px;margin:0 auto}
-.srv-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
-  background:rgba(255,255,255,.08);margin-top:3.5rem;
-  border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);overflow:hidden;
+.service-card {
+  padding: 32px 28px; border-radius: 16px;
+  background: var(--sfondo); border: 1px solid rgba(58,85,120,0.07);
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  cursor: pointer; position: relative; overflow: hidden;
 }
-@media(max-width:650px){.srv-grid{grid-template-columns:1fr}}
-.srv-item{
-  background:#0d1a2d;padding:3rem;
-  position:relative;overflow:hidden;transition:background .3s;
+.service-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 3px; background: var(--oro);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s;
 }
-.srv-item::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--lime),transparent);
-  transform:scaleX(0);transition:transform .4s;
+.service-card:hover::before { transform: scaleX(1); }
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(30,58,92,0.1);
+  background: white;
 }
-.srv-item:hover{background:#111f35}
-.srv-item:hover::after{transform:scaleX(1)}
-.srv-n{font-family:'Cormorant Garamond',serif;font-size:4.5rem;font-weight:700;color:rgba(255,255,255,.06);line-height:1;margin-bottom:.4rem;position:absolute;right:1.5rem;top:.5rem}
-.srv-ico{font-size:2rem;margin-bottom:.9rem;display:block}
-.srv-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;margin-bottom:.6rem;color:#fff}
-.srv-desc{font-size:.78rem;color:rgba(255,255,255,.5);line-height:2;font-weight:300;margin-bottom:1.2rem;max-width:380px}
-.srv-link{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);display:flex;align-items:center;gap:.4rem}
-.srv-link svg{width:12px;height:12px;transition:transform .2s}
-.srv-item:hover .srv-link svg{transform:translateX(5px)}
+.service-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  background: linear-gradient(135deg, var(--blu), var(--blu3));
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px; font-size: 1.4rem;
+  box-shadow: 0 8px 24px rgba(58,85,120,0.3);
+}
+.service-title { font-size: 1rem; font-weight: 700; color: var(--testo); margin-bottom: 10px; }
+.service-desc { font-size: 0.82rem; color: var(--grigio); line-height: 1.65; }
 
-/* ═══════════════════════════════════════════
+/* ══════════════════════════════════════════
    PERCHÉ NOI
-═══════════════════════════════════════════ */
-.perche-sec{background:var(--blu);padding:7rem 2rem;position:relative;overflow:hidden}
-.perche-sec::after{
-  content:'';position:absolute;top:-120px;left:-120px;
-  width:500px;height:500px;
-  background:radial-gradient(circle,rgba(206,224,143,.08) 0%,transparent 65%);
-  pointer-events:none;
+══════════════════════════════════════════ */
+#perche { background: linear-gradient(135deg, var(--blu) 0%, var(--blu3) 100%); }
+.perche-inner { max-width: 1200px; margin: 0 auto; }
+#perche .section-label { color: var(--oro); }
+#perche .section-title { color: white; }
+#perche .section-sub { color: rgba(255,255,255,0.7); }
+.perche-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 48px; align-items: center;
 }
-.perche-inner{
-  max-width:1300px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:5rem;align-items:center;
+.perche-list { display: flex; flex-direction: column; gap: 20px; }
+.perche-item {
+  display: flex; gap: 18px; align-items: flex-start;
+  padding: 20px; background: rgba(255,255,255,0.07);
+  border-radius: 14px; border: 1px solid rgba(255,255,255,0.1);
+  transition: background 0.2s;
 }
-@media(max-width:900px){.perche-inner{grid-template-columns:1fr;gap:3rem}}
-.quote-block{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(1.4rem,2.8vw,2rem);
-  font-weight:300;font-style:italic;color:var(--panna);
-  line-height:1.6;border-left:2px solid var(--lime);padding-left:2rem;
+.perche-item:hover { background: rgba(255,255,255,0.12); }
+.perche-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem; font-weight: 700; color: var(--oro);
+  line-height: 1; flex-shrink: 0; width: 52px;
 }
-.quote-block strong{font-weight:600;font-style:normal;color:var(--lime)}
-.quote-attr{
-  font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(245,240,232,.25);margin-top:1.4rem;
-  padding-left:2rem;font-weight:300;
+.perche-item-body h4 { font-size: 0.95rem; font-weight: 700; color: white; margin-bottom: 6px; }
+.perche-item-body p { font-size: 0.82rem; color: rgba(255,255,255,0.65); line-height: 1.6; }
+.perche-visual {
+  position: relative; border-radius: 20px; overflow: hidden;
+  aspect-ratio: 4/5;
 }
-.why-items{display:flex;flex-direction:column;gap:.85rem}
-.wi{
-  display:flex;align-items:flex-start;gap:1rem;
-  padding:1.2rem 1.3rem;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:var(--radius);
-  transition:border-color .25s,background .25s,transform .25s;
+.perche-visual-img {
+  width: 100%; height: 100%; object-fit: cover;
+  background: linear-gradient(135deg, rgba(206,224,143,0.3), rgba(58,85,120,0.6));
 }
-.wi:hover{border-color:rgba(206,224,143,.3);background:rgba(206,224,143,.05);transform:translateX(4px)}
-.wi-ico{
-  width:40px;height:40px;flex-shrink:0;
-  background:rgba(206,224,143,.12);border-radius:4px;
-  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+.perche-card-float {
+  position: absolute; bottom: 24px; left: 24px; right: 24px;
+  background: white; border-radius: 14px; padding: 18px 22px;
+  display: flex; align-items: center; gap: 16px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.2);
 }
-.wi-t{font-size:.84rem;font-weight:500;margin-bottom:.2rem;color:var(--panna)}
-.wi-d{font-size:.74rem;color:rgba(245,240,232,.35);line-height:1.7;font-weight:300}
+.perche-card-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: var(--oro); display: flex; align-items: center;
+  justify-content: center; font-size: 1.3rem; flex-shrink: 0;
+}
+.perche-card-txt h5 { font-size: 0.85rem; font-weight: 700; color: var(--testo); }
+.perche-card-txt p { font-size: 0.72rem; color: var(--grigio); }
 
-/* ═══════════════════════════════════════════
-   CHI SIAMO (home preview)
-═══════════════════════════════════════════ */
-.chisiamo-sec{background:var(--sfondo-chiaro);padding:7rem 2rem}
-.chisiamo-sec .sec-tag{color:var(--blu3)}
-.chisiamo-sec .sec-h{color:var(--blu-scuro)}
-.chisiamo-sec .sec-h strong{color:var(--blu)}
-.cs-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:5rem;max-width:1100px;
-  margin:3.5rem auto 0;align-items:center;
+/* ══════════════════════════════════════════
+   STIMA IMMOBILE — HERO SECTION
+══════════════════════════════════════════ */
+#stima { background: var(--sfondo); }
+.stima-card {
+  max-width: 800px; margin: 0 auto;
+  background: white; border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(30,58,92,0.10);
+  padding: 48px; border: 1px solid rgba(58,85,120,0.08);
 }
-@media(max-width:800px){.cs-grid{grid-template-columns:1fr;gap:2.5rem}}
-.cs-foto-wrap{position:relative}
-.cs-foto{
-  width:100%;max-width:340px;height:420px;
-  object-fit:cover;object-position:top;
-  border-radius:var(--radius);
-  box-shadow:var(--ombra);display:block;margin:0 auto;
+.stima-intro {
+  text-align: center; margin-bottom: 40px;
 }
-.cs-foto-deco{
-  position:absolute;bottom:-20px;right:-20px;
-  width:180px;height:180px;
-  border:2px solid rgba(206,224,143,.3);
-  border-radius:var(--radius);z-index:-1;
+.stima-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  margin-bottom: 24px;
 }
-@media(max-width:800px){.cs-foto-deco{display:none}}
-.cs-nome{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--blu-scuro);font-weight:600;margin-bottom:.2rem}
-.cs-ruolo{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--blu3);margin-bottom:1.5rem;font-weight:500}
-.cs-bio{font-size:.82rem;color:var(--blu);line-height:2;font-weight:300;margin-bottom:1.4rem}
-.cs-badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.8rem}
-.cs-badge{
-  background:#fff;border:1px solid rgba(92,122,158,.2);
-  padding:.3rem .9rem;border-radius:20px;
-  font-size:.62rem;color:var(--blu);letter-spacing:.06em;font-weight:500;
+.stima-group { display: flex; flex-direction: column; gap: 6px; }
+.stima-group label {
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--chiaro);
 }
+.stima-group select, .stima-group input {
+  padding: 13px 16px; border: 1.5px solid rgba(168,192,214,0.4);
+  border-radius: 10px; font-family: 'Montserrat', sans-serif;
+  font-size: 0.88rem; color: var(--testo); background: var(--sfondo);
+  transition: all 0.2s;
+}
+.stima-group select:focus, .stima-group input:focus {
+  outline: none; border-color: var(--blu); background: white;
+  box-shadow: 0 0 0 3px rgba(58,85,120,0.08);
+}
+.btn-stima {
+  width: 100%; padding: 16px;
+  background: linear-gradient(135deg, var(--blu), var(--blu3));
+  color: white; border: none; border-radius: 12px;
+  font-size: 0.9rem; font-weight: 700; letter-spacing: 0.5px;
+  transition: all 0.25s; display: flex; align-items: center;
+  justify-content: center; gap: 10px;
+}
+.btn-stima:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(58,85,120,0.4); }
+#stima-result {
+  display: none; margin-top: 28px; padding: 24px;
+  background: var(--sfondo); border-radius: 14px;
+  border: 1px solid rgba(58,85,120,0.1);
+}
+.stima-result-header {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; color: var(--testo); margin-bottom: 16px; font-weight: 600;
+}
+.stima-values {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;
+}
+.stima-val-card {
+  text-align: center; padding: 16px; background: white;
+  border-radius: 10px; border: 1px solid rgba(58,85,120,0.08);
+}
+.stima-val-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: var(--grigio); margin-bottom: 6px; }
+.stima-val-price { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; }
+.stima-val-card.mid .stima-val-price { color: var(--blu); font-size: 1.7rem; }
+.stima-euromq { text-align: center; margin-top: 12px; font-size: 0.78rem; color: var(--grigio); }
+.stima-disclaimer { font-size: 0.72rem; color: var(--grigio); margin-top: 12px; line-height: 1.5; }
+.btn-stima-contatta {
+  margin-top: 16px; width: 100%; padding: 13px;
+  background: var(--oro); color: var(--testo); border: none; border-radius: 10px;
+  font-weight: 700; font-size: 0.85rem; cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-stima-contatta:hover { background: var(--oro2); transform: translateY(-1px); }
 
-/* ═══════════════════════════════════════════
-   REVIEWS SCROLLING
-═══════════════════════════════════════════ */
-.reviews-sec{background:#f8fafb;padding:5rem 2rem;overflow:hidden}
-.reviews-sec .sec-tag{color:var(--blu3)}
-.reviews-sec .sec-h{color:var(--blu-scuro)}
-.reviews-sec .sec-h strong{color:var(--blu)}
-.reviews-track-wrap{
-  position:relative;overflow:hidden;margin-top:2.5rem;
-}
-.reviews-track-wrap::before,
-.reviews-track-wrap::after{
-  content:'';position:absolute;top:0;bottom:0;width:150px;z-index:2;pointer-events:none;
-}
-.reviews-track-wrap::before{left:0;background:linear-gradient(to right,#f8fafb,transparent)}
-.reviews-track-wrap::after{right:0;background:linear-gradient(to left,#f8fafb,transparent)}
-.reviews-track{
-  display:flex;gap:1.2rem;width:max-content;
-  animation:scrollReviews 55s linear infinite;
-  will-change:transform;
-}
-.reviews-track:hover{animation-play-state:paused}
-@keyframes scrollReviews{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.rcard{
-  background:#fff;border:1px solid rgba(58,85,120,.1);
-  border-radius:10px;padding:1.5rem 1.6rem;
-  min-width:290px;max-width:290px;flex-shrink:0;
-  transition:border-color .3s,box-shadow .3s;
-  box-shadow:0 2px 14px rgba(58,85,120,.07);
-}
-.rcard:hover{border-color:rgba(92,122,158,.35);box-shadow:0 8px 28px rgba(58,85,120,.14)}
-.rcard-stars{color:#f4a900;font-size:.85rem;letter-spacing:.1em;margin-bottom:.6rem}
-.rcard-text{font-size:.78rem;color:var(--blu);line-height:1.75;font-style:italic;margin-bottom:.9rem}
-.rcard-author{font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--blu-scuro);font-weight:700}
-.rcard-detail{font-size:.6rem;color:var(--blu4);margin-top:.15rem}
-
-/* ═══════════════════════════════════════════
+/* ══════════════════════════════════════════
    BLOG
-═══════════════════════════════════════════ */
-.blog-sec{background:#fff;padding:7rem 2rem}
-.blog-inner{max-width:1300px;margin:0 auto}
-.blog-sec .sec-tag{color:var(--blu3)}
-.blog-sec .sec-h{color:var(--blu-scuro)}
-.blog-sec .sec-h strong{color:var(--blu)}
-.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
-@media(max-width:900px){.blog-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.blog-grid{grid-template-columns:1fr}}
-.bcard{
-  display:block;border:1px solid rgba(58,85,120,.12);
-  border-radius:var(--radius);overflow:hidden;
-  transition:border-color .3s,transform .3s,box-shadow .3s;
-  box-shadow:0 2px 12px rgba(58,85,120,.07);
-  background:#fff;
+══════════════════════════════════════════ */
+#blog { background: white; }
+.blog-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 28px;
 }
-.bcard:hover{border-color:rgba(92,122,158,.4);transform:translateY(-6px);box-shadow:0 12px 35px rgba(58,85,120,.14)}
-.bcard-img{
-  height:150px;display:flex;align-items:center;justify-content:center;
-  font-size:2.8rem;
+.blog-card {
+  background: var(--sfondo); border-radius: 16px; overflow: hidden;
+  border: 1px solid rgba(58,85,120,0.06); transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
 }
-.bcard-body{padding:1.1rem 1.2rem;background:#fff}
-.bcard-cat{
-  font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;
-  background:rgba(92,122,158,.1);color:var(--blu);
-  padding:.14rem .5rem;border-radius:3px;display:inline-block;margin-bottom:.5rem;
+.blog-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(30,58,92,0.1); }
+.blog-img {
+  height: 180px; background: linear-gradient(135deg, var(--blu), var(--blu3));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem;
 }
-.bcard-title{
-  font-family:'Cormorant Garamond',serif;font-size:1.15rem;
-  font-weight:600;line-height:1.35;margin-bottom:.35rem;color:var(--blu-scuro);
+.blog-body { padding: 22px; }
+.blog-cat {
+  font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--blu3); margin-bottom: 10px;
 }
-.bcard-date{font-size:.62rem;color:var(--blu4)}
+.blog-title { font-size: 1rem; font-weight: 600; color: var(--testo); line-height: 1.4; margin-bottom: 10px; }
+.blog-date { font-size: 0.72rem; color: var(--grigio); }
 
-/* ═══════════════════════════════════════════
-   CTA SECTION
-═══════════════════════════════════════════ */
-.cta-sec{background:var(--blu);padding:0;overflow:hidden}
-.cta-inner-wrap{
-  max-width:1300px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 1.3fr;
-  min-height:500px;align-items:end;
+/* ══════════════════════════════════════════
+   MAPPA COPERTURA
+══════════════════════════════════════════ */
+#copertura { background: var(--sfondo); }
+.comuni-grid {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px;
 }
-@media(max-width:900px){.cta-inner-wrap{grid-template-columns:1fr}}
-.cta-text-col{
-  padding:6rem 2rem 6rem 4rem;
-  display:flex;flex-direction:column;gap:.5rem;
-  order:1;
+.comune-chip {
+  background: white; border: 1px solid rgba(58,85,120,0.12);
+  color: var(--testo); padding: 6px 14px; border-radius: 20px;
+  font-size: 0.78rem; font-weight: 500; cursor: pointer;
+  transition: all 0.2s;
 }
-@media(max-width:900px){.cta-text-col{padding:4rem 1.5rem 3rem;text-align:center}}
-.cta-sec h2{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(1.8rem,3.5vw,3rem);
-  font-weight:300;margin-bottom:.7rem;color:var(--bianco);
-}
-.cta-sec h2 strong{font-weight:600;color:var(--lime)}
-.cta-sec p{font-size:.82rem;color:rgba(245,240,232,.5);max-width:480px;margin:0 0 2.5rem;line-height:1.9;font-weight:300}
-.cta-btns{display:flex;gap:1rem;flex-wrap:wrap}
-@media(max-width:900px){.cta-btns{justify-content:center}}
-.cta-woman-col{
-  position:relative;align-self:end;overflow:hidden;order:2;
-  display:flex;align-items:flex-end;justify-content:center;
-}
-.cta-woman-img{
-  display:block;width:100%;max-width:400px;
-  height:auto;object-fit:contain;object-position:bottom center;
-  -webkit-mask-image:
-    linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%),
-    linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
-  -webkit-mask-composite:destination-in;
-  mask-image:
-    linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%),
-    linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
-  mask-composite:intersect;
-  opacity:0;transition:opacity .8s ease;
-  transform-origin:bottom center;
-}
-.cta-woman-img.visible{opacity:1}
-@media(max-width:900px){
-  .cta-woman-col{order:-1;max-height:160px}
-  .cta-woman-img{max-width:110px!important;-webkit-mask-image:linear-gradient(to top,rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%)!important;mask-image:linear-gradient(to top,rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%)!important}
-}
+.comune-chip:hover { background: var(--blu); color: white; border-color: var(--blu); }
 
-/* ═══════════════════════════════════════════
-   FAQ
-═══════════════════════════════════════════ */
-.faq-sec{background:#fff;padding:7rem 2rem}
-.faq-sec .sec-tag{color:var(--blu3)}
-.faq-sec .sec-h{color:var(--blu-scuro)}
-.faq-sec .sec-h strong{color:var(--blu)}
-.faq-wrap{max-width:840px;margin:3.5rem auto 0;display:flex;flex-direction:column;gap:.7rem}
-.faq-item{border:1px solid rgba(92,122,158,.14);border-radius:var(--radius);overflow:hidden;background:#fff;transition:box-shadow .3s}
-.faq-item:hover{box-shadow:0 4px 20px rgba(58,85,120,.1)}
-.faq-q{
-  padding:1.2rem 1.5rem;cursor:pointer;
-  display:flex;justify-content:space-between;align-items:center;
-  font-size:.84rem;font-weight:500;color:var(--blu-scuro);
-  user-select:none;gap:1rem;
-}
-.faq-q:hover{background:var(--sfondo-chiaro)}
-.faq-ico{width:20px;height:20px;flex-shrink:0;transition:transform .35s;color:var(--blu3)}
-.faq-item.open .faq-ico{transform:rotate(45deg)}
-.faq-a{
-  max-height:0;overflow:hidden;
-  transition:max-height .4s ease,padding .3s;
-  font-size:.78rem;color:var(--blu);line-height:1.9;font-weight:300;padding:0 1.5rem;
-}
-.faq-item.open .faq-a{max-height:250px;padding:.1rem 1.5rem 1.3rem}
-
-/* ═══════════════════════════════════════════
+/* ══════════════════════════════════════════
    FOOTER
-═══════════════════════════════════════════ */
-footer{background:#0f1e32;border-top:1px solid rgba(206,224,143,.1);padding:5rem 2rem 2rem}
-.fi{max-width:1300px;margin:0 auto}
-.fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3.5rem}
-@media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
-@media(max-width:500px){.fgrid{grid-template-columns:1fr}}
-.flogo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--bianco);margin-bottom:.7rem}
-.flogo em{color:var(--lime);font-style:italic;font-weight:300}
-.finfo{font-size:.73rem;color:rgba(168,192,214,.6);line-height:2.1;font-weight:300}
-.fh{font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.18);margin-bottom:1rem;font-weight:500}
-.fcol a{display:block;font-size:.74rem;color:rgba(168,192,214,.5);margin-bottom:.4rem;transition:color .2s;font-weight:300}
-.fcol a:hover{color:var(--lime)}
-.fbot{
-  border-top:1px solid rgba(168,192,214,.1);padding-top:1.4rem;
-  display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;
-  font-size:.65rem;color:rgba(255,255,255,.15);font-weight:300;
+══════════════════════════════════════════ */
+footer {
+  background: var(--testo); color: rgba(255,255,255,0.75);
+  padding: 60px 40px 30px;
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+  margin-bottom: 40px;
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; font-weight: 600; color: white; margin-bottom: 14px;
+}
+.footer-desc { font-size: 0.82rem; line-height: 1.7; margin-bottom: 20px; }
+.footer-socials { display: flex; gap: 10px; }
+.footer-social {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(255,255,255,0.1); display: flex; align-items: center;
+  justify-content: center; font-size: 0.9rem; transition: background 0.2s;
+  cursor: pointer;
+}
+.footer-social:hover { background: var(--oro); }
+.footer-col h4 {
+  font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--oro); margin-bottom: 18px;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul a {
+  font-size: 0.82rem; color: rgba(255,255,255,0.65);
+  transition: color 0.2s;
+}
+.footer-col ul a:hover { color: white; }
+.footer-bottom {
+  max-width: 1200px; margin: 0 auto;
+  padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.75rem; flex-wrap: wrap; gap: 12px;
+}
+.footer-bottom a { color: rgba(255,255,255,0.5); transition: color 0.2s; }
+.footer-bottom a:hover { color: white; }
+
+/* ══════════════════════════════════════════
+   ANIMAZIONI
+══════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* LOADING SKELETON */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+/* TOOLTIP */
+[data-tooltip] { position: relative; }
+[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%);
+  background: var(--testo); color: white; padding: 5px 10px; border-radius: 6px;
+  font-size: 0.7rem; white-space: nowrap; z-index: 100;
 }
 
-/* ═══════════════════════════════════════════
-   REVEAL ANIMATION
-═══════════════════════════════════════════ */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform .9s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:.15s}
-.reveal-delay-2{transition-delay:.3s}
-.reveal-delay-3{transition-delay:.45s}
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .search-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .perche-grid { grid-template-columns: 1fr; }
+  .perche-visual { display: none; }
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  section { padding: 60px 20px; }
+  #search-section { padding: 0 20px 48px; margin-top: -48px; }
+  .search-card { padding: 22px; }
+  .search-grid { grid-template-columns: 1fr 1fr; }
+  .hero-content { padding: 0 20px; }
+  .hero-stats { gap: 24px; }
+  .stima-card { padding: 28px 20px; }
+  .stima-grid { grid-template-columns: 1fr; }
+  .stima-values { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .search-grid { grid-template-columns: 1fr; }
+  .hero-stats { flex-direction: column; gap: 16px; }
+  .hero-ctas { flex-direction: column; }
+  .btn-hero { justify-content: center; }
+}
 
-/* ═══════════════════════════════════════════
-   CHATBOT PULSE WIDGET
-═══════════════════════════════════════════ */
-#chat-widget{
-  position:fixed;bottom:2rem;right:2rem;z-index:8000;
-  font-family:'Montserrat',sans-serif;
-}
-/* pulse rings */
-#chat-widget::before,
-#chat-widget::after{
-  content:'';position:absolute;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:72px;height:72px;
-  border-radius:50%;
-  border:2px solid rgba(143,156,99,.5);
-  animation:pulseRing 2.5s ease-out infinite;
-  pointer-events:none;
-}
-#chat-widget::after{
-  border-color:rgba(206,224,143,.3);
-  animation-delay:1.25s;
-}
-@keyframes pulseRing{
-  0%{transform:translate(-50%,-50%) scale(1);opacity:.8}
-  100%{transform:translate(-50%,-50%) scale(2.2);opacity:0}
-}
-#chat-btn{
-  width:72px;height:72px;
-  background:linear-gradient(145deg,#8F9C63,#3d4429);
-  border-radius:50%;border:3px solid rgba(168,192,214,.7);
-  cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 8px 32px rgba(40,80,130,.5);
-  transition:transform .3s,box-shadow .3s;
-  position:relative;overflow:hidden;z-index:1;
-}
-#chat-btn:hover{transform:scale(1.09);box-shadow:0 12px 40px rgba(40,80,130,.6)}
-#chat-badge{
-  position:absolute;top:-4px;right:-4px;
-  width:20px;height:20px;background:#e85d2a;
-  border-radius:50%;font-size:.58rem;color:#fff;
-  display:flex;align-items:center;justify-content:center;
-  font-weight:700;border:2px solid #0f1e32;z-index:2;
-}
-#chat-btn-avatar{
-  width:100%;height:100%;
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;border-radius:50%;
-}
-#chat-box{
-  position:absolute;bottom:84px;right:0;
-  width:375px;max-height:560px;
-  background:#fff;border-radius:16px;
-  box-shadow:0 20px 60px rgba(0,0,0,.25);
-  display:none;flex-direction:column;overflow:hidden;
-  border:1px solid rgba(143,156,99,.2);
-  animation:chatOpen .38s cubic-bezier(.16,1,.3,1);
-}
-@keyframes chatOpen{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-#chat-box.open{display:flex}
-.chat-head{
-  background:linear-gradient(135deg,var(--blu),var(--blu3));
-  padding:1.1rem 1.2rem;display:flex;align-items:center;gap:.8rem;flex-shrink:0;
-}
-.chat-avatar-head{
-  width:46px;height:46px;border-radius:50%;
-  background:rgba(255,255,255,.1);border:2px solid rgba(206,224,143,.35);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;
-}
-.chat-head-info h4{font-size:.82rem;font-weight:600;color:#fff;margin-bottom:.15rem}
-.chat-head-info p{font-size:.62rem;color:rgba(255,255,255,.55);font-weight:300}
-.chat-status-dot{width:8px;height:8px;background:#6fcf97;border-radius:50%;display:inline-block;margin-right:.35rem;animation:blink 2s ease infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
-.chat-close{
-  margin-left:auto;background:none;border:none;cursor:pointer;
-  color:rgba(255,255,255,.45);font-size:1.3rem;line-height:1;
-  transition:color .2s;padding:.2rem .4rem;
-}
-.chat-close:hover{color:#fff}
-#chat-messages{
-  flex:1;overflow-y:auto;padding:1rem;
-  display:flex;flex-direction:column;gap:.65rem;
-  background:linear-gradient(to bottom,#f8fafc,#fff);
-}
-.msg{
-  max-width:85%;padding:.7rem .95rem;
-  border-radius:12px;font-size:.78rem;line-height:1.6;font-weight:300;
-  animation:msgIn .3s ease;
-}
-@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.msg-bot{background:var(--sfondo-chiaro);color:var(--blu-scuro);border-radius:12px 12px 12px 3px;align-self:flex-start}
-.msg-user{background:var(--blu);color:#fff;border-radius:12px 12px 3px 12px;align-self:flex-end}
-#chat-input-area{
-  padding:.75rem 1rem;border-top:1px solid rgba(58,85,120,.1);
-  display:flex;gap:.5rem;background:#fff;flex-shrink:0;
-}
-#chat-input{
-  flex:1;border:1px solid rgba(92,122,158,.2);border-radius:22px;
-  padding:.55rem 1rem;font-family:'Montserrat',sans-serif;
-  font-size:.76rem;outline:none;color:var(--blu-scuro);
-  transition:border-color .2s;
-}
-#chat-input:focus{border-color:var(--blu3)}
-#chat-send{
-  background:var(--lime);border:none;cursor:pointer;
-  width:38px;height:38px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  transition:background .2s,transform .2s;
-}
-#chat-send:hover{background:var(--lime2);transform:scale(1.08)}
-#chat-send svg{width:16px;height:16px;color:var(--blu-scuro)}
-
-/* keyframes generali */
-@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes wordReveal{from{transform:translateY(110%)}to{transform:translateY(0)}}
-
-/* mobile global */
-@media(max-width:768px){
-  .hero-stat--c{display:none}
-  .hero-coords{display:none}
-  .hero-line,.hero-line-r{display:none}
-}
+/* NUMERO CONTATORE ANIMATO */
+.count-up { display: inline-block; }
 </style>
 </head>
 <body>
 
-<!-- CURSORI CUSTOM -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursor-ring"></div>
-
-<!-- ═══════════════ HEADER ═══════════════ -->
-<header id="header">
-  <a href="index.html" class="logo">
-    <span>Righetto <em>Immobiliare</em></span>
-    <small>Padova e Provincia</small>
-  </a>
-  <nav>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="chi-siamo.html">Chi Siamo</a></li>
-      <li><a href="servizi.html">Servizi</a></li>
-      <li><a href="immobili.html">Immobili</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="faq.html">FAQ</a></li>
-      <li><a href="contatti.html">Contatti</a></li>
-    </ul>
-  </nav>
-  <div class="nav-right">
-    <span class="nav-tel">📞 049 884 3484</span>
-    <a href="contatti.html" class="nav-btn">Valutazione Gratuita</a>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+<!-- ══════════════════════════════
+     NAVBAR
+══════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <span class="nav-logo-main">Righetto Immobiliare</span>
+    <span class="nav-logo-sub">Padova · Dal 1990</span>
   </div>
-</header>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="chi-siamo.html">Chi Siamo</a></li>
+    <li><a href="immobili.html">Immobili</a></li>
+    <li><a href="servizi.html">Servizi</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="contatti.html" class="nav-cta">Contatti</a></li>
+  </ul>
+  <button class="nav-burger" id="burgerBtn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-<!-- mobile menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">Home</a>
-  <a href="chi-siamo.html">Chi Siamo</a>
-  <a href="servizi.html">Servizi</a>
-  <a href="immobili.html">Immobili</a>
-  <a href="blog.html">Blog</a>
-  <a href="faq.html">FAQ</a>
-  <a href="contatti.html">Contatti</a>
-  <div class="mm-divider"></div>
-  <span class="mm-tel">049 884 3484</span>
-  <a href="contatti.html" class="mm-btn">Valutazione Gratuita</a>
+<div class="nav-mobile" id="navMobile">
+  <a href="index.html">🏠 Home</a>
+  <a href="chi-siamo.html">👥 Chi Siamo</a>
+  <a href="immobili.html">🏘️ Immobili</a>
+  <a href="servizi.html">⭐ Servizi</a>
+  <a href="blog.html">📰 Blog</a>
+  <a href="faq.html">❓ FAQ</a>
+  <a href="contatti.html">📞 Contatti</a>
 </div>
 
-<!-- ═══════════════ HERO ═══════════════ -->
-<section class="hero">
+<!-- ══════════════════════════════
+     HERO
+══════════════════════════════ -->
+<section id="hero">
   <canvas id="hero-canvas"></canvas>
-  <div class="grain"></div>
-  <div class="vignette"></div>
-  <div class="hero-line"></div>
-  <div class="hero-line-r"></div>
-
-  <!-- Floating stat badges -->
-  <div class="hero-stat hero-stat--a">
-    <div class="hs-num" data-count="500">0+</div>
-    <div class="hs-lab">Immobili venduti</div>
-  </div>
-  <div class="hero-stat hero-stat--b">
-    <div class="hs-num" data-count="30">0</div>
-    <div class="hs-lab">Anni di esperienza</div>
-  </div>
-  <div class="hero-stat hero-stat--c">
-    <div class="hs-num" data-count="98">0%</div>
-    <div class="hs-lab">Clienti soddisfatti</div>
-  </div>
-
+  <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow">
-      <div class="hero-eyebrow-line"></div>
-      <span>Agenzia Immobiliare · Padova</span>
-      <div class="hero-eyebrow-line"></div>
+    <div class="hero-badge">
+      <span>Dal 1990 a Padova</span>
     </div>
-    <h1 class="hero-h1" id="heroH1">
-      <span class="word"><span class="word-inner">La</span></span>
-      <span class="word"><span class="word-inner">tua</span></span>
-      <span class="word"><span class="word-inner">casa</span></span>
-      <br>
-      <span class="word hero-h1-row2"><span class="word-inner"><em>ideale</em></span></span>
-      <span class="word hero-h1-row2"><span class="word-inner">ti</span></span>
-      <span class="word hero-h1-row2"><span class="word-inner">aspetta</span></span>
+    <h1 class="hero-title">
+      Trova la casa<br>dei tuoi <span>sogni</span>
     </h1>
-    <p class="hero-sub">Compravendita, affitti e valutazioni gratuite a Padova e provincia</p>
-    <div class="hero-actions">
-      <a href="immobili.html" class="btn-primary"><span>Sfoglia gli immobili</span></a>
-      <a href="contatti.html" class="btn-ghost"><span>Valutazione gratuita</span></a>
+    <p class="hero-sub">
+      La tua agenzia di fiducia a Padova e Provincia. Oltre 30 anni di esperienza nella compravendita e locazione di immobili residenziali, commerciali e industriali.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <h3><span class="count-up" data-target="350">0</span>+</h3>
+        <p>Immobili trattati</p>
+      </div>
+      <div class="hero-stat">
+        <h3><span class="count-up" data-target="30">0</span>+</h3>
+        <p>Anni di esperienza</p>
+      </div>
+      <div class="hero-stat">
+        <h3><span class="count-up" data-target="101">0</span></h3>
+        <p>Comuni coperti</p>
+      </div>
+    </div>
+    <div class="hero-ctas">
+      <a href="immobili.html" class="btn-hero btn-hero-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Cerca Immobili
+      </a>
+      <button class="btn-hero btn-hero-outline" onclick="document.getElementById('stima').scrollIntoView({behavior:'smooth'})">
+        💰 Stima il tuo immobile
+      </button>
     </div>
   </div>
-
-  <div class="hero-bg-num">30</div>
-  <div class="scroll-hint">
-    <div class="scroll-mouse"></div>
+  <div class="hero-scroll">
     <span>Scorri</span>
+    <div class="hero-scroll-line"></div>
   </div>
-  <div class="hero-coords">45.4064° N — 11.8768° E — Padova</div>
 </section>
 
-<!-- ═══════════════ SEARCH ═══════════════ -->
-<section class="search-section">
-  <div class="search-inner">
+<!-- ══════════════════════════════
+     RICERCA AVANZATA
+══════════════════════════════ -->
+<div id="search-section">
+  <div class="search-card reveal">
     <div class="search-tabs">
-      <button class="stab active" data-tab="compra">Acquista</button>
-      <button class="stab" data-tab="affitta">Affitta</button>
-      <button class="stab" data-tab="vendi">Vendi</button>
-      <button class="stab" data-tab="valuta">Valuta</button>
+      <button class="search-tab active" onclick="setTab(this,'vendita')">🏷️ Vendita</button>
+      <button class="search-tab" onclick="setTab(this,'affitto')">🔑 Affitto</button>
+      <button class="search-tab" onclick="setTab(this,'asta')">⚖️ Aste</button>
     </div>
-    <form class="search-fields" action="immobili.html" method="get">
-      <div class="sf">
-        <label for="s-comune">Comune</label>
-        <input id="s-comune" name="comune" type="text" placeholder="Padova, Abano...">
-      </div>
-      <div class="sf">
-        <label for="s-tipo">Tipologia</label>
-        <select id="s-tipo" name="tipo">
+    <div class="search-grid">
+      <div class="search-group">
+        <label>Tipologia</label>
+        <select id="s-tipo">
           <option value="">Tutte le tipologie</option>
-          <option>Appartamento</option>
-          <option>Villa / Casa</option>
-          <option>Bifamiliare</option>
-          <option>Capannone</option>
-          <option>Terreno</option>
-          <option>Ufficio</option>
+          <option value="appartamento">Appartamento</option>
+          <option value="villa">Villa / Villetta</option>
+          <option value="bifamiliare">Bifamiliare</option>
+          <option value="attico">Attico / Mansarda</option>
+          <option value="ufficio">Ufficio</option>
+          <option value="negozio">Negozio</option>
+          <option value="capannone">Capannone</option>
+          <option value="terreno">Terreno</option>
         </select>
       </div>
-      <div class="sf">
-        <label for="s-locali">Locali</label>
-        <select id="s-locali" name="locali">
-          <option value="">Qualsiasi</option>
-          <option>Monolocale</option>
-          <option>Bilocale</option>
-          <option>Trilocale</option>
-          <option>4+ locali</option>
+      <div class="search-group">
+        <label>Zona / Comune</label>
+        <select id="s-zona">
+          <option value="">Tutta la provincia</option>
+          <option value="Padova">Padova</option>
+          <option value="Abano Terme">Abano Terme</option>
+          <option value="Cittadella">Cittadella</option>
+          <option value="Albignasego">Albignasego</option>
+          <option value="Selvazzano Dentro">Selvazzano</option>
+          <option value="Noventa Padovana">Noventa Padovana</option>
+          <option value="Vigonza">Vigonza</option>
+          <option value="Rubano">Rubano</option>
+          <option value="Camposampiero">Camposampiero</option>
+          <option value="Este">Este</option>
+          <option value="Monselice">Monselice</option>
         </select>
       </div>
-      <div class="sf">
-        <label for="s-budget">Budget max</label>
-        <select id="s-budget" name="budget">
+      <div class="search-group">
+        <label>Prezzo massimo</label>
+        <select id="s-prezzo">
           <option value="">Nessun limite</option>
-          <option>fino a €100.000</option>
-          <option>fino a €200.000</option>
-          <option>fino a €300.000</option>
-          <option>fino a €500.000</option>
-          <option>oltre €500.000</option>
+          <option value="100000">€ 100.000</option>
+          <option value="150000">€ 150.000</option>
+          <option value="200000">€ 200.000</option>
+          <option value="300000">€ 300.000</option>
+          <option value="500000">€ 500.000</option>
+          <option value="1000000">€ 1.000.000</option>
         </select>
       </div>
-      <button type="submit" class="search-btn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <div class="search-group">
+        <label>Superficie min (mq)</label>
+        <input type="number" id="s-mq" placeholder="Es: 60">
+      </div>
+      <div class="search-group">
+        <label>Locali</label>
+        <select id="s-locali">
+          <option value="">Qualsiasi</option>
+          <option value="1">Monolocale</option>
+          <option value="2">Bilocale</option>
+          <option value="3">Trilocale</option>
+          <option value="4">4+ locali</option>
+        </select>
+      </div>
+      <button class="btn-cerca" onclick="doSearch()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         Cerca
       </button>
-    </form>
-  </div>
-</section>
-
-<!-- ═══════════════ STATS BAR ═══════════════ -->
-<div class="stats-bar">
-  <div class="stat">
-    <div class="stat-n" data-count="500">0</div>
-    <div class="stat-l">Immobili venduti</div>
-  </div>
-  <div class="stat">
-    <div class="stat-n" data-count="30">0</div>
-    <div class="stat-l">Anni di esperienza</div>
-  </div>
-  <div class="stat">
-    <div class="stat-n" data-count="46">0</div>
-    <div class="stat-l">Comuni coperti</div>
-  </div>
-  <div class="stat">
-    <div class="stat-n" data-count="98">0</div>
-    <div class="stat-l">% clienti soddisfatti</div>
+    </div>
   </div>
 </div>
 
-<!-- ═══════════════ EVIDENZA IMMOBILI ═══════════════ -->
-<section class="evidenza">
-  <div class="ev-inner">
-    <div class="ev-header reveal">
-      <div>
-        <p class="sec-tag">Portafoglio Immobiliare</p>
-        <h2 class="sec-h">Immobili in <strong>Evidenza</strong></h2>
-      </div>
-      <a href="immobili.html" class="ev-link">Vedi tutti →</a>
+<!-- ══════════════════════════════
+     IMMOBILI IN EVIDENZA
+══════════════════════════════ -->
+<section id="evidenza">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Portfolio</div>
+      <h2 class="section-title">Immobili in Evidenza</h2>
+      <p class="section-sub">Scopri la nostra selezione di proprietà esclusive a Padova e Provincia. Ogni immobile è seguito con cura dalla valutazione al rogito.</p>
     </div>
-    <div class="cards-grid">
-      <!-- card 1 -->
-      <a href="immobile.html" class="pcard reveal">
-        <div class="pcard-img">
-          <div class="pcard-img-ph">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <div class="pcard-overlay"></div>
-          <div class="pcard-badges">
-            <span class="badge badge-v">Vendita</span>
-            <span class="badge badge-e">Esclusiva</span>
-          </div>
+    <div class="props-grid reveal" id="propsGrid">
+      <!-- Skeleton loading -->
+      <div class="prop-card" style="pointer-events:none">
+        <div class="skeleton" style="height:220px;border-radius:0"></div>
+        <div class="prop-body">
+          <div class="skeleton" style="height:28px;width:40%;margin-bottom:10px"></div>
+          <div class="skeleton" style="height:16px;margin-bottom:6px"></div>
+          <div class="skeleton" style="height:16px;width:70%;margin-bottom:20px"></div>
+          <div class="skeleton" style="height:12px;width:80%"></div>
         </div>
-        <div class="pcard-body">
-          <div class="pcard-price">€ 320.000</div>
-          <div class="pcard-title">Appartamento luminoso con terrazzo panoramico</div>
-          <div class="pcard-loc">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Padova Centro
-          </div>
-          <div class="pcard-specs">
-            <span>🛏 3 locali</span>
-            <span>📐 95 mq</span>
-            <span>🚗 Box auto</span>
-            <span>⚡ Classe A</span>
-          </div>
+      </div>
+      <div class="prop-card" style="pointer-events:none">
+        <div class="skeleton" style="height:220px;border-radius:0"></div>
+        <div class="prop-body">
+          <div class="skeleton" style="height:28px;width:40%;margin-bottom:10px"></div>
+          <div class="skeleton" style="height:16px;margin-bottom:6px"></div>
+          <div class="skeleton" style="height:16px;width:70%;margin-bottom:20px"></div>
+          <div class="skeleton" style="height:12px;width:80%"></div>
         </div>
-      </a>
-      <!-- card 2 -->
-      <a href="immobile.html" class="pcard reveal reveal-delay-1">
-        <div class="pcard-img">
-          <div class="pcard-img-ph"></div>
-          <div class="pcard-overlay"></div>
-          <div class="pcard-badges">
-            <span class="badge badge-a">Affitto</span>
-          </div>
+      </div>
+      <div class="prop-card" style="pointer-events:none">
+        <div class="skeleton" style="height:220px;border-radius:0"></div>
+        <div class="prop-body">
+          <div class="skeleton" style="height:28px;width:40%;margin-bottom:10px"></div>
+          <div class="skeleton" style="height:16px;margin-bottom:6px"></div>
+          <div class="skeleton" style="height:16px;width:70%;margin-bottom:20px"></div>
+          <div class="skeleton" style="height:12px;width:80%"></div>
         </div>
-        <div class="pcard-body">
-          <div class="pcard-price">€ 850 /mese</div>
-          <div class="pcard-title">Bilocale arredato, zona Arcella</div>
-          <div class="pcard-loc">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Padova — Arcella
-          </div>
-          <div class="pcard-specs">
-            <span>🛏 2 locali</span>
-            <span>📐 58 mq</span>
-            <span>🪑 Arredato</span>
-          </div>
-        </div>
-      </a>
-      <!-- card 3 -->
-      <a href="immobile.html" class="pcard reveal reveal-delay-2">
-        <div class="pcard-img">
-          <div class="pcard-img-ph" style="background:linear-gradient(135deg,#4A6A8C 0%,#3A5578 100%)"></div>
-          <div class="pcard-overlay"></div>
-          <div class="pcard-badges">
-            <span class="badge badge-v">Vendita</span>
-          </div>
-        </div>
-        <div class="pcard-body">
-          <div class="pcard-price">€ 580.000</div>
-          <div class="pcard-title">Villa singola con giardino e piscina</div>
-          <div class="pcard-loc">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Abano Terme
-          </div>
-          <div class="pcard-specs">
-            <span>🛏 5 locali</span>
-            <span>📐 240 mq</span>
-            <span>🌳 Giardino</span>
-            <span>🏊 Piscina</span>
-          </div>
-        </div>
+      </div>
+    </div>
+    <div class="props-more reveal">
+      <a href="immobili.html" class="btn-outline">
+        Vedi tutti gli immobili
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ SERVIZI ═══════════════ -->
-<section class="servizi-sec">
-  <div class="srv-inner">
-    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto">
-      <p class="sec-tag">Cosa facciamo</p>
-      <h2 class="sec-h">I nostri <strong>Servizi</strong></h2>
+<!-- ══════════════════════════════
+     SERVIZI
+══════════════════════════════ -->
+<section id="servizi">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Cosa offriamo</div>
+      <h2 class="section-title">I Nostri Servizi</h2>
+      <p class="section-sub">Dalla valutazione al rogito, gestiamo ogni fase con professionalità e trasparenza. Tutto incluso nel nostro servizio.</p>
     </div>
-    <div class="srv-grid">
-      <div class="srv-item reveal">
-        <div class="srv-n">01</div>
-        <span class="srv-ico">🏠</span>
-        <div class="srv-title">Compravendita</div>
-        <p class="srv-desc">Gestiamo l'intero processo di compravendita, dalla valutazione alla firma del rogito, garantendo massima sicurezza e trasparenza.</p>
-        <a href="servizio-vendita.html" class="srv-link">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      </div>
-      <div class="srv-item reveal reveal-delay-1">
-        <div class="srv-n">02</div>
-        <span class="srv-ico">🔑</span>
-        <div class="srv-title">Affitti</div>
-        <p class="srv-desc">Gestione completa degli affitti: selezione degli inquilini, redazione contratti, assistenza legale e gestione ordinaria.</p>
-        <a href="servizi.html" class="srv-link">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      </div>
-      <div class="srv-item reveal reveal-delay-2">
-        <div class="srv-n">03</div>
-        <span class="srv-ico">📊</span>
-        <div class="srv-title">Valutazione Gratuita</div>
-        <p class="srv-desc">Ottieni una stima accurata del valore del tuo immobile grazie alla nostra profonda conoscenza del mercato locale.</p>
-        <a href="contatti.html" class="srv-link">Richiedi ora <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      </div>
-      <div class="srv-item reveal reveal-delay-3">
-        <div class="srv-n">04</div>
-        <span class="srv-ico">💼</span>
-        <div class="srv-title">Consulenza Immobiliare</div>
-        <p class="srv-desc">Supporto professionale per investimenti, mutui, pratiche urbanistiche e tutto ciò che riguarda il mondo immobiliare.</p>
-        <a href="servizi.html" class="srv-link">Scopri di più <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      </div>
+    <div class="services-grid">
+      <a href="servizi.html#vendita" class="service-card reveal reveal-delay-1">
+        <div class="service-icon">🏷️</div>
+        <h3 class="service-title">Vendita Immobili</h3>
+        <p class="service-desc">Valutiamo, fotografiamo, pubblichiamo e gestiamo le trattative. Dalla valutazione gratuita al rogito, siamo al tuo fianco.</p>
+      </a>
+      <a href="servizi.html#affitto" class="service-card reveal reveal-delay-2">
+        <div class="service-icon">🔑</div>
+        <h3 class="service-title">Affitto e Gestione</h3>
+        <p class="service-desc">Selezione inquilini, contratti di locazione, gestione canoni e pratiche. Affitti residenziali e commerciali.</p>
+      </a>
+      <a href="servizi.html#valutazione" class="service-card reveal reveal-delay-3">
+        <div class="service-icon">💰</div>
+        <h3 class="service-title">Valutazione Gratuita</h3>
+        <p class="service-desc">Perizia professionale basata su dati reali di mercato. Vieni a conoscerci o usa il nostro strumento di stima online.</p>
+      </a>
+      <a href="servizi.html#virtual-tour" class="service-card reveal reveal-delay-4">
+        <div class="service-icon">🌐</div>
+        <h3 class="service-title">Virtual Tour 360°</h3>
+        <p class="service-desc">Foto 360° equirettangolari, virtual tour interattivo e video YouTube per ogni immobile. Valorizzazione massima.</p>
+      </a>
+      <a href="servizi.html#commerciale" class="service-card reveal">
+        <div class="service-icon">🏢</div>
+        <h3 class="service-title">Immobili Commerciali</h3>
+        <p class="service-desc">Uffici, negozi, capannoni, terreni industriali. Competenza specifica nel mercato B2B della provincia di Padova.</p>
+      </a>
+      <a href="servizi.html#aste" class="service-card reveal">
+        <div class="service-icon">⚖️</div>
+        <h3 class="service-title">Aste Giudiziarie</h3>
+        <p class="service-desc">Assistenza completa nelle aste immobiliari giudiziarie. Analisi, sopralluogo, offerta e tutela legale.</p>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ PERCHÉ NOI ═══════════════ -->
-<section class="perche-sec">
+<!-- ══════════════════════════════
+     PERCHÉ NOI
+══════════════════════════════ -->
+<section id="perche">
   <div class="perche-inner">
     <div class="reveal">
-      <p class="sec-tag">La nostra filosofia</p>
-      <blockquote class="quote-block">
-        "Non vendiamo case.<br>Costruiamo <strong>storie</strong><br>di vita e di famiglia."
-      </blockquote>
-      <p class="quote-attr">— Gino Capon, Fondatore</p>
+      <div class="section-label" style="color:var(--oro)">I nostri punti di forza</div>
+      <h2 class="section-title" style="color:white">Perché sceglierci</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.7);margin-bottom:40px">
+        30 anni di esperienza nel mercato immobiliare padovano. Non siamo una catena — siamo una famiglia che conosce ogni quartiere, ogni strada, ogni opportunità.
+      </p>
     </div>
-    <div class="why-items">
-      <div class="wi reveal">
-        <div class="wi-ico">🎯</div>
-        <div>
-          <div class="wi-t">Esperienza trentennale</div>
-          <div class="wi-d">Tre decenni sul mercato immobiliare di Padova e provincia ci rendono la scelta più sicura.</div>
+    <div class="perche-grid">
+      <div class="perche-list">
+        <div class="perche-item reveal reveal-delay-1">
+          <div class="perche-num">01</div>
+          <div class="perche-item-body">
+            <h4>Conoscenza del territorio</h4>
+            <p>Operiamo in tutti i 101 comuni della provincia di Padova dal 1990. Conosciamo prezzi, tendenze e opportunità di ogni zona.</p>
+          </div>
+        </div>
+        <div class="perche-item reveal reveal-delay-2">
+          <div class="perche-num">02</div>
+          <div class="perche-item-body">
+            <h4>Tecnologia al servizio tuo</h4>
+            <p>Virtual tour 360°, video YouTube, chatbot AI con stime di mercato. La tecnologia che fa la differenza nella vendita rapida.</p>
+          </div>
+        </div>
+        <div class="perche-item reveal reveal-delay-3">
+          <div class="perche-num">03</div>
+          <div class="perche-item-body">
+            <h4>Trasparenza totale</h4>
+            <p>Commissioni chiare, contratti semplici, comunicazione costante. Nessuna sorpresa: sai sempre a che punto è la tua pratica.</p>
+          </div>
+        </div>
+        <div class="perche-item reveal reveal-delay-4">
+          <div class="perche-num">04</div>
+          <div class="perche-item-body">
+            <h4>Assistenza completa</h4>
+            <p>Ti seguiamo dall'APE al rogito. Collaboriamo con notai, geometri, commercialisti e istituti di credito.</p>
+          </div>
         </div>
       </div>
-      <div class="wi reveal reveal-delay-1">
-        <div class="wi-ico">🤝</div>
-        <div>
-          <div class="wi-t">Trasparenza totale</div>
-          <div class="wi-d">Nessun costo nascosto, nessuna sorpresa. Ogni passo è chiaro e condiviso con te.</div>
-        </div>
-      </div>
-      <div class="wi reveal reveal-delay-2">
-        <div class="wi-ico">⚡</div>
-        <div>
-          <div class="wi-t">Risposta in 24 ore</div>
-          <div class="wi-d">Ogni richiesta riceve risposta entro 24 ore. La tua casa non può aspettare.</div>
-        </div>
-      </div>
-      <div class="wi reveal reveal-delay-3">
-        <div class="wi-ico">📍</div>
-        <div>
-          <div class="wi-t">Radici nel territorio</div>
-          <div class="wi-d">Conosciamo ogni via, ogni quartiere, ogni valore di mercato di Padova e dei 46 comuni della provincia.</div>
+      <div class="perche-visual reveal">
+        <div class="perche-visual-img" style="background:linear-gradient(135deg,#CEE08F22,#3A557866);min-height:400px;display:flex;align-items:center;justify-content:center;font-size:8rem;">🏛️</div>
+        <div class="perche-card-float">
+          <div class="perche-card-icon">⭐</div>
+          <div class="perche-card-txt">
+            <h5>Valutazione Gratuita</h5>
+            <p>Vieni in agenzia senza impegno</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ CHI SIAMO (preview) ═══════════════ -->
-<section class="chisiamo-sec">
-  <div style="max-width:1100px;margin:0 auto;text-align:center">
-    <p class="sec-tag reveal">Il team</p>
-    <h2 class="sec-h reveal"><strong>Chi</strong> siamo</h2>
-  </div>
-  <div class="cs-grid">
-    <div class="cs-foto-wrap reveal">
-      <img class="cs-foto" src="assets/gino-capon.jpg" alt="Gino Capon — Righetto Immobiliare" onerror="this.style.background='linear-gradient(135deg,#5C7A9E,#3A5578)';this.alt=''">
-      <div class="cs-foto-deco"></div>
+<!-- ══════════════════════════════
+     STIMA IMMOBILE
+══════════════════════════════ -->
+<section id="stima">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:8px">
+      <div class="section-label" style="justify-content:center">Strumento gratuito</div>
+      <h2 class="section-title">Stima il tuo Immobile</h2>
+      <p class="section-sub" style="margin:0 auto 0">
+        Scopri il valore di mercato del tuo immobile in pochi secondi. Dati aggiornati 2025–2026 per tutti i comuni della provincia di Padova.
+      </p>
     </div>
-    <div class="reveal">
-      <div class="cs-nome">Gino Capon</div>
-      <div class="cs-ruolo">Agente immobiliare — Fondatore</div>
-      <p class="cs-bio">Con oltre 30 anni di esperienza nel mercato immobiliare padovano, ho fondato Righetto Immobiliare con una missione chiara: accompagnare ogni cliente con professionalità, ascolto e totale trasparenza.</p>
-      <p class="cs-bio">Ogni immobile racconta una storia. Il mio lavoro è trovare la persona giusta per viverla.</p>
-      <div class="cs-badges">
-        <span class="cs-badge">FIAIP</span>
-        <span class="cs-badge">30+ anni esperienza</span>
-        <span class="cs-badge">46 Comuni</span>
-        <span class="cs-badge">Mediatore certificato</span>
+    <div class="stima-card reveal">
+      <div class="stima-grid">
+        <div class="stima-group">
+          <label>Comune</label>
+          <select id="st-comune">
+            <option value="">Seleziona comune...</option>
+            <option value="padova">Padova</option>
+            <option value="abano terme">Abano Terme</option>
+            <option value="montegrotto terme">Montegrotto Terme</option>
+            <option value="cittadella">Cittadella</option>
+            <option value="albignasego">Albignasego</option>
+            <option value="selvazzano dentro">Selvazzano Dentro</option>
+            <option value="noventa padovana">Noventa Padovana</option>
+            <option value="vigonza">Vigonza</option>
+            <option value="rubano">Rubano</option>
+            <option value="limena">Limena</option>
+            <option value="cadoneghe">Cadoneghe</option>
+            <option value="camposampiero">Camposampiero</option>
+            <option value="piove di sacco">Piove di Sacco</option>
+            <option value="este">Este</option>
+            <option value="monselice">Monselice</option>
+            <option value="montagnana">Montagnana</option>
+            <option value="conselve">Conselve</option>
+            <option value="default">Altro comune della provincia</option>
+          </select>
+        </div>
+        <div class="stima-group">
+          <label>Tipologia</label>
+          <select id="st-tipo">
+            <option value="appartamento">Appartamento</option>
+            <option value="bilocale">Bilocale</option>
+            <option value="trilocale">Trilocale</option>
+            <option value="monolocale">Monolocale</option>
+            <option value="attico">Attico</option>
+            <option value="villa singola">Villa Singola</option>
+            <option value="villa bifamiliare">Villa Bifamiliare</option>
+            <option value="villetta">Villetta</option>
+            <option value="duplex">Duplex</option>
+            <option value="capannone">Capannone</option>
+            <option value="terreno edificabile">Terreno Edificabile</option>
+            <option value="terreno agricolo">Terreno Agricolo</option>
+          </select>
+        </div>
+        <div class="stima-group">
+          <label>Superficie (mq)</label>
+          <input type="number" id="st-mq" placeholder="Es: 85" min="10">
+        </div>
+        <div class="stima-group">
+          <label>Stato dell'immobile</label>
+          <select id="st-stato">
+            <option value="buono">Buono stato</option>
+            <option value="ottimo">Ottimo</option>
+            <option value="nuovo">Nuovo / Ristrutturato</option>
+            <option value="discreto">Discreto</option>
+            <option value="da ristrutturare">Da ristrutturare</option>
+          </select>
+        </div>
       </div>
-      <a href="chi-siamo.html" class="btn-primary" style="display:inline-flex"><span>Scopri di più</span></a>
+      <button class="btn-stima" onclick="calcolaStima()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Calcola Stima di Mercato
+      </button>
+      <div id="stima-result">
+        <div class="stima-result-header" id="stima-result-title">📊 Stima di Mercato 2025-2026</div>
+        <div class="stima-values">
+          <div class="stima-val-card">
+            <div class="stima-val-label">Valore Minimo</div>
+            <div class="stima-val-price" id="stima-min" style="color:var(--grigio)">—</div>
+          </div>
+          <div class="stima-val-card mid">
+            <div class="stima-val-label">⭐ Valore Medio</div>
+            <div class="stima-val-price" id="stima-med">—</div>
+          </div>
+          <div class="stima-val-card">
+            <div class="stima-val-label">Valore Massimo</div>
+            <div class="stima-val-price" id="stima-max" style="color:var(--verde)">—</div>
+          </div>
+        </div>
+        <div class="stima-euromq" id="stima-euromq"></div>
+        <div class="stima-disclaimer">
+          ⚠️ Stima indicativa basata su dati di mercato FIAIP Padova, Immobiliare.it e Idealista (2025-2026). 
+          Il valore reale può variare in base a caratteristiche specifiche dell'immobile, piano, esposizione e condizioni del mercato locale.
+        </div>
+        <button class="btn-stima-contatta" onclick="window.location.href='contatti.html?tipo=valutazione'">
+          📞 Vuoi una valutazione ufficiale gratuita? Contattaci →
+        </button>
+        <div id="stima-correlati" style="margin-top:16px"></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ RECENSIONI ═══════════════ -->
-<section class="reviews-sec">
-  <div style="max-width:1300px;margin:0 auto;text-align:center">
-    <p class="sec-tag reveal">Testimonianze</p>
-    <h2 class="sec-h reveal">Cosa dicono i <strong>nostri clienti</strong></h2>
-  </div>
-  <div class="reviews-track-wrap">
-    <div class="reviews-track" id="reviewsTrack">
-      <!-- Original set -->
-      <div class="rcard"><div class="rcard-stars">★★★★★</div><p class="rcard-text">"Gino è stato impeccabile. Ha trovato la nostra casa in meno di un mese, gestendo tutto con professionalità e umanità."</p><div class="rcard-author">Marco R.</div><div class="rcard-detail">Acquisto appartamento · Padova</div></div>
-      <div class="rcard"><div class="rcard-stars">★★★★★</div><p class="rcard-text">"Valutazione gratuita precisa, prezzo giusto, vendita in 6 settimane. Non potevo chiedere di meglio."</p><div class="rcard-author">Silvia T.</div><div class="rcard-detail">Vendita villa · Abano Terme</div></div>
-      <div class="rcard"><div class="rcard-stars">★★★★★</div><p class="rcard-text">"Trasparenza totale in ogni fase. Ho acquistato il mio primo appartamento senza nessuna sorpresa."</p><div class="rcard-author">Alessio M.</div><div class="rcard-detail">Primo acquisto · Padova</div></div>
-      <div class="rcard"><div class="rcard-stars">★★★★☆</div><p class="rcard-text">"Ottima gestione dell'affitto del mio immobile. Inquilini selezionati bene, zero problemi da 3 anni."</p><div class="rcard-author">Carla V.</div><div class="rcard-detail">Gestione affitto · Noventa Padovana</div></div>
-      <div class="rcard"><div class="rcard-stars">★★★★★</div><p class="rcard-text">"Ho chiamato 5 agenzie. Solo Righetto ha risposto subito e con dati concreti sul mercato. Scelta facile."</p><div class="rcard-author">Luca B.</div><div class="rcard-detail">Consulenza investimento · Padova</div></div>
-      <div class="rcard"><div class="rcard-stars">★★★★★</div><p class="rcard-text">"La valutazione era perfettamente allineata al mercato. Venduto al prezzo richiesto, senza sconti."</p><div class="rcard-author">Francesca D.</div><div class="rcard-detail">Vendita appartamento · Montegrotto</div></div>
-      <!-- Duplicate for seamless loop -->
-      <div class="rcard"><div class="rcard-stars">★★★★★</div><p class="rcard-text">"Gino è stato impeccabile. Ha trovato la nostra casa in meno di un mese, gestendo tutto con professionalità e umanità."</p><div class="rcard-author">Marco R.</div><div class="rcard-detail">Acquisto appartamento · Padova</div></div>
-      <div class="rcard"><div class="rcard-stars">★★★★★</div><p class="rcard-text">"Valutazione gratuita precisa, prezzo giusto, vendita in 6 settimane. Non potevo chiedere di meglio."</p><div class="rcard-author">Silvia T.</div><div class="rcard-detail">Vendita villa · Abano Terme</div></div>
-      <div class="rcard"><div class="rcard-stars">★★★★★</div><p class="rcard-text">"Trasparenza totale in ogni fase. Ho acquistato il mio primo appartamento senza nessuna sorpresa."</p><div class="rcard-author">Alessio M.</div><div class="rcard-detail">Primo acquisto · Padova</div></div>
-      <div class="rcard"><div class="rcard-stars">★★★★☆</div><p class="rcard-text">"Ottima gestione dell'affitto del mio immobile. Inquilini selezionati bene, zero problemi da 3 anni."</p><div class="rcard-author">Carla V.</div><div class="rcard-detail">Gestione affitto · Noventa Padovana</div></div>
-      <div class="rcard"><div class="rcard-stars">★★★★★</div><p class="rcard-text">"Ho chiamato 5 agenzie. Solo Righetto ha risposto subito e con dati concreti sul mercato. Scelta facile."</p><div class="rcard-author">Luca B.</div><div class="rcard-detail">Consulenza investimento · Padova</div></div>
-      <div class="rcard"><div class="rcard-stars">★★★★★</div><p class="rcard-text">"La valutazione era perfettamente allineata al mercato. Venduto al prezzo richiesto, senza sconti."</p><div class="rcard-author">Francesca D.</div><div class="rcard-detail">Vendita appartamento · Montegrotto</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ BLOG ═══════════════ -->
-<section class="blog-sec">
-  <div class="blog-inner">
-    <div class="ev-header reveal">
+<!-- ══════════════════════════════
+     BLOG
+══════════════════════════════ -->
+<section id="blog">
+  <div class="section-inner">
+    <div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:40px">
       <div>
-        <p class="sec-tag">News & Consigli</p>
-        <h2 class="sec-h">Dal nostro <strong>Blog</strong></h2>
+        <div class="section-label">Aggiornamenti</div>
+        <h2 class="section-title" style="margin-bottom:0">Dal Blog</h2>
       </div>
-      <a href="blog.html" class="ev-link">Tutti gli articoli →</a>
+      <a href="blog.html" class="btn-outline" style="height:fit-content">Tutti gli articoli →</a>
     </div>
     <div class="blog-grid">
-      <a href="blog.html" class="bcard reveal">
-        <div class="bcard-img" style="background:linear-gradient(135deg,#EEF3F8,#dce8f0)">🏠</div>
-        <div class="bcard-body">
-          <span class="bcard-cat">Mercato</span>
-          <div class="bcard-title">Mercato immobiliare Padova 2025: prezzi e tendenze</div>
-          <div class="bcard-date">15 Febbraio 2025</div>
+      <article class="blog-card reveal reveal-delay-1" onclick="window.location.href='blog.html#mercato-2025'">
+        <div class="blog-img">📈</div>
+        <div class="blog-body">
+          <div class="blog-cat">Mercato Immobiliare</div>
+          <h3 class="blog-title">Prezzi immobili a Padova: +7.9% nel 2025. Cosa aspettarsi nel 2026</h3>
+          <div class="blog-date">Febbraio 2026</div>
         </div>
-      </a>
-      <a href="blog.html" class="bcard reveal reveal-delay-1">
-        <div class="bcard-img" style="background:linear-gradient(135deg,#f0f5e8,#e2efb8)">📄</div>
-        <div class="bcard-body">
-          <span class="bcard-cat">Guida</span>
-          <div class="bcard-title">Come ottenere un mutuo nel 2025: guida completa</div>
-          <div class="bcard-date">08 Febbraio 2025</div>
+      </article>
+      <article class="blog-card reveal reveal-delay-2" onclick="window.location.href='blog.html#tram-padova'">
+        <div class="blog-img">🚊</div>
+        <div class="blog-body">
+          <div class="blog-cat">Tendenze</div>
+          <h3 class="blog-title">Effetto tram: i quartieri di Padova che stanno rivalutandosi</h3>
+          <div class="blog-date">Gennaio 2026</div>
         </div>
-      </a>
-      <a href="blog.html" class="bcard reveal reveal-delay-2">
-        <div class="bcard-img" style="background:linear-gradient(135deg,#EEF3F8,#c8d9eb)">💡</div>
-        <div class="bcard-body">
-          <span class="bcard-cat">Consigli</span>
-          <div class="bcard-title">Bonus ristrutturazione 2025: cosa cambia e come sfruttarlo</div>
-          <div class="bcard-date">01 Febbraio 2025</div>
+      </article>
+      <article class="blog-card reveal reveal-delay-3" onclick="window.location.href='blog.html#comprare-casa'">
+        <div class="blog-img">🏠</div>
+        <div class="blog-body">
+          <div class="blog-cat">Guida all'acquisto</div>
+          <h3 class="blog-title">Come comprare casa nel 2026: guida completa per acquirenti a Padova</h3>
+          <div class="blog-date">Dicembre 2025</div>
         </div>
-      </a>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ CTA ═══════════════ -->
-<section class="cta-sec">
-  <div class="cta-inner-wrap">
-    <div class="cta-text-col reveal">
-      <p class="sec-tag" style="color:var(--lime)">Inizia oggi</p>
-      <h2><strong>Pronto a trovare</strong><br>la tua casa ideale?</h2>
-      <p>Il nostro team è disponibile per una consulenza gratuita. Contattaci oggi e ricevi una risposta entro 24 ore.</p>
-      <div class="cta-btns">
-        <a href="contatti.html" class="btn-primary"><span>Contattaci ora</span></a>
-        <a href="tel:0498843484" class="btn-ghost"><span>📞 049 884 3484</span></a>
-      </div>
+<!-- ══════════════════════════════
+     COMUNI COPERTURA
+══════════════════════════════ -->
+<section id="copertura" style="padding:60px 40px">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Operatività</div>
+      <h2 class="section-title">Operiamo in tutta la Provincia</h2>
+      <p class="section-sub">Tutti i 101 comuni della provincia di Padova. Conosciamo ogni zona, ogni quartiere, ogni opportunità.</p>
     </div>
-    <div class="cta-woman-col">
-      <img class="cta-woman-img" id="ctaWoman"
-        src="assets/consulente.png"
-        alt="Consulente Righetto Immobiliare"
-        onerror="this.style.display='none'">
-    </div>
+    <div class="comuni-grid reveal" id="comuniGrid"></div>
   </div>
 </section>
 
-<!-- ═══════════════ FAQ ═══════════════ -->
-<section class="faq-sec">
-  <div style="max-width:840px;margin:0 auto;text-align:center">
-    <p class="sec-tag reveal">Domande frequenti</p>
-    <h2 class="sec-h reveal">Hai <strong>domande</strong>?</h2>
-  </div>
-  <div class="faq-wrap">
-    <div class="faq-item reveal">
-      <div class="faq-q">
-        Quanto costa la valutazione del mio immobile?
-        <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-      </div>
-      <div class="faq-a">La valutazione del tuo immobile è completamente <strong>gratuita e senza impegno</strong>. Un nostro esperto effettuerà un sopralluogo e ti consegnerà una stima dettagliata basata sui dati reali di mercato.</div>
-    </div>
-    <div class="faq-item reveal">
-      <div class="faq-q">
-        Quali comuni coprite nella provincia di Padova?
-        <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-      </div>
-      <div class="faq-a">Operiamo in <strong>46 comuni</strong> della provincia di Padova, tra cui Padova, Abano Terme, Montegrotto, Noventa Padovana, Vigonza, Selvazzano, Rubano, Albignasego e molti altri.</div>
-    </div>
-    <div class="faq-item reveal">
-      <div class="faq-q">
-        Quanto tempo ci vuole per vendere casa?
-        <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-      </div>
-      <div class="faq-a">Con una corretta valutazione e strategia di marketing, i nostri immobili si vendono mediamente in <strong>60-90 giorni</strong>. Molto dipende dalla tipologia, zona e prezzo richiesto.</div>
-    </div>
-    <div class="faq-item reveal">
-      <div class="faq-q">
-        Gestite anche affitti e locazioni?
-        <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-      </div>
-      <div class="faq-a">Sì, offriamo un servizio completo di <strong>gestione affitti</strong>: dalla ricerca dell'inquilino alla redazione del contratto, dalla registrazione alla gestione delle pratiche ordinarie e straordinarie.</div>
-    </div>
-    <div class="faq-item reveal">
-      <div class="faq-q">
-        Come posso richiedere informazioni su un immobile?
-        <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-      </div>
-      <div class="faq-a">Puoi contattarci tramite il modulo in questa pagina, per telefono al <strong>049 884 3484</strong>, via WhatsApp oppure chattare direttamente con Sara, il nostro assistente virtuale.</div>
-    </div>
-    <div style="text-align:center;margin-top:2rem">
-      <a href="faq.html" class="btn-ghost" style="display:inline-flex">Tutte le FAQ</a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ FOOTER ═══════════════ -->
+<!-- ══════════════════════════════
+     FOOTER
+══════════════════════════════ -->
 <footer>
-  <div class="fi">
-    <div class="fgrid">
-      <div class="fcol">
-        <div class="flogo">Righetto <em>Immobiliare</em></div>
-        <p class="finfo">
-          Via [Indirizzo], Padova<br>
-          📞 049 884 3484<br>
-          ✉ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="630a0d050c23110a040b0617170c0a0e0e0c010a0f0a0211064d0a17">[email&#160;protected]</a><br><br>
-          P.IVA: [numero]<br>
-          Iscrizione FIAIP n° [numero]
-        </p>
-      </div>
-      <div class="fcol">
-        <div class="fh">Navigazione</div>
-        <a href="index.html">Home</a>
-        <a href="chi-siamo.html">Chi siamo</a>
-        <a href="servizi.html">Servizi</a>
-        <a href="immobili.html">Immobili</a>
-        <a href="contatti.html">Contatti</a>
-      </div>
-      <div class="fcol">
-        <div class="fh">Servizi</div>
-        <a href="servizio-vendita.html">Compravendita</a>
-        <a href="servizi.html">Affitti</a>
-        <a href="contatti.html">Valutazione gratuita</a>
-        <a href="servizi.html">Consulenza</a>
-        <a href="servizi.html">Mutui</a>
-      </div>
-      <div class="fcol">
-        <div class="fh">Informazioni</div>
-        <a href="blog.html">Blog</a>
-        <a href="faq.html">FAQ</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="privacy.html">Cookie Policy</a>
-        <a href="admin.html" style="color:rgba(255,255,255,.1);font-size:.6rem">Admin</a>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Righetto Immobiliare</div>
+      <p class="footer-desc">
+        Dal 1990 al servizio dei padovani. La tua agenzia di fiducia per acquistare, vendere o affittare immobili a Padova e in tutta la provincia.
+      </p>
+      <div class="footer-socials">
+        <div class="footer-social" data-tooltip="Facebook">f</div>
+        <div class="footer-social" data-tooltip="Instagram">ig</div>
+        <div class="footer-social" data-tooltip="LinkedIn">in</div>
+        <div class="footer-social" data-tooltip="YouTube">▶</div>
       </div>
     </div>
-    <div class="fbot">
-      <span>© 2025 Righetto Immobiliare — Capon Gino. Tutti i diritti riservati.</span>
-      <span>Agenzia Immobiliare Padova</span>
+    <div class="footer-col">
+      <h4>Navigazione</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="chi-siamo.html">Chi Siamo</a></li>
+        <li><a href="immobili.html">Immobili</a></li>
+        <li><a href="servizi.html">Servizi</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Servizi</h4>
+      <ul>
+        <li><a href="servizi.html#vendita">Vendita</a></li>
+        <li><a href="servizi.html#affitto">Affitto</a></li>
+        <li><a href="servizi.html#valutazione">Valutazione Gratuita</a></li>
+        <li><a href="servizi.html#virtual-tour">Virtual Tour 360°</a></li>
+        <li><a href="servizi.html#aste">Aste Giudiziarie</a></li>
+        <li><a href="servizi.html#commerciale">Immobili Commerciali</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contatti</h4>
+      <ul>
+        <li><a href="tel:+390490000000">📞 049 000 0000</a></li>
+        <li><a href="mailto:info@righettoimmobiliare.it">📧 info@righetto...</a></li>
+        <li><a href="contatti.html">📍 Via Roma 1, Padova</a></li>
+        <li><a href="contatti.html">🕐 Lun–Ven 9–19</a></li>
+        <li><a href="contatti.html">🕐 Sab 9–12:30</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Righetto Immobiliare — P.IVA 00000000000</span>
+    <div style="display:flex;gap:20px">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="privacy.html#cookie">Cookie Policy</a>
+      <a href="privacy.html#gdpr">GDPR</a>
     </div>
   </div>
 </footer>
 
-<!-- ═══════════════ CHATBOT SARA ═══════════════ -->
-<div id="chat-widget">
-  <div id="chat-box">
-    <div class="chat-head">
-      <div class="chat-avatar-head">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
-          <circle cx="20" cy="16" r="8" fill="rgba(206,224,143,.9)"/>
-          <ellipse cx="20" cy="34" rx="13" ry="9" fill="rgba(206,224,143,.7)"/>
-        </svg>
-      </div>
-      <div class="chat-head-info">
-        <h4>Sara <span class="chat-status-dot"></span></h4>
-        <p>Assistente Righetto Immobiliare</p>
-      </div>
-      <button class="chat-close" onclick="toggleChat()" aria-label="Chiudi">×</button>
-    </div>
-    <div id="chat-messages">
-      <div class="msg msg-bot">Ciao! 👋 Sono <strong>Sara</strong>, la tua assistente immobiliare. Come posso aiutarti oggi?</div>
-    </div>
-    <div id="chat-input-area">
-      <input id="chat-input" type="text" placeholder="Scrivi un messaggio..." autocomplete="off">
-      <button id="chat-send" onclick="sendChatMessage()" aria-label="Invia">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-      </button>
-    </div>
-  </div>
-  <div style="position:relative">
-    <button id="chat-btn" onclick="toggleChat()" aria-label="Chat con Sara">
-      <div id="chat-btn-avatar">
-        <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" width="72" height="72">
-          <circle cx="36" cy="28" r="14" fill="rgba(206,224,143,.95)"/>
-          <ellipse cx="36" cy="62" rx="22" ry="14" fill="rgba(206,224,143,.8)"/>
-        </svg>
-      </div>
-    </button>
-    <div id="chat-badge">1</div>
-  </div>
-</div>
+<!-- CHATBOT SCRIPT -->
+<script src="chatbot.js"></script>
 
-<!-- ═══════════════════════════════════════════
-   JAVASCRIPT
-═══════════════════════════════════════════ -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* ─── CURSOR ─── */
-const cur = document.getElementById('cursor');
-const curR = document.getElementById('cursor-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
-(function animCursor(){
-  rx+=(mx-rx)*.15;ry+=(my-ry)*.15;
-  cur.style.left=mx+'px';cur.style.top=my+'px';
-  curR.style.left=rx+'px';curR.style.top=ry+'px';
-  requestAnimationFrame(animCursor);
-})();
+<script>
+// ══════════════════════════════════════════════
+// SUPABASE
+// ══════════════════════════════════════════════
+const SUPA_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
+let sb;
+if (window.supabase) sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
 
-/* ─── HEADER SCROLL ─── */
-const hdr=document.getElementById('header');
-window.addEventListener('scroll',()=>{
-  hdr.classList.toggle('scrolled',window.scrollY>60);
-},{ passive:true });
+// ══════════════════════════════════════════════
+// CANVAS HERO — Particelle geometriche animate
+// ══════════════════════════════════════════════
+(function() {
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [], lines = [];
+  
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
 
-/* ─── HAMBURGER ─── */
-const ham=document.getElementById('hamburger');
-const mob=document.getElementById('mobileMenu');
-ham.addEventListener('click',()=>{
-  ham.classList.toggle('open');
-  mob.classList.toggle('open');
-  document.body.style.overflow=mob.classList.contains('open')?'hidden':'';
-});
-mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
-  ham.classList.remove('open');mob.classList.remove('open');document.body.style.overflow='';
-}));
-
-/* ─── SEARCH TABS ─── */
-document.querySelectorAll('.stab').forEach(btn=>{
-  btn.addEventListener('click',function(){
-    document.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));
-    this.classList.add('active');
-  });
-});
-
-/* ─── HERO CANVAS — particelle connesse ─── */
-(function(){
-  const canvas=document.getElementById('hero-canvas');
-  const ctx=canvas.getContext('2d');
-  let W,H,dots=[];
-  const N=100,MAX_D=130,SPEED=.55;
-  function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}
-  resize();window.addEventListener('resize',resize);
-  for(let i=0;i<N;i++) dots.push({
-    x:Math.random()*1200,y:Math.random()*800,
-    vx:(Math.random()-.5)*SPEED,vy:(Math.random()-.5)*SPEED,
-    r:Math.random()*2+.8
-  });
-  function frame(){
-    ctx.clearRect(0,0,W,H);
-    // background gradient
-    const g=ctx.createLinearGradient(0,0,W,H);
-    g.addColorStop(0,'#3A5578');g.addColorStop(.5,'#4A6A8C');g.addColorStop(1,'#3A5578');
-    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-    // move & draw
-    dots.forEach(d=>{
-      d.x+=d.vx;d.y+=d.vy;
-      if(d.x<0||d.x>W)d.vx*=-1;
-      if(d.y<0||d.y>H)d.vy*=-1;
-      ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(206,224,143,.6)';ctx.fill();
+  // Particelle
+  for (let i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      r: Math.random() * 2.5 + 0.5,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.3,
+      opacity: Math.random() * 0.5 + 0.1
     });
-    // lines
-    for(let i=0;i<dots.length;i++)for(let j=i+1;j<dots.length;j++){
-      const dx=dots[i].x-dots[j].x,dy=dots[i].y-dots[j].y;
-      const dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<MAX_D){
-        ctx.beginPath();ctx.moveTo(dots[i].x,dots[i].y);ctx.lineTo(dots[j].x,dots[j].y);
-        ctx.strokeStyle=`rgba(168,192,214,${.25*(1-dist/MAX_D)})`;
-        ctx.lineWidth=.5;ctx.stroke();
-      }
-    }
-    requestAnimationFrame(frame);
   }
-  frame();
+
+  // Edifici stilizzati
+  const buildings = [];
+  for (let i = 0; i < 8; i++) {
+    const w = 60 + Math.random() * 80;
+    buildings.push({
+      x: i * (window.innerWidth / 7) + Math.random() * 40,
+      w, h: 120 + Math.random() * 200,
+      floors: Math.floor(3 + Math.random() * 6)
+    });
+  }
+
+  function drawBuildings() {
+    const baseY = H;
+    buildings.forEach(b => {
+      ctx.fillStyle = 'rgba(255,255,255,0.04)';
+      ctx.beginPath();
+      ctx.rect(b.x, baseY - b.h, b.w, b.h);
+      ctx.fill();
+      // finestre
+      ctx.fillStyle = 'rgba(206,224,143,0.15)';
+      const ww = 8, wh = 6, cols = Math.floor(b.w / 16);
+      for (let r = 0; r < b.floors; r++) {
+        for (let c = 0; c < cols; c++) {
+          if (Math.random() > 0.3) {
+            ctx.fillRect(b.x + 4 + c * 14, baseY - b.h + 10 + r * 18, ww, wh);
+          }
+        }
+      }
+    });
+  }
+
+  let mouse = { x: W/2, y: H/2 };
+  document.getElementById('hero').addEventListener('mousemove', e => {
+    mouse.x = e.clientX; mouse.y = e.clientY;
+  });
+
+  let frame = 0;
+  function animate() {
+    ctx.clearRect(0, 0, W, H);
+    
+    // Gradient sky
+    const grd = ctx.createLinearGradient(0, 0, W, H);
+    grd.addColorStop(0, 'rgba(30,58,92,0.6)');
+    grd.addColorStop(1, 'rgba(92,122,158,0.3)');
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, W, H);
+
+    drawBuildings();
+
+    // Particelle + connessioni
+    particles.forEach((p, i) => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+
+      // Connessioni tra particelle vicine
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[j].x - p.x, dy = particles[j].y - p.y;
+        const dist = Math.sqrt(dx*dx+dy*dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(206,224,143,${0.12 * (1 - dist/120)})`;
+          ctx.lineWidth = 0.6;
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+
+      // Disegna particella
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(206,224,143,${p.opacity})`;
+      ctx.fill();
+    });
+
+    // Linea orizzonte
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(206,224,143,0.08)';
+    ctx.lineWidth = 1;
+    ctx.moveTo(0, H * 0.85);
+    ctx.lineTo(W, H * 0.85);
+    ctx.stroke();
+
+    frame++;
+    requestAnimationFrame(animate);
+  }
+  animate();
 })();
 
-/* ─── COUNTER ANIMATION ─── */
-function animateCounter(el){
-  const target=parseInt(el.dataset.count||el.textContent)||0;
-  const suffix=el.textContent.includes('%')?'%':el.textContent.includes('+')?'+':'';
-  let start=null;
-  const dur=1800;
-  function step(ts){
-    if(!start)start=ts;
-    const p=Math.min((ts-start)/dur,1);
-    const ease=1-Math.pow(1-p,3);
-    el.textContent=Math.round(ease*target)+(suffix);
-    if(p<1)requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-const statEls=document.querySelectorAll('.stat-n, .hs-num');
-const statsObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){animateCounter(e.target);statsObs.unobserve(e.target)}});
-},{threshold:.5});
-statEls.forEach(el=>statsObs.observe(el));
-
-/* ─── REVEAL ON SCROLL ─── */
-const revObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revObs.unobserve(e.target)}});
-},{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
-
-/* ─── FAQ ACCORDION ─── */
-document.querySelectorAll('.faq-q').forEach(q=>{
-  q.addEventListener('click',()=>{
-    const item=q.parentElement;
-    const wasOpen=item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-    if(!wasOpen)item.classList.add('open');
-  });
+// ══════════════════════════════════════════════
+// NAVBAR
+// ══════════════════════════════════════════════
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
 });
 
-/* ─── CTA WOMAN PARALLAX ─── */
-const ctaW=document.getElementById('ctaWoman');
-if(ctaW){
-  const io=new IntersectionObserver(entries=>{
-    if(entries[0].isIntersecting){ctaW.classList.add('visible');io.disconnect()}
-  },{threshold:.3});
-  io.observe(ctaW);
-  window.addEventListener('scroll',()=>{
-    const rect=ctaW.getBoundingClientRect();
-    const center=rect.top+rect.height/2-innerHeight/2;
-    ctaW.style.transform=`translateY(${center*0.06}px)`;
-  },{passive:true});
+document.getElementById('burgerBtn').addEventListener('click', () => {
+  document.getElementById('navMobile').classList.toggle('open');
+});
+
+// ══════════════════════════════════════════════
+// REVEAL SCROLL
+// ══════════════════════════════════════════════
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ══════════════════════════════════════════════
+// COUNTER ANIMAZIONE
+// ══════════════════════════════════════════════
+const countEls = document.querySelectorAll('.count-up');
+const countObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.target);
+      let current = 0;
+      const step = target / 50;
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = Math.floor(current);
+        if (current >= target) clearInterval(timer);
+      }, 30);
+      countObs.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+countEls.forEach(el => countObs.observe(el));
+
+// ══════════════════════════════════════════════
+// SEARCH TABS
+// ══════════════════════════════════════════════
+let currentTab = 'vendita';
+function setTab(btn, tipo) {
+  document.querySelectorAll('.search-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentTab = tipo;
 }
 
-/* ─── CHATBOT SARA ─── */
-function toggleChat(){
-  const box=document.getElementById('chat-box');
-  const badge=document.getElementById('chat-badge');
-  box.classList.toggle('open');
-  if(box.classList.contains('open')){
-    badge.style.display='none';
-    document.getElementById('chat-input').focus();
+function doSearch() {
+  const tipo = document.getElementById('s-tipo').value;
+  const zona = document.getElementById('s-zona').value;
+  const prezzo = document.getElementById('s-prezzo').value;
+  const mq = document.getElementById('s-mq').value;
+  const locali = document.getElementById('s-locali').value;
+  const params = new URLSearchParams({ op: currentTab });
+  if (tipo) params.set('tipo', tipo);
+  if (zona) params.set('zona', zona);
+  if (prezzo) params.set('prezzo_max', prezzo);
+  if (mq) params.set('mq_min', mq);
+  if (locali) params.set('locali', locali);
+  window.location.href = 'immobili.html?' + params.toString();
+}
+
+// ══════════════════════════════════════════════
+// LOAD IMMOBILI IN EVIDENZA
+// ══════════════════════════════════════════════
+async function loadImmobili() {
+  if (!sb) return;
+  const grid = document.getElementById('propsGrid');
+  try {
+    const { data } = await sb.from('immobili')
+      .select('*')
+      .eq('attivo', true).eq('in_evidenza', true).eq('venduto', false)
+      .order('created_at', { ascending: false }).limit(6);
+    
+    if (!data || data.length === 0) {
+      // Fallback: carica ultimi immobili
+      const { data: all } = await sb.from('immobili')
+        .select('*').eq('attivo', true).eq('venduto', false)
+        .order('created_at', { ascending: false }).limit(6);
+      renderProps(all || []);
+    } else {
+      renderProps(data);
+    }
+  } catch(e) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--grigio)">Caricamento non disponibile. <a href="immobili.html" style="color:var(--blu)">Vedi tutti gli immobili →</a></div>`;
   }
 }
-function sendChatMessage(){
-  const inp=document.getElementById('chat-input');
-  const msgs=document.getElementById('chat-messages');
-  const text=inp.value.trim();
-  if(!text)return;
-  // user msg
-  const um=document.createElement('div');
-  um.className='msg msg-user';um.textContent=text;msgs.appendChild(um);
-  inp.value='';msgs.scrollTop=msgs.scrollHeight;
-  // typing indicator
-  const typing=document.createElement('div');
-  typing.className='msg msg-bot';typing.innerHTML='<span style="opacity:.5;font-size:.85rem">Sara sta scrivendo…</span>';
-  msgs.appendChild(typing);msgs.scrollTop=msgs.scrollHeight;
-  // auto reply
-  setTimeout(()=>{
-    typing.remove();
-    const bm=document.createElement('div');
-    bm.className='msg msg-bot';
-    const replies=[
-      'Grazie per il tuo messaggio! Un nostro agente ti contatterà entro 24 ore. 😊',
-      'Ottima domanda! Ti metto in contatto con Gino che potrà aiutarti al meglio.',
-      'Certo! Puoi anche chiamarci al 📞 049 884 3484 per una risposta immediata.',
-      'Ho capito. Vuoi che ti fissi una valutazione gratuita del tuo immobile?'
-    ];
-    bm.textContent=replies[Math.floor(Math.random()*replies.length)];
-    msgs.appendChild(bm);msgs.scrollTop=msgs.scrollHeight;
-  },1200);
-}
-document.getElementById('chat-input').addEventListener('keypress',e=>{if(e.key==='Enter')sendChatMessage()});
-// global alias for chatbot.js integration
-window.toggleChat=toggleChat;
-window.submitForm=sendChatMessage;
 
-/* ─── LOAD CHATBOT.JS (se presente) ─── */
-(f
+function renderProps(data) {
+  const grid = document.getElementById('propsGrid');
+  if (!data.length) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--grigio)">Nessun immobile disponibile al momento. <a href="contatti.html" style="color:var(--blu)">Contattaci →</a></div>`;
+    return;
+  }
+  grid.innerHTML = data.map(imm => {
+    const foto = Array.isArray(imm.foto) && imm.foto.length > 0 ? imm.foto[0] : null;
+    const prezzo = imm.prezzo ? new Intl.NumberFormat('it-IT', {style:'currency',currency:'EUR',maximumFractionDigits:0}).format(imm.prezzo) : 'Prezzo su richiesta';
+    const badgeColor = imm.tipo_operazione === 'affitto' ? 'affitto' : imm.tipo_operazione === 'asta' ? 'asta' : 'vendita';
+    const badgeLabel = imm.tipo_operazione === 'affitto' ? '🔑 Affitto' : imm.tipo_operazione === 'asta' ? '⚖️ Asta' : '🏷️ Vendita';
+    const hasVT = imm.virtual_tour || (imm.vt_scenes && imm.vt_scenes.length > 0);
+    return `
+    <a href="immobile.html?id=${imm.id}" class="prop-card">
+      <div class="prop-img-wrap">
+        ${foto ? `<img src="${foto}" alt="${imm.titolo}" loading="lazy">` : `<div class="prop-img-placeholder">🏠</div>`}
+        <span class="prop-badge ${badgeColor}">${badgeLabel}</span>
+        ${imm.in_evidenza ? '<span class="prop-badge-ev">⭐ Evidenza</span>' : ''}
+        ${hasVT ? '<div class="prop-virtual">🌐 Virtual Tour</div>' : ''}
+      </div>
+      <div class="prop-body">
+        <div class="prop-price">${prezzo}${imm.tipo_operazione === 'affitto' ? '<span style="font-size:0.7em;color:var(--grigio)">/mese</span>' : ''}</div>
+        <div class="prop-title">${imm.titolo || 'Immobile senza titolo'}</div>
+        <div class="prop-location">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          ${imm.comune || 'Padova e Provincia'}
+        </div>
+        <div class="prop-features">
+          ${imm.superficie ? `<div class="prop-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18"/></svg>${imm.superficie} mq</div>` : ''}
+          ${imm.locali ? `<div class="prop-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>${imm.locali} locali</div>` : ''}
+          ${imm.bagni ? `<div class="prop-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v7a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4V4"/></svg>${imm.bagni} bagni</div>` : ''}
+          ${imm.garage ? `<div class="prop-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="1 7 5 2 19 2 23 7"/></svg>Garage</div>` : ''}
+        </div>
+      </div>
+    </a>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════════════
+// STIMA PREZZI (usa dati da chatbot.js)
+// ══════════════════════════════════════════════
+const PREZZI = {
+  'padova':              { app:2500,villa:3000,villa_bif:2750,capannone:720,terreno_edif:450,terreno_agr:6 },
+  'abano terme':         { app:2100,villa:2520,villa_bif:2310,capannone:650,terreno_edif:380,terreno_agr:5 },
+  'montegrotto terme':   { app:1900,villa:2280,villa_bif:2090,capannone:600,terreno_edif:350,terreno_agr:5 },
+  'cittadella':          { app:3200,villa:3840,villa_bif:3520,capannone:750,terreno_edif:500,terreno_agr:7 },
+  'albignasego':         { app:1900,villa:2280,villa_bif:2090,capannone:600,terreno_edif:300,terreno_agr:4 },
+  'selvazzano dentro':   { app:1850,villa:2220,villa_bif:2035,capannone:600,terreno_edif:300,terreno_agr:4 },
+  'noventa padovana':    { app:1850,villa:2220,villa_bif:2035,capannone:580,terreno_edif:290,terreno_agr:4 },
+  'vigonza':             { app:1700,villa:2040,villa_bif:1870,capannone:560,terreno_edif:270,terreno_agr:4 },
+  'rubano':              { app:1900,villa:2280,villa_bif:2090,capannone:600,terreno_edif:310,terreno_agr:4 },
+  'limena':              { app:1700,villa:2040,villa_bif:1870,capannone:560,terreno_edif:280,terreno_agr:4 },
+  'cadoneghe':           { app:1750,villa:2100,villa_bif:1925,capannone:560,terreno_edif:280,terreno_agr:4 },
+  'camposampiero':       { app:1600,villa:1920,villa_bif:1760,capannone:550,terreno_edif:270,terreno_agr:4 },
+  'piove di sacco':      { app:1800,villa:2160,villa_bif:1980,capannone:580,terreno_edif:280,terreno_agr:4 },
+  'este':                { app:1100,villa:1320,villa_bif:1210,capannone:450,terreno_edif:200,terreno_agr:3 },
+  'monselice':           { app:1050,villa:1260,villa_bif:1155,capannone:440,terreno_edif:190,terreno_agr:3 },
+  'montagnana':          { app:950, villa:1140,villa_bif:1045,capannone:400,terreno_edif:170,terreno_agr:3 },
+  'conselve':            { app:1150,villa:1380,villa_bif:1265,capannone:460,terreno_edif:210,terreno_agr:3 },
+  'default':             { app:1700,villa:2040,villa_bif:1870,capannone:560,terreno_edif:280,terreno_agr:4 }
+};
+const STATI = { nuovo:1.25, ristrutturato:1.2, ottimo:1.1, buono:1.0, discreto:0.9, 'da ristrutturare':0.75 };
+
+function fmt(n){ return new Intl.NumberFormat('it-IT',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n); }
+
+async function calcolaStima() {
+  const comune = document.getElementById('st-comune').value;
+  const tipo = document.getElementById('st-tipo').value;
+  const mq = parseFloat(document.getElementById('st-mq').value);
+  const stato = document.getElementById('st-stato').value;
+  if (!comune) return alert('Seleziona il comune!');
+  if (!mq || mq < 1) return alert('Inserisci la superficie in mq!');
+
+  const zona = PREZZI[comune] || PREZZI['default'];
+  const mult = STATI[stato] || 1.0;
+  let euromq;
+  if (tipo.includes('capannone')) euromq = zona.capannone;
+  else if (tipo.includes('terreno agr')) euromq = zona.terreno_agr;
+  else if (tipo.includes('terreno edif')) euromq = zona.terreno_edif;
+  else if (tipo.includes('bifam')) euromq = zona.villa_bif;
+  else if (tipo.includes('villa')) euromq = zona.villa;
+  else euromq = zona.app;
+  // Muliplica per tipo specifico
+  if (tipo==='attico') euromq*=1.35;
+  else if (tipo==='monolocale') euromq*=1.10;
+  else if (tipo==='bilocale') euromq*=1.05;
+  
+  let scala = 1; if(mq>200) scala=0.92; else if(mq>150) scala=0.96; else if(mq<40) scala=1.10;
+  euromq = Math.round(euromq * mult * scala);
+  
+  if (tipo.includes('terreno agr')) {
+    const med = Math.round(euromq * mq);
+    document.getElementById('stima-min').textContent = fmt(Math.round(med*0.88));
+    document.getElementById('stima-med').textContent = fmt(med);
+    document.getElementById('stima-max').textContent = fmt(Math.round(med*1.12));
+    document.getElementById('stima-euromq').textContent = `Prezzo medio: ~${fmt(euromq)}/mq (terreno agricolo)`;
+  } else {
+    const med = Math.round(euromq * mq);
+    document.getElementById('stima-min').textContent = fmt(Math.round(med*0.88));
+    document.getElementById('stima-med').textContent = fmt(med);
+    document.getElementById('stima-max').textContent = fmt(Math.round(med*1.12));
+    document.getElementById('stima-euromq').textContent = `Prezzo medio di mercato: ~${fmt(euromq)}/mq`;
+  }
+  
+  const comuneLabel = document.getElementById('st-comune').options[document.getElementById('st-comune').selectedIndex].text;
+  document.getElementById('stima-result-title').textContent = `📊 Stima: ${tipo} ${mq}mq a ${comuneLabel}`;
+  document.getElementById('stima-result').style.display = 'block';
+  document.getElementById('stima-result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  
+  // Cerca immobili correlati nel DB
+  if (sb) {
+    const mqMin = Math.round(mq * 0.80), mqMax = Math.round(mq * 1.20);
+    const { data: corr } = await sb.from('immobili')
+      .select('id,titolo,superficie,prezzo,comune,foto')
+      .eq('attivo',true).eq('venduto',false)
+      .gte('superficie',mqMin).lte('superficie',mqMax)
+      .limit(3);
+    const div = document.getElementById('stima-correlati');
+    if (corr && corr.length > 0) {
+      div.innerHTML = `<div style="font-size:0.82rem;font-weight:700;color:var(--testo);margin-bottom:10px">🔍 Immobili simili disponibili:</div>
+        <div style="display:grid;gap:8px">` +
+        corr.map(i => `<a href="immobile.html?id=${i.id}" style="display:flex;gap:12px;padding:10px;background:white;border-radius:8px;border:1px solid rgba(58,85,120,0.1);text-decoration:none">
+          <div style="width:52px;height:40px;border-radius:6px;background:${i.foto?'':'var(--chiaro)'};overflow:hidden;flex-shrink:0">
+            ${i.foto ? `<img src="${Array.isArray(i.foto)?i.foto[0]:i.foto}" style="width:100%;height:100%;object-fit:cover">` : '🏠'}
+          </div>
+          <div>
+            <div style="font-size:0.8rem;font-weight:600;color:var(--testo)">${i.titolo}</div>
+            <div style="font-size:0.72rem;color:var(--grigio)">${i.superficie||'?'}mq · ${i.comune||''} · <strong style="color:var(--blu)">${i.prezzo?fmt(i.prezzo):'Su richiesta'}</strong></div>
+          </div>
+        </a>`).join('') + '</div>';
+    } else {
+      div.innerHTML = `<div style="font-size:0.8rem;color:var(--grigio);padding:8px;text-align:center">Nessun immobile con queste caratteristiche ora disponibile. <a href="contatti.html" style="color:var(--blu)">Contattaci →</a></div>`;
+    }
+  }
+}
+
+// ══════════════════════════════════════════════
+// COMUNI GRID
+// ══════════════════════════════════════════════
+const comuni101 = [
+  'Agna','Albignasego','Anguillara Veneta','Arquà Petrarca','Arre','Arzergrande',
+  'Bagnoli di Sopra','Baone','Barbona','Battaglia Terme','Boara Pisani','Borgo Veneto',
+  'Borgoricco','Bovolenta','Brugine','Cadoneghe','Campo San Martino','Campodarsego',
+  'Campodoro','Camposampiero','Candiana','Cartura','Casale di Scodosia','Casalserugo',
+  'Castelbaldo','Cervarese Santa Croce','Cinto Euganeo','Cittadella','Codevigo',
+  'Conselve','Correzzola','Curtarolo','Due Carrare','Este','Fontaniva','Galliera Veneta',
+  'Galzignano Terme','Gazzo Padovano','Granze','Isola Vicentina','Legnaro','Limena',
+  'Loreggia','Lozzo Atestino','Masera di Padova','Massanzago','Merlara','Mestrino',
+  'Montagnana','Monselice','Montegrotto Terme','Noventa Padovana','Ospedaletto Euganeo',
+  'Padova','Pernumia','Piacenza d\'Adige','Piazzola sul Brenta','Piombino Dese',
+  'Piove di Sacco','Polverara','Ponso','Ponte San Nicolò','Pontelongo','Pozzonovo',
+  'Rovolon','Rubano','Saccolongo','Saletto','San Giorgio delle Pertiche',
+  'San Martino di Lupari','San Pietro Viminario','Sant\'Angelo di Piove',
+  'Sant\'Elena','Santa Giustina in Colle','Santa Margherita d\'Adige','Saonara',
+  'Selvazzano Dentro','Solesino','Stanghella','Teolo','Terrassa Padovana',
+  'Tombolo','Torreglia','Trebaseleghe','Tribano','Urbana','Veggiano','Venezia',
+  'Villa del Conte','Villa Estense','Villanova di Camposampiero','Vo\'','Vigodarzere','Vigonza'
+];
+
+document.getElementById('comuniGrid').innerHTML = comuni101
+  .sort(() => 0) // mantieni ordine
+  .map(c => `<a href="immobili.html?zona=${encodeURIComponent(c)}" class="comune-chip" title="Immobili a ${c}">${c}</a>`)
+  .join('');
+
+// ══════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════
+loadImmobili();
+</script>
+</body>
+</html>
