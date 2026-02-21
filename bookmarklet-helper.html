@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Installa Scraping Idealista — Righetto</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f5f0e8;
+  color: #1E3A5C;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+}
+h1 {
+  font-size: 1.5rem;
+  color: #3A5578;
+  margin-bottom: 8px;
+}
+.sub { color: #7A9AB8; font-size: 0.85rem; margin-bottom: 32px; }
+
+.step {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+.step-num {
+  background: #3A5578;
+  color: white;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.step-text { font-size: 0.9rem; line-height: 1.6; padding-top: 4px; }
+.step-text strong { color: #3A5578; }
+
+.bookmark-box {
+  background: #3A5578;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  margin: 28px 0;
+}
+.bookmark-box p {
+  color: #A8C0D6;
+  font-size: 0.8rem;
+  margin-bottom: 16px;
+}
+
+#bookmarkLink {
+  display: inline-block;
+  background: #CEE08F;
+  color: #1E3A5C;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: grab;
+  border: 3px dashed #3A5578;
+  transition: transform 0.1s;
+}
+#bookmarkLink:hover { transform: scale(1.05); }
+#bookmarkLink:active { cursor: grabbing; }
+
+.drag-hint {
+  color: #CEE08F;
+  font-size: 0.78rem;
+  margin-top: 12px;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+.divider {
+  text-align: center;
+  color: #A8C0D6;
+  font-size: 0.8rem;
+  margin: 20px 0;
+  position: relative;
+}
+.divider::before, .divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: #e0e0e0;
+}
+.divider::before { left: 0; }
+.divider::after { right: 0; }
+
+.alt-method {
+  background: #f5f0e8;
+  border-radius: 10px;
+  padding: 16px;
+}
+.alt-method p { font-size: 0.82rem; margin-bottom: 10px; color: #5C7A9E; font-weight: 600; }
+.code-box {
+  background: #1E3A5C;
+  color: #CEE08F;
+  border-radius: 8px;
+  padding: 12px;
+  font-family: monospace;
+  font-size: 0.7rem;
+  word-break: break-all;
+  line-height: 1.4;
+  max-height: 120px;
+  overflow: auto;
+  margin-bottom: 10px;
+}
+.btn-copy {
+  background: #3A5578;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-family: 'Segoe UI', sans-serif;
+  width: 100%;
+  transition: background 0.2s;
+}
+.btn-copy:hover { background: #5C7A9E; }
+.btn-copy.copied { background: #27ae60; }
+
+.uso {
+  margin-top: 28px;
+  padding: 16px;
+  background: #e8f4e8;
+  border-radius: 10px;
+  border-left: 4px solid #27ae60;
+}
+.uso p { font-size: 0.82rem; line-height: 1.7; }
+.uso strong { color: #27ae60; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>🔖 Installa Scraping Idealista</h1>
+  <p class="sub">Per importare annunci Idealista nell'admin di Righetto Immobiliare</p>
+
+  <!-- METODO 1 — DRAG & DROP -->
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-text">Assicurati di avere la <strong>barra dei preferiti visibile</strong> nel browser<br>
+    <small style="color:#7A9AB8">Chrome/Edge: Ctrl+Shift+B per mostrarla/nasconderla</small></div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-text"><strong>Trascina</strong> il pulsante giallo qui sotto direttamente nella barra dei preferiti</div>
+  </div>
+
+  <div class="bookmark-box">
+    <p>👇 Trascina questo pulsante nella barra preferiti in alto 👇</p>
+    <a id="bookmarkLink" href="javascript:(function(){const cfg=window.config||{};const id=String(cfg.propertyId||'');const op=cfg.operation||'';const tipo=op==='rent'?'affitto':op==='sale'?'vendita':'asta';const titolo=document.querySelector('.main-info__title-main')?.textContent?.trim()||'';const comune=document.querySelector('.main-info__title-minor')?.textContent?.trim()||'Padova';const prezzo_txt=document.querySelector('.info-data-price .txt-bold')?.textContent?.trim()||'0';const prezzo=parseFloat(prezzo_txt.replace(/[.]/g,'').replace(',','.'))||null;const desc=[...document.querySelectorAll('.comment .adCommentsLanguage p')].map(p=>p.textContent.trim()).join(' ')||'';const tipologie={warehouse:'capannone',apartment:'appartamento',villa:'villa',penthouse:'attico',office:'ufficio',store:'negozio',garage:'garage',land:'terreno'};const tipologia=tipologie[cfg.typology||'']||cfg.typology||'';const categoria=['warehouse','office','store'].includes(cfg.typology)?'commerciale':cfg.typology==='land'?'terreno':'residenziale';const allText=[...document.querySelectorAll('.info-features span,.details-property_features li')].map(s=>s.textContent.trim());const getNum=function(re){return parseInt((allText.find(function(f){return re.test(f);})||'').replace(/[^\d]/g,''))||null;};const sup=getNum(/\d+\s*m/);const loc=getNum(/local/i);const bag=getNum(/bagn/i);const dl=desc.toLowerCase();const has=function(w){return allText.some(function(c){return c.toLowerCase().includes(w);})||dl.includes(w);};const r={codice:'RIG'+id.slice(-4),titolo:titolo,tipo_operazione:tipo,categoria:categoria,tipologia:tipologia,comune:comune,prezzo:prezzo,superficie:sup,locali:loc,bagni:bag,garage:has('garage')||has('box'),giardino:has('giardino'),terrazzo:has('terraz'),cantina:has('cantina'),ascensore:has('ascensore'),piscina:has('piscina'),arredato:has('arredato'),ingresso_indipendente:has('ingresso indipendente'),canna_fumaria:has('canna fumaria'),riscaldamento_autonomo:has('autonomo'),riscaldamento_centralizzato:has('centralizzato'),aria_condizionata:has('condizionata'),animali_ammessi:has('animali'),consegna:dl.includes('libero')||dl.includes('libera')?'LIBERA':dl.includes('occup')?'OCCUPATA':'',id_idealista:id,note_interne:desc.substring(0,800),attivo:true,in_evidenza:false,venduto:false,affittato:false};const json=JSON.stringify(r,null,2);navigator.clipboard.writeText(json).then(function(){alert('OK! Dati copiati!\n\nVai sull admin e clicca Importa da Idealista');}).catch(function(){console.log(json);alert('Apri Console F12 e copia il JSON');});})();">
+      🔖 Scraping Idealista
+    </a>
+    <div class="drag-hint">☝️ Tieni premuto e trascina nella barra in alto ☝️</div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-text">Vai su un annuncio Idealista → clicca <strong>"Scraping Idealista"</strong> nella barra → appare alert <strong>"OK! Dati copiati!"</strong></div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-text">Vai nell'<strong>Admin</strong> → Nuovo Immobile → <strong>📥 Importa da Idealista</strong> → Ctrl+V → Compila!</div>
+  </div>
+
+  <div class="divider">oppure se drag & drop non funziona</div>
+
+  <!-- METODO 2 — COPIA CODICE -->
+  <div class="alt-method">
+    <p>📋 Metodo alternativo — clic destro sulla barra preferiti → "Aggiungi pagina" → incolla come URL:</p>
+    <div class="code-box" id="codeBox">javascript:(function(){const cfg=window.config||{};const id=String(cfg.propertyId||'');const op=cfg.operation||'';const tipo=op==='rent'?'affitto':op==='sale'?'vendita':'asta';const titolo=document.querySelector('.main-info__title-main')?.textContent?.trim()||'';const comune=document.querySelector('.main-info__title-minor')?.textContent?.trim()||'Padova';const prezzo_txt=document.querySelector('.info-data-price .txt-bold')?.textContent?.trim()||'0';const prezzo=parseFloat(prezzo_txt.replace(/[.]/g,'').replace(',','.'))||null;const desc=[...document.querySelectorAll('.comment .adCommentsLanguage p')].map(p=>p.textContent.trim()).join(' ')||'';const tipologie={warehouse:'capannone',apartment:'appartamento',villa:'villa',penthouse:'attico',office:'ufficio',store:'negozio',garage:'garage',land:'terreno'};const tipologia=tipologie[cfg.typology||'']||cfg.typology||'';const categoria=['warehouse','office','store'].includes(cfg.typology)?'commerciale':cfg.typology==='land'?'terreno':'residenziale';const allText=[...document.querySelectorAll('.info-features span,.details-property_features li')].map(s=>s.textContent.trim());const getNum=function(re){return parseInt((allText.find(function(f){return re.test(f);})||'').replace(/[^\d]/g,''))||null;};const sup=getNum(/\d+\s*m/);const loc=getNum(/local/i);const bag=getNum(/bagn/i);const dl=desc.toLowerCase();const has=function(w){return allText.some(function(c){return c.toLowerCase().includes(w);})||dl.includes(w);};const r={codice:'RIG'+id.slice(-4),titolo:titolo,tipo_operazione:tipo,categoria:categoria,tipologia:tipologia,comune:comune,prezzo:prezzo,superficie:sup,locali:loc,bagni:bag,garage:has('garage')||has('box'),giardino:has('giardino'),terrazzo:has('terraz'),cantina:has('cantina'),ascensore:has('ascensore'),piscina:has('piscina'),arredato:has('arredato'),ingresso_indipendente:has('ingresso indipendente'),canna_fumaria:has('canna fumaria'),riscaldamento_autonomo:has('autonomo'),riscaldamento_centralizzato:has('centralizzato'),aria_condizionata:has('condizionata'),animali_ammessi:has('animali'),consegna:dl.includes('libero')||dl.includes('libera')?'LIBERA':dl.includes('occup')?'OCCUPATA':'',id_idealista:id,note_interne:desc.substring(0,800),attivo:true,in_evidenza:false,venduto:false,affittato:false};const json=JSON.stringify(r,null,2);navigator.clipboard.writeText(json).then(function(){alert('OK! Dati copiati!\n\nVai sull admin e clicca Importa da Idealista');}).catch(function(){console.log(json);alert('Apri Console F12 e copia il JSON');});})();</div>
+    <button class="btn-copy" id="btnCopy" onclick="copyCode()">📋 Copia il codice</button>
+  </div>
+
+  <div class="uso">
+    <p>
+      <strong>✅ Come si usa ogni volta:</strong><br>
+      1. Apri annuncio su Idealista<br>
+      2. Clicca <strong>"Scraping Idealista"</strong> dalla barra preferiti<br>
+      3. Appare alert <strong>"OK! Dati copiati!"</strong><br>
+      4. Vai Admin → Nuovo → <strong>📥 Importa da Idealista</strong> → Ctrl+V
+    </p>
+  </div>
+</div>
+
+<script>
+function copyCode() {
+  const code = document.getElementById('codeBox').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.getElementById('btnCopy');
+    btn.textContent = '✅ Copiato! Ora incollalo come URL del bookmark';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '📋 Copia il codice';
+      btn.classList.remove('copied');
+    }, 3000);
+  });
+}
+</script>
+</body>
+</html>

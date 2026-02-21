@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Immobili in vendita e affitto — Righetto Immobiliare Padova</title>
+  <meta name="description" content="Scopri gli immobili di Righetto Immobiliare: ville, appartamenti, uffici in vendita e affitto a Padova e provincia. Filtri avanzati, virtual tour 360° e video.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --nero:#3A5578;--bianco:#fafaf5;--oro:#CEE08F;--oro2:#e2efb8;
+      --grigio:#7A9AB8;--gc:#A8C0D6;--verde:#4A6A8C;--rosso:#d75f5f;
+      --blu:#4A6A8C;--sfondo:#f5f0e8;--card:#fafaf5;--caffe:#5C7A9E;--testo:#1E3A5C;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Montserrat',sans-serif;background:#5C7A9E;color:var(--bianco);line-height:1.5}
+
+    /* ── HEADER ── */
+    header{background:var(--nero);position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.07)}
+    .header-inner{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:62px;display:flex;align-items:center;gap:2rem}
+    .hlogo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff;text-decoration:none;white-space:nowrap}
+    .hlogo span{color:var(--oro);font-style:italic}
+    .hnav{display:flex;align-items:center;gap:.2rem;flex:1}
+    .hnav a{color:rgba(255,255,255,.55);font-size:.82rem;text-decoration:none;padding:.4rem .8rem;border-radius:2px;transition:color .2s,background .2s;white-space:nowrap}
+    .hnav a:hover{color:#fff}
+    .hnav a.active{color:var(--oro)}
+    .h-cta{display:flex;align-items:center;gap:.65rem}
+    .h-tel{color:rgba(255,255,255,.6);font-size:.78rem;text-decoration:none;display:flex;align-items:center;gap:.35rem}
+    .h-tel:hover{color:#fff}
+    .h-tel svg{width:13px;height:13px}
+    .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:2px;font-size:.76rem;font-weight:500;text-decoration:none;letter-spacing:.04em;white-space:nowrap;transition:background .2s}
+    .h-btn:hover{background:var(--oro2)}
+
+    /* ── HERO SEARCH BAR ── */
+    .hero-search{background:var(--nero);padding:2.2rem 1.5rem 0}
+    .hero-search-inner{max-width:1380px;margin:0 auto}
+    .hero-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:#fff;margin-bottom:1.2rem;font-style:italic}
+    .hero-title strong{font-weight:600;font-style:normal;color:var(--oro)}
+
+    /* SEARCH TABS */
+    .s-tabs{display:flex;gap:0;margin-bottom:0}
+    .s-tab{padding:.6rem 1.4rem;border:none;background:rgba(255,255,255,.08);color:rgba(255,255,255,.5);font-family:'DM Sans',sans-serif;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s;border-radius:3px 3px 0 0}
+    .s-tab:hover{background:rgba(255,255,255,.12);color:#fff}
+    .s-tab.active{background:var(--sfondo);color:var(--nero);font-weight:500}
+
+    /* SEARCH BOX */
+    .search-box{background:var(--sfondo);border-radius:0 3px 0 0;padding:1.2rem 1.4rem;display:flex;align-items:center;gap:.65rem;flex-wrap:wrap}
+    .sb-field{display:flex;flex-direction:column;gap:.2rem;min-width:140px}
+    .sb-field label{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grigio);font-weight:500}
+    .sb-field select,.sb-field input{border:1px solid var(--gc);border-radius:2px;padding:.48rem .65rem;font-family:'DM Sans',sans-serif;font-size:.84rem;background:#fff;color:var(--testo);transition:border-color .2s}
+    .sb-field select:focus,.sb-field input:focus{outline:none;border-color:var(--oro)}
+    .sb-zona{flex:1;min-width:200px}
+    .sb-zona-wrap{position:relative}
+    .sb-zona-wrap svg{position:absolute;left:.6rem;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--grigio);pointer-events:none}
+    .sb-zona-wrap input{padding-left:2rem!important;width:100%}
+    .sb-sep{width:1px;height:36px;background:var(--gc);flex-shrink:0}
+    .sb-search-btn{background:var(--nero);color:#fff;padding:.6rem 1.6rem;border:none;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s,transform .15s;display:flex;align-items:center;gap:.45rem;white-space:nowrap;flex-shrink:0}
+    .sb-search-btn:hover{background:var(--oro);color:var(--nero);transform:translateY(-1px)}
+    .sb-search-btn svg{width:14px;height:14px}
+
+    /* ADVANCED FILTERS TOGGLE */
+    .filter-toggle{padding:.55rem 1.4rem;background:var(--sfondo);border-top:1px solid var(--gc);display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.76rem;color:var(--grigio);user-select:none;transition:color .2s}
+    .filter-toggle:hover{color:var(--nero)}
+    .filter-toggle svg{width:13px;height:13px;transition:transform .25s}
+    .filter-toggle.open svg{transform:rotate(180deg)}
+
+    .advanced-filters{background:var(--sfondo);border-top:1px solid var(--gc);max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s}
+    .advanced-filters.open{max-height:400px;padding:1rem 1.4rem 1.2rem}
+    .af-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.65rem}
+    @media(max-width:900px){.af-grid{grid-template-columns:repeat(3,1fr)}}
+    .af-field{display:flex;flex-direction:column;gap:.2rem}
+    .af-field label{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grigio);font-weight:500}
+    .af-field select,.af-field input{border:1px solid var(--gc);border-radius:2px;padding:.44rem .6rem;font-family:'DM Sans',sans-serif;font-size:.8rem;background:#fff;color:var(--nero)}
+    .af-field select:focus,.af-field input:focus{outline:none;border-color:var(--oro)}
+    .af-range{display:flex;align-items:center;gap:.35rem}
+    .af-range input{flex:1}
+    .af-range span{font-size:.72rem;color:var(--grigio)}
+
+    /* ── LAYOUT ── */
+    .page{max-width:1380px;margin:0 auto;padding:1.4rem 1.5rem;display:grid;grid-template-columns:300px 1fr;gap:1.4rem;align-items:start}
+    @media(max-width:1024px){.page{grid-template-columns:1fr}}
+
+    /* ── SIDEBAR FILTRI ── */
+    .sidebar{position:sticky;top:80px}
+    .filter-panel{background:#fff;border:1px solid var(--gc);border-radius:3px;overflow:hidden}
+    .fp-head{padding:.85rem 1.1rem;border-bottom:1px solid var(--gc);background:var(--bianco);display:flex;align-items:center;justify-content:space-between}
+    .fp-head h3{font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+    .fp-reset{font-size:.7rem;color:var(--oro);cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;padding:0}
+    .fp-reset:hover{text-decoration:underline}
+    .fp-section{padding:.85rem 1.1rem;border-bottom:1px solid var(--gc)}
+    .fp-section:last-child{border-bottom:none}
+    .fp-section-title{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grigio);font-weight:500;margin-bottom:.65rem;display:flex;align-items:center;justify-content:space-between}
+    .fp-section-title button{background:none;border:none;font-size:.65rem;color:var(--oro);cursor:pointer;font-family:'DM Sans',sans-serif;padding:0}
+    .fp-check{display:flex;flex-direction:column;gap:.38rem}
+    .fp-check label{display:flex;align-items:center;gap:.45rem;font-size:.8rem;color:var(--grigio);cursor:pointer;transition:color .2s}
+    .fp-check label:hover{color:var(--nero)}
+    .fp-check input{accent-color:var(--oro);width:14px;height:14px;flex-shrink:0}
+    .fp-check .cnt{margin-left:auto;font-size:.66rem;color:rgba(107,101,96,.5)}
+    .range-row{display:flex;align-items:center;gap:.4rem;margin-top:.3rem}
+    .range-row input{flex:1;border:1px solid var(--gc);border-radius:2px;padding:.4rem .5rem;font-family:'DM Sans',sans-serif;font-size:.78rem;background:var(--bianco)}
+    .range-row input:focus{outline:none;border-color:var(--oro)}
+    .range-sep{font-size:.72rem;color:var(--grigio)}
+    .fp-chip-row{display:flex;flex-wrap:wrap;gap:.3rem}
+    .fp-chip{padding:.28rem .65rem;border:1px solid var(--gc);border-radius:20px;font-size:.73rem;color:var(--grigio);cursor:pointer;transition:background .2s,border-color .2s,color .2s;background:#fff}
+    .fp-chip:hover,.fp-chip.on{background:var(--nero);border-color:var(--nero);color:#fff}
+    .fp-chip.on-gold{background:var(--oro);border-color:var(--oro);color:var(--nero)}
+
+    /* CE SELECTOR */
+    .ce-row{display:flex;gap:.22rem;flex-wrap:wrap}
+    .ce-tag{padding:.22rem .48rem;border-radius:2px;font-size:.66rem;font-weight:700;cursor:pointer;transition:opacity .2s,transform .15s;border:1px solid transparent}
+    .ce-tag:not(.on){opacity:.35}
+    .ce-tag.on{transform:scale(1.05)}
+    .ce-A4,.ce-A4{background:#1b5e20;color:#fff}
+    .ce-A3{background:#2e7d32;color:#fff}
+    .ce-A2{background:#388e3c;color:#fff}
+    .ce-A1{background:#43a047;color:#fff}
+    .ce-B{background:#558b2f;color:#fff}
+    .ce-C{background:#f9a825;color:#000}
+    .ce-D{background:#ef6c00;color:#fff}
+    .ce-E{background:#e53935;color:#fff}
+    .ce-F{background:#b71c1c;color:#fff}
+    .ce-G{background:#880e4f;color:#fff}
+
+    /* ── RESULTS AREA ── */
+    .results-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.6rem}
+    .results-count{font-family:'Cormorant Garamond',serif;font-size:1.15rem}
+    .results-count strong{color:var(--nero)}
+    .results-count span{color:var(--grigio);font-size:.9rem}
+    .results-controls{display:flex;align-items:center;gap:.6rem}
+    .sort-sel{border:1px solid var(--gc);border-radius:2px;padding:.4rem .65rem;font-family:'DM Sans',sans-serif;font-size:.78rem;background:#fff;color:var(--nero)}
+    .view-toggle{display:flex;border:1px solid var(--gc);border-radius:2px;overflow:hidden}
+    .vt-btn{width:32px;height:32px;border:none;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;border-right:1px solid var(--gc)}
+    .vt-btn:last-child{border-right:none}
+    .vt-btn:hover,.vt-btn.active{background:var(--nero)}
+    .vt-btn:hover svg,.vt-btn.active svg{color:#fff}
+    .vt-btn svg{width:14px;height:14px;color:var(--grigio)}
+
+    /* ACTIVE FILTERS TAGS */
+    .active-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.85rem}
+    .atag{display:flex;align-items:center;gap:.3rem;padding:.22rem .55rem;background:var(--nero);color:#fff;border-radius:2px;font-size:.7rem}
+    .atag button{background:none;border:none;color:rgba(255,255,255,.6);cursor:pointer;font-size:.8rem;line-height:1;padding:0;display:flex;align-items:center}
+    .atag button:hover{color:#fff}
+
+    /* ── GRID IMMOBILI ── */
+    .imm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+    .imm-grid.list-view{grid-template-columns:1fr}
+    @media(max-width:1200px){.imm-grid:not(.list-view){grid-template-columns:1fr}}
+
+    /* CARD */
+    .card{background:var(--card);border:1px solid var(--gc);border-radius:3px;overflow:hidden;transition:transform .25s,box-shadow .25s;cursor:pointer;display:block;text-decoration:none;color:inherit}
+    .card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.09)}
+    .card.list-view{display:grid;grid-template-columns:280px 1fr}
+
+    /* CARD IMAGE */
+    .card-img{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--gc)}
+    .card.list-view .card-img{aspect-ratio:unset;height:100%;min-height:180px}
+    .card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+    .card:hover .card-img img{transform:scale(1.04)}
+    .card-img-ph{width:100%;height:100%;background:linear-gradient(135deg,#e8e4de,#d4cfc8);display:flex;align-items:center;justify-content:center}
+    .card-img-ph svg{width:32px;height:32px;opacity:.2}
+
+    /* BADGES OVERLAY */
+    .card-badges{position:absolute;top:.6rem;left:.6rem;display:flex;flex-direction:column;gap:.28rem;z-index:2}
+    .cbadge{font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;padding:.18rem .5rem;border-radius:1px;font-weight:600}
+    .cb-vendita{background:var(--nero);color:#fff}
+    .cb-affitto{background:var(--verde);color:#fff}
+    .cb-evidenza{background:var(--oro);color:var(--nero)}
+    .cb-nuovo{background:var(--rosso);color:#fff}
+    .card-media{position:absolute;bottom:.5rem;right:.5rem;display:flex;gap:.22rem;z-index:2}
+    .cm-icon{width:24px;height:24px;background:rgba(0,0,0,.65);border-radius:2px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+    .cm-icon svg{width:11px;height:11px;color:#fff}
+    .card-count{position:absolute;bottom:.5rem;left:.5rem;background:rgba(0,0,0,.65);color:#fff;font-size:.62rem;padding:.15rem .45rem;border-radius:1px;backdrop-filter:blur(4px);letter-spacing:.04em}
+
+    /* CARD BODY */
+    .card-body{padding:1rem 1.1rem}
+    .card.list-view .card-body{padding:1rem 1.2rem;display:flex;flex-direction:column;justify-content:space-between}
+    .card-price{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;color:var(--testo);line-height:1}
+    .card-price small{font-family:'DM Sans',sans-serif;font-size:.72rem;color:var(--grigio);font-weight:400;margin-left:.2rem}
+    .card-title{font-size:.88rem;font-weight:500;margin:.35rem 0 .2rem;line-height:1.35}
+    .card-location{display:flex;align-items:center;gap:.28rem;font-size:.76rem;color:var(--grigio);margin-bottom:.7rem}
+    .card-location svg{width:11px;height:11px;flex-shrink:0;color:var(--oro)}
+    .card-specs{display:flex;gap:.75rem;flex-wrap:wrap;padding-top:.65rem;border-top:1px solid var(--gc)}
+    .cs{display:flex;align-items:center;gap:.28rem;font-size:.75rem;color:var(--grigio)}
+    .cs svg{width:13px;height:13px;color:var(--gc);flex-shrink:0}
+    .cs strong{color:var(--nero);font-weight:500}
+    .card-footer{display:flex;align-items:center;justify-content:space-between;padding:.55rem 1.1rem;border-top:1px solid var(--gc);background:var(--bianco)}
+    .cf-ref{font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--grigio)}
+    .cf-ce{font-size:.6rem;font-weight:700;padding:.12rem .38rem;border-radius:1px}
+    .cf-agent{font-size:.7rem;color:var(--grigio)}
+    .fav-btn{position:absolute;top:.6rem;right:.6rem;width:30px;height:30px;background:rgba(255,255,255,.9);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,transform .15s;z-index:3;backdrop-filter:blur(4px)}
+    .fav-btn:hover{background:#fff;transform:scale(1.1)}
+    .fav-btn svg{width:14px;height:14px;color:var(--grigio)}
+    .fav-btn.on svg{color:var(--rosso);fill:var(--rosso)}
+
+    /* ── PAGINATION ── */
+    .pagination{display:flex;align-items:center;justify-content:center;gap:.35rem;margin-top:2rem;padding-bottom:2rem}
+    .page-btn{width:36px;height:36px;border:1px solid var(--gc);background:#fff;border-radius:2px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.82rem;color:var(--grigio);transition:background .2s,border-color .2s,color .2s}
+    .page-btn:hover{border-color:var(--nero);color:var(--nero)}
+    .page-btn.active{background:var(--nero);border-color:var(--nero);color:#fff}
+    .page-btn.prev-next{width:auto;padding:0 .85rem;gap:.3rem;font-size:.74rem;letter-spacing:.04em;text-transform:uppercase}
+    .page-btn svg{width:13px;height:13px}
+
+    /* ── MAP TOGGLE ── */
+    .map-toggle-bar{background:var(--nero);padding:.7rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+    .map-toggle-inner{max-width:1380px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+    .map-toggle-text{font-size:.78rem;color:rgba(255,255,255,.6)}
+    .map-toggle-btn{display:flex;align-items:center;gap:.4rem;padding:.38rem .85rem;border:1px solid rgba(255,255,255,.2);background:transparent;color:#fff;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:.74rem;letter-spacing:.04em;cursor:pointer;transition:border-color .2s,background .2s}
+    .map-toggle-btn:hover{border-color:var(--oro);background:rgba(201,168,76,.1);color:var(--oro)}
+    .map-toggle-btn svg{width:13px;height:13px}
+    .map-panel{background:var(--gc);height:0;overflow:hidden;transition:height .4s ease}
+    .map-panel.open{height:420px}
+    .map-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.8rem;color:var(--grigio);background:linear-gradient(135deg,#e8e4de 0%,#f0ece6 50%,#e0dbd3 100%)}
+    .map-placeholder svg{width:40px;height:40px;opacity:.3}
+    .map-placeholder p{font-size:.82rem}
+
+    /* MODAL */
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(4px)}
+    .modal-overlay.open{opacity:1;pointer-events:all}
+    .modal{background:#fff;border-radius:3px;max-width:680px;width:100%;max-height:90vh;overflow-y:auto;transform:translateY(20px);transition:transform .3s}
+    .modal-overlay.open .modal{transform:translateY(0)}
+    .modal-img{width:100%;height:260px;object-fit:cover;background:var(--gc)}
+    .modal-body{padding:1.5rem}
+    .modal-price{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600}
+    .modal-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;font-style:italic;margin:.3rem 0 .5rem;color:var(--grigio)}
+    .modal-loc{display:flex;align-items:center;gap:.3rem;font-size:.82rem;color:var(--grigio);margin-bottom:1.1rem}
+    .modal-loc svg{width:12px;height:12px;color:var(--oro)}
+    .modal-specs{display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem;margin-bottom:1.1rem}
+    .ms-item{background:var(--bianco);border:1px solid var(--gc);border-radius:2px;padding:.6rem .75rem;text-align:center}
+    .ms-val{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600}
+    .ms-lbl{font-size:.64rem;color:var(--grigio);text-transform:uppercase;letter-spacing:.08em}
+    .modal-desc{font-size:.84rem;line-height:1.8;color:var(--grigio);margin-bottom:1.2rem}
+    .modal-actions{display:flex;gap:.55rem}
+    .modal-close{position:absolute;top:1rem;right:1rem;width:34px;height:34px;background:rgba(0,0,0,.6);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10}
+    .modal-close svg{width:14px;height:14px;color:#fff}
+    .modal-head{position:relative}
+
+    /* CONTACT FORM INLINE */
+    .contact-card{background:var(--bianco);border:1px solid var(--gc);border-radius:3px;padding:1.1rem;margin-top:1rem}
+    .cc-title{font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:.4rem}
+    .cc-title svg{width:13px;height:13px;color:var(--oro)}
+    .cc-fields{display:flex;flex-direction:column;gap:.5rem}
+    .cc-fields input,.cc-fields textarea{border:1px solid var(--gc);border-radius:2px;padding:.48rem .65rem;font-family:'DM Sans',sans-serif;font-size:.82rem;background:#fff;width:100%}
+    .cc-fields input:focus,.cc-fields textarea:focus{outline:none;border-color:var(--oro)}
+    .cc-fields textarea{resize:vertical;min-height:72px;line-height:1.6}
+    .cc-submit{width:100%;background:var(--nero);color:#fff;padding:.6rem;border:none;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;margin-top:.5rem;transition:background .2s}
+    .cc-submit:hover{background:var(--oro);color:var(--nero)}
+
+    /* NESSUN RISULTATO */
+    .no-results{text-align:center;padding:4rem 2rem;color:var(--grigio)}
+    .no-results svg{width:48px;height:48px;opacity:.2;margin:0 auto .75rem;display:block}
+    .no-results h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--nero);margin-bottom:.4rem}
+    .no-results p{font-size:.85rem}
+
+    /* FOOTER */
+    footer{background:var(--nero);color:rgba(255,255,255,.45);padding:2.2rem 1.5rem;margin-top:2rem}
+    .footer-inner{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2rem}
+    .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;margin-bottom:.5rem}
+    .footer-logo span{color:var(--oro);font-style:italic}
+    .footer-info{font-size:.77rem;line-height:1.8}
+    .footer-col h4{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.7rem;font-weight:500}
+    .footer-col a{display:block;font-size:.78rem;color:rgba(255,255,255,.4);text-decoration:none;margin-bottom:.28rem;transition:color .2s}
+    .footer-col a:hover{color:var(--oro)}
+    .footer-bottom{max-width:1380px;margin:.9rem auto 0;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;font-size:.7rem;flex-wrap:wrap;gap:.4rem}
+
+    @media(max-width:768px){
+      .search-box{flex-direction:column;align-items:stretch}
+      .sb-sep{display:none}
+      .footer-inner{grid-template-columns:1fr 1fr}
+      .imm-grid{grid-template-columns:1fr}
+      .card.list-view{grid-template-columns:1fr}
+      .modal-specs{grid-template-columns:repeat(2,1fr)}
+      .hero-title{font-size:1.4rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="hlogo">Righetto <span>Immobiliare</span></a>
+    <nav class="hnav">
+      <a href="index.html">Home</a>
+      <a href="immobili.html" class="active">Immobili</a>
+      <a href="servizi.html">Servizi</a>
+      <a href="chi-siamo.html">Chi siamo</a>
+      <a href="blog.html">Blog</a>
+      <a href="contatti.html">Contatti</a>
+      <a href="faq.html">FAQ</a>
+    </nav>
+    <div class="h-cta">
+      <a class="h-tel" href="tel:+390498843484"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>049 884 3484</a>
+      <a class="h-btn" href="contatti.html">Valutazione gratuita</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO SEARCH -->
+<div class="hero-search">
+  <div class="hero-search-inner">
+    <h1 class="hero-title">Trova il tuo <strong>immobile ideale</strong><br>a Padova e provincia</h1>
+    <div class="s-tabs">
+      <button class="s-tab active" onclick="setTab(this,'vendita')">Acquisto</button>
+      <button class="s-tab" onclick="setTab(this,'affitto')">Affitto</button>
+      <button class="s-tab" onclick="setTab(this,'aste')">Aste</button>
+    </div>
+    <div class="search-box">
+      <div class="sb-field sb-zona">
+        <label>Dove cerchi?</label>
+        <div class="sb-zona-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><input type="text" id="zona-input" placeholder="Comune, quartiere, via..." oninput="filterCards()"></div>
+      </div>
+      <div class="sb-sep"></div>
+      <div class="sb-field">
+        <label>Tipologia</label>
+        <select id="f-tipo" onchange="filterCards()">
+          <option value="">Tutte</option>
+          <option value="villa">Villa / Casa singola</option>
+          <option value="appartamento">Appartamento</option>
+          <option value="bifamiliare">Bifamiliare</option>
+          <option value="ufficio">Ufficio</option>
+          <option value="locale">Locale commerciale</option>
+          <option value="terreno">Terreno</option>
+          <option value="garage">Garage / Box</option>
+        </select>
+      </div>
+      <div class="sb-field">
+        <label>Prezzo max</label>
+        <select id="f-prezzo" onchange="filterCards()">
+          <option value="">Qualsiasi</option>
+          <option value="100000">fino a € 100.000</option>
+          <option value="200000">fino a € 200.000</option>
+          <option value="300000">fino a € 300.000</option>
+          <option value="400000">fino a € 400.000</option>
+          <option value="500000">fino a € 500.000</option>
+          <option value="750000">fino a € 750.000</option>
+        </select>
+      </div>
+      <div class="sb-field">
+        <label>Camere min</label>
+        <select id="f-camere" onchange="filterCards()">
+          <option value="">Qualsiasi</option>
+          <option value="1">1+</option>
+          <option value="2">2+</option>
+          <option value="3">3+</option>
+          <option value="4">4+</option>
+          <option value="5">5+</option>
+        </select>
+      </div>
+      <div class="sb-field">
+        <label>Mq min</label>
+        <select id="f-mq" onchange="filterCards()">
+          <option value="">Qualsiasi</option>
+          <option value="40">40+ mq</option>
+          <option value="60">60+ mq</option>
+          <option value="80">80+ mq</option>
+          <option value="100">100+ mq</option>
+          <option value="150">150+ mq</option>
+          <option value="200">200+ mq</option>
+          <option value="300">300+ mq</option>
+        </select>
+      </div>
+      <button class="sb-search-btn" onclick="filterCards()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        Cerca
+      </button>
+    </div>
+
+    <!-- FILTRI AVANZATI TOGGLE -->
+    <div class="filter-toggle" id="adv-toggle" onclick="toggleAdv()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+      Filtri avanzati
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="advanced-filters" id="adv-filters">
+      <div class="af-grid">
+        <div class="af-field"><label>Bagni min</label><select id="f-bagni" onchange="filterCards()"><option value="">Qualsiasi</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option></select></div>
+        <div class="af-field"><label>Garage</label><select id="f-garage" onchange="filterCards()"><option value="">Qualsiasi</option><option value="1">Sì</option></select></div>
+        <div class="af-field"><label>Giardino</label><select id="f-giardino" onchange="filterCards()"><option value="">Qualsiasi</option><option value="1">Sì</option></select></div>
+        <div class="af-field"><label>Anno costruzione</label><select id="f-anno"><option value="">Qualsiasi</option><option value="new">Dopo il 2000</option><option value="90s">1980–2000</option><option value="old">Prima del 1980</option></select></div>
+        <div class="af-field"><label>Stato</label><select id="f-stato"><option value="">Qualsiasi</option><option>Ottimo</option><option>Buono</option><option>Da ristrutturare</option><option>Nuovo</option></select></div>
+        <div class="af-field"><label>Caratteristiche</label><select id="f-extra"><option value="">Qualsiasi</option><option>Piscina</option><option>Vista aperta</option><option>Mansarda</option><option>Taverna</option></select></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAPPA -->
+<div class="map-toggle-bar">
+  <div class="map-toggle-inner">
+    <span class="map-toggle-text">Visualizza gli immobili sulla mappa</span>
+    <button class="map-toggle-btn" onclick="toggleMap()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+      Mostra mappa
+    </button>
+  </div>
+</div>
+<div class="map-panel" id="map-panel">
+  <div class="map-placeholder">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+    <p>Mappa Google Maps — da collegare con le coordinate degli immobili</p>
+  </div>
+</div>
+
+<!-- MAIN PAGE -->
+<div class="page">
+
+  <!-- SIDEBAR FILTRI -->
+  <aside class="sidebar">
+    <div class="filter-panel">
+      <div class="fp-head"><h3>Filtri</h3><button class="fp-reset" onclick="resetFilters()">Azzera tutto</button></div>
+
+      <div class="fp-section">
+        <div class="fp-section-title">Operazione</div>
+        <div class="fp-chip-row">
+          <span class="fp-chip on" onclick="toggleChip(this,'op','vendita')">Vendita</span>
+          <span class="fp-chip" onclick="toggleChip(this,'op','affitto')">Affitto</span>
+          <span class="fp-chip" onclick="toggleChip(this,'op','aste')">Aste</span>
+        </div>
+      </div>
+
+      <div class="fp-section">
+        <div class="fp-section-title">Tipologia immobile</div>
+        <div class="fp-check">
+          <label><input type="checkbox" checked onchange="filterCards()"> Villa / Casa singola <span class="cnt">3</span></label>
+          <label><input type="checkbox" checked onchange="filterCards()"> Appartamento <span class="cnt">5</span></label>
+          <label><input type="checkbox" checked onchange="filterCards()"> Bifamiliare <span class="cnt">2</span></label>
+          <label><input type="checkbox" checked onchange="filterCards()"> Ufficio <span class="cnt">1</span></label>
+          <label><input type="checkbox" checked onchange="filterCards()"> Locale commerciale <span class="cnt">1</span></label>
+        </div>
+      </div>
+
+      <div class="fp-section">
+        <div class="fp-section-title">Prezzo</div>
+        <div class="range-row">
+          <input type="number" placeholder="Min €" id="s-pmin" oninput="filterCards()">
+          <span class="range-sep">–</span>
+          <input type="number" placeholder="Max €" id="s-pmax" oninput="filterCards()">
+        </div>
+      </div>
+
+      <div class="fp-section">
+        <div class="fp-section-title">Superficie</div>
+        <div class="range-row">
+          <input type="number" placeholder="Min mq" id="s-mqmin" oninput="filterCards()">
+          <span class="range-sep">–</span>
+          <input type="number" placeholder="Max mq" id="s-mqmax" oninput="filterCards()">
+        </div>
+      </div>
+
+      <div class="fp-section">
+        <div class="fp-section-title">Camere</div>
+        <div class="fp-chip-row">
+          <span class="fp-chip" onclick="toggleChipSingle(this,'cam')">1</span>
+          <span class="fp-chip" onclick="toggleChipSingle(this,'cam')">2</span>
+          <span class="fp-chip" onclick="toggleChipSingle(this,'cam')">3</span>
+          <span class="fp-chip" onclick="toggleChipSingle(this,'cam')">4</span>
+          <span class="fp-chip" onclick="toggleChipSingle(this,'cam')">5+</span>
+        </div>
+      </div>
+
+      <div class="fp-section">
+        <div class="fp-section-title">Zona / Comune</div>
+        <div class="fp-check">
+          <label><input type="checkbox" checked onchange="filterCards()"> Padova <span class="cnt">4</span></label>
+          <label><input type="checkbox" checked onchange="filterCards()"> Curtarolo <span class="cnt">1</span></label>
+          <label><input type="checkbox" checked onchange="filterCards()"> Albignasego <span class="cnt">2</span></label>
+          <label><input type="checkbox" checked onchange="filterCards()"> Limena <span class="cnt">1</span></label>
+          <label><input type="checkbox" checked onchange="filterCards()"> Cadoneghe <span class="cnt">1</span></label>
+          <label><input type="checkbox" checked onchange="filterCards()"> Vigodarzere <span class="cnt">2</span></label>
+          <label><input type="checkbox" checked onchange="filterCards()"> Saccolongo <span class="cnt">1</span></label>
+        </div>
+      </div>
+
+      <div class="fp-section">
+        <div class="fp-section-title">Caratteristiche</div>
+        <div class="fp-check">
+          <label><input type="checkbox" onchange="filterCards()"> Con giardino</label>
+          <label><input type="checkbox" onchange="filterCards()"> Con garage</label>
+          <label><input type="checkbox" onchange="filterCards()"> Con piscina</label>
+          <label><input type="checkbox" onchange="filterCards()"> Con mansarda</label>
+          <label><input type="checkbox" onchange="filterCards()"> Vista aperta</label>
+          <label><input type="checkbox" onchange="filterCards()"> Virtual Tour 360°</label>
+          <label><input type="checkbox" onchange="filterCards()"> Video YouTube</label>
+        </div>
+      </div>
+
+      <div class="fp-section">
+        <div class="fp-section-title">Classe energetica</div>
+        <div class="ce-row">
+          <span class="ce-tag ce-A4 on" onclick="this.classList.toggle('on')">A4</span>
+          <span class="ce-tag ce-A3 on" onclick="this.classList.toggle('on')">A3</span>
+          <span class="ce-tag ce-A2 on" onclick="this.classList.toggle('on')">A2</span>
+          <span class="ce-tag ce-A1 on" onclick="this.classList.toggle('on')">A1</span>
+          <span class="ce-tag ce-B on" onclick="this.classList.toggle('on')">B</span>
+          <span class="ce-tag ce-C on" onclick="this.classList.toggle('on')">C</span>
+          <span class="ce-tag ce-D on" onclick="this.classList.toggle('on')">D</span>
+          <span class="ce-tag ce-E on" onclick="this.classList.toggle('on')">E</span>
+          <span class="ce-tag ce-F on" onclick="this.classList.toggle('on')">F</span>
+          <span class="ce-tag ce-G on" onclick="this.classList.toggle('on')">G</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- RISULTATI -->
+  <div>
+    <div class="results-head">
+      <div class="results-count"><strong id="res-count">12</strong> <span>immobili trovati</span></div>
+      <div class="results-controls">
+        <select class="sort-sel" onchange="sortCards(this.value)">
+          <option value="default">Rilevanza</option>
+          <option value="price-asc">Prezzo: dal più basso</option>
+          <option value="price-desc">Prezzo: dal più alto</option>
+          <option value="mq-desc">Superficie: più grande</option>
+          <option value="newest">Più recenti</option>
+        </select>
+        <div class="view-toggle">
+          <button class="vt-btn active" id="btn-grid" onclick="setView('grid')" title="Vista griglia">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          </button>
+          <button class="vt-btn" id="btn-list" onclick="setView('list')" title="Vista lista">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIVE TAGS -->
+    <div class="active-tags" id="active-tags"></div>
+
+    <!-- GRID IMMOBILI -->
+    <div class="imm-grid" id="imm-grid">
+
+      <!-- CARD 1: LA0307 Villa Curtarolo -->
+      <a class="card" href="immobile.html?rif=LA0307" data-tipo="villa" data-prezzo="380000" data-mq="350" data-camere="5" data-comune="curtarolo" data-vt="1" data-yt="1" data-giardino="1" data-garage="1" data-op="vendita" onclick="openCard(event,this)">
+        <div class="card-img">
+          <div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+          <div class="card-badges"><span class="cbadge cb-vendita">Vendita</span><span class="cbadge cb-evidenza">★ In evidenza</span></div>
+          <div class="card-media">
+            <div class="cm-icon" title="Video YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+            <div class="cm-icon" title="Virtual Tour 360°"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          </div>
+          <div class="card-count">42 foto</div>
+          <button class="fav-btn" onclick="event.preventDefault();event.stopPropagation();toggleFav(this)" title="Salva"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+        </div>
+        <div class="card-body">
+          <div class="card-price">€ 380.000</div>
+          <div class="card-title">Villa singola a pochi chilometri da Padova</div>
+          <div class="card-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Curtarolo, Padova</div>
+          <div class="card-specs">
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg><strong>350</strong>&nbsp;mq</div>
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><strong>5</strong>&nbsp;camere</div>
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22H4a2 2 0 01-2-2v-2h20v2a2 2 0 01-2 2h-3M22 12v-2a5 5 0 00-5-5H7a5 5 0 00-5 5v2h20z"/></svg><strong>2</strong>&nbsp;bagni</div>
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><strong>2</strong>&nbsp;garage</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="cf-ref">Rif. LA0307</span>
+          <span class="cf-ce" style="background:#ef6c00;color:#fff">D</span>
+          <span class="cf-agent">Capon Gino</span>
+        </div>
+      </a>
+
+      <!-- CARD 2: LA0308 Appartamento Padova Centro -->
+      <a class="card" href="immobile.html?rif=LA0308" data-tipo="appartamento" data-prezzo="285000" data-mq="85" data-camere="3" data-comune="padova" data-yt="1" data-op="vendita" onclick="openCard(event,this)">
+        <div class="card-img">
+          <div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+          <div class="card-badges"><span class="cbadge cb-vendita">Vendita</span></div>
+          <div class="card-media"><div class="cm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div></div>
+          <div class="card-count">18 foto</div>
+          <button class="fav-btn" onclick="event.preventDefault();event.stopPropagation();toggleFav(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+        </div>
+        <div class="card-body">
+          <div class="card-price">€ 285.000</div>
+          <div class="card-title">Appartamento 3 locali — Centro Storico Padova</div>
+          <div class="card-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Centro Storico, Padova</div>
+          <div class="card-specs">
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg><strong>85</strong>&nbsp;mq</div>
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><strong>3</strong>&nbsp;camere</div>
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22H4a2 2 0 01-2-2v-2h20v2a2 2 0 01-2 2h-3M22 12v-2a5 5 0 00-5-5H7a5 5 0 00-5 5v2h20z"/></svg><strong>1</strong>&nbsp;bagno</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="cf-ref">Rif. LA0308</span>
+          <span class="cf-ce" style="background:#f9a825;color:#000">C</span>
+          <span class="cf-agent">Capon Gino</span>
+        </div>
+      </a>
+
+      <!-- CARD 3: LA0309 Bilocale affitto -->
+      <a class="card" href="immobile.html?rif=LA0309" data-tipo="appartamento" data-prezzo="950" data-mq="55" data-camere="2" data-comune="padova" data-op="affitto" onclick="openCard(event,this)">
+        <div class="card-img">
+          <div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+          <div class="card-badges"><span class="cbadge cb-affitto">Affitto</span></div>
+          <div class="card-count">12 foto</div>
+          <button class="fav-btn" onclick="event.preventDefault();event.stopPropagation();toggleFav(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+        </div>
+        <div class="card-body">
+          <div class="card-price">€ 950 <small>/mese</small></div>
+          <div class="card-title">Bilocale luminoso — Prato della Valle</div>
+          <div class="card-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Prato della Valle, Padova</div>
+          <div class="card-specs">
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg><strong>55</strong>&nbsp;mq</div>
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><strong>2</strong>&nbsp;camere</div>
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22H4a2 2 0 01-2-2v-2h20v2a2 2 0 01-2 2h-3M22 12v-2a5 5 0 00-5-5H7a5 5 0 00-5 5v2h20z"/></svg><strong>1</strong>&nbsp;bagno</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="cf-ref">Rif. LA0309</span>
+          <span class="cf-ce" style="background:#558b2f;color:#fff">B</span>
+          <span class="cf-agent">Righetto Linda</span>
+        </div>
+      </a>
+
+      <!-- CARD 4: LA0310 Villa bifamiliare -->
+      <a class="card" href="immobile.html?rif=LA0310" data-tipo="bifamiliare" data-prezzo="520000" data-mq="180" data-camere="4" data-comune="albignasego" data-giardino="1" data-garage="1" data-op="vendita" onclick="openCard(event,this)">
+        <div class="card-img">
+          <div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+          <div class="card-badges"><span class="cbadge cb-vendita">Vendita</span><span class="cbadge cb-evidenza">★ In evidenza</span></div>
+          <div class="card-count">28 foto</div>
+          <button class="fav-btn" onclick="event.preventDefault();event.stopPropagation();toggleFav(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+        </div>
+        <div class="card-body">
+          <div class="card-price">€ 520.000</div>
+          <div class="card-title">Villa bifamiliare con giardino privato</div>
+          <div class="card-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Albignasego, Padova</div>
+          <div class="card-specs">
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg><strong>180</strong>&nbsp;mq</div>
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><strong>4</strong>&nbsp;camere</div>
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22H4a2 2 0 01-2-2v-2h20v2a2 2 0 01-2 2h-3M22 12v-2a5 5 0 00-5-5H7a5 5 0 00-5 5v2h20z"/></svg><strong>2</strong>&nbsp;bagni</div>
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><strong>2</strong>&nbsp;garage</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="cf-ref">Rif. LA0310</span>
+          <span class="cf-ce" style="background:#43a047;color:#fff">A1</span>
+          <span class="cf-agent">Capon Gino</span>
+        </div>
+      </a>
+
+      <!-- CARD 5: LA0311 Appartamento Albignasego -->
+      <a class="card" href="immobile.html?rif=LA0311" data-tipo="appartamento" data-prezzo="195000" data-mq="75" data-camere="3" data-comune="albignasego" data-op="vendita" onclick="openCard(event,this)">
+        <div class="card-img">
+          <div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+          <div class="card-badges"><span class="cbadge cb-vendita">Vendita</span></div>
+          <div class="card-count">15 foto</div>
+          <button class="fav-btn" onclick="event.preventDefault();event.stopPropagation();toggleFav(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+        </div>
+        <div class="card-body">
+          <div class="card-price">€ 195.000</div>
+          <div class="card-title">Trilocale con balcone — Albignasego</div>
+          <div class="card-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Albignasego, Padova</div>
+          <div class="card-specs">
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg><strong>75</strong>&nbsp;mq</div>
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><strong>3</strong>&nbsp;camere</div>
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22H4a2 2 0 01-2-2v-2h20v2a2 2 0 01-2 2h-3M22 12v-2a5 5 0 00-5-5H7a5 5 0 00-5 5v2h20z"/></svg><strong>1</strong>&nbsp;bagno</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="cf-ref">Rif. LA0311</span>
+          <span class="cf-ce" style="background:#e53935;color:#fff">E</span>
+          <span class="cf-agent">Righetto Linda</span>
+        </div>
+      </a>
+
+      <!-- CARD 6: LA0312 Villa Limena -->
+      <a class="card" href="immobile.html?rif=LA0312" data-tipo="villa" data-prezzo="680000" data-mq="290" data-camere="5" data-comune="limena" data-giardino="1" data-garage="1" data-vt="1" data-op="vendita" onclick="openCard(event,this)">
+        <div class="card-img">
+          <div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+          <div class="card-badges"><span class="cbadge cb-vendita">Vendita</span></div>
+          <div class="card-media"><div class="cm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div></div>
+          <div class="card-count">36 foto</div>
+          <button class="fav-btn" onclick="event.preventDefault();event.stopPropagation();toggleFav(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+        </div>
+        <div class="card-body">
+          <div class="card-price">€ 680.000</div>
+          <div class="card-title">Villa singola con piscina e parco — Limena</div>
+          <div class="card-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Limena, Padova</div>
+          <div class="card-specs">
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg><strong>290</strong>&nbsp;mq</div>
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><strong>5</strong>&nbsp;camere</div>
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22H4a2 2 0 01-2-2v-2h20v2a2 2 0 01-2 2h-3M22 12v-2a5 5 0 00-5-5H7a5 5 0 00-5 5v2h20z"/></svg><strong>3</strong>&nbsp;bagni</div>
+            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><strong>2</strong>&nbsp;garage</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="cf-ref">Rif. LA0312</span>
+          <span class="cf-ce" style="background:#43a047;color:#fff">A1</span>
+          <span class="cf-agent">Capon Gino</span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- NESSUN RISULTATO -->
+    <div id="no-results" class="no-results" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <h3>Nessun immobile trovato</h3>
+      <p>Prova ad allargare i criteri di ricerca o <button onclick="resetFilters()" style="background:none;border:none;color:var(--oro);cursor:pointer;font-size:.85rem;font-family:'DM Sans',sans-serif;">azzera i filtri</button></p>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination">
+      <button class="page-btn prev-next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Prec.</button>
+      <button class="page-btn active">1</button>
+      <button class="page-btn" onclick="this.parentElement.querySelectorAll('.page-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">2</button>
+      <button class="page-btn" onclick="this.parentElement.querySelectorAll('.page-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">3</button>
+      <span style="padding:0 .3rem;color:var(--grigio);font-size:.82rem;">…</span>
+      <button class="page-btn">6</button>
+      <button class="page-btn prev-next">Succ.<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DETTAGLIO -->
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modal-box">
+    <div class="modal-head">
+      <div class="card-img-ph" style="width:100%;height:240px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="40" height="40" style="opacity:.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      </div>
+      <button class="modal-close" onclick="closeModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body" id="modal-body">
+      <!-- dinamico -->
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Righetto <span>Immobiliare</span></div>
+      <div class="footer-info">
+        Gruppo Immobiliare Righetto di Capon Gino<br>
+        Via Roma, 96 — 35010 Limena (PD)<br>
+        Tel: 049 884 3484<br>
+        Cell: 348 862 1888<br>
+        <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="36515f585976445f515e534242595f5b5b59545f5a5f574453185f42">[email&#160;protected]</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Immobili</h4>
+      <a href="immobili.html?op=vendita">In vendita</a>
+      <a href="immobili.html?op=affitto">In affitto</a>
+      <a href="immobili.html?ev=1">In evidenza</a>
+      <a href="immobili.html?tipo=villa">Ville</a>
+      <a href="immobili.html?tipo=appartamento">Appartamenti</a>
+    </div>
+    <div class="footer-col">
+      <h4>Servizi</h4>
+      <a href="servizi.html">Valutazioni gratuite</a>
+      <a href="servizi.html#perizie">Perizie immobiliari</a>
+      <a href="servizi.html#locazioni">Contratti di locazione</a>
+      <a href="servizi.html#gestione">Gestione immobili</a>
+    </div>
+    <div class="footer-col">
+      <h4>Info</h4>
+      <a href="chi-siamo.html">Chi siamo</a>
+      <a href="blog.html">Blog</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contatti.html">Contatti</a>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Gruppo Immobiliare Righetto di Capon Gino — P.IVA 12345678901</span>
+    <span>Iscrizione al Ruolo Agenti d'Affari in Mediazione</span>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ── DATA ──
+  const immobili = [
+    {rif:'LA0307',titolo:'Villa singola a pochi km da Padova',prezzo:380000,mq:350,camere:5,bagni:2,comune:'Curtarolo',ce:'D',ceBg:'#ef6c00',ceTx:'#fff',op:'vendita',tipo:'villa',agent:'Capon Gino',giardino:true,garage:true,vt:true,yt:true,foto:42,desc:'Una casa dove i sogni prendono forma…\n\nVilla singola di 350 mq con ampio giardino privato di 1.000 mq, garage doppio, porticato e mansarda. 5 camere matrimoniali, 2 bagni, salone di 50 mq.'},
+    {rif:'LA0308',titolo:'Appartamento 3 locali — Centro Storico Padova',prezzo:285000,mq:85,camere:3,bagni:1,comune:'Padova',ce:'C',ceBg:'#f9a825',ceTx:'#000',op:'vendita',tipo:'appartamento',agent:'Capon Gino',yt:true,foto:18,desc:'Luminoso trilocale nel cuore di Padova. Piano alto, ottime finiture, cucina abitabile.'},
+    {rif:'LA0309',titolo:'Bilocale luminoso — Prato della Valle',prezzo:950,mq:55,camere:2,bagni:1,comune:'Padova',ce:'B',ceBg:'#558b2f',ceTx:'#fff',op:'affitto',tipo:'appartamento',agent:'Righetto Linda',foto:12,desc:'Bilocale ristrutturato vicino a Prato della Valle. Disponibile subito.'},
+    {rif:'LA0310',titolo:'Villa bifamiliare con giardino privato',prezzo:520000,mq:180,camere:4,bagni:2,comune:'Albignasego',ce:'A1',ceBg:'#43a047',ceTx:'#fff',op:'vendita',tipo:'bifamiliare',agent:'Capon Gino',giardino:true,garage:true,foto:28,desc:'Bellissima bifamiliare con giardino indipendente, classe A1.'},
+    {rif:'LA0311',titolo:'Trilocale con balcone — Albignasego',prezzo:195000,mq:75,camere:3,bagni:1,comune:'Albignasego',ce:'E',ceBg:'#e53935',ceTx:'#fff',op:'vendita',tipo:'appartamento',agent:'Righetto Linda',foto:15,desc:'Trilocale di 75 mq con ampio balcone. Buono stato. Libero subito.'},
+    {rif:'LA0312',titolo:'Villa singola con piscina e parco — Limena',prezzo:680000,mq:290,camere:5,bagni:3,comune:'Limena',ce:'A1',ceBg:'#43a047',ceTx:'#fff',op:'vendita',tipo:'villa',agent:'Capon Gino',giardino:true,garage:true,vt:true,foto:36,desc:'Villa esclusiva con piscina riscaldata e parco di 2.000 mq. Classe energetica A1.'},
+  ];
+
+  let currentView = 'grid';
+  let currentOp = 'vendita';
+
+  // ── TABS ──
+  function setTab(btn, op) {
+    document.querySelectorAll('.s-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    currentOp = op;
+    filterCards();
+  }
+
+  // ── FILTRI AVANZATI TOGGLE ──
+  function toggleAdv() {
+    const t = document.getElementById('adv-toggle');
+    const f = document.getElementById('adv-filters');
+    t.classList.toggle('open');
+    f.classList.toggle('open');
+  }
+
+  // ── MAPPA ──
+  function toggleMap() {
+    const p = document.getElementById('map-panel');
+    p.classList.toggle('open');
+  }
+
+  // ── VISTA ──
+  function setView(v) {
+    currentView = v;
+    const grid = document.getElementById('imm-grid');
+    document.getElementById('btn-grid').classList.toggle('active', v === 'grid');
+    document.getElementById('btn-list').classList.toggle('active', v === 'list');
+    grid.classList.toggle('list-view', v === 'list');
+    document.querySelectorAll('.card').forEach(c => c.classList.toggle('list-view', v === 'list'));
+  }
+
+  // ── CHIP TOGGLE ──
+  function toggleChip(el, group, val) {
+    el.classList.toggle('on');
+    filterCards();
+  }
+  function toggleChipSingle(el, group) {
+    const row = el.closest('.fp-chip-row');
+    row.querySelectorAll('.fp-chip').forEach(c => c.classList.remove('on'));
+    el.classList.add('on');
+    filterCards();
+  }
+
+  // ── PREFERITI ──
+  function toggleFav(btn) {
+    btn.classList.toggle('on');
+    btn.title = btn.classList.contains('on') ? 'Salvato!' : 'Salva';
+  }
+
+  // ── FILTER ──
+  function filterCards() {
+    const zona = (document.getElementById('zona-input').value || '').toLowerCase();
+    const tipo = document.getElementById('f-tipo').value;
+    const prezzoMax = parseInt(document.getElementById('f-prezzo').value) || Infinity;
+    const camereMin = parseInt(document.getElementById('f-camere').value) || 0;
+    const mqMin = parseInt(document.getElementById('f-mq').value) || 0;
+
+    const cards = document.querySelectorAll('#imm-grid .card');
+    let visible = 0;
+
+    cards.forEach(c => {
+      const cOp = c.dataset.op || 'vendita';
+      const cTipo = c.dataset.tipo || '';
+      const cPrezzo = parseInt(c.dataset.prezzo) || 0;
+      const cMq = parseInt(c.dataset.mq) || 0;
+      const cCamere = parseInt(c.dataset.camere) || 0;
+      const cComune = (c.dataset.comune || '').toLowerCase();
+      const cTitle = c.querySelector('.card-title').textContent.toLowerCase();
+
+      let show = true;
+      if (currentOp !== 'aste' && cOp !== currentOp) show = false;
+      if (tipo && !cTipo.includes(tipo)) show = false;
+      if (cPrezzo > prezzoMax) show = false;
+      if (cCamere < camereMin) show = false;
+      if (cMq < mqMin) show = false;
+      if (zona && !cComune.includes(zona) && !cTitle.includes(zona)) show = false;
+
+      c.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    document.getElementById('res-count').textContent = visible;
+    document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  // ── SORT ──
+  function sortCards(val) {
+    const grid = document.getElementById('imm-grid');
+    const cards = Array.from(grid.querySelectorAll('.card'));
+    cards.sort((a, b) => {
+      const pa = parseInt(a.dataset.prezzo) || 0;
+      const pb = parseInt(b.dataset.prezzo) || 0;
+      const ma = parseInt(a.dataset.mq) || 0;
+      const mb = parseInt(b.dataset.mq) || 0;
+      if (val === 'price-asc') return pa - pb;
+      if (val === 'price-desc') return pb - pa;
+      if (val === 'mq-desc') return mb - ma;
+      return 0;
+    });
+    cards.forEach(c => grid.appendChild(c));
+  }
+
+  // ── RESET ──
+  function resetFilters() {
+    document.getElementById('zona-input').value = '';
+    document.getElementById('f-tipo').value = '';
+    document.getElementById('f-prezzo').value = '';
+    document.getElementById('f-camere').value = '';
+    document.getElementById('f-mq').value = '';
+    document.querySelectorAll('#imm-grid .card').forEach(c => c.style.display = '');
+    document.getElementById('res-count').textContent = document.querySelectorAll('#imm-grid .card').length;
+    document.getElementById('no-results').style.display = 'none';
+  }
+
+  // ── MODAL ──
+  function openCard(e, el) {
+    e.preventDefault();
+    const rif = el.href?.split('rif=')[1] || el.querySelector('.cf-ref').textContent.replace('Rif. ','');
+    const d = immobili.find(i => i.rif === rif);
+    if (!d) return;
+
+    const mediaIcons = [];
+    if (d.yt) mediaIcons.push('<span style="background:var(--rosso);color:#fff;font-size:.6rem;padding:.15rem .4rem;border-radius:1px;font-weight:600;">▶ VIDEO</span>');
+    if (d.vt) mediaIcons.push('<span style="background:var(--blu);color:#fff;font-size:.6rem;padding:.15rem .4rem;border-radius:1px;font-weight:600;">● 360°</span>');
+
+    document.getElementById('modal-body').innerHTML = `
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:.4rem;">
+        <div>
+          <div class="modal-price">€ ${d.prezzo.toLocaleString('it')}${d.op==='affitto'?'<span style="font-size:.9rem;color:var(--grigio);font-family:\'DM Sans\',sans-serif;"> /mese</span>':''}</div>
+          <div class="modal-title">${d.titolo}</div>
+        </div>
+        <div style="display:flex;gap:.3rem;align-items:center;">${mediaIcons.join('')}<span style="font-size:.6rem;font-weight:700;padding:.15rem .38rem;border-radius:1px;background:${d.ceBg};color:${d.ceTx};">${d.ce}</span></div>
+      </div>
+      <div class="modal-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>${d.comune}, Padova — Rif. <strong>${d.rif}</strong></div>
+      <div class="modal-specs">
+        <div class="ms-item"><div class="ms-val">${d.mq}</div><div class="ms-lbl">mq</div></div>
+        <div class="ms-item"><div class="ms-val">${d.camere}</div><div class="ms-lbl">Camere</div></div>
+        <div class="ms-item"><div class="ms-val">${d.bagni}</div><div class="ms-lbl">Bagni</div></div>
+        <div class="ms-item"><div class="ms-val">${Math.round(d.prezzo/d.mq).toLocaleString('it')}</div><div class="ms-lbl">€/mq</div></div>
+      </div>
+      <div class="modal-desc">${d.desc.replace(/\n/g,'<br>')}</div>
+      <div class="modal-actions">
+        <a href="immobile.html?rif=${d.rif}" class="btn btn-dark" style="flex:1;justify-content:center;text-decoration:none;display:flex;align-items:center;gap:.4rem;padding:.6rem 1rem;background:var(--nero);color:#fff;border-radius:2px;font-family:\'DM Sans\',sans-serif;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Scheda completa
+        </a>
+        <button onclick="closeModal()" style="padding:.6rem 1.1rem;border:1px solid var(--gc);background:#fff;border-radius:2px;cursor:pointer;font-family:\'DM Sans\',sans-serif;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;">Chiudi</button>
+      </div>
+      <div class="contact-card">
+        <div class="cc-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>Richiedi informazioni — ${d.rif}</div>
+        <div class="cc-fields">
+          <input type="text" placeholder="Nome e cognome *">
+          <input type="tel" placeholder="Telefono *">
+          <input type="email" placeholder="Email">
+          <textarea placeholder="Messaggio (es: Vorrei fissare una visita...)"></textarea>
+          <label style="display:flex;align-items:flex-start;gap:.4rem;font-size:.72rem;color:var(--grigio);">
+            <input type="checkbox" style="margin-top:.15rem;accent-color:var(--oro);flex-shrink:0;">
+            Acconsento al trattamento dei dati personali ai sensi del GDPR
+          </label>
+          <button class="cc-submit" onclick="sendRequest(this,'${d.rif}')">Invia richiesta</button>
+        </div>
+      </div>`;
+
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function sendRequest(btn, rif) {
+    btn.textContent = '�

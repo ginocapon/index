@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Blog Immobiliare Padova — Righetto Immobiliare</title>
+  <meta name="description" content="Articoli, guide e consigli pratici sul mercato immobiliare di Padova e provincia. Vendita, affitto, normativa, fiscalità. Righetto Immobiliare.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--nero:#0a0a0a;--bianco:#f5f2ed;--oro:#c9a84c;--grigio:#6b6560;--gc:#e8e4de;--sfondo:#f0ece6}
+    body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--nero)}
+    a{text-decoration:none;color:inherit}
+    header{background:var(--nero);position:sticky;top:0;z-index:100}
+    .hi{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:62px;display:flex;align-items:center;gap:2rem}
+    .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff}
+    .logo span{color:var(--oro);font-style:italic}
+    nav{display:flex;gap:.2rem;flex:1}
+    nav a{color:rgba(255,255,255,.5);font-size:.82rem;padding:.4rem .75rem;border-radius:2px;transition:color .2s}
+    nav a:hover{color:#fff} nav a.active{color:var(--oro)}
+    .h-cta{display:flex;gap:.65rem;align-items:center}
+    .h-tel{color:rgba(255,255,255,.55);font-size:.78rem}
+    .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:2px;font-size:.76rem;font-weight:500}
+    /* HERO */
+    .hero{background:var(--nero);padding:4.5rem 1.5rem 3rem}
+    .hero-inner{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end}
+    @media(max-width:900px){.hero-inner{grid-template-columns:1fr}}
+    .htag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.6rem}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:#fff;line-height:1.2;margin-bottom:.7rem}
+    .hero h1 strong{font-weight:600;font-style:italic}
+    .hero p{font-size:.88rem;color:rgba(255,255,255,.45);line-height:1.8}
+    .search-wrap{position:relative}
+    .search-wrap label{display:block;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.35rem}
+    .search-wrap input{width:100%;padding:.68rem 1rem .68rem 2.5rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:2px;font-family:'DM Sans',sans-serif;font-size:.85rem;color:#fff}
+    .search-wrap input::placeholder{color:rgba(255,255,255,.3)}
+    .search-wrap input:focus{outline:none;border-color:var(--oro);background:rgba(255,255,255,.1)}
+    .search-wrap svg{position:absolute;bottom:.72rem;left:.7rem;width:15px;height:15px;color:rgba(255,255,255,.35);pointer-events:none}
+    /* CATS */
+    .cats{background:var(--sfondo);border-bottom:1px solid var(--gc);padding:.8rem 1.5rem;overflow-x:auto}
+    .cats-inner{max-width:1380px;margin:0 auto;display:flex;gap:.4rem}
+    .cats-inner::-webkit-scrollbar{display:none}
+    .cat-btn{padding:.4rem 1rem;border:1px solid var(--gc);border-radius:20px;background:#fff;font-family:'DM Sans',sans-serif;font-size:.76rem;color:var(--grigio);cursor:pointer;white-space:nowrap;transition:all .2s}
+    .cat-btn:hover{border-color:var(--nero);color:var(--nero)}
+    .cat-btn.active{background:var(--nero);border-color:var(--nero);color:#fff}
+    /* LAYOUT */
+    .page{max-width:1380px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:1fr 300px;gap:2rem;align-items:start}
+    @media(max-width:1024px){.page{grid-template-columns:1fr}}
+    /* FEATURED */
+    .featured{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
+    @media(max-width:700px){.featured{grid-template-columns:1fr}}
+    .art-big{border:1px solid var(--gc);border-radius:3px;overflow:hidden;text-decoration:none;color:inherit;display:block;transition:transform .25s,box-shadow .25s;grid-row:span 2}
+    @media(max-width:700px){.art-big{grid-row:span 1}}
+    .art-big:hover,.art-sm:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.09)}
+    .art-sm{border:1px solid var(--gc);border-radius:3px;overflow:hidden;text-decoration:none;color:inherit;display:flex;transition:transform .25s,box-shadow .25s}
+    .art-img{position:relative;background:var(--sfondo);overflow:hidden}
+    .art-big .art-img{height:260px}
+    .art-sm .art-img{width:120px;flex-shrink:0}
+    .art-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.5rem}
+    .art-cat{position:absolute;top:.6rem;left:.6rem;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;background:var(--nero);color:#fff;padding:.18rem .5rem;border-radius:1px;font-weight:600;z-index:1}
+    .art-body{padding:.85rem 1rem}
+    .art-big .art-body{padding:1rem 1.2rem}
+    .art-date{font-size:.68rem;color:var(--grigio);margin-bottom:.3rem}
+    .art-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;line-height:1.3;margin-bottom:.4rem}
+    .art-big .art-title{font-size:1.55rem}
+    .art-excerpt{font-size:.8rem;color:var(--grigio);line-height:1.7;margin-bottom:.6rem}
+    .art-sm .art-excerpt{display:none}
+    .art-meta{display:flex;align-items:center;gap:.6rem;font-size:.7rem;color:var(--grigio)}
+    .art-author{display:flex;align-items:center;gap:.3rem}
+    .art-av{width:20px;height:20px;border-radius:50%;background:var(--oro);display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:700;color:var(--nero)}
+    .art-read{font-size:.68rem;color:var(--oro)}
+    /* GRID ARTICOLI */
+    .art-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:2rem}
+    @media(max-width:600px){.art-grid{grid-template-columns:1fr}}
+    .acard{border:1px solid var(--gc);border-radius:3px;overflow:hidden;text-decoration:none;color:inherit;display:block;transition:transform .2s,box-shadow .2s}
+    .acard:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.08)}
+    .acard-img{height:160px;background:var(--sfondo);position:relative;overflow:hidden}
+    .acard-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.2rem}
+    .acard-body{padding:.9rem 1rem}
+    .acard-cat{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;background:var(--gc);color:var(--grigio);padding:.15rem .45rem;border-radius:1px;display:inline-block;margin-bottom:.35rem}
+    .acard-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;line-height:1.35;margin-bottom:.3rem}
+    .acard-excerpt{font-size:.78rem;color:var(--grigio);line-height:1.65;margin-bottom:.55rem}
+    .acard-meta{display:flex;align-items:center;justify-content:space-between;font-size:.68rem;color:var(--grigio)}
+    .acard-meta span{color:var(--oro)}
+    /* SIDEBAR */
+    .sidebar{position:sticky;top:80px;display:flex;flex-direction:column;gap:1rem}
+    .sb{background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;overflow:hidden}
+    .sb-h{padding:.8rem 1rem;border-bottom:1px solid var(--gc);background:#fff;font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600}
+    .sb-b{padding:.85rem 1rem}
+    .recent-item{display:flex;gap:.65rem;padding:.55rem 0;border-bottom:1px solid var(--gc)}
+    .recent-item:last-child{border-bottom:none}
+    .ri-img{width:52px;height:40px;background:var(--gc);border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+    .ri-title{font-size:.79rem;font-weight:500;line-height:1.35;margin-bottom:.15rem}
+    .ri-date{font-size:.66rem;color:var(--grigio)}
+    .tag-cloud{display:flex;flex-wrap:wrap;gap:.3rem}
+    .tag{padding:.25rem .6rem;background:#fff;border:1px solid var(--gc);border-radius:20px;font-size:.72rem;color:var(--grigio);cursor:pointer;transition:all .2s}
+    .tag:hover{background:var(--nero);border-color:var(--nero);color:#fff}
+    .nl-form{display:flex;flex-direction:column;gap:.5rem}
+    .nl-form input{border:1px solid var(--gc);border-radius:2px;padding:.48rem .65rem;font-family:'DM Sans',sans-serif;font-size:.82rem;background:#fff}
+    .nl-form input:focus{outline:none;border-color:var(--oro)}
+    .nl-btn{background:var(--nero);color:#fff;padding:.55rem;border:none;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s}
+    .nl-btn:hover{background:var(--oro);color:var(--nero)}
+    /* PAGINATION */
+    .pagination{display:flex;gap:.35rem;justify-content:center;padding:1.5rem 0}
+    .pb{width:36px;height:36px;border:1px solid var(--gc);background:#fff;border-radius:2px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.82rem;color:var(--grigio);transition:all .2s}
+    .pb:hover{border-color:var(--nero);color:var(--nero)}
+    .pb.active{background:var(--nero);border-color:var(--nero);color:#fff}
+    /* FOOTER */
+    footer{background:var(--nero);padding:3rem 1.5rem 1.5rem}
+    .fi{max-width:1380px;margin:0 auto}
+    .fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2rem}
+    @media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
+    .flogo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;margin-bottom:.6rem}
+    .flogo span{color:var(--oro);font-style:italic}
+    .finfo{font-size:.76rem;color:rgba(255,255,255,.35);line-height:1.9}
+    .fh{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.7rem}
+    .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.38);margin-bottom:.3rem;transition:color .2s}
+    .fcol a:hover{color:var(--oro)}
+    .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.22);flex-wrap:wrap;gap:.4rem}
+  </style>
+</head>
+<body>
+<header>
+  <div class="hi">
+    <a href="index.html" class="logo">Righetto <span>Immobiliare</span></a>
+    <nav><a href="index.html">Home</a><a href="immobili.html">Immobili</a><a href="servizi.html">Servizi</a><a href="chi-siamo.html">Chi siamo</a><a href="blog.html" class="active">Blog</a><a href="contatti.html">Contatti</a><a href="faq.html">FAQ</a></nav>
+    <div class="h-cta"><a class="h-tel" href="tel:+390498843484">049 884 3484</a><a class="h-btn" href="contatti.html">Valutazione gratuita</a></div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="htag">Blog & Risorse</div>
+      <h1>Guide, consigli e<br>notizie sul <strong>mercato immobiliare</strong></h1>
+      <p>Articoli pratici su vendita, affitto, normativa e mercato di Padova e provincia. Aggiornati ogni settimana dai nostri esperti.</p>
+    </div>
+    <div class="search-wrap">
+      <label>Cerca nel blog</label>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" placeholder="Es: mercato Padova, cedolare secca, mutuo...">
+    </div>
+  </div>
+</div>
+
+<div class="cats">
+  <div class="cats-inner">
+    <button class="cat-btn active">Tutti</button>
+    <button class="cat-btn">Mercato locale</button>
+    <button class="cat-btn">Guida alla vendita</button>
+    <button class="cat-btn">Affitti</button>
+    <button class="cat-btn">Normativa</button>
+    <button class="cat-btn">Fisco</button>
+    <button class="cat-btn">Consigli acquisto</button>
+    <button class="cat-btn">Ristrutturazione</button>
+  </div>
+</div>
+
+<div class="page">
+  <div>
+    <!-- IN EVIDENZA -->
+    <div style="font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--grigio);margin-bottom:.7rem;font-weight:500">In evidenza</div>
+    <div class="featured">
+      <a class="art-big" href="blog-articolo.html">
+        <div class="art-img"><div class="art-img-ph">🏘️</div><span class="art-cat">Mercato locale</span></div>
+        <div class="art-body">
+          <div class="art-date">15 febbraio 2025</div>
+          <div class="art-title">Mercato immobiliare Padova 2025: prezzi in crescita del 4,2% nelle zone residenziali</div>
+          <div class="art-excerpt">Analisi completa del mercato immobiliare di Padova e provincia nel primo trimestre 2025. Zone più dinamiche, tipologie più richieste e previsioni per l'anno in corso. Dati aggiornati con le compravendite reali concluse.</div>
+          <div class="art-meta"><div class="art-author"><div class="art-av">G</div>Capon Gino</div><span class="art-read">8 min di lettura</span></div>
+        </div>
+      </a>
+      <a class="art-sm" href="blog-articolo.html">
+        <div class="art-img"><div class="art-img-ph">📋</div><span class="art-cat">Affitti</span></div>
+        <div class="art-body">
+          <div class="art-date">8 febbraio 2025</div>
+          <div class="art-title">Canone concordato 2025: tutti i vantaggi fiscali per proprietari e inquilini</div>
+          <div class="art-meta"><div class="art-author"><div class="art-av">G</div></div><span class="art-read">5 min</span></div>
+        </div>
+      </a>
+      <a class="art-sm" href="blog-articolo.html">
+        <div class="art-img"><div class="art-img-ph">💰</div><span class="art-cat">Fisco</span></div>
+        <div class="art-body">
+          <div class="art-date">1 febbraio 2025</div>
+          <div class="art-title">Bonus ristrutturazione 2025: cosa cambia e come sfruttarlo prima di vendere</div>
+          <div class="art-meta"><div class="art-author"><div class="art-av">G</div></div><span class="art-read">6 min</span></div>
+        </div>
+      </a>
+    </div>
+
+    <div style="font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--grigio);margin-bottom:.7rem;font-weight:500">Tutti gli articoli</div>
+    <div class="art-grid">
+      <a class="acard" href="blog-articolo.html">
+        <div class="acard-img"><div class="acard-img-ph">🏠</div></div>
+        <div class="acard-body">
+          <span class="acard-cat">Guida alla vendita</span>
+          <div class="acard-title">Come preparare la tua casa per la vendita: 10 mosse che aumentano il valore</div>
+          <div class="acard-excerpt">Dal home staging alla documentazione: le strategie concrete per vendere più velocemente e a un prezzo migliore.</div>
+          <div class="acard-meta"><span>25 gen 2025</span><span>7 min</span></div>
+        </div>
+      </a>
+      <a class="acard" href="blog-articolo.html">
+        <div class="acard-img"><div class="acard-img-ph">🔑</div></div>
+        <div class="acard-body">
+          <span class="acard-cat">Consigli acquisto</span>
+          <div class="acard-title">Prima casa a Padova: guida completa alle agevolazioni 2025</div>
+          <div class="acard-excerpt">Imposta di registro al 2%, IVA ridotta, detrazioni interessi mutuo: tutto quello che devi sapere per risparmiare sull'acquisto.</div>
+          <div class="acard-meta"><span>18 gen 2025</span><span>6 min</span></div>
+        </div>
+      </a>
+      <a class="acard" href="blog-articolo.html">
+        <div class="acard-img"><div class="acard-img-ph">⚡</div></div>
+        <div class="acard-body">
+          <span class="acard-cat">Normativa</span>
+          <div class="acard-title">APE obbligatorio: tutto quello che devi sapere prima di vendere o affittare</div>
+          <div class="acard-excerpt">L'Attestato di Prestazione Energetica è obbligatorio per qualsiasi compravendita o locazione. Guida completa a costi, validità e responsabilità.</div>
+          <div class="acard-meta"><span>10 gen 2025</span><span>4 min</span></div>
+        </div>
+      </a>
+      <a class="acard" href="blog-articolo.html">
+        <div class="acard-img"><div class="acard-img-ph">📊</div></div>
+        <div class="acard-body">
+          <span class="acard-cat">Mercato locale</span>
+          <div class="acard-title">Albignasego e Limena: le zone più richieste dell'hinterland padovano nel 2025</div>
+          <div class="acard-excerpt">Analisi delle zone con maggiore crescita di domanda e valore immobiliare nella cintura nord e sud di Padova.</div>
+          <div class="acard-meta"><span>3 gen 2025</span><span>5 min</span></div>
+        </div>
+      </a>
+      <a class="acard" href="blog-articolo.html">
+        <div class="acard-img"><div class="acard-img-ph">🏗️</div></div>
+        <div class="acard-body">
+          <span class="acard-cat">Ristrutturazione</span>
+          <div class="acard-title">Comprare casa da ristrutturare a Padova: conviene davvero nel 2025?</div>
+          <div class="acard-excerpt">Calcolo costi e benefici: acquistare un immobile da ristrutturare a prezzo ridotto vs acquistare già pronto. I numeri reali del mercato padovano.</div>
+          <div class="acard-meta"><span>20 dic 2024</span><span>8 min</span></div>
+        </div>
+      </a>
+      <a class="acard" href="blog-articolo.html">
+        <div class="acard-img"><div class="acard-img-ph">📝</div></div>
+        <div class="acard-body">
+          <span class="acard-cat">Affitti</span>
+          <div class="acard-title">Sfratto per morosità: iter, tempi e come proteggersi prima che succeda</div>
+          <div class="acard-excerpt">Guida pratica alla procedura di sfratto in Italia: tempi reali, costi e strategie preventive per i proprietari di immobili in affitto.</div>
+          <div class="acard-meta"><span>12 dic 2024</span><span>6 min</span></div>
+        </div>
+      </a>
+    </div>
+
+    <div class="pagination">
+      <button class="pb active">1</button>
+      <button class="pb">2</button>
+      <button class="pb">3</button>
+      <span style="padding:0 .3rem;color:var(--grigio)">…</span>
+      <button class="pb">8</button>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sb">
+      <div class="sb-h">Articoli recenti</div>
+      <div class="sb-b">
+        <a href="blog-articolo.html" style="text-decoration:none;color:inherit">
+          <div class="recent-item"><div class="ri-img">🏘️</div><div><div class="ri-title">Mercato Padova 2025: prezzi in crescita</div><div class="ri-date">15 feb 2025</div></div></div>
+        </a>
+        <a href="blog-articolo.html" style="text-decoration:none;color:inherit">
+          <div class="recent-item"><div class="ri-img">📋</div><div><div class="ri-title">Canone concordato 2025: i vantaggi</div><div class="ri-date">8 feb 2025</div></div></div>
+        </a>
+        <a href="blog-articolo.html" style="text-decoration:none;color:inherit">
+          <div class="recent-item"><div class="ri-img">💰</div><div><div class="ri-title">Bonus ristrutturazione 2025</div><div class="ri-date">1 feb 2025</div></div></div>
+        </a>
+        <a href="blog-articolo.html" style="text-decoration:none;color:inherit">
+          <div class="recent-item"><div class="ri-img">🏠</div><div><div class="ri-title">Come preparare casa per la vendita</div><div class="ri-date">25 gen 2025</div></div></div>
+        </a>
+      </div>
+    </div>
+    <div class="sb">
+      <div class="sb-h">Argomenti</div>
+      <div class="sb-b">
+        <div class="tag-cloud">
+          <span class="tag">Mercato Padova</span><span class="tag">Vendita</span><span class="tag">Affitto</span><span class="tag">Mutuo</span><span class="tag">Cedolare secca</span><span class="tag">Bonus casa</span><span class="tag">APE</span><span class="tag">Prima casa</span><span class="tag">Preliminare</span><span class="tag">IMU</span><span class="tag">Ristrutturazione</span><span class="tag">Normativa</span><span class="tag">Investimento</span>
+        </div>
+      </div>
+    </div>
+    <div class="sb">
+      <div class="sb-h">Newsletter</div>
+      <div class="sb-b">
+        <p style="font-size:.79rem;color:var(--grigio);margin-bottom:.75rem;line-height:1.7">Ricevi ogni mese gli aggiornamenti sul mercato immobiliare di Padova e i nuovi articoli direttamente nella tua email.</p>
+        <div class="nl-form">
+          <input type="email" placeholder="La tua email">
+          <button class="nl-btn">Iscriviti alla newsletter</button>
+        </div>
+        <p style="font-size:.65rem;color:var(--grigio);margin-top:.45rem">Nessuno spam. Puoi cancellarti in qualsiasi momento.</p>
+      </div>
+    </div>
+    <div style="background:var(--nero);border-radius:3px;padding:1.3rem;text-align:center">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#fff;margin-bottom:.4rem">Valuta il tuo immobile</div>
+      <p style="font-size:.76rem;color:rgba(255,255,255,.4);line-height:1.65;margin-bottom:.85rem">Scopri quanto vale la tua casa nel mercato attuale di Padova. Gratis e senza impegno.</p>
+      <a href="contatti.html" style="display:block;background:var(--oro);color:var(--nero);padding:.58rem;border-radius:2px;font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase">Valutazione gratuita</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fi">
+    <div class="fgrid">
+      <div><div class="flogo">Righetto <span>Immobiliare</span></div><div class="finfo">Via Roma, 96 — 35010 Limena (PD)<br>Tel: 049 884 3484 · Cell: 348 862 1888</div></div>
+      <div class="fcol"><div class="fh">Servizi</div><a href="servizi.html">Vendita</a><a href="servizi.html">Locazioni</a><a href="servizi.html">Preliminari</a></div>
+      <div class="fcol"><div class="fh">Immobili</div><a href="immobili.html?op=vendita">In vendita</a><a href="immobili.html?op=affitto">In affitto</a></div>
+      <div class="fcol"><div class="fh">Info</div><a href="chi-siamo.html">Chi siamo</a><a href="faq.html">FAQ</a><a href="contatti.html">Contatti</a><a href="privacy.html">Privacy</a></div>
+    </div>
+    <div class="fbot"><span>© 2025 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 12345678901</span></div>
+  </div>
+</footer>
+</body>
+</html>

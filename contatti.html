@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contatti — Righetto Immobiliare Padova</title>
+  <meta name="description" content="Contatta Righetto Immobiliare: Via Roma 96, Limena (PD). Tel 049 884 3484 · Cell 348 862 1888. Richiedi valutazione gratuita o prenota una visita.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--nero:#0a0a0a;--bianco:#f5f2ed;--oro:#c9a84c;--grigio:#6b6560;--gc:#e8e4de;--verde:#4a5c4e;--sfondo:#f0ece6}
+    body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--nero)}
+    a{text-decoration:none;color:inherit}
+    header{background:var(--nero);position:sticky;top:0;z-index:100}
+    .hi{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:62px;display:flex;align-items:center;gap:2rem}
+    .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff}
+    .logo span{color:var(--oro);font-style:italic}
+    nav{display:flex;gap:.2rem;flex:1}
+    nav a{color:rgba(255,255,255,.5);font-size:.82rem;padding:.4rem .75rem;border-radius:2px;transition:color .2s}
+    nav a:hover{color:#fff} nav a.active{color:var(--oro)}
+    .h-cta{display:flex;gap:.65rem;align-items:center}
+    .h-tel{color:rgba(255,255,255,.55);font-size:.78rem}
+    .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:2px;font-size:.76rem;font-weight:500}
+    /* HERO */
+    .hero{background:var(--nero);padding:4rem 1.5rem}
+    .hero-inner{max-width:1380px;margin:0 auto}
+    .htag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.5rem}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:#fff;margin-bottom:.65rem}
+    .hero h1 strong{font-weight:600;font-style:italic}
+    .hero p{font-size:.9rem;color:rgba(255,255,255,.45);line-height:1.8;max-width:560px}
+    /* MAIN */
+    .main{max-width:1380px;margin:0 auto;padding:3rem 1.5rem;display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:start}
+    @media(max-width:1000px){.main{grid-template-columns:1fr}}
+    /* FORM */
+    .fbox{background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;overflow:hidden}
+    .fbox-head{padding:1.2rem 1.5rem;border-bottom:1px solid var(--gc);background:#fff}
+    .fbox-head h2{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600}
+    .fbox-head p{font-size:.78rem;color:var(--grigio);margin-top:.25rem}
+    .fbox-body{padding:1.5rem}
+    .frow{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:.75rem}
+    @media(max-width:600px){.frow{grid-template-columns:1fr}}
+    .field{display:flex;flex-direction:column;gap:.25rem;margin-bottom:.75rem}
+    .field label{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grigio);font-weight:500}
+    .field input,.field select,.field textarea{border:1px solid var(--gc);border-radius:2px;padding:.52rem .68rem;font-family:'DM Sans',sans-serif;font-size:.85rem;background:#fff;color:var(--nero);transition:border-color .2s}
+    .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--oro);background:#fff}
+    .field textarea{resize:vertical;min-height:110px;line-height:1.65}
+    .fchk{display:flex;align-items:flex-start;gap:.45rem;font-size:.75rem;color:var(--grigio);margin-bottom:1rem}
+    .fchk input{accent-color:var(--oro);flex-shrink:0;margin-top:.18rem;width:14px;height:14px}
+    .fsubmit{width:100%;background:var(--nero);color:#fff;padding:.75rem;border:none;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s}
+    .fsubmit:hover{background:var(--oro);color:var(--nero)}
+    .fsuccess{display:none;text-align:center;padding:2rem;background:rgba(74,92,78,.08);border:1px solid rgba(74,92,78,.2);border-radius:2px;margin-top:1rem}
+    .fsuccess h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:.4rem;color:var(--verde)}
+    .fsuccess p{font-size:.82rem;color:var(--grigio)}
+    /* SIDEBAR INFO */
+    .sidebar{display:flex;flex-direction:column;gap:1rem}
+    .ibox{background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;overflow:hidden}
+    .ibox-head{padding:.85rem 1.1rem;border-bottom:1px solid var(--gc);background:#fff;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600}
+    .ibox-body{padding:1rem 1.1rem}
+    .citem{display:flex;align-items:flex-start;gap:.75rem;padding:.65rem 0;border-bottom:1px solid var(--gc)}
+    .citem:last-child{border-bottom:none}
+    .ci-icon{width:34px;height:34px;background:#fff;border:1px solid var(--gc);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .ci-icon svg{width:14px;height:14px;color:var(--oro)}
+    .ci-lbl{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--grigio);margin-bottom:.18rem}
+    .ci-val{font-size:.85rem;font-weight:500}
+    .ci-val a{color:var(--nero);transition:color .2s}
+    .ci-val a:hover{color:var(--oro)}
+    /* ORARI */
+    .orari{display:flex;flex-direction:column;gap:.28rem}
+    .or{display:flex;justify-content:space-between;font-size:.82rem;padding:.3rem 0;border-bottom:1px solid var(--gc)}
+    .or:last-child{border-bottom:none}
+    .or .gg{color:var(--grigio)}
+    .or .ap{font-weight:500;color:var(--verde)}
+    .or .ch{font-weight:500;color:var(--nero);opacity:.4}
+    /* MAPPA */
+    .mappa-section{background:var(--sfondo);border-top:1px solid var(--gc)}
+    .map-wrap{height:420px;background:linear-gradient(135deg,#e8e4de,#d4cfc8);display:flex;align-items:center;justify-content:center;position:relative}
+    .map-ph{text-align:center;color:var(--grigio)}
+    .map-ph svg{width:40px;height:40px;opacity:.2;margin:0 auto .6rem;display:block}
+    .map-ph p{font-size:.85rem}
+    .map-ph small{font-size:.72rem;opacity:.6;display:block;margin-top:.2rem}
+    .map-overlay{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);background:var(--nero);color:#fff;padding:.6rem 1.2rem;border-radius:2px;font-size:.78rem;display:flex;align-items:center;gap:.4rem;white-space:nowrap}
+    .map-overlay svg{width:13px;height:13px;color:var(--oro)}
+    /* WA FLOAT */
+    .wa-float{position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;background:#25d366;color:#fff;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.35);transition:transform .2s}
+    .wa-float:hover{transform:scale(1.1)}
+    .wa-float svg{width:26px;height:26px}
+    /* FOOTER */
+    footer{background:var(--nero);padding:3rem 1.5rem 1.5rem}
+    .fi{max-width:1380px;margin:0 auto}
+    .fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2rem}
+    @media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
+    .flogo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;margin-bottom:.6rem}
+    .flogo span{color:var(--oro);font-style:italic}
+    .finfo{font-size:.76rem;color:rgba(255,255,255,.35);line-height:1.9}
+    .fh{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.7rem}
+    .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.38);margin-bottom:.3rem;transition:color .2s}
+    .fcol a:hover{color:var(--oro)}
+    .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.22);flex-wrap:wrap;gap:.4rem}
+  </style>
+</head>
+<body>
+<header>
+  <div class="hi">
+    <a href="index.html" class="logo">Righetto <span>Immobiliare</span></a>
+    <nav><a href="index.html">Home</a><a href="immobili.html">Immobili</a><a href="servizi.html">Servizi</a><a href="chi-siamo.html">Chi siamo</a><a href="blog.html">Blog</a><a href="contatti.html" class="active">Contatti</a><a href="faq.html">FAQ</a></nav>
+    <div class="h-cta"><a class="h-tel" href="tel:+390498843484">049 884 3484</a><a class="h-btn" href="#form">Scrivici</a></div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="htag">Padova e provincia</div>
+    <h1>Parliamo del tuo <strong>immobile</strong></h1>
+    <p>Siamo a tua disposizione per qualsiasi domanda: vendita, affitto, valutazione, preliminari. Prima consulenza sempre gratuita e senza impegno. Rispondiamo entro 24 ore.</p>
+  </div>
+</div>
+
+<div class="main" id="form">
+  <!-- FORM CONTATTO -->
+  <div class="fbox">
+    <div class="fbox-head">
+      <h2>Inviaci un messaggio</h2>
+      <p>Compilaci il form e ti ricontatteremo entro 24 ore lavorative</p>
+    </div>
+    <div class="fbox-body">
+      <div class="frow">
+        <div class="field"><label>Nome <span style="color:var(--oro)">*</span></label><input type="text" id="f-nome" placeholder="Mario"></div>
+        <div class="field"><label>Cognome <span style="color:var(--oro)">*</span></label><input type="text" id="f-cog" placeholder="Rossi"></div>
+      </div>
+      <div class="frow">
+        <div class="field"><label>Telefono <span style="color:var(--oro)">*</span></label><input type="tel" id="f-tel" placeholder="333 123 4567"></div>
+        <div class="field"><label>Email</label><input type="email" id="f-mail" placeholder="mario@email.it"></div>
+      </div>
+      <div class="field"><label>Oggetto della richiesta</label>
+        <select id="f-obj">
+          <option value="">Seleziona...</option>
+          <option>Voglio vendere un immobile</option>
+          <option>Voglio acquistare un immobile</option>
+          <option>Voglio affittare un immobile</option>
+          <option>Cerco casa in affitto</option>
+          <option>Valutazione gratuita del mio immobile</option>
+          <option>Informazioni su un immobile in catalogo</option>
+          <option>Consulenza preliminari di compravendita</option>
+          <option>Gestione contratto di locazione</option>
+          <option>Altro</option>
+        </select>
+      </div>
+      <div class="field"><label>Comune / Zona di interesse</label><input type="text" placeholder="Es. Padova centro, Albignasego, Curtarolo..."></div>
+      <div class="field"><label>Messaggio</label><textarea id="f-msg" placeholder="Descrivici la tua situazione o la tua richiesta. Più dettagli ci fornisci, più precisa sarà la nostra risposta.&#10;&#10;Es: Ho una villa di 300 mq a Cadoneghe che vorrei vendere entro fine anno. Quando possiamo fare una valutazione?"></textarea></div>
+      <div class="fchk">
+        <input type="checkbox" id="f-gdpr">
+        <label for="f-gdpr">Acconsento al trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR) e del D.Lgs. 196/2003. I tuoi dati non saranno ceduti a terzi.</label>
+      </div>
+      <div class="fchk" style="margin-top:-.4rem">
+        <input type="checkbox" id="f-news">
+        <label for="f-news">Desidero ricevere aggiornamenti sugli immobili in vendita e le offerte dell'agenzia (facoltativo)</label>
+      </div>
+      <button class="fsubmit" onclick="sendForm()">Invia messaggio</button>
+      <div class="fsuccess" id="success">
+        <h3>✓ Messaggio inviato!</h3>
+        <p>Grazie per averci contattato. Ti risponderemo entro 24 ore lavorative. Se hai urgenza, chiamaci al <strong>049 884 3484</strong> o scrivici su WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR INFO -->
+  <div class="sidebar">
+    <div class="ibox">
+      <div class="ibox-head">Dove siamo</div>
+      <div class="ibox-body">
+        <div class="citem">
+          <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><div class="ci-lbl">Indirizzo</div><div class="ci-val">Via Roma, 96<br>35010 Limena (PD)</div></div>
+        </div>
+        <div class="citem">
+          <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 .18H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg></div>
+          <div><div class="ci-lbl">Telefono ufficio</div><div class="ci-val"><a href="tel:+390498843484">049 884 3484</a></div></div>
+        </div>
+        <div class="citem">
+          <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 .18H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg></div>
+          <div><div class="ci-lbl">Cellulare (Capon Gino)</div><div class="ci-val"><a href="tel:+393488621888">348 862 1888</a></div></div>
+        </div>
+        <div class="citem">
+          <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><div class="ci-lbl">Email</div><div class="ci-val"><a href="/cdn-cgi/l/email-protection#57303e393817253e303f322323383e3a3a38353e3b3e362532793e23"><span class="__cf_email__" data-cfemail="f2959b9c9db2809b959a9786869d9b9f9f9d909b9e9b938097dc9b86">[email&#160;protected]</span></a></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="ibox">
+      <div class="ibox-head">Orari di apertura</div>
+      <div class="ibox-body">
+        <div class="orari">
+          <div class="or"><span class="gg">Lunedì – Venerdì</span><span class="ap">9:00 – 13:00 / 15:00 – 19:00</span></div>
+          <div class="or"><span class="gg">Sabato</span><span class="ap">9:00 – 13:00</span></div>
+          <div class="or"><span class="gg">Domenica</span><span class="ch">Chiuso</span></div>
+        </div>
+        <div style="margin-top:.75rem;font-size:.76rem;color:var(--grigio);background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.18);border-radius:2px;padding:.6rem .75rem;">
+          ℹ️ Le visite agli immobili possono essere fissate anche fuori dagli orari di apertura, su appuntamento.
+        </div>
+      </div>
+    </div>
+    <a href="https://wa.me/393488621888?text=Salve,%20vorrei%20informazioni%20sui%20vostri%20servizi%20immobiliari" target="_blank" style="display:flex;align-items:center;gap:.85rem;padding:1rem 1.2rem;background:#25d366;border-radius:3px;color:#fff;font-weight:500;font-size:.88rem;transition:opacity .2s">
+      <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Scrivici su WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- MAPPA -->
+<div class="mappa-section">
+  <div class="map-wrap">
+    <div class="map-ph">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <p>Righetto Immobiliare — Via Roma, 96 — Limena (PD)</p>
+      <small>Inserire iframe Google Maps: https://maps.google.com/?q=Via+Roma+96+Limena+Padova</small>
+    </div>
+    <div class="map-overlay">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Via Roma, 96 — Limena (PD) · <a href="https://maps.google.com/?q=Via+Roma+96+Limena+Padova" target="_blank" style="color:var(--oro);margin-left:.3rem">Apri in Maps</a>
+    </div>
+  </div>
+</div>
+
+<!-- WA FLOAT -->
+<a href="https://wa.me/393488621888" target="_blank" class="wa-float" title="Scrivici su WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<footer>
+  <div class="fi">
+    <div class="fgrid">
+      <div><div class="flogo">Righetto <span>Immobiliare</span></div><div class="finfo">Via Roma, 96 — 35010 Limena (PD)<br>Tel: 049 884 3484 · Cell: 348 862 1888<br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="83e4eaedecc3f1eae4ebe6f7f7eceaeeeeece1eaefeae2f1e6adeaf7">[email&#160;protected]</a></div></div>
+      <div class="fcol"><div class="fh">Servizi</div><a href="servizi.html">Vendita</a><a href="servizi.html">Locazioni</a><a href="servizi.html">Preliminari</a><a href="servizi.html">Valutazioni</a></div>
+      <div class="fcol"><div class="fh">Immobili</div><a href="immobili.html?op=vendita">In vendita</a><a href="immobili.html?op=affitto">In affitto</a><a href="immobili.html?tipo=villa">Ville</a></div>
+      <div class="fcol"><div class="fh">Info</div><a href="chi-siamo.html">Chi siamo</a><a href="blog.html">Blog</a><a href="faq.html">FAQ</a><a href="privacy.html">Privacy</a></div>
+    </div>
+    <div class="fbot"><span>© 2025 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 12345678901</span></div>
+  </div>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function sendForm(){
+  const n=document.getElementById('f-nom

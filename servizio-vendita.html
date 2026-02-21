@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Guida Completa alla Vendita Immobili — Righetto Immobiliare Padova</title>
+  <meta name="description" content="Vendi casa a Padova con Righetto Immobiliare. Valutazione gratuita, strategia personalizzata, fotografie professionali, virtual tour. Assistenza completa fino al rogito.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--nero:#0a0a0a;--bianco:#f5f2ed;--oro:#c9a84c;--grigio:#6b6560;--gc:#e8e4de;--verde:#4a5c4e;--sfondo:#f0ece6}
+    body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--nero)}
+    a{text-decoration:none;color:inherit}
+    header{background:var(--nero);position:sticky;top:0;z-index:100}
+    .hi{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:62px;display:flex;align-items:center;gap:2rem}
+    .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff}.logo span{color:var(--oro);font-style:italic}
+    nav{display:flex;gap:.2rem;flex:1}
+    nav a{color:rgba(255,255,255,.5);font-size:.82rem;padding:.4rem .75rem;border-radius:2px;transition:color .2s}
+    nav a:hover{color:#fff} nav a.active{color:var(--oro)}
+    .h-cta{display:flex;gap:.65rem;align-items:center}
+    .h-tel{color:rgba(255,255,255,.55);font-size:.78rem}
+    .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:2px;font-size:.76rem;font-weight:500}
+    /* BREADCRUMB */
+    .bc{background:var(--nero);border-top:1px solid rgba(255,255,255,.06);padding:.5rem 1.5rem}
+    .bc-inner{max-width:1380px;margin:0 auto;display:flex;align-items:center;gap:.4rem;font-size:.7rem;color:rgba(255,255,255,.3)}
+    .bc-inner a{color:rgba(255,255,255,.3);transition:color .2s}.bc-inner a:hover{color:var(--oro)}
+    .bc-inner svg{width:9px;height:9px;flex-shrink:0}
+    /* HERO */
+    .hero{background:var(--nero);padding:5rem 1.5rem 4rem;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.12) 0%,transparent 70%)}
+    .hero-inner{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    @media(max-width:900px){.hero-inner{grid-template-columns:1fr}}
+    .htag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.7rem}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:#fff;line-height:1.15;margin-bottom:1rem}
+    .hero h1 strong{font-weight:600;font-style:italic}
+    .hero p{font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.9;margin-bottom:1.5rem}
+    .hero-btns{display:flex;gap:.65rem;flex-wrap:wrap}
+    .btn-gold{background:var(--oro);color:var(--nero);padding:.65rem 1.4rem;border-radius:2px;font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
+    .btn-gold:hover{background:#d4b86a}
+    .btn-outline{border:1px solid rgba(255,255,255,.2);color:#fff;padding:.65rem 1.4rem;border-radius:2px;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:all .2s}
+    .btn-outline:hover{border-color:var(--oro);color:var(--oro)}
+    /* STATS HERO */
+    .hero-stats{display:flex;flex-direction:column;gap:.6rem}
+    .hstat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:1.2rem 1.4rem;display:flex;align-items:center;gap:1rem}
+    .hstat-val{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;color:var(--oro);flex-shrink:0;min-width:80px}
+    .hstat-lbl{font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.5}
+    /* SEZIONI */
+    .sec{padding:5rem 1.5rem}
+    .sec.bg{background:var(--sfondo)}
+    .sec-inner{max-width:1380px;margin:0 auto}
+    .sec-tag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.5rem}
+    .sec-t{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;margin-bottom:.75rem}
+    .sec-t strong{font-weight:600}
+    .sec-sub{font-size:.88rem;color:var(--grigio);line-height:1.8;max-width:600px;margin-bottom:2.5rem}
+    /* PROCESSO VENDITA */
+    .steps-vendita{display:flex;flex-direction:column;gap:0}
+    .step-v{display:grid;grid-template-columns:80px 1fr;gap:0;align-items:start;position:relative}
+    .step-v::before{content:'';position:absolute;left:39px;top:50px;bottom:-30px;width:1px;background:var(--gc);z-index:0}
+    .step-v:last-child::before{display:none}
+    .step-v-left{display:flex;flex-direction:column;align-items:center;padding-top:.3rem;position:relative;z-index:1}
+    .step-n-circle{width:42px;height:42px;border-radius:50%;background:var(--nero);color:var(--oro);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;flex-shrink:0;border:2px solid var(--oro)}
+    .step-v-body{padding:0 0 2.5rem 1.5rem}
+    .step-v-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;margin-bottom:.4rem}
+    .step-v-desc{font-size:.84rem;color:var(--grigio);line-height:1.8}
+    .step-v-detail{margin-top:.65rem;background:#fff;border:1px solid var(--gc);border-radius:2px;padding:.75rem 1rem}
+    .step-v-detail ul{list-style:none;display:flex;flex-direction:column;gap:.25rem}
+    .step-v-detail li{font-size:.79rem;color:var(--grigio);display:flex;align-items:flex-start;gap:.4rem}
+    .step-v-detail li::before{content:'→';color:var(--oro);flex-shrink:0}
+    /* COSA INCLUDE GRID */
+    .include-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    @media(max-width:900px){.include-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:560px){.include-grid{grid-template-columns:1fr}}
+    .inc-card{background:#fff;border:1px solid var(--gc);border-radius:3px;padding:1.4rem;transition:transform .2s,box-shadow .2s}
+    .inc-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.07)}
+    .inc-icon{font-size:1.8rem;margin-bottom:.7rem}
+    .inc-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;margin-bottom:.4rem}
+    .inc-desc{font-size:.8rem;color:var(--grigio);line-height:1.7}
+    /* CONFRONTO */
+    .comparison{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2rem}
+    @media(max-width:700px){.comparison{grid-template-columns:1fr}}
+    .comp-col{border-radius:3px;overflow:hidden;border:1px solid var(--gc)}
+    .comp-head{padding:1rem 1.2rem;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600}
+    .comp-col.good .comp-head{background:var(--verde);color:#fff}
+    .comp-col.bad .comp-head{background:#e8e4de;color:var(--nero)}
+    .comp-body{padding:.5rem .8rem}
+    .comp-row{display:flex;align-items:flex-start;gap:.5rem;padding:.48rem .4rem;border-bottom:1px solid var(--gc);font-size:.82rem;color:var(--grigio)}
+    .comp-row:last-child{border-bottom:none}
+    .comp-row .icon{flex-shrink:0;margin-top:.05rem}
+    /* FORM LATERALE */
+    .page-grid{max-width:1380px;margin:0 auto;padding:0 1.5rem 5rem;display:grid;grid-template-columns:1fr 360px;gap:2rem;align-items:start}
+    @media(max-width:1100px){.page-grid{grid-template-columns:1fr}}
+    .form-box{background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;overflow:hidden;position:sticky;top:80px}
+    .fb-head{padding:1.2rem 1.4rem;border-bottom:1px solid var(--gc);background:#fff}
+    .fb-head h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600}
+    .fb-head p{font-size:.76rem;color:var(--grigio);margin-top:.2rem}
+    .fb-body{padding:1.2rem 1.4rem}
+    .field{margin-bottom:.6rem}
+    .field label{display:block;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grigio);margin-bottom:.22rem}
+    .field input,.field select,.field textarea{width:100%;border:1px solid var(--gc);border-radius:2px;padding:.5rem .65rem;font-family:'DM Sans',sans-serif;font-size:.83rem;background:#fff;color:var(--nero);transition:border-color .2s}
+    .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--oro)}
+    .field textarea{min-height:80px;resize:vertical;line-height:1.6}
+    .fchk{display:flex;align-items:flex-start;gap:.4rem;font-size:.72rem;color:var(--grigio);margin:.4rem 0 .8rem}
+    .fchk input{accent-color:var(--oro);flex-shrink:0;margin-top:.15rem}
+    .fsub{width:100%;background:var(--nero);color:#fff;padding:.7rem;border:none;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s}
+    .fsub:hover{background:var(--oro);color:var(--nero)}
+    .fb-tel{display:flex;align-items:center;gap:.5rem;padding:.75rem 1rem;background:#fff;border:1px solid var(--gc);border-radius:2px;margin-top:.5rem;font-size:.82rem;color:var(--grigio)}
+    .fb-tel svg{width:14px;height:14px;color:var(--oro)}
+    .fb-tel strong{color:var(--nero)}
+    /* TESTIMONIANZE */
+    .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
+    @media(max-width:900px){.reviews-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:560px){.reviews-grid{grid-template-columns:1fr}}
+    .review{background:#fff;border:1px solid var(--gc);border-radius:3px;padding:1.3rem}
+    .stars{color:var(--oro);font-size:1rem;margin-bottom:.6rem}
+    .review-text{font-size:.83rem;color:var(--grigio);line-height:1.75;font-style:italic;margin-bottom:.8rem}
+    .review-auth{font-size:.72rem;font-weight:500;display:flex;align-items:center;gap:.45rem}
+    .review-av{width:28px;height:28px;border-radius:50%;background:var(--oro);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--nero)}
+    /* FOOTER */
+    footer{background:var(--nero);padding:3rem 1.5rem 1.5rem}
+    .fi{max-width:1380px;margin:0 auto}
+    .fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2rem}
+    @media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
+    .flogo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;margin-bottom:.6rem}.flogo span{color:var(--oro);font-style:italic}
+    .finfo{font-size:.76rem;color:rgba(255,255,255,.35);line-height:1.9}
+    .fh{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.7rem}
+    .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.38);margin-bottom:.3rem;transition:color .2s}.fcol a:hover{color:var(--oro)}
+    .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.22);flex-wrap:wrap;gap:.4rem}
+  </style>
+</head>
+<body>
+<header>
+  <div class="hi">
+    <a href="index.html" class="logo">Righetto <span>Immobiliare</span></a>
+    <nav><a href="index.html">Home</a><a href="immobili.html">Immobili</a><a href="servizi.html" class="active">Servizi</a><a href="chi-siamo.html">Chi siamo</a><a href="blog.html">Blog</a><a href="contatti.html">Contatti</a><a href="faq.html">FAQ</a></nav>
+    <div class="h-cta"><a class="h-tel" href="tel:+390498843484">049 884 3484</a><a class="h-btn" href="#richiedi">Valutazione gratuita</a></div>
+  </div>
+</header>
+<div class="bc"><div class="bc-inner"><a href="index.html">Home</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg><a href="servizi.html">Servizi</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg><span>Vendita Immobili</span></div></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="htag">Servizio principale</div>
+      <h1>Vendiamo la tua casa<br>al <strong>giusto prezzo,</strong><br>nel <strong>minor tempo</strong></h1>
+      <p>Dalla valutazione iniziale alla firma del rogito, ti seguiamo in ogni fase con strategia personalizzata, promozione multicanale e assistenza professionale completa. Zero pensieri, massimo risultato.</p>
+      <div class="hero-btns">
+        <a href="#richiedi" class="btn-gold">Valutazione gratuita</a>
+        <a href="https://wa.me/393488621888?text=Vorrei%20vendere%20un%20immobile.%20Quando%20possiamo%20fare%20una%20valutazione?" class="btn-outline" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-val">4,2</div><div class="hstat-lbl">mesi in media dalla valutazione al rogito. Il mercato padovano richiede tempi — noi li accorciamo.</div></div>
+      <div class="hstat"><div class="hstat-val">98%</div><div class="hstat-lbl">dei clienti ha dichiarato di essere soddisfatto del nostro servizio e tornerebbe a sceglierci.</div></div>
+      <div class="hstat"><div class="hstat-val">30+</div><div class="hstat-lbl">anni sul mercato immobiliare di Padova e provincia. Conosciamo ogni via, ogni dinamica.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COSA INCLUDE -->
+<section class="sec">
+  <div class="sec-inner">
+    <div class="sec-tag">Il nostro servizio</div>
+    <h2 class="sec-t">Tutto incluso, <strong>nessuna sorpresa</strong></h2>
+    <p class="sec-sub">Con Righetto Immobiliare non paghi nulla finché non vendiamo. Ogni fase è gestita da noi: non devi pensare a niente.</p>
+    <div class="include-grid">
+      <div class="inc-card"><div class="inc-icon">📊</div><div class="inc-title">Valutazione di mercato</div><div class="inc-desc">Analisi basata su compravendite reali concluse nell'area. Non stime online: dati veri del mercato padovano aggiornati alle ultime settimane.</div></div>
+      <div class="inc-card"><div class="inc-icon">📁</div><div class="inc-title">Verifica documentale</div><div class="inc-desc">Controlliamo tutta la documentazione prima di mettere l'immobile sul mercato: catasto, visure, conformità, APE, titoli edilizi.</div></div>
+      <div class="inc-card"><div class="inc-icon">📸</div><div class="inc-title">Foto professionali</div><div class="inc-desc">Fotografie d'interni con attrezzatura professionale. Le foto fanno la differenza: immobili con foto pro ricevono il 40% di contatti in più.</div></div>
+      <div class="inc-card"><div class="inc-icon">🎬</div><div class="inc-title">Video e virtual tour 360°</div><div class="inc-desc">Video walkthrough su YouTube e virtual tour 360° per permettere ai potenziali acquirenti di visitare il tuo immobile da casa, 24 ore su 24.</div></div>
+      <div class="inc-card"><div class="inc-icon">🌐</div><div class="inc-title">Pubblicazione multicanale</div><div class="inc-desc">Immobiliare.it, Casa.it, Idealista, il nostro sito, social media e la nostra rete di acquirenti già qualificati. Massima visibilità garantita.</div></div>
+      <div class="inc-card"><div class="inc-icon">🤝</div><div class="inc-title">Gestione visite e trattativa</div><div class="inc-desc">Qualifichiamo ogni acquirente prima della visita. Gestiamo la trattativa per massimizzare il prezzo finale e proteggere i tuoi interessi.</div></div>
+      <div class="inc-card"><div class="inc-icon">✍️</div><div class="inc-title">Compromesso e rogito</div><div class="inc-desc">Assistenza completa nella redazione del contratto preliminare e coordinamento con il notaio fino alla firma del rogito definitivo.</div></div>
+      <div class="inc-card"><div class="inc-icon">📋</div><div class="inc-title">Gestione mutuo acquirente</div><div class="inc-desc">Supportiamo l'acquirente nell'ottenimento del mutuo, coordinando tempi e documenti per non rallentare la vendita.</div></div>
+      <div class="inc-card"><div class="inc-icon">📞</div><div class="inc-title">Aggiornamenti costanti</div><div class="inc-desc">Ti teniamo aggiornato su ogni visita, ogni feedback, ogni sviluppo. Nessun silenzio: sai sempre cosa sta succedendo.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section class="sec bg">
+  <div class="sec-inner">
+    <div class="sec-tag">Come funziona</div>
+    <h2 class="sec-t">Il nostro processo di <strong>vendita in 7 fasi</strong></h2>
+    <p class="sec-sub">Un metodo collaudato in 30 anni di attività sul mercato padovano.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start">
+      <div class="steps-vendita">
+        <div class="step-v">
+          <div class="step-v-left"><div class="step-n-circle">1</div></div>
+          <div class="step-v-body">
+            <div class="step-v-title">Valutazione gratuita</div>
+            <div class="step-v-desc">Veniamo a vedere l'immobile, analizziamo il mercato locale e ti forniamo una valutazione scritta realistica con i dati delle compravendite recenti nell'area.</div>
+            <div class="step-v-detail"><ul><li>Sopralluogo con agente dedicato</li><li>Analisi comparativa di mercato</li><li>Report scritto con fascia di prezzo consigliata</li></ul></div>
+          </div>
+        </div>
+        <div class="step-v">
+          <div class="step-v-left"><div class="step-n-circle">2</div></div>
+          <div class="step-v-body">
+            <div class="step-v-title">Incarico e documentazione</div>
+            <div class="step-v-desc">Firmiamo il mandato e raccogliamo tutta la documentazione necessaria. Verifichiamo la conformità urbanistica e catastale prima di andare sul mercato.</div>
+            <div class="step-v-detail"><ul><li>Raccolta atto di provenienza, visure, planimetrie</li><li>Verifica conformità e APE</li><li>Definizione strategia e prezzo di lancio</li></ul></div>
+          </div>
+        </div>
+        <div class="step-v">
+          <div class="step-v-left"><div class="step-n-circle">3</div></div>
+          <div class="step-v-body">
+            <div class="step-v-title">Produzione materiali</div>
+            <div class="step-v-desc">Fotografia professionale, video walkthrough, virtual tour 360°, planimetria grafica. Tutto il materiale per presentare al meglio il tuo immobile.</div>
+          </div>
+        </div>
+        <div class="step-v">
+          <div class="step-v-left"><div class="step-n-circle">4</div></div>
+          <div class="step-v-body">
+            <div class="step-v-title">Pubblicazione e promozione</div>
+            <div class="step-v-desc">Pubblicazione su tutti i portali immobiliari, sul nostro sito e sui canali social. Promozione alla nostra banca dati di acquirenti in ricerca attiva.</div>
+          </div>
+        </div>
+        <div class="step-v">
+          <div class="step-v-left"><div class="step-n-circle">5</div></div>
+          <div class="step-v-body">
+            <div class="step-v-title">Visite e selezione acquirenti</div>
+            <div class="step-v-desc">Qualifichiamo ogni richiesta, organizziamo e conduciamo le visite, raccogliamo i feedback e teniamo il proprietario sempre aggiornato.</div>
+          </div>
+        </div>
+        <div class="step-v">
+          <div class="step-v-left"><div class="step-n-circle">6</div></div>
+          <div class="step-v-body">
+            <div class="step-v-title">Proposta e trattativa</div>
+            <div class="step-v-desc">Gestiamo la proposta d'acquisto e la trattativa per massimizzare il prezzo finale. Tuteliamo sempre i tuoi interessi.</div>
+          </div>
+        </div>
+        <div class="step-v">
+          <div class="step-v-left"><div class="step-n-circle">7</div></div>
+          <div class="step-v-body">
+            <div class="step-v-title">Compromesso e rogito</div>
+            <div class="step-v-desc">Assistenza nella firma del contratto preliminare e coordinamento con il notaio per il rogito definitivo. Fine: chiavi consegnate, vendita completata.</div>
+          </div>
+        </div>
+      </div>
+      <!-- CONFRONTO -->
+      <div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;margin-bottom:1rem">Con agenzia vs fai da te</div>
+        <div class="comparison">
+          <div class="comp-col good">
+            <div class="comp-head">✓ Con Righetto</div>
+            <div class="comp-body">
+              <div class="comp-row"><span class="icon">✓</span>Valutazione professionale basata su dati reali</div>
+              <div class="comp-row"><span class="icon">✓</span>Foto e video professionali</div>
+              <div class="comp-row"><span class="icon">✓</span>Pubblicazione su tutti i portali</div>
+              <div class="comp-row"><span class="icon">✓</span>Acquirenti pre-qualificati</div>
+              <div class="comp-row"><span class="icon">✓</span>Trattativa gestita da esperti</div>
+              <div class="comp-row"><span class="icon">✓</span>Verifica documenti e conformità</div>
+              <div class="comp-row"><span class="icon">✓</span>Zero anticipi — paghi solo a vendita conclusa</div>
+            </div>
+          </div>
+          <div class="comp-col bad">
+            <div class="comp-head">✗ Fai da te</div>
+            <div class="comp-body">
+              <div class="comp-row"><span class="icon">✗</span>Prezzo spesso sbagliato (troppo alto o basso)</div>
+              <div class="comp-row"><span class="icon">✗</span>Foto con il cellulare</div>
+              <div class="comp-row"><span class="icon">✗</span>Visibilità limitata</div>
+              <div class="comp-row"><span class="icon">✗</span>Visite da curiosi non qualificati</div>
+              <div class="comp-row"><span class="icon">✗</span>Trattativa fai da te, rischio errori</div>
+              <div class="comp-row"><span class="icon">✗</span>Rischio vizi documentali</div>
+              <div class="comp-row"><span class="icon">✗</span>Tempi di vendita molto più lunghi</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIANZE -->
+<section class="sec">
+  <div class="sec-inner">
+    <div class="sec-tag">Cosa dicono i clienti</div>
+    <h2 class="sec-t">Chi ha già <strong>venduto con noi</strong></h2>
+    <div class="reviews-grid">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <div class="review-text">"Ho venduto la mia villa a Curtarolo in soli 3 mesi, a un prezzo superiore alle mie aspettative. Gino è stato sempre disponibile e professionale. Lo consiglio senza riserve."</div>
+        <div class="review-auth"><div class="review-av">M</div>Marco T. — Villa Curtarolo</div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <div class="review-text">"Avevo già provato con un'altra agenzia per 8 mesi senza risultati. Con Righetto Immobiliare ho venduto in 5 settimane. La differenza è stata la loro rete di contatti e la gestione professionale."</div>
+        <div class="review-auth"><div class="review-av">L</div>Laura B. — Appartamento Padova</div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <div class="review-text">"Hanno gestito tutto: dalla documentazione alle visite, dalla trattativa al rogito. Non ho dovuto preoccuparmi di nulla. Servizio impeccabile."</div>
+        <div class="review-auth"><div class="review-av">F</div>Franco e Anna M. — Bifamiliare Limena</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM + SIDEBAR -->
+<div class="page-grid" id="richiedi">
+  <div>
+    <div class="sec-tag">Inizia ora</div>
+    <h2 class="sec-t">Richiedi la tua<br><strong>valutazione gratuita</strong></h2>
+    <p style="font-size:.9rem;color:var(--grigio);line-height:1.8;margin-bottom:2rem;max-width:520px">Veniamo a vedere il tuo immobile, ti forniamo una valutazione scritta di mercato senza impegno. Poi sei tu a decidere. Nessun costo iniziale.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
+      <div style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1.2rem;display:flex;align-items:center;gap:.75rem">
+        <span style="font-size:1.5rem">🏠</span>
+        <div><div style="font-weight:500;font-size:.88rem">Appartamenti</div><div style="font-size:.76rem;color:var(--grigio)">in tutte le zone di Padova</div></div>
+      </div>
+      <div style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1.2rem;display:flex;align-items:center;gap:.75rem">
+        <span style="font-size:1.5rem">🏡</span>
+        <div><div style="font-weight:500;font-size:.88rem">Ville e villette</div><div style="font-size:.76rem;color:var(--grigio)">Padova e provincia</div></div>
+      </div>
+      <div style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1.2rem;display:flex;align-items:center;gap:.75rem">
+        <span style="font-size:1.5rem">🏢</span>
+        <div><div style="font-weight:500;font-size:.88rem">Uffici e commerciale</div><div style="font-size:.76rem;color:var(--grigio)">locali e capannoni</div></div>
+      </div>
+      <div style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1.2rem;display:flex;align-items:center;gap:.75rem">
+        <span style="font-size:1.5rem">🌳</span>
+        <div><div style="font-weight:500;font-size:.88rem">Terreni e rustici</div><div style="font-size:.76rem;color:var(--grigio)">edificabili e agricoli</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="form-box">
+    <div class="fb-head">
+      <h3>Valutazione gratuita</h3>
+      <p>Rispondiamo entro 24 ore — nessun impegno</p>
+    </div>
+    <div class="fb-body">
+      <div class="field"><label>Nome e Cognome *</label><input type="text" id="f-nome" placeholder="Mario Rossi"></div>
+      <div class="field"><label>Telefono *</label><input type="tel" id="f-tel" placeholder="333 123 4567"></div>
+      <div class="field"><label>Email</label><input type="email" placeholder="mario@email.it"></div>
+      <div class="field"><label>Tipo immobile</label>
+        <select>
+          <option>Appartamento</option><option>Villa singola</option><option>Villetta a schiera</option><option>Bifamiliare</option><option>Terreno</option><option>Locale commerciale</option><option>Altro</option>
+        </select>
+      </div>
+      <div class="field"><label>Comune</label><input type="text" placeholder="Es. Padova, Curtarolo, Albignasego..."></div>
+      <div class="field"><label>Note</label><textarea placeholder="Breve descrizione dell'immobile: mq, piano, anno, condizioni..."></textarea></div>
+      <div class="fchk"><input type="checkbox" id="f-gdpr"><label for="f-gdpr">Acconsento al trattamento dei dati ai sensi del GDPR</label></div>
+      <button class="fsub" onclick="sendForm()">Richiedi valutazione gratuita</button>
+      <a href="tel:+390498843484" class="fb-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>Oppure chiama <strong>049 884 3484</strong></a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fi">
+    <div class="fgrid">
+      <div><div class="flogo">Righetto <span>Immobiliare</span></div><div class="finfo">Via Roma, 96 — 35010 Limena (PD)<br>Tel: 049 884 3484 · Cell: 348 862 1888<br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="eb8c828584ab99828c838e9f9f8482868684898287828a998ec5829f">[email&#160;protected]</a></div></div>
+      <div class="fcol"><div class="fh">Servizi</div><a href="servizi.html">Tutti i servizi</a><a href="servizio-locazioni.html">Locazioni</a><a href="servizio-preliminari.html">Preliminari</a></div>
+      <div class="fcol"><div class="fh">Immobili</div><a href="immobili.html?op=vendita">In vendita</a><a href="immobili.html?op=affitto">In affitto</a></div>
+      <div class="fcol"><div class="fh">Info</div><a href="chi-siamo.html">Chi siamo</a><a href="faq.html">FAQ</a><a href="contatti.html">Contatti</a><a href="privacy.html">Privacy</a></div>
+    </div>
+    <div class="fbot"><span>© 2025 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 12345678901</span></div>
+  </div>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function sendForm(){
+  const n=document.getElementById('f-nome').value.trim();
+  const t=document.getElementById('f-tel').value.trim();
+  const g=document.getElementById('f-gdpr').checked;
+  if(!n||!t){alert('Inserisci nome e telef

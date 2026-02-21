@@ -1,0 +1,2531 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Righetto Immobiliare</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root {
+  --nero:   #3A5578;
+  --nero2:  #4A6A8C;
+  --caffe:  #5C7A9E;
+  --caffe2: #7A9AB8;
+  --caffe3: #A8C0D6;
+  --oro:    #CEE08F;
+  --oro2:   #e2efb8;
+  --sfondo: #f5f0e8;
+  --bianco: #fafaf5;
+  --testo:  #1E3A5C;
+  --rosso:  #e74c3c;
+  --verde:  #27ae60;
+  --sidebar-w: 260px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--sfondo);
+  color: var(--testo);
+  min-height: 100vh;
+}
+
+/* ══════════ LOGIN OVERLAY ══════════ */
+#loginOverlay {
+  position: fixed; inset: 0;
+  background: linear-gradient(135deg, var(--nero) 0%, var(--caffe) 100%);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999;
+}
+.login-box {
+  background: var(--bianco);
+  border-radius: 16px;
+  padding: 48px 40px;
+  width: 100%; max-width: 420px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+  text-align: center;
+}
+.login-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--nero);
+  margin-bottom: 6px;
+}
+.login-sub {
+  font-size: 0.75rem;
+  color: var(--caffe2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+.login-box input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid var(--caffe3);
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  color: var(--testo);
+  background: var(--sfondo);
+  margin-bottom: 16px;
+  transition: border-color 0.2s;
+}
+.login-box input:focus {
+  outline: none;
+  border-color: var(--nero);
+}
+.btn-login {
+  width: 100%;
+  padding: 14px;
+  background: var(--oro);
+  color: var(--testo);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-login:hover { background: var(--oro2); }
+.login-error {
+  color: var(--rosso);
+  font-size: 0.82rem;
+  margin-top: 12px;
+  display: none;
+}
+
+/* ══════════ LAYOUT ══════════ */
+#appWrapper { display: flex; min-height: 100vh; }
+
+/* SIDEBAR */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--nero);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+  transition: transform 0.3s;
+}
+.sidebar-logo {
+  padding: 28px 24px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.sidebar-logo h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--oro);
+  line-height: 1.2;
+}
+.sidebar-logo span {
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--caffe3);
+}
+nav { flex: 1; padding: 16px 0; }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 24px;
+  color: var(--caffe3);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+  position: relative;
+}
+.nav-item:hover {
+  color: white;
+  background: rgba(255,255,255,0.06);
+}
+.nav-item.active {
+  color: var(--oro);
+  background: rgba(206,224,143,0.1);
+  border-left-color: var(--oro);
+}
+.nav-item svg { width: 18px; height: 18px; flex-shrink: 0; }
+.nav-badge {
+  position: absolute;
+  right: 16px;
+  background: var(--rosso);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 10px;
+}
+.sidebar-footer {
+  padding: 16px 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 0.75rem;
+  color: var(--caffe3);
+}
+.btn-logout {
+  display: flex; align-items: center; gap: 8px;
+  color: var(--caffe3);
+  cursor: pointer;
+  font-size: 0.8rem;
+  background: none;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  padding: 8px 0;
+  transition: color 0.2s;
+}
+.btn-logout:hover { color: var(--oro); }
+
+/* MAIN */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.topbar {
+  background: white;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  position: sticky; top: 0; z-index: 50;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.topbar-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--nero);
+}
+.topbar-actions { display: flex; gap: 12px; align-items: center; }
+
+.content { padding: 32px; flex: 1; }
+
+/* ══════════ BUTTONS ══════════ */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.83rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.btn-primary { background: var(--oro); color: var(--testo); }
+.btn-primary:hover { background: var(--oro2); transform: translateY(-1px); }
+.btn-secondary { background: var(--caffe3); color: var(--testo); }
+.btn-secondary:hover { background: var(--caffe2); color: white; }
+.btn-danger { background: #fde8e8; color: var(--rosso); }
+.btn-danger:hover { background: var(--rosso); color: white; }
+.btn-sm { padding: 6px 12px; font-size: 0.75rem; }
+.btn-icon { padding: 8px; border-radius: 6px; background: var(--sfondo); color: var(--testo); border: none; cursor: pointer; transition: all 0.2s; }
+.btn-icon:hover { background: var(--caffe3); }
+
+/* ══════════ STATS ══════════ */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px 24px;
+  border-left: 4px solid var(--oro);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.stat-card.blue { border-left-color: var(--caffe); }
+.stat-card.green { border-left-color: var(--verde); }
+.stat-card.red { border-left-color: var(--rosso); }
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--nero);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--caffe2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* ══════════ TABLE ══════════ */
+.table-wrap {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.table-head {
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--sfondo);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.table-search {
+  padding: 9px 14px;
+  border: 1.5px solid var(--caffe3);
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.83rem;
+  color: var(--testo);
+  background: var(--sfondo);
+  width: 240px;
+  transition: border-color 0.2s;
+}
+.table-search:focus { outline: none; border-color: var(--nero); }
+
+table { width: 100%; border-collapse: collapse; }
+th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--caffe2);
+  background: var(--sfondo);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+td {
+  padding: 14px 16px;
+  font-size: 0.82rem;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  vertical-align: middle;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(206,224,143,0.06); }
+
+.prop-thumb {
+  width: 52px; height: 40px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: var(--caffe3);
+  display: block;
+}
+.prop-thumb-placeholder {
+  width: 52px; height: 40px;
+  border-radius: 6px;
+  background: var(--caffe3);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 0.7rem;
+}
+
+/* BADGES */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.badge-verde { background: #d4f5e0; color: #1a7a40; }
+.badge-rosso { background: #fde8e8; color: #c0392b; }
+.badge-oro { background: #fef9e0; color: #7d6608; }
+.badge-grigio { background: #eee; color: #666; }
+.badge-blu { background: #e0eeff; color: #1a4a8a; }
+
+/* TOGGLE */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 36px; height: 20px;
+}
+.toggle input { display: none; }
+.toggle-slider {
+  position: absolute; inset: 0;
+  background: #ccc;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.toggle-slider:before {
+  content: '';
+  position: absolute;
+  width: 14px; height: 14px;
+  left: 3px; top: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+.toggle input:checked + .toggle-slider { background: var(--verde); }
+.toggle input:checked + .toggle-slider:before { transform: translateX(16px); }
+
+/* ══════════ FORM / MODAL ══════════ */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(30,58,92,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 500;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: white;
+  border-radius: 16px;
+  width: 100%; max-width: 860px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+  overflow: hidden;
+  margin: auto;
+}
+.modal-header {
+  padding: 24px 28px;
+  background: var(--nero);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+.modal-close {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: white;
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.modal-close:hover { background: rgba(255,255,255,0.25); }
+.modal-body { padding: 28px; }
+.modal-footer {
+  padding: 16px 28px;
+  border-top: 1px solid var(--sfondo);
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* FORM */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+.form-full { grid-column: 1 / -1; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--caffe2);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 10px 14px;
+  border: 1.5px solid var(--caffe3);
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  color: var(--testo);
+  background: var(--sfondo);
+  transition: border-color 0.2s;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--nero);
+  background: white;
+}
+.form-group textarea { resize: vertical; min-height: 80px; }
+
+.section-divider {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--nero);
+  margin: 20px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--oro);
+  grid-column: 1 / -1;
+}
+
+/* CHECKBOXES */
+.checks-grid {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  grid-column: 1 / -1;
+}
+.check-item {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 0.82rem; cursor: pointer;
+  background: var(--sfondo);
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1.5px solid transparent;
+  transition: all 0.2s;
+}
+.check-item input { accent-color: var(--nero); }
+.check-item:has(input:checked) {
+  border-color: var(--oro);
+  background: rgba(206,224,143,0.2);
+}
+
+/* FOTO MANAGER */
+.foto-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+.foto-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background: var(--caffe3);
+}
+.foto-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.foto-del {
+  position: absolute; top: 4px; right: 4px;
+  background: rgba(231,76,60,0.85);
+  color: white; border: none;
+  width: 22px; height: 22px;
+  border-radius: 4px;
+  cursor: pointer; font-size: 0.7rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.foto-add {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 6px;
+  aspect-ratio: 4/3;
+  border: 2px dashed var(--caffe3);
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--caffe2);
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 8px;
+  transition: all 0.2s;
+}
+.foto-add:hover { border-color: var(--nero); color: var(--nero); }
+.url-input-row {
+  display: flex; gap: 8px;
+}
+.url-input-row input { flex: 1; }
+
+/* RICHIESTE */
+.richiesta-card {
+  background: white;
+  border-radius: 10px;
+  padding: 16px 20px;
+  border-left: 4px solid var(--caffe);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.richiesta-card.non-letta { border-left-color: var(--oro); }
+.richiesta-info h4 { font-size: 0.9rem; font-weight: 600; color: var(--nero); }
+.richiesta-info p { font-size: 0.8rem; color: var(--caffe2); margin-top: 2px; }
+.richiesta-meta { font-size: 0.72rem; color: var(--caffe3); margin-top: 6px; }
+.richiesta-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+
+/* LOADING */
+.loading {
+  display: flex; align-items: center; justify-content: center;
+  padding: 60px;
+  color: var(--caffe2);
+  font-size: 0.85rem;
+  gap: 12px;
+}
+.spinner {
+  width: 24px; height: 24px;
+  border: 3px solid var(--caffe3);
+  border-top-color: var(--nero);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--caffe2);
+}
+.empty-state svg { width: 48px; height: 48px; margin: 0 auto 12px; display: block; opacity: 0.4; }
+.empty-state h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--nero); }
+
+/* TOAST */
+.toast-container {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  z-index: 9998;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.toast {
+  background: var(--nero);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 0.83rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  animation: slideIn 0.3s ease;
+  display: flex; align-items: center; gap: 10px;
+}
+.toast.success { background: var(--verde); }
+.toast.error { background: var(--rosso); }
+@keyframes slideIn { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+
+/* ══════════ UPLOAD ZONES ══════════ */
+.upload-zone {
+  border: 2px dashed var(--caffe3);
+  border-radius: 12px;
+  padding: 32px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--sfondo);
+  margin-bottom: 12px;
+}
+.upload-zone:hover, .upload-zone.drag-over {
+  border-color: var(--nero);
+  background: var(--oro2);
+}
+.upload-icon { font-size: 2rem; margin-bottom: 8px; }
+.upload-label { font-size: 0.88rem; font-weight: 600; color: var(--testo); margin-bottom: 4px; }
+.upload-hint { font-size: 0.72rem; color: var(--caffe2); }
+
+.upload-progress {
+  background: var(--sfondo);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--caffe3);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--nero);
+  border-radius: 3px;
+  transition: width 0.3s;
+  width: 0%;
+}
+.upload-progress span { font-size: 0.75rem; color: var(--caffe2); white-space: nowrap; }
+
+/* FOTO GRID */
+.foto-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+@media (max-width: 900px) {
+  .foto-grid .foto-thumb { width: calc(33.33% - 7px) !important; }
+}
+.foto-thumb {
+  width: calc(16.66% - 9px);
+  height: 130px;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--caffe3);
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+.foto-thumb:hover { border-color: var(--nero); }
+.foto-thumb img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.foto-thumb .foto-del {
+  position: absolute;
+  top: 4px; right: 4px;
+  background: rgba(231,76,60,0.95);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 26px; height: 26px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: transform 0.15s;
+}
+.foto-thumb .foto-del:hover { transform: scale(1.2); background: var(--rosso); }
+.foto-thumb .foto-badge {
+  position: absolute;
+  bottom: 4px; left: 4px;
+  background: rgba(58,85,120,0.85);
+  color: white;
+  font-size: 0.6rem;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+/* DOCUMENTI LIST */
+.doc-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--sfondo);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 1px solid var(--caffe3);
+}
+.doc-icon { font-size: 1.5rem; flex-shrink: 0; }
+.doc-info { flex: 1; min-width: 0; }
+.doc-name { font-size: 0.82rem; font-weight: 600; color: var(--testo); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.doc-meta { font-size: 0.68rem; color: var(--caffe2); }
+.doc-actions { display: flex; gap: 6px; }
+.doc-actions a { color: var(--nero); font-size: 0.75rem; text-decoration: none; }
+.doc-actions a:hover { color: var(--caffe); }
+.doc-del { 
+  background: var(--rosso); 
+  border: none; 
+  cursor: pointer; 
+  color: white; 
+  font-size: 1rem;
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.doc-del:hover { background: #c0392b; }
+
+/* VT SCENES */
+.vt-scene-card {
+  background: var(--sfondo);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid var(--caffe3);
+}
+.vt-scene-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.vt-scene-num {
+  background: var(--nero);
+  color: white;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 600; flex-shrink: 0;
+}
+.vt-scene-name {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1.5px solid var(--caffe3);
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem;
+}
+.vt-scene-preview {
+  width: 100%; max-height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-top: 8px;
+  border: 2px solid var(--oro);
+}
+
+
+/* SEZIONI */
+.section { display: none; }
+.section.active { display: block; }
+
+/* FILTRI */
+.filter-bar {
+  background: white;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.filter-bar select, .filter-bar input {
+  padding: 8px 12px;
+  border: 1.5px solid var(--caffe3);
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  color: var(--testo);
+  background: var(--sfondo);
+}
+
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .content { padding: 16px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-grid.three { grid-template-columns: 1fr; }
+  table { font-size: 0.75rem; }
+  td, th { padding: 10px 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginOverlay">
+  <div class="login-box">
+    <div class="login-logo">Righetto Immobiliare</div>
+    <div class="login-sub">Pannello Amministrazione</div>
+    <input type="password" id="loginPass" placeholder="Password admin..." autocomplete="current-password">
+    <button class="btn-login" onclick="doLogin()">Accedi</button>
+    <div class="login-error" id="loginError">Password non corretta</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="appWrapper" style="display:none">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <h1>Righetto<br>Immobiliare</h1>
+      <span>Admin Panel</span>
+    </div>
+    <nav>
+      <div class="nav-item active" onclick="showSection('immobili')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Immobili
+      </div>
+      <div class="nav-item" onclick="showSection('nuovo')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        Nuovo Immobile
+      </div>
+      <div class="nav-item" onclick="showSection('richieste')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Richieste
+        <span class="nav-badge" id="badgeRichieste" style="display:none">0</span>
+      </div>
+      <div class="nav-item" onclick="showSection('impostazioni')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Impostazioni
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn-logout" onclick="doLogout()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-title" id="topbarTitle">Gestione Immobili</div>
+      <div class="topbar-actions">
+        <a href="immobili.html" target="_blank" class="btn btn-secondary btn-sm">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Vedi sito
+        </a>
+        <button class="btn btn-primary btn-sm" onclick="showSection('nuovo')">
+          + Nuovo
+        </button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ═══ SEZIONE IMMOBILI ═══ -->
+      <div class="section active" id="sec-immobili">
+        <div class="stats-grid" id="statsGrid">
+          <div class="stat-card"><div class="stat-num" id="statTot">—</div><div class="stat-label">Totale Immobili</div></div>
+          <div class="stat-card blue"><div class="stat-num" id="statVendita">—</div><div class="stat-label">In Vendita</div></div>
+          <div class="stat-card green"><div class="stat-num" id="statAffitto">—</div><div class="stat-label">In Affitto</div></div>
+          <div class="stat-card red"><div class="stat-num" id="statVenduti">—</div><div class="stat-label">Venduti/Affittati</div></div>
+        </div>
+
+        <div class="table-wrap">
+          <div class="table-head">
+            <div style="font-weight:600;font-size:0.9rem;">Lista Immobili</div>
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+              <select id="filtroTipo" onchange="loadImmobili()" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.8rem;">
+                <option value="">Tutti</option>
+                <option value="vendita">Vendita</option>
+                <option value="affitto">Affitto</option>
+                <option value="asta">Asta</option>
+              </select>
+              <input class="table-search" type="text" placeholder="🔍 Cerca..." id="searchInput" oninput="filterTable()">
+            </div>
+          </div>
+          <div id="immobiliTableWrap">
+            <div class="loading"><div class="spinner"></div> Caricamento dal database...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SEZIONE NUOVO/MODIFICA ═══ -->
+      <div class="section" id="sec-nuovo">
+        <div class="table-wrap">
+          <div class="modal-header" style="border-radius:0">
+            <h2 id="formTitle">Nuovo Immobile</h2>
+            <button class="btn btn-primary btn-sm" onclick="openImportModal()" style="background:var(--oro);color:var(--testo)">
+              📥 Importa da Idealista
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="immobileForm" onsubmit="saveImmobile(event)">
+              <input type="hidden" id="editId">
+              <div class="form-grid">
+
+                <div class="section-divider">Informazioni Base</div>
+
+                <div class="form-group">
+                  <label>Codice Riferimento</label>
+                  <input type="text" id="f_codice" placeholder="es. LA0307 · CAP1680 (copia da Idealista)" style="font-weight:600;letter-spacing:1px">
+                  <small style="color:var(--caffe2);font-size:0.7rem">Copia esattamente il codice Rif. che trovi su Idealista nella scheda immobile</small>
+                </div>
+                <div class="form-group">
+                  <label>Titolo *</label>
+                  <input type="text" id="f_titolo" placeholder="es. Appartamento luminoso centro" required>
+                </div>
+                <div class="form-group">
+                  <label>Tipo Operazione *</label>
+                  <select id="f_tipo_operazione" required>
+                    <option value="">Seleziona...</option>
+                    <option value="vendita">🏷️ In Vendita</option>
+                    <option value="affitto">🔑 In Affitto</option>
+                    <option value="affitto_commerciale">🏢 In Affitto Commerciale</option>
+                    <option value="affitto_residenziale">🏠 In Affitto Residenziale</option>
+                    <option value="asta">⚖️ Asta Giudiziaria</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Categoria</label>
+                  <select id="f_categoria">
+                    <option value="residenziale">Residenziale</option>
+                    <option value="commerciale">Commerciale</option>
+                    <option value="terreno">Terreno</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Tipologia</label>
+                  <select id="f_tipologia" onchange="suggerisciCodice()">
+                    <option value="appartamento">Appartamento</option>
+                    <option value="villa">Villa</option>
+                    <option value="villetta">Villetta</option>
+                    <option value="attico">Attico</option>
+                    <option value="bilocale">Bilocale</option>
+                    <option value="trilocale">Trilocale</option>
+                    <option value="monolocale">Monolocale</option>
+                    <option value="ufficio">Ufficio</option>
+                    <option value="negozio">Negozio</option>
+                    <option value="capannone">Capannone</option>
+                    <option value="terreno">Terreno</option>
+                    <option value="garage">Garage</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Prezzo (€) *</label>
+                  <input type="number" id="f_prezzo" placeholder="es. 180000" required>
+                </div>
+
+                <div class="section-divider">Localizzazione</div>
+
+                <div class="form-group">
+                  <label>Comune</label>
+                  <input type="text" id="f_comune" value="Padova" placeholder="Padova">
+                </div>
+                <div class="form-group form-full">
+                  <label>Indirizzo <span style="background:#e67e22;color:white;font-size:0.65rem;padding:2px 6px;border-radius:4px;margin-left:4px">🔒 SOLO OPERATORE</span></label>
+                  <input type="text" id="f_indirizzo" placeholder="es. Via Roma 12, Padova">
+                  <small style="color:var(--caffe2);font-size:0.7rem">⚠️ Nascosto al pubblico — visibile solo nell'admin</small>
+                </div>
+                <div class="form-group">
+                  <label>Latitudine</label>
+                  <input type="number" id="f_lat" step="any" placeholder="es. 45.4064">
+                </div>
+                <div class="form-group">
+                  <label>Longitudine</label>
+                  <input type="number" id="f_lng" step="any" placeholder="es. 11.8768">
+                </div>
+
+                <div class="section-divider">Caratteristiche</div>
+
+                <div class="form-group">
+                  <label>Superficie (mq)</label>
+                  <input type="number" id="f_superficie" placeholder="es. 85">
+                </div>
+                <div class="form-group">
+                  <label>Locali</label>
+                  <input type="number" id="f_locali" placeholder="es. 3">
+                </div>
+                <div class="form-group">
+                  <label>Bagni</label>
+                  <input type="number" id="f_bagni" placeholder="es. 1">
+                </div>
+                <div class="form-group">
+                  <label>Piano</label>
+                  <input type="text" id="f_piano" placeholder="es. 2° / Terra / Ultimo">
+                </div>
+                <div class="form-group">
+                  <label>Anno Costruzione</label>
+                  <input type="number" id="f_anno_costruzione" placeholder="es. 1990">
+                </div>
+                <div class="form-group">
+                  <label>Stato</label>
+                  <select id="f_stato">
+                    <option value="">Non specificato</option>
+                    <option value="ottimo">Ottimo</option>
+                    <option value="buono">Buono</option>
+                    <option value="da_ristrutturare">Da ristrutturare</option>
+                    <option value="ristrutturato">Ristrutturato</option>
+                    <option value="nuovo">Nuovo</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Classe Energetica</label>
+                  <select id="f_classe_energetica">
+                    <option value="">Non specificata</option>
+                    <option>G</option><option>F</option><option>E</option><option>D</option>
+                    <option>C</option><option>B</option><option>A1</option>
+                    <option>A2</option><option>A3</option><option>A4</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>⚡ IPE — Indice Prest. Energetica (kWh/m³ anno)</label>
+                  <input type="number" id="f_ipe_kwh" step="0.01" min="0" placeholder="es. 112.00">
+                  <small style="color:var(--caffe2);font-size:0.7rem">Valore numerico riportato sull'APE — es. 112 kWh/m³ anno</small>
+                </div>
+
+                <!-- ═══ AMBIENTI ═══ -->
+                <div class="section-divider">🏠 Ambienti</div>
+                <div class="checks-grid">
+                  <label class="check-item"><input type="checkbox" id="f_soggiorno"> 🛋️ Soggiorno</label>
+                  <label class="check-item"><input type="checkbox" id="f_cucina"> 🍳 Cucina</label>
+                  <label class="check-item"><input type="checkbox" id="f_mansarda"> 🏠 Mansarda</label>
+                  <label class="check-item"><input type="checkbox" id="f_taverna"> 🍷 Taverna</label>
+                  <label class="check-item"><input type="checkbox" id="f_soffitta"> 📦 Soffitta</label>
+                  <label class="check-item"><input type="checkbox" id="f_lavanderia"> 🧺 Lavanderia</label>
+                  <label class="check-item"><input type="checkbox" id="f_cantina"> 📦 Cantina</label>
+                  <label class="check-item"><input type="checkbox" id="f_porticato"> ⛩️ Porticato</label>
+                  <label class="check-item"><input type="checkbox" id="f_soppalco"> 📐 Soppalco</label>
+                  <label class="check-item"><input type="checkbox" id="f_giardino_condominiale"> 🌳 Giardino condominiale</label>
+                </div>
+                <div class="form-grid" style="margin-top:12px">
+                  <div class="form-group">
+                    <label>N° Camere</label>
+                    <input type="number" id="f_camere" min="0" placeholder="es. 3">
+                  </div>
+                  <div class="form-group">
+                    <label>N° Bagni</label>
+                    <input type="number" id="f_bagni_totali" min="0" placeholder="es. 2">
+                  </div>
+                  <div class="form-group">
+                    <label>N° Terrazzi</label>
+                    <input type="number" id="f_terrazzi_num" min="0" placeholder="es. 1">
+                  </div>
+                  <div class="form-group">
+                    <label>N° Ripostigli</label>
+                    <input type="number" id="f_ripostigli" min="0" placeholder="es. 1">
+                  </div>
+                  <div class="form-group">
+                    <label>N° Garage</label>
+                    <input type="number" id="f_garage_num" min="0" placeholder="es. 1">
+                  </div>
+                  <div class="form-group">
+                    <label>N° Garage Doppio</label>
+                    <input type="number" id="f_garage_doppio" min="0" placeholder="es. 0">
+                  </div>
+                  <div class="form-group">
+                    <label>N° Posto Auto</label>
+                    <input type="number" id="f_posto_auto" min="0" placeholder="es. 0">
+                  </div>
+                  <div class="form-group">
+                    <label>MQ Giardino</label>
+                    <input type="number" id="f_mq_giardino" min="0" placeholder="es. 200">
+                  </div>
+                  <div class="form-group">
+                    <label>MQ Superficie Lotto</label>
+                    <input type="number" id="f_mq_lotto" min="0" placeholder="es. 500">
+                  </div>
+                  <div class="form-group">
+                    <label>Esposizione</label>
+                    <select id="f_esposizione">
+                      <option value="">Non specificata</option>
+                      <option value="N">Nord</option>
+                      <option value="S">Sud</option>
+                      <option value="E">Est</option>
+                      <option value="O">Ovest</option>
+                      <option value="NE">Nord-Est</option>
+                      <option value="NO">Nord-Ovest</option>
+                      <option value="SE">Sud-Est</option>
+                      <option value="SO">Sud-Ovest</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- ═══ LIVELLI ═══ -->
+                <div class="section-divider">📐 Livelli</div>
+                <div class="checks-grid">
+                  <label class="check-item"><input type="checkbox" id="f_piano_interrato"> Piano Interrato</label>
+                  <label class="check-item"><input type="checkbox" id="f_piano_terra"> Piano Terra</label>
+                  <label class="check-item"><input type="checkbox" id="f_primo_piano"> Primo Piano</label>
+                </div>
+
+                <!-- ═══ COMFORT ═══ -->
+                <div class="section-divider">✨ Comfort</div>
+                <div class="checks-grid">
+                  <label class="check-item"><input type="checkbox" id="f_garage"> 🚗 Garage</label>
+                  <label class="check-item"><input type="checkbox" id="f_giardino"> 🌿 Giardino</label>
+                  <label class="check-item"><input type="checkbox" id="f_terrazzo"> ☀️ Terrazzo/Balcone</label>
+                  <label class="check-item"><input type="checkbox" id="f_ascensore"> 🛗 Ascensore</label>
+                  <label class="check-item"><input type="checkbox" id="f_piscina"> 🏊 Piscina</label>
+                  <label class="check-item"><input type="checkbox" id="f_arredato"> 🛋️ Arredato</label>
+                  <label class="check-item"><input type="checkbox" id="f_ingresso_indipendente"> 🚪 Ingresso Indipendente</label>
+                  <label class="check-item"><input type="checkbox" id="f_canna_fumaria"> 🔥 Canna Fumaria</label>
+                  <label class="check-item"><input type="checkbox" id="f_animali_ammessi"> 🐾 Animali Ammessi</label>
+                  <label class="check-item"><input type="checkbox" id="f_annuncio_prestigio"> ⭐ Annuncio Prestigio</label>
+                  <label class="check-item"><input type="checkbox" id="f_chiavi_agenzia"> 🔑 Chiavi in Agenzia</label>
+                  <label class="check-item"><input type="checkbox" id="f_immobile_garantito"> ✅ Immobile Garantito</label>
+                  <label class="check-item"><input type="checkbox" id="f_annuncio_autonomo"> 📢 Annuncio Autonomo</label>
+                  <label class="check-item"><input type="checkbox" id="f_portineria"> 👮 Portineria</label>
+                  <label class="check-item"><input type="checkbox" id="f_posto_spiaggia"> 🏖️ Posto Spiaggia</label>
+                  <label class="check-item"><input type="checkbox" id="f_accesso_disabili"> ♿ Accesso Disabili</label>
+                  <label class="check-item"><input type="checkbox" id="f_area_fitness"> 🏋️ Area Fitness</label>
+                </div>
+                <div class="form-grid" style="margin-top:12px">
+                  <div class="form-group">
+                    <label>N° Accessi Carrai</label>
+                    <input type="number" id="f_num_accessi_carrai" min="0" placeholder="es. 1">
+                  </div>
+                  <div class="form-group">
+                    <label>N° Portoni</label>
+                    <input type="number" id="f_num_portoni" min="0" placeholder="es. 1">
+                  </div>
+                  <div class="form-group">
+                    <label>N° Chiavi</label>
+                    <input type="number" id="f_numero_chiavi" min="0" placeholder="es. 2">
+                  </div>
+                  <div class="form-group">
+                    <label>Unità Abitative</label>
+                    <input type="number" id="f_unita_abitative" min="1" placeholder="es. 1">
+                  </div>
+                  <div class="form-group">
+                    <label>Impianto Elettrico</label>
+                    <select id="f_impianto_elettrico">
+                      <option value="">Non specificato</option>
+                      <option value="a norma">A Norma</option>
+                      <option value="da adeguare">Da Adeguare</option>
+                      <option value="non presente">Non Presente</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Panorama</label>
+                    <select id="f_panorama">
+                      <option value="">Non specificato</option>
+                      <option value="vista aperta">Vista Aperta</option>
+                      <option value="vista mare">Vista Mare</option>
+                      <option value="vista monti">Vista Monti</option>
+                      <option value="vista citta">Vista Città</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Consegna</label>
+                    <select id="f_consegna">
+                      <option value="">Non specificata</option>
+                      <option value="LIBERA">Libera</option>
+                      <option value="OCCUPATA">Occupata</option>
+                      <option value="DA DEFINIRE">Da Definire</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Spese Condominio (€/mese)</label>
+                    <input type="number" id="f_spese_condominio" min="0" placeholder="es. 80">
+                  </div>
+                  <div class="form-group">
+                    <label>Connettività</label>
+                    <select id="f_connettivita">
+                      <option value="">Non specificata</option>
+                      <option value="nessuna">Nessuna</option>
+                      <option value="adsl">ADSL</option>
+                      <option value="fibra">Fibra Ottica</option>
+                      <option value="fibra_1gb">Fibra 1GB</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Distanza Mare/Lago (mt)</label>
+                    <input type="number" id="f_distanza_mare" min="0" placeholder="es. 500">
+                  </div>
+                  <div class="form-group">
+                    <label>Totale Piani Edificio</label>
+                    <input type="number" id="f_totale_piani" min="1" placeholder="es. 3">
+                  </div>
+                  <div class="form-group">
+                    <label>Piano Numero</label>
+                    <select id="f_piano_numero">
+                      <option value="">----</option>
+                      <option value="-1">Interrato</option>
+                      <option value="0">Piano Terra</option>
+                      <option value="1">1°</option><option value="2">2°</option>
+                      <option value="3">3°</option><option value="4">4°</option>
+                      <option value="5">5°+</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Tipo Contratto</label>
+                    <select id="f_tipo_contratto">
+                      <option value="">Non specificato</option>
+                      <option value="intera proprieta">Intera Proprietà</option>
+                      <option value="nuda proprieta">Nuda Proprietà</option>
+                      <option value="usufrutto">Usufrutto</option>
+                      <option value="affitto residenziale">Affitto Residenziale</option>
+                      <option value="affitto commerciale">Affitto Commerciale</option>
+                      <option value="affitto a riscatto">Affitto a Riscatto</option>
+                      <option value="locazione transitoria">Locazione Transitoria</option>
+                      <option value="comodato d'uso">Comodato d'Uso</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Stato al Rogito</label>
+                    <select id="f_stato_rogito">
+                      <option value="">Non specificato</option>
+                      <option value="libero">Libero</option>
+                      <option value="occupato">Occupato</option>
+                      <option value="da definire">Da Definire</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- ═══ RISCALDAMENTO & ENERGIA ═══ -->
+                <div class="section-divider">🔥 Riscaldamento & Energia</div>
+                <div class="checks-grid">
+                  <label class="check-item"><input type="checkbox" id="f_riscaldamento_autonomo"> Autonomo</label>
+                  <label class="check-item"><input type="checkbox" id="f_riscaldamento_centralizzato"> Centralizzato</label>
+                  <label class="check-item"><input type="checkbox" id="f_riscaldamento_semi_autonomo"> Semi-Autonomo</label>
+                  <label class="check-item"><input type="checkbox" id="f_aria_condizionata"> ❄️ Aria Condizionata</label>
+                  <label class="check-item"><input type="checkbox" id="f_caldaia_condensazione"> Caldaia Condensazione</label>
+                  <label class="check-item"><input type="checkbox" id="f_camino"> 🔥 Camino</label>
+                  <label class="check-item"><input type="checkbox" id="f_riscaldamento_pavimento"> Riscald. a Pavimento</label>
+                  <label class="check-item"><input type="checkbox" id="f_raffreddamento_pavimento"> Raffredd. a Pavimento</label>
+                  <label class="check-item"><input type="checkbox" id="f_termopompa"> Termopompa</label>
+                  <label class="check-item"><input type="checkbox" id="f_predisposizione_aria"> Predisposizione Aria Cond.</label>
+                  <label class="check-item"><input type="checkbox" id="f_contacolori"> Contacolori</label>
+                  <label class="check-item"><input type="checkbox" id="f_pannelli_fotovoltaici"> ☀️ Pannelli Fotovoltaici</label>
+                  <label class="check-item"><input type="checkbox" id="f_pannelli_solari"> 🌞 Pannelli Solari</label>
+                  <label class="check-item"><input type="checkbox" id="f_impianto_geotermico"> Geotermico</label>
+                </div>
+
+                <!-- ═══ SICUREZZA & TECNOLOGIA ═══ -->
+                <div class="section-divider">🔐 Sicurezza & Tecnologia</div>
+                <div class="checks-grid">
+                  <label class="check-item"><input type="checkbox" id="f_allarme"> 🚨 Allarme</label>
+                  <label class="check-item"><input type="checkbox" id="f_predisposizione_allarme"> Predisposizione Allarme</label>
+                  <label class="check-item"><input type="checkbox" id="f_domotica"> 🏠 Domotica</label>
+                  <label class="check-item"><input type="checkbox" id="f_porta_blindata"> 🔐 Porta Blindata</label>
+                  <label class="check-item"><input type="checkbox" id="f_tapparelle_motorizzate"> Tapparelle Motorizzate</label>
+                  <label class="check-item"><input type="checkbox" id="f_tende_sole"> Tende da Sole</label>
+                  <label class="check-item"><input type="checkbox" id="f_zanzariere"> Zanzariere</label>
+                  <label class="check-item"><input type="checkbox" id="f_cassaforte"> 🔒 Cassaforte</label>
+                </div>
+
+                <!-- ═══ STATO IMMOBILE ═══ -->
+                <div class="section-divider">🏗️ Stato Immobile</div>
+                <div class="checks-grid">
+                  <label class="check-item"><input type="checkbox" id="f_nuovo_costruzione"> 🆕 Nuovo/In Costruzione</label>
+                  <label class="check-item"><input type="checkbox" id="f_grezzo"> Grezzo</label>
+                  <label class="check-item"><input type="checkbox" id="f_cartello"> 🪧 Cartello Esposto</label>
+                  <label class="check-item"><input type="checkbox" id="f_riservato_residenti"> Riservato Residenti</label>
+                </div>
+                <div class="form-grid" style="margin-top:12px">
+                  <div class="form-group">
+                    <label>Stato Manutenzione</label>
+                    <select id="f_stato_manutenzione">
+                      <option value="">Non specificato</option>
+                      <option value="ottimo">Ottimo</option>
+                      <option value="buono">Buono</option>
+                      <option value="discreto">Discreto</option>
+                      <option value="da ristrutturare">Da Ristrutturare</option>
+                      <option value="ristrutturato">Ristrutturato</option>
+                      <option value="nuovo">Nuovo</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- ═══ CATASTO ═══ -->
+                <div class="section-divider">
+                  📋 Dati Catastali
+                  <span style="background:#e74c3c;color:white;font-size:0.65rem;padding:2px 8px;border-radius:4px;margin-left:8px">🔒 SOLO AGENZIA</span>
+                </div>
+                <div style="background:#fff8f8;border:1px solid #fcc;border-radius:8px;padding:12px;margin-bottom:12px;font-size:0.78rem;color:#c0392b">
+                  ⚠️ Tutti i dati catastali e i relativi PDF sono <strong>riservati</strong> — non visibili agli utenti pubblici
+                </div>
+
+                <!-- Totali -->
+                <div class="form-grid" style="margin-bottom:16px">
+                  <div class="form-group">
+                    <label>Rendita Catastale Totale (€)</label>
+                    <input type="number" id="f_rendita_catastale" step="0.01" placeholder="es. 1638.98">
+                  </div>
+                  <div class="form-group">
+                    <label>Valore Catastale Totale (€)</label>
+                    <input type="number" id="f_valore_catastale" step="0.01" placeholder="es. 189302.19">
+                  </div>
+                  <div class="form-group">
+                    <label>Prezzo Reale (€) 🔒</label>
+                    <input type="number" id="f_prezzo_reale" placeholder="es. 380000">
+                  </div>
+                </div>
+
+                <!-- Unità catastali multiple -->
+                <div style="margin-bottom:8px;display:flex;align-items:center;justify-content:space-between">
+                  <label style="font-size:0.82rem;font-weight:600;color:var(--testo)">Unità Catastali</label>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="addUnitaCatastale()">+ Aggiungi Unità</button>
+                </div>
+                <div id="unitaCatastaliList"></div>
+
+                <!-- Upload schede catastali PDF - RISERVATO -->
+                <div style="margin-top:16px">
+                  <label style="font-size:0.82rem;font-weight:600;color:var(--testo);margin-bottom:6px;display:block">
+                    📄 Schede Catastali PDF
+                    <span style="background:#e74c3c;color:white;font-size:0.6rem;padding:1px 6px;border-radius:3px;margin-left:6px">🔒 RISERVATO</span>
+                  </label>
+                  <div class="upload-zone" id="dropZoneCatasto" onclick="document.getElementById('inputCatasto').click()" ondragover="onDragOver(event)" ondragleave="onDragLeave(event,'dropZoneCatasto')" ondrop="onDrop(event,'catasto')">
+                    <div class="upload-icon">📋</div>
+                    <div class="upload-label">Trascina le schede catastali</div>
+                    <div class="upload-hint">PDF · max 20MB per file — visibili solo all'agenzia</div>
+                    <input type="file" id="inputCatasto" multiple accept=".pdf,.doc,.docx" style="display:none" onchange="handleFiles(this.files,'catasto')">
+                  </div>
+                  <div class="upload-progress" id="progressCatasto" style="display:none">
+                    <div class="progress-bar"><div class="progress-fill" id="progressCatastoFill"></div></div>
+                    <span id="progressCatastoText">Caricamento...</span>
+                  </div>
+                  <div id="catastoPdfList"></div>
+                </div>
+
+                <!-- ═══ FOTO ═══ -->
+                <div class="section-divider">📸 Foto Immobile</div>
+                <div class="form-group form-full">
+                  <div class="upload-zone" id="dropZoneFoto" onclick="document.getElementById('inputFoto').click()" ondragover="onDragOver(event)" ondragleave="onDragLeave(event,'dropZoneFoto')" ondrop="onDrop(event,'foto')">
+                    <div class="upload-icon">📸</div>
+                    <div class="upload-label">Clicca o trascina qui le foto</div>
+                    <div class="upload-hint">JPG · PNG · WEBP · HEIC — max 10MB per foto</div>
+                    <input type="file" id="inputFoto" multiple accept="image/*,.heic" style="display:none" onchange="handleFiles(this.files,'foto')">
+                  </div>
+                  <div class="upload-progress" id="progressFoto" style="display:none">
+                    <div class="progress-bar"><div class="progress-fill" id="progressFotoFill"></div></div>
+                    <span id="progressFotoText">Caricamento...</span>
+                  </div>
+                  <div id="fotoList" style="width:100%"></div>
+                  <div style="margin-top:8px;padding-top:8px;border-top:1px dashed var(--caffe3)">
+                    <label style="font-size:0.75rem;color:var(--caffe2)">oppure aggiungi URL diretto:</label>
+                    <div class="url-input-row" style="margin-top:4px">
+                      <input type="url" id="fotoUrlInput" placeholder="https://... (URL immagine)">
+                      <button type="button" class="btn btn-secondary btn-sm" onclick="addFotoUrl()">+ URL</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ PLANIMETRIE ═══ -->
+                <div class="section-divider">📐 Planimetrie</div>
+                <div class="form-group form-full">
+                  <div class="upload-zone" id="dropZonePlan" onclick="document.getElementById('inputPlan').click()" ondragover="onDragOver(event)" ondragleave="onDragLeave(event,'dropZonePlan')" ondrop="onDrop(event,'planimetrie')">
+                    <div class="upload-icon">📐</div>
+                    <div class="upload-label">Clicca o trascina le planimetrie</div>
+                    <div class="upload-hint">JPG · PNG · PDF — max 10MB per file</div>
+                    <input type="file" id="inputPlan" multiple accept="image/*,.pdf" style="display:none" onchange="handleFiles(this.files,'planimetrie')">
+                  </div>
+                  <div class="upload-progress" id="progressPlan" style="display:none">
+                    <div class="progress-bar"><div class="progress-fill" id="progressPlanFill"></div></div>
+                    <span id="progressPlanText">Caricamento...</span>
+                  </div>
+                  <div id="planimetrieList"></div>
+                </div>
+
+                <!-- ═══ DOCUMENTI PDF ═══ -->
+                <div class="section-divider">
+                  📄 Documenti (PDF · Word · DXF)
+                  <span style="background:#e74c3c;color:white;font-size:0.65rem;padding:2px 8px;border-radius:4px;margin-left:8px">🔒 RISERVATO AGENZIA</span>
+                </div>
+                <div style="background:#fff8f8;border:1px solid #fcc;border-radius:8px;padding:10px 14px;margin-bottom:10px;font-size:0.78rem;color:#c0392b">
+                  ⚠️ I documenti caricati sono <strong>visibili solo all'agenzia</strong> — non accessibili dagli utenti pubblici
+                </div>
+                <div class="form-group form-full">
+                  <div class="upload-zone" id="dropZoneDoc" onclick="document.getElementById('inputDoc').click()" ondragover="onDragOver(event)" ondragleave="onDragLeave(event,'dropZoneDoc')" ondrop="onDrop(event,'documenti')">
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-label">Clicca o trascina i documenti</div>
+                    <div class="upload-hint">PDF · DOC · DOCX · DXF · XLS — max 20MB per file</div>
+                    <input type="file" id="inputDoc" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.dxf,.dwg,.zip,.ppt,.pptx" style="display:none" onchange="handleFiles(this.files,'documenti')">
+                  </div>
+                  <div class="upload-progress" id="progressDoc" style="display:none">
+                    <div class="progress-bar"><div class="progress-fill" id="progressDocFill"></div></div>
+                    <span id="progressDocText">Caricamento...</span>
+                  </div>
+                  <div id="documentiList"></div>
+                </div>
+
+                <!-- ═══ VIDEO & VIRTUAL TOUR ═══ -->
+                <div class="section-divider">🎬 Video & Virtual Tour</div>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label>YouTube Video ID</label>
+                    <input type="text" id="f_youtube_id" placeholder="es. H93UW4SX8zQ">
+                    <small style="color:var(--caffe2);font-size:0.72rem">Dall'URL youtube.com/watch?v=<strong>QUESTO</strong></small>
+                  </div>
+                  <div class="form-group form-full">
+                    <label>🌐 Virtual Tour URL (Idealista, Kuula, Matterport...)</label>
+                    <input type="url" id="f_virtual_tour" placeholder="es. https://www.idealista.it/immobile/33318540/virtual-tour/1/">
+                    <small style="color:var(--caffe2);font-size:0.72rem">
+                      Incolla l'URL del virtual tour da Idealista → verrà mostrato nella scheda immobile in iframe a tutto schermo.<br>
+                      Es: <strong>https://www.idealista.it/immobile/XXXXXXX/virtual-tour/1/</strong>
+                    </small>
+                  </div>
+                </div>
+
+                <!-- ═══ VIRTUAL TOUR 360° PANNELLUM ═══ -->
+                <div class="section-divider">🌐 Virtual Tour 360° (Pannellum)</div>
+                <div class="form-group form-full">
+                  <label style="margin-bottom:8px;display:block">Stanze del Tour — aggiungi foto 360° equirettangolari per ogni stanza</label>
+                  <div id="vtScenesList"></div>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="addVtScene()" style="margin-top:8px">
+                    + Aggiungi Stanza 360°
+                  </button>
+                  <small style="color:var(--caffe2);font-size:0.72rem;display:block;margin-top:6px">
+                    ⚠️ Usa foto 360° equirettangolari (2:1 ratio). Carica su ImgBB o Google Drive e incolla l'URL diretto.
+                  </small>
+                </div>
+
+                <!-- ═══ PUBBLICAZIONE ═══ -->
+                <div class="section-divider">📢 Stato Pubblicazione</div>
+                <div class="checks-grid">
+                  <label class="check-item"><input type="checkbox" id="f_attivo" checked> ✅ Attivo (visibile sul sito)</label>
+                  <label class="check-item"><input type="checkbox" id="f_in_evidenza"> ⭐ In Evidenza (homepage)</label>
+                  <label class="check-item"><input type="checkbox" id="f_venduto"> 🔴 Venduto</label>
+                  <label class="check-item"><input type="checkbox" id="f_affittato"> 🔴 Affittato</label>
+                </div>
+
+                <!-- ═══ NOTE INTERNE ═══ -->
+                <div class="section-divider">📝 Note Interne</div>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label>ID Idealista</label>
+                    <input type="text" id="f_id_idealista" placeholder="ID annuncio su Idealista">
+                  </div>
+                  <div class="form-group form-full">
+                    <label>Note Interne (non visibili sul sito)</label>
+                    <textarea id="f_note_interne" placeholder="Note private, appunti, promemoria, storia del cliente..."></textarea>
+                  </div>
+                </div>
+
+              </div><!-- /form-grid -->
+
+              <div style="display:flex;gap:12px;margin-top:24px;justify-content:flex-end;">
+                <button type="button" class="btn btn-secondary" onclick="resetForm()">Annulla</button>
+                <button type="submit" class="btn btn-primary" id="btnSalva">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                  Salva Immobile
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SEZIONE RICHIESTE ═══ -->
+      <div class="section" id="sec-richieste">
+        <div class="table-wrap" style="padding:24px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;">Richieste Ricevute</h3>
+            <button class="btn btn-secondary btn-sm" onclick="loadRichieste()">↺ Aggiorna</button>
+          </div>
+          <div class="filter-bar">
+            <select id="filtroRichiesteProvenienza" onchange="loadRichieste()">
+              <option value="">Tutte le fonti</option>
+              <option value="chatbot">Chatbot</option>
+              <option value="form">Form Contatto</option>
+              <option value="email">Email</option>
+            </select>
+            <select id="filtroRichiesteLetto" onchange="loadRichieste()">
+              <option value="">Tutte</option>
+              <option value="false">Non lette</option>
+              <option value="true">Lette</option>
+            </select>
+          </div>
+          <div id="richiesteList">
+            <div class="loading"><div class="spinner"></div> Caricamento richieste...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SEZIONE IMPOSTAZIONI ═══ -->
+      <div class="section" id="sec-impostazioni">
+        <div class="table-wrap" style="padding:28px;max-width:600px">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:20px;">Impostazioni</h3>
+          <div class="form-group" style="margin-bottom:16px">
+            <label>Supabase URL</label>
+            <input type="text" value="https://qwkwkemuabfwvwuqrxlu.supabase.co" readonly>
+          </div>
+          <div class="form-group" style="margin-bottom:16px">
+            <label>Progetto</label>
+            <input type="text" value="righetto-immobiliare" readonly>
+          </div>
+          <div class="form-group" style="margin-bottom:24px">
+            <label>Stato Connessione</label>
+            <input type="text" id="connStatus" value="Verifica in corso..." readonly>
+          </div>
+          <div style="display:flex;gap:12px">
+            <button class="btn btn-secondary" onclick="testConn()">Test Connessione</button>
+            <a href="https://supabase.com/dashboard/project/qwkwkemuabfwvwuqrxlu" target="_blank" class="btn btn-primary">Apri Supabase</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </main>
+</div><!-- /appWrapper -->
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// ══════════════════════════════════════
+// CONFIG
+// ══════════════════════════════════════
+const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
+const ADMIN_PASSWORD = 'Righetto2024!';
+const URL_KEY = 'RIG2024';
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let currentFotos = [];
+let currentPlanimetrie = [];
+let currentDocumenti = [];
+let currentVtScenes = [];
+let allImmobili = [];
+
+// ══════════════════════════════════════
+// LOGIN
+// ══════════════════════════════════════
+function checkAuth() {
+  const params = new URLSearchParams(window.location.search);
+  const urlKey = params.get('key');
+  const session = sessionStorage.getItem('rig_admin');
+
+  if (urlKey === URL_KEY || session === 'ok') {
+    sessionStorage.setItem('rig_admin', 'ok');
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('appWrapper').style.display = 'flex';
+    init();
+  }
+}
+
+function doLogin() {
+  const pass = document.getElementById('loginPass').value;
+  if (pass === ADMIN_PASSWORD) {
+    sessionStorage.setItem('rig_admin', 'ok');
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('appWrapper').style.display = 'flex';
+    init();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+    document.getElementById('loginPass').style.borderColor = 'var(--rosso)';
+  }
+}
+
+document.getElementById('loginPass').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+
+function doLogout() {
+  sessionStorage.removeItem('rig_admin');
+  location.reload();
+}
+
+// ══════════════════════════════════════
+// INIT
+// ══════════════════════════════════════
+async function init() {
+  await loadImmobili();
+  await loadRichiesteCount();
+}
+
+// ══════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('sec-' + name).classList.add('active');
+  event.currentTarget.classList.add('active');
+
+  const titles = {
+    immobili: 'Gestione Immobili',
+    nuovo: 'Nuovo Immobile',
+    richieste: 'Richieste Clienti',
+    impostazioni: 'Impostazioni'
+  };
+  document.getElementById('topbarTitle').textContent = titles[name] || name;
+
+  if (name === 'richieste') loadRichieste();
+  if (name === 'impostazioni') testConn();
+}
+
+// ══════════════════════════════════════
+// LOAD IMMOBILI
+// ══════════════════════════════════════
+async function loadImmobili() {
+  const wrap = document.getElementById('immobiliTableWrap');
+  wrap.innerHTML = '<div class="loading"><div class="spinner"></div> Caricamento...</div>';
+
+  const tipo = document.getElementById('filtroTipo').value;
+  let query = sb.from('immobili').select('*').order('created_at', { ascending: false });
+  if (tipo) query = query.eq('tipo_operazione', tipo);
+
+  const { data, error } = await query;
+  if (error) {
+    wrap.innerHTML = `<div class="empty-state"><h3>Errore caricamento</h3><p style="margin-top:8px;font-size:0.8rem;color:var(--rosso)">${error.message}</p></div>`;
+    return;
+  }
+
+  allImmobili = data || [];
+  updateStats(allImmobili);
+  renderTable(allImmobili);
+}
+
+function updateStats(data) {
+  document.getElementById('statTot').textContent = data.length;
+  document.getElementById('statVendita').textContent = data.filter(i => i.tipo_operazione === 'vendita' && !i.venduto).length;
+  document.getElementById('statAffitto').textContent = data.filter(i => i.tipo_operazione === 'affitto' && !i.affittato).length;
+  document.getElementById('statVenduti').textContent = data.filter(i => i.venduto || i.affittato).length;
+}
+
+function renderTable(data) {
+  const wrap = document.getElementById('immobiliTableWrap');
+  if (!data.length) {
+    wrap.innerHTML = `<div class="empty-state">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      <h3>Nessun immobile trovato</h3>
+      <p style="margin-top:8px;font-size:0.82rem">Aggiungi il primo immobile con il pulsante "Nuovo"</p>
+    </div>`;
+    return;
+  }
+
+  const rows = data.map(i => {
+    const foto = Array.isArray(i.foto) && i.foto.length > 0 ? i.foto[0] : null;
+    const thumb = foto
+      ? `<img src="${foto}" class="prop-thumb" onerror="this.style.display='none'">`
+      : `<div class="prop-thumb-placeholder">📷</div>`;
+
+    const stato = i.venduto ? `<span class="badge badge-rosso">Venduto</span>`
+      : i.affittato ? `<span class="badge badge-rosso">Affittato</span>`
+      : i.attivo ? `<span class="badge badge-verde">Attivo</span>`
+      : `<span class="badge badge-grigio">Disattivo</span>`;
+
+    const tipo = i.tipo_operazione === 'vendita' ? `<span class="badge badge-blu">Vendita</span>`
+      : i.tipo_operazione === 'affitto' ? `<span class="badge badge-oro">Affitto</span>`
+      : `<span class="badge badge-grigio">Asta</span>`;
+
+    const evidenza = i.in_evidenza ? '⭐' : '';
+    const prezzo = i.prezzo ? '€ ' + Number(i.prezzo).toLocaleString('it-IT') : '—';
+    const mq = i.superficie ? i.superficie + ' mq' : '—';
+
+    return `<tr>
+      <td>${thumb}</td>
+      <td>
+        <div style="font-weight:600;font-size:0.85rem">${evidenza} ${i.titolo || '—'}</div>
+        <div style="color:var(--caffe2);font-size:0.75rem">${i.codice || ''} · ${i.comune || 'Padova'}</div>
+      </td>
+      <td>${tipo}</td>
+      <td style="font-weight:600">${prezzo}</td>
+      <td>${mq}</td>
+      <td>${i.locali || '—'}</td>
+      <td>${stato}</td>
+      <td>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-secondary btn-sm" onclick="editImmobile('${i.id}')">✏️</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')">🗑️</button>
+          <button class="btn btn-sm" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="Toggle evidenza" style="background:var(--sfondo)">⭐</button>
+          <button class="btn btn-sm" onclick="toggleAttivo('${i.id}',${!i.attivo})" title="Toggle attivo" style="background:var(--sfondo)">${i.attivo ? '👁️' : '🚫'}</button>
+          <a href="immobile.html?id=${i.id}" target="_blank" class="btn btn-sm" title="Anteprima scheda" style="background:#e8f5e9;color:#27ae60;text-decoration:none">🔍</a>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+
+  wrap.innerHTML = `<table>
+    <thead><tr>
+      <th>Foto</th>
+      <th>Immobile</th>
+      <th>Tipo</th>
+      <th>Prezzo</th>
+      <th>Superficie</th>
+      <th>Locali</th>
+      <th>Stato</th>
+      <th>Azioni</th>
+    </tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+}
+
+function filterTable() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const filtered = allImmobili.filter(i =>
+    (i.titolo || '').toLowerCase().includes(q) ||
+    (i.codice || '').toLowerCase().includes(q) ||
+    (i.comune || '').toLowerCase().includes(q) ||
+    (i.indirizzo || '').toLowerCase().includes(q)
+  );
+  renderTable(filtered);
+}
+
+// ══════════════════════════════════════
+// FORM / SAVE
+// ══════════════════════════════════════
+function resetForm() {
+  document.getElementById('immobileForm').reset();
+  document.getElementById('editId').value = '';
+  document.getElementById('formTitle').textContent = 'Nuovo Immobile';
+  document.getElementById('f_attivo').checked = true;
+  currentFotos = []; currentPlanimetrie = []; currentDocumenti = []; currentVtScenes = [];
+  renderFotos(); renderPlanimetrie(); renderDocumenti(); renderVtScenes();
+  showSection('nuovo');
+}
+
+function editImmobile(id) {
+  const imm = allImmobili.find(x => String(x.id) === String(id));
+  if (!imm) { toast('Immobile non trovato', 'error'); return; }
+  document.getElementById('editId').value = imm.id;
+  document.getElementById('formTitle').textContent = 'Modifica: ' + imm.titolo;
+
+  const fields = ['codice','titolo','tipo_operazione','categoria','tipologia','prezzo',
+    'comune','indirizzo','lat','lng','superficie','locali','bagni','piano',
+    'anno_costruzione','stato','classe_energetica','youtube_id','virtual_tour',
+    'id_idealista','note_interne',
+    'camere','bagni_totali','terrazzi_num','ripostigli','garage_num','garage_doppio',
+    'posto_auto','mq_giardino','mq_lotto','esposizione',
+    'impianto_elettrico','panorama','consegna','spese_condominio',
+    'rendita_catastale','valore_catastale','prezzo_reale','ipe_kwh','ipe_kwh'];
+
+  fields.forEach(f => {
+    const el = document.getElementById('f_' + f);
+    if (el) el.value = imm[f] !== null && imm[f] !== undefined ? imm[f] : '';
+  });
+
+  const bools = ['garage','giardino','terrazzo','cantina','ascensore','piscina','arredato',
+    'attivo','in_evidenza','venduto','affittato',
+    'soggiorno','cucina','mansarda','taverna','soffitta','lavanderia','porticato','soppalco',
+    'giardino_condominiale','piano_interrato','piano_terra','primo_piano',
+    'ingresso_indipendente','canna_fumaria','animali_ammessi','annuncio_prestigio',
+    'chiavi_agenzia','immobile_garantito','riscaldamento_autonomo',
+    'riscaldamento_centralizzato','aria_condizionata'];
+  bools.forEach(f => {
+    const el = document.getElementById('f_' + f);
+    if (el) el.checked = !!imm[f];
+  });
+
+  currentFotos = Array.isArray(imm.foto) ? [...imm.foto] : [];
+  currentUnitaCatastali = Array.isArray(imm.unita_catastali) ? [...imm.unita_catastali] : [];
+  currentCatastoPdf = Array.isArray(imm.catasto_pdf) ? [...imm.catasto_pdf] : [];
+  currentPlanimetrie = Array.isArray(imm.planimetrie) ? [...imm.planimetrie] : [];
+  currentDocumenti = Array.isArray(imm.documenti) ? [...imm.documenti] : [];
+  currentVtScenes = Array.isArray(imm.virtual_tour_scenes) ? [...imm.virtual_tour_scenes] : [];
+  renderFotos();
+  renderPlanimetrie();
+  renderDocumenti();
+  renderVtScenes();
+  renderUnitaCatastali();
+  renderCatastoPdf();
+
+  // Switch to form section
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('sec-nuovo').classList.add('active');
+  document.getElementById('topbarTitle').textContent = 'Modifica Immobile';
+  window.scrollTo(0, 0);
+}
+
+async function saveImmobile(e) {
+  e.preventDefault();
+  const btn = document.getElementById('btnSalva');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner" style="width:16px;height:16px;border-width:2px"></div> Salvataggio...';
+
+  const id = document.getElementById('editId').value;
+  const titolo = document.getElementById('f_titolo').value.trim();
+  const slug = titolo.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+  const payload = {
+    codice: document.getElementById('f_codice').value || null,
+    titolo,
+    slug,
+    tipo_operazione: document.getElementById('f_tipo_operazione').value,
+    categoria: document.getElementById('f_categoria').value,
+    tipologia: document.getElementById('f_tipologia').value,
+    prezzo: parseFloat(document.getElementById('f_prezzo').value) || null,
+    comune: document.getElementById('f_comune').value || 'Padova',
+    indirizzo: document.getElementById('f_indirizzo').value || null,
+    lat: parseFloat(document.getElementById('f_lat').value) || null,
+    lng: parseFloat(document.getElementById('f_lng').value) || null,
+    superficie: parseInt(document.getElementById('f_superficie').value) || null,
+    locali: parseInt(document.getElementById('f_locali').value) || null,
+    bagni: parseInt(document.getElementById('f_bagni').value) || null,
+    piano: document.getElementById('f_piano').value || null,
+    anno_costruzione: parseInt(document.getElementById('f_anno_costruzione').value) || null,
+    stato: document.getElementById('f_stato').value || null,
+    classe_energetica: document.getElementById('f_classe_energetica').value || null,
+    ipe_kwh: parseFloat(document.getElementById('f_ipe_kwh')?.value)||null,
+    ipe_kwh: parseFloat(document.getElementById('f_ipe_kwh')?.value)||null,
+    garage: document.getElementById('f_garage').checked,
+    giardino: document.getElementById('f_giardino').checked,
+    terrazzo: document.getElementById('f_terrazzo').checked,
+    cantina: document.getElementById('f_cantina').checked,
+    ascensore: document.getElementById('f_ascensore').checked,
+    piscina: document.getElementById('f_piscina').checked,
+    arredato: document.getElementById('f_arredato').checked,
+    foto: currentFotos,
+    planimetrie: currentPlanimetrie,
+    documenti: currentDocumenti,
+    virtual_tour_scenes: currentVtScenes,
+    youtube_id: document.getElementById('f_youtube_id').value || null,
+    virtual_tour: document.getElementById('f_virtual_tour').value || null,
+    // Ambienti
+    soggiorno: document.getElementById('f_soggiorno').checked,
+    cucina: document.getElementById('f_cucina').checked,
+    camere: parseInt(document.getElementById('f_camere').value)||null,
+    bagni_totali: parseInt(document.getElementById('f_bagni_totali').value)||null,
+    mansarda: document.getElementById('f_mansarda').checked,
+    taverna: document.getElementById('f_taverna').checked,
+    soffitta: document.getElementById('f_soffitta').checked,
+    lavanderia: document.getElementById('f_lavanderia').checked,
+    porticato: document.getElementById('f_porticato').checked,
+    soppalco: document.getElementById('f_soppalco').checked,
+    giardino_condominiale: document.getElementById('f_giardino_condominiale').checked,
+    terrazzi_num: parseInt(document.getElementById('f_terrazzi_num').value)||null,
+    ripostigli: parseInt(document.getElementById('f_ripostigli').value)||null,
+    garage_num: parseInt(document.getElementById('f_garage_num').value)||null,
+    garage_doppio: parseInt(document.getElementById('f_garage_doppio').value)||null,
+    posto_auto: parseInt(document.getElementById('f_posto_auto').value)||null,
+    mq_giardino: parseFloat(document.getElementById('f_mq_giardino').value)||null,
+    mq_lotto: parseFloat(document.getElementById('f_mq_lotto').value)||null,
+    esposizione: document.getElementById('f_esposizione').value||null,
+    // Livelli
+    piano_interrato: document.getElementById('f_piano_interrato').checked,
+    piano_terra: document.getElementById('f_piano_terra').checked,
+    primo_piano: document.getElementById('f_primo_piano').checked,
+    // Comfort
+    garage: document.getElementById('f_garage').checked,
+    giardino: document.getElementById('f_giardino').checked,
+    terrazzo: document.getElementById('f_terrazzo').checked,
+    cantina: document.getElementById('f_cantina').checked,
+    ascensore: document.getElementById('f_ascensore').checked,
+    piscina: document.getElementById('f_piscina').checked,
+    arredato: document.getElementById('f_arredato').checked,
+    ingresso_indipendente: document.getElementById('f_ingresso_indipendente').checked,
+    canna_fumaria: document.getElementById('f_canna_fumaria').checked,
+    animali_ammessi: document.getElementById('f_animali_ammessi').checked,
+    annuncio_prestigio: document.getElementById('f_annuncio_prestigio').checked,
+    chiavi_agenzia: document.getElementById('f_chiavi_agenzia').checked,
+    immobile_garantito: document.getElementById('f_immobile_garantito').checked,
+    num_accessi_carrai: parseInt(document.getElementById('f_num_accessi_carrai').value)||null,
+    num_portoni: parseInt(document.getElementById('f_num_portoni').value)||null,
+    impianto_elettrico: document.getElementById('f_impianto_elettrico').value||null,
+    panorama: document.getElementById('f_panorama').value||null,
+    consegna: document.getElementById('f_consegna').value||null,
+    spese_condominio: parseFloat(document.getElementById('f_spese_condominio').value)||null,
+    // Arredamento
+    arredo: document.getElementById('f_arredo')?.checked||false,
+    cucina_arredata: document.getElementById('f_cucina_arredata')?.checked||false,
+    forno: document.getElementById('f_forno')?.checked||false,
+    frigorifero: document.getElementById('f_frigorifero')?.checked||false,
+    lavastoviglie: document.getElementById('f_lavastoviglie')?.checked||false,
+    lavatrice: document.getElementById('f_lavatrice')?.checked||false,
+    televisione: document.getElementById('f_televisione')?.checked||false,
+    vasca_idromassaggio: document.getElementById('f_vasca_idromassaggio')?.checked||false,
+    // Riscaldamento
+    riscaldamento_autonomo: document.getElementById('f_riscaldamento_autonomo').checked,
+    riscaldamento_centralizzato: document.getElementById('f_riscaldamento_centralizzato').checked,
+    aria_condizionata: document.getElementById('f_aria_condizionata').checked,
+    caldaia_condensazione: document.getElementById('f_caldaia_condensazione')?.checked||false,
+    camino: document.getElementById('f_camino')?.checked||false,
+    riscaldamento_pavimento: document.getElementById('f_riscaldamento_pavimento')?.checked||false,
+    termopompa: document.getElementById('f_termopompa')?.checked||false,
+    pannelli_fotovoltaici: document.getElementById('f_pannelli_fotovoltaici')?.checked||false,
+    pannelli_solari: document.getElementById('f_pannelli_solari')?.checked||false,
+    impianto_geotermico: document.getElementById('f_impianto_geotermico')?.checked||false,
+    // Altri comfort
+    allarme: document.getElementById('f_allarme')?.checked||false,
+    domotica: document.getElementById('f_domotica')?.checked||false,
+    porta_blindata: document.getElementById('f_porta_blindata')?.checked||false,
+    tapparelle_motorizzate: document.getElementById('f_tapparelle_motorizzate')?.checked||false,
+    zanzariere: document.getElementById('f_zanzariere')?.checked||false,
+    accesso_disabili: document.getElementById('f_accesso_disabili')?.checked||false,
+    area_fitness: document.getElementById('f_area_fitness')?.checked||false,
+    portineria: document.getElementById('f_portineria')?.checked||false,
+    cassaforte: document.getElementById('f_cassaforte')?.checked||false,
+    posto_spiaggia: document.getElementById('f_posto_spiaggia')?.checked||false,
+    connettivita: document.getElementById('f_connettivita')?.value||null,
+    numero_chiavi: parseInt(document.getElementById('f_numero_chiavi')?.value)||null,
+    // Catasto
+    unita_catastali: currentUnitaCatastali,
+    catasto_pdf: currentCatastoPdf,
+    rendita_catastale: parseFloat(document.getElementById('f_rendita_catastale').value)||null,
+    valore_catastale: parseFloat(document.getElementById('f_valore_catastale').value)||null,
+    prezzo_reale: parseFloat(document.getElementById('f_prezzo_reale').value)||null,
+    // Pubblicazione
+    attivo: document.getElementById('f_attivo').checked,
+    in_evidenza: document.getElementById('f_in_evidenza').checked,
+    venduto: document.getElementById('f_venduto').checked,
+    affittato: document.getElementById('f_affittato').checked,
+    id_idealista: document.getElementById('f_id_idealista').value || null,
+    note_interne: document.getElementById('f_note_interne').value || null,
+  };
+
+  // Salva con retry: se colonna mancante la rimuove e riprova
+  let error;
+  let attempts = 0;
+  let currentPayload = {...payload};
+  while (attempts < 20) {
+    let res;
+    if (id) {
+      res = await sb.from('immobili').update(currentPayload).eq('id', id);
+    } else {
+      res = await sb.from('immobili').insert(currentPayload);
+    }
+    error = res.error;
+    if (!error) break;
+    // Se errore è "column not found" rimuovi quella colonna e riprova
+    const match = error.message.match(/Could not find the '([^']+)' column/);
+    if (match) {
+      const badCol = match[1];
+      console.warn('Colonna non trovata, rimuovo:', badCol);
+      delete currentPayload[badCol];
+      attempts++;
+    } else {
+      break; // altro tipo di errore, esci
+    }
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '💾 Salva Immobile';
+
+  if (error) {
+    toast('Errore: ' + error.message, 'error');
+  } else {
+    toast(id ? 'Immobile aggiornato!' : 'Immobile creato!', 'success');
+    document.getElementById('editId').value = '';
+    document.getElementById('formTitle').textContent = 'Nuovo Immobile';
+    document.getElementById('immobileForm').reset();
+    document.getElementById('f_attivo').checked = true;
+    currentFotos = []; currentPlanimetrie = []; currentDocumenti = []; currentVtScenes = []; currentUnitaCatastali = []; currentCatastoPdf = [];
+    renderFotos(); renderPlanimetrie(); renderDocumenti(); renderVtScenes(); renderUnitaCatastali(); renderCatastoPdf();
+    await loadImmobili();
+    showSectionById('immobili');
+  }
+}
+
+// ══════════════════════════════════════
+// CRUD HELPERS
+// ══════════════════════════════════════
+async function deleteImmobile(id, titolo) {
+  if (!confirm(`Eliminare definitivamente "${titolo}"?\n\nQuesta azione non è reversibile.`)) return;
+  const { error } = await sb.from('immobili').delete().eq('id', id);
+  if (error) { toast('Errore: ' + error.message, 'error'); return; }
+  toast('Immobile eliminato', 'success');
+  await loadImmobili();
+}
+
+async function toggleEvidenza(id, val) {
+  const { error } = await sb.from('immobili').update({ in_evidenza: val }).eq('id', id);
+  if (!error) { await loadImmobili(); toast(val ? '⭐ In evidenza!' : 'Rimosso da evidenza'); }
+}
+
+async function toggleAttivo(id, val) {
+  const { error } = await sb.from('immobili').update({ attivo: val }).eq('id', id);
+  if (!error) { await loadImmobili(); toast(val ? '✅ Immobile attivato' : '🚫 Immobile disattivato'); }
+}
+
+function showSectionById(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-' + name).classList.add('active');
+}
+
+// ══════════════════════════════════════
+// FOTO MANAGER
+// ══════════════════════════════════════
+// addFoto legacy - see addFotoUrl
+function addFoto() {
+  const url = document.getElementById('fotoUrlInput').value.trim();
+  if (!url) return;
+  currentFotos.push(url);
+  document.getElementById('fotoUrlInput').value = '';
+  renderFotos();
+}
+
+function removeFoto(idx) {
+  currentFotos.splice(idx, 1);
+  renderFotos();
+}
+
+// renderFotos OLD RIMOSSA
+
+// ══════════════════════════════════════
+// RICHIESTE
+// ══════════════════════════════════════
+async function loadRichiesteCount() {
+  const { count } = await sb.from('richieste').select('*', { count: 'exact', head: true }).eq('letto', false);
+  const badge = document.getElementById('badgeRichieste');
+  if (count > 0) {
+    badge.textContent = count;
+    badge.style.display = 'inline-block';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+async function loadRichieste() {
+  const list = document.getElementById('richiesteList');
+  list.innerHTML = '<div class="loading"><div class="spinner"></div> Caricamento...</div>';
+
+  const prov = document.getElementById('filtroRichiesteProvenienza').value;
+  const letto = document.getElementById('filtroRichiesteLetto').value;
+
+  let query = sb.from('richieste').select('*').order('created_at', { ascending: false });
+  if (prov) query = query.eq('provenienza', prov);
+  if (letto !== '') query = query.eq('letto', letto === 'true');
+
+  const { data, error } = await query;
+  if (error) { list.innerHTML = `<p style="color:var(--rosso)">${error.message}</p>`; return; }
+
+  if (!data || !data.length) {
+    list.innerHTML = `<div class="empty-state">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <h3>Nessuna richiesta</h3>
+    </div>`;
+    return;
+  }
+
+  list.innerHTML = data.map(r => {
+    const data_fmt = new Date(r.created_at).toLocaleString('it-IT');
+    const prov_badge = r.provenienza === 'chatbot' ? `<span class="badge badge-blu">🤖 Chatbot</span>`
+      : r.provenienza === 'form' ? `<span class="badge badge-verde">📝 Form</span>`
+      : `<span class="badge badge-grigio">📧 Email</span>`;
+
+    return `<div class="richiesta-card ${r.letto ? '' : 'non-letta'}">
+      <div class="richiesta-info">
+        <h4>${r.nome || 'Anonimo'} ${r.letto ? '' : '🔵'}</h4>
+        <p>📧 ${r.email || '—'} · 📞 ${r.telefono || '—'}</p>
+        ${r.messaggio ? `<p style="margin-top:6px;color:var(--testo)">${r.messaggio}</p>` : ''}
+        ${r.tipo_immobile ? `<p>🏠 Cerca: ${r.tipo_immobile} · Budget: ${r.budget || '—'} · Zona: ${r.zona || '—'}</p>` : ''}
+        <div class="richiesta-meta">${prov_badge} · ${data_fmt}</div>
+      </div>
+      <div class="richiesta-actions">
+        ${!r.letto ? `<button class="btn btn-secondary btn-sm" onclick="segnaLetta('${r.id}')">✓ Segna letta</button>` : ''}
+        <button class="btn btn-danger btn-sm" onclick="deleteRichiesta('${r.id}')">🗑️</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function segnaLetta(id) {
+  await sb.from('richieste').update({ letto: true }).eq('id', id);
+  loadRichieste();
+  loadRichiesteCount();
+}
+
+async function deleteRichiesta(id) {
+  if (!confirm('Eliminare questa richiesta?')) return;
+  await sb.from('richieste').delete().eq('id', id);
+  loadRichieste();
+  loadRichiesteCount();
+}
+
+// ══════════════════════════════════════
+// TEST CONNESSIONE
+// ══════════════════════════════════════
+async function testConn() {
+  const el = document.getElementById('connStatus');
+  el.value = 'Verifica in corso...';
+  const { count, error } = await sb.from('immobili').select('*', { count: 'exact', head: true });
+  if (error) {
+    el.value = '❌ Errore: ' + error.message;
+  } else {
+    el.value = `✅ Connesso — ${count} immobili nel database`;
+  }
+}
+
+// ══════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════
+function toast(msg, type = '') {
+  const c = document.getElementById('toastContainer');
+  const t = document.createElement('div');
+  t.className = 'toast ' + type;
+  t.textContent = msg;
+  c.appendChild(t);
+  setTimeout(() => t.remove(), 3500);
+}
+
+// ══════════════════════════════════════
+// START
+// ══════════════════════════════════════
+
+
+// ══════════════════════════════════════
+// UPLOAD SUPABASE STORAGE
+// ══════════════════════════════════════
+
+function getFileIcon(name) {
+  const ext = name.split('.').pop().toLowerCase();
+  const icons = {pdf:'📄',doc:'📝',docx:'📝',xls:'📊',xlsx:'📊',dxf:'📐',dwg:'📐',zip:'🗜️',ppt:'📋',pptx:'📋'};
+  return icons[ext] || '📎';
+}
+
+function slugify(name) {
+  return name.toLowerCase().replace(/[^a-z0-9.]/g,'-').replace(/-+/g,'-');
+}
+
+function onDragOver(e) {
+  e.preventDefault();
+  e.currentTarget.classList.add('drag-over');
+}
+function onDragLeave(e, id) {
+  document.getElementById(id).classList.remove('drag-over');
+}
+function onDrop(e, bucket) {
+  e.preventDefault();
+  const zoneId = bucket === 'foto' ? 'dropZoneFoto' : bucket === 'planimetrie' ? 'dropZonePlan' : 'dropZoneDoc';
+  document.getElementById(zoneId).classList.remove('drag-over');
+  handleFiles(e.dataTransfer.files, bucket);
+}
+
+async function handleFiles(files, bucket) {
+  const arr = Array.from(files);
+  if (!arr.length) return;
+
+  const progWrap = document.getElementById('progress' + (bucket==='foto'?'Foto':bucket==='planimetrie'?'Plan':'Doc'));
+  const progFill = document.getElementById('progress' + (bucket==='foto'?'Foto':bucket==='planimetrie'?'Plan':'Doc') + 'Fill');
+  const progText = document.getElementById('progress' + (bucket==='foto'?'Foto':bucket==='planimetrie'?'Plan':'Doc') + 'Text');
+
+  progWrap.style.display = 'flex';
+  let done = 0;
+
+  for (const file of arr) {
+    const maxMB = bucket === 'documenti' ? 20 : 10;
+    if (file.size > maxMB * 1024 * 1024) {
+      toast('⚠️ ' + file.name + ' supera ' + maxMB + 'MB', 'error');
+      continue;
+    }
+
+    progText.textContent = 'Caricamento ' + (done+1) + '/' + arr.length + ': ' + file.name;
+    progFill.style.width = Math.round((done / arr.length) * 100) + '%';
+
+    const ts = Date.now();
+    const safeName = ts + '-' + slugify(file.name);
+    const path = safeName;
+
+    const bucketName = bucket === 'foto' ? 'foto-immobili' : bucket === 'catasto' ? 'documenti' : bucket;
+      const { data, error } = await sb.storage.from(bucketName).upload(path, file, {
+      cacheControl: '3600',
+      upsert: false,
+      contentType: file.type
+    });
+
+    if (error) {
+      toast('❌ Errore upload: ' + file.name + ' — ' + error.message, 'error');
+    } else {
+      const { data: urlData } = sb.storage.from(bucketName).getPublicUrl(path);
+      const publicUrl = urlData.publicUrl;
+
+      if (bucket === 'foto') {
+        currentFotos.push(publicUrl);
+        renderFotos();
+      } else if (bucket === 'planimetrie') {
+        currentPlanimetrie.push({ url: publicUrl, nome: file.name });
+        renderPlanimetrie();
+      } else if (bucket === 'catasto') {
+        currentCatastoPdf.push({ url: publicUrl, nome: file.name });
+        renderCatastoPdf();
+      } else {
+        currentDocumenti.push({ url: publicUrl, nome: file.name, tipo: file.name.split('.').pop().toUpperCase() });
+        renderDocumenti();
+      }
+      toast('✅ ' + file.name + ' caricato!', 'success');
+    }
+
+    done++;
+    progFill.style.width = Math.round((done / arr.length) * 100) + '%';
+  }
+
+  progText.textContent = '✅ ' + done + ' file caricati';
+  setTimeout(() => { progWrap.style.display = 'none'; }, 2000);
+}
+
+function addFotoUrl() {
+  const url = document.getElementById('fotoUrlInput').value.trim();
+  if (!url) return;
+  currentFotos.push(url);
+  renderFotos();
+  document.getElementById('fotoUrlInput').value = '';
+}
+
+function renderFotos() {
+  const el = document.getElementById('fotoList');
+  if (!currentFotos.length) { el.innerHTML = '<div style="font-size:0.78rem;color:var(--caffe2);padding:8px">Nessuna foto ancora</div>'; return; }
+  const W = el.offsetWidth || 800;
+  const colW = Math.floor((W - 50) / 6);
+  el.innerHTML = '<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:12px;width:100%">' + currentFotos.map((url, i) => `
+    <div style="height:120px;border-radius:8px;overflow:hidden;background:url('${url}') center/cover no-repeat #ccc;position:relative;border:2px solid #ddd">
+      <button onclick="removeFoto(${i})" style="position:absolute;top:3px;right:3px;background:rgba(220,50,50,0.9);color:#fff;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:11px;line-height:22px;text-align:center;padding:0;z-index:9">✕</button>
+      <span style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,0.6);color:#fff;font-size:9px;padding:1px 4px;border-radius:3px">${i===0?'⭐':i+1}</span>
+    </div>
+  `).join('') + '</div>';
+}
+
+function removeFoto(i) {
+  currentFotos.splice(i, 1);
+  renderFotos();
+}
+
+function renderPlanimetrie() {
+  const el = document.getElementById('planimetrieList');
+  if (!currentPlanimetrie.length) { el.innerHTML = '<div style="font-size:0.78rem;color:var(--caffe2);padding:8px">Nessuna planimetria ancora</div>'; return; }
+  el.innerHTML = '<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:12px;width:100%">' + currentPlanimetrie.map((p, i) => {
+    const isImg = /\.(jpg|jpeg|png|webp|gif)$/i.test(p.url||'');
+    const bg = isImg ? `background:url('${p.url}') center/cover no-repeat #ccc` : 'background:#e8e8e8';
+    return `<div style="height:120px;border-radius:8px;overflow:hidden;${bg};position:relative;border:2px solid #ddd">
+      ${!isImg ? '<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:2rem">📐</div>' : ''}
+      <button onclick="removePlanimetria(${i})" style="position:absolute;top:3px;right:3px;background:rgba(220,50,50,0.9);color:#fff;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:11px;line-height:22px;text-align:center;padding:0;z-index:9">✕</button>
+      <span style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,0.6);color:#fff;font-size:9px;padding:1px 4px;border-radius:3px">${i+1}</span>
+    </div>`;
+  }).join('') + '</div>';
+}
+
+function removePlanimetria(i) {
+  currentPlanimetrie.splice(i, 1);
+  renderPlanimetrie();
+}
+
+function renderDocumenti() {
+  const el = document.getElementById('documentiList');
+  if (!currentDocumenti.length) { el.innerHTML = '<div style="font-size:0.78rem;color:var(--caffe2);padding:8px">Nessun documento ancora</div>'; return; }
+  el.innerHTML = currentDocumenti.map((d, i) => `
+    <div class="doc-item">
+      <span class="doc-icon">${getFileIcon(d.nome)}</span>
+      <div class="doc-info">
+        <div class="doc-name">${d.nome}</div>
+        <div class="doc-meta">${d.tipo || ''}</div>
+      </div>
+      <div class="doc-actions">
+        <a href="${d.url}" target="_blank">👁️ Vedi</a>
+        <button class="doc-del" onclick="removeDocumento(${i})">🗑️</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function removeDocumento(i) {
+  currentDocumenti.splice(i, 1);
+  renderDocumenti();
+}
+
+// VT SCENES
+function addVtScene() {
+  const idx = currentVtScenes.length;
+  currentVtScenes.push({ nome: 'Stanza ' + (idx+1), url: '', thumbnail: '' });
+  renderVtScenes();
+}
+
+function renderVtScenes() {
+  const el = document.getElementById('vtScenesList');
+  if (!currentVtScenes.length) { el.innerHTML = '<div style="font-size:0.78rem;color:var(--caffe2);padding:8px">Nessuna stanza aggiunta</div>'; return; }
+  el.innerHTML = currentVtScenes.map((s, i) => `
+    <div class="vt-scene-card">
+      <div class="vt-scene-header">
+        <div class="vt-scene-num">${i+1}</div>
+        <input class="vt-scene-name" type="text" value="${s.nome}" placeholder="Nome stanza (es. Soggiorno)" onchange="currentVtScenes[${i}].nome=this.value">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="removeVtScene(${i})" style="background:var(--rosso);color:white;border-color:var(--rosso)">✕</button>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input type="url" placeholder="URL foto 360° equirettangolare" value="${s.url}"
+          style="flex:1;padding:8px 10px;border:1.5px solid var(--caffe3);border-radius:6px;font-family:Montserrat,sans-serif;font-size:0.78rem"
+          onchange="currentVtScenes[${i}].url=this.value;updateVtPreview(${i},this.value)">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('inputVt${i}').click()">📤 Carica</button>
+        <input type="file" id="inputVt${i}" accept="image/*" style="display:none" onchange="uploadVtScene(this.files[0],${i})">
+      </div>
+      ${s.url ? `<img src="${s.url}" class="vt-scene-preview" id="vtPrev${i}" onerror="this.style.display='none'" style="display:block">` : `<div id="vtPrev${i}"></div>`}
+    </div>
+  `).join('');
+}
+
+function updateVtPreview(i, url) {
+  const el = document.getElementById('vtPrev' + i);
+  if (!el) return;
+  if (url) { el.outerHTML = `<img src="${url}" class="vt-scene-preview" id="vtPrev${i}" style="display:block">`; }
+}
+
+async function uploadVtScene(file, idx) {
+  if (!file) return;
+  toast('⏳ Caricamento foto 360°...', 'success');
+  const path = Date.now() + '-360-' + slugify(file.name);
+  const { data, error } = await sb.storage.from('foto-immobili').upload(path, file, { cacheControl:'3600', upsert:false });
+  if (error) { toast('❌ Errore: ' + error.message, 'error'); return; }
+  const { data: urlData } = sb.storage.from('foto-immobili').getPublicUrl(path);
+  currentVtScenes[idx].url = urlData.publicUrl;
+  currentVtScenes[idx].thumbnail = urlData.publicUrl;
+  renderVtScenes();
+  toast('✅ Foto 360° caricata!', 'success');
+}
+
+function removeVtScene(i) {
+  currentVtScenes.splice(i, 1);
+  renderVtScenes();
+}
+
+
+
+// ══════════════════════════════════════
+// CODICE RIFERIMENTO AUTO
+// ══════════════════════════════════════
+const PREFISSI = {
+  appartamento: 'APP',
+  villa: 'VIL',
+  villetta: 'VLT',
+  attico: 'ATT',
+  bilocale: 'BIL',
+  trilocale: 'TRI',
+  monolocale: 'MON',
+  ufficio: 'UFF',
+  negozio: 'NEG',
+  capannone: 'CAP',
+  terreno: 'TER',
+  garage: 'GAR',
+  magazzino: 'MAG',
+  rustico: 'RUS',
+  cascina: 'CAS',
+  loft: 'LOF',
+  mansarda: 'MAN',
+};
+
+function getPrefisso() {
+  const tip = document.getElementById('f_tipologia')?.value || '';
+  return PREFISSI[tip] || 'RIG';
+}
+
+async function generaCodice() {
+  const pfx = getPrefisso();
+  // Conta quanti immobili hanno già quel prefisso
+  const { data } = await sb.from('immobili').select('codice').ilike('codice', pfx + '%');
+  const num = (data?.length || 0) + 1;
+  const codice = pfx + String(num).padStart(4, '0');
+  document.getElementById('f_codice').value = codice;
+  document.getElementById('f_codice').style.borderColor = 'var(--verde)';
+  setTimeout(() => document.getElementById('f_codice').style.borderColor = '', 1500);
+}
+
+function suggerisciCodice() {
+  // Solo se campo vuoto (non sovrascrive codici esistenti)
+  const current = document.getElementById('f_codice').value;
+  if (!current) generaCodice();
+}
+
+
+// ══════════════════════════════════════
+// UNITÀ CATASTALI MULTIPLE
+// ══════════════════════════════════════
+let currentUnitaCatastali = [];
+let currentCatastoPdf = [];
+
+function addUnitaCatastale() {
+  currentUnitaCatastali.push({
+    categoria: '', comune_catastale: '', sezione: '', foglio: '',
+    mappale: '', subalterno: '', classe: '',
+    rendita: null, valore_prima: null, valore_seconda: null,
+    descrizione: ''
+  });
+  renderUnitaCatastali();
+}
+
+function removeUnitaCatastale(i) {
+  currentUnitaCatastali.splice(i, 1);
+  renderUnitaCatastali();
+}
+
+function renderUnitaCatastali() {
+  const el = document.getElementById('unitaCatastaliList');
+  if (!currentUnitaCatastali.length) {
+    el.innerHTML = '<div style="font-size:0.78rem;color:var(--caffe2);padding:8px;text-align:center">Nessuna unità — clicca + Aggiungi Unità</div>';
+    return;
+  }
+  el.innerHTML = currentUnitaCatastali.map((u, i) => `
+    <div style="background:white;border:1px solid var(--caffe3);border-radius:10px;padding:16px;margin-bottom:12px;position:relative">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <span style="font-weight:700;font-size:0.85rem;color:var(--nero)">📋 Unità ${i+1}</span>
+        <button type="button" onclick="removeUnitaCatastale(${i})" style="background:var(--rosso);color:white;border:none;border-radius:6px;padding:4px 10px;cursor:pointer;font-size:0.78rem">✕ Rimuovi</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px">
+        <div><label style="font-size:0.7rem;color:var(--caffe2)">Categoria</label>
+          <input type="text" value="${u.categoria}" placeholder="es. A7" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].categoria=this.value"></div>
+        <div><label style="font-size:0.7rem;color:var(--caffe2)">Comune Catastale</label>
+          <input type="text" value="${u.comune_catastale}" placeholder="es. D226" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].comune_catastale=this.value"></div>
+        <div><label style="font-size:0.7rem;color:var(--caffe2)">Sezione</label>
+          <input type="text" value="${u.sezione}" placeholder="es. /" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].sezione=this.value"></div>
+        <div><label style="font-size:0.7rem;color:var(--caffe2)">Foglio</label>
+          <input type="text" value="${u.foglio}" placeholder="es. 11" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].foglio=this.value"></div>
+        <div><label style="font-size:0.7rem;color:var(--caffe2)">Mappale</label>
+          <input type="text" value="${u.mappale}" placeholder="es. 538" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].mappale=this.value"></div>
+        <div><label style="font-size:0.7rem;color:var(--caffe2)">Subalterno</label>
+          <input type="text" value="${u.subalterno}" placeholder="es. 2" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].subalterno=this.value"></div>
+        <div><label style="font-size:0.7rem;color:var(--caffe2)">Classe</label>
+          <input type="text" value="${u.classe}" placeholder="es. 1" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].classe=this.value"></div>
+        <div><label style="font-size:0.7rem;color:var(--caffe2)">Rendita (€)</label>
+          <input type="number" value="${u.rendita||''}" placeholder="es. 1568.74" step="0.01" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].rendita=parseFloat(this.value)||null"></div>
+        <div><label style="font-size:0.7rem;color:var(--caffe2)">Val. Catastale Prima Casa (€)</label>
+          <input type="number" value="${u.valore_prima||''}" step="0.01" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].valore_prima=parseFloat(this.value)||null"></div>
+        <div><label style="font-size:0.7rem;color:var(--caffe2)">Val. Catastale Seconda Casa (€)</label>
+          <input type="number" value="${u.valore_seconda||''}" step="0.01" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].valore_seconda=parseFloat(this.value)||null"></div>
+        <div style="grid-column:1/-1"><label style="font-size:0.7rem;color:var(--caffe2)">Descrizione (es. VILLA SINGOLA 13,50 VANI MQ 260)</label>
+          <input type="text" value="${u.descrizione}" placeholder="descrizione libera" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].descrizione=this.value"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderCatastoPdf() {
+  const el = document.getElementById('catastoPdfList');
+  if (!el) return;
+  if (!currentCatastoPdf.length) { el.innerHTML = ''; return; }
+  el.innerHTML = currentCatastoPdf.map((d, i) => `
+    <div class="doc-item">
+      <span class="doc-icon">📋</span>
+      <div class="doc-info">
+        <div class="doc-name">${d.nome}</div>
+        <div class="doc-meta">🔒 Riservato agenzia</div>
+      </div>
+      <div class="doc-actions">
+        <a href="${d.url}" target="_blank">👁️ Vedi</a>
+        <button class="doc-del" onclick="removeCatastoPdf(${i})">🗑️</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function removeCatastoPdf(i) {
+  currentCatastoPdf.splice(i, 1);
+  renderCatastoPdf();
+}
+
+
+// IMPORTA DA IDEALISTA
+function openImportModal() {
+  document.getElementById('importModal').classList.add('open');
+  document.getElementById('importJson').value = '';
+  document.getElementById('importError').style.display = 'none';
+}
+function closeImportModal() {
+  document.getElementById('importModal').classList.remove('open');
+}
+function doImport() {
+  const raw = document.getElementById('importJson').value.trim();
+  const errEl = document.getElementById('importError');
+  errEl.style.display = 'none';
+  if (!raw) { errEl.textContent = '⚠️ Incolla il JSON!'; errEl.style.display = 'block'; return; }
+  let data;
+  try { data = JSON.parse(raw); } catch(e) { errEl.textContent = '❌ JSON non valido. Riprova.'; errEl.style.display = 'block'; return; }
+  const map = {codice:'f_codice',titolo:'f_titolo',tipo_operazione:'f_tipo_operazione',categoria:'f_categoria',tipologia:'f_tipologia',comune:'f_comune',indirizzo:'f_indirizzo',prezzo:'f_prezzo',superficie:'f_superficie',locali:'f_locali',camere:'f_camere',bagni_totali:'f_bagni_totali',piano:'f_piano',anno_costruzione:'f_anno_costruzione',stato_manutenzione:'f_stato_manutenzione',classe_energetica:'f_classe_energetica',ipe_kwh:'f_ipe_kwh',esposizione:'f_esposizione',spese_condominio:'f_spese_condominio',consegna:'f_consegna',impianto_elettrico:'f_impianto_elettrico',num_accessi_carrai:'f_num_accessi_carrai',num_portoni:'f_num_portoni',garage_num:'f_garage_num',youtube_id:'f_youtube_id',virtual_tour:'f_virtual_tour',id_idealista:'f_id_idealista',note_interne:'f_note_interne',lat:'f_lat',lng:'f_lng'};
+  Object.entries(map).forEach(([k,id])=>{const el=document.getElementById(id);if(el&&data[k]!==undefined&&data[k]!==null)el.value=data[k];});
+  ['garage','giardino','terrazzo','cantina','ascensore','piscina','arredato','attivo','in_evidenza','venduto','affittato'].forEach(k=>{const el=document.getElementById('f_'+k);if(el&&data[k]!==undefined)el.checked=!!data[k];});
+  // Le foto di Idealista NON vengono importate (copyright)
+currentFotos=[];
+renderFotos();
+  document.getElementById('f_attivo').checked=true;
+  closeImportModal();
+  toast('✅ Dati importati! Aggiungi le tue foto.','success');
+  window.scrollTo(0,200);
+}
+
+renderFotos();
+checkAuth();
+</script>
+
+<!-- MODAL IMPORTA DA IDEALISTA -->
+<div class="modal-overlay" id="importModal">
+  <div class="modal" style="max-width:600px">
+    <div class="modal-header">
+      <h2>📥 Importa da Idealista</h2>
+      <button class="modal-close" onclick="closeImportModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:0.85rem;color:var(--caffe2);margin-bottom:16px">
+        1️⃣ Salva il bookmarklet qui sotto nei preferiti del browser<br>
+        2️⃣ Apri annuncio Idealista → clicca il bookmarklet<br>
+        3️⃣ Appare un alert: <strong>"Dati copiati!"</strong><br>
+        4️⃣ Incolla qui il JSON con <strong>Ctrl+V</strong><br>
+        ⚠️ Le foto NON vengono importate (copyright Idealista)
+      </p>
+      <div class="form-group">
+        <label>Incolla qui il JSON copiato dal bookmarklet</label>
+        <textarea id="importJson" style="min-height:200px;font-family:monospace;font-size:0.75rem" placeholder='{
+  "titolo": "...",
+  "prezzo": 180000,
+  ...
+}'></textarea>
+      </div>
+      <div id="importError" style="color:var(--rosso);font-size:0.82rem;margin-top:8px;display:none"></div>
+      <div style="background:var(--sfondo);border-radius:8px;padding:12px;margin-top:12px">
+        <div style="font-size:0.75rem;font-weight:600;color:var(--caffe2);margin-bottom:8px">BOOKMARKLET — salva nei preferiti del browser:</div>
+        <code style="font-size:0.68rem;word-break:break-all;color:var(--nero)">javascript:(function(){const cfg=window.config||{};const id=String(cfg.propertyId||'');const op=cfg.operation||'';const tipo=op==='rent'?'affitto':op==='sale'?'vendita':'asta';// Titolo e comuneconst titolo=document.querySelector('.main-info__title-main')?.textContent?.trim()||'';const comune=document.querySelector('.main-info__title-minor')?.textContent?.trim()||'Padova';// Prezzoconst prezzo_txt=document.querySelector('.info-data-price .txt-bold')?.textContent?.trim()||'0';const prezzo=parseFloat(prezzo_txt.replace(/\./g,'').replace(',','.'))||null;// Codice riferimentoconst codice_el=document.querySelector('.txt-ref');const codice=codice_el?codice_el.textContent.replace(/[^A-Z0-9]/gi,'').trim():'RIG'+id.slice(-4);// Descrizione completaconst desc=[...document.querySelectorAll('.comment .adCommentsLanguage p')].map(p=>p.textContent.trim()).join(' ')||'';const dl=desc.toLowerCase();// Tipologiaconst tipologie={warehouse:'capannone',apartment:'appartamento',villa:'villa',penthouse:'attico',office:'ufficio',store:'negozio',garage:'garage',land:'terreno',building:'palazzo',premise:'locale commerciale'};const tipologia=tipologie[cfg.typology||'']||cfg.typology||'';const categoria=['warehouse','office','store','premise','building'].includes(cfg.typology)?'commerciale':cfg.typology==='land'?'terreno':'residenziale';// Features numeriche e testoconst feats=[...document.querySelectorAll('.info-features span')].map(s=>s.textContent.trim());const details=[...document.querySelectorAll('.details-property_features li')].map(l=>l.textContent.trim());const all=[...feats,...details];const alll=all.map(t=>t.toLowerCase());// Funzioni helperconst getN=function(re){const f=all.find(function(t){return re.test(t);});return f?parseInt(f.replace(/[^\d]/g,''))||null:null;};const has=function(w){return alll.some(function(t){return t.includes(w);})||dl.includes(w);};const getVal=function(re){const f=all.find(function(t){return re.test(t);});return f?f.split(':').pop().trim():'';};// Dati numericiconst superficie=getN(/\d+\s*m/)||null;const locali=getN(/local/i)||null;const camere=getN(/camer/i)||null;const bagni=getN(/bagn/i)||null;// Pianoconst piano_el=all.find(function(t){return /piano/i.test(t)&&t.includes(':');});const piano=piano_el?piano_el.split(':').pop().trim():'';// Anno costruzioneconst anno_el=all.find(function(t){return /costruz|anno/i.test(t)&&t.includes(':');});const anno=anno_el?parseInt(anno_el.replace(/[^\d]/g,''))||null:null;// Stato manutenzioneconst stato_el=all.find(function(t){return /stato\s+manut/i.test(t)&&t.includes(':');});const stato_manutenzione=stato_el?stato_el.split(':').pop().trim().toLowerCase():'';// Classe energeticaconst energy_el=all.find(function(t){return /classe\s+energ/i.test(t)&&t.includes(':');});const classe_energetica=energy_el?energy_el.replace(/.*:/,'').replace(/[^A-G0-9\+]/g,'').trim():'';// Esposizioneconst esp_el=all.find(function(t){return /esposiz/i.test(t)&&t.includes(':');});const esposizione=esp_el?esp_el.split(':').pop().trim():'';// Spese condominioconst spese_el=all.find(function(t){return /spese\s+cond/i.test(t)&&t.includes(':');});const spese_condominio=spese_el?parseFloat(spese_el.replace(/[^\d,]/g,'').replace(',','.'))||null:null;// Consegnaconst consegna=dl.includes('libero')||dl.includes('libera')?'LIBERA':dl.includes('occup')?'OCCUPATA':'';// Indirizzoconst indirizzo=document.querySelector('.main-info__title-minor span')?.textContent?.trim()||'';// Coordinateconst lat=cfg.coordinates?.latitude||null;const lng=cfg.coordinates?.longitude||null;// Dotazioni booleaneconst r={codice,titolo,tipo_operazione:tipo,categoria,tipologia,comune,indirizzo,lat,lng,prezzo,superficie,locali,camere,bagni_totali:bagni,piano,anno_costruzione:anno,stato_manutenzione,classe_energetica,esposizione,spese_condominio,consegna,// Comfortgarage:has('garage')||has('box auto'),giardino:has('giardino'),terrazzo:has('terraz')||has('balcon'),cantina:has('cantina'),ascensore:has('ascensore'),piscina:has('piscina'),arredato:has('arredato'),arredo:has('arredato'),ingresso_indipendente:has('ingresso indipendente'),canna_fumaria:has('canna fumaria'),animali_ammessi:has('animali'),annuncio_prestigio:has('prestigio'),porticato:has('porticato')||has('portico'),soppalco:has('soppalco'),lavanderia:has('lavanderia'),mansarda:has('mansarda'),taverna:has('taverna'),soffitta:has('soffitta'),// Riscaldamentoriscaldamento_autonomo:has('riscaldamento autonomo')||has('riscald. autonomo'),riscaldamento_centralizzato:has('riscaldamento centralizzato')||has('riscald. centralizzato'),riscaldamento_semi_autonomo:has('semi-autonomo')||has('semi autonomo'),aria_condizionata:has('condizionata')||has('clima'),caldaia_condensazione:has('condensazione'),camino:has('camino'),riscaldamento_pavimento:has('pavimento'),pannelli_fotovoltaici:has('fotovoltai'),pannelli_solari:has('pannelli solari'),termopompa:has('termopompa'),// Sicurezzaallarme:has('allarme'),porta_blindata:has('porta blindata'),tapparelle_motorizzate:has('tapparelle motorizzate'),domotica:has('domotica'),// Livellipiano_interrato:has('piano interrato'),piano_terra:has('piano terra'),primo_piano:has('primo piano'),// Altroimpianto_elettrico:has('norma')?'a norma':'',num_accessi_carrai:getN(/accessi\s+carrai/i)||0,num_portoni:getN(/portoni/i)||0,garage_num:getN(/n.*garage/i)||0,// Metaid_idealista:id,note_interne:desc.substring(0,800),attivo:true,in_evidenza:false,venduto:false,affittato:false};const json=JSON.stringify(r,null,2);console.log('%c✅ DATI ESTRATTI COMPLETI:','background:#CEE08F;color:#1E3A5C;font-size:14px;font-weight:bold;padding:4px');console.log(json);navigator.clipboard.writeText(json).then(function(){const tot=Object.values(r).filter(function(v){return v!==null&&v!==''&&v!==false&&v!==0;}).length;alert('✅ '+tot+' campi estratti e copiati!\n\nVai Admin → Nuovo → 📥 Importa da Idealista');}).catch(function(){alert('Copia il JSON dalla Console F12');});})();</code>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeImportModal()">Annulla</button>
+      <button class="btn btn-primary" onclick="doImport()">✅ Compila il form</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

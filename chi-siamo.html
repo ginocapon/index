@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Chi Siamo — Righetto Immobiliare Padova</title>
+  <meta name="description" content="Righetto Immobiliare: 30 anni di esperienza nel mercato immobiliare di Padova e provincia. Conosciamo ogni quartiere, ogni dinamica. Capon Gino — titolare.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--nero:#0a0a0a;--bianco:#f5f2ed;--oro:#c9a84c;--grigio:#6b6560;--gc:#e8e4de;--verde:#4a5c4e;--sfondo:#f0ece6}
+    body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--nero)}
+    a{text-decoration:none;color:inherit}
+    header{background:var(--nero);position:sticky;top:0;z-index:100}
+    .hi{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:62px;display:flex;align-items:center;gap:2rem}
+    .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff}
+    .logo span{color:var(--oro);font-style:italic}
+    nav{display:flex;gap:.2rem;flex:1}
+    nav a{color:rgba(255,255,255,.5);font-size:.82rem;padding:.4rem .75rem;border-radius:2px;transition:color .2s}
+    nav a:hover{color:#fff} nav a.active{color:var(--oro)}
+    .h-cta{display:flex;gap:.65rem;align-items:center}
+    .h-tel{color:rgba(255,255,255,.55);font-size:.78rem}
+    .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:2px;font-size:.76rem;font-weight:500}
+    /* HERO */
+    .hero{background:var(--nero);padding:5rem 1.5rem;position:relative;overflow:hidden}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent)}
+    .hero-inner{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    @media(max-width:900px){.hero-inner{grid-template-columns:1fr}}
+    .htag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.7rem}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:#fff;line-height:1.2;margin-bottom:1.1rem}
+    .hero h1 strong{font-weight:600;font-style:italic}
+    .hero p{font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.9}
+    /* LINEA TEMPORALE */
+    .timeline{padding:5rem 1.5rem;background:var(--sfondo)}
+    .tl-inner{max-width:1100px;margin:0 auto}
+    .sec-tag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.5rem}
+    .sec-t{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;margin-bottom:3rem}
+    .sec-t strong{font-weight:600}
+    .tl-items{position:relative;padding-left:2.2rem}
+    .tl-items::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--gc)}
+    .tl-item{position:relative;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--gc)}
+    .tl-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+    .tl-dot{position:absolute;left:-2.55rem;top:.3rem;width:10px;height:10px;border-radius:50%;background:var(--oro);border:2px solid var(--sfondo)}
+    .tl-year{font-size:.68rem;letter-spacing:.1em;color:var(--oro);margin-bottom:.3rem;font-weight:500}
+    .tl-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;margin-bottom:.4rem}
+    .tl-desc{font-size:.84rem;color:var(--grigio);line-height:1.75}
+    /* TEAM */
+    .team{padding:5rem 1.5rem}
+    .team-inner{max-width:1380px;margin:0 auto}
+    .team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem;margin-top:3rem}
+    @media(max-width:700px){.team-grid{grid-template-columns:1fr}}
+    .tcard{border:1px solid var(--gc);border-radius:3px;overflow:hidden;display:grid;grid-template-columns:140px 1fr}
+    .tcard-img{background:var(--nero);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:4rem;color:var(--oro);aspect-ratio:1}
+    .tcard-body{padding:1.3rem}
+    .tcard-name{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;margin-bottom:.2rem}
+    .tcard-role{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--oro);margin-bottom:.65rem}
+    .tcard-bio{font-size:.82rem;color:var(--grigio);line-height:1.7;margin-bottom:.85rem}
+    .tcard-contacts{display:flex;flex-direction:column;gap:.28rem}
+    .tcc{display:flex;align-items:center;gap:.4rem;font-size:.77rem;color:var(--grigio)}
+    .tcc svg{width:12px;height:12px;color:var(--oro);flex-shrink:0}
+    /* VALORI */
+    .values{background:var(--sfondo);padding:5rem 1.5rem}
+    .val-inner{max-width:1380px;margin:0 auto}
+    .val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem}
+    @media(max-width:800px){.val-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:500px){.val-grid{grid-template-columns:1fr}}
+    .vcard{background:#fff;border:1px solid var(--gc);border-radius:3px;padding:1.6rem;transition:transform .2s,box-shadow .2s}
+    .vcard:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.07)}
+    .vcard-icon{font-size:2rem;margin-bottom:.85rem}
+    .vcard-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;margin-bottom:.4rem}
+    .vcard-desc{font-size:.82rem;color:var(--grigio);line-height:1.7}
+    /* NUMERI */
+    .numbers{background:var(--nero);padding:5rem 1.5rem}
+    .num-inner{max-width:1380px;margin:0 auto}
+    .num-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:3rem}
+    @media(max-width:800px){.num-grid{grid-template-columns:repeat(2,1fr)}}
+    .nbox{text-align:center;padding:2rem 1rem}
+    .nbox-val{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:600;color:var(--oro)}
+    .nbox-lbl{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.35rem}
+    /* CTA */
+    .cta-s{padding:5rem 1.5rem;text-align:center}
+    .cta-s h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;margin-bottom:.75rem}
+    .cta-s h2 strong{font-weight:600;color:var(--oro)}
+    .cta-s p{font-size:.88rem;color:var(--grigio);max-width:520px;margin:0 auto 2rem;line-height:1.8}
+    .btn-dk{background:var(--nero);color:#fff;padding:.7rem 1.6rem;border-radius:2px;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;display:inline-block;transition:background .2s}
+    .btn-dk:hover{background:var(--oro);color:var(--nero)}
+    /* FOOTER */
+    footer{background:var(--nero);padding:3rem 1.5rem 1.5rem}
+    .fi{max-width:1380px;margin:0 auto}
+    .fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2rem}
+    @media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
+    .flogo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;margin-bottom:.6rem}
+    .flogo span{color:var(--oro);font-style:italic}
+    .finfo{font-size:.76rem;color:rgba(255,255,255,.35);line-height:1.9}
+    .fh{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.7rem;font-weight:500}
+    .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.38);margin-bottom:.3rem;transition:color .2s}
+    .fcol a:hover{color:var(--oro)}
+    .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.22);flex-wrap:wrap;gap:.4rem}
+  </style>
+</head>
+<body>
+<header>
+  <div class="hi">
+    <a href="index.html" class="logo">Righetto <span>Immobiliare</span></a>
+    <nav><a href="index.html">Home</a><a href="immobili.html">Immobili</a><a href="servizi.html">Servizi</a><a href="chi-siamo.html" class="active">Chi siamo</a><a href="blog.html">Blog</a><a href="contatti.html">Contatti</a><a href="faq.html">FAQ</a></nav>
+    <div class="h-cta"><a class="h-tel" href="tel:+390498843484">049 884 3484</a><a class="h-btn" href="contatti.html">Valutazione gratuita</a></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="htag">Dal 1990 — Padova e provincia</div>
+      <h1>Passione, <strong>esperienza</strong><br>e fiducia nel mattone</h1>
+      <p>Più di 30 anni al servizio delle famiglie e degli investitori di Padova e provincia. Non siamo un'agenzia come le altre: conosciamo ogni via, ogni quartiere, ogni dinamica del mercato locale. Il risultato? Vendite più rapide, affitti più sicuri, clienti più soddisfatti.</p>
+    </div>
+    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:3px;padding:2rem;font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;font-style:italic;color:rgba(255,255,255,.7);line-height:1.6">
+      "Ogni immobile racconta una storia.<br>Il nostro lavoro è aiutarti a <span style="color:var(--oro);font-weight:600;font-style:normal">scrivere la prossima."</span>
+      <div style="font-family:'DM Sans',sans-serif;font-size:.72rem;color:rgba(255,255,255,.3);margin-top:1rem;font-style:normal">— Capon Gino, Titolare</div>
+    </div>
+  </div>
+</section>
+
+<section class="timeline">
+  <div class="tl-inner">
+    <div class="sec-tag">La nostra storia</div>
+    <h2 class="sec-t">Tre decenni di <strong>presenza sul territorio</strong></h2>
+    <div class="tl-items">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1990</div><div class="tl-title">La fondazione</div><div class="tl-desc">Righetto Immobiliare nasce a Limena (PD) con una missione chiara: offrire un servizio immobiliare di qualità, personale e trasparente, alle famiglie della provincia di Padova.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2000</div><div class="tl-title">L'espansione</div><div class="tl-desc">Con l'avvento di internet iniziamo a pubblicare gli immobili online, anticipando il settore. Il portafoglio cresce fino a coprire tutta la provincia: da Padova città ad Albignasego, Cadoneghe, Vigodarzere, Saccolongo.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2015</div><div class="tl-title">I servizi integrati</div><div class="tl-desc">Lanciamo i servizi integrati: oltre alla compravendita, aggiungiamo gestione locazioni, consulenza preliminari e assistenza post-rogito. Un punto di riferimento unico per ogni esigenza immobiliare.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2024</div><div class="tl-title">Il digitale al servizio del cliente</div><div class="tl-desc">Introduciamo virtual tour 360°, video professionali e il portale Serviziimmobiliaripadova.it: tecnologia e innovazione al servizio di un'esperienza cliente sempre più completa e trasparente.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="team">
+  <div class="team-inner">
+    <div class="sec-tag">Il team</div>
+    <h2 class="sec-t">Le persone dietro <strong>ogni trattativa</strong></h2>
+    <div class="team-grid">
+      <div class="tcard">
+        <div class="tcard-img">G</div>
+        <div class="tcard-body">
+          <div class="tcard-name">Capon Gino</div>
+          <div class="tcard-role">Titolare — Agente Immobiliare</div>
+          <div class="tcard-bio">Fondatore di Righetto Immobiliare, con oltre 30 anni di esperienza nel mercato padovano. Specializzato in ville, abitazioni di pregio e investimenti immobiliari. Mediatore abilitato con iscrizione al Ruolo.</div>
+          <div class="tcard-contacts">
+            <div class="tcc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 .18H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>348 862 1888</div>
+            <div class="tcc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="781f111617380a111f101d0c0c17111515171a111411190a1d56110c">[email&#160;protected]</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-img" style="background:#4a5c4e">R</div>
+        <div class="tcard-body">
+          <div class="tcard-name">Righetto Linda</div>
+          <div class="tcard-role">Agente Immobiliare — Locazioni</div>
+          <div class="tcard-bio">Specializzata nella gestione dei contratti di locazione e nel mercato degli affitti a Padova e provincia. Cura ogni aspetto del rapporto tra proprietario e inquilino con attenzione normativa e professionalità.</div>
+          <div class="tcard-contacts">
+            <div class="tcc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 .18H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>049 884 3484</div>
+            <div class="tcc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="600c090e040120120907080514140f090d0d0f02090c090112054e0914">[email&#160;protected]</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="values">
+  <div class="val-inner">
+    <div class="sec-tag">I nostri valori</div>
+    <h2 class="sec-t">Cosa ci <strong>guida ogni giorno</strong></h2>
+    <div class="val-grid">
+      <div class="vcard"><div class="vcard-icon">🤝</div><div class="vcard-title">Fiducia</div><div class="vcard-desc">Costruiamo relazioni durature basate sulla trasparenza. Diciamo sempre la verità, anche quando non è quella che il cliente vorrebbe sentire.</div></div>
+      <div class="vcard"><div class="vcard-icon">🎯</div><div class="vcard-title">Precisione</div><div class="vcard-desc">Ogni valutazione, ogni contratto, ogni pratica viene gestita con attenzione maniacale ai dettagli. I dettagli fanno la differenza.</div></div>
+      <div class="vcard"><div class="vcard-icon">📍</div><div class="vcard-title">Radicamento locale</div><div class="vcard-desc">Conosciamo Padova e provincia come le nostre tasche. Dati reali, comparabili veri, conoscenza diretta di ogni quartiere.</div></div>
+      <div class="vcard"><div class="vcard-icon">⚡</div><div class="vcard-title">Rapidità</div><div class="vcard-desc">Rispondiamo sempre entro 24 ore. Gestiamo le pratiche con tempestività perché il tempo è prezioso per tutti.</div></div>
+      <div class="vcard"><div class="vcard-icon">🔒</div><div class="vcard-title">Tutela</div><div class="vcard-desc">Proteggiamo gli interessi del cliente in ogni fase della trattativa. Verifichiamo tutto prima che tu firmi qualsiasi documento.</div></div>
+      <div class="vcard"><div class="vcard-icon">📈</div><div class="vcard-title">Risultati</div><div class="vcard-desc">Non vendiamo sogni: lavoriamo per obiettivi concreti e misurabili. I numeri parlano chiaro: 98% di clienti soddisfatti.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="numbers">
+  <div class="num-inner">
+    <div class="sec-tag" style="color:var(--oro)">I numeri</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:#fff;margin-top:.5rem">Trent'anni di <strong style="font-weight:600">risultati concreti</strong></h2>
+    <div class="num-grid">
+      <div class="nbox"><div class="nbox-val">30+</div><div class="nbox-lbl">anni di esperienza</div></div>
+      <div class="nbox"><div class="nbox-val">500+</div><div class="nbox-lbl">immobili compravenduti</div></div>
+      <div class="nbox"><div class="nbox-val">1.200+</div><div class="nbox-lbl">contratti gestiti</div></div>
+      <div class="nbox"><div class="nbox-val">98%</div><div class="nbox-lbl">clienti soddisfatti</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-s">
+  <div class="sec-tag">Lavoriamo insieme</div>
+  <h2>Hai un immobile da <strong>vendere o affittare?</strong></h2>
+  <p>Richiedi una valutazione gratuita e scopri quanto vale davvero il tuo immobile nel mercato attuale di Padova e provincia.</p>
+  <a href="contatti.html" class="btn-dk">Valutazione gratuita</a>
+</section>
+
+<footer>
+  <div class="fi">
+    <div class="fgrid">
+      <div><div class="flogo">Righetto <span>Immobiliare</span></div><div class="finfo">Gruppo Immobiliare Righetto di Capon Gino<br>Via Roma, 96 — 35010 Limena (PD)<br>Tel: 049 884 3484 · Cell: 348 862 1888<br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f2959b9c9db2809b959a9786869d9b9f9f9d909b9e9b938097dc9b86">[email&#160;protected]</a></div></div>
+      <div class="fcol"><div class="fh">Servizi</div><a href="servizi.html">Vendita immobili</a><a href="servizi.html">Locazioni</a><a href="servizi.html">Preliminari</a><a href="servizi.html">Valutazioni</a></div>
+      <div class="fcol"><div class="fh">Immobili</div><a href="immobili.html?op=vendita">In vendita</a><a href="immobili.html?op=affitto">In affitto</a><a href="immobili.html?tipo=villa">Ville</a><a href="immobili.html?tipo=appartamento">Appartamenti</a></
