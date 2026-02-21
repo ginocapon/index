@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scraping Idealista — Righetto</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI',sans-serif; background:#1E3A5C; color:white; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px; }
+.card { background:#2a4a6e; border-radius:16px; padding:32px; max-width:640px; width:100%; }
+h1 { font-size:1.4rem; color:#CEE08F; margin-bottom:6px; }
+.sub { color:#A8C0D6; font-size:0.82rem; margin-bottom:28px; }
+.step { background:#1E3A5C; border-radius:10px; padding:16px; margin-bottom:12px; display:flex; gap:14px; align-items:flex-start; }
+.num { background:#CEE08F; color:#1E3A5C; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.85rem; flex-shrink:0; margin-top:2px; }
+.step-text { font-size:0.85rem; line-height:1.7; color:#e0e8f0; }
+.step-text strong { color:#CEE08F; }
+.bookmark-wrap { background:#0f2238; border-radius:12px; padding:24px; text-align:center; margin:24px 0; }
+.bookmark-wrap p { color:#A8C0D6; font-size:0.78rem; margin-bottom:14px; }
+#bm { display:inline-block; background:#CEE08F; color:#1E3A5C; padding:14px 32px; border-radius:10px; font-weight:700; font-size:1.1rem; text-decoration:none; cursor:grab; border:3px dashed #3A5578; user-select:none; }
+#bm:active { cursor:grabbing; }
+.arrow { color:#CEE08F; font-size:0.8rem; margin-top:10px; animation:blink 1.2s infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
+.btn { display:block; width:100%; padding:14px; background:#CEE08F; color:#1E3A5C; border:none; border-radius:10px; font-size:0.95rem; font-weight:700; cursor:pointer; margin-top:8px; font-family:'Segoe UI',sans-serif; }
+.btn:hover { background:#d8eea0; }
+.btn.copied { background:#27ae60; color:white; }
+.divider { text-align:center; color:#5C7A9E; font-size:0.78rem; margin:20px 0; }
+.note { background:#0f2238; border-left:3px solid #27ae60; padding:12px 16px; border-radius:6px; font-size:0.8rem; color:#A8C0D6; line-height:1.7; margin-top:20px; }
+.note strong { color:#CEE08F; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>🔖 Installa Scraping Idealista</h1>
+  <p class="sub">Versione aggiornata — estrae TUTTI i dati: codice, camere, bagni, piano, anno, stato, classe energetica e molto altro</p>
+
+  <div class="step">
+    <div class="num">1</div>
+    <div class="step-text">Mostra la <strong>barra preferiti</strong> nel browser<br>
+    <small style="color:#5C7A9E">Chrome/Edge: premi Ctrl+Shift+B</small></div>
+  </div>
+
+  <div class="step">
+    <div class="num">2</div>
+    <div class="step-text"><strong>Trascina</strong> il pulsante giallo qui sotto nella barra dei preferiti in alto 👇</div>
+  </div>
+
+  <div class="bookmark-wrap">
+    <p>☝️ Tieni premuto e trascina nella barra preferiti ☝️</p>
+    <a id="bm" href="#" ondragstart="setHref()">🔖 Scraping Idealista</a>
+    <div class="arrow">↑ trascina qui sopra ↑</div>
+  </div>
+
+  <div class="divider">— oppure metodo manuale —</div>
+
+  <div class="step">
+    <div class="num">3</div>
+    <div class="step-text">Clic destro sulla barra preferiti → <strong>"Aggiungi pagina"</strong> → nel campo <strong>URL</strong> incolla il codice qui sotto</div>
+  </div>
+
+  <button class="btn" id="btnCopy" onclick="copyCode()">📋 Copia il codice bookmarklet</button>
+
+  <div class="note">
+    <strong>✅ Come si usa:</strong><br>
+    1. Apri un annuncio su Idealista<br>
+    2. Clicca <strong>"Scraping Idealista"</strong> dalla barra preferiti<br>
+    3. Appare alert con numero campi estratti<br>
+    4. Vai Admin → Nuovo → <strong>📥 Importa da Idealista</strong> → Ctrl+V → Compila!<br><br>
+    <strong>Estrae:</strong> codice rif., titolo, tipo, tipologia, comune, prezzo, superficie, locali, camere, bagni, piano, anno costruzione, stato manutenzione, classe energetica, esposizione, spese condominio, consegna, coordinate GPS, tutte le dotazioni (garage, giardino, terrazzo, cantina, ascensore, riscaldamento, ecc.)
+  </div>
+</div>
+
+<script>
+// Il codice vero del bookmarklet
+const CODE = `javascript:(function(){try{var cfg=window.config||{};var id=String(cfg.propertyId||'');var op=cfg.operation||'';var tipo=op==='rent'?'affitto':op==='sale'?'vendita':'asta';var titolo=(document.querySelector('.main-info__title-main')||{}).textContent||'';titolo=titolo.trim();var luogo=(document.querySelector('.main-info__title-minor')||{}).textContent||'Padova';luogo=luogo.trim();var comune=luogo.split(',')[0].trim();var prezzo_el=document.querySelector('.info-data-price .txt-bold');var prezzo=prezzo_el?parseFloat(prezzo_el.textContent.replace(/\\.(?=[0-9]{3})/g,'').replace(',','.'))||null:null;var codice_el=document.querySelector('.txt-ref');var codice=codice_el?codice_el.textContent.replace('Rif.:','').trim():('RIG'+id.slice(-4));var desc_parts=document.querySelectorAll('.comment .adCommentsLanguage p');var desc=Array.from(desc_parts).map(function(p){return p.textContent.trim();}).join(' ');var dl=desc.toLowerCase();var feats=Array.from(document.querySelectorAll('.info-features span')).map(function(s){return s.textContent.trim();});var details=Array.from(document.querySelectorAll('.details-property_features li')).map(function(l){return l.textContent.trim();});var all=feats.concat(details);var alll=all.map(function(t){return t.toLowerCase();});function getN(re){var f=all.find(function(t){return re.test(t);});if(!f)return null;var m=f.match(/([0-9][0-9.]*)/);if(!m)return null;var clean=m[1].replace(/\./g,'');return parseInt(clean)||null;}function has(w){return alll.some(function(t){return t.indexOf(w)>=0;})||dl.indexOf(w)>=0;}function getAfterColon(re){var f=all.find(function(t){return re.test(t)&&t.indexOf(':')>=0;});return f?f.split(':').pop().trim():'';}var tipologie={warehouse:'capannone',apartment:'appartamento',villa:'villa',penthouse:'attico',office:'ufficio',store:'negozio',garage:'garage',land:'terreno'};var tipologia=tipologie[cfg.typology||'']||cfg.typology||'';var categoria=['warehouse','office','store'].indexOf(cfg.typology)>=0?'commerciale':cfg.typology==='land'?'terreno':'residenziale';var sup_f=feats.find(function(t){return /^[0-9]/.test(t.trim());});var superficie=(function(){var f=feats.find(function(t){return /^[0-9]/.test(t.trim());});if(!f)return null;var m=f.match(/^([0-9]{1,3}(?:\.[0-9]{3})*)/);return m?parseInt(m[1].replace(/\./g,''))||null:null;})();var locali=getN(/local/i);var camere=getN(/camer/i);var bagni=getN(/bagn/i);var piano=getAfterColon(/piano/i);var anno=getN(/costruz|^anno/i);var stato_man=getAfterColon(/stato\\s+manut/i).toLowerCase();var classe='';var ape_kw=alll.find(function(t){return t.indexOf('kwh')>=0;});var ipe=null;if(ape_kw){var m_ipe=ape_kw.match(/([0-9][0-9.,]*)\s*kwh/i);ipe=m_ipe?parseFloat(m_ipe[1].replace(',','.'))||null:null;}var esposizione=getAfterColon(/esposiz/i);var consegna=dl.indexOf('libero')>=0||dl.indexOf('libera')>=0?'LIBERA':dl.indexOf('occup')>=0?'OCCUPATA':'';var lat=(cfg.coordinates||{}).latitude||null;var lng=(cfg.coordinates||{}).longitude||null;var r={codice:codice,titolo:titolo,tipo_operazione:tipo,categoria:categoria,tipologia:tipologia,comune:comune,lat:lat,lng:lng,prezzo:prezzo,superficie:superficie,locali:locali,camere:camere,bagni_totali:bagni,piano:piano,anno_costruzione:anno,stato_manutenzione:stato_man,classe_energetica:classe,ipe_kwh:ipe,ipe_kwh:ipe,esposizione:esposizione,consegna:consegna,garage:has('garage')||has('box auto'),giardino:has('giardino'),terrazzo:has('terraz')||has('balcon'),cantina:has('cantina'),ascensore:has('ascensore'),piscina:has('piscina'),arredato:has('arredato'),ingresso_indipendente:has('ingresso indipendente'),canna_fumaria:has('canna fumaria'),animali_ammessi:has('animali'),porticato:has('porticat'),soppalco:has('soppalco'),lavanderia:has('lavanderia'),mansarda:has('mansarda'),taverna:has('taverna'),riscaldamento_autonomo:has('riscaldamento autonomo')||has('riscald. autonomo'),riscaldamento_centralizzato:has('riscaldamento centralizzato'),aria_condizionata:has('condizionata')||has('clima'),camino:has('camino'),pannelli_fotovoltaici:has('fotovoltai'),pannelli_solari:has('pannelli solari'),allarme:has('allarme'),porta_blindata:has('porta blindata'),domotica:has('domotica'),tapparelle_motorizzate:has('tapparelle motorizzate'),zanzariere:has('zanzariere'),impianto_elettrico:has('norma')?'a norma':'',id_idealista:id,note_interne:desc.substring(0,800),attivo:true,in_evidenza:false,venduto:false,affittato:false};var json=JSON.stringify(r,null,2);var tot=Object.keys(r).filter(function(k){var v=r[k];return v!==null&&v!==''&&v!==false&&v!==0;}).length;navigator.clipboard.writeText(json).then(function(){alert('OK! '+tot+' campi estratti e copiati!\\n\\nVai Admin → Nuovo → Importa da Idealista');}).catch(function(){prompt('Copia tutto qui sotto:',json);});}catch(e){alert('Errore: '+e.message);}})();`;
+
+function setHref() {
+  document.getElementById('bm').href = CODE;
+}
+
+// Set href on load too
+window.onload = function() {
+  document.getElementById('bm').href = CODE;
+};
+
+function copyCode() {
+  navigator.clipboard.writeText(CODE).then(function() {
+    var btn = document.getElementById('btnCopy');
+    btn.textContent = '✅ Copiato! Incollalo nel campo URL del bookmark';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = '📋 Copia il codice bookmarklet';
+      btn.classList.remove('copied');
+    }, 4000);
+  });
+}
+</script>
+</body>
+</html>

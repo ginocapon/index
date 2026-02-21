@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FAQ — Domande Frequenti Immobiliari — Righetto Immobiliare Padova</title>
+  <meta name="description" content="Risposte alle domande più frequenti su compravendita, affitti, valutazioni e contratti a Padova. Righetto Immobiliare.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--nero:#0a0a0a;--bianco:#f5f2ed;--oro:#c9a84c;--grigio:#6b6560;--gc:#e8e4de;--sfondo:#f0ece6}
+    body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--nero)}
+    a{text-decoration:none;color:inherit}
+    header{background:var(--nero);position:sticky;top:0;z-index:100}
+    .hi{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:62px;display:flex;align-items:center;gap:2rem}
+    .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff}.logo span{color:var(--oro);font-style:italic}
+    nav{display:flex;gap:.2rem;flex:1}
+    nav a{color:rgba(255,255,255,.5);font-size:.82rem;padding:.4rem .75rem;border-radius:2px;transition:color .2s}
+    nav a:hover{color:#fff}nav a.active{color:var(--oro)}
+    .h-cta{display:flex;gap:.65rem;align-items:center}
+    .h-tel{color:rgba(255,255,255,.55);font-size:.78rem}
+    .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:2px;font-size:.76rem;font-weight:500}
+    .hero{background:var(--nero);padding:4.5rem 1.5rem 3.5rem;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-40px;right:-40px;width:400px;height:400px;background:radial-gradient(circle,rgba(201,168,76,.1) 0%,transparent 70%)}
+    .hero-inner{max-width:860px;margin:0 auto;text-align:center}
+    .htag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.6rem}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:#fff;margin-bottom:.8rem}
+    .hero h1 strong{font-weight:600;font-style:italic}
+    .hero p{font-size:.9rem;color:rgba(255,255,255,.45);line-height:1.85;max-width:560px;margin:0 auto 1.8rem}
+    .faq-search{position:relative;max-width:480px;margin:0 auto}
+    .faq-search input{width:100%;padding:.72rem 1rem .72rem 2.6rem;border:none;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:.88rem;background:#fff;color:var(--nero)}
+    .faq-search input:focus{outline:2px solid var(--oro)}
+    .faq-search svg{position:absolute;left:.8rem;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--grigio);pointer-events:none}
+    .cats{background:var(--sfondo);border-bottom:1px solid var(--gc);padding:.85rem 1.5rem;overflow-x:auto}
+    .cats-inner{max-width:1380px;margin:0 auto;display:flex;gap:.4rem}
+    .cat-btn{padding:.42rem 1.1rem;border:1px solid var(--gc);border-radius:20px;background:#fff;font-family:'DM Sans',sans-serif;font-size:.78rem;color:var(--grigio);cursor:pointer;white-space:nowrap;transition:all .2s}
+    .cat-btn:hover{border-color:var(--nero);color:var(--nero)}.cat-btn.active{background:var(--nero);border-color:var(--nero);color:#fff}
+    .page{max-width:1380px;margin:0 auto;padding:3rem 1.5rem;display:grid;grid-template-columns:1fr 320px;gap:2rem;align-items:start}
+    @media(max-width:1024px){.page{grid-template-columns:1fr}}
+    .faq-group{margin-bottom:2.5rem}
+    .fg-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;margin-bottom:1rem;padding-bottom:.6rem;border-bottom:2px solid var(--gc);display:flex;align-items:center;gap:.5rem}
+    .faq-item{border:1px solid var(--gc);border-radius:3px;overflow:hidden;margin-bottom:.45rem;transition:border-color .25s}
+    .faq-item.open{border-color:var(--oro)}
+    .faq-q{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.1rem;cursor:pointer;gap:1rem;user-select:none;transition:background .2s}
+    .faq-q:hover{background:var(--sfondo)}
+    .faq-q-text{font-size:.88rem;font-weight:500;line-height:1.4}
+    .faq-icon{width:22px;height:22px;border:1px solid var(--gc);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .25s}
+    .faq-item.open .faq-icon{background:var(--oro);border-color:var(--oro);transform:rotate(45deg)}
+    .faq-icon svg{width:11px;height:11px;color:var(--grigio)}
+    .faq-item.open .faq-icon svg{color:#fff}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+    .faq-item.open .faq-a{max-height:600px}
+    .faq-a-inner{padding:.8rem 1.1rem 1.1rem;font-size:.84rem;color:var(--grigio);line-height:1.85;border-top:1px solid var(--gc)}
+    .faq-a-inner strong{color:var(--nero)}
+    .sidebar{display:flex;flex-direction:column;gap:1rem;position:sticky;top:80px}
+    .sb-box{background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;overflow:hidden}
+    .sb-head{padding:.85rem 1.1rem;border-bottom:1px solid var(--gc);background:#fff;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600}
+    .sb-body{padding:1rem 1.1rem}
+    .sb-links{display:flex;flex-direction:column;gap:.22rem}
+    .sb-link{display:flex;align-items:center;gap:.4rem;padding:.48rem .65rem;border:1px solid var(--gc);border-radius:2px;font-size:.81rem;color:var(--grigio);background:#fff;cursor:pointer;transition:all .2s}
+    .sb-link:hover{border-color:var(--oro);color:var(--nero)}
+    .sb-link svg{width:11px;height:11px;color:var(--oro);flex-shrink:0}
+    .cta-box{background:var(--nero);border-radius:3px;padding:1.4rem;text-align:center}
+    .cta-box h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;margin-bottom:.4rem}
+    .cta-box p{font-size:.77rem;color:rgba(255,255,255,.45);line-height:1.7;margin-bottom:.85rem}
+    .cta-box a{display:block;background:var(--oro);color:var(--nero);padding:.6rem;border-radius:2px;font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.38rem}
+    .cta-box a.wa{background:#25d366;color:#fff}
+    footer{background:var(--nero);padding:3rem 1.5rem 1.5rem}
+    .fi{max-width:1380px;margin:0 auto}
+    .fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2rem}
+    @media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
+    .flogo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;margin-bottom:.6rem}.flogo span{color:var(--oro);font-style:italic}
+    .finfo{font-size:.76rem;color:rgba(255,255,255,.35);line-height:1.9}
+    .fh{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.7rem}
+    .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.38);margin-bottom:.3rem;transition:color .2s}
+    .fcol a:hover{color:var(--oro)}
+    .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.22);flex-wrap:wrap;gap:.4rem}
+  </style>
+</head>
+<body>
+<header>
+  <div class="hi">
+    <a href="index.html" class="logo">Righetto <span>Immobiliare</span></a>
+    <nav><a href="index.html">Home</a><a href="immobili.html">Immobili</a><a href="servizi.html">Servizi</a><a href="chi-siamo.html">Chi siamo</a><a href="blog.html">Blog</a><a href="contatti.html">Contatti</a><a href="faq.html" class="active">FAQ</a></nav>
+    <div class="h-cta"><a class="h-tel" href="tel:+390498843484">049 884 3484</a><a class="h-btn" href="contatti.html">Consulenza gratuita</a></div>
+  </div>
+</header>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="htag">Domande frequenti</div>
+    <h1>Tutto quello che devi <strong>sapere</strong></h1>
+    <p>Risposte chiare alle domande più comuni su compravendita, affitti, valutazioni e contratti immobiliari a Padova e provincia.</p>
+    <div class="faq-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="faq-search-input" placeholder="Cerca una domanda..." oninput="searchFaq()">
+    </div>
+  </div>
+</div>
+<div class="cats">
+  <div class="cats-inner">
+    <button class="cat-btn active" onclick="filterCat(this,'all')">Tutte</button>
+    <button class="cat-btn" onclick="filterCat(this,'vendita')">Vendita</button>
+    <button class="cat-btn" onclick="filterCat(this,'acquisto')">Acquisto</button>
+    <button class="cat-btn" onclick="filterCat(this,'affitto')">Affitto</button>
+    <button class="cat-btn" onclick="filterCat(this,'valutazione')">Valutazione</button>
+    <button class="cat-btn" onclick="filterCat(this,'contratti')">Contratti</button>
+    <button class="cat-btn" onclick="filterCat(this,'fiscale')">Fisco</button>
+    <button class="cat-btn" onclick="filterCat(this,'agenzia')">Agenzia</button>
+  </div>
+</div>
+<div class="page">
+  <div id="faq-content">
+    <div class="faq-group" data-cat="vendita">
+      <div class="fg-title"><span>🏠</span> Vendita immobili</div>
+      <div class="faq-item" onclick="toggle(this)"><div class="faq-q"><span class="faq-q-text">Quanto tempo ci vuole per vendere una casa a Padova?</span><div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-a-inner">Con una valutazione realistica e una buona strategia di promozione, le vendite si concludono generalmente in <strong>3-6 mesi</strong>. Immobili sovraprezzati possono restare sul mercato 12-18 mesi perdendo attrattività. La nostra media è 4,2 mesi.</div></div></div>
+      <div class="faq-item" onclick="toggle(this)"><div class="faq-q"><span class="faq-q-text">Quali documenti servono per vendere casa?</span><div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-a-inner">Servono: <strong>atto di provenienza</strong>, <strong>visura catastale</strong> con planimetria, <strong>APE</strong> obbligatorio, <strong>certificato di abitabilità</strong>, titoli edilizi e documentazione condominiale se applicabile. Ci occupiamo noi di raccogliere e verificare tutta la documentazione.</div></div></div>
+      <div class="faq-item" onclick="toggle(this)"><div class="faq-q"><span class="faq-q-text">Qual è la vostra provvigione per la vendita?</span><div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-a-inner">La provvigione è concordata preventivamente ed è <strong>trasparente</strong>. Viene applicata solo a vendita conclusa — nessun anticipo, nessuna spesa se non vendiamo. Contattaci per conoscere le condizioni specifiche in base alla tua situazione.</div></div></div>
+      <div class="faq-item" onclick="toggle(this)"><div class="faq-q"><span class="faq-q-text">Cosa include il servizio di vendita?</span><div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-a-inner">Valutazione gratuita, verifica documenti, fotografie professionali, virtual tour 360°, video, pubblicazione su tutti i portali (Immobiliare.it, Casa.it, Idealista), gestione visite, qualifica acquirenti, trattativa, assistenza al compromesso e coordinamento con il notaio fino al rogito.</div></div></div>
+    </div>
+    <div class="faq-group" data-cat="acquisto">
+      <div class="fg-title"><span>🔑</span> Acquisto immobili</div>
+      <div class="faq-item" onclick="toggle(this)"><div class="faq-q"><span class="faq-q-text">Come funziona il processo di acquisto di una casa?</span><div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-a-inner"><strong>1)</strong> Ricerca e visite — <strong>2)</strong> Proposta d'acquisto con caparra — <strong>3)</strong> Verifica documentale — <strong>4)</strong> Compromesso con caparra integrativa — <strong>5)</strong> Richiesta mutuo — <strong>6)</strong> Rogito notarile. Dal compromesso al rogito solitamente 2-4 mesi.</div></div></div>
+      <div class="faq-item" onclick="toggle(this)"><div class="faq-q"><span class="faq-q-text">Quali spese si aggiungono al prezzo di acquisto?</span><div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-a-inner"><strong>Imposta di registro</strong> (2% prima casa, 9% seconda sul valore catastale), <strong>IVA</strong> se da costruttore (4% prima casa), <strong>notaio</strong> (1-2%), provvigione agenzia, spese istruttoria mutuo. In media le spese accessorie sono il 10-15% del prezzo.</div></div></div>
+      <div class="faq-item" onclick="toggle(this)"><div class="faq-q"><span class="faq-q-text">Cosa verificare prima di acquistare?</span><div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-a-inner">Visura ipotecaria (ipoteche/pignoramenti), conformità urbanistica e catastale, assenza di abusi edilizi, regolarità spese condominiali, stato degli impianti, classe energetica. Ci occupiamo noi di tutte queste verifiche per proteggere il tuo investimento.</div></div></div>
+    </div>
+    <div class="faq-group" data-cat="affitto">
+      <div class="fg-title"><span>📋</span> Affitto e locazioni</div>
+      <div class="faq-item" onclick="toggle(this)"><div class="faq-q"><span class="faq-q-text">Quali tipologie di contratto di affitto esistono?</span><div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-a-inner"><strong>4+4 a canone libero</strong>, <strong>3+2 a canone concordato</strong> (vantaggi fiscali), <strong>transitorio</strong> (1-18 mesi), <strong>studenti universitari</strong> (6-36 mesi). La scelta dipende dalle esigenze di proprietario e inquilino. Consigliamo sempre la consulenza professionale.</div></div></div>
+      <div class="faq-item" onclick="toggle(this)"><div class="faq-q"><span class="faq-q-text">È obbligatorio registrare il contratto di affitto?</span><div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-a-inner"><strong>Sì, assolutamente.</strong> La registrazione all'Agenzia delle Entrate è obbligatoria entro 30 giorni dalla firma. Mancata registrazione comporta pesanti sanzioni e rende il contratto nullo. Ci occupiamo noi della procedura di registrazione.</div></div></div>
+      <div class="faq-item" onclick="toggle(this)"><div class="faq-q"><span class="faq-q-text">Come tutelarsi da un inquilino moroso?</span><div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-a-inner">Prima della firma raccogliamo buste paga, CU e verifichiamo la solvibilità. Si può richiedere una <strong>fideiussione bancaria o assicurativa</strong> (3-6 mensilità). In caso di morosità assistiamo il proprietario nelle procedure di intimazione e sfratto.</div></div></div>
+    </div>
+    <div class="faq-group" data-cat="valutazione">
+      <div class="fg-title"><span>📊</span> Valutazione</div>
+      <div class="faq-item" onclick="toggle(this)"><div class="faq-q"><span class="faq-q-text">Come viene calcolato il valore di un immobile?</span><div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-a-inner">Con il <strong>metodo comparativo</strong>: analizziamo le compravendite reali concluse nell'area nelle ultime settimane per immobili simili. Correggiamo poi per esposizione, garage, giardino, ascensore, classe energetica, stato degli impianti. Forniamo sempre una valutazione scritta.</div></div></div>
+      <div class="faq-item" onclick="toggle(this)"><div class="faq-q"><span class="faq-q-text">La valutazione gratuita è davvero senza impegno?</span><div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-a-inner"><strong>Assolutamente sì.</strong> Nessun obbligo di conferire mandato. Analizziamo insieme il tuo immobile, ti forniamo una stima realistica basata su dati reali. Poi sei tu a decidere se affidarci la vendita.</div></div></div>
+    </div>
+    <div class="faq-group" data-cat="contratti">
+      <div class="fg-title"><span>✍️</span> Contratti e preliminari</div>
+      <div class="faq-item" onclick="toggle(this)"><div class="faq-q"><span class="faq-q-text">Cos'è il contratto preliminare?</span><div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-a-inner">Il <strong>compromesso</strong> è un accordo vincolante con cui le parti si impegnano a concludere la compravendita. Sancisce prezzo, data del rogito e condizioni sospensive (es. mutuo). Non trasferisce la proprietà — quella avviene solo con il rogito notarile. È però giuridicamente vincolante per entrambe le parti.</div></div></div>
+      <div class="faq-item" onclick="toggle(this)"><div class="faq-q"><span class="faq-q-text">Cosa succede se il venditore si ritira dopo il compromesso?</span><div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-a-inner">Il venditore deve <strong>restituire all'acquirente il doppio della caparra confirmatoria</strong>. In alternativa l'acquirente può agire in giudizio per ottenere il trasferimento coattivo della proprietà tramite sentenza. Stessa logica al contrario se si ritira l'acquirente: perde la caparra versata.</div></div></div>
+    </div>
+    <div class="faq-group" data-cat="fiscale">
+      <div class="fg-title"><span>💰</span> Fisco e tasse</div>
+      <div class="faq-item" onclick="toggle(this)"><div class="faq-q"><span class="faq-q-text">Quali tasse si pagano quando si vende casa?</span><div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-a-inner">Il venditore normalmente <strong>non paga tasse sulla plusvalenza</strong> se ha abitato l'immobile come prima casa o se sono passati più di 5 anni dall'acquisto. Altrimenti la plusvalenza è tassata al 26% con imposta sostitutiva. Consulta sempre il tuo commercialista per la situazione specifica.</div></div></div>
+      <div class="faq-item" onclick="toggle(this)"><div class="faq-q"><span class="faq-q-text">Conviene la cedolare secca per gli affitti?</span><div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-a-inner">La <strong>cedolare secca</strong> sostituisce IRPEF e addizionali. Aliquota: <strong>21% canone libero</strong>, <strong>10% canone concordato</strong>. Conviene quasi sempre per chi è in scaglioni IRPEF sopra il 23%. Per i concordati il risparmio è spesso molto significativo.</div></div></div>
+    </div>
+    <div class="faq-group" data-cat="agenzia">
+      <div class="fg-title"><span>🤝</span> Lavorare con noi</div>
+      <div class="faq-item" onclick="toggle(this)"><div class="faq-q"><span class="faq-q-text">Operate solo a Padova o anche in provincia?</span><div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-a-inner">Operiamo su <strong>Padova e tutta la provincia</strong>: Albignasego, Limena, Curtarolo, Cadoneghe, Vigodarzere, Saccolongo, Selvazzano, Rubano, Mestrino, Abano Terme e comuni limitrofi. La nostra sede è a Limena.</div></div></div>
+      <div class="faq-item" onclick="toggle(this)"><div class="faq-q"><span class="faq-q-text">Come iniziare a lavorare con voi?</span><div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a"><div class="faq-a-inner"><strong>Chiamaci</strong> al 049 884 3484, <strong>WhatsApp</strong> al 348 862 1888 o compila il form su questa pagina. Veniamo a vedere il tuo immobile, ti forniamo una valutazione gratuita e ti spieghiamo come lavoriamo. Poi decidi tu, senza nessun impegno.</div></div></div>
+    </div>
+  </div>
+  <div class="sidebar">
+    <div class="sb-box">
+      <div class="sb-head">Categorie</div>
+      <div class="sb-body">
+        <div class="sb-links">
+          <span class="sb-link" onclick="filterCat(null,'all')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/></svg>Tutte le domande</span>
+          <span class="sb-link" onclick="filterCat(null,'vendita')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L12 3l9 6.5V20H3z"/></svg>Vendita</span>
+          <span class="sb-link" onclick="filterCat(null,'acquisto')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10H7M21 6H3M21 14H3M21 18H7"/></svg>Acquisto</span>
+          <span class="sb-link" onclick="filterCat(null,'affitto')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg>Affitto</span>
+          <span class="sb-link" onclick="filterCat(null,'valutazione')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Valutazione</span>
+          <span class="sb-link" onclick="filterCat(null,'contratti')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Contratti</span>
+          <span class="sb-link" onclick="filterCat(null,'fiscale')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Fisco</span>
+          <span class="sb-link" onclick="filterCat(null,'agenzia')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Agenzia</span>
+        </div>
+      </div>
+    </div>
+    <div class="cta-box">
+      <h3>Non trovi la risposta?</h3>
+      <p>Contattaci direttamente. La consulenza iniziale è sempre gratuita.</p>
+      <a href="contatti.html">Contattaci ora</a>
+      <a href="https://wa.me/393488621888" target="_blank" class="wa">WhatsApp</a>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="fi">
+    <div class="fgrid">
+      <div><div class="flogo">Righetto <span>Immobiliare</span></div><div class="finfo">Via Roma, 96 — 35010 Limena (PD)<br>Tel: 049 884 3484 · Cell: 348 862 1888</div></div>
+      <div class="fcol"><div class="fh">Servizi</div><a href="servizi.html">Vendita</a><a href="servizi.html">Locazioni</a><a href="servizi.html">Valutazioni</a></div>
+      <div class="fcol"><div class="fh">Immobili</div><a href="immobili.html?op=vendita">In vendita</a><a href="immobili.html?op=affitto">In affitto</a></div>
+      <div class="fcol"><div class="fh">Info</div><a href="chi-siamo.html">Chi siamo</a><a href="blog.html">Blog</a><a href="contatti.html">Contatti</a><a href="privacy.html">Privacy</a></div>
+    </div>
+    <div class="fbot"><span>© 2025 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 12345678901</span></div>
+  </div>
+</footer>
+<script>
+function toggle(item){const w=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!w)item.classList.add('open')}
+function filterCat(btn,cat){document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');document.querySelectorAll('.faq-group').forEach(g=>{g.style.display=(cat==='all'||g.dataset.cat===cat)?'':'none'})}
+function searchFaq(){const q=document.getElementById('faq-search-input').value.toLowerCase();document.querySelectorAll('.faq-item').forEach(i=>{i.style.display=(!q||i.textContent.toLowerCase().includes(q))?'':'none'});document.querySelectorAll('.faq-group').forEach(g=>{const v=[...g.querySelectorAll('.faq-item')].some(i=>i.style.display!=='none');g.style.display=v?'':'none'})}
+</script>
+</body>
+</html>
