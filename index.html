@@ -768,7 +768,7 @@ footer{background:var(--testo);color:rgba(255,255,255,0.55);padding:64px 44px 28
   gap: 64px; align-items: center;
 }
 .territorio-left {
-  /* testo principale a sinistra sull'ombra */
+  display: flex; flex-direction: column; justify-content: flex-start;
 }
 .territorio-tag {
   display: inline-flex; align-items: center; gap: 10px;
@@ -931,6 +931,61 @@ button svg, a.btn-p svg, a.btn-g svg {
 
 
 .btn-g{background:rgba(255,255,255,0.20)!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;border:1.5px solid rgba(255,255,255,0.55)!important;color:white!important;}
+
+/* ══ TERRITORIO — CSS COMPLETO ══ */
+
+/* Tag eyebrow */
+.territorio-tag::before {
+  content: ''; display: block; width: 28px; height: 1.5px;
+  background: var(--oro); margin-right: 2px;
+}
+
+/* Titolo h2 */
+.territorio-h2 {
+  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+.territorio-h2 span {
+  color: var(--oro); font-style: italic;
+}
+
+/* Paragrafo */
+.territorio-p {
+  text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+}
+
+/* Chips zona */
+.territorio-chips {
+  margin-bottom: 28px;
+}
+
+/* Bottone territorio — link arancio */
+.btn-territorio {
+  text-decoration: none;
+}
+
+/* Stat box hover */
+.t-stat-box:hover {
+  background: rgba(255,255,255,0.12) !important;
+}
+
+/* Stat numero */
+.t-stat-n sup {
+  font-size: 1.1rem; margin-top: 6px; vertical-align: super;
+}
+
+/* Allineamento destra */
+.territorio-right {
+  align-items: flex-end;
+}
+
+/* Responsive 768px già coperto ma rinforziamo */
+@media(max-width:768px) {
+  .territorio-right { align-items: flex-start !important; }
+  .t-stat-box { max-width: 100% !important; }
+  .territorio-chips { gap: 8px !important; }
+  .t-chip { font-size: 0.68rem !important; padding: 6px 12px !important; }
+}
+
 </style>
 
 <script type="application/ld+json">
@@ -1569,7 +1624,7 @@ button svg, a.btn-p svg, a.btn-g svg {
     </div>
     <div class="f-col"><h5>Navigazione</h5><ul><li><a href="index.html">Home</a></li><li><a href="chi-siamo.html">Chi Siamo</a></li><li><a href="immobili.html">Immobili</a></li><li><a href="servizi.html">Servizi</a></li><li><a href="blog.html">Blog</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
     <div class="f-col"><h5>Servizi</h5><ul><li><a href="servizi.html#vendita">Vendita</a></li><li><a href="servizi.html#affitto">Affitto</a></li><li><a href="servizi.html#valutazione">Valutazione</a></li><li><a href="servizi.html#virtual-tour">Virtual Tour 360°</a></li><li><a href="servizi.html#aste">Aste Giudiziarie</a></li></ul></div>
-    <div class="f-col"><h5>Contatti</h5><ul><li><a href="tel:+390490000000">📞 049 000 0000</a></li><li><a href="mailto:info@righettoimmobiliare.it">📧 info@righetto...</a></li><li><a href="contatti.html">📍 Via Roma 1, Padova</a></li><li><a href="contatti.html">🕐 Lun–Ven: 9–19</a></li><li><a href="contatti.html">🕐 Sab: 9:00–12:30</a></li></ul></div>
+    <div class="f-col"><h5>Contatti</h5><ul><li><a href="tel:+390490000000">📞 049 000 0000</a></li><li><a href="/cdn-cgi/l/email-protection#274e49414867554e404f425353484e4a4a48454e4b4e465542094e53">📧 info@righetto...</a></li><li><a href="contatti.html">📍 Via Roma 1, Padova</a></li><li><a href="contatti.html">🕐 Lun–Ven: 9–19</a></li><li><a href="contatti.html">🕐 Sab: 9:00–12:30</a></li></ul></div>
   </div>
   <div class="footer-bottom">
     <span>© 2026 Righetto Immobiliare — P.IVA 00000000000 — Padova</span>
@@ -1577,7 +1632,7 @@ button svg, a.btn-p svg, a.btn-g svg {
   </div>
 </footer>
 
-<script src="js/chatbot.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/chatbot.js"></script>
 <script>
 /* ══ SUPABASE ══ */
 const SB_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
@@ -1869,12 +1924,4 @@ function doRicerca() {
   const mq     = document.getElementById('r-mq').value;
   if (tipo)   p.set('tipo', tipo);
   if (zona)   p.set('zona', zona);
-  if (prezzo) p.set('prezzo_max', prezzo);
-  if (mq)     p.set('mq_min', mq);
-  window.location.href = 'immobili.html?' + p.toString();
-}
-
-loadImmobili();
-</script>
-</body>
-</html>
+  if (prezzo) p.set('pr
