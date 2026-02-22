@@ -1492,7 +1492,7 @@ button svg, a.btn-p svg, a.btn-g svg {
     </div>
     <div class="f-col"><h5>Navigazione</h5><ul><li><a href="index.html">Home</a></li><li><a href="chi-siamo.html">Chi Siamo</a></li><li><a href="immobili.html">Immobili</a></li><li><a href="servizi.html">Servizi</a></li><li><a href="blog.html">Blog</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
     <div class="f-col"><h5>Servizi</h5><ul><li><a href="servizi.html#vendita">Vendita</a></li><li><a href="servizi.html#affitto">Affitto</a></li><li><a href="servizi.html#valutazione">Valutazione</a></li><li><a href="servizi.html#virtual-tour">Virtual Tour 360°</a></li><li><a href="servizi.html#aste">Aste Giudiziarie</a></li></ul></div>
-    <div class="f-col"><h5>Contatti</h5><ul><li><a href="tel:+390490000000">📞 049 000 0000</a></li><li><a href="mailto:info@righettoimmobiliare.it">📧 info@righetto...</a></li><li><a href="contatti.html">📍 Via Roma 1, Padova</a></li><li><a href="contatti.html">🕐 Lun–Ven: 9–19</a></li><li><a href="contatti.html">🕐 Sab: 9:00–12:30</a></li></ul></div>
+    <div class="f-col"><h5>Contatti</h5><ul><li><a href="tel:+390490000000">📞 049 000 0000</a></li><li><a href="/cdn-cgi/l/email-protection#f29b9c949db2809b959a9786869d9b9f9f9d909b9e9b938097dc9b86">📧 info@righetto...</a></li><li><a href="contatti.html">📍 Via Roma 1, Padova</a></li><li><a href="contatti.html">🕐 Lun–Ven: 9–19</a></li><li><a href="contatti.html">🕐 Sab: 9:00–12:30</a></li></ul></div>
   </div>
   <div class="footer-bottom">
     <span>© 2026 Righetto Immobiliare — P.IVA 00000000000 — Padova</span>
@@ -1500,7 +1500,7 @@ button svg, a.btn-p svg, a.btn-g svg {
   </div>
 </footer>
 
-<script src="js/chatbot.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/chatbot.js"></script>
 <script>
 /* ══ SUPABASE ══ */
 const SB_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
@@ -1792,12 +1792,4 @@ function doRicerca() {
   const mq     = document.getElementById('r-mq').value;
   if (tipo)   p.set('tipo', tipo);
   if (zona)   p.set('zona', zona);
-  if (prezzo) p.set('prezzo_max', prezzo);
-  if (mq)     p.set('mq_min', mq);
-  window.location.href = 'immobili.html?' + p.toString();
-}
-
-loadImmobili();
-</script>
-</body>
-</html>
+  if (prezzo) p.set('pr
