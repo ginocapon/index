@@ -53,6 +53,87 @@ button{font-family:inherit;cursor:pointer}
 ::-webkit-scrollbar-track{background:var(--sfondo)}
 ::-webkit-scrollbar-thumb{background:var(--blu3);border-radius:3px}
 
+
+/* ══ RICERCA ══ */
+#ricerca {
+  background: var(--testo);
+  padding: 0; position: relative; z-index: 50;
+  box-shadow: 0 6px 32px rgba(21,36,53,0.22);
+  border-top: 3px solid var(--oro);
+}
+.ricerca-wrap {
+  max-width: 1200px; margin: 0 auto;
+}
+.r-tabs {
+  display: flex; border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 0 28px; overflow-x: auto;
+}
+.r-tab {
+  padding: 14px 20px; background: none; border: none;
+  font-family: 'Montserrat',sans-serif; font-size: 0.72rem;
+  font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.45); cursor: pointer; white-space: nowrap;
+  border-bottom: 3px solid transparent; margin-bottom: -1px;
+  transition: all 0.2s;
+}
+.r-tab:hover { color: rgba(255,255,255,0.80); }
+.r-tab.active { color: white; border-bottom-color: var(--oro); }
+.r-filtri {
+  display: flex; align-items: stretch; flex-wrap: nowrap;
+  min-height: 64px;
+}
+.r-field {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 10px 20px;
+  border-right: 1px solid rgba(255,255,255,0.07);
+}
+.r-field label {
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.35);
+  margin-bottom: 3px;
+}
+.r-field select, .r-field input {
+  background: none; border: none; outline: none;
+  font-family: 'Montserrat',sans-serif; font-size: 0.88rem;
+  font-weight: 600; color: white; width: 100%;
+  -webkit-appearance: none; appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(255,255,255,0.35)'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0 center;
+  padding-right: 16px;
+}
+.r-field input { background-image: none; padding-right: 0; }
+.r-field input::placeholder { color: rgba(255,255,255,0.35); }
+.r-field select option { background: var(--testo); color: white; }
+.r-btn-cerca {
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; padding: 0 36px;
+  background: var(--oro); color: var(--testo);
+  font-family: 'Montserrat',sans-serif;
+  font-weight: 800; font-size: 0.8rem; letter-spacing: 1.5px;
+  text-transform: uppercase; border: none; cursor: pointer;
+  transition: all 0.22s; white-space: nowrap; min-width: 140px;
+}
+.r-btn-cerca:hover { background: var(--oro2); }
+.r-bot-hint {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 28px; font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.r-bot-hint strong { color: var(--oro); cursor: pointer; font-weight: 700; }
+.r-bot-hint strong:hover { text-decoration: underline; }
+.r-bot-avatar {
+  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(184,212,74,0.12); border: 1.5px solid rgba(184,212,74,0.35);
+  display: flex; align-items: center; justify-content: center;
+}
+@media(max-width:768px){
+  .r-filtri { flex-direction: column; }
+  .r-field { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .r-btn-cerca { min-height: 56px; width: 100%; }
+}
+
 /* NAVBAR */
 #navbar{
   position:fixed;top:0;left:0;right:0;z-index:1000;
@@ -569,27 +650,22 @@ button{font-family:inherit;cursor:pointer}
 }
 .cs-cta svg { width:15px; height:15px; flex-shrink:0; }
 /* Colonna foto */
+.cs-foto::before {
+  content: '';
+  position: absolute;
+  width: 380px; height: 380px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(44,74,110,0.07) 0%, transparent 68%);
+  bottom: -60px; left: 50%; transform: translateX(-50%); z-index: 1;
+}
 .cs-foto {
   order: 2; position: relative;
-  background: linear-gradient(175deg, var(--testo) 0%, #1E3A5C 60%, #2C4A6E 100%);
+  background: var(--sfondo);
   display: flex; align-items: flex-end; justify-content: center;
   overflow: hidden; min-height: 600px;
 }
 /* arco decorativo */
-.cs-foto::before {
-  content: ''; position: absolute;
-  width: 360px; height: 360px; border-radius: 50%;
-  border: 1px solid rgba(184,212,74,0.15);
-  bottom: -60px; left: 50%; transform: translateX(-50%);
-  z-index: 1;
-}
-.cs-foto::after {
-  content: ''; position: absolute;
-  width: 280px; height: 280px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(184,212,74,0.08) 0%, transparent 70%);
-  bottom: -20px; left: 50%; transform: translateX(-50%);
-  z-index: 1;
-}
+
+
 .cs-foto img {
   position: relative; z-index: 2;
   width: 100%; max-width: 380px;
@@ -602,20 +678,22 @@ button{font-family:inherit;cursor:pointer}
   position: absolute; bottom: 28px; left: 0; right: 0;
   text-align: center; z-index: 3;
 }
-.cs-foto-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem; font-weight: 700; color: white;
-  letter-spacing: 0.5px;
-}
+
 .cs-foto-role {
-  font-size: 0.6rem; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--oro);
-  font-weight: 700; margin-top: 4px;
+  font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--blu3); font-weight: 700; text-align: center;
 }
 
 @media(max-width:900px) {
   .cs-inner { grid-template-columns: 1fr; }
-  .cs-foto { min-height: 320px; order: 2; }
+  .cs-foto::before {
+  content: '';
+  position: absolute;
+  width: 380px; height: 380px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(44,74,110,0.07) 0%, transparent 68%);
+  bottom: -60px; left: 50%; transform: translateX(-50%); z-index: 1;
+}
+.cs-foto { min-height: 320px; order: 2; }
   .cs-foto img { max-height: 320px; width: auto; }
   .cs-testo { order: 1; padding: 44px 24px; }
 }
@@ -1470,8 +1548,7 @@ button svg, a.btn-p svg, a.btn-g svg {
            alt="Consulente immobiliare Righetto Immobiliare Padova"
            loading="lazy" width="380">
       <div class="cs-foto-label">
-        <div class="cs-foto-name">Il nostro team</div>
-        <div class="cs-foto-role">Dal 1990 · Padova</div>
+        <div class="cs-foto-role">Righetto Immobiliare · Dal 1990</div>
       </div>
     </div>
   </div>
@@ -1492,7 +1569,7 @@ button svg, a.btn-p svg, a.btn-g svg {
     </div>
     <div class="f-col"><h5>Navigazione</h5><ul><li><a href="index.html">Home</a></li><li><a href="chi-siamo.html">Chi Siamo</a></li><li><a href="immobili.html">Immobili</a></li><li><a href="servizi.html">Servizi</a></li><li><a href="blog.html">Blog</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
     <div class="f-col"><h5>Servizi</h5><ul><li><a href="servizi.html#vendita">Vendita</a></li><li><a href="servizi.html#affitto">Affitto</a></li><li><a href="servizi.html#valutazione">Valutazione</a></li><li><a href="servizi.html#virtual-tour">Virtual Tour 360°</a></li><li><a href="servizi.html#aste">Aste Giudiziarie</a></li></ul></div>
-    <div class="f-col"><h5>Contatti</h5><ul><li><a href="tel:+390490000000">📞 049 000 0000</a></li><li><a href="/cdn-cgi/l/email-protection#f29b9c949db2809b959a9786869d9b9f9f9d909b9e9b938097dc9b86">📧 info@righetto...</a></li><li><a href="contatti.html">📍 Via Roma 1, Padova</a></li><li><a href="contatti.html">🕐 Lun–Ven: 9–19</a></li><li><a href="contatti.html">🕐 Sab: 9:00–12:30</a></li></ul></div>
+    <div class="f-col"><h5>Contatti</h5><ul><li><a href="tel:+390490000000">📞 049 000 0000</a></li><li><a href="mailto:info@righettoimmobiliare.it">📧 info@righetto...</a></li><li><a href="contatti.html">📍 Via Roma 1, Padova</a></li><li><a href="contatti.html">🕐 Lun–Ven: 9–19</a></li><li><a href="contatti.html">🕐 Sab: 9:00–12:30</a></li></ul></div>
   </div>
   <div class="footer-bottom">
     <span>© 2026 Righetto Immobiliare — P.IVA 00000000000 — Padova</span>
@@ -1500,7 +1577,7 @@ button svg, a.btn-p svg, a.btn-g svg {
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/chatbot.js"></script>
+<script src="js/chatbot.js"></script>
 <script>
 /* ══ SUPABASE ══ */
 const SB_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
@@ -1792,4 +1869,12 @@ function doRicerca() {
   const mq     = document.getElementById('r-mq').value;
   if (tipo)   p.set('tipo', tipo);
   if (zona)   p.set('zona', zona);
-  if (prezzo) p.set('pr
+  if (prezzo) p.set('prezzo_max', prezzo);
+  if (mq)     p.set('mq_min', mq);
+  window.location.href = 'immobili.html?' + p.toString();
+}
+
+loadImmobili();
+</script>
+</body>
+</html>
