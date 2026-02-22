@@ -768,7 +768,9 @@ footer{background:var(--testo);color:rgba(255,255,255,0.55);padding:64px 44px 28
   gap: 64px; align-items: center;
 }
 .territorio-left {
-  display: flex; flex-direction: column; justify-content: flex-start;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
 }
 .territorio-tag {
   display: inline-flex; align-items: center; gap: 10px;
@@ -864,6 +866,26 @@ footer{background:var(--testo);color:rgba(255,255,255,0.55);padding:64px 44px 28
   .hero-h1{font-size:2.8rem}
 
   /* BOTTONI STESSA MISURA SU MOBILE */
+/* btn-g base */
+.btn-g{
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:9px;padding:15px 32px;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  color:white;border-radius:8px;font-weight:800;font-size:0.82rem;
+  letter-spacing:1.2px;text-transform:uppercase;
+  border:2px solid rgba(255,255,255,0.5);
+  transition:all 0.25s;cursor:pointer;white-space:nowrap;
+  text-shadow:0 1px 6px rgba(0,0,0,0.4);
+  font-family:"Montserrat",sans-serif;
+}
+.btn-g:hover{
+  background:rgba(255,255,255,0.28);
+  border-color:var(--oro);color:var(--oro);
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(0,0,0,0.2);
+  text-shadow:none;
+}
   .btn-p,.btn-g,.btn-calc,.btn-send,.btn-srch,.btn-src{
     padding:15px 22px;font-size:0.78rem;width:100%;justify-content:center;
   }
@@ -931,61 +953,6 @@ button svg, a.btn-p svg, a.btn-g svg {
 
 
 .btn-g{background:rgba(255,255,255,0.20)!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;border:1.5px solid rgba(255,255,255,0.55)!important;color:white!important;}
-
-/* ══ TERRITORIO — CSS COMPLETO ══ */
-
-/* Tag eyebrow */
-.territorio-tag::before {
-  content: ''; display: block; width: 28px; height: 1.5px;
-  background: var(--oro); margin-right: 2px;
-}
-
-/* Titolo h2 */
-.territorio-h2 {
-  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
-}
-.territorio-h2 span {
-  color: var(--oro); font-style: italic;
-}
-
-/* Paragrafo */
-.territorio-p {
-  text-shadow: 0 1px 8px rgba(0,0,0,0.4);
-}
-
-/* Chips zona */
-.territorio-chips {
-  margin-bottom: 28px;
-}
-
-/* Bottone territorio — link arancio */
-.btn-territorio {
-  text-decoration: none;
-}
-
-/* Stat box hover */
-.t-stat-box:hover {
-  background: rgba(255,255,255,0.12) !important;
-}
-
-/* Stat numero */
-.t-stat-n sup {
-  font-size: 1.1rem; margin-top: 6px; vertical-align: super;
-}
-
-/* Allineamento destra */
-.territorio-right {
-  align-items: flex-end;
-}
-
-/* Responsive 768px già coperto ma rinforziamo */
-@media(max-width:768px) {
-  .territorio-right { align-items: flex-start !important; }
-  .t-stat-box { max-width: 100% !important; }
-  .territorio-chips { gap: 8px !important; }
-  .t-chip { font-size: 0.68rem !important; padding: 6px 12px !important; }
-}
-
 </style>
 
 <script type="application/ld+json">
@@ -1624,7 +1591,7 @@ button svg, a.btn-p svg, a.btn-g svg {
     </div>
     <div class="f-col"><h5>Navigazione</h5><ul><li><a href="index.html">Home</a></li><li><a href="chi-siamo.html">Chi Siamo</a></li><li><a href="immobili.html">Immobili</a></li><li><a href="servizi.html">Servizi</a></li><li><a href="blog.html">Blog</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
     <div class="f-col"><h5>Servizi</h5><ul><li><a href="servizi.html#vendita">Vendita</a></li><li><a href="servizi.html#affitto">Affitto</a></li><li><a href="servizi.html#valutazione">Valutazione</a></li><li><a href="servizi.html#virtual-tour">Virtual Tour 360°</a></li><li><a href="servizi.html#aste">Aste Giudiziarie</a></li></ul></div>
-    <div class="f-col"><h5>Contatti</h5><ul><li><a href="tel:+390490000000">📞 049 000 0000</a></li><li><a href="/cdn-cgi/l/email-protection#274e49414867554e404f425353484e4a4a48454e4b4e465542094e53">📧 info@righetto...</a></li><li><a href="contatti.html">📍 Via Roma 1, Padova</a></li><li><a href="contatti.html">🕐 Lun–Ven: 9–19</a></li><li><a href="contatti.html">🕐 Sab: 9:00–12:30</a></li></ul></div>
+    <div class="f-col"><h5>Contatti</h5><ul><li><a href="tel:+390490000000">📞 049 000 0000</a></li><li><a href="/cdn-cgi/l/email-protection#87eee9e1e8c7f5eee0efe2f3f3e8eeeaeae8e5eeebeee6f5e2a9eef3">📧 info@righetto...</a></li><li><a href="contatti.html">📍 Via Roma 1, Padova</a></li><li><a href="contatti.html">🕐 Lun–Ven: 9–19</a></li><li><a href="contatti.html">🕐 Sab: 9:00–12:30</a></li></ul></div>
   </div>
   <div class="footer-bottom">
     <span>© 2026 Righetto Immobiliare — P.IVA 00000000000 — Padova</span>
