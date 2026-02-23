@@ -4,22 +4,22 @@
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Chi Siamo — Righetto Immobiliare Padova</title>
   <meta name="description" content="Righetto Immobiliare: 30 anni di esperienza nel mercato immobiliare di Padova e provincia. Conosciamo ogni quartiere, ogni dinamica. Capon Gino — titolare.">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--nero:#0a0a0a;--bianco:#f5f2ed;--oro:#c9a84c;--grigio:#6b6560;--gc:#e8e4de;--verde:#4a5c4e;--sfondo:#f0ece6}
-    body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--nero)}
+    :root{--nero:#2C4A6E;--bianco:#F7F5F1;--oro:#B8D44A;--grigio:#6B7A8D;--gc:#E1DBD1;--verde:#1E8449;--sfondo:#ECE7DF;--blu:#2C4A6E;--blu2:#3A5F8C;--azzurro:#8AB4CE;--oro2:#CDED62;--testo:#152435;--carta:#F2EDE7}
+    body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--testo)}
     a{text-decoration:none;color:inherit}
     header{background:var(--nero);position:sticky;top:0;z-index:100}
-    .hi{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:62px;display:flex;align-items:center;gap:2rem}
+    .hi{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:74px;display:flex;align-items:center;gap:2rem}
     .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff}
     .logo span{color:var(--oro);font-style:italic}
     nav{display:flex;gap:.2rem;flex:1}
-    nav a{color:rgba(255,255,255,.5);font-size:.82rem;padding:.4rem .75rem;border-radius:2px;transition:color .2s}
+    nav a{color:rgba(255,255,255,.5);font-size:.82rem;padding:.4rem .75rem;border-radius:4px;transition:color .2s}
     nav a:hover{color:#fff} nav a.active{color:var(--oro)}
     .h-cta{display:flex;gap:.65rem;align-items:center}
     .h-tel{color:rgba(255,255,255,.55);font-size:.78rem}
-    .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:2px;font-size:.76rem;font-weight:500}
+    .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:6px;font-size:.76rem;font-weight:500;transition:background .2s}
     /* HERO */
     .hero{background:var(--nero);padding:5rem 1.5rem;position:relative;overflow:hidden}
     .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent)}
@@ -48,7 +48,7 @@
     .team-inner{max-width:1380px;margin:0 auto}
     .team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem;margin-top:3rem}
     @media(max-width:700px){.team-grid{grid-template-columns:1fr}}
-    .tcard{border:1px solid var(--gc);border-radius:3px;overflow:hidden;display:grid;grid-template-columns:140px 1fr}
+    .tcard{border:1px solid var(--gc);border-radius:10px;overflow:hidden;display:grid;grid-template-columns:140px 1fr;transition:transform .25s,box-shadow .25s}
     .tcard-img{background:var(--nero);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:4rem;color:var(--oro);aspect-ratio:1}
     .tcard-body{padding:1.3rem}
     .tcard-name{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;margin-bottom:.2rem}
@@ -63,7 +63,7 @@
     .val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem}
     @media(max-width:800px){.val-grid{grid-template-columns:1fr 1fr}}
     @media(max-width:500px){.val-grid{grid-template-columns:1fr}}
-    .vcard{background:#fff;border:1px solid var(--gc);border-radius:3px;padding:1.6rem;transition:transform .2s,box-shadow .2s}
+    .vcard{background:#fff;border:1px solid var(--gc);border-radius:10px;padding:1.6rem;transition:transform .2s,box-shadow .2s}
     .vcard:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.07)}
     .vcard-icon{font-size:2rem;margin-bottom:.85rem}
     .vcard-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;margin-bottom:.4rem}
@@ -81,7 +81,7 @@
     .cta-s h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;margin-bottom:.75rem}
     .cta-s h2 strong{font-weight:600;color:var(--oro)}
     .cta-s p{font-size:.88rem;color:var(--grigio);max-width:520px;margin:0 auto 2rem;line-height:1.8}
-    .btn-dk{background:var(--nero);color:#fff;padding:.7rem 1.6rem;border-radius:2px;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;display:inline-block;transition:background .2s}
+    .btn-dk{background:var(--nero);color:#fff;padding:.7rem 1.6rem;border-radius:8px;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;display:inline-block;transition:background .2s}
     .btn-dk:hover{background:var(--oro);color:var(--nero)}
     /* FOOTER */
     footer{background:var(--nero);padding:3rem 1.5rem 1.5rem}
@@ -113,9 +113,9 @@
       <h1>Passione, <strong>esperienza</strong><br>e fiducia nel mattone</h1>
       <p>Più di 30 anni al servizio delle famiglie e degli investitori di Padova e provincia. Non siamo un'agenzia come le altre: conosciamo ogni via, ogni quartiere, ogni dinamica del mercato locale. Il risultato? Vendite più rapide, affitti più sicuri, clienti più soddisfatti.</p>
     </div>
-    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:3px;padding:2rem;font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;font-style:italic;color:rgba(255,255,255,.7);line-height:1.6">
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);border-radius:10px;padding:2rem;font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;font-style:italic;color:rgba(255,255,255,.7);line-height:1.6">
       "Ogni immobile racconta una storia.<br>Il nostro lavoro è aiutarti a <span style="color:var(--oro);font-weight:600;font-style:normal">scrivere la prossima."</span>
-      <div style="font-family:'DM Sans',sans-serif;font-size:.72rem;color:rgba(255,255,255,.3);margin-top:1rem;font-style:normal">— Capon Gino, Titolare</div>
+      <div style="font-family:'Montserrat',sans-serif;font-size:.72rem;color:rgba(255,255,255,.3);margin-top:1rem;font-style:normal">— Capon Gino, Titolare</div>
     </div>
   </div>
 </section>
