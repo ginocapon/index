@@ -848,7 +848,8 @@ footer{background:var(--testo);color:rgba(255,255,255,0.55);padding:64px 44px 28
   .t-stat-box { max-width: 100%; }
 }
 
-.fc-inner{grid-template-columns:1fr}
+@media(max-width:900px){
+  .fc-inner{grid-template-columns:1fr}
   .fc-foto{height:320px;display:block!important}
   .footer-inner{grid-template-columns:1fr 1fr}
 }
@@ -857,8 +858,7 @@ footer{background:var(--testo);color:rgba(255,255,255,0.55);padding:64px 44px 28
   #navbar{padding:0 20px}
   .nav-links,.nav-cta{display:none}
   .nav-burger{display:flex}
-  #evidenza,#servizi,#perche,#stima,#blog,#comuni,#form-contatto,footer{padding-left:20px;padding-right:20px}
-  #evidenza,#servizi,#perche,#stima,#blog,
+  #evidenza,#servizi,#perche,#stima,#blog,#faq-hp,#form-contatto,footer{padding-left:20px;padding-right:20px}
   .hero-inner{grid-template-columns:1fr;padding:0 20px;padding-top:calc(var(--nav-h) + 20px);padding-bottom:88px}
   .hero-right{display:none}
   .hero-h1{font-size:2.8rem}
@@ -1054,6 +1054,91 @@ button svg, a.btn-p svg, a.btn-g svg {
   font-size: 0.78rem; color: var(--grigio);
 }
 .stima-feat::before { content: '✓'; color: var(--oro); font-weight: 900; flex-shrink: 0; }
+
+/* ── FORM CONTATTO ── */
+#form-contatto { padding: 0; background: var(--bianco); }
+.fc-inner {
+  display: grid; grid-template-columns: 420px 1fr;
+  max-width: 1200px; margin: 0 auto;
+  min-height: 600px;
+}
+.fc-foto {
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.fc-foto img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+}
+.fc-foto-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(21,36,53,0.85) 0%, rgba(21,36,53,0.15) 60%, transparent 100%);
+}
+.fc-foto-info {
+  position: relative; z-index: 2; padding: 32px 28px;
+}
+.fc-nome { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: white; }
+.fc-ruolo { font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.55); font-weight: 600; margin-top: 4px; }
+.fc-stars { margin-top: 10px; display: flex; gap: 3px; }
+.fc-stars span { color: var(--oro); font-size: 0.9rem; }
+.fc-badge {
+  display: inline-block; margin-top: 10px;
+  padding: 5px 12px; border-radius: 4px;
+  background: rgba(184,212,74,0.15); border: 1px solid rgba(184,212,74,0.3);
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--oro);
+}
+.fc-form { padding: 56px 48px; }
+.fc-ey {
+  font-size: 0.62rem; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--oro); font-weight: 700; margin-bottom: 10px;
+}
+.fc-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem; font-weight: 700; color: var(--testo);
+  line-height: 1.15; margin-bottom: 32px;
+}
+.fc-title span { color: var(--blu3); }
+.fc-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  margin-bottom: 24px;
+}
+.fc-group { display: flex; flex-direction: column; gap: 5px; }
+.fc-group.full { grid-column: 1 / -1; }
+.fc-group label {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--grigio);
+}
+.fc-group input, .fc-group select, .fc-group textarea {
+  padding: 12px 14px; border: 1px solid rgba(44,74,110,0.12);
+  border-radius: 8px; font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem; color: var(--testo); background: var(--carta);
+  transition: border-color 0.2s;
+}
+.fc-group input:focus, .fc-group select:focus, .fc-group textarea:focus {
+  outline: none; border-color: var(--oro);
+}
+.fc-group textarea { min-height: 90px; resize: vertical; }
+.btn-send {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 15px 32px; background: var(--blu); color: white;
+  border: none; border-radius: 8px;
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+  font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase;
+  cursor: pointer; transition: all 0.25s; width: 100%;
+}
+.btn-send:hover { background: var(--blu2); transform: translateY(-1px); }
+.fc-privacy {
+  font-size: 0.72rem; color: var(--grigio); margin-top: 14px;
+  line-height: 1.6;
+}
+.fc-privacy a { color: var(--blu3); text-decoration: underline; }
+#cf-ok {
+  display: none; margin-top: 16px; padding: 14px 18px;
+  background: rgba(30,132,73,0.08); border: 1px solid rgba(30,132,73,0.2);
+  border-radius: 8px; font-size: 0.82rem; color: var(--verde);
+  font-weight: 600;
+}
 
 /* ── FAQ ── */
 #faq-hp { background: var(--sfondo); padding: 90px 44px; }
@@ -1715,6 +1800,111 @@ button svg, a.btn-p svg, a.btn-g svg {
   </div>
 </section>
 
+<!-- FAQ HOMEPAGE -->
+<section id="faq-hp">
+  <div class="faq-inner">
+    <div class="faq-head rv">
+      <div class="eyebrow">Domande frequenti</div>
+      <h2 class="sec-h2">Risposte rapide</h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span class="faq-q">Quanto tempo ci vuole per vendere un immobile?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Con una valutazione realistica e una buona strategia di promozione, le vendite si concludono generalmente in 3-6 mesi. Immobili sovraprezzati possono restare sul mercato 12-18 mesi. La nostra media è di 4,2 mesi.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span class="faq-q">La valutazione del mio immobile è gratuita?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Sì, completamente gratuita e senza impegno. I nostri agenti effettuano un sopralluogo professionale e consegnano una stima scritta basata sui dati reali FIAIP 2025-2026 per la provincia di Padova.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span class="faq-q">Quali documenti servono per vendere casa?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Servono: atto di provenienza, visura catastale con planimetria, APE obbligatorio, certificato di abitabilità, titoli edilizi e documentazione condominiale. Ci occupiamo noi di raccogliere e verificare tutta la documentazione.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span class="faq-q">Operate anche fuori dal centro di Padova?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Operiamo in tutti i 101 comuni della provincia di Padova: dal centro storico ai borghi rurali del Basso Padovano, dai Colli Euganei alla Riviera del Brenta, dalle zone industriali alle aree agricole.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span class="faq-q">Cos'è il Virtual Tour 360°?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Realizziamo fotografie sferiche 360° e le pubblichiamo come tour interattivo navigabile online. Il potenziale acquirente visita l'immobile da casa, risparmiando tempo e aumentando la qualità dei contatti ricevuti.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          <span class="faq-q">Come funziona la stima AI sul vostro sito?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Il nostro strumento online calcola una stima indicativa basata sui dati FIAIP 2025-2026 per tutti i 101 comuni della provincia. Per una valutazione ufficiale gratuita, contattaci per un sopralluogo professionale.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM CONTATTO -->
+<section id="form-contatto">
+  <div class="fc-inner">
+    <div class="fc-foto">
+      <img
+        src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&q=85&fit=crop&crop=faces,top"
+        alt="Alessandra Righetto — Agente Immobiliare Padova"
+        onerror="this.src='https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=700&q=80&fit=crop&crop=face'">
+      <div class="fc-foto-overlay"></div>
+      <div class="fc-foto-info">
+        <div class="fc-nome">Alessandra Righetto</div>
+        <div class="fc-ruolo">Responsabile Vendite · Padova</div>
+        <div class="fc-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <div class="fc-badge">Agente abilitato FIAIP</div>
+      </div>
+    </div>
+    <div class="fc-form">
+      <div class="fc-ey">Siamo qui per te</div>
+      <h2 class="fc-title">Parliamo del<br>tuo <span>immobile</span></h2>
+      <form id="contattoForm" onsubmit="inviaContatto(event)">
+        <div class="fc-grid">
+          <div class="fc-group"><label>Nome *</label><input type="text" id="cf-nome" placeholder="Mario" required></div>
+          <div class="fc-group"><label>Cognome *</label><input type="text" id="cf-cognome" placeholder="Rossi" required></div>
+          <div class="fc-group"><label>Email *</label><input type="email" id="cf-email" placeholder="mario@email.it" required></div>
+          <div class="fc-group"><label>Telefono *</label><input type="tel" id="cf-tel" placeholder="+39 340 000 0000" required></div>
+          <div class="fc-group full">
+            <label>Tipo di interesse</label>
+            <select id="cf-interesse">
+              <option value="">Seleziona...</option>
+              <option value="vendere">Voglio vendere il mio immobile</option>
+              <option value="acquistare">Voglio acquistare casa</option>
+              <option value="affittare">Voglio affittare il mio immobile</option>
+              <option value="cercare-affitto">Cerco un immobile in affitto</option>
+              <option value="valutazione">Richiedo valutazione gratuita</option>
+              <option value="asta">Informazioni sulle aste</option>
+              <option value="altro">Altro</option>
+            </select>
+          </div>
+          <div class="fc-group full"><label>Messaggio</label><textarea id="cf-msg" placeholder="Descrivi la tua esigenza... (opzionale)"></textarea></div>
+        </div>
+        <button type="submit" class="btn-send">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Invia Richiesta
+        </button>
+        <div class="fc-privacy">Inviando il modulo accetti la nostra <a href="privacy.html">Privacy Policy</a>. I tuoi dati saranno usati esclusivamente per rispondere alla tua richiesta.</div>
+        <div id="cf-ok"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
@@ -1763,42 +1953,6 @@ document.querySelectorAll('.nav-mobile a').forEach(a=>{
     document.getElementById('navMobile').classList.remove('open');
   });
 });
-
-/* ══ SEARCH TAB ══ */
-let currentTab = 'vendita';
-function setTab(btn, tab){
-  currentTab = tab;
-  document.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-}
-function doSearch(){
-  const p = new URLSearchParams();
-  p.set('tab', currentTab);
-  const tipo=document.getElementById('s-tipo').value;
-  const zona=document.getElementById('s-zona').value;
-  const prezzo=document.getElementById('s-prezzo').value;
-  const mq=document.getElementById('s-mq').value;
-  if(tipo) p.set('tipo',tipo);
-  if(zona) p.set('zona',zona);
-  if(prezzo) p.set('prezzo_max',prezzo);
-  if(mq) p.set('mq_min',mq);
-  window.location.href = 'immobili.html?' + p.toString();
-}
-
-function doRicerca(){
-  const p = new URLSearchParams();
-  const tab = currentRTab || 'vendita';
-  p.set('contratto', tab);
-  const tipo    = document.getElementById('r-tipo')?.value;
-  const zona    = document.getElementById('r-zona')?.value;
-  const prezzo  = document.getElementById('r-prezzo')?.value;
-  const mq      = document.getElementById('r-mq')?.value;
-  if(tipo)   p.set('tipo', tipo);
-  if(zona)   p.set('zona', zona);
-  if(prezzo) p.set('prezzo_max', prezzo);
-  if(mq)     p.set('mq_min', mq);
-  window.location.href = 'immobili.html?' + p.toString();
-}
 
 
 function toggleQ(btn){
@@ -2010,8 +2164,6 @@ async function inviaContatto(e){
   btn.textContent='✓ Inviato'; btn.style.background='var(--verde)';
 }
 
-/* ══ COMUNI ══ */
-
 
 
 /* ══ RICERCA RAPIDA ══ */
@@ -2030,4 +2182,12 @@ function doRicerca() {
   const mq     = document.getElementById('r-mq').value;
   if (tipo)   p.set('tipo', tipo);
   if (zona)   p.set('zona', zona);
-  if (prezzo) p.set('pr
+  if (prezzo) p.set('prezzo_max', prezzo);
+  if (mq)     p.set('mq_min', mq);
+  window.location.href = 'immobili.html?' + p.toString();
+}
+
+loadImmobili();
+</script>
+</body>
+</html>
