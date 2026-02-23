@@ -742,7 +742,7 @@ footer{background:var(--testo);color:rgba(255,255,255,0.55);padding:64px 44px 28
   .props-grid>.pc:first-child .pp{font-size:1.45rem}
   .perche-grid,.stima-layout{grid-template-columns:1fr}
   .perche-stats{flex-direction:row;gap:16px}
-  
+}
 /* TERRITORIO — foto rurale B&W */
 #territorio {
   position: relative;
@@ -863,7 +863,7 @@ footer{background:var(--testo);color:rgba(255,255,255,0.55);padding:64px 44px 28
 }
 
 @media(max-width:900px){
-  .fc-inner{max-width:100%}
+  .fc-inner{max-width:100%;grid-template-columns:1fr}.fc-foto{display:none}
   .footer-inner{grid-template-columns:1fr 1fr}
 }
 @media(max-width:768px){
@@ -1090,11 +1090,61 @@ button svg, a.btn-p svg, a.btn-g svg {
   pointer-events: none;
 }
 .fc-inner {
-  max-width: 720px; margin: 0 auto;
+  max-width: 1200px; margin: 0 auto;
   position: relative; z-index: 2;
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 0;
+  background: rgba(255,255,255,0.03);
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
 }
-.fc-foto { display: none; }
-.fc-form { padding: 0; }
+.fc-foto {
+  position: relative;
+  overflow: hidden;
+  min-height: 580px;
+}
+.fc-foto img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: saturate(0.9) contrast(1.02);
+}
+.fc-foto-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 32px 28px 28px;
+  background: linear-gradient(to top, rgba(12,22,38,0.92) 0%, rgba(12,22,38,0.55) 60%, transparent 100%);
+  z-index: 2;
+}
+.fc-nome {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; font-weight: 700; color: white;
+  margin-bottom: 4px;
+}
+.fc-ruolo {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.6);
+  margin-bottom: 8px;
+}
+.fc-stars {
+  color: var(--oro); font-size: 0.85rem;
+  letter-spacing: 2px; margin-bottom: 8px;
+}
+.fc-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: 20px;
+  background: rgba(184,212,74,0.12); border: 1px solid rgba(184,212,74,0.25);
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--oro);
+}
+.fc-form { padding: 56px 48px; }
+
+
+
+
+
+
 .fc-ey {
   font-size: 0.62rem; letter-spacing: 3.5px; text-transform: uppercase;
   color: var(--oro); font-weight: 700; margin-bottom: 12px;
@@ -1991,6 +2041,15 @@ button svg, a.btn-p svg, a.btn-g svg {
 <!-- FORM CONTATTO -->
 <section id="form-contatto">
   <div class="fc-inner">
+    <div class="fc-foto">
+      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&q=85&fit=crop&crop=faces,top" alt="Alessandra Righetto — Responsabile Vendite" onerror="this.src='https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=700&q=80&fit=crop&crop=face'">
+      <div class="fc-foto-overlay">
+        <div class="fc-nome">Alessandra Righetto</div>
+        <div class="fc-ruolo">Responsabile Vendite · Padova</div>
+        <div class="fc-stars">★★★★★</div>
+        <div class="fc-badge">Agente abilitato FIAIP</div>
+      </div>
+    </div>
     <div class="fc-form">
       <div class="fc-ey">Siamo qui per te</div>
       <h2 class="fc-title">Parliamo del tuo <span>immobile</span></h2>
