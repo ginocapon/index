@@ -7,8 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--nero:#2C4A6E;--bianco:#F7F5F1;--oro:#B8D44A;--grigio:#6B7A8D;--gc:#E1DBD1;--verde:#1E8449;--sfondo:#ECE7DF;--blu:#2C4A6E;--blu2:#3A5F8C;--azzurro:#8AB4CE;--oro2:#CDED62;--testo:#152435;--carta:#F2EDE7}
-    body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--testo)}
+    :root{--nero:#2C4A6E;--bianco:#080b0e;--oro:#B8D44A;--grigio:#8a9bb0;--gc:rgba(255,255,255,0.06);--verde:#1E8449;--sfondo:#0d1117;--blu:#2C4A6E;--blu2:#3A5F8C;--azzurro:#8AB4CE;--oro2:#CDED62;--testo:#e0ddd6;--carta:#111820}
+    body{font-family:'Montserrat',sans-serif;background:#080b0e;color:#e0ddd6}
     a{text-decoration:none;color:inherit}
     header{background:var(--nero);position:sticky;top:0;z-index:100}
     .hi{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:74px;display:flex;align-items:center;gap:2rem}
@@ -30,7 +30,7 @@
     .hero h1 strong{font-weight:600;font-style:italic}
     .hero p{font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.9}
     /* LINEA TEMPORALE */
-    .timeline{padding:5rem 1.5rem;background:var(--sfondo)}
+    .timeline{padding:5rem 1.5rem;background:#0d1117}
     .tl-inner{max-width:1100px;margin:0 auto}
     .sec-tag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.5rem}
     .sec-t{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;margin-bottom:3rem}
@@ -39,7 +39,7 @@
     .tl-items::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--gc)}
     .tl-item{position:relative;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--gc)}
     .tl-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
-    .tl-dot{position:absolute;left:-2.55rem;top:.3rem;width:10px;height:10px;border-radius:50%;background:var(--oro);border:2px solid var(--sfondo)}
+    .tl-dot{position:absolute;left:-2.55rem;top:.3rem;width:10px;height:10px;border-radius:50%;background:var(--oro);border:2px solid #0d1117;box-shadow:0 0 8px rgba(184,212,74,0.3)}
     .tl-year{font-size:.68rem;letter-spacing:.1em;color:var(--oro);margin-bottom:.3rem;font-weight:500}
     .tl-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;margin-bottom:.4rem}
     .tl-desc{font-size:.84rem;color:var(--grigio);line-height:1.75}
@@ -58,13 +58,13 @@
     .tcc{display:flex;align-items:center;gap:.4rem;font-size:.77rem;color:var(--grigio)}
     .tcc svg{width:12px;height:12px;color:var(--oro);flex-shrink:0}
     /* VALORI */
-    .values{background:var(--sfondo);padding:5rem 1.5rem}
+    .values{background:#0d1117;padding:5rem 1.5rem}
     .val-inner{max-width:1380px;margin:0 auto}
     .val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem}
     @media(max-width:800px){.val-grid{grid-template-columns:1fr 1fr}}
     @media(max-width:500px){.val-grid{grid-template-columns:1fr}}
-    .vcard{background:#fff;border:1px solid var(--gc);border-radius:10px;padding:1.6rem;transition:transform .2s,box-shadow .2s}
-    .vcard:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.07)}
+    .vcard{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:1.6rem;transition:transform .2s,box-shadow .2s;backdrop-filter:blur(8px)}
+    .vcard:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(184,212,74,0.06)}
     .vcard-icon{font-size:2rem;margin-bottom:.85rem}
     .vcard-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;margin-bottom:.4rem}
     .vcard-desc{font-size:.82rem;color:var(--grigio);line-height:1.7}
@@ -95,6 +95,14 @@
     .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.38);margin-bottom:.3rem;transition:color .2s}
     .fcol a:hover{color:var(--oro)}
     .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.22);flex-wrap:wrap;gap:.4rem}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .timeline{animation:fadeInUp 0.5s ease both}
+    .tl-items::before{background:rgba(255,255,255,0.06)}
+    .tl-item{border-bottom-color:rgba(255,255,255,0.06)}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,212,74,0.3),transparent)}
+    .tcard{border-color:rgba(255,255,255,0.06);background:rgba(255,255,255,0.02)}
+    .team{background:#080b0e}
+    .cta-s{background:#080b0e}
   </style>
 </head>
 <body>

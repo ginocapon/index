@@ -7,8 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--nero:#2C4A6E;--bianco:#F7F5F1;--oro:#B8D44A;--grigio:#6B7A8D;--gc:#E1DBD1;--verde:#1E8449;--sfondo:#ECE7DF;--blu:#2C4A6E;--blu2:#3A5F8C;--azzurro:#8AB4CE;--oro2:#CDED62;--testo:#152435;--carta:#F2EDE7}
-    body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--testo)}
+    :root{--nero:#2C4A6E;--bianco:#080b0e;--oro:#B8D44A;--grigio:#8a9bb0;--gc:rgba(255,255,255,0.06);--verde:#1E8449;--sfondo:#0d1117;--blu:#2C4A6E;--blu2:#3A5F8C;--azzurro:#8AB4CE;--oro2:#CDED62;--testo:#e0ddd6;--carta:#111820}
+    body{font-family:'Montserrat',sans-serif;background:#080b0e;color:#e0ddd6}
     a{text-decoration:none;color:inherit}
     header{background:var(--nero);position:sticky;top:0;z-index:100}
     .hi{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:74px;display:flex;align-items:center;gap:2rem}
@@ -32,7 +32,7 @@
     @media(max-width:1000px){.main{grid-template-columns:1fr}}
     /* FORM */
     .fbox{background:var(--sfondo);border:1px solid var(--gc);border-radius:10px;overflow:hidden}
-    .fbox-head{padding:1.2rem 1.5rem;border-bottom:1px solid var(--gc);background:#fff}
+    .fbox-head{padding:1.2rem 1.5rem;border-bottom:1px solid var(--gc);background:rgba(255,255,255,0.04)}
     .fbox-head h2{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600}
     .fbox-head p{font-size:.78rem;color:var(--grigio);margin-top:.25rem}
     .fbox-body{padding:1.5rem}
@@ -40,8 +40,8 @@
     @media(max-width:600px){.frow{grid-template-columns:1fr}}
     .field{display:flex;flex-direction:column;gap:.25rem;margin-bottom:.75rem}
     .field label{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grigio);font-weight:500}
-    .field input,.field select,.field textarea{border:1px solid var(--gc);border-radius:6px;padding:.52rem .68rem;font-family:'Montserrat',sans-serif;font-size:.85rem;background:#fff;color:var(--testo);transition:border-color .2s}
-    .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--oro);background:#fff}
+    .field input,.field select,.field textarea{border:1px solid var(--gc);border-radius:6px;padding:.52rem .68rem;font-family:'Montserrat',sans-serif;font-size:.85rem;background:rgba(255,255,255,0.06);color:#e0ddd6;transition:border-color .2s}
+    .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--oro);background:rgba(255,255,255,0.1)}
     .field textarea{resize:vertical;min-height:110px;line-height:1.65}
     .fchk{display:flex;align-items:flex-start;gap:.45rem;font-size:.75rem;color:var(--grigio);margin-bottom:1rem}
     .fchk input{accent-color:var(--oro);flex-shrink:0;margin-top:.18rem;width:14px;height:14px}
@@ -53,15 +53,15 @@
     /* SIDEBAR INFO */
     .sidebar{display:flex;flex-direction:column;gap:1rem}
     .ibox{background:var(--sfondo);border:1px solid var(--gc);border-radius:10px;overflow:hidden}
-    .ibox-head{padding:.85rem 1.1rem;border-bottom:1px solid var(--gc);background:#fff;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600}
+    .ibox-head{padding:.85rem 1.1rem;border-bottom:1px solid var(--gc);background:rgba(255,255,255,0.04);font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:#e0ddd6}
     .ibox-body{padding:1rem 1.1rem}
     .citem{display:flex;align-items:flex-start;gap:.75rem;padding:.65rem 0;border-bottom:1px solid var(--gc)}
     .citem:last-child{border-bottom:none}
-    .ci-icon{width:34px;height:34px;background:#fff;border:1px solid var(--gc);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .ci-icon{width:34px;height:34px;background:rgba(255,255,255,0.04);border:1px solid var(--gc);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
     .ci-icon svg{width:14px;height:14px;color:var(--oro)}
     .ci-lbl{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--grigio);margin-bottom:.18rem}
     .ci-val{font-size:.85rem;font-weight:500}
-    .ci-val a{color:var(--nero);transition:color .2s}
+    .ci-val a{color:#e0ddd6;transition:color .2s}
     .ci-val a:hover{color:var(--oro)}
     /* ORARI */
     .orari{display:flex;flex-direction:column;gap:.28rem}
@@ -71,8 +71,8 @@
     .or .ap{font-weight:500;color:var(--verde)}
     .or .ch{font-weight:500;color:var(--nero);opacity:.4}
     /* MAPPA */
-    .mappa-section{background:var(--sfondo);border-top:1px solid var(--gc)}
-    .map-wrap{height:420px;background:linear-gradient(135deg,#e8e4de,#d4cfc8);display:flex;align-items:center;justify-content:center;position:relative}
+    .mappa-section{background:#0d1117;border-top:1px solid rgba(255,255,255,0.06)}
+    .map-wrap{height:420px;background:linear-gradient(135deg,#0d1117,#111820);display:flex;align-items:center;justify-content:center;position:relative}
     .map-ph{text-align:center;color:var(--grigio)}
     .map-ph svg{width:40px;height:40px;opacity:.2;margin:0 auto .6rem;display:block}
     .map-ph p{font-size:.85rem}
@@ -95,6 +95,14 @@
     .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.38);margin-bottom:.3rem;transition:color .2s}
     .fcol a:hover{color:var(--oro)}
     .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.22);flex-wrap:wrap;gap:.4rem}
+    .hero{position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-80px;right:-80px;width:500px;height:500px;background:radial-gradient(circle,rgba(184,212,74,0.08) 0%,transparent 70%);pointer-events:none}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,212,74,0.3),transparent)}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .main{animation:fadeInUp 0.5s ease both}
+    .fbox{border-color:rgba(255,255,255,0.06);backdrop-filter:blur(12px);background:rgba(255,255,255,0.02)}
+    .ibox{border-color:rgba(255,255,255,0.06);backdrop-filter:blur(12px);background:rgba(255,255,255,0.02)}
+    .fsubmit:hover{background:var(--oro);color:#080b0e}
   </style>
 </head>
 <body>

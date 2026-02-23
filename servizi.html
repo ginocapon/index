@@ -7,8 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--nero:#2C4A6E;--bianco:#F7F5F1;--oro:#B8D44A;--grigio:#6B7A8D;--gc:#E1DBD1;--verde:#1E8449;--rosso:#C0392B;--sfondo:#ECE7DF;--blu:#2C4A6E;--blu2:#3A5F8C;--azzurro:#8AB4CE;--oro2:#CDED62;--testo:#152435;--carta:#F2EDE7}
-    body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--testo)}
+    :root{--nero:#2C4A6E;--bianco:#080b0e;--oro:#B8D44A;--grigio:#8a9bb0;--gc:rgba(255,255,255,0.06);--verde:#1E8449;--rosso:#C0392B;--sfondo:#0d1117;--blu:#2C4A6E;--blu2:#3A5F8C;--azzurro:#8AB4CE;--oro2:#CDED62;--testo:#e0ddd6;--carta:#111820}
+    body{font-family:'Montserrat',sans-serif;background:#080b0e;color:#e0ddd6}
     a{text-decoration:none;color:inherit}
     /* HEADER */
     header{background:var(--nero);position:sticky;top:0;z-index:100}
@@ -49,9 +49,9 @@
     .sec-sub{font-size:.88rem;color:var(--grigio);line-height:1.75;max-width:580px;margin-bottom:3rem}
     .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem}
     @media(max-width:900px){.services-grid{grid-template-columns:1fr}}
-    .scard{border:1px solid var(--gc);border-radius:10px;overflow:hidden;transition:transform .25s,box-shadow .25s;background:#fff}
-    .scard:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.09)}
-    .scard-img{height:200px;background:var(--sfondo);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+    .scard{border:1px solid rgba(255,255,255,0.06);border-radius:10px;overflow:hidden;transition:transform .25s,box-shadow .25s;background:rgba(255,255,255,0.02);backdrop-filter:blur(12px)}
+    .scard:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(184,212,74,0.06)}
+    .scard-img{height:200px;background:#0d1117 !important;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
     .scard-img-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
     .scard-num{position:absolute;top:1rem;left:1.2rem;font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:600;color:rgba(0,0,0,.05);line-height:1}
     .scard-icon{font-size:3.5rem;position:relative;z-index:1}
@@ -66,17 +66,17 @@
     .scard-link{display:inline-flex;align-items:center;gap:.35rem;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--nero);border-bottom:1px solid var(--oro);padding-bottom:.12rem;transition:color .2s}
     .scard-link:hover{color:var(--oro)}
     /* PROCESSO */
-    .process{background:var(--sfondo);padding:5rem 1.5rem}
+    .process{background:#0d1117;padding:5rem 1.5rem}
     .process-inner{max-width:1380px;margin:0 auto}
     .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:3rem}
     @media(max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:500px){.steps{grid-template-columns:1fr}}
-    .step{background:#fff;border:1px solid var(--gc);border-radius:10px;padding:1.6rem 1.2rem;position:relative;transition:transform .2s,box-shadow .2s}
+    .step{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:1.6rem 1.2rem;position:relative;transition:transform .2s,box-shadow .2s;backdrop-filter:blur(8px)}
     .step-n{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:600;color:var(--oro);opacity:.25;line-height:1;margin-bottom:.6rem}
     .step-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;margin-bottom:.45rem}
     .step-desc{font-size:.82rem;color:var(--grigio);line-height:1.7}
     /* PERCHÉ NOI */
-    .why{padding:5rem 1.5rem;background:#fff}
+    .why{padding:5rem 1.5rem;background:#080b0e}
     .why-inner{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
     @media(max-width:900px){.why-inner{grid-template-columns:1fr}}
     .why-visual{background:var(--nero);border-radius:10px;padding:2.5rem;aspect-ratio:4/3;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
@@ -86,9 +86,9 @@
     .why-quote strong{font-weight:600;color:var(--oro);font-style:normal}
     .why-author{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.75rem;position:relative;z-index:1}
     .why-items{display:flex;flex-direction:column;gap:.75rem}
-    .wi{display:flex;align-items:flex-start;gap:1rem;padding:1rem;border:1px solid var(--gc);border-radius:10px;transition:border-color .2s}
+    .wi{display:flex;align-items:flex-start;gap:1rem;padding:1rem;border:1px solid rgba(255,255,255,0.06);border-radius:10px;transition:border-color .2s;background:rgba(255,255,255,0.02)}
     .wi:hover{border-color:var(--oro)}
-    .wi-icon{width:40px;height:40px;background:var(--sfondo);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem}
+    .wi-icon{width:40px;height:40px;background:rgba(255,255,255,0.04);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem}
     .wi-title{font-weight:500;font-size:.88rem;margin-bottom:.22rem}
     .wi-desc{font-size:.78rem;color:var(--grigio);line-height:1.6}
     /* CTA FINALE */
@@ -110,6 +110,12 @@
     .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.38);margin-bottom:.3rem;transition:color .2s}
     .fcol a:hover{color:var(--oro)}
     .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.22);flex-wrap:wrap;gap:.4rem}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .section{animation:fadeInUp 0.5s ease both}
+    .scard-img{background:#0d1117}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,212,74,0.3),transparent)}
+    .step:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(184,212,74,0.06);border-color:rgba(184,212,74,0.15)}
+    .scard-list li{border-bottom-color:rgba(255,255,255,0.04)}
   </style>
 </head>
 <body>
@@ -155,7 +161,7 @@
     <div class="services-grid">
 
       <div class="scard">
-        <div class="scard-img" style="background:linear-gradient(135deg,#f0ece6,#e8e4de)">
+        <div class="scard-img" style="background:linear-gradient(135deg,#0d1117,#1a2332)">
           <div class="scard-num">01</div>
           <div class="scard-icon">🏠</div>
           <span class="scard-tag">Servizio principale</span>
@@ -176,7 +182,7 @@
       </div>
 
       <div class="scard">
-        <div class="scard-img" style="background:linear-gradient(135deg,#e8f0ee,#d4e4e0)">
+        <div class="scard-img" style="background:linear-gradient(135deg,#0d1418,#162028)">
           <div class="scard-num">02</div>
           <div class="scard-icon">📋</div>
           <span class="scard-tag">Locazioni</span>
@@ -197,7 +203,7 @@
       </div>
 
       <div class="scard">
-        <div class="scard-img" style="background:linear-gradient(135deg,#f0eee8,#e4dfd4)">
+        <div class="scard-img" style="background:linear-gradient(135deg,#11150f,#1c241a)">
           <div class="scard-num">03</div>
           <div class="scard-icon">✍️</div>
           <span class="scard-tag">Compravendita</span>
@@ -218,7 +224,7 @@
       </div>
 
       <div class="scard">
-        <div class="scard-img" style="background:linear-gradient(135deg,#eef0e8,#e0e8d4)">
+        <div class="scard-img" style="background:linear-gradient(135deg,#0f1210,#182018)">
           <div class="scard-num">04</div>
           <div class="scard-icon">🏡</div>
           <span class="scard-tag">Gestione patrimonio</span>
@@ -239,7 +245,7 @@
       </div>
 
       <div class="scard">
-        <div class="scard-img" style="background:linear-gradient(135deg,#e8eef0,#d4dfe8)">
+        <div class="scard-img" style="background:linear-gradient(135deg,#0d1217,#152028)">
           <div class="scard-num">05</div>
           <div class="scard-icon">📊</div>
           <span class="scard-tag">Valutazione</span>
@@ -260,7 +266,7 @@
       </div>
 
       <div class="scard">
-        <div class="scard-img" style="background:linear-gradient(135deg,#f0eae8,#e8d8d4)">
+        <div class="scard-img" style="background:linear-gradient(135deg,#130f0e,#201816)">
           <div class="scard-num">06</div>
           <div class="scard-icon">💡</div>
           <span class="scard-tag">Servizi accessori</span>
