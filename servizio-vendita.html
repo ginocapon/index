@@ -4,21 +4,21 @@
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Guida Completa alla Vendita Immobili — Righetto Immobiliare Padova</title>
   <meta name="description" content="Vendi casa a Padova con Righetto Immobiliare. Valutazione gratuita, strategia personalizzata, fotografie professionali, virtual tour. Assistenza completa fino al rogito.">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--nero:#0a0a0a;--bianco:#f5f2ed;--oro:#c9a84c;--grigio:#6b6560;--gc:#e8e4de;--verde:#4a5c4e;--sfondo:#f0ece6}
-    body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--nero)}
+    :root{--nero:#2C4A6E;--bianco:#080b0e;--oro:#B8D44A;--grigio:#8a9bb0;--gc:rgba(255,255,255,0.06);--verde:#1E8449;--sfondo:#0d1117}
+    body{font-family:'Montserrat',sans-serif;background:#080b0e;color:#e0ddd6}
     a{text-decoration:none;color:inherit}
     header{background:var(--nero);position:sticky;top:0;z-index:100}
-    .hi{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:62px;display:flex;align-items:center;gap:2rem}
+    .hi{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:74px;display:flex;align-items:center;gap:2rem}
     .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff}.logo span{color:var(--oro);font-style:italic}
     nav{display:flex;gap:.2rem;flex:1}
-    nav a{color:rgba(255,255,255,.5);font-size:.82rem;padding:.4rem .75rem;border-radius:2px;transition:color .2s}
+    nav a{color:rgba(255,255,255,.5);font-size:.82rem;padding:.4rem .75rem;border-radius:4px;transition:color .2s}
     nav a:hover{color:#fff} nav a.active{color:var(--oro)}
     .h-cta{display:flex;gap:.65rem;align-items:center}
     .h-tel{color:rgba(255,255,255,.55);font-size:.78rem}
-    .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:2px;font-size:.76rem;font-weight:500}
+    .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:6px;font-size:.76rem;font-weight:500}
     /* BREADCRUMB */
     .bc{background:var(--nero);border-top:1px solid rgba(255,255,255,.06);padding:.5rem 1.5rem}
     .bc-inner{max-width:1380px;margin:0 auto;display:flex;align-items:center;gap:.4rem;font-size:.7rem;color:rgba(255,255,255,.3)}
@@ -26,7 +26,7 @@
     .bc-inner svg{width:9px;height:9px;flex-shrink:0}
     /* HERO */
     .hero{background:var(--nero);padding:5rem 1.5rem 4rem;position:relative;overflow:hidden}
-    .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.12) 0%,transparent 70%)}
+    .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:500px;height:500px;background:radial-gradient(circle,rgba(184,212,74,.12) 0%,transparent 70%)}
     .hero-inner{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
     @media(max-width:900px){.hero-inner{grid-template-columns:1fr}}
     .htag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.7rem}
@@ -34,9 +34,9 @@
     .hero h1 strong{font-weight:600;font-style:italic}
     .hero p{font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.9;margin-bottom:1.5rem}
     .hero-btns{display:flex;gap:.65rem;flex-wrap:wrap}
-    .btn-gold{background:var(--oro);color:var(--nero);padding:.65rem 1.4rem;border-radius:2px;font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
+    .btn-gold{background:var(--oro);color:var(--nero);padding:.65rem 1.4rem;border-radius:8px;font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
     .btn-gold:hover{background:#d4b86a}
-    .btn-outline{border:1px solid rgba(255,255,255,.2);color:#fff;padding:.65rem 1.4rem;border-radius:2px;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:all .2s}
+    .btn-outline{border:1px solid rgba(255,255,255,.2);color:#fff;padding:.65rem 1.4rem;border-radius:8px;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:all .2s}
     .btn-outline:hover{border-color:var(--oro);color:var(--oro)}
     /* STATS HERO */
     .hero-stats{display:flex;flex-direction:column;gap:.6rem}
@@ -45,7 +45,7 @@
     .hstat-lbl{font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.5}
     /* SEZIONI */
     .sec{padding:5rem 1.5rem}
-    .sec.bg{background:var(--sfondo)}
+    .sec.bg{background:#0d1117}
     .sec-inner{max-width:1380px;margin:0 auto}
     .sec-tag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.5rem}
     .sec-t{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;margin-bottom:.75rem}
@@ -61,7 +61,7 @@
     .step-v-body{padding:0 0 2.5rem 1.5rem}
     .step-v-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;margin-bottom:.4rem}
     .step-v-desc{font-size:.84rem;color:var(--grigio);line-height:1.8}
-    .step-v-detail{margin-top:.65rem;background:#fff;border:1px solid var(--gc);border-radius:2px;padding:.75rem 1rem}
+    .step-v-detail{margin-top:.65rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:.75rem 1rem}
     .step-v-detail ul{list-style:none;display:flex;flex-direction:column;gap:.25rem}
     .step-v-detail li{font-size:.79rem;color:var(--grigio);display:flex;align-items:flex-start;gap:.4rem}
     .step-v-detail li::before{content:'→';color:var(--oro);flex-shrink:0}
@@ -69,18 +69,18 @@
     .include-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
     @media(max-width:900px){.include-grid{grid-template-columns:1fr 1fr}}
     @media(max-width:560px){.include-grid{grid-template-columns:1fr}}
-    .inc-card{background:#fff;border:1px solid var(--gc);border-radius:3px;padding:1.4rem;transition:transform .2s,box-shadow .2s}
-    .inc-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.07)}
+    .inc-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:1.4rem;transition:transform .2s,box-shadow .2s;backdrop-filter:blur(8px)}
+    .inc-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(184,212,74,0.06)}
     .inc-icon{font-size:1.8rem;margin-bottom:.7rem}
     .inc-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;margin-bottom:.4rem}
     .inc-desc{font-size:.8rem;color:var(--grigio);line-height:1.7}
     /* CONFRONTO */
     .comparison{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2rem}
     @media(max-width:700px){.comparison{grid-template-columns:1fr}}
-    .comp-col{border-radius:3px;overflow:hidden;border:1px solid var(--gc)}
+    .comp-col{border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.06)}
     .comp-head{padding:1rem 1.2rem;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600}
     .comp-col.good .comp-head{background:var(--verde);color:#fff}
-    .comp-col.bad .comp-head{background:#e8e4de;color:var(--nero)}
+    .comp-col.bad .comp-head{background:rgba(255,255,255,0.06);color:#e0ddd6}
     .comp-body{padding:.5rem .8rem}
     .comp-row{display:flex;align-items:flex-start;gap:.5rem;padding:.48rem .4rem;border-bottom:1px solid var(--gc);font-size:.82rem;color:var(--grigio)}
     .comp-row:last-child{border-bottom:none}
@@ -88,28 +88,28 @@
     /* FORM LATERALE */
     .page-grid{max-width:1380px;margin:0 auto;padding:0 1.5rem 5rem;display:grid;grid-template-columns:1fr 360px;gap:2rem;align-items:start}
     @media(max-width:1100px){.page-grid{grid-template-columns:1fr}}
-    .form-box{background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;overflow:hidden;position:sticky;top:80px}
-    .fb-head{padding:1.2rem 1.4rem;border-bottom:1px solid var(--gc);background:#fff}
+    .form-box{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;overflow:hidden;position:sticky;top:80px;backdrop-filter:blur(12px)}
+    .fb-head{padding:1.2rem 1.4rem;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.04)}
     .fb-head h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600}
     .fb-head p{font-size:.76rem;color:var(--grigio);margin-top:.2rem}
     .fb-body{padding:1.2rem 1.4rem}
     .field{margin-bottom:.6rem}
     .field label{display:block;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grigio);margin-bottom:.22rem}
-    .field input,.field select,.field textarea{width:100%;border:1px solid var(--gc);border-radius:2px;padding:.5rem .65rem;font-family:'DM Sans',sans-serif;font-size:.83rem;background:#fff;color:var(--nero);transition:border-color .2s}
+    .field input,.field select,.field textarea{width:100%;border:1px solid rgba(255,255,255,0.06);border-radius:6px;padding:.5rem .65rem;font-family:'Montserrat',sans-serif;font-size:.83rem;background:rgba(255,255,255,0.06);color:#e0ddd6;transition:border-color .2s}
     .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--oro)}
     .field textarea{min-height:80px;resize:vertical;line-height:1.6}
     .fchk{display:flex;align-items:flex-start;gap:.4rem;font-size:.72rem;color:var(--grigio);margin:.4rem 0 .8rem}
     .fchk input{accent-color:var(--oro);flex-shrink:0;margin-top:.15rem}
-    .fsub{width:100%;background:var(--nero);color:#fff;padding:.7rem;border:none;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s}
+    .fsub{width:100%;background:var(--nero);color:#fff;padding:.7rem;border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s}
     .fsub:hover{background:var(--oro);color:var(--nero)}
-    .fb-tel{display:flex;align-items:center;gap:.5rem;padding:.75rem 1rem;background:#fff;border:1px solid var(--gc);border-radius:2px;margin-top:.5rem;font-size:.82rem;color:var(--grigio)}
+    .fb-tel{display:flex;align-items:center;gap:.5rem;padding:.75rem 1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:8px;margin-top:.5rem;font-size:.82rem;color:var(--grigio)}
     .fb-tel svg{width:14px;height:14px;color:var(--oro)}
-    .fb-tel strong{color:var(--nero)}
+    .fb-tel strong{color:#e0ddd6}
     /* TESTIMONIANZE */
     .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
     @media(max-width:900px){.reviews-grid{grid-template-columns:1fr 1fr}}
     @media(max-width:560px){.reviews-grid{grid-template-columns:1fr}}
-    .review{background:#fff;border:1px solid var(--gc);border-radius:3px;padding:1.3rem}
+    .review{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:1.3rem}
     .stars{color:var(--oro);font-size:1rem;margin-bottom:.6rem}
     .review-text{font-size:.83rem;color:var(--grigio);line-height:1.75;font-style:italic;margin-bottom:.8rem}
     .review-auth{font-size:.72rem;font-weight:500;display:flex;align-items:center;gap:.45rem}
@@ -124,6 +124,11 @@
     .fh{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.7rem}
     .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.38);margin-bottom:.3rem;transition:color .2s}.fcol a:hover{color:var(--oro)}
     .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.22);flex-wrap:wrap;gap:.4rem}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,212,74,0.3),transparent)}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .sec{animation:fadeInUp 0.5s ease both}
+    .step-n-circle{box-shadow:0 0 10px rgba(184,212,74,0.2)}
+    .inc-card:hover,.review:hover{border-color:rgba(184,212,74,0.15)}
   </style>
 </head>
 <body>

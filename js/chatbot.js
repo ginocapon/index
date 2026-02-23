@@ -527,16 +527,17 @@ function initChatbotUI() {
     font-family: 'Montserrat', 'Segoe UI', sans-serif;
   }
   #rig-chat-btn {
-    width: 62px; height: 62px; border-radius: 50%;
-    background: linear-gradient(135deg, #3A5578, #5C7A9E);
-    border: none; cursor: pointer;
-    box-shadow: 0 6px 24px rgba(58,85,120,0.45);
+    width: 68px; height: 68px; border-radius: 50%;
+    background: linear-gradient(135deg, #2C4A6E, #3A5F8C);
+    border: 3px solid #B8D44A; cursor: pointer;
+    box-shadow: 0 6px 28px rgba(184,212,74,0.3), 0 0 0 0 rgba(184,212,74,0.2);
     display: flex; align-items: center; justify-content: center;
     transition: transform 0.2s, box-shadow 0.2s;
-    position: relative;
+    position: relative; overflow: hidden; padding: 0;
   }
-  #rig-chat-btn:hover { transform: scale(1.08); box-shadow: 0 10px 32px rgba(58,85,120,0.55); }
+  #rig-chat-btn:hover { transform: scale(1.08); box-shadow: 0 10px 36px rgba(184,212,74,0.45), 0 0 0 4px rgba(184,212,74,0.15); }
   #rig-chat-btn svg { width: 28px; height: 28px; }
+  #rig-chat-btn .sara-avatar { width: 100%; height: 100%; border-radius: 50%; }
   #rig-chat-pulse {
     position: absolute; top: 4px; right: 4px;
     width: 14px; height: 14px; border-radius: 50%;
@@ -569,10 +570,10 @@ function initChatbotUI() {
     border-radius: 20px 20px 0 0; flex-shrink: 0;
   }
   .chat-header-avatar {
-    width: 40px; height: 40px; border-radius: 50%;
-    background: rgba(206,224,143,0.25);
+    width: 42px; height: 42px; border-radius: 50%;
+    background: transparent;
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem; flex-shrink: 0;
+    flex-shrink: 0; overflow: hidden;
     border: 2px solid #CEE08F;
   }
   .chat-header-info { flex: 1; }
@@ -685,9 +686,19 @@ function initChatbotUI() {
   <div id="rig-chat-widget">
     <div id="rig-chat-box" role="dialog" aria-label="Chat assistente">
       <div class="chat-header">
-        <div class="chat-header-avatar">🏠</div>
+        <div class="chat-header-avatar">
+          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;border-radius:50%">
+            <circle cx="20" cy="20" r="20" fill="#2C4A6E"/>
+            <circle cx="20" cy="14.5" r="7" fill="#FDDCB5"/>
+            <path d="M13 13c0-6 3-9 7-9s7 4 7 9c0 1-.5 3-1.5 3.5-1-4-3-6-5.5-6s-4.5 2-5.5 6c-.5-.5-1.5-2.5-1.5-3.5z" fill="#3D2417"/>
+            <path d="M10 36c0-8 5-12 10-12s10 4 10 12v4H10z" fill="#B8D44A"/>
+            <ellipse cx="17.5" cy="14" rx="1.2" ry="1.3" fill="#2C4A6E"/>
+            <ellipse cx="22.5" cy="14" rx="1.2" ry="1.3" fill="#2C4A6E"/>
+            <path d="M18 17.5q2 2 4 0" fill="none" stroke="#D4847A" stroke-width=".8" stroke-linecap="round"/>
+          </svg>
+        </div>
         <div class="chat-header-info">
-          <h4>Righetto Immobiliare</h4>
+          <h4>Sara — Righetto Immobiliare</h4>
           <span>Online — rispondiamo subito</span>
         </div>
         <button class="chat-close" onclick="rigChat.toggle()" aria-label="Chiudi chat">✕</button>
@@ -711,11 +722,26 @@ function initChatbotUI() {
         </button>
       </div>
     </div>
-    <button id="rig-chat-btn" onclick="rigChat.toggle()" aria-label="Apri chat assistente">
-      <svg id="rig-chat-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    <button id="rig-chat-btn" onclick="rigChat.toggle()" aria-label="Apri chat con Sara">
+      <svg id="rig-chat-icon" class="sara-avatar" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="sara-bg" x1="0" y1="0" x2="64" y2="64"><stop offset="0%" stop-color="#2C4A6E"/><stop offset="100%" stop-color="#3A5F8C"/></linearGradient></defs>
+        <rect width="64" height="64" fill="url(#sara-bg)"/>
+        <circle cx="32" cy="24" r="11" fill="#FDDCB5"/>
+        <path d="M20 21c0-9 5-15 12-15s12 6 12 15c0 2-1 4-2 5.5-1.5-6-4.5-9.5-10-9.5s-8.5 3.5-10 9.5c-1-1.5-2-3.5-2-5.5z" fill="#3D2417"/>
+        <path d="M20 26c-1.5 4-2 10-.5 16 0 0 2-9 4-11z" fill="#3D2417"/>
+        <path d="M44 26c1.5 4 2 10 .5 16 0 0-2-9-4-11z" fill="#3D2417"/>
+        <rect x="28.5" y="34" width="7" height="6" rx="3.5" fill="#FDDCB5"/>
+        <path d="M16 56c0-13 7-19 16-19s16 6 16 19v8H16z" fill="#B8D44A"/>
+        <ellipse cx="27.5" cy="23" rx="1.8" ry="2" fill="#2C4A6E"/>
+        <ellipse cx="36.5" cy="23" rx="1.8" ry="2" fill="#2C4A6E"/>
+        <circle cx="28" cy="22.5" r="0.5" fill="white" opacity="0.6"/>
+        <circle cx="37" cy="22.5" r="0.5" fill="white" opacity="0.6"/>
+        <path d="M25 20q2.5-1.5 5 0" fill="none" stroke="#3D2417" stroke-width="0.6" stroke-linecap="round"/>
+        <path d="M34 20q2.5-1.5 5 0" fill="none" stroke="#3D2417" stroke-width="0.6" stroke-linecap="round"/>
+        <path d="M28 28q4 3.5 8 0" fill="none" stroke="#D4847A" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M26 39q6 4 12 0" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="0.6" stroke-linecap="round"/>
       </svg>
-      <svg id="rig-chat-icon-close" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" style="display:none">
+      <svg id="rig-chat-icon-close" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" style="display:none;width:28px;height:28px;position:absolute">
         <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
       </svg>
       <span id="rig-chat-pulse"></span>
