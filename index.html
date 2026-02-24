@@ -1818,8 +1818,8 @@ button svg, a.btn-p svg, a.btn-g svg {
       </a>
     </div>
     <div class="cs-foto rv d2">
-      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=700&q=85&fit=crop&crop=faces,top"
-           alt="Consulente immobiliare Righetto Immobiliare Padova"
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=85&fit=crop"
+           alt="Immobile gestito da Righetto Immobiliare Padova"
            loading="lazy" width="380">
       <div class="cs-foto-label">
         <div class="cs-foto-role">Righetto Immobiliare · Dal 1990</div>
@@ -1887,15 +1887,15 @@ button svg, a.btn-p svg, a.btn-g svg {
   <div class="fc-inner">
     <div class="fc-foto">
       <img
-        src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&q=85&fit=crop&crop=faces,top"
-        alt="Alessandra Righetto — Agente Immobiliare Padova"
-        onerror="this.src='https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=700&q=80&fit=crop&crop=face'">
+        src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=700&q=85&fit=crop"
+        alt="Righetto Immobiliare — Agenzia Immobiliare Padova dal 1990"
+        onerror="this.src='https://images.unsplash.com/photo-1582407947092-50b8c1ef07e0?w=700&q=80&fit=crop'">
       <div class="fc-foto-overlay"></div>
       <div class="fc-foto-info">
-        <div class="fc-nome">Alessandra Righetto</div>
-        <div class="fc-ruolo">Responsabile Vendite · Padova</div>
+        <div class="fc-nome">Righetto Immobiliare</div>
+        <div class="fc-ruolo">Agenzia Immobiliare · Padova dal 1990</div>
         <div class="fc-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <div class="fc-badge">Agente abilitato FIAIP</div>
+        <div class="fc-badge">Agenti abilitati FIAIP</div>
       </div>
     </div>
     <div class="fc-form">
@@ -2025,25 +2025,41 @@ document.querySelectorAll('.rv').forEach(el=>rvObs.observe(el));
 async function loadImmobili(){
   if(!sb){ showDemoProps(); return; }
   try{
-    const {data,error} = await sb.from('immobili').select('*')
+    // Prima carica gli immobili in evidenza
+    const {data:evidenza,error:e1} = await sb.from('immobili').select('*')
       .eq('attivo',true).eq('venduto',false).eq('in_evidenza',true)
-      .order('created_at',{ascending:false}).limit(5);
-    if(error||!data||!data.length){ showDemoProps(); return; }
-    renderProps(data);
+      .order('created_at',{ascending:false}).limit(6);
+    let risultati = (e1 || !evidenza) ? [] : evidenza;
+    // Se meno di 4, riempi con gli ultimi immobili attivi (non gia' inclusi)
+    if(risultati.length < 4){
+      const ids = risultati.map(r=>r.id);
+      const {data:altri} = await sb.from('immobili').select('*')
+        .eq('attivo',true).eq('venduto',false).eq('affittato',false)
+        .order('created_at',{ascending:false}).limit(8);
+      if(altri){
+        for(const a of altri){
+          if(!ids.includes(a.id)){ risultati.push(a); ids.push(a.id); }
+          if(risultati.length>=6) break;
+        }
+      }
+    }
+    if(!risultati.length){ showDemoProps(); return; }
+    renderProps(risultati);
   }catch(e){ showDemoProps(); }
 }
 
 function renderProps(arr){
   const grid = document.getElementById('propsGrid');
   if(!arr||!arr.length){ showDemoProps(); return; }
-  grid.innerHTML = arr.slice(0,5).map((p,i)=>{
+  grid.innerHTML = arr.slice(0,6).map((p,i)=>{
     const isFirst = i===0;
-    const tipClass = p.tipo_contratto==='affitto'?'ta':p.tipo_contratto==='asta'?'te':'tv';
-    const tipLabel = p.tipo_contratto==='affitto'?'Affitto':p.tipo_contratto==='asta'?'Asta':'Vendita';
-    const price = p.tipo_contratto==='affitto'
+    const tipo = p.tipo_operazione || p.tipo_contratto || 'vendita';
+    const tipClass = tipo==='affitto'?'ta':tipo==='asta'?'te':'tv';
+    const tipLabel = tipo==='affitto'?'Affitto':tipo==='asta'?'Asta':'Vendita';
+    const price = tipo==='affitto'
       ? `€ ${p.prezzo?.toLocaleString('it-IT')}/mese`
       : `€ ${p.prezzo?.toLocaleString('it-IT')}`;
-    const imgUrl = p.foto_principale || (p.foto_urls&&p.foto_urls[0]) || '';
+    const imgUrl = p.foto_principale || (p.foto_urls&&p.foto_urls[0]) || (p.foto&&p.foto[0]) || '';
     const imgTag = imgUrl
       ? `<img src="${imgUrl}" alt="${p.titolo||'Immobile'}" loading="lazy" onerror="this.parentNode.innerHTML='<div class=pi-ph>🏠</div>'">`
       : `<div class="pi-ph">🏠</div>`;
@@ -2162,7 +2178,7 @@ async function loadCorrelati(comune, mq, tipo){
     if(!data||!data.length) return;
     div.innerHTML='<div class="sr-lbl" style="margin-top:14px">Immobili simili nel portfolio</div>'+
       data.map(p=>`<a href="immobile.html?id=${p.id}" class="scl">
-        <img class="sc-th" src="${p.foto_principale||''}" onerror="this.style.display='none'">
+        <img class="sc-th" src="${p.foto_principale||(p.foto&&p.foto[0])||''}" onerror="this.style.display='none'">
         <div><div class="sc-nm">${p.titolo||p.comune}</div>
         <div class="sc-mt">${p.superficie||''} mq · ${p.comune}</div>
         <div class="sc-pr">€ ${p.prezzo?.toLocaleString('it-IT')}</div></div>
