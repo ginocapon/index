@@ -236,6 +236,17 @@
     <div class="fbot"><span>© 2025 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 12345678901</span></div>
   </div>
 </footer>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
 function sendForm(){
-  const n=document.getElementById('f-nom
+  const n=document.getElementById('f-nome').value.trim();
+  const t=document.getElementById('f-tel').value.trim();
+  const g=document.getElementById('f-gdpr').checked;
+  if(!n||!t){alert('Inserisci nome e telefono');return}
+  if(!g){alert('Accetta il trattamento dati');return}
+  document.getElementById('success').style.display='block';
+}
+</script>
+<script src="js/chatbot.js"></script>
+</body>
+</html>

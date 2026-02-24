@@ -57,7 +57,7 @@
     .sb-zona-wrap svg{position:absolute;left:.6rem;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--grigio);pointer-events:none}
     .sb-zona-wrap input{padding-left:2rem!important;width:100%}
     .sb-sep{width:1px;height:36px;background:var(--gc);flex-shrink:0}
-    .sb-search-btn{background:var(--nero);color:#fff;padding:.6rem 1.6rem;border:none;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s,transform .15s;display:flex;align-items:center;gap:.45rem;white-space:nowrap;flex-shrink:0}
+    .sb-search-btn{background:var(--nero);color:#fff;padding:.6rem 1.6rem;border:none;border-radius:2px;font-family:'Montserrat',sans-serif;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s,transform .15s;display:flex;align-items:center;gap:.45rem;white-space:nowrap;flex-shrink:0}
     .sb-search-btn:hover{background:var(--oro);color:var(--nero);transform:translateY(-1px)}
     .sb-search-btn svg{width:14px;height:14px}
 
@@ -88,19 +88,19 @@
     .filter-panel{background:#fff;border:1px solid var(--gc);border-radius:10px;overflow:hidden}
     .fp-head{padding:.85rem 1.1rem;border-bottom:1px solid var(--gc);background:var(--bianco);display:flex;align-items:center;justify-content:space-between}
     .fp-head h3{font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
-    .fp-reset{font-size:.7rem;color:var(--oro);cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;padding:0}
+    .fp-reset{font-size:.7rem;color:var(--oro);cursor:pointer;background:none;border:none;font-family:'Montserrat',sans-serif;padding:0}
     .fp-reset:hover{text-decoration:underline}
     .fp-section{padding:.85rem 1.1rem;border-bottom:1px solid var(--gc)}
     .fp-section:last-child{border-bottom:none}
     .fp-section-title{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grigio);font-weight:500;margin-bottom:.65rem;display:flex;align-items:center;justify-content:space-between}
-    .fp-section-title button{background:none;border:none;font-size:.65rem;color:var(--oro);cursor:pointer;font-family:'DM Sans',sans-serif;padding:0}
+    .fp-section-title button{background:none;border:none;font-size:.65rem;color:var(--oro);cursor:pointer;font-family:'Montserrat',sans-serif;padding:0}
     .fp-check{display:flex;flex-direction:column;gap:.38rem}
     .fp-check label{display:flex;align-items:center;gap:.45rem;font-size:.8rem;color:var(--grigio);cursor:pointer;transition:color .2s}
     .fp-check label:hover{color:var(--nero)}
     .fp-check input{accent-color:var(--oro);width:14px;height:14px;flex-shrink:0}
     .fp-check .cnt{margin-left:auto;font-size:.66rem;color:rgba(107,101,96,.5)}
     .range-row{display:flex;align-items:center;gap:.4rem;margin-top:.3rem}
-    .range-row input{flex:1;border:1px solid var(--gc);border-radius:2px;padding:.4rem .5rem;font-family:'DM Sans',sans-serif;font-size:.78rem;background:var(--bianco)}
+    .range-row input{flex:1;border:1px solid var(--gc);border-radius:2px;padding:.4rem .5rem;font-family:'Montserrat',sans-serif;font-size:.78rem;background:var(--bianco)}
     .range-row input:focus{outline:none;border-color:var(--oro)}
     .range-sep{font-size:.72rem;color:var(--grigio)}
     .fp-chip-row{display:flex;flex-wrap:wrap;gap:.3rem}
@@ -699,7 +699,7 @@
     <div id="no-results" class="no-results" style="display:none;">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       <h3>Nessun immobile trovato</h3>
-      <p>Prova ad allargare i criteri di ricerca o <button onclick="resetFilters()" style="background:none;border:none;color:var(--oro);cursor:pointer;font-size:.85rem;font-family:'DM Sans',sans-serif;">azzera i filtri</button></p>
+      <p>Prova ad allargare i criteri di ricerca o <button onclick="resetFilters()" style="background:none;border:none;color:var(--oro);cursor:pointer;font-size:.85rem;font-family:'Montserrat',sans-serif;">azzera i filtri</button></p>
     </div>
 
     <!-- PAGINATION -->
@@ -961,4 +961,11 @@
   }
 
   function sendRequest(btn, rif) {
-    btn.textContent = '�
+    btn.textContent = 'Inviato!';
+    btn.disabled = true;
+    setTimeout(() => { btn.textContent = 'Invia richiesta'; btn.disabled = false; }, 3000);
+  }
+</script>
+<script src="js/chatbot.js"></script>
+</body>
+</html>
