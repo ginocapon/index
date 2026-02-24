@@ -527,16 +527,17 @@ function initChatbotUI() {
     font-family: 'Montserrat', 'Segoe UI', sans-serif;
   }
   #rig-chat-btn {
-    width: 62px; height: 62px; border-radius: 50%;
-    background: linear-gradient(135deg, #3A5578, #5C7A9E);
-    border: none; cursor: pointer;
+    width: 68px; height: 68px; border-radius: 50%;
+    background: none;
+    border: 3px solid #CEE08F; cursor: pointer;
     box-shadow: 0 6px 24px rgba(58,85,120,0.45);
     display: flex; align-items: center; justify-content: center;
     transition: transform 0.2s, box-shadow 0.2s;
-    position: relative;
+    position: relative; overflow: hidden; padding: 0;
   }
   #rig-chat-btn:hover { transform: scale(1.08); box-shadow: 0 10px 32px rgba(58,85,120,0.55); }
   #rig-chat-btn svg { width: 28px; height: 28px; }
+  #rig-chat-btn img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
   #rig-chat-pulse {
     position: absolute; top: 4px; right: 4px;
     width: 14px; height: 14px; border-radius: 50%;
@@ -685,10 +686,10 @@ function initChatbotUI() {
   <div id="rig-chat-widget">
     <div id="rig-chat-box" role="dialog" aria-label="Chat assistente">
       <div class="chat-header">
-        <div class="chat-header-avatar">🏠</div>
+        <div class="chat-header-avatar"><img src="img/sara.svg" alt="Sara" style="width:100%;height:100%;border-radius:50%;object-fit:cover"></div>
         <div class="chat-header-info">
-          <h4>Righetto Immobiliare</h4>
-          <span>Online — rispondiamo subito</span>
+          <h4>Sara — Assistente AI</h4>
+          <span>Online — rispondo subito</span>
         </div>
         <button class="chat-close" onclick="rigChat.toggle()" aria-label="Chiudi chat">✕</button>
       </div>
@@ -711,11 +712,9 @@ function initChatbotUI() {
         </button>
       </div>
     </div>
-    <button id="rig-chat-btn" onclick="rigChat.toggle()" aria-label="Apri chat assistente">
-      <svg id="rig-chat-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-      </svg>
-      <svg id="rig-chat-icon-close" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" style="display:none">
+    <button id="rig-chat-btn" onclick="rigChat.toggle()" aria-label="Apri chat con Sara">
+      <img id="rig-chat-icon" src="img/sara.svg" alt="Sara — Assistente AI" style="display:block">
+      <svg id="rig-chat-icon-close" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" style="display:none;width:28px;height:28px">
         <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
       </svg>
       <span id="rig-chat-pulse"></span>
@@ -735,12 +734,14 @@ function initChatbotUI() {
       const iconChat = document.getElementById('rig-chat-icon');
       const iconClose = document.getElementById('rig-chat-icon-close');
       const pulse = document.getElementById('rig-chat-pulse');
+      const btn = document.getElementById('rig-chat-btn');
       box.classList.toggle('open', this.open);
       iconChat.style.display = this.open ? 'none' : 'block';
       iconClose.style.display = this.open ? 'block' : 'none';
       if (pulse) pulse.style.display = this.open ? 'none' : 'block';
+      btn.style.background = this.open ? 'linear-gradient(135deg, #3A5578, #5C7A9E)' : 'none';
       if (this.open && document.getElementById('rig-chat-msgs').children.length === 0) {
-        this.addMsg('bot', '👋 Ciao! Sono l\'assistente di **Righetto Immobiliare**.\n\nPosso aiutarti con:\n• 💰 **Stima valore** del tuo immobile\n• 🔍 **Cerca immobili** in vendita o affitto\n• 📋 Info su servizi e provvigioni\n• 📞 **Contattare** un nostro agente\n\nCome posso aiutarti?');
+        this.addMsg('bot', '👋 Ciao! Sono **Sara**, l\'assistente AI di Righetto Immobiliare.\n\nPosso aiutarti con:\n• 💰 **Stima valore** del tuo immobile\n• 🔍 **Cerca immobili** in vendita o affitto\n• 📋 Info su servizi e provvigioni\n• 📞 **Contattare** un nostro agente\n\nCome posso aiutarti?');
         document.getElementById('rig-chat-input').focus();
       }
     },
@@ -754,7 +755,7 @@ function initChatbotUI() {
       bubble.innerHTML = this.renderMarkdown(text);
       if (role === 'bot') {
         const av = document.createElement('div');
-        av.className = 'chat-avatar'; av.textContent = 'R';
+        av.className = 'chat-avatar'; av.innerHTML = '<img src="img/sara.svg" alt="Sara" style="width:100%;height:100%;border-radius:50%">';
         div.appendChild(av);
       }
       div.appendChild(bubble);

@@ -4,21 +4,21 @@
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Guida Completa alla Vendita Immobili — Righetto Immobiliare Padova</title>
   <meta name="description" content="Vendi casa a Padova con Righetto Immobiliare. Valutazione gratuita, strategia personalizzata, fotografie professionali, virtual tour. Assistenza completa fino al rogito.">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--nero:#0a0a0a;--bianco:#f5f2ed;--oro:#c9a84c;--grigio:#6b6560;--gc:#e8e4de;--verde:#4a5c4e;--sfondo:#f0ece6}
-    body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--nero)}
+    :root{--nero:#2C4A6E;--bianco:#F7F5F1;--oro:#B8D44A;--oro2:#CDED62;--grigio:#6B7A8D;--gc:#E1DBD1;--verde:#1E8449;--sfondo:#ECE7DF;--blu:#2C4A6E;--blu2:#3A5F8C;--azzurro:#8AB4CE;--testo:#152435;--carta:#F2EDE7}
+    body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--testo)}
     a{text-decoration:none;color:inherit}
     header{background:var(--nero);position:sticky;top:0;z-index:100}
-    .hi{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:62px;display:flex;align-items:center;gap:2rem}
+    .hi{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:74px;display:flex;align-items:center;gap:2rem}
     .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff}.logo span{color:var(--oro);font-style:italic}
     nav{display:flex;gap:.2rem;flex:1}
-    nav a{color:rgba(255,255,255,.5);font-size:.82rem;padding:.4rem .75rem;border-radius:2px;transition:color .2s}
+    nav a{color:rgba(255,255,255,.5);font-size:.82rem;padding:.4rem .75rem;border-radius:4px;transition:color .2s}
     nav a:hover{color:#fff} nav a.active{color:var(--oro)}
     .h-cta{display:flex;gap:.65rem;align-items:center}
     .h-tel{color:rgba(255,255,255,.55);font-size:.78rem}
-    .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:2px;font-size:.76rem;font-weight:500}
+    .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:6px;font-size:.76rem;font-weight:500;transition:background .2s}
     /* BREADCRUMB */
     .bc{background:var(--nero);border-top:1px solid rgba(255,255,255,.06);padding:.5rem 1.5rem}
     .bc-inner{max-width:1380px;margin:0 auto;display:flex;align-items:center;gap:.4rem;font-size:.7rem;color:rgba(255,255,255,.3)}
@@ -34,13 +34,13 @@
     .hero h1 strong{font-weight:600;font-style:italic}
     .hero p{font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.9;margin-bottom:1.5rem}
     .hero-btns{display:flex;gap:.65rem;flex-wrap:wrap}
-    .btn-gold{background:var(--oro);color:var(--nero);padding:.65rem 1.4rem;border-radius:2px;font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
-    .btn-gold:hover{background:#d4b86a}
-    .btn-outline{border:1px solid rgba(255,255,255,.2);color:#fff;padding:.65rem 1.4rem;border-radius:2px;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:all .2s}
+    .btn-gold{background:var(--oro);color:var(--nero);padding:.65rem 1.4rem;border-radius:8px;font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
+    .btn-gold:hover{background:var(--oro2)}
+    .btn-outline{border:1px solid rgba(255,255,255,.25);color:#fff;padding:.65rem 1.4rem;border-radius:8px;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:all .2s}
     .btn-outline:hover{border-color:var(--oro);color:var(--oro)}
     /* STATS HERO */
     .hero-stats{display:flex;flex-direction:column;gap:.6rem}
-    .hstat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:1.2rem 1.4rem;display:flex;align-items:center;gap:1rem}
+    .hstat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:1.2rem 1.4rem;display:flex;align-items:center;gap:1rem}
     .hstat-val{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;color:var(--oro);flex-shrink:0;min-width:80px}
     .hstat-lbl{font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.5}
     /* SEZIONI */
@@ -61,7 +61,7 @@
     .step-v-body{padding:0 0 2.5rem 1.5rem}
     .step-v-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;margin-bottom:.4rem}
     .step-v-desc{font-size:.84rem;color:var(--grigio);line-height:1.8}
-    .step-v-detail{margin-top:.65rem;background:#fff;border:1px solid var(--gc);border-radius:2px;padding:.75rem 1rem}
+    .step-v-detail{margin-top:.65rem;background:#fff;border:1px solid var(--gc);border-radius:6px;padding:.75rem 1rem}
     .step-v-detail ul{list-style:none;display:flex;flex-direction:column;gap:.25rem}
     .step-v-detail li{font-size:.79rem;color:var(--grigio);display:flex;align-items:flex-start;gap:.4rem}
     .step-v-detail li::before{content:'→';color:var(--oro);flex-shrink:0}
@@ -69,7 +69,7 @@
     .include-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
     @media(max-width:900px){.include-grid{grid-template-columns:1fr 1fr}}
     @media(max-width:560px){.include-grid{grid-template-columns:1fr}}
-    .inc-card{background:#fff;border:1px solid var(--gc);border-radius:3px;padding:1.4rem;transition:transform .2s,box-shadow .2s}
+    .inc-card{background:#fff;border:1px solid var(--gc);border-radius:10px;padding:1.4rem;transition:transform .2s,box-shadow .2s}
     .inc-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.07)}
     .inc-icon{font-size:1.8rem;margin-bottom:.7rem}
     .inc-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;margin-bottom:.4rem}
@@ -77,7 +77,7 @@
     /* CONFRONTO */
     .comparison{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2rem}
     @media(max-width:700px){.comparison{grid-template-columns:1fr}}
-    .comp-col{border-radius:3px;overflow:hidden;border:1px solid var(--gc)}
+    .comp-col{border-radius:10px;overflow:hidden;border:1px solid var(--gc)}
     .comp-head{padding:1rem 1.2rem;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600}
     .comp-col.good .comp-head{background:var(--verde);color:#fff}
     .comp-col.bad .comp-head{background:#e8e4de;color:var(--nero)}
@@ -88,28 +88,28 @@
     /* FORM LATERALE */
     .page-grid{max-width:1380px;margin:0 auto;padding:0 1.5rem 5rem;display:grid;grid-template-columns:1fr 360px;gap:2rem;align-items:start}
     @media(max-width:1100px){.page-grid{grid-template-columns:1fr}}
-    .form-box{background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;overflow:hidden;position:sticky;top:80px}
+    .form-box{background:var(--sfondo);border:1px solid var(--gc);border-radius:10px;overflow:hidden;position:sticky;top:80px}
     .fb-head{padding:1.2rem 1.4rem;border-bottom:1px solid var(--gc);background:#fff}
     .fb-head h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600}
     .fb-head p{font-size:.76rem;color:var(--grigio);margin-top:.2rem}
     .fb-body{padding:1.2rem 1.4rem}
     .field{margin-bottom:.6rem}
     .field label{display:block;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grigio);margin-bottom:.22rem}
-    .field input,.field select,.field textarea{width:100%;border:1px solid var(--gc);border-radius:2px;padding:.5rem .65rem;font-family:'DM Sans',sans-serif;font-size:.83rem;background:#fff;color:var(--nero);transition:border-color .2s}
+    .field input,.field select,.field textarea{width:100%;border:1px solid var(--gc);border-radius:6px;padding:.5rem .65rem;font-family:'Montserrat',sans-serif;font-size:.83rem;background:#fff;color:var(--nero);transition:border-color .2s}
     .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--oro)}
     .field textarea{min-height:80px;resize:vertical;line-height:1.6}
     .fchk{display:flex;align-items:flex-start;gap:.4rem;font-size:.72rem;color:var(--grigio);margin:.4rem 0 .8rem}
     .fchk input{accent-color:var(--oro);flex-shrink:0;margin-top:.15rem}
-    .fsub{width:100%;background:var(--nero);color:#fff;padding:.7rem;border:none;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s}
+    .fsub{width:100%;background:var(--nero);color:#fff;padding:.7rem;border:none;border-radius:6px;font-family:'Montserrat',sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s}
     .fsub:hover{background:var(--oro);color:var(--nero)}
-    .fb-tel{display:flex;align-items:center;gap:.5rem;padding:.75rem 1rem;background:#fff;border:1px solid var(--gc);border-radius:2px;margin-top:.5rem;font-size:.82rem;color:var(--grigio)}
+    .fb-tel{display:flex;align-items:center;gap:.5rem;padding:.75rem 1rem;background:#fff;border:1px solid var(--gc);border-radius:6px;margin-top:.5rem;font-size:.82rem;color:var(--grigio)}
     .fb-tel svg{width:14px;height:14px;color:var(--oro)}
     .fb-tel strong{color:var(--nero)}
     /* TESTIMONIANZE */
     .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
     @media(max-width:900px){.reviews-grid{grid-template-columns:1fr 1fr}}
     @media(max-width:560px){.reviews-grid{grid-template-columns:1fr}}
-    .review{background:#fff;border:1px solid var(--gc);border-radius:3px;padding:1.3rem}
+    .review{background:#fff;border:1px solid var(--gc);border-radius:10px;padding:1.3rem}
     .stars{color:var(--oro);font-size:1rem;margin-bottom:.6rem}
     .review-text{font-size:.83rem;color:var(--grigio);line-height:1.75;font-style:italic;margin-bottom:.8rem}
     .review-auth{font-size:.72rem;font-weight:500;display:flex;align-items:center;gap:.45rem}
@@ -302,19 +302,19 @@
     <h2 class="sec-t">Richiedi la tua<br><strong>valutazione gratuita</strong></h2>
     <p style="font-size:.9rem;color:var(--grigio);line-height:1.8;margin-bottom:2rem;max-width:520px">Veniamo a vedere il tuo immobile, ti forniamo una valutazione scritta di mercato senza impegno. Poi sei tu a decidere. Nessun costo iniziale.</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
-      <div style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1.2rem;display:flex;align-items:center;gap:.75rem">
+      <div style="background:var(--sfondo);border:1px solid var(--gc);border-radius:10px;padding:1.2rem;display:flex;align-items:center;gap:.75rem">
         <span style="font-size:1.5rem">🏠</span>
         <div><div style="font-weight:500;font-size:.88rem">Appartamenti</div><div style="font-size:.76rem;color:var(--grigio)">in tutte le zone di Padova</div></div>
       </div>
-      <div style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1.2rem;display:flex;align-items:center;gap:.75rem">
+      <div style="background:var(--sfondo);border:1px solid var(--gc);border-radius:10px;padding:1.2rem;display:flex;align-items:center;gap:.75rem">
         <span style="font-size:1.5rem">🏡</span>
         <div><div style="font-weight:500;font-size:.88rem">Ville e villette</div><div style="font-size:.76rem;color:var(--grigio)">Padova e provincia</div></div>
       </div>
-      <div style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1.2rem;display:flex;align-items:center;gap:.75rem">
+      <div style="background:var(--sfondo);border:1px solid var(--gc);border-radius:10px;padding:1.2rem;display:flex;align-items:center;gap:.75rem">
         <span style="font-size:1.5rem">🏢</span>
         <div><div style="font-weight:500;font-size:.88rem">Uffici e commerciale</div><div style="font-size:.76rem;color:var(--grigio)">locali e capannoni</div></div>
       </div>
-      <div style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1.2rem;display:flex;align-items:center;gap:.75rem">
+      <div style="background:var(--sfondo);border:1px solid var(--gc);border-radius:10px;padding:1.2rem;display:flex;align-items:center;gap:.75rem">
         <span style="font-size:1.5rem">🌳</span>
         <div><div style="font-weight:500;font-size:.88rem">Terreni e rustici</div><div style="font-size:.76rem;color:var(--grigio)">edificabili e agricoli</div></div>
       </div>
@@ -354,9 +354,17 @@
     <div class="fbot"><span>© 2025 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 12345678901</span></div>
   </div>
 </footer>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
 function sendForm(){
   const n=document.getElementById('f-nome').value.trim();
   const t=document.getElementById('f-tel').value.trim();
   const g=document.getElementById('f-gdpr').checked;
-  if(!n||!t){alert('Inserisci nome e telef
+  if(!n||!t){alert('Inserisci nome e telefono');return}
+  if(!g){alert('Accetta il trattamento dati');return}
+  alert('Grazie '+n+'! Ti ricontatteremo al '+t+' entro 24 ore.');
+}
+</script>
+<script src="js/chatbot.js"></script>
+</body>
+</html>
