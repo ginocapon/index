@@ -851,6 +851,11 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         Richieste
         <span class="nav-badge" id="badgeRichieste" style="display:none">0</span>
       </div>
+      <div class="nav-item" onclick="showSection('blog')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        Blog
+        <span class="nav-badge" id="badgeBlog" style="display:none">0</span>
+      </div>
       <div class="nav-item" onclick="showSection('impostazioni')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         Impostazioni
@@ -1502,6 +1507,121 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         </div>
       </div>
 
+      <!-- ═══ SEZIONE BLOG ═══ -->
+      <div class="section" id="sec-blog">
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-num" id="statBlogTot">0</div><div class="stat-label">Totale Articoli</div></div>
+          <div class="stat-card blue"><div class="stat-num" id="statBlogPub">0</div><div class="stat-label">Pubblicati</div></div>
+          <div class="stat-card green"><div class="stat-num" id="statBlogBozze">0</div><div class="stat-label">Bozze</div></div>
+        </div>
+
+        <div class="table-wrap">
+          <div class="table-head">
+            <div style="font-weight:600;font-size:0.9rem">Articoli del Blog</div>
+            <div style="display:flex;gap:10px">
+              <button class="btn btn-primary btn-sm" onclick="openBlogEditor()">+ Nuovo Articolo</button>
+            </div>
+          </div>
+          <div id="blogListWrap">
+            <div class="empty-state"><h3>Nessun articolo</h3><p style="margin-top:8px">Clicca "+ Nuovo Articolo" per iniziare</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ EDITOR BLOG ═══ -->
+      <div class="section" id="sec-blog-editor">
+        <div class="table-wrap">
+          <div class="modal-header" style="border-radius:0">
+            <h2 id="blogEditorTitle">Nuovo Articolo</h2>
+            <button class="btn btn-secondary btn-sm" onclick="showSection('blog');document.querySelector('[onclick*=blog]').classList.add('active')">← Torna alla lista</button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="blogEditId">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Titolo Articolo *</label>
+                <input type="text" id="b_titolo" placeholder="es. Mercato immobiliare Padova 2026" required>
+              </div>
+              <div class="form-group">
+                <label>Categoria</label>
+                <select id="b_categoria">
+                  <option value="Mercato locale">Mercato locale</option>
+                  <option value="Guida alla vendita">Guida alla vendita</option>
+                  <option value="Affitti">Affitti</option>
+                  <option value="Normativa">Normativa</option>
+                  <option value="Fisco">Fisco</option>
+                  <option value="Consigli acquisto">Consigli acquisto</option>
+                  <option value="Ristrutturazione">Ristrutturazione</option>
+                  <option value="Investimento">Investimento</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Autore</label>
+                <input type="text" id="b_autore" value="Capon Gino" placeholder="Nome autore">
+              </div>
+              <div class="form-group">
+                <label>Data Pubblicazione</label>
+                <input type="date" id="b_data">
+              </div>
+              <div class="form-group">
+                <label>Emoji Copertina</label>
+                <input type="text" id="b_emoji" placeholder="es. 🏘️" value="🏠" style="font-size:1.5rem;text-align:center">
+              </div>
+              <div class="form-group">
+                <label>Tempo di Lettura (min)</label>
+                <input type="number" id="b_tempo" value="5" min="1" max="60">
+              </div>
+              <div class="form-group form-full">
+                <label>Stato</label>
+                <div style="display:flex;gap:16px;margin-top:4px">
+                  <label class="check-item"><input type="radio" name="b_stato" value="pubblicato" checked> Pubblicato</label>
+                  <label class="check-item"><input type="radio" name="b_stato" value="bozza"> Bozza</label>
+                  <label class="check-item"><input type="checkbox" id="b_evidenza"> In Evidenza</label>
+                </div>
+              </div>
+              <div class="form-group form-full">
+                <label>Contenuto Articolo (HTML) — scrivi il tuo codice qui</label>
+                <div style="background:#1e1e2e;border-radius:10px;overflow:hidden;margin-top:4px">
+                  <div style="padding:8px 14px;background:#2d2d44;display:flex;align-items:center;justify-content:space-between">
+                    <span style="font-size:0.72rem;color:#8888aa;font-weight:600;letter-spacing:1px">HTML EDITOR</span>
+                    <div style="display:flex;gap:8px">
+                      <button type="button" onclick="insertTag('h2')" class="btn btn-sm" style="background:#3a3a5c;color:#ccc;padding:4px 10px;font-size:0.7rem">H2</button>
+                      <button type="button" onclick="insertTag('h3')" class="btn btn-sm" style="background:#3a3a5c;color:#ccc;padding:4px 10px;font-size:0.7rem">H3</button>
+                      <button type="button" onclick="insertTag('p')" class="btn btn-sm" style="background:#3a3a5c;color:#ccc;padding:4px 10px;font-size:0.7rem">P</button>
+                      <button type="button" onclick="insertTag('strong')" class="btn btn-sm" style="background:#3a3a5c;color:#ccc;padding:4px 10px;font-size:0.7rem">B</button>
+                      <button type="button" onclick="insertTag('ul')" class="btn btn-sm" style="background:#3a3a5c;color:#ccc;padding:4px 10px;font-size:0.7rem">UL</button>
+                      <button type="button" onclick="insertTag('blockquote')" class="btn btn-sm" style="background:#3a3a5c;color:#ccc;padding:4px 10px;font-size:0.7rem">QUOTE</button>
+                    </div>
+                  </div>
+                  <textarea id="b_contenuto" style="width:100%;min-height:400px;background:#1e1e2e;color:#e0e0e0;border:none;padding:16px;font-family:'Courier New',monospace;font-size:0.85rem;line-height:1.7;resize:vertical;tab-size:2" placeholder="<h2>Titolo sezione</h2>
+<p>Il testo del tuo articolo va qui...</p>
+
+<h3>Sottotitolo</h3>
+<p>Puoi usare <strong>grassetto</strong> e <em>corsivo</em>.</p>
+
+<ul>
+  <li>Punto 1</li>
+  <li>Punto 2</li>
+</ul>"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- ANTEPRIMA LIVE -->
+            <div class="section-divider" style="margin-top:28px">Anteprima Articolo</div>
+            <div id="blogPreview" style="background:var(--sfondo);border:1px solid var(--caffe3);border-radius:10px;padding:28px;min-height:200px;font-family:'Montserrat',sans-serif">
+              <p style="color:var(--caffe2);font-size:0.85rem">Scrivi del contenuto sopra per vedere l'anteprima...</p>
+            </div>
+
+            <div style="display:flex;gap:12px;margin-top:24px;justify-content:flex-end">
+              <button class="btn btn-secondary" onclick="showSection('blog');document.querySelector('[onclick*=blog]').classList.add('active')">Annulla</button>
+              <button class="btn btn-danger" id="btnDeleteArticle" onclick="deleteBlogArticle()" style="display:none">Elimina</button>
+              <button class="btn btn-primary" onclick="saveBlogArticle()">Salva Articolo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- ═══ SEZIONE IMPOSTAZIONI ═══ -->
       <div class="section" id="sec-impostazioni">
         <div class="table-wrap" style="padding:28px;max-width:600px">
@@ -1607,11 +1727,13 @@ function showSection(name) {
     immobili: 'Gestione Immobili',
     nuovo: 'Nuovo Immobile',
     richieste: 'Richieste Clienti',
+    blog: 'Gestione Blog',
     impostazioni: 'Impostazioni'
   };
   document.getElementById('topbarTitle').textContent = titles[name] || name;
 
   if (name === 'richieste') loadRichieste();
+  if (name === 'blog') loadBlogList();
   if (name === 'impostazioni') testConn();
 }
 
@@ -2486,6 +2608,198 @@ renderFotos();
   closeImportModal();
   toast('✅ Dati importati! Aggiungi le tue foto.','success');
   window.scrollTo(0,200);
+}
+
+// ══════════════════════════════════════
+// BLOG — Gestione Articoli (localStorage)
+// ══════════════════════════════════════
+function getBlogArticles() {
+  try { return JSON.parse(localStorage.getItem('rig_blog_articles') || '[]'); }
+  catch(e) { return []; }
+}
+function saveBlogArticles(articles) {
+  localStorage.setItem('rig_blog_articles', JSON.stringify(articles));
+}
+
+function loadBlogList() {
+  const articles = getBlogArticles();
+  const wrap = document.getElementById('blogListWrap');
+  const tot = articles.length;
+  const pub = articles.filter(a => a.stato === 'pubblicato').length;
+  const bozze = tot - pub;
+  document.getElementById('statBlogTot').textContent = tot;
+  document.getElementById('statBlogPub').textContent = pub;
+  document.getElementById('statBlogBozze').textContent = bozze;
+  const badge = document.getElementById('badgeBlog');
+  if (bozze > 0) { badge.textContent = bozze; badge.style.display = ''; }
+  else badge.style.display = 'none';
+
+  if (!tot) {
+    wrap.innerHTML = '<div class="empty-state"><h3>Nessun articolo</h3><p style="margin-top:8px">Clicca "+ Nuovo Articolo" per iniziare</p></div>';
+    return;
+  }
+  wrap.innerHTML = `<table><thead><tr><th></th><th>Titolo</th><th>Categoria</th><th>Data</th><th>Stato</th><th>Azioni</th></tr></thead><tbody>${
+    articles.sort((a,b) => new Date(b.data) - new Date(a.data)).map(a => `
+      <tr>
+        <td style="font-size:1.8rem;text-align:center">${a.emoji || '📝'}</td>
+        <td><strong style="font-size:0.88rem">${esc(a.titolo)}</strong><br><span style="font-size:0.72rem;color:var(--caffe2)">${getExcerpt(a.contenuto, 60)}</span></td>
+        <td><span class="badge badge-blu">${esc(a.categoria)}</span></td>
+        <td style="font-size:0.8rem">${formatDate(a.data)}</td>
+        <td>${a.stato === 'pubblicato' ? '<span class="badge badge-verde">Pubblicato</span>' : '<span class="badge badge-oro">Bozza</span>'}${a.evidenza ? ' <span class="badge badge-blu">★</span>' : ''}</td>
+        <td style="white-space:nowrap">
+          <button class="btn btn-sm btn-secondary" onclick="editBlogArticle('${a.id}')">✏️ Modifica</button>
+          <button class="btn btn-sm btn-danger" onclick="deleteBlogById('${a.id}')">🗑️</button>
+        </td>
+      </tr>
+    `).join('')
+  }</tbody></table>`;
+}
+
+function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+function formatDate(d) {
+  if (!d) return '—';
+  const dt = new Date(d);
+  return dt.toLocaleDateString('it-IT', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+function getExcerpt(html, maxWords) {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html || '';
+  const txt = tmp.textContent || '';
+  const words = txt.split(/\s+/).filter(Boolean);
+  return words.slice(0, maxWords).join(' ') + (words.length > maxWords ? '...' : '');
+}
+
+function openBlogEditor(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-blog-editor').classList.add('active');
+  document.getElementById('topbarTitle').textContent = id ? 'Modifica Articolo' : 'Nuovo Articolo';
+  document.getElementById('blogEditorTitle').textContent = id ? 'Modifica Articolo' : 'Nuovo Articolo';
+  document.getElementById('btnDeleteArticle').style.display = id ? '' : 'none';
+
+  // Reset form
+  document.getElementById('blogEditId').value = '';
+  document.getElementById('b_titolo').value = '';
+  document.getElementById('b_categoria').value = 'Mercato locale';
+  document.getElementById('b_autore').value = 'Capon Gino';
+  document.getElementById('b_data').value = new Date().toISOString().split('T')[0];
+  document.getElementById('b_emoji').value = '🏠';
+  document.getElementById('b_tempo').value = '5';
+  document.getElementById('b_contenuto').value = '';
+  document.querySelector('input[name=b_stato][value=pubblicato]').checked = true;
+  document.getElementById('b_evidenza').checked = false;
+  updateBlogPreview();
+}
+
+function editBlogArticle(id) {
+  const articles = getBlogArticles();
+  const a = articles.find(x => x.id === id);
+  if (!a) return;
+  openBlogEditor(id);
+  document.getElementById('blogEditId').value = a.id;
+  document.getElementById('b_titolo').value = a.titolo || '';
+  document.getElementById('b_categoria').value = a.categoria || 'Mercato locale';
+  document.getElementById('b_autore').value = a.autore || 'Capon Gino';
+  document.getElementById('b_data').value = a.data || '';
+  document.getElementById('b_emoji').value = a.emoji || '🏠';
+  document.getElementById('b_tempo').value = a.tempo || 5;
+  document.getElementById('b_contenuto').value = a.contenuto || '';
+  const stato = a.stato || 'bozza';
+  const radio = document.querySelector(`input[name=b_stato][value=${stato}]`);
+  if (radio) radio.checked = true;
+  document.getElementById('b_evidenza').checked = !!a.evidenza;
+  updateBlogPreview();
+}
+
+function saveBlogArticle() {
+  const titolo = document.getElementById('b_titolo').value.trim();
+  if (!titolo) { toast('⚠️ Inserisci un titolo!', 'error'); return; }
+  const contenuto = document.getElementById('b_contenuto').value.trim();
+  if (!contenuto) { toast('⚠️ Inserisci il contenuto HTML!', 'error'); return; }
+
+  const articles = getBlogArticles();
+  const editId = document.getElementById('blogEditId').value;
+  const stato = document.querySelector('input[name=b_stato]:checked').value;
+
+  const article = {
+    id: editId || 'art_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+    titolo,
+    categoria: document.getElementById('b_categoria').value,
+    autore: document.getElementById('b_autore').value || 'Capon Gino',
+    data: document.getElementById('b_data').value || new Date().toISOString().split('T')[0],
+    emoji: document.getElementById('b_emoji').value || '🏠',
+    tempo: parseInt(document.getElementById('b_tempo').value) || 5,
+    contenuto,
+    stato,
+    evidenza: document.getElementById('b_evidenza').checked,
+    updated_at: new Date().toISOString()
+  };
+
+  if (editId) {
+    const idx = articles.findIndex(a => a.id === editId);
+    if (idx >= 0) articles[idx] = article;
+    else articles.push(article);
+  } else {
+    articles.push(article);
+  }
+
+  saveBlogArticles(articles);
+  toast('✅ Articolo salvato!', 'success');
+  showSection('blog');
+  // re-highlight blog nav
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.nav-item')[4].classList.add('active');
+  loadBlogList();
+}
+
+function deleteBlogArticle() {
+  const id = document.getElementById('blogEditId').value;
+  if (!id) return;
+  if (!confirm('Eliminare questo articolo?')) return;
+  deleteBlogById(id);
+}
+function deleteBlogById(id) {
+  if (!confirm('Eliminare questo articolo?')) return;
+  let articles = getBlogArticles();
+  articles = articles.filter(a => a.id !== id);
+  saveBlogArticles(articles);
+  toast('🗑️ Articolo eliminato', 'success');
+  loadBlogList();
+  // go back to list if we're in editor
+  if (document.getElementById('sec-blog-editor').classList.contains('active')) {
+    showSection('blog');
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.querySelectorAll('.nav-item')[4].classList.add('active');
+  }
+}
+
+function updateBlogPreview() {
+  const html = document.getElementById('b_contenuto').value;
+  const preview = document.getElementById('blogPreview');
+  if (!html.trim()) {
+    preview.innerHTML = '<p style="color:var(--caffe2);font-size:0.85rem">Scrivi del contenuto sopra per vedere l\'anteprima...</p>';
+    return;
+  }
+  preview.innerHTML = '<div class="blog-article-body">' + html + '</div>';
+}
+
+// Live preview
+document.getElementById('b_contenuto').addEventListener('input', updateBlogPreview);
+
+function insertTag(tag) {
+  const ta = document.getElementById('b_contenuto');
+  const start = ta.selectionStart;
+  const end = ta.selectionEnd;
+  const sel = ta.value.substring(start, end);
+  let insert;
+  if (tag === 'ul') {
+    insert = `<ul>\n  <li>${sel || 'elemento'}</li>\n</ul>`;
+  } else {
+    insert = `<${tag}>${sel || ''}</${tag}>`;
+  }
+  ta.value = ta.value.substring(0, start) + insert + ta.value.substring(end);
+  ta.focus();
+  ta.selectionStart = ta.selectionEnd = start + insert.length;
+  updateBlogPreview();
 }
 
 renderFotos();
