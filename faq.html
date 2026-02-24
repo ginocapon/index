@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--nero:#2C4A6E;--bianco:#F7F5F1;--oro:#B8D44A;--grigio:#6B7A8D;--gc:#E1DBD1;--sfondo:#ECE7DF;--blu:#2C4A6E;--blu2:#3A5F8C;--azzurro:#8AB4CE;--oro2:#CDED62;--testo:#152435;--carta:#F2EDE7}
+    :root{--nero:#152435;--bianco:#F7F5F1;--oro:#B8D44A;--grigio:#6B7A8D;--gc:#E1DBD1;--sfondo:#ECE7DF;--blu:#2C4A6E;--blu2:#3A5F8C;--blu3:#4E789A;--azzurro:#8AB4CE;--oro2:#CDED62;--oro-bg:rgba(184,212,74,0.10);--testo:#152435;--carta:#F2EDE7}
     body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--testo)}
     a{text-decoration:none;color:inherit}
     header{background:var(--nero);position:sticky;top:0;z-index:100}
@@ -18,8 +18,9 @@
     nav a:hover{color:#fff}nav a.active{color:var(--oro)}
     .h-cta{display:flex;gap:.65rem;align-items:center}
     .h-tel{color:rgba(255,255,255,.55);font-size:.78rem}
-    .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:6px;font-size:.76rem;font-weight:500;transition:background .2s}
-    .hero{background:var(--nero);padding:4.5rem 1.5rem 3.5rem;position:relative;overflow:hidden}
+    .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:6px;font-size:.76rem;font-weight:500;transition:all .2s}
+.h-btn:hover{background:var(--oro2);transform:translateY(-1px)}
+    .hero{background:linear-gradient(135deg,var(--nero) 0%,var(--blu) 100%);padding:4.5rem 1.5rem 3.5rem;position:relative;overflow:hidden}
     .hero::before{content:'';position:absolute;top:-40px;right:-40px;width:400px;height:400px;background:radial-gradient(circle,rgba(184,212,74,.12) 0%,transparent 70%)}
     .hero-inner{max-width:860px;margin:0 auto;text-align:center}
     .htag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.6rem}
@@ -41,7 +42,7 @@
     .faq-item{border:1px solid var(--gc);border-radius:10px;overflow:hidden;margin-bottom:.45rem;transition:border-color .25s}
     .faq-item.open{border-color:var(--oro)}
     .faq-q{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.1rem;cursor:pointer;gap:1rem;user-select:none;transition:background .2s}
-    .faq-q:hover{background:var(--sfondo)}
+    .faq-q:hover{background:var(--sfondo);transition:background .2s}
     .faq-q-text{font-size:.88rem;font-weight:500;line-height:1.4}
     .faq-icon{width:22px;height:22px;border:1px solid var(--gc);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .25s}
     .faq-item.open .faq-icon{background:var(--oro);border-color:var(--oro);transform:rotate(45deg)}
@@ -59,12 +60,13 @@
     .sb-link{display:flex;align-items:center;gap:.4rem;padding:.48rem .65rem;border:1px solid var(--gc);border-radius:8px;font-size:.81rem;color:var(--grigio);background:#fff;cursor:pointer;transition:all .2s}
     .sb-link:hover{border-color:var(--oro);color:var(--nero)}
     .sb-link svg{width:11px;height:11px;color:var(--oro);flex-shrink:0}
-    .cta-box{background:var(--nero);border-radius:10px;padding:1.4rem;text-align:center}
+    .cta-box{background:linear-gradient(135deg,var(--nero) 0%,var(--blu) 100%);border-radius:10px;padding:1.4rem;text-align:center}
     .cta-box h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;margin-bottom:.4rem}
     .cta-box p{font-size:.77rem;color:rgba(255,255,255,.45);line-height:1.7;margin-bottom:.85rem}
-    .cta-box a{display:block;background:var(--oro);color:var(--nero);padding:.6rem;border-radius:8px;font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.38rem}
+    .cta-box a{display:block;background:var(--oro);color:var(--nero);padding:.6rem;border-radius:8px;font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.38rem;transition:all .2s}
+.cta-box a:hover{background:var(--oro2);transform:translateY(-1px);box-shadow:0 4px 12px rgba(184,212,74,.2)}
     .cta-box a.wa{background:#25d366;color:#fff}
-    footer{background:var(--nero);padding:3rem 1.5rem 1.5rem}
+    footer{background:linear-gradient(180deg,var(--nero) 0%,#0d1a2a 100%);padding:3rem 1.5rem 1.5rem}
     .fi{max-width:1380px;margin:0 auto}
     .fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2rem}
     @media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
