@@ -4,7 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Immobili in vendita e affitto — Righetto Immobiliare Padova</title>
-  <meta name="description" content="Scopri gli immobili di Righetto Immobiliare: ville, appartamenti, uffici in vendita e affitto a Padova e provincia. Filtri avanzati, virtual tour 360° e video.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://righettoimmobiliare.it/immobili.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Immobili in Vendita e Affitto — Padova e Provincia">
+<meta property="og:description" content="Ville, appartamenti, uffici in vendita e affitto a Padova. Filtri avanzati, virtual tour 360°.">
+<meta property="og:url" content="https://righettoimmobiliare.it/immobili.html">
+<meta property="og:site_name" content="Righetto Immobiliare">
+<meta property="og:locale" content="it_IT">
+<meta name="description" content="Scopri gli immobili di Righetto Immobiliare: ville, appartamenti, uffici in vendita e affitto a Padova e provincia. Filtri avanzati, virtual tour 360° e video.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
@@ -276,6 +284,21 @@
       .hero-title{font-size:1.4rem}
     }
   </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SearchResultsPage",
+  "name": "Immobili in vendita e affitto a Padova",
+  "url": "https://righettoimmobiliare.it/immobili.html",
+  "description": "Cerca immobili in vendita e affitto a Padova e nei 101 comuni della provincia.",
+  "mainEntity": {
+    "@type": "ItemList",
+    "name": "Immobili Righetto Immobiliare",
+    "itemListElement": []
+  }
+}
+</script>
 </head>
 <body>
 
@@ -962,4 +985,18 @@
   }
 
   function sendRequest(btn, rif) {
-    btn.textContent = '�
+    btn.textContent = 'Invio...'; btn.disabled = true;
+    const nome = document.getElementById('cc-nome').value.trim();
+    const tel = document.getElementById('cc-tel').value.trim();
+    const email = document.getElementById('cc-email') ? document.getElementById('cc-email').value.trim() : '';
+    const msg = document.getElementById('cc-msg') ? document.getElementById('cc-msg').value.trim() : '';
+    if(!nome||!tel){alert('Inserisci nome e telefono');btn.textContent='Invia richiesta';btn.disabled=false;return}
+    const sb = window._sb;
+    if(sb){sb.from('richieste').insert([{nome:nome,email:email,telefono:tel,messaggio:'Rif: '+rif+'. '+msg,provenienza:'scheda-immobile',letto:false}]).then(()=>{btn.textContent='Inviato!';alert('Richiesta inviata! Ti ricontatteremo presto.')}).catch(()=>{btn.textContent='Invia richiesta';btn.disabled=false;alert('Errore. Chiama il 049 884 3484')})}
+    else{btn.textContent='Inviato!';alert('Richiesta registrata. Ti ricontatteremo!')}
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/chatbot.js"></script>
+</body>
+</html>
