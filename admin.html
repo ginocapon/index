@@ -1950,6 +1950,8 @@ async function saveImmobile(e) {
     piscina: document.getElementById('f_piscina').checked,
     arredato: document.getElementById('f_arredato').checked,
     foto: currentFotos,
+    foto_principale: currentFotos[0] || null,
+    foto_urls: currentFotos,
     planimetrie: currentPlanimetrie,
     documenti: currentDocumenti,
     virtual_tour_scenes: currentVtScenes,
