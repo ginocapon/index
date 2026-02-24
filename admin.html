@@ -2615,17 +2615,26 @@ renderFotos();
 // ══════════════════════════════════════
 // BLOG — Gestione Articoli (localStorage)
 // ══════════════════════════════════════
-function getBlogArticles() {
-  try { return JSON.parse(localStorage.getItem('rig_blog_articles') || '[]'); }
-  catch(e) { return []; }
-}
-function saveBlogArticles(articles) {
-  localStorage.setItem('rig_blog_articles', JSON.stringify(articles));
+let blogArticles = [];
+
+async function getBlogArticles() {
+  try {
+    const { data, error } = await sb.from('blog').select('*').order('data', { ascending: false });
+    if (error) throw error;
+    blogArticles = data || [];
+  } catch(e) {
+    console.warn('Supabase blog non disponibile, uso localStorage:', e.message);
+    try { blogArticles = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]'); } catch(ex) { blogArticles = []; }
+  }
+  // Backup su localStorage
+  try { localStorage.setItem('rig_blog_articles', JSON.stringify(blogArticles)); } catch(e) {}
+  return blogArticles;
 }
 
-function loadBlogList() {
-  const articles = getBlogArticles();
+async function loadBlogList() {
   const wrap = document.getElementById('blogListWrap');
+  wrap.innerHTML = '<div class="loading"><div class="spinner"></div> Caricamento articoli...</div>';
+  const articles = await getBlogArticles();
   const tot = articles.length;
   const pub = articles.filter(a => a.stato === 'pubblicato').length;
   const bozze = tot - pub;
@@ -2693,8 +2702,7 @@ function openBlogEditor(id) {
 }
 
 function editBlogArticle(id) {
-  const articles = getBlogArticles();
-  const a = articles.find(x => x.id === id);
+  const a = blogArticles.find(x => x.id === id);
   if (!a) return;
   openBlogEditor(id);
   document.getElementById('blogEditId').value = a.id;
@@ -2712,18 +2720,16 @@ function editBlogArticle(id) {
   updateBlogPreview();
 }
 
-function saveBlogArticle() {
+async function saveBlogArticle() {
   const titolo = document.getElementById('b_titolo').value.trim();
   if (!titolo) { toast('⚠️ Inserisci un titolo!', 'error'); return; }
   const contenuto = document.getElementById('b_contenuto').value.trim();
   if (!contenuto) { toast('⚠️ Inserisci il contenuto HTML!', 'error'); return; }
 
-  const articles = getBlogArticles();
   const editId = document.getElementById('blogEditId').value;
   const stato = document.querySelector('input[name=b_stato]:checked').value;
 
-  const article = {
-    id: editId || 'art_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+  const payload = {
     titolo,
     categoria: document.getElementById('b_categoria').value,
     autore: document.getElementById('b_autore').value || 'Capon Gino',
@@ -2736,18 +2742,34 @@ function saveBlogArticle() {
     updated_at: new Date().toISOString()
   };
 
-  if (editId) {
-    const idx = articles.findIndex(a => a.id === editId);
-    if (idx >= 0) articles[idx] = article;
-    else articles.push(article);
-  } else {
-    articles.push(article);
+  try {
+    let error;
+    if (editId) {
+      const res = await sb.from('blog').update(payload).eq('id', editId);
+      error = res.error;
+    } else {
+      const res = await sb.from('blog').insert(payload);
+      error = res.error;
+    }
+    if (error) throw error;
+    toast('✅ Articolo salvato!', 'success');
+  } catch(e) {
+    console.warn('Errore salvataggio blog su Supabase:', e.message);
+    // Fallback localStorage
+    const articles = blogArticles;
+    const article = { ...payload, id: editId || 'art_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6) };
+    if (editId) {
+      const idx = articles.findIndex(a => a.id === editId);
+      if (idx >= 0) articles[idx] = article;
+      else articles.push(article);
+    } else {
+      articles.push(article);
+    }
+    try { localStorage.setItem('rig_blog_articles', JSON.stringify(articles)); } catch(ex) {}
+    toast('⚠️ Salvato in locale (Supabase non disponibile)', 'error');
   }
 
-  saveBlogArticles(articles);
-  toast('✅ Articolo salvato!', 'success');
   showSection('blog');
-  // re-highlight blog nav
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.querySelectorAll('.nav-item')[4].classList.add('active');
   loadBlogList();
@@ -2757,16 +2779,21 @@ function deleteBlogArticle() {
   const id = document.getElementById('blogEditId').value;
   if (!id) return;
   if (!confirm('Eliminare questo articolo?')) return;
-  deleteBlogById(id);
+  deleteBlogById(id, true);
 }
-function deleteBlogById(id) {
-  if (!confirm('Eliminare questo articolo?')) return;
-  let articles = getBlogArticles();
-  articles = articles.filter(a => a.id !== id);
-  saveBlogArticles(articles);
-  toast('🗑️ Articolo eliminato', 'success');
+async function deleteBlogById(id, skipConfirm) {
+  if (!skipConfirm && !confirm('Eliminare questo articolo?')) return;
+  try {
+    const { error } = await sb.from('blog').delete().eq('id', id);
+    if (error) throw error;
+    toast('🗑️ Articolo eliminato', 'success');
+  } catch(e) {
+    console.warn('Errore eliminazione blog su Supabase:', e.message);
+    blogArticles = blogArticles.filter(a => a.id !== id);
+    try { localStorage.setItem('rig_blog_articles', JSON.stringify(blogArticles)); } catch(ex) {}
+    toast('🗑️ Articolo eliminato (locale)', 'success');
+  }
   loadBlogList();
-  // go back to list if we're in editor
   if (document.getElementById('sec-blog-editor').classList.contains('active')) {
     showSection('blog');
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));

@@ -554,168 +554,12 @@
     <!-- ACTIVE TAGS -->
     <div class="active-tags" id="active-tags"></div>
 
-    <!-- GRID IMMOBILI -->
+    <!-- GRID IMMOBILI (caricato dinamicamente da Supabase) -->
     <div class="imm-grid" id="imm-grid">
-
-      <!-- CARD 1: LA0307 Villa Curtarolo -->
-      <a class="card" href="immobile.html?rif=LA0307" data-tipo="villa" data-prezzo="380000" data-mq="350" data-camere="5" data-comune="curtarolo" data-vt="1" data-yt="1" data-giardino="1" data-garage="1" data-op="vendita" onclick="openCard(event,this)">
-        <div class="card-img">
-          <div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-          <div class="card-badges"><span class="cbadge cb-vendita">Vendita</span><span class="cbadge cb-evidenza">★ In evidenza</span></div>
-          <div class="card-media">
-            <div class="cm-icon" title="Video YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
-            <div class="cm-icon" title="Virtual Tour 360°"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
-          </div>
-          <div class="card-count">42 foto</div>
-          <button class="fav-btn" onclick="event.preventDefault();event.stopPropagation();toggleFav(this)" title="Salva"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        </div>
-        <div class="card-body">
-          <div class="card-price">€ 380.000</div>
-          <div class="card-title">Villa singola a pochi chilometri da Padova</div>
-          <div class="card-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Curtarolo, Padova</div>
-          <div class="card-specs">
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg><strong>350</strong>&nbsp;mq</div>
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><strong>5</strong>&nbsp;camere</div>
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22H4a2 2 0 01-2-2v-2h20v2a2 2 0 01-2 2h-3M22 12v-2a5 5 0 00-5-5H7a5 5 0 00-5 5v2h20z"/></svg><strong>2</strong>&nbsp;bagni</div>
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><strong>2</strong>&nbsp;garage</div>
-          </div>
-        </div>
-        <div class="card-footer">
-          <span class="cf-ref">Rif. LA0307</span>
-          <span class="cf-ce" style="background:#ef6c00;color:#fff">D</span>
-          <span class="cf-agent">Capon Gino</span>
-        </div>
-      </a>
-
-      <!-- CARD 2: LA0308 Appartamento Padova Centro -->
-      <a class="card" href="immobile.html?rif=LA0308" data-tipo="appartamento" data-prezzo="285000" data-mq="85" data-camere="3" data-comune="padova" data-yt="1" data-op="vendita" onclick="openCard(event,this)">
-        <div class="card-img">
-          <div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-          <div class="card-badges"><span class="cbadge cb-vendita">Vendita</span></div>
-          <div class="card-media"><div class="cm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div></div>
-          <div class="card-count">18 foto</div>
-          <button class="fav-btn" onclick="event.preventDefault();event.stopPropagation();toggleFav(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        </div>
-        <div class="card-body">
-          <div class="card-price">€ 285.000</div>
-          <div class="card-title">Appartamento 3 locali — Centro Storico Padova</div>
-          <div class="card-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Centro Storico, Padova</div>
-          <div class="card-specs">
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg><strong>85</strong>&nbsp;mq</div>
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><strong>3</strong>&nbsp;camere</div>
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22H4a2 2 0 01-2-2v-2h20v2a2 2 0 01-2 2h-3M22 12v-2a5 5 0 00-5-5H7a5 5 0 00-5 5v2h20z"/></svg><strong>1</strong>&nbsp;bagno</div>
-          </div>
-        </div>
-        <div class="card-footer">
-          <span class="cf-ref">Rif. LA0308</span>
-          <span class="cf-ce" style="background:#f9a825;color:#000">C</span>
-          <span class="cf-agent">Capon Gino</span>
-        </div>
-      </a>
-
-      <!-- CARD 3: LA0309 Bilocale affitto -->
-      <a class="card" href="immobile.html?rif=LA0309" data-tipo="appartamento" data-prezzo="950" data-mq="55" data-camere="2" data-comune="padova" data-op="affitto" onclick="openCard(event,this)">
-        <div class="card-img">
-          <div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-          <div class="card-badges"><span class="cbadge cb-affitto">Affitto</span></div>
-          <div class="card-count">12 foto</div>
-          <button class="fav-btn" onclick="event.preventDefault();event.stopPropagation();toggleFav(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        </div>
-        <div class="card-body">
-          <div class="card-price">€ 950 <small>/mese</small></div>
-          <div class="card-title">Bilocale luminoso — Prato della Valle</div>
-          <div class="card-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Prato della Valle, Padova</div>
-          <div class="card-specs">
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg><strong>55</strong>&nbsp;mq</div>
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><strong>2</strong>&nbsp;camere</div>
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22H4a2 2 0 01-2-2v-2h20v2a2 2 0 01-2 2h-3M22 12v-2a5 5 0 00-5-5H7a5 5 0 00-5 5v2h20z"/></svg><strong>1</strong>&nbsp;bagno</div>
-          </div>
-        </div>
-        <div class="card-footer">
-          <span class="cf-ref">Rif. LA0309</span>
-          <span class="cf-ce" style="background:#558b2f;color:#fff">B</span>
-          <span class="cf-agent">Righetto Linda</span>
-        </div>
-      </a>
-
-      <!-- CARD 4: LA0310 Villa bifamiliare -->
-      <a class="card" href="immobile.html?rif=LA0310" data-tipo="bifamiliare" data-prezzo="520000" data-mq="180" data-camere="4" data-comune="albignasego" data-giardino="1" data-garage="1" data-op="vendita" onclick="openCard(event,this)">
-        <div class="card-img">
-          <div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-          <div class="card-badges"><span class="cbadge cb-vendita">Vendita</span><span class="cbadge cb-evidenza">★ In evidenza</span></div>
-          <div class="card-count">28 foto</div>
-          <button class="fav-btn" onclick="event.preventDefault();event.stopPropagation();toggleFav(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        </div>
-        <div class="card-body">
-          <div class="card-price">€ 520.000</div>
-          <div class="card-title">Villa bifamiliare con giardino privato</div>
-          <div class="card-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Albignasego, Padova</div>
-          <div class="card-specs">
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg><strong>180</strong>&nbsp;mq</div>
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><strong>4</strong>&nbsp;camere</div>
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22H4a2 2 0 01-2-2v-2h20v2a2 2 0 01-2 2h-3M22 12v-2a5 5 0 00-5-5H7a5 5 0 00-5 5v2h20z"/></svg><strong>2</strong>&nbsp;bagni</div>
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><strong>2</strong>&nbsp;garage</div>
-          </div>
-        </div>
-        <div class="card-footer">
-          <span class="cf-ref">Rif. LA0310</span>
-          <span class="cf-ce" style="background:#43a047;color:#fff">A1</span>
-          <span class="cf-agent">Capon Gino</span>
-        </div>
-      </a>
-
-      <!-- CARD 5: LA0311 Appartamento Albignasego -->
-      <a class="card" href="immobile.html?rif=LA0311" data-tipo="appartamento" data-prezzo="195000" data-mq="75" data-camere="3" data-comune="albignasego" data-op="vendita" onclick="openCard(event,this)">
-        <div class="card-img">
-          <div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-          <div class="card-badges"><span class="cbadge cb-vendita">Vendita</span></div>
-          <div class="card-count">15 foto</div>
-          <button class="fav-btn" onclick="event.preventDefault();event.stopPropagation();toggleFav(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        </div>
-        <div class="card-body">
-          <div class="card-price">€ 195.000</div>
-          <div class="card-title">Trilocale con balcone — Albignasego</div>
-          <div class="card-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Albignasego, Padova</div>
-          <div class="card-specs">
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg><strong>75</strong>&nbsp;mq</div>
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><strong>3</strong>&nbsp;camere</div>
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22H4a2 2 0 01-2-2v-2h20v2a2 2 0 01-2 2h-3M22 12v-2a5 5 0 00-5-5H7a5 5 0 00-5 5v2h20z"/></svg><strong>1</strong>&nbsp;bagno</div>
-          </div>
-        </div>
-        <div class="card-footer">
-          <span class="cf-ref">Rif. LA0311</span>
-          <span class="cf-ce" style="background:#e53935;color:#fff">E</span>
-          <span class="cf-agent">Righetto Linda</span>
-        </div>
-      </a>
-
-      <!-- CARD 6: LA0312 Villa Limena -->
-      <a class="card" href="immobile.html?rif=LA0312" data-tipo="villa" data-prezzo="680000" data-mq="290" data-camere="5" data-comune="limena" data-giardino="1" data-garage="1" data-vt="1" data-op="vendita" onclick="openCard(event,this)">
-        <div class="card-img">
-          <div class="card-img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-          <div class="card-badges"><span class="cbadge cb-vendita">Vendita</span></div>
-          <div class="card-media"><div class="cm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div></div>
-          <div class="card-count">36 foto</div>
-          <button class="fav-btn" onclick="event.preventDefault();event.stopPropagation();toggleFav(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-        </div>
-        <div class="card-body">
-          <div class="card-price">€ 680.000</div>
-          <div class="card-title">Villa singola con piscina e parco — Limena</div>
-          <div class="card-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Limena, Padova</div>
-          <div class="card-specs">
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg><strong>290</strong>&nbsp;mq</div>
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><strong>5</strong>&nbsp;camere</div>
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22H4a2 2 0 01-2-2v-2h20v2a2 2 0 01-2 2h-3M22 12v-2a5 5 0 00-5-5H7a5 5 0 00-5 5v2h20z"/></svg><strong>3</strong>&nbsp;bagni</div>
-            <div class="cs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><strong>2</strong>&nbsp;garage</div>
-          </div>
-        </div>
-        <div class="card-footer">
-          <span class="cf-ref">Rif. LA0312</span>
-          <span class="cf-ce" style="background:#43a047;color:#fff">A1</span>
-          <span class="cf-agent">Capon Gino</span>
-        </div>
-      </a>
-
+      <div id="loading-state" style="grid-column:1/-1;text-align:center;padding:3rem;">
+        <div style="font-size:1.5rem;margin-bottom:.5rem;opacity:.4">⏳</div>
+        <p style="color:var(--grigio);font-size:.85rem">Caricamento immobili...</p>
+      </div>
     </div>
 
     <!-- NESSUN RISULTATO -->
@@ -798,19 +642,128 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // ── DATA ──
-  const immobili = [
-    {rif:'LA0307',titolo:'Villa singola a pochi km da Padova',prezzo:380000,mq:350,camere:5,bagni:2,comune:'Curtarolo',ce:'D',ceBg:'#ef6c00',ceTx:'#fff',op:'vendita',tipo:'villa',agent:'Capon Gino',giardino:true,garage:true,vt:true,yt:true,foto:42,desc:'Una casa dove i sogni prendono forma…\n\nVilla singola di 350 mq con ampio giardino privato di 1.000 mq, garage doppio, porticato e mansarda. 5 camere matrimoniali, 2 bagni, salone di 50 mq.'},
-    {rif:'LA0308',titolo:'Appartamento 3 locali — Centro Storico Padova',prezzo:285000,mq:85,camere:3,bagni:1,comune:'Padova',ce:'C',ceBg:'#f9a825',ceTx:'#000',op:'vendita',tipo:'appartamento',agent:'Capon Gino',yt:true,foto:18,desc:'Luminoso trilocale nel cuore di Padova. Piano alto, ottime finiture, cucina abitabile.'},
-    {rif:'LA0309',titolo:'Bilocale luminoso — Prato della Valle',prezzo:950,mq:55,camere:2,bagni:1,comune:'Padova',ce:'B',ceBg:'#558b2f',ceTx:'#fff',op:'affitto',tipo:'appartamento',agent:'Righetto Linda',foto:12,desc:'Bilocale ristrutturato vicino a Prato della Valle. Disponibile subito.'},
-    {rif:'LA0310',titolo:'Villa bifamiliare con giardino privato',prezzo:520000,mq:180,camere:4,bagni:2,comune:'Albignasego',ce:'A1',ceBg:'#43a047',ceTx:'#fff',op:'vendita',tipo:'bifamiliare',agent:'Capon Gino',giardino:true,garage:true,foto:28,desc:'Bellissima bifamiliare con giardino indipendente, classe A1.'},
-    {rif:'LA0311',titolo:'Trilocale con balcone — Albignasego',prezzo:195000,mq:75,camere:3,bagni:1,comune:'Albignasego',ce:'E',ceBg:'#e53935',ceTx:'#fff',op:'vendita',tipo:'appartamento',agent:'Righetto Linda',foto:15,desc:'Trilocale di 75 mq con ampio balcone. Buono stato. Libero subito.'},
-    {rif:'LA0312',titolo:'Villa singola con piscina e parco — Limena',prezzo:680000,mq:290,camere:5,bagni:3,comune:'Limena',ce:'A1',ceBg:'#43a047',ceTx:'#fff',op:'vendita',tipo:'villa',agent:'Capon Gino',giardino:true,garage:true,vt:true,foto:36,desc:'Villa esclusiva con piscina riscaldata e parco di 2.000 mq. Classe energetica A1.'},
-  ];
+  // ── CONFIG SUPABASE ──
+  const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  window._sb = sb;
 
+  let immobili = [];
   let currentView = 'grid';
   let currentOp = 'vendita';
+
+  // ── COLORI CLASSE ENERGETICA ──
+  const CE_COLORS = {
+    'A4':{bg:'#1b5e20',tx:'#fff'},'A3':{bg:'#2e7d32',tx:'#fff'},'A2':{bg:'#388e3c',tx:'#fff'},'A1':{bg:'#43a047',tx:'#fff'},
+    'B':{bg:'#558b2f',tx:'#fff'},'C':{bg:'#f9a825',tx:'#000'},'D':{bg:'#ef6c00',tx:'#fff'},
+    'E':{bg:'#e53935',tx:'#fff'},'F':{bg:'#c62828',tx:'#fff'},'G':{bg:'#b71c1c',tx:'#fff'}
+  };
+
+  // ── SVG ICONS ──
+  const SVG_PLACEHOLDER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>';
+  const SVG_HEART = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>';
+  const SVG_LOC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+  const SVG_MQ = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>';
+  const SVG_CAM = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>';
+  const SVG_BAGNI = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 22H4a2 2 0 01-2-2v-2h20v2a2 2 0 01-2 2h-3M22 12v-2a5 5 0 00-5-5H7a5 5 0 00-5 5v2h20z"/></svg>';
+  const SVG_GARAGE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>';
+  const SVG_YT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>';
+  const SVG_VT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+
+  // ── CARICAMENTO IMMOBILI DA SUPABASE ──
+  async function loadImmobili() {
+    const grid = document.getElementById('imm-grid');
+    try {
+      const { data, error } = await sb.from('immobili').select('*').eq('attivo', true).order('in_evidenza', { ascending: false }).order('created_at', { ascending: false });
+      if (error) throw error;
+      immobili = (data || []).map(i => ({
+        id: i.id,
+        rif: i.codice || '',
+        titolo: i.titolo || '',
+        prezzo: i.prezzo || 0,
+        mq: i.superficie || 0,
+        camere: i.camere || i.locali || 0,
+        bagni: i.bagni || 0,
+        comune: i.comune || 'Padova',
+        ce: i.classe_energetica || '',
+        ceBg: (CE_COLORS[i.classe_energetica] || {bg:'#999'}).bg,
+        ceTx: (CE_COLORS[i.classe_energetica] || {tx:'#fff'}).tx,
+        op: i.tipo_operazione || 'vendita',
+        tipo: i.tipologia || '',
+        giardino: !!i.giardino,
+        garage: !!i.garage,
+        vt: !!i.virtual_tour,
+        yt: !!i.youtube_id,
+        foto: Array.isArray(i.foto) ? i.foto : [],
+        evidenza: !!i.in_evidenza,
+        venduto: !!i.venduto,
+        affittato: !!i.affittato,
+        desc: i.titolo || '',
+        _raw: i
+      }));
+      renderCards();
+    } catch(err) {
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;"><p style="color:var(--rosso);font-size:.85rem">Errore nel caricamento degli immobili. Riprova.</p></div>';
+      console.error('Errore caricamento immobili:', err);
+    }
+  }
+
+  // ── RENDER CARDS ──
+  function renderCards() {
+    const grid = document.getElementById('imm-grid');
+    if (!immobili.length) {
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;"><div style="font-size:2.5rem;margin-bottom:.8rem;opacity:.3">🏠</div><h3 style="font-family:\'Cormorant Garamond\',serif;font-size:1.4rem;color:var(--nero);margin-bottom:.4rem">Nessun immobile disponibile</h3><p style="color:var(--grigio);font-size:.85rem">Nuovi immobili in arrivo. Contattaci per informazioni.</p></div>';
+      document.getElementById('res-count').textContent = '0';
+      return;
+    }
+    grid.innerHTML = immobili.map(i => {
+      const fotoUrl = i.foto.length > 0 ? i.foto[0] : '';
+      const fotoCount = i.foto.length;
+      const imgHtml = fotoUrl
+        ? '<img src="'+fotoUrl+'" alt="'+i.titolo.replace(/"/g,'&quot;')+'" style="width:100%;height:100%;object-fit:cover;" loading="lazy" onerror="this.parentElement.innerHTML=\''+SVG_PLACEHOLDER.replace(/'/g,"\\'")+'\'">'
+        : '<div class="card-img-ph">'+SVG_PLACEHOLDER+'</div>';
+      const opLabel = i.op === 'affitto' ? 'Affitto' : i.op === 'asta' ? 'Asta' : 'Vendita';
+      const opClass = i.op === 'affitto' ? 'cb-affitto' : i.op === 'asta' ? 'cb-aste' : 'cb-vendita';
+      let badges = '<span class="cbadge '+opClass+'">'+opLabel+'</span>';
+      if (i.evidenza) badges += '<span class="cbadge cb-evidenza">&#9733; In evidenza</span>';
+      if (i.venduto) badges += '<span class="cbadge" style="background:var(--rosso);color:#fff">Venduto</span>';
+      if (i.affittato) badges += '<span class="cbadge" style="background:var(--rosso);color:#fff">Affittato</span>';
+      let media = '';
+      if (i.yt) media += '<div class="cm-icon" title="Video YouTube">'+SVG_YT+'</div>';
+      if (i.vt) media += '<div class="cm-icon" title="Virtual Tour 360&deg;">'+SVG_VT+'</div>';
+      const prezzoFmt = i.op === 'affitto'
+        ? '&euro; ' + Number(i.prezzo).toLocaleString('it-IT') + ' <small>/mese</small>'
+        : '&euro; ' + Number(i.prezzo).toLocaleString('it-IT');
+      let specs = '<div class="cs">'+SVG_MQ+'<strong>'+i.mq+'</strong>&nbsp;mq</div>';
+      specs += '<div class="cs">'+SVG_CAM+'<strong>'+i.camere+'</strong>&nbsp;camere</div>';
+      specs += '<div class="cs">'+SVG_BAGNI+'<strong>'+i.bagni+'</strong>&nbsp;bagn'+(i.bagni===1?'o':'i')+'</div>';
+      if (i.garage) specs += '<div class="cs">'+SVG_GARAGE+'<strong>1</strong>&nbsp;garage</div>';
+      const ceColor = CE_COLORS[i.ce] || {bg:'#999',tx:'#fff'};
+      const ceHtml = i.ce ? '<span class="cf-ce" style="background:'+ceColor.bg+';color:'+ceColor.tx+'">'+i.ce+'</span>' : '';
+      return '<a class="card" href="immobile.html?id='+i.id+'" data-tipo="'+i.tipo+'" data-prezzo="'+i.prezzo+'" data-mq="'+i.mq+'" data-camere="'+i.camere+'" data-comune="'+(i.comune||'').toLowerCase()+'" data-vt="'+(i.vt?'1':'')+'" data-yt="'+(i.yt?'1':'')+'" data-giardino="'+(i.giardino?'1':'')+'" data-garage="'+(i.garage?'1':'')+'" data-op="'+i.op+'" onclick="openCard(event,this)">'
+        + '<div class="card-img">'
+        + imgHtml
+        + '<div class="card-badges">'+badges+'</div>'
+        + (media ? '<div class="card-media">'+media+'</div>' : '')
+        + (fotoCount > 0 ? '<div class="card-count">'+fotoCount+' foto</div>' : '')
+        + '<button class="fav-btn" onclick="event.preventDefault();event.stopPropagation();toggleFav(this)" title="Salva">'+SVG_HEART+'</button>'
+        + '</div>'
+        + '<div class="card-body">'
+        + '<div class="card-price">'+prezzoFmt+'</div>'
+        + '<div class="card-title">'+i.titolo+'</div>'
+        + '<div class="card-location">'+SVG_LOC+i.comune+', Padova</div>'
+        + '<div class="card-specs">'+specs+'</div>'
+        + '</div>'
+        + '<div class="card-footer">'
+        + (i.rif ? '<span class="cf-ref">Rif. '+i.rif+'</span>' : '')
+        + ceHtml
+        + '</div>'
+        + '</a>';
+    }).join('');
+    filterCards();
+  }
 
   // ── TABS ──
   function setTab(btn, op) {
@@ -930,50 +883,38 @@
   // ── MODAL ──
   function openCard(e, el) {
     e.preventDefault();
-    const rif = el.href?.split('rif=')[1] || el.querySelector('.cf-ref').textContent.replace('Rif. ','');
-    const d = immobili.find(i => i.rif === rif);
-    if (!d) return;
+    const id = el.href?.split('id=')[1] || '';
+    const rif = el.querySelector('.cf-ref') ? el.querySelector('.cf-ref').textContent.replace('Rif. ','') : '';
+    const d = immobili.find(i => i.id === id || i.rif === rif);
+    if (!d) { window.location.href = el.href; return; }
 
     const mediaIcons = [];
-    if (d.yt) mediaIcons.push('<span style="background:var(--rosso);color:#fff;font-size:.6rem;padding:.15rem .4rem;border-radius:1px;font-weight:600;">▶ VIDEO</span>');
-    if (d.vt) mediaIcons.push('<span style="background:var(--blu);color:#fff;font-size:.6rem;padding:.15rem .4rem;border-radius:1px;font-weight:600;">● 360°</span>');
+    if (d.yt) mediaIcons.push('<span style="background:var(--rosso);color:#fff;font-size:.6rem;padding:.15rem .4rem;border-radius:1px;font-weight:600;">&#9654; VIDEO</span>');
+    if (d.vt) mediaIcons.push('<span style="background:var(--blu);color:#fff;font-size:.6rem;padding:.15rem .4rem;border-radius:1px;font-weight:600;">&#9679; 360&deg;</span>');
+    const ceHtml = d.ce ? '<span style="font-size:.6rem;font-weight:700;padding:.15rem .38rem;border-radius:1px;background:'+d.ceBg+';color:'+d.ceTx+';">'+d.ce+'</span>' : '';
+    const prezzoMq = d.mq > 0 ? Math.round(d.prezzo/d.mq).toLocaleString('it-IT') : '—';
 
     document.getElementById('modal-body').innerHTML = `
       <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:.4rem;">
         <div>
-          <div class="modal-price">€ ${d.prezzo.toLocaleString('it')}${d.op==='affitto'?'<span style="font-size:.9rem;color:var(--grigio);font-family:\'DM Sans\',sans-serif;"> /mese</span>':''}</div>
+          <div class="modal-price">&euro; ${d.prezzo.toLocaleString('it-IT')}${d.op==='affitto'?'<span style="font-size:.9rem;color:var(--grigio);font-family:\'DM Sans\',sans-serif;"> /mese</span>':''}</div>
           <div class="modal-title">${d.titolo}</div>
         </div>
-        <div style="display:flex;gap:.3rem;align-items:center;">${mediaIcons.join('')}<span style="font-size:.6rem;font-weight:700;padding:.15rem .38rem;border-radius:1px;background:${d.ceBg};color:${d.ceTx};">${d.ce}</span></div>
+        <div style="display:flex;gap:.3rem;align-items:center;">${mediaIcons.join('')}${ceHtml}</div>
       </div>
-      <div class="modal-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>${d.comune}, Padova — Rif. <strong>${d.rif}</strong></div>
+      <div class="modal-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>${d.comune}, Padova${d.rif ? ' — Rif. <strong>'+d.rif+'</strong>' : ''}</div>
       <div class="modal-specs">
         <div class="ms-item"><div class="ms-val">${d.mq}</div><div class="ms-lbl">mq</div></div>
         <div class="ms-item"><div class="ms-val">${d.camere}</div><div class="ms-lbl">Camere</div></div>
         <div class="ms-item"><div class="ms-val">${d.bagni}</div><div class="ms-lbl">Bagni</div></div>
-        <div class="ms-item"><div class="ms-val">${Math.round(d.prezzo/d.mq).toLocaleString('it')}</div><div class="ms-lbl">€/mq</div></div>
+        <div class="ms-item"><div class="ms-val">${prezzoMq}</div><div class="ms-lbl">&euro;/mq</div></div>
       </div>
-      <div class="modal-desc">${d.desc.replace(/\n/g,'<br>')}</div>
       <div class="modal-actions">
-        <a href="immobile.html?rif=${d.rif}" class="btn btn-dark" style="flex:1;justify-content:center;text-decoration:none;display:flex;align-items:center;gap:.4rem;padding:.6rem 1rem;background:var(--nero);color:#fff;border-radius:2px;font-family:\'DM Sans\',sans-serif;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;">
+        <a href="immobile.html?id=${d.id}" class="btn btn-dark" style="flex:1;justify-content:center;text-decoration:none;display:flex;align-items:center;gap:.4rem;padding:.6rem 1rem;background:var(--nero);color:#fff;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           Scheda completa
         </a>
-        <button onclick="closeModal()" style="padding:.6rem 1.1rem;border:1px solid var(--gc);background:#fff;border-radius:2px;cursor:pointer;font-family:\'DM Sans\',sans-serif;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;">Chiudi</button>
-      </div>
-      <div class="contact-card">
-        <div class="cc-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>Richiedi informazioni — ${d.rif}</div>
-        <div class="cc-fields">
-          <input type="text" placeholder="Nome e cognome *">
-          <input type="tel" placeholder="Telefono *">
-          <input type="email" placeholder="Email">
-          <textarea placeholder="Messaggio (es: Vorrei fissare una visita...)"></textarea>
-          <label style="display:flex;align-items:flex-start;gap:.4rem;font-size:.72rem;color:var(--grigio);">
-            <input type="checkbox" style="margin-top:.15rem;accent-color:var(--oro);flex-shrink:0;">
-            Acconsento al trattamento dei dati personali ai sensi del GDPR
-          </label>
-          <button class="cc-submit" onclick="sendRequest(this,'${d.rif}')">Invia richiesta</button>
-        </div>
+        <button onclick="closeModal()" style="padding:.6rem 1.1rem;border:1px solid var(--gc);background:#fff;border-radius:2px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;">Chiudi</button>
       </div>`;
 
     document.getElementById('modal').classList.add('open');
@@ -985,19 +926,9 @@
     document.body.style.overflow = '';
   }
 
-  function sendRequest(btn, rif) {
-    btn.textContent = 'Invio...'; btn.disabled = true;
-    const nome = document.getElementById('cc-nome').value.trim();
-    const tel = document.getElementById('cc-tel').value.trim();
-    const email = document.getElementById('cc-email') ? document.getElementById('cc-email').value.trim() : '';
-    const msg = document.getElementById('cc-msg') ? document.getElementById('cc-msg').value.trim() : '';
-    if(!nome||!tel){alert('Inserisci nome e telefono');btn.textContent='Invia richiesta';btn.disabled=false;return}
-    const sb = window._sb;
-    if(sb){sb.from('richieste').insert([{nome:nome,email:email,telefono:tel,messaggio:'Rif: '+rif+'. '+msg,provenienza:'scheda-immobile',letto:false}]).then(()=>{btn.textContent='Inviato!';alert('Richiesta inviata! Ti ricontatteremo presto.')}).catch(()=>{btn.textContent='Invia richiesta';btn.disabled=false;alert('Errore. Chiama il 049 884 3484')})}
-    else{btn.textContent='Inviato!';alert('Richiesta registrata. Ti ricontatteremo!')}
-  }
+  // ── INIT ──
+  loadImmobili();
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/chatbot.js"></script>
 <script src="js/cookie-consent.js"></script>
 </body>

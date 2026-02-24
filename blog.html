@@ -225,17 +225,34 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // ══════════════════════════════
-// BLOG ENGINE — carica articoli da localStorage
+// BLOG ENGINE — carica articoli da Supabase
 // ══════════════════════════════
+const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
+let sbBlog = null;
+let allArticles = [];
 let currentCat = '';
 
-function getArticles() {
+async function initBlog() {
   try {
-    const arts = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]');
-    return arts.filter(a => a.stato === 'pubblicato').sort((a,b) => new Date(b.data) - new Date(a.data));
-  } catch(e) { return []; }
+    sbBlog = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const { data, error } = await sbBlog.from('blog').select('*').eq('stato', 'pubblicato').order('data', { ascending: false });
+    if (error) throw error;
+    allArticles = data || [];
+  } catch(e) {
+    // Fallback a localStorage se la tabella blog non esiste
+    console.warn('Blog Supabase non disponibile, uso localStorage:', e.message);
+    try { allArticles = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]').filter(a => a.stato === 'pubblicato'); } catch(ex) { allArticles = []; }
+  }
+  allArticles.sort((a,b) => new Date(b.data) - new Date(a.data));
+  renderBlog();
+}
+
+function getArticles() {
+  return allArticles;
 }
 
 function excerpt(html, maxWords) {
@@ -348,9 +365,8 @@ function renderBlog() {
 function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
 
 // Init
-renderBlog();
+initBlog();
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/chatbot.js"></script>
 <script src="js/cookie-consent.js"></script>
 </body>
