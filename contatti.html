@@ -3,7 +3,15 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Contatti — Righetto Immobiliare Padova</title>
-  <meta name="description" content="Contatta Righetto Immobiliare: Via Roma 96, Limena (PD). Tel 049 884 3484 · Cell 348 862 1888. Richiedi valutazione gratuita o prenota una visita.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://righettoimmobiliare.it/contatti.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contatti — Righetto Immobiliare Padova">
+<meta property="og:description" content="Contatta Righetto Immobiliare: Via Roma 96, Limena (PD). Tel 049 884 3484.">
+<meta property="og:url" content="https://righettoimmobiliare.it/contatti.html">
+<meta property="og:site_name" content="Righetto Immobiliare">
+<meta property="og:locale" content="it_IT">
+<meta name="description" content="Contatta Righetto Immobiliare: Via Roma 96, Limena (PD). Tel 049 884 3484 · Cell 348 862 1888. Richiedi valutazione gratuita o prenota una visita.">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -98,6 +106,26 @@
     .fcol a:hover{color:var(--oro)}
     .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.22);flex-wrap:wrap;gap:.4rem}
   </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contatti Righetto Immobiliare",
+  "url": "https://righettoimmobiliare.it/contatti.html",
+  "mainEntity": {
+    "@type": "RealEstateAgent",
+    "name": "Righetto Immobiliare",
+    "telephone": "+39-049-884-3484",
+    "email": "info@righettoimmobiliare.it",
+    "address": {"@type": "PostalAddress", "streetAddress": "Via Roma 96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
+    "openingHoursSpecification": [
+      {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "19:00"},
+      {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "12:30"}
+    ]
+  }
+}
+</script>
 </head>
 <body>
 <header>
@@ -240,4 +268,19 @@
 </footer>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function sendForm(){
-  const n=document.getElementById('f-nom
+  const n=document.getElementById('f-nome').value.trim();
+  const e=document.getElementById('f-email').value.trim();
+  const t=document.getElementById('f-tel').value.trim();
+  const m=document.getElementById('f-msg').value.trim();
+  const g=document.getElementById('f-gdpr').checked;
+  if(!n||!t){alert('Inserisci nome e telefono');return}
+  if(!g){alert('Accetta la privacy policy');return}
+  const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');
+  if(sb){sb.from('richieste').insert([{nome:n,email:e,telefono:t,messaggio:m,provenienza:'form-contatti',letto:false}]).then(()=>{alert('Richiesta inviata! Ti ricontatteremo presto.');document.querySelector('form')&&document.querySelector('form').reset()}).catch(()=>alert('Errore. Chiama il 049 884 3484'))}
+  else{alert('Richiesta registrata. Ti ricontatteremo!')}
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/chatbot.js"></script>
+</body>
+</html>
