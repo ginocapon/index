@@ -3,7 +3,15 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Blog Immobiliare Padova — Righetto Immobiliare</title>
-  <meta name="description" content="Articoli, guide e consigli pratici sul mercato immobiliare di Padova e provincia. Vendita, affitto, normativa, fiscalità. Righetto Immobiliare.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://righettoimmobiliare.it/blog.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blog Immobiliare — Righetto Immobiliare Padova">
+<meta property="og:description" content="Guide, consigli e analisi sul mercato immobiliare di Padova e provincia.">
+<meta property="og:url" content="https://righettoimmobiliare.it/blog.html">
+<meta property="og:site_name" content="Righetto Immobiliare">
+<meta property="og:locale" content="it_IT">
+<meta name="description" content="Articoli, guide e consigli pratici sul mercato immobiliare di Padova e provincia. Vendita, affitto, normativa, fiscalità. Righetto Immobiliare.">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -100,11 +108,9 @@
     .nl-form input:focus{outline:none;border-color:var(--oro)}
     .nl-btn{background:var(--nero);color:#fff;padding:.55rem;border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s}
     .nl-btn:hover{background:var(--oro);color:var(--nero);transform:translateY(-1px);box-shadow:0 4px 12px rgba(184,212,74,.2)}
-    /* PAGINATION */
-    .pagination{display:flex;gap:.35rem;justify-content:center;padding:1.5rem 0}
-    .pb{width:36px;height:36px;border:1px solid var(--gc);background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.82rem;color:var(--grigio);transition:all .2s}
-    .pb:hover{border-color:var(--nero);color:var(--nero)}
-    .pb.active{background:var(--nero);border-color:var(--nero);color:#fff}
+    /* EMPTY */
+    .blog-empty{text-align:center;padding:4rem 2rem;color:var(--grigio)}
+    .blog-empty h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--nero);margin-bottom:.5rem}
     /* FOOTER */
     footer{background:linear-gradient(180deg,var(--nero) 0%,#0d1a2a 100%);padding:3rem 1.5rem 1.5rem}
     .fi{max-width:1380px;margin:0 auto}
@@ -118,6 +124,17 @@
     .fcol a:hover{color:var(--oro)}
     .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.22);flex-wrap:wrap;gap:.4rem}
   </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Blog Righetto Immobiliare",
+  "description": "Guide, consigli e analisi sul mercato immobiliare di Padova e provincia.",
+  "url": "https://righettoimmobiliare.it/blog.html",
+  "publisher": {"@type": "RealEstateAgent", "name": "Righetto Immobiliare", "url": "https://righettoimmobiliare.it"}
+}
+</script>
 </head>
 <body>
 <header>
@@ -138,148 +155,43 @@
     <div class="search-wrap">
       <label>Cerca nel blog</label>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" placeholder="Es: mercato Padova, cedolare secca, mutuo...">
+      <input type="text" id="blogSearch" placeholder="Es: mercato Padova, cedolare secca, mutuo..." oninput="renderBlog()">
     </div>
   </div>
 </div>
 
 <div class="cats">
-  <div class="cats-inner">
-    <button class="cat-btn active">Tutti</button>
-    <button class="cat-btn">Mercato locale</button>
-    <button class="cat-btn">Guida alla vendita</button>
-    <button class="cat-btn">Affitti</button>
-    <button class="cat-btn">Normativa</button>
-    <button class="cat-btn">Fisco</button>
-    <button class="cat-btn">Consigli acquisto</button>
-    <button class="cat-btn">Ristrutturazione</button>
+  <div class="cats-inner" id="catButtons">
+    <button class="cat-btn active" onclick="filterCat(this,'')">Tutti</button>
+    <button class="cat-btn" onclick="filterCat(this,'Mercato locale')">Mercato locale</button>
+    <button class="cat-btn" onclick="filterCat(this,'Guida alla vendita')">Guida alla vendita</button>
+    <button class="cat-btn" onclick="filterCat(this,'Affitti')">Affitti</button>
+    <button class="cat-btn" onclick="filterCat(this,'Normativa')">Normativa</button>
+    <button class="cat-btn" onclick="filterCat(this,'Fisco')">Fisco</button>
+    <button class="cat-btn" onclick="filterCat(this,'Consigli acquisto')">Consigli acquisto</button>
+    <button class="cat-btn" onclick="filterCat(this,'Ristrutturazione')">Ristrutturazione</button>
   </div>
 </div>
 
 <div class="page">
   <div>
-    <!-- IN EVIDENZA -->
-    <div style="font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--grigio);margin-bottom:.7rem;font-weight:500">In evidenza</div>
-    <div class="featured">
-      <a class="art-big" href="blog-articolo.html">
-        <div class="art-img"><div class="art-img-ph">🏘️</div><span class="art-cat">Mercato locale</span></div>
-        <div class="art-body">
-          <div class="art-date">15 febbraio 2025</div>
-          <div class="art-title">Mercato immobiliare Padova 2025: prezzi in crescita del 4,2% nelle zone residenziali</div>
-          <div class="art-excerpt">Analisi completa del mercato immobiliare di Padova e provincia nel primo trimestre 2025. Zone più dinamiche, tipologie più richieste e previsioni per l'anno in corso. Dati aggiornati con le compravendite reali concluse.</div>
-          <div class="art-meta"><div class="art-author"><div class="art-av">G</div>Capon Gino</div><span class="art-read">8 min di lettura</span></div>
-        </div>
-      </a>
-      <a class="art-sm" href="blog-articolo.html">
-        <div class="art-img"><div class="art-img-ph">📋</div><span class="art-cat">Affitti</span></div>
-        <div class="art-body">
-          <div class="art-date">8 febbraio 2025</div>
-          <div class="art-title">Canone concordato 2025: tutti i vantaggi fiscali per proprietari e inquilini</div>
-          <div class="art-meta"><div class="art-author"><div class="art-av">G</div></div><span class="art-read">5 min</span></div>
-        </div>
-      </a>
-      <a class="art-sm" href="blog-articolo.html">
-        <div class="art-img"><div class="art-img-ph">💰</div><span class="art-cat">Fisco</span></div>
-        <div class="art-body">
-          <div class="art-date">1 febbraio 2025</div>
-          <div class="art-title">Bonus ristrutturazione 2025: cosa cambia e come sfruttarlo prima di vendere</div>
-          <div class="art-meta"><div class="art-author"><div class="art-av">G</div></div><span class="art-read">6 min</span></div>
-        </div>
-      </a>
-    </div>
+    <!-- IN EVIDENZA (dinamico) -->
+    <div id="featuredSection"></div>
 
     <div style="font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--grigio);margin-bottom:.7rem;font-weight:500">Tutti gli articoli</div>
-    <div class="art-grid">
-      <a class="acard" href="blog-articolo.html">
-        <div class="acard-img"><div class="acard-img-ph">🏠</div></div>
-        <div class="acard-body">
-          <span class="acard-cat">Guida alla vendita</span>
-          <div class="acard-title">Come preparare la tua casa per la vendita: 10 mosse che aumentano il valore</div>
-          <div class="acard-excerpt">Dal home staging alla documentazione: le strategie concrete per vendere più velocemente e a un prezzo migliore.</div>
-          <div class="acard-meta"><span>25 gen 2025</span><span>7 min</span></div>
-        </div>
-      </a>
-      <a class="acard" href="blog-articolo.html">
-        <div class="acard-img"><div class="acard-img-ph">🔑</div></div>
-        <div class="acard-body">
-          <span class="acard-cat">Consigli acquisto</span>
-          <div class="acard-title">Prima casa a Padova: guida completa alle agevolazioni 2025</div>
-          <div class="acard-excerpt">Imposta di registro al 2%, IVA ridotta, detrazioni interessi mutuo: tutto quello che devi sapere per risparmiare sull'acquisto.</div>
-          <div class="acard-meta"><span>18 gen 2025</span><span>6 min</span></div>
-        </div>
-      </a>
-      <a class="acard" href="blog-articolo.html">
-        <div class="acard-img"><div class="acard-img-ph">⚡</div></div>
-        <div class="acard-body">
-          <span class="acard-cat">Normativa</span>
-          <div class="acard-title">APE obbligatorio: tutto quello che devi sapere prima di vendere o affittare</div>
-          <div class="acard-excerpt">L'Attestato di Prestazione Energetica è obbligatorio per qualsiasi compravendita o locazione. Guida completa a costi, validità e responsabilità.</div>
-          <div class="acard-meta"><span>10 gen 2025</span><span>4 min</span></div>
-        </div>
-      </a>
-      <a class="acard" href="blog-articolo.html">
-        <div class="acard-img"><div class="acard-img-ph">📊</div></div>
-        <div class="acard-body">
-          <span class="acard-cat">Mercato locale</span>
-          <div class="acard-title">Albignasego e Limena: le zone più richieste dell'hinterland padovano nel 2025</div>
-          <div class="acard-excerpt">Analisi delle zone con maggiore crescita di domanda e valore immobiliare nella cintura nord e sud di Padova.</div>
-          <div class="acard-meta"><span>3 gen 2025</span><span>5 min</span></div>
-        </div>
-      </a>
-      <a class="acard" href="blog-articolo.html">
-        <div class="acard-img"><div class="acard-img-ph">🏗️</div></div>
-        <div class="acard-body">
-          <span class="acard-cat">Ristrutturazione</span>
-          <div class="acard-title">Comprare casa da ristrutturare a Padova: conviene davvero nel 2025?</div>
-          <div class="acard-excerpt">Calcolo costi e benefici: acquistare un immobile da ristrutturare a prezzo ridotto vs acquistare già pronto. I numeri reali del mercato padovano.</div>
-          <div class="acard-meta"><span>20 dic 2024</span><span>8 min</span></div>
-        </div>
-      </a>
-      <a class="acard" href="blog-articolo.html">
-        <div class="acard-img"><div class="acard-img-ph">📝</div></div>
-        <div class="acard-body">
-          <span class="acard-cat">Affitti</span>
-          <div class="acard-title">Sfratto per morosità: iter, tempi e come proteggersi prima che succeda</div>
-          <div class="acard-excerpt">Guida pratica alla procedura di sfratto in Italia: tempi reali, costi e strategie preventive per i proprietari di immobili in affitto.</div>
-          <div class="acard-meta"><span>12 dic 2024</span><span>6 min</span></div>
-        </div>
-      </a>
-    </div>
-
-    <div class="pagination">
-      <button class="pb active">1</button>
-      <button class="pb">2</button>
-      <button class="pb">3</button>
-      <span style="padding:0 .3rem;color:var(--grigio)">…</span>
-      <button class="pb">8</button>
-    </div>
+    <div class="art-grid" id="artGrid"></div>
   </div>
 
   <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="sb">
       <div class="sb-h">Articoli recenti</div>
-      <div class="sb-b">
-        <a href="blog-articolo.html" style="text-decoration:none;color:inherit">
-          <div class="recent-item"><div class="ri-img">🏘️</div><div><div class="ri-title">Mercato Padova 2025: prezzi in crescita</div><div class="ri-date">15 feb 2025</div></div></div>
-        </a>
-        <a href="blog-articolo.html" style="text-decoration:none;color:inherit">
-          <div class="recent-item"><div class="ri-img">📋</div><div><div class="ri-title">Canone concordato 2025: i vantaggi</div><div class="ri-date">8 feb 2025</div></div></div>
-        </a>
-        <a href="blog-articolo.html" style="text-decoration:none;color:inherit">
-          <div class="recent-item"><div class="ri-img">💰</div><div><div class="ri-title">Bonus ristrutturazione 2025</div><div class="ri-date">1 feb 2025</div></div></div>
-        </a>
-        <a href="blog-articolo.html" style="text-decoration:none;color:inherit">
-          <div class="recent-item"><div class="ri-img">🏠</div><div><div class="ri-title">Come preparare casa per la vendita</div><div class="ri-date">25 gen 2025</div></div></div>
-        </a>
-      </div>
+      <div class="sb-b" id="recentSidebar"></div>
     </div>
     <div class="sb">
       <div class="sb-h">Argomenti</div>
       <div class="sb-b">
-        <div class="tag-cloud">
-          <span class="tag">Mercato Padova</span><span class="tag">Vendita</span><span class="tag">Affitto</span><span class="tag">Mutuo</span><span class="tag">Cedolare secca</span><span class="tag">Bonus casa</span><span class="tag">APE</span><span class="tag">Prima casa</span><span class="tag">Preliminare</span><span class="tag">IMU</span><span class="tag">Ristrutturazione</span><span class="tag">Normativa</span><span class="tag">Investimento</span>
-        </div>
+        <div class="tag-cloud" id="tagCloud"></div>
       </div>
     </div>
     <div class="sb">
@@ -312,5 +224,133 @@
     <div class="fbot"><span>© 2025 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 12345678901</span></div>
   </div>
 </footer>
+
+<script>
+// ══════════════════════════════
+// BLOG ENGINE — carica articoli da localStorage
+// ══════════════════════════════
+let currentCat = '';
+
+function getArticles() {
+  try {
+    const arts = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]');
+    return arts.filter(a => a.stato === 'pubblicato').sort((a,b) => new Date(b.data) - new Date(a.data));
+  } catch(e) { return []; }
+}
+
+function excerpt(html, maxWords) {
+  const d = document.createElement('div');
+  d.innerHTML = html || '';
+  const words = (d.textContent || '').split(/\s+/).filter(Boolean);
+  return words.slice(0, maxWords).join(' ') + (words.length > maxWords ? '...' : '');
+}
+
+function fmtDate(d) {
+  if (!d) return '';
+  return new Date(d).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+function fmtDateShort(d) {
+  if (!d) return '';
+  return new Date(d).toLocaleDateString('it-IT', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function filterCat(btn, cat) {
+  currentCat = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderBlog();
+}
+
+function renderBlog() {
+  const all = getArticles();
+  const search = (document.getElementById('blogSearch').value || '').toLowerCase();
+
+  let filtered = all;
+  if (currentCat) filtered = filtered.filter(a => a.categoria === currentCat);
+  if (search) filtered = filtered.filter(a =>
+    (a.titolo || '').toLowerCase().includes(search) ||
+    (a.contenuto || '').toLowerCase().includes(search) ||
+    (a.categoria || '').toLowerCase().includes(search)
+  );
+
+  // Featured (articoli in evidenza)
+  const featEl = document.getElementById('featuredSection');
+  const evidenza = filtered.filter(a => a.evidenza);
+  if (evidenza.length > 0) {
+    const big = evidenza[0];
+    const smalls = evidenza.slice(1, 3);
+    featEl.innerHTML = `
+      <div style="font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--grigio);margin-bottom:.7rem;font-weight:500">In evidenza</div>
+      <div class="featured">
+        <a class="art-big" href="blog-articolo.html?id=${big.id}">
+          <div class="art-img"><div class="art-img-ph">${big.emoji || '📝'}</div><span class="art-cat">${esc(big.categoria)}</span></div>
+          <div class="art-body">
+            <div class="art-date">${fmtDate(big.data)}</div>
+            <div class="art-title">${esc(big.titolo)}</div>
+            <div class="art-excerpt">${esc(excerpt(big.contenuto, 100))}</div>
+            <div class="art-meta"><div class="art-author"><div class="art-av">${(big.autore||'G')[0]}</div>${esc(big.autore)}</div><span class="art-read">${big.tempo || 5} min di lettura</span></div>
+          </div>
+        </a>
+        ${smalls.map(a => `
+          <a class="art-sm" href="blog-articolo.html?id=${a.id}">
+            <div class="art-img"><div class="art-img-ph">${a.emoji || '📝'}</div><span class="art-cat">${esc(a.categoria)}</span></div>
+            <div class="art-body">
+              <div class="art-date">${fmtDate(a.data)}</div>
+              <div class="art-title">${esc(a.titolo)}</div>
+              <div class="art-meta"><div class="art-author"><div class="art-av">${(a.autore||'G')[0]}</div></div><span class="art-read">${a.tempo || 5} min</span></div>
+            </div>
+          </a>
+        `).join('')}
+      </div>`;
+  } else {
+    featEl.innerHTML = '';
+  }
+
+  // Grid articoli (non in evidenza, o tutti se non ci sono evidenza)
+  const grid = evidenza.length > 0
+    ? filtered.filter(a => !a.evidenza)
+    : filtered;
+
+  const gridEl = document.getElementById('artGrid');
+  if (grid.length === 0 && evidenza.length === 0) {
+    gridEl.innerHTML = '<div class="blog-empty"><div style="font-size:3rem;margin-bottom:1rem">📝</div><h3>Nessun articolo ancora</h3><p>I nuovi articoli appariranno qui appena pubblicati dall\'admin.</p></div>';
+  } else {
+    gridEl.innerHTML = grid.map(a => `
+      <a class="acard" href="blog-articolo.html?id=${a.id}">
+        <div class="acard-img"><div class="acard-img-ph">${a.emoji || '📝'}</div></div>
+        <div class="acard-body">
+          <span class="acard-cat">${esc(a.categoria)}</span>
+          <div class="acard-title">${esc(a.titolo)}</div>
+          <div class="acard-excerpt">${esc(excerpt(a.contenuto, 100))}</div>
+          <div class="acard-meta"><span>${fmtDateShort(a.data)}</span><span>${a.tempo || 5} min</span></div>
+        </div>
+      </a>
+    `).join('');
+  }
+
+  // Sidebar recenti
+  const recent = all.slice(0, 4);
+  document.getElementById('recentSidebar').innerHTML = recent.length
+    ? recent.map(a => `
+        <a href="blog-articolo.html?id=${a.id}" style="text-decoration:none;color:inherit">
+          <div class="recent-item"><div class="ri-img">${a.emoji || '📝'}</div><div><div class="ri-title">${esc(a.titolo)}</div><div class="ri-date">${fmtDateShort(a.data)}</div></div></div>
+        </a>
+      `).join('')
+    : '<p style="font-size:.8rem;color:var(--grigio)">Nessun articolo recente</p>';
+
+  // Tag cloud
+  const cats = [...new Set(all.map(a => a.categoria).filter(Boolean))];
+  document.getElementById('tagCloud').innerHTML = cats.length
+    ? cats.map(c => `<span class="tag" onclick="filterCat(document.querySelector('.cat-btn'),&quot;${c}&quot;);document.querySelector('.cat-btn').classList.remove('active');this.closest('.tag-cloud').querySelectorAll('.tag').forEach(t=>t.style.background='');this.style.background='var(--nero)';this.style.color='#fff'">${esc(c)}</span>`).join('')
+    : '<span class="tag">Mercato Padova</span><span class="tag">Vendita</span><span class="tag">Affitto</span><span class="tag">Normativa</span>';
+}
+
+function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+
+// Init
+renderBlog();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/chatbot.js"></script>
 </body>
 </html>
