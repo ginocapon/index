@@ -117,37 +117,21 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
+
 function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
 function fmtDate(d) {
   if (!d) return '';
   return new Date(d).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
 }
-function excerpt(html, n) {
-  const d = document.createElement('div');
-  d.innerHTML = html || '';
-  const w = (d.textContent || '').split(/\s+/).filter(Boolean);
-  return w.slice(0, n).join(' ') + (w.length > n ? '...' : '');
-}
 
-(function() {
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get('id');
+function renderArticle(art, articles) {
   const wrap = document.getElementById('articleContent');
-
-  let articles = [];
-  try { articles = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]'); } catch(e) {}
-  const art = articles.find(a => a.id === id);
-
-  if (!art) {
-    wrap.innerHTML = '<div class="not-found"><div style="font-size:4rem;margin-bottom:1rem">📄</div><h2>Articolo non trovato</h2><p style="color:var(--grigio);margin-top:.5rem">L\'articolo potrebbe essere stato rimosso o il link non è valido.</p><a href="blog.html" style="display:inline-block;margin-top:1.5rem;background:var(--oro);color:var(--nero);padding:.6rem 1.5rem;border-radius:8px;font-weight:600;font-size:.85rem">← Torna al blog</a></div>';
-    return;
-  }
-
-  // Update page title
   document.getElementById('pageTitle').textContent = art.titolo + ' — Righetto Immobiliare';
 
-  // Related articles (same category, max 2)
   const related = articles
     .filter(a => a.id !== art.id && a.stato === 'pubblicato' && a.categoria === art.categoria)
     .slice(0, 2);
@@ -161,31 +145,28 @@ function excerpt(html, n) {
         <div class="art-hero-meta">
           <div class="av">${(art.autore || 'G')[0]}</div>
           <span>${esc(art.autore)}</span>
-          <span>·</span>
+          <span>&middot;</span>
           <span>${fmtDate(art.data)}</span>
-          <span>·</span>
+          <span>&middot;</span>
           <span>${art.tempo || 5} min di lettura</span>
         </div>
       </div>
     </div>
-
     <div class="art-container">
       <div class="art-content">${art.contenuto}</div>
-
       <div class="share-bar">
         <span>Condividi:</span>
         <button class="share-btn" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copiato!'">Copia link</button>
         <a class="share-btn" href="https://wa.me/?text=${encodeURIComponent(art.titolo + ' — ' + location.href)}" target="_blank">WhatsApp</a>
         <a class="share-btn" href="mailto:?subject=${encodeURIComponent(art.titolo)}&body=${encodeURIComponent('Leggi questo articolo: ' + location.href)}" target="_blank">Email</a>
       </div>
-
       ${related.length ? `
         <div class="related">
           <h3>Articoli correlati</h3>
           <div class="related-grid">
             ${related.map(r => `
               <a class="rel-card" href="blog-articolo.html?id=${r.id}">
-                <div class="rel-card-img">${r.emoji || '📝'}</div>
+                <div class="rel-card-img">${r.emoji || '&#128221;'}</div>
                 <div class="rel-card-body">
                   <span class="rel-card-cat">${esc(r.categoria)}</span>
                   <div class="rel-card-title">${esc(r.titolo)}</div>
@@ -197,9 +178,34 @@ function excerpt(html, n) {
       ` : ''}
     </div>
   `;
+}
+
+function showNotFound() {
+  document.getElementById('articleContent').innerHTML = '<div class="not-found"><div style="font-size:4rem;margin-bottom:1rem">&#128196;</div><h2>Articolo non trovato</h2><p style="color:var(--grigio);margin-top:.5rem">L\'articolo potrebbe essere stato rimosso o il link non è valido.</p><a href="blog.html" style="display:inline-block;margin-top:1.5rem;background:var(--oro);color:var(--nero);padding:.6rem 1.5rem;border-radius:8px;font-weight:600;font-size:.85rem">&larr; Torna al blog</a></div>';
+}
+
+(async function() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  if (!id) { showNotFound(); return; }
+
+  try {
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const { data: art, error } = await sb.from('blog').select('*').eq('id', id).single();
+    if (error || !art) { showNotFound(); return; }
+    const { data: allData } = await sb.from('blog').select('*').eq('stato', 'pubblicato');
+    renderArticle(art, allData || []);
+  } catch(e) {
+    // Fallback localStorage
+    console.warn('Blog Supabase non disponibile:', e.message);
+    let articles = [];
+    try { articles = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]'); } catch(ex) {}
+    const art = articles.find(a => a.id === id);
+    if (!art) { showNotFound(); return; }
+    renderArticle(art, articles);
+  }
 })();
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/chatbot.js"></script>
 <script src="js/cookie-consent.js"></script>
 </body>
