@@ -364,6 +364,350 @@ const FAQ_DATA = [
   {
     k: ['sara', 'chi sei', 'assistente', 'bot', 'intelligenza artificiale'],
     r: '👋 Ciao! Sono **Sara**, l\'assistente virtuale di Righetto Immobiliare. Sono disponibile **24/7** per rispondere alle tue domande su immobili, prezzi, servizi e procedure. Posso anche fornirti **stime di mercato** per tutti i 101 comuni della provincia di Padova!\n\nSe hai bisogno di parlare con un agente, scrivi *"contattami"* e ti richiamiamo noi.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // VENDITA — FAQ APPROFONDITE
+  // ═══════════════════════════════════════════════
+  {
+    k: ['valutazione gratuita', 'senza impegno', 'valutazione gratis'],
+    r: '✅ **La valutazione gratuita è davvero senza impegno.** Analizziamo il tuo immobile con comparabili reali di mercato e ti forniamo un report dettagliato per decidere se procedere con noi. Nessun vincolo, nessun costo.\n\n📞 Chiama il **049 884 3484** o scrivi *"contattami"* per prenotare.'
+  },
+  {
+    k: ['tempo vendita', 'quanto tempo', 'vendere veloce', 'tempi vendita'],
+    r: '⏱️ **In media 45-60 giorni** con la nostra strategia multicanale. Riduciamo i tempi grazie a:\n\n• Promozione su portali leader (Immobiliare.it, Idealista, Casa.it)\n• Social geolocalizzati\n• Acquirenti già pre-qualificati nella nostra banca dati\n\nIl 98% dei nostri clienti vende entro i tempi previsti.'
+  },
+  {
+    k: ['foto professionali', 'drone', 'video 4k', 'virtual tour', 'foto immobile'],
+    r: '📸 **Investiamo nella qualità visiva del tuo immobile:**\n\n• Foto professionali con **drone**\n• Virtual tour **360°**\n• Video cinematici **4K**\n• Planimetrie **3D interattive**\n\nTutto incluso, senza anticipo. Un immobile con foto professionali riceve il **40% di contatti in più**.'
+  },
+  {
+    k: ['selezionate acquirenti', 'acquirenti qualificati', 'curiosi', 'qualifica acquirente'],
+    r: '🔍 **Selezioniamo rigorosamente ogni acquirente:**\n\n• Verifica capacità economica (pre-approvazione mutuo)\n• Analisi motivazioni e tempistiche\n• Evitiamo curiosi e perditempo\n\nPresentiamo solo acquirenti qualificati e pronti all\'acquisto.'
+  },
+  {
+    k: ['parte legale', 'rogito', 'fino al rogito', 'assistenza legale vendita'],
+    r: '⚖️ **Sì, ti accompagniamo dalla valutazione al passaggio chiavi:**\n\n• Contratto preliminare\n• Coordinamento mutuo acquirente\n• Rapporto con il notaio\n• Volture utenze\n\nTu firmi e non pensi a nulla. Servizio **chiavi in mano**.'
+  },
+  {
+    k: ['immobili lusso', 'lusso', 'prestigio', 'alto spendente', 'christie', 'sotheby'],
+    r: '🏛️ **Strategie dedicate per il segmento lusso:**\n\n• Marketing su **Christie\'s** e **Sotheby\'s**\n• Network investitori internazionali\n• Servizio fotografico premium\n• Target alto-spendente mirato\n\nMassima riservatezza e posizionamento esclusivo.'
+  },
+  {
+    k: ['prezzo non raggiunto', 'non si vende', 'sotto prezzo', 'ribasso'],
+    r: '📉 **Se non si raggiunge il prezzo valutato**, rinegoziamo la strategia o proponiamo soluzioni alternative come l\'affitto con riscatto. Mai forzature: **il tuo interesse viene prima di tutto**. Adattiamo il piano, non ti abbandoniamo.'
+  },
+  {
+    k: ['esclusiva', 'mandato libero', 'mandato esclusiva', 'incarico'],
+    r: '📝 **Offriamo entrambe le opzioni:**\n\n• **Esclusiva** → investimento marketing massimo, tempi più rapidi\n• **Mandato libero** → maggiore libertà\n\nL\'esclusiva ci permette di investire di più nella promozione del tuo immobile, ma rispettiamo sempre la tua scelta.'
+  },
+  {
+    k: ['solo padova', 'zona coperta', 'dove lavorate', 'area operativa'],
+    r: '📍 **Copriamo tutta la provincia di Padova e oltre:**\n\n• Padova città e prima cintura\n• Selvazzano, Abano, Montegrotto, Rubano, Limena\n• Monselice, Este, Cittadella, Camposampiero\n• Fino a Vicenza e comuni limitrofi\n\n**101 comuni** nel nostro database prezzi!'
+  },
+  {
+    k: ['esempi venduti', 'portfolio', 'casi studio', 'immobili venduti'],
+    r: '🏡 **Sì, sul nostro portfolio online trovi:**\n\n• Casi studio con foto prima/dopo\n• Tempi di vendita reali\n• Prezzi ottenuti\n\nOgni vendita è una storia di successo. Chiedici e ti mostriamo i risultati nella tua zona!'
+  },
+  {
+    k: ['chi paga foto', 'costo foto', 'anticipo foto'],
+    r: '💰 **Le foto professionali e il virtual tour li paghiamo noi**, senza anticipo. Investiamo nel tuo immobile come fosse nostro. Paghi solo a vendita conclusa.'
+  },
+  {
+    k: ['home staging', 'staging', 'allestimento'],
+    r: '🎨 **Sì, offriamo home staging:**\n\n• **Staging virtuale gratuito** nelle foto (rendering digitale)\n• **Staging fisico opzionale** per immobili vuoti\n\nL\'home staging aumenta la velocità di vendita del **+20%** e il prezzo finale fino al **+5%**.'
+  },
+  {
+    k: ['privacy visite', 'discrezione', 'riservatezza', 'nda'],
+    r: '🔒 **Massima discrezione garantita:**\n\n• Registrazione visitatori obbligatoria\n• NDA per immobili sensibili\n• Verifica identità prima di ogni visita\n\nLa tua privacy è una priorità assoluta.'
+  },
+  {
+    k: ['vendita asta', 'asta giudiziaria', 'asta immobiliare'],
+    r: '🔨 **Sì, gestiamo vendite all\'asta** con strategie dedicate per massimizzare le offerte mantenendo la riservatezza fino all\'aggiudicazione. Assistenza completa dalla perizia al decreto di trasferimento.'
+  },
+  {
+    k: ['offerta durante esclusiva', 'offerta migliore'],
+    r: '📋 **Se ricevi un\'offerta durante l\'esclusiva**, la valutiamo insieme. Se è migliore della nostra strategia, la accettiamo senza penali. Il tuo interesse è sempre al primo posto.'
+  },
+  {
+    k: ['investitori istituzionali', 'family office', 'fondi', 'sgr'],
+    r: '🏦 **Sì, collaboriamo con:**\n\n• Family office\n• SGR (Società Gestione Risparmio)\n• Fondi immobiliari\n\nPer immobili da investimento con rendimenti interessanti. Network qualificato e riservato.'
+  },
+  {
+    k: ['valutazione mutuo', 'perizia banca', 'perizia ctu'],
+    r: '🏦 **Sì, realizziamo perizie CTU accreditate** per tutte le principali banche: Intesa Sanpaolo, UniCredit, BNL, BPER, Banco BPM. Metodica OMI certificata.'
+  },
+  {
+    k: ['promozione portali', 'immobiliare.it', 'idealista', 'casa.it'],
+    r: '🌐 **Promozione multicanale massima:**\n\n• Primo posto organico su **Immobiliare.it**\n• **Idealista** e **Casa.it**\n• Google My Business ottimizzato\n• Social media geolocalizzati\n• La nostra banca dati acquirenti\n\nVisibilità totale per il tuo immobile.'
+  },
+  {
+    k: ['immobili commerciali', 'negozio', 'ufficio', 'capannone vendita'],
+    r: '🏢 **Sì, gestiamo immobili commerciali:**\n\n• Negozi e locali\n• Uffici\n• Capannoni e magazzini\n\nStrategie **B2B dedicate** con promozione su canali professionali e network imprenditoriale.'
+  },
+  {
+    k: ['compenso', 'provvigione', 'quanto costa', 'commissione agenzia'],
+    r: '💶 **Provvigione solo sul venduto**, percentuale standard di mercato. Trasparente dall\'inizio, concordata nel mandato. **Nessun costo anticipato**, nessuna sorpresa. Paghi solo quando la vendita è conclusa.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // LOCAZIONI — FAQ
+  // ═══════════════════════════════════════════════
+  {
+    k: ['inquilini solvibili', 'solvibilità', 'garanzia inquilino', 'verifica inquilino'],
+    r: '✅ **Verifica solvibilità completa:**\n\n• Buste paga e cedolini\n• Garanzie bancarie\n• Visura K-bis per aziende\n• Scoring solvibilità\n\nSolo inquilini affidabili e verificati.'
+  },
+  {
+    k: ['tipo contratto locazione', 'contratto 4+4', 'contratto 3+2', 'transitorio', 'foresteria'],
+    r: '📋 **Gestiamo tutti i tipi di contratto:**\n\n• **4+4** — Libero mercato\n• **3+2** — Canone concordato (vantaggi fiscali)\n• **Transitorio** — Da 1 a 18 mesi\n• **Commerciale** — Per attività\n• **Foresteria** — Per aziende\n• **Affitti brevi** — Turistici\n\nTi consigliamo la formula più vantaggiosa per la tua situazione.'
+  },
+  {
+    k: ['registrazione contratto', 'agenzia entrate', 'registrazione locazione'],
+    r: '📄 **Ci occupiamo gratuitamente della registrazione telematica** del contratto all\'Agenzia delle Entrate. Zero burocrazia per te.'
+  },
+  {
+    k: ['airbnb', 'locazioni brevi', 'affitto breve', 'affitto turistico'],
+    r: '🏖️ **Gestione completa Airbnb e affitti brevi:**\n\n• Check-in e check-out\n• Pulizie professionali\n• Gestione recensioni\n• Ottimizzazione prezzi dinamici\n• Comunicazione ospiti\n\nMassimizziamo la tua rendita senza pensieri.'
+  },
+  {
+    k: ['inquilino non paga', 'morosità', 'sfratto', 'mancato pagamento'],
+    r: '⚠️ **In caso di morosità, attiviamo:**\n\n• Procedura legale rapida\n• Recupero crediti tramite i nostri legali partner\n• Assistenza completa dallo sfratto alla riconsegna\n\nPolizze **affitto sicuro** disponibili per prevenire il problema.'
+  },
+  {
+    k: ['rivalutazione istat', 'adeguamento istat', 'aggiornamento canone'],
+    r: '📈 **Calcoliamo e notifichiamo automaticamente** la rivalutazione ISTAT ogni anno. Nessun adeguamento dimenticato, massima tutela del tuo reddito locativo.'
+  },
+  {
+    k: ['scelgo inquilino', 'scelta inquilino', 'ultimo parola'],
+    r: '👤 **Sì, hai sempre l\'ultima parola** dopo la nostra qualifica di solvibilità. Ti presentiamo i candidati migliori con tutte le informazioni, tu decidi chi ospitare nel tuo immobile.'
+  },
+  {
+    k: ['immobili ammobiliati', 'arredato affitto', 'inventario'],
+    r: '🛋️ **Sì, gestiamo immobili ammobiliati:**\n\n• Inventario iniziale dettagliato con foto\n• Stato di locazione documentato\n• Riconsegna finale verificata\n\nTutela completa del tuo arredamento.'
+  },
+  {
+    k: ['tempo trovare inquilino', 'quanto tempo affittare'],
+    r: '⏱️ **Media 18 giorni** per trovare inquilino grazie al doppio canale:\n\n• **Privati** — portali + social\n• **Aziende** — relocation multinazionali\n\nRaggiungiamo il target giusto rapidamente.'
+  },
+  {
+    k: ['contratti expat', 'relocation', 'aziende affitto', 'multinazionali'],
+    r: '🌍 **Sì, contratti relocation** con multinazionali e professionisti trasfertisti. Esperienza consolidata con aziende del territorio padovano e veronese. Contratti su misura in italiano e inglese.'
+  },
+  {
+    k: ['polizza affitto sicuro', 'garanzia canone', 'assicurazione affitto'],
+    r: '🛡️ **Partnership con compagnie assicurative** per polizze **affitto sicuro**:\n\n• Garanzia canone mensile\n• Copertura morosità\n• Tutela legale inclusa\n\nDormi tranquillo, il canone è garantito.'
+  },
+  {
+    k: ['spese condominiali inquilino', 'chi paga condominio'],
+    r: '🏢 **Chiarimento forfettario nel contratto.** Noi verifichiamo i conteggi millesimali e gestiamo la ripartizione corretta tra proprietario e inquilino secondo la legge vigente.'
+  },
+  {
+    k: ['successione locativa', 'passaggio contratto eredi', 'subentro'],
+    r: '📋 **Gestiamo il passaggio contratti agli eredi** con comunicazione all\'Agenzia delle Entrate e aggiornamento di tutte le registrazioni. Assistenza completa nella successione locativa.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // GESTIONE PRELIMINARI — FAQ
+  // ═══════════════════════════════════════════════
+  {
+    k: ['regolarità edilizia', 'verifica edilizia', 'scia', 'dia', 'condono', 'sanatoria'],
+    r: '🏗️ **Verifica completa della regolarità edilizia:**\n\n• Analisi planimetrie catastali\n• Verifica SCIA/DIA\n• Controllo condoni e sanatorie\n• Identificazione eventuali abusi\n\nNessuna sorpresa dopo la firma del preliminare.'
+  },
+  {
+    k: ['vincoli urbanistici', 'prg', 'pgt', 'servitù'],
+    r: '📐 **Controlliamo tutti i vincoli urbanistici:**\n\n• Sopralluogo tecnico\n• Visure PRG/PGT\n• Banche dati servitù\n• Vincoli paesaggistici e idrogeologici\n\nSicurezza totale prima di firmare.'
+  },
+  {
+    k: ['vizio occulto', 'vizi nascosti', 'difetto immobile'],
+    r: '⚠️ **Tutela contrattuale contro vizi occulti:**\n\n• Clausola rescissoria\n• Caparra confirmatoria risarcitoria automatica\n• Dichiarazioni venditore dettagliate\n\nIl preliminare ti protegge da sorprese.'
+  },
+  {
+    k: ['compromesso bilingue', 'acquirenti stranieri', 'contratto inglese'],
+    r: '🌍 **Redigiamo compromessi bilingue** per acquirenti stranieri:\n\n• Italiano/Inglese\n• Italiano/Cinese\n• Italiano/Arabo\n\nAssistenza completa per compravendite internazionali.'
+  },
+  {
+    k: ['mutuo ipotecario', 'sospensione rate', 'preventivo mutuo'],
+    r: '🏦 **Assistenza mutui ipotecari completa:**\n\n• Perizia tecnica\n• Preventivo mutuo migliore\n• Sospensione rate se necessario\n• Coordinamento con la banca\n\nTi aiutiamo a ottenere le condizioni migliori.'
+  },
+  {
+    k: ['imposta registro', 'imposte acquisto', 'tasse preliminare'],
+    r: '💰 **Calcolo esatto delle imposte** e assistenza nel pagamento telematico:\n\n• Imposta di registro\n• Imposta ipotecaria e catastale\n• Simulazione costi totali\n\nTrasparenza totale sui costi fin dall\'inizio.'
+  },
+  {
+    k: ['servitù prediali', 'ipoteche giudiziali', 'visure ipotecarie'],
+    r: '🔍 **Verifiche ipotecarie complete:**\n\n• Analisi atti e visure\n• Servitù prediali\n• Ipoteche giudiziali\n• Cancellazioni necessarie\n\nNessun vincolo nascosto: garanzia totale.'
+  },
+  {
+    k: ['clausole penali', 'penale contratto', 'ritiro proposta'],
+    r: '⚖️ **Clausole penali personalizzate** su misura per ogni trattativa: tempistiche, ritiro, condizioni sospensive. Ogni clausola è calibrata per proteggere i tuoi interessi specifici.'
+  },
+  {
+    k: ['coordinamento notaio', 'notaio partner', 'lista notai'],
+    r: '📋 **Siamo coordinati con tutti i notai** della provincia. Lista notai partner con tariffe dedicate per i nostri clienti. Gestiamo tutti gli appuntamenti e la documentazione.'
+  },
+  {
+    k: ['accollo mutuo', 'passaggio mutuo'],
+    r: '🏦 **Gestiamo l\'accollo mutui:**\n\n• Rinegoziazione condizioni\n• Passaggio banca\n• Verifica convenienza\n\nTi seguiamo in ogni aspetto finanziario della compravendita.'
+  },
+  {
+    k: ['donazione', 'divisione ereditaria', 'eredità immobile'],
+    r: '👨‍👩‍👧 **Gestiamo donazioni e divisioni ereditarie** con i nostri commercialisti partner per ottimizzazione fiscale:\n\n• Perizie per divisione\n• Analisi donazione vs cessione\n• Calcolo imposte e plusvalenze'
+  },
+  {
+    k: ['apostille', 'legalizzazione', 'rogito internazionale'],
+    r: '🌐 **Apostille e legalizzazione atti** per rogiti internazionali. Assistenza completa per acquirenti e venditori esteri con documentazione conforme alle normative internazionali.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // GESTIONE PATRIMONIO — FAQ
+  // ═══════════════════════════════════════════════
+  {
+    k: ['gestione completa', 'cosa include gestione', 'gestione patrimonio'],
+    r: '🏠 **La gestione completa include:**\n\n• Selezione e gestione inquilini\n• Manutenzione ordinaria e straordinaria\n• Pagamenti e rendicontazione\n• Ottimizzazione fiscale\n• Report periodici\n\nTu incassi, noi pensiamo a tutto il resto.'
+  },
+  {
+    k: ['app proprietari', 'dashboard', 'portale proprietario'],
+    r: '📱 **Dashboard online per proprietari:**\n\n• Incassi in tempo reale\n• Stato manutenzioni\n• Documenti scaricabili **24/7**\n• Storico pagamenti\n\nControlla il tuo patrimonio ovunque ti trovi.'
+  },
+  {
+    k: ['artigiani', 'rete artigiani', 'manutenzione urgente'],
+    r: '🔧 **Rete di 40+ artigiani qualificati** con SLA (tempi di intervento garantiti):\n\n• Idraulici, elettricisti, fabbri\n• Imbianchini, muratori\n• Caldaisti, climatizzatori\n• Pronto intervento h24\n\nInterventi rapidi e prezzi concordati.'
+  },
+  {
+    k: ['redditività portafoglio', 'rendimento immobili', 'analisi rendita'],
+    r: '📊 **Report trimestrale di redditività:**\n\n• Yield lordo e netto\n• Benchmark con il mercato\n• Proiezioni a 12-24 mesi\n• Suggerimenti di ottimizzazione\n\nMassimiziamo il rendimento del tuo portafoglio.'
+  },
+  {
+    k: ['ottimizzazione fiscale', 'cedolare secca gestione', 'tasse immobili'],
+    r: '📋 **Ottimizzazione carico fiscale:**\n\n• Cedolare secca vs regime ordinario\n• Rivalutazioni OICE\n• Leasing operativo\n• Deduzioni e detrazioni applicabili\n\nRisparmi fiscali concreti sul tuo patrimonio.'
+  },
+  {
+    k: ['manutenzione predittiva', 'check stagionale', 'prevenzione guasti'],
+    r: '🔧 **Piani di manutenzione predittiva:**\n\n• Check stagionali programmati\n• Analisi costi/benefici interventi\n• Prevenzione guasti costosi\n\nMeglio prevenire che riparare: risparmi fino al **30%** sui costi di manutenzione.'
+  },
+  {
+    k: ['patrimoni ereditari', 'immobili eredità gestione', 'divisione quote'],
+    r: '👨‍👩‍👧 **Gestiamo patrimoni ereditari complessi:**\n\n• Divisioni immobiliari\n• Locazioni pro-quota\n• Gestione contenziosi tra eredi\n• Valorizzazione e vendita concordata\n\nEsperienza trentennale nelle situazioni più delicate.'
+  },
+  {
+    k: ['assicurazione immobile', 'polizza multirischio', 'assicurazione globale'],
+    r: '🛡️ **Polizze multirischio** con massimali elevati:\n\n• Incendio e scoppio\n• Danni da acqua\n• Responsabilità civile\n• Furto e atti vandalici\n\nPartnership con le migliori compagnie per coperture complete.'
+  },
+  {
+    k: ['hotel management', 'case vacanze', 'gestione vacanze'],
+    r: '🏖️ **Gestione chiavi in mano per case vacanze:**\n\n• Promozione su Booking, Airbnb\n• Check-in/check-out\n• Pulizie e biancheria\n• Manutenzione e assistenza ospiti\n\nRendita passiva garantita sul tuo immobile vacanza.'
+  },
+  {
+    k: ['immobili strumentali', 'leasing immobile', 'cespiti bilancio'],
+    r: '🏢 **Gestiamo immobili strumentali per aziende:**\n\n• Leasing finanziario e operativo\n• Rivalutazione cespiti a bilancio\n• Gestione contratti professionali\n\nSoluzioni su misura per il patrimonio aziendale.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // VALUTAZIONI E PERIZIE — FAQ
+  // ═══════════════════════════════════════════════
+  {
+    k: ['perizia valida banca', 'perizia abi', 'perizia accreditata'],
+    r: '🏦 **Sì, le nostre perizie sono accreditate ABI** con metodica OMI/CTU. Valide per tutte le principali banche italiane. Periti iscritti ai ruoli giudiziali dei tribunali.'
+  },
+  {
+    k: ['tempo perizia', 'quanto tempo valutazione', 'tempi report'],
+    r: '⏱️ **Tempi di consegna:**\n\n• **Valutazione gratuita:** 24-48 ore\n• **Perizia completa certificata:** 5 giorni lavorativi\n• **Perizia giurata CTU:** 7-10 giorni\n\nRapidità senza compromessi sulla qualità.'
+  },
+  {
+    k: ['valutazione asta', 'immobile asta valore', 'stima asta'],
+    r: '🔨 **Valutiamo immobili all\'asta:**\n\n• Analisi perizia del tribunale\n• Confronto con valori di mercato\n• Valutazione rischi legali\n• Gap asta/mercato\n\nTi aiutiamo a capire se conviene partecipare.'
+  },
+  {
+    k: ['stima divisione', 'perizia ereditaria', 'perizia giurata'],
+    r: '⚖️ **Perizie per divisioni ereditarie:**\n\n• Perizie giurate con valore legale\n• Assistenza CTU giudiziale\n• Valutazioni imparziali e certificate\n\nRisolviamo situazioni complesse con competenza e imparzialità.'
+  },
+  {
+    k: ['database comparabili', 'comparabili mercato', 'transazioni recenti'],
+    r: '📊 **Database di 15.000+ transazioni** nella provincia di Padova degli ultimi 24 mesi. Dati reali, non stime algoritmiche. È ciò che rende le nostre valutazioni accurate e affidabili.'
+  },
+  {
+    k: ['valutazione rurale', 'immobile rurale', 'terreno agricolo valutazione'],
+    r: '🌾 **Valutiamo immobili rurali:**\n\n• Calcolo DGRV\n• Reddito fondiario\n• Cubatura edificabile\n• Potenzialità di trasformazione\n\nConosciamo il mercato agricolo del territorio padovano.'
+  },
+  {
+    k: ['perizia ipocatastale', 'docfa', 'accatastamento', 'frazionamento'],
+    r: '📐 **Perizie ipocatastali complete:**\n\n• Pratiche DOCFA\n• Accatastamenti e variazioni\n• Frazionamenti e fusioni\n• Aggiornamento planimetrie\n\nGestiamo tutta la parte catastale.'
+  },
+  {
+    k: ['redditività locativa', 'yield', 'break even', 'irr immobiliare'],
+    r: '📊 **Analisi redditività locativa completa:**\n\n• **Yield lordo e netto**\n• **Break-even** dell\'investimento\n• **IRR** (Tasso Interno di Rendimento)\n• Confronto con alternative\n\nNumeri chiari per decidere se investire.'
+  },
+  {
+    k: ['valutazione commerciale', 'stima negozio', 'dcf immobiliare'],
+    r: '🏢 **Valutiamo immobili commerciali** con metodi professionali:\n\n• Metodo **DCF** (Discounted Cash Flow)\n• Capitalizzazione dei redditi\n• Comparazione di mercato\n\nValutazioni affidabili per ogni tipologia commerciale.'
+  },
+  {
+    k: ['trend quartiere', 'microzona', 'proiezioni prezzi'],
+    r: '📈 **Analisi trend di quartiere:**\n\n• Microzonizzazione dettagliata\n• Proiezioni a **12-24 mesi**\n• Fattori di crescita (infrastrutture, servizi, trasporti)\n• Confronto storico\n\nSapere dove investire fa la differenza.'
+  },
+  {
+    k: ['mutuo 100', 'valutazione mutuo giovani', 'mutuo prima casa'],
+    r: '🏠 **Valutazioni ex-ante per mutuo 100%:**\n\n• Simulazione banca preventiva\n• Buffer di sicurezza\n• Verifica fattibilità prima dell\'offerta\n\nTi evitiamo brutte sorprese in fase di richiesta mutuo.'
+  },
+  {
+    k: ['passaggio generazionale', 'donazione immobile', 'cessione genitori'],
+    r: '👨‍👩‍👧 **Valutazioni per passaggio generazionale:**\n\n• Analisi donazione vs cessione a titolo oneroso\n• Calcolo imposte per entrambi gli scenari\n• Ottimizzazione fiscale intergenerazionale\n\nLa scelta giusta può far risparmiare migliaia di euro.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // ATTIVAZIONE UTENZE E SERVIZI — FAQ
+  // ═══════════════════════════════════════════════
+  {
+    k: ['volture luce gas', 'chi paga volture', 'costo volture'],
+    r: '💡 **Le volture luce e gas le gestiamo gratis.** Nessun costo aggiuntivo per te. Ci occupiamo di tutto: documentazione, contatti con i fornitori, attivazione.'
+  },
+  {
+    k: ['tempo attivazione', 'quanto tempo utenze', 'attivazione rapida'],
+    r: '⏱️ **48 ore dalla consegna chiavi** per l\'attivazione di tutte le utenze. Tempistiche garantite grazie ai nostri rapporti diretti con i fornitori.'
+  },
+  {
+    k: ['fornitore conveniente', 'miglior offerta luce', 'confronto fornitori', 'mercato libero'],
+    r: '💰 **Confrontiamo 15+ operatori** del mercato libero per trovarti l\'offerta più conveniente:\n\n• Luce e gas\n• Tutti gli operatori nazionali\n• Analisi consumi personalizzata\n\nRisparmi reali sulla bolletta fin dal primo mese.'
+  },
+  {
+    k: ['acqua fogna', 'utenze acqua', 'multi utility'],
+    r: '🚰 **Gestiamo tutte le utenze multi-utility:**\n\n• Acqua potabile\n• Fognatura\n• Rifiuti\n\nUn unico interlocutore per tutte le attivazioni.'
+  },
+  {
+    k: ['volture impresa', 'partita iva utenze', 'utenze ufficio'],
+    r: '🏢 **Volture per partite IVA e imprese:**\n\n• Utenze business\n• Split utenze uffici\n• Potenza impegnata personalizzata\n• Orario festivo/notturno\n\nGestione professionale per le aziende.'
+  },
+  {
+    k: ['fotovoltaico', 'bonus 110', 'gse', 'pannelli solari utenze'],
+    r: '☀️ **Partnership con GSE per:**\n\n• Pratiche fotovoltaico\n• Bonus 110% e incentivi\n• Scambio sul posto\n• Comunità energetiche\n\nTi accompagniamo nell\'efficientamento energetico.'
+  },
+  {
+    k: ['utenze temporanee', 'utenze cantiere', 'utenze evento'],
+    r: '⚡ **Attivazioni utenze temporanee** per:\n\n• Cantieri edili\n• Eventi e manifestazioni\n• Locazioni brevi\n\nRapide da attivare, facili da chiudere.'
+  },
+  {
+    k: ['bonus sociale', 'isee', 'bonus luce gas'],
+    r: '👨‍👩‍👧 **Assistenza bonus sociali:**\n\n• Verifica requisiti ISEE\n• Richiesta bonus luce e gas\n• Autocertificazioni\n• Rinnovi automatici\n\nTi aiutiamo ad accedere a tutti gli sconti a cui hai diritto.'
+  },
+  {
+    k: ['audit consumi', 'analisi bollette', 'risparmio bolletta'],
+    r: '📊 **Audit consumi energetici:**\n\n• Analisi ultimi 24 mesi di bollette\n• Identificazione sprechi\n• Piano risparmio personalizzato\n• **Risparmio garantito** o ti rimborsiamo la consulenza'
+  },
+  {
+    k: ['guasti 24', 'pronto intervento', 'emergenza utenze'],
+    r: '🚨 **Assistenza guasti 24/7:**\n\n• Helpdesk dedicato\n• Pronto intervento\n• Coordinamento con tecnici\n\nUn numero diretto per ogni emergenza, giorno e notte.'
+  },
+  {
+    k: ['utenze condominio', 'millesimi', 'contatori singoli'],
+    r: '🏢 **Gestione utenze condominiali:**\n\n• Ripartizione millesimi corretta\n• Contatori singoli\n• Coordinamento con l\'amministratore\n\nNiente più discussioni sui consumi.'
+  },
+  {
+    k: ['checklist consegna', 'protocollo consegna', 'report utenze'],
+    r: '✅ **Checklist consegna utenze certificata:**\n\n• Protocollo firmato di consegna\n• Report finale con tutti i codici contratto\n• Contatti diretti fornitori\n• Scadenze e promemoria\n\nTutto documentato, nulla lasciato al caso.'
+  },
+  {
+    k: ['efficientamento', 'classe energetica migliorare', 'ape post lavori'],
+    r: '🏠 **Pratiche di efficientamento energetico:**\n\n• APE post-riqualificazione\n• Classi D1-D4\n• Coordinamento con tecnici certificati\n\nMigliora la classe energetica e aumenta il valore del tuo immobile.'
   }
 ];
 
