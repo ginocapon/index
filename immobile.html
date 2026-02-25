@@ -648,6 +648,15 @@ let ytId = null;
 let chatOpen = false;
 let chatInitDone = false;
 
+// ══ RISOLVI URL IMMAGINI SUPABASE ══
+function resolveImageUrl(url) {
+  if (!url || typeof url !== 'string') return '';
+  url = url.trim();
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) return url;
+  return SUPABASE_URL + '/storage/v1/object/public/' + url.replace(/^\/+/, '');
+}
+
 // ══ SEO SLUG ══
 function generatePropertySlug(d) {
   if (!d) return '';
@@ -760,7 +769,7 @@ function render(d) {
   setOg('title', seoTitle);
   setOg('description', seoDesc);
   setOg('url', canonical.href);
-  if (Array.isArray(d.foto) && d.foto[0]) setOg('image', d.foto[0]);
+  if (Array.isArray(d.foto) && d.foto[0]) setOg('image', resolveImageUrl(d.foto[0]));
   setOg('type', 'website');
 
   // JSON-LD Schema.org RealEstateListing
@@ -784,7 +793,7 @@ function render(d) {
       addressCountry: 'IT'
     }
   };
-  if (Array.isArray(d.foto) && d.foto[0]) jsonLd.image = d.foto[0];
+  if (Array.isArray(d.foto) && d.foto[0]) jsonLd.image = resolveImageUrl(d.foto[0]);
   if (d.superficie) jsonLd.floorSize = { '@type': 'QuantitativeValue', value: d.superficie, unitCode: 'MTK' };
   if (d.locali || d.camere) jsonLd.numberOfRooms = d.locali || d.camere;
   let ldScript = document.getElementById('jsonld-immobile');
@@ -797,7 +806,7 @@ function render(d) {
   document.getElementById('bc-rif').textContent = d.codice ? 'Rif. ' + d.codice : '';
 
   // Gallery
-  lbFotos = Array.isArray(d.foto) ? d.foto.filter(Boolean) : [];
+  lbFotos = Array.isArray(d.foto) ? d.foto.filter(Boolean).map(resolveImageUrl) : [];
   renderGallery(d, lbFotos);
 
   // Hero badges
@@ -1080,7 +1089,8 @@ async function loadSimili(d) {
   if (!data || !data.length) { document.getElementById('similiGrid').innerHTML = '<p style="color:var(--grigio);font-size:.84rem">Nessun immobile simile trovato.</p>'; return; }
 
   document.getElementById('similiGrid').innerHTML = data.map(i => {
-    const thumb = Array.isArray(i.foto) && i.foto[0] ? `<img src="${i.foto[0]}" alt="${i.titolo}" style="width:100%;height:100%;object-fit:cover">` : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="24" height="24" style="opacity:.18"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>`;
+    const thumbUrl = Array.isArray(i.foto) && i.foto[0] ? resolveImageUrl(i.foto[0]) : '';
+    const thumb = thumbUrl ? `<img src="${thumbUrl}" alt="${i.titolo}" style="width:100%;height:100%;object-fit:cover">` : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="24" height="24" style="opacity:.18"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>`;
     return `<a class="sim-card" href="immobile.html?s=${encodeURIComponent(generatePropertySlug(i))}">
       <div class="sim-img">${thumb}</div>
       <div class="sim-body">
