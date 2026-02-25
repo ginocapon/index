@@ -88,8 +88,7 @@
     .af-range span{font-size:.72rem;color:var(--grigio)}
 
     /* ── LAYOUT ── */
-    .page{max-width:1380px;margin:0 auto;padding:1.4rem 1.5rem;display:grid;grid-template-columns:300px 1fr;gap:1.4rem;align-items:start}
-    @media(max-width:1024px){.page{grid-template-columns:1fr}}
+    .page{max-width:1380px;margin:0 auto;padding:1.4rem 1.5rem}
 
     /* ── SIDEBAR FILTRI ── */
     .sidebar{position:sticky;top:80px}
@@ -153,9 +152,10 @@
     .atag button:hover{color:#fff}
 
     /* ── GRID IMMOBILI ── */
-    .imm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+    .imm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
     .imm-grid.list-view{grid-template-columns:1fr}
-    @media(max-width:1200px){.imm-grid:not(.list-view){grid-template-columns:1fr}}
+    @media(max-width:1200px){.imm-grid:not(.list-view){grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.imm-grid:not(.list-view){grid-template-columns:1fr}}
 
     /* CARD */
     .card{background:var(--card);border:1px solid var(--gc);border-radius:10px;overflow:hidden;transition:transform .25s,box-shadow .25s;cursor:pointer;display:block;text-decoration:none;color:inherit}
@@ -394,11 +394,14 @@
       </button>
     </div>
 
-    <!-- FILTRI AVANZATI TOGGLE -->
-    <div class="filter-toggle" id="adv-toggle" onclick="toggleAdv()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
-      Filtri avanzati
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    <!-- FILTRI AVANZATI TOGGLE + AZZERA -->
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-top:.3rem">
+      <div class="filter-toggle" id="adv-toggle" onclick="toggleAdv()" style="margin:0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+        Filtri avanzati
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <button onclick="resetFilters()" style="background:none;border:none;color:var(--oro);cursor:pointer;font-size:.75rem;font-family:'DM Sans',sans-serif;padding:.3rem .6rem;white-space:nowrap">Azzera filtri</button>
     </div>
     <div class="advanced-filters" id="adv-filters">
       <div class="af-grid">
@@ -432,109 +435,6 @@
 
 <!-- MAIN PAGE -->
 <div class="page">
-
-  <!-- SIDEBAR FILTRI -->
-  <aside class="sidebar">
-    <div class="filter-panel">
-      <div class="fp-head"><h3>Filtri</h3><button class="fp-reset" onclick="resetFilters()">Azzera tutto</button></div>
-
-      <div class="fp-section">
-        <div class="fp-section-title">Operazione</div>
-        <div class="fp-chip-row">
-          <span class="fp-chip on" onclick="toggleChip(this,'op','tutti')">Tutti</span>
-          <span class="fp-chip" onclick="toggleChip(this,'op','vendita')">Vendita</span>
-          <span class="fp-chip" onclick="toggleChip(this,'op','affitto')">Affitto</span>
-          <span class="fp-chip" onclick="toggleChip(this,'op','aste')">Aste</span>
-        </div>
-      </div>
-
-      <div class="fp-section">
-        <div class="fp-section-title">Tipologia immobile</div>
-        <div class="fp-check" id="sidebar-tipo-checks">
-          <label><input type="checkbox" checked onchange="filterCards()"> Villa / Casa singola</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Appartamento</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Bifamiliare</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Attico / Mansarda</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Capannone</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Negozio</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Ufficio</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Terreno</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Garage / Box</label>
-        </div>
-      </div>
-
-      <div class="fp-section">
-        <div class="fp-section-title">Prezzo</div>
-        <div class="range-row">
-          <input type="number" placeholder="Min €" id="s-pmin" oninput="filterCards()">
-          <span class="range-sep">–</span>
-          <input type="number" placeholder="Max €" id="s-pmax" oninput="filterCards()">
-        </div>
-      </div>
-
-      <div class="fp-section">
-        <div class="fp-section-title">Superficie</div>
-        <div class="range-row">
-          <input type="number" placeholder="Min mq" id="s-mqmin" oninput="filterCards()">
-          <span class="range-sep">–</span>
-          <input type="number" placeholder="Max mq" id="s-mqmax" oninput="filterCards()">
-        </div>
-      </div>
-
-      <div class="fp-section">
-        <div class="fp-section-title">Camere</div>
-        <div class="fp-chip-row">
-          <span class="fp-chip" onclick="toggleChipSingle(this,'cam')">1</span>
-          <span class="fp-chip" onclick="toggleChipSingle(this,'cam')">2</span>
-          <span class="fp-chip" onclick="toggleChipSingle(this,'cam')">3</span>
-          <span class="fp-chip" onclick="toggleChipSingle(this,'cam')">4</span>
-          <span class="fp-chip" onclick="toggleChipSingle(this,'cam')">5+</span>
-        </div>
-      </div>
-
-      <div class="fp-section">
-        <div class="fp-section-title">Zona / Comune</div>
-        <div class="fp-check">
-          <label><input type="checkbox" checked onchange="filterCards()"> Padova <span class="cnt">4</span></label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Curtarolo <span class="cnt">1</span></label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Albignasego <span class="cnt">2</span></label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Limena <span class="cnt">1</span></label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Cadoneghe <span class="cnt">1</span></label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Vigodarzere <span class="cnt">2</span></label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Saccolongo <span class="cnt">1</span></label>
-        </div>
-      </div>
-
-      <div class="fp-section">
-        <div class="fp-section-title">Caratteristiche</div>
-        <div class="fp-check">
-          <label><input type="checkbox" onchange="filterCards()"> Con giardino</label>
-          <label><input type="checkbox" onchange="filterCards()"> Con garage</label>
-          <label><input type="checkbox" onchange="filterCards()"> Con piscina</label>
-          <label><input type="checkbox" onchange="filterCards()"> Con mansarda</label>
-          <label><input type="checkbox" onchange="filterCards()"> Vista aperta</label>
-          <label><input type="checkbox" onchange="filterCards()"> Virtual Tour 360°</label>
-          <label><input type="checkbox" onchange="filterCards()"> Video YouTube</label>
-        </div>
-      </div>
-
-      <div class="fp-section">
-        <div class="fp-section-title">Classe energetica</div>
-        <div class="ce-row">
-          <span class="ce-tag ce-A4 on" onclick="this.classList.toggle('on')">A4</span>
-          <span class="ce-tag ce-A3 on" onclick="this.classList.toggle('on')">A3</span>
-          <span class="ce-tag ce-A2 on" onclick="this.classList.toggle('on')">A2</span>
-          <span class="ce-tag ce-A1 on" onclick="this.classList.toggle('on')">A1</span>
-          <span class="ce-tag ce-B on" onclick="this.classList.toggle('on')">B</span>
-          <span class="ce-tag ce-C on" onclick="this.classList.toggle('on')">C</span>
-          <span class="ce-tag ce-D on" onclick="this.classList.toggle('on')">D</span>
-          <span class="ce-tag ce-E on" onclick="this.classList.toggle('on')">E</span>
-          <span class="ce-tag ce-F on" onclick="this.classList.toggle('on')">F</span>
-          <span class="ce-tag ce-G on" onclick="this.classList.toggle('on')">G</span>
-        </div>
-      </div>
-    </div>
-  </aside>
 
   <!-- RISULTATI -->
   <div>
@@ -795,15 +695,6 @@
     document.querySelectorAll('.s-tab').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
     currentOp = op;
-    // Sincronizza chip sidebar operazione
-    const chipRow = document.querySelector('.fp-section .fp-chip-row');
-    if (chipRow) {
-      chipRow.querySelectorAll('.fp-chip').forEach(c => c.classList.remove('on'));
-      chipRow.querySelectorAll('.fp-chip').forEach(c => {
-        const chipVal = c.getAttribute('onclick') || '';
-        if (chipVal.includes("'" + op + "'")) c.classList.add('on');
-      });
-    }
     filterCards();
   }
 
@@ -831,26 +722,8 @@
     document.querySelectorAll('.card').forEach(c => c.classList.toggle('list-view', v === 'list'));
   }
 
-  // ── CHIP TOGGLE ──
-  function toggleChip(el, group, val) {
-    if (group === 'op') {
-      // Operazione: selezione singola (come i tab)
-      const row = el.closest('.fp-chip-row');
-      row.querySelectorAll('.fp-chip').forEach(c => c.classList.remove('on'));
-      el.classList.add('on');
-      currentOp = val;
-      // Sincronizza anche i tab in alto
-      document.querySelectorAll('.s-tab').forEach(t => t.classList.remove('active'));
-      const tabMap = { 'vendita': 'Acquisto', 'affitto': 'Affitto', 'aste': 'Aste', 'tutti': 'Tutti' };
-      const label = tabMap[val] || 'Tutti';
-      document.querySelectorAll('.s-tab').forEach(t => {
-        if (t.textContent.trim() === label) t.classList.add('active');
-      });
-    } else {
-      el.classList.toggle('on');
-    }
-    filterCards();
-  }
+  // ── CHIP TOGGLE (per eventuali usi futuri) ──
+  function toggleChip(el, group, val) { el.classList.toggle('on'); filterCards(); }
   function toggleChipSingle(el, group) {
     const row = el.closest('.fp-chip-row');
     row.querySelectorAll('.fp-chip').forEach(c => c.classList.remove('on'));
@@ -948,18 +821,17 @@
     document.getElementById('f-prezzo').value = '';
     document.getElementById('f-camere').value = '';
     document.getElementById('f-mq').value = '';
+    // Reset filtri avanzati
+    ['f-bagni','f-garage','f-giardino','f-anno','f-stato','f-extra'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
     // Reset tab a "Tutti"
     currentOp = 'tutti';
     document.querySelectorAll('.s-tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.s-tab').forEach(t => {
       if (t.textContent.trim() === 'Tutti') t.classList.add('active');
     });
-    // Reset sidebar chips
-    const chipRow = document.querySelector('.fp-section .fp-chip-row');
-    if (chipRow) {
-      chipRow.querySelectorAll('.fp-chip').forEach(c => c.classList.remove('on'));
-      chipRow.querySelector('.fp-chip')?.classList.add('on'); // "Tutti" è il primo
-    }
     document.querySelectorAll('#imm-grid .card').forEach(c => c.style.display = '');
     document.getElementById('res-count').textContent = document.querySelectorAll('#imm-grid .card').length;
     document.getElementById('no-results').style.display = 'none';
