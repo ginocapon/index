@@ -293,7 +293,7 @@ function generateSlug(titolo) {
   return s;
 }
 function artUrl(a) {
-  return 'blog-articolo.html?s=' + encodeURIComponent(generateSlug(a.titolo)) + '&id=' + a.id;
+  return 'blog-articolo.html?s=' + encodeURIComponent(generateSlug(a.titolo));
 }
 
 function fmtDate(d) {
