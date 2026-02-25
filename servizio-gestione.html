@@ -2,16 +2,16 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Guida Completa alla Vendita Immobili — Righetto Immobiliare Padova</title>
+  <title>Gestione Immobili e Patrimonio Immobiliare — Righetto Immobiliare Padova</title>
   <meta name="robots" content="index, follow, max-image-preview:large">
-<link rel="canonical" href="https://righettoimmobiliare.it/servizio-vendita.html">
+<link rel="canonical" href="https://righettoimmobiliare.it/servizio-gestione.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Vendita Immobili — Righetto Immobiliare Padova">
-<meta property="og:description" content="Vendi casa a Padova: valutazione gratuita, foto professionali, virtual tour, assistenza completa.">
-<meta property="og:url" content="https://righettoimmobiliare.it/servizio-vendita.html">
+<meta property="og:title" content="Gestione Immobili e Patrimonio — Righetto Immobiliare Padova">
+<meta property="og:description" content="Gestione completa del tuo patrimonio immobiliare a Padova: inquilini, manutenzione, fiscalità, rendicontazione. Oltre 30 anni di esperienza.">
+<meta property="og:url" content="https://righettoimmobiliare.it/servizio-gestione.html">
 <meta property="og:site_name" content="Righetto Immobiliare">
 <meta property="og:locale" content="it_IT">
-<meta name="description" content="Vendi casa a Padova con Righetto Immobiliare. Valutazione gratuita, strategia personalizzata, fotografie professionali, virtual tour. Assistenza completa fino al rogito.">
+<meta name="description" content="Gestione immobili e patrimonio immobiliare a Padova. Inquilini, manutenzione, fiscalità, rendicontazione trasparente. 200+ immobili gestiti, 40+ artigiani partner. Righetto Immobiliare.">
   <link rel="stylesheet" href="css/fonts.css">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -47,8 +47,9 @@
     .btn-outline{border:1px solid rgba(255,255,255,.2);color:#fff;padding:.65rem 1.4rem;border-radius:2px;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:all .2s}
     .btn-outline:hover{border-color:var(--oro);color:var(--oro)}
     /* STATS HERO */
-    .hero-stats{display:flex;flex-direction:column;gap:.6rem}
-    .hstat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:1.2rem 1.4rem;display:flex;align-items:center;gap:1rem}
+    .hero-stats{display:flex;flex-direction:column;gap:.6rem;position:relative;border-radius:6px;overflow:hidden;padding:2rem;background:linear-gradient(135deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.35) 100%)}
+    .hero-stats-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.35}
+    .hstat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:1.2rem 1.4rem;display:flex;align-items:center;gap:1rem;position:relative;z-index:1;backdrop-filter:blur(2px)}
     .hstat-val{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;color:var(--oro);flex-shrink:0;min-width:80px}
     .hstat-lbl{font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.5}
     /* SEZIONI */
@@ -72,7 +73,7 @@
     .step-v-detail{margin-top:.65rem;background:#fff;border:1px solid var(--gc);border-radius:2px;padding:.75rem 1rem}
     .step-v-detail ul{list-style:none;display:flex;flex-direction:column;gap:.25rem}
     .step-v-detail li{font-size:.79rem;color:var(--grigio);display:flex;align-items:flex-start;gap:.4rem}
-    .step-v-detail li::before{content:'→';color:var(--oro);flex-shrink:0}
+    .step-v-detail li::before{content:'\2192';color:var(--oro);flex-shrink:0}
     /* COSA INCLUDE GRID */
     .include-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
     @media(max-width:900px){.include-grid{grid-template-columns:1fr 1fr}}
@@ -138,12 +139,12 @@
 {
   "@context": "https://schema.org",
   "@type": "Service",
-  "serviceType": "Vendita Immobili",
-  "name": "Servizio Vendita Immobili — Righetto Immobiliare",
-  "url": "https://righettoimmobiliare.it/servizio-vendita.html",
+  "serviceType": "Gestione Immobili e Patrimonio Immobiliare",
+  "name": "Servizio Gestione Immobili — Righetto Immobiliare",
+  "url": "https://righettoimmobiliare.it/servizio-gestione.html",
   "provider": {"@type": "RealEstateAgent", "name": "Righetto Immobiliare", "url": "https://righettoimmobiliare.it"},
   "areaServed": {"@type": "AdministrativeArea", "name": "Provincia di Padova"},
-  "description": "Vendi casa a Padova con valutazione gratuita, strategia personalizzata, fotografie professionali e virtual tour 360."
+  "description": "Gestione completa del patrimonio immobiliare a Padova: selezione inquilini, manutenzione, fiscalità, rendicontazione trasparente. Oltre 200 immobili gestiti con 30+ anni di esperienza."
 }
 </script>
 </head>
@@ -152,27 +153,28 @@
   <div class="hi">
     <a href="index.html" class="logo">Righetto <span>Immobiliare</span></a>
     <nav><a href="index.html">Home</a><a href="immobili.html">Immobili</a><a href="servizi.html" class="active">Servizi</a><a href="chi-siamo.html">Chi siamo</a><a href="blog.html">Blog</a><a href="contatti.html">Contatti</a><a href="faq.html">FAQ</a></nav>
-    <div class="h-cta"><a class="h-tel" href="tel:+390498843484">049 884 3484</a><a class="h-btn" href="#richiedi">Valutazione gratuita</a></div>
+    <div class="h-cta"><a class="h-tel" href="tel:+390498843484">049 884 3484</a><a class="h-btn" href="#richiedi">Consulenza gratuita</a></div>
   </div>
 </header>
-<div class="bc"><div class="bc-inner"><a href="index.html">Home</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg><a href="servizi.html">Servizi</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg><span>Vendita Immobili</span></div></div>
+<div class="bc"><div class="bc-inner"><a href="index.html">Home</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg><a href="servizi.html">Servizi</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg><span>Gestione Immobili</span></div></div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
     <div>
-      <div class="htag">Servizio principale</div>
-      <h1>Vendiamo la tua casa<br>al <strong>giusto prezzo,</strong><br>nel <strong>minor tempo</strong></h1>
-      <p>Dalla valutazione iniziale alla firma del rogito, ti seguiamo in ogni fase con strategia personalizzata, promozione multicanale e assistenza professionale completa. Zero pensieri, massimo risultato.</p>
+      <div class="htag">Gestione patrimonio immobiliare</div>
+      <h1>Gestiamo i tuoi immobili<br>in modo <strong>completo</strong><br>e <strong>trasparente</strong></h1>
+      <p>Inquilini, manutenzione, fiscalità e rendicontazione: ci occupiamo di tutto noi. Tu incassi senza pensieri. Un unico interlocutore per ogni esigenza del tuo patrimonio immobiliare a Padova e provincia.</p>
       <div class="hero-btns">
-        <a href="#richiedi" class="btn-gold">Valutazione gratuita</a>
-        <a href="https://wa.me/393488621888?text=Vorrei%20vendere%20un%20immobile.%20Quando%20possiamo%20fare%20una%20valutazione?" class="btn-outline" target="_blank">WhatsApp</a>
+        <a href="#richiedi" class="btn-gold">Richiedi consulenza gestione</a>
+        <a href="https://wa.me/393488621888?text=Vorrei%20informazioni%20sulla%20gestione%20dei%20miei%20immobili.%20Possiamo%20fissare%20un%20incontro?" class="btn-outline" target="_blank">WhatsApp</a>
       </div>
     </div>
     <div class="hero-stats">
-      <div class="hstat"><div class="hstat-val">4,2</div><div class="hstat-lbl">mesi in media dalla valutazione al rogito. Il mercato padovano richiede tempi — noi li accorciamo.</div></div>
-      <div class="hstat"><div class="hstat-val">98%</div><div class="hstat-lbl">dei clienti ha dichiarato di essere soddisfatto del nostro servizio e tornerebbe a sceglierci.</div></div>
-      <div class="hstat"><div class="hstat-val">30+</div><div class="hstat-lbl">anni sul mercato immobiliare di Padova e provincia. Conosciamo ogni via, ogni dinamica.</div></div>
+      <img src="img/foto-servizi/gestioni-immobili-padova.png" alt="Gestione immobili Padova — Righetto Immobiliare" class="hero-stats-bg">
+      <div class="hstat"><div class="hstat-val">200+</div><div class="hstat-lbl">immobili gestiti tra Padova e provincia. Appartamenti, ville, uffici e locali commerciali sotto la nostra cura.</div></div>
+      <div class="hstat"><div class="hstat-val">40+</div><div class="hstat-lbl">artigiani partner verificati nella nostra rete. Interventi rapidi con SLA garantiti per ogni tipo di manutenzione.</div></div>
+      <div class="hstat"><div class="hstat-val">30+</div><div class="hstat-lbl">anni di esperienza nella gestione immobiliare a Padova. Affidabilità costruita nel tempo, risultati misurabili.</div></div>
     </div>
   </div>
 </section>
@@ -181,18 +183,18 @@
 <section class="sec">
   <div class="sec-inner">
     <div class="sec-tag">Il nostro servizio</div>
-    <h2 class="sec-t">Tutto incluso, <strong>nessuna sorpresa</strong></h2>
-    <p class="sec-sub">Con Righetto Immobiliare non paghi nulla finché non vendiamo. Ogni fase è gestita da noi: non devi pensare a niente.</p>
+    <h2 class="sec-t">Gestione completa, <strong>zero pensieri</strong></h2>
+    <p class="sec-sub">Dal singolo appartamento al portafoglio immobiliare: gestiamo ogni aspetto con trasparenza, competenza e reportistica puntuale.</p>
     <div class="include-grid">
-      <div class="inc-card"><div class="inc-icon">📊</div><div class="inc-title">Valutazione di mercato</div><div class="inc-desc">Analisi basata su compravendite reali concluse nell'area. Non stime online: dati veri del mercato padovano aggiornati alle ultime settimane.</div></div>
-      <div class="inc-card"><div class="inc-icon">📁</div><div class="inc-title">Verifica documentale</div><div class="inc-desc">Controlliamo tutta la documentazione prima di mettere l'immobile sul mercato: catasto, visure, conformità, APE, titoli edilizi.</div></div>
-      <div class="inc-card"><div class="inc-icon">📸</div><div class="inc-title">Foto professionali</div><div class="inc-desc">Fotografie d'interni con attrezzatura professionale. Le foto fanno la differenza: immobili con foto pro ricevono il 40% di contatti in più.</div></div>
-      <div class="inc-card"><div class="inc-icon">🎬</div><div class="inc-title">Video e virtual tour 360°</div><div class="inc-desc">Video walkthrough su YouTube e virtual tour 360° per permettere ai potenziali acquirenti di visitare il tuo immobile da casa, 24 ore su 24.</div></div>
-      <div class="inc-card"><div class="inc-icon">🌐</div><div class="inc-title">Pubblicazione multicanale</div><div class="inc-desc">Immobiliare.it, Casa.it, Idealista, il nostro sito, social media e la nostra rete di acquirenti già qualificati. Massima visibilità garantita.</div></div>
-      <div class="inc-card"><div class="inc-icon">🤝</div><div class="inc-title">Gestione visite e trattativa</div><div class="inc-desc">Qualifichiamo ogni acquirente prima della visita. Gestiamo la trattativa per massimizzare il prezzo finale e proteggere i tuoi interessi.</div></div>
-      <div class="inc-card"><div class="inc-icon">✍️</div><div class="inc-title">Compromesso e rogito</div><div class="inc-desc">Assistenza completa nella redazione del contratto preliminare e coordinamento con il notaio fino alla firma del rogito definitivo.</div></div>
-      <div class="inc-card"><div class="inc-icon">📋</div><div class="inc-title">Gestione mutuo acquirente</div><div class="inc-desc">Supportiamo l'acquirente nell'ottenimento del mutuo, coordinando tempi e documenti per non rallentare la vendita.</div></div>
-      <div class="inc-card"><div class="inc-icon">📞</div><div class="inc-title">Aggiornamenti costanti</div><div class="inc-desc">Ti teniamo aggiornato su ogni visita, ogni feedback, ogni sviluppo. Nessun silenzio: sai sempre cosa sta succedendo.</div></div>
+      <div class="inc-card"><div class="inc-icon">👥</div><div class="inc-title">Gestione completa inquilini</div><div class="inc-desc">Selezione accurata degli inquilini con verifica referenze e solvibilità. Gestione contratti, rinnovi, disdette, comunicazioni e risoluzione di ogni problematica locativa.</div></div>
+      <div class="inc-card"><div class="inc-icon">🔧</div><div class="inc-title">Manutenzione ordinaria e straordinaria</div><div class="inc-desc">Rete di oltre 40 artigiani verificati con SLA concordati. Interventi rapidi per idraulica, elettricità, edilizia, serramenti. Preventivi comparati e supervisione lavori.</div></div>
+      <div class="inc-card"><div class="inc-icon">💰</div><div class="inc-title">Gestione pagamenti e rendicontazione</div><div class="inc-desc">Incasso canoni, pagamento bollette e spese condominiali, gestione cauzioni. Rendicontazione mensile dettagliata con tutti i movimenti del tuo patrimonio.</div></div>
+      <div class="inc-card"><div class="inc-icon">📊</div><div class="inc-title">Ottimizzazione fiscale</div><div class="inc-desc">Consulenza su cedolare secca, rivalutazioni OICE, leasing immobiliare. Massimizziamo il rendimento netto scegliendo il regime fiscale più conveniente per ogni immobile.</div></div>
+      <div class="inc-card"><div class="inc-icon">💻</div><div class="inc-title">Dashboard online proprietari</div><div class="inc-desc">Accesso 24/7 alla tua area riservata: incassi in tempo reale, stato manutenzioni, documenti contrattuali, storico interventi. Tutto sotto controllo dal tuo smartphone.</div></div>
+      <div class="inc-card"><div class="inc-icon">📈</div><div class="inc-title">Analisi redditivit&agrave; portafoglio</div><div class="inc-desc">Report trimestrale con rendimento lordo e netto di ogni immobile, benchmark di mercato, indice di vacancy e suggerimenti per migliorare la performance del portafoglio.</div></div>
+      <div class="inc-card"><div class="inc-icon">🛡️</div><div class="inc-title">Piani manutenzione predittiva</div><div class="inc-desc">Check stagionali programmati su caldaie, coperture, facciate e impianti. Analisi costi/benefici degli interventi per prevenire guasti e preservare il valore dell'immobile.</div></div>
+      <div class="inc-card"><div class="inc-icon">🏛️</div><div class="inc-title">Gestione patrimoni ereditari</div><div class="inc-desc">Assistenza completa per immobili ereditati: divisioni tra coeredi, locazioni pro-quota, valorizzazione del patrimonio. Gestiamo le complessità, tu raccogli i frutti.</div></div>
+      <div class="inc-card"><div class="inc-icon">🔒</div><div class="inc-title">Assicurazioni globali</div><div class="inc-desc">Polizze multirischio con massimali elevati: incendio, responsabilità civile, eventi atmosferici, tutela legale. Coperture dedicate per proprietari e conduttori.</div></div>
     </div>
   </div>
 </section>
@@ -201,88 +203,81 @@
 <section class="sec bg">
   <div class="sec-inner">
     <div class="sec-tag">Come funziona</div>
-    <h2 class="sec-t">Il nostro processo di <strong>vendita in 7 fasi</strong></h2>
-    <p class="sec-sub">Un metodo collaudato in 30 anni di attività sul mercato padovano.</p>
+    <h2 class="sec-t">Il nostro processo di <strong>gestione in 6 fasi</strong></h2>
+    <p class="sec-sub">Un metodo strutturato per prendere in carico il tuo patrimonio e farlo rendere al massimo.</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start">
       <div class="steps-vendita">
         <div class="step-v">
           <div class="step-v-left"><div class="step-n-circle">1</div></div>
           <div class="step-v-body">
-            <div class="step-v-title">Valutazione gratuita</div>
-            <div class="step-v-desc">Veniamo a vedere l'immobile, analizziamo il mercato locale e ti forniamo una valutazione scritta realistica con i dati delle compravendite recenti nell'area.</div>
-            <div class="step-v-detail"><ul><li>Sopralluogo con agente dedicato</li><li>Analisi comparativa di mercato</li><li>Report scritto con fascia di prezzo consigliata</li></ul></div>
+            <div class="step-v-title">Analisi patrimonio immobiliare</div>
+            <div class="step-v-desc">Esaminiamo ogni immobile del tuo portafoglio: stato manutentivo, situazione contrattuale, redditività attuale, documentazione e conformità urbanistica-catastale.</div>
+            <div class="step-v-detail"><ul><li>Sopralluogo tecnico su ogni unità immobiliare</li><li>Verifica contratti in essere e scadenze</li><li>Audit documentale completo</li></ul></div>
           </div>
         </div>
         <div class="step-v">
           <div class="step-v-left"><div class="step-n-circle">2</div></div>
           <div class="step-v-body">
-            <div class="step-v-title">Incarico e documentazione</div>
-            <div class="step-v-desc">Firmiamo il mandato e raccogliamo tutta la documentazione necessaria. Verifichiamo la conformità urbanistica e catastale prima di andare sul mercato.</div>
-            <div class="step-v-detail"><ul><li>Raccolta atto di provenienza, visure, planimetrie</li><li>Verifica conformità e APE</li><li>Definizione strategia e prezzo di lancio</li></ul></div>
+            <div class="step-v-title">Piano gestione personalizzato</div>
+            <div class="step-v-desc">Definiamo insieme obiettivi, budget, priorità di intervento e strategia fiscale. Ogni proprietario ha esigenze diverse: il piano è costruito su misura.</div>
+            <div class="step-v-detail"><ul><li>Definizione obiettivi di rendimento</li><li>Piano manutenzione pluriennale</li><li>Scelta regime fiscale ottimale</li></ul></div>
           </div>
         </div>
         <div class="step-v">
           <div class="step-v-left"><div class="step-n-circle">3</div></div>
           <div class="step-v-body">
-            <div class="step-v-title">Produzione materiali</div>
-            <div class="step-v-desc">Fotografia professionale, video walkthrough, virtual tour 360°, planimetria grafica. Tutto il materiale per presentare al meglio il tuo immobile.</div>
+            <div class="step-v-title">Presa in carico immobili</div>
+            <div class="step-v-desc">Verbale di consegna, inventario dettagliato, attivazione utenze e polizze assicurative. Da questo momento siamo noi il punto di riferimento per ogni questione.</div>
           </div>
         </div>
         <div class="step-v">
           <div class="step-v-left"><div class="step-n-circle">4</div></div>
           <div class="step-v-body">
-            <div class="step-v-title">Pubblicazione e promozione</div>
-            <div class="step-v-desc">Pubblicazione su tutti i portali immobiliari, sul nostro sito e sui canali social. Promozione alla nostra banca dati di acquirenti in ricerca attiva.</div>
+            <div class="step-v-title">Gestione operativa quotidiana</div>
+            <div class="step-v-desc">Incassi, pagamenti, manutenzioni, rapporti con inquilini e condominio. Gestiamo tutto noi con tempestività e professionalità, tu non devi pensare a nulla.</div>
           </div>
         </div>
         <div class="step-v">
           <div class="step-v-left"><div class="step-n-circle">5</div></div>
           <div class="step-v-body">
-            <div class="step-v-title">Visite e selezione acquirenti</div>
-            <div class="step-v-desc">Qualifichiamo ogni richiesta, organizziamo e conduciamo le visite, raccogliamo i feedback e teniamo il proprietario sempre aggiornato.</div>
+            <div class="step-v-title">Reportistica periodica</div>
+            <div class="step-v-desc">Rendicontazione mensile dettagliata, report trimestrale di performance e riepilogo annuale per la dichiarazione dei redditi. Massima trasparenza su ogni euro.</div>
           </div>
         </div>
         <div class="step-v">
           <div class="step-v-left"><div class="step-n-circle">6</div></div>
           <div class="step-v-body">
-            <div class="step-v-title">Proposta e trattativa</div>
-            <div class="step-v-desc">Gestiamo la proposta d'acquisto e la trattativa per massimizzare il prezzo finale. Tuteliamo sempre i tuoi interessi.</div>
-          </div>
-        </div>
-        <div class="step-v">
-          <div class="step-v-left"><div class="step-n-circle">7</div></div>
-          <div class="step-v-body">
-            <div class="step-v-title">Compromesso e rogito</div>
-            <div class="step-v-desc">Assistenza nella firma del contratto preliminare e coordinamento con il notaio per il rogito definitivo. Fine: chiavi consegnate, vendita completata.</div>
+            <div class="step-v-title">Ottimizzazione continua rendimento</div>
+            <div class="step-v-desc">Analizziamo periodicamente il mercato per adeguare i canoni, proponiamo interventi di valorizzazione e suggeriamo le migliori strategie per massimizzare il tuo rendimento netto.</div>
           </div>
         </div>
       </div>
       <!-- CONFRONTO -->
       <div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;margin-bottom:1rem">Con agenzia vs fai da te</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;margin-bottom:1rem">Con Righetto vs Gestione autonoma</div>
         <div class="comparison">
           <div class="comp-col good">
-            <div class="comp-head">✓ Con Righetto</div>
+            <div class="comp-head">&#10003; Con Righetto</div>
             <div class="comp-body">
-              <div class="comp-row"><span class="icon">✓</span>Valutazione professionale basata su dati reali</div>
-              <div class="comp-row"><span class="icon">✓</span>Foto e video professionali</div>
-              <div class="comp-row"><span class="icon">✓</span>Pubblicazione su tutti i portali</div>
-              <div class="comp-row"><span class="icon">✓</span>Acquirenti pre-qualificati</div>
-              <div class="comp-row"><span class="icon">✓</span>Trattativa gestita da esperti</div>
-              <div class="comp-row"><span class="icon">✓</span>Verifica documenti e conformità</div>
-              <div class="comp-row"><span class="icon">✓</span>Zero anticipi — paghi solo a vendita conclusa</div>
+              <div class="comp-row"><span class="icon">&#10003;</span>Un unico interlocutore per tutto il patrimonio</div>
+              <div class="comp-row"><span class="icon">&#10003;</span>Inquilini selezionati e verificati</div>
+              <div class="comp-row"><span class="icon">&#10003;</span>Manutenzioni rapide con artigiani convenzionati</div>
+              <div class="comp-row"><span class="icon">&#10003;</span>Rendicontazione trasparente e puntuale</div>
+              <div class="comp-row"><span class="icon">&#10003;</span>Ottimizzazione fiscale professionale</div>
+              <div class="comp-row"><span class="icon">&#10003;</span>Dashboard online con accesso 24/7</div>
+              <div class="comp-row"><span class="icon">&#10003;</span>Gestione morosità e contenzioso inclusa</div>
             </div>
           </div>
           <div class="comp-col bad">
-            <div class="comp-head">✗ Fai da te</div>
+            <div class="comp-head">&#10007; Gestione autonoma</div>
             <div class="comp-body">
-              <div class="comp-row"><span class="icon">✗</span>Prezzo spesso sbagliato (troppo alto o basso)</div>
-              <div class="comp-row"><span class="icon">✗</span>Foto con il cellulare</div>
-              <div class="comp-row"><span class="icon">✗</span>Visibilità limitata</div>
-              <div class="comp-row"><span class="icon">✗</span>Visite da curiosi non qualificati</div>
-              <div class="comp-row"><span class="icon">✗</span>Trattativa fai da te, rischio errori</div>
-              <div class="comp-row"><span class="icon">✗</span>Rischio vizi documentali</div>
-              <div class="comp-row"><span class="icon">✗</span>Tempi di vendita molto più lunghi</div>
+              <div class="comp-row"><span class="icon">&#10007;</span>Decine di interlocutori da coordinare</div>
+              <div class="comp-row"><span class="icon">&#10007;</span>Rischio inquilini morosi o problematici</div>
+              <div class="comp-row"><span class="icon">&#10007;</span>Emergenze a qualsiasi ora, notti e festivi</div>
+              <div class="comp-row"><span class="icon">&#10007;</span>Contabilità confusa e tempo perso</div>
+              <div class="comp-row"><span class="icon">&#10007;</span>Regime fiscale spesso non ottimizzato</div>
+              <div class="comp-row"><span class="icon">&#10007;</span>Nessun controllo centralizzato</div>
+              <div class="comp-row"><span class="icon">&#10007;</span>Gestione legale a proprio carico e rischio</div>
             </div>
           </div>
         </div>
@@ -295,22 +290,22 @@
 <section class="sec">
   <div class="sec-inner">
     <div class="sec-tag">Cosa dicono i clienti</div>
-    <h2 class="sec-t">Chi ha già <strong>venduto con noi</strong></h2>
+    <h2 class="sec-t">Chi ci ha affidato <strong>la gestione</strong></h2>
     <div class="reviews-grid">
       <div class="review">
-        <div class="stars">★★★★★</div>
-        <div class="review-text">"Ho venduto la mia villa a Curtarolo in soli 3 mesi, a un prezzo superiore alle mie aspettative. Gino è stato sempre disponibile e professionale. Lo consiglio senza riserve."</div>
-        <div class="review-auth"><div class="review-av">M</div>Marco T. — Villa Curtarolo</div>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="review-text">"Ho 6 appartamenti a Padova e gestirli da solo era diventato un secondo lavoro. Da quando li segue Righetto Immobiliare, incasso regolarmente senza preoccuparmi di nulla. La rendicontazione mensile è impeccabile."</div>
+        <div class="review-auth"><div class="review-av">G</div>Giovanni R. — 6 unità a Padova</div>
       </div>
       <div class="review">
-        <div class="stars">★★★★★</div>
-        <div class="review-text">"Avevo già provato con un'altra agenzia per 8 mesi senza risultati. Con Righetto Immobiliare ho venduto in 5 settimane. La differenza è stata la loro rete di contatti e la gestione professionale."</div>
-        <div class="review-auth"><div class="review-av">L</div>Laura B. — Appartamento Padova</div>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="review-text">"Abbiamo ereditato un piccolo patrimonio immobiliare e non sapevamo da dove iniziare. Gino e il suo team hanno preso in carico tutto: contratti, manutenzioni, fisco. Professionali e sempre disponibili."</div>
+        <div class="review-auth"><div class="review-av">S</div>Silvia e Marco P. — Patrimonio ereditario</div>
       </div>
       <div class="review">
-        <div class="stars">★★★★★</div>
-        <div class="review-text">"Hanno gestito tutto: dalla documentazione alle visite, dalla trattativa al rogito. Non ho dovuto preoccuparmi di nulla. Servizio impeccabile."</div>
-        <div class="review-auth"><div class="review-av">F</div>Franco e Anna M. — Bifamiliare Limena</div>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="review-text">"La dashboard online è fantastica: vedo incassi, spese e stato di ogni immobile in tempo reale. In due anni il rendimento netto del mio portafoglio è cresciuto del 15% grazie alla loro ottimizzazione fiscale."</div>
+        <div class="review-auth"><div class="review-av">A</div>Alberto C. — 10 unità tra Padova e Limena</div>
       </div>
     </div>
   </div>
@@ -320,12 +315,12 @@
 <div class="page-grid" id="richiedi">
   <div>
     <div class="sec-tag">Inizia ora</div>
-    <h2 class="sec-t">Richiedi la tua<br><strong>valutazione gratuita</strong></h2>
-    <p style="font-size:.9rem;color:var(--grigio);line-height:1.8;margin-bottom:2rem;max-width:520px">Veniamo a vedere il tuo immobile, ti forniamo una valutazione scritta di mercato senza impegno. Poi sei tu a decidere. Nessun costo iniziale.</p>
+    <h2 class="sec-t">Affida la gestione<br><strong>dei tuoi immobili</strong></h2>
+    <p style="font-size:.9rem;color:var(--grigio);line-height:1.8;margin-bottom:2rem;max-width:520px">Analizziamo il tuo patrimonio e ti presentiamo un piano di gestione personalizzato senza impegno. Scopri quanto puoi guadagnare senza stress.</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
       <div style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1.2rem;display:flex;align-items:center;gap:.75rem">
         <span style="font-size:1.5rem">🏠</span>
-        <div><div style="font-weight:500;font-size:.88rem">Appartamenti</div><div style="font-size:.76rem;color:var(--grigio)">in tutte le zone di Padova</div></div>
+        <div><div style="font-weight:500;font-size:.88rem">Appartamenti</div><div style="font-size:.76rem;color:var(--grigio)">singoli o interi condomini</div></div>
       </div>
       <div style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1.2rem;display:flex;align-items:center;gap:.75rem">
         <span style="font-size:1.5rem">🏡</span>
@@ -336,29 +331,29 @@
         <div><div style="font-weight:500;font-size:.88rem">Uffici e commerciale</div><div style="font-size:.76rem;color:var(--grigio)">locali e capannoni</div></div>
       </div>
       <div style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1.2rem;display:flex;align-items:center;gap:.75rem">
-        <span style="font-size:1.5rem">🌳</span>
-        <div><div style="font-weight:500;font-size:.88rem">Terreni e rustici</div><div style="font-size:.76rem;color:var(--grigio)">edificabili e agricoli</div></div>
+        <span style="font-size:1.5rem">🏛️</span>
+        <div><div style="font-weight:500;font-size:.88rem">Patrimoni ereditari</div><div style="font-size:.76rem;color:var(--grigio)">gestione pro-quota</div></div>
       </div>
     </div>
   </div>
   <div class="form-box">
     <div class="fb-head">
-      <h3>Valutazione gratuita</h3>
+      <h3>Affida la gestione dei tuoi immobili</h3>
       <p>Rispondiamo entro 24 ore — nessun impegno</p>
     </div>
     <div class="fb-body">
       <div class="field"><label>Nome e Cognome *</label><input type="text" id="f-nome" placeholder="Mario Rossi"></div>
       <div class="field"><label>Telefono *</label><input type="tel" id="f-tel" placeholder="333 123 4567"></div>
       <div class="field"><label>Email</label><input type="email" placeholder="mario@email.it"></div>
-      <div class="field"><label>Tipo immobile</label>
+      <div class="field"><label>Numero immobili da gestire</label>
         <select>
-          <option>Appartamento</option><option>Villa singola</option><option>Villetta a schiera</option><option>Bifamiliare</option><option>Terreno</option><option>Locale commerciale</option><option>Altro</option>
+          <option>1 immobile</option><option>2-3 immobili</option><option>4-10 immobili</option><option>Oltre 10 immobili</option><option>Patrimonio ereditario</option>
         </select>
       </div>
-      <div class="field"><label>Comune</label><input type="text" placeholder="Es. Padova, Curtarolo, Albignasego..."></div>
-      <div class="field"><label>Note</label><textarea placeholder="Breve descrizione dell'immobile: mq, piano, anno, condizioni..."></textarea></div>
+      <div class="field"><label>Comune</label><input type="text" placeholder="Es. Padova, Limena, Albignasego..."></div>
+      <div class="field"><label>Note</label><textarea placeholder="Descrivi brevemente il tuo patrimonio: tipologia immobili, stato attuale della gestione, esigenze particolari..."></textarea></div>
       <div class="fchk"><input type="checkbox" id="f-gdpr"><label for="f-gdpr">Acconsento al trattamento dei dati ai sensi del GDPR</label></div>
-      <button class="fsub" onclick="sendForm()">Richiedi valutazione gratuita</button>
+      <button class="fsub" onclick="sendForm()">Richiedi consulenza gestione</button>
       <a href="tel:+390498843484" class="fb-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>Oppure chiama <strong>049 884 3484</strong></a>
     </div>
   </div>
@@ -367,24 +362,23 @@
 <footer>
   <div class="fi">
     <div class="fgrid">
-      <div><div class="flogo">Righetto <span>Immobiliare</span></div><div class="finfo">Via Roma, 96 — 35010 Limena (PD)<br>Tel: 049 884 3484 · Cell: 348 862 1888<br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="eb8c828584ab99828c838e9f9f8482868684898287828a998ec5829f">[email&#160;protected]</a></div></div>
-      <div class="fcol"><div class="fh">Servizi</div><a href="servizio-vendita.html">Vendita immobili</a><a href="servizio-locazioni.html">Locazioni</a><a href="servizio-preliminari.html">Preliminari</a><a href="servizio-gestione.html">Gestione immobili</a><a href="servizio-valutazioni.html">Valutazioni</a><a href="servizio-utenze.html">Utenze</a></div>
+      <div><div class="flogo">Righetto <span>Immobiliare</span></div><div class="finfo">Via Roma, 96 — 35010 Limena (PD)<br>Tel: 049 884 3484 · Cell: 348 862 1888<br>info@righettoimmobiliare.it</div></div>
+      <div class="fcol"><div class="fh">Servizi</div><a href="servizio-vendita.html">Vendita Immobili</a><a href="servizio-locazioni.html">Locazioni</a><a href="servizio-preliminari.html">Preliminari</a><a href="servizio-gestione.html">Gestione Immobili</a><a href="servizio-valutazioni.html">Valutazioni</a><a href="servizio-utenze.html">Utenze</a></div>
       <div class="fcol"><div class="fh">Immobili</div><a href="immobili.html?op=vendita">In vendita</a><a href="immobili.html?op=affitto">In affitto</a></div>
       <div class="fcol"><div class="fh">Info</div><a href="chi-siamo.html">Chi siamo</a><a href="faq.html">FAQ</a><a href="contatti.html">Contatti</a><a href="privacy.html">Privacy</a><a href="cookie-policy.html">Cookie Policy</a><a href="#" data-cookie-prefs>Preferenze Cookie</a></div>
     </div>
-    <div class="fbot"><span>© 2025 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
+    <div class="fbot"><span>&copy; 2025 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
   </div>
 </footer>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 function sendForm(){
   const n=document.getElementById('f-nome').value.trim();
   const t=document.getElementById('f-tel').value.trim();
   const g=document.getElementById('f-gdpr').checked;
   if(!n||!t){alert('Inserisci nome e telefono');return}
-  const g2=document.getElementById('f-gdpr').checked;
-  if(!g2){alert('Accetta la privacy policy');return}
+  if(!g){alert('Accetta la privacy policy');return}
   const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');
-  if(sb){sb.from('richieste').insert([{nome:n,telefono:t,messaggio:'Richiesta da pagina vendita',provenienza:'form-vendita',letto:false}]).then(()=>{alert('Richiesta inviata! Ti ricontatteremo presto.')}).catch(()=>alert('Errore. Chiama il 049 884 3484'))}
+  if(sb){sb.from('richieste').insert([{nome:n,telefono:t,messaggio:'Richiesta gestione immobili',provenienza:'form-gestione',letto:false}]).then(()=>{alert('Richiesta inviata! Ti ricontatteremo presto.')}).catch(()=>alert('Errore. Chiama il 049 884 3484'))}
   else{alert('Richiesta registrata. Ti ricontatteremo!')}
 }
 </script>
