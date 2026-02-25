@@ -1925,10 +1925,32 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                     <option value="blog">Solo Blog</option>
                   </select>
                 </div>
+                <div style="border-top:1px solid var(--caffe3);padding-top:12px;margin-top:4px">
+                  <label>Facebook Page ID</label>
+                  <input type="text" id="fbPageId" placeholder="Es: 123456789012345" oninput="saveSocialConfig()" autocomplete="off">
+                </div>
+                <div>
+                  <label>Page Access Token</label>
+                  <input type="password" id="fbPageToken" placeholder="Incolla qui il token..." oninput="saveSocialConfig()" autocomplete="off">
+                  <div style="margin-top:6px;display:flex;gap:6px">
+                    <button class="btn btn-secondary btn-sm" onclick="toggleTokenVisibility('fbPageToken')">Mostra/Nascondi</button>
+                    <button class="btn btn-secondary btn-sm" onclick="testFacebookConnection()">Test Connessione</button>
+                  </div>
+                </div>
+                <div id="fbConnectionResult" style="display:none;padding:10px;border-radius:8px;font-size:0.8rem;margin-top:4px"></div>
+                <div style="background:var(--sfondo);border-radius:8px;padding:12px;margin-top:4px">
+                  <div style="font-size:0.72rem;font-weight:600;color:var(--caffe2);margin-bottom:6px">COME OTTENERE IL TOKEN</div>
+                  <ol style="font-size:0.72rem;color:var(--caffe2);padding-left:16px;line-height:1.6">
+                    <li>Vai su <strong>developers.facebook.com</strong></li>
+                    <li>Crea una App tipo "Business"</li>
+                    <li>Aggiungi il prodotto "Facebook Login" e "Pages API"</li>
+                    <li>In Graph API Explorer, seleziona la tua Pagina</li>
+                    <li>Genera un <strong>Page Access Token</strong> con permessi:<br>
+                      <code style="font-size:0.68rem">pages_manage_posts, pages_read_engagement</code></li>
+                    <li>Per un token permanente: converti in long-lived token</li>
+                  </ol>
+                </div>
               </div>
-            </div>
-
-            <!-- Instagram -->
             <div class="platform-card instagram" id="platformCard-instagram">
               <div class="platform-card-header">
                 <div class="platform-icon instagram">
@@ -2122,8 +2144,24 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <div class="social-tab-content" id="socialTab-coda">
           <div class="social-queue-actions">
             <button class="btn btn-primary" onclick="generateQueue()">Rigenera Coda</button>
+            <button class="btn btn-primary" onclick="publishAllFacebook()" style="background:#1877F2;color:white">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              Pubblica Tutti su Facebook
+            </button>
             <button class="btn btn-secondary" onclick="clearQueue()">Svuota Coda</button>
             <span style="font-size:0.82rem;color:var(--caffe2);margin-left:auto" id="queueCount">0 post in coda</span>
+          </div>
+          <div id="fbPublishProgress" style="display:none;margin-bottom:16px">
+            <div style="background:white;border-radius:10px;padding:16px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.04)">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+                <div class="spinner" style="width:20px;height:20px"></div>
+                <span style="font-size:0.85rem;font-weight:600;color:var(--nero)" id="fbProgressText">Pubblicazione in corso...</span>
+              </div>
+              <div style="background:var(--sfondo);border-radius:6px;height:8px;overflow:hidden">
+                <div id="fbProgressBar" style="background:var(--verde);height:100%;width:0%;transition:width 0.3s;border-radius:6px"></div>
+              </div>
+              <div style="font-size:0.75rem;color:var(--caffe2);margin-top:6px" id="fbProgressDetail"></div>
+            </div>
           </div>
           <div id="queueList">
             <div class="social-empty">
@@ -3469,20 +3507,7 @@ function loadSocialConfig() {
   }
 }
 
-function saveSocialConfig() {
-  PLATFORMS.forEach(p => {
-    const pre = PLATFORM_PREFIXES[p];
-    socialConfig[p] = {
-      enabled: document.getElementById(pre + 'Enabled')?.checked || false,
-      frequenza: parseInt(document.getElementById(pre + 'Frequenza')?.value) || 3,
-      orario: document.getElementById(pre + 'Orario')?.value || '10:00',
-      tipo: document.getElementById(pre + 'Tipo')?.value || 'misto'
-    };
-  });
-  localStorage.setItem(SOCIAL_CONFIG_KEY, JSON.stringify(socialConfig));
-  updateSocialStats();
-  toast('Configurazione social salvata', 'success');
-}
+// saveSocialConfig() defined in Facebook API section below
 
 function applySocialConfig() {
   PLATFORMS.forEach(p => {
@@ -4022,6 +4047,416 @@ function addCTA() {
   document.getElementById('postPreviewText').textContent = ta.value;
   const limit = PLATFORM_CHAR_LIMITS[document.getElementById('previewPlatform')?.value] || 2200;
   document.getElementById('postCharCount').textContent = `${ta.value.length} / ${limit}`;
+}
+
+// ══════════════════════════════════════
+// FACEBOOK GRAPH API INTEGRATION
+// ══════════════════════════════════════
+const FB_GRAPH_URL = 'https://graph.facebook.com/v21.0';
+const FB_API_CONFIG_KEY = 'rig_fb_api_config';
+
+function loadFbApiConfig() {
+  try {
+    return JSON.parse(localStorage.getItem(FB_API_CONFIG_KEY)) || {};
+  } catch(e) { return {}; }
+}
+
+function saveFbApiConfig(config) {
+  localStorage.setItem(FB_API_CONFIG_KEY, JSON.stringify(config));
+}
+
+// Save FB API credentials when user types
+function saveSocialConfig() {
+  PLATFORMS.forEach(p => {
+    const pre = PLATFORM_PREFIXES[p];
+    socialConfig[p] = {
+      enabled: document.getElementById(pre + 'Enabled')?.checked || false,
+      frequenza: parseInt(document.getElementById(pre + 'Frequenza')?.value) || 3,
+      orario: document.getElementById(pre + 'Orario')?.value || '10:00',
+      tipo: document.getElementById(pre + 'Tipo')?.value || 'misto'
+    };
+  });
+  localStorage.setItem(SOCIAL_CONFIG_KEY, JSON.stringify(socialConfig));
+
+  // Save Facebook API config separately
+  const fbConfig = {
+    pageId: document.getElementById('fbPageId')?.value || '',
+    pageToken: document.getElementById('fbPageToken')?.value || ''
+  };
+  saveFbApiConfig(fbConfig);
+  updateSocialStats();
+  updatePlatformStatus('facebook');
+}
+
+function applySocialConfigFb() {
+  const fbCfg = loadFbApiConfig();
+  const pageIdEl = document.getElementById('fbPageId');
+  const tokenEl = document.getElementById('fbPageToken');
+  if (pageIdEl && fbCfg.pageId) pageIdEl.value = fbCfg.pageId;
+  if (tokenEl && fbCfg.pageToken) tokenEl.value = fbCfg.pageToken;
+  updatePlatformStatus('facebook');
+}
+
+// Override updatePlatformStatus to include FB API status
+const _origUpdatePlatformStatus = updatePlatformStatus;
+updatePlatformStatus = function(platform) {
+  _origUpdatePlatformStatus(platform);
+  if (platform === 'facebook') {
+    const fbCfg = loadFbApiConfig();
+    const statusEl = document.getElementById('fbStatus');
+    const enabled = document.getElementById('fbEnabled')?.checked;
+    if (statusEl) {
+      if (!enabled) {
+        statusEl.textContent = 'Disattivato';
+        statusEl.style.color = '';
+      } else if (fbCfg.pageId && fbCfg.pageToken) {
+        statusEl.textContent = 'Configurato - API pronta';
+        statusEl.style.color = 'var(--verde)';
+      } else {
+        statusEl.textContent = 'Attivo - Token API mancante';
+        statusEl.style.color = 'var(--rosso)';
+      }
+    }
+  }
+};
+
+function toggleTokenVisibility(inputId) {
+  const inp = document.getElementById(inputId);
+  if (!inp) return;
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+}
+
+// ── Test Facebook Connection ──
+async function testFacebookConnection() {
+  const fbCfg = loadFbApiConfig();
+  const resultEl = document.getElementById('fbConnectionResult');
+  if (!resultEl) return;
+
+  if (!fbCfg.pageId || !fbCfg.pageToken) {
+    resultEl.style.display = 'block';
+    resultEl.style.background = '#fde8e8';
+    resultEl.style.color = 'var(--rosso)';
+    resultEl.textContent = 'Inserisci Page ID e Page Access Token prima di testare.';
+    return;
+  }
+
+  resultEl.style.display = 'block';
+  resultEl.style.background = '#e0eeff';
+  resultEl.style.color = 'var(--nero)';
+  resultEl.textContent = 'Test in corso...';
+
+  try {
+    const response = await fetch(`${FB_GRAPH_URL}/${fbCfg.pageId}?fields=name,id,fan_count,picture&access_token=${fbCfg.pageToken}`);
+    const data = await response.json();
+
+    if (data.error) {
+      resultEl.style.background = '#fde8e8';
+      resultEl.style.color = 'var(--rosso)';
+      resultEl.textContent = `Errore: ${data.error.message}`;
+      return;
+    }
+
+    resultEl.style.background = '#d4f5e0';
+    resultEl.style.color = '#1a7a40';
+    resultEl.innerHTML = `<strong>Connessione riuscita!</strong><br>Pagina: ${data.name}<br>ID: ${data.id}${data.fan_count ? '<br>Fan: ' + data.fan_count.toLocaleString('it-IT') : ''}`;
+    toast('Connessione Facebook riuscita!', 'success');
+
+  } catch(err) {
+    resultEl.style.background = '#fde8e8';
+    resultEl.style.color = 'var(--rosso)';
+    resultEl.textContent = `Errore di rete: ${err.message}`;
+  }
+}
+
+// ── Publish to Facebook ──
+async function publishToFacebook(post) {
+  const fbCfg = loadFbApiConfig();
+
+  if (!fbCfg.pageId || !fbCfg.pageToken) {
+    throw new Error('Facebook non configurato: inserisci Page ID e Token nella tab Piattaforme');
+  }
+
+  let result;
+
+  if (post.immagine) {
+    // Photo post with message
+    const params = new URLSearchParams({
+      message: post.testo || '',
+      url: post.immagine,
+      access_token: fbCfg.pageToken
+    });
+    const response = await fetch(`${FB_GRAPH_URL}/${fbCfg.pageId}/photos`, {
+      method: 'POST',
+      body: params
+    });
+    result = await response.json();
+  } else {
+    // Text-only post
+    const params = new URLSearchParams({
+      message: post.testo || '',
+      access_token: fbCfg.pageToken
+    });
+
+    // Add link if the post references a property or blog article
+    const link = getPostLink(post);
+    if (link) params.set('link', link);
+
+    const response = await fetch(`${FB_GRAPH_URL}/${fbCfg.pageId}/feed`, {
+      method: 'POST',
+      body: params
+    });
+    result = await response.json();
+  }
+
+  if (result.error) {
+    throw new Error(result.error.message || 'Errore sconosciuto Facebook API');
+  }
+
+  return result;
+}
+
+function getPostLink(post) {
+  const baseUrl = 'https://righettoimmobiliare.it';
+  if (post.tipo_contenuto === 'immobile') {
+    const item = socialImmobili.find(i => i.id === post.contenuto_id);
+    if (item) {
+      const slug = generatePropertySlug(item);
+      return `${baseUrl}/immobile.html?s=${slug}`;
+    }
+  } else if (post.tipo_contenuto === 'blog') {
+    const item = socialBlogArticles.find(i => i.id === post.contenuto_id);
+    if (item) {
+      const slug = (item.titolo || '').toLowerCase()
+        .replace(/[àáâãäå]/g,'a').replace(/[èéêë]/g,'e').replace(/[ìíîï]/g,'i')
+        .replace(/[òóôõö]/g,'o').replace(/[ùúûü]/g,'u')
+        .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+      return `${baseUrl}/blog-articolo.html?s=${slug}`;
+    }
+  }
+  return '';
+}
+
+// ── Publish Single Post ──
+async function publishSingleFb(postId) {
+  const post = socialQueue.find(q => q.id === postId);
+  if (!post) { toast('Post non trovato', 'error'); return; }
+
+  const btn = event?.currentTarget;
+  if (btn) { btn.disabled = true; btn.textContent = 'Invio...'; }
+
+  try {
+    const result = await publishToFacebook(post);
+    post.stato = 'pubblicato';
+    post.data_pubblicata = new Date().toISOString();
+    post.fb_post_id = result.id || result.post_id;
+    localStorage.setItem(SOCIAL_QUEUE_KEY, JSON.stringify(socialQueue));
+    toast(`Pubblicato su Facebook: ${post.titolo}`, 'success');
+    renderQueue();
+    updateSocialStats();
+  } catch(err) {
+    post.stato = 'errore';
+    post.errore = err.message;
+    localStorage.setItem(SOCIAL_QUEUE_KEY, JSON.stringify(socialQueue));
+    toast(`Errore Facebook: ${err.message}`, 'error');
+    if (btn) { btn.disabled = false; btn.textContent = 'Pubblica'; }
+  }
+}
+
+// ── Publish All Facebook Posts ──
+async function publishAllFacebook() {
+  const fbCfg = loadFbApiConfig();
+  if (!fbCfg.pageId || !fbCfg.pageToken) {
+    toast('Configura Page ID e Token nella tab Piattaforme', 'error');
+    return;
+  }
+
+  const fbPosts = socialQueue.filter(q => q.piattaforma === 'facebook' && q.stato === 'programmato');
+  if (fbPosts.length === 0) {
+    toast('Nessun post Facebook in coda', 'error');
+    return;
+  }
+
+  if (!confirm(`Vuoi pubblicare ${fbPosts.length} post su Facebook?\n\nI post verranno pubblicati con un intervallo di 30 secondi tra uno e l'altro per rispettare i limiti API.`)) return;
+
+  const progressWrap = document.getElementById('fbPublishProgress');
+  const progressBar = document.getElementById('fbProgressBar');
+  const progressText = document.getElementById('fbProgressText');
+  const progressDetail = document.getElementById('fbProgressDetail');
+  if (progressWrap) progressWrap.style.display = 'block';
+
+  let published = 0;
+  let errors = 0;
+
+  for (let i = 0; i < fbPosts.length; i++) {
+    const post = fbPosts[i];
+    const pct = Math.round(((i + 1) / fbPosts.length) * 100);
+    if (progressBar) progressBar.style.width = pct + '%';
+    if (progressText) progressText.textContent = `Pubblicazione ${i + 1}/${fbPosts.length}...`;
+    if (progressDetail) progressDetail.textContent = post.titolo;
+
+    try {
+      const result = await publishToFacebook(post);
+      post.stato = 'pubblicato';
+      post.data_pubblicata = new Date().toISOString();
+      post.fb_post_id = result.id || result.post_id;
+      published++;
+    } catch(err) {
+      post.stato = 'errore';
+      post.errore = err.message;
+      errors++;
+    }
+
+    localStorage.setItem(SOCIAL_QUEUE_KEY, JSON.stringify(socialQueue));
+    renderQueue();
+    updateSocialStats();
+
+    // Wait 30 seconds between posts to respect rate limits
+    if (i < fbPosts.length - 1) {
+      if (progressDetail) progressDetail.textContent = 'Attesa 30 secondi per limiti API...';
+      await new Promise(r => setTimeout(r, 30000));
+    }
+  }
+
+  if (progressText) progressText.textContent = 'Completato!';
+  if (progressDetail) progressDetail.textContent = `${published} pubblicati, ${errors} errori`;
+  if (progressBar) progressBar.style.width = '100%';
+
+  setTimeout(() => {
+    if (progressWrap) progressWrap.style.display = 'none';
+  }, 5000);
+
+  toast(`Facebook: ${published} pubblicati, ${errors} errori`, published > 0 ? 'success' : 'error');
+}
+
+// ── Auto-Scheduler (checks every minute) ──
+let socialSchedulerInterval = null;
+
+function startSocialScheduler() {
+  if (socialSchedulerInterval) clearInterval(socialSchedulerInterval);
+
+  socialSchedulerInterval = setInterval(async () => {
+    loadSocialConfig();
+    const now = new Date();
+
+    const duePosts = socialQueue.filter(q => {
+      if (q.stato !== 'programmato') return false;
+      if (q.piattaforma !== 'facebook') return false; // Only Facebook for now
+      const scheduled = new Date(q.data_programmata);
+      return scheduled <= now;
+    });
+
+    for (const post of duePosts) {
+      try {
+        const result = await publishToFacebook(post);
+        post.stato = 'pubblicato';
+        post.data_pubblicata = new Date().toISOString();
+        post.fb_post_id = result.id || result.post_id;
+        console.log('[Social Scheduler] Pubblicato:', post.titolo);
+      } catch(err) {
+        post.stato = 'errore';
+        post.errore = err.message;
+        console.warn('[Social Scheduler] Errore:', post.titolo, err.message);
+      }
+      localStorage.setItem(SOCIAL_QUEUE_KEY, JSON.stringify(socialQueue));
+      // Wait between posts
+      await new Promise(r => setTimeout(r, 30000));
+    }
+
+    if (duePosts.length > 0) {
+      updateSocialStats();
+    }
+  }, 60000); // Check every minute
+}
+
+// Override initSocialDashboard to include FB config
+const _origInitSocial = initSocialDashboard;
+initSocialDashboard = async function() {
+  await _origInitSocial();
+  applySocialConfigFb();
+  startSocialScheduler();
+};
+
+// Override renderQueue to add publish buttons
+const _origRenderQueue = renderQueue;
+renderQueue = function() {
+  const wrap = document.getElementById('queueList');
+  const countEl = document.getElementById('queueCount');
+  if (!wrap) return;
+
+  const scheduled = socialQueue.filter(q => q.stato === 'programmato');
+  const published = socialQueue.filter(q => q.stato === 'pubblicato');
+  const errored = socialQueue.filter(q => q.stato === 'errore');
+
+  if (countEl) countEl.textContent = `${scheduled.length} programmati | ${published.length} pubblicati | ${errored.length} errori`;
+
+  if (socialQueue.length === 0) {
+    wrap.innerHTML = `<div class="social-empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <p>Nessun post in coda.<br>Seleziona contenuti e genera la coda di pubblicazione.</p>
+    </div>`;
+    return;
+  }
+
+  const fbCfg = loadFbApiConfig();
+  const hasFbConfig = !!(fbCfg.pageId && fbCfg.pageToken);
+
+  wrap.innerHTML = socialQueue.map(post => {
+    const dt = new Date(post.data_programmata);
+    const dateStr = dt.toLocaleDateString('it-IT', { day: '2-digit', month: 'short' });
+    const timeStr = dt.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+    const dayName = dt.toLocaleDateString('it-IT', { weekday: 'short' });
+    const preview = (post.testo || '').substring(0, 80) + ((post.testo || '').length > 80 ? '...' : '');
+    const typeBadge = post.tipo_contenuto === 'immobile' ? '<span class="badge badge-blu" style="font-size:0.6rem">IMMOBILE</span>' : '<span class="badge badge-verde" style="font-size:0.6rem">BLOG</span>';
+    const platformBadge = `<span class="cal-slot ${post.piattaforma}" style="font-size:0.65rem;cursor:default">${PLATFORM_LABELS[post.piattaforma]}</span>`;
+
+    let statusHtml = '';
+    if (post.stato === 'pubblicato') {
+      statusHtml = '<span class="badge badge-verde">PUBBLICATO</span>';
+    } else if (post.stato === 'errore') {
+      statusHtml = `<span class="badge badge-rosso" title="${post.errore || ''}">ERRORE</span>`;
+    } else {
+      statusHtml = '<span class="badge badge-oro">PROGRAMMATO</span>';
+    }
+
+    let actionsHtml = '';
+    if (post.stato === 'programmato' && post.piattaforma === 'facebook' && hasFbConfig) {
+      actionsHtml = `<button class="btn btn-sm" style="background:#1877F2;color:white;font-size:0.7rem" onclick="publishSingleFb('${post.id}')">Pubblica Ora</button>`;
+    } else if (post.stato === 'errore' && post.piattaforma === 'facebook' && hasFbConfig) {
+      actionsHtml = `<button class="btn btn-sm btn-secondary" style="font-size:0.7rem" onclick="retrySingleFb('${post.id}')">Riprova</button>`;
+    }
+
+    return `<div class="queue-item" style="${post.stato === 'pubblicato' ? 'opacity:0.6' : ''} ${post.stato === 'errore' ? 'border-left:3px solid var(--rosso)' : ''}">
+      <div class="queue-item-time">
+        <div class="q-date">${dayName} ${dateStr}</div>
+        <div class="q-time">${timeStr}</div>
+      </div>
+      <div class="queue-item-content">
+        <div class="queue-item-title">${post.titolo}</div>
+        <div class="queue-item-preview">${preview}</div>
+        ${post.stato === 'errore' && post.errore ? `<div style="font-size:0.7rem;color:var(--rosso);margin-top:4px">${post.errore}</div>` : ''}
+        ${post.stato === 'pubblicato' && post.fb_post_id ? `<div style="font-size:0.7rem;color:var(--verde);margin-top:4px">ID: ${post.fb_post_id}</div>` : ''}
+      </div>
+      <div class="queue-item-badges" style="gap:6px">
+        ${platformBadge} ${typeBadge} ${statusHtml}
+      </div>
+      <div style="display:flex;gap:4px;align-items:center">
+        ${actionsHtml}
+        ${post.stato !== 'pubblicato' ? `<button class="btn-icon" onclick="removeFromQueue('${post.id}')" title="Rimuovi">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--rosso)" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+};
+
+function retrySingleFb(postId) {
+  const post = socialQueue.find(q => q.id === postId);
+  if (post) {
+    post.stato = 'programmato';
+    delete post.errore;
+    localStorage.setItem(SOCIAL_QUEUE_KEY, JSON.stringify(socialQueue));
+  }
+  publishSingleFb(postId);
 }
 
 renderFotos();
