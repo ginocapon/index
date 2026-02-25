@@ -1751,6 +1751,22 @@ function showSection(name) {
 }
 
 // ══════════════════════════════════════
+// SEO SLUG PER IMMOBILI
+function generatePropertySlug(d) {
+  if (!d) return '';
+  const parts = [
+    d.tipologia || d.categoria || 'immobile',
+    d.tipo_operazione || 'vendita',
+    d.comune || 'padova',
+    d.codice || ''
+  ];
+  return parts.map(p => (p || '').toLowerCase()
+    .replace(/[àáâãäå]/g,'a').replace(/[èéêë]/g,'e').replace(/[ìíîï]/g,'i')
+    .replace(/[òóôõö]/g,'o').replace(/[ùúûü]/g,'u').replace(/ç/g,'c').replace(/ñ/g,'n')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')
+  ).filter(Boolean).join('-');
+}
+
 // LOAD IMMOBILI
 // ══════════════════════════════════════
 async function loadImmobili() {
@@ -1826,7 +1842,7 @@ function renderTable(data) {
           <button class="btn btn-danger btn-sm" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')">🗑️</button>
           <button class="btn btn-sm" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="Toggle evidenza" style="background:var(--sfondo)">⭐</button>
           <button class="btn btn-sm" onclick="toggleAttivo('${i.id}',${!i.attivo})" title="Toggle attivo" style="background:var(--sfondo)">${i.attivo ? '👁️' : '🚫'}</button>
-          <a href="immobile.html?id=${i.id}" target="_blank" class="btn btn-sm" title="Anteprima scheda" style="background:#e8f5e9;color:#27ae60;text-decoration:none">🔍</a>
+          <a href="immobile.html?s=${encodeURIComponent(generatePropertySlug(i))}" target="_blank" class="btn btn-sm" title="Anteprima scheda" style="background:#e8f5e9;color:#27ae60;text-decoration:none">🔍</a>
         </div>
       </td>
     </tr>`;
