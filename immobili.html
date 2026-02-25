@@ -668,6 +668,15 @@
   let currentView = 'grid';
   let currentOp = 'vendita';
 
+  // ── RISOLVI URL IMMAGINI SUPABASE ──
+  function resolveImageUrl(url) {
+    if (!url || typeof url !== 'string') return '';
+    url = url.trim();
+    if (!url) return '';
+    if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) return url;
+    return SUPABASE_URL + '/storage/v1/object/public/' + url.replace(/^\/+/, '');
+  }
+
   // ── COLORI CLASSE ENERGETICA ──
   const CE_COLORS = {
     'A4':{bg:'#1b5e20',tx:'#fff'},'A3':{bg:'#2e7d32',tx:'#fff'},'A2':{bg:'#388e3c',tx:'#fff'},'A1':{bg:'#43a047',tx:'#fff'},
@@ -726,7 +735,8 @@
         garage: !!i.garage,
         vt: !!i.virtual_tour,
         yt: !!i.youtube_id,
-        foto: Array.isArray(i.foto) ? i.foto : [],
+        foto: (Array.isArray(i.foto) ? i.foto : []).map(resolveImageUrl).filter(Boolean),
+        fotoPrincipale: resolveImageUrl(i.foto_principale || (i.foto_urls&&i.foto_urls[0]) || ''),
         evidenza: !!i.in_evidenza,
         venduto: !!i.venduto,
         affittato: !!i.affittato,
@@ -749,7 +759,7 @@
       return;
     }
     grid.innerHTML = immobili.map(i => {
-      const fotoUrl = i.foto.length > 0 ? i.foto[0] : '';
+      const fotoUrl = i.fotoPrincipale || (i.foto.length > 0 ? i.foto[0] : '');
       const fotoCount = i.foto.length;
       const imgHtml = fotoUrl
         ? '<img src="'+fotoUrl+'" alt="'+i.titolo.replace(/"/g,'&quot;')+'" style="width:100%;height:100%;object-fit:cover;" loading="lazy" onerror="this.parentElement.innerHTML=\''+SVG_PLACEHOLDER.replace(/'/g,"\\'")+'\'">'
