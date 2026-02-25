@@ -377,7 +377,7 @@ button{font-family:inherit;cursor:pointer}
 .video-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 48px; }
 .video-text { flex: 1; min-width: 260px; }
 .video-text .sec-p { margin-bottom: 18px; }
-.video-wrap { flex: 0 0 340px; max-width: 340px; position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(21,36,53,0.14); aspect-ratio: 9/16; background: #000; cursor: pointer; }
+.video-wrap { flex: 1 1 560px; max-width: 640px; position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(21,36,53,0.14); aspect-ratio: 16/9; background: #000; cursor: pointer; }
 .video-wrap iframe { width: 100%; height: 100%; border: 0; }
 .video-facade { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.35) 100%); z-index: 2; transition: opacity 0.3s; }
 .video-facade:hover { background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.25) 100%); }
@@ -390,7 +390,7 @@ button{font-family:inherit;cursor:pointer}
   .video-inner { flex-direction: column; text-align: center; }
   .video-text { order: 2; }
   .video-text .eyebrow { justify-content: center; }
-  .video-wrap { flex: none; width: 280px; max-width: 280px; order: 1; }
+  .video-wrap { flex: none; width: 100%; max-width: 100%; order: 1; }
   #video-intro { padding: 48px 20px; }
 }
 
@@ -1401,12 +1401,12 @@ button svg, a.btn-p svg, a.btn-g svg {
     },
     {
       "@type": "VideoObject",
-      "name": "Righetto Immobiliare — Agenzia Immobiliare Padova dal 1990",
-      "description": "Scopri come lavora Righetto Immobiliare: vendita, affitto e gestione immobili a Padova e in tutti i 101 comuni della provincia. Virtual tour 360°, assistente AI Sara e 30 anni di esperienza.",
-      "thumbnailUrl": "https://img.youtube.com/vi/IW-v3vOtBx4/maxresdefault.jpg",
+      "name": "Vendi Casa in 30 giorni — Righetto Immobiliare Padova",
+      "description": "Scopri come Righetto Immobiliare ti aiuta a vendere casa in 30 giorni: vendita, affitto e gestione immobili a Padova e in tutti i 101 comuni della provincia. Virtual tour 360°, assistente AI Sara e 30 anni di esperienza.",
+      "thumbnailUrl": "https://img.youtube.com/vi/1JM_lXuqLHM/maxresdefault.jpg",
       "uploadDate": "2025-01-01",
-      "contentUrl": "https://www.youtube.com/shorts/IW-v3vOtBx4",
-      "embedUrl": "https://www.youtube.com/embed/IW-v3vOtBx4",
+      "contentUrl": "https://www.youtube.com/watch?v=1JM_lXuqLHM",
+      "embedUrl": "https://www.youtube.com/embed/1JM_lXuqLHM",
       "publisher": {
         "@type": "Organization",
         "name": "Righetto Immobiliare",
@@ -1584,7 +1584,7 @@ button svg, a.btn-p svg, a.btn-g svg {
       <p class="sec-p">Scopri in un minuto come lavoriamo: dalla valutazione al rogito, con tecnologia, trasparenza e 30 anni di esperienza nel territorio padovano. Assistente AI Sara disponibile 24/7 per ogni domanda.</p>
     </div>
     <div class="video-wrap" id="videoWrap" onclick="loadVideo(this)">
-      <img class="video-thumb" src="https://img.youtube.com/vi/IW-v3vOtBx4/maxresdefault.jpg" alt="Video presentazione Righetto Immobiliare Padova" width="340" height="604" loading="lazy">
+      <img class="video-thumb" src="https://img.youtube.com/vi/1JM_lXuqLHM/maxresdefault.jpg" alt="Vendi Casa in 30 giorni — Righetto Immobiliare Padova" width="640" height="360" loading="lazy">
       <div class="video-facade">
         <div class="play-btn">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="var(--blu)" stroke="none"><polygon points="6 3 20 12 6 21"/></svg>
@@ -2372,11 +2372,11 @@ function loadVideo(wrap) {
   if (f) f.style.display = 'none';
   if (t) t.style.display = 'none';
   var ifr = document.createElement('iframe');
-  ifr.src = 'https://www.youtube.com/embed/IW-v3vOtBx4?autoplay=1&rel=0';
-  ifr.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+  ifr.src = 'https://www.youtube.com/embed/1JM_lXuqLHM?autoplay=1&rel=0';
+  ifr.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
   ifr.allowFullscreen = true;
   ifr.loading = 'lazy';
-  ifr.title = 'Video presentazione Righetto Immobiliare Padova';
+  ifr.title = 'Vendi Casa in 30 giorni — Righetto Immobiliare Padova';
   wrap.appendChild(ifr);
 }
 </script>
