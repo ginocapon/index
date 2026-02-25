@@ -2271,7 +2271,7 @@ function generateSlug(titolo) {
   grid.innerHTML = articles.map((a,i) => {
     const img = extractImg(a);
     const slug = generateSlug(a.titolo);
-    const href = 'blog-articolo.html?s=' + encodeURIComponent(slug) + '&id=' + a.id;
+    const href = 'blog-articolo.html?s=' + encodeURIComponent(slug);
     return '<div class="blog-card rv d'+(i+1)+'" onclick="location.href=\''+href+'\'">'
       + '<div class="blog-cover"'+(img?' style="background:url('+img+') center/cover;font-size:0"':'')+'>'+(img?'':a.emoji||'📝')+'</div>'
       + '<div class="blog-body"><div class="blog-cat">'+((a.categoria||'Blog').replace(/</g,'&lt;'))+'</div>'
