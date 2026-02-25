@@ -661,6 +661,22 @@
     'E':{bg:'#e53935',tx:'#fff'},'F':{bg:'#c62828',tx:'#fff'},'G':{bg:'#b71c1c',tx:'#fff'}
   };
 
+  // ── SEO SLUG PER IMMOBILI ──
+  function generatePropertySlug(d) {
+    if (!d) return '';
+    const parts = [
+      d.tipologia || d.tipo || d.categoria || 'immobile',
+      d.tipo_operazione || d.op || 'vendita',
+      d.comune || 'padova',
+      d.codice || d.rif || ''
+    ];
+    return parts.map(p => (p || '').toLowerCase()
+      .replace(/[àáâãäå]/g,'a').replace(/[èéêë]/g,'e').replace(/[ìíîï]/g,'i')
+      .replace(/[òóôõö]/g,'o').replace(/[ùúûü]/g,'u').replace(/ç/g,'c').replace(/ñ/g,'n')
+      .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')
+    ).filter(Boolean).join('-');
+  }
+
   // ── SVG ICONS ──
   const SVG_PLACEHOLDER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>';
   const SVG_HEART = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>';
@@ -742,7 +758,8 @@
       if (i.garage) specs += '<div class="cs">'+SVG_GARAGE+'<strong>1</strong>&nbsp;garage</div>';
       const ceColor = CE_COLORS[i.ce] || {bg:'#999',tx:'#fff'};
       const ceHtml = i.ce ? '<span class="cf-ce" style="background:'+ceColor.bg+';color:'+ceColor.tx+'">'+i.ce+'</span>' : '';
-      return '<a class="card" href="immobile.html?id='+i.id+'" data-tipo="'+i.tipo+'" data-prezzo="'+i.prezzo+'" data-mq="'+i.mq+'" data-camere="'+i.camere+'" data-comune="'+(i.comune||'').toLowerCase()+'" data-vt="'+(i.vt?'1':'')+'" data-yt="'+(i.yt?'1':'')+'" data-giardino="'+(i.giardino?'1':'')+'" data-garage="'+(i.garage?'1':'')+'" data-op="'+i.op+'" onclick="openCard(event,this)">'
+      const cardSlug = generatePropertySlug(i);
+      return '<a class="card" href="immobile.html?s='+encodeURIComponent(cardSlug)+'" data-tipo="'+i.tipo+'" data-prezzo="'+i.prezzo+'" data-mq="'+i.mq+'" data-camere="'+i.camere+'" data-comune="'+(i.comune||'').toLowerCase()+'" data-vt="'+(i.vt?'1':'')+'" data-yt="'+(i.yt?'1':'')+'" data-giardino="'+(i.giardino?'1':'')+'" data-garage="'+(i.garage?'1':'')+'" data-op="'+i.op+'" onclick="openCard(event,this)">'
         + '<div class="card-img">'
         + imgHtml
         + '<div class="card-badges">'+badges+'</div>'
@@ -883,9 +900,9 @@
   // ── MODAL ──
   function openCard(e, el) {
     e.preventDefault();
-    const id = el.href?.split('id=')[1] || '';
     const rif = el.querySelector('.cf-ref') ? el.querySelector('.cf-ref').textContent.replace('Rif. ','') : '';
-    const d = immobili.find(i => i.id === id || i.rif === rif);
+    const urlSlug = new URL(el.href, location.origin).searchParams.get('s') || '';
+    const d = immobili.find(i => generatePropertySlug(i) === urlSlug || i.rif === rif);
     if (!d) { window.location.href = el.href; return; }
 
     const mediaIcons = [];
@@ -910,7 +927,7 @@
         <div class="ms-item"><div class="ms-val">${prezzoMq}</div><div class="ms-lbl">&euro;/mq</div></div>
       </div>
       <div class="modal-actions">
-        <a href="immobile.html?id=${d.id}" class="btn btn-dark" style="flex:1;justify-content:center;text-decoration:none;display:flex;align-items:center;gap:.4rem;padding:.6rem 1rem;background:var(--nero);color:#fff;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;">
+        <a href="immobile.html?s=${encodeURIComponent(generatePropertySlug(d))}" class="btn btn-dark" style="flex:1;justify-content:center;text-decoration:none;display:flex;align-items:center;gap:.4rem;padding:.6rem 1rem;background:var(--nero);color:#fff;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           Scheda completa
         </a>
