@@ -193,35 +193,25 @@ function generateSlug(titolo) {
   return s;
 }
 function artUrl(a) {
-  return 'blog-articolo.html?s=' + encodeURIComponent(generateSlug(a.titolo)) + '&id=' + a.id;
+  return 'blog-articolo.html?s=' + encodeURIComponent(generateSlug(a.titolo));
 }
 
 (async function() {
   const params = new URLSearchParams(window.location.search);
   const slug = params.get('s');
-  const id = params.get('id');
+  const id = params.get('id'); // retrocompatibilità vecchi link
   if (!slug && !id) { showNotFound(); return; }
 
   let art = null, allData = [];
   try {
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    // Prova prima per ID (veloce)
-    if (id) {
-      const res = await sb.from('blog').select('*').eq('id', id).single();
-      if (!res.error && res.data) art = res.data;
-    }
-    // Se non trovato per ID, cerca per slug generato dal titolo
-    if (!art && slug) {
-      const { data: all } = await sb.from('blog').select('*').eq('stato', 'pubblicato');
-      if (all) {
-        allData = all;
-        art = all.find(a => generateSlug(a.titolo) === slug);
-      }
-    }
-    // Carica tutti gli articoli per correlati (se non gia' caricati)
-    if (art && !allData.length) {
-      const { data } = await sb.from('blog').select('*').eq('stato', 'pubblicato');
-      allData = data || [];
+    const { data: all } = await sb.from('blog').select('*').eq('stato', 'pubblicato');
+    if (all) {
+      allData = all;
+      // Cerca per slug (priorità)
+      if (slug) art = all.find(a => generateSlug(a.titolo) === slug);
+      // Fallback per ID (vecchi link)
+      if (!art && id) art = all.find(a => a.id === id);
     }
   } catch(e) {
     console.warn('Blog Supabase non disponibile:', e.message);
@@ -231,22 +221,22 @@ function artUrl(a) {
   if (!art) {
     let articles = [];
     try { articles = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]'); } catch(ex) {}
-    if (id) art = articles.find(a => a.id === id);
-    if (!art && slug) art = articles.find(a => generateSlug(a.titolo) === slug);
+    if (slug) art = articles.find(a => generateSlug(a.titolo) === slug);
+    if (!art && id) art = articles.find(a => a.id === id);
     allData = articles;
   }
 
   if (!art) { showNotFound(); return; }
 
-  // Aggiorna URL nel browser con slug SEO corretto (se mancante)
+  // Aggiorna URL nel browser con slug SEO pulito (senza UUID)
   const correctSlug = generateSlug(art.titolo);
-  if (!slug || slug !== correctSlug) {
-    const newUrl = 'blog-articolo.html?s=' + encodeURIComponent(correctSlug) + '&id=' + art.id;
-    history.replaceState(null, '', newUrl);
+  const cleanUrl = 'blog-articolo.html?s=' + encodeURIComponent(correctSlug);
+  if (location.search !== '?s=' + encodeURIComponent(correctSlug)) {
+    history.replaceState(null, '', cleanUrl);
   }
 
   // Aggiorna meta tags SEO
-  document.querySelector('link[rel=canonical]').href = 'https://righettoimmobiliare.it/blog-articolo.html?s=' + encodeURIComponent(correctSlug);
+  document.querySelector('link[rel=canonical]').href = 'https://righettoimmobiliare.it/' + cleanUrl;
   const metaDesc = document.querySelector('meta[name=description]');
   if (metaDesc) metaDesc.content = (art.titolo || '') + ' — Righetto Immobiliare Padova. Guide e consigli sul mercato immobiliare.';
 
