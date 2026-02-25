@@ -4,6 +4,8 @@
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title id="pageTitle">Articolo — Righetto Immobiliare</title>
   <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co">
   <link rel="canonical" href="https://righettoimmobiliare.it/blog-articolo.html">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Righetto Immobiliare">
@@ -239,6 +241,21 @@ function artUrl(a) {
   document.querySelector('link[rel=canonical]').href = 'https://righettoimmobiliare.it/' + cleanUrl;
   const metaDesc = document.querySelector('meta[name=description]');
   if (metaDesc) metaDesc.content = (art.titolo || '') + ' — Righetto Immobiliare Padova. Guide e consigli sul mercato immobiliare.';
+
+  // Genera JSON-LD Article
+  var ldScript = document.getElementById('jsonld-article');
+  if (!ldScript) { ldScript = document.createElement('script'); ldScript.type = 'application/ld+json'; ldScript.id = 'jsonld-article'; document.head.appendChild(ldScript); }
+  ldScript.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": art.titolo || '',
+    "author": { "@type": "Organization", "name": "Righetto Immobiliare" },
+    "publisher": { "@type": "Organization", "name": "Righetto Immobiliare", "logo": { "@type": "ImageObject", "url": "https://righettoimmobiliare.it/assets/logo.png" } },
+    "datePublished": art.data || '',
+    "dateModified": art.aggiornato || art.data || '',
+    "description": (art.titolo || '') + ' — Guide e consigli sul mercato immobiliare di Padova.',
+    "mainEntityOfPage": 'https://righettoimmobiliare.it/' + cleanUrl
+  });
 
   renderArticle(art, allData || []);
 })();
