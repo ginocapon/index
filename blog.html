@@ -256,19 +256,32 @@ function getArticles() {
 }
 
 function excerpt(html, maxWords) {
-  // Rimuove tag <script> (incluso JSON-LD) e <style> prima di estrarre il testo
-  let clean = (html || '').replace(/<script[\s\S]*?<\/script>/gi, '').replace(/<style[\s\S]*?<\/style>/gi, '');
+  let clean = (html || '')
+    .replace(/<script[\s\S]*?<\/script>/gi, '')   // rimuove tag <script> (JSON-LD)
+    .replace(/<style[\s\S]*?<\/style>/gi, '')      // rimuove tag <style>
+    .replace(/\{[\s]*"@context"[\s\S]*?\}(?:\s*\})?/g, '')  // rimuove JSON-LD come testo libero
+    .replace(/\{[\s]*"@type"[\s\S]*?\}(?:\s*\})?/g, '');    // rimuove JSON schema come testo libero
   const d = document.createElement('div');
   d.innerHTML = clean;
-  const words = (d.textContent || '').split(/\s+/).filter(Boolean);
+  // Rimuove anche eventuali blocchi JSON rimasti nel testo
+  let txt = (d.textContent || '').replace(/\{[^}]*"@context"[^}]*\}/g, '').replace(/\{[^}]*"@type"[^}]*\}/g, '').trim();
+  const words = txt.split(/\s+/).filter(Boolean);
   return words.slice(0, maxWords).join(' ') + (words.length > maxWords ? '...' : '');
 }
 
-// Estrae la prima immagine <img src="..."> dal contenuto HTML
+// Estrae la prima immagine dal contenuto: cerca <img>, poi URL nel JSON-LD "image", poi URL immagine diretta
 function extractFirstImage(html) {
   if (!html) return '';
-  const match = html.match(/<img[^>]+src=["']([^"']+)["']/i);
-  return match ? match[1] : '';
+  // 1. Cerca tag <img src="...">
+  const imgTag = html.match(/<img[^>]+src=["']([^"']+)["']/i);
+  if (imgTag) return imgTag[1];
+  // 2. Cerca URL immagine nel campo "image" del JSON-LD
+  const jsonImg = html.match(/"image"\s*:\s*\[\s*"(https?:\/\/[^"]+)"/i) || html.match(/"image"\s*:\s*"(https?:\/\/[^"]+)"/i);
+  if (jsonImg) return jsonImg[1];
+  // 3. Cerca qualsiasi URL che sembra un'immagine
+  const anyImg = html.match(/(https?:\/\/[^\s"'<>]+\.(?:jpg|jpeg|png|webp|gif)(?:\?[^\s"'<>]*)?)/i);
+  if (anyImg) return anyImg[1];
+  return '';
 }
 
 function fmtDate(d) {
