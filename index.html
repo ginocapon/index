@@ -2084,6 +2084,17 @@ const rvObs = new IntersectionObserver(entries=>{
 },{threshold:0.12});
 document.querySelectorAll('.rv').forEach(el=>rvObs.observe(el));
 
+/* ══ RISOLVI URL IMMAGINI SUPABASE ══ */
+function resolveImageUrl(url) {
+  if (!url || typeof url !== 'string') return '';
+  url = url.trim();
+  if (!url) return '';
+  // Già URL completo
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) return url;
+  // Percorso relativo Supabase Storage → costruisci URL pubblico
+  return SUPABASE_URL + '/storage/v1/object/public/' + url.replace(/^\/+/, '');
+}
+
 /* ══ SEO SLUG PER IMMOBILI ══ */
 function generatePropertySlug(d) {
   if (!d) return '';
@@ -2138,7 +2149,8 @@ function renderProps(arr){
     const price = tipo==='affitto'
       ? `€ ${p.prezzo?.toLocaleString('it-IT')}/mese`
       : `€ ${p.prezzo?.toLocaleString('it-IT')}`;
-    const imgUrl = p.foto_principale || (p.foto_urls&&p.foto_urls[0]) || (p.foto&&p.foto[0]) || '';
+    const rawImg = p.foto_principale || (p.foto_urls&&p.foto_urls[0]) || (p.foto&&p.foto[0]) || '';
+    const imgUrl = resolveImageUrl(rawImg);
     const imgTag = imgUrl
       ? `<img src="${imgUrl}" alt="${p.titolo||'Immobile'}" loading="lazy" onerror="this.parentNode.innerHTML='<div class=pi-ph>🏠</div>'">`
       : `<div class="pi-ph">🏠</div>`;
@@ -2341,12 +2353,12 @@ function generateSlug(titolo) {
     return;
   }
   function extractImg(a) {
-    if (a.immagine_copertina) return a.immagine_copertina;
+    if (a.immagine_copertina) return resolveImageUrl(a.immagine_copertina);
     if (!a.contenuto) return '';
     const m = a.contenuto.match(/<img[^>]+src=["']([^"']+)["']/i);
-    if (m) return m[1];
+    if (m) return resolveImageUrl(m[1]);
     const j = a.contenuto.match(/"image"\s*:\s*\[?\s*"(https?:\/\/[^"]+)"/i);
-    if (j) return j[1];
+    if (j) return resolveImageUrl(j[1]);
     return '';
   }
   function fmtMese(d) { return d ? new Date(d).toLocaleDateString('it-IT',{month:'long',year:'numeric'}) : ''; }
