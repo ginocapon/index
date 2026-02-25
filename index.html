@@ -2278,6 +2278,8 @@ function generateSlug(titolo) {
       + '<h3 class="blog-title">'+((a.titolo||'').replace(/</g,'&lt;'))+'</h3>'
       + '<div class="blog-date">'+fmtMese(a.data)+'</div></div></div>';
   }).join('');
+  // Attiva animazione reveal sulle card appena create
+  grid.querySelectorAll('.rv').forEach(el => { if(typeof rvObs!=='undefined') rvObs.observe(el); else el.classList.add('vis'); });
 })();
 </script>
 <script src="js/cookie-consent.js"></script>
