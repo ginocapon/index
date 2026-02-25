@@ -256,10 +256,19 @@ function getArticles() {
 }
 
 function excerpt(html, maxWords) {
+  // Rimuove tag <script> (incluso JSON-LD) e <style> prima di estrarre il testo
+  let clean = (html || '').replace(/<script[\s\S]*?<\/script>/gi, '').replace(/<style[\s\S]*?<\/style>/gi, '');
   const d = document.createElement('div');
-  d.innerHTML = html || '';
+  d.innerHTML = clean;
   const words = (d.textContent || '').split(/\s+/).filter(Boolean);
   return words.slice(0, maxWords).join(' ') + (words.length > maxWords ? '...' : '');
+}
+
+// Estrae la prima immagine <img src="..."> dal contenuto HTML
+function extractFirstImage(html) {
+  if (!html) return '';
+  const match = html.match(/<img[^>]+src=["']([^"']+)["']/i);
+  return match ? match[1] : '';
 }
 
 function fmtDate(d) {
@@ -296,28 +305,31 @@ function renderBlog() {
   if (evidenza.length > 0) {
     const big = evidenza[0];
     const smalls = evidenza.slice(1, 3);
+    const bigImg = big.immagine_copertina || extractFirstImage(big.contenuto);
     featEl.innerHTML = `
       <div style="font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--grigio);margin-bottom:.7rem;font-weight:500">In evidenza</div>
       <div class="featured">
         <a class="art-big" href="blog-articolo.html?id=${big.id}">
-          <div class="art-img"><div class="art-img-ph">${big.emoji || '📝'}</div><span class="art-cat">${esc(big.categoria)}</span></div>
+          <div class="art-img">${bigImg ? '<img src="'+bigImg+'" alt="'+esc(big.titolo)+'" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.outerHTML=\'<div class=art-img-ph>'+(big.emoji||'&#128221;')+'</div>\'">' : '<div class="art-img-ph">'+(big.emoji || '&#128221;')+'</div>'}<span class="art-cat">${esc(big.categoria)}</span></div>
           <div class="art-body">
             <div class="art-date">${fmtDate(big.data)}</div>
             <div class="art-title">${esc(big.titolo)}</div>
-            <div class="art-excerpt">${esc(excerpt(big.contenuto, 100))}</div>
+            <div class="art-excerpt">${esc(excerpt(big.contenuto, 30))}</div>
             <div class="art-meta"><div class="art-author"><div class="art-av">${(big.autore||'G')[0]}</div>${esc(big.autore)}</div><span class="art-read">${big.tempo || 5} min di lettura</span></div>
           </div>
         </a>
-        ${smalls.map(a => `
+        ${smalls.map(a => {
+          const smImg = a.immagine_copertina || extractFirstImage(a.contenuto);
+          return `
           <a class="art-sm" href="blog-articolo.html?id=${a.id}">
-            <div class="art-img"><div class="art-img-ph">${a.emoji || '📝'}</div><span class="art-cat">${esc(a.categoria)}</span></div>
+            <div class="art-img">${smImg ? '<img src="'+smImg+'" alt="'+esc(a.titolo)+'" style="width:100%;height:100%;object-fit:cover" loading="lazy">' : '<div class="art-img-ph">'+(a.emoji || '&#128221;')+'</div>'}<span class="art-cat">${esc(a.categoria)}</span></div>
             <div class="art-body">
               <div class="art-date">${fmtDate(a.data)}</div>
               <div class="art-title">${esc(a.titolo)}</div>
               <div class="art-meta"><div class="art-author"><div class="art-av">${(a.autore||'G')[0]}</div></div><span class="art-read">${a.tempo || 5} min</span></div>
             </div>
           </a>
-        `).join('')}
+        `}).join('')}
       </div>`;
   } else {
     featEl.innerHTML = '';
@@ -332,27 +344,31 @@ function renderBlog() {
   if (grid.length === 0 && evidenza.length === 0) {
     gridEl.innerHTML = '<div class="blog-empty"><div style="font-size:3rem;margin-bottom:1rem">📝</div><h3>Nessun articolo ancora</h3><p>I nuovi articoli appariranno qui appena pubblicati dall\'admin.</p></div>';
   } else {
-    gridEl.innerHTML = grid.map(a => `
+    gridEl.innerHTML = grid.map(a => {
+      const cardImg = a.immagine_copertina || extractFirstImage(a.contenuto);
+      return `
       <a class="acard" href="blog-articolo.html?id=${a.id}">
-        <div class="acard-img"><div class="acard-img-ph">${a.emoji || '📝'}</div></div>
+        <div class="acard-img">${cardImg ? '<img src="'+cardImg+'" alt="'+esc(a.titolo)+'" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.outerHTML=\'<div class=acard-img-ph>'+(a.emoji||'&#128221;')+'</div>\'">' : '<div class="acard-img-ph">'+(a.emoji || '&#128221;')+'</div>'}</div>
         <div class="acard-body">
           <span class="acard-cat">${esc(a.categoria)}</span>
           <div class="acard-title">${esc(a.titolo)}</div>
-          <div class="acard-excerpt">${esc(excerpt(a.contenuto, 100))}</div>
+          <div class="acard-excerpt">${esc(excerpt(a.contenuto, 30))}</div>
           <div class="acard-meta"><span>${fmtDateShort(a.data)}</span><span>${a.tempo || 5} min</span></div>
         </div>
       </a>
-    `).join('');
+    `}).join('');
   }
 
   // Sidebar recenti
   const recent = all.slice(0, 4);
   document.getElementById('recentSidebar').innerHTML = recent.length
-    ? recent.map(a => `
+    ? recent.map(a => {
+        const riImg = a.immagine_copertina || extractFirstImage(a.contenuto);
+        return `
         <a href="blog-articolo.html?id=${a.id}" style="text-decoration:none;color:inherit">
-          <div class="recent-item"><div class="ri-img">${a.emoji || '📝'}</div><div><div class="ri-title">${esc(a.titolo)}</div><div class="ri-date">${fmtDateShort(a.data)}</div></div></div>
+          <div class="recent-item"><div class="ri-img">${riImg ? '<img src="'+riImg+'" style="width:100%;height:100%;object-fit:cover;border-radius:2px" loading="lazy">' : (a.emoji || '&#128221;')}</div><div><div class="ri-title">${esc(a.titolo)}</div><div class="ri-date">${fmtDateShort(a.data)}</div></div></div>
         </a>
-      `).join('')
+      `}).join('')
     : '<p style="font-size:.8rem;color:var(--grigio)">Nessun articolo recente</p>';
 
   // Tag cloud

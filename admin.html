@@ -1572,6 +1572,11 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <input type="number" id="b_tempo" value="5" min="1" max="60">
               </div>
               <div class="form-group form-full">
+                <label>Immagine Copertina (URL)</label>
+                <input type="text" id="b_immagine_copertina" placeholder="https://... (URL immagine copertina articolo)">
+                <small style="color:var(--caffe2);font-size:0.7rem">Inserisci l'URL di una foto. Se vuoto, verra' usata la prima immagine dal contenuto dell'articolo.</small>
+              </div>
+              <div class="form-group form-full">
                 <label>Stato</label>
                 <div style="display:flex;gap:16px;margin-top:4px">
                   <label class="check-item"><input type="radio" name="b_stato" value="pubblicato" checked> Pubblicato</label>
@@ -2673,8 +2678,10 @@ function formatDate(d) {
   return dt.toLocaleDateString('it-IT', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 function getExcerpt(html, maxWords) {
+  // Rimuove tag <script> (JSON-LD) e <style> prima di estrarre il testo
+  let clean = (html || '').replace(/<script[\s\S]*?<\/script>/gi, '').replace(/<style[\s\S]*?<\/style>/gi, '');
   const tmp = document.createElement('div');
-  tmp.innerHTML = html || '';
+  tmp.innerHTML = clean;
   const txt = tmp.textContent || '';
   const words = txt.split(/\s+/).filter(Boolean);
   return words.slice(0, maxWords).join(' ') + (words.length > maxWords ? '...' : '');
@@ -2695,6 +2702,7 @@ function openBlogEditor(id) {
   document.getElementById('b_data').value = new Date().toISOString().split('T')[0];
   document.getElementById('b_emoji').value = '🏠';
   document.getElementById('b_tempo').value = '5';
+  document.getElementById('b_immagine_copertina').value = '';
   document.getElementById('b_contenuto').value = '';
   document.querySelector('input[name=b_stato][value=pubblicato]').checked = true;
   document.getElementById('b_evidenza').checked = false;
@@ -2712,6 +2720,7 @@ function editBlogArticle(id) {
   document.getElementById('b_data').value = a.data || '';
   document.getElementById('b_emoji').value = a.emoji || '🏠';
   document.getElementById('b_tempo').value = a.tempo || 5;
+  document.getElementById('b_immagine_copertina').value = a.immagine_copertina || '';
   document.getElementById('b_contenuto').value = a.contenuto || '';
   const stato = a.stato || 'bozza';
   const radio = document.querySelector(`input[name=b_stato][value=${stato}]`);
@@ -2736,6 +2745,7 @@ async function saveBlogArticle() {
     data: document.getElementById('b_data').value || new Date().toISOString().split('T')[0],
     emoji: document.getElementById('b_emoji').value || '🏠',
     tempo: parseInt(document.getElementById('b_tempo').value) || 5,
+    immagine_copertina: document.getElementById('b_immagine_copertina').value.trim() || null,
     contenuto,
     stato,
     evidenza: document.getElementById('b_evidenza').checked,
