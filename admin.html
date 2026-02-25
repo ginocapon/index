@@ -1540,7 +1540,15 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <div class="form-grid">
               <div class="form-group">
                 <label>Titolo Articolo *</label>
-                <input type="text" id="b_titolo" placeholder="es. Mercato immobiliare Padova 2026" required>
+                <input type="text" id="b_titolo" placeholder="es. Mercato immobiliare Padova 2026" required oninput="updateSlugPreview()">
+              </div>
+              <div class="form-group">
+                <label>URL SEO (auto-generato)</label>
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span style="font-size:.72rem;color:var(--caffe2);white-space:nowrap">blog-articolo.html?s=</span>
+                  <input type="text" id="b_slug" readonly style="background:var(--sfondo);font-size:.78rem;color:var(--nero);font-family:monospace" placeholder="slug-seo-automatico">
+                </div>
+                <small style="color:var(--caffe2);font-size:.68rem">Generato automaticamente dal titolo con geolocalizzazione Padova per la SEO.</small>
               </div>
               <div class="form-group">
                 <label>Categoria</label>
@@ -2690,6 +2698,19 @@ function getExcerpt(html, maxWords) {
   return words.slice(0, maxWords).join(' ') + (words.length > maxWords ? '...' : '');
 }
 
+function generateSlug(titolo) {
+  let s = (titolo || '').toLowerCase()
+    .replace(/[àáâãäå]/g,'a').replace(/[èéêë]/g,'e').replace(/[ìíîï]/g,'i')
+    .replace(/[òóôõö]/g,'o').replace(/[ùúûü]/g,'u').replace(/[ç]/g,'c')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,80);
+  if (!/padova|limena|abano|selvazzano|rubano|vigonza|cadoneghe|noventa|saonara|cittadella|montegrotto|este|monselice|camposampiero|piove/i.test(s)) s += '-padova';
+  return s;
+}
+function updateSlugPreview() {
+  const titolo = document.getElementById('b_titolo').value;
+  document.getElementById('b_slug').value = generateSlug(titolo);
+}
+
 function openBlogEditor(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById('sec-blog-editor').classList.add('active');
@@ -2706,6 +2727,7 @@ function openBlogEditor(id) {
   document.getElementById('b_emoji').value = '🏠';
   document.getElementById('b_tempo').value = '5';
   document.getElementById('b_immagine_copertina').value = '';
+  document.getElementById('b_slug').value = '';
   document.getElementById('b_contenuto').value = '';
   document.querySelector('input[name=b_stato][value=pubblicato]').checked = true;
   document.getElementById('b_evidenza').checked = false;
@@ -2724,6 +2746,7 @@ function editBlogArticle(id) {
   document.getElementById('b_emoji').value = a.emoji || '🏠';
   document.getElementById('b_tempo').value = a.tempo || 5;
   document.getElementById('b_immagine_copertina').value = a.immagine_copertina || '';
+  document.getElementById('b_slug').value = generateSlug(a.titolo);
   document.getElementById('b_contenuto').value = a.contenuto || '';
   const stato = a.stato || 'bozza';
   const radio = document.querySelector(`input[name=b_stato][value=${stato}]`);
