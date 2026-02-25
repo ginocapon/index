@@ -2019,6 +2019,22 @@ const rvObs = new IntersectionObserver(entries=>{
 },{threshold:0.12});
 document.querySelectorAll('.rv').forEach(el=>rvObs.observe(el));
 
+/* ══ SEO SLUG PER IMMOBILI ══ */
+function generatePropertySlug(d) {
+  if (!d) return '';
+  const parts = [
+    d.tipologia || d.categoria || 'immobile',
+    d.tipo_operazione || d.tipo_contratto || 'vendita',
+    d.comune || 'padova',
+    d.codice || ''
+  ];
+  return parts.map(p => (p || '').toLowerCase()
+    .replace(/[àáâãäå]/g,'a').replace(/[èéêë]/g,'e').replace(/[ìíîï]/g,'i')
+    .replace(/[òóôõö]/g,'o').replace(/[ùúûü]/g,'u').replace(/ç/g,'c').replace(/ñ/g,'n')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')
+  ).filter(Boolean).join('-');
+}
+
 /* ══ IMMOBILI DA SUPABASE ══ */
 async function loadImmobili(){
   if(!sb){ showDemoProps(); return; }
@@ -2061,7 +2077,8 @@ function renderProps(arr){
     const imgTag = imgUrl
       ? `<img src="${imgUrl}" alt="${p.titolo||'Immobile'}" loading="lazy" onerror="this.parentNode.innerHTML='<div class=pi-ph>🏠</div>'">`
       : `<div class="pi-ph">🏠</div>`;
-    return `<a href="immobile.html?id=${p.id}" class="pc">
+    const propSlug = generatePropertySlug(p);
+    return `<a href="immobile.html?s=${encodeURIComponent(propSlug)}" class="pc">
       <div class="pi">
         ${imgTag}
         <span class="ptag ${tipClass}">${tipLabel}</span>
@@ -2175,7 +2192,7 @@ async function loadCorrelati(comune, mq, tipo){
       .gte('superficie',mq*0.75).lte('superficie',mq*1.25).limit(3);
     if(!data||!data.length) return;
     div.innerHTML='<div class="sr-lbl" style="margin-top:14px">Immobili simili nel portfolio</div>'+
-      data.map(p=>`<a href="immobile.html?id=${p.id}" class="scl">
+      data.map(p=>`<a href="immobile.html?s=${encodeURIComponent(generatePropertySlug(p))}" class="scl">
         <img class="sc-th" src="${p.foto_principale||(p.foto&&p.foto[0])||''}" onerror="this.style.display='none'">
         <div><div class="sc-nm">${p.titolo||p.comune}</div>
         <div class="sc-mt">${p.superficie||''} mq · ${p.comune}</div>

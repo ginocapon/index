@@ -15,6 +15,24 @@ const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
 
 // ══════════════════════════════════════════════
+// SEO SLUG PER IMMOBILI
+// ══════════════════════════════════════════════
+function generatePropertySlug(d) {
+  if (!d) return '';
+  const parts = [
+    d.tipologia || d.categoria || 'immobile',
+    d.tipo_operazione || 'vendita',
+    d.comune || 'padova',
+    d.codice || ''
+  ];
+  return parts.map(p => (p || '').toLowerCase()
+    .replace(/[àáâãäå]/g,'a').replace(/[èéêë]/g,'e').replace(/[ìíîï]/g,'i')
+    .replace(/[òóôõö]/g,'o').replace(/[ùúûü]/g,'u').replace(/ç/g,'c').replace(/ñ/g,'n')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')
+  ).filter(Boolean).join('-');
+}
+
+// ══════════════════════════════════════════════
 // DATABASE PREZZI — PROVINCIA DI PADOVA 2025-2026
 // Fonte: FIAIP Padova, Immobiliare.it, Idealista, OMI Agenzia Entrate
 // ══════════════════════════════════════════════
@@ -997,7 +1015,8 @@ class RighettoChat {
         const prezzo = imm.prezzo ? this.formatPrice(imm.prezzo) : 'Su richiesta';
         msg += `• **${imm.titolo}** — ${imm.superficie || '?'}mq — ${prezzo}\n`;
         if (imm.comune) msg += `  📍 ${imm.comune}\n`;
-        msg += `  👉 [Vedi scheda](/immobile.html?id=${imm.id})\n\n`;
+        const immSlug = generatePropertySlug(imm);
+        msg += `  👉 [Vedi scheda](/immobile.html?s=${encodeURIComponent(immSlug)})\n\n`;
       }
     } else {
       msg += `---\n💬 **Vuoi essere contattato da un nostro agente** per una valutazione ufficiale gratuita?`;

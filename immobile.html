@@ -646,31 +646,74 @@ let ytId = null;
 let chatOpen = false;
 let chatInitDone = false;
 
+// ══ SEO SLUG ══
+function generatePropertySlug(d) {
+  if (!d) return '';
+  const parts = [
+    d.tipologia || d.categoria || 'immobile',
+    d.tipo_operazione || 'vendita',
+    d.comune || 'padova',
+    d.codice || ''
+  ];
+  return parts.map(p => (p || '').toLowerCase()
+    .replace(/[àáâãäå]/g,'a').replace(/[èéêë]/g,'e').replace(/[ìíîï]/g,'i')
+    .replace(/[òóôõö]/g,'o').replace(/[ùúûü]/g,'u').replace(/ç/g,'c').replace(/ñ/g,'n')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')
+  ).filter(Boolean).join('-');
+}
+
 // ══ INIT ══
 async function init() {
   const params = new URLSearchParams(window.location.search);
+  const slug = params.get('s');
   const id = params.get('id') || params.get('rif') || params.get('codice');
-  if (!id) { showError(); return; }
+  if (!slug && !id) { showError(); return; }
 
-  let query;
-  // Try by UUID id first, then by codice
-  if (id.includes('-') && id.length > 10) {
-    query = sb.from('immobili').select('*').eq('id', id).single();
-  } else {
-    query = sb.from('immobili').select('*').eq('codice', id).single();
-  }
-  const { data, error } = await query;
+  let art = null;
 
-  if (error || !data) {
-    showError();
-    return;
+  // Strategy: if slug present, load all active and match by slug
+  // If id/codice present, do direct lookup (backward compatibility)
+  if (slug) {
+    const { data: all } = await sb.from('immobili').select('*');
+    if (all) {
+      art = all.find(a => generatePropertySlug(a) === slug);
+      // Fallback: try matching just the codice part from the slug
+      if (!art) {
+        const slugParts = slug.split('-');
+        const lastPart = slugParts[slugParts.length - 1].toUpperCase();
+        art = all.find(a => a.codice && a.codice.toUpperCase() === lastPart);
+      }
+    }
   }
-  immobile = data;
-  render(data);
+
+  if (!art && id) {
+    let query;
+    if (id.includes('-') && id.length > 10) {
+      query = sb.from('immobili').select('*').eq('id', id).single();
+    } else {
+      query = sb.from('immobili').select('*').eq('codice', id).single();
+    }
+    const { data } = await query;
+    if (data) art = data;
+  }
+
+  if (!art) { showError(); return; }
+
+  // Clean URL: redirect to SEO slug if accessed via old UUID/codice link
+  const correctSlug = generatePropertySlug(art);
+  if (correctSlug) {
+    const cleanUrl = 'immobile.html?s=' + encodeURIComponent(correctSlug);
+    if (window.location.search !== '?s=' + encodeURIComponent(correctSlug)) {
+      history.replaceState(null, '', cleanUrl);
+    }
+  }
+
+  immobile = art;
+  render(art);
   hideLoading();
 
   // Chatbot dopo 3.5s
-  setTimeout(() => initChatbot(data), 3500);
+  setTimeout(() => initChatbot(art), 3500);
 }
 
 function showError() {
@@ -694,10 +737,57 @@ function cap(s) {
 }
 
 function render(d) {
-  // Meta
-  const t = d.titolo || 'Immobile';
-  document.getElementById('page-title').textContent = t + ' — Righetto Immobiliare';
-  document.getElementById('page-desc').setAttribute('content', t + ' a ' + (d.comune||'Padova'));
+  // Meta SEO — ricco di dettagli come Idealista
+  const tipologia = cap(d.tipologia || d.categoria || 'Immobile');
+  const operazione = d.tipo_operazione === 'vendita' ? 'in vendita' : d.tipo_operazione === 'affitto' ? 'in affitto' : '';
+  const comuneLabel = d.comune || 'Padova';
+  const mqLabel = d.superficie ? d.superficie + ' m²' : '';
+  const localiLabel = (d.locali || d.camere) ? (d.locali || d.camere) + ' locali' : '';
+  const seoTitle = [tipologia, operazione, 'a ' + comuneLabel].filter(Boolean).join(' ') + ' — Righetto Immobiliare Padova';
+  const seoDesc = [tipologia, 'di', mqLabel, localiLabel ? '· ' + localiLabel : '', operazione, 'a', comuneLabel, d.codice ? '· Rif. ' + d.codice : '', '— Righetto Immobiliare'].filter(Boolean).join(' ');
+  document.getElementById('page-title').textContent = seoTitle;
+  document.getElementById('page-desc').setAttribute('content', seoDesc);
+
+  // Canonical URL
+  let canonical = document.querySelector('link[rel="canonical"]');
+  if (!canonical) { canonical = document.createElement('link'); canonical.rel = 'canonical'; document.head.appendChild(canonical); }
+  canonical.href = 'https://ginocapon.github.io/index/immobile.html?s=' + encodeURIComponent(generatePropertySlug(d));
+
+  // Open Graph
+  const setOg = (prop, val) => { let m = document.querySelector('meta[property="og:'+prop+'"]'); if(!m){m=document.createElement('meta');m.setAttribute('property','og:'+prop);document.head.appendChild(m);} m.content=val; };
+  setOg('title', seoTitle);
+  setOg('description', seoDesc);
+  setOg('url', canonical.href);
+  if (Array.isArray(d.foto) && d.foto[0]) setOg('image', d.foto[0]);
+  setOg('type', 'website');
+
+  // JSON-LD Schema.org RealEstateListing
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'RealEstateListing',
+    name: seoTitle.replace(' — Righetto Immobiliare Padova', ''),
+    description: seoDesc,
+    url: canonical.href,
+    datePosted: d.created_at || new Date().toISOString(),
+    offers: {
+      '@type': 'Offer',
+      price: d.prezzo || 0,
+      priceCurrency: 'EUR',
+      availability: 'https://schema.org/InStock'
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: comuneLabel,
+      addressRegion: 'Veneto',
+      addressCountry: 'IT'
+    }
+  };
+  if (Array.isArray(d.foto) && d.foto[0]) jsonLd.image = d.foto[0];
+  if (d.superficie) jsonLd.floorSize = { '@type': 'QuantitativeValue', value: d.superficie, unitCode: 'MTK' };
+  if (d.locali || d.camere) jsonLd.numberOfRooms = d.locali || d.camere;
+  let ldScript = document.getElementById('jsonld-immobile');
+  if (!ldScript) { ldScript = document.createElement('script'); ldScript.type = 'application/ld+json'; ldScript.id = 'jsonld-immobile'; document.head.appendChild(ldScript); }
+  ldScript.textContent = JSON.stringify(jsonLd);
 
   // Breadcrumb
   document.getElementById('bc-tipo').textContent = cap(d.tipo_operazione || 'immobile');
@@ -989,7 +1079,7 @@ async function loadSimili(d) {
 
   document.getElementById('similiGrid').innerHTML = data.map(i => {
     const thumb = Array.isArray(i.foto) && i.foto[0] ? `<img src="${i.foto[0]}" alt="${i.titolo}" style="width:100%;height:100%;object-fit:cover">` : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="24" height="24" style="opacity:.18"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>`;
-    return `<a class="sim-card" href="immobile.html?id=${i.id}">
+    return `<a class="sim-card" href="immobile.html?s=${encodeURIComponent(generatePropertySlug(i))}">
       <div class="sim-img">${thumb}</div>
       <div class="sim-body">
         <div class="sim-price">${fmt(i.prezzo)}</div>
