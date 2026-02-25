@@ -326,7 +326,8 @@
   <div class="hero-search-inner">
     <h1 class="hero-title">Trova il tuo <strong>immobile ideale</strong><br>a Padova e provincia</h1>
     <div class="s-tabs">
-      <button class="s-tab active" onclick="setTab(this,'vendita')">Acquisto</button>
+      <button class="s-tab active" onclick="setTab(this,'tutti')">Tutti</button>
+      <button class="s-tab" onclick="setTab(this,'vendita')">Acquisto</button>
       <button class="s-tab" onclick="setTab(this,'affitto')">Affitto</button>
       <button class="s-tab" onclick="setTab(this,'aste')">Aste</button>
     </div>
@@ -343,8 +344,10 @@
           <option value="villa">Villa / Casa singola</option>
           <option value="appartamento">Appartamento</option>
           <option value="bifamiliare">Bifamiliare</option>
+          <option value="attico">Attico / Mansarda</option>
+          <option value="capannone">Capannone</option>
+          <option value="negozio">Negozio</option>
           <option value="ufficio">Ufficio</option>
-          <option value="locale">Locale commerciale</option>
           <option value="terreno">Terreno</option>
           <option value="garage">Garage / Box</option>
         </select>
@@ -438,7 +441,8 @@
       <div class="fp-section">
         <div class="fp-section-title">Operazione</div>
         <div class="fp-chip-row">
-          <span class="fp-chip on" onclick="toggleChip(this,'op','vendita')">Vendita</span>
+          <span class="fp-chip on" onclick="toggleChip(this,'op','tutti')">Tutti</span>
+          <span class="fp-chip" onclick="toggleChip(this,'op','vendita')">Vendita</span>
           <span class="fp-chip" onclick="toggleChip(this,'op','affitto')">Affitto</span>
           <span class="fp-chip" onclick="toggleChip(this,'op','aste')">Aste</span>
         </div>
@@ -446,12 +450,16 @@
 
       <div class="fp-section">
         <div class="fp-section-title">Tipologia immobile</div>
-        <div class="fp-check">
-          <label><input type="checkbox" checked onchange="filterCards()"> Villa / Casa singola <span class="cnt">3</span></label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Appartamento <span class="cnt">5</span></label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Bifamiliare <span class="cnt">2</span></label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Ufficio <span class="cnt">1</span></label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Locale commerciale <span class="cnt">1</span></label>
+        <div class="fp-check" id="sidebar-tipo-checks">
+          <label><input type="checkbox" checked onchange="filterCards()"> Villa / Casa singola</label>
+          <label><input type="checkbox" checked onchange="filterCards()"> Appartamento</label>
+          <label><input type="checkbox" checked onchange="filterCards()"> Bifamiliare</label>
+          <label><input type="checkbox" checked onchange="filterCards()"> Attico / Mansarda</label>
+          <label><input type="checkbox" checked onchange="filterCards()"> Capannone</label>
+          <label><input type="checkbox" checked onchange="filterCards()"> Negozio</label>
+          <label><input type="checkbox" checked onchange="filterCards()"> Ufficio</label>
+          <label><input type="checkbox" checked onchange="filterCards()"> Terreno</label>
+          <label><input type="checkbox" checked onchange="filterCards()"> Garage / Box</label>
         </div>
       </div>
 
@@ -652,7 +660,7 @@
 
   let immobili = [];
   let currentView = 'grid';
-  let currentOp = 'vendita';
+  let currentOp = 'tutti';
 
   // ── COLORI CLASSE ENERGETICA ──
   const CE_COLORS = {
@@ -787,6 +795,15 @@
     document.querySelectorAll('.s-tab').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
     currentOp = op;
+    // Sincronizza chip sidebar operazione
+    const chipRow = document.querySelector('.fp-section .fp-chip-row');
+    if (chipRow) {
+      chipRow.querySelectorAll('.fp-chip').forEach(c => c.classList.remove('on'));
+      chipRow.querySelectorAll('.fp-chip').forEach(c => {
+        const chipVal = c.getAttribute('onclick') || '';
+        if (chipVal.includes("'" + op + "'")) c.classList.add('on');
+      });
+    }
     filterCards();
   }
 
@@ -816,7 +833,22 @@
 
   // ── CHIP TOGGLE ──
   function toggleChip(el, group, val) {
-    el.classList.toggle('on');
+    if (group === 'op') {
+      // Operazione: selezione singola (come i tab)
+      const row = el.closest('.fp-chip-row');
+      row.querySelectorAll('.fp-chip').forEach(c => c.classList.remove('on'));
+      el.classList.add('on');
+      currentOp = val;
+      // Sincronizza anche i tab in alto
+      document.querySelectorAll('.s-tab').forEach(t => t.classList.remove('active'));
+      const tabMap = { 'vendita': 'Acquisto', 'affitto': 'Affitto', 'aste': 'Aste', 'tutti': 'Tutti' };
+      const label = tabMap[val] || 'Tutti';
+      document.querySelectorAll('.s-tab').forEach(t => {
+        if (t.textContent.trim() === label) t.classList.add('active');
+      });
+    } else {
+      el.classList.toggle('on');
+    }
     filterCards();
   }
   function toggleChipSingle(el, group) {
@@ -830,6 +862,28 @@
   function toggleFav(btn) {
     btn.classList.toggle('on');
     btn.title = btn.classList.contains('on') ? 'Salvato!' : 'Salva';
+  }
+
+  // ── MAPPA TIPOLOGIE: valore filtro → valori DB che devono matchare ──
+  const TIPO_MAP = {
+    'villa': ['villa','villa singola','villetta','casa singola','casa indipendente'],
+    'appartamento': ['appartamento','bilocale','trilocale','monolocale','quadrilocale'],
+    'bifamiliare': ['bifamiliare','villa bifamiliare'],
+    'attico': ['attico','mansarda','attico mansarda'],
+    'capannone': ['capannone','capannone industriale','capannone artigianale','magazzino'],
+    'negozio': ['negozio','locale commerciale','commerciale','attività commerciale'],
+    'ufficio': ['ufficio','studio','ufficio open space'],
+    'terreno': ['terreno','terreno edificabile','terreno agricolo','rurale'],
+    'garage': ['garage','box','posto auto','autorimessa']
+  };
+
+  function tipoMatches(filterVal, cardTipo) {
+    if (!filterVal) return true;
+    const ct = (cardTipo || '').toLowerCase().trim();
+    if (!ct) return false;
+    const aliases = TIPO_MAP[filterVal];
+    if (aliases) return aliases.some(a => ct.includes(a) || a.includes(ct));
+    return ct.includes(filterVal);
   }
 
   // ── FILTER ──
@@ -853,8 +907,10 @@
       const cTitle = c.querySelector('.card-title').textContent.toLowerCase();
 
       let show = true;
-      if (currentOp !== 'aste' && cOp !== currentOp) show = false;
-      if (tipo && !cTipo.includes(tipo)) show = false;
+      // Filtro operazione: 'tutti' mostra tutto
+      if (currentOp !== 'tutti' && cOp !== currentOp) show = false;
+      // Filtro tipologia con mapping intelligente
+      if (tipo && !tipoMatches(tipo, cTipo)) show = false;
       if (cPrezzo > prezzoMax) show = false;
       if (cCamere < camereMin) show = false;
       if (cMq < mqMin) show = false;
@@ -892,6 +948,18 @@
     document.getElementById('f-prezzo').value = '';
     document.getElementById('f-camere').value = '';
     document.getElementById('f-mq').value = '';
+    // Reset tab a "Tutti"
+    currentOp = 'tutti';
+    document.querySelectorAll('.s-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.s-tab').forEach(t => {
+      if (t.textContent.trim() === 'Tutti') t.classList.add('active');
+    });
+    // Reset sidebar chips
+    const chipRow = document.querySelector('.fp-section .fp-chip-row');
+    if (chipRow) {
+      chipRow.querySelectorAll('.fp-chip').forEach(c => c.classList.remove('on'));
+      chipRow.querySelector('.fp-chip')?.classList.add('on'); // "Tutti" è il primo
+    }
     document.querySelectorAll('#imm-grid .card').forEach(c => c.style.display = '');
     document.getElementById('res-count').textContent = document.querySelectorAll('#imm-grid .card').length;
     document.getElementById('no-results').style.display = 'none';
@@ -942,6 +1010,49 @@
     document.getElementById('modal').classList.remove('open');
     document.body.style.overflow = '';
   }
+
+  // ── LETTURA PARAMETRI URL (dalla ricerca home page) ──
+  (function applyUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get('tab');
+    const tipo = params.get('tipo');
+    const zona = params.get('zona');
+    const prezzoMax = params.get('prezzo_max');
+    const mqMin = params.get('mq_min');
+
+    if (tab) {
+      currentOp = tab;
+      document.querySelectorAll('.s-tab').forEach(t => t.classList.remove('active'));
+      const tabMap = { 'vendita': 'Acquisto', 'affitto': 'Affitto', 'asta': 'Aste', 'aste': 'Aste', 'tutti': 'Tutti' };
+      const label = tabMap[tab] || 'Tutti';
+      document.querySelectorAll('.s-tab').forEach(t => {
+        if (t.textContent.trim() === label) t.classList.add('active');
+      });
+    }
+    if (tipo) document.getElementById('f-tipo').value = tipo;
+    if (zona) document.getElementById('zona-input').value = zona;
+    if (prezzoMax) {
+      const sel = document.getElementById('f-prezzo');
+      // Trova l'opzione più vicina
+      let best = '';
+      Array.from(sel.options).forEach(o => {
+        if (o.value && parseInt(o.value) >= parseInt(prezzoMax)) {
+          if (!best || parseInt(o.value) < parseInt(best)) best = o.value;
+        }
+      });
+      sel.value = best || prezzoMax;
+    }
+    if (mqMin) {
+      const sel = document.getElementById('f-mq');
+      let best = '';
+      Array.from(sel.options).forEach(o => {
+        if (o.value && parseInt(o.value) <= parseInt(mqMin)) {
+          if (!best || parseInt(o.value) > parseInt(best)) best = o.value;
+        }
+      });
+      sel.value = best || mqMin;
+    }
+  })();
 
   // ── INIT ──
   loadImmobili();
