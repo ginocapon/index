@@ -847,19 +847,45 @@ class RighettoChat {
 
   // ────── SALVA RICHIESTA ──────
   async salvaRichiesta(dati) {
-    if (!this.supabase) return false;
-    try {
-      await this.supabase.from('richieste').insert([{
-        nome: dati.nome,
-        email: dati.email,
-        telefono: dati.telefono,
-        messaggio: dati.note || dati.messaggio,
-        provenienza: 'chatbot',
-        letto: false,
-        created_at: new Date().toISOString()
-      }]);
-      return true;
-    } catch { return false; }
+    let supaOk = false;
+    let formspreeOk = false;
+
+    // Supabase
+    if (this.supabase) {
+      try {
+        await this.supabase.from('richieste').insert([{
+          nome: dati.nome,
+          email: dati.email,
+          telefono: dati.telefono,
+          messaggio: dati.note || dati.messaggio,
+          provenienza: 'chatbot',
+          letto: false,
+          created_at: new Date().toISOString()
+        }]);
+        supaOk = true;
+      } catch { supaOk = false; }
+    }
+
+    // Formspree — notifica email
+    if (typeof SERVIZI_CONFIG !== 'undefined' && SERVIZI_CONFIG.FORMSPREE_ID && SERVIZI_CONFIG.FORMSPREE_ID !== 'IL_TUO_FORM_ID') {
+      try {
+        const r = await fetch('https://formspree.io/f/' + SERVIZI_CONFIG.FORMSPREE_ID, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            nome: dati.nome,
+            email: dati.email,
+            telefono: dati.telefono,
+            messaggio: dati.note || dati.messaggio,
+            provenienza: 'chatbot',
+            _subject: 'Nuovo contatto dal chatbot: ' + dati.nome
+          })
+        });
+        formspreeOk = r.ok;
+      } catch { formspreeOk = false; }
+    }
+
+    return supaOk || formspreeOk;
   }
 
   // ────── ELABORA MESSAGGIO ──────

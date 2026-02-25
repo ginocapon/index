@@ -176,7 +176,7 @@
           <option>Altro</option>
         </select>
       </div>
-      <div class="field"><label>Comune / Zona di interesse</label><input type="text" placeholder="Es. Padova centro, Albignasego, Curtarolo..."></div>
+      <div class="field"><label>Comune / Zona di interesse</label><input type="text" id="f-zona" placeholder="Es. Padova centro, Albignasego, Curtarolo..."></div>
       <div class="field"><label>Messaggio</label><textarea id="f-msg" placeholder="Descrivici la tua situazione o la tua richiesta. Più dettagli ci fornisci, più precisa sarà la nostra risposta.&#10;&#10;Es: Ho una villa di 300 mq a Cadoneghe che vorrei vendere entro fine anno. Quando possiamo fare una valutazione?"></textarea></div>
       <div class="fchk">
         <input type="checkbox" id="f-gdpr">
@@ -268,21 +268,101 @@
     <div class="fbot"><span>© 2025 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
   </div>
 </footer>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-function sendForm(){
-  const n=document.getElementById('f-nome').value.trim();
-  const e=document.getElementById('f-email').value.trim();
-  const t=document.getElementById('f-tel').value.trim();
-  const m=document.getElementById('f-msg').value.trim();
-  const g=document.getElementById('f-gdpr').checked;
-  if(!n||!t){alert('Inserisci nome e telefono');return}
-  if(!g){alert('Accetta la privacy policy');return}
-  const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');
-  if(sb){sb.from('richieste').insert([{nome:n,email:e,telefono:t,messaggio:m,provenienza:'form-contatti',letto:false}]).then(()=>{alert('Richiesta inviata! Ti ricontatteremo presto.');document.querySelector('form')&&document.querySelector('form').reset()}).catch(()=>alert('Errore. Chiama il 049 884 3484'))}
-  else{alert('Richiesta registrata. Ti ricontatteremo!')}
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
+<script>
+async function sendForm(){
+  const nome = document.getElementById('f-nome').value.trim();
+  const cognome = document.getElementById('f-cog').value.trim();
+  const tel = document.getElementById('f-tel').value.trim();
+  const email = document.getElementById('f-mail').value.trim();
+  const oggetto = document.getElementById('f-obj').value;
+  const zona = document.getElementById('f-zona').value.trim();
+  const msg = document.getElementById('f-msg').value.trim();
+  const gdpr = document.getElementById('f-gdpr').checked;
+  const news = document.getElementById('f-news').checked;
+
+  if(!nome || !tel){ alert('Inserisci nome e telefono'); return; }
+  if(!gdpr){ alert('Accetta la privacy policy per procedere'); return; }
+
+  const btn = document.querySelector('.fsubmit');
+  btn.disabled = true;
+  btn.textContent = 'Invio in corso...';
+
+  const nomeCompleto = nome + (cognome ? ' ' + cognome : '');
+
+  // ── 1. FORMSPREE — Notifica email ──
+  let formspreeOk = false;
+  if (SERVIZI_CONFIG.FORMSPREE_ID && SERVIZI_CONFIG.FORMSPREE_ID !== 'IL_TUO_FORM_ID') {
+    try {
+      const r = await fetch('https://formspree.io/f/' + SERVIZI_CONFIG.FORMSPREE_ID, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          nome: nomeCompleto,
+          email: email,
+          telefono: tel,
+          oggetto: oggetto,
+          zona: zona,
+          messaggio: msg,
+          newsletter: news ? 'Si' : 'No',
+          _subject: 'Nuovo contatto dal sito: ' + nomeCompleto
+        })
+      });
+      formspreeOk = r.ok;
+    } catch(e) { formspreeOk = false; }
+  }
+
+  // ── 2. SUPABASE — Salvataggio database ──
+  let supaOk = false;
+  try {
+    const sb = window.supabase && supabase.createClient(
+      'https://qwkwkemuabfwvwuqrxlu.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc'
+    );
+    if (sb) {
+      await sb.from('richieste').insert([{
+        nome: nomeCompleto,
+        email: email,
+        telefono: tel,
+        messaggio: (oggetto ? '[' + oggetto + '] ' : '') + (zona ? 'Zona: ' + zona + ' — ' : '') + msg,
+        provenienza: 'form-contatti',
+        letto: false
+      }]);
+      supaOk = true;
+    }
+  } catch(e) { supaOk = false; }
+
+  // ── 3. BREVO — Iscrizione newsletter ──
+  if (news && email && SERVIZI_CONFIG.BREVO_FORM_URL) {
+    try {
+      await fetch(SERVIZI_CONFIG.BREVO_FORM_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, attributes: { NOME: nomeCompleto, TELEFONO: tel } })
+      });
+    } catch(e) { /* newsletter non critica */ }
+  }
+
+  // ── RISULTATO ──
+  btn.disabled = false;
+  btn.textContent = 'INVIA MESSAGGIO';
+
+  if (formspreeOk || supaOk) {
+    document.getElementById('success').style.display = 'block';
+    btn.style.display = 'none';
+    ['f-nome','f-cog','f-tel','f-mail','f-zona','f-msg'].forEach(function(id){
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('f-obj').selectedIndex = 0;
+    document.getElementById('f-gdpr').checked = false;
+    document.getElementById('f-news').checked = false;
+  } else {
+    alert('Errore nell\'invio. Chiama il 049 884 3484 o scrivici su WhatsApp.');
+  }
 }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/chatbot.js"></script>
 <script src="js/cookie-consent.js"></script>
 </body>
