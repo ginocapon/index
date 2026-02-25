@@ -2719,7 +2719,7 @@ function generateSlug(titolo) {
     .replace(/[àáâãäå]/g,'a').replace(/[èéêë]/g,'e').replace(/[ìíîï]/g,'i')
     .replace(/[òóôõö]/g,'o').replace(/[ùúûü]/g,'u').replace(/[ç]/g,'c')
     .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,80);
-  if (!/padova|limena|abano|selvazzano|rubano|vigonza|cadoneghe|noventa|saonara|cittadella|montegrotto|este|monselice|camposampiero|piove/i.test(s)) s += '-padova';
+  if (!s.endsWith('-padova') && !s.endsWith('padova')) s += '-padova';
   return s;
 }
 function updateSlugPreview() {
