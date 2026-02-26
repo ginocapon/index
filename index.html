@@ -19,6 +19,7 @@
 <meta property="og:locale" content="it_IT">
 <link rel="canonical" href="https://righettoimmobiliare.it/">
 <link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/nav-mobile.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root {
@@ -2034,17 +2035,7 @@ try { if(window.supabase) sb = window.supabase.createClient(SB_URL, SB_KEY); } c
 const nav = document.getElementById('navbar');
 window.addEventListener('scroll',()=>{ nav.classList.toggle('scrolled', window.scrollY>60); });
 
-/* ══ BURGER MENU ══ */
-document.getElementById('burgerBtn').addEventListener('click', function(){
-  this.classList.toggle('open');
-  document.getElementById('navMobile').classList.toggle('open');
-});
-document.querySelectorAll('.nav-mobile a').forEach(a=>{
-  a.addEventListener('click',()=>{
-    document.getElementById('burgerBtn').classList.remove('open');
-    document.getElementById('navMobile').classList.remove('open');
-  });
-});
+/* ══ BURGER MENU — gestito da js/nav-mobile.js ══ */
 
 
 function toggleQ(btn){
@@ -2393,6 +2384,7 @@ function loadVideo(wrap) {
   wrap.appendChild(ifr);
 }
 </script>
+<script src="js/nav-mobile.js"></script>
 <script src="js/cookie-consent.js"></script>
 </body>
 </html>
