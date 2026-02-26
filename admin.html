@@ -1108,7 +1108,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 }
 .email-item {
   display: grid;
-  grid-template-columns: 36px 1fr 2fr 90px 50px;
+  grid-template-columns: 36px 24px 1fr 2fr 90px 50px;
   align-items: center;
   gap: 8px;
   padding: 10px 16px;
@@ -1117,6 +1117,85 @@ tr:hover td { background: rgba(206,224,143,0.06); }
   cursor: pointer;
   transition: background 0.1s;
 }
+.email-item-star {
+  font-size: 1.1rem;
+  color: var(--caffe3);
+  cursor: pointer;
+  transition: color 0.15s, transform 0.15s;
+  user-select: none;
+  text-align: center;
+  line-height: 1;
+}
+.email-item-star:hover { color: #f1c40f; transform: scale(1.2); }
+.email-item-star.starred { color: #f1c40f; }
+.email-bulk-bar {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--nero);
+  color: white;
+  font-size: 0.78rem;
+  flex-wrap: wrap;
+}
+.email-bulk-bar.visible { display: flex; }
+.email-bulk-bar .bulk-count { font-weight: 600; margin-right: 4px; }
+.email-bulk-bar button {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.email-bulk-bar button:hover { background: rgba(255,255,255,0.25); }
+.email-bulk-bar button.bulk-danger { background: rgba(231,76,60,0.3); border-color: rgba(231,76,60,0.4); }
+.email-bulk-bar button.bulk-danger:hover { background: rgba(231,76,60,0.5); }
+.csv-dropzone {
+  border: 2px dashed var(--caffe3);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  margin-bottom: 16px;
+}
+.csv-dropzone:hover, .csv-dropzone.dragover {
+  border-color: var(--nero);
+  background: rgba(206,224,143,0.1);
+}
+.csv-preview-table {
+  width: 100%;
+  font-size: 0.78rem;
+  border-collapse: collapse;
+  margin-top: 12px;
+  max-height: 300px;
+  overflow-y: auto;
+  display: block;
+}
+.csv-preview-table th, .csv-preview-table td {
+  padding: 6px 10px;
+  border: 1px solid rgba(0,0,0,0.08);
+  text-align: left;
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.csv-preview-table th {
+  background: var(--nero);
+  color: white;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+.csv-preview-table tr:nth-child(even) { background: var(--sfondo); }
 .email-item:hover { background: rgba(206,224,143,0.06); }
 .email-item.active { background: rgba(206,224,143,0.15); }
 .email-item.unread { font-weight: 600; }
@@ -2438,6 +2517,18 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <span style="font-size:0.75rem;color:var(--caffe2)" id="emailStatusText">Non connesso</span>
               </div>
 
+              <!-- Bulk Actions Bar -->
+              <div class="email-bulk-bar" id="emailBulkBar">
+                <span class="bulk-count" id="bulkCount">0</span> selezionate
+                <button onclick="bulkMarkRead()">Segna come letto</button>
+                <button onclick="bulkMarkUnread()">Segna come non letto</button>
+                <button onclick="bulkToggleStar()">Importante</button>
+                <button onclick="bulkArchive()">Archivia</button>
+                <button class="bulk-danger" onclick="bulkTrash()">Elimina</button>
+                <button onclick="bulkSelectAll()">Seleziona tutte</button>
+                <button onclick="bulkDeselectAll()">Deseleziona</button>
+              </div>
+
               <div class="email-split">
                 <!-- Lista Email -->
                 <div class="email-list-area" id="emailListArea">
@@ -2481,6 +2572,14 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                       <button class="btn btn-secondary btn-sm" onclick="forwardEmail()">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 17 20 12 15 7"/><path d="M4 18v-2a4 4 0 0 0 4-4h12"/></svg>
                         Inoltra
+                      </button>
+                      <button class="btn btn-secondary btn-sm" onclick="toggleCurrentEmailReadStatus()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+                        <span id="btnReadStatusText">Segna come non letto</span>
+                      </button>
+                      <button class="btn btn-secondary btn-sm" onclick="toggleCurrentEmailStar()" id="btnStarCurrent">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <span id="btnStarText">Importante</span>
                       </button>
                       <button class="btn btn-secondary btn-sm" onclick="openLinkPropertyModal()">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
@@ -2656,6 +2755,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <option value="manuale">Manuali</option>
               </select>
               <input class="table-search" type="text" placeholder="Cerca cliente..." id="searchClienti" oninput="filterClientiTable()">
+              <button class="btn btn-secondary btn-sm" onclick="openCsvImportModal()">Importa CSV</button>
               <button class="btn btn-primary btn-sm" onclick="openClienteModal()">+ Nuovo Cliente</button>
             </div>
           </div>
@@ -2728,6 +2828,49 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <button class="btn btn-secondary" onclick="closeClienteModal()">Annulla</button>
             <button class="btn btn-danger" id="btnDeleteCliente" onclick="deleteCliente()" style="display:none">Elimina</button>
             <button class="btn btn-primary" onclick="saveCliente()">Salva Cliente</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL IMPORTA CSV CLIENTI -->
+      <div class="modal-overlay" id="csvImportModal">
+        <div class="modal" style="max-width:750px">
+          <div class="modal-header">
+            <h2>Importa Clienti da CSV</h2>
+            <button class="modal-close" onclick="closeCsvImportModal()">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="csv-dropzone" id="csvDropzone" onclick="document.getElementById('csvFileInput').click()"
+              ondragover="event.preventDefault();this.classList.add('dragover')"
+              ondragleave="this.classList.remove('dragover')"
+              ondrop="event.preventDefault();this.classList.remove('dragover');handleCsvDrop(event)">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--caffe2)" stroke-width="1.5" style="display:block;margin:0 auto 8px">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              <p style="font-size:0.88rem;font-weight:600;color:var(--testo)">Trascina qui il file CSV oppure clicca per selezionarlo</p>
+              <p style="font-size:0.78rem;color:var(--caffe2);margin-top:4px">Formati accettati: .csv, .txt (separatore: virgola, punto e virgola, o tab)</p>
+              <input type="file" id="csvFileInput" accept=".csv,.txt" style="display:none" onchange="handleCsvFile(this.files[0])">
+            </div>
+            <div id="csvFileName" style="font-size:0.82rem;color:var(--nero);font-weight:600;margin-bottom:8px;display:none"></div>
+
+            <!-- Column Mapping -->
+            <div id="csvMappingArea" style="display:none">
+              <p style="font-size:0.82rem;color:var(--caffe2);margin-bottom:12px">Mappa le colonne del CSV ai campi del database:</p>
+              <div class="form-grid" id="csvMappingGrid"></div>
+            </div>
+
+            <!-- Preview -->
+            <div id="csvPreviewArea" style="display:none;margin-top:16px">
+              <p style="font-size:0.82rem;font-weight:600;color:var(--nero);margin-bottom:8px">Anteprima (<span id="csvPreviewCount">0</span> righe):</p>
+              <div style="max-height:250px;overflow:auto;border:1px solid rgba(0,0,0,0.08);border-radius:8px">
+                <table class="csv-preview-table" id="csvPreviewTable"></table>
+              </div>
+            </div>
+            <div id="csvError" style="color:var(--rosso);font-size:0.82rem;margin-top:8px;display:none"></div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeCsvImportModal()">Annulla</button>
+            <button class="btn btn-primary" id="btnCsvImport" onclick="doCsvImport()" style="display:none">Importa Clienti</button>
           </div>
         </div>
       </div>
@@ -2847,6 +2990,13 @@ function verifyTotp() {
   const secret = localStorage.getItem('rig_2fa_secret');
   if (!secret || !code) return;
 
+  // Check if OTPAuth library is loaded
+  if (typeof OTPAuth === 'undefined') {
+    document.getElementById('totpError').textContent = 'Errore: libreria 2FA non caricata. Ricarica la pagina.';
+    document.getElementById('totpError').style.display = 'block';
+    return;
+  }
+
   try {
     const totp = new OTPAuth.TOTP({
       issuer: 'Righetto Immobiliare',
@@ -2857,10 +3007,11 @@ function verifyTotp() {
       secret: OTPAuth.Secret.fromBase32(secret)
     });
 
-    const delta = totp.validate({ token: code, window: 1 });
+    const delta = totp.validate({ token: code, window: 2 });
     if (delta !== null) {
       grantAccess();
     } else {
+      document.getElementById('totpError').textContent = 'Codice non valido';
       document.getElementById('totpError').style.display = 'block';
       document.getElementById('loginTotp').style.borderColor = 'var(--rosso)';
       document.getElementById('loginTotp').value = '';
@@ -2868,6 +3019,7 @@ function verifyTotp() {
     }
   } catch(e) {
     console.error('TOTP verify error:', e);
+    document.getElementById('totpError').textContent = 'Errore verifica: ' + e.message;
     document.getElementById('totpError').style.display = 'block';
   }
 }
@@ -2885,6 +3037,11 @@ function loginStep1Back() {
 function show2FASetup() {
   document.getElementById('loginStep1').style.display = 'none';
   document.getElementById('loginSetup2FA').style.display = 'block';
+
+  if (typeof OTPAuth === 'undefined') {
+    document.getElementById('qrCodeContainer').innerHTML = '<p style="color:var(--rosso);font-size:0.82rem">Errore: libreria OTPAuth non caricata. Controlla la connessione internet e ricarica la pagina.</p>';
+    return;
+  }
 
   // Generate new TOTP secret
   const secret = new OTPAuth.Secret({ size: 20 });
@@ -2923,6 +3080,13 @@ function generateQRCode(text) {
 function confirmTotpSetup() {
   const code = document.getElementById('setupTotpCode').value.trim();
   if (!code || !pendingTotpSecret) {
+    document.getElementById('setupError').textContent = 'Inserisci il codice a 6 cifre dall\'app Authenticator';
+    document.getElementById('setupError').style.display = 'block';
+    return;
+  }
+
+  if (typeof OTPAuth === 'undefined') {
+    document.getElementById('setupError').textContent = 'Errore: libreria 2FA non caricata. Ricarica la pagina.';
     document.getElementById('setupError').style.display = 'block';
     return;
   }
@@ -2937,18 +3101,20 @@ function confirmTotpSetup() {
       secret: OTPAuth.Secret.fromBase32(pendingTotpSecret)
     });
 
-    const delta = totp.validate({ token: code, window: 1 });
+    const delta = totp.validate({ token: code, window: 2 });
     if (delta !== null) {
       // Code is correct — save secret and grant access
       localStorage.setItem('rig_2fa_secret', pendingTotpSecret);
       pendingTotpSecret = null;
       grantAccess();
     } else {
+      document.getElementById('setupError').textContent = 'Codice non corretto. Riprova.';
       document.getElementById('setupError').style.display = 'block';
       document.getElementById('setupTotpCode').style.borderColor = 'var(--rosso)';
     }
   } catch(e) {
     console.error('TOTP setup error:', e);
+    document.getElementById('setupError').textContent = 'Errore: ' + e.message;
     document.getElementById('setupError').style.display = 'block';
   }
 }
@@ -4386,7 +4552,221 @@ async function deleteClienteById(id) {
   }
 }
 
-// escHtml is defined in the email section below (hoisted)
+// ══════════════════════════════════════
+// CSV IMPORT FOR CLIENTI
+// ══════════════════════════════════════
+let csvParsedData = [];
+let csvHeaders = [];
+const csvFieldMap = {
+  nome: ['nome', 'name', 'nome e cognome', 'nome cognome', 'nominativo', 'cliente', 'full name', 'fullname'],
+  email: ['email', 'e-mail', 'mail', 'posta', 'email address'],
+  telefono: ['telefono', 'tel', 'phone', 'cellulare', 'cell', 'mobile', 'numero'],
+  fonte: ['fonte', 'source', 'origine', 'provenienza', 'canale'],
+  interesse: ['interesse', 'interest', 'ricerca', 'richiesta', 'cerca', 'note ricerca'],
+  note: ['note', 'notes', 'commenti', 'osservazioni', 'appunti', 'descrizione']
+};
+
+function openCsvImportModal() {
+  csvParsedData = [];
+  csvHeaders = [];
+  document.getElementById('csvFileInput').value = '';
+  document.getElementById('csvFileName').style.display = 'none';
+  document.getElementById('csvMappingArea').style.display = 'none';
+  document.getElementById('csvPreviewArea').style.display = 'none';
+  document.getElementById('csvError').style.display = 'none';
+  document.getElementById('btnCsvImport').style.display = 'none';
+  document.getElementById('csvImportModal').classList.add('open');
+}
+
+function closeCsvImportModal() {
+  document.getElementById('csvImportModal').classList.remove('open');
+}
+
+function handleCsvDrop(event) {
+  const files = event.dataTransfer.files;
+  if (files.length > 0) handleCsvFile(files[0]);
+}
+
+function handleCsvFile(file) {
+  if (!file) return;
+  const ext = file.name.split('.').pop().toLowerCase();
+  if (!['csv', 'txt'].includes(ext)) {
+    showCsvError('Formato non supportato. Usa file .csv o .txt');
+    return;
+  }
+
+  document.getElementById('csvFileName').textContent = 'File: ' + file.name + ' (' + (file.size / 1024).toFixed(1) + ' KB)';
+  document.getElementById('csvFileName').style.display = 'block';
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    parseCsvContent(e.target.result);
+  };
+  reader.onerror = function() {
+    showCsvError('Errore nella lettura del file');
+  };
+  reader.readAsText(file, 'UTF-8');
+}
+
+function parseCsvContent(text) {
+  // Detect separator: semicolon, comma, or tab
+  const firstLine = text.split('\n')[0];
+  let separator = ',';
+  if (firstLine.split(';').length > firstLine.split(',').length) separator = ';';
+  if (firstLine.split('\t').length > firstLine.split(separator).length) separator = '\t';
+
+  const lines = text.split('\n').map(l => l.trim()).filter(l => l);
+  if (lines.length < 2) {
+    showCsvError('Il file deve contenere almeno un\'intestazione e una riga di dati');
+    return;
+  }
+
+  csvHeaders = parseCsvLine(lines[0], separator);
+  csvParsedData = [];
+
+  for (let i = 1; i < lines.length; i++) {
+    const values = parseCsvLine(lines[i], separator);
+    if (values.length > 0 && values.some(v => v.trim())) {
+      const row = {};
+      csvHeaders.forEach((h, idx) => { row[h] = (values[idx] || '').trim(); });
+      csvParsedData.push(row);
+    }
+  }
+
+  if (csvParsedData.length === 0) {
+    showCsvError('Nessuna riga di dati trovata nel file');
+    return;
+  }
+
+  document.getElementById('csvError').style.display = 'none';
+  renderCsvMapping();
+  renderCsvPreview();
+  document.getElementById('btnCsvImport').style.display = 'inline-flex';
+}
+
+function parseCsvLine(line, sep) {
+  const result = [];
+  let current = '';
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') {
+      if (inQuotes && line[i + 1] === '"') { current += '"'; i++; }
+      else { inQuotes = !inQuotes; }
+    } else if (ch === sep && !inQuotes) {
+      result.push(current); current = '';
+    } else {
+      current += ch;
+    }
+  }
+  result.push(current);
+  return result;
+}
+
+function renderCsvMapping() {
+  const grid = document.getElementById('csvMappingGrid');
+  const dbFields = ['nome', 'email', 'telefono', 'fonte', 'interesse', 'note'];
+  const labels = { nome: 'Nome', email: 'Email', telefono: 'Telefono', fonte: 'Fonte', interesse: 'Interesse', note: 'Note' };
+
+  grid.innerHTML = dbFields.map(field => {
+    // Auto-detect best match
+    const aliases = csvFieldMap[field] || [];
+    let bestMatch = '';
+    for (const h of csvHeaders) {
+      if (aliases.some(a => h.toLowerCase().trim() === a)) { bestMatch = h; break; }
+    }
+    if (!bestMatch) {
+      for (const h of csvHeaders) {
+        if (aliases.some(a => h.toLowerCase().trim().includes(a))) { bestMatch = h; break; }
+      }
+    }
+
+    const options = csvHeaders.map(h =>
+      '<option value="' + escHtml(h) + '"' + (h === bestMatch ? ' selected' : '') + '>' + escHtml(h) + '</option>'
+    ).join('');
+
+    return '<div class="form-group"><label>' + labels[field] + '</label>' +
+      '<select id="csvMap_' + field + '" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:\'Montserrat\',sans-serif;font-size:0.8rem">' +
+      '<option value="">(non mappare)</option>' + options + '</select></div>';
+  }).join('');
+
+  document.getElementById('csvMappingArea').style.display = 'block';
+}
+
+function renderCsvPreview() {
+  document.getElementById('csvPreviewCount').textContent = csvParsedData.length;
+  const table = document.getElementById('csvPreviewTable');
+  const previewRows = csvParsedData.slice(0, 10);
+
+  let html = '<thead><tr>' + csvHeaders.map(h => '<th>' + escHtml(h) + '</th>').join('') + '</tr></thead><tbody>';
+  previewRows.forEach(row => {
+    html += '<tr>' + csvHeaders.map(h => '<td>' + escHtml(row[h] || '') + '</td>').join('') + '</tr>';
+  });
+  if (csvParsedData.length > 10) {
+    html += '<tr><td colspan="' + csvHeaders.length + '" style="text-align:center;color:var(--caffe2);font-style:italic">... e altre ' + (csvParsedData.length - 10) + ' righe</td></tr>';
+  }
+  html += '</tbody>';
+  table.innerHTML = html;
+  document.getElementById('csvPreviewArea').style.display = 'block';
+}
+
+async function doCsvImport() {
+  const mapping = {};
+  ['nome', 'email', 'telefono', 'fonte', 'interesse', 'note'].forEach(field => {
+    const sel = document.getElementById('csvMap_' + field);
+    if (sel && sel.value) mapping[field] = sel.value;
+  });
+
+  if (!mapping.nome && !mapping.email) {
+    showCsvError('Devi mappare almeno il campo Nome o Email');
+    return;
+  }
+
+  const records = csvParsedData.map(row => {
+    const rec = {};
+    Object.entries(mapping).forEach(([dbField, csvCol]) => {
+      rec[dbField] = row[csvCol] || '';
+    });
+    if (!rec.fonte) rec.fonte = 'csv_import';
+    return rec;
+  }).filter(r => r.nome || r.email);
+
+  if (records.length === 0) {
+    showCsvError('Nessun record valido da importare');
+    return;
+  }
+
+  document.getElementById('btnCsvImport').disabled = true;
+  document.getElementById('btnCsvImport').textContent = 'Importazione in corso...';
+
+  try {
+    // Insert in batches of 50
+    const batchSize = 50;
+    let imported = 0;
+    for (let i = 0; i < records.length; i += batchSize) {
+      const batch = records.slice(i, i + batchSize);
+      const { error } = await sb.from('clienti').insert(batch);
+      if (error) throw error;
+      imported += batch.length;
+    }
+
+    toast(imported + ' clienti importati con successo!', 'success');
+    closeCsvImportModal();
+    loadClienti();
+  } catch(err) {
+    console.error('CSV import error:', err);
+    showCsvError('Errore importazione: ' + (err.message || 'Errore sconosciuto'));
+  } finally {
+    document.getElementById('btnCsvImport').disabled = false;
+    document.getElementById('btnCsvImport').textContent = 'Importa Clienti';
+  }
+}
+
+function showCsvError(msg) {
+  const el = document.getElementById('csvError');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
 
 // ══════════════════════════════════════
 // EMAIL CLIENT — GMAIL API INTEGRATION (Multi-Account + Dynamic Labels)
@@ -4435,14 +4815,87 @@ function initEmailSection() {
       refreshEmails();
     }
   } else if (gmailAccounts.length > 0) {
-    // Auto-reconnect if we have saved accounts
-    document.getElementById('emailAuthBanner').style.display = 'block';
-    document.getElementById('emailClient').style.display = 'none';
-    renderAccountSelector();
+    // Try auto-reconnect: restore saved token and attempt silent re-auth
+    const acc = gmailAccounts[activeAccountIndex] || gmailAccounts[0];
+    if (acc && acc.token) {
+      gmailAccessToken = acc.token;
+      // Set token in gapi client if available
+      if (gapiInited && typeof gapi !== 'undefined' && gapi.client) {
+        gapi.client.setToken({ access_token: acc.token });
+      }
+      document.getElementById('emailAuthBanner').style.display = 'none';
+      document.getElementById('emailClient').style.display = 'block';
+      document.getElementById('emailStatusText').textContent = 'Riconnessione...';
+      document.getElementById('emailStatusText').style.color = '#e67e22';
+      renderAccountSelector();
+      // Test if the token is still valid
+      tryAutoReconnect();
+    } else {
+      // No saved token, try silent re-auth
+      attemptSilentReauth();
+    }
   } else {
     document.getElementById('emailAuthBanner').style.display = 'block';
     document.getElementById('emailClient').style.display = 'none';
   }
+}
+
+async function tryAutoReconnect() {
+  try {
+    // Test the saved token with a lightweight API call
+    const resp = await gapi.client.gmail.users.getProfile({ userId: 'me' });
+    if (resp.result && resp.result.emailAddress) {
+      document.getElementById('emailStatusText').textContent = 'Connesso — ' + resp.result.emailAddress;
+      document.getElementById('emailStatusText').style.color = 'var(--verde)';
+      toast('Gmail riconnesso automaticamente!', 'success');
+      loadGmailLabels();
+      refreshEmails();
+      return;
+    }
+  } catch(e) {
+    console.log('Saved token expired, attempting silent re-auth...');
+  }
+  // Token expired — try silent re-auth
+  attemptSilentReauth();
+}
+
+function attemptSilentReauth() {
+  if (!gmailClientId) {
+    showReconnectBanner();
+    return;
+  }
+  if (!gmailTokenClient) gisLoaded();
+  if (gmailTokenClient) {
+    try {
+      // Try without prompt (silent) — works if user previously consented
+      gmailTokenClient.requestAccessToken({ prompt: '' });
+    } catch(e) {
+      console.log('Silent re-auth failed, showing reconnect banner');
+      showReconnectBanner();
+    }
+  } else {
+    showReconnectBanner();
+  }
+}
+
+function showReconnectBanner() {
+  gmailAccessToken = null;
+  document.getElementById('emailAuthBanner').style.display = 'block';
+  document.getElementById('emailClient').style.display = 'none';
+  // Replace banner text with reconnect message
+  const banner = document.getElementById('emailAuthBanner');
+  if (banner && gmailAccounts.length > 0) {
+    const existingBtn = banner.querySelector('.btn-reconnect');
+    if (!existingBtn) {
+      const reconnectDiv = document.createElement('div');
+      reconnectDiv.style.cssText = 'text-align:center;padding:16px';
+      reconnectDiv.innerHTML = '<p style="font-size:0.88rem;color:var(--caffe2);margin-bottom:12px">La sessione Gmail e\' scaduta. Clicca per riconnetterti:</p>' +
+        '<button class="btn btn-primary btn-reconnect" onclick="gmailAuth()" style="margin-right:10px">Riconnetti Gmail</button>' +
+        '<button class="btn btn-secondary" onclick="loadDemoEmails()">Modalita\' Demo</button>';
+      banner.appendChild(reconnectDiv);
+    }
+  }
+  renderAccountSelector();
 }
 
 // ── DEMO MODE ──
@@ -4570,6 +5023,8 @@ async function showEmail(emailId) {
   document.getElementById('previewBody').innerHTML = bodyHtml;
 
   renderPropertyLink(emailId);
+  updatePreviewReadButton();
+  updatePreviewStarButton();
 }
 
 // GAPI init
@@ -5181,6 +5636,10 @@ async function refreshEmails() {
   }
 }
 
+// Starred emails stored in localStorage
+let emailStarredState = {};
+try { emailStarredState = JSON.parse(localStorage.getItem('email_starred') || '{}'); } catch(e) { emailStarredState = {}; }
+
 function renderEmailList() {
   const listArea = document.getElementById('emailListItems');
   const empty = document.getElementById('emailListEmpty');
@@ -5188,6 +5647,7 @@ function renderEmailList() {
 
   if (currentEmails.length === 0) {
     empty.style.display = 'block';
+    updateBulkBar();
     return;
   }
   empty.style.display = 'none';
@@ -5199,19 +5659,227 @@ function renderEmailList() {
     const linkedBadge = linked
       ? `<span class="badge badge-oro">${linked.codice}</span>`
       : '';
+    const isStarred = emailStarredState[email.id] || (email.labelIds && email.labelIds.includes('STARRED'));
 
     const div = document.createElement('div');
     div.className = 'email-item' + (email.unread ? ' unread' : '') + (email.id === currentEmailId ? ' active' : '');
+    div.dataset.emailId = email.id;
     div.innerHTML = `
-      <input type="checkbox" class="email-item-check" onclick="event.stopPropagation()">
+      <input type="checkbox" class="email-item-check" data-email-id="${email.id}" onclick="event.stopPropagation();updateBulkBar()">
+      <div class="email-item-star ${isStarred ? 'starred' : ''}" onclick="event.stopPropagation();toggleStar('${email.id}')" title="Importante">&#9733;</div>
       <div class="email-item-from" title="${escHtml(email.from)}">${escHtml(fromName)}</div>
-      <div class="email-item-subject" title="${escHtml(email.subject)}">${escHtml(email.subject)} <span style="color:var(--caffe3);font-weight:400">— ${escHtml(email.snippet.substring(0, 60))}</span></div>
+      <div class="email-item-subject" title="${escHtml(email.subject)}">${escHtml(email.subject)} <span style="color:var(--caffe3);font-weight:400">&mdash; ${escHtml(email.snippet.substring(0, 60))}</span></div>
       <div class="email-item-date">${dateStr}</div>
       <div class="email-item-property">${linkedBadge}</div>
     `;
     div.onclick = () => showEmail(email.id);
     listArea.appendChild(div);
   });
+
+  updateBulkBar();
+}
+
+// ── STAR / IMPORTANT ──
+
+function toggleStar(emailId) {
+  emailStarredState[emailId] = !emailStarredState[emailId];
+  localStorage.setItem('email_starred', JSON.stringify(emailStarredState));
+
+  // Update star icon in list
+  const starEl = document.querySelector('[data-email-id="' + emailId + '"]')?.closest('.email-item')?.querySelector('.email-item-star');
+  if (starEl) starEl.classList.toggle('starred');
+
+  // If real Gmail, toggle STARRED label
+  if (!demoMode && gmailAccessToken) {
+    const isStarred = emailStarredState[emailId];
+    gapi.client.gmail.users.messages.modify({
+      userId: 'me',
+      id: emailId,
+      addLabelIds: isStarred ? ['STARRED'] : [],
+      removeLabelIds: isStarred ? [] : ['STARRED']
+    }).catch(e => console.error('Star toggle error:', e));
+  }
+}
+
+function toggleCurrentEmailStar() {
+  if (!currentEmailId) return;
+  toggleStar(currentEmailId);
+  updatePreviewStarButton();
+}
+
+function updatePreviewStarButton() {
+  if (!currentEmailId) return;
+  const isStarred = emailStarredState[currentEmailId];
+  const textEl = document.getElementById('btnStarText');
+  if (textEl) {
+    textEl.textContent = isStarred ? 'Rimuovi Importante' : 'Importante';
+  }
+}
+
+// ── MARK READ / UNREAD ──
+
+function toggleCurrentEmailReadStatus() {
+  if (!currentEmailId) return;
+  const email = currentEmails.find(e => e.id === currentEmailId);
+  if (!email) return;
+
+  email.unread = !email.unread;
+
+  if (!demoMode && gmailAccessToken) {
+    if (email.unread) {
+      gapi.client.gmail.users.messages.modify({
+        userId: 'me', id: currentEmailId,
+        addLabelIds: ['UNREAD'], removeLabelIds: []
+      }).catch(e => console.error('Mark unread error:', e));
+    } else {
+      gapi.client.gmail.users.messages.modify({
+        userId: 'me', id: currentEmailId,
+        addLabelIds: [], removeLabelIds: ['UNREAD']
+      }).catch(e => console.error('Mark read error:', e));
+    }
+  }
+
+  renderEmailList();
+  updateUnreadBadge();
+  updatePreviewReadButton();
+}
+
+function updatePreviewReadButton() {
+  if (!currentEmailId) return;
+  const email = currentEmails.find(e => e.id === currentEmailId);
+  const textEl = document.getElementById('btnReadStatusText');
+  if (textEl && email) {
+    textEl.textContent = email.unread ? 'Segna come letto' : 'Segna come non letto';
+  }
+}
+
+function updateUnreadBadge() {
+  const unread = currentEmails.filter(e => e.unread).length;
+  const badge = document.getElementById('badgePosta');
+  const countInbox = document.getElementById('countInbox');
+  if (unread > 0) {
+    badge.style.display = 'inline';
+    badge.textContent = unread;
+    countInbox.textContent = unread;
+  } else {
+    badge.style.display = 'none';
+    countInbox.textContent = '0';
+  }
+}
+
+// ── BULK ACTIONS ──
+
+function getSelectedEmailIds() {
+  const checks = document.querySelectorAll('.email-item-check:checked');
+  return Array.from(checks).map(c => c.dataset.emailId).filter(Boolean);
+}
+
+function updateBulkBar() {
+  const selected = getSelectedEmailIds();
+  const bar = document.getElementById('emailBulkBar');
+  const count = document.getElementById('bulkCount');
+  if (selected.length > 0) {
+    bar.classList.add('visible');
+    count.textContent = selected.length;
+  } else {
+    bar.classList.remove('visible');
+  }
+}
+
+function bulkSelectAll() {
+  document.querySelectorAll('.email-item-check').forEach(c => c.checked = true);
+  updateBulkBar();
+}
+
+function bulkDeselectAll() {
+  document.querySelectorAll('.email-item-check').forEach(c => c.checked = false);
+  updateBulkBar();
+}
+
+function bulkMarkRead() {
+  const ids = getSelectedEmailIds();
+  ids.forEach(id => {
+    const email = currentEmails.find(e => e.id === id);
+    if (email) email.unread = false;
+    if (!demoMode && gmailAccessToken) {
+      gapi.client.gmail.users.messages.modify({
+        userId: 'me', id,
+        addLabelIds: [], removeLabelIds: ['UNREAD']
+      }).catch(() => {});
+    }
+  });
+  renderEmailList();
+  updateUnreadBadge();
+  toast(ids.length + ' email segnate come lette', 'success');
+}
+
+function bulkMarkUnread() {
+  const ids = getSelectedEmailIds();
+  ids.forEach(id => {
+    const email = currentEmails.find(e => e.id === id);
+    if (email) email.unread = true;
+    if (!demoMode && gmailAccessToken) {
+      gapi.client.gmail.users.messages.modify({
+        userId: 'me', id,
+        addLabelIds: ['UNREAD'], removeLabelIds: []
+      }).catch(() => {});
+    }
+  });
+  renderEmailList();
+  updateUnreadBadge();
+  toast(ids.length + ' email segnate come non lette', 'success');
+}
+
+function bulkToggleStar() {
+  const ids = getSelectedEmailIds();
+  ids.forEach(id => {
+    emailStarredState[id] = !emailStarredState[id];
+    if (!demoMode && gmailAccessToken) {
+      gapi.client.gmail.users.messages.modify({
+        userId: 'me', id,
+        addLabelIds: emailStarredState[id] ? ['STARRED'] : [],
+        removeLabelIds: emailStarredState[id] ? [] : ['STARRED']
+      }).catch(() => {});
+    }
+  });
+  localStorage.setItem('email_starred', JSON.stringify(emailStarredState));
+  renderEmailList();
+  toast(ids.length + ' email aggiornate', 'success');
+}
+
+function bulkArchive() {
+  const ids = getSelectedEmailIds();
+  if (!confirm('Archiviare ' + ids.length + ' email?')) return;
+  ids.forEach(id => {
+    if (!demoMode && gmailAccessToken) {
+      gapi.client.gmail.users.messages.modify({
+        userId: 'me', id,
+        addLabelIds: [], removeLabelIds: ['INBOX']
+      }).catch(() => {});
+    }
+    // Remove from current list
+    currentEmails = currentEmails.filter(e => e.id !== id);
+  });
+  renderEmailList();
+  updateUnreadBadge();
+  toast(ids.length + ' email archiviate', 'success');
+}
+
+function bulkTrash() {
+  const ids = getSelectedEmailIds();
+  if (!confirm('Eliminare ' + ids.length + ' email?')) return;
+  ids.forEach(id => {
+    if (!demoMode && gmailAccessToken) {
+      gapi.client.gmail.users.messages.trash({ userId: 'me', id }).catch(() => {});
+    }
+    currentEmails = currentEmails.filter(e => e.id !== id);
+  });
+  currentEmailId = null;
+  document.getElementById('emailPreviewEmpty').style.display = 'flex';
+  document.getElementById('emailPreviewContent').style.display = 'none';
+  renderEmailList();
+  updateUnreadBadge();
+  toast(ids.length + ' email eliminate', 'success');
 }
 
 function extractName(fromStr) {
@@ -5307,6 +5975,8 @@ async function showEmailReal(emailId) {
 
     // Show property link if exists
     renderPropertyLink(emailId);
+    updatePreviewReadButton();
+    updatePreviewStarButton();
 
   } catch (err) {
     console.error('Error loading email:', err);
