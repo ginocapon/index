@@ -6,6 +6,8 @@
 <title>Admin — Righetto Immobiliare</title>
 <link rel="stylesheet" href="css/fonts.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://apis.google.com/js/api.js"></script>
+<script src="https://accounts.google.com/gsi/client"></script>
 <style>
 :root {
   --nero:   #3A5578;
@@ -803,6 +805,453 @@ tr:hover td { background: rgba(206,224,143,0.06); }
   background: var(--sfondo);
 }
 
+/* ══════════ EMAIL CLIENT ══════════ */
+.email-layout {
+  display: flex;
+  height: calc(100vh - 130px);
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.email-folders {
+  width: 200px;
+  min-width: 200px;
+  background: var(--sfondo);
+  border-right: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.email-folders-header {
+  padding: 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.email-folder-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  font-size: 0.82rem;
+  color: var(--testo);
+  cursor: pointer;
+  transition: all 0.15s;
+  border-left: 3px solid transparent;
+}
+.email-folder-item:hover {
+  background: rgba(206,224,143,0.15);
+}
+.email-folder-item.active {
+  background: rgba(206,224,143,0.2);
+  border-left-color: var(--oro);
+  font-weight: 600;
+  color: var(--nero);
+}
+.email-folder-item svg { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.6; }
+.email-folder-item.active svg { opacity: 1; }
+.email-folder-count {
+  margin-left: auto;
+  background: var(--caffe3);
+  color: var(--nero);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 10px;
+  min-width: 20px;
+  text-align: center;
+}
+.email-folder-item.active .email-folder-count {
+  background: var(--oro);
+}
+.email-folder-divider {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--caffe2);
+  padding: 14px 16px 6px;
+}
+.email-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.email-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  background: white;
+  flex-wrap: wrap;
+}
+.email-toolbar .email-search {
+  flex: 1;
+  min-width: 180px;
+  padding: 8px 14px;
+  border: 1.5px solid var(--caffe3);
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem;
+  color: var(--testo);
+  background: var(--sfondo);
+  transition: border-color 0.2s;
+}
+.email-toolbar .email-search:focus {
+  outline: none;
+  border-color: var(--nero);
+  background: white;
+}
+.email-split {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.email-list-area {
+  height: 45%;
+  min-height: 200px;
+  overflow-y: auto;
+  border-bottom: 2px solid var(--caffe3);
+}
+.email-item {
+  display: grid;
+  grid-template-columns: 36px 1fr 2fr 90px 50px;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 0.82rem;
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.email-item:hover { background: rgba(206,224,143,0.06); }
+.email-item.active { background: rgba(206,224,143,0.15); }
+.email-item.unread { font-weight: 600; }
+.email-item.unread .email-item-from { color: var(--nero); }
+.email-item-check {
+  width: 16px; height: 16px;
+  accent-color: var(--nero);
+  cursor: pointer;
+}
+.email-item-from {
+  color: var(--testo);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.email-item-subject {
+  color: var(--caffe2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.email-item-date {
+  color: var(--caffe2);
+  font-size: 0.75rem;
+  text-align: right;
+  white-space: nowrap;
+}
+.email-item-property {
+  text-align: center;
+}
+.email-item-property .badge {
+  font-size: 0.65rem;
+  padding: 2px 6px;
+}
+.email-preview-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.email-preview-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--caffe2);
+  font-size: 0.88rem;
+  flex-direction: column;
+  gap: 8px;
+}
+.email-preview-empty svg { width: 48px; height: 48px; opacity: 0.3; }
+.email-preview-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.email-preview-subject {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--nero);
+  margin-bottom: 12px;
+}
+.email-preview-meta {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.email-preview-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--caffe3);
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.email-preview-from-info { flex: 1; }
+.email-preview-from-name {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--nero);
+}
+.email-preview-from-email {
+  font-size: 0.78rem;
+  color: var(--caffe2);
+}
+.email-preview-to {
+  font-size: 0.75rem;
+  color: var(--caffe2);
+  margin-top: 2px;
+}
+.email-preview-date {
+  font-size: 0.75rem;
+  color: var(--caffe2);
+  white-space: nowrap;
+}
+.email-preview-body {
+  padding: 20px 24px;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--testo);
+  flex: 1;
+}
+.email-preview-body blockquote {
+  border-left: 3px solid var(--caffe3);
+  padding-left: 12px;
+  margin: 12px 0;
+  color: var(--caffe2);
+}
+.email-preview-actions {
+  padding: 16px 24px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  background: var(--sfondo);
+}
+.email-property-link {
+  margin: 0 24px 16px;
+  padding: 14px 18px;
+  background: rgba(206,224,143,0.15);
+  border: 1.5px solid var(--oro);
+  border-radius: 10px;
+}
+.email-property-link-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.email-property-link-header span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--nero);
+}
+.email-property-link-body {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.email-property-link-thumb {
+  width: 60px; height: 45px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: var(--caffe3);
+}
+.email-property-link-info h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--nero);
+}
+.email-property-link-info p {
+  font-size: 0.78rem;
+  color: var(--caffe2);
+}
+
+/* COMPOSE MODAL */
+.email-compose-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30,58,92,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 600;
+  display: none;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 24px;
+}
+.email-compose-overlay.open { display: flex; }
+.email-compose-box {
+  background: white;
+  border-radius: 12px 12px 0 0;
+  width: 560px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 -4px 40px rgba(0,0,0,0.2);
+}
+.email-compose-header {
+  padding: 14px 20px;
+  background: var(--nero);
+  color: white;
+  border-radius: 12px 12px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.email-compose-header h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.email-compose-body {
+  padding: 16px 20px;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.email-compose-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  padding-bottom: 8px;
+}
+.email-compose-field label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--caffe2);
+  min-width: 75px;
+}
+.email-compose-field input {
+  flex: 1;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  color: var(--testo);
+  padding: 6px 0;
+}
+.email-compose-field input:focus { outline: none; }
+.email-compose-content {
+  flex: 1;
+  min-height: 200px;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--testo);
+  resize: none;
+  padding: 8px 0;
+}
+.email-compose-content:focus { outline: none; }
+.email-compose-footer {
+  padding: 12px 20px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* PROPERTY LINK MODAL */
+.email-link-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(30,58,92,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 700;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.email-link-modal.open { display: flex; }
+.email-link-box {
+  background: white;
+  border-radius: 12px;
+  width: 480px;
+  max-height: 70vh;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+}
+.email-link-results {
+  max-height: 350px;
+  overflow-y: auto;
+  padding: 0 16px 16px;
+}
+.email-link-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.email-link-item:hover { background: rgba(206,224,143,0.15); }
+.email-link-thumb {
+  width: 50px; height: 38px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: var(--caffe3);
+}
+.email-link-info h4 {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--nero);
+}
+.email-link-info p {
+  font-size: 0.72rem;
+  color: var(--caffe2);
+}
+
+/* AUTH BANNER */
+.email-auth-banner {
+  text-align: center;
+  padding: 60px 32px;
+}
+.email-auth-banner svg { width: 64px; height: 64px; margin-bottom: 16px; opacity: 0.4; }
+.email-auth-banner h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  color: var(--nero);
+  margin-bottom: 8px;
+}
+.email-auth-banner p {
+  font-size: 0.85rem;
+  color: var(--caffe2);
+  margin-bottom: 20px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 1100px) {
+  .email-layout { flex-direction: column; height: auto; }
+  .email-folders { width: 100%; min-width: unset; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .email-folder-item { padding: 8px 14px; border-left: none; border-bottom: 3px solid transparent; white-space: nowrap; }
+  .email-folder-item.active { border-left: none; border-bottom-color: var(--oro); }
+  .email-folder-divider { display: none; }
+  .email-list-area { height: 300px; }
+}
 @media (max-width: 768px) {
   .sidebar { transform: translateX(-100%); }
   .sidebar.open { transform: translateX(0); }
@@ -812,6 +1261,9 @@ tr:hover td { background: rgba(206,224,143,0.06); }
   .form-grid.three { grid-template-columns: 1fr; }
   table { font-size: 0.75rem; }
   td, th { padding: 10px 10px; }
+  .email-item { grid-template-columns: 36px 1fr 100px; }
+  .email-item-subject, .email-item-property { display: none; }
+  .email-compose-box { width: 100%; }
 }
 </style>
 </head>
@@ -850,6 +1302,11 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         Richieste
         <span class="nav-badge" id="badgeRichieste" style="display:none">0</span>
+      </div>
+      <div class="nav-item" onclick="showSection('posta')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+        Posta
+        <span class="nav-badge" id="badgePosta" style="display:none">0</span>
       </div>
       <div class="nav-item" onclick="showSection('blog')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
@@ -1635,6 +2092,229 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         </div>
       </div>
 
+      <!-- ═══ SEZIONE POSTA ═══ -->
+      <div class="section" id="sec-posta">
+
+        <!-- Banner Auth (visibile se non connesso a Gmail) -->
+        <div id="emailAuthBanner" class="email-auth-banner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+          <h3>Collega il tuo account Gmail</h3>
+          <p>Per leggere e inviare email direttamente dal pannello admin, collega il tuo account Google.</p>
+          <button class="btn btn-primary" onclick="gmailAuth()" id="btnGmailAuth">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+            Connetti Gmail
+          </button>
+          <div style="margin-top:16px;font-size:0.78rem;color:var(--caffe2)">
+            <p>Serve configurare le credenziali Google API.</p>
+            <button class="btn btn-secondary btn-sm" onclick="showGmailSetupGuide()" style="margin-top:8px">Guida Configurazione</button>
+          </div>
+        </div>
+
+        <!-- Client Email (visibile dopo auth) -->
+        <div id="emailClient" style="display:none">
+          <div class="email-layout">
+
+            <!-- Cartelle -->
+            <div class="email-folders">
+              <div class="email-folders-header">
+                <button class="btn btn-primary btn-sm" onclick="composeEmail()" style="width:100%">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  Scrivi
+                </button>
+              </div>
+              <div class="email-folder-item active" onclick="selectFolder('INBOX', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+                Inbox
+                <span class="email-folder-count" id="countInbox">0</span>
+              </div>
+              <div class="email-folder-item" onclick="selectFolder('SENT', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                Inviati
+              </div>
+              <div class="email-folder-item" onclick="selectFolder('DRAFT', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Bozze
+              </div>
+              <div class="email-folder-item" onclick="selectFolder('TRASH', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                Cestino
+              </div>
+              <div class="email-folder-divider">Etichette</div>
+              <div class="email-folder-item" onclick="selectLabel('immobili', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                Immobili
+              </div>
+              <div class="email-folder-item" onclick="selectLabel('trattative', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                Trattative
+              </div>
+              <div class="email-folder-item" onclick="selectLabel('archivio', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="12" x2="12" y2="17"/></svg>
+                Archivio
+              </div>
+            </div>
+
+            <!-- Main Email Area -->
+            <div class="email-main">
+              <div class="email-toolbar">
+                <input type="text" class="email-search" placeholder="Cerca email..." id="emailSearchInput" onkeydown="if(event.key==='Enter')searchEmails()">
+                <button class="btn btn-secondary btn-sm" onclick="searchEmails()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  Cerca
+                </button>
+                <button class="btn btn-secondary btn-sm" onclick="refreshEmails()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                  Aggiorna
+                </button>
+                <span style="font-size:0.75rem;color:var(--caffe2)" id="emailStatusText">Non connesso</span>
+              </div>
+
+              <div class="email-split">
+                <!-- Lista Email -->
+                <div class="email-list-area" id="emailListArea">
+                  <div class="loading" id="emailListLoading" style="display:none">
+                    <div class="spinner"></div> Caricamento email...
+                  </div>
+                  <div class="empty-state" id="emailListEmpty">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+                    <h3>Nessuna email</h3>
+                    <p style="font-size:0.82rem;color:var(--caffe2)">Connetti Gmail per visualizzare le email</p>
+                  </div>
+                  <div id="emailListItems"></div>
+                </div>
+
+                <!-- Anteprima Email -->
+                <div class="email-preview-area" id="emailPreviewArea">
+                  <div class="email-preview-empty" id="emailPreviewEmpty">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+                    <span>Seleziona un'email per visualizzarla</span>
+                  </div>
+                  <div id="emailPreviewContent" style="display:none">
+                    <div class="email-preview-header">
+                      <div class="email-preview-subject" id="previewSubject"></div>
+                      <div class="email-preview-meta">
+                        <div class="email-preview-avatar" id="previewAvatar"></div>
+                        <div class="email-preview-from-info">
+                          <div class="email-preview-from-name" id="previewFromName"></div>
+                          <div class="email-preview-from-email" id="previewFromEmail"></div>
+                          <div class="email-preview-to" id="previewTo"></div>
+                        </div>
+                        <div class="email-preview-date" id="previewDate"></div>
+                      </div>
+                    </div>
+                    <div id="emailPropertyLinkArea"></div>
+                    <div class="email-preview-body" id="previewBody"></div>
+                    <div class="email-preview-actions">
+                      <button class="btn btn-primary btn-sm" onclick="replyEmail()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg>
+                        Rispondi
+                      </button>
+                      <button class="btn btn-secondary btn-sm" onclick="forwardEmail()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 17 20 12 15 7"/><path d="M4 18v-2a4 4 0 0 0 4-4h12"/></svg>
+                        Inoltra
+                      </button>
+                      <button class="btn btn-secondary btn-sm" onclick="openLinkPropertyModal()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                        Collega Immobile
+                      </button>
+                      <button class="btn btn-danger btn-sm" onclick="trashEmail()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                        Elimina
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL COMPONI EMAIL -->
+      <div class="email-compose-overlay" id="composeOverlay">
+        <div class="email-compose-box">
+          <div class="email-compose-header">
+            <h3 id="composeTitle">Nuova Email</h3>
+            <button class="modal-close" onclick="closeCompose()">&times;</button>
+          </div>
+          <div class="email-compose-body">
+            <div class="email-compose-field">
+              <label>A:</label>
+              <input type="email" id="composeTo" placeholder="destinatario@email.com">
+            </div>
+            <div class="email-compose-field">
+              <label>Oggetto:</label>
+              <input type="text" id="composeSubject" placeholder="Oggetto dell'email">
+            </div>
+            <textarea class="email-compose-content" id="composeBody" placeholder="Scrivi il messaggio..."></textarea>
+          </div>
+          <div class="email-compose-footer">
+            <button class="btn btn-primary" onclick="sendEmail()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Invia
+            </button>
+            <button class="btn btn-secondary" onclick="closeCompose()">Annulla</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL COLLEGA IMMOBILE -->
+      <div class="email-link-modal" id="linkPropertyModal">
+        <div class="email-link-box">
+          <div class="modal-header">
+            <h2>Collega a Immobile</h2>
+            <button class="modal-close" onclick="closeLinkPropertyModal()">&times;</button>
+          </div>
+          <div style="padding:16px">
+            <input type="text" class="table-search" style="width:100%" placeholder="Cerca immobile per codice, titolo, comune..." id="linkPropertySearch" oninput="filterLinkProperties()">
+          </div>
+          <div class="email-link-results" id="linkPropertyResults"></div>
+        </div>
+      </div>
+
+      <!-- MODAL GUIDA SETUP GMAIL -->
+      <div class="modal-overlay" id="gmailSetupGuide">
+        <div class="modal" style="max-width:700px">
+          <div class="modal-header">
+            <h2>Configurazione Gmail API</h2>
+            <button class="modal-close" onclick="document.getElementById('gmailSetupGuide').classList.remove('open')">&times;</button>
+          </div>
+          <div class="modal-body" style="font-size:0.85rem;line-height:1.7">
+            <h4 style="color:var(--nero);margin-bottom:12px">Step 1 — Crea progetto Google Cloud</h4>
+            <ol style="padding-left:20px;margin-bottom:20px;color:var(--testo)">
+              <li>Vai su <a href="https://console.cloud.google.com" target="_blank" style="color:var(--nero);font-weight:600">console.cloud.google.com</a></li>
+              <li>Crea un nuovo progetto (es. "Righetto Admin")</li>
+              <li>Dal menu, vai su <b>API e servizi > Libreria</b></li>
+              <li>Cerca "Gmail API" e abilitala</li>
+            </ol>
+            <h4 style="color:var(--nero);margin-bottom:12px">Step 2 — Crea credenziali OAuth2</h4>
+            <ol style="padding-left:20px;margin-bottom:20px;color:var(--testo)">
+              <li>Vai su <b>API e servizi > Credenziali</b></li>
+              <li>Clicca <b>+ Crea Credenziali > ID client OAuth</b></li>
+              <li>Tipo: <b>Applicazione web</b></li>
+              <li>Origini JavaScript autorizzate: aggiungi il tuo dominio (e <code>http://localhost</code> per test)</li>
+              <li>Copia il <b>Client ID</b></li>
+            </ol>
+            <h4 style="color:var(--nero);margin-bottom:12px">Step 3 — Configura la schermata di consenso</h4>
+            <ol style="padding-left:20px;margin-bottom:20px;color:var(--testo)">
+              <li>Vai su <b>API e servizi > Schermata di consenso OAuth</b></li>
+              <li>Tipo utente: <b>Esterno</b> (poi aggiungi il tuo utente come tester)</li>
+              <li>Compila nome app, email, ecc.</li>
+              <li>Aggiungi scope: <code>gmail.readonly</code>, <code>gmail.send</code>, <code>gmail.modify</code></li>
+            </ol>
+            <h4 style="color:var(--nero);margin-bottom:12px">Step 4 — Inserisci Client ID qui</h4>
+            <div class="form-group" style="margin-bottom:16px">
+              <label>Google Client ID</label>
+              <input type="text" id="gmailClientIdInput" placeholder="123456789-xxxxx.apps.googleusercontent.com" value="">
+            </div>
+            <div style="display:flex;gap:12px">
+              <button class="btn btn-primary" onclick="saveGmailConfig()">Salva e Connetti</button>
+              <button class="btn btn-secondary" onclick="document.getElementById('gmailSetupGuide').classList.remove('open')">Chiudi</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- ═══ SEZIONE IMPOSTAZIONI ═══ -->
       <div class="section" id="sec-impostazioni">
         <div class="table-wrap" style="padding:28px;max-width:600px">
@@ -1740,12 +2420,14 @@ function showSection(name) {
     immobili: 'Gestione Immobili',
     nuovo: 'Nuovo Immobile',
     richieste: 'Richieste Clienti',
+    posta: 'Posta',
     blog: 'Gestione Blog',
     impostazioni: 'Impostazioni'
   };
   document.getElementById('topbarTitle').textContent = titles[name] || name;
 
   if (name === 'richieste') loadRichieste();
+  if (name === 'posta') initEmailSection();
   if (name === 'blog') loadBlogList();
   if (name === 'impostazioni') testConn();
 }
@@ -2884,6 +3566,628 @@ function insertTag(tag) {
 }
 
 renderFotos();
+
+// ══════════════════════════════════════
+// EMAIL CLIENT — GMAIL API INTEGRATION
+// ══════════════════════════════════════
+
+const GMAIL_SCOPES = 'https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/gmail.modify';
+const GMAIL_DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest';
+
+let gmailClientId = localStorage.getItem('gmail_client_id') || '';
+let gmailTokenClient = null;
+let gmailAccessToken = null;
+let currentEmails = [];
+let currentEmailId = null;
+let currentFolder = 'INBOX';
+let emailPropertyLinks = {};
+let gapiInited = false;
+let gisInited = false;
+
+// Load email-property links from localStorage
+try {
+  emailPropertyLinks = JSON.parse(localStorage.getItem('email_property_links') || '{}');
+} catch(e) { emailPropertyLinks = {}; }
+
+function initEmailSection() {
+  if (gmailAccessToken) {
+    document.getElementById('emailAuthBanner').style.display = 'none';
+    document.getElementById('emailClient').style.display = 'block';
+    refreshEmails();
+  } else {
+    document.getElementById('emailAuthBanner').style.display = 'block';
+    document.getElementById('emailClient').style.display = 'none';
+  }
+}
+
+// GAPI init
+function gapiLoaded() {
+  gapi.load('client', async () => {
+    await gapi.client.init({
+      discoveryDocs: [GMAIL_DISCOVERY_DOC],
+    });
+    gapiInited = true;
+    maybeEnableAuth();
+  });
+}
+
+// GIS init
+function gisLoaded() {
+  if (!gmailClientId) return;
+  gmailTokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: gmailClientId,
+    scope: GMAIL_SCOPES,
+    callback: handleAuthResponse,
+  });
+  gisInited = true;
+  maybeEnableAuth();
+}
+
+function maybeEnableAuth() {
+  if (gapiInited && gisInited) {
+    document.getElementById('btnGmailAuth').disabled = false;
+  }
+}
+
+function handleAuthResponse(resp) {
+  if (resp.error) {
+    toast('Errore autenticazione Gmail: ' + resp.error, 'error');
+    return;
+  }
+  gmailAccessToken = resp.access_token;
+  document.getElementById('emailAuthBanner').style.display = 'none';
+  document.getElementById('emailClient').style.display = 'block';
+  document.getElementById('emailStatusText').textContent = 'Connesso';
+  document.getElementById('emailStatusText').style.color = 'var(--verde)';
+  toast('Gmail connesso!', 'success');
+  refreshEmails();
+}
+
+function gmailAuth() {
+  if (!gmailClientId) {
+    showGmailSetupGuide();
+    return;
+  }
+  if (!gmailTokenClient) {
+    gisLoaded();
+  }
+  if (gmailTokenClient) {
+    gmailTokenClient.requestAccessToken({ prompt: 'consent' });
+  } else {
+    toast('Client ID non configurato. Segui la guida.', 'error');
+  }
+}
+
+function showGmailSetupGuide() {
+  document.getElementById('gmailSetupGuide').classList.add('open');
+  document.getElementById('gmailClientIdInput').value = gmailClientId;
+}
+
+function saveGmailConfig() {
+  const cid = document.getElementById('gmailClientIdInput').value.trim();
+  if (!cid) {
+    toast('Inserisci il Client ID', 'error');
+    return;
+  }
+  gmailClientId = cid;
+  localStorage.setItem('gmail_client_id', cid);
+  document.getElementById('gmailSetupGuide').classList.remove('open');
+  toast('Client ID salvato!', 'success');
+  gisLoaded();
+  setTimeout(() => gmailAuth(), 500);
+}
+
+// ── FOLDERS ──
+
+function selectFolder(folder, el) {
+  currentFolder = folder;
+  document.querySelectorAll('.email-folder-item').forEach(f => f.classList.remove('active'));
+  el.classList.add('active');
+  refreshEmails();
+}
+
+function selectLabel(label, el) {
+  document.querySelectorAll('.email-folder-item').forEach(f => f.classList.remove('active'));
+  el.classList.add('active');
+  searchEmails('label:' + label);
+}
+
+// ── EMAIL LIST ──
+
+async function refreshEmails() {
+  if (!gmailAccessToken) return;
+
+  const listArea = document.getElementById('emailListItems');
+  const loading = document.getElementById('emailListLoading');
+  const empty = document.getElementById('emailListEmpty');
+
+  listArea.innerHTML = '';
+  loading.style.display = 'flex';
+  empty.style.display = 'none';
+
+  try {
+    const response = await gapi.client.gmail.users.messages.list({
+      userId: 'me',
+      labelIds: [currentFolder],
+      maxResults: 50
+    });
+
+    const messages = response.result.messages || [];
+    if (messages.length === 0) {
+      loading.style.display = 'none';
+      empty.style.display = 'block';
+      empty.querySelector('h3').textContent = 'Nessuna email';
+      empty.querySelector('p').textContent = 'Questa cartella e\' vuota';
+      return;
+    }
+
+    // Fetch details for each message
+    const batch = messages.map(m =>
+      gapi.client.gmail.users.messages.get({
+        userId: 'me',
+        id: m.id,
+        format: 'metadata',
+        metadataHeaders: ['From', 'To', 'Subject', 'Date']
+      })
+    );
+
+    const results = await Promise.all(batch);
+    currentEmails = results.map(r => {
+      const msg = r.result;
+      const headers = {};
+      (msg.payload.headers || []).forEach(h => {
+        headers[h.name.toLowerCase()] = h.value;
+      });
+      return {
+        id: msg.id,
+        threadId: msg.threadId,
+        from: headers.from || '',
+        to: headers.to || '',
+        subject: headers.subject || '(nessun oggetto)',
+        date: headers.date || '',
+        snippet: msg.snippet || '',
+        unread: (msg.labelIds || []).includes('UNREAD')
+      };
+    });
+
+    renderEmailList();
+
+    // Update inbox count
+    const unreadCount = currentEmails.filter(e => e.unread).length;
+    const badge = document.getElementById('badgePosta');
+    const countInbox = document.getElementById('countInbox');
+    if (unreadCount > 0) {
+      badge.style.display = 'inline';
+      badge.textContent = unreadCount;
+      countInbox.textContent = unreadCount;
+    } else {
+      badge.style.display = 'none';
+      countInbox.textContent = '0';
+    }
+
+  } catch (err) {
+    console.error('Gmail API error:', err);
+    if (err.status === 401) {
+      gmailAccessToken = null;
+      toast('Sessione scaduta. Riconnetti Gmail.', 'error');
+      initEmailSection();
+    } else {
+      toast('Errore caricamento email: ' + (err.result?.error?.message || err.message || 'Errore sconosciuto'), 'error');
+    }
+  } finally {
+    loading.style.display = 'none';
+  }
+}
+
+function renderEmailList() {
+  const listArea = document.getElementById('emailListItems');
+  const empty = document.getElementById('emailListEmpty');
+  listArea.innerHTML = '';
+
+  if (currentEmails.length === 0) {
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  currentEmails.forEach(email => {
+    const fromName = extractName(email.from);
+    const dateStr = formatEmailDate(email.date);
+    const linked = emailPropertyLinks[email.id];
+    const linkedBadge = linked
+      ? `<span class="badge badge-oro">${linked.codice}</span>`
+      : '';
+
+    const div = document.createElement('div');
+    div.className = 'email-item' + (email.unread ? ' unread' : '') + (email.id === currentEmailId ? ' active' : '');
+    div.innerHTML = `
+      <input type="checkbox" class="email-item-check" onclick="event.stopPropagation()">
+      <div class="email-item-from" title="${escHtml(email.from)}">${escHtml(fromName)}</div>
+      <div class="email-item-subject" title="${escHtml(email.subject)}">${escHtml(email.subject)} <span style="color:var(--caffe3);font-weight:400">— ${escHtml(email.snippet.substring(0, 60))}</span></div>
+      <div class="email-item-date">${dateStr}</div>
+      <div class="email-item-property">${linkedBadge}</div>
+    `;
+    div.onclick = () => showEmail(email.id);
+    listArea.appendChild(div);
+  });
+}
+
+function extractName(fromStr) {
+  if (!fromStr) return '';
+  const match = fromStr.match(/^"?([^"<]+)"?\s*</);
+  return match ? match[1].trim() : fromStr.split('@')[0];
+}
+
+function formatEmailDate(dateStr) {
+  if (!dateStr) return '';
+  try {
+    const d = new Date(dateStr);
+    const now = new Date();
+    const isToday = d.toDateString() === now.toDateString();
+    if (isToday) return d.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+    return d.toLocaleDateString('it-IT', { day: '2-digit', month: '2-digit' });
+  } catch(e) { return dateStr.substring(0, 10); }
+}
+
+function escHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// ── EMAIL PREVIEW ──
+
+async function showEmail(emailId) {
+  currentEmailId = emailId;
+  renderEmailList(); // Update active state
+
+  const previewEmpty = document.getElementById('emailPreviewEmpty');
+  const previewContent = document.getElementById('emailPreviewContent');
+  previewEmpty.style.display = 'none';
+  previewContent.style.display = 'flex';
+  previewContent.style.flexDirection = 'column';
+
+  try {
+    const response = await gapi.client.gmail.users.messages.get({
+      userId: 'me',
+      id: emailId,
+      format: 'full'
+    });
+
+    const msg = response.result;
+    const headers = {};
+    (msg.payload.headers || []).forEach(h => {
+      headers[h.name.toLowerCase()] = h.value;
+    });
+
+    // Mark as read
+    if ((msg.labelIds || []).includes('UNREAD')) {
+      gapi.client.gmail.users.messages.modify({
+        userId: 'me',
+        id: emailId,
+        removeLabelIds: ['UNREAD']
+      });
+      const emailObj = currentEmails.find(e => e.id === emailId);
+      if (emailObj) emailObj.unread = false;
+      renderEmailList();
+    }
+
+    // Extract body
+    let body = '';
+    if (msg.payload.parts) {
+      const htmlPart = msg.payload.parts.find(p => p.mimeType === 'text/html');
+      const textPart = msg.payload.parts.find(p => p.mimeType === 'text/plain');
+      if (htmlPart && htmlPart.body.data) {
+        body = atob(htmlPart.body.data.replace(/-/g, '+').replace(/_/g, '/'));
+      } else if (textPart && textPart.body.data) {
+        body = '<pre style="white-space:pre-wrap;font-family:inherit">' +
+          escHtml(atob(textPart.body.data.replace(/-/g, '+').replace(/_/g, '/'))) + '</pre>';
+      }
+    } else if (msg.payload.body && msg.payload.body.data) {
+      const decoded = atob(msg.payload.body.data.replace(/-/g, '+').replace(/_/g, '/'));
+      if (msg.payload.mimeType === 'text/html') {
+        body = decoded;
+      } else {
+        body = '<pre style="white-space:pre-wrap;font-family:inherit">' + escHtml(decoded) + '</pre>';
+      }
+    }
+
+    const fromName = extractName(headers.from || '');
+    const initials = fromName.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+
+    document.getElementById('previewSubject').textContent = headers.subject || '(nessun oggetto)';
+    document.getElementById('previewAvatar').textContent = initials;
+    document.getElementById('previewFromName').textContent = fromName;
+    document.getElementById('previewFromEmail').textContent = '<' + (headers.from || '').replace(/^.*</, '').replace(/>.*$/, '') + '>';
+    document.getElementById('previewTo').textContent = 'A: ' + (headers.to || '');
+    document.getElementById('previewDate').textContent = headers.date ? new Date(headers.date).toLocaleString('it-IT') : '';
+    document.getElementById('previewBody').innerHTML = body;
+
+    // Show property link if exists
+    renderPropertyLink(emailId);
+
+  } catch (err) {
+    console.error('Error loading email:', err);
+    toast('Errore caricamento email', 'error');
+  }
+}
+
+function renderPropertyLink(emailId) {
+  const area = document.getElementById('emailPropertyLinkArea');
+  const linked = emailPropertyLinks[emailId];
+
+  if (!linked) {
+    area.innerHTML = '';
+    return;
+  }
+
+  area.innerHTML = `
+    <div class="email-property-link">
+      <div class="email-property-link-header">
+        <span>Immobile collegato</span>
+        <button class="btn btn-danger btn-sm" onclick="unlinkProperty('${emailId}')">Scollega</button>
+      </div>
+      <div class="email-property-link-body">
+        <div class="email-property-link-info">
+          <h4>${escHtml(linked.codice)} — ${escHtml(linked.titolo)}</h4>
+          <p>${escHtml(linked.comune || '')} | ${linked.prezzo ? '€' + Number(linked.prezzo).toLocaleString('it-IT') : ''} | ${linked.superficie ? linked.superficie + 'mq' : ''}</p>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ── SEARCH ──
+
+async function searchEmails(queryOverride) {
+  if (!gmailAccessToken) return;
+
+  const query = queryOverride || document.getElementById('emailSearchInput').value.trim();
+  if (!query) { refreshEmails(); return; }
+
+  const listArea = document.getElementById('emailListItems');
+  const loading = document.getElementById('emailListLoading');
+  const empty = document.getElementById('emailListEmpty');
+
+  listArea.innerHTML = '';
+  loading.style.display = 'flex';
+  empty.style.display = 'none';
+
+  try {
+    const response = await gapi.client.gmail.users.messages.list({
+      userId: 'me',
+      q: query,
+      maxResults: 50
+    });
+
+    const messages = response.result.messages || [];
+    if (messages.length === 0) {
+      loading.style.display = 'none';
+      empty.style.display = 'block';
+      empty.querySelector('h3').textContent = 'Nessun risultato';
+      empty.querySelector('p').textContent = 'Prova con termini diversi';
+      return;
+    }
+
+    const batch = messages.map(m =>
+      gapi.client.gmail.users.messages.get({
+        userId: 'me',
+        id: m.id,
+        format: 'metadata',
+        metadataHeaders: ['From', 'To', 'Subject', 'Date']
+      })
+    );
+
+    const results = await Promise.all(batch);
+    currentEmails = results.map(r => {
+      const msg = r.result;
+      const headers = {};
+      (msg.payload.headers || []).forEach(h => {
+        headers[h.name.toLowerCase()] = h.value;
+      });
+      return {
+        id: msg.id,
+        threadId: msg.threadId,
+        from: headers.from || '',
+        to: headers.to || '',
+        subject: headers.subject || '(nessun oggetto)',
+        date: headers.date || '',
+        snippet: msg.snippet || '',
+        unread: (msg.labelIds || []).includes('UNREAD')
+      };
+    });
+
+    renderEmailList();
+    document.getElementById('emailStatusText').textContent = `${currentEmails.length} risultati per "${query}"`;
+
+  } catch (err) {
+    console.error('Search error:', err);
+    toast('Errore ricerca: ' + (err.result?.error?.message || 'Errore'), 'error');
+  } finally {
+    loading.style.display = 'none';
+  }
+}
+
+// ── COMPOSE / REPLY / FORWARD ──
+
+let composeMode = 'new'; // 'new', 'reply', 'forward'
+let composeReplyToId = null;
+
+function composeEmail() {
+  composeMode = 'new';
+  composeReplyToId = null;
+  document.getElementById('composeTitle').textContent = 'Nuova Email';
+  document.getElementById('composeTo').value = '';
+  document.getElementById('composeSubject').value = '';
+  document.getElementById('composeBody').value = '';
+  document.getElementById('composeOverlay').classList.add('open');
+}
+
+function replyEmail() {
+  if (!currentEmailId) return;
+  const email = currentEmails.find(e => e.id === currentEmailId);
+  if (!email) return;
+
+  composeMode = 'reply';
+  composeReplyToId = currentEmailId;
+  document.getElementById('composeTitle').textContent = 'Rispondi';
+
+  const replyTo = email.from.replace(/^.*</, '').replace(/>.*$/, '');
+  document.getElementById('composeTo').value = replyTo;
+  document.getElementById('composeSubject').value = (email.subject.startsWith('Re:') ? '' : 'Re: ') + email.subject;
+  document.getElementById('composeBody').value = '\n\n--- Messaggio originale ---\nDa: ' + email.from + '\nData: ' + email.date + '\nOggetto: ' + email.subject + '\n\n';
+  document.getElementById('composeOverlay').classList.add('open');
+}
+
+function forwardEmail() {
+  if (!currentEmailId) return;
+  const email = currentEmails.find(e => e.id === currentEmailId);
+  if (!email) return;
+
+  composeMode = 'forward';
+  composeReplyToId = null;
+  document.getElementById('composeTitle').textContent = 'Inoltra';
+  document.getElementById('composeTo').value = '';
+  document.getElementById('composeSubject').value = 'Fwd: ' + email.subject;
+  document.getElementById('composeBody').value = '\n\n--- Messaggio inoltrato ---\nDa: ' + email.from + '\nData: ' + email.date + '\nOggetto: ' + email.subject + '\n\n';
+  document.getElementById('composeOverlay').classList.add('open');
+}
+
+function closeCompose() {
+  document.getElementById('composeOverlay').classList.remove('open');
+}
+
+async function sendEmail() {
+  const to = document.getElementById('composeTo').value.trim();
+  const subject = document.getElementById('composeSubject').value.trim();
+  const body = document.getElementById('composeBody').value;
+
+  if (!to) { toast('Inserisci un destinatario', 'error'); return; }
+  if (!subject) { toast('Inserisci un oggetto', 'error'); return; }
+
+  const email = [
+    'To: ' + to,
+    'Subject: ' + subject,
+    'Content-Type: text/plain; charset=utf-8',
+    '',
+    body
+  ].join('\r\n');
+
+  const encodedEmail = btoa(unescape(encodeURIComponent(email)))
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '');
+
+  try {
+    const params = {
+      userId: 'me',
+      resource: { raw: encodedEmail }
+    };
+    if (composeMode === 'reply' && composeReplyToId) {
+      const orig = currentEmails.find(e => e.id === composeReplyToId);
+      if (orig) params.resource.threadId = orig.threadId;
+    }
+
+    await gapi.client.gmail.users.messages.send(params);
+    toast('Email inviata!', 'success');
+    closeCompose();
+    refreshEmails();
+  } catch (err) {
+    console.error('Send error:', err);
+    toast('Errore invio: ' + (err.result?.error?.message || 'Errore'), 'error');
+  }
+}
+
+// ── TRASH ──
+
+async function trashEmail() {
+  if (!currentEmailId) return;
+  if (!confirm('Spostare questa email nel cestino?')) return;
+
+  try {
+    await gapi.client.gmail.users.messages.trash({
+      userId: 'me',
+      id: currentEmailId
+    });
+    toast('Email spostata nel cestino', 'success');
+    currentEmailId = null;
+    document.getElementById('emailPreviewEmpty').style.display = 'flex';
+    document.getElementById('emailPreviewContent').style.display = 'none';
+    refreshEmails();
+  } catch (err) {
+    toast('Errore: ' + (err.result?.error?.message || 'Errore'), 'error');
+  }
+}
+
+// ── PROPERTY LINKING ──
+
+function openLinkPropertyModal() {
+  if (!currentEmailId) return;
+  document.getElementById('linkPropertyModal').classList.add('open');
+  document.getElementById('linkPropertySearch').value = '';
+  renderLinkPropertyResults(allImmobili);
+}
+
+function closeLinkPropertyModal() {
+  document.getElementById('linkPropertyModal').classList.remove('open');
+}
+
+function filterLinkProperties() {
+  const q = document.getElementById('linkPropertySearch').value.toLowerCase().trim();
+  if (!q) { renderLinkPropertyResults(allImmobili); return; }
+  const filtered = allImmobili.filter(i =>
+    (i.codice || '').toLowerCase().includes(q) ||
+    (i.titolo || '').toLowerCase().includes(q) ||
+    (i.comune || '').toLowerCase().includes(q) ||
+    (i.tipologia || '').toLowerCase().includes(q)
+  );
+  renderLinkPropertyResults(filtered);
+}
+
+function renderLinkPropertyResults(list) {
+  const container = document.getElementById('linkPropertyResults');
+  if (!list || list.length === 0) {
+    container.innerHTML = '<p style="text-align:center;color:var(--caffe2);padding:20px;font-size:0.85rem">Nessun immobile trovato</p>';
+    return;
+  }
+  container.innerHTML = list.slice(0, 20).map(i => `
+    <div class="email-link-item" onclick="linkProperty('${i.id}', '${escHtml(i.codice || '')}', '${escHtml(i.titolo || '')}', '${escHtml(i.comune || '')}', ${i.prezzo || 0}, ${i.superficie || 0})">
+      <div class="email-link-info">
+        <h4>${escHtml(i.codice || '')} — ${escHtml(i.titolo || 'Senza titolo')}</h4>
+        <p>${escHtml(i.comune || '')} | ${i.prezzo ? '€' + Number(i.prezzo).toLocaleString('it-IT') : 'N/D'} | ${i.superficie ? i.superficie + 'mq' : ''} | ${escHtml(i.tipo_operazione || '')}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function linkProperty(propId, codice, titolo, comune, prezzo, superficie) {
+  if (!currentEmailId) return;
+  emailPropertyLinks[currentEmailId] = { id: propId, codice, titolo, comune, prezzo, superficie };
+  localStorage.setItem('email_property_links', JSON.stringify(emailPropertyLinks));
+  closeLinkPropertyModal();
+  renderPropertyLink(currentEmailId);
+  renderEmailList();
+  toast('Immobile collegato!', 'success');
+}
+
+function unlinkProperty(emailId) {
+  delete emailPropertyLinks[emailId];
+  localStorage.setItem('email_property_links', JSON.stringify(emailPropertyLinks));
+  renderPropertyLink(emailId);
+  renderEmailList();
+  toast('Immobile scollegato', 'success');
+}
+
+// ── INIT GMAIL API ON LOAD ──
+
+// Defer Gmail API initialization
+if (typeof gapi !== 'undefined') {
+  gapiLoaded();
+}
+if (typeof google !== 'undefined' && google.accounts) {
+  gisLoaded();
+}
+
 checkAuth();
 </script>
 
