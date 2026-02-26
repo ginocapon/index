@@ -3,6 +3,9 @@
    (esclusa index.html che ha il suo)
    ═══════════════════════════════════════════════ */
 
+/* Garantisce che il burger si posizioni correttamente */
+header{position:relative}
+
 .nav-burger{
   display:none;
   position:absolute;right:20px;top:50%;transform:translateY(-50%);
@@ -44,7 +47,7 @@
   /* Nasconde navigazione desktop, mostra burger */
   .hi nav,.hi .h-cta{display:none!important}
   .header-inner .hnav,.header-inner .h-cta{display:none!important}
-  .nav-burger{display:flex}
-  .hi,.header-inner{height:64px}
+  .nav-burger{display:flex!important}
+  .hi,.header-inner{height:64px!important}
   .nav-mobile{top:64px}
 }
