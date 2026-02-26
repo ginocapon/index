@@ -1569,9 +1569,15 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         style="text-align:center;font-size:1.8rem;letter-spacing:12px;font-weight:700;font-family:'Montserrat',sans-serif">
       <button class="btn-login" onclick="verifyTotp()" style="margin-top:12px">Verifica</button>
       <div class="login-error" id="totpError">Codice non valido</div>
-      <button onclick="loginStep1Back()" style="background:none;border:none;color:var(--caffe2);font-size:0.78rem;cursor:pointer;margin-top:8px;font-family:'Montserrat',sans-serif">
-        ← Torna al login
-      </button>
+      <div style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(0,0,0,0.08)">
+        <button onclick="loginStep1Back()" style="background:none;border:none;color:var(--caffe2);font-size:0.78rem;cursor:pointer;font-family:'Montserrat',sans-serif">
+          ← Torna al login
+        </button>
+        <br>
+        <button onclick="emergencyDisable2FA()" style="background:none;border:none;color:var(--rosso);font-size:0.72rem;cursor:pointer;margin-top:8px;font-family:'Montserrat',sans-serif;text-decoration:underline">
+          Hai perso l'accesso? Disattiva 2FA
+        </button>
+      </div>
     </div>
 
     <!-- Step Setup: Prima configurazione 2FA -->
@@ -2937,7 +2943,16 @@ let pendingTotpSecret = null; // used during 2FA setup
 function checkAuth() {
   const params = new URLSearchParams(window.location.search);
   const urlKey = params.get('key');
+  const reset2fa = params.get('reset2fa');
   const session = sessionStorage.getItem('rig_admin');
+
+  // Emergency 2FA reset via URL: ?reset2fa=RIG2024
+  if (reset2fa === URL_KEY) {
+    localStorage.removeItem('rig_2fa_secret');
+    console.log('2FA reset via URL parameter');
+    // Clean URL
+    window.history.replaceState({}, '', window.location.pathname);
+  }
 
   if (session === 'ok') {
     // Already authenticated this session (password + 2FA already verified)
@@ -2980,8 +2995,8 @@ function doLogin() {
     document.getElementById('loginTotp').value = '';
     document.getElementById('loginTotp').focus();
   } else {
-    // No 2FA — offer setup
-    show2FASetup();
+    // No 2FA configured — grant access directly (2FA can be set up from Settings)
+    grantAccess();
   }
 }
 
@@ -3136,6 +3151,13 @@ function disable2FA() {
   localStorage.removeItem('rig_2fa_secret');
   check2FAStatus();
   toast('2FA disattivato', 'success');
+}
+
+function emergencyDisable2FA() {
+  if (!confirm('Stai per DISATTIVARE il 2FA.\nHai gia\' inserito la password, quindi sei autorizzato.\n\nVuoi procedere?')) return;
+  localStorage.removeItem('rig_2fa_secret');
+  // Go back to step 1 and auto-login (password was already verified)
+  grantAccess();
 }
 
 function check2FAStatus() {
