@@ -503,7 +503,7 @@ class RighettoChat {
         msg += `• **${imm.titolo}** — ${imm.superficie || '?'}mq — ${prezzo}\n`;
         if (imm.comune) msg += `  📍 ${imm.comune}\n`;
         const immSlug = generatePropertySlug(imm);
-        msg += `  👉 [Vedi scheda](/immobile.html?s=${encodeURIComponent(immSlug)})\n\n`;
+        msg += `  👉 [Vedi scheda](immobile.html?s=${encodeURIComponent(immSlug)})\n\n`;
       }
     } else {
       msg += `---\n💬 **Vuoi essere contattato da un nostro agente** per una valutazione ufficiale gratuita?`;
@@ -516,7 +516,7 @@ class RighettoChat {
   rispostaRicerca(low) {
     let tipo = 'vendita';
     if (/affitto|locare|locazione/.test(low)) tipo = 'affitto';
-    return `🔍 **Cerca Immobili**\n\nPuoi cercare direttamente nella pagina [Immobili](/immobili.html) con filtri avanzati per:\n• Tipo operazione (vendita/affitto)\n• Tipologia (appartamento, villa...)\n• Zona/Comune\n• Superficie\n• Prezzo\n\n👉 [Vai agli immobili](/immobili.html?tipo=${tipo})\n\nOppure dimmi cosa cerchi e ti aiuto!`;
+    return `🔍 **Cerca Immobili**\n\nPuoi cercare direttamente nella pagina [Immobili](immobili.html) con filtri avanzati per:\n• Tipo operazione (vendita/affitto)\n• Tipologia (appartamento, villa...)\n• Zona/Comune\n• Superficie\n• Prezzo\n\n👉 [Vai agli immobili](immobili.html?tipo=${tipo})\n\nOppure dimmi cosa cerchi e ti aiuto!`;
   }
 
   // ────── INVIA RICHIESTA ──────
