@@ -9,6 +9,7 @@
   <link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
     <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/nav-mobile.css">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
@@ -310,7 +311,17 @@
       <a class="h-btn" href="contatti.html">Valutazione gratuita</a>
     </div>
   </div>
+  <button class="nav-burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
 </header>
+<div class="nav-mobile" id="navMobile">
+  <a href="index.html">Home</a>
+  <a href="chi-siamo.html">Chi Siamo</a>
+  <a href="immobili.html">Immobili</a>
+  <a href="servizi.html">Servizi</a>
+  <a href="blog.html">Blog</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contatti.html" class="nav-mobile-cta">Contattaci</a>
+</div>
 
 <!-- BREADCRUMB -->
 <div class="breadcrumb">
@@ -1524,6 +1535,7 @@ function toggleChat() {
 init();
 </script>
 <!-- Chatbot globale disabilitato su questa pagina: usa il chatbot dedicato all'immobile -->
+<script src="js/nav-mobile.js"></script>
 <script src="js/cookie-consent.js"></script>
 </body>
 </html>
