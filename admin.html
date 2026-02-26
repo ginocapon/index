@@ -816,8 +816,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
   box-shadow: 0 2px 12px rgba(0,0,0,0.04);
 }
 .email-folders {
-  width: 200px;
-  min-width: 200px;
+  width: 230px;
+  min-width: 230px;
   background: var(--sfondo);
   border-right: 1px solid rgba(0,0,0,0.06);
   display: flex;
@@ -871,7 +871,197 @@ tr:hover td { background: rgba(206,224,143,0.06); }
   letter-spacing: 1px;
   color: var(--caffe2);
   padding: 14px 16px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
+.email-folder-divider-actions {
+  display: flex;
+  gap: 4px;
+}
+.email-folder-divider-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  color: var(--caffe2);
+  opacity: 0.6;
+  transition: opacity 0.15s;
+  line-height: 1;
+}
+.email-folder-divider-actions button:hover {
+  opacity: 1;
+  color: var(--nero);
+}
+.email-label-tree {
+  padding-left: 0;
+}
+.email-label-children {
+  overflow: hidden;
+  transition: max-height 0.2s ease;
+}
+.email-label-children.collapsed {
+  max-height: 0 !important;
+}
+.email-folder-item.label-item {
+  padding-left: 16px;
+  position: relative;
+}
+.email-folder-item.label-item .label-color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.email-folder-item.label-item.nested-1 { padding-left: 32px; }
+.email-folder-item.label-item.nested-2 { padding-left: 48px; }
+.email-folder-item.label-item.nested-3 { padding-left: 64px; }
+.email-folder-item .label-toggle {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: transform 0.2s, opacity 0.15s;
+}
+.email-folder-item .label-toggle:hover { opacity: 1; }
+.email-folder-item .label-toggle.expanded { transform: rotate(90deg); }
+.email-folder-item .label-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.email-folder-item .label-ctx-btn {
+  opacity: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  color: var(--caffe2);
+  font-size: 1rem;
+  line-height: 1;
+  transition: opacity 0.15s;
+}
+.email-folder-item:hover .label-ctx-btn { opacity: 0.7; }
+.email-folder-item .label-ctx-btn:hover { opacity: 1; color: var(--nero); }
+.label-ctx-menu {
+  position: fixed;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  padding: 6px 0;
+  z-index: 9999;
+  min-width: 160px;
+  font-size: 0.8rem;
+}
+.label-ctx-menu-item {
+  padding: 8px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--testo);
+  transition: background 0.1s;
+}
+.label-ctx-menu-item:hover { background: rgba(206,224,143,0.15); }
+.label-ctx-menu-item.danger { color: #c0392b; }
+.label-ctx-menu-item.danger:hover { background: rgba(192,57,43,0.08); }
+/* Multi-account selector */
+.email-account-selector {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.email-account-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: var(--testo);
+  transition: background 0.15s;
+  overflow: hidden;
+}
+.email-account-item:hover { background: rgba(206,224,143,0.15); }
+.email-account-item.active { background: rgba(206,224,143,0.25); font-weight: 600; color: var(--nero); }
+.email-account-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--caffe3);
+  color: var(--nero);
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.email-account-item.active .email-account-avatar { background: var(--oro); }
+.email-account-info {
+  min-width: 0;
+  overflow: hidden;
+}
+.email-account-name {
+  font-weight: 600;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.email-account-email {
+  font-size: 0.68rem;
+  color: var(--caffe2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.email-account-add {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.72rem;
+  color: var(--caffe2);
+  transition: all 0.15s;
+  border: 1px dashed var(--caffe3);
+}
+.email-account-add:hover { background: rgba(206,224,143,0.1); color: var(--nero); border-color: var(--oro); }
+.email-account-add svg { width: 14px; height: 14px; }
+/* Label create modal */
+.label-modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 10000;
+  display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s;
+}
+.label-modal-overlay.open { opacity: 1; pointer-events: all; }
+.label-modal {
+  background: white; border-radius: 12px; padding: 24px; width: 360px; max-width: 90vw;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+}
+.label-modal h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 16px; }
+.label-modal .form-group { margin-bottom: 14px; }
+.label-modal .form-group label { font-size: 0.78rem; font-weight: 600; color: var(--nero); display: block; margin-bottom: 4px; }
+.label-modal .form-group input, .label-modal .form-group select {
+  width: 100%; padding: 8px 12px; border: 1.5px solid var(--caffe3); border-radius: 8px;
+  font-family: 'Montserrat', sans-serif; font-size: 0.82rem;
+}
+.label-color-picker {
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+.label-color-swatch {
+  width: 24px; height: 24px; border-radius: 50%; cursor: pointer; border: 2px solid transparent;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.label-color-swatch:hover { transform: scale(1.15); }
+.label-color-swatch.selected { border-color: var(--nero); transform: scale(1.15); }
 .email-main {
   flex: 1;
   display: flex;
@@ -1247,10 +1437,14 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
 @media (max-width: 1100px) {
   .email-layout { flex-direction: column; height: auto; }
-  .email-folders { width: 100%; min-width: unset; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .email-folders { width: 100%; min-width: unset; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.06); flex-wrap: nowrap; }
   .email-folder-item { padding: 8px 14px; border-left: none; border-bottom: 3px solid transparent; white-space: nowrap; }
   .email-folder-item.active { border-left: none; border-bottom-color: var(--oro); }
+  .email-folder-item.label-item.nested-1, .email-folder-item.label-item.nested-2, .email-folder-item.label-item.nested-3 { padding-left: 14px; }
   .email-folder-divider { display: none; }
+  .email-account-selector { flex-direction: row; overflow-x: auto; padding: 8px; }
+  .email-label-children { max-height: none !important; }
+  .email-label-children.collapsed { max-height: none !important; display: flex; }
   .email-list-area { height: 300px; }
 }
 @media (max-width: 768px) {
@@ -2170,41 +2364,62 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
             <!-- Cartelle -->
             <div class="email-folders">
+              <!-- Multi-account selector -->
+              <div class="email-account-selector" id="emailAccountSelector">
+                <!-- Populated dynamically -->
+              </div>
+
               <div class="email-folders-header">
                 <button class="btn btn-primary btn-sm" onclick="composeEmail()" style="width:100%">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                   Scrivi
                 </button>
               </div>
-              <div class="email-folder-item active" onclick="selectFolder('INBOX', this)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
-                Inbox
-                <span class="email-folder-count" id="countInbox">0</span>
+
+              <!-- System folders (always visible) -->
+              <div id="emailSystemFolders">
+                <div class="email-folder-item active" data-folder="INBOX" onclick="selectFolder('INBOX', this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+                  <span class="label-name">Inbox</span>
+                  <span class="email-folder-count" id="countInbox">0</span>
+                </div>
+                <div class="email-folder-item" data-folder="STARRED" onclick="selectFolder('STARRED', this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <span class="label-name">Speciali</span>
+                </div>
+                <div class="email-folder-item" data-folder="IMPORTANT" onclick="selectFolder('IMPORTANT', this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                  <span class="label-name">Importanti</span>
+                </div>
+                <div class="email-folder-item" data-folder="SENT" onclick="selectFolder('SENT', this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                  <span class="label-name">Inviati</span>
+                </div>
+                <div class="email-folder-item" data-folder="DRAFT" onclick="selectFolder('DRAFT', this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  <span class="label-name">Bozze</span>
+                </div>
+                <div class="email-folder-item" data-folder="SPAM" onclick="selectFolder('SPAM', this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <span class="label-name">Spam</span>
+                </div>
+                <div class="email-folder-item" data-folder="TRASH" onclick="selectFolder('TRASH', this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                  <span class="label-name">Cestino</span>
+                </div>
               </div>
-              <div class="email-folder-item" onclick="selectFolder('SENT', this)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                Inviati
+
+              <!-- Etichette dinamiche -->
+              <div class="email-folder-divider">
+                <span>Etichette</span>
+                <div class="email-folder-divider-actions">
+                  <button onclick="openCreateLabelModal()" title="Nuova etichetta">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  </button>
+                </div>
               </div>
-              <div class="email-folder-item" onclick="selectFolder('DRAFT', this)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                Bozze
-              </div>
-              <div class="email-folder-item" onclick="selectFolder('TRASH', this)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                Cestino
-              </div>
-              <div class="email-folder-divider">Etichette</div>
-              <div class="email-folder-item" onclick="selectLabel('immobili', this)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-                Immobili
-              </div>
-              <div class="email-folder-item" onclick="selectLabel('trattative', this)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-                Trattative
-              </div>
-              <div class="email-folder-item" onclick="selectLabel('archivio', this)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="12" x2="12" y2="17"/></svg>
-                Archivio
+              <div id="emailLabelsTree">
+                <!-- Populated dynamically from Gmail API -->
               </div>
             </div>
 
@@ -2366,6 +2581,58 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               <button class="btn btn-secondary" onclick="document.getElementById('gmailSetupGuide').classList.remove('open')">Chiudi</button>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- MODAL CREA/MODIFICA ETICHETTA -->
+      <div class="label-modal-overlay" id="labelModal">
+        <div class="label-modal">
+          <h3 id="labelModalTitle">Nuova Etichetta</h3>
+          <div class="form-group">
+            <label>Nome</label>
+            <input type="text" id="labelNameInput" placeholder="Es: Clienti VIP">
+          </div>
+          <div class="form-group">
+            <label>Etichetta padre (opzionale)</label>
+            <select id="labelParentSelect">
+              <option value="">(Nessuna — livello principale)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Colore</label>
+            <div class="label-color-picker" id="labelColorPicker">
+              <div class="label-color-swatch selected" data-bg="#999999" data-fg="#ffffff" style="background:#999999" onclick="selectLabelColor(this)"></div>
+              <div class="label-color-swatch" data-bg="#e74c3c" data-fg="#ffffff" style="background:#e74c3c" onclick="selectLabelColor(this)"></div>
+              <div class="label-color-swatch" data-bg="#e67e22" data-fg="#ffffff" style="background:#e67e22" onclick="selectLabelColor(this)"></div>
+              <div class="label-color-swatch" data-bg="#f1c40f" data-fg="#333333" style="background:#f1c40f" onclick="selectLabelColor(this)"></div>
+              <div class="label-color-swatch" data-bg="#2ecc71" data-fg="#ffffff" style="background:#2ecc71" onclick="selectLabelColor(this)"></div>
+              <div class="label-color-swatch" data-bg="#1abc9c" data-fg="#ffffff" style="background:#1abc9c" onclick="selectLabelColor(this)"></div>
+              <div class="label-color-swatch" data-bg="#3498db" data-fg="#ffffff" style="background:#3498db" onclick="selectLabelColor(this)"></div>
+              <div class="label-color-swatch" data-bg="#9b59b6" data-fg="#ffffff" style="background:#9b59b6" onclick="selectLabelColor(this)"></div>
+              <div class="label-color-swatch" data-bg="#34495e" data-fg="#ffffff" style="background:#34495e" onclick="selectLabelColor(this)"></div>
+              <div class="label-color-swatch" data-bg="#795548" data-fg="#ffffff" style="background:#795548" onclick="selectLabelColor(this)"></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:18px">
+            <button class="btn btn-primary" id="labelModalSaveBtn" onclick="saveLabelModal()">Crea</button>
+            <button class="btn btn-secondary" onclick="closeLabelModal()">Annulla</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Context menu for labels (positioned absolutely) -->
+      <div class="label-ctx-menu" id="labelCtxMenu" style="display:none">
+        <div class="label-ctx-menu-item" onclick="ctxRenameLabel()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Rinomina
+        </div>
+        <div class="label-ctx-menu-item" onclick="ctxCreateSubLabel()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Sotto-etichetta
+        </div>
+        <div class="label-ctx-menu-item danger" onclick="ctxDeleteLabel()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          Elimina
         </div>
       </div>
 
@@ -4122,10 +4389,10 @@ async function deleteClienteById(id) {
 // escHtml is defined in the email section below (hoisted)
 
 // ══════════════════════════════════════
-// EMAIL CLIENT — GMAIL API INTEGRATION
-// ══════════════════════════════════════
+// EMAIL CLIENT — GMAIL API INTEGRATION (Multi-Account + Dynamic Labels)
+// ══════════════════════════════════════════════════════════════════════
 
-const GMAIL_SCOPES = 'https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/gmail.modify';
+const GMAIL_SCOPES = 'https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.labels';
 const GMAIL_DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest';
 
 let gmailClientId = localStorage.getItem('gmail_client_id') || '';
@@ -4138,6 +4405,19 @@ let emailPropertyLinks = {};
 let gapiInited = false;
 let gisInited = false;
 
+// Multi-account support
+let gmailAccounts = [];
+let activeAccountIndex = 0;
+try { gmailAccounts = JSON.parse(localStorage.getItem('gmail_accounts') || '[]'); } catch(e) { gmailAccounts = []; }
+
+// Dynamic labels
+let gmailLabels = [];
+let labelCollapsedState = {};
+try { labelCollapsedState = JSON.parse(localStorage.getItem('gmail_label_collapsed') || '{}'); } catch(e) { labelCollapsedState = {}; }
+
+// Label context menu state
+let ctxTargetLabel = null;
+
 // Load email-property links from localStorage
 try {
   emailPropertyLinks = JSON.parse(localStorage.getItem('email_property_links') || '{}');
@@ -4149,7 +4429,16 @@ function initEmailSection() {
   if (gmailAccessToken || demoMode) {
     document.getElementById('emailAuthBanner').style.display = 'none';
     document.getElementById('emailClient').style.display = 'block';
-    if (!demoMode) refreshEmails();
+    renderAccountSelector();
+    if (!demoMode) {
+      loadGmailLabels();
+      refreshEmails();
+    }
+  } else if (gmailAccounts.length > 0) {
+    // Auto-reconnect if we have saved accounts
+    document.getElementById('emailAuthBanner').style.display = 'block';
+    document.getElementById('emailClient').style.display = 'none';
+    renderAccountSelector();
   } else {
     document.getElementById('emailAuthBanner').style.display = 'block';
     document.getElementById('emailClient').style.display = 'none';
@@ -4233,6 +4522,7 @@ function loadDemoEmails() {
   countInbox.textContent = unread;
 
   renderEmailList();
+  renderDemoLabels();
   toast('Modalita\' demo attivata — dati di esempio', 'success');
 }
 
@@ -4322,6 +4612,8 @@ function handleAuthResponse(resp) {
   document.getElementById('emailStatusText').textContent = 'Connesso';
   document.getElementById('emailStatusText').style.color = 'var(--verde)';
   toast('Gmail connesso!', 'success');
+  saveCurrentAccount();
+  loadGmailLabels();
   refreshEmails();
 }
 
@@ -4356,34 +4648,449 @@ function saveGmailConfig() {
   document.getElementById('gmailSetupGuide').classList.remove('open');
   toast('Client ID salvato!', 'success');
   gisLoaded();
-  setTimeout(() => gmailAuth(), 500);
+  setTimeout(() => {
+    gmailAuth();
+  }, 500);
 }
 
-// ── FOLDERS ──
+// ── FOLDERS & LABELS ──
 
 function selectFolder(folder, el) {
   currentFolder = folder;
   document.querySelectorAll('.email-folder-item').forEach(f => f.classList.remove('active'));
-  el.classList.add('active');
+  if (el) el.classList.add('active');
   refreshEmails();
 }
 
-function selectLabel(label, el) {
+function selectLabel(labelId, labelName, el) {
+  currentFolder = labelId;
   document.querySelectorAll('.email-folder-item').forEach(f => f.classList.remove('active'));
-  el.classList.add('active');
+  if (el) el.classList.add('active');
   if (demoMode) {
-    // Demo: filter by category keyword
-    const labelMap = { immobili: 'villa|appartamento|immobil', trattative: 'contratto|firma|rogito', archivio: 'registrazione|conferma' };
-    const pattern = labelMap[label] || label;
-    const re = new RegExp(pattern, 'i');
+    const re = new RegExp(labelName, 'i');
     const original = [...currentEmails];
     currentEmails = original.filter(e => re.test(e.subject) || re.test(e._demoBody || ''));
     renderEmailList();
-    document.getElementById('emailStatusText').textContent = currentEmails.length + ' email con etichetta "' + label + '"';
+    document.getElementById('emailStatusText').textContent = currentEmails.length + ' email con etichetta "' + labelName + '"';
     currentEmails = original;
     return;
   }
-  searchEmails('label:' + label);
+  refreshEmails();
+}
+
+// ── MULTI-ACCOUNT ──
+
+function renderAccountSelector() {
+  const container = document.getElementById('emailAccountSelector');
+  if (!container) return;
+
+  if (gmailAccounts.length === 0 && !gmailAccessToken) {
+    container.innerHTML = '';
+    return;
+  }
+
+  let html = '';
+  gmailAccounts.forEach((acc, idx) => {
+    const isActive = idx === activeAccountIndex;
+    const initials = (acc.name || acc.email || '?').split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+    html += `
+      <div class="email-account-item ${isActive ? 'active' : ''}" onclick="switchAccount(${idx})">
+        <div class="email-account-avatar">${initials}</div>
+        <div class="email-account-info">
+          <div class="email-account-name">${escHtml(acc.name || acc.email)}</div>
+          <div class="email-account-email">${escHtml(acc.email)}</div>
+        </div>
+      </div>
+    `;
+  });
+
+  html += `
+    <div class="email-account-add" onclick="addGmailAccount()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Aggiungi account
+    </div>
+  `;
+
+  container.innerHTML = html;
+}
+
+function switchAccount(idx) {
+  if (idx === activeAccountIndex) return;
+  activeAccountIndex = idx;
+  const acc = gmailAccounts[idx];
+  if (acc && acc.token) {
+    gmailAccessToken = acc.token;
+    renderAccountSelector();
+    loadGmailLabels();
+    currentFolder = 'INBOX';
+    // Re-highlight inbox
+    document.querySelectorAll('.email-folder-item').forEach(f => f.classList.remove('active'));
+    const inboxEl = document.querySelector('[data-folder="INBOX"]');
+    if (inboxEl) inboxEl.classList.add('active');
+    refreshEmails();
+    toast('Account: ' + acc.email, 'success');
+  }
+}
+
+function addGmailAccount() {
+  if (!gmailClientId) {
+    showGmailSetupGuide();
+    return;
+  }
+  if (!gmailTokenClient) gisLoaded();
+  if (gmailTokenClient) {
+    gmailTokenClient.requestAccessToken({ prompt: 'consent' });
+  }
+}
+
+async function saveCurrentAccount() {
+  if (!gmailAccessToken) return;
+  try {
+    const resp = await gapi.client.gmail.users.getProfile({ userId: 'me' });
+    const email = resp.result.emailAddress;
+    const existing = gmailAccounts.findIndex(a => a.email === email);
+    const accData = { email, name: email.split('@')[0], token: gmailAccessToken };
+    if (existing >= 0) {
+      gmailAccounts[existing] = accData;
+      activeAccountIndex = existing;
+    } else {
+      gmailAccounts.push(accData);
+      activeAccountIndex = gmailAccounts.length - 1;
+    }
+    localStorage.setItem('gmail_accounts', JSON.stringify(gmailAccounts));
+    renderAccountSelector();
+  } catch(e) {
+    console.error('Error getting profile:', e);
+  }
+}
+
+// ── DYNAMIC LABELS FROM GMAIL API ──
+
+async function loadGmailLabels() {
+  if (!gmailAccessToken || demoMode) {
+    renderDemoLabels();
+    return;
+  }
+  try {
+    const resp = await gapi.client.gmail.users.labels.list({ userId: 'me' });
+    const allLabels = resp.result.labels || [];
+
+    // Filter to user-created labels only (not system ones)
+    gmailLabels = allLabels
+      .filter(l => l.type === 'user')
+      .map(l => ({
+        id: l.id,
+        name: l.name,
+        type: l.type,
+        color: l.color || null,
+        messagesTotal: l.messagesTotal || 0,
+        messagesUnread: l.messagesUnread || 0
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name, 'it'));
+
+    // Fetch unread counts for each label
+    for (const label of gmailLabels) {
+      try {
+        const detail = await gapi.client.gmail.users.labels.get({ userId: 'me', id: label.id });
+        label.messagesTotal = detail.result.messagesTotal || 0;
+        label.messagesUnread = detail.result.messagesUnread || 0;
+      } catch(e) { /* skip */ }
+    }
+
+    renderLabelTree();
+  } catch(err) {
+    console.error('Error loading labels:', err);
+    renderDemoLabels();
+  }
+}
+
+function renderDemoLabels() {
+  const container = document.getElementById('emailLabelsTree');
+  container.innerHTML = `
+    <div class="email-folder-item label-item" onclick="selectLabel('immobili','Immobili',this)">
+      <span class="label-color-dot" style="background:#3498db"></span>
+      <span class="label-name">Immobili</span>
+    </div>
+    <div class="email-folder-item label-item" onclick="selectLabel('trattative','Trattative',this)">
+      <span class="label-color-dot" style="background:#e67e22"></span>
+      <span class="label-name">Trattative</span>
+    </div>
+    <div class="email-folder-item label-item" onclick="selectLabel('archivio','Archivio',this)">
+      <span class="label-color-dot" style="background:#999999"></span>
+      <span class="label-name">Archivio</span>
+    </div>
+  `;
+}
+
+function buildLabelTree(labels) {
+  // Gmail uses "/" in label names for nesting: "Parent/Child/Grandchild"
+  const tree = [];
+  const map = {};
+
+  // First pass: build all nodes
+  labels.forEach(l => {
+    map[l.name] = { ...l, children: [], _shortName: l.name };
+  });
+
+  // Second pass: establish parent-child relationships
+  labels.forEach(l => {
+    const lastSlash = l.name.lastIndexOf('/');
+    if (lastSlash > 0) {
+      const parentName = l.name.substring(0, lastSlash);
+      const shortName = l.name.substring(lastSlash + 1);
+      map[l.name]._shortName = shortName;
+      if (map[parentName]) {
+        map[parentName].children.push(map[l.name]);
+        return;
+      }
+    }
+    tree.push(map[l.name]);
+  });
+
+  return tree;
+}
+
+function renderLabelTree() {
+  const container = document.getElementById('emailLabelsTree');
+  const tree = buildLabelTree(gmailLabels);
+  container.innerHTML = renderLabelNodes(tree, 0);
+}
+
+function renderLabelNodes(nodes, depth) {
+  let html = '';
+  nodes.forEach(node => {
+    const hasChildren = node.children && node.children.length > 0;
+    const isCollapsed = labelCollapsedState[node.id] === true;
+    const colorBg = node.color ? node.color.backgroundColor || '#999' : '#999';
+    const nestClass = depth > 0 ? ' nested-' + Math.min(depth, 3) : '';
+    const unread = node.messagesUnread || 0;
+
+    html += `<div class="email-folder-item label-item${nestClass}" data-label-id="${node.id}" onclick="selectLabel('${node.id}','${escHtml(node._shortName)}',this)">`;
+
+    // Toggle arrow for children
+    if (hasChildren) {
+      html += `<svg class="label-toggle ${isCollapsed ? '' : 'expanded'}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" onclick="event.stopPropagation();toggleLabelChildren('${node.id}',this)"><polyline points="9 18 15 12 9 6"/></svg>`;
+    }
+
+    // Color dot
+    html += `<span class="label-color-dot" style="background:${colorBg}"></span>`;
+
+    // Name
+    html += `<span class="label-name" title="${escHtml(node.name)}">${escHtml(node._shortName)}</span>`;
+
+    // Unread count
+    if (unread > 0) {
+      html += `<span class="email-folder-count">${unread}</span>`;
+    }
+
+    // Context menu button
+    html += `<button class="label-ctx-btn" onclick="event.stopPropagation();showLabelCtxMenu(event,'${node.id}','${escHtml(node.name)}')" title="Opzioni">&middot;&middot;&middot;</button>`;
+
+    html += `</div>`;
+
+    // Children container
+    if (hasChildren) {
+      html += `<div class="email-label-children${isCollapsed ? ' collapsed' : ''}" id="labelChildren_${node.id}" style="max-height:${isCollapsed ? '0' : '2000px'}">`;
+      html += renderLabelNodes(node.children, depth + 1);
+      html += `</div>`;
+    }
+  });
+  return html;
+}
+
+function toggleLabelChildren(labelId, toggleEl) {
+  const childrenEl = document.getElementById('labelChildren_' + labelId);
+  if (!childrenEl) return;
+  const isCollapsed = childrenEl.classList.contains('collapsed');
+  if (isCollapsed) {
+    childrenEl.classList.remove('collapsed');
+    childrenEl.style.maxHeight = '2000px';
+    toggleEl.classList.add('expanded');
+    delete labelCollapsedState[labelId];
+  } else {
+    childrenEl.classList.add('collapsed');
+    childrenEl.style.maxHeight = '0';
+    toggleEl.classList.remove('expanded');
+    labelCollapsedState[labelId] = true;
+  }
+  localStorage.setItem('gmail_label_collapsed', JSON.stringify(labelCollapsedState));
+}
+
+// ── LABEL CONTEXT MENU ──
+
+function showLabelCtxMenu(event, labelId, labelName) {
+  event.preventDefault();
+  event.stopPropagation();
+  ctxTargetLabel = { id: labelId, name: labelName };
+  const menu = document.getElementById('labelCtxMenu');
+  menu.style.display = 'block';
+  menu.style.left = event.clientX + 'px';
+  menu.style.top = event.clientY + 'px';
+
+  // Close on outside click
+  setTimeout(() => {
+    document.addEventListener('click', closeLabelCtxMenu, { once: true });
+  }, 10);
+}
+
+function closeLabelCtxMenu() {
+  document.getElementById('labelCtxMenu').style.display = 'none';
+}
+
+function ctxRenameLabel() {
+  closeLabelCtxMenu();
+  if (!ctxTargetLabel) return;
+  const newName = prompt('Nuovo nome per "' + ctxTargetLabel.name.split('/').pop() + '":', ctxTargetLabel.name.split('/').pop());
+  if (!newName || !newName.trim()) return;
+
+  // If nested, keep parent path
+  const lastSlash = ctxTargetLabel.name.lastIndexOf('/');
+  const fullNewName = lastSlash > 0 ? ctxTargetLabel.name.substring(0, lastSlash + 1) + newName.trim() : newName.trim();
+
+  if (demoMode) {
+    toast('(DEMO) Etichetta rinominata in "' + newName.trim() + '"', 'success');
+    return;
+  }
+
+  renameLabelAPI(ctxTargetLabel.id, fullNewName);
+}
+
+async function renameLabelAPI(labelId, newName) {
+  try {
+    await gapi.client.gmail.users.labels.patch({
+      userId: 'me',
+      id: labelId,
+      resource: { name: newName }
+    });
+    toast('Etichetta rinominata!', 'success');
+    loadGmailLabels();
+  } catch(err) {
+    toast('Errore: ' + (err.result?.error?.message || 'Errore'), 'error');
+  }
+}
+
+function ctxCreateSubLabel() {
+  closeLabelCtxMenu();
+  if (!ctxTargetLabel) return;
+  openCreateLabelModal(ctxTargetLabel.name);
+}
+
+function ctxDeleteLabel() {
+  closeLabelCtxMenu();
+  if (!ctxTargetLabel) return;
+  const shortName = ctxTargetLabel.name.split('/').pop();
+  if (!confirm('Eliminare l\'etichetta "' + shortName + '"? Le email non verranno cancellate.')) return;
+
+  if (demoMode) {
+    toast('(DEMO) Etichetta eliminata', 'success');
+    return;
+  }
+
+  deleteLabelAPI(ctxTargetLabel.id);
+}
+
+async function deleteLabelAPI(labelId) {
+  try {
+    await gapi.client.gmail.users.labels.delete({
+      userId: 'me',
+      id: labelId
+    });
+    toast('Etichetta eliminata!', 'success');
+    // If currently viewing this label, switch to inbox
+    if (currentFolder === labelId) {
+      currentFolder = 'INBOX';
+      const inboxEl = document.querySelector('[data-folder="INBOX"]');
+      if (inboxEl) {
+        document.querySelectorAll('.email-folder-item').forEach(f => f.classList.remove('active'));
+        inboxEl.classList.add('active');
+      }
+      refreshEmails();
+    }
+    loadGmailLabels();
+  } catch(err) {
+    toast('Errore: ' + (err.result?.error?.message || 'Errore'), 'error');
+  }
+}
+
+// ── LABEL CREATE/EDIT MODAL ──
+
+let labelModalMode = 'create'; // 'create' or 'rename'
+let labelModalEditId = null;
+
+function openCreateLabelModal(parentName) {
+  labelModalMode = 'create';
+  labelModalEditId = null;
+  document.getElementById('labelModalTitle').textContent = 'Nuova Etichetta';
+  document.getElementById('labelModalSaveBtn').textContent = 'Crea';
+  document.getElementById('labelNameInput').value = '';
+
+  // Populate parent select
+  const parentSelect = document.getElementById('labelParentSelect');
+  parentSelect.innerHTML = '<option value="">(Nessuna — livello principale)</option>';
+  gmailLabels.forEach(l => {
+    parentSelect.innerHTML += `<option value="${escHtml(l.name)}" ${l.name === parentName ? 'selected' : ''}>${escHtml(l.name)}</option>`;
+  });
+
+  // Reset color
+  document.querySelectorAll('.label-color-swatch').forEach(s => s.classList.remove('selected'));
+  document.querySelector('.label-color-swatch').classList.add('selected');
+
+  document.getElementById('labelModal').classList.add('open');
+  setTimeout(() => document.getElementById('labelNameInput').focus(), 100);
+}
+
+function closeLabelModal() {
+  document.getElementById('labelModal').classList.remove('open');
+}
+
+function selectLabelColor(el) {
+  document.querySelectorAll('.label-color-swatch').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+async function saveLabelModal() {
+  const name = document.getElementById('labelNameInput').value.trim();
+  if (!name) { toast('Inserisci un nome', 'error'); return; }
+
+  const parentName = document.getElementById('labelParentSelect').value;
+  const fullName = parentName ? parentName + '/' + name : name;
+
+  const selectedColor = document.querySelector('.label-color-swatch.selected');
+  const bgColor = selectedColor ? selectedColor.dataset.bg : '#999999';
+  const fgColor = selectedColor ? selectedColor.dataset.fg : '#ffffff';
+
+  if (demoMode) {
+    toast('(DEMO) Etichetta "' + fullName + '" creata', 'success');
+    closeLabelModal();
+    return;
+  }
+
+  try {
+    const resource = {
+      name: fullName,
+      labelListVisibility: 'labelShow',
+      messageListVisibility: 'show'
+    };
+
+    // Only add color if not default gray
+    if (bgColor !== '#999999') {
+      resource.color = {
+        backgroundColor: bgColor,
+        textColor: fgColor
+      };
+    }
+
+    await gapi.client.gmail.users.labels.create({
+      userId: 'me',
+      resource
+    });
+
+    toast('Etichetta "' + name + '" creata!', 'success');
+    closeLabelModal();
+    loadGmailLabels();
+  } catch(err) {
+    toast('Errore: ' + (err.result?.error?.message || 'Errore'), 'error');
+  }
 }
 
 // ── EMAIL LIST ──
