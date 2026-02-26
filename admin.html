@@ -1685,6 +1685,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         Clienti
         <span class="nav-badge" id="badgeClienti" style="display:none">0</span>
       </div>
+      <div class="nav-item" onclick="showSection('social')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        Social
+      </div>
       <div class="nav-item" onclick="showSection('impostazioni')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         Impostazioni
@@ -2985,6 +2989,147 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         </div>
       </div>
 
+      <!-- ═══ SEZIONE SOCIAL MEDIA ═══ -->
+      <div class="section" id="sec-social">
+        <div class="table-wrap" style="padding:28px;max-width:800px">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:6px">Pubblicazione Social Media</h3>
+          <p style="font-size:0.82rem;color:var(--caffe2);margin-bottom:20px">Configura le API per pubblicare gli immobili direttamente sui social media</p>
+
+          <!-- FACEBOOK -->
+          <div style="background:var(--sfondo);border-radius:12px;padding:18px;margin-bottom:16px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <div style="width:36px;height:36px;border-radius:8px;background:#1877F2;display:flex;align-items:center;justify-content:center">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </div>
+              <div>
+                <div style="font-weight:700;font-size:0.95rem;color:var(--nero)">Facebook Page</div>
+                <div style="font-size:0.75rem;color:var(--caffe2)" id="fbStatus">Non configurato</div>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Page ID</label>
+                <input type="text" id="socialFbPageId" placeholder="Es. 1234567890">
+              </div>
+              <div class="form-group">
+                <label>Page Access Token</label>
+                <input type="password" id="socialFbToken" placeholder="Token di lunga durata">
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="btn btn-sm btn-secondary" onclick="testFbConnection()">Test Connessione</button>
+              <button class="btn btn-sm btn-primary" onclick="saveSocialConfig('fb')">Salva</button>
+            </div>
+          </div>
+
+          <!-- INSTAGRAM -->
+          <div style="background:var(--sfondo);border-radius:12px;padding:18px;margin-bottom:16px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="white"/></svg>
+              </div>
+              <div>
+                <div style="font-weight:700;font-size:0.95rem;color:var(--nero)">Instagram Business</div>
+                <div style="font-size:0.75rem;color:var(--caffe2)" id="igStatus">Non configurato</div>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Instagram Business Account ID</label>
+                <input type="text" id="socialIgAccountId" placeholder="Dall'API Graph di Facebook">
+              </div>
+              <div class="form-group">
+                <label>Access Token (stesso di Facebook)</label>
+                <input type="password" id="socialIgToken" placeholder="Usa lo stesso token Facebook">
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="btn btn-sm btn-secondary" onclick="testIgConnection()">Test Connessione</button>
+              <button class="btn btn-sm btn-primary" onclick="saveSocialConfig('ig')">Salva</button>
+            </div>
+          </div>
+
+          <!-- GOOGLE BUSINESS PROFILE -->
+          <div style="background:var(--sfondo);border-radius:12px;padding:18px;margin-bottom:16px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <div style="width:36px;height:36px;border-radius:8px;background:#4285F4;display:flex;align-items:center;justify-content:center">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              </div>
+              <div>
+                <div style="font-weight:700;font-size:0.95rem;color:var(--nero)">Google Business Profile</div>
+                <div style="font-size:0.75rem;color:var(--caffe2)" id="gbpStatus">Non configurato</div>
+              </div>
+            </div>
+            <p style="font-size:0.78rem;color:var(--caffe2);margin-bottom:10px">Usa lo stesso Google Client ID configurato per la Posta. Verr&agrave; richiesto il permesso aggiuntivo per Business Profile.</p>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-sm btn-secondary" onclick="connectGBP()">Connetti Google Business</button>
+              <span id="gbpAccount" style="font-size:0.82rem;color:var(--nero);align-self:center"></span>
+            </div>
+          </div>
+
+          <!-- TIKTOK -->
+          <div style="background:var(--sfondo);border-radius:12px;padding:18px;margin-bottom:16px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <div style="width:36px;height:36px;border-radius:8px;background:#000;display:flex;align-items:center;justify-content:center">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.53a6.27 6.27 0 0 0-.79-.05A6.34 6.34 0 0 0 3.16 15a6.34 6.34 0 0 0 6.33 6.34 6.34 6.34 0 0 0 6.33-6.34V8.6a8.2 8.2 0 0 0 4.77 1.52V6.69h-.99z"/></svg>
+              </div>
+              <div>
+                <div style="font-weight:700;font-size:0.95rem;color:var(--nero)">TikTok</div>
+                <div style="font-size:0.75rem;color:var(--caffe2)">Condivisione diretta</div>
+              </div>
+            </div>
+            <p style="font-size:0.78rem;color:var(--caffe2)">TikTok non supporta la pubblicazione diretta da siti web. Quando pubblichi un immobile, verr&agrave; generata una scheda visiva ottimizzata che potrai scaricare e caricare manualmente su TikTok.</p>
+          </div>
+
+          <!-- PUBBLICA IMMOBILE -->
+          <div style="background:white;border:2px solid var(--caffe3);border-radius:12px;padding:18px;margin-top:24px">
+            <h4 style="font-size:1rem;color:var(--nero);margin-bottom:12px">Pubblica Immobile sui Social</h4>
+            <div class="form-group" style="margin-bottom:12px">
+              <label>Seleziona Immobile</label>
+              <select id="socialPropertySelect" style="width:100%">
+                <option value="">— Seleziona un immobile —</option>
+              </select>
+            </div>
+            <div id="socialPropertyPreview" style="display:none;background:var(--sfondo);border-radius:8px;padding:12px;margin-bottom:12px"></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn btn-sm" onclick="publishToFacebook()" style="background:#1877F2;color:white">Pubblica su Facebook</button>
+              <button class="btn btn-sm" onclick="publishToInstagram()" style="background:linear-gradient(45deg,#f09433,#dc2743);color:white">Pubblica su Instagram</button>
+              <button class="btn btn-sm" onclick="publishToGBP()" style="background:#4285F4;color:white">Pubblica su Google</button>
+              <button class="btn btn-sm" onclick="generateTikTokImage()" style="background:#000;color:white">Genera per TikTok</button>
+            </div>
+            <div id="socialPublishResult" style="margin-top:12px;font-size:0.82rem;display:none"></div>
+          </div>
+
+          <!-- GUIDA SETUP -->
+          <details style="margin-top:20px">
+            <summary style="font-weight:600;font-size:0.9rem;color:var(--nero);cursor:pointer">Come configurare le API</summary>
+            <div style="font-size:0.82rem;color:var(--caffe2);padding:12px 0;line-height:1.7">
+              <p><strong>Facebook + Instagram:</strong></p>
+              <ol style="padding-left:20px;margin-bottom:12px">
+                <li>Vai su <a href="https://developers.facebook.com" target="_blank">developers.facebook.com</a></li>
+                <li>Crea un'app di tipo "Business"</li>
+                <li>Aggiungi il prodotto "Facebook Login"</li>
+                <li>In Strumenti > Esplora API Graph, genera un Token di Pagina</li>
+                <li>Per il token di lunga durata: usa il debug token e estendilo</li>
+                <li>Il Page ID lo trovi nelle Impostazioni della Pagina Facebook</li>
+                <li>L'Instagram Business Account ID: vai su API Graph Explorer, chiama <code>/me/accounts</code> poi <code>/{page-id}?fields=instagram_business_account</code></li>
+              </ol>
+              <p><strong>Google Business Profile:</strong></p>
+              <ol style="padding-left:20px;margin-bottom:12px">
+                <li>Usa lo stesso Google Client ID della Posta</li>
+                <li>Abilita "Google My Business API" nella Console Google Cloud</li>
+                <li>Clicca "Connetti Google Business" qui sopra per autorizzare</li>
+              </ol>
+              <p><strong>TikTok:</strong></p>
+              <ol style="padding-left:20px">
+                <li>La pubblicazione diretta non e' supportata</li>
+                <li>Genera l'immagine dell'immobile e caricala manualmente su TikTok</li>
+              </ol>
+            </div>
+          </details>
+        </div>
+      </div>
+
       <!-- ═══ SEZIONE IMPOSTAZIONI ═══ -->
       <div class="section" id="sec-impostazioni">
         <div class="table-wrap" style="padding:28px;max-width:600px">
@@ -3288,7 +3433,7 @@ function check2FAStatus() {
 
 function handleHashNavigation() {
   const hash = window.location.hash.replace('#', '');
-  const validSections = ['immobili', 'nuovo', 'richieste', 'posta', 'blog', 'clienti', 'impostazioni'];
+  const validSections = ['immobili', 'nuovo', 'richieste', 'posta', 'blog', 'clienti', 'social', 'impostazioni'];
   if (hash && validSections.includes(hash)) {
     setTimeout(() => showSection(hash), 300);
   }
@@ -3344,7 +3489,7 @@ function showSection(name) {
   const sec = document.getElementById('sec-' + name);
   if (sec) sec.classList.add('active');
   // Mark the correct nav-item as active
-  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','impostazioni'];
+  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','impostazioni'];
   const idx = sectionNames.indexOf(name);
   const navItems = document.querySelectorAll('.nav-item');
   if (idx >= 0 && navItems[idx]) navItems[idx].classList.add('active');
@@ -3356,6 +3501,7 @@ function showSection(name) {
     posta: 'Posta',
     blog: 'Gestione Blog',
     clienti: 'Gestione Clienti',
+    social: 'Social Media',
     impostazioni: 'Impostazioni'
   };
   document.getElementById('topbarTitle').textContent = titles[name] || name;
@@ -3363,6 +3509,7 @@ function showSection(name) {
   if (name === 'richieste') loadRichieste();
   if (name === 'posta') initEmailSection();
   if (name === 'blog') loadBlogList();
+  if (name === 'social') loadSocialSection();
   if (name === 'clienti') loadClienti();
   if (name === 'impostazioni') { testConn(); check2FAStatus(); }
 }
@@ -3458,6 +3605,7 @@ function renderTable(data) {
           <button class="btn btn-secondary btn-sm" onclick="editImmobile('${i.id}')" title="Modifica">✏️</button>
           <button class="btn btn-sm" onclick="showMatchingClienti('${i.id}')" title="Trova clienti compatibili" style="background:#e3f2fd;color:#1565c0">🤝</button>
           <button class="btn btn-sm" onclick="printPropertyPdf('${i.id}')" title="Stampa PDF" style="background:#fff3e0;color:#e65100">📄</button>
+          <button class="btn btn-sm" onclick="quickPublishSocial('${i.id}')" title="Pubblica sui Social" style="background:#e8f5e9;color:#1877F2">📢</button>
           <button class="btn btn-danger btn-sm" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')">🗑️</button>
           <button class="btn btn-sm" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="Toggle evidenza" style="background:var(--sfondo)">⭐</button>
           <button class="btn btn-sm" onclick="toggleAttivo('${i.id}',${!i.attivo})" title="Toggle attivo" style="background:var(--sfondo)">${i.attivo ? '👁️' : '🚫'}</button>
@@ -4885,85 +5033,682 @@ function printPropertyPdf(id) {
   const i = allImmobili.find(x => x.id == id);
   if (!i) { toast('Immobile non trovato', 'error'); return; }
 
-  const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
+  // Collect all photos (max 4 for layout)
+  const allPhotos = (i.foto_urls || i.foto || []).filter(Boolean).slice(0, 4);
+  const mainFoto = i.foto_principale || allPhotos[0] || '';
+  const extraPhotos = allPhotos.slice(1, 4);
   const prezzo = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : 'Prezzo su richiesta';
-  const tipo = i.tipo_operazione === 'vendita' ? 'Vendita' : i.tipo_operazione === 'affitto' ? 'Affitto' : (i.tipo_operazione || '');
+  const prezzoMq = (i.prezzo && i.superficie) ? '\u20AC ' + Math.round(i.prezzo / i.superficie).toLocaleString('it-IT') + '/mq' : '';
+  const tipo = i.tipo_operazione === 'vendita' ? 'VENDITA' : i.tipo_operazione === 'affitto' ? 'AFFITTO' : (i.tipo_operazione || '').toUpperCase();
 
-  // Build features list
+  // Build comprehensive features
   const features = [];
+  if (i.tipologia || i.categoria) features.push(['Tipologia', i.tipologia || i.categoria]);
   if (i.superficie) features.push(['Superficie', i.superficie + ' mq']);
   if (i.locali) features.push(['Locali', i.locali]);
   if (i.camere) features.push(['Camere', i.camere]);
   if (i.bagni_totali || i.bagni) features.push(['Bagni', i.bagni_totali || i.bagni]);
   if (i.piano) features.push(['Piano', i.piano]);
-  if (i.anno_costruzione) features.push(['Anno costruzione', i.anno_costruzione]);
-  if (i.classe_energetica) features.push(['Classe energetica', i.classe_energetica]);
-  if (i.stato) features.push(['Stato', i.stato]);
-  if (i.spese_condominio) features.push(['Spese condominiali', '\u20AC ' + Number(i.spese_condominio).toLocaleString('it-IT') + '/mese']);
-  if (i.esposizione) features.push(['Esposizione', i.esposizione]);
   if (i.totale_piani) features.push(['Piani totali', i.totale_piani]);
+  if (i.anno_costruzione) features.push(['Anno costruzione', i.anno_costruzione]);
+  if (i.stato) features.push(['Stato immobile', i.stato]);
+  if (i.classe_energetica) features.push(['Classe energetica', i.classe_energetica]);
+  if (i.ipe_kwh) features.push(['IPE', i.ipe_kwh + ' kWh/m\u00B2a']);
+  if (i.esposizione) features.push(['Esposizione', i.esposizione]);
   if (i.mq_giardino) features.push(['Giardino', i.mq_giardino + ' mq']);
   if (i.mq_lotto) features.push(['Lotto', i.mq_lotto + ' mq']);
+  if (i.terrazzi_num) features.push(['Terrazzi', i.terrazzi_num]);
+  if (i.garage_num) features.push(['Garage', i.garage_num]);
+  if (i.posto_auto) features.push(['Posti auto', i.posto_auto]);
+  if (i.ripostigli) features.push(['Ripostigli', i.ripostigli]);
+  if (i.spese_condominio) features.push(['Spese condominiali', '\u20AC ' + Number(i.spese_condominio).toLocaleString('it-IT') + '/mese']);
   if (i.consegna) features.push(['Consegna', i.consegna]);
-  if (i.ipe_kwh) features.push(['IPE', i.ipe_kwh + ' kWh/m\u00B2a']);
+  if (i.panorama) features.push(['Panorama', i.panorama]);
+  if (i.connettivita) features.push(['Connettivit\u00E0', i.connettivita]);
 
-  // Comfort / dotazioni
+  // Ambienti
+  const ambienti = [];
+  if (i.soggiorno) ambienti.push('Soggiorno');
+  if (i.cucina) ambienti.push('Cucina');
+  if (i.mansarda) ambienti.push('Mansarda');
+  if (i.taverna) ambienti.push('Taverna');
+  if (i.soffitta) ambienti.push('Soffitta');
+  if (i.lavanderia) ambienti.push('Lavanderia');
+  if (i.porticato) ambienti.push('Porticato');
+  if (i.soppalco) ambienti.push('Soppalco');
+
+  // Riscaldamento / Clima
+  const clima = [];
+  if (i.riscaldamento_autonomo) clima.push('Riscaldamento autonomo');
+  if (i.riscaldamento_centralizzato) clima.push('Riscaldamento centralizzato');
+  if (i.riscaldamento_pavimento) clima.push('Riscaldamento a pavimento');
+  if (i.aria_condizionata) clima.push('Aria condizionata');
+  if (i.camino) clima.push('Camino');
+  if (i.termopompa) clima.push('Termopompa');
+  if (i.caldaia_condensazione) clima.push('Caldaia a condensazione');
+
+  // Comfort / Sicurezza
   const comforts = [];
-  if (i.garage) comforts.push('Garage');
+  if (i.garage || i.garage_num) comforts.push('Garage');
   if (i.giardino) comforts.push('Giardino');
   if (i.terrazzo) comforts.push('Terrazzo');
   if (i.cantina) comforts.push('Cantina');
   if (i.ascensore) comforts.push('Ascensore');
   if (i.piscina) comforts.push('Piscina');
   if (i.arredato || i.arredo) comforts.push('Arredato');
-  if (i.aria_condizionata) comforts.push('Aria condizionata');
-  if (i.riscaldamento_autonomo) comforts.push('Riscaldamento autonomo');
-  if (i.riscaldamento_centralizzato) comforts.push('Riscaldamento centralizzato');
-  if (i.camino) comforts.push('Camino');
+  if (i.ingresso_indipendente) comforts.push('Ingresso indipendente');
   if (i.allarme) comforts.push('Allarme');
   if (i.porta_blindata) comforts.push('Porta blindata');
-  if (i.pannelli_fotovoltaici) comforts.push('Fotovoltaico');
-  if (i.pannelli_solari) comforts.push('Solare termico');
-  if (i.ingresso_indipendente) comforts.push('Ingresso indipendente');
-  if (i.mansarda) comforts.push('Mansarda');
-  if (i.taverna) comforts.push('Taverna');
-  if (i.porticato) comforts.push('Porticato');
   if (i.domotica) comforts.push('Domotica');
   if (i.tapparelle_motorizzate) comforts.push('Tapparelle motorizzate');
+  if (i.zanzariere) comforts.push('Zanzariere');
+  if (i.pannelli_fotovoltaici) comforts.push('Fotovoltaico');
+  if (i.pannelli_solari) comforts.push('Solare termico');
+  if (i.impianto_geotermico) comforts.push('Geotermico');
+  if (i.canna_fumaria) comforts.push('Canna fumaria');
+  if (i.portineria) comforts.push('Portineria');
+  if (i.accesso_disabili) comforts.push('Accesso disabili');
 
-  const featuresHtml = features.map(f => '<tr><td style="font-weight:600;padding:4px 16px 4px 0;font-size:13px;color:#555;white-space:nowrap">' + f[0] + '</td><td style="padding:4px 0;font-size:13px">' + f[1] + '</td></tr>').join('');
-  const comfortsHtml = comforts.length > 0 ? '<div style="margin-top:16px"><h3 style="font-size:14px;color:#3A5578;margin-bottom:8px">Dotazioni e Comfort</h3><div style="display:flex;flex-wrap:wrap;gap:6px">' + comforts.map(c => '<span style="background:#f0f4e8;color:#3A5578;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:500">' + c + '</span>').join('') + '</div></div>' : '';
+  // Build features table (2 columns)
+  const half = Math.ceil(features.length / 2);
+  const col1 = features.slice(0, half);
+  const col2 = features.slice(half);
+  let featRows = '';
+  for (let r = 0; r < half; r++) {
+    const f1 = col1[r] || ['',''];
+    const f2 = col2[r] || ['',''];
+    featRows += '<tr>' +
+      '<td class="feat-label">' + f1[0] + '</td><td class="feat-val">' + f1[1] + '</td>' +
+      '<td class="feat-label">' + f2[0] + '</td><td class="feat-val">' + f2[1] + '</td>' +
+      '</tr>';
+  }
+
+  const tagHtml = (arr, title) => {
+    if (!arr.length) return '';
+    return '<div class="tag-section"><h3>' + title + '</h3><div class="tags">' + arr.map(t => '<span class="tag">\u2713 ' + t + '</span>').join('') + '</div></div>';
+  };
 
   const win = window.open('', '_blank');
-  win.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + escHtml(i.codice || '') + ' - ' + escHtml(i.titolo || '') + '</title>' +
-    '<style>' +
-    '@page { margin: 20mm 15mm; }' +
-    'body { font-family: "Segoe UI", Arial, sans-serif; color: #1E3A5C; margin: 0; padding: 20px; line-height: 1.5; }' +
-    '.header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 3px solid #CEE08F; padding-bottom: 16px; margin-bottom: 20px; }' +
-    '.logo { font-size: 22px; font-weight: 700; color: #3A5578; }' +
-    '.logo small { display: block; font-size: 10px; font-weight: 400; color: #7A9AB8; letter-spacing: 2px; text-transform: uppercase; }' +
-    '.badge-tipo { background: #3A5578; color: white; padding: 4px 14px; border-radius: 16px; font-size: 12px; font-weight: 600; }' +
-    '.main-photo { width: 100%; max-height: 350px; object-fit: cover; border-radius: 10px; margin-bottom: 20px; }' +
-    '.title { font-size: 20px; font-weight: 700; color: #3A5578; margin-bottom: 4px; }' +
-    '.location { font-size: 14px; color: #7A9AB8; margin-bottom: 4px; }' +
-    '.price { font-size: 24px; font-weight: 700; color: #27ae60; margin-bottom: 16px; }' +
-    '.features-table { border-collapse: collapse; width: 100%; }' +
-    '.features-table tr:nth-child(even) { background: #f9f9f6; }' +
-    '.footer { margin-top: 30px; padding-top: 12px; border-top: 2px solid #CEE08F; text-align: center; font-size: 11px; color: #7A9AB8; }' +
-    '@media print { body { padding: 0; } }' +
-    '</style></head><body>' +
-    '<div class="header"><div class="logo">Righetto Immobiliare<small>Agenzia Immobiliare</small></div><div><span class="badge-tipo">' + tipo + '</span><div style="text-align:right;font-size:11px;color:#7A9AB8;margin-top:6px">Rif. ' + escHtml(i.codice || '') + '</div></div></div>' +
-    (foto ? '<img src="' + foto + '" class="main-photo" onerror="this.style.display=\'none\'">' : '') +
-    '<div class="title">' + escHtml(i.titolo || 'Immobile') + '</div>' +
-    '<div class="location">' + escHtml(i.comune || '') + (i.indirizzo ? ' — ' + escHtml(i.indirizzo) : '') + '</div>' +
-    '<div class="price">' + prezzo + '</div>' +
-    '<table class="features-table">' + featuresHtml + '</table>' +
-    comfortsHtml +
-    (i.note_interne ? '' : '') +
-    '<div class="footer">Righetto Immobiliare | Tel: 049 XXX XXXX | info@righettoimmobiliare.it | www.righettoimmobiliare.it<br>Documento generato il ' + new Date().toLocaleDateString('it-IT') + '</div>' +
-    '</body></html>');
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${escHtml(i.codice || '')} - ${escHtml(i.titolo || '')}</title>
+<style>
+  @page { margin: 12mm 12mm 14mm 12mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; color: #1E3A5C; padding: 0; line-height: 1.45; font-size: 13px; }
+  .header { background: #3A5578; color: white; padding: 14px 22px; display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-size: 20px; font-weight: 700; }
+  .logo span { color: #CEE08F; }
+  .logo small { display: block; font-size: 9px; font-weight: 400; color: #B0C8E0; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+  .badge-tipo { background: #CEE08F; color: #3A5578; padding: 5px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 1px; }
+  .rif { text-align: right; font-size: 10px; color: #B0C8E0; margin-top: 4px; }
+  .photos { display: flex; gap: 6px; padding: 10px 16px; background: #f5f3ee; }
+  .photos .main { flex: 2; height: 230px; border-radius: 8px; object-fit: cover; }
+  .photos .side { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+  .photos .side img { flex: 1; border-radius: 6px; object-fit: cover; min-height: 0; }
+  .no-photo { flex: 2; height: 230px; border-radius: 8px; background: #ddd; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; }
+  .title-bar { padding: 14px 22px 6px; }
+  .title-bar h1 { font-size: 18px; font-weight: 700; color: #3A5578; }
+  .title-bar .loc { font-size: 13px; color: #7A9AB8; margin-top: 2px; }
+  .price-bar { padding: 4px 22px 14px; display: flex; align-items: baseline; gap: 12px; }
+  .price-bar .price { font-size: 26px; font-weight: 700; color: #27ae60; }
+  .price-bar .pmq { font-size: 12px; color: #7A9AB8; }
+  .feat-table { width: 100%; border-collapse: collapse; margin: 0 auto; padding: 0 16px; }
+  .feat-table td { padding: 5px 10px; font-size: 12px; border-bottom: 1px solid #eee; }
+  .feat-label { color: #7A9AB8; font-weight: 400; width: 22%; }
+  .feat-val { color: #3A5578; font-weight: 600; width: 28%; }
+  .section { padding: 0 22px; margin-top: 14px; }
+  .section h2 { font-size: 13px; font-weight: 700; color: #3A5578; border-left: 4px solid #CEE08F; padding-left: 8px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tag-section { margin-top: 12px; padding: 0 22px; }
+  .tag-section h3 { font-size: 11px; font-weight: 700; color: #3A5578; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag { background: #f0f4e8; color: #3A5578; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 500; }
+  .desc { font-size: 12px; color: #555; line-height: 1.6; margin-top: 6px; }
+  .footer { background: #3A5578; color: #B0C8E0; padding: 10px 22px; text-align: center; font-size: 9px; margin-top: 20px; }
+  .footer strong { color: #CEE08F; }
+  @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+</style></head><body>
+<div class="header">
+  <div class="logo"><span>Righetto</span> Immobiliare<small>Agenzia Immobiliare</small></div>
+  <div><span class="badge-tipo">${tipo}</span><div class="rif">Rif. ${escHtml(i.codice || 'N/D')}</div></div>
+</div>
+<div class="photos">
+  ${mainFoto ? '<img class="main" src="' + mainFoto + '" onerror="this.style.display=\'none\'">' : '<div class="no-photo">Nessuna foto disponibile</div>'}
+  ${extraPhotos.length > 0 ? '<div class="side">' + extraPhotos.map(p => '<img src="' + p + '" onerror="this.style.display=\'none\'">').join('') + '</div>' : ''}
+</div>
+<div class="title-bar">
+  <h1>${escHtml(i.titolo || 'Immobile')}</h1>
+  <div class="loc">${escHtml(i.comune || '')}${i.indirizzo ? ' \u2014 ' + escHtml(i.indirizzo) : ''}</div>
+</div>
+<div class="price-bar">
+  <span class="price">${prezzo}</span>
+  ${prezzoMq ? '<span class="pmq">(' + prezzoMq + ')</span>' : ''}
+</div>
+<div class="section"><h2>Caratteristiche</h2></div>
+<table class="feat-table">${featRows}</table>
+${tagHtml(ambienti, 'Ambienti')}
+${tagHtml(clima, 'Riscaldamento / Clima')}
+${tagHtml(comforts, 'Dotazioni & Comfort')}
+${i.descrizione ? '<div class="section" style="margin-top:14px"><h2>Descrizione</h2><div class="desc">' + escHtml(i.descrizione || '').replace(/\\n/g, '<br>') + '</div></div>' : ''}
+<div class="footer">
+  <strong>Righetto Immobiliare</strong> \u2014 Via Roma 96, Limena (PD) \u2014 Tel: 049 884 3484 \u2014 info@righettoimmobiliare.it \u2014 www.righettoimmobiliare.it<br>
+  Documento generato il ${new Date().toLocaleDateString('it-IT')} \u2014 Le informazioni non costituiscono elemento contrattuale
+</div>
+</body></html>`);
   win.document.close();
-  setTimeout(function() { win.print(); }, 500);
+  // Wait for images to load before printing
+  setTimeout(function() { win.print(); }, 1200);
+}
+
+// ══════════════════════════════════════
+// SOCIAL MEDIA PUBLISHING
+// ══════════════════════════════════════
+
+function quickPublishSocial(id) {
+  showSection('social');
+  setTimeout(() => {
+    const sel = document.getElementById('socialPropertySelect');
+    if (sel) { sel.value = id; showSocialPropertyPreview(id); }
+  }, 200);
+}
+
+function loadSocialSection() {
+  // Load saved configs
+  const fbPageId = localStorage.getItem('social_fb_page_id') || '';
+  const fbToken = localStorage.getItem('social_fb_token') || '';
+  const igAccountId = localStorage.getItem('social_ig_account_id') || '';
+  const igToken = localStorage.getItem('social_ig_token') || '';
+
+  document.getElementById('socialFbPageId').value = fbPageId;
+  document.getElementById('socialFbToken').value = fbToken;
+  document.getElementById('socialIgAccountId').value = igAccountId;
+  document.getElementById('socialIgToken').value = igToken;
+
+  document.getElementById('fbStatus').textContent = fbPageId ? 'Configurato' : 'Non configurato';
+  document.getElementById('fbStatus').style.color = fbPageId ? 'var(--verde)' : 'var(--caffe2)';
+  document.getElementById('igStatus').textContent = igAccountId ? 'Configurato' : 'Non configurato';
+  document.getElementById('igStatus').style.color = igAccountId ? 'var(--verde)' : 'var(--caffe2)';
+
+  // Populate property selector
+  const sel = document.getElementById('socialPropertySelect');
+  sel.innerHTML = '<option value="">— Seleziona un immobile —</option>';
+  allImmobili.filter(i => i.attivo && !i.venduto && !i.affittato).forEach(i => {
+    const opt = document.createElement('option');
+    opt.value = i.id;
+    opt.textContent = (i.codice || '') + ' — ' + (i.titolo || 'Senza titolo') + ' — ' + (i.prezzo ? '€' + Number(i.prezzo).toLocaleString('it-IT') : 'N/D');
+    sel.appendChild(opt);
+  });
+  sel.onchange = function() { showSocialPropertyPreview(this.value); };
+
+  // Check GBP
+  const gbpLocation = localStorage.getItem('social_gbp_location');
+  if (gbpLocation) {
+    document.getElementById('gbpStatus').textContent = 'Connesso';
+    document.getElementById('gbpStatus').style.color = 'var(--verde)';
+    document.getElementById('gbpAccount').textContent = localStorage.getItem('social_gbp_name') || '';
+  }
+}
+
+function saveSocialConfig(platform) {
+  if (platform === 'fb') {
+    localStorage.setItem('social_fb_page_id', document.getElementById('socialFbPageId').value.trim());
+    localStorage.setItem('social_fb_token', document.getElementById('socialFbToken').value.trim());
+    document.getElementById('fbStatus').textContent = 'Configurato';
+    document.getElementById('fbStatus').style.color = 'var(--verde)';
+  } else if (platform === 'ig') {
+    localStorage.setItem('social_ig_account_id', document.getElementById('socialIgAccountId').value.trim());
+    localStorage.setItem('social_ig_token', document.getElementById('socialIgToken').value.trim());
+    document.getElementById('igStatus').textContent = 'Configurato';
+    document.getElementById('igStatus').style.color = 'var(--verde)';
+  }
+  toast('Configurazione salvata!', 'success');
+}
+
+function showSocialPropertyPreview(id) {
+  const preview = document.getElementById('socialPropertyPreview');
+  if (!id) { preview.style.display = 'none'; return; }
+  const i = allImmobili.find(x => x.id == id);
+  if (!i) { preview.style.display = 'none'; return; }
+  const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
+  const prezzo = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : 'N/D';
+  preview.style.display = 'flex';
+  preview.style.gap = '12px';
+  preview.style.alignItems = 'center';
+  preview.innerHTML = (foto ? '<img src="' + foto + '" style="width:80px;height:60px;object-fit:cover;border-radius:6px" onerror="this.style.display=\'none\'">' : '') +
+    '<div><div style="font-weight:600;font-size:0.88rem">' + escHtml(i.titolo || '') + '</div>' +
+    '<div style="font-size:0.78rem;color:var(--caffe2)">' + escHtml(i.comune || '') + ' | ' + prezzo + (i.superficie ? ' | ' + i.superficie + ' mq' : '') + '</div></div>';
+}
+
+function buildSocialCaption(i) {
+  const tipo = i.tipo_operazione === 'vendita' ? 'IN VENDITA' : i.tipo_operazione === 'affitto' ? 'IN AFFITTO' : '';
+  const prezzo = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : '';
+  let caption = '';
+  if (tipo) caption += tipo + ' | ';
+  caption += (i.titolo || 'Immobile') + '\n\n';
+  caption += (i.comune || '') + (i.indirizzo ? ' — ' + i.indirizzo : '') + '\n';
+  if (prezzo) caption += prezzo + '\n';
+  if (i.superficie) caption += i.superficie + ' mq';
+  if (i.camere) caption += ' | ' + i.camere + ' camere';
+  if (i.bagni_totali || i.bagni) caption += ' | ' + (i.bagni_totali || i.bagni) + ' bagni';
+  caption += '\n\n';
+  // Build feature highlights
+  const highlights = [];
+  if (i.classe_energetica) highlights.push('Classe ' + i.classe_energetica);
+  if (i.garage) highlights.push('Garage');
+  if (i.giardino) highlights.push('Giardino');
+  if (i.terrazzo) highlights.push('Terrazzo');
+  if (i.ascensore) highlights.push('Ascensore');
+  if (i.aria_condizionata) highlights.push('Climatizzato');
+  if (highlights.length) caption += highlights.join(' | ') + '\n\n';
+  caption += 'Rif. ' + (i.codice || '') + '\n';
+  caption += 'Righetto Immobiliare | Tel: 049 884 3484\n';
+  caption += '#immobiliare #' + (i.comune || 'padova').toLowerCase().replace(/\s+/g, '') + ' #' + (i.tipo_operazione || 'vendita') + ' #casainvendita #righettoimmobiliare';
+  return caption;
+}
+
+function showPublishResult(msg, type) {
+  const el = document.getElementById('socialPublishResult');
+  el.style.display = 'block';
+  el.style.color = type === 'error' ? 'var(--rosso)' : 'var(--verde)';
+  el.textContent = msg;
+}
+
+// ── FACEBOOK PUBLISHING ──
+async function testFbConnection() {
+  const pageId = document.getElementById('socialFbPageId').value.trim() || localStorage.getItem('social_fb_page_id');
+  const token = document.getElementById('socialFbToken').value.trim() || localStorage.getItem('social_fb_token');
+  if (!pageId || !token) { toast('Inserisci Page ID e Token', 'error'); return; }
+  try {
+    const res = await fetch('https://graph.facebook.com/v21.0/' + pageId + '?fields=name,fan_count&access_token=' + token);
+    const data = await res.json();
+    if (data.error) { toast('Errore: ' + data.error.message, 'error'); return; }
+    toast('Connesso a: ' + data.name + ' (' + (data.fan_count || 0) + ' fan)', 'success');
+    document.getElementById('fbStatus').textContent = 'Connesso: ' + data.name;
+    document.getElementById('fbStatus').style.color = 'var(--verde)';
+  } catch(e) { toast('Errore di rete: ' + e.message, 'error'); }
+}
+
+async function publishToFacebook() {
+  const id = document.getElementById('socialPropertySelect').value;
+  if (!id) { toast('Seleziona un immobile', 'error'); return; }
+  const i = allImmobili.find(x => x.id == id);
+  if (!i) return;
+
+  const pageId = localStorage.getItem('social_fb_page_id');
+  const token = localStorage.getItem('social_fb_token');
+  if (!pageId || !token) { toast('Configura Facebook prima (Page ID + Token)', 'error'); return; }
+
+  const caption = buildSocialCaption(i);
+  const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
+
+  try {
+    toast('Pubblicazione su Facebook...', 'success');
+    let res;
+    if (foto) {
+      // Post with photo
+      res = await fetch('https://graph.facebook.com/v21.0/' + pageId + '/photos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: foto, caption: caption, access_token: token })
+      });
+    } else {
+      // Text-only post
+      res = await fetch('https://graph.facebook.com/v21.0/' + pageId + '/feed', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: caption, access_token: token })
+      });
+    }
+    const data = await res.json();
+    if (data.error) {
+      showPublishResult('Errore Facebook: ' + data.error.message, 'error');
+      toast('Errore Facebook: ' + data.error.message, 'error');
+    } else {
+      showPublishResult('Pubblicato su Facebook! ID: ' + (data.id || data.post_id), 'success');
+      toast('Pubblicato su Facebook!', 'success');
+    }
+  } catch(e) {
+    showPublishResult('Errore di rete: ' + e.message, 'error');
+    toast('Errore: ' + e.message, 'error');
+  }
+}
+
+// ── INSTAGRAM PUBLISHING ──
+async function testIgConnection() {
+  const accountId = document.getElementById('socialIgAccountId').value.trim() || localStorage.getItem('social_ig_account_id');
+  const token = document.getElementById('socialIgToken').value.trim() || localStorage.getItem('social_ig_token');
+  if (!accountId || !token) { toast('Inserisci Account ID e Token', 'error'); return; }
+  try {
+    const res = await fetch('https://graph.facebook.com/v21.0/' + accountId + '?fields=username,followers_count&access_token=' + token);
+    const data = await res.json();
+    if (data.error) { toast('Errore: ' + data.error.message, 'error'); return; }
+    toast('Connesso a: @' + data.username + ' (' + (data.followers_count || 0) + ' follower)', 'success');
+    document.getElementById('igStatus').textContent = 'Connesso: @' + data.username;
+    document.getElementById('igStatus').style.color = 'var(--verde)';
+  } catch(e) { toast('Errore di rete: ' + e.message, 'error'); }
+}
+
+async function publishToInstagram() {
+  const id = document.getElementById('socialPropertySelect').value;
+  if (!id) { toast('Seleziona un immobile', 'error'); return; }
+  const i = allImmobili.find(x => x.id == id);
+  if (!i) return;
+
+  const accountId = localStorage.getItem('social_ig_account_id');
+  const token = localStorage.getItem('social_ig_token');
+  if (!accountId || !token) { toast('Configura Instagram prima', 'error'); return; }
+
+  const caption = buildSocialCaption(i);
+  const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
+  if (!foto) { toast('Serve almeno una foto per Instagram', 'error'); return; }
+
+  try {
+    toast('Pubblicazione su Instagram...', 'success');
+
+    // Check if multiple photos for carousel
+    const allPhotos = (i.foto_urls || i.foto || []).filter(Boolean);
+
+    if (allPhotos.length > 1 && allPhotos.length <= 10) {
+      // CAROUSEL POST
+      // Step 1: Create carousel items
+      const itemIds = [];
+      for (const photoUrl of allPhotos.slice(0, 10)) {
+        const itemRes = await fetch('https://graph.facebook.com/v21.0/' + accountId + '/media', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ image_url: photoUrl, is_carousel_item: true, access_token: token })
+        });
+        const itemData = await itemRes.json();
+        if (itemData.id) itemIds.push(itemData.id);
+      }
+      // Step 2: Create carousel container
+      const containerRes = await fetch('https://graph.facebook.com/v21.0/' + accountId + '/media', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ media_type: 'CAROUSEL', children: itemIds, caption: caption, access_token: token })
+      });
+      const container = await containerRes.json();
+      if (container.error) { showPublishResult('Errore Instagram: ' + container.error.message, 'error'); return; }
+
+      // Step 3: Publish
+      await waitForIgMedia(container.id, token);
+      const pubRes = await fetch('https://graph.facebook.com/v21.0/' + accountId + '/media_publish', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ creation_id: container.id, access_token: token })
+      });
+      const pubData = await pubRes.json();
+      if (pubData.error) { showPublishResult('Errore Instagram: ' + pubData.error.message, 'error'); }
+      else { showPublishResult('Pubblicato su Instagram (carousel ' + allPhotos.length + ' foto)!', 'success'); toast('Pubblicato su Instagram!', 'success'); }
+
+    } else {
+      // SINGLE IMAGE POST
+      // Step 1: Create media container
+      const containerRes = await fetch('https://graph.facebook.com/v21.0/' + accountId + '/media', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image_url: foto, caption: caption, access_token: token })
+      });
+      const container = await containerRes.json();
+      if (container.error) { showPublishResult('Errore Instagram: ' + container.error.message, 'error'); return; }
+
+      // Step 2: Wait for processing and publish
+      await waitForIgMedia(container.id, token);
+      const pubRes = await fetch('https://graph.facebook.com/v21.0/' + accountId + '/media_publish', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ creation_id: container.id, access_token: token })
+      });
+      const pubData = await pubRes.json();
+      if (pubData.error) { showPublishResult('Errore Instagram: ' + pubData.error.message, 'error'); }
+      else { showPublishResult('Pubblicato su Instagram!', 'success'); toast('Pubblicato su Instagram!', 'success'); }
+    }
+  } catch(e) {
+    showPublishResult('Errore: ' + e.message, 'error');
+    toast('Errore: ' + e.message, 'error');
+  }
+}
+
+async function waitForIgMedia(containerId, token) {
+  // Instagram needs processing time. Poll status for up to 30 seconds.
+  for (let attempt = 0; attempt < 10; attempt++) {
+    await new Promise(r => setTimeout(r, 3000));
+    try {
+      const res = await fetch('https://graph.facebook.com/v21.0/' + containerId + '?fields=status_code&access_token=' + token);
+      const data = await res.json();
+      if (data.status_code === 'FINISHED') return;
+      if (data.status_code === 'ERROR') throw new Error('Errore elaborazione media Instagram');
+    } catch(e) { /* continue polling */ }
+  }
+}
+
+// ── GOOGLE BUSINESS PROFILE ──
+let gbpTokenClient = null;
+
+function connectGBP() {
+  if (!gmailClientId) {
+    toast('Configura prima il Google Client ID nella sezione Posta', 'error');
+    return;
+  }
+  gbpTokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: gmailClientId,
+    scope: 'https://www.googleapis.com/auth/business.manage',
+    callback: handleGBPAuth,
+  });
+  gbpTokenClient.requestAccessToken();
+}
+
+async function handleGBPAuth(resp) {
+  if (resp.error) { toast('Errore auth Google: ' + resp.error, 'error'); return; }
+  const gbpAccessToken = resp.access_token;
+  localStorage.setItem('social_gbp_access_token', gbpAccessToken);
+
+  try {
+    // Get accounts
+    const accRes = await fetch('https://mybusinessaccountmanagement.googleapis.com/v1/accounts', {
+      headers: { 'Authorization': 'Bearer ' + gbpAccessToken }
+    });
+    const accData = await accRes.json();
+    if (!accData.accounts || accData.accounts.length === 0) {
+      toast('Nessun account Google Business trovato', 'error');
+      return;
+    }
+    const account = accData.accounts[0];
+    localStorage.setItem('social_gbp_account', account.name);
+
+    // Get locations
+    const locRes = await fetch('https://mybusinessbusinessinformation.googleapis.com/v1/' + account.name + '/locations', {
+      headers: { 'Authorization': 'Bearer ' + gbpAccessToken }
+    });
+    const locData = await locRes.json();
+    if (locData.locations && locData.locations.length > 0) {
+      const loc = locData.locations[0];
+      localStorage.setItem('social_gbp_location', loc.name);
+      localStorage.setItem('social_gbp_name', loc.title || loc.storefrontAddress?.locality || 'Business');
+      document.getElementById('gbpStatus').textContent = 'Connesso';
+      document.getElementById('gbpStatus').style.color = 'var(--verde)';
+      document.getElementById('gbpAccount').textContent = loc.title || '';
+      toast('Connesso a Google Business: ' + (loc.title || ''), 'success');
+    } else {
+      toast('Nessuna sede trovata nell\'account', 'error');
+    }
+  } catch(e) {
+    toast('Errore Google Business: ' + e.message, 'error');
+  }
+}
+
+async function publishToGBP() {
+  const id = document.getElementById('socialPropertySelect').value;
+  if (!id) { toast('Seleziona un immobile', 'error'); return; }
+  const i = allImmobili.find(x => x.id == id);
+  if (!i) return;
+
+  const gbpToken = localStorage.getItem('social_gbp_access_token');
+  const gbpLocation = localStorage.getItem('social_gbp_location');
+  if (!gbpToken || !gbpLocation) { toast('Connetti Google Business prima', 'error'); return; }
+
+  const prezzo = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : '';
+  const tipo = i.tipo_operazione === 'vendita' ? 'In vendita' : i.tipo_operazione === 'affitto' ? 'In affitto' : '';
+  const summary = tipo + ': ' + (i.titolo || '') + ' - ' + (i.comune || '') + (prezzo ? ' - ' + prezzo : '') + (i.superficie ? ' - ' + i.superficie + ' mq' : '') + '\nRif. ' + (i.codice || '') + ' | Righetto Immobiliare';
+  const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
+
+  try {
+    toast('Pubblicazione su Google Business...', 'success');
+    const postBody = {
+      languageCode: 'it',
+      summary: summary,
+      topicType: 'STANDARD',
+    };
+    if (foto) {
+      postBody.media = [{ mediaFormat: 'PHOTO', sourceUrl: foto }];
+    }
+    const res = await fetch('https://mybusiness.googleapis.com/v4/' + gbpLocation + '/localPosts', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + gbpToken, 'Content-Type': 'application/json' },
+      body: JSON.stringify(postBody)
+    });
+    const data = await res.json();
+    if (data.error) {
+      showPublishResult('Errore Google: ' + (data.error.message || JSON.stringify(data.error)), 'error');
+    } else {
+      showPublishResult('Pubblicato su Google Business Profile!', 'success');
+      toast('Pubblicato su Google Business!', 'success');
+    }
+  } catch(e) {
+    showPublishResult('Errore: ' + e.message, 'error');
+  }
+}
+
+// ── TIKTOK IMAGE GENERATOR ──
+function generateTikTokImage() {
+  const id = document.getElementById('socialPropertySelect').value;
+  if (!id) { toast('Seleziona un immobile', 'error'); return; }
+  const i = allImmobili.find(x => x.id == id);
+  if (!i) return;
+
+  const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
+  const prezzo = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : '';
+  const tipo = i.tipo_operazione === 'vendita' ? 'IN VENDITA' : i.tipo_operazione === 'affitto' ? 'IN AFFITTO' : '';
+
+  // Create a canvas 1080x1920 (TikTok 9:16)
+  const canvas = document.createElement('canvas');
+  canvas.width = 1080;
+  canvas.height = 1920;
+  const ctx = canvas.getContext('2d');
+
+  // Background gradient
+  const grad = ctx.createLinearGradient(0, 0, 0, 1920);
+  grad.addColorStop(0, '#1E3A5C');
+  grad.addColorStop(1, '#3A5578');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 1080, 1920);
+
+  const drawContent = () => {
+    // Header bar
+    ctx.fillStyle = '#CEE08F';
+    ctx.fillRect(0, 0, 1080, 120);
+    ctx.font = 'bold 50px "Segoe UI", Arial, sans-serif';
+    ctx.fillStyle = '#3A5578';
+    ctx.textAlign = 'center';
+    ctx.fillText('Righetto Immobiliare', 540, 78);
+
+    // Tipo badge
+    if (tipo) {
+      ctx.fillStyle = '#CEE08F';
+      const tw = ctx.measureText(tipo).width;
+      ctx.fillStyle = '#CEE08F';
+      ctx.beginPath();
+      ctx.roundRect(540 - tw/2 - 30, 160, tw + 60, 70, 35);
+      ctx.fill();
+      ctx.font = 'bold 36px "Segoe UI", Arial';
+      ctx.fillStyle = '#3A5578';
+      ctx.fillText(tipo, 540, 205);
+    }
+
+    // Title
+    ctx.font = 'bold 52px "Segoe UI", Arial';
+    ctx.fillStyle = '#FFFFFF';
+    ctx.textAlign = 'center';
+    const titleText = (i.titolo || 'Immobile').substring(0, 35);
+    ctx.fillText(titleText, 540, foto ? 1150 : 500);
+
+    // Location
+    ctx.font = '36px "Segoe UI", Arial';
+    ctx.fillStyle = '#B0C8E0';
+    ctx.fillText((i.comune || '') + (i.indirizzo ? ' — ' + i.indirizzo.substring(0, 30) : ''), 540, foto ? 1200 : 560);
+
+    // Price
+    if (prezzo) {
+      ctx.font = 'bold 72px "Segoe UI", Arial';
+      ctx.fillStyle = '#CEE08F';
+      ctx.fillText(prezzo, 540, foto ? 1310 : 670);
+    }
+
+    // Specs
+    const specY = foto ? 1400 : 760;
+    ctx.font = '32px "Segoe UI", Arial';
+    ctx.fillStyle = '#FFFFFF';
+    const specItems = [];
+    if (i.superficie) specItems.push(i.superficie + ' mq');
+    if (i.camere) specItems.push(i.camere + ' camere');
+    if (i.bagni_totali || i.bagni) specItems.push((i.bagni_totali || i.bagni) + ' bagni');
+    if (i.classe_energetica) specItems.push('Classe ' + i.classe_energetica);
+    ctx.fillText(specItems.join('  |  '), 540, specY);
+
+    // Features
+    const features = [];
+    if (i.garage) features.push('Garage');
+    if (i.giardino) features.push('Giardino');
+    if (i.terrazzo) features.push('Terrazzo');
+    if (i.ascensore) features.push('Ascensore');
+    if (i.aria_condizionata) features.push('Clima');
+    if (features.length) {
+      ctx.font = '28px "Segoe UI", Arial';
+      ctx.fillStyle = '#B0C8E0';
+      ctx.fillText(features.join('  \u2022  '), 540, specY + 50);
+    }
+
+    // Footer
+    ctx.fillStyle = 'rgba(206,224,143,0.15)';
+    ctx.fillRect(0, 1800, 1080, 120);
+    ctx.font = '28px "Segoe UI", Arial';
+    ctx.fillStyle = '#CEE08F';
+    ctx.fillText('Rif. ' + (i.codice || '') + '  |  Tel: 049 884 3484', 540, 1850);
+    ctx.font = '24px "Segoe UI", Arial';
+    ctx.fillStyle = '#B0C8E0';
+    ctx.fillText('www.righettoimmobiliare.it', 540, 1885);
+
+    // Download
+    canvas.toBlob(function(blob) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'TikTok-' + (i.codice || 'immobile') + '.png';
+      a.click();
+      URL.revokeObjectURL(url);
+      toast('Immagine TikTok scaricata! Caricala su TikTok.', 'success');
+      showPublishResult('Immagine generata e scaricata. Caricala manualmente su TikTok.', 'success');
+    }, 'image/png');
+  };
+
+  if (foto) {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      // Draw photo in center area (260px from top, 1080x800)
+      const cropH = Math.min(img.height, img.width * (800/1080));
+      ctx.drawImage(img, 0, 0, img.width, cropH, 0, 260, 1080, 800);
+      // Gradient overlay bottom
+      const grad2 = ctx.createLinearGradient(0, 800, 0, 1100);
+      grad2.addColorStop(0, 'rgba(30,58,92,0)');
+      grad2.addColorStop(1, 'rgba(30,58,92,1)');
+      ctx.fillStyle = grad2;
+      ctx.fillRect(0, 800, 1080, 300);
+      drawContent();
+    };
+    img.onerror = () => drawContent();
+    img.src = foto;
+  } else {
+    drawContent();
+  }
 }
 
 // ══════════════════════════════════════
