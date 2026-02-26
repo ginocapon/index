@@ -2823,7 +2823,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <th>Email</th>
                 <th>Telefono</th>
                 <th>Fonte</th>
-                <th>Interesse</th>
+                <th>Cerca</th>
+                <th>Budget</th>
                 <th>Data</th>
                 <th>Azioni</th>
               </tr>
@@ -2865,8 +2866,51 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <option value="passaparola">Passaparola</option>
                 </select>
               </div>
+              <div class="form-group">
+                <label>Tipo Operazione</label>
+                <select id="clienteTipoOp">
+                  <option value="">Qualsiasi</option>
+                  <option value="vendita">Acquisto</option>
+                  <option value="affitto">Affitto</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Tipologia</label>
+                <select id="clienteTipologia">
+                  <option value="">Qualsiasi</option>
+                  <option value="appartamento">Appartamento</option>
+                  <option value="villa">Villa / Bifamiliare</option>
+                  <option value="attico">Attico / Mansarda</option>
+                  <option value="casa indipendente">Casa Indipendente</option>
+                  <option value="ufficio">Ufficio / Studio</option>
+                  <option value="negozio">Negozio / Locale</option>
+                  <option value="capannone">Capannone</option>
+                  <option value="terreno">Terreno</option>
+                  <option value="garage">Garage / Box</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Zona / Comune</label>
+                <input type="text" id="clienteZona" placeholder="Es. Padova, Arcella, Abano">
+              </div>
+              <div class="form-group">
+                <label>Budget Minimo</label>
+                <input type="number" id="clienteBudgetMin" placeholder="0" min="0">
+              </div>
+              <div class="form-group">
+                <label>Budget Massimo</label>
+                <input type="number" id="clienteBudgetMax" placeholder="500000" min="0">
+              </div>
+              <div class="form-group">
+                <label>Camere Minime</label>
+                <input type="number" id="clienteCamereMin" placeholder="2" min="0" max="20">
+              </div>
+              <div class="form-group">
+                <label>Superficie Min (mq)</label>
+                <input type="number" id="clienteSupMin" placeholder="50" min="0">
+              </div>
               <div class="form-group form-full">
-                <label>Interesse / Ricerca</label>
+                <label>Interesse / Ricerca (testo libero)</label>
                 <input type="text" id="clienteInteresse" placeholder="Es. Cerca appartamento 3 camere zona centro Padova">
               </div>
               <div class="form-group form-full">
@@ -2922,6 +2966,21 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           <div class="modal-footer">
             <button class="btn btn-secondary" onclick="closeCsvImportModal()">Annulla</button>
             <button class="btn btn-primary" id="btnCsvImport" onclick="doCsvImport()" style="display:none">Importa Clienti</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL INCROCIO RISULTATI -->
+      <div class="modal-overlay" id="matchModal">
+        <div class="modal" style="max-width:800px">
+          <div class="modal-header">
+            <h2 id="matchModalTitle">Risultati Incrocio</h2>
+            <button class="modal-close" onclick="closeMatchModal()">&times;</button>
+          </div>
+          <div class="modal-body" id="matchModalBody" style="max-height:500px;overflow-y:auto">
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeMatchModal()">Chiudi</button>
           </div>
         </div>
       </div>
@@ -3396,7 +3455,9 @@ function renderTable(data) {
       <td>${stato}</td>
       <td>
         <div style="display:flex;gap:6px">
-          <button class="btn btn-secondary btn-sm" onclick="editImmobile('${i.id}')">✏️</button>
+          <button class="btn btn-secondary btn-sm" onclick="editImmobile('${i.id}')" title="Modifica">✏️</button>
+          <button class="btn btn-sm" onclick="showMatchingClienti('${i.id}')" title="Trova clienti compatibili" style="background:#e3f2fd;color:#1565c0">🤝</button>
+          <button class="btn btn-sm" onclick="printPropertyPdf('${i.id}')" title="Stampa PDF" style="background:#fff3e0;color:#e65100">📄</button>
           <button class="btn btn-danger btn-sm" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')">🗑️</button>
           <button class="btn btn-sm" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="Toggle evidenza" style="background:var(--sfondo)">⭐</button>
           <button class="btn btn-sm" onclick="toggleAttivo('${i.id}',${!i.attivo})" title="Toggle attivo" style="background:var(--sfondo)">${i.attivo ? '👁️' : '🚫'}</button>
@@ -4506,18 +4567,27 @@ function renderClientiTable() {
   tbody.innerHTML = allClienti.map(c => {
     const badgeClass = fonteColors[c.fonte] || 'badge-grigio';
     const dateStr = c.created_at ? new Date(c.created_at).toLocaleDateString('it-IT') : '';
+    const cercaInfo = [c.tipo_operazione_cercata, c.tipologia_cercata, c.zona_cercata].filter(Boolean).join(' · ') || c.interesse || '—';
+    const budgetInfo = (c.budget_min || c.budget_max) ? (c.budget_min ? '€' + Number(c.budget_min).toLocaleString('it-IT') : '0') + ' - ' + (c.budget_max ? '€' + Number(c.budget_max).toLocaleString('it-IT') : '∞') : '—';
+    const tel = (c.telefono || '').replace(/\s+/g, '').replace(/^(\+39|0039)/, '');
+    const waLink = tel ? 'https://wa.me/39' + tel : '';
     return `<tr>
       <td style="font-weight:600">${escHtml(c.nome || '')}</td>
       <td><a href="mailto:${escHtml(c.email || '')}" style="color:var(--nero)">${escHtml(c.email || '')}</a></td>
       <td>${escHtml(c.telefono || '—')}</td>
       <td><span class="badge ${badgeClass}">${escHtml(c.fonte || '')}</span></td>
-      <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(c.interesse || '')}">${escHtml(c.interesse || '—')}</td>
+      <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(cercaInfo)}">${escHtml(cercaInfo)}</td>
+      <td style="font-size:0.72rem;white-space:nowrap">${budgetInfo}</td>
       <td style="white-space:nowrap">${dateStr}</td>
       <td>
-        <div style="display:flex;gap:6px">
+        <div style="display:flex;gap:4px;flex-wrap:wrap">
           <button class="btn-icon" onclick="editCliente('${c.id}')" title="Modifica">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
           </button>
+          <button class="btn-icon" onclick="showMatchingImmobili('${c.id}')" title="Trova immobili compatibili" style="color:#1565c0">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </button>
+          ${waLink ? '<a href="' + waLink + '" target="_blank" class="btn-icon" title="WhatsApp" style="color:#25d366;text-decoration:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.37c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.49-.89-.8-1.49-1.78-1.67-2.08-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35zm-5.44 7.43h-.02a9.75 9.75 0 0 1-4.97-1.36l-.36-.21-3.71.97.99-3.63-.23-.37a9.75 9.75 0 0 1-1.5-5.19C2.24 6.54 6.69 2.1 12.06 2.1a9.72 9.72 0 0 1 6.9 2.86 9.72 9.72 0 0 1 2.86 6.9c0 5.37-4.37 9.74-9.79 9.74zm8.33-18.06A11.62 11.62 0 0 0 12.05.1C5.56.1.21 5.44.21 11.92a11.8 11.8 0 0 0 1.58 5.9L0 24l6.34-1.66a11.82 11.82 0 0 0 5.66 1.44h.01c6.49 0 11.84-5.34 11.84-11.82a11.74 11.74 0 0 0-3.49-8.22z"/></svg></a>' : ''}
           <button class="btn-icon" onclick="deleteClienteById('${c.id}')" title="Elimina" style="color:var(--rosso)">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
           </button>
@@ -4559,6 +4629,13 @@ function openClienteModal(id) {
   document.getElementById('clienteEmail').value = '';
   document.getElementById('clienteTelefono').value = '';
   document.getElementById('clienteFonte').value = 'manuale';
+  document.getElementById('clienteTipoOp').value = '';
+  document.getElementById('clienteTipologia').value = '';
+  document.getElementById('clienteZona').value = '';
+  document.getElementById('clienteBudgetMin').value = '';
+  document.getElementById('clienteBudgetMax').value = '';
+  document.getElementById('clienteCamereMin').value = '';
+  document.getElementById('clienteSupMin').value = '';
   document.getElementById('clienteInteresse').value = '';
   document.getElementById('clienteNote').value = '';
   document.getElementById('btnDeleteCliente').style.display = 'none';
@@ -4574,6 +4651,13 @@ function editCliente(id) {
   document.getElementById('clienteEmail').value = c.email || '';
   document.getElementById('clienteTelefono').value = c.telefono || '';
   document.getElementById('clienteFonte').value = c.fonte || 'manuale';
+  document.getElementById('clienteTipoOp').value = c.tipo_operazione_cercata || '';
+  document.getElementById('clienteTipologia').value = c.tipologia_cercata || '';
+  document.getElementById('clienteZona').value = c.zona_cercata || '';
+  document.getElementById('clienteBudgetMin').value = c.budget_min || '';
+  document.getElementById('clienteBudgetMax').value = c.budget_max || '';
+  document.getElementById('clienteCamereMin').value = c.camere_min || '';
+  document.getElementById('clienteSupMin').value = c.superficie_min || '';
   document.getElementById('clienteInteresse').value = c.interesse || '';
   document.getElementById('clienteNote').value = c.note || '';
   document.getElementById('btnDeleteCliente').style.display = 'inline-flex';
@@ -4591,6 +4675,13 @@ async function saveCliente() {
     email: document.getElementById('clienteEmail').value.trim(),
     telefono: document.getElementById('clienteTelefono').value.trim(),
     fonte: document.getElementById('clienteFonte').value,
+    tipo_operazione_cercata: document.getElementById('clienteTipoOp').value || null,
+    tipologia_cercata: document.getElementById('clienteTipologia').value || null,
+    zona_cercata: document.getElementById('clienteZona').value.trim() || null,
+    budget_min: parseFloat(document.getElementById('clienteBudgetMin').value) || null,
+    budget_max: parseFloat(document.getElementById('clienteBudgetMax').value) || null,
+    camere_min: parseInt(document.getElementById('clienteCamereMin').value) || null,
+    superficie_min: parseInt(document.getElementById('clienteSupMin').value) || null,
     interesse: document.getElementById('clienteInteresse').value.trim(),
     note: document.getElementById('clienteNote').value.trim()
   };
@@ -4635,6 +4726,244 @@ async function deleteClienteById(id) {
   } catch(err) {
     toast('Errore eliminazione: ' + (err.message || 'Errore'), 'error');
   }
+}
+
+// ══════════════════════════════════════
+// INCROCIO CLIENTI ↔ IMMOBILI + WHATSAPP
+// ══════════════════════════════════════
+
+function matchScore(client, property) {
+  let score = 0;
+  let maxScore = 0;
+
+  // Tipo operazione
+  if (client.tipo_operazione_cercata) {
+    maxScore += 30;
+    if (property.tipo_operazione === client.tipo_operazione_cercata) score += 30;
+  }
+
+  // Tipologia
+  if (client.tipologia_cercata) {
+    maxScore += 20;
+    const tip = (property.tipologia || '').toLowerCase();
+    if (tip.includes(client.tipologia_cercata.toLowerCase())) score += 20;
+  }
+
+  // Zona / Comune
+  if (client.zona_cercata) {
+    maxScore += 15;
+    const zones = client.zona_cercata.toLowerCase().split(/[,;\/]+/).map(z => z.trim());
+    const propLoc = ((property.comune || '') + ' ' + (property.indirizzo || '')).toLowerCase();
+    if (zones.some(z => propLoc.includes(z))) score += 15;
+  }
+
+  // Budget
+  if (client.budget_max || client.budget_min) {
+    maxScore += 20;
+    const prezzo = property.prezzo || 0;
+    const min = client.budget_min || 0;
+    const max = client.budget_max || Infinity;
+    if (prezzo >= min && prezzo <= max) score += 20;
+    else if (prezzo <= max * 1.1 && prezzo >= min * 0.9) score += 10; // 10% tolerance
+  }
+
+  // Camere
+  if (client.camere_min) {
+    maxScore += 10;
+    if ((property.camere || 0) >= client.camere_min) score += 10;
+  }
+
+  // Superficie
+  if (client.superficie_min) {
+    maxScore += 5;
+    if ((property.superficie || 0) >= client.superficie_min) score += 5;
+  }
+
+  if (maxScore === 0) {
+    // No structured criteria — try text matching on interesse
+    if (client.interesse) {
+      const words = client.interesse.toLowerCase().split(/\s+/).filter(w => w.length > 3);
+      const propText = [property.titolo, property.comune, property.tipologia, property.tipo_operazione].join(' ').toLowerCase();
+      const matches = words.filter(w => propText.includes(w));
+      return matches.length > 0 ? Math.min(matches.length * 20, 80) : 0;
+    }
+    return 0;
+  }
+
+  return Math.round((score / maxScore) * 100);
+}
+
+function showMatchingImmobili(clientId) {
+  const client = allClienti.find(c => c.id == clientId);
+  if (!client) return;
+
+  const matches = allImmobili
+    .filter(i => i.attivo && !i.venduto && !i.affittato)
+    .map(i => ({ ...i, _score: matchScore(client, i) }))
+    .filter(i => i._score >= 30)
+    .sort((a, b) => b._score - a._score);
+
+  document.getElementById('matchModalTitle').textContent = 'Immobili per ' + (client.nome || client.email);
+
+  if (matches.length === 0) {
+    document.getElementById('matchModalBody').innerHTML = '<div style="text-align:center;padding:40px;color:var(--caffe2)"><p style="font-size:1.1rem;margin-bottom:8px">Nessun immobile compatibile</p><p style="font-size:0.82rem">Prova ad aggiornare i criteri di ricerca del cliente</p></div>';
+  } else {
+    const tel = (client.telefono || '').replace(/\s+/g, '').replace(/^(\+39|0039)/, '');
+    document.getElementById('matchModalBody').innerHTML = matches.map(i => {
+      const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
+      const thumb = foto ? '<img src="' + foto + '" style="width:70px;height:52px;object-fit:cover;border-radius:6px" onerror="this.style.display=\'none\'">' : '<div style="width:70px;height:52px;background:var(--caffe3);border-radius:6px;display:flex;align-items:center;justify-content:center;color:white;font-size:0.7rem">No foto</div>';
+      const prezzo = i.prezzo ? '€ ' + Number(i.prezzo).toLocaleString('it-IT') : '';
+      const waMsg = encodeURIComponent('Buongiorno ' + (client.nome || '') + ', le proponiamo questo immobile:\n\n' + (i.codice || '') + ' - ' + (i.titolo || '') + '\n' + (i.comune || '') + '\n' + prezzo + (i.superficie ? ' | ' + i.superficie + ' mq' : '') + (i.camere ? ' | ' + i.camere + ' camere' : '') + '\n\nPer info: Righetto Immobiliare');
+      const waUrl = tel ? 'https://wa.me/39' + tel + '?text=' + waMsg : '';
+      return '<div style="display:flex;gap:14px;align-items:center;padding:12px;border-bottom:1px solid rgba(0,0,0,0.06)">' +
+        thumb +
+        '<div style="flex:1;min-width:0">' +
+          '<div style="font-weight:600;font-size:0.88rem;color:var(--nero)">' + escHtml(i.codice || '') + ' — ' + escHtml(i.titolo || '') + '</div>' +
+          '<div style="font-size:0.78rem;color:var(--caffe2)">' + escHtml(i.comune || '') + ' | ' + prezzo + (i.superficie ? ' | ' + i.superficie + ' mq' : '') + (i.camere ? ' | ' + i.camere + ' cam' : '') + '</div>' +
+        '</div>' +
+        '<div style="display:flex;flex-direction:column;gap:4px;align-items:center">' +
+          '<span style="background:' + (i._score >= 70 ? 'var(--verde)' : i._score >= 50 ? '#e67e22' : 'var(--caffe2)') + ';color:white;padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:700">' + i._score + '%</span>' +
+          (waUrl ? '<a href="' + waUrl + '" target="_blank" style="background:#25d366;color:white;padding:4px 10px;border-radius:6px;font-size:0.72rem;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:4px">WhatsApp</a>' : '') +
+          '<button class="btn btn-sm" style="font-size:0.68rem;padding:2px 8px" onclick="printPropertyPdf(\'' + i.id + '\');closeMatchModal()">PDF</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  document.getElementById('matchModal').classList.add('open');
+}
+
+function showMatchingClienti(propertyId) {
+  const property = allImmobili.find(i => i.id == propertyId);
+  if (!property) return;
+
+  const matches = allClienti
+    .map(c => ({ ...c, _score: matchScore(c, property) }))
+    .filter(c => c._score >= 30)
+    .sort((a, b) => b._score - a._score);
+
+  document.getElementById('matchModalTitle').textContent = 'Clienti per ' + (property.codice || '') + ' — ' + (property.titolo || '');
+
+  if (matches.length === 0) {
+    document.getElementById('matchModalBody').innerHTML = '<div style="text-align:center;padding:40px;color:var(--caffe2)"><p style="font-size:1.1rem;margin-bottom:8px">Nessun cliente compatibile</p><p style="font-size:0.82rem">Inserisci clienti con criteri di ricerca per trovare corrispondenze</p></div>';
+  } else {
+    const prezzo = property.prezzo ? '€ ' + Number(property.prezzo).toLocaleString('it-IT') : '';
+    const propInfo = (property.codice || '') + ' - ' + (property.titolo || '') + '\n' + (property.comune || '') + '\n' + prezzo + (property.superficie ? ' | ' + property.superficie + ' mq' : '') + (property.camere ? ' | ' + property.camere + ' camere' : '');
+
+    document.getElementById('matchModalBody').innerHTML = matches.map(c => {
+      const tel = (c.telefono || '').replace(/\s+/g, '').replace(/^(\+39|0039)/, '');
+      const waMsg = encodeURIComponent('Buongiorno ' + (c.nome || '') + ', le proponiamo questo immobile:\n\n' + propInfo + '\n\nPer info: Righetto Immobiliare');
+      const waUrl = tel ? 'https://wa.me/39' + tel + '?text=' + waMsg : '';
+      const cercaInfo = [c.tipo_operazione_cercata, c.tipologia_cercata, c.zona_cercata].filter(Boolean).join(' · ');
+      const budgetInfo = (c.budget_min || c.budget_max) ? (c.budget_min ? '€' + Number(c.budget_min).toLocaleString('it-IT') : '0') + '-' + (c.budget_max ? '€' + Number(c.budget_max).toLocaleString('it-IT') : '∞') : '';
+      return '<div style="display:flex;gap:14px;align-items:center;padding:12px;border-bottom:1px solid rgba(0,0,0,0.06)">' +
+        '<div style="width:40px;height:40px;border-radius:50%;background:var(--caffe3);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.85rem;flex-shrink:0">' + ((c.nome || '?')[0] || '?').toUpperCase() + '</div>' +
+        '<div style="flex:1;min-width:0">' +
+          '<div style="font-weight:600;font-size:0.88rem;color:var(--nero)">' + escHtml(c.nome || c.email || '') + '</div>' +
+          '<div style="font-size:0.78rem;color:var(--caffe2)">' + escHtml(c.telefono || '') + (cercaInfo ? ' · ' + escHtml(cercaInfo) : '') + (budgetInfo ? ' · ' + budgetInfo : '') + '</div>' +
+        '</div>' +
+        '<div style="display:flex;flex-direction:column;gap:4px;align-items:center">' +
+          '<span style="background:' + (c._score >= 70 ? 'var(--verde)' : c._score >= 50 ? '#e67e22' : 'var(--caffe2)') + ';color:white;padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:700">' + c._score + '%</span>' +
+          (waUrl ? '<a href="' + waUrl + '" target="_blank" style="background:#25d366;color:white;padding:4px 10px;border-radius:6px;font-size:0.72rem;font-weight:600;text-decoration:none">WhatsApp</a>' : '') +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  document.getElementById('matchModal').classList.add('open');
+}
+
+function closeMatchModal() {
+  document.getElementById('matchModal').classList.remove('open');
+}
+
+// ══════════════════════════════════════
+// STAMPA PDF IMMOBILE
+// ══════════════════════════════════════
+
+function printPropertyPdf(id) {
+  const i = allImmobili.find(x => x.id == id);
+  if (!i) { toast('Immobile non trovato', 'error'); return; }
+
+  const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
+  const prezzo = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : 'Prezzo su richiesta';
+  const tipo = i.tipo_operazione === 'vendita' ? 'Vendita' : i.tipo_operazione === 'affitto' ? 'Affitto' : (i.tipo_operazione || '');
+
+  // Build features list
+  const features = [];
+  if (i.superficie) features.push(['Superficie', i.superficie + ' mq']);
+  if (i.locali) features.push(['Locali', i.locali]);
+  if (i.camere) features.push(['Camere', i.camere]);
+  if (i.bagni_totali || i.bagni) features.push(['Bagni', i.bagni_totali || i.bagni]);
+  if (i.piano) features.push(['Piano', i.piano]);
+  if (i.anno_costruzione) features.push(['Anno costruzione', i.anno_costruzione]);
+  if (i.classe_energetica) features.push(['Classe energetica', i.classe_energetica]);
+  if (i.stato) features.push(['Stato', i.stato]);
+  if (i.spese_condominio) features.push(['Spese condominiali', '\u20AC ' + Number(i.spese_condominio).toLocaleString('it-IT') + '/mese']);
+  if (i.esposizione) features.push(['Esposizione', i.esposizione]);
+  if (i.totale_piani) features.push(['Piani totali', i.totale_piani]);
+  if (i.mq_giardino) features.push(['Giardino', i.mq_giardino + ' mq']);
+  if (i.mq_lotto) features.push(['Lotto', i.mq_lotto + ' mq']);
+  if (i.consegna) features.push(['Consegna', i.consegna]);
+  if (i.ipe_kwh) features.push(['IPE', i.ipe_kwh + ' kWh/m\u00B2a']);
+
+  // Comfort / dotazioni
+  const comforts = [];
+  if (i.garage) comforts.push('Garage');
+  if (i.giardino) comforts.push('Giardino');
+  if (i.terrazzo) comforts.push('Terrazzo');
+  if (i.cantina) comforts.push('Cantina');
+  if (i.ascensore) comforts.push('Ascensore');
+  if (i.piscina) comforts.push('Piscina');
+  if (i.arredato || i.arredo) comforts.push('Arredato');
+  if (i.aria_condizionata) comforts.push('Aria condizionata');
+  if (i.riscaldamento_autonomo) comforts.push('Riscaldamento autonomo');
+  if (i.riscaldamento_centralizzato) comforts.push('Riscaldamento centralizzato');
+  if (i.camino) comforts.push('Camino');
+  if (i.allarme) comforts.push('Allarme');
+  if (i.porta_blindata) comforts.push('Porta blindata');
+  if (i.pannelli_fotovoltaici) comforts.push('Fotovoltaico');
+  if (i.pannelli_solari) comforts.push('Solare termico');
+  if (i.ingresso_indipendente) comforts.push('Ingresso indipendente');
+  if (i.mansarda) comforts.push('Mansarda');
+  if (i.taverna) comforts.push('Taverna');
+  if (i.porticato) comforts.push('Porticato');
+  if (i.domotica) comforts.push('Domotica');
+  if (i.tapparelle_motorizzate) comforts.push('Tapparelle motorizzate');
+
+  const featuresHtml = features.map(f => '<tr><td style="font-weight:600;padding:4px 16px 4px 0;font-size:13px;color:#555;white-space:nowrap">' + f[0] + '</td><td style="padding:4px 0;font-size:13px">' + f[1] + '</td></tr>').join('');
+  const comfortsHtml = comforts.length > 0 ? '<div style="margin-top:16px"><h3 style="font-size:14px;color:#3A5578;margin-bottom:8px">Dotazioni e Comfort</h3><div style="display:flex;flex-wrap:wrap;gap:6px">' + comforts.map(c => '<span style="background:#f0f4e8;color:#3A5578;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:500">' + c + '</span>').join('') + '</div></div>' : '';
+
+  const win = window.open('', '_blank');
+  win.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + escHtml(i.codice || '') + ' - ' + escHtml(i.titolo || '') + '</title>' +
+    '<style>' +
+    '@page { margin: 20mm 15mm; }' +
+    'body { font-family: "Segoe UI", Arial, sans-serif; color: #1E3A5C; margin: 0; padding: 20px; line-height: 1.5; }' +
+    '.header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 3px solid #CEE08F; padding-bottom: 16px; margin-bottom: 20px; }' +
+    '.logo { font-size: 22px; font-weight: 700; color: #3A5578; }' +
+    '.logo small { display: block; font-size: 10px; font-weight: 400; color: #7A9AB8; letter-spacing: 2px; text-transform: uppercase; }' +
+    '.badge-tipo { background: #3A5578; color: white; padding: 4px 14px; border-radius: 16px; font-size: 12px; font-weight: 600; }' +
+    '.main-photo { width: 100%; max-height: 350px; object-fit: cover; border-radius: 10px; margin-bottom: 20px; }' +
+    '.title { font-size: 20px; font-weight: 700; color: #3A5578; margin-bottom: 4px; }' +
+    '.location { font-size: 14px; color: #7A9AB8; margin-bottom: 4px; }' +
+    '.price { font-size: 24px; font-weight: 700; color: #27ae60; margin-bottom: 16px; }' +
+    '.features-table { border-collapse: collapse; width: 100%; }' +
+    '.features-table tr:nth-child(even) { background: #f9f9f6; }' +
+    '.footer { margin-top: 30px; padding-top: 12px; border-top: 2px solid #CEE08F; text-align: center; font-size: 11px; color: #7A9AB8; }' +
+    '@media print { body { padding: 0; } }' +
+    '</style></head><body>' +
+    '<div class="header"><div class="logo">Righetto Immobiliare<small>Agenzia Immobiliare</small></div><div><span class="badge-tipo">' + tipo + '</span><div style="text-align:right;font-size:11px;color:#7A9AB8;margin-top:6px">Rif. ' + escHtml(i.codice || '') + '</div></div></div>' +
+    (foto ? '<img src="' + foto + '" class="main-photo" onerror="this.style.display=\'none\'">' : '') +
+    '<div class="title">' + escHtml(i.titolo || 'Immobile') + '</div>' +
+    '<div class="location">' + escHtml(i.comune || '') + (i.indirizzo ? ' — ' + escHtml(i.indirizzo) : '') + '</div>' +
+    '<div class="price">' + prezzo + '</div>' +
+    '<table class="features-table">' + featuresHtml + '</table>' +
+    comfortsHtml +
+    (i.note_interne ? '' : '') +
+    '<div class="footer">Righetto Immobiliare | Tel: 049 XXX XXXX | info@righettoimmobiliare.it | www.righettoimmobiliare.it<br>Documento generato il ' + new Date().toLocaleDateString('it-IT') + '</div>' +
+    '</body></html>');
+  win.document.close();
+  setTimeout(function() { win.print(); }, 500);
 }
 
 // ══════════════════════════════════════
