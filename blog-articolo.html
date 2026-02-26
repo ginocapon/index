@@ -12,6 +12,7 @@
   <meta property="og:locale" content="it_IT">
   <meta name="description" content="Articolo del blog di Righetto Immobiliare — guide e consigli sul mercato immobiliare di Padova.">
   <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/nav-mobile.css">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--nero:#152435;--bianco:#F7F5F1;--oro:#B8D44A;--grigio:#6B7A8D;--gc:#E1DBD1;--sfondo:#ECE7DF;--blu:#2C4A6E;--blu2:#3A5F8C;--oro2:#CDED62;--testo:#152435;--carta:#F2EDE7}
@@ -101,7 +102,17 @@
     <nav><a href="index.html">Home</a><a href="immobili.html">Immobili</a><a href="servizi.html">Servizi</a><a href="chi-siamo.html">Chi siamo</a><a href="blog.html" class="active">Blog</a><a href="contatti.html">Contatti</a><a href="faq.html">FAQ</a></nav>
     <div class="h-cta"><a class="h-tel" href="tel:+390498843484">049 884 3484</a><a class="h-btn" href="contatti.html">Valutazione gratuita</a></div>
   </div>
+  <button class="nav-burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
 </header>
+<div class="nav-mobile" id="navMobile">
+  <a href="index.html">Home</a>
+  <a href="chi-siamo.html">Chi Siamo</a>
+  <a href="immobili.html">Immobili</a>
+  <a href="servizi.html">Servizi</a>
+  <a href="blog.html">Blog</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contatti.html" class="nav-mobile-cta">Contattaci</a>
+</div>
 
 <div id="articleContent">
   <div style="text-align:center;padding:4rem"><div style="font-size:1.5rem;color:var(--grigio)">Caricamento...</div></div>
@@ -260,6 +271,7 @@ function artUrl(a) {
   renderArticle(art, allData || []);
 })();
 </script>
+<script src="js/nav-mobile.js"></script>
 <script src="js/config.js"></script>
 <script src="js/chatbot.js"></script>
 <script src="js/cookie-consent.js"></script>

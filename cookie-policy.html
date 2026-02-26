@@ -13,6 +13,7 @@
 <meta property="og:locale" content="it_IT">
 <meta name="description" content="Cookie Policy di Righetto Immobiliare. Informativa sull'utilizzo dei cookie ai sensi del Regolamento UE 2016/679 (GDPR) e delle Linee Guida del Garante 10 giugno 2021.">
   <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/nav-mobile.css">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--nero:#0a0a0a;--bianco:#f5f2ed;--oro:#c9a84c;--grigio:#6b6560;--gc:#e8e4de;--sfondo:#f0ece6;--blu:#2C4A6E}
@@ -70,7 +71,17 @@
     <nav><a href="index.html">Home</a><a href="immobili.html">Immobili</a><a href="servizi.html">Servizi</a><a href="chi-siamo.html">Chi siamo</a><a href="blog.html">Blog</a><a href="contatti.html">Contatti</a><a href="faq.html">FAQ</a></nav>
     <div class="h-cta"><a class="h-tel" href="tel:+390498843484">049 884 3484</a><a class="h-btn" href="contatti.html">Contattaci</a></div>
   </div>
+  <button class="nav-burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
 </header>
+<div class="nav-mobile" id="navMobile">
+  <a href="index.html">Home</a>
+  <a href="chi-siamo.html">Chi Siamo</a>
+  <a href="immobili.html">Immobili</a>
+  <a href="servizi.html">Servizi</a>
+  <a href="blog.html">Blog</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contatti.html" class="nav-mobile-cta">Contattaci</a>
+</div>
 
 <div class="hero">
   <div class="hero-inner">
@@ -197,6 +208,7 @@
   </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<script src="js/nav-mobile.js"></script>
 <script src="js/config.js"></script>
 <script src="js/chatbot.js"></script>
 <script src="js/cookie-consent.js"></script>
