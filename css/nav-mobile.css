@@ -43,6 +43,68 @@ header{position:relative}
   border-bottom:none!important;
 }
 
+/* ═══ GESTIONALE DROPDOWN (solo se loggato) ═══ */
+.gestionale-wrap{
+  position:relative;display:inline-block;
+}
+.gestionale-btn{
+  font-family:'Montserrat',sans-serif;
+  font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:rgba(255,255,255,.85);
+  background:none;border:none;cursor:pointer;
+  padding:10px 14px;display:flex;align-items:center;gap:6px;
+  transition:color .2s;border-radius:6px;
+}
+.gestionale-btn:hover{color:white}
+.gestionale-btn svg{width:14px;height:14px;transition:transform .2s}
+.gestionale-btn.open svg{transform:rotate(180deg)}
+
+/* When navbar is scrolled (index.html) */
+.scrolled .gestionale-btn{color:var(--testo2,#4A5568)}
+.scrolled .gestionale-btn:hover{color:var(--blu,#2C4A6E)}
+
+/* Header pages (non-index) */
+header .gestionale-btn{color:white}
+header .gestionale-btn:hover{color:var(--oro,#B8D44A)}
+
+.gestionale-menu{
+  position:absolute;top:100%;right:0;
+  background:white;border-radius:10px;
+  box-shadow:0 8px 32px rgba(0,0,0,.15);
+  min-width:200px;padding:8px 0;
+  opacity:0;visibility:hidden;transform:translateY(-8px);
+  transition:all .2s;z-index:1001;
+}
+.gestionale-menu.open{opacity:1;visibility:visible;transform:translateY(4px)}
+.gestionale-menu a{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 18px;font-size:.82rem;font-weight:500;
+  color:#1E3A5C;text-decoration:none;transition:background .15s;
+  font-family:'Montserrat',sans-serif;
+}
+.gestionale-menu a:hover{background:rgba(206,224,143,.15)}
+.gestionale-menu a svg{width:16px;height:16px;opacity:.6}
+.gestionale-menu-divider{height:1px;background:rgba(0,0,0,.06);margin:4px 0}
+
+/* Mobile gestionale in nav-mobile panel */
+.nav-mobile .gestionale-mobile-section{
+  margin-top:16px;padding-top:16px;
+  border-top:2px solid rgba(44,74,110,.1);
+}
+.nav-mobile .gestionale-mobile-label{
+  font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;color:var(--blu3,#7A8B9E);
+  padding:0 0 8px;display:block;
+}
+.nav-mobile .gestionale-mobile-section a{
+  font-family:'Montserrat',sans-serif!important;
+  font-size:1rem!important;font-weight:600;
+  color:var(--blu,#2C4A6E);
+  padding:10px 0;border-bottom:1px solid rgba(44,74,110,.06);
+  display:flex;align-items:center;gap:10px;
+}
+.nav-mobile .gestionale-mobile-section a svg{width:18px;height:18px;opacity:.6}
+
 @media(max-width:768px){
   /* Nasconde navigazione desktop, mostra burger */
   .hi nav,.hi .h-cta{display:none!important}
@@ -50,4 +112,5 @@ header{position:relative}
   .nav-burger{display:flex!important}
   .hi,.header-inner{height:64px!important}
   .nav-mobile{top:64px}
+  .gestionale-wrap{display:none!important}
 }

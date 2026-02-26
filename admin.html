@@ -8,6 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://apis.google.com/js/api.js"></script>
 <script src="https://accounts.google.com/gsi/client"></script>
+<script src="https://cdn.jsdelivr.net/npm/otpauth@9/dist/otpauth.umd.min.js"></script>
 <style>
 :root {
   --nero:   #3A5578;
@@ -1274,9 +1275,54 @@ tr:hover td { background: rgba(206,224,143,0.06); }
   <div class="login-box">
     <div class="login-logo">Righetto Immobiliare</div>
     <div class="login-sub">Pannello Amministrazione</div>
-    <input type="password" id="loginPass" placeholder="Password admin..." autocomplete="current-password">
-    <button class="btn-login" onclick="doLogin()">Accedi</button>
-    <div class="login-error" id="loginError">Password non corretta</div>
+
+    <!-- Step 1: Password -->
+    <div id="loginStep1">
+      <input type="password" id="loginPass" placeholder="Password admin..." autocomplete="current-password">
+      <button class="btn-login" onclick="doLogin()">Accedi</button>
+      <div class="login-error" id="loginError">Password non corretta</div>
+    </div>
+
+    <!-- Step 2: TOTP Code -->
+    <div id="loginStep2" style="display:none">
+      <div style="margin-bottom:16px">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--nero)" stroke-width="1.5" style="display:block;margin:0 auto 8px">
+          <rect x="5" y="11" width="14" height="10" rx="2"/><path d="M12 3a4 4 0 0 0-4 4v4h8V7a4 4 0 0 0-4-4z"/><circle cx="12" cy="16" r="1"/>
+        </svg>
+        <p style="font-size:0.85rem;color:var(--caffe2);margin-bottom:4px">Verifica a 2 fattori</p>
+        <p style="font-size:0.78rem;color:var(--caffe3)">Inserisci il codice a 6 cifre dall'app Authenticator</p>
+      </div>
+      <input type="text" id="loginTotp" placeholder="000000" maxlength="6" autocomplete="one-time-code"
+        style="text-align:center;font-size:1.8rem;letter-spacing:12px;font-weight:700;font-family:'Montserrat',sans-serif">
+      <button class="btn-login" onclick="verifyTotp()" style="margin-top:12px">Verifica</button>
+      <div class="login-error" id="totpError">Codice non valido</div>
+      <button onclick="loginStep1Back()" style="background:none;border:none;color:var(--caffe2);font-size:0.78rem;cursor:pointer;margin-top:8px;font-family:'Montserrat',sans-serif">
+        ← Torna al login
+      </button>
+    </div>
+
+    <!-- Step Setup: Prima configurazione 2FA -->
+    <div id="loginSetup2FA" style="display:none">
+      <div style="margin-bottom:16px">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--verde)" stroke-width="1.5" style="display:block;margin:0 auto 8px">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <p style="font-size:0.95rem;font-weight:600;color:var(--nero);margin-bottom:4px">Configura Autenticazione 2FA</p>
+        <p style="font-size:0.78rem;color:var(--caffe2)">Scansiona il QR code con Google Authenticator, Authy o altra app TOTP</p>
+      </div>
+      <div id="qrCodeContainer" style="display:flex;justify-content:center;margin:16px 0;min-height:200px;align-items:center"></div>
+      <div style="margin-bottom:12px">
+        <p style="font-size:0.72rem;color:var(--caffe3);margin-bottom:4px">Oppure inserisci manualmente questo codice:</p>
+        <code id="totpSecretDisplay" style="display:block;background:var(--sfondo);padding:8px 12px;border-radius:6px;font-size:0.82rem;word-break:break-all;color:var(--nero);user-select:all"></code>
+      </div>
+      <input type="text" id="setupTotpCode" placeholder="Inserisci codice di conferma" maxlength="6"
+        style="text-align:center;font-size:1.4rem;letter-spacing:8px;font-weight:700;font-family:'Montserrat',sans-serif">
+      <button class="btn-login" onclick="confirmTotpSetup()" style="margin-top:12px;background:var(--verde);color:white">Conferma e Attiva 2FA</button>
+      <div class="login-error" id="setupError">Codice non corretto. Riprova.</div>
+      <button onclick="skipTotpSetup()" style="background:none;border:none;color:var(--caffe3);font-size:0.72rem;cursor:pointer;margin-top:8px;font-family:'Montserrat',sans-serif">
+        Configura piu' tardi
+      </button>
+    </div>
   </div>
 </div>
 
@@ -1312,6 +1358,11 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
         Blog
         <span class="nav-badge" id="badgeBlog" style="display:none">0</span>
+      </div>
+      <div class="nav-item" onclick="showSection('clienti')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Clienti
+        <span class="nav-badge" id="badgeClienti" style="display:none">0</span>
       </div>
       <div class="nav-item" onclick="showSection('impostazioni')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -2315,6 +2366,102 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         </div>
       </div>
 
+      <!-- ═══ SEZIONE CLIENTI ═══ -->
+      <div class="section" id="sec-clienti">
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-num" id="statClientiTot">—</div><div class="stat-label">Totale Clienti</div></div>
+          <div class="stat-card blue"><div class="stat-num" id="statClientiNewsletter">—</div><div class="stat-label">Da Newsletter</div></div>
+          <div class="stat-card green"><div class="stat-num" id="statClientiRichieste">—</div><div class="stat-label">Da Richieste</div></div>
+          <div class="stat-card red"><div class="stat-num" id="statClientiManuali">—</div><div class="stat-label">Inseriti Manualmente</div></div>
+        </div>
+
+        <div class="table-wrap">
+          <div class="table-head">
+            <div style="font-weight:600;font-size:0.9rem;">Rubrica Clienti</div>
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+              <select id="filtroFonteCliente" onchange="loadClienti()" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.8rem;">
+                <option value="">Tutte le fonti</option>
+                <option value="newsletter">Newsletter</option>
+                <option value="richiesta">Richieste</option>
+                <option value="manuale">Manuali</option>
+              </select>
+              <input class="table-search" type="text" placeholder="Cerca cliente..." id="searchClienti" oninput="filterClientiTable()">
+              <button class="btn btn-primary btn-sm" onclick="openClienteModal()">+ Nuovo Cliente</button>
+            </div>
+          </div>
+          <div id="clientiLoading" class="loading" style="display:none"><div class="spinner"></div> Caricamento...</div>
+          <div id="clientiEmpty" class="empty-state" style="display:none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <h3>Nessun cliente</h3>
+            <p style="font-size:0.82rem;color:var(--caffe2)">Aggiungi il primo cliente o aspetta iscrizioni alla newsletter</p>
+          </div>
+          <table id="clientiTable" style="display:none">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefono</th>
+                <th>Fonte</th>
+                <th>Interesse</th>
+                <th>Data</th>
+                <th>Azioni</th>
+              </tr>
+            </thead>
+            <tbody id="clientiBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- MODAL CLIENTE -->
+      <div class="modal-overlay" id="clienteModal">
+        <div class="modal" style="max-width:600px">
+          <div class="modal-header">
+            <h2 id="clienteModalTitle">Nuovo Cliente</h2>
+            <button class="modal-close" onclick="closeClienteModal()">&times;</button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="clienteEditId">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Nome e Cognome</label>
+                <input type="text" id="clienteNome" placeholder="Es. Mario Rossi">
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="clienteEmail" placeholder="mario@email.com">
+              </div>
+              <div class="form-group">
+                <label>Telefono</label>
+                <input type="tel" id="clienteTelefono" placeholder="+39 049 ...">
+              </div>
+              <div class="form-group">
+                <label>Fonte</label>
+                <select id="clienteFonte">
+                  <option value="manuale">Inserimento manuale</option>
+                  <option value="newsletter">Newsletter</option>
+                  <option value="richiesta">Richiesta dal sito</option>
+                  <option value="telefono">Telefonata</option>
+                  <option value="passaparola">Passaparola</option>
+                </select>
+              </div>
+              <div class="form-group form-full">
+                <label>Interesse / Ricerca</label>
+                <input type="text" id="clienteInteresse" placeholder="Es. Cerca appartamento 3 camere zona centro Padova">
+              </div>
+              <div class="form-group form-full">
+                <label>Note</label>
+                <textarea id="clienteNote" rows="3" placeholder="Note aggiuntive..."></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeClienteModal()">Annulla</button>
+            <button class="btn btn-danger" id="btnDeleteCliente" onclick="deleteCliente()" style="display:none">Elimina</button>
+            <button class="btn btn-primary" onclick="saveCliente()">Salva Cliente</button>
+          </div>
+        </div>
+      </div>
+
       <!-- ═══ SEZIONE IMPOSTAZIONI ═══ -->
       <div class="section" id="sec-impostazioni">
         <div class="table-wrap" style="padding:28px;max-width:600px">
@@ -2330,6 +2477,14 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           <div class="form-group" style="margin-bottom:24px">
             <label>Stato Connessione</label>
             <input type="text" id="connStatus" value="Verifica in corso..." readonly>
+          </div>
+          <div class="form-group" style="margin-bottom:16px">
+            <label>Autenticazione 2FA</label>
+            <div style="display:flex;gap:12px;align-items:center">
+              <span id="status2FA" style="font-size:0.85rem;color:var(--caffe2)">Verifica...</span>
+              <button class="btn btn-secondary btn-sm" id="btn2FASetup" onclick="open2FASetup()" style="display:none">Configura 2FA</button>
+              <button class="btn btn-danger btn-sm" id="btn2FADisable" onclick="disable2FA()" style="display:none">Disattiva 2FA</button>
+            </div>
           </div>
           <div style="display:flex;gap:12px">
             <button class="btn btn-secondary" onclick="testConn()">Test Connessione</button>
@@ -2362,8 +2517,10 @@ let currentVtScenes = [];
 let allImmobili = [];
 
 // ══════════════════════════════════════
-// LOGIN
+// LOGIN + 2FA (TOTP)
 // ══════════════════════════════════════
+let pendingTotpSecret = null; // used during 2FA setup
+
 function checkAuth() {
   const params = new URLSearchParams(window.location.search);
   const urlKey = params.get('key');
@@ -2371,27 +2528,214 @@ function checkAuth() {
 
   if (urlKey === URL_KEY || session === 'ok') {
     sessionStorage.setItem('rig_admin', 'ok');
-    document.getElementById('loginOverlay').style.display = 'none';
-    document.getElementById('appWrapper').style.display = 'flex';
-    init();
+    grantAccess();
   }
+}
+
+function grantAccess() {
+  sessionStorage.setItem('rig_admin', 'ok');
+  document.getElementById('loginOverlay').style.display = 'none';
+  document.getElementById('appWrapper').style.display = 'flex';
+  init();
+  handleHashNavigation();
 }
 
 function doLogin() {
   const pass = document.getElementById('loginPass').value;
-  if (pass === ADMIN_PASSWORD) {
-    sessionStorage.setItem('rig_admin', 'ok');
-    document.getElementById('loginOverlay').style.display = 'none';
-    document.getElementById('appWrapper').style.display = 'flex';
-    init();
-  } else {
+  if (pass !== ADMIN_PASSWORD) {
     document.getElementById('loginError').style.display = 'block';
     document.getElementById('loginPass').style.borderColor = 'var(--rosso)';
+    return;
+  }
+
+  // Password OK — check if 2FA is enabled
+  const totpSecret = localStorage.getItem('rig_2fa_secret');
+  if (totpSecret) {
+    // 2FA is enabled — show TOTP step
+    document.getElementById('loginStep1').style.display = 'none';
+    document.getElementById('loginStep2').style.display = 'block';
+    document.getElementById('loginTotp').value = '';
+    document.getElementById('loginTotp').focus();
+  } else {
+    // No 2FA — offer setup
+    show2FASetup();
+  }
+}
+
+function verifyTotp() {
+  const code = document.getElementById('loginTotp').value.trim();
+  const secret = localStorage.getItem('rig_2fa_secret');
+  if (!secret || !code) return;
+
+  try {
+    const totp = new OTPAuth.TOTP({
+      issuer: 'Righetto Immobiliare',
+      label: 'Admin',
+      algorithm: 'SHA1',
+      digits: 6,
+      period: 30,
+      secret: OTPAuth.Secret.fromBase32(secret)
+    });
+
+    const delta = totp.validate({ token: code, window: 1 });
+    if (delta !== null) {
+      grantAccess();
+    } else {
+      document.getElementById('totpError').style.display = 'block';
+      document.getElementById('loginTotp').style.borderColor = 'var(--rosso)';
+      document.getElementById('loginTotp').value = '';
+      document.getElementById('loginTotp').focus();
+    }
+  } catch(e) {
+    console.error('TOTP verify error:', e);
+    document.getElementById('totpError').style.display = 'block';
+  }
+}
+
+function loginStep1Back() {
+  document.getElementById('loginStep1').style.display = 'block';
+  document.getElementById('loginStep2').style.display = 'none';
+  document.getElementById('loginSetup2FA').style.display = 'none';
+  document.getElementById('totpError').style.display = 'none';
+  document.getElementById('loginPass').value = '';
+}
+
+// ── 2FA SETUP ──
+
+function show2FASetup() {
+  document.getElementById('loginStep1').style.display = 'none';
+  document.getElementById('loginSetup2FA').style.display = 'block';
+
+  // Generate new TOTP secret
+  const secret = new OTPAuth.Secret({ size: 20 });
+  pendingTotpSecret = secret.base32;
+
+  const totp = new OTPAuth.TOTP({
+    issuer: 'Righetto Immobiliare',
+    label: 'Admin',
+    algorithm: 'SHA1',
+    digits: 6,
+    period: 30,
+    secret: secret
+  });
+
+  const uri = totp.toString();
+  document.getElementById('totpSecretDisplay').textContent = secret.base32;
+
+  // Generate QR code using simple canvas approach
+  generateQRCode(uri);
+}
+
+function generateQRCode(text) {
+  const container = document.getElementById('qrCodeContainer');
+  // Use a QR code API for simplicity (no extra library needed)
+  const img = document.createElement('img');
+  img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(text);
+  img.alt = 'QR Code 2FA';
+  img.style.cssText = 'width:200px;height:200px;border-radius:8px;border:2px solid var(--caffe3)';
+  img.onerror = function() {
+    container.innerHTML = '<p style="font-size:0.82rem;color:var(--caffe2)">Impossibile generare QR. Copia il codice manualmente.</p>';
+  };
+  container.innerHTML = '';
+  container.appendChild(img);
+}
+
+function confirmTotpSetup() {
+  const code = document.getElementById('setupTotpCode').value.trim();
+  if (!code || !pendingTotpSecret) {
+    document.getElementById('setupError').style.display = 'block';
+    return;
+  }
+
+  try {
+    const totp = new OTPAuth.TOTP({
+      issuer: 'Righetto Immobiliare',
+      label: 'Admin',
+      algorithm: 'SHA1',
+      digits: 6,
+      period: 30,
+      secret: OTPAuth.Secret.fromBase32(pendingTotpSecret)
+    });
+
+    const delta = totp.validate({ token: code, window: 1 });
+    if (delta !== null) {
+      // Code is correct — save secret and grant access
+      localStorage.setItem('rig_2fa_secret', pendingTotpSecret);
+      pendingTotpSecret = null;
+      grantAccess();
+    } else {
+      document.getElementById('setupError').style.display = 'block';
+      document.getElementById('setupTotpCode').style.borderColor = 'var(--rosso)';
+    }
+  } catch(e) {
+    console.error('TOTP setup error:', e);
+    document.getElementById('setupError').style.display = 'block';
+  }
+}
+
+function skipTotpSetup() {
+  pendingTotpSecret = null;
+  grantAccess();
+}
+
+function open2FASetup() {
+  // Can be called from Settings page
+  document.getElementById('loginOverlay').style.display = 'flex';
+  document.getElementById('appWrapper').style.display = 'none';
+  show2FASetup();
+}
+
+function disable2FA() {
+  if (!confirm('Sei sicuro di voler disattivare l\'autenticazione a 2 fattori?')) return;
+  localStorage.removeItem('rig_2fa_secret');
+  check2FAStatus();
+  toast('2FA disattivato', 'success');
+}
+
+function check2FAStatus() {
+  const has2FA = !!localStorage.getItem('rig_2fa_secret');
+  const statusEl = document.getElementById('status2FA');
+  const setupBtn = document.getElementById('btn2FASetup');
+  const disableBtn = document.getElementById('btn2FADisable');
+  if (has2FA) {
+    statusEl.textContent = 'Attivo';
+    statusEl.style.color = 'var(--verde)';
+    statusEl.style.fontWeight = '600';
+    setupBtn.style.display = 'none';
+    disableBtn.style.display = 'inline-flex';
+  } else {
+    statusEl.textContent = 'Non attivo';
+    statusEl.style.color = 'var(--rosso)';
+    statusEl.style.fontWeight = '600';
+    setupBtn.style.display = 'inline-flex';
+    disableBtn.style.display = 'none';
+  }
+}
+
+// ── HASH NAVIGATION (for Gestionale dropdown links) ──
+
+function handleHashNavigation() {
+  const hash = window.location.hash.replace('#', '');
+  if (hash && ['immobili', 'nuovo', 'richieste', 'posta', 'blog', 'clienti', 'impostazioni'].includes(hash)) {
+    setTimeout(() => {
+      const navItems = document.querySelectorAll('.nav-item');
+      const sectionMap = { immobili: 0, nuovo: 1, richieste: 2, posta: 3, blog: 4, clienti: 5, impostazioni: 6 };
+      const idx = sectionMap[hash];
+      if (idx !== undefined && navItems[idx]) {
+        navItems[idx].click();
+      }
+    }, 300);
   }
 }
 
 document.getElementById('loginPass').addEventListener('keydown', e => {
   if (e.key === 'Enter') doLogin();
+});
+document.getElementById('loginTotp').addEventListener('keydown', e => {
+  if (e.key === 'Enter') verifyTotp();
+});
+document.getElementById('setupTotpCode').addEventListener('keydown', e => {
+  if (e.key === 'Enter') confirmTotpSetup();
 });
 
 function doLogout() {
@@ -2422,6 +2766,7 @@ function showSection(name) {
     richieste: 'Richieste Clienti',
     posta: 'Posta',
     blog: 'Gestione Blog',
+    clienti: 'Gestione Clienti',
     impostazioni: 'Impostazioni'
   };
   document.getElementById('topbarTitle').textContent = titles[name] || name;
@@ -2429,7 +2774,8 @@ function showSection(name) {
   if (name === 'richieste') loadRichieste();
   if (name === 'posta') initEmailSection();
   if (name === 'blog') loadBlogList();
-  if (name === 'impostazioni') testConn();
+  if (name === 'clienti') loadClienti();
+  if (name === 'impostazioni') { testConn(); check2FAStatus(); }
 }
 
 // ══════════════════════════════════════
@@ -3566,6 +3912,209 @@ function insertTag(tag) {
 }
 
 renderFotos();
+
+// ══════════════════════════════════════
+// GESTIONE CLIENTI
+// ══════════════════════════════════════
+
+let allClienti = [];
+
+async function loadClienti() {
+  const loading = document.getElementById('clientiLoading');
+  const empty = document.getElementById('clientiEmpty');
+  const table = document.getElementById('clientiTable');
+  const tbody = document.getElementById('clientiBody');
+
+  loading.style.display = 'flex';
+  empty.style.display = 'none';
+  table.style.display = 'none';
+
+  try {
+    const fonte = document.getElementById('filtroFonteCliente').value;
+    let query = sb.from('clienti').select('*').order('created_at', { ascending: false });
+    if (fonte) query = query.eq('fonte', fonte);
+
+    const { data, error } = await query;
+    if (error) throw error;
+
+    allClienti = data || [];
+    renderClientiTable();
+    updateClientiStats();
+  } catch(err) {
+    console.error('Error loading clienti:', err);
+    // If table doesn't exist, show empty state with hint
+    empty.style.display = 'block';
+    empty.querySelector('h3').textContent = 'Tabella clienti non trovata';
+    empty.querySelector('p').textContent = 'Crea la tabella "clienti" in Supabase (vedi guida nelle Impostazioni)';
+  } finally {
+    loading.style.display = 'none';
+  }
+}
+
+function renderClientiTable() {
+  const empty = document.getElementById('clientiEmpty');
+  const table = document.getElementById('clientiTable');
+  const tbody = document.getElementById('clientiBody');
+
+  if (allClienti.length === 0) {
+    empty.style.display = 'block';
+    table.style.display = 'none';
+    return;
+  }
+
+  empty.style.display = 'none';
+  table.style.display = 'table';
+
+  const fonteColors = {
+    newsletter: 'badge-blu',
+    richiesta: 'badge-oro',
+    manuale: 'badge-grigio',
+    telefono: 'badge-verde',
+    passaparola: 'badge-verde'
+  };
+
+  tbody.innerHTML = allClienti.map(c => {
+    const badgeClass = fonteColors[c.fonte] || 'badge-grigio';
+    const dateStr = c.created_at ? new Date(c.created_at).toLocaleDateString('it-IT') : '';
+    return `<tr>
+      <td style="font-weight:600">${escHtml(c.nome || '')}</td>
+      <td><a href="mailto:${escHtml(c.email || '')}" style="color:var(--nero)">${escHtml(c.email || '')}</a></td>
+      <td>${escHtml(c.telefono || '—')}</td>
+      <td><span class="badge ${badgeClass}">${escHtml(c.fonte || '')}</span></td>
+      <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(c.interesse || '')}">${escHtml(c.interesse || '—')}</td>
+      <td style="white-space:nowrap">${dateStr}</td>
+      <td>
+        <div style="display:flex;gap:6px">
+          <button class="btn-icon" onclick="editCliente('${c.id}')" title="Modifica">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+          <button class="btn-icon" onclick="deleteClienteById('${c.id}')" title="Elimina" style="color:var(--rosso)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          </button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function updateClientiStats() {
+  document.getElementById('statClientiTot').textContent = allClienti.length;
+  document.getElementById('statClientiNewsletter').textContent = allClienti.filter(c => c.fonte === 'newsletter').length;
+  document.getElementById('statClientiRichieste').textContent = allClienti.filter(c => c.fonte === 'richiesta').length;
+  document.getElementById('statClientiManuali').textContent = allClienti.filter(c => c.fonte === 'manuale').length;
+
+  const badge = document.getElementById('badgeClienti');
+  if (allClienti.length > 0) {
+    badge.style.display = 'inline';
+    badge.textContent = allClienti.length;
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+function filterClientiTable() {
+  const q = document.getElementById('searchClienti').value.toLowerCase().trim();
+  const tbody = document.getElementById('clientiBody');
+  const rows = tbody.querySelectorAll('tr');
+  rows.forEach(row => {
+    const text = row.textContent.toLowerCase();
+    row.style.display = text.includes(q) ? '' : 'none';
+  });
+}
+
+function openClienteModal(id) {
+  document.getElementById('clienteEditId').value = '';
+  document.getElementById('clienteModalTitle').textContent = 'Nuovo Cliente';
+  document.getElementById('clienteNome').value = '';
+  document.getElementById('clienteEmail').value = '';
+  document.getElementById('clienteTelefono').value = '';
+  document.getElementById('clienteFonte').value = 'manuale';
+  document.getElementById('clienteInteresse').value = '';
+  document.getElementById('clienteNote').value = '';
+  document.getElementById('btnDeleteCliente').style.display = 'none';
+  document.getElementById('clienteModal').classList.add('open');
+}
+
+function editCliente(id) {
+  const c = allClienti.find(x => x.id == id);
+  if (!c) return;
+  document.getElementById('clienteEditId').value = c.id;
+  document.getElementById('clienteModalTitle').textContent = 'Modifica Cliente';
+  document.getElementById('clienteNome').value = c.nome || '';
+  document.getElementById('clienteEmail').value = c.email || '';
+  document.getElementById('clienteTelefono').value = c.telefono || '';
+  document.getElementById('clienteFonte').value = c.fonte || 'manuale';
+  document.getElementById('clienteInteresse').value = c.interesse || '';
+  document.getElementById('clienteNote').value = c.note || '';
+  document.getElementById('btnDeleteCliente').style.display = 'inline-flex';
+  document.getElementById('clienteModal').classList.add('open');
+}
+
+function closeClienteModal() {
+  document.getElementById('clienteModal').classList.remove('open');
+}
+
+async function saveCliente() {
+  const id = document.getElementById('clienteEditId').value;
+  const data = {
+    nome: document.getElementById('clienteNome').value.trim(),
+    email: document.getElementById('clienteEmail').value.trim(),
+    telefono: document.getElementById('clienteTelefono').value.trim(),
+    fonte: document.getElementById('clienteFonte').value,
+    interesse: document.getElementById('clienteInteresse').value.trim(),
+    note: document.getElementById('clienteNote').value.trim()
+  };
+
+  if (!data.nome && !data.email) {
+    toast('Inserisci almeno nome o email', 'error');
+    return;
+  }
+
+  try {
+    if (id) {
+      const { error } = await sb.from('clienti').update(data).eq('id', id);
+      if (error) throw error;
+      toast('Cliente aggiornato!', 'success');
+    } else {
+      const { error } = await sb.from('clienti').insert([data]);
+      if (error) throw error;
+      toast('Cliente aggiunto!', 'success');
+    }
+    closeClienteModal();
+    loadClienti();
+  } catch(err) {
+    console.error('Save cliente error:', err);
+    toast('Errore: ' + (err.message || 'Errore salvataggio'), 'error');
+  }
+}
+
+async function deleteCliente() {
+  const id = document.getElementById('clienteEditId').value;
+  if (!id || !confirm('Eliminare questo cliente?')) return;
+  await deleteClienteById(id);
+  closeClienteModal();
+}
+
+async function deleteClienteById(id) {
+  if (!confirm('Eliminare questo cliente?')) return;
+  try {
+    const { error } = await sb.from('clienti').delete().eq('id', id);
+    if (error) throw error;
+    toast('Cliente eliminato', 'success');
+    loadClienti();
+  } catch(err) {
+    toast('Errore eliminazione: ' + (err.message || 'Errore'), 'error');
+  }
+}
+
+// Helper: escHtml is already defined in email section below; skip if exists
+if (typeof escHtml === 'undefined') {
+  function escHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+}
 
 // ══════════════════════════════════════
 // EMAIL CLIENT — GMAIL API INTEGRATION
