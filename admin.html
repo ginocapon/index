@@ -3100,6 +3100,126 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <div id="socialPublishResult" style="margin-top:12px;font-size:0.82rem;display:none"></div>
           </div>
 
+          <!-- ═══ PROGRAMMAZIONE AUTOMATICA SOCIAL ═══ -->
+          <div style="background:linear-gradient(135deg,#1a237e 0%,#283593 100%);border-radius:14px;padding:24px;margin-top:24px;color:white">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+              <div>
+                <h4 style="font-size:1.1rem;margin:0;font-family:'Cormorant Garamond',serif">Programmazione Automatica</h4>
+                <p style="font-size:0.75rem;opacity:0.8;margin:4px 0 0">Pianifica pubblicazioni ricorrenti con spintax e frasi accattivanti generate automaticamente</p>
+              </div>
+              <div style="background:rgba(255,255,255,0.15);border-radius:8px;padding:6px 14px;font-size:0.72rem" id="schedulerStatusBadge">
+                Scheduler: <span id="schedulerStatusText">Attivo</span>
+              </div>
+            </div>
+
+            <!-- Nuova Programmazione -->
+            <div style="background:rgba(255,255,255,0.1);border-radius:12px;padding:18px;margin-bottom:16px">
+              <div style="font-weight:700;font-size:0.9rem;margin-bottom:14px">Nuova Programmazione</div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                <!-- Tipo contenuto -->
+                <div class="form-group">
+                  <label style="color:rgba(255,255,255,0.85);font-size:0.78rem">Tipo Contenuto</label>
+                  <select id="schedType" onchange="loadScheduleContentOptions()" style="background:rgba(255,255,255,0.12);color:white;border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:8px 12px;font-size:0.82rem">
+                    <option value="immobile">Immobile</option>
+                    <option value="blog">Articolo Blog</option>
+                  </select>
+                </div>
+                <!-- Seleziona contenuto -->
+                <div class="form-group">
+                  <label style="color:rgba(255,255,255,0.85);font-size:0.78rem">Seleziona Contenuto</label>
+                  <select id="schedContent" style="background:rgba(255,255,255,0.12);color:white;border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:8px 12px;font-size:0.82rem">
+                    <option value="">— Seleziona —</option>
+                  </select>
+                </div>
+                <!-- Frequenza -->
+                <div class="form-group">
+                  <label style="color:rgba(255,255,255,0.85);font-size:0.78rem">Frequenza Settimanale</label>
+                  <select id="schedFrequency" style="background:rgba(255,255,255,0.12);color:white;border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:8px 12px;font-size:0.82rem">
+                    <option value="1">1 volta/settimana</option>
+                    <option value="2">2 volte/settimana</option>
+                    <option value="3" selected>3 volte/settimana</option>
+                    <option value="5">5 volte/settimana</option>
+                    <option value="7">Ogni giorno</option>
+                  </select>
+                </div>
+                <!-- Orario -->
+                <div class="form-group">
+                  <label style="color:rgba(255,255,255,0.85);font-size:0.78rem">Orario Pubblicazione</label>
+                  <select id="schedTime" style="background:rgba(255,255,255,0.12);color:white;border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:8px 12px;font-size:0.82rem">
+                    <option value="09:00">09:00 (Mattina)</option>
+                    <option value="12:00">12:00 (Pranzo)</option>
+                    <option value="14:00">14:00 (Pomeriggio)</option>
+                    <option value="17:00">17:00 (Tardo pomeriggio)</option>
+                    <option value="18:30" selected>18:30 (Sera - Orario top)</option>
+                    <option value="20:00">20:00 (Sera)</option>
+                    <option value="21:00">21:00 (Sera tardi)</option>
+                  </select>
+                </div>
+                <!-- Data Scadenza -->
+                <div class="form-group">
+                  <label style="color:rgba(255,255,255,0.85);font-size:0.78rem">Scadenza (dopo questa data si sospende)</label>
+                  <input type="date" id="schedExpiry" style="background:rgba(255,255,255,0.12);color:white;border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:8px 12px;font-size:0.82rem">
+                </div>
+                <!-- Giorni della settimana -->
+                <div class="form-group">
+                  <label style="color:rgba(255,255,255,0.85);font-size:0.78rem">Giorni Preferiti</label>
+                  <div style="display:flex;gap:4px;flex-wrap:wrap" id="schedDaysWrap">
+                    <label style="display:flex;align-items:center;gap:3px;font-size:0.72rem;color:rgba(255,255,255,0.85);cursor:pointer"><input type="checkbox" value="1" checked class="schedDay"> Lun</label>
+                    <label style="display:flex;align-items:center;gap:3px;font-size:0.72rem;color:rgba(255,255,255,0.85);cursor:pointer"><input type="checkbox" value="2" class="schedDay"> Mar</label>
+                    <label style="display:flex;align-items:center;gap:3px;font-size:0.72rem;color:rgba(255,255,255,0.85);cursor:pointer"><input type="checkbox" value="3" checked class="schedDay"> Mer</label>
+                    <label style="display:flex;align-items:center;gap:3px;font-size:0.72rem;color:rgba(255,255,255,0.85);cursor:pointer"><input type="checkbox" value="4" class="schedDay"> Gio</label>
+                    <label style="display:flex;align-items:center;gap:3px;font-size:0.72rem;color:rgba(255,255,255,0.85);cursor:pointer"><input type="checkbox" value="5" checked class="schedDay"> Ven</label>
+                    <label style="display:flex;align-items:center;gap:3px;font-size:0.72rem;color:rgba(255,255,255,0.85);cursor:pointer"><input type="checkbox" value="6" class="schedDay"> Sab</label>
+                    <label style="display:flex;align-items:center;gap:3px;font-size:0.72rem;color:rgba(255,255,255,0.85);cursor:pointer"><input type="checkbox" value="0" class="schedDay"> Dom</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Social da pubblicare -->
+              <div style="margin-top:14px">
+                <label style="color:rgba(255,255,255,0.85);font-size:0.78rem;display:block;margin-bottom:8px">Pubblica su:</label>
+                <div style="display:flex;gap:10px;flex-wrap:wrap">
+                  <label style="display:flex;align-items:center;gap:6px;background:rgba(24,119,242,0.3);border:1px solid rgba(24,119,242,0.5);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:0.82rem">
+                    <input type="checkbox" id="schedFb" checked> Facebook
+                  </label>
+                  <label style="display:flex;align-items:center;gap:6px;background:rgba(220,39,67,0.3);border:1px solid rgba(220,39,67,0.5);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:0.82rem">
+                    <input type="checkbox" id="schedIg" checked> Instagram
+                  </label>
+                  <label style="display:flex;align-items:center;gap:6px;background:rgba(66,133,244,0.3);border:1px solid rgba(66,133,244,0.5);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:0.82rem">
+                    <input type="checkbox" id="schedGbp"> Google Business
+                  </label>
+                  <label style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:0.82rem">
+                    <input type="checkbox" id="schedTiktok"> TikTok (immagine)
+                  </label>
+                </div>
+              </div>
+
+              <!-- Anteprima Spintax -->
+              <div style="margin-top:16px">
+                <button class="btn btn-sm" onclick="previewScheduledSpintax()" style="background:rgba(206,224,143,0.9);color:#1a237e;font-weight:600;margin-right:8px">Anteprima Spintax</button>
+                <button class="btn btn-sm" onclick="saveScheduledPost()" style="background:#CEE08F;color:#1a237e;font-weight:700">Programma Pubblicazione</button>
+              </div>
+              <div id="spintaxPreviewArea" style="display:none;margin-top:12px;background:rgba(0,0,0,0.3);border-radius:8px;padding:14px;font-size:0.78rem;line-height:1.6;white-space:pre-wrap"></div>
+            </div>
+
+            <!-- Lista Programmazioni Attive -->
+            <div style="margin-top:8px">
+              <div style="font-weight:700;font-size:0.9rem;margin-bottom:10px">Programmazioni Attive</div>
+              <div id="scheduledPostsList" style="font-size:0.82rem">
+                <div style="opacity:0.6;text-align:center;padding:16px">Nessuna programmazione attiva. Crea la prima!</div>
+              </div>
+            </div>
+
+            <!-- Log Pubblicazioni -->
+            <details style="margin-top:12px">
+              <summary style="font-size:0.82rem;cursor:pointer;opacity:0.8">Storico Pubblicazioni Automatiche</summary>
+              <div id="scheduleLog" style="max-height:200px;overflow-y:auto;margin-top:8px;font-size:0.72rem;background:rgba(0,0,0,0.2);border-radius:8px;padding:10px;line-height:1.8">
+                <div style="opacity:0.6">Nessuna pubblicazione ancora...</div>
+              </div>
+            </details>
+          </div>
+
           <!-- GUIDA SETUP -->
           <details style="margin-top:20px">
             <summary style="font-weight:600;font-size:0.9rem;color:var(--nero);cursor:pointer">Come configurare le API</summary>
@@ -5245,6 +5365,9 @@ function loadSocialSection() {
     document.getElementById('gbpStatus').style.color = 'var(--verde)';
     document.getElementById('gbpAccount').textContent = localStorage.getItem('social_gbp_name') || '';
   }
+
+  // Init Social Scheduler (js/social-scheduler.js)
+  if (typeof initSocialScheduler === 'function') initSocialScheduler();
 }
 
 function saveSocialConfig(platform) {
@@ -7491,6 +7614,7 @@ checkAuth();
     </div>
   </div>
 </div>
+<script src="js/social-scheduler.js"></script>
 <script src="js/cookie-consent.js"></script>
 </body>
 </html>
