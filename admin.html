@@ -2157,7 +2157,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           </button>
           <div style="margin-top:16px;font-size:0.78rem;color:var(--caffe2)">
             <p>Serve configurare le credenziali Google API.</p>
-            <button class="btn btn-secondary btn-sm" onclick="showGmailSetupGuide()" style="margin-top:8px">Guida Configurazione</button>
+            <div style="display:flex;gap:8px;justify-content:center;margin-top:8px;flex-wrap:wrap">
+              <button class="btn btn-secondary btn-sm" onclick="showGmailSetupGuide()">Guida Configurazione</button>
+              <button class="btn btn-sm" onclick="loadDemoEmails()" style="background:#e0eeff;color:#1a4a8a">Modalita' Demo</button>
+            </div>
           </div>
         </div>
 
@@ -4138,15 +4141,144 @@ try {
   emailPropertyLinks = JSON.parse(localStorage.getItem('email_property_links') || '{}');
 } catch(e) { emailPropertyLinks = {}; }
 
+let demoMode = false;
+
 function initEmailSection() {
-  if (gmailAccessToken) {
+  if (gmailAccessToken || demoMode) {
     document.getElementById('emailAuthBanner').style.display = 'none';
     document.getElementById('emailClient').style.display = 'block';
-    refreshEmails();
+    if (!demoMode) refreshEmails();
   } else {
     document.getElementById('emailAuthBanner').style.display = 'block';
     document.getElementById('emailClient').style.display = 'none';
   }
+}
+
+// ── DEMO MODE ──
+function loadDemoEmails() {
+  demoMode = true;
+  document.getElementById('emailAuthBanner').style.display = 'none';
+  document.getElementById('emailClient').style.display = 'block';
+  document.getElementById('emailStatusText').textContent = 'DEMO — Dati di esempio';
+  document.getElementById('emailStatusText').style.color = '#1a4a8a';
+
+  const now = new Date();
+  const h = (offset) => new Date(now.getTime() - offset * 3600000).toISOString();
+
+  currentEmails = [
+    {
+      id: 'demo-1', threadId: 't1', unread: true,
+      from: 'Mario Rossi <mario.rossi@gmail.com>',
+      to: 'info@righettoimmobiliare.it',
+      subject: 'Richiesta informazioni villa in zona Arcella',
+      date: h(1),
+      snippet: 'Buongiorno, ho visto sul vostro sito la villa bifamiliare in zona Arcella e vorrei organizzare una visita...',
+      _demoBody: 'Buongiorno,\n\nho visto sul vostro sito la villa bifamiliare in zona Arcella (codice LA0307) e sono molto interessato.\n\nVorrei sapere:\n- Se e\' possibile organizzare una visita nel fine settimana\n- Se il prezzo e\' trattabile\n- Quali sono le spese condominiali\n\nIl mio budget e\' di circa 350.000€.\n\nGrazie,\nMario Rossi\nTel: 349 1234567'
+    },
+    {
+      id: 'demo-2', threadId: 't2', unread: true,
+      from: 'Laura Bianchi <laura.bianchi@yahoo.it>',
+      to: 'info@righettoimmobiliare.it',
+      subject: 'Valutazione appartamento centro storico Padova',
+      date: h(3),
+      snippet: 'Gentile Righetto Immobiliare, vorrei richiedere una valutazione gratuita del mio appartamento...',
+      _demoBody: 'Gentile Righetto Immobiliare,\n\nvorrei richiedere una valutazione gratuita del mio appartamento situato in centro storico a Padova, zona Prato della Valle.\n\nCaratteristiche:\n- 95mq su due livelli\n- 3 camere da letto\n- 2 bagni\n- Terrazzo 15mq\n- Ristrutturato nel 2019\n- Classe energetica B\n\nSono disponibile per un appuntamento in qualsiasi giorno della prossima settimana.\n\nCordiali saluti,\nLaura Bianchi\n349 7654321'
+    },
+    {
+      id: 'demo-3', threadId: 't3', unread: false,
+      from: 'Paolo Verdi <paolo.verdi@outlook.com>',
+      to: 'info@righettoimmobiliare.it',
+      subject: 'Re: Contratto di locazione bilocale via Roma',
+      date: h(8),
+      snippet: 'Perfetto, confermo la disponibilita\' per la firma del contratto giovedi\' alle 15:00 presso il vostro ufficio...',
+      _demoBody: 'Perfetto, confermo la disponibilita\' per la firma del contratto giovedi\' alle 15:00 presso il vostro ufficio.\n\nPortero\' con me:\n- Documento di identita\'\n- Codice fiscale\n- Ultime 2 buste paga\n- Referenze del precedente proprietario\n\nA giovedi\',\nPaolo Verdi'
+    },
+    {
+      id: 'demo-4', threadId: 't4', unread: false,
+      from: 'Agenzia Entrate <noreply@agenziaentrate.gov.it>',
+      to: 'info@righettoimmobiliare.it',
+      subject: 'Conferma registrazione contratto N. 2024/RT/001234',
+      date: h(24),
+      snippet: 'Si comunica che il contratto di locazione e\' stato regolarmente registrato con numero...',
+      _demoBody: 'Gentile contribuente,\n\nsi comunica che il contratto di locazione e\' stato regolarmente registrato:\n\nNumero registrazione: 2024/RT/001234\nData: 25/02/2026\nDurata: 4+4 anni\nCanone mensile: €750,00\n\nIl presente messaggio e\' generato automaticamente.'
+    },
+    {
+      id: 'demo-5', threadId: 't5', unread: true,
+      from: 'Giulia Marchetti <giulia.m@gmail.com>',
+      to: 'info@righettoimmobiliare.it',
+      subject: 'Cerco trilocale in affitto zona Mandria',
+      date: h(5),
+      snippet: 'Buongiorno, sono una giovane professionista e cerco un trilocale in affitto nella zona Mandria...',
+      _demoBody: 'Buongiorno,\n\nsono una giovane professionista e cerco un trilocale in affitto nella zona Mandria o zone limitrofe.\n\nRequisiti:\n- Budget max €650/mese + spese\n- Almeno 2 camere da letto\n- Possibilmente con posto auto\n- Disponibilita\' da aprile 2026\n\nHo referenze e contratto a tempo indeterminato.\n\nGrazie mille,\nGiulia Marchetti\n340 9876543'
+    },
+    {
+      id: 'demo-6', threadId: 't6', unread: false,
+      from: 'Marco Zanetti <m.zanetti@studio-zanetti.it>',
+      to: 'info@righettoimmobiliare.it',
+      subject: 'Documenti per rogito villa Abano Terme',
+      date: h(48),
+      snippet: 'Come da accordi, allego la documentazione necessaria per procedere con il rogito previsto per...',
+      _demoBody: 'Gentile Dott. Righetto,\n\ncome da accordi, le invio la documentazione necessaria per procedere con il rogito previsto per il 15 marzo:\n\n1. Visura catastale aggiornata\n2. APE (Attestato Prestazione Energetica)\n3. Certificato di conformita\' impianti\n4. Planimetria catastale\n\nResto a disposizione per qualsiasi chiarimento.\n\nCordiali saluti,\nAvv. Marco Zanetti\nStudio Legale Zanetti & Associati'
+    }
+  ];
+
+  // Set badge counts
+  const unread = currentEmails.filter(e => e.unread).length;
+  const badge = document.getElementById('badgePosta');
+  const countInbox = document.getElementById('countInbox');
+  badge.style.display = 'inline';
+  badge.textContent = unread;
+  countInbox.textContent = unread;
+
+  renderEmailList();
+  toast('Modalita\' demo attivata — dati di esempio', 'success');
+}
+
+// Override showEmail for demo mode
+const _originalShowEmail = typeof showEmail === 'function' ? showEmail : null;
+
+async function showEmail(emailId) {
+  if (!demoMode) {
+    // Real Gmail mode — use original function logic
+    return showEmailReal(emailId);
+  }
+
+  // Demo mode
+  currentEmailId = emailId;
+  renderEmailList();
+
+  const email = currentEmails.find(e => e.id === emailId);
+  if (!email) return;
+
+  // Mark as read
+  email.unread = false;
+  renderEmailList();
+  const unread = currentEmails.filter(e => e.unread).length;
+  document.getElementById('badgePosta').textContent = unread;
+  document.getElementById('countInbox').textContent = unread;
+  if (unread === 0) document.getElementById('badgePosta').style.display = 'none';
+
+  const previewEmpty = document.getElementById('emailPreviewEmpty');
+  const previewContent = document.getElementById('emailPreviewContent');
+  previewEmpty.style.display = 'none';
+  previewContent.style.display = 'flex';
+  previewContent.style.flexDirection = 'column';
+
+  const fromName = extractName(email.from);
+  const fromEmail = email.from.replace(/^.*</, '').replace(/>.*$/, '');
+  const initials = fromName.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+  const dateStr = new Date(email.date).toLocaleString('it-IT');
+  const bodyHtml = '<pre style="white-space:pre-wrap;font-family:inherit;margin:0">' + escHtml(email._demoBody || email.snippet) + '</pre>';
+
+  document.getElementById('previewSubject').textContent = email.subject;
+  document.getElementById('previewAvatar').textContent = initials;
+  document.getElementById('previewFromName').textContent = fromName;
+  document.getElementById('previewFromEmail').textContent = '<' + fromEmail + '>';
+  document.getElementById('previewTo').textContent = 'A: ' + email.to;
+  document.getElementById('previewDate').textContent = dateStr;
+  document.getElementById('previewBody').innerHTML = bodyHtml;
+
+  renderPropertyLink(emailId);
 }
 
 // GAPI init
@@ -4244,6 +4376,7 @@ function selectLabel(label, el) {
 // ── EMAIL LIST ──
 
 async function refreshEmails() {
+  if (demoMode) { renderEmailList(); toast('(DEMO) Lista aggiornata', 'success'); return; }
   if (!gmailAccessToken) return;
 
   const listArea = document.getElementById('emailListItems');
@@ -4384,9 +4517,9 @@ function escHtml(str) {
   return div.innerHTML;
 }
 
-// ── EMAIL PREVIEW ──
+// ── EMAIL PREVIEW (Real Gmail) ──
 
-async function showEmail(emailId) {
+async function showEmailReal(emailId) {
   currentEmailId = emailId;
   renderEmailList(); // Update active state
 
@@ -4614,6 +4747,13 @@ async function sendEmail() {
   if (!to) { toast('Inserisci un destinatario', 'error'); return; }
   if (!subject) { toast('Inserisci un oggetto', 'error'); return; }
 
+  // Demo mode — simula invio
+  if (demoMode) {
+    toast('(DEMO) Email inviata a ' + to, 'success');
+    closeCompose();
+    return;
+  }
+
   const email = [
     'To: ' + to,
     'Subject: ' + subject,
@@ -4652,6 +4792,17 @@ async function sendEmail() {
 async function trashEmail() {
   if (!currentEmailId) return;
   if (!confirm('Spostare questa email nel cestino?')) return;
+
+  // Demo mode
+  if (demoMode) {
+    currentEmails = currentEmails.filter(e => e.id !== currentEmailId);
+    currentEmailId = null;
+    document.getElementById('emailPreviewEmpty').style.display = 'flex';
+    document.getElementById('emailPreviewContent').style.display = 'none';
+    renderEmailList();
+    toast('(DEMO) Email spostata nel cestino', 'success');
+    return;
+  }
 
   try {
     await gapi.client.gmail.users.messages.trash({
