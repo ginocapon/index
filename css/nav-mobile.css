@@ -105,6 +105,35 @@ header .gestionale-btn:hover{color:var(--oro,#B8D44A)}
 }
 .nav-mobile .gestionale-mobile-section a svg{width:18px;height:18px;opacity:.6}
 
+/* ═══ PULSANTE LOGIN (quando non loggato) ═══ */
+.nav-login-btn{
+  font-family:'Montserrat',sans-serif;
+  font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:rgba(255,255,255,.85)!important;
+  padding:8px 16px;border-radius:6px;
+  border:1px solid rgba(255,255,255,.25);
+  transition:all .2s;cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.nav-login-btn:hover{color:white!important;border-color:rgba(255,255,255,.5)}
+/* index.html scrolled */
+.scrolled .nav-login-btn{color:var(--testo2,#4A5568)!important;border-color:rgba(44,74,110,.2)}
+.scrolled .nav-login-btn:hover{color:var(--blu,#2C4A6E)!important;border-color:var(--blu,#2C4A6E)}
+/* header pages */
+header .nav-login-btn{color:white!important;border-color:rgba(255,255,255,.25)}
+header .nav-login-btn:hover{color:var(--oro,#B8D44A)!important;border-color:var(--oro,#B8D44A)}
+/* Mobile login link */
+.nav-mobile-login{
+  margin-top:16px!important;
+  display:flex!important;align-items:center;gap:8px;
+  font-family:'Montserrat',sans-serif!important;
+  font-size:.9rem!important;font-weight:700;
+  color:var(--blu,#2C4A6E)!important;
+  padding:12px 0!important;
+  border-top:2px solid rgba(44,74,110,.1)!important;
+  border-bottom:none!important;
+}
+
 @media(max-width:768px){
   /* Nasconde navigazione desktop, mostra burger */
   .hi nav,.hi .h-cta{display:none!important}
@@ -113,4 +142,5 @@ header .gestionale-btn:hover{color:var(--oro,#B8D44A)}
   .hi,.header-inner{height:64px!important}
   .nav-mobile{top:64px}
   .gestionale-wrap{display:none!important}
+  .nav-login-btn{display:none!important}
 }
