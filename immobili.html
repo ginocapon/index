@@ -16,6 +16,7 @@
 <meta property="og:locale" content="it_IT">
 <meta name="description" content="Scopri gli immobili di Righetto Immobiliare: ville, appartamenti, uffici in vendita e affitto a Padova e provincia. Filtri avanzati, virtual tour 360° e video.">
     <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/nav-mobile.css">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
@@ -321,7 +322,17 @@
       <a class="h-btn" href="contatti.html">Valutazione gratuita</a>
     </div>
   </div>
+  <button class="nav-burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
 </header>
+<div class="nav-mobile" id="navMobile">
+  <a href="index.html">Home</a>
+  <a href="chi-siamo.html">Chi Siamo</a>
+  <a href="immobili.html">Immobili</a>
+  <a href="servizi.html">Servizi</a>
+  <a href="blog.html">Blog</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contatti.html" class="nav-mobile-cta">Contattaci</a>
+</div>
 
 <!-- HERO SEARCH -->
 <div class="hero-search">
@@ -970,6 +981,7 @@
   // ── INIT ──
   loadImmobili();
 </script>
+<script src="js/nav-mobile.js"></script>
 <script src="js/config.js"></script>
 <script src="js/chatbot.js"></script>
 <script src="js/cookie-consent.js"></script>
