@@ -212,6 +212,27 @@ nav { flex: 1; padding: 16px 0; }
   color: var(--nero);
 }
 .topbar-actions { display: flex; gap: 12px; align-items: center; }
+.topbar-burger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  flex-direction: column;
+  gap: 5px;
+  margin-right: 12px;
+}
+.topbar-burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--nero);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.topbar-burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.topbar-burger.open span:nth-child(2) { opacity: 0; }
+.topbar-burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
 .content { padding: 32px; flex: 1; }
 
@@ -1108,7 +1129,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 }
 .email-item {
   display: grid;
-  grid-template-columns: 36px 1fr 2fr 90px 50px;
+  grid-template-columns: 36px 24px 1fr 2fr 90px 50px;
   align-items: center;
   gap: 8px;
   padding: 10px 16px;
@@ -1117,6 +1138,85 @@ tr:hover td { background: rgba(206,224,143,0.06); }
   cursor: pointer;
   transition: background 0.1s;
 }
+.email-item-star {
+  font-size: 1.1rem;
+  color: var(--caffe3);
+  cursor: pointer;
+  transition: color 0.15s, transform 0.15s;
+  user-select: none;
+  text-align: center;
+  line-height: 1;
+}
+.email-item-star:hover { color: #f1c40f; transform: scale(1.2); }
+.email-item-star.starred { color: #f1c40f; }
+.email-bulk-bar {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--nero);
+  color: white;
+  font-size: 0.78rem;
+  flex-wrap: wrap;
+}
+.email-bulk-bar.visible { display: flex; }
+.email-bulk-bar .bulk-count { font-weight: 600; margin-right: 4px; }
+.email-bulk-bar button {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.email-bulk-bar button:hover { background: rgba(255,255,255,0.25); }
+.email-bulk-bar button.bulk-danger { background: rgba(231,76,60,0.3); border-color: rgba(231,76,60,0.4); }
+.email-bulk-bar button.bulk-danger:hover { background: rgba(231,76,60,0.5); }
+.csv-dropzone {
+  border: 2px dashed var(--caffe3);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  margin-bottom: 16px;
+}
+.csv-dropzone:hover, .csv-dropzone.dragover {
+  border-color: var(--nero);
+  background: rgba(206,224,143,0.1);
+}
+.csv-preview-table {
+  width: 100%;
+  font-size: 0.78rem;
+  border-collapse: collapse;
+  margin-top: 12px;
+  max-height: 300px;
+  overflow-y: auto;
+  display: block;
+}
+.csv-preview-table th, .csv-preview-table td {
+  padding: 6px 10px;
+  border: 1px solid rgba(0,0,0,0.08);
+  text-align: left;
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.csv-preview-table th {
+  background: var(--nero);
+  color: white;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+.csv-preview-table tr:nth-child(even) { background: var(--sfondo); }
 .email-item:hover { background: rgba(206,224,143,0.06); }
 .email-item.active { background: rgba(206,224,143,0.15); }
 .email-item.unread { font-weight: 600; }
@@ -1452,13 +1552,34 @@ tr:hover td { background: rgba(206,224,143,0.06); }
   .sidebar.open { transform: translateX(0); }
   .main { margin-left: 0; }
   .content { padding: 16px; }
+  .topbar { padding: 12px 16px; }
+  .topbar-burger { display: flex; }
+  .topbar-title { font-size: 1.1rem; }
+  .topbar-actions .btn { font-size: 0.72rem; padding: 6px 10px; }
   .form-grid { grid-template-columns: 1fr; }
   .form-grid.three { grid-template-columns: 1fr; }
   table { font-size: 0.75rem; }
   td, th { padding: 10px 10px; }
-  .email-item { grid-template-columns: 36px 1fr 100px; }
+  .email-item { grid-template-columns: 28px 22px 1fr 70px; }
   .email-item-subject, .email-item-property { display: none; }
+  .email-item-check { width: 14px; height: 14px; }
+  .email-item-star { font-size: 0.95rem; }
   .email-compose-box { width: 100%; }
+  .email-bulk-bar { font-size: 0.7rem; gap: 5px; padding: 6px 10px; }
+  .email-bulk-bar button { padding: 4px 8px; font-size: 0.68rem; }
+  .email-layout { height: auto; }
+  .email-folders { min-width: unset; width: 100%; flex-direction: row; overflow-x: auto; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.06); flex-wrap: nowrap; max-height: 120px; }
+  .email-folder-item { padding: 8px 14px; border-left: none; border-bottom: 3px solid transparent; white-space: nowrap; font-size: 0.75rem; }
+  .email-folder-item.active { border-left: none; border-bottom-color: var(--oro); }
+  .email-account-selector { flex-direction: row; overflow-x: auto; padding: 8px; max-height: 60px; }
+  .email-preview-actions { gap: 6px; padding: 12px 16px; }
+  .email-preview-actions .btn { font-size: 0.72rem; padding: 6px 10px; }
+  .email-preview-header { padding: 14px 16px 10px; }
+  .email-preview-body { padding: 14px 16px; }
+  .login-box { padding: 32px 24px; margin: 16px; }
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stat-card .stat-num { font-size: 1.6rem; }
+  .modal { margin: 16px; max-height: 90vh; overflow-y: auto; }
 }
 </style>
 </head>
@@ -1490,9 +1611,15 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         style="text-align:center;font-size:1.8rem;letter-spacing:12px;font-weight:700;font-family:'Montserrat',sans-serif">
       <button class="btn-login" onclick="verifyTotp()" style="margin-top:12px">Verifica</button>
       <div class="login-error" id="totpError">Codice non valido</div>
-      <button onclick="loginStep1Back()" style="background:none;border:none;color:var(--caffe2);font-size:0.78rem;cursor:pointer;margin-top:8px;font-family:'Montserrat',sans-serif">
-        ← Torna al login
-      </button>
+      <div style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(0,0,0,0.08)">
+        <button onclick="loginStep1Back()" style="background:none;border:none;color:var(--caffe2);font-size:0.78rem;cursor:pointer;font-family:'Montserrat',sans-serif">
+          ← Torna al login
+        </button>
+        <br>
+        <button onclick="emergencyDisable2FA()" style="background:none;border:none;color:var(--rosso);font-size:0.72rem;cursor:pointer;margin-top:8px;font-family:'Montserrat',sans-serif;text-decoration:underline">
+          Hai perso l'accesso? Disattiva 2FA
+        </button>
+      </div>
     </div>
 
     <!-- Step Setup: Prima configurazione 2FA -->
@@ -1558,6 +1685,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         Clienti
         <span class="nav-badge" id="badgeClienti" style="display:none">0</span>
       </div>
+      <div class="nav-item" onclick="showSection('social')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        Social
+      </div>
       <div class="nav-item" onclick="showSection('impostazioni')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         Impostazioni
@@ -1574,6 +1705,9 @@ tr:hover td { background: rgba(206,224,143,0.06); }
   <!-- MAIN -->
   <main class="main">
     <div class="topbar">
+      <button class="topbar-burger" id="adminBurger" onclick="toggleAdminSidebar()">
+        <span></span><span></span><span></span>
+      </button>
       <div class="topbar-title" id="topbarTitle">Gestione Immobili</div>
       <div class="topbar-actions">
         <a href="immobili.html" target="_blank" class="btn btn-secondary btn-sm">
@@ -2438,6 +2572,18 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <span style="font-size:0.75rem;color:var(--caffe2)" id="emailStatusText">Non connesso</span>
               </div>
 
+              <!-- Bulk Actions Bar -->
+              <div class="email-bulk-bar" id="emailBulkBar">
+                <span class="bulk-count" id="bulkCount">0</span> selezionate
+                <button onclick="bulkMarkRead()">Segna come letto</button>
+                <button onclick="bulkMarkUnread()">Segna come non letto</button>
+                <button onclick="bulkToggleStar()">Importante</button>
+                <button onclick="bulkArchive()">Archivia</button>
+                <button class="bulk-danger" onclick="bulkTrash()">Elimina</button>
+                <button onclick="bulkSelectAll()">Seleziona tutte</button>
+                <button onclick="bulkDeselectAll()">Deseleziona</button>
+              </div>
+
               <div class="email-split">
                 <!-- Lista Email -->
                 <div class="email-list-area" id="emailListArea">
@@ -2481,6 +2627,14 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                       <button class="btn btn-secondary btn-sm" onclick="forwardEmail()">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 17 20 12 15 7"/><path d="M4 18v-2a4 4 0 0 0 4-4h12"/></svg>
                         Inoltra
+                      </button>
+                      <button class="btn btn-secondary btn-sm" onclick="toggleCurrentEmailReadStatus()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+                        <span id="btnReadStatusText">Segna come non letto</span>
+                      </button>
+                      <button class="btn btn-secondary btn-sm" onclick="toggleCurrentEmailStar()" id="btnStarCurrent">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <span id="btnStarText">Importante</span>
                       </button>
                       <button class="btn btn-secondary btn-sm" onclick="openLinkPropertyModal()">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
@@ -2656,6 +2810,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <option value="manuale">Manuali</option>
               </select>
               <input class="table-search" type="text" placeholder="Cerca cliente..." id="searchClienti" oninput="filterClientiTable()">
+              <button class="btn btn-secondary btn-sm" onclick="openCsvImportModal()">Importa CSV</button>
               <button class="btn btn-primary btn-sm" onclick="openClienteModal()">+ Nuovo Cliente</button>
             </div>
           </div>
@@ -2672,7 +2827,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <th>Email</th>
                 <th>Telefono</th>
                 <th>Fonte</th>
-                <th>Interesse</th>
+                <th>Cerca</th>
+                <th>Budget</th>
                 <th>Data</th>
                 <th>Azioni</th>
               </tr>
@@ -2714,8 +2870,51 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <option value="passaparola">Passaparola</option>
                 </select>
               </div>
+              <div class="form-group">
+                <label>Tipo Operazione</label>
+                <select id="clienteTipoOp">
+                  <option value="">Qualsiasi</option>
+                  <option value="vendita">Acquisto</option>
+                  <option value="affitto">Affitto</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Tipologia</label>
+                <select id="clienteTipologia">
+                  <option value="">Qualsiasi</option>
+                  <option value="appartamento">Appartamento</option>
+                  <option value="villa">Villa / Bifamiliare</option>
+                  <option value="attico">Attico / Mansarda</option>
+                  <option value="casa indipendente">Casa Indipendente</option>
+                  <option value="ufficio">Ufficio / Studio</option>
+                  <option value="negozio">Negozio / Locale</option>
+                  <option value="capannone">Capannone</option>
+                  <option value="terreno">Terreno</option>
+                  <option value="garage">Garage / Box</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Zona / Comune</label>
+                <input type="text" id="clienteZona" placeholder="Es. Padova, Arcella, Abano">
+              </div>
+              <div class="form-group">
+                <label>Budget Minimo</label>
+                <input type="number" id="clienteBudgetMin" placeholder="0" min="0">
+              </div>
+              <div class="form-group">
+                <label>Budget Massimo</label>
+                <input type="number" id="clienteBudgetMax" placeholder="500000" min="0">
+              </div>
+              <div class="form-group">
+                <label>Camere Minime</label>
+                <input type="number" id="clienteCamereMin" placeholder="2" min="0" max="20">
+              </div>
+              <div class="form-group">
+                <label>Superficie Min (mq)</label>
+                <input type="number" id="clienteSupMin" placeholder="50" min="0">
+              </div>
               <div class="form-group form-full">
-                <label>Interesse / Ricerca</label>
+                <label>Interesse / Ricerca (testo libero)</label>
                 <input type="text" id="clienteInteresse" placeholder="Es. Cerca appartamento 3 camere zona centro Padova">
               </div>
               <div class="form-group form-full">
@@ -2729,6 +2928,205 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <button class="btn btn-danger" id="btnDeleteCliente" onclick="deleteCliente()" style="display:none">Elimina</button>
             <button class="btn btn-primary" onclick="saveCliente()">Salva Cliente</button>
           </div>
+        </div>
+      </div>
+
+      <!-- MODAL IMPORTA CSV CLIENTI -->
+      <div class="modal-overlay" id="csvImportModal">
+        <div class="modal" style="max-width:750px">
+          <div class="modal-header">
+            <h2>Importa Clienti da CSV</h2>
+            <button class="modal-close" onclick="closeCsvImportModal()">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="csv-dropzone" id="csvDropzone" onclick="document.getElementById('csvFileInput').click()"
+              ondragover="event.preventDefault();this.classList.add('dragover')"
+              ondragleave="this.classList.remove('dragover')"
+              ondrop="event.preventDefault();this.classList.remove('dragover');handleCsvDrop(event)">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--caffe2)" stroke-width="1.5" style="display:block;margin:0 auto 8px">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              <p style="font-size:0.88rem;font-weight:600;color:var(--testo)">Trascina qui il file CSV oppure clicca per selezionarlo</p>
+              <p style="font-size:0.78rem;color:var(--caffe2);margin-top:4px">Formati accettati: .csv, .txt (separatore: virgola, punto e virgola, o tab)</p>
+              <input type="file" id="csvFileInput" accept=".csv,.txt" style="display:none" onchange="handleCsvFile(this.files[0])">
+            </div>
+            <div id="csvFileName" style="font-size:0.82rem;color:var(--nero);font-weight:600;margin-bottom:8px;display:none"></div>
+
+            <!-- Column Mapping -->
+            <div id="csvMappingArea" style="display:none">
+              <p style="font-size:0.82rem;color:var(--caffe2);margin-bottom:12px">Mappa le colonne del CSV ai campi del database:</p>
+              <div class="form-grid" id="csvMappingGrid"></div>
+            </div>
+
+            <!-- Preview -->
+            <div id="csvPreviewArea" style="display:none;margin-top:16px">
+              <p style="font-size:0.82rem;font-weight:600;color:var(--nero);margin-bottom:8px">Anteprima (<span id="csvPreviewCount">0</span> righe):</p>
+              <div style="max-height:250px;overflow:auto;border:1px solid rgba(0,0,0,0.08);border-radius:8px">
+                <table class="csv-preview-table" id="csvPreviewTable"></table>
+              </div>
+            </div>
+            <div id="csvError" style="color:var(--rosso);font-size:0.82rem;margin-top:8px;display:none"></div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeCsvImportModal()">Annulla</button>
+            <button class="btn btn-primary" id="btnCsvImport" onclick="doCsvImport()" style="display:none">Importa Clienti</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL INCROCIO RISULTATI -->
+      <div class="modal-overlay" id="matchModal">
+        <div class="modal" style="max-width:800px">
+          <div class="modal-header">
+            <h2 id="matchModalTitle">Risultati Incrocio</h2>
+            <button class="modal-close" onclick="closeMatchModal()">&times;</button>
+          </div>
+          <div class="modal-body" id="matchModalBody" style="max-height:500px;overflow-y:auto">
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeMatchModal()">Chiudi</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SEZIONE SOCIAL MEDIA ═══ -->
+      <div class="section" id="sec-social">
+        <div class="table-wrap" style="padding:28px;max-width:800px">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:6px">Pubblicazione Social Media</h3>
+          <p style="font-size:0.82rem;color:var(--caffe2);margin-bottom:20px">Configura le API per pubblicare gli immobili direttamente sui social media</p>
+
+          <!-- FACEBOOK -->
+          <div style="background:var(--sfondo);border-radius:12px;padding:18px;margin-bottom:16px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <div style="width:36px;height:36px;border-radius:8px;background:#1877F2;display:flex;align-items:center;justify-content:center">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </div>
+              <div>
+                <div style="font-weight:700;font-size:0.95rem;color:var(--nero)">Facebook Page</div>
+                <div style="font-size:0.75rem;color:var(--caffe2)" id="fbStatus">Non configurato</div>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Page ID</label>
+                <input type="text" id="socialFbPageId" placeholder="Es. 1234567890">
+              </div>
+              <div class="form-group">
+                <label>Page Access Token</label>
+                <input type="password" id="socialFbToken" placeholder="Token di lunga durata">
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="btn btn-sm btn-secondary" onclick="testFbConnection()">Test Connessione</button>
+              <button class="btn btn-sm btn-primary" onclick="saveSocialConfig('fb')">Salva</button>
+            </div>
+          </div>
+
+          <!-- INSTAGRAM -->
+          <div style="background:var(--sfondo);border-radius:12px;padding:18px;margin-bottom:16px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="white"/></svg>
+              </div>
+              <div>
+                <div style="font-weight:700;font-size:0.95rem;color:var(--nero)">Instagram Business</div>
+                <div style="font-size:0.75rem;color:var(--caffe2)" id="igStatus">Non configurato</div>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Instagram Business Account ID</label>
+                <input type="text" id="socialIgAccountId" placeholder="Dall'API Graph di Facebook">
+              </div>
+              <div class="form-group">
+                <label>Access Token (stesso di Facebook)</label>
+                <input type="password" id="socialIgToken" placeholder="Usa lo stesso token Facebook">
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="btn btn-sm btn-secondary" onclick="testIgConnection()">Test Connessione</button>
+              <button class="btn btn-sm btn-primary" onclick="saveSocialConfig('ig')">Salva</button>
+            </div>
+          </div>
+
+          <!-- GOOGLE BUSINESS PROFILE -->
+          <div style="background:var(--sfondo);border-radius:12px;padding:18px;margin-bottom:16px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <div style="width:36px;height:36px;border-radius:8px;background:#4285F4;display:flex;align-items:center;justify-content:center">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              </div>
+              <div>
+                <div style="font-weight:700;font-size:0.95rem;color:var(--nero)">Google Business Profile</div>
+                <div style="font-size:0.75rem;color:var(--caffe2)" id="gbpStatus">Non configurato</div>
+              </div>
+            </div>
+            <p style="font-size:0.78rem;color:var(--caffe2);margin-bottom:10px">Usa lo stesso Google Client ID configurato per la Posta. Verr&agrave; richiesto il permesso aggiuntivo per Business Profile.</p>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-sm btn-secondary" onclick="connectGBP()">Connetti Google Business</button>
+              <span id="gbpAccount" style="font-size:0.82rem;color:var(--nero);align-self:center"></span>
+            </div>
+          </div>
+
+          <!-- TIKTOK -->
+          <div style="background:var(--sfondo);border-radius:12px;padding:18px;margin-bottom:16px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <div style="width:36px;height:36px;border-radius:8px;background:#000;display:flex;align-items:center;justify-content:center">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.53a6.27 6.27 0 0 0-.79-.05A6.34 6.34 0 0 0 3.16 15a6.34 6.34 0 0 0 6.33 6.34 6.34 6.34 0 0 0 6.33-6.34V8.6a8.2 8.2 0 0 0 4.77 1.52V6.69h-.99z"/></svg>
+              </div>
+              <div>
+                <div style="font-weight:700;font-size:0.95rem;color:var(--nero)">TikTok</div>
+                <div style="font-size:0.75rem;color:var(--caffe2)">Condivisione diretta</div>
+              </div>
+            </div>
+            <p style="font-size:0.78rem;color:var(--caffe2)">TikTok non supporta la pubblicazione diretta da siti web. Quando pubblichi un immobile, verr&agrave; generata una scheda visiva ottimizzata che potrai scaricare e caricare manualmente su TikTok.</p>
+          </div>
+
+          <!-- PUBBLICA IMMOBILE -->
+          <div style="background:white;border:2px solid var(--caffe3);border-radius:12px;padding:18px;margin-top:24px">
+            <h4 style="font-size:1rem;color:var(--nero);margin-bottom:12px">Pubblica Immobile sui Social</h4>
+            <div class="form-group" style="margin-bottom:12px">
+              <label>Seleziona Immobile</label>
+              <select id="socialPropertySelect" style="width:100%">
+                <option value="">— Seleziona un immobile —</option>
+              </select>
+            </div>
+            <div id="socialPropertyPreview" style="display:none;background:var(--sfondo);border-radius:8px;padding:12px;margin-bottom:12px"></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn btn-sm" onclick="publishToFacebook()" style="background:#1877F2;color:white">Pubblica su Facebook</button>
+              <button class="btn btn-sm" onclick="publishToInstagram()" style="background:linear-gradient(45deg,#f09433,#dc2743);color:white">Pubblica su Instagram</button>
+              <button class="btn btn-sm" onclick="publishToGBP()" style="background:#4285F4;color:white">Pubblica su Google</button>
+              <button class="btn btn-sm" onclick="generateTikTokImage()" style="background:#000;color:white">Genera per TikTok</button>
+            </div>
+            <div id="socialPublishResult" style="margin-top:12px;font-size:0.82rem;display:none"></div>
+          </div>
+
+          <!-- GUIDA SETUP -->
+          <details style="margin-top:20px">
+            <summary style="font-weight:600;font-size:0.9rem;color:var(--nero);cursor:pointer">Come configurare le API</summary>
+            <div style="font-size:0.82rem;color:var(--caffe2);padding:12px 0;line-height:1.7">
+              <p><strong>Facebook + Instagram:</strong></p>
+              <ol style="padding-left:20px;margin-bottom:12px">
+                <li>Vai su <a href="https://developers.facebook.com" target="_blank">developers.facebook.com</a></li>
+                <li>Crea un'app di tipo "Business"</li>
+                <li>Aggiungi il prodotto "Facebook Login"</li>
+                <li>In Strumenti > Esplora API Graph, genera un Token di Pagina</li>
+                <li>Per il token di lunga durata: usa il debug token e estendilo</li>
+                <li>Il Page ID lo trovi nelle Impostazioni della Pagina Facebook</li>
+                <li>L'Instagram Business Account ID: vai su API Graph Explorer, chiama <code>/me/accounts</code> poi <code>/{page-id}?fields=instagram_business_account</code></li>
+              </ol>
+              <p><strong>Google Business Profile:</strong></p>
+              <ol style="padding-left:20px;margin-bottom:12px">
+                <li>Usa lo stesso Google Client ID della Posta</li>
+                <li>Abilita "Google My Business API" nella Console Google Cloud</li>
+                <li>Clicca "Connetti Google Business" qui sopra per autorizzare</li>
+              </ol>
+              <p><strong>TikTok:</strong></p>
+              <ol style="padding-left:20px">
+                <li>La pubblicazione diretta non e' supportata</li>
+                <li>Genera l'immagine dell'immobile e caricala manualmente su TikTok</li>
+              </ol>
+            </div>
+          </details>
         </div>
       </div>
 
@@ -2794,7 +3192,16 @@ let pendingTotpSecret = null; // used during 2FA setup
 function checkAuth() {
   const params = new URLSearchParams(window.location.search);
   const urlKey = params.get('key');
+  const reset2fa = params.get('reset2fa');
   const session = sessionStorage.getItem('rig_admin');
+
+  // Emergency 2FA reset via URL: ?reset2fa=RIG2024
+  if (reset2fa === URL_KEY) {
+    localStorage.removeItem('rig_2fa_secret');
+    console.log('2FA reset via URL parameter');
+    // Clean URL
+    window.history.replaceState({}, '', window.location.pathname);
+  }
 
   if (session === 'ok') {
     // Already authenticated this session (password + 2FA already verified)
@@ -2837,8 +3244,8 @@ function doLogin() {
     document.getElementById('loginTotp').value = '';
     document.getElementById('loginTotp').focus();
   } else {
-    // No 2FA — offer setup
-    show2FASetup();
+    // No 2FA configured — grant access directly (2FA can be set up from Settings)
+    grantAccess();
   }
 }
 
@@ -2846,6 +3253,13 @@ function verifyTotp() {
   const code = document.getElementById('loginTotp').value.trim();
   const secret = localStorage.getItem('rig_2fa_secret');
   if (!secret || !code) return;
+
+  // Check if OTPAuth library is loaded
+  if (typeof OTPAuth === 'undefined') {
+    document.getElementById('totpError').textContent = 'Errore: libreria 2FA non caricata. Ricarica la pagina.';
+    document.getElementById('totpError').style.display = 'block';
+    return;
+  }
 
   try {
     const totp = new OTPAuth.TOTP({
@@ -2857,10 +3271,11 @@ function verifyTotp() {
       secret: OTPAuth.Secret.fromBase32(secret)
     });
 
-    const delta = totp.validate({ token: code, window: 1 });
+    const delta = totp.validate({ token: code, window: 2 });
     if (delta !== null) {
       grantAccess();
     } else {
+      document.getElementById('totpError').textContent = 'Codice non valido';
       document.getElementById('totpError').style.display = 'block';
       document.getElementById('loginTotp').style.borderColor = 'var(--rosso)';
       document.getElementById('loginTotp').value = '';
@@ -2868,6 +3283,7 @@ function verifyTotp() {
     }
   } catch(e) {
     console.error('TOTP verify error:', e);
+    document.getElementById('totpError').textContent = 'Errore verifica: ' + e.message;
     document.getElementById('totpError').style.display = 'block';
   }
 }
@@ -2885,6 +3301,11 @@ function loginStep1Back() {
 function show2FASetup() {
   document.getElementById('loginStep1').style.display = 'none';
   document.getElementById('loginSetup2FA').style.display = 'block';
+
+  if (typeof OTPAuth === 'undefined') {
+    document.getElementById('qrCodeContainer').innerHTML = '<p style="color:var(--rosso);font-size:0.82rem">Errore: libreria OTPAuth non caricata. Controlla la connessione internet e ricarica la pagina.</p>';
+    return;
+  }
 
   // Generate new TOTP secret
   const secret = new OTPAuth.Secret({ size: 20 });
@@ -2923,6 +3344,13 @@ function generateQRCode(text) {
 function confirmTotpSetup() {
   const code = document.getElementById('setupTotpCode').value.trim();
   if (!code || !pendingTotpSecret) {
+    document.getElementById('setupError').textContent = 'Inserisci il codice a 6 cifre dall\'app Authenticator';
+    document.getElementById('setupError').style.display = 'block';
+    return;
+  }
+
+  if (typeof OTPAuth === 'undefined') {
+    document.getElementById('setupError').textContent = 'Errore: libreria 2FA non caricata. Ricarica la pagina.';
     document.getElementById('setupError').style.display = 'block';
     return;
   }
@@ -2937,18 +3365,20 @@ function confirmTotpSetup() {
       secret: OTPAuth.Secret.fromBase32(pendingTotpSecret)
     });
 
-    const delta = totp.validate({ token: code, window: 1 });
+    const delta = totp.validate({ token: code, window: 2 });
     if (delta !== null) {
       // Code is correct — save secret and grant access
       localStorage.setItem('rig_2fa_secret', pendingTotpSecret);
       pendingTotpSecret = null;
       grantAccess();
     } else {
+      document.getElementById('setupError').textContent = 'Codice non corretto. Riprova.';
       document.getElementById('setupError').style.display = 'block';
       document.getElementById('setupTotpCode').style.borderColor = 'var(--rosso)';
     }
   } catch(e) {
     console.error('TOTP setup error:', e);
+    document.getElementById('setupError').textContent = 'Errore: ' + e.message;
     document.getElementById('setupError').style.display = 'block';
   }
 }
@@ -2970,6 +3400,13 @@ function disable2FA() {
   localStorage.removeItem('rig_2fa_secret');
   check2FAStatus();
   toast('2FA disattivato', 'success');
+}
+
+function emergencyDisable2FA() {
+  if (!confirm('Stai per DISATTIVARE il 2FA.\nHai gia\' inserito la password, quindi sei autorizzato.\n\nVuoi procedere?')) return;
+  localStorage.removeItem('rig_2fa_secret');
+  // Go back to step 1 and auto-login (password was already verified)
+  grantAccess();
 }
 
 function check2FAStatus() {
@@ -2996,7 +3433,7 @@ function check2FAStatus() {
 
 function handleHashNavigation() {
   const hash = window.location.hash.replace('#', '');
-  const validSections = ['immobili', 'nuovo', 'richieste', 'posta', 'blog', 'clienti', 'impostazioni'];
+  const validSections = ['immobili', 'nuovo', 'richieste', 'posta', 'blog', 'clienti', 'social', 'impostazioni'];
   if (hash && validSections.includes(hash)) {
     setTimeout(() => showSection(hash), 300);
   }
@@ -3017,6 +3454,24 @@ function doLogout() {
   location.reload();
 }
 
+// ── ADMIN SIDEBAR TOGGLE (mobile) ──
+function toggleAdminSidebar() {
+  var sidebar = document.getElementById('sidebar');
+  var burger = document.getElementById('adminBurger');
+  sidebar.classList.toggle('open');
+  burger.classList.toggle('open');
+}
+
+// Close sidebar when clicking a nav item on mobile
+document.querySelectorAll('.sidebar .nav-item').forEach(function(item) {
+  item.addEventListener('click', function() {
+    if (window.innerWidth <= 768) {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('adminBurger').classList.remove('open');
+    }
+  });
+});
+
 // ══════════════════════════════════════
 // INIT
 // ══════════════════════════════════════
@@ -3034,7 +3489,7 @@ function showSection(name) {
   const sec = document.getElementById('sec-' + name);
   if (sec) sec.classList.add('active');
   // Mark the correct nav-item as active
-  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','impostazioni'];
+  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','impostazioni'];
   const idx = sectionNames.indexOf(name);
   const navItems = document.querySelectorAll('.nav-item');
   if (idx >= 0 && navItems[idx]) navItems[idx].classList.add('active');
@@ -3046,6 +3501,7 @@ function showSection(name) {
     posta: 'Posta',
     blog: 'Gestione Blog',
     clienti: 'Gestione Clienti',
+    social: 'Social Media',
     impostazioni: 'Impostazioni'
   };
   document.getElementById('topbarTitle').textContent = titles[name] || name;
@@ -3053,6 +3509,7 @@ function showSection(name) {
   if (name === 'richieste') loadRichieste();
   if (name === 'posta') initEmailSection();
   if (name === 'blog') loadBlogList();
+  if (name === 'social') loadSocialSection();
   if (name === 'clienti') loadClienti();
   if (name === 'impostazioni') { testConn(); check2FAStatus(); }
 }
@@ -3145,7 +3602,10 @@ function renderTable(data) {
       <td>${stato}</td>
       <td>
         <div style="display:flex;gap:6px">
-          <button class="btn btn-secondary btn-sm" onclick="editImmobile('${i.id}')">✏️</button>
+          <button class="btn btn-secondary btn-sm" onclick="editImmobile('${i.id}')" title="Modifica">✏️</button>
+          <button class="btn btn-sm" onclick="showMatchingClienti('${i.id}')" title="Trova clienti compatibili" style="background:#e3f2fd;color:#1565c0">🤝</button>
+          <button class="btn btn-sm" onclick="printPropertyPdf('${i.id}')" title="Stampa PDF" style="background:#fff3e0;color:#e65100">📄</button>
+          <button class="btn btn-sm" onclick="quickPublishSocial('${i.id}')" title="Pubblica sui Social" style="background:#e8f5e9;color:#1877F2">📢</button>
           <button class="btn btn-danger btn-sm" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')">🗑️</button>
           <button class="btn btn-sm" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="Toggle evidenza" style="background:var(--sfondo)">⭐</button>
           <button class="btn btn-sm" onclick="toggleAttivo('${i.id}',${!i.attivo})" title="Toggle attivo" style="background:var(--sfondo)">${i.attivo ? '👁️' : '🚫'}</button>
@@ -4255,18 +4715,27 @@ function renderClientiTable() {
   tbody.innerHTML = allClienti.map(c => {
     const badgeClass = fonteColors[c.fonte] || 'badge-grigio';
     const dateStr = c.created_at ? new Date(c.created_at).toLocaleDateString('it-IT') : '';
+    const cercaInfo = [c.tipo_operazione_cercata, c.tipologia_cercata, c.zona_cercata].filter(Boolean).join(' · ') || c.interesse || '—';
+    const budgetInfo = (c.budget_min || c.budget_max) ? (c.budget_min ? '€' + Number(c.budget_min).toLocaleString('it-IT') : '0') + ' - ' + (c.budget_max ? '€' + Number(c.budget_max).toLocaleString('it-IT') : '∞') : '—';
+    const tel = (c.telefono || '').replace(/\s+/g, '').replace(/^(\+39|0039)/, '');
+    const waLink = tel ? 'https://wa.me/39' + tel : '';
     return `<tr>
       <td style="font-weight:600">${escHtml(c.nome || '')}</td>
       <td><a href="mailto:${escHtml(c.email || '')}" style="color:var(--nero)">${escHtml(c.email || '')}</a></td>
       <td>${escHtml(c.telefono || '—')}</td>
       <td><span class="badge ${badgeClass}">${escHtml(c.fonte || '')}</span></td>
-      <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(c.interesse || '')}">${escHtml(c.interesse || '—')}</td>
+      <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(cercaInfo)}">${escHtml(cercaInfo)}</td>
+      <td style="font-size:0.72rem;white-space:nowrap">${budgetInfo}</td>
       <td style="white-space:nowrap">${dateStr}</td>
       <td>
-        <div style="display:flex;gap:6px">
+        <div style="display:flex;gap:4px;flex-wrap:wrap">
           <button class="btn-icon" onclick="editCliente('${c.id}')" title="Modifica">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
           </button>
+          <button class="btn-icon" onclick="showMatchingImmobili('${c.id}')" title="Trova immobili compatibili" style="color:#1565c0">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </button>
+          ${waLink ? '<a href="' + waLink + '" target="_blank" class="btn-icon" title="WhatsApp" style="color:#25d366;text-decoration:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.37c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.49-.89-.8-1.49-1.78-1.67-2.08-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35zm-5.44 7.43h-.02a9.75 9.75 0 0 1-4.97-1.36l-.36-.21-3.71.97.99-3.63-.23-.37a9.75 9.75 0 0 1-1.5-5.19C2.24 6.54 6.69 2.1 12.06 2.1a9.72 9.72 0 0 1 6.9 2.86 9.72 9.72 0 0 1 2.86 6.9c0 5.37-4.37 9.74-9.79 9.74zm8.33-18.06A11.62 11.62 0 0 0 12.05.1C5.56.1.21 5.44.21 11.92a11.8 11.8 0 0 0 1.58 5.9L0 24l6.34-1.66a11.82 11.82 0 0 0 5.66 1.44h.01c6.49 0 11.84-5.34 11.84-11.82a11.74 11.74 0 0 0-3.49-8.22z"/></svg></a>' : ''}
           <button class="btn-icon" onclick="deleteClienteById('${c.id}')" title="Elimina" style="color:var(--rosso)">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
           </button>
@@ -4308,6 +4777,13 @@ function openClienteModal(id) {
   document.getElementById('clienteEmail').value = '';
   document.getElementById('clienteTelefono').value = '';
   document.getElementById('clienteFonte').value = 'manuale';
+  document.getElementById('clienteTipoOp').value = '';
+  document.getElementById('clienteTipologia').value = '';
+  document.getElementById('clienteZona').value = '';
+  document.getElementById('clienteBudgetMin').value = '';
+  document.getElementById('clienteBudgetMax').value = '';
+  document.getElementById('clienteCamereMin').value = '';
+  document.getElementById('clienteSupMin').value = '';
   document.getElementById('clienteInteresse').value = '';
   document.getElementById('clienteNote').value = '';
   document.getElementById('btnDeleteCliente').style.display = 'none';
@@ -4323,6 +4799,13 @@ function editCliente(id) {
   document.getElementById('clienteEmail').value = c.email || '';
   document.getElementById('clienteTelefono').value = c.telefono || '';
   document.getElementById('clienteFonte').value = c.fonte || 'manuale';
+  document.getElementById('clienteTipoOp').value = c.tipo_operazione_cercata || '';
+  document.getElementById('clienteTipologia').value = c.tipologia_cercata || '';
+  document.getElementById('clienteZona').value = c.zona_cercata || '';
+  document.getElementById('clienteBudgetMin').value = c.budget_min || '';
+  document.getElementById('clienteBudgetMax').value = c.budget_max || '';
+  document.getElementById('clienteCamereMin').value = c.camere_min || '';
+  document.getElementById('clienteSupMin').value = c.superficie_min || '';
   document.getElementById('clienteInteresse').value = c.interesse || '';
   document.getElementById('clienteNote').value = c.note || '';
   document.getElementById('btnDeleteCliente').style.display = 'inline-flex';
@@ -4340,6 +4823,13 @@ async function saveCliente() {
     email: document.getElementById('clienteEmail').value.trim(),
     telefono: document.getElementById('clienteTelefono').value.trim(),
     fonte: document.getElementById('clienteFonte').value,
+    tipo_operazione_cercata: document.getElementById('clienteTipoOp').value || null,
+    tipologia_cercata: document.getElementById('clienteTipologia').value || null,
+    zona_cercata: document.getElementById('clienteZona').value.trim() || null,
+    budget_min: parseFloat(document.getElementById('clienteBudgetMin').value) || null,
+    budget_max: parseFloat(document.getElementById('clienteBudgetMax').value) || null,
+    camere_min: parseInt(document.getElementById('clienteCamereMin').value) || null,
+    superficie_min: parseInt(document.getElementById('clienteSupMin').value) || null,
     interesse: document.getElementById('clienteInteresse').value.trim(),
     note: document.getElementById('clienteNote').value.trim()
   };
@@ -4386,7 +4876,1056 @@ async function deleteClienteById(id) {
   }
 }
 
-// escHtml is defined in the email section below (hoisted)
+// ══════════════════════════════════════
+// INCROCIO CLIENTI ↔ IMMOBILI + WHATSAPP
+// ══════════════════════════════════════
+
+function matchScore(client, property) {
+  let score = 0;
+  let maxScore = 0;
+
+  // Tipo operazione
+  if (client.tipo_operazione_cercata) {
+    maxScore += 30;
+    if (property.tipo_operazione === client.tipo_operazione_cercata) score += 30;
+  }
+
+  // Tipologia
+  if (client.tipologia_cercata) {
+    maxScore += 20;
+    const tip = (property.tipologia || '').toLowerCase();
+    if (tip.includes(client.tipologia_cercata.toLowerCase())) score += 20;
+  }
+
+  // Zona / Comune
+  if (client.zona_cercata) {
+    maxScore += 15;
+    const zones = client.zona_cercata.toLowerCase().split(/[,;\/]+/).map(z => z.trim());
+    const propLoc = ((property.comune || '') + ' ' + (property.indirizzo || '')).toLowerCase();
+    if (zones.some(z => propLoc.includes(z))) score += 15;
+  }
+
+  // Budget
+  if (client.budget_max || client.budget_min) {
+    maxScore += 20;
+    const prezzo = property.prezzo || 0;
+    const min = client.budget_min || 0;
+    const max = client.budget_max || Infinity;
+    if (prezzo >= min && prezzo <= max) score += 20;
+    else if (prezzo <= max * 1.1 && prezzo >= min * 0.9) score += 10; // 10% tolerance
+  }
+
+  // Camere
+  if (client.camere_min) {
+    maxScore += 10;
+    if ((property.camere || 0) >= client.camere_min) score += 10;
+  }
+
+  // Superficie
+  if (client.superficie_min) {
+    maxScore += 5;
+    if ((property.superficie || 0) >= client.superficie_min) score += 5;
+  }
+
+  if (maxScore === 0) {
+    // No structured criteria — try text matching on interesse
+    if (client.interesse) {
+      const words = client.interesse.toLowerCase().split(/\s+/).filter(w => w.length > 3);
+      const propText = [property.titolo, property.comune, property.tipologia, property.tipo_operazione].join(' ').toLowerCase();
+      const matches = words.filter(w => propText.includes(w));
+      return matches.length > 0 ? Math.min(matches.length * 20, 80) : 0;
+    }
+    return 0;
+  }
+
+  return Math.round((score / maxScore) * 100);
+}
+
+function showMatchingImmobili(clientId) {
+  const client = allClienti.find(c => c.id == clientId);
+  if (!client) return;
+
+  const matches = allImmobili
+    .filter(i => i.attivo && !i.venduto && !i.affittato)
+    .map(i => ({ ...i, _score: matchScore(client, i) }))
+    .filter(i => i._score >= 30)
+    .sort((a, b) => b._score - a._score);
+
+  document.getElementById('matchModalTitle').textContent = 'Immobili per ' + (client.nome || client.email);
+
+  if (matches.length === 0) {
+    document.getElementById('matchModalBody').innerHTML = '<div style="text-align:center;padding:40px;color:var(--caffe2)"><p style="font-size:1.1rem;margin-bottom:8px">Nessun immobile compatibile</p><p style="font-size:0.82rem">Prova ad aggiornare i criteri di ricerca del cliente</p></div>';
+  } else {
+    const tel = (client.telefono || '').replace(/\s+/g, '').replace(/^(\+39|0039)/, '');
+    document.getElementById('matchModalBody').innerHTML = matches.map(i => {
+      const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
+      const thumb = foto ? '<img src="' + foto + '" style="width:70px;height:52px;object-fit:cover;border-radius:6px" onerror="this.style.display=\'none\'">' : '<div style="width:70px;height:52px;background:var(--caffe3);border-radius:6px;display:flex;align-items:center;justify-content:center;color:white;font-size:0.7rem">No foto</div>';
+      const prezzo = i.prezzo ? '€ ' + Number(i.prezzo).toLocaleString('it-IT') : '';
+      const waMsg = encodeURIComponent('Buongiorno ' + (client.nome || '') + ', le proponiamo questo immobile:\n\n' + (i.codice || '') + ' - ' + (i.titolo || '') + '\n' + (i.comune || '') + '\n' + prezzo + (i.superficie ? ' | ' + i.superficie + ' mq' : '') + (i.camere ? ' | ' + i.camere + ' camere' : '') + '\n\nPer info: Righetto Immobiliare');
+      const waUrl = tel ? 'https://wa.me/39' + tel + '?text=' + waMsg : '';
+      return '<div style="display:flex;gap:14px;align-items:center;padding:12px;border-bottom:1px solid rgba(0,0,0,0.06)">' +
+        thumb +
+        '<div style="flex:1;min-width:0">' +
+          '<div style="font-weight:600;font-size:0.88rem;color:var(--nero)">' + escHtml(i.codice || '') + ' — ' + escHtml(i.titolo || '') + '</div>' +
+          '<div style="font-size:0.78rem;color:var(--caffe2)">' + escHtml(i.comune || '') + ' | ' + prezzo + (i.superficie ? ' | ' + i.superficie + ' mq' : '') + (i.camere ? ' | ' + i.camere + ' cam' : '') + '</div>' +
+        '</div>' +
+        '<div style="display:flex;flex-direction:column;gap:4px;align-items:center">' +
+          '<span style="background:' + (i._score >= 70 ? 'var(--verde)' : i._score >= 50 ? '#e67e22' : 'var(--caffe2)') + ';color:white;padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:700">' + i._score + '%</span>' +
+          (waUrl ? '<a href="' + waUrl + '" target="_blank" style="background:#25d366;color:white;padding:4px 10px;border-radius:6px;font-size:0.72rem;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:4px">WhatsApp</a>' : '') +
+          '<button class="btn btn-sm" style="font-size:0.68rem;padding:2px 8px" onclick="printPropertyPdf(\'' + i.id + '\');closeMatchModal()">PDF</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  document.getElementById('matchModal').classList.add('open');
+}
+
+function showMatchingClienti(propertyId) {
+  const property = allImmobili.find(i => i.id == propertyId);
+  if (!property) return;
+
+  const matches = allClienti
+    .map(c => ({ ...c, _score: matchScore(c, property) }))
+    .filter(c => c._score >= 30)
+    .sort((a, b) => b._score - a._score);
+
+  document.getElementById('matchModalTitle').textContent = 'Clienti per ' + (property.codice || '') + ' — ' + (property.titolo || '');
+
+  if (matches.length === 0) {
+    document.getElementById('matchModalBody').innerHTML = '<div style="text-align:center;padding:40px;color:var(--caffe2)"><p style="font-size:1.1rem;margin-bottom:8px">Nessun cliente compatibile</p><p style="font-size:0.82rem">Inserisci clienti con criteri di ricerca per trovare corrispondenze</p></div>';
+  } else {
+    const prezzo = property.prezzo ? '€ ' + Number(property.prezzo).toLocaleString('it-IT') : '';
+    const propInfo = (property.codice || '') + ' - ' + (property.titolo || '') + '\n' + (property.comune || '') + '\n' + prezzo + (property.superficie ? ' | ' + property.superficie + ' mq' : '') + (property.camere ? ' | ' + property.camere + ' camere' : '');
+
+    document.getElementById('matchModalBody').innerHTML = matches.map(c => {
+      const tel = (c.telefono || '').replace(/\s+/g, '').replace(/^(\+39|0039)/, '');
+      const waMsg = encodeURIComponent('Buongiorno ' + (c.nome || '') + ', le proponiamo questo immobile:\n\n' + propInfo + '\n\nPer info: Righetto Immobiliare');
+      const waUrl = tel ? 'https://wa.me/39' + tel + '?text=' + waMsg : '';
+      const cercaInfo = [c.tipo_operazione_cercata, c.tipologia_cercata, c.zona_cercata].filter(Boolean).join(' · ');
+      const budgetInfo = (c.budget_min || c.budget_max) ? (c.budget_min ? '€' + Number(c.budget_min).toLocaleString('it-IT') : '0') + '-' + (c.budget_max ? '€' + Number(c.budget_max).toLocaleString('it-IT') : '∞') : '';
+      return '<div style="display:flex;gap:14px;align-items:center;padding:12px;border-bottom:1px solid rgba(0,0,0,0.06)">' +
+        '<div style="width:40px;height:40px;border-radius:50%;background:var(--caffe3);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.85rem;flex-shrink:0">' + ((c.nome || '?')[0] || '?').toUpperCase() + '</div>' +
+        '<div style="flex:1;min-width:0">' +
+          '<div style="font-weight:600;font-size:0.88rem;color:var(--nero)">' + escHtml(c.nome || c.email || '') + '</div>' +
+          '<div style="font-size:0.78rem;color:var(--caffe2)">' + escHtml(c.telefono || '') + (cercaInfo ? ' · ' + escHtml(cercaInfo) : '') + (budgetInfo ? ' · ' + budgetInfo : '') + '</div>' +
+        '</div>' +
+        '<div style="display:flex;flex-direction:column;gap:4px;align-items:center">' +
+          '<span style="background:' + (c._score >= 70 ? 'var(--verde)' : c._score >= 50 ? '#e67e22' : 'var(--caffe2)') + ';color:white;padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:700">' + c._score + '%</span>' +
+          (waUrl ? '<a href="' + waUrl + '" target="_blank" style="background:#25d366;color:white;padding:4px 10px;border-radius:6px;font-size:0.72rem;font-weight:600;text-decoration:none">WhatsApp</a>' : '') +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  document.getElementById('matchModal').classList.add('open');
+}
+
+function closeMatchModal() {
+  document.getElementById('matchModal').classList.remove('open');
+}
+
+// ══════════════════════════════════════
+// STAMPA PDF IMMOBILE
+// ══════════════════════════════════════
+
+function printPropertyPdf(id) {
+  const i = allImmobili.find(x => x.id == id);
+  if (!i) { toast('Immobile non trovato', 'error'); return; }
+
+  // Collect all photos (max 4 for layout)
+  const allPhotos = (i.foto_urls || i.foto || []).filter(Boolean).slice(0, 4);
+  const mainFoto = i.foto_principale || allPhotos[0] || '';
+  const extraPhotos = allPhotos.slice(1, 4);
+  const prezzo = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : 'Prezzo su richiesta';
+  const prezzoMq = (i.prezzo && i.superficie) ? '\u20AC ' + Math.round(i.prezzo / i.superficie).toLocaleString('it-IT') + '/mq' : '';
+  const tipo = i.tipo_operazione === 'vendita' ? 'VENDITA' : i.tipo_operazione === 'affitto' ? 'AFFITTO' : (i.tipo_operazione || '').toUpperCase();
+
+  // Build comprehensive features
+  const features = [];
+  if (i.tipologia || i.categoria) features.push(['Tipologia', i.tipologia || i.categoria]);
+  if (i.superficie) features.push(['Superficie', i.superficie + ' mq']);
+  if (i.locali) features.push(['Locali', i.locali]);
+  if (i.camere) features.push(['Camere', i.camere]);
+  if (i.bagni_totali || i.bagni) features.push(['Bagni', i.bagni_totali || i.bagni]);
+  if (i.piano) features.push(['Piano', i.piano]);
+  if (i.totale_piani) features.push(['Piani totali', i.totale_piani]);
+  if (i.anno_costruzione) features.push(['Anno costruzione', i.anno_costruzione]);
+  if (i.stato) features.push(['Stato immobile', i.stato]);
+  if (i.classe_energetica) features.push(['Classe energetica', i.classe_energetica]);
+  if (i.ipe_kwh) features.push(['IPE', i.ipe_kwh + ' kWh/m\u00B2a']);
+  if (i.esposizione) features.push(['Esposizione', i.esposizione]);
+  if (i.mq_giardino) features.push(['Giardino', i.mq_giardino + ' mq']);
+  if (i.mq_lotto) features.push(['Lotto', i.mq_lotto + ' mq']);
+  if (i.terrazzi_num) features.push(['Terrazzi', i.terrazzi_num]);
+  if (i.garage_num) features.push(['Garage', i.garage_num]);
+  if (i.posto_auto) features.push(['Posti auto', i.posto_auto]);
+  if (i.ripostigli) features.push(['Ripostigli', i.ripostigli]);
+  if (i.spese_condominio) features.push(['Spese condominiali', '\u20AC ' + Number(i.spese_condominio).toLocaleString('it-IT') + '/mese']);
+  if (i.consegna) features.push(['Consegna', i.consegna]);
+  if (i.panorama) features.push(['Panorama', i.panorama]);
+  if (i.connettivita) features.push(['Connettivit\u00E0', i.connettivita]);
+
+  // Ambienti
+  const ambienti = [];
+  if (i.soggiorno) ambienti.push('Soggiorno');
+  if (i.cucina) ambienti.push('Cucina');
+  if (i.mansarda) ambienti.push('Mansarda');
+  if (i.taverna) ambienti.push('Taverna');
+  if (i.soffitta) ambienti.push('Soffitta');
+  if (i.lavanderia) ambienti.push('Lavanderia');
+  if (i.porticato) ambienti.push('Porticato');
+  if (i.soppalco) ambienti.push('Soppalco');
+
+  // Riscaldamento / Clima
+  const clima = [];
+  if (i.riscaldamento_autonomo) clima.push('Riscaldamento autonomo');
+  if (i.riscaldamento_centralizzato) clima.push('Riscaldamento centralizzato');
+  if (i.riscaldamento_pavimento) clima.push('Riscaldamento a pavimento');
+  if (i.aria_condizionata) clima.push('Aria condizionata');
+  if (i.camino) clima.push('Camino');
+  if (i.termopompa) clima.push('Termopompa');
+  if (i.caldaia_condensazione) clima.push('Caldaia a condensazione');
+
+  // Comfort / Sicurezza
+  const comforts = [];
+  if (i.garage || i.garage_num) comforts.push('Garage');
+  if (i.giardino) comforts.push('Giardino');
+  if (i.terrazzo) comforts.push('Terrazzo');
+  if (i.cantina) comforts.push('Cantina');
+  if (i.ascensore) comforts.push('Ascensore');
+  if (i.piscina) comforts.push('Piscina');
+  if (i.arredato || i.arredo) comforts.push('Arredato');
+  if (i.ingresso_indipendente) comforts.push('Ingresso indipendente');
+  if (i.allarme) comforts.push('Allarme');
+  if (i.porta_blindata) comforts.push('Porta blindata');
+  if (i.domotica) comforts.push('Domotica');
+  if (i.tapparelle_motorizzate) comforts.push('Tapparelle motorizzate');
+  if (i.zanzariere) comforts.push('Zanzariere');
+  if (i.pannelli_fotovoltaici) comforts.push('Fotovoltaico');
+  if (i.pannelli_solari) comforts.push('Solare termico');
+  if (i.impianto_geotermico) comforts.push('Geotermico');
+  if (i.canna_fumaria) comforts.push('Canna fumaria');
+  if (i.portineria) comforts.push('Portineria');
+  if (i.accesso_disabili) comforts.push('Accesso disabili');
+
+  // Build features table (2 columns)
+  const half = Math.ceil(features.length / 2);
+  const col1 = features.slice(0, half);
+  const col2 = features.slice(half);
+  let featRows = '';
+  for (let r = 0; r < half; r++) {
+    const f1 = col1[r] || ['',''];
+    const f2 = col2[r] || ['',''];
+    featRows += '<tr>' +
+      '<td class="feat-label">' + f1[0] + '</td><td class="feat-val">' + f1[1] + '</td>' +
+      '<td class="feat-label">' + f2[0] + '</td><td class="feat-val">' + f2[1] + '</td>' +
+      '</tr>';
+  }
+
+  const tagHtml = (arr, title) => {
+    if (!arr.length) return '';
+    return '<div class="tag-section"><h3>' + title + '</h3><div class="tags">' + arr.map(t => '<span class="tag">\u2713 ' + t + '</span>').join('') + '</div></div>';
+  };
+
+  const win = window.open('', '_blank');
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${escHtml(i.codice || '')} - ${escHtml(i.titolo || '')}</title>
+<style>
+  @page { margin: 12mm 12mm 14mm 12mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; color: #1E3A5C; padding: 0; line-height: 1.45; font-size: 13px; }
+  .header { background: #3A5578; color: white; padding: 14px 22px; display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-size: 20px; font-weight: 700; }
+  .logo span { color: #CEE08F; }
+  .logo small { display: block; font-size: 9px; font-weight: 400; color: #B0C8E0; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+  .badge-tipo { background: #CEE08F; color: #3A5578; padding: 5px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 1px; }
+  .rif { text-align: right; font-size: 10px; color: #B0C8E0; margin-top: 4px; }
+  .photos { display: flex; gap: 6px; padding: 10px 16px; background: #f5f3ee; }
+  .photos .main { flex: 2; height: 230px; border-radius: 8px; object-fit: cover; }
+  .photos .side { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+  .photos .side img { flex: 1; border-radius: 6px; object-fit: cover; min-height: 0; }
+  .no-photo { flex: 2; height: 230px; border-radius: 8px; background: #ddd; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; }
+  .title-bar { padding: 14px 22px 6px; }
+  .title-bar h1 { font-size: 18px; font-weight: 700; color: #3A5578; }
+  .title-bar .loc { font-size: 13px; color: #7A9AB8; margin-top: 2px; }
+  .price-bar { padding: 4px 22px 14px; display: flex; align-items: baseline; gap: 12px; }
+  .price-bar .price { font-size: 26px; font-weight: 700; color: #27ae60; }
+  .price-bar .pmq { font-size: 12px; color: #7A9AB8; }
+  .feat-table { width: 100%; border-collapse: collapse; margin: 0 auto; padding: 0 16px; }
+  .feat-table td { padding: 5px 10px; font-size: 12px; border-bottom: 1px solid #eee; }
+  .feat-label { color: #7A9AB8; font-weight: 400; width: 22%; }
+  .feat-val { color: #3A5578; font-weight: 600; width: 28%; }
+  .section { padding: 0 22px; margin-top: 14px; }
+  .section h2 { font-size: 13px; font-weight: 700; color: #3A5578; border-left: 4px solid #CEE08F; padding-left: 8px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tag-section { margin-top: 12px; padding: 0 22px; }
+  .tag-section h3 { font-size: 11px; font-weight: 700; color: #3A5578; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag { background: #f0f4e8; color: #3A5578; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 500; }
+  .desc { font-size: 12px; color: #555; line-height: 1.6; margin-top: 6px; }
+  .footer { background: #3A5578; color: #B0C8E0; padding: 10px 22px; text-align: center; font-size: 9px; margin-top: 20px; }
+  .footer strong { color: #CEE08F; }
+  @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+</style></head><body>
+<div class="header">
+  <div class="logo"><span>Righetto</span> Immobiliare<small>Agenzia Immobiliare</small></div>
+  <div><span class="badge-tipo">${tipo}</span><div class="rif">Rif. ${escHtml(i.codice || 'N/D')}</div></div>
+</div>
+<div class="photos">
+  ${mainFoto ? '<img class="main" src="' + mainFoto + '" onerror="this.style.display=\'none\'">' : '<div class="no-photo">Nessuna foto disponibile</div>'}
+  ${extraPhotos.length > 0 ? '<div class="side">' + extraPhotos.map(p => '<img src="' + p + '" onerror="this.style.display=\'none\'">').join('') + '</div>' : ''}
+</div>
+<div class="title-bar">
+  <h1>${escHtml(i.titolo || 'Immobile')}</h1>
+  <div class="loc">${escHtml(i.comune || '')}${i.indirizzo ? ' \u2014 ' + escHtml(i.indirizzo) : ''}</div>
+</div>
+<div class="price-bar">
+  <span class="price">${prezzo}</span>
+  ${prezzoMq ? '<span class="pmq">(' + prezzoMq + ')</span>' : ''}
+</div>
+<div class="section"><h2>Caratteristiche</h2></div>
+<table class="feat-table">${featRows}</table>
+${tagHtml(ambienti, 'Ambienti')}
+${tagHtml(clima, 'Riscaldamento / Clima')}
+${tagHtml(comforts, 'Dotazioni & Comfort')}
+${i.descrizione ? '<div class="section" style="margin-top:14px"><h2>Descrizione</h2><div class="desc">' + escHtml(i.descrizione || '').replace(/\\n/g, '<br>') + '</div></div>' : ''}
+<div class="footer">
+  <strong>Righetto Immobiliare</strong> \u2014 Via Roma 96, Limena (PD) \u2014 Tel: 049 884 3484 \u2014 info@righettoimmobiliare.it \u2014 www.righettoimmobiliare.it<br>
+  Documento generato il ${new Date().toLocaleDateString('it-IT')} \u2014 Le informazioni non costituiscono elemento contrattuale
+</div>
+</body></html>`);
+  win.document.close();
+  // Wait for images to load before printing
+  setTimeout(function() { win.print(); }, 1200);
+}
+
+// ══════════════════════════════════════
+// SOCIAL MEDIA PUBLISHING
+// ══════════════════════════════════════
+
+function quickPublishSocial(id) {
+  showSection('social');
+  setTimeout(() => {
+    const sel = document.getElementById('socialPropertySelect');
+    if (sel) { sel.value = id; showSocialPropertyPreview(id); }
+  }, 200);
+}
+
+function loadSocialSection() {
+  // Load saved configs
+  const fbPageId = localStorage.getItem('social_fb_page_id') || '';
+  const fbToken = localStorage.getItem('social_fb_token') || '';
+  const igAccountId = localStorage.getItem('social_ig_account_id') || '';
+  const igToken = localStorage.getItem('social_ig_token') || '';
+
+  document.getElementById('socialFbPageId').value = fbPageId;
+  document.getElementById('socialFbToken').value = fbToken;
+  document.getElementById('socialIgAccountId').value = igAccountId;
+  document.getElementById('socialIgToken').value = igToken;
+
+  document.getElementById('fbStatus').textContent = fbPageId ? 'Configurato' : 'Non configurato';
+  document.getElementById('fbStatus').style.color = fbPageId ? 'var(--verde)' : 'var(--caffe2)';
+  document.getElementById('igStatus').textContent = igAccountId ? 'Configurato' : 'Non configurato';
+  document.getElementById('igStatus').style.color = igAccountId ? 'var(--verde)' : 'var(--caffe2)';
+
+  // Populate property selector
+  const sel = document.getElementById('socialPropertySelect');
+  sel.innerHTML = '<option value="">— Seleziona un immobile —</option>';
+  allImmobili.filter(i => i.attivo && !i.venduto && !i.affittato).forEach(i => {
+    const opt = document.createElement('option');
+    opt.value = i.id;
+    opt.textContent = (i.codice || '') + ' — ' + (i.titolo || 'Senza titolo') + ' — ' + (i.prezzo ? '€' + Number(i.prezzo).toLocaleString('it-IT') : 'N/D');
+    sel.appendChild(opt);
+  });
+  sel.onchange = function() { showSocialPropertyPreview(this.value); };
+
+  // Check GBP
+  const gbpLocation = localStorage.getItem('social_gbp_location');
+  if (gbpLocation) {
+    document.getElementById('gbpStatus').textContent = 'Connesso';
+    document.getElementById('gbpStatus').style.color = 'var(--verde)';
+    document.getElementById('gbpAccount').textContent = localStorage.getItem('social_gbp_name') || '';
+  }
+}
+
+function saveSocialConfig(platform) {
+  if (platform === 'fb') {
+    localStorage.setItem('social_fb_page_id', document.getElementById('socialFbPageId').value.trim());
+    localStorage.setItem('social_fb_token', document.getElementById('socialFbToken').value.trim());
+    document.getElementById('fbStatus').textContent = 'Configurato';
+    document.getElementById('fbStatus').style.color = 'var(--verde)';
+  } else if (platform === 'ig') {
+    localStorage.setItem('social_ig_account_id', document.getElementById('socialIgAccountId').value.trim());
+    localStorage.setItem('social_ig_token', document.getElementById('socialIgToken').value.trim());
+    document.getElementById('igStatus').textContent = 'Configurato';
+    document.getElementById('igStatus').style.color = 'var(--verde)';
+  }
+  toast('Configurazione salvata!', 'success');
+}
+
+function showSocialPropertyPreview(id) {
+  const preview = document.getElementById('socialPropertyPreview');
+  if (!id) { preview.style.display = 'none'; return; }
+  const i = allImmobili.find(x => x.id == id);
+  if (!i) { preview.style.display = 'none'; return; }
+  const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
+  const prezzo = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : 'N/D';
+  preview.style.display = 'flex';
+  preview.style.gap = '12px';
+  preview.style.alignItems = 'center';
+  preview.innerHTML = (foto ? '<img src="' + foto + '" style="width:80px;height:60px;object-fit:cover;border-radius:6px" onerror="this.style.display=\'none\'">' : '') +
+    '<div><div style="font-weight:600;font-size:0.88rem">' + escHtml(i.titolo || '') + '</div>' +
+    '<div style="font-size:0.78rem;color:var(--caffe2)">' + escHtml(i.comune || '') + ' | ' + prezzo + (i.superficie ? ' | ' + i.superficie + ' mq' : '') + '</div></div>';
+}
+
+function buildSocialCaption(i) {
+  const tipo = i.tipo_operazione === 'vendita' ? 'IN VENDITA' : i.tipo_operazione === 'affitto' ? 'IN AFFITTO' : '';
+  const prezzo = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : '';
+  let caption = '';
+  if (tipo) caption += tipo + ' | ';
+  caption += (i.titolo || 'Immobile') + '\n\n';
+  caption += (i.comune || '') + (i.indirizzo ? ' — ' + i.indirizzo : '') + '\n';
+  if (prezzo) caption += prezzo + '\n';
+  if (i.superficie) caption += i.superficie + ' mq';
+  if (i.camere) caption += ' | ' + i.camere + ' camere';
+  if (i.bagni_totali || i.bagni) caption += ' | ' + (i.bagni_totali || i.bagni) + ' bagni';
+  caption += '\n\n';
+  // Build feature highlights
+  const highlights = [];
+  if (i.classe_energetica) highlights.push('Classe ' + i.classe_energetica);
+  if (i.garage) highlights.push('Garage');
+  if (i.giardino) highlights.push('Giardino');
+  if (i.terrazzo) highlights.push('Terrazzo');
+  if (i.ascensore) highlights.push('Ascensore');
+  if (i.aria_condizionata) highlights.push('Climatizzato');
+  if (highlights.length) caption += highlights.join(' | ') + '\n\n';
+  caption += 'Rif. ' + (i.codice || '') + '\n';
+  caption += 'Righetto Immobiliare | Tel: 049 884 3484\n';
+  caption += '#immobiliare #' + (i.comune || 'padova').toLowerCase().replace(/\s+/g, '') + ' #' + (i.tipo_operazione || 'vendita') + ' #casainvendita #righettoimmobiliare';
+  return caption;
+}
+
+function showPublishResult(msg, type) {
+  const el = document.getElementById('socialPublishResult');
+  el.style.display = 'block';
+  el.style.color = type === 'error' ? 'var(--rosso)' : 'var(--verde)';
+  el.textContent = msg;
+}
+
+// ── FACEBOOK PUBLISHING ──
+async function testFbConnection() {
+  const pageId = document.getElementById('socialFbPageId').value.trim() || localStorage.getItem('social_fb_page_id');
+  const token = document.getElementById('socialFbToken').value.trim() || localStorage.getItem('social_fb_token');
+  if (!pageId || !token) { toast('Inserisci Page ID e Token', 'error'); return; }
+  try {
+    const res = await fetch('https://graph.facebook.com/v21.0/' + pageId + '?fields=name,fan_count&access_token=' + token);
+    const data = await res.json();
+    if (data.error) { toast('Errore: ' + data.error.message, 'error'); return; }
+    toast('Connesso a: ' + data.name + ' (' + (data.fan_count || 0) + ' fan)', 'success');
+    document.getElementById('fbStatus').textContent = 'Connesso: ' + data.name;
+    document.getElementById('fbStatus').style.color = 'var(--verde)';
+  } catch(e) { toast('Errore di rete: ' + e.message, 'error'); }
+}
+
+async function publishToFacebook() {
+  const id = document.getElementById('socialPropertySelect').value;
+  if (!id) { toast('Seleziona un immobile', 'error'); return; }
+  const i = allImmobili.find(x => x.id == id);
+  if (!i) return;
+
+  const pageId = localStorage.getItem('social_fb_page_id');
+  const token = localStorage.getItem('social_fb_token');
+  if (!pageId || !token) { toast('Configura Facebook prima (Page ID + Token)', 'error'); return; }
+
+  const caption = buildSocialCaption(i);
+  const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
+
+  try {
+    toast('Pubblicazione su Facebook...', 'success');
+    let res;
+    if (foto) {
+      // Post with photo
+      res = await fetch('https://graph.facebook.com/v21.0/' + pageId + '/photos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: foto, caption: caption, access_token: token })
+      });
+    } else {
+      // Text-only post
+      res = await fetch('https://graph.facebook.com/v21.0/' + pageId + '/feed', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: caption, access_token: token })
+      });
+    }
+    const data = await res.json();
+    if (data.error) {
+      showPublishResult('Errore Facebook: ' + data.error.message, 'error');
+      toast('Errore Facebook: ' + data.error.message, 'error');
+    } else {
+      showPublishResult('Pubblicato su Facebook! ID: ' + (data.id || data.post_id), 'success');
+      toast('Pubblicato su Facebook!', 'success');
+    }
+  } catch(e) {
+    showPublishResult('Errore di rete: ' + e.message, 'error');
+    toast('Errore: ' + e.message, 'error');
+  }
+}
+
+// ── INSTAGRAM PUBLISHING ──
+async function testIgConnection() {
+  const accountId = document.getElementById('socialIgAccountId').value.trim() || localStorage.getItem('social_ig_account_id');
+  const token = document.getElementById('socialIgToken').value.trim() || localStorage.getItem('social_ig_token');
+  if (!accountId || !token) { toast('Inserisci Account ID e Token', 'error'); return; }
+  try {
+    const res = await fetch('https://graph.facebook.com/v21.0/' + accountId + '?fields=username,followers_count&access_token=' + token);
+    const data = await res.json();
+    if (data.error) { toast('Errore: ' + data.error.message, 'error'); return; }
+    toast('Connesso a: @' + data.username + ' (' + (data.followers_count || 0) + ' follower)', 'success');
+    document.getElementById('igStatus').textContent = 'Connesso: @' + data.username;
+    document.getElementById('igStatus').style.color = 'var(--verde)';
+  } catch(e) { toast('Errore di rete: ' + e.message, 'error'); }
+}
+
+async function publishToInstagram() {
+  const id = document.getElementById('socialPropertySelect').value;
+  if (!id) { toast('Seleziona un immobile', 'error'); return; }
+  const i = allImmobili.find(x => x.id == id);
+  if (!i) return;
+
+  const accountId = localStorage.getItem('social_ig_account_id');
+  const token = localStorage.getItem('social_ig_token');
+  if (!accountId || !token) { toast('Configura Instagram prima', 'error'); return; }
+
+  const caption = buildSocialCaption(i);
+  const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
+  if (!foto) { toast('Serve almeno una foto per Instagram', 'error'); return; }
+
+  try {
+    toast('Pubblicazione su Instagram...', 'success');
+
+    // Check if multiple photos for carousel
+    const allPhotos = (i.foto_urls || i.foto || []).filter(Boolean);
+
+    if (allPhotos.length > 1 && allPhotos.length <= 10) {
+      // CAROUSEL POST
+      // Step 1: Create carousel items
+      const itemIds = [];
+      for (const photoUrl of allPhotos.slice(0, 10)) {
+        const itemRes = await fetch('https://graph.facebook.com/v21.0/' + accountId + '/media', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ image_url: photoUrl, is_carousel_item: true, access_token: token })
+        });
+        const itemData = await itemRes.json();
+        if (itemData.id) itemIds.push(itemData.id);
+      }
+      // Step 2: Create carousel container
+      const containerRes = await fetch('https://graph.facebook.com/v21.0/' + accountId + '/media', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ media_type: 'CAROUSEL', children: itemIds, caption: caption, access_token: token })
+      });
+      const container = await containerRes.json();
+      if (container.error) { showPublishResult('Errore Instagram: ' + container.error.message, 'error'); return; }
+
+      // Step 3: Publish
+      await waitForIgMedia(container.id, token);
+      const pubRes = await fetch('https://graph.facebook.com/v21.0/' + accountId + '/media_publish', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ creation_id: container.id, access_token: token })
+      });
+      const pubData = await pubRes.json();
+      if (pubData.error) { showPublishResult('Errore Instagram: ' + pubData.error.message, 'error'); }
+      else { showPublishResult('Pubblicato su Instagram (carousel ' + allPhotos.length + ' foto)!', 'success'); toast('Pubblicato su Instagram!', 'success'); }
+
+    } else {
+      // SINGLE IMAGE POST
+      // Step 1: Create media container
+      const containerRes = await fetch('https://graph.facebook.com/v21.0/' + accountId + '/media', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image_url: foto, caption: caption, access_token: token })
+      });
+      const container = await containerRes.json();
+      if (container.error) { showPublishResult('Errore Instagram: ' + container.error.message, 'error'); return; }
+
+      // Step 2: Wait for processing and publish
+      await waitForIgMedia(container.id, token);
+      const pubRes = await fetch('https://graph.facebook.com/v21.0/' + accountId + '/media_publish', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ creation_id: container.id, access_token: token })
+      });
+      const pubData = await pubRes.json();
+      if (pubData.error) { showPublishResult('Errore Instagram: ' + pubData.error.message, 'error'); }
+      else { showPublishResult('Pubblicato su Instagram!', 'success'); toast('Pubblicato su Instagram!', 'success'); }
+    }
+  } catch(e) {
+    showPublishResult('Errore: ' + e.message, 'error');
+    toast('Errore: ' + e.message, 'error');
+  }
+}
+
+async function waitForIgMedia(containerId, token) {
+  // Instagram needs processing time. Poll status for up to 30 seconds.
+  for (let attempt = 0; attempt < 10; attempt++) {
+    await new Promise(r => setTimeout(r, 3000));
+    try {
+      const res = await fetch('https://graph.facebook.com/v21.0/' + containerId + '?fields=status_code&access_token=' + token);
+      const data = await res.json();
+      if (data.status_code === 'FINISHED') return;
+      if (data.status_code === 'ERROR') throw new Error('Errore elaborazione media Instagram');
+    } catch(e) { /* continue polling */ }
+  }
+}
+
+// ── GOOGLE BUSINESS PROFILE ──
+let gbpTokenClient = null;
+
+function connectGBP() {
+  if (!gmailClientId) {
+    toast('Configura prima il Google Client ID nella sezione Posta', 'error');
+    return;
+  }
+  gbpTokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: gmailClientId,
+    scope: 'https://www.googleapis.com/auth/business.manage',
+    callback: handleGBPAuth,
+  });
+  gbpTokenClient.requestAccessToken();
+}
+
+async function handleGBPAuth(resp) {
+  if (resp.error) { toast('Errore auth Google: ' + resp.error, 'error'); return; }
+  const gbpAccessToken = resp.access_token;
+  localStorage.setItem('social_gbp_access_token', gbpAccessToken);
+
+  try {
+    // Get accounts
+    const accRes = await fetch('https://mybusinessaccountmanagement.googleapis.com/v1/accounts', {
+      headers: { 'Authorization': 'Bearer ' + gbpAccessToken }
+    });
+    const accData = await accRes.json();
+    if (!accData.accounts || accData.accounts.length === 0) {
+      toast('Nessun account Google Business trovato', 'error');
+      return;
+    }
+    const account = accData.accounts[0];
+    localStorage.setItem('social_gbp_account', account.name);
+
+    // Get locations
+    const locRes = await fetch('https://mybusinessbusinessinformation.googleapis.com/v1/' + account.name + '/locations', {
+      headers: { 'Authorization': 'Bearer ' + gbpAccessToken }
+    });
+    const locData = await locRes.json();
+    if (locData.locations && locData.locations.length > 0) {
+      const loc = locData.locations[0];
+      localStorage.setItem('social_gbp_location', loc.name);
+      localStorage.setItem('social_gbp_name', loc.title || loc.storefrontAddress?.locality || 'Business');
+      document.getElementById('gbpStatus').textContent = 'Connesso';
+      document.getElementById('gbpStatus').style.color = 'var(--verde)';
+      document.getElementById('gbpAccount').textContent = loc.title || '';
+      toast('Connesso a Google Business: ' + (loc.title || ''), 'success');
+    } else {
+      toast('Nessuna sede trovata nell\'account', 'error');
+    }
+  } catch(e) {
+    toast('Errore Google Business: ' + e.message, 'error');
+  }
+}
+
+async function publishToGBP() {
+  const id = document.getElementById('socialPropertySelect').value;
+  if (!id) { toast('Seleziona un immobile', 'error'); return; }
+  const i = allImmobili.find(x => x.id == id);
+  if (!i) return;
+
+  const gbpToken = localStorage.getItem('social_gbp_access_token');
+  const gbpLocation = localStorage.getItem('social_gbp_location');
+  if (!gbpToken || !gbpLocation) { toast('Connetti Google Business prima', 'error'); return; }
+
+  const prezzo = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : '';
+  const tipo = i.tipo_operazione === 'vendita' ? 'In vendita' : i.tipo_operazione === 'affitto' ? 'In affitto' : '';
+  const summary = tipo + ': ' + (i.titolo || '') + ' - ' + (i.comune || '') + (prezzo ? ' - ' + prezzo : '') + (i.superficie ? ' - ' + i.superficie + ' mq' : '') + '\nRif. ' + (i.codice || '') + ' | Righetto Immobiliare';
+  const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
+
+  try {
+    toast('Pubblicazione su Google Business...', 'success');
+    const postBody = {
+      languageCode: 'it',
+      summary: summary,
+      topicType: 'STANDARD',
+    };
+    if (foto) {
+      postBody.media = [{ mediaFormat: 'PHOTO', sourceUrl: foto }];
+    }
+    const res = await fetch('https://mybusiness.googleapis.com/v4/' + gbpLocation + '/localPosts', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + gbpToken, 'Content-Type': 'application/json' },
+      body: JSON.stringify(postBody)
+    });
+    const data = await res.json();
+    if (data.error) {
+      showPublishResult('Errore Google: ' + (data.error.message || JSON.stringify(data.error)), 'error');
+    } else {
+      showPublishResult('Pubblicato su Google Business Profile!', 'success');
+      toast('Pubblicato su Google Business!', 'success');
+    }
+  } catch(e) {
+    showPublishResult('Errore: ' + e.message, 'error');
+  }
+}
+
+// ── TIKTOK IMAGE GENERATOR ──
+function generateTikTokImage() {
+  const id = document.getElementById('socialPropertySelect').value;
+  if (!id) { toast('Seleziona un immobile', 'error'); return; }
+  const i = allImmobili.find(x => x.id == id);
+  if (!i) return;
+
+  const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
+  const prezzo = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : '';
+  const tipo = i.tipo_operazione === 'vendita' ? 'IN VENDITA' : i.tipo_operazione === 'affitto' ? 'IN AFFITTO' : '';
+
+  // Create a canvas 1080x1920 (TikTok 9:16)
+  const canvas = document.createElement('canvas');
+  canvas.width = 1080;
+  canvas.height = 1920;
+  const ctx = canvas.getContext('2d');
+
+  // Background gradient
+  const grad = ctx.createLinearGradient(0, 0, 0, 1920);
+  grad.addColorStop(0, '#1E3A5C');
+  grad.addColorStop(1, '#3A5578');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 1080, 1920);
+
+  const drawContent = () => {
+    // Header bar
+    ctx.fillStyle = '#CEE08F';
+    ctx.fillRect(0, 0, 1080, 120);
+    ctx.font = 'bold 50px "Segoe UI", Arial, sans-serif';
+    ctx.fillStyle = '#3A5578';
+    ctx.textAlign = 'center';
+    ctx.fillText('Righetto Immobiliare', 540, 78);
+
+    // Tipo badge
+    if (tipo) {
+      ctx.fillStyle = '#CEE08F';
+      const tw = ctx.measureText(tipo).width;
+      ctx.fillStyle = '#CEE08F';
+      ctx.beginPath();
+      ctx.roundRect(540 - tw/2 - 30, 160, tw + 60, 70, 35);
+      ctx.fill();
+      ctx.font = 'bold 36px "Segoe UI", Arial';
+      ctx.fillStyle = '#3A5578';
+      ctx.fillText(tipo, 540, 205);
+    }
+
+    // Title
+    ctx.font = 'bold 52px "Segoe UI", Arial';
+    ctx.fillStyle = '#FFFFFF';
+    ctx.textAlign = 'center';
+    const titleText = (i.titolo || 'Immobile').substring(0, 35);
+    ctx.fillText(titleText, 540, foto ? 1150 : 500);
+
+    // Location
+    ctx.font = '36px "Segoe UI", Arial';
+    ctx.fillStyle = '#B0C8E0';
+    ctx.fillText((i.comune || '') + (i.indirizzo ? ' — ' + i.indirizzo.substring(0, 30) : ''), 540, foto ? 1200 : 560);
+
+    // Price
+    if (prezzo) {
+      ctx.font = 'bold 72px "Segoe UI", Arial';
+      ctx.fillStyle = '#CEE08F';
+      ctx.fillText(prezzo, 540, foto ? 1310 : 670);
+    }
+
+    // Specs
+    const specY = foto ? 1400 : 760;
+    ctx.font = '32px "Segoe UI", Arial';
+    ctx.fillStyle = '#FFFFFF';
+    const specItems = [];
+    if (i.superficie) specItems.push(i.superficie + ' mq');
+    if (i.camere) specItems.push(i.camere + ' camere');
+    if (i.bagni_totali || i.bagni) specItems.push((i.bagni_totali || i.bagni) + ' bagni');
+    if (i.classe_energetica) specItems.push('Classe ' + i.classe_energetica);
+    ctx.fillText(specItems.join('  |  '), 540, specY);
+
+    // Features
+    const features = [];
+    if (i.garage) features.push('Garage');
+    if (i.giardino) features.push('Giardino');
+    if (i.terrazzo) features.push('Terrazzo');
+    if (i.ascensore) features.push('Ascensore');
+    if (i.aria_condizionata) features.push('Clima');
+    if (features.length) {
+      ctx.font = '28px "Segoe UI", Arial';
+      ctx.fillStyle = '#B0C8E0';
+      ctx.fillText(features.join('  \u2022  '), 540, specY + 50);
+    }
+
+    // Footer
+    ctx.fillStyle = 'rgba(206,224,143,0.15)';
+    ctx.fillRect(0, 1800, 1080, 120);
+    ctx.font = '28px "Segoe UI", Arial';
+    ctx.fillStyle = '#CEE08F';
+    ctx.fillText('Rif. ' + (i.codice || '') + '  |  Tel: 049 884 3484', 540, 1850);
+    ctx.font = '24px "Segoe UI", Arial';
+    ctx.fillStyle = '#B0C8E0';
+    ctx.fillText('www.righettoimmobiliare.it', 540, 1885);
+
+    // Download
+    canvas.toBlob(function(blob) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'TikTok-' + (i.codice || 'immobile') + '.png';
+      a.click();
+      URL.revokeObjectURL(url);
+      toast('Immagine TikTok scaricata! Caricala su TikTok.', 'success');
+      showPublishResult('Immagine generata e scaricata. Caricala manualmente su TikTok.', 'success');
+    }, 'image/png');
+  };
+
+  if (foto) {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      // Draw photo in center area (260px from top, 1080x800)
+      const cropH = Math.min(img.height, img.width * (800/1080));
+      ctx.drawImage(img, 0, 0, img.width, cropH, 0, 260, 1080, 800);
+      // Gradient overlay bottom
+      const grad2 = ctx.createLinearGradient(0, 800, 0, 1100);
+      grad2.addColorStop(0, 'rgba(30,58,92,0)');
+      grad2.addColorStop(1, 'rgba(30,58,92,1)');
+      ctx.fillStyle = grad2;
+      ctx.fillRect(0, 800, 1080, 300);
+      drawContent();
+    };
+    img.onerror = () => drawContent();
+    img.src = foto;
+  } else {
+    drawContent();
+  }
+}
+
+// ══════════════════════════════════════
+// CSV IMPORT FOR CLIENTI
+// ══════════════════════════════════════
+let csvParsedData = [];
+let csvHeaders = [];
+const csvFieldMap = {
+  nome: ['nome', 'name', 'nome e cognome', 'nome cognome', 'nominativo', 'cliente', 'full name', 'fullname'],
+  email: ['email', 'e-mail', 'mail', 'posta', 'email address'],
+  telefono: ['telefono', 'tel', 'phone', 'cellulare', 'cell', 'mobile', 'numero'],
+  fonte: ['fonte', 'source', 'origine', 'provenienza', 'canale'],
+  interesse: ['interesse', 'interest', 'ricerca', 'richiesta', 'cerca', 'note ricerca'],
+  note: ['note', 'notes', 'commenti', 'osservazioni', 'appunti', 'descrizione']
+};
+
+function openCsvImportModal() {
+  csvParsedData = [];
+  csvHeaders = [];
+  document.getElementById('csvFileInput').value = '';
+  document.getElementById('csvFileName').style.display = 'none';
+  document.getElementById('csvMappingArea').style.display = 'none';
+  document.getElementById('csvPreviewArea').style.display = 'none';
+  document.getElementById('csvError').style.display = 'none';
+  document.getElementById('btnCsvImport').style.display = 'none';
+  document.getElementById('csvImportModal').classList.add('open');
+}
+
+function closeCsvImportModal() {
+  document.getElementById('csvImportModal').classList.remove('open');
+}
+
+function handleCsvDrop(event) {
+  const files = event.dataTransfer.files;
+  if (files.length > 0) handleCsvFile(files[0]);
+}
+
+function handleCsvFile(file) {
+  if (!file) return;
+  const ext = file.name.split('.').pop().toLowerCase();
+  if (!['csv', 'txt'].includes(ext)) {
+    showCsvError('Formato non supportato. Usa file .csv o .txt');
+    return;
+  }
+
+  document.getElementById('csvFileName').textContent = 'File: ' + file.name + ' (' + (file.size / 1024).toFixed(1) + ' KB)';
+  document.getElementById('csvFileName').style.display = 'block';
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    parseCsvContent(e.target.result);
+  };
+  reader.onerror = function() {
+    showCsvError('Errore nella lettura del file');
+  };
+  reader.readAsText(file, 'UTF-8');
+}
+
+function parseCsvContent(text) {
+  // Detect separator: semicolon, comma, or tab
+  const firstLine = text.split('\n')[0];
+  let separator = ',';
+  if (firstLine.split(';').length > firstLine.split(',').length) separator = ';';
+  if (firstLine.split('\t').length > firstLine.split(separator).length) separator = '\t';
+
+  const lines = text.split('\n').map(l => l.trim()).filter(l => l);
+  if (lines.length < 2) {
+    showCsvError('Il file deve contenere almeno un\'intestazione e una riga di dati');
+    return;
+  }
+
+  csvHeaders = parseCsvLine(lines[0], separator);
+  csvParsedData = [];
+
+  for (let i = 1; i < lines.length; i++) {
+    const values = parseCsvLine(lines[i], separator);
+    if (values.length > 0 && values.some(v => v.trim())) {
+      const row = {};
+      csvHeaders.forEach((h, idx) => { row[h] = (values[idx] || '').trim(); });
+      csvParsedData.push(row);
+    }
+  }
+
+  if (csvParsedData.length === 0) {
+    showCsvError('Nessuna riga di dati trovata nel file');
+    return;
+  }
+
+  document.getElementById('csvError').style.display = 'none';
+  renderCsvMapping();
+  renderCsvPreview();
+  document.getElementById('btnCsvImport').style.display = 'inline-flex';
+}
+
+function parseCsvLine(line, sep) {
+  const result = [];
+  let current = '';
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') {
+      if (inQuotes && line[i + 1] === '"') { current += '"'; i++; }
+      else { inQuotes = !inQuotes; }
+    } else if (ch === sep && !inQuotes) {
+      result.push(current); current = '';
+    } else {
+      current += ch;
+    }
+  }
+  result.push(current);
+  return result;
+}
+
+function renderCsvMapping() {
+  const grid = document.getElementById('csvMappingGrid');
+  const dbFields = ['nome', 'email', 'telefono', 'fonte', 'interesse', 'note'];
+  const labels = { nome: 'Nome', email: 'Email', telefono: 'Telefono', fonte: 'Fonte', interesse: 'Interesse', note: 'Note' };
+
+  grid.innerHTML = dbFields.map(field => {
+    // Auto-detect best match
+    const aliases = csvFieldMap[field] || [];
+    let bestMatch = '';
+    for (const h of csvHeaders) {
+      if (aliases.some(a => h.toLowerCase().trim() === a)) { bestMatch = h; break; }
+    }
+    if (!bestMatch) {
+      for (const h of csvHeaders) {
+        if (aliases.some(a => h.toLowerCase().trim().includes(a))) { bestMatch = h; break; }
+      }
+    }
+
+    const options = csvHeaders.map(h =>
+      '<option value="' + escHtml(h) + '"' + (h === bestMatch ? ' selected' : '') + '>' + escHtml(h) + '</option>'
+    ).join('');
+
+    return '<div class="form-group"><label>' + labels[field] + '</label>' +
+      '<select id="csvMap_' + field + '" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:\'Montserrat\',sans-serif;font-size:0.8rem">' +
+      '<option value="">(non mappare)</option>' + options + '</select></div>';
+  }).join('');
+
+  document.getElementById('csvMappingArea').style.display = 'block';
+}
+
+function renderCsvPreview() {
+  document.getElementById('csvPreviewCount').textContent = csvParsedData.length;
+  const table = document.getElementById('csvPreviewTable');
+  const previewRows = csvParsedData.slice(0, 10);
+
+  let html = '<thead><tr>' + csvHeaders.map(h => '<th>' + escHtml(h) + '</th>').join('') + '</tr></thead><tbody>';
+  previewRows.forEach(row => {
+    html += '<tr>' + csvHeaders.map(h => '<td>' + escHtml(row[h] || '') + '</td>').join('') + '</tr>';
+  });
+  if (csvParsedData.length > 10) {
+    html += '<tr><td colspan="' + csvHeaders.length + '" style="text-align:center;color:var(--caffe2);font-style:italic">... e altre ' + (csvParsedData.length - 10) + ' righe</td></tr>';
+  }
+  html += '</tbody>';
+  table.innerHTML = html;
+  document.getElementById('csvPreviewArea').style.display = 'block';
+}
+
+async function doCsvImport() {
+  const mapping = {};
+  ['nome', 'email', 'telefono', 'fonte', 'interesse', 'note'].forEach(field => {
+    const sel = document.getElementById('csvMap_' + field);
+    if (sel && sel.value) mapping[field] = sel.value;
+  });
+
+  if (!mapping.nome && !mapping.email) {
+    showCsvError('Devi mappare almeno il campo Nome o Email');
+    return;
+  }
+
+  const records = csvParsedData.map(row => {
+    const rec = {};
+    Object.entries(mapping).forEach(([dbField, csvCol]) => {
+      rec[dbField] = row[csvCol] || '';
+    });
+    if (!rec.fonte) rec.fonte = 'csv_import';
+    return rec;
+  }).filter(r => r.nome || r.email);
+
+  if (records.length === 0) {
+    showCsvError('Nessun record valido da importare');
+    return;
+  }
+
+  document.getElementById('btnCsvImport').disabled = true;
+  document.getElementById('btnCsvImport').textContent = 'Importazione in corso...';
+
+  try {
+    // Insert in batches of 50
+    const batchSize = 50;
+    let imported = 0;
+    for (let i = 0; i < records.length; i += batchSize) {
+      const batch = records.slice(i, i + batchSize);
+      const { error } = await sb.from('clienti').insert(batch);
+      if (error) throw error;
+      imported += batch.length;
+    }
+
+    toast(imported + ' clienti importati con successo!', 'success');
+    closeCsvImportModal();
+    loadClienti();
+  } catch(err) {
+    console.error('CSV import error:', err);
+    showCsvError('Errore importazione: ' + (err.message || 'Errore sconosciuto'));
+  } finally {
+    document.getElementById('btnCsvImport').disabled = false;
+    document.getElementById('btnCsvImport').textContent = 'Importa Clienti';
+  }
+}
+
+function showCsvError(msg) {
+  const el = document.getElementById('csvError');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
 
 // ══════════════════════════════════════
 // EMAIL CLIENT — GMAIL API INTEGRATION (Multi-Account + Dynamic Labels)
@@ -4435,14 +5974,87 @@ function initEmailSection() {
       refreshEmails();
     }
   } else if (gmailAccounts.length > 0) {
-    // Auto-reconnect if we have saved accounts
-    document.getElementById('emailAuthBanner').style.display = 'block';
-    document.getElementById('emailClient').style.display = 'none';
-    renderAccountSelector();
+    // Try auto-reconnect: restore saved token and attempt silent re-auth
+    const acc = gmailAccounts[activeAccountIndex] || gmailAccounts[0];
+    if (acc && acc.token) {
+      gmailAccessToken = acc.token;
+      // Set token in gapi client if available
+      if (gapiInited && typeof gapi !== 'undefined' && gapi.client) {
+        gapi.client.setToken({ access_token: acc.token });
+      }
+      document.getElementById('emailAuthBanner').style.display = 'none';
+      document.getElementById('emailClient').style.display = 'block';
+      document.getElementById('emailStatusText').textContent = 'Riconnessione...';
+      document.getElementById('emailStatusText').style.color = '#e67e22';
+      renderAccountSelector();
+      // Test if the token is still valid
+      tryAutoReconnect();
+    } else {
+      // No saved token, try silent re-auth
+      attemptSilentReauth();
+    }
   } else {
     document.getElementById('emailAuthBanner').style.display = 'block';
     document.getElementById('emailClient').style.display = 'none';
   }
+}
+
+async function tryAutoReconnect() {
+  try {
+    // Test the saved token with a lightweight API call
+    const resp = await gapi.client.gmail.users.getProfile({ userId: 'me' });
+    if (resp.result && resp.result.emailAddress) {
+      document.getElementById('emailStatusText').textContent = 'Connesso — ' + resp.result.emailAddress;
+      document.getElementById('emailStatusText').style.color = 'var(--verde)';
+      toast('Gmail riconnesso automaticamente!', 'success');
+      loadGmailLabels();
+      refreshEmails();
+      return;
+    }
+  } catch(e) {
+    console.log('Saved token expired, attempting silent re-auth...');
+  }
+  // Token expired — try silent re-auth
+  attemptSilentReauth();
+}
+
+function attemptSilentReauth() {
+  if (!gmailClientId) {
+    showReconnectBanner();
+    return;
+  }
+  if (!gmailTokenClient) gisLoaded();
+  if (gmailTokenClient) {
+    try {
+      // Try without prompt (silent) — works if user previously consented
+      gmailTokenClient.requestAccessToken({ prompt: '' });
+    } catch(e) {
+      console.log('Silent re-auth failed, showing reconnect banner');
+      showReconnectBanner();
+    }
+  } else {
+    showReconnectBanner();
+  }
+}
+
+function showReconnectBanner() {
+  gmailAccessToken = null;
+  document.getElementById('emailAuthBanner').style.display = 'block';
+  document.getElementById('emailClient').style.display = 'none';
+  // Replace banner text with reconnect message
+  const banner = document.getElementById('emailAuthBanner');
+  if (banner && gmailAccounts.length > 0) {
+    const existingBtn = banner.querySelector('.btn-reconnect');
+    if (!existingBtn) {
+      const reconnectDiv = document.createElement('div');
+      reconnectDiv.style.cssText = 'text-align:center;padding:16px';
+      reconnectDiv.innerHTML = '<p style="font-size:0.88rem;color:var(--caffe2);margin-bottom:12px">La sessione Gmail e\' scaduta. Clicca per riconnetterti:</p>' +
+        '<button class="btn btn-primary btn-reconnect" onclick="gmailAuth()" style="margin-right:10px">Riconnetti Gmail</button>' +
+        '<button class="btn btn-secondary" onclick="loadDemoEmails()">Modalita\' Demo</button>';
+      banner.appendChild(reconnectDiv);
+    }
+  }
+  renderAccountSelector();
 }
 
 // ── DEMO MODE ──
@@ -4570,6 +6182,8 @@ async function showEmail(emailId) {
   document.getElementById('previewBody').innerHTML = bodyHtml;
 
   renderPropertyLink(emailId);
+  updatePreviewReadButton();
+  updatePreviewStarButton();
 }
 
 // GAPI init
@@ -5181,6 +6795,10 @@ async function refreshEmails() {
   }
 }
 
+// Starred emails stored in localStorage
+let emailStarredState = {};
+try { emailStarredState = JSON.parse(localStorage.getItem('email_starred') || '{}'); } catch(e) { emailStarredState = {}; }
+
 function renderEmailList() {
   const listArea = document.getElementById('emailListItems');
   const empty = document.getElementById('emailListEmpty');
@@ -5188,6 +6806,7 @@ function renderEmailList() {
 
   if (currentEmails.length === 0) {
     empty.style.display = 'block';
+    updateBulkBar();
     return;
   }
   empty.style.display = 'none';
@@ -5199,19 +6818,227 @@ function renderEmailList() {
     const linkedBadge = linked
       ? `<span class="badge badge-oro">${linked.codice}</span>`
       : '';
+    const isStarred = emailStarredState[email.id] || (email.labelIds && email.labelIds.includes('STARRED'));
 
     const div = document.createElement('div');
     div.className = 'email-item' + (email.unread ? ' unread' : '') + (email.id === currentEmailId ? ' active' : '');
+    div.dataset.emailId = email.id;
     div.innerHTML = `
-      <input type="checkbox" class="email-item-check" onclick="event.stopPropagation()">
+      <input type="checkbox" class="email-item-check" data-email-id="${email.id}" onclick="event.stopPropagation();updateBulkBar()">
+      <div class="email-item-star ${isStarred ? 'starred' : ''}" onclick="event.stopPropagation();toggleStar('${email.id}')" title="Importante">&#9733;</div>
       <div class="email-item-from" title="${escHtml(email.from)}">${escHtml(fromName)}</div>
-      <div class="email-item-subject" title="${escHtml(email.subject)}">${escHtml(email.subject)} <span style="color:var(--caffe3);font-weight:400">— ${escHtml(email.snippet.substring(0, 60))}</span></div>
+      <div class="email-item-subject" title="${escHtml(email.subject)}">${escHtml(email.subject)} <span style="color:var(--caffe3);font-weight:400">&mdash; ${escHtml(email.snippet.substring(0, 60))}</span></div>
       <div class="email-item-date">${dateStr}</div>
       <div class="email-item-property">${linkedBadge}</div>
     `;
     div.onclick = () => showEmail(email.id);
     listArea.appendChild(div);
   });
+
+  updateBulkBar();
+}
+
+// ── STAR / IMPORTANT ──
+
+function toggleStar(emailId) {
+  emailStarredState[emailId] = !emailStarredState[emailId];
+  localStorage.setItem('email_starred', JSON.stringify(emailStarredState));
+
+  // Update star icon in list
+  const starEl = document.querySelector('[data-email-id="' + emailId + '"]')?.closest('.email-item')?.querySelector('.email-item-star');
+  if (starEl) starEl.classList.toggle('starred');
+
+  // If real Gmail, toggle STARRED label
+  if (!demoMode && gmailAccessToken) {
+    const isStarred = emailStarredState[emailId];
+    gapi.client.gmail.users.messages.modify({
+      userId: 'me',
+      id: emailId,
+      addLabelIds: isStarred ? ['STARRED'] : [],
+      removeLabelIds: isStarred ? [] : ['STARRED']
+    }).catch(e => console.error('Star toggle error:', e));
+  }
+}
+
+function toggleCurrentEmailStar() {
+  if (!currentEmailId) return;
+  toggleStar(currentEmailId);
+  updatePreviewStarButton();
+}
+
+function updatePreviewStarButton() {
+  if (!currentEmailId) return;
+  const isStarred = emailStarredState[currentEmailId];
+  const textEl = document.getElementById('btnStarText');
+  if (textEl) {
+    textEl.textContent = isStarred ? 'Rimuovi Importante' : 'Importante';
+  }
+}
+
+// ── MARK READ / UNREAD ──
+
+function toggleCurrentEmailReadStatus() {
+  if (!currentEmailId) return;
+  const email = currentEmails.find(e => e.id === currentEmailId);
+  if (!email) return;
+
+  email.unread = !email.unread;
+
+  if (!demoMode && gmailAccessToken) {
+    if (email.unread) {
+      gapi.client.gmail.users.messages.modify({
+        userId: 'me', id: currentEmailId,
+        addLabelIds: ['UNREAD'], removeLabelIds: []
+      }).catch(e => console.error('Mark unread error:', e));
+    } else {
+      gapi.client.gmail.users.messages.modify({
+        userId: 'me', id: currentEmailId,
+        addLabelIds: [], removeLabelIds: ['UNREAD']
+      }).catch(e => console.error('Mark read error:', e));
+    }
+  }
+
+  renderEmailList();
+  updateUnreadBadge();
+  updatePreviewReadButton();
+}
+
+function updatePreviewReadButton() {
+  if (!currentEmailId) return;
+  const email = currentEmails.find(e => e.id === currentEmailId);
+  const textEl = document.getElementById('btnReadStatusText');
+  if (textEl && email) {
+    textEl.textContent = email.unread ? 'Segna come letto' : 'Segna come non letto';
+  }
+}
+
+function updateUnreadBadge() {
+  const unread = currentEmails.filter(e => e.unread).length;
+  const badge = document.getElementById('badgePosta');
+  const countInbox = document.getElementById('countInbox');
+  if (unread > 0) {
+    badge.style.display = 'inline';
+    badge.textContent = unread;
+    countInbox.textContent = unread;
+  } else {
+    badge.style.display = 'none';
+    countInbox.textContent = '0';
+  }
+}
+
+// ── BULK ACTIONS ──
+
+function getSelectedEmailIds() {
+  const checks = document.querySelectorAll('.email-item-check:checked');
+  return Array.from(checks).map(c => c.dataset.emailId).filter(Boolean);
+}
+
+function updateBulkBar() {
+  const selected = getSelectedEmailIds();
+  const bar = document.getElementById('emailBulkBar');
+  const count = document.getElementById('bulkCount');
+  if (selected.length > 0) {
+    bar.classList.add('visible');
+    count.textContent = selected.length;
+  } else {
+    bar.classList.remove('visible');
+  }
+}
+
+function bulkSelectAll() {
+  document.querySelectorAll('.email-item-check').forEach(c => c.checked = true);
+  updateBulkBar();
+}
+
+function bulkDeselectAll() {
+  document.querySelectorAll('.email-item-check').forEach(c => c.checked = false);
+  updateBulkBar();
+}
+
+function bulkMarkRead() {
+  const ids = getSelectedEmailIds();
+  ids.forEach(id => {
+    const email = currentEmails.find(e => e.id === id);
+    if (email) email.unread = false;
+    if (!demoMode && gmailAccessToken) {
+      gapi.client.gmail.users.messages.modify({
+        userId: 'me', id,
+        addLabelIds: [], removeLabelIds: ['UNREAD']
+      }).catch(() => {});
+    }
+  });
+  renderEmailList();
+  updateUnreadBadge();
+  toast(ids.length + ' email segnate come lette', 'success');
+}
+
+function bulkMarkUnread() {
+  const ids = getSelectedEmailIds();
+  ids.forEach(id => {
+    const email = currentEmails.find(e => e.id === id);
+    if (email) email.unread = true;
+    if (!demoMode && gmailAccessToken) {
+      gapi.client.gmail.users.messages.modify({
+        userId: 'me', id,
+        addLabelIds: ['UNREAD'], removeLabelIds: []
+      }).catch(() => {});
+    }
+  });
+  renderEmailList();
+  updateUnreadBadge();
+  toast(ids.length + ' email segnate come non lette', 'success');
+}
+
+function bulkToggleStar() {
+  const ids = getSelectedEmailIds();
+  ids.forEach(id => {
+    emailStarredState[id] = !emailStarredState[id];
+    if (!demoMode && gmailAccessToken) {
+      gapi.client.gmail.users.messages.modify({
+        userId: 'me', id,
+        addLabelIds: emailStarredState[id] ? ['STARRED'] : [],
+        removeLabelIds: emailStarredState[id] ? [] : ['STARRED']
+      }).catch(() => {});
+    }
+  });
+  localStorage.setItem('email_starred', JSON.stringify(emailStarredState));
+  renderEmailList();
+  toast(ids.length + ' email aggiornate', 'success');
+}
+
+function bulkArchive() {
+  const ids = getSelectedEmailIds();
+  if (!confirm('Archiviare ' + ids.length + ' email?')) return;
+  ids.forEach(id => {
+    if (!demoMode && gmailAccessToken) {
+      gapi.client.gmail.users.messages.modify({
+        userId: 'me', id,
+        addLabelIds: [], removeLabelIds: ['INBOX']
+      }).catch(() => {});
+    }
+    // Remove from current list
+    currentEmails = currentEmails.filter(e => e.id !== id);
+  });
+  renderEmailList();
+  updateUnreadBadge();
+  toast(ids.length + ' email archiviate', 'success');
+}
+
+function bulkTrash() {
+  const ids = getSelectedEmailIds();
+  if (!confirm('Eliminare ' + ids.length + ' email?')) return;
+  ids.forEach(id => {
+    if (!demoMode && gmailAccessToken) {
+      gapi.client.gmail.users.messages.trash({ userId: 'me', id }).catch(() => {});
+    }
+    currentEmails = currentEmails.filter(e => e.id !== id);
+  });
+  currentEmailId = null;
+  document.getElementById('emailPreviewEmpty').style.display = 'flex';
+  document.getElementById('emailPreviewContent').style.display = 'none';
+  renderEmailList();
+  updateUnreadBadge();
+  toast(ids.length + ' email eliminate', 'success');
 }
 
 function extractName(fromStr) {
@@ -5307,6 +7134,8 @@ async function showEmailReal(emailId) {
 
     // Show property link if exists
     renderPropertyLink(emailId);
+    updatePreviewReadButton();
+    updatePreviewStarButton();
 
   } catch (err) {
     console.error('Error loading email:', err);
