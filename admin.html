@@ -2529,9 +2529,19 @@ function checkAuth() {
   const urlKey = params.get('key');
   const session = sessionStorage.getItem('rig_admin');
 
-  if (urlKey === URL_KEY || session === 'ok') {
-    sessionStorage.setItem('rig_admin', 'ok');
+  if (session === 'ok') {
+    // Already authenticated this session (password + 2FA already verified)
     grantAccess();
+  } else if (urlKey === URL_KEY) {
+    // URL key: still require 2FA if enabled
+    const totpSecret = localStorage.getItem('rig_2fa_secret');
+    if (totpSecret) {
+      document.getElementById('loginStep1').style.display = 'none';
+      document.getElementById('loginStep2').style.display = 'block';
+      document.getElementById('loginTotp').focus();
+    } else {
+      grantAccess();
+    }
   }
 }
 
@@ -2756,16 +2766,11 @@ function showSection(name) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   const sec = document.getElementById('sec-' + name);
   if (sec) sec.classList.add('active');
-  // Mark the clicked nav-item as active (safe for programmatic calls)
-  if (typeof event !== 'undefined' && event && event.currentTarget) {
-    event.currentTarget.classList.add('active');
-  } else {
-    // Fallback: find nav-item by section name
-    const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','impostazioni'];
-    const idx = sectionNames.indexOf(name);
-    const navItems = document.querySelectorAll('.nav-item');
-    if (idx >= 0 && navItems[idx]) navItems[idx].classList.add('active');
-  }
+  // Mark the correct nav-item as active
+  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','impostazioni'];
+  const idx = sectionNames.indexOf(name);
+  const navItems = document.querySelectorAll('.nav-item');
+  if (idx >= 0 && navItems[idx]) navItems[idx].classList.add('active');
 
   const titles = {
     immobili: 'Gestione Immobili',
@@ -4231,8 +4236,7 @@ function loadDemoEmails() {
   toast('Modalita\' demo attivata — dati di esempio', 'success');
 }
 
-// Override showEmail for demo mode
-const _originalShowEmail = typeof showEmail === 'function' ? showEmail : null;
+
 
 async function showEmail(emailId) {
   if (!demoMode) {
@@ -4367,6 +4371,18 @@ function selectFolder(folder, el) {
 function selectLabel(label, el) {
   document.querySelectorAll('.email-folder-item').forEach(f => f.classList.remove('active'));
   el.classList.add('active');
+  if (demoMode) {
+    // Demo: filter by category keyword
+    const labelMap = { immobili: 'villa|appartamento|immobil', trattative: 'contratto|firma|rogito', archivio: 'registrazione|conferma' };
+    const pattern = labelMap[label] || label;
+    const re = new RegExp(pattern, 'i');
+    const original = [...currentEmails];
+    currentEmails = original.filter(e => re.test(e.subject) || re.test(e._demoBody || ''));
+    renderEmailList();
+    document.getElementById('emailStatusText').textContent = currentEmails.length + ' email con etichetta "' + label + '"';
+    currentEmails = original;
+    return;
+  }
   searchEmails('label:' + label);
 }
 
