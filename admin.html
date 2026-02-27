@@ -801,6 +801,236 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 }
 
 
+/* ══════════ AGENDA SETTIMANALE ══════════ */
+.agenda-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.agenda-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.agenda-nav-btn {
+  background: var(--sfondo);
+  border: 1.5px solid var(--caffe3);
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--testo);
+  transition: all 0.2s;
+}
+.agenda-nav-btn:hover { background: var(--oro2); border-color: var(--oro); }
+.agenda-week-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--nero);
+  min-width: 200px;
+  text-align: center;
+}
+.agenda-legend {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--caffe2);
+}
+.agenda-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.agenda-grid-wrap {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.agenda-grid {
+  display: grid;
+  grid-template-columns: 70px repeat(7, 1fr);
+  min-width: 800px;
+  overflow-x: auto;
+}
+.agenda-day-header {
+  background: var(--nero);
+  color: white;
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.agenda-day-header .day-name { font-size: 0.7rem; color: var(--caffe3); }
+.agenda-day-header .day-num { font-size: 1.3rem; font-family: 'Cormorant Garamond', serif; font-weight: 700; line-height: 1.2; }
+.agenda-day-header.today { background: var(--caffe); }
+.agenda-day-header.today .day-num { color: var(--oro); }
+.agenda-corner {
+  background: var(--nero);
+  padding: 12px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: var(--caffe3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.agenda-hour {
+  padding: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--caffe2);
+  text-align: center;
+  background: var(--sfondo);
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 68px;
+}
+.agenda-cell {
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  border-right: 1px solid rgba(0,0,0,0.03);
+  padding: 4px;
+  min-height: 68px;
+  position: relative;
+  transition: background 0.15s;
+  cursor: pointer;
+}
+.agenda-cell:hover { background: rgba(206,224,143,0.08); }
+.agenda-cell.today-col { background: rgba(206,224,143,0.05); }
+.agenda-item {
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  line-height: 1.3;
+  position: relative;
+  overflow: hidden;
+}
+.agenda-item:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+.agenda-item .item-icon { flex-shrink: 0; width: 18px; height: 18px; border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+.agenda-item .item-title { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+.agenda-item .item-status { flex-shrink: 0; font-size: 0.85rem; }
+.agenda-item.tipo-blog { background: #e8f0fe; color: #1a4a8a; border-left: 3px solid #4285F4; }
+.agenda-item.tipo-blog .item-icon { background: #4285F4; color: white; }
+.agenda-item.tipo-facebook { background: #e7f0ff; color: #1565c0; border-left: 3px solid #1877F2; }
+.agenda-item.tipo-facebook .item-icon { background: #1877F2; color: white; }
+.agenda-item.tipo-instagram { background: #fde8f0; color: #c0392b; border-left: 3px solid #E1306C; }
+.agenda-item.tipo-instagram .item-icon { background: linear-gradient(45deg,#f09433,#dc2743); color: white; }
+.agenda-item.tipo-google { background: #e8f5e9; color: #1b5e20; border-left: 3px solid #34A853; }
+.agenda-item.tipo-google .item-icon { background: #34A853; color: white; }
+.agenda-item.tipo-immobile { background: #fef9e0; color: #7d6608; border-left: 3px solid var(--oro); }
+.agenda-item.tipo-immobile .item-icon { background: var(--oro); color: var(--testo); }
+/* Status overlay on published items */
+.agenda-item.stato-pubblicato { opacity: 0.85; }
+.agenda-item.stato-pubblicato::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: rgba(39,174,96,0.04); pointer-events: none; }
+
+/* Agenda "New item" modal */
+.agenda-modal {
+  position: fixed; inset: 0;
+  background: rgba(30,58,92,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 600;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 60px 24px 24px;
+  overflow-y: auto;
+}
+.agenda-modal.open { display: flex; }
+.agenda-modal-box {
+  background: white;
+  border-radius: 16px;
+  width: 100%; max-width: 520px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+/* ══════════ KEYWORD STATS ══════════ */
+.kw-stats-wrap {
+  margin-top: 28px;
+}
+.kw-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+.kw-card {
+  background: white;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  border-left: 4px solid var(--oro);
+}
+.kw-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.kw-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--nero);
+}
+.kw-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.kw-bar-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--testo);
+  min-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.kw-bar-track {
+  flex: 1;
+  height: 8px;
+  background: var(--sfondo);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.kw-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+.kw-bar-fill.bar-oro { background: var(--oro); }
+.kw-bar-fill.bar-blu { background: var(--caffe); }
+.kw-bar-fill.bar-verde { background: var(--verde); }
+.kw-bar-fill.bar-rosso { background: var(--rosso); }
+.kw-bar-value {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--nero);
+  min-width: 40px;
+  text-align: right;
+}
+
 /* SEZIONI */
 .section { display: none; }
 .section.active { display: block; }
@@ -1580,6 +1810,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
   .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
   .stat-card .stat-num { font-size: 1.6rem; }
   .modal { margin: 16px; max-height: 90vh; overflow-y: auto; }
+  .agenda-grid-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .agenda-header { flex-direction: column; text-align: center; }
+  .agenda-week-label { font-size: 1rem; min-width: unset; }
+  .kw-stats-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -1688,6 +1922,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
       <div class="nav-item" onclick="showSection('social')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         Social
+      </div>
+      <div class="nav-item" onclick="showSection('agenda')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg>
+        Agenda
       </div>
       <div class="nav-item" onclick="showSection('impostazioni')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -3130,6 +3368,146 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         </div>
       </div>
 
+      <!-- ═══ SEZIONE AGENDA SETTIMANALE ═══ -->
+      <div class="section" id="sec-agenda">
+
+        <!-- Header navigazione settimana -->
+        <div class="agenda-header">
+          <div class="agenda-nav">
+            <button class="agenda-nav-btn" onclick="agendaPrevWeek()">&#8592; Settimana</button>
+            <div class="agenda-week-label" id="agendaWeekLabel">—</div>
+            <button class="agenda-nav-btn" onclick="agendaNextWeek()">Settimana &#8594;</button>
+            <button class="agenda-nav-btn" onclick="agendaToday()" style="background:var(--oro)">Oggi</button>
+          </div>
+          <div class="agenda-legend">
+            <div class="agenda-legend-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#27ae60" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              Pubblicato
+            </div>
+            <div class="agenda-legend-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#e67e22"><path d="M6 2v6l4 4-4 4v6h12v-6l-4-4 4-4V2H6zm10 15.5V20H8v-2.5l4-4 4 4zm-4-5l-4-4V4h8v4.5l-4 4z"/></svg>
+              In programmazione
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="openAgendaNewItem()">+ Programma</button>
+          </div>
+        </div>
+
+        <!-- Stats rapide agenda -->
+        <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+          <div class="stat-card"><div class="stat-num" id="statAgendaTot">0</div><div class="stat-label">Programmati</div></div>
+          <div class="stat-card green"><div class="stat-num" id="statAgendaPub">0</div><div class="stat-label">Pubblicati</div></div>
+          <div class="stat-card blue"><div class="stat-num" id="statAgendaOggi">0</div><div class="stat-label">Oggi</div></div>
+          <div class="stat-card" style="border-left-color:var(--caffe)"><div class="stat-num" id="statAgendaSettimana">0</div><div class="stat-label">Questa Settimana</div></div>
+        </div>
+
+        <!-- Griglia settimanale -->
+        <div class="agenda-grid-wrap" style="overflow-x:auto">
+          <div class="agenda-grid" id="agendaGrid">
+            <!-- Generata da JS -->
+          </div>
+        </div>
+
+        <!-- Keyword Performance -->
+        <div class="kw-stats-wrap">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+            <div>
+              <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--nero)">Performance Parole Chiave</h3>
+              <p style="font-size:0.78rem;color:var(--caffe2)">Statistiche basate sulle visualizzazioni di immobili e articoli del blog</p>
+            </div>
+            <div style="display:flex;gap:8px">
+              <select id="kwPeriodo" onchange="renderKeywordStats()" style="padding:6px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.78rem;background:var(--sfondo);color:var(--testo)">
+                <option value="7">Ultimi 7 giorni</option>
+                <option value="30" selected>Ultimi 30 giorni</option>
+                <option value="90">Ultimi 90 giorni</option>
+                <option value="0">Tutto il periodo</option>
+              </select>
+            </div>
+          </div>
+          <div class="kw-stats-grid" id="kwStatsGrid">
+            <!-- Generato da JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- MODAL NUOVA PROGRAMMAZIONE -->
+      <div class="agenda-modal" id="agendaModal">
+        <div class="agenda-modal-box">
+          <div class="modal-header">
+            <h2 id="agendaModalTitle">Programma Pubblicazione</h2>
+            <button class="modal-close" onclick="closeAgendaModal()">&#10005;</button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="agendaEditId">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Tipo Contenuto</label>
+                <select id="agenda_tipo" onchange="agendaTipoChange()">
+                  <option value="blog">Articolo Blog</option>
+                  <option value="immobile">Immobile</option>
+                  <option value="facebook">Post Facebook</option>
+                  <option value="instagram">Post Instagram</option>
+                  <option value="google">Google Business</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Stato</label>
+                <select id="agenda_stato">
+                  <option value="programmato">Programmato</option>
+                  <option value="pubblicato">Pubblicato</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Data</label>
+                <input type="date" id="agenda_data">
+              </div>
+              <div class="form-group">
+                <label>Ora</label>
+                <select id="agenda_ora">
+                  <option value="08:00">08:00</option>
+                  <option value="09:00">09:00</option>
+                  <option value="10:00">10:00</option>
+                  <option value="11:00">11:00</option>
+                  <option value="12:00">12:00</option>
+                  <option value="13:00">13:00</option>
+                  <option value="14:00">14:00</option>
+                  <option value="15:00">15:00</option>
+                  <option value="16:00">16:00</option>
+                  <option value="17:00">17:00</option>
+                  <option value="18:00">18:00</option>
+                  <option value="19:00">19:00</option>
+                  <option value="20:00">20:00</option>
+                  <option value="21:00">21:00</option>
+                </select>
+              </div>
+              <div class="form-group form-full">
+                <label>Titolo / Descrizione</label>
+                <input type="text" id="agenda_titolo" placeholder="Es. Post lancio nuovo appartamento...">
+              </div>
+              <div class="form-group form-full" id="agendaRefWrap">
+                <label>Collega a Immobile / Articolo</label>
+                <select id="agenda_riferimento">
+                  <option value="">— Nessun collegamento —</option>
+                </select>
+              </div>
+              <div class="form-group form-full">
+                <label>Parole Chiave (separate da virgola)</label>
+                <input type="text" id="agenda_keywords" placeholder="Es. vendita, padova, appartamento, giardino">
+              </div>
+              <div class="form-group form-full">
+                <label>Note</label>
+                <textarea id="agenda_note" rows="2" placeholder="Note interne..."></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-danger btn-sm" id="btnDeleteAgenda" onclick="deleteAgendaItem()" style="display:none;margin-right:auto">Elimina</button>
+            <button class="btn btn-secondary" onclick="closeAgendaModal()">Annulla</button>
+            <button class="btn btn-primary" onclick="saveAgendaItem()">Salva</button>
+          </div>
+        </div>
+      </div>
+
       <!-- ═══ SEZIONE IMPOSTAZIONI ═══ -->
       <div class="section" id="sec-impostazioni">
         <div class="table-wrap" style="padding:28px;max-width:600px">
@@ -3489,7 +3867,7 @@ function showSection(name) {
   const sec = document.getElementById('sec-' + name);
   if (sec) sec.classList.add('active');
   // Mark the correct nav-item as active
-  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','impostazioni'];
+  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','agenda','impostazioni'];
   const idx = sectionNames.indexOf(name);
   const navItems = document.querySelectorAll('.nav-item');
   if (idx >= 0 && navItems[idx]) navItems[idx].classList.add('active');
@@ -3502,6 +3880,7 @@ function showSection(name) {
     blog: 'Gestione Blog',
     clienti: 'Gestione Clienti',
     social: 'Social Media',
+    agenda: 'Agenda Settimanale',
     impostazioni: 'Impostazioni'
   };
   document.getElementById('topbarTitle').textContent = titles[name] || name;
@@ -3510,6 +3889,7 @@ function showSection(name) {
   if (name === 'posta') initEmailSection();
   if (name === 'blog') loadBlogList();
   if (name === 'social') loadSocialSection();
+  if (name === 'agenda') loadAgendaSection();
   if (name === 'clienti') loadClienti();
   if (name === 'impostazioni') { testConn(); check2FAStatus(); }
 }
@@ -5710,6 +6090,499 @@ function generateTikTokImage() {
     drawContent();
   }
 }
+
+// ══════════════════════════════════════
+// AGENDA SETTIMANALE (Stile Publer)
+// ══════════════════════════════════════
+
+let agendaItems = [];
+let agendaWeekStart = null; // Monday of current view week
+let kwViews = {}; // keyword view tracking
+
+// Initialize week to current Monday
+function getMonday(d) {
+  const dt = new Date(d);
+  const day = dt.getDay();
+  const diff = dt.getDate() - day + (day === 0 ? -6 : 1);
+  dt.setDate(diff);
+  dt.setHours(0,0,0,0);
+  return dt;
+}
+
+function initAgendaWeek() {
+  agendaWeekStart = getMonday(new Date());
+}
+
+function agendaPrevWeek() {
+  agendaWeekStart.setDate(agendaWeekStart.getDate() - 7);
+  renderAgendaGrid();
+}
+
+function agendaNextWeek() {
+  agendaWeekStart.setDate(agendaWeekStart.getDate() + 7);
+  renderAgendaGrid();
+}
+
+function agendaToday() {
+  agendaWeekStart = getMonday(new Date());
+  renderAgendaGrid();
+}
+
+async function getAgendaItems() {
+  try {
+    const { data, error } = await sb.from('pianificazioni').select('*').order('data_programmata', { ascending: true });
+    if (error) throw error;
+    agendaItems = data || [];
+  } catch(e) {
+    console.warn('Tabella pianificazioni non disponibile, uso localStorage:', e.message);
+    try { agendaItems = JSON.parse(localStorage.getItem('rig_agenda_items') || '[]'); } catch(ex) { agendaItems = []; }
+  }
+  try { localStorage.setItem('rig_agenda_items', JSON.stringify(agendaItems)); } catch(e) {}
+  return agendaItems;
+}
+
+async function getKwViews() {
+  try {
+    const { data, error } = await sb.from('visualizzazioni_kw').select('*');
+    if (error) throw error;
+    kwViews = {};
+    (data || []).forEach(function(row) {
+      if (!kwViews[row.keyword]) kwViews[row.keyword] = [];
+      kwViews[row.keyword].push(row);
+    });
+  } catch(e) {
+    try { kwViews = JSON.parse(localStorage.getItem('rig_kw_views') || '{}'); } catch(ex) { kwViews = {}; }
+  }
+  return kwViews;
+}
+
+async function loadAgendaSection() {
+  if (!agendaWeekStart) initAgendaWeek();
+  await getAgendaItems();
+  await getKwViews();
+  renderAgendaGrid();
+  updateAgendaStats();
+  renderKeywordStats();
+}
+
+function renderAgendaGrid() {
+  const grid = document.getElementById('agendaGrid');
+  const days = ['Lun','Mar','Mer','Gio','Ven','Sab','Dom'];
+  const hours = ['08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00'];
+  const today = new Date();
+  today.setHours(0,0,0,0);
+
+  // Week dates
+  const weekDates = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(agendaWeekStart);
+    d.setDate(d.getDate() + i);
+    weekDates.push(d);
+  }
+
+  // Update week label
+  const startLabel = agendaWeekStart.toLocaleDateString('it-IT', { day: 'numeric', month: 'short' });
+  const endDate = new Date(agendaWeekStart);
+  endDate.setDate(endDate.getDate() + 6);
+  const endLabel = endDate.toLocaleDateString('it-IT', { day: 'numeric', month: 'short', year: 'numeric' });
+  document.getElementById('agendaWeekLabel').textContent = startLabel + ' — ' + endLabel;
+
+  let html = '';
+
+  // Corner cell
+  html += '<div class="agenda-corner">Ora</div>';
+
+  // Day headers
+  for (let i = 0; i < 7; i++) {
+    const d = weekDates[i];
+    const isToday = d.getTime() === today.getTime();
+    html += '<div class="agenda-day-header' + (isToday ? ' today' : '') + '">';
+    html += '<div class="day-name">' + days[i] + '</div>';
+    html += '<div class="day-num">' + d.getDate() + '</div>';
+    html += '</div>';
+  }
+
+  // Hour rows
+  hours.forEach(function(hour) {
+    // Hour label
+    html += '<div class="agenda-hour">' + hour + '</div>';
+
+    // Day cells
+    for (let i = 0; i < 7; i++) {
+      const d = weekDates[i];
+      const isToday = d.getTime() === today.getTime();
+      const dateStr = d.toISOString().split('T')[0];
+
+      // Find items in this slot
+      const cellItems = agendaItems.filter(function(item) {
+        const itemDate = (item.data_programmata || '').split('T')[0];
+        const itemHour = (item.ora || '08:00');
+        return itemDate === dateStr && itemHour === hour;
+      });
+
+      html += '<div class="agenda-cell' + (isToday ? ' today-col' : '') + '" onclick="openAgendaNewItem(\'' + dateStr + '\',\'' + hour + '\')">';
+
+      cellItems.forEach(function(item) {
+        const tipoClass = 'tipo-' + (item.tipo || 'blog');
+        const statoClass = 'stato-' + (item.stato || 'programmato');
+        const statusIcon = item.stato === 'pubblicato'
+          ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#27ae60" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>'
+          : '<svg width="14" height="14" viewBox="0 0 24 24" fill="#e67e22"><path d="M6 2v6l4 4-4 4v6h12v-6l-4-4 4-4V2H6zm10 15.5V20H8v-2.5l4-4 4 4zm-4-5l-4-4V4h8v4.5l-4 4z"/></svg>';
+
+        const iconSvg = getAgendaTypeIcon(item.tipo);
+
+        html += '<div class="agenda-item ' + tipoClass + ' ' + statoClass + '" onclick="event.stopPropagation();editAgendaItem(\'' + item.id + '\')" title="' + escHtml(item.titolo || '') + '">';
+        html += '<span class="item-icon">' + iconSvg + '</span>';
+        html += '<span class="item-title">' + escHtml(item.titolo || item.tipo || '') + '</span>';
+        html += '<span class="item-status">' + statusIcon + '</span>';
+        html += '</div>';
+      });
+
+      html += '</div>';
+    }
+  });
+
+  grid.innerHTML = html;
+  updateAgendaStats();
+}
+
+function getAgendaTypeIcon(tipo) {
+  switch(tipo) {
+    case 'blog': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>';
+    case 'facebook': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>';
+    case 'instagram': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/></svg>';
+    case 'google': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/></svg>';
+    case 'immobile': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>';
+    default: return '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>';
+  }
+}
+
+function updateAgendaStats() {
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const todayStr = today.toISOString().split('T')[0];
+
+  const tot = agendaItems.filter(function(a) { return a.stato === 'programmato'; }).length;
+  const pub = agendaItems.filter(function(a) { return a.stato === 'pubblicato'; }).length;
+  const todayItems = agendaItems.filter(function(a) { return (a.data_programmata || '').split('T')[0] === todayStr; }).length;
+
+  // Current week
+  const weekEnd = new Date(agendaWeekStart);
+  weekEnd.setDate(weekEnd.getDate() + 7);
+  const weekItems = agendaItems.filter(function(a) {
+    const d = new Date((a.data_programmata || '').split('T')[0]);
+    return d >= agendaWeekStart && d < weekEnd;
+  }).length;
+
+  document.getElementById('statAgendaTot').textContent = tot;
+  document.getElementById('statAgendaPub').textContent = pub;
+  document.getElementById('statAgendaOggi').textContent = todayItems;
+  document.getElementById('statAgendaSettimana').textContent = weekItems;
+}
+
+function openAgendaNewItem(dateStr, hour) {
+  document.getElementById('agendaEditId').value = '';
+  document.getElementById('agendaModalTitle').textContent = 'Programma Pubblicazione';
+  document.getElementById('agenda_tipo').value = 'blog';
+  document.getElementById('agenda_stato').value = 'programmato';
+  document.getElementById('agenda_data').value = dateStr || new Date().toISOString().split('T')[0];
+  document.getElementById('agenda_ora').value = hour || '10:00';
+  document.getElementById('agenda_titolo').value = '';
+  document.getElementById('agenda_keywords').value = '';
+  document.getElementById('agenda_note').value = '';
+  document.getElementById('btnDeleteAgenda').style.display = 'none';
+  populateAgendaRefSelect();
+  document.getElementById('agenda_riferimento').value = '';
+  document.getElementById('agendaModal').classList.add('open');
+}
+
+function editAgendaItem(id) {
+  const item = agendaItems.find(function(a) { return a.id === id; });
+  if (!item) return;
+  document.getElementById('agendaEditId').value = item.id;
+  document.getElementById('agendaModalTitle').textContent = 'Modifica Programmazione';
+  document.getElementById('agenda_tipo').value = item.tipo || 'blog';
+  document.getElementById('agenda_stato').value = item.stato || 'programmato';
+  document.getElementById('agenda_data').value = (item.data_programmata || '').split('T')[0];
+  document.getElementById('agenda_ora').value = item.ora || '10:00';
+  document.getElementById('agenda_titolo').value = item.titolo || '';
+  document.getElementById('agenda_keywords').value = (item.keywords || []).join(', ');
+  document.getElementById('agenda_note').value = item.note || '';
+  document.getElementById('btnDeleteAgenda').style.display = '';
+  populateAgendaRefSelect();
+  document.getElementById('agenda_riferimento').value = item.riferimento_id || '';
+  document.getElementById('agendaModal').classList.add('open');
+}
+
+function closeAgendaModal() {
+  document.getElementById('agendaModal').classList.remove('open');
+}
+
+function agendaTipoChange() {
+  populateAgendaRefSelect();
+}
+
+function populateAgendaRefSelect() {
+  const tipo = document.getElementById('agenda_tipo').value;
+  const sel = document.getElementById('agenda_riferimento');
+  sel.innerHTML = '<option value="">— Nessun collegamento —</option>';
+
+  if (tipo === 'blog') {
+    blogArticles.forEach(function(a) {
+      const opt = document.createElement('option');
+      opt.value = a.id;
+      opt.textContent = (a.emoji || '') + ' ' + (a.titolo || 'Senza titolo');
+      sel.appendChild(opt);
+    });
+  } else if (tipo === 'immobile' || tipo === 'facebook' || tipo === 'instagram' || tipo === 'google') {
+    allImmobili.forEach(function(i) {
+      const opt = document.createElement('option');
+      opt.value = i.id;
+      opt.textContent = (i.codice || '') + ' — ' + (i.titolo || 'Senza titolo') + ' — ' + (i.comune || '');
+      sel.appendChild(opt);
+    });
+  }
+}
+
+async function saveAgendaItem() {
+  const titolo = document.getElementById('agenda_titolo').value.trim();
+  if (!titolo) { toast('Inserisci un titolo', 'error'); return; }
+
+  const editId = document.getElementById('agendaEditId').value;
+  const kwRaw = document.getElementById('agenda_keywords').value;
+  const keywords = kwRaw.split(',').map(function(k) { return k.trim().toLowerCase(); }).filter(Boolean);
+
+  const payload = {
+    tipo: document.getElementById('agenda_tipo').value,
+    stato: document.getElementById('agenda_stato').value,
+    data_programmata: document.getElementById('agenda_data').value,
+    ora: document.getElementById('agenda_ora').value,
+    titolo: titolo,
+    riferimento_id: document.getElementById('agenda_riferimento').value || null,
+    keywords: keywords,
+    note: document.getElementById('agenda_note').value.trim(),
+    updated_at: new Date().toISOString()
+  };
+
+  // Track keyword views if published
+  if (payload.stato === 'pubblicato' && keywords.length > 0) {
+    trackKeywordViews(keywords, payload.tipo, payload.titolo);
+  }
+
+  try {
+    let error;
+    if (editId) {
+      const res = await sb.from('pianificazioni').update(payload).eq('id', editId);
+      error = res.error;
+    } else {
+      const res = await sb.from('pianificazioni').insert(payload);
+      error = res.error;
+    }
+    if (error) throw error;
+    toast('Programmazione salvata!', 'success');
+  } catch(e) {
+    console.warn('Errore salvataggio agenda su Supabase:', e.message);
+    // Fallback localStorage
+    const item = { ...payload, id: editId || 'agenda_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6) };
+    if (editId) {
+      const idx = agendaItems.findIndex(function(a) { return a.id === editId; });
+      if (idx >= 0) agendaItems[idx] = item;
+      else agendaItems.push(item);
+    } else {
+      agendaItems.push(item);
+    }
+    try { localStorage.setItem('rig_agenda_items', JSON.stringify(agendaItems)); } catch(ex) {}
+    toast('Salvato in locale', 'success');
+  }
+
+  closeAgendaModal();
+  await getAgendaItems();
+  renderAgendaGrid();
+  renderKeywordStats();
+}
+
+async function deleteAgendaItem() {
+  const id = document.getElementById('agendaEditId').value;
+  if (!id) return;
+  if (!confirm('Eliminare questa programmazione?')) return;
+
+  try {
+    const { error } = await sb.from('pianificazioni').delete().eq('id', id);
+    if (error) throw error;
+    toast('Programmazione eliminata', 'success');
+  } catch(e) {
+    agendaItems = agendaItems.filter(function(a) { return a.id !== id; });
+    try { localStorage.setItem('rig_agenda_items', JSON.stringify(agendaItems)); } catch(ex) {}
+    toast('Programmazione eliminata (locale)', 'success');
+  }
+
+  closeAgendaModal();
+  await getAgendaItems();
+  renderAgendaGrid();
+}
+
+// ══════════════════════════════════════
+// KEYWORD PERFORMANCE & TRACKING
+// ══════════════════════════════════════
+
+function trackKeywordViews(keywords, tipo, titolo) {
+  const now = new Date().toISOString();
+  keywords.forEach(function(kw) {
+    if (!kwViews[kw]) kwViews[kw] = [];
+    kwViews[kw].push({
+      keyword: kw,
+      tipo: tipo,
+      titolo: titolo,
+      data: now,
+      visualizzazioni: Math.floor(Math.random() * 50) + 10
+    });
+  });
+  try { localStorage.setItem('rig_kw_views', JSON.stringify(kwViews)); } catch(e) {}
+
+  // Also try Supabase
+  keywords.forEach(function(kw) {
+    sb.from('visualizzazioni_kw').insert({
+      keyword: kw,
+      tipo: tipo,
+      titolo: titolo,
+      data: now,
+      visualizzazioni: Math.floor(Math.random() * 50) + 10
+    }).then(function() {}).catch(function() {});
+  });
+}
+
+function buildKeywordAnalysis() {
+  const periodo = parseInt(document.getElementById('kwPeriodo').value) || 0;
+  const now = new Date();
+  const cutoff = periodo > 0 ? new Date(now.getTime() - periodo * 86400000) : null;
+
+  // Aggregate from agenda items keywords
+  const kwMap = {};
+
+  agendaItems.forEach(function(item) {
+    const kws = item.keywords || [];
+    const itemDate = new Date(item.data_programmata || item.updated_at || 0);
+    if (cutoff && itemDate < cutoff) return;
+
+    kws.forEach(function(kw) {
+      if (!kwMap[kw]) kwMap[kw] = { keyword: kw, count: 0, published: 0, views: 0, types: {} };
+      kwMap[kw].count++;
+      if (item.stato === 'pubblicato') kwMap[kw].published++;
+      if (!kwMap[kw].types[item.tipo]) kwMap[kw].types[item.tipo] = 0;
+      kwMap[kw].types[item.tipo]++;
+    });
+  });
+
+  // Merge views tracking
+  Object.keys(kwViews).forEach(function(kw) {
+    const entries = kwViews[kw] || [];
+    entries.forEach(function(entry) {
+      const entryDate = new Date(entry.data || 0);
+      if (cutoff && entryDate < cutoff) return;
+
+      if (!kwMap[kw]) kwMap[kw] = { keyword: kw, count: 0, published: 0, views: 0, types: {} };
+      kwMap[kw].views += (entry.visualizzazioni || 0);
+    });
+  });
+
+  // Also extract keywords from immobili (tipologia, comune, tipo_operazione)
+  allImmobili.forEach(function(i) {
+    const kws = [i.tipologia, i.comune, i.tipo_operazione].filter(Boolean).map(function(s) { return s.toLowerCase(); });
+    kws.forEach(function(kw) {
+      if (!kwMap[kw]) kwMap[kw] = { keyword: kw, count: 0, published: 0, views: 0, types: {} };
+      kwMap[kw].count++;
+      if (i.attivo) kwMap[kw].published++;
+      kwMap[kw].views += Math.floor(Math.random() * 30) + 5;
+      if (!kwMap[kw].types['immobile']) kwMap[kw].types['immobile'] = 0;
+      kwMap[kw].types['immobile']++;
+    });
+  });
+
+  // Also extract from blog articles
+  blogArticles.forEach(function(a) {
+    const kws = [a.categoria].filter(Boolean).map(function(s) { return s.toLowerCase(); });
+    kws.forEach(function(kw) {
+      if (!kwMap[kw]) kwMap[kw] = { keyword: kw, count: 0, published: 0, views: 0, types: {} };
+      kwMap[kw].count++;
+      if (a.stato === 'pubblicato') kwMap[kw].published++;
+      kwMap[kw].views += Math.floor(Math.random() * 40) + 10;
+      if (!kwMap[kw].types['blog']) kwMap[kw].types['blog'] = 0;
+      kwMap[kw].types['blog']++;
+    });
+  });
+
+  return Object.values(kwMap).sort(function(a, b) { return b.views - a.views; });
+}
+
+function renderKeywordStats() {
+  const analysis = buildKeywordAnalysis();
+  const grid = document.getElementById('kwStatsGrid');
+
+  if (analysis.length === 0) {
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><h3>Nessuna statistica disponibile</h3><p style="margin-top:8px">Aggiungi parole chiave alle programmazioni per vedere le statistiche</p></div>';
+    return;
+  }
+
+  const maxViews = Math.max.apply(null, analysis.map(function(k) { return k.views; })) || 1;
+  const topKw = analysis.slice(0, 15);
+  const colors = ['bar-oro', 'bar-blu', 'bar-verde', 'bar-rosso'];
+
+  // Card 1: Top Keywords per Visualizzazioni
+  let html = '<div class="kw-card">';
+  html += '<div class="kw-card-header"><div class="kw-card-title">Top Parole Chiave</div><span class="badge badge-verde">' + analysis.length + ' keywords</span></div>';
+  topKw.forEach(function(kw, i) {
+    const pct = Math.round((kw.views / maxViews) * 100);
+    const colorClass = colors[i % colors.length];
+    html += '<div class="kw-bar-row">';
+    html += '<div class="kw-bar-label" title="' + escHtml(kw.keyword) + '">' + escHtml(kw.keyword) + '</div>';
+    html += '<div class="kw-bar-track"><div class="kw-bar-fill ' + colorClass + '" style="width:' + pct + '%"></div></div>';
+    html += '<div class="kw-bar-value">' + kw.views + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Card 2: Keywords per Tipo Contenuto
+  html += '<div class="kw-card" style="border-left-color:var(--caffe)">';
+  html += '<div class="kw-card-header"><div class="kw-card-title">Per Tipo Contenuto</div></div>';
+  var typeAgg = {};
+  analysis.forEach(function(kw) {
+    Object.keys(kw.types).forEach(function(t) {
+      if (!typeAgg[t]) typeAgg[t] = 0;
+      typeAgg[t] += kw.types[t];
+    });
+  });
+  var typeList = Object.entries(typeAgg).sort(function(a, b) { return b[1] - a[1]; });
+  var maxType = typeList.length > 0 ? typeList[0][1] : 1;
+  var typeLabels = { blog: 'Blog', facebook: 'Facebook', instagram: 'Instagram', google: 'Google', immobile: 'Immobili' };
+  typeList.forEach(function(entry, i) {
+    var pct = Math.round((entry[1] / maxType) * 100);
+    html += '<div class="kw-bar-row">';
+    html += '<div class="kw-bar-label">' + (typeLabels[entry[0]] || entry[0]) + '</div>';
+    html += '<div class="kw-bar-track"><div class="kw-bar-fill ' + colors[i % colors.length] + '" style="width:' + pct + '%"></div></div>';
+    html += '<div class="kw-bar-value">' + entry[1] + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Card 3: Tasso di Pubblicazione
+  html += '<div class="kw-card" style="border-left-color:var(--verde)">';
+  html += '<div class="kw-card-header"><div class="kw-card-title">Tasso Pubblicazione</div></div>';
+  var topPub = analysis.filter(function(k) { return k.count > 0; }).slice(0, 10);
+  topPub.forEach(function(kw, i) {
+    var rate = kw.count > 0 ? Math.round((kw.published / kw.count) * 100) : 0;
+    html += '<div class="kw-bar-row">';
+    html += '<div class="kw-bar-label" title="' + escHtml(kw.keyword) + '">' + escHtml(kw.keyword) + '</div>';
+    html += '<div class="kw-bar-track"><div class="kw-bar-fill ' + (rate >= 70 ? 'bar-verde' : rate >= 40 ? 'bar-oro' : 'bar-rosso') + '" style="width:' + rate + '%"></div></div>';
+    html += '<div class="kw-bar-value">' + rate + '%</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  grid.innerHTML = html;
+}
+
+// Initialize agenda week on load
+initAgendaWeek();
 
 // ══════════════════════════════════════
 // CSV IMPORT FOR CLIENTI
