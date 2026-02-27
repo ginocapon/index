@@ -6104,16 +6104,21 @@ async function handleGBPAuth(resp) {
 
   try {
     // Get accounts
+    console.log('[GBP] Fetching accounts...');
     const accRes = await fetch('https://mybusinessaccountmanagement.googleapis.com/v1/accounts', {
       headers: { 'Authorization': 'Bearer ' + gbpAccessToken }
     });
+    console.log('[GBP] Accounts response status:', accRes.status);
     if (accRes.status === 403) {
       const errData = await accRes.json().catch(() => ({}));
       const errMsg = errData.error?.message || '';
+      console.log('[GBP] 403 error:', errMsg);
       if (errMsg.includes('not enabled') || errMsg.includes('has not been used')) {
         toast('API "My Business Account Management" non abilitata. Abilitala nella Google Cloud Console', 'error');
       } else if (errMsg.includes('billing')) {
         toast('Periodo di prova scaduto. Fai l\'upgrade (gratuito) nella Google Cloud Console', 'error');
+      } else if (errMsg.includes('REQUEST_DENIED') || errMsg.includes('quota')) {
+        toast('Quota API esaurita o accesso non concesso. Richiedi l\'accesso alle API Business Profile tramite il modulo Google', 'error');
       } else {
         toast('Errore 403: ' + (errMsg || 'Accesso negato. Verifica le API abilitate nella Cloud Console'), 'error');
       }
@@ -6126,25 +6131,56 @@ async function handleGBPAuth(resp) {
       document.getElementById('gbpAccount').textContent = '';
       return;
     }
-    const accData = await accRes.json();
-    if (!accData.accounts || accData.accounts.length === 0) {
-      toast('Nessun account Google Business trovato. Verifica di accedere con l\'account Google che gestisce la scheda Business', 'error');
+    if (!accRes.ok) {
+      const errBody = await accRes.text().catch(() => '');
+      console.log('[GBP] Unexpected status ' + accRes.status + ':', errBody);
+      toast('Errore API (HTTP ' + accRes.status + '). Apri la Console del browser (F12) per dettagli', 'error');
       document.getElementById('gbpAccount').textContent = '';
       return;
     }
+    const accData = await accRes.json();
+    console.log('[GBP] Accounts response:', JSON.stringify(accData));
+    if (!accData.accounts || accData.accounts.length === 0) {
+      // Show diagnostic info to help debug
+      const diagInfo = 'Risposta API: ' + JSON.stringify(accData);
+      console.warn('[GBP] Nessun account trovato. Risposta completa:', accData);
+      document.getElementById('gbpAccount').innerHTML = '<span style="color:var(--rosso);font-size:0.75rem">Nessun account trovato</span>';
+      toast('Nessun account Google Business trovato.', 'error');
+      // Show a detailed diagnostic alert
+      setTimeout(function() {
+        alert('DIAGNOSTICA GOOGLE BUSINESS\n\n' +
+          'Stato HTTP: ' + accRes.status + ' (OK)\n' +
+          'Risposta: ' + JSON.stringify(accData, null, 2) + '\n\n' +
+          'POSSIBILI CAUSE:\n' +
+          '1) Hai effettuato l\'accesso con l\'account Google corretto?\n' +
+          '   (quello che gestisce la scheda Business)\n\n' +
+          '2) Le API hanno quota 0: dopo aver abilitato le API,\n' +
+          '   devi richiedere l\'accesso compilando il modulo:\n' +
+          '   "Google Business Profile API access request"\n\n' +
+          '3) La scheda Google Business potrebbe non essere verificata\n\n' +
+          'Fai uno screenshot di questo messaggio e condividilo per assistenza.');
+      }, 300);
+      return;
+    }
     const account = accData.accounts[0];
+    console.log('[GBP] Account found:', account.name, account.accountName || '');
     localStorage.setItem('social_gbp_account', account.name);
 
     // Get locations
+    console.log('[GBP] Fetching locations for', account.name);
     const locRes = await fetch('https://mybusinessbusinessinformation.googleapis.com/v1/' + account.name + '/locations?readMask=name,title,storefrontAddress', {
       headers: { 'Authorization': 'Bearer ' + gbpAccessToken }
     });
+    console.log('[GBP] Locations response status:', locRes.status);
     if (locRes.status === 403) {
+      const errData = await locRes.json().catch(() => ({}));
+      console.log('[GBP] Locations 403 error:', errData);
       toast('API "My Business Business Information" non abilitata. Abilitala nella Google Cloud Console', 'error');
       document.getElementById('gbpAccount').textContent = '';
       return;
     }
     const locData = await locRes.json();
+    console.log('[GBP] Locations response:', JSON.stringify(locData));
     if (locData.locations && locData.locations.length > 0) {
       const loc = locData.locations[0];
       localStorage.setItem('social_gbp_location', loc.name);
@@ -6154,10 +6190,12 @@ async function handleGBPAuth(resp) {
       document.getElementById('gbpAccount').textContent = loc.title || '';
       toast('Connesso a Google Business: ' + (loc.title || ''), 'success');
     } else {
+      console.warn('[GBP] Nessuna sede trovata. Risposta:', locData);
       toast('Nessuna sede trovata. Verifica che la scheda Google Business sia attiva e verificata', 'error');
       document.getElementById('gbpAccount').textContent = '';
     }
   } catch(e) {
+    console.error('[GBP] Exception:', e);
     toast('Errore Google Business: ' + e.message, 'error');
     document.getElementById('gbpAccount').textContent = '';
   }
