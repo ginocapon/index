@@ -3102,22 +3102,35 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
           <!-- ═══ PROGRAMMAZIONE AUTOMATICA SOCIAL ═══ -->
           <div style="background:linear-gradient(135deg,#1a237e 0%,#283593 100%);border-radius:14px;padding:24px;margin-top:24px;color:white">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">
               <div>
                 <h4 style="font-size:1.1rem;margin:0;font-family:'Cormorant Garamond',serif">Programmazione Automatica</h4>
                 <p style="font-size:0.75rem;opacity:0.8;margin:4px 0 0">Pianifica pubblicazioni ricorrenti con spintax e frasi accattivanti generate automaticamente</p>
               </div>
-              <div style="background:rgba(255,255,255,0.15);border-radius:8px;padding:6px 14px;font-size:0.72rem" id="schedulerStatusBadge">
-                Scheduler: <span id="schedulerStatusText">Attivo</span>
+              <div style="background:rgba(255,255,255,0.15);border-radius:8px;padding:6px 14px;font-size:0.72rem">
+                Scheduler: <span id="schedulerStatusText" style="color:#4caf50">Attivo</span>
               </div>
             </div>
 
-            <!-- Nuova Programmazione -->
+            <!-- AVVISO PAGINA APERTA -->
+            <div style="background:rgba(255,152,0,0.2);border:1px solid rgba(255,152,0,0.4);border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:0.75rem;display:flex;align-items:center;gap:8px">
+              <span style="font-size:1.2rem">&#9888;</span>
+              <span>Lo scheduler funziona finche' questa pagina resta aperta. Se la chiudi, al prossimo accesso ti verranno proposte le pubblicazioni mancate da recuperare. Per risultati migliori, tieni il tab aperto in background.</span>
+            </div>
+
+            <!-- CALENDARIO SETTIMANALE -->
+            <div style="background:rgba(0,0,0,0.2);border-radius:12px;padding:16px;margin-bottom:16px">
+              <div style="font-weight:700;font-size:0.9rem;margin-bottom:12px">Calendario Settimanale</div>
+              <div id="weeklyCalendarGrid" style="overflow-x:auto">
+                <div style="opacity:0.6;text-align:center;padding:20px;font-size:0.82rem">Caricamento calendario...</div>
+              </div>
+            </div>
+
+            <!-- NUOVA PROGRAMMAZIONE -->
             <div style="background:rgba(255,255,255,0.1);border-radius:12px;padding:18px;margin-bottom:16px">
               <div style="font-weight:700;font-size:0.9rem;margin-bottom:14px">Nuova Programmazione</div>
 
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-                <!-- Tipo contenuto -->
                 <div class="form-group">
                   <label style="color:rgba(255,255,255,0.85);font-size:0.78rem">Tipo Contenuto</label>
                   <select id="schedType" onchange="loadScheduleContentOptions()" style="background:rgba(255,255,255,0.12);color:white;border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:8px 12px;font-size:0.82rem">
@@ -3125,14 +3138,12 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                     <option value="blog">Articolo Blog</option>
                   </select>
                 </div>
-                <!-- Seleziona contenuto -->
                 <div class="form-group">
                   <label style="color:rgba(255,255,255,0.85);font-size:0.78rem">Seleziona Contenuto</label>
                   <select id="schedContent" style="background:rgba(255,255,255,0.12);color:white;border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:8px 12px;font-size:0.82rem">
-                    <option value="">— Seleziona —</option>
+                    <option value="">-- Seleziona --</option>
                   </select>
                 </div>
-                <!-- Frequenza -->
                 <div class="form-group">
                   <label style="color:rgba(255,255,255,0.85);font-size:0.78rem">Frequenza Settimanale</label>
                   <select id="schedFrequency" style="background:rgba(255,255,255,0.12);color:white;border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:8px 12px;font-size:0.82rem">
@@ -3143,7 +3154,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                     <option value="7">Ogni giorno</option>
                   </select>
                 </div>
-                <!-- Orario -->
                 <div class="form-group">
                   <label style="color:rgba(255,255,255,0.85);font-size:0.78rem">Orario Pubblicazione</label>
                   <select id="schedTime" style="background:rgba(255,255,255,0.12);color:white;border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:8px 12px;font-size:0.82rem">
@@ -3156,15 +3166,13 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                     <option value="21:00">21:00 (Sera tardi)</option>
                   </select>
                 </div>
-                <!-- Data Scadenza -->
                 <div class="form-group">
                   <label style="color:rgba(255,255,255,0.85);font-size:0.78rem">Scadenza (dopo questa data si sospende)</label>
                   <input type="date" id="schedExpiry" style="background:rgba(255,255,255,0.12);color:white;border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:8px 12px;font-size:0.82rem">
                 </div>
-                <!-- Giorni della settimana -->
                 <div class="form-group">
                   <label style="color:rgba(255,255,255,0.85);font-size:0.78rem">Giorni Preferiti</label>
-                  <div style="display:flex;gap:4px;flex-wrap:wrap" id="schedDaysWrap">
+                  <div style="display:flex;gap:4px;flex-wrap:wrap">
                     <label style="display:flex;align-items:center;gap:3px;font-size:0.72rem;color:rgba(255,255,255,0.85);cursor:pointer"><input type="checkbox" value="1" checked class="schedDay"> Lun</label>
                     <label style="display:flex;align-items:center;gap:3px;font-size:0.72rem;color:rgba(255,255,255,0.85);cursor:pointer"><input type="checkbox" value="2" class="schedDay"> Mar</label>
                     <label style="display:flex;align-items:center;gap:3px;font-size:0.72rem;color:rgba(255,255,255,0.85);cursor:pointer"><input type="checkbox" value="3" checked class="schedDay"> Mer</label>
@@ -3176,7 +3184,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 </div>
               </div>
 
-              <!-- Social da pubblicare -->
               <div style="margin-top:14px">
                 <label style="color:rgba(255,255,255,0.85);font-size:0.78rem;display:block;margin-bottom:8px">Pubblica su:</label>
                 <div style="display:flex;gap:10px;flex-wrap:wrap">
@@ -3195,15 +3202,14 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 </div>
               </div>
 
-              <!-- Anteprima Spintax -->
-              <div style="margin-top:16px">
-                <button class="btn btn-sm" onclick="previewScheduledSpintax()" style="background:rgba(206,224,143,0.9);color:#1a237e;font-weight:600;margin-right:8px">Anteprima Spintax</button>
+              <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn btn-sm" onclick="previewScheduledSpintax()" style="background:rgba(206,224,143,0.9);color:#1a237e;font-weight:600">Anteprima Spintax</button>
                 <button class="btn btn-sm" onclick="saveScheduledPost()" style="background:#CEE08F;color:#1a237e;font-weight:700">Programma Pubblicazione</button>
               </div>
               <div id="spintaxPreviewArea" style="display:none;margin-top:12px;background:rgba(0,0,0,0.3);border-radius:8px;padding:14px;font-size:0.78rem;line-height:1.6;white-space:pre-wrap"></div>
             </div>
 
-            <!-- Lista Programmazioni Attive -->
+            <!-- PROGRAMMAZIONI ATTIVE -->
             <div style="margin-top:8px">
               <div style="font-weight:700;font-size:0.9rem;margin-bottom:10px">Programmazioni Attive</div>
               <div id="scheduledPostsList" style="font-size:0.82rem">
@@ -3211,7 +3217,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               </div>
             </div>
 
-            <!-- Log Pubblicazioni -->
+            <!-- LOG -->
             <details style="margin-top:12px">
               <summary style="font-size:0.82rem;cursor:pointer;opacity:0.8">Storico Pubblicazioni Automatiche</summary>
               <div id="scheduleLog" style="max-height:200px;overflow-y:auto;margin-top:8px;font-size:0.72rem;background:rgba(0,0,0,0.2);border-radius:8px;padding:10px;line-height:1.8">
