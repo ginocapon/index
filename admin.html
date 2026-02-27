@@ -963,6 +963,18 @@ tr:hover td { background: rgba(206,224,143,0.06); }
   overflow: hidden;
 }
 
+/* AGENDA RECAP PREVIEW */
+.agenda-recap-date {
+  display: inline-block;
+  padding: 3px 8px;
+  margin: 2px 4px 2px 0;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+.agenda-recap-date.future { background: #fef3e0; color: #e67e22; }
+.agenda-recap-date.past { background: #d4f5e0; color: #1a7a40; }
+
 /* ══════════ KEYWORD STATS ══════════ */
 .kw-stats-wrap {
   margin-top: 28px;
@@ -3338,6 +3350,24 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <div id="socialPublishResult" style="margin-top:12px;font-size:0.82rem;display:none"></div>
           </div>
 
+          <!-- PUBBLICA ARTICOLO BLOG -->
+          <div style="background:white;border:2px solid var(--caffe3);border-radius:12px;padding:18px;margin-top:16px">
+            <h4 style="font-size:1rem;color:var(--nero);margin-bottom:12px">Pubblica Articolo Blog sui Social</h4>
+            <div class="form-group" style="margin-bottom:12px">
+              <label>Seleziona Articolo</label>
+              <select id="socialBlogSelect" style="width:100%" onchange="showSocialBlogPreview(this.value)">
+                <option value="">— Seleziona un articolo —</option>
+              </select>
+            </div>
+            <div id="socialBlogPreview" style="display:none;background:var(--sfondo);border-radius:8px;padding:12px;margin-bottom:12px"></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn btn-sm" onclick="publishBlogToFacebook()" style="background:#1877F2;color:white">Pubblica su Facebook</button>
+              <button class="btn btn-sm" onclick="publishBlogToInstagram()" style="background:linear-gradient(45deg,#f09433,#dc2743);color:white">Pubblica su Instagram</button>
+              <button class="btn btn-sm" onclick="publishBlogToGBP()" style="background:#4285F4;color:white">Pubblica su Google</button>
+            </div>
+            <div id="socialBlogPublishResult" style="margin-top:12px;font-size:0.82rem;display:none"></div>
+          </div>
+
           <!-- GUIDA SETUP -->
           <details style="margin-top:20px">
             <summary style="font-weight:600;font-size:0.9rem;color:var(--nero);cursor:pointer">Come configurare le API</summary>
@@ -3441,55 +3471,70 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <input type="hidden" id="agendaEditId">
             <div class="form-grid">
               <div class="form-group">
-                <label>Tipo Contenuto</label>
+                <label>Piattaforma</label>
                 <select id="agenda_tipo" onchange="agendaTipoChange()">
-                  <option value="blog">Articolo Blog</option>
-                  <option value="immobile">Immobile</option>
-                  <option value="facebook">Post Facebook</option>
-                  <option value="instagram">Post Instagram</option>
+                  <option value="facebook">Facebook</option>
+                  <option value="instagram">Instagram</option>
                   <option value="google">Google Business</option>
+                  <option value="blog">Pubblicazione Blog</option>
                 </select>
               </div>
               <div class="form-group">
-                <label>Stato</label>
-                <select id="agenda_stato">
-                  <option value="programmato">Programmato</option>
-                  <option value="pubblicato">Pubblicato</option>
+                <label>Contenuto</label>
+                <select id="agenda_contenuto" onchange="agendaContenutoChange()">
+                  <option value="immobile">Immobile</option>
+                  <option value="articolo">Articolo Blog</option>
                 </select>
               </div>
-              <div class="form-group">
-                <label>Data</label>
-                <input type="date" id="agenda_data">
-              </div>
-              <div class="form-group">
-                <label>Ora</label>
-                <select id="agenda_ora">
-                  <option value="08:00">08:00</option>
-                  <option value="09:00">09:00</option>
-                  <option value="10:00">10:00</option>
-                  <option value="11:00">11:00</option>
-                  <option value="12:00">12:00</option>
-                  <option value="13:00">13:00</option>
-                  <option value="14:00">14:00</option>
-                  <option value="15:00">15:00</option>
-                  <option value="16:00">16:00</option>
-                  <option value="17:00">17:00</option>
-                  <option value="18:00">18:00</option>
-                  <option value="19:00">19:00</option>
-                  <option value="20:00">20:00</option>
-                  <option value="21:00">21:00</option>
+              <div class="form-group form-full" id="agendaRefWrap">
+                <label id="agendaRefLabel">Seleziona Immobile</label>
+                <select id="agenda_riferimento" onchange="agendaRefChange()">
+                  <option value="">— Seleziona —</option>
                 </select>
               </div>
               <div class="form-group form-full">
                 <label>Titolo / Descrizione</label>
                 <input type="text" id="agenda_titolo" placeholder="Es. Post lancio nuovo appartamento...">
               </div>
-              <div class="form-group form-full" id="agendaRefWrap">
-                <label>Collega a Immobile / Articolo</label>
-                <select id="agenda_riferimento">
-                  <option value="">— Nessun collegamento —</option>
-                </select>
+
+              <div class="section-divider">Programmazione Ricorrente</div>
+
+              <div class="form-group">
+                <label>Orario Pubblicazione</label>
+                <input type="time" id="agenda_ora" value="12:30" step="300">
               </div>
+              <div class="form-group">
+                <label>&nbsp;</label>
+                <p style="font-size:0.75rem;color:var(--caffe2);margin-top:2px">L'orario in cui verr&agrave; pubblicato ogni giorno selezionato</p>
+              </div>
+
+              <div class="form-group form-full">
+                <label>Giorni della Settimana</label>
+                <div class="checks-grid" id="agendaDaysWrap">
+                  <label class="check-item"><input type="checkbox" id="ag_day_1" value="1"> Luned&igrave;</label>
+                  <label class="check-item"><input type="checkbox" id="ag_day_2" value="2"> Marted&igrave;</label>
+                  <label class="check-item"><input type="checkbox" id="ag_day_3" value="3"> Mercoled&igrave;</label>
+                  <label class="check-item"><input type="checkbox" id="ag_day_4" value="4"> Gioved&igrave;</label>
+                  <label class="check-item"><input type="checkbox" id="ag_day_5" value="5"> Venerd&igrave;</label>
+                  <label class="check-item"><input type="checkbox" id="ag_day_6" value="6"> Sabato</label>
+                  <label class="check-item"><input type="checkbox" id="ag_day_0" value="0"> Domenica</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Data Inizio</label>
+                <input type="date" id="agenda_data_inizio">
+              </div>
+              <div class="form-group">
+                <label>Data Fine</label>
+                <input type="date" id="agenda_data_fine">
+              </div>
+
+              <div class="form-group form-full" id="agendaPreviewWrap" style="display:none">
+                <label>Anteprima Pubblicazioni</label>
+                <div id="agendaPreviewDates" style="font-size:0.78rem;color:var(--caffe2);background:var(--sfondo);border-radius:8px;padding:12px;max-height:120px;overflow-y:auto"></div>
+              </div>
+
               <div class="form-group form-full">
                 <label>Parole Chiave (separate da virgola)</label>
                 <input type="text" id="agenda_keywords" placeholder="Es. vendita, padova, appartamento, giardino">
@@ -3503,7 +3548,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           <div class="modal-footer">
             <button class="btn btn-danger btn-sm" id="btnDeleteAgenda" onclick="deleteAgendaItem()" style="display:none;margin-right:auto">Elimina</button>
             <button class="btn btn-secondary" onclick="closeAgendaModal()">Annulla</button>
-            <button class="btn btn-primary" onclick="saveAgendaItem()">Salva</button>
+            <button class="btn btn-primary" onclick="saveAgendaItem()">Salva Programmazione</button>
           </div>
         </div>
       </div>
@@ -5618,6 +5663,16 @@ function loadSocialSection() {
   });
   sel.onchange = function() { showSocialPropertyPreview(this.value); };
 
+  // Populate blog article selector
+  const blogSel = document.getElementById('socialBlogSelect');
+  blogSel.innerHTML = '<option value="">— Seleziona un articolo —</option>';
+  blogArticles.forEach(function(a) {
+    const opt = document.createElement('option');
+    opt.value = a.id;
+    opt.textContent = (a.emoji || '') + ' ' + (a.titolo || 'Senza titolo') + ' — ' + (a.categoria || '') + (a.stato === 'pubblicato' ? ' (Pubblicato)' : ' (Bozza)');
+    blogSel.appendChild(opt);
+  });
+
   // Check GBP
   const gbpLocation = localStorage.getItem('social_gbp_location');
   if (gbpLocation) {
@@ -5689,6 +5744,154 @@ function showPublishResult(msg, type) {
   el.style.display = 'block';
   el.style.color = type === 'error' ? 'var(--rosso)' : 'var(--verde)';
   el.textContent = msg;
+}
+
+function showBlogPublishResult(msg, type) {
+  const el = document.getElementById('socialBlogPublishResult');
+  el.style.display = 'block';
+  el.style.color = type === 'error' ? 'var(--rosso)' : 'var(--verde)';
+  el.textContent = msg;
+}
+
+// ── BLOG SOCIAL PREVIEW & PUBLISH ──
+function showSocialBlogPreview(id) {
+  const preview = document.getElementById('socialBlogPreview');
+  if (!id) { preview.style.display = 'none'; return; }
+  const a = blogArticles.find(function(x) { return x.id == id; });
+  if (!a) { preview.style.display = 'none'; return; }
+  const cover = a.immagine_copertina || '';
+  preview.style.display = 'flex';
+  preview.style.gap = '12px';
+  preview.style.alignItems = 'center';
+  preview.innerHTML = (cover ? '<img src="' + cover + '" style="width:80px;height:60px;object-fit:cover;border-radius:6px" onerror="this.style.display=\'none\'">' : '<div style="width:60px;height:60px;font-size:2rem;text-align:center;line-height:60px">' + (a.emoji || '\uD83D\uDCDD') + '</div>') +
+    '<div><div style="font-weight:600;font-size:0.88rem">' + escHtml(a.titolo || '') + '</div>' +
+    '<div style="font-size:0.78rem;color:var(--caffe2)">' + escHtml(a.categoria || '') + ' | ' + escHtml(a.autore || '') + ' | ' + (a.stato === 'pubblicato' ? 'Pubblicato' : 'Bozza') + '</div></div>';
+}
+
+function buildBlogSocialCaption(a) {
+  var caption = (a.emoji || '\uD83C\uDFE0') + ' ' + (a.titolo || 'Articolo') + '\n\n';
+  // Extract a short excerpt from HTML content
+  var tmp = document.createElement('div');
+  tmp.innerHTML = (a.contenuto || '').replace(/<script[\s\S]*?<\/script>/gi, '').replace(/<style[\s\S]*?<\/style>/gi, '');
+  var txt = (tmp.textContent || '').trim();
+  var excerpt = txt.split(/\s+/).slice(0, 40).join(' ');
+  if (txt.split(/\s+/).length > 40) excerpt += '...';
+  caption += excerpt + '\n\n';
+  caption += 'Leggi l\'articolo completo su righettoimmobiliare.it/blog-articolo.html?s=' + (a.slug || '') + '\n\n';
+  caption += 'Righetto Immobiliare | Tel: 049 884 3484\n';
+  // Hashtags from category
+  var cat = (a.categoria || '').toLowerCase().replace(/\s+/g, '');
+  caption += '#immobiliare #padova #' + cat + ' #blog #righettoimmobiliare';
+  return caption;
+}
+
+async function publishBlogToFacebook() {
+  var id = document.getElementById('socialBlogSelect').value;
+  if (!id) { toast('Seleziona un articolo', 'error'); return; }
+  var a = blogArticles.find(function(x) { return x.id == id; });
+  if (!a) return;
+
+  var pageId = localStorage.getItem('social_fb_page_id');
+  var token = localStorage.getItem('social_fb_token');
+  if (!pageId || !token) { toast('Configura Facebook prima (Page ID + Token)', 'error'); return; }
+
+  var caption = buildBlogSocialCaption(a);
+  var cover = a.immagine_copertina || '';
+  var link = 'https://www.righettoimmobiliare.it/blog-articolo.html?s=' + (a.slug || '');
+
+  try {
+    toast('Pubblicazione articolo su Facebook...', 'success');
+    var res;
+    if (cover) {
+      res = await fetch('https://graph.facebook.com/v21.0/' + pageId + '/photos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: cover, caption: caption, access_token: token })
+      });
+    } else {
+      res = await fetch('https://graph.facebook.com/v21.0/' + pageId + '/feed', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: caption, link: link, access_token: token })
+      });
+    }
+    var data = await res.json();
+    if (data.error) { showBlogPublishResult('Errore: ' + data.error.message, 'error'); return; }
+    showBlogPublishResult('Articolo pubblicato su Facebook! ID: ' + (data.id || data.post_id), 'success');
+  } catch(e) {
+    showBlogPublishResult('Errore di rete: ' + e.message, 'error');
+  }
+}
+
+async function publishBlogToInstagram() {
+  var id = document.getElementById('socialBlogSelect').value;
+  if (!id) { toast('Seleziona un articolo', 'error'); return; }
+  var a = blogArticles.find(function(x) { return x.id == id; });
+  if (!a) return;
+
+  var igAccountId = localStorage.getItem('social_ig_account_id');
+  var token = localStorage.getItem('social_ig_token');
+  if (!igAccountId || !token) { toast('Configura Instagram prima', 'error'); return; }
+
+  var cover = a.immagine_copertina || '';
+  if (!cover) { toast('L\'articolo deve avere un\'immagine di copertina per Instagram', 'error'); return; }
+
+  var caption = buildBlogSocialCaption(a);
+
+  try {
+    toast('Pubblicazione articolo su Instagram...', 'success');
+    var createRes = await fetch('https://graph.facebook.com/v21.0/' + igAccountId + '/media', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ image_url: cover, caption: caption, access_token: token })
+    });
+    var createData = await createRes.json();
+    if (createData.error) { showBlogPublishResult('Errore: ' + createData.error.message, 'error'); return; }
+
+    var publishRes = await fetch('https://graph.facebook.com/v21.0/' + igAccountId + '/media_publish', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ creation_id: createData.id, access_token: token })
+    });
+    var publishData = await publishRes.json();
+    if (publishData.error) { showBlogPublishResult('Errore pubblicazione: ' + publishData.error.message, 'error'); return; }
+    showBlogPublishResult('Articolo pubblicato su Instagram! ID: ' + publishData.id, 'success');
+  } catch(e) {
+    showBlogPublishResult('Errore di rete: ' + e.message, 'error');
+  }
+}
+
+async function publishBlogToGBP() {
+  var id = document.getElementById('socialBlogSelect').value;
+  if (!id) { toast('Seleziona un articolo', 'error'); return; }
+  var a = blogArticles.find(function(x) { return x.id == id; });
+  if (!a) return;
+
+  var gbpLocation = localStorage.getItem('social_gbp_location');
+  var gbpToken = localStorage.getItem('social_gbp_token');
+  if (!gbpLocation || !gbpToken) { toast('Configura Google Business Profile prima', 'error'); return; }
+
+  var link = 'https://www.righettoimmobiliare.it/blog-articolo.html?s=' + (a.slug || '');
+  var summary = (a.emoji || '') + ' ' + (a.titolo || '') + ' - ' + (a.categoria || '');
+
+  try {
+    toast('Pubblicazione articolo su Google Business...', 'success');
+    var res = await fetch('https://mybusiness.googleapis.com/v4/' + gbpLocation + '/localPosts', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + gbpToken, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        topicType: 'STANDARD',
+        languageCode: 'it',
+        summary: summary.substring(0, 1500),
+        callToAction: { actionType: 'LEARN_MORE', url: link }
+      })
+    });
+    var data = await res.json();
+    if (data.error) { showBlogPublishResult('Errore: ' + (data.error.message || JSON.stringify(data.error)), 'error'); return; }
+    showBlogPublishResult('Articolo pubblicato su Google Business!', 'success');
+  } catch(e) {
+    showBlogPublishResult('Errore di rete: ' + e.message, 'error');
+  }
 }
 
 // ── FACEBOOK PUBLISHING ──
@@ -6095,11 +6298,12 @@ function generateTikTokImage() {
 // AGENDA SETTIMANALE (Stile Publer)
 // ══════════════════════════════════════
 
-let agendaItems = [];
-let agendaWeekStart = null; // Monday of current view week
-let kwViews = {}; // keyword view tracking
+let agendaSchedules = [];   // recurring schedule definitions
+let agendaExpanded = [];     // expanded single-day occurrences for current view
+let agendaWeekStart = null;
+let kwViews = {};
 
-// Initialize week to current Monday
+// ── Helpers ──
 function getMonday(d) {
   const dt = new Date(d);
   const day = dt.getDay();
@@ -6108,45 +6312,74 @@ function getMonday(d) {
   dt.setHours(0,0,0,0);
   return dt;
 }
+function initAgendaWeek() { agendaWeekStart = getMonday(new Date()); }
+function agendaPrevWeek() { agendaWeekStart.setDate(agendaWeekStart.getDate() - 7); renderAgendaGrid(); }
+function agendaNextWeek() { agendaWeekStart.setDate(agendaWeekStart.getDate() + 7); renderAgendaGrid(); }
+function agendaToday()    { agendaWeekStart = getMonday(new Date()); renderAgendaGrid(); }
 
-function initAgendaWeek() {
-  agendaWeekStart = getMonday(new Date());
+function dateFmt(d) { return d.toISOString().split('T')[0]; }
+
+// JS getDay(): 0=Sun,1=Mon…6=Sat
+// Our checkboxes use same convention: 0=Sun,1=Mon…6=Sat
+function expandScheduleForWeek(sched, weekStart) {
+  var results = [];
+  var giorni = sched.giorni || [];
+  if (!giorni.length) return results;
+  var ora = sched.ora || '12:00';
+  var inizio = new Date(sched.data_inizio + 'T00:00:00');
+  var fine   = new Date(sched.data_fine   + 'T23:59:59');
+  var now = new Date();
+
+  for (var i = 0; i < 7; i++) {
+    var d = new Date(weekStart);
+    d.setDate(d.getDate() + i);
+    d.setHours(0,0,0,0);
+    var jsDay = d.getDay(); // 0=Sun
+    if (giorni.indexOf(jsDay) === -1) continue;
+    if (d < inizio || d > fine) continue;
+
+    // Determine status: past = pubblicato, future = programmato
+    var slotTime = new Date(d);
+    var parts = ora.split(':');
+    slotTime.setHours(parseInt(parts[0]) || 0, parseInt(parts[1]) || 0, 0, 0);
+    var stato = slotTime <= now ? 'pubblicato' : 'programmato';
+
+    results.push({
+      id: sched.id,
+      schedule_id: sched.id,
+      tipo: sched.tipo,
+      contenuto: sched.contenuto,
+      titolo: sched.titolo,
+      riferimento_id: sched.riferimento_id,
+      keywords: sched.keywords || [],
+      ora: ora,
+      data: dateFmt(d),
+      stato: stato
+    });
+  }
+  return results;
 }
 
-function agendaPrevWeek() {
-  agendaWeekStart.setDate(agendaWeekStart.getDate() - 7);
-  renderAgendaGrid();
-}
-
-function agendaNextWeek() {
-  agendaWeekStart.setDate(agendaWeekStart.getDate() + 7);
-  renderAgendaGrid();
-}
-
-function agendaToday() {
-  agendaWeekStart = getMonday(new Date());
-  renderAgendaGrid();
-}
-
-async function getAgendaItems() {
+// ── Data persistence ──
+async function getAgendaSchedules() {
   try {
-    const { data, error } = await sb.from('pianificazioni').select('*').order('data_programmata', { ascending: true });
-    if (error) throw error;
-    agendaItems = data || [];
+    var resp = await sb.from('pianificazioni').select('*').order('created_at', { ascending: false });
+    if (resp.error) throw resp.error;
+    agendaSchedules = resp.data || [];
   } catch(e) {
     console.warn('Tabella pianificazioni non disponibile, uso localStorage:', e.message);
-    try { agendaItems = JSON.parse(localStorage.getItem('rig_agenda_items') || '[]'); } catch(ex) { agendaItems = []; }
+    try { agendaSchedules = JSON.parse(localStorage.getItem('rig_agenda_schedules') || '[]'); } catch(ex) { agendaSchedules = []; }
   }
-  try { localStorage.setItem('rig_agenda_items', JSON.stringify(agendaItems)); } catch(e) {}
-  return agendaItems;
+  try { localStorage.setItem('rig_agenda_schedules', JSON.stringify(agendaSchedules)); } catch(e) {}
+  return agendaSchedules;
 }
 
 async function getKwViews() {
   try {
-    const { data, error } = await sb.from('visualizzazioni_kw').select('*');
-    if (error) throw error;
+    var resp = await sb.from('visualizzazioni_kw').select('*');
+    if (resp.error) throw resp.error;
     kwViews = {};
-    (data || []).forEach(function(row) {
+    (resp.data || []).forEach(function(row) {
       if (!kwViews[row.keyword]) kwViews[row.keyword] = [];
       kwViews[row.keyword].push(row);
     });
@@ -6156,82 +6389,106 @@ async function getKwViews() {
   return kwViews;
 }
 
+// ── Load section ──
 async function loadAgendaSection() {
   if (!agendaWeekStart) initAgendaWeek();
-  await getAgendaItems();
+  await getAgendaSchedules();
   await getKwViews();
   renderAgendaGrid();
   updateAgendaStats();
   renderKeywordStats();
 }
 
+// ── Expand all schedules for the current view week ──
+function expandAllForWeek() {
+  agendaExpanded = [];
+  agendaSchedules.forEach(function(sched) {
+    var items = expandScheduleForWeek(sched, agendaWeekStart);
+    agendaExpanded = agendaExpanded.concat(items);
+  });
+}
+
+// ── Render the weekly grid ──
 function renderAgendaGrid() {
-  const grid = document.getElementById('agendaGrid');
-  const days = ['Lun','Mar','Mer','Gio','Ven','Sab','Dom'];
-  const hours = ['08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00'];
-  const today = new Date();
+  expandAllForWeek();
+
+  var grid = document.getElementById('agendaGrid');
+  var dayNames = ['Lun','Mar','Mer','Gio','Ven','Sab','Dom'];
+  // Half-hour slots from 08:00 to 21:30
+  var hours = [];
+  for (var h = 8; h <= 21; h++) {
+    hours.push((h < 10 ? '0' : '') + h + ':00');
+    hours.push((h < 10 ? '0' : '') + h + ':30');
+  }
+
+  var today = new Date();
   today.setHours(0,0,0,0);
 
-  // Week dates
-  const weekDates = [];
-  for (let i = 0; i < 7; i++) {
-    const d = new Date(agendaWeekStart);
+  var weekDates = [];
+  for (var i = 0; i < 7; i++) {
+    var d = new Date(agendaWeekStart);
     d.setDate(d.getDate() + i);
     weekDates.push(d);
   }
 
-  // Update week label
-  const startLabel = agendaWeekStart.toLocaleDateString('it-IT', { day: 'numeric', month: 'short' });
-  const endDate = new Date(agendaWeekStart);
+  // Week label
+  var startLabel = agendaWeekStart.toLocaleDateString('it-IT', { day: 'numeric', month: 'short' });
+  var endDate = new Date(agendaWeekStart);
   endDate.setDate(endDate.getDate() + 6);
-  const endLabel = endDate.toLocaleDateString('it-IT', { day: 'numeric', month: 'short', year: 'numeric' });
-  document.getElementById('agendaWeekLabel').textContent = startLabel + ' — ' + endLabel;
+  var endLabel = endDate.toLocaleDateString('it-IT', { day: 'numeric', month: 'short', year: 'numeric' });
+  document.getElementById('agendaWeekLabel').textContent = startLabel + ' \u2014 ' + endLabel;
 
-  let html = '';
-
-  // Corner cell
-  html += '<div class="agenda-corner">Ora</div>';
+  var html = '<div class="agenda-corner">Ora</div>';
 
   // Day headers
-  for (let i = 0; i < 7; i++) {
-    const d = weekDates[i];
-    const isToday = d.getTime() === today.getTime();
+  for (var i = 0; i < 7; i++) {
+    var d = weekDates[i];
+    var isToday = d.getTime() === today.getTime();
     html += '<div class="agenda-day-header' + (isToday ? ' today' : '') + '">';
-    html += '<div class="day-name">' + days[i] + '</div>';
+    html += '<div class="day-name">' + dayNames[i] + '</div>';
     html += '<div class="day-num">' + d.getDate() + '</div>';
     html += '</div>';
   }
 
+  // Map items into hourly slots (round to nearest half-hour)
+  function slotKey(dateStr, hour) { return dateStr + '|' + hour; }
+  var slotMap = {};
+  agendaExpanded.forEach(function(item) {
+    // Round item time to nearest half-hour slot
+    var timeParts = (item.ora || '12:00').split(':');
+    var hh = parseInt(timeParts[0]) || 12;
+    var mm = parseInt(timeParts[1]) || 0;
+    mm = mm < 15 ? 0 : mm < 45 ? 30 : (hh++, 0);
+    if (hh > 21) { hh = 21; mm = 30; }
+    if (hh < 8) { hh = 8; mm = 0; }
+    var slot = (hh < 10 ? '0' : '') + hh + ':' + (mm === 0 ? '00' : '30');
+    var key = slotKey(item.data, slot);
+    if (!slotMap[key]) slotMap[key] = [];
+    slotMap[key].push(item);
+  });
+
   // Hour rows
   hours.forEach(function(hour) {
-    // Hour label
     html += '<div class="agenda-hour">' + hour + '</div>';
-
-    // Day cells
-    for (let i = 0; i < 7; i++) {
-      const d = weekDates[i];
-      const isToday = d.getTime() === today.getTime();
-      const dateStr = d.toISOString().split('T')[0];
-
-      // Find items in this slot
-      const cellItems = agendaItems.filter(function(item) {
-        const itemDate = (item.data_programmata || '').split('T')[0];
-        const itemHour = (item.ora || '08:00');
-        return itemDate === dateStr && itemHour === hour;
-      });
+    for (var i = 0; i < 7; i++) {
+      var d = weekDates[i];
+      var isToday = d.getTime() === today.getTime();
+      var dateStr = dateFmt(d);
+      var key = slotKey(dateStr, hour);
+      var cellItems = slotMap[key] || [];
 
       html += '<div class="agenda-cell' + (isToday ? ' today-col' : '') + '" onclick="openAgendaNewItem(\'' + dateStr + '\',\'' + hour + '\')">';
 
       cellItems.forEach(function(item) {
-        const tipoClass = 'tipo-' + (item.tipo || 'blog');
-        const statoClass = 'stato-' + (item.stato || 'programmato');
-        const statusIcon = item.stato === 'pubblicato'
+        var tipoClass = 'tipo-' + (item.tipo || 'blog');
+        var statoClass = 'stato-' + (item.stato || 'programmato');
+        var statusIcon = item.stato === 'pubblicato'
           ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#27ae60" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>'
           : '<svg width="14" height="14" viewBox="0 0 24 24" fill="#e67e22"><path d="M6 2v6l4 4-4 4v6h12v-6l-4-4 4-4V2H6zm10 15.5V20H8v-2.5l4-4 4 4zm-4-5l-4-4V4h8v4.5l-4 4z"/></svg>';
+        var iconSvg = getAgendaTypeIcon(item.tipo);
+        var timeLabel = item.ora || '';
 
-        const iconSvg = getAgendaTypeIcon(item.tipo);
-
-        html += '<div class="agenda-item ' + tipoClass + ' ' + statoClass + '" onclick="event.stopPropagation();editAgendaItem(\'' + item.id + '\')" title="' + escHtml(item.titolo || '') + '">';
+        html += '<div class="agenda-item ' + tipoClass + ' ' + statoClass + '" onclick="event.stopPropagation();editAgendaItem(\'' + item.schedule_id + '\')" title="' + escHtml(item.titolo || '') + ' (' + timeLabel + ')">';
         html += '<span class="item-icon">' + iconSvg + '</span>';
         html += '<span class="item-title">' + escHtml(item.titolo || item.tipo || '') + '</span>';
         html += '<span class="item-status">' + statusIcon + '</span>';
@@ -6252,172 +6509,294 @@ function getAgendaTypeIcon(tipo) {
     case 'facebook': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>';
     case 'instagram': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/></svg>';
     case 'google': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/></svg>';
-    case 'immobile': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>';
     default: return '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>';
   }
 }
 
+// ── Stats ──
 function updateAgendaStats() {
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  const todayStr = today.toISOString().split('T')[0];
+  var today = new Date(); today.setHours(0,0,0,0);
+  var todayStr = dateFmt(today);
+  var now = new Date();
 
-  const tot = agendaItems.filter(function(a) { return a.stato === 'programmato'; }).length;
-  const pub = agendaItems.filter(function(a) { return a.stato === 'pubblicato'; }).length;
-  const todayItems = agendaItems.filter(function(a) { return (a.data_programmata || '').split('T')[0] === todayStr; }).length;
+  // Expand ALL occurrences (not just this week) for stats
+  var allExpanded = [];
+  agendaSchedules.forEach(function(sched) {
+    var giorni = sched.giorni || [];
+    var inizio = new Date(sched.data_inizio + 'T00:00:00');
+    var fine   = new Date(sched.data_fine   + 'T23:59:59');
+    var d = new Date(inizio);
+    while (d <= fine) {
+      var jsDay = d.getDay();
+      if (giorni.indexOf(jsDay) !== -1) {
+        var slotTime = new Date(d);
+        var parts = (sched.ora || '12:00').split(':');
+        slotTime.setHours(parseInt(parts[0]) || 0, parseInt(parts[1]) || 0);
+        allExpanded.push({
+          data: dateFmt(d),
+          stato: slotTime <= now ? 'pubblicato' : 'programmato'
+        });
+      }
+      d.setDate(d.getDate() + 1);
+    }
+  });
 
-  // Current week
-  const weekEnd = new Date(agendaWeekStart);
-  weekEnd.setDate(weekEnd.getDate() + 7);
-  const weekItems = agendaItems.filter(function(a) {
-    const d = new Date((a.data_programmata || '').split('T')[0]);
-    return d >= agendaWeekStart && d < weekEnd;
-  }).length;
+  var tot = allExpanded.filter(function(a) { return a.stato === 'programmato'; }).length;
+  var pub = allExpanded.filter(function(a) { return a.stato === 'pubblicato'; }).length;
+  var todayCount = allExpanded.filter(function(a) { return a.data === todayStr; }).length;
+  var weekCount = agendaExpanded.length;
 
   document.getElementById('statAgendaTot').textContent = tot;
   document.getElementById('statAgendaPub').textContent = pub;
-  document.getElementById('statAgendaOggi').textContent = todayItems;
-  document.getElementById('statAgendaSettimana').textContent = weekItems;
+  document.getElementById('statAgendaOggi').textContent = todayCount;
+  document.getElementById('statAgendaSettimana').textContent = weekCount;
 }
 
+// ── Open modal for NEW schedule ──
 function openAgendaNewItem(dateStr, hour) {
   document.getElementById('agendaEditId').value = '';
-  document.getElementById('agendaModalTitle').textContent = 'Programma Pubblicazione';
-  document.getElementById('agenda_tipo').value = 'blog';
-  document.getElementById('agenda_stato').value = 'programmato';
-  document.getElementById('agenda_data').value = dateStr || new Date().toISOString().split('T')[0];
-  document.getElementById('agenda_ora').value = hour || '10:00';
+  document.getElementById('agendaModalTitle').textContent = 'Programma Pubblicazione Ricorrente';
+  document.getElementById('agenda_tipo').value = 'facebook';
+  document.getElementById('agenda_contenuto').value = 'immobile';
   document.getElementById('agenda_titolo').value = '';
+  document.getElementById('agenda_ora').value = hour || '12:30';
   document.getElementById('agenda_keywords').value = '';
   document.getElementById('agenda_note').value = '';
   document.getElementById('btnDeleteAgenda').style.display = 'none';
+
+  // Date defaults
+  var startDate = dateStr || dateFmt(new Date());
+  document.getElementById('agenda_data_inizio').value = startDate;
+  var endDef = new Date(startDate);
+  endDef.setMonth(endDef.getMonth() + 1);
+  document.getElementById('agenda_data_fine').value = dateFmt(endDef);
+
+  // Reset day checkboxes
+  for (var d = 0; d <= 6; d++) document.getElementById('ag_day_' + d).checked = false;
+  // Pre-check the day of the clicked date
+  if (dateStr) {
+    var clickedDay = new Date(dateStr + 'T12:00:00').getDay();
+    document.getElementById('ag_day_' + clickedDay).checked = true;
+  }
+
   populateAgendaRefSelect();
   document.getElementById('agenda_riferimento').value = '';
+  agendaPreviewDates();
   document.getElementById('agendaModal').classList.add('open');
+
+  // Bind live preview
+  bindAgendaPreviewListeners();
 }
 
+// ── Open modal for EDIT schedule ──
 function editAgendaItem(id) {
-  const item = agendaItems.find(function(a) { return a.id === id; });
-  if (!item) return;
-  document.getElementById('agendaEditId').value = item.id;
+  var sched = agendaSchedules.find(function(a) { return a.id === id; });
+  if (!sched) return;
+  document.getElementById('agendaEditId').value = sched.id;
   document.getElementById('agendaModalTitle').textContent = 'Modifica Programmazione';
-  document.getElementById('agenda_tipo').value = item.tipo || 'blog';
-  document.getElementById('agenda_stato').value = item.stato || 'programmato';
-  document.getElementById('agenda_data').value = (item.data_programmata || '').split('T')[0];
-  document.getElementById('agenda_ora').value = item.ora || '10:00';
-  document.getElementById('agenda_titolo').value = item.titolo || '';
-  document.getElementById('agenda_keywords').value = (item.keywords || []).join(', ');
-  document.getElementById('agenda_note').value = item.note || '';
+  document.getElementById('agenda_tipo').value = sched.tipo || 'facebook';
+  document.getElementById('agenda_contenuto').value = sched.contenuto || 'immobile';
+  document.getElementById('agenda_titolo').value = sched.titolo || '';
+  document.getElementById('agenda_ora').value = sched.ora || '12:30';
+  document.getElementById('agenda_data_inizio').value = sched.data_inizio || '';
+  document.getElementById('agenda_data_fine').value = sched.data_fine || '';
+  document.getElementById('agenda_keywords').value = (sched.keywords || []).join(', ');
+  document.getElementById('agenda_note').value = sched.note || '';
   document.getElementById('btnDeleteAgenda').style.display = '';
+
+  // Set day checkboxes
+  var giorni = sched.giorni || [];
+  for (var d = 0; d <= 6; d++) document.getElementById('ag_day_' + d).checked = giorni.indexOf(d) !== -1;
+
   populateAgendaRefSelect();
-  document.getElementById('agenda_riferimento').value = item.riferimento_id || '';
+  document.getElementById('agenda_riferimento').value = sched.riferimento_id || '';
+  agendaPreviewDates();
   document.getElementById('agendaModal').classList.add('open');
+  bindAgendaPreviewListeners();
 }
 
 function closeAgendaModal() {
   document.getElementById('agendaModal').classList.remove('open');
+  unbindAgendaPreviewListeners();
 }
 
-function agendaTipoChange() {
-  populateAgendaRefSelect();
+// ── Live preview of dates ──
+var _agendaPreviewBound = false;
+function bindAgendaPreviewListeners() {
+  if (_agendaPreviewBound) return;
+  _agendaPreviewBound = true;
+  var ids = ['agenda_data_inizio','agenda_data_fine','agenda_ora'];
+  ids.forEach(function(id) { document.getElementById(id).addEventListener('change', agendaPreviewDates); });
+  for (var d = 0; d <= 6; d++) document.getElementById('ag_day_' + d).addEventListener('change', agendaPreviewDates);
+}
+function unbindAgendaPreviewListeners() {
+  _agendaPreviewBound = false;
+  var ids = ['agenda_data_inizio','agenda_data_fine','agenda_ora'];
+  ids.forEach(function(id) { document.getElementById(id).removeEventListener('change', agendaPreviewDates); });
+  for (var d = 0; d <= 6; d++) document.getElementById('ag_day_' + d).removeEventListener('change', agendaPreviewDates);
+}
+
+function agendaPreviewDates() {
+  var wrap = document.getElementById('agendaPreviewWrap');
+  var container = document.getElementById('agendaPreviewDates');
+  var inizio = document.getElementById('agenda_data_inizio').value;
+  var fine = document.getElementById('agenda_data_fine').value;
+  var ora = document.getElementById('agenda_ora').value || '12:30';
+  var giorni = [];
+  for (var d = 0; d <= 6; d++) {
+    if (document.getElementById('ag_day_' + d).checked) giorni.push(d);
+  }
+
+  if (!inizio || !fine || !giorni.length) { wrap.style.display = 'none'; return; }
+
+  var dates = [];
+  var start = new Date(inizio + 'T00:00:00');
+  var end = new Date(fine + 'T23:59:59');
+  var now = new Date();
+  var cursor = new Date(start);
+  var limit = 200;
+
+  while (cursor <= end && dates.length < limit) {
+    if (giorni.indexOf(cursor.getDay()) !== -1) {
+      var slotTime = new Date(cursor);
+      var parts = ora.split(':');
+      slotTime.setHours(parseInt(parts[0]) || 0, parseInt(parts[1]) || 0);
+      dates.push({ date: new Date(cursor), past: slotTime <= now });
+    }
+    cursor.setDate(cursor.getDate() + 1);
+  }
+
+  if (!dates.length) { wrap.style.display = 'none'; return; }
+
+  var dayLabels = ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'];
+  wrap.style.display = '';
+  container.innerHTML = '<strong style="font-size:0.72rem;color:var(--nero)">' + dates.length + ' pubblicazioni programmate (' + ora + ')</strong><br style="margin-bottom:6px">' +
+    dates.map(function(dd) {
+      var cls = dd.past ? 'past' : 'future';
+      var icon = dd.past ? '\u2705' : '\u23F3';
+      return '<span class="agenda-recap-date ' + cls + '">' + icon + ' ' + dayLabels[dd.date.getDay()] + ' ' + dd.date.toLocaleDateString('it-IT', { day:'numeric', month:'short' }) + '</span>';
+    }).join('');
+}
+
+// ── Content type switching ──
+function agendaTipoChange() { populateAgendaRefSelect(); }
+function agendaContenutoChange() { populateAgendaRefSelect(); }
+function agendaRefChange() {
+  var sel = document.getElementById('agenda_riferimento');
+  var titolo = document.getElementById('agenda_titolo');
+  if (sel.value && sel.selectedOptions[0] && !titolo.value.trim()) {
+    titolo.value = sel.selectedOptions[0].textContent.trim().substring(0, 80);
+  }
 }
 
 function populateAgendaRefSelect() {
-  const tipo = document.getElementById('agenda_tipo').value;
-  const sel = document.getElementById('agenda_riferimento');
-  sel.innerHTML = '<option value="">— Nessun collegamento —</option>';
+  var contenuto = document.getElementById('agenda_contenuto').value;
+  var sel = document.getElementById('agenda_riferimento');
+  var label = document.getElementById('agendaRefLabel');
+  sel.innerHTML = '<option value="">\u2014 Seleziona \u2014</option>';
 
-  if (tipo === 'blog') {
+  if (contenuto === 'articolo') {
+    label.textContent = 'Seleziona Articolo Blog';
     blogArticles.forEach(function(a) {
-      const opt = document.createElement('option');
+      var opt = document.createElement('option');
       opt.value = a.id;
-      opt.textContent = (a.emoji || '') + ' ' + (a.titolo || 'Senza titolo');
+      opt.textContent = (a.emoji || '') + ' ' + (a.titolo || 'Senza titolo') + ' \u2014 ' + (a.categoria || '');
       sel.appendChild(opt);
     });
-  } else if (tipo === 'immobile' || tipo === 'facebook' || tipo === 'instagram' || tipo === 'google') {
+  } else {
+    label.textContent = 'Seleziona Immobile';
     allImmobili.forEach(function(i) {
-      const opt = document.createElement('option');
+      var opt = document.createElement('option');
       opt.value = i.id;
-      opt.textContent = (i.codice || '') + ' — ' + (i.titolo || 'Senza titolo') + ' — ' + (i.comune || '');
+      opt.textContent = (i.codice || '') + ' \u2014 ' + (i.titolo || 'Senza titolo') + ' \u2014 ' + (i.comune || '');
       sel.appendChild(opt);
     });
   }
 }
 
+// ── Save schedule ──
 async function saveAgendaItem() {
-  const titolo = document.getElementById('agenda_titolo').value.trim();
+  var titolo = document.getElementById('agenda_titolo').value.trim();
   if (!titolo) { toast('Inserisci un titolo', 'error'); return; }
+  var inizio = document.getElementById('agenda_data_inizio').value;
+  var fine = document.getElementById('agenda_data_fine').value;
+  if (!inizio || !fine) { toast('Inserisci data inizio e fine', 'error'); return; }
+  if (fine < inizio) { toast('La data fine deve essere dopo la data inizio', 'error'); return; }
 
-  const editId = document.getElementById('agendaEditId').value;
-  const kwRaw = document.getElementById('agenda_keywords').value;
-  const keywords = kwRaw.split(',').map(function(k) { return k.trim().toLowerCase(); }).filter(Boolean);
+  var giorni = [];
+  for (var d = 0; d <= 6; d++) {
+    if (document.getElementById('ag_day_' + d).checked) giorni.push(d);
+  }
+  if (!giorni.length) { toast('Seleziona almeno un giorno della settimana', 'error'); return; }
 
-  const payload = {
+  var editId = document.getElementById('agendaEditId').value;
+  var kwRaw = document.getElementById('agenda_keywords').value;
+  var keywords = kwRaw.split(',').map(function(k) { return k.trim().toLowerCase(); }).filter(Boolean);
+
+  var payload = {
     tipo: document.getElementById('agenda_tipo').value,
-    stato: document.getElementById('agenda_stato').value,
-    data_programmata: document.getElementById('agenda_data').value,
-    ora: document.getElementById('agenda_ora').value,
+    contenuto: document.getElementById('agenda_contenuto').value,
     titolo: titolo,
     riferimento_id: document.getElementById('agenda_riferimento').value || null,
+    ora: document.getElementById('agenda_ora').value || '12:30',
+    giorni: giorni,
+    data_inizio: inizio,
+    data_fine: fine,
     keywords: keywords,
     note: document.getElementById('agenda_note').value.trim(),
     updated_at: new Date().toISOString()
   };
 
-  // Track keyword views if published
-  if (payload.stato === 'pubblicato' && keywords.length > 0) {
-    trackKeywordViews(keywords, payload.tipo, payload.titolo);
-  }
-
   try {
-    let error;
+    var error;
     if (editId) {
-      const res = await sb.from('pianificazioni').update(payload).eq('id', editId);
+      var res = await sb.from('pianificazioni').update(payload).eq('id', editId);
       error = res.error;
     } else {
-      const res = await sb.from('pianificazioni').insert(payload);
+      payload.created_at = new Date().toISOString();
+      var res = await sb.from('pianificazioni').insert(payload);
       error = res.error;
     }
     if (error) throw error;
     toast('Programmazione salvata!', 'success');
   } catch(e) {
-    console.warn('Errore salvataggio agenda su Supabase:', e.message);
-    // Fallback localStorage
-    const item = { ...payload, id: editId || 'agenda_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6) };
+    console.warn('Errore salvataggio su Supabase:', e.message);
+    var item = Object.assign({}, payload, { id: editId || 'sched_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6) });
     if (editId) {
-      const idx = agendaItems.findIndex(function(a) { return a.id === editId; });
-      if (idx >= 0) agendaItems[idx] = item;
-      else agendaItems.push(item);
+      var idx = agendaSchedules.findIndex(function(a) { return a.id === editId; });
+      if (idx >= 0) agendaSchedules[idx] = item;
+      else agendaSchedules.push(item);
     } else {
-      agendaItems.push(item);
+      agendaSchedules.push(item);
     }
-    try { localStorage.setItem('rig_agenda_items', JSON.stringify(agendaItems)); } catch(ex) {}
+    try { localStorage.setItem('rig_agenda_schedules', JSON.stringify(agendaSchedules)); } catch(ex) {}
     toast('Salvato in locale', 'success');
   }
 
   closeAgendaModal();
-  await getAgendaItems();
+  await getAgendaSchedules();
   renderAgendaGrid();
   renderKeywordStats();
 }
 
+// ── Delete schedule ──
 async function deleteAgendaItem() {
-  const id = document.getElementById('agendaEditId').value;
+  var id = document.getElementById('agendaEditId').value;
   if (!id) return;
-  if (!confirm('Eliminare questa programmazione?')) return;
+  if (!confirm('Eliminare questa programmazione ricorrente e tutte le occorrenze?')) return;
 
   try {
-    const { error } = await sb.from('pianificazioni').delete().eq('id', id);
-    if (error) throw error;
+    var resp = await sb.from('pianificazioni').delete().eq('id', id);
+    if (resp.error) throw resp.error;
     toast('Programmazione eliminata', 'success');
   } catch(e) {
-    agendaItems = agendaItems.filter(function(a) { return a.id !== id; });
-    try { localStorage.setItem('rig_agenda_items', JSON.stringify(agendaItems)); } catch(ex) {}
+    agendaSchedules = agendaSchedules.filter(function(a) { return a.id !== id; });
+    try { localStorage.setItem('rig_agenda_schedules', JSON.stringify(agendaSchedules)); } catch(ex) {}
     toast('Programmazione eliminata (locale)', 'success');
   }
 
   closeAgendaModal();
-  await getAgendaItems();
+  await getAgendaSchedules();
   renderAgendaGrid();
 }
 
@@ -6456,20 +6835,34 @@ function buildKeywordAnalysis() {
   const now = new Date();
   const cutoff = periodo > 0 ? new Date(now.getTime() - periodo * 86400000) : null;
 
-  // Aggregate from agenda items keywords
+  // Aggregate from agenda schedules
   const kwMap = {};
 
-  agendaItems.forEach(function(item) {
-    const kws = item.keywords || [];
-    const itemDate = new Date(item.data_programmata || item.updated_at || 0);
-    if (cutoff && itemDate < cutoff) return;
+  agendaSchedules.forEach(function(sched) {
+    const kws = sched.keywords || [];
+    if (!kws.length) return;
+    // Count how many total occurrences this schedule generates
+    var giorni = sched.giorni || [];
+    var inizio = new Date(sched.data_inizio + 'T00:00:00');
+    var fine = new Date(sched.data_fine + 'T23:59:59');
+    var now = new Date();
+    var d = new Date(inizio);
+    var totalOccurrences = 0, pubOccurrences = 0;
+    while (d <= fine) {
+      if (giorni.indexOf(d.getDay()) !== -1) {
+        if (cutoff && d < cutoff) { d.setDate(d.getDate() + 1); continue; }
+        totalOccurrences++;
+        if (d <= now) pubOccurrences++;
+      }
+      d.setDate(d.getDate() + 1);
+    }
 
     kws.forEach(function(kw) {
       if (!kwMap[kw]) kwMap[kw] = { keyword: kw, count: 0, published: 0, views: 0, types: {} };
-      kwMap[kw].count++;
-      if (item.stato === 'pubblicato') kwMap[kw].published++;
-      if (!kwMap[kw].types[item.tipo]) kwMap[kw].types[item.tipo] = 0;
-      kwMap[kw].types[item.tipo]++;
+      kwMap[kw].count += totalOccurrences;
+      kwMap[kw].published += pubOccurrences;
+      if (!kwMap[kw].types[sched.tipo]) kwMap[kw].types[sched.tipo] = 0;
+      kwMap[kw].types[sched.tipo] += totalOccurrences;
     });
   });
 
