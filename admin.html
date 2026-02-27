@@ -3310,10 +3310,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <div style="font-size:0.75rem;color:var(--caffe2)" id="gbpStatus">Non configurato</div>
               </div>
             </div>
-            <p style="font-size:0.78rem;color:var(--caffe2);margin-bottom:10px">Usa lo stesso Google Client ID configurato per la Posta. Verr&agrave; richiesto il permesso aggiuntivo per Business Profile.</p>
-            <div style="display:flex;gap:8px">
+            <p style="font-size:0.78rem;color:var(--caffe2);margin-bottom:10px">Usa lo stesso Google Client ID configurato per la Posta. Assicurati di aver abilitato le API "My Business Account Management", "My Business Business Information" e "Google My Business" nella <a href="https://console.cloud.google.com/apis/library" target="_blank" style="color:var(--caffe)">Google Cloud Console</a>.</p>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
               <button class="btn btn-sm btn-secondary" onclick="connectGBP()">Connetti Google Business</button>
-              <span id="gbpAccount" style="font-size:0.82rem;color:var(--nero);align-self:center"></span>
+              <span id="gbpAccount" style="font-size:0.82rem;color:var(--nero)"></span>
             </div>
           </div>
 
@@ -3384,9 +3384,19 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               </ol>
               <p><strong>Google Business Profile:</strong></p>
               <ol style="padding-left:20px;margin-bottom:12px">
-                <li>Usa lo stesso Google Client ID della Posta</li>
-                <li>Abilita "Google My Business API" nella Console Google Cloud</li>
+                <li>Vai su <a href="https://console.cloud.google.com/apis/library" target="_blank">Google Cloud Console &gt; Libreria API</a></li>
+                <li>Usa lo stesso progetto del Google Client ID della Posta</li>
+                <li>Cerca e abilita queste 3 API:
+                  <ul style="margin:4px 0;padding-left:16px">
+                    <li><strong>My Business Account Management API</strong></li>
+                    <li><strong>My Business Business Information API</strong></li>
+                    <li><strong>Google My Business API</strong> (per la pubblicazione post)</li>
+                  </ul>
+                </li>
+                <li>Vai su <a href="https://console.cloud.google.com/apis/credentials/consent" target="_blank">Schermata di consenso OAuth</a> e aggiungi lo scope <code>business.manage</code></li>
+                <li>Verifica che le <strong>Origini JavaScript autorizzate</strong> nelle credenziali OAuth includano il dominio di questo sito</li>
                 <li>Clicca "Connetti Google Business" qui sopra per autorizzare</li>
+                <li>Accedi con l'account Google che gestisce la scheda Business (proprietario/amministratore)</li>
               </ol>
               <p><strong>TikTok:</strong></p>
               <ol style="padding-left:20px">
@@ -6071,36 +6081,101 @@ function connectGBP() {
     toast('Configura prima il Google Client ID nella sezione Posta', 'error');
     return;
   }
-  gbpTokenClient = google.accounts.oauth2.initTokenClient({
-    client_id: gmailClientId,
-    scope: 'https://www.googleapis.com/auth/business.manage',
-    callback: handleGBPAuth,
-  });
-  gbpTokenClient.requestAccessToken();
+  if (typeof google === 'undefined' || !google.accounts || !google.accounts.oauth2) {
+    toast('Errore: libreria Google non caricata. Ricarica la pagina e riprova.', 'error');
+    return;
+  }
+  document.getElementById('gbpStatus').textContent = 'Connessione in corso...';
+  document.getElementById('gbpStatus').style.color = 'var(--caffe2)';
+  try {
+    gbpTokenClient = google.accounts.oauth2.initTokenClient({
+      client_id: gmailClientId,
+      scope: 'https://www.googleapis.com/auth/business.manage',
+      callback: handleGBPAuth,
+      error_callback: function(err) {
+        document.getElementById('gbpStatus').textContent = 'Errore connessione';
+        document.getElementById('gbpStatus').style.color = '#e74c3c';
+        if (err.type === 'popup_closed') {
+          toast('Finestra di autorizzazione chiusa. Riprova e completa il login Google.', 'error');
+        } else if (err.type === 'popup_failed_to_open') {
+          toast('Impossibile aprire il popup. Controlla che il browser non blocchi i popup per questo sito.', 'error');
+        } else {
+          toast('Errore OAuth: ' + (err.message || err.type || JSON.stringify(err)), 'error');
+        }
+      }
+    });
+    gbpTokenClient.requestAccessToken();
+  } catch(e) {
+    document.getElementById('gbpStatus').textContent = 'Errore';
+    document.getElementById('gbpStatus').style.color = '#e74c3c';
+    toast('Errore inizializzazione Google OAuth: ' + e.message + '. Verifica che il Client ID sia corretto e che le origini JavaScript autorizzate includano questo dominio.', 'error');
+  }
 }
 
 async function handleGBPAuth(resp) {
-  if (resp.error) { toast('Errore auth Google: ' + resp.error, 'error'); return; }
+  if (resp.error) {
+    document.getElementById('gbpStatus').textContent = 'Errore autorizzazione';
+    document.getElementById('gbpStatus').style.color = '#e74c3c';
+    const errorMessages = {
+      'access_denied': 'Accesso negato. Devi accettare i permessi per Google Business Profile.',
+      'invalid_client': 'Client ID non valido. Verifica il Google Client ID nella sezione Posta.',
+      'invalid_scope': 'Scope non autorizzato. Abilita "Google My Business API" nella Google Cloud Console.',
+      'popup_closed_by_user': 'Finestra chiusa. Riprova e completa l\'autorizzazione.'
+    };
+    toast(errorMessages[resp.error] || 'Errore auth Google: ' + resp.error + (resp.error_description ? ' - ' + resp.error_description : ''), 'error');
+    return;
+  }
+
   const gbpAccessToken = resp.access_token;
   localStorage.setItem('social_gbp_access_token', gbpAccessToken);
+  document.getElementById('gbpStatus').textContent = 'Recupero account...';
 
   try {
     // Get accounts
     const accRes = await fetch('https://mybusinessaccountmanagement.googleapis.com/v1/accounts', {
       headers: { 'Authorization': 'Bearer ' + gbpAccessToken }
     });
+    if (!accRes.ok) {
+      const errBody = await accRes.json().catch(() => ({}));
+      const errMsg = errBody.error?.message || errBody.error?.status || ('HTTP ' + accRes.status);
+      if (accRes.status === 403) {
+        toast('API non abilitata o permessi insufficienti. Vai su Google Cloud Console > API e Servizi > Libreria e abilita "My Business Account Management API". Errore: ' + errMsg, 'error');
+      } else if (accRes.status === 401) {
+        toast('Token scaduto o non valido. Riprova la connessione.', 'error');
+      } else {
+        toast('Errore recupero account Google Business (HTTP ' + accRes.status + '): ' + errMsg, 'error');
+      }
+      document.getElementById('gbpStatus').textContent = 'Errore API';
+      document.getElementById('gbpStatus').style.color = '#e74c3c';
+      return;
+    }
     const accData = await accRes.json();
     if (!accData.accounts || accData.accounts.length === 0) {
-      toast('Nessun account Google Business trovato', 'error');
+      toast('Nessun account Google Business trovato per questo account Google. Verifica di accedere con l\'account che gestisce la scheda Google Business.', 'error');
+      document.getElementById('gbpStatus').textContent = 'Nessun account trovato';
+      document.getElementById('gbpStatus').style.color = '#e74c3c';
       return;
     }
     const account = accData.accounts[0];
     localStorage.setItem('social_gbp_account', account.name);
+    document.getElementById('gbpStatus').textContent = 'Recupero sedi...';
 
     // Get locations
-    const locRes = await fetch('https://mybusinessbusinessinformation.googleapis.com/v1/' + account.name + '/locations', {
+    const locRes = await fetch('https://mybusinessbusinessinformation.googleapis.com/v1/' + account.name + '/locations?readMask=name,title,storefrontAddress', {
       headers: { 'Authorization': 'Bearer ' + gbpAccessToken }
     });
+    if (!locRes.ok) {
+      const errBody = await locRes.json().catch(() => ({}));
+      const errMsg = errBody.error?.message || errBody.error?.status || ('HTTP ' + locRes.status);
+      if (locRes.status === 403) {
+        toast('API sedi non abilitata. Vai su Google Cloud Console e abilita "My Business Business Information API". Errore: ' + errMsg, 'error');
+      } else {
+        toast('Errore recupero sedi (HTTP ' + locRes.status + '): ' + errMsg, 'error');
+      }
+      document.getElementById('gbpStatus').textContent = 'Errore recupero sedi';
+      document.getElementById('gbpStatus').style.color = '#e74c3c';
+      return;
+    }
     const locData = await locRes.json();
     if (locData.locations && locData.locations.length > 0) {
       const loc = locData.locations[0];
@@ -6111,10 +6186,14 @@ async function handleGBPAuth(resp) {
       document.getElementById('gbpAccount').textContent = loc.title || '';
       toast('Connesso a Google Business: ' + (loc.title || ''), 'success');
     } else {
-      toast('Nessuna sede trovata nell\'account', 'error');
+      toast('Nessuna sede trovata nell\'account Google Business. Verifica che la scheda Google Business sia attiva e verificata.', 'error');
+      document.getElementById('gbpStatus').textContent = 'Nessuna sede trovata';
+      document.getElementById('gbpStatus').style.color = '#e74c3c';
     }
   } catch(e) {
-    toast('Errore Google Business: ' + e.message, 'error');
+    document.getElementById('gbpStatus').textContent = 'Errore connessione';
+    document.getElementById('gbpStatus').style.color = '#e74c3c';
+    toast('Errore Google Business: ' + e.message + '. Controlla la connessione internet e riprova.', 'error');
   }
 }
 
@@ -6126,7 +6205,7 @@ async function publishToGBP() {
 
   const gbpToken = localStorage.getItem('social_gbp_access_token');
   const gbpLocation = localStorage.getItem('social_gbp_location');
-  if (!gbpToken || !gbpLocation) { toast('Connetti Google Business prima', 'error'); return; }
+  if (!gbpToken || !gbpLocation) { toast('Connetti prima Google Business cliccando il pulsante nella sezione sopra', 'error'); return; }
 
   const prezzo = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : '';
   const tipo = i.tipo_operazione === 'vendita' ? 'In vendita' : i.tipo_operazione === 'affitto' ? 'In affitto' : '';
@@ -6150,13 +6229,22 @@ async function publishToGBP() {
     });
     const data = await res.json();
     if (data.error) {
-      showPublishResult('Errore Google: ' + (data.error.message || JSON.stringify(data.error)), 'error');
+      let errDetail = data.error.message || JSON.stringify(data.error);
+      if (data.error.code === 401 || data.error.status === 'UNAUTHENTICATED') {
+        errDetail += ' — Token scaduto, riconnetti Google Business.';
+        localStorage.removeItem('social_gbp_access_token');
+        document.getElementById('gbpStatus').textContent = 'Token scaduto';
+        document.getElementById('gbpStatus').style.color = '#e74c3c';
+      } else if (data.error.code === 403) {
+        errDetail += ' — Permessi insufficienti. Verifica che le API siano abilitate nella Google Cloud Console.';
+      }
+      showPublishResult('Errore Google: ' + errDetail, 'error');
     } else {
       showPublishResult('Pubblicato su Google Business Profile!', 'success');
       toast('Pubblicato su Google Business!', 'success');
     }
   } catch(e) {
-    showPublishResult('Errore: ' + e.message, 'error');
+    showPublishResult('Errore di rete: ' + e.message + '. Controlla la connessione e riprova.', 'error');
   }
 }
 
