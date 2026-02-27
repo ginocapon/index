@@ -3310,7 +3310,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <div style="font-size:0.75rem;color:var(--caffe2)" id="gbpStatus">Non configurato</div>
               </div>
             </div>
-            <p style="font-size:0.78rem;color:var(--caffe2);margin-bottom:10px">Usa lo stesso Google Client ID configurato per la Posta. Assicurati di aver abilitato le API "My Business Account Management", "My Business Business Information" e "Google My Business" nella <a href="https://console.cloud.google.com/apis/library" target="_blank" style="color:var(--caffe)">Google Cloud Console</a>.</p>
+            <p style="font-size:0.78rem;color:var(--caffe2);margin-bottom:10px">Pubblica immobili e articoli direttamente sulla tua scheda Google Business Profile. Usa lo stesso Google Client ID configurato per la Posta. Assicurati di aver abilitato le API "My Business Account Management" e "My Business Business Information" nella <a href="https://console.cloud.google.com/apis/library" target="_blank" style="color:var(--caffe)">Google Cloud Console</a>. Se dopo l'abilitazione la quota risulta 0, potrebbe essere necessario richiedere l'accesso alle API di Business Profile tramite il modulo Google.</p>
             <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
               <button class="btn btn-sm btn-secondary" onclick="connectGBP()">Connetti Google Business</button>
               <span id="gbpAccount" style="font-size:0.82rem;color:var(--nero)"></span>
@@ -3385,14 +3385,15 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               <p><strong>Google Business Profile:</strong></p>
               <ol style="padding-left:20px;margin-bottom:12px">
                 <li>Usa lo stesso Google Client ID della Posta</li>
-                <li>Nella <a href="https://console.cloud.google.com/apis/library" target="_blank" style="color:var(--caffe)">Google Cloud Console</a>, abilita queste 3 API:
+                <li>Nella <a href="https://console.cloud.google.com/apis/library" target="_blank" style="color:var(--caffe)">Google Cloud Console</a>, cerca e abilita queste API:
                   <ul style="padding-left:16px;margin:4px 0">
-                    <li>My Business Account Management API</li>
-                    <li>My Business Business Information API</li>
-                    <li>Google My Business API</li>
+                    <li><strong>My Business Account Management API</strong> &mdash; per trovare il tuo account</li>
+                    <li><strong>My Business Business Information API</strong> &mdash; per leggere le sedi</li>
                   </ul>
                 </li>
+                <li>Se dopo l'abilitazione la quota risulta 0, richiedi l'accesso alle API di Business Profile tramite il modulo Google</li>
                 <li>Verifica che il periodo di prova Google Cloud non sia scaduto (l'upgrade &egrave; gratuito)</li>
+                <li>Accedi con l'account Google proprietario/gestore della scheda Business</li>
                 <li>Clicca "Connetti Google Business" qui sopra per autorizzare</li>
               </ol>
               <p><strong>TikTok:</strong></p>
@@ -5875,7 +5876,7 @@ async function publishBlogToGBP() {
   if (!a) return;
 
   var gbpLocation = localStorage.getItem('social_gbp_location');
-  var gbpToken = localStorage.getItem('social_gbp_token');
+  var gbpToken = localStorage.getItem('social_gbp_access_token');
   if (!gbpLocation || !gbpToken) { toast('Configura Google Business Profile prima', 'error'); return; }
 
   var link = 'https://www.righettoimmobiliare.it/blog-articolo.html?s=' + (a.slug || '');
