@@ -6087,27 +6087,62 @@ function connectGBP() {
 }
 
 async function handleGBPAuth(resp) {
-  if (resp.error) { toast('Errore auth Google: ' + resp.error, 'error'); return; }
+  if (resp.error) {
+    if (resp.error === 'access_denied') {
+      toast('Permesso negato. Assicurati di autorizzare lo scope Business Profile nella finestra Google', 'error');
+    } else if (resp.error === 'popup_blocked_by_browser') {
+      toast('Popup bloccato dal browser. Abilita i popup per questo sito e riprova', 'error');
+    } else {
+      toast('Errore auth Google: ' + resp.error, 'error');
+    }
+    return;
+  }
   const gbpAccessToken = resp.access_token;
   localStorage.setItem('social_gbp_access_token', gbpAccessToken);
+  document.getElementById('gbpAccount').innerHTML = '<span style="color:var(--caffe2)">Connessione in corso...</span>';
 
   try {
     // Get accounts
     const accRes = await fetch('https://mybusinessaccountmanagement.googleapis.com/v1/accounts', {
       headers: { 'Authorization': 'Bearer ' + gbpAccessToken }
     });
+    if (accRes.status === 403) {
+      const errData = await accRes.json().catch(() => ({}));
+      const errMsg = errData.error?.message || '';
+      if (errMsg.includes('not enabled') || errMsg.includes('has not been used')) {
+        toast('API "My Business Account Management" non abilitata. Abilitala nella Google Cloud Console', 'error');
+      } else if (errMsg.includes('billing')) {
+        toast('Periodo di prova scaduto. Fai l\'upgrade (gratuito) nella Google Cloud Console', 'error');
+      } else {
+        toast('Errore 403: ' + (errMsg || 'Accesso negato. Verifica le API abilitate nella Cloud Console'), 'error');
+      }
+      document.getElementById('gbpAccount').textContent = '';
+      return;
+    }
+    if (accRes.status === 401) {
+      toast('Token scaduto o non valido. Riprova la connessione', 'error');
+      localStorage.removeItem('social_gbp_access_token');
+      document.getElementById('gbpAccount').textContent = '';
+      return;
+    }
     const accData = await accRes.json();
     if (!accData.accounts || accData.accounts.length === 0) {
-      toast('Nessun account Google Business trovato', 'error');
+      toast('Nessun account Google Business trovato. Verifica di accedere con l\'account Google che gestisce la scheda Business', 'error');
+      document.getElementById('gbpAccount').textContent = '';
       return;
     }
     const account = accData.accounts[0];
     localStorage.setItem('social_gbp_account', account.name);
 
     // Get locations
-    const locRes = await fetch('https://mybusinessbusinessinformation.googleapis.com/v1/' + account.name + '/locations', {
+    const locRes = await fetch('https://mybusinessbusinessinformation.googleapis.com/v1/' + account.name + '/locations?readMask=name,title,storefrontAddress', {
       headers: { 'Authorization': 'Bearer ' + gbpAccessToken }
     });
+    if (locRes.status === 403) {
+      toast('API "My Business Business Information" non abilitata. Abilitala nella Google Cloud Console', 'error');
+      document.getElementById('gbpAccount').textContent = '';
+      return;
+    }
     const locData = await locRes.json();
     if (locData.locations && locData.locations.length > 0) {
       const loc = locData.locations[0];
@@ -6118,10 +6153,12 @@ async function handleGBPAuth(resp) {
       document.getElementById('gbpAccount').textContent = loc.title || '';
       toast('Connesso a Google Business: ' + (loc.title || ''), 'success');
     } else {
-      toast('Nessuna sede trovata nell\'account', 'error');
+      toast('Nessuna sede trovata. Verifica che la scheda Google Business sia attiva e verificata', 'error');
+      document.getElementById('gbpAccount').textContent = '';
     }
   } catch(e) {
     toast('Errore Google Business: ' + e.message, 'error');
+    document.getElementById('gbpAccount').textContent = '';
   }
 }
 
@@ -6155,6 +6192,14 @@ async function publishToGBP() {
       headers: { 'Authorization': 'Bearer ' + gbpToken, 'Content-Type': 'application/json' },
       body: JSON.stringify(postBody)
     });
+    if (res.status === 401) {
+      localStorage.removeItem('social_gbp_access_token');
+      document.getElementById('gbpStatus').textContent = 'Non configurato';
+      document.getElementById('gbpStatus').style.color = '';
+      document.getElementById('gbpAccount').textContent = '';
+      showPublishResult('Token scaduto. Riconnetti Google Business e riprova', 'error');
+      return;
+    }
     const data = await res.json();
     if (data.error) {
       showPublishResult('Errore Google: ' + (data.error.message || JSON.stringify(data.error)), 'error');
