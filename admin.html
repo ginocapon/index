@@ -6081,7 +6081,7 @@ function connectGBP() {
   }
   gbpTokenClient = google.accounts.oauth2.initTokenClient({
     client_id: gmailClientId,
-    scope: 'https://www.googleapis.com/auth/business.manage',
+    scope: 'https://www.googleapis.com/auth/business.manage email',
     callback: handleGBPAuth,
   });
   gbpTokenClient.requestAccessToken();
@@ -6103,26 +6103,45 @@ async function handleGBPAuth(resp) {
   document.getElementById('gbpAccount').innerHTML = '<span style="color:var(--caffe2)">Connessione in corso...</span>';
 
   try {
+    // First, get the email to show which account is being used
+    let userEmail = '(sconosciuto)';
+    try {
+      const meRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+        headers: { 'Authorization': 'Bearer ' + gbpAccessToken }
+      });
+      if (meRes.ok) {
+        const meData = await meRes.json();
+        userEmail = meData.email || '(sconosciuto)';
+        console.log('[GBP] Autenticato come:', userEmail);
+      }
+    } catch(e) { console.log('[GBP] Could not fetch user info:', e); }
+
     // Get accounts
     console.log('[GBP] Fetching accounts...');
     const accRes = await fetch('https://mybusinessaccountmanagement.googleapis.com/v1/accounts', {
       headers: { 'Authorization': 'Bearer ' + gbpAccessToken }
     });
     console.log('[GBP] Accounts response status:', accRes.status);
+    const accRawText = await accRes.text();
+    console.log('[GBP] Accounts raw response:', accRawText);
+
     if (accRes.status === 403) {
-      const errData = await accRes.json().catch(() => ({}));
-      const errMsg = errData.error?.message || '';
+      let errMsg = '';
+      try { errMsg = JSON.parse(accRawText).error?.message || ''; } catch(e) {}
       console.log('[GBP] 403 error:', errMsg);
-      if (errMsg.includes('not enabled') || errMsg.includes('has not been used')) {
-        toast('API "My Business Account Management" non abilitata. Abilitala nella Google Cloud Console', 'error');
-      } else if (errMsg.includes('billing')) {
-        toast('Periodo di prova scaduto. Fai l\'upgrade (gratuito) nella Google Cloud Console', 'error');
-      } else if (errMsg.includes('REQUEST_DENIED') || errMsg.includes('quota')) {
-        toast('Quota API esaurita o accesso non concesso. Richiedi l\'accesso alle API Business Profile tramite il modulo Google', 'error');
-      } else {
-        toast('Errore 403: ' + (errMsg || 'Accesso negato. Verifica le API abilitate nella Cloud Console'), 'error');
-      }
-      document.getElementById('gbpAccount').textContent = '';
+      document.getElementById('gbpAccount').innerHTML = '<span style="color:var(--rosso);font-size:0.75rem">Errore 403</span>';
+      // Show detailed 403 diagnostic
+      alert('ERRORE 403 - ACCESSO NEGATO\n\n' +
+        'Email: ' + userEmail + '\n' +
+        'Errore: ' + (errMsg || 'Accesso negato') + '\n\n' +
+        'COSA FARE:\n' +
+        '1) Vai su console.cloud.google.com\n' +
+        '2) Abilita queste API:\n' +
+        '   - My Business Account Management API\n' +
+        '   - My Business Business Information API\n' +
+        '3) Se le hai già abilitate e l\'errore persiste,\n' +
+        '   devi richiedere accesso alle GBP API:\n' +
+        '   developers.google.com/my-business/content/basic-setup');
       return;
     }
     if (accRes.status === 401) {
@@ -6132,34 +6151,33 @@ async function handleGBPAuth(resp) {
       return;
     }
     if (!accRes.ok) {
-      const errBody = await accRes.text().catch(() => '');
-      console.log('[GBP] Unexpected status ' + accRes.status + ':', errBody);
-      toast('Errore API (HTTP ' + accRes.status + '). Apri la Console del browser (F12) per dettagli', 'error');
+      console.log('[GBP] Unexpected status ' + accRes.status + ':', accRawText);
+      alert('ERRORE HTTP ' + accRes.status + '\n\nEmail: ' + userEmail + '\n\nRisposta:\n' + accRawText.substring(0, 500));
       document.getElementById('gbpAccount').textContent = '';
       return;
     }
-    const accData = await accRes.json();
-    console.log('[GBP] Accounts response:', JSON.stringify(accData));
+
+    let accData;
+    try { accData = JSON.parse(accRawText); } catch(e) { accData = {}; }
+    console.log('[GBP] Accounts parsed:', JSON.stringify(accData));
+
     if (!accData.accounts || accData.accounts.length === 0) {
-      // Show diagnostic info to help debug
-      const diagInfo = 'Risposta API: ' + JSON.stringify(accData);
       console.warn('[GBP] Nessun account trovato. Risposta completa:', accData);
       document.getElementById('gbpAccount').innerHTML = '<span style="color:var(--rosso);font-size:0.75rem">Nessun account trovato</span>';
-      toast('Nessun account Google Business trovato.', 'error');
-      // Show a detailed diagnostic alert
-      setTimeout(function() {
-        alert('DIAGNOSTICA GOOGLE BUSINESS\n\n' +
-          'Stato HTTP: ' + accRes.status + ' (OK)\n' +
-          'Risposta: ' + JSON.stringify(accData, null, 2) + '\n\n' +
-          'POSSIBILI CAUSE:\n' +
-          '1) Hai effettuato l\'accesso con l\'account Google corretto?\n' +
-          '   (quello che gestisce la scheda Business)\n\n' +
-          '2) Le API hanno quota 0: dopo aver abilitato le API,\n' +
-          '   devi richiedere l\'accesso compilando il modulo:\n' +
-          '   "Google Business Profile API access request"\n\n' +
-          '3) La scheda Google Business potrebbe non essere verificata\n\n' +
-          'Fai uno screenshot di questo messaggio e condividilo per assistenza.');
-      }, 300);
+      // Show diagnostic with email - this is the key info we need
+      alert('NESSUN ACCOUNT GOOGLE BUSINESS TROVATO\n\n' +
+        'Email autenticata: ' + userEmail + '\n' +
+        'Stato HTTP: ' + accRes.status + ' (OK)\n' +
+        'Risposta API: ' + JSON.stringify(accData) + '\n\n' +
+        'VERIFICA:\n' +
+        '1) L\'email qui sopra è quella che gestisce la tua\n' +
+        '   scheda Google Business?\n\n' +
+        '2) Vai su business.google.com e controlla con\n' +
+        '   quale account sei loggato lì\n\n' +
+        '3) Se l\'email è corretta, potrebbe servire richiedere\n' +
+        '   accesso API su:\n' +
+        '   developers.google.com/my-business/content/basic-setup\n\n' +
+        'Fai uno SCREENSHOT di questo messaggio!');
       return;
     }
     const account = accData.accounts[0];
