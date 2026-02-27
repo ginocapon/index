@@ -3310,10 +3310,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <div style="font-size:0.75rem;color:var(--caffe2)" id="gbpStatus">Non configurato</div>
               </div>
             </div>
-            <p style="font-size:0.78rem;color:var(--caffe2);margin-bottom:10px">Usa lo stesso Google Client ID configurato per la Posta. Verr&agrave; richiesto il permesso aggiuntivo per Business Profile.</p>
-            <div style="display:flex;gap:8px">
+            <p style="font-size:0.78rem;color:var(--caffe2);margin-bottom:10px">Usa lo stesso Google Client ID configurato per la Posta. Assicurati di aver abilitato le API "My Business Account Management", "My Business Business Information" e "Google My Business" nella <a href="https://console.cloud.google.com/apis/library" target="_blank" style="color:var(--caffe)">Google Cloud Console</a>.</p>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
               <button class="btn btn-sm btn-secondary" onclick="connectGBP()">Connetti Google Business</button>
-              <span id="gbpAccount" style="font-size:0.82rem;color:var(--nero);align-self:center"></span>
+              <span id="gbpAccount" style="font-size:0.82rem;color:var(--nero)"></span>
             </div>
           </div>
 
@@ -3385,7 +3385,14 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               <p><strong>Google Business Profile:</strong></p>
               <ol style="padding-left:20px;margin-bottom:12px">
                 <li>Usa lo stesso Google Client ID della Posta</li>
-                <li>Abilita "Google My Business API" nella Console Google Cloud</li>
+                <li>Nella <a href="https://console.cloud.google.com/apis/library" target="_blank" style="color:var(--caffe)">Google Cloud Console</a>, abilita queste 3 API:
+                  <ul style="padding-left:16px;margin:4px 0">
+                    <li>My Business Account Management API</li>
+                    <li>My Business Business Information API</li>
+                    <li>Google My Business API</li>
+                  </ul>
+                </li>
+                <li>Verifica che il periodo di prova Google Cloud non sia scaduto (l'upgrade &egrave; gratuito)</li>
                 <li>Clicca "Connetti Google Business" qui sopra per autorizzare</li>
               </ol>
               <p><strong>TikTok:</strong></p>
