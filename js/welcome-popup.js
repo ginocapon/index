@@ -20,7 +20,7 @@
   // ── Testo che Sara "dice" ──
   var WELCOME_LINES = [
     "Ciao! Sono Sara, la tua assistente virtuale di Righetto Immobiliare.",
-    "\n\nDal 1990 aiutiamo chi cerca, vende o affitta casa a Padova e in tutta la provincia.",
+    "\n\nDal 2000 aiutiamo chi cerca, vende o affitta casa a Padova e in tutta la provincia.",
     "\n\nQui trovi valutazioni gratuite, consulenza su vendita e locazione, gestione completa del tuo immobile e molto altro.",
     "\n\nSe hai domande, la nostra chatbot \u00e8 pronta a risponderti subito! E per tutto il resto, i nostri consulenti sono sempre a disposizione.",
     "\n\nScegli come vuoi continuare \u2935\ufe0f"
