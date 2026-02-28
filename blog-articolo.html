@@ -263,7 +263,7 @@ function artUrl(a) {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": art.titolo || '',
-    "author": { "@type": "Organization", "name": "Righetto Immobiliare" },
+    "author": { "@type": "Person", "name": art.autore || "Gino Capon", "jobTitle": "Agente Immobiliare", "worksFor": {"@type": "Organization", "name": "Righetto Immobiliare", "url": "https://righettoimmobiliare.it"} },
     "publisher": { "@type": "Organization", "name": "Righetto Immobiliare", "logo": { "@type": "ImageObject", "url": "https://righettoimmobiliare.it/assets/logo.png" } },
     "datePublished": art.data || '',
     "dateModified": art.aggiornato || art.data || '',
