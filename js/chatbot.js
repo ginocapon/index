@@ -738,9 +738,10 @@ window.RIGHETTO_FAQ_DATA = FAQ_DATA;
 class RighettoChat {
   constructor() {
     this.messages = [];
-    this.state = 'idle'; // idle | stima_comune | stima_tipo | stima_mq | stima_stato | contatto_nome | contatto_email | contatto_tel | contatto_note
+    this.state = 'idle'; // idle | stima_* | contatto_* | ricerca_tipo_op | ricerca_zona
     this.stimaData = {};
     this.contattoPending = null;
+    this.ricercaData = {};
     this.isOpen = false;
     this.supabase = null;
     this.initSupabase();
@@ -945,6 +946,28 @@ class RighettoChat {
       return await this.inviaRichiesta();
     }
 
+    // ── STATO: ricerca immobili guidata ──
+    if (this.state === 'ricerca_tipo_op') {
+      if (/affitt|locaz|rent/.test(low)) {
+        this.ricercaData.tipo_op = 'affitto';
+      } else if (/acquist|compr|vendit|compra/.test(low)) {
+        this.ricercaData.tipo_op = 'vendita';
+      } else if (/tutt|entramb|qualsiasi|indifferen/.test(low)) {
+        this.ricercaData.tipo_op = null; // tutti
+      } else {
+        return '🤔 Non ho capito... Cerchi un immobile in **vendita** o in **affitto**? Oppure scrivi **tutti** per vedere entrambi.';
+      }
+      this.state = 'ricerca_zona';
+      const tipoLabel = this.ricercaData.tipo_op === 'affitto' ? 'in affitto' : this.ricercaData.tipo_op === 'vendita' ? 'in vendita' : '';
+      return `📍 Perfetto, cerchi ${tipoLabel}!\n\n**In quale zona o comune?**\n*(Es: Padova, Limena, Abano Terme, Cittadella... oppure scrivi "tutti" per vedere tutto il catalogo)*`;
+    }
+
+    if (this.state === 'ricerca_zona') {
+      this.state = 'idle';
+      const zona = /tutt|qualsiasi|indifferen|ovunque|ogni/.test(low) ? null : msg.trim();
+      return await this.cercaImmobiliCatalogo(this.ricercaData.tipo_op, zona);
+    }
+
     // ── INTENT DETECTION ──
 
     // Stima diretta inline (es: "stima appartamento 85mq a Padova buono stato")
@@ -972,9 +995,32 @@ class RighettoChat {
       return '👋 Ottimo! Ti ricontatteremo al più presto.\n\n**Come ti chiami?** (Nome e Cognome)';
     }
 
-    // Ricerca immobili
-    if (/cerca|trov|immobi|annunci|vedete|avete|list/.test(low)) {
-      return this.rispostaRicerca(low);
+    // Ricerca immobili — avvia flusso conversazionale
+    if (/cerca|trov|immobi|annunci|vedete|avete|list|casa|appartam|villa|bilocale|monolocale|trilocale|attico/.test(low)) {
+      // Se l'utente dice già vendita o affitto, saltiamo la prima domanda
+      if (/affitt|locaz/.test(low)) {
+        this.ricercaData = { tipo_op: 'affitto' };
+        // Se dice anche la zona, cerca subito
+        const zonaMatch = low.match(/(?:a|in|zona|comune)\s+([a-zàèéìòù\s]+?)(?:\s*$|\s+(?:in|da|per))/i);
+        if (zonaMatch) {
+          return this.cercaImmobiliCatalogo('affitto', zonaMatch[1].trim());
+        }
+        this.state = 'ricerca_zona';
+        return '📍 **In quale zona o comune cerchi in affitto?**\n*(Es: Padova, Limena, Abano... oppure "tutti" per tutto il catalogo)*';
+      }
+      if (/acquist|compr|vendita/.test(low)) {
+        this.ricercaData = { tipo_op: 'vendita' };
+        const zonaMatch = low.match(/(?:a|in|zona|comune)\s+([a-zàèéìòù\s]+?)(?:\s*$|\s+(?:in|da|per))/i);
+        if (zonaMatch) {
+          return this.cercaImmobiliCatalogo('vendita', zonaMatch[1].trim());
+        }
+        this.state = 'ricerca_zona';
+        return '📍 **In quale zona o comune cerchi in vendita?**\n*(Es: Padova, Limena, Abano... oppure "tutti" per tutto il catalogo)*';
+      }
+      // Non ha specificato → chiediamo
+      this.ricercaData = {};
+      this.state = 'ricerca_tipo_op';
+      return '🏠 **Cerchi un immobile!** Ottimo, ti aiuto subito.\n\nStai cercando in **vendita** (acquisto) o in **affitto** (locazione)?';
     }
 
     // FAQ
@@ -1054,11 +1100,78 @@ class RighettoChat {
     return msg;
   }
 
-  // ────── RISPOSTA RICERCA ──────
-  rispostaRicerca(low) {
-    let tipo = 'vendita';
-    if (/affitto|locare|locazione/.test(low)) tipo = 'affitto';
-    return `🔍 **Cerca Immobili**\n\nPuoi cercare direttamente nella pagina [Immobili](immobili.html) con filtri avanzati per:\n• Tipo operazione (vendita/affitto)\n• Tipologia (appartamento, villa...)\n• Zona/Comune\n• Superficie\n• Prezzo\n\n👉 [Vai agli immobili](immobili.html?tipo=${tipo})\n\nOppure dimmi cosa cerchi e ti aiuto!`;
+  // ────── RICERCA IMMOBILI DAL CATALOGO ──────
+  async cercaImmobiliCatalogo(tipoOp, zona) {
+    if (!this.supabase) {
+      // Fallback senza Supabase
+      const tipo = tipoOp || 'vendita';
+      return `🔍 Vai alla pagina immobili per la ricerca completa:\n\n👉 [Immobili in ${tipo}](immobili.html?tipo=${tipo})\n\nOppure contatta un nostro consulente per assistenza personalizzata!`;
+    }
+
+    try {
+      let q = this.supabase.from('immobili').select('*')
+        .eq('attivo', true).eq('venduto', false);
+
+      if (tipoOp) {
+        q = q.ilike('tipo_operazione', '%' + tipoOp + '%');
+      }
+
+      if (zona) {
+        const zonaNorm = this.normalizeKey(zona);
+        q = q.ilike('comune', '%' + zonaNorm + '%');
+      }
+
+      q = q.order('created_at', { ascending: false }).limit(8);
+      const { data, error } = await q;
+
+      if (error || !data) {
+        return this.fallbackRicerca(tipoOp);
+      }
+
+      const tipoLabel = tipoOp === 'affitto' ? 'in affitto' : tipoOp === 'vendita' ? 'in vendita' : 'disponibili';
+      const zonaLabel = zona ? ` a **${zona}**` : '';
+
+      if (data.length === 0) {
+        let msg = `😔 Mi dispiace, al momento non ho immobili ${tipoLabel}${zonaLabel} nel nostro catalogo.\n\n`;
+        msg += `Ma non ti preoccupare! Posso:\n`;
+        msg += `• 🔍 Cercare in un'altra zona — dimmi quale!\n`;
+        msg += `• 📞 **Metterti in contatto con un consulente** che conosce il mercato e può trovare l'immobile giusto per te.\n\n`;
+        msg += `Cosa preferisci?`;
+        return msg;
+      }
+
+      let msg = `🏠 **Ecco gli immobili ${tipoLabel}${zonaLabel}:**\n\n`;
+
+      for (const imm of data) {
+        const prezzo = imm.prezzo ? this.formatPrice(imm.prezzo) : 'Prezzo su richiesta';
+        const sup = imm.superficie ? `${imm.superficie} mq` : '';
+        const loc = imm.comune || '';
+        const tip = imm.tipologia || imm.categoria || '';
+        const immSlug = generatePropertySlug(imm);
+
+        msg += `🔹 **${imm.titolo || tip}**\n`;
+        if (loc) msg += `   📍 ${loc}`;
+        if (sup) msg += ` — ${sup}`;
+        msg += `\n   💰 ${prezzo}\n`;
+        msg += `   👉 [Vedi scheda](immobile.html?s=${encodeURIComponent(immSlug)})\n\n`;
+      }
+
+      if (data.length >= 8) {
+        const tipo = tipoOp || 'vendita';
+        msg += `---\n📋 Ce ne sono altri! [Vedi tutti gli immobili](immobili.html?tipo=${tipo})\n\n`;
+      }
+
+      msg += `---\n💬 Vuoi che ti metta in contatto con un consulente per una ricerca personalizzata?`;
+      return msg;
+
+    } catch (e) {
+      return this.fallbackRicerca(tipoOp);
+    }
+  }
+
+  fallbackRicerca(tipoOp) {
+    const tipo = tipoOp || 'vendita';
+    return `🔍 **Cerca Immobili**\n\nPuoi cercare nella pagina:\n👉 [Immobili in ${tipo}](immobili.html?tipo=${tipo})\n\nOppure dimmi cosa cerchi e ti aiuto!`;
   }
 
   // ────── INVIA RICHIESTA ──────
@@ -1081,8 +1194,8 @@ function initChatbotUI() {
 
   const engine = new RighettoChat();
 
-  // Avatar Sara — donna bionda con occhiali, professionale
-  const SARA_AVATAR = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%233A5578'/%3E%3Cstop offset='100%25' stop-color='%235C7A9E'/%3E%3C/linearGradient%3E%3ClinearGradient id='hair' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23F2D06B'/%3E%3Cstop offset='100%25' stop-color='%23D4A843'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='60' cy='60' r='60' fill='url(%23bg)'/%3E%3Cellipse cx='60' cy='48' rx='35' ry='38' fill='url(%23hair)'/%3E%3Cellipse cx='60' cy='62' rx='24' ry='28' fill='%23FDDCB5'/%3E%3Cellipse cx='60' cy='45' rx='30' ry='20' fill='url(%23hair)'/%3E%3Cpath d='M30 42 Q35 20 60 18 Q85 20 90 42 Q88 35 75 32 Q60 28 45 32 Q32 35 30 42Z' fill='url(%23hair)'/%3E%3Cpath d='M25 55 Q28 70 35 78' stroke='%23D4A843' stroke-width='8' fill='none' stroke-linecap='round'/%3E%3Cpath d='M95 55 Q92 70 85 78' stroke='%23D4A843' stroke-width='8' fill='none' stroke-linecap='round'/%3E%3Cellipse cx='48' cy='58' rx='5' ry='4' fill='white'/%3E%3Cellipse cx='72' cy='58' rx='5' ry='4' fill='white'/%3E%3Ccircle cx='49' cy='58' r='2.5' fill='%232C4A6E'/%3E%3Ccircle cx='73' cy='58' r='2.5' fill='%232C4A6E'/%3E%3Ccircle cx='50' cy='57' r='0.8' fill='white'/%3E%3Ccircle cx='74' cy='57' r='0.8' fill='white'/%3E%3Crect x='38' y='55' width='14' height='9' rx='4.5' fill='none' stroke='%23556B7A' stroke-width='1.5'/%3E%3Crect x='62' y='55' width='14' height='9' rx='4.5' fill='none' stroke='%23556B7A' stroke-width='1.5'/%3E%3Cline x1='52' y1='59' x2='62' y2='59' stroke='%23556B7A' stroke-width='1.2'/%3E%3Cline x1='38' y1='59' x2='28' y2='56' stroke='%23556B7A' stroke-width='1.2'/%3E%3Cline x1='76' y1='59' x2='86' y2='56' stroke='%23556B7A' stroke-width='1.2'/%3E%3Cellipse cx='48' cy='66' rx='2' ry='0.8' fill='%23E8A090' opacity='0.5'/%3E%3Cellipse cx='72' cy='66' rx='2' ry='0.8' fill='%23E8A090' opacity='0.5'/%3E%3Cpath d='M55 72 Q60 76 65 72' stroke='%23C0756B' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3Cpath d='M40 95 Q42 82 60 80 Q78 82 80 95' fill='%233A5578'/%3E%3Cpath d='M52 82 L55 90 L60 84 L65 90 L68 82' fill='white' opacity='0.9'/%3E%3C/svg%3E";
+  // Avatar Sara — foto reale
+  const SARA_AVATAR = "img/sara-avatar.jpg";
 
   const html = `
   <style>
@@ -1103,6 +1216,7 @@ function initChatbotUI() {
   #rig-chat-btn svg { width: 28px; height: 28px; }
   #rig-chat-btn-avatar {
     width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+    object-position: center 45%;
   }
   #rig-chat-pulse {
     position: absolute; top: 4px; right: 4px;
@@ -1142,6 +1256,7 @@ function initChatbotUI() {
   }
   .chat-header-avatar img {
     width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+    object-position: center 45%;
   }
   .chat-header-info { flex: 1; }
   .chat-header-info h4 { font-size: 0.88rem; font-weight: 700; }
@@ -1191,6 +1306,7 @@ function initChatbotUI() {
   }
   .chat-avatar img {
     width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+    object-position: center 45%;
   }
   .chat-typing {
     display: flex; gap: 4px; padding: 10px 14px;
@@ -1244,6 +1360,21 @@ function initChatbotUI() {
   .chat-msg.bot .chat-bubble a { color: #3A5578; }
   .chat-bubble strong { font-weight: 700; }
   .chat-bubble code { background: rgba(0,0,0,0.08); padding: 1px 5px; border-radius: 3px; font-family: monospace; }
+  /* Recensione stelline */
+  .chat-rating { text-align: center; padding: 12px 0 4px; }
+  .chat-rating p { font-size: 0.82rem; color: #1E3A5C; margin: 0 0 8px; font-weight: 600; }
+  .chat-rating-stars { display: flex; justify-content: center; gap: 6px; }
+  .chat-rating-stars button {
+    background: none; border: none; font-size: 1.6rem; cursor: pointer;
+    transition: transform 0.15s; color: #CBD5E1; line-height: 1;
+  }
+  .chat-rating-stars button:hover,
+  .chat-rating-stars button.active { color: #F59E0B; transform: scale(1.2); }
+  .chat-rating-thanks {
+    font-size: 0.8rem; color: #6B7A8D; margin: 8px 0 0; opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .chat-rating-thanks.visible { opacity: 1; }
   @media (max-width: 420px) {
     #rig-chat-box { width: calc(100vw - 20px); right: 10px; bottom: 90px; }
     #rig-chat-widget { right: 14px; bottom: 20px; }
@@ -1366,6 +1497,7 @@ function initChatbotUI() {
 
     async send(text) {
       if (!text.trim()) return;
+      this.msgCount++;
       // Nascondi quick buttons dopo il primo messaggio
       document.getElementById('rig-quick-btns').style.display = 'none';
       this.addMsg('user', text);
@@ -1384,6 +1516,71 @@ function initChatbotUI() {
       inp.value = '';
       inp.style.height = 'auto';
       this.send(val);
+    },
+
+    msgCount: 0,
+    ratingShown: false,
+
+    showRating() {
+      if (this.ratingShown) return;
+      this.ratingShown = true;
+      const msgs = document.getElementById('rig-chat-msgs');
+      const div = document.createElement('div');
+      div.className = 'chat-rating';
+      div.innerHTML = '<p>Come ti sei trovato con Sara?</p>' +
+        '<div class="chat-rating-stars">' +
+          '<button data-star="1" onclick="rigChat.submitRating(1)">&#9733;</button>' +
+          '<button data-star="2" onclick="rigChat.submitRating(2)">&#9733;</button>' +
+          '<button data-star="3" onclick="rigChat.submitRating(3)">&#9733;</button>' +
+          '<button data-star="4" onclick="rigChat.submitRating(4)">&#9733;</button>' +
+          '<button data-star="5" onclick="rigChat.submitRating(5)">&#9733;</button>' +
+        '</div>' +
+        '<p class="chat-rating-thanks" id="rig-rating-thanks">Grazie per il tuo feedback! ❤️</p>';
+      msgs.appendChild(div);
+      msgs.scrollTop = msgs.scrollHeight;
+    },
+
+    async submitRating(stars) {
+      // Evidenzia stelline
+      const btns = document.querySelectorAll('.chat-rating-stars button');
+      btns.forEach(b => {
+        const s = parseInt(b.getAttribute('data-star'));
+        b.classList.toggle('active', s <= stars);
+        b.style.pointerEvents = 'none';
+      });
+      // Mostra grazie
+      const thanks = document.getElementById('rig-rating-thanks');
+      if (thanks) thanks.classList.add('visible');
+      // Salva su Supabase
+      if (engine.supabase) {
+        try {
+          await engine.supabase.from('recensioni_chatbot').insert([{
+            voto: stars,
+            pagina: location.pathname,
+            created_at: new Date().toISOString()
+          }]);
+        } catch(e) { /* silent */ }
+      }
+    }
+  };
+
+  // Mostra recensione alla chiusura se ci sono stati almeno 2 messaggi
+  const origToggle = window.rigChat.toggle.bind(window.rigChat);
+  window.rigChat.toggle = function() {
+    const wasOpen = this.open;
+    origToggle();
+    if (wasOpen && this.msgCount >= 2) {
+      this.showRating();
+      // Riapri brevemente per mostrare le stelline
+      if (!this.open) {
+        this.open = true;
+        const box = document.getElementById('rig-chat-box');
+        box.classList.add('open');
+        const iconAvatar = document.getElementById('rig-chat-btn-avatar');
+        const iconClose = document.getElementById('rig-chat-icon-close');
+        if (iconAvatar) iconAvatar.style.display = 'none';
+        iconClose.style.display = 'block';
+      }
     }
   };
 }

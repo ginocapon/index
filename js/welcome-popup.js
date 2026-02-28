@@ -14,54 +14,13 @@
   // ── Una volta per sessione ──
   if (sessionStorage.getItem('welcome_shown')) return;
 
-  // ── Avatar Sara INLINE SVG (animabile) ──
-  var SARA_SVG = '<svg class="welcome-avatar-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">' +
-    '<defs>' +
-      '<linearGradient id="wbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3A5578"/><stop offset="100%" stop-color="#5C7A9E"/></linearGradient>' +
-      '<linearGradient id="whair" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F2D06B"/><stop offset="100%" stop-color="#D4A843"/></linearGradient>' +
-    '</defs>' +
-    '<circle cx="60" cy="60" r="60" fill="url(#wbg)"/>' +
-    '<g id="sara-head">' +
-      // Capelli dietro
-      '<ellipse cx="60" cy="48" rx="35" ry="38" fill="url(#whair)"/>' +
-      // Viso
-      '<ellipse cx="60" cy="62" rx="24" ry="28" fill="#FDDCB5"/>' +
-      // Capelli sopra
-      '<ellipse cx="60" cy="45" rx="30" ry="20" fill="url(#whair)"/>' +
-      '<path d="M30 42 Q35 20 60 18 Q85 20 90 42 Q88 35 75 32 Q60 28 45 32 Q32 35 30 42Z" fill="url(#whair)"/>' +
-      // Ciocche laterali
-      '<path d="M25 55 Q28 70 35 78" stroke="#D4A843" stroke-width="8" fill="none" stroke-linecap="round"/>' +
-      '<path d="M95 55 Q92 70 85 78" stroke="#D4A843" stroke-width="8" fill="none" stroke-linecap="round"/>' +
-      // Occhi - bianchi
-      '<ellipse cx="48" cy="58" rx="5" ry="4" fill="white"/>' +
-      '<ellipse cx="72" cy="58" rx="5" ry="4" fill="white"/>' +
-      // Pupille
-      '<circle cx="49" cy="58" r="2.5" fill="#2C4A6E"/>' +
-      '<circle cx="73" cy="58" r="2.5" fill="#2C4A6E"/>' +
-      // Riflesso occhi
-      '<circle cx="50" cy="57" r="0.8" fill="white"/>' +
-      '<circle cx="74" cy="57" r="0.8" fill="white"/>' +
-      // Palpebre (per blink) - inizialmente invisibili
-      '<ellipse id="sara-blink-l" cx="48" cy="58" rx="6" ry="0" fill="#FDDCB5"/>' +
-      '<ellipse id="sara-blink-r" cx="72" cy="58" rx="6" ry="0" fill="#FDDCB5"/>' +
-      // Occhiali
-      '<rect x="38" y="55" width="14" height="9" rx="4.5" fill="none" stroke="#556B7A" stroke-width="1.5"/>' +
-      '<rect x="62" y="55" width="14" height="9" rx="4.5" fill="none" stroke="#556B7A" stroke-width="1.5"/>' +
-      '<line x1="52" y1="59" x2="62" y2="59" stroke="#556B7A" stroke-width="1.2"/>' +
-      '<line x1="38" y1="59" x2="28" y2="56" stroke="#556B7A" stroke-width="1.2"/>' +
-      '<line x1="76" y1="59" x2="86" y2="56" stroke="#556B7A" stroke-width="1.2"/>' +
-      // Guance — rossore animato quando parla
-      '<ellipse id="sara-cheek-l" cx="46" cy="66" rx="5" ry="2.5" fill="#E8A090" opacity="0.15"/>' +
-      '<ellipse id="sara-cheek-r" cx="74" cy="66" rx="5" ry="2.5" fill="#E8A090" opacity="0.15"/>' +
-      // Bocca — animata! ID per JS
-      '<path id="sara-mouth" d="M55 72 Q60 76 65 72" stroke="#C0756B" stroke-width="1.8" fill="none" stroke-linecap="round"/>' +
-      // Bocca aperta (riempimento, invisibile di default)
-      '<ellipse id="sara-mouth-open" cx="60" cy="74" rx="4" ry="0" fill="#B05050" opacity="0"/>' +
-    '</g>' +
-    // Corpo
-    '<path d="M40 95 Q42 82 60 80 Q78 82 80 95" fill="#3A5578"/>' +
-    '<path d="M52 82 L55 90 L60 84 L65 90 L68 82" fill="white" opacity="0.9"/>' +
-  '</svg>';
+  // ── Avatar Sara — FOTO REALE con animazioni CSS ──
+  var SARA_PHOTO = 'img/sara-avatar.jpg';
+  var SARA_HTML = '<div class="welcome-avatar-photo" id="sara-photo-wrap">' +
+    '<img src="' + SARA_PHOTO + '" alt="Sara — Assistente Righetto Immobiliare" class="welcome-avatar-img" id="sara-photo">' +
+    '<div class="sara-speaking-ring" id="sara-ring"></div>' +
+    '<div class="sara-glow" id="sara-glow"></div>' +
+  '</div>';
 
   // ── Testo che Sara "dice" ──
   var WELCOME_LINES = [
@@ -106,7 +65,7 @@
     '<div id="welcome-card" style="position:relative">' +
       '<button class="welcome-close" aria-label="Chiudi">&times;</button>' +
       '<div class="welcome-header">' +
-        '<div class="welcome-avatar-wrap">' + SARA_SVG + '</div>' +
+        '<div class="welcome-avatar-wrap">' + SARA_HTML + '</div>' +
         '<div class="welcome-header-text">' +
           '<h3>Benvenuto!</h3>' +
           '<p class="welcome-online">Sara &mdash; assistente virtuale</p>' +
@@ -138,159 +97,33 @@
   var typeTimer = null;
 
   // ── Avatar animation refs ──
-  var mouthPath = null;
-  var mouthOpen = null;
-  var blinkL = null;
-  var blinkR = null;
-  var headGroup = null;
-  var cheekL = null;
-  var cheekR = null;
-  var mouthTimer = null;
-  var blinkTimer = null;
-  var headTimer = null;
-  var blushTimer = null;
+  // ══════════════════════════════════════════════
+  // ANIMAZIONI FOTO REALE — effetti CSS dinamici
+  // ══════════════════════════════════════════════
+  var saraPhoto = null;
+  var saraRing = null;
+  var saraGlow = null;
+  var animTimer = null;
 
   function initAvatarRefs() {
-    mouthPath = document.getElementById('sara-mouth');
-    mouthOpen = document.getElementById('sara-mouth-open');
-    blinkL = document.getElementById('sara-blink-l');
-    blinkR = document.getElementById('sara-blink-r');
-    headGroup = document.getElementById('sara-head');
-    cheekL = document.getElementById('sara-cheek-l');
-    cheekR = document.getElementById('sara-cheek-r');
+    saraPhoto = document.getElementById('sara-photo');
+    saraRing = document.getElementById('sara-ring');
+    saraGlow = document.getElementById('sara-glow');
   }
 
-  // ══════════════════════════════════════════════
-  // ANIMAZIONI AVATAR
-  // ══════════════════════════════════════════════
-
-  // ── Lip-sync: bocca che si apre/chiude a ritmo del parlato ──
-  var mouthShapes = [
-    { d: 'M55 72 Q60 76 65 72', ry: 0, op: 0 },       // chiusa (sorriso)
-    { d: 'M54 73 Q60 78 66 73', ry: 2.5, op: 0.8 },   // semi-aperta
-    { d: 'M53 73 Q60 80 67 73', ry: 4, op: 1 },        // aperta
-    { d: 'M55 73 Q60 77 65 73', ry: 1.5, op: 0.6 },    // leggermente aperta
-  ];
-
-  function animateMouth() {
-    if (!isSpeaking || !mouthPath || !mouthOpen) return;
-
-    var shape = mouthShapes[Math.floor(Math.random() * mouthShapes.length)];
-    mouthPath.setAttribute('d', shape.d);
-    mouthOpen.setAttribute('ry', shape.ry);
-    mouthOpen.setAttribute('opacity', shape.op);
-
-    // Velocità variabile per sembrare naturale (80-180ms)
-    var delay = 80 + Math.random() * 100;
-    mouthTimer = setTimeout(animateMouth, delay);
-  }
-
-  function stopMouth() {
-    if (mouthTimer) clearTimeout(mouthTimer);
-    if (mouthPath) mouthPath.setAttribute('d', 'M55 72 Q60 76 65 72');
-    if (mouthOpen) { mouthOpen.setAttribute('ry', '0'); mouthOpen.setAttribute('opacity', '0'); }
-  }
-
-  // ── Blink: occhi che sbattono periodicamente ──
-  function doBlink() {
-    if (!blinkL || !blinkR) return;
-
-    // Chiudi palpebre
-    blinkL.setAttribute('ry', '5');
-    blinkR.setAttribute('ry', '5');
-
-    setTimeout(function () {
-      // Riapri
-      blinkL.setAttribute('ry', '0');
-      blinkR.setAttribute('ry', '0');
-    }, 120);
-
-    // Prossimo blink: 2-5 secondi (naturale)
-    blinkTimer = setTimeout(doBlink, 2000 + Math.random() * 3000);
-  }
-
-  function stopBlink() {
-    if (blinkTimer) clearTimeout(blinkTimer);
-    if (blinkL) blinkL.setAttribute('ry', '0');
-    if (blinkR) blinkR.setAttribute('ry', '0');
-  }
-
-  // ── Head: leggero movimento della testa ──
-  var headAngle = 0;
-  function animateHead() {
-    if (!headGroup) return;
-
-    // Oscillazione lenta: -2° a +2°
-    headAngle += (Math.random() - 0.5) * 1.5;
-    headAngle = Math.max(-2, Math.min(2, headAngle));
-
-    // Leggero shift verticale
-    var ty = Math.sin(Date.now() / 1500) * 1.5;
-
-    headGroup.setAttribute('transform',
-      'rotate(' + headAngle.toFixed(1) + ' 60 60) translate(0 ' + ty.toFixed(1) + ')');
-
-    headTimer = setTimeout(animateHead, 200);
-  }
-
-  function stopHead() {
-    if (headTimer) clearTimeout(headTimer);
-    if (headGroup) headGroup.setAttribute('transform', '');
-  }
-
-  // ── Blush: guance che si arrossano quando parla ──
-  var blushLevel = 0.15;
-
-  function animateBlush() {
-    if (!cheekL || !cheekR) return;
-
-    // Sale gradualmente fino a 0.55-0.7 con piccole oscillazioni
-    if (isSpeaking && blushLevel < 0.6) {
-      blushLevel += 0.03;
-    }
-    // Oscillazione naturale: rossore che pulsa leggermente
-    var pulse = Math.sin(Date.now() / 800) * 0.08;
-    var val = Math.min(0.7, blushLevel + pulse);
-
-    cheekL.setAttribute('opacity', val.toFixed(2));
-    cheekR.setAttribute('opacity', val.toFixed(2));
-
-    blushTimer = setTimeout(animateBlush, 120);
-  }
-
-  function fadeBlush() {
-    if (blushTimer) clearTimeout(blushTimer);
-    // Sfuma lentamente il rossore dopo che smette di parlare
-    function fade() {
-      if (blushLevel <= 0.2) {
-        blushLevel = 0.15;
-        if (cheekL) cheekL.setAttribute('opacity', '0.15');
-        if (cheekR) cheekR.setAttribute('opacity', '0.15');
-        return;
-      }
-      blushLevel -= 0.02;
-      if (cheekL) cheekL.setAttribute('opacity', blushLevel.toFixed(2));
-      if (cheekR) cheekR.setAttribute('opacity', blushLevel.toFixed(2));
-      blushTimer = setTimeout(fade, 80);
-    }
-    fade();
-  }
-
-  // ── Start/stop tutte le animazioni ──
+  // Quando Sara parla: anello luminoso pulsante + leggero zoom/rotazione foto
   function startAnimations() {
     isSpeaking = true;
-    animateMouth();
-    doBlink();
-    animateHead();
-    animateBlush();
+    if (saraRing) saraRing.classList.add('speaking');
+    if (saraGlow) saraGlow.classList.add('speaking');
+    if (saraPhoto) saraPhoto.classList.add('speaking');
   }
 
   function stopAnimations() {
     isSpeaking = false;
-    stopMouth();
-    stopBlink();
-    stopHead();
-    fadeBlush();
+    if (saraRing) saraRing.classList.remove('speaking');
+    if (saraGlow) saraGlow.classList.remove('speaking');
+    if (saraPhoto) saraPhoto.classList.remove('speaking');
   }
 
   // ── Init ──
@@ -318,8 +151,6 @@
       if (cursor) cursor.remove();
       actionsEl.classList.add('visible');
       stopAnimations();
-      // Sorriso finale
-      if (mouthPath) mouthPath.setAttribute('d', 'M54 72 Q60 77 66 72');
       return;
     }
     var ch = fullText[charIndex];
@@ -367,49 +198,121 @@
 
   function stopAudio() {
     if (audioEl) { audioEl.pause(); audioEl.currentTime = 0; }
+    speechAborted = true;
+    speechQueue = [];
     if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); }
     stopAnimations();
   }
 
-  // ── Speech API fallback ──
+  // ══════════════════════════════════════════════
+  // SPEECH API ULTRA-NATURALE — frase per frase
+  // con pause, intonazione variabile, voce premium
+  // ══════════════════════════════════════════════
+
+  // Frasi separate per parlato naturale (con pause tra ognuna)
+  var SPEECH_PHRASES = [
+    { text: "Ciao!", rate: 0.92, pitch: 1.15, pause: 500 },
+    { text: "Sono Sara, la tua assistente virtuale di Righetto Immobiliare.", rate: 0.88, pitch: 1.08, pause: 700 },
+    { text: "Dal 2000 aiutiamo chi cerca, vende o affitta casa a Padova e in tutta la provincia.", rate: 0.85, pitch: 1.05, pause: 800 },
+    { text: "Qui trovi valutazioni gratuite, consulenza su vendita e locazione, gestione completa del tuo immobile e molto altro.", rate: 0.87, pitch: 1.06, pause: 700 },
+    { text: "Se hai domande, la nostra chatbot è pronta a risponderti subito!", rate: 0.90, pitch: 1.10, pause: 400 },
+    { text: "E per tutto il resto, i nostri consulenti sono sempre a disposizione.", rate: 0.86, pitch: 1.04, pause: 600 },
+    { text: "Scegli come vuoi continuare!", rate: 0.90, pitch: 1.12, pause: 0 }
+  ];
+
+  var speechQueue = [];
+  var speechAborted = false;
+
+  function pickVoice() {
+    var voices = window.speechSynthesis.getVoices();
+    var italian = voices.filter(function (v) { return /it[-_]IT/i.test(v.lang); });
+
+    // Ranking di qualità: preferisci voci neurali/premium
+    var ranking = [
+      /neural/i,
+      /premium/i,
+      /enhanced/i,
+      /natural/i,
+      /isabella/i,
+      /elsa/i,
+      /federica/i,
+      /alice/i,
+      /google.*it/i,
+      /microsoft.*it/i,
+      /female|donna/i
+    ];
+
+    var best = null;
+    var bestScore = -1;
+
+    italian.forEach(function (v) {
+      var score = 0;
+      ranking.forEach(function (pattern, i) {
+        if (pattern.test(v.name)) score += (ranking.length - i) * 10;
+      });
+      // Bonus per voci locali (non remote) → più veloci
+      if (!v.localService) score += 5;
+      if (score > bestScore) { bestScore = score; best = v; }
+    });
+
+    return best || (italian.length ? italian[0] : null);
+  }
+
   function speakWithSpeechAPI() {
     if (!speechEnabled || !('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
+    speechAborted = false;
+    speechQueue = SPEECH_PHRASES.slice();
 
-    var text = fullText.replace(/\n/g, ' ').replace(/\u2935\ufe0f/g, '');
-    var utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'it-IT';
-    utterance.rate = 0.95;
-    utterance.pitch = 1.1;
+    function speakNext() {
+      if (speechAborted || speechQueue.length === 0) {
+        stopAnimations();
+        return;
+      }
 
-    utterance.onstart = function () { startAnimations(); };
-    utterance.onend = function () { stopAnimations(); };
+      var phrase = speechQueue.shift();
+      var utterance = new SpeechSynthesisUtterance(phrase.text);
+      utterance.lang = 'it-IT';
+      utterance.rate = phrase.rate;
+      utterance.pitch = phrase.pitch;
+      utterance.volume = 1;
 
-    function pickVoice() {
-      var voices = window.speechSynthesis.getVoices();
-      var italian = voices.filter(function (v) { return /it[-_]IT/i.test(v.lang); });
-      var preferred = italian.filter(function (v) {
-        return /female|donna|google.*it|alice|elsa|federica|isabella|natural/i.test(v.name);
-      });
-      if (preferred.length) return preferred[0];
-      if (italian.length) return italian[0];
-      return null;
+      var voice = pickVoice();
+      if (voice) utterance.voice = voice;
+
+      utterance.onstart = function () { startAnimations(); };
+      utterance.onend = function () {
+        if (speechAborted) { stopAnimations(); return; }
+        // Pausa naturale tra frasi
+        if (phrase.pause > 0 && speechQueue.length > 0) {
+          stopAnimations();
+          setTimeout(function () {
+            if (!speechAborted) speakNext();
+          }, phrase.pause);
+        } else {
+          speakNext();
+        }
+      };
+      utterance.onerror = function () {
+        if (!speechAborted && speechQueue.length > 0) speakNext();
+        else stopAnimations();
+      };
+
+      window.speechSynthesis.speak(utterance);
     }
 
+    // Attendi che le voci siano caricate
     var voice = pickVoice();
     if (voice) {
-      utterance.voice = voice;
-      window.speechSynthesis.speak(utterance);
+      speakNext();
     } else {
       window.speechSynthesis.onvoiceschanged = function () {
-        var v = pickVoice();
-        if (v) utterance.voice = v;
-        window.speechSynthesis.speak(utterance);
         window.speechSynthesis.onvoiceschanged = null;
+        speakNext();
       };
       setTimeout(function () {
-        if (!window.speechSynthesis.speaking) window.speechSynthesis.speak(utterance);
-      }, 300);
+        if (!window.speechSynthesis.speaking && !speechAborted) speakNext();
+      }, 400);
     }
   }
 
@@ -425,32 +328,201 @@
     }
   });
 
-  // ── Chiudi popup ──
-  function closePopup() {
+  // ══════════════════════════════════════════════
+  // PARTICLE DISINTEGRATION — Effetto "Thanos snap"
+  // Sara si dissolve in particelle che volano via
+  // ══════════════════════════════════════════════
+
+  var isDisintegrating = false;
+
+  function disintegrateSara(callback) {
+    if (isDisintegrating) return;
+    isDisintegrating = true;
+
+    var photo = document.getElementById('sara-photo');
+    var wrap = document.getElementById('sara-photo-wrap');
+    if (!photo || !wrap) { if (callback) callback(); return; }
+
+    // Misure reali dell'avatar nel DOM
+    var rect = photo.getBoundingClientRect();
+    var w = Math.round(rect.width);
+    var h = Math.round(rect.height);
+    if (w === 0 || h === 0) { if (callback) callback(); return; }
+
+    // Canvas sorgente: disegna la foto
+    var srcCanvas = document.createElement('canvas');
+    srcCanvas.width = w;
+    srcCanvas.height = h;
+    var srcCtx = srcCanvas.getContext('2d');
+
+    // Clip circolare come la foto
+    srcCtx.beginPath();
+    srcCtx.arc(w / 2, h / 2, w / 2, 0, Math.PI * 2);
+    srcCtx.closePath();
+    srcCtx.clip();
+    srcCtx.drawImage(photo, 0, 0, w, h);
+
+    var imageData = srcCtx.getImageData(0, 0, w, h);
+    var pixels = imageData.data;
+
+    // Crea N canvas-particella sovrapposti
+    var PARTICLE_COLS = 80;
+    var PARTICLE_ROWS = 80;
+    var cellW = w / PARTICLE_COLS;
+    var cellH = h / PARTICLE_ROWS;
+    var particles = [];
+
+    // Container per le particelle — posizionato sopra l'avatar
+    var particleContainer = document.createElement('div');
+    particleContainer.style.cssText =
+      'position:absolute;top:0;left:0;width:100%;height:100%;' +
+      'pointer-events:none;z-index:10;overflow:visible;border-radius:50%;';
+    wrap.style.position = 'relative';
+    wrap.appendChild(particleContainer);
+
+    // Genera particelle
+    for (var row = 0; row < PARTICLE_ROWS; row++) {
+      for (var col = 0; col < PARTICLE_COLS; col++) {
+        var px = Math.floor(col * cellW + cellW / 2);
+        var py = Math.floor(row * cellH + cellH / 2);
+        var idx = (py * w + px) * 4;
+
+        // Salta pixel trasparenti (fuori dal cerchio)
+        if (pixels[idx + 3] < 30) continue;
+
+        // Colore medio del blocco
+        var r = pixels[idx];
+        var g = pixels[idx + 1];
+        var b = pixels[idx + 2];
+
+        var particle = document.createElement('div');
+        var size = Math.random() * 2.5 + 1.5;
+
+        particle.style.cssText =
+          'position:absolute;border-radius:50%;' +
+          'width:' + size + 'px;height:' + size + 'px;' +
+          'background:rgb(' + r + ',' + g + ',' + b + ');' +
+          'left:' + (col * cellW) + 'px;top:' + (row * cellH) + 'px;' +
+          'opacity:1;pointer-events:none;will-change:transform,opacity;';
+
+        particleContainer.appendChild(particle);
+
+        // Direzione di volo casuale (prevalentemente verso destra e in alto)
+        var angle = (Math.random() - 0.3) * Math.PI;
+        var speed = Math.random() * 120 + 40;
+        var dx = Math.cos(angle) * speed;
+        var dy = Math.sin(angle) * speed - Math.random() * 60;
+
+        // Delay progressivo: da sinistra a destra come un'onda
+        var delay = (col / PARTICLE_COLS) * 800 + Math.random() * 400;
+        var duration = Math.random() * 800 + 800;
+
+        particles.push({
+          el: particle,
+          dx: dx,
+          dy: dy,
+          delay: delay,
+          duration: duration,
+          rotation: Math.random() * 360
+        });
+      }
+    }
+
+    // Nascondi gli effetti glow/ring
+    if (saraRing) saraRing.style.transition = 'opacity 0.3s';
+    if (saraRing) saraRing.style.opacity = '0';
+    if (saraGlow) saraGlow.style.transition = 'opacity 0.3s';
+    if (saraGlow) saraGlow.style.opacity = '0';
+
+    // Fade out testo header, body, bottoni
+    var card = document.getElementById('welcome-card');
+    var header = card.querySelector('.welcome-header-text');
+    var body = card.querySelector('.welcome-body');
+    var actions = card.querySelector('.welcome-actions');
+
+    if (header) { header.style.transition = 'opacity 0.6s ease'; header.style.opacity = '0'; }
+    if (body) { body.style.transition = 'opacity 0.6s ease 0.3s'; body.style.opacity = '0'; }
+    if (actions) { actions.style.transition = 'opacity 0.4s ease'; actions.style.opacity = '0'; }
+
+    // Anima ogni particella
+    requestAnimationFrame(function () {
+      particles.forEach(function (p) {
+        setTimeout(function () {
+          p.el.style.transition = 'transform ' + p.duration + 'ms cubic-bezier(0.4,0,0.2,1), opacity ' + p.duration + 'ms ease-out';
+          p.el.style.transform = 'translate(' + p.dx + 'px,' + p.dy + 'px) rotate(' + p.rotation + 'deg) scale(0.3)';
+          p.el.style.opacity = '0';
+        }, p.delay);
+      });
+    });
+
+    // Fade out la foto originale progressivamente
+    setTimeout(function () {
+      photo.style.transition = 'opacity 0.8s ease';
+      photo.style.opacity = '0';
+    }, 300);
+
+    // Fade out bordo avatar
+    var avatarWrap = card.querySelector('.welcome-avatar-wrap');
+    if (avatarWrap) {
+      setTimeout(function () {
+        avatarWrap.style.transition = 'opacity 0.5s ease';
+        avatarWrap.style.opacity = '0';
+      }, 1000);
+    }
+
+    // Callback quando l'animazione è finita
+    var maxDuration = 1800;
+    setTimeout(function () {
+      // Dissolvi l'intera card
+      if (card) {
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.95)';
+      }
+      overlay.style.transition = 'opacity 0.5s ease';
+      overlay.classList.remove('visible');
+      setTimeout(function () {
+        overlay.remove();
+        isDisintegrating = false;
+        if (callback) callback();
+      }, 500);
+    }, maxDuration);
+  }
+
+  // ── Chiudi popup CON effetto disintegrazione ──
+  function closePopup(callback) {
+    if (typeTimer) clearTimeout(typeTimer);
+    stopAudio();
+    disintegrateSara(callback || null);
+  }
+
+  // ── Chiudi rapido (senza effetto, per ESC/click overlay) ──
+  function closePopupFast() {
     if (typeTimer) clearTimeout(typeTimer);
     stopAudio();
     overlay.classList.remove('visible');
     setTimeout(function () { overlay.remove(); }, 400);
   }
 
-  overlay.querySelector('.welcome-close').addEventListener('click', closePopup);
-  overlay.addEventListener('click', function (e) { if (e.target === overlay) closePopup(); });
+  overlay.querySelector('.welcome-close').addEventListener('click', function () { closePopup(); });
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) closePopupFast(); });
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && document.getElementById('welcome-overlay')) closePopup();
+    if (e.key === 'Escape' && document.getElementById('welcome-overlay')) closePopupFast();
   });
 
-  // ── CTA: Apri chatbot ──
+  // ── CTA: Apri chatbot (con disintegrazione) ──
   document.getElementById('welcome-chatbot').addEventListener('click', function () {
-    closePopup();
-    setTimeout(function () {
-      if (window.rigChat && typeof window.rigChat.toggle === 'function') {
-        var box = document.getElementById('rig-chat-box');
-        if (!box || !box.classList.contains('open')) window.rigChat.toggle();
-      }
-    }, 500);
+    closePopup(function () {
+      setTimeout(function () {
+        if (window.rigChat && typeof window.rigChat.toggle === 'function') {
+          var box = document.getElementById('rig-chat-box');
+          if (!box || !box.classList.contains('open')) window.rigChat.toggle();
+        }
+      }, 200);
+    });
   });
 
-  // ── CTA: Buona navigazione ──
-  document.getElementById('welcome-browse').addEventListener('click', closePopup);
+  // ── CTA: Buona navigazione (con disintegrazione) ──
+  document.getElementById('welcome-browse').addEventListener('click', function () { closePopup(); });
 
 })();
