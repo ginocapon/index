@@ -726,6 +726,219 @@ const FAQ_DATA = [
   {
     k: ['efficientamento', 'classe energetica migliorare', 'ape post lavori'],
     r: '🏠 **Pratiche di efficientamento energetico:**\n\n• APE post-riqualificazione\n• Classi D1-D4\n• Coordinamento con tecnici certificati\n\nMigliora la classe energetica e aumenta il valore del tuo immobile.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ IMMOBILIARI — CARATTERISTICHE DELL'IMMOBILE
+  // Sezione 1: Struttura e Spazi (1-20)
+  // ═══════════════════════════════════════════════
+  {
+    k: ['quante stanze', 'numero stanze', 'stanze immobile', 'locali'],
+    r: '🏠 **Quante stanze ha l\'immobile?**\n\nIl numero di stanze è indicato nella scheda dell\'immobile. Per dettagli specifici, contatta il nostro consulente.\n\n📞 **049 884 3484** oppure scrivi *"contattami"*.'
+  },
+  {
+    k: ['quanti bagni', 'numero bagni', 'bagni immobile', 'servizi igienici'],
+    r: '🚿 **Quanti bagni ci sono?**\n\nIl numero di bagni è specificato nell\'annuncio. In genere, gli appartamenti hanno da **1 a 3 bagni**. Controlla la scheda dell\'immobile per il dato esatto.'
+  },
+  {
+    k: ['metratura', 'metri quadri', 'superficie', 'grandezza', 'dimensione immobile'],
+    r: '📐 **Metratura dell\'immobile**\n\nLa metratura è indicata nella scheda. Attenzione:\n• **Mq commerciali** — includono muri e pertinenze\n• **Mq calpestabili** — superficie effettivamente vivibile\n\nPer il dato esatto, consulta l\'annuncio o chiedi al consulente.'
+  },
+  {
+    k: ['mq commerciali', 'mq calpestabili', 'differenza mq', 'superficie commerciale', 'superficie calpestabile'],
+    r: '📏 **Mq commerciali vs calpestabili**\n\n• **Mq commerciali:** includono muri perimetrali, divisori e quote di pertinenze\n• **Mq calpestabili:** la superficie effettivamente vivibile, senza muri\n\nLa differenza può essere del **15-25%**. Chiedi sempre quale dato è indicato nell\'annuncio.'
+  },
+  {
+    k: ['balcone', 'terrazzo', 'terrazza', 'loggia'],
+    r: '🌇 **Balcone o terrazzo?**\n\nVerifica nella scheda dell\'immobile. Balconi e terrazzi sono sempre indicati con le relative metrature. Un terrazzo ampio aggiunge valore significativo all\'immobile.'
+  },
+  {
+    k: ['giardino privato', 'giardino', 'area verde', 'spazio esterno'],
+    r: '🌳 **Giardino privato**\n\nSe presente, è indicato nell\'annuncio con la relativa metratura. Il giardino privato è un plus molto ricercato, soprattutto per famiglie. Chiedi al consulente per ulteriori dettagli.'
+  },
+  {
+    k: ['garage', 'posto auto', 'parcheggio', 'autorimessa'],
+    r: '🚗 **Garage o posto auto**\n\nGarage e posti auto sono indicati nella scheda. Possono essere:\n• **Inclusi** nel prezzo di vendita\n• **Venduti separatamente**\n\nIn zone residenziali di Padova, il posto auto è un valore aggiunto molto importante.'
+  },
+  {
+    k: ['cantina', 'solaio', 'soffitta', 'pertinenze'],
+    r: '📦 **Cantina e solaio**\n\nLe pertinenze come cantina e solaio sono indicate nella descrizione dell\'immobile. Chiedi al consulente per dimensioni e accessibilità. Sono spazi utili per deposito e organizzazione.'
+  },
+  {
+    k: ['piano', 'che piano', 'quale piano', 'piano alto', 'piano basso', 'piano terra'],
+    r: '🏢 **A che piano si trova?**\n\nIl piano è indicato nell\'annuncio.\n• **Piani alti** = più luce e privacy\n• **Piani bassi** = più comodi per anziani e famiglie\n• **Piano terra** = accesso diretto, spesso con giardino'
+  },
+  {
+    k: ['ascensore', 'elevatore', 'montacarichi'],
+    r: '🛗 **C\'è l\'ascensore?**\n\nLa presenza dell\'ascensore è specificata nella scheda dell\'immobile. Per condomini senza ascensore, verifica la possibilità di installazione futura.'
+  },
+  {
+    k: ['livelli', 'piani interni', 'più piani', 'doppio livello', 'su due piani'],
+    r: '🏠 **Unico livello o più piani?**\n\nÈ indicato nella descrizione. Le soluzioni su più livelli offrono **più privacy** tra zona giorno e notte, tipiche di villette e attici duplex.'
+  },
+  {
+    k: ['esposizione', 'orientamento', 'sud', 'nord', 'est', 'ovest'],
+    r: '☀️ **Esposizione dell\'immobile**\n\nL\'esposizione è indicata nella scheda:\n• **Sud/Sud-Ovest** = più luce naturale\n• **Nord** = più fresco d\'estate, meno luminoso\n• **Est** = sole al mattino\n• **Ovest** = sole al pomeriggio\n\nL\'esposizione incide su comfort e consumi energetici.'
+  },
+  {
+    k: ['luminoso', 'luminosità', 'luce naturale', 'buio'],
+    r: '💡 **L\'immobile è luminoso?**\n\nLa luminosità dipende da esposizione, piano e dimensione delle finestre. Ti consigliamo sempre una **visita di persona** per valutare la luce naturale nelle diverse ore del giorno.'
+  },
+  {
+    k: ['armadi a muro', 'armadio incassato', 'cabina armadio'],
+    r: '🚪 **Armadi a muro**\n\nSe presenti, sono indicati nella descrizione dell\'immobile. In caso contrario, verifica gli spazi disponibili per installarli. Una cabina armadio è un plus molto apprezzato.'
+  },
+  {
+    k: ['cucina abitabile', 'angolo cottura', 'cucinotto', 'cucina separata'],
+    r: '🍳 **Cucina abitabile o angolo cottura?**\n\nQuesto dettaglio è nella descrizione:\n• **Cucina abitabile** — permette di mangiare in cucina\n• **Angolo cottura** — integrato nel soggiorno, soluzione moderna open space\n• **Cucinotto** — cucina piccola separata'
+  },
+  {
+    k: ['ripostiglio', 'sgabuzzino', 'locale deposito'],
+    r: '📦 **Ripostiglio**\n\nSe presente, è indicato nella scheda. È uno spazio utile spesso sottovalutato: perfetto per scope, aspirapolvere, scorte e organizzazione domestica.'
+  },
+  {
+    k: ['ingresso indipendente', 'accesso indipendente', 'entrata privata'],
+    r: '🚪 **Ingresso indipendente**\n\nPer **ville e villette** sì, l\'ingresso è sempre indipendente. Per appartamenti, verifica nella scheda se l\'accesso è da vano scale condominiale o indipendente.'
+  },
+  {
+    k: ['quanti posti auto', 'numero posti auto', 'posti macchina'],
+    r: '🅿️ **Quanti posti auto?**\n\nSono indicati nella scheda dell\'immobile. In zone residenziali di Padova, il posto auto è un valore aggiunto importante, soprattutto in centro e zone a traffico limitato.'
+  },
+  {
+    k: ['garage singolo', 'garage doppio', 'capienza garage', 'dimensione garage'],
+    r: '🚘 **Garage singolo o doppio?**\n\nDimensione e capienza sono specificate nell\'annuncio:\n• **Garage singolo** — 1 auto + spazio deposito\n• **Garage doppio** — ospita comodamente 2 auto\n\nVerifica le dimensioni esatte nella scheda.'
+  },
+  {
+    k: ['lavanderia', 'locale lavanderia', 'lavatrice dove'],
+    r: '👕 **Lavanderia**\n\nSe presente, è indicata nell\'annuncio. In caso contrario, spesso si può ricavare uno spazio lavanderia in:\n• Bagno secondario\n• Cantina\n• Terrazzo coperto\n• Ripostiglio'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ IMMOBILIARI — STATO E CONDIZIONI (21-34)
+  // ═══════════════════════════════════════════════
+  {
+    k: ['immobile nuovo', 'immobile usato', 'stato immobile', 'condizioni immobile'],
+    r: '🏗️ **Stato dell\'immobile**\n\nLo stato è indicato nell\'annuncio:\n• **Nuovo** — appena costruito, mai abitato\n• **Ristrutturato** — lavori recenti, come nuovo\n• **Buono stato** — ben mantenuto, abitabile subito\n• **Da ristrutturare** — richiede lavori, prezzo più basso\n\nOgni condizione ha i suoi vantaggi!'
+  },
+  {
+    k: ['anno costruzione', 'quando costruito', 'età immobile', 'anno edificio'],
+    r: '📅 **Anno di costruzione**\n\nL\'anno è indicato nella scheda.\n• **Ante 1970** — possono richiedere più interventi\n• **1970-2005** — verificare impianti e isolamento\n• **Post 2005** — generalmente più efficienti energeticamente\n\nChiedi al consulente per dettagli specifici.'
+  },
+  {
+    k: ['da ristrutturare', 'costo ristrutturazione', 'lavori necessari'],
+    r: '🔨 **Immobile da ristrutturare**\n\nSe indicato come "da ristrutturare", prevedi lavori. Puoi sfruttare i **bonus fiscali vigenti** per ridurre i costi:\n• Detrazione 50% ristrutturazione\n• Ecobonus 50-65%\n• Bonus mobili\n\nIl consulente può aiutarti a stimare i costi.'
+  },
+  {
+    k: ['ultima ristrutturazione', 'quando ristrutturato', 'interventi fatti'],
+    r: '🔧 **Ultima ristrutturazione**\n\nSe disponibile, il dato è nella scheda dell\'immobile. Chiedi al consulente per dettagli specifici sugli interventi effettuati e la relativa documentazione.'
+  },
+  {
+    k: ['lavori fatti', 'storico lavori', 'interventi eseguiti', 'cosa è stato rifatto'],
+    r: '📋 **Lavori di ristrutturazione eseguiti**\n\nIl consulente può fornirti lo storico degli interventi. Verifica sempre la **documentazione** relativa ai lavori eseguiti: permessi, fatture e certificati di conformità.'
+  },
+  {
+    k: ['intonaco', 'facciata', 'esterno edificio', 'stato esterno'],
+    r: '🏠 **Intonaco e facciata esterna**\n\nLo stato dell\'intonaco è verificabile durante il sopralluogo. Eventuali crepe o distacchi vanno valutati da un tecnico. Il rifacimento della facciata è spesa condominiale.'
+  },
+  {
+    k: ['tetto', 'copertura', 'tetto rifatto', 'impermeabilizzazione tetto'],
+    r: '🏠 **Stato del tetto**\n\nChiedi al consulente se il tetto è stato rifatto di recente. Un tetto rifatto è garanzia di:\n• Impermeabilità\n• Isolamento termico\n• Durata per molti anni\n\nÈ un elemento importante nella valutazione.'
+  },
+  {
+    k: ['grondaie', 'pluviali', 'scarichi tetto'],
+    r: '🌧️ **Stato delle grondaie**\n\nVerifica durante il sopralluogo. Grondaie in cattivo stato possono causare:\n• Infiltrazioni\n• Danni alle pareti esterne\n• Umidità nei muri\n\nLa manutenzione è generalmente a carico del condominio.'
+  },
+  {
+    k: ['umidità', 'muffa', 'umido', 'condensa'],
+    r: '💧 **Problemi di umidità**\n\nEventuali problemi sono dichiarati o verificabili durante la visita. Segnali da controllare:\n• Macchie sui muri\n• Muffa negli angoli\n• Odore di umido\n• Condensa sulle finestre\n\nSe noti qualcosa, chiedi una valutazione tecnica.'
+  },
+  {
+    k: ['infiltrazioni', 'perdite acqua', 'infiltrazione tetto', 'infiltrazione parete'],
+    r: '🌊 **Infiltrazioni**\n\nIl venditore è tenuto a dichiarare eventuali infiltrazioni. Durante la visita, controlla:\n• Soffitti per macchie di umidità\n• Angoli per segni di infiltrazione\n• Pareti perimetrali\n\nIn caso di dubbi, richiedi una perizia tecnica.'
+  },
+  {
+    k: ['pavimento', 'pavimentazione', 'parquet', 'piastrelle', 'gres'],
+    r: '🏠 **Stato del pavimento**\n\nVerifica in visita lo stato della pavimentazione. Controlla:\n• Piastrelle rotte o scheggiate\n• Parquet danneggiato o sollevato\n• Pavimenti irregolari\n\nEventuali interventi vanno valutati nel budget complessivo.'
+  },
+  {
+    k: ['muri portanti', 'struttura', 'strutturale', 'statica edificio'],
+    r: '🧱 **Muri portanti e struttura**\n\nUn tecnico può verificare lo stato dei muri portanti. Crepe significative richiedono una **valutazione strutturale** da parte di un ingegnere strutturista. Le micro-fessure da assestamento sono normali.'
+  },
+  {
+    k: ['amianto', 'eternit', 'fibrocemento'],
+    r: '⚠️ **Presenza di amianto**\n\nPer immobili costruiti **prima del 1992** è possibile la presenza di amianto (eternit). In caso di dubbi, è necessaria una **perizia specializzata**. La rimozione va affidata a ditte certificate con smaltimento a norma.'
+  },
+  {
+    k: ['crepe', 'fessure', 'lesioni muri', 'crepa muro'],
+    r: '🔍 **Crepe e fessure**\n\n• **Micro-fessure** — normali nell\'assestamento dell\'edificio\n• **Crepe diagonali o ampie** — richiedono la valutazione di un ingegnere strutturista\n\nDurante la visita, il consulente può aiutarti a valutare la situazione.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ IMMOBILIARI — IMPIANTI E RISCALDAMENTO (35-50)
+  // ═══════════════════════════════════════════════
+  {
+    k: ['tipo riscaldamento', 'sistema riscaldamento', 'come si riscalda'],
+    r: '🔥 **Tipo di riscaldamento**\n\nPuò essere:\n• **Autonomo** — gestisci tu consumi e costi\n• **Centralizzato** — spese condivise con il condominio\n\nIl tipo è indicato nella scheda dell\'immobile.'
+  },
+  {
+    k: ['autonomo centralizzato', 'riscaldamento autonomo', 'riscaldamento centralizzato', 'riscaldamento condominiale'],
+    r: '🌡️ **Autonomo vs Centralizzato**\n\nÈ indicato nella scheda:\n• **Autonomo** — più controllo su temperature e costi, accensione libera\n• **Centralizzato** — comodo ma meno flessibile, orari prestabiliti\n\nEntrambi hanno vantaggi, dipende dalle tue esigenze.'
+  },
+  {
+    k: ['gas metano', 'metano', 'allaccio gas', 'riscaldamento gas'],
+    r: '🔵 **Riscaldamento a gas metano**\n\nÈ il sistema più diffuso nella provincia di Padova. Verifica nella scheda dell\'immobile o chiedi al consulente. Nella maggior parte delle zone urbane il gas metano è già allacciato.'
+  },
+  {
+    k: ['pompa di calore', 'pompa calore', 'heat pump'],
+    r: '♻️ **Pompa di calore**\n\nSe presente, è indicato nella scheda. Le pompe di calore sono **molto efficienti** e possono:\n• Riscaldare d\'inverno\n• Raffreddare d\'estate\n• Ridurre i consumi fino al 40%\n\nSono un investimento che valorizza l\'immobile.'
+  },
+  {
+    k: ['riscaldamento pavimento', 'pavimento radiante', 'radiante'],
+    r: '🏠 **Riscaldamento a pavimento**\n\nSe presente, è un grande vantaggio:\n• Distribuzione **uniforme** del calore\n• **Risparmio energetico** significativo\n• Nessun radiatore a vista\n• Maggiore comfort abitativo\n\nÈ indicato nella scheda dell\'immobile.'
+  },
+  {
+    k: ['termosifoni', 'radiatori', 'fan coil', 'caloriferi'],
+    r: '🌡️ **Termosifoni o fan coil?**\n\nVerifica nella scheda:\n• **Termosifoni** — classici, affidabili\n• **Fan coil** — più moderni, possono funzionare anche per il **raffreddamento estivo**\n\nI fan coil offrono maggiore versatilità.'
+  },
+  {
+    k: ['aria condizionata', 'climatizzatore', 'condizionatore', 'raffrescamento'],
+    r: '❄️ **Aria condizionata**\n\nSe presente, è indicato nell\'annuncio. In caso contrario, verifica:\n• La **predisposizione** per l\'installazione\n• La possibilità di installare split\n• Eventuali vincoli condominiali\n\nNelle estati padovane è un comfort molto apprezzato.'
+  },
+  {
+    k: ['impianto elettrico', 'elettrico a norma', 'certificato conformità elettrico'],
+    r: '⚡ **Impianto elettrico a norma**\n\nPer impianti **post-2008** serve il certificato di conformità (DM 37/08). Per i precedenti, basta il certificato di rispondenza. Verifica con il consulente lo stato dell\'impianto.'
+  },
+  {
+    k: ['impianto idraulico', 'tubature', 'tubi', 'idraulico a norma'],
+    r: '🔧 **Impianto idraulico**\n\nVerifica con il consulente. Impianti vecchi in **piombo o ferro zincato** andrebbero sostituiti per sicurezza e qualità dell\'acqua. I moderni impianti in multistrato sono più affidabili.'
+  },
+  {
+    k: ['gas allacciato', 'allaccio gas metano', 'rete gas'],
+    r: '🔵 **Gas metano allacciato**\n\nNella maggior parte delle zone urbane di Padova sì. Per zone rurali o isolate, verifica la disponibilità dell\'allaccio alla rete del gas. In alternativa si può optare per GPL o pompa di calore.'
+  },
+  {
+    k: ['predisposizione condizionatore', 'predisposizione clima', 'predisposizione aria condizionata'],
+    r: '❄️ **Predisposizione aria condizionata**\n\nSe presente, l\'installazione è **più semplice ed economica** (tubi già passati, scarichi predisposti). Chiedi al consulente per verificare la presenza della predisposizione nell\'immobile.'
+  },
+  {
+    k: ['caldaia recente', 'età caldaia', 'caldaia vecchia', 'impianto recente'],
+    r: '🔥 **Impianto di riscaldamento recente?**\n\nChiedi al consulente l\'anno della caldaia o pompa di calore. Una **caldaia a condensazione moderna** riduce i consumi del **20-30%** rispetto ai modelli tradizionali.'
+  },
+  {
+    k: ['caldaia condensazione', 'condensazione', 'caldaia moderna'],
+    r: '🌱 **Caldaia a condensazione**\n\nSe presente è un vantaggio:\n• Consuma **meno** gas\n• Inquina meno\n• Rendimento più alto\n\nSono obbligatorie per le nuove installazioni **dal 2015**. È un elemento che valorizza l\'immobile.'
+  },
+  {
+    k: ['pannelli solari', 'fotovoltaico', 'solare termico', 'energia solare'],
+    r: '☀️ **Pannelli solari o fotovoltaici**\n\nSe presenti, sono indicati nella scheda. I vantaggi:\n• Riduzione significativa dei **costi energetici**\n• Aumento del **valore dell\'immobile**\n• Possibilità di incentivi GSE\n• Contributo alla sostenibilità ambientale'
+  },
+  {
+    k: ['allarme', 'antifurto', 'sistema sicurezza', 'impianto allarme', 'videosorveglianza'],
+    r: '🔐 **Impianto di allarme**\n\nSe presente, è indicato nella scheda. Verifica:\n• Se è **funzionante** e aggiornato\n• Il tipo (perimetrale, volumetrico, misto)\n• La presenza di videosorveglianza\n\nUn impianto di sicurezza è un valore aggiunto per l\'immobile.'
+  },
+  {
+    k: ['tv', 'antenna', 'fibra ottica', 'internet', 'connessione'],
+    r: '📡 **Impianto TV e fibra ottica**\n\nLa predisposizione TV è generalmente presente in tutti gli immobili. Per la **fibra ottica**, verifica la copertura nella zona su:\n• Sito del tuo operatore\n• Open Fiber\n\nLa fibra è un comfort sempre più importante, soprattutto per chi lavora da casa.'
   }
 ];
 
