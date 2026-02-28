@@ -198,49 +198,121 @@
 
   function stopAudio() {
     if (audioEl) { audioEl.pause(); audioEl.currentTime = 0; }
+    speechAborted = true;
+    speechQueue = [];
     if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); }
     stopAnimations();
   }
 
-  // ── Speech API fallback ──
+  // ══════════════════════════════════════════════
+  // SPEECH API ULTRA-NATURALE — frase per frase
+  // con pause, intonazione variabile, voce premium
+  // ══════════════════════════════════════════════
+
+  // Frasi separate per parlato naturale (con pause tra ognuna)
+  var SPEECH_PHRASES = [
+    { text: "Ciao!", rate: 0.92, pitch: 1.15, pause: 500 },
+    { text: "Sono Sara, la tua assistente virtuale di Righetto Immobiliare.", rate: 0.88, pitch: 1.08, pause: 700 },
+    { text: "Dal 2000 aiutiamo chi cerca, vende o affitta casa a Padova e in tutta la provincia.", rate: 0.85, pitch: 1.05, pause: 800 },
+    { text: "Qui trovi valutazioni gratuite, consulenza su vendita e locazione, gestione completa del tuo immobile e molto altro.", rate: 0.87, pitch: 1.06, pause: 700 },
+    { text: "Se hai domande, la nostra chatbot è pronta a risponderti subito!", rate: 0.90, pitch: 1.10, pause: 400 },
+    { text: "E per tutto il resto, i nostri consulenti sono sempre a disposizione.", rate: 0.86, pitch: 1.04, pause: 600 },
+    { text: "Scegli come vuoi continuare!", rate: 0.90, pitch: 1.12, pause: 0 }
+  ];
+
+  var speechQueue = [];
+  var speechAborted = false;
+
+  function pickVoice() {
+    var voices = window.speechSynthesis.getVoices();
+    var italian = voices.filter(function (v) { return /it[-_]IT/i.test(v.lang); });
+
+    // Ranking di qualità: preferisci voci neurali/premium
+    var ranking = [
+      /neural/i,
+      /premium/i,
+      /enhanced/i,
+      /natural/i,
+      /isabella/i,
+      /elsa/i,
+      /federica/i,
+      /alice/i,
+      /google.*it/i,
+      /microsoft.*it/i,
+      /female|donna/i
+    ];
+
+    var best = null;
+    var bestScore = -1;
+
+    italian.forEach(function (v) {
+      var score = 0;
+      ranking.forEach(function (pattern, i) {
+        if (pattern.test(v.name)) score += (ranking.length - i) * 10;
+      });
+      // Bonus per voci locali (non remote) → più veloci
+      if (!v.localService) score += 5;
+      if (score > bestScore) { bestScore = score; best = v; }
+    });
+
+    return best || (italian.length ? italian[0] : null);
+  }
+
   function speakWithSpeechAPI() {
     if (!speechEnabled || !('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
+    speechAborted = false;
+    speechQueue = SPEECH_PHRASES.slice();
 
-    var text = fullText.replace(/\n/g, ' ').replace(/\u2935\ufe0f/g, '');
-    var utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'it-IT';
-    utterance.rate = 0.95;
-    utterance.pitch = 1.1;
+    function speakNext() {
+      if (speechAborted || speechQueue.length === 0) {
+        stopAnimations();
+        return;
+      }
 
-    utterance.onstart = function () { startAnimations(); };
-    utterance.onend = function () { stopAnimations(); };
+      var phrase = speechQueue.shift();
+      var utterance = new SpeechSynthesisUtterance(phrase.text);
+      utterance.lang = 'it-IT';
+      utterance.rate = phrase.rate;
+      utterance.pitch = phrase.pitch;
+      utterance.volume = 1;
 
-    function pickVoice() {
-      var voices = window.speechSynthesis.getVoices();
-      var italian = voices.filter(function (v) { return /it[-_]IT/i.test(v.lang); });
-      var preferred = italian.filter(function (v) {
-        return /female|donna|google.*it|alice|elsa|federica|isabella|natural/i.test(v.name);
-      });
-      if (preferred.length) return preferred[0];
-      if (italian.length) return italian[0];
-      return null;
+      var voice = pickVoice();
+      if (voice) utterance.voice = voice;
+
+      utterance.onstart = function () { startAnimations(); };
+      utterance.onend = function () {
+        if (speechAborted) { stopAnimations(); return; }
+        // Pausa naturale tra frasi
+        if (phrase.pause > 0 && speechQueue.length > 0) {
+          stopAnimations();
+          setTimeout(function () {
+            if (!speechAborted) speakNext();
+          }, phrase.pause);
+        } else {
+          speakNext();
+        }
+      };
+      utterance.onerror = function () {
+        if (!speechAborted && speechQueue.length > 0) speakNext();
+        else stopAnimations();
+      };
+
+      window.speechSynthesis.speak(utterance);
     }
 
+    // Attendi che le voci siano caricate
     var voice = pickVoice();
     if (voice) {
-      utterance.voice = voice;
-      window.speechSynthesis.speak(utterance);
+      speakNext();
     } else {
       window.speechSynthesis.onvoiceschanged = function () {
-        var v = pickVoice();
-        if (v) utterance.voice = v;
-        window.speechSynthesis.speak(utterance);
         window.speechSynthesis.onvoiceschanged = null;
+        speakNext();
       };
       setTimeout(function () {
-        if (!window.speechSynthesis.speaking) window.speechSynthesis.speak(utterance);
-      }, 300);
+        if (!window.speechSynthesis.speaking && !speechAborted) speakNext();
+      }, 400);
     }
   }
 
