@@ -33,6 +33,11 @@
 
   var fullText = WELCOME_LINES.join('');
 
+  // ── Detect mobile / touch devices (iPad compreso) ──
+  var isMobile = /Mobi|Android|iPad|iPhone|iPod/i.test(navigator.userAgent) ||
+                 (('ontouchstart' in window) && navigator.maxTouchPoints > 0) ||
+                 (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); // iPad con iPadOS
+
   // ── Audio engine ──
   var AUDIO_MP3 = 'audio/welcome-sara.mp3';
   var audioEl = null;
@@ -111,9 +116,10 @@
     saraGlow = document.getElementById('sara-glow');
   }
 
-  // Quando Sara parla: anello luminoso pulsante + leggero zoom/rotazione foto
+  // Quando Sara parla: anello luminoso pulsante + movimenti dinamici corpo/testa
   function startAnimations() {
     isSpeaking = true;
+    if (saraPhoto) saraPhoto.classList.remove('idle');
     if (saraRing) saraRing.classList.add('speaking');
     if (saraGlow) saraGlow.classList.add('speaking');
     if (saraPhoto) saraPhoto.classList.add('speaking');
@@ -124,6 +130,8 @@
     if (saraRing) saraRing.classList.remove('speaking');
     if (saraGlow) saraGlow.classList.remove('speaking');
     if (saraPhoto) saraPhoto.classList.remove('speaking');
+    // Torna all'animazione idle (respiro leggero)
+    if (saraPhoto) saraPhoto.classList.add('idle');
   }
 
   // ── Init ──
@@ -133,15 +141,54 @@
       sessionStorage.setItem('welcome_shown', '1');
       setTimeout(function () {
         initAvatarRefs();
-        startTypewriter();
+        // Attiva subito l'animazione idle (respiro leggero)
+        if (saraPhoto) saraPhoto.classList.add('idle');
+
+        if (isMobile) {
+          // Mobile/iPad: avvia typewriter SENZA audio (browser lo blocca)
+          // Mostra pulsante PLAY sull'avatar per sbloccare l'audio con tap utente
+          startTypewriter(false);
+          showMobilePlayBtn();
+        } else {
+          // Desktop: autoplay come prima
+          startTypewriter(true);
+        }
       }, 600);
     }, 1200);
   });
 
+  // ── Pulsante PLAY per mobile — sblocca audio con gesto utente ──
+  function showMobilePlayBtn() {
+    var wrap = document.getElementById('sara-photo-wrap');
+    if (!wrap) return;
+
+    var btn = document.createElement('button');
+    btn.className = 'sara-mobile-play';
+    btn.setAttribute('aria-label', 'Ascolta Sara');
+    btn.innerHTML =
+      '<svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>' +
+      '<span class="sara-play-label">Tocca per ascoltare</span>';
+    wrap.style.position = 'relative';
+    wrap.appendChild(btn);
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      // Animazione uscita pulsante
+      btn.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      btn.style.opacity = '0';
+      btn.style.transform = 'translate(-50%, -50%) scale(0.5)';
+      setTimeout(function () { btn.remove(); }, 300);
+
+      // Togli idle, avvia audio (il tap dell'utente sblocca l'audio su iOS/Android)
+      if (saraPhoto) saraPhoto.classList.remove('idle');
+      playAudio();
+    }, { once: true });
+  }
+
   // ── Typewriter ──
-  function startTypewriter() {
+  function startTypewriter(withAudio) {
     charIndex = 0;
-    playAudio();
+    if (withAudio !== false) playAudio();
     typeNext();
   }
 
