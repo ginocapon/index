@@ -729,6 +729,9 @@ const FAQ_DATA = [
   }
 ];
 
+// Espone FAQ_DATA per la pagina FAQ statica
+window.RIGHETTO_FAQ_DATA = FAQ_DATA;
+
 // ══════════════════════════════════════════════
 // CHATBOT ENGINE
 // ══════════════════════════════════════════════

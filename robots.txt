@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /scraping.html
+Disallow: /bookmarklet-helper.html
+Disallow: /js/
+
+Sitemap: https://righettoimmobiliare.it/sitemap.xml
