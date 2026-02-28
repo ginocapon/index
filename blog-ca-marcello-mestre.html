@@ -2,10 +2,14 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#2C4A6E">
   <title>Ca' Marcello Mestre: da area industriale dismessa a hub turistico da 70 milioni — Righetto Immobiliare</title>
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
   <link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/cormorant-garamond-600.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="canonical" href="https://righettoimmobiliare.it/blog-ca-marcello-mestre.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Ca' Marcello Mestre: da area industriale dismessa a hub turistico da 70 milioni">
@@ -20,9 +24,14 @@
   <meta property="article:tag" content="riqualificazione urbana">
   <meta property="article:tag" content="investimenti immobiliari">
   <meta property="article:tag" content="Mestre Venezia">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ca' Marcello Mestre: da area industriale dismessa a hub turistico da 70 milioni">
+  <meta name="twitter:description" content="Il progetto Ca' Marcello a Mestre e' il modello perfetto di riqualificazione urbana: 16.000 mq, 4 hotel, 2.000 posti letto, completato in 22 mesi. Cosa insegna al mercato immobiliare di Padova.">
+  <meta name="twitter:image" content="https://righettoimmobiliare.it/img/blog/ca-marcello-hero.jpg">
   <meta name="description" content="Il progetto Ca' Marcello a Mestre (Venezia): 70 milioni per trasformare un'ex area industriale in hub turistico con 4 hotel e 2.000 posti letto. Analisi completa e lezioni per il mercato immobiliare di Padova.">
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/nav-mobile.css">
+  <link rel="stylesheet" href="css/scroll-reveal.css">
 
   <!-- JSON-LD Article -->
   <script type="application/ld+json">
@@ -278,7 +287,10 @@
 
 <!-- HERO con immagine -->
 <div class="art-hero">
-  <img class="art-hero-img" src="img/blog/ca-marcello-hero.jpg" alt="Complesso Ca' Marcello a Mestre, Venezia - architettura moderna del polo alberghiero" width="1200" height="600" fetchpriority="high">
+  <picture>
+    <source srcset="img/blog/ca-marcello-hero.webp" type="image/webp">
+    <img class="art-hero-img" src="img/blog/ca-marcello-hero.jpg" alt="Complesso Ca' Marcello a Mestre, Venezia - architettura moderna del polo alberghiero" width="1200" height="600" fetchpriority="high">
+  </picture>
   <div class="art-hero-overlay">
     <div class="art-hero-inner">
       <div class="breadcrumb"><a href="index.html">Home</a> / <a href="blog.html">Blog</a> / Ca' Marcello Mestre</div>
@@ -331,7 +343,10 @@
     <p>Nel 2017, la societa' austriaca <strong>MTK Developments</strong> ha avviato un progetto di sostituzione edilizia radicale: demolizione completa dei capannoni preesistenti e nuova edificazione con tecniche costruttive industrializzate, che hanno permesso tempi di realizzazione straordinariamente rapidi.</p>
 
     <figure>
-      <img src="img/blog/ca-marcello-interni.jpg" alt="Edificio moderno del complesso Ca' Marcello Mestre - architettura contemporanea" loading="lazy">
+      <picture>
+        <source srcset="img/blog/ca-marcello-interni.webp" type="image/webp">
+        <img src="img/blog/ca-marcello-interni.jpg" alt="Edificio moderno del complesso Ca' Marcello Mestre - architettura contemporanea" loading="lazy">
+      </picture>
       <figcaption>Gli interni del Leonardo Royal Hotel Venice Mestre, fiore all'occhiello del complesso Ca' Marcello</figcaption>
     </figure>
 
@@ -370,7 +385,10 @@
     </ul>
 
     <figure>
-      <img src="img/blog/ca-marcello-piazza.jpg" alt="Panorama urbano: il modello di riqualificazione e sviluppo immobiliare di Ca' Marcello" loading="lazy">
+      <picture>
+        <source srcset="img/blog/ca-marcello-piazza.webp" type="image/webp">
+        <img src="img/blog/ca-marcello-piazza.jpg" alt="Panorama urbano: il modello di riqualificazione e sviluppo immobiliare di Ca' Marcello" loading="lazy">
+      </picture>
       <figcaption>La piazza pubblica e le aree verdi del complesso Ca' Marcello: riqualificazione che genera valore per l'intera comunita'</figcaption>
     </figure>
 
@@ -519,10 +537,11 @@ document.querySelectorAll('.faq-q').forEach(function(q) {
   });
 });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="js/nav-mobile.js"></script>
 <script src="js/config.js"></script>
 <script src="js/chatbot.js"></script>
 <script src="js/cookie-consent.js"></script>
+<script src="js/scroll-reveal.js" defer></script>
 </body>
 </html>

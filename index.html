@@ -9,6 +9,9 @@
 <link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co">
 <link rel="dns-prefetch" href="https://www.youtube.com">
 <link rel="dns-prefetch" href="https://img.youtube.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/cormorant-garamond-600.woff2" as="font" type="font/woff2" crossorigin>
 <meta name="theme-color" content="#2C4A6E">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:type" content="website">
@@ -17,10 +20,17 @@
 <meta property="og:url" content="https://righettoimmobiliare.it/">
 <meta property="og:site_name" content="Righetto Immobiliare">
 <meta property="og:locale" content="it_IT">
+<meta property="og:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Righetto Immobiliare — Agenzia Immobiliare Padova dal 1990">
+<meta name="twitter:description" content="Vendita, affitto e gestione immobili in tutti i 101 comuni della provincia di Padova. Valutazione gratuita, virtual tour 360° e assistente AI Sara 24/7.">
+<meta name="twitter:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
 <link rel="canonical" href="https://righettoimmobiliare.it/">
 <link rel="stylesheet" href="css/fonts.css">
 <link rel="stylesheet" href="css/nav-mobile.css">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="stylesheet" href="css/scroll-reveal.css">
 <style>
 :root {
   --blu:      #2C4A6E;
@@ -243,7 +253,7 @@ button{font-family:inherit;cursor:pointer}
   filter: brightness(0.92);
   animation: slowZoom 18s ease-in-out infinite alternate;
 
-  background-image: url('img/team/titolari.jpg');}
+  background-image: url('img/team/titolari.webp');}
 @keyframes slowZoom {
   from { transform: scale(1.05); }
   to   { transform: scale(1.10); }
@@ -1466,7 +1476,7 @@ button svg, a.btn-p svg, a.btn-g svg {
 
 <!-- HERO -->
 <section id="hero">
-  <div id="hero-bg" style="background-image:url(img/team/titolari.jpg)"></div>
+  <div id="hero-bg" style="background-image:url(img/team/titolari.webp)"></div>
   <div class="hero-veil"></div>
   <div class="hero-grain"></div>
   <div class="hero-inner">
@@ -1575,7 +1585,7 @@ button svg, a.btn-p svg, a.btn-g svg {
 <!-- VIDEO PRESENTAZIONE -->
 <section id="video-intro">
   <div class="video-inner">
-    <div class="video-text">
+    <div class="video-text sr">
       <div class="video-badge">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         Video
@@ -1584,7 +1594,7 @@ button svg, a.btn-p svg, a.btn-g svg {
       <h2 class="sec-h2">La nostra<br>agenzia</h2>
       <p class="sec-p">Scopri in un minuto come lavoriamo: dalla valutazione al rogito, con tecnologia, trasparenza e 30 anni di esperienza nel territorio padovano. Assistente AI Sara disponibile 24/7 per ogni domanda.</p>
     </div>
-    <div class="video-wrap" id="videoWrap" onclick="loadVideo(this)">
+    <div class="video-wrap sr" id="videoWrap" onclick="loadVideo(this)">
       <img class="video-thumb" src="https://img.youtube.com/vi/1JM_lXuqLHM/maxresdefault.jpg" alt="Vendi Casa in 30 giorni — Righetto Immobiliare Padova" width="640" height="360" loading="lazy">
       <div class="video-facade">
         <div class="play-btn">
@@ -1599,14 +1609,14 @@ button svg, a.btn-p svg, a.btn-g svg {
 <!-- IMMOBILI IN EVIDENZA -->
 <section id="evidenza">
   <div class="ev-inner">
-    <div class="ev-head rv">
+    <div class="ev-head rv sr">
       <div>
         <div class="eyebrow">Portfolio selezionato</div>
         <h2 class="sec-h2">Immobili in Evidenza</h2>
       </div>
       <a href="immobili.html" class="link-all">Vedi tutto il portfolio<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
-    <div class="props-grid" id="propsGrid">
+    <div class="props-grid sr-stagger" id="propsGrid">
       <div class="pc rv d1" style="pointer-events:none"><div class="sk" style="height:260px"></div><div class="pb"><div class="sk" style="height:26px;width:42%;margin-bottom:9px"></div><div class="sk" style="height:13px;margin-bottom:6px"></div><div class="sk" style="height:13px;width:60%"></div></div></div>
       <div class="pc rv d2" style="pointer-events:none"><div class="sk" style="height:190px"></div><div class="pb"><div class="sk" style="height:20px;width:38%;margin-bottom:7px"></div><div class="sk" style="height:12px"></div></div></div>
       <div class="pc rv d3" style="pointer-events:none"><div class="sk" style="height:190px"></div><div class="pb"><div class="sk" style="height:20px;width:38%;margin-bottom:7px"></div><div class="sk" style="height:12px"></div></div></div>
@@ -1617,12 +1627,12 @@ button svg, a.btn-p svg, a.btn-g svg {
 <!-- SERVIZI -->
 <section id="servizi">
   <div class="srv-inner">
-    <div class="rv">
+    <div class="rv sr">
       <div class="eyebrow">Cosa offriamo</div>
       <h2 class="sec-h2">I Nostri Servizi</h2>
       <p class="sec-p">Dalla valutazione gratuita al rogito. Ogni fase seguita con professionalità e trasparenza totale.</p>
     </div>
-    <div class="srv-grid">
+    <div class="srv-grid sr-stagger">
       <a href="servizi.html#vendita" class="srv-card rv d1"><div class="srv-ico">🏷️</div><div class="srv-t">Vendita Immobili</div><div class="srv-d">Valutiamo, fotografiamo e gestiamo tutta la trattativa. Dalla valutazione gratuita al rogito notarile.</div></a>
       <a href="servizi.html#affitto" class="srv-card rv d2"><div class="srv-ico">🔑</div><div class="srv-t">Affitto e Gestione</div><div class="srv-d">Selezione inquilini, contratti 4+4, transitorio, studenti. Gestione completa del rapporto.</div></a>
       <a href="servizi.html#valutazione" class="srv-card rv d3"><div class="srv-ico">💰</div><div class="srv-t">Valutazione Gratuita</div><div class="srv-d">Perizia professionale con dati reali FIAIP 2025-2026. Senza impegno, senza costi.</div></a>
@@ -1637,12 +1647,12 @@ button svg, a.btn-p svg, a.btn-g svg {
 <section id="perche">
   <div class="perche-bg"></div>
   <div class="perche-inner">
-    <div class="rv">
+    <div class="rv sr">
       <div class="eyebrow" style="color:var(--oro)">I nostri punti di forza</div>
       <h2 class="sec-h2 w">Perché sceglierci</h2>
       <p class="sec-p" style="color:rgba(255,255,255,0.5)">30 anni sul territorio. Non siamo una catena: siamo una famiglia che conosce ogni quartiere, ogni prezzo, ogni opportunità della provincia.</p>
     </div>
-    <div class="perche-grid" style="margin-top:48px">
+    <div class="perche-grid sr-stagger" style="margin-top:48px">
       <div class="perche-list">
         <div class="perche-item rv d1"><div class="pn-n">01</div><div><div class="pn-h">Radici nel territorio</div><div class="pn-p">101 comuni della provincia di Padova dal 1990. Prezzi reali, tendenze reali, contatti reali con notai e geometri locali.</div></div></div>
         <div class="perche-item rv d2"><div class="pn-n">02</div><div><div class="pn-h">Tecnologia avanzata</div><div class="pn-p">Virtual tour 360°, video YouTube professionale, chatbot AI con stime di mercato. La tecnologia che vende più veloce.</div></div></div>
@@ -1662,7 +1672,7 @@ button svg, a.btn-p svg, a.btn-g svg {
 <section id="stima">
   <div class="stima-inner">
     <div class="stima-layout">
-      <div class="rv">
+      <div class="rv sr">
         <div class="eyebrow">Strumento gratuito</div>
         <h2 class="sec-h2">Stima il tuo<br>Immobile</h2>
         <p class="sec-p">Scopri il valore di mercato in pochi secondi. Dati 2025–2026 da FIAIP Padova per tutti i 101 comuni della provincia.</p>
@@ -1674,7 +1684,7 @@ button svg, a.btn-p svg, a.btn-g svg {
           <div class="stima-feat">Immobili simili nel nostro portfolio</div>
         </div>
       </div>
-      <div class="rv d2">
+      <div class="rv sr d2">
         <div class="stima-card">
           <div class="stima-card-title">📊 Calcola il Valore</div>
           <div class="sf-grid">
@@ -1768,11 +1778,11 @@ button svg, a.btn-p svg, a.btn-g svg {
 <!-- BLOG -->
 <section id="blog">
   <div class="blog-inner">
-    <div class="blog-head rv">
+    <div class="blog-head rv sr">
       <div><div class="eyebrow">Aggiornamenti e guide</div><h2 class="sec-h2">Dal Blog</h2></div>
       <a href="blog.html" class="link-all">Tutti gli articoli<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
-    <div class="blog-grid" id="blogGridHome">
+    <div class="blog-grid sr-stagger" id="blogGridHome">
       <div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--grigio);font-size:.85rem">Caricamento articoli...</div>
     </div>
   </div>
@@ -1784,7 +1794,7 @@ button svg, a.btn-p svg, a.btn-g svg {
   <div id="territorio-bg"></div>
   <div class="territorio-veil"></div>
   <div class="territorio-inner">
-    <div class="territorio-left rv">
+    <div class="territorio-left rv sr">
       <div class="territorio-tag">Copertura Provinciale</div>
       <h2 class="territorio-h2">
         Dal centro città<br>
@@ -1808,7 +1818,7 @@ button svg, a.btn-p svg, a.btn-g svg {
         Esplora tutti gli immobili
       </a>
     </div>
-    <div class="territorio-right rv d2">
+    <div class="territorio-right rv sr-stagger d2">
       <div class="t-stat-box">
         <div class="t-stat-n"><span class="cu" data-t="101">0</span></div>
         <div class="t-stat-l">Comuni della Provincia</div>
@@ -1833,7 +1843,7 @@ button svg, a.btn-p svg, a.btn-g svg {
 <!-- CHI SIAMO HP -->
 <section id="chi-siamo-hp">
   <div class="cs-inner">
-    <div class="cs-testo rv">
+    <div class="cs-testo rv sr">
       <div class="cs-eyebrow">Chi siamo</div>
       <h2 class="cs-h2">Più di 30 anni<br>al tuo <span>fianco</span></h2>
       <p class="cs-intro">
@@ -1881,7 +1891,7 @@ button svg, a.btn-p svg, a.btn-g svg {
         Scopri chi siamo
       </a>
     </div>
-    <div class="cs-foto rv d2">
+    <div class="cs-foto rv sr d2">
       <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=700&q=85&fit=crop&crop=faces,top"
            alt="Consulente immobiliare Righetto Immobiliare Padova"
            loading="lazy" width="380">
@@ -1895,11 +1905,11 @@ button svg, a.btn-p svg, a.btn-g svg {
 <!-- FAQ HOMEPAGE -->
 <section id="faq-hp">
   <div class="faq-inner">
-    <div class="faq-head rv">
+    <div class="faq-head rv sr">
       <div class="eyebrow">Domande frequenti</div>
       <h2 class="sec-h2">Risposte rapide</h2>
     </div>
-    <div class="faq-grid">
+    <div class="faq-grid sr-stagger">
       <div class="faq-item">
         <button class="faq-btn" onclick="toggleFaq(this)">
           <span class="faq-q">Quanto tempo ci vuole per vendere un immobile?</span>
@@ -1947,13 +1957,16 @@ button svg, a.btn-p svg, a.btn-g svg {
 </section>
 
 <!-- FORM CONTATTO -->
-<section id="form-contatto">
+<section id="form-contatto" class="sr">
   <div class="fc-inner">
     <div class="fc-foto">
-      <img
-        src="img/team/linda-righetto.jpg"
-        alt="Linda Righetto — Agente Immobiliare Locazioni Padova"
-        onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&q=85&fit=crop&crop=faces,top'">
+      <picture>
+        <source srcset="img/team/linda-righetto.webp" type="image/webp">
+        <img
+          src="img/team/linda-righetto.jpg"
+          alt="Linda Righetto — Agente Immobiliare Locazioni Padova"
+          onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&q=85&fit=crop&crop=faces,top'">
+      </picture>
       <div class="fc-foto-overlay"></div>
       <div class="fc-foto-info">
         <div class="fc-nome">Linda Righetto</div>
@@ -2384,7 +2397,9 @@ function loadVideo(wrap) {
   wrap.appendChild(ifr);
 }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="js/nav-mobile.js"></script>
 <script src="js/cookie-consent.js"></script>
+<script src="js/scroll-reveal.js" defer></script>
 </body>
 </html>

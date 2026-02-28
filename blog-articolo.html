@@ -2,10 +2,14 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#2C4A6E">
   <title id="pageTitle">Articolo — Righetto Immobiliare</title>
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
   <link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/cormorant-garamond-600.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="canonical" href="https://righettoimmobiliare.it/blog-articolo.html">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Righetto Immobiliare">
@@ -13,6 +17,7 @@
   <meta name="description" content="Articolo del blog di Righetto Immobiliare — guide e consigli sul mercato immobiliare di Padova.">
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/nav-mobile.css">
+  <link rel="stylesheet" href="css/scroll-reveal.css">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--nero:#152435;--bianco:#F7F5F1;--oro:#B8D44A;--grigio:#6B7A8D;--gc:#E1DBD1;--sfondo:#ECE7DF;--blu:#2C4A6E;--blu2:#3A5F8C;--oro2:#CDED62;--testo:#152435;--carta:#F2EDE7}
@@ -130,7 +135,7 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script>
 const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
@@ -260,7 +265,7 @@ function artUrl(a) {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": art.titolo || '',
-    "author": { "@type": "Organization", "name": "Righetto Immobiliare" },
+    "author": { "@type": "Person", "name": art.autore || "Gino Capon", "jobTitle": "Agente Immobiliare", "worksFor": {"@type": "Organization", "name": "Righetto Immobiliare", "url": "https://righettoimmobiliare.it"} },
     "publisher": { "@type": "Organization", "name": "Righetto Immobiliare", "logo": { "@type": "ImageObject", "url": "https://righettoimmobiliare.it/assets/logo.png" } },
     "datePublished": art.data || '',
     "dateModified": art.aggiornato || art.data || '',
@@ -275,5 +280,6 @@ function artUrl(a) {
 <script src="js/config.js"></script>
 <script src="js/chatbot.js"></script>
 <script src="js/cookie-consent.js"></script>
+<script src="js/scroll-reveal.js" defer></script>
 </body>
 </html>
