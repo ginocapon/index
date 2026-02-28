@@ -50,9 +50,9 @@
       '<line x1="52" y1="59" x2="62" y2="59" stroke="#556B7A" stroke-width="1.2"/>' +
       '<line x1="38" y1="59" x2="28" y2="56" stroke="#556B7A" stroke-width="1.2"/>' +
       '<line x1="76" y1="59" x2="86" y2="56" stroke="#556B7A" stroke-width="1.2"/>' +
-      // Guance
-      '<ellipse cx="48" cy="66" rx="2" ry="0.8" fill="#E8A090" opacity="0.5"/>' +
-      '<ellipse cx="72" cy="66" rx="2" ry="0.8" fill="#E8A090" opacity="0.5"/>' +
+      // Guance — rossore animato quando parla
+      '<ellipse id="sara-cheek-l" cx="46" cy="66" rx="5" ry="2.5" fill="#E8A090" opacity="0.15"/>' +
+      '<ellipse id="sara-cheek-r" cx="74" cy="66" rx="5" ry="2.5" fill="#E8A090" opacity="0.15"/>' +
       // Bocca — animata! ID per JS
       '<path id="sara-mouth" d="M55 72 Q60 76 65 72" stroke="#C0756B" stroke-width="1.8" fill="none" stroke-linecap="round"/>' +
       // Bocca aperta (riempimento, invisibile di default)
@@ -143,9 +143,12 @@
   var blinkL = null;
   var blinkR = null;
   var headGroup = null;
+  var cheekL = null;
+  var cheekR = null;
   var mouthTimer = null;
   var blinkTimer = null;
   var headTimer = null;
+  var blushTimer = null;
 
   function initAvatarRefs() {
     mouthPath = document.getElementById('sara-mouth');
@@ -153,6 +156,8 @@
     blinkL = document.getElementById('sara-blink-l');
     blinkR = document.getElementById('sara-blink-r');
     headGroup = document.getElementById('sara-head');
+    cheekL = document.getElementById('sara-cheek-l');
+    cheekR = document.getElementById('sara-cheek-r');
   }
 
   // ══════════════════════════════════════════════
@@ -233,12 +238,51 @@
     if (headGroup) headGroup.setAttribute('transform', '');
   }
 
+  // ── Blush: guance che si arrossano quando parla ──
+  var blushLevel = 0.15;
+
+  function animateBlush() {
+    if (!cheekL || !cheekR) return;
+
+    // Sale gradualmente fino a 0.55-0.7 con piccole oscillazioni
+    if (isSpeaking && blushLevel < 0.6) {
+      blushLevel += 0.03;
+    }
+    // Oscillazione naturale: rossore che pulsa leggermente
+    var pulse = Math.sin(Date.now() / 800) * 0.08;
+    var val = Math.min(0.7, blushLevel + pulse);
+
+    cheekL.setAttribute('opacity', val.toFixed(2));
+    cheekR.setAttribute('opacity', val.toFixed(2));
+
+    blushTimer = setTimeout(animateBlush, 120);
+  }
+
+  function fadeBlush() {
+    if (blushTimer) clearTimeout(blushTimer);
+    // Sfuma lentamente il rossore dopo che smette di parlare
+    function fade() {
+      if (blushLevel <= 0.2) {
+        blushLevel = 0.15;
+        if (cheekL) cheekL.setAttribute('opacity', '0.15');
+        if (cheekR) cheekR.setAttribute('opacity', '0.15');
+        return;
+      }
+      blushLevel -= 0.02;
+      if (cheekL) cheekL.setAttribute('opacity', blushLevel.toFixed(2));
+      if (cheekR) cheekR.setAttribute('opacity', blushLevel.toFixed(2));
+      blushTimer = setTimeout(fade, 80);
+    }
+    fade();
+  }
+
   // ── Start/stop tutte le animazioni ──
   function startAnimations() {
     isSpeaking = true;
     animateMouth();
     doBlink();
     animateHead();
+    animateBlush();
   }
 
   function stopAnimations() {
@@ -246,6 +290,7 @@
     stopMouth();
     stopBlink();
     stopHead();
+    fadeBlush();
   }
 
   // ── Init ──
