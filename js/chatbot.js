@@ -175,6 +175,32 @@ const MULT_TIPOLOGIA = {
 };
 
 // ══════════════════════════════════════════════
+// TIPOLOGIE E BUDGET PER RICERCA GUIDATA
+// ══════════════════════════════════════════════
+const TIPOLOGIE_RICERCA = [
+  { n: 1, label: 'Appartamento', value: 'appartamento', aliases: ['appartamento', 'app'] },
+  { n: 2, label: 'Casa singola / Villa', value: 'villa', aliases: ['casa singola', 'villa', 'villetta', 'singola', 'unifamiliare'] },
+  { n: 3, label: 'Bifamiliare / Duplex', value: 'bifamiliare', aliases: ['bifamiliare', 'duplex', 'bif'] },
+  { n: 4, label: 'Attico / Mansarda', value: 'attico', aliases: ['attico', 'mansarda', 'penthouse'] },
+  { n: 5, label: 'Capannone / Magazzino', value: 'capannone', aliases: ['capannone', 'magazzino', 'industriale', 'laboratorio'] },
+  { n: 6, label: 'Ufficio / Studio', value: 'ufficio', aliases: ['ufficio', 'studio professionale', 'studio'] },
+  { n: 7, label: 'Negozio / Locale commerciale', value: 'negozio', aliases: ['negozio', 'locale commerciale', 'commerciale', 'locale'] },
+  { n: 8, label: 'Terreno', value: 'terreno', aliases: ['terreno', 'lotto', 'terreno edificabile', 'terreno agricolo'] },
+  { n: 9, label: 'Rustico / Casale', value: 'rustico', aliases: ['rustico', 'casale', 'cascina', 'colonica'] }
+];
+
+const BUDGET_VENDITA = [
+  { n: 1, label: 'Fino a €50.000', min: 0, max: 50000 },
+  { n: 2, label: '€50.000 — €100.000', min: 50000, max: 100000 },
+  { n: 3, label: '€100.000 — €130.000', min: 100000, max: 130000 },
+  { n: 4, label: '€130.000 — €160.000', min: 130000, max: 160000 },
+  { n: 5, label: '€160.000 — €200.000', min: 160000, max: 200000 },
+  { n: 6, label: '€200.000 — €250.000', min: 200000, max: 250000 },
+  { n: 7, label: '€250.000 — €300.000', min: 250000, max: 300000 },
+  { n: 8, label: 'Oltre €300.000', min: 300000, max: 99999999 }
+];
+
+// ══════════════════════════════════════════════
 // FAQ E RISPOSTE PREDEFINITE
 // ══════════════════════════════════════════════
 const FAQ_DATA = [
@@ -1829,6 +1855,221 @@ const FAQ_DATA = [
   {
     k: ['agente aiuta trattativa', 'mediazione prezzo acquisto', 'ruolo agente nella trattativa'],
     r: '🤝 **L\'agente nella trattativa**\n\nAssolutamente sì, è uno dei nostri ruoli principali:\n• Facciamo da **mediatore imparziale** tra le parti\n• Gestiamo le **emozioni** (vendere/comprare casa è emotivo!)\n• Consigliamo il **giusto prezzo** basandoci sui dati\n• Troviamo le condizioni per chiudere in modo **equilibrato**\n\nUna buona trattativa è quella in cui entrambe le parti sono soddisfatte.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // SEZIONE 4: RICERCA IMMOBILI E TIPOLOGIE
+  // FAQ 251-300: GUIDA ALLA RICERCA
+  // ═══════════════════════════════════════════════
+
+  // ── TIPOLOGIE IMMOBILIARI (251-260) ──
+  {
+    k: ['cos è appartamento tipologia', 'definizione appartamento', 'appartamento significato'],
+    r: '🏢 **Appartamento**\n\nUnità immobiliare all\'interno di un condominio o palazzina. Include:\n• **Monolocale** — 1 ambiente + bagno\n• **Bilocale** — soggiorno + 1 camera\n• **Trilocale** — soggiorno + 2 camere\n• **Quadrilocale** e oltre\n\nÈ la tipologia più comune e richiesta. Scrivi **"cerca immobili"** per trovare il tuo!'
+  },
+  {
+    k: ['cos è casa singola tipologia', 'definizione casa singola', 'casa singola significato', 'differenza villa casa singola'],
+    r: '🏡 **Casa singola / Villa**\n\nImmobile indipendente su tutti i lati, con area esterna privata:\n• **Ingresso autonomo** e giardino\n• **Nessun vicino** attaccato\n• Più privacy e spazio\n• Generalmente con **garage** e cantina\n\nIdeale per famiglie. Scrivi **"cerca immobili"** per trovare la tua casa singola!'
+  },
+  {
+    k: ['cos è bifamiliare tipologia', 'definizione bifamiliare', 'bifamiliare significato', 'cos è duplex'],
+    r: '🏘️ **Bifamiliare / Duplex**\n\nDue unità abitative che condividono una parete o il tetto:\n• **Bifamiliare** — due abitazioni affiancate\n• **Duplex** — due livelli sovrapposti\n• Ingresso indipendente per ciascuno\n• Costo inferiore alla villa singola\n\nUn buon compromesso tra indipendenza e prezzo.'
+  },
+  {
+    k: ['cos è attico tipologia', 'definizione attico', 'attico significato', 'differenza attico mansarda'],
+    r: '🏙️ **Attico / Mansarda**\n\n• **Attico** — ultimo piano con terrazza panoramica, finiture di pregio\n• **Mansarda** — sottotetto abitabile con soffitti inclinati\n\nCaratteristiche comuni:\n• Vista panoramica\n• Luminosità naturale\n• Spesso con terrazza\n• Prezzo al mq superiore alla media'
+  },
+  {
+    k: ['cos è capannone tipologia', 'definizione capannone', 'capannone significato', 'magazzino industriale'],
+    r: '🏭 **Capannone / Magazzino**\n\nImmobile ad uso produttivo, artigianale o di deposito:\n• **Capannone industriale** — produzione e lavorazione\n• **Magazzino** — stoccaggio e logistica\n• **Laboratorio artigianale** — attività artigiane\n\nRichiede specifiche urbanistiche (zona D). Verifica sempre la destinazione d\'uso.'
+  },
+  {
+    k: ['cos è ufficio tipologia', 'definizione ufficio', 'studio professionale immobile', 'ufficio significato immobiliare'],
+    r: '🏢 **Ufficio / Studio Professionale**\n\nImmobile ad uso direzionale per attività professionali:\n• Studi legali, commercialisti, architetti\n• Sedi aziendali e co-working\n• Categorie catastali **A/10** (uffici) o **D/5** (istituti di credito)\n\nRichiede destinazione d\'uso compatibile. Scrivi **"cerca immobili"** per trovare il tuo ufficio!'
+  },
+  {
+    k: ['cos è negozio tipologia', 'definizione locale commerciale', 'negozio significato immobiliare', 'fondo commerciale'],
+    r: '🏪 **Negozio / Locale Commerciale**\n\nImmobile destinato ad attività di vendita al pubblico:\n• Negozi al dettaglio\n• Bar, ristoranti, pizzerie\n• Centri estetici, palestre\n• Categoria catastale **C/1**\n\nImportante: verifica la **posizione**, la **visibilità** e il **flusso pedonale**.'
+  },
+  {
+    k: ['cos è terreno tipologia', 'definizione terreno', 'terreno edificabile vs agricolo', 'lotto edificabile'],
+    r: '🌿 **Terreno**\n\nDue categorie principali:\n• **Edificabile** — si può costruire, valore più alto (€150-€650/mq)\n• **Agricolo** — uso coltivazione, valore più basso (€2-€9/mq)\n\nVerifica sempre:\n• Indice di edificabilità\n• Vincoli paesaggistici o idrogeologici\n• Oneri di urbanizzazione'
+  },
+  {
+    k: ['cos è rustico tipologia', 'definizione rustico', 'casale significato', 'cascina da ristrutturare'],
+    r: '🏚️ **Rustico / Casale / Cascina**\n\nImmobile rurale di pregio storico-architettonico:\n• **Rustico** — costruzione tradizionale in pietra/mattoni\n• **Casale** — casa colonica con terreno\n• **Cascina** — complesso rurale con annessi\n\nSpesso da ristrutturare. Possibili **bonus fiscali** per il recupero. Un investimento di valore!'
+  },
+  {
+    k: ['differenza monolocale bilocale trilocale', 'tipi appartamento per stanze', 'quante stanze bilocale'],
+    r: '🔢 **Tipologie per numero di stanze**\n\n• **Monolocale** — 1 ambiente unico (zona giorno + notte) + bagno, ~25-45 mq\n• **Bilocale** — soggiorno + 1 camera + bagno, ~45-65 mq\n• **Trilocale** — soggiorno + 2 camere + bagno, ~65-90 mq\n• **Quadrilocale** — soggiorno + 3 camere + bagni, ~90-120 mq\n\nLa metratura varia in base alla zona e all\'epoca di costruzione.'
+  },
+
+  // ── ZONE E QUARTIERI (261-270) ──
+  {
+    k: ['zona padova centro immobili', 'immobili centro storico padova', 'comprare centro padova'],
+    r: '📍 **Padova Centro Storico**\n\nLa zona più prestigiosa e ricercata:\n• Prezzi: **€2.800-€3.500/mq** (appartamenti)\n• Prato della Valle, Piazze, Portici\n• Servizi e trasporti eccellenti\n• Ideale per investimento e vita culturale\n\nScrivi **"cerca immobili"** per vedere cosa abbiamo disponibile in centro!'
+  },
+  {
+    k: ['zona abano terme immobili', 'immobili terme padova', 'comprare abano terme'],
+    r: '♨️ **Abano Terme / Montegrotto Terme**\n\nLa zona termale più famosa d\'Europa:\n• Prezzi: **€1.900-€2.100/mq** (appartamenti)\n• Terme, benessere, parchi\n• Ottima qualità della vita\n• Ben collegata con Padova (15 min)\n\nScrivi **"cerca immobili"** per esplorare le opportunità nella zona termale!'
+  },
+  {
+    k: ['zona cittadella immobili', 'immobili cittadella padova', 'comprare cittadella'],
+    r: '🏰 **Cittadella**\n\nBorgo medievale con le mura più belle d\'Italia:\n• Prezzi: **€3.200/mq** (appartamenti) — zona in forte crescita\n• Centro storico murato unico\n• Servizi completi e vivace\n• Ottimo per famiglie\n\nScrivi **"cerca immobili"** per vedere le disponibilità a Cittadella!'
+  },
+  {
+    k: ['zona camposampiero immobili', 'immobili camposampiero', 'comprare camposampiero nord padova'],
+    r: '📍 **Camposampiero e Area Nord**\n\nZona strategica a nord di Padova:\n• Prezzi: **€1.400-€1.600/mq** (appartamenti)\n• Buoni servizi e collegamenti\n• Trebaseleghe, Borgoricco, Loreggia\n• Ideale per chi cerca tranquillità a prezzi accessibili\n\nScrivi **"cerca immobili"** per esplorare l\'area nord!'
+  },
+  {
+    k: ['zona colli euganei immobili', 'immobili colli padova', 'comprare colli euganei'],
+    r: '🏔️ **Colli Euganei**\n\nNatura, panorami e qualità della vita:\n• Prezzi variabili: **€1.000-€1.800/mq**\n• Monselice, Arquà Petrarca, Torreglia, Teolo\n• Paesaggi mozzafiato\n• Ideale per chi ama la campagna vicino alla città\n\nScrivi **"cerca immobili"** per le opportunità sui Colli!'
+  },
+  {
+    k: ['zona piove di sacco immobili', 'immobili saccisica', 'comprare piove di sacco'],
+    r: '📍 **Piove di Sacco e Saccisica**\n\nZona a sud-est di Padova, vicina al mare:\n• Prezzi: **€1.300-€1.500/mq** (appartamenti)\n• Buoni servizi commerciali\n• Correzzola, Codevigo, Due Carrare\n• Prezzi accessibili con buona qualità\n\nScrivi **"cerca immobili"** per esplorare la Saccisica!'
+  },
+  {
+    k: ['zona este montagnana immobili', 'immobili este padova', 'comprare bassa padovana'],
+    r: '🏰 **Este / Montagnana**\n\nBorghi storici della Bassa Padovana:\n• Prezzi: **€900-€1.100/mq** — i più accessibili della provincia\n• Castelli, mura medievali, storia\n• Ritmo di vita tranquillo\n• Ottimo rapporto qualità-prezzo\n\nScrivi **"cerca immobili"** per vedere le opportunità!'
+  },
+  {
+    k: ['prima cintura padova migliore', 'comuni vicini padova migliori', 'dove comprare vicino padova'],
+    r: '🎯 **Prima cintura di Padova — Dove comprare?**\n\nI comuni più richiesti vicino a Padova:\n• **Albignasego** — servizi completi, €1.900/mq\n• **Selvazzano** — verde e tranquillità, €1.850/mq\n• **Rubano** — ottimi collegamenti, €1.900/mq\n• **Vigonza** — buon rapporto prezzo, €1.700/mq\n• **Abano Terme** — terme e benessere, €2.100/mq\n\nScrivi **"cerca immobili"** per una ricerca guidata!'
+  },
+  {
+    k: ['zone investimento padova', 'dove investire immobiliare padova', 'migliore zona investimento'],
+    r: '📈 **Zone migliori per investire a Padova**\n\nPer rendimento da affitto:\n• **Centro storico** — alta domanda studenti\n• **Zona Università** — affitti sicuri\n• **Arcella** — prezzi bassi, alta domanda\n\nPer rivalutazione:\n• **Cittadella** — in forte crescita\n• **Prima cintura** — domanda costante\n\nScrivi **"cerca immobili"** per trovare l\'investimento giusto!'
+  },
+  {
+    k: ['zone più richieste padova', 'dove si vende prima padova', 'quartieri popolari padova'],
+    r: '🔥 **Zone più richieste nella provincia di Padova**\n\n1. **Padova Centro** — sempre richiesto\n2. **Cittadella** — boom degli ultimi anni\n3. **Abano/Montegrotto** — qualità della vita\n4. **Albignasego** — famiglie giovani\n5. **Selvazzano** — verde e servizi\n\nOgni zona ha il suo punto di forza. Scrivi **"cerca immobili"** e ti guido nella scelta!'
+  },
+
+  // ── BUDGET E CONSIGLI PREZZO (271-280) ──
+  {
+    k: ['come scegliere budget casa', 'quanto posso spendere casa', 'budget acquisto immobile'],
+    r: '💰 **Come scegliere il budget?**\n\nRegola d\'oro: la **rata del mutuo** non deve superare il **30-35%** del reddito netto familiare.\n\nEsempio pratico:\n• Reddito netto €2.000/mese → rata max €600-€700\n• Mutuo ~€130.000-€150.000 a 25 anni\n• + anticipo 20% → budget totale ~€160.000-€190.000\n\nScrivi **"cerca immobili"** per trovare casa nel tuo budget!'
+  },
+  {
+    k: ['immobili economici padova', 'casa sotto 100.000', 'appartamento economico padova'],
+    r: '🏷️ **Immobili sotto €100.000 — Dove trovarli?**\n\nLe zone più accessibili della provincia:\n• **Este/Montagnana** — da €60.000 per bilocali\n• **Bassa Padovana** — prezzi molto contenuti\n• **Camposampiero nord** — buone occasioni\n• **Padova Arcella** — bilocali da €80.000\n\nScrivi **"cerca immobili"** e seleziona il budget "Fino a €100.000"!'
+  },
+  {
+    k: ['immobili fascia media padova', 'casa 150.000 200.000', 'appartamento 160.000'],
+    r: '🏠 **Fascia €130.000 — €200.000**\n\nLa fascia più richiesta! Cosa puoi trovare:\n• **Trilocale** in prima cintura (Albignasego, Vigonza)\n• **Bilocale ristrutturato** in centro Padova\n• **Appartamento ampio** in zona Camposampiero\n• **Bifamiliare** nella Bassa Padovana\n\nScrivi **"cerca immobili"** per la ricerca guidata!'
+  },
+  {
+    k: ['immobili pregio padova', 'casa oltre 300.000', 'villa lusso padova provincia'],
+    r: '🏆 **Immobili di pregio — Oltre €300.000**\n\nLe proposte più esclusive:\n• **Ville singole** in prima cintura\n• **Attici con terrazza** in centro storico\n• **Casali ristrutturati** sui Colli Euganei\n• **Ville storiche** con parco\n\nScrivi **"cerca immobili"** e seleziona "Oltre €300.000"!'
+  },
+  {
+    k: ['prezzo metro quadro padova dettaglio', 'costo mq padova aggiornato', 'quanto costa al metro quadro'],
+    r: '📊 **Prezzi al mq — Provincia di Padova 2025-2026**\n\nAppartamenti (media):\n• **Centro storico:** €2.800-€3.500/mq\n• **Prima cintura:** €1.650-€2.100/mq\n• **Seconda cintura:** €1.300-€1.700/mq\n• **Bassa padovana:** €850-€1.100/mq\n• **Cittadella:** €3.200/mq\n\nScrivi **"stima immobile"** per un calcolo personalizzato!'
+  },
+  {
+    k: ['come negoziare prezzo casa', 'trattativa prezzo immobile', 'margine trattativa'],
+    r: '🤝 **Come negoziare il prezzo?**\n\nConsigli pratici:\n• Il margine di trattativa medio è **5-10%** del prezzo richiesto\n• Immobili fermi da mesi: margine fino al **15-20%**\n• Non offendere con offerte troppo basse\n• Basa la tua offerta su **dati reali** (comparabili, perizie)\n• L\'agente immobiliare ti aiuta a trovare il **punto d\'incontro**\n\nNoi ti assistiamo nella trattativa!'
+  },
+  {
+    k: ['quanto risparmiare comprando casa', 'risparmio acquisto prima casa', 'detrazioni acquisto casa'],
+    r: '💶 **Quanto puoi risparmiare comprando casa?**\n\n**Prima casa** — risparmi significativi:\n• Imposta di registro: **2%** (anziché 9%)\n• IVA da costruttore: **4%** (anziché 10%)\n• Detrazione interessi mutuo: **€760/anno**\n\n**Under 36** (se ancora attive):\n• Esenzione totale imposte\n• Credito IVA\n\nScrivi **"cerca immobili"** per iniziare!'
+  },
+  {
+    k: ['prezzo giusto appartamento trilocale', 'quanto costa trilocale padova', 'prezzo medio trilocale'],
+    r: '🏢 **Quanto costa un trilocale? (70-90 mq)**\n\n• **Padova centro:** €175.000-€280.000\n• **Prima cintura:** €120.000-€170.000\n• **Camposampiero:** €100.000-€130.000\n• **Cittadella:** €220.000-€260.000\n• **Este:** €70.000-€90.000\n\nSono stime medie. Scrivi **"stima immobile"** per un calcolo preciso sulla tua zona!'
+  },
+  {
+    k: ['costi nascosti acquisto casa', 'spese extra comprare casa', 'costi accessori acquisto'],
+    r: '⚠️ **Costi nascosti nell\'acquisto casa**\n\nOltre al prezzo dell\'immobile, prevedi:\n• **Imposte:** 2-9% del prezzo (o 4-10% IVA)\n• **Notaio:** €2.000-€4.000\n• **Agenzia:** 2-4% + IVA\n• **Mutuo:** perizia, istruttoria, assicurazione\n• **Trasloco e sistemazione:** €1.000-€3.000\n\nPrevedi un **8-12% extra** rispetto al prezzo. Noi ti aiutiamo a calcolare tutto!'
+  },
+  {
+    k: ['differenza prezzo richiesto valore reale', 'prezzo mercato vs prezzo annuncio', 'immobile sovrapprezzato'],
+    r: '📊 **Prezzo richiesto vs valore reale**\n\nSpesso il prezzo in annuncio è **superiore** al valore di mercato:\n• Componente emotiva del proprietario\n• Aspettativa di trattativa\n• Scarto medio: **5-15%** sopra il valore reale\n\nCome proteggerti:\n• Chiedi una **perizia** indipendente\n• Confronta con **comparabili** della zona\n• Usa il nostro tool **"stima immobile"** per un riferimento!'
+  },
+
+  // ── CONSIGLI RICERCA E VISITE (281-290) ──
+  {
+    k: ['come cercare casa consigli', 'guida ricerca immobile', 'consigli comprare casa'],
+    r: '🔍 **Consigli per cercare casa**\n\n1. Definisci **budget realistico** (rata max 30% reddito)\n2. Scegli **2-3 zone** target\n3. Decidi **priorità**: mq, giardino, garage, piano...\n4. Non cercare la casa perfetta — cerca quella **giusta**\n5. Visita almeno **5-10 immobili** prima di decidere\n6. Affidati a un **professionista**\n\nScrivi **"cerca immobili"** per iniziare la ricerca guidata!'
+  },
+  {
+    k: ['quanto tempo trovare casa', 'tempistiche ricerca immobile', 'quanto dura cercare casa'],
+    r: '⏱️ **Quanto tempo ci vuole per trovare casa?**\n\nMediamente:\n• **1-2 mesi** se hai le idee chiare e budget adeguato\n• **3-4 mesi** per la maggior parte delle persone\n• **6+ mesi** se cerchi qualcosa di molto specifico\n\nFattori che velocizzano:\n• Budget realistico\n• Flessibilità sulla zona\n• Decisioni rapide sulle visite\n\nScrivi **"cerca immobili"** per iniziare subito!'
+  },
+  {
+    k: ['cosa guardare visita immobile', 'checklist visita casa', 'cosa controllare quando visiti'],
+    r: '📋 **Checklist per la visita dell\'immobile**\n\n**Struttura:**\n• Crepe, umidità, macchie\n• Infissi e serramenti\n• Impianti (elettrico, idraulico)\n\n**Contesto:**\n• Luminosità naturale\n• Rumorosità\n• Parcheggio e accessi\n\n**Documenti:**\n• Conformità catastale\n• APE (classe energetica)\n• Spese condominiali\n\nNoi accompagniamo ogni visita con una scheda dettagliata!'
+  },
+  {
+    k: ['quante visite fare prima acquisto', 'numero visite casa', 'visitare più volte immobile'],
+    r: '🔄 **Quante visite fare?**\n\nConsigliamo:\n• **Prima visita:** impressione generale, layout, luce\n• **Seconda visita:** dettagli tecnici, misurazioni\n• **Terza visita:** con un tecnico di fiducia\n\nConsigli:\n• Visita in **orari diversi** (mattina/sera)\n• Visita in **giorni diversi** (feriale/weekend)\n• Parla con i **vicini** per capire il contesto\n\nNoi organizziamo le visite in modo strategico!'
+  },
+  {
+    k: ['domande venditore acquisto', 'cosa chiedere proprietario', 'informazioni prima acquisto'],
+    r: '❓ **Domande da fare prima dell\'acquisto**\n\n• Perché vendete? (motivazione reale)\n• Da quanto tempo è in vendita?\n• Quanto pagate di **condominio**?\n• L\'immobile è **conforme** al catasto?\n• Ci sono **lavori straordinari** previsti?\n• Quali **impianti** sono stati rifatti?\n• APE: quale **classe energetica**?\n\nIl nostro agente verifica tutto questo per te!'
+  },
+  {
+    k: ['valutare quartiere zona', 'come scegliere quartiere', 'vivibilità zona immobile'],
+    r: '🏘️ **Come valutare un quartiere?**\n\nControlla prima della visita:\n• **Servizi:** supermercati, farmacie, scuole\n• **Trasporti:** bus, tram, stazione, autostrada\n• **Verde:** parchi e aree pedonali\n• **Sicurezza:** illuminazione, frequentazione\n• **Parcheggio:** disponibilità e costi\n\nConsiglio: passa nella zona di **sera** e nel **weekend** per capire l\'atmosfera reale.'
+  },
+  {
+    k: ['errori comprare casa', 'sbagli acquisto immobile', 'cosa non fare comprando casa'],
+    r: '⚠️ **Errori da evitare quando compri casa**\n\n1. **Non controllare i documenti** — abusi edilizi nascosti\n2. **Innamorarsi troppo** — perdere lucidità nella trattativa\n3. **Ignorare i costi extra** — imposte, notaio, agenzia\n4. **Non fare la perizia** — il valore reale potrebbe essere diverso\n5. **Fretta** — una visita non basta\n6. **Mutuo troppo alto** — rata max 30% del reddito\n\nCon noi, eviti tutti questi errori!'
+  },
+  {
+    k: ['controlli prima acquisto casa', 'verifiche pre acquisto', 'due diligence immobiliare'],
+    r: '🔎 **Controlli essenziali prima dell\'acquisto**\n\n• **Visura ipotecaria** — ipoteche, pignoramenti\n• **Conformità catastale** — planimetria conforme\n• **Conformità urbanistica** — no abusi edilizi\n• **APE** — classe energetica valida\n• **Certificazione impianti** — conformità elettrica/idraulica\n• **Spese condominiali** — arretrati e delibere\n\nNoi verifichiamo **tutto** prima di proporti un immobile!'
+  },
+  {
+    k: ['differenza vendita affitto vantaggi', 'meglio comprare o affittare', 'conviene affitto o acquisto'],
+    r: '⚖️ **Comprare vs Affittare**\n\n**Comprare conviene se:**\n• Resti nella zona per 7+ anni\n• Hai l\'anticipo (15-20%)\n• Vuoi un investimento a lungo termine\n\n**Affittare conviene se:**\n• Non sai dove ti stabilirai\n• Non hai l\'anticipo\n• Vuoi flessibilità\n\nScrivi **"cerca immobili"** per esplorare sia vendita che affitto!'
+  },
+  {
+    k: ['classe energetica importante', 'ape acquisto casa', 'efficienza energetica immobile'],
+    r: '⚡ **Classe energetica — Quanto è importante?**\n\nMolto! La classe energetica influisce su:\n• **Bollette:** da €500/anno (A) a €3.000/anno (G)\n• **Valore immobile:** classe A vale 10-20% in più\n• **Comfort:** isolamento termico e acustico\n• **Obbligo:** l\'APE è obbligatorio per vendita e affitto\n\nClassi: A4 (migliore) → G (peggiore). Chiedi sempre l\'APE prima di comprare!'
+  },
+
+  // ── AFFITTO: CONSIGLI E RICERCA (291-300) ──
+  {
+    k: ['cercare appartamento affitto consigli', 'come trovare affitto padova', 'guida affitto casa'],
+    r: '🏠 **Consigli per cercare casa in affitto**\n\n1. Definisci il **budget mensile** (max 30% dello stipendio)\n2. Scegli la **zona** in base a lavoro/studio\n3. Prepara i **documenti**: busta paga, CUD, documento identità\n4. Visita sempre l\'immobile **di persona**\n5. Verifica lo **stato degli impianti**\n\nScrivi **"cerca immobili"** e seleziona "Affitto" per iniziare!'
+  },
+  {
+    k: ['documenti necessari affitto locazione', 'cosa serve per affittare', 'requisiti inquilino affitto'],
+    r: '📋 **Documenti necessari per affittare**\n\n**Per l\'inquilino:**\n• Documento d\'identità e codice fiscale\n• Ultime **3 buste paga** (o CUD/730)\n• Contratto di lavoro\n• Eventuale **garante** (con stessi documenti)\n\n**Per il proprietario:**\n• Visura catastale\n• APE valido\n• Regolamento condominiale\n\nPrepara tutto in anticipo per velocizzare!'
+  },
+  {
+    k: ['deposito cauzionale affitto quanto', 'cauzione affitto regole', 'quante mensilità cauzione'],
+    r: '🔒 **Deposito cauzionale in affitto**\n\n• Massimo **3 mensilità** di canone (art. 11 L. 392/78)\n• Deve essere restituito a fine contratto con **interessi legali**\n• Il proprietario non può usarlo per le ultime mensilità\n• Può trattenere solo per danni documentati\n\nConsiglio: fai sempre il **verbale di consegna** con foto dell\'immobile!'
+  },
+  {
+    k: ['spese condominiali affitto chi paga', 'oneri accessori inquilino', 'condominio a carico inquilino'],
+    r: '🏢 **Spese condominiali in affitto**\n\n**A carico dell\'inquilino:**\n• Pulizia scale e ascensore\n• Energia elettrica parti comuni\n• Acqua condominiale\n• Giardinaggio ordinario\n\n**A carico del proprietario:**\n• Lavori straordinari\n• Sostituzione impianti\n• Manutenzione strutturale\n\nChiedi sempre il **consuntivo** dell\'anno precedente!'
+  },
+  {
+    k: ['affitto ammobiliato o vuoto', 'differenza arredato non arredato', 'meglio ammobiliato'],
+    r: '🛋️ **Affitto ammobiliato vs vuoto**\n\n**Ammobiliato:**\n• Canone più alto (+10-20%)\n• Pronto da abitare subito\n• Ideale per studenti e temporanei\n• Inventario obbligatorio dei mobili\n\n**Vuoto:**\n• Canone più basso\n• Libertà di arredare a gusto\n• Ideale per lunghe permanenze\n\nScrivi **"cerca immobili"** per cercare in affitto!'
+  },
+  {
+    k: ['affitto studenti padova', 'stanza studenti università', 'affitto universitari padova'],
+    r: '🎓 **Affitto per studenti a Padova**\n\nZone più richieste:\n• **Centro/Prato della Valle** — vicino alle facoltà\n• **Arcella** — prezzi più bassi, ben collegata\n• **Zona Ospedale** — Medicina e Biologia\n\nTipologie:\n• Stanza singola: **€350-€500/mese**\n• Stanza doppia: **€200-€350/mese**\n• Bilocale: **€500-€750/mese**\n\nScrivi **"cerca immobili"** e seleziona "Affitto"!'
+  },
+  {
+    k: ['preavviso lasciare affitto dettaglio', 'quanto preavviso per disdire', 'disdetta affitto tempistiche'],
+    r: '📬 **Preavviso per lasciare l\'affitto**\n\nLa disdetta deve essere comunicata con:\n• **6 mesi** di preavviso per contratti 4+4 e 3+2\n• Tempo previsto dal contratto per i transitori\n• Tramite **raccomandata A/R** o **PEC**\n\nAttenzione: servono **gravi motivi** documentati per recedere prima della scadenza naturale.\n\nScrivi **"cerca immobili"** se cerchi una nuova casa!'
+  },
+  {
+    k: ['affitto transitorio lavoratori', 'locazione temporanea lavoro', 'affitto breve per lavoro'],
+    r: '💼 **Affitto transitorio per lavoratori**\n\nContratto da **1 a 18 mesi** per trasferimenti temporanei:\n• Serve lettera del datore di lavoro\n• Canone concordato (in molti comuni)\n• Non si rinnova automaticamente\n• Ideale per trasferte, distacchi, progetti temporanei\n\nScrivi **"cerca immobili"** e seleziona "Affitto" per trovare soluzioni transitorie!'
+  },
+  {
+    k: ['garanzie affitto richieste', 'fideiussione affitto', 'garante per affitto chi serve'],
+    r: '🛡️ **Garanzie richieste per l\'affitto**\n\nI proprietari possono chiedere:\n• **Deposito cauzionale** — max 3 mensilità\n• **Garante** — persona che si obbliga in caso di mancato pagamento\n• **Fideiussione bancaria/assicurativa** — garanzia formale\n• **Busta paga/CUD** — dimostrazione di reddito\n\nIl reddito netto mensile dovrebbe essere **almeno 3 volte** il canone.'
+  },
+  {
+    k: ['consigli prima visita affitto', 'cosa verificare appartamento affitto', 'checklist affitto'],
+    r: '📋 **Checklist prima di affittare**\n\n✅ Verifica lo **stato degli impianti** (elettrico, idraulico, gas)\n✅ Controlla **infissi e serramenti** (isolamento)\n✅ Chiedi l\'**APE** (classe energetica → bollette)\n✅ Verifica le **spese condominiali** mensili\n✅ Leggi il **regolamento condominiale** (animali, orari...)\n✅ Fai il **verbale di consegna** con foto\n✅ Chiedi se ci sono **lavori straordinari** previsti\n\nScrivi **"cerca immobili"** per iniziare la ricerca!'
   }
 ];
 
@@ -1838,9 +2079,10 @@ const FAQ_DATA = [
 class RighettoChat {
   constructor() {
     this.messages = [];
-    this.state = 'idle'; // idle | stima_comune | stima_tipo | stima_mq | stima_stato | contatto_nome | contatto_email | contatto_tel | contatto_note
+    this.state = 'idle'; // idle | stima_* | contatto_* | ricerca_*
     this.stimaData = {};
     this.contattoPending = null;
+    this.ricercaData = {};
     this.isOpen = false;
     this.supabase = null;
     this.initSupabase();
@@ -2045,6 +2287,101 @@ class RighettoChat {
       return await this.inviaRichiesta();
     }
 
+    // ── STATO: ricerca guidata immobili ──
+    if (this.state === 'ricerca_tipo_op') {
+      if (low === '1' || /vendita|comprare|acquist|compro/.test(low)) {
+        this.ricercaData.operazione = 'vendita';
+      } else if (low === '2' || /affitto|locare|locazione|affittare/.test(low)) {
+        this.ricercaData.operazione = 'affitto';
+      } else {
+        return '❌ Scegli **1** per Vendita o **2** per Affitto.';
+      }
+      this.state = 'ricerca_tipologia';
+      let tipoMsg = '🏠 **Che tipo di immobile cerchi?**\n\n';
+      TIPOLOGIE_RICERCA.forEach(t => { tipoMsg += `${t.n}️⃣ ${t.label}\n`; });
+      tipoMsg += '\n*Scrivi il numero o il tipo di immobile.*';
+      return tipoMsg;
+    }
+
+    if (this.state === 'ricerca_tipologia') {
+      const num = parseInt(low);
+      let found = null;
+      if (num >= 1 && num <= TIPOLOGIE_RICERCA.length) {
+        found = TIPOLOGIE_RICERCA[num - 1];
+      } else {
+        found = TIPOLOGIE_RICERCA.find(t => t.aliases.some(a => low.includes(a)));
+      }
+      if (!found) return '❌ Seleziona un\'opzione valida (1-9) o scrivi il tipo di immobile.';
+      this.ricercaData.tipologia = found.value;
+      this.ricercaData.tipologiaLabel = found.label;
+      this.state = 'ricerca_zona';
+      return '📍 **In quale zona o comune?**\n*(Es: Padova, Abano Terme, Cittadella, Monselice...)*\n\nScrivi il nome della zona o del comune.';
+    }
+
+    if (this.state === 'ricerca_zona') {
+      this.ricercaData.zona = msg;
+      const zonaKey = this.normalizeKey(msg);
+      const zonaEsiste = Object.keys(PREZZI_COMUNI).some(k => k !== 'default' && (k.includes(zonaKey) || zonaKey.includes(k)));
+      this.ricercaData.zonaConosciuta = zonaEsiste;
+      this.state = 'ricerca_mq';
+      if (!zonaEsiste) {
+        return '📐 Zona registrata! Potremmo avere **altre opportunità** interessanti per te.\n\n**Quanti metri quadri cerchi?**\n*(Inserisci il numero, es: 80)*';
+      }
+      return '📐 **Quanti metri quadri cerchi?**\n*(Inserisci il numero, es: 80)*';
+    }
+
+    if (this.state === 'ricerca_mq') {
+      const n = parseFloat(msg.replace(/[^0-9,.]/g, '').replace(',', '.'));
+      if (isNaN(n) || n < 10) return '❌ Inserisci un numero valido di mq (es: 80)';
+      this.ricercaData.mq = n;
+      if (this.ricercaData.operazione === 'vendita') {
+        this.state = 'ricerca_prezzo';
+        let prezzoMsg = '💰 **Qual è il tuo budget?**\n\n';
+        BUDGET_VENDITA.forEach(b => { prezzoMsg += `${b.n}️⃣ ${b.label}\n`; });
+        prezzoMsg += '\n*Scrivi il numero della fascia di prezzo.*';
+        return prezzoMsg;
+      } else {
+        this.state = 'ricerca_rating';
+        return await this.mostraRisultatiRicerca();
+      }
+    }
+
+    if (this.state === 'ricerca_prezzo') {
+      const num = parseInt(low);
+      if (isNaN(num) || num < 1 || num > BUDGET_VENDITA.length) {
+        return '❌ Seleziona un\'opzione valida (1-8).';
+      }
+      const budget = BUDGET_VENDITA[num - 1];
+      this.ricercaData.prezzoMin = budget.min;
+      this.ricercaData.prezzoMax = budget.max;
+      this.ricercaData.budgetLabel = budget.label;
+      this.state = 'ricerca_rating';
+      return await this.mostraRisultatiRicerca();
+    }
+
+    if (this.state === 'ricerca_rating') {
+      const rating = parseInt(low);
+      if (isNaN(rating) || rating < 2 || rating > 5) {
+        return '❌ Inserisci un voto da **2** a **5**.';
+      }
+      this.ricercaData.rating = rating;
+      if (rating >= 4) {
+        this.state = 'ricerca_nome';
+        return `✨ **Grazie per le ${rating} stelle!** Siamo felici del tuo feedback!\n\nPossiamo sapere il tuo **nome**? *(Solo il nome, per la privacy)*`;
+      } else {
+        this.state = 'idle';
+        await this.salvaValutazione(rating, null);
+        return `Grazie per il tuo feedback di ${rating} stelle. Cercheremo di migliorare! 🙏\n\n---\n📞 Vuoi essere **contattato** da un nostro agente? Scrivi "contattami"!\n\n👉 Oppure [cerca altri immobili](immobili.html)`;
+      }
+    }
+
+    if (this.state === 'ricerca_nome') {
+      const nome = msg.trim();
+      this.state = 'idle';
+      await this.salvaValutazione(this.ricercaData.rating, nome);
+      return `Grazie **${nome}**! La tua valutazione è stata salvata. ⭐\n\n---\n📞 Vuoi essere **contattato** da un nostro agente? Scrivi "contattami"!\n\n👉 Oppure [cerca altri immobili](immobili.html)`;
+    }
+
     // ── INTENT DETECTION ──
 
     // Stima diretta inline (es: "stima appartamento 85mq a Padova buono stato")
@@ -2072,9 +2409,11 @@ class RighettoChat {
       return '👋 Ottimo! Ti ricontatteremo al più presto.\n\n**Come ti chiami?** (Nome e Cognome)';
     }
 
-    // Ricerca immobili
-    if (/cerca|trov|immobi|annunci|vedete|avete|list/.test(low)) {
-      return this.rispostaRicerca(low);
+    // Ricerca immobili — avvia wizard guidato
+    if (/cerca|trov|immobi|annunci|vedete|avete|list|cerco|voglio comprare|voglio affitt/.test(low)) {
+      this.state = 'ricerca_tipo_op';
+      this.ricercaData = {};
+      return '🔍 **Ricerca Immobili Guidata**\n\nTi guido nella ricerca dell\'immobile perfetto per te!\n\nCerchi un immobile in **vendita** o in **affitto**?\n\n1️⃣ Vendita\n2️⃣ Affitto\n\n*Scrivi 1 o 2.*';
     }
 
     // FAQ — best-score matching: prefer longer/more specific keyword matches
@@ -2181,6 +2520,107 @@ class RighettoChat {
     } else {
       return '⚠️ Non riesco a salvare la richiesta al momento.\n\n📞 Chiama direttamente: **+39 049 000 0000**\n📧 Email: **info@righettoimmobiliare.it**';
     }
+  }
+
+  // ────── RISULTATI RICERCA GUIDATA ──────
+  async mostraRisultatiRicerca() {
+    const d = this.ricercaData;
+    const mqMin = Math.round(d.mq * 0.70);
+    const mqMax = Math.round(d.mq * 1.30);
+
+    let risultati = [];
+    if (this.supabase) {
+      try {
+        let q = this.supabase.from('immobili').select('*')
+          .eq('attivo', true).eq('venduto', false);
+        if (d.operazione) q = q.eq('tipo_operazione', d.operazione);
+        if (d.tipologia) q = q.ilike('tipologia', '%' + d.tipologia + '%');
+        if (d.zona) q = q.ilike('comune', '%' + d.zona + '%');
+        q = q.gte('superficie', mqMin).lte('superficie', mqMax);
+        if (d.prezzoMin !== undefined) q = q.gte('prezzo', d.prezzoMin);
+        if (d.prezzoMax !== undefined) q = q.lte('prezzo', d.prezzoMax);
+        q = q.limit(5);
+        const { data } = await q;
+        risultati = data || [];
+      } catch { risultati = []; }
+    }
+
+    let msg = '📊 **RISULTATI RICERCA**\n\n';
+    msg += '📍 Zona: **' + d.zona + '**\n';
+    msg += '🏠 Tipo: **' + d.tipologiaLabel + '**\n';
+    msg += '📐 Metratura: **~' + d.mq + ' mq**\n';
+    if (d.operazione === 'vendita' && d.budgetLabel) {
+      msg += '💰 Budget: **' + d.budgetLabel + '**\n';
+    }
+    msg += '🔄 Operazione: **' + (d.operazione === 'vendita' ? 'Vendita' : 'Affitto') + '**\n\n';
+    msg += '---\n\n';
+
+    if (risultati.length > 0) {
+      msg += '🎯 **Ho trovato ' + risultati.length + ' immobil' + (risultati.length === 1 ? 'e' : 'i') + ':**\n\n';
+      for (const imm of risultati) {
+        const prezzo = imm.prezzo ? this.formatPrice(imm.prezzo) : 'Su richiesta';
+        msg += '• **' + (imm.titolo || imm.tipologia) + '**\n';
+        msg += '  📍 ' + (imm.comune || d.zona) + ' — ' + (imm.superficie || '?') + ' mq — ' + prezzo + '\n';
+        const immSlug = generatePropertySlug(imm);
+        msg += '  👉 [Vedi scheda](immobile.html?s=' + encodeURIComponent(immSlug) + ')\n\n';
+      }
+    } else {
+      // Ricerca più ampia senza filtro zona
+      let altriRisultati = [];
+      if (this.supabase) {
+        try {
+          let q2 = this.supabase.from('immobili').select('*')
+            .eq('attivo', true).eq('venduto', false);
+          if (d.operazione) q2 = q2.eq('tipo_operazione', d.operazione);
+          if (d.tipologia) q2 = q2.ilike('tipologia', '%' + d.tipologia + '%');
+          q2 = q2.limit(3);
+          const { data: data2 } = await q2;
+          altriRisultati = data2 || [];
+        } catch { altriRisultati = []; }
+      }
+
+      if (!d.zonaConosciuta) {
+        msg += '📌 La zona **"' + d.zona + '"** non è nella nostra area principale, ma **abbiamo altre opportunità** per te!\n\n';
+      } else {
+        msg += '😔 Al momento non abbiamo immobili con questi criteri esatti.\n\n';
+        msg += '✨ Ma **abbiamo altre opportunità** che potrebbero interessarti!\n\n';
+      }
+
+      if (altriRisultati.length > 0) {
+        msg += '🔍 **Immobili simili disponibili:**\n\n';
+        for (const imm of altriRisultati) {
+          const prezzo = imm.prezzo ? this.formatPrice(imm.prezzo) : 'Su richiesta';
+          msg += '• **' + (imm.titolo || imm.tipologia) + '**\n';
+          msg += '  📍 ' + (imm.comune || '—') + ' — ' + (imm.superficie || '?') + ' mq — ' + prezzo + '\n';
+          const immSlug = generatePropertySlug(imm);
+          msg += '  👉 [Vedi scheda](immobile.html?s=' + encodeURIComponent(immSlug) + ')\n\n';
+        }
+      }
+
+      msg += '👉 [Vedi tutti gli immobili](immobili.html?tipo=' + d.operazione + ')\n\n';
+    }
+
+    msg += '---\n\n';
+    msg += '⭐ **Come valuti il servizio del chatbot?**\nDai 2 a 5 stelle:\n\n';
+    msg += '2️⃣ ⭐⭐\n3️⃣ ⭐⭐⭐\n4️⃣ ⭐⭐⭐⭐\n5️⃣ ⭐⭐⭐⭐⭐\n\n';
+    msg += '*Scrivi il numero da 2 a 5.*';
+
+    return msg;
+  }
+
+  // ────── SALVA VALUTAZIONE ──────
+  async salvaValutazione(rating, nome) {
+    if (!this.supabase) return;
+    const d = this.ricercaData;
+    try {
+      await this.supabase.from('richieste').insert([{
+        nome: nome || 'Anonimo',
+        messaggio: 'Valutazione chatbot: ' + rating + '/5 stelle. Ricerca: ' + (d.operazione || '') + ' ' + (d.tipologiaLabel || '') + ' ' + (d.zona || '') + ' ' + (d.mq || '') + 'mq' + (d.budgetLabel ? ' budget ' + d.budgetLabel : ''),
+        provenienza: 'chatbot_valutazione',
+        letto: false,
+        created_at: new Date().toISOString()
+      }]);
+    } catch {}
   }
 }
 
