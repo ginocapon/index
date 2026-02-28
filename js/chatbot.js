@@ -1216,7 +1216,7 @@ function initChatbotUI() {
   #rig-chat-btn svg { width: 28px; height: 28px; }
   #rig-chat-btn-avatar {
     width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
-    object-position: center 35%;
+    object-position: center 45%;
   }
   #rig-chat-pulse {
     position: absolute; top: 4px; right: 4px;
@@ -1256,7 +1256,7 @@ function initChatbotUI() {
   }
   .chat-header-avatar img {
     width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
-    object-position: center 35%;
+    object-position: center 45%;
   }
   .chat-header-info { flex: 1; }
   .chat-header-info h4 { font-size: 0.88rem; font-weight: 700; }
@@ -1306,7 +1306,7 @@ function initChatbotUI() {
   }
   .chat-avatar img {
     width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
-    object-position: center 35%;
+    object-position: center 45%;
   }
   .chat-typing {
     display: flex; gap: 4px; padding: 10px 14px;
