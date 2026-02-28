@@ -205,7 +205,7 @@ const FAQ_DATA = [
     r: '🏷️ **Vuoi vendere il tuo immobile?**\n\nEcco i nostri passi:\n1. **Valutazione gratuita** — veniamo da te senza impegno\n2. **Foto + Virtual Tour 360°** — valorizzazione massima\n3. **Pubblicazione** — Idealista, Immobiliare.it, sito nostro\n4. **Gestione visite** — noi organizziamo tutto\n5. **Trattativa + Rogito** — ti assistiamo fino alla firma\n\n👉 Vuoi un appuntamento gratuito?'
   },
   {
-    k: ['tempo vendita', 'quanto tempo', 'tempistica vendita', 'velocità'],
+    k: ['tempo vendita', 'quanto tempo vendere', 'tempistica vendita', 'velocità vendita'],
     r: '⏱️ **Tempi medi di vendita a Padova**\n\nCon la nostra strategia digitale (virtual tour 360°, pubblicazione multi-portale, social media marketing):\n• Centro storico: **45-75 giorni**\n• Prima cintura: **60-90 giorni**\n• Provincia: **90-120 giorni**\n\nUn immobile ben valorizzato si vende più velocemente!'
   },
   {
@@ -217,7 +217,7 @@ const FAQ_DATA = [
     r: '📋 **Contratto preliminare (compromesso)**\n\nIl preliminare di vendita è un contratto che obbliga le parti al rogito definitivo. Prevede:\n• Caparra confirmatoria (10-20% del prezzo)\n• Termine per il rogito\n• Clausole sospensive (es. mutuo)\n• Registrazione obbligatoria entro 20 giorni\n\nNoi prepariamo e registriamo il preliminare per voi.'
   },
   {
-    k: ['rogito', 'atto', 'notaio', 'notarile'],
+    k: ['rogito', 'atto notarile', 'notaio', 'atto di vendita'],
     r: '🏛️ **Il rogito notarile**\n\nIl rogito è l\'atto definitivo di compravendita stipulato dal notaio. Il notaio è scelto generalmente dall\'acquirente. I costi notarili (onorario + imposte) variano dal 2% al 4% del prezzo di acquisto. Noi vi accompagniamo fino alla firma e al passaggio delle chiavi!'
   },
   // ── ACQUISTO ──
@@ -226,7 +226,7 @@ const FAQ_DATA = [
     r: '🏡 **Agevolazioni prima casa**\n\n**Requisiti:**\n• Non possedere altri immobili nello stesso comune\n• Residenza nel comune entro 18 mesi\n• Non aver già usufruito del bonus\n\n**Vantaggi:**\n• Imposta di registro al 2% (anziché 9%)\n• Per under 36: esenzione totale imposte e credito IVA\n• Detrazioni interessi mutuo fino a €4.000/anno'
   },
   {
-    k: ['caparra', 'deposito', 'anticipo', 'acconto'],
+    k: ['caparra', 'anticipo prezzo', 'acconto prezzo'],
     r: '💶 **Caparra e acconti**\n\n**Caparra confirmatoria:** somma versata al compromesso (10-20%). Se l\'acquirente si ritira, la perde; se il venditore si ritira, deve restituire il doppio.\n\n**Caparra penitenziale:** permette il recesso pagando la caparra come penale.\n\n**Acconto:** semplice anticipo sul prezzo, va restituito se l\'affare non si conclude.'
   },
   {
@@ -282,7 +282,7 @@ const FAQ_DATA = [
   },
   // ── DOCUMENTI ──
   {
-    k: ['documenti', 'ape', 'certificato', 'pratiche', 'catasto'],
+    k: ['documenti vendita', 'documenti necessari', 'pratiche vendita', 'documentazione immobile'],
     r: '📋 **Documenti per la vendita**\n\nServiranno:\n• APE (Attestato Prestazione Energetica)\n• Planimetria catastale aggiornata\n• Atto di provenienza\n• Visura catastale\n• Certificato di abitabilità/agibilità\n• Conformità urbanistica\n• Conformità impianti\n\nNon preoccuparti — ti aiutiamo a raccogliere tutto!'
   },
   {
@@ -341,7 +341,7 @@ const FAQ_DATA = [
   },
   // ── CERTIFICAZIONI E CONFORMITÀ ──
   {
-    k: ['conformità', 'abuso', 'abusivismo', 'sanatoria', 'condono'],
+    k: ['conformità urbanistica', 'abuso edilizio', 'abusivismo', 'sanatoria edilizia', 'condono edilizio'],
     r: '🏗️ **Conformità urbanistica e catastale**\n\nPrima della vendita è necessario verificare che:\n• Lo stato di fatto corrisponda alle planimetrie catastali\n• Non ci siano abusi edilizi\n• Eventuali difformità siano sanabili\n\nIn caso di abusi, è possibile presentare una **CILA in sanatoria** (costo medio €1.000-€3.000). Noi vi mettiamo in contatto con tecnici di fiducia.'
   },
   // ── SUCCESSIONE E DONAZIONE ──
@@ -392,11 +392,11 @@ const FAQ_DATA = [
     r: '✅ **La valutazione gratuita è davvero senza impegno.** Analizziamo il tuo immobile con comparabili reali di mercato e ti forniamo un report dettagliato per decidere se procedere con noi. Nessun vincolo, nessun costo.\n\n📞 Chiama il **049 884 3484** o scrivi *"contattami"* per prenotare.'
   },
   {
-    k: ['tempo vendita', 'quanto tempo', 'vendere veloce', 'tempi vendita'],
+    k: ['vendere in fretta', 'vendita rapida', 'vendere veloce padova', 'tempi medi vendita'],
     r: '⏱️ **In media 45-60 giorni** con la nostra strategia multicanale. Riduciamo i tempi grazie a:\n\n• Promozione su portali leader (Immobiliare.it, Idealista, Casa.it)\n• Social geolocalizzati\n• Acquirenti già pre-qualificati nella nostra banca dati\n\nIl 98% dei nostri clienti vende entro i tempi previsti.'
   },
   {
-    k: ['foto professionali', 'drone', 'video 4k', 'virtual tour', 'foto immobile'],
+    k: ['foto professionali', 'drone immobiliare', 'video 4k immobile', 'servizio fotografico casa'],
     r: '📸 **Investiamo nella qualità visiva del tuo immobile:**\n\n• Foto professionali con **drone**\n• Virtual tour **360°**\n• Video cinematici **4K**\n• Planimetrie **3D interattive**\n\nTutto incluso, senza anticipo. Un immobile con foto professionali riceve il **40% di contatti in più**.'
   },
   {
@@ -404,7 +404,7 @@ const FAQ_DATA = [
     r: '🔍 **Selezioniamo rigorosamente ogni acquirente:**\n\n• Verifica capacità economica (pre-approvazione mutuo)\n• Analisi motivazioni e tempistiche\n• Evitiamo curiosi e perditempo\n\nPresentiamo solo acquirenti qualificati e pronti all\'acquisto.'
   },
   {
-    k: ['parte legale', 'rogito', 'fino al rogito', 'assistenza legale vendita'],
+    k: ['parte legale', 'assistenza fino al rogito', 'assistenza legale vendita', 'accompagnamento rogito'],
     r: '⚖️ **Sì, ti accompagniamo dalla valutazione al passaggio chiavi:**\n\n• Contratto preliminare\n• Coordinamento mutuo acquirente\n• Rapporto con il notaio\n• Volture utenze\n\nTu firmi e non pensi a nulla. Servizio **chiavi in mano**.'
   },
   {
@@ -464,7 +464,7 @@ const FAQ_DATA = [
     r: '🏢 **Sì, gestiamo immobili commerciali:**\n\n• Negozi e locali\n• Uffici\n• Capannoni e magazzini\n\nStrategie **B2B dedicate** con promozione su canali professionali e network imprenditoriale.'
   },
   {
-    k: ['compenso', 'provvigione', 'quanto costa', 'commissione agenzia'],
+    k: ['compenso agenzia', 'provvigione sul venduto', 'costo del servizio'],
     r: '💶 **Provvigione solo sul venduto**, percentuale standard di mercato. Trasparente dall\'inizio, concordata nel mandato. **Nessun costo anticipato**, nessuna sorpresa. Paghi solo quando la vendita è conclusa.'
   },
 
@@ -528,11 +528,11 @@ const FAQ_DATA = [
   // GESTIONE PRELIMINARI — FAQ
   // ═══════════════════════════════════════════════
   {
-    k: ['regolarità edilizia', 'verifica edilizia', 'scia', 'dia', 'condono', 'sanatoria'],
+    k: ['regolarità edilizia', 'verifica edilizia', 'dia edilizia', 'pratiche edilizie pregresse'],
     r: '🏗️ **Verifica completa della regolarità edilizia:**\n\n• Analisi planimetrie catastali\n• Verifica SCIA/DIA\n• Controllo condoni e sanatorie\n• Identificazione eventuali abusi\n\nNessuna sorpresa dopo la firma del preliminare.'
   },
   {
-    k: ['vincoli urbanistici', 'prg', 'pgt', 'servitù'],
+    k: ['vincoli urbanistici', 'prg', 'pgt', 'vincoli edificabilità'],
     r: '📐 **Controlliamo tutti i vincoli urbanistici:**\n\n• Sopralluogo tecnico\n• Visure PRG/PGT\n• Banche dati servitù\n• Vincoli paesaggistici e idrogeologici\n\nSicurezza totale prima di firmare.'
   },
   {
@@ -548,7 +548,7 @@ const FAQ_DATA = [
     r: '🏦 **Assistenza mutui ipotecari completa:**\n\n• Perizia tecnica\n• Preventivo mutuo migliore\n• Sospensione rate se necessario\n• Coordinamento con la banca\n\nTi aiutiamo a ottenere le condizioni migliori.'
   },
   {
-    k: ['imposta registro', 'imposte acquisto', 'tasse preliminare'],
+    k: ['imposta registro acquisto', 'tasse preliminare', 'imposte atto'],
     r: '💰 **Calcolo esatto delle imposte** e assistenza nel pagamento telematico:\n\n• Imposta di registro\n• Imposta ipotecaria e catastale\n• Simulazione costi totali\n\nTrasparenza totale sui costi fin dall\'inizio.'
   },
   {
@@ -1174,11 +1174,11 @@ const FAQ_DATA = [
   // FAQ 101-102: Visure
   // ═══════════════════════════════════════════════
   {
-    k: ['visura catastale cos è', 'dati catastali', 'rendita catastale', 'categoria catastale'],
+    k: ['visura catastale', 'dati catastali', 'rendita catastale', 'categoria catastale'],
     r: '📋 **Visura catastale**\n\nÈ il documento che riporta i dati catastali dell\'immobile:\n• **Proprietario** intestatario\n• **Rendita catastale**\n• **Categoria** (A2, A3, ecc.)\n• **Classe** e **consistenza** (vani)\n\nÈ fondamentale per calcolare le imposte e verificare la proprietà.'
   },
   {
-    k: ['visura ipotecaria cos è', 'ipoteche immobile', 'pignoramenti', 'gravami immobile'],
+    k: ['visura ipotecaria', 'ipoteche immobile', 'pignoramenti', 'gravami immobile'],
     r: '🔍 **Visura ipotecaria**\n\nVerifica la presenza di:\n• **Ipoteche** (volontarie o giudiziali)\n• **Pignoramenti**\n• **Altri gravami** sull\'immobile\n\nÈ **fondamentale** prima dell\'acquisto. Noi la eseguiamo sempre per garantirti un acquisto sicuro.'
   },
 
@@ -1190,15 +1190,15 @@ const FAQ_DATA = [
     r: '🏠 **Come funziona l\'acquisto di una casa?**\n\nLe fasi principali:\n1. **Visita** dell\'immobile\n2. **Proposta d\'acquisto** scritta\n3. **Accettazione** del venditore\n4. **Preliminare** (compromesso)\n5. **Rogito notarile** — passaggio di proprietà\n\nTi seguiamo in **ogni fase**, dalla prima visita alle chiavi.'
   },
   {
-    k: ['proposta acquisto cos è', 'offerta acquisto', 'proposta scritta'],
+    k: ['proposta di acquisto', 'proposta vincolante', 'proposta scritta'],
     r: '📝 **Proposta d\'acquisto**\n\nÈ un\'offerta **scritta e vincolante** con cui dichiari la tua intenzione di acquistare a determinate condizioni e prezzo. È accompagnata da un assegno di caparra. Diventa efficace solo quando il venditore la accetta.'
   },
   {
-    k: ['preliminare cos è', 'compromesso cos è', 'cos è il compromesso'],
+    k: ['contratto preliminare di vendita', 'compromesso immobiliare', 'registrare preliminare'],
     r: '📋 **Contratto preliminare (compromesso)**\n\nÈ l\'accordo che **vincola entrambe le parti** alla compravendita. Deve essere:\n• **Registrato** entro 20 giorni all\'Agenzia delle Entrate\n• Accompagnato dalla caparra confirmatoria\n\nNoi prepariamo e registriamo il preliminare per voi.'
   },
   {
-    k: ['rogito cos è', 'atto definitivo', 'atto notarile cos è'],
+    k: ['rogito notarile', 'atto definitivo di vendita', 'trasferimento proprietà rogito'],
     r: '🏛️ **Rogito notarile**\n\nÈ l\'**atto definitivo di vendita** stipulato dal notaio. Con il rogito:\n• Si trasferisce la **proprietà**\n• Viene trascritto nei **registri immobiliari**\n• Si consegnano le **chiavi**\n\nÈ il momento finale della compravendita.'
   },
   {
@@ -1210,11 +1210,11 @@ const FAQ_DATA = [
     r: '🏦 **Proposta condizionata al mutuo**\n\nSì, è possibile inserire una **clausola sospensiva**: se il mutuo non viene concesso, la proposta decade e la caparra viene **restituita integralmente**. È una tutela importante per l\'acquirente.'
   },
   {
-    k: ['caparra confirmatoria cos è', 'caparra significato', 'garanzia acquisto'],
+    k: ['caparra confirmatoria', 'confirmatoria', 'caparra penitenziale differenza'],
     r: '💶 **Caparra confirmatoria**\n\nÈ una somma versata a **garanzia dell\'impegno**:\n• Se l\'**acquirente** recede → perde la caparra\n• Se il **venditore** recede → deve restituire il **doppio**\n\nÈ la principale tutela economica nella compravendita.'
   },
   {
-    k: ['quanto caparra', 'importo caparra', 'percentuale caparra'],
+    k: ['caparra quanto versare', 'importo della caparra', 'caparra 5 10 20 percento'],
     r: '💰 **Quanto deve essere la caparra?**\n\nGeneralmente dal **5% al 20%** del prezzo di vendita. Non c\'è un obbligo di legge specifico, si concorda tra le parti. Il consulente ti aiuta a trovare l\'importo giusto per la tua situazione.'
   },
   {
@@ -1258,27 +1258,27 @@ const FAQ_DATA = [
     r: '🧾 **Tasse per l\'acquisto casa**\n\n**Da privato:**\n• Prima casa: imposta registro **2%** + €50+€50\n• Seconda casa: imposta registro **9%** + €50+€50\n\n**Da costruttore:**\n• Prima casa: IVA **4%** + €200×3\n• Seconda casa: IVA **10%** + €200×3\n\nLe imposte si calcolano sul valore catastale (da privato) o sul prezzo (da costruttore).'
   },
   {
-    k: ['imposta registro cos è', 'imposta registro immobile', 'tassa trasferimento'],
+    k: ['imposta di registro', 'imposta registro 2 9 percento', 'tassa trasferimento immobiliare'],
     r: '📊 **Imposta di registro**\n\nÈ la tassa sul trasferimento immobiliare. Si calcola sul **valore catastale**, non sul prezzo di vendita:\n• **2%** per prima casa\n• **9%** per seconda casa\n\nMinimo €1.000. È una delle voci principali nel costo di acquisto.'
   },
   {
-    k: ['valore catastale cos è', 'calcolo valore catastale', 'rendita rivalutata'],
+    k: ['valore catastale', 'calcolo valore catastale', 'rendita rivalutata', 'coefficiente catastale'],
     r: '🔢 **Valore catastale**\n\nÈ la rendita catastale rivalutata × un coefficiente:\n• **×115,5** per prima casa\n• **×126** per seconda casa\n\nServe per calcolare le imposte. È quasi sempre **inferiore** al prezzo di mercato, con vantaggio fiscale per l\'acquirente.'
   },
   {
-    k: ['agevolazioni prima casa requisiti', 'benefici prima casa', 'condizioni prima casa'],
+    k: ['requisiti prima casa', 'benefici prima casa', 'condizioni prima casa', 'residenza 18 mesi'],
     r: '🏡 **Agevolazioni prima casa**\n\n**Requisiti:**\n• Imposta di registro ridotta al **2%** (anziché 9%)\n• Non possedere altri immobili nello stesso comune\n• Trasferire la **residenza entro 18 mesi**\n• Non aver già usufruito del bonus\n\nUn risparmio significativo sulle imposte!'
   },
   {
-    k: ['bonus under 36', 'agevolazioni giovani casa', 'prima casa giovani'],
+    k: ['under 36 casa', 'bonus giovani acquisto', 'prima casa giovani under'],
     r: '👶 **Bonus prima casa under 36**\n\nVerifica le **agevolazioni vigenti**, poiché le condizioni possono cambiare. Il consulente ti aggiorna sempre sulle opportunità attuali per i giovani acquirenti. Contattaci per info aggiornate!'
   },
   {
-    k: ['costo provvigione', 'quanto provvigione agenzia', 'prezzo agenzia'],
+    k: ['provvigione agenzia immobiliare', 'tariffe mediazione', 'onorari agente immobiliare'],
     r: '💶 **Provvigione dell\'agenzia**\n\nLa provvigione è concordata al conferimento dell\'incarico. Contattaci per un **preventivo trasparente**. Nessun costo nascosto, nessuna sorpresa.\n\n📞 **049 884 3484** oppure scrivi *"contattami"*.'
   },
   {
-    k: ['chi paga agenzia', 'provvigione acquirente venditore', 'agenzia chi paga'],
+    k: ['chi paga agenzia', 'provvigione acquirente e venditore', 'mediazione chi paga'],
     r: '💰 **Chi paga la provvigione?**\n\nGeneralmente sia **acquirente** che **venditore**, salvo accordi diversi. Ogni agenzia ha le sue condizioni. Da noi, tutto è concordato e trasparente fin dall\'inizio.'
   },
   {
@@ -1302,15 +1302,15 @@ const FAQ_DATA = [
   // FAQ 130-138: MUTUO E FINANZIAMENTO
   // ═══════════════════════════════════════════════
   {
-    k: ['come funziona mutuo', 'mutuo spiegazione', 'mutuo acquisto casa come'],
+    k: ['come funziona il mutuo', 'mutuo spiegazione', 'mutuo ipotecario come funziona'],
     r: '🏦 **Come funziona un mutuo?**\n\nLa banca finanzia una parte del prezzo (fino all\'**80%**). Tu restituisci con **rate mensili** per 10-30 anni, con interessi. Il mutuo è garantito da ipoteca sull\'immobile acquistato.'
   },
   {
-    k: ['quanto mutuo posso avere', 'importo mutuo massimo', 'mutuo massimo'],
+    k: ['quanto mutuo posso ottenere', 'importo massimo mutuo', 'mutuo massimo finanziabile'],
     r: '💶 **Quanto mutuo puoi ottenere?**\n\nDi norma fino all\'**80%** del valore di perizia. Regola importante:\n• La rata **non dovrebbe superare** il **30-35%** del reddito netto mensile\n\nEsempio: con €2.000 netti/mese → rata max €600-€700. Possiamo aiutarti a simulare il tuo mutuo.'
   },
   {
-    k: ['fisso o variabile', 'tasso fisso variabile', 'meglio fisso variabile'],
+    k: ['fisso o variabile', 'tasso fisso o variabile', 'meglio fisso o variabile'],
     r: '📊 **Tasso fisso o variabile?**\n\n• **Fisso** — rata costante, più sicurezza, ideale per chi vuole tranquillità\n• **Variabile** — rata iniziale più bassa ma soggetta a variazioni di mercato\n\nDipende dalla tua **propensione al rischio** e dalla situazione di mercato. Il consulente ti aiuta a scegliere.'
   },
   {
@@ -1322,11 +1322,11 @@ const FAQ_DATA = [
     r: '🏠 **Mutuo al 100%**\n\nÈ raro ma possibile con garanzie aggiuntive:\n• **Fondo Prima Casa Consap** — garanzia statale\n• Fideiussione di un familiare\n• Garanzie patrimoniali extra\n\nChiedi al consulente finanziario per valutare la tua situazione.'
   },
   {
-    k: ['perizia bancaria cos è', 'perito banca', 'valutazione banca immobile'],
+    k: ['perizia bancaria immobile', 'perito della banca', 'perizia per il mutuo'],
     r: '🔍 **Perizia bancaria**\n\nÈ la valutazione dell\'immobile da parte di un **perito incaricato dalla banca**. Verifica che il valore sia congruo con il mutuo richiesto. Se il valore di perizia è inferiore al prezzo, la banca riduce l\'importo finanziabile.'
   },
   {
-    k: ['costo perizia banca', 'perizia quanto costa', 'prezzo perizia'],
+    k: ['costo perizia bancaria', 'perizia immobiliare costo', 'spesa perizia mutuo'],
     r: '💶 **Costo della perizia bancaria**\n\nGeneralmente tra **€200 e €400**, a carico dell\'acquirente. Alcune banche la includono nel pacchetto mutuo. È una spesa una tantum necessaria per l\'approvazione del finanziamento.'
   },
   {
@@ -1334,7 +1334,7 @@ const FAQ_DATA = [
     r: '✅ **Estinzione anticipata del mutuo**\n\nSì, **senza penali** dalla Legge Bersani (2007). Puoi estinguere:\n• **Parzialmente** — riduci la rata o la durata\n• **Totalmente** — chiudi il mutuo\n\nÈ un tuo diritto, in qualsiasi momento.'
   },
   {
-    k: ['taeg', 'tasso effettivo', 'taeg mutuo', 'costo reale mutuo'],
+    k: ['taeg', 'tasso annuo effettivo globale', 'taeg mutuo', 'costo effettivo mutuo'],
     r: '📊 **TAEG — Tasso Annuo Effettivo Globale**\n\nInclude interessi + **tutte le spese** accessorie del mutuo:\n• Spese istruttoria\n• Perizia\n• Assicurazioni obbligatorie\n\nÈ il dato **più utile** per confrontare offerte di mutuo diverse tra banche.'
   },
 
@@ -1342,11 +1342,11 @@ const FAQ_DATA = [
   // FAQ 139-149: VENDITA
   // ═══════════════════════════════════════════════
   {
-    k: ['come vendere casa', 'vendere immobile come', 'procedura vendita'],
+    k: ['come vendere il mio immobile', 'procedura di vendita', 'vendere casa passaggi'],
     r: '🏷️ **Come vendere il tuo immobile?**\n\nContattaci per una **valutazione gratuita**. Ci occupiamo di tutto:\n1. Valutazione professionale\n2. Foto e virtual tour 360°\n3. Pubblicazione su tutti i portali\n4. Gestione visite e trattativa\n5. Pratiche fino al rogito\n\n📞 **049 884 3484** oppure scrivi *"contattami"*.'
   },
   {
-    k: ['quanto vale casa mia', 'valore mia casa', 'stima mia casa'],
+    k: ['quanto vale la mia casa', 'valore del mio immobile', 'stima della mia casa'],
     r: '🏠 **Quanto vale il tuo immobile?**\n\nRichiedi una **valutazione gratuita**. Analizziamo:\n• **Zona** e posizione\n• **Stato** e anno di costruzione\n• **Metratura** e tipologia\n• **Classe energetica**\n• **Mercato** di riferimento attuale\n\nPuoi anche provare la nostra **stima online** scrivendo *"stima"*!'
   },
   {
@@ -1358,7 +1358,7 @@ const FAQ_DATA = [
     r: '🔧 **Lavori prima di vendere?**\n\nNon sempre necessari, ma piccoli interventi possono fare la differenza:\n• **Tinteggiatura** — rinfrescare le pareti\n• **Pulizia professionale** — prima impressione\n• **Home staging** — allestimento attraente\n\nPossono velocizzare la vendita e alzare il prezzo del **3-5%**.'
   },
   {
-    k: ['home staging cos è', 'staging significato', 'allestimento vendita'],
+    k: ['home staging significato', 'cos è home staging', 'allestimento immobile vendita'],
     r: '🎨 **Cos\'è l\'home staging?**\n\nÈ l\'**allestimento professionale** dell\'immobile per renderlo più attraente:\n• Mobili e complementi strategici\n• Illuminazione studiata\n• Foto e visite più efficaci\n\nAumenta le possibilità di vendita e il prezzo finale. Noi offriamo anche **staging virtuale gratuito**!'
   },
   {
@@ -1366,7 +1366,7 @@ const FAQ_DATA = [
     r: '🏦 **Vendere con mutuo in corso**\n\nSì, è possibile! Il mutuo viene **estinto con il ricavato** della vendita al momento del rogito. La banca poi cancella l\'ipoteca. È una procedura standard, la gestiamo noi in coordinamento con la banca e il notaio.'
   },
   {
-    k: ['documenti vendita', 'documenti per vendere casa', 'carte vendita'],
+    k: ['documenti per vendere', 'carte per vendere casa', 'elenco documenti vendita'],
     r: '📋 **Documenti per vendere casa**\n\nServono:\n• **Atto di provenienza**\n• Visure catastali aggiornate\n• **APE** (Attestato Prestazione Energetica)\n• Certificazione impianti\n• Planimetria catastale\n• Documento d\'identità e codice fiscale\n\nNon preoccuparti, ti aiutiamo a raccogliere tutto!'
   },
   {
@@ -1374,7 +1374,7 @@ const FAQ_DATA = [
     r: '🧾 **Tasse sulla vendita**\n\nAttenzione se vendi **prima di 5 anni** dall\'acquisto con agevolazione prima casa senza riacquistare entro 1 anno:\n• Perdi i **benefici fiscali** goduti\n• Devi pagare la differenza di imposte + sanzioni\n\nSe vendi dopo 5 anni, generalmente nessuna tassa aggiuntiva.'
   },
   {
-    k: ['plusvalenza cos è', 'tassa guadagno vendita', 'plusvalenza immobiliare cos è'],
+    k: ['plusvalenza immobiliare', 'tassa sulla plusvalenza', 'plusvalenza 26 percento'],
     r: '💰 **Plusvalenza immobiliare**\n\nÈ la differenza tra prezzo di **vendita** e prezzo di **acquisto**. Se vendi entro 5 anni (e non è prima casa):\n• Tassazione IRPEF ordinaria, oppure\n• Imposta sostitutiva del **26%**\n\n**Esente** se l\'immobile è stato adibito a prima casa per la maggior parte del periodo.'
   },
   {
@@ -1382,8 +1382,232 @@ const FAQ_DATA = [
     r: '🔄 **Meglio vendere prima di comprare?**\n\nDipende dalla tua situazione:\n• **Vendere prima** — più sicurezza economica, ma devi trovare un alloggio temporaneo\n• **Comprare prima** — rischio di avere due immobili temporaneamente\n\nIl consulente può aiutarti a **sincronizzare** vendita e acquisto per evitare problemi.'
   },
   {
-    k: ['incarico esclusiva cos è', 'esclusiva agenzia', 'mandato esclusivo significato'],
+    k: ['incarico in esclusiva', 'mandato esclusivo vendita', 'esclusiva agenzia immobiliare'],
     r: '📝 **Incarico in esclusiva**\n\nAffidi la vendita a **una sola agenzia** per un periodo concordato. Vantaggi:\n• Più **impegno** e investimento promozionale\n• Strategia di vendita **dedicata**\n• Un unico interlocutore\n\nL\'esclusiva ci permette di investire al massimo nella promozione del tuo immobile.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ 150-155: AFFITTO
+  // ═══════════════════════════════════════════════
+  {
+    k: ['tipi contratto affitto', 'contratto locazione tipi', 'affitto 4+4', 'affitto 3+2', 'contratto transitorio'],
+    r: '📄 **Tipi di contratto d\'affitto**\n\n• **Libero (4+4)** — canone libero, durata 4 anni + rinnovo automatico di 4\n• **Concordato (3+2)** — canone calmierato con vantaggi fiscali\n• **Transitorio (1-18 mesi)** — per esigenze temporanee documentate\n• **Studenti (6-36 mesi)** — riservato a studenti universitari fuori sede\n\nTi aiutiamo a scegliere la formula più adatta.'
+  },
+  {
+    k: ['canone concordato cos è', 'affitto concordato vantaggi', 'contratto concordato'],
+    r: '🤝 **Contratto a canone concordato**\n\nIl canone è stabilito in base ad **accordi territoriali** tra associazioni. Vantaggi:\n• **Proprietario:** cedolare secca ridotta al 10%, sconto IMU\n• **Inquilino:** canone inferiore al mercato, detrazioni fiscali\n\nConviene a entrambe le parti. Chiedi al consulente se è applicabile nella tua zona.'
+  },
+  {
+    k: ['deposito cauzionale affitto', 'cauzione locazione', 'quante mensilità cauzione'],
+    r: '💶 **Deposito cauzionale**\n\nGeneralmente **2-3 mensilità** di canone, versate all\'inizio della locazione. Il deposito:\n• Viene **restituito a fine locazione**\n• Al netto di eventuali danni documentati\n• Non può essere usato come pagamento degli ultimi mesi\n\nProduce interessi legali a favore dell\'inquilino.'
+  },
+  {
+    k: ['aumento affitto', 'proprietario aumenta affitto', 'adeguamento istat affitto'],
+    r: '📈 **Aumento dell\'affitto**\n\nIl proprietario può aumentare il canone solo:\n• Con **adeguamento ISTAT** annuale (se previsto dal contratto), generalmente al 75% dell\'indice\n• Al **rinnovo** del contratto, nei limiti di legge\n\nAumenti arbitrari non sono consentiti. Verifica sempre le clausole del tuo contratto.'
+  },
+  {
+    k: ['preavviso affitto', 'disdetta affitto', 'lasciare affitto quanto preavviso'],
+    r: '📬 **Preavviso per lasciare l\'affitto**\n\nGeneralmente **6 mesi** di preavviso, da comunicare con **raccomandata A/R** (o PEC). Attenzione:\n• Il preavviso decorre dal mese successivo alla ricezione\n• Verifica le condizioni specifiche nel tuo contratto\n• In alcuni casi (trasferimento lavoro, gravi motivi) è possibile recedere con preavviso ridotto.'
+  },
+  {
+    k: ['spese condominiali in affitto', 'oneri accessori locazione', 'condominiali ordinarie straordinarie'],
+    r: '🏢 **Spese condominiali in affitto**\n\n• **Inquilino** — spese ordinarie: pulizia scale, ascensore, luce parti comuni, giardinaggio, portineria\n• **Proprietario** — spese straordinarie: rifacimento facciata, sostituzione impianti, lavori strutturali\n\nVerifica sempre il contratto per le ripartizioni specifiche concordate.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ 156-165: ASPETTI LEGALI
+  // ═══════════════════════════════════════════════
+  {
+    k: ['diritto prelazione cos è', 'prelazione immobile', 'prelazione affitto commerciale'],
+    r: '⚖️ **Diritto di prelazione**\n\nÈ il diritto di essere **preferiti nell\'acquisto** a parità di condizioni. Esiste per legge:\n• Negli **immobili commerciali** in affitto\n• Per i **coeredi** in caso di vendita di quote ereditarie\n• In alcuni contratti agrari\n\nIl venditore deve notificare l\'intenzione di vendita. Noi verifichiamo sempre eventuali prelazioni.'
+  },
+  {
+    k: ['ipoteca significato', 'garanzia ipotecaria', 'ipoteca sulla casa'],
+    r: '🏦 **Ipoteca sull\'immobile**\n\nÈ una **garanzia reale** a favore della banca che finanzia il mutuo. Punti chiave:\n• Viene iscritta al momento della concessione del mutuo\n• Si cancella **automaticamente** dopo l\'estinzione del mutuo\n• Non impedisce di vivere nell\'immobile o di venderlo\n\nÈ la garanzia standard per ogni mutuo ipotecario.'
+  },
+  {
+    k: ['comprare immobile ipoteca', 'casa con ipoteca', 'acquisto casa ipotecata'],
+    r: '🔓 **Comprare un immobile con ipoteca?**\n\nSì, è possibile e abbastanza comune! L\'ipoteca viene **cancellata al rogito**: il notaio trattiene dal prezzo la somma per estinguere il mutuo residuo del venditore. Noi verifichiamo in anticipo la situazione ipotecaria completa.'
+  },
+  {
+    k: ['donazione immobiliare rischi', 'casa donata rischi', 'impugnazione donazione', 'eredità legittimari donazione'],
+    r: '⚠️ **Donazione immobiliare — Rischi**\n\nAttenzione: la donazione può essere **impugnata dagli eredi legittimari** entro 20 anni. Conseguenze:\n• Le banche spesso **non concedono mutui** su immobili donati\n• L\'acquirente rischia la restituzione\n• Esistono polizze assicurative specifiche, ma non sempre bastano\n\nSe l\'immobile che ti interessa proviene da donazione, **parlane subito con il consulente**.'
+  },
+  {
+    k: ['nuda proprietà significato', 'comprare nuda proprietà', 'investire in nuda proprietà'],
+    r: '🏠 **Nuda proprietà**\n\nAcquisti la **proprietà** ma l\'usufruttuario (spesso l\'anziano venditore) continua ad abitarci vita natural durante. Vantaggi:\n• Prezzo ridotto del **20-50%** rispetto al pieno valore\n• Buon investimento a lungo termine\n• Imposte calcolate sul valore della nuda proprietà\n\nIl prezzo dipende dall\'età dell\'usufruttuario.'
+  },
+  {
+    k: ['servitù cosa sono', 'servitù immobiliare', 'diritto di passaggio'],
+    r: '🚶 **Servitù immobiliari**\n\nSono diritti di terzi sull\'immobile, ad esempio:\n• **Servitù di passaggio** — diritto di attraversare la proprietà\n• **Servitù di veduta** — distanze minime per finestre\n• **Servitù di scarico** — tubature che attraversano il fondo\n\nVanno verificate **prima dell\'acquisto** perché vincolano la proprietà permanentemente.'
+  },
+  {
+    k: ['usucapione cos è', 'usucapione immobile', 'proprietà per possesso'],
+    r: '⏳ **Usucapione**\n\nSi diventa proprietari di un immobile dopo averlo posseduto **ininterrottamente per 20 anni**, in modo:\n• Pacifico e pubblico\n• Continuo e non contestato\n\nServe una **sentenza del tribunale** per formalizzare il passaggio di proprietà. È una procedura lunga e complessa.'
+  },
+  {
+    k: ['comprare casa separato', 'acquisto casa divorziato', 'separazione e acquisto'],
+    r: '⚖️ **Acquisto casa da separato/divorziato**\n\nSì, è possibile comprare casa. Tuttavia è consigliabile:\n• Verificare la **situazione patrimoniale** con un legale\n• Controllare eventuali vincoli da accordi di separazione\n• Valutare il regime patrimoniale (comunione/separazione dei beni)\n\nUn legale può aiutarti a evitare complicazioni future.'
+  },
+  {
+    k: ['vizi occulti dopo acquisto', 'difetti non dichiarati', 'problemi nascosti immobile'],
+    r: '🔍 **Vizi occulti dopo l\'acquisto**\n\nSe scopri difetti non dichiarati dal venditore:\n• Hai **8 giorni dalla scoperta** per denunciarli\n• **1 anno** per agire legalmente\n• Il venditore è responsabile per i vizi **non visibili** al momento dell\'acquisto\n\nPer questo noi effettuiamo sempre verifiche approfondite prima del rogito.'
+  },
+  {
+    k: ['comunione dei beni acquisto', 'separazione beni casa', 'regime patrimoniale acquisto'],
+    r: '💍 **Comunione dei beni e acquisto**\n\n• **Comunione dei beni** — l\'immobile è di entrambi i coniugi al **50%**, anche se paga uno solo\n• **Separazione dei beni** — è solo di chi lo acquista\n\nÈ importante scegliere il regime patrimoniale consapevolmente, anche in vista di futuri acquisti immobiliari.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ 166-173: RISTRUTTURAZIONE E BONUS
+  // ═══════════════════════════════════════════════
+  {
+    k: ['bonus ristrutturazione esistono', 'agevolazioni ristrutturazione', 'detrazioni casa lavori'],
+    r: '🏗️ **Bonus per la ristrutturazione**\n\nSì, esistono diverse agevolazioni fiscali che cambiano periodicamente:\n• Bonus ristrutturazione\n• Ecobonus (risparmio energetico)\n• Bonus mobili\n• Sismabonus\n\nLe aliquote e i limiti variano. **Chiedi al consulente** per le agevolazioni attualmente in vigore nella tua situazione.'
+  },
+  {
+    k: ['detrazione ristrutturazione edilizia', 'bonus lavori edilizia', 'recupero fiscale ristrutturazione'],
+    r: '💰 **Bonus ristrutturazione**\n\nÈ una **detrazione fiscale** sulle spese di ristrutturazione edilizia, recuperata in 10 rate annuali in dichiarazione dei redditi. L\'aliquota e i limiti di spesa variano in base alla normativa vigente.\n\nPer sfruttarlo: conserva tutte le fatture e paga con **bonifico parlante**.'
+  },
+  {
+    k: ['ristrutturare prima rogito', 'lavori prima acquisto', 'ristrutturazione prima atto'],
+    r: '⚠️ **Ristrutturare prima del rogito?**\n\nSolo con **autorizzazione scritta** del venditore. Attenzione:\n• I lavori restano sul suo immobile se la vendita salta\n• Non puoi accedere ai bonus fiscali senza essere proprietario\n\nÈ più prudente **attendere il trasferimento di proprietà**. In alternativa, inserisci accordi specifici nel preliminare.'
+  },
+  {
+    k: ['permesso ristrutturare', 'serve permesso lavori', 'autorizzazione lavori casa'],
+    r: '📋 **Permessi per ristrutturare**\n\nDipende dai lavori:\n• **Edilizia libera** — tinteggiatura, pavimenti, sanitari (nessun titolo)\n• **CILA** — manutenzione straordinaria leggera\n• **SCIA** — lavori importanti senza cambio volumetria\n• **Permesso di Costruire** — ampliamenti e modifiche strutturali\n\nIl tuo tecnico di fiducia sa consigliarti il titolo giusto.'
+  },
+  {
+    k: ['cila', 'comunicazione inizio lavori asseverata', 'cila significato'],
+    r: '📝 **CILA — Comunicazione Inizio Lavori Asseverata**\n\nServe per lavori di **manutenzione straordinaria leggera**, ad esempio:\n• Spostare tramezzi (muri non portanti)\n• Rifare impianti\n• Modificare la distribuzione interna\n\nVa presentata in Comune da un tecnico abilitato. Il costo del tecnico varia da €500 a €1.500.'
+  },
+  {
+    k: ['scia edilizia', 'scia significato', 'segnalazione certificata inizio attività'],
+    r: '📋 **SCIA — Segnalazione Certificata di Inizio Attività**\n\nServe per lavori più importanti che **non modificano la volumetria**:\n• Ristrutturazione edilizia\n• Restauro e risanamento conservativo\n• Varianti in corso d\'opera\n\nI lavori possono iniziare dalla data di presentazione. Va redatta da un tecnico abilitato.'
+  },
+  {
+    k: ['costo ristrutturazione al mq', 'prezzo ristrutturazione completa', 'ristrutturare quanto costa'],
+    r: '💶 **Costo ristrutturazione completa**\n\nA Padova, indicativamente:\n• **Ristrutturazione base:** €500-€600/mq\n• **Medio livello:** €600-€800/mq\n• **Alto livello:** €800-€1.200/mq\n\nIl costo varia molto in base a materiali, impianti e finiture scelte. Consigliamo sempre di richiedere **almeno 3 preventivi**.'
+  },
+  {
+    k: ['abbattere muro portante', 'demolire muro portante', 'muro portante si può togliere'],
+    r: '🧱 **Abbattere un muro portante**\n\nÈ possibile ma **non è un intervento banale**:\n• Serve il progetto di un **ingegnere strutturista**\n• È necessario il **Permesso di Costruire**\n• Vanno inserite travi o pilastri sostitutivi\n• Costo indicativo: €3.000-€8.000 (solo struttura)\n\nMai improvvisare: la sicurezza della struttura è prioritaria.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ 174-179: VALUTAZIONE E MERCATO
+  // ═══════════════════════════════════════════════
+  {
+    k: ['come valutare immobile', 'criteri valutazione casa', 'cosa influenza prezzo casa'],
+    r: '📊 **Come si valuta un immobile?**\n\nI fattori principali:\n• **Zona** e posizione nel quartiere\n• **Metratura** commerciale\n• **Stato** conservativo (ristrutturato vs da ristrutturare)\n• **Classe energetica**\n• **Piano** ed esposizione\n• **Pertinenze** (garage, cantina, giardino)\n• Andamento del **mercato locale**\n\nRichiedi la nostra valutazione gratuita per un\'analisi professionale.'
+  },
+  {
+    k: ['prezzo metro quadro cos è', 'prezzo mq significato', 'valore mq'],
+    r: '📏 **Prezzo al metro quadro**\n\nÈ il valore medio di compravendita per mq nella zona. Un riferimento utile, ma va adattato a:\n• Caratteristiche specifiche dell\'immobile\n• Piano e luminosità\n• Stato di manutenzione\n• Presenza di pertinenze\n\nDue appartamenti nella stessa via possono avere prezzi/mq molto diversi.'
+  },
+  {
+    k: ['prezzi immobili padova', 'quanto costa casa padova', 'valore case padova zona'],
+    r: '🏠 **Prezzi immobili — Zona Padova**\n\nIndicativamente (2024):\n• **Centro storico:** €2.500-€4.000/mq\n• **Semicentro:** €1.500-€2.500/mq\n• **Prima cintura:** €1.200-€2.000/mq\n• **Provincia:** €1.000-€1.800/mq\n\nI valori variano molto in base allo stato e alle caratteristiche. Per una stima precisa, chiedi la nostra **valutazione gratuita**.'
+  },
+  {
+    k: ['dati omi cosa sono', 'quotazioni omi', 'osservatorio mercato immobiliare'],
+    r: '📈 **Dati OMI**\n\nSono le quotazioni dell\'**Osservatorio del Mercato Immobiliare** dell\'Agenzia delle Entrate. Indicano:\n• Valori **minimi e massimi** per zona\n• Distinti per tipologia e stato conservativo\n• Aggiornati semestralmente\n\nSono un riferimento utile ma **non vincolante**. La valutazione reale considera molti più fattori.'
+  },
+  {
+    k: ['momento giusto comprare', 'conviene comprare adesso', 'quando comprare casa'],
+    r: '🤔 **È il momento giusto per comprare?**\n\nDipende da più fattori:\n• Le tue **esigenze personali** e familiari\n• La tua **capacità finanziaria**\n• L\'andamento dei **tassi di interesse**\n• Il mercato locale\n\nIl momento migliore è quando hai trovato la casa giusta alle condizioni giuste per te. Il consulente ti aiuta a valutare.'
+  },
+  {
+    k: ['comprare casa investimento', 'investimento immobiliare conviene', 'rendita affitto'],
+    r: '📊 **Casa come investimento**\n\nDipende da diversi fattori:\n• **Zona** — posizioni centrali rendono di più\n• **Prezzo d\'acquisto** — comprare bene è metà del guadagno\n• **Mercato affitti** — domanda e canoni medi\n• **Costi** — tasse, manutenzione, gestione\n\nA Padova, la rendita lorda da affitto si aggira sul **4-6%** annuo. Il consulente può aiutarti a valutare le opportunità.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ 180-200: SERVIZIO E ASSISTENZA
+  // ═══════════════════════════════════════════════
+  {
+    k: ['contattare consulente', 'parlare con agente', 'come vi contatto'],
+    r: '📞 **Contattaci!**\n\nSiamo disponibili su più canali:\n• **Telefono:** 049 884 3484\n• **WhatsApp:** scrivici direttamente\n• **Email:** dal form sul sito\n• **Di persona:** in ufficio su appuntamento\n\nTi ricontatteremo **in giornata**. Oppure scrivi *"contattami"* qui in chat!'
+  },
+  {
+    k: ['offrite valutazione gratuita', 'stima senza impegno casa', 'valutazione gratuita immobile'],
+    r: '🏠 **Valutazione gratuita**\n\nSì, offriamo una valutazione **gratuita e senza impegno** del tuo immobile. Come funziona:\n1. Ci contatti o scrivi *"stima"* in chat\n2. Fissiamo un sopralluogo\n3. Analizziamo l\'immobile e il mercato\n4. Ti consegniamo la valutazione\n\nNessun costo, nessun obbligo. 📞 **049 884 3484**'
+  },
+  {
+    k: ['zone servite', 'comuni coperti', 'quali zone padova'],
+    r: '📍 **Dove operiamo**\n\nPrincipalmente a **Padova e provincia**:\n• Padova centro e semicentro\n• Limena, Villafranca Padovana\n• Campodarsego, Vigonza\n• Noventa Padovana\n• Comuni limitrofi\n\nConosciamo il mercato locale in modo approfondito. Per zone specifiche, chiedici!'
+  },
+  {
+    k: ['visita weekend', 'appuntamento sabato', 'visita sabato domenica'],
+    r: '📅 **Visite nel weekend**\n\nSì, organizziamo visite anche il **sabato**! Contattaci per fissare un appuntamento nell\'orario più comodo per te. La flessibilità è un nostro punto di forza.\n\n📞 **049 884 3484** oppure scrivi *"contattami"* per prenotare.'
+  },
+  {
+    k: ['tour virtuale 360', 'visita virtuale online', 'esplorare casa da remoto'],
+    r: '🖥️ **Virtual tour 360°**\n\nMolti nostri immobili dispongono del virtual tour interattivo:\n• Naviga **stanza per stanza**\n• Ruota la vista a **360°**\n• Zoom sui dettagli\n• Disponibile su **smartphone e PC**\n\nPuoi esplorare la casa comodamente da casa tua, prima di decidere se visitarla di persona!'
+  },
+  {
+    k: ['come funziona virtual tour', 'usare virtual tour', 'navigare virtual tour'],
+    r: '🎯 **Come funziona il virtual tour**\n\nÈ semplicissimo:\n1. Apri il link dell\'immobile\n2. Clicca e trascina per **ruotare la vista**\n3. Usa i punti di navigazione per **cambiare stanza**\n4. Pinch o rotella per lo **zoom**\n\nÈ come essere lì di persona! Ideale per una prima selezione prima della visita.'
+  },
+  {
+    k: ['video immobili', 'youtube immobili', 'filmati case'],
+    r: '🎬 **Video degli immobili**\n\nSì, realizziamo **video professionali** per i nostri immobili:\n• Riprese interne ed esterne\n• Drone per viste aeree\n• Pubblicati sul nostro canale **YouTube**\n\nUna visione completa e realistica dell\'immobile prima ancora di visitarlo.'
+  },
+  {
+    k: ['newsletter immobili', 'aggiornamenti nuove case', 'notifiche nuovi immobili'],
+    r: '🔔 **Resta aggiornato!**\n\nPer non perdere nessuna opportunità:\n• Iscriviti alla nostra **newsletter**\n• Attiva le **notifiche** personalizzate\n• Seguici sui **social**\n\nTi avviseremo appena viene inserito un immobile che corrisponde ai tuoi criteri di ricerca. Scrivi *"contattami"* per attivare il servizio!'
+  },
+  {
+    k: ['non trovo casa', 'immobile non trovato', 'cerco casa specifica'],
+    r: '🔎 **Non trovi l\'immobile che cerchi?**\n\nNon preoccuparti! Contattaci con le tue esigenze:\n• Abbiamo anche immobili **non ancora pubblicati**\n• Possiamo cercare **attivamente** per te nella zona desiderata\n• Ti avvisiamo appena troviamo qualcosa di adatto\n\nScrivici le tue esigenze o clicca *"contattami"*. Troviamo la tua casa insieme!'
+  },
+  {
+    k: ['durata visita immobile', 'quanto dura visita', 'tempo visita casa'],
+    r: '⏱️ **Durata della visita**\n\nUna visita dura circa **20-30 minuti**. Per sfruttarla al meglio:\n• Prepara le **domande** in anticipo\n• Controlla **infissi**, impianti e umidità\n• Osserva la **luminosità** nelle diverse ore\n• Valuta il **quartiere** e i servizi vicini\n\nIl consulente è lì per rispondere a ogni tua curiosità.'
+  },
+  {
+    k: ['portare tecnico visita', 'geometra visita', 'ingegnere sopralluogo'],
+    r: '👷 **Portare un tecnico alla visita?**\n\nAssolutamente sì, anzi **lo consigliamo**! Un tecnico di fiducia può:\n• Valutare lo stato degli **impianti**\n• Verificare eventuali **problemi strutturali**\n• Stimare i costi di eventuali **lavori**\n• Controllare la **conformità** dell\'immobile\n\nÈ un investimento che può farti risparmiare molto.'
+  },
+  {
+    k: ['cosa portare proposta acquisto', 'documenti per proposta', 'proposta cosa serve'],
+    r: '📋 **Cosa portare per la proposta d\'acquisto**\n\n• **Documento d\'identità** in corso di validità\n• **Codice fiscale**\n• **Assegno bancario** (non trasferibile) per la caparra\n\nIl consulente ti guida passo passo nella compilazione. Non preoccuparti, pensiamo a tutto noi!'
+  },
+  {
+    k: ['fate anche affitti', 'gestite locazioni', 'affitto disponibile'],
+    r: '🏠 **Locazioni**\n\nSì, gestiamo sia **vendite** che **affitti**! Il nostro servizio locazioni include:\n• Ricerca inquilini qualificati\n• Verifica affidabilità\n• Contratto e registrazione\n• Assistenza continua\n\nContattaci per conoscere gli immobili disponibili in locazione. 📞 **049 884 3484**'
+  },
+  {
+    k: ['due diligence immobiliare', 'verifica documentale completa', 'controllo completo prima acquisto'],
+    r: '🔍 **Due diligence immobiliare**\n\nÈ la **verifica completa** della documentazione:\n• **Urbanistica** — conformità edilizia e permessi\n• **Catastale** — planimetrie e rendite\n• **Ipotecaria** — gravami e ipoteche\n• **Condominiale** — spese e delibere\n\nNoi la eseguiamo **sempre**, è inclusa nel nostro servizio. La tua sicurezza viene prima di tutto.'
+  },
+  {
+    k: ['acquistare dall estero', 'comprare casa estero', 'procura notarile acquisto'],
+    r: '🌍 **Acquistare dall\'estero**\n\nSì, è possibile anche con **procura notarile**: un delegato firma per tuo conto. Ti assistiamo in tutto il processo:\n• Videochiamate per le visite\n• Coordinamento con notaio e banca\n• Gestione documentale a distanza\n\nAbbiamo esperienza con acquirenti internazionali.'
+  },
+  {
+    k: ['trascrizione del preliminare', 'preliminare trascritto registri', 'differenza registrazione trascrizione'],
+    r: '📋 **Compromesso registrato vs trascritto**\n\n• **Registrato** — obbligatorio, presso l\'Agenzia delle Entrate (€200 + imposte)\n• **Trascritto** — facoltativo, nei registri immobiliari. Offre **maggiore tutela**:\n  - Protegge da ipoteche successive\n  - Protegge da vendite a terzi\n  - Costo aggiuntivo ma più sicurezza\n\nPer importi elevati, la trascrizione è fortemente consigliata.'
+  },
+  {
+    k: ['residenza dopo acquisto', 'trasferire residenza prima casa', 'tempo residenza prima casa'],
+    r: '🏠 **Trasferimento residenza — Prima casa**\n\nHai **18 mesi dalla data del rogito** per trasferire la residenza nel comune dell\'immobile. Se non lo fai:\n• Perdi le **agevolazioni fiscali** (risparmio del 7% di imposta)\n• Devi restituire la differenza + sanzioni\n\nSegna la data e non dimenticarti! Il consulente ti ricorda la scadenza.'
+  },
+  {
+    k: ['casa intestata figlio minorenne', 'immobile minorenne', 'acquisto per figlio minore'],
+    r: '👶 **Intestare casa a figlio minorenne**\n\nÈ possibile ma serve l\'**autorizzazione del Giudice Tutelare**:\n• Va presentata istanza al tribunale\n• Il giudice verifica l\'interesse del minore\n• Tempi aggiuntivi (1-3 mesi)\n\nÈ una procedura specifica che richiede l\'assistenza di un legale. Possiamo metterti in contatto con un professionista.'
+  },
+  {
+    k: ['classe catastale significato', 'categoria a2 a3 a4', 'categorie catastali abitazione'],
+    r: '🏷️ **Classe catastale**\n\nIndica la **categoria** e il livello dell\'immobile:\n• **A/1** — abitazione signorile\n• **A/2** — abitazione civile\n• **A/3** — abitazione economica\n• **A/4** — abitazione popolare\n• **A/7** — villini\n\nInfluisce sulla **rendita catastale** e quindi sulle imposte. Le categorie A/1, A/8, A/9 pagano l\'IMU anche come prima casa.'
+  },
+  {
+    k: ['accatastato significato', 'immobile registrato al catasto', 'cosa significa accatastato'],
+    r: '📋 **Immobile accatastato**\n\nSignifica che è **registrato al Catasto** con:\n• Una **planimetria** depositata\n• Una **rendita catastale** attribuita\n• Una **categoria** assegnata (A/2, A/3, ecc.)\n\nÈ obbligatorio per tutti gli immobili. Un immobile non accatastato non può essere venduto né ipotecato.'
+  },
+  {
+    k: ['cosa controllare prima firmare', 'attenzione documenti', 'firmare documenti immobiliare'],
+    r: '✍️ **Prima di firmare qualsiasi documento**\n\nRegole d\'oro:\n• **Leggi tutto** con attenzione, senza fretta\n• **Chiedi spiegazioni** su ogni punto non chiaro\n• Non firmare mai **sotto pressione**\n• Consulta il tuo **legale o consulente** in caso di dubbi\n• Conserva sempre una **copia** di tutto\n\nNoi spieghiamo ogni documento in modo chiaro e trasparente. La tua consapevolezza è la nostra priorità.'
   }
 ];
 
@@ -1621,7 +1845,7 @@ class RighettoChat {
     }
 
     // Contatto
-    if (/contatt|chiamat|appuntam|richiama|visita|veder|incontr|form/.test(low)) {
+    if (/contattami|contattare|chiamatemi|appuntamento|richiamatemi|fissare visita|prenotare visita|incontrarvi|compilare form/.test(low)) {
       this.state = 'contatto_nome';
       this.contattoPending = { provenienza: 'chatbot' };
       return '👋 Ottimo! Ti ricontatteremo al più presto.\n\n**Come ti chiami?** (Nome e Cognome)';
@@ -1632,11 +1856,23 @@ class RighettoChat {
       return this.rispostaRicerca(low);
     }
 
-    // FAQ
+    // FAQ — best-score matching: prefer longer/more specific keyword matches
+    let bestFaq = null;
+    let bestScore = 0;
     for (const faq of FAQ_DATA) {
-      if (faq.k.some(k => low.includes(k))) {
-        return faq.r;
+      let score = 0;
+      for (const k of faq.k) {
+        if (low.includes(k)) {
+          score += k.length;
+        }
       }
+      if (score > bestScore) {
+        bestScore = score;
+        bestFaq = faq;
+      }
+    }
+    if (bestFaq) {
+      return bestFaq.r;
     }
 
     // Saluto
