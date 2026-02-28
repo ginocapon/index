@@ -286,6 +286,7 @@
     .footer-links{display:flex;gap:1rem;flex-wrap:wrap}
     .footer-links a{color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s}
     .footer-links a:hover{color:var(--oro)}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
   </style>
 </head>
@@ -553,17 +554,22 @@
       </div>
       <div class="side-body">
         <div class="form-fields">
+          <label for="f-nome" class="sr-only">Nome e cognome</label>
           <input type="text" placeholder="Nome e cognome *" id="f-nome">
+          <label for="f-tel" class="sr-only">Telefono</label>
           <input type="tel" placeholder="Telefono *" id="f-tel">
-          <input type="email" placeholder="Email">
+          <label for="f-email" class="sr-only">Email</label>
+          <input type="email" placeholder="Email" id="f-email">
+          <label for="f-interesse" class="sr-only">Tipo di richiesta</label>
           <select id="f-interesse">
             <option value="">Tipo di richiesta</option>
             <option>Voglio fissare una visita</option>
             <option>Voglio maggiori informazioni</option>
             <option>Voglio fare una proposta</option>
           </select>
+          <label for="f-msg" class="sr-only">Messaggio</label>
           <textarea placeholder="Messaggio..." id="f-msg"></textarea>
-          <label class="form-check">
+          <label class="form-check" for="f-gdpr">
             <input type="checkbox" id="f-gdpr">
             Acconsento al trattamento dei dati personali (GDPR)
           </label>
@@ -632,7 +638,7 @@
 </div>
 
 <!-- TOAST -->
-<div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span id="toastMsg"></span></div>
+<div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span id="toastMsg"></span></div>
 
 </main>
 
@@ -652,7 +658,7 @@
       <a href="cookie-policy.html">Cookie Policy</a>
       <a href="#" data-cookie-prefs>Preferenze Cookie</a>
     </div>
-    <div>© 2025 Gruppo Immobiliare Righetto di Capon Gino</div>
+    <div>© 2026 Gruppo Immobiliare Righetto di Capon Gino</div>
   </div>
 </footer>
 
@@ -1001,7 +1007,7 @@ function renderGallery(d, fotos) {
 }
 
 function renderDettagli(d) {
-  const check = (icon, label) => `<span class="ctag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>${icon} ${label}</span>`;
+  const check = (icon, label) => `<span class="ctag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>${icon} ${label}</span>`;
   let html = '';
 
   // Ambienti
@@ -1622,8 +1628,8 @@ function toggleChat() {
 init();
 </script>
 <!-- Chatbot globale disabilitato su questa pagina: usa il chatbot dedicato all'immobile -->
-<script src="js/nav-mobile.js"></script>
-<script src="js/cookie-consent.js"></script>
+<script src="js/nav-mobile.js" defer></script>
+<script src="js/cookie-consent.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
 <script src="js/welcome-popup.js" defer></script>
 </body>
