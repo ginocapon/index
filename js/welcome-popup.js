@@ -1,6 +1,6 @@
 /**
  * WELCOME POPUP — Righetto Immobiliare
- * Avatar Sara che accoglie il visitatore con voce e testo animato.
+ * Avatar Sara ANIMATA: lip-sync, blinking, head movement.
  * Audio: MP3 pre-generato (priorità) → fallback Web Speech API.
  * Si mostra una sola volta per sessione (sessionStorage).
  */
@@ -14,8 +14,54 @@
   // ── Una volta per sessione ──
   if (sessionStorage.getItem('welcome_shown')) return;
 
-  // ── Avatar Sara (stesso SVG del chatbot) ──
-  var SARA_AVATAR = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%233A5578'/%3E%3Cstop offset='100%25' stop-color='%235C7A9E'/%3E%3C/linearGradient%3E%3ClinearGradient id='hair' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23F2D06B'/%3E%3Cstop offset='100%25' stop-color='%23D4A843'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='60' cy='60' r='60' fill='url(%23bg)'/%3E%3Cellipse cx='60' cy='48' rx='35' ry='38' fill='url(%23hair)'/%3E%3Cellipse cx='60' cy='62' rx='24' ry='28' fill='%23FDDCB5'/%3E%3Cellipse cx='60' cy='45' rx='30' ry='20' fill='url(%23hair)'/%3E%3Cpath d='M30 42 Q35 20 60 18 Q85 20 90 42 Q88 35 75 32 Q60 28 45 32 Q32 35 30 42Z' fill='url(%23hair)'/%3E%3Cpath d='M25 55 Q28 70 35 78' stroke='%23D4A843' stroke-width='8' fill='none' stroke-linecap='round'/%3E%3Cpath d='M95 55 Q92 70 85 78' stroke='%23D4A843' stroke-width='8' fill='none' stroke-linecap='round'/%3E%3Cellipse cx='48' cy='58' rx='5' ry='4' fill='white'/%3E%3Cellipse cx='72' cy='58' rx='5' ry='4' fill='white'/%3E%3Ccircle cx='49' cy='58' r='2.5' fill='%232C4A6E'/%3E%3Ccircle cx='73' cy='58' r='2.5' fill='%232C4A6E'/%3E%3Ccircle cx='50' cy='57' r='0.8' fill='white'/%3E%3Ccircle cx='74' cy='57' r='0.8' fill='white'/%3E%3Crect x='38' y='55' width='14' height='9' rx='4.5' fill='none' stroke='%23556B7A' stroke-width='1.5'/%3E%3Crect x='62' y='55' width='14' height='9' rx='4.5' fill='none' stroke='%23556B7A' stroke-width='1.5'/%3E%3Cline x1='52' y1='59' x2='62' y2='59' stroke='%23556B7A' stroke-width='1.2'/%3E%3Cline x1='38' y1='59' x2='28' y2='56' stroke='%23556B7A' stroke-width='1.2'/%3E%3Cline x1='76' y1='59' x2='86' y2='56' stroke='%23556B7A' stroke-width='1.2'/%3E%3Cellipse cx='48' cy='66' rx='2' ry='0.8' fill='%23E8A090' opacity='0.5'/%3E%3Cellipse cx='72' cy='66' rx='2' ry='0.8' fill='%23E8A090' opacity='0.5'/%3E%3Cpath d='M55 72 Q60 76 65 72' stroke='%23C0756B' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3Cpath d='M40 95 Q42 82 60 80 Q78 82 80 95' fill='%233A5578'/%3E%3Cpath d='M52 82 L55 90 L60 84 L65 90 L68 82' fill='white' opacity='0.9'/%3E%3C/svg%3E";
+  // ── Avatar Sara INLINE SVG (animabile) ──
+  var SARA_SVG = '<svg class="welcome-avatar-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">' +
+    '<defs>' +
+      '<linearGradient id="wbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3A5578"/><stop offset="100%" stop-color="#5C7A9E"/></linearGradient>' +
+      '<linearGradient id="whair" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F2D06B"/><stop offset="100%" stop-color="#D4A843"/></linearGradient>' +
+    '</defs>' +
+    '<circle cx="60" cy="60" r="60" fill="url(#wbg)"/>' +
+    '<g id="sara-head">' +
+      // Capelli dietro
+      '<ellipse cx="60" cy="48" rx="35" ry="38" fill="url(#whair)"/>' +
+      // Viso
+      '<ellipse cx="60" cy="62" rx="24" ry="28" fill="#FDDCB5"/>' +
+      // Capelli sopra
+      '<ellipse cx="60" cy="45" rx="30" ry="20" fill="url(#whair)"/>' +
+      '<path d="M30 42 Q35 20 60 18 Q85 20 90 42 Q88 35 75 32 Q60 28 45 32 Q32 35 30 42Z" fill="url(#whair)"/>' +
+      // Ciocche laterali
+      '<path d="M25 55 Q28 70 35 78" stroke="#D4A843" stroke-width="8" fill="none" stroke-linecap="round"/>' +
+      '<path d="M95 55 Q92 70 85 78" stroke="#D4A843" stroke-width="8" fill="none" stroke-linecap="round"/>' +
+      // Occhi - bianchi
+      '<ellipse cx="48" cy="58" rx="5" ry="4" fill="white"/>' +
+      '<ellipse cx="72" cy="58" rx="5" ry="4" fill="white"/>' +
+      // Pupille
+      '<circle cx="49" cy="58" r="2.5" fill="#2C4A6E"/>' +
+      '<circle cx="73" cy="58" r="2.5" fill="#2C4A6E"/>' +
+      // Riflesso occhi
+      '<circle cx="50" cy="57" r="0.8" fill="white"/>' +
+      '<circle cx="74" cy="57" r="0.8" fill="white"/>' +
+      // Palpebre (per blink) - inizialmente invisibili
+      '<ellipse id="sara-blink-l" cx="48" cy="58" rx="6" ry="0" fill="#FDDCB5"/>' +
+      '<ellipse id="sara-blink-r" cx="72" cy="58" rx="6" ry="0" fill="#FDDCB5"/>' +
+      // Occhiali
+      '<rect x="38" y="55" width="14" height="9" rx="4.5" fill="none" stroke="#556B7A" stroke-width="1.5"/>' +
+      '<rect x="62" y="55" width="14" height="9" rx="4.5" fill="none" stroke="#556B7A" stroke-width="1.5"/>' +
+      '<line x1="52" y1="59" x2="62" y2="59" stroke="#556B7A" stroke-width="1.2"/>' +
+      '<line x1="38" y1="59" x2="28" y2="56" stroke="#556B7A" stroke-width="1.2"/>' +
+      '<line x1="76" y1="59" x2="86" y2="56" stroke="#556B7A" stroke-width="1.2"/>' +
+      // Guance
+      '<ellipse cx="48" cy="66" rx="2" ry="0.8" fill="#E8A090" opacity="0.5"/>' +
+      '<ellipse cx="72" cy="66" rx="2" ry="0.8" fill="#E8A090" opacity="0.5"/>' +
+      // Bocca — animata! ID per JS
+      '<path id="sara-mouth" d="M55 72 Q60 76 65 72" stroke="#C0756B" stroke-width="1.8" fill="none" stroke-linecap="round"/>' +
+      // Bocca aperta (riempimento, invisibile di default)
+      '<ellipse id="sara-mouth-open" cx="60" cy="74" rx="4" ry="0" fill="#B05050" opacity="0"/>' +
+    '</g>' +
+    // Corpo
+    '<path d="M40 95 Q42 82 60 80 Q78 82 80 95" fill="#3A5578"/>' +
+    '<path d="M52 82 L55 90 L60 84 L65 90 L68 82" fill="white" opacity="0.9"/>' +
+  '</svg>';
 
   // ── Testo che Sara "dice" ──
   var WELCOME_LINES = [
@@ -30,38 +76,25 @@
 
   // ── Audio engine ──
   var AUDIO_MP3 = 'audio/welcome-sara.mp3';
-  var audioEl = null;       // HTML5 Audio element (MP3)
-  var usingMp3 = false;     // true se l'MP3 è stato caricato con successo
-  var audioReady = false;   // true quando l'audio è pronto a partire
+  var audioEl = null;
+  var usingMp3 = false;
+  var audioReady = false;
   var speechEnabled = true;
+  var isSpeaking = false;
 
-  // Pre-carica l'MP3 — se fallisce useremo Speech API
   function preloadAudio() {
     return new Promise(function (resolve) {
       audioEl = new Audio();
       audioEl.preload = 'auto';
-
       audioEl.addEventListener('canplaythrough', function () {
-        usingMp3 = true;
-        audioReady = true;
-        resolve(true);
+        usingMp3 = true; audioReady = true; resolve(true);
       }, { once: true });
-
       audioEl.addEventListener('error', function () {
-        usingMp3 = false;
-        audioReady = true;
-        resolve(false);
+        usingMp3 = false; audioReady = true; resolve(false);
       }, { once: true });
-
-      // Timeout: se non carica in 3s, vai con Speech API
       setTimeout(function () {
-        if (!audioReady) {
-          usingMp3 = false;
-          audioReady = true;
-          resolve(false);
-        }
+        if (!audioReady) { usingMp3 = false; audioReady = true; resolve(false); }
       }, 3000);
-
       audioEl.src = AUDIO_MP3;
     });
   }
@@ -73,7 +106,7 @@
     '<div id="welcome-card" style="position:relative">' +
       '<button class="welcome-close" aria-label="Chiudi">&times;</button>' +
       '<div class="welcome-header">' +
-        '<img class="welcome-avatar" src="' + SARA_AVATAR + '" alt="Sara">' +
+        '<div class="welcome-avatar-wrap">' + SARA_SVG + '</div>' +
         '<div class="welcome-header-text">' +
           '<h3>Benvenuto!</h3>' +
           '<p class="welcome-online">Sara &mdash; assistente virtuale</p>' +
@@ -104,12 +137,126 @@
   var charIndex = 0;
   var typeTimer = null;
 
+  // ── Avatar animation refs ──
+  var mouthPath = null;
+  var mouthOpen = null;
+  var blinkL = null;
+  var blinkR = null;
+  var headGroup = null;
+  var mouthTimer = null;
+  var blinkTimer = null;
+  var headTimer = null;
+
+  function initAvatarRefs() {
+    mouthPath = document.getElementById('sara-mouth');
+    mouthOpen = document.getElementById('sara-mouth-open');
+    blinkL = document.getElementById('sara-blink-l');
+    blinkR = document.getElementById('sara-blink-r');
+    headGroup = document.getElementById('sara-head');
+  }
+
+  // ══════════════════════════════════════════════
+  // ANIMAZIONI AVATAR
+  // ══════════════════════════════════════════════
+
+  // ── Lip-sync: bocca che si apre/chiude a ritmo del parlato ──
+  var mouthShapes = [
+    { d: 'M55 72 Q60 76 65 72', ry: 0, op: 0 },       // chiusa (sorriso)
+    { d: 'M54 73 Q60 78 66 73', ry: 2.5, op: 0.8 },   // semi-aperta
+    { d: 'M53 73 Q60 80 67 73', ry: 4, op: 1 },        // aperta
+    { d: 'M55 73 Q60 77 65 73', ry: 1.5, op: 0.6 },    // leggermente aperta
+  ];
+
+  function animateMouth() {
+    if (!isSpeaking || !mouthPath || !mouthOpen) return;
+
+    var shape = mouthShapes[Math.floor(Math.random() * mouthShapes.length)];
+    mouthPath.setAttribute('d', shape.d);
+    mouthOpen.setAttribute('ry', shape.ry);
+    mouthOpen.setAttribute('opacity', shape.op);
+
+    // Velocità variabile per sembrare naturale (80-180ms)
+    var delay = 80 + Math.random() * 100;
+    mouthTimer = setTimeout(animateMouth, delay);
+  }
+
+  function stopMouth() {
+    if (mouthTimer) clearTimeout(mouthTimer);
+    if (mouthPath) mouthPath.setAttribute('d', 'M55 72 Q60 76 65 72');
+    if (mouthOpen) { mouthOpen.setAttribute('ry', '0'); mouthOpen.setAttribute('opacity', '0'); }
+  }
+
+  // ── Blink: occhi che sbattono periodicamente ──
+  function doBlink() {
+    if (!blinkL || !blinkR) return;
+
+    // Chiudi palpebre
+    blinkL.setAttribute('ry', '5');
+    blinkR.setAttribute('ry', '5');
+
+    setTimeout(function () {
+      // Riapri
+      blinkL.setAttribute('ry', '0');
+      blinkR.setAttribute('ry', '0');
+    }, 120);
+
+    // Prossimo blink: 2-5 secondi (naturale)
+    blinkTimer = setTimeout(doBlink, 2000 + Math.random() * 3000);
+  }
+
+  function stopBlink() {
+    if (blinkTimer) clearTimeout(blinkTimer);
+    if (blinkL) blinkL.setAttribute('ry', '0');
+    if (blinkR) blinkR.setAttribute('ry', '0');
+  }
+
+  // ── Head: leggero movimento della testa ──
+  var headAngle = 0;
+  function animateHead() {
+    if (!headGroup) return;
+
+    // Oscillazione lenta: -2° a +2°
+    headAngle += (Math.random() - 0.5) * 1.5;
+    headAngle = Math.max(-2, Math.min(2, headAngle));
+
+    // Leggero shift verticale
+    var ty = Math.sin(Date.now() / 1500) * 1.5;
+
+    headGroup.setAttribute('transform',
+      'rotate(' + headAngle.toFixed(1) + ' 60 60) translate(0 ' + ty.toFixed(1) + ')');
+
+    headTimer = setTimeout(animateHead, 200);
+  }
+
+  function stopHead() {
+    if (headTimer) clearTimeout(headTimer);
+    if (headGroup) headGroup.setAttribute('transform', '');
+  }
+
+  // ── Start/stop tutte le animazioni ──
+  function startAnimations() {
+    isSpeaking = true;
+    animateMouth();
+    doBlink();
+    animateHead();
+  }
+
+  function stopAnimations() {
+    isSpeaking = false;
+    stopMouth();
+    stopBlink();
+    stopHead();
+  }
+
   // ── Init ──
   preloadAudio().then(function () {
     setTimeout(function () {
       overlay.classList.add('visible');
       sessionStorage.setItem('welcome_shown', '1');
-      setTimeout(startTypewriter, 600);
+      setTimeout(function () {
+        initAvatarRefs();
+        startTypewriter();
+      }, 600);
     }, 1200);
   });
 
@@ -125,6 +272,9 @@
       var cursor = typeEl.querySelector('.cursor');
       if (cursor) cursor.remove();
       actionsEl.classList.add('visible');
+      stopAnimations();
+      // Sorriso finale
+      if (mouthPath) mouthPath.setAttribute('d', 'M54 72 Q60 77 66 72');
       return;
     }
     var ch = fullText[charIndex];
@@ -159,8 +309,10 @@
 
     if (usingMp3 && audioEl) {
       audioEl.currentTime = 0;
+      audioEl.addEventListener('play', function () { startAnimations(); }, { once: true });
+      audioEl.addEventListener('ended', function () { stopAnimations(); }, { once: true });
+      audioEl.addEventListener('pause', function () { if (audioEl.ended) return; stopAnimations(); }, { once: true });
       audioEl.play().catch(function () {
-        // Autoplay bloccato dal browser → fallback Speech API
         speakWithSpeechAPI();
       });
     } else {
@@ -169,15 +321,9 @@
   }
 
   function stopAudio() {
-    // Ferma MP3
-    if (audioEl) {
-      audioEl.pause();
-      audioEl.currentTime = 0;
-    }
-    // Ferma Speech API
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-    }
+    if (audioEl) { audioEl.pause(); audioEl.currentTime = 0; }
+    if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); }
+    stopAnimations();
   }
 
   // ── Speech API fallback ──
@@ -191,10 +337,12 @@
     utterance.rate = 0.95;
     utterance.pitch = 1.1;
 
+    utterance.onstart = function () { startAnimations(); };
+    utterance.onend = function () { stopAnimations(); };
+
     function pickVoice() {
       var voices = window.speechSynthesis.getVoices();
       var italian = voices.filter(function (v) { return /it[-_]IT/i.test(v.lang); });
-      // Preferisci voci neurali/femminili
       var preferred = italian.filter(function (v) {
         return /female|donna|google.*it|alice|elsa|federica|isabella|natural/i.test(v.name);
       });
@@ -215,9 +363,7 @@
         window.speechSynthesis.onvoiceschanged = null;
       };
       setTimeout(function () {
-        if (!window.speechSynthesis.speaking) {
-          window.speechSynthesis.speak(utterance);
-        }
+        if (!window.speechSynthesis.speaking) window.speechSynthesis.speak(utterance);
       }, 300);
     }
   }
@@ -230,7 +376,6 @@
       audioBtn.textContent = '\ud83d\udd07 Voce disattivata';
     } else {
       audioBtn.textContent = '\ud83d\udd0a Voce attiva';
-      // Riavvia audio se il typewriter è ancora in corso
       if (charIndex < fullText.length) playAudio();
     }
   });
@@ -244,11 +389,7 @@
   }
 
   overlay.querySelector('.welcome-close').addEventListener('click', closePopup);
-
-  overlay.addEventListener('click', function (e) {
-    if (e.target === overlay) closePopup();
-  });
-
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) closePopup(); });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && document.getElementById('welcome-overlay')) closePopup();
   });
@@ -259,9 +400,7 @@
     setTimeout(function () {
       if (window.rigChat && typeof window.rigChat.toggle === 'function') {
         var box = document.getElementById('rig-chat-box');
-        if (!box || !box.classList.contains('open')) {
-          window.rigChat.toggle();
-        }
+        if (!box || !box.classList.contains('open')) window.rigChat.toggle();
       }
     }, 500);
   });
