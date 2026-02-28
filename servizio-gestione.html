@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#2C4A6E">
   <title>Gestione Immobili e Patrimonio Immobiliare — Righetto Immobiliare Padova</title>
   <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -19,9 +20,14 @@
 <meta property="og:image" content="https://righettoimmobiliare.it/img/foto-servizi/gestioni-immobili-padova.webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gestione Immobili e Patrimonio — Righetto Immobiliare Padova">
+<meta name="twitter:description" content="Gestione completa del tuo patrimonio immobiliare a Padova: inquilini, manutenzione, fiscalità, rendicontazione. Oltre 30 anni di esperienza.">
+<meta name="twitter:image" content="https://righettoimmobiliare.it/img/foto-servizi/gestioni-immobili-padova.webp">
 <meta name="description" content="Gestione immobili e patrimonio immobiliare a Padova. Inquilini, manutenzione, fiscalità, rendicontazione trasparente. 200+ immobili gestiti, 40+ artigiani partner. Righetto Immobiliare.">
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/nav-mobile.css">
+  <link rel="stylesheet" href="css/scroll-reveal.css">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--nero:#0a0a0a;--bianco:#f5f2ed;--oro:#c9a84c;--grigio:#6b6560;--gc:#e8e4de;--verde:#4a5c4e;--sfondo:#f0ece6}
@@ -199,7 +205,7 @@
     <div class="hero-stats">
       <picture>
         <source srcset="img/foto-servizi/gestioni-immobili-padova.webp" type="image/webp">
-        <img src="img/foto-servizi/gestioni-immobili-padova.png" alt="Gestione immobili Padova — Righetto Immobiliare" class="hero-stats-bg" width="640" height="427" loading="lazy">
+        <img src="img/foto-servizi/gestioni-immobili-padova.png" alt="Gestione immobili Padova — Righetto Immobiliare" class="hero-stats-bg" width="640" height="427" fetchpriority="high">
       </picture>
       <div class="hstat"><div class="hstat-val">200+</div><div class="hstat-lbl">immobili gestiti tra Padova e provincia. Appartamenti, ville, uffici e locali commerciali sotto la nostra cura.</div></div>
       <div class="hstat"><div class="hstat-val">40+</div><div class="hstat-lbl">artigiani partner verificati nella nostra rete. Interventi rapidi con SLA garantiti per ogni tipo di manutenzione.</div></div>
@@ -210,11 +216,11 @@
 
 <!-- COSA INCLUDE -->
 <section class="sec">
-  <div class="sec-inner">
+  <div class="sec-inner sr">
     <div class="sec-tag">Il nostro servizio</div>
     <h2 class="sec-t">Gestione completa, <strong>zero pensieri</strong></h2>
     <p class="sec-sub">Dal singolo appartamento al portafoglio immobiliare: gestiamo ogni aspetto con trasparenza, competenza e reportistica puntuale.</p>
-    <div class="include-grid">
+    <div class="include-grid sr-stagger">
       <div class="inc-card"><div class="inc-icon">👥</div><div class="inc-title">Gestione completa inquilini</div><div class="inc-desc">Selezione accurata degli inquilini con verifica referenze e solvibilità. Gestione contratti, rinnovi, disdette, comunicazioni e risoluzione di ogni problematica locativa.</div></div>
       <div class="inc-card"><div class="inc-icon">🔧</div><div class="inc-title">Manutenzione ordinaria e straordinaria</div><div class="inc-desc">Rete di oltre 40 artigiani verificati con SLA concordati. Interventi rapidi per idraulica, elettricità, edilizia, serramenti. Preventivi comparati e supervisione lavori.</div></div>
       <div class="inc-card"><div class="inc-icon">💰</div><div class="inc-title">Gestione pagamenti e rendicontazione</div><div class="inc-desc">Incasso canoni, pagamento bollette e spese condominiali, gestione cauzioni. Rendicontazione mensile dettagliata con tutti i movimenti del tuo patrimonio.</div></div>
@@ -230,7 +236,7 @@
 
 <!-- PROCESSO -->
 <section class="sec bg">
-  <div class="sec-inner">
+  <div class="sec-inner sr">
     <div class="sec-tag">Come funziona</div>
     <h2 class="sec-t">Il nostro processo di <strong>gestione in 6 fasi</strong></h2>
     <p class="sec-sub">Un metodo strutturato per prendere in carico il tuo patrimonio e farlo rendere al massimo.</p>
@@ -317,10 +323,10 @@
 
 <!-- TESTIMONIANZE -->
 <section class="sec">
-  <div class="sec-inner">
+  <div class="sec-inner sr">
     <div class="sec-tag">Cosa dicono i clienti</div>
     <h2 class="sec-t">Chi ci ha affidato <strong>la gestione</strong></h2>
-    <div class="reviews-grid">
+    <div class="reviews-grid sr-stagger">
       <div class="review">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <div class="review-text">"Ho 6 appartamenti a Padova e gestirli da solo era diventato un secondo lavoro. Da quando li segue Righetto Immobiliare, incasso regolarmente senza preoccuparmi di nulla. La rendicontazione mensile è impeccabile."</div>
@@ -416,5 +422,44 @@ function sendForm(){
 <script src="js/config.js"></script>
 <script src="js/chatbot.js"></script>
 <script src="js/cookie-consent.js"></script>
+<script src="js/scroll-reveal.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Gestione Immobili e Patrimonio — Righetto Immobiliare Padova",
+  "provider": {
+    "@type": "RealEstateAgent",
+    "name": "Righetto Immobiliare",
+    "url": "https://righettoimmobiliare.it"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "bestRating": "5",
+    "ratingCount": "3"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": {"@type": "Rating", "ratingValue": "5"},
+      "author": {"@type": "Person", "name": "Giovanni R."},
+      "reviewBody": "Ho 6 appartamenti a Padova e gestirli da solo era diventato un secondo lavoro. Da quando li segue Righetto Immobiliare, incasso regolarmente senza preoccuparmi di nulla. La rendicontazione mensile è impeccabile."
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {"@type": "Rating", "ratingValue": "5"},
+      "author": {"@type": "Person", "name": "Silvia e Marco P."},
+      "reviewBody": "Abbiamo ereditato un piccolo patrimonio immobiliare e non sapevamo da dove iniziare. Gino e il suo team hanno preso in carico tutto: contratti, manutenzioni, fisco. Professionali e sempre disponibili."
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {"@type": "Rating", "ratingValue": "5"},
+      "author": {"@type": "Person", "name": "Alberto C."},
+      "reviewBody": "La dashboard online è fantastica: vedo incassi, spese e stato di ogni immobile in tempo reale. In due anni il rendimento netto del mio portafoglio è cresciuto del 15% grazie alla loro ottimizzazione fiscale."
+    }
+  ]
+}
+</script>
 </body>
 </html>

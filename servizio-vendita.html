@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#2C4A6E">
   <title>Guida Completa alla Vendita Immobili — Righetto Immobiliare Padova</title>
   <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -19,9 +20,14 @@
 <meta property="og:image" content="https://righettoimmobiliare.it/img/foto-servizi/vendita-immobili-padova.webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vendita Immobili — Righetto Immobiliare Padova">
+<meta name="twitter:description" content="Vendi casa a Padova: valutazione gratuita, foto professionali, virtual tour, assistenza completa.">
+<meta name="twitter:image" content="https://righettoimmobiliare.it/img/foto-servizi/vendita-immobili-padova.webp">
 <meta name="description" content="Vendi casa a Padova con Righetto Immobiliare. Valutazione gratuita, strategia personalizzata, fotografie professionali, virtual tour. Assistenza completa fino al rogito.">
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/nav-mobile.css">
+  <link rel="stylesheet" href="css/scroll-reveal.css">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--nero:#0a0a0a;--bianco:#f5f2ed;--oro:#c9a84c;--grigio:#6b6560;--gc:#e8e4de;--verde:#4a5c4e;--sfondo:#f0ece6}
@@ -205,11 +211,11 @@
 
 <!-- COSA INCLUDE -->
 <section class="sec">
-  <div class="sec-inner">
+  <div class="sec-inner sr">
     <div class="sec-tag">Il nostro servizio</div>
     <h2 class="sec-t">Tutto incluso, <strong>nessuna sorpresa</strong></h2>
     <p class="sec-sub">Con Righetto Immobiliare non paghi nulla finché non vendiamo. Ogni fase è gestita da noi: non devi pensare a niente.</p>
-    <div class="include-grid">
+    <div class="include-grid sr-stagger">
       <div class="inc-card"><div class="inc-icon">📊</div><div class="inc-title">Valutazione di mercato</div><div class="inc-desc">Analisi basata su compravendite reali concluse nell'area. Non stime online: dati veri del mercato padovano aggiornati alle ultime settimane.</div></div>
       <div class="inc-card"><div class="inc-icon">📁</div><div class="inc-title">Verifica documentale</div><div class="inc-desc">Controlliamo tutta la documentazione prima di mettere l'immobile sul mercato: catasto, visure, conformità, APE, titoli edilizi.</div></div>
       <div class="inc-card"><div class="inc-icon">📸</div><div class="inc-title">Foto professionali</div><div class="inc-desc">Fotografie d'interni con attrezzatura professionale. Le foto fanno la differenza: immobili con foto pro ricevono il 40% di contatti in più.</div></div>
@@ -225,7 +231,7 @@
 
 <!-- PROCESSO -->
 <section class="sec bg">
-  <div class="sec-inner">
+  <div class="sec-inner sr">
     <div class="sec-tag">Come funziona</div>
     <h2 class="sec-t">Il nostro processo di <strong>vendita in 7 fasi</strong></h2>
     <p class="sec-sub">Un metodo collaudato in 30 anni di attività sul mercato padovano.</p>
@@ -319,10 +325,10 @@
 
 <!-- TESTIMONIANZE -->
 <section class="sec">
-  <div class="sec-inner">
+  <div class="sec-inner sr">
     <div class="sec-tag">Cosa dicono i clienti</div>
     <h2 class="sec-t">Chi ha già <strong>venduto con noi</strong></h2>
-    <div class="reviews-grid">
+    <div class="reviews-grid sr-stagger">
       <div class="review">
         <div class="stars">★★★★★</div>
         <div class="review-text">"Ho venduto la mia villa a Curtarolo in soli 3 mesi, a un prezzo superiore alle mie aspettative. Gino è stato sempre disponibile e professionale. Lo consiglio senza riserve."</div>
@@ -419,5 +425,44 @@ function sendForm(){
 <script src="js/config.js"></script>
 <script src="js/chatbot.js"></script>
 <script src="js/cookie-consent.js"></script>
+<script src="js/scroll-reveal.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Vendita Immobili — Righetto Immobiliare Padova",
+  "provider": {
+    "@type": "RealEstateAgent",
+    "name": "Righetto Immobiliare",
+    "url": "https://righettoimmobiliare.it"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "bestRating": "5",
+    "ratingCount": "3"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": {"@type": "Rating", "ratingValue": "5"},
+      "author": {"@type": "Person", "name": "Marco T."},
+      "reviewBody": "Ho venduto la mia villa a Curtarolo in soli 3 mesi, a un prezzo superiore alle mie aspettative. Gino è stato sempre disponibile e professionale. Lo consiglio senza riserve."
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {"@type": "Rating", "ratingValue": "5"},
+      "author": {"@type": "Person", "name": "Laura B."},
+      "reviewBody": "Avevo già provato con un'altra agenzia per 8 mesi senza risultati. Con Righetto Immobiliare ho venduto in 5 settimane. La differenza è stata la loro rete di contatti e la gestione professionale."
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {"@type": "Rating", "ratingValue": "5"},
+      "author": {"@type": "Person", "name": "Franco e Anna M."},
+      "reviewBody": "Hanno gestito tutto: dalla documentazione alle visite, dalla trattativa al rogito. Non ho dovuto preoccuparmi di nulla. Servizio impeccabile."
+    }
+  ]
+}
+</script>
 </body>
 </html>

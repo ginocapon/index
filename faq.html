@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#2C4A6E">
   <title>FAQ — Domande Frequenti Immobiliari — Righetto Immobiliare Padova</title>
   <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -19,9 +20,14 @@
 <meta property="og:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FAQ — Domande Frequenti — Righetto Immobiliare">
+<meta name="twitter:description" content="Risposte alle domande più frequenti su compravendita, affitti, mutui, tasse a Padova.">
+<meta name="twitter:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
 <meta name="description" content="Risposte alle domande più frequenti su compravendita, affitti, valutazioni e contratti a Padova. Righetto Immobiliare.">
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/nav-mobile.css">
+  <link rel="stylesheet" href="css/scroll-reveal.css">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--nero:#152435;--bianco:#F7F5F1;--oro:#B8D44A;--grigio:#6B7A8D;--gc:#E1DBD1;--sfondo:#ECE7DF;--blu:#2C4A6E;--blu2:#3A5F8C;--blu3:#4E789A;--azzurro:#8AB4CE;--oro2:#CDED62;--oro-bg:rgba(184,212,74,0.10);--testo:#152435;--carta:#F2EDE7}
@@ -314,7 +320,7 @@ function searchFaq(){const q=document.getElementById('faq-search-input').value.t
         });
       });
       if (itemsHtml) {
-        html += '<div class="faq-group" data-cat="' + group.cat + '">' +
+        html += '<div class="faq-group sr" data-cat="' + group.cat + '">' +
           '<div class="fg-title"><span>' + group.icon + '</span> ' + group.title + '</div>' +
           itemsHtml + '</div>';
       }
@@ -339,5 +345,6 @@ function searchFaq(){const q=document.getElementById('faq-search-input').value.t
 })();
 </script>
 <script src="js/cookie-consent.js"></script>
+<script src="js/scroll-reveal.js" defer></script>
 </body>
 </html>
