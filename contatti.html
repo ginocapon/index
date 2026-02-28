@@ -39,10 +39,10 @@
     .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff}
     .logo span{color:var(--oro);font-style:italic}
     nav{display:flex;gap:.2rem;flex:1}
-    nav a{color:rgba(255,255,255,.5);font-size:.82rem;padding:.4rem .75rem;border-radius:4px;transition:color .2s}
+    nav a{color:rgba(255,255,255,.7);font-size:.82rem;padding:.4rem .75rem;border-radius:4px;transition:color .2s}
     nav a:hover{color:#fff} nav a.active{color:var(--oro)}
     .h-cta{display:flex;gap:.65rem;align-items:center}
-    .h-tel{color:rgba(255,255,255,.55);font-size:.78rem}
+    .h-tel{color:rgba(255,255,255,.75);font-size:.78rem}
     .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:6px;font-size:.76rem;font-weight:500;transition:all .2s}
     .h-btn:hover{background:var(--oro2);transform:translateY(-1px)}
     /* HERO */
@@ -116,11 +116,12 @@
     @media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
     .flogo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;margin-bottom:.6rem}
     .flogo span{color:var(--oro);font-style:italic}
-    .finfo{font-size:.76rem;color:rgba(255,255,255,.35);line-height:1.9}
-    .fh{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.7rem}
-    .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.38);margin-bottom:.3rem;transition:color .2s}
+    .finfo{font-size:.76rem;color:rgba(255,255,255,.6);line-height:1.9}
+    .fh{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.7rem}
+    .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.6);margin-bottom:.3rem;transition:color .2s}
     .fcol a:hover{color:var(--oro)}
-    .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.22);flex-wrap:wrap;gap:.4rem}
+    .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.55);flex-wrap:wrap;gap:.4rem}
+    .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
   </style>
 
 <script type="application/ld+json">
@@ -150,6 +151,7 @@
 </script>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 <header>
   <div class="hi">
     <a href="index.html" class="logo">Righetto <span>Immobiliare</span></a>
@@ -176,23 +178,23 @@
   </div>
 </div>
 
-<div class="main" id="form">
+<main class="main" id="main-content">
   <!-- FORM CONTATTO -->
   <div class="fbox sr">
     <div class="fbox-head">
       <h2>Inviaci un messaggio</h2>
       <p>Compilaci il form e ti ricontatteremo entro 24 ore lavorative</p>
     </div>
-    <div class="fbox-body">
+    <div class="fbox-body"><form id="contact-form" onsubmit="sendForm();return false;" novalidate>
       <div class="frow">
-        <div class="field"><label>Nome <span style="color:var(--oro)">*</span></label><input type="text" id="f-nome" placeholder="Mario"></div>
-        <div class="field"><label>Cognome <span style="color:var(--oro)">*</span></label><input type="text" id="f-cog" placeholder="Rossi"></div>
+        <div class="field"><label for="f-nome">Nome <span style="color:var(--oro)">*</span></label><input type="text" id="f-nome" placeholder="Mario"></div>
+        <div class="field"><label for="f-cog">Cognome <span style="color:var(--oro)">*</span></label><input type="text" id="f-cog" placeholder="Rossi"></div>
       </div>
       <div class="frow">
-        <div class="field"><label>Telefono <span style="color:var(--oro)">*</span></label><input type="tel" id="f-tel" placeholder="333 123 4567"></div>
-        <div class="field"><label>Email</label><input type="email" id="f-mail" placeholder="mario@email.it"></div>
+        <div class="field"><label for="f-tel">Telefono <span style="color:var(--oro)">*</span></label><input type="tel" id="f-tel" placeholder="333 123 4567"></div>
+        <div class="field"><label for="f-mail">Email</label><input type="email" id="f-mail" placeholder="mario@email.it"></div>
       </div>
-      <div class="field"><label>Oggetto della richiesta</label>
+      <div class="field"><label for="f-obj">Oggetto della richiesta</label>
         <select id="f-obj">
           <option value="">Seleziona...</option>
           <option>Voglio vendere un immobile</option>
@@ -206,8 +208,8 @@
           <option>Altro</option>
         </select>
       </div>
-      <div class="field"><label>Comune / Zona di interesse</label><input type="text" id="f-zona" placeholder="Es. Padova centro, Albignasego, Curtarolo..."></div>
-      <div class="field"><label>Messaggio</label><textarea id="f-msg" placeholder="Descrivici la tua situazione o la tua richiesta. Più dettagli ci fornisci, più precisa sarà la nostra risposta.&#10;&#10;Es: Ho una villa di 300 mq a Cadoneghe che vorrei vendere entro fine anno. Quando possiamo fare una valutazione?"></textarea></div>
+      <div class="field"><label for="f-zona">Comune / Zona di interesse</label><input type="text" id="f-zona" placeholder="Es. Padova centro, Albignasego, Curtarolo..."></div>
+      <div class="field"><label for="f-msg">Messaggio</label><textarea id="f-msg" placeholder="Descrivici la tua situazione o la tua richiesta. Più dettagli ci fornisci, più precisa sarà la nostra risposta.&#10;&#10;Es: Ho una villa di 300 mq a Cadoneghe che vorrei vendere entro fine anno. Quando possiamo fare una valutazione?"></textarea></div>
       <div class="fchk">
         <input type="checkbox" id="f-gdpr">
         <label for="f-gdpr">Acconsento al trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR) e del D.Lgs. 196/2003. I tuoi dati non saranno ceduti a terzi.</label>
@@ -216,12 +218,12 @@
         <input type="checkbox" id="f-news">
         <label for="f-news">Desidero ricevere aggiornamenti sugli immobili in vendita e le offerte dell'agenzia (facoltativo)</label>
       </div>
-      <button class="fsubmit" onclick="sendForm()">Invia messaggio</button>
+      <button class="fsubmit" type="submit">Invia messaggio</button>
       <div class="fsuccess" id="success">
         <h3>✓ Messaggio inviato!</h3>
         <p>Grazie per averci contattato. Ti risponderemo entro 24 ore lavorative. Se hai urgenza, chiamaci al <strong>049 884 3484</strong> o scrivici su WhatsApp.</p>
       </div>
-    </div>
+    </form></div>
   </div>
 
   <!-- SIDEBAR INFO -->
@@ -230,19 +232,19 @@
       <div class="ibox-head">Dove siamo</div>
       <div class="ibox-body">
         <div class="citem">
-          <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="ci-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
           <div><div class="ci-lbl">Indirizzo</div><div class="ci-val">Via Roma, 96<br>35010 Limena (PD)</div></div>
         </div>
         <div class="citem">
-          <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 .18H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg></div>
+          <div class="ci-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 .18H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg></div>
           <div><div class="ci-lbl">Telefono ufficio</div><div class="ci-val"><a href="tel:+390498843484">049 884 3484</a></div></div>
         </div>
         <div class="citem">
-          <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 .18H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg></div>
+          <div class="ci-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 .18H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg></div>
           <div><div class="ci-lbl">Cellulare (Capon Gino)</div><div class="ci-val"><a href="tel:+393488621888">348 862 1888</a></div></div>
         </div>
         <div class="citem">
-          <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div class="ci-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
           <div><div class="ci-lbl">Email</div><div class="ci-val"><a href="/cdn-cgi/l/email-protection#57303e393817253e303f322323383e3a3a38353e3b3e362532793e23"><span class="__cf_email__" data-cfemail="f2959b9c9db2809b959a9786869d9b9f9f9d909b9e9b938097dc9b86">[email&#160;protected]</span></a></div></div>
         </div>
       </div>
@@ -261,22 +263,22 @@
       </div>
     </div>
     <a href="https://wa.me/393488621888?text=Salve,%20vorrei%20informazioni%20sui%20vostri%20servizi%20immobiliari" target="_blank" style="display:flex;align-items:center;gap:.85rem;padding:1rem 1.2rem;background:#25d366;border-radius:10px;color:#fff;font-weight:500;font-size:.88rem;transition:opacity .2s">
-      <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Scrivici su WhatsApp
     </a>
   </div>
-</div>
+</main>
 
 <!-- MAPPA -->
 <div class="mappa-section sr">
   <div class="map-wrap">
     <div class="map-ph">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
       <p>Righetto Immobiliare — Via Roma, 96 — Limena (PD)</p>
       <small>Inserire iframe Google Maps: https://maps.google.com/?q=Via+Roma+96+Limena+Padova</small>
     </div>
     <div class="map-overlay">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
       Via Roma, 96 — Limena (PD) · <a href="https://maps.google.com/?q=Via+Roma+96+Limena+Padova" target="_blank" style="color:var(--oro);margin-left:.3rem">Apri in Maps</a>
     </div>
   </div>
@@ -284,7 +286,7 @@
 
 <!-- WA FLOAT -->
 <a href="https://wa.me/393488621888" target="_blank" class="wa-float" title="Scrivici su WhatsApp">
-  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <svg aria-hidden="true" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
 <footer>
@@ -295,13 +297,13 @@
       <div class="fcol"><div class="fh">Immobili</div><a href="immobili.html?op=vendita">In vendita</a><a href="immobili.html?op=affitto">In affitto</a><a href="immobili.html?tipo=villa">Ville</a></div>
       <div class="fcol"><div class="fh">Info</div><a href="chi-siamo.html">Chi siamo</a><a href="blog.html">Blog</a><a href="faq.html">FAQ</a><a href="privacy.html">Privacy</a><a href="cookie-policy.html">Cookie Policy</a><a href="#" data-cookie-prefs>Preferenze Cookie</a></div>
     </div>
-    <div class="fbot"><span>© 2025 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
+    <div class="fbot"><span>© 2026 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
   </div>
 </footer>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-<script src="js/nav-mobile.js"></script>
-<script src="js/config.js"></script>
+<script src="js/nav-mobile.js" defer></script>
+<script src="js/config.js" defer></script>
 <script>
 async function sendForm(){
   const nome = document.getElementById('f-nome').value.trim();
@@ -394,8 +396,8 @@ async function sendForm(){
   }
 }
 </script>
-<script src="js/chatbot.js"></script>
-<script src="js/cookie-consent.js"></script>
+<script src="js/chatbot.js" defer></script>
+<script src="js/cookie-consent.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
 <script src="js/welcome-popup.js" defer></script>
 </body>
