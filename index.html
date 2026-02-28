@@ -1520,7 +1520,7 @@ button svg, a.btn-p svg, a.btn-g svg {
     </div>
     <div class="r-filtri">
       <div class="r-field">
-        <label>Tipologia</label>
+        <label for="r-tipo">Tipologia</label>
         <select id="r-tipo">
           <option value="">Tutte le tipologie</option>
           <option value="appartamento">Appartamento</option>
@@ -1534,7 +1534,7 @@ button svg, a.btn-p svg, a.btn-g svg {
         </select>
       </div>
       <div class="r-field">
-        <label>Zona / Comune</label>
+        <label for="r-zona">Zona / Comune</label>
         <select id="r-zona">
           <option value="">Tutta la provincia</option>
           <option>Padova centro</option>
@@ -1554,7 +1554,7 @@ button svg, a.btn-p svg, a.btn-g svg {
         </select>
       </div>
       <div class="r-field">
-        <label>Prezzo massimo</label>
+        <label for="r-prezzo">Prezzo massimo</label>
         <select id="r-prezzo">
           <option value="">Nessun limite</option>
           <option value="80000">fino a € 80.000</option>
@@ -1567,7 +1567,7 @@ button svg, a.btn-p svg, a.btn-g svg {
         </select>
       </div>
       <div class="r-field">
-        <label>Superficie min.</label>
+        <label for="r-mq">Superficie min.</label>
         <input type="number" id="r-mq" placeholder="es. 60 mq" min="10">
       </div>
       <button class="r-btn-cerca" onclick="doRicerca()">
@@ -1695,7 +1695,7 @@ button svg, a.btn-p svg, a.btn-g svg {
           <div class="stima-card-title">📊 Calcola il Valore</div>
           <div class="sf-grid">
             <div class="sf-g" style="grid-column:1/-1">
-              <label>Comune</label>
+              <label for="st-comune">Comune</label>
               <select id="st-comune">
                 <option value="">Seleziona comune...</option>
                 <option value="padova">Padova (città)</option>
