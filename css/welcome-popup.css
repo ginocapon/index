@@ -59,6 +59,7 @@
 #sara-mouth-open { transition: ry 0.08s ease, opacity 0.08s ease; }
 #sara-blink-l, #sara-blink-r { transition: ry 0.06s ease; }
 #sara-head { transition: transform 0.3s ease-out; }
+#sara-cheek-l, #sara-cheek-r { transition: opacity 0.15s ease; }
 .welcome-header-text {
   color: #fff;
 }
