@@ -20,7 +20,6 @@
 <link rel="canonical" href="https://righettoimmobiliare.it/">
 <link rel="stylesheet" href="css/fonts.css">
 <link rel="stylesheet" href="css/nav-mobile.css">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root {
   --blu:      #2C4A6E;
@@ -243,7 +242,7 @@ button{font-family:inherit;cursor:pointer}
   filter: brightness(0.92);
   animation: slowZoom 18s ease-in-out infinite alternate;
 
-  background-image: url('img/team/titolari.jpg');}
+  background-image: url('img/team/titolari.webp');}
 @keyframes slowZoom {
   from { transform: scale(1.05); }
   to   { transform: scale(1.10); }
@@ -1466,7 +1465,7 @@ button svg, a.btn-p svg, a.btn-g svg {
 
 <!-- HERO -->
 <section id="hero">
-  <div id="hero-bg" style="background-image:url(img/team/titolari.jpg)"></div>
+  <div id="hero-bg" style="background-image:url(img/team/titolari.webp)"></div>
   <div class="hero-veil"></div>
   <div class="hero-grain"></div>
   <div class="hero-inner">
@@ -1950,10 +1949,13 @@ button svg, a.btn-p svg, a.btn-g svg {
 <section id="form-contatto">
   <div class="fc-inner">
     <div class="fc-foto">
-      <img
-        src="img/team/linda-righetto.jpg"
-        alt="Linda Righetto — Agente Immobiliare Locazioni Padova"
-        onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&q=85&fit=crop&crop=faces,top'">
+      <picture>
+        <source srcset="img/team/linda-righetto.webp" type="image/webp">
+        <img
+          src="img/team/linda-righetto.jpg"
+          alt="Linda Righetto — Agente Immobiliare Locazioni Padova"
+          onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&q=85&fit=crop&crop=faces,top'">
+      </picture>
       <div class="fc-foto-overlay"></div>
       <div class="fc-foto-info">
         <div class="fc-nome">Linda Righetto</div>
@@ -2384,6 +2386,7 @@ function loadVideo(wrap) {
   wrap.appendChild(ifr);
 }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="js/nav-mobile.js"></script>
 <script src="js/cookie-consent.js"></script>
 </body>
