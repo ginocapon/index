@@ -37,18 +37,20 @@
   background: linear-gradient(135deg, #2C4A6E 0%, #4E789A 100%);
   padding: 28px 28px 20px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
+  text-align: center;
 }
-/* Avatar wrapper — contiene SVG inline animato */
+/* Avatar wrapper — contiene SVG inline animato (3x più grande) */
 .welcome-avatar-wrap {
-  width: 80px; height: 80px;
+  width: 200px; height: 200px;
   border-radius: 50%;
-  border: 3px solid rgba(255,255,255,0.3);
+  border: 4px solid rgba(255,255,255,0.35);
   flex-shrink: 0;
   overflow: hidden;
   background: linear-gradient(135deg, #3A5578, #5C7A9E);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 0 20px rgba(255,255,255,0.05);
 }
 .welcome-avatar-svg {
   width: 100%; height: 100%;
@@ -197,7 +199,7 @@
 @media (max-width: 520px) {
   #welcome-card { border-radius: 20px; }
   .welcome-header { padding: 20px 20px 16px; gap: 12px; }
-  .welcome-avatar-wrap { width: 60px; height: 60px; }
+  .welcome-avatar-wrap { width: 150px; height: 150px; }
   .welcome-header-text h3 { font-size: 1.15rem; }
   .welcome-body { padding: 18px 20px; }
   .welcome-text { font-size: 0.85rem; min-height: 90px; }
