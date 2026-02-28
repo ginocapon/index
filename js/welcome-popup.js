@@ -1,6 +1,7 @@
 /**
  * WELCOME POPUP — Righetto Immobiliare
  * Avatar Sara che accoglie il visitatore con voce e testo animato.
+ * Audio: MP3 pre-generato (priorità) → fallback Web Speech API.
  * Si mostra una sola volta per sessione (sessionStorage).
  */
 (function () {
@@ -26,6 +27,44 @@
   ];
 
   var fullText = WELCOME_LINES.join('');
+
+  // ── Audio engine ──
+  var AUDIO_MP3 = 'audio/welcome-sara.mp3';
+  var audioEl = null;       // HTML5 Audio element (MP3)
+  var usingMp3 = false;     // true se l'MP3 è stato caricato con successo
+  var audioReady = false;   // true quando l'audio è pronto a partire
+  var speechEnabled = true;
+
+  // Pre-carica l'MP3 — se fallisce useremo Speech API
+  function preloadAudio() {
+    return new Promise(function (resolve) {
+      audioEl = new Audio();
+      audioEl.preload = 'auto';
+
+      audioEl.addEventListener('canplaythrough', function () {
+        usingMp3 = true;
+        audioReady = true;
+        resolve(true);
+      }, { once: true });
+
+      audioEl.addEventListener('error', function () {
+        usingMp3 = false;
+        audioReady = true;
+        resolve(false);
+      }, { once: true });
+
+      // Timeout: se non carica in 3s, vai con Speech API
+      setTimeout(function () {
+        if (!audioReady) {
+          usingMp3 = false;
+          audioReady = true;
+          resolve(false);
+        }
+      }, 3000);
+
+      audioEl.src = AUDIO_MP3;
+    });
+  }
 
   // ── Crea il DOM ──
   var overlay = document.createElement('div');
@@ -62,28 +101,27 @@
   var typeEl = document.getElementById('welcome-typewriter');
   var actionsEl = document.getElementById('welcome-actions');
   var audioBtn = document.getElementById('welcome-audio-btn');
-  var speechEnabled = true;
-  var speechUtterance = null;
   var charIndex = 0;
   var typeTimer = null;
 
-  // ── Mostra con piccolo ritardo ──
-  setTimeout(function () {
-    overlay.classList.add('visible');
-    sessionStorage.setItem('welcome_shown', '1');
-    setTimeout(startTypewriter, 600);
-  }, 1200);
+  // ── Init ──
+  preloadAudio().then(function () {
+    setTimeout(function () {
+      overlay.classList.add('visible');
+      sessionStorage.setItem('welcome_shown', '1');
+      setTimeout(startTypewriter, 600);
+    }, 1200);
+  });
 
   // ── Typewriter ──
   function startTypewriter() {
     charIndex = 0;
-    speakText(fullText.replace(/\n/g, ' '));
+    playAudio();
     typeNext();
   }
 
   function typeNext() {
     if (charIndex >= fullText.length) {
-      // Rimuovi cursore e mostra CTA
       var cursor = typeEl.querySelector('.cursor');
       if (cursor) cursor.remove();
       actionsEl.classList.add('visible');
@@ -93,7 +131,6 @@
     charIndex++;
 
     if (ch === '\n') {
-      // Ignora newline nel typewriter (usiamo <br> per gli a capo doppi)
       if (charIndex < fullText.length && fullText[charIndex] === '\n') {
         charIndex++;
         var br = document.createElement('br');
@@ -105,7 +142,7 @@
 
     var span = document.createTextNode(ch);
     typeEl.insertBefore(span, typeEl.querySelector('.cursor'));
-    // Velocità: 28ms/char, pausa più lunga dopo punteggiatura
+
     var delay = 28;
     if (ch === '.' || ch === '!' || ch === '?') delay = 320;
     else if (ch === ',') delay = 140;
@@ -113,49 +150,73 @@
     typeTimer = setTimeout(typeNext, delay);
   }
 
-  // ── Speech Synthesis (italiano) ──
-  function speakText(text) {
+  // ══════════════════════════════════════════════
+  // AUDIO: MP3 (priorità) → Speech API (fallback)
+  // ══════════════════════════════════════════════
+
+  function playAudio() {
+    if (!speechEnabled) return;
+
+    if (usingMp3 && audioEl) {
+      audioEl.currentTime = 0;
+      audioEl.play().catch(function () {
+        // Autoplay bloccato dal browser → fallback Speech API
+        speakWithSpeechAPI();
+      });
+    } else {
+      speakWithSpeechAPI();
+    }
+  }
+
+  function stopAudio() {
+    // Ferma MP3
+    if (audioEl) {
+      audioEl.pause();
+      audioEl.currentTime = 0;
+    }
+    // Ferma Speech API
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+  }
+
+  // ── Speech API fallback ──
+  function speakWithSpeechAPI() {
     if (!speechEnabled || !('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
 
-    speechUtterance = new SpeechSynthesisUtterance(text);
-    speechUtterance.lang = 'it-IT';
-    speechUtterance.rate = 0.95;
-    speechUtterance.pitch = 1.1;
+    var text = fullText.replace(/\n/g, ' ').replace(/\u2935\ufe0f/g, '');
+    var utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'it-IT';
+    utterance.rate = 0.95;
+    utterance.pitch = 1.1;
 
-    // Cerca una voce femminile italiana
     function pickVoice() {
       var voices = window.speechSynthesis.getVoices();
       var italian = voices.filter(function (v) { return /it[-_]IT/i.test(v.lang); });
-      // Preferisci voci femminili
-      var female = italian.filter(function (v) {
-        return /female|donna|google.*it|alice|elsa|federica|cosimo/i.test(v.name);
+      // Preferisci voci neurali/femminili
+      var preferred = italian.filter(function (v) {
+        return /female|donna|google.*it|alice|elsa|federica|isabella|natural/i.test(v.name);
       });
-      if (female.length) return female[0];
+      if (preferred.length) return preferred[0];
       if (italian.length) return italian[0];
       return null;
     }
 
     var voice = pickVoice();
     if (voice) {
-      speechUtterance.voice = voice;
-      window.speechSynthesis.speak(speechUtterance);
+      utterance.voice = voice;
+      window.speechSynthesis.speak(utterance);
     } else {
-      // Le voci potrebbero non essere ancora caricate
       window.speechSynthesis.onvoiceschanged = function () {
         var v = pickVoice();
-        if (v) {
-          speechUtterance.voice = v;
-          window.speechSynthesis.speak(speechUtterance);
-        } else {
-          window.speechSynthesis.speak(speechUtterance);
-        }
+        if (v) utterance.voice = v;
+        window.speechSynthesis.speak(utterance);
         window.speechSynthesis.onvoiceschanged = null;
       };
-      // Fallback se onvoiceschanged non scatta
       setTimeout(function () {
         if (!window.speechSynthesis.speaking) {
-          window.speechSynthesis.speak(speechUtterance);
+          window.speechSynthesis.speak(utterance);
         }
       }, 300);
     }
@@ -165,33 +226,29 @@
   audioBtn.addEventListener('click', function () {
     speechEnabled = !speechEnabled;
     if (!speechEnabled) {
-      window.speechSynthesis.cancel();
+      stopAudio();
       audioBtn.textContent = '\ud83d\udd07 Voce disattivata';
     } else {
       audioBtn.textContent = '\ud83d\udd0a Voce attiva';
-      // Se il typewriter è ancora in corso, riavvia la voce dal testo rimanente
-      var remaining = fullText.substring(charIndex).replace(/\n/g, ' ');
-      if (remaining.length > 5) speakText(remaining);
+      // Riavvia audio se il typewriter è ancora in corso
+      if (charIndex < fullText.length) playAudio();
     }
   });
 
   // ── Chiudi popup ──
   function closePopup() {
     if (typeTimer) clearTimeout(typeTimer);
-    window.speechSynthesis.cancel();
+    stopAudio();
     overlay.classList.remove('visible');
     setTimeout(function () { overlay.remove(); }, 400);
   }
 
-  // X button
   overlay.querySelector('.welcome-close').addEventListener('click', closePopup);
 
-  // Click fuori dal card
   overlay.addEventListener('click', function (e) {
     if (e.target === overlay) closePopup();
   });
 
-  // ESC
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && document.getElementById('welcome-overlay')) closePopup();
   });
@@ -199,7 +256,6 @@
   // ── CTA: Apri chatbot ──
   document.getElementById('welcome-chatbot').addEventListener('click', function () {
     closePopup();
-    // Apri il chatbot dopo che il popup è chiuso
     setTimeout(function () {
       if (window.rigChat && typeof window.rigChat.toggle === 'function') {
         var box = document.getElementById('rig-chat-box');
