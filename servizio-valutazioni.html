@@ -38,10 +38,10 @@
     .hi{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:62px;display:flex;align-items:center;gap:2rem}
     .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff}.logo span{color:var(--oro);font-style:italic}
     nav{display:flex;gap:.2rem;flex:1}
-    nav a{color:rgba(255,255,255,.5);font-size:.82rem;padding:.4rem .75rem;border-radius:2px;transition:color .2s}
+    nav a{color:rgba(255,255,255,.7);font-size:.82rem;padding:.4rem .75rem;border-radius:2px;transition:color .2s}
     nav a:hover{color:#fff} nav a.active{color:var(--oro)}
     .h-cta{display:flex;gap:.65rem;align-items:center}
-    .h-tel{color:rgba(255,255,255,.55);font-size:.78rem}
+    .h-tel{color:rgba(255,255,255,.75);font-size:.78rem}
     .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:2px;font-size:.76rem;font-weight:500}
     /* BREADCRUMB */
     .bc{background:var(--nero);border-top:1px solid rgba(255,255,255,.06);padding:.5rem 1.5rem}
@@ -147,10 +147,11 @@
     .fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2rem}
     @media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
     .flogo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;margin-bottom:.6rem}.flogo span{color:var(--oro);font-style:italic}
-    .finfo{font-size:.76rem;color:rgba(255,255,255,.35);line-height:1.9}
-    .fh{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.7rem}
-    .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.38);margin-bottom:.3rem;transition:color .2s}.fcol a:hover{color:var(--oro)}
-    .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.22);flex-wrap:wrap;gap:.4rem}
+    .finfo{font-size:.76rem;color:rgba(255,255,255,.6);line-height:1.9}
+    .fh{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.7rem}
+    .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.6);margin-bottom:.3rem;transition:color .2s}.fcol a:hover{color:var(--oro)}
+    .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.55);flex-wrap:wrap;gap:.4rem}
+    .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
   </style>
 
 <script type="application/ld+json">
@@ -180,6 +181,7 @@
 </script>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 <header>
   <div class="hi">
     <a href="index.html" class="logo">Righetto <span>Immobiliare</span></a>
@@ -197,8 +199,9 @@
   <a href="faq.html">FAQ</a>
   <a href="contatti.html" class="nav-mobile-cta">Contattaci</a>
 </div>
-<div class="bc"><div class="bc-inner"><a href="index.html">Home</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg><a href="servizi.html">Servizi</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg><span>Valutazioni e Perizie</span></div></div>
+<div class="bc"><div class="bc-inner"><a href="index.html">Home</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg><a href="servizi.html">Servizi</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg><span>Valutazioni e Perizie</span></div></div>
 
+<main id="main-content">
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
@@ -390,27 +393,30 @@
       <p>Rispondiamo entro 24 ore — nessun impegno</p>
     </div>
     <div class="fb-body">
-      <div class="field"><label>Nome e Cognome *</label><input type="text" id="f-nome" placeholder="Mario Rossi"></div>
-      <div class="field"><label>Telefono *</label><input type="tel" id="f-tel" placeholder="333 123 4567"></div>
-      <div class="field"><label>Email</label><input type="email" placeholder="mario@email.it"></div>
-      <div class="field"><label>Tipo immobile</label>
-        <select>
+      <form onsubmit="return false;" novalidate>
+      <div class="field"><label for="f-nome">Nome e Cognome *</label><input type="text" id="f-nome" placeholder="Mario Rossi"></div>
+      <div class="field"><label for="f-tel">Telefono *</label><input type="tel" id="f-tel" placeholder="333 123 4567"></div>
+      <div class="field"><label for="f-email">Email</label><input type="email" id="f-email" placeholder="mario@email.it"></div>
+      <div class="field"><label for="f-tipo">Tipo immobile</label>
+        <select id="f-tipo">
           <option>Appartamento</option><option>Villa singola</option><option>Villetta a schiera</option><option>Bifamiliare</option><option>Terreno</option><option>Locale commerciale</option><option>Altro</option>
         </select>
       </div>
-      <div class="field"><label>Comune</label><input type="text" placeholder="Es. Padova, Curtarolo, Albignasego..."></div>
-      <div class="field"><label>Tipo di valutazione richiesta</label>
-        <select>
+      <div class="field"><label for="f-comune">Comune</label><input type="text" id="f-comune" placeholder="Es. Padova, Curtarolo, Albignasego..."></div>
+      <div class="field"><label for="f-valtype">Tipo di valutazione richiesta</label>
+        <select id="f-valtype">
           <option>Valutazione gratuita di mercato</option><option>Perizia ABI per banca</option><option>Perizia giurata per tribunale</option><option>Stima divisione ereditaria</option><option>Valutazione immobile all'asta</option><option>Analisi redditivita locativa</option><option>Altro</option>
         </select>
       </div>
-      <div class="field"><label>Note</label><textarea placeholder="Breve descrizione dell'immobile e motivo della valutazione..."></textarea></div>
+      <div class="field"><label for="f-note">Note</label><textarea id="f-note" placeholder="Breve descrizione dell'immobile e motivo della valutazione..."></textarea></div>
       <div class="fchk"><input type="checkbox" id="f-gdpr"><label for="f-gdpr">Acconsento al trattamento dei dati ai sensi del GDPR</label></div>
       <button class="fsub" onclick="sendForm()">Richiedi valutazione</button>
-      <a href="tel:+390498843484" class="fb-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>Oppure chiama <strong>049 884 3484</strong></a>
+      </form>
+      <a href="tel:+390498843484" class="fb-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>Oppure chiama <strong>049 884 3484</strong></a>
     </div>
   </div>
 </div>
+</main>
 
 <footer>
   <div class="fi">
@@ -420,7 +426,7 @@
       <div class="fcol"><div class="fh">Immobili</div><a href="immobili.html?op=vendita">In vendita</a><a href="immobili.html?op=affitto">In affitto</a></div>
       <div class="fcol"><div class="fh">Info</div><a href="chi-siamo.html">Chi siamo</a><a href="faq.html">FAQ</a><a href="contatti.html">Contatti</a><a href="privacy.html">Privacy</a><a href="cookie-policy.html">Cookie Policy</a><a href="#" data-cookie-prefs>Preferenze Cookie</a></div>
     </div>
-    <div class="fbot"><span>&copy; 2025 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
+    <div class="fbot"><span>&copy; 2026 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
   </div>
 </footer>
 <script>
@@ -437,10 +443,10 @@ function sendForm(){
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-<script src="js/nav-mobile.js"></script>
-<script src="js/config.js"></script>
-<script src="js/chatbot.js"></script>
-<script src="js/cookie-consent.js"></script>
+<script src="js/nav-mobile.js" defer></script>
+<script src="js/config.js" defer></script>
+<script src="js/chatbot.js" defer></script>
+<script src="js/cookie-consent.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
 <script type="application/ld+json">
 {
