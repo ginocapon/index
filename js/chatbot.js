@@ -1608,6 +1608,227 @@ const FAQ_DATA = [
   {
     k: ['cosa controllare prima firmare', 'attenzione documenti', 'firmare documenti immobiliare'],
     r: '✍️ **Prima di firmare qualsiasi documento**\n\nRegole d\'oro:\n• **Leggi tutto** con attenzione, senza fretta\n• **Chiedi spiegazioni** su ogni punto non chiaro\n• Non firmare mai **sotto pressione**\n• Consulta il tuo **legale o consulente** in caso di dubbi\n• Conserva sempre una **copia** di tutto\n\nNoi spieghiamo ogni documento in modo chiaro e trasparente. La tua consapevolezza è la nostra priorità.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // SEZIONE 3: APPROFONDIMENTI PROFESSIONALI
+  // FAQ 201-211: CONTRATTI DI LOCAZIONE
+  // ═══════════════════════════════════════════════
+  {
+    k: ['contratto 4+4 spiegazione', 'locazione 4+4 come funziona', 'contratto abitativo libero'],
+    r: '📄 **Contratto di locazione 4+4**\n\nÈ il contratto d\'affitto più comune per uso abitativo:\n• Dura **4 anni** + rinnovo automatico di **altri 4**\n• Il canone è **libero**, concordato tra le parti\n• Disdetta con **6 mesi di preavviso**\n\nAlla scadenza degli 8 anni, si rinnova tacitamente salvo nuova disdetta.'
+  },
+  {
+    k: ['disdetta 4+4 prima scadenza', 'recedere contratto affitto anticipato', 'uscire dal 4+4'],
+    r: '📬 **Disdire un contratto 4+4 prima della scadenza**\n\n**Inquilino:** può recedere in qualsiasi momento con **6 mesi di preavviso** e per gravi motivi (trasferimento lavoro, problemi economici documentati).\n\n**Proprietario:** può disdire solo alla **prima scadenza** (4 anni) e solo per motivi specifici previsti dalla legge (art. 3, L. 431/98).'
+  },
+  {
+    k: ['motivi disdetta proprietario', 'quando proprietario può disdire', 'disdetta primo rinnovo'],
+    r: '⚖️ **Motivi di disdetta del proprietario al primo rinnovo**\n\nIl proprietario può disdire il 4+4 alla prima scadenza solo per:\n• **Uso proprio** o di familiari stretti\n• **Vendita** dell\'immobile (se non ne possiede altri)\n• **Ristrutturazione integrale** dell\'edificio\n• Destinazione a **uso non abitativo**\n\nDeve comunicarlo con **raccomandata almeno 6 mesi prima** della scadenza.'
+  },
+  {
+    k: ['contratto locazione commerciale', 'affitto negozio', 'locazione 6+6', 'affitto ufficio contratto'],
+    r: '🏪 **Contratto di locazione commerciale**\n\nPer immobili ad uso diverso dall\'abitativo (negozi, uffici, laboratori):\n• Durata minima: **6 anni** + rinnovo di **altri 6** (6+6)\n• Per attività alberghiere: **9+9**\n• Canone libero\n\nOffre maggiori tutele all\'inquilino rispetto all\'abitativo, incluso il diritto di prelazione.'
+  },
+  {
+    k: ['6+6 obbligatorio', 'durata minima commerciale', 'contratto commerciale meno 6 anni'],
+    r: '📋 **Il contratto commerciale 6+6 è obbligatorio?**\n\nSì, la durata minima di **6 anni** è prevista dalla legge (L. 392/78). Non si può stipulare un contratto commerciale di durata inferiore, salvo:\n• Contratto **transitorio** per esigenze particolari\n• Attività con carattere **stagionale**\n\nClausole con durata inferiore sono **nulle**.'
+  },
+  {
+    k: ['prelazione inquilino commerciale', 'diritto prelazione conduttore', 'prelazione vendita locale'],
+    r: '🏷️ **Prelazione dell\'inquilino commerciale**\n\nSì, a differenza dell\'abitativo, l\'inquilino commerciale ha il **diritto di prelazione**:\n• Il proprietario deve offrire l\'immobile **alle stesse condizioni** proposte a terzi\n• L\'inquilino ha **60 giorni** per rispondere\n• Se non viene rispettata, l\'inquilino può riscattare l\'immobile dal nuovo acquirente\n\nÈ una tutela molto forte per chi ha un\'attività avviata.'
+  },
+  {
+    k: ['indennità avviamento commerciale', 'indennità 18 mensilità', 'fine locazione commerciale indennità'],
+    r: '💶 **Indennità di avviamento commerciale**\n\nSe il proprietario non rinnova il contratto commerciale alla scadenza, deve pagare all\'inquilino:\n• **18 mensilità** dell\'ultimo canone\n• **21 mensilità** per attività alberghiere\n\nÈ una tutela per l\'attività avviata dall\'inquilino. Non è dovuta se è l\'inquilino a non rinnovare.'
+  },
+  {
+    k: ['cedere contratto commerciale', 'cessione locazione azienda', 'subentro contratto negozio'],
+    r: '🔄 **Cessione del contratto commerciale**\n\nSì, è possibile cedere il contratto insieme alla **cessione o affitto dell\'azienda**:\n• Il proprietario **non può opporsi**, salvo gravi motivi\n• Deve essere **informato** per iscritto\n• Il cedente resta obbligato in solido per un anno\n\nÈ una norma che facilita il passaggio di attività commerciali.'
+  },
+  {
+    k: ['contratto transitorio come funziona', 'locazione temporanea', 'affitto breve termine'],
+    r: '⏳ **Contratto di locazione transitorio**\n\nContratto a breve termine, da **1 a 18 mesi**, per esigenze temporanee documentate:\n• Trasferimento lavorativo\n• Studio fuori sede\n• Trasloco in corso\n• Ristrutturazione della propria casa\n\n**Non si rinnova automaticamente.** L\'esigenza transitoria va dichiarata e documentata nel contratto.'
+  },
+  {
+    k: ['quando fare transitorio', 'requisiti contratto transitorio', 'esigenza transitoria documentata'],
+    r: '📋 **Quando si può fare un contratto transitorio?**\n\nSolo se c\'è un\'esigenza temporanea **reale e documentata**:\n• Trasferimento lavorativo temporaneo (lettera del datore)\n• Attesa di ristrutturazione (preventivo lavori)\n• Separazione in corso (atto legale)\n• Assistenza a familiari (certificato medico)\n\nSenza documentazione, il contratto è **nullo** e si trasforma in 4+4.'
+  },
+  {
+    k: ['transitorio si rinnova', 'scadenza transitorio cosa succede', 'transitorio diventa 4+4'],
+    r: '🔄 **Il contratto transitorio si rinnova?**\n\nNo, si conclude alla **scadenza pattuita**. Attenzione:\n• Se l\'esigenza transitoria è **cessata prima** della scadenza → si trasforma automaticamente in **4+4**\n• Se alla scadenza l\'inquilino non lascia l\'immobile → il proprietario deve agire per lo sfratto\n\nÈ importante che l\'esigenza temporanea sia reale e documentabile.'
+  },
+  {
+    k: ['contratto concordato 3+2 dettaglio', 'locazione concordato come funziona', 'concordato territoriale affitto'],
+    r: '🤝 **Contratto concordato (3+2) — Approfondimento**\n\nDura **3 anni + 2 di rinnovo automatico**. Caratteristiche:\n• Il canone è stabilito dagli **accordi territoriali**\n• Serve l\'**attestazione** di un\'associazione di categoria\n• Vantaggi fiscali per entrambe le parti\n\nÈ la formula più vantaggiosa in termini fiscali, ma il canone è calmierato.'
+  },
+  {
+    k: ['vantaggi fiscali concordato dettaglio', 'cedolare secca 10 concordato', 'risparmio concordato'],
+    r: '💰 **Vantaggi fiscali del contratto concordato**\n\n**Per il proprietario:**\n• Cedolare secca al **10%** (anziché 21%)\n• Riduzione IMU fino al **25%**\n• Base imponibile IRPEF ridotta del 30%\n\n**Per l\'inquilino:**\n• Canone inferiore al mercato\n• Possibili detrazioni sul canone\n\nUn risparmio significativo per entrambi.'
+  },
+  {
+    k: ['comuni contratto concordato', 'accordo territoriale comune', 'alta tensione abitativa'],
+    r: '🏘️ **Contratto concordato: quali comuni?**\n\nNon tutti i comuni possono applicarlo. Serve un **accordo territoriale** tra associazioni di categoria:\n• È **obbligatorio** nei comuni ad alta tensione abitativa\n• Altri comuni possono adottarlo volontariamente\n• Padova e provincia hanno accordi attivi\n\nVerifica se il tuo comune ha un accordo. Noi possiamo aiutarti a verificarlo.'
+  },
+  {
+    k: ['calcolo canone concordato', 'tabelle canone concordato', 'come si determina canone'],
+    r: '🧮 **Come si calcola il canone concordato?**\n\nIl canone è determinato da **tabelle** allegate all\'accordo territoriale, in base a:\n• **Zona** dell\'immobile (fascia A, B, C...)\n• **Metratura** e tipologia\n• **Stato** conservativo e dotazioni\n• Anno di costruzione\n\nServe l\'**attestazione** di un\'associazione di categoria. Noi collaboriamo con le associazioni locali.'
+  },
+  {
+    k: ['attestazione conformità concordato', 'associazione attestazione affitto', 'attestazione obbligatoria concordato'],
+    r: '📋 **Attestazione per il contratto concordato**\n\nÈ **obbligatoria** per accedere ai benefici fiscali:\n• Rilasciata da almeno una delle **associazioni firmatarie** dell\'accordo\n• Certifica che il canone è conforme alle tabelle\n• Costo: generalmente **€50-€150**\n\nSenza attestazione, non hai diritto alla cedolare al 10% né allo sconto IMU.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ 217-223: REGISTRAZIONE CONTRATTI E PRELIMINARI
+  // ═══════════════════════════════════════════════
+  {
+    k: ['obbligo registrazione locazione', 'registrare affitto obbligatorio', 'contratto non registrato'],
+    r: '⚖️ **Obbligo di registrazione del contratto di locazione**\n\nSì, **sempre obbligatorio**. Tutti i contratti con durata superiore a 30 giorni vanno registrati all\'Agenzia delle Entrate **entro 30 giorni** dalla firma.\n\nLa registrazione può essere fatta:\n• Online tramite il portale dell\'Agenzia\n• Tramite un intermediario abilitato\n• Di persona all\'ufficio territoriale'
+  },
+  {
+    k: ['contratto non registrato conseguenze', 'sanzioni mancata registrazione', 'affitto in nero conseguenze'],
+    r: '⚠️ **Contratto di locazione non registrato**\n\nLe conseguenze sono gravi:\n• Il contratto è **nullo**\n• Sanzioni fiscali dal **120% al 240%** dell\'imposta dovuta\n• L\'inquilino può chiedere la **registrazione forzata** al giudice\n• Il giudice può ridurre il canone ai parametri concordati\n\nL\'affitto in nero non conviene a nessuno. Noi gestiamo sempre contratti regolari.'
+  },
+  {
+    k: ['costo registrazione locazione', 'quanto costa registrare affitto', 'imposta registro affitto'],
+    r: '💶 **Costo registrazione contratto di locazione**\n\n**Con cedolare secca:** nessun costo di registro né bolli.\n\n**Senza cedolare secca:**\n• Imposta di registro: **2%** del canone annuo (minimo €67)\n• Bolli: **€16** ogni 4 facciate/100 righe\n• Si divide al 50% tra proprietario e inquilino\n\nCon la cedolare secca risparmi anche su questo!'
+  },
+  {
+    k: ['cedolare secca spiegazione', 'cedolare secca come funziona', 'regime cedolare secca dettaglio'],
+    r: '📊 **Cedolare secca — Come funziona**\n\nÈ un regime fiscale **opzionale** per il proprietario che sostituisce:\n• IRPEF e addizionali\n• Imposta di registro\n• Imposta di bollo\n\nCon un\'**aliquota fissa**:\n• **21%** per contratti liberi (4+4)\n• **10%** per contratti concordati (3+2)\n\nAttenzione: scegliendo la cedolare, **non puoi aumentare il canone** con l\'adeguamento ISTAT.'
+  },
+  {
+    k: ['registrazione preliminare obbligatoria', 'registrare compromesso obbligo', 'costo registrazione compromesso dettaglio'],
+    r: '📋 **Registrazione del contratto preliminare**\n\nSì, è **obbligatorio** registrarlo entro 20 giorni dalla firma:\n• Imposta fissa: **€200**\n• Imposta proporzionale: **0,50%** sulla caparra confirmatoria\n• **3%** sugli acconti prezzo\n• Bolli: €16 ogni 4 facciate\n\nLe imposte versate si **recuperano al rogito** come credito d\'imposta.'
+  },
+  {
+    k: ['differenza registrare trascrivere preliminare', 'registrazione vs trascrizione', 'tutela preliminare acquirente'],
+    r: '📝 **Registrare vs trascrivere il preliminare**\n\n**Registrazione** (obbligatoria):\n• Valore fiscale\n• Costo contenuto (€200 + imposte)\n\n**Trascrizione** (facoltativa):\n• Tutela **reale** dell\'acquirente\n• Protegge da vendite a terzi\n• Protegge da ipoteche successive\n• Costo più alto (serve il notaio)\n\nLa trascrizione è come un\'assicurazione sulla tua futura casa.'
+  },
+  {
+    k: ['conviene trascrivere preliminare', 'trascrizione quando farla', 'tutela acquirente prima rogito'],
+    r: '🛡️ **Conviene trascrivere il preliminare?**\n\nÈ consigliabile quando:\n• L\'importo è **elevato**\n• Passa **molto tempo** prima del rogito (6+ mesi)\n• Il venditore ha situazioni patrimoniali **complesse**\n• Vuoi la **massima tutela** possibile\n\nTi protegge se il venditore vende ad altri o se emergono debiti dopo la firma. Il costo in più può salvarti da grossi problemi.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ 224-233: MUTUI E FINANZIAMENTI
+  // ═══════════════════════════════════════════════
+  {
+    k: ['mutuo 100 percento come', 'mutuo senza anticipo possibile', 'finanziamento totale casa'],
+    r: '🏦 **Mutuo al 100% — Come funziona**\n\nÈ raro ma possibile. Alcune banche lo concedono con la **garanzia del Fondo Prima Casa Consap** (copertura statale fino all\'80%).\n\nRequisiti tipici:\n• ISEE entro i limiti previsti\n• Età e reddito compatibili\n• Immobile **non di lusso**\n\nSenza Consap, pochissime banche offrono il 100%. Il consulente può indicarti le opzioni.'
+  },
+  {
+    k: ['fondo consap', 'fondo garanzia prima casa', 'garanzia statale mutuo'],
+    r: '🏛️ **Fondo di Garanzia Prima Casa (Consap)**\n\nFondo statale che garantisce il **50-80%** del mutuo. Permette di ottenere finanziamenti fino al **100%**.\n\n**Priorità:**\n• Under 36\n• Giovani coppie\n• Famiglie numerose (3+ figli)\n• Inquilini di case popolari\n\nImporto massimo mutuo: **€250.000**. La domanda va presentata tramite la banca.'
+  },
+  {
+    k: ['requisiti mutuo 100 percento', 'condizioni mutuo totale', 'mutuo senza acconto requisiti'],
+    r: '📋 **Requisiti per il mutuo al 100%**\n\nVariano da banca a banca. Generalmente:\n• Reddito **stabile e dimostrabile**\n• Nessuna segnalazione in **CRIF**\n• Immobile **non di lusso** (no cat. A1, A8, A9)\n• Importo entro **€250.000**\n• Garanzia **Consap** quasi sempre necessaria\n\nLa rata non deve superare il 30-35% del reddito netto.'
+  },
+  {
+    k: ['agevolazioni under 36 età limite', 'fino a che età bonus casa', 'under 36 scadenza'],
+    r: '👶 **Agevolazioni under 36 — Età limite**\n\nLe agevolazioni erano riservate a chi non aveva ancora compiuto **36 anni** alla data del rogito. Attenzione:\n• Queste agevolazioni vengono **prorogate o modificate** annualmente dalla Legge di Bilancio\n• Verifica sempre la **normativa vigente**\n\nIl consulente ti aggiorna sulle opportunità attuali per la tua fascia d\'età.'
+  },
+  {
+    k: ['agevolazioni under 36 dettaglio', 'esenzione imposte giovani', 'credito imposta iva under 36'],
+    r: '💰 **Agevolazioni under 36 — Dettaglio**\n\nIncludevano (verifica le condizioni attuali):\n• **Esenzione** imposta di registro, ipotecaria e catastale\n• **Credito d\'imposta IVA** per acquisto da costruttore\n• Accesso al **Fondo Consap** con garanzia all\'80%\n• Esenzione imposta sostitutiva sul mutuo\n\nUn risparmio che poteva superare i **€5.000-€10.000**.'
+  },
+  {
+    k: ['differenza mutuo 80 100', 'mutuo 80 vs 100', 'conviene mutuo 100 o 80'],
+    r: '📊 **Mutuo 80% vs 100% — Confronto**\n\n**Mutuo all\'80%:**\n• Anticipi il **20%** di tasca tua\n• Rate più basse\n• Tassi di interesse migliori\n• Più banche disponibili\n\n**Mutuo al 100%:**\n• Non anticipi nulla\n• Rate più alte\n• Interessi maggiori\n• Serve garanzia Consap\n\nSe puoi, l\'80% è sempre più vantaggioso nel lungo periodo.'
+  },
+  {
+    k: ['interessi mutuo cosa sono', 'come funzionano interessi', 'ammortamento mutuo spiegazione'],
+    r: '💶 **Interessi del mutuo — Come funzionano**\n\nSono il costo che la banca ti addebita per prestarti i soldi. Con l\'**ammortamento alla francese** (il più comune):\n• Nei **primi anni** paghi soprattutto interessi\n• Col tempo paghi progressivamente **più capitale**\n• La rata resta costante (a tasso fisso)\n\nEsempio: su €150.000 a 25 anni al 3%, paghi circa €60.000 di interessi totali.'
+  },
+  {
+    k: ['tasse sul mutuo', 'imposta sostitutiva mutuo', 'costi accessori mutuo'],
+    r: '🧾 **Tasse e costi sul mutuo**\n\n• **Imposta sostitutiva:** 0,25% prima casa / 2% seconda casa (sul capitale finanziato)\n• **Perizia:** €200-€400\n• **Istruttoria:** €300-€800\n• **Assicurazione incendio:** obbligatoria (€200-€500/anno)\n• **Assicurazione vita:** consigliata ma non obbligatoria\n\nChiedi sempre il **TAEG** per confrontare il costo totale tra banche diverse.'
+  },
+  {
+    k: ['detrazione interessi mutuo', 'interessi mutuo 730', 'scaricare interessi mutuo'],
+    r: '📊 **Detrazione interessi del mutuo**\n\nPer la prima casa puoi detrarre il **19%** degli interessi passivi:\n• Massimo detraibile: **€4.000** annui\n• Risparmio massimo: **€760/anno** in dichiarazione dei redditi\n• Vale anche per oneri accessori (notaio mutuo, perizia)\n\nLa detrazione spetta a chi è intestatario sia del mutuo che dell\'immobile.'
+  },
+  {
+    k: ['spread mutuo significato', 'spread banca cosa significa', 'come leggere tasso mutuo'],
+    r: '📈 **Spread del mutuo**\n\nÈ il **margine di guadagno** della banca, sommato al tasso di riferimento:\n• **Tasso fisso** = IRS + spread\n• **Tasso variabile** = Euribor + spread\n\nPiù lo spread è basso, più il mutuo è conveniente. Confronta sempre lo spread tra diverse banche. Oggi si aggira tra **0,5% e 1,5%**.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ 234-238: PERIZIE IMMOBILIARI
+  // ═══════════════════════════════════════════════
+  {
+    k: ['perizia immobiliare significato', 'valutazione tecnica immobile', 'stima professionale casa'],
+    r: '📋 **Perizia immobiliare**\n\nÈ una **valutazione tecnica** dell\'immobile fatta da un professionista abilitato (geometra, architetto, ingegnere). Stima il valore di mercato basandosi su:\n• Zona e posizione\n• Stato conservativo\n• Metratura e caratteristiche\n• Comparabili venduti in zona\n\nÈ un documento oggettivo, diverso dalla semplice stima di mercato.'
+  },
+  {
+    k: ['perizia asseverata significato', 'perizia giurata immobile', 'perizia valore legale'],
+    r: '⚖️ **Perizia asseverata**\n\nÈ una perizia in cui il tecnico **giura sotto responsabilità penale** che i dati e le valutazioni sono veritieri. Ha **valore legale** e può essere usata:\n• In **tribunale** (cause, CTU)\n• Per pratiche **bancarie**\n• Per questioni **fiscali** (successioni, rivalutazioni)\n\nCosta di più di una perizia semplice ma ha un peso giuridico molto maggiore.'
+  },
+  {
+    k: ['quando serve perizia asseverata', 'perizia asseverata obbligatoria', 'casi perizia giurata'],
+    r: '📋 **Quando serve una perizia asseverata?**\n\nÈ necessaria per:\n• Richieste di **mutuo** (la banca la richiede sempre)\n• **Successioni** e divisioni ereditarie\n• **Cause legali** e CTU\n• Pratiche fiscali (rivalutazione terreni)\n• Conferimenti in **società**\n\nPer una semplice compravendita tra privati, basta generalmente una stima di mercato.'
+  },
+  {
+    k: ['costo perizia immobiliare dettaglio', 'tariffe perizia casa', 'preventivo perizia'],
+    r: '💶 **Costi perizia immobiliare**\n\n• **Perizia semplice:** €200-€500\n• **Perizia asseverata:** €300-€800\n• **Perizia bancaria per mutuo:** €200-€400 (spesso inclusa nelle spese di istruttoria)\n\nIl costo dipende dalla complessità dell\'immobile e dalla finalità. Chiedi sempre un preventivo prima.'
+  },
+  {
+    k: ['chi fa perizia mutuo', 'perito incaricato banca', 'perizia mutuo come funziona'],
+    r: '🏦 **Chi fa la perizia per il mutuo?**\n\nUn **perito iscritto all\'albo**, incaricato dalla banca (non puoi sceglierlo tu). Il perito verifica:\n• Il **valore** dell\'immobile\n• La **conformità catastale** e urbanistica\n• L\'assenza di abusi edilizi\n\nIl suo parere è **vincolante**: se valuta l\'immobile meno del prezzo, la banca riduce il mutuo. Noi verifichiamo tutto prima per evitare sorprese.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ 239-250: VENDITA, INCARICO E AGENZIA
+  // ═══════════════════════════════════════════════
+  {
+    k: ['tempi vendita immobile dettaglio', 'quanto ci vuole per vendere', 'tempistiche vendita realistiche'],
+    r: '⏱️ **Tempi realistici di vendita**\n\nCon il giusto prezzo:\n• **Prezzo corretto:** 2-4 mesi\n• **Prezzo nella media:** 4-6 mesi\n• **Prezzo sopra mercato:** 6-12 mesi o più\n\nUn buon **posizionamento di prezzo** è la chiave. Il primo mese è il più importante: è quando l\'immobile ha la massima visibilità online.'
+  },
+  {
+    k: ['prezzo troppo alto conseguenze', 'immobile fermo mercato', 'errore prezzo vendita'],
+    r: '⚠️ **Prezzo troppo alto: cosa succede?**\n\nL\'immobile resta **fermo sul mercato** e:\n• Perde attrattività per gli acquirenti\n• Viene scartato nei risultati di ricerca\n• Dopo mesi senza visite, sarai costretto a **ribassare**\n• Il prezzo finale sarà spesso **inferiore** a quello che avresti ottenuto partendo correttamente\n\nPartire col prezzo giusto è sempre la strategia migliore.'
+  },
+  {
+    k: ['perché immobile non si vende', 'cause vendita bloccata', 'immobile non riceve visite'],
+    r: '🔍 **Perché un immobile non si vende?**\n\nLe cause principali:\n• **Prezzo troppo alto** — la causa n°1\n• **Cattiva presentazione** — foto scadenti, disordine\n• **Scarsa promozione** — pochi portali, niente social\n• **Difetti non dichiarati** — creano sfiducia\n• **Zona poco richiesta** — serve più pazienza\n\nUn\'analisi onesta è il primo passo. Noi ti diamo un feedback realistico.'
+  },
+  {
+    k: ['bruciatura immobile', 'immobile troppo tempo in vendita', 'effetto stanchezza annuncio'],
+    r: '🔥 **Effetto "bruciatura" dell\'immobile**\n\nQuando un immobile resta in vendita **troppo a lungo**, gli acquirenti pensano che ci sia qualcosa che non va. Anche abbassando il prezzo:\n• La **fiducia è compromessa**\n• L\'annuncio perde visibilità nei portali\n• I contatti calano drasticamente\n\nMeglio partire col **prezzo giusto da subito**. Il consulente ti aiuta con una valutazione realistica.'
+  },
+  {
+    k: ['ritirare incarico vendita', 'non voglio più vendere', 'recesso incarico agenzia'],
+    r: '📋 **Ritirare l\'incarico di vendita**\n\nL\'incarico ha una durata concordata. Se recedi **prima della scadenza** senza giusta causa:\n• Potresti dover pagare una **penale**\n• O un **rimborso spese** per le attività svolte\n\nLeggi sempre bene le clausole prima di firmare. Noi abbiamo clausole chiare e trasparenti.'
+  },
+  {
+    k: ['durata incarico vendita', 'quanto dura mandato agenzia', 'scadenza incarico immobiliare'],
+    r: '📅 **Durata dell\'incarico di vendita**\n\nGeneralmente da **3 a 12 mesi**, concordato tra le parti. Alla scadenza:\n• Se non vuoi rinnovare, basta **comunicarlo**\n• L\'incarico decade automaticamente\n• Nessun obbligo di rinnovo\n\nDurante la validità, rispetta le condizioni firmate. Un buon agente ti tiene informato costantemente sull\'andamento.'
+  },
+  {
+    k: ['penale ritiro incarico', 'rimborso spese agenzia', 'costo recesso anticipato agenzia'],
+    r: '💶 **Penale per ritiro dell\'incarico**\n\nDipende dal contratto. La maggior parte degli incarichi prevede:\n• Una **penale** in caso di recesso anticipato\n• O un **rimborso spese** per le attività già svolte (foto, promozione, visite)\n\nVerifica sempre le condizioni **prima di firmare**. Da noi, le clausole sono spiegate chiaramente e senza sorprese.'
+  },
+  {
+    k: ['vendere senza contratto agenzia', 'nessun incarico scritto', 'mandato verbale immobiliare'],
+    r: '📝 **Vendere senza contratto scritto con l\'agenzia**\n\nSenza incarico scritto, non hai vincoli formali. Tuttavia:\n• Se l\'agenzia ti ha **presentato un acquirente** e concludi la vendita, potrebbe richiedere la provvigione\n• Vale il principio di **causalità** (art. 1755 c.c.)\n\nPer evitare controversie, è sempre meglio avere un incarico scritto con condizioni chiare.'
+  },
+  {
+    k: ['provvigione senza incarico', 'agenzia chiede compenso senza contratto', 'mediazione senza mandato'],
+    r: '⚖️ **Provvigione senza incarico scritto**\n\nSì, l\'agenzia **può chiederla** se dimostra di aver messo in relazione le parti (art. 1755 c.c.):\n• Il diritto alla provvigione nasce dalla **mediazione effettiva**\n• Non necessariamente dal contratto scritto\n• Basta provare il **nesso causale** tra l\'attività dell\'agente e la conclusione dell\'affare\n\nPer questo è meglio chiarire tutto per iscritto fin dall\'inizio.'
+  },
+  {
+    k: ['vantaggi agente immobiliare', 'perché affidarsi agenzia', 'agente immobiliare cosa fa per me'],
+    r: '🏆 **Vantaggi di affidarsi a un agente immobiliare**\n\nUn professionista ti offre:\n• **Valutazione corretta** basata sul mercato reale\n• **Verifica documentale** completa (urbanistica, catastale, ipotecaria)\n• **Marketing professionale** — foto, video, virtual tour, portali\n• **Visite selezionate** con acquirenti già qualificati\n• **Trattativa esperta** per le migliori condizioni\n• **Tutela legale** fino al rogito\n• Risparmio di **tempo, stress e rischi**'
+  },
+  {
+    k: ['agente verifica documenti', 'controllo documentazione agenzia', 'agenzia controlla casa prima vendita'],
+    r: '📋 **L\'agente verifica la documentazione?**\n\nSì, un buon agente verifica **tutto prima** della messa in vendita:\n• **Conformità urbanistica** e catastale\n• **Visure ipotecarie** aggiornate\n• **Certificazioni impianti**\n• **APE** valido\n• **Spese condominiali** regolari\n\nQuesto evita blocchi al rogito e dà sicurezza all\'acquirente. Noi lo facciamo sempre, di prassi.'
+  },
+  {
+    k: ['agente aiuta trattativa', 'mediazione prezzo acquisto', 'ruolo agente nella trattativa'],
+    r: '🤝 **L\'agente nella trattativa**\n\nAssolutamente sì, è uno dei nostri ruoli principali:\n• Facciamo da **mediatore imparziale** tra le parti\n• Gestiamo le **emozioni** (vendere/comprare casa è emotivo!)\n• Consigliamo il **giusto prezzo** basandoci sui dati\n• Troviamo le condizioni per chiudere in modo **equilibrato**\n\nUna buona trattativa è quella in cui entrambe le parti sono soddisfatte.'
   }
 ];
 
