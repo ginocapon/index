@@ -939,6 +939,234 @@ const FAQ_DATA = [
   {
     k: ['tv', 'antenna', 'fibra ottica', 'internet', 'connessione'],
     r: '📡 **Impianto TV e fibra ottica**\n\nLa predisposizione TV è generalmente presente in tutti gli immobili. Per la **fibra ottica**, verifica la copertura nella zona su:\n• Sito del tuo operatore\n• Open Fiber\n\nLa fibra è un comfort sempre più importante, soprattutto per chi lavora da casa.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ IMMOBILIARI — IMPIANTI AGGIUNTIVI (51-53)
+  // ═══════════════════════════════════════════════
+  {
+    k: ['videocitofono', 'citofono', 'citofono video', 'campanello smart'],
+    r: '🔔 **Videocitofono**\n\nSe presente, è indicato nella scheda. I modelli moderni permettono anche la **gestione da smartphone**: vedi chi suona e apri il portone ovunque tu sia. È un comfort di sicurezza molto apprezzato.'
+  },
+  {
+    k: ['acqua calda', 'boiler', 'scaldabagno', 'produzione acqua calda'],
+    r: '🚿 **Acqua calda: caldaia o boiler?**\n\nDipende dall\'impianto:\n• **Caldaia combinata** — produce acqua calda istantanea, più efficiente\n• **Boiler elettrico** — accumula l\'acqua calda, consumi più alti\n• **Boiler a pompa di calore** — soluzione moderna e efficiente\n\nVerifica nella scheda dell\'immobile.'
+  },
+  {
+    k: ['addolcitore', 'calcare', 'acqua dura', 'durezza acqua'],
+    r: '💧 **Addolcitore d\'acqua**\n\nSe presente, è un plus importante: protegge **tubature ed elettrodomestici** dal calcare. Molto utile nella zona di Padova dove l\'acqua è mediamente dura. Allunga la vita di caldaia, lavatrice e lavastoviglie.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ IMMOBILIARI — INFISSI E ISOLAMENTO (54-63)
+  // ═══════════════════════════════════════════════
+  {
+    k: ['doppi vetri', 'vetri finestre', 'vetro doppio', 'vetrocamera'],
+    r: '🪟 **Doppi vetri**\n\nVerifica nella scheda. I doppi vetri migliorano:\n• **Isolamento termico** — meno dispersione di calore\n• **Isolamento acustico** — meno rumore dall\'esterno\n• **Risparmio energetico** — bollette più basse\n\nSono ormai uno standard nelle costruzioni moderne.'
+  },
+  {
+    k: ['serramenti', 'infissi', 'finestre pvc', 'finestre legno', 'finestre alluminio'],
+    r: '🪟 **Tipo di serramenti**\n\nÈ indicato nella descrizione:\n• **PVC** — ottimo rapporto qualità/prezzo, bassa manutenzione\n• **Legno** — estetica calda e naturale, richiede manutenzione\n• **Alluminio a taglio termico** — durabilità e design moderno\n\nIl tipo di infisso incide molto su isolamento e comfort.'
+  },
+  {
+    k: ['triplo vetro', 'vetro camera', 'vetro basso emissivo'],
+    r: '🪟 **Vetro camera o triplo vetro?**\n\n• **Vetro camera (doppio)** — lo standard attuale, buon isolamento\n• **Triplo vetro** — isolamento superiore, ideale per zone fredde o esposizioni a nord\n• **Basso emissivo** — trattamento che riduce la dispersione termica\n\nVerifica il tipo nella scheda dell\'immobile.'
+  },
+  {
+    k: ['tapparelle', 'tapparelle elettriche', 'tapparelle manuali', 'avvolgibili'],
+    r: '🏠 **Tapparelle elettriche o manuali?**\n\nVerifica nella scheda o in visita:\n• **Elettriche** — più comode, soprattutto per finestre grandi, gestibili anche da domotica\n• **Manuali** — più economiche, nessun costo elettrico\n\nL\'elettrificazione delle tapparelle è un intervento relativamente semplice.'
+  },
+  {
+    k: ['zanzariere', 'zanzariera', 'anti insetti'],
+    r: '🦟 **Zanzariere**\n\nSe presenti, sono indicate nell\'annuncio. In caso contrario, si installano facilmente su quasi tutti i tipi di finestre. Nelle estati padovane sono molto utili, soprattutto ai piani bassi e vicino a zone verdi.'
+  },
+  {
+    k: ['cappotto termico', 'isolamento termico', 'coibentazione', 'isolamento esterno'],
+    r: '🧱 **Isolamento termico (cappotto)**\n\nSe presente, è un grande vantaggio:\n• **Risparmio energetico** fino al 40%\n• Temperatura interna più stabile\n• Migliore classe energetica\n• Meno umidità e condensa\n\nVerifica nella scheda o chiedi al consulente.'
+  },
+  {
+    k: ['isolamento acustico', 'rumore', 'insonorizzazione', 'fonoisolamento'],
+    r: '🔇 **Isolamento acustico**\n\nDipende da anno di costruzione, materiali e infissi. Gli immobili recenti hanno **standard acustici migliori** per legge. Per quelli più datati, si può migliorare con:\n• Infissi nuovi\n• Contropareti isolanti\n• Pavimento flottante'
+  },
+  {
+    k: ['persiane', 'scuri', 'scuretti', 'oscuranti'],
+    r: '🏠 **Persiane e scuri**\n\nVerifica le condizioni in visita:\n• **In legno** — richiedono manutenzione periodica (verniciatura)\n• **In alluminio** — più durature, meno manutenzione\n• **In PVC** — buon rapporto qualità/prezzo\n\nIl consulente può valutarne lo stato durante il sopralluogo.'
+  },
+  {
+    k: ['porta blindata', 'portoncino blindato', 'portone ingresso', 'classe sicurezza'],
+    r: '🔒 **Portoncino blindato**\n\nSe presente, è indicato nell\'annuncio. Una porta blindata di **classe 3 o superiore** garantisce buona sicurezza. Verifica anche:\n• Serratura europea anti-bumping\n• Isolamento termico e acustico del portoncino\n• Cilindro di sicurezza'
+  },
+  {
+    k: ['spifferi', 'correnti aria', 'tenuta infissi', 'guarnizioni finestre'],
+    r: '💨 **Spifferi dalle finestre**\n\nSpifferi indicano serramenti vecchi o mal posati. Durante la visita:\n• Avvicina la mano agli infissi per sentire correnti d\'aria\n• Controlla le guarnizioni\n• Verifica la chiusura ermetica\n\nLa sostituzione degli infissi gode della **detrazione fiscale 50%**.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ IMMOBILIARI — CLASSE ENERGETICA (64-68)
+  // ═══════════════════════════════════════════════
+  {
+    k: ['classe energetica immobile', 'quale classe energetica', 'lettera energetica'],
+    r: '⚡ **Classe energetica dell\'immobile**\n\nÈ indicata nell\'**APE** (Attestato di Prestazione Energetica), obbligatorio per ogni annuncio. Le classi vanno da:\n• **A4** (migliore) — consumi minimi\n• **G** (peggiore) — consumi elevati\n\nLa classe influisce su bollette e valore dell\'immobile.'
+  },
+  {
+    k: ['cos è ape', 'ape cosa significa', 'attestato prestazione energetica significato'],
+    r: '📋 **Cos\'è l\'APE?**\n\nL\'**Attestato di Prestazione Energetica** è un documento obbligatorio che indica i consumi energetici dell\'immobile. Caratteristiche:\n• **Validità:** 10 anni\n• **Obbligatorio** per vendita e affitto\n• Redatto da un tecnico abilitato\n• Costo medio: €150-€300'
+  },
+  {
+    k: ['classe energetica consumi', 'risparmio classe a', 'consumi classe g'],
+    r: '💰 **Classe energetica e consumi**\n\nL\'impatto è enorme:\n• Una **classe A** consuma fino all\'**80% in meno** di una classe G\n• La differenza si vede subito in bolletta\n• Un appartamento in classe G può costare €2.000-€3.000/anno di riscaldamento, in classe A meno di €500\n\nInvesti nel risparmio energetico!'
+  },
+  {
+    k: ['migliorare classe energetica', 'salire classe', 'upgrade energetico'],
+    r: '📈 **Migliorare la classe energetica**\n\nSì, è possibile con:\n• **Cappotto termico** — salto di 2-3 classi\n• **Infissi nuovi** — miglioramento significativo\n• **Caldaia a condensazione o pompa di calore**\n• **Pannelli solari/fotovoltaici**\n\nEsistono **incentivi fiscali** (50-65%) per questi interventi.'
+  },
+  {
+    k: ['costo migliorare classe', 'quanto costa efficientare', 'preventivo energetico'],
+    r: '💶 **Costi indicativi per migliorare la classe energetica:**\n\n• **Infissi nuovi:** €5.000-€10.000\n• **Cappotto termico:** €15.000-€30.000\n• **Caldaia a condensazione:** €3.000-€5.000\n• **Pompa di calore:** €5.000-€10.000\n\nChiedi un preventivo dedicato al nostro consulente. Molti interventi godono di detrazioni fiscali.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ IMMOBILIARI — ESTERNI E PERTINENZE (69-73)
+  // ═══════════════════════════════════════════════
+  {
+    k: ['aree verdi condominiali', 'giardino condominiale', 'verde comune'],
+    r: '🌿 **Aree verdi condominiali**\n\nSe presenti, sono indicate nella scheda. Le spese di manutenzione (giardiniere, irrigazione) rientrano nelle **spese condominiali ordinarie** e sono ripartite tra tutti i condomini.'
+  },
+  {
+    k: ['piscina condominiale', 'piscina condominio'],
+    r: '🏊 **Piscina condominiale**\n\nSe presente, è un valore aggiunto importante ma comporta **spese condominiali più alte** per:\n• Manutenzione e pulizia\n• Prodotti chimici\n• Assicurazione\n• Eventuale bagnino\n\nVerifica l\'importo nelle spese condominiali.'
+  },
+  {
+    k: ['posto bici', 'biciclette', 'rastrelliera', 'deposito bici'],
+    r: '🚲 **Posti bici nel condominio**\n\nVerifica con il consulente. Molti condomini recenti prevedono spazi dedicati. A Padova, città molto ciclabile, è un **comfort importante** per la vita quotidiana.'
+  },
+  {
+    k: ['cortile condominiale', 'cortile privato', 'cortile interno'],
+    r: '🏠 **Cortile: condominiale o privato?**\n\nÈ specificato nella scheda:\n• **Cortile privato** — più libertà di utilizzo, spazio esclusivo\n• **Cortile condominiale** — uso comune, regolato dal regolamento condominiale\n\nVerifica i dettagli nell\'annuncio.'
+  },
+  {
+    k: ['locale bici', 'locale passeggino', 'deposito carrozzine'],
+    r: '👶 **Locale bici/passeggino**\n\nVerifica con il consulente. È un plus importante per **famiglie con bambini**. Molti condomini moderni hanno spazi dedicati al piano terra per biciclette, passeggini e monopattini.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ IMMOBILIARI — ZONA E CONTESTO (74-83)
+  // ═══════════════════════════════════════════════
+  {
+    k: ['zona immobile', 'dove si trova', 'posizione immobile', 'localizzazione'],
+    r: '📍 **Zona dell\'immobile**\n\nLa zona è indicata nell\'annuncio con mappa. Chiedi al consulente per info dettagliate su:\n• Servizi disponibili\n• Trasporti pubblici\n• Vivibilità e sicurezza\n• Prezzi medi della zona'
+  },
+  {
+    k: ['scuole vicine', 'scuole zona', 'scuola vicina', 'asilo vicino'],
+    r: '🏫 **Scuole nelle vicinanze**\n\nIl consulente può informarti sulle scuole della zona:\n• Asili nido e scuole materne\n• Scuole elementari\n• Scuole medie\n• Scuole superiori e licei\n\nLa vicinanza alle scuole è un fattore molto ricercato dalle famiglie.'
+  },
+  {
+    k: ['mezzi pubblici', 'autobus', 'tram', 'trasporti', 'fermata bus'],
+    r: '🚌 **Distanza dai mezzi pubblici**\n\nVerifica nella scheda o sulla mappa. Per Padova, la vicinanza al **tram** è un valore aggiunto importante. Le linee bus coprono bene la città e la prima cintura.'
+  },
+  {
+    k: ['supermercato', 'negozi vicini', 'commerci zona', 'spesa'],
+    r: '🛒 **Supermercato vicino?**\n\nNella maggior parte delle zone residenziali di Padova e provincia sì. Verifica sulla mappa dell\'annuncio. La vicinanza a supermercati e negozi è un comfort quotidiano importante.'
+  },
+  {
+    k: ['zona tranquilla', 'rumorosa', 'quiete', 'silenzioso', 'traffico zona'],
+    r: '🤫 **La zona è tranquilla?**\n\nIl consulente conosce bene le zone di Padova e provincia. Ti consigliamo anche una **visita in diversi orari** della giornata per valutare il livello di rumore e traffico.'
+  },
+  {
+    k: ['parcheggi zona', 'parcheggio strada', 'strisce blu', 'ztl'],
+    r: '🅿️ **Parcheggi nella zona**\n\nVaria da zona a zona:\n• **Centro Padova** — più difficile, ZTL e strisce blu\n• **Prima cintura** — generalmente buona disponibilità\n• **Provincia** — nessun problema\n\nIl garage/posto auto diventa fondamentale in centro.'
+  },
+  {
+    k: ['allagamenti', 'rischio idrogeologico', 'esondazione', 'alluvione'],
+    r: '🌊 **Rischio allagamenti**\n\nPer la zona di Padova, verifica le **mappe di rischio idrogeologico** del comune. Il consulente può consigliarti e indicarti le zone più sicure. È un aspetto importante nella scelta dell\'immobile.'
+  },
+  {
+    k: ['cantieri zona', 'progetti urbanistici', 'nuove costruzioni zona', 'sviluppo zona'],
+    r: '🏗️ **Cantieri e progetti urbanistici**\n\nChiedi al consulente per info aggiornate:\n• **Nuove infrastrutture** — possono aumentare il valore\n• **Cantieri prolungati** — possono creare disagi temporanei\n• **Piani urbanistici** — indicano lo sviluppo futuro della zona'
+  },
+  {
+    k: ['sport zona', 'palestre vicine', 'piscina pubblica', 'parco vicino', 'ciclabile'],
+    r: '🏃 **Sport e tempo libero nella zona**\n\nIl consulente può indicarti:\n• Palestre e centri fitness\n• Piscine pubbliche e private\n• Parchi e aree verdi\n• Percorsi ciclabili\n\nPadova è una città molto vivibile e sportiva.'
+  },
+  {
+    k: ['distanza centro padova', 'quanto dista centro', 'lontano dal centro'],
+    r: '📍 **Distanza dal centro di Padova**\n\nÈ indicata nell\'annuncio. Per riferimento:\n• **Limena** (nostra sede) — ~10 km dal centro\n• **Prima cintura** — 5-15 km, buoni collegamenti\n• **Provincia** — 15-40 km\n\nVerifica tempi di percorrenza in auto e con mezzi pubblici.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ IMMOBILIARI — CONDOMINIO (84-91)
+  // ═══════════════════════════════════════════════
+  {
+    k: ['importo spese condominiali', 'quanto costa condominio', 'spese mensili condominio'],
+    r: '💶 **Spese condominiali**\n\nL\'importo è indicato nella scheda. Includono generalmente:\n• Pulizia scale\n• Assicurazione fabbricato\n• Manutenzione ordinaria\n• Luce parti comuni\n• Ascensore (se presente)\n\nChiedi al consulente per il dettaglio esatto.'
+  },
+  {
+    k: ['lavori straordinari', 'lavori condominio previsti', 'delibere lavori'],
+    r: '🏗️ **Lavori straordinari previsti?**\n\nChiedi al consulente. È importante sapere che:\n• Lavori **deliberati prima** della vendita → a carico del **venditore**\n• Lavori deliberati dopo → a carico dell\'**acquirente**\n\nVerifichiamo sempre questo aspetto prima della compravendita.'
+  },
+  {
+    k: ['amministratore condominio', 'chi amministra', 'gestione condominio'],
+    r: '👔 **Amministratore di condominio**\n\nÈ **obbligatorio** per condomini con più di 8 unità. Per i più piccoli, la gestione può essere interna (autogestione). Il consulente può fornirti i contatti dell\'amministratore.'
+  },
+  {
+    k: ['verbali assemblea', 'assemblee condominiali', 'delibere assemblea'],
+    r: '📋 **Verbali delle assemblee**\n\nSì, è un tuo **diritto** consultarli prima dell\'acquisto. Il consulente può richiederli per tua verifica. Nei verbali trovi:\n• Delibere su lavori e spese\n• Situazione morosità\n• Problematiche in corso'
+  },
+  {
+    k: ['venditore spese condominiali', 'arretrati condominio', 'morosità venditore'],
+    r: '⚠️ **Spese condominiali del venditore**\n\nVerifichiamo **sempre** questo aspetto. Attenzione: le spese non pagate possono ricadere sull\'acquirente per l\'anno in corso e quello precedente. Chiediamo sempre la **liberatoria** dall\'amministratore.'
+  },
+  {
+    k: ['regolamento condominiale', 'regolamento condominio', 'vincoli condominio'],
+    r: '📜 **Regolamento condominiale**\n\nOgni condominio ha il suo regolamento. Verifica eventuali vincoli su:\n• Animali domestici\n• Orari di silenzio\n• Modifiche esterne (tende, condizionatori)\n• Uso delle parti comuni\n\nIl consulente può procurarti una copia.'
+  },
+  {
+    k: ['animali condominio', 'cane condominio', 'gatto condominio', 'animali domestici casa'],
+    r: '🐾 **Animali domestici in condominio**\n\nSì, la **legge lo consente** (Riforma del Condominio 2012). Il regolamento condominiale **non può vietare** la detenzione di animali domestici. Sono però richiesti rispetto delle norme igieniche e di convivenza.'
+  },
+  {
+    k: ['costo medio condominio padova', 'spese condominiali medie', 'media condominio'],
+    r: '💰 **Costi medi condominiali a Padova:**\n\n• **Base** (scale + assicurazione): €50-100/mese\n• **Con ascensore e giardino:** €100-200/mese\n• **Con portineria/piscina:** oltre €200/mese\n\nSono indicazioni medie, il costo esatto dipende dal condominio specifico.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // FAQ IMMOBILIARI — CERTIFICAZIONI E DOCUMENTI (92-100)
+  // ═══════════════════════════════════════════════
+  {
+    k: ['certificazioni impianti', 'impianti certificati', 'documenti impianti'],
+    r: '📋 **Certificazioni degli impianti**\n\nPer impianti **post-2008** serve la conformità (DM 37/08), per i precedenti la rispondenza. Verifichiamo **tutto prima della vendita** per garantirti la massima tranquillità.'
+  },
+  {
+    k: ['certificato conformità', 'cos è conformità', 'dm 37', 'dichiarazione conformità'],
+    r: '📄 **Certificato di conformità**\n\nAttesta che l\'impianto è stato realizzato **a regola d\'arte** secondo le norme vigenti (DM 37/2008). È obbligatorio dal 2008 e deve essere rilasciato dall\'installatore abilitato per ogni impianto.'
+  },
+  {
+    k: ['certificato rispondenza', 'diri', 'rispondenza impianti'],
+    r: '📄 **Certificato di rispondenza (DiRi)**\n\nPer impianti **pre-2008**, un tecnico abilitato certifica che l\'impianto, pur datato, rispetta i **requisiti minimi di sicurezza**. È un\'alternativa alla conformità per impianti più vecchi.'
+  },
+  {
+    k: ['agibilità', 'abitabilità', 'certificato agibilità', 'segnalazione agibilità'],
+    r: '🏠 **Agibilità/Abitabilità**\n\nÈ un documento fondamentale che certifica la conformità dell\'immobile ai requisiti di:\n• **Sicurezza** strutturale\n• **Igiene** e salubrità\n• **Risparmio energetico**\n\nDal 2016 si chiama **Segnalazione Certificata di Agibilità (SCA)**.'
+  },
+  {
+    k: ['difformità catastali', 'errori catasto', 'planimetria non conforme'],
+    r: '⚠️ **Difformità catastali**\n\nVerifichiamo sempre la **conformità catastale** prima della vendita. Eventuali difformità vanno sanate prima del rogito tramite:\n• Variazione catastale (DOCFA)\n• Aggiornamento planimetrie\n\nCosto medio: €500-€1.500.'
+  },
+  {
+    k: ['conformità catastale cos è', 'planimetria conforme', 'catasto conforme'],
+    r: '📐 **Conformità catastale**\n\nSignifica che la **planimetria catastale** corrisponde allo stato reale dell\'immobile. È **obbligatoria per il rogito** dal 2010. Il notaio la verifica prima dell\'atto. Noi la controlliamo in anticipo.'
+  },
+  {
+    k: ['conformità urbanistica cos è', 'regolarità edilizia cos è', 'permessi edilizi'],
+    r: '🏗️ **Conformità urbanistica**\n\nVerifica che l\'immobile sia stato costruito/modificato con **regolari permessi edilizi**. È la cosa **più importante da controllare** prima dell\'acquisto. Difformità urbanistiche possono bloccare la vendita.'
+  },
+  {
+    k: ['accesso atti', 'accesso atti comune', 'verifica permessi comune'],
+    r: '📋 **Accesso agli atti in comune**\n\nÈ la verifica dei **permessi edilizi** depositati in comune. Lo facciamo **sempre** per garantire la regolarità dell\'immobile. Permette di scoprire eventuali abusi o difformità prima dell\'acquisto.'
+  },
+  {
+    k: ['progetti immobile', 'planimetrie originali', 'documenti costruzione'],
+    r: '📐 **Progetti dell\'immobile**\n\nVerifichiamo la presenza di progetti e permessi originali:\n• Licenza edilizia\n• Planimetrie depositate\n• Eventuali varianti\n• Certificati di collaudo\n\nEventuali mancanze vanno risolte **prima della compravendita**.'
   }
 ];
 
