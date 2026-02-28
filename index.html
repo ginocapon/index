@@ -1729,7 +1729,7 @@ button svg, a.btn-p svg, a.btn-g svg {
               </select>
             </div>
             <div class="sf-g">
-              <label>Tipologia</label>
+              <label for="st-tipo">Tipologia</label>
               <select id="st-tipo">
                 <option value="appartamento">Appartamento</option>
                 <option value="bilocale">Bilocale</option>
@@ -1745,11 +1745,11 @@ button svg, a.btn-p svg, a.btn-g svg {
               </select>
             </div>
             <div class="sf-g">
-              <label>Superficie (mq)</label>
+              <label for="st-mq">Superficie (mq)</label>
               <input type="number" id="st-mq" placeholder="Es: 85" min="5">
             </div>
             <div class="sf-g" style="grid-column:1/-1">
-              <label>Stato dell'immobile</label>
+              <label for="st-stato">Stato dell'immobile</label>
               <select id="st-stato">
                 <option value="buono">Buono stato</option>
                 <option value="ottimo">Ottimo / Rifinito</option>
@@ -1986,12 +1986,12 @@ button svg, a.btn-p svg, a.btn-g svg {
       <h2 class="fc-title">Parliamo del<br>tuo <span>immobile</span></h2>
       <form id="contattoForm" onsubmit="inviaContatto(event)">
         <div class="fc-grid">
-          <div class="fc-group"><label>Nome *</label><input type="text" id="cf-nome" placeholder="Mario" required></div>
-          <div class="fc-group"><label>Cognome *</label><input type="text" id="cf-cognome" placeholder="Rossi" required></div>
-          <div class="fc-group"><label>Email *</label><input type="email" id="cf-email" placeholder="mario@email.it" required></div>
-          <div class="fc-group"><label>Telefono *</label><input type="tel" id="cf-tel" placeholder="+39 340 000 0000" required></div>
+          <div class="fc-group"><label for="cf-nome">Nome *</label><input type="text" id="cf-nome" placeholder="Mario" required></div>
+          <div class="fc-group"><label for="cf-cognome">Cognome *</label><input type="text" id="cf-cognome" placeholder="Rossi" required></div>
+          <div class="fc-group"><label for="cf-email">Email *</label><input type="email" id="cf-email" placeholder="mario@email.it" required></div>
+          <div class="fc-group"><label for="cf-tel">Telefono *</label><input type="tel" id="cf-tel" placeholder="+39 340 000 0000" required></div>
           <div class="fc-group full">
-            <label>Tipo di interesse</label>
+            <label for="cf-interesse">Tipo di interesse</label>
             <select id="cf-interesse">
               <option value="">Seleziona...</option>
               <option value="vendere">Voglio vendere il mio immobile</option>
