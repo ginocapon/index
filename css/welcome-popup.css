@@ -1,0 +1,206 @@
+/* ══════════════════════════════════════════════
+   WELCOME POPUP — Righetto Immobiliare
+   Accoglienza visitatore con avatar Sara
+   ══════════════════════════════════════════════ */
+
+/* Overlay */
+#welcome-overlay {
+  position: fixed; inset: 0;
+  background: rgba(21,36,53,0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  padding: 16px;
+}
+#welcome-overlay.visible { opacity: 1; }
+
+/* Card */
+#welcome-card {
+  background: #F7F5F1;
+  border-radius: 24px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.35);
+  max-width: 480px;
+  width: 100%;
+  overflow: hidden;
+  transform: translateY(30px) scale(0.95);
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+#welcome-overlay.visible #welcome-card {
+  transform: translateY(0) scale(1);
+}
+
+/* Header con avatar */
+.welcome-header {
+  background: linear-gradient(135deg, #2C4A6E 0%, #4E789A 100%);
+  padding: 28px 28px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+/* Avatar wrapper — contiene SVG inline animato */
+.welcome-avatar-wrap {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.3);
+  flex-shrink: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, #3A5578, #5C7A9E);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+.welcome-avatar-svg {
+  width: 100%; height: 100%;
+  display: block;
+}
+/* Transizioni fluide sugli elementi animati */
+#sara-mouth { transition: d 0.08s ease; }
+#sara-mouth-open { transition: ry 0.08s ease, opacity 0.08s ease; }
+#sara-blink-l, #sara-blink-r { transition: ry 0.06s ease; }
+#sara-head { transition: transform 0.3s ease-out; }
+#sara-cheek-l, #sara-cheek-r { transition: opacity 0.15s ease; }
+.welcome-header-text {
+  color: #fff;
+}
+.welcome-header-text h3 {
+  margin: 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.welcome-header-text p {
+  margin: 4px 0 0;
+  font-size: 0.82rem;
+  opacity: 0.8;
+  font-family: 'Montserrat', sans-serif;
+}
+.welcome-online {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.welcome-online::before {
+  content: '';
+  width: 8px; height: 8px;
+  background: #B8D44A;
+  border-radius: 50%;
+  animation: welcome-pulse 2s ease-in-out infinite;
+}
+@keyframes welcome-pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}
+
+/* Body */
+.welcome-body {
+  padding: 24px 28px;
+}
+.welcome-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #152435;
+  min-height: 110px;
+}
+.welcome-text .cursor {
+  display: inline-block;
+  width: 2px; height: 1em;
+  background: #2C4A6E;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: welcome-blink 0.7s step-end infinite;
+}
+@keyframes welcome-blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Audio toggle */
+.welcome-audio-toggle {
+  display: inline-flex;
+  align-items: center; gap: 6px;
+  background: none; border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+  color: #6B7A8D;
+  cursor: pointer;
+  padding: 4px 0;
+  margin-top: 8px;
+}
+.welcome-audio-toggle:hover { color: #2C4A6E; }
+
+/* CTA buttons */
+.welcome-actions {
+  display: flex;
+  gap: 10px;
+  padding: 0 28px 24px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+}
+.welcome-actions.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.welcome-btn {
+  flex: 1;
+  padding: 13px 16px;
+  border-radius: 14px;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+.welcome-btn-primary {
+  background: linear-gradient(135deg, #B8D44A, #A8C43A);
+  color: #152435;
+  box-shadow: 0 4px 16px rgba(184,212,74,0.35);
+}
+.welcome-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(184,212,74,0.5);
+}
+.welcome-btn-secondary {
+  background: #ECE7DF;
+  color: #2C4A6E;
+}
+.welcome-btn-secondary:hover {
+  background: #E1DBD1;
+  transform: translateY(-2px);
+}
+
+/* Close X */
+.welcome-close {
+  position: absolute;
+  top: 12px; right: 16px;
+  background: none; border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 1.4rem;
+  cursor: pointer;
+  z-index: 2;
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+.welcome-close:hover {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 520px) {
+  #welcome-card { border-radius: 20px; }
+  .welcome-header { padding: 20px 20px 16px; gap: 12px; }
+  .welcome-avatar-wrap { width: 60px; height: 60px; }
+  .welcome-header-text h3 { font-size: 1.15rem; }
+  .welcome-body { padding: 18px 20px; }
+  .welcome-text { font-size: 0.85rem; min-height: 90px; }
+  .welcome-actions { padding: 0 20px 20px; flex-direction: column; }
+  .welcome-btn { padding: 12px 14px; }
+}
