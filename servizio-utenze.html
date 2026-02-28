@@ -377,18 +377,20 @@
       <p>Rispondiamo entro 24 ore — nessun impegno</p>
     </div>
     <div class="fb-body">
-      <div class="field"><label>Nome e Cognome *</label><input type="text" id="f-nome" placeholder="Mario Rossi"></div>
-      <div class="field"><label>Telefono *</label><input type="tel" id="f-tel" placeholder="333 123 4567"></div>
-      <div class="field"><label>Email</label><input type="email" placeholder="mario@email.it"></div>
-      <div class="field"><label>Tipo di richiesta</label>
-        <select>
+      <form onsubmit="return false;" novalidate>
+      <div class="field"><label for="f-nome">Nome e Cognome *</label><input type="text" id="f-nome" placeholder="Mario Rossi"></div>
+      <div class="field"><label for="f-tel">Telefono *</label><input type="tel" id="f-tel" placeholder="333 123 4567"></div>
+      <div class="field"><label for="f-email">Email</label><input type="email" id="f-email" placeholder="mario@email.it"></div>
+      <div class="field"><label for="f-tipo">Tipo di richiesta</label>
+        <select id="f-tipo">
           <option>Voltura luce e gas</option><option>Nuova attivazione</option><option>Cambio fornitore</option><option>Utenze acqua/fogna</option><option>Voltura impresa/P.IVA</option><option>Utenza temporanea</option><option>Bonus sociale</option><option>Altro</option>
         </select>
       </div>
-      <div class="field"><label>Indirizzo immobile</label><input type="text" placeholder="Es. Via Roma 10, Padova"></div>
-      <div class="field"><label>Note</label><textarea placeholder="Dettagli: tipo immobile, utenze da attivare, tempistiche preferite..."></textarea></div>
+      <div class="field"><label for="f-indirizzo">Indirizzo immobile</label><input type="text" id="f-indirizzo" placeholder="Es. Via Roma 10, Padova"></div>
+      <div class="field"><label for="f-note">Note</label><textarea id="f-note" placeholder="Dettagli: tipo immobile, utenze da attivare, tempistiche preferite..."></textarea></div>
       <div class="fchk"><input type="checkbox" id="f-gdpr"><label for="f-gdpr">Acconsento al trattamento dei dati ai sensi del GDPR</label></div>
       <button class="fsub" onclick="sendForm()">Richiedi attivazione utenze</button>
+      </form>
       <a href="tel:+390498843484" class="fb-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>Oppure chiama <strong>049 884 3484</strong></a>
     </div>
   </div>
@@ -403,7 +405,7 @@
       <div class="fcol"><div class="fh">Immobili</div><a href="immobili.html?op=vendita">In vendita</a><a href="immobili.html?op=affitto">In affitto</a></div>
       <div class="fcol"><div class="fh">Info</div><a href="chi-siamo.html">Chi siamo</a><a href="faq.html">FAQ</a><a href="contatti.html">Contatti</a><a href="privacy.html">Privacy</a><a href="cookie-policy.html">Cookie Policy</a><a href="#" data-cookie-prefs>Preferenze Cookie</a></div>
     </div>
-    <div class="fbot"><span>&copy; 2025 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
+    <div class="fbot"><span>&copy; 2026 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
   </div>
 </footer>
 <script>
@@ -420,10 +422,10 @@ function sendForm(){
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-<script src="js/nav-mobile.js"></script>
-<script src="js/config.js"></script>
-<script src="js/chatbot.js"></script>
-<script src="js/cookie-consent.js"></script>
+<script src="js/nav-mobile.js" defer></script>
+<script src="js/config.js" defer></script>
+<script src="js/chatbot.js" defer></script>
+<script src="js/cookie-consent.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
 <script type="application/ld+json">
 {
