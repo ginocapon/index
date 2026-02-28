@@ -39,10 +39,10 @@
     .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff}
     .logo span{color:var(--oro);font-style:italic}
     nav{display:flex;gap:.2rem;flex:1}
-    nav a{color:rgba(255,255,255,.5);font-size:.82rem;padding:.4rem .75rem;border-radius:4px;transition:color .2s}
+    nav a{color:rgba(255,255,255,.7);font-size:.82rem;padding:.4rem .75rem;border-radius:4px;transition:color .2s}
     nav a:hover{color:#fff} nav a.active{color:var(--oro)}
     .h-cta{display:flex;gap:.65rem;align-items:center}
-    .h-tel{color:rgba(255,255,255,.55);font-size:.78rem}
+    .h-tel{color:rgba(255,255,255,.75);font-size:.78rem}
     .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:6px;font-size:.76rem;font-weight:500;transition:all .2s}
     .h-btn:hover{background:var(--oro2);transform:translateY(-1px)}
     /* HERO */
@@ -118,11 +118,12 @@
     @media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
     .flogo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;margin-bottom:.6rem}
     .flogo span{color:var(--oro);font-style:italic}
-    .finfo{font-size:.76rem;color:rgba(255,255,255,.35);line-height:1.9}
-    .fh{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.7rem;font-weight:500}
-    .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.38);margin-bottom:.3rem;transition:color .2s}
+    .finfo{font-size:.76rem;color:rgba(255,255,255,.6);line-height:1.9}
+    .fh{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.7rem;font-weight:500}
+    .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.6);margin-bottom:.3rem;transition:color .2s}
     .fcol a:hover{color:var(--oro)}
-    .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.22);flex-wrap:wrap;gap:.4rem}
+    .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.55);flex-wrap:wrap;gap:.4rem}
+    .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
   </style>
 
 <script type="application/ld+json">
@@ -163,6 +164,7 @@
 </script>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 <header>
   <div class="hi">
     <a href="index.html" class="logo">Righetto <span>Immobiliare</span></a>
@@ -181,6 +183,7 @@
   <a href="contatti.html" class="nav-mobile-cta">Contattaci</a>
 </div>
 
+<main id="main-content">
 <section class="hero">
   <div class="hero-inner">
     <div>
@@ -224,8 +227,8 @@
           <div class="tcard-role">Titolare — Agente Immobiliare</div>
           <div class="tcard-bio">Fondatore di Righetto Immobiliare, con oltre 25 anni di esperienza nel mercato padovano. Specializzato in ville, abitazioni di pregio e investimenti immobiliari. Mediatore abilitato con iscrizione al Ruolo.</div>
           <div class="tcard-contacts">
-            <div class="tcc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 .18H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>348 862 1888</div>
-            <div class="tcc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="781f111617380a111f101d0c0c17111515171a111411190a1d56110c">[email&#160;protected]</a></div>
+            <div class="tcc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 .18H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>348 862 1888</div>
+            <div class="tcc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="781f111617380a111f101d0c0c17111515171a111411190a1d56110c">[email&#160;protected]</a></div>
           </div>
         </div>
       </div>
@@ -236,8 +239,8 @@
           <div class="tcard-role">Agente Immobiliare — Locazioni</div>
           <div class="tcard-bio">Specializzata nella gestione dei contratti di locazione e nel mercato degli affitti a Padova e provincia. Cura ogni aspetto del rapporto tra proprietario e inquilino con attenzione normativa e professionalità.</div>
           <div class="tcard-contacts">
-            <div class="tcc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 .18H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>049 884 3484</div>
-            <div class="tcc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="600c090e040120120907080514140f090d0d0f02090c090112054e0914">[email&#160;protected]</a></div>
+            <div class="tcc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 .18H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>049 884 3484</div>
+            <div class="tcc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="600c090e040120120907080514140f090d0d0f02090c090112054e0914">[email&#160;protected]</a></div>
           </div>
         </div>
       </div>
@@ -283,6 +286,7 @@
   <p>Richiedi una valutazione gratuita e scopri quanto vale davvero il tuo immobile nel mercato attuale di Padova e provincia.</p>
   <a href="contatti.html" class="btn-dk">Valutazione gratuita</a>
 </section>
+</main>
 
 <footer>
   <div class="fi">
@@ -292,14 +296,14 @@
       <div class="fcol"><div class="fh">Immobili</div><a href="immobili.html?op=vendita">In vendita</a><a href="immobili.html?op=affitto">In affitto</a><a href="immobili.html?tipo=villa">Ville</a><a href="immobili.html?tipo=appartamento">Appartamenti</a></div>
       <div class="fcol"><div class="fh">Info</div><a href="chi-siamo.html">Chi siamo</a><a href="blog.html">Blog</a><a href="faq.html">FAQ</a><a href="contatti.html">Contatti</a><a href="privacy.html">Privacy</a><a href="cookie-policy.html">Cookie Policy</a><a href="#" data-cookie-prefs>Preferenze Cookie</a></div>
     </div>
-    <div class="fbot"><span>&copy; 2025 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
+    <div class="fbot"><span>&copy; 2026 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
   </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-<script src="js/nav-mobile.js"></script>
+<script src="js/nav-mobile.js" defer></script>
 <script src="js/config.js"></script>
-<script src="js/chatbot.js"></script>
-<script src="js/cookie-consent.js"></script>
+<script src="js/chatbot.js" defer></script>
+<script src="js/cookie-consent.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
 <script src="js/welcome-popup.js" defer></script>
 </body>

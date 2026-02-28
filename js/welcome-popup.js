@@ -38,6 +38,9 @@
                  (('ontouchstart' in window) && navigator.maxTouchPoints > 0) ||
                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); // iPad con iPadOS
 
+  // ── Su mobile/tablet: non mostrare il popup (pesante e scomodo) ──
+  if (isMobile) return;
+
   // ── Audio engine ──
   var AUDIO_MP3 = 'audio/welcome-sara.mp3';
   var audioEl = null;
