@@ -30,10 +30,10 @@
     .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff;text-decoration:none}
     .logo span{color:var(--oro);font-style:italic}
     nav{display:flex;gap:.2rem;flex:1}
-    nav a{color:rgba(255,255,255,.5);font-size:.82rem;padding:.4rem .75rem;border-radius:2px;transition:color .2s}
+    nav a{color:rgba(255,255,255,.7);font-size:.82rem;padding:.4rem .75rem;border-radius:2px;transition:color .2s}
     nav a:hover{color:#fff}
     .h-cta{display:flex;gap:.65rem;align-items:center}
-    .h-tel{color:rgba(255,255,255,.55);font-size:.78rem;text-decoration:none}
+    .h-tel{color:rgba(255,255,255,.75);font-size:.78rem;text-decoration:none}
     .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:2px;font-size:.76rem;font-weight:500;text-decoration:none}
     .hero{background:var(--nero);padding:3.5rem 1.5rem}
     .hero-inner{max-width:860px;margin:0 auto}
@@ -62,15 +62,17 @@
     @media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
     .flogo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;margin-bottom:.6rem}
     .flogo span{color:var(--oro);font-style:italic}
-    .finfo{font-size:.76rem;color:rgba(255,255,255,.35);line-height:1.9}
-    .fh{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.7rem}
-    .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.38);margin-bottom:.3rem;transition:color .2s}
+    .finfo{font-size:.76rem;color:rgba(255,255,255,.6);line-height:1.9}
+    .fh{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.7rem}
+    .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.6);margin-bottom:.3rem;transition:color .2s}
     .fcol a:hover{color:var(--oro)}
-    .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.22);flex-wrap:wrap;gap:.4rem}
+    .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.55);flex-wrap:wrap;gap:.4rem}
     @media(max-width:600px){.cookie-table{font-size:.74rem}.cookie-table th,.cookie-table td{padding:7px 8px}}
+    .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
   </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 <header>
   <div class="hi">
     <a href="index.html" class="logo">Righetto <span>Immobiliare</span></a>
@@ -89,6 +91,7 @@
   <a href="contatti.html" class="nav-mobile-cta">Contattaci</a>
 </div>
 
+<main id="main-content">
 <div class="hero">
   <div class="hero-inner">
     <div class="htag">Informativa legale</div>
@@ -201,6 +204,7 @@
   <p>Consulta anche la nostra <a href="privacy.html">Privacy Policy</a> o il sito del <a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">Garante per la Protezione dei Dati Personali</a>.</p>
 
 </div>
+</main>
 
 <footer>
   <div class="fi">
@@ -214,10 +218,10 @@
   </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-<script src="js/nav-mobile.js"></script>
+<script src="js/nav-mobile.js" defer></script>
 <script src="js/config.js"></script>
-<script src="js/chatbot.js"></script>
-<script src="js/cookie-consent.js"></script>
+<script src="js/chatbot.js" defer></script>
+<script src="js/cookie-consent.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
 <script src="js/welcome-popup.js" defer></script>
 </body>
