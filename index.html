@@ -722,20 +722,20 @@ button{font-family:inherit;cursor:pointer}
   .cs-testo { order: 1; padding: 44px 24px; }
 }
 
-footer{background:var(--testo);color:rgba(255,255,255,0.55);padding:64px 44px 28px;border-top:3px solid var(--oro)}
+footer{background:var(--testo);color:rgba(255,255,255,0.6);padding:64px 44px 28px;border-top:3px solid var(--oro)}
 .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:50px;margin-bottom:48px}
 .f-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:white;margin-bottom:14px}
 .f-logo span{color:var(--oro)}
 .f-desc{font-size:0.8rem;line-height:1.8;margin-bottom:22px}
 .f-socs{display:flex;gap:9px}
-.f-soc{width:36px;height:36px;border-radius:7px;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:800;cursor:pointer;transition:all 0.2s;color:rgba(255,255,255,0.45)}
+.f-soc{width:36px;height:36px;border-radius:7px;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:800;cursor:pointer;transition:all 0.2s;color:rgba(255,255,255,0.6)}
 .f-soc:hover{background:var(--oro);color:var(--testo);border-color:var(--oro)}
 .f-col h5{font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--oro);font-weight:700;margin-bottom:18px}
 .f-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
-.f-col ul a{font-size:0.8rem;color:rgba(255,255,255,0.5);transition:color 0.2s}
+.f-col ul a{font-size:0.8rem;color:rgba(255,255,255,0.6);transition:color 0.2s}
 .f-col ul a:hover{color:white}
-.footer-bottom{max-width:1200px;margin:0 auto;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;font-size:0.7rem;flex-wrap:wrap;gap:10px}
-.footer-bottom a{color:rgba(255,255,255,0.38);transition:color 0.2s}
+.footer-bottom{max-width:1200px;margin:0 auto;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;font-size:0.7rem;flex-wrap:wrap;gap:10px;color:rgba(255,255,255,0.55)}
+.footer-bottom a{color:rgba(255,255,255,0.6);transition:color 0.2s}
 .footer-bottom a:hover{color:white}
 
 /* ANIMAZIONI SCROLL */
@@ -1201,6 +1201,7 @@ button svg, a.btn-p svg, a.btn-g svg {
   #faq-hp { padding: 60px 20px; }
   .faq-grid { grid-template-columns: 1fr; }
 }
+.skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
 
 </style>
 
@@ -1447,6 +1448,7 @@ button svg, a.btn-p svg, a.btn-g svg {
 
 </head>
 <body>
+<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
 <!-- NAVBAR -->
 <nav id="navbar">
@@ -1476,6 +1478,8 @@ button svg, a.btn-p svg, a.btn-g svg {
 </div>
 
 
+<main id="main-content">
+
 <!-- HERO -->
 <section id="hero">
   <div id="hero-bg" style="background-image:url(img/team/titolari.webp)"></div>
@@ -1491,7 +1495,7 @@ button svg, a.btn-p svg, a.btn-g svg {
       <p class="hero-p">Dal 2000, la famiglia Righetto accompagna acquirenti e venditori in tutta la provincia. 25 anni di competenza locale, tecnologia avanzata, risultati concreti.</p>
       <div class="hero-btns">
         <button class="btn-g" onclick="document.getElementById('stima').scrollIntoView({behavior:'smooth'})">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           Stima il tuo Immobile
         </button>
       </div>
@@ -1516,7 +1520,7 @@ button svg, a.btn-p svg, a.btn-g svg {
     </div>
     <div class="r-filtri">
       <div class="r-field">
-        <label>Tipologia</label>
+        <label for="r-tipo">Tipologia</label>
         <select id="r-tipo">
           <option value="">Tutte le tipologie</option>
           <option value="appartamento">Appartamento</option>
@@ -1530,7 +1534,7 @@ button svg, a.btn-p svg, a.btn-g svg {
         </select>
       </div>
       <div class="r-field">
-        <label>Zona / Comune</label>
+        <label for="r-zona">Zona / Comune</label>
         <select id="r-zona">
           <option value="">Tutta la provincia</option>
           <option>Padova centro</option>
@@ -1550,7 +1554,7 @@ button svg, a.btn-p svg, a.btn-g svg {
         </select>
       </div>
       <div class="r-field">
-        <label>Prezzo massimo</label>
+        <label for="r-prezzo">Prezzo massimo</label>
         <select id="r-prezzo">
           <option value="">Nessun limite</option>
           <option value="80000">fino a € 80.000</option>
@@ -1563,17 +1567,17 @@ button svg, a.btn-p svg, a.btn-g svg {
         </select>
       </div>
       <div class="r-field">
-        <label>Superficie min.</label>
+        <label for="r-mq">Superficie min.</label>
         <input type="number" id="r-mq" placeholder="es. 60 mq" min="10">
       </div>
       <button class="r-btn-cerca" onclick="doRicerca()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px;height:16px;flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px;height:16px;flex-shrink:0" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         Cerca
       </button>
     </div>
     <div class="r-bot-hint">
       <div class="r-bot-avatar">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--oro)" stroke-width="2" style="width:18px;height:18px;flex-shrink:0"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--oro)" stroke-width="2" style="width:18px;height:18px;flex-shrink:0" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
       </div>
       <span>Non sai da dove iniziare?&nbsp;
         <strong style="color:var(--oro);cursor:pointer" onclick="window.saraBot && saraBot.open()">Chiedi a Sara</strong>
@@ -1589,7 +1593,7 @@ button svg, a.btn-p svg, a.btn-g svg {
   <div class="video-inner">
     <div class="video-text sr">
       <div class="video-badge">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         Video
       </div>
       <div class="eyebrow">Scopri chi siamo</div>
@@ -1600,7 +1604,7 @@ button svg, a.btn-p svg, a.btn-g svg {
       <img class="video-thumb" src="https://img.youtube.com/vi/1JM_lXuqLHM/maxresdefault.jpg" alt="Vendi Casa in 30 giorni — Righetto Immobiliare Padova" width="640" height="360" loading="lazy">
       <div class="video-facade">
         <div class="play-btn">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="var(--blu)" stroke="none"><polygon points="6 3 20 12 6 21"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="var(--blu)" stroke="none" aria-hidden="true"><polygon points="6 3 20 12 6 21"/></svg>
         </div>
       </div>
     </div>
@@ -1616,7 +1620,7 @@ button svg, a.btn-p svg, a.btn-g svg {
         <div class="eyebrow">Portfolio selezionato</div>
         <h2 class="sec-h2">Immobili in Evidenza</h2>
       </div>
-      <a href="immobili.html" class="link-all">Vedi tutto il portfolio<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="immobili.html" class="link-all">Vedi tutto il portfolio<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
     <div class="props-grid sr-stagger" id="propsGrid">
       <div class="pc rv d1" style="pointer-events:none"><div class="sk" style="height:260px"></div><div class="pb"><div class="sk" style="height:26px;width:42%;margin-bottom:9px"></div><div class="sk" style="height:13px;margin-bottom:6px"></div><div class="sk" style="height:13px;width:60%"></div></div></div>
@@ -1652,7 +1656,7 @@ button svg, a.btn-p svg, a.btn-g svg {
     <div class="rv sr">
       <div class="eyebrow" style="color:var(--oro)">I nostri punti di forza</div>
       <h2 class="sec-h2 w">Perché sceglierci</h2>
-      <p class="sec-p" style="color:rgba(255,255,255,0.5)">25 anni sul territorio. Non siamo una catena: siamo una famiglia che conosce ogni quartiere, ogni prezzo, ogni opportunità della provincia.</p>
+      <p class="sec-p" style="color:rgba(255,255,255,0.7)">25 anni sul territorio. Non siamo una catena: siamo una famiglia che conosce ogni quartiere, ogni prezzo, ogni opportunità della provincia.</p>
     </div>
     <div class="perche-grid sr-stagger" style="margin-top:48px">
       <div class="perche-list">
@@ -1691,7 +1695,7 @@ button svg, a.btn-p svg, a.btn-g svg {
           <div class="stima-card-title">📊 Calcola il Valore</div>
           <div class="sf-grid">
             <div class="sf-g" style="grid-column:1/-1">
-              <label>Comune</label>
+              <label for="st-comune">Comune</label>
               <select id="st-comune">
                 <option value="">Seleziona comune...</option>
                 <option value="padova">Padova (città)</option>
@@ -1725,7 +1729,7 @@ button svg, a.btn-p svg, a.btn-g svg {
               </select>
             </div>
             <div class="sf-g">
-              <label>Tipologia</label>
+              <label for="st-tipo">Tipologia</label>
               <select id="st-tipo">
                 <option value="appartamento">Appartamento</option>
                 <option value="bilocale">Bilocale</option>
@@ -1741,11 +1745,11 @@ button svg, a.btn-p svg, a.btn-g svg {
               </select>
             </div>
             <div class="sf-g">
-              <label>Superficie (mq)</label>
+              <label for="st-mq">Superficie (mq)</label>
               <input type="number" id="st-mq" placeholder="Es: 85" min="5">
             </div>
             <div class="sf-g" style="grid-column:1/-1">
-              <label>Stato dell'immobile</label>
+              <label for="st-stato">Stato dell'immobile</label>
               <select id="st-stato">
                 <option value="buono">Buono stato</option>
                 <option value="ottimo">Ottimo / Rifinito</option>
@@ -1756,7 +1760,7 @@ button svg, a.btn-p svg, a.btn-g svg {
             </div>
           </div>
           <button class="btn-calc" onclick="calcolaStima()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/></svg>
             Calcola Stima di Mercato
           </button>
           <div id="stima-result">
@@ -1782,7 +1786,7 @@ button svg, a.btn-p svg, a.btn-g svg {
   <div class="blog-inner">
     <div class="blog-head rv sr">
       <div><div class="eyebrow">Aggiornamenti e guide</div><h2 class="sec-h2">Dal Blog</h2></div>
-      <a href="blog.html" class="link-all">Tutti gli articoli<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="blog.html" class="link-all">Tutti gli articoli<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
     <div class="blog-grid sr-stagger" id="blogGridHome">
       <div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--grigio);font-size:.85rem">Caricamento articoli...</div>
@@ -1816,7 +1820,7 @@ button svg, a.btn-p svg, a.btn-g svg {
         <span class="t-chip">🌱 Aree Rurali &amp; Agricole</span>
       </div>
       <a href="immobili.html" class="btn-territorio" title="Vedi tutti gli immobili in provincia di Padova" style="margin-top:28px">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:17px;height:17px;flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:17px;height:17px;flex-shrink:0" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         Esplora tutti gli immobili
       </a>
     </div>
@@ -1889,7 +1893,7 @@ button svg, a.btn-p svg, a.btn-g svg {
         </div>
       </div>
       <a href="chi-siamo.html" class="cs-cta">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:15px;height:15px;flex-shrink:0"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:15px;height:15px;flex-shrink:0" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
         Scopri chi siamo
       </a>
     </div>
@@ -1982,12 +1986,12 @@ button svg, a.btn-p svg, a.btn-g svg {
       <h2 class="fc-title">Parliamo del<br>tuo <span>immobile</span></h2>
       <form id="contattoForm" onsubmit="inviaContatto(event)">
         <div class="fc-grid">
-          <div class="fc-group"><label>Nome *</label><input type="text" id="cf-nome" placeholder="Mario" required></div>
-          <div class="fc-group"><label>Cognome *</label><input type="text" id="cf-cognome" placeholder="Rossi" required></div>
-          <div class="fc-group"><label>Email *</label><input type="email" id="cf-email" placeholder="mario@email.it" required></div>
-          <div class="fc-group"><label>Telefono *</label><input type="tel" id="cf-tel" placeholder="+39 340 000 0000" required></div>
+          <div class="fc-group"><label for="cf-nome">Nome *</label><input type="text" id="cf-nome" placeholder="Mario" required></div>
+          <div class="fc-group"><label for="cf-cognome">Cognome *</label><input type="text" id="cf-cognome" placeholder="Rossi" required></div>
+          <div class="fc-group"><label for="cf-email">Email *</label><input type="email" id="cf-email" placeholder="mario@email.it" required></div>
+          <div class="fc-group"><label for="cf-tel">Telefono *</label><input type="tel" id="cf-tel" placeholder="+39 340 000 0000" required></div>
           <div class="fc-group full">
-            <label>Tipo di interesse</label>
+            <label for="cf-interesse">Tipo di interesse</label>
             <select id="cf-interesse">
               <option value="">Seleziona...</option>
               <option value="vendere">Voglio vendere il mio immobile</option>
@@ -1999,10 +2003,10 @@ button svg, a.btn-p svg, a.btn-g svg {
               <option value="altro">Altro</option>
             </select>
           </div>
-          <div class="fc-group full"><label>Messaggio</label><textarea id="cf-msg" placeholder="Descrivi la tua esigenza... (opzionale)"></textarea></div>
+          <div class="fc-group full"><label for="cf-msg">Messaggio</label><textarea id="cf-msg" placeholder="Descrivi la tua esigenza... (opzionale)"></textarea></div>
         </div>
         <button type="submit" class="btn-send">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           Invia Richiesta
         </button>
         <div class="fc-privacy">Inviando il modulo accetti la nostra <a href="privacy.html">Privacy Policy</a>. I tuoi dati saranno usati esclusivamente per rispondere alla tua richiesta.</div>
@@ -2011,6 +2015,8 @@ button svg, a.btn-p svg, a.btn-g svg {
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -2036,7 +2042,7 @@ button svg, a.btn-p svg, a.btn-g svg {
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/config.js"></script>
-<script src="js/chatbot.js"></script>
+<script src="js/chatbot.js" defer></script>
 <script>
 /* ══ SUPABASE ══ */
 const SB_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
@@ -2173,13 +2179,13 @@ function renderProps(arr){
         <div class="pp">${price}</div>
         <div class="pn">${p.titolo||'Immobile a '+p.comune}</div>
         <div class="ploc">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           ${p.comune||'Padova'}${p.indirizzo?' — '+p.indirizzo:''}
         </div>
         <div class="pfeats">
-          ${p.superficie?`<span class="pfeat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block"><rect x="3" y="3" width="18" height="18" rx="1"/></svg>${p.superficie} mq</span>`:''}
-          ${p.locali?`<span class="pfeat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>${p.locali} loc.</span>`:''}
-          ${p.bagni?`<span class="pfeat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block"><path d="M4 12h16M4 6h16M4 18h16"/></svg>${p.bagni} bagni</span>`:''}
+          ${p.superficie?`<span class="pfeat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/></svg>${p.superficie} mq</span>`:''}
+          ${p.locali?`<span class="pfeat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>${p.locali} loc.</span>`:''}
+          ${p.bagni?`<span class="pfeat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><path d="M4 12h16M4 6h16M4 18h16"/></svg>${p.bagni} bagni</span>`:''}
         </div>
       </div>
     </a>`;
@@ -2399,8 +2405,8 @@ function loadVideo(wrap) {
   wrap.appendChild(ifr);
 }
 </script>
-<script src="js/nav-mobile.js"></script>
-<script src="js/cookie-consent.js"></script>
+<script src="js/nav-mobile.js" defer></script>
+<script src="js/cookie-consent.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
 <script src="js/welcome-popup.js" defer></script>
 </body>

@@ -40,10 +40,10 @@
     .hlogo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff;text-decoration:none}
     .hlogo span{color:var(--oro);font-style:italic}
     .hnav{display:flex;align-items:center;gap:.2rem;flex:1}
-    .hnav a{color:rgba(255,255,255,.55);font-size:.82rem;text-decoration:none;padding:.4rem .8rem;border-radius:2px;transition:color .2s}
+    .hnav a{color:rgba(255,255,255,.7);font-size:.82rem;text-decoration:none;padding:.4rem .8rem;border-radius:2px;transition:color .2s}
     .hnav a:hover{color:#fff}
     .h-cta{display:flex;align-items:center;gap:.65rem}
-    .h-tel{color:rgba(255,255,255,.6);font-size:.78rem;text-decoration:none;display:flex;align-items:center;gap:.35rem}
+    .h-tel{color:rgba(255,255,255,.75);font-size:.78rem;text-decoration:none;display:flex;align-items:center;gap:.35rem}
     .h-tel:hover{color:#fff}
     .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:2px;font-size:.76rem;font-weight:500;text-decoration:none;letter-spacing:.04em}
 
@@ -279,16 +279,19 @@
     .error-page h2{font-family:'Cormorant Garamond',serif;font-size:2rem;color:#fff}
 
     /* FOOTER */
-    footer{background:var(--nero);color:rgba(255,255,255,.4);padding:2rem 1.5rem;margin-top:2rem}
+    footer{background:var(--nero);color:rgba(255,255,255,.6);padding:2rem 1.5rem;margin-top:2rem}
     .footer-inner{max-width:1380px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.76rem}
     .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#fff}
     .footer-logo span{color:var(--oro);font-style:italic}
     .footer-links{display:flex;gap:1rem;flex-wrap:wrap}
-    .footer-links a{color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}
+    .footer-links a{color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s}
     .footer-links a:hover{color:var(--oro)}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
   </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
 <!-- LOADING -->
 <div id="loadingScreen">
@@ -311,7 +314,7 @@
     </nav>
     <div class="h-cta">
       <a class="h-tel" href="tel:+390498843484">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
         049 884 3484
       </a>
       <a class="h-btn" href="contatti.html">Valutazione gratuita</a>
@@ -329,17 +332,18 @@
   <a href="contatti.html" class="nav-mobile-cta">Contattaci</a>
 </div>
 
+<main id="main-content">
 <!-- BREADCRUMB -->
 <div class="breadcrumb">
   <div class="bc-inner" id="breadcrumb">
     <a href="index.html">Home</a>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
     <a href="immobili.html">Immobili</a>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
     <span id="bc-tipo">Caricamento...</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
     <span id="bc-comune">—</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
     <span id="bc-rif">—</span>
   </div>
 </div>
@@ -348,7 +352,7 @@
 <div class="gallery-wrap" id="galleryWrap">
   <div class="gallery-main" onclick="openLightbox(0)" id="galleryMain">
     <div class="gallery-no-foto" id="galleryPlaceholder">
-      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
       <p style="font-size:.8rem">Foto non disponibili</p>
     </div>
     <div class="gallery-overlay"></div>
@@ -359,7 +363,7 @@
     </div>
     <div class="gallery-controls">
       <button class="gc-btn" onclick="event.stopPropagation();openLightbox(0)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
         <span id="fotoCountHero">0 foto</span>
       </button>
     </div>
@@ -381,7 +385,7 @@
         Tutte le informazioni in un PDF elegante da condividere o stampare
       </div>
       <button class="pdf-banner-btn" onclick="downloadPDF()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         <span>Scarica PDF</span>
       </button>
     </div>
@@ -401,7 +405,7 @@
 
     <!-- INFO -->
     <div class="s-box" id="s-info">
-      <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg><h2>Informazioni principali</h2></div>
+      <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg><h2>Informazioni principali</h2></div>
       <div class="s-body">
         <div class="specs-grid" id="specsGrid"></div>
         <div class="char-grid">
@@ -413,29 +417,29 @@
 
     <!-- DESC -->
     <div class="s-box" id="s-desc">
-      <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><h2>Descrizione</h2></div>
+      <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><h2>Descrizione</h2></div>
       <div class="s-body"><div class="desc-text" id="descText">—</div></div>
     </div>
 
     <!-- DETTAGLI -->
     <div class="s-box" id="s-dettagli">
-      <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/></svg><h2>Dettagli e comfort</h2></div>
+      <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/></svg><h2>Dettagli e comfort</h2></div>
       <div class="s-body" id="dettagliBody"></div>
     </div>
 
     <!-- ENERGIA -->
     <div class="s-box" id="s-energia">
-      <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><h2>Prestazione Energetica (APE)</h2></div>
+      <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><h2>Prestazione Energetica (APE)</h2></div>
       <div class="s-body" id="energiaBody"></div>
     </div>
 
     <!-- VIDEO (hidden if no YT) -->
     <div class="s-box" id="s-video" style="display:none">
-      <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 001.95-1.97A29 29 0 0023 12a29 29 0 00-.46-5.58z"/></svg><h2>Video dell'immobile</h2></div>
+      <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 001.95-1.97A29 29 0 0023 12a29 29 0 00-.46-5.58z"/></svg><h2>Video dell'immobile</h2></div>
       <div class="s-body">
         <div class="yt-embed" id="ytBox">
           <div class="yt-ph" onclick="loadYT()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 001.95-1.97A29 29 0 0023 12a29 29 0 00-.46-5.58z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 001.95-1.97A29 29 0 0023 12a29 29 0 00-.46-5.58z"/></svg>
             <p>Clicca per vedere il video</p>
           </div>
         </div>
@@ -444,7 +448,7 @@
 
     <!-- VIRTUAL TOUR -->
     <div class="s-box" id="s-tour" style="display:none">
-      <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><h2>Virtual Tour 360°</h2></div>
+      <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><h2>Virtual Tour 360°</h2></div>
       <div class="s-body">
         <div class="vt-embed" id="vtBox"></div>
       </div>
@@ -452,22 +456,22 @@
 
     <!-- PLANIMETRIE -->
     <div class="s-box" id="s-planimetria" style="display:none">
-      <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><h2>Planimetria</h2></div>
+      <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><h2>Planimetria</h2></div>
       <div class="s-body" id="planimetriaBody"></div>
     </div>
 
     <!-- MAPPA -->
     <div class="s-box" id="s-mappa">
-      <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/></svg><h2>Posizione</h2></div>
+      <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/></svg><h2>Posizione</h2></div>
       <div class="s-body">
         <div class="map-embed" id="mapEmbed">
           <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;color:var(--grigio)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36" aria-hidden="true"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/></svg>
             <p id="mapText" style="font-size:.84rem">Caricamento mappa...</p>
           </div>
         </div>
         <div class="map-note">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11" style="color:var(--oro)"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11" style="color:var(--oro)" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
           La posizione indicata è approssimativa per tutelare la privacy del venditore.
         </div>
       </div>
@@ -475,7 +479,7 @@
 
     <!-- SIMILI -->
     <div class="s-box" id="s-simili">
-      <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg><h2>Immobili simili</h2></div>
+      <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg><h2>Immobili simili</h2></div>
       <div class="s-body"><div class="simili-grid" id="similiGrid"><p style="color:var(--grigio);font-size:.84rem">Caricamento...</p></div></div>
     </div>
   </div>
@@ -491,19 +495,19 @@
         <div id="priceRows"></div>
         <div class="price-cta-row">
           <button class="cta-primary" onclick="scrollToForm()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
             Richiedi informazioni
           </button>
           <button class="cta-secondary" onclick="prenotaVisita()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             Prenota visita
           </button>
           <button class="cta-pdf" onclick="downloadPDF()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             <span>📄 Scarica Scheda PDF</span>
           </button>
           <button class="cta-secondary" onclick="window.print()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
             Stampa
           </button>
         </div>
@@ -523,19 +527,19 @@
         </div>
         <div class="agent-contacts">
           <a href="tel:+393488621888" class="agent-contact">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
             348 862 1888 (cell.)
           </a>
           <a href="tel:+390498843484" class="agent-contact">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
             049 884 3484 (ufficio)
           </a>
           <a href="mailto:info@righttoimmobiliare.it" class="agent-contact">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             info@righettoimmobiliare.it
           </a>
           <a id="waLink" href="#" class="agent-contact" target="_blank" style="background:#25d366;border-color:#25d366;color:#fff;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
             Scrivi su WhatsApp
           </a>
         </div>
@@ -550,17 +554,22 @@
       </div>
       <div class="side-body">
         <div class="form-fields">
+          <label for="f-nome" class="sr-only">Nome e cognome</label>
           <input type="text" placeholder="Nome e cognome *" id="f-nome">
+          <label for="f-tel" class="sr-only">Telefono</label>
           <input type="tel" placeholder="Telefono *" id="f-tel">
-          <input type="email" placeholder="Email">
+          <label for="f-email" class="sr-only">Email</label>
+          <input type="email" placeholder="Email" id="f-email">
+          <label for="f-interesse" class="sr-only">Tipo di richiesta</label>
           <select id="f-interesse">
             <option value="">Tipo di richiesta</option>
             <option>Voglio fissare una visita</option>
             <option>Voglio maggiori informazioni</option>
             <option>Voglio fare una proposta</option>
           </select>
+          <label for="f-msg" class="sr-only">Messaggio</label>
           <textarea placeholder="Messaggio..." id="f-msg"></textarea>
-          <label class="form-check">
+          <label class="form-check" for="f-gdpr">
             <input type="checkbox" id="f-gdpr">
             Acconsento al trattamento dei dati personali (GDPR)
           </label>
@@ -573,12 +582,12 @@
     <div class="side-box">
       <div class="side-body">
         <button class="fav-big" id="fav-btn" onclick="toggleFav()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
           Aggiungi ai preferiti
         </button>
         <div class="share-row">
-          <button class="share-btn" onclick="shareLink()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Condividi</button>
-          <button class="share-btn" onclick="copyLink()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copia link</button>
+          <button class="share-btn" onclick="shareLink()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Condividi</button>
+          <button class="share-btn" onclick="copyLink()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copia link</button>
         </div>
       </div>
     </div>
@@ -591,7 +600,7 @@
 <!-- ERROR PAGE (hidden) -->
 <div id="errorPage" style="display:none">
   <div class="error-page">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="60" height="60" style="opacity:.3"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="60" height="60" style="opacity:.3" aria-hidden="true"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>
     <h2>Immobile non trovato</h2>
     <p style="font-size:.9rem">L'immobile potrebbe essere stato rimosso o il link non è valido.</p>
     <a href="immobili.html" style="margin-top:1rem;background:var(--oro);color:var(--nero);padding:.65rem 1.4rem;border-radius:2px;text-decoration:none;font-size:.82rem;font-weight:600">← Vedi tutti gli immobili</a>
@@ -601,9 +610,9 @@
 <!-- LIGHTBOX -->
 <div class="lb-overlay" id="lb" onclick="if(event.target===this)closeLB()">
   <img class="lb-img" id="lbImg" src="" alt="">
-  <button class="lb-close" onclick="closeLB()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-  <button class="lb-prev" onclick="lbNav(-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
-  <button class="lb-next" onclick="lbNav(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+  <button class="lb-close" onclick="closeLB()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <button class="lb-prev" onclick="lbNav(-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <button class="lb-next" onclick="lbNav(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
   <div class="lb-counter" id="lbCounter">1 / 1</div>
 </div>
 
@@ -624,12 +633,14 @@
     <div class="chat-actions" id="chatActions"></div>
   </div>
   <div class="chat-toggle" onclick="toggleChat()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
   </div>
 </div>
 
 <!-- TOAST -->
-<div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span id="toastMsg"></span></div>
+<div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span id="toastMsg"></span></div>
+
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -647,7 +658,7 @@
       <a href="cookie-policy.html">Cookie Policy</a>
       <a href="#" data-cookie-prefs>Preferenze Cookie</a>
     </div>
-    <div>© 2025 Gruppo Immobiliare Righetto di Capon Gino</div>
+    <div>© 2026 Gruppo Immobiliare Righetto di Capon Gino</div>
   </div>
 </footer>
 
@@ -996,7 +1007,7 @@ function renderGallery(d, fotos) {
 }
 
 function renderDettagli(d) {
-  const check = (icon, label) => `<span class="ctag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>${icon} ${label}</span>`;
+  const check = (icon, label) => `<span class="ctag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>${icon} ${label}</span>`;
   let html = '';
 
   // Ambienti
@@ -1617,8 +1628,8 @@ function toggleChat() {
 init();
 </script>
 <!-- Chatbot globale disabilitato su questa pagina: usa il chatbot dedicato all'immobile -->
-<script src="js/nav-mobile.js"></script>
-<script src="js/cookie-consent.js"></script>
+<script src="js/nav-mobile.js" defer></script>
+<script src="js/cookie-consent.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
 <script src="js/welcome-popup.js" defer></script>
 </body>
