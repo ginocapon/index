@@ -79,7 +79,7 @@
     .sb-zona{flex:1;min-width:200px}
     .sb-zona-wrap{position:relative}
     .sb-zona-wrap svg{position:absolute;left:.6rem;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--grigio);pointer-events:none}
-    .sb-zona-wrap input{padding-left:2rem!important;width:100%}
+    .sb-zona-wrap input,.sb-zona-wrap select{padding-left:2rem!important;width:100%}
     .sb-sep{width:1px;height:36px;background:var(--gc);flex-shrink:0}
     .sb-search-btn{background:var(--nero);color:#fff;padding:.6rem 1.6rem;border:none;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s,transform .15s;display:flex;align-items:center;gap:.45rem;white-space:nowrap;flex-shrink:0}
     .sb-search-btn:hover{background:var(--oro);color:var(--nero);transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,212,74,.2)}
@@ -368,7 +368,121 @@
     <div class="search-box">
       <div class="sb-field sb-zona">
         <label>Dove cerchi?</label>
-        <div class="sb-zona-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><input type="text" id="zona-input" placeholder="Comune, quartiere, via..." oninput="filterCards()"></div>
+        <div class="sb-zona-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><select id="zona-input" onchange="filterCards()">
+          <option value="">Tutta la provincia</option>
+          <optgroup label="Padova">
+            <option value="padova">Padova (tutta)</option>
+            <option value="padova centro">Padova Centro</option>
+            <option value="padova periferia">Padova Periferia</option>
+          </optgroup>
+          <optgroup label="Comuni della Provincia">
+            <option value="Abano Terme">Abano Terme</option>
+            <option value="Agna">Agna</option>
+            <option value="Albignasego">Albignasego</option>
+            <option value="Anguillara Veneta">Anguillara Veneta</option>
+            <option value="Arquà Petrarca">Arquà Petrarca</option>
+            <option value="Arre">Arre</option>
+            <option value="Arzergrande">Arzergrande</option>
+            <option value="Bagnoli di Sopra">Bagnoli di Sopra</option>
+            <option value="Baone">Baone</option>
+            <option value="Barbona">Barbona</option>
+            <option value="Battaglia Terme">Battaglia Terme</option>
+            <option value="Boara Pisani">Boara Pisani</option>
+            <option value="Borgo Veneto">Borgo Veneto</option>
+            <option value="Borgoricco">Borgoricco</option>
+            <option value="Bovolenta">Bovolenta</option>
+            <option value="Brugine">Brugine</option>
+            <option value="Cadoneghe">Cadoneghe</option>
+            <option value="Campodarsego">Campodarsego</option>
+            <option value="Campodoro">Campodoro</option>
+            <option value="Camposampiero">Camposampiero</option>
+            <option value="Campo San Martino">Campo San Martino</option>
+            <option value="Candiana">Candiana</option>
+            <option value="Carceri">Carceri</option>
+            <option value="Carmignano di Brenta">Carmignano di Brenta</option>
+            <option value="Cartura">Cartura</option>
+            <option value="Casale di Scodosia">Casale di Scodosia</option>
+            <option value="Casalserugo">Casalserugo</option>
+            <option value="Castelbaldo">Castelbaldo</option>
+            <option value="Cervarese Santa Croce">Cervarese Santa Croce</option>
+            <option value="Cinto Euganeo">Cinto Euganeo</option>
+            <option value="Cittadella">Cittadella</option>
+            <option value="Codevigo">Codevigo</option>
+            <option value="Conselve">Conselve</option>
+            <option value="Correzzola">Correzzola</option>
+            <option value="Curtarolo">Curtarolo</option>
+            <option value="Due Carrare">Due Carrare</option>
+            <option value="Este">Este</option>
+            <option value="Fontaniva">Fontaniva</option>
+            <option value="Galliera Veneta">Galliera Veneta</option>
+            <option value="Galzignano Terme">Galzignano Terme</option>
+            <option value="Gazzo">Gazzo</option>
+            <option value="Grantorto">Grantorto</option>
+            <option value="Granze">Granze</option>
+            <option value="Legnaro">Legnaro</option>
+            <option value="Limena">Limena</option>
+            <option value="Loreggia">Loreggia</option>
+            <option value="Lozzo Atestino">Lozzo Atestino</option>
+            <option value="Maserà di Padova">Maserà di Padova</option>
+            <option value="Masi">Masi</option>
+            <option value="Massanzago">Massanzago</option>
+            <option value="Megliadino San Vitale">Megliadino San Vitale</option>
+            <option value="Merlara">Merlara</option>
+            <option value="Mestrino">Mestrino</option>
+            <option value="Monselice">Monselice</option>
+            <option value="Montagnana">Montagnana</option>
+            <option value="Montegrotto Terme">Montegrotto Terme</option>
+            <option value="Noventa Padovana">Noventa Padovana</option>
+            <option value="Ospedaletto Euganeo">Ospedaletto Euganeo</option>
+            <option value="Pernumia">Pernumia</option>
+            <option value="Piacenza d'Adige">Piacenza d'Adige</option>
+            <option value="Piazzola sul Brenta">Piazzola sul Brenta</option>
+            <option value="Piombino Dese">Piombino Dese</option>
+            <option value="Piove di Sacco">Piove di Sacco</option>
+            <option value="Polverara">Polverara</option>
+            <option value="Ponso">Ponso</option>
+            <option value="Ponte San Nicolò">Ponte San Nicolò</option>
+            <option value="Pontelongo">Pontelongo</option>
+            <option value="Pozzonovo">Pozzonovo</option>
+            <option value="Rovolon">Rovolon</option>
+            <option value="Rubano">Rubano</option>
+            <option value="Saccolongo">Saccolongo</option>
+            <option value="San Giorgio delle Pertiche">San Giorgio delle Pertiche</option>
+            <option value="San Giorgio in Bosco">San Giorgio in Bosco</option>
+            <option value="San Martino di Lupari">San Martino di Lupari</option>
+            <option value="San Pietro in Gu">San Pietro in Gu</option>
+            <option value="San Pietro Viminario">San Pietro Viminario</option>
+            <option value="Sant'Angelo di Piove di Sacco">Sant'Angelo di Piove di Sacco</option>
+            <option value="Sant'Elena">Sant'Elena</option>
+            <option value="Santa Giustina in Colle">Santa Giustina in Colle</option>
+            <option value="Sant'Urbano">Sant'Urbano</option>
+            <option value="Saonara">Saonara</option>
+            <option value="Selvazzano Dentro">Selvazzano Dentro</option>
+            <option value="Solesino">Solesino</option>
+            <option value="Stanghella">Stanghella</option>
+            <option value="Teolo">Teolo</option>
+            <option value="Terrassa Padovana">Terrassa Padovana</option>
+            <option value="Tombolo">Tombolo</option>
+            <option value="Torreglia">Torreglia</option>
+            <option value="Trebaseleghe">Trebaseleghe</option>
+            <option value="Tribano">Tribano</option>
+            <option value="Urbana">Urbana</option>
+            <option value="Veggiano">Veggiano</option>
+            <option value="Vescovana">Vescovana</option>
+            <option value="Vighizzolo d'Este">Vighizzolo d'Este</option>
+            <option value="Vigodarzere">Vigodarzere</option>
+            <option value="Vigonza">Vigonza</option>
+            <option value="Villa del Conte">Villa del Conte</option>
+            <option value="Villa Estense">Villa Estense</option>
+            <option value="Villafranca Padovana">Villafranca Padovana</option>
+            <option value="Vo'">Vo'</option>
+          </optgroup>
+          <optgroup label="Zone">
+            <option value="Colli Euganei">Colli Euganei</option>
+            <option value="Basso Padovano">Basso Padovano</option>
+            <option value="Riviera del Brenta">Riviera del Brenta</option>
+          </optgroup>
+        </select></div>
       </div>
       <div class="sb-sep"></div>
       <div class="sb-field">
@@ -691,12 +805,13 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // ── CONFIG SUPABASE ──
   const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
-  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  let sb;
+  try { sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) { console.error('Supabase init error:', e); }
   window._sb = sb;
 
   let immobili = [];
@@ -1002,7 +1117,85 @@
     document.body.style.overflow = '';
   }
 
+  // ── APPLICA PARAMETRI URL (dalla ricerca homepage) ──
+  function applyUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get('tab');
+    const tipo = params.get('tipo');
+    const zona = params.get('zona');
+    const prezzoMax = params.get('prezzo_max');
+    const mqMin = params.get('mq_min');
+
+    // Attiva il tab corretto
+    if (tab && ['vendita', 'affitto', 'aste'].includes(tab)) {
+      currentOp = tab;
+      const tabLabels = { vendita: 'Acquisto', affitto: 'Affitto', aste: 'Aste' };
+      document.querySelectorAll('.s-tab').forEach(t => {
+        t.classList.toggle('active', t.textContent.trim() === tabLabels[tab]);
+      });
+    }
+
+    // Imposta il valore zona — cerca corrispondenza nel select
+    if (zona) {
+      const zonaSelect = document.getElementById('zona-input');
+      const zonaLower = zona.toLowerCase();
+      let matched = false;
+      for (const opt of zonaSelect.options) {
+        if (opt.value && opt.value.toLowerCase() === zonaLower) {
+          zonaSelect.value = opt.value;
+          matched = true;
+          break;
+        }
+      }
+      // Fallback: cerca per inclusione parziale
+      if (!matched) {
+        for (const opt of zonaSelect.options) {
+          if (opt.value && opt.value.toLowerCase().includes(zonaLower)) {
+            zonaSelect.value = opt.value;
+            break;
+          }
+        }
+      }
+    }
+
+    // Imposta tipologia
+    if (tipo) {
+      const fTipo = document.getElementById('f-tipo');
+      for (const opt of fTipo.options) {
+        if (opt.value === tipo) { fTipo.value = tipo; break; }
+      }
+    }
+
+    // Imposta prezzo massimo — trova l'opzione più vicina
+    if (prezzoMax) {
+      const pVal = parseInt(prezzoMax);
+      const fPrezzo = document.getElementById('f-prezzo');
+      let bestOpt = '';
+      for (const opt of fPrezzo.options) {
+        if (opt.value && parseInt(opt.value) >= pVal) { bestOpt = opt.value; break; }
+      }
+      if (bestOpt) fPrezzo.value = bestOpt;
+    }
+
+    // Imposta mq minimi — trova l'opzione più vicina
+    if (mqMin) {
+      const mVal = parseInt(mqMin);
+      const fMq = document.getElementById('f-mq');
+      let bestOpt = '';
+      for (const opt of fMq.options) {
+        if (opt.value && parseInt(opt.value) >= mVal) { bestOpt = opt.value; break; }
+      }
+      if (!bestOpt) {
+        // Prendi l'ultima opzione se il valore è superiore a tutti
+        const lastOpt = fMq.options[fMq.options.length - 1];
+        if (lastOpt.value) bestOpt = lastOpt.value;
+      }
+      if (bestOpt) fMq.value = bestOpt;
+    }
+  }
+
   // ── INIT ──
+  applyUrlParams();
   loadImmobili();
 </script>
 <script src="js/nav-mobile.js" defer></script>

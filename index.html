@@ -124,6 +124,7 @@ button{font-family:inherit;cursor:pointer}
 .r-field input { background-image: none; padding-right: 0; }
 .r-field input::placeholder { color: rgba(255,255,255,0.35); }
 .r-field select option { background: var(--testo); color: white; }
+.r-field select optgroup { background: var(--testo); color: rgba(255,255,255,0.55); font-style: normal; font-size: 0.78rem; }
 .r-btn-cerca {
   display: flex; align-items: center; justify-content: center;
   gap: 10px; padding: 0 36px;
@@ -1537,20 +1538,118 @@ button svg, a.btn-p svg, a.btn-g svg {
         <label for="r-zona">Zona / Comune</label>
         <select id="r-zona">
           <option value="">Tutta la provincia</option>
-          <option>Padova centro</option>
-          <option>Padova periferia</option>
-          <option>Albignasego</option>
-          <option>Selvazzano Dentro</option>
-          <option>Vigonza</option>
-          <option>Rubano</option>
-          <option>Abano Terme</option>
-          <option>Cittadella</option>
-          <option>Camposampiero</option>
-          <option>Monselice</option>
-          <option>Este</option>
-          <option>Colli Euganei</option>
-          <option>Basso Padovano</option>
-          <option>Riviera del Brenta</option>
+          <optgroup label="Padova">
+            <option value="padova">Padova (tutta)</option>
+            <option value="Padova centro">Padova Centro</option>
+            <option value="Padova periferia">Padova Periferia</option>
+          </optgroup>
+          <optgroup label="Comuni della Provincia">
+            <option>Abano Terme</option>
+            <option>Agna</option>
+            <option>Albignasego</option>
+            <option>Anguillara Veneta</option>
+            <option>Arquà Petrarca</option>
+            <option>Arre</option>
+            <option>Arzergrande</option>
+            <option>Bagnoli di Sopra</option>
+            <option>Baone</option>
+            <option>Barbona</option>
+            <option>Battaglia Terme</option>
+            <option>Boara Pisani</option>
+            <option>Borgo Veneto</option>
+            <option>Borgoricco</option>
+            <option>Bovolenta</option>
+            <option>Brugine</option>
+            <option>Cadoneghe</option>
+            <option>Campodarsego</option>
+            <option>Campodoro</option>
+            <option>Camposampiero</option>
+            <option>Campo San Martino</option>
+            <option>Candiana</option>
+            <option>Carceri</option>
+            <option>Carmignano di Brenta</option>
+            <option>Cartura</option>
+            <option>Casale di Scodosia</option>
+            <option>Casalserugo</option>
+            <option>Castelbaldo</option>
+            <option>Cervarese Santa Croce</option>
+            <option>Cinto Euganeo</option>
+            <option>Cittadella</option>
+            <option>Codevigo</option>
+            <option>Conselve</option>
+            <option>Correzzola</option>
+            <option>Curtarolo</option>
+            <option>Due Carrare</option>
+            <option>Este</option>
+            <option>Fontaniva</option>
+            <option>Galliera Veneta</option>
+            <option>Galzignano Terme</option>
+            <option>Gazzo</option>
+            <option>Grantorto</option>
+            <option>Granze</option>
+            <option>Legnaro</option>
+            <option>Limena</option>
+            <option>Loreggia</option>
+            <option>Lozzo Atestino</option>
+            <option>Maserà di Padova</option>
+            <option>Masi</option>
+            <option>Massanzago</option>
+            <option>Megliadino San Vitale</option>
+            <option>Merlara</option>
+            <option>Mestrino</option>
+            <option>Monselice</option>
+            <option>Montagnana</option>
+            <option>Montegrotto Terme</option>
+            <option>Noventa Padovana</option>
+            <option>Ospedaletto Euganeo</option>
+            <option>Pernumia</option>
+            <option>Piacenza d'Adige</option>
+            <option>Piazzola sul Brenta</option>
+            <option>Piombino Dese</option>
+            <option>Piove di Sacco</option>
+            <option>Polverara</option>
+            <option>Ponso</option>
+            <option>Ponte San Nicolò</option>
+            <option>Pontelongo</option>
+            <option>Pozzonovo</option>
+            <option>Rovolon</option>
+            <option>Rubano</option>
+            <option>Saccolongo</option>
+            <option>San Giorgio delle Pertiche</option>
+            <option>San Giorgio in Bosco</option>
+            <option>San Martino di Lupari</option>
+            <option>San Pietro in Gu</option>
+            <option>San Pietro Viminario</option>
+            <option>Sant'Angelo di Piove di Sacco</option>
+            <option>Sant'Elena</option>
+            <option>Santa Giustina in Colle</option>
+            <option>Sant'Urbano</option>
+            <option>Saonara</option>
+            <option>Selvazzano Dentro</option>
+            <option>Solesino</option>
+            <option>Stanghella</option>
+            <option>Teolo</option>
+            <option>Terrassa Padovana</option>
+            <option>Tombolo</option>
+            <option>Torreglia</option>
+            <option>Trebaseleghe</option>
+            <option>Tribano</option>
+            <option>Urbana</option>
+            <option>Veggiano</option>
+            <option>Vescovana</option>
+            <option>Vighizzolo d'Este</option>
+            <option>Vigodarzere</option>
+            <option>Vigonza</option>
+            <option>Villa del Conte</option>
+            <option>Villa Estense</option>
+            <option>Villafranca Padovana</option>
+            <option>Vo'</option>
+          </optgroup>
+          <optgroup label="Zone">
+            <option>Colli Euganei</option>
+            <option>Basso Padovano</option>
+            <option>Riviera del Brenta</option>
+          </optgroup>
         </select>
       </div>
       <div class="r-field">
