@@ -1935,6 +1935,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         Social
       </div>
+      <div class="nav-item" onclick="showSection('landing')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Landing Pages
+      </div>
       <div class="nav-item" onclick="showSection('agenda')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg>
         Agenda
@@ -3561,6 +3565,97 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         </div>
       </div>
 
+      <!-- ═══ SEZIONE LANDING PAGES ═══ -->
+      <div class="section" id="sec-landing">
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-num" id="statLandTot">0</div><div class="stat-label">Totale Landing</div></div>
+          <div class="stat-card blue"><div class="stat-num" id="statLandPub">0</div><div class="stat-label">Pubblicate</div></div>
+          <div class="stat-card green"><div class="stat-num" id="statLandProg">0</div><div class="stat-label">Programmate</div></div>
+          <div class="stat-card" style="border-left-color:var(--caffe2)"><div class="stat-num" id="statLandBozze">0</div><div class="stat-label">Bozze</div></div>
+        </div>
+
+        <div class="table-wrap">
+          <div class="table-head">
+            <div style="font-weight:600;font-size:0.9rem">Landing Pages</div>
+            <div style="display:flex;gap:10px">
+              <button class="btn btn-secondary btn-sm" onclick="pubblicaLandingSelezionate()">Pubblica selezionate</button>
+              <button class="btn btn-primary btn-sm" onclick="openLandingEditor()">+ Nuova Landing</button>
+            </div>
+          </div>
+          <div id="landingListWrap">
+            <div class="empty-state"><h3>Nessuna landing page</h3><p style="margin-top:8px">Clicca "+ Nuova Landing" per creare una landing page</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ EDITOR LANDING PAGE ═══ -->
+      <div class="section" id="sec-landing-editor">
+        <div class="table-wrap">
+          <div class="modal-header" style="border-radius:0">
+            <h2 id="landingEditorTitle">Nuova Landing Page</h2>
+            <button class="btn btn-secondary btn-sm" onclick="showSection('landing')">← Torna alla lista</button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="landingEditId">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Titolo Landing *</label>
+                <input type="text" id="l_titolo" placeholder="es. Valutazione gratuita immobile Padova">
+              </div>
+              <div class="form-group">
+                <label>Slug / Nome File</label>
+                <input type="text" id="l_slug" placeholder="es. landing-valutazione" style="font-family:monospace;font-size:.82rem">
+                <small style="color:var(--caffe2);font-size:.68rem">Nome del file HTML (senza .html). Se vuoto, generato dal titolo.</small>
+              </div>
+              <div class="form-group">
+                <label>Categoria / Tipo</label>
+                <select id="l_categoria">
+                  <option value="vendita">Vendita</option>
+                  <option value="valutazione">Valutazione</option>
+                  <option value="affitto">Affitto</option>
+                  <option value="agente">Agente</option>
+                  <option value="promozione">Promozione</option>
+                  <option value="evento">Evento</option>
+                  <option value="altro">Altro</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>URL Landing (se già esistente)</label>
+                <input type="text" id="l_url" placeholder="es. landing-valutazione.html">
+                <small style="color:var(--caffe2);font-size:.68rem">Se la pagina HTML esiste già nel sito, inserisci il nome del file.</small>
+              </div>
+              <div class="form-group">
+                <label>Data Pubblicazione Programmata</label>
+                <input type="datetime-local" id="l_data_pub">
+                <small style="color:var(--caffe2);font-size:.68rem">Lascia vuoto per pubblicare subito. Se impostata, la landing verrà attivata automaticamente a questa data.</small>
+              </div>
+              <div class="form-group">
+                <label>Data Fine (opzionale)</label>
+                <input type="datetime-local" id="l_data_fine">
+                <small style="color:var(--caffe2);font-size:.68rem">Se impostata, la landing verrà disattivata automaticamente.</small>
+              </div>
+              <div class="form-group form-full">
+                <label>Descrizione / Note</label>
+                <textarea id="l_descrizione" rows="3" placeholder="Note interne sulla landing page..."></textarea>
+              </div>
+              <div class="form-group form-full">
+                <label>Stato</label>
+                <div style="display:flex;gap:16px;margin-top:4px">
+                  <label class="check-item"><input type="radio" name="l_stato" value="pubblicata" checked> Pubblicata</label>
+                  <label class="check-item"><input type="radio" name="l_stato" value="programmata"> Programmata</label>
+                  <label class="check-item"><input type="radio" name="l_stato" value="bozza"> Bozza</label>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;margin-top:24px;justify-content:flex-end">
+              <button class="btn btn-secondary" onclick="showSection('landing')">Annulla</button>
+              <button class="btn btn-danger" id="btnDeleteLanding" onclick="deleteLandingPage()" style="display:none">Elimina</button>
+              <button class="btn btn-primary" onclick="saveLandingPage()">Salva Landing</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- ═══ SEZIONE IMPOSTAZIONI ═══ -->
       <div class="section" id="sec-impostazioni">
         <div class="table-wrap" style="padding:28px;max-width:600px">
@@ -3920,7 +4015,7 @@ function showSection(name) {
   const sec = document.getElementById('sec-' + name);
   if (sec) sec.classList.add('active');
   // Mark the correct nav-item as active
-  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','agenda','impostazioni'];
+  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','landing','agenda','impostazioni'];
   const idx = sectionNames.indexOf(name);
   const navItems = document.querySelectorAll('.nav-item');
   if (idx >= 0 && navItems[idx]) navItems[idx].classList.add('active');
@@ -3933,6 +4028,7 @@ function showSection(name) {
     blog: 'Gestione Blog',
     clienti: 'Gestione Clienti',
     social: 'Social Media',
+    landing: 'Landing Pages',
     agenda: 'Agenda Settimanale',
     impostazioni: 'Impostazioni'
   };
@@ -3942,6 +4038,7 @@ function showSection(name) {
   if (name === 'posta') initEmailSection();
   if (name === 'blog') loadBlogList();
   if (name === 'social') loadSocialSection();
+  if (name === 'landing') loadLandingList();
   if (name === 'agenda') loadAgendaSection();
   if (name === 'clienti') loadClienti();
   if (name === 'impostazioni') { testConn(); check2FAStatus(); }
@@ -4340,6 +4437,224 @@ async function toggleEvidenza(id, val) {
 async function toggleAttivo(id, val) {
   const { error } = await sb.from('immobili').update({ attivo: val }).eq('id', id);
   if (!error) { await loadImmobili(); toast(val ? '✅ Immobile attivato' : '🚫 Immobile disattivato'); }
+}
+
+// ══════════════════════════════════════
+// LANDING PAGES
+// ══════════════════════════════════════
+let landingPages = [];
+
+async function getLandingPages() {
+  try {
+    const { data, error } = await sb.from('landing_pages').select('*').order('created_at', { ascending: false });
+    if (error) throw error;
+    landingPages = data || [];
+  } catch(e) {
+    console.warn('Tabella landing_pages non disponibile, uso localStorage:', e.message);
+    try { landingPages = JSON.parse(localStorage.getItem('rig_landing_pages') || '[]'); } catch(ex) { landingPages = []; }
+  }
+  try { localStorage.setItem('rig_landing_pages', JSON.stringify(landingPages)); } catch(e) {}
+  return landingPages;
+}
+
+async function loadLandingList() {
+  const wrap = document.getElementById('landingListWrap');
+  wrap.innerHTML = '<div class="loading"><div class="spinner"></div> Caricamento landing pages...</div>';
+  const pages = await getLandingPages();
+
+  // Aggiorna contatori
+  checkScheduledLandings(pages);
+  const tot = pages.length;
+  const pub = pages.filter(p => p.stato === 'pubblicata').length;
+  const prog = pages.filter(p => p.stato === 'programmata').length;
+  const bozze = pages.filter(p => p.stato === 'bozza').length;
+  document.getElementById('statLandTot').textContent = tot;
+  document.getElementById('statLandPub').textContent = pub;
+  document.getElementById('statLandProg').textContent = prog;
+  document.getElementById('statLandBozze').textContent = bozze;
+
+  if (!tot) {
+    wrap.innerHTML = '<div class="empty-state"><h3>Nessuna landing page</h3><p style="margin-top:8px">Clicca "+ Nuova Landing" per aggiungere una landing page</p></div>';
+    return;
+  }
+
+  wrap.innerHTML = `<table><thead><tr><th style="width:30px"><input type="checkbox" id="landingCheckAll" onchange="toggleAllLanding(this.checked)"></th><th>Titolo</th><th>Tipo</th><th>URL</th><th>Stato</th><th>Pubblicazione</th><th>Azioni</th></tr></thead><tbody>${
+    pages.map(p => {
+      const statoBadge = p.stato === 'pubblicata' ? '<span class="badge badge-verde">Pubblicata</span>'
+        : p.stato === 'programmata' ? '<span class="badge badge-oro">Programmata</span>'
+        : '<span class="badge" style="background:var(--caffe3);color:#fff">Bozza</span>';
+      const dataPub = p.data_pubblicazione ? formatDateTime(p.data_pubblicazione) : '—';
+      const urlFile = p.url || (p.slug ? p.slug + '.html' : '—');
+      return `<tr>
+        <td><input type="checkbox" class="landing-check" value="${p.id}"></td>
+        <td><strong style="font-size:0.88rem">${esc(p.titolo)}</strong>${p.descrizione ? '<br><span style="font-size:0.72rem;color:var(--caffe2)">' + esc(p.descrizione).substring(0, 80) + '</span>' : ''}</td>
+        <td><span class="badge badge-blu">${esc(p.categoria || 'altro')}</span></td>
+        <td style="font-size:0.78rem;font-family:monospace"><a href="${esc(urlFile)}" target="_blank" style="color:var(--nero)">${esc(urlFile)}</a></td>
+        <td>${statoBadge}</td>
+        <td style="font-size:0.78rem">${dataPub}</td>
+        <td style="white-space:nowrap">
+          <button class="btn btn-sm btn-secondary" onclick="editLandingPage('${p.id}')">✏️ Modifica</button>
+          <button class="btn btn-sm btn-danger" onclick="deleteLandingById('${p.id}')">🗑️</button>
+        </td>
+      </tr>`;
+    }).join('')
+  }</tbody></table>`;
+}
+
+function formatDateTime(d) {
+  if (!d) return '';
+  const dt = new Date(d);
+  return dt.toLocaleDateString('it-IT', { day:'numeric', month:'short', year:'numeric' }) + ' ' + dt.toLocaleTimeString('it-IT', { hour:'2-digit', minute:'2-digit' });
+}
+
+function toggleAllLanding(checked) {
+  document.querySelectorAll('.landing-check').forEach(c => c.checked = checked);
+}
+
+function checkScheduledLandings(pages) {
+  const now = new Date();
+  pages.forEach(p => {
+    if (p.stato === 'programmata' && p.data_pubblicazione && new Date(p.data_pubblicazione) <= now) {
+      p.stato = 'pubblicata';
+      updateLandingStatus(p.id, 'pubblicata');
+    }
+    if (p.stato === 'pubblicata' && p.data_fine && new Date(p.data_fine) <= now) {
+      p.stato = 'bozza';
+      updateLandingStatus(p.id, 'bozza');
+    }
+  });
+}
+
+async function updateLandingStatus(id, stato) {
+  try {
+    await sb.from('landing_pages').update({ stato }).eq('id', id);
+  } catch(e) {
+    const idx = landingPages.findIndex(p => p.id === id);
+    if (idx >= 0) { landingPages[idx].stato = stato; try { localStorage.setItem('rig_landing_pages', JSON.stringify(landingPages)); } catch(ex) {} }
+  }
+}
+
+async function pubblicaLandingSelezionate() {
+  const checked = document.querySelectorAll('.landing-check:checked');
+  if (!checked.length) { toast('Seleziona almeno una landing page', 'error'); return; }
+  for (const c of checked) {
+    await updateLandingStatus(c.value, 'pubblicata');
+  }
+  toast('✅ ' + checked.length + ' landing page pubblicate!', 'success');
+  loadLandingList();
+}
+
+function openLandingEditor(id) {
+  document.getElementById('landingEditId').value = '';
+  document.getElementById('l_titolo').value = '';
+  document.getElementById('l_slug').value = '';
+  document.getElementById('l_categoria').value = 'vendita';
+  document.getElementById('l_url').value = '';
+  document.getElementById('l_data_pub').value = '';
+  document.getElementById('l_data_fine').value = '';
+  document.getElementById('l_descrizione').value = '';
+  document.querySelector('input[name=l_stato][value=pubblicata]').checked = true;
+  document.getElementById('btnDeleteLanding').style.display = 'none';
+  document.getElementById('landingEditorTitle').textContent = 'Nuova Landing Page';
+
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-landing-editor').classList.add('active');
+  document.getElementById('topbarTitle').textContent = 'Nuova Landing Page';
+}
+
+async function editLandingPage(id) {
+  const pages = landingPages.length ? landingPages : await getLandingPages();
+  const p = pages.find(x => x.id == id);
+  if (!p) { toast('Landing non trovata', 'error'); return; }
+
+  document.getElementById('landingEditId').value = p.id;
+  document.getElementById('l_titolo').value = p.titolo || '';
+  document.getElementById('l_slug').value = p.slug || '';
+  document.getElementById('l_categoria').value = p.categoria || 'altro';
+  document.getElementById('l_url').value = p.url || '';
+  document.getElementById('l_data_pub').value = p.data_pubblicazione ? p.data_pubblicazione.slice(0, 16) : '';
+  document.getElementById('l_data_fine').value = p.data_fine ? p.data_fine.slice(0, 16) : '';
+  document.getElementById('l_descrizione').value = p.descrizione || '';
+  const statoRadio = document.querySelector('input[name=l_stato][value="' + (p.stato || 'bozza') + '"]');
+  if (statoRadio) statoRadio.checked = true;
+  document.getElementById('btnDeleteLanding').style.display = '';
+  document.getElementById('landingEditorTitle').textContent = 'Modifica Landing';
+
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-landing-editor').classList.add('active');
+  document.getElementById('topbarTitle').textContent = 'Modifica Landing Page';
+}
+
+async function saveLandingPage() {
+  const titolo = document.getElementById('l_titolo').value.trim();
+  if (!titolo) { toast('Inserisci un titolo!', 'error'); return; }
+
+  const editId = document.getElementById('landingEditId').value;
+  const stato = document.querySelector('input[name=l_stato]:checked').value;
+  const slug = document.getElementById('l_slug').value.trim() || titolo.toLowerCase()
+    .replace(/[àáâãäå]/g,'a').replace(/[èéêë]/g,'e').replace(/[ìíîï]/g,'i')
+    .replace(/[òóôõö]/g,'o').replace(/[ùúûü]/g,'u').replace(/[ç]/g,'c')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,60);
+
+  const payload = {
+    titolo,
+    slug,
+    categoria: document.getElementById('l_categoria').value,
+    url: document.getElementById('l_url').value.trim() || slug + '.html',
+    data_pubblicazione: document.getElementById('l_data_pub').value ? new Date(document.getElementById('l_data_pub').value).toISOString() : null,
+    data_fine: document.getElementById('l_data_fine').value ? new Date(document.getElementById('l_data_fine').value).toISOString() : null,
+    descrizione: document.getElementById('l_descrizione').value.trim(),
+    stato,
+    updated_at: new Date().toISOString()
+  };
+
+  try {
+    let error;
+    if (editId) {
+      const res = await sb.from('landing_pages').update(payload).eq('id', editId);
+      error = res.error;
+    } else {
+      payload.created_at = new Date().toISOString();
+      const res = await sb.from('landing_pages').insert(payload);
+      error = res.error;
+    }
+    if (error) throw error;
+    toast('✅ Landing page salvata!', 'success');
+  } catch(e) {
+    console.warn('Errore salvataggio landing su Supabase:', e.message);
+    const page = { ...payload, id: editId || 'land_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6) };
+    if (!page.created_at) page.created_at = new Date().toISOString();
+    if (editId) {
+      const idx = landingPages.findIndex(p => p.id === editId);
+      if (idx >= 0) landingPages[idx] = page; else landingPages.push(page);
+    } else {
+      landingPages.push(page);
+    }
+    try { localStorage.setItem('rig_landing_pages', JSON.stringify(landingPages)); } catch(ex) {}
+    toast('✅ Landing salvata (locale)', 'success');
+  }
+  showSection('landing');
+}
+
+async function deleteLandingPage() {
+  const id = document.getElementById('landingEditId').value;
+  if (!id) return;
+  if (!confirm('Eliminare questa landing page?')) return;
+  await deleteLandingById(id);
+  showSection('landing');
+}
+
+async function deleteLandingById(id) {
+  if (!confirm('Confermi eliminazione?')) return;
+  try {
+    const { error } = await sb.from('landing_pages').delete().eq('id', id);
+    if (error) throw error;
+  } catch(e) {
+    landingPages = landingPages.filter(p => p.id !== id);
+    try { localStorage.setItem('rig_landing_pages', JSON.stringify(landingPages)); } catch(ex) {}
+  }
+  toast('🗑️ Landing eliminata', 'success');
+  loadLandingList();
 }
 
 function showSectionById(name) {
