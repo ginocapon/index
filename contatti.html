@@ -304,6 +304,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="js/nav-mobile.js" defer></script>
 <script src="js/config.js" defer></script>
+<script src="js/brevo-key.js" defer></script>
 <script>
 async function sendForm(){
   const nome = document.getElementById('f-nome').value.trim();
@@ -381,12 +382,12 @@ async function sendForm(){
   } catch(e) { supaOk = false; }
 
   // ── 3. BREVO — Iscrizione newsletter ──
-  if (news && email && SERVIZI_CONFIG.BREVO_FORM_URL) {
+  if (news && email && SERVIZI_CONFIG.BREVO_API_KEY) {
     try {
-      await fetch(SERVIZI_CONFIG.BREVO_FORM_URL, {
+      await fetch('https://api.brevo.com/v3/contacts', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email, attributes: { NOME: nomeCompleto, TELEFONO: tel } })
+        headers: { 'accept': 'application/json', 'content-type': 'application/json', 'api-key': SERVIZI_CONFIG.BREVO_API_KEY },
+        body: JSON.stringify({ email: email, attributes: { NOME: nomeCompleto, TELEFONO: tel, ZONA: zona || '', INTERESSE: 'generico', FONTE: 'form-contatti' }, listIds: [SERVIZI_CONFIG.BREVO_LIST_ID || 11], updateEnabled: true })
       });
     } catch(e) { /* newsletter non critica */ }
   }
