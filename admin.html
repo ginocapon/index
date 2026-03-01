@@ -1939,6 +1939,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         Landing Pages
       </div>
+      <div class="nav-item" onclick="showSection('newsletter')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Newsletter <span class="badge-count" id="badgeNewsletter" style="display:none">0</span>
+      </div>
       <div class="nav-item" onclick="showSection('agenda')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg>
         Agenda
@@ -3410,6 +3414,49 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         </div>
       </div>
 
+      <!-- ═══ SEZIONE NEWSLETTER ISCRITTI ═══ -->
+      <div class="section" id="sec-newsletter">
+        <div class="stats-row">
+          <div class="stat-card"><div class="stat-num" id="statNewsTot">0</div><div class="stat-label">Totale Iscritti</div></div>
+          <div class="stat-card blue"><div class="stat-num" id="statNewsAttivi">0</div><div class="stat-label">Attivi</div></div>
+          <div class="stat-card green"><div class="stat-num" id="statNewsVendita">0</div><div class="stat-label">Interesse Vendita</div></div>
+          <div class="stat-card red"><div class="stat-num" id="statNewsAcquisto">0</div><div class="stat-label">Interesse Acquisto</div></div>
+        </div>
+        <div class="section-header" style="margin-top:1.5rem">
+          <div>
+            <div style="font-weight:600;font-size:0.9rem">Iscritti Newsletter</div>
+            <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+              <select id="filtroNewsInteresse" onchange="loadNewsletterList()" style="padding:6px 10px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.78rem">
+                <option value="">Tutti gli interessi</option>
+                <option value="vendita">Vendita</option>
+                <option value="acquisto">Acquisto</option>
+                <option value="valutazione">Valutazione</option>
+                <option value="affitto">Affitto</option>
+                <option value="consulenza">Consulenza</option>
+                <option value="generico">Generico</option>
+              </select>
+              <select id="filtroNewsTipo" onchange="loadNewsletterList()" style="padding:6px 10px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.78rem">
+                <option value="">Tutti i tipi immobile</option>
+                <option value="Appartamento">Appartamento</option>
+                <option value="Villa / Villetta">Villa / Villetta</option>
+                <option value="Casa indipendente">Casa indipendente</option>
+                <option value="Bifamiliare">Bifamiliare</option>
+                <option value="Rustico / Casale">Rustico / Casale</option>
+                <option value="Terreno">Terreno</option>
+                <option value="Commerciale / Ufficio">Commerciale / Ufficio</option>
+              </select>
+              <input type="text" id="searchNews" placeholder="Cerca nome, email, zona..." oninput="filterNewsTable()" style="padding:6px 10px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.78rem;min-width:180px">
+            </div>
+          </div>
+          <div style="display:flex;gap:6px">
+            <button class="btn btn-secondary btn-sm" onclick="copyNewsEmails()" title="Copia tutte le email filtrate">Copia Email</button>
+          </div>
+        </div>
+        <div id="newsListWrap" style="margin-top:1rem">
+          <div class="loading"><div class="spinner"></div> Caricamento iscritti...</div>
+        </div>
+      </div>
+
       <!-- ═══ SEZIONE AGENDA SETTIMANALE ═══ -->
       <div class="section" id="sec-agenda">
 
@@ -4015,7 +4062,7 @@ function showSection(name) {
   const sec = document.getElementById('sec-' + name);
   if (sec) sec.classList.add('active');
   // Mark the correct nav-item as active
-  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','landing','agenda','impostazioni'];
+  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','landing','newsletter','agenda','impostazioni'];
   const idx = sectionNames.indexOf(name);
   const navItems = document.querySelectorAll('.nav-item');
   if (idx >= 0 && navItems[idx]) navItems[idx].classList.add('active');
@@ -4029,6 +4076,7 @@ function showSection(name) {
     clienti: 'Gestione Clienti',
     social: 'Social Media',
     landing: 'Landing Pages',
+    newsletter: 'Newsletter Iscritti',
     agenda: 'Agenda Settimanale',
     impostazioni: 'Impostazioni'
   };
@@ -4039,6 +4087,7 @@ function showSection(name) {
   if (name === 'blog') loadBlogList();
   if (name === 'social') loadSocialSection();
   if (name === 'landing') loadLandingList();
+  if (name === 'newsletter') loadNewsletterList();
   if (name === 'agenda') loadAgendaSection();
   if (name === 'clienti') loadClienti();
   if (name === 'impostazioni') { testConn(); check2FAStatus(); }
@@ -4660,6 +4709,88 @@ async function deleteLandingById(id) {
 function showSectionById(name) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById('sec-' + name).classList.add('active');
+}
+
+// ══════════════════════════════════════
+// NEWSLETTER ISCRITTI
+// ══════════════════════════════════════
+let allNewsSubscribers = [];
+
+async function loadNewsletterList() {
+  const wrap = document.getElementById('newsListWrap');
+  wrap.innerHTML = '<div class="loading"><div class="spinner"></div> Caricamento iscritti...</div>';
+  try {
+    const interesse = document.getElementById('filtroNewsInteresse').value;
+    const tipo = document.getElementById('filtroNewsTipo').value;
+    let query = sb.from('newsletter_subscribers').select('*').order('created_at', { ascending: false });
+    if (interesse) query = query.eq('interesse', interesse);
+    if (tipo) query = query.eq('tipo_immobile', tipo);
+    const { data, error } = await query;
+    if (error) throw error;
+    allNewsSubscribers = data || [];
+    renderNewsTable();
+    updateNewsStats();
+  } catch(e) {
+    console.warn('Errore caricamento newsletter:', e.message);
+    wrap.innerHTML = '<div class="empty-state"><h3>Tabella non trovata</h3><p style="margin-top:8px">Esegui l\'SQL per creare la tabella newsletter_subscribers su Supabase</p></div>';
+  }
+}
+
+function renderNewsTable() {
+  const wrap = document.getElementById('newsListWrap');
+  if (!allNewsSubscribers.length) {
+    wrap.innerHTML = '<div class="empty-state"><h3>Nessun iscritto</h3><p style="margin-top:8px">Gli iscritti appariranno qui quando qualcuno compila un form</p></div>';
+    return;
+  }
+  const interesseColors = { vendita:'badge-oro', acquisto:'badge-blu', valutazione:'badge-verde', affitto:'badge-grigio', consulenza:'badge-grigio', generico:'' };
+  wrap.innerHTML = `<table><thead><tr><th>Nome</th><th>Email</th><th>Telefono</th><th>Interesse</th><th>Tipo Immobile</th><th>Zona</th><th>Provenienza</th><th>Data</th><th>Stato</th></tr></thead><tbody>${
+    allNewsSubscribers.map(s => {
+      const badge = interesseColors[s.interesse] || '';
+      const dt = s.created_at ? new Date(s.created_at).toLocaleDateString('it-IT') : '';
+      return `<tr>
+        <td style="font-weight:600">${esc(s.nome || '—')}</td>
+        <td><a href="mailto:${esc(s.email)}" style="color:var(--nero)">${esc(s.email)}</a></td>
+        <td>${esc(s.telefono || '—')}</td>
+        <td><span class="badge ${badge}">${esc(s.interesse || 'generico')}</span></td>
+        <td>${esc(s.tipo_immobile || '—')}</td>
+        <td>${esc(s.zona || '—')}</td>
+        <td style="font-size:0.72rem">${esc(s.provenienza || s.fonte || '—')}</td>
+        <td style="font-size:0.72rem">${dt}</td>
+        <td>${s.attivo ? '<span class="badge badge-verde">Attivo</span>' : '<span class="badge badge-grigio">Inattivo</span>'}</td>
+      </tr>`;
+    }).join('')
+  }</tbody></table>`;
+}
+
+function updateNewsStats() {
+  document.getElementById('statNewsTot').textContent = allNewsSubscribers.length;
+  document.getElementById('statNewsAttivi').textContent = allNewsSubscribers.filter(s => s.attivo).length;
+  document.getElementById('statNewsVendita').textContent = allNewsSubscribers.filter(s => s.interesse === 'vendita').length;
+  document.getElementById('statNewsAcquisto').textContent = allNewsSubscribers.filter(s => s.interesse === 'acquisto').length;
+  const badge = document.getElementById('badgeNewsletter');
+  if (allNewsSubscribers.length > 0) { badge.style.display = 'inline'; badge.textContent = allNewsSubscribers.length; }
+  else { badge.style.display = 'none'; }
+}
+
+function filterNewsTable() {
+  const q = document.getElementById('searchNews').value.toLowerCase().trim();
+  const rows = document.querySelectorAll('#newsListWrap tbody tr');
+  rows.forEach(row => { row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none'; });
+}
+
+function copyNewsEmails() {
+  const interesse = document.getElementById('filtroNewsInteresse').value;
+  const tipo = document.getElementById('filtroNewsTipo').value;
+  let filtered = allNewsSubscribers.filter(s => s.attivo && s.email);
+  if (interesse) filtered = filtered.filter(s => s.interesse === interesse);
+  if (tipo) filtered = filtered.filter(s => s.tipo_immobile === tipo);
+  const emails = filtered.map(s => s.email).join(', ');
+  if (!emails) { toast('Nessuna email da copiare', 'error'); return; }
+  navigator.clipboard.writeText(emails).then(() => {
+    toast('Copiate ' + filtered.length + ' email negli appunti!', 'success');
+  }).catch(() => {
+    prompt('Copia manualmente:', emails);
+  });
 }
 
 // ══════════════════════════════════════
