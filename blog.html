@@ -234,8 +234,9 @@
       <div class="sb-b">
         <p style="font-size:.79rem;color:var(--grigio);margin-bottom:.75rem;line-height:1.7">Ricevi ogni mese gli aggiornamenti sul mercato immobiliare di Padova e i nuovi articoli direttamente nella tua email.</p>
         <div class="nl-form">
-          <input type="email" placeholder="La tua email">
-          <button class="nl-btn">Iscriviti alla newsletter</button>
+          <input type="email" id="nlEmail" placeholder="La tua email">
+          <button class="nl-btn" onclick="iscriviNewsletter()">Iscriviti alla newsletter</button>
+          <div id="nlMsg" style="display:none;font-size:.78rem;margin-top:.4rem;color:var(--oro);font-weight:500"></div>
         </div>
         <p style="font-size:.65rem;color:var(--grigio);margin-top:.45rem">Nessuno spam. Puoi cancellarti in qualsiasi momento.</p>
       </div>
@@ -261,7 +262,7 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // ══════════════════════════════
 // BLOG ENGINE — carica articoli da Supabase
@@ -440,6 +441,27 @@ function renderBlog() {
 }
 
 function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+
+// Newsletter iscrizione
+async function iscriviNewsletter() {
+  const email = (document.getElementById('nlEmail').value || '').trim();
+  const msgEl = document.getElementById('nlMsg');
+  if (!email || !email.includes('@')) { msgEl.style.display = 'block'; msgEl.style.color = '#e74c3c'; msgEl.textContent = 'Inserisci un\'email valida'; return; }
+  try {
+    if (sbBlog) {
+      await sbBlog.from('newsletter_subscribers').upsert([{
+        email: email,
+        fonte: 'blog-sidebar',
+        attivo: true,
+        created_at: new Date().toISOString()
+      }], { onConflict: 'email' });
+    }
+    msgEl.style.display = 'block'; msgEl.style.color = 'var(--oro)'; msgEl.textContent = 'Iscrizione completata!';
+    document.getElementById('nlEmail').value = '';
+  } catch(e) {
+    msgEl.style.display = 'block'; msgEl.style.color = '#e74c3c'; msgEl.textContent = 'Errore. Riprova più tardi.';
+  }
+}
 
 // Init
 initBlog();

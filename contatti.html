@@ -361,9 +361,22 @@ async function sendForm(){
         telefono: tel,
         messaggio: (oggetto ? '[' + oggetto + '] ' : '') + (zona ? 'Zona: ' + zona + ' — ' : '') + msg,
         provenienza: 'form-contatti',
+        newsletter: news,
         letto: false
       }]);
       supaOk = true;
+
+      // Se ha accettato la newsletter, salva anche in newsletter_subscribers
+      if (news && email) {
+        await sb.from('newsletter_subscribers').upsert([{
+          email: email,
+          nome: nomeCompleto,
+          telefono: tel,
+          fonte: 'form-contatti',
+          attivo: true,
+          created_at: new Date().toISOString()
+        }], { onConflict: 'email' }).then(() => {}).catch(() => {});
+      }
     }
   } catch(e) { supaOk = false; }
 
