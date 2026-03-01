@@ -3,19 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#2C4A6E">
+<meta name="theme-color" content="#FF6B35">
 <title>Vendi Casa a Padova — Valutazione Gratuita | Righetto Immobiliare</title>
-<meta name="description" content="Vuoi vendere casa a Padova e provincia? Scopri perché affidarsi a un agente immobiliare esperto ti fa ottenere fino al 15% in più. Valutazione gratuita, vendita media in 45 giorni. Dal 2000.">
+<meta name="description" content="Vuoi vendere casa a Padova e provincia? Scopri perche affidarsi a un agente immobiliare esperto ti fa ottenere fino al 15% in piu. Valutazione gratuita, vendita media in 45 giorni. Dal 2000.">
 <meta name="keywords" content="vendere casa Padova, agenzia immobiliare Padova, valutazione immobile gratuita Padova, vendita casa Padova provincia, quanto vale la mia casa Padova, agente immobiliare Padova, vendere casa velocemente Padova">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-<link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co">
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/cormorant-garamond-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="canonical" href="https://righettoimmobiliare.it/landing-vendita.html">
-
-<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Vendi Casa a Padova — Valutazione Gratuita in 24h">
 <meta property="og:description" content="Affidati a chi conosce il mercato di Padova da 25 anni. Valutazione gratuita, vendita media in 45 giorni, assistenza completa dalla A alla Z.">
@@ -25,165 +18,202 @@
 <meta property="og:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-
-<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Vendi Casa a Padova — Valutazione Gratuita in 24h">
-<meta name="twitter:description" content="Affidati a chi conosce il mercato di Padova da 25 anni. Valutazione gratuita, vendita media in 45 giorni.">
+<meta name="twitter:description" content="Affidati a chi conosce il mercato di Padova da 25 anni.">
 <meta name="twitter:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
-
 <link rel="stylesheet" href="css/fonts.css">
 
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --nero:#152435;--bianco:#F7F5F1;--oro:#B8D44A;--grigio:#6B7A8D;
-  --gc:#E1DBD1;--verde:#1E8449;--sfondo:#ECE7DF;--blu:#2C4A6E;
-  --blu2:#3A5F8C;--blu3:#4E789A;--azzurro:#8AB4CE;--oro2:#CDED62;
-  --oro-bg:rgba(184,212,74,0.10);--testo:#152435;--carta:#F2EDE7;
-  --rosso:#C0392B
+  --fire:#FF6B35;--fire2:#FF8F5E;--sun:#FFD23F;--deep:#1B1B2F;
+  --purple:#6C63FF;--purple2:#8B83FF;--mint:#00E5A0;--mint2:#00FFB4;
+  --white:#FFFFFF;--offwhite:#FAFAFA;--light:#F0F0F7;--gray:#6B7280;
+  --dark:#111827;--glass:rgba(255,255,255,0.12);--shadow:0 20px 60px rgba(0,0,0,.15);
+  --radius:16px;
 }
 html{scroll-behavior:smooth}
-body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--testo);line-height:1.7}
+body{font-family:'Montserrat',sans-serif;background:var(--offwhite);color:var(--dark);line-height:1.7;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
-img{max-width:100%;height:auto}
+img{max-width:100%;height:auto;display:block}
+.skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--fire);color:#fff;padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
 
-/* ── TOPBAR ── */
-.topbar{background:var(--nero);padding:.5rem 1.5rem;text-align:center;font-size:.72rem;color:rgba(255,255,255,.7);letter-spacing:.03em}
-.topbar a{color:var(--oro);font-weight:600}
+/* ═══ ANIMATED GRADIENT BG ═══ */
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.15);opacity:.7}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes countUp{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+@keyframes shake{0%,100%{transform:rotate(0)}25%{transform:rotate(-3deg)}75%{transform:rotate(3deg)}}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(255,107,53,.3)}50%{box-shadow:0 0 40px rgba(255,107,53,.6)}}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-/* ── HERO ── */
-.hero{background:linear-gradient(145deg,var(--nero) 0%,var(--blu) 55%,var(--blu3) 100%);padding:4rem 1.5rem 3rem;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:500px;height:500px;background:radial-gradient(circle,rgba(184,212,74,.1) 0%,transparent 70%);pointer-events:none}
-.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 400px;gap:3rem;align-items:center}
-@media(max-width:900px){.hero-inner{grid-template-columns:1fr;text-align:center}}
-.hero-tag{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--oro);margin-bottom:.6rem;font-weight:600}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:#fff;line-height:1.15;margin-bottom:1rem}
-.hero h1 strong{font-weight:600;font-style:italic;color:var(--oro)}
-.hero-sub{font-size:.92rem;color:rgba(255,255,255,.7);line-height:1.85;margin-bottom:1.8rem;max-width:520px}
-@media(max-width:900px){.hero-sub{margin:0 auto 1.8rem}}
-.hero-stats{display:flex;gap:1.8rem;flex-wrap:wrap}
-@media(max-width:900px){.hero-stats{justify-content:center}}
-.hs{text-align:center}
-.hs-n{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--oro);line-height:1}
-.hs-l{font-size:.65rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-top:.2rem}
+/* ═══ TOPBAR URGENZA ═══ */
+.topbar{background:linear-gradient(90deg,var(--fire),var(--purple),var(--fire));background-size:200% 200%;animation:gradShift 4s ease infinite;padding:.6rem 1rem;text-align:center;font-size:.78rem;color:#fff;font-weight:600;letter-spacing:.03em}
+.topbar span{animation:pulse 2s infinite}
 
-/* ── FORM CARD (hero) ── */
-.form-card{background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden}
-.fc-head{background:linear-gradient(135deg,var(--oro),#9EC232);padding:1.2rem 1.5rem;text-align:center}
-.fc-head h2{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:700;color:var(--nero)}
-.fc-head p{font-size:.75rem;color:var(--nero);opacity:.7;margin-top:.15rem}
+/* ═══ HERO ═══ */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;background:var(--deep);overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.3;filter:brightness(.6)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,27,47,.92) 0%,rgba(108,99,255,.6) 50%,rgba(255,107,53,.4) 100%);z-index:1}
+.hero-shapes{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.shape{position:absolute;border-radius:50%;opacity:.08}
+.shape-1{width:600px;height:600px;background:var(--fire);top:-200px;right:-150px;animation:float 8s ease-in-out infinite}
+.shape-2{width:400px;height:400px;background:var(--purple);bottom:-100px;left:-100px;animation:float 6s ease-in-out infinite 2s}
+.shape-3{width:200px;height:200px;background:var(--sun);top:40%;left:20%;animation:float 10s ease-in-out infinite 1s}
+.hero-inner{position:relative;z-index:3;max-width:1200px;margin:0 auto;padding:6rem 1.5rem 4rem;display:grid;grid-template-columns:1fr 420px;gap:3rem;align-items:center;animation:fadeUp .8s ease-out}
+@media(max-width:960px){.hero-inner{grid-template-columns:1fr;padding:5rem 1.5rem 3rem}}
+.hero-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);border-radius:50px;padding:.35rem .9rem;font-size:.68rem;color:#fff;font-weight:500;margin-bottom:1rem}
+.hero-badge .dot{width:8px;height:8px;background:var(--mint);border-radius:50%;animation:pulse 1.5s infinite}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:3.4rem;font-weight:300;color:#fff;line-height:1.1;margin-bottom:1.2rem}
+@media(max-width:600px){.hero h1{font-size:2.4rem}}
+.hero h1 em{font-style:italic;font-weight:700;background:linear-gradient(135deg,var(--fire),var(--sun));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:.92rem;color:rgba(255,255,255,.7);line-height:1.85;margin-bottom:2rem;max-width:500px}
+.hero-proof{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+.hp{display:flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.08);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.45rem .8rem;font-size:.74rem;color:rgba(255,255,255,.85);font-weight:500}
+.hp-icon{font-size:1.1rem}
+.hero-imgs{display:flex;gap:-.5rem;margin-bottom:.8rem}
+.hero-imgs img{width:38px;height:38px;border-radius:50%;border:2px solid var(--deep);object-fit:cover}
+.hero-imgs-text{font-size:.72rem;color:rgba(255,255,255,.5);margin-left:.6rem;align-self:center}
+
+/* ═══ FORM CARD (Glass) ═══ */
+.form-card{background:rgba(255,255,255,.95);backdrop-filter:blur(20px);border-radius:20px;overflow:hidden;box-shadow:0 25px 80px rgba(0,0,0,.3);animation:fadeUp 1s ease-out .3s both}
+@media(max-width:960px){.form-card{max-width:480px;margin:0 auto}}
+.fc-ribbon{background:linear-gradient(90deg,var(--fire),var(--sun));padding:3px;font-size:0}
+.fc-head{padding:1.2rem 1.5rem;text-align:center;position:relative}
+.fc-head::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--fire),var(--purple),var(--mint))}
+.fc-sara{display:flex;align-items:center;gap:.6rem;justify-content:center;margin-bottom:.6rem}
+.fc-sara img{width:48px;height:48px;border-radius:50%;border:2px solid var(--fire);object-fit:cover}
+.fc-sara-info{text-align:left}
+.fc-sara-name{font-size:.78rem;font-weight:700;color:var(--dark)}
+.fc-sara-role{font-size:.62rem;color:var(--gray)}
+.fc-head h2{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:700;color:var(--dark)}
+.fc-head p{font-size:.72rem;color:var(--gray);margin-top:.15rem}
+.fc-urgency{background:var(--sun);color:var(--dark);padding:.3rem .8rem;border-radius:6px;font-size:.62rem;font-weight:700;display:inline-block;margin-top:.5rem;animation:shake 3s infinite}
 .fc-body{padding:1.5rem}
-.fc-field{margin-bottom:.75rem}
-.fc-field label{display:block;font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--grigio);margin-bottom:.25rem;font-weight:500}
-.fc-field input,.fc-field select,.fc-field textarea{width:100%;border:1px solid var(--gc);border-radius:8px;padding:.55rem .75rem;font-family:'Montserrat',sans-serif;font-size:.85rem;background:#fff;color:var(--testo);transition:border-color .2s}
-.fc-field input:focus,.fc-field select:focus,.fc-field textarea:focus{outline:none;border-color:var(--oro)}
-.fc-field textarea{resize:vertical;min-height:70px}
-.fc-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-@media(max-width:500px){.fc-row{grid-template-columns:1fr}}
-.fc-chk{display:flex;align-items:flex-start;gap:.4rem;font-size:.7rem;color:var(--grigio);margin-bottom:1rem}
-.fc-chk input{accent-color:var(--oro);flex-shrink:0;margin-top:.15rem;width:14px;height:14px}
-.fc-submit{width:100%;background:var(--nero);color:#fff;padding:.8rem;border:none;border-radius:10px;font-family:'Montserrat',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .25s}
-.fc-submit:hover{background:var(--oro);color:var(--nero);transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,212,74,.3)}
-.fc-note{text-align:center;font-size:.68rem;color:var(--grigio);margin-top:.75rem}
+.fc-field{margin-bottom:.7rem}
+.fc-field label{display:block;font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gray);margin-bottom:.2rem;font-weight:600}
+.fc-field input,.fc-field select,.fc-field textarea{width:100%;border:2px solid #E5E7EB;border-radius:10px;padding:.55rem .75rem;font-family:'Montserrat',sans-serif;font-size:.85rem;background:#fff;color:var(--dark);transition:all .25s}
+.fc-field input:focus,.fc-field select:focus,.fc-field textarea:focus{outline:none;border-color:var(--fire);box-shadow:0 0 0 3px rgba(255,107,53,.15)}
+.fc-field textarea{resize:vertical;min-height:60px}
+.fc-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+@media(max-width:480px){.fc-row{grid-template-columns:1fr}}
+.fc-chk{display:flex;align-items:flex-start;gap:.4rem;font-size:.68rem;color:var(--gray);margin-bottom:1rem}
+.fc-chk input{accent-color:var(--fire);flex-shrink:0;margin-top:.15rem;width:15px;height:15px}
+.fc-submit{width:100%;background:linear-gradient(135deg,var(--fire),var(--fire2));color:#fff;padding:.85rem;border:none;border-radius:12px;font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.fc-submit::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:left .5s}
+.fc-submit:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(255,107,53,.4)}
+.fc-submit:hover::before{left:100%}
+.fc-note{text-align:center;font-size:.66rem;color:var(--gray);margin-top:.7rem}
+.fc-trust{display:flex;justify-content:center;gap:1rem;margin-top:.8rem;padding-top:.8rem;border-top:1px solid #E5E7EB}
+.fc-trust span{font-size:.6rem;color:var(--gray);display:flex;align-items:center;gap:.25rem}
+.fc-trust span::before{font-size:.8rem}
 .fc-success{display:none;text-align:center;padding:2rem 1rem}
-.fc-success h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--verde);margin-bottom:.4rem}
-.fc-success p{font-size:.82rem;color:var(--grigio)}
+.fc-success h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--mint);margin-bottom:.4rem}
+.fc-success p{font-size:.82rem;color:var(--gray)}
 
-/* ── SARA SECTION ── */
-.sara-section{background:var(--sfondo);padding:4rem 1.5rem}
-.sara-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:280px 1fr;gap:3rem;align-items:center}
-@media(max-width:800px){.sara-inner{grid-template-columns:1fr;text-align:center}}
-.sara-photo{width:240px;height:240px;border-radius:50%;object-fit:cover;object-position:center 45%;border:4px solid var(--oro);box-shadow:0 12px 40px rgba(0,0,0,.15);margin:0 auto}
-.sara-text h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;margin-bottom:.8rem;color:var(--nero)}
-.sara-text h2 span{color:var(--oro);font-style:italic}
-.sara-text p{font-size:.88rem;color:var(--grigio);line-height:1.85;margin-bottom:1rem}
-.sara-badge{display:inline-flex;align-items:center;gap:.4rem;background:var(--oro-bg);border:1px solid rgba(184,212,74,.2);border-radius:8px;padding:.45rem .85rem;font-size:.72rem;color:var(--nero);font-weight:500}
-.sara-badge::before{content:'';width:9px;height:9px;background:var(--oro);border-radius:50%;animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
+/* ═══ SOCIAL PROOF MARQUEE ═══ */
+.marquee{background:var(--dark);padding:.7rem 0;overflow:hidden;white-space:nowrap}
+.marquee-track{display:inline-flex;animation:marquee 25s linear infinite}
+.marquee-item{display:inline-flex;align-items:center;gap:.4rem;padding:0 2rem;font-size:.78rem;color:rgba(255,255,255,.6);font-weight:500}
+.marquee-item strong{color:var(--fire);font-weight:700}
+.marquee-item .sep{color:rgba(255,255,255,.15);margin:0 .5rem}
 
-/* ── VANTAGGI ── */
-.vantaggi{padding:5rem 1.5rem;background:#fff}
-.vantaggi-inner{max-width:1100px;margin:0 auto}
-.sec-tag{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--oro);margin-bottom:.5rem;font-weight:600;text-align:center}
-.sec-h2{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;text-align:center;margin-bottom:.5rem}
-.sec-sub{text-align:center;font-size:.88rem;color:var(--grigio);max-width:600px;margin:0 auto 3rem}
-.v-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+/* ═══ VANTAGGI (Cards vibranti) ═══ */
+.vantaggi{padding:5rem 1.5rem;background:var(--offwhite);position:relative}
+.vantaggi-inner{max-width:1200px;margin:0 auto}
+.sec-tag{font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--fire);margin-bottom:.4rem;font-weight:700;text-align:center}
+.sec-h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;text-align:center;margin-bottom:.4rem;line-height:1.15}
+.sec-h2 em{font-style:italic;background:linear-gradient(135deg,var(--fire),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sec-sub{text-align:center;font-size:.88rem;color:var(--gray);max-width:550px;margin:0 auto 3rem}
+.v-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
 @media(max-width:800px){.v-grid{grid-template-columns:1fr}}
-.v-card{background:var(--sfondo);border:1px solid var(--gc);border-radius:14px;padding:2rem 1.5rem;text-align:center;transition:transform .3s,box-shadow .3s}
-.v-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.08)}
-.v-icon{font-size:2.2rem;margin-bottom:.8rem}
-.v-card h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;margin-bottom:.5rem}
-.v-card p{font-size:.82rem;color:var(--grigio);line-height:1.75}
-.v-highlight{border-color:var(--oro);background:var(--oro-bg)}
+.v-card{background:#fff;border-radius:var(--radius);padding:2rem 1.5rem;border:1px solid #E5E7EB;transition:all .35s;position:relative;overflow:hidden}
+.v-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;transition:height .3s}
+.v-card:nth-child(1)::before{background:linear-gradient(90deg,var(--fire),var(--sun))}
+.v-card:nth-child(2)::before{background:linear-gradient(90deg,var(--purple),var(--purple2))}
+.v-card:nth-child(3)::before{background:linear-gradient(90deg,var(--mint),#00D4AA)}
+.v-card:nth-child(4)::before{background:linear-gradient(90deg,var(--sun),#FFC107)}
+.v-card:nth-child(5)::before{background:linear-gradient(90deg,#FF4081,var(--fire))}
+.v-card:nth-child(6)::before{background:linear-gradient(90deg,#00BCD4,var(--purple))}
+.v-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(0,0,0,.1)}.v-card:hover::before{height:6px}
+.v-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:1rem}
+.v-card:nth-child(1) .v-icon{background:rgba(255,107,53,.1)}
+.v-card:nth-child(2) .v-icon{background:rgba(108,99,255,.1)}
+.v-card:nth-child(3) .v-icon{background:rgba(0,229,160,.1)}
+.v-card:nth-child(4) .v-icon{background:rgba(255,210,63,.1)}
+.v-card:nth-child(5) .v-icon{background:rgba(255,64,129,.1)}
+.v-card:nth-child(6) .v-icon{background:rgba(0,188,212,.1)}
+.v-card h3{font-size:1rem;font-weight:700;margin-bottom:.4rem}
+.v-card p{font-size:.82rem;color:var(--gray);line-height:1.75}
 
-/* ── COME FUNZIONA ── */
-.come{padding:5rem 1.5rem;background:var(--sfondo)}
+/* ═══ IMGSTRIP ═══ */
+.imgstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+@media(max-width:700px){.imgstrip{grid-template-columns:1fr 1fr}}
+.imgstrip-item{position:relative;overflow:hidden;aspect-ratio:4/3}
+.imgstrip-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.imgstrip-item:hover img{transform:scale(1.08)}
+.imgstrip-cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));padding:1rem;color:#fff;font-size:.72rem;font-weight:600}
+
+/* ═══ COME FUNZIONA ═══ */
+.come{padding:5rem 1.5rem;background:#fff}
 .come-inner{max-width:1100px;margin:0 auto}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:2rem}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem}
 @media(max-width:800px){.steps{grid-template-columns:1fr 1fr}}
 @media(max-width:500px){.steps{grid-template-columns:1fr}}
-.step{text-align:center;position:relative}
-.step-n{width:48px;height:48px;background:var(--nero);color:var(--oro);font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .8rem}
-.step h3{font-size:.9rem;font-weight:600;margin-bottom:.3rem}
-.step p{font-size:.78rem;color:var(--grigio);line-height:1.7}
+.step{text-align:center;padding:1.5rem 1rem;border-radius:var(--radius);background:var(--light);position:relative;transition:all .3s}
+.step:hover{background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.08);transform:translateY(-4px)}
+.step-n{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:800;color:#fff}
+.step:nth-child(1) .step-n{background:linear-gradient(135deg,var(--fire),var(--sun))}
+.step:nth-child(2) .step-n{background:linear-gradient(135deg,var(--purple),var(--purple2))}
+.step:nth-child(3) .step-n{background:linear-gradient(135deg,var(--mint),#00D4AA)}
+.step:nth-child(4) .step-n{background:linear-gradient(135deg,#FF4081,var(--fire))}
+.step h3{font-size:.88rem;font-weight:700;margin-bottom:.3rem}
+.step p{font-size:.78rem;color:var(--gray);line-height:1.7}
+.step-arrow{position:absolute;top:50%;right:-18px;font-size:1.2rem;color:var(--fire);z-index:1}
+@media(max-width:800px){.step-arrow{display:none}}
 
-/* ── SOCIAL PROOF ── */
-.proof{padding:5rem 1.5rem;background:#fff}
-.proof-inner{max-width:1100px;margin:0 auto}
-.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+/* ═══ TESTIMONIAL ═══ */
+.testi{padding:5rem 1.5rem;background:linear-gradient(135deg,var(--deep),#2D1B69)}
+.testi-inner{max-width:1100px;margin:0 auto}
+.testi .sec-tag,.testi .sec-h2,.testi .sec-sub{color:#fff}.testi .sec-sub{color:rgba(255,255,255,.5)}
+.testi .sec-h2 em{background:linear-gradient(135deg,var(--fire),var(--sun));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2rem}
 @media(max-width:800px){.t-grid{grid-template-columns:1fr}}
-.t-card{background:var(--sfondo);border:1px solid var(--gc);border-radius:12px;padding:1.5rem;position:relative}
-.t-card::before{content:'\201C';font-family:'Cormorant Garamond',serif;font-size:3.5rem;color:var(--oro);position:absolute;top:.2rem;left:1rem;line-height:1;opacity:.5}
-.t-quote{font-size:.85rem;color:var(--testo);line-height:1.75;font-style:italic;margin-bottom:1rem;padding-top:.5rem}
-.t-author{font-size:.75rem;font-weight:600;color:var(--nero)}
-.t-detail{font-size:.68rem;color:var(--grigio)}
-.t-stars{color:var(--oro);font-size:.85rem;margin-bottom:.3rem}
+.t-card{background:rgba(255,255,255,.06);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:1.5rem;position:relative;transition:all .3s}
+.t-card:hover{background:rgba(255,255,255,.1);transform:translateY(-4px)}
+.t-stars{color:var(--sun);font-size:.9rem;margin-bottom:.6rem;letter-spacing:2px}
+.t-quote{font-size:.84rem;color:rgba(255,255,255,.8);line-height:1.8;font-style:italic;margin-bottom:1rem}
+.t-foot{display:flex;align-items:center;gap:.6rem}
+.t-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--fire)}
+.t-info .t-name{font-size:.75rem;font-weight:700;color:#fff}
+.t-info .t-detail{font-size:.65rem;color:rgba(255,255,255,.4)}
 
-/* ── FAQ ── */
-.faq{padding:5rem 1.5rem;background:var(--sfondo)}
-.faq-inner{max-width:800px;margin:0 auto}
-.faq-item{background:#fff;border:1px solid var(--gc);border-radius:10px;margin-bottom:.6rem;overflow:hidden}
-.faq-q{padding:1rem 1.2rem;font-size:.88rem;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background .2s}
-.faq-q:hover{background:var(--oro-bg)}
-.faq-q::after{content:'+';font-size:1.2rem;color:var(--oro);font-weight:300;transition:transform .3s}
-.faq-item.open .faq-q::after{transform:rotate(45deg)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 1.2rem}
-.faq-item.open .faq-a{max-height:500px;padding:.2rem 1.2rem 1rem}
-.faq-a p{font-size:.82rem;color:var(--grigio);line-height:1.8}
+/* ═══ CTA FINALE ═══ */
+.cta-final{padding:5rem 1.5rem;background:#fff;text-align:center;position:relative;overflow:hidden}
+.cta-final::before{content:'';position:absolute;top:50%;left:50%;width:800px;height:800px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,107,53,.06) 0%,transparent 70%);pointer-events:none}
+.cta-final h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;margin-bottom:.5rem}
+.cta-final h2 em{background:linear-gradient(135deg,var(--fire),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cta-final p{font-size:.9rem;color:var(--gray);margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto}
+.cta-btn{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,var(--fire),var(--fire2));color:#fff;padding:.85rem 2.5rem;border-radius:14px;font-size:.92rem;font-weight:700;transition:all .3s;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;animation:glow 3s infinite}
+.cta-btn:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 16px 48px rgba(255,107,53,.4)}
+.cta-channels{display:flex;justify-content:center;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap}
+.cta-ch{display:flex;align-items:center;gap:.35rem;font-size:.78rem;color:var(--gray);font-weight:500}
+.cta-ch a{color:var(--fire);font-weight:700}
 
-/* ── CTA FINALE ── */
-.cta-final{background:linear-gradient(135deg,var(--nero),var(--blu));padding:4rem 1.5rem;text-align:center}
-.cta-final h2{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:#fff;margin-bottom:.6rem}
-.cta-final p{font-size:.9rem;color:rgba(255,255,255,.6);margin-bottom:1.5rem;max-width:500px;margin-left:auto;margin-right:auto}
-.cta-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--oro);color:var(--nero);padding:.8rem 2rem;border-radius:10px;font-size:.88rem;font-weight:600;transition:all .25s;border:none;cursor:pointer;font-family:'Montserrat',sans-serif}
-.cta-btn:hover{background:var(--oro2);transform:translateY(-3px);box-shadow:0 10px 30px rgba(184,212,74,.4)}
-.cta-tel{display:block;margin-top:1rem;color:rgba(255,255,255,.5);font-size:.78rem}
-.cta-tel a{color:var(--oro)}
+/* ═══ FOOTER ═══ */
+.footer-mini{background:var(--dark);padding:1.5rem;text-align:center;font-size:.7rem;color:rgba(255,255,255,.45)}
+.footer-mini a{color:rgba(255,255,255,.5);margin:0 .5rem}.footer-mini a:hover{color:var(--fire)}
 
-/* ── FOOTER MINI ── */
-.footer-mini{background:#0d1a2a;padding:1.5rem;text-align:center;font-size:.7rem;color:rgba(255,255,255,.55)}
-.footer-mini a{color:rgba(255,255,255,.6);margin:0 .5rem}
-.footer-mini a:hover{color:var(--oro)}
-
-/* ── SKIP LINK ── */
-.skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
-
-/* ── RESPONSIVE ── */
-@media(max-width:900px){
-  .hero h1{font-size:2.2rem}
-  .hero-inner{gap:2rem}
-}
-@media(max-width:600px){
-  .hero{padding:3rem 1rem 2rem}
-  .hero h1{font-size:1.8rem}
-  .sec-h2{font-size:1.7rem}
-  .sara-photo{width:180px;height:180px}
-  .t-grid{grid-template-columns:1fr}
-}
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:960px){.hero h1{font-size:2.6rem}.hero-inner{text-align:center}.hero-sub{margin:0 auto 2rem}.hero-proof{justify-content:center}.hero-imgs{justify-content:center}}
+@media(max-width:600px){.hero{min-height:auto}.sec-h2{font-size:2rem}.cta-final h2{font-size:2rem}.v-grid{gap:.8rem}}
 </style>
 
-<!-- JSON-LD: Organizzazione + Servizio -->
+<!-- JSON-LD -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -200,30 +230,10 @@ img{max-width:100%;height:auto}
       "email": "info@righettoimmobiliare.it",
       "foundingDate": "2000",
       "description": "Agenzia immobiliare a Padova e provincia dal 2000. Vendita, affitto, valutazioni gratuite, gestione completa.",
-      "areaServed": {
-        "@type": "AdministrativeArea",
-        "name": "Provincia di Padova",
-        "containedInPlace": {"@type": "Country", "name": "Italia"}
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Via Roma 96",
-        "addressLocality": "Limena",
-        "postalCode": "35010",
-        "addressRegion": "PD",
-        "addressCountry": "IT"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 45.3920,
-        "longitude": 11.8500
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "reviewCount": "127",
-        "bestRating": "5"
-      },
+      "areaServed": {"@type": "AdministrativeArea", "name": "Provincia di Padova", "containedInPlace": {"@type": "Country", "name": "Italia"}},
+      "address": {"@type": "PostalAddress", "streetAddress": "Via Roma 96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
+      "geo": {"@type": "GeoCoordinates", "latitude": 45.3920, "longitude": 11.8500},
+      "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "127", "bestRating": "5"},
       "openingHoursSpecification": [
         {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "19:00"},
         {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "12:30"}
@@ -232,66 +242,34 @@ img{max-width:100%;height:auto}
     {
       "@type": "Service",
       "name": "Vendita Immobiliare a Padova",
-      "description": "Servizio completo di vendita immobiliare con valutazione gratuita, virtual tour 360°, campagne marketing multicanale e assistenza legale fino al rogito.",
+      "description": "Servizio completo di vendita immobiliare con valutazione gratuita, virtual tour 360, campagne marketing multicanale e assistenza legale fino al rogito.",
       "provider": {"@id": "https://righettoimmobiliare.it/#organization"},
       "serviceType": "Vendita immobiliare",
       "areaServed": "Padova e Provincia",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "EUR",
-        "description": "Valutazione immobiliare gratuita e senza impegno"
-      }
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR", "description": "Valutazione immobiliare gratuita e senza impegno"}
     },
     {
       "@type": "WebPage",
       "@id": "https://righettoimmobiliare.it/landing-vendita.html",
       "name": "Vendi Casa a Padova — Valutazione Gratuita",
-      "description": "Scopri perché affidarsi a un agente immobiliare esperto ti fa ottenere fino al 15% in più nella vendita della tua casa a Padova.",
+      "description": "Scopri perche affidarsi a un agente immobiliare esperto ti fa ottenere fino al 15% in piu nella vendita della tua casa a Padova.",
       "url": "https://righettoimmobiliare.it/landing-vendita.html",
       "isPartOf": {"@id": "https://righettoimmobiliare.it/#organization"},
-      "speakable": {
-        "@type": "SpeakableSpecification",
-        "cssSelector": [".hero h1", ".hero-sub", ".sec-h2"]
-      }
+      "speakable": {"@type": "SpeakableSpecification", "cssSelector": [".hero h1", ".hero-sub", ".sec-h2"]}
     },
     {
       "@type": "FAQPage",
       "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Quanto costa la valutazione del mio immobile?",
-          "acceptedAnswer": {"@type": "Answer", "text": "La valutazione è completamente gratuita e senza impegno. Un nostro agente effettua un sopralluogo, analizza i comparabili di zona e ti consegna un report dettagliato con il valore di mercato stimato."}
-        },
-        {
-          "@type": "Question",
-          "name": "In quanto tempo si vende un immobile a Padova?",
-          "acceptedAnswer": {"@type": "Answer", "text": "Con la nostra strategia multicanale (portali, social, rete contatti, virtual tour), la vendita media avviene in 45 giorni. Gli immobili ben posizionati e correttamente valutati si vendono ancora più rapidamente."}
-        },
-        {
-          "@type": "Question",
-          "name": "Perché affidarsi a un'agenzia immobiliare invece di vendere privatamente?",
-          "acceptedAnswer": {"@type": "Answer", "text": "Le statistiche mostrano che gli immobili venduti tramite agenzia ottengono mediamente il 10-15% in più rispetto alle vendite tra privati. L'agente gestisce trattativa, documentazione, certificazioni, accesso al credito dell'acquirente e assistenza fino al rogito notarile."}
-        },
-        {
-          "@type": "Question",
-          "name": "Quali documenti servono per vendere casa?",
-          "acceptedAnswer": {"@type": "Answer", "text": "I principali sono: atto di provenienza, visura catastale, APE (attestato prestazione energetica), planimetria catastale, certificato di agibilità e documentazione urbanistica. Il nostro team ti guida nella raccolta di tutta la documentazione necessaria."}
-        },
-        {
-          "@type": "Question",
-          "name": "Quali zone di Padova coprite?",
-          "acceptedAnswer": {"@type": "Answer", "text": "Operiamo in tutti i 101 comuni della provincia di Padova: dal centro storico a Limena, Selvazzano, Abano Terme, Albignasego, Cadoneghe, Rubano, Vigonza e tutte le altre località."}
-        }
+        {"@type": "Question", "name": "Quanto costa la valutazione del mio immobile?", "acceptedAnswer": {"@type": "Answer", "text": "La valutazione e completamente gratuita e senza impegno. Un nostro agente effettua un sopralluogo, analizza i comparabili di zona e ti consegna un report dettagliato con il valore di mercato stimato."}},
+        {"@type": "Question", "name": "In quanto tempo si vende un immobile a Padova?", "acceptedAnswer": {"@type": "Answer", "text": "Con la nostra strategia multicanale, la vendita media avviene in 45 giorni. Gli immobili ben posizionati si vendono ancora piu rapidamente."}},
+        {"@type": "Question", "name": "Perche affidarsi a un agenzia immobiliare?", "acceptedAnswer": {"@type": "Answer", "text": "Gli immobili venduti tramite agenzia ottengono mediamente il 10-15% in piu rispetto alle vendite tra privati. L'agente gestisce trattativa, documentazione e assistenza fino al rogito."}},
+        {"@type": "Question", "name": "Quali zone di Padova coprite?", "acceptedAnswer": {"@type": "Answer", "text": "Operiamo in tutti i 101 comuni della provincia di Padova: dal centro storico a Limena, Selvazzano, Abano Terme, Albignasego e tutte le altre localita."}}
       ]
     },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://righettoimmobiliare.it/"},
-        {"@type": "ListItem", "position": 2, "name": "Vendi Casa", "item": "https://righettoimmobiliare.it/landing-vendita.html"}
-      ]
-    }
+    {"@type": "BreadcrumbList", "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://righettoimmobiliare.it/"},
+      {"@type": "ListItem", "position": 2, "name": "Vendi Casa", "item": "https://righettoimmobiliare.it/landing-vendita.html"}
+    ]}
   ]
 }
 </script>
@@ -299,33 +277,53 @@ img{max-width:100%;height:auto}
 <body>
 <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
-<!-- TOPBAR -->
+<!-- TOPBAR URGENZA -->
 <div class="topbar">
-  Valutazione gratuita del tuo immobile a Padova e provincia &mdash; <a href="#form">Richiedi ora</a>
+  <span>🔥</span> Solo questo mese: valutazione gratuita + report di mercato in regalo — <a href="#form" style="text-decoration:underline">Prenota ora</a>
 </div>
 
 <main id="main-content">
 
 <!-- ══ HERO ══ -->
 <section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80" alt="Bellissima casa moderna con giardino" width="1600" height="900">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-shapes"><div class="shape shape-1"></div><div class="shape shape-2"></div><div class="shape shape-3"></div></div>
   <div class="hero-inner">
     <div>
-      <div class="hero-tag">Vendere casa a Padova</div>
-      <h1>Il tuo immobile merita<br>il <strong>prezzo giusto</strong></h1>
-      <p class="hero-sub">Affidati a chi conosce ogni via, ogni quartiere, ogni dinamica del mercato padovano da 25 anni. Con noi ottieni una valutazione reale, una strategia su misura e la tranquillita di un team che ti accompagna fino al rogito.</p>
-      <div class="hero-stats">
-        <div class="hs"><div class="hs-n">350+</div><div class="hs-l">Immobili venduti</div></div>
-        <div class="hs"><div class="hs-n">45 gg</div><div class="hs-l">Tempo medio vendita</div></div>
-        <div class="hs"><div class="hs-n">98%</div><div class="hs-l">Clienti soddisfatti</div></div>
-        <div class="hs"><div class="hs-n">25</div><div class="hs-l">Anni di esperienza</div></div>
+      <div class="hero-badge"><span class="dot"></span> 3 immobili venduti questa settimana</div>
+      <h1>La tua casa merita<br>il <em>prezzo giusto</em></h1>
+      <p class="hero-sub">Non svendere il tuo immobile. Con 25 anni di esperienza a Padova, ti garantiamo una valutazione reale, un marketing che funziona e zero pensieri fino al rogito.</p>
+      <div class="hero-proof">
+        <div class="hp"><span class="hp-icon">⚡</span> Vendita media 45 giorni</div>
+        <div class="hp"><span class="hp-icon">💰</span> +15% vs vendita privata</div>
+        <div class="hp"><span class="hp-icon">⭐</span> 4.8/5 su Google</div>
+      </div>
+      <div class="hero-imgs">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="Cliente soddisfatto" width="38" height="38">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face" alt="Cliente soddisfatta" width="38" height="38">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face" alt="Cliente soddisfatto" width="38" height="38">
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face" alt="Cliente soddisfatta" width="38" height="38">
+        <span class="hero-imgs-text">+127 clienti soddisfatti</span>
       </div>
     </div>
 
-    <!-- FORM -->
+    <!-- FORM con SARA -->
     <div class="form-card" id="form">
+      <div class="fc-ribbon"></div>
       <div class="fc-head">
+        <div class="fc-sara">
+          <img src="img/sara-avatar.jpg" alt="Sara, assistente Righetto Immobiliare" width="48" height="48">
+          <div class="fc-sara-info">
+            <div class="fc-sara-name">Sara ti guida</div>
+            <div class="fc-sara-role">Assistente immobiliare</div>
+          </div>
+        </div>
         <h2>Richiedi la Valutazione Gratuita</h2>
-        <p>Rispondiamo entro 24 ore &mdash; zero impegno</p>
+        <p>Rispondiamo entro 24 ore — zero impegno</p>
+        <div class="fc-urgency">⏰ Posti limitati questo mese</div>
       </div>
       <div class="fc-body">
         <form id="leadForm" onsubmit="sendLead(event)" novalidate>
@@ -337,280 +335,223 @@ img{max-width:100%;height:auto}
             <div class="fc-field"><label for="l-tel">Telefono *</label><input type="tel" id="l-tel" placeholder="333 123 4567" required></div>
             <div class="fc-field"><label for="l-email">Email</label><input type="email" id="l-email" placeholder="mario@email.it"></div>
           </div>
-          <div class="fc-field"><label for="l-comune">Comune / Zona dell'immobile *</label><input type="text" id="l-comune" placeholder="Es. Padova centro, Albignasego, Limena..." required></div>
+          <div class="fc-field"><label for="l-comune">Comune / Zona *</label><input type="text" id="l-comune" placeholder="Es. Padova centro, Albignasego, Limena..." required></div>
           <div class="fc-field"><label for="l-tipo">Tipo di immobile</label>
-            <select id="l-tipo">
-              <option value="">Seleziona...</option>
-              <option>Appartamento</option>
-              <option>Villa / Villetta</option>
-              <option>Casa indipendente</option>
-              <option>Bifamiliare</option>
-              <option>Rustico / Casale</option>
-              <option>Terreno</option>
-              <option>Commerciale / Ufficio</option>
-              <option>Altro</option>
-            </select>
+            <select id="l-tipo"><option value="">Seleziona...</option><option>Appartamento</option><option>Villa / Villetta</option><option>Casa indipendente</option><option>Bifamiliare</option><option>Rustico / Casale</option><option>Terreno</option><option>Commerciale / Ufficio</option><option>Altro</option></select>
           </div>
-          <div class="fc-field"><label for="l-note">Note (opzionale)</label><textarea id="l-note" placeholder="Superficie, stato, tempistiche preferite..."></textarea></div>
-          <div class="fc-chk"><input type="checkbox" id="l-gdpr" required><label for="l-gdpr">Acconsento al trattamento dei dati personali ai sensi del GDPR. <a href="privacy.html" style="color:var(--oro)">Leggi privacy</a></label></div>
-          <button type="submit" class="fc-submit">Richiedi valutazione gratuita</button>
+          <div class="fc-field"><label for="l-note">Note (opzionale)</label><textarea id="l-note" placeholder="Superficie, stato, tempistiche..."></textarea></div>
+          <div class="fc-chk"><input type="checkbox" id="l-gdpr" required><label for="l-gdpr">Acconsento al trattamento dei dati personali. <a href="privacy.html" style="color:var(--fire)">Privacy</a></label></div>
+          <button type="submit" class="fc-submit">🏠 Richiedi valutazione gratuita</button>
         </form>
         <p class="fc-note">Nessun costo, nessun impegno. Rispondiamo entro 24h.</p>
+        <div class="fc-trust">
+          <span>🔒 Dati protetti</span>
+          <span>⭐ 4.8/5 Google</span>
+          <span>✅ 25 anni</span>
+        </div>
         <div class="fc-success" id="leadSuccess">
-          <h3>Richiesta inviata!</h3>
-          <p>Grazie! Ti contatteremo entro 24 ore per fissare il sopralluogo gratuito. Se hai urgenza: <a href="tel:+390498843484" style="color:var(--oro);font-weight:600">049 884 3484</a></p>
+          <h3>Richiesta inviata! 🎉</h3>
+          <p>Ti contatteremo entro 24 ore. Urgenza? <a href="tel:+390498843484" style="color:var(--fire);font-weight:700">049 884 3484</a></p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ SARA ══ -->
-<section class="sara-section">
-  <div class="sara-inner">
-    <div>
-      <img src="img/sara-avatar.jpg" alt="Sara — Assistente Virtuale Righetto Immobiliare" class="sara-photo" width="240" height="240" loading="lazy">
-    </div>
-    <div class="sara-text">
-      <h2>Hai domande? Chiedi a <span>Sara</span></h2>
-      <p>Sara e la nostra assistente virtuale disponibile 24 ore su 24. Puo rispondere alle tue domande sulla vendita, sulle valutazioni e su tutti i servizi della nostra agenzia. Provare per credere!</p>
-      <p>Oppure, se preferisci parlare con un consulente, siamo a tua disposizione al telefono o in ufficio a Limena.</p>
-      <div class="sara-badge">Disponibile 24/7 &mdash; anche su WhatsApp</div>
-    </div>
+<!-- SOCIAL PROOF MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="marquee-item"><strong>350+</strong> immobili venduti</span>
+    <span class="marquee-item"><strong>45 giorni</strong> tempo medio vendita</span>
+    <span class="marquee-item"><strong>98%</strong> clienti soddisfatti</span>
+    <span class="marquee-item"><strong>25 anni</strong> di esperienza a Padova</span>
+    <span class="marquee-item"><strong>101</strong> comuni coperti</span>
+    <span class="marquee-item"><strong>+15%</strong> rispetto alla vendita privata</span>
+    <span class="marquee-item"><strong>350+</strong> immobili venduti</span>
+    <span class="marquee-item"><strong>45 giorni</strong> tempo medio vendita</span>
+    <span class="marquee-item"><strong>98%</strong> clienti soddisfatti</span>
+    <span class="marquee-item"><strong>25 anni</strong> di esperienza a Padova</span>
+    <span class="marquee-item"><strong>101</strong> comuni coperti</span>
+    <span class="marquee-item"><strong>+15%</strong> rispetto alla vendita privata</span>
   </div>
-</section>
+</div>
 
 <!-- ══ VANTAGGI ══ -->
 <section class="vantaggi" id="vantaggi">
   <div class="vantaggi-inner">
-    <div class="sec-tag">Perche scegliere un agente</div>
-    <h2 class="sec-h2">6 vantaggi di vendere con un professionista</h2>
-    <p class="sec-sub">Vendere casa privatamente sembra piu semplice, ma le statistiche raccontano un'altra storia. Ecco cosa cambia con un agente al tuo fianco.</p>
+    <div class="sec-tag">Perche scegliere noi</div>
+    <h2 class="sec-h2">6 vantaggi che fanno la <em>differenza</em></h2>
+    <p class="sec-sub">Chi vende con noi non torna mai indietro. Ecco perche.</p>
     <div class="v-grid">
-      <div class="v-card v-highlight">
+      <div class="v-card">
         <div class="v-icon">💰</div>
         <h3>Fino al 15% in piu</h3>
-        <p>Gli immobili venduti tramite agenzia ottengono mediamente il 10-15% in piu rispetto alle vendite tra privati. La nostra valutazione e strategia di prezzo massimizzano il tuo guadagno.</p>
+        <p>La nostra valutazione e strategia di prezzo massimizzano il tuo guadagno. I dati FIAIP lo confermano.</p>
       </div>
       <div class="v-card">
         <div class="v-icon">⚡</div>
-        <h3>Vendita piu veloce</h3>
-        <p>Tempo medio di vendita: 45 giorni. Con i portali, i social, la rete contatti e i virtual tour 360°, il tuo immobile raggiunge subito gli acquirenti giusti.</p>
+        <h3>Vendita in 45 giorni</h3>
+        <p>Portali, social, virtual tour 360°, rete contatti. Il tuo immobile raggiunge subito gli acquirenti giusti.</p>
       </div>
       <div class="v-card">
         <div class="v-icon">📋</div>
-        <h3>Zero stress burocratico</h3>
-        <p>Documenti, visure, APE, conformita urbanistica, preliminare: ci occupiamo noi di tutto. Tu firmi, noi gestiamo.</p>
+        <h3>Zero burocrazia</h3>
+        <p>Documenti, visure, APE, conformita: ci occupiamo noi di tutto. Tu firmi, noi gestiamo.</p>
       </div>
       <div class="v-card">
         <div class="v-icon">🔒</div>
-        <h3>Sicurezza legale</h3>
-        <p>Ogni trattativa e tutelata: verifica solvibilita acquirente, accesso al credito, conformita catastale. Nessuna sorpresa dal preliminare al rogito.</p>
+        <h3>Sicurezza totale</h3>
+        <p>Verifica solvibilita acquirente, conformita catastale. Nessuna sorpresa dal preliminare al rogito.</p>
       </div>
       <div class="v-card">
         <div class="v-icon">📸</div>
-        <h3>Marketing professionale</h3>
-        <p>Foto professionali, virtual tour 360°, video, annunci ottimizzati su tutti i portali. Il tuo immobile viene presentato al meglio.</p>
+        <h3>Marketing pro</h3>
+        <p>Foto professionali, video, virtual tour 360°, campagne social mirate. Il tuo immobile brilla.</p>
       </div>
       <div class="v-card">
         <div class="v-icon">🤝</div>
         <h3>Trattativa esperta</h3>
-        <p>Negoziamo per te con gli acquirenti. 25 anni di esperienza nella mediazione significano condizioni migliori e meno rischi.</p>
+        <p>25 anni di mediazione. Negoziamo per te con distacco e strategia. Risultati migliori, meno stress.</p>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ══ IMGSTRIP ══ -->
+<div class="imgstrip">
+  <div class="imgstrip-item">
+    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80" alt="Consegna chiavi casa venduta Padova" width="600" height="450" loading="lazy">
+    <div class="imgstrip-cap">🔑 Consegna chiavi</div>
+  </div>
+  <div class="imgstrip-item">
+    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" alt="Villa con giardino venduta a Padova" width="600" height="450" loading="lazy">
+    <div class="imgstrip-cap">🏡 Ville e villette</div>
+  </div>
+  <div class="imgstrip-item">
+    <img src="https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=600&q=80" alt="Casa con famiglia felice" width="600" height="450" loading="lazy">
+    <div class="imgstrip-cap">👨‍👩‍👧‍👦 Famiglie felici</div>
+  </div>
+  <div class="imgstrip-item">
+    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80" alt="Cane Golden Retriever in giardino di casa" width="600" height="450" loading="lazy">
+    <div class="imgstrip-cap">🐕 Anche lui approva</div>
+  </div>
+</div>
 
 <!-- ══ COME FUNZIONA ══ -->
 <section class="come">
   <div class="come-inner">
-    <div class="sec-tag">Il percorso</div>
-    <h2 class="sec-h2">Come vendiamo la tua casa</h2>
-    <p class="sec-sub">4 passi semplici, dalla valutazione alle chiavi in mano al nuovo proprietario.</p>
+    <div class="sec-tag">4 passi semplici</div>
+    <h2 class="sec-h2">Come vendiamo la <em>tua casa</em></h2>
+    <p class="sec-sub">Dalla valutazione alle chiavi in mano. Semplice, veloce, senza pensieri.</p>
     <div class="steps">
       <div class="step">
         <div class="step-n">1</div>
         <h3>Valutazione gratuita</h3>
-        <p>Sopralluogo, analisi comparativa di mercato e report con il valore reale del tuo immobile. Gratuito e senza impegno.</p>
+        <p>Sopralluogo, analisi di mercato e report con il valore reale. Gratis e senza impegno.</p>
+        <span class="step-arrow">→</span>
       </div>
       <div class="step">
         <div class="step-n">2</div>
         <h3>Strategia su misura</h3>
-        <p>Foto professionali, virtual tour, annunci ottimizzati, campagne social. Definiamo insieme il prezzo e la strategia di marketing.</p>
+        <p>Foto pro, virtual tour, annunci, campagne social. Prezzo e piano marketing su misura.</p>
+        <span class="step-arrow">→</span>
       </div>
       <div class="step">
         <div class="step-n">3</div>
         <h3>Visite e trattativa</h3>
-        <p>Filtriamo gli acquirenti seri, gestiamo le visite e conduciamo la trattativa per ottenere il miglior risultato per te.</p>
+        <p>Filtriamo gli acquirenti seri, gestiamo le visite e negoziamo il miglior prezzo per te.</p>
+        <span class="step-arrow">→</span>
       </div>
       <div class="step">
         <div class="step-n">4</div>
-        <h3>Venduta!</h3>
-        <p>Gestiamo tutto: preliminare, documentazione, rapporto con il notaio. Tu ti presenti al rogito e incassi.</p>
+        <h3>Venduta! 🎉</h3>
+        <p>Preliminare, documentazione, notaio. Tu ti presenti al rogito e incassi.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ SOCIAL PROOF ══ -->
-<section class="proof">
-  <div class="proof-inner">
+<!-- ══ TESTIMONIANZE ══ -->
+<section class="testi">
+  <div class="testi-inner">
     <div class="sec-tag">Testimonianze</div>
-    <h2 class="sec-h2">Cosa dicono i nostri clienti</h2>
+    <h2 class="sec-h2">Chi ha venduto con noi <em>non torna indietro</em></h2>
+    <p class="sec-sub">Storie vere di clienti veri.</p>
     <div class="t-grid">
       <div class="t-card">
         <div class="t-stars">★★★★★</div>
-        <p class="t-quote">Abbiamo venduto il nostro appartamento a Padova centro in soli 38 giorni e al prezzo che volevamo. Professionali, disponibili e sempre trasparenti. Consigliatissimi!</p>
-        <div class="t-author">Marco e Silvia B.</div>
-        <div class="t-detail">Appartamento — Padova Centro</div>
+        <p class="t-quote">"Venduto in 38 giorni al prezzo che volevamo. Professionali, disponibili e trasparenti. Consigliatissimi!"</p>
+        <div class="t-foot">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" alt="Marco B." class="t-avatar" width="36" height="36">
+          <div class="t-info"><div class="t-name">Marco e Silvia B.</div><div class="t-detail">Appartamento — Padova Centro</div></div>
+        </div>
       </div>
       <div class="t-card">
         <div class="t-stars">★★★★★</div>
-        <p class="t-quote">Avevo provato a vendere da solo per 6 mesi senza risultati. Con Righetto Immobiliare, venduto in 3 settimane a un prezzo superiore a quello che chiedevo io. Sara e il chatbot sono una marcia in piu.</p>
-        <div class="t-author">Andrea T.</div>
-        <div class="t-detail">Villa bifamiliare — Selvazzano</div>
+        <p class="t-quote">"Avevo provato da solo per 6 mesi. Con Righetto, venduto in 3 settimane a un prezzo superiore. Sara e il chatbot sono una marcia in piu."</p>
+        <div class="t-foot">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face" alt="Andrea T." class="t-avatar" width="36" height="36">
+          <div class="t-info"><div class="t-name">Andrea T.</div><div class="t-detail">Villa bifamiliare — Selvazzano</div></div>
+        </div>
       </div>
       <div class="t-card">
         <div class="t-stars">★★★★★</div>
-        <p class="t-quote">Ci hanno seguito dall'inizio alla fine: documenti, notaio, tutto. Non avremmo mai pensato che vendere casa potesse essere cosi semplice. Gino e il suo team fanno la differenza.</p>
-        <div class="t-author">Famiglia Zanetti</div>
-        <div class="t-detail">Casa indipendente — Limena</div>
+        <p class="t-quote">"Documenti, notaio, tutto gestito. Non pensavamo che vendere casa potesse essere cosi semplice. Gino e il team fanno la differenza."</p>
+        <div class="t-foot">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face" alt="Famiglia Zanetti" class="t-avatar" width="36" height="36">
+          <div class="t-info"><div class="t-name">Famiglia Zanetti</div><div class="t-detail">Casa indipendente — Limena</div></div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ FAQ ══ -->
-<section class="faq" id="faq">
-  <div class="faq-inner">
-    <div class="sec-tag">Domande frequenti</div>
-    <h2 class="sec-h2">Hai dei dubbi? Ecco le risposte</h2>
-    <p class="sec-sub" style="margin-bottom:2rem">Le domande piu comuni di chi sta pensando di vendere casa a Padova.</p>
-
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">Quanto costa la valutazione del mio immobile?</div>
-      <div class="faq-a"><p>La valutazione e completamente <strong>gratuita e senza impegno</strong>. Un nostro agente effettua un sopralluogo, analizza i comparabili di zona e ti consegna un report dettagliato con il valore di mercato stimato.</p></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">In quanto tempo si vende un immobile a Padova?</div>
-      <div class="faq-a"><p>Con la nostra strategia multicanale (portali, social, rete contatti, virtual tour), la vendita media avviene in <strong>45 giorni</strong>. Gli immobili ben posizionati e correttamente valutati si vendono ancora piu rapidamente.</p></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">Perche affidarsi a un'agenzia invece di vendere privatamente?</div>
-      <div class="faq-a"><p>Le statistiche mostrano che gli immobili venduti tramite agenzia ottengono mediamente il <strong>10-15% in piu</strong>. L'agente gestisce trattativa, documentazione, certificazioni, accesso al credito dell'acquirente e assistenza fino al rogito notarile.</p></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">Quali documenti servono per vendere casa?</div>
-      <div class="faq-a"><p>I principali sono: atto di provenienza, visura catastale, APE (attestato prestazione energetica), planimetria catastale, certificato di agibilita e documentazione urbanistica. <strong>Il nostro team ti guida nella raccolta</strong> di tutta la documentazione necessaria.</p></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">Quali zone di Padova coprite?</div>
-      <div class="faq-a"><p>Operiamo in tutti i <strong>101 comuni della provincia di Padova</strong>: dal centro storico a Limena, Selvazzano, Abano Terme, Albignasego, Cadoneghe, Rubano, Vigonza e tutte le altre localita.</p></div>
     </div>
   </div>
 </section>
 
 <!-- ══ CTA FINALE ══ -->
 <section class="cta-final">
-  <h2>Pronto a scoprire quanto vale la tua casa?</h2>
-  <p>Richiedi una valutazione gratuita: ti rispondiamo entro 24 ore, senza nessun impegno.</p>
-  <a href="#form" class="cta-btn">Richiedi valutazione gratuita</a>
-  <div class="cta-tel">Oppure chiamaci: <a href="tel:+390498843484">049 884 3484</a> · <a href="https://wa.me/393488621888" target="_blank">WhatsApp</a></div>
+  <h2>Pronto a scoprire quanto vale <em>la tua casa</em>?</h2>
+  <p>Richiedi una valutazione gratuita. Zero costi, zero impegno, rispondiamo in 24h.</p>
+  <a href="#form" class="cta-btn">🏠 Richiedi valutazione gratuita</a>
+  <div class="cta-channels">
+    <div class="cta-ch">📞 <a href="tel:+390498843484">049 884 3484</a></div>
+    <div class="cta-ch">💬 <a href="https://wa.me/393488621888" target="_blank">WhatsApp</a></div>
+    <div class="cta-ch">📧 <a href="mailto:info@righettoimmobiliare.it">Email</a></div>
+  </div>
 </section>
 
 </main>
 
-<!-- FOOTER MINI -->
 <footer class="footer-mini">
-  <div>&copy; 2026 Gruppo Immobiliare Righetto di Capon Gino &mdash; P.IVA 05182390285</div>
-  <div style="margin-top:.4rem">
-    <a href="index.html">Sito principale</a>
-    <a href="privacy.html">Privacy</a>
-    <a href="cookie-policy.html">Cookie Policy</a>
-    <a href="contatti.html">Contatti</a>
-  </div>
+  <div>&copy; 2026 Gruppo Immobiliare Righetto di Capon Gino — P.IVA 05182390285</div>
+  <div style="margin-top:.4rem"><a href="index.html">Sito</a><a href="privacy.html">Privacy</a><a href="cookie-policy.html">Cookie</a><a href="contatti.html">Contatti</a></div>
 </footer>
 
 <!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="js/config.js" defer></script>
 <script>
-/* ── FAQ Toggle ── */
-function toggleFaq(el){
-  el.parentElement.classList.toggle('open');
-}
-
-/* ── Lead Form ── */
 async function sendLead(e){
   e.preventDefault();
-  const nome = document.getElementById('l-nome').value.trim();
-  const cognome = document.getElementById('l-cognome').value.trim();
-  const tel = document.getElementById('l-tel').value.trim();
-  const email = document.getElementById('l-email').value.trim();
-  const comune = document.getElementById('l-comune').value.trim();
-  const tipo = document.getElementById('l-tipo').value;
-  const note = document.getElementById('l-note').value.trim();
-  const gdpr = document.getElementById('l-gdpr').checked;
-
-  if(!nome || !tel || !comune){ alert('Compila nome, telefono e comune'); return; }
-  if(!gdpr){ alert('Accetta la privacy policy per procedere'); return; }
-
-  const btn = document.querySelector('.fc-submit');
-  btn.disabled = true;
-  btn.textContent = 'Invio in corso...';
-
-  const nomeCompleto = nome + (cognome ? ' ' + cognome : '');
-  const messaggio = [
-    tipo ? 'Tipo: ' + tipo : '',
-    comune ? 'Zona: ' + comune : '',
-    note || ''
-  ].filter(Boolean).join(' — ');
-
-  // Formspree
-  let formspreeOk = false;
-  try {
-    if (typeof SERVIZI_CONFIG !== 'undefined' && SERVIZI_CONFIG.FORMSPREE_ID && SERVIZI_CONFIG.FORMSPREE_ID !== 'IL_TUO_FORM_ID') {
-      const r = await fetch('https://formspree.io/f/' + SERVIZI_CONFIG.FORMSPREE_ID, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          nome: nomeCompleto, email: email, telefono: tel,
-          messaggio: messaggio,
-          _subject: 'LANDING VENDITA — Nuovo lead: ' + nomeCompleto
-        })
-      });
-      formspreeOk = r.ok;
-    }
-  } catch(e) {}
-
-  // Supabase
-  let supaOk = false;
-  try {
-    const sb = window.supabase && supabase.createClient(
-      'https://qwkwkemuabfwvwuqrxlu.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc'
-    );
-    if (sb) {
-      await sb.from('richieste').insert([{
-        nome: nomeCompleto, email: email, telefono: tel,
-        messaggio: '[LANDING VENDITA] ' + messaggio,
-        provenienza: 'landing-vendita',
-        letto: false
-      }]);
-      supaOk = true;
-    }
-  } catch(e) {}
-
-  btn.disabled = false;
-  btn.textContent = 'RICHIEDI VALUTAZIONE GRATUITA';
-
-  if (formspreeOk || supaOk) {
-    document.getElementById('leadForm').style.display = 'none';
-    document.getElementById('leadSuccess').style.display = 'block';
-    document.querySelector('.fc-note').style.display = 'none';
-  } else {
-    alert('Errore nell\'invio. Chiamaci al 049 884 3484 o scrivici su WhatsApp.');
-  }
+  const nome=document.getElementById('l-nome').value.trim();
+  const cognome=document.getElementById('l-cognome').value.trim();
+  const tel=document.getElementById('l-tel').value.trim();
+  const email=document.getElementById('l-email').value.trim();
+  const comune=document.getElementById('l-comune').value.trim();
+  const tipo=document.getElementById('l-tipo').value;
+  const note=document.getElementById('l-note').value.trim();
+  const gdpr=document.getElementById('l-gdpr').checked;
+  if(!nome||!tel||!comune){alert('Compila nome, telefono e comune');return;}
+  if(!gdpr){alert('Accetta la privacy policy per procedere');return;}
+  const btn=document.querySelector('.fc-submit');
+  btn.disabled=true;btn.textContent='Invio in corso...';
+  const nomeCompleto=nome+(cognome?' '+cognome:'');
+  const messaggio=[tipo?'Tipo: '+tipo:'',comune?'Zona: '+comune:'',note||''].filter(Boolean).join(' — ');
+  let formspreeOk=false;
+  try{if(typeof SERVIZI_CONFIG!=='undefined'&&SERVIZI_CONFIG.FORMSPREE_ID&&SERVIZI_CONFIG.FORMSPREE_ID!=='IL_TUO_FORM_ID'){const r=await fetch('https://formspree.io/f/'+SERVIZI_CONFIG.FORMSPREE_ID,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({nome:nomeCompleto,email,telefono:tel,messaggio,_subject:'LANDING VENDITA — '+nomeCompleto})});formspreeOk=r.ok;}}catch(e){}
+  let supaOk=false;
+  try{const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');if(sb){await sb.from('richieste').insert([{nome:nomeCompleto,email,telefono:tel,messaggio:'[LANDING VENDITA] '+messaggio,provenienza:'landing-vendita',letto:false}]);supaOk=true;}}catch(e){}
+  btn.disabled=false;btn.textContent='🏠 RICHIEDI VALUTAZIONE GRATUITA';
+  if(formspreeOk||supaOk){document.getElementById('leadForm').style.display='none';document.getElementById('leadSuccess').style.display='block';document.querySelector('.fc-note').style.display='none';document.querySelector('.fc-trust').style.display='none';}
+  else{alert('Errore. Chiamaci al 049 884 3484 o scrivici su WhatsApp.');}
 }
 </script>
 <script src="js/chatbot.js" defer></script>
