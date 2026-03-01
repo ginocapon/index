@@ -452,9 +452,20 @@ async function iscriviNewsletter() {
       await sbBlog.from('newsletter_subscribers').upsert([{
         email: email,
         fonte: 'blog-sidebar',
+        interesse: 'generico',
         attivo: true,
         created_at: new Date().toISOString()
       }], { onConflict: 'email' });
+    }
+    // Iscrivi anche su Brevo
+    if (typeof SERVIZI_CONFIG !== 'undefined' && SERVIZI_CONFIG.BREVO_API_KEY) {
+      try {
+        await fetch('https://api.brevo.com/v3/contacts', {
+          method: 'POST',
+          headers: { 'accept': 'application/json', 'content-type': 'application/json', 'api-key': SERVIZI_CONFIG.BREVO_API_KEY },
+          body: JSON.stringify({ email: email, attributes: { INTERESSE: 'blog', FONTE: 'blog-sidebar' }, listIds: [SERVIZI_CONFIG.BREVO_LIST_ID || 11], updateEnabled: true })
+        });
+      } catch(e) {}
     }
     msgEl.style.display = 'block'; msgEl.style.color = 'var(--oro)'; msgEl.textContent = 'Iscrizione completata!';
     document.getElementById('nlEmail').value = '';
@@ -468,6 +479,7 @@ initBlog();
 </script>
 <script src="js/nav-mobile.js" defer></script>
 <script src="js/config.js"></script>
+<script src="js/brevo-key.js"></script>
 <script src="js/chatbot.js" defer></script>
 <script src="js/cookie-consent.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
