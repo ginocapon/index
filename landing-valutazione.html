@@ -364,6 +364,7 @@ img{max-width:100%;height:auto;display:block}
               <div class="fc-field"><label for="v-email">Email</label><input type="email" id="v-email" placeholder="mario@email.it"></div>
             </div>
             <div class="fc-chk"><input type="checkbox" id="v-gdpr" required><label for="v-gdpr">Acconsento al trattamento dei dati. <a href="privacy.html" style="color:var(--purple)">Privacy</a></label></div>
+            <div class="fc-chk"><input type="checkbox" id="v-news" checked><label for="v-news">Desidero ricevere aggiornamenti su immobili simili nella mia zona e articoli dal blog</label></div>
             <button type="submit" class="fc-submit">📊 Richiedi valutazione gratuita</button>
           </div>
         </form>
@@ -452,7 +453,14 @@ img{max-width:100%;height:auto;display:block}
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="js/config.js" defer></script>
+<script src="js/brevo-key.js" defer></script>
 <script>
+async function iscriviBrevo(email,nome,attrs){
+  try{
+    if(typeof SERVIZI_CONFIG==='undefined'||!SERVIZI_CONFIG.BREVO_API_KEY)return;
+    await fetch('https://api.brevo.com/v3/contacts',{method:'POST',headers:{'accept':'application/json','content-type':'application/json','api-key':SERVIZI_CONFIG.BREVO_API_KEY},body:JSON.stringify({email:email,attributes:{NOME:nome,TELEFONO:attrs.telefono||'',TIPO_IMMOBILE:attrs.tipo_immobile||'',ZONA:attrs.zona||'',INTERESSE:attrs.interesse||'generico',FONTE:attrs.fonte||'sito'},listIds:[SERVIZI_CONFIG.BREVO_LIST_ID||11],updateEnabled:true})});
+  }catch(e){}
+}
 let currentStep=1;
 function goStep(n){
   if(n===2&&(!document.getElementById('v-comune').value.trim()||!document.getElementById('v-tipo').value)){alert('Inserisci comune e tipo immobile');return;}
@@ -463,16 +471,19 @@ function goStep(n){
 }
 async function sendLead(e){
   e.preventDefault();
-  const nome=document.getElementById('v-nome').value.trim(),cognome=document.getElementById('v-cognome').value.trim(),tel=document.getElementById('v-tel').value.trim(),email=document.getElementById('v-email').value.trim(),gdpr=document.getElementById('v-gdpr').checked;
+  const nome=document.getElementById('v-nome').value.trim(),cognome=document.getElementById('v-cognome').value.trim(),tel=document.getElementById('v-tel').value.trim(),email=document.getElementById('v-email').value.trim(),gdpr=document.getElementById('v-gdpr').checked,news=document.getElementById('v-news').checked;
   if(!nome||!tel){alert('Inserisci nome e telefono');return;}
   if(!gdpr){alert('Accetta la privacy policy');return;}
   const btn=document.querySelector('.fc-submit');btn.disabled=true;btn.textContent='Invio in corso...';
   const nomeCompleto=nome+(cognome?' '+cognome:'');
-  const dettagli=[document.getElementById('v-tipo').value?'Tipo: '+document.getElementById('v-tipo').value:'',document.getElementById('v-comune').value?'Zona: '+document.getElementById('v-comune').value:'',document.getElementById('v-mq').value?document.getElementById('v-mq').value+' mq':'',document.getElementById('v-vani').value||'',document.getElementById('v-stato').value?'Stato: '+document.getElementById('v-stato').value:'',document.getElementById('v-piano').value?'Piano: '+document.getElementById('v-piano').value:'',document.getElementById('v-garage').value?'Garage: '+document.getElementById('v-garage').value:'',document.getElementById('v-motivo').value?'Motivo: '+document.getElementById('v-motivo').value:''].filter(Boolean).join(' | ');
+  const tipoImm=document.getElementById('v-tipo').value;
+  const zonaImm=document.getElementById('v-comune').value.trim();
+  const dettagli=[tipoImm?'Tipo: '+tipoImm:'',zonaImm?'Zona: '+zonaImm:'',document.getElementById('v-mq').value?document.getElementById('v-mq').value+' mq':'',document.getElementById('v-vani').value||'',document.getElementById('v-stato').value?'Stato: '+document.getElementById('v-stato').value:'',document.getElementById('v-piano').value?'Piano: '+document.getElementById('v-piano').value:'',document.getElementById('v-garage').value?'Garage: '+document.getElementById('v-garage').value:'',document.getElementById('v-motivo').value?'Motivo: '+document.getElementById('v-motivo').value:''].filter(Boolean).join(' | ');
   let formspreeOk=false;
-  try{if(typeof SERVIZI_CONFIG!=='undefined'&&SERVIZI_CONFIG.FORMSPREE_ID&&SERVIZI_CONFIG.FORMSPREE_ID!=='IL_TUO_FORM_ID'){const r=await fetch('https://formspree.io/f/'+SERVIZI_CONFIG.FORMSPREE_ID,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({nome:nomeCompleto,email,telefono:tel,messaggio:dettagli,_subject:'LANDING VALUTAZIONE — '+nomeCompleto})});formspreeOk=r.ok;}}catch(e){}
+  try{if(typeof SERVIZI_CONFIG!=='undefined'&&SERVIZI_CONFIG.FORMSPREE_ID&&SERVIZI_CONFIG.FORMSPREE_ID!=='IL_TUO_FORM_ID'){const r=await fetch('https://formspree.io/f/'+SERVIZI_CONFIG.FORMSPREE_ID,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({nome:nomeCompleto,email,telefono:tel,messaggio:dettagli,newsletter:news?'Si':'No',_subject:'LANDING VALUTAZIONE — '+nomeCompleto})});formspreeOk=r.ok;}}catch(e){}
   let supaOk=false;
-  try{const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');if(sb){await sb.from('richieste').insert([{nome:nomeCompleto,email,telefono:tel,messaggio:'[LANDING VALUTAZIONE] '+dettagli,provenienza:'landing-valutazione',letto:false}]);supaOk=true;}}catch(e){}
+  try{const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');if(sb){await sb.from('richieste').insert([{nome:nomeCompleto,email,telefono:tel,messaggio:'[LANDING VALUTAZIONE] '+dettagli,provenienza:'landing-valutazione',newsletter:news,letto:false}]);supaOk=true;if(news&&email){await sb.from('newsletter_subscribers').upsert([{email,nome:nomeCompleto,telefono:tel,tipo_immobile:tipoImm||null,zona:zonaImm||null,interesse:'valutazione',provenienza:'landing-valutazione',fonte:'landing-valutazione',attivo:true,created_at:new Date().toISOString()}],{onConflict:'email'}).catch(()=>{});}}}catch(e){}
+  if(news&&email){iscriviBrevo(email,nomeCompleto,{telefono:tel,tipo_immobile:tipoImm,zona:zonaImm,interesse:'valutazione',fonte:'landing-valutazione'});}
   btn.disabled=false;btn.textContent='📊 RICHIEDI VALUTAZIONE GRATUITA';
   if(formspreeOk||supaOk){document.getElementById('leadForm').style.display='none';document.getElementById('leadSuccess').style.display='block';document.querySelector('.fc-note').style.display='none';document.querySelector('.fc-steps').style.display='none';}
   else{alert('Errore. Chiamaci al 049 884 3484 o scrivici su WhatsApp.');}

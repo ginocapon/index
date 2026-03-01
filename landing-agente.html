@@ -376,7 +376,12 @@ img{max-width:100%;height:auto;display:block}
           <input type="email" class="fg-field" id="a-email" placeholder="Email">
           <input type="text" class="fg-field" id="a-comune" placeholder="Comune / Zona *" required>
         </div>
+        <div class="fg-row">
+          <select class="fg-field" id="a-interesse"><option value="">Cosa ti interessa?</option><option value="acquisto">Acquistare un immobile</option><option value="vendita">Vendere un immobile</option><option value="affitto">Affittare un immobile</option><option value="valutazione">Valutazione gratuita</option><option value="consulenza">Consulenza generica</option></select>
+          <select class="fg-field" id="a-tipo"><option value="">Tipo immobile</option><option>Appartamento</option><option>Villa / Villetta</option><option>Casa indipendente</option><option>Bifamiliare</option><option>Rustico / Casale</option><option>Terreno</option><option>Commerciale / Ufficio</option></select>
+        </div>
         <div class="fg-chk"><input type="checkbox" id="a-gdpr" required><label for="a-gdpr">Accetto la <a href="privacy.html">privacy policy</a></label></div>
+        <div class="fg-chk"><input type="checkbox" id="a-news" checked><label for="a-news">Desidero ricevere aggiornamenti su immobili nella mia zona e articoli dal blog</label></div>
         <button type="submit" class="fg-submit">🏠 Richiedi valutazione gratuita</button>
       </form>
       <div class="cta-success" id="leadSuccess">
@@ -400,18 +405,28 @@ img{max-width:100%;height:auto;display:block}
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="js/config.js" defer></script>
+<script src="js/brevo-key.js" defer></script>
 <script>
+async function iscriviBrevo(email,nome,attrs){
+  try{
+    if(typeof SERVIZI_CONFIG==='undefined'||!SERVIZI_CONFIG.BREVO_API_KEY)return;
+    await fetch('https://api.brevo.com/v3/contacts',{method:'POST',headers:{'accept':'application/json','content-type':'application/json','api-key':SERVIZI_CONFIG.BREVO_API_KEY},body:JSON.stringify({email:email,attributes:{NOME:nome,TELEFONO:attrs.telefono||'',TIPO_IMMOBILE:attrs.tipo_immobile||'',ZONA:attrs.zona||'',INTERESSE:attrs.interesse||'generico',FONTE:attrs.fonte||'sito'},listIds:[SERVIZI_CONFIG.BREVO_LIST_ID||11],updateEnabled:true})});
+  }catch(e){}
+}
 async function sendLead(e){
   e.preventDefault();
-  const nome=document.getElementById('a-nome').value.trim(),tel=document.getElementById('a-tel').value.trim(),email=document.getElementById('a-email').value.trim(),comune=document.getElementById('a-comune').value.trim(),gdpr=document.getElementById('a-gdpr').checked;
+  const nome=document.getElementById('a-nome').value.trim(),tel=document.getElementById('a-tel').value.trim(),email=document.getElementById('a-email').value.trim(),comune=document.getElementById('a-comune').value.trim(),gdpr=document.getElementById('a-gdpr').checked,news=document.getElementById('a-news').checked;
+  const interesse=document.getElementById('a-interesse').value;
+  const tipoImm=document.getElementById('a-tipo').value;
   if(!nome||!tel||!comune){alert('Compila nome, telefono e comune');return;}
   if(!gdpr){alert('Accetta la privacy policy');return;}
   const btn=document.querySelector('.fg-submit');btn.disabled=true;btn.textContent='Invio in corso...';
-  const msg='Zona: '+comune;
+  const msg=[interesse?'Interesse: '+interesse:'',tipoImm?'Tipo: '+tipoImm:'','Zona: '+comune].filter(Boolean).join(' — ');
   let formspreeOk=false;
-  try{if(typeof SERVIZI_CONFIG!=='undefined'&&SERVIZI_CONFIG.FORMSPREE_ID&&SERVIZI_CONFIG.FORMSPREE_ID!=='IL_TUO_FORM_ID'){const r=await fetch('https://formspree.io/f/'+SERVIZI_CONFIG.FORMSPREE_ID,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({nome,email,telefono:tel,messaggio:msg,_subject:'LANDING AGENTE — '+nome})});formspreeOk=r.ok;}}catch(e){}
+  try{if(typeof SERVIZI_CONFIG!=='undefined'&&SERVIZI_CONFIG.FORMSPREE_ID&&SERVIZI_CONFIG.FORMSPREE_ID!=='IL_TUO_FORM_ID'){const r=await fetch('https://formspree.io/f/'+SERVIZI_CONFIG.FORMSPREE_ID,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({nome,email,telefono:tel,messaggio:msg,newsletter:news?'Si':'No',_subject:'LANDING AGENTE — '+nome})});formspreeOk=r.ok;}}catch(e){}
   let supaOk=false;
-  try{const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');if(sb){await sb.from('richieste').insert([{nome,email,telefono:tel,messaggio:'[LANDING AGENTE] '+msg,provenienza:'landing-agente',letto:false}]);supaOk=true;}}catch(e){}
+  try{const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');if(sb){await sb.from('richieste').insert([{nome,email,telefono:tel,messaggio:'[LANDING AGENTE] '+msg,provenienza:'landing-agente',newsletter:news,letto:false}]);supaOk=true;if(news&&email){await sb.from('newsletter_subscribers').upsert([{email,nome,telefono:tel,tipo_immobile:tipoImm||null,zona:comune||null,interesse:interesse||'consulenza',provenienza:'landing-agente',fonte:'landing-agente',attivo:true,created_at:new Date().toISOString()}],{onConflict:'email'}).catch(()=>{});}}}catch(e){}
+  if(news&&email){iscriviBrevo(email,nome,{telefono:tel,tipo_immobile:tipoImm,zona:comune,interesse:interesse||'consulenza',fonte:'landing-agente'});}
   btn.disabled=false;btn.textContent='🏠 RICHIEDI VALUTAZIONE GRATUITA';
   if(formspreeOk||supaOk){document.getElementById('inlineForm').style.display='none';document.getElementById('leadSuccess').style.display='block';}
   else{alert('Errore. Chiamaci al 049 884 3484.');}
