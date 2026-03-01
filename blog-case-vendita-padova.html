@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#2C4A6E">
-  <!-- TITLE TAG: 58 char, keyword all'inizio, power word finale -->
   <title>Case in Vendita Padova 2026: Prezzi, Zone e Guida Esperta</title>
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -16,9 +15,11 @@
   <meta property="og:title" content="Case in Vendita Padova 2026: Prezzi, Zone e Guida Esperta">
   <meta property="og:description" content="Case in vendita a Padova e provincia nel 2026: prezzi aggiornati al mq zona per zona, quartieri migliori e consigli d'acquisto. Guida di Righetto Immobiliare.">
   <meta property="og:url" content="https://righettoimmobiliare.it/blog-case-vendita-padova.html">
-  <meta property="og:image" content="https://righettoimmobiliare.it/img/og-default.webp">
+  <meta property="og:image" content="https://righettoimmobiliare.it/img/foto-servizi/vendita-immobili-padova.webp">
   <meta property="og:site_name" content="Righetto Immobiliare">
   <meta property="og:locale" content="it_IT">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="article:published_time" content="2026-03-01T08:00:00+01:00">
   <meta property="article:author" content="Gino Capon">
   <meta property="article:section" content="Mercato locale">
@@ -28,8 +29,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Case in Vendita Padova 2026: Prezzi, Zone e Guida Esperta">
   <meta name="twitter:description" content="Case in vendita a Padova e provincia nel 2026: prezzi aggiornati al mq zona per zona, quartieri migliori e consigli d'acquisto. Guida di Righetto Immobiliare.">
-  <meta name="twitter:image" content="https://righettoimmobiliare.it/img/og-default.webp">
-  <!-- META DESCRIPTION: 152 char, keyword + CTA + valore unico -->
+  <meta name="twitter:image" content="https://righettoimmobiliare.it/img/foto-servizi/vendita-immobili-padova.webp">
   <meta name="description" content="Case in vendita a Padova e provincia nel 2026: prezzi aggiornati al mq zona per zona, quartieri migliori e consigli d'acquisto. Guida di Righetto Immobiliare.">
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/nav-mobile.css">
@@ -43,7 +43,11 @@
     "@type": "Article",
     "headline": "Case in Vendita Padova 2026: Prezzi Aggiornati, Zone Migliori e Guida Completa all'Acquisto",
     "description": "Guida completa alle case in vendita a Padova e provincia nel 2026. Prezzi aggiornati al metro quadro zona per zona, analisi dei quartieri migliori, tipologie disponibili e consigli pratici per l'acquisto.",
-    "image": ["https://righettoimmobiliare.it/img/og-default.webp"],
+    "image": [
+      "https://righettoimmobiliare.it/img/foto-servizi/vendita-immobili-padova.webp",
+      "https://righettoimmobiliare.it/img/foto-servizi/valutazioni-e-perizie-padova.webp",
+      "https://righettoimmobiliare.it/img/foto-servizi/gestioni-immobili-padova.webp"
+    ],
     "author": {
       "@type": "Person",
       "name": "Gino Capon",
@@ -203,9 +207,10 @@
     .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:6px;font-size:.76rem;font-weight:500;transition:all .2s}
     .h-btn:hover{background:var(--oro2);transform:translateY(-1px)}
 
-    /* HERO ARTICOLO */
-    .art-hero{background:linear-gradient(135deg,var(--nero) 0%,var(--blu) 100%);padding:3.5rem 1.5rem 2.5rem;position:relative;overflow:hidden}
-    .art-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:500px;height:500px;background:radial-gradient(circle,rgba(184,212,74,.08) 0%,transparent 70%);pointer-events:none}
+    /* HERO ARTICOLO — stile immagine con overlay */
+    .art-hero{position:relative;overflow:hidden}
+    .art-hero-img{width:100%;height:480px;object-fit:cover;display:block;filter:brightness(.4)}
+    .art-hero-overlay{position:absolute;bottom:0;left:0;right:0;padding:3rem 1.5rem 2.5rem;background:linear-gradient(transparent,rgba(21,36,53,.95) 40%)}
     .art-hero-inner{max-width:820px;margin:0 auto}
     .breadcrumb{font-size:.72rem;color:rgba(255,255,255,.45);margin-bottom:1rem}
     .breadcrumb a{color:rgba(255,255,255,.55);transition:color .2s}
@@ -232,6 +237,8 @@
     .art-content table{width:100%;border-collapse:collapse;margin:1.2rem 0;font-size:.84rem}
     .art-content th,.art-content td{padding:.65rem .9rem;border:1px solid var(--gc);text-align:left}
     .art-content th{background:var(--sfondo);font-weight:600;font-size:.76rem;text-transform:uppercase;letter-spacing:.5px}
+    .art-content figure{margin:1.5rem 0}
+    .art-content figcaption{font-size:.76rem;color:var(--grigio);text-align:center;margin-top:.4rem;font-style:italic}
 
     /* SOMMARIO */
     .toc{background:var(--sfondo);border:1px solid var(--gc);border-radius:10px;padding:1.2rem 1.5rem;margin-bottom:2rem}
@@ -247,6 +254,12 @@
     .stat-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--oro);line-height:1}
     .stat-label{font-size:.68rem;color:rgba(255,255,255,.5);margin-top:.3rem;text-transform:uppercase;letter-spacing:.5px}
     @media(max-width:700px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+
+    /* GALLERY */
+    .gallery{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:1.5rem 0}
+    .gallery img{width:100%;height:220px;object-fit:cover;border-radius:8px;transition:transform .3s}
+    .gallery img:hover{transform:scale(1.02)}
+    @media(max-width:600px){.gallery{grid-template-columns:1fr}}
 
     /* HIGHLIGHT BOX */
     .highlight-box{background:linear-gradient(135deg,var(--nero),var(--blu));border-radius:12px;padding:1.5rem 1.8rem;margin:1.8rem 0;color:#fff}
@@ -283,6 +296,14 @@
     .share-btn{padding:.4rem 1rem;border:1px solid var(--gc);border-radius:20px;font-size:.76rem;color:var(--grigio);cursor:pointer;transition:all .2s;background:#fff;font-family:'Montserrat',sans-serif}
     .share-btn:hover{background:var(--nero);color:#fff;border-color:var(--nero)}
 
+    /* CORRELATI */
+    .related{margin-top:2rem;padding:1.5rem;background:var(--sfondo);border-radius:10px;border:1px solid var(--gc)}
+    .related h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;margin-bottom:.8rem}
+    .related ul{margin:0 0 0 1.2rem}
+    .related li{margin-bottom:.4rem}
+    .related a{color:var(--blu);text-decoration:underline;transition:color .2s}
+    .related a:hover{color:var(--oro)}
+
     /* FOOTER */
     footer{background:linear-gradient(180deg,var(--nero) 0%,#0d1a2a 100%);padding:3rem 1.5rem 1.5rem}
     .fi{max-width:1380px;margin:0 auto}
@@ -298,6 +319,7 @@
 
     @media(max-width:768px){
       .art-hero h1{font-size:1.9rem}
+      .art-hero-img{height:320px}
       .cta-banner{padding:1.5rem;flex-direction:column;text-align:center}
     }
     .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
@@ -324,20 +346,25 @@
 </div>
 
 <main id="main-content">
-<!-- HERO -->
+<!-- HERO con immagine — stile Ca' Marcello -->
 <div class="art-hero">
-  <div class="art-hero-inner">
-    <div class="breadcrumb"><a href="index.html">Home</a> / <a href="blog.html">Blog</a> / Case in Vendita Padova</div>
-    <span class="cat-badge">Mercato locale</span>
-    <!-- H1: keyword principale + anno -->
-    <h1>Case in Vendita a <strong>Padova</strong> nel 2026: Prezzi, Zone Migliori e Guida Completa</h1>
-    <div class="art-hero-meta">
-      <div class="av">G</div>
-      <span>Gino Capon</span>
-      <span>&middot;</span>
-      <span>1 marzo 2026</span>
-      <span>&middot;</span>
-      <span>9 min di lettura</span>
+  <picture>
+    <source srcset="img/foto-servizi/vendita-immobili-padova.webp" type="image/webp">
+    <img class="art-hero-img" src="img/foto-servizi/vendita-immobili-padova.png" alt="Case in vendita a Padova e provincia - panoramica mercato immobiliare 2026" width="1200" height="600" fetchpriority="high">
+  </picture>
+  <div class="art-hero-overlay">
+    <div class="art-hero-inner">
+      <div class="breadcrumb"><a href="index.html">Home</a> / <a href="blog.html">Blog</a> / Case in Vendita Padova</div>
+      <span class="cat-badge">Mercato locale</span>
+      <h1>Case in Vendita a <strong>Padova</strong> nel 2026: Prezzi, Zone Migliori e Guida Completa</h1>
+      <div class="art-hero-meta">
+        <div class="av">G</div>
+        <span>Gino Capon</span>
+        <span>&middot;</span>
+        <span>1 marzo 2026</span>
+        <span>&middot;</span>
+        <span>9 min di lettura</span>
+      </div>
     </div>
   </div>
 </div>
@@ -399,6 +426,14 @@
 
     <p>Nella nostra esperienza in Righetto Immobiliare, dove <strong>gestiamo compravendite nella zona di Padova dal 2000</strong>, il 2026 si sta confermando come un anno favorevole per chi acquista: c'e' buona scelta, i prezzi sono ancora ragionevoli rispetto alle grandi citta' del Nord, e le tempistiche di compravendita sono tornate ai livelli pre-pandemia.</p>
 
+    <figure>
+      <picture>
+        <source srcset="img/foto-servizi/valutazioni-e-perizie-padova.webp" type="image/webp">
+        <img src="img/foto-servizi/valutazioni-e-perizie-padova.png" alt="Valutazione immobiliare a Padova - consulenza per acquisto casa" loading="lazy">
+      </picture>
+      <figcaption>Un momento di consulenza immobiliare presso la nostra agenzia: valutare correttamente un immobile e' il primo passo per un acquisto sicuro</figcaption>
+    </figure>
+
     <!-- H2 #2 — PREZZI -->
     <h2 id="prezzi-zona">Quanto costano le case in vendita a Padova? Prezzi al mq aggiornati al 2026</h2>
 
@@ -434,13 +469,25 @@
     <p>Il centro storico di Padova &mdash; da <strong>Piazza delle Erbe</strong> a <strong>Prato della Valle</strong>, passando per il Portello e le Riviere &mdash; resta la zona a maggiore domanda. Gli immobili qui si rivalutano costantemente grazie alla posizione unica, alla vicinanza all'universita' e alla qualita' architettonica. Ideale per <strong>investimento a reddito</strong> (locazione studentesca) e per chi cerca il fascino della citta' storica.</p>
 
     <h3>Arcella &ndash; San Carlo: il quartiere in trasformazione</h3>
-    <p>L'Arcella e' la zona di Padova con il <strong>maggiore potenziale di crescita nel 2026</strong>. I prezzi sono ancora accessibili rispetto al centro, ma i progetti di riqualificazione urbana e la vicinanza alla stazione stanno attraendo giovani coppie e investitori. Nella nostra agenzia abbiamo registrato un +12% di richieste per questa zona nell'ultimo anno.</p>
+    <p>L'Arcella e' la zona di Padova con il <strong>maggiore potenziale di crescita nel 2026</strong>. I prezzi sono ancora accessibili rispetto al centro, ma i progetti di riqualificazione urbana e la vicinanza alla stazione stanno attraendo giovani coppie e investitori. Nella nostra agenzia abbiamo registrato un <strong>+12% di richieste</strong> per questa zona nell'ultimo anno.</p>
 
     <h3>Forcellini &ndash; Terranegra: la scelta delle famiglie</h3>
     <p>Quartiere residenziale tranquillo, con <strong>scuole, parchi e servizi a portata di mano</strong>. Le villette e gli appartamenti con giardino sono i piu' richiesti. Ottimo rapporto qualita'-prezzo per famiglie con bambini che cercano spazio senza allontanarsi troppo dal centro.</p>
 
     <h3>Prima cintura: Limena, Vigonza, Selvazzano</h3>
     <p>I comuni della <strong>prima cintura urbana</strong> offrono il miglior rapporto qualita'-prezzo del territorio padovano. A <strong>Limena</strong>, dove ha sede la nostra agenzia, un appartamento di 90 mq in buone condizioni si trova a <strong>135.000-170.000 &euro;</strong>. A <strong>Vigonza</strong> e <strong>Selvazzano Dentro</strong> i prezzi sono simili, con il vantaggio di collegamenti rapidi verso Padova (10-15 minuti in auto, bus frequenti).</p>
+
+    <!-- GALLERY — immagini servizi -->
+    <div class="gallery">
+      <picture>
+        <source srcset="img/foto-servizi/gestioni-immobili-padova.webp" type="image/webp">
+        <img src="img/foto-servizi/gestioni-immobili-padova.png" alt="Gestione immobili in vendita a Padova - servizio professionale Righetto Immobiliare" loading="lazy">
+      </picture>
+      <picture>
+        <source srcset="img/foto-servizi/contratti-di-locazione-padova.webp" type="image/webp">
+        <img src="img/foto-servizi/contratti-di-locazione-padova.png" alt="Contratti immobiliari Padova - compravendita e locazione con assistenza professionale" loading="lazy">
+      </picture>
+    </div>
 
     <!-- CTA INTERMEDIA -->
     <div class="cta-banner">
@@ -474,13 +521,31 @@
     <p>La provincia di Padova offre <strong>prezzi piu' accessibili e spazi piu' ampi</strong> rispetto al capoluogo, senza rinunciare ai servizi essenziali. I comuni dove abbiamo gestito il maggior numero di compravendite nel 2025-2026 sono i seguenti.</p>
 
     <ul>
-      <li><strong>Limena:</strong> a 8 km dal centro di Padova, collegata dall'asse del Brenta. Comune in crescita con servizi completi (scuole, commercio, sport). Prezzi medi: 1.500-1.900 &euro;/mq</li>
-      <li><strong>Vigonza:</strong> ampia offerta di villette e appartamenti nuovi. Zona strategica tra Padova e la riviera del Brenta. Prezzi medi: 1.400-1.800 &euro;/mq</li>
-      <li><strong>Campodarsego:</strong> ideale per chi cerca <strong>metrature generose a prezzi contenuti</strong>. Villette con giardino a partire da 180.000 &euro;. Prezzi medi: 1.200-1.600 &euro;/mq</li>
-      <li><strong>Selvazzano Dentro:</strong> confine sud-ovest di Padova, vicino ai Colli Euganei. Zone verdi e residenziali di pregio. Prezzi medi: 1.600-2.100 &euro;/mq</li>
-      <li><strong>Abano Terme:</strong> la citta' termale offre immobili con standard elevati e un contesto paesaggistico unico. Prezzi medi: 1.500-2.200 &euro;/mq</li>
-      <li><strong>Rubano:</strong> comune residenziale molto apprezzato per la tranquillita' e i servizi. Prezzi medi: 1.500-2.000 &euro;/mq</li>
+      <li><strong>Limena:</strong> a 8 km dal centro di Padova, collegata dall'asse del Brenta. Comune in crescita con servizi completi (scuole, commercio, sport). Prezzi medi: <strong>1.500-1.900 &euro;/mq</strong></li>
+      <li><strong>Vigonza:</strong> ampia offerta di villette e appartamenti nuovi. Zona strategica tra Padova e la riviera del Brenta. Prezzi medi: <strong>1.400-1.800 &euro;/mq</strong></li>
+      <li><strong>Campodarsego:</strong> ideale per chi cerca <strong>metrature generose a prezzi contenuti</strong>. Villette con giardino a partire da 180.000 &euro;. Prezzi medi: <strong>1.200-1.600 &euro;/mq</strong></li>
+      <li><strong>Selvazzano Dentro:</strong> confine sud-ovest di Padova, vicino ai Colli Euganei. Zone verdi e residenziali di pregio. Prezzi medi: <strong>1.600-2.100 &euro;/mq</strong></li>
+      <li><strong>Abano Terme:</strong> la citta' termale offre immobili con standard elevati e un contesto paesaggistico unico. Prezzi medi: <strong>1.500-2.200 &euro;/mq</strong></li>
+      <li><strong>Rubano:</strong> comune residenziale molto apprezzato per la tranquillita' e i servizi. Prezzi medi: <strong>1.500-2.000 &euro;/mq</strong></li>
     </ul>
+
+    <figure>
+      <picture>
+        <source srcset="img/foto-servizi/gestione-preliminari-padova.webp" type="image/webp">
+        <img src="img/foto-servizi/gestione-preliminari-padova.png" alt="Gestione preliminare di compravendita immobiliare a Padova" loading="lazy">
+      </picture>
+      <figcaption>La firma del preliminare di compravendita: un passaggio fondamentale che seguiamo con cura per ogni cliente</figcaption>
+    </figure>
+
+    <div class="highlight-box">
+      <h3>La nostra esperienza in provincia</h3>
+      <p>In oltre 26 anni di attivita' a Limena, abbiamo maturato una <strong>conoscenza capillare del territorio</strong>: conosciamo i costruttori, i condomini, le strade e i prezzi reali di ogni via. Questo ci permette di consigliare il giusto prezzo — sia a chi compra che a chi vende — evitando sorprese dopo il rogito.</p>
+      <ul>
+        <li>Oltre <strong>500 compravendite</strong> gestite nella provincia di Padova</li>
+        <li>Rete di contatti con notai, geometri e periti del territorio</li>
+        <li>Valutazione gratuita e senza impegno per ogni immobile</li>
+      </ul>
+    </div>
 
     <!-- H2 #6 — CONSIGLI -->
     <h2 id="consigli">Come scegliere la casa giusta a Padova? 7 consigli pratici</h2>
@@ -579,13 +644,13 @@
     <a class="share-btn" href="mailto:?subject=Case%20in%20Vendita%20Padova%202026%20-%20Guida&body=Leggi%20questa%20guida%3A%20https%3A%2F%2Frighettoimmobiliare.it%2Fblog-case-vendita-padova.html" target="_blank" rel="noopener">Email</a>
   </div>
 
-  <!-- ARTICOLI SATELLITE (Topic Cluster) -->
-  <div style="margin-top:2rem;padding:1.5rem;background:var(--sfondo);border-radius:10px;border:1px solid var(--gc)">
-    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;margin-bottom:.8rem">Approfondimenti correlati</h3>
-    <ul style="margin:0 0 0 1.2rem">
-      <li style="margin-bottom:.4rem"><a href="servizio-valutazioni.html" style="color:var(--blu);text-decoration:underline">Come funziona la valutazione immobiliare a Padova</a></li>
-      <li style="margin-bottom:.4rem"><a href="servizio-vendita.html" style="color:var(--blu);text-decoration:underline">Guida completa alla vendita di un immobile a Padova</a></li>
-      <li style="margin-bottom:.4rem"><a href="blog.html" style="color:var(--blu);text-decoration:underline">Tutti gli articoli del nostro blog immobiliare</a></li>
+  <!-- ARTICOLI CORRELATI -->
+  <div class="related">
+    <h3>Approfondimenti correlati</h3>
+    <ul>
+      <li><a href="servizio-valutazioni.html">Come funziona la valutazione immobiliare a Padova</a></li>
+      <li><a href="servizio-vendita.html">Guida completa alla vendita di un immobile a Padova</a></li>
+      <li><a href="blog-ca-marcello-mestre.html">Ca' Marcello Mestre: riqualificazione e investimento nel Veneto</a></li>
     </ul>
   </div>
 
