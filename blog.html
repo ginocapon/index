@@ -292,6 +292,60 @@ async function initBlog() {
     console.warn('Blog Supabase non disponibile, uso localStorage:', e.message);
     try { allArticles = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]').filter(a => a.stato === 'pubblicato'); } catch(ex) { allArticles = []; }
   }
+  // Articoli statici (pagine HTML dedicate)
+  const articoliStatici = [
+    {
+      titolo: 'Conviene comprare casa a Padova o restare in affitto? Analisi su 20 anni',
+      categoria: 'Consigli acquisto',
+      data: '2026-03-02',
+      tempo: 12,
+      stato: 'pubblicato',
+      immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp',
+      url_statico: 'blog-comprare-affittare-padova.html',
+      contenuto: 'Conviene comprare casa a Padova o restare in affitto? Su un orizzonte di 20 anni, l\'acquisto costruisce un patrimonio netto di oltre 190.000 euro, mentre l\'affitto genera un costo irrecuperabile di circa 250.000 euro. Analisi completa con dati OMI, simulazioni mutuo e trend del mercato immobiliare padovano.',
+      evidenza: true
+    },
+    {
+      titolo: 'Case in Vendita Padova 2026: Prezzi, Zone Migliori e Guida Completa',
+      categoria: 'Mercato locale',
+      data: '2026-03-01',
+      tempo: 9,
+      stato: 'pubblicato',
+      immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp',
+      url_statico: 'blog-case-vendita-padova.html',
+      contenuto: 'Le case in vendita a Padova nel 2026 hanno un prezzo medio compreso tra 1.800 e 2.600 euro/mq in citta\' e tra 1.200 e 1.900 euro/mq in provincia. Il mercato immobiliare padovano e\' in crescita costante.',
+      evidenza: true
+    },
+    {
+      titolo: 'Mutuo Prima Casa a Padova: Guida Completa 2026',
+      categoria: 'Consigli acquisto',
+      data: '2026-02-20',
+      tempo: 10,
+      stato: 'pubblicato',
+      immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp',
+      url_statico: 'blog-mutuo-prima-casa-padova.html',
+      contenuto: 'Guida completa al mutuo prima casa a Padova nel 2026: tassi, requisiti, agevolazioni under 36, documenti necessari e consigli pratici per ottenere il miglior finanziamento.',
+      evidenza: false
+    },
+    {
+      titolo: 'Ca\' Marcello Mestre: Riqualificazione e Investimento nel Veneto',
+      categoria: 'Mercato locale',
+      data: '2026-02-24',
+      tempo: 8,
+      stato: 'pubblicato',
+      immagine_copertina: 'img/blog/ca-marcello-mestre.webp',
+      url_statico: 'blog-ca-marcello-mestre.html',
+      contenuto: 'Ca\' Marcello a Mestre: un progetto di riqualificazione che trasforma una storica villa veneta in un\'opportunita\' di investimento immobiliare unica nel territorio.',
+      evidenza: false
+    }
+  ];
+  // Merge: aggiungi statici solo se non gia' presenti (by titolo)
+  const titoliEsistenti = new Set(allArticles.map(a => (a.titolo || '').toLowerCase()));
+  articoliStatici.forEach(s => {
+    if (!titoliEsistenti.has(s.titolo.toLowerCase())) {
+      allArticles.push(s);
+    }
+  });
   allArticles.sort((a,b) => new Date(b.data) - new Date(a.data));
   renderBlog();
 }
@@ -338,6 +392,7 @@ function generateSlug(titolo) {
   return s;
 }
 function artUrl(a) {
+  if (a.url_statico) return a.url_statico;
   return 'blog-articolo.html?s=' + encodeURIComponent(generateSlug(a.titolo));
 }
 
