@@ -1412,12 +1412,14 @@ async function downloadPDF() {
   y += 16;
 
   // ── DESCRIZIONE (prominente, subito dopo specs) ──
-  if (d.descrizione) {
+  const descTesto = d.descrizione || d.note_interne || d.descrizione_pubblica || '';
+  if (descTesto) {
     y = sectionTitle('DESCRIZIONE', y);
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(8.5);
     doc.setTextColor(60, 75, 95);
-    const descLines = doc.splitTextToSize(d.descrizione.substring(0, 2000), W - m * 2);
+    const descClean = descTesto.replace(/\\n/g, '\n').replace(/<[^>]*>/g, '');
+    const descLines = doc.splitTextToSize(descClean.substring(0, 2000), W - m * 2);
     for (let l = 0; l < descLines.length; l++) {
       y = checkPage(y, 5);
       doc.text(descLines[l], m, y);
