@@ -6158,7 +6158,7 @@ function printPropertyPdf(id) {
   ${prezzoMq ? '<span class="pmq">(' + prezzoMq + ')</span>' : ''}
 </div>
 ${specsHtml}
-${i.descrizione ? '<div class="section"><h2>Descrizione</h2><div class="desc">' + escHtml(i.descrizione || '').replace(/\\n/g, '<br>') + '</div></div>' : ''}
+${(i.descrizione || i.note_interne || i.descrizione_pubblica) ? '<div class="section"><h2>Descrizione</h2><div class="desc">' + escHtml(i.descrizione || i.note_interne || i.descrizione_pubblica || '').replace(/\\n/g, '<br>') + '</div></div>' : ''}
 <div class="section" style="margin-top:10px"><h2>Caratteristiche</h2></div>
 <table class="feat-table">${featRows}</table>
 ${tagHtml(ambienti, 'Ambienti')}
