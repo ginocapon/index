@@ -756,7 +756,8 @@ class RighettoChat {
   // ────── STIMA PREZZO ──────
   stimaPrezzo(comune, tipologia, mq, stato) {
     const comuneKey = this.normalizeKey(comune);
-    const prezziZona = PREZZI_COMUNI[comuneKey] || PREZZI_COMUNI['default'];
+    const fuzzyKey = this.fuzzyMatchComune(comune);
+    const prezziZona = PREZZI_COMUNI[comuneKey] || (fuzzyKey ? PREZZI_COMUNI[fuzzyKey] : null) || PREZZI_COMUNI['default'];
 
     let prezzoBase;
     const tipoNorm = this.normalizeKey(tipologia);
@@ -825,6 +826,60 @@ class RighettoChat {
       .replace(/à/g,'a').replace(/è|é/g,'e').replace(/ì/g,'i')
       .replace(/ò/g,'o').replace(/ù/g,'u')
       .replace(/[^a-z0-9\s']/g,'').replace(/\s+/g,' ');
+  }
+
+  // ────── FUZZY MATCHING per errori di battitura ──────
+  levenshtein(a, b) {
+    const m = a.length, n = b.length;
+    const d = Array.from({ length: m + 1 }, (_, i) => [i]);
+    for (let j = 1; j <= n; j++) d[0][j] = j;
+    for (let i = 1; i <= m; i++) {
+      for (let j = 1; j <= n; j++) {
+        d[i][j] = a[i-1] === b[j-1]
+          ? d[i-1][j-1]
+          : 1 + Math.min(d[i-1][j], d[i][j-1], d[i-1][j-1]);
+      }
+    }
+    return d[m][n];
+  }
+
+  fuzzyMatchComune(input) {
+    const norm = this.normalizeKey(input);
+    // Exact match first
+    if (PREZZI_COMUNI[norm]) return norm;
+    // Partial match (existing logic)
+    const keys = Object.keys(PREZZI_COMUNI).filter(k => k !== 'default');
+    const partial = keys.find(k => norm.includes(k) || k.includes(norm));
+    if (partial) return partial;
+    // Fuzzy: Levenshtein distance
+    let best = null, bestDist = Infinity;
+    for (const k of keys) {
+      const dist = this.levenshtein(norm, k);
+      // Allow max 2 typos for short names, max 3 for longer ones
+      const maxDist = k.length <= 5 ? 1 : k.length <= 8 ? 2 : 3;
+      if (dist < bestDist && dist <= maxDist) {
+        best = k;
+        bestDist = dist;
+      }
+    }
+    return best; // null if no fuzzy match
+  }
+
+  fuzzyMatchKeyword(input, keywords) {
+    const norm = input.toLowerCase();
+    // Exact substring match first (original logic)
+    if (keywords.some(k => norm.includes(k))) return true;
+    // Fuzzy: check each word in input against each keyword
+    const words = norm.split(/\s+/);
+    for (const kw of keywords) {
+      for (const w of words) {
+        if (w.length < 3) continue; // skip tiny words
+        const dist = this.levenshtein(w, kw);
+        const maxDist = kw.length <= 5 ? 1 : 2;
+        if (dist <= maxDist) return true;
+      }
+    }
+    return false;
   }
 
   formatPrice(n) {
@@ -1023,9 +1078,9 @@ class RighettoChat {
       return '🏠 **Cerchi un immobile!** Ottimo, ti aiuto subito.\n\nStai cercando in **vendita** (acquisto) o in **affitto** (locazione)?';
     }
 
-    // FAQ
+    // FAQ (con fuzzy matching per errori di battitura)
     for (const faq of FAQ_DATA) {
-      if (faq.k.some(k => low.includes(k))) {
+      if (this.fuzzyMatchKeyword(low, faq.k)) {
         return faq.r;
       }
     }
@@ -1063,8 +1118,7 @@ class RighettoChat {
   async completaStima() {
     const { comune, tipo, mq, stato } = this.stimaData;
     const stima = this.stimaPrezzo(comune, tipo, mq, stato);
-    const comuni_validi = Object.keys(PREZZI_COMUNI).filter(k => k !== 'default');
-    const trovato = comuni_validi.find(k => this.normalizeKey(comune).includes(k) || k.includes(this.normalizeKey(comune)));
+    const trovato = this.fuzzyMatchComune(comune);
 
     let msg = `📊 **STIMA DI MERCATO** *(dati 2025–2026)*\n\n`;
     msg += `📍 ${comune.charAt(0).toUpperCase() + comune.slice(1)}\n`;
@@ -1117,7 +1171,9 @@ class RighettoChat {
       }
 
       if (zona) {
-        const zonaNorm = this.normalizeKey(zona);
+        // Fuzzy match: correggi errori di battitura nei nomi comuni
+        const fuzzyZona = this.fuzzyMatchComune(zona);
+        const zonaNorm = fuzzyZona || this.normalizeKey(zona);
         q = q.ilike('comune', '%' + zonaNorm + '%');
       }
 
