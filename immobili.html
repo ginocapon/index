@@ -46,8 +46,8 @@
       --blu:#2C4A6E;--sfondo:#ECE7DF;--card:#F7F5F1;--caffe:#152435;--testo:#152435;
       --blu2:#3A5F8C;--blu3:#4E789A;--azzurro:#8AB4CE;--carta:#F2EDE7;--oro-bg:rgba(184,212,74,0.10);
     }
-    html{scroll-behavior:smooth}
-    body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--testo);line-height:1.5}
+    html{scroll-behavior:smooth;overflow-x:hidden}
+    body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--testo);line-height:1.5;overflow-x:hidden;max-width:100vw}
 
     /* ── HEADER ── */
     header{background:linear-gradient(135deg,var(--nero) 0%,var(--blu) 100%);position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.07)}
@@ -305,6 +305,14 @@
       .card.list-view{grid-template-columns:1fr}
       .modal-specs{grid-template-columns:repeat(2,1fr)}
       .hero-title{font-size:1.4rem}
+      .page{padding:1rem .75rem}
+      .hero-search{padding:1.5rem .75rem 0}
+      .header-inner{padding:0 .75rem}
+      .map-toggle-bar{padding:.7rem .75rem}
+      .card-body{padding:.8rem .75rem}
+      .card-footer{padding:.5rem .75rem}
+      .card-price{font-size:1.35rem}
+      .card-title{font-size:.82rem}
     }
     .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
   </style>
@@ -666,33 +674,13 @@
         </div>
       </div>
 
-      <div class="fp-section">
-        <div class="fp-section-title">Caratteristiche</div>
-        <div class="fp-check">
-          <label><input type="checkbox" onchange="filterCards()"> Con giardino</label>
-          <label><input type="checkbox" onchange="filterCards()"> Con garage</label>
-          <label><input type="checkbox" onchange="filterCards()"> Con piscina</label>
-          <label><input type="checkbox" onchange="filterCards()"> Con mansarda</label>
-          <label><input type="checkbox" onchange="filterCards()"> Vista aperta</label>
-          <label><input type="checkbox" onchange="filterCards()"> Virtual Tour 360°</label>
-          <label><input type="checkbox" onchange="filterCards()"> Video YouTube</label>
-        </div>
-      </div>
-
-      <div class="fp-section">
-        <div class="fp-section-title">Classe energetica</div>
-        <div class="ce-row">
-          <span class="ce-tag ce-A4 on" onclick="this.classList.toggle('on')">A4</span>
-          <span class="ce-tag ce-A3 on" onclick="this.classList.toggle('on')">A3</span>
-          <span class="ce-tag ce-A2 on" onclick="this.classList.toggle('on')">A2</span>
-          <span class="ce-tag ce-A1 on" onclick="this.classList.toggle('on')">A1</span>
-          <span class="ce-tag ce-B on" onclick="this.classList.toggle('on')">B</span>
-          <span class="ce-tag ce-C on" onclick="this.classList.toggle('on')">C</span>
-          <span class="ce-tag ce-D on" onclick="this.classList.toggle('on')">D</span>
-          <span class="ce-tag ce-E on" onclick="this.classList.toggle('on')">E</span>
-          <span class="ce-tag ce-F on" onclick="this.classList.toggle('on')">F</span>
-          <span class="ce-tag ce-G on" onclick="this.classList.toggle('on')">G</span>
-        </div>
+      <div class="fp-section" style="border-bottom:none;background:linear-gradient(135deg,rgba(184,212,74,0.08),rgba(58,85,120,0.05));padding:1.1rem;text-align:center">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--nero);margin-bottom:.35rem">Non trovi quello che cerchi?</div>
+        <div style="font-size:.75rem;color:var(--grigio);line-height:1.5;margin-bottom:.7rem">Il nostro team conosce ogni angolo della provincia di Padova</div>
+        <a href="contatti.html" style="display:inline-flex;align-items:center;gap:.4rem;background:var(--nero);color:#fff;padding:.45rem 1rem;border-radius:6px;font-size:.72rem;font-weight:500;text-decoration:none;letter-spacing:.04em;transition:background .2s">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          Contattaci
+        </a>
       </div>
     </div>
   </aside>
@@ -1022,12 +1010,49 @@
     const camereMin = parseInt(document.getElementById('f-camere').value) || 0;
     const mqMin = parseInt(document.getElementById('f-mq').value) || 0;
 
+    // Sidebar: range prezzo
+    const sPmin = parseInt(document.getElementById('s-pmin').value) || 0;
+    const sPmax = parseInt(document.getElementById('s-pmax').value) || Infinity;
+    // Sidebar: range superficie
+    const sMqMin = parseInt(document.getElementById('s-mqmin').value) || 0;
+    const sMqMax = parseInt(document.getElementById('s-mqmax').value) || Infinity;
+    // Sidebar: camere chip
+    const camChip = document.querySelector('.fp-chip-row [onclick*="cam"].on');
+    const camFromSidebar = camChip ? parseInt(camChip.textContent) || 0 : 0;
+    // Sidebar: tipologia checkboxes
+    const tipoChecks = document.querySelectorAll('.fp-section .fp-check label');
+    const tipoSection = document.querySelector('.fp-section .fp-section-title');
+    let checkedTipos = [];
+    let tipoSidebarActive = false;
+    tipoChecks.forEach(lbl => {
+      const cb = lbl.querySelector('input[type="checkbox"]');
+      const text = lbl.textContent.replace(/\d/g,'').trim().toLowerCase();
+      if (cb && tipoSection && lbl.closest('.fp-section').querySelector('.fp-section-title').textContent.trim() === 'Tipologia immobile') {
+        if (cb.checked) checkedTipos.push(text);
+        else tipoSidebarActive = true;
+      }
+    });
+    // Sidebar: zona checkboxes
+    let checkedZone = [];
+    let zonaSidebarActive = false;
+    document.querySelectorAll('.fp-section').forEach(sec => {
+      const title = sec.querySelector('.fp-section-title');
+      if (title && title.textContent.trim() === 'Zona / Comune') {
+        sec.querySelectorAll('.fp-check label').forEach(lbl => {
+          const cb = lbl.querySelector('input[type="checkbox"]');
+          const text = lbl.childNodes[1] ? lbl.childNodes[1].textContent.trim().toLowerCase() : lbl.textContent.replace(/\d/g,'').trim().toLowerCase();
+          if (cb && cb.checked) checkedZone.push(text);
+          if (cb && !cb.checked) zonaSidebarActive = true;
+        });
+      }
+    });
+
     const cards = document.querySelectorAll('#imm-grid .card');
     let visible = 0;
 
     cards.forEach(c => {
       const cOp = c.dataset.op || 'vendita';
-      const cTipo = c.dataset.tipo || '';
+      const cTipo = (c.dataset.tipo || '').toLowerCase();
       const cPrezzo = parseInt(c.dataset.prezzo) || 0;
       const cMq = parseInt(c.dataset.mq) || 0;
       const cCamere = parseInt(c.dataset.camere) || 0;
@@ -1035,12 +1060,28 @@
       const cTitle = c.querySelector('.card-title').textContent.toLowerCase();
 
       let show = true;
+      // Operazione
       if (currentOp !== 'aste' && cOp !== currentOp) show = false;
+      // Barra di ricerca: tipologia
       if (tipo && !cTipo.includes(tipo)) show = false;
+      // Barra di ricerca: prezzo max
       if (cPrezzo > prezzoMax) show = false;
+      // Barra di ricerca: camere min
       if (cCamere < camereMin) show = false;
+      // Barra di ricerca: superficie min
       if (cMq < mqMin) show = false;
+      // Barra di ricerca: zona testo
       if (zona && !cComune.includes(zona) && !cTitle.includes(zona)) show = false;
+      // Sidebar: range prezzo
+      if (cPrezzo < sPmin || cPrezzo > sPmax) show = false;
+      // Sidebar: range superficie
+      if (cMq < sMqMin || cMq > sMqMax) show = false;
+      // Sidebar: camere chip
+      if (camFromSidebar > 0 && cCamere < camFromSidebar) show = false;
+      // Sidebar: tipologia checkboxes (filtra solo se qualcuno è deselezionato)
+      if (tipoSidebarActive && !checkedTipos.some(t => cTipo.includes(t) || t.includes(cTipo))) show = false;
+      // Sidebar: zona checkboxes (filtra solo se qualcuno è deselezionato)
+      if (zonaSidebarActive && !checkedZone.some(z => cComune.includes(z) || z.includes(cComune))) show = false;
 
       c.style.display = show ? '' : 'none';
       if (show) visible++;
