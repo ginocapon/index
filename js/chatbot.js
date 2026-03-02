@@ -1431,9 +1431,21 @@ function initChatbotUI() {
     transition: opacity 0.3s;
   }
   .chat-rating-thanks.visible { opacity: 1; }
-  @media (max-width: 420px) {
-    #rig-chat-box { width: calc(100vw - 20px); right: 10px; bottom: 90px; }
-    #rig-chat-widget { right: 14px; bottom: 20px; }
+  #rig-chat-close-bar {
+    display: none; text-align: center; margin-top: 6px;
+  }
+  #rig-chat-close-bar button {
+    background: #3A5578; color: #fff; border: none;
+    padding: 5px 16px; border-radius: 20px; font-family: inherit;
+    font-size: 0.68rem; font-weight: 600; cursor: pointer;
+    letter-spacing: 0.03em; transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 2px 8px rgba(58,85,120,0.3);
+  }
+  #rig-chat-close-bar button:hover { background: #CEE08F; color: #152435; transform: scale(1.05); }
+  #rig-chat-close-bar.visible { display: block; }
+  @media (max-width: 768px) {
+    #rig-chat-box { width: calc(100vw - 24px); right: 12px; bottom: 90px; max-width: none; }
+    #rig-chat-widget { right: 12px; bottom: 18px; }
   }
   </style>
 
@@ -1473,6 +1485,7 @@ function initChatbotUI() {
       </svg>
       <span id="rig-chat-pulse"></span>
     </button>
+    <div id="rig-chat-close-bar"><button onclick="rigChat.toggle()">Chiudi chat</button></div>
   </div>`;
 
   document.body.insertAdjacentHTML('beforeend', html);
@@ -1488,10 +1501,12 @@ function initChatbotUI() {
       const iconAvatar = document.getElementById('rig-chat-btn-avatar');
       const iconClose = document.getElementById('rig-chat-icon-close');
       const pulse = document.getElementById('rig-chat-pulse');
+      const closeBar = document.getElementById('rig-chat-close-bar');
       box.classList.toggle('open', this.open);
       if (iconAvatar) iconAvatar.style.display = this.open ? 'none' : 'block';
       iconClose.style.display = this.open ? 'block' : 'none';
       if (pulse) pulse.style.display = this.open ? 'none' : 'block';
+      if (closeBar) closeBar.classList.toggle('visible', this.open);
       if (this.open && document.getElementById('rig-chat-msgs').children.length === 0) {
         this.addMsg('bot', '👋 Ciao! Sono **Sara**, l\'assistente di **Righetto Immobiliare**.\n\nPosso aiutarti con:\n• 💰 **Stima valore** del tuo immobile\n• 🔍 **Cerca immobili** in vendita o affitto\n• 📋 Info su servizi, tasse, mutui e procedure\n• 📞 **Contattare** un nostro agente\n\nCome posso aiutarti?');
         document.getElementById('rig-chat-input').focus();
