@@ -2118,7 +2118,16 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 </div>
                 <div class="form-group">
                   <label>Piano</label>
-                  <input type="text" id="f_piano" placeholder="es. 2° / Terra / Ultimo">
+                  <select id="f_piano">
+                    <option value="">Seleziona...</option>
+                    <option value="Piano Terra">Piano Terra</option>
+                    <option value="1°">1° Piano</option>
+                    <option value="2°">2° Piano</option>
+                    <option value="3°">3° Piano</option>
+                    <option value="4°">4° Piano</option>
+                    <option value="5°">5° Piano</option>
+                    <option value="6°">6° Piano</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label>Anno Costruzione</label>
@@ -2154,6 +2163,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <div class="section-divider">🏠 Ambienti</div>
                 <div class="checks-grid">
                   <label class="check-item"><input type="checkbox" id="f_soggiorno"> 🛋️ Soggiorno</label>
+                  <label class="check-item"><input type="checkbox" id="f_soggiorno_angolo_cottura"> 🛋️🍳 Soggiorno con angolo cottura</label>
                   <label class="check-item"><input type="checkbox" id="f_cucina"> 🍳 Cucina</label>
                   <label class="check-item"><input type="checkbox" id="f_mansarda"> 🏠 Mansarda</label>
                   <label class="check-item"><input type="checkbox" id="f_taverna"> 🍷 Taverna</label>
@@ -2331,6 +2341,9 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                       <option value="intera proprieta">Intera Proprietà</option>
                       <option value="nuda proprieta">Nuda Proprietà</option>
                       <option value="usufrutto">Usufrutto</option>
+                      <option value="affitto ordinario">Affitto Ordinario</option>
+                      <option value="cedolare secca">Cedolare Secca</option>
+                      <option value="concordato">Concordato</option>
                       <option value="affitto residenziale">Affitto Residenziale</option>
                       <option value="affitto commerciale">Affitto Commerciale</option>
                       <option value="affitto a riscatto">Affitto a Riscatto</option>
@@ -4249,6 +4262,7 @@ function editImmobile(id) {
 
   const fields = ['codice','titolo','tipo_operazione','categoria','tipologia','prezzo',
     'comune','indirizzo','lat','lng','superficie','locali','bagni','piano',
+    'piano_numero','tipo_contratto',
     'anno_costruzione','stato','classe_energetica','youtube_id','virtual_tour',
     'id_idealista','note_interne',
     'camere','bagni_totali','terrazzi_num','ripostigli','garage_num','garage_doppio',
@@ -4263,7 +4277,7 @@ function editImmobile(id) {
 
   const bools = ['garage','giardino','terrazzo','cantina','ascensore','piscina','arredato',
     'attivo','in_evidenza','venduto','affittato',
-    'soggiorno','cucina','mansarda','taverna','soffitta','lavanderia','porticato','soppalco',
+    'soggiorno','soggiorno_angolo_cottura','cucina','mansarda','taverna','soffitta','lavanderia','porticato','soppalco',
     'giardino_condominiale','piano_interrato','piano_terra','primo_piano',
     'ingresso_indipendente','canna_fumaria','animali_ammessi','annuncio_prestigio',
     'chiavi_agenzia','immobile_garantito','riscaldamento_autonomo',
@@ -4320,6 +4334,8 @@ async function saveImmobile(e) {
     locali: parseInt(document.getElementById('f_locali').value) || null,
     bagni: parseInt(document.getElementById('f_bagni').value) || null,
     piano: document.getElementById('f_piano').value || null,
+    piano_numero: document.getElementById('f_piano_numero')?.value ? parseInt(document.getElementById('f_piano_numero').value) : null,
+    tipo_contratto: document.getElementById('f_tipo_contratto')?.value || null,
     anno_costruzione: parseInt(document.getElementById('f_anno_costruzione').value) || null,
     stato: document.getElementById('f_stato').value || null,
     classe_energetica: document.getElementById('f_classe_energetica').value || null,
@@ -4342,6 +4358,7 @@ async function saveImmobile(e) {
     virtual_tour: document.getElementById('f_virtual_tour').value || null,
     // Ambienti
     soggiorno: document.getElementById('f_soggiorno').checked,
+    soggiorno_angolo_cottura: document.getElementById('f_soggiorno_angolo_cottura')?.checked||false,
     cucina: document.getElementById('f_cucina').checked,
     camere: parseInt(document.getElementById('f_camere').value)||null,
     bagni_totali: parseInt(document.getElementById('f_bagni_totali').value)||null,
@@ -5956,6 +5973,7 @@ function printPropertyPdf(id) {
   // Ambienti
   const ambienti = [];
   if (i.soggiorno) ambienti.push('Soggiorno');
+  if (i.soggiorno_angolo_cottura) ambienti.push('Soggiorno con angolo cottura');
   if (i.cucina) ambienti.push('Cucina');
   if (i.mansarda) ambienti.push('Mansarda');
   if (i.taverna) ambienti.push('Taverna');

@@ -670,7 +670,7 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // ══ CONFIG ══
 const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
@@ -870,6 +870,7 @@ function render(d) {
   const left = [
     ['Tipo immobile', cap(d.tipologia || d.categoria || '')],
     ['Operazione', cap(d.tipo_operazione || '')],
+    ['Tipo contratto', d.tipo_contratto ? cap(d.tipo_contratto) : '—'],
     ['Comune', d.comune || 'Padova'],
     ['Piano', d.piano || '—'],
     ['Anno costruzione', d.anno_costruzione || '—'],
@@ -1021,6 +1022,7 @@ function renderDettagli(d) {
   // Ambienti
   const ambienti = [];
   if (d.soggiorno) ambienti.push(check('','Soggiorno'));
+  if (d.soggiorno_angolo_cottura) ambienti.push(check('🍳','Soggiorno con angolo cottura'));
   if (d.cucina) ambienti.push(check('🍳','Cucina'));
   if (d.mansarda) ambienti.push(check('','Mansarda'));
   if (d.taverna) ambienti.push(check('🍷','Taverna'));
@@ -1633,7 +1635,10 @@ function toggleChat() {
   document.getElementById('chatPanel').classList.toggle('show', chatOpen);
 }
 
-init();
+init().catch(function(err) {
+  console.error('Errore caricamento immobile:', err);
+  showError();
+});
 </script>
 <!-- Chatbot globale disabilitato su questa pagina: usa il chatbot dedicato all'immobile -->
 <script src="js/nav-mobile.js" defer></script>
