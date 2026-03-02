@@ -1444,8 +1444,17 @@ function initChatbotUI() {
   #rig-chat-close-bar button:hover { background: #CEE08F; color: #152435; transform: scale(1.05); }
   #rig-chat-close-bar.visible { display: block; }
   @media (max-width: 768px) {
-    #rig-chat-box { width: calc(100vw - 24px); right: 12px; bottom: 90px; max-width: none; }
-    #rig-chat-widget { right: 12px; bottom: 18px; }
+    #rig-chat-box {
+      width: calc(100vw - 32px); right: 16px; left: 16px; bottom: 85px;
+      max-width: none; max-height: calc(100vh - 120px);
+    }
+    .chat-input-row { padding: 10px 10px; gap: 6px; }
+    #rig-chat-input { padding: 8px 12px; font-size: 0.8rem; min-height: 36px; }
+    #rig-chat-send { width: 36px; height: 36px; min-width: 36px; }
+    .chat-msgs { padding: 12px 10px; }
+    .chat-quick-btns { padding: 8px 10px; gap: 5px; }
+    .chat-qbtn { font-size: 0.68rem; padding: 5px 8px; }
+    #rig-chat-widget { right: 14px; bottom: 18px; }
   }
   </style>
 
