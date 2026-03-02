@@ -655,7 +655,7 @@
   <div class="footer-inner">
     <div>
       <div class="footer-logo">Righetto <span>Immobiliare</span></div>
-      <div style="margin-top:.4rem;">Via Roma, 96 — Limena (PD) · Tel: 049 884 3484</div>
+      <div style="margin-top:.4rem;">Via Roma n.96 — Limena (PD) · Tel: 049 884 3484</div>
     </div>
     <div class="footer-links">
       <a href="immobili.html">Immobili</a>
@@ -1320,7 +1320,7 @@ async function downloadPDF() {
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(7);
   doc.setTextColor(200, 210, 220);
-  doc.text('Via Roma 96, Limena (PD)  |  Tel: 049 884 3484  |  www.righettoimmobiliare.it', m, 17);
+  doc.text('Via Roma n.96, Limena (PD)  |  Tel: 049 884 3484  |  www.righettoimmobiliare.it', m, 17);
   // Tipo badge + Rif
   const tipoLabel = (d.tipo_operazione || '').toUpperCase();
   doc.setFillColor(...VERDE);
@@ -1658,7 +1658,7 @@ async function downloadPDF() {
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(6.5);
     doc.setTextColor(200, 210, 220);
-    doc.text('Righetto Immobiliare \u2014 Via Roma 96, Limena (PD) \u2014 Tel: 049 884 3484 \u2014 info@righettoimmobiliare.it', m, 291);
+    doc.text('Righetto Immobiliare \u2014 Via Roma n.96, Limena (PD) \u2014 Tel: 049 884 3484 \u2014 info@righettoimmobiliare.it', m, 291);
     doc.setTextColor(...VERDE);
     doc.text('Rif. ' + (d.codice || 'N/D') + '  |  Pag. ' + p + '/' + totalPages + '  |  ' + new Date().toLocaleDateString('it-IT'), W - m, 291, { align: 'right' });
   }
