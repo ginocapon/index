@@ -2577,6 +2577,11 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                     <input type="text" id="f_id_idealista" placeholder="ID annuncio su Idealista">
                   </div>
                   <div class="form-group form-full">
+                    <label>📝 Descrizione Immobile (visibile sul sito)</label>
+                    <textarea id="f_descrizione" rows="6" placeholder="Descrizione completa dell'immobile: posizione, caratteristiche, stato, punti di forza... Questo testo sarà visibile ai visitatori nella scheda dell'immobile." style="min-height:140px"></textarea>
+                    <small style="color:var(--caffe2);font-size:0.7rem">Questa descrizione verrà mostrata nella pagina pubblica dell'immobile. Se importi da Idealista, viene compilata automaticamente dallo scraping.</small>
+                  </div>
+                  <div class="form-group form-full">
                     <label>Note Interne (non visibili sul sito)</label>
                     <textarea id="f_note_interne" placeholder="Note private, appunti, promemoria, storia del cliente..."></textarea>
                   </div>
@@ -4264,7 +4269,7 @@ function editImmobile(id) {
     'comune','indirizzo','lat','lng','superficie','locali','bagni','piano',
     'piano_numero','tipo_contratto',
     'anno_costruzione','stato','classe_energetica','youtube_id','virtual_tour',
-    'id_idealista','note_interne',
+    'id_idealista','descrizione','note_interne',
     'camere','bagni_totali','terrazzi_num','ripostigli','garage_num','garage_doppio',
     'posto_auto','mq_giardino','mq_lotto','esposizione',
     'impianto_elettrico','panorama','consegna','spese_condominio',
@@ -4446,6 +4451,7 @@ async function saveImmobile(e) {
     venduto: document.getElementById('f_venduto').checked,
     affittato: document.getElementById('f_affittato').checked,
     id_idealista: document.getElementById('f_id_idealista').value || null,
+    descrizione: document.getElementById('f_descrizione').value || null,
     note_interne: document.getElementById('f_note_interne').value || null,
   };
 
