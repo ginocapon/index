@@ -7,9 +7,10 @@
 (function () {
   'use strict';
 
-  // ── Non mostrare su pagine admin/utility ──
+  // ── Mostrare SOLO sulla home page ──
   var path = location.pathname;
-  if (/admin|bookmarklet|scraping|cookie-policy|privacy/i.test(path)) return;
+  var isHome = path === '/' || path.endsWith('/index.html') || path.endsWith('/index') || path === '/index.html';
+  if (!isHome) return;
 
   // ── Una volta per sessione ──
   if (sessionStorage.getItem('welcome_shown')) return;
