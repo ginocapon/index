@@ -6168,7 +6168,7 @@ ${tagHtml(sicurezza, 'Sicurezza & Tecnologia')}
 ${ceHtml}
 ${planHtml}
 <div class="footer">
-  <strong>Righetto Immobiliare</strong> \u2014 Via Roma 96, Limena (PD) \u2014 Tel: 049 884 3484 \u2014 info@righettoimmobiliare.it \u2014 www.righettoimmobiliare.it<br>
+  <strong>Righetto Immobiliare</strong> \u2014 Via Roma 96, Limena (PD) \u2014 Tel: 049.88.43.484 \u2014 info@righettoimmobiliare.it \u2014 www.righettoimmobiliare.it<br>
   Documento generato il ${new Date().toLocaleDateString('it-IT')} \u2014 Le informazioni non costituiscono elemento contrattuale
 </div>
 </body></html>`);
@@ -6287,7 +6287,7 @@ function buildSocialCaption(i) {
   if (i.aria_condizionata) highlights.push('Climatizzato');
   if (highlights.length) caption += highlights.join(' | ') + '\n\n';
   caption += 'Rif. ' + (i.codice || '') + '\n';
-  caption += 'Righetto Immobiliare | Tel: 049 884 3484\n';
+  caption += 'Righetto Immobiliare | Tel: 049.88.43.484\n';
   caption += '#immobiliare #' + (i.comune || 'padova').toLowerCase().replace(/\s+/g, '') + ' #' + (i.tipo_operazione || 'vendita') + ' #casainvendita #righettoimmobiliare';
   return caption;
 }
@@ -6331,7 +6331,7 @@ function buildBlogSocialCaption(a) {
   if (txt.split(/\s+/).length > 40) excerpt += '...';
   caption += excerpt + '\n\n';
   caption += 'Leggi l\'articolo completo su righettoimmobiliare.it/blog-articolo.html?s=' + (a.slug || '') + '\n\n';
-  caption += 'Righetto Immobiliare | Tel: 049 884 3484\n';
+  caption += 'Righetto Immobiliare | Tel: 049.88.43.484\n';
   // Hashtags from category
   var cat = (a.categoria || '').toLowerCase().replace(/\s+/g, '');
   caption += '#immobiliare #padova #' + cat + ' #blog #righettoimmobiliare';
@@ -6908,7 +6908,7 @@ function generateTikTokImage() {
     ctx.fillRect(0, 1800, 1080, 120);
     ctx.font = '28px "Segoe UI", Arial';
     ctx.fillStyle = '#CEE08F';
-    ctx.fillText('Rif. ' + (i.codice || '') + '  |  Tel: 049 884 3484', 540, 1850);
+    ctx.fillText('Rif. ' + (i.codice || '') + '  |  Tel: 049.88.43.484', 540, 1850);
     ctx.font = '24px "Segoe UI", Arial';
     ctx.fillStyle = '#B0C8E0';
     ctx.fillText('www.righettoimmobiliare.it', 540, 1885);
