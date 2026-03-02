@@ -214,7 +214,7 @@ img{max-width:100%;height:auto;display:block}
       "email": "info@righettoimmobiliare.it",
       "foundingDate": "2000",
       "areaServed": {"@type": "AdministrativeArea", "name": "Provincia di Padova"},
-      "address": {"@type": "PostalAddress", "streetAddress": "Via Roma 96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
+      "address": {"@type": "PostalAddress", "streetAddress": "Via Roma n.96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
       "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "127", "bestRating": "5"}
     },
     {
@@ -379,7 +379,7 @@ img{max-width:100%;height:auto;display:block}
         <p class="fc-note">Zero costi, zero impegno. Report in 24h.</p>
         <div class="fc-success" id="leadSuccess">
           <h3>Richiesta inviata! 🎉</h3>
-          <p>Ti contatteremo entro 24 ore.<br><a href="tel:+390498843484" style="color:var(--purple);font-weight:700">049 884 3484</a></p>
+          <p>Ti contatteremo entro 24 ore.<br><a href="tel:+390498843484" style="color:var(--purple);font-weight:700">049.88.43.484</a></p>
         </div>
       </div>
     </div>
@@ -447,7 +447,7 @@ img{max-width:100%;height:auto;display:block}
   <p>Un immobile mal valutato puo farti perdere migliaia di euro. Scopri il valore reale, gratis.</p>
   <a href="#form" class="cta-btn">📊 Scopri il valore della tua casa</a>
   <div class="cta-channels">
-    <div class="cta-ch">📞 <a href="tel:+390498843484">049 884 3484</a></div>
+    <div class="cta-ch">📞 <a href="tel:+390498843484">049.88.43.484</a></div>
     <div class="cta-ch">💬 <a href="https://wa.me/393488621888" target="_blank">WhatsApp</a></div>
   </div>
 </section>
@@ -493,7 +493,7 @@ async function sendLead(e){
   if(news&&email){iscriviBrevo(email,nomeCompleto,{telefono:tel,tipo_immobile:tipoImm,zona:zonaImm,interesse:'valutazione',fonte:'landing-valutazione'});}
   btn.disabled=false;btn.textContent='📊 RICHIEDI VALUTAZIONE GRATUITA';
   if(formspreeOk||supaOk){document.getElementById('leadForm').style.display='none';document.getElementById('leadSuccess').style.display='block';document.querySelector('.fc-note').style.display='none';document.querySelector('.fc-steps').style.display='none';}
-  else{alert('Errore. Chiamaci al 049 884 3484 o scrivici su WhatsApp.');}
+  else{alert('Errore. Chiamaci al 049.88.43.484 o scrivici su WhatsApp.');}
 }
 </script>
 <script src="js/chatbot.js" defer></script>

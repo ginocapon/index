@@ -173,7 +173,7 @@
   <div class="hi">
     <a href="index.html" class="logo">Righetto <span>Immobiliare</span></a>
     <nav><a href="index.html">Home</a><a href="immobili.html">Immobili</a><a href="servizi.html">Servizi</a><a href="chi-siamo.html">Chi siamo</a><a href="blog.html" class="active">Blog</a><a href="contatti.html">Contatti</a><a href="faq.html">FAQ</a></nav>
-    <div class="h-cta"><a class="h-tel" href="tel:+390498843484">049 884 3484</a><a class="h-btn" href="contatti.html">Valutazione gratuita</a></div>
+    <div class="h-cta"><a class="h-tel" href="tel:+390498843484">049.88.43.484</a><a class="h-btn" href="contatti.html">Valutazione gratuita</a></div>
   </div>
   <button class="nav-burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
 </header>
@@ -261,9 +261,9 @@
 <footer>
   <div class="fi">
     <div class="fgrid">
-      <div><div class="flogo">Righetto <span>Immobiliare</span></div><div class="finfo">Via Roma, 96 — 35010 Limena (PD)<br>Tel: 049 884 3484 · Cell: 348 862 1888</div></div>
+      <div><div class="flogo">Righetto <span>Immobiliare</span></div><div class="finfo">Via Roma n.96 — 35010 Limena (PD)<br>Tel: 049.88.43.484 · Cell: 348 862 1888<br>info@righettoimmobiliare.it</div></div>
       <div class="fcol"><div class="fh">Servizi</div><a href="servizi.html">Vendita</a><a href="servizi.html">Locazioni</a><a href="servizi.html">Preliminari</a></div>
-      <div class="fcol"><div class="fh">Immobili</div><a href="immobili.html?op=vendita">In vendita</a><a href="immobili.html?op=affitto">In affitto</a></div>
+      <div class="fcol"><div class="fh">Immobili</div><a href="immobili.html?op=vendita">In vendita</a><a href="immobili.html?op=affitto">In affitto</a><div class="fh" style="margin-top:.8rem">Quartieri</div><a href="zona-centro-storico-padova.html">Centro Storico</a><a href="zona-arcella-padova.html">Arcella</a><a href="zona-universitaria-padova.html">Zona Universitaria</a><a href="zona-prato-della-valle-padova.html">Prato della Valle</a><a href="zona-sacra-famiglia-padova.html">Sacra Famiglia</a><a href="zona-forcellini-padova.html">Forcellini</a><a href="zona-guizza-padova.html">Guizza</a><a href="zona-voltabarozzo-padova.html">Voltabarozzo</a></div>
       <div class="fcol"><div class="fh">Info</div><a href="chi-siamo.html">Chi siamo</a><a href="faq.html">FAQ</a><a href="contatti.html">Contatti</a><a href="privacy.html">Privacy</a><a href="cookie-policy.html">Cookie Policy</a><a href="#" data-cookie-prefs>Preferenze Cookie</a></div>
     </div>
     <div class="fbot"><span>© 2026 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
@@ -294,6 +294,39 @@ async function initBlog() {
   }
   // Articoli statici (pagine HTML dedicate)
   const articoliStatici = [
+    {
+      titolo: 'Guida ai Quartieri di Padova: Dove Comprare Casa nel 2026',
+      categoria: 'Mercato locale',
+      data: '2026-03-02',
+      tempo: 11,
+      stato: 'pubblicato',
+      immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp',
+      url_statico: 'blog-quartieri-padova-2026.html',
+      contenuto: 'Guida completa ai quartieri di Padova: prezzi al mq zona per zona, caratteristiche di ogni quartiere, consigli su dove comprare casa nel 2026 in base al budget e allo stile di vita.',
+      evidenza: true
+    },
+    {
+      titolo: 'Affitto Studenti Padova 2026: Zone, Prezzi e Guida Completa',
+      categoria: 'Affitti',
+      data: '2026-03-02',
+      tempo: 9,
+      stato: 'pubblicato',
+      immagine_copertina: 'img/foto-servizi/contratti-di-locazione-padova.webp',
+      url_statico: 'blog-affitto-studenti-padova.html',
+      contenuto: 'Guida completa per studenti e proprietari: zone migliori, prezzi stanze singole e doppie, tipologie contrattuali, consigli per cercare casa e rendite per chi affitta.',
+      evidenza: true
+    },
+    {
+      titolo: 'Mercato Immobiliare Padova 2026: Prezzi, Tendenze e Previsioni',
+      categoria: 'Mercato locale',
+      data: '2026-03-02',
+      tempo: 10,
+      stato: 'pubblicato',
+      immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp',
+      url_statico: 'blog-mercato-immobiliare-padova-2026.html',
+      contenuto: 'Panoramica del mercato immobiliare padovano nel 2026: prezzi in crescita del 3-5%, mutui sotto il 3.5%, affitti +8%. Previsioni e analisi zona per zona.',
+      evidenza: true
+    },
     {
       titolo: 'Conviene comprare casa a Padova o restare in affitto? Analisi su 20 anni',
       categoria: 'Consigli acquisto',

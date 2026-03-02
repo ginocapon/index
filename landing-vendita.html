@@ -239,7 +239,7 @@ img{max-width:100%;height:auto;display:block}
       "foundingDate": "2000",
       "description": "Agenzia immobiliare a Padova e provincia dal 2000. Vendita, affitto, valutazioni gratuite, gestione completa.",
       "areaServed": {"@type": "AdministrativeArea", "name": "Provincia di Padova", "containedInPlace": {"@type": "Country", "name": "Italia"}},
-      "address": {"@type": "PostalAddress", "streetAddress": "Via Roma 96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
+      "address": {"@type": "PostalAddress", "streetAddress": "Via Roma n.96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
       "geo": {"@type": "GeoCoordinates", "latitude": 45.3920, "longitude": 11.8500},
       "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "127", "bestRating": "5"},
       "openingHoursSpecification": [
@@ -360,7 +360,7 @@ img{max-width:100%;height:auto;display:block}
         </div>
         <div class="fc-success" id="leadSuccess">
           <h3>Richiesta inviata! 🎉</h3>
-          <p>Ti contatteremo entro 24 ore. Urgenza? <a href="tel:+390498843484" style="color:var(--fire);font-weight:700">049 884 3484</a></p>
+          <p>Ti contatteremo entro 24 ore. Urgenza? <a href="tel:+390498843484" style="color:var(--fire);font-weight:700">049.88.43.484</a></p>
         </div>
       </div>
     </div>
@@ -521,7 +521,7 @@ img{max-width:100%;height:auto;display:block}
   <p>Richiedi una valutazione gratuita. Zero costi, zero impegno, rispondiamo in 24h.</p>
   <a href="#form" class="cta-btn">🏠 Richiedi valutazione gratuita</a>
   <div class="cta-channels">
-    <div class="cta-ch">📞 <a href="tel:+390498843484">049 884 3484</a></div>
+    <div class="cta-ch">📞 <a href="tel:+390498843484">049.88.43.484</a></div>
     <div class="cta-ch">💬 <a href="https://wa.me/393488621888" target="_blank">WhatsApp</a></div>
     <div class="cta-ch">📧 <a href="mailto:info@righettoimmobiliare.it">Email</a></div>
   </div>
@@ -568,7 +568,7 @@ async function sendLead(e){
   if(news&&email){iscriviBrevo(email,nomeCompleto,{telefono:tel,tipo_immobile:tipo,zona:comune,interesse:'vendita',fonte:'landing-vendita'});}
   btn.disabled=false;btn.textContent='🏠 RICHIEDI VALUTAZIONE GRATUITA';
   if(formspreeOk||supaOk){document.getElementById('leadForm').style.display='none';document.getElementById('leadSuccess').style.display='block';document.querySelector('.fc-note').style.display='none';document.querySelector('.fc-trust').style.display='none';}
-  else{alert('Errore. Chiamaci al 049 884 3484 o scrivici su WhatsApp.');}
+  else{alert('Errore. Chiamaci al 049.88.43.484 o scrivici su WhatsApp.');}
 }
 </script>
 <script src="js/chatbot.js" defer></script>
