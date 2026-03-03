@@ -2471,6 +2471,25 @@ function generateSlug(titolo) {
   if (!articles.length) {
     try { articles = JSON.parse(localStorage.getItem('rig_blog_articles')||'[]').filter(a=>a.stato==='pubblicato').sort((a,b)=>new Date(b.data)-new Date(a.data)).slice(0,3); } catch(e){}
   }
+  // Immagini di copertina per articoli statici (fallback se Supabase non le ha)
+  var staticCovers = {
+    'conviene comprare casa a padova o restare in affitto': 'img/foto-servizi/vendita-immobili-padova.webp',
+    'case in vendita padova 2026': 'img/foto-servizi/vendita-immobili-padova.webp',
+    'guida al mutuo prima casa a padova 2026': 'img/foto-servizi/valutazioni-e-perizie-padova.webp',
+    'guida ai quartieri di padova': 'img/foto-servizi/vendita-immobili-padova.webp',
+    'affitto studenti padova 2026': 'img/foto-servizi/contratti-di-locazione-padova.webp',
+    'mercato immobiliare padova 2026': 'img/foto-servizi/valutazioni-e-perizie-padova.webp',
+    'ca\' marcello mestre': 'img/blog/ca-marcello-hero.webp'
+  };
+  articles.forEach(function(a) {
+    if (!a.immagine_copertina) {
+      var t = (a.titolo || '').toLowerCase();
+      var keys = Object.keys(staticCovers);
+      for (var k = 0; k < keys.length; k++) {
+        if (t.indexOf(keys[k]) !== -1) { a.immagine_copertina = staticCovers[keys[k]]; break; }
+      }
+    }
+  });
   if (!articles.length) {
     grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:2rem"><a href="blog.html" style="color:var(--oro);font-weight:600;font-size:.9rem">Visita il blog &rarr;</a></div>';
     return;
