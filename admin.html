@@ -2207,6 +2207,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <label class="check-item"><input type="checkbox" id="f_piano_interrato"> Piano Interrato</label>
                   <label class="check-item"><input type="checkbox" id="f_piano_terra"> Piano Terra</label>
                   <label class="check-item"><input type="checkbox" id="f_primo_piano"> Primo Piano</label>
+                  <label class="check-item"><input type="checkbox" id="f_ultimo_piano"> 🏢 Ultimo Piano</label>
                 </div>
 
                 <!-- ═══ COMFORT ═══ -->
@@ -4110,7 +4111,7 @@ function editImmobile(id) {
   const bools = ['garage','giardino','terrazzo','cantina','ascensore','piscina','arredato',
     'attivo','in_evidenza','venduto','affittato',
     'soggiorno','cucina','mansarda','taverna','soffitta','lavanderia','porticato','soppalco',
-    'giardino_condominiale','piano_interrato','piano_terra','primo_piano',
+    'giardino_condominiale','piano_interrato','piano_terra','primo_piano','ultimo_piano',
     'ingresso_indipendente','canna_fumaria','animali_ammessi','annuncio_prestigio',
     'chiavi_agenzia','immobile_garantito','riscaldamento_autonomo',
     'riscaldamento_centralizzato','aria_condizionata'];
@@ -4210,6 +4211,7 @@ async function saveImmobile(e) {
     piano_interrato: document.getElementById('f_piano_interrato').checked,
     piano_terra: document.getElementById('f_piano_terra').checked,
     primo_piano: document.getElementById('f_primo_piano').checked,
+    ultimo_piano: document.getElementById('f_ultimo_piano').checked,
     // Comfort
     garage: document.getElementById('f_garage').checked,
     giardino: document.getElementById('f_giardino').checked,
