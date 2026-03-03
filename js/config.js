@@ -14,7 +14,7 @@ const SERVIZI_CONFIG = {
 
   // ── BREVO (ex Sendinblue) ──────────────────────────────
   // Newsletter per nuovi immobili e articoli del blog
-  // Vai su https://brevo.com → Contatti → Liste → Crea lista
-  // Poi: Contatti → Form → Crea form → copia l'URL di azione
+  BREVO_API_KEY: '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',
+  BREVO_LIST_ID: 11,
   BREVO_FORM_URL: ''
 };

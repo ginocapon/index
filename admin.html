@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MHDHHES26"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9MHDHHES26');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin — Righetto Immobiliare</title>
@@ -1935,6 +1943,14 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         Social
       </div>
+      <div class="nav-item" onclick="showSection('landing')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Landing Pages
+      </div>
+      <div class="nav-item" onclick="showSection('newsletter')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Newsletter <span class="badge-count" id="badgeNewsletter" style="display:none">0</span>
+      </div>
       <div class="nav-item" onclick="showSection('agenda')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg>
         Agenda
@@ -2102,7 +2118,16 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 </div>
                 <div class="form-group">
                   <label>Piano</label>
-                  <input type="text" id="f_piano" placeholder="es. 2° / Terra / Ultimo">
+                  <select id="f_piano">
+                    <option value="">Seleziona...</option>
+                    <option value="Piano Terra">Piano Terra</option>
+                    <option value="1°">1° Piano</option>
+                    <option value="2°">2° Piano</option>
+                    <option value="3°">3° Piano</option>
+                    <option value="4°">4° Piano</option>
+                    <option value="5°">5° Piano</option>
+                    <option value="6°">6° Piano</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label>Anno Costruzione</label>
@@ -2138,6 +2163,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <div class="section-divider">🏠 Ambienti</div>
                 <div class="checks-grid">
                   <label class="check-item"><input type="checkbox" id="f_soggiorno"> 🛋️ Soggiorno</label>
+                  <label class="check-item"><input type="checkbox" id="f_soggiorno_angolo_cottura"> 🛋️🍳 Soggiorno con angolo cottura</label>
                   <label class="check-item"><input type="checkbox" id="f_cucina"> 🍳 Cucina</label>
                   <label class="check-item"><input type="checkbox" id="f_mansarda"> 🏠 Mansarda</label>
                   <label class="check-item"><input type="checkbox" id="f_taverna"> 🍷 Taverna</label>
@@ -2316,6 +2342,9 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                       <option value="intera proprieta">Intera Proprietà</option>
                       <option value="nuda proprieta">Nuda Proprietà</option>
                       <option value="usufrutto">Usufrutto</option>
+                      <option value="affitto ordinario">Affitto Ordinario</option>
+                      <option value="cedolare secca">Cedolare Secca</option>
+                      <option value="concordato">Concordato</option>
                       <option value="affitto residenziale">Affitto Residenziale</option>
                       <option value="affitto commerciale">Affitto Commerciale</option>
                       <option value="affitto a riscatto">Affitto a Riscatto</option>
@@ -2547,6 +2576,11 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <div class="form-group">
                     <label>ID Idealista</label>
                     <input type="text" id="f_id_idealista" placeholder="ID annuncio su Idealista">
+                  </div>
+                  <div class="form-group form-full">
+                    <label>📝 Descrizione Immobile (visibile sul sito)</label>
+                    <textarea id="f_descrizione" rows="6" placeholder="Descrizione completa dell'immobile: posizione, caratteristiche, stato, punti di forza... Questo testo sarà visibile ai visitatori nella scheda dell'immobile." style="min-height:140px"></textarea>
+                    <small style="color:var(--caffe2);font-size:0.7rem">Questa descrizione verrà mostrata nella pagina pubblica dell'immobile. Se importi da Idealista, viene compilata automaticamente dallo scraping.</small>
                   </div>
                   <div class="form-group form-full">
                     <label>Note Interne (non visibili sul sito)</label>
@@ -3407,6 +3441,49 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         </div>
       </div>
 
+      <!-- ═══ SEZIONE NEWSLETTER ISCRITTI ═══ -->
+      <div class="section" id="sec-newsletter">
+        <div class="stats-row">
+          <div class="stat-card"><div class="stat-num" id="statNewsTot">0</div><div class="stat-label">Totale Iscritti</div></div>
+          <div class="stat-card blue"><div class="stat-num" id="statNewsAttivi">0</div><div class="stat-label">Attivi</div></div>
+          <div class="stat-card green"><div class="stat-num" id="statNewsVendita">0</div><div class="stat-label">Interesse Vendita</div></div>
+          <div class="stat-card red"><div class="stat-num" id="statNewsAcquisto">0</div><div class="stat-label">Interesse Acquisto</div></div>
+        </div>
+        <div class="section-header" style="margin-top:1.5rem">
+          <div>
+            <div style="font-weight:600;font-size:0.9rem">Iscritti Newsletter</div>
+            <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+              <select id="filtroNewsInteresse" onchange="loadNewsletterList()" style="padding:6px 10px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.78rem">
+                <option value="">Tutti gli interessi</option>
+                <option value="vendita">Vendita</option>
+                <option value="acquisto">Acquisto</option>
+                <option value="valutazione">Valutazione</option>
+                <option value="affitto">Affitto</option>
+                <option value="consulenza">Consulenza</option>
+                <option value="generico">Generico</option>
+              </select>
+              <select id="filtroNewsTipo" onchange="loadNewsletterList()" style="padding:6px 10px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.78rem">
+                <option value="">Tutti i tipi immobile</option>
+                <option value="Appartamento">Appartamento</option>
+                <option value="Villa / Villetta">Villa / Villetta</option>
+                <option value="Casa indipendente">Casa indipendente</option>
+                <option value="Bifamiliare">Bifamiliare</option>
+                <option value="Rustico / Casale">Rustico / Casale</option>
+                <option value="Terreno">Terreno</option>
+                <option value="Commerciale / Ufficio">Commerciale / Ufficio</option>
+              </select>
+              <input type="text" id="searchNews" placeholder="Cerca nome, email, zona..." oninput="filterNewsTable()" style="padding:6px 10px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.78rem;min-width:180px">
+            </div>
+          </div>
+          <div style="display:flex;gap:6px">
+            <button class="btn btn-secondary btn-sm" onclick="copyNewsEmails()" title="Copia tutte le email filtrate">Copia Email</button>
+          </div>
+        </div>
+        <div id="newsListWrap" style="margin-top:1rem">
+          <div class="loading"><div class="spinner"></div> Caricamento iscritti...</div>
+        </div>
+      </div>
+
       <!-- ═══ SEZIONE AGENDA SETTIMANALE ═══ -->
       <div class="section" id="sec-agenda">
 
@@ -3558,6 +3635,97 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <button class="btn btn-danger btn-sm" id="btnDeleteAgenda" onclick="deleteAgendaItem()" style="display:none;margin-right:auto">Elimina</button>
             <button class="btn btn-secondary" onclick="closeAgendaModal()">Annulla</button>
             <button class="btn btn-primary" onclick="saveAgendaItem()">Salva Programmazione</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SEZIONE LANDING PAGES ═══ -->
+      <div class="section" id="sec-landing">
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-num" id="statLandTot">0</div><div class="stat-label">Totale Landing</div></div>
+          <div class="stat-card blue"><div class="stat-num" id="statLandPub">0</div><div class="stat-label">Pubblicate</div></div>
+          <div class="stat-card green"><div class="stat-num" id="statLandProg">0</div><div class="stat-label">Programmate</div></div>
+          <div class="stat-card" style="border-left-color:var(--caffe2)"><div class="stat-num" id="statLandBozze">0</div><div class="stat-label">Bozze</div></div>
+        </div>
+
+        <div class="table-wrap">
+          <div class="table-head">
+            <div style="font-weight:600;font-size:0.9rem">Landing Pages</div>
+            <div style="display:flex;gap:10px">
+              <button class="btn btn-secondary btn-sm" onclick="pubblicaLandingSelezionate()">Pubblica selezionate</button>
+              <button class="btn btn-primary btn-sm" onclick="openLandingEditor()">+ Nuova Landing</button>
+            </div>
+          </div>
+          <div id="landingListWrap">
+            <div class="empty-state"><h3>Nessuna landing page</h3><p style="margin-top:8px">Clicca "+ Nuova Landing" per creare una landing page</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ EDITOR LANDING PAGE ═══ -->
+      <div class="section" id="sec-landing-editor">
+        <div class="table-wrap">
+          <div class="modal-header" style="border-radius:0">
+            <h2 id="landingEditorTitle">Nuova Landing Page</h2>
+            <button class="btn btn-secondary btn-sm" onclick="showSection('landing')">← Torna alla lista</button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="landingEditId">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Titolo Landing *</label>
+                <input type="text" id="l_titolo" placeholder="es. Valutazione gratuita immobile Padova">
+              </div>
+              <div class="form-group">
+                <label>Slug / Nome File</label>
+                <input type="text" id="l_slug" placeholder="es. landing-valutazione" style="font-family:monospace;font-size:.82rem">
+                <small style="color:var(--caffe2);font-size:.68rem">Nome del file HTML (senza .html). Se vuoto, generato dal titolo.</small>
+              </div>
+              <div class="form-group">
+                <label>Categoria / Tipo</label>
+                <select id="l_categoria">
+                  <option value="vendita">Vendita</option>
+                  <option value="valutazione">Valutazione</option>
+                  <option value="affitto">Affitto</option>
+                  <option value="agente">Agente</option>
+                  <option value="promozione">Promozione</option>
+                  <option value="evento">Evento</option>
+                  <option value="altro">Altro</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>URL Landing (se già esistente)</label>
+                <input type="text" id="l_url" placeholder="es. landing-valutazione.html">
+                <small style="color:var(--caffe2);font-size:.68rem">Se la pagina HTML esiste già nel sito, inserisci il nome del file.</small>
+              </div>
+              <div class="form-group">
+                <label>Data Pubblicazione Programmata</label>
+                <input type="datetime-local" id="l_data_pub">
+                <small style="color:var(--caffe2);font-size:.68rem">Lascia vuoto per pubblicare subito. Se impostata, la landing verrà attivata automaticamente a questa data.</small>
+              </div>
+              <div class="form-group">
+                <label>Data Fine (opzionale)</label>
+                <input type="datetime-local" id="l_data_fine">
+                <small style="color:var(--caffe2);font-size:.68rem">Se impostata, la landing verrà disattivata automaticamente.</small>
+              </div>
+              <div class="form-group form-full">
+                <label>Descrizione / Note</label>
+                <textarea id="l_descrizione" rows="3" placeholder="Note interne sulla landing page..."></textarea>
+              </div>
+              <div class="form-group form-full">
+                <label>Stato</label>
+                <div style="display:flex;gap:16px;margin-top:4px">
+                  <label class="check-item"><input type="radio" name="l_stato" value="pubblicata" checked> Pubblicata</label>
+                  <label class="check-item"><input type="radio" name="l_stato" value="programmata"> Programmata</label>
+                  <label class="check-item"><input type="radio" name="l_stato" value="bozza"> Bozza</label>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;margin-top:24px;justify-content:flex-end">
+              <button class="btn btn-secondary" onclick="showSection('landing')">Annulla</button>
+              <button class="btn btn-danger" id="btnDeleteLanding" onclick="deleteLandingPage()" style="display:none">Elimina</button>
+              <button class="btn btn-primary" onclick="saveLandingPage()">Salva Landing</button>
+            </div>
           </div>
         </div>
       </div>
@@ -3921,7 +4089,7 @@ function showSection(name) {
   const sec = document.getElementById('sec-' + name);
   if (sec) sec.classList.add('active');
   // Mark the correct nav-item as active
-  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','agenda','impostazioni'];
+  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','landing','newsletter','agenda','impostazioni'];
   const idx = sectionNames.indexOf(name);
   const navItems = document.querySelectorAll('.nav-item');
   if (idx >= 0 && navItems[idx]) navItems[idx].classList.add('active');
@@ -3934,6 +4102,8 @@ function showSection(name) {
     blog: 'Gestione Blog',
     clienti: 'Gestione Clienti',
     social: 'Social Media',
+    landing: 'Landing Pages',
+    newsletter: 'Newsletter Iscritti',
     agenda: 'Agenda Settimanale',
     impostazioni: 'Impostazioni'
   };
@@ -3943,6 +4113,8 @@ function showSection(name) {
   if (name === 'posta') initEmailSection();
   if (name === 'blog') loadBlogList();
   if (name === 'social') loadSocialSection();
+  if (name === 'landing') loadLandingList();
+  if (name === 'newsletter') loadNewsletterList();
   if (name === 'agenda') loadAgendaSection();
   if (name === 'clienti') loadClienti();
   if (name === 'impostazioni') { testConn(); check2FAStatus(); }
@@ -4096,8 +4268,9 @@ function editImmobile(id) {
 
   const fields = ['codice','titolo','tipo_operazione','categoria','tipologia','prezzo',
     'comune','indirizzo','lat','lng','superficie','locali','bagni','piano',
+    'piano_numero','tipo_contratto',
     'anno_costruzione','stato','classe_energetica','youtube_id','virtual_tour',
-    'id_idealista','note_interne',
+    'id_idealista','descrizione','note_interne',
     'camere','bagni_totali','terrazzi_num','ripostigli','garage_num','garage_doppio',
     'posto_auto','mq_giardino','mq_lotto','esposizione',
     'impianto_elettrico','panorama','consegna','spese_condominio',
@@ -4110,7 +4283,7 @@ function editImmobile(id) {
 
   const bools = ['garage','giardino','terrazzo','cantina','ascensore','piscina','arredato',
     'attivo','in_evidenza','venduto','affittato',
-    'soggiorno','cucina','mansarda','taverna','soffitta','lavanderia','porticato','soppalco',
+    'soggiorno','soggiorno_angolo_cottura','cucina','mansarda','taverna','soffitta','lavanderia','porticato','soppalco',
     'giardino_condominiale','piano_interrato','piano_terra','primo_piano','ultimo_piano',
     'ingresso_indipendente','canna_fumaria','animali_ammessi','annuncio_prestigio',
     'chiavi_agenzia','immobile_garantito','riscaldamento_autonomo',
@@ -4167,6 +4340,8 @@ async function saveImmobile(e) {
     locali: parseInt(document.getElementById('f_locali').value) || null,
     bagni: parseInt(document.getElementById('f_bagni').value) || null,
     piano: document.getElementById('f_piano').value || null,
+    piano_numero: document.getElementById('f_piano_numero')?.value ? parseInt(document.getElementById('f_piano_numero').value) : null,
+    tipo_contratto: document.getElementById('f_tipo_contratto')?.value || null,
     anno_costruzione: parseInt(document.getElementById('f_anno_costruzione').value) || null,
     stato: document.getElementById('f_stato').value || null,
     classe_energetica: document.getElementById('f_classe_energetica').value || null,
@@ -4189,6 +4364,7 @@ async function saveImmobile(e) {
     virtual_tour: document.getElementById('f_virtual_tour').value || null,
     // Ambienti
     soggiorno: document.getElementById('f_soggiorno').checked,
+    soggiorno_angolo_cottura: document.getElementById('f_soggiorno_angolo_cottura')?.checked||false,
     cucina: document.getElementById('f_cucina').checked,
     camere: parseInt(document.getElementById('f_camere').value)||null,
     bagni_totali: parseInt(document.getElementById('f_bagni_totali').value)||null,
@@ -4277,6 +4453,7 @@ async function saveImmobile(e) {
     venduto: document.getElementById('f_venduto').checked,
     affittato: document.getElementById('f_affittato').checked,
     id_idealista: document.getElementById('f_id_idealista').value || null,
+    descrizione: document.getElementById('f_descrizione').value || null,
     note_interne: document.getElementById('f_note_interne').value || null,
   };
 
@@ -4344,9 +4521,309 @@ async function toggleAttivo(id, val) {
   if (!error) { await loadImmobili(); toast(val ? '✅ Immobile attivato' : '🚫 Immobile disattivato'); }
 }
 
+// ══════════════════════════════════════
+// LANDING PAGES
+// ══════════════════════════════════════
+let landingPages = [];
+
+async function getLandingPages() {
+  try {
+    const { data, error } = await sb.from('landing_pages').select('*').order('created_at', { ascending: false });
+    if (error) throw error;
+    landingPages = data || [];
+  } catch(e) {
+    console.warn('Tabella landing_pages non disponibile, uso localStorage:', e.message);
+    try { landingPages = JSON.parse(localStorage.getItem('rig_landing_pages') || '[]'); } catch(ex) { landingPages = []; }
+  }
+  try { localStorage.setItem('rig_landing_pages', JSON.stringify(landingPages)); } catch(e) {}
+  return landingPages;
+}
+
+async function loadLandingList() {
+  const wrap = document.getElementById('landingListWrap');
+  wrap.innerHTML = '<div class="loading"><div class="spinner"></div> Caricamento landing pages...</div>';
+  const pages = await getLandingPages();
+
+  // Aggiorna contatori
+  checkScheduledLandings(pages);
+  const tot = pages.length;
+  const pub = pages.filter(p => p.stato === 'pubblicata').length;
+  const prog = pages.filter(p => p.stato === 'programmata').length;
+  const bozze = pages.filter(p => p.stato === 'bozza').length;
+  document.getElementById('statLandTot').textContent = tot;
+  document.getElementById('statLandPub').textContent = pub;
+  document.getElementById('statLandProg').textContent = prog;
+  document.getElementById('statLandBozze').textContent = bozze;
+
+  if (!tot) {
+    wrap.innerHTML = '<div class="empty-state"><h3>Nessuna landing page</h3><p style="margin-top:8px">Clicca "+ Nuova Landing" per aggiungere una landing page</p></div>';
+    return;
+  }
+
+  wrap.innerHTML = `<table><thead><tr><th style="width:30px"><input type="checkbox" id="landingCheckAll" onchange="toggleAllLanding(this.checked)"></th><th>Titolo</th><th>Tipo</th><th>URL</th><th>Stato</th><th>Pubblicazione</th><th>Azioni</th></tr></thead><tbody>${
+    pages.map(p => {
+      const statoBadge = p.stato === 'pubblicata' ? '<span class="badge badge-verde">Pubblicata</span>'
+        : p.stato === 'programmata' ? '<span class="badge badge-oro">Programmata</span>'
+        : '<span class="badge" style="background:var(--caffe3);color:#fff">Bozza</span>';
+      const dataPub = p.data_pubblicazione ? formatDateTime(p.data_pubblicazione) : '—';
+      const urlFile = p.url || (p.slug ? p.slug + '.html' : '—');
+      return `<tr>
+        <td><input type="checkbox" class="landing-check" value="${p.id}"></td>
+        <td><strong style="font-size:0.88rem">${esc(p.titolo)}</strong>${p.descrizione ? '<br><span style="font-size:0.72rem;color:var(--caffe2)">' + esc(p.descrizione).substring(0, 80) + '</span>' : ''}</td>
+        <td><span class="badge badge-blu">${esc(p.categoria || 'altro')}</span></td>
+        <td style="font-size:0.78rem;font-family:monospace"><a href="${esc(urlFile)}" target="_blank" style="color:var(--nero)">${esc(urlFile)}</a></td>
+        <td>${statoBadge}</td>
+        <td style="font-size:0.78rem">${dataPub}</td>
+        <td style="white-space:nowrap">
+          <button class="btn btn-sm btn-secondary" onclick="editLandingPage('${p.id}')">✏️ Modifica</button>
+          <button class="btn btn-sm btn-danger" onclick="deleteLandingById('${p.id}')">🗑️</button>
+        </td>
+      </tr>`;
+    }).join('')
+  }</tbody></table>`;
+}
+
+function formatDateTime(d) {
+  if (!d) return '';
+  const dt = new Date(d);
+  return dt.toLocaleDateString('it-IT', { day:'numeric', month:'short', year:'numeric' }) + ' ' + dt.toLocaleTimeString('it-IT', { hour:'2-digit', minute:'2-digit' });
+}
+
+function toggleAllLanding(checked) {
+  document.querySelectorAll('.landing-check').forEach(c => c.checked = checked);
+}
+
+function checkScheduledLandings(pages) {
+  const now = new Date();
+  pages.forEach(p => {
+    if (p.stato === 'programmata' && p.data_pubblicazione && new Date(p.data_pubblicazione) <= now) {
+      p.stato = 'pubblicata';
+      updateLandingStatus(p.id, 'pubblicata');
+    }
+    if (p.stato === 'pubblicata' && p.data_fine && new Date(p.data_fine) <= now) {
+      p.stato = 'bozza';
+      updateLandingStatus(p.id, 'bozza');
+    }
+  });
+}
+
+async function updateLandingStatus(id, stato) {
+  try {
+    await sb.from('landing_pages').update({ stato }).eq('id', id);
+  } catch(e) {
+    const idx = landingPages.findIndex(p => p.id === id);
+    if (idx >= 0) { landingPages[idx].stato = stato; try { localStorage.setItem('rig_landing_pages', JSON.stringify(landingPages)); } catch(ex) {} }
+  }
+}
+
+async function pubblicaLandingSelezionate() {
+  const checked = document.querySelectorAll('.landing-check:checked');
+  if (!checked.length) { toast('Seleziona almeno una landing page', 'error'); return; }
+  for (const c of checked) {
+    await updateLandingStatus(c.value, 'pubblicata');
+  }
+  toast('✅ ' + checked.length + ' landing page pubblicate!', 'success');
+  loadLandingList();
+}
+
+function openLandingEditor(id) {
+  document.getElementById('landingEditId').value = '';
+  document.getElementById('l_titolo').value = '';
+  document.getElementById('l_slug').value = '';
+  document.getElementById('l_categoria').value = 'vendita';
+  document.getElementById('l_url').value = '';
+  document.getElementById('l_data_pub').value = '';
+  document.getElementById('l_data_fine').value = '';
+  document.getElementById('l_descrizione').value = '';
+  document.querySelector('input[name=l_stato][value=pubblicata]').checked = true;
+  document.getElementById('btnDeleteLanding').style.display = 'none';
+  document.getElementById('landingEditorTitle').textContent = 'Nuova Landing Page';
+
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-landing-editor').classList.add('active');
+  document.getElementById('topbarTitle').textContent = 'Nuova Landing Page';
+}
+
+async function editLandingPage(id) {
+  const pages = landingPages.length ? landingPages : await getLandingPages();
+  const p = pages.find(x => x.id == id);
+  if (!p) { toast('Landing non trovata', 'error'); return; }
+
+  document.getElementById('landingEditId').value = p.id;
+  document.getElementById('l_titolo').value = p.titolo || '';
+  document.getElementById('l_slug').value = p.slug || '';
+  document.getElementById('l_categoria').value = p.categoria || 'altro';
+  document.getElementById('l_url').value = p.url || '';
+  document.getElementById('l_data_pub').value = p.data_pubblicazione ? p.data_pubblicazione.slice(0, 16) : '';
+  document.getElementById('l_data_fine').value = p.data_fine ? p.data_fine.slice(0, 16) : '';
+  document.getElementById('l_descrizione').value = p.descrizione || '';
+  const statoRadio = document.querySelector('input[name=l_stato][value="' + (p.stato || 'bozza') + '"]');
+  if (statoRadio) statoRadio.checked = true;
+  document.getElementById('btnDeleteLanding').style.display = '';
+  document.getElementById('landingEditorTitle').textContent = 'Modifica Landing';
+
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-landing-editor').classList.add('active');
+  document.getElementById('topbarTitle').textContent = 'Modifica Landing Page';
+}
+
+async function saveLandingPage() {
+  const titolo = document.getElementById('l_titolo').value.trim();
+  if (!titolo) { toast('Inserisci un titolo!', 'error'); return; }
+
+  const editId = document.getElementById('landingEditId').value;
+  const stato = document.querySelector('input[name=l_stato]:checked').value;
+  const slug = document.getElementById('l_slug').value.trim() || titolo.toLowerCase()
+    .replace(/[àáâãäå]/g,'a').replace(/[èéêë]/g,'e').replace(/[ìíîï]/g,'i')
+    .replace(/[òóôõö]/g,'o').replace(/[ùúûü]/g,'u').replace(/[ç]/g,'c')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,60);
+
+  const payload = {
+    titolo,
+    slug,
+    categoria: document.getElementById('l_categoria').value,
+    url: document.getElementById('l_url').value.trim() || slug + '.html',
+    data_pubblicazione: document.getElementById('l_data_pub').value ? new Date(document.getElementById('l_data_pub').value).toISOString() : null,
+    data_fine: document.getElementById('l_data_fine').value ? new Date(document.getElementById('l_data_fine').value).toISOString() : null,
+    descrizione: document.getElementById('l_descrizione').value.trim(),
+    stato,
+    updated_at: new Date().toISOString()
+  };
+
+  try {
+    let error;
+    if (editId) {
+      const res = await sb.from('landing_pages').update(payload).eq('id', editId);
+      error = res.error;
+    } else {
+      payload.created_at = new Date().toISOString();
+      const res = await sb.from('landing_pages').insert(payload);
+      error = res.error;
+    }
+    if (error) throw error;
+    toast('✅ Landing page salvata!', 'success');
+  } catch(e) {
+    console.warn('Errore salvataggio landing su Supabase:', e.message);
+    const page = { ...payload, id: editId || 'land_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6) };
+    if (!page.created_at) page.created_at = new Date().toISOString();
+    if (editId) {
+      const idx = landingPages.findIndex(p => p.id === editId);
+      if (idx >= 0) landingPages[idx] = page; else landingPages.push(page);
+    } else {
+      landingPages.push(page);
+    }
+    try { localStorage.setItem('rig_landing_pages', JSON.stringify(landingPages)); } catch(ex) {}
+    toast('✅ Landing salvata (locale)', 'success');
+  }
+  showSection('landing');
+}
+
+async function deleteLandingPage() {
+  const id = document.getElementById('landingEditId').value;
+  if (!id) return;
+  if (!confirm('Eliminare questa landing page?')) return;
+  await deleteLandingById(id);
+  showSection('landing');
+}
+
+async function deleteLandingById(id) {
+  if (!confirm('Confermi eliminazione?')) return;
+  try {
+    const { error } = await sb.from('landing_pages').delete().eq('id', id);
+    if (error) throw error;
+  } catch(e) {
+    landingPages = landingPages.filter(p => p.id !== id);
+    try { localStorage.setItem('rig_landing_pages', JSON.stringify(landingPages)); } catch(ex) {}
+  }
+  toast('🗑️ Landing eliminata', 'success');
+  loadLandingList();
+}
+
 function showSectionById(name) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById('sec-' + name).classList.add('active');
+}
+
+// ══════════════════════════════════════
+// NEWSLETTER ISCRITTI
+// ══════════════════════════════════════
+let allNewsSubscribers = [];
+
+async function loadNewsletterList() {
+  const wrap = document.getElementById('newsListWrap');
+  wrap.innerHTML = '<div class="loading"><div class="spinner"></div> Caricamento iscritti...</div>';
+  try {
+    const interesse = document.getElementById('filtroNewsInteresse').value;
+    const tipo = document.getElementById('filtroNewsTipo').value;
+    let query = sb.from('newsletter_subscribers').select('*').order('created_at', { ascending: false });
+    if (interesse) query = query.eq('interesse', interesse);
+    if (tipo) query = query.eq('tipo_immobile', tipo);
+    const { data, error } = await query;
+    if (error) throw error;
+    allNewsSubscribers = data || [];
+    renderNewsTable();
+    updateNewsStats();
+  } catch(e) {
+    console.warn('Errore caricamento newsletter:', e.message);
+    wrap.innerHTML = '<div class="empty-state"><h3>Tabella non trovata</h3><p style="margin-top:8px">Esegui l\'SQL per creare la tabella newsletter_subscribers su Supabase</p></div>';
+  }
+}
+
+function renderNewsTable() {
+  const wrap = document.getElementById('newsListWrap');
+  if (!allNewsSubscribers.length) {
+    wrap.innerHTML = '<div class="empty-state"><h3>Nessun iscritto</h3><p style="margin-top:8px">Gli iscritti appariranno qui quando qualcuno compila un form</p></div>';
+    return;
+  }
+  const interesseColors = { vendita:'badge-oro', acquisto:'badge-blu', valutazione:'badge-verde', affitto:'badge-grigio', consulenza:'badge-grigio', generico:'' };
+  wrap.innerHTML = `<table><thead><tr><th>Nome</th><th>Email</th><th>Telefono</th><th>Interesse</th><th>Tipo Immobile</th><th>Zona</th><th>Provenienza</th><th>Data</th><th>Stato</th></tr></thead><tbody>${
+    allNewsSubscribers.map(s => {
+      const badge = interesseColors[s.interesse] || '';
+      const dt = s.created_at ? new Date(s.created_at).toLocaleDateString('it-IT') : '';
+      return `<tr>
+        <td style="font-weight:600">${esc(s.nome || '—')}</td>
+        <td><a href="mailto:${esc(s.email)}" style="color:var(--nero)">${esc(s.email)}</a></td>
+        <td>${esc(s.telefono || '—')}</td>
+        <td><span class="badge ${badge}">${esc(s.interesse || 'generico')}</span></td>
+        <td>${esc(s.tipo_immobile || '—')}</td>
+        <td>${esc(s.zona || '—')}</td>
+        <td style="font-size:0.72rem">${esc(s.provenienza || s.fonte || '—')}</td>
+        <td style="font-size:0.72rem">${dt}</td>
+        <td>${s.attivo ? '<span class="badge badge-verde">Attivo</span>' : '<span class="badge badge-grigio">Inattivo</span>'}</td>
+      </tr>`;
+    }).join('')
+  }</tbody></table>`;
+}
+
+function updateNewsStats() {
+  document.getElementById('statNewsTot').textContent = allNewsSubscribers.length;
+  document.getElementById('statNewsAttivi').textContent = allNewsSubscribers.filter(s => s.attivo).length;
+  document.getElementById('statNewsVendita').textContent = allNewsSubscribers.filter(s => s.interesse === 'vendita').length;
+  document.getElementById('statNewsAcquisto').textContent = allNewsSubscribers.filter(s => s.interesse === 'acquisto').length;
+  const badge = document.getElementById('badgeNewsletter');
+  if (allNewsSubscribers.length > 0) { badge.style.display = 'inline'; badge.textContent = allNewsSubscribers.length; }
+  else { badge.style.display = 'none'; }
+}
+
+function filterNewsTable() {
+  const q = document.getElementById('searchNews').value.toLowerCase().trim();
+  const rows = document.querySelectorAll('#newsListWrap tbody tr');
+  rows.forEach(row => { row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none'; });
+}
+
+function copyNewsEmails() {
+  const interesse = document.getElementById('filtroNewsInteresse').value;
+  const tipo = document.getElementById('filtroNewsTipo').value;
+  let filtered = allNewsSubscribers.filter(s => s.attivo && s.email);
+  if (interesse) filtered = filtered.filter(s => s.interesse === interesse);
+  if (tipo) filtered = filtered.filter(s => s.tipo_immobile === tipo);
+  const emails = filtered.map(s => s.email).join(', ');
+  if (!emails) { toast('Nessuna email da copiare', 'error'); return; }
+  navigator.clipboard.writeText(emails).then(() => {
+    toast('Copiate ' + filtered.length + ' email negli appunti!', 'success');
+  }).catch(() => {
+    prompt('Copia manualmente:', emails);
+  });
 }
 
 // ══════════════════════════════════════
@@ -5468,15 +5945,13 @@ function printPropertyPdf(id) {
   const i = allImmobili.find(x => x.id == id);
   if (!i) { toast('Immobile non trovato', 'error'); return; }
 
-  // Collect all photos (max 4 for layout)
+  // Collect photos (max 4 in row)
   const allPhotos = (i.foto_urls || i.foto || []).filter(Boolean).slice(0, 4);
-  const mainFoto = i.foto_principale || allPhotos[0] || '';
-  const extraPhotos = allPhotos.slice(1, 4);
   const prezzo = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : 'Prezzo su richiesta';
   const prezzoMq = (i.prezzo && i.superficie) ? '\u20AC ' + Math.round(i.prezzo / i.superficie).toLocaleString('it-IT') + '/mq' : '';
-  const tipo = i.tipo_operazione === 'vendita' ? 'VENDITA' : i.tipo_operazione === 'affitto' ? 'AFFITTO' : (i.tipo_operazione || '').toUpperCase();
+  const tipo = (i.tipo_operazione || '').toUpperCase();
 
-  // Build comprehensive features
+  // Build features table
   const features = [];
   if (i.tipologia || i.categoria) features.push(['Tipologia', i.tipologia || i.categoria]);
   if (i.superficie) features.push(['Superficie', i.superficie + ' mq']);
@@ -5487,23 +5962,33 @@ function printPropertyPdf(id) {
   if (i.totale_piani) features.push(['Piani totali', i.totale_piani]);
   if (i.anno_costruzione) features.push(['Anno costruzione', i.anno_costruzione]);
   if (i.stato) features.push(['Stato immobile', i.stato]);
-  if (i.classe_energetica) features.push(['Classe energetica', i.classe_energetica]);
-  if (i.ipe_kwh) features.push(['IPE', i.ipe_kwh + ' kWh/m\u00B2a']);
   if (i.esposizione) features.push(['Esposizione', i.esposizione]);
   if (i.mq_giardino) features.push(['Giardino', i.mq_giardino + ' mq']);
   if (i.mq_lotto) features.push(['Lotto', i.mq_lotto + ' mq']);
   if (i.terrazzi_num) features.push(['Terrazzi', i.terrazzi_num]);
-  if (i.garage_num) features.push(['Garage', i.garage_num]);
+  if (i.garage_num) features.push(['Garage', i.garage_num + (i.garage_doppio ? ' (doppio)' : '')]);
   if (i.posto_auto) features.push(['Posti auto', i.posto_auto]);
   if (i.ripostigli) features.push(['Ripostigli', i.ripostigli]);
   if (i.spese_condominio) features.push(['Spese condominiali', '\u20AC ' + Number(i.spese_condominio).toLocaleString('it-IT') + '/mese']);
   if (i.consegna) features.push(['Consegna', i.consegna]);
   if (i.panorama) features.push(['Panorama', i.panorama]);
   if (i.connettivita) features.push(['Connettivit\u00E0', i.connettivita]);
+  if (i.impianto_elettrico) features.push(['Imp. elettrico', i.impianto_elettrico]);
+  if (i.distanza_mare) features.push(['Dist. mare', i.distanza_mare + ' m']);
+  const half = Math.ceil(features.length / 2);
+  const col1 = features.slice(0, half);
+  const col2 = features.slice(half);
+  let featRows = '';
+  for (let r = 0; r < half; r++) {
+    const f1 = col1[r] || ['',''];
+    const f2 = col2[r] || ['',''];
+    featRows += '<tr><td class="fl">' + f1[0] + '</td><td class="fv">' + f1[1] + '</td><td class="fl">' + f2[0] + '</td><td class="fv">' + f2[1] + '</td></tr>';
+  }
 
   // Ambienti
   const ambienti = [];
   if (i.soggiorno) ambienti.push('Soggiorno');
+  if (i.soggiorno_angolo_cottura) ambienti.push('Soggiorno con angolo cottura');
   if (i.cucina) ambienti.push('Cucina');
   if (i.mansarda) ambienti.push('Mansarda');
   if (i.taverna) ambienti.push('Taverna');
@@ -5512,125 +5997,185 @@ function printPropertyPdf(id) {
   if (i.porticato) ambienti.push('Porticato');
   if (i.soppalco) ambienti.push('Soppalco');
 
-  // Riscaldamento / Clima
+  // Clima
   const clima = [];
   if (i.riscaldamento_autonomo) clima.push('Riscaldamento autonomo');
   if (i.riscaldamento_centralizzato) clima.push('Riscaldamento centralizzato');
   if (i.riscaldamento_pavimento) clima.push('Riscaldamento a pavimento');
+  if (i.raffreddamento_pavimento) clima.push('Raffreddamento a pavimento');
   if (i.aria_condizionata) clima.push('Aria condizionata');
   if (i.camino) clima.push('Camino');
   if (i.termopompa) clima.push('Termopompa');
   if (i.caldaia_condensazione) clima.push('Caldaia a condensazione');
+  if (i.pannelli_fotovoltaici) clima.push('Fotovoltaico');
+  if (i.pannelli_solari) clima.push('Solare termico');
+  if (i.impianto_geotermico) clima.push('Geotermico');
 
-  // Comfort / Sicurezza
-  const comforts = [];
-  if (i.garage || i.garage_num) comforts.push('Garage');
-  if (i.giardino) comforts.push('Giardino');
-  if (i.terrazzo) comforts.push('Terrazzo');
-  if (i.cantina) comforts.push('Cantina');
-  if (i.ascensore) comforts.push('Ascensore');
-  if (i.piscina) comforts.push('Piscina');
-  if (i.arredato || i.arredo) comforts.push('Arredato');
-  if (i.ingresso_indipendente) comforts.push('Ingresso indipendente');
-  if (i.allarme) comforts.push('Allarme');
-  if (i.porta_blindata) comforts.push('Porta blindata');
-  if (i.domotica) comforts.push('Domotica');
-  if (i.tapparelle_motorizzate) comforts.push('Tapparelle motorizzate');
-  if (i.zanzariere) comforts.push('Zanzariere');
-  if (i.pannelli_fotovoltaici) comforts.push('Fotovoltaico');
-  if (i.pannelli_solari) comforts.push('Solare termico');
-  if (i.impianto_geotermico) comforts.push('Geotermico');
-  if (i.canna_fumaria) comforts.push('Canna fumaria');
-  if (i.portineria) comforts.push('Portineria');
-  if (i.accesso_disabili) comforts.push('Accesso disabili');
+  // Comfort
+  const comfort = [];
+  if (i.garage || i.garage_num) comfort.push('Garage');
+  if (i.giardino) comfort.push('Giardino');
+  if (i.terrazzo) comfort.push('Terrazzo');
+  if (i.cantina) comfort.push('Cantina');
+  if (i.ascensore) comfort.push('Ascensore');
+  if (i.piscina) comfort.push('Piscina');
+  if (i.arredato || i.arredo) comfort.push('Arredato');
+  if (i.ingresso_indipendente) comfort.push('Ingresso indipendente');
+  if (i.portineria) comfort.push('Portineria');
+  if (i.accesso_disabili) comfort.push('Accesso disabili');
 
-  // Build features table (2 columns)
-  const half = Math.ceil(features.length / 2);
-  const col1 = features.slice(0, half);
-  const col2 = features.slice(half);
-  let featRows = '';
-  for (let r = 0; r < half; r++) {
-    const f1 = col1[r] || ['',''];
-    const f2 = col2[r] || ['',''];
-    featRows += '<tr>' +
-      '<td class="feat-label">' + f1[0] + '</td><td class="feat-val">' + f1[1] + '</td>' +
-      '<td class="feat-label">' + f2[0] + '</td><td class="feat-val">' + f2[1] + '</td>' +
-      '</tr>';
-  }
+  // Sicurezza
+  const sicurezza = [];
+  if (i.allarme) sicurezza.push('Allarme');
+  if (i.porta_blindata) sicurezza.push('Porta blindata');
+  if (i.domotica) sicurezza.push('Domotica');
+  if (i.tapparelle_motorizzate) sicurezza.push('Tapparelle motorizzate');
+  if (i.zanzariere) sicurezza.push('Zanzariere');
+  if (i.canna_fumaria) sicurezza.push('Canna fumaria');
+  if (i.cassaforte) sicurezza.push('Cassaforte');
 
   const tagHtml = (arr, title) => {
     if (!arr.length) return '';
-    return '<div class="tag-section"><h3>' + title + '</h3><div class="tags">' + arr.map(t => '<span class="tag">\u2713 ' + t + '</span>').join('') + '</div></div>';
+    return '<div class="tags-sec"><h3>' + title + '</h3><div class="tags">' + arr.map(t => '<span class="tag">\u2713 ' + t + '</span>').join('') + '</div></div>';
   };
+
+  // Classe energetica barre
+  const ce = i.classe_energetica || '';
+  const ipe = i.ipe_kwh || '';
+  const classi = ['A4','A3','A2','A1','B','C','D','E','F','G'];
+  const ceColori = {A4:'#1b5e20',A3:'#2e7d32',A2:'#388e3c',A1:'#43a047',B:'#558b2f',C:'#f9a825',D:'#ef6c00',E:'#e53935',F:'#b71c1c',G:'#880e4f'};
+  const ceWidths = {A4:25,A3:32,A2:39,A1:46,B:53,C:60,D:67,E:74,F:81,G:88};
+
+  let ceHtml = '';
+  if (ce) {
+    ceHtml = '<div class="ce-section"><h3>Classe Energetica</h3><div class="ce-grid"><div class="ce-bars">';
+    classi.forEach(c => {
+      const isActive = c === ce;
+      const col = ceColori[c] || '#999';
+      const w = isActive ? 100 : (ceWidths[c] || 50);
+      ceHtml += '<div class="ce-row"><div class="ce-bar" style="background:' + col + ';width:' + w + '%;' + (isActive ? 'font-weight:800;font-size:11px' : 'font-size:9px') + '">' + (isActive ? '\u25C4 ' + c + ' \u2014 Immobile' : c) + '</div>';
+      if (isActive && ipe) ceHtml += '<span class="ce-ipe">' + ipe + ' kWh/m\u00B2\u00B7anno</span>';
+      ceHtml += '</div>';
+    });
+    ceHtml += '</div><div class="ce-badge" style="background:' + (ceColori[ce] || '#666') + '">' + ce + '<small>CLASSE</small></div></div></div>';
+  }
+
+  // Planimetrie (solo immagini)
+  const plan = Array.isArray(i.planimetrie) ? i.planimetrie : [];
+  const planImgs = plan.map(p => typeof p === 'string' ? p : (p && p.url)).filter(u => u && /\.(jpg|jpeg|png|webp|gif)/i.test(u));
+  let planHtml = '';
+  if (planImgs.length) {
+    planHtml = '<div class="plan-section"><h3>Planimetrie</h3><div class="plan-grid">';
+    planImgs.forEach((url, idx) => {
+      const nome = typeof plan[idx] === 'object' && plan[idx].nome ? plan[idx].nome : 'Planimetria ' + (idx + 1);
+      planHtml += '<div class="plan-item"><img src="' + url + '" onerror="this.parentElement.style.display=\'none\'"><span>' + escHtml(nome) + '</span></div>';
+    });
+    planHtml += '</div></div>';
+  }
+
+  // Specs row
+  const specs = [
+    ['SUPERFICIE', i.superficie ? i.superficie + ' mq' : '\u2014'],
+    ['LOCALI', i.locali || '\u2014'],
+    ['CAMERE', i.camere || '\u2014'],
+    ['BAGNI', i.bagni_totali || i.bagni || '\u2014'],
+    ['PIANO', i.piano || '\u2014'],
+    ['ANNO', i.anno_costruzione || '\u2014'],
+  ];
+  let specsHtml = '<div class="specs-row">';
+  specs.forEach((s, idx) => {
+    specsHtml += '<div class="spec' + (idx % 2 ? ' alt' : '') + '"><strong>' + s[1] + '</strong><small>' + s[0] + '</small></div>';
+  });
+  specsHtml += '</div>';
 
   const win = window.open('', '_blank');
   win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${escHtml(i.codice || '')} - ${escHtml(i.titolo || '')}</title>
 <style>
-  @page { margin: 12mm 12mm 14mm 12mm; }
+  @page { margin: 10mm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', Arial, sans-serif; color: #1E3A5C; padding: 0; line-height: 1.45; font-size: 13px; }
-  .header { background: #3A5578; color: white; padding: 14px 22px; display: flex; justify-content: space-between; align-items: center; }
-  .logo { font-size: 20px; font-weight: 700; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; color: #1E3A5C; line-height: 1.45; font-size: 12px; }
+  .header { background: #3A5578; color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-size: 18px; font-weight: 700; }
   .logo span { color: #CEE08F; }
-  .logo small { display: block; font-size: 9px; font-weight: 400; color: #B0C8E0; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
-  .badge-tipo { background: #CEE08F; color: #3A5578; padding: 5px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 1px; }
-  .rif { text-align: right; font-size: 10px; color: #B0C8E0; margin-top: 4px; }
-  .photos { display: flex; gap: 6px; padding: 10px 16px; background: #f5f3ee; }
-  .photos .main { flex: 2; height: 230px; border-radius: 8px; object-fit: cover; }
-  .photos .side { flex: 1; display: flex; flex-direction: column; gap: 6px; }
-  .photos .side img { flex: 1; border-radius: 6px; object-fit: cover; min-height: 0; }
-  .no-photo { flex: 2; height: 230px; border-radius: 8px; background: #ddd; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; }
-  .title-bar { padding: 14px 22px 6px; }
-  .title-bar h1 { font-size: 18px; font-weight: 700; color: #3A5578; }
-  .title-bar .loc { font-size: 13px; color: #7A9AB8; margin-top: 2px; }
-  .price-bar { padding: 4px 22px 14px; display: flex; align-items: baseline; gap: 12px; }
-  .price-bar .price { font-size: 26px; font-weight: 700; color: #27ae60; }
-  .price-bar .pmq { font-size: 12px; color: #7A9AB8; }
-  .feat-table { width: 100%; border-collapse: collapse; margin: 0 auto; padding: 0 16px; }
-  .feat-table td { padding: 5px 10px; font-size: 12px; border-bottom: 1px solid #eee; }
-  .feat-label { color: #7A9AB8; font-weight: 400; width: 22%; }
-  .feat-val { color: #3A5578; font-weight: 600; width: 28%; }
-  .section { padding: 0 22px; margin-top: 14px; }
-  .section h2 { font-size: 13px; font-weight: 700; color: #3A5578; border-left: 4px solid #CEE08F; padding-left: 8px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-  .tag-section { margin-top: 12px; padding: 0 22px; }
-  .tag-section h3 { font-size: 11px; font-weight: 700; color: #3A5578; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-  .tags { display: flex; flex-wrap: wrap; gap: 5px; }
-  .tag { background: #f0f4e8; color: #3A5578; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 500; }
-  .desc { font-size: 12px; color: #555; line-height: 1.6; margin-top: 6px; }
-  .footer { background: #3A5578; color: #B0C8E0; padding: 10px 22px; text-align: center; font-size: 9px; margin-top: 20px; }
+  .logo small { display: block; font-size: 8px; font-weight: 400; color: #B0C8E0; letter-spacing: 2px; text-transform: uppercase; margin-top: 1px; }
+  .badge-tipo { background: #CEE08F; color: #3A5578; padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px; }
+  .rif { text-align: right; font-size: 9px; color: #B0C8E0; margin-top: 3px; }
+  .photos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 8px 14px; background: #f5f3ee; }
+  .photos img { width: 100%; height: 140px; object-fit: cover; border-radius: 6px; }
+  .no-photo { grid-column: 1/-1; height: 140px; border-radius: 6px; background: #ddd; display: flex; align-items: center; justify-content: center; color: #999; }
+  .title-bar { padding: 10px 20px 4px; }
+  .title-bar h1 { font-size: 17px; font-weight: 700; color: #3A5578; }
+  .title-bar .loc { font-size: 12px; color: #7A9AB8; margin-top: 2px; }
+  .price-bar { padding: 4px 20px 10px; display: flex; align-items: baseline; gap: 12px; }
+  .price-bar .price { font-size: 24px; font-weight: 700; color: #3A5578; }
+  .price-bar .pmq { font-size: 11px; color: #7A9AB8; }
+  .specs-row { display: grid; grid-template-columns: repeat(6, 1fr); margin: 0 14px 8px; }
+  .spec { text-align: center; padding: 6px 4px; background: #faf8f2; }
+  .spec.alt { background: #f4f2ec; }
+  .spec strong { display: block; font-size: 13px; color: #3A5578; }
+  .spec small { font-size: 8px; color: #7A9AB8; text-transform: uppercase; letter-spacing: .5px; }
+  .section { padding: 0 20px; margin-top: 12px; }
+  .section h2 { font-size: 12px; font-weight: 700; color: #3A5578; border-left: 4px solid #CEE08F; padding-left: 8px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .desc { font-size: 12px; color: #444; line-height: 1.65; margin-top: 4px; }
+  .feat-table { width: 100%; border-collapse: collapse; margin: 0 14px; }
+  .feat-table td { padding: 4px 8px; font-size: 11px; border-bottom: 1px solid #eee; }
+  .fl { color: #7A9AB8; font-weight: 400; width: 20%; }
+  .fv { color: #3A5578; font-weight: 600; width: 30%; }
+  .tags-sec { margin-top: 10px; padding: 0 20px; }
+  .tags-sec h3 { font-size: 10px; font-weight: 700; color: #3A5578; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tag { background: #f0f4e8; color: #3A5578; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 500; }
+  .ce-section { margin-top: 12px; padding: 0 20px; page-break-inside: avoid; }
+  .ce-section h3 { font-size: 10px; font-weight: 700; color: #3A5578; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+  .ce-grid { display: flex; align-items: center; gap: 16px; }
+  .ce-bars { flex: 1; }
+  .ce-row { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
+  .ce-bar { color: #fff; padding: 1px 8px; border-radius: 2px 10px 10px 2px; white-space: nowrap; min-width: 28px; }
+  .ce-ipe { font-size: 9px; color: #3A5578; font-weight: 600; }
+  .ce-badge { width: 60px; height: 60px; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; font-size: 22px; font-weight: 700; }
+  .ce-badge small { font-size: 7px; font-weight: 400; margin-top: 1px; }
+  .plan-section { margin-top: 14px; padding: 0 20px; page-break-before: auto; }
+  .plan-section h3 { font-size: 10px; font-weight: 700; color: #3A5578; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+  .plan-grid { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .plan-item { text-align: center; }
+  .plan-item img { max-width: 100%; max-height: 280px; border: 1px solid #ddd; border-radius: 4px; }
+  .plan-item span { display: block; font-size: 9px; color: #7A9AB8; margin-top: 3px; }
+  .footer { background: #3A5578; color: #B0C8E0; padding: 8px 20px; text-align: center; font-size: 8px; margin-top: 16px; }
   .footer strong { color: #CEE08F; }
-  @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+  @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } .plan-section { page-break-before: auto; } }
 </style></head><body>
 <div class="header">
   <div class="logo"><span>Righetto</span> Immobiliare<small>Agenzia Immobiliare</small></div>
   <div><span class="badge-tipo">${tipo}</span><div class="rif">Rif. ${escHtml(i.codice || 'N/D')}</div></div>
 </div>
 <div class="photos">
-  ${mainFoto ? '<img class="main" src="' + mainFoto + '" onerror="this.style.display=\'none\'">' : '<div class="no-photo">Nessuna foto disponibile</div>'}
-  ${extraPhotos.length > 0 ? '<div class="side">' + extraPhotos.map(p => '<img src="' + p + '" onerror="this.style.display=\'none\'">').join('') + '</div>' : ''}
+  ${allPhotos.length > 0 ? allPhotos.map(p => '<img src="' + p + '" onerror="this.style.display=\'none\'">').join('') : '<div class="no-photo">Nessuna foto disponibile</div>'}
 </div>
 <div class="title-bar">
   <h1>${escHtml(i.titolo || 'Immobile')}</h1>
-  <div class="loc">${escHtml(i.comune || '')}${i.indirizzo ? ' \u2014 ' + escHtml(i.indirizzo) : ''}</div>
+  <div class="loc">${escHtml(i.comune || '')}</div>
 </div>
 <div class="price-bar">
   <span class="price">${prezzo}</span>
   ${prezzoMq ? '<span class="pmq">(' + prezzoMq + ')</span>' : ''}
 </div>
-<div class="section"><h2>Caratteristiche</h2></div>
+${specsHtml}
+${(i.descrizione || i.note_interne || i.descrizione_pubblica) ? '<div class="section"><h2>Descrizione</h2><div class="desc">' + escHtml(i.descrizione || i.note_interne || i.descrizione_pubblica || '').replace(/\\n/g, '<br>') + '</div></div>' : ''}
+<div class="section" style="margin-top:10px"><h2>Caratteristiche</h2></div>
 <table class="feat-table">${featRows}</table>
 ${tagHtml(ambienti, 'Ambienti')}
-${tagHtml(clima, 'Riscaldamento / Clima')}
-${tagHtml(comforts, 'Dotazioni & Comfort')}
-${i.descrizione ? '<div class="section" style="margin-top:14px"><h2>Descrizione</h2><div class="desc">' + escHtml(i.descrizione || '').replace(/\\n/g, '<br>') + '</div></div>' : ''}
+${tagHtml(clima, 'Riscaldamento & Clima')}
+${tagHtml(comfort, 'Dotazioni & Comfort')}
+${tagHtml(sicurezza, 'Sicurezza & Tecnologia')}
+${ceHtml}
+${planHtml}
 <div class="footer">
-  <strong>Righetto Immobiliare</strong> \u2014 Via Roma 96, Limena (PD) \u2014 Tel: 049 884 3484 \u2014 info@righettoimmobiliare.it \u2014 www.righettoimmobiliare.it<br>
+  <strong>Righetto Immobiliare</strong> \u2014 Via Roma 96, Limena (PD) \u2014 Tel: 049.88.43.484 \u2014 info@righettoimmobiliare.it \u2014 www.righettoimmobiliare.it<br>
   Documento generato il ${new Date().toLocaleDateString('it-IT')} \u2014 Le informazioni non costituiscono elemento contrattuale
 </div>
 </body></html>`);
   win.document.close();
-  // Wait for images to load before printing
-  setTimeout(function() { win.print(); }, 1200);
+  setTimeout(function() { win.print(); }, 1500);
 }
 
 // ══════════════════════════════════════
@@ -5744,7 +6289,7 @@ function buildSocialCaption(i) {
   if (i.aria_condizionata) highlights.push('Climatizzato');
   if (highlights.length) caption += highlights.join(' | ') + '\n\n';
   caption += 'Rif. ' + (i.codice || '') + '\n';
-  caption += 'Righetto Immobiliare | Tel: 049 884 3484\n';
+  caption += 'Righetto Immobiliare | Tel: 049.88.43.484\n';
   caption += '#immobiliare #' + (i.comune || 'padova').toLowerCase().replace(/\s+/g, '') + ' #' + (i.tipo_operazione || 'vendita') + ' #casainvendita #righettoimmobiliare';
   return caption;
 }
@@ -5788,7 +6333,7 @@ function buildBlogSocialCaption(a) {
   if (txt.split(/\s+/).length > 40) excerpt += '...';
   caption += excerpt + '\n\n';
   caption += 'Leggi l\'articolo completo su righettoimmobiliare.it/blog-articolo.html?s=' + (a.slug || '') + '\n\n';
-  caption += 'Righetto Immobiliare | Tel: 049 884 3484\n';
+  caption += 'Righetto Immobiliare | Tel: 049.88.43.484\n';
   // Hashtags from category
   var cat = (a.categoria || '').toLowerCase().replace(/\s+/g, '');
   caption += '#immobiliare #padova #' + cat + ' #blog #righettoimmobiliare';
@@ -6365,7 +6910,7 @@ function generateTikTokImage() {
     ctx.fillRect(0, 1800, 1080, 120);
     ctx.font = '28px "Segoe UI", Arial';
     ctx.fillStyle = '#CEE08F';
-    ctx.fillText('Rif. ' + (i.codice || '') + '  |  Tel: 049 884 3484', 540, 1850);
+    ctx.fillText('Rif. ' + (i.codice || '') + '  |  Tel: 049.88.43.484', 540, 1850);
     ctx.font = '24px "Segoe UI", Arial';
     ctx.fillStyle = '#B0C8E0';
     ctx.fillText('www.righettoimmobiliare.it', 540, 1885);

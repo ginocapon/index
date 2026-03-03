@@ -756,7 +756,8 @@ class RighettoChat {
   // ────── STIMA PREZZO ──────
   stimaPrezzo(comune, tipologia, mq, stato) {
     const comuneKey = this.normalizeKey(comune);
-    const prezziZona = PREZZI_COMUNI[comuneKey] || PREZZI_COMUNI['default'];
+    const fuzzyKey = this.fuzzyMatchComune(comune);
+    const prezziZona = PREZZI_COMUNI[comuneKey] || (fuzzyKey ? PREZZI_COMUNI[fuzzyKey] : null) || PREZZI_COMUNI['default'];
 
     let prezzoBase;
     const tipoNorm = this.normalizeKey(tipologia);
@@ -825,6 +826,60 @@ class RighettoChat {
       .replace(/à/g,'a').replace(/è|é/g,'e').replace(/ì/g,'i')
       .replace(/ò/g,'o').replace(/ù/g,'u')
       .replace(/[^a-z0-9\s']/g,'').replace(/\s+/g,' ');
+  }
+
+  // ────── FUZZY MATCHING per errori di battitura ──────
+  levenshtein(a, b) {
+    const m = a.length, n = b.length;
+    const d = Array.from({ length: m + 1 }, (_, i) => [i]);
+    for (let j = 1; j <= n; j++) d[0][j] = j;
+    for (let i = 1; i <= m; i++) {
+      for (let j = 1; j <= n; j++) {
+        d[i][j] = a[i-1] === b[j-1]
+          ? d[i-1][j-1]
+          : 1 + Math.min(d[i-1][j], d[i][j-1], d[i-1][j-1]);
+      }
+    }
+    return d[m][n];
+  }
+
+  fuzzyMatchComune(input) {
+    const norm = this.normalizeKey(input);
+    // Exact match first
+    if (PREZZI_COMUNI[norm]) return norm;
+    // Partial match (existing logic)
+    const keys = Object.keys(PREZZI_COMUNI).filter(k => k !== 'default');
+    const partial = keys.find(k => norm.includes(k) || k.includes(norm));
+    if (partial) return partial;
+    // Fuzzy: Levenshtein distance
+    let best = null, bestDist = Infinity;
+    for (const k of keys) {
+      const dist = this.levenshtein(norm, k);
+      // Allow max 2 typos for short names, max 3 for longer ones
+      const maxDist = k.length <= 5 ? 1 : k.length <= 8 ? 2 : 3;
+      if (dist < bestDist && dist <= maxDist) {
+        best = k;
+        bestDist = dist;
+      }
+    }
+    return best; // null if no fuzzy match
+  }
+
+  fuzzyMatchKeyword(input, keywords) {
+    const norm = input.toLowerCase();
+    // Exact substring match first (original logic)
+    if (keywords.some(k => norm.includes(k))) return true;
+    // Fuzzy: check each word in input against each keyword
+    const words = norm.split(/\s+/);
+    for (const kw of keywords) {
+      for (const w of words) {
+        if (w.length < 3) continue; // skip tiny words
+        const dist = this.levenshtein(w, kw);
+        const maxDist = kw.length <= 5 ? 1 : 2;
+        if (dist <= maxDist) return true;
+      }
+    }
+    return false;
   }
 
   formatPrice(n) {
@@ -1023,9 +1078,9 @@ class RighettoChat {
       return '🏠 **Cerchi un immobile!** Ottimo, ti aiuto subito.\n\nStai cercando in **vendita** (acquisto) o in **affitto** (locazione)?';
     }
 
-    // FAQ
+    // FAQ (con fuzzy matching per errori di battitura)
     for (const faq of FAQ_DATA) {
-      if (faq.k.some(k => low.includes(k))) {
+      if (this.fuzzyMatchKeyword(low, faq.k)) {
         return faq.r;
       }
     }
@@ -1063,8 +1118,7 @@ class RighettoChat {
   async completaStima() {
     const { comune, tipo, mq, stato } = this.stimaData;
     const stima = this.stimaPrezzo(comune, tipo, mq, stato);
-    const comuni_validi = Object.keys(PREZZI_COMUNI).filter(k => k !== 'default');
-    const trovato = comuni_validi.find(k => this.normalizeKey(comune).includes(k) || k.includes(this.normalizeKey(comune)));
+    const trovato = this.fuzzyMatchComune(comune);
 
     let msg = `📊 **STIMA DI MERCATO** *(dati 2025–2026)*\n\n`;
     msg += `📍 ${comune.charAt(0).toUpperCase() + comune.slice(1)}\n`;
@@ -1117,7 +1171,9 @@ class RighettoChat {
       }
 
       if (zona) {
-        const zonaNorm = this.normalizeKey(zona);
+        // Fuzzy match: correggi errori di battitura nei nomi comuni
+        const fuzzyZona = this.fuzzyMatchComune(zona);
+        const zonaNorm = fuzzyZona || this.normalizeKey(zona);
         q = q.ilike('comune', '%' + zonaNorm + '%');
       }
 
@@ -1375,9 +1431,30 @@ function initChatbotUI() {
     transition: opacity 0.3s;
   }
   .chat-rating-thanks.visible { opacity: 1; }
-  @media (max-width: 420px) {
-    #rig-chat-box { width: calc(100vw - 20px); right: 10px; bottom: 90px; }
-    #rig-chat-widget { right: 14px; bottom: 20px; }
+  #rig-chat-close-bar {
+    display: none; text-align: center; margin-top: 6px;
+  }
+  #rig-chat-close-bar button {
+    background: #3A5578; color: #fff; border: none;
+    padding: 5px 16px; border-radius: 20px; font-family: inherit;
+    font-size: 0.68rem; font-weight: 600; cursor: pointer;
+    letter-spacing: 0.03em; transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 2px 8px rgba(58,85,120,0.3);
+  }
+  #rig-chat-close-bar button:hover { background: #CEE08F; color: #152435; transform: scale(1.05); }
+  #rig-chat-close-bar.visible { display: block; }
+  @media (max-width: 768px) {
+    #rig-chat-box {
+      width: calc(100vw - 32px); right: 16px; left: 16px; bottom: 85px;
+      max-width: none; max-height: calc(100vh - 120px);
+    }
+    .chat-input-row { padding: 10px 10px; gap: 6px; }
+    #rig-chat-input { padding: 8px 12px; font-size: 0.8rem; min-height: 36px; }
+    #rig-chat-send { width: 36px; height: 36px; min-width: 36px; }
+    .chat-msgs { padding: 12px 10px; }
+    .chat-quick-btns { padding: 8px 10px; gap: 5px; }
+    .chat-qbtn { font-size: 0.68rem; padding: 5px 8px; }
+    #rig-chat-widget { right: 14px; bottom: 18px; }
   }
   </style>
 
@@ -1417,6 +1494,7 @@ function initChatbotUI() {
       </svg>
       <span id="rig-chat-pulse"></span>
     </button>
+    <div id="rig-chat-close-bar"><button onclick="rigChat.toggle()">Chiudi chat</button></div>
   </div>`;
 
   document.body.insertAdjacentHTML('beforeend', html);
@@ -1432,10 +1510,12 @@ function initChatbotUI() {
       const iconAvatar = document.getElementById('rig-chat-btn-avatar');
       const iconClose = document.getElementById('rig-chat-icon-close');
       const pulse = document.getElementById('rig-chat-pulse');
+      const closeBar = document.getElementById('rig-chat-close-bar');
       box.classList.toggle('open', this.open);
       if (iconAvatar) iconAvatar.style.display = this.open ? 'none' : 'block';
       iconClose.style.display = this.open ? 'block' : 'none';
       if (pulse) pulse.style.display = this.open ? 'none' : 'block';
+      if (closeBar) closeBar.classList.toggle('visible', this.open);
       if (this.open && document.getElementById('rig-chat-msgs').children.length === 0) {
         this.addMsg('bot', '👋 Ciao! Sono **Sara**, l\'assistente di **Righetto Immobiliare**.\n\nPosso aiutarti con:\n• 💰 **Stima valore** del tuo immobile\n• 🔍 **Cerca immobili** in vendita o affitto\n• 📋 Info su servizi, tasse, mutui e procedure\n• 📞 **Contattare** un nostro agente\n\nCome posso aiutarti?');
         document.getElementById('rig-chat-input').focus();
