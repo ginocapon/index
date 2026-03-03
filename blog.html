@@ -372,7 +372,19 @@ async function initBlog() {
       evidenza: false
     }
   ];
-  // Merge: aggiungi statici solo se non gia' presenti (by titolo)
+  // Merge: arricchisci articoli da Supabase con dati statici (immagine, url) se mancanti,
+  // oppure aggiungi articoli statici non presenti in Supabase
+  const staticByTitle = {};
+  articoliStatici.forEach(s => { staticByTitle[s.titolo.toLowerCase()] = s; });
+  allArticles.forEach(a => {
+    const s = staticByTitle[(a.titolo || '').toLowerCase()];
+    if (s) {
+      if (!a.immagine_copertina) a.immagine_copertina = s.immagine_copertina;
+      if (!a.url_statico) a.url_statico = s.url_statico;
+      if (!a.tempo) a.tempo = s.tempo;
+      if (!a.categoria) a.categoria = s.categoria;
+    }
+  });
   const titoliEsistenti = new Set(allArticles.map(a => (a.titolo || '').toLowerCase()));
   articoliStatici.forEach(s => {
     if (!titoliEsistenti.has(s.titolo.toLowerCase())) {
