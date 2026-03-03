@@ -2002,12 +2002,18 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <div style="font-weight:600;font-size:0.9rem;">Lista Immobili</div>
             <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
               <select id="filtroTipo" onchange="loadImmobili()" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.8rem;">
-                <option value="">Tutti</option>
+                <option value="">Tutti i tipi</option>
                 <option value="vendita">Vendita</option>
                 <option value="affitto">Affitto</option>
                 <option value="asta">Asta</option>
               </select>
-              <input class="table-search" type="text" placeholder="🔍 Cerca..." id="searchInput" oninput="filterTable()">
+              <select id="filtroStato" onchange="filterTable()" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.8rem;">
+                <option value="">Tutti gli stati</option>
+                <option value="attivi">Solo Attivi</option>
+                <option value="non_attivi">Solo Non Attivi</option>
+                <option value="venduti">Venduti / Affittati</option>
+              </select>
+              <input class="table-search" type="text" placeholder="🔍 Cerca titolo, codice, comune, proprietario..." id="searchInput" oninput="filterTable()" style="min-width:280px">
             </div>
           </div>
           <div id="immobiliTableWrap">
@@ -2080,6 +2086,28 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <div class="form-group">
                   <label>Prezzo (€) *</label>
                   <input type="number" id="f_prezzo" placeholder="es. 180000" required>
+                </div>
+
+                <div class="section-divider">Proprietario <span style="background:#e67e22;color:white;font-size:0.65rem;padding:2px 6px;border-radius:4px;margin-left:4px">🔒 SOLO OPERATORE</span></div>
+
+                <div class="form-group">
+                  <label>Proprietario (seleziona da clienti)</label>
+                  <select id="f_proprietario_id" onchange="onProprietarioSelect()">
+                    <option value="">— Nessuno —</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Nome proprietario (testo libero)</label>
+                  <input type="text" id="f_proprietario_nome" placeholder="Es. Mario Rossi o Immobiliare Rossi Srl">
+                  <small style="color:var(--caffe2);font-size:0.68rem">Se non presente tra i clienti, scrivi qui il nome</small>
+                </div>
+                <div class="form-group">
+                  <label>Tel. proprietario</label>
+                  <input type="tel" id="f_proprietario_tel" placeholder="+39 ...">
+                </div>
+                <div class="form-group">
+                  <label>Email proprietario</label>
+                  <input type="email" id="f_proprietario_email" placeholder="proprietario@email.com">
                 </div>
 
                 <div class="section-divider">Localizzazione</div>
@@ -3094,7 +3122,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <option value="richiesta">Richieste</option>
                 <option value="manuale">Manuali</option>
               </select>
-              <input class="table-search" type="text" placeholder="Cerca cliente..." id="searchClienti" oninput="filterClientiTable()">
+              <input class="table-search" type="text" placeholder="🔍 Cerca nome, azienda, P.IVA, tel, email, indirizzo..." id="searchClienti" oninput="filterClientiTable()" style="min-width:300px">
               <button class="btn btn-secondary btn-sm" onclick="openCsvImportModal()">Importa CSV</button>
               <button class="btn btn-primary btn-sm" onclick="openClienteModal()">+ Nuovo Cliente</button>
             </div>
@@ -3111,6 +3139,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Telefono</th>
+                <th>Tipo</th>
+                <th>Azienda / P.IVA</th>
                 <th>Fonte</th>
                 <th>Cerca</th>
                 <th>Budget</th>
@@ -3125,7 +3155,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
       <!-- MODAL CLIENTE -->
       <div class="modal-overlay" id="clienteModal">
-        <div class="modal" style="max-width:600px">
+        <div class="modal" style="max-width:750px">
           <div class="modal-header">
             <h2 id="clienteModalTitle">Nuovo Cliente</h2>
             <button class="modal-close" onclick="closeClienteModal()">&times;</button>
@@ -3202,6 +3232,55 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <label>Interesse / Ricerca (testo libero)</label>
                 <input type="text" id="clienteInteresse" placeholder="Es. Cerca appartamento 3 camere zona centro Padova">
               </div>
+
+              <div class="section-divider" style="margin-top:12px;font-size:0.78rem;font-weight:600;color:var(--caffe2);border-bottom:1px solid var(--caffe3);padding-bottom:6px;">Dati Personali / Azienda (opzionale)</div>
+
+              <div class="form-group">
+                <label>Tipo Cliente</label>
+                <select id="clienteTipoCliente" onchange="toggleCampiAzienda()">
+                  <option value="privato">Privato</option>
+                  <option value="azienda">Azienda / Societa'</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Codice Fiscale</label>
+                <input type="text" id="clienteCodiceFiscale" placeholder="RSSMRA80A01H501U" maxlength="16" style="text-transform:uppercase">
+              </div>
+              <div class="form-group">
+                <label>Indirizzo</label>
+                <input type="text" id="clienteIndirizzo" placeholder="Via Roma 96, 35010 Limena (PD)">
+              </div>
+
+              <div id="campiAzienda" style="display:none;grid-column:1/-1;">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label>Ragione Sociale</label>
+                    <input type="text" id="clienteRagioneSociale" placeholder="Es. Immobiliare Rossi S.r.l.">
+                  </div>
+                  <div class="form-group">
+                    <label>Partita IVA</label>
+                    <input type="text" id="clientePartitaIva" placeholder="01234567890" maxlength="11">
+                  </div>
+                  <div class="form-group">
+                    <label>PEC</label>
+                    <input type="email" id="clientePec" placeholder="azienda@pec.it">
+                  </div>
+                  <div class="form-group">
+                    <label>Codice SDI</label>
+                    <input type="text" id="clienteSdi" placeholder="ABCDEFG" maxlength="7" style="text-transform:uppercase">
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-divider" style="margin-top:12px;font-size:0.78rem;font-weight:600;color:var(--caffe2);border-bottom:1px solid var(--caffe3);padding-bottom:6px;">Documenti Cliente</div>
+
+              <div class="form-group form-full">
+                <label>Documenti (carta identita', foto, PDF, Word...)</label>
+                <div id="clienteDocumentiList" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px"></div>
+                <input type="file" id="clienteDocumentiInput" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.webp" onchange="uploadClienteDocumenti(this.files)" style="font-size:0.8rem">
+                <small style="color:var(--caffe2);font-size:0.68rem">PDF, Word, JPG, PNG — max 5MB per file</small>
+              </div>
+
               <div class="form-group form-full">
                 <label>Note</label>
                 <textarea id="clienteNote" rows="3" placeholder="Note aggiuntive..."></textarea>
@@ -4117,6 +4196,7 @@ function showSection(name) {
   if (name === 'newsletter') loadNewsletterList();
   if (name === 'agenda') loadAgendaSection();
   if (name === 'clienti') loadClienti();
+  if (name === 'nuovo') populateProprietarioDropdown();
   if (name === 'impostazioni') { testConn(); check2FAStatus(); }
 }
 
@@ -4139,6 +4219,40 @@ function generatePropertySlug(d) {
 
 // LOAD IMMOBILI
 // ══════════════════════════════════════
+// Popola il dropdown proprietario con i clienti esistenti
+async function populateProprietarioDropdown() {
+  const select = document.getElementById('f_proprietario_id');
+  if (!select) return;
+  const current = select.value;
+  select.innerHTML = '<option value="">— Nessuno —</option>';
+  try {
+    const { data } = await sb.from('clienti').select('id,nome,ragione_sociale,tipo_cliente,telefono,email').order('nome');
+    (data || []).forEach(c => {
+      const label = c.tipo_cliente === 'azienda' && c.ragione_sociale
+        ? c.ragione_sociale + ' (' + (c.nome || '') + ')'
+        : c.nome || c.email || 'Cliente #' + c.id;
+      const opt = document.createElement('option');
+      opt.value = c.id;
+      opt.textContent = label;
+      opt.dataset.nome = c.nome || '';
+      opt.dataset.tel = c.telefono || '';
+      opt.dataset.email = c.email || '';
+      select.appendChild(opt);
+    });
+    if (current) select.value = current;
+  } catch(e) { console.warn('Errore caricamento clienti per proprietario:', e); }
+}
+
+function onProprietarioSelect() {
+  const select = document.getElementById('f_proprietario_id');
+  const opt = select.selectedOptions[0];
+  if (opt && opt.value) {
+    document.getElementById('f_proprietario_nome').value = opt.dataset.nome || opt.textContent;
+    document.getElementById('f_proprietario_tel').value = opt.dataset.tel || '';
+    document.getElementById('f_proprietario_email').value = opt.dataset.email || '';
+  }
+}
+
 async function loadImmobili() {
   const wrap = document.getElementById('immobiliTableWrap');
   wrap.innerHTML = '<div class="loading"><div class="spinner"></div> Caricamento...</div>';
@@ -4194,6 +4308,7 @@ function renderTable(data) {
     const evidenza = i.in_evidenza ? '⭐' : '';
     const prezzo = i.prezzo ? '€ ' + Number(i.prezzo).toLocaleString('it-IT') : '—';
     const mq = i.superficie ? i.superficie + ' mq' : '—';
+    const propNome = i.proprietario_nome || '—';
 
     return `<tr>
       <td>${thumb}</td>
@@ -4205,6 +4320,7 @@ function renderTable(data) {
       <td style="font-weight:600">${prezzo}</td>
       <td>${mq}</td>
       <td>${i.locali || '—'}</td>
+      <td style="font-size:0.78rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(propNome)}">${escHtml(propNome)}</td>
       <td>${stato}</td>
       <td>
         <div style="display:flex;gap:6px">
@@ -4229,6 +4345,7 @@ function renderTable(data) {
       <th>Prezzo</th>
       <th>Superficie</th>
       <th>Locali</th>
+      <th>Proprietario</th>
       <th>Stato</th>
       <th>Azioni</th>
     </tr></thead>
@@ -4237,13 +4354,33 @@ function renderTable(data) {
 }
 
 function filterTable() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const filtered = allImmobili.filter(i =>
-    (i.titolo || '').toLowerCase().includes(q) ||
-    (i.codice || '').toLowerCase().includes(q) ||
-    (i.comune || '').toLowerCase().includes(q) ||
-    (i.indirizzo || '').toLowerCase().includes(q)
-  );
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  const statoFilter = document.getElementById('filtroStato').value;
+
+  let filtered = allImmobili;
+
+  // Filtro stato
+  if (statoFilter === 'attivi') {
+    filtered = filtered.filter(i => i.attivo && !i.venduto && !i.affittato);
+  } else if (statoFilter === 'non_attivi') {
+    filtered = filtered.filter(i => !i.attivo && !i.venduto && !i.affittato);
+  } else if (statoFilter === 'venduti') {
+    filtered = filtered.filter(i => i.venduto || i.affittato);
+  }
+
+  // Ricerca testo (titolo, codice, comune, indirizzo, proprietario)
+  if (q) {
+    filtered = filtered.filter(i =>
+      (i.titolo || '').toLowerCase().includes(q) ||
+      (i.codice || '').toLowerCase().includes(q) ||
+      (i.comune || '').toLowerCase().includes(q) ||
+      (i.indirizzo || '').toLowerCase().includes(q) ||
+      (i.proprietario_nome || '').toLowerCase().includes(q) ||
+      (i.proprietario_tel || '').toLowerCase().includes(q) ||
+      (i.proprietario_email || '').toLowerCase().includes(q)
+    );
+  }
+
   renderTable(filtered);
 }
 
@@ -4263,10 +4400,12 @@ function resetForm() {
 function editImmobile(id) {
   const imm = allImmobili.find(x => String(x.id) === String(id));
   if (!imm) { toast('Immobile non trovato', 'error'); return; }
+  populateProprietarioDropdown();
   document.getElementById('editId').value = imm.id;
   document.getElementById('formTitle').textContent = 'Modifica: ' + imm.titolo;
 
   const fields = ['codice','titolo','tipo_operazione','categoria','tipologia','prezzo',
+    'proprietario_id','proprietario_nome','proprietario_tel','proprietario_email',
     'comune','indirizzo','lat','lng','superficie','locali','bagni','piano',
     'piano_numero','tipo_contratto',
     'anno_costruzione','stato','classe_energetica','youtube_id','virtual_tour',
@@ -4332,6 +4471,10 @@ async function saveImmobile(e) {
     categoria: document.getElementById('f_categoria').value,
     tipologia: document.getElementById('f_tipologia').value,
     prezzo: parseFloat(document.getElementById('f_prezzo').value) || null,
+    proprietario_id: document.getElementById('f_proprietario_id').value || null,
+    proprietario_nome: document.getElementById('f_proprietario_nome').value.trim() || null,
+    proprietario_tel: document.getElementById('f_proprietario_tel').value.trim() || null,
+    proprietario_email: document.getElementById('f_proprietario_email').value.trim() || null,
     comune: document.getElementById('f_comune').value || 'Padova',
     indirizzo: document.getElementById('f_indirizzo').value || null,
     lat: parseFloat(document.getElementById('f_lat').value) || null,
@@ -5631,10 +5774,15 @@ function renderClientiTable() {
     const budgetInfo = (c.budget_min || c.budget_max) ? (c.budget_min ? '€' + Number(c.budget_min).toLocaleString('it-IT') : '0') + ' - ' + (c.budget_max ? '€' + Number(c.budget_max).toLocaleString('it-IT') : '∞') : '—';
     const tel = (c.telefono || '').replace(/\s+/g, '').replace(/^(\+39|0039)/, '');
     const waLink = tel ? 'https://wa.me/39' + tel : '';
-    return `<tr>
-      <td style="font-weight:600">${escHtml(c.nome || '')}</td>
+    const tipoCliente = c.tipo_cliente === 'azienda' ? '<span class="badge badge-blu">Azienda</span>' : '<span class="badge badge-grigio">Privato</span>';
+    const azInfo = c.tipo_cliente === 'azienda' ? [c.ragione_sociale, c.partita_iva ? 'P.IVA: ' + c.partita_iva : ''].filter(Boolean).join('<br>') : '—';
+    const docsCount = Array.isArray(c.documenti_cliente) ? c.documenti_cliente.length : 0;
+    return `<tr data-nome="${escHtml(c.nome||'')}" data-email="${escHtml(c.email||'')}" data-telefono="${escHtml(c.telefono||'')}" data-ragione="${escHtml(c.ragione_sociale||'')}" data-piva="${escHtml(c.partita_iva||'')}" data-indirizzo="${escHtml(c.indirizzo_cliente||'')}">
+      <td style="font-weight:600">${escHtml(c.nome || '')}${docsCount ? ' <span title="' + docsCount + ' documenti" style="color:var(--oro);font-size:0.7rem">📎' + docsCount + '</span>' : ''}</td>
       <td><a href="mailto:${escHtml(c.email || '')}" style="color:var(--nero)">${escHtml(c.email || '')}</a></td>
       <td>${escHtml(c.telefono || '—')}</td>
+      <td>${tipoCliente}</td>
+      <td style="font-size:0.74rem;max-width:160px">${azInfo}</td>
       <td><span class="badge ${badgeClass}">${escHtml(c.fonte || '')}</span></td>
       <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(cercaInfo)}">${escHtml(cercaInfo)}</td>
       <td style="font-size:0.72rem;white-space:nowrap">${budgetInfo}</td>
@@ -5674,12 +5822,64 @@ function updateClientiStats() {
 
 function filterClientiTable() {
   const q = document.getElementById('searchClienti').value.toLowerCase().trim();
+  if (!q) {
+    // Mostra tutti
+    renderClientiTable();
+    return;
+  }
   const tbody = document.getElementById('clientiBody');
   const rows = tbody.querySelectorAll('tr');
   rows.forEach(row => {
-    const text = row.textContent.toLowerCase();
-    row.style.display = text.includes(q) ? '' : 'none';
+    // Cerca in tutti i data-attributes + testo visibile
+    const searchable = [
+      row.dataset.nome || '',
+      row.dataset.email || '',
+      row.dataset.telefono || '',
+      row.dataset.ragione || '',
+      row.dataset.piva || '',
+      row.dataset.indirizzo || '',
+      row.textContent
+    ].join(' ').toLowerCase();
+    row.style.display = searchable.includes(q) ? '' : 'none';
   });
+}
+
+let currentClienteDocumenti = [];
+
+function toggleCampiAzienda() {
+  const tipo = document.getElementById('clienteTipoCliente').value;
+  document.getElementById('campiAzienda').style.display = tipo === 'azienda' ? 'block' : 'none';
+}
+
+async function uploadClienteDocumenti(files) {
+  for (const file of files) {
+    if (file.size > 5 * 1024 * 1024) { toast('File troppo grande (max 5MB): ' + file.name, 'error'); continue; }
+    const ext = file.name.split('.').pop().toLowerCase();
+    const path = 'clienti-docs/' + Date.now() + '-' + Math.random().toString(36).substr(2,6) + '.' + ext;
+    const { data, error } = await sb.storage.from('documenti').upload(path, file, { cacheControl: '3600', upsert: false });
+    if (error) { toast('Errore upload: ' + error.message, 'error'); continue; }
+    const { data: urlData } = sb.storage.from('documenti').getPublicUrl(path);
+    currentClienteDocumenti.push({ nome: file.name, url: urlData.publicUrl, tipo: ext });
+    toast('Caricato: ' + file.name, 'success');
+  }
+  renderClienteDocumenti();
+}
+
+function renderClienteDocumenti() {
+  const wrap = document.getElementById('clienteDocumentiList');
+  if (!currentClienteDocumenti.length) { wrap.innerHTML = ''; return; }
+  wrap.innerHTML = currentClienteDocumenti.map((d, i) => {
+    const icon = ['jpg','jpeg','png','webp'].includes(d.tipo) ? '🖼️' : '📄';
+    return `<div style="display:flex;align-items:center;gap:6px;background:var(--sfondo);padding:4px 10px;border-radius:6px;font-size:0.76rem">
+      ${icon} <a href="${d.url}" target="_blank" style="color:var(--nero);text-decoration:underline">${escHtml(d.nome)}</a>
+      <button type="button" onclick="removeClienteDoc(${i})" style="background:none;border:none;color:var(--rosso);cursor:pointer;font-size:0.8rem">&times;</button>
+    </div>`;
+  }).join('');
+}
+
+function removeClienteDoc(idx) {
+  currentClienteDocumenti.splice(idx, 1);
+  renderClienteDocumenti();
 }
 
 function openClienteModal(id) {
@@ -5698,6 +5898,17 @@ function openClienteModal(id) {
   document.getElementById('clienteSupMin').value = '';
   document.getElementById('clienteInteresse').value = '';
   document.getElementById('clienteNote').value = '';
+  // Nuovi campi
+  document.getElementById('clienteTipoCliente').value = 'privato';
+  document.getElementById('clienteCodiceFiscale').value = '';
+  document.getElementById('clienteIndirizzo').value = '';
+  document.getElementById('clienteRagioneSociale').value = '';
+  document.getElementById('clientePartitaIva').value = '';
+  document.getElementById('clientePec').value = '';
+  document.getElementById('clienteSdi').value = '';
+  currentClienteDocumenti = [];
+  renderClienteDocumenti();
+  toggleCampiAzienda();
   document.getElementById('btnDeleteCliente').style.display = 'none';
   document.getElementById('clienteModal').classList.add('open');
 }
@@ -5720,6 +5931,17 @@ function editCliente(id) {
   document.getElementById('clienteSupMin').value = c.superficie_min || '';
   document.getElementById('clienteInteresse').value = c.interesse || '';
   document.getElementById('clienteNote').value = c.note || '';
+  // Nuovi campi
+  document.getElementById('clienteTipoCliente').value = c.tipo_cliente || 'privato';
+  document.getElementById('clienteCodiceFiscale').value = c.codice_fiscale || '';
+  document.getElementById('clienteIndirizzo').value = c.indirizzo_cliente || '';
+  document.getElementById('clienteRagioneSociale').value = c.ragione_sociale || '';
+  document.getElementById('clientePartitaIva').value = c.partita_iva || '';
+  document.getElementById('clientePec').value = c.pec || '';
+  document.getElementById('clienteSdi').value = c.sdi || '';
+  currentClienteDocumenti = Array.isArray(c.documenti_cliente) ? [...c.documenti_cliente] : [];
+  renderClienteDocumenti();
+  toggleCampiAzienda();
   document.getElementById('btnDeleteCliente').style.display = 'inline-flex';
   document.getElementById('clienteModal').classList.add('open');
 }
@@ -5743,7 +5965,16 @@ async function saveCliente() {
     camere_min: parseInt(document.getElementById('clienteCamereMin').value) || null,
     superficie_min: parseInt(document.getElementById('clienteSupMin').value) || null,
     interesse: document.getElementById('clienteInteresse').value.trim(),
-    note: document.getElementById('clienteNote').value.trim()
+    note: document.getElementById('clienteNote').value.trim(),
+    // Nuovi campi azienda/documenti
+    tipo_cliente: document.getElementById('clienteTipoCliente').value || 'privato',
+    codice_fiscale: document.getElementById('clienteCodiceFiscale').value.trim().toUpperCase() || null,
+    indirizzo_cliente: document.getElementById('clienteIndirizzo').value.trim() || null,
+    ragione_sociale: document.getElementById('clienteRagioneSociale').value.trim() || null,
+    partita_iva: document.getElementById('clientePartitaIva').value.trim() || null,
+    pec: document.getElementById('clientePec').value.trim() || null,
+    sdi: document.getElementById('clienteSdi').value.trim().toUpperCase() || null,
+    documenti_cliente: currentClienteDocumenti
   };
 
   if (!data.nome && !data.email) {
