@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MHDHHES26"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9MHDHHES26');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#FF6B35">
@@ -231,7 +239,7 @@ img{max-width:100%;height:auto;display:block}
       "foundingDate": "2000",
       "description": "Agenzia immobiliare a Padova e provincia dal 2000. Vendita, affitto, valutazioni gratuite, gestione completa.",
       "areaServed": {"@type": "AdministrativeArea", "name": "Provincia di Padova", "containedInPlace": {"@type": "Country", "name": "Italia"}},
-      "address": {"@type": "PostalAddress", "streetAddress": "Via Roma 96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
+      "address": {"@type": "PostalAddress", "streetAddress": "Via Roma n.96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
       "geo": {"@type": "GeoCoordinates", "latitude": 45.3920, "longitude": 11.8500},
       "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "127", "bestRating": "5"},
       "openingHoursSpecification": [
@@ -341,6 +349,7 @@ img{max-width:100%;height:auto;display:block}
           </div>
           <div class="fc-field"><label for="l-note">Note (opzionale)</label><textarea id="l-note" placeholder="Superficie, stato, tempistiche..."></textarea></div>
           <div class="fc-chk"><input type="checkbox" id="l-gdpr" required><label for="l-gdpr">Acconsento al trattamento dei dati personali. <a href="privacy.html" style="color:var(--fire)">Privacy</a></label></div>
+          <div class="fc-chk"><input type="checkbox" id="l-news" checked><label for="l-news">Desidero ricevere aggiornamenti su immobili simili nella mia zona e articoli dal blog</label></div>
           <button type="submit" class="fc-submit">🏠 Richiedi valutazione gratuita</button>
         </form>
         <p class="fc-note">Nessun costo, nessun impegno. Rispondiamo entro 24h.</p>
@@ -351,7 +360,7 @@ img{max-width:100%;height:auto;display:block}
         </div>
         <div class="fc-success" id="leadSuccess">
           <h3>Richiesta inviata! 🎉</h3>
-          <p>Ti contatteremo entro 24 ore. Urgenza? <a href="tel:+390498843484" style="color:var(--fire);font-weight:700">049 884 3484</a></p>
+          <p>Ti contatteremo entro 24 ore. Urgenza? <a href="tel:+390498843484" style="color:var(--fire);font-weight:700">049.88.43.484</a></p>
         </div>
       </div>
     </div>
@@ -512,7 +521,7 @@ img{max-width:100%;height:auto;display:block}
   <p>Richiedi una valutazione gratuita. Zero costi, zero impegno, rispondiamo in 24h.</p>
   <a href="#form" class="cta-btn">🏠 Richiedi valutazione gratuita</a>
   <div class="cta-channels">
-    <div class="cta-ch">📞 <a href="tel:+390498843484">049 884 3484</a></div>
+    <div class="cta-ch">📞 <a href="tel:+390498843484">049.88.43.484</a></div>
     <div class="cta-ch">💬 <a href="https://wa.me/393488621888" target="_blank">WhatsApp</a></div>
     <div class="cta-ch">📧 <a href="mailto:info@righettoimmobiliare.it">Email</a></div>
   </div>
@@ -529,6 +538,12 @@ img{max-width:100%;height:auto;display:block}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="js/config.js" defer></script>
 <script>
+async function iscriviBrevo(email,nome,attrs){
+  try{
+    if(typeof SERVIZI_CONFIG==='undefined'||!SERVIZI_CONFIG.BREVO_API_KEY)return;
+    await fetch('https://api.brevo.com/v3/contacts',{method:'POST',headers:{'accept':'application/json','content-type':'application/json','api-key':SERVIZI_CONFIG.BREVO_API_KEY},body:JSON.stringify({email:email,attributes:{NOME:nome,TELEFONO:attrs.telefono||'',TIPO_IMMOBILE:attrs.tipo_immobile||'',ZONA:attrs.zona||'',INTERESSE:attrs.interesse||'generico',FONTE:attrs.fonte||'sito'},listIds:[SERVIZI_CONFIG.BREVO_LIST_ID||11],updateEnabled:true})});
+  }catch(e){}
+}
 async function sendLead(e){
   e.preventDefault();
   const nome=document.getElementById('l-nome').value.trim();
@@ -539,6 +554,7 @@ async function sendLead(e){
   const tipo=document.getElementById('l-tipo').value;
   const note=document.getElementById('l-note').value.trim();
   const gdpr=document.getElementById('l-gdpr').checked;
+  const news=document.getElementById('l-news').checked;
   if(!nome||!tel||!comune){alert('Compila nome, telefono e comune');return;}
   if(!gdpr){alert('Accetta la privacy policy per procedere');return;}
   const btn=document.querySelector('.fc-submit');
@@ -546,12 +562,13 @@ async function sendLead(e){
   const nomeCompleto=nome+(cognome?' '+cognome:'');
   const messaggio=[tipo?'Tipo: '+tipo:'',comune?'Zona: '+comune:'',note||''].filter(Boolean).join(' — ');
   let formspreeOk=false;
-  try{if(typeof SERVIZI_CONFIG!=='undefined'&&SERVIZI_CONFIG.FORMSPREE_ID&&SERVIZI_CONFIG.FORMSPREE_ID!=='IL_TUO_FORM_ID'){const r=await fetch('https://formspree.io/f/'+SERVIZI_CONFIG.FORMSPREE_ID,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({nome:nomeCompleto,email,telefono:tel,messaggio,_subject:'LANDING VENDITA — '+nomeCompleto})});formspreeOk=r.ok;}}catch(e){}
+  try{if(typeof SERVIZI_CONFIG!=='undefined'&&SERVIZI_CONFIG.FORMSPREE_ID&&SERVIZI_CONFIG.FORMSPREE_ID!=='IL_TUO_FORM_ID'){const r=await fetch('https://formspree.io/f/'+SERVIZI_CONFIG.FORMSPREE_ID,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({nome:nomeCompleto,email,telefono:tel,messaggio,newsletter:news?'Si':'No',_subject:'LANDING VENDITA — '+nomeCompleto})});formspreeOk=r.ok;}}catch(e){}
   let supaOk=false;
-  try{const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');if(sb){await sb.from('richieste').insert([{nome:nomeCompleto,email,telefono:tel,messaggio:'[LANDING VENDITA] '+messaggio,provenienza:'landing-vendita',letto:false}]);supaOk=true;}}catch(e){}
+  try{const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');if(sb){await sb.from('richieste').insert([{nome:nomeCompleto,email,telefono:tel,messaggio:'[LANDING VENDITA] '+messaggio,provenienza:'landing-vendita',newsletter:news,letto:false}]);supaOk=true;if(news&&email){await sb.from('newsletter_subscribers').upsert([{email,nome:nomeCompleto,telefono:tel,tipo_immobile:tipo||null,zona:comune||null,interesse:'vendita',provenienza:'landing-vendita',fonte:'landing-vendita',attivo:true,created_at:new Date().toISOString()}],{onConflict:'email'}).catch(()=>{});}}}catch(e){}
+  if(news&&email){iscriviBrevo(email,nomeCompleto,{telefono:tel,tipo_immobile:tipo,zona:comune,interesse:'vendita',fonte:'landing-vendita'});}
   btn.disabled=false;btn.textContent='🏠 RICHIEDI VALUTAZIONE GRATUITA';
   if(formspreeOk||supaOk){document.getElementById('leadForm').style.display='none';document.getElementById('leadSuccess').style.display='block';document.querySelector('.fc-note').style.display='none';document.querySelector('.fc-trust').style.display='none';}
-  else{alert('Errore. Chiamaci al 049 884 3484 o scrivici su WhatsApp.');}
+  else{alert('Errore. Chiamaci al 049.88.43.484 o scrivici su WhatsApp.');}
 }
 </script>
 <script src="js/chatbot.js" defer></script>

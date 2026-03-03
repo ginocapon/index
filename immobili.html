@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MHDHHES26"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9MHDHHES26');
+</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#2C4A6E">
@@ -38,8 +46,8 @@
       --blu:#2C4A6E;--sfondo:#ECE7DF;--card:#F7F5F1;--caffe:#152435;--testo:#152435;
       --blu2:#3A5F8C;--blu3:#4E789A;--azzurro:#8AB4CE;--carta:#F2EDE7;--oro-bg:rgba(184,212,74,0.10);
     }
-    html{scroll-behavior:smooth}
-    body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--testo);line-height:1.5}
+    html{scroll-behavior:smooth;overflow-x:hidden}
+    body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--testo);line-height:1.5;overflow-x:hidden;max-width:100vw}
 
     /* ── HEADER ── */
     header{background:linear-gradient(135deg,var(--nero) 0%,var(--blu) 100%);position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.07)}
@@ -104,49 +112,14 @@
     .af-range span{font-size:.72rem;color:var(--grigio)}
 
     /* ── LAYOUT ── */
-    .page{max-width:1380px;margin:0 auto;padding:1.4rem 1.5rem;display:grid;grid-template-columns:300px 1fr;gap:1.4rem;align-items:start}
-    @media(max-width:1024px){.page{grid-template-columns:1fr}}
+    .page{max-width:1380px;margin:0 auto;padding:1.4rem 1.5rem;display:grid;grid-template-columns:1fr;gap:1.4rem;align-items:start}
 
-    /* ── SIDEBAR FILTRI ── */
-    .sidebar{position:sticky;top:80px}
-    .filter-panel{background:#fff;border:1px solid var(--gc);border-radius:10px;overflow:hidden}
-    .fp-head{padding:.85rem 1.1rem;border-bottom:1px solid var(--gc);background:var(--bianco);display:flex;align-items:center;justify-content:space-between}
-    .fp-head h3{font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
-    .fp-reset{font-size:.7rem;color:var(--oro);cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;padding:0}
-    .fp-reset:hover{text-decoration:underline}
-    .fp-section{padding:.85rem 1.1rem;border-bottom:1px solid var(--gc)}
-    .fp-section:last-child{border-bottom:none}
-    .fp-section-title{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grigio);font-weight:500;margin-bottom:.65rem;display:flex;align-items:center;justify-content:space-between}
-    .fp-section-title button{background:none;border:none;font-size:.65rem;color:var(--oro);cursor:pointer;font-family:'DM Sans',sans-serif;padding:0}
-    .fp-check{display:flex;flex-direction:column;gap:.38rem}
-    .fp-check label{display:flex;align-items:center;gap:.45rem;font-size:.8rem;color:var(--grigio);cursor:pointer;transition:color .2s}
-    .fp-check label:hover{color:var(--nero)}
-    .fp-check input{accent-color:var(--oro);width:14px;height:14px;flex-shrink:0}
-    .fp-check .cnt{margin-left:auto;font-size:.66rem;color:rgba(107,101,96,.5)}
-    .range-row{display:flex;align-items:center;gap:.4rem;margin-top:.3rem}
-    .range-row input{flex:1;border:1px solid var(--gc);border-radius:2px;padding:.4rem .5rem;font-family:'DM Sans',sans-serif;font-size:.78rem;background:var(--bianco)}
-    .range-row input:focus{outline:none;border-color:var(--oro)}
-    .range-sep{font-size:.72rem;color:var(--grigio)}
-    .fp-chip-row{display:flex;flex-wrap:wrap;gap:.3rem}
-    .fp-chip{padding:.28rem .65rem;border:1px solid var(--gc);border-radius:20px;font-size:.73rem;color:var(--grigio);cursor:pointer;transition:background .2s,border-color .2s,color .2s;background:#fff}
-    .fp-chip:hover,.fp-chip.on{background:var(--nero);border-color:var(--nero);color:#fff}
-    .fp-chip.on-gold{background:var(--oro);border-color:var(--oro);color:var(--nero)}
-
-    /* CE SELECTOR */
-    .ce-row{display:flex;gap:.22rem;flex-wrap:wrap}
-    .ce-tag{padding:.22rem .48rem;border-radius:2px;font-size:.66rem;font-weight:700;cursor:pointer;transition:opacity .2s,transform .15s;border:1px solid transparent}
-    .ce-tag:not(.on){opacity:.35}
-    .ce-tag.on{transform:scale(1.05)}
-    .ce-A4,.ce-A4{background:#1b5e20;color:#fff}
-    .ce-A3{background:#2e7d32;color:#fff}
-    .ce-A2{background:#388e3c;color:#fff}
-    .ce-A1{background:#43a047;color:#fff}
-    .ce-B{background:#558b2f;color:#fff}
-    .ce-C{background:#f9a825;color:#000}
-    .ce-D{background:#ef6c00;color:#fff}
-    .ce-E{background:#e53935;color:#fff}
-    .ce-F{background:#b71c1c;color:#fff}
-    .ce-G{background:#880e4f;color:#fff}
+    /* ── ACTIVE FILTERS BAR ── */
+    .filters-active-bar{background:var(--bianco);border:1px solid var(--gc);border-radius:8px;padding:.6rem 1rem;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+    .filters-active-bar:empty{display:none}
+    .fab-label{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--grigio);font-weight:500}
+    .fab-reset{font-size:.7rem;color:var(--oro);cursor:pointer;background:none;border:none;font-family:'Montserrat',sans-serif;padding:.2rem .5rem;margin-left:auto}
+    .fab-reset:hover{text-decoration:underline}
 
     /* ── RESULTS AREA ── */
     .results-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.6rem}
@@ -169,9 +142,10 @@
     .atag button:hover{color:#fff}
 
     /* ── GRID IMMOBILI ── */
-    .imm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+    .imm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
     .imm-grid.list-view{grid-template-columns:1fr}
-    @media(max-width:1200px){.imm-grid:not(.list-view){grid-template-columns:1fr}}
+    @media(max-width:1100px){.imm-grid:not(.list-view){grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:700px){.imm-grid:not(.list-view){grid-template-columns:1fr}}
 
     /* CARD */
     .card{background:var(--card);border:1px solid var(--gc);border-radius:10px;overflow:hidden;transition:transform .25s,box-shadow .25s;cursor:pointer;display:block;text-decoration:none;color:inherit}
@@ -261,16 +235,16 @@
     .modal-close svg{width:14px;height:14px;color:#fff}
     .modal-head{position:relative}
 
-    /* CONTACT FORM INLINE */
-    .contact-card{background:var(--bianco);border:1px solid var(--gc);border-radius:10px;padding:1.1rem;margin-top:1rem}
-    .cc-title{font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:.4rem}
-    .cc-title svg{width:13px;height:13px;color:var(--oro)}
-    .cc-fields{display:flex;flex-direction:column;gap:.5rem}
-    .cc-fields input,.cc-fields textarea{border:1px solid var(--gc);border-radius:6px;padding:.48rem .65rem;font-family:'Montserrat',sans-serif;font-size:.82rem;background:#fff;width:100%}
-    .cc-fields input:focus,.cc-fields textarea:focus{outline:none;border-color:var(--oro)}
-    .cc-fields textarea{resize:vertical;min-height:72px;line-height:1.6}
-    .cc-submit{width:100%;background:var(--nero);color:#fff;padding:.6rem;border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;margin-top:.5rem;transition:background .2s}
-    .cc-submit:hover{background:var(--oro);color:var(--nero)}
+    /* CTA BANNER */
+    .cta-banner-search{max-width:1380px;margin:0 auto;padding:0 1.5rem 1rem}
+    .cta-banner-inner{background:linear-gradient(135deg,var(--nero) 0%,var(--blu) 100%);border-radius:12px;overflow:hidden;display:flex;align-items:center;position:relative;min-height:120px}
+    .cta-banner-pattern{position:absolute;inset:0;opacity:.06;background-image:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(184,212,74,.5) 20px,rgba(184,212,74,.5) 21px),repeating-linear-gradient(-45deg,transparent,transparent 20px,rgba(184,212,74,.5) 20px,rgba(184,212,74,.5) 21px);pointer-events:none}
+    .cta-banner-content{position:relative;z-index:1;padding:1.5rem 2rem;text-align:center;width:100%}
+    .cta-banner-content h2{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#fff;margin-bottom:.4rem}
+    .cta-banner-content p{font-size:.8rem;color:rgba(255,255,255,.65);margin-bottom:.8rem;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.5}
+    .cta-banner-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--oro);color:var(--nero);padding:.5rem 1.2rem;border-radius:6px;font-size:.76rem;font-weight:600;text-decoration:none;letter-spacing:.04em;transition:all .2s}
+    .cta-banner-btn:hover{background:var(--oro2);transform:translateY(-1px)}
+    @media(max-width:768px){.cta-banner-search{padding:0 .75rem 1rem}.cta-banner-content{padding:1.2rem 1rem}.cta-banner-content h2{font-size:1.15rem}}
 
     /* NESSUN RISULTATO */
     .no-results{text-align:center;padding:4rem 2rem;color:var(--grigio)}
@@ -297,6 +271,14 @@
       .card.list-view{grid-template-columns:1fr}
       .modal-specs{grid-template-columns:repeat(2,1fr)}
       .hero-title{font-size:1.4rem}
+      .page{padding:1rem .75rem}
+      .hero-search{padding:1.5rem .75rem 0}
+      .header-inner{padding:0 .75rem}
+      .map-toggle-bar{padding:.7rem .75rem}
+      .card-body{padding:.8rem .75rem}
+      .card-footer{padding:.5rem .75rem}
+      .card-price{font-size:1.35rem}
+      .card-title{font-size:.82rem}
     }
     .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
   </style>
@@ -339,7 +321,7 @@
       <a href="faq.html">FAQ</a>
     </nav>
     <div class="h-cta">
-      <a class="h-tel" href="tel:+390498843484"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>049 884 3484</a>
+      <a class="h-tel" href="tel:+390498843484"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>049.88.43.484</a>
       <a class="h-btn" href="contatti.html">Valutazione gratuita</a>
     </div>
   </div>
@@ -556,9 +538,9 @@
         <div class="af-field"><label>Bagni min</label><select id="f-bagni" onchange="filterCards()"><option value="">Qualsiasi</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option></select></div>
         <div class="af-field"><label>Garage</label><select id="f-garage" onchange="filterCards()"><option value="">Qualsiasi</option><option value="1">Sì</option></select></div>
         <div class="af-field"><label>Giardino</label><select id="f-giardino" onchange="filterCards()"><option value="">Qualsiasi</option><option value="1">Sì</option></select></div>
-        <div class="af-field"><label>Anno costruzione</label><select id="f-anno"><option value="">Qualsiasi</option><option value="new">Dopo il 2000</option><option value="90s">1980–2000</option><option value="old">Prima del 1980</option></select></div>
-        <div class="af-field"><label>Stato</label><select id="f-stato"><option value="">Qualsiasi</option><option>Ottimo</option><option>Buono</option><option>Da ristrutturare</option><option>Nuovo</option></select></div>
-        <div class="af-field"><label>Caratteristiche</label><select id="f-extra"><option value="">Qualsiasi</option><option>Piscina</option><option>Vista aperta</option><option>Mansarda</option><option>Taverna</option></select></div>
+        <div class="af-field"><label>Anno costruzione</label><select id="f-anno" onchange="filterCards()"><option value="">Qualsiasi</option><option value="new">Dopo il 2000</option><option value="90s">1980–2000</option><option value="old">Prima del 1980</option></select></div>
+        <div class="af-field"><label>Stato</label><select id="f-stato" onchange="filterCards()"><option value="">Qualsiasi</option><option value="ottimo">Ottimo</option><option value="buono">Buono</option><option value="da ristrutturare">Da ristrutturare</option><option value="nuovo">Nuovo</option></select></div>
+        <div class="af-field"><label>Caratteristiche</label><select id="f-extra" onchange="filterCards()"><option value="">Qualsiasi</option><option value="piscina">Piscina</option><option value="vista">Vista aperta</option><option value="mansarda">Mansarda</option><option value="taverna">Taverna</option></select></div>
       </div>
     </div>
   </div>
@@ -583,111 +565,6 @@
 
 <!-- MAIN PAGE -->
 <div class="page">
-
-  <!-- SIDEBAR FILTRI -->
-  <aside class="sidebar">
-    <div class="filter-panel">
-      <div class="fp-head"><h3>Filtri</h3><button class="fp-reset" onclick="resetFilters()">Azzera tutto</button></div>
-
-      <div class="fp-section">
-        <div class="fp-section-title">Operazione</div>
-        <div class="fp-chip-row">
-          <span class="fp-chip on" onclick="toggleChip(this,'op','vendita')">Vendita</span>
-          <span class="fp-chip" onclick="toggleChip(this,'op','affitto')">Affitto</span>
-          <span class="fp-chip" onclick="toggleChip(this,'op','aste')">Aste</span>
-        </div>
-      </div>
-
-      <div class="fp-section">
-        <div class="fp-section-title">Tipologia immobile</div>
-        <div class="fp-check">
-          <label><input type="checkbox" checked onchange="filterCards()"> Appartamento</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Villa / Villetta</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Bifamiliare</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Attico / Mansarda</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Bilocale</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Trilocale</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Ufficio</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Negozio</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Locale commerciale</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Capannone</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Terreno / Rurale</label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Garage / Box</label>
-        </div>
-      </div>
-
-      <div class="fp-section">
-        <div class="fp-section-title">Prezzo</div>
-        <div class="range-row">
-          <input type="number" placeholder="Min €" id="s-pmin" oninput="filterCards()">
-          <span class="range-sep">–</span>
-          <input type="number" placeholder="Max €" id="s-pmax" oninput="filterCards()">
-        </div>
-      </div>
-
-      <div class="fp-section">
-        <div class="fp-section-title">Superficie</div>
-        <div class="range-row">
-          <input type="number" placeholder="Min mq" id="s-mqmin" oninput="filterCards()">
-          <span class="range-sep">–</span>
-          <input type="number" placeholder="Max mq" id="s-mqmax" oninput="filterCards()">
-        </div>
-      </div>
-
-      <div class="fp-section">
-        <div class="fp-section-title">Camere</div>
-        <div class="fp-chip-row">
-          <span class="fp-chip" onclick="toggleChipSingle(this,'cam')">1</span>
-          <span class="fp-chip" onclick="toggleChipSingle(this,'cam')">2</span>
-          <span class="fp-chip" onclick="toggleChipSingle(this,'cam')">3</span>
-          <span class="fp-chip" onclick="toggleChipSingle(this,'cam')">4</span>
-          <span class="fp-chip" onclick="toggleChipSingle(this,'cam')">5+</span>
-        </div>
-      </div>
-
-      <div class="fp-section">
-        <div class="fp-section-title">Zona / Comune</div>
-        <div class="fp-check">
-          <label><input type="checkbox" checked onchange="filterCards()"> Padova <span class="cnt">4</span></label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Curtarolo <span class="cnt">1</span></label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Albignasego <span class="cnt">2</span></label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Limena <span class="cnt">1</span></label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Cadoneghe <span class="cnt">1</span></label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Vigodarzere <span class="cnt">2</span></label>
-          <label><input type="checkbox" checked onchange="filterCards()"> Saccolongo <span class="cnt">1</span></label>
-        </div>
-      </div>
-
-      <div class="fp-section">
-        <div class="fp-section-title">Caratteristiche</div>
-        <div class="fp-check">
-          <label><input type="checkbox" onchange="filterCards()"> Con giardino</label>
-          <label><input type="checkbox" onchange="filterCards()"> Con garage</label>
-          <label><input type="checkbox" onchange="filterCards()"> Con piscina</label>
-          <label><input type="checkbox" onchange="filterCards()"> Con mansarda</label>
-          <label><input type="checkbox" onchange="filterCards()"> Vista aperta</label>
-          <label><input type="checkbox" onchange="filterCards()"> Virtual Tour 360°</label>
-          <label><input type="checkbox" onchange="filterCards()"> Video YouTube</label>
-        </div>
-      </div>
-
-      <div class="fp-section">
-        <div class="fp-section-title">Classe energetica</div>
-        <div class="ce-row">
-          <span class="ce-tag ce-A4 on" onclick="this.classList.toggle('on')">A4</span>
-          <span class="ce-tag ce-A3 on" onclick="this.classList.toggle('on')">A3</span>
-          <span class="ce-tag ce-A2 on" onclick="this.classList.toggle('on')">A2</span>
-          <span class="ce-tag ce-A1 on" onclick="this.classList.toggle('on')">A1</span>
-          <span class="ce-tag ce-B on" onclick="this.classList.toggle('on')">B</span>
-          <span class="ce-tag ce-C on" onclick="this.classList.toggle('on')">C</span>
-          <span class="ce-tag ce-D on" onclick="this.classList.toggle('on')">D</span>
-          <span class="ce-tag ce-E on" onclick="this.classList.toggle('on')">E</span>
-          <span class="ce-tag ce-F on" onclick="this.classList.toggle('on')">F</span>
-          <span class="ce-tag ce-G on" onclick="this.classList.toggle('on')">G</span>
-        </div>
-      </div>
-    </div>
-  </aside>
 
   <!-- RISULTATI -->
   <div>
@@ -731,14 +608,21 @@
     </div>
 
     <!-- PAGINATION -->
-    <div class="pagination">
-      <button class="page-btn prev-next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Prec.</button>
-      <button class="page-btn active">1</button>
-      <button class="page-btn" onclick="this.parentElement.querySelectorAll('.page-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">2</button>
-      <button class="page-btn" onclick="this.parentElement.querySelectorAll('.page-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">3</button>
-      <span style="padding:0 .3rem;color:var(--grigio);font-size:.82rem;">…</span>
-      <button class="page-btn">6</button>
-      <button class="page-btn prev-next">Succ.<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    <div class="pagination" id="pagination"></div>
+  </div>
+</div>
+
+<!-- BANNER CTA DECORATIVO -->
+<div class="cta-banner-search">
+  <div class="cta-banner-inner">
+    <div class="cta-banner-pattern"></div>
+    <div class="cta-banner-content">
+      <h2>Non trovi quello che cerchi?</h2>
+      <p>Il nostro team conosce ogni angolo della provincia di Padova. Contattaci per una ricerca personalizzata.</p>
+      <a href="contatti.html" class="cta-banner-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        Contattaci
+      </a>
     </div>
   </div>
 </div>
@@ -767,8 +651,8 @@
       <div class="footer-logo">Righetto <span>Immobiliare</span></div>
       <div class="footer-info">
         Gruppo Immobiliare Righetto di Capon Gino<br>
-        Via Roma, 96 — 35010 Limena (PD)<br>
-        Tel: 049 884 3484<br>
+        Via Roma n.96 — 35010 Limena (PD)<br>
+        Tel: 049.88.43.484<br>
         Cell: 348 862 1888<br>
         <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="36515f585976445f515e534242595f5b5b59545f5a5f574453185f42">[email&#160;protected]</a>
       </div>
@@ -780,6 +664,11 @@
       <a href="immobili.html?ev=1">In evidenza</a>
       <a href="immobili.html?tipo=villa">Ville</a>
       <a href="immobili.html?tipo=appartamento">Appartamenti</a>
+      <h4 style="margin-top:.8rem">Quartieri</h4>
+      <a href="zona-centro-storico-padova.html">Centro Storico</a>
+      <a href="zona-arcella-padova.html">Arcella</a>
+      <a href="zona-universitaria-padova.html">Zona Universitaria</a>
+      <a href="zona-prato-della-valle-padova.html">Prato della Valle</a>
     </div>
     <div class="footer-col">
       <h4>Servizi</h4>
@@ -874,15 +763,15 @@
         prezzo: i.prezzo || 0,
         mq: i.superficie || 0,
         camere: i.camere || i.locali || 0,
-        bagni: i.bagni || 0,
+        bagni: i.bagni_totali || i.bagni || 0,
         comune: i.comune || 'Padova',
         ce: i.classe_energetica || '',
         ceBg: (CE_COLORS[i.classe_energetica] || {bg:'#999'}).bg,
         ceTx: (CE_COLORS[i.classe_energetica] || {tx:'#fff'}).tx,
         op: i.tipo_operazione || 'vendita',
         tipo: i.tipologia || '',
-        giardino: !!i.giardino,
-        garage: !!i.garage,
+        giardino: !!(i.giardino || i.mq_giardino),
+        garage: !!(i.garage || i.garage_num),
         vt: !!i.virtual_tour,
         yt: !!i.youtube_id,
         foto: (Array.isArray(i.foto) ? i.foto : []).map(resolveImageUrl).filter(Boolean),
@@ -891,6 +780,12 @@
         venduto: !!i.venduto,
         affittato: !!i.affittato,
         desc: i.titolo || '',
+        anno: i.anno_costruzione || 0,
+        stato: i.stato || i.stato_manutenzione || '',
+        piscina: !!i.piscina,
+        mansarda: !!i.mansarda,
+        taverna: !!i.taverna,
+        vistaAperta: !!(i.panorama && i.panorama.toLowerCase().includes('aperta')),
         _raw: i
       }));
       renderCards();
@@ -933,7 +828,7 @@
       const ceColor = CE_COLORS[i.ce] || {bg:'#999',tx:'#fff'};
       const ceHtml = i.ce ? '<span class="cf-ce" style="background:'+ceColor.bg+';color:'+ceColor.tx+'">'+i.ce+'</span>' : '';
       const cardSlug = generatePropertySlug(i);
-      return '<a class="card" href="immobile.html?s='+encodeURIComponent(cardSlug)+'" data-tipo="'+i.tipo+'" data-prezzo="'+i.prezzo+'" data-mq="'+i.mq+'" data-camere="'+i.camere+'" data-comune="'+(i.comune||'').toLowerCase()+'" data-vt="'+(i.vt?'1':'')+'" data-yt="'+(i.yt?'1':'')+'" data-giardino="'+(i.giardino?'1':'')+'" data-garage="'+(i.garage?'1':'')+'" data-op="'+i.op+'" onclick="openCard(event,this)">'
+      return '<a class="card" href="immobile.html?s='+encodeURIComponent(cardSlug)+'" data-tipo="'+i.tipo+'" data-prezzo="'+i.prezzo+'" data-mq="'+i.mq+'" data-camere="'+i.camere+'" data-bagni="'+i.bagni+'" data-comune="'+(i.comune||'').toLowerCase()+'" data-vt="'+(i.vt?'1':'')+'" data-yt="'+(i.yt?'1':'')+'" data-giardino="'+(i.giardino?'1':'')+'" data-garage="'+(i.garage?'1':'')+'" data-op="'+i.op+'" data-anno="'+i.anno+'" data-stato="'+(i.stato||'').toLowerCase()+'" data-piscina="'+(i.piscina?'1':'')+'" data-mansarda="'+(i.mansarda?'1':'')+'" data-taverna="'+(i.taverna?'1':'')+'" data-vista="'+(i.vistaAperta?'1':'')+'" onclick="openCard(event,this)">'
         + '<div class="card-img">'
         + imgHtml
         + '<div class="card-badges">'+badges+'</div>'
@@ -988,17 +883,6 @@
     document.querySelectorAll('.card').forEach(c => c.classList.toggle('list-view', v === 'list'));
   }
 
-  // ── CHIP TOGGLE ──
-  function toggleChip(el, group, val) {
-    el.classList.toggle('on');
-    filterCards();
-  }
-  function toggleChipSingle(el, group) {
-    const row = el.closest('.fp-chip-row');
-    row.querySelectorAll('.fp-chip').forEach(c => c.classList.remove('on'));
-    el.classList.add('on');
-    filterCards();
-  }
 
   // ── PREFERITI ──
   function toggleFav(btn) {
@@ -1014,25 +898,63 @@
     const camereMin = parseInt(document.getElementById('f-camere').value) || 0;
     const mqMin = parseInt(document.getElementById('f-mq').value) || 0;
 
+    // Filtri avanzati
+    const bagniMin = parseInt(document.getElementById('f-bagni').value) || 0;
+    const garageReq = document.getElementById('f-garage').value;
+    const giardinoReq = document.getElementById('f-giardino').value;
+    const annoFiltro = document.getElementById('f-anno').value;
+    const statoFiltro = document.getElementById('f-stato').value;
+    const extraFiltro = document.getElementById('f-extra').value;
+
     const cards = document.querySelectorAll('#imm-grid .card');
     let visible = 0;
 
     cards.forEach(c => {
       const cOp = c.dataset.op || 'vendita';
-      const cTipo = c.dataset.tipo || '';
+      const cTipo = (c.dataset.tipo || '').toLowerCase();
       const cPrezzo = parseInt(c.dataset.prezzo) || 0;
       const cMq = parseInt(c.dataset.mq) || 0;
       const cCamere = parseInt(c.dataset.camere) || 0;
+      const cBagni = parseInt(c.dataset.bagni) || 0;
       const cComune = (c.dataset.comune || '').toLowerCase();
       const cTitle = c.querySelector('.card-title').textContent.toLowerCase();
+      const cAnno = parseInt(c.dataset.anno) || 0;
+      const cStato = (c.dataset.stato || '').toLowerCase();
 
       let show = true;
-      if (currentOp !== 'aste' && cOp !== currentOp) show = false;
+      // Operazione (tab)
+      if (currentOp === 'aste') {
+        if (cOp !== 'asta' && cOp !== 'aste') show = false;
+      } else {
+        if (cOp !== currentOp) show = false;
+      }
+      // Tipologia
       if (tipo && !cTipo.includes(tipo)) show = false;
+      // Prezzo max
       if (cPrezzo > prezzoMax) show = false;
+      // Camere min
       if (cCamere < camereMin) show = false;
+      // Superficie min
       if (cMq < mqMin) show = false;
+      // Zona
       if (zona && !cComune.includes(zona) && !cTitle.includes(zona)) show = false;
+      // Bagni min
+      if (cBagni < bagniMin) show = false;
+      // Garage
+      if (garageReq === '1' && c.dataset.garage !== '1') show = false;
+      // Giardino
+      if (giardinoReq === '1' && c.dataset.giardino !== '1') show = false;
+      // Anno costruzione
+      if (annoFiltro === 'new' && (cAnno === 0 || cAnno < 2000)) show = false;
+      if (annoFiltro === '90s' && (cAnno === 0 || cAnno < 1980 || cAnno > 2000)) show = false;
+      if (annoFiltro === 'old' && (cAnno === 0 || cAnno >= 1980)) show = false;
+      // Stato immobile
+      if (statoFiltro && !cStato.includes(statoFiltro)) show = false;
+      // Caratteristiche extra
+      if (extraFiltro === 'piscina' && c.dataset.piscina !== '1') show = false;
+      if (extraFiltro === 'vista' && c.dataset.vista !== '1') show = false;
+      if (extraFiltro === 'mansarda' && c.dataset.mansarda !== '1') show = false;
+      if (extraFiltro === 'taverna' && c.dataset.taverna !== '1') show = false;
 
       c.style.display = show ? '' : 'none';
       if (show) visible++;
@@ -1066,9 +988,13 @@
     document.getElementById('f-prezzo').value = '';
     document.getElementById('f-camere').value = '';
     document.getElementById('f-mq').value = '';
-    document.querySelectorAll('#imm-grid .card').forEach(c => c.style.display = '');
-    document.getElementById('res-count').textContent = document.querySelectorAll('#imm-grid .card').length;
-    document.getElementById('no-results').style.display = 'none';
+    document.getElementById('f-bagni').value = '';
+    document.getElementById('f-garage').value = '';
+    document.getElementById('f-giardino').value = '';
+    document.getElementById('f-anno').value = '';
+    document.getElementById('f-stato').value = '';
+    document.getElementById('f-extra').value = '';
+    filterCards();
   }
 
   // ── MODAL ──

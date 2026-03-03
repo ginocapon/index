@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MHDHHES26"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9MHDHHES26');
+</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#2C4A6E">
@@ -315,7 +323,7 @@
     <div class="h-cta">
       <a class="h-tel" href="tel:+390498843484">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
-        049 884 3484
+        049.88.43.484
       </a>
       <a class="h-btn" href="contatti.html">Valutazione gratuita</a>
     </div>
@@ -532,7 +540,7 @@
           </a>
           <a href="tel:+390498843484" class="agent-contact">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
-            049 884 3484 (ufficio)
+            049.88.43.484 (ufficio)
           </a>
           <a href="mailto:info@righttoimmobiliare.it" class="agent-contact">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -647,7 +655,7 @@
   <div class="footer-inner">
     <div>
       <div class="footer-logo">Righetto <span>Immobiliare</span></div>
-      <div style="margin-top:.4rem;">Via Roma, 96 — Limena (PD) · Tel: 049 884 3484</div>
+      <div style="margin-top:.4rem;">Via Roma n.96 — Limena (PD) · Tel: 049.88.43.484</div>
     </div>
     <div class="footer-links">
       <a href="immobili.html">Immobili</a>
@@ -662,7 +670,7 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // ══ CONFIG ══
 const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
@@ -862,6 +870,7 @@ function render(d) {
   const left = [
     ['Tipo immobile', cap(d.tipologia || d.categoria || '')],
     ['Operazione', cap(d.tipo_operazione || '')],
+    ['Tipo contratto', d.tipo_contratto ? cap(d.tipo_contratto) : '—'],
     ['Comune', d.comune || 'Padova'],
     ['Piano', d.piano || '—'],
     ['Anno costruzione', d.anno_costruzione || '—'],
@@ -1013,6 +1022,7 @@ function renderDettagli(d) {
   // Ambienti
   const ambienti = [];
   if (d.soggiorno) ambienti.push(check('','Soggiorno'));
+  if (d.soggiorno_angolo_cottura) ambienti.push(check('🍳','Soggiorno con angolo cottura'));
   if (d.cucina) ambienti.push(check('🍳','Cucina'));
   if (d.mansarda) ambienti.push(check('','Mansarda'));
   if (d.taverna) ambienti.push(check('🍷','Taverna'));
@@ -1253,22 +1263,22 @@ async function downloadPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
   const d = immobile;
-  const W = 210, m = 16;
+  const W = 210, m = 14;
+  const BLU = [58, 85, 120], VERDE = [206, 224, 143], GRIGIO = [120, 150, 175];
 
   // Helper: load image as data URL for jsPDF
-  async function loadImageData(url) {
+  async function loadImg(url) {
     if (!url) return null;
     try {
-      const resolved = resolveImageUrl(url);
+      const resolved = typeof resolveImageUrl === 'function' ? resolveImageUrl(url) : url;
       return await new Promise((resolve) => {
         const img = new Image();
         img.crossOrigin = 'anonymous';
         img.onload = () => {
           const c = document.createElement('canvas');
-          c.width = img.naturalWidth;
-          c.height = img.naturalHeight;
+          c.width = img.naturalWidth; c.height = img.naturalHeight;
           c.getContext('2d').drawImage(img, 0, 0);
-          resolve({ data: c.toDataURL('image/jpeg', 0.85), w: img.naturalWidth, h: img.naturalHeight });
+          resolve({ data: c.toDataURL('image/jpeg', 0.82), w: img.naturalWidth, h: img.naturalHeight });
         };
         img.onerror = () => resolve(null);
         img.src = resolved;
@@ -1276,67 +1286,105 @@ async function downloadPDF() {
     } catch(e) { return null; }
   }
 
-  // HEADER BAR
-  doc.setFillColor(58, 85, 120);
-  doc.rect(0, 0, W, 32, 'F');
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(18);
-  doc.setTextColor(206, 224, 143);
-  doc.text('Righetto', m, 13);
-  doc.setTextColor(255, 255, 255);
-  doc.text(' Immobiliare', m + 26, 13);
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(7.5);
-  doc.setTextColor(200, 210, 220);
-  doc.text('Via Roma 96, Limena (PD)  |  Tel: 049 884 3484  |  www.righettoimmobiliare.it', m, 19.5);
-  // Tipo + Rif
-  const tipoLabel = (d.tipo_operazione || '').toUpperCase();
-  doc.setFillColor(206, 224, 143);
-  doc.roundedRect(W - m - 45, 6, 45, 8, 2, 2, 'F');
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(8);
-  doc.setTextColor(58, 85, 120);
-  doc.text(tipoLabel + '  |  Rif. ' + (d.codice || 'N/D'), W - m - 43, 11.5);
+  // Page break helper
+  const checkPage = (yPos, need) => {
+    if (yPos + need > 280) { doc.addPage(); return 14; }
+    return yPos;
+  };
 
-  // TITLE + LOCATION (below header)
+  // Section title helper
+  const sectionTitle = (title, yPos) => {
+    yPos = checkPage(yPos, 12);
+    doc.setFillColor(...VERDE);
+    doc.rect(m, yPos, 3, 6, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(...BLU);
+    doc.text(title, m + 6, yPos + 4.5);
+    return yPos + 9;
+  };
+
+  // ═══════════════════════════════════════
+  // PAGE 1: HEADER + PHOTOS + PRICE + SPECS
+  // ═══════════════════════════════════════
+
+  // HEADER BAR
+  doc.setFillColor(...BLU);
+  doc.rect(0, 0, W, 28, 'F');
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(8);
+  doc.setFontSize(17);
+  doc.setTextColor(...VERDE);
+  doc.text('Righetto', m, 11);
   doc.setTextColor(255, 255, 255);
-  const titleStr = (d.titolo || 'Scheda Immobile').substring(0, 70);
-  doc.text(titleStr, m, 27);
+  doc.text(' Immobiliare', m + 24, 11);
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(7);
-  doc.setTextColor(180, 200, 220);
-  doc.text((d.comune || '') + (d.indirizzo ? ' — ' + d.indirizzo : ''), m, 31);
+  doc.setTextColor(200, 210, 220);
+  doc.text('Via Roma n.96, Limena (PD)  |  Tel: 049.88.43.484  |  www.righettoimmobiliare.it', m, 17);
+  // Tipo badge + Rif
+  const tipoLabel = (d.tipo_operazione || '').toUpperCase();
+  doc.setFillColor(...VERDE);
+  doc.roundedRect(W - m - 46, 5, 46, 8, 2, 2, 'F');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8);
+  doc.setTextColor(...BLU);
+  doc.text(tipoLabel + '  |  Rif. ' + (d.codice || 'N/D'), W - m - 44, 10.5);
+  // Title inside header
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(9);
+  doc.setTextColor(255, 255, 255);
+  doc.text((d.titolo || 'Scheda Immobile').substring(0, 80), m, 24);
 
-  let y = 36;
+  let y = 31;
 
-  // MAIN PHOTO
-  const fotos = Array.isArray(d.foto) ? d.foto.filter(Boolean) : [];
-  const mainImg = await loadImageData(fotos[0] || d.foto_principale);
-  if (mainImg) {
-    const imgH = 58;
-    const imgW = W - m * 2;
-    doc.addImage(mainImg.data, 'JPEG', m, y, imgW, imgH);
-    y += imgH + 4;
+  // ── 4 PHOTOS IN A ROW ──
+  const fotos = (Array.isArray(d.foto) ? d.foto : (d.foto_urls || [])).filter(Boolean);
+  const photoUrls = fotos.slice(0, 4);
+  const photoImgs = await Promise.all(photoUrls.map(u => loadImg(u)));
+  const validPhotos = photoImgs.filter(Boolean);
+
+  if (validPhotos.length > 0) {
+    const gap = 2;
+    const totalW = W - m * 2;
+    if (validPhotos.length === 1) {
+      // Single photo full width
+      doc.addImage(validPhotos[0].data, 'JPEG', m, y, totalW, 55);
+      y += 57;
+    } else {
+      // Grid: 4 photos in a row (or however many we have)
+      const count = Math.min(validPhotos.length, 4);
+      const pw = (totalW - gap * (count - 1)) / count;
+      const ph = 42;
+      validPhotos.slice(0, 4).forEach((img, idx) => {
+        doc.addImage(img.data, 'JPEG', m + idx * (pw + gap), y, pw, ph);
+      });
+      y += ph + 3;
+    }
   }
+
+  // LOCATION (solo comune, NO indirizzo)
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8);
+  doc.setTextColor(...GRIGIO);
+  doc.text(d.comune || '', m, y + 3);
+  y += 6;
 
   // PRICE BAR
   doc.setFillColor(245, 240, 232);
-  doc.roundedRect(m, y, W - m * 2, 14, 2, 2, 'F');
+  doc.roundedRect(m, y, W - m * 2, 13, 2, 2, 'F');
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(18);
-  doc.setTextColor(58, 85, 120);
+  doc.setFontSize(17);
+  doc.setTextColor(...BLU);
   const prezzoTxt = d.prezzo ? '\u20AC ' + Number(d.prezzo).toLocaleString('it-IT') : 'Prezzo su richiesta';
-  doc.text(prezzoTxt, m + 4, y + 9.5);
+  doc.text(prezzoTxt, m + 4, y + 9);
   if (d.superficie && d.prezzo) {
     const pMq = Math.round(d.prezzo / d.superficie);
     doc.setFontSize(8);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(100, 130, 160);
-    doc.text('\u20AC ' + pMq.toLocaleString('it-IT') + '/mq', m + 4, y + 13.5);
+    doc.text('\u20AC ' + pMq.toLocaleString('it-IT') + '/mq', m + 70, y + 9);
   }
-  y += 18;
+  y += 17;
 
   // KEY SPECS ROW
   const specs = [
@@ -1345,7 +1393,7 @@ async function downloadPDF() {
     ['CAMERE', d.camere || '\u2014'],
     ['BAGNI', d.bagni_totali || d.bagni || '\u2014'],
     ['PIANO', d.piano || '\u2014'],
-    ['CLASSE EN.', d.classe_energetica || 'N/D'],
+    ['ANNO', d.anno_costruzione || '\u2014'],
   ];
   const colW = (W - m * 2) / specs.length;
   specs.forEach((s, idx) => {
@@ -1353,70 +1401,82 @@ async function downloadPDF() {
     doc.setFillColor(idx % 2 === 0 ? 250 : 244, idx % 2 === 0 ? 248 : 242, idx % 2 === 0 ? 242 : 234);
     doc.rect(x, y, colW, 12, 'F');
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
-    doc.setTextColor(58, 85, 120);
-    doc.text(String(s[1]), x + colW / 2, y + 6.5, { align: 'center' });
+    doc.setFontSize(10);
+    doc.setTextColor(...BLU);
+    doc.text(String(s[1]), x + colW / 2, y + 6, { align: 'center' });
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(5.5);
-    doc.setTextColor(120, 150, 175);
-    doc.text(s[0], x + colW / 2, y + 11, { align: 'center' });
+    doc.setTextColor(...GRIGIO);
+    doc.text(s[0], x + colW / 2, y + 10.5, { align: 'center' });
   });
   y += 16;
 
-  // SECTION helper
-  const sectionTitle = (title, yPos) => {
-    if (yPos > 265) { doc.addPage(); yPos = 16; }
-    doc.setFillColor(206, 224, 143);
-    doc.rect(m, yPos, 3, 6, 'F');
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(9);
-    doc.setTextColor(58, 85, 120);
-    doc.text(title, m + 6, yPos + 4.5);
-    return yPos + 9;
-  };
+  // ── DESCRIZIONE (prominente, subito dopo specs) ──
+  const descTesto = d.descrizione || d.note_interne || d.descrizione_pubblica || '';
+  if (descTesto) {
+    y = sectionTitle('DESCRIZIONE', y);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8.5);
+    doc.setTextColor(60, 75, 95);
+    const descClean = descTesto.replace(/\\n/g, '\n').replace(/<[^>]*>/g, '');
+    const descLines = doc.splitTextToSize(descClean.substring(0, 2000), W - m * 2);
+    for (let l = 0; l < descLines.length; l++) {
+      y = checkPage(y, 5);
+      doc.text(descLines[l], m, y);
+      y += 4;
+    }
+    y += 4;
+  }
 
-  // CARATTERISTICHE
-  y = sectionTitle('CARATTERISTICHE', y);
+  // ── CARATTERISTICHE COMPLETE ──
   const chars = [
     ['Tipologia', d.tipologia || d.categoria || ''],
     ['Comune', d.comune || ''],
-    ['Stato', d.stato || d.stato_manutenzione || ''],
+    ['Stato immobile', d.stato || d.stato_manutenzione || ''],
     ['Anno costruzione', d.anno_costruzione || ''],
     ['Esposizione', d.esposizione || ''],
     ['Consegna', d.consegna || ''],
-    ['IPE', d.ipe_kwh ? d.ipe_kwh + ' kWh/m\u00B2a' : ''],
-    ['Riscaldamento', d.riscaldamento_autonomo ? 'Autonomo' : d.riscaldamento_centralizzato ? 'Centralizzato' : (d.riscaldamento_pavimento ? 'Pavimento' : '')],
-    ['Garage', d.garage_num ? d.garage_num + ' garage' : (d.garage ? 'S\u00EC' : '')],
+    ['Riscaldamento', d.riscaldamento_autonomo ? 'Autonomo' : d.riscaldamento_centralizzato ? 'Centralizzato' : d.riscaldamento_semi_autonomo ? 'Semi-autonomo' : (d.riscaldamento_pavimento ? 'A pavimento' : '')],
+    ['Garage', d.garage_num ? d.garage_num + (d.garage_doppio ? ' (doppio)' : '') : (d.garage ? 'S\u00EC' : '')],
     ['Giardino', d.mq_giardino ? d.mq_giardino + ' mq' : (d.giardino ? 'S\u00EC' : '')],
     ['Lotto', d.mq_lotto ? d.mq_lotto + ' mq' : ''],
     ['Posti auto', d.posto_auto || ''],
     ['Terrazzi', d.terrazzi_num || ''],
+    ['Ripostigli', d.ripostigli || ''],
     ['Piani totali', d.totale_piani || ''],
-    ['Spese cond.', d.spese_condominio ? '\u20AC ' + Number(d.spese_condominio).toLocaleString('it-IT') + '/mese' : ''],
+    ['Spese condominiali', d.spese_condominio ? '\u20AC ' + Number(d.spese_condominio).toLocaleString('it-IT') + '/mese' : ''],
     ['Panorama', d.panorama || ''],
+    ['Connettivit\u00E0', d.connettivita || ''],
+    ['Impianto elettrico', d.impianto_elettrico || ''],
+    ['Dist. mare', d.distanza_mare ? d.distanza_mare + ' m' : ''],
   ].filter(r => r[1]);
-  const col2W = (W - m * 2) / 2 - 3;
-  chars.forEach((r, idx) => {
-    const col = idx % 2;
-    const row = Math.floor(idx / 2);
-    const cx = col === 0 ? m : m + col2W + 6;
-    const cy = y + row * 5.5;
-    if (cy > 270) { doc.addPage(); y = 16; }
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(7);
-    doc.setTextColor(120, 150, 175);
-    doc.text(r[0] + ':', cx, cy);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(58, 85, 120);
-    doc.text(String(r[1]), cx + 24, cy);
-    doc.setDrawColor(230, 235, 240);
-    doc.line(cx, cy + 1, cx + col2W, cy + 1);
-  });
-  y += Math.ceil(chars.length / 2) * 5.5 + 5;
 
-  // AMBIENTI
+  if (chars.length) {
+    y = sectionTitle('CARATTERISTICHE', y);
+    const col2W = (W - m * 2) / 2 - 3;
+    chars.forEach((r, idx) => {
+      const col = idx % 2;
+      const row = Math.floor(idx / 2);
+      const cx = col === 0 ? m : m + col2W + 6;
+      const cy = y + row * 5.5;
+      if (cy > 274) { doc.addPage(); y = 14; return; }
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(7);
+      doc.setTextColor(...GRIGIO);
+      doc.text(r[0] + ':', cx, cy);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(...BLU);
+      doc.text(String(r[1]), cx + 28, cy);
+      doc.setDrawColor(230, 235, 240);
+      doc.line(cx, cy + 1, cx + col2W, cy + 1);
+    });
+    y += Math.ceil(chars.length / 2) * 5.5 + 4;
+  }
+
+  // ── AMBIENTI ──
   const ambienti = [];
   if (d.soggiorno) ambienti.push('Soggiorno');
+  if (d.soggiorno_angolo_cottura) ambienti.push('Soggiorno con angolo cottura');
   if (d.cucina) ambienti.push('Cucina');
   if (d.mansarda) ambienti.push('Mansarda');
   if (d.taverna) ambienti.push('Taverna');
@@ -1425,7 +1485,21 @@ async function downloadPDF() {
   if (d.porticato) ambienti.push('Porticato');
   if (d.soppalco) ambienti.push('Soppalco');
 
-  // COMFORT TAGS (expanded)
+  // ── RISCALDAMENTO / CLIMA ──
+  const clima = [];
+  if (d.riscaldamento_autonomo) clima.push('Riscaldamento autonomo');
+  if (d.riscaldamento_centralizzato) clima.push('Riscaldamento centralizzato');
+  if (d.riscaldamento_pavimento) clima.push('Riscaldamento a pavimento');
+  if (d.raffreddamento_pavimento) clima.push('Raffreddamento a pavimento');
+  if (d.aria_condizionata) clima.push('Aria condizionata');
+  if (d.camino) clima.push('Camino');
+  if (d.termopompa) clima.push('Termopompa');
+  if (d.caldaia_condensazione) clima.push('Caldaia a condensazione');
+  if (d.pannelli_fotovoltaici) clima.push('Fotovoltaico');
+  if (d.pannelli_solari) clima.push('Solare termico');
+  if (d.impianto_geotermico) clima.push('Geotermico');
+
+  // ── COMFORT / DOTAZIONI ──
   const comfort = [];
   if (d.garage || d.garage_num) comfort.push('Garage');
   if (d.giardino) comfort.push('Giardino');
@@ -1433,34 +1507,31 @@ async function downloadPDF() {
   if (d.cantina) comfort.push('Cantina');
   if (d.ascensore) comfort.push('Ascensore');
   if (d.piscina) comfort.push('Piscina');
-  if (d.aria_condizionata) comfort.push('Aria condizionata');
   if (d.arredato || d.arredo) comfort.push('Arredato');
-  if (d.allarme) comfort.push('Allarme');
-  if (d.porta_blindata) comfort.push('Porta blindata');
-  if (d.camino) comfort.push('Camino');
-  if (d.pannelli_fotovoltaici) comfort.push('Fotovoltaico');
-  if (d.pannelli_solari) comfort.push('Solare termico');
-  if (d.riscaldamento_pavimento) comfort.push('Riscald. pavimento');
-  if (d.domotica) comfort.push('Domotica');
-  if (d.tapparelle_motorizzate) comfort.push('Tapparelle mot.');
-  if (d.zanzariere) comfort.push('Zanzariere');
-  if (d.ingresso_indipendente) comfort.push('Ingresso indip.');
-  if (d.canna_fumaria) comfort.push('Canna fumaria');
-  if (d.termopompa) comfort.push('Termopompa');
-  if (d.impianto_geotermico) comfort.push('Geotermico');
+  if (d.ingresso_indipendente) comfort.push('Ingresso indipendente');
   if (d.portineria) comfort.push('Portineria');
   if (d.accesso_disabili) comfort.push('Accesso disabili');
-  if (d.cassaforte) comfort.push('Cassaforte');
 
+  // ── SICUREZZA & TECNOLOGIA ──
+  const sicurezza = [];
+  if (d.allarme) sicurezza.push('Allarme');
+  if (d.porta_blindata) sicurezza.push('Porta blindata');
+  if (d.domotica) sicurezza.push('Domotica');
+  if (d.tapparelle_motorizzate) sicurezza.push('Tapparelle motorizzate');
+  if (d.zanzariere) sicurezza.push('Zanzariere');
+  if (d.canna_fumaria) sicurezza.push('Canna fumaria');
+  if (d.cassaforte) sicurezza.push('Cassaforte');
+
+  // Draw tag groups
   const drawTags = (tags, title, yStart) => {
     if (!tags.length) return yStart;
     yStart = sectionTitle(title, yStart);
     let cx = m, cy = yStart;
     tags.forEach((tag) => {
       doc.setFontSize(6.5);
-      const tw = doc.getTextWidth(tag) + 7;
+      const tw = doc.getTextWidth('\u2713 ' + tag) + 6;
       if (cx + tw > W - m) { cx = m; cy += 6; }
-      if (cy > 274) { doc.addPage(); cy = 16; cx = m; }
+      cy = checkPage(cy, 6);
       doc.setFillColor(230, 239, 184);
       doc.roundedRect(cx, cy - 3.5, tw, 5, 1, 1, 'F');
       doc.setFont('helvetica', 'normal');
@@ -1472,37 +1543,124 @@ async function downloadPDF() {
   };
 
   y = drawTags(ambienti, 'AMBIENTI', y);
+  y = drawTags(clima, 'RISCALDAMENTO & CLIMA', y);
   y = drawTags(comfort, 'DOTAZIONI & COMFORT', y);
+  y = drawTags(sicurezza, 'SICUREZZA & TECNOLOGIA', y);
 
-  // DESCRIPTION
-  if (d.descrizione) {
-    if (y > 240) { doc.addPage(); y = 16; }
-    y = sectionTitle('DESCRIZIONE', y);
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(7.5);
-    doc.setTextColor(80, 100, 120);
-    const lines = doc.splitTextToSize(d.descrizione.substring(0, 900), W - m * 2);
-    const maxLines = Math.min(lines.length, 18);
-    for (let l = 0; l < maxLines; l++) {
-      if (y > 276) { doc.addPage(); y = 16; }
-      doc.text(lines[l], m, y);
-      y += 3.8;
-    }
-    y += 4;
+  // ═══════════════════════════════════════
+  // CLASSE ENERGETICA (grafica con barre)
+  // ═══════════════════════════════════════
+  const ce = d.classe_energetica || '';
+  if (ce) {
+    y = checkPage(y, 55);
+    y = sectionTitle('CLASSE ENERGETICA', y);
+    const classi = ['A4','A3','A2','A1','B','C','D','E','F','G'];
+    const colori = {A4:[27,94,32],A3:[46,125,50],A2:[56,142,60],A1:[67,160,71],B:[85,139,47],C:[249,168,37],D:[239,108,0],E:[229,57,53],F:[183,28,28],G:[136,14,79]};
+    const widths = {A4:25,A3:30,A2:35,A1:40,B:50,C:60,D:70,E:80,F:90,G:100};
+
+    const barH = 4;
+    const barGap = 0.8;
+    const maxBarW = W - m * 2 - 50;
+
+    classi.forEach(c => {
+      const isActive = c === ce;
+      const col = colori[c] || [150,150,150];
+      const bw = (widths[c] / 100) * maxBarW;
+
+      y = checkPage(y, barH + barGap + 1);
+
+      // Bar
+      doc.setFillColor(...col);
+      const actualW = isActive ? maxBarW + 20 : bw;
+      doc.roundedRect(m, y, actualW, barH, 1, 1, 'F');
+
+      // Label inside bar
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(isActive ? 7 : 6);
+      doc.setTextColor(255, 255, 255);
+      if (isActive) {
+        doc.text(c + '  \u25C4  IMMOBILE', m + 3, y + 3);
+        // IPE value to the right
+        if (d.ipe_kwh) {
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(7);
+          doc.setTextColor(...BLU);
+          doc.text(d.ipe_kwh + ' kWh/m\u00B2\u00B7anno', m + actualW + 3, y + 3);
+        }
+      } else {
+        doc.text(c, m + 3, y + 3);
+      }
+
+      y += barH + barGap;
+    });
+
+    // Big badge next to bars
+    const badgeX = W - m - 25;
+    const badgeY = y - (classi.length * (barH + barGap)) + 5;
+    const badgeCol = colori[ce] || [150,150,150];
+    doc.setFillColor(...badgeCol);
+    doc.roundedRect(badgeX, badgeY, 22, 22, 2, 2, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(18);
+    doc.setTextColor(255, 255, 255);
+    doc.text(ce, badgeX + 11, badgeY + 14, { align: 'center' });
+    doc.setFontSize(5);
+    doc.text('CLASSE', badgeX + 11, badgeY + 19, { align: 'center' });
+
+    y += 5;
   }
 
-  // FOOTER on all pages
-  const lastPage = doc.getNumberOfPages();
-  for (let p = 1; p <= lastPage; p++) {
+  // ═══════════════════════════════════════
+  // PLANIMETRIA (foto delle planimetrie)
+  // ═══════════════════════════════════════
+  const planimetrie = Array.isArray(d.planimetrie) ? d.planimetrie : [];
+  const planImgUrls = planimetrie
+    .map(p => typeof p === 'string' ? p : (p && p.url))
+    .filter(u => u && /\.(jpg|jpeg|png|webp|gif)/i.test(u));
+
+  if (planImgUrls.length) {
+    doc.addPage();
+    y = 14;
+    y = sectionTitle('PLANIMETRIE', y);
+
+    for (let pi = 0; pi < planImgUrls.length; pi++) {
+      const pImg = await loadImg(planImgUrls[pi]);
+      if (pImg) {
+        // Calculate proportional size, max width = page width - margins
+        const maxW = W - m * 2;
+        const maxH = 120;
+        const ratio = Math.min(maxW / pImg.w, maxH / pImg.h);
+        const imgW = pImg.w * ratio;
+        const imgH = pImg.h * ratio;
+        y = checkPage(y, imgH + 8);
+        const xCenter = m + (maxW - imgW) / 2;
+        doc.addImage(pImg.data, 'JPEG', xCenter, y, imgW, imgH);
+        y += imgH + 6;
+        // Label
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(6.5);
+        doc.setTextColor(...GRIGIO);
+        const planLabel = typeof planimetrie[pi] === 'object' && planimetrie[pi].nome ? planimetrie[pi].nome : 'Planimetria ' + (pi + 1);
+        doc.text(planLabel, W / 2, y - 2, { align: 'center' });
+        y += 4;
+      }
+    }
+  }
+
+  // ═══════════════════════════════════════
+  // FOOTER on ALL pages
+  // ═══════════════════════════════════════
+  const totalPages = doc.getNumberOfPages();
+  for (let p = 1; p <= totalPages; p++) {
     doc.setPage(p);
-    doc.setFillColor(58, 85, 120);
+    doc.setFillColor(...BLU);
     doc.rect(0, 286, W, 11, 'F');
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(6.5);
     doc.setTextColor(200, 210, 220);
-    doc.text('Righetto Immobiliare \u2014 Via Roma 96, Limena (PD) \u2014 Tel: 049 884 3484 \u2014 info@righettoimmobiliare.it', m, 291.5);
-    doc.setTextColor(206, 224, 143);
-    doc.text('Rif. ' + (d.codice || 'N/D') + ' \u2014 ' + new Date().toLocaleDateString('it-IT'), W - m, 291.5, { align: 'right' });
+    doc.text('Righetto Immobiliare \u2014 Via Roma n.96, Limena (PD) \u2014 Tel: 049.88.43.484 \u2014 info@righettoimmobiliare.it', m, 291);
+    doc.setTextColor(...VERDE);
+    doc.text('Rif. ' + (d.codice || 'N/D') + '  |  Pag. ' + p + '/' + totalPages + '  |  ' + new Date().toLocaleDateString('it-IT'), W - m, 291, { align: 'right' });
   }
 
   const filename = 'Righetto-' + (d.codice || d.comune || 'immobile') + '.pdf';
@@ -1625,7 +1783,10 @@ function toggleChat() {
   document.getElementById('chatPanel').classList.toggle('show', chatOpen);
 }
 
-init();
+init().catch(function(err) {
+  console.error('Errore caricamento immobile:', err);
+  showError();
+});
 </script>
 <!-- Chatbot globale disabilitato su questa pagina: usa il chatbot dedicato all'immobile -->
 <script src="js/nav-mobile.js" defer></script>
