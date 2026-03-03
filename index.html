@@ -2461,6 +2461,16 @@ function generateSlug(titolo) {
 (async function loadBlogHome() {
   const grid = document.getElementById('blogGridHome');
   if (!grid) return;
+  // Mappa fallback per articoli statici (immagine + url dedicato)
+  const staticMap = {
+    'guida ai quartieri di padova: dove comprare casa nel 2026': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-quartieri-padova-2026.html' },
+    'affitto studenti padova 2026: zone, prezzi e guida completa': { img: 'img/foto-servizi/contratti-di-locazione-padova.webp', url: 'blog-affitto-studenti-padova.html' },
+    'mercato immobiliare padova 2026: prezzi, tendenze e previsioni': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-mercato-immobiliare-padova-2026.html' },
+    'conviene comprare casa a padova o restare in affitto? analisi su 20 anni': { img: 'img/blog/comprare-affittare-padova.webp', url: 'blog-comprare-affittare-padova.html' },
+    'case in vendita padova 2026: prezzi, zone migliori e guida completa': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-case-vendita-padova.html' },
+    'mutuo prima casa a padova: guida completa 2026': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-mutuo-prima-casa-padova.html' },
+    "ca' marcello mestre: riqualificazione e investimento nel veneto": { img: 'img/blog/ca-marcello-hero.webp', url: 'blog-ca-marcello-mestre.html' }
+  };
   let articles = [];
   try {
     if (sb) {
@@ -2471,29 +2481,19 @@ function generateSlug(titolo) {
   if (!articles.length) {
     try { articles = JSON.parse(localStorage.getItem('rig_blog_articles')||'[]').filter(a=>a.stato==='pubblicato').sort((a,b)=>new Date(b.data)-new Date(a.data)).slice(0,3); } catch(e){}
   }
-  // Immagini di copertina per articoli statici (fallback se Supabase non le ha)
-  var staticCovers = {
-    'conviene comprare casa a padova o restare in affitto': 'img/foto-servizi/vendita-immobili-padova.webp',
-    'case in vendita padova 2026': 'img/foto-servizi/vendita-immobili-padova.webp',
-    'guida al mutuo prima casa a padova 2026': 'img/foto-servizi/valutazioni-e-perizie-padova.webp',
-    'guida ai quartieri di padova': 'img/foto-servizi/vendita-immobili-padova.webp',
-    'affitto studenti padova 2026': 'img/foto-servizi/contratti-di-locazione-padova.webp',
-    'mercato immobiliare padova 2026': 'img/foto-servizi/valutazioni-e-perizie-padova.webp',
-    'ca\' marcello mestre': 'img/blog/ca-marcello-hero.webp'
-  };
-  articles.forEach(function(a) {
-    if (!a.immagine_copertina) {
-      var t = (a.titolo || '').toLowerCase();
-      var keys = Object.keys(staticCovers);
-      for (var k = 0; k < keys.length; k++) {
-        if (t.indexOf(keys[k]) !== -1) { a.immagine_copertina = staticCovers[keys[k]]; break; }
-      }
-    }
-  });
   if (!articles.length) {
     grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:2rem"><a href="blog.html" style="color:var(--oro);font-weight:600;font-size:.9rem">Visita il blog &rarr;</a></div>';
     return;
   }
+  // Arricchisci articoli con dati statici (immagine e url) se mancanti
+  articles.forEach(a => {
+    const key = (a.titolo || '').toLowerCase();
+    const s = staticMap[key];
+    if (s) {
+      if (!a.immagine_copertina) a.immagine_copertina = s.img;
+      if (!a.url_statico) a.url_statico = s.url;
+    }
+  });
   function extractImg(a) {
     if (a.immagine_copertina) return resolveImageUrl(a.immagine_copertina);
     if (!a.contenuto) return '';
@@ -2507,7 +2507,7 @@ function generateSlug(titolo) {
   grid.innerHTML = articles.map((a,i) => {
     const img = extractImg(a);
     const slug = generateSlug(a.titolo);
-    const href = 'blog-articolo.html?s=' + encodeURIComponent(slug);
+    const href = a.url_statico || ('blog-articolo.html?s=' + encodeURIComponent(slug));
     return '<div class="blog-card rv d'+(i+1)+'" onclick="location.href=\''+href+'\'">'
       + '<div class="blog-cover"'+(img?' style="background:url('+img+') center/cover;font-size:0"':'')+'>'+(img?'':a.emoji||'📝')+'</div>'
       + '<div class="blog-body"><div class="blog-cat">'+((a.categoria||'Blog').replace(/</g,'&lt;'))+'</div>'

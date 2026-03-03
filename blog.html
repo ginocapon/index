@@ -433,7 +433,7 @@ async function initBlog() {
       tempo: 12,
       stato: 'pubblicato',
       autore: 'Gino Capon',
-      immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp',
+      immagine_copertina: 'img/blog/comprare-affittare-padova.webp',
       url_statico: 'blog-comprare-affittare-padova.html',
       contenuto: 'Conviene comprare casa a Padova o restare in affitto? Su un orizzonte di 20 anni, l\'acquisto costruisce un patrimonio netto di oltre 190.000 euro, mentre l\'affitto genera un costo irrecuperabile di circa 250.000 euro. Analisi completa con dati OMI, simulazioni mutuo e trend del mercato immobiliare padovano.',
       evidenza: true
@@ -475,7 +475,19 @@ async function initBlog() {
       evidenza: false
     }
   ];
-  // Merge: aggiungi statici solo se non gia' presenti (by titolo)
+  // Merge: arricchisci articoli da Supabase con dati statici (immagine, url) se mancanti,
+  // oppure aggiungi articoli statici non presenti in Supabase
+  const staticByTitle = {};
+  articoliStatici.forEach(s => { staticByTitle[s.titolo.toLowerCase()] = s; });
+  allArticles.forEach(a => {
+    const s = staticByTitle[(a.titolo || '').toLowerCase()];
+    if (s) {
+      if (!a.immagine_copertina) a.immagine_copertina = s.immagine_copertina;
+      if (!a.url_statico) a.url_statico = s.url_statico;
+      if (!a.tempo) a.tempo = s.tempo;
+      if (!a.categoria) a.categoria = s.categoria;
+    }
+  });
   const titoliEsistenti = new Set(allArticles.map(a => (a.titolo || '').toLowerCase()));
   articoliStatici.forEach(s => {
     if (!titoliEsistenti.has(s.titolo.toLowerCase())) {
