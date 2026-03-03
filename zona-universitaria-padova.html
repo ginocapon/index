@@ -57,9 +57,10 @@
     .bc-inner a{color:rgba(255,255,255,.3);transition:color .2s}.bc-inner a:hover{color:var(--oro)}
     .bc-inner svg{width:9px;height:9px;flex-shrink:0}
     /* HERO */
-    .hero{background:var(--nero);padding:5rem 1.5rem 4rem;position:relative;overflow:hidden}
-    .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.12) 0%,transparent 70%)}
-    .hero-inner{max-width:1380px;margin:0 auto}
+    .hero{position:relative;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;z-index:0}
+    .hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.3)}
+    .hero-inner{position:relative;z-index:1;max-width:1380px;margin:0 auto;padding:5rem 1.5rem 4rem}
     .htag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.7rem}
     .hero h1{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:#fff;line-height:1.15;margin-bottom:1rem}
     .hero h1 strong{font-weight:600;font-style:italic}
@@ -155,6 +156,7 @@
 <main id="main-content">
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg"><picture><source srcset="img/foto-servizi/valutazioni-e-perizie-padova.webp" type="image/webp"><img src="img/foto-servizi/valutazioni-e-perizie-padova.png" alt="Immobili Zona Universitaria Padova" width="1200" height="480" loading="eager"></picture></div>
   <div class="hero-inner">
     <div class="htag">Quartiere di Padova</div>
     <h1>Zona Universitaria: <strong>otto secoli di storia,</strong> rendite che non dormono mai</h1>
