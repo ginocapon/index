@@ -2461,6 +2461,16 @@ function generateSlug(titolo) {
 (async function loadBlogHome() {
   const grid = document.getElementById('blogGridHome');
   if (!grid) return;
+  // Mappa fallback per articoli statici (immagine + url dedicato)
+  const staticMap = {
+    'guida ai quartieri di padova: dove comprare casa nel 2026': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-quartieri-padova-2026.html' },
+    'affitto studenti padova 2026: zone, prezzi e guida completa': { img: 'img/foto-servizi/contratti-di-locazione-padova.webp', url: 'blog-affitto-studenti-padova.html' },
+    'mercato immobiliare padova 2026: prezzi, tendenze e previsioni': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-mercato-immobiliare-padova-2026.html' },
+    'conviene comprare casa a padova o restare in affitto? analisi su 20 anni': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-comprare-affittare-padova.html' },
+    'case in vendita padova 2026: prezzi, zone migliori e guida completa': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-case-vendita-padova.html' },
+    'mutuo prima casa a padova: guida completa 2026': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-mutuo-prima-casa-padova.html' },
+    "ca' marcello mestre: riqualificazione e investimento nel veneto": { img: 'img/blog/ca-marcello-mestre.webp', url: 'blog-ca-marcello-mestre.html' }
+  };
   let articles = [];
   try {
     if (sb) {
@@ -2475,6 +2485,15 @@ function generateSlug(titolo) {
     grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:2rem"><a href="blog.html" style="color:var(--oro);font-weight:600;font-size:.9rem">Visita il blog &rarr;</a></div>';
     return;
   }
+  // Arricchisci articoli con dati statici (immagine e url) se mancanti
+  articles.forEach(a => {
+    const key = (a.titolo || '').toLowerCase();
+    const s = staticMap[key];
+    if (s) {
+      if (!a.immagine_copertina) a.immagine_copertina = s.img;
+      if (!a.url_statico) a.url_statico = s.url;
+    }
+  });
   function extractImg(a) {
     if (a.immagine_copertina) return resolveImageUrl(a.immagine_copertina);
     if (!a.contenuto) return '';
