@@ -2123,8 +2123,11 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 </div>
                 <div class="form-group form-full">
                   <label>Indirizzo per Mappa <span style="background:#27ae60;color:white;font-size:0.65rem;padding:2px 6px;border-radius:4px;margin-left:4px">📍 PUBBLICO</span></label>
-                  <input type="text" id="f_indirizzo_mappa" placeholder="es. Via Roma, Padova — indirizzo approssimativo per la mappa pubblica">
-                  <small style="color:var(--caffe2);font-size:0.7rem">📍 Visibile al pubblico — inserisci una via vicina (senza numero civico) per mostrare la posizione approssimativa sulla mappa</small>
+                  <div style="display:flex;gap:8px;align-items:center">
+                    <input type="text" id="f_indirizzo_mappa" placeholder="es. Via Roma, Padova — indirizzo approssimativo per la mappa pubblica" style="flex:1">
+                    <button type="button" id="btnGeneraVia" onclick="generaViaCasuale()" style="white-space:nowrap;padding:8px 14px;background:#27ae60;color:#fff;border:none;border-radius:6px;font-size:0.75rem;font-weight:600;cursor:pointer;font-family:Montserrat,sans-serif">🎲 Genera via</button>
+                  </div>
+                  <small style="color:var(--caffe2);font-size:0.7rem">📍 Visibile al pubblico — clicca "Genera via" per inserire automaticamente una via reale del comune (senza numero civico)</small>
                 </div>
 
                 <div class="section-divider">Caratteristiche</div>
@@ -4392,6 +4395,67 @@ function resetForm() {
   currentFotos = []; currentPlanimetrie = []; currentDocumenti = []; currentVtScenes = [];
   renderFotos(); renderPlanimetrie(); renderDocumenti(); renderVtScenes();
   showSection('nuovo');
+}
+
+// ══════════════════════════════════════
+// GENERA VIA CASUALE per indirizzo_mappa
+// ══════════════════════════════════════
+async function generaViaCasuale() {
+  const btn = document.getElementById('btnGeneraVia');
+  const comune = (document.getElementById('f_comune').value || 'Padova').trim();
+  if (!comune) { toast('Inserisci prima il Comune', 'error'); return; }
+
+  btn.disabled = true;
+  btn.textContent = '⏳ Cerco...';
+
+  try {
+    // Cerca vie reali nel comune tramite Nominatim (OpenStreetMap)
+    const query = encodeURIComponent(comune + ', Provincia di Padova, Italia');
+    const resp = await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + query);
+    const centro = await resp.json();
+    if (!centro || !centro.length) { toast('Comune non trovato: ' + comune, 'error'); return; }
+
+    const lat = parseFloat(centro[0].lat);
+    const lon = parseFloat(centro[0].lon);
+
+    // Cerca strade nel raggio del centro del comune (reverse geocoding con variazioni casuali)
+    const vie = [];
+    const tentativi = 8;
+    for (let i = 0; i < tentativi; i++) {
+      // Offset casuale: ~200-800m in direzione casuale
+      const angolo = Math.random() * 2 * Math.PI;
+      const raggio = 0.002 + Math.random() * 0.006; // ~200-800m in gradi
+      const rLat = lat + raggio * Math.sin(angolo);
+      const rLon = lon + raggio * Math.cos(angolo);
+
+      const r = await fetch('https://nominatim.openstreetmap.org/reverse?format=json&lat=' + rLat + '&lon=' + rLon + '&zoom=16&addressdetails=1');
+      const data = await r.json();
+      if (data && data.address && data.address.road) {
+        const via = data.address.road;
+        if (!vie.includes(via)) vie.push(via);
+      }
+      // Rispetta rate-limit Nominatim (1 req/sec)
+      await new Promise(r => setTimeout(r, 1100));
+    }
+
+    if (vie.length === 0) {
+      toast('Nessuna via trovata per ' + comune + '. Inseriscila manualmente.', 'error');
+      return;
+    }
+
+    // Scegli una via casuale tra quelle trovate
+    const viaScelta = vie[Math.floor(Math.random() * vie.length)];
+    const risultato = viaScelta + ', ' + comune;
+    document.getElementById('f_indirizzo_mappa').value = risultato;
+    toast('Via generata: ' + risultato, 'success');
+
+  } catch (e) {
+    console.error('Errore generazione via:', e);
+    toast('Errore nella ricerca. Riprova.', 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '🎲 Genera via';
+  }
 }
 
 function editImmobile(id) {
