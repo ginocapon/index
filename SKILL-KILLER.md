@@ -1,7 +1,7 @@
 # SKILL KILLER - Prompt Operativo per righettoimmobiliare.it
 ### (Il nome e' ironico, ma il contenuto e' serissimo)
 
-> **Versione:** 1.0 - 2 Marzo 2026
+> **Versione:** 1.1 - 4 Marzo 2026
 > **Ultimo aggiornamento Google verificato:** Marzo 2026
 > **Prossima verifica consigliata:** Aprile 2026
 
@@ -16,6 +16,7 @@ Prima di ogni sessione di lavoro sul sito, DEVI:
 - Fare una ricerca web per: `"Google Search updates [mese corrente] [anno corrente]"`
 - Fare una ricerca web per: `"Core Web Vitals updates [anno corrente]"`
 - Fare una ricerca web per: `"Google Search Console new features [anno corrente]"`
+- Fare una ricerca web per: `"GEO Generative Engine Optimization updates [anno corrente]"`
 - Confrontare i risultati con la sezione "STATO AGGIORNAMENTI GOOGLE" qui sotto
 - Se trovi novita', AGGIORNA questo file aggiungendo le nuove informazioni nella sezione apposita
 - Comunica all'utente cosa e' cambiato rispetto all'ultima volta
@@ -137,10 +138,12 @@ CNAME               - Dominio GitHub Pages
 2. **Rilevanza semantica** - Contenuto che risponde all'intento di ricerca
 3. **Core Web Vitals** - Performance come fattore decisivo a parita' di contenuto
 4. **Mobile-first** - Google indicizza prima la versione mobile
-5. **Dati strutturati** - Schema.org per rich snippets
-6. **Link interni** - Ogni pagina importante deve essere collegata internamente
-7. **HTTPS** - Obbligatorio
-8. **Contenuto originale** - Penalizzazione per clickbait e contenuti superficiali
+5. **Dati strutturati** - Schema.org per rich snippets + GeoCoordinates per local SEO
+6. **GEO (Generative Engine Optimization)** - Ottimizzazione per essere citati da AI (Gemini, ChatGPT, Perplexity)
+7. **AEO (Answer Engine Optimization)** - Ottimizzazione per featured snippets e risposte dirette
+8. **Link interni** - Ogni pagina importante deve essere collegata internamente
+9. **HTTPS** - Obbligatorio
+10. **Contenuto originale** - Penalizzazione per clickbait e contenuti superficiali
 
 ### Novita' Google Marzo 2026
 - **AI Analysis Tools** in Search Console - analisi con linguaggio naturale
@@ -149,6 +152,48 @@ CNAME               - Dominio GitHub Pages
 - **SVT e VSI** - Nuove metriche per stabilita' visiva
 - **Soglie INP piu' strette** - Google ha reso piu' severi i requisiti di interattivita'
 - Rimosso supporto per **practice problem** e **dataset structured data**
+
+### GEO — Generative Engine Optimization (NUOVO 2026)
+
+> **Cos'e':** Ottimizzazione dei contenuti per essere citati dalle AI generative
+> (Gemini, ChatGPT, Perplexity, Copilot). Dove il SEO punta ai click,
+> il GEO punta a essere **la fonte citata** nelle risposte AI.
+
+**Perche' e' critico per un'agenzia immobiliare locale:**
+- Il 35% delle ricerche nel 2026 passa per assistenti AI
+- Le AI con dati strutturati hanno **300% di accuratezza in piu'** nel citare un sito
+- Domande tipo "miglior agenzia immobiliare Padova" → le AI rispondono citando fonti strutturate
+
+**Regole GEO per ogni contenuto:**
+1. **Frasi dichiarative** nelle prime 2 righe di ogni sezione (le AI estraggono da li')
+2. **Dati numerici specifici** e verificabili (prezzi/mq, anni esperienza, N. immobili)
+3. **Formato:** Domanda H2 → Risposta diretta (40-60 parole) → Approfondimento
+4. **Liste, tabelle, definizioni chiare** — formato che le AI prediligono
+5. **Citare fonti ufficiali** (Agenzia Entrate, OMI, FIAIP) per aumentare la fiducia
+
+**Regole AEO (Answer Engine Optimization) per featured snippet:**
+1. **Risposta 40-60 parole** come primo paragrafo dopo ogni H2
+2. **Formato is-snippet:** "[Keyword] e' [definizione/risposta]"
+3. **Min 5 FAQ** in formato Q&A con Schema FAQPage
+4. **Tabelle comparative** per dati numerici (prezzi zone, confronti)
+
+### GeoCoordinates — Dati Geografici nello Schema Markup
+
+**Ogni pagina con schema LocalBusiness/RealEstateAgent DEVE includere:**
+```json
+"geo": {
+  "@type": "GeoCoordinates",
+  "latitude": 45.476956,
+  "longitude": 11.845762
+},
+"hasMap": "https://maps.google.com/?q=45.476956,11.845762"
+```
+
+**Perche':**
+- Essenziale per ricerche "vicino a me" / "near me" (in forte crescita)
+- Google Maps usa queste coordinate per posizionamento preciso
+- Senza `geo`, Google indovina la posizione dall'indirizzo — meno preciso
+- Le ricerche vocali (35% nel 2026) dipendono pesantemente da questi dati
 
 ### Checklist SEO per Ogni Pagina
 - [ ] Title tag unico (max 60 caratteri)
@@ -160,7 +205,17 @@ CNAME               - Dominio GitHub Pages
 - [ ] Open Graph tags per condivisione social
 - [ ] Canonical URL impostato
 - [ ] Dati strutturati Schema.org (LocalBusiness, RealEstateListing)
+- [ ] GeoCoordinates nello schema LocalBusiness/RealEstateAgent
 - [ ] Immagini ottimizzate (WebP + lazy loading)
+
+### Checklist GEO/AEO per Ogni Contenuto
+- [ ] Frasi dichiarative nelle prime 2 righe di ogni sezione
+- [ ] Dati numerici specifici e verificabili
+- [ ] Formato: Domanda H2 + Risposta diretta + Approfondimento
+- [ ] Liste, tabelle, definizioni chiare
+- [ ] Min 5 FAQ con Schema FAQPage
+- [ ] Risposta 40-60 parole come primo paragrafo per ogni H2
+- [ ] Citazioni fonti ufficiali (Agenzia Entrate, OMI, FIAIP)
 
 ### Routine di Monitoraggio
 - **Settimanale:** Controllare report performance in Search Console
@@ -199,6 +254,17 @@ CNAME               - Dominio GitHub Pages
 ---
 
 ## CHANGELOG AGGIORNAMENTI
+
+### v1.1 - 4 Marzo 2026 (GEO/AEO + GeoCoordinates)
+- Aggiunta sezione GEO (Generative Engine Optimization) con regole per ottimizzazione AI
+- Aggiunta sezione AEO (Answer Engine Optimization) per featured snippets
+- Aggiunta sezione GeoCoordinates con coordinate GPS azienda (45.476956, 11.845762)
+- Aggiunta checklist GEO/AEO per ogni contenuto
+- Aggiornata checklist SEO con voce GeoCoordinates
+- Aggiornati fattori di ranking con GEO e AEO (punti 6 e 7)
+- Aggiunta verifica GEO nella routine di aggiornamento obbligatoria
+- Aggiornato seo-content-generator.js con GeoCoordinates nello schema
+- Aggiornate tutte le pagine HTML con GeoCoordinates nello schema RealEstateAgent
 
 ### v1.0 - 2 Marzo 2026 (Creazione)
 - Creato prompt iniziale con stato aggiornamenti Google Marzo 2026
