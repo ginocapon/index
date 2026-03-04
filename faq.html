@@ -208,7 +208,7 @@ function searchFaq(){const q=document.getElementById('faq-search-input').value.t
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="js/nav-mobile.js" defer></script>
 <script src="js/config.js"></script>
-<script src="js/chatbot.js"></script>
+<script src="js/chatbot.js" defer></script>
 <script>
 // ══════════════════════════════════════════════════════════════
 // FAQ PAGE — Rendering dinamico da FAQ_DATA (single source of truth)
@@ -354,7 +354,25 @@ function searchFaq(){const q=document.getElementById('faq-search-input').value.t
     }
   }
 
-  renderFaqPage();
+  // Tenta il render: se FAQ_DATA non è ancora pronto (defer/network), riprova
+  function tryRender() {
+    if (window.RIGHETTO_FAQ_DATA) {
+      renderFaqPage();
+    } else {
+      // Riprova ogni 100ms fino a 3 secondi
+      var attempts = 0;
+      var timer = setInterval(function() {
+        attempts++;
+        if (window.RIGHETTO_FAQ_DATA) {
+          clearInterval(timer);
+          renderFaqPage();
+        } else if (attempts > 30) {
+          clearInterval(timer);
+        }
+      }, 100);
+    }
+  }
+  tryRender();
 })();
 </script>
 <script src="js/cookie-consent.js" defer></script>
