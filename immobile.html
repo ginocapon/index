@@ -16,6 +16,7 @@
   <meta name="description" id="page-desc" content="Immobile in vendita — Righetto Immobiliare Padova">
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
   <link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/cormorant-garamond-600.woff2" as="font" type="font/woff2" crossorigin>
@@ -940,14 +941,8 @@ function render(d) {
     document.getElementById('planimetriaBody').innerHTML = planHtml;
   }
 
-  // Mappa — usa indirizzo_mappa (pubblico) per geocoding automatico
-  if (d.indirizzo_mappa) {
-    const mapQuery = encodeURIComponent(d.indirizzo_mappa);
-    document.getElementById('mapEmbed').innerHTML = `<iframe src="https://maps.google.com/maps?q=${mapQuery}&z=15&output=embed" loading="lazy" allowfullscreen></iframe>`;
-  } else if (d.comune) {
-    document.getElementById('mapText').textContent = (d.comune || 'Padova');
-    document.getElementById('mapEmbed').innerHTML = `<iframe src="https://maps.google.com/maps?q=${encodeURIComponent((d.comune||'Padova')+', PD, Italia')}&z=13&output=embed" loading="lazy"></iframe>`;
-  }
+  // Mappa Leaflet — usa indirizzo_mappa (pubblico) per geocoding automatico
+  initPropertyMap(d);
 
   // Sidebar prezzo
   document.getElementById('sbPrice').textContent = fmt(d.prezzo);
@@ -1782,6 +1777,63 @@ function chatInfo() {
 function toggleChat() {
   chatOpen = !chatOpen;
   document.getElementById('chatPanel').classList.toggle('show', chatOpen);
+}
+
+async function initPropertyMap(d) {
+  const addr = d.indirizzo_mappa || (d.comune ? d.comune + ', PD, Italia' : 'Padova, PD, Italia');
+  const zoom = d.indirizzo_mappa ? 15 : 13;
+
+  // Carica Leaflet JS
+  if (!window.L) {
+    await new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      s.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
+      s.crossOrigin = '';
+      s.onload = resolve;
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  try {
+    const q = encodeURIComponent(addr + (addr.includes('Italia') ? '' : ', Italia'));
+    const resp = await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + q);
+    const results = await resp.json();
+
+    if (results && results.length > 0) {
+      const lat = parseFloat(results[0].lat);
+      const lon = parseFloat(results[0].lon);
+      const container = document.getElementById('mapEmbed');
+      container.innerHTML = '<div id="leaflet-map-single" style="width:100%;height:100%;min-height:300px"></div>';
+
+      const map = L.map('leaflet-map-single').setView([lat, lon], zoom);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
+        maxZoom: 19
+      }).addTo(map);
+
+      const codice = d.codice || '';
+      const icon = L.divIcon({
+        className: 'leaflet-marker-custom',
+        html: '<div style="background:#c0392b;width:18px;height:18px;border-radius:50%;border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4);position:relative"></div>'
+            + (codice ? '<div style="position:absolute;top:20px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:10px;font-weight:700;color:#2C4A6E;background:rgba(255,255,255,.9);padding:1px 5px;border-radius:3px;font-family:Montserrat,sans-serif;line-height:1.2;box-shadow:0 1px 3px rgba(0,0,0,.2)">' + codice + '</div>' : ''),
+        iconSize: [18, 36],
+        iconAnchor: [9, 9]
+      });
+
+      L.marker([lat, lon], { icon }).addTo(map);
+      setTimeout(() => map.invalidateSize(), 300);
+    } else {
+      // Fallback: Google Maps embed
+      const mapQuery = encodeURIComponent(addr);
+      document.getElementById('mapEmbed').innerHTML = '<iframe src="https://maps.google.com/maps?q=' + mapQuery + '&z=' + zoom + '&output=embed" loading="lazy" allowfullscreen style="width:100%;height:100%;border:none"></iframe>';
+    }
+  } catch(e) {
+    console.warn('Geocoding fallito, fallback Google Maps:', e);
+    const mapQuery = encodeURIComponent(addr);
+    document.getElementById('mapEmbed').innerHTML = '<iframe src="https://maps.google.com/maps?q=' + mapQuery + '&z=' + zoom + '&output=embed" loading="lazy" allowfullscreen style="width:100%;height:100%;border:none"></iframe>';
+  }
 }
 
 init().catch(function(err) {

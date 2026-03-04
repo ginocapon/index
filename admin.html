@@ -4614,6 +4614,7 @@ async function saveImmobile(e) {
     if (match) {
       const badCol = match[1];
       console.warn('Colonna non trovata, rimuovo:', badCol);
+      toast('Colonna "' + badCol + '" non presente nel database — il campo non verrà salvato. Aggiungi la colonna in Supabase.', 'error');
       delete currentPayload[badCol];
       attempts++;
     } else {
