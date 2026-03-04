@@ -2117,17 +2117,14 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <input type="text" id="f_comune" value="Padova" placeholder="Padova">
                 </div>
                 <div class="form-group form-full">
-                  <label>Indirizzo <span style="background:#e67e22;color:white;font-size:0.65rem;padding:2px 6px;border-radius:4px;margin-left:4px">🔒 SOLO OPERATORE</span></label>
+                  <label>Indirizzo reale <span style="background:#e67e22;color:white;font-size:0.65rem;padding:2px 6px;border-radius:4px;margin-left:4px">🔒 SOLO OPERATORE</span></label>
                   <input type="text" id="f_indirizzo" placeholder="es. Via Roma 12, Padova">
                   <small style="color:var(--caffe2);font-size:0.7rem">⚠️ Nascosto al pubblico — visibile solo nell'admin</small>
                 </div>
-                <div class="form-group">
-                  <label>Latitudine</label>
-                  <input type="number" id="f_lat" step="any" placeholder="es. 45.4064">
-                </div>
-                <div class="form-group">
-                  <label>Longitudine</label>
-                  <input type="number" id="f_lng" step="any" placeholder="es. 11.8768">
+                <div class="form-group form-full">
+                  <label>Indirizzo per Mappa <span style="background:#27ae60;color:white;font-size:0.65rem;padding:2px 6px;border-radius:4px;margin-left:4px">📍 PUBBLICO</span></label>
+                  <input type="text" id="f_indirizzo_mappa" placeholder="es. Via Roma, Padova — indirizzo approssimativo per la mappa pubblica">
+                  <small style="color:var(--caffe2);font-size:0.7rem">📍 Visibile al pubblico — inserisci una via vicina (senza numero civico) per mostrare la posizione approssimativa sulla mappa</small>
                 </div>
 
                 <div class="section-divider">Caratteristiche</div>
@@ -4406,7 +4403,7 @@ function editImmobile(id) {
 
   const fields = ['codice','titolo','tipo_operazione','categoria','tipologia','prezzo',
     'proprietario_id','proprietario_nome','proprietario_tel','proprietario_email',
-    'comune','indirizzo','lat','lng','superficie','locali','bagni','piano',
+    'comune','indirizzo','indirizzo_mappa','superficie','locali','bagni','piano',
     'piano_numero','tipo_contratto',
     'anno_costruzione','stato','classe_energetica','youtube_id','virtual_tour',
     'id_idealista','descrizione','note_interne',
@@ -4477,8 +4474,7 @@ async function saveImmobile(e) {
     proprietario_email: document.getElementById('f_proprietario_email').value.trim() || null,
     comune: document.getElementById('f_comune').value || 'Padova',
     indirizzo: document.getElementById('f_indirizzo').value || null,
-    lat: parseFloat(document.getElementById('f_lat').value) || null,
-    lng: parseFloat(document.getElementById('f_lng').value) || null,
+    indirizzo_mappa: document.getElementById('f_indirizzo_mappa').value || null,
     superficie: parseInt(document.getElementById('f_superficie').value) || null,
     locali: parseInt(document.getElementById('f_locali').value) || null,
     bagni: parseInt(document.getElementById('f_bagni').value) || null,

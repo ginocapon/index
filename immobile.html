@@ -824,6 +824,7 @@ function render(d) {
     },
     address: {
       '@type': 'PostalAddress',
+      streetAddress: d.indirizzo_mappa || '',
       addressLocality: comuneLabel,
       addressRegion: 'Veneto',
       addressCountry: 'IT'
@@ -872,6 +873,7 @@ function render(d) {
     ['Operazione', cap(d.tipo_operazione || '')],
     ['Tipo contratto', d.tipo_contratto ? cap(d.tipo_contratto) : '—'],
     ['Comune', d.comune || 'Padova'],
+    ['Zona', d.indirizzo_mappa || '—'],
     ['Piano', d.piano || '—'],
     ['Anno costruzione', d.anno_costruzione || '—'],
     ['Stato', cap(d.stato || d.stato_manutenzione || '—')],
@@ -938,14 +940,13 @@ function render(d) {
     document.getElementById('planimetriaBody').innerHTML = planHtml;
   }
 
-  // Mappa
-  if (d.lat && d.lng) {
-    document.getElementById('mapEmbed').innerHTML = `<iframe src="https://maps.google.com/maps?q=${d.lat},${d.lng}&z=15&output=embed" loading="lazy" allowfullscreen></iframe>`;
-  } else {
-    document.getElementById('mapText').textContent = (d.comune || 'Padova') + (d.indirizzo ? ' — ' + d.indirizzo.replace(/\d+/g,'') : '');
-    if (d.comune) {
-      document.getElementById('mapEmbed').innerHTML = `<iframe src="https://maps.google.com/maps?q=${encodeURIComponent((d.comune||'Padova')+', PD, Italia')}&z=13&output=embed" loading="lazy"></iframe>`;
-    }
+  // Mappa — usa indirizzo_mappa (pubblico) per geocoding automatico
+  if (d.indirizzo_mappa) {
+    const mapQuery = encodeURIComponent(d.indirizzo_mappa);
+    document.getElementById('mapEmbed').innerHTML = `<iframe src="https://maps.google.com/maps?q=${mapQuery}&z=15&output=embed" loading="lazy" allowfullscreen></iframe>`;
+  } else if (d.comune) {
+    document.getElementById('mapText').textContent = (d.comune || 'Padova');
+    document.getElementById('mapEmbed').innerHTML = `<iframe src="https://maps.google.com/maps?q=${encodeURIComponent((d.comune||'Padova')+', PD, Italia')}&z=13&output=embed" loading="lazy"></iframe>`;
   }
 
   // Sidebar prezzo
