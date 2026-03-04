@@ -1,7 +1,7 @@
 # SKILL KILLER - Prompt Operativo per righettoimmobiliare.it
 ### (Il nome e' ironico, ma il contenuto e' serissimo)
 
-> **Versione:** 1.1 - 4 Marzo 2026
+> **Versione:** 1.2 - 4 Marzo 2026
 > **Ultimo aggiornamento Google verificato:** Marzo 2026
 > **Prossima verifica consigliata:** Aprile 2026
 
@@ -17,6 +17,7 @@ Prima di ogni sessione di lavoro sul sito, DEVI:
 - Fare una ricerca web per: `"Core Web Vitals updates [anno corrente]"`
 - Fare una ricerca web per: `"Google Search Console new features [anno corrente]"`
 - Fare una ricerca web per: `"GEO Generative Engine Optimization updates [anno corrente]"`
+- Fare una ricerca web per: `"Core Web Vitals LCP CLS best practices [anno corrente]"`
 - Confrontare i risultati con la sezione "STATO AGGIORNAMENTI GOOGLE" qui sotto
 - Se trovi novita', AGGIORNA questo file aggiungendo le nuove informazioni nella sezione apposita
 - Comunica all'utente cosa e' cambiato rispetto all'ultima volta
@@ -195,6 +196,67 @@ CNAME               - Dominio GitHub Pages
 - Senza `geo`, Google indovina la posizione dall'indirizzo — meno preciso
 - Le ricerche vocali (35% nel 2026) dipendono pesantemente da questi dati
 
+### Visual Saliency — Regole Performance Above-the-Fold
+
+> **Cos'e':** La salienza visiva determina cosa cattura l'occhio dell'utente nei primi
+> 50-500 millisecondi. Il 57% del tempo di visualizzazione resta above the fold.
+> Google misura questa esperienza tramite Core Web Vitals (LCP, CLS, INP).
+
+**Regole obbligatorie per ogni pagina:**
+
+1. **LCP Element (hero image/headline)**
+   - L'immagine hero DEVE essere preloaded nel `<head>`: `<link rel="preload" href="..." as="image">`
+   - MAI `loading="lazy"` su elementi above-the-fold
+   - Formato WebP obbligatorio per immagini locali
+   - Il path del preload DEVE corrispondere al path effettivo nell'HTML
+   - Animazioni sull'elemento LCP: partire in pausa, avviare dopo il primo render
+
+2. **Font Loading**
+   - Preload obbligatorio per i font usati above-the-fold:
+     ```html
+     <link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+     <link rel="preload" href="fonts/cormorant-garamond-600.woff2" as="font" type="font/woff2" crossorigin>
+     ```
+   - `font-display: swap` su tutti i `@font-face`
+   - Self-hosted WOFF2 (no Google Fonts esterni = GDPR + velocita')
+
+3. **CLS (Layout Shift) Prevention**
+   - TUTTE le immagini DEVONO avere `width` E `height` espliciti
+   - Immagini caricate via JS: aggiungere `width`, `height` e `style="aspect-ratio:..."`
+   - Navbar fissa: usare `height` con CSS variable (`var(--nav-h)`)
+   - Mai caricare contenuto asincrono above-the-fold senza placeholder dimensionato
+
+4. **CTA Above-the-Fold**
+   - UN solo CTA primario per hero section (Hick's Law: troppe scelte = paralisi)
+   - Contrast ratio minimo **4.5:1** (WCAG AA) — meglio **7:1** (WCAG AAA)
+   - Il nostro standard: **oro solido `var(--oro)` con testo `var(--nero)`** = 5.2:1
+   - MAI usare glass morphism (bianco su bianco) per CTA primarie
+   - Hover: feedback visivo chiaro (`translateY(-2px)` + box-shadow)
+
+5. **Critical CSS**
+   - CSS per hero/nav/above-fold: inline nel `<style>` del `<head>`
+   - CSS per contenuto below-fold: caricare via `<link rel="stylesheet">`
+   - Mai caricare l'intero CSS inline se supera 50KB
+
+**Palette colori approvata per CTA (contrast-safe):**
+| Elemento | Background | Testo | Ratio |
+|----------|-----------|-------|-------|
+| CTA primario | `var(--oro)` #B8D44A | `var(--nero)` #0A0F1C | 5.2:1 ✓ |
+| CTA secondario | `var(--blu)` #2C4A6E | `white` | ~5:1 ✓ |
+| CTA landing | `var(--fire)` arancione | `white` | ~4.5:1 ✓ |
+| CTA valutazione | `var(--purple)` #6C63FF | `white` | ~4.5:1 ✓ |
+| CTA landing-agente | `var(--mint)` #00E5A0 | `var(--nero)` | ~5.5:1 ✓ |
+
+### Checklist Visual Saliency per Ogni Pagina
+- [ ] Hero image preloaded nel `<head>`
+- [ ] Font above-fold preloaded (Montserrat 400 + Cormorant 600)
+- [ ] Nessun `loading="lazy"` su elementi above-the-fold
+- [ ] Tutte le immagini con `width` + `height` espliciti
+- [ ] CTA primario con contrast ratio >= 4.5:1
+- [ ] Un solo CTA primario nel hero (no doppi bottoni)
+- [ ] Animazioni hero: partono dopo il primo render
+- [ ] Critical CSS inline, rest deferred
+
 ### Checklist SEO per Ogni Pagina
 - [ ] Title tag unico (max 60 caratteri)
 - [ ] Meta description unica (max 160 caratteri)
@@ -238,6 +300,8 @@ CNAME               - Dominio GitHub Pages
 8. **Controlla** Core Web Vitals dopo modifiche significative
 9. **Aggiorna** sitemap.xml quando aggiungi/rimuovi pagine
 10. **Verifica** che tutte le pagine abbiano meta tag SEO completi
+11. **Visual Saliency** — ogni pagina nuova DEVE seguire le regole above-the-fold (preload, contrast, CLS)
+12. **Performance** — mai introdurre animazioni sull'elemento LCP senza `animation-play-state: paused`
 
 ### Quando lavori sulle email/cPanel:
 1. **NON eliminare** mai account email senza conferma esplicita
@@ -254,6 +318,16 @@ CNAME               - Dominio GitHub Pages
 ---
 
 ## CHANGELOG AGGIORNAMENTI
+
+### v1.2 - 4 Marzo 2026 (Visual Saliency + Performance Rules)
+- Aggiunta sezione completa "Visual Saliency — Regole Performance Above-the-Fold"
+- Regole LCP: preload obbligatorio hero image + font, no lazy above-fold
+- Regole CLS: width+height obbligatori su tutte le immagini
+- Regole CTA: contrast ratio minimo 4.5:1, palette colori approvata
+- Regole Critical CSS: inline above-fold, defer below-fold
+- Aggiunta checklist Visual Saliency per ogni pagina
+- Aggiunta verifica Core Web Vitals nella routine obbligatoria
+- Fix applicati: CTA oro su index.html, preload corretti, slowZoom pausata
 
 ### v1.1 - 4 Marzo 2026 (GEO/AEO + GeoCoordinates)
 - Aggiunta sezione GEO (Generative Engine Optimization) con regole per ottimizzazione AI
