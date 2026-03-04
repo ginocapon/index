@@ -2480,25 +2480,35 @@ function generateSlug(titolo) {
     'comprare casa a padova nel 2026: guida definitiva passo dopo passo': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-comprare-casa-padova-guida-2026.html' },
     'quanto costa vendere casa a padova nel 2026? costi, tasse e tempi reali': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-costi-vendere-casa-padova-2026.html' }
   };
+  // Articoli statici (sempre presenti)
+  const articoliStatici = [
+    { titolo: 'Comprare Casa a Padova nel 2026: Guida Definitiva Passo dopo Passo', categoria: 'Consigli acquisto', data: '2026-03-04', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-comprare-casa-padova-guida-2026.html' },
+    { titolo: 'Quanto Costa Vendere Casa a Padova nel 2026? Costi, Tasse e Tempi Reali', categoria: 'Guida alla vendita', data: '2026-03-04', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-costi-vendere-casa-padova-2026.html' },
+    { titolo: "L'impegno quotidiano di un'agenzia immobiliare: tra burocrazia e incertezza mutui", categoria: "Vita d'Agenzia", data: '2026-03-03', stato: 'pubblicato', immagine_copertina: 'img/blog/ufficio-righetto-immobiliare.webp', url_statico: 'blog-impegno-quotidiano-agenzia-immobiliare.html' },
+    { titolo: 'Appartamento Nuova Costruzione Limena: 101 mq con Giardino 310 mq in Classe A4', categoria: 'Nuove Costruzioni', data: '2026-03-03', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-appartamento-nuova-costruzione-limena.html' },
+    { titolo: 'Guida ai Quartieri di Padova: Dove Comprare Casa nel 2026', categoria: 'Mercato locale', data: '2026-03-02', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-quartieri-padova-2026.html' },
+    { titolo: 'Affitto Studenti Padova 2026: Zone, Prezzi e Guida Completa', categoria: 'Affitti', data: '2026-03-02', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/contratti-di-locazione-padova.webp', url_statico: 'blog-affitto-studenti-padova.html' },
+    { titolo: 'Mercato Immobiliare Padova 2026: Prezzi, Tendenze e Previsioni', categoria: 'Mercato locale', data: '2026-03-02', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-mercato-immobiliare-padova-2026.html' },
+    { titolo: 'Conviene comprare casa a Padova o restare in affitto? Analisi su 20 anni', categoria: 'Consigli acquisto', data: '2026-03-02', stato: 'pubblicato', immagine_copertina: 'img/blog/comprare-affittare-padova.webp', url_statico: 'blog-comprare-affittare-padova.html' },
+    { titolo: 'Case in Vendita Padova 2026: Prezzi, Zone Migliori e Guida Completa', categoria: 'Mercato locale', data: '2026-03-01', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-case-vendita-padova.html' }
+  ];
+  // Carica da Supabase e merge con statici
   let articles = [];
   try {
     if (sb) {
-      const { data, error } = await sb.from('blog').select('*').eq('stato','pubblicato').order('data',{ascending:false}).limit(3);
+      const { data, error } = await sb.from('blog').select('*').eq('stato','pubblicato').order('data',{ascending:false});
       if (!error && data) articles = data;
     }
   } catch(e) {}
   if (!articles.length) {
-    try { articles = JSON.parse(localStorage.getItem('rig_blog_articles')||'[]').filter(a=>a.stato==='pubblicato').sort((a,b)=>new Date(b.data)-new Date(a.data)).slice(0,3); } catch(e){}
+    try { articles = JSON.parse(localStorage.getItem('rig_blog_articles')||'[]').filter(a=>a.stato==='pubblicato'); } catch(e) { articles = []; }
   }
-  if (!articles.length) {
-    // Fallback: mostra i 3 articoli statici piu' recenti
-    articles = [
-      { titolo: 'Comprare Casa a Padova nel 2026: Guida Definitiva Passo dopo Passo', categoria: 'Consigli acquisto', data: '2026-03-04', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-comprare-casa-padova-guida-2026.html' },
-      { titolo: 'Quanto Costa Vendere Casa a Padova nel 2026? Costi, Tasse e Tempi Reali', categoria: 'Guida alla vendita', data: '2026-03-04', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-costi-vendere-casa-padova-2026.html' },
-      { titolo: "L'impegno quotidiano di un'agenzia immobiliare: tra burocrazia e incertezza mutui", categoria: "Vita d'Agenzia", data: '2026-03-03', stato: 'pubblicato', immagine_copertina: 'img/blog/ufficio-righetto-immobiliare.webp', url_statico: 'blog-impegno-quotidiano-agenzia-immobiliare.html' }
-    ];
-  }
-  // Arricchisci articoli con dati statici (immagine e url) se mancanti
+  // Merge: aggiungi statici non presenti in Supabase
+  const titoliEsistenti = new Set(articles.map(a => (a.titolo || '').toLowerCase()));
+  articoliStatici.forEach(s => {
+    if (!titoliEsistenti.has(s.titolo.toLowerCase())) articles.push(s);
+  });
+  // Arricchisci con immagini/url statici se mancanti
   articles.forEach(a => {
     const key = (a.titolo || '').toLowerCase();
     const s = staticMap[key];
@@ -2507,6 +2517,9 @@ function generateSlug(titolo) {
       if (!a.url_statico) a.url_statico = s.url;
     }
   });
+  // Ordina per data e prendi i 3 piu' recenti
+  articles.sort((a,b) => new Date(b.data) - new Date(a.data));
+  articles = articles.slice(0, 3);
   function extractImg(a) {
     if (a.immagine_copertina) return resolveImageUrl(a.immagine_copertina);
     if (!a.contenuto) return '';
