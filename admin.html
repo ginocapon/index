@@ -1976,7 +1976,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
       </button>
       <div class="topbar-title" id="topbarTitle">Gestione Immobili</div>
       <div class="topbar-actions">
-        <a href="immobili.html" target="_blank" class="btn btn-secondary btn-sm">
+        <a href="immobili" target="_blank" class="btn btn-secondary btn-sm">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           Vedi sito
         </a>
@@ -4331,7 +4331,7 @@ function renderTable(data) {
           <button class="btn btn-danger btn-sm" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')">🗑️</button>
           <button class="btn btn-sm" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="Toggle evidenza" style="background:var(--sfondo)">⭐</button>
           <button class="btn btn-sm" onclick="toggleAttivo('${i.id}',${!i.attivo})" title="Toggle attivo" style="background:var(--sfondo)">${i.attivo ? '👁️' : '🚫'}</button>
-          <a href="immobile.html?s=${encodeURIComponent(generatePropertySlug(i))}" target="_blank" class="btn btn-sm" title="Anteprima scheda" style="background:#e8f5e9;color:#27ae60;text-decoration:none">🔍</a>
+          <a href="immobile?s=${encodeURIComponent(generatePropertySlug(i))}" target="_blank" class="btn btn-sm" title="Anteprima scheda" style="background:#e8f5e9;color:#27ae60;text-decoration:none">🔍</a>
         </div>
       </td>
     </tr>`;
@@ -4774,7 +4774,7 @@ async function loadLandingList() {
         : p.stato === 'programmata' ? '<span class="badge badge-oro">Programmata</span>'
         : '<span class="badge" style="background:var(--caffe3);color:#fff">Bozza</span>';
       const dataPub = p.data_pubblicazione ? formatDateTime(p.data_pubblicazione) : '—';
-      const urlFile = p.url || (p.slug ? p.slug + '.html' : '—');
+      const urlFile = p.url || (p.slug ? p.slug : '—');
       return `<tr>
         <td><input type="checkbox" class="landing-check" value="${p.id}"></td>
         <td><strong style="font-size:0.88rem">${esc(p.titolo)}</strong>${p.descrizione ? '<br><span style="font-size:0.72rem;color:var(--caffe2)">' + esc(p.descrizione).substring(0, 80) + '</span>' : ''}</td>
@@ -4890,7 +4890,7 @@ async function saveLandingPage() {
     titolo,
     slug,
     categoria: document.getElementById('l_categoria').value,
-    url: document.getElementById('l_url').value.trim() || slug + '.html',
+    url: document.getElementById('l_url').value.trim() || slug,
     data_pubblicazione: document.getElementById('l_data_pub').value ? new Date(document.getElementById('l_data_pub').value).toISOString() : null,
     data_fine: document.getElementById('l_data_fine').value ? new Date(document.getElementById('l_data_fine').value).toISOString() : null,
     descrizione: document.getElementById('l_descrizione').value.trim(),
