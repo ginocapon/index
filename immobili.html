@@ -786,6 +786,7 @@
         mansarda: !!i.mansarda,
         taverna: !!i.taverna,
         vistaAperta: !!(i.panorama && i.panorama.toLowerCase().includes('aperta')),
+        indirizzo_mappa: i.indirizzo_mappa || '',
         _raw: i
       }));
       renderCards();
@@ -839,7 +840,7 @@
         + '<div class="card-body">'
         + '<div class="card-price">'+prezzoFmt+'</div>'
         + '<div class="card-title">'+i.titolo+'</div>'
-        + '<div class="card-location">'+SVG_LOC+i.comune+', Padova</div>'
+        + '<div class="card-location">'+SVG_LOC+(i.indirizzo_mappa || i.comune+', Padova')+'</div>'
         + '<div class="card-specs">'+specs+'</div>'
         + '</div>'
         + '<div class="card-footer">'
@@ -868,9 +869,22 @@
   }
 
   // ── MAPPA ──
+  let mapLoaded = false;
   function toggleMap() {
     const p = document.getElementById('map-panel');
     p.classList.toggle('open');
+    if (!mapLoaded && p.classList.contains('open')) {
+      mapLoaded = true;
+      // Mostra mappa centrata su Padova con gli immobili che hanno indirizzo_mappa
+      const withAddr = immobili.filter(i => i.indirizzo_mappa);
+      if (withAddr.length > 0) {
+        // Usa il primo indirizzo come centro della mappa
+        const q = encodeURIComponent(withAddr[0].indirizzo_mappa);
+        p.innerHTML = `<iframe src="https://maps.google.com/maps?q=${q}&z=13&output=embed" style="width:100%;height:100%;border:none" loading="lazy" allowfullscreen></iframe>`;
+      } else {
+        p.innerHTML = `<iframe src="https://maps.google.com/maps?q=${encodeURIComponent('Padova, PD, Italia')}&z=13&output=embed" style="width:100%;height:100%;border:none" loading="lazy" allowfullscreen></iframe>`;
+      }
+    }
   }
 
   // ── VISTA ──
