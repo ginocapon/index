@@ -114,20 +114,20 @@
 <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 <header>
   <div class="hi">
-    <a href="index.html" class="logo">Righetto <span>Immobiliare</span></a>
-    <nav><a href="index.html">Home</a><a href="immobili.html">Immobili</a><a href="servizi.html">Servizi</a><a href="chi-siamo.html">Chi siamo</a><a href="blog.html" class="active">Blog</a><a href="contatti.html">Contatti</a><a href="faq.html">FAQ</a></nav>
-    <div class="h-cta"><a class="h-tel" href="tel:+390498843484">049.88.43.484</a><a class="h-btn" href="contatti.html">Valutazione gratuita</a></div>
+    <a href="/" class="logo">Righetto <span>Immobiliare</span></a>
+    <nav><a href="/">Home</a><a href="immobili">Immobili</a><a href="servizi">Servizi</a><a href="chi-siamo">Chi siamo</a><a href="blog" class="active">Blog</a><a href="contatti">Contatti</a><a href="faq">FAQ</a></nav>
+    <div class="h-cta"><a class="h-tel" href="tel:+390498843484">049.88.43.484</a><a class="h-btn" href="contatti">Valutazione gratuita</a></div>
   </div>
   <button class="nav-burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
 </header>
 <div class="nav-mobile" id="navMobile">
-  <a href="index.html">Home</a>
-  <a href="chi-siamo.html">Chi Siamo</a>
-  <a href="immobili.html">Immobili</a>
-  <a href="servizi.html">Servizi</a>
-  <a href="blog.html">Blog</a>
-  <a href="faq.html">FAQ</a>
-  <a href="contatti.html" class="nav-mobile-cta">Contattaci</a>
+  <a href="/">Home</a>
+  <a href="chi-siamo">Chi Siamo</a>
+  <a href="immobili">Immobili</a>
+  <a href="servizi">Servizi</a>
+  <a href="blog">Blog</a>
+  <a href="faq">FAQ</a>
+  <a href="contatti" class="nav-mobile-cta">Contattaci</a>
 </div>
 
 <main id="main-content">
@@ -141,9 +141,9 @@
   <div class="fi">
     <div class="fgrid">
       <div><div class="flogo">Righetto <span>Immobiliare</span></div><div class="finfo">Via Roma n.96 — 35010 Limena (PD)<br>Tel: 049.88.43.484 · Cell: 348 862 1888<br>info@righettoimmobiliare.it</div></div>
-      <div class="fcol"><div class="fh">Servizi</div><a href="servizi.html">Vendita</a><a href="servizi.html">Locazioni</a><a href="servizi.html">Preliminari</a></div>
-      <div class="fcol"><div class="fh">Immobili</div><a href="immobili.html?op=vendita">In vendita</a><a href="immobili.html?op=affitto">In affitto</a><div class="fh" style="margin-top:.8rem">Quartieri</div><a href="zona-centro-storico-padova.html">Centro Storico</a><a href="zona-arcella-padova.html">Arcella</a><a href="zona-universitaria-padova.html">Zona Universitaria</a><a href="zona-prato-della-valle-padova.html">Prato della Valle</a><a href="zona-sacra-famiglia-padova.html">Sacra Famiglia</a><a href="zona-forcellini-padova.html">Forcellini</a><a href="zona-guizza-padova.html">Guizza</a><a href="zona-voltabarozzo-padova.html">Voltabarozzo</a></div>
-      <div class="fcol"><div class="fh">Info</div><a href="chi-siamo.html">Chi siamo</a><a href="faq.html">FAQ</a><a href="contatti.html">Contatti</a><a href="privacy.html">Privacy</a><a href="cookie-policy.html">Cookie Policy</a><a href="#" data-cookie-prefs>Preferenze Cookie</a></div>
+      <div class="fcol"><div class="fh">Servizi</div><a href="servizi">Vendita</a><a href="servizi">Locazioni</a><a href="servizi">Preliminari</a></div>
+      <div class="fcol"><div class="fh">Immobili</div><a href="immobili?op=vendita">In vendita</a><a href="immobili?op=affitto">In affitto</a><div class="fh" style="margin-top:.8rem">Quartieri</div><a href="zona-centro-storico-padova">Centro Storico</a><a href="zona-arcella-padova">Arcella</a><a href="zona-universitaria-padova">Zona Universitaria</a><a href="zona-prato-della-valle-padova">Prato della Valle</a><a href="zona-sacra-famiglia-padova">Sacra Famiglia</a><a href="zona-forcellini-padova">Forcellini</a><a href="zona-guizza-padova">Guizza</a><a href="zona-voltabarozzo-padova">Voltabarozzo</a></div>
+      <div class="fcol"><div class="fh">Info</div><a href="chi-siamo">Chi siamo</a><a href="faq">FAQ</a><a href="contatti">Contatti</a><a href="privacy">Privacy</a><a href="cookie-policy">Cookie Policy</a><a href="#" data-cookie-prefs>Preferenze Cookie</a></div>
     </div>
     <div class="fbot"><span>© 2026 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
   </div>
@@ -171,7 +171,7 @@ function renderArticle(art, articles) {
   wrap.innerHTML = `
     <div class="art-hero">
       <div class="art-hero-inner">
-        <div class="breadcrumb"><a href="index.html">Home</a> / <a href="blog.html">Blog</a> / ${esc(art.titolo)}</div>
+        <div class="breadcrumb"><a href="/">Home</a> / <a href="blog">Blog</a> / ${esc(art.titolo)}</div>
         <span class="cat-badge">${esc(art.categoria)}</span>
         <h1>${esc(art.titolo)}</h1>
         <div class="art-hero-meta">
@@ -213,7 +213,7 @@ function renderArticle(art, articles) {
 }
 
 function showNotFound() {
-  document.getElementById('articleContent').innerHTML = '<div class="not-found"><div style="font-size:4rem;margin-bottom:1rem">&#128196;</div><h2>Articolo non trovato</h2><p style="color:var(--grigio);margin-top:.5rem">L\'articolo potrebbe essere stato rimosso o il link non è valido.</p><a href="blog.html" style="display:inline-block;margin-top:1.5rem;background:var(--oro);color:var(--nero);padding:.6rem 1.5rem;border-radius:8px;font-weight:600;font-size:.85rem">&larr; Torna al blog</a></div>';
+  document.getElementById('articleContent').innerHTML = '<div class="not-found"><div style="font-size:4rem;margin-bottom:1rem">&#128196;</div><h2>Articolo non trovato</h2><p style="color:var(--grigio);margin-top:.5rem">L\'articolo potrebbe essere stato rimosso o il link non è valido.</p><a href="blog" style="display:inline-block;margin-top:1.5rem;background:var(--oro);color:var(--nero);padding:.6rem 1.5rem;border-radius:8px;font-weight:600;font-size:.85rem">&larr; Torna al blog</a></div>';
 }
 
 function generateSlug(titolo) {
@@ -225,7 +225,7 @@ function generateSlug(titolo) {
   return s;
 }
 function artUrl(a) {
-  return 'blog-articolo.html?s=' + encodeURIComponent(generateSlug(a.titolo));
+  return 'blog-articolo?s=' + encodeURIComponent(generateSlug(a.titolo));
 }
 
 (async function() {
@@ -262,7 +262,7 @@ function artUrl(a) {
 
   // Aggiorna URL nel browser con slug SEO pulito (senza UUID)
   const correctSlug = generateSlug(art.titolo);
-  const cleanUrl = 'blog-articolo.html?s=' + encodeURIComponent(correctSlug);
+  const cleanUrl = 'blog-articolo?s=' + encodeURIComponent(correctSlug);
   if (location.search !== '?s=' + encodeURIComponent(correctSlug)) {
     history.replaceState(null, '', cleanUrl);
   }
