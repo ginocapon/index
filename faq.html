@@ -208,7 +208,7 @@ function searchFaq(){const q=document.getElementById('faq-search-input').value.t
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="js/nav-mobile.js" defer></script>
 <script src="js/config.js"></script>
-<script src="js/chatbot.js" defer></script>
+<script src="js/chatbot.js"></script>
 <script>
 // ══════════════════════════════════════════════════════════════
 // FAQ PAGE — Rendering dinamico da FAQ_DATA (single source of truth)
@@ -354,13 +354,7 @@ function searchFaq(){const q=document.getElementById('faq-search-input').value.t
     }
   }
 
-  // chatbot.js è defer → RIGHETTO_FAQ_DATA disponibile solo dopo il parsing
-  // DOMContentLoaded si attiva DOPO i defer scripts
-  if (window.RIGHETTO_FAQ_DATA) {
-    renderFaqPage();
-  } else {
-    document.addEventListener('DOMContentLoaded', renderFaqPage);
-  }
+  renderFaqPage();
 })();
 </script>
 <script src="js/cookie-consent.js" defer></script>
