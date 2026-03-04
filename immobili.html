@@ -916,12 +916,14 @@
           const lon = parseFloat(results[0].lon);
           bounds.push([lat, lon]);
 
-          // Pallino rosso con codice immobile
-          const codice = imm.codice || imm._raw?.codice || '';
+          // Pallino rosso con codice + tipologia immobile
+          const codice = imm.rif || imm._raw?.codice || '';
+          const tipologia = imm.tipo || imm._raw?.tipologia || '';
+          const markerLabel = [codice, tipologia].filter(Boolean).join(' — ');
           const icon = L.divIcon({
             className: 'leaflet-marker-custom',
             html: '<div style="background:#c0392b;width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4);position:relative"></div>'
-                + (codice ? '<div style="position:absolute;top:16px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:9px;font-weight:700;color:#2C4A6E;background:rgba(255,255,255,.85);padding:1px 4px;border-radius:3px;font-family:Montserrat,sans-serif;line-height:1.2;box-shadow:0 1px 2px rgba(0,0,0,.2)">' + codice + '</div>' : ''),
+                + (markerLabel ? '<div style="position:absolute;top:16px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:9px;font-weight:700;color:#2C4A6E;background:rgba(255,255,255,.85);padding:1px 4px;border-radius:3px;font-family:Montserrat,sans-serif;line-height:1.2;box-shadow:0 1px 2px rgba(0,0,0,.2)">' + markerLabel + '</div>' : ''),
             iconSize: [14, 30],
             iconAnchor: [7, 7]
           });

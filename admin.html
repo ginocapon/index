@@ -4600,7 +4600,8 @@ async function saveImmobile(e) {
   let error;
   let attempts = 0;
   let currentPayload = {...payload};
-  while (attempts < 20) {
+  const removedCols = [];
+  while (attempts < 30) {
     let res;
     if (id) {
       res = await sb.from('immobili').update(currentPayload).eq('id', id);
@@ -4614,12 +4615,15 @@ async function saveImmobile(e) {
     if (match) {
       const badCol = match[1];
       console.warn('Colonna non trovata, rimuovo:', badCol);
-      toast('Colonna "' + badCol + '" non presente nel database — il campo non verrà salvato. Aggiungi la colonna in Supabase.', 'error');
+      removedCols.push(badCol);
       delete currentPayload[badCol];
       attempts++;
     } else {
       break; // altro tipo di errore, esci
     }
+  }
+  if (removedCols.length > 0) {
+    console.warn('Colonne rimosse dal payload perché non presenti in Supabase:', removedCols.join(', '));
   }
 
   btn.disabled = false;
