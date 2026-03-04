@@ -148,6 +148,12 @@ function generateLocalBusinessSchema() {
       addressRegion: AZIENDA.provincia,
       addressCountry: 'IT'
     },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 45.476956,
+      longitude: 11.845762
+    },
+    hasMap: 'https://maps.google.com/?q=45.476956,11.845762',
     areaServed: AZIENDA.zona.map(z => ({
       '@type': 'City',
       name: z
