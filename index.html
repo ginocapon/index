@@ -2219,6 +2219,8 @@ function resolveImageUrl(url) {
   if (!url) return '';
   // Già URL completo
   if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) return url;
+  // Percorso locale (img/, css/, fonts/) → lascia così com'è
+  if (url.startsWith('img/') || url.startsWith('./') || url.startsWith('css/') || url.startsWith('fonts/')) return url;
   // Percorso relativo Supabase Storage → costruisci URL pubblico
   return SB_URL + '/storage/v1/object/public/' + url.replace(/^\/+/, '');
 }
