@@ -6589,13 +6589,13 @@ async function publishBlogToFacebook() {
     toast('Pubblicazione articolo su Facebook...', 'success');
     var res;
     if (cover) {
-      res = await fetch('https://graph.facebook.com/v21.0/' + pageId + '/photos', {
+      res = await fetch('https://graph.facebook.com/v22.0/' + pageId + '/photos', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: cover, caption: caption, access_token: token })
       });
     } else {
-      res = await fetch('https://graph.facebook.com/v21.0/' + pageId + '/feed', {
+      res = await fetch('https://graph.facebook.com/v22.0/' + pageId + '/feed', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: caption, link: link, access_token: token })
@@ -6626,7 +6626,7 @@ async function publishBlogToInstagram() {
 
   try {
     toast('Pubblicazione articolo su Instagram...', 'success');
-    var createRes = await fetch('https://graph.facebook.com/v21.0/' + igAccountId + '/media', {
+    var createRes = await fetch('https://graph.facebook.com/v22.0/' + igAccountId + '/media', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ image_url: cover, caption: caption, access_token: token })
@@ -6634,7 +6634,7 @@ async function publishBlogToInstagram() {
     var createData = await createRes.json();
     if (createData.error) { showBlogPublishResult('Errore: ' + createData.error.message, 'error'); return; }
 
-    var publishRes = await fetch('https://graph.facebook.com/v21.0/' + igAccountId + '/media_publish', {
+    var publishRes = await fetch('https://graph.facebook.com/v22.0/' + igAccountId + '/media_publish', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ creation_id: createData.id, access_token: token })
@@ -6686,7 +6686,7 @@ async function testFbConnection() {
   const token = document.getElementById('socialFbToken').value.trim() || localStorage.getItem('social_fb_token');
   if (!pageId || !token) { toast('Inserisci Page ID e Token', 'error'); return; }
   try {
-    const res = await fetch('https://graph.facebook.com/v21.0/' + pageId + '?fields=name,fan_count&access_token=' + token);
+    const res = await fetch('https://graph.facebook.com/v22.0/' + pageId + '?fields=name,fan_count&access_token=' + token);
     const data = await res.json();
     if (data.error) { toast('Errore: ' + data.error.message, 'error'); return; }
     toast('Connesso a: ' + data.name + ' (' + (data.fan_count || 0) + ' fan)', 'success');
@@ -6713,14 +6713,14 @@ async function publishToFacebook() {
     let res;
     if (foto) {
       // Post with photo
-      res = await fetch('https://graph.facebook.com/v21.0/' + pageId + '/photos', {
+      res = await fetch('https://graph.facebook.com/v22.0/' + pageId + '/photos', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: foto, caption: caption, access_token: token })
       });
     } else {
       // Text-only post
-      res = await fetch('https://graph.facebook.com/v21.0/' + pageId + '/feed', {
+      res = await fetch('https://graph.facebook.com/v22.0/' + pageId + '/feed', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: caption, access_token: token })
@@ -6746,7 +6746,7 @@ async function testIgConnection() {
   const token = document.getElementById('socialIgToken').value.trim() || localStorage.getItem('social_ig_token');
   if (!accountId || !token) { toast('Inserisci Account ID e Token', 'error'); return; }
   try {
-    const res = await fetch('https://graph.facebook.com/v21.0/' + accountId + '?fields=username,followers_count&access_token=' + token);
+    const res = await fetch('https://graph.facebook.com/v22.0/' + accountId + '?fields=username,followers_count&access_token=' + token);
     const data = await res.json();
     if (data.error) { toast('Errore: ' + data.error.message, 'error'); return; }
     toast('Connesso a: @' + data.username + ' (' + (data.followers_count || 0) + ' follower)', 'success');
@@ -6780,7 +6780,7 @@ async function publishToInstagram() {
       // Step 1: Create carousel items
       const itemIds = [];
       for (const photoUrl of allPhotos.slice(0, 10)) {
-        const itemRes = await fetch('https://graph.facebook.com/v21.0/' + accountId + '/media', {
+        const itemRes = await fetch('https://graph.facebook.com/v22.0/' + accountId + '/media', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ image_url: photoUrl, is_carousel_item: true, access_token: token })
@@ -6789,7 +6789,7 @@ async function publishToInstagram() {
         if (itemData.id) itemIds.push(itemData.id);
       }
       // Step 2: Create carousel container
-      const containerRes = await fetch('https://graph.facebook.com/v21.0/' + accountId + '/media', {
+      const containerRes = await fetch('https://graph.facebook.com/v22.0/' + accountId + '/media', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ media_type: 'CAROUSEL', children: itemIds, caption: caption, access_token: token })
@@ -6799,7 +6799,7 @@ async function publishToInstagram() {
 
       // Step 3: Publish
       await waitForIgMedia(container.id, token);
-      const pubRes = await fetch('https://graph.facebook.com/v21.0/' + accountId + '/media_publish', {
+      const pubRes = await fetch('https://graph.facebook.com/v22.0/' + accountId + '/media_publish', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ creation_id: container.id, access_token: token })
@@ -6811,7 +6811,7 @@ async function publishToInstagram() {
     } else {
       // SINGLE IMAGE POST
       // Step 1: Create media container
-      const containerRes = await fetch('https://graph.facebook.com/v21.0/' + accountId + '/media', {
+      const containerRes = await fetch('https://graph.facebook.com/v22.0/' + accountId + '/media', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ image_url: foto, caption: caption, access_token: token })
@@ -6821,7 +6821,7 @@ async function publishToInstagram() {
 
       // Step 2: Wait for processing and publish
       await waitForIgMedia(container.id, token);
-      const pubRes = await fetch('https://graph.facebook.com/v21.0/' + accountId + '/media_publish', {
+      const pubRes = await fetch('https://graph.facebook.com/v22.0/' + accountId + '/media_publish', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ creation_id: container.id, access_token: token })
@@ -6841,7 +6841,7 @@ async function waitForIgMedia(containerId, token) {
   for (let attempt = 0; attempt < 10; attempt++) {
     await new Promise(r => setTimeout(r, 3000));
     try {
-      const res = await fetch('https://graph.facebook.com/v21.0/' + containerId + '?fields=status_code&access_token=' + token);
+      const res = await fetch('https://graph.facebook.com/v22.0/' + containerId + '?fields=status_code&access_token=' + token);
       const data = await res.json();
       if (data.status_code === 'FINISHED') return;
       if (data.status_code === 'ERROR') throw new Error('Errore elaborazione media Instagram');
