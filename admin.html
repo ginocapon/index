@@ -3833,11 +3833,20 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               <em>Nessun destinatario caricato</em>
             </div>
             <div style="margin-top:8px;font-size:0.8rem;color:var(--caffe2)" id="emContatore">0 destinatari</div>
+            <div style="margin-top:10px;padding:10px 14px;background:#fff8e1;border:1px solid #ffe082;border-radius:8px;font-size:0.78rem;color:#6d4c00">
+              <strong>GDPR:</strong> Assicurati che i destinatari abbiano dato consenso al trattamento dati per marketing (Reg. UE 2016/679). Ogni email include link Privacy Policy e opzione di cancellazione iscrizione.
+            </div>
           </div>
 
           <!-- STEP 2: Componi Email -->
           <div style="margin-bottom:24px;padding:20px;background:#f8f6f3;border-radius:12px">
             <h4 style="margin-bottom:12px;color:var(--oro)">2. Componi Email</h4>
+            <div style="margin-bottom:12px">
+              <label style="font-size:0.85rem;color:var(--caffe2);margin-bottom:6px;display:block">Template predefiniti:</label>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn btn-secondary btn-sm" onclick="emLoadTemplate('offerta-luce')">Offerta Luce</button>
+              </div>
+            </div>
             <div class="form-group" style="margin-bottom:12px">
               <label>Oggetto</label>
               <input type="text" id="emOggetto" placeholder="Es: Nuovi immobili disponibili a Padova">
@@ -9852,6 +9861,29 @@ checkAuth();
     const nome = prompt('Nome (opzionale):') || '';
     emContatti.push({nome, email: email.trim()});
     emRenderList();
+  };
+
+  // Carica template predefinito
+  const EM_TEMPLATES = {
+    'offerta-luce': {
+      oggetto: 'Offerta Esclusiva Luce — Blocca il prezzo a 0,1378 €/kWh',
+      file: 'templates/email-offerta-luce.html'
+    }
+  };
+  window.emLoadTemplate = async function(name) {
+    const tpl = EM_TEMPLATES[name];
+    if (!tpl) return toast('Template non trovato','error');
+    try {
+      const resp = await fetch(tpl.file);
+      if (!resp.ok) throw new Error('File non trovato');
+      const html = await resp.text();
+      document.getElementById('emOggetto').value = tpl.oggetto;
+      document.getElementById('emCorpo').value = html;
+      document.getElementById('emUnsubscribe').checked = false;
+      toast('Template "' + name + '" caricato','success');
+    } catch(e) {
+      toast('Errore caricamento template: ' + e.message,'error');
+    }
   };
 
   function emRenderList() {
