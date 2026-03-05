@@ -3155,6 +3155,25 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <tbody id="clientiBody"></tbody>
           </table>
         </div>
+
+        <!-- ═══ GESTIONE GRUPPI CONTATTI ═══ -->
+        <div class="table-wrap" style="margin-top:20px">
+          <div class="table-head">
+            <div style="font-weight:600;font-size:0.9rem;">Gestione Gruppi Contatti</div>
+            <button class="btn btn-primary btn-sm" onclick="emToggleGruppiManager()">+ Nuovo Gruppo</button>
+          </div>
+          <div style="padding:16px">
+            <div id="emGruppiManager">
+              <div style="display:flex;gap:8px;margin-bottom:14px">
+                <input type="text" id="emNuovoGruppo" placeholder="Nome nuovo gruppo..." style="flex:1;padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.85rem">
+                <input type="color" id="emGruppoColore" value="#667eea" style="width:40px;height:36px;border:none;border-radius:6px;cursor:pointer">
+                <button class="btn btn-sm" onclick="emCreaGruppo()" style="background:#4CAF50;color:#fff;border:none;font-size:0.8rem;padding:8px 16px">+ Crea</button>
+              </div>
+              <div id="emListaGruppi" style="font-size:0.85rem"></div>
+              <p style="font-size:0.78rem;color:var(--caffe2);margin-top:10px;margin-bottom:0">I gruppi vengono salvati e puoi usarli nella sezione Email Marketing per selezionare i destinatari.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- MODAL CLIENTE -->
@@ -3841,69 +3860,52 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             </div>
           </div>
 
-          <!-- STEP 1: Destinatari & Gruppi -->
+          <!-- STEP 1: Destinatari -->
           <div style="margin-bottom:24px;padding:20px;background:#f8f6f3;border-radius:12px">
-            <h4 style="margin-bottom:12px;color:var(--oro)">1. Destinatari & Gruppi</h4>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
-              <button class="btn btn-secondary btn-sm" onclick="emLoadClienti()">Carica tutti i clienti</button>
-              <label class="btn btn-secondary btn-sm" style="cursor:pointer">
-                Importa CSV <input type="file" accept=".csv" onchange="emImportCSV(event)" style="display:none">
-              </label>
-              <button class="btn btn-secondary btn-sm" onclick="emAddManual()">+ Manuale</button>
-              <label class="btn btn-sm" style="cursor:pointer;background:#4CAF50;color:#fff;border:none">
-                Importa CSV in DB <input type="file" accept=".csv" onchange="emImportCSVtoSupabase(event)" style="display:none">
-              </label>
-              <button class="btn btn-sm" style="background:#e74c3c;color:#fff;border:none" onclick="emPulisciLista()">Pulisci (rimuovi bounce)</button>
-            </div>
+            <h4 style="margin-bottom:12px;color:var(--oro)">1. Destinatari</h4>
 
-            <!-- Gruppi di intento (predefiniti) -->
-            <div style="margin-bottom:12px;padding:12px;background:#fff;border:1px solid #e0d6c8;border-radius:8px">
-              <label style="font-size:0.85rem;font-weight:600;display:block;margin-bottom:8px;color:var(--caffe)">Filtra per gruppo:</label>
-              <div style="display:flex;gap:8px;flex-wrap:wrap" id="emGruppiBox">
-                <label style="display:flex;align-items:center;gap:4px;font-size:0.8rem;cursor:pointer;background:#f0f0f0;padding:4px 10px;border-radius:20px">
-                  <input type="checkbox" class="em-gruppo-check" value="tutti" checked onchange="emFiltraGruppo()"> Tutti
-                </label>
-                <label style="display:flex;align-items:center;gap:4px;font-size:0.8rem;cursor:pointer;background:#e3f2fd;padding:4px 10px;border-radius:20px">
-                  <input type="checkbox" class="em-gruppo-check" value="acquirente" onchange="emFiltraGruppo()"> Acquirenti
-                </label>
-                <label style="display:flex;align-items:center;gap:4px;font-size:0.8rem;cursor:pointer;background:#e8f5e9;padding:4px 10px;border-radius:20px">
-                  <input type="checkbox" class="em-gruppo-check" value="venditore" onchange="emFiltraGruppo()"> Venditori
-                </label>
-                <label style="display:flex;align-items:center;gap:4px;font-size:0.8rem;cursor:pointer;background:#fff3e0;padding:4px 10px;border-radius:20px">
-                  <input type="checkbox" class="em-gruppo-check" value="investitore" onchange="emFiltraGruppo()"> Investitori
-                </label>
-                <label style="display:flex;align-items:center;gap:4px;font-size:0.8rem;cursor:pointer;background:#fce4ec;padding:4px 10px;border-radius:20px">
-                  <input type="checkbox" class="em-gruppo-check" value="affittuario" onchange="emFiltraGruppo()"> Affittuari
-                </label>
-                <label style="display:flex;align-items:center;gap:4px;font-size:0.8rem;cursor:pointer;background:#f3e5f5;padding:4px 10px;border-radius:20px">
-                  <input type="checkbox" class="em-gruppo-check" value="azienda" onchange="emFiltraGruppo()"> Aziende
-                </label>
-                <label style="display:flex;align-items:center;gap:4px;font-size:0.8rem;cursor:pointer;background:#e0e0e0;padding:4px 10px;border-radius:20px">
-                  <input type="checkbox" class="em-gruppo-check" value="newsletter" onchange="emFiltraGruppo()"> Solo Newsletter
-                </label>
+            <!-- Seleziona gruppo o aggiungi singolo contatto -->
+            <div style="margin-bottom:12px;padding:14px;background:#fff;border:1px solid #e0d6c8;border-radius:8px">
+              <label style="font-size:0.85rem;font-weight:600;display:block;margin-bottom:10px;color:var(--caffe)">Seleziona destinatari:</label>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+                <button class="btn btn-secondary btn-sm" onclick="emLoadClienti()">Carica tutti i clienti</button>
+                <button class="btn btn-secondary btn-sm" onclick="emAddManual()">+ Aggiungi contatto</button>
+                <button class="btn btn-sm" style="background:#e74c3c;color:#fff;border:none" onclick="emPulisciLista()">Pulisci lista</button>
               </div>
-              <!-- Gruppi personalizzati -->
-              <div id="emGruppiPersonalizzati" style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"></div>
-            </div>
 
-            <!-- Gestione Gruppi (stile Brevo) -->
-            <div style="margin-bottom:12px;padding:12px;background:#e8eaf6;border:1px solid #9fa8da;border-radius:8px">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-                <label style="font-size:0.85rem;font-weight:600;color:#283593">Gestione Gruppi (stile Brevo)</label>
-                <button class="btn btn-sm" onclick="emToggleGruppiManager()" style="background:#3f51b5;color:#fff;border:none;font-size:0.75rem">Gestisci gruppi</button>
-              </div>
-              <div id="emGruppiManager" style="display:none">
-                <div style="display:flex;gap:8px;margin-bottom:10px">
-                  <input type="text" id="emNuovoGruppo" placeholder="Nome nuovo gruppo..." style="flex:1;padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-size:0.8rem">
-                  <input type="color" id="emGruppoColore" value="#667eea" style="width:36px;height:30px;border:none;border-radius:4px;cursor:pointer">
-                  <button class="btn btn-sm" onclick="emCreaGruppo()" style="background:#4CAF50;color:#fff;border:none;font-size:0.75rem">+ Crea</button>
+              <!-- Selezione gruppi (creati nella sezione Contatti) -->
+              <div style="margin-bottom:10px">
+                <label style="font-size:0.82rem;font-weight:600;display:block;margin-bottom:6px;color:var(--caffe2)">Oppure seleziona un gruppo:</label>
+                <div style="display:flex;gap:8px;flex-wrap:wrap" id="emGruppiBox">
+                  <label style="display:flex;align-items:center;gap:4px;font-size:0.8rem;cursor:pointer;background:#f0f0f0;padding:4px 10px;border-radius:20px">
+                    <input type="checkbox" class="em-gruppo-check" value="tutti" checked onchange="emFiltraGruppo()"> Tutti
+                  </label>
+                  <label style="display:flex;align-items:center;gap:4px;font-size:0.8rem;cursor:pointer;background:#e3f2fd;padding:4px 10px;border-radius:20px">
+                    <input type="checkbox" class="em-gruppo-check" value="acquirente" onchange="emFiltraGruppo()"> Acquirenti
+                  </label>
+                  <label style="display:flex;align-items:center;gap:4px;font-size:0.8rem;cursor:pointer;background:#e8f5e9;padding:4px 10px;border-radius:20px">
+                    <input type="checkbox" class="em-gruppo-check" value="venditore" onchange="emFiltraGruppo()"> Venditori
+                  </label>
+                  <label style="display:flex;align-items:center;gap:4px;font-size:0.8rem;cursor:pointer;background:#fff3e0;padding:4px 10px;border-radius:20px">
+                    <input type="checkbox" class="em-gruppo-check" value="investitore" onchange="emFiltraGruppo()"> Investitori
+                  </label>
+                  <label style="display:flex;align-items:center;gap:4px;font-size:0.8rem;cursor:pointer;background:#fce4ec;padding:4px 10px;border-radius:20px">
+                    <input type="checkbox" class="em-gruppo-check" value="affittuario" onchange="emFiltraGruppo()"> Affittuari
+                  </label>
+                  <label style="display:flex;align-items:center;gap:4px;font-size:0.8rem;cursor:pointer;background:#f3e5f5;padding:4px 10px;border-radius:20px">
+                    <input type="checkbox" class="em-gruppo-check" value="azienda" onchange="emFiltraGruppo()"> Aziende
+                  </label>
+                  <label style="display:flex;align-items:center;gap:4px;font-size:0.8rem;cursor:pointer;background:#e0e0e0;padding:4px 10px;border-radius:20px">
+                    <input type="checkbox" class="em-gruppo-check" value="newsletter" onchange="emFiltraGruppo()"> Solo Newsletter
+                  </label>
                 </div>
-                <div id="emListaGruppi" style="max-height:150px;overflow-y:auto;font-size:0.8rem"></div>
-                <p style="font-size:0.72rem;color:#5c6bc0;margin-top:6px;margin-bottom:0">I gruppi vengono salvati e puoi usarli per programmare invii separati con orari diversi.</p>
+                <!-- Gruppi personalizzati (creati nella sezione Contatti) -->
+                <div id="emGruppiPersonalizzati" style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"></div>
               </div>
+              <p style="font-size:0.72rem;color:var(--caffe2);margin:0">Per creare nuovi gruppi, vai alla sezione <a href="#" onclick="showSection('sec-clienti');return false" style="color:#667eea;font-weight:600">Clienti</a>.</p>
             </div>
 
-            <!-- Storico invii per contatto -->
+            <!-- Storico invii per gruppo -->
             <div style="margin-bottom:12px">
               <button class="btn btn-secondary btn-sm" onclick="emMostraStorico()" style="font-size:0.75rem">Storico invii per gruppo</button>
               <div id="emStoricoGruppi" style="display:none;margin-top:8px;max-height:200px;overflow-y:auto;font-size:0.8rem;background:#fff;border:1px solid #e0d6c8;border-radius:8px;padding:10px"></div>
@@ -3989,17 +3991,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               <div style="padding:16px;background:#fff;border:1px solid #e0d6c8;border-radius:8px">
                 <p style="font-size:0.8rem;color:var(--caffe2);margin-bottom:12px">Crea la tua email senza scrivere codice — compila i campi e il sistema genera l'HTML professionale.</p>
 
-                <!-- Template rapido -->
-                <div style="margin-bottom:16px">
-                  <label style="font-size:0.85rem;font-weight:600;display:block;margin-bottom:6px">Template rapido:</label>
-                  <div style="display:flex;gap:6px;flex-wrap:wrap">
-                    <button class="btn btn-secondary btn-sm" onclick="emLoadTemplate('newsletter-normativa')" style="font-size:0.75rem">Newsletter Normativa</button>
-                    <button class="btn btn-secondary btn-sm" onclick="emLoadTemplate('nuovi-immobili')" style="font-size:0.75rem">Nuovi Immobili</button>
-                    <button class="btn btn-secondary btn-sm" onclick="emLoadTemplate('auguri')" style="font-size:0.75rem">Auguri</button>
-                    <button class="btn btn-secondary btn-sm" onclick="emLoadTemplate('offerta-luce')" style="font-size:0.75rem">Offerta Luce</button>
-                  </div>
-                </div>
-
                 <!-- Immagine header -->
                 <div class="form-group" style="margin-bottom:16px">
                   <label style="font-weight:600">Immagine header (opzionale)</label>
@@ -4081,7 +4072,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <button class="btn btn-secondary" onclick="emBuildVisualEmail()" style="flex:1">
                     Genera email dall'editor visuale
                   </button>
-                  <button class="btn btn-sm" onclick="emInsertProperty()" style="background:#1a1a2e;color:#fff;border:none;padding:8px 16px">
+                  <button class="btn btn-sm" onclick="emInsertProperty()" style="background:#667eea;color:#fff;border:none;padding:8px 16px">
                     + Inserisci immobile
                   </button>
                 </div>
@@ -4092,15 +4083,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <div id="emPanelCodice" style="display:none">
               <div style="padding:16px;background:#fff;border:1px solid #e0d6c8;border-radius:8px">
                 <p style="font-size:0.8rem;color:var(--caffe2);margin-bottom:12px">Inserisci direttamente codice HTML. Variabili: <code>{{nome}}</code> = nome cliente, <code>{{unsubscribe_link}}</code> = link disiscrizione.</p>
-                <div style="margin-bottom:12px">
-                  <label style="font-size:0.85rem;font-weight:600;display:block;margin-bottom:6px">Template predefiniti:</label>
-                  <div style="display:flex;gap:6px;flex-wrap:wrap">
-                    <button class="btn btn-secondary btn-sm" onclick="emLoadTemplate('newsletter-normativa')" style="font-size:0.75rem">Newsletter Normativa</button>
-                    <button class="btn btn-secondary btn-sm" onclick="emLoadTemplate('nuovi-immobili')" style="font-size:0.75rem">Nuovi Immobili</button>
-                    <button class="btn btn-secondary btn-sm" onclick="emLoadTemplate('auguri')" style="font-size:0.75rem">Auguri</button>
-                    <button class="btn btn-secondary btn-sm" onclick="emLoadTemplate('offerta-luce')" style="font-size:0.75rem">Offerta Luce</button>
-                  </div>
-                </div>
                 <!-- Inserisci foto nel codice HTML -->
                 <div style="margin-bottom:12px;padding:10px;background:#f8f6f3;border-radius:8px">
                   <label style="font-size:0.8rem;font-weight:600;display:block;margin-bottom:6px">Inserisci immagine nel corpo:</label>
@@ -4116,7 +4098,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <div class="form-group" style="margin-bottom:0">
                   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
                     <label style="margin:0">Corpo HTML</label>
-                    <button class="btn btn-sm" onclick="emInsertProperty()" style="background:#1a1a2e;color:#fff;border:none;font-size:0.75rem;padding:4px 12px">+ Inserisci immobile</button>
+                    <button class="btn btn-sm" onclick="emInsertProperty()" style="background:#667eea;color:#fff;border:none;font-size:0.75rem;padding:4px 12px">+ Inserisci immobile</button>
                   </div>
                   <textarea id="emCorpo" rows="16" style="font-family:monospace;font-size:0.85rem;background:#1a1a2e;color:#e0e0e0;border:none;border-radius:8px;padding:12px" placeholder="<html>&#10;<body>&#10;  <h1>Titolo</h1>&#10;  <p>Gentile {{nome}}, ...</p>&#10;</body>&#10;</html>"></textarea>
                 </div>
@@ -10729,9 +10711,9 @@ checkAuth();
   }
 
   window.emToggleGruppiManager = function() {
-    const mgr = document.getElementById('emGruppiManager');
-    mgr.style.display = mgr.style.display === 'none' ? 'block' : 'none';
-    if (mgr.style.display !== 'none') emLoadGruppi();
+    emLoadGruppi();
+    const input = document.getElementById('emNuovoGruppo');
+    if (input) input.focus();
   };
 
   window.emCreaGruppo = function() {
