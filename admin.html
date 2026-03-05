@@ -3828,6 +3828,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <input type="file" accept=".csv" onchange="emImportCSV(event)" style="display:none">
               </label>
               <button class="btn btn-secondary btn-sm" onclick="emAddManual()">+ Aggiungi manuale</button>
+              <label class="btn btn-sm" style="cursor:pointer;background:#4CAF50;color:#fff;border:none">
+                Importa CSV in Database
+                <input type="file" accept=".csv" onchange="emImportCSVtoSupabase(event)" style="display:none">
+              </label>
             </div>
             <div id="emDestinatari" style="max-height:200px;overflow-y:auto;font-size:0.85rem;color:var(--caffe2)">
               <em>Nessun destinatario caricato</em>
@@ -9854,6 +9858,142 @@ checkAuth();
       });
       emRenderList();
       toast(imported + ' contatti importati','success');
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  };
+
+  // Import CSV direttamente nella tabella clienti di Supabase
+  window.emImportCSVtoSupabase = async function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = async function(ev) {
+      const lines = ev.target.result.split('\n').filter(l => l.trim());
+      if (lines.length < 2) return toast('CSV vuoto','error');
+
+      // Rileva delimitatore
+      const firstLine = lines[0];
+      const delim = firstLine.includes('\t') ? '\t' : firstLine.includes(';') ? ';' : ',';
+
+      // Parse header
+      const headers = lines[0].split(delim).map(h => h.trim().replace(/^"|"$/g,'').toLowerCase());
+      const colIdx = {};
+      headers.forEach((h, i) => {
+        if (h.includes('cognome')) colIdx.cognome = i;
+        else if (h === 'nome') colIdx.nome = i;
+        else if (h.includes('ragione')) colIdx.ragione_sociale = i;
+        else if (h === 'email' || h === 'e-mail') colIdx.email = i;
+        else if (h.includes('pec')) colIdx.pec = i;
+        else if (h === 'telefono') colIdx.telefono = i;
+        else if (h === 'cellulare' || h === 'cell') colIdx.cellulare = i;
+        else if (h.includes('partita') || h === 'p.iva') colIdx.partita_iva = i;
+        else if (h.includes('fiscale')) colIdx.codice_fiscale = i;
+        else if (h === 'provincia') colIdx.provincia = i;
+        else if (h === 'comune') colIdx.comune = i;
+        else if (h === 'indirizzo') colIdx.indirizzo = i;
+        else if (h === 'civico') colIdx.civico = i;
+        else if (h === 'cap') colIdx.cap = i;
+        else if (h.includes('sdi')) colIdx.sdi = i;
+        else if (h === 'note') colIdx.note = i;
+      });
+
+      if (colIdx.email === undefined) return toast('Colonna "Email" non trovata nel CSV','error');
+
+      const cleanPhone = (val) => {
+        if (!val) return null;
+        val = val.trim();
+        if (/e\+/i.test(val)) {
+          try { return String(Math.round(parseFloat(val.replace(',','.')))) } catch(e) { return null }
+        }
+        const c = val.replace(/[^\d+]/g, '');
+        return c.length >= 6 ? c : null;
+      };
+
+      const cleanEmail = (val) => {
+        if (!val) return null;
+        val = val.trim().toLowerCase().replace(/\.+$/, '').replace('gmial.com','gmail.com');
+        return /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(val) ? val : null;
+      };
+
+      const get = (row, key) => (colIdx[key] !== undefined && row[colIdx[key]]) ? row[colIdx[key]].trim().replace(/^"|"$/g,'') : '';
+
+      const seenEmails = new Set();
+      const records = [];
+      const skipPatterns = ['@pec.', '@legalmail.', '@arubapec.', '@comune.', 'disdette@'];
+
+      for (let i = 1; i < lines.length; i++) {
+        const parts = lines[i].split(delim).map(p => p.trim().replace(/^"|"$/g,''));
+        const rawEmail = parts[colIdx.email] || '';
+        if (!rawEmail || rawEmail.toLowerCase() === 'email') continue;
+
+        const email = cleanEmail(rawEmail);
+        if (!email || seenEmails.has(email)) continue;
+        if (skipPatterns.some(p => email.includes(p))) continue;
+        seenEmails.add(email);
+
+        const cognome = get(parts, 'cognome');
+        const nome = get(parts, 'nome');
+        let fullName = (cognome + ' ' + nome).trim();
+        if (!fullName) fullName = email.split('@')[0].replace(/[._]/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+
+        const telefono = cleanPhone(get(parts, 'cellulare')) || cleanPhone(get(parts, 'telefono'));
+        const pec = cleanEmail(get(parts, 'pec'));
+        const note = get(parts, 'note').substring(0, 1000) || null;
+        const cf = get(parts, 'codice_fiscale');
+        const piva = get(parts, 'partita_iva');
+        const rs = get(parts, 'ragione_sociale');
+        const sdi = get(parts, 'sdi');
+        const indirizzo = [get(parts,'indirizzo'), get(parts,'civico')].filter(Boolean).join(', ');
+        const comune = get(parts, 'comune');
+        const provincia = get(parts, 'provincia');
+        const cap = get(parts, 'cap');
+        const addr = [indirizzo, cap, comune, provincia ? `(${provincia})` : ''].filter(Boolean).join(' ').trim();
+
+        const record = { nome: fullName, email, fonte: 'import_csv' };
+        if (telefono) record.telefono = telefono;
+        if (note) record.note = note;
+        if (cf && cf.length === 16) record.codice_fiscale = cf;
+        if (piva) record.partita_iva = piva;
+        if (rs) record.ragione_sociale = rs;
+        if (pec) record.pec = pec;
+        if (sdi) record.sdi = sdi;
+        if (addr) record.indirizzo_cliente = addr;
+        if (rs || piva) record.tipo_cliente = 'azienda';
+        records.push(record);
+      }
+
+      if (!records.length) return toast('Nessun contatto valido trovato','error');
+
+      if (!confirm(`Trovati ${records.length} contatti validi.\nCaricare nel database Supabase?`)) return;
+
+      // Upload in batch
+      const BATCH = 50;
+      let ok = 0, fail = 0;
+      toast(`Caricamento ${records.length} contatti...`, 'info');
+
+      for (let i = 0; i < records.length; i += BATCH) {
+        const batch = records.slice(i, i + BATCH);
+        try {
+          const { error } = await sb.from('clienti').upsert(batch, { onConflict: 'email', ignoreDuplicates: true });
+          if (error) throw error;
+          ok += batch.length;
+        } catch(err) {
+          // Prova uno a uno
+          for (const rec of batch) {
+            try {
+              const { error: e2 } = await sb.from('clienti').insert(rec);
+              if (!e2) ok++; else fail++;
+            } catch(e3) { fail++; }
+          }
+        }
+      }
+
+      toast(`Importazione completata: ${ok} caricati, ${fail} errori`, ok > 0 ? 'success' : 'error');
+
+      // Ricarica anche come destinatari email
+      emContatti = records.map(r => ({ nome: r.nome, email: r.email }));
+      emRenderList();
     };
     reader.readAsText(file);
     e.target.value = '';
