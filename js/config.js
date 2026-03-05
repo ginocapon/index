@@ -23,7 +23,7 @@ const SERVIZI_CONFIG = {
   // Poi Services → copia Service ID
   // Poi Email Templates → crea template marketing → copia Template ID
   // Variabili template: {{to_email}}, {{to_name}}, {{subject}}, {{message}}
-  EMAILJS_PUBLIC_KEY: '',
-  EMAILJS_SERVICE_ID: '',
+  EMAILJS_PUBLIC_KEY: 'n3XE6MEEie7ZxPw-z',
+  EMAILJS_SERVICE_ID: 'service_60lyfuu',
   EMAILJS_MARKETING_TEMPLATE_ID: ''
 };
