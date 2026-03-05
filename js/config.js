@@ -3,7 +3,7 @@
  *
  * Istruzioni:
  * 1. FORMSPREE: Registrati su https://formspree.io → Crea un form → Copia il Form ID
- * 2. BREVO: Registrati su https://brevo.com → Crea lista contatti → Crea form iscrizione
+ * 2. EMAILJS: Registrati su https://www.emailjs.com → Crea servizio email → Crea template
  */
 
 const SERVIZI_CONFIG = {
@@ -12,9 +12,13 @@ const SERVIZI_CONFIG = {
   // Vai su https://formspree.io → New Form → copia l'ID (es: "xrgjayzk")
   FORMSPREE_ID: 'IL_TUO_FORM_ID',
 
-  // ── BREVO (ex Sendinblue) ──────────────────────────────
-  // Newsletter per nuovi immobili e articoli del blog
-  // Vai su https://brevo.com → Contatti → Liste → Crea lista
-  // Poi: Contatti → Form → Crea form → copia l'URL di azione
-  BREVO_FORM_URL: ''
+  // ── EMAILJS (sostituto di Brevo) ───────────────────────
+  // 200 email/mese gratis — per notifiche e newsletter
+  // Vai su https://www.emailjs.com → Registrati gratis
+  // 1. Email Services → Add New Service (es. Gmail) → copia Service ID
+  // 2. Email Templates → Create New Template → copia Template ID
+  // 3. Account → copia la Public Key
+  EMAILJS_PUBLIC_KEY: '',
+  EMAILJS_SERVICE_ID: '',
+  EMAILJS_TEMPLATE_ID: ''
 };
