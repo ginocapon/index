@@ -3815,8 +3815,29 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
       <!-- ═══ SEZIONE EMAIL MARKETING ═══ -->
       <div class="section" id="sec-emailmarketing">
-        <div class="table-wrap" style="padding:28px;max-width:800px">
-          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:20px;">Email Marketing</h3>
+        <div class="table-wrap" style="padding:28px;max-width:900px">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:6px;">Email Marketing Pro</h3>
+          <p style="font-size:0.8rem;color:var(--caffe2);margin-bottom:20px">Powered by Brevo — Deliverability professionale con DKIM/SPF/DMARC</p>
+
+          <!-- DASHBOARD RAPIDA -->
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:24px">
+            <div style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:16px;border-radius:12px;text-align:center">
+              <div style="font-size:1.6rem;font-weight:700" id="emStatInviati">0</div>
+              <div style="font-size:0.75rem;opacity:0.9">Email inviate</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#2d7a3a,#4CAF50);color:#fff;padding:16px;border-radius:12px;text-align:center">
+              <div style="font-size:1.6rem;font-weight:700" id="emStatAperti">0%</div>
+              <div style="font-size:0.75rem;opacity:0.9">Tasso apertura</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#e67e22,#f39c12);color:#fff;padding:16px;border-radius:12px;text-align:center">
+              <div style="font-size:1.6rem;font-weight:700" id="emStatClick">0%</div>
+              <div style="font-size:0.75rem;opacity:0.9">Tasso click</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#c0392b,#e74c3c);color:#fff;padding:16px;border-radius:12px;text-align:center">
+              <div style="font-size:1.6rem;font-weight:700" id="emStatBounce">0</div>
+              <div style="font-size:0.75rem;opacity:0.9">Bounce/Unsub</div>
+            </div>
+          </div>
 
           <!-- STEP 1: Destinatari -->
           <div style="margin-bottom:24px;padding:20px;background:#f8f6f3;border-radius:12px">
@@ -3832,6 +3853,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 Importa CSV in Database
                 <input type="file" accept=".csv" onchange="emImportCSVtoSupabase(event)" style="display:none">
               </label>
+              <button class="btn btn-sm" style="background:#e74c3c;color:#fff;border:none" onclick="emPulisciLista()">Pulisci lista (rimuovi bounce/unsub)</button>
             </div>
             <div id="emDestinatari" style="max-height:200px;overflow-y:auto;font-size:0.85rem;color:var(--caffe2)">
               <em>Nessun destinatario caricato</em>
@@ -3849,54 +3871,136 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               <label style="font-size:0.85rem;color:var(--caffe2);margin-bottom:6px;display:block">Template predefiniti:</label>
               <div style="display:flex;gap:8px;flex-wrap:wrap">
                 <button class="btn btn-secondary btn-sm" onclick="emLoadTemplate('offerta-luce')">Offerta Luce</button>
+                <button class="btn btn-secondary btn-sm" onclick="emLoadTemplate('newsletter-normativa')">Newsletter Normativa</button>
+                <button class="btn btn-secondary btn-sm" onclick="emLoadTemplate('nuovi-immobili')">Nuovi Immobili</button>
+                <button class="btn btn-secondary btn-sm" onclick="emLoadTemplate('auguri')">Auguri / Festività</button>
               </div>
             </div>
             <div class="form-group" style="margin-bottom:12px">
-              <label>Oggetto</label>
-              <input type="text" id="emOggetto" placeholder="Es: Nuovi immobili disponibili a Padova">
+              <label>Mittente</label>
+              <select id="emMittente" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px">
+                <option value="info@righetto-immobiliare.it">info@righetto-immobiliare.it (Principale)</option>
+                <option value="newsletter@righetto-immobiliare.it">newsletter@righetto-immobiliare.it (Newsletter)</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:12px">
+              <label>Nome mittente</label>
+              <input type="text" id="emNomeMittente" value="Righetto Immobiliare" placeholder="Righetto Immobiliare">
+            </div>
+            <div class="form-group" style="margin-bottom:12px">
+              <label>Oggetto <span style="font-size:0.75rem;color:var(--caffe2)">(usa {{nome}} per personalizzare — max 60 caratteri consigliati)</span></label>
+              <input type="text" id="emOggetto" placeholder="Es: {{nome}}, nuove normative casa 2026 — cosa cambia per te" maxlength="100">
+              <div style="font-size:0.7rem;color:var(--caffe2);margin-top:4px">
+                <span id="emOggettoCount">0</span>/100 caratteri |
+                Anteprima: <span style="font-weight:600" id="emOggettoPreview">—</span>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:12px">
+              <label>Testo anteprima (preheader) <span style="font-size:0.75rem;color:var(--caffe2)">(visibile nell'inbox dopo l'oggetto)</span></label>
+              <input type="text" id="emPreheader" placeholder="Es: Scopri le novità che impattano il tuo immobile..." maxlength="120">
             </div>
             <div class="form-group" style="margin-bottom:12px">
               <label>Corpo email <span style="font-size:0.75rem;color:var(--caffe2)">(HTML supportato — usa {{nome}} per personalizzare)</span></label>
-              <textarea id="emCorpo" rows="10" placeholder="Gentile {{nome}},&#10;&#10;siamo lieti di presentarle le nostre ultime proposte immobiliari..."></textarea>
+              <textarea id="emCorpo" rows="12" placeholder="Gentile {{nome}},&#10;&#10;siamo lieti di presentarle le nostre ultime proposte immobiliari..."></textarea>
             </div>
             <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
               <label style="display:flex;align-items:center;gap:6px;font-size:0.85rem;cursor:pointer">
-                <input type="checkbox" id="emUnsubscribe" checked> Includi link "Cancellami" (anti-spam)
+                <input type="checkbox" id="emUnsubscribe" checked> Link "Cancellami" (obbligatorio)
               </label>
-              <div style="display:flex;align-items:center;gap:6px">
-                <label style="font-size:0.85rem">Delay tra email (sec):</label>
-                <input type="number" id="emDelay" value="3" min="1" max="30" style="width:60px">
+              <label style="display:flex;align-items:center;gap:6px;font-size:0.85rem;cursor:pointer">
+                <input type="checkbox" id="emTracking" checked> Traccia aperture e click
+              </label>
+            </div>
+
+            <!-- Anti-spam tips -->
+            <div style="margin-top:14px;padding:12px 14px;background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;font-size:0.78rem;color:#1b5e20">
+              <strong>Anti-Spam Tips (come Brevo):</strong>
+              <ul style="margin:6px 0 0 16px;padding:0">
+                <li>Brevo gestisce automaticamente DKIM, SPF e DMARC per massima deliverability</li>
+                <li>L'invio è graduale (warm-up) — le prime campagne vanno a batch piccoli</li>
+                <li>Bounce e disiscrizioni vengono rimossi automaticamente</li>
+                <li>Personalizza sempre con {{nome}} — le email generiche finiscono in spam</li>
+                <li>Usa oggetti brevi (&lt;60 car.) senza MAIUSCOLE o troppi punti esclamativi</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- STEP 2.5: Configurazione invio -->
+          <div style="margin-bottom:24px;padding:20px;background:#f8f6f3;border-radius:12px">
+            <h4 style="margin-bottom:12px;color:var(--oro)">2.5 Configurazione Invio</h4>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+              <div>
+                <label style="font-size:0.85rem;display:block;margin-bottom:6px">Modalità invio:</label>
+                <select id="emModalita" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px">
+                  <option value="graduale">Graduale (warm-up — consigliato)</option>
+                  <option value="batch">Batch (50/ora)</option>
+                  <option value="immediato">Immediato (tutte subito)</option>
+                </select>
               </div>
+              <div>
+                <label style="font-size:0.85rem;display:block;margin-bottom:6px">Delay tra email (sec):</label>
+                <input type="number" id="emDelay" value="5" min="1" max="60" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px">
+              </div>
+              <div>
+                <label style="font-size:0.85rem;display:block;margin-bottom:6px">Pianifica invio:</label>
+                <input type="datetime-local" id="emSchedule" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px">
+              </div>
+              <div>
+                <label style="font-size:0.85rem;display:block;margin-bottom:6px">Reply-To:</label>
+                <input type="email" id="emReplyTo" value="info@righetto-immobiliare.it" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px">
+              </div>
+            </div>
+            <div style="margin-top:12px;padding:10px;background:#e3f2fd;border:1px solid #90caf9;border-radius:8px;font-size:0.78rem;color:#0d47a1">
+              <strong>Warm-up consigliato:</strong> Settimana 1: max 50 email/giorno → Settimana 2: max 100 → Settimana 3: max 200 → Poi senza limiti. Questo costruisce la tua reputazione di invio.
             </div>
           </div>
 
           <!-- STEP 3: Anteprima & Invio -->
           <div style="margin-bottom:24px;padding:20px;background:#f8f6f3;border-radius:12px">
             <h4 style="margin-bottom:12px;color:var(--oro)">3. Anteprima & Invio</h4>
-            <div style="display:flex;gap:8px;margin-bottom:12px">
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
               <button class="btn btn-secondary btn-sm" onclick="emPreview()">Mostra anteprima</button>
               <button class="btn btn-secondary btn-sm" id="emBtnChiudi" onclick="emChiudiPreview()" style="display:none">Chiudi anteprima</button>
+              <button class="btn btn-sm" style="background:#667eea;color:#fff;border:none" onclick="emSendTest()">Invia email di PROVA</button>
             </div>
             <div id="emPreviewBox" style="display:none;border:1px solid #ddd;border-radius:8px;background:#fff;margin-bottom:12px;overflow:hidden">
               <iframe id="emPreviewFrame" style="width:100%;height:600px;border:none"></iframe>
             </div>
             <div style="display:flex;gap:8px;align-items:center">
-              <button class="btn btn-primary" id="emBtnInvia" onclick="emInvia()">Invia a tutti</button>
+              <button class="btn btn-primary" id="emBtnInvia" onclick="emInvia()" style="background:linear-gradient(135deg,#667eea,#764ba2);border:none;padding:12px 28px;font-size:1rem">Invia campagna</button>
               <button class="btn btn-danger btn-sm" id="emBtnStop" onclick="emStop()" style="display:none">Ferma invio</button>
             </div>
             <div id="emProgress" style="display:none;margin-top:12px">
-              <div style="background:#e0d6c8;border-radius:8px;height:20px;overflow:hidden">
-                <div id="emProgressBar" style="background:var(--oro);height:100%;width:0%;transition:width 0.3s;border-radius:8px"></div>
+              <div style="background:#e0d6c8;border-radius:8px;height:24px;overflow:hidden">
+                <div id="emProgressBar" style="background:linear-gradient(90deg,#667eea,#764ba2);height:100%;width:0%;transition:width 0.3s;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.7rem;font-weight:600" id="emProgressBarText"></div>
               </div>
               <div id="emProgressText" style="font-size:0.8rem;color:var(--caffe2);margin-top:4px">0 / 0</div>
             </div>
           </div>
 
-          <!-- STEP 4: Log -->
-          <div style="padding:20px;background:#f8f6f3;border-radius:12px">
-            <h4 style="margin-bottom:12px;color:var(--oro)">4. Log Invii</h4>
+          <!-- STEP 4: Log & Analytics -->
+          <div style="padding:20px;background:#f8f6f3;border-radius:12px;margin-bottom:24px">
+            <h4 style="margin-bottom:12px;color:var(--oro)">4. Log & Analytics</h4>
+            <div style="display:flex;gap:8px;margin-bottom:12px">
+              <button class="btn btn-secondary btn-sm" onclick="emLoadStats()">Aggiorna statistiche</button>
+              <button class="btn btn-secondary btn-sm" onclick="emLoadCampaignHistory()">Storico campagne</button>
+            </div>
+            <div id="emCampaignHistory" style="display:none;margin-bottom:12px;max-height:200px;overflow-y:auto;font-size:0.8rem"></div>
             <div id="emLog" style="max-height:250px;overflow-y:auto;font-size:0.8rem;font-family:monospace;color:var(--caffe2)">
               <em>Nessun invio effettuato</em>
+            </div>
+          </div>
+
+          <!-- STEP 5: Gestione Disiscrizioni -->
+          <div style="padding:20px;background:#f8f6f3;border-radius:12px">
+            <h4 style="margin-bottom:12px;color:var(--oro)">5. Gestione Disiscrizioni & Bounce</h4>
+            <div style="display:flex;gap:8px;margin-bottom:12px">
+              <button class="btn btn-secondary btn-sm" onclick="emLoadUnsubscribed()">Vedi disiscritti</button>
+              <button class="btn btn-secondary btn-sm" onclick="emLoadBounces()">Vedi bounce</button>
+              <button class="btn btn-sm" style="background:#e74c3c;color:#fff;border:none" onclick="emSyncBlacklist()">Sincronizza blacklist da Brevo</button>
+            </div>
+            <div id="emBlacklist" style="max-height:200px;overflow-y:auto;font-size:0.8rem;color:var(--caffe2)">
+              <em>Nessun dato</em>
             </div>
           </div>
         </div>
@@ -9805,13 +9909,13 @@ checkAuth();
 </div>
 <script src="js/cookie-consent.js"></script>
 
-<!-- EmailJS SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<!-- Email Marketing Pro — Nessuna dipendenza esterna -->
 <script>
-// ═══ EMAIL MARKETING ═══
+// ═══ EMAIL MARKETING PRO — Sistema proprietario come Brevo ═══
 (function(){
   let emContatti = [];
   let emStopped = false;
+  let emBlacklist = new Set();
 
   function escHtml(s) {
     const d = document.createElement('div');
@@ -9819,15 +9923,48 @@ checkAuth();
     return d.innerHTML;
   }
 
-  // Carica clienti da Supabase
+  // ── Carica blacklist all'avvio ──
+  async function loadBlacklist() {
+    try {
+      const {data} = await supabase.from('email_blacklist').select('email');
+      if (data) emBlacklist = new Set(data.map(d => d.email.toLowerCase()));
+    } catch(e) { /* tabella potrebbe non esistere ancora */ }
+  }
+  loadBlacklist();
+
+  // ── Contatore caratteri oggetto ──
+  document.addEventListener('DOMContentLoaded', () => {
+    const oggettoInput = document.getElementById('emOggetto');
+    if (oggettoInput) {
+      oggettoInput.addEventListener('input', () => {
+        const len = oggettoInput.value.length;
+        const countEl = document.getElementById('emOggettoCount');
+        const previewEl = document.getElementById('emOggettoPreview');
+        if (countEl) countEl.textContent = len;
+        if (previewEl) previewEl.textContent = oggettoInput.value.replace(/\{\{nome\}\}/gi, 'Mario Rossi') || '—';
+      });
+    }
+  });
+
+  // Carica clienti da Supabase (esclusi blacklist)
   window.emLoadClienti = async function() {
     try {
+      await loadBlacklist();
       const {data, error} = await supabase.from('clienti').select('nome, email').not('email','is',null).neq('email','');
       if (error) throw error;
       if (!data.length) return toast('Nessun cliente con email trovato','error');
-      emContatti = data.map(c => ({nome: c.nome || '', email: c.email.trim()})).filter(c => c.email);
+      emContatti = data
+        .map(c => ({nome: c.nome || '', email: c.email.trim().toLowerCase()}))
+        .filter(c => c.email && c.email.includes('@') && !emBlacklist.has(c.email));
+      // Deduplica per email
+      const seen = new Set();
+      emContatti = emContatti.filter(c => {
+        if (seen.has(c.email)) return false;
+        seen.add(c.email);
+        return true;
+      });
       emRenderList();
-      toast(emContatti.length + ' clienti caricati','success');
+      toast(emContatti.length + ' clienti caricati (esclusi disiscritti/bounce)','success');
     } catch(e) {
       toast('Errore caricamento: ' + e.message,'error');
     }
@@ -10008,24 +10145,149 @@ checkAuth();
     emRenderList();
   };
 
-  // Carica template predefinito
+  // ═══ TEMPLATE PREDEFINITI ═══
   const EM_TEMPLATES = {
     'offerta-luce': {
       oggetto: 'Offerta Esclusiva Luce — Blocca il prezzo a 0,1378 €/kWh',
       file: 'templates/email-offerta-luce.html'
+    },
+    'newsletter-normativa': {
+      oggetto: '{{nome}}, novità normative immobiliari — cosa cambia per te',
+      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
+<div style="max-width:620px;margin:0 auto;background:#ffffff">
+  <!-- Header -->
+  <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:30px;text-align:center">
+    <h1 style="color:#d4a843;margin:0;font-size:24px;letter-spacing:1px">RIGHETTO IMMOBILIARE</h1>
+    <p style="color:#ccc;margin:8px 0 0;font-size:13px">La tua fonte di informazione immobiliare</p>
+  </div>
+
+  <!-- Saluto personalizzato -->
+  <div style="padding:30px 30px 10px">
+    <p style="font-size:16px;color:#333">Gentile <strong>{{nome}}</strong>,</p>
+    <p style="font-size:15px;color:#555;line-height:1.7">ti scriviamo per tenerti aggiornato sulle ultime novità normative che possono impattare il tuo immobile e le tue finanze.</p>
+  </div>
+
+  <!-- Contenuto principale -->
+  <div style="padding:0 30px 20px">
+    <div style="background:#f8f6f0;border-left:4px solid #d4a843;padding:20px;border-radius:0 8px 8px 0;margin-bottom:20px">
+      <h3 style="color:#1a1a2e;margin:0 0 10px;font-size:17px">📋 Novità del mese</h3>
+      <p style="color:#555;font-size:14px;line-height:1.6;margin:0">
+        [Inserisci qui il contenuto della normativa o novità...]<br><br>
+        <strong>Cosa significa per te:</strong> [Spiega l'impatto pratico per il cliente]
+      </p>
+    </div>
+
+    <div style="background:#e8f5e9;border-left:4px solid #4CAF50;padding:20px;border-radius:0 8px 8px 0;margin-bottom:20px">
+      <h3 style="color:#1b5e20;margin:0 0 10px;font-size:17px">💡 Il consiglio di Righetto</h3>
+      <p style="color:#555;font-size:14px;line-height:1.6;margin:0">
+        [Inserisci il tuo consiglio professionale...]
+      </p>
+    </div>
+
+    <div style="text-align:center;padding:20px 0">
+      <a href="https://righetto-immobiliare.it/contatti.html" style="display:inline-block;background:#d4a843;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:15px;font-weight:bold">Prenota una consulenza gratuita</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="background:#1a1a2e;padding:24px 30px;text-align:center">
+    <p style="color:#d4a843;margin:0 0 8px;font-size:14px;font-weight:bold">Righetto Immobiliare</p>
+    <p style="color:#999;margin:0 0 4px;font-size:12px">Via Fratelli Cervi 37, 35129 Padova</p>
+    <p style="color:#999;margin:0 0 12px;font-size:12px">Tel: 049 7808 888 | info@righetto-immobiliare.it</p>
+    <p style="color:#666;font-size:11px;margin:0">{{unsubscribe_link}}</p>
+  </div>
+</div>
+</body></html>`
+    },
+    'nuovi-immobili': {
+      oggetto: '{{nome}}, nuove opportunità immobiliari a Padova',
+      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
+<div style="max-width:620px;margin:0 auto;background:#ffffff">
+  <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:30px;text-align:center">
+    <h1 style="color:#d4a843;margin:0;font-size:24px;letter-spacing:1px">RIGHETTO IMMOBILIARE</h1>
+    <p style="color:#ccc;margin:8px 0 0;font-size:13px">Nuove proposte selezionate per te</p>
+  </div>
+
+  <div style="padding:30px">
+    <p style="font-size:16px;color:#333">Gentile <strong>{{nome}}</strong>,</p>
+    <p style="font-size:15px;color:#555;line-height:1.7">abbiamo selezionato alcune proposte immobiliari che potrebbero interessarti nella zona di Padova e provincia.</p>
+
+    <!-- Immobile 1 -->
+    <div style="border:1px solid #e0d6c8;border-radius:12px;overflow:hidden;margin:20px 0">
+      <div style="background:#f8f6f0;padding:16px">
+        <h3 style="margin:0 0 8px;color:#1a1a2e;font-size:16px">🏠 [Titolo Immobile]</h3>
+        <p style="color:#555;font-size:14px;margin:0 0 8px">[Indirizzo] — [Zona]</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap">
+          <span style="background:#d4a843;color:#fff;padding:4px 12px;border-radius:20px;font-size:13px">€ [Prezzo]</span>
+          <span style="background:#e8e8e8;padding:4px 12px;border-radius:20px;font-size:13px">[mq] mq</span>
+          <span style="background:#e8e8e8;padding:4px 12px;border-radius:20px;font-size:13px">[N] locali</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:20px 0">
+      <a href="https://righetto-immobiliare.it/immobili.html" style="display:inline-block;background:#d4a843;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:15px;font-weight:bold">Vedi tutti gli immobili</a>
+    </div>
+  </div>
+
+  <div style="background:#1a1a2e;padding:24px 30px;text-align:center">
+    <p style="color:#d4a843;margin:0 0 8px;font-size:14px;font-weight:bold">Righetto Immobiliare</p>
+    <p style="color:#999;margin:0 0 4px;font-size:12px">Via Fratelli Cervi 37, 35129 Padova</p>
+    <p style="color:#999;margin:0 0 12px;font-size:12px">Tel: 049 7808 888 | info@righetto-immobiliare.it</p>
+    <p style="color:#666;font-size:11px;margin:0">{{unsubscribe_link}}</p>
+  </div>
+</div>
+</body></html>`
+    },
+    'auguri': {
+      oggetto: 'Auguri da Righetto Immobiliare, {{nome}}!',
+      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
+<div style="max-width:620px;margin:0 auto;background:#ffffff">
+  <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:40px;text-align:center">
+    <h1 style="color:#d4a843;margin:0;font-size:28px;letter-spacing:1px">Auguri!</h1>
+    <p style="color:#ccc;margin:12px 0 0;font-size:15px">da Righetto Immobiliare</p>
+  </div>
+
+  <div style="padding:30px;text-align:center">
+    <p style="font-size:18px;color:#333">Caro/a <strong>{{nome}}</strong>,</p>
+    <p style="font-size:15px;color:#555;line-height:1.8;max-width:450px;margin:0 auto">
+      Ti auguriamo [buone feste / buon anno / buona Pasqua] e ti ringraziamo per la fiducia che ci hai dato.
+      <br><br>
+      Siamo sempre a tua disposizione per qualsiasi esigenza immobiliare.
+    </p>
+    <div style="margin:30px 0">
+      <a href="https://righetto-immobiliare.it" style="display:inline-block;background:#d4a843;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:15px;font-weight:bold">Visita il nostro sito</a>
+    </div>
+  </div>
+
+  <div style="background:#1a1a2e;padding:24px 30px;text-align:center">
+    <p style="color:#d4a843;margin:0 0 8px;font-size:14px;font-weight:bold">Righetto Immobiliare</p>
+    <p style="color:#999;margin:0;font-size:12px">Via Fratelli Cervi 37, 35129 Padova | 049 7808 888</p>
+    <p style="color:#666;font-size:11px;margin:8px 0 0">{{unsubscribe_link}}</p>
+  </div>
+</div>
+</body></html>`
     }
   };
+
   window.emLoadTemplate = async function(name) {
     const tpl = EM_TEMPLATES[name];
     if (!tpl) return toast('Template non trovato','error');
     try {
-      const resp = await fetch(tpl.file);
-      if (!resp.ok) throw new Error('File non trovato');
-      const html = await resp.text();
+      if (tpl.file) {
+        const resp = await fetch(tpl.file);
+        if (!resp.ok) throw new Error('File non trovato');
+        const html = await resp.text();
+        document.getElementById('emCorpo').value = html;
+      } else {
+        document.getElementById('emCorpo').value = tpl.corpo;
+      }
       document.getElementById('emOggetto').value = tpl.oggetto;
-      document.getElementById('emCorpo').value = html;
-      document.getElementById('emUnsubscribe').checked = false;
-      toast('Template "' + name + '" caricato','success');
+      document.getElementById('emUnsubscribe').checked = true;
+      toast('Template "' + name + '" caricato — personalizza il contenuto!','success');
     } catch(e) {
       toast('Errore caricamento template: ' + e.message,'error');
     }
@@ -10052,46 +10314,174 @@ checkAuth();
     emRenderList();
   };
 
-  // Anteprima
+  // ═══ ANTEPRIMA ═══
   window.emPreview = function() {
     const oggetto = document.getElementById('emOggetto').value;
     const corpo = document.getElementById('emCorpo').value;
+    const preheader = document.getElementById('emPreheader')?.value || '';
     if (!oggetto || !corpo) return toast('Compila oggetto e corpo','error');
 
-    const nome = emContatti.length ? (emContatti[0].nome || 'Cliente') : 'Cliente';
-    let html = corpo.replace(/\{\{nome\}\}/gi, escHtml(nome));
+    const nome = emContatti.length ? (emContatti[0].nome || 'Cliente') : 'Mario Rossi';
+    let html = buildEmailHtml(corpo, nome, true);
+    const subjectPreview = oggetto.replace(/\{\{nome\}\}/gi, escHtml(nome));
 
     const box = document.getElementById('emPreviewBox');
     const frame = document.getElementById('emPreviewFrame');
     box.style.display = 'block';
     document.getElementById('emBtnChiudi').style.display = 'inline-block';
-    frame.srcdoc = html;
+    // Header info sopra l'iframe
+    const headerHtml = '<div style="background:#f0f0f0;padding:12px;font-size:0.85rem">' +
+      '<div><strong>Da:</strong> ' + escHtml(document.getElementById('emNomeMittente')?.value || 'Righetto Immobiliare') +
+        ' &lt;' + escHtml(document.getElementById('emMittente')?.value || 'info@righetto-immobiliare.it') + '&gt;</div>' +
+      '<div><strong>A:</strong> ' + escHtml(nome) + ' &lt;' + escHtml(emContatti.length ? emContatti[0].email : 'esempio@email.com') + '&gt;</div>' +
+      '<div><strong>Oggetto:</strong> ' + escHtml(subjectPreview) + '</div>' +
+      (preheader ? '<div><strong>Preheader:</strong> <span style="color:#999">' + escHtml(preheader) + '</span></div>' : '') +
+    '</div>';
+    box.innerHTML = headerHtml + '<iframe id="emPreviewFrame" style="width:100%;height:500px;border:none;border-top:1px solid #ddd"></iframe>';
+    document.getElementById('emPreviewFrame').srcdoc = html;
   };
 
   window.emChiudiPreview = function() {
     document.getElementById('emPreviewBox').style.display = 'none';
     document.getElementById('emBtnChiudi').style.display = 'none';
-    document.getElementById('emPreviewFrame').srcdoc = '';
   };
 
-  // Invio batch
+  // ═══ COSTRUISCI HTML EMAIL CON ANTI-SPAM ═══
+  function buildEmailHtml(corpo, nome, isPreview) {
+    const preheader = document.getElementById('emPreheader')?.value || '';
+    const unsubscribe = document.getElementById('emUnsubscribe')?.checked !== false;
+
+    let html = corpo.replace(/\{\{nome\}\}/gi, escHtml(nome || 'Cliente'));
+
+    // Aggiungi preheader nascosto (visibile solo in inbox)
+    if (preheader) {
+      const preheaderHtml = '<div style="display:none;max-height:0;overflow:hidden;mso-hide:all">' +
+        escHtml(preheader.replace(/\{\{nome\}\}/gi, nome || 'Cliente')) +
+        '&nbsp;'.repeat(100) + '</div>';
+      html = preheaderHtml + html;
+    }
+
+    // Aggiungi link disiscrizione professionale
+    if (unsubscribe) {
+      html = html.replace(/\{\{unsubscribe_link\}\}/gi,
+        '<a href="' + (isPreview ? '#' : '{{UNSUB_URL}}') + '" style="color:#999;text-decoration:underline">Non desidero più ricevere queste comunicazioni</a>'
+      );
+      // Se il template non ha il placeholder, aggiungi il footer
+      if (!corpo.includes('{{unsubscribe_link}}')) {
+        html += '<div style="text-align:center;padding:20px;font-size:11px;color:#999;border-top:1px solid #eee;margin-top:20px">' +
+          'Ricevi questa email perché sei un contatto di Righetto Immobiliare.<br>' +
+          '<a href="' + (isPreview ? '#' : '{{UNSUB_URL}}') + '" style="color:#999;text-decoration:underline">Cancella iscrizione</a> | ' +
+          '<a href="https://righetto-immobiliare.it/privacy-policy.html" style="color:#999;text-decoration:underline">Privacy Policy</a><br>' +
+          'Righetto Immobiliare — Via Fratelli Cervi 37, 35129 Padova' +
+        '</div>';
+      }
+    }
+
+    return html;
+  }
+
+  // ═══ INVIO EMAIL DI TEST ═══
+  window.emSendTest = async function() {
+    const testEmail = prompt('Inserisci email per il test:');
+    if (!testEmail || !testEmail.includes('@')) return;
+
+    const oggetto = document.getElementById('emOggetto').value;
+    const corpo = document.getElementById('emCorpo').value;
+    if (!oggetto || !corpo) return toast('Compila oggetto e corpo prima','error');
+
+    const html = buildEmailHtml(corpo, 'Test User', false)
+      .replace(/\{\{UNSUB_URL\}\}/g, '#test');
+
+    emLogMsg('Invio test a ' + testEmail + '...', 'info');
+
+    try {
+      // Prova Edge Function SMTP
+      const supabaseUrl = supabase.supabaseUrl || 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
+      const resp = await fetch(supabaseUrl + '/functions/v1/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + (supabase.supabaseKey || supabase.auth?.currentSession?.access_token || '')
+        },
+        body: JSON.stringify({
+          action: 'send_test',
+          to_email: testEmail,
+          subject: oggetto.replace(/\{\{nome\}\}/gi, 'Test User'),
+          html_body: html
+        })
+      });
+      const result = await resp.json();
+      if (result.status === 'sent') {
+        emLogMsg('Test inviato con successo a ' + testEmail, 'ok');
+        toast('Email di test inviata!', 'success');
+      } else {
+        throw new Error(result.error || 'Errore sconosciuto');
+      }
+    } catch(e) {
+      // Fallback: usa Brevo API se Edge Function non disponibile
+      emLogMsg('Edge Function non disponibile, provo Brevo API...', 'warn');
+      try {
+        await sendViaBrevo(testEmail, 'Test User', '[TEST] ' + oggetto, html);
+        emLogMsg('Test inviato via Brevo a ' + testEmail, 'ok');
+        toast('Email di test inviata via Brevo!', 'success');
+      } catch(e2) {
+        emLogMsg('Errore: ' + e2.message, 'err');
+        toast('Errore invio test: ' + e2.message, 'error');
+      }
+    }
+  };
+
+  // ═══ INVIO VIA BREVO API (Fallback) ═══
+  async function sendViaBrevo(toEmail, toName, subject, htmlBody) {
+    const cfg = window.SERVIZI_CONFIG || {};
+    const apiKey = cfg.BREVO_API_KEY;
+    if (!apiKey) throw new Error('Brevo API key non configurata in config.js');
+
+    const resp = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'api-key': apiKey,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        sender: {
+          name: document.getElementById('emNomeMittente')?.value || 'Righetto Immobiliare',
+          email: document.getElementById('emMittente')?.value || 'info@righetto-immobiliare.it'
+        },
+        to: [{ email: toEmail, name: toName || '' }],
+        replyTo: { email: document.getElementById('emReplyTo')?.value || 'info@righetto-immobiliare.it' },
+        subject: subject,
+        htmlContent: htmlBody,
+        headers: {
+          'X-Mailin-custom': 'righetto-immobiliare',
+          'charset': 'utf-8'
+        }
+      })
+    });
+
+    if (!resp.ok) {
+      const err = await resp.json().catch(() => ({}));
+      throw new Error(err.message || 'Errore Brevo ' + resp.status);
+    }
+    return await resp.json();
+  }
+
+  // ═══ INVIO CAMPAGNA MASSIVA ═══
   window.emInvia = async function() {
     if (!emContatti.length) return toast('Carica destinatari prima','error');
     const oggetto = document.getElementById('emOggetto').value;
     const corpo = document.getElementById('emCorpo').value;
     if (!oggetto || !corpo) return toast('Compila oggetto e corpo','error');
 
-    const cfg = window.SERVIZI_CONFIG || {};
-    if (!cfg.EMAILJS_PUBLIC_KEY || !cfg.EMAILJS_SERVICE_ID || !cfg.EMAILJS_MARKETING_TEMPLATE_ID) {
-      return toast('Configura EmailJS in js/config.js (PUBLIC_KEY, SERVICE_ID, MARKETING_TEMPLATE_ID)','error');
-    }
-
-    emailjs.init(cfg.EMAILJS_PUBLIC_KEY);
-
-    const delay = parseInt(document.getElementById('emDelay').value) || 3;
-    const unsubscribe = document.getElementById('emUnsubscribe').checked;
     const total = emContatti.length;
-    let sent = 0, errors = 0;
+    const modalita = document.getElementById('emModalita')?.value || 'graduale';
+
+    // Conferma prima dell'invio
+    if (!confirm('Stai per inviare ' + total + ' email in modalità "' + modalita + '".\n\nConfermi l\'invio?')) return;
+
+    const delay = parseInt(document.getElementById('emDelay')?.value) || 5;
+    let sent = 0, errors = 0, skipped = 0;
     emStopped = false;
 
     document.getElementById('emBtnInvia').disabled = true;
@@ -10099,58 +10489,303 @@ checkAuth();
     document.getElementById('emProgress').style.display = 'block';
     document.getElementById('emLog').innerHTML = '';
 
+    // Warm-up: calcola batch size
+    let batchSize = total;
+    let batchPause = 0;
+    if (modalita === 'graduale') {
+      batchSize = 10;  // 10 email per batch
+      batchPause = 60000; // 1 minuto pausa tra batch
+      emLogMsg('Modalità warm-up: 10 email per batch con pausa di 1 min', 'info');
+    } else if (modalita === 'batch') {
+      batchSize = 50;
+      batchPause = 30000;
+      emLogMsg('Modalità batch: 50 email per batch con pausa di 30 sec', 'info');
+    }
+
+    // Registra campagna in Supabase (se tabella esiste)
+    let campagnaId = null;
+    try {
+      const {data: camp} = await supabase.from('campagne_email').insert({
+        nome: 'Campagna ' + new Date().toLocaleDateString('it-IT'),
+        oggetto: oggetto,
+        preheader: document.getElementById('emPreheader')?.value || '',
+        corpo_html: corpo,
+        mittente_email: document.getElementById('emMittente')?.value || 'info@righetto-immobiliare.it',
+        mittente_nome: document.getElementById('emNomeMittente')?.value || 'Righetto Immobiliare',
+        stato: 'in_invio',
+        totale_destinatari: total,
+        iniziata_il: new Date().toISOString()
+      }).select('id').single();
+      if (camp) campagnaId = camp.id;
+      emLogMsg('Campagna #' + campagnaId + ' creata', 'info');
+    } catch(e) { /* tabella potrebbe non esistere */ }
+
+    emLogMsg('Inizio invio a ' + total + ' destinatari...', 'info');
+
     for (let i = 0; i < total; i++) {
       if (emStopped) {
-        emLogMsg('Invio fermato dall\'utente', 'warn');
+        emLogMsg('Invio fermato dall\'utente dopo ' + sent + ' email', 'warn');
         break;
       }
 
-      const c = emContatti[i];
-      let msg = corpo.replace(/\{\{nome\}\}/gi, c.nome || 'Cliente');
-      if (unsubscribe) {
-        msg += '<br><br><hr style="border:none;border-top:1px solid #ccc"><p style="font-size:11px;color:#999;text-align:center">Se non desideri ricevere queste comunicazioni, rispondi con oggetto "CANCELLAMI"</p>';
+      // Pausa tra batch
+      if (batchPause && i > 0 && i % batchSize === 0) {
+        emLogMsg('Pausa warm-up (' + (batchPause/1000) + 's) dopo batch di ' + batchSize + '...', 'info');
+        await new Promise(r => setTimeout(r, batchPause));
       }
 
+      const c = emContatti[i];
+      const nome = c.nome || 'Cliente';
+
+      // Salta se in blacklist
+      if (emBlacklist.has(c.email.toLowerCase())) {
+        skipped++;
+        emLogMsg('SKIP (disiscritto) → ' + c.email, 'warn');
+        continue;
+      }
+
+      // Personalizza email
+      const subjectPersonal = oggetto.replace(/\{\{nome\}\}/gi, nome);
+      const html = buildEmailHtml(corpo, nome, false);
+
+      // Genera URL disiscrizione unico
+      const unsubUrl = 'https://righetto-immobiliare.it/unsubscribe.html?email=' + encodeURIComponent(c.email);
+      const finalHtml = html.replace(/\{\{UNSUB_URL\}\}/g, unsubUrl);
+
       try {
-        await emailjs.send(cfg.EMAILJS_SERVICE_ID, cfg.EMAILJS_MARKETING_TEMPLATE_ID, {
-          to_email: c.email,
-          to_name: c.nome || 'Cliente',
-          subject: oggetto,
-          title: oggetto,
-          message: msg
-        });
+        // Prima prova Edge Function, poi fallback Brevo
+        let success = false;
+        try {
+          const supabaseUrl = supabase.supabaseUrl || 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
+          const resp = await fetch(supabaseUrl + '/functions/v1/send-email', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + (supabase.supabaseKey || '')
+            },
+            body: JSON.stringify({
+              action: 'send_single',
+              to_email: c.email,
+              to_name: nome,
+              subject: subjectPersonal,
+              html_body: finalHtml,
+              campaign_id: campagnaId,
+              reply_to: document.getElementById('emReplyTo')?.value
+            })
+          });
+          const result = await resp.json();
+          if (result.status === 'sent') success = true;
+          else if (result.status === 'rate_limited') {
+            emLogMsg('RATE LIMIT raggiunto — pausa 5 minuti...', 'warn');
+            await new Promise(r => setTimeout(r, 300000));
+            i--; // Riprova
+            continue;
+          } else if (result.status === 'skipped') {
+            skipped++;
+            emLogMsg('SKIP (blacklist) → ' + c.email, 'warn');
+            continue;
+          }
+        } catch(e) { /* Edge Function non disponibile */ }
+
+        // Fallback: Brevo API
+        if (!success) {
+          await sendViaBrevo(c.email, nome, subjectPersonal, finalHtml);
+          success = true;
+        }
+
         sent++;
-        emLogMsg('OK → ' + c.email, 'ok');
+        emLogMsg('OK → ' + c.email + (nome !== 'Cliente' ? ' (' + nome + ')' : ''), 'ok');
+
+        // Registra in coda_email
+        if (campagnaId) {
+          supabase.from('coda_email').insert({
+            campagna_id: campagnaId,
+            destinatario_email: c.email,
+            destinatario_nome: nome,
+            oggetto: subjectPersonal,
+            corpo_html: finalHtml,
+            stato: 'inviata',
+            inviata_il: new Date().toISOString()
+          }).then(() => {}).catch(() => {});
+        }
       } catch(err) {
         errors++;
-        emLogMsg('ERRORE → ' + c.email + ': ' + (err.text || err.message || err), 'err');
+        const errMsg = err.text || err.message || String(err);
+        emLogMsg('ERRORE → ' + c.email + ': ' + errMsg, 'err');
+
+        // Se bounce permanente, aggiungi a blacklist locale
+        if (errMsg.includes('550') || errMsg.includes('User unknown') || errMsg.includes('does not exist')) {
+          emBlacklist.add(c.email.toLowerCase());
+          emLogMsg('  → Aggiunto a blacklist (bounce permanente)', 'warn');
+          try {
+            await supabase.from('email_blacklist').upsert({email: c.email.toLowerCase(), motivo: 'bounce'});
+          } catch(e) {}
+        }
       }
 
       // Progress
       const pct = Math.round(((i + 1) / total) * 100);
       document.getElementById('emProgressBar').style.width = pct + '%';
-      document.getElementById('emProgressText').textContent = (i + 1) + ' / ' + total + ' (' + sent + ' ok, ' + errors + ' errori)';
+      document.getElementById('emProgressBar').textContent = pct + '%';
+      document.getElementById('emProgressText').textContent =
+        (i + 1) + ' / ' + total + ' (' + sent + ' ok, ' + errors + ' errori, ' + skipped + ' skip)';
 
-      // Delay
+      // Delay tra email (randomizzato per sembrare naturale)
       if (i < total - 1 && !emStopped) {
-        await new Promise(r => setTimeout(r, delay * 1000));
+        const jitter = delay * 1000 + Math.random() * 2000;
+        await new Promise(r => setTimeout(r, jitter));
       }
+    }
+
+    // Aggiorna campagna
+    if (campagnaId) {
+      supabase.from('campagne_email').update({
+        stato: emStopped ? 'annullata' : 'completata',
+        inviati: sent,
+        errori: errors,
+        completata_il: new Date().toISOString()
+      }).eq('id', campagnaId).then(() => {}).catch(() => {});
     }
 
     document.getElementById('emBtnInvia').disabled = false;
     document.getElementById('emBtnStop').style.display = 'none';
-    toast('Invio completato: ' + sent + ' ok, ' + errors + ' errori', errors ? 'error' : 'success');
+    emLogMsg('═══ COMPLETATO: ' + sent + ' inviate, ' + errors + ' errori, ' + skipped + ' saltate ═══', sent > 0 ? 'ok' : 'err');
+    toast('Campagna completata: ' + sent + ' ok, ' + errors + ' errori', errors > 0 ? 'error' : 'success');
   };
 
   window.emStop = function() {
     emStopped = true;
+    emLogMsg('Stop richiesto — completamento batch in corso...', 'warn');
+  };
+
+  // ═══ PULIZIA LISTA (rimuovi bounce/unsub) ═══
+  window.emPulisciLista = async function() {
+    await loadBlacklist();
+    const before = emContatti.length;
+    emContatti = emContatti.filter(c => !emBlacklist.has(c.email.toLowerCase()));
+    const removed = before - emContatti.length;
+    emRenderList();
+    toast(removed + ' contatti rimossi (disiscritti/bounce). Rimasti: ' + emContatti.length, 'success');
+  };
+
+  // ═══ STATISTICHE ═══
+  window.emLoadStats = async function() {
+    try {
+      // Conta campagne totali
+      const {data: campagne} = await supabase.from('campagne_email').select('inviati,aperti,click,bounce,disiscritti,errori');
+      if (!campagne || !campagne.length) return toast('Nessuna campagna trovata','info');
+
+      let totInviati = 0, totAperti = 0, totClick = 0, totBounce = 0;
+      campagne.forEach(c => {
+        totInviati += c.inviati || 0;
+        totAperti += c.aperti || 0;
+        totClick += c.click || 0;
+        totBounce += (c.bounce || 0) + (c.disiscritti || 0);
+      });
+
+      document.getElementById('emStatInviati').textContent = totInviati;
+      document.getElementById('emStatAperti').textContent = totInviati > 0 ? Math.round(totAperti/totInviati*100) + '%' : '0%';
+      document.getElementById('emStatClick').textContent = totInviati > 0 ? Math.round(totClick/totInviati*100) + '%' : '0%';
+      document.getElementById('emStatBounce').textContent = totBounce;
+      toast('Statistiche aggiornate', 'success');
+    } catch(e) {
+      toast('Tabella campagne non trovata — esegui sql/email-marketing-tables.sql', 'error');
+    }
+  };
+
+  // ═══ STORICO CAMPAGNE ═══
+  window.emLoadCampaignHistory = async function() {
+    try {
+      const {data} = await supabase.from('campagne_email')
+        .select('*')
+        .order('created_at', {ascending: false})
+        .limit(20);
+
+      if (!data || !data.length) return toast('Nessuna campagna trovata','info');
+
+      const box = document.getElementById('emCampaignHistory');
+      box.style.display = 'block';
+      box.innerHTML = '<table style="width:100%;border-collapse:collapse"><thead><tr style="background:#f0f0f0">' +
+        '<th style="padding:6px;text-align:left;font-size:0.75rem">Data</th>' +
+        '<th style="padding:6px;text-align:left;font-size:0.75rem">Oggetto</th>' +
+        '<th style="padding:6px;text-align:center;font-size:0.75rem">Stato</th>' +
+        '<th style="padding:6px;text-align:center;font-size:0.75rem">Inviati</th>' +
+        '<th style="padding:6px;text-align:center;font-size:0.75rem">Aperti</th>' +
+        '<th style="padding:6px;text-align:center;font-size:0.75rem">Errori</th>' +
+        '</tr></thead><tbody>' +
+        data.map(c => {
+          const statoColor = c.stato === 'completata' ? '#2d7a3a' : c.stato === 'in_invio' ? '#e67e22' : '#c0392b';
+          return '<tr style="border-bottom:1px solid #eee">' +
+            '<td style="padding:6px;font-size:0.75rem">' + new Date(c.created_at).toLocaleDateString('it-IT') + '</td>' +
+            '<td style="padding:6px;font-size:0.75rem">' + escHtml(c.oggetto?.substring(0,40)) + '</td>' +
+            '<td style="padding:6px;text-align:center"><span style="background:' + statoColor + ';color:#fff;padding:2px 8px;border-radius:10px;font-size:0.7rem">' + c.stato + '</span></td>' +
+            '<td style="padding:6px;text-align:center;font-size:0.75rem">' + (c.inviati || 0) + '/' + (c.totale_destinatari || 0) + '</td>' +
+            '<td style="padding:6px;text-align:center;font-size:0.75rem">' + (c.aperti || 0) + '</td>' +
+            '<td style="padding:6px;text-align:center;font-size:0.75rem">' + (c.errori || 0) + '</td>' +
+          '</tr>';
+        }).join('') +
+        '</tbody></table>';
+    } catch(e) {
+      toast('Tabella campagne non trovata — esegui sql/email-marketing-tables.sql', 'error');
+    }
+  };
+
+  // ═══ GESTIONE DISISCRITTI/BOUNCE ═══
+  window.emLoadUnsubscribed = async function() {
+    try {
+      const {data} = await supabase.from('email_blacklist').select('*').eq('motivo', 'disiscrizione').order('created_at', {ascending: false});
+      const box = document.getElementById('emBlacklist');
+      if (!data || !data.length) { box.innerHTML = '<em>Nessun disiscritto</em>'; return; }
+      box.innerHTML = '<strong>Disiscritti (' + data.length + '):</strong><br>' +
+        data.map(d => '<div style="padding:3px 0;border-bottom:1px solid #eee">' + escHtml(d.email) + ' — ' + new Date(d.created_at).toLocaleDateString('it-IT') + '</div>').join('');
+    } catch(e) { toast('Tabella blacklist non trovata', 'error'); }
+  };
+
+  window.emLoadBounces = async function() {
+    try {
+      const {data} = await supabase.from('email_blacklist').select('*').eq('motivo', 'bounce').order('created_at', {ascending: false});
+      const box = document.getElementById('emBlacklist');
+      if (!data || !data.length) { box.innerHTML = '<em>Nessun bounce</em>'; return; }
+      box.innerHTML = '<strong>Bounce (' + data.length + '):</strong><br>' +
+        data.map(d => '<div style="padding:3px 0;border-bottom:1px solid #eee">' + escHtml(d.email) + ' — ' + new Date(d.created_at).toLocaleDateString('it-IT') + '</div>').join('');
+    } catch(e) { toast('Tabella blacklist non trovata', 'error'); }
+  };
+
+  window.emSyncBlacklist = async function() {
+    // Sincronizza blacklist da Brevo API
+    const cfg = window.SERVIZI_CONFIG || {};
+    if (!cfg.BREVO_API_KEY) return toast('Brevo API key non configurata', 'error');
+    try {
+      const resp = await fetch('https://api.brevo.com/v3/contacts?limit=500&offset=0', {
+        headers: { 'api-key': cfg.BREVO_API_KEY, 'accept': 'application/json' }
+      });
+      if (!resp.ok) throw new Error('Errore Brevo ' + resp.status);
+      // Brevo non ha un endpoint diretto per la blacklist nella free tier
+      // Usiamo i contatti bloccati
+      const resp2 = await fetch('https://api.brevo.com/v3/smtp/blockedContacts?limit=100', {
+        headers: { 'api-key': cfg.BREVO_API_KEY, 'accept': 'application/json' }
+      });
+      if (resp2.ok) {
+        const blocked = await resp2.json();
+        if (blocked.contacts) {
+          for (const c of blocked.contacts) {
+            await supabase.from('email_blacklist').upsert({email: c.email.toLowerCase(), motivo: 'bounce'}).catch(() => {});
+            emBlacklist.add(c.email.toLowerCase());
+          }
+          toast('Sincronizzati ' + (blocked.contacts?.length || 0) + ' contatti bloccati da Brevo', 'success');
+        }
+      }
+    } catch(e) {
+      toast('Errore sincronizzazione: ' + e.message, 'error');
+    }
   };
 
   function emLogMsg(text, type) {
     const log = document.getElementById('emLog');
-    const color = type === 'ok' ? '#2d7a3a' : type === 'err' ? '#c0392b' : '#b8860b';
+    const color = type === 'ok' ? '#2d7a3a' : type === 'err' ? '#c0392b' : type === 'warn' ? '#b8860b' : '#667eea';
+    const icon = type === 'ok' ? '✓' : type === 'err' ? '✗' : type === 'warn' ? '⚠' : 'ℹ';
     const time = new Date().toLocaleTimeString('it-IT');
-    log.innerHTML += '<div style="color:' + color + '">[' + time + '] ' + escHtml(text) + '</div>';
+    log.innerHTML += '<div style="color:' + color + '">[' + time + '] ' + icon + ' ' + escHtml(text) + '</div>';
     log.scrollTop = log.scrollHeight;
   }
 })();
