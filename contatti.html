@@ -351,13 +351,12 @@ async function sendForm(){
   if (SERVIZI_CONFIG.EMAILJS_PUBLIC_KEY && SERVIZI_CONFIG.EMAILJS_SERVICE_ID && SERVIZI_CONFIG.EMAILJS_TEMPLATE_ID) {
     try {
       await emailjs.send(SERVIZI_CONFIG.EMAILJS_SERVICE_ID, SERVIZI_CONFIG.EMAILJS_TEMPLATE_ID, {
+        title: oggetto || 'Richiesta dal sito',
+        name: nomeCompleto,
+        email: email,
         from_name: nomeCompleto,
-        from_email: email,
-        telefono: tel,
-        oggetto: oggetto,
-        zona: zona,
-        messaggio: msg,
-        newsletter: news ? 'Si' : 'No'
+        time: new Date().toLocaleString('it-IT'),
+        message: 'Tel: ' + tel + (zona ? ' | Zona: ' + zona : '') + '\n\n' + msg + (news ? '\n\nIscritto alla newsletter' : '')
       }, SERVIZI_CONFIG.EMAILJS_PUBLIC_KEY);
     } catch(e) { /* emailjs non critico */ }
   }
