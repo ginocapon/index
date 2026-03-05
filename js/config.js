@@ -25,5 +25,5 @@ const SERVIZI_CONFIG = {
   // Variabili template: {{to_email}}, {{to_name}}, {{subject}}, {{message}}
   EMAILJS_PUBLIC_KEY: 'n3XE6MEEie7ZxPw-z',
   EMAILJS_SERVICE_ID: 'service_60lyfuu',
-  EMAILJS_MARKETING_TEMPLATE_ID: ''
+  EMAILJS_MARKETING_TEMPLATE_ID: 'template_1gpdcuq'
 };
