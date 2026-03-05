@@ -1939,6 +1939,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg>
         Agenda
       </div>
+      <div class="nav-item" onclick="showSection('email-marketing')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+        Email Marketing
+      </div>
       <div class="nav-item" onclick="showSection('impostazioni')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         Impostazioni
@@ -3553,6 +3557,142 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         </div>
       </div>
 
+      <!-- ═══ SEZIONE EMAIL MARKETING ═══ -->
+      <div class="section" id="sec-email-marketing">
+        <div class="table-wrap" style="padding:28px">
+
+          <!-- Config EmailJS -->
+          <div id="emktConfigBanner" style="background:var(--oro2);border-radius:10px;padding:16px 20px;margin-bottom:20px;display:none">
+            <strong>Configura EmailJS</strong>
+            <p style="font-size:0.82rem;margin:6px 0 12px;color:var(--testo)">Inserisci le credenziali EmailJS in <b>js/config.js</b> per attivare l'invio email.</p>
+          </div>
+
+          <!-- Stats -->
+          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px">
+            <div class="stat-card" style="flex:1;min-width:140px">
+              <div class="stat-label">Destinatari selezionati</div>
+              <div class="stat-num" id="emktSelectedCount">0</div>
+            </div>
+            <div class="stat-card" style="flex:1;min-width:140px">
+              <div class="stat-label">Inviate questa sessione</div>
+              <div class="stat-num" id="emktSentCount">0</div>
+            </div>
+            <div class="stat-card" style="flex:1;min-width:140px">
+              <div class="stat-label">Errori</div>
+              <div class="stat-num" id="emktErrorCount" style="color:var(--rosso)">0</div>
+            </div>
+          </div>
+
+          <!-- Step 1: Destinatari -->
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:16px">1. Destinatari</h3>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px">
+            <button class="btn btn-secondary btn-sm" onclick="emktLoadFromClienti()">Carica da Clienti</button>
+            <button class="btn btn-secondary btn-sm" onclick="document.getElementById('emktCsvInput').click()">Importa CSV</button>
+            <input type="file" id="emktCsvInput" accept=".csv" style="display:none" onchange="emktImportCSV(this)">
+            <button class="btn btn-secondary btn-sm" onclick="emktAddManual()">Aggiungi manuale</button>
+            <button class="btn btn-secondary btn-sm" onclick="emktSelectAll()">Seleziona tutti</button>
+            <button class="btn btn-secondary btn-sm" onclick="emktDeselectAll()">Deseleziona tutti</button>
+          </div>
+
+          <!-- Manual add row -->
+          <div id="emktManualRow" style="display:none;margin-bottom:16px;padding:14px;background:var(--sfondo);border-radius:8px">
+            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:end">
+              <div class="form-group" style="flex:1;min-width:160px;margin:0">
+                <label style="font-size:0.75rem">Nome</label>
+                <input type="text" id="emktManualNome" placeholder="Mario Rossi">
+              </div>
+              <div class="form-group" style="flex:1;min-width:200px;margin:0">
+                <label style="font-size:0.75rem">Email</label>
+                <input type="email" id="emktManualEmail" placeholder="mario@email.com">
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="emktConfirmManual()">Aggiungi</button>
+              <button class="btn btn-secondary btn-sm" onclick="document.getElementById('emktManualRow').style.display='none'">Annulla</button>
+            </div>
+          </div>
+
+          <!-- Contacts table -->
+          <div style="max-height:300px;overflow-y:auto;margin-bottom:24px;border:1px solid var(--caffe3);border-radius:8px">
+            <table class="tbl" style="margin:0">
+              <thead>
+                <tr>
+                  <th style="width:40px"><input type="checkbox" id="emktCheckAll" onchange="emktToggleAll(this.checked)"></th>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th>Fonte</th>
+                  <th style="width:60px"></th>
+                </tr>
+              </thead>
+              <tbody id="emktContactsBody">
+                <tr><td colspan="5" style="text-align:center;color:var(--caffe2);padding:24px">Nessun destinatario caricato</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Step 2: Template Email -->
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:16px">2. Componi Email</h3>
+
+          <div class="form-group" style="margin-bottom:12px">
+            <label>Oggetto</label>
+            <input type="text" id="emktSubject" placeholder="Es: Nuovi immobili disponibili a Limena">
+          </div>
+
+          <div class="form-group" style="margin-bottom:12px">
+            <label>Messaggio (HTML supportato — usa {{nome}} per personalizzare)</label>
+            <textarea id="emktBody" rows="12" style="font-family:monospace;font-size:0.85rem" placeholder="Gentile {{nome}},
+
+siamo lieti di presentarle le nostre ultime proposte immobiliari.
+
+Visiti il nostro sito: https://www.righettoimmobiliare.it
+
+Cordiali saluti,
+Righetto Immobiliare"></textarea>
+          </div>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+            <button class="btn btn-secondary btn-sm" onclick="emktPreview()">Anteprima</button>
+            <label style="display:flex;align-items:center;gap:6px;font-size:0.82rem;color:var(--caffe2)">
+              <input type="checkbox" id="emktUnsubscribe" checked>
+              Includi link "Non desidero ricevere email"
+            </label>
+          </div>
+
+          <!-- Preview -->
+          <div id="emktPreviewBox" style="display:none;margin-bottom:24px;border:2px solid var(--caffe3);border-radius:10px;overflow:hidden">
+            <div style="background:var(--nero);color:white;padding:10px 16px;font-size:0.82rem;font-weight:600">Anteprima Email</div>
+            <div id="emktPreviewContent" style="padding:20px;background:white;min-height:100px"></div>
+          </div>
+
+          <!-- Step 3: Invio -->
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:16px">3. Invia</h3>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
+            <div class="form-group" style="margin:0;width:180px">
+              <label style="font-size:0.75rem">Delay tra email (sec)</label>
+              <input type="number" id="emktDelay" value="3" min="1" max="30">
+            </div>
+            <button class="btn btn-primary" id="emktSendBtn" onclick="emktStartSend()" style="height:42px;margin-top:auto">
+              Invia a tutti i selezionati
+            </button>
+            <button class="btn btn-danger btn-sm" id="emktStopBtn" onclick="emktStopSend()" style="display:none;height:42px;margin-top:auto">
+              Ferma invio
+            </button>
+          </div>
+
+          <!-- Progress -->
+          <div id="emktProgress" style="display:none;margin-bottom:16px">
+            <div style="background:var(--caffe3);border-radius:8px;height:24px;overflow:hidden;margin-bottom:8px">
+              <div id="emktProgressBar" style="background:var(--verde);height:100%;width:0%;transition:width 0.3s;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:600;color:white;min-width:40px"></div>
+            </div>
+            <div id="emktProgressText" style="font-size:0.82rem;color:var(--caffe2)"></div>
+          </div>
+
+          <!-- Log -->
+          <div id="emktLog" style="display:none;max-height:200px;overflow-y:auto;background:var(--sfondo);border-radius:8px;padding:12px;font-size:0.78rem;font-family:monospace"></div>
+
+        </div>
+      </div>
+
       <!-- ═══ SEZIONE IMPOSTAZIONI ═══ -->
       <div class="section" id="sec-impostazioni">
         <div class="table-wrap" style="padding:28px;max-width:600px">
@@ -3912,7 +4052,7 @@ function showSection(name) {
   const sec = document.getElementById('sec-' + name);
   if (sec) sec.classList.add('active');
   // Mark the correct nav-item as active
-  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','agenda','impostazioni'];
+  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','agenda','email-marketing','impostazioni'];
   const idx = sectionNames.indexOf(name);
   const navItems = document.querySelectorAll('.nav-item');
   if (idx >= 0 && navItems[idx]) navItems[idx].classList.add('active');
@@ -3926,6 +4066,7 @@ function showSection(name) {
     clienti: 'Gestione Clienti',
     social: 'Social Media',
     agenda: 'Agenda Settimanale',
+    'email-marketing': 'Email Marketing',
     impostazioni: 'Impostazioni'
   };
   document.getElementById('topbarTitle').textContent = titles[name] || name;
@@ -3936,6 +4077,7 @@ function showSection(name) {
   if (name === 'social') loadSocialSection();
   if (name === 'agenda') loadAgendaSection();
   if (name === 'clienti') loadClienti();
+  if (name === 'email-marketing') initEmailMarketing();
   if (name === 'impostazioni') { testConn(); check2FAStatus(); }
 }
 
@@ -8757,6 +8899,304 @@ checkAuth();
     </div>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="js/config.js"></script>
+<script>
+// ══════════════════════════════════════
+// EMAIL MARKETING
+// ══════════════════════════════════════
+let emktContacts = [];
+let emktSending = false;
+let emktSentCount = 0;
+let emktErrorCount = 0;
+
+function initEmailMarketing() {
+  // Check if EmailJS is configured
+  const banner = document.getElementById('emktConfigBanner');
+  if (!SERVIZI_CONFIG.EMAILJS_PUBLIC_KEY || !SERVIZI_CONFIG.EMAILJS_SERVICE_ID) {
+    banner.style.display = 'block';
+  } else {
+    banner.style.display = 'none';
+  }
+  updateEmktUI();
+}
+
+function updateEmktUI() {
+  const selected = emktContacts.filter(c => c.selected);
+  document.getElementById('emktSelectedCount').textContent = selected.length;
+  document.getElementById('emktSentCount').textContent = emktSentCount;
+  document.getElementById('emktErrorCount').textContent = emktErrorCount;
+}
+
+function renderEmktContacts() {
+  const tbody = document.getElementById('emktContactsBody');
+  if (emktContacts.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--caffe2);padding:24px">Nessun destinatario caricato</td></tr>';
+    document.getElementById('emktCheckAll').checked = false;
+    updateEmktUI();
+    return;
+  }
+  tbody.innerHTML = emktContacts.map((c, i) => `
+    <tr style="${c.sent ? 'background:rgba(39,174,96,0.08)' : c.error ? 'background:rgba(231,76,60,0.08)' : ''}">
+      <td><input type="checkbox" ${c.selected ? 'checked' : ''} onchange="emktToggleContact(${i}, this.checked)"></td>
+      <td>${escapeHtml(c.nome || '—')}</td>
+      <td>${escapeHtml(c.email)}</td>
+      <td><span style="font-size:0.75rem;color:var(--caffe2)">${escapeHtml(c.fonte || '')}</span></td>
+      <td>
+        ${c.sent ? '<span style="color:var(--verde);font-size:0.75rem;font-weight:600">Inviata</span>' : ''}
+        ${c.error ? '<span style="color:var(--rosso);font-size:0.75rem" title="'+escapeHtml(c.error)+'">Errore</span>' : ''}
+        ${!c.sent && !c.error ? '<button class="btn btn-danger btn-sm" style="padding:2px 8px;font-size:0.7rem" onclick="emktRemoveContact('+i+')">X</button>' : ''}
+      </td>
+    </tr>
+  `).join('');
+  updateEmktUI();
+}
+
+function escapeHtml(text) {
+  const d = document.createElement('div');
+  d.textContent = text || '';
+  return d.innerHTML;
+}
+
+function emktToggleContact(i, checked) {
+  emktContacts[i].selected = checked;
+  updateEmktUI();
+}
+
+function emktToggleAll(checked) {
+  emktContacts.forEach(c => { if (!c.sent) c.selected = checked; });
+  renderEmktContacts();
+}
+
+function emktSelectAll() {
+  emktContacts.forEach(c => { if (!c.sent) c.selected = true; });
+  document.getElementById('emktCheckAll').checked = true;
+  renderEmktContacts();
+}
+
+function emktDeselectAll() {
+  emktContacts.forEach(c => c.selected = false);
+  document.getElementById('emktCheckAll').checked = false;
+  renderEmktContacts();
+}
+
+function emktRemoveContact(i) {
+  emktContacts.splice(i, 1);
+  renderEmktContacts();
+}
+
+async function emktLoadFromClienti() {
+  try {
+    const { data, error } = await sb.from('clienti').select('nome, email, fonte').not('email', 'is', null).neq('email', '');
+    if (error) throw error;
+    if (!data || data.length === 0) {
+      toast('Nessun cliente con email trovato', 'error');
+      return;
+    }
+    // Add only new emails (avoid duplicates)
+    const existing = new Set(emktContacts.map(c => c.email.toLowerCase()));
+    let added = 0;
+    data.forEach(c => {
+      if (c.email && !existing.has(c.email.toLowerCase())) {
+        emktContacts.push({ nome: c.nome || '', email: c.email, fonte: c.fonte || 'clienti', selected: true, sent: false, error: null });
+        existing.add(c.email.toLowerCase());
+        added++;
+      }
+    });
+    toast(added + ' clienti caricati', 'success');
+    renderEmktContacts();
+  } catch(err) {
+    console.error('Load clienti error:', err);
+    toast('Errore caricamento clienti: ' + err.message, 'error');
+  }
+}
+
+function emktImportCSV(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const lines = e.target.result.split('\n').map(l => l.trim()).filter(Boolean);
+    const existing = new Set(emktContacts.map(c => c.email.toLowerCase()));
+    let added = 0;
+    // Skip header if it contains "email" or "nome"
+    const start = /email|nome|name/i.test(lines[0]) ? 1 : 0;
+    for (let i = start; i < lines.length; i++) {
+      const parts = lines[i].split(/[,;]\s*/);
+      let nome = '', email = '';
+      if (parts.length >= 2) {
+        // Try to figure out which is email
+        if (parts[0].includes('@')) { email = parts[0]; nome = parts[1]; }
+        else if (parts[1].includes('@')) { nome = parts[0]; email = parts[1]; }
+        else continue;
+      } else if (parts[0].includes('@')) {
+        email = parts[0];
+      } else continue;
+
+      email = email.trim().replace(/"/g, '');
+      nome = nome.trim().replace(/"/g, '');
+      if (email && !existing.has(email.toLowerCase())) {
+        emktContacts.push({ nome, email, fonte: 'csv', selected: true, sent: false, error: null });
+        existing.add(email.toLowerCase());
+        added++;
+      }
+    }
+    toast(added + ' contatti importati da CSV', 'success');
+    renderEmktContacts();
+    input.value = '';
+  };
+  reader.readAsText(file);
+}
+
+function emktAddManual() {
+  document.getElementById('emktManualRow').style.display = 'block';
+  document.getElementById('emktManualNome').value = '';
+  document.getElementById('emktManualEmail').value = '';
+  document.getElementById('emktManualEmail').focus();
+}
+
+function emktConfirmManual() {
+  const nome = document.getElementById('emktManualNome').value.trim();
+  const email = document.getElementById('emktManualEmail').value.trim();
+  if (!email || !email.includes('@')) {
+    toast('Inserisci un\'email valida', 'error');
+    return;
+  }
+  const existing = new Set(emktContacts.map(c => c.email.toLowerCase()));
+  if (existing.has(email.toLowerCase())) {
+    toast('Email gia\' presente', 'error');
+    return;
+  }
+  emktContacts.push({ nome, email, fonte: 'manuale', selected: true, sent: false, error: null });
+  document.getElementById('emktManualRow').style.display = 'none';
+  toast('Contatto aggiunto', 'success');
+  renderEmktContacts();
+}
+
+function emktPreview() {
+  const subject = document.getElementById('emktSubject').value || '(nessun oggetto)';
+  const body = document.getElementById('emktBody').value || '';
+  const unsub = document.getElementById('emktUnsubscribe').checked;
+  let html = body.replace(/\n/g, '<br>').replace(/\{\{nome\}\}/g, '<b style="color:var(--nero)">[Nome Destinatario]</b>');
+  if (unsub) {
+    html += '<br><br><hr style="border:none;border-top:1px solid #ddd;margin:16px 0"><p style="font-size:11px;color:#999;text-align:center">Se non desideri ricevere ulteriori comunicazioni, rispondi a questa email con oggetto "CANCELLAMI"</p>';
+  }
+  document.getElementById('emktPreviewContent').innerHTML =
+    '<div style="margin-bottom:12px"><strong>Oggetto:</strong> ' + escapeHtml(subject) + '</div><hr style="border:none;border-top:1px solid #eee;margin:8px 0"><div style="line-height:1.6">' + html + '</div>';
+  document.getElementById('emktPreviewBox').style.display = 'block';
+}
+
+async function emktStartSend() {
+  if (emktSending) return;
+
+  const pk = SERVIZI_CONFIG.EMAILJS_PUBLIC_KEY;
+  const sid = SERVIZI_CONFIG.EMAILJS_SERVICE_ID;
+  const tid = SERVIZI_CONFIG.EMAILJS_MARKETING_TEMPLATE_ID || SERVIZI_CONFIG.EMAILJS_TEMPLATE_ID;
+
+  if (!pk || !sid || !tid) {
+    toast('Configura EmailJS in js/config.js prima di inviare', 'error');
+    return;
+  }
+
+  const subject = document.getElementById('emktSubject').value.trim();
+  if (!subject) {
+    toast('Inserisci un oggetto per l\'email', 'error');
+    return;
+  }
+
+  const body = document.getElementById('emktBody').value.trim();
+  if (!body) {
+    toast('Inserisci il contenuto dell\'email', 'error');
+    return;
+  }
+
+  const selected = emktContacts.filter(c => c.selected && !c.sent);
+  if (selected.length === 0) {
+    toast('Nessun destinatario selezionato', 'error');
+    return;
+  }
+
+  if (!confirm('Stai per inviare ' + selected.length + ' email. Continuare?')) return;
+
+  emktSending = true;
+  emktSentCount = 0;
+  emktErrorCount = 0;
+  const delay = Math.max(1, parseInt(document.getElementById('emktDelay').value) || 3) * 1000;
+  const unsub = document.getElementById('emktUnsubscribe').checked;
+
+  document.getElementById('emktSendBtn').style.display = 'none';
+  document.getElementById('emktStopBtn').style.display = 'inline-flex';
+  document.getElementById('emktProgress').style.display = 'block';
+  document.getElementById('emktLog').style.display = 'block';
+  document.getElementById('emktLog').innerHTML = '';
+
+  const total = selected.length;
+
+  for (let i = 0; i < selected.length; i++) {
+    if (!emktSending) {
+      emktLogMsg('Invio interrotto dall\'utente', 'warn');
+      break;
+    }
+
+    const contact = selected[i];
+    const pct = Math.round(((i + 1) / total) * 100);
+    document.getElementById('emktProgressBar').style.width = pct + '%';
+    document.getElementById('emktProgressBar').textContent = pct + '%';
+    document.getElementById('emktProgressText').textContent = 'Invio ' + (i + 1) + ' di ' + total + ': ' + contact.email;
+
+    let personalBody = body.replace(/\{\{nome\}\}/g, contact.nome || 'Gentile Cliente');
+    if (unsub) {
+      personalBody += '\n\n---\nSe non desideri ricevere ulteriori comunicazioni, rispondi con oggetto "CANCELLAMI"';
+    }
+
+    try {
+      await emailjs.send(sid, tid, {
+        title: subject,
+        to_email: contact.email,
+        to_name: contact.nome || '',
+        name: contact.nome || 'Righetto Immobiliare',
+        email: 'info@righettoimmobiliare.it',
+        message: personalBody,
+      }, pk);
+
+      contact.sent = true;
+      contact.selected = false;
+      emktSentCount++;
+      emktLogMsg('OK: ' + contact.email, 'success');
+    } catch(err) {
+      contact.error = err?.text || err?.message || 'Errore sconosciuto';
+      emktErrorCount++;
+      emktLogMsg('ERRORE ' + contact.email + ': ' + contact.error, 'error');
+    }
+
+    renderEmktContacts();
+
+    // Delay between sends
+    if (i < selected.length - 1 && emktSending) {
+      await new Promise(r => setTimeout(r, delay));
+    }
+  }
+
+  emktSending = false;
+  document.getElementById('emktSendBtn').style.display = 'inline-flex';
+  document.getElementById('emktStopBtn').style.display = 'none';
+  document.getElementById('emktProgressText').textContent = 'Completato! ' + emktSentCount + ' inviate, ' + emktErrorCount + ' errori';
+  updateEmktUI();
+  toast('Invio completato: ' + emktSentCount + ' email inviate', emktErrorCount > 0 ? 'error' : 'success');
+}
+
+function emktStopSend() {
+  emktSending = false;
+}
+
+function emktLogMsg(msg, type) {
+  const log = document.getElementById('emktLog');
+  const color = type === 'success' ? 'var(--verde)' : type === 'error' ? 'var(--rosso)' : 'var(--caffe2)';
+  const time = new Date().toLocaleTimeString('it-IT');
+  log.innerHTML += '<div style="color:' + color + '">[' + time + '] ' + escapeHtml(msg) + '</div>';
+  log.scrollTop = log.scrollHeight;
+}
+</script>
 <script src="js/cookie-consent.js"></script>
 </body>
 </html>
