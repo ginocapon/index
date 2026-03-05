@@ -3731,11 +3731,13 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           <div class="stat-card" style="border-left-color:var(--caffe2)"><div class="stat-num" id="statLandBozze">0</div><div class="stat-label">Bozze</div></div>
         </div>
 
+        <div style="margin-bottom:16px;padding:12px 16px;background:#e3f2fd;border:1px solid #90caf9;border-radius:8px;font-size:0.82rem;color:#0d47a1">
+          <strong>Nota:</strong> Le landing pages sono gestite qui come elenco. Per inviarle via email ai clienti, usa la sezione <strong>Email Marketing</strong> → seleziona la landing dalla tendina "Inserisci contenuto da...".
+        </div>
         <div class="table-wrap">
           <div class="table-head">
             <div style="font-weight:600;font-size:0.9rem">Landing Pages</div>
             <div style="display:flex;gap:10px">
-              <button class="btn btn-secondary btn-sm" onclick="pubblicaLandingSelezionate()">Pubblica selezionate</button>
               <button class="btn btn-primary btn-sm" onclick="openLandingEditor()">+ Nuova Landing</button>
             </div>
           </div>
@@ -3841,7 +3843,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
           <!-- STEP 1: Destinatari & Gruppi -->
           <div style="margin-bottom:24px;padding:20px;background:#f8f6f3;border-radius:12px">
-            <h4 style="margin-bottom:12px;color:var(--oro)">1. Destinatari</h4>
+            <h4 style="margin-bottom:12px;color:var(--oro)">1. Destinatari & Gruppi</h4>
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
               <button class="btn btn-secondary btn-sm" onclick="emLoadClienti()">Carica tutti i clienti</button>
               <label class="btn btn-secondary btn-sm" style="cursor:pointer">
@@ -3854,9 +3856,9 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               <button class="btn btn-sm" style="background:#e74c3c;color:#fff;border:none" onclick="emPulisciLista()">Pulisci (rimuovi bounce)</button>
             </div>
 
-            <!-- Gruppi di intento -->
+            <!-- Gruppi di intento (predefiniti) -->
             <div style="margin-bottom:12px;padding:12px;background:#fff;border:1px solid #e0d6c8;border-radius:8px">
-              <label style="font-size:0.85rem;font-weight:600;display:block;margin-bottom:8px;color:var(--caffe)">Filtra per gruppo di intento:</label>
+              <label style="font-size:0.85rem;font-weight:600;display:block;margin-bottom:8px;color:var(--caffe)">Filtra per gruppo:</label>
               <div style="display:flex;gap:8px;flex-wrap:wrap" id="emGruppiBox">
                 <label style="display:flex;align-items:center;gap:4px;font-size:0.8rem;cursor:pointer;background:#f0f0f0;padding:4px 10px;border-radius:20px">
                   <input type="checkbox" class="em-gruppo-check" value="tutti" checked onchange="emFiltraGruppo()"> Tutti
@@ -3880,6 +3882,31 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <input type="checkbox" class="em-gruppo-check" value="newsletter" onchange="emFiltraGruppo()"> Solo Newsletter
                 </label>
               </div>
+              <!-- Gruppi personalizzati -->
+              <div id="emGruppiPersonalizzati" style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"></div>
+            </div>
+
+            <!-- Gestione Gruppi (stile Brevo) -->
+            <div style="margin-bottom:12px;padding:12px;background:#e8eaf6;border:1px solid #9fa8da;border-radius:8px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                <label style="font-size:0.85rem;font-weight:600;color:#283593">Gestione Gruppi (stile Brevo)</label>
+                <button class="btn btn-sm" onclick="emToggleGruppiManager()" style="background:#3f51b5;color:#fff;border:none;font-size:0.75rem">Gestisci gruppi</button>
+              </div>
+              <div id="emGruppiManager" style="display:none">
+                <div style="display:flex;gap:8px;margin-bottom:10px">
+                  <input type="text" id="emNuovoGruppo" placeholder="Nome nuovo gruppo..." style="flex:1;padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-size:0.8rem">
+                  <input type="color" id="emGruppoColore" value="#667eea" style="width:36px;height:30px;border:none;border-radius:4px;cursor:pointer">
+                  <button class="btn btn-sm" onclick="emCreaGruppo()" style="background:#4CAF50;color:#fff;border:none;font-size:0.75rem">+ Crea</button>
+                </div>
+                <div id="emListaGruppi" style="max-height:150px;overflow-y:auto;font-size:0.8rem"></div>
+                <p style="font-size:0.72rem;color:#5c6bc0;margin-top:6px;margin-bottom:0">I gruppi vengono salvati e puoi usarli per programmare invii separati con orari diversi.</p>
+              </div>
+            </div>
+
+            <!-- Storico invii per contatto -->
+            <div style="margin-bottom:12px">
+              <button class="btn btn-secondary btn-sm" onclick="emMostraStorico()" style="font-size:0.75rem">Storico invii per gruppo</button>
+              <div id="emStoricoGruppi" style="display:none;margin-top:8px;max-height:200px;overflow-y:auto;font-size:0.8rem;background:#fff;border:1px solid #e0d6c8;border-radius:8px;padding:10px"></div>
             </div>
 
             <div id="emDestinatari" style="max-height:200px;overflow-y:auto;font-size:0.85rem;color:var(--caffe2)">
@@ -3903,9 +3930,32 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               <button id="emTabCodice" onclick="emSwitchTab('codice')" style="flex:1;padding:10px;border:none;cursor:pointer;font-weight:600;font-size:0.85rem;background:#f8f6f3;color:var(--caffe);transition:all 0.2s">
                 Editor HTML (avanzato)
               </button>
-              <button id="emTabLanding" onclick="emSwitchTab('landing')" style="flex:1;padding:10px;border:none;cursor:pointer;font-weight:600;font-size:0.85rem;background:#f8f6f3;color:var(--caffe);transition:all 0.2s">
-                Seleziona Pagina/Landing
-              </button>
+            </div>
+
+            <!-- ═══ INSERISCI CONTENUTO DA... (3 tendine) ═══ -->
+            <div style="margin-bottom:16px;padding:14px;background:#fff;border:2px solid #667eea;border-radius:10px">
+              <label style="font-size:0.85rem;font-weight:600;display:block;margin-bottom:10px;color:#667eea">Inserisci contenuto da...</label>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+                <div>
+                  <label style="font-size:0.78rem;display:block;margin-bottom:4px;color:var(--caffe2)">Articoli Blog</label>
+                  <select id="emPickBlog" onchange="emInsertFromBlog(this.value)" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px;font-size:0.8rem">
+                    <option value="">— Seleziona articolo —</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="font-size:0.78rem;display:block;margin-bottom:4px;color:var(--caffe2)">Immobili</label>
+                  <select id="emPickImmobile" onchange="emInsertFromImmobile(this.value)" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px;font-size:0.8rem">
+                    <option value="">— Seleziona immobile —</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="font-size:0.78rem;display:block;margin-bottom:4px;color:var(--caffe2)">Landing Pages</label>
+                  <select id="emPickLanding" onchange="emInsertFromLanding(this.value)" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px;font-size:0.8rem">
+                    <option value="">— Seleziona landing —</option>
+                  </select>
+                </div>
+              </div>
+              <p style="font-size:0.72rem;color:var(--caffe2);margin-top:8px;margin-bottom:0">Seleziona un contenuto e verrà inserito automaticamente nel corpo email con immagine, titolo e link.</p>
             </div>
 
             <!-- Campi comuni -->
@@ -4013,6 +4063,20 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   </div>
                 </div>
 
+                <!-- Foto aggiuntive nel corpo -->
+                <div class="form-group" style="margin-bottom:12px">
+                  <label style="font-weight:600">Foto aggiuntive nel corpo <span style="font-size:0.75rem;font-weight:400;color:var(--caffe2)">(puoi aggiungerne quante vuoi)</span></label>
+                  <div id="emVisualExtraImages"></div>
+                  <div style="display:flex;gap:8px;margin-top:6px">
+                    <label class="btn btn-secondary btn-sm" style="cursor:pointer;margin:0">
+                      + Carica foto
+                      <input type="file" accept="image/*" multiple onchange="emAddExtraImages(event)" style="display:none">
+                    </label>
+                    <input type="text" id="emExtraImageUrl" placeholder="oppure incolla URL..." style="flex:1;padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-size:0.8rem">
+                    <button class="btn btn-sm" onclick="emAddExtraImageByUrl()" style="background:#667eea;color:#fff;border:none;font-size:0.75rem">Aggiungi</button>
+                  </div>
+                </div>
+
                 <div style="display:flex;gap:8px;margin-top:8px">
                   <button class="btn btn-secondary" onclick="emBuildVisualEmail()" style="flex:1">
                     Genera email dall'editor visuale
@@ -4037,6 +4101,18 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                     <button class="btn btn-secondary btn-sm" onclick="emLoadTemplate('offerta-luce')" style="font-size:0.75rem">Offerta Luce</button>
                   </div>
                 </div>
+                <!-- Inserisci foto nel codice HTML -->
+                <div style="margin-bottom:12px;padding:10px;background:#f8f6f3;border-radius:8px">
+                  <label style="font-size:0.8rem;font-weight:600;display:block;margin-bottom:6px">Inserisci immagine nel corpo:</label>
+                  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+                    <label class="btn btn-secondary btn-sm" style="cursor:pointer;margin:0">
+                      Carica foto
+                      <input type="file" accept="image/*" onchange="emInsertImageInHTML(event)" style="display:none">
+                    </label>
+                    <input type="text" id="emHtmlImageUrl" placeholder="oppure incolla URL immagine..." style="flex:1;padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-size:0.8rem">
+                    <button class="btn btn-sm" onclick="emInsertImageUrlInHTML()" style="background:#667eea;color:#fff;border:none;font-size:0.75rem">Inserisci URL</button>
+                  </div>
+                </div>
                 <div class="form-group" style="margin-bottom:0">
                   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
                     <label style="margin:0">Corpo HTML</label>
@@ -4044,46 +4120,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   </div>
                   <textarea id="emCorpo" rows="16" style="font-family:monospace;font-size:0.85rem;background:#1a1a2e;color:#e0e0e0;border:none;border-radius:8px;padding:12px" placeholder="<html>&#10;<body>&#10;  <h1>Titolo</h1>&#10;  <p>Gentile {{nome}}, ...</p>&#10;</body>&#10;</html>"></textarea>
                 </div>
-              </div>
-            </div>
-
-            <!-- ═══ TAB LANDING/PAGINA ═══ -->
-            <div id="emPanelLanding" style="display:none">
-              <div style="padding:16px;background:#fff;border:1px solid #e0d6c8;border-radius:8px">
-                <p style="font-size:0.8rem;color:var(--caffe2);margin-bottom:12px">Seleziona una pagina o landing già esistente nel sito. Verrà creata un'email con anteprima e link alla pagina.</p>
-
-                <div class="form-group" style="margin-bottom:12px">
-                  <label style="font-weight:600">Categoria</label>
-                  <select id="emLandingCategoria" onchange="emFilterLandings()" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px">
-                    <option value="tutti">Tutte le pagine</option>
-                    <option value="blog">Articoli Blog (12)</option>
-                    <option value="landing">Landing Page (4)</option>
-                    <option value="zona">Guide Zone/Quartieri (8)</option>
-                    <option value="servizio">Servizi (7)</option>
-                  </select>
-                </div>
-
-                <div class="form-group" style="margin-bottom:12px">
-                  <label style="font-weight:600">Seleziona pagina</label>
-                  <select id="emLandingSelect" onchange="emPreviewLanding()" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px" size="8">
-                    <option value="">— Seleziona una pagina —</option>
-                  </select>
-                </div>
-
-                <div id="emLandingPreview" style="display:none;padding:12px;background:#f8f6f0;border-radius:8px;margin-bottom:12px">
-                  <div style="font-weight:600;margin-bottom:6px" id="emLandingPreviewTitle"></div>
-                  <div style="font-size:0.8rem;color:var(--caffe2)" id="emLandingPreviewDesc"></div>
-                  <div style="font-size:0.75rem;color:#667eea;margin-top:4px" id="emLandingPreviewUrl"></div>
-                </div>
-
-                <div class="form-group" style="margin-bottom:12px">
-                  <label>Messaggio introduttivo (opzionale)</label>
-                  <textarea id="emLandingIntro" rows="3" placeholder="Gentile {{nome}}, abbiamo pubblicato un nuovo articolo che potrebbe interessarti..."></textarea>
-                </div>
-
-                <button class="btn btn-secondary" onclick="emBuildLandingEmail()" style="width:100%">
-                  Genera email con link alla pagina
-                </button>
               </div>
             </div>
 
@@ -4171,9 +4207,9 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             </div>
           </div>
 
-          <!-- STEP 4: Log & Analytics -->
+          <!-- STEP 5: Log & Analytics -->
           <div style="padding:20px;background:#f8f6f3;border-radius:12px;margin-bottom:24px">
-            <h4 style="margin-bottom:12px;color:var(--oro)">4. Log & Analytics</h4>
+            <h4 style="margin-bottom:12px;color:var(--oro)">5. Log & Analytics</h4>
             <div style="display:flex;gap:8px;margin-bottom:12px">
               <button class="btn btn-secondary btn-sm" onclick="emLoadStats()">Aggiorna statistiche</button>
               <button class="btn btn-secondary btn-sm" onclick="emLoadCampaignHistory()">Storico campagne</button>
@@ -4184,9 +4220,9 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             </div>
           </div>
 
-          <!-- STEP 5: Gestione Disiscrizioni -->
+          <!-- STEP 6: Gestione Disiscrizioni -->
           <div style="padding:20px;background:#f8f6f3;border-radius:12px">
-            <h4 style="margin-bottom:12px;color:var(--oro)">5. Gestione Disiscrizioni & Bounce</h4>
+            <h4 style="margin-bottom:12px;color:var(--oro)">6. Gestione Disiscrizioni & Bounce</h4>
             <div style="display:flex;gap:8px;margin-bottom:12px">
               <button class="btn btn-secondary btn-sm" onclick="emLoadUnsubscribed()">Vedi disiscritti</button>
               <button class="btn btn-secondary btn-sm" onclick="emLoadBounces()">Vedi bounce</button>
@@ -10168,22 +10204,228 @@ checkAuth();
         if (previewEl) previewEl.textContent = oggettoInput.value.replace(/\{\{nome\}\}/gi, 'Mario Rossi') || '—';
       });
     }
-    // Popola landing/pagine
-    emPopulateLandings();
+    // Popola le 3 tendine contenuto (blog, immobili, landing)
+    emPopulateContentPickers();
   });
 
-  // ═══ TAB SWITCHING (Visuale / Codice / Landing) ═══
+  // ═══ TAB SWITCHING (Visuale / Codice) ═══
   window.emSwitchTab = function(tab) {
     document.getElementById('emPanelVisuale').style.display = tab === 'visuale' ? 'block' : 'none';
     document.getElementById('emPanelCodice').style.display = tab === 'codice' ? 'block' : 'none';
-    document.getElementById('emPanelLanding').style.display = tab === 'landing' ? 'block' : 'none';
     document.getElementById('emTabVisuale').style.background = tab === 'visuale' ? 'var(--oro)' : '#f8f6f3';
     document.getElementById('emTabVisuale').style.color = tab === 'visuale' ? '#fff' : 'var(--caffe)';
     document.getElementById('emTabCodice').style.background = tab === 'codice' ? 'var(--oro)' : '#f8f6f3';
     document.getElementById('emTabCodice').style.color = tab === 'codice' ? '#fff' : 'var(--caffe)';
-    document.getElementById('emTabLanding').style.background = tab === 'landing' ? 'var(--oro)' : '#f8f6f3';
-    document.getElementById('emTabLanding').style.color = tab === 'landing' ? '#fff' : 'var(--caffe)';
   };
+
+  // ═══ POPOLA LE 3 TENDINE CONTENUTO ═══
+  async function emPopulateContentPickers() {
+    // 1. Articoli Blog
+    try {
+      const {data: articles} = await supabase.from('blog').select('id, titolo, slug, categoria, immagine_url').order('created_at', {ascending: false});
+      const sel = document.getElementById('emPickBlog');
+      if (sel && articles) {
+        articles.forEach(a => {
+          const opt = document.createElement('option');
+          opt.value = a.id;
+          opt.textContent = (a.categoria ? '[' + a.categoria + '] ' : '') + (a.titolo || 'Senza titolo');
+          opt.dataset.slug = a.slug || '';
+          opt.dataset.titolo = a.titolo || '';
+          opt.dataset.img = a.immagine_url || '';
+          sel.appendChild(opt);
+        });
+      }
+    } catch(e) { console.warn('Blog picker:', e.message); }
+
+    // 2. Immobili
+    try {
+      const {data: immobili} = await supabase.from('immobili').select('id, titolo, codice, comune, prezzo, tipo_operazione, foto').eq('attivo', true).order('created_at', {ascending: false});
+      const sel = document.getElementById('emPickImmobile');
+      if (sel && immobili) {
+        immobili.forEach(im => {
+          const opt = document.createElement('option');
+          opt.value = im.id;
+          const prezzoStr = im.prezzo ? ' — €' + Number(im.prezzo).toLocaleString('it-IT') : '';
+          opt.textContent = (im.codice || '') + ' ' + (im.titolo || im.comune || '') + prezzoStr;
+          opt.dataset.titolo = im.titolo || im.comune || '';
+          opt.dataset.codice = im.codice || '';
+          opt.dataset.prezzo = im.prezzo || '';
+          opt.dataset.tipo = im.tipo_operazione || '';
+          opt.dataset.comune = im.comune || '';
+          opt.dataset.img = (im.foto && im.foto.length) ? im.foto[0] : '';
+          sel.appendChild(opt);
+        });
+      }
+    } catch(e) { console.warn('Immobili picker:', e.message); }
+
+    // 3. Landing Pages
+    try {
+      const {data: landings} = await supabase.from('landing_pages').select('id, titolo, slug, url, categoria, descrizione').order('created_at', {ascending: false});
+      const sel = document.getElementById('emPickLanding');
+      if (sel && landings) {
+        landings.forEach(lp => {
+          const opt = document.createElement('option');
+          opt.value = lp.id;
+          opt.textContent = (lp.categoria ? '[' + lp.categoria + '] ' : '') + (lp.titolo || 'Senza titolo');
+          opt.dataset.titolo = lp.titolo || '';
+          opt.dataset.slug = lp.slug || '';
+          opt.dataset.url = lp.url || (lp.slug ? lp.slug + '.html' : '');
+          opt.dataset.desc = lp.descrizione || '';
+          sel.appendChild(opt);
+        });
+      }
+    } catch(e) { console.warn('Landing picker:', e.message); }
+  }
+
+  // ═══ INSERISCI CONTENUTO DA BLOG ═══
+  window.emInsertFromBlog = function(id) {
+    if (!id) return;
+    const sel = document.getElementById('emPickBlog');
+    const opt = sel.options[sel.selectedIndex];
+    const titolo = opt.dataset.titolo;
+    const slug = opt.dataset.slug;
+    const img = opt.dataset.img;
+    const url = 'https://righetto-immobiliare.it/blog/' + (slug || 'articolo') + '.html';
+
+    let html = '';
+    if (img) html += '<div style="text-align:center;margin-bottom:16px"><img src="' + escHtml(img) + '" style="max-width:100%;border-radius:8px" alt="' + escHtml(titolo) + '"></div>\n';
+    html += '<h2 style="color:#1a1a2e;margin-bottom:8px">' + escHtml(titolo) + '</h2>\n';
+    html += '<p>Gentile {{nome}}, abbiamo pubblicato un nuovo articolo che potrebbe interessarti.</p>\n';
+    html += '<p style="text-align:center;margin-top:16px"><a href="' + escHtml(url) + '" style="background:#d4a843;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600">Leggi l\'articolo</a></p>\n';
+
+    emInsertContentInEditor(html, titolo);
+    sel.selectedIndex = 0;
+  };
+
+  // ═══ INSERISCI CONTENUTO DA IMMOBILE ═══
+  window.emInsertFromImmobile = function(id) {
+    if (!id) return;
+    const sel = document.getElementById('emPickImmobile');
+    const opt = sel.options[sel.selectedIndex];
+    const titolo = opt.dataset.titolo;
+    const codice = opt.dataset.codice;
+    const prezzo = opt.dataset.prezzo;
+    const tipo = opt.dataset.tipo;
+    const comune = opt.dataset.comune;
+    const img = opt.dataset.img;
+    const url = 'https://righetto-immobiliare.it/immobile.html?id=' + id;
+
+    let html = '';
+    if (img) html += '<div style="text-align:center;margin-bottom:16px"><img src="' + escHtml(img) + '" style="max-width:100%;border-radius:8px" alt="' + escHtml(titolo) + '"></div>\n';
+    html += '<div style="background:#f8f6f0;border-left:4px solid #d4a843;padding:16px;border-radius:0 8px 8px 0;margin-bottom:16px">\n';
+    html += '  <h3 style="color:#1a1a2e;margin:0 0 6px">' + escHtml(titolo) + '</h3>\n';
+    if (codice) html += '  <p style="font-size:13px;color:#888;margin:0 0 4px">Rif. ' + escHtml(codice) + ' — ' + escHtml(comune) + '</p>\n';
+    if (tipo) html += '  <p style="font-size:13px;color:#888;margin:0 0 4px">Tipo: ' + escHtml(tipo) + '</p>\n';
+    if (prezzo) html += '  <p style="font-size:18px;color:#d4a843;font-weight:700;margin:8px 0 0">€ ' + Number(prezzo).toLocaleString('it-IT') + '</p>\n';
+    html += '</div>\n';
+    html += '<p style="text-align:center"><a href="' + escHtml(url) + '" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600">Vedi dettagli immobile</a></p>\n';
+
+    emInsertContentInEditor(html, titolo);
+    sel.selectedIndex = 0;
+  };
+
+  // ═══ INSERISCI CONTENUTO DA LANDING PAGE ═══
+  window.emInsertFromLanding = function(id) {
+    if (!id) return;
+    const sel = document.getElementById('emPickLanding');
+    const opt = sel.options[sel.selectedIndex];
+    const titolo = opt.dataset.titolo;
+    const urlPage = opt.dataset.url;
+    const desc = opt.dataset.desc;
+    const url = 'https://righetto-immobiliare.it/' + (urlPage || '');
+
+    let html = '<h2 style="color:#1a1a2e;margin-bottom:8px">' + escHtml(titolo) + '</h2>\n';
+    if (desc) html += '<p style="color:#555">' + escHtml(desc) + '</p>\n';
+    html += '<p>Gentile {{nome}}, ti segnaliamo questa pagina che potrebbe interessarti.</p>\n';
+    html += '<p style="text-align:center;margin-top:16px"><a href="' + escHtml(url) + '" style="background:#d4a843;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px">Scopri di più</a></p>\n';
+
+    emInsertContentInEditor(html, titolo);
+    sel.selectedIndex = 0;
+  };
+
+  // Helper: inserisce contenuto nell'editor attivo (visuale o codice)
+  function emInsertContentInEditor(html, titolo) {
+    const panelVisuale = document.getElementById('emPanelVisuale');
+    if (panelVisuale && panelVisuale.style.display !== 'none') {
+      // Siamo in modalità visuale: compila i campi
+      document.getElementById('emVisualTitle').value = titolo || '';
+      document.getElementById('emVisualBody').value = 'Gentile {{nome}},\n\nti segnaliamo un contenuto che potrebbe interessarti.\n\nClicca il pulsante qui sotto per maggiori dettagli.';
+      toast('Contenuto caricato nell\'editor visuale — clicca "Genera email" per completare', 'success');
+    } else {
+      // Siamo in modalità codice: inserisci HTML direttamente
+      const corpo = document.getElementById('emCorpo');
+      const cursorPos = corpo.selectionStart || corpo.value.length;
+      corpo.value = corpo.value.substring(0, cursorPos) + '\n' + html + '\n' + corpo.value.substring(cursorPos);
+      toast('Contenuto inserito nel corpo HTML', 'success');
+    }
+    // Auto-compila oggetto se vuoto
+    const oggettoInput = document.getElementById('emOggetto');
+    if (oggettoInput && !oggettoInput.value.trim()) {
+      oggettoInput.value = titolo || '';
+    }
+  }
+
+  // ═══ INSERISCI IMMAGINE IN EDITOR HTML ═══
+  window.emInsertImageInHTML = function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      const imgTag = '<img src="' + ev.target.result + '" style="max-width:100%;border-radius:8px;margin:12px 0" alt="Immagine">';
+      const corpo = document.getElementById('emCorpo');
+      const pos = corpo.selectionStart || corpo.value.length;
+      corpo.value = corpo.value.substring(0, pos) + '\n' + imgTag + '\n' + corpo.value.substring(pos);
+      toast('Immagine inserita nel corpo HTML', 'success');
+    };
+    reader.readAsDataURL(file);
+    e.target.value = '';
+  };
+
+  window.emInsertImageUrlInHTML = function() {
+    const url = document.getElementById('emHtmlImageUrl').value.trim();
+    if (!url) return toast('Inserisci un URL immagine', 'error');
+    const imgTag = '<img src="' + escHtml(url) + '" style="max-width:100%;border-radius:8px;margin:12px 0" alt="Immagine">';
+    const corpo = document.getElementById('emCorpo');
+    const pos = corpo.selectionStart || corpo.value.length;
+    corpo.value = corpo.value.substring(0, pos) + '\n' + imgTag + '\n' + corpo.value.substring(pos);
+    document.getElementById('emHtmlImageUrl').value = '';
+    toast('Immagine inserita nel corpo HTML', 'success');
+  };
+
+  // ═══ FOTO AGGIUNTIVE EDITOR VISUALE ═══
+  let emExtraImages = [];
+
+  window.emAddExtraImages = function(e) {
+    const files = Array.from(e.target.files);
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        emExtraImages.push(ev.target.result);
+        emRenderExtraImages();
+      };
+      reader.readAsDataURL(file);
+    });
+    e.target.value = '';
+  };
+
+  window.emAddExtraImageByUrl = function() {
+    const url = document.getElementById('emExtraImageUrl').value.trim();
+    if (!url) return toast('Inserisci un URL', 'error');
+    emExtraImages.push(url);
+    document.getElementById('emExtraImageUrl').value = '';
+    emRenderExtraImages();
+  };
+
+  function emRenderExtraImages() {
+    const box = document.getElementById('emVisualExtraImages');
+    if (!box) return;
+    box.innerHTML = emExtraImages.map((img, i) =>
+      '<div style="display:inline-block;position:relative;margin:4px">' +
+      '<img src="' + img + '" style="height:80px;border-radius:6px;border:1px solid #ddd">' +
+      '<button onclick="emExtraImages.splice(' + i + ',1);emRenderExtraImages()" style="position:absolute;top:-6px;right:-6px;background:#e74c3c;color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:12px;cursor:pointer;line-height:1">✕</button>' +
+      '</div>'
+    ).join('');
+  }
 
   // ═══ SCHEDULER TAB SWITCHING ═══
   window.emSwitchSchedTab = function(tab) {
@@ -10263,6 +10505,15 @@ checkAuth();
       html += `\n    <div style="background:#f8f6f0;border-left:4px solid #d4a843;padding:18px;border-radius:0 8px 8px 0;margin:20px 0">`;
       if (boxTitle) html += `\n      <h3 style="color:#1a1a2e;margin:0 0 8px;font-size:16px">${escHtml(boxTitle)}</h3>`;
       if (boxText) html += `\n      <p style="color:#555;font-size:14px;line-height:1.6;margin:0">${escHtml(boxText).replace(/\n/g,'<br>')}</p>`;
+      html += `\n    </div>`;
+    }
+
+    // Foto aggiuntive
+    if (emExtraImages.length) {
+      html += `\n    <div style="margin:20px 0">`;
+      emExtraImages.forEach(imgSrc => {
+        html += `\n      <img src="${imgSrc}" style="max-width:100%;border-radius:8px;margin-bottom:12px;display:block" alt="Foto">`;
+      });
       html += `\n    </div>`;
     }
 
@@ -10423,9 +10674,26 @@ checkAuth();
     if (selected.includes('tutti') || selected.length === 0) {
       emContatti = [...emTuttiContatti];
     } else {
+      // Separa gruppi predefiniti da gruppi custom
+      const predefiniti = selected.filter(s => !s.startsWith('custom_'));
+      const customIds = selected.filter(s => s.startsWith('custom_')).map(s => s.replace('custom_', ''));
+
+      // Raccogli email dai gruppi custom
+      const customEmails = new Set();
+      customIds.forEach(gid => {
+        const g = emGruppiCustom.find(gr => gr.id === gid);
+        if (g && g.contatti) g.contatti.forEach(e => customEmails.add(e));
+      });
+
       emContatti = emTuttiContatti.filter(c => {
-        const tipo = (c.tipo_cliente || c.gruppo || '').toLowerCase();
-        return selected.some(s => tipo.includes(s));
+        // Match per tipo_cliente predefinito
+        if (predefiniti.length) {
+          const tipo = (c.tipo_cliente || c.gruppo || '').toLowerCase();
+          if (predefiniti.some(s => tipo.includes(s))) return true;
+        }
+        // Match per gruppo custom
+        if (customEmails.has(c.email)) return true;
+        return false;
       });
     }
 
@@ -10440,6 +10708,139 @@ checkAuth();
     emRenderList();
     toast(emContatti.length + ' contatti filtrati','info');
   };
+
+  // ═══ GESTIONE GRUPPI PERSONALIZZATI (STILE BREVO) ═══
+  let emGruppiCustom = [];
+
+  // Carica gruppi da localStorage (o Supabase se disponibile)
+  async function emLoadGruppi() {
+    try {
+      const {data} = await supabase.from('gruppi_email').select('*').order('created_at', {ascending: false});
+      if (data) { emGruppiCustom = data; }
+    } catch(e) {
+      try { emGruppiCustom = JSON.parse(localStorage.getItem('rig_gruppi_email') || '[]'); } catch(ex) { emGruppiCustom = []; }
+    }
+    emRenderGruppi();
+    emRenderGruppiChips();
+  }
+
+  function emSaveGruppiLocal() {
+    try { localStorage.setItem('rig_gruppi_email', JSON.stringify(emGruppiCustom)); } catch(e) {}
+  }
+
+  window.emToggleGruppiManager = function() {
+    const mgr = document.getElementById('emGruppiManager');
+    mgr.style.display = mgr.style.display === 'none' ? 'block' : 'none';
+    if (mgr.style.display !== 'none') emLoadGruppi();
+  };
+
+  window.emCreaGruppo = function() {
+    const nome = document.getElementById('emNuovoGruppo').value.trim();
+    const colore = document.getElementById('emGruppoColore').value;
+    if (!nome) return toast('Inserisci un nome per il gruppo', 'error');
+    if (emGruppiCustom.some(g => g.nome.toLowerCase() === nome.toLowerCase())) return toast('Gruppo già esistente', 'error');
+
+    const gruppo = { id: 'g_' + Date.now(), nome, colore, contatti: [], created_at: new Date().toISOString() };
+    emGruppiCustom.push(gruppo);
+    emSaveGruppiLocal();
+
+    // Salva in Supabase se possibile
+    try { supabase.from('gruppi_email').insert({ nome, colore }).then(() => {}); } catch(e) {}
+
+    document.getElementById('emNuovoGruppo').value = '';
+    emRenderGruppi();
+    emRenderGruppiChips();
+    toast('Gruppo "' + nome + '" creato!', 'success');
+  };
+
+  window.emDeleteGruppo = function(id) {
+    if (!confirm('Eliminare questo gruppo?')) return;
+    emGruppiCustom = emGruppiCustom.filter(g => g.id !== id);
+    emSaveGruppiLocal();
+    try { supabase.from('gruppi_email').delete().eq('id', id).then(() => {}); } catch(e) {}
+    emRenderGruppi();
+    emRenderGruppiChips();
+  };
+
+  window.emAssegnaContatti = function(gruppoId) {
+    // Assegna i contatti attualmente filtrati al gruppo
+    const gruppo = emGruppiCustom.find(g => g.id === gruppoId);
+    if (!gruppo) return;
+    const emails = emContatti.map(c => c.email);
+    gruppo.contatti = [...new Set([...(gruppo.contatti || []), ...emails])];
+    emSaveGruppiLocal();
+    emRenderGruppi();
+    toast(emails.length + ' contatti assegnati al gruppo "' + gruppo.nome + '"', 'success');
+  };
+
+  window.emFiltraPerGruppoCustom = function(gruppoId) {
+    const gruppo = emGruppiCustom.find(g => g.id === gruppoId);
+    if (!gruppo || !gruppo.contatti || !gruppo.contatti.length) return toast('Gruppo vuoto', 'info');
+    const emailSet = new Set(gruppo.contatti);
+    emContatti = emTuttiContatti.filter(c => emailSet.has(c.email));
+    emRenderList();
+    toast(emContatti.length + ' contatti del gruppo "' + gruppo.nome + '"', 'info');
+  };
+
+  function emRenderGruppi() {
+    const box = document.getElementById('emListaGruppi');
+    if (!box) return;
+    if (!emGruppiCustom.length) {
+      box.innerHTML = '<em style="color:#7986cb">Nessun gruppo personalizzato creato.</em>';
+      return;
+    }
+    box.innerHTML = emGruppiCustom.map(g =>
+      '<div style="display:flex;align-items:center;gap:8px;padding:6px 8px;background:#fff;border-radius:6px;margin-bottom:4px;border-left:4px solid ' + (g.colore || '#667eea') + '">' +
+      '<strong style="flex:1">' + escHtml(g.nome) + '</strong>' +
+      '<span style="font-size:0.72rem;color:#888">' + ((g.contatti || []).length) + ' contatti</span>' +
+      '<button onclick="emAssegnaContatti(\'' + g.id + '\')" style="background:#4CAF50;color:#fff;border:none;border-radius:4px;padding:2px 8px;font-size:0.7rem;cursor:pointer" title="Assegna contatti filtrati a questo gruppo">+ Assegna</button>' +
+      '<button onclick="emFiltraPerGruppoCustom(\'' + g.id + '\')" style="background:#667eea;color:#fff;border:none;border-radius:4px;padding:2px 8px;font-size:0.7rem;cursor:pointer">Filtra</button>' +
+      '<button onclick="emDeleteGruppo(\'' + g.id + '\')" style="background:#e74c3c;color:#fff;border:none;border-radius:4px;padding:2px 6px;font-size:0.7rem;cursor:pointer">✕</button>' +
+      '</div>'
+    ).join('');
+  }
+
+  function emRenderGruppiChips() {
+    const box = document.getElementById('emGruppiPersonalizzati');
+    if (!box) return;
+    box.innerHTML = emGruppiCustom.map(g =>
+      '<label style="display:flex;align-items:center;gap:4px;font-size:0.8rem;cursor:pointer;background:' + (g.colore || '#667eea') + '22;padding:4px 10px;border-radius:20px;border:1px solid ' + (g.colore || '#667eea') + '">' +
+      '<input type="checkbox" class="em-gruppo-check" value="custom_' + g.id + '" onchange="emFiltraGruppo()"> ' + escHtml(g.nome) +
+      '</label>'
+    ).join('');
+  }
+
+  // ═══ STORICO INVII PER GRUPPO ═══
+  window.emMostraStorico = async function() {
+    const box = document.getElementById('emStoricoGruppi');
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    if (box.style.display === 'none') return;
+
+    box.innerHTML = '<em>Caricamento...</em>';
+    try {
+      const {data} = await supabase.from('campagne_email').select('*').order('created_at', {ascending: false}).limit(20);
+      if (!data || !data.length) {
+        box.innerHTML = '<em>Nessun invio registrato.</em>';
+        return;
+      }
+      box.innerHTML = '<table style="width:100%;font-size:0.78rem"><thead><tr><th>Campagna</th><th>Gruppo</th><th>Data invio</th><th>Destinatari</th><th>Stato</th></tr></thead><tbody>' +
+        data.map(c =>
+          '<tr>' +
+          '<td>' + escHtml(c.nome || c.oggetto || '—') + '</td>' +
+          '<td>' + escHtml(c.gruppo || 'tutti') + '</td>' +
+          '<td>' + (c.pianificata_per ? new Date(c.pianificata_per).toLocaleString('it-IT') : c.created_at ? new Date(c.created_at).toLocaleString('it-IT') : '—') + '</td>' +
+          '<td>' + (c.totale_destinatari || 0) + '</td>' +
+          '<td>' + (c.stato === 'completata' ? '<span style="color:green">Completata</span>' : c.stato === 'in_coda' ? '<span style="color:orange">In coda</span>' : escHtml(c.stato || '—')) + '</td>' +
+          '</tr>'
+        ).join('') +
+        '</tbody></table>';
+    } catch(e) {
+      box.innerHTML = '<em>Errore caricamento storico: ' + escHtml(e.message) + '</em>';
+    }
+  };
+
+  // Init: carica gruppi all'avvio della pagina
+  setTimeout(emLoadGruppi, 1000);
 
   // ═══ MULTI-PROGRAMMAZIONE ═══
   window.emAddScheduledSend = function() {
@@ -10473,6 +10874,7 @@ checkAuth();
             <option value="affittuario" ${s.gruppo==='affittuario'?'selected':''}>Affittuari</option>
             <option value="azienda" ${s.gruppo==='azienda'?'selected':''}>Aziende</option>
             <option value="newsletter" ${s.gruppo==='newsletter'?'selected':''}>Newsletter</option>
+            ${emGruppiCustom.map(g => '<option value="custom_' + g.id + '" ' + (s.gruppo==='custom_'+g.id?'selected':'') + '>' + escHtml(g.nome) + ' (' + (g.contatti||[]).length + ')</option>').join('')}
           </select>
         </div>
         <div>
@@ -10502,17 +10904,31 @@ checkAuth();
       const scheduledFor = new Date(s.data + 'T' + s.ora + ':00');
       if (scheduledFor < new Date()) { toast('La data ' + s.data + ' è nel passato!','error'); return; }
 
+      // Risolvi nome gruppo per custom
+      let gruppoNome = s.gruppo;
+      let numDestinatari = 0;
+      if (s.gruppo.startsWith('custom_')) {
+        const g = emGruppiCustom.find(gr => gr.id === s.gruppo.replace('custom_', ''));
+        gruppoNome = g ? g.nome : s.gruppo;
+        numDestinatari = g ? (g.contatti || []).length : 0;
+      } else if (s.gruppo === 'tutti') {
+        numDestinatari = emTuttiContatti.length;
+      } else {
+        numDestinatari = emTuttiContatti.filter(c => (c.tipo_cliente || '').toLowerCase().includes(s.gruppo)).length;
+      }
+
       try {
         await supabase.from('campagne_email').insert({
-          nome: 'Programmata: ' + s.gruppo + ' — ' + s.data + ' ' + s.ora,
+          nome: 'Programmata: ' + gruppoNome + ' — ' + s.data + ' ' + s.ora,
           oggetto: oggetto,
           preheader: document.getElementById('emPreheader')?.value || '',
           corpo_html: corpo,
           mittente_email: document.getElementById('emMittente')?.value || 'info@righetto-immobiliare.it',
           mittente_nome: document.getElementById('emNomeMittente')?.value || 'Righetto Immobiliare',
+          gruppo: gruppoNome,
           stato: 'in_coda',
           pianificata_per: scheduledFor.toISOString(),
-          totale_destinatari: 0 // verrà aggiornato al momento dell'invio
+          totale_destinatari: numDestinatari
         });
         saved++;
       } catch(e) {
@@ -10560,24 +10976,37 @@ checkAuth();
     const reader = new FileReader();
     reader.onload = function(ev) {
       const lines = ev.target.result.split('\n').filter(l => l.trim());
-      let imported = 0;
+      let imported = 0, duplicati = 0;
+      // Costruisci set di email e telefoni già presenti
+      const existingEmails = new Set(emContatti.map(c => (c.email || '').toLowerCase().trim()));
+      const existingPhones = new Set(emContatti.filter(c => c.telefono).map(c => c.telefono.replace(/\D/g,'')));
+
       lines.forEach(line => {
         const parts = line.split(/[,;\t]/).map(p => p.trim().replace(/^"|"$/g,''));
+        let email = '', nome = '', telefono = '';
         if (parts.length >= 2) {
           const isEmail0 = parts[0].includes('@');
-          const email = isEmail0 ? parts[0] : parts[1];
-          const nome = isEmail0 ? parts[1] : parts[0];
-          if (email.includes('@')) {
-            emContatti.push({nome, email});
-            imported++;
-          }
+          email = (isEmail0 ? parts[0] : parts[1]).toLowerCase().trim();
+          nome = isEmail0 ? parts[1] : parts[0];
+          if (parts.length >= 3) telefono = parts[2].replace(/\D/g,'');
         } else if (parts[0] && parts[0].includes('@')) {
-          emContatti.push({nome: '', email: parts[0]});
-          imported++;
+          email = parts[0].toLowerCase().trim();
         }
+        if (!email.includes('@')) return;
+
+        // Deduplica per email o telefono
+        if (existingEmails.has(email)) { duplicati++; return; }
+        if (telefono && telefono.length >= 6 && existingPhones.has(telefono)) { duplicati++; return; }
+
+        existingEmails.add(email);
+        if (telefono) existingPhones.add(telefono);
+        emContatti.push({nome, email, telefono: telefono || undefined});
+        imported++;
       });
       emRenderList();
-      toast(imported + ' contatti importati','success');
+      let msg = imported + ' contatti importati';
+      if (duplicati > 0) msg += ' (' + duplicati + ' duplicati rimossi)';
+      toast(msg, 'success');
     };
     reader.readAsText(file);
     e.target.value = '';
@@ -10685,7 +11114,29 @@ checkAuth();
 
       if (!records.length) return toast('Nessun contatto valido trovato','error');
 
-      if (!confirm(`Trovati ${records.length} contatti validi.\nCaricare nel database Supabase?`)) return;
+      // ═══ DEDUPLICA: controlla email e telefoni già in DB ═══
+      let dedupMsg = '';
+      try {
+        const {data: existingClients} = await supabase.from('clienti').select('email, telefono');
+        if (existingClients && existingClients.length) {
+          const dbEmails = new Set(existingClients.map(c => (c.email || '').toLowerCase()));
+          const dbPhones = new Set(existingClients.filter(c => c.telefono).map(c => c.telefono.replace(/\D/g,'')));
+          const beforeCount = records.length;
+          const dedupRecords = records.filter(r => {
+            if (dbEmails.has(r.email)) return false;
+            if (r.telefono && dbPhones.has(r.telefono.replace(/\D/g,''))) return false;
+            return true;
+          });
+          const removed = beforeCount - dedupRecords.length;
+          if (removed > 0) {
+            dedupMsg = `\n(${removed} duplicati trovati per email/telefono già in DB — verranno saltati)`;
+            records.splice(0, records.length, ...dedupRecords);
+          }
+        }
+      } catch(e) { console.warn('Deduplica DB skip:', e.message); }
+
+      if (!records.length) return toast('Tutti i contatti sono già presenti nel database','info');
+      if (!confirm(`Trovati ${records.length} contatti nuovi da importare.${dedupMsg}\nCaricare nel database Supabase?`)) return;
 
       // Upload in batch
       const BATCH = 50;
