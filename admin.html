@@ -3869,8 +3869,13 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           <!-- STEP 3: Anteprima & Invio -->
           <div style="margin-bottom:24px;padding:20px;background:#f8f6f3;border-radius:12px">
             <h4 style="margin-bottom:12px;color:var(--oro)">3. Anteprima & Invio</h4>
-            <button class="btn btn-secondary btn-sm" onclick="emPreview()" style="margin-bottom:12px">Mostra anteprima</button>
-            <div id="emPreviewBox" style="display:none;border:1px solid #ddd;padding:16px;border-radius:8px;background:#fff;margin-bottom:12px;max-height:300px;overflow-y:auto"></div>
+            <div style="display:flex;gap:8px;margin-bottom:12px">
+              <button class="btn btn-secondary btn-sm" onclick="emPreview()">Mostra anteprima</button>
+              <button class="btn btn-secondary btn-sm" id="emBtnChiudi" onclick="emChiudiPreview()" style="display:none">Chiudi anteprima</button>
+            </div>
+            <div id="emPreviewBox" style="display:none;border:1px solid #ddd;border-radius:8px;background:#fff;margin-bottom:12px;overflow:hidden">
+              <iframe id="emPreviewFrame" style="width:100%;height:600px;border:none"></iframe>
+            </div>
             <div style="display:flex;gap:8px;align-items:center">
               <button class="btn btn-primary" id="emBtnInvia" onclick="emInvia()">Invia a tutti</button>
               <button class="btn btn-danger btn-sm" id="emBtnStop" onclick="emStop()" style="display:none">Ferma invio</button>
@@ -9911,17 +9916,22 @@ checkAuth();
   window.emPreview = function() {
     const oggetto = document.getElementById('emOggetto').value;
     const corpo = document.getElementById('emCorpo').value;
-    const unsubscribe = document.getElementById('emUnsubscribe').checked;
     if (!oggetto || !corpo) return toast('Compila oggetto e corpo','error');
 
     const nome = emContatti.length ? (emContatti[0].nome || 'Cliente') : 'Cliente';
     let html = corpo.replace(/\{\{nome\}\}/gi, escHtml(nome));
-    if (unsubscribe) {
-      html += '<br><br><hr style="border:none;border-top:1px solid #ccc"><p style="font-size:11px;color:#999;text-align:center">Se non desideri ricevere queste comunicazioni, rispondi con oggetto "CANCELLAMI"</p>';
-    }
+
     const box = document.getElementById('emPreviewBox');
+    const frame = document.getElementById('emPreviewFrame');
     box.style.display = 'block';
-    box.innerHTML = '<div style="margin-bottom:8px"><strong>Oggetto:</strong> ' + escHtml(oggetto) + '</div><hr style="margin:8px 0"><div>' + html + '</div>';
+    document.getElementById('emBtnChiudi').style.display = 'inline-block';
+    frame.srcdoc = html;
+  };
+
+  window.emChiudiPreview = function() {
+    document.getElementById('emPreviewBox').style.display = 'none';
+    document.getElementById('emBtnChiudi').style.display = 'none';
+    document.getElementById('emPreviewFrame').srcdoc = '';
   };
 
   // Invio batch
