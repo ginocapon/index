@@ -1,7 +1,7 @@
 # SKILL KILLER - Prompt Operativo per righettoimmobiliare.it
 ### (Il nome e' ironico, ma il contenuto e' serissimo)
 
-> **Versione:** 1.2 - 4 Marzo 2026
+> **Versione:** 1.3 - 4 Marzo 2026
 > **Ultimo aggiornamento Google verificato:** Marzo 2026
 > **Prossima verifica consigliata:** Aprile 2026
 
@@ -54,22 +54,39 @@ Ogni volta che trovi aggiornamenti rilevanti:
 
 ### File Principali del Sito
 ```
-index.html          - Homepage (1.1 MB, canvas animato)
-immobili.html       - Lista immobili
-immobile.html       - Dettaglio immobile
-servizi.html        - Pagina servizi
-chi-siamo.html      - Chi siamo
-contatti.html       - Form contatti
-blog.html           - Blog
-faq.html            - FAQ
-admin.html          - Pannello admin
-js/chatbot.js       - Chatbot Sara (1,595 righe)
-js/config.js        - Configurazioni API
-js/welcome-popup.js - Popup benvenuto
-js/cookie-consent.js - Cookie consent
-sitemap.xml         - Sitemap per Google
-robots.txt          - Direttive crawler
-CNAME               - Dominio GitHub Pages
+index.html                          - Homepage
+immobili.html                       - Lista immobili
+immobile.html                       - Dettaglio immobile
+agenzia-immobiliare-padova.html     - Pagina pillar "agenzia immobiliare padova" (keyword #1)
+servizi.html                        - Pagina servizi hub
+servizio-vendita.html               - Servizio vendita (con FAQ)
+servizio-locazioni.html             - Servizio locazioni
+servizio-preliminari.html           - Servizio preliminari
+servizio-valutazioni.html           - Servizio valutazioni (con FAQ)
+servizio-gestione.html              - Servizio gestione immobili
+servizio-utenze.html                - Servizio utenze
+chi-siamo.html                      - Chi siamo
+contatti.html                       - Form contatti
+blog.html                           - Blog hub
+blog-*.html (11 articoli)           - Articoli blog SEO
+faq.html                            - FAQ (30+ domande)
+zona-*.html (8 quartieri)           - Pagine quartieri Padova (con RealEstateAgent + FAQPage schema)
+landing-vendita.html                - Landing vendita
+landing-valutazione.html            - Landing valutazione
+landing-agente.html                 - Landing agente
+admin.html                          - Pannello admin
+js/chatbot.js                       - Chatbot Sara + dati FAQ + database prezzi
+js/config.js                        - Configurazioni API
+js/welcome-popup.js                 - Popup benvenuto
+js/cookie-consent.js                - Cookie consent
+js/nav-mobile.js                    - Navigazione mobile
+js/scroll-reveal.js                 - Animazioni scroll
+scripts/seo-content-generator.js    - Generatore template SEO per nuovi articoli
+sitemap.xml                         - Sitemap per Google (40 URL)
+robots.txt                          - Direttive crawler
+CNAME                               - Dominio GitHub Pages
+SKILL-KILLER.md                     - QUESTO FILE — prompt operativo master
+SERP-STRATEGY.md                    - Copia dettagliata strategia SERP (deprecato, tutto in SKILL-KILLER.md)
 ```
 
 ---
@@ -317,7 +334,208 @@ CNAME               - Dominio GitHub Pages
 
 ---
 
+## ANALISI COMPETITIVA E STRATEGIA SERP
+
+> **IMPORTANTE PER CLAUDE:** Questa sezione contiene l'analisi completa dei competitor,
+> lo stato delle SERP, le strategie da implementare e i KPI da monitorare.
+> Ad ogni sessione di lavoro, VERIFICA lo stato di avanzamento delle checklist qui sotto
+> e comunica all'utente cosa e' stato fatto e cosa resta da fare.
+
+### Stato Attuale SERP (marzo 2026)
+
+| Keyword | Posizione Righetto | Chi appare |
+|---|---|---|
+| "agenzia immobiliare padova" | NON APPARE | LuxuryEstate, RicercAttiva, Unico Immobiliare, Instagram vari |
+| "vendere casa padova agenzia" | NON APPARE | Dove.it, venderecasapadova.it, Tetto Rosso, Grimaldi, Pianeta Casa |
+| "comprare casa padova" | NON APPARE | Idealista, Immobiliare.it, Subito, RE/MAX, Tecnocasa (portali dominano) |
+| "Righetto Immobiliare Padova" | SI (brand) | Idealista, Immobiliare.it, Casa.it, Wikicasa |
+
+**Problema principale**: SEO on-page eccellente (il migliore tra i locali), ma domain authority troppo bassa per competere nelle SERP generiche.
+
+### Competitor Diretti — Confronto
+
+| Feature | Righetto | Tetto Rosso | RicercAttiva | Pianeta Casa | Tecnocasa | Gabetti | Engel & Volkers | Tempocasa | Grimaldi |
+|---|---|---|---|---|---|---|---|---|---|
+| Clean URLs | **Forte** | Forte | Forte | Forte | Miste | Buone | Buone (SPA) | Buone | Forte |
+| FAQ Pages | **Si (migliore)** | Si | No | No | No | No | No | No | No |
+| Blog/Content | **Si** | Si | Si (migliore) | Si | Minimo | Minimo | No | Nazionale | Si |
+| Schema.org | **Esteso (migliore)** | Buono | Buono | Base | Base | Base | Non trovato | Base | Buono |
+| Recensioni Google | ~127 (schema) | **~256** | Poche | ~104 | 20-80/ufficio | N/D | N/D | Alto (nazionale) | N/D |
+| Qualita sito | **Alta** | Alta | Buona | Buona | Template | Corporate | Premium | Moderna | Buona |
+| Appare in SERP | **NO** | **SI** | **SI** | No | Si (portale) | Si (portale) | No | No | Si |
+
+**Competitor #1 — Tetto Rosso Immobiliare (PERICOLO ALTO)**
+- 4 uffici incluso **Limena** (stessa zona nostra)
+- **256 recensioni Google** (il doppio delle nostre)
+- FAQ page + Magazine/Blog
+- **Appaiono in SERP** per "vendere casa padova agenzia"
+- LEZIONE: la differenza e' nei backlink e nella longevita del dominio
+
+### SUPER KILL 1 — Google Business Profile (PRIORITA N.1)
+- [ ] Ottimizzare profilo GBP al 100%: tutte le categorie (agenzia immobiliare, consulente immobiliare, valutatore immobiliare)
+- [ ] Aggiungere TUTTI i servizi nel GBP: vendita, acquisto, affitto, valutazione, gestione, virtual tour
+- [ ] Pubblicare Google Posts OGNI SETTIMANA (nuovi immobili, articoli blog, offerte)
+- [ ] Aggiungere foto OGNI SETTIMANA (immobili, team, ufficio, eventi)
+- [ ] Compilare tutte le Q&A del profilo GBP (le stesse FAQ del sito)
+- [ ] Verificare che gli attributi siano completi (orari, accessibilita, servizi)
+
+### SUPER KILL 2 — Recensioni Google (GAP PIU CRITICO)
+- [ ] Tetto Rosso ha 256 recensioni, Pianeta Casa 104, Righetto ~127 (non verificato)
+- [ ] AZIONE: messaggio WhatsApp post-rogito con link diretto a Google Review
+- [ ] OBIETTIVO: +30 recensioni/anno (bastano i rogiti normali)
+- [ ] SCRIPT messaggio: "Gentile [nome], grazie per aver scelto Righetto Immobiliare! Se il nostro servizio ti ha soddisfatto, ci farebbe piacere una tua recensione su Google: [link]. Ci aiuta molto!"
+- [ ] MAI comprare recensioni false — penalita = rimozione TUTTE le recensioni + sospensione GBP + multa AGCM fino a 5M euro
+
+### SUPER KILL 3 — Backlink Locali (COSTRUIRE DOMAIN AUTHORITY)
+- [ ] Registrarsi su PadovaOggi / IlGazzettino come fonte esperta (articoli mercato immobiliare)
+- [ ] Comunicati stampa su quotidiani locali (dati mercato, report annuali)
+- [ ] Collaborazioni con geometri, notai, architetti di Padova (scambio link)
+- [ ] Registrazione su directory locali: PagineGialle, Yelp, TripAdvisor, Cylex, TuttoCitta
+- [ ] Profilo LinkedIn aziendale con link al sito e contenuti regolari
+- [ ] Profilo FIAIP / FIMAA con link al sito
+- [ ] Guest post su blog immobiliari nazionali (Idealista News, CasaNoi, etc.)
+
+### SUPER KILL 4 — Citazioni NAP Consistenti
+- [ ] Verificare che Nome/Indirizzo/Telefono sia IDENTICO su: Google, Idealista, Immobiliare.it, Casa.it, PagineGialle, Yelp, Cylex, TuttoCitta, Virgilio
+- [ ] Formato standard: "Righetto Immobiliare" — usare ovunque lo stesso nome
+- [ ] Indirizzo: Via Roma 96, 35010 Limena PD (sempre identico)
+- [ ] Telefono: 049 884 3484 (stesso formato ovunque)
+
+### Strategie Rubate ai Concorrenti
+
+**Da Tetto Rosso Immobiliare (competitor #1)**
+- 256 recensioni Google: processo sistematico post-vendita
+- 4 uffici incluso Limena: prossimita geografica come vantaggio
+- [ ] AZIONE: verificare backlink di tettorossoimmobiliare.it con Ahrefs/Semrush
+
+**Da RicercAttiva (competitor #2 per content)**
+- Blog aggressivo: articoli su successioni, tasse, agevolazioni, legge di bilancio
+- Posizionamento unico: "trovo casa in 90 giorni"
+- URL long-tail con keyword (slug lunghissimi)
+- [ ] AZIONE: scrivere articoli su temi fiscali/legali per catturare traffico informativo
+
+**Da venderecasapadova.it (Federico Rigato)**
+- Dominio exact-match: vantaggio SERP enorme per "vendere casa padova"
+- Landing page singola: funnel di conversione diretto, "vendo in 59 giorni"
+- Open House technique
+- [ ] AZIONE: creare landing-vendere-casa-padova.html ultra-ottimizzata
+- [ ] AZIONE: valutare tecnica Open House come differenziazione
+
+**Da Pianeta Casa Padova**
+- Widget Google Reviews integrato nel sito (embed reale)
+- 104 recensioni con processo strutturato
+- Tool confronto immobili
+- [ ] AZIONE: aggiungere widget Google Reviews nel footer o homepage
+
+**Da Grimaldi Padova**
+- Magazine mensile: freshness signals per Google
+- Articoli tecnico-legali che attirano link naturali
+- [ ] AZIONE: pubblicare almeno 2 articoli blog al mese
+
+**Da Engel & Volkers**
+- Instagram forte: 826 follower per singolo ufficio Padova
+- [ ] AZIONE: rafforzare presenza Instagram con reels immobili, storie quartieri
+
+**Da Tempocasa**
+- 20.775 recensioni Trustpilot nazionali
+- Matterport virtual tour 3D
+- "Immobile Certificato": bollino qualita sugli annunci
+- [ ] AZIONE: creare bollino "Verificato Righetto" (certificazione documentale pre-pubblicazione)
+
+### Contenuti Mancanti da Creare (Topic Cluster)
+
+**Cluster "Vendere Casa Padova"**
+- [x] servizio-vendita.html (pagina servizio + FAQ)
+- [x] blog-costi-vendere-casa-padova-2026.html
+- [ ] landing-vendere-casa-padova.html (landing dedicata, ultra-ottimizzata)
+- [ ] blog-tempi-vendita-casa-padova.html ("quanto tempo per vendere casa a Padova")
+- [ ] blog-documenti-vendita-casa.html ("documenti per vendere casa")
+- [ ] blog-tasse-vendita-casa.html ("tasse e costi vendita immobiliare")
+
+**Cluster "Comprare Casa Padova"**
+- [x] blog-comprare-casa-padova-guida-2026.html
+- [x] blog-mutuo-prima-casa-padova.html
+- [ ] blog-agevolazioni-prima-casa-2026.html ("bonus prima casa under 36")
+- [ ] blog-successione-immobiliare-padova.html ("casa ereditata, cosa fare")
+- [ ] blog-investire-immobiliare-padova.html ("investimento immobiliare Padova")
+
+**Cluster "Quartieri Padova"**
+- [x] blog-quartieri-padova-2026.html
+- [x] 8 pagine zona-*.html (con RealEstateAgent + FAQPage schema)
+- [x] agenzia-immobiliare-padova.html (pagina pillar)
+- [ ] zona-limena.html (CRITICO — comune sede agenzia!)
+- [ ] zona-vigonza.html
+- [ ] zona-abano-terme.html
+- [ ] zona-selvazzano.html
+
+**Cluster "Affitto Padova"**
+- [x] blog-affitto-studenti-padova.html
+- [x] servizio-locazioni.html
+- [ ] blog-contratto-affitto-padova.html ("canone concordato Padova")
+- [ ] blog-rendimento-affitto-padova.html ("rendimento locativo per quartiere")
+
+### Azioni Tecniche SEO — Stato Avanzamento
+
+**Completate (4 marzo 2026)**
+- [x] Aggiunto RealEstateAgent schema a tutte le 8 zone pages
+- [x] Aggiunto FAQPage schema con 4 FAQ specifiche per ogni quartiere
+- [x] Aggiunto FAQ section visibile + FAQPage schema a servizio-vendita.html (5 FAQ)
+- [x] Aggiunto FAQ section visibile + FAQPage schema a servizio-valutazioni.html (5 FAQ)
+- [x] Creata pagina pillar agenzia-immobiliare-padova.html (keyword #1 mancante)
+- [x] Aggiornato sitemap.xml con nuova pagina
+- [x] Clean URLs: rimosso .html da tutti i link interni
+- [x] Fix pagina FAQ vuota (chatbot.js sincrono)
+
+**Da fare (prossime sessioni)**
+- [ ] Aggiungere FAQPage schema alle altre 4 service pages (locazioni, preliminari, gestione, utenze)
+- [ ] Creare landing-vendere-casa-padova.html (keyword "vendere casa padova")
+- [ ] Creare zona-limena.html (comune sede agenzia — CRITICO)
+- [ ] Aggiungere internal linking tra blog posts e zone pages (cross-link contestuali)
+- [ ] Aggiungere link alla pagina agenzia-immobiliare-padova nel nav o nel footer
+- [ ] Verificare tutti i link interni (nessun broken link)
+- [ ] Verificare indexing in Google Search Console dopo deploy
+- [ ] Richiedere indicizzazione manuale delle nuove pagine via GSC
+- [ ] Aggiungere widget Google Reviews reale nella homepage
+- [ ] Configurare hreflang se si prevede versione EN
+
+### KPI da Monitorare
+
+| Metrica | Valore attuale | Obiettivo 3 mesi | Obiettivo 6 mesi |
+|---|---|---|---|
+| Recensioni Google | ~127 | 140+ | 160+ |
+| Posizione "agenzia immobiliare padova" | >100 | Top 30 | Top 10 |
+| Posizione "vendere casa padova" | >100 | Top 50 | Top 20 |
+| Traffico organico mensile | ? (verificare GSC) | +30% | +80% |
+| Pagine indicizzate | ~39 | 45+ | 55+ |
+| Backlink da domini unici | ? (verificare) | +10 | +25 |
+
+### Calendario Editoriale Suggerito
+
+| Mese | Contenuto | Keyword target |
+|---|---|---|
+| Marzo 2026 | zona-limena.html | "case limena", "immobiliare limena" |
+| Marzo 2026 | blog-agevolazioni-prima-casa-2026.html | "bonus prima casa 2026" |
+| Aprile 2026 | landing-vendere-casa-padova.html | "vendere casa padova" |
+| Aprile 2026 | blog-successione-immobiliare.html | "casa ereditata cosa fare" |
+| Maggio 2026 | zona-vigonza.html + zona-abano-terme.html | "case vigonza", "case abano terme" |
+| Maggio 2026 | blog-rendimento-affitto-padova.html | "investimento affitto padova" |
+| Giugno 2026 | blog-contratto-affitto-padova.html | "contratto affitto canone concordato" |
+| Giugno 2026 | zona-selvazzano.html | "case selvazzano dentro" |
+
+---
+
 ## CHANGELOG AGGIORNAMENTI
+
+### v1.3 - 4 Marzo 2026 (Analisi Competitiva + Strategia SERP)
+- Aggiunta sezione completa "ANALISI COMPETITIVA E STRATEGIA SERP"
+- Tabella confronto 9 competitor (Tetto Rosso, RicercAttiva, Pianeta Casa, Tecnocasa, Gabetti, Engel & Volkers, Tempocasa, Grimaldi, venderecasapadova.it)
+- 4 SUPER KILL: Google Business Profile, Recensioni Google, Backlink Locali, Citazioni NAP
+- Strategie rubate ai competitor con azioni specifiche
+- Topic Cluster con contenuti mancanti da creare (vendere, comprare, quartieri, affitto)
+- Stato avanzamento azioni tecniche SEO (completate e da fare)
+- KPI da monitorare con obiettivi a 3 e 6 mesi
+- Calendario editoriale marzo-giugno 2026
+- Implementate: pagina pillar agenzia-immobiliare-padova.html, RealEstateAgent + FAQPage schema su 8 zone pages, FAQ su servizio-vendita e servizio-valutazioni
 
 ### v1.2 - 4 Marzo 2026 (Visual Saliency + Performance Rules)
 - Aggiunta sezione completa "Visual Saliency — Regole Performance Above-the-Fold"
