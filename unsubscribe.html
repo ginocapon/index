@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disiscrizione — Righetto Immobiliare</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: Georgia, 'Times New Roman', serif; background: #f5f3ef; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .card { background: #fff; max-width: 500px; width: 100%; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 30px; text-align: center; }
+        .header h1 { color: #d4a843; font-size: 1.4rem; letter-spacing: 1px; }
+        .content { padding: 30px; text-align: center; }
+        .content p { color: #555; font-size: 1rem; line-height: 1.6; margin-bottom: 16px; }
+        .email-display { background: #f8f6f0; padding: 12px 20px; border-radius: 8px; font-weight: bold; color: #1a1a2e; margin: 16px 0; display: inline-block; }
+        .btn { display: inline-block; padding: 14px 32px; border-radius: 8px; font-size: 1rem; cursor: pointer; border: none; font-family: inherit; margin: 8px; }
+        .btn-danger { background: #e74c3c; color: #fff; }
+        .btn-secondary { background: #e0d6c8; color: #333; }
+        .btn:hover { opacity: 0.9; }
+        .success { display: none; }
+        .success h2 { color: #2d7a3a; margin-bottom: 12px; }
+        .footer { text-align: center; padding: 20px; font-size: 0.8rem; color: #999; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <h1>RIGHETTO IMMOBILIARE</h1>
+        </div>
+        <div class="content" id="confirmSection">
+            <h2 style="color:#1a1a2e;margin-bottom:16px">Conferma disiscrizione</h2>
+            <p>Stai per cancellarti dalla mailing list di Righetto Immobiliare.</p>
+            <div class="email-display" id="emailDisplay"></div>
+            <p style="font-size:0.9rem;color:#999">Non riceverai più newsletter e aggiornamenti da parte nostra.</p>
+            <div style="margin-top:20px">
+                <button class="btn btn-danger" onclick="confirmUnsub()">Confermo la cancellazione</button>
+                <br>
+                <a href="https://righetto-immobiliare.it" class="btn btn-secondary" style="text-decoration:none;display:inline-block;margin-top:8px">Annulla e torna al sito</a>
+            </div>
+        </div>
+        <div class="content success" id="successSection">
+            <h2>Disiscrizione completata</h2>
+            <p>La tua email è stata rimossa dalla nostra mailing list.</p>
+            <p style="font-size:0.9rem;color:#999">Se cambi idea, puoi sempre reiscriverti dal nostro sito.</p>
+            <a href="https://righetto-immobiliare.it" class="btn btn-secondary" style="text-decoration:none;display:inline-block;margin-top:12px">Torna al sito</a>
+        </div>
+        <div class="footer">
+            Righetto Immobiliare — Via Fratelli Cervi 37, 35129 Padova<br>
+            <a href="https://righetto-immobiliare.it/privacy-policy.html" style="color:#999">Privacy Policy</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const supabase = window.supabase.createClient(
+            'https://qwkwkemuabfwvwuqrxlu.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc'
+        );
+
+        const params = new URLSearchParams(window.location.search);
+        const email = params.get('email') || '';
+        document.getElementById('emailDisplay').textContent = email || '(email non trovata)';
+
+        if (!email) {
+            document.getElementById('confirmSection').innerHTML =
+                '<h2 style="color:#c0392b;margin-bottom:16px">Link non valido</h2>' +
+                '<p>Questo link di disiscrizione non è valido. Contattaci direttamente se vuoi cancellarti.</p>' +
+                '<a href="https://righetto-immobiliare.it" class="btn btn-secondary" style="text-decoration:none;display:inline-block;margin-top:12px">Torna al sito</a>';
+        }
+
+        async function confirmUnsub() {
+            if (!email) return;
+            try {
+                await supabase.from('email_blacklist').upsert({
+                    email: email.toLowerCase().trim(),
+                    motivo: 'disiscrizione'
+                });
+                document.getElementById('confirmSection').style.display = 'none';
+                document.getElementById('successSection').style.display = 'block';
+            } catch(e) {
+                alert('Errore durante la disiscrizione. Per favore contattaci a info@righetto-immobiliare.it');
+            }
+        }
+    </script>
+</body>
+</html>
