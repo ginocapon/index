@@ -16,5 +16,14 @@ const SERVIZI_CONFIG = {
   // Newsletter per nuovi immobili e articoli del blog
   BREVO_API_KEY: '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',
   BREVO_LIST_ID: 11,
-  BREVO_FORM_URL: ''
+  BREVO_FORM_URL: '',
+
+  // ── EMAILJS (Email Marketing) ────────────────────────────
+  // Vai su https://emailjs.com → Account → Public Key
+  // Poi Services → copia Service ID
+  // Poi Email Templates → crea template marketing → copia Template ID
+  // Variabili template: {{to_email}}, {{to_name}}, {{subject}}, {{message}}
+  EMAILJS_PUBLIC_KEY: '',
+  EMAILJS_SERVICE_ID: '',
+  EMAILJS_MARKETING_TEMPLATE_ID: ''
 };

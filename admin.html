@@ -1955,6 +1955,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg>
         Agenda
       </div>
+      <div class="nav-item" onclick="showSection('emailmarketing')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Email Marketing
+      </div>
       <div class="nav-item" onclick="showSection('impostazioni')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         Impostazioni
@@ -3809,6 +3813,77 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         </div>
       </div>
 
+      <!-- ═══ SEZIONE EMAIL MARKETING ═══ -->
+      <div class="section" id="sec-emailmarketing">
+        <div class="table-wrap" style="padding:28px;max-width:800px">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:20px;">Email Marketing</h3>
+
+          <!-- STEP 1: Destinatari -->
+          <div style="margin-bottom:24px;padding:20px;background:#f8f6f3;border-radius:12px">
+            <h4 style="margin-bottom:12px;color:var(--oro)">1. Destinatari</h4>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+              <button class="btn btn-secondary btn-sm" onclick="emLoadClienti()">Carica da Clienti</button>
+              <label class="btn btn-secondary btn-sm" style="cursor:pointer">
+                Importa CSV
+                <input type="file" accept=".csv" onchange="emImportCSV(event)" style="display:none">
+              </label>
+              <button class="btn btn-secondary btn-sm" onclick="emAddManual()">+ Aggiungi manuale</button>
+            </div>
+            <div id="emDestinatari" style="max-height:200px;overflow-y:auto;font-size:0.85rem;color:var(--caffe2)">
+              <em>Nessun destinatario caricato</em>
+            </div>
+            <div style="margin-top:8px;font-size:0.8rem;color:var(--caffe2)" id="emContatore">0 destinatari</div>
+          </div>
+
+          <!-- STEP 2: Componi Email -->
+          <div style="margin-bottom:24px;padding:20px;background:#f8f6f3;border-radius:12px">
+            <h4 style="margin-bottom:12px;color:var(--oro)">2. Componi Email</h4>
+            <div class="form-group" style="margin-bottom:12px">
+              <label>Oggetto</label>
+              <input type="text" id="emOggetto" placeholder="Es: Nuovi immobili disponibili a Padova">
+            </div>
+            <div class="form-group" style="margin-bottom:12px">
+              <label>Corpo email <span style="font-size:0.75rem;color:var(--caffe2)">(HTML supportato — usa {{nome}} per personalizzare)</span></label>
+              <textarea id="emCorpo" rows="10" placeholder="Gentile {{nome}},&#10;&#10;siamo lieti di presentarle le nostre ultime proposte immobiliari..."></textarea>
+            </div>
+            <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+              <label style="display:flex;align-items:center;gap:6px;font-size:0.85rem;cursor:pointer">
+                <input type="checkbox" id="emUnsubscribe" checked> Includi link "Cancellami" (anti-spam)
+              </label>
+              <div style="display:flex;align-items:center;gap:6px">
+                <label style="font-size:0.85rem">Delay tra email (sec):</label>
+                <input type="number" id="emDelay" value="3" min="1" max="30" style="width:60px">
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3: Anteprima & Invio -->
+          <div style="margin-bottom:24px;padding:20px;background:#f8f6f3;border-radius:12px">
+            <h4 style="margin-bottom:12px;color:var(--oro)">3. Anteprima & Invio</h4>
+            <button class="btn btn-secondary btn-sm" onclick="emPreview()" style="margin-bottom:12px">Mostra anteprima</button>
+            <div id="emPreviewBox" style="display:none;border:1px solid #ddd;padding:16px;border-radius:8px;background:#fff;margin-bottom:12px;max-height:300px;overflow-y:auto"></div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <button class="btn btn-primary" id="emBtnInvia" onclick="emInvia()">Invia a tutti</button>
+              <button class="btn btn-danger btn-sm" id="emBtnStop" onclick="emStop()" style="display:none">Ferma invio</button>
+            </div>
+            <div id="emProgress" style="display:none;margin-top:12px">
+              <div style="background:#e0d6c8;border-radius:8px;height:20px;overflow:hidden">
+                <div id="emProgressBar" style="background:var(--oro);height:100%;width:0%;transition:width 0.3s;border-radius:8px"></div>
+              </div>
+              <div id="emProgressText" style="font-size:0.8rem;color:var(--caffe2);margin-top:4px">0 / 0</div>
+            </div>
+          </div>
+
+          <!-- STEP 4: Log -->
+          <div style="padding:20px;background:#f8f6f3;border-radius:12px">
+            <h4 style="margin-bottom:12px;color:var(--oro)">4. Log Invii</h4>
+            <div id="emLog" style="max-height:250px;overflow-y:auto;font-size:0.8rem;font-family:monospace;color:var(--caffe2)">
+              <em>Nessun invio effettuato</em>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- ═══ SEZIONE IMPOSTAZIONI ═══ -->
       <div class="section" id="sec-impostazioni">
         <div class="table-wrap" style="padding:28px;max-width:600px">
@@ -4168,7 +4243,7 @@ function showSection(name) {
   const sec = document.getElementById('sec-' + name);
   if (sec) sec.classList.add('active');
   // Mark the correct nav-item as active
-  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','landing','newsletter','agenda','impostazioni'];
+  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','landing','newsletter','agenda','emailmarketing','impostazioni'];
   const idx = sectionNames.indexOf(name);
   const navItems = document.querySelectorAll('.nav-item');
   if (idx >= 0 && navItems[idx]) navItems[idx].classList.add('active');
@@ -4184,6 +4259,7 @@ function showSection(name) {
     landing: 'Landing Pages',
     newsletter: 'Newsletter Iscritti',
     agenda: 'Agenda Settimanale',
+    emailmarketing: 'Email Marketing',
     impostazioni: 'Impostazioni'
   };
   document.getElementById('topbarTitle').textContent = titles[name] || name;
@@ -9710,5 +9786,192 @@ checkAuth();
   </div>
 </div>
 <script src="js/cookie-consent.js"></script>
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+// ═══ EMAIL MARKETING ═══
+(function(){
+  let emContatti = [];
+  let emStopped = false;
+
+  function escHtml(s) {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  // Carica clienti da Supabase
+  window.emLoadClienti = async function() {
+    try {
+      const {data, error} = await supabase.from('clienti').select('nome, email').not('email','is',null).neq('email','');
+      if (error) throw error;
+      if (!data.length) return toast('Nessun cliente con email trovato','error');
+      emContatti = data.map(c => ({nome: c.nome || '', email: c.email.trim()})).filter(c => c.email);
+      emRenderList();
+      toast(emContatti.length + ' clienti caricati','success');
+    } catch(e) {
+      toast('Errore caricamento: ' + e.message,'error');
+    }
+  };
+
+  // Import CSV
+  window.emImportCSV = function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      const lines = ev.target.result.split('\n').filter(l => l.trim());
+      let imported = 0;
+      lines.forEach(line => {
+        const parts = line.split(/[,;\t]/).map(p => p.trim().replace(/^"|"$/g,''));
+        if (parts.length >= 2) {
+          const isEmail0 = parts[0].includes('@');
+          const email = isEmail0 ? parts[0] : parts[1];
+          const nome = isEmail0 ? parts[1] : parts[0];
+          if (email.includes('@')) {
+            emContatti.push({nome, email});
+            imported++;
+          }
+        } else if (parts[0] && parts[0].includes('@')) {
+          emContatti.push({nome: '', email: parts[0]});
+          imported++;
+        }
+      });
+      emRenderList();
+      toast(imported + ' contatti importati','success');
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  };
+
+  // Aggiungi manuale
+  window.emAddManual = function() {
+    const email = prompt('Email:');
+    if (!email || !email.includes('@')) return;
+    const nome = prompt('Nome (opzionale):') || '';
+    emContatti.push({nome, email: email.trim()});
+    emRenderList();
+  };
+
+  function emRenderList() {
+    const box = document.getElementById('emDestinatari');
+    if (!emContatti.length) {
+      box.innerHTML = '<em>Nessun destinatario caricato</em>';
+      document.getElementById('emContatore').textContent = '0 destinatari';
+      return;
+    }
+    box.innerHTML = emContatti.map((c,i) =>
+      '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;border-bottom:1px solid #eee">' +
+        '<span>' + escHtml(c.nome ? c.nome + ' — ' + c.email : c.email) + '</span>' +
+        '<button onclick="emRemove(' + i + ')" style="background:none;border:none;color:#c00;cursor:pointer;font-size:1.1rem">&times;</button>' +
+      '</div>'
+    ).join('');
+    document.getElementById('emContatore').textContent = emContatti.length + ' destinatari';
+  }
+
+  window.emRemove = function(i) {
+    emContatti.splice(i, 1);
+    emRenderList();
+  };
+
+  // Anteprima
+  window.emPreview = function() {
+    const oggetto = document.getElementById('emOggetto').value;
+    const corpo = document.getElementById('emCorpo').value;
+    const unsubscribe = document.getElementById('emUnsubscribe').checked;
+    if (!oggetto || !corpo) return toast('Compila oggetto e corpo','error');
+
+    const nome = emContatti.length ? (emContatti[0].nome || 'Cliente') : 'Cliente';
+    let html = corpo.replace(/\{\{nome\}\}/gi, escHtml(nome));
+    if (unsubscribe) {
+      html += '<br><br><hr style="border:none;border-top:1px solid #ccc"><p style="font-size:11px;color:#999;text-align:center">Se non desideri ricevere queste comunicazioni, rispondi con oggetto "CANCELLAMI"</p>';
+    }
+    const box = document.getElementById('emPreviewBox');
+    box.style.display = 'block';
+    box.innerHTML = '<div style="margin-bottom:8px"><strong>Oggetto:</strong> ' + escHtml(oggetto) + '</div><hr style="margin:8px 0"><div>' + html + '</div>';
+  };
+
+  // Invio batch
+  window.emInvia = async function() {
+    if (!emContatti.length) return toast('Carica destinatari prima','error');
+    const oggetto = document.getElementById('emOggetto').value;
+    const corpo = document.getElementById('emCorpo').value;
+    if (!oggetto || !corpo) return toast('Compila oggetto e corpo','error');
+
+    const cfg = window.SERVIZI_CONFIG || {};
+    if (!cfg.EMAILJS_PUBLIC_KEY || !cfg.EMAILJS_SERVICE_ID || !cfg.EMAILJS_MARKETING_TEMPLATE_ID) {
+      return toast('Configura EmailJS in js/config.js (PUBLIC_KEY, SERVICE_ID, MARKETING_TEMPLATE_ID)','error');
+    }
+
+    emailjs.init(cfg.EMAILJS_PUBLIC_KEY);
+
+    const delay = parseInt(document.getElementById('emDelay').value) || 3;
+    const unsubscribe = document.getElementById('emUnsubscribe').checked;
+    const total = emContatti.length;
+    let sent = 0, errors = 0;
+    emStopped = false;
+
+    document.getElementById('emBtnInvia').disabled = true;
+    document.getElementById('emBtnStop').style.display = 'inline-block';
+    document.getElementById('emProgress').style.display = 'block';
+    document.getElementById('emLog').innerHTML = '';
+
+    for (let i = 0; i < total; i++) {
+      if (emStopped) {
+        emLogMsg('Invio fermato dall\'utente', 'warn');
+        break;
+      }
+
+      const c = emContatti[i];
+      let msg = corpo.replace(/\{\{nome\}\}/gi, c.nome || 'Cliente');
+      if (unsubscribe) {
+        msg += '<br><br><hr style="border:none;border-top:1px solid #ccc"><p style="font-size:11px;color:#999;text-align:center">Se non desideri ricevere queste comunicazioni, rispondi con oggetto "CANCELLAMI"</p>';
+      }
+
+      try {
+        await emailjs.send(cfg.EMAILJS_SERVICE_ID, cfg.EMAILJS_MARKETING_TEMPLATE_ID, {
+          to_email: c.email,
+          to_name: c.nome || 'Cliente',
+          subject: oggetto,
+          title: oggetto,
+          message: msg
+        });
+        sent++;
+        emLogMsg('OK → ' + c.email, 'ok');
+      } catch(err) {
+        errors++;
+        emLogMsg('ERRORE → ' + c.email + ': ' + (err.text || err.message || err), 'err');
+      }
+
+      // Progress
+      const pct = Math.round(((i + 1) / total) * 100);
+      document.getElementById('emProgressBar').style.width = pct + '%';
+      document.getElementById('emProgressText').textContent = (i + 1) + ' / ' + total + ' (' + sent + ' ok, ' + errors + ' errori)';
+
+      // Delay
+      if (i < total - 1 && !emStopped) {
+        await new Promise(r => setTimeout(r, delay * 1000));
+      }
+    }
+
+    document.getElementById('emBtnInvia').disabled = false;
+    document.getElementById('emBtnStop').style.display = 'none';
+    toast('Invio completato: ' + sent + ' ok, ' + errors + ' errori', errors ? 'error' : 'success');
+  };
+
+  window.emStop = function() {
+    emStopped = true;
+  };
+
+  function emLogMsg(text, type) {
+    const log = document.getElementById('emLog');
+    const color = type === 'ok' ? '#2d7a3a' : type === 'err' ? '#c0392b' : '#b8860b';
+    const time = new Date().toLocaleTimeString('it-IT');
+    log.innerHTML += '<div style="color:' + color + '">[' + time + '] ' + escHtml(text) + '</div>';
+    log.scrollTop = log.scrollHeight;
+  }
+})();
+</script>
 </body>
 </html>
