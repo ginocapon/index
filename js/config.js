@@ -20,5 +20,11 @@ const SERVIZI_CONFIG = {
   // 3. Account → copia la Public Key
   EMAILJS_PUBLIC_KEY: '',
   EMAILJS_SERVICE_ID: '',
-  EMAILJS_TEMPLATE_ID: ''
+  EMAILJS_TEMPLATE_ID: '',
+
+  // ── EMAILJS MARKETING (per invio landing page) ────────
+  // Crea un SECONDO template su EmailJS per le email marketing
+  // Variabili template: {{to_email}}, {{to_name}}, {{title}}, {{message}}
+  // Se vuoto, usa lo stesso EMAILJS_TEMPLATE_ID
+  EMAILJS_MARKETING_TEMPLATE_ID: ''
 };
