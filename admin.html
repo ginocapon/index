@@ -4734,7 +4734,7 @@ function renderTable(data) {
           <button class="btn btn-sm" onclick="printPropertyPdf('${i.id}')" title="Stampa PDF" style="background:#fff3e0;color:#e65100">📄</button>
           <button class="btn btn-sm" onclick="quickPublishSocial('${i.id}')" title="Pubblica sui Social" style="background:#e8f5e9;color:#1877F2">📢</button>
           <button class="btn btn-danger btn-sm" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')">🗑️</button>
-          <button class="btn btn-sm" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="Toggle evidenza" style="background:var(--sfondo)">⭐</button>
+          <button class="btn btn-sm" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="Toggle evidenza" style="background:${i.in_evidenza ? '#fee' : 'var(--sfondo)'}">${i.in_evidenza ? '<span style="color:#e74c3c">⭐</span>' : '⭐'}</button>
           <button class="btn btn-sm" onclick="toggleAttivo('${i.id}',${!i.attivo})" title="Toggle attivo" style="background:var(--sfondo)">${i.attivo ? '👁️' : '🚫'}</button>
           <a href="immobile?s=${encodeURIComponent(generatePropertySlug(i))}" target="_blank" class="btn btn-sm" title="Anteprima scheda" style="background:#e8f5e9;color:#27ae60;text-decoration:none">🔍</a>
         </div>
