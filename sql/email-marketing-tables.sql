@@ -81,6 +81,24 @@ CREATE TABLE IF NOT EXISTS smtp_config (
     created_at TIMESTAMPTZ DEFAULT now()
 );
 
+-- 6. Gruppi personalizzati per email marketing (stile Brevo)
+CREATE TABLE IF NOT EXISTS gruppi_email (
+    id TEXT PRIMARY KEY DEFAULT 'g_' || extract(epoch from now())::bigint::text,
+    nome TEXT NOT NULL UNIQUE,
+    colore TEXT DEFAULT '#667eea',
+    contatti TEXT[] DEFAULT '{}',
+    created_at TIMESTAMPTZ DEFAULT now()
+);
+
+ALTER TABLE gruppi_email ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow all for anon" ON gruppi_email FOR ALL USING (true) WITH CHECK (true);
+
+-- Aggiungi colonna gruppo a campagne_email (se non esiste)
+DO $$ BEGIN
+    ALTER TABLE campagne_email ADD COLUMN IF NOT EXISTS gruppo TEXT DEFAULT 'tutti';
+EXCEPTION WHEN others THEN NULL;
+END $$;
+
 -- ═══ INDICI per performance ═══
 CREATE INDEX IF NOT EXISTS idx_coda_email_stato ON coda_email(stato);
 CREATE INDEX IF NOT EXISTS idx_coda_email_campagna ON coda_email(campagna_id);
