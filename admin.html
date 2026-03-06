@@ -4057,8 +4057,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
                 <!-- Corpo testo -->
                 <div class="form-group" style="margin-bottom:12px">
-                  <label style="font-weight:600">Testo principale <span style="font-size:0.75rem;font-weight:400;color:var(--caffe2)">(scrivi come in un documento — {{nome}} per personalizzare)</span></label>
-                  <textarea id="emVisualBody" rows="8" placeholder="Gentile {{nome}},&#10;&#10;ti scriviamo per informarti delle ultime novità...&#10;&#10;Ecco i punti principali:&#10;• Punto 1&#10;• Punto 2&#10;&#10;Restiamo a disposizione."></textarea>
+                  <label style="font-weight:600">Testo principale <span style="font-size:0.75rem;font-weight:400;color:var(--caffe2)">(scrivi liberamente come vuoi — se vuoi personalizzare con il nome del cliente scrivi {{nome}})</span></label>
+                  <textarea id="emVisualBody" rows="8" placeholder="Scrivi qui il testo della tua email...&#10;&#10;Esempio:&#10;Buongiorno,&#10;&#10;vi informiamo che abbiamo nuovi immobili disponibili nella zona di Limena.&#10;&#10;Non esitate a contattarci per maggiori informazioni.&#10;&#10;Cordiali saluti,&#10;Righetto Immobiliare"></textarea>
                 </div>
 
                 <!-- Sezione evidenziata (box colorato) -->
@@ -4823,7 +4823,7 @@ function renderTable(data) {
           <button class="btn btn-sm" onclick="printPropertyPdf('${i.id}')" title="Stampa PDF" style="background:#fff3e0;color:#e65100">📄</button>
           <button class="btn btn-sm" onclick="quickPublishSocial('${i.id}')" title="Pubblica sui Social" style="background:#e8f5e9;color:#1877F2">📢</button>
           <button class="btn btn-danger btn-sm" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')">🗑️</button>
-          <button class="btn btn-sm" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="Toggle evidenza" style="background:${i.in_evidenza ? '#fee' : 'var(--sfondo)'}">${i.in_evidenza ? '<span style="color:#e74c3c">⭐</span>' : '⭐'}</button>
+          <button class="btn btn-sm" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="${i.in_evidenza ? 'Rimuovi da evidenza' : 'Metti in evidenza'}" style="background:${i.in_evidenza ? '#fde8e8' : 'var(--sfondo)'};border:${i.in_evidenza ? '2px solid #e74c3c' : '1px solid #ddd'};font-size:1.1rem">${i.in_evidenza ? '🌟' : '⭐'}</button>
           <button class="btn btn-sm" onclick="toggleAttivo('${i.id}',${!i.attivo})" title="Toggle attivo" style="background:var(--sfondo)">${i.attivo ? '👁️' : '🚫'}</button>
           <a href="immobile?s=${encodeURIComponent(generatePropertySlug(i))}" target="_blank" class="btn btn-sm" title="Anteprima scheda" style="background:#e8f5e9;color:#27ae60;text-decoration:none">🔍</a>
         </div>
@@ -10303,9 +10303,20 @@ checkAuth();
 
     // 1. Articoli Blog
     try {
-      const {data: articles} = await sb.from('blog').select('id, titolo, slug, categoria, immagine_copertina').order('data', {ascending: false});
+      // Prova prima con order('data'), se fallisce usa order('created_at')
+      let articles = null;
+      try {
+        const res = await sb.from('blog').select('id, titolo, slug, categoria, immagine_copertina').order('data', {ascending: false});
+        if (res.error) throw res.error;
+        articles = res.data;
+      } catch(e2) {
+        console.warn('Blog: colonna data non trovata, provo created_at');
+        const res2 = await sb.from('blog').select('id, titolo, slug, categoria, immagine_copertina').order('created_at', {ascending: false});
+        articles = res2.data;
+      }
       const sel = document.getElementById('emPickBlog');
-      if (sel && articles) {
+      if (sel && articles && articles.length) {
+        console.log('Blog picker: caricati ' + articles.length + ' articoli');
         articles.forEach(a => {
           const opt = document.createElement('option');
           opt.value = a.id;
@@ -10315,8 +10326,10 @@ checkAuth();
           opt.dataset.img = a.immagine_copertina || '';
           sel.appendChild(opt);
         });
+      } else {
+        console.warn('Blog picker: nessun articolo trovato nella tabella blog');
       }
-    } catch(e) { console.warn('Blog picker:', e.message); }
+    } catch(e) { console.warn('Blog picker errore:', e.message); }
 
     // 2. Immobili
     try {
@@ -11655,12 +11668,23 @@ checkAuth();
 
   // ═══ INVIO EMAIL DI TEST ═══
   window.emSendTest = async function() {
-    const testEmail = prompt('Inserisci email per il test:');
+    const testEmail = prompt('Inserisci email per il test:', 'info@righettoimmobiliare.it');
     if (!testEmail || !testEmail.includes('@')) return;
 
     const oggetto = document.getElementById('emOggetto').value;
-    const corpo = document.getElementById('emCorpo').value;
-    if (!oggetto || !corpo) return toast('Compila oggetto e corpo prima','error');
+    let corpo = document.getElementById('emCorpo').value;
+
+    // Se corpo vuoto ma editor visuale ha contenuto, genera automaticamente
+    if (!corpo) {
+      const titoloVis = document.getElementById('emVisualTitle')?.value;
+      const testoVis = document.getElementById('emVisualBody')?.value;
+      if (titoloVis || testoVis) {
+        if (typeof emBuildVisualEmail === 'function') emBuildVisualEmail();
+        corpo = document.getElementById('emCorpo').value;
+      }
+    }
+
+    if (!oggetto || !corpo) return toast('Compila oggetto e corpo email prima. Se usi l\'editor visuale, clicca prima "Genera email"','error');
 
     const html = buildEmailHtml(corpo, 'Test User', false)
       .replace(/\{\{UNSUB_URL\}\}/g, '#test');
@@ -11701,8 +11725,19 @@ checkAuth();
   window.emInvia = async function() {
     if (!emContatti.length) return toast('Carica destinatari prima','error');
     const oggetto = document.getElementById('emOggetto').value;
-    const corpo = document.getElementById('emCorpo').value;
-    if (!oggetto || !corpo) return toast('Compila oggetto e corpo','error');
+    let corpo = document.getElementById('emCorpo').value;
+
+    // Auto-genera da editor visuale se corpo vuoto
+    if (!corpo) {
+      const titoloVis = document.getElementById('emVisualTitle')?.value;
+      const testoVis = document.getElementById('emVisualBody')?.value;
+      if (titoloVis || testoVis) {
+        if (typeof emBuildVisualEmail === 'function') emBuildVisualEmail();
+        corpo = document.getElementById('emCorpo').value;
+      }
+    }
+
+    if (!oggetto || !corpo) return toast('Compila oggetto e corpo email prima. Se usi l\'editor visuale, clicca prima "Genera email"','error');
 
     const total = emContatti.length;
     const modalita = document.getElementById('emModalita')?.value || 'graduale';
