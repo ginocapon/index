@@ -2007,7 +2007,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               <select id="filtroTipo" onchange="loadImmobili()" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.8rem;">
                 <option value="">Tutti i tipi</option>
                 <option value="vendita">🏷️ In Vendita</option>
-                <option value="affitto">🏠 Affitto</option>
                 <option value="affitto_residenziale">🏠 Affitto Residenziale</option>
                 <option value="affitto_commerciale">🏢 Affitto Commerciale</option>
                 <option value="asta_giudiziaria">⚖️ Asta Giudiziaria</option>
@@ -2060,14 +2059,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                     <option value="affitto_residenziale">🏠 Affitto Residenziale</option>
                     <option value="affitto_commerciale">🏢 Affitto Commerciale</option>
                     <option value="asta_giudiziaria">⚖️ Asta Giudiziaria</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label>Categoria</label>
-                  <select id="f_categoria">
-                    <option value="residenziale">Residenziale</option>
-                    <option value="commerciale">Commerciale</option>
-                    <option value="terreno">Terreno</option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -4964,7 +4955,7 @@ function editImmobile(id) {
   document.getElementById('editId').value = imm.id;
   document.getElementById('formTitle').textContent = 'Modifica: ' + imm.titolo;
 
-  const fields = ['codice','titolo','tipo_operazione','categoria','tipologia','prezzo',
+  const fields = ['codice','titolo','tipo_operazione','tipologia','prezzo',
     'proprietario_id','proprietario_nome','proprietario_tel','proprietario_email',
     'comune','indirizzo','indirizzo_mappa','superficie','locali','bagni','piano',
     'piano_numero','tipo_contratto',
@@ -5028,7 +5019,6 @@ async function saveImmobile(e) {
     titolo,
     slug,
     tipo_operazione: document.getElementById('f_tipo_operazione').value,
-    categoria: document.getElementById('f_categoria').value,
     tipologia: document.getElementById('f_tipologia').value,
     prezzo: parseFloat(document.getElementById('f_prezzo').value) || null,
     proprietario_id: document.getElementById('f_proprietario_id').value || null,

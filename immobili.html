@@ -808,8 +808,8 @@
       const imgHtml = fotoUrl
         ? '<img src="'+fotoUrl+'" alt="'+i.titolo.replace(/"/g,'&quot;')+'" style="width:100%;height:100%;object-fit:cover;" loading="lazy" onerror="this.parentElement.innerHTML=\''+SVG_PLACEHOLDER.replace(/'/g,"\\'")+'\'">'
         : '<div class="card-img-ph">'+SVG_PLACEHOLDER+'</div>';
-      const opLabel = i.op === 'affitto' ? 'Affitto' : i.op === 'asta' ? 'Asta' : 'Vendita';
-      const opClass = i.op === 'affitto' ? 'cb-affitto' : i.op === 'asta' ? 'cb-aste' : 'cb-vendita';
+      const opLabel = i.op.startsWith('affitto') ? 'Affitto' : i.op === 'asta' ? 'Asta' : 'Vendita';
+      const opClass = i.op.startsWith('affitto') ? 'cb-affitto' : i.op === 'asta' ? 'cb-aste' : 'cb-vendita';
       let badges = '<span class="cbadge '+opClass+'">'+opLabel+'</span>';
       if (i.evidenza) badges += '<span class="cbadge cb-evidenza">&#9733; In evidenza</span>';
       if (i.venduto) badges += '<span class="cbadge" style="background:var(--rosso);color:#fff">Venduto</span>';
@@ -817,7 +817,7 @@
       let media = '';
       if (i.yt) media += '<div class="cm-icon" title="Video YouTube">'+SVG_YT+'</div>';
       if (i.vt) media += '<div class="cm-icon" title="Virtual Tour 360&deg;">'+SVG_VT+'</div>';
-      const prezzoFmt = i.op === 'affitto'
+      const prezzoFmt = i.op.startsWith('affitto')
         ? '&euro; ' + Number(i.prezzo).toLocaleString('it-IT') + ' <small>/mese</small>'
         : '&euro; ' + Number(i.prezzo).toLocaleString('it-IT');
       let specs = '<div class="cs">'+SVG_MQ+'<strong>'+i.mq+'</strong>&nbsp;mq</div>';
@@ -1006,6 +1006,8 @@
       // Operazione (tab)
       if (currentOp === 'aste') {
         if (cOp !== 'asta' && cOp !== 'aste') show = false;
+      } else if (currentOp === 'affitto') {
+        if (!cOp.startsWith('affitto')) show = false;
       } else {
         if (cOp !== currentOp) show = false;
       }
