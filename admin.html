@@ -378,6 +378,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 .badge-oro { background: #fef9e0; color: #7d6608; }
 .badge-grigio { background: #eee; color: #666; }
 .badge-blu { background: #e0eeff; color: #1a4a8a; }
+.badge-arancio { background: #fff3e0; color: #e65100; }
 
 /* TOGGLE */
 .toggle {
@@ -4860,7 +4861,7 @@ function renderTable(data) {
 
     const tipo = i.tipo_operazione === 'vendita' ? `<span class="badge badge-blu">Vendita</span>`
       : (i.tipo_operazione === 'affitto_residenziale' || i.tipo_operazione === 'affitto') ? `<span class="badge badge-verde">Affitto Res.</span>`
-      : i.tipo_operazione === 'affitto_commerciale' ? `<span class="badge badge-verde">Affitto Comm.</span>`
+      : i.tipo_operazione === 'affitto_commerciale' ? `<span class="badge badge-arancio">Affitto Comm.</span>`
       : i.tipo_operazione === 'asta_giudiziaria' ? `<span class="badge badge-grigio">Asta</span>`
       : `<span class="badge badge-grigio">${escHtml(i.tipo_operazione || '—')}</span>`;
 
