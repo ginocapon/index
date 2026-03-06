@@ -1997,8 +1997,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <div class="stats-grid" id="statsGrid">
           <div class="stat-card"><div class="stat-num" id="statTot">—</div><div class="stat-label">Totale Immobili</div></div>
           <div class="stat-card blue"><div class="stat-num" id="statVendita">—</div><div class="stat-label">In Vendita</div></div>
-          <div class="stat-card green"><div class="stat-num" id="statAffitto">—</div><div class="stat-label">In Affitto</div></div>
-          <div class="stat-card red"><div class="stat-num" id="statVenduti">—</div><div class="stat-label">Venduti/Affittati</div></div>
+          <div class="stat-card red"><div class="stat-num" id="statVenduti">—</div><div class="stat-label">Venduti</div></div>
         </div>
 
         <div class="table-wrap">
@@ -2008,8 +2007,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               <select id="filtroTipo" onchange="loadImmobili()" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.8rem;">
                 <option value="">Tutti i tipi</option>
                 <option value="vendita">🏷️ In Vendita</option>
-                <option value="affitto_residenziale">🏠 Affitto Residenziale</option>
-                <option value="affitto_commerciale">🏢 Affitto Commerciale</option>
                 <option value="asta_giudiziaria">⚖️ Asta Giudiziaria</option>
               </select>
               <select id="filtroStato" onchange="filterTable()" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.8rem;">
@@ -2057,8 +2054,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <select id="f_tipo_operazione" required>
                     <option value="">Seleziona...</option>
                     <option value="vendita">🏷️ In Vendita</option>
-                    <option value="affitto_commerciale">🏢 In Affitto Commerciale</option>
-                    <option value="affitto_residenziale">🏠 In Affitto Residenziale</option>
                     <option value="asta_giudiziaria">⚖️ Asta Giudiziaria</option>
                   </select>
                 </div>
@@ -2378,14 +2373,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                       <option value="intera proprieta">Intera Proprietà</option>
                       <option value="nuda proprieta">Nuda Proprietà</option>
                       <option value="usufrutto">Usufrutto</option>
-                      <option value="affitto ordinario">Affitto Ordinario</option>
                       <option value="cedolare secca">Cedolare Secca</option>
                       <option value="concordato">Concordato</option>
-                      <option value="affitto residenziale">Affitto Residenziale</option>
-                      <option value="affitto commerciale">Affitto Commerciale</option>
-                      <option value="affitto a riscatto">Affitto a Riscatto</option>
-                      <option value="locazione transitoria">Locazione Transitoria</option>
-                      <option value="comodato d'uso">Comodato d'Uso</option>
                     </select>
                   </div>
                   <div class="form-group">
@@ -3217,8 +3206,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <select id="clienteTipoOp">
                   <option value="">Qualsiasi</option>
                   <option value="vendita">Acquisto</option>
-                  <option value="affitto_residenziale">Affitto Residenziale</option>
-                  <option value="affitto_commerciale">Affitto Commerciale</option>
                 </select>
               </div>
               <div class="form-group">
@@ -3565,8 +3552,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <option value="vendita">Vendita</option>
                 <option value="acquisto">Acquisto</option>
                 <option value="valutazione">Valutazione</option>
-                <option value="affitto_residenziale">Affitto Residenziale</option>
-                <option value="affitto_commerciale">Affitto Commerciale</option>
                 <option value="consulenza">Consulenza</option>
                 <option value="generico">Generico</option>
               </select>
@@ -3796,7 +3781,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <select id="l_categoria">
                   <option value="vendita">Vendita</option>
                   <option value="valutazione">Valutazione</option>
-                  <option value="affitto">Affitto</option>
                   <option value="agente">Agente</option>
                   <option value="promozione">Promozione</option>
                   <option value="evento">Evento</option>
