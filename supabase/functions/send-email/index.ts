@@ -1,8 +1,8 @@
 // ═══════════════════════════════════════════════════════════════
 // RIGHETTO IMMOBILIARE — Email Sending Edge Function
-// Invia email via Resend API — Compatibile con Supabase Edge Functions
+// Invia email via Brevo (Sendinblue) API — Compatibile Supabase Edge
 // Deploy: supabase functions deploy send-email
-// Secrets: RESEND_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
+// Secrets: BREVO_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
 // ═══════════════════════════════════════════════════════════════
 
 import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
@@ -14,55 +14,60 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
 };
 
-// ═══ RESEND EMAIL SENDER ═══
-async function sendViaResend(options: {
+// ═══ BREVO (SENDINBLUE) EMAIL SENDER ═══
+async function sendViaBrevo(options: {
   from: string;
   fromName?: string;
   to: string;
+  toName?: string;
   subject: string;
   html: string;
   replyTo?: string;
   headers?: Record<string, string>;
 }) {
-  const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
-  if (!RESEND_API_KEY) {
-    throw new Error("RESEND_API_KEY non configurata. Vai su Supabase Dashboard > Edge Functions > send-email > Secrets e aggiungi RESEND_API_KEY.");
+  const BREVO_API_KEY = Deno.env.get("BREVO_API_KEY");
+  if (!BREVO_API_KEY) {
+    throw new Error("BREVO_API_KEY non configurata. Vai su Supabase Dashboard > Edge Functions > send-email > Secrets e aggiungi BREVO_API_KEY.");
   }
 
-  // Formatta il "from" correttamente: "Nome <email>"
   const fromEmail = options.from?.trim();
-  const fromName = options.fromName?.trim();
+  const fromName = options.fromName?.trim() || "Righetto Immobiliare";
 
   if (!fromEmail || !fromEmail.includes("@")) {
     throw new Error("Email mittente non valida: '" + fromEmail + "'. Configura un mittente valido.");
   }
 
-  const fromFormatted = fromName
-    ? `${fromName} <${fromEmail}>`
-    : fromEmail;
-
-  console.log("Resend: Invio a", options.to, "da", fromFormatted);
+  console.log("Brevo: Invio a", options.to, "da", fromName, "<" + fromEmail + ">");
 
   const payload: any = {
-    from: fromFormatted,
-    to: [options.to],
+    sender: {
+      name: fromName,
+      email: fromEmail,
+    },
+    to: [{
+      email: options.to,
+      name: options.toName || options.to,
+    }],
     subject: options.subject,
-    html: options.html,
+    htmlContent: options.html,
   };
 
   if (options.replyTo) {
-    payload.reply_to = options.replyTo;
+    payload.replyTo = {
+      email: options.replyTo,
+    };
   }
 
   if (options.headers) {
     payload.headers = options.headers;
   }
 
-  const resp = await fetch("https://api.resend.com/emails", {
+  const resp = await fetch("https://api.brevo.com/v3/smtp/email", {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${RESEND_API_KEY}`,
+      "api-key": BREVO_API_KEY,
       "Content-Type": "application/json",
+      "Accept": "application/json",
     },
     body: JSON.stringify(payload),
   });
@@ -70,11 +75,11 @@ async function sendViaResend(options: {
   const result = await resp.json();
 
   if (!resp.ok) {
-    const errorMsg = result.message || result.error?.message || JSON.stringify(result);
-    throw new Error("Resend API errore: " + errorMsg);
+    const errorMsg = result.message || result.error || JSON.stringify(result);
+    throw new Error("Brevo API errore: " + errorMsg);
   }
 
-  console.log("Resend: Email inviata a", options.to, "ID:", result.id);
+  console.log("Brevo: Email inviata a", options.to, "MessageId:", result.messageId);
   return result;
 }
 
@@ -85,7 +90,7 @@ serve(async (req) => {
     return new Response("ok", { headers: corsHeaders });
   }
 
-  // Handle GET requests (tracking pixel, click tracking)
+  // Handle GET requests (tracking pixel, click tracking, unsubscribe)
   if (req.method === "GET") {
     const url = new URL(req.url);
     const action = url.searchParams.get("action");
@@ -141,7 +146,6 @@ serve(async (req) => {
 
 // ═══ GET EMAIL CONFIG ═══
 async function getEmailConfig(supabase: any) {
-  // Prima prova smtp_config per backwards compatibility
   try {
     const { data, error } = await supabase
       .from("smtp_config")
@@ -154,12 +158,11 @@ async function getEmailConfig(supabase: any) {
     }
   } catch (_) { /* tabella potrebbe non esistere */ }
 
-  // Fallback: usa variabili d'ambiente
   return {
     mittente_email: Deno.env.get("SENDER_EMAIL") || "info@righettoimmobiliare.it",
     mittente_nome: Deno.env.get("SENDER_NAME") || "Righetto Immobiliare",
-    max_per_ora: 100,
-    max_per_giorno: 500,
+    max_per_ora: 300,
+    max_per_giorno: 2000,
   };
 }
 
@@ -186,7 +189,6 @@ async function sendSingleEmail(supabase: any, body: any) {
 
   const config = await getEmailConfig(supabase);
 
-  // Rate limiting
   const canSend = await checkRateLimits(supabase, config);
   if (!canSend) {
     return jsonResponse({ status: "rate_limited", reason: "Limite orario/giornaliero raggiunto" });
@@ -209,17 +211,17 @@ async function sendSingleEmail(supabase: any, body: any) {
   const fromName = sender_name || config.mittente_nome;
 
   try {
-    await sendViaResend({
+    await sendViaBrevo({
       from: fromEmail,
       fromName: fromName,
       to: to_email,
+      toName: to_name || "",
       subject: subject,
       html: finalHtml,
       replyTo: body.reply_to || fromEmail,
       headers: headers,
     });
 
-    // Aggiorna stato coda
     if (queue_id) {
       await supabase
         .from("coda_email")
@@ -227,7 +229,6 @@ async function sendSingleEmail(supabase: any, body: any) {
         .eq("id", queue_id);
     }
 
-    // Incrementa contatore campagna
     if (campaign_id) {
       try {
         const { data } = await supabase
@@ -247,7 +248,6 @@ async function sendSingleEmail(supabase: any, body: any) {
     return jsonResponse({ status: "sent", to: to_email });
 
   } catch (err) {
-    // Aggiorna errore in coda
     if (queue_id) {
       await supabase
         .from("coda_email")
@@ -255,7 +255,6 @@ async function sendSingleEmail(supabase: any, body: any) {
         .eq("id", queue_id);
     }
 
-    // Bounce — aggiungi a blacklist
     if (err.message?.includes("550") || err.message?.includes("User unknown") || err.message?.includes("does not exist")) {
       await supabase
         .from("email_blacklist")
@@ -292,7 +291,6 @@ async function processQueue(supabase: any, body: any) {
   const results: any[] = [];
 
   for (const item of queue) {
-    // Blacklist check
     try {
       const { data: bl } = await supabase
         .from("email_blacklist")
@@ -315,10 +313,11 @@ async function processQueue(supabase: any, body: any) {
     try {
       const trackPixel = `<img src="${Deno.env.get("SUPABASE_URL")}/functions/v1/send-email?action=track_open&id=${item.id}" width="1" height="1" style="display:none" alt="">`;
 
-      await sendViaResend({
+      await sendViaBrevo({
         from: config.mittente_email,
         fromName: config.mittente_nome,
         to: item.destinatario_email,
+        toName: item.destinatario_nome || "",
         subject: item.oggetto,
         html: (item.corpo_html || "") + trackPixel,
         replyTo: config.mittente_email,
@@ -337,8 +336,8 @@ async function processQueue(supabase: any, body: any) {
       sent++;
       results.push({ email: item.destinatario_email, status: "sent" });
 
-      // Delay tra email (1-3 sec) per evitare rate limit Resend
-      const delay = 1000 + Math.random() * 2000;
+      // Delay tra email (1-2 sec)
+      const delay = 1000 + Math.random() * 1000;
       await new Promise((r) => setTimeout(r, delay));
 
     } catch (err) {
@@ -381,7 +380,7 @@ async function sendTestEmail(supabase: any, body: any) {
   console.log("Test email — From:", fromEmail, "Name:", fromName, "To:", to_email);
 
   try {
-    await sendViaResend({
+    await sendViaBrevo({
       from: fromEmail,
       fromName: fromName,
       to: to_email,
@@ -410,9 +409,11 @@ async function handleUnsubscribe(supabase: any, body: any) {
     .upsert({ email: email.toLowerCase().trim(), motivo: "disiscrizione" });
 
   if (queue_id) {
-    await supabase
-      .from("email_tracking")
-      .insert({ coda_email_id: queue_id, tipo: "disiscrizione" });
+    try {
+      await supabase
+        .from("email_tracking")
+        .insert({ coda_email_id: queue_id, tipo: "disiscrizione" });
+    } catch (_) { /* ignore */ }
   }
 
   const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Disiscrizione</title></head>
@@ -484,7 +485,7 @@ async function checkRateLimits(supabase: any, config: any): Promise<boolean> {
       .eq("stato", "inviata")
       .gte("inviata_il", oneHourAgo.toISOString());
 
-    if ((hourCount || 0) >= (config.max_per_ora || 100)) return false;
+    if ((hourCount || 0) >= (config.max_per_ora || 300)) return false;
 
     const { count: dayCount } = await supabase
       .from("coda_email")
@@ -492,7 +493,7 @@ async function checkRateLimits(supabase: any, config: any): Promise<boolean> {
       .eq("stato", "inviata")
       .gte("inviata_il", todayStart.toISOString());
 
-    if ((dayCount || 0) >= (config.max_per_giorno || 500)) return false;
+    if ((dayCount || 0) >= (config.max_per_giorno || 2000)) return false;
   } catch (_) {
     // Se la tabella non esiste, permetti l'invio
   }
