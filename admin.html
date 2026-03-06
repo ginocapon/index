@@ -4740,7 +4740,9 @@ async function loadImmobili() {
 
   const tipo = document.getElementById('filtroTipo').value;
   let query = sb.from('immobili').select('*').order('created_at', { ascending: false });
-  if (tipo) {
+  if (tipo === 'affitto_residenziale') {
+    query = query.in('tipo_operazione', ['affitto_residenziale', 'affitto']);
+  } else if (tipo) {
     query = query.eq('tipo_operazione', tipo);
   }
 
@@ -4785,7 +4787,7 @@ function renderTable(data) {
       : `<span class="badge badge-grigio">Disattivo</span>`;
 
     const tipo = i.tipo_operazione === 'vendita' ? `<span class="badge badge-blu">Vendita</span>`
-      : i.tipo_operazione === 'affitto_residenziale' ? `<span class="badge badge-oro">Affitto Res.</span>`
+      : (i.tipo_operazione === 'affitto_residenziale' || i.tipo_operazione === 'affitto') ? `<span class="badge badge-oro">Affitto Res.</span>`
       : i.tipo_operazione === 'affitto_commerciale' ? `<span class="badge badge-oro">Affitto Comm.</span>`
       : i.tipo_operazione === 'asta_giudiziaria' ? `<span class="badge badge-grigio">Asta</span>`
       : `<span class="badge badge-grigio">${escHtml(i.tipo_operazione || '—')}</span>`;
