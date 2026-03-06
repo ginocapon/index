@@ -1,8 +1,10 @@
 // ═══════════════════════════════════════════════════════════════
 // RIGHETTO IMMOBILIARE — Email Sending Edge Function
-// Invia email via Brevo (Sendinblue) API — Compatibile Supabase Edge
+// Invia email via PHP relay sul tuo cPanel — Zero servizi esterni
 // Deploy: supabase functions deploy send-email
-// Secrets: BREVO_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
+// Secrets necessari su Supabase:
+//   MAIL_RELAY_URL = https://righetto-immobiliare.it/api/send-mail.php
+//   MAIL_RELAY_KEY = RighettoMail2026!SecretKey  (stessa del PHP)
 // ═══════════════════════════════════════════════════════════════
 
 import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
@@ -14,83 +16,54 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
 };
 
-// ═══ BREVO (SENDINBLUE) EMAIL SENDER ═══
-async function sendViaBrevo(options: {
-  from: string;
-  fromName?: string;
-  to: string;
-  toName?: string;
+// ═══ INVIO VIA PHP RELAY (tuo cPanel) ═══
+async function sendViaRelay(options: {
+  action: string;
+  to_email: string;
+  to_name?: string;
+  sender_email: string;
+  sender_name?: string;
   subject: string;
-  html: string;
-  replyTo?: string;
-  headers?: Record<string, string>;
+  html_body: string;
+  reply_to?: string;
 }) {
-  const BREVO_API_KEY = Deno.env.get("BREVO_API_KEY");
-  if (!BREVO_API_KEY) {
-    throw new Error("BREVO_API_KEY non configurata. Vai su Supabase Dashboard > Edge Functions > send-email > Secrets e aggiungi BREVO_API_KEY.");
+  const RELAY_URL = Deno.env.get("MAIL_RELAY_URL");
+  const RELAY_KEY = Deno.env.get("MAIL_RELAY_KEY");
+
+  if (!RELAY_URL || !RELAY_KEY) {
+    throw new Error(
+      "MAIL_RELAY_URL o MAIL_RELAY_KEY non configurati. " +
+      "Vai su Supabase Dashboard > Edge Functions > send-email > Secrets."
+    );
   }
 
-  const fromEmail = options.from?.trim();
-  const fromName = options.fromName?.trim() || "Righetto Immobiliare";
+  console.log("Relay:", options.action, "→", options.to_email, "da", options.sender_email);
 
-  if (!fromEmail || !fromEmail.includes("@")) {
-    throw new Error("Email mittente non valida: '" + fromEmail + "'. Configura un mittente valido.");
-  }
-
-  console.log("Brevo: Invio a", options.to, "da", fromName, "<" + fromEmail + ">");
-
-  const payload: any = {
-    sender: {
-      name: fromName,
-      email: fromEmail,
-    },
-    to: [{
-      email: options.to,
-      name: options.toName || options.to,
-    }],
-    subject: options.subject,
-    htmlContent: options.html,
-  };
-
-  if (options.replyTo) {
-    payload.replyTo = {
-      email: options.replyTo,
-    };
-  }
-
-  if (options.headers) {
-    payload.headers = options.headers;
-  }
-
-  const resp = await fetch("https://api.brevo.com/v3/smtp/email", {
+  const resp = await fetch(RELAY_URL, {
     method: "POST",
     headers: {
-      "api-key": BREVO_API_KEY,
       "Content-Type": "application/json",
-      "Accept": "application/json",
+      "X-API-Key": RELAY_KEY,
     },
-    body: JSON.stringify(payload),
+    body: JSON.stringify(options),
   });
 
   const result = await resp.json();
 
-  if (!resp.ok) {
-    const errorMsg = result.message || result.error || JSON.stringify(result);
-    throw new Error("Brevo API errore: " + errorMsg);
+  if (result.status === "error") {
+    throw new Error(result.error || "Errore dal relay PHP");
   }
 
-  console.log("Brevo: Email inviata a", options.to, "MessageId:", result.messageId);
   return result;
 }
 
 // ═══ MAIN HANDLER ═══
 serve(async (req) => {
-  // Handle CORS preflight
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
 
-  // Handle GET requests (tracking pixel, click tracking, unsubscribe)
+  // GET: tracking pixel, click, unsubscribe
   if (req.method === "GET") {
     const url = new URL(req.url);
     const action = url.searchParams.get("action");
@@ -101,9 +74,7 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
     );
 
-    if (action === "track_open" && id) {
-      return await trackOpen(supabase, { id });
-    }
+    if (action === "track_open" && id) return await trackOpen(supabase, { id });
     if (action === "track_click") {
       return await trackClick(supabase, {
         queue_id: id,
@@ -112,9 +83,7 @@ serve(async (req) => {
     }
     if (action === "unsubscribe") {
       const email = url.searchParams.get("email");
-      if (email) {
-        return await handleUnsubscribe(supabase, { email, queue_id: id });
-      }
+      if (email) return await handleUnsubscribe(supabase, { email, queue_id: id });
     }
 
     return jsonResponse({ error: "Azione GET non riconosciuta" }, 400);
@@ -137,7 +106,6 @@ serve(async (req) => {
     if (action === "track_click") return await trackClick(supabase, body);
 
     return jsonResponse({ error: "Azione non riconosciuta: " + action }, 400);
-
   } catch (error) {
     console.error("Errore:", error);
     return jsonResponse({ error: error.message }, 500);
@@ -152,15 +120,12 @@ async function getEmailConfig(supabase: any) {
       .select("*")
       .eq("attivo", true)
       .limit(1);
-
-    if (!error && data && data.length > 0) {
-      return data[0];
-    }
-  } catch (_) { /* tabella potrebbe non esistere */ }
+    if (!error && data && data.length > 0) return data[0];
+  } catch (_) {}
 
   return {
-    mittente_email: Deno.env.get("SENDER_EMAIL") || "info@righettoimmobiliare.it",
-    mittente_nome: Deno.env.get("SENDER_NAME") || "Righetto Immobiliare",
+    mittente_email: "info@righettoimmobiliare.it",
+    mittente_nome: "Righetto Immobiliare",
     max_per_ora: 300,
     max_per_giorno: 2000,
   };
@@ -174,25 +139,20 @@ async function sendSingleEmail(supabase: any, body: any) {
     return jsonResponse({ status: "error", error: "Email destinatario non valida" }, 400);
   }
 
-  // Controlla blacklist
+  // Blacklist
   try {
-    const { data: blacklisted } = await supabase
+    const { data: bl } = await supabase
       .from("email_blacklist")
       .select("id")
       .eq("email", to_email.toLowerCase().trim())
       .limit(1);
-
-    if (blacklisted && blacklisted.length > 0) {
-      return jsonResponse({ status: "skipped", reason: "blacklisted" });
-    }
-  } catch (_) { /* tabella potrebbe non esistere */ }
+    if (bl && bl.length > 0) return jsonResponse({ status: "skipped", reason: "blacklisted" });
+  } catch (_) {}
 
   const config = await getEmailConfig(supabase);
 
   const canSend = await checkRateLimits(supabase, config);
-  if (!canSend) {
-    return jsonResponse({ status: "rate_limited", reason: "Limite orario/giornaliero raggiunto" });
-  }
+  if (!canSend) return jsonResponse({ status: "rate_limited", reason: "Limite raggiunto" });
 
   // Tracking pixel
   let finalHtml = html_body || "";
@@ -200,31 +160,23 @@ async function sendSingleEmail(supabase: any, body: any) {
     finalHtml += `<img src="${Deno.env.get("SUPABASE_URL")}/functions/v1/send-email?action=track_open&id=${queue_id}" width="1" height="1" style="display:none" alt="">`;
   }
 
-  // Header anti-spam
-  const headers: Record<string, string> = {
-    "X-Mailer": "RighettoImmobiliare/1.0",
-    "List-Unsubscribe": `<${Deno.env.get("SUPABASE_URL")}/functions/v1/send-email?action=unsubscribe&email=${encodeURIComponent(to_email)}>`,
-    "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
-  };
-
   const fromEmail = sender_email || config.mittente_email;
   const fromName = sender_name || config.mittente_nome;
 
   try {
-    await sendViaBrevo({
-      from: fromEmail,
-      fromName: fromName,
-      to: to_email,
-      toName: to_name || "",
-      subject: subject,
-      html: finalHtml,
-      replyTo: body.reply_to || fromEmail,
-      headers: headers,
+    await sendViaRelay({
+      action: "send_single",
+      to_email,
+      to_name: to_name || "",
+      sender_email: fromEmail,
+      sender_name: fromName,
+      subject,
+      html_body: finalHtml,
+      reply_to: body.reply_to || fromEmail,
     });
 
     if (queue_id) {
-      await supabase
-        .from("coda_email")
+      await supabase.from("coda_email")
         .update({ stato: "inviata", inviata_il: new Date().toISOString() })
         .eq("id", queue_id);
     }
@@ -232,32 +184,25 @@ async function sendSingleEmail(supabase: any, body: any) {
     if (campaign_id) {
       try {
         const { data } = await supabase
-          .from("campagne_email")
-          .select("inviati")
-          .eq("id", campaign_id)
-          .single();
+          .from("campagne_email").select("inviati").eq("id", campaign_id).single();
         if (data) {
-          await supabase
-            .from("campagne_email")
-            .update({ inviati: (data.inviati || 0) + 1 })
-            .eq("id", campaign_id);
+          await supabase.from("campagne_email")
+            .update({ inviati: (data.inviati || 0) + 1 }).eq("id", campaign_id);
         }
-      } catch (_) { /* ignore */ }
+      } catch (_) {}
     }
 
     return jsonResponse({ status: "sent", to: to_email });
 
   } catch (err) {
     if (queue_id) {
-      await supabase
-        .from("coda_email")
+      await supabase.from("coda_email")
         .update({ stato: "errore", errore_msg: err.message, tentativo: (body.tentativo || 0) + 1 })
         .eq("id", queue_id);
     }
 
-    if (err.message?.includes("550") || err.message?.includes("User unknown") || err.message?.includes("does not exist")) {
-      await supabase
-        .from("email_blacklist")
+    if (err.message?.includes("550") || err.message?.includes("unknown")) {
+      await supabase.from("email_blacklist")
         .upsert({ email: to_email.toLowerCase().trim(), motivo: "bounce" });
     }
 
@@ -271,96 +216,65 @@ async function processQueue(supabase: any, body: any) {
   const config = await getEmailConfig(supabase);
 
   const { data: queue, error } = await supabase
-    .from("coda_email")
-    .select("*")
-    .eq("campagna_id", campaign_id)
-    .eq("stato", "in_coda")
-    .order("id")
-    .limit(batch_size);
+    .from("coda_email").select("*")
+    .eq("campagna_id", campaign_id).eq("stato", "in_coda")
+    .order("id").limit(batch_size);
 
   if (error || !queue || queue.length === 0) {
-    await supabase
-      .from("campagne_email")
+    await supabase.from("campagne_email")
       .update({ stato: "completata", completata_il: new Date().toISOString() })
       .eq("id", campaign_id);
     return jsonResponse({ status: "completed", processed: 0 });
   }
 
-  let sent = 0;
-  let errors = 0;
+  let sent = 0, errors = 0;
   const results: any[] = [];
 
   for (const item of queue) {
     try {
-      const { data: bl } = await supabase
-        .from("email_blacklist")
-        .select("id")
-        .eq("email", item.destinatario_email.toLowerCase().trim())
-        .limit(1);
-
+      const { data: bl } = await supabase.from("email_blacklist")
+        .select("id").eq("email", item.destinatario_email.toLowerCase().trim()).limit(1);
       if (bl && bl.length > 0) {
         await supabase.from("coda_email").delete().eq("id", item.id);
         continue;
       }
-    } catch (_) { /* ignore */ }
+    } catch (_) {}
 
     const canSend = await checkRateLimits(supabase, config);
-    if (!canSend) {
-      results.push({ email: item.destinatario_email, status: "rate_limited" });
-      break;
-    }
+    if (!canSend) { results.push({ email: item.destinatario_email, status: "rate_limited" }); break; }
 
     try {
       const trackPixel = `<img src="${Deno.env.get("SUPABASE_URL")}/functions/v1/send-email?action=track_open&id=${item.id}" width="1" height="1" style="display:none" alt="">`;
 
-      await sendViaBrevo({
-        from: config.mittente_email,
-        fromName: config.mittente_nome,
-        to: item.destinatario_email,
-        toName: item.destinatario_nome || "",
+      await sendViaRelay({
+        action: "send_single",
+        to_email: item.destinatario_email,
+        to_name: item.destinatario_nome || "",
+        sender_email: config.mittente_email,
+        sender_name: config.mittente_nome,
         subject: item.oggetto,
-        html: (item.corpo_html || "") + trackPixel,
-        replyTo: config.mittente_email,
-        headers: {
-          "List-Unsubscribe": `<${Deno.env.get("SUPABASE_URL")}/functions/v1/send-email?action=unsubscribe&email=${encodeURIComponent(item.destinatario_email)}>`,
-          "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
-          "X-Mailer": "RighettoImmobiliare/1.0",
-        },
+        html_body: (item.corpo_html || "") + trackPixel,
+        reply_to: config.mittente_email,
       });
 
-      await supabase
-        .from("coda_email")
-        .update({ stato: "inviata", inviata_il: new Date().toISOString() })
-        .eq("id", item.id);
-
+      await supabase.from("coda_email")
+        .update({ stato: "inviata", inviata_il: new Date().toISOString() }).eq("id", item.id);
       sent++;
       results.push({ email: item.destinatario_email, status: "sent" });
 
-      // Delay tra email (1-2 sec)
-      const delay = 1000 + Math.random() * 1000;
-      await new Promise((r) => setTimeout(r, delay));
-
+      // 3 sec tra email
+      await new Promise((r) => setTimeout(r, 3000));
     } catch (err) {
       errors++;
-      await supabase
-        .from("coda_email")
+      await supabase.from("coda_email")
         .update({ stato: "errore", errore_msg: err.message, tentativo: (item.tentativo || 0) + 1 })
         .eq("id", item.id);
-
-      if (err.message?.includes("550") || err.message?.includes("User unknown")) {
-        await supabase
-          .from("email_blacklist")
-          .upsert({ email: item.destinatario_email.toLowerCase().trim(), motivo: "bounce" });
-      }
-
       results.push({ email: item.destinatario_email, status: "error", error: err.message });
     }
   }
 
-  await supabase
-    .from("campagne_email")
-    .update({ inviati: sent, errori: errors })
-    .eq("id", campaign_id);
+  await supabase.from("campagne_email")
+    .update({ inviati: sent, errori: errors }).eq("id", campaign_id);
 
   return jsonResponse({ status: "batch_done", sent, errors, results });
 }
@@ -374,24 +288,19 @@ async function sendTestEmail(supabase: any, body: any) {
     return jsonResponse({ status: "error", error: "Email destinatario non valida" }, 400);
   }
 
-  const fromEmail = sender_email || config.mittente_email;
-  const fromName = sender_name || config.mittente_nome;
-
-  console.log("Test email — From:", fromEmail, "Name:", fromName, "To:", to_email);
-
   try {
-    await sendViaBrevo({
-      from: fromEmail,
-      fromName: fromName,
-      to: to_email,
-      subject: "[TEST] " + (subject || "Email di prova"),
-      html: html_body || "<h1>Email di test</h1><p>Questa è un'email di prova da Righetto Immobiliare.</p>",
-      replyTo: reply_to || fromEmail,
+    await sendViaRelay({
+      action: "send_test",
+      to_email,
+      sender_email: sender_email || config.mittente_email,
+      sender_name: sender_name || config.mittente_nome,
+      subject: subject || "Email di prova",
+      html_body: html_body || "<h1>Test</h1><p>Email di prova da Righetto Immobiliare.</p>",
+      reply_to: reply_to || sender_email || config.mittente_email,
     });
 
     return jsonResponse({ status: "sent", message: "Email di test inviata a " + to_email });
   } catch (err) {
-    console.error("Errore invio test:", err);
     return jsonResponse({ status: "error", error: err.message });
   }
 }
@@ -399,21 +308,13 @@ async function sendTestEmail(supabase: any, body: any) {
 // ═══ DISISCRIZIONE ═══
 async function handleUnsubscribe(supabase: any, body: any) {
   const { email, queue_id } = body;
+  if (!email) return jsonResponse({ error: "Email mancante" }, 400);
 
-  if (!email) {
-    return jsonResponse({ error: "Email mancante" }, 400);
-  }
-
-  await supabase
-    .from("email_blacklist")
+  await supabase.from("email_blacklist")
     .upsert({ email: email.toLowerCase().trim(), motivo: "disiscrizione" });
 
   if (queue_id) {
-    try {
-      await supabase
-        .from("email_tracking")
-        .insert({ coda_email_id: queue_id, tipo: "disiscrizione" });
-    } catch (_) { /* ignore */ }
+    try { await supabase.from("email_tracking").insert({ coda_email_id: queue_id, tipo: "disiscrizione" }); } catch (_) {}
   }
 
   const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Disiscrizione</title></head>
@@ -426,29 +327,24 @@ async function handleUnsubscribe(supabase: any, body: any) {
     </div>
   </body></html>`;
 
-  return new Response(html, {
-    headers: { ...corsHeaders, "Content-Type": "text/html" },
-  });
+  return new Response(html, { headers: { ...corsHeaders, "Content-Type": "text/html" } });
 }
 
 // ═══ TRACCIAMENTO ═══
 async function trackOpen(supabase: any, body: any) {
-  const queueId = body.id;
-
-  if (queueId) {
+  if (body.id) {
     try {
-      await supabase.from("coda_email").update({ aperta_il: new Date().toISOString() }).eq("id", queueId);
-      await supabase.from("email_tracking").insert({ coda_email_id: queueId, tipo: "apertura" });
-    } catch (_) { /* ignore */ }
+      await supabase.from("coda_email").update({ aperta_il: new Date().toISOString() }).eq("id", body.id);
+      await supabase.from("email_tracking").insert({ coda_email_id: body.id, tipo: "apertura" });
+    } catch (_) {}
   }
 
-  // Pixel trasparente 1x1 GIF
   const pixel = new Uint8Array([
-    0x47, 0x49, 0x46, 0x38, 0x39, 0x61, 0x01, 0x00, 0x01, 0x00,
-    0x80, 0x00, 0x00, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x21,
-    0xf9, 0x04, 0x01, 0x00, 0x00, 0x00, 0x00, 0x2c, 0x00, 0x00,
-    0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x00, 0x02, 0x02, 0x44,
-    0x01, 0x00, 0x3b,
+    0x47,0x49,0x46,0x38,0x39,0x61,0x01,0x00,0x01,0x00,
+    0x80,0x00,0x00,0xff,0xff,0xff,0x00,0x00,0x00,0x21,
+    0xf9,0x04,0x01,0x00,0x00,0x00,0x00,0x2c,0x00,0x00,
+    0x00,0x00,0x01,0x00,0x01,0x00,0x00,0x02,0x02,0x44,
+    0x01,0x00,0x3b,
   ]);
 
   return new Response(pixel, {
@@ -457,18 +353,16 @@ async function trackOpen(supabase: any, body: any) {
 }
 
 async function trackClick(supabase: any, body: any) {
-  const { queue_id, url } = body;
-
-  if (queue_id) {
+  if (body.queue_id) {
     try {
-      await supabase.from("coda_email").update({ click_il: new Date().toISOString() }).eq("id", queue_id);
-      await supabase.from("email_tracking").insert({ coda_email_id: queue_id, tipo: "click", url_cliccato: url });
-    } catch (_) { /* ignore */ }
+      await supabase.from("coda_email").update({ click_il: new Date().toISOString() }).eq("id", body.queue_id);
+      await supabase.from("email_tracking").insert({ coda_email_id: body.queue_id, tipo: "click", url_cliccato: body.url });
+    } catch (_) {}
   }
 
   return new Response(null, {
     status: 302,
-    headers: { ...corsHeaders, Location: url || "https://righetto-immobiliare.it" },
+    headers: { ...corsHeaders, Location: body.url || "https://righetto-immobiliare.it" },
   });
 }
 
@@ -476,27 +370,19 @@ async function trackClick(supabase: any, body: any) {
 async function checkRateLimits(supabase: any, config: any): Promise<boolean> {
   try {
     const now = new Date();
-    const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
+    const oneHourAgo = new Date(now.getTime() - 3600000);
     const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    const { count: hourCount } = await supabase
-      .from("coda_email")
+    const { count: hc } = await supabase.from("coda_email")
       .select("id", { count: "exact", head: true })
-      .eq("stato", "inviata")
-      .gte("inviata_il", oneHourAgo.toISOString());
+      .eq("stato", "inviata").gte("inviata_il", oneHourAgo.toISOString());
+    if ((hc || 0) >= (config.max_per_ora || 300)) return false;
 
-    if ((hourCount || 0) >= (config.max_per_ora || 300)) return false;
-
-    const { count: dayCount } = await supabase
-      .from("coda_email")
+    const { count: dc } = await supabase.from("coda_email")
       .select("id", { count: "exact", head: true })
-      .eq("stato", "inviata")
-      .gte("inviata_il", todayStart.toISOString());
-
-    if ((dayCount || 0) >= (config.max_per_giorno || 2000)) return false;
-  } catch (_) {
-    // Se la tabella non esiste, permetti l'invio
-  }
+      .eq("stato", "inviata").gte("inviata_il", todayStart.toISOString());
+    if ((dc || 0) >= (config.max_per_giorno || 2000)) return false;
+  } catch (_) {}
 
   return true;
 }
