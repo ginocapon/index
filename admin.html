@@ -2007,9 +2007,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
               <select id="filtroTipo" onchange="loadImmobili()" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.8rem;">
                 <option value="">Tutti i tipi</option>
-                <option value="vendita">Vendita</option>
-                <option value="affitto">Affitto</option>
-                <option value="asta">Asta</option>
+                <option value="vendita">🏷️ In Vendita</option>
+                <option value="affitto_residenziale">🏠 Affitto Residenziale</option>
+                <option value="affitto_commerciale">🏢 Affitto Commerciale</option>
+                <option value="asta_giudiziaria">⚖️ Asta Giudiziaria</option>
               </select>
               <select id="filtroStato" onchange="filterTable()" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.8rem;">
                 <option value="">Tutti gli stati</option>
@@ -2096,9 +2097,13 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
                 <div class="form-group">
                   <label>Proprietario (seleziona da clienti)</label>
-                  <select id="f_proprietario_id" onchange="onProprietarioSelect()">
-                    <option value="">— Nessuno —</option>
-                  </select>
+                  <div style="position:relative">
+                    <input type="text" id="f_proprietario_search" placeholder="⏳ Cerca nome, cognome, email o telefono..." oninput="searchProprietario(this.value)" onfocus="searchProprietario(this.value)" autocomplete="off" style="padding-right:36px">
+                    <span style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none" id="proprietarioSearchIcon">🔍</span>
+                    <input type="hidden" id="f_proprietario_id">
+                    <div id="proprietarioResults" style="display:none;position:absolute;top:100%;left:0;right:0;max-height:250px;overflow-y:auto;background:white;border:1.5px solid var(--caffe3);border-top:none;border-radius:0 0 8px 8px;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,0.15)"></div>
+                  </div>
+                  <small style="color:var(--caffe2);font-size:0.68rem">Digita almeno 2 caratteri per cercare tra i clienti</small>
                 </div>
                 <div class="form-group">
                   <label>Nome proprietario (testo libero)</label>
@@ -4657,39 +4662,90 @@ function generatePropertySlug(d) {
 
 // LOAD IMMOBILI
 // ══════════════════════════════════════
-// Popola il dropdown proprietario con i clienti esistenti
-async function populateProprietarioDropdown() {
-  const select = document.getElementById('f_proprietario_id');
-  if (!select) return;
-  const current = select.value;
-  select.innerHTML = '<option value="">— Nessuno —</option>';
-  try {
-    const { data } = await sb.from('clienti').select('id,nome,ragione_sociale,tipo_cliente,telefono,email').order('nome');
-    (data || []).forEach(c => {
-      const label = c.tipo_cliente === 'azienda' && c.ragione_sociale
-        ? c.ragione_sociale + ' (' + (c.nome || '') + ')'
-        : c.nome || c.email || 'Cliente #' + c.id;
-      const opt = document.createElement('option');
-      opt.value = c.id;
-      opt.textContent = label;
-      opt.dataset.nome = c.nome || '';
-      opt.dataset.tel = c.telefono || '';
-      opt.dataset.email = c.email || '';
-      select.appendChild(opt);
-    });
-    if (current) select.value = current;
-  } catch(e) { console.warn('Errore caricamento clienti per proprietario:', e); }
+// Ricerca proprietario con clessidra (autocomplete live)
+let _proprietarioTimeout = null;
+let _proprietarioCache = [];
+
+async function searchProprietario(query) {
+  const resultsDiv = document.getElementById('proprietarioResults');
+  const icon = document.getElementById('proprietarioSearchIcon');
+
+  if (!query || query.length < 2) {
+    resultsDiv.style.display = 'none';
+    icon.textContent = '🔍';
+    return;
+  }
+
+  // Mostra clessidra durante la ricerca
+  icon.textContent = '⏳';
+
+  clearTimeout(_proprietarioTimeout);
+  _proprietarioTimeout = setTimeout(async () => {
+    try {
+      const q = query.toLowerCase();
+      // Cerca su Supabase con filtro fuzzy
+      const { data } = await sb.from('clienti')
+        .select('id,nome,ragione_sociale,tipo_cliente,telefono,email')
+        .or(`nome.ilike.%${q}%,ragione_sociale.ilike.%${q}%,email.ilike.%${q}%,telefono.ilike.%${q}%`)
+        .order('nome')
+        .limit(20);
+
+      _proprietarioCache = data || [];
+      icon.textContent = '🔍';
+
+      if (_proprietarioCache.length === 0) {
+        resultsDiv.innerHTML = '<div style="padding:12px;color:#999;font-size:0.8rem;text-align:center">Nessun cliente trovato</div>';
+        resultsDiv.style.display = 'block';
+        return;
+      }
+
+      resultsDiv.innerHTML = _proprietarioCache.map(c => {
+        const label = c.tipo_cliente === 'azienda' && c.ragione_sociale
+          ? c.ragione_sociale + ' (' + (c.nome || '') + ')'
+          : c.nome || c.email || 'Cliente #' + c.id;
+        const sub = [c.email, c.telefono].filter(Boolean).join(' · ');
+        return `<div onclick="selectProprietario('${c.id}')" style="padding:10px 14px;cursor:pointer;border-bottom:1px solid #f0f0f0;transition:background 0.15s" onmouseover="this.style.background='#f5f0e8'" onmouseout="this.style.background='white'">
+          <div style="font-size:0.85rem;font-weight:600;color:#2c1810">${escHtml(label)}</div>
+          ${sub ? `<div style="font-size:0.72rem;color:#999;margin-top:2px">${escHtml(sub)}</div>` : ''}
+        </div>`;
+      }).join('');
+      resultsDiv.style.display = 'block';
+
+    } catch(e) {
+      console.warn('Errore ricerca proprietario:', e);
+      icon.textContent = '🔍';
+    }
+  }, 300); // debounce 300ms
 }
 
-function onProprietarioSelect() {
-  const select = document.getElementById('f_proprietario_id');
-  const opt = select.selectedOptions[0];
-  if (opt && opt.value) {
-    document.getElementById('f_proprietario_nome').value = opt.dataset.nome || opt.textContent;
-    document.getElementById('f_proprietario_tel').value = opt.dataset.tel || '';
-    document.getElementById('f_proprietario_email').value = opt.dataset.email || '';
-  }
+function selectProprietario(id) {
+  const c = _proprietarioCache.find(x => x.id === id);
+  if (!c) return;
+
+  const label = c.tipo_cliente === 'azienda' && c.ragione_sociale
+    ? c.ragione_sociale + ' (' + (c.nome || '') + ')'
+    : c.nome || c.email || 'Cliente #' + c.id;
+
+  document.getElementById('f_proprietario_id').value = c.id;
+  document.getElementById('f_proprietario_search').value = label;
+  document.getElementById('f_proprietario_nome').value = c.nome || label;
+  document.getElementById('f_proprietario_tel').value = c.telefono || '';
+  document.getElementById('f_proprietario_email').value = c.email || '';
+  document.getElementById('proprietarioResults').style.display = 'none';
 }
+
+// Chiudi risultati quando clicchi fuori
+document.addEventListener('click', function(e) {
+  const results = document.getElementById('proprietarioResults');
+  const search = document.getElementById('f_proprietario_search');
+  if (results && search && !results.contains(e.target) && e.target !== search) {
+    results.style.display = 'none';
+  }
+});
+
+// Mantieni compatibilità con populateProprietarioDropdown (non fa più nulla)
+function populateProprietarioDropdown() {}
+function onProprietarioSelect() {}
 
 async function loadImmobili() {
   const wrap = document.getElementById('immobiliTableWrap');
@@ -4830,6 +4886,9 @@ function resetForm() {
   document.getElementById('editId').value = '';
   document.getElementById('formTitle').textContent = 'Nuovo Immobile';
   document.getElementById('f_attivo').checked = true;
+  const propSearch = document.getElementById('f_proprietario_search');
+  if (propSearch) propSearch.value = '';
+  document.getElementById('f_proprietario_id').value = '';
   currentFotos = []; currentPlanimetrie = []; currentDocumenti = []; currentVtScenes = [];
   renderFotos(); renderPlanimetrie(); renderDocumenti(); renderVtScenes();
   showSection('nuovo');
@@ -4899,7 +4958,9 @@ async function generaViaCasuale() {
 function editImmobile(id) {
   const imm = allImmobili.find(x => String(x.id) === String(id));
   if (!imm) { toast('Immobile non trovato', 'error'); return; }
-  populateProprietarioDropdown();
+  // Popola campo ricerca proprietario con il nome attuale
+  const propSearch = document.getElementById('f_proprietario_search');
+  if (propSearch) propSearch.value = imm.proprietario_nome || '';
   document.getElementById('editId').value = imm.id;
   document.getElementById('formTitle').textContent = 'Modifica: ' + imm.titolo;
 
@@ -5139,6 +5200,9 @@ async function saveImmobile(e) {
     document.getElementById('formTitle').textContent = 'Nuovo Immobile';
     document.getElementById('immobileForm').reset();
     document.getElementById('f_attivo').checked = true;
+    const ps = document.getElementById('f_proprietario_search');
+    if (ps) ps.value = '';
+    document.getElementById('f_proprietario_id').value = '';
     currentFotos = []; currentPlanimetrie = []; currentDocumenti = []; currentVtScenes = []; currentUnitaCatastali = []; currentCatastoPdf = [];
     renderFotos(); renderPlanimetrie(); renderDocumenti(); renderVtScenes(); renderUnitaCatastali(); renderCatastoPdf();
     await loadImmobili();
