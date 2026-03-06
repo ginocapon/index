@@ -578,17 +578,26 @@ function mostraRisultatoValutazione(dati) {
       qrDiv.innerHTML += '<p>Inquadra per scriverci su WhatsApp</p>';
     }
   } catch(e) {}
-  // Auto-PDF dopo 6 secondi
-  setTimeout(function() {
+  // Auto-PDF dopo 3 secondi (con retry se jsPDF non ancora caricato)
+  var pdfTentativi = 0;
+  function tentaPDF() {
     var notice = document.getElementById('valPdfNotice');
-    if (typeof generaValutazionePDF === 'function') {
+    if (typeof generaValutazionePDF === 'function' && window.jspdf) {
       generaValutazionePDF(dati).then(function() {
         notice.innerHTML = '<span class="val-pdf-done">La tua scheda PDF e\' stata scaricata!</span>';
-      }).catch(function() {
-        notice.innerHTML = '<span class="val-pdf-done">La tua scheda PDF e\' stata scaricata!</span>';
+      }).catch(function(err) {
+        console.error('Errore PDF:', err);
+        notice.innerHTML = '<span class="val-pdf-done">Errore nel download PDF. Riprova.</span>';
       });
+    } else if (pdfTentativi < 5) {
+      pdfTentativi++;
+      setTimeout(tentaPDF, 1000);
+    } else {
+      console.error('generaValutazionePDF non disponibile dopo 5 tentativi');
+      notice.innerHTML = '<span class="val-pdf-done">Errore caricamento PDF. Ricarica la pagina.</span>';
     }
-  }, 6000);
+  }
+  setTimeout(tentaPDF, 3000);
 }
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
