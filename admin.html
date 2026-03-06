@@ -4334,7 +4334,10 @@ function grantAccess() {
   sessionStorage.setItem('rig_admin', 'ok');
   document.getElementById('loginOverlay').style.display = 'none';
   document.getElementById('appWrapper').style.display = 'flex';
-  init();
+  init().catch(err => {
+    console.error('Errore inizializzazione:', err);
+    document.getElementById('immobiliTableWrap').innerHTML = '<div class="empty-state"><h3>Errore di connessione</h3><p style="margin-top:8px;font-size:0.82rem;color:var(--rosso)">Impossibile caricare i dati. Ricarica la pagina.</p></div>';
+  });
   handleHashNavigation();
 }
 
@@ -4587,8 +4590,7 @@ document.querySelectorAll('.sidebar .nav-item').forEach(function(item) {
 // INIT
 // ══════════════════════════════════════
 async function init() {
-  await loadImmobili();
-  await loadRichiesteCount();
+  await Promise.all([loadImmobili(), loadRichiesteCount()]);
 }
 
 // ══════════════════════════════════════
