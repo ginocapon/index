@@ -169,6 +169,8 @@ img{max-width:100%;height:auto;display:block}
 .val-pdf-notice{display:flex;align-items:center;gap:.5rem;justify-content:center;font-size:.78rem;color:var(--gray);margin-top:1rem;padding:.6rem 1rem;background:var(--light);border-radius:10px}
 .val-pdf-notice .pdf-spinner{width:18px;height:18px;border:2px solid #E5E7EB;border-top:2px solid var(--purple);border-radius:50%;animation:spin 1s linear infinite}
 .val-pdf-done{color:var(--mint);font-weight:600}
+.val-pdf-btn{display:inline-block;margin-top:.8rem;padding:.7rem 1.6rem;background:var(--purple);color:#fff;border:none;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;transition:background .2s}
+.val-pdf-btn:hover{background:var(--purple2)}
 .val-wa-qr{margin-top:1rem;text-align:center}
 .val-wa-qr canvas{margin:0 auto;border-radius:8px}
 .val-wa-qr p{font-size:.7rem;color:var(--gray);margin-top:.3rem}
@@ -417,6 +419,7 @@ img{max-width:100%;height:auto;display:block}
             <div class="val-stima-range" id="valRange"></div>
             <div class="val-stima-mq" id="valMq"></div>
           </div>
+          <button class="val-pdf-btn" id="valPdfBtn" style="display:none" onclick="scaricaPDF()">📄 Scarica scheda PDF</button>
           <div class="val-pdf-notice" id="valPdfNotice">
             <div class="pdf-spinner"></div>
             <span>Stiamo preparando la tua scheda PDF...</span>
@@ -503,7 +506,32 @@ img{max-width:100%;height:auto;display:block}
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="js/config.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="js/valutazione-pdf.js"></script>
 <script>
+function scaricaPDF() {
+  var dati = window._valDati;
+  if (!dati) return;
+  var notice = document.getElementById('valPdfNotice');
+  var btn = document.getElementById('valPdfBtn');
+  if (typeof generaValutazionePDF === 'function' && window.jspdf) {
+    notice.innerHTML = '<div class="pdf-spinner"></div><span>Stiamo preparando la tua scheda PDF...</span>';
+    notice.style.display = 'flex';
+    generaValutazionePDF(dati).then(function() {
+      notice.innerHTML = '<span class="val-pdf-done">La tua scheda PDF e\' stata scaricata!</span>';
+      btn.style.display = 'inline-block';
+    }).catch(function(err) {
+      console.error('Errore PDF:', err);
+      notice.innerHTML = '<span class="val-pdf-done">Errore nel download. Clicca il pulsante per riprovare.</span>';
+      btn.style.display = 'inline-block';
+    });
+  } else {
+    console.error('jsPDF non caricato:', typeof generaValutazionePDF, !!window.jspdf);
+    notice.innerHTML = '<span class="val-pdf-done">Errore caricamento. Clicca il pulsante per riprovare.</span>';
+    btn.style.display = 'inline-block';
+  }
+}
 async function iscriviBrevo(email,nome,attrs){
   try{
     if(typeof SERVIZI_CONFIG==='undefined'||!SERVIZI_CONFIG.BREVO_API_KEY)return;
@@ -578,31 +606,14 @@ function mostraRisultatoValutazione(dati) {
       qrDiv.innerHTML += '<p>Inquadra per scriverci su WhatsApp</p>';
     }
   } catch(e) {}
-  // Auto-PDF dopo 3 secondi (con retry se jsPDF non ancora caricato)
-  var pdfTentativi = 0;
-  function tentaPDF() {
-    var notice = document.getElementById('valPdfNotice');
-    if (typeof generaValutazionePDF === 'function' && window.jspdf) {
-      generaValutazionePDF(dati).then(function() {
-        notice.innerHTML = '<span class="val-pdf-done">La tua scheda PDF e\' stata scaricata!</span>';
-      }).catch(function(err) {
-        console.error('Errore PDF:', err);
-        notice.innerHTML = '<span class="val-pdf-done">Errore nel download PDF. Riprova.</span>';
-      });
-    } else if (pdfTentativi < 5) {
-      pdfTentativi++;
-      setTimeout(tentaPDF, 1000);
-    } else {
-      console.error('generaValutazionePDF non disponibile dopo 5 tentativi');
-      notice.innerHTML = '<span class="val-pdf-done">Errore caricamento PDF. Ricarica la pagina.</span>';
-    }
-  }
-  setTimeout(tentaPDF, 3000);
+  // Salva dati per il pulsante manuale
+  window._valDati = dati;
+  // Auto-PDF dopo 3 secondi
+  setTimeout(function() {
+    scaricaPDF();
+  }, 3000);
 }
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
-<script src="js/valutazione-pdf.js" defer></script>
 <script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */
 (function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js';document.body.appendChild(s);}
 setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
