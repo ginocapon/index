@@ -45,20 +45,25 @@ $action = $input['action'] ?? '';
 
 // ═══ INVIO SINGOLA EMAIL ═══
 if ($action === 'send' || $action === 'send_single' || $action === 'send_test') {
-    $to = filter_var($input['to_email'] ?? '', FILTER_VALIDATE_EMAIL);
-    $fromEmail = filter_var($input['sender_email'] ?? 'info@righettoimmobiliare.it', FILTER_VALIDATE_EMAIL);
+    $to = filter_var(trim($input['to_email'] ?? ''), FILTER_VALIDATE_EMAIL);
+    $rawSender = trim($input['sender_email'] ?? '');
+    $fromEmail = $rawSender ? filter_var($rawSender, FILTER_VALIDATE_EMAIL) : false;
     $fromName = $input['sender_name'] ?? 'Righetto Immobiliare';
     $subject = $input['subject'] ?? '';
     $htmlBody = $input['html_body'] ?? '';
-    $replyTo = filter_var($input['reply_to'] ?? $fromEmail, FILTER_VALIDATE_EMAIL);
     $toName = $input['to_name'] ?? '';
 
     if (!$to) {
-        echo json_encode(['status' => 'error', 'error' => 'Email destinatario non valida']);
+        echo json_encode(['status' => 'error', 'error' => 'Email destinatario non valida: ' . ($input['to_email'] ?? '(vuoto)')]);
         exit;
     }
+    // Fallback mittente se non valido o non fornito
     if (!$fromEmail) {
         $fromEmail = 'info@righettoimmobiliare.it';
+    }
+    $replyTo = filter_var(trim($input['reply_to'] ?? ''), FILTER_VALIDATE_EMAIL);
+    if (!$replyTo) {
+        $replyTo = $fromEmail;
     }
     if (!$subject || !$htmlBody) {
         echo json_encode(['status' => 'error', 'error' => 'Oggetto e corpo email obbligatori']);
@@ -84,11 +89,12 @@ if ($action === 'send' || $action === 'send_single' || $action === 'send_test') 
 if ($action === 'send_batch') {
     $emails = $input['emails'] ?? [];
     $delay = intval($input['delay_ms'] ?? 3000); // 3 sec default tra email
-    $fromEmail = filter_var($input['sender_email'] ?? 'info@righettoimmobiliare.it', FILTER_VALIDATE_EMAIL);
+    $rawSenderBatch = trim($input['sender_email'] ?? '');
+    $fromEmail = $rawSenderBatch ? filter_var($rawSenderBatch, FILTER_VALIDATE_EMAIL) : false;
     $fromName = $input['sender_name'] ?? 'Righetto Immobiliare';
-    $replyTo = filter_var($input['reply_to'] ?? $fromEmail, FILTER_VALIDATE_EMAIL);
-
     if (!$fromEmail) $fromEmail = 'info@righettoimmobiliare.it';
+    $replyTo = filter_var(trim($input['reply_to'] ?? ''), FILTER_VALIDATE_EMAIL);
+    if (!$replyTo) $replyTo = $fromEmail;
 
     $sent = 0;
     $errors = 0;
@@ -196,13 +202,20 @@ function sendEmail($to, $toName, $fromEmail, $fromName, $subject, $htmlBody, $re
         ? '=?UTF-8?B?' . base64_encode($toName) . '?= <' . $to . '>'
         : $to;
 
-    // Invio con mail()
-    $success = @mail($toFormatted, '=?UTF-8?B?' . base64_encode($subject) . '?=', $body, implode("\r\n", $headers));
+    // Envelope sender (necessario su cPanel/Exim per autorizzare il From)
+    $envelopeSender = '-f ' . $fromEmail;
+
+    // Codifica oggetto in UTF-8
+    $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
+
+    // Invio con mail() — il 5° parametro imposta il Return-Path / envelope sender
+    $success = @mail($toFormatted, $encodedSubject, $body, implode("\r\n", $headers), $envelopeSender);
 
     if ($success) {
         return true;
     } else {
         $lastError = error_get_last();
-        return 'mail() fallita: ' . ($lastError['message'] ?? 'errore sconosciuto');
+        return 'mail() fallita: ' . ($lastError['message'] ?? 'errore sconosciuto') .
+               ' | From: ' . $fromEmail . ' | To: ' . $to;
     }
 }

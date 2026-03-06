@@ -131,12 +131,19 @@ async function getEmailConfig(supabase: any) {
   };
 }
 
+// ═══ VALIDAZIONE EMAIL ═══
+function isValidEmail(email: string): boolean {
+  if (!email || typeof email !== "string") return false;
+  const trimmed = email.trim();
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
+}
+
 // ═══ INVIO SINGOLA EMAIL ═══
 async function sendSingleEmail(supabase: any, body: any) {
   const { to_email, to_name, subject, html_body, campaign_id, queue_id, sender_email, sender_name } = body;
 
-  if (!to_email || !to_email.includes("@")) {
-    return jsonResponse({ status: "error", error: "Email destinatario non valida" }, 400);
+  if (!to_email || !isValidEmail(to_email)) {
+    return jsonResponse({ status: "error", error: "Email destinatario non valida: " + (to_email || "(vuoto)") }, 400);
   }
 
   // Blacklist
@@ -160,8 +167,11 @@ async function sendSingleEmail(supabase: any, body: any) {
     finalHtml += `<img src="${Deno.env.get("SUPABASE_URL")}/functions/v1/send-email?action=track_open&id=${queue_id}" width="1" height="1" style="display:none" alt="">`;
   }
 
-  const fromEmail = sender_email || config.mittente_email;
+  // Validazione mittente: usa config come fallback se sender_email è vuoto o non valido
+  const fromEmail = (sender_email && isValidEmail(sender_email)) ? sender_email.trim() : config.mittente_email;
   const fromName = sender_name || config.mittente_nome;
+
+  console.log("sendSingleEmail: from=" + fromEmail + ", to=" + to_email);
 
   try {
     await sendViaRelay({
@@ -284,19 +294,26 @@ async function sendTestEmail(supabase: any, body: any) {
   const { to_email, subject, html_body, sender_email, sender_name, reply_to } = body;
   const config = await getEmailConfig(supabase);
 
-  if (!to_email || !to_email.includes("@")) {
-    return jsonResponse({ status: "error", error: "Email destinatario non valida" }, 400);
+  if (!to_email || !isValidEmail(to_email)) {
+    return jsonResponse({ status: "error", error: "Email destinatario non valida: " + (to_email || "(vuoto)") }, 400);
   }
+
+  // Validazione mittente: usa config come fallback se sender_email è vuoto o non valido
+  const fromEmail = (sender_email && isValidEmail(sender_email)) ? sender_email.trim() : config.mittente_email;
+  const fromName = sender_name || config.mittente_nome;
+  const replyToEmail = (reply_to && isValidEmail(reply_to)) ? reply_to.trim() : fromEmail;
+
+  console.log("sendTestEmail: from=" + fromEmail + ", to=" + to_email);
 
   try {
     await sendViaRelay({
       action: "send_test",
-      to_email,
-      sender_email: sender_email || config.mittente_email,
-      sender_name: sender_name || config.mittente_nome,
+      to_email: to_email.trim(),
+      sender_email: fromEmail,
+      sender_name: fromName,
       subject: subject || "Email di prova",
       html_body: html_body || "<h1>Test</h1><p>Email di prova da Righetto Immobiliare.</p>",
-      reply_to: reply_to || sender_email || config.mittente_email,
+      reply_to: replyToEmail,
     });
 
     return jsonResponse({ status: "sent", message: "Email di test inviata a " + to_email });
