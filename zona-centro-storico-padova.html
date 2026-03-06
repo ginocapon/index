@@ -193,7 +193,7 @@
 <main id="main-content">
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"><picture><source srcset="img/foto-servizi/vendita-immobili-padova.webp" type="image/webp"><img src="img/foto-servizi/vendita-immobili-padova.png" alt="Immobili Centro Storico Padova" width="1200" height="480" loading="eager"></picture></div>
+  <div class="hero-bg"><picture><source srcset="img/foto-servizi/vendita-immobili-padova.webp" type="image/webp"><img src="img/foto-servizi/vendita-immobili-padova.webp" alt="Immobili Centro Storico Padova" width="1200" height="480" loading="eager"></picture></div>
   <div class="hero-inner">
     <div class="htag">Quartiere di Padova</div>
     <h1>Centro Storico di <strong>Padova</strong></h1>
@@ -305,7 +305,10 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="js/nav-mobile.js" defer></script>
 <script src="js/config.js" defer></script>
-<script src="js/chatbot.js" defer></script>
+<script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */
+(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js';document.body.appendChild(s);}
+setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
+})();</script>
 <script src="js/cookie-consent.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
 <script src="js/welcome-popup.js" defer></script>

@@ -340,7 +340,7 @@
 <div class="art-hero">
   <picture>
     <source srcset="img/foto-servizi/contratti-di-locazione-padova.webp" type="image/webp">
-    <img class="art-hero-img" src="img/foto-servizi/contratti-di-locazione-padova.png" alt="Affitto studenti a Padova - guida completa zone e prezzi 2026" width="1200" height="600" fetchpriority="high">
+    <img class="art-hero-img" src="img/foto-servizi/contratti-di-locazione-padova.webp" alt="Affitto studenti a Padova - guida completa zone e prezzi 2026" width="1200" height="600" fetchpriority="high">
   </picture>
   <div class="art-hero-overlay">
     <div class="art-hero-inner">
@@ -421,7 +421,7 @@
     <figure>
       <picture>
         <source srcset="img/foto-servizi/gestioni-immobili-padova.webp" type="image/webp">
-        <img src="img/foto-servizi/gestioni-immobili-padova.png" alt="Gestione locazioni studentesche a Padova - servizio professionale Righetto Immobiliare" loading="lazy" width="1536" height="1024">
+        <img src="img/foto-servizi/gestioni-immobili-padova.webp" alt="Gestione locazioni studentesche a Padova - servizio professionale Righetto Immobiliare" loading="lazy" width="1536" height="1024">
       </picture>
       <figcaption>La gestione professionale delle locazioni studentesche: dal contratto alla manutenzione, ci occupiamo di tutto</figcaption>
     </figure>
@@ -497,11 +497,11 @@
     <div class="gallery">
       <picture>
         <source srcset="img/foto-servizi/valutazioni-e-perizie-padova.webp" type="image/webp">
-        <img src="img/foto-servizi/valutazioni-e-perizie-padova.png" alt="Consulenza immobiliare per affitto studenti a Padova" loading="lazy" width="1536" height="1024">
+        <img src="img/foto-servizi/valutazioni-e-perizie-padova.webp" alt="Consulenza immobiliare per affitto studenti a Padova" loading="lazy" width="1536" height="1024">
       </picture>
       <picture>
         <source srcset="img/foto-servizi/gestione-preliminari-padova.webp" type="image/webp">
-        <img src="img/foto-servizi/gestione-preliminari-padova.png" alt="Contratti di locazione per studenti a Padova - assistenza professionale" loading="lazy" width="1536" height="1024">
+        <img src="img/foto-servizi/gestione-preliminari-padova.webp" alt="Contratti di locazione per studenti a Padova - assistenza professionale" loading="lazy" width="1536" height="1024">
       </picture>
     </div>
 
@@ -620,7 +620,10 @@ document.querySelectorAll('.faq-q').forEach(function(q) {
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="js/nav-mobile.js" defer></script>
 <script src="js/config.js"></script>
-<script src="js/chatbot.js" defer></script>
+<script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */
+(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js';document.body.appendChild(s);}
+setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
+})();</script>
 <script src="js/cookie-consent.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
 <script src="js/welcome-popup.js" defer></script>
