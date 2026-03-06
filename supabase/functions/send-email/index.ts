@@ -104,7 +104,7 @@ async function createSmtpClient(config: any) {
 
 // ═══ INVIO SINGOLA EMAIL ═══
 async function sendSingleEmail(supabase: any, body: any) {
-  const { to_email, to_name, subject, html_body, campaign_id, queue_id } = body;
+  const { to_email, to_name, subject, html_body, campaign_id, queue_id, sender_email, sender_name } = body;
 
   // Controlla blacklist
   const { data: blacklisted } = await supabase
@@ -147,12 +147,12 @@ async function sendSingleEmail(supabase: any, body: any) {
 
   try {
     await client.send({
-      from: { name: config.mittente_nome, addr: config.mittente_email },
+      from: { name: sender_name || config.mittente_nome, addr: sender_email || config.mittente_email },
       to: [{ name: to_name || "", addr: to_email }],
       subject: subject,
       content: "",
       html: finalHtml,
-      replyTo: body.reply_to || config.mittente_email,
+      replyTo: body.reply_to || sender_email || config.mittente_email,
       headers: headers,
     });
 
@@ -328,18 +328,18 @@ async function processQueue(supabase: any, body: any) {
 
 // ═══ EMAIL DI TEST ═══
 async function sendTestEmail(supabase: any, body: any) {
-  const { to_email, subject, html_body } = body;
+  const { to_email, subject, html_body, sender_email, sender_name, reply_to } = body;
   const config = await getSmtpConfig(supabase);
   const client = await createSmtpClient(config);
 
   try {
     await client.send({
-      from: { name: config.mittente_nome, addr: config.mittente_email },
+      from: { name: sender_name || config.mittente_nome, addr: sender_email || config.mittente_email },
       to: [{ addr: to_email }],
       subject: "[TEST] " + subject,
       content: "",
       html: html_body,
-      replyTo: config.mittente_email,
+      replyTo: reply_to || sender_email || config.mittente_email,
     });
     await client.close();
     return jsonResponse({ status: "sent", message: "Email di test inviata a " + to_email });
