@@ -787,7 +787,7 @@ function cap(s) {
 function render(d) {
   // Meta SEO — ricco di dettagli come Idealista
   const tipologia = cap(d.tipologia || d.categoria || 'Immobile');
-  const operazione = d.tipo_operazione === 'vendita' ? 'in vendita' : d.tipo_operazione === 'affitto' ? 'in affitto' : '';
+  const operazione = d.tipo_operazione === 'vendita' ? 'in vendita' : (d.tipo_operazione || '').startsWith('affitto') ? 'in affitto' : '';
   const comuneLabel = d.comune || 'Padova';
   const mqLabel = d.superficie ? d.superficie + ' m²' : '';
   const localiLabel = (d.locali || d.camere) ? (d.locali || d.camere) + ' locali' : '';
