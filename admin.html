@@ -3838,7 +3838,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
       <div class="section" id="sec-emailmarketing">
         <div class="table-wrap" style="padding:28px;max-width:900px">
           <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:6px;">Email Marketing Pro</h3>
-          <p style="font-size:0.8rem;color:var(--caffe2);margin-bottom:20px">Powered by Brevo — Deliverability professionale con DKIM/SPF/DMARC</p>
+          <p style="font-size:0.8rem;color:var(--caffe2);margin-bottom:20px">Invio email tramite SMTP proprio — Deliverability professionale con DKIM/SPF/DMARC</p>
 
           <!-- DASHBOARD RAPIDA -->
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:24px">
@@ -3998,8 +3998,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               <div class="form-group" style="margin:0">
                 <label>Mittente</label>
                 <select id="emMittente" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px">
-                  <option value="info@righetto-immobiliare.it">info@righetto-immobiliare.it</option>
-                  <option value="newsletter@righetto-immobiliare.it">newsletter@righetto-immobiliare.it</option>
+                  <option value="info@righettoimmobiliare.it">info@righettoimmobiliare.it</option>
+                  <option value="newsletter@righettoimmobiliare.it">newsletter@righettoimmobiliare.it</option>
                 </select>
               </div>
               <div class="form-group" style="margin:0">
@@ -4176,7 +4176,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 </div>
                 <div>
                   <label style="font-size:0.85rem;display:block;margin-bottom:6px">Reply-To:</label>
-                  <input type="email" id="emReplyTo" value="info@righetto-immobiliare.it" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px">
+                  <input type="email" id="emReplyTo" value="info@righettoimmobiliare.it" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:8px">
                 </div>
               </div>
             </div>
@@ -4237,7 +4237,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <div style="display:flex;gap:8px;margin-bottom:12px">
               <button class="btn btn-secondary btn-sm" onclick="emLoadUnsubscribed()">Vedi disiscritti</button>
               <button class="btn btn-secondary btn-sm" onclick="emLoadBounces()">Vedi bounce</button>
-              <button class="btn btn-sm" style="background:#e74c3c;color:#fff;border:none" onclick="emSyncBlacklist()">Sincronizza blacklist da Brevo</button>
             </div>
             <div id="emBlacklist" style="max-height:200px;overflow-y:auto;font-size:0.8rem;color:var(--caffe2)">
               <em>Nessun dato</em>
@@ -10240,7 +10239,7 @@ checkAuth();
 
     // 1. Articoli Blog
     try {
-      const {data: articles} = await sb.from('blog').select('id, titolo, slug, categoria, immagine_url').order('data', {ascending: false});
+      const {data: articles} = await sb.from('blog').select('id, titolo, slug, categoria, immagine_copertina').order('data', {ascending: false});
       const sel = document.getElementById('emPickBlog');
       if (sel && articles) {
         articles.forEach(a => {
@@ -10249,7 +10248,7 @@ checkAuth();
           opt.textContent = (a.categoria ? '[' + a.categoria + '] ' : '') + (a.titolo || 'Senza titolo');
           opt.dataset.slug = a.slug || '';
           opt.dataset.titolo = a.titolo || '';
-          opt.dataset.img = a.immagine_url || '';
+          opt.dataset.img = a.immagine_copertina || '';
           sel.appendChild(opt);
         });
       }
@@ -10591,7 +10590,7 @@ checkAuth();
   <div style="background:#1a1a2e;padding:24px 30px;text-align:center">
     <p style="color:#d4a843;margin:0 0 8px;font-size:14px;font-weight:bold">Righetto Immobiliare</p>
     <p style="color:#999;margin:0 0 4px;font-size:12px">Via Fratelli Cervi 37, 35129 Padova</p>
-    <p style="color:#999;margin:0 0 12px;font-size:12px">Tel: 049 7808 888 | info@righetto-immobiliare.it</p>
+    <p style="color:#999;margin:0 0 12px;font-size:12px">Tel: 049 7808 888 | info@righettoimmobiliare.it</p>
     <p style="color:#666;font-size:11px;margin:0">{{unsubscribe_link}}</p>
   </div>
 </div>
@@ -10708,7 +10707,7 @@ checkAuth();
   <div style="background:#1a1a2e;padding:24px 30px;text-align:center">
     <p style="color:#d4a843;margin:0 0 8px;font-size:14px;font-weight:bold">Righetto Immobiliare</p>
     <p style="color:#999;margin:0 0 4px;font-size:12px">Via Fratelli Cervi 37, 35129 Padova</p>
-    <p style="color:#999;margin:0 0 12px;font-size:12px">Tel: 049 7808 888 | info@righetto-immobiliare.it</p>
+    <p style="color:#999;margin:0 0 12px;font-size:12px">Tel: 049 7808 888 | info@righettoimmobiliare.it</p>
     <p style="color:#666;font-size:11px;margin:0">{{unsubscribe_link}}</p>
   </div>
 </div>
@@ -10781,7 +10780,7 @@ checkAuth();
     toast(emContatti.length + ' contatti filtrati','info');
   };
 
-  // ═══ GESTIONE GRUPPI PERSONALIZZATI (STILE BREVO) ═══
+  // ═══ GESTIONE GRUPPI PERSONALIZZATI ═══
   let emGruppiCustom = [];
 
   // Carica gruppi da localStorage (o Supabase se disponibile)
@@ -10995,7 +10994,7 @@ checkAuth();
           oggetto: oggetto,
           preheader: document.getElementById('emPreheader')?.value || '',
           corpo_html: corpo,
-          mittente_email: document.getElementById('emMittente')?.value || 'info@righetto-immobiliare.it',
+          mittente_email: document.getElementById('emMittente')?.value || 'info@righettoimmobiliare.it',
           mittente_nome: document.getElementById('emNomeMittente')?.value || 'Righetto Immobiliare',
           gruppo: gruppoNome,
           stato: 'in_coda',
@@ -11388,7 +11387,7 @@ checkAuth();
   <div style="background:#1a1a2e;padding:24px 30px;text-align:center">
     <p style="color:#d4a843;margin:0 0 8px;font-size:14px;font-weight:bold">Righetto Immobiliare</p>
     <p style="color:#999;margin:0 0 4px;font-size:12px">Via Fratelli Cervi 37, 35129 Padova</p>
-    <p style="color:#999;margin:0 0 12px;font-size:12px">Tel: 049 7808 888 | info@righetto-immobiliare.it</p>
+    <p style="color:#999;margin:0 0 12px;font-size:12px">Tel: 049 7808 888 | info@righettoimmobiliare.it</p>
     <p style="color:#666;font-size:11px;margin:0">{{unsubscribe_link}}</p>
   </div>
 </div>
@@ -11429,7 +11428,7 @@ checkAuth();
   <div style="background:#1a1a2e;padding:24px 30px;text-align:center">
     <p style="color:#d4a843;margin:0 0 8px;font-size:14px;font-weight:bold">Righetto Immobiliare</p>
     <p style="color:#999;margin:0 0 4px;font-size:12px">Via Fratelli Cervi 37, 35129 Padova</p>
-    <p style="color:#999;margin:0 0 12px;font-size:12px">Tel: 049 7808 888 | info@righetto-immobiliare.it</p>
+    <p style="color:#999;margin:0 0 12px;font-size:12px">Tel: 049 7808 888 | info@righettoimmobiliare.it</p>
     <p style="color:#666;font-size:11px;margin:0">{{unsubscribe_link}}</p>
   </div>
 </div>
@@ -11542,7 +11541,7 @@ checkAuth();
     // Header info sopra l'iframe
     const headerHtml = '<div style="background:#f0f0f0;padding:12px;font-size:0.85rem">' +
       '<div><strong>Da:</strong> ' + escHtml(document.getElementById('emNomeMittente')?.value || 'Righetto Immobiliare') +
-        ' &lt;' + escHtml(document.getElementById('emMittente')?.value || 'info@righetto-immobiliare.it') + '&gt;</div>' +
+        ' &lt;' + escHtml(document.getElementById('emMittente')?.value || 'info@righettoimmobiliare.it') + '&gt;</div>' +
       '<div><strong>A:</strong> ' + escHtml(nome) + ' &lt;' + escHtml(emContatti.length ? emContatti[0].email : 'esempio@email.com') + '&gt;</div>' +
       '<div><strong>Oggetto:</strong> ' + escHtml(subjectPreview) + '</div>' +
       (preheader ? '<div><strong>Preheader:</strong> <span style="color:#999">' + escHtml(preheader) + '</span></div>' : '') +
@@ -11605,19 +11604,20 @@ checkAuth();
     emLogMsg('Invio test a ' + testEmail + '...', 'info');
 
     try {
-      // Prova Edge Function SMTP
-      const supabaseUrl = supabase.supabaseUrl || 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
-      const resp = await fetch(supabaseUrl + '/functions/v1/send-email', {
+      const resp = await fetch(SUPABASE_URL + '/functions/v1/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + (supabase.supabaseKey || supabase.auth?.currentSession?.access_token || '')
+          'Authorization': 'Bearer ' + SUPABASE_KEY
         },
         body: JSON.stringify({
           action: 'send_test',
           to_email: testEmail,
           subject: oggetto.replace(/\{\{nome\}\}/gi, 'Test User'),
-          html_body: html
+          html_body: html,
+          sender_email: document.getElementById('emMittente')?.value || 'info@righettoimmobiliare.it',
+          sender_name: document.getElementById('emNomeMittente')?.value || 'Righetto Immobiliare',
+          reply_to: document.getElementById('emReplyTo')?.value || 'info@righettoimmobiliare.it'
         })
       });
       const result = await resp.json();
@@ -11625,57 +11625,13 @@ checkAuth();
         emLogMsg('Test inviato con successo a ' + testEmail, 'ok');
         toast('Email di test inviata!', 'success');
       } else {
-        throw new Error(result.error || 'Errore sconosciuto');
+        throw new Error(result.error || 'Errore Edge Function: ' + JSON.stringify(result));
       }
     } catch(e) {
-      // Fallback: usa Brevo API se Edge Function non disponibile
-      emLogMsg('Edge Function non disponibile, provo Brevo API...', 'warn');
-      try {
-        await sendViaBrevo(testEmail, 'Test User', '[TEST] ' + oggetto, html);
-        emLogMsg('Test inviato via Brevo a ' + testEmail, 'ok');
-        toast('Email di test inviata via Brevo!', 'success');
-      } catch(e2) {
-        emLogMsg('Errore: ' + e2.message, 'err');
-        toast('Errore invio test: ' + e2.message, 'error');
-      }
+      emLogMsg('Errore: ' + e.message, 'err');
+      toast('Errore invio test: ' + e.message + ' — Verifica che la Edge Function "send-email" sia deployata e la tabella smtp_config sia configurata.', 'error');
     }
   };
-
-  // ═══ INVIO VIA BREVO API (Fallback) ═══
-  async function sendViaBrevo(toEmail, toName, subject, htmlBody) {
-    const cfg = window.SERVIZI_CONFIG || {};
-    const apiKey = cfg.BREVO_API_KEY;
-    if (!apiKey) throw new Error('Brevo API key non configurata in config.js');
-
-    const resp = await fetch('https://api.brevo.com/v3/smtp/email', {
-      method: 'POST',
-      headers: {
-        'accept': 'application/json',
-        'api-key': apiKey,
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        sender: {
-          name: document.getElementById('emNomeMittente')?.value || 'Righetto Immobiliare',
-          email: document.getElementById('emMittente')?.value || 'info@righetto-immobiliare.it'
-        },
-        to: [{ email: toEmail, name: toName || '' }],
-        replyTo: { email: document.getElementById('emReplyTo')?.value || 'info@righetto-immobiliare.it' },
-        subject: subject,
-        htmlContent: htmlBody,
-        headers: {
-          'X-Mailin-custom': 'righetto-immobiliare',
-          'charset': 'utf-8'
-        }
-      })
-    });
-
-    if (!resp.ok) {
-      const err = await resp.json().catch(() => ({}));
-      throw new Error(err.message || 'Errore Brevo ' + resp.status);
-    }
-    return await resp.json();
-  }
 
   // ═══ INVIO CAMPAGNA MASSIVA ═══
   window.emInvia = async function() {
@@ -11720,7 +11676,7 @@ checkAuth();
         oggetto: oggetto,
         preheader: document.getElementById('emPreheader')?.value || '',
         corpo_html: corpo,
-        mittente_email: document.getElementById('emMittente')?.value || 'info@righetto-immobiliare.it',
+        mittente_email: document.getElementById('emMittente')?.value || 'info@righettoimmobiliare.it',
         mittente_nome: document.getElementById('emNomeMittente')?.value || 'Righetto Immobiliare',
         stato: 'in_invio',
         totale_destinatari: total,
@@ -11763,44 +11719,38 @@ checkAuth();
       const finalHtml = html.replace(/\{\{UNSUB_URL\}\}/g, unsubUrl);
 
       try {
-        // Prima prova Edge Function, poi fallback Brevo
-        let success = false;
-        try {
-          const supabaseUrl = supabase.supabaseUrl || 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
-          const resp = await fetch(supabaseUrl + '/functions/v1/send-email', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + (supabase.supabaseKey || '')
-            },
-            body: JSON.stringify({
-              action: 'send_single',
-              to_email: c.email,
-              to_name: nome,
-              subject: subjectPersonal,
-              html_body: finalHtml,
-              campaign_id: campagnaId,
-              reply_to: document.getElementById('emReplyTo')?.value
-            })
-          });
-          const result = await resp.json();
-          if (result.status === 'sent') success = true;
-          else if (result.status === 'rate_limited') {
-            emLogMsg('RATE LIMIT raggiunto — pausa 5 minuti...', 'warn');
-            await new Promise(r => setTimeout(r, 300000));
-            i--; // Riprova
-            continue;
-          } else if (result.status === 'skipped') {
-            skipped++;
-            emLogMsg('SKIP (blacklist) → ' + c.email, 'warn');
-            continue;
-          }
-        } catch(e) { /* Edge Function non disponibile */ }
-
-        // Fallback: Brevo API
-        if (!success) {
-          await sendViaBrevo(c.email, nome, subjectPersonal, finalHtml);
-          success = true;
+        const resp = await fetch(SUPABASE_URL + '/functions/v1/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + SUPABASE_KEY
+          },
+          body: JSON.stringify({
+            action: 'send_single',
+            to_email: c.email,
+            to_name: nome,
+            subject: subjectPersonal,
+            html_body: finalHtml,
+            campaign_id: campagnaId,
+            reply_to: document.getElementById('emReplyTo')?.value,
+            sender_email: document.getElementById('emMittente')?.value || 'info@righettoimmobiliare.it',
+            sender_name: document.getElementById('emNomeMittente')?.value || 'Righetto Immobiliare'
+          })
+        });
+        const result = await resp.json();
+        if (result.status === 'sent') {
+          // ok
+        } else if (result.status === 'rate_limited') {
+          emLogMsg('RATE LIMIT raggiunto — pausa 5 minuti...', 'warn');
+          await new Promise(r => setTimeout(r, 300000));
+          i--; // Riprova
+          continue;
+        } else if (result.status === 'skipped') {
+          skipped++;
+          emLogMsg('SKIP (blacklist) → ' + c.email, 'warn');
+          continue;
+        } else {
+          throw new Error(result.error || 'Errore invio');
         }
 
         sent++;
@@ -11959,35 +11909,6 @@ checkAuth();
       box.innerHTML = '<strong>Bounce (' + data.length + '):</strong><br>' +
         data.map(d => '<div style="padding:3px 0;border-bottom:1px solid #eee">' + escHtml(d.email) + ' — ' + new Date(d.created_at).toLocaleDateString('it-IT') + '</div>').join('');
     } catch(e) { toast('Tabella blacklist non trovata', 'error'); }
-  };
-
-  window.emSyncBlacklist = async function() {
-    // Sincronizza blacklist da Brevo API
-    const cfg = window.SERVIZI_CONFIG || {};
-    if (!cfg.BREVO_API_KEY) return toast('Brevo API key non configurata', 'error');
-    try {
-      const resp = await fetch('https://api.brevo.com/v3/contacts?limit=500&offset=0', {
-        headers: { 'api-key': cfg.BREVO_API_KEY, 'accept': 'application/json' }
-      });
-      if (!resp.ok) throw new Error('Errore Brevo ' + resp.status);
-      // Brevo non ha un endpoint diretto per la blacklist nella free tier
-      // Usiamo i contatti bloccati
-      const resp2 = await fetch('https://api.brevo.com/v3/smtp/blockedContacts?limit=100', {
-        headers: { 'api-key': cfg.BREVO_API_KEY, 'accept': 'application/json' }
-      });
-      if (resp2.ok) {
-        const blocked = await resp2.json();
-        if (blocked.contacts) {
-          for (const c of blocked.contacts) {
-            await sb.from('email_blacklist').upsert({email: c.email.toLowerCase(), motivo: 'bounce'}).catch(() => {});
-            emBlacklist.add(c.email.toLowerCase());
-          }
-          toast('Sincronizzati ' + (blocked.contacts?.length || 0) + ' contatti bloccati da Brevo', 'success');
-        }
-      }
-    } catch(e) {
-      toast('Errore sincronizzazione: ' + e.message, 'error');
-    }
   };
 
   function emLogMsg(text, type) {
