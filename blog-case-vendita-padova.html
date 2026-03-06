@@ -41,8 +41,8 @@
   <meta name="description" content="Case in vendita a Padova e provincia nel 2026: prezzi aggiornati al mq zona per zona, quartieri migliori e consigli d'acquisto. Guida di Righetto Immobiliare.">
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/nav-mobile.css">
-  <link rel="stylesheet" href="css/scroll-reveal.css">
-  <link rel="stylesheet" href="css/welcome-popup.css">
+  <link rel="stylesheet" href="css/scroll-reveal.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="css/welcome-popup.css" media="print" onload="this.media='all'">
 
   <!-- JSON-LD Article -->
   <script type="application/ld+json">
@@ -364,7 +364,7 @@
 <div class="art-hero">
   <picture>
     <source srcset="img/foto-servizi/vendita-immobili-padova.webp" type="image/webp">
-    <img class="art-hero-img" src="img/foto-servizi/vendita-immobili-padova.png" alt="Case in vendita a Padova e provincia - panoramica mercato immobiliare 2026" width="1200" height="600" fetchpriority="high">
+    <img class="art-hero-img" src="img/foto-servizi/vendita-immobili-padova.webp" alt="Case in vendita a Padova e provincia - panoramica mercato immobiliare 2026" width="1200" height="600" fetchpriority="high">
   </picture>
   <div class="art-hero-overlay">
     <div class="art-hero-inner">
@@ -443,7 +443,7 @@
     <figure>
       <picture>
         <source srcset="img/foto-servizi/valutazioni-e-perizie-padova.webp" type="image/webp">
-        <img src="img/foto-servizi/valutazioni-e-perizie-padova.png" alt="Valutazione immobiliare a Padova - consulenza per acquisto casa" loading="lazy" width="1536" height="1024">
+        <img src="img/foto-servizi/valutazioni-e-perizie-padova.webp" alt="Valutazione immobiliare a Padova - consulenza per acquisto casa" loading="lazy" width="1536" height="1024">
       </picture>
       <figcaption>Un momento di consulenza immobiliare presso la nostra agenzia: valutare correttamente un immobile e' il primo passo per un acquisto sicuro</figcaption>
     </figure>
@@ -495,11 +495,11 @@
     <div class="gallery">
       <picture>
         <source srcset="img/foto-servizi/gestioni-immobili-padova.webp" type="image/webp">
-        <img src="img/foto-servizi/gestioni-immobili-padova.png" alt="Gestione immobili in vendita a Padova - servizio professionale Righetto Immobiliare" loading="lazy" width="1536" height="1024">
+        <img src="img/foto-servizi/gestioni-immobili-padova.webp" alt="Gestione immobili in vendita a Padova - servizio professionale Righetto Immobiliare" loading="lazy" width="1536" height="1024">
       </picture>
       <picture>
         <source srcset="img/foto-servizi/contratti-di-locazione-padova.webp" type="image/webp">
-        <img src="img/foto-servizi/contratti-di-locazione-padova.png" alt="Contratti immobiliari Padova - compravendita e locazione con assistenza professionale" loading="lazy" width="1536" height="1024">
+        <img src="img/foto-servizi/contratti-di-locazione-padova.webp" alt="Contratti immobiliari Padova - compravendita e locazione con assistenza professionale" loading="lazy" width="1536" height="1024">
       </picture>
     </div>
 
@@ -546,7 +546,7 @@
     <figure>
       <picture>
         <source srcset="img/foto-servizi/gestione-preliminari-padova.webp" type="image/webp">
-        <img src="img/foto-servizi/gestione-preliminari-padova.png" alt="Gestione preliminare di compravendita immobiliare a Padova" loading="lazy" width="1536" height="1024">
+        <img src="img/foto-servizi/gestione-preliminari-padova.webp" alt="Gestione preliminare di compravendita immobiliare a Padova" loading="lazy" width="1536" height="1024">
       </picture>
       <figcaption>La firma del preliminare di compravendita: un passaggio fondamentale che seguiamo con cura per ogni cliente</figcaption>
     </figure>
@@ -699,7 +699,10 @@ document.querySelectorAll('.faq-q').forEach(function(q) {
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="js/nav-mobile.js" defer></script>
 <script src="js/config.js"></script>
-<script src="js/chatbot.js" defer></script>
+<script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */
+(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js';document.body.appendChild(s);}
+setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
+})();</script>
 <script src="js/cookie-consent.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
 <script src="js/welcome-popup.js" defer></script>
