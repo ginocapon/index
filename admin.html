@@ -2033,9 +2033,14 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <div class="table-wrap">
           <div class="modal-header" style="border-radius:0">
             <h2 id="formTitle">Nuovo Immobile</h2>
-            <button class="btn btn-primary btn-sm" onclick="openImportModal()" style="background:var(--oro);color:var(--testo)">
-              📥 Importa da Idealista
-            </button>
+            <div style="display:flex;gap:8px;align-items:center">
+              <button class="btn btn-primary btn-sm" onclick="openImportModal()" style="background:var(--oro);color:var(--testo)">
+                📥 Importa da Idealista
+              </button>
+              <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('immobileForm').requestSubmit()" style="background:var(--verde,#2d7a3a);color:#fff">
+                💾 Salva
+              </button>
+            </div>
           </div>
           <div class="modal-body">
             <form id="immobileForm" onsubmit="saveImmobile(event)">
