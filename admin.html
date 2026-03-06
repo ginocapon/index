@@ -11681,7 +11681,12 @@ checkAuth();
     const html = buildEmailHtml(corpo, 'Test User', false)
       .replace(/\{\{UNSUB_URL\}\}/g, '#test');
 
-    emLogMsg('Invio test a ' + testEmail + '...', 'info');
+    // Validazione e trim dei campi mittente
+    const senderEmail = (document.getElementById('emMittente')?.value || '').trim() || 'info@righettoimmobiliare.it';
+    const senderName = (document.getElementById('emNomeMittente')?.value || '').trim() || 'Righetto Immobiliare';
+    const replyToVal = (document.getElementById('emReplyTo')?.value || '').trim() || senderEmail;
+
+    emLogMsg('Invio test a ' + testEmail + ' da ' + senderEmail + '...', 'info');
 
     try {
       const resp = await fetch(SUPABASE_URL + '/functions/v1/send-email', {
@@ -11692,12 +11697,12 @@ checkAuth();
         },
         body: JSON.stringify({
           action: 'send_test',
-          to_email: testEmail,
+          to_email: testEmail.trim(),
           subject: oggetto.replace(/\{\{nome\}\}/gi, 'Test User'),
           html_body: html,
-          sender_email: document.getElementById('emMittente')?.value || 'info@righettoimmobiliare.it',
-          sender_name: document.getElementById('emNomeMittente')?.value || 'Righetto Immobiliare',
-          reply_to: document.getElementById('emReplyTo')?.value || 'info@righettoimmobiliare.it'
+          sender_email: senderEmail,
+          sender_name: senderName,
+          reply_to: replyToVal
         })
       });
       const result = await resp.json();
@@ -11767,8 +11772,8 @@ checkAuth();
         oggetto: oggetto,
         preheader: document.getElementById('emPreheader')?.value || '',
         corpo_html: corpo,
-        mittente_email: document.getElementById('emMittente')?.value || 'info@righettoimmobiliare.it',
-        mittente_nome: document.getElementById('emNomeMittente')?.value || 'Righetto Immobiliare',
+        mittente_email: (document.getElementById('emMittente')?.value || '').trim() || 'info@righettoimmobiliare.it',
+        mittente_nome: (document.getElementById('emNomeMittente')?.value || '').trim() || 'Righetto Immobiliare',
         stato: 'in_invio',
         totale_destinatari: total,
         iniziata_il: new Date().toISOString()
@@ -11823,9 +11828,9 @@ checkAuth();
             subject: subjectPersonal,
             html_body: finalHtml,
             campaign_id: campagnaId,
-            reply_to: document.getElementById('emReplyTo')?.value,
-            sender_email: document.getElementById('emMittente')?.value || 'info@righettoimmobiliare.it',
-            sender_name: document.getElementById('emNomeMittente')?.value || 'Righetto Immobiliare'
+            reply_to: (document.getElementById('emReplyTo')?.value || '').trim() || (document.getElementById('emMittente')?.value || '').trim() || 'info@righettoimmobiliare.it',
+            sender_email: (document.getElementById('emMittente')?.value || '').trim() || 'info@righettoimmobiliare.it',
+            sender_name: (document.getElementById('emNomeMittente')?.value || '').trim() || 'Righetto Immobiliare'
           })
         });
         const result = await resp.json();
