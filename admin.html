@@ -4792,8 +4792,8 @@ function renderTable(data) {
       : `<span class="badge badge-grigio">Disattivo</span>`;
 
     const tipo = i.tipo_operazione === 'vendita' ? `<span class="badge badge-blu">Vendita</span>`
-      : (i.tipo_operazione === 'affitto_residenziale' || i.tipo_operazione === 'affitto') ? `<span class="badge badge-oro">Affitto Res.</span>`
-      : i.tipo_operazione === 'affitto_commerciale' ? `<span class="badge badge-oro">Affitto Comm.</span>`
+      : (i.tipo_operazione === 'affitto_residenziale' || i.tipo_operazione === 'affitto') ? `<span class="badge badge-verde">Affitto Res.</span>`
+      : i.tipo_operazione === 'affitto_commerciale' ? `<span class="badge badge-verde">Affitto Comm.</span>`
       : i.tipo_operazione === 'asta_giudiziaria' ? `<span class="badge badge-grigio">Asta</span>`
       : `<span class="badge badge-grigio">${escHtml(i.tipo_operazione || '—')}</span>`;
 
