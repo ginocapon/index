@@ -1456,6 +1456,42 @@ function initChatbotUI() {
     .chat-qbtn { font-size: 0.68rem; padding: 5px 8px; }
     #rig-chat-widget { right: 14px; bottom: 18px; }
   }
+  /* Welcome card dentro la chat */
+  .chat-welcome-card {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 28px 20px 20px; text-align: center;
+  }
+  .chat-welcome-photo {
+    width: 80px; height: 80px; border-radius: 50%;
+    object-fit: cover; object-position: center 45%;
+    border: 3px solid #CEE08F;
+    box-shadow: 0 4px 16px rgba(58,85,120,0.2);
+    margin-bottom: 12px;
+  }
+  .chat-welcome-name {
+    font-size: 1.05rem; font-weight: 700; color: #1E3A5C;
+  }
+  .chat-welcome-role {
+    font-size: 0.68rem; color: #6B7A8D; letter-spacing: 0.5px;
+    margin-bottom: 14px;
+  }
+  .chat-welcome-text {
+    font-size: 0.82rem; color: #3A5578; line-height: 1.65;
+    margin: 0 0 18px;
+  }
+  .chat-welcome-btn {
+    background: linear-gradient(135deg, #3A5578, #5C7A9E);
+    color: white; border: none; border-radius: 24px;
+    padding: 12px 28px; font-family: inherit;
+    font-size: 0.82rem; font-weight: 700;
+    letter-spacing: 0.5px; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(58,85,120,0.3);
+  }
+  .chat-welcome-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(58,85,120,0.4);
+  }
   </style>
 
   <div id="rig-chat-widget">
@@ -1504,6 +1540,8 @@ function initChatbotUI() {
     engine,
     open: false,
 
+    welcomeShown: false,
+
     toggle() {
       this.open = !this.open;
       const box = document.getElementById('rig-chat-box');
@@ -1517,9 +1555,37 @@ function initChatbotUI() {
       if (pulse) pulse.style.display = this.open ? 'none' : 'block';
       if (closeBar) closeBar.classList.toggle('visible', this.open);
       if (this.open && document.getElementById('rig-chat-msgs').children.length === 0) {
-        this.addMsg('bot', '👋 Ciao! Sono **Sara**, l\'assistente di **Righetto Immobiliare**.\n\nPosso aiutarti con:\n• 💰 **Stima valore** del tuo immobile\n• 🔍 **Cerca immobili** in vendita o affitto\n• 📋 Info su servizi, tasse, mutui e procedure\n• 📞 **Contattare** un nostro agente\n\nCome posso aiutarti?');
-        document.getElementById('rig-chat-input').focus();
+        this.showWelcome();
       }
+    },
+
+    showWelcome() {
+      if (this.welcomeShown) return;
+      this.welcomeShown = true;
+      var msgs = document.getElementById('rig-chat-msgs');
+      var welcome = document.createElement('div');
+      welcome.className = 'chat-welcome-card';
+      welcome.innerHTML = '<img src="' + SARA_AVATAR + '" alt="Sara" class="chat-welcome-photo">' +
+        '<div class="chat-welcome-name">Sara</div>' +
+        '<div class="chat-welcome-role">Assistente Righetto Immobiliare</div>' +
+        '<p class="chat-welcome-text">Ciao! Sono qui per aiutarti.<br>Usa la chat per scoprire i nostri servizi, stimare il valore del tuo immobile o cercare casa.</p>' +
+        '<button class="chat-welcome-btn" onclick="rigChat.startChat()">Inizia a chattare</button>';
+      msgs.appendChild(welcome);
+      // Nascondi quick buttons e input fino al click
+      document.getElementById('rig-quick-btns').style.display = 'none';
+      document.querySelector('.chat-input-row').style.display = 'none';
+    },
+
+    startChat() {
+      // Rimuovi la welcome card
+      var card = document.querySelector('.chat-welcome-card');
+      if (card) card.remove();
+      // Mostra input e quick buttons
+      document.querySelector('.chat-input-row').style.display = 'flex';
+      document.getElementById('rig-quick-btns').style.display = 'flex';
+      // Messaggio iniziale
+      this.addMsg('bot', 'Come posso aiutarti? Scegli un\'opzione o scrivi liberamente.');
+      document.getElementById('rig-chat-input').focus();
     },
 
     addMsg(role, text) {
@@ -1671,5 +1737,20 @@ if (document.readyState === 'loading') {
 } else {
   initChatbotUI();
 }
+
+// ── Auto-open chatbot dopo 3s su desktop (solo homepage, una volta per sessione) ──
+function autoOpenChatDesktop() {
+  var path = location.pathname.replace(/\/+$/, '') || '/';
+  var isHome = path === '/' || path === '/index.html' || path === '/index';
+  var isMobile = window.innerWidth <= 768;
+  var alreadyShown = sessionStorage.getItem('chatbot_auto_opened');
+  if (isHome && !isMobile && !alreadyShown && window.rigChat) {
+    sessionStorage.setItem('chatbot_auto_opened', '1');
+    if (!window.rigChat.open) {
+      window.rigChat.toggle();
+    }
+  }
+}
+setTimeout(autoOpenChatDesktop, 3000);
 
 })();
