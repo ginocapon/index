@@ -327,7 +327,7 @@
 <div class="art-hero">
   <picture>
     <source srcset="img/foto-servizi/vendita-immobili-padova.webp" type="image/webp">
-    <img class="art-hero-img" src="img/foto-servizi/vendita-immobili-padova.png" alt="Comprare casa a Padova nel 2026 - guida completa all'acquisto immobiliare" width="1200" height="600" fetchpriority="high">
+    <img class="art-hero-img" src="img/foto-servizi/vendita-immobili-padova.webp" alt="Comprare casa a Padova nel 2026 - guida completa all'acquisto immobiliare" width="1200" height="600" fetchpriority="high">
   </picture>
   <div class="art-hero-overlay">
     <div class="art-hero-inner">
@@ -491,7 +491,7 @@
     <figure>
       <picture>
         <source srcset="img/foto-servizi/gestione-preliminari-padova.webp" type="image/webp">
-        <img src="img/foto-servizi/gestione-preliminari-padova.png" alt="Consulenza per acquisto immobiliare a Padova - gestione preliminari e contrattualistica" loading="lazy" width="1536" height="1024">
+        <img src="img/foto-servizi/gestione-preliminari-padova.webp" alt="Consulenza per acquisto immobiliare a Padova - gestione preliminari e contrattualistica" loading="lazy" width="1536" height="1024">
       </picture>
       <figcaption>La gestione dei preliminari e della contrattualistica: un passaggio critico che richiede competenza e attenzione</figcaption>
     </figure>
@@ -579,11 +579,11 @@
     <div class="gallery">
       <picture>
         <source srcset="img/foto-servizi/valutazioni-e-perizie-padova.webp" type="image/webp">
-        <img src="img/foto-servizi/valutazioni-e-perizie-padova.png" alt="Valutazione e perizia immobiliare a Padova per acquisto casa" loading="lazy" width="1536" height="1024">
+        <img src="img/foto-servizi/valutazioni-e-perizie-padova.webp" alt="Valutazione e perizia immobiliare a Padova per acquisto casa" loading="lazy" width="1536" height="1024">
       </picture>
       <picture>
         <source srcset="img/foto-servizi/gestioni-immobili-padova.webp" type="image/webp">
-        <img src="img/foto-servizi/gestioni-immobili-padova.png" alt="Gestione compravendita immobiliare a Padova - assistenza completa" loading="lazy" width="1536" height="1024">
+        <img src="img/foto-servizi/gestioni-immobili-padova.webp" alt="Gestione compravendita immobiliare a Padova - assistenza completa" loading="lazy" width="1536" height="1024">
       </picture>
     </div>
 
@@ -763,7 +763,10 @@ document.querySelectorAll('.faq-q').forEach(function(q) {
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="js/nav-mobile.js" defer></script>
 <script src="js/config.js"></script>
-<script src="js/chatbot.js" defer></script>
+<script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */
+(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js';document.body.appendChild(s);}
+setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
+})();</script>
 <script src="js/cookie-consent.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
 <script src="js/welcome-popup.js" defer></script>

@@ -217,7 +217,7 @@
     <div class="hero-stats">
       <picture>
         <source srcset="img/foto-servizi/gestioni-immobili-padova.webp" type="image/webp">
-        <img src="img/foto-servizi/gestioni-immobili-padova.png" alt="Gestione immobili Padova — Righetto Immobiliare" class="hero-stats-bg" width="640" height="427" fetchpriority="high">
+        <img src="img/foto-servizi/gestioni-immobili-padova.webp" alt="Gestione immobili Padova — Righetto Immobiliare" class="hero-stats-bg" width="640" height="427" fetchpriority="high">
       </picture>
       <div class="hstat"><div class="hstat-val">200+</div><div class="hstat-lbl">immobili gestiti tra Padova e provincia. Appartamenti, ville, uffici e locali commerciali sotto la nostra cura.</div></div>
       <div class="hstat"><div class="hstat-val">40+</div><div class="hstat-lbl">artigiani partner verificati nella nostra rete. Interventi rapidi con SLA garantiti per ogni tipo di manutenzione.</div></div>
@@ -435,7 +435,10 @@ function sendForm(){
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="js/nav-mobile.js" defer></script>
 <script src="js/config.js" defer></script>
-<script src="js/chatbot.js" defer></script>
+<script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */
+(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js';document.body.appendChild(s);}
+setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
+})();</script>
 <script src="js/cookie-consent.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
 <script type="application/ld+json">
