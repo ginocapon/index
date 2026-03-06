@@ -273,6 +273,8 @@ footer a{color:var(--oro)}
         </div>
         <div class="sr-mq" id="sr-mq-t"></div>
         <div class="sr-note">⚠️ Stima indicativa basata su dati FIAIP 2026. Per una perizia immobiliare accurata, richiedi la valutazione professionale gratuita.</div>
+        <button id="sr-pdf-btn" class="btn-calc" style="margin-top:16px;background:var(--blu);color:white" onclick="scaricaPdfStima()">📄 Scarica Scheda PDF</button>
+        <div id="sr-pdf-notice" style="display:none;margin-top:10px;font-size:0.72rem;color:var(--grigio);text-align:center"></div>
       </div>
     </div>
   </div>
@@ -320,6 +322,9 @@ footer a{color:var(--oro)}
   <div class="f-copy">© 2026 Gruppo Immobiliare Righetto di Capon Gino — P.IVA 05182390285 — Via Roma 96, Limena (PD) — <a href="privacy">Privacy</a> · <a href="cookie-policy">Cookie</a></div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="js/valutazione-pdf.js"></script>
 <script src="js/config.js"></script>
 <script>
 const SB_URL='https://qwkwkemuabfwvwuqrxlu.supabase.co';
@@ -341,9 +346,29 @@ function calcolaStima(){
   document.getElementById('sr-min').textContent=fmt(mn);document.getElementById('sr-med').textContent=fmt(md);document.getElementById('sr-max').textContent=fmt(mx);
   document.getElementById('sr-mq-t').textContent=mq+' mq \u00B7 circa '+fmt(Math.round(ppMq))+'/mq';
   document.getElementById('stima-result').style.display='block';
+  document.getElementById('sr-pdf-btn').style.display='flex';
   document.getElementById('stima-result').scrollIntoView({behavior:'smooth',block:'nearest'});
+  // Salva dati per PDF
+  window._stimaDati={comune:comune,tipo:tipo,mq:mq,stato:stato,stima:{min:mn,med:md,max:mx,euroMq:Math.round(ppMq)}};
+  // Auto-download PDF dopo 3 secondi
+  setTimeout(function(){scaricaPdfStima()},3000);
   setTimeout(showSara,5000);
   if(typeof gtag==='function')gtag('event','stima_calcolata',{event_category:'conversion',event_label:comune+' - '+tipo,value:md});
+}
+function scaricaPdfStima(){
+  var d=window._stimaDati;if(!d)return;
+  var notice=document.getElementById('sr-pdf-notice');
+  var btn=document.getElementById('sr-pdf-btn');
+  if(typeof generaValutazionePDF==='function'&&window.jspdf){
+    notice.style.display='block';notice.textContent='Preparazione PDF in corso...';
+    generaValutazionePDF(d).then(function(){
+      notice.textContent='✅ PDF scaricato!';notice.style.color='var(--verde)';
+    }).catch(function(err){
+      console.error('Errore PDF:',err);notice.textContent='Errore. Clicca il pulsante per riprovare.';
+    });
+  }else{
+    console.error('jsPDF non caricato');notice.style.display='block';notice.textContent='Caricamento in corso, riprova tra qualche secondo.';
+  }
 }
 function showSara(){var p=document.getElementById('saraPopup');if(p.style.display==='flex')return;p.style.display='flex'}
 function closeSara(){document.getElementById('saraPopup').style.display='none'}
