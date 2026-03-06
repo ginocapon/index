@@ -2007,6 +2007,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               <select id="filtroTipo" onchange="loadImmobili()" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.8rem;">
                 <option value="">Tutti i tipi</option>
                 <option value="vendita">🏷️ In Vendita</option>
+                <option value="affitto_residenziale">🏠 Affitto Residenziale</option>
+                <option value="affitto_commerciale">🏢 Affitto Commerciale</option>
                 <option value="asta_giudiziaria">⚖️ Asta Giudiziaria</option>
               </select>
               <select id="filtroStato" onchange="filterTable()" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.8rem;">
@@ -2054,6 +2056,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <select id="f_tipo_operazione" required>
                     <option value="">Seleziona...</option>
                     <option value="vendita">🏷️ In Vendita</option>
+                    <option value="affitto_residenziale">🏠 Affitto Residenziale</option>
+                    <option value="affitto_commerciale">🏢 Affitto Commerciale</option>
                     <option value="asta_giudiziaria">⚖️ Asta Giudiziaria</option>
                   </select>
                 </div>
@@ -3206,6 +3210,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <select id="clienteTipoOp">
                   <option value="">Qualsiasi</option>
                   <option value="vendita">Acquisto</option>
+                  <option value="affitto_residenziale">Affitto Residenziale</option>
+                  <option value="affitto_commerciale">Affitto Commerciale</option>
                 </select>
               </div>
               <div class="form-group">
