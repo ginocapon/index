@@ -420,7 +420,7 @@ img{max-width:100%;height:auto;display:block}
             <div class="val-stima-mq" id="valMq"></div>
           </div>
           <button class="val-pdf-btn" id="valPdfBtn" style="display:none" onclick="scaricaPDF()">📄 Scarica scheda PDF</button>
-          <div class="val-pdf-notice" id="valPdfNotice">
+          <div class="val-pdf-notice" id="valPdfNotice" style="display:none">
             <div class="pdf-spinner"></div>
             <span>Stiamo preparando la tua scheda PDF...</span>
           </div>
@@ -606,8 +606,9 @@ function mostraRisultatoValutazione(dati) {
       qrDiv.innerHTML += '<p>Inquadra per scriverci su WhatsApp</p>';
     }
   } catch(e) {}
-  // Salva dati per il pulsante manuale
+  // Salva dati per il pulsante manuale e mostra subito il pulsante
   window._valDati = dati;
+  document.getElementById('valPdfBtn').style.display = 'inline-block';
   // Auto-PDF dopo 3 secondi
   setTimeout(function() {
     scaricaPDF();
