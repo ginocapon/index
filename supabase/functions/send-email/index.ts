@@ -27,15 +27,8 @@ async function sendViaRelay(options: {
   html_body: string;
   reply_to?: string;
 }) {
-  const RELAY_URL = Deno.env.get("MAIL_RELAY_URL");
-  const RELAY_KEY = Deno.env.get("MAIL_RELAY_KEY");
-
-  if (!RELAY_URL || !RELAY_KEY) {
-    throw new Error(
-      "MAIL_RELAY_URL o MAIL_RELAY_KEY non configurati. " +
-      "Vai su Supabase Dashboard > Edge Functions > send-email > Secrets."
-    );
-  }
+  const RELAY_URL = Deno.env.get("MAIL_RELAY_URL") || "https://righetto-immobiliare.it/api/send-mail.php";
+  const RELAY_KEY = Deno.env.get("MAIL_RELAY_KEY") || "RighettoMail2026!SecretKey";
 
   console.log("Relay:", options.action, "→", options.to_email, "da", options.sender_email);
 
