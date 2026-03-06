@@ -2007,6 +2007,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               <select id="filtroTipo" onchange="loadImmobili()" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.8rem;">
                 <option value="">Tutti i tipi</option>
                 <option value="vendita">🏷️ In Vendita</option>
+                <option value="affitto">🏠 Affitto</option>
                 <option value="affitto_residenziale">🏠 Affitto Residenziale</option>
                 <option value="affitto_commerciale">🏢 Affitto Commerciale</option>
                 <option value="asta_giudiziaria">⚖️ Asta Giudiziaria</option>
@@ -4334,7 +4335,10 @@ function grantAccess() {
   sessionStorage.setItem('rig_admin', 'ok');
   document.getElementById('loginOverlay').style.display = 'none';
   document.getElementById('appWrapper').style.display = 'flex';
-  init();
+  init().catch(err => {
+    console.error('Errore inizializzazione:', err);
+    document.getElementById('immobiliTableWrap').innerHTML = '<div class="empty-state"><h3>Errore di connessione</h3><p style="margin-top:8px;font-size:0.82rem;color:var(--rosso)">Impossibile caricare i dati. Ricarica la pagina.</p></div>';
+  });
   handleHashNavigation();
 }
 
@@ -4587,8 +4591,7 @@ document.querySelectorAll('.sidebar .nav-item').forEach(function(item) {
 // INIT
 // ══════════════════════════════════════
 async function init() {
-  await loadImmobili();
-  await loadRichiesteCount();
+  await Promise.all([loadImmobili(), loadRichiesteCount()]);
 }
 
 // ══════════════════════════════════════
@@ -4744,7 +4747,11 @@ async function loadImmobili() {
 
   const tipo = document.getElementById('filtroTipo').value;
   let query = sb.from('immobili').select('*').order('created_at', { ascending: false });
-  if (tipo) query = query.eq('tipo_operazione', tipo);
+  if (tipo === 'affitto') {
+    query = query.in('tipo_operazione', ['affitto', 'affitto_residenziale', 'affitto_commerciale']);
+  } else if (tipo) {
+    query = query.eq('tipo_operazione', tipo);
+  }
 
   const { data, error } = await query;
   if (error) {
@@ -4754,7 +4761,7 @@ async function loadImmobili() {
 
   allImmobili = data || [];
   updateStats(allImmobili);
-  renderTable(allImmobili);
+  filterTable();
 }
 
 function updateStats(data) {
