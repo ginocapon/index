@@ -4072,9 +4072,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <button class="btn btn-secondary" onclick="emBuildVisualEmail()" style="flex:1">
                     Genera email dall'editor visuale
                   </button>
-                  <button class="btn btn-sm" onclick="emInsertProperty()" style="background:#667eea;color:#fff;border:none;padding:8px 16px">
-                    + Inserisci immobile
-                  </button>
                 </div>
               </div>
             </div>
@@ -4096,9 +4093,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   </div>
                 </div>
                 <div class="form-group" style="margin-bottom:0">
-                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                  <div style="margin-bottom:6px">
                     <label style="margin:0">Corpo HTML</label>
-                    <button class="btn btn-sm" onclick="emInsertProperty()" style="background:#667eea;color:#fff;border:none;font-size:0.75rem;padding:4px 12px">+ Inserisci immobile</button>
                   </div>
                   <textarea id="emCorpo" rows="16" style="font-family:monospace;font-size:0.85rem;background:#1a1a2e;color:#e0e0e0;border:none;border-radius:8px;padding:12px" placeholder="<html>&#10;<body>&#10;  <h1>Titolo</h1>&#10;  <p>Gentile {{nome}}, ...</p>&#10;</body>&#10;</html>"></textarea>
                 </div>
@@ -4604,7 +4600,7 @@ function showSection(name) {
   if (name === 'landing') loadLandingList();
   if (name === 'newsletter') loadNewsletterList();
   if (name === 'agenda') loadAgendaSection();
-  if (name === 'clienti') loadClienti();
+  if (name === 'clienti') { loadClienti(); if (typeof emLoadGruppi === 'function') emLoadGruppi(); }
   if (name === 'nuovo') populateProprietarioDropdown();
   if (name === 'impostazioni') { testConn(); check2FAStatus(); }
 }
@@ -4738,7 +4734,7 @@ function renderTable(data) {
           <button class="btn btn-sm" onclick="printPropertyPdf('${i.id}')" title="Stampa PDF" style="background:#fff3e0;color:#e65100">📄</button>
           <button class="btn btn-sm" onclick="quickPublishSocial('${i.id}')" title="Pubblica sui Social" style="background:#e8f5e9;color:#1877F2">📢</button>
           <button class="btn btn-danger btn-sm" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')">🗑️</button>
-          <button class="btn btn-sm" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="Toggle evidenza" style="background:var(--sfondo)">⭐</button>
+          <button class="btn btn-sm" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="Toggle evidenza" style="background:${i.in_evidenza ? '#fee' : 'var(--sfondo)'}">${i.in_evidenza ? '<span style="color:#e74c3c">⭐</span>' : '⭐'}</button>
           <button class="btn btn-sm" onclick="toggleAttivo('${i.id}',${!i.attivo})" title="Toggle attivo" style="background:var(--sfondo)">${i.attivo ? '👁️' : '🚫'}</button>
           <a href="immobile?s=${encodeURIComponent(generatePropertySlug(i))}" target="_blank" class="btn btn-sm" title="Anteprima scheda" style="background:#e8f5e9;color:#27ae60;text-decoration:none">🔍</a>
         </div>
@@ -10164,7 +10160,7 @@ checkAuth();
   // ── Carica blacklist all'avvio ──
   async function loadBlacklist() {
     try {
-      const {data} = await supabase.from('email_blacklist').select('email');
+      const {data} = await sb.from('email_blacklist').select('email');
       if (data) emBlacklist = new Set(data.map(d => d.email.toLowerCase()));
     } catch(e) { /* tabella potrebbe non esistere ancora */ }
   }
@@ -10204,7 +10200,7 @@ checkAuth();
   async function emPopulateContentPickers() {
     // 1. Articoli Blog
     try {
-      const {data: articles} = await supabase.from('blog').select('id, titolo, slug, categoria, immagine_url').order('created_at', {ascending: false});
+      const {data: articles} = await sb.from('blog').select('id, titolo, slug, categoria, immagine_url').order('created_at', {ascending: false});
       const sel = document.getElementById('emPickBlog');
       if (sel && articles) {
         articles.forEach(a => {
@@ -10221,7 +10217,7 @@ checkAuth();
 
     // 2. Immobili
     try {
-      const {data: immobili} = await supabase.from('immobili').select('id, titolo, codice, comune, prezzo, tipo_operazione, foto').eq('attivo', true).order('created_at', {ascending: false});
+      const {data: immobili} = await sb.from('immobili').select('id, titolo, codice, comune, prezzo, tipo_operazione, foto').order('created_at', {ascending: false});
       const sel = document.getElementById('emPickImmobile');
       if (sel && immobili) {
         immobili.forEach(im => {
@@ -10242,7 +10238,7 @@ checkAuth();
 
     // 3. Landing Pages
     try {
-      const {data: landings} = await supabase.from('landing_pages').select('id, titolo, slug, url, categoria, descrizione').order('created_at', {ascending: false});
+      const {data: landings} = await sb.from('landing_pages').select('id, titolo, slug, url, categoria, descrizione').order('created_at', {ascending: false});
       const sel = document.getElementById('emPickLanding');
       if (sel && landings) {
         landings.forEach(lp => {
@@ -10697,7 +10693,7 @@ checkAuth();
   // Carica gruppi da localStorage (o Supabase se disponibile)
   async function emLoadGruppi() {
     try {
-      const {data} = await supabase.from('gruppi_email').select('*').order('created_at', {ascending: false});
+      const {data} = await sb.from('gruppi_email').select('*').order('created_at', {ascending: false});
       if (data) { emGruppiCustom = data; }
     } catch(e) {
       try { emGruppiCustom = JSON.parse(localStorage.getItem('rig_gruppi_email') || '[]'); } catch(ex) { emGruppiCustom = []; }
@@ -10727,7 +10723,7 @@ checkAuth();
     emSaveGruppiLocal();
 
     // Salva in Supabase se possibile
-    try { supabase.from('gruppi_email').insert({ nome, colore }).then(() => {}); } catch(e) {}
+    try { sb.from('gruppi_email').insert({ nome, colore }).then(() => {}); } catch(e) {}
 
     document.getElementById('emNuovoGruppo').value = '';
     emRenderGruppi();
@@ -10739,7 +10735,7 @@ checkAuth();
     if (!confirm('Eliminare questo gruppo?')) return;
     emGruppiCustom = emGruppiCustom.filter(g => g.id !== id);
     emSaveGruppiLocal();
-    try { supabase.from('gruppi_email').delete().eq('id', id).then(() => {}); } catch(e) {}
+    try { sb.from('gruppi_email').delete().eq('id', id).then(() => {}); } catch(e) {}
     emRenderGruppi();
     emRenderGruppiChips();
   };
@@ -10800,7 +10796,7 @@ checkAuth();
 
     box.innerHTML = '<em>Caricamento...</em>';
     try {
-      const {data} = await supabase.from('campagne_email').select('*').order('created_at', {ascending: false}).limit(20);
+      const {data} = await sb.from('campagne_email').select('*').order('created_at', {ascending: false}).limit(20);
       if (!data || !data.length) {
         box.innerHTML = '<em>Nessun invio registrato.</em>';
         return;
@@ -10900,7 +10896,7 @@ checkAuth();
       }
 
       try {
-        await supabase.from('campagne_email').insert({
+        await sb.from('campagne_email').insert({
           nome: 'Programmata: ' + gruppoNome + ' — ' + s.data + ' ' + s.ora,
           oggetto: oggetto,
           preheader: document.getElementById('emPreheader')?.value || '',
@@ -10929,7 +10925,7 @@ checkAuth();
   window.emLoadClienti = async function() {
     try {
       await loadBlacklist();
-      const {data, error} = await supabase.from('clienti').select('nome, email, tipo_cliente').not('email','is',null).neq('email','');
+      const {data, error} = await sb.from('clienti').select('nome, email, tipo_cliente').not('email','is',null).neq('email','');
       if (error) throw error;
       if (!data.length) return toast('Nessun cliente con email trovato','error');
       emContatti = data
@@ -11099,7 +11095,7 @@ checkAuth();
       // ═══ DEDUPLICA: controlla email e telefoni già in DB ═══
       let dedupMsg = '';
       try {
-        const {data: existingClients} = await supabase.from('clienti').select('email, telefono');
+        const {data: existingClients} = await sb.from('clienti').select('email, telefono');
         if (existingClients && existingClients.length) {
           const dbEmails = new Set(existingClients.map(c => (c.email || '').toLowerCase()));
           const dbPhones = new Set(existingClients.filter(c => c.telefono).map(c => c.telefono.replace(/\D/g,'')));
@@ -11521,7 +11517,7 @@ checkAuth();
     // Registra campagna in Supabase (se tabella esiste)
     let campagnaId = null;
     try {
-      const {data: camp} = await supabase.from('campagne_email').insert({
+      const {data: camp} = await sb.from('campagne_email').insert({
         nome: 'Campagna ' + new Date().toLocaleDateString('it-IT'),
         oggetto: oggetto,
         preheader: document.getElementById('emPreheader')?.value || '',
@@ -11614,7 +11610,7 @@ checkAuth();
 
         // Registra in coda_email
         if (campagnaId) {
-          supabase.from('coda_email').insert({
+          sb.from('coda_email').insert({
             campagna_id: campagnaId,
             destinatario_email: c.email,
             destinatario_nome: nome,
@@ -11634,7 +11630,7 @@ checkAuth();
           emBlacklist.add(c.email.toLowerCase());
           emLogMsg('  → Aggiunto a blacklist (bounce permanente)', 'warn');
           try {
-            await supabase.from('email_blacklist').upsert({email: c.email.toLowerCase(), motivo: 'bounce'});
+            await sb.from('email_blacklist').upsert({email: c.email.toLowerCase(), motivo: 'bounce'});
           } catch(e) {}
         }
       }
@@ -11655,7 +11651,7 @@ checkAuth();
 
     // Aggiorna campagna
     if (campagnaId) {
-      supabase.from('campagne_email').update({
+      sb.from('campagne_email').update({
         stato: emStopped ? 'annullata' : 'completata',
         inviati: sent,
         errori: errors,
@@ -11688,7 +11684,7 @@ checkAuth();
   window.emLoadStats = async function() {
     try {
       // Conta campagne totali
-      const {data: campagne} = await supabase.from('campagne_email').select('inviati,aperti,click,bounce,disiscritti,errori');
+      const {data: campagne} = await sb.from('campagne_email').select('inviati,aperti,click,bounce,disiscritti,errori');
       if (!campagne || !campagne.length) return toast('Nessuna campagna trovata','info');
 
       let totInviati = 0, totAperti = 0, totClick = 0, totBounce = 0;
@@ -11712,7 +11708,7 @@ checkAuth();
   // ═══ STORICO CAMPAGNE ═══
   window.emLoadCampaignHistory = async function() {
     try {
-      const {data} = await supabase.from('campagne_email')
+      const {data} = await sb.from('campagne_email')
         .select('*')
         .order('created_at', {ascending: false})
         .limit(20);
@@ -11749,7 +11745,7 @@ checkAuth();
   // ═══ GESTIONE DISISCRITTI/BOUNCE ═══
   window.emLoadUnsubscribed = async function() {
     try {
-      const {data} = await supabase.from('email_blacklist').select('*').eq('motivo', 'disiscrizione').order('created_at', {ascending: false});
+      const {data} = await sb.from('email_blacklist').select('*').eq('motivo', 'disiscrizione').order('created_at', {ascending: false});
       const box = document.getElementById('emBlacklist');
       if (!data || !data.length) { box.innerHTML = '<em>Nessun disiscritto</em>'; return; }
       box.innerHTML = '<strong>Disiscritti (' + data.length + '):</strong><br>' +
@@ -11759,7 +11755,7 @@ checkAuth();
 
   window.emLoadBounces = async function() {
     try {
-      const {data} = await supabase.from('email_blacklist').select('*').eq('motivo', 'bounce').order('created_at', {ascending: false});
+      const {data} = await sb.from('email_blacklist').select('*').eq('motivo', 'bounce').order('created_at', {ascending: false});
       const box = document.getElementById('emBlacklist');
       if (!data || !data.length) { box.innerHTML = '<em>Nessun bounce</em>'; return; }
       box.innerHTML = '<strong>Bounce (' + data.length + '):</strong><br>' +
@@ -11785,7 +11781,7 @@ checkAuth();
         const blocked = await resp2.json();
         if (blocked.contacts) {
           for (const c of blocked.contacts) {
-            await supabase.from('email_blacklist').upsert({email: c.email.toLowerCase(), motivo: 'bounce'}).catch(() => {});
+            await sb.from('email_blacklist').upsert({email: c.email.toLowerCase(), motivo: 'bounce'}).catch(() => {});
             emBlacklist.add(c.email.toLowerCase());
           }
           toast('Sincronizzati ' + (blocked.contacts?.length || 0) + ' contatti bloccati da Brevo', 'success');
