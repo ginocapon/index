@@ -3168,6 +3168,36 @@ tr:hover td { background: rgba(206,224,143,0.06); }
       </div>
 
       <!-- MODAL CLIENTE -->
+      <!-- ═══ MODAL ANTEPRIMA BLOG ═══ -->
+      <div class="modal-overlay" id="blogPreviewModal">
+        <div class="modal" style="max-width:680px">
+          <div class="modal-header">
+            <h2 style="font-size:1rem">🔍 Anteprima Articolo</h2>
+            <button class="modal-close" onclick="closeBlogPreviewModal()">&times;</button>
+          </div>
+          <div class="modal-body" style="padding:0">
+            <div id="blogPreviewImg" style="width:100%;height:200px;background:var(--sfondo);display:flex;align-items:center;justify-content:center;font-size:4rem;overflow:hidden"></div>
+            <div style="padding:24px 28px">
+              <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+                <span class="badge badge-blu" id="blogPreviewCat"></span>
+                <span style="font-size:0.75rem;color:var(--caffe2)" id="blogPreviewDate"></span>
+                <span style="font-size:0.75rem;color:var(--caffe2)" id="blogPreviewTempo"></span>
+              </div>
+              <h3 style="font-size:1.15rem;margin-bottom:12px;color:var(--nero)" id="blogPreviewTitle"></h3>
+              <p style="font-size:0.85rem;line-height:1.8;color:var(--caffe);max-height:180px;overflow-y:auto" id="blogPreviewExcerpt"></p>
+              <div style="display:flex;gap:8px;align-items:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--gc)">
+                <span style="font-size:0.75rem;color:var(--caffe2)">Autore:</span>
+                <strong style="font-size:0.8rem" id="blogPreviewAuthor"></strong>
+                <span id="blogPreviewStato" style="margin-left:auto"></span>
+              </div>
+              <div style="text-align:center;margin-top:20px">
+                <button class="btn btn-primary" onclick="closeBlogPreviewModal()">OK</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="modal-overlay" id="clienteModal">
         <div class="modal" style="max-width:750px">
           <div class="modal-header">
@@ -6075,6 +6105,7 @@ async function loadBlogList() {
         <td style="font-size:0.8rem">${formatDate(a.data)}</td>
         <td>${a.stato === 'pubblicato' ? '<span class="badge badge-verde">Pubblicato</span>' : '<span class="badge badge-oro">Bozza</span>'}${a.evidenza ? ' <span class="badge badge-blu">★</span>' : ''}</td>
         <td style="white-space:nowrap">
+          <button class="btn btn-sm" style="background:var(--sfondo);border:1px solid var(--gc);padding:6px 8px" onclick="previewBlogArticle('${a.id}')" title="Anteprima">🔍</button>
           <button class="btn btn-sm btn-secondary" onclick="editBlogArticle('${a.id}')">✏️ Modifica</button>
           <button class="btn btn-sm btn-danger" onclick="deleteBlogById('${a.id}')">🗑️</button>
         </td>
@@ -6253,6 +6284,32 @@ function updateBlogPreview() {
 
 // Live preview
 document.getElementById('b_contenuto').addEventListener('input', updateBlogPreview);
+
+// Anteprima rapida articolo blog (popup)
+function previewBlogArticle(id) {
+  const a = blogArticles.find(x => x.id === id);
+  if (!a) return;
+  // Immagine o emoji
+  const imgEl = document.getElementById('blogPreviewImg');
+  if (a.immagine_copertina) {
+    imgEl.innerHTML = '<img src="' + a.immagine_copertina + '" style="width:100%;height:200px;object-fit:cover" alt="">';
+  } else {
+    imgEl.innerHTML = '<span style="font-size:4rem">' + (a.emoji || '📝') + '</span>';
+  }
+  document.getElementById('blogPreviewCat').textContent = a.categoria || '';
+  document.getElementById('blogPreviewDate').textContent = '📅 ' + formatDate(a.data);
+  document.getElementById('blogPreviewTempo').textContent = '⏱️ ' + (a.tempo || 5) + ' min di lettura';
+  document.getElementById('blogPreviewTitle').textContent = a.titolo || '';
+  document.getElementById('blogPreviewExcerpt').textContent = getExcerpt(a.contenuto, 120);
+  document.getElementById('blogPreviewAuthor').textContent = a.autore || 'Capon Gino';
+  document.getElementById('blogPreviewStato').innerHTML = a.stato === 'pubblicato'
+    ? '<span class="badge badge-verde">Pubblicato</span>'
+    : '<span class="badge badge-oro">Bozza</span>';
+  document.getElementById('blogPreviewModal').classList.add('open');
+}
+function closeBlogPreviewModal() {
+  document.getElementById('blogPreviewModal').classList.remove('open');
+}
 
 function insertTag(tag) {
   const ta = document.getElementById('b_contenuto');
