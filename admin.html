@@ -3198,6 +3198,43 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         </div>
       </div>
 
+      <!-- ═══ MODAL ANTEPRIMA IMMOBILE ═══ -->
+      <div class="modal-overlay" id="immPreviewModal">
+        <div class="modal" style="max-width:700px">
+          <div class="modal-header">
+            <h2 style="font-size:1rem">🔍 Anteprima Immobile</h2>
+            <button class="modal-close" onclick="closeImmPreviewModal()">&times;</button>
+          </div>
+          <div class="modal-body" style="padding:0">
+            <div id="immPreviewImg" style="width:100%;height:220px;background:var(--sfondo);display:flex;align-items:center;justify-content:center;font-size:4rem;overflow:hidden"></div>
+            <div style="padding:24px 28px">
+              <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+                <span id="immPreviewTipo" class="badge badge-blu"></span>
+                <span id="immPreviewStato"></span>
+                <span id="immPreviewEvidenza" style="font-size:1.1rem"></span>
+              </div>
+              <h3 style="font-size:1.2rem;margin-bottom:8px;color:var(--nero)" id="immPreviewTitle"></h3>
+              <div style="font-size:0.82rem;color:var(--caffe2);margin-bottom:16px" id="immPreviewLocation"></div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px">
+                <div style="text-align:center;padding:12px;background:var(--sfondo);border-radius:8px"><div style="font-size:1.2rem;font-weight:700;color:var(--nero)" id="immPreviewPrezzo"></div><div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--caffe2);margin-top:2px">Prezzo</div></div>
+                <div style="text-align:center;padding:12px;background:var(--sfondo);border-radius:8px"><div style="font-size:1.2rem;font-weight:700;color:var(--nero)" id="immPreviewMq"></div><div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--caffe2);margin-top:2px">Superficie</div></div>
+                <div style="text-align:center;padding:12px;background:var(--sfondo);border-radius:8px"><div style="font-size:1.2rem;font-weight:700;color:var(--nero)" id="immPreviewLocali"></div><div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--caffe2);margin-top:2px">Locali</div></div>
+                <div style="text-align:center;padding:12px;background:var(--sfondo);border-radius:8px"><div style="font-size:1.2rem;font-weight:700;color:var(--nero)" id="immPreviewBagni"></div><div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--caffe2);margin-top:2px">Bagni</div></div>
+              </div>
+              <div style="font-size:0.82rem;color:var(--caffe);line-height:1.7;max-height:100px;overflow-y:auto;margin-bottom:16px" id="immPreviewDesc"></div>
+              <div style="display:flex;gap:10px;align-items:center;padding-top:16px;border-top:1px solid var(--gc)">
+                <span style="font-size:0.72rem;color:var(--caffe2)">Proprietario:</span>
+                <strong style="font-size:0.8rem" id="immPreviewProp"></strong>
+              </div>
+              <div style="display:flex;gap:10px;justify-content:center;margin-top:20px">
+                <a id="immPreviewLink" href="#" target="_blank" class="btn btn-primary" style="text-decoration:none">🔗 Vedi Scheda Completa</a>
+                <button class="btn btn-secondary" onclick="closeImmPreviewModal()">OK</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="modal-overlay" id="clienteModal">
         <div class="modal" style="max-width:750px">
           <div class="modal-header">
@@ -4848,7 +4885,7 @@ function renderTable(data) {
           <button class="btn btn-danger btn-sm" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')">🗑️</button>
           <button class="btn btn-sm" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="${i.in_evidenza ? 'Rimuovi da evidenza' : 'Metti in evidenza'}" style="background:${i.in_evidenza ? '#e74c3c' : 'var(--sfondo)'};border:${i.in_evidenza ? '2px solid #c0392b' : '1px solid #ddd'};font-size:1.1rem;${i.in_evidenza ? 'color:#fff;border-radius:8px' : ''}">${i.in_evidenza ? '⭐' : '☆'}</button>
           <button class="btn btn-sm" onclick="toggleAttivo('${i.id}',${!i.attivo})" title="Toggle attivo" style="background:var(--sfondo)">${i.attivo ? '👁️' : '🚫'}</button>
-          <a href="immobile?s=${encodeURIComponent(generatePropertySlug(i))}" target="_blank" class="btn btn-sm" title="Anteprima scheda" style="background:#e8f5e9;color:#27ae60;text-decoration:none">🔍</a>
+          <button class="btn btn-sm" onclick="previewImmobile('${i.id}')" title="Anteprima rapida" style="background:#e8f5e9;color:#27ae60">🔍</button>
         </div>
       </td>
     </tr>`;
@@ -6309,6 +6346,36 @@ function previewBlogArticle(id) {
 }
 function closeBlogPreviewModal() {
   document.getElementById('blogPreviewModal').classList.remove('open');
+}
+
+// Anteprima rapida immobile (popup)
+function previewImmobile(id) {
+  var i = allImmobili.find(function(x) { return x.id === id; });
+  if (!i) return;
+  var imgEl = document.getElementById('immPreviewImg');
+  var foto = Array.isArray(i.foto) && i.foto.length > 0 ? i.foto[0] : (i.foto_principale || '');
+  if (foto) {
+    imgEl.innerHTML = '<img src="' + foto + '" style="width:100%;height:220px;object-fit:cover" alt="" onerror="this.parentElement.innerHTML=\'📷\'">';
+  } else {
+    imgEl.innerHTML = '<span style="font-size:4rem">📷</span>';
+  }
+  var tipoLabel = i.tipo_operazione === 'vendita' ? 'Vendita' : (i.tipo_operazione || '').startsWith('affitto') ? 'Affitto' : (i.tipo_operazione || '—');
+  document.getElementById('immPreviewTipo').textContent = tipoLabel;
+  document.getElementById('immPreviewStato').innerHTML = i.venduto ? '<span class="badge badge-rosso">Venduto</span>' : i.affittato ? '<span class="badge badge-rosso">Affittato</span>' : i.attivo ? '<span class="badge badge-verde">Attivo</span>' : '<span class="badge badge-grigio">Disattivo</span>';
+  document.getElementById('immPreviewEvidenza').textContent = i.in_evidenza ? '⭐' : '';
+  document.getElementById('immPreviewTitle').textContent = i.titolo || '—';
+  document.getElementById('immPreviewLocation').textContent = (i.indirizzo ? i.indirizzo + ' · ' : '') + (i.comune || 'Padova') + (i.codice ? ' · Cod. ' + i.codice : '');
+  document.getElementById('immPreviewPrezzo').textContent = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : '—';
+  document.getElementById('immPreviewMq').textContent = i.superficie ? i.superficie + ' mq' : '—';
+  document.getElementById('immPreviewLocali').textContent = i.locali || '—';
+  document.getElementById('immPreviewBagni').textContent = i.bagni || '—';
+  document.getElementById('immPreviewDesc').textContent = i.descrizione ? i.descrizione.substring(0, 300) + (i.descrizione.length > 300 ? '...' : '') : 'Nessuna descrizione';
+  document.getElementById('immPreviewProp').textContent = i.proprietario_nome || '—';
+  document.getElementById('immPreviewLink').href = 'immobile?s=' + encodeURIComponent(generatePropertySlug(i));
+  document.getElementById('immPreviewModal').classList.add('open');
+}
+function closeImmPreviewModal() {
+  document.getElementById('immPreviewModal').classList.remove('open');
 }
 
 function insertTag(tag) {
