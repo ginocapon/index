@@ -6101,6 +6101,14 @@ renderFotos();
 // ══════════════════════════════════════
 let blogArticles = [];
 
+// Articoli con pagina HTML dedicata — seed automatico
+const _blogSeedArticles = [
+  { titolo: 'Home Staging Padova: Come Vendere Casa Prima e Meglio', categoria: 'Guida alla vendita', data: '2026-03-06', tempo: 9, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🏠', immagine_copertina: 'img/blog/home-staging.webp', url_statico: 'blog-home-staging-padova', contenuto: '<p>La tua casa non si vende? Un immobile preparato con Home Staging professionale si vende dal 20% al 50% piu\' velocemente.</p>', evidenza: true },
+  { titolo: 'Vendere Casa a Padova: 7 Errori Costosi da Evitare', categoria: 'Guida alla vendita', data: '2026-03-06', tempo: 10, stato: 'pubblicato', autore: 'Gino Capon', emoji: '⚠️', immagine_copertina: 'img/team/titolari.webp', url_statico: 'vendere-casa-padova-errori', contenuto: '<p>Stai pensando di vendere casa a Padova? Scopri i 7 errori che costano fino al 15% del valore.</p>', evidenza: true },
+  { titolo: 'Comprare Casa a Padova nel 2026: Guida Definitiva Passo dopo Passo', categoria: 'Consigli acquisto', data: '2026-03-04', tempo: 12, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🏡', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-comprare-casa-padova-guida-2026', contenuto: '<p>La guida piu\' completa per comprare casa a Padova nel 2026.</p>', evidenza: true },
+  { titolo: 'Quanto Costa Vendere Casa a Padova nel 2026? Costi, Tasse e Tempi Reali', categoria: 'Guida alla vendita', data: '2026-03-04', tempo: 10, stato: 'pubblicato', autore: 'Gino Capon', emoji: '💰', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-costi-vendere-casa-padova-2026', contenuto: '<p>Tutti i costi reali per vendere casa a Padova nel 2026.</p>', evidenza: true }
+];
+
 async function getBlogArticles() {
   try {
     const { data, error } = await sb.from('blog').select('*').order('data', { ascending: false });
@@ -6110,6 +6118,13 @@ async function getBlogArticles() {
     console.warn('Supabase blog non disponibile, uso localStorage:', e.message);
     try { blogArticles = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]'); } catch(ex) { blogArticles = []; }
   }
+  // Seed: aggiungi articoli statici mancanti
+  const titoliEsistenti = new Set(blogArticles.map(a => (a.titolo || '').toLowerCase()));
+  _blogSeedArticles.forEach(s => {
+    if (!titoliEsistenti.has(s.titolo.toLowerCase())) {
+      blogArticles.push({ ...s, id: 'seed_' + s.url_statico });
+    }
+  });
   // Backup su localStorage
   try { localStorage.setItem('rig_blog_articles', JSON.stringify(blogArticles)); } catch(e) {}
   return blogArticles;
