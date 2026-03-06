@@ -14,13 +14,14 @@
 <title>Vendere e Comprare Casa a Padova | Righetto Immobiliare</title>
 <meta name="description" content="Assistenza completa per vendere e comprare casa a Padova e provincia. Dalla valutazione al rogito in tutti i 101 comuni. Dal 2000.">
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://qwkwkemuabfwvwuqrxlu.supabase.co" crossorigin>
 <link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co">
 <link rel="dns-prefetch" href="https://www.youtube.com">
 <link rel="dns-prefetch" href="https://img.youtube.com">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/cormorant-garamond-600.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="img/team/titolari.webp" as="image" type="image/webp">
+<link rel="preload" href="img/team/titolari.webp" as="image" type="image/webp" fetchpriority="high">
 <meta name="google-site-verification" content="AbK7L5qoV9UFcfjQmtpC5OmD1ZsHx_55NNGYjxlOSxw">
 <meta name="theme-color" content="#2C4A6E">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -40,9 +41,9 @@
 <link rel="canonical" href="https://righettoimmobiliare.it/">
 <link rel="stylesheet" href="css/fonts.css">
 <link rel="stylesheet" href="css/nav-mobile.css">
-<link rel="stylesheet" href="css/scroll-reveal.css">
-<link rel="stylesheet" href="css/welcome-popup.css">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="stylesheet" href="css/scroll-reveal.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/welcome-popup.css" media="print" onload="this.media='all'">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <style>
 :root {
   --blu:      #2C4A6E;
@@ -258,7 +259,7 @@ button{font-family:inherit;cursor:pointer}
 }
 #hero-bg {
   position: absolute; inset: 0; z-index: 0;
-  background-image: url('img/hero-bg.webp');
+  background-image: url('img/team/titolari.webp');
   background-size: cover;
   background-position: center 20%;
   background-repeat: no-repeat;
@@ -266,7 +267,7 @@ button{font-family:inherit;cursor:pointer}
   filter: brightness(0.92);
   animation: slowZoom 18s ease-in-out infinite alternate;
   animation-play-state: paused;
-  background-image: url('img/team/titolari.webp');}
+}
 #hero-bg.loaded{animation-play-state:running;}
 @keyframes slowZoom {
   from { transform: scale(1.05); }
@@ -789,13 +790,13 @@ footer{background:var(--testo);color:rgba(255,255,255,0.6);padding:64px 44px 28p
 }
 #territorio-bg {
   position: absolute; inset: 0; z-index: 0;
-  background-image: url('img/territorio-bg.webp');
   background-size: cover;
   background-position: center 40%;
   filter: grayscale(100%) contrast(0.88) brightness(0.72);
   transform: scale(1.03);
   animation: slowZoom 22s ease-in-out infinite alternate;
 }
+#territorio-bg.loaded { background-image: url('img/territorio-bg.webp'); }
 .territorio-veil {
   position: absolute; inset: 0; z-index: 1;
   background:
@@ -2176,16 +2177,31 @@ button svg, a.btn-p svg, a.btn-g svg {
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/config.js"></script>
-<script src="js/chatbot.js" defer></script>
+<script src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js" defer></script>
+<script src="js/config.js"></script>
+<script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */
+(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js';document.body.appendChild(s);}
+setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
+})();</script>
 <script>
 /* ══ SUPABASE ══ */
 const SB_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
 let sb;
-try { if(window.supabase) sb = window.supabase.createClient(SB_URL, SB_KEY); } catch(e){}
+function initSB(){try{if(window.supabase&&!sb)sb=window.supabase.createClient(SB_URL,SB_KEY);}catch(e){}}
+initSB();
 
 
+
+/* ══ LAZY-LOAD TERRITORIO BG ══ */
+(function(){
+  const tb=document.getElementById('territorio-bg');
+  if(!tb) return;
+  const io=new IntersectionObserver(function(e){
+    if(e[0].isIntersecting){tb.classList.add('loaded');io.disconnect();}
+  },{rootMargin:'200px'});
+  io.observe(tb);
+})();
 
 /* ══ NAVBAR SCROLL ══ */
 const nav = document.getElementById('navbar');
@@ -2476,7 +2492,13 @@ function doRicerca() {
   window.location.href = 'immobili?' + p.toString();
 }
 
-loadImmobili();
+/* Attendi Supabase se defer non è ancora pronto */
+function waitSBThen(fn,tries){
+  initSB();
+  if(sb||tries>8) return fn();
+  setTimeout(function(){waitSBThen(fn,tries+1);},150);
+}
+waitSBThen(loadImmobili,0);
 
 // ══ BLOG DINAMICO HOMEPAGE ══
 function generateSlug(titolo) {
