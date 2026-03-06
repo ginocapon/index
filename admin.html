@@ -4738,9 +4738,7 @@ async function loadImmobili() {
 
   const tipo = document.getElementById('filtroTipo').value;
   let query = sb.from('immobili').select('*').order('created_at', { ascending: false });
-  if (tipo === 'affitto') {
-    query = query.in('tipo_operazione', ['affitto', 'affitto_residenziale', 'affitto_commerciale']);
-  } else if (tipo) {
+  if (tipo) {
     query = query.eq('tipo_operazione', tipo);
   }
 
@@ -4758,7 +4756,7 @@ async function loadImmobili() {
 function updateStats(data) {
   document.getElementById('statTot').textContent = data.length;
   document.getElementById('statVendita').textContent = data.filter(i => i.tipo_operazione === 'vendita' && !i.venduto).length;
-  document.getElementById('statAffitto').textContent = data.filter(i => (i.tipo_operazione === 'affitto' || i.tipo_operazione === 'affitto_residenziale' || i.tipo_operazione === 'affitto_commerciale') && !i.affittato).length;
+  document.getElementById('statAffitto').textContent = data.filter(i => (i.tipo_operazione || '').startsWith('affitto') && !i.affittato).length;
   document.getElementById('statVenduti').textContent = data.filter(i => i.venduto || i.affittato).length;
 }
 
@@ -4787,8 +4785,8 @@ function renderTable(data) {
     const tipo = i.tipo_operazione === 'vendita' ? `<span class="badge badge-blu">Vendita</span>`
       : i.tipo_operazione === 'affitto_residenziale' ? `<span class="badge badge-oro">Affitto Res.</span>`
       : i.tipo_operazione === 'affitto_commerciale' ? `<span class="badge badge-oro">Affitto Comm.</span>`
-      : i.tipo_operazione === 'affitto' ? `<span class="badge badge-oro">Affitto</span>`
-      : `<span class="badge badge-grigio">Asta</span>`;
+      : i.tipo_operazione === 'asta_giudiziaria' ? `<span class="badge badge-grigio">Asta</span>`
+      : `<span class="badge badge-grigio">${escHtml(i.tipo_operazione || '—')}</span>`;
 
     const evidenza = i.in_evidenza ? '⭐' : '';
     const prezzo = i.prezzo ? '€ ' + Number(i.prezzo).toLocaleString('it-IT') : '—';
