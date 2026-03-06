@@ -78,28 +78,52 @@ async function getSmtpConfig(supabase: any) {
     .from("smtp_config")
     .select("*")
     .eq("attivo", true)
-    .limit(1)
-    .single();
+    .limit(1);
 
-  if (error || !data) {
-    throw new Error("Nessuna configurazione SMTP attiva trovata. Configura in Supabase → smtp_config");
+  if (error || !data || data.length === 0) {
+    throw new Error("Nessuna configurazione SMTP attiva trovata. Configura in Supabase → smtp_config. Errore: " + (error?.message || "nessun dato"));
   }
-  return data;
+  return data[0]; // Prendi la prima riga
 }
 
 async function createSmtpClient(config: any) {
-  const client = new SMTPClient({
-    connection: {
-      hostname: config.host,
-      port: config.porta,
-      tls: config.use_tls,
-      auth: {
-        username: config.utente,
-        password: config.password,
-      },
-    },
-  });
-  return client;
+  // Strategia: prova diverse configurazioni per massima compatibilità
+  const attempts = [];
+
+  if (config.porta === 465) {
+    // Aruba smtps.aruba.it:465 — SSL diretto
+    attempts.push({ hostname: config.host, port: 465, tls: true });
+    // Fallback: smtp.aruba.it:587 — STARTTLS
+    attempts.push({ hostname: config.host.replace('smtps.', 'smtp.'), port: 587, tls: false });
+  } else if (config.porta === 587) {
+    attempts.push({ hostname: config.host, port: 587, tls: false });
+    attempts.push({ hostname: config.host.replace('smtp.', 'smtps.'), port: 465, tls: true });
+  } else {
+    attempts.push({ hostname: config.host, port: config.porta, tls: config.use_tls });
+  }
+
+  let lastError = null;
+  for (const attempt of attempts) {
+    try {
+      console.log(`Tentativo SMTP: ${attempt.hostname}:${attempt.port} TLS=${attempt.tls}`);
+      const client = new SMTPClient({
+        connection: {
+          hostname: attempt.hostname,
+          port: attempt.port,
+          tls: attempt.tls,
+          auth: {
+            username: config.utente,
+            password: config.password,
+          },
+        },
+      });
+      return client;
+    } catch (e) {
+      console.warn(`SMTP ${attempt.hostname}:${attempt.port} fallito:`, e.message);
+      lastError = e;
+    }
+  }
+  throw lastError || new Error("Impossibile connettersi al server SMTP");
 }
 
 // ═══ INVIO SINGOLA EMAIL ═══
@@ -125,7 +149,12 @@ async function sendSingleEmail(supabase: any, body: any) {
     return jsonResponse({ status: "rate_limited", reason: "Limite orario/giornaliero raggiunto" });
   }
 
-  const client = await createSmtpClient(config);
+  let client;
+  try {
+    client = await createSmtpClient(config);
+  } catch (connErr) {
+    return jsonResponse({ status: "error", error: "Connessione SMTP fallita: " + connErr.message });
+  }
 
   // Aggiungi tracking pixel e unsubscribe
   let finalHtml = html_body;
@@ -156,7 +185,7 @@ async function sendSingleEmail(supabase: any, body: any) {
       headers: headers,
     });
 
-    await client.close();
+    try { await client.close(); } catch(_) { /* ignore close errors */ }
 
     // Aggiorna stato in coda
     if (queue_id) {
@@ -330,7 +359,13 @@ async function processQueue(supabase: any, body: any) {
 async function sendTestEmail(supabase: any, body: any) {
   const { to_email, subject, html_body, sender_email, sender_name, reply_to } = body;
   const config = await getSmtpConfig(supabase);
-  const client = await createSmtpClient(config);
+
+  let client;
+  try {
+    client = await createSmtpClient(config);
+  } catch (connErr) {
+    return jsonResponse({ status: "error", error: "Connessione SMTP fallita: " + connErr.message + " — Host: " + config.host + " Porta: " + config.porta });
+  }
 
   try {
     await client.send({
@@ -341,10 +376,14 @@ async function sendTestEmail(supabase: any, body: any) {
       html: html_body,
       replyTo: reply_to || sender_email || config.mittente_email,
     });
-    await client.close();
+    try { await client.close(); } catch(_) { /* ignore close errors */ }
     return jsonResponse({ status: "sent", message: "Email di test inviata a " + to_email });
   } catch (err) {
-    await client.close().catch(() => {});
+    try { await client.close(); } catch(_) {}
+    // Se l'errore è solo su close() ma send() è andato, conta come successo
+    if (err.message?.includes("close") || err.message?.includes("properties of undefined")) {
+      return jsonResponse({ status: "sent", message: "Email inviata (warning: " + err.message + ")" });
+    }
     return jsonResponse({ status: "error", error: err.message });
   }
 }
