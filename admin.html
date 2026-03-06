@@ -3868,8 +3868,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <div style="margin-bottom:12px;padding:14px;background:#fff;border:1px solid #e0d6c8;border-radius:8px">
               <label style="font-size:0.85rem;font-weight:600;display:block;margin-bottom:10px;color:var(--caffe)">Seleziona destinatari:</label>
               <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
-                <button class="btn btn-secondary btn-sm" onclick="emLoadClienti()">Carica tutti i clienti</button>
-                <button class="btn btn-secondary btn-sm" onclick="emAddManual()">+ Aggiungi contatto</button>
+                <button class="btn btn-secondary btn-sm" onclick="emApriSelezionaClienti()">Seleziona clienti</button>
                 <button class="btn btn-sm" style="background:#e74c3c;color:#fff;border:none" onclick="emPulisciLista()">Pulisci lista</button>
               </div>
 
@@ -3902,7 +3901,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <!-- Gruppi personalizzati (creati nella sezione Contatti) -->
                 <div id="emGruppiPersonalizzati" style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"></div>
               </div>
-              <p style="font-size:0.72rem;color:var(--caffe2);margin:0">Per creare nuovi gruppi, vai alla sezione <a href="#" onclick="showSection('sec-clienti');return false" style="color:#667eea;font-weight:600">Clienti</a>.</p>
+              <p style="font-size:0.72rem;color:var(--caffe2);margin:0">Per creare nuovi gruppi, vai alla sezione <a href="#" onclick="showSection('clienti');return false" style="color:#667eea;font-weight:600">Clienti</a>.</p>
             </div>
 
             <!-- Storico invii per gruppo -->
@@ -3911,12 +3910,38 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               <div id="emStoricoGruppi" style="display:none;margin-top:8px;max-height:200px;overflow-y:auto;font-size:0.8rem;background:#fff;border:1px solid #e0d6c8;border-radius:8px;padding:10px"></div>
             </div>
 
+            <div style="margin-bottom:6px">
+              <input type="text" id="emCercaDestinatario" placeholder="Cerca nella lista destinatari..." oninput="emFiltraCercaDestinatari()" style="width:100%;padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-size:0.8rem;font-family:'Montserrat',sans-serif">
+            </div>
             <div id="emDestinatari" style="max-height:200px;overflow-y:auto;font-size:0.85rem;color:var(--caffe2)">
               <em>Nessun destinatario caricato</em>
             </div>
             <div style="margin-top:8px;font-size:0.8rem;color:var(--caffe2)" id="emContatore">0 destinatari</div>
             <div style="margin-top:10px;padding:10px 14px;background:#fff8e1;border:1px solid #ffe082;border-radius:8px;font-size:0.78rem;color:#6d4c00">
               <strong>GDPR:</strong> Ogni email include link Privacy Policy e opzione di cancellazione. Assicurati del consenso marketing (Reg. UE 2016/679).
+            </div>
+          </div>
+
+          <!-- MODALE SELEZIONA CLIENTI -->
+          <div class="modal-overlay" id="emSelezionaClientiModal" style="display:none">
+            <div class="modal" style="max-width:700px;max-height:80vh;display:flex;flex-direction:column">
+              <div class="modal-header">
+                <h2>Seleziona Clienti</h2>
+                <button class="modal-close" onclick="emChiudiSelezionaClienti()">&times;</button>
+              </div>
+              <div style="padding:12px 20px;border-bottom:1px solid #eee">
+                <input type="text" id="emCercaCliente" placeholder="Cerca nome, cognome, email, telefono..." oninput="emFiltraCercaClienti()" style="width:100%;padding:10px 14px;border:1.5px solid var(--caffe3);border-radius:8px;font-size:0.85rem;font-family:'Montserrat',sans-serif">
+                <div style="display:flex;gap:8px;margin-top:8px;align-items:center">
+                  <button class="btn btn-sm" onclick="emSelezionaTutti()" style="background:#4CAF50;color:#fff;border:none;font-size:0.75rem">Seleziona tutti</button>
+                  <button class="btn btn-sm" onclick="emDeselezionaTutti()" style="background:#888;color:#fff;border:none;font-size:0.75rem">Deseleziona tutti</button>
+                  <span style="font-size:0.75rem;color:var(--caffe2);margin-left:auto" id="emCercaContatore">0 clienti</span>
+                </div>
+              </div>
+              <div id="emListaClientiSelezionabili" style="flex:1;overflow-y:auto;padding:10px 20px;max-height:400px"></div>
+              <div style="padding:12px 20px;border-top:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+                <span style="font-size:0.82rem;color:var(--caffe2)" id="emSelezionatiCount">0 selezionati</span>
+                <button class="btn" onclick="emConfermaSelezionati()" style="background:var(--oro);color:#fff;border:none;font-weight:600;padding:10px 24px;border-radius:8px">Conferma selezione</button>
+              </div>
             </div>
           </div>
 
@@ -3958,6 +3983,14 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 </div>
               </div>
               <p style="font-size:0.72rem;color:var(--caffe2);margin-top:8px;margin-bottom:0">Seleziona un contenuto e verrà inserito automaticamente nel corpo email con immagine, titolo e link.</p>
+              <!-- Anteprima contenuti selezionati -->
+              <div id="emContentPreview" style="display:none;margin-top:12px;padding:12px;background:#f8f6f3;border-radius:8px;border:1px solid #e0d6c8">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                  <label style="font-size:0.8rem;font-weight:600;color:var(--caffe)">Contenuti selezionati:</label>
+                  <button onclick="emClearContentPreview()" style="background:none;border:none;color:#c00;cursor:pointer;font-size:0.75rem">Svuota tutto</button>
+                </div>
+                <div id="emContentPreviewItems"></div>
+              </div>
             </div>
 
             <!-- Campi comuni -->
@@ -4601,6 +4634,7 @@ function showSection(name) {
   if (name === 'newsletter') loadNewsletterList();
   if (name === 'agenda') loadAgendaSection();
   if (name === 'clienti') { loadClienti(); if (typeof emLoadGruppi === 'function') emLoadGruppi(); }
+  if (name === 'emailmarketing') { if (typeof emLoadGruppi === 'function') emLoadGruppi(); if (typeof emPopulateContentPickers === 'function') emPopulateContentPickers(); }
   if (name === 'nuovo') populateProprietarioDropdown();
   if (name === 'impostazioni') { testConn(); check2FAStatus(); }
 }
@@ -10198,9 +10232,15 @@ checkAuth();
 
   // ═══ POPOLA LE 3 TENDINE CONTENUTO ═══
   async function emPopulateContentPickers() {
+    // Pulisci dropdown prima di ripopolare (evita duplicati)
+    ['emPickBlog','emPickImmobile','emPickLanding'].forEach(id => {
+      const sel = document.getElementById(id);
+      if (sel) { while (sel.options.length > 1) sel.remove(1); }
+    });
+
     // 1. Articoli Blog
     try {
-      const {data: articles} = await sb.from('blog').select('id, titolo, slug, categoria, immagine_url').order('created_at', {ascending: false});
+      const {data: articles} = await sb.from('blog').select('id, titolo, slug, categoria, immagine_url').order('data', {ascending: false});
       const sel = document.getElementById('emPickBlog');
       if (sel && articles) {
         articles.forEach(a => {
@@ -10272,7 +10312,7 @@ checkAuth();
     html += '<p style="text-align:center;margin-top:16px"><a href="' + escHtml(url) + '" style="background:#d4a843;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600">Leggi l\'articolo</a></p>\n';
 
     emInsertContentInEditor(html, titolo);
-    sel.selectedIndex = 0;
+    emAddContentPreviewCard('blog', titolo, img, url);
   };
 
   // ═══ INSERISCI CONTENUTO DA IMMOBILE ═══
@@ -10299,7 +10339,7 @@ checkAuth();
     html += '<p style="text-align:center"><a href="' + escHtml(url) + '" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600">Vedi dettagli immobile</a></p>\n';
 
     emInsertContentInEditor(html, titolo);
-    sel.selectedIndex = 0;
+    emAddContentPreviewCard('immobile', (codice ? 'Rif. ' + codice + ' — ' : '') + titolo + (prezzo ? ' — €' + Number(prezzo).toLocaleString('it-IT') : ''), img, url);
   };
 
   // ═══ INSERISCI CONTENUTO DA LANDING PAGE ═══
@@ -10318,7 +10358,7 @@ checkAuth();
     html += '<p style="text-align:center;margin-top:16px"><a href="' + escHtml(url) + '" style="background:#d4a843;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px">Scopri di più</a></p>\n';
 
     emInsertContentInEditor(html, titolo);
-    sel.selectedIndex = 0;
+    emAddContentPreviewCard('landing', titolo, null, url);
   };
 
   // Helper: inserisce contenuto nell'editor attivo (visuale o codice)
@@ -10368,6 +10408,45 @@ checkAuth();
     corpo.value = corpo.value.substring(0, pos) + '\n' + imgTag + '\n' + corpo.value.substring(pos);
     document.getElementById('emHtmlImageUrl').value = '';
     toast('Immagine inserita nel corpo HTML', 'success');
+  };
+
+  // ═══ PREVIEW CONTENUTI SELEZIONATI ═══
+  let emSelectedContents = [];
+
+  function emAddContentPreviewCard(tipo, titolo, img, url) {
+    emSelectedContents.push({tipo, titolo, img, url});
+    emRenderContentPreview();
+  }
+
+  function emRenderContentPreview() {
+    const box = document.getElementById('emContentPreview');
+    const items = document.getElementById('emContentPreviewItems');
+    if (!emSelectedContents.length) { box.style.display = 'none'; return; }
+    box.style.display = 'block';
+    const badges = {blog: '#4CAF50', immobile: '#667eea', landing: '#d4a843'};
+    items.innerHTML = emSelectedContents.map((c, i) =>
+      '<div style="display:flex;align-items:center;gap:10px;padding:8px;background:#fff;border-radius:6px;margin-bottom:4px;border-left:4px solid ' + (badges[c.tipo] || '#888') + '">' +
+      (c.img ? '<img src="' + escHtml(c.img) + '" style="width:50px;height:35px;object-fit:cover;border-radius:4px">' : '') +
+      '<div style="flex:1;min-width:0">' +
+        '<span style="font-size:0.7rem;font-weight:600;color:' + (badges[c.tipo] || '#888') + ';text-transform:uppercase">' + escHtml(c.tipo) + '</span>' +
+        '<div style="font-size:0.8rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + escHtml(c.titolo) + '</div>' +
+      '</div>' +
+      '<button onclick="emRemoveContentPreview(' + i + ')" style="background:none;border:none;color:#c00;cursor:pointer;font-size:1rem">&times;</button>' +
+      '</div>'
+    ).join('');
+  }
+
+  window.emRemoveContentPreview = function(i) {
+    emSelectedContents.splice(i, 1);
+    emRenderContentPreview();
+  };
+
+  window.emClearContentPreview = function() {
+    emSelectedContents = [];
+    emRenderContentPreview();
+    document.getElementById('emPickBlog').selectedIndex = 0;
+    document.getElementById('emPickImmobile').selectedIndex = 0;
+    document.getElementById('emPickLanding').selectedIndex = 0;
   };
 
   // ═══ FOTO AGGIUNTIVE EDITOR VISUALE ═══
@@ -10644,9 +10723,24 @@ checkAuth();
   };
 
   // ═══ GRUPPI DI INTENTO ═══
-  window.emFiltraGruppo = function() {
+  window.emFiltraGruppo = async function() {
     const checks = document.querySelectorAll('.em-gruppo-check:checked');
     const selected = Array.from(checks).map(c => c.value);
+
+    // Auto-carica clienti se lista vuota
+    if (!emTuttiContatti.length) {
+      try {
+        await loadBlacklist();
+        const {data} = await sb.from('clienti').select('nome, email, tipo_cliente').not('email','is',null).neq('email','');
+        if (data && data.length) {
+          const seen = new Set();
+          emTuttiContatti = data
+            .map(c => ({nome: c.nome || '', email: (c.email || '').trim().toLowerCase(), tipo_cliente: c.tipo_cliente || '', gruppo: c.tipo_cliente || ''}))
+            .filter(c => c.email && c.email.includes('@') && !emBlacklist.has(c.email))
+            .filter(c => { if (seen.has(c.email)) return false; seen.add(c.email); return true; });
+        }
+      } catch(e) { toast('Errore caricamento clienti: ' + e.message, 'error'); return; }
+    }
 
     // Se "tutti" è selezionato, mostra tutti
     if (selected.includes('tutti') || selected.length === 0) {
@@ -11148,13 +11242,101 @@ checkAuth();
     e.target.value = '';
   };
 
-  // Aggiungi manuale
-  window.emAddManual = function() {
-    const email = prompt('Email:');
-    if (!email || !email.includes('@')) return;
-    const nome = prompt('Nome (opzionale):') || '';
-    emContatti.push({nome, email: email.trim()});
+  // ═══ MODALE SELEZIONA CLIENTI ═══
+  let emTuttiClientiDB = [];
+
+  window.emApriSelezionaClienti = async function() {
+    try {
+      await loadBlacklist();
+      const {data, error} = await sb.from('clienti').select('nome, email, telefono, tipo_cliente').not('email','is',null).neq('email','');
+      if (error) throw error;
+      if (!data || !data.length) return toast('Nessun cliente con email trovato','error');
+
+      // Deduplica e pulisci
+      const seen = new Set();
+      emTuttiClientiDB = data
+        .map(c => ({nome: c.nome || '', email: (c.email || '').trim().toLowerCase(), telefono: c.telefono || '', tipo_cliente: c.tipo_cliente || ''}))
+        .filter(c => c.email && c.email.includes('@') && !emBlacklist.has(c.email))
+        .filter(c => { if (seen.has(c.email)) return false; seen.add(c.email); return true; });
+
+      // Segna quelli già selezionati
+      const giaSel = new Set(emContatti.map(c => c.email));
+      emTuttiClientiDB.forEach(c => c._selected = giaSel.has(c.email));
+
+      document.getElementById('emSelezionaClientiModal').style.display = 'flex';
+      document.getElementById('emCercaCliente').value = '';
+      emRenderClientiSelezionabili(emTuttiClientiDB);
+    } catch(e) {
+      toast('Errore: ' + e.message, 'error');
+    }
+  };
+
+  window.emChiudiSelezionaClienti = function() {
+    document.getElementById('emSelezionaClientiModal').style.display = 'none';
+  };
+
+  function emRenderClientiSelezionabili(lista) {
+    const box = document.getElementById('emListaClientiSelezionabili');
+    document.getElementById('emCercaContatore').textContent = lista.length + ' clienti';
+    const selCount = lista.filter(c => c._selected).length;
+    document.getElementById('emSelezionatiCount').textContent = selCount + ' selezionati';
+    if (!lista.length) { box.innerHTML = '<em style="color:#888">Nessun risultato</em>'; return; }
+    box.innerHTML = lista.map((c, i) =>
+      '<label style="display:flex;align-items:center;gap:10px;padding:8px 6px;border-bottom:1px solid #f0f0f0;cursor:pointer;font-size:0.83rem' + (c._selected ? ';background:#e8f5e9' : '') + '" data-idx="' + i + '">' +
+        '<input type="checkbox" ' + (c._selected ? 'checked' : '') + ' onchange="emToggleClienteSel(this)" data-email="' + escHtml(c.email) + '" style="width:16px;height:16px">' +
+        '<div style="flex:1;min-width:0">' +
+          '<div style="font-weight:600">' + escHtml(c.nome || '—') + '</div>' +
+          '<div style="font-size:0.75rem;color:#888">' + escHtml(c.email) + (c.telefono ? ' · ' + escHtml(c.telefono) : '') + '</div>' +
+        '</div>' +
+        '<span style="font-size:0.7rem;color:#888;background:#f0f0f0;padding:2px 6px;border-radius:10px">' + escHtml(c.tipo_cliente || 'Privato') + '</span>' +
+      '</label>'
+    ).join('');
+  }
+
+  window.emToggleClienteSel = function(cb) {
+    const email = cb.dataset.email;
+    const c = emTuttiClientiDB.find(cl => cl.email === email);
+    if (c) c._selected = cb.checked;
+    cb.closest('label').style.background = cb.checked ? '#e8f5e9' : '';
+    const selCount = emTuttiClientiDB.filter(c => c._selected).length;
+    document.getElementById('emSelezionatiCount').textContent = selCount + ' selezionati';
+  };
+
+  window.emFiltraCercaClienti = function() {
+    const q = document.getElementById('emCercaCliente').value.toLowerCase().trim();
+    if (!q) { emRenderClientiSelezionabili(emTuttiClientiDB); return; }
+    const filtered = emTuttiClientiDB.filter(c =>
+      (c.nome || '').toLowerCase().includes(q) ||
+      (c.email || '').toLowerCase().includes(q) ||
+      (c.telefono || '').includes(q)
+    );
+    emRenderClientiSelezionabili(filtered);
+  };
+
+  window.emSelezionaTutti = function() {
+    // Seleziona tutti quelli attualmente visibili
+    const q = document.getElementById('emCercaCliente').value.toLowerCase().trim();
+    emTuttiClientiDB.forEach(c => {
+      if (!q || (c.nome || '').toLowerCase().includes(q) || (c.email || '').toLowerCase().includes(q) || (c.telefono || '').includes(q)) {
+        c._selected = true;
+      }
+    });
+    emFiltraCercaClienti();
+  };
+
+  window.emDeselezionaTutti = function() {
+    emTuttiClientiDB.forEach(c => c._selected = false);
+    emFiltraCercaClienti();
+  };
+
+  window.emConfermaSelezionati = function() {
+    const selezionati = emTuttiClientiDB.filter(c => c._selected);
+    if (!selezionati.length) return toast('Nessun cliente selezionato','error');
+    emContatti = selezionati.map(c => ({nome: c.nome, email: c.email, tipo_cliente: c.tipo_cliente, gruppo: c.tipo_cliente}));
+    emTuttiContatti = [...emContatti];
     emRenderList();
+    document.getElementById('emSelezionaClientiModal').style.display = 'none';
+    toast(emContatti.length + ' clienti selezionati','success');
   };
 
   // ═══ TEMPLATE PREDEFINITI ═══
@@ -11324,6 +11506,22 @@ checkAuth();
   window.emRemove = function(i) {
     emContatti.splice(i, 1);
     emRenderList();
+  };
+
+  window.emFiltraCercaDestinatari = function() {
+    const q = (document.getElementById('emCercaDestinatario')?.value || '').toLowerCase().trim();
+    const box = document.getElementById('emDestinatari');
+    if (!emContatti.length) return;
+    const filtered = q ? emContatti.filter((c,i) => {
+      return (c.nome || '').toLowerCase().includes(q) || (c.email || '').toLowerCase().includes(q) || (c.telefono || '').includes(q);
+    }) : emContatti;
+    box.innerHTML = filtered.map((c) => {
+      const idx = emContatti.indexOf(c);
+      return '<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;border-bottom:1px solid #eee">' +
+        '<span>' + escHtml(c.nome ? c.nome + ' — ' + c.email : c.email) + '</span>' +
+        '<button onclick="emRemove(' + idx + ')" style="background:none;border:none;color:#c00;cursor:pointer;font-size:1.1rem">&times;</button>' +
+      '</div>';
+    }).join('');
   };
 
   // ═══ ANTEPRIMA ═══
