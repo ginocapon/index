@@ -3217,7 +3217,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <select id="clienteTipoOp">
                   <option value="">Qualsiasi</option>
                   <option value="vendita">Acquisto</option>
-                  <option value="affitto">Affitto</option>
+                  <option value="affitto_residenziale">Affitto Residenziale</option>
+                  <option value="affitto_commerciale">Affitto Commerciale</option>
                 </select>
               </div>
               <div class="form-group">
@@ -3564,7 +3565,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <option value="vendita">Vendita</option>
                 <option value="acquisto">Acquisto</option>
                 <option value="valutazione">Valutazione</option>
-                <option value="affitto">Affitto</option>
+                <option value="affitto_residenziale">Affitto Residenziale</option>
+                <option value="affitto_commerciale">Affitto Commerciale</option>
                 <option value="consulenza">Consulenza</option>
                 <option value="generico">Generico</option>
               </select>
@@ -4768,7 +4770,7 @@ async function loadImmobili() {
 function updateStats(data) {
   document.getElementById('statTot').textContent = data.length;
   document.getElementById('statVendita').textContent = data.filter(i => i.tipo_operazione === 'vendita' && !i.venduto).length;
-  document.getElementById('statAffitto').textContent = data.filter(i => i.tipo_operazione === 'affitto' && !i.affittato).length;
+  document.getElementById('statAffitto').textContent = data.filter(i => (i.tipo_operazione === 'affitto' || i.tipo_operazione === 'affitto_residenziale' || i.tipo_operazione === 'affitto_commerciale') && !i.affittato).length;
   document.getElementById('statVenduti').textContent = data.filter(i => i.venduto || i.affittato).length;
 }
 
@@ -4795,6 +4797,8 @@ function renderTable(data) {
       : `<span class="badge badge-grigio">Disattivo</span>`;
 
     const tipo = i.tipo_operazione === 'vendita' ? `<span class="badge badge-blu">Vendita</span>`
+      : i.tipo_operazione === 'affitto_residenziale' ? `<span class="badge badge-oro">Affitto Res.</span>`
+      : i.tipo_operazione === 'affitto_commerciale' ? `<span class="badge badge-oro">Affitto Comm.</span>`
       : i.tipo_operazione === 'affitto' ? `<span class="badge badge-oro">Affitto</span>`
       : `<span class="badge badge-grigio">Asta</span>`;
 
@@ -7092,7 +7096,7 @@ function showSocialPropertyPreview(id) {
 }
 
 function buildSocialCaption(i) {
-  const tipo = i.tipo_operazione === 'vendita' ? 'IN VENDITA' : i.tipo_operazione === 'affitto' ? 'IN AFFITTO' : '';
+  const tipo = i.tipo_operazione === 'vendita' ? 'IN VENDITA' : i.tipo_operazione?.startsWith('affitto') ? 'IN AFFITTO' : '';
   const prezzo = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : '';
   let caption = '';
   if (tipo) caption += tipo + ' | ';
@@ -7601,7 +7605,7 @@ async function publishToGBP() {
   if (!gbpToken || !gbpLocation) { toast('Connetti Google Business prima', 'error'); return; }
 
   const prezzo = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : '';
-  const tipo = i.tipo_operazione === 'vendita' ? 'In vendita' : i.tipo_operazione === 'affitto' ? 'In affitto' : '';
+  const tipo = i.tipo_operazione === 'vendita' ? 'In vendita' : i.tipo_operazione?.startsWith('affitto') ? 'In affitto' : '';
   const summary = tipo + ': ' + (i.titolo || '') + ' - ' + (i.comune || '') + (prezzo ? ' - ' + prezzo : '') + (i.superficie ? ' - ' + i.superficie + ' mq' : '') + '\nRif. ' + (i.codice || '') + ' | Righetto Immobiliare';
   const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
 
@@ -7649,7 +7653,7 @@ function generateTikTokImage() {
 
   const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
   const prezzo = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : '';
-  const tipo = i.tipo_operazione === 'vendita' ? 'IN VENDITA' : i.tipo_operazione === 'affitto' ? 'IN AFFITTO' : '';
+  const tipo = i.tipo_operazione === 'vendita' ? 'IN VENDITA' : i.tipo_operazione?.startsWith('affitto') ? 'IN AFFITTO' : '';
 
   // Create a canvas 1080x1920 (TikTok 9:16)
   const canvas = document.createElement('canvas');
@@ -10302,31 +10306,31 @@ checkAuth();
 
     // 1. Articoli Blog
     try {
-      // Prova prima con order('data'), se fallisce usa order('created_at')
-      let articles = null;
-      try {
-        const res = await sb.from('blog').select('id, titolo, slug, categoria, immagine_copertina').order('data', {ascending: false});
-        if (res.error) throw res.error;
-        articles = res.data;
-      } catch(e2) {
-        console.warn('Blog: colonna data non trovata, provo created_at');
-        const res2 = await sb.from('blog').select('id, titolo, slug, categoria, immagine_copertina').order('created_at', {ascending: false});
-        articles = res2.data;
-      }
+      // Carica tutti gli articoli dal blog (select * per massima compatibilità colonne)
+      const res = await sb.from('blog').select('*').order('created_at', {ascending: false});
+      console.log('Blog picker query result:', JSON.stringify({error: res.error, count: res.data?.length}));
+      const articles = res.data;
       const sel = document.getElementById('emPickBlog');
       if (sel && articles && articles.length) {
-        console.log('Blog picker: caricati ' + articles.length + ' articoli');
+        console.log('Blog picker: caricati ' + articles.length + ' articoli. Colonne:', Object.keys(articles[0]).join(', '));
         articles.forEach(a => {
           const opt = document.createElement('option');
           opt.value = a.id;
-          opt.textContent = (a.categoria ? '[' + a.categoria + '] ' : '') + (a.titolo || 'Senza titolo');
+          opt.textContent = (a.categoria ? '[' + a.categoria + '] ' : '') + (a.titolo || a.title || 'Senza titolo');
           opt.dataset.slug = a.slug || '';
-          opt.dataset.titolo = a.titolo || '';
-          opt.dataset.img = a.immagine_copertina || '';
+          opt.dataset.titolo = a.titolo || a.title || '';
+          opt.dataset.img = a.immagine_copertina || a.immagine_url || a.image || '';
           sel.appendChild(opt);
         });
       } else {
-        console.warn('Blog picker: nessun articolo trovato nella tabella blog');
+        console.warn('Blog picker: nessun articolo trovato. Errore:', res.error?.message || 'tabella vuota');
+        if (sel) {
+          const opt = document.createElement('option');
+          opt.value = '';
+          opt.textContent = '(Nessun articolo nel blog)';
+          opt.disabled = true;
+          sel.appendChild(opt);
+        }
       }
     } catch(e) { console.warn('Blog picker errore:', e.message); }
 
@@ -12035,7 +12039,7 @@ checkAuth();
       <div style="padding:18px">
         <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px">
           <div>
-            <div style="font-size:11px;color:#d4a843;font-weight:600;text-transform:uppercase;margin-bottom:4px">${property.tipo_operazione === 'affitto' ? 'In Affitto' : 'In Vendita'} ${property.codice ? '· ' + escHtml(property.codice) : ''}</div>
+            <div style="font-size:11px;color:#d4a843;font-weight:600;text-transform:uppercase;margin-bottom:4px">${property.tipo_operazione?.startsWith('affitto') ? 'In Affitto' : 'In Vendita'} ${property.codice ? '· ' + escHtml(property.codice) : ''}</div>
             <h3 style="margin:0;color:#1a1a2e;font-size:17px;line-height:1.3">${escHtml(property.titolo || 'Immobile')}</h3>
           </div>
           <div style="text-align:right;flex-shrink:0;margin-left:12px">
