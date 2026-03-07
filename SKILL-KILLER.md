@@ -1,8 +1,8 @@
 # SKILL KILLER - Prompt Operativo per righettoimmobiliare.it
 ### (Il nome e' ironico, ma il contenuto e' serissimo)
 
-> **Versione:** 1.3 - 4 Marzo 2026
-> **Ultimo aggiornamento Google verificato:** Marzo 2026
+> **Versione:** 1.4 - 7 Marzo 2026
+> **Ultimo aggiornamento Google verificato:** 7 Marzo 2026 (Core Update rolling out)
 > **Prossima verifica consigliata:** Aprile 2026
 
 ---
@@ -164,12 +164,20 @@ SERP-STRATEGY.md                    - Copia dettagliata strategia SERP (deprecat
 10. **Contenuto originale** - Penalizzazione per clickbait e contenuti superficiali
 
 ### Novita' Google Marzo 2026
+- **March 2026 Core Update** - In rollout dal 7 marzo, ~2 settimane per completamento. Focus su: E-E-A-T, topical authority, local relevance, page experience consistency
+- **Topical Authority rafforzata** - Google valuta la copertura complessiva di un topic sul sito, non singole pagine
+- **Local Relevance potenziata** - Vantaggio per siti che comunicano chiaramente zona e area servizi
+- **Page Experience consistency** - Siti con performance inconsistente (home veloce, blog lento) penalizzati
 - **AI Analysis Tools** in Search Console - analisi con linguaggio naturale
 - **Query Groups** in Search Console Insights - raggruppamento query simili
-- **Discover Core Update** (5 Feb 2026) - algoritmo separato per Google Discover
+- **Custom Annotations** in Performance Reports - note personalizzate sui grafici
+- **Branded Queries Filter** - separazione automatica query brand/non-brand
+- **AI Mode data** contato nei totali Performance Report di Search Console
+- **Discover Core Update** (5 Feb 2026) - piu' contenuti locali, meno clickbait, piu' contenuti originali
 - **SVT e VSI** - Nuove metriche per stabilita' visiva
 - **Soglie INP piu' strette** - Google ha reso piu' severi i requisiti di interattivita'
 - Rimosso supporto per **practice problem** e **dataset structured data**
+- **GEO critico nel 2026** - 40% ricerche via AI, recency bias forte (contenuti >3 mesi perdono citazioni), overlap SEO/GEO sceso sotto 20%
 
 ### GEO — Generative Engine Optimization (NUOVO 2026)
 
@@ -525,6 +533,23 @@ SERP-STRATEGY.md                    - Copia dettagliata strategia SERP (deprecat
 ---
 
 ## CHANGELOG AGGIORNAMENTI
+
+### v1.4 - 7 Marzo 2026 (5 Conversion Features + Audit SKILL-KILLER)
+- **5 feature di conversione implementate:**
+  1. Testimonial section in homepage con 3 recensioni reali + Review schema markup
+  2. Email gate modal su vendere-casa-padova-errori.html (lead capture prima del PDF)
+  3. Sticky mobile CTA bar su homepage, landing-vendita, landing-mutuo, calcolatore
+  4. Sezione video fondatore su landing-vendita con YouTube facade pattern
+  5. Urgency badges su homepage e calcolatore (prezzi +7% 2026)
+- **Audit Visual Saliency completato:** rimosso loading="lazy" da avatar testimonial e video thumbnail
+- **Audit GEO/AEO completato:** aggiornato testo intro testimonial con frasi dichiarative
+- **Review schema aggiunto:** 3 Review objects individuali nello schema LocalBusiness homepage
+- **Fix CLS:** aggiunto width/height a immagine form contatto homepage (700x700)
+- **Fix render-blocking CSS:** deferring css/fonts.css e css/nav-mobile.css su calcolatore
+- **Hero preload aggiunto:** landing-mutuo.html mancava preload immagine hero
+- **Sitemap aggiornato:** aggiunte 4 landing pages mancanti (vendita, mutuo, valutazione, agente) → 47 URL totali
+- **Google Core Update Marzo 2026:** documentato rollout, focus su topical authority e local relevance
+- **GEO 2026:** aggiornata sezione con dati recenti (40% ricerche via AI, recency bias, overlap <20%)
 
 ### v1.3 - 4 Marzo 2026 (Analisi Competitiva + Strategia SERP)
 - Aggiunta sezione completa "ANALISI COMPETITIVA E STRATEGIA SERP"
