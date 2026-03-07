@@ -341,7 +341,14 @@ function generateSlug(titolo) {
     'comprare casa a padova nel 2026: guida definitiva passo dopo passo': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-comprare-casa-padova-guida-2026' },
     'quanto costa vendere casa a padova nel 2026? costi, tasse e tempi reali': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-costi-vendere-casa-padova-2026' },
     'home staging padova: come vendere casa prima e meglio': { img: 'img/blog/home-staging.webp', url: 'blog-home-staging-padova' },
-    'vendere casa a padova: 7 errori costosi da evitare': { img: 'img/team/titolari.webp', url: 'vendere-casa-padova-errori' }
+    'vendere casa a padova: 7 errori costosi da evitare': { img: 'img/team/titolari.webp', url: 'vendere-casa-padova-errori' },
+    'documenti per vendere casa nel 2026: lista completa e guida pratica': { img: 'img/foto-servizi/gestione-preliminari-padova.webp', url: 'blog-documenti-vendita-casa' },
+    'tasse vendita casa 2026: plusvalenza, imposte e guida fiscale completa': { img: 'img/foto-servizi/attivazione-utenze-e-servizi-padova.webp', url: 'blog-tasse-vendita-casa' },
+    'casa ereditata a padova: cosa fare, tasse e come venderla nel 2026': { img: 'img/foto-servizi/gestioni-immobili-padova.webp', url: 'blog-successione-immobiliare-padova' },
+    'agevolazioni prima casa 2026: bonus, requisiti e come ottenerli': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-agevolazioni-prima-casa-2026' },
+    'investire nel mercato immobiliare a padova nel 2026: guida completa': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-investire-immobiliare-padova' },
+    'contratto di affitto a padova 2026: canone concordato e guida completa': { img: 'img/foto-servizi/contratti-di-locazione-padova.webp', url: 'blog-contratto-affitto-padova' },
+    'rendimento affitto padova 2026: calcolo e analisi per quartiere': { img: 'img/foto-servizi/contratti-di-locazione-padova.webp', url: 'blog-rendimento-affitto-padova' }
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
@@ -355,7 +362,14 @@ function generateSlug(titolo) {
     { titolo: 'Affitto Studenti Padova 2026: Zone, Prezzi e Guida Completa', categoria: 'Affitti', data: '2026-03-02', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/contratti-di-locazione-padova.webp', url_statico: 'blog-affitto-studenti-padova' },
     { titolo: 'Mercato Immobiliare Padova 2026: Prezzi, Tendenze e Previsioni', categoria: 'Mercato locale', data: '2026-03-02', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-mercato-immobiliare-padova-2026' },
     { titolo: 'Conviene comprare casa a Padova o restare in affitto? Analisi su 20 anni', categoria: 'Consigli acquisto', data: '2026-03-02', stato: 'pubblicato', immagine_copertina: 'img/blog/comprare-affittare-padova.webp', url_statico: 'blog-comprare-affittare-padova' },
-    { titolo: 'Case in Vendita Padova 2026: Prezzi, Zone Migliori e Guida Completa', categoria: 'Mercato locale', data: '2026-03-01', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-case-vendita-padova' }
+    { titolo: 'Case in Vendita Padova 2026: Prezzi, Zone Migliori e Guida Completa', categoria: 'Mercato locale', data: '2026-03-01', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-case-vendita-padova' },
+    { titolo: 'Documenti per Vendere Casa nel 2026: Lista Completa e Guida Pratica', categoria: 'Guida alla vendita', data: '2026-03-07', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/gestione-preliminari-padova.webp', url_statico: 'blog-documenti-vendita-casa' },
+    { titolo: 'Tasse Vendita Casa 2026: Plusvalenza, Imposte e Guida Fiscale Completa', categoria: 'Fisco', data: '2026-03-07', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/attivazione-utenze-e-servizi-padova.webp', url_statico: 'blog-tasse-vendita-casa' },
+    { titolo: 'Casa Ereditata a Padova: Cosa Fare, Tasse e Come Venderla nel 2026', categoria: 'Normativa', data: '2026-03-07', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/gestioni-immobili-padova.webp', url_statico: 'blog-successione-immobiliare-padova' },
+    { titolo: 'Agevolazioni Prima Casa 2026: Bonus, Requisiti e Come Ottenerli', categoria: 'Fisco', data: '2026-03-07', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-agevolazioni-prima-casa-2026' },
+    { titolo: 'Investire nel Mercato Immobiliare a Padova nel 2026: Guida Completa', categoria: 'Consigli acquisto', data: '2026-03-07', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-investire-immobiliare-padova' },
+    { titolo: 'Contratto di Affitto a Padova 2026: Canone Concordato e Guida Completa', categoria: 'Affitti', data: '2026-03-07', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/contratti-di-locazione-padova.webp', url_statico: 'blog-contratto-affitto-padova' },
+    { titolo: 'Rendimento Affitto Padova 2026: Calcolo e Analisi per Quartiere', categoria: 'Affitti', data: '2026-03-07', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/contratti-di-locazione-padova.webp', url_statico: 'blog-rendimento-affitto-padova' }
   ];
   // Carica da Supabase e merge con statici
   let articles = [];
