@@ -1738,8 +1738,8 @@ if (document.readyState === 'loading') {
   initChatbotUI();
 }
 
-// ── Auto-open chatbot dopo ~4s su homepage (solo prima visita sessione) ──
-// NB: chatbot.js è caricato lazy dopo ~3s, quindi il delay reale è ~4s totali
+// ── Auto-open chatbot dopo ~3s su homepage (solo prima visita sessione) ──
+// NB: chatbot.js è caricato lazy dopo ~3s, quindi il delay reale è ~3s totali
 function autoOpenChatbot() {
   var path = location.pathname.replace(/\/+$/, '') || '/';
   var isHome = path === '/' || path === '/index.html' || path === '/index' || path === '/home';
@@ -1765,6 +1765,6 @@ function autoOpenChatbot() {
     }
   }
 }
-setTimeout(autoOpenChatbot, 1000);
+setTimeout(autoOpenChatbot, 0);
 
 })();
