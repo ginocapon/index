@@ -25,7 +25,7 @@ const AZIENDA = {
   settore: 'Agenzia immobiliare',
   sito: 'https://righettoimmobiliare.it',
   telefono: '049 884 3484',
-  cellulare: '348 862 1888',
+  cellulare: '349 736 5930',
   indirizzo: 'Via Roma, 96',
   cap: '35010',
   citta: 'Limena',
