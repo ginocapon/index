@@ -68,7 +68,7 @@ servizio-utenze.html                - Servizio utenze
 chi-siamo.html                      - Chi siamo
 contatti.html                       - Form contatti
 blog.html                           - Blog hub
-blog-*.html (11 articoli)           - Articoli blog SEO
+blog-*.html (18 articoli)           - Articoli blog SEO
 faq.html                            - FAQ (30+ domande)
 zona-*.html (8 quartieri)           - Pagine quartieri Padova (con RealEstateAgent + FAQPage schema)
 landing-vendita.html                - Landing vendita
@@ -337,6 +337,12 @@ SERP-STRATEGY.md                    - Copia dettagliata strategia SERP (deprecat
 10. **Verifica** che tutte le pagine abbiano meta tag SEO completi
 11. **Visual Saliency** — ogni pagina nuova DEVE seguire le regole above-the-fold (preload, contrast, CLS)
 12. **Performance** — mai introdurre animazioni sull'elemento LCP senza `animation-play-state: paused`
+13. **Pubblicazione articoli blog** — OBBLIGATORIO registrare ogni nuovo articolo in TUTTI questi punti, altrimenti non comparira' nel sito ne' nell'admin:
+    - `admin.html` → array `_blogSeedArticles` (seed per admin panel)
+    - `blog.html` → array `articoliStatici` (listing pagina blog)
+    - `js/homepage.js` → oggetto `staticMap` (mapping titolo→url) + array `articoliStatici` (card homepage)
+    - `sitemap.xml` → nuovo URL
+    - **VERIFICA FINALE:** dopo il push, controllare che l'articolo compaia nell'admin panel come "Pubblicato" e nella pagina blog del sito
 
 ### Quando lavori sulle email/cPanel:
 1. **NON eliminare** mai account email senza conferma esplicita
@@ -497,15 +503,15 @@ SERP-STRATEGY.md                    - Copia dettagliata strategia SERP (deprecat
 - [x] blog-costi-vendere-casa-padova-2026.html
 - [ ] landing-vendere-casa-padova.html (landing dedicata, ultra-ottimizzata)
 - [ ] blog-tempi-vendita-casa-padova.html ("quanto tempo per vendere casa a Padova")
-- [ ] blog-documenti-vendita-casa.html ("documenti per vendere casa")
-- [ ] blog-tasse-vendita-casa.html ("tasse e costi vendita immobiliare")
+- [x] blog-documenti-vendita-casa.html ("documenti per vendere casa")
+- [x] blog-tasse-vendita-casa.html ("tasse e costi vendita immobiliare")
 
 **Cluster "Comprare Casa Padova"**
 - [x] blog-comprare-casa-padova-guida-2026.html
 - [x] blog-mutuo-prima-casa-padova.html
-- [ ] blog-agevolazioni-prima-casa-2026.html ("bonus prima casa under 36")
-- [ ] blog-successione-immobiliare-padova.html ("casa ereditata, cosa fare")
-- [ ] blog-investire-immobiliare-padova.html ("investimento immobiliare Padova")
+- [x] blog-agevolazioni-prima-casa-2026.html ("bonus prima casa under 36")
+- [x] blog-successione-immobiliare-padova.html ("casa ereditata, cosa fare")
+- [x] blog-investire-immobiliare-padova.html ("investimento immobiliare Padova")
 
 **Cluster "Quartieri Padova"**
 - [x] blog-quartieri-padova-2026.html
@@ -519,8 +525,8 @@ SERP-STRATEGY.md                    - Copia dettagliata strategia SERP (deprecat
 **Cluster "Affitto Padova"**
 - [x] blog-affitto-studenti-padova.html
 - [x] servizio-locazioni.html
-- [ ] blog-contratto-affitto-padova.html ("canone concordato Padova")
-- [ ] blog-rendimento-affitto-padova.html ("rendimento locativo per quartiere")
+- [x] blog-contratto-affitto-padova.html ("canone concordato Padova")
+- [x] blog-rendimento-affitto-padova.html ("rendimento locativo per quartiere")
 
 ### Azioni Tecniche SEO — Stato Avanzamento
 
@@ -539,7 +545,7 @@ SERP-STRATEGY.md                    - Copia dettagliata strategia SERP (deprecat
 - [ ] Aggiungere immobile.html alla sitemap (manca!)
 - [ ] Creare landing-vendere-casa-padova.html (keyword "vendere casa padova") — PRIORITA ALTA
 - [ ] Creare zona-limena.html (comune sede agenzia — CRITICO)
-- [ ] Creare llms.txt (nuovo standard per guidare AI bots — vantaggio GEO)
+- [x] Creare llms.txt (nuovo standard per guidare AI bots — vantaggio GEO)
 - [ ] Aggiungere internal linking tra blog posts e zone pages (cross-link contestuali)
 - [x] Aggiunto link alla pagina agenzia-immobiliare-padova nel footer (7 marzo 2026)
 - [x] GeoCoordinates aggiunto a landing-mutuo.html (7 marzo 2026)
