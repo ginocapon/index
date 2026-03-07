@@ -1,7 +1,7 @@
 # SKILL KILLER - Prompt Operativo per righettoimmobiliare.it
 ### (Il nome e' ironico, ma il contenuto e' serissimo)
 
-> **Versione:** 1.5 - 7 Marzo 2026
+> **Versione:** 1.6 - 7 Marzo 2026
 > **Ultimo aggiornamento Google verificato:** 7 Marzo 2026 (Core Update confermato + Engagement Reliability)
 > **Prossima verifica consigliata:** Aprile 2026
 
@@ -537,12 +537,15 @@ SERP-STRATEGY.md                    - Copia dettagliata strategia SERP (deprecat
 **Da fare (prossime sessioni)**
 - [ ] Aggiungere FAQPage schema alle altre 4 service pages (locazioni, preliminari, gestione, utenze)
 - [ ] Aggiungere immobile.html alla sitemap (manca!)
-- [ ] Creare landing-vendere-casa-padova.html (keyword "vendere casa padova")
+- [ ] Creare landing-vendere-casa-padova.html (keyword "vendere casa padova") — PRIORITA ALTA
 - [ ] Creare zona-limena.html (comune sede agenzia — CRITICO)
 - [ ] Creare llms.txt (nuovo standard per guidare AI bots — vantaggio GEO)
 - [ ] Aggiungere internal linking tra blog posts e zone pages (cross-link contestuali)
-- [ ] Aggiungere link alla pagina agenzia-immobiliare-padova nel nav o nel footer
-- [ ] Verificare tutti i link interni (nessun broken link)
+- [x] Aggiunto link alla pagina agenzia-immobiliare-padova nel footer (7 marzo 2026)
+- [x] GeoCoordinates aggiunto a landing-mutuo.html (7 marzo 2026)
+- [x] CLS fix: width/height su immagini dinamiche blog.html (7 marzo 2026)
+- [x] FAQ Mutuo dedicata con 15 domande + schema aggiornato (7 marzo 2026)
+- [ ] Verificare tutti i link interni (nessun broken link — audit dice OK)
 - [ ] Verificare indexing in Google Search Console dopo deploy
 - [ ] Richiedere indicizzazione manuale delle nuove pagine via GSC
 - [ ] Aggiungere widget Google Reviews reale nella homepage
@@ -577,6 +580,14 @@ SERP-STRATEGY.md                    - Copia dettagliata strategia SERP (deprecat
 ---
 
 ## CHANGELOG AGGIORNAMENTI
+
+### v1.6 - 7 Marzo 2026 (Fix Audit + FAQ Mutuo Dedicata)
+- **GeoCoordinates aggiunto a landing-mutuo.html** — mancava nello schema LocalBusiness
+- **Link pagina pillar** agenzia-immobiliare-padova aggiunto nel footer homepage (era orfana!)
+- **CLS fix blog.html** — aggiunto width/height a tutte le immagini dinamiche (featured, card, sidebar)
+- **FAQ Mutuo dedicata** — 15 domande nella pagina FAQ con categoria propria (era sparsa in Acquisto)
+- **FAQPage schema aggiornato** — 7 nuove domande mutuo nello structured data (da ~30 a ~37 FAQ)
+- **Bottone "Mutuo" in barra categorie FAQ** + link sidebar
 
 ### v1.5 - 7 Marzo 2026 (Audit Completo Sito + Aggiornamento Competitor + Google Updates)
 - **Audit completo sito vs competitor** — punteggio 7.5/10 (top tecnico, invisibile SERP)
