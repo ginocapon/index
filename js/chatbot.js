@@ -181,7 +181,7 @@ const FAQ_DATA = [
   // ── INFO AGENZIA ──
   {
     k: ['orari', 'apertura', 'chiuso', 'aperto', 'quando'],
-    r: '🕐 **Orari Righetto Immobiliare**\nLunedì–Venerdì: 9:00–13:00 / 15:00–19:00\nSabato: 9:00–12:30\nDomenica: Chiuso\n\n📞 Tel: 049 884 3484 · Cell: 348 862 1888\n📧 info@righettoimmobiliare.it'
+    r: '🕐 **Orari Righetto Immobiliare**\nLunedì–Venerdì: 9:00–13:00 / 15:00–19:00\nSabato: 9:00–12:30\nDomenica: Chiuso\n\n📞 Tel: 049 884 3484 · Cell: 349 736 5930\n📧 info@righettoimmobiliare.it'
   },
   {
     k: ['dove', 'sede', 'indirizzo', 'ufficio', 'trovare'],
@@ -380,8 +380,8 @@ const FAQ_DATA = [
     r: '📊 **Mercato immobiliare Padova 2025-2026**\n\n• Prezzi medi in **leggera crescita** (+2-3% annuo)\n• Forte domanda zona universitaria e prima cintura\n• Cittadella: mercato molto dinamico (~3.200 €/mq)\n• Centro storico stabile sui 3.500 €/mq\n• Colli Euganei: crescita per il turismo\n\nUsa la nostra **stima online** per conoscere il valore nella tua zona!'
   },
   {
-    k: ['sara', 'chi sei', 'assistente', 'bot', 'intelligenza artificiale'],
-    r: '👋 Ciao! Sono **Sara**, l\'assistente virtuale di Righetto Immobiliare. Sono disponibile **24/7** per rispondere alle tue domande su immobili, prezzi, servizi e procedure. Posso anche fornirti **stime di mercato** per tutti i 101 comuni della provincia di Padova!\n\nSe hai bisogno di parlare con un agente, scrivi *"contattami"* e ti richiamiamo noi.'
+    k: ['linda', 'chi sei', 'assistente', 'bot', 'intelligenza artificiale'],
+    r: '👋 Ciao! Sono **Linda**, l\'assistente virtuale di Righetto Immobiliare. Sono disponibile **24/7** per rispondere alle tue domande su immobili, prezzi, servizi e procedure. Posso anche fornirti **stime di mercato** per tutti i 101 comuni della provincia di Padova!\n\nSe hai bisogno di parlare con un agente, scrivi *"contattami"* e ti richiamiamo noi.'
   },
 
   // ═══════════════════════════════════════════════
@@ -1087,7 +1087,7 @@ class RighettoChat {
 
     // Saluto
     if (/^(ciao|salve|buongiorno|buonasera|hey|hi|hello)/.test(low)) {
-      return '👋 Ciao! Sono **Sara**, l\'assistente di **Righetto Immobiliare**.\n\nPosso aiutarti con:\n• 💰 **Stima valore** del tuo immobile\n• 🔍 **Ricerca immobili** in vendita/affitto\n• 📋 Info su **vendita**, **acquisto**, **affitto**, **mutui**, **tasse**\n• 📞 **Contattare** un agente\n\nCome posso aiutarti?';
+      return '👋 Ciao! Sono **Linda**, l\'assistente di **Righetto Immobiliare**.\n\nPosso aiutarti con:\n• 💰 **Stima valore** del tuo immobile\n• 🔍 **Ricerca immobili** in vendita/affitto\n• 📋 Info su **vendita**, **acquisto**, **affitto**, **mutui**, **tasse**\n• 📞 **Contattare** un agente\n\nCome posso aiutarti?';
     }
 
     // Default
@@ -1250,7 +1250,7 @@ function initChatbotUI() {
 
   const engine = new RighettoChat();
 
-  // Avatar Sara — foto reale
+  // Avatar Linda — foto reale
   const SARA_AVATAR = "img/team/real-state-linda-righetto.webp";
 
   const html = `
@@ -1497,9 +1497,9 @@ function initChatbotUI() {
   <div id="rig-chat-widget">
     <div id="rig-chat-box" role="dialog" aria-label="Chat assistente">
       <div class="chat-header">
-        <div class="chat-header-avatar"><img src="${SARA_AVATAR}" alt="Sara"></div>
+        <div class="chat-header-avatar"><img src="${SARA_AVATAR}" alt="Linda"></div>
         <div class="chat-header-info">
-          <h4>Sara — Righetto Immobiliare</h4>
+          <h4>Linda — Righetto Immobiliare</h4>
           <span>Online — rispondiamo subito</span>
         </div>
         <button class="chat-close" onclick="rigChat.toggle()" aria-label="Chiudi chat">✕</button>
@@ -1523,8 +1523,8 @@ function initChatbotUI() {
         </button>
       </div>
     </div>
-    <button id="rig-chat-btn" onclick="rigChat.toggle()" aria-label="Chatta con Sara">
-      <img id="rig-chat-btn-avatar" src="${SARA_AVATAR}" alt="Sara" id="rig-chat-icon">
+    <button id="rig-chat-btn" onclick="rigChat.toggle()" aria-label="Chatta con Linda">
+      <img id="rig-chat-btn-avatar" src="${SARA_AVATAR}" alt="Linda" id="rig-chat-icon">
       <svg id="rig-chat-icon-close" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" style="display:none">
         <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
       </svg>
@@ -1565,8 +1565,8 @@ function initChatbotUI() {
       var msgs = document.getElementById('rig-chat-msgs');
       var welcome = document.createElement('div');
       welcome.className = 'chat-welcome-card';
-      welcome.innerHTML = '<img src="' + SARA_AVATAR + '" alt="Sara" class="chat-welcome-photo">' +
-        '<div class="chat-welcome-name">Sara</div>' +
+      welcome.innerHTML = '<img src="' + SARA_AVATAR + '" alt="Linda" class="chat-welcome-photo">' +
+        '<div class="chat-welcome-name">Linda</div>' +
         '<div class="chat-welcome-role">Assistente Righetto Immobiliare</div>' +
         '<p class="chat-welcome-text">Ciao! Sono qui per aiutarti.<br>Usa la chat per scoprire i nostri servizi, stimare il valore del tuo immobile o cercare casa.</p>' +
         '<button class="chat-welcome-btn" onclick="rigChat.startChat()">Inizia a chattare</button>';
@@ -1599,7 +1599,7 @@ function initChatbotUI() {
         const av = document.createElement('div');
         av.className = 'chat-avatar';
         const avImg = document.createElement('img');
-        avImg.src = SARA_AVATAR; avImg.alt = 'Sara';
+        avImg.src = SARA_AVATAR; avImg.alt = 'Linda';
         av.appendChild(avImg);
         div.appendChild(av);
       }
@@ -1625,7 +1625,7 @@ function initChatbotUI() {
       const av = document.createElement('div');
       av.className = 'chat-avatar';
       const avImg2 = document.createElement('img');
-      avImg2.src = SARA_AVATAR; avImg2.alt = 'Sara';
+      avImg2.src = SARA_AVATAR; avImg2.alt = 'Linda';
       av.appendChild(avImg2);
       div.appendChild(av);
       const t = document.createElement('div');
@@ -1673,7 +1673,7 @@ function initChatbotUI() {
       const msgs = document.getElementById('rig-chat-msgs');
       const div = document.createElement('div');
       div.className = 'chat-rating';
-      div.innerHTML = '<p>Come ti sei trovato con Sara?</p>' +
+      div.innerHTML = '<p>Come ti sei trovato con Linda?</p>' +
         '<div class="chat-rating-stars">' +
           '<button data-star="1" onclick="rigChat.submitRating(1)">&#9733;</button>' +
           '<button data-star="2" onclick="rigChat.submitRating(2)">&#9733;</button>' +
