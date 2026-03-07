@@ -484,6 +484,53 @@ img{max-width:100%;height:auto;display:block}
   </div>
 </section>
 
+<!-- ══ VIDEO DEL FONDATORE ══ -->
+<section style="padding:5rem 1.5rem;background:#fff;position:relative">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center">
+    <div>
+      <div class="sec-tag">Conosci chi ti seguira</div>
+      <h2 class="sec-h2">Un minuto con <em>Gino Righetto</em></h2>
+      <p style="font-size:0.88rem;color:var(--gray);line-height:1.8;margin:1rem 0 1.5rem;max-width:480px">Scopri in 60 secondi come lavoriamo: dalla valutazione al rogito, con tecnologia, trasparenza e 25 anni di esperienza nel mercato padovano.</p>
+      <div style="display:flex;gap:1.2rem;flex-wrap:wrap;margin-bottom:1.5rem">
+        <div style="display:flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:600;color:var(--dark)"><span style="font-size:1.1rem">⭐</span> 4.8/5 su Google</div>
+        <div style="display:flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:600;color:var(--dark)"><span style="font-size:1.1rem">🏠</span> 350+ immobili venduti</div>
+        <div style="display:flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:600;color:var(--dark)"><span style="font-size:1.1rem">📅</span> Dal 2000</div>
+      </div>
+      <a href="#form" style="display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,var(--fire),var(--fire2));color:#fff;padding:.75rem 2rem;border-radius:12px;font-size:.82rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;transition:all .3s">Richiedi valutazione gratuita</a>
+    </div>
+    <div id="videoWrapVendita" onclick="loadVideoVendita(this)" style="position:relative;border-radius:16px;overflow:hidden;box-shadow:0 12px 48px rgba(0,0,0,0.15);aspect-ratio:16/9;background:#000;cursor:pointer">
+      <img src="https://img.youtube.com/vi/1JM_lXuqLHM/hqdefault.jpg" alt="Video presentazione Righetto Immobiliare" width="640" height="360" loading="lazy" style="width:100%;height:100%;object-fit:cover;opacity:0.85;transition:opacity .3s">
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.2);transition:background .3s"></div>
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;background:rgba(255,255,255,0.92);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 30px rgba(0,0,0,0.4);transition:transform .3s,background .3s;z-index:2">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--fire)" stroke="none"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(transparent,rgba(0,0,0,0.7));z-index:2">
+        <span style="font-size:0.72rem;font-weight:600;color:var(--sun);letter-spacing:.1em;text-transform:uppercase">Guarda il video</span>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+function loadVideoVendita(w){
+  var ifr=document.createElement('iframe');
+  ifr.src='https://www.youtube.com/embed/1JM_lXuqLHM?autoplay=1&rel=0';
+  ifr.allow='accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share';
+  ifr.allowFullscreen=true;ifr.loading='lazy';
+  ifr.title='Righetto Immobiliare — Presentazione';
+  ifr.style.cssText='width:100%;height:100%;border:0;position:absolute;inset:0;z-index:5';
+  w.innerHTML='';w.appendChild(ifr);
+}
+</script>
+<style>
+@media(max-width:768px){
+  #videoWrapVendita{aspect-ratio:16/9}
+  section:has(#videoWrapVendita) > div{grid-template-columns:1fr!important;text-align:center}
+  section:has(#videoWrapVendita) p{margin-left:auto;margin-right:auto}
+  section:has(#videoWrapVendita) [style*="display:flex;gap:1.2rem"]{justify-content:center}
+  section:has(#videoWrapVendita) a[href="#form"]{display:inline-flex}
+}
+</style>
+
 <!-- ══ TESTIMONIANZE ══ -->
 <section class="testi">
   <div class="testi-inner">
@@ -579,6 +626,27 @@ async function sendLead(e){
 (function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js';document.body.appendChild(s);}
 setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
 })();</script>
+<!-- STICKY MOBILE CTA -->
+<style>
+.sticky-cta-mobile{display:none;position:fixed;bottom:0;left:0;right:0;z-index:990;background:rgba(21,36,53,0.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:2px solid var(--fire);padding:10px 16px;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.22,1,0.36,1);box-shadow:0 -4px 24px rgba(0,0,0,0.2)}
+.sticky-cta-mobile.visible{transform:translateY(0)}
+.sticky-cta-inner{display:flex;align-items:center;gap:10px;max-width:600px;margin:0 auto}
+.sticky-cta-inner a{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:12px 10px;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.8px;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:all 0.2s}
+.sticky-cta-inner .scta-primary{background:var(--fire);color:#fff}
+.sticky-cta-inner .scta-wa{background:#25D366;color:#fff}
+.sticky-cta-inner .scta-tel{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.15)}
+@media(max-width:768px){.sticky-cta-mobile{display:block}body{padding-bottom:64px}}
+</style>
+<div class="sticky-cta-mobile" id="stickyCta">
+  <div class="sticky-cta-inner">
+    <a href="#form" class="scta-primary">Valutazione Gratis</a>
+    <a href="https://wa.me/393488621888" class="scta-wa" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="tel:+390498843484" class="scta-tel">Chiama</a>
+  </div>
+</div>
+<script>
+(function(){var b=document.getElementById('stickyCta');if(!b)return;var s=false;window.addEventListener('scroll',function(){if(window.scrollY>400&&!s){s=true;b.classList.add('visible')}else if(window.scrollY<=200&&s){s=false;b.classList.remove('visible')}},{passive:true})})();
+</script>
 <script src="js/cookie-consent.js" defer></script>
 </body>
 </html>
