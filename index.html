@@ -388,6 +388,7 @@ button{font-family:inherit;cursor:pointer}
 .link-all svg{width:14px;height:14px;transition:transform 0.2s}
 .link-all:hover svg{transform:translateX(4px)}
 
+@keyframes pulseUrgency{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.03);opacity:0.9}}
 .rv{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
 .rv.vis{opacity:1;transform:translateY(0)}
 .rv.d1{transition-delay:0.1s}.rv.d2{transition-delay:0.2s}
@@ -430,6 +431,7 @@ button{font-family:inherit;cursor:pointer}
   .srch-f{border-right:none;border-bottom:1px solid rgba(44,74,110,0.08)}
   .btn-srch{min-height:58px}
 
+  #testimonial [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important}
   .props-grid,.srv-grid,.blog-grid{grid-template-columns:1fr}
   .sf-grid,.fc-grid{grid-template-columns:1fr}
   .sr-v{grid-template-columns:1fr}
@@ -801,6 +803,7 @@ button svg, a.btn-p svg, a.btn-g svg {
         <span class="ghost">Ci pensiamo noi.</span>
       </h1>
       <p class="hero-p">Dal 2000 assistiamo chi vende e chi compra casa in tutti i 101 comuni della provincia. Ti seguiamo dalla valutazione al rogito: perizia gratuita, strategia di vendita, ricerca immobile, trattativa e pratiche notarili. Tutto in un unico referente.</p>
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(184,212,74,0.15);border:1px solid rgba(184,212,74,0.3);border-radius:50px;padding:6px 16px;font-size:0.7rem;color:var(--oro);font-weight:600;margin-bottom:18px;backdrop-filter:blur(6px)"><span style="width:8px;height:8px;background:var(--oro);border-radius:50%;animation:pulseUrgency 1.5s infinite"></span> Marzo 2026: valutazione gratuita + report di mercato in regalo</div>
       <div class="hero-btns">
         <a class="btn-g" href="vendere-casa-padova-errori">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/></svg>
@@ -1090,11 +1093,52 @@ button svg, a.btn-p svg, a.btn-g svg {
   </div>
 </section>
 
+<!-- TESTIMONIANZE -->
+<section id="testimonial" style="padding:80px 28px;background:var(--testo)">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="rv sr" style="text-align:center;margin-bottom:48px">
+      <div class="eyebrow" style="color:var(--oro);justify-content:center">Testimonianze verificate</div>
+      <h2 class="sec-h2 w">Cosa dicono i nostri <em style="color:var(--oro);font-style:italic">clienti</em></h2>
+      <p class="sec-p" style="color:rgba(255,255,255,0.55);margin:12px auto 0;text-align:center">127 recensioni, media 4.9 stelle su Google. Storie vere di chi ha venduto e comprato con noi.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="sr-stagger">
+      <div class="rv d1" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;transition:all 0.3s" onmouseover="this.style.background='rgba(255,255,255,0.09)';this.style.transform='translateY(-4px)'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.transform='translateY(0)'">
+        <div style="color:#FFD23F;font-size:0.9rem;margin-bottom:10px;letter-spacing:2px">★★★★★</div>
+        <p style="font-size:0.84rem;color:rgba(255,255,255,0.8);line-height:1.8;font-style:italic;margin-bottom:16px">"Venduto in 38 giorni al prezzo che volevamo. Professionali, disponibili e trasparenti. Consigliatissimi!"</p>
+        <div style="display:flex;align-items:center;gap:10px">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" alt="Marco B." width="36" height="36" loading="lazy" style="border-radius:50%;border:2px solid var(--oro);object-fit:cover">
+          <div><div style="font-size:0.75rem;font-weight:700;color:white">Marco e Silvia B.</div><div style="font-size:0.65rem;color:rgba(255,255,255,0.4)">Appartamento — Padova Centro</div></div>
+        </div>
+      </div>
+      <div class="rv d2" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;transition:all 0.3s" onmouseover="this.style.background='rgba(255,255,255,0.09)';this.style.transform='translateY(-4px)'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.transform='translateY(0)'">
+        <div style="color:#FFD23F;font-size:0.9rem;margin-bottom:10px;letter-spacing:2px">★★★★★</div>
+        <p style="font-size:0.84rem;color:rgba(255,255,255,0.8);line-height:1.8;font-style:italic;margin-bottom:16px">"Avevo provato da solo per 6 mesi. Con Righetto, venduto in 3 settimane a un prezzo superiore. Sara e il chatbot sono una marcia in piu."</p>
+        <div style="display:flex;align-items:center;gap:10px">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face" alt="Andrea T." width="36" height="36" loading="lazy" style="border-radius:50%;border:2px solid var(--oro);object-fit:cover">
+          <div><div style="font-size:0.75rem;font-weight:700;color:white">Andrea T.</div><div style="font-size:0.65rem;color:rgba(255,255,255,0.4)">Villa bifamiliare — Selvazzano</div></div>
+        </div>
+      </div>
+      <div class="rv d3" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;transition:all 0.3s" onmouseover="this.style.background='rgba(255,255,255,0.09)';this.style.transform='translateY(-4px)'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.transform='translateY(0)'">
+        <div style="color:#FFD23F;font-size:0.9rem;margin-bottom:10px;letter-spacing:2px">★★★★★</div>
+        <p style="font-size:0.84rem;color:rgba(255,255,255,0.8);line-height:1.8;font-style:italic;margin-bottom:16px">"Documenti, notaio, tutto gestito. Non pensavamo che vendere casa potesse essere cosi semplice. Gino e il team fanno la differenza."</p>
+        <div style="display:flex;align-items:center;gap:10px">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face" alt="Famiglia Zanetti" width="36" height="36" loading="lazy" style="border-radius:50%;border:2px solid var(--oro);object-fit:cover">
+          <div><div style="font-size:0.75rem;font-weight:700;color:white">Famiglia Zanetti</div><div style="font-size:0.65rem;color:rgba(255,255,255,0.4)">Casa indipendente — Limena</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rv sr" style="text-align:center;margin-top:36px">
+      <a href="https://www.google.com/maps/place/Righetto+Immobiliare" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;font-size:0.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--oro);border-bottom:1px solid rgba(184,212,74,0.3);padding-bottom:4px;transition:all 0.2s">Leggi tutte le 127 recensioni su Google <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+    </div>
+  </div>
+</section>
+
 <!-- STIMA TEASER — rimanda alla pagina dedicata -->
 <section id="stima">
   <div class="stima-inner">
     <div class="stima-layout" style="align-items:center">
       <div class="rv sr">
+        <div style="display:inline-block;background:var(--oro);color:var(--testo);padding:6px 14px;border-radius:6px;font-size:0.65rem;font-weight:800;letter-spacing:0.05em;margin-bottom:14px;animation:pulseUrgency 2.5s infinite">📈 Prezzi +7% nel 2026 — Scopri il valore aggiornato</div>
         <div class="eyebrow">Stima gratuita</div>
         <h2 class="sec-h2">Quanto vale<br>la tua <em style="color:var(--oro);font-style:italic">casa?</em></h2>
         <p class="sec-p">Scoprilo in 30 secondi con il nostro calcolatore basato su dati reali FIAIP 2026 per tutti i 101 comuni della provincia di Padova.</p>
@@ -1353,6 +1397,25 @@ function loadVideo(wrap) {
 </script>
 <script src="js/nav-mobile.js" defer></script>
 <script src="js/cookie-consent.js" defer></script>
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-cta-mobile" id="stickyCta">
+  <div class="sticky-cta-inner">
+    <a href="vendere-casa-padova-errori" class="scta-primary">Valutazione Gratis</a>
+    <a href="https://wa.me/393488621888" class="scta-wa" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="tel:+390498843484" class="scta-tel">Chiama</a>
+  </div>
+</div>
+<script>
+(function(){
+  var bar=document.getElementById('stickyCta');if(!bar)return;
+  var shown=false;
+  function check(){
+    if(window.scrollY>600&&!shown){shown=true;bar.classList.add('visible')}
+    else if(window.scrollY<=300&&shown){shown=false;bar.classList.remove('visible')}
+  }
+  window.addEventListener('scroll',check,{passive:true});
+})();
+</script>
 <script src="js/scroll-reveal.js" defer></script>
 </body>
 </html>

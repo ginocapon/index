@@ -811,6 +811,27 @@ async function sendMutuoLead(e) {
 (function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js';document.body.appendChild(s);}
 setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
 })();</script>
+<!-- STICKY MOBILE CTA -->
+<style>
+.sticky-cta-mobile{display:none;position:fixed;bottom:0;left:0;right:0;z-index:990;background:rgba(21,36,53,0.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:2px solid var(--green);padding:10px 16px;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.22,1,0.36,1);box-shadow:0 -4px 24px rgba(0,0,0,0.2)}
+.sticky-cta-mobile.visible{transform:translateY(0)}
+.sticky-cta-inner{display:flex;align-items:center;gap:10px;max-width:600px;margin:0 auto}
+.sticky-cta-inner a{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:12px 10px;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.8px;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:all 0.2s}
+.sticky-cta-inner .scta-primary{background:var(--green);color:#fff}
+.sticky-cta-inner .scta-wa{background:#25D366;color:#fff}
+.sticky-cta-inner .scta-tel{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.15)}
+@media(max-width:768px){.sticky-cta-mobile{display:block}body{padding-bottom:64px}}
+</style>
+<div class="sticky-cta-mobile" id="stickyCta">
+  <div class="sticky-cta-inner">
+    <a href="#formContatto" class="scta-primary">Consulenza Gratis</a>
+    <a href="https://wa.me/393488621888" class="scta-wa" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="tel:+390498843484" class="scta-tel">Chiama</a>
+  </div>
+</div>
+<script>
+(function(){var b=document.getElementById('stickyCta');if(!b)return;var s=false;window.addEventListener('scroll',function(){if(window.scrollY>400&&!s){s=true;b.classList.add('visible')}else if(window.scrollY<=200&&s){s=false;b.classList.remove('visible')}},{passive:true})})();
+</script>
 <script src="js/cookie-consent.js" defer></script>
 </body>
 </html>
