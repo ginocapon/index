@@ -31,8 +31,8 @@
 <meta name="twitter:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
 <link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/cormorant-garamond-600.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/fonts.css">
-<link rel="stylesheet" href="css/nav-mobile.css">
+<link rel="stylesheet" href="css/fonts.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/nav-mobile.css" media="print" onload="this.media='all'">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script type="application/ld+json">
 [
@@ -128,6 +128,8 @@ a{color:inherit;text-decoration:none}img{max-width:100%;display:block}button{fon
 
 .sara-popup{position:fixed;bottom:24px;right:24px;z-index:999;display:none;animation:saraBounce 0.6s cubic-bezier(0.34,1.56,0.64,1)}
 @keyframes saraBounce{from{opacity:0;transform:scale(0.3) translateY(40px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes urgencyShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 .sara-card{background:white;border-radius:20px;box-shadow:0 12px 48px rgba(21,36,53,0.2);padding:20px 24px;max-width:340px;position:relative;border:2px solid var(--oro)}
 .sara-card::after{content:'';position:absolute;bottom:-8px;right:40px;width:16px;height:16px;background:white;border-right:2px solid var(--oro);border-bottom:2px solid var(--oro);transform:rotate(45deg)}
 .sara-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
@@ -250,6 +252,7 @@ footer a{color:var(--oro)}
       </div>
     </div>
     <div class="stima-card">
+      <div style="background:linear-gradient(90deg,var(--oro),#CDED62,var(--oro));background-size:200% 200%;animation:urgencyShift 3s ease infinite;padding:8px 14px;text-align:center;font-size:0.72rem;font-weight:700;color:var(--testo);border-radius:10px 10px 0 0;letter-spacing:0.03em">📈 Prezzi in crescita del +7% nel 2026 — Scopri il valore aggiornato della tua casa</div>
       <div class="stima-card-title">📊 Calcola il Valore</div>
       <div class="sf-grid">
         <div class="sf-g" style="grid-column:1/-1"><label for="st-comune">Comune</label>
@@ -273,8 +276,40 @@ footer a{color:var(--oro)}
         </div>
         <div class="sr-mq" id="sr-mq-t"></div>
         <div class="sr-note">⚠️ Stima indicativa basata su dati FIAIP 2026. Per una perizia immobiliare accurata, richiedi la valutazione professionale gratuita.</div>
-        <button id="sr-pdf-btn" class="btn-calc" style="margin-top:16px;background:var(--blu);color:white" onclick="scaricaPdfStima()">📄 Scarica Scheda PDF</button>
+        <button id="sr-pdf-btn" class="btn-calc" style="margin-top:16px;background:var(--blu);color:white" onclick="mostraEmailGate()">📄 Scarica Scheda PDF Dettagliata</button>
         <div id="sr-pdf-notice" style="display:none;margin-top:10px;font-size:0.72rem;color:var(--grigio);text-align:center"></div>
+
+        <!-- Email Gate Modal -->
+        <div id="emailGateOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(4px)">
+          <div style="background:white;border-radius:16px;padding:36px 28px;max-width:420px;width:90%;position:relative;box-shadow:0 24px 64px rgba(0,0,0,0.25);animation:fadeUp 0.4s ease">
+            <button onclick="chiudiEmailGate()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.4rem;color:var(--grigio);cursor:pointer;line-height:1">&times;</button>
+            <div style="text-align:center;margin-bottom:20px">
+              <div style="font-size:2.5rem;margin-bottom:8px">📊</div>
+              <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--testo);margin-bottom:6px">Ricevi la Scheda PDF</h3>
+              <p style="font-size:0.82rem;color:var(--grigio);line-height:1.6">Inserisci la tua email per ricevere il report dettagliato con la valutazione del tuo immobile.</p>
+            </div>
+            <form id="emailGateForm" onsubmit="inviaEmailGate(event)">
+              <div style="margin-bottom:12px">
+                <label style="display:block;font-size:0.65rem;text-transform:uppercase;letter-spacing:2px;color:var(--grigio);font-weight:700;margin-bottom:4px">Nome *</label>
+                <input type="text" id="eg-nome" placeholder="Mario" required style="width:100%;padding:12px 14px;border:2px solid #E5E7EB;border-radius:10px;font-family:'Montserrat',sans-serif;font-size:0.88rem;transition:border 0.2s" onfocus="this.style.borderColor='var(--blu)'" onblur="this.style.borderColor='#E5E7EB'">
+              </div>
+              <div style="margin-bottom:12px">
+                <label style="display:block;font-size:0.65rem;text-transform:uppercase;letter-spacing:2px;color:var(--grigio);font-weight:700;margin-bottom:4px">Email *</label>
+                <input type="email" id="eg-email" placeholder="mario@email.it" required style="width:100%;padding:12px 14px;border:2px solid #E5E7EB;border-radius:10px;font-family:'Montserrat',sans-serif;font-size:0.88rem;transition:border 0.2s" onfocus="this.style.borderColor='var(--blu)'" onblur="this.style.borderColor='#E5E7EB'">
+              </div>
+              <div style="margin-bottom:16px">
+                <label style="display:block;font-size:0.65rem;text-transform:uppercase;letter-spacing:2px;color:var(--grigio);font-weight:700;margin-bottom:4px">Telefono (opzionale)</label>
+                <input type="tel" id="eg-tel" placeholder="333 123 4567" style="width:100%;padding:12px 14px;border:2px solid #E5E7EB;border-radius:10px;font-family:'Montserrat',sans-serif;font-size:0.88rem;transition:border 0.2s" onfocus="this.style.borderColor='var(--blu)'" onblur="this.style.borderColor='#E5E7EB'">
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:6px;font-size:0.68rem;color:var(--grigio);margin-bottom:16px">
+                <input type="checkbox" id="eg-gdpr" required style="accent-color:var(--blu);flex-shrink:0;margin-top:2px;width:15px;height:15px">
+                <label for="eg-gdpr">Acconsento al trattamento dei dati. <a href="privacy" style="color:var(--blu)">Privacy</a></label>
+              </div>
+              <button type="submit" id="eg-btn" class="btn-calc" style="width:100%;background:var(--oro);color:var(--testo);font-weight:800;padding:14px;border-radius:10px">📄 Scarica PDF Gratuito</button>
+            </form>
+            <p style="text-align:center;font-size:0.65rem;color:var(--grigio);margin-top:10px">🔒 I tuoi dati sono al sicuro. Niente spam, lo promettiamo.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -350,8 +385,7 @@ function calcolaStima(){
   document.getElementById('stima-result').scrollIntoView({behavior:'smooth',block:'nearest'});
   // Salva dati per PDF
   window._stimaDati={comune:comune,tipo:tipo,mq:mq,stato:stato,stima:{min:mn,med:md,max:mx,euroMq:Math.round(ppMq)}};
-  // Auto-download PDF dopo 3 secondi
-  setTimeout(function(){scaricaPdfStima()},3000);
+  // Mostra Sara dopo il calcolo (il PDF ora richiede email)
   setTimeout(showSara,5000);
   if(typeof gtag==='function')gtag('event','stima_calcolata',{event_category:'conversion',event_label:comune+' - '+tipo,value:md});
 }
@@ -373,6 +407,68 @@ function scaricaPdfStima(){
 function showSara(){var p=document.getElementById('saraPopup');if(p.style.display==='flex')return;p.style.display='flex'}
 function closeSara(){document.getElementById('saraPopup').style.display='none'}
 function toggleFaq(b){var i=b.parentElement,o=i.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(x){x.classList.remove('open')});if(!o)i.classList.add('open')}
+
+function mostraEmailGate(){
+  var o=document.getElementById('emailGateOverlay');
+  o.style.display='flex';
+  document.body.style.overflow='hidden';
+  o.addEventListener('click',function(e){if(e.target===o)chiudiEmailGate()});
+}
+function chiudiEmailGate(){
+  document.getElementById('emailGateOverlay').style.display='none';
+  document.body.style.overflow='';
+}
+async function inviaEmailGate(e){
+  e.preventDefault();
+  var nome=document.getElementById('eg-nome').value.trim();
+  var email=document.getElementById('eg-email').value.trim();
+  var tel=document.getElementById('eg-tel').value.trim();
+  if(!nome||!email){alert('Inserisci nome e email');return}
+  if(!document.getElementById('eg-gdpr').checked){alert('Accetta la privacy policy');return}
+  var btn=document.getElementById('eg-btn');
+  btn.disabled=true;btn.textContent='Invio in corso...';
+  // Salva lead in Supabase
+  try{
+    if(sb){
+      await sb.from('richieste').insert([{nome:nome,email:email,telefono:tel||null,messaggio:'[PDF VALUTAZIONE] '+JSON.stringify(window._stimaDati||{}),provenienza:'calcolatore-pdf',newsletter:true,letto:false}]);
+      await sb.from('newsletter_subscribers').upsert([{email:email,nome:nome,telefono:tel||null,interesse:'valutazione',provenienza:'calcolatore-pdf',fonte:'calcolatore-pdf',attivo:true,created_at:new Date().toISOString()}],{onConflict:'email'}).catch(function(){});
+    }
+  }catch(ex){}
+  // Iscrivi a Brevo
+  try{
+    if(typeof SERVIZI_CONFIG!=='undefined'&&SERVIZI_CONFIG.BREVO_API_KEY){
+      fetch('https://api.brevo.com/v3/contacts',{method:'POST',headers:{'accept':'application/json','content-type':'application/json','api-key':SERVIZI_CONFIG.BREVO_API_KEY},body:JSON.stringify({email:email,attributes:{NOME:nome,TELEFONO:tel||'',INTERESSE:'valutazione',FONTE:'calcolatore-pdf'},listIds:[SERVIZI_CONFIG.BREVO_LIST_ID||11],updateEnabled:true})});
+    }
+  }catch(ex){}
+  // GA event
+  if(typeof gtag==='function')gtag('event','pdf_lead',{event_category:'conversion',event_label:email});
+  // Genera e scarica il PDF
+  chiudiEmailGate();
+  scaricaPdfStima();
+  btn.disabled=false;btn.textContent='📄 Scarica PDF Gratuito';
+}
+</script>
+
+<!-- STICKY MOBILE CTA -->
+<style>
+.sticky-cta-mobile{display:none;position:fixed;bottom:0;left:0;right:0;z-index:990;background:rgba(21,36,53,0.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:2px solid var(--oro);padding:10px 16px;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.22,1,0.36,1);box-shadow:0 -4px 24px rgba(0,0,0,0.2)}
+.sticky-cta-mobile.visible{transform:translateY(0)}
+.sticky-cta-inner{display:flex;align-items:center;gap:10px;max-width:600px;margin:0 auto}
+.sticky-cta-inner a{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:12px 10px;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.8px;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:all 0.2s}
+.sticky-cta-inner .scta-primary{background:var(--oro);color:#152435}
+.sticky-cta-inner .scta-wa{background:#25D366;color:#fff}
+.sticky-cta-inner .scta-tel{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.15)}
+@media(max-width:768px){.sticky-cta-mobile{display:block}body{padding-bottom:64px}}
+</style>
+<div class="sticky-cta-mobile" id="stickyCta">
+  <div class="sticky-cta-inner">
+    <a href="#stima" class="scta-primary">Calcola Valore</a>
+    <a href="https://wa.me/393488621888" class="scta-wa" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="tel:+390498843484" class="scta-tel">Chiama</a>
+  </div>
+</div>
+<script>
+(function(){var b=document.getElementById('stickyCta');if(!b)return;var s=false;window.addEventListener('scroll',function(){if(window.scrollY>400&&!s){s=true;b.classList.add('visible')}else if(window.scrollY<=200&&s){s=false;b.classList.remove('visible')}},{passive:true})})();
 </script>
 </body>
 </html>
