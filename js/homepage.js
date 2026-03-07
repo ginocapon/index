@@ -339,10 +339,14 @@ function generateSlug(titolo) {
     "l'impegno quotidiano di un'agenzia immobiliare: tra burocrazia e incertezza mutui": { img: 'img/blog/ufficio-righetto-immobiliare.webp', url: 'blog-impegno-quotidiano-agenzia-immobiliare' },
     'appartamento nuova costruzione limena: 101 mq con giardino 310 mq in classe a4': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-appartamento-nuova-costruzione-limena' },
     'comprare casa a padova nel 2026: guida definitiva passo dopo passo': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-comprare-casa-padova-guida-2026' },
-    'quanto costa vendere casa a padova nel 2026? costi, tasse e tempi reali': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-costi-vendere-casa-padova-2026' }
+    'quanto costa vendere casa a padova nel 2026? costi, tasse e tempi reali': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-costi-vendere-casa-padova-2026' },
+    'home staging padova: come vendere casa prima e meglio': { img: 'img/blog/home-staging.webp', url: 'blog-home-staging-padova' },
+    'vendere casa a padova: 7 errori costosi da evitare': { img: 'img/team/titolari.webp', url: 'vendere-casa-padova-errori' }
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    { titolo: 'Home Staging Padova: Come Vendere Casa Prima e Meglio', categoria: 'Guida alla vendita', data: '2026-03-06', stato: 'pubblicato', immagine_copertina: 'img/blog/home-staging.webp', url_statico: 'blog-home-staging-padova' },
+    { titolo: 'Vendere Casa a Padova: 7 Errori Costosi da Evitare', categoria: 'Guida alla vendita', data: '2026-03-06', stato: 'pubblicato', immagine_copertina: 'img/team/titolari.webp', url_statico: 'vendere-casa-padova-errori' },
     { titolo: 'Comprare Casa a Padova nel 2026: Guida Definitiva Passo dopo Passo', categoria: 'Consigli acquisto', data: '2026-03-04', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-comprare-casa-padova-guida-2026' },
     { titolo: 'Quanto Costa Vendere Casa a Padova nel 2026? Costi, Tasse e Tempi Reali', categoria: 'Guida alla vendita', data: '2026-03-04', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-costi-vendere-casa-padova-2026' },
     { titolo: "L'impegno quotidiano di un'agenzia immobiliare: tra burocrazia e incertezza mutui", categoria: "Vita d'Agenzia", data: '2026-03-03', stato: 'pubblicato', immagine_copertina: 'img/blog/ufficio-righetto-immobiliare.webp', url_statico: 'blog-impegno-quotidiano-agenzia-immobiliare' },

@@ -1087,7 +1087,7 @@ class RighettoChat {
 
     // Saluto
     if (/^(ciao|salve|buongiorno|buonasera|hey|hi|hello)/.test(low)) {
-      return '👋 Ciao! Sono **Linda**, l\'assistente di **Righetto Immobiliare**.\n\nPosso aiutarti con:\n• 💰 **Stima valore** del tuo immobile\n• 🔍 **Ricerca immobili** in vendita/affitto\n• 📋 Info su **vendita**, **acquisto**, **affitto**, **mutui**, **tasse**\n• 📞 **Contattare** un agente\n\nCome posso aiutarti?';
+      return '👋 Ciao! Sono **Linda**, l\'assistente di **Righetto Immobiliare**.\n\nPosso aiutarti con:\n• 💰 **Stima valore** del tuo immobile\n• 🔍 **Ricerca immobili** in vendita/affitto\n• 🏦 **Consulenza mutuo** gratuita — [simulatore rata](landing-mutuo.html)\n• 📋 Info su **vendita**, **acquisto**, **affitto**, **tasse**\n• 📞 **Contattare** un agente\n\nCome posso aiutarti?';
     }
 
     // Default

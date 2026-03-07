@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://righettoimmobiliare.it/</loc><lastmod>2026-03-04</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://righettoimmobiliare.it/</loc><lastmod>2026-03-07</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://righettoimmobiliare.it/immobili.html</loc><lastmod>2026-03-04</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
   <url><loc>https://righettoimmobiliare.it/servizi.html</loc><lastmod>2026-02-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://righettoimmobiliare.it/vendere-casa-padova-errori.html</loc><lastmod>2026-03-06</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://righettoimmobiliare.it/servizio-vendita.html</loc><lastmod>2026-02-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://righettoimmobiliare.it/servizio-locazioni.html</loc><lastmod>2026-02-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://righettoimmobiliare.it/servizio-preliminari.html</loc><lastmod>2026-02-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -18,6 +19,7 @@
   <url><loc>https://righettoimmobiliare.it/blog-ca-marcello-mestre.html</loc><lastmod>2026-02-24</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
   <url><loc>https://righettoimmobiliare.it/blog-impegno-quotidiano-agenzia-immobiliare.html</loc><lastmod>2026-03-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://righettoimmobiliare.it/blog-appartamento-nuova-costruzione-limena.html</loc><lastmod>2026-03-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://righettoimmobiliare.it/zona-limena.html</loc><lastmod>2026-03-07</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <!-- Zone / Quartieri Padova -->
   <url><loc>https://righettoimmobiliare.it/zona-centro-storico-padova.html</loc><lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://righettoimmobiliare.it/zona-arcella-padova.html</loc><lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -33,6 +35,13 @@
   <url><loc>https://righettoimmobiliare.it/blog-mercato-immobiliare-padova-2026.html</loc><lastmod>2026-03-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://righettoimmobiliare.it/blog-comprare-casa-padova-guida-2026.html</loc><lastmod>2026-03-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://righettoimmobiliare.it/blog-costi-vendere-casa-padova-2026.html</loc><lastmod>2026-03-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://righettoimmobiliare.it/blog-home-staging-padova.html</loc><lastmod>2026-03-06</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <!-- Landing pages -->
+  <url><loc>https://righettoimmobiliare.it/landing-vendita.html</loc><lastmod>2026-03-07</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://righettoimmobiliare.it/landing-mutuo.html</loc><lastmod>2026-03-07</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://righettoimmobiliare.it/landing-valutazione.html</loc><lastmod>2026-03-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://righettoimmobiliare.it/landing-agente.html</loc><lastmod>2026-03-04</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://righettoimmobiliare.it/landing-vendere-casa-padova.html</loc><lastmod>2026-03-07</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <!-- Pagina pillar agenzia -->
   <url><loc>https://righettoimmobiliare.it/agenzia-immobiliare-padova.html</loc><lastmod>2026-03-04</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://righettoimmobiliare.it/faq.html</loc><lastmod>2026-02-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
