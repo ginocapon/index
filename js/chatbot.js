@@ -1738,19 +1738,20 @@ if (document.readyState === 'loading') {
   initChatbotUI();
 }
 
-// ── Auto-open chatbot dopo 3s su desktop (solo homepage, una volta per sessione) ──
+// ── Auto-open chatbot dopo ~4s su homepage (solo prima visita sessione) ──
+// NB: chatbot.js è caricato lazy dopo ~3s, quindi il delay reale è ~4s totali
 function autoOpenChatDesktop() {
   var path = location.pathname.replace(/\/+$/, '') || '/';
   var isHome = path === '/' || path === '/index.html' || path === '/index';
-  var isMobile = window.innerWidth <= 768;
   var alreadyShown = sessionStorage.getItem('chatbot_auto_opened');
-  if (isHome && !isMobile && !alreadyShown && window.rigChat) {
+  if (isHome && !alreadyShown && window.rigChat) {
     sessionStorage.setItem('chatbot_auto_opened', '1');
-    if (!window.rigChat.open) {
+    var box = document.getElementById('rig-chat-box');
+    if (!box || !box.classList.contains('open')) {
       window.rigChat.toggle();
     }
   }
 }
-setTimeout(autoOpenChatDesktop, 3000);
+setTimeout(autoOpenChatDesktop, 1000);
 
 })();
