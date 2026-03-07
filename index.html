@@ -43,6 +43,7 @@
 <link rel="stylesheet" href="css/nav-mobile.css" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/scroll-reveal.css" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/below-fold.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/welcome-popup.css" media="print" onload="this.media='all'">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <style>
 :root {
@@ -667,7 +668,7 @@ button svg, a.btn-p svg, a.btn-g svg {
           "name": "Avete un assistente AI per la ricerca immobiliare?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Sì, il nostro sito dispone di Sara, un assistente AI interattivo disponibile 24/7. Sara risponde a domande sui prezzi, aiuta nella ricerca dell'immobile giusto, fornisce stime di mercato per tutti i 101 comuni della provincia e indirizza verso le proprietà più adatte alle vostre esigenze."
+            "text": "Sì, il nostro sito dispone di Linda, un assistente AI interattivo disponibile 24/7. Linda risponde a domande sui prezzi, aiuta nella ricerca dell'immobile giusto, fornisce stime di mercato per tutti i 101 comuni della provincia e indirizza verso le proprietà più adatte alle vostre esigenze."
           }
         },
         {
@@ -747,7 +748,7 @@ button svg, a.btn-p svg, a.btn-g svg {
     {
       "@type": "VideoObject",
       "name": "Vendi Casa in 30 giorni — Righetto Immobiliare Padova",
-      "description": "Scopri come Righetto Immobiliare ti aiuta a vendere casa in 30 giorni: vendita, affitto e gestione immobili a Padova e in tutti i 101 comuni della provincia. Virtual tour 360°, assistente AI Sara e 25 anni di esperienza.",
+      "description": "Scopri come Righetto Immobiliare ti aiuta a vendere casa in 30 giorni: vendita, affitto e gestione immobili a Padova e in tutti i 101 comuni della provincia. Virtual tour 360°, assistente AI Linda e 25 anni di esperienza.",
       "thumbnailUrl": "https://img.youtube.com/vi/1JM_lXuqLHM/maxresdefault.jpg",
       "uploadDate": "2025-01-01",
       "contentUrl": "https://www.youtube.com/watch?v=1JM_lXuqLHM",
@@ -766,7 +767,7 @@ button svg, a.btn-p svg, a.btn-g svg {
       "@id": "https://righettoimmobiliare.it/#website",
       "url": "https://righettoimmobiliare.it",
       "name": "Righetto Immobiliare — Agenzia Immobiliare Padova",
-      "description": "Vendita e affitto immobili a Padova e provincia dal 2000. 101 comuni coperti, virtual tour 360°, assistente AI Sara disponibile 24/7.",
+      "description": "Vendita e affitto immobili a Padova e provincia dal 2000. 101 comuni coperti, virtual tour 360°, assistente AI Linda disponibile 24/7.",
       "potentialAction": {
         "@type": "SearchAction",
         "target": "https://righettoimmobiliare.it/immobili.html?q={search_term_string}",
@@ -1014,7 +1015,7 @@ button svg, a.btn-p svg, a.btn-g svg {
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--oro)" stroke-width="2" style="width:18px;height:18px;flex-shrink:0" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
       </div>
       <span>Non sai da dove iniziare?&nbsp;
-        <strong style="color:var(--oro);cursor:pointer" onclick="window.saraBot && saraBot.open()">Chiedi a Sara</strong>
+        <strong style="color:var(--oro);cursor:pointer" onclick="window.saraBot && saraBot.open()">Chiedi a Linda</strong>
         &nbsp;— la nostra AI ti guida nella ricerca e stima il valore di qualsiasi immobile.
       </span>
     </div>
@@ -1032,7 +1033,7 @@ button svg, a.btn-p svg, a.btn-g svg {
       </div>
       <div class="eyebrow">Scopri chi siamo</div>
       <h2 class="sec-h2">La nostra<br>agenzia</h2>
-      <p class="sec-p">Scopri in un minuto come lavoriamo: dalla valutazione al rogito, con tecnologia, trasparenza e 25 anni di esperienza nel territorio padovano. Assistente AI Sara disponibile 24/7 per ogni domanda.</p>
+      <p class="sec-p">Scopri in un minuto come lavoriamo: dalla valutazione al rogito, con tecnologia, trasparenza e 25 anni di esperienza nel territorio padovano. Assistente AI Linda disponibile 24/7 per ogni domanda.</p>
     </div>
     <div class="video-wrap sr" id="videoWrap" onclick="loadVideo(this)">
       <img class="video-thumb" src="https://img.youtube.com/vi/1JM_lXuqLHM/hqdefault.jpg" alt="Vendi Casa in 30 giorni — Righetto Immobiliare Padova" width="640" height="360" loading="lazy">
@@ -1477,5 +1478,6 @@ function loadVideo(wrap) {
 })();
 </script>
 <script src="js/scroll-reveal.js" defer></script>
+<script src="js/welcome-popup.js" defer></script>
 </body>
 </html>

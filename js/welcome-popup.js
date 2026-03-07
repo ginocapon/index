@@ -1,6 +1,6 @@
 /**
  * WELCOME POPUP — Righetto Immobiliare
- * Avatar Sara ANIMATA: lip-sync, blinking, head movement.
+ * Avatar Linda ANIMATA: lip-sync, blinking, head movement.
  * Audio: MP3 pre-generato (priorità) → fallback Web Speech API.
  * Si mostra una sola volta per sessione (sessionStorage).
  */
@@ -15,17 +15,17 @@
   // ── Una volta per sessione ──
   if (sessionStorage.getItem('welcome_shown')) return;
 
-  // ── Avatar Sara — FOTO REALE con animazioni CSS ──
+  // ── Avatar Linda — FOTO REALE con animazioni CSS ──
   var SARA_PHOTO = 'img/team/real-state-linda-righetto.webp';
   var SARA_HTML = '<div class="welcome-avatar-photo" id="sara-photo-wrap">' +
-    '<img src="' + SARA_PHOTO + '" alt="Sara — Assistente Righetto Immobiliare" class="welcome-avatar-img" id="sara-photo">' +
+    '<img src="' + SARA_PHOTO + '" alt="Linda — Assistente Righetto Immobiliare" class="welcome-avatar-img" id="sara-photo">' +
     '<div class="sara-speaking-ring" id="sara-ring"></div>' +
     '<div class="sara-glow" id="sara-glow"></div>' +
   '</div>';
 
-  // ── Testo che Sara "dice" ──
+  // ── Testo che Linda "dice" ──
   var WELCOME_LINES = [
-    "Ciao! Sono Sara, la tua assistente virtuale di Righetto Immobiliare.",
+    "Ciao! Sono Linda, la tua assistente virtuale di Righetto Immobiliare.",
     "\n\nDal 2000 aiutiamo chi cerca, vende o affitta casa a Padova e in tutta la provincia.",
     "\n\nQui trovi valutazioni gratuite, consulenza su vendita e locazione, gestione completa del tuo immobile e molto altro.",
     "\n\nSe hai domande, la nostra chatbot \u00e8 pronta a risponderti subito! E per tutto il resto, i nostri consulenti sono sempre a disposizione.",
@@ -77,7 +77,7 @@
         '<div class="welcome-avatar-wrap">' + SARA_HTML + '</div>' +
         '<div class="welcome-header-text">' +
           '<h3>Benvenuto!</h3>' +
-          '<p class="welcome-online">Sara &mdash; assistente virtuale</p>' +
+          '<p class="welcome-online">Linda &mdash; assistente virtuale</p>' +
         '</div>' +
       '</div>' +
       '<div class="welcome-body">' +
@@ -88,7 +88,7 @@
       '</div>' +
       '<div class="welcome-actions" id="welcome-actions">' +
         '<button class="welcome-btn welcome-btn-primary" id="welcome-chatbot">' +
-          '\ud83d\udcac Chatta con Sara' +
+          '\ud83d\udcac Chatta con Linda' +
         '</button>' +
         '<button class="welcome-btn welcome-btn-secondary" id="welcome-browse">' +
           '\ud83d\udc4b Buona navigazione!' +
@@ -120,7 +120,7 @@
     saraGlow = document.getElementById('sara-glow');
   }
 
-  // Quando Sara parla: anello luminoso pulsante + movimenti dinamici corpo/testa
+  // Quando Linda parla: anello luminoso pulsante + movimenti dinamici corpo/testa
   function startAnimations() {
     isSpeaking = true;
     if (saraPhoto) saraPhoto.classList.remove('idle');
@@ -168,7 +168,7 @@
 
     var btn = document.createElement('button');
     btn.className = 'sara-mobile-play';
-    btn.setAttribute('aria-label', 'Ascolta Sara');
+    btn.setAttribute('aria-label', 'Ascolta Linda');
     btn.innerHTML =
       '<svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>' +
       '<span class="sara-play-label">Tocca per ascoltare</span>';
@@ -263,7 +263,7 @@
   // Frasi separate per parlato naturale (con pause tra ognuna)
   var SPEECH_PHRASES = [
     { text: "Ciao!", rate: 0.92, pitch: 1.15, pause: 500 },
-    { text: "Sono Sara, la tua assistente virtuale di Righetto Immobiliare.", rate: 0.88, pitch: 1.08, pause: 700 },
+    { text: "Sono Linda, la tua assistente virtuale di Righetto Immobiliare.", rate: 0.88, pitch: 1.08, pause: 700 },
     { text: "Dal 2000 aiutiamo chi cerca, vende o affitta casa a Padova e in tutta la provincia.", rate: 0.85, pitch: 1.05, pause: 800 },
     { text: "Qui trovi valutazioni gratuite, consulenza su vendita e locazione, gestione completa del tuo immobile e molto altro.", rate: 0.87, pitch: 1.06, pause: 700 },
     { text: "Se hai domande, la nostra chatbot è pronta a risponderti subito!", rate: 0.90, pitch: 1.10, pause: 400 },
@@ -381,7 +381,7 @@
 
   // ══════════════════════════════════════════════
   // PARTICLE DISINTEGRATION — Effetto "Thanos snap"
-  // Sara si dissolve in particelle che volano via
+  // Linda si dissolve in particelle che volano via
   // ══════════════════════════════════════════════
 
   var isDisintegrating = false;
