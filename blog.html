@@ -662,7 +662,7 @@ function renderBlog() {
       <div style="font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--grigio);margin-bottom:.7rem;font-weight:500">In evidenza</div>
       <div class="featured">
         <a class="art-big" href="${artUrl(big)}">
-          <div class="art-img">${bigImg ? '<img src="'+bigImg+'" alt="'+esc(big.titolo)+'" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.outerHTML=\'<div class=art-img-ph>'+(big.emoji||'&#128221;')+'</div>\'">' : '<div class="art-img-ph">'+(big.emoji || '&#128221;')+'</div>'}<span class="art-cat">${esc(big.categoria)}</span></div>
+          <div class="art-img">${bigImg ? '<img src="'+bigImg+'" alt="'+esc(big.titolo)+'" width="600" height="260" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.outerHTML=\'<div class=art-img-ph>'+(big.emoji||'&#128221;')+'</div>\'">' : '<div class="art-img-ph">'+(big.emoji || '&#128221;')+'</div>'}<span class="art-cat">${esc(big.categoria)}</span></div>
           <div class="art-body">
             <div class="art-date">${fmtDate(big.data)}</div>
             <div class="art-title">${esc(big.titolo)}</div>
@@ -674,7 +674,7 @@ function renderBlog() {
           const smImg = a.immagine_copertina || extractFirstImage(a.contenuto);
           return `
           <a class="art-sm" href="${artUrl(a)}">
-            <div class="art-img">${smImg ? '<img src="'+smImg+'" alt="'+esc(a.titolo)+'" style="width:100%;height:100%;object-fit:cover" loading="lazy">' : '<div class="art-img-ph">'+(a.emoji || '&#128221;')+'</div>'}<span class="art-cat">${esc(a.categoria)}</span></div>
+            <div class="art-img">${smImg ? '<img src="'+smImg+'" alt="'+esc(a.titolo)+'" width="120" height="120" style="width:100%;height:100%;object-fit:cover" loading="lazy">' : '<div class="art-img-ph">'+(a.emoji || '&#128221;')+'</div>'}<span class="art-cat">${esc(a.categoria)}</span></div>
             <div class="art-body">
               <div class="art-date">${fmtDate(a.data)}</div>
               <div class="art-title">${esc(a.titolo)}</div>
@@ -700,7 +700,7 @@ function renderBlog() {
       const cardImg = a.immagine_copertina || extractFirstImage(a.contenuto);
       return `
       <a class="acard" href="${artUrl(a)}">
-        <div class="acard-img">${cardImg ? '<img src="'+cardImg+'" alt="'+esc(a.titolo)+'" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.outerHTML=\'<div class=acard-img-ph>'+(a.emoji||'&#128221;')+'</div>\'">' : '<div class="acard-img-ph">'+(a.emoji || '&#128221;')+'</div>'}</div>
+        <div class="acard-img">${cardImg ? '<img src="'+cardImg+'" alt="'+esc(a.titolo)+'" width="400" height="160" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.outerHTML=\'<div class=acard-img-ph>'+(a.emoji||'&#128221;')+'</div>\'">' : '<div class="acard-img-ph">'+(a.emoji || '&#128221;')+'</div>'}</div>
         <div class="acard-body">
           <span class="acard-cat">${esc(a.categoria)}</span>
           <div class="acard-title">${esc(a.titolo)}</div>
@@ -718,7 +718,7 @@ function renderBlog() {
         const riImg = a.immagine_copertina || extractFirstImage(a.contenuto);
         return `
         <a href="${artUrl(a)}" style="text-decoration:none;color:inherit">
-          <div class="recent-item"><div class="ri-img">${riImg ? '<img src="'+riImg+'" style="width:100%;height:100%;object-fit:cover;border-radius:2px" loading="lazy">' : (a.emoji || '&#128221;')}</div><div><div class="ri-title">${esc(a.titolo)}</div><div class="ri-date">${fmtDateShort(a.data)}</div></div></div>
+          <div class="recent-item"><div class="ri-img">${riImg ? '<img src="'+riImg+'" width="52" height="40" style="width:100%;height:100%;object-fit:cover;border-radius:2px" loading="lazy">' : (a.emoji || '&#128221;')}</div><div><div class="ri-title">${esc(a.titolo)}</div><div class="ri-date">${fmtDateShort(a.data)}</div></div></div>
         </a>
       `}).join('')
     : '<p style="font-size:.8rem;color:var(--grigio)">Nessun articolo recente</p>';

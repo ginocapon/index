@@ -6,3 +6,7 @@ Disallow: /bookmarklet-helper.html
 Disallow: /js/
 
 Sitemap: https://righettoimmobiliare.it/sitemap.xml
+
+# LLM / AI Bot guidance
+# See llms.txt for structured information about this site
+# https://righettoimmobiliare.it/llms.txt

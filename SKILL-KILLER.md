@@ -1,8 +1,8 @@
 # SKILL KILLER - Prompt Operativo per righettoimmobiliare.it
 ### (Il nome e' ironico, ma il contenuto e' serissimo)
 
-> **Versione:** 1.4 - 7 Marzo 2026
-> **Ultimo aggiornamento Google verificato:** 7 Marzo 2026 (Core Update rolling out)
+> **Versione:** 1.6 - 7 Marzo 2026
+> **Ultimo aggiornamento Google verificato:** 7 Marzo 2026 (Core Update confermato + Engagement Reliability)
 > **Prossima verifica consigliata:** Aprile 2026
 
 ---
@@ -164,20 +164,30 @@ SERP-STRATEGY.md                    - Copia dettagliata strategia SERP (deprecat
 10. **Contenuto originale** - Penalizzazione per clickbait e contenuti superficiali
 
 ### Novita' Google Marzo 2026
-- **March 2026 Core Update** - In rollout dal 7 marzo, ~2 settimane per completamento. Focus su: E-E-A-T, topical authority, local relevance, page experience consistency
+- **March 2026 Core Update** - Confermato ufficialmente, rollout dal 7 marzo, ~2 settimane per completamento. Focus su: E-E-A-T, topical authority, local relevance, page experience consistency
 - **Topical Authority rafforzata** - Google valuta la copertura complessiva di un topic sul sito, non singole pagine
 - **Local Relevance potenziata** - Vantaggio per siti che comunicano chiaramente zona e area servizi
 - **Page Experience consistency** - Siti con performance inconsistente (home veloce, blog lento) penalizzati
 - **AI Analysis Tools** in Search Console - analisi con linguaggio naturale
+- **Search Console AI-powered configuration tool** - lanciato marzo 2026
 - **Query Groups** in Search Console Insights - raggruppamento query simili
 - **Custom Annotations** in Performance Reports - note personalizzate sui grafici
 - **Branded Queries Filter** - separazione automatica query brand/non-brand
 - **AI Mode data** contato nei totali Performance Report di Search Console
-- **Discover Core Update** (5 Feb 2026) - piu' contenuti locali, meno clickbait, piu' contenuti originali
+- **Nuovi link styles in AI Mode/AI Overviews** - Google ha aggiornato come mostra i link
+- **UCP-powered checkout in AI Mode** - integrazione e-commerce in risposte AI
+- **Google review policies aggiornate** - molte recensioni sparite (verificare le nostre!)
+- **Discover Core Update** (5 Feb 2026) - piu' contenuti locali, meno clickbait, piu' contenuti originali (completato 27 feb)
 - **SVT e VSI** - Nuove metriche per stabilita' visiva
-- **Soglie INP piu' strette** - Google ha reso piu' severi i requisiti di interattivita'
+- **Engagement Reliability** - NUOVA metrica CWV: misura affidabilita' interazioni (click, form, menu) nel tempo e su diversi device
+- **LCP target piu' severo** - Il target competitivo nel 2026 e' sotto 2 secondi (non piu' 2.5s)
+- **Soglie INP piu' strette** - 43% dei siti ancora non passa la soglia 200ms
 - Rimosso supporto per **practice problem** e **dataset structured data**
+- **GEO tipping point 2026** - ChatGPT 800M utenti/settimana, Gemini 750M/mese, AI Overviews in 16%+ ricerche
 - **GEO critico nel 2026** - 40% ricerche via AI, recency bias forte (contenuti >3 mesi perdono citazioni), overlap SEO/GEO sceso sotto 20%
+- **GEO content converte 4.4x** vs SEO tradizionale ($3.71 return per $1 investito)
+- **llms.txt** - Nuovo standard emergente per guidare AI bots (come robots.txt ma per LLM)
+- **Ranking volatility estrema** - Cali organici 20-35% riportati da molti siti da febbraio-marzo 2026
 
 ### GEO — Generative Engine Optimization (NUOVO 2026)
 
@@ -349,28 +359,58 @@ SERP-STRATEGY.md                    - Copia dettagliata strategia SERP (deprecat
 > Ad ogni sessione di lavoro, VERIFICA lo stato di avanzamento delle checklist qui sotto
 > e comunica all'utente cosa e' stato fatto e cosa resta da fare.
 
-### Stato Attuale SERP (marzo 2026)
+### Stato Attuale SERP (verificato 7 marzo 2026)
 
 | Keyword | Posizione Righetto | Chi appare |
 |---|---|---|
-| "agenzia immobiliare padova" | NON APPARE | LuxuryEstate, RicercAttiva, Unico Immobiliare, Instagram vari |
-| "vendere casa padova agenzia" | NON APPARE | Dove.it, venderecasapadova.it, Tetto Rosso, Grimaldi, Pianeta Casa |
-| "comprare casa padova" | NON APPARE | Idealista, Immobiliare.it, Subito, RE/MAX, Tecnocasa (portali dominano) |
-| "Righetto Immobiliare Padova" | SI (brand) | Idealista, Immobiliare.it, Casa.it, Wikicasa |
+| "agenzia immobiliare padova" | **NON APPARE** | Immobiliare.it, Tetto Rosso, RicercAttiva, Promopadova, Dove.it, RockAgent |
+| "vendere casa padova agenzia" | **NON APPARE** | Pianeta Casa, Grimaldi, Dove.it, Tetto Rosso, RockAgent, Tecnocasa |
+| "migliore agenzia immobiliare padova" | **NON APPARE** | Gruppo Bortoletti, SZ Affari, RockAgent, Dove.it, Promopadova, StarOfService |
+| "comprare casa padova" | **NON APPARE** | Idealista, Immobiliare.it, Subito, Tecnocasa (portali dominano) |
+| "mutuo padova" / "consulenza mutuo padova" | **NON APPARE** (landing creata!) | Banche, comparatori — da monitorare |
+| "Righetto Immobiliare Padova" | **SI (brand)** | Idealista, Immobiliare.it, Casa.it, Wikicasa |
 
-**Problema principale**: SEO on-page eccellente (il migliore tra i locali), ma domain authority troppo bassa per competere nelle SERP generiche.
+**Problema principale**: SEO on-page il migliore tra i competitor locali (confermato), ma domain authority troppo bassa per competere nelle SERP. I nuovi competitor nazionali (Dove.it, RockAgent) alzano l'asticella.
 
-### Competitor Diretti — Confronto
+### Punteggio Complessivo Sito (7 marzo 2026)
 
-| Feature | Righetto | Tetto Rosso | RicercAttiva | Pianeta Casa | Tecnocasa | Gabetti | Engel & Volkers | Tempocasa | Grimaldi |
-|---|---|---|---|---|---|---|---|---|---|
-| Clean URLs | **Forte** | Forte | Forte | Forte | Miste | Buone | Buone (SPA) | Buone | Forte |
-| FAQ Pages | **Si (migliore)** | Si | No | No | No | No | No | No | No |
-| Blog/Content | **Si** | Si | Si (migliore) | Si | Minimo | Minimo | No | Nazionale | Si |
-| Schema.org | **Esteso (migliore)** | Buono | Buono | Base | Base | Base | Non trovato | Base | Buono |
-| Recensioni Google | ~127 (schema) | **~256** | Poche | ~104 | 20-80/ufficio | N/D | N/D | Alto (nazionale) | N/D |
-| Qualita sito | **Alta** | Alta | Buona | Buona | Template | Corporate | Premium | Moderna | Buona |
-| Appare in SERP | **NO** | **SI** | **SI** | No | Si (portale) | Si (portale) | No | No | Si |
+| Area | Punteggio | Note |
+|---|---|---|
+| SEO on-page | **9.5/10** | Il migliore tra i competitor locali |
+| Schema.org | **9/10** | Solo 4 service pages senza FAQPage |
+| Contenuti/Blog | **8/10** | Buono, RicercAttiva ha piu' contenuti fiscali/legali |
+| GEO/AEO | **8.5/10** | Unico a ottimizzare per AI — vantaggio forte |
+| Core Web Vitals | **8/10** | Buono, target LCP ora <2s da raggiungere |
+| Chatbot AI | **10/10** | Unico nel mercato locale — vantaggio esclusivo |
+| Simulatore mutuo | **10/10** | Unico nel mercato locale — vantaggio esclusivo |
+| Recensioni Google | **6/10** | 127 vs 256 Tetto Rosso — gap critico |
+| Domain Authority | **4/10** | Problema #1 — nessun backlink significativo |
+| Apparizione SERP | **2/10** | Non appare per nessuna keyword non-brand |
+| **TOTALE** | **7.5/10** | Sito tecnicamente top, invisibile nelle SERP |
+
+### Competitor Diretti — Confronto (aggiornato 7 marzo 2026)
+
+| Feature | Righetto | Tetto Rosso | RicercAttiva | Pianeta Casa | Dove.it | RockAgent | Grimaldi |
+|---|---|---|---|---|---|---|---|
+| Clean URLs | **Forte** | Forte | Forte | Forte | Forte | Forte | Forte |
+| FAQ Pages | **Si (top)** | Si | No | No | No | No | No |
+| Blog/Content | **Si** | Si | **Si (top)** | Si | **Forte** | **Forte** | Si |
+| Schema.org | **Esteso (top)** | Buono | Buono | Base | Buono | Buono | Buono |
+| Recensioni Google | ~127 | **~256** | Poche | ~104 | N/D (nazionale) | N/D | N/D |
+| Qualita sito | **Alta** | Alta | Buona | Buona | **Alta** | **Alta** | Buona |
+| Chatbot AI | **Si (unico!)** | No | No | No | No | No | No |
+| Simulatore mutuo | **Si (unico!)** | No | No | No | No | No | No |
+| GEO/AEO ottimizzato | **Si (unico!)** | No | No | No | Parziale | No | No |
+| Dati mercato visibili | Si | No | No | No | **Si (top)** | **Si (top)** | No |
+| Landing dedicate | **5** | 1 | 2 | 1 | Molte | Molte | 1 |
+| Zero commissioni | No | No | No | No | **Si (venditore)** | Ridotte | No |
+| Appare in SERP | **NO** | **SI** | **SI** | No | **SI** | **SI** | **SI** |
+
+**NUOVI competitor identificati (marzo 2026):**
+- **Dove.it** — Zero commissioni venditore, molto aggressivo su Padova, contenuti forti
+- **RockAgent** — Agenzia ibrida, dati mercato prominenti (2.456 €/mq medio Padova)
+- **Gruppo Bortoletti** — Appare per "migliore agenzia immobiliare Padova"
+- **Promopadova** — Marketing locale forte, foto professionali gratuite
 
 **Competitor #1 — Tetto Rosso Immobiliare (PERICOLO ALTO)**
 - 4 uffici incluso **Limena** (stessa zona nostra)
@@ -496,14 +536,21 @@ SERP-STRATEGY.md                    - Copia dettagliata strategia SERP (deprecat
 
 **Da fare (prossime sessioni)**
 - [ ] Aggiungere FAQPage schema alle altre 4 service pages (locazioni, preliminari, gestione, utenze)
-- [ ] Creare landing-vendere-casa-padova.html (keyword "vendere casa padova")
+- [ ] Aggiungere immobile.html alla sitemap (manca!)
+- [ ] Creare landing-vendere-casa-padova.html (keyword "vendere casa padova") — PRIORITA ALTA
 - [ ] Creare zona-limena.html (comune sede agenzia — CRITICO)
+- [ ] Creare llms.txt (nuovo standard per guidare AI bots — vantaggio GEO)
 - [ ] Aggiungere internal linking tra blog posts e zone pages (cross-link contestuali)
-- [ ] Aggiungere link alla pagina agenzia-immobiliare-padova nel nav o nel footer
-- [ ] Verificare tutti i link interni (nessun broken link)
+- [x] Aggiunto link alla pagina agenzia-immobiliare-padova nel footer (7 marzo 2026)
+- [x] GeoCoordinates aggiunto a landing-mutuo.html (7 marzo 2026)
+- [x] CLS fix: width/height su immagini dinamiche blog.html (7 marzo 2026)
+- [x] FAQ Mutuo dedicata con 15 domande + schema aggiornato (7 marzo 2026)
+- [ ] Verificare tutti i link interni (nessun broken link — audit dice OK)
 - [ ] Verificare indexing in Google Search Console dopo deploy
 - [ ] Richiedere indicizzazione manuale delle nuove pagine via GSC
 - [ ] Aggiungere widget Google Reviews reale nella homepage
+- [ ] Verificare che recensioni Google non siano sparite (nuove policies Google!)
+- [ ] Ottimizzare LCP sotto 2 secondi (nuovo target competitivo 2026)
 - [ ] Configurare hreflang se si prevede versione EN
 
 ### KPI da Monitorare
@@ -533,6 +580,29 @@ SERP-STRATEGY.md                    - Copia dettagliata strategia SERP (deprecat
 ---
 
 ## CHANGELOG AGGIORNAMENTI
+
+### v1.6 - 7 Marzo 2026 (Fix Audit + FAQ Mutuo Dedicata)
+- **GeoCoordinates aggiunto a landing-mutuo.html** — mancava nello schema LocalBusiness
+- **Link pagina pillar** agenzia-immobiliare-padova aggiunto nel footer homepage (era orfana!)
+- **CLS fix blog.html** — aggiunto width/height a tutte le immagini dinamiche (featured, card, sidebar)
+- **FAQ Mutuo dedicata** — 15 domande nella pagina FAQ con categoria propria (era sparsa in Acquisto)
+- **FAQPage schema aggiornato** — 7 nuove domande mutuo nello structured data (da ~30 a ~37 FAQ)
+- **Bottone "Mutuo" in barra categorie FAQ** + link sidebar
+
+### v1.5 - 7 Marzo 2026 (Audit Completo Sito + Aggiornamento Competitor + Google Updates)
+- **Audit completo sito vs competitor** — punteggio 7.5/10 (top tecnico, invisibile SERP)
+- **Nuovi competitor identificati:** Dove.it (zero commissioni), RockAgent (ibrida), Gruppo Bortoletti, Promopadova
+- **Tabella competitor aggiornata** — da 9 a 7 competitor con metriche piu' rilevanti (chatbot, simulatore, GEO)
+- **SERP verificata 7 marzo:** Righetto NON appare per nessuna keyword non-brand (confermato)
+- **Google March 2026 Core Update confermato ufficialmente** — rollout dal 7 marzo
+- **Engagement Reliability** — nuova metrica CWV documentata
+- **LCP target aggiornato** — competitivo sotto 2s (non piu' 2.5s)
+- **GEO 2026 tipping point:** ChatGPT 800M/settimana, Gemini 750M/mese, conversioni 4.4x vs SEO
+- **llms.txt** — nuovo standard emergente documentato (da implementare)
+- **Google review policies aggiornate** — rischio perdita recensioni (da verificare!)
+- **Ranking volatility estrema** — cali 20-35% riportati da molti siti
+- **Aggiunto punteggio complessivo sito** con 10 aree di valutazione
+- **Aggiornata lista "Da fare"** — aggiunta immobile.html in sitemap, llms.txt, verifica recensioni, LCP <2s
 
 ### v1.4 - 7 Marzo 2026 (5 Conversion Features + Audit SKILL-KILLER)
 - **5 feature di conversione implementate:**
