@@ -378,6 +378,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 .badge-oro { background: #fef9e0; color: #7d6608; }
 .badge-grigio { background: #eee; color: #666; }
 .badge-blu { background: #e0eeff; color: #1a4a8a; }
+.badge-arancio { background: #fff3e0; color: #e65100; }
 
 /* TOGGLE */
 .toggle {
@@ -1980,6 +1981,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <span></span><span></span><span></span>
       </button>
       <div class="topbar-title" id="topbarTitle">Gestione Immobili</div>
+      <a href="/" class="btn btn-secondary btn-sm" style="margin-left:12px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Home
+      </a>
       <div class="topbar-actions">
         <a href="immobili" target="_blank" class="btn btn-secondary btn-sm">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -3173,6 +3178,73 @@ tr:hover td { background: rgba(206,224,143,0.06); }
       </div>
 
       <!-- MODAL CLIENTE -->
+      <!-- ═══ MODAL ANTEPRIMA BLOG ═══ -->
+      <div class="modal-overlay" id="blogPreviewModal">
+        <div class="modal" style="max-width:680px">
+          <div class="modal-header">
+            <h2 style="font-size:1rem">🔍 Anteprima Articolo</h2>
+            <button class="modal-close" onclick="closeBlogPreviewModal()">&times;</button>
+          </div>
+          <div class="modal-body" style="padding:0">
+            <div id="blogPreviewImg" style="width:100%;height:200px;background:var(--sfondo);display:flex;align-items:center;justify-content:center;font-size:4rem;overflow:hidden"></div>
+            <div style="padding:24px 28px">
+              <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+                <span class="badge badge-blu" id="blogPreviewCat"></span>
+                <span style="font-size:0.75rem;color:var(--caffe2)" id="blogPreviewDate"></span>
+                <span style="font-size:0.75rem;color:var(--caffe2)" id="blogPreviewTempo"></span>
+              </div>
+              <h3 style="font-size:1.15rem;margin-bottom:12px;color:var(--nero)" id="blogPreviewTitle"></h3>
+              <p style="font-size:0.85rem;line-height:1.8;color:var(--caffe);max-height:180px;overflow-y:auto" id="blogPreviewExcerpt"></p>
+              <div style="display:flex;gap:8px;align-items:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--gc)">
+                <span style="font-size:0.75rem;color:var(--caffe2)">Autore:</span>
+                <strong style="font-size:0.8rem" id="blogPreviewAuthor"></strong>
+                <span id="blogPreviewStato" style="margin-left:auto"></span>
+              </div>
+              <div style="text-align:center;margin-top:20px">
+                <button class="btn btn-primary" onclick="closeBlogPreviewModal()">OK</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ MODAL ANTEPRIMA IMMOBILE ═══ -->
+      <div class="modal-overlay" id="immPreviewModal">
+        <div class="modal" style="max-width:700px">
+          <div class="modal-header">
+            <h2 style="font-size:1rem">🔍 Anteprima Immobile</h2>
+            <button class="modal-close" onclick="closeImmPreviewModal()">&times;</button>
+          </div>
+          <div class="modal-body" style="padding:0">
+            <div id="immPreviewImg" style="width:100%;height:220px;background:var(--sfondo);display:flex;align-items:center;justify-content:center;font-size:4rem;overflow:hidden"></div>
+            <div style="padding:24px 28px">
+              <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+                <span id="immPreviewTipo" class="badge badge-blu"></span>
+                <span id="immPreviewStato"></span>
+                <span id="immPreviewEvidenza" style="font-size:1.1rem"></span>
+              </div>
+              <h3 style="font-size:1.2rem;margin-bottom:8px;color:var(--nero)" id="immPreviewTitle"></h3>
+              <div style="font-size:0.82rem;color:var(--caffe2);margin-bottom:16px" id="immPreviewLocation"></div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px">
+                <div style="text-align:center;padding:12px;background:var(--sfondo);border-radius:8px"><div style="font-size:1.2rem;font-weight:700;color:var(--nero)" id="immPreviewPrezzo"></div><div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--caffe2);margin-top:2px">Prezzo</div></div>
+                <div style="text-align:center;padding:12px;background:var(--sfondo);border-radius:8px"><div style="font-size:1.2rem;font-weight:700;color:var(--nero)" id="immPreviewMq"></div><div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--caffe2);margin-top:2px">Superficie</div></div>
+                <div style="text-align:center;padding:12px;background:var(--sfondo);border-radius:8px"><div style="font-size:1.2rem;font-weight:700;color:var(--nero)" id="immPreviewLocali"></div><div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--caffe2);margin-top:2px">Locali</div></div>
+                <div style="text-align:center;padding:12px;background:var(--sfondo);border-radius:8px"><div style="font-size:1.2rem;font-weight:700;color:var(--nero)" id="immPreviewBagni"></div><div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--caffe2);margin-top:2px">Bagni</div></div>
+              </div>
+              <div style="font-size:0.82rem;color:var(--caffe);line-height:1.7;max-height:100px;overflow-y:auto;margin-bottom:16px" id="immPreviewDesc"></div>
+              <div style="display:flex;gap:10px;align-items:center;padding-top:16px;border-top:1px solid var(--gc)">
+                <span style="font-size:0.72rem;color:var(--caffe2)">Proprietario:</span>
+                <strong style="font-size:0.8rem" id="immPreviewProp"></strong>
+              </div>
+              <div style="display:flex;gap:10px;justify-content:center;margin-top:20px">
+                <a id="immPreviewLink" href="#" target="_blank" class="btn btn-primary" style="text-decoration:none">🔗 Vedi Scheda Completa</a>
+                <button class="btn btn-secondary" onclick="closeImmPreviewModal()">OK</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="modal-overlay" id="clienteModal">
         <div class="modal" style="max-width:750px">
           <div class="modal-header">
@@ -4793,7 +4865,7 @@ function renderTable(data) {
 
     const tipo = i.tipo_operazione === 'vendita' ? `<span class="badge badge-blu">Vendita</span>`
       : (i.tipo_operazione === 'affitto_residenziale' || i.tipo_operazione === 'affitto') ? `<span class="badge badge-verde">Affitto Res.</span>`
-      : i.tipo_operazione === 'affitto_commerciale' ? `<span class="badge badge-verde">Affitto Comm.</span>`
+      : i.tipo_operazione === 'affitto_commerciale' ? `<span class="badge badge-arancio">Affitto Comm.</span>`
       : i.tipo_operazione === 'asta_giudiziaria' ? `<span class="badge badge-grigio">Asta</span>`
       : `<span class="badge badge-grigio">${escHtml(i.tipo_operazione || '—')}</span>`;
 
@@ -4823,7 +4895,7 @@ function renderTable(data) {
           <button class="btn btn-danger btn-sm" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')">🗑️</button>
           <button class="btn btn-sm" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="${i.in_evidenza ? 'Rimuovi da evidenza' : 'Metti in evidenza'}" style="background:${i.in_evidenza ? '#e74c3c' : 'var(--sfondo)'};border:${i.in_evidenza ? '2px solid #c0392b' : '1px solid #ddd'};font-size:1.1rem;${i.in_evidenza ? 'color:#fff;border-radius:8px' : ''}">${i.in_evidenza ? '⭐' : '☆'}</button>
           <button class="btn btn-sm" onclick="toggleAttivo('${i.id}',${!i.attivo})" title="Toggle attivo" style="background:var(--sfondo)">${i.attivo ? '👁️' : '🚫'}</button>
-          <a href="immobile?s=${encodeURIComponent(generatePropertySlug(i))}" target="_blank" class="btn btn-sm" title="Anteprima scheda" style="background:#e8f5e9;color:#27ae60;text-decoration:none">🔍</a>
+          <button class="btn btn-sm" onclick="previewImmobile('${i.id}')" title="Anteprima rapida" style="background:#e8f5e9;color:#27ae60">🔍</button>
         </div>
       </td>
     </tr>`;
@@ -6039,6 +6111,14 @@ renderFotos();
 // ══════════════════════════════════════
 let blogArticles = [];
 
+// Articoli con pagina HTML dedicata — seed automatico
+const _blogSeedArticles = [
+  { titolo: 'Home Staging Padova: Come Vendere Casa Prima e Meglio', categoria: 'Guida alla vendita', data: '2026-03-06', tempo: 9, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🏠', immagine_copertina: 'img/blog/home-staging.webp', url_statico: 'blog-home-staging-padova', contenuto: '<p>La tua casa non si vende? Un immobile preparato con Home Staging professionale si vende dal 20% al 50% piu\' velocemente.</p>', evidenza: true },
+  { titolo: 'Vendere Casa a Padova: 7 Errori Costosi da Evitare', categoria: 'Guida alla vendita', data: '2026-03-06', tempo: 10, stato: 'pubblicato', autore: 'Gino Capon', emoji: '⚠️', immagine_copertina: 'img/team/titolari.webp', url_statico: 'vendere-casa-padova-errori', contenuto: '<p>Stai pensando di vendere casa a Padova? Scopri i 7 errori che costano fino al 15% del valore.</p>', evidenza: true },
+  { titolo: 'Comprare Casa a Padova nel 2026: Guida Definitiva Passo dopo Passo', categoria: 'Consigli acquisto', data: '2026-03-04', tempo: 12, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🏡', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-comprare-casa-padova-guida-2026', contenuto: '<p>La guida piu\' completa per comprare casa a Padova nel 2026.</p>', evidenza: true },
+  { titolo: 'Quanto Costa Vendere Casa a Padova nel 2026? Costi, Tasse e Tempi Reali', categoria: 'Guida alla vendita', data: '2026-03-04', tempo: 10, stato: 'pubblicato', autore: 'Gino Capon', emoji: '💰', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-costi-vendere-casa-padova-2026', contenuto: '<p>Tutti i costi reali per vendere casa a Padova nel 2026.</p>', evidenza: true }
+];
+
 async function getBlogArticles() {
   try {
     const { data, error } = await sb.from('blog').select('*').order('data', { ascending: false });
@@ -6048,6 +6128,13 @@ async function getBlogArticles() {
     console.warn('Supabase blog non disponibile, uso localStorage:', e.message);
     try { blogArticles = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]'); } catch(ex) { blogArticles = []; }
   }
+  // Seed: aggiungi articoli statici mancanti
+  const titoliEsistenti = new Set(blogArticles.map(a => (a.titolo || '').toLowerCase()));
+  _blogSeedArticles.forEach(s => {
+    if (!titoliEsistenti.has(s.titolo.toLowerCase())) {
+      blogArticles.push({ ...s, id: 'seed_' + s.url_statico });
+    }
+  });
   // Backup su localStorage
   try { localStorage.setItem('rig_blog_articles', JSON.stringify(blogArticles)); } catch(e) {}
   return blogArticles;
@@ -6080,6 +6167,7 @@ async function loadBlogList() {
         <td style="font-size:0.8rem">${formatDate(a.data)}</td>
         <td>${a.stato === 'pubblicato' ? '<span class="badge badge-verde">Pubblicato</span>' : '<span class="badge badge-oro">Bozza</span>'}${a.evidenza ? ' <span class="badge badge-blu">★</span>' : ''}</td>
         <td style="white-space:nowrap">
+          <button class="btn btn-sm" style="background:var(--sfondo);border:1px solid var(--gc);padding:6px 8px" onclick="previewBlogArticle('${a.id}')" title="Anteprima">🔍</button>
           <button class="btn btn-sm btn-secondary" onclick="editBlogArticle('${a.id}')">✏️ Modifica</button>
           <button class="btn btn-sm btn-danger" onclick="deleteBlogById('${a.id}')">🗑️</button>
         </td>
@@ -6258,6 +6346,62 @@ function updateBlogPreview() {
 
 // Live preview
 document.getElementById('b_contenuto').addEventListener('input', updateBlogPreview);
+
+// Anteprima rapida articolo blog (popup)
+function previewBlogArticle(id) {
+  const a = blogArticles.find(x => x.id === id);
+  if (!a) return;
+  // Immagine o emoji
+  const imgEl = document.getElementById('blogPreviewImg');
+  if (a.immagine_copertina) {
+    imgEl.innerHTML = '<img src="' + a.immagine_copertina + '" style="width:100%;height:200px;object-fit:cover" alt="">';
+  } else {
+    imgEl.innerHTML = '<span style="font-size:4rem">' + (a.emoji || '📝') + '</span>';
+  }
+  document.getElementById('blogPreviewCat').textContent = a.categoria || '';
+  document.getElementById('blogPreviewDate').textContent = '📅 ' + formatDate(a.data);
+  document.getElementById('blogPreviewTempo').textContent = '⏱️ ' + (a.tempo || 5) + ' min di lettura';
+  document.getElementById('blogPreviewTitle').textContent = a.titolo || '';
+  document.getElementById('blogPreviewExcerpt').textContent = getExcerpt(a.contenuto, 120);
+  document.getElementById('blogPreviewAuthor').textContent = a.autore || 'Capon Gino';
+  document.getElementById('blogPreviewStato').innerHTML = a.stato === 'pubblicato'
+    ? '<span class="badge badge-verde">Pubblicato</span>'
+    : '<span class="badge badge-oro">Bozza</span>';
+  document.getElementById('blogPreviewModal').classList.add('open');
+}
+function closeBlogPreviewModal() {
+  document.getElementById('blogPreviewModal').classList.remove('open');
+}
+
+// Anteprima rapida immobile (popup)
+function previewImmobile(id) {
+  var i = allImmobili.find(function(x) { return x.id === id; });
+  if (!i) return;
+  var imgEl = document.getElementById('immPreviewImg');
+  var foto = Array.isArray(i.foto) && i.foto.length > 0 ? i.foto[0] : (i.foto_principale || '');
+  if (foto) {
+    imgEl.innerHTML = '<img src="' + foto + '" style="width:100%;height:220px;object-fit:cover" alt="" onerror="this.parentElement.innerHTML=\'📷\'">';
+  } else {
+    imgEl.innerHTML = '<span style="font-size:4rem">📷</span>';
+  }
+  var tipoLabel = i.tipo_operazione === 'vendita' ? 'Vendita' : (i.tipo_operazione || '').startsWith('affitto') ? 'Affitto' : (i.tipo_operazione || '—');
+  document.getElementById('immPreviewTipo').textContent = tipoLabel;
+  document.getElementById('immPreviewStato').innerHTML = i.venduto ? '<span class="badge badge-rosso">Venduto</span>' : i.affittato ? '<span class="badge badge-rosso">Affittato</span>' : i.attivo ? '<span class="badge badge-verde">Attivo</span>' : '<span class="badge badge-grigio">Disattivo</span>';
+  document.getElementById('immPreviewEvidenza').textContent = i.in_evidenza ? '⭐' : '';
+  document.getElementById('immPreviewTitle').textContent = i.titolo || '—';
+  document.getElementById('immPreviewLocation').textContent = (i.indirizzo ? i.indirizzo + ' · ' : '') + (i.comune || 'Padova') + (i.codice ? ' · Cod. ' + i.codice : '');
+  document.getElementById('immPreviewPrezzo').textContent = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : '—';
+  document.getElementById('immPreviewMq').textContent = i.superficie ? i.superficie + ' mq' : '—';
+  document.getElementById('immPreviewLocali').textContent = i.locali || '—';
+  document.getElementById('immPreviewBagni').textContent = i.bagni || '—';
+  document.getElementById('immPreviewDesc').textContent = i.descrizione ? i.descrizione.substring(0, 300) + (i.descrizione.length > 300 ? '...' : '') : 'Nessuna descrizione';
+  document.getElementById('immPreviewProp').textContent = i.proprietario_nome || '—';
+  document.getElementById('immPreviewLink').href = 'immobile?s=' + encodeURIComponent(generatePropertySlug(i));
+  document.getElementById('immPreviewModal').classList.add('open');
+}
+function closeImmPreviewModal() {
+  document.getElementById('immPreviewModal').classList.remove('open');
+}
 
 function insertTag(tag) {
   const ta = document.getElementById('b_contenuto');

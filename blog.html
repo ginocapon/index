@@ -157,7 +157,16 @@
   "name": "Blog Righetto Immobiliare",
   "description": "Guide, consigli e analisi sul mercato immobiliare di Padova e provincia.",
   "url": "https://righettoimmobiliare.it/blog.html",
-  "publisher": {"@type": "RealEstateAgent", "name": "Righetto Immobiliare", "url": "https://righettoimmobiliare.it"}
+  "publisher": {
+    "@type": "RealEstateAgent",
+    "name": "Righetto Immobiliare",
+    "url": "https://righettoimmobiliare.it",
+    "telephone": "+39-049-884-3484",
+    "address": {"@type": "PostalAddress", "streetAddress": "Via Roma n.96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
+    "geo": {"@type": "GeoCoordinates", "latitude": 45.476956, "longitude": 11.845762},
+    "hasMap": "https://maps.google.com/?q=45.476956,11.845762",
+    "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "127", "bestRating": "5"}
+  }
 }
 </script>
 <script type="application/ld+json">
@@ -509,6 +518,30 @@ async function initBlog() {
       evidenza: false
     },
     {
+      titolo: 'Home Staging Padova: Come Vendere Casa Prima e Meglio',
+      categoria: 'Guida alla vendita',
+      data: '2026-03-06',
+      tempo: 9,
+      stato: 'pubblicato',
+      autore: 'Gino Capon',
+      immagine_copertina: 'img/blog/home-staging.webp',
+      url_statico: 'blog-home-staging-padova',
+      contenuto: 'La tua casa non si vende? Un immobile preparato con Home Staging professionale si vende dal 20% al 50% piu\' velocemente e riceve offerte piu\' alte. Righetto Immobiliare coordina ditte specializzate per preparare il tuo immobile alla vendita e ottenere il massimo prezzo.',
+      evidenza: true
+    },
+    {
+      titolo: 'Vendere Casa a Padova: 7 Errori Costosi da Evitare',
+      categoria: 'Guida alla vendita',
+      data: '2026-03-06',
+      tempo: 10,
+      stato: 'pubblicato',
+      autore: 'Gino Capon',
+      immagine_copertina: 'img/team/titolari.webp',
+      url_statico: 'vendere-casa-padova-errori',
+      contenuto: 'Stai pensando di vendere casa a Padova? Scopri i 7 errori che costano fino al 15% del valore. Stima immobiliare gratuita con dati FIAIP 2026, calcolatore interattivo e valutazione professionale per tutti i 101 comuni della provincia.',
+      evidenza: true
+    },
+    {
       titolo: 'Ca\' Marcello Mestre: Riqualificazione e Investimento nel Veneto',
       categoria: 'Mercato locale',
       data: '2026-02-24',
@@ -629,7 +662,7 @@ function renderBlog() {
       <div style="font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--grigio);margin-bottom:.7rem;font-weight:500">In evidenza</div>
       <div class="featured">
         <a class="art-big" href="${artUrl(big)}">
-          <div class="art-img">${bigImg ? '<img src="'+bigImg+'" alt="'+esc(big.titolo)+'" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.outerHTML=\'<div class=art-img-ph>'+(big.emoji||'&#128221;')+'</div>\'">' : '<div class="art-img-ph">'+(big.emoji || '&#128221;')+'</div>'}<span class="art-cat">${esc(big.categoria)}</span></div>
+          <div class="art-img">${bigImg ? '<img src="'+bigImg+'" alt="'+esc(big.titolo)+'" width="600" height="260" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.outerHTML=\'<div class=art-img-ph>'+(big.emoji||'&#128221;')+'</div>\'">' : '<div class="art-img-ph">'+(big.emoji || '&#128221;')+'</div>'}<span class="art-cat">${esc(big.categoria)}</span></div>
           <div class="art-body">
             <div class="art-date">${fmtDate(big.data)}</div>
             <div class="art-title">${esc(big.titolo)}</div>
@@ -641,7 +674,7 @@ function renderBlog() {
           const smImg = a.immagine_copertina || extractFirstImage(a.contenuto);
           return `
           <a class="art-sm" href="${artUrl(a)}">
-            <div class="art-img">${smImg ? '<img src="'+smImg+'" alt="'+esc(a.titolo)+'" style="width:100%;height:100%;object-fit:cover" loading="lazy">' : '<div class="art-img-ph">'+(a.emoji || '&#128221;')+'</div>'}<span class="art-cat">${esc(a.categoria)}</span></div>
+            <div class="art-img">${smImg ? '<img src="'+smImg+'" alt="'+esc(a.titolo)+'" width="120" height="120" style="width:100%;height:100%;object-fit:cover" loading="lazy">' : '<div class="art-img-ph">'+(a.emoji || '&#128221;')+'</div>'}<span class="art-cat">${esc(a.categoria)}</span></div>
             <div class="art-body">
               <div class="art-date">${fmtDate(a.data)}</div>
               <div class="art-title">${esc(a.titolo)}</div>
@@ -667,7 +700,7 @@ function renderBlog() {
       const cardImg = a.immagine_copertina || extractFirstImage(a.contenuto);
       return `
       <a class="acard" href="${artUrl(a)}">
-        <div class="acard-img">${cardImg ? '<img src="'+cardImg+'" alt="'+esc(a.titolo)+'" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.outerHTML=\'<div class=acard-img-ph>'+(a.emoji||'&#128221;')+'</div>\'">' : '<div class="acard-img-ph">'+(a.emoji || '&#128221;')+'</div>'}</div>
+        <div class="acard-img">${cardImg ? '<img src="'+cardImg+'" alt="'+esc(a.titolo)+'" width="400" height="160" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.outerHTML=\'<div class=acard-img-ph>'+(a.emoji||'&#128221;')+'</div>\'">' : '<div class="acard-img-ph">'+(a.emoji || '&#128221;')+'</div>'}</div>
         <div class="acard-body">
           <span class="acard-cat">${esc(a.categoria)}</span>
           <div class="acard-title">${esc(a.titolo)}</div>
@@ -685,7 +718,7 @@ function renderBlog() {
         const riImg = a.immagine_copertina || extractFirstImage(a.contenuto);
         return `
         <a href="${artUrl(a)}" style="text-decoration:none;color:inherit">
-          <div class="recent-item"><div class="ri-img">${riImg ? '<img src="'+riImg+'" style="width:100%;height:100%;object-fit:cover;border-radius:2px" loading="lazy">' : (a.emoji || '&#128221;')}</div><div><div class="ri-title">${esc(a.titolo)}</div><div class="ri-date">${fmtDateShort(a.data)}</div></div></div>
+          <div class="recent-item"><div class="ri-img">${riImg ? '<img src="'+riImg+'" width="52" height="40" style="width:100%;height:100%;object-fit:cover;border-radius:2px" loading="lazy">' : (a.emoji || '&#128221;')}</div><div><div class="ri-title">${esc(a.titolo)}</div><div class="ri-date">${fmtDateShort(a.data)}</div></div></div>
         </a>
       `}).join('')
     : '<p style="font-size:.8rem;color:var(--grigio)">Nessun articolo recente</p>';

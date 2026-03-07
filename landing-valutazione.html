@@ -155,6 +155,27 @@ img{max-width:100%;height:auto;display:block}
 .fc-success h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--mint);margin-bottom:.4rem}
 .fc-success p{font-size:.82rem;color:var(--gray)}
 
+/* RISULTATO VALUTAZIONE */
+.val-result{display:none;margin-top:1.5rem;animation:fadeUp .6s ease-out}
+.val-linda-wrap{text-align:center;margin-bottom:1.5rem;animation:scaleIn .5s ease-out}
+.val-linda-img{width:180px;height:220px;object-fit:cover;object-position:center top;border-radius:20px;border:4px solid var(--purple);box-shadow:0 8px 40px rgba(108,99,255,.3);margin:0 auto;display:block}
+.val-linda-bubble{display:inline-block;background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff;padding:.6rem 1.4rem;border-radius:20px 20px 20px 4px;font-size:1rem;font-weight:700;margin-top:.8rem;animation:float 3s ease-in-out infinite;position:relative}
+.val-linda-bubble::after{content:'';position:absolute;bottom:-8px;left:20px;width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:10px solid var(--purple)}
+.val-stima-box{background:linear-gradient(135deg,var(--purple-deep),#1a0f40);border-radius:var(--radius);padding:1.5rem;margin:1rem 0;color:#fff;text-align:center}
+.val-stima-label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--purple2);margin-bottom:.3rem}
+.val-stima-value{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;color:var(--sun);line-height:1.1}
+.val-stima-range{font-size:.82rem;color:rgba(255,255,255,.5);margin-top:.3rem}
+.val-stima-mq{font-size:.78rem;color:var(--mint);margin-top:.2rem}
+.val-pdf-notice{display:flex;align-items:center;gap:.5rem;justify-content:center;font-size:.78rem;color:var(--gray);margin-top:1rem;padding:.6rem 1rem;background:var(--light);border-radius:10px}
+.val-pdf-notice .pdf-spinner{width:18px;height:18px;border:2px solid #E5E7EB;border-top:2px solid var(--purple);border-radius:50%;animation:spin 1s linear infinite}
+.val-pdf-done{color:var(--mint);font-weight:600}
+.val-pdf-btn{display:inline-block;margin-top:.8rem;padding:.7rem 1.6rem;background:var(--purple);color:#fff;border:none;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;transition:background .2s}
+.val-pdf-btn:hover{background:var(--purple2)}
+.val-wa-qr{margin-top:1rem;text-align:center}
+.val-wa-qr canvas{margin:0 auto;border-radius:8px}
+.val-wa-qr p{font-size:.7rem;color:var(--gray);margin-top:.3rem}
+@keyframes wink{0%,80%,100%{transform:scale(1)}90%{transform:scale(1.05) rotate(-2deg)}}
+
 /* COME FUNZIONA */
 .come{padding:5rem 1.5rem;background:#fff}
 .come-inner{max-width:1100px;margin:0 auto}
@@ -386,6 +407,25 @@ img{max-width:100%;height:auto;display:block}
           <h3>Richiesta inviata! 🎉</h3>
           <p>Ti contatteremo entro 24 ore.<br><a href="tel:+390498843484" style="color:var(--purple);font-weight:700">049.88.43.484</a></p>
         </div>
+        <!-- Risultato valutazione con Linda -->
+        <div class="val-result" id="valResult">
+          <div class="val-linda-wrap">
+            <img src="img/team/foto-linda-righetto-viola.webp" alt="Linda Righetto — Righetto Immobiliare" class="val-linda-img" width="180" height="220">
+            <div class="val-linda-bubble">Ricordati di contattarci! 😉</div>
+          </div>
+          <div class="val-stima-box">
+            <div class="val-stima-label">Stima indicativa del tuo immobile</div>
+            <div class="val-stima-value" id="valMed"></div>
+            <div class="val-stima-range" id="valRange"></div>
+            <div class="val-stima-mq" id="valMq"></div>
+          </div>
+          <button class="val-pdf-btn" id="valPdfBtn" style="display:none" onclick="scaricaPDF()">📄 Scarica scheda PDF</button>
+          <div class="val-pdf-notice" id="valPdfNotice" style="display:none">
+            <div class="pdf-spinner"></div>
+            <span>Stiamo preparando la tua scheda PDF...</span>
+          </div>
+          <div class="val-wa-qr" id="valQr"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -466,7 +506,32 @@ img{max-width:100%;height:auto;display:block}
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="js/config.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="js/valutazione-pdf.js"></script>
 <script>
+function scaricaPDF() {
+  var dati = window._valDati;
+  if (!dati) return;
+  var notice = document.getElementById('valPdfNotice');
+  var btn = document.getElementById('valPdfBtn');
+  if (typeof generaValutazionePDF === 'function' && window.jspdf) {
+    notice.innerHTML = '<div class="pdf-spinner"></div><span>Stiamo preparando la tua scheda PDF...</span>';
+    notice.style.display = 'flex';
+    generaValutazionePDF(dati).then(function() {
+      notice.innerHTML = '<span class="val-pdf-done">La tua scheda PDF e\' stata scaricata!</span>';
+      btn.style.display = 'inline-block';
+    }).catch(function(err) {
+      console.error('Errore PDF:', err);
+      notice.innerHTML = '<span class="val-pdf-done">Errore nel download. Clicca il pulsante per riprovare.</span>';
+      btn.style.display = 'inline-block';
+    });
+  } else {
+    console.error('jsPDF non caricato:', typeof generaValutazionePDF, !!window.jspdf);
+    notice.innerHTML = '<span class="val-pdf-done">Errore caricamento. Clicca il pulsante per riprovare.</span>';
+    btn.style.display = 'inline-block';
+  }
+}
 async function iscriviBrevo(email,nome,attrs){
   try{
     if(typeof SERVIZI_CONFIG==='undefined'||!SERVIZI_CONFIG.BREVO_API_KEY)return;
@@ -497,8 +562,60 @@ async function sendLead(e){
   try{const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');if(sb){await sb.from('richieste').insert([{nome:nomeCompleto,email,telefono:tel,messaggio:'[LANDING VALUTAZIONE] '+dettagli,provenienza:'landing-valutazione',newsletter:news,letto:false}]);supaOk=true;if(news&&email){await sb.from('newsletter_subscribers').upsert([{email,nome:nomeCompleto,telefono:tel,tipo_immobile:tipoImm||null,zona:zonaImm||null,interesse:'valutazione',provenienza:'landing-valutazione',fonte:'landing-valutazione',attivo:true,created_at:new Date().toISOString()}],{onConflict:'email'}).catch(()=>{});}}}catch(e){}
   if(news&&email){iscriviBrevo(email,nomeCompleto,{telefono:tel,tipo_immobile:tipoImm,zona:zonaImm,interesse:'valutazione',fonte:'landing-valutazione'});}
   btn.disabled=false;btn.textContent='📊 RICHIEDI VALUTAZIONE GRATUITA';
-  if(formspreeOk||supaOk){document.getElementById('leadForm').style.display='none';document.getElementById('leadSuccess').style.display='block';document.querySelector('.fc-note').style.display='none';document.querySelector('.fc-steps').style.display='none';}
+  if(formspreeOk||supaOk){
+    document.getElementById('leadForm').style.display='none';
+    document.querySelector('.fc-note').style.display='none';
+    document.querySelector('.fc-steps').style.display='none';
+    // Calcola stima e mostra risultato con Linda
+    mostraRisultatoValutazione({
+      comune: zonaImm,
+      tipo: tipoImm,
+      mq: parseFloat(document.getElementById('v-mq').value) || 0,
+      stato: document.getElementById('v-stato').value,
+      vani: document.getElementById('v-vani').value,
+      piano: document.getElementById('v-piano').value,
+      garage: document.getElementById('v-garage').value,
+      nome: nomeCompleto
+    });
+  }
   else{alert('Errore. Chiamaci al 049.88.43.484 o scrivici su WhatsApp.');}
+}
+function mostraRisultatoValutazione(dati) {
+  const mq = dati.mq;
+  if (!mq || mq < 5) {
+    // Senza mq mostra solo il successo classico
+    document.getElementById('leadSuccess').style.display='block';
+    return;
+  }
+  const stima = calcolaValutazione(dati.comune, dati.tipo, mq, dati.stato);
+  dati.stima = stima;
+  const fmt = n => new Intl.NumberFormat('it-IT',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n);
+  document.getElementById('valMed').textContent = fmt(stima.med);
+  document.getElementById('valRange').textContent = 'Range: ' + fmt(stima.min) + ' — ' + fmt(stima.max);
+  document.getElementById('valMq').textContent = fmt(stima.euroMq) + ' / mq';
+  // Mostra il pannello con Linda
+  const valResult = document.getElementById('valResult');
+  valResult.style.display = 'block';
+  valResult.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // QR Code WhatsApp
+  try {
+    const qrDiv = document.getElementById('valQr');
+    const waUrl = 'https://wa.me/393497365930?text=' + encodeURIComponent('Ciao! Ho appena fatto una valutazione online del mio immobile a ' + (dati.comune || 'Padova') + '. Vorrei saperne di piu\'!');
+    if (typeof QRCode !== 'undefined') {
+      new QRCode(qrDiv, { text: waUrl, width: 120, height: 120, correctLevel: QRCode.CorrectLevel.M });
+      qrDiv.innerHTML += '<p>Inquadra per scriverci su WhatsApp</p>';
+    }
+  } catch(e) {}
+  // Salva dati per il pulsante manuale e mostra subito il pulsante
+  window._valDati = dati;
+  document.getElementById('valPdfBtn').style.display = 'inline-block';
+  // Auto-PDF dopo 3 secondi — solo desktop (no mobile/tablet)
+  var isDesktop = window.innerWidth > 1024 && !('ontouchstart' in window);
+  if (isDesktop) {
+    setTimeout(function() {
+      scaricaPDF();
+    }, 3000);
+  }
 }
 </script>
 <script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */

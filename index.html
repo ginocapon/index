@@ -389,6 +389,7 @@ button{font-family:inherit;cursor:pointer}
 .link-all svg{width:14px;height:14px;transition:transform 0.2s}
 .link-all:hover svg{transform:translateX(4px)}
 
+@keyframes pulseUrgency{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.03);opacity:0.9}}
 .rv{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
 .rv.vis{opacity:1;transform:translateY(0)}
 .rv.d1{transition-delay:0.1s}.rv.d2{transition-delay:0.2s}
@@ -413,7 +414,7 @@ button{font-family:inherit;cursor:pointer}
   #navbar{padding:0 20px}
   .nav-links,.nav-cta{display:none}
   .nav-burger{display:flex}
-  #evidenza,#servizi,#perche,#stima,#blog,#faq-hp,#form-contatto,footer{padding-left:20px;padding-right:20px}
+  #evidenza,#servizi,#perche,#mutuo-hp,#stima,#blog,#faq-hp,#form-contatto,footer{padding-left:20px;padding-right:20px}
   .hero-inner{grid-template-columns:1fr;padding:0 20px;padding-top:calc(var(--nav-h) + 20px);padding-bottom:88px}
   .hero-right{display:none}
   #hero-bg{background-size:auto 80%;background-position:center 20%}
@@ -431,6 +432,8 @@ button{font-family:inherit;cursor:pointer}
   .srch-f{border-right:none;border-bottom:1px solid rgba(44,74,110,0.08)}
   .btn-srch{min-height:58px}
 
+  #testimonial [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important}
+  .mutuo-grid{grid-template-columns:1fr!important}
   .props-grid,.srv-grid,.blog-grid{grid-template-columns:1fr}
   .sf-grid,.fc-grid{grid-template-columns:1fr}
   .sr-v{grid-template-columns:1fr}
@@ -595,7 +598,27 @@ button svg, a.btn-p svg, a.btn-g svg {
         "ratingValue": "4.9",
         "reviewCount": "127",
         "bestRating": "5"
-      }
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
+          "author": {"@type": "Person", "name": "Marco e Silvia B."},
+          "reviewBody": "Venduto in 38 giorni al prezzo che volevamo. Professionali, disponibili e trasparenti. Consigliatissimi!"
+        },
+        {
+          "@type": "Review",
+          "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
+          "author": {"@type": "Person", "name": "Andrea T."},
+          "reviewBody": "Avevo provato da solo per 6 mesi. Con Righetto, venduto in 3 settimane a un prezzo superiore. Sara e il chatbot sono una marcia in piu."
+        },
+        {
+          "@type": "Review",
+          "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
+          "author": {"@type": "Person", "name": "Famiglia Zanetti"},
+          "reviewBody": "Documenti, notaio, tutto gestito. Non pensavamo che vendere casa potesse essere cosi semplice. Gino e il team fanno la differenza."
+        }
+      ]
     },
     {
       "@type": "FAQPage",
@@ -802,11 +825,16 @@ button svg, a.btn-p svg, a.btn-g svg {
         <span class="ghost">Ci pensiamo noi.</span>
       </h1>
       <p class="hero-p">Dal 2000 assistiamo chi vende e chi compra casa in tutti i 101 comuni della provincia. Ti seguiamo dalla valutazione al rogito: perizia gratuita, strategia di vendita, ricerca immobile, trattativa e pratiche notarili. Tutto in un unico referente.</p>
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(184,212,74,0.15);border:1px solid rgba(184,212,74,0.3);border-radius:50px;padding:6px 16px;font-size:0.7rem;color:var(--oro);font-weight:600;margin-bottom:18px;backdrop-filter:blur(6px)"><span style="width:8px;height:8px;background:var(--oro);border-radius:50%;animation:pulseUrgency 1.5s infinite"></span> Marzo 2026: valutazione gratuita + report di mercato in regalo</div>
       <div class="hero-btns">
-        <button class="btn-g" onclick="document.getElementById('stima').scrollIntoView({behavior:'smooth'})">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          Stima il tuo Immobile
-        </button>
+        <a class="btn-g" href="vendere-casa-padova-errori">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/></svg>
+          Quanto vale la tua casa?
+        </a>
+        <a class="btn-g" href="vendere-casa-padova-errori#errori" style="background:transparent;border:2px solid rgba(255,255,255,0.4);color:white">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Vuoi vendere? Leggi prima questo
+        </a>
       </div>
     </div>
     <div class="hero-stats-row">
@@ -1055,12 +1083,10 @@ button svg, a.btn-p svg, a.btn-g svg {
       <p class="sec-p">Dalla valutazione gratuita al rogito. Ogni fase seguita con professionalità e trasparenza totale.</p>
     </div>
     <div class="srv-grid sr-stagger">
-      <a href="servizi#vendita" class="srv-card rv d1"><div class="srv-ico">🏷️</div><div class="srv-t">Vendita Immobili</div><div class="srv-d">Valutiamo, fotografiamo e gestiamo tutta la trattativa. Dalla valutazione gratuita al rogito notarile.</div></a>
-      <a href="servizi#affitto" class="srv-card rv d2"><div class="srv-ico">🔑</div><div class="srv-t">Affitto e Gestione</div><div class="srv-d">Selezione inquilini, contratti 4+4, transitorio, studenti. Gestione completa del rapporto.</div></a>
-      <a href="servizi#valutazione" class="srv-card rv d3"><div class="srv-ico">💰</div><div class="srv-t">Valutazione Gratuita</div><div class="srv-d">Perizia professionale con dati reali FIAIP 2025-2026. Senza impegno, senza costi.</div></a>
-      <a href="servizi#virtual-tour" class="srv-card rv d1"><div class="srv-ico">🌐</div><div class="srv-t">Virtual Tour 360°</div><div class="srv-d">Foto 360°, tour interattivo e video YouTube professionale per ogni immobile in vendita.</div></a>
-      <a href="servizi#commerciale" class="srv-card rv d2"><div class="srv-ico">🏢</div><div class="srv-t">Immobili Commerciali</div><div class="srv-d">Uffici, negozi, capannoni, terreni industriali. Competenza specifica nel mercato B2B.</div></a>
-      <a href="servizi#aste" class="srv-card rv d3"><div class="srv-ico">⚖️</div><div class="srv-t">Aste Giudiziarie</div><div class="srv-d">Assistenza completa: analisi, sopralluogo, offerta e tutela legale step by step.</div></a>
+      <a href="vendere-casa-padova-errori" class="srv-card rv d1"><div class="srv-ico">🏷️</div><div class="srv-t">Vendita Immobili</div><div class="srv-d">Vendiamo la tua casa al giusto prezzo. Scopri i 7 errori da evitare e come li risolviamo noi.</div><div style="margin-top:12px;font-size:0.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blu3)">Scopri di più →</div></a>
+      <a href="vendere-casa-padova-errori#stima" class="srv-card rv d2"><div class="srv-ico">💰</div><div class="srv-t">Valutazione Gratuita</div><div class="srv-d">Quanto vale la tua casa? Calcolalo gratis in 30 secondi con dati reali FIAIP 2026.</div><div style="margin-top:12px;font-size:0.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blu3)">Calcola ora →</div></a>
+      <a href="landing-mutuo" class="srv-card rv d3"><div class="srv-ico">🏦</div><div class="srv-t">Consulenza Mutuo Gratuita</div><div class="srv-d">Confronto tassi da 10+ banche, simulatore rata e assistenza completa. Zero costi, zero impegno.</div><div style="margin-top:12px;font-size:0.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blu3)">Simula la rata →</div></a>
+      <a href="servizi" class="srv-card rv d4"><div class="srv-ico">🔑</div><div class="srv-t">Tutti i Servizi</div><div class="srv-d">Affitto, aste, virtual tour 360°, commerciale. Scopri tutto quello che possiamo fare per te.</div><div style="margin-top:12px;font-size:0.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blu3)">Vedi tutti →</div></a>
     </div>
   </div>
 </section>
@@ -1090,107 +1116,103 @@ button svg, a.btn-p svg, a.btn-g svg {
   </div>
 </section>
 
-<!-- STIMA IL TUO IMMOBILE -->
-<section id="stima">
-  <div class="stima-inner">
-    <div class="stima-layout">
-      <div class="rv sr">
-        <div class="eyebrow">Strumento gratuito</div>
-        <h2 class="sec-h2">Stima il tuo<br>Immobile</h2>
-        <p class="sec-p">Scopri il valore di mercato in pochi secondi. Dati 2025–2026 da FIAIP Padova per tutti i 101 comuni della provincia.</p>
-        <div class="stima-feats">
-          <div class="stima-feat">Prezzi aggiornati Gennaio 2026</div>
-          <div class="stima-feat">Copertura 101 comuni provincia</div>
-          <div class="stima-feat">Appartamenti, ville, capannoni, terreni</div>
-          <div class="stima-feat">Moltiplicatori per stato e tipologia</div>
-          <div class="stima-feat">Immobili simili nel nostro portfolio</div>
+<!-- TESTIMONIANZE -->
+<section id="testimonial" style="padding:80px 28px;background:var(--testo)">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="rv sr" style="text-align:center;margin-bottom:48px">
+      <div class="eyebrow" style="color:var(--oro);justify-content:center">Testimonianze verificate</div>
+      <h2 class="sec-h2 w">Cosa dicono i nostri <em style="color:var(--oro);font-style:italic">clienti</em></h2>
+      <p class="sec-p" style="color:rgba(255,255,255,0.55);margin:12px auto 0;text-align:center">Righetto Immobiliare ha ottenuto 127 recensioni con una media di 4.9 stelle su Google. I nostri clienti raccontano esperienze reali di vendita e acquisto a Padova e provincia.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="sr-stagger">
+      <div class="rv d1" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;transition:all 0.3s" onmouseover="this.style.background='rgba(255,255,255,0.09)';this.style.transform='translateY(-4px)'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.transform='translateY(0)'">
+        <div style="color:#FFD23F;font-size:0.9rem;margin-bottom:10px;letter-spacing:2px">★★★★★</div>
+        <p style="font-size:0.84rem;color:rgba(255,255,255,0.8);line-height:1.8;font-style:italic;margin-bottom:16px">"Venduto in 38 giorni al prezzo che volevamo. Professionali, disponibili e trasparenti. Consigliatissimi!"</p>
+        <div style="display:flex;align-items:center;gap:10px">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" alt="Marco B." width="36" height="36" style="border-radius:50%;border:2px solid var(--oro);object-fit:cover">
+          <div><div style="font-size:0.75rem;font-weight:700;color:white">Marco e Silvia B.</div><div style="font-size:0.65rem;color:rgba(255,255,255,0.4)">Appartamento — Padova Centro</div></div>
         </div>
       </div>
-      <div class="rv sr d2">
-        <div class="stima-card">
-          <div class="stima-card-title">📊 Calcola il Valore</div>
-          <div class="sf-grid">
-            <div class="sf-g" style="grid-column:1/-1">
-              <label for="st-comune">Comune</label>
-              <select id="st-comune">
-                <option value="">Seleziona comune...</option>
-                <option value="padova">Padova (città)</option>
-                <option value="padova centro storico">Padova — Centro Storico</option>
-                <option value="padova arcella">Padova — Arcella</option>
-                <option value="padova guizza">Padova — Guizza/Salboro</option>
-                <option value="abano terme">Abano Terme</option>
-                <option value="montegrotto terme">Montegrotto Terme</option>
-                <option value="cittadella">Cittadella</option>
-                <option value="albignasego">Albignasego</option>
-                <option value="selvazzano dentro">Selvazzano Dentro</option>
-                <option value="noventa padovana">Noventa Padovana</option>
-                <option value="vigonza">Vigonza</option>
-                <option value="rubano">Rubano</option>
-                <option value="limena">Limena</option>
-                <option value="cadoneghe">Cadoneghe</option>
-                <option value="saccolongo">Saccolongo</option>
-                <option value="camposampiero">Camposampiero</option>
-                <option value="trebaseleghe">Trebaseleghe</option>
-                <option value="piove di sacco">Piove di Sacco</option>
-                <option value="este">Este</option>
-                <option value="monselice">Monselice</option>
-                <option value="montagnana">Montagnana</option>
-                <option value="conselve">Conselve</option>
-                <option value="teolo">Teolo</option>
-                <option value="arquà petrarca">Arquà Petrarca</option>
-                <option value="galzignano terme">Galzignano Terme</option>
-                <option value="battaglia terme">Battaglia Terme</option>
-                <option value="due carrare">Due Carrare</option>
-                <option value="default">Altro comune della provincia</option>
-              </select>
-            </div>
-            <div class="sf-g">
-              <label for="st-tipo">Tipologia</label>
-              <select id="st-tipo">
-                <option value="appartamento">Appartamento</option>
-                <option value="bilocale">Bilocale</option>
-                <option value="trilocale">Trilocale</option>
-                <option value="monolocale">Monolocale</option>
-                <option value="attico">Attico / Mansarda</option>
-                <option value="villa singola">Villa singola</option>
-                <option value="villa bifamiliare">Villa bifamiliare</option>
-                <option value="villetta">Villetta</option>
-                <option value="capannone">Capannone</option>
-                <option value="terreno edificabile">Terreno Edificabile</option>
-                <option value="terreno agricolo">Terreno Agricolo</option>
-              </select>
-            </div>
-            <div class="sf-g">
-              <label for="st-mq">Superficie (mq)</label>
-              <input type="number" id="st-mq" placeholder="Es: 85" min="5">
-            </div>
-            <div class="sf-g" style="grid-column:1/-1">
-              <label for="st-stato">Stato dell'immobile</label>
-              <select id="st-stato">
-                <option value="buono">Buono stato</option>
-                <option value="ottimo">Ottimo / Rifinito</option>
-                <option value="nuovo">Nuovo / Ristrutturato recente</option>
-                <option value="discreto">Discreto</option>
-                <option value="da ristrutturare">Da ristrutturare</option>
-              </select>
-            </div>
-          </div>
-          <button class="btn-calc" onclick="calcolaStima()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/></svg>
-            Calcola Stima di Mercato
-          </button>
-          <div id="stima-result">
-            <div class="sr-lbl">📊 Stima di Mercato 2025–2026</div>
-            <div class="sr-v">
-              <div class="sr-vc"><div class="sr-vl">Valore Min.</div><div class="sr-vp" id="sr-min">—</div></div>
-              <div class="sr-vc mid"><div class="sr-vl">⭐ Valore Medio</div><div class="sr-vp" id="sr-med">—</div></div>
-              <div class="sr-vc"><div class="sr-vl">Valore Max.</div><div class="sr-vp" id="sr-max">—</div></div>
-            </div>
-            <div class="sr-mq" id="sr-mq-t"></div>
-            <div class="sr-note">⚠️ Stima indicativa da dati FIAIP/Immobiliare.it (2025-2026). Il valore reale dipende da piano, esposizione e condizioni specifiche.</div>
-            <button class="btn-src" onclick="document.getElementById('form-contatto').scrollIntoView({behavior:'smooth'})">📞 Vuoi una valutazione ufficiale gratuita? →</button>
-            <div id="stima-correlati"></div>
-          </div>
+      <div class="rv d2" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;transition:all 0.3s" onmouseover="this.style.background='rgba(255,255,255,0.09)';this.style.transform='translateY(-4px)'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.transform='translateY(0)'">
+        <div style="color:#FFD23F;font-size:0.9rem;margin-bottom:10px;letter-spacing:2px">★★★★★</div>
+        <p style="font-size:0.84rem;color:rgba(255,255,255,0.8);line-height:1.8;font-style:italic;margin-bottom:16px">"Avevo provato da solo per 6 mesi. Con Righetto, venduto in 3 settimane a un prezzo superiore. Sara e il chatbot sono una marcia in piu."</p>
+        <div style="display:flex;align-items:center;gap:10px">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face" alt="Andrea T." width="36" height="36" style="border-radius:50%;border:2px solid var(--oro);object-fit:cover">
+          <div><div style="font-size:0.75rem;font-weight:700;color:white">Andrea T.</div><div style="font-size:0.65rem;color:rgba(255,255,255,0.4)">Villa bifamiliare — Selvazzano</div></div>
+        </div>
+      </div>
+      <div class="rv d3" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;transition:all 0.3s" onmouseover="this.style.background='rgba(255,255,255,0.09)';this.style.transform='translateY(-4px)'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.transform='translateY(0)'">
+        <div style="color:#FFD23F;font-size:0.9rem;margin-bottom:10px;letter-spacing:2px">★★★★★</div>
+        <p style="font-size:0.84rem;color:rgba(255,255,255,0.8);line-height:1.8;font-style:italic;margin-bottom:16px">"Documenti, notaio, tutto gestito. Non pensavamo che vendere casa potesse essere cosi semplice. Gino e il team fanno la differenza."</p>
+        <div style="display:flex;align-items:center;gap:10px">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face" alt="Famiglia Zanetti" width="36" height="36" style="border-radius:50%;border:2px solid var(--oro);object-fit:cover">
+          <div><div style="font-size:0.75rem;font-weight:700;color:white">Famiglia Zanetti</div><div style="font-size:0.65rem;color:rgba(255,255,255,0.4)">Casa indipendente — Limena</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rv sr" style="text-align:center;margin-top:36px">
+      <a href="https://www.google.com/maps/place/Righetto+Immobiliare" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;font-size:0.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--oro);border-bottom:1px solid rgba(184,212,74,0.3);padding-bottom:4px;transition:all 0.2s">Leggi tutte le 127 recensioni su Google <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- MUTUO — sezione dedicata -->
+<section id="mutuo-hp" style="padding:80px 28px;background:linear-gradient(135deg,#0a1628 0%,#1a2d4a 50%,#0d2137 100%);position:relative;overflow:hidden">
+  <div style="position:absolute;top:-60px;right:-60px;width:320px;height:320px;background:radial-gradient(circle,rgba(184,212,74,0.12) 0%,transparent 70%);border-radius:50%;pointer-events:none"></div>
+  <div style="position:absolute;bottom:-40px;left:-40px;width:240px;height:240px;background:radial-gradient(circle,rgba(74,106,140,0.15) 0%,transparent 70%);border-radius:50%;pointer-events:none"></div>
+  <div style="max-width:1100px;margin:0 auto;position:relative;z-index:1">
+    <div class="rv sr" style="text-align:center;margin-bottom:48px">
+      <div class="eyebrow" style="color:var(--oro);justify-content:center">Servizio gratuito</div>
+      <h2 class="sec-h2 w">Stai cercando il <em style="color:var(--oro);font-style:italic">mutuo giusto?</em></h2>
+      <p class="sec-p" style="color:rgba(255,255,255,0.65);margin:12px auto 0;text-align:center;max-width:600px">Non firmare la prima offerta della banca. Ti aiutiamo a confrontare i tassi di oltre 10 istituti di credito e trovare la soluzione perfetta per te — gratis.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px" class="sr-stagger mutuo-grid">
+      <div class="rv d1" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:32px 24px;text-align:center;transition:all 0.3s" onmouseover="this.style.background='rgba(255,255,255,0.1)';this.style.transform='translateY(-4px)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.transform='translateY(0)'">
+        <div style="font-size:2.8rem;margin-bottom:12px">🏦</div>
+        <div style="font-size:1rem;font-weight:700;color:white;margin-bottom:8px">10+ Banche a confronto</div>
+        <div style="font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.7">Confrontiamo le offerte dei principali istituti di credito per trovare il tasso migliore per te.</div>
+      </div>
+      <div class="rv d2" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:32px 24px;text-align:center;transition:all 0.3s" onmouseover="this.style.background='rgba(255,255,255,0.1)';this.style.transform='translateY(-4px)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.transform='translateY(0)'">
+        <div style="font-size:2.8rem;margin-bottom:12px">📊</div>
+        <div style="font-size:1rem;font-weight:700;color:white;margin-bottom:8px">Simulatore rata online</div>
+        <div style="font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.7">Calcola subito la rata del tuo mutuo con importo, durata e tasso aggiornati a Marzo 2026.</div>
+      </div>
+      <div class="rv d3" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:32px 24px;text-align:center;transition:all 0.3s" onmouseover="this.style.background='rgba(255,255,255,0.1)';this.style.transform='translateY(-4px)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.transform='translateY(0)'">
+        <div style="font-size:2.8rem;margin-bottom:12px">💶</div>
+        <div style="font-size:1rem;font-weight:700;color:white;margin-bottom:8px">Zero costi, zero impegno</div>
+        <div style="font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.7">Consulenza completamente gratuita. Nessun vincolo: ti aiutiamo a scegliere, la decisione è tua.</div>
+      </div>
+    </div>
+    <div class="rv sr" style="text-align:center">
+      <a href="landing-mutuo" class="btn-g" style="display:inline-flex;font-size:0.85rem;padding:18px 36px;gap:10px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        Simula la tua rata — È gratis
+      </a>
+      <p style="margin-top:14px;font-size:0.7rem;color:rgba(255,255,255,0.35);letter-spacing:0.5px">Consulenza mutuo gratuita • Risposta entro 24 ore • Agevolazioni under 36</p>
+    </div>
+  </div>
+</section>
+
+<!-- STIMA TEASER — rimanda alla pagina dedicata -->
+<section id="stima">
+  <div class="stima-inner">
+    <div class="stima-layout" style="align-items:center">
+      <div class="rv sr">
+        <div style="display:inline-block;background:var(--oro);color:var(--testo);padding:6px 14px;border-radius:6px;font-size:0.65rem;font-weight:800;letter-spacing:0.05em;margin-bottom:14px;animation:pulseUrgency 2.5s infinite">📈 Prezzi +7% nel 2026 — Scopri il valore aggiornato</div>
+        <div class="eyebrow">Stima gratuita</div>
+        <h2 class="sec-h2">Quanto vale<br>la tua <em style="color:var(--oro);font-style:italic">casa?</em></h2>
+        <p class="sec-p">Scoprilo in 30 secondi con il nostro calcolatore basato su dati reali FIAIP 2026 per tutti i 101 comuni della provincia di Padova.</p>
+        <a href="vendere-casa-padova-errori" class="btn-g" style="margin-top:24px;display:inline-flex">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/></svg>
+          Calcola il Valore del tuo Immobile
+        </a>
+      </div>
+      <div class="rv sr d2" style="text-align:center">
+        <div style="font-size:8rem;line-height:1;margin-bottom:16px;filter:drop-shadow(0 4px 24px rgba(184,212,74,0.3))">🏠</div>
+        <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap">
+          <div style="text-align:center"><div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--blu)">101</div><div style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--grigio);font-weight:700">Comuni</div></div>
+          <div style="text-align:center"><div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--blu)">15k<sup style="font-size:0.9rem">+</sup></div><div style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--grigio);font-weight:700">Dati reali</div></div>
+          <div style="text-align:center"><div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--blu)">30<sup style="font-size:0.9rem">sec</sup></div><div style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--grigio);font-weight:700">Risultato</div></div>
         </div>
       </div>
     </div>
@@ -1269,44 +1291,12 @@ button svg, a.btn-p svg, a.btn-g svg {
       <div class="cs-eyebrow">Chi siamo</div>
       <h2 class="cs-h2">Specialisti in vendita<br>e acquisto <span>immobili</span></h2>
       <p class="cs-intro">
-        "Dal 2000 affianchiamo chi vende e chi compra casa a Padova. Non siamo intermediari generici: ci occupiamo di ogni fase della transazione — dalla valutazione alla firma dal notaio — con un unico referente dedicato."
+        "Dal 2000, un unico obiettivo: vendere la tua casa al prezzo giusto, nel minor tempo possibile. Non intermediari, ma partner. Un referente dedicato dalla valutazione al rogito."
       </p>
-      <div class="cs-qa">
-        <div class="cs-q">
-          <button class="cs-q-btn" onclick="toggleQ(this)">
-            <span class="cs-q-txt">Chi è Righetto Immobiliare?</span>
-            <span class="cs-q-icon">+</span>
-          </button>
-          <div class="cs-a">Siamo un'agenzia indipendente con sede a Padova, specializzata nell'assistenza completa per chi vende e chi compra casa. Dal 2000 seguiamo ogni transazione dall'inizio al rogito: valutazione, documentazione, trattativa, pratiche notarili. Un unico referente, zero sorprese.</div>
-        </div>
-        <div class="cs-q">
-          <button class="cs-q-btn" onclick="toggleQ(this)">
-            <span class="cs-q-txt">In quali zone operate?</span>
-            <span class="cs-q-icon">+</span>
-          </button>
-          <div class="cs-a">Operiamo in tutti i 101 comuni della provincia di Padova: dal centro storico ai borghi rurali del Basso Padovano, dai Colli Euganei alla Riviera del Brenta, dalle zone industriali alle aree agricole.</div>
-        </div>
-        <div class="cs-q">
-          <button class="cs-q-btn" onclick="toggleQ(this)">
-            <span class="cs-q-txt">Quanto costa la valutazione del mio immobile?</span>
-            <span class="cs-q-icon">+</span>
-          </button>
-          <div class="cs-a">È completamente gratuita e senza impegno. I nostri agenti effettuano un sopralluogo professionale e consegnano una stima scritta basata sui dati reali FIAIP 2025-2026.</div>
-        </div>
-        <div class="cs-q">
-          <button class="cs-q-btn" onclick="toggleQ(this)">
-            <span class="cs-q-txt">Vendete anche in zone rurali e terreni agricoli?</span>
-            <span class="cs-q-icon">+</span>
-          </button>
-          <div class="cs-a">Sì, è una delle nostre specialità. Gestiamo ville di campagna, casali, terreni agricoli, rustici da ristrutturare e proprietà rurali in tutto il territorio provinciale.</div>
-        </div>
-        <div class="cs-q">
-          <button class="cs-q-btn" onclick="toggleQ(this)">
-            <span class="cs-q-txt">Come funziona il Virtual Tour 360°?</span>
-            <span class="cs-q-icon">+</span>
-          </button>
-          <div class="cs-a">Realizziamo fotografie sferiche 360° e le pubblichiamo come tour interattivo navigabile online. Il potenziale acquirente visita l'immobile da casa, risparmiando tempo e aumentando la qualità dei contatti ricevuti.</div>
-        </div>
+      <div style="display:flex;gap:24px;margin:28px 0;flex-wrap:wrap">
+        <div style="text-align:center;flex:1;min-width:80px"><div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--oro)">25<sup>+</sup></div><div style="font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--grigio);font-weight:700">Anni</div></div>
+        <div style="text-align:center;flex:1;min-width:80px"><div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--oro)">350<sup>+</sup></div><div style="font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--grigio);font-weight:700">Immobili</div></div>
+        <div style="text-align:center;flex:1;min-width:80px"><div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--oro)">98<sup>%</sup></div><div style="font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--grigio);font-weight:700">Soddisfatti</div></div>
       </div>
       <a href="chi-siamo" class="cs-cta">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:15px;height:15px;flex-shrink:0" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
@@ -1348,31 +1338,10 @@ button svg, a.btn-p svg, a.btn-g svg {
       </div>
       <div class="faq-item">
         <button class="faq-btn" onclick="toggleFaq(this)">
-          <span class="faq-q">Quali documenti servono per vendere casa?</span>
+          <span class="faq-q">Posso vendere casa da solo senza agenzia?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">Servono: atto di provenienza, visura catastale con planimetria, APE obbligatorio, certificato di abitabilità, titoli edilizi e documentazione condominiale. Ci occupiamo noi di raccogliere e verificare tutta la documentazione.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">
-          <span class="faq-q">Operate anche fuori dal centro di Padova?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a">Operiamo in tutti i 101 comuni della provincia di Padova: dal centro storico ai borghi rurali del Basso Padovano, dai Colli Euganei alla Riviera del Brenta, dalle zone industriali alle aree agricole.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">
-          <span class="faq-q">Cos'è il Virtual Tour 360°?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a">Realizziamo fotografie sferiche 360° e le pubblichiamo come tour interattivo navigabile online. Il potenziale acquirente visita l'immobile da casa, risparmiando tempo e aumentando la qualità dei contatti ricevuti.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">
-          <span class="faq-q">Come funziona la stima AI sul vostro sito?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a">Il nostro strumento online calcola una stima indicativa basata sui dati FIAIP 2025-2026 per tutti i 101 comuni della provincia. Per una valutazione ufficiale gratuita, contattaci per un sopralluogo professionale.</div>
+        <div class="faq-a">Puoi, ma i dati FIAIP mostrano che chi vende da solo impiega il doppio del tempo e ottiene in media il 10-15% in meno. <a href="vendere-casa-padova-errori" style="color:var(--blu);font-weight:700">Scopri i 7 errori più costosi →</a></div>
       </div>
     </div>
   </div>
@@ -1387,6 +1356,7 @@ button svg, a.btn-p svg, a.btn-g svg {
         <img
           src="img/team/linda-righetto.jpg"
           alt="Linda Righetto — Agente Immobiliare Locazioni Padova"
+          width="700" height="700"
           onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&q=85&fit=crop&crop=faces,top'">
       </picture>
       <div class="fc-foto-overlay"></div>
@@ -1447,8 +1417,8 @@ button svg, a.btn-p svg, a.btn-g svg {
         <div class="f-soc">▶</div>
       </div>
     </div>
-    <div class="f-col"><h5>Navigazione</h5><ul><li><a href="/">Home</a></li><li><a href="chi-siamo">Chi Siamo</a></li><li><a href="immobili">Immobili</a></li><li><a href="servizi">Servizi</a></li><li><a href="blog">Blog</a></li><li><a href="faq">FAQ</a></li></ul><h5 style="margin-top:1.2rem">Quartieri</h5><ul><li><a href="zona-centro-storico-padova">Centro Storico</a></li><li><a href="zona-arcella-padova">Arcella</a></li><li><a href="zona-prato-della-valle-padova">Prato della Valle</a></li><li><a href="zona-universitaria-padova">Zona Universitaria</a></li><li><a href="zona-sacra-famiglia-padova">Sacra Famiglia</a></li><li><a href="zona-forcellini-padova">Forcellini</a></li><li><a href="zona-guizza-padova">Guizza</a></li><li><a href="zona-voltabarozzo-padova">Voltabarozzo</a></li></ul></div>
-    <div class="f-col"><h5>Servizi</h5><ul><li><a href="servizi#vendita">Vendita</a></li><li><a href="servizi#affitto">Affitto</a></li><li><a href="servizi#valutazione">Valutazione</a></li><li><a href="servizi#virtual-tour">Virtual Tour 360°</a></li><li><a href="servizi#aste">Aste Giudiziarie</a></li></ul></div>
+    <div class="f-col"><h5>Navigazione</h5><ul><li><a href="/">Home</a></li><li><a href="chi-siamo">Chi Siamo</a></li><li><a href="immobili">Immobili</a></li><li><a href="servizi">Servizi</a></li><li><a href="agenzia-immobiliare-padova">Agenzia Padova</a></li><li><a href="blog">Blog</a></li><li><a href="faq">FAQ</a></li></ul><h5 style="margin-top:1.2rem">Quartieri</h5><ul><li><a href="zona-centro-storico-padova">Centro Storico</a></li><li><a href="zona-arcella-padova">Arcella</a></li><li><a href="zona-prato-della-valle-padova">Prato della Valle</a></li><li><a href="zona-universitaria-padova">Zona Universitaria</a></li><li><a href="zona-sacra-famiglia-padova">Sacra Famiglia</a></li><li><a href="zona-forcellini-padova">Forcellini</a></li><li><a href="zona-guizza-padova">Guizza</a></li><li><a href="zona-voltabarozzo-padova">Voltabarozzo</a></li></ul></div>
+    <div class="f-col"><h5>Servizi</h5><ul><li><a href="servizi#vendita">Vendita</a></li><li><a href="servizi#affitto">Affitto</a></li><li><a href="servizi#valutazione">Valutazione</a></li><li><a href="servizi#virtual-tour">Virtual Tour 360°</a></li><li><a href="servizi#aste">Aste Giudiziarie</a></li><li><a href="landing-mutuo">Consulenza Mutuo</a></li></ul></div>
     <div class="f-col"><h5>Contatti</h5><ul><li><a href="tel:+390498843484">📞 049.88.43.484</a></li><li><a href="mailto:info@righettoimmobiliare.it">📧 info@righettoimmobiliare.it</a></li><li><a href="contatti">📍 Via Roma n.96, Limena (PD)</a></li><li><a href="contatti">🕐 Lun–Ven: 9–19</a></li><li><a href="contatti">🕐 Sab: 9:00–12:30</a></li></ul></div>
   </div>
   <div class="footer-bottom">
@@ -1488,6 +1458,25 @@ function loadVideo(wrap) {
 </script>
 <script src="js/nav-mobile.js" defer></script>
 <script src="js/cookie-consent.js" defer></script>
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-cta-mobile" id="stickyCta">
+  <div class="sticky-cta-inner">
+    <a href="vendere-casa-padova-errori" class="scta-primary">Valutazione Gratis</a>
+    <a href="https://wa.me/393488621888" class="scta-wa" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="tel:+390498843484" class="scta-tel">Chiama</a>
+  </div>
+</div>
+<script>
+(function(){
+  var bar=document.getElementById('stickyCta');if(!bar)return;
+  var shown=false;
+  function check(){
+    if(window.scrollY>600&&!shown){shown=true;bar.classList.add('visible')}
+    else if(window.scrollY<=300&&shown){shown=false;bar.classList.remove('visible')}
+  }
+  window.addEventListener('scroll',check,{passive:true});
+})();
+</script>
 <script src="js/scroll-reveal.js" defer></script>
 <script src="js/welcome-popup.js" defer></script>
 </body>
