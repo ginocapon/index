@@ -341,7 +341,7 @@ footer a{color:var(--oro)}
     <button class="sara-close" onclick="closeSara()">&times;</button>
     <div class="sara-top">
       <div class="sara-avatar">👩</div>
-      <div><div class="sara-name">Sara</div><div class="sara-role">Assistente Righetto Immobiliare</div></div>
+      <div><div class="sara-name">Linda</div><div class="sara-role">Assistente Righetto Immobiliare</div></div>
     </div>
     <div class="sara-msg">Questa e solo una stima indicativa! <span class="wink">😉</span><br><br>Per sapere il <strong>valore reale</strong> della tua casa servono un sopralluogo e un'analisi dei comparabili nella tua zona.<br>La facciamo <strong>gratis e senza impegno</strong>!</div>
     <div class="sara-btns">
@@ -385,7 +385,7 @@ function calcolaStima(){
   document.getElementById('stima-result').scrollIntoView({behavior:'smooth',block:'nearest'});
   // Salva dati per PDF
   window._stimaDati={comune:comune,tipo:tipo,mq:mq,stato:stato,stima:{min:mn,med:md,max:mx,euroMq:Math.round(ppMq)}};
-  // Mostra Sara dopo il calcolo (il PDF ora richiede email)
+  // Mostra Linda dopo il calcolo (il PDF ora richiede email)
   setTimeout(showSara,5000);
   if(typeof gtag==='function')gtag('event','stima_calcolata',{event_category:'conversion',event_label:comune+' - '+tipo,value:md});
 }
