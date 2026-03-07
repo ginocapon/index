@@ -609,10 +609,13 @@ function mostraRisultatoValutazione(dati) {
   // Salva dati per il pulsante manuale e mostra subito il pulsante
   window._valDati = dati;
   document.getElementById('valPdfBtn').style.display = 'inline-block';
-  // Auto-PDF dopo 3 secondi
-  setTimeout(function() {
-    scaricaPDF();
-  }, 3000);
+  // Auto-PDF dopo 3 secondi — solo desktop (no mobile/tablet)
+  var isDesktop = window.innerWidth > 1024 && !('ontouchstart' in window);
+  if (isDesktop) {
+    setTimeout(function() {
+      scaricaPDF();
+    }, 3000);
+  }
 }
 </script>
 <script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */

@@ -250,6 +250,208 @@ const FAQ_DATA = [
     k: ['surroga', 'sostituzione mutuo', 'portabilità'],
     r: '🔄 **Surroga del mutuo**\n\nLa surroga (o portabilità) permette di trasferire il mutuo a un\'altra banca con condizioni migliori, **senza costi** per il mutuatario. È un diritto previsto dalla Legge Bersani. Conviene quando i tassi di mercato sono più bassi rispetto a quelli del tuo mutuo attuale.'
   },
+  // ── MUTUO — 50+ DOMANDE APPROFONDITE ──
+  {
+    k: ['quanto mutuo', 'importo mutuo', 'quanto posso', 'budget mutuo'],
+    r: '💶 **Quanto mutuo puoi ottenere?**\n\nDipende dal tuo reddito: la rata non deve superare il **30-35% del netto mensile**. Con uno stipendio di €1.800/mese, puoi permetterti una rata di circa €540-€630. Su 25 anni a tasso fisso ~2,8%, significa un mutuo di circa **€130.000-€150.000**.\n\n👉 Vuoi un calcolo preciso? Visita la nostra [pagina mutui](landing-mutuo.html) con simulatore gratuito!\n\n📞 Consulenza gratuita: **049 884 3484**'
+  },
+  {
+    k: ['rata mutuo', 'calcola rata', 'simulazione rata', 'quanto pago'],
+    r: '🧮 **Simulazione rata mutuo**\n\nEsempio per un mutuo di **€160.000 a 25 anni**:\n• Tasso fisso 2,8%: rata ~**€741/mese**\n• Tasso variabile 2,2%: rata ~**€694/mese**\n• Tasso fisso 3,5%: rata ~**€800/mese**\n\n👉 Usa il nostro [simulatore gratuito](landing-mutuo.html#calcolatore) per un calcolo personalizzato!\n\n📞 Consulenza gratuita: confrontiamo 10+ banche per te.'
+  },
+  {
+    k: ['tasso cap', 'variabile cap', 'tetto massimo rata'],
+    r: '🛡️ **Mutuo a tasso variabile con CAP**\n\nIl CAP è un tetto massimo al tasso: la rata segue l\'Euribor ma non può mai superare una soglia predefinita. Spread tipico: 1,5-2% sopra Euribor, CAP tipico: 4-5%.\n\nCosto leggermente superiore al variabile puro, ma con la sicurezza di un tetto.\n\n📞 [Consulenza gratuita](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['tasso misto', 'cambio tasso', 'switch tasso'],
+    r: '🔀 **Mutuo a tasso misto**\n\nTi permette di scegliere periodicamente (ogni 3 o 5 anni) se continuare a tasso fisso o passare al variabile. Attualmente: ~2,3-3,0% per la componente fissa. Offre flessibilità ma con spread generalmente più alti.\n\n📞 [Consulenza gratuita](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['documenti mutuo', 'cosa serve mutuo', 'pratiche mutuo'],
+    r: '📋 **Documenti per la richiesta di mutuo**\n\n**Dipendente:** carta d\'identità, codice fiscale, ultime 2-3 buste paga, CUD/730, estratti conto ultimi 3 mesi, contratto di lavoro.\n\n**Autonomo (P.IVA):** ultimi 2-3 modelli Unico, iscrizione Camera di Commercio, estratti conto ultimi 6 mesi.\n\n**Per l\'immobile:** compromesso, planimetria e visura catastale.\n\nNoi ti aiutiamo a preparare tutto! [Consulenza gratuita](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['istruttoria', 'spese istruttoria', 'costo istruttoria'],
+    r: '🏦 **Spese di istruttoria mutuo**\n\nCosta generalmente **€300-€800** (o 0,2-0,5% dell\'importo). Alcune banche offrono promozioni con istruttoria gratuita. I nostri consulenti sanno quali banche la azzerano in questo momento!\n\n📞 [Consulenza gratuita](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['assicurazione mutuo', 'polizza incendio', 'scoppio incendio'],
+    r: '🛡️ **Assicurazioni mutuo**\n\n**Obbligatoria:** polizza scoppio e incendio (~€200-€500/anno).\n\n**Facoltative:** polizza vita/invalidità, polizza perdita impiego.\n\n⚠️ La banca NON può obbligarti a sottoscrivere le polizze facoltative con lei! Puoi scegliere una compagnia esterna con risparmio significativo.'
+  },
+  {
+    k: ['mutuo 100', 'mutuo cento', 'senza anticipo', 'zero anticipo'],
+    r: '🏠 **Mutuo 100% — Senza anticipo**\n\nPossibile per:\n• **Under 36** con ISEE ≤ €40.000 tramite Fondo Garanzia Consap\n• Alcune banche con garanzia aggiuntiva (garante o fideiussione)\n\n⚠️ Tasso generalmente più alto (+0,3-0,5%) e serve reddito più solido.\n\n📞 Verifichiamo la fattibilità: [consulenza gratuita](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['fondo garanzia', 'consap', 'garanzia statale', 'fondo prima casa'],
+    r: '🏛️ **Fondo Garanzia Prima Casa (Consap)**\n\nLo Stato garantisce fino all\'80% della quota capitale.\n\n**Requisiti:** non possedere altri immobili abitativi, immobile non di lusso, mutui fino a €250.000.\n\n**Priorità a:** under 36 (ISEE ≤ €40.000), famiglie con figli, conduttori IACP.\n\nI nostri consulenti gestiscono la pratica Consap per te. [Info](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['under 36', 'giovani mutuo', 'agevolazioni giovani', 'bonus giovani casa'],
+    r: '🎓 **Agevolazioni mutuo under 36** (ISEE ≤ €40.000)\n\n• Accesso al Fondo Garanzia (mutui fino al 100%)\n• Esenzione imposta di registro, ipotecaria e catastale\n• Credito d\'imposta IVA (da costruttore)\n\n**Requisiti:** età < 36 anni al rogito, ISEE ≤ €40.000, acquisto prima casa.\n\n📞 Ti assistiamo in tutto! [Consulenza gratuita](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['crif', 'segnalazione', 'cattivo pagatore', 'centrale rischi'],
+    r: '⚠️ **Segnalazione CRIF / Centrale Rischi**\n\nOttenere un mutuo con segnalazioni è difficile ma non impossibile:\n• Ritardo lieve (< 2 rate): alcune banche considerano\n• Segnalazione grave: attendere cancellazione (36 mesi dalla regolarizzazione)\n• Puoi richiedere la visura CRIF gratis 1 volta/anno\n\nI nostri consulenti conoscono le banche più flessibili. [Contattaci](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['garante', 'fideiussore', 'garanzia personale'],
+    r: '🤝 **Garante (fideiussore) per il mutuo**\n\nServe quando il reddito è insufficiente, il contratto precario, o l\'LTV è elevato.\n\n**Requisiti garante:** reddito stabile, nessuna segnalazione CRIF, età < 70-75 anni a fine mutuo.\n\n⚠️ Il garante è responsabile per l\'intero debito, non solo la parte eccedente.'
+  },
+  {
+    k: ['partita iva mutuo', 'autonomo mutuo', 'libero professionista'],
+    r: '💼 **Mutuo per lavoratori autonomi / P.IVA**\n\nServono almeno **2-3 anni** di attività, reddito stabile, Modello Unico degli ultimi 2-3 anni, estratti conto ultimi 6-12 mesi.\n\nAlcune banche valutano il fatturato, altre il reddito netto. I nostri consulenti sanno quali sono le più accessibili.\n\n📞 [Consulenza gratuita](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['estinzione anticipata', 'chiudere mutuo', 'pagare prima', 'estinguere'],
+    r: '💰 **Estinzione anticipata del mutuo**\n\nDal 2007 (Legge Bersani), senza penali per mutui post 02/2007.\n\n**Opzioni:** estinzione totale (chiudi e liberi ipoteca) o parziale (riduci rata o durata).\n\n**Conviene?** Soprattutto nei primi anni, quando paghi più interessi. Negli ultimi anni gli interessi sono già quasi pagati.\n\nSimulazione gratuita con i nostri esperti!'
+  },
+  {
+    k: ['ltv', 'loan to value', 'rapporto prestito'],
+    r: '📊 **LTV — Loan to Value**\n\n• **LTV 80%** — Standard, migliori condizioni\n• **LTV 90-95%** — Possibile con garanzie, tasso +0,2-0,3%\n• **LTV 100%** — Solo Fondo Consap (under 36) o garante forte\n\n⚠️ Il valore di riferimento è la **perizia bancaria**, non il prezzo. Se la perizia è inferiore, il LTV sale.'
+  },
+  {
+    k: ['perizia bassa', 'valore perizia', 'perizia inferiore'],
+    r: '🔍 **Perizia inferiore al prezzo?**\n\nLa banca calcola il mutuo sull\'80% del valore di perizia. Se la perizia è più bassa del prezzo, devi coprire la differenza.\n\n**Esempio:** Prezzo €200.000, perizia €180.000 → mutuo max €144.000 → servono €56.000 invece di €40.000.\n\n**Soluzione:** fai valutare l\'immobile PRIMA della proposta. Con noi è gratis! [Valutazione gratuita](landing-valutazione.html)'
+  },
+  {
+    k: ['tan', 'taeg', 'tasso effettivo', 'costo reale mutuo'],
+    r: '📊 **TAN vs TAEG**\n\n• **TAN:** tasso di interesse puro sul capitale\n• **TAEG:** include TAN + tutte le spese (istruttoria, perizia, assicurazioni, gestione)\n\n⚠️ Confronta sempre i **TAEG**, non i TAN! Un mutuo con TAN basso ma spese alte può costare di più. I nostri consulenti mostrano il TAEG reale di ogni offerta.'
+  },
+  {
+    k: ['tempo mutuo', 'quanto tempo approvazione', 'tempistica mutuo'],
+    r: '⏱️ **Tempistiche mutuo**\n\n1. Raccolta documenti: 3-5 giorni\n2. Istruttoria banca: 7-15 gg lavorativi\n3. Perizia immobile: 7-10 gg\n4. Delibera finale: 7-15 gg\n5. Stipula notarile: concordata\n\n**Totale: 30-60 giorni.** Con la nostra assistenza prepariamo tutto in anticipo e acceleriamo i tempi.'
+  },
+  {
+    k: ['mutuo rifiutato', 'rifiuto mutuo', 'bocciato mutuo', 'negato mutuo'],
+    r: '❌ **Mutuo rifiutato — Cosa fare?**\n\n**Cause:** reddito insufficiente, segnalazioni CRIF, troppi finanziamenti, immobile con problemi.\n\n**Soluzioni:** coinvolgere garante, ridurre importo, allungare durata, estinguere finanziamenti minori, provare altra banca.\n\n📞 Analizziamo il motivo e troviamo alternative: [contattaci](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['pre approvazione', 'pre delibera', 'fattibilità mutuo'],
+    r: '✅ **Pre-approvazione del mutuo**\n\nValutazione preventiva della banca prima di trovare l\'immobile. Sai esattamente quanto puoi spendere, sei più credibile col venditore, acceleri i tempi.\n\nCon noi in **48 ore**! [Richiedi la pre-approvazione](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['interessi detraibili', 'detrazione interessi', '19 per cento'],
+    r: '📊 **Detrazione interessi mutuo prima casa**\n\nDetrazione IRPEF 19% su max **€4.000/anno** di interessi = risparmio fino a **€760/anno**. Detraibili anche spese notarili del mutuo.\n\n**Requisiti:** prima casa, mutuo ipotecario, residenza entro 12 mesi dal rogito.'
+  },
+  {
+    k: ['imposta sostitutiva', 'tassa mutuo'],
+    r: '💰 **Imposta sostitutiva sul mutuo**\n\n• **0,25%** dell\'importo per **prima casa** (es. €160.000 × 0,25% = €400)\n• **2,00%** dell\'importo per **seconda casa** (es. €160.000 × 2% = €3.200)\n\nTrattenuta dalla banca al momento dell\'erogazione.'
+  },
+  {
+    k: ['mutuo costruzione', 'mutuo ristrutturazione', 'sal', 'stato avanzamento'],
+    r: '🏗️ **Mutuo SAL (costruzione/ristrutturazione)**\n\nEroga il capitale in tranche man mano che i lavori avanzano, verificati dal perito. Durante i lavori paghi solo interessi di preammortamento. La rata piena parte dopo l\'ultima erogazione.\n\n📞 [Consulenza gratuita](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['mutuo seconda casa', 'seconda casa mutuo', 'investimento mutuo'],
+    r: '🏠 **Mutuo seconda casa / investimento**\n\n• LTV max 60-70% | Imposta sostitutiva 2% | Tasso +0,2-0,5% | Nessuna detrazione interessi | IMU da pagare\n\nPuò comunque rendere 4-7% annuo a Padova. [Consulenza investimento](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['surroga conviene', 'quando surroga', 'surroga 2026'],
+    r: '🔄 **Quando conviene la surroga?**\n\nConviene se il tuo tasso è superiore di 0,5-1% ai tassi attuali e mancano molti anni. È gratuita e la vecchia banca non può opporsi.\n\n**Esempio:** Da 4% a 2,8% su €120.000 = risparmi ~**€80/mese** (~€960/anno).\n\n📞 Verifica gratuita: [contattaci](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['notaio mutuo', 'costi notaio'],
+    r: '🏛️ **Spese notarili mutuo**\n\n• Notaio mutuo: €1.500-€2.500\n• Notaio rogito: €2.000-€4.000\n\n💡 Le spese notarili del mutuo prima casa sono **detraibili al 19%**. Abbiamo notai partner con tariffe dedicate.'
+  },
+  {
+    k: ['ipoteca', 'cancellazione ipoteca'],
+    r: '🔒 **Ipoteca sul mutuo**\n\nGaranzia della banca iscritta per il 150-200% dell\'importo. Cancellazione automatica dopo estinzione o manuale (~€500-€1.000).\n\n⚠️ L\'ipoteca NON significa che la banca possiede la casa. Puoi vivere e gestire l\'immobile liberamente.'
+  },
+  {
+    k: ['ammortamento', 'piano ammortamento', 'francese'],
+    r: '📊 **Piano di ammortamento alla francese** (il più comune)\n\nRata costante: all\'inizio paghi più interessi, alla fine più capitale. Nei primi 5-10 anni paghi soprattutto interessi → l\'estinzione anticipata conviene di più all\'inizio!\n\nL\'ammortamento all\'italiana (raro) ha rata decrescente.'
+  },
+  {
+    k: ['mutuo cointestato', 'cointestazione', 'mutuo coppia'],
+    r: '👫 **Mutuo cointestato**\n\n**Pro:** redditi si sommano, entrambi detraggono interessi (50% ciascuno).\n**Contro:** entrambi responsabili per l\'intero debito.\n\nAlternativa: uno proprietario e l\'altro garante. I nostri consulenti consigliano la formula migliore.'
+  },
+  {
+    k: ['sospensione rate', 'non riesco pagare', 'difficoltà rata', 'moratoria'],
+    r: '⚠️ **Difficoltà pagamento rate**\n\n• **Fondo Gasparrini:** sospensione fino a 18 mesi (perdita lavoro, morte, invalidità)\n• **Rinegoziazione:** allungare durata per abbassare rata\n• **Surroga:** trasferire a banca con condizioni migliori\n\nNon aspettare di saltare le rate! [Consulenza urgente](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['mutuo donazione', 'casa donata mutuo'],
+    r: '⚠️ **Mutuo su immobile donato**\n\nMolte banche rifiutano per rischio impugnazione entro 20 anni. Soluzioni: polizza specifica, risoluzione donazione, banche specializzate.\n\n📞 Conosciamo le banche disponibili: [contattaci](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['reddito necessario', 'stipendio minimo', 'quanto devo guadagnare'],
+    r: '💰 **Reddito necessario per il mutuo**\n\nRata ≤ 30-35% del netto. Esempi (25 anni, 2,8%):\n• Rata €500 → reddito min ~€1.500/mese\n• Rata €700 → reddito min ~€2.000/mese\n• Rata €900 → reddito min ~€2.600/mese\n\nSe hai altri finanziamenti, le rate si sommano!\n\n👉 [Simulatore](landing-mutuo.html#calcolatore)'
+  },
+  {
+    k: ['euribor', 'irs', 'indice riferimento'],
+    r: '📈 **Indici di riferimento**\n\n• **Euribor:** per tassi variabili, aggiornato quotidianamente, influenzato dai tassi BCE\n• **IRS (Eurirs):** per tassi fissi, costo della copertura a lungo termine\n\nFormula: Variabile = Euribor + Spread | Fisso = IRS + Spread. Lo spread è il margine della banca (1-2%). Noi troviamo le banche con lo spread più basso!'
+  },
+  {
+    k: ['spese totali acquisto', 'quanto costa comprare', 'budget totale'],
+    r: '🧾 **Costi totali acquisto** (es. €200.000 prima casa da privato)\n\n• Imposta registro: ~€2.400\n• Imposte ipo+catastale: €100\n• Notaio: ~€5.000\n• Agenzia (3%+IVA): ~€7.320\n• Istruttoria+perizia: ~€850\n• Assicurazione: ~€300\n• Imposta sostitutiva: ~€400\n\n**Totale extra: ~€15.000-€17.000** (7-8% del prezzo)\n\n📞 [Calcolo dettagliato gratuito](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['clausola sospensiva', 'condizione mutuo', 'salvo buon fine'],
+    r: '⚖️ **Clausola sospensiva mutuo**\n\nNella proposta d\'acquisto: se la banca non approva il mutuo, la proposta si annulla e recuperi la caparra. **Fondamentale!** Senza questa clausola rischi di perdere la caparra.\n\nNoi inseriamo SEMPRE questa tutela. [Assistenza completa](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['mutuo green', 'casa efficiente', 'mutuo ecologico'],
+    r: '🌱 **Mutuo Green**\n\nCondizioni agevolate per immobili classe A/B o ristrutturazioni con miglioramento ≥2 classi:\n• Tasso -0,1-0,3%\n• Importo finanziabile più alto\n• Istruttoria ridotta o azzerata\n\nA Padova molte nuove costruzioni sono in classe A! [Scopri le offerte](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['banca migliore', 'quale banca', 'confronto banche'],
+    r: '🏦 **Quale banca per il mutuo?**\n\nDipende dal profilo. Noi confrontiamo **10+ banche** tra Intesa, UniCredit, Crédit Agricole, BPER, BCC locali e banche online.\n\nOgni banca ha punti di forza diversi. Troviamo quella giusta per te — gratis!\n\n📞 [Confronto personalizzato](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['mutuo lavoro determinato', 'tempo determinato', 'precario mutuo'],
+    r: '📋 **Mutuo con tempo determinato**\n\nPossibile se hai continuità lavorativa dimostrabile, azienda solida, o un garante con indeterminato. Anche il Fondo Consap aiuta (under 36 o categorie prioritarie).\n\n📞 Conosciamo le banche più flessibili: [contattaci](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['mutuo straniero', 'stranieri mutuo', 'cittadino estero'],
+    r: '🌍 **Mutuo per cittadini stranieri**\n\n**Comunitari UE:** stesse condizioni degli italiani.\n**Extracomunitari:** servono permesso di soggiorno lungo, residenza 1-2 anni, reddito in Italia.\n\n📞 Assistenza in italiano e inglese: [contattaci](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['mutuo asta', 'acquisto asta mutuo'],
+    r: '⚖️ **Mutuo per acquisto all\'asta**\n\nPossibile: ottieni la pre-delibera prima dell\'asta, poi la banca perfeziona il mutuo dopo l\'aggiudicazione. Alcune banche non finanziano aste — noi sappiamo quali lo fanno.\n\n📞 [Assistenza aste + mutuo](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['costo totale mutuo', 'quanto pago interessi', 'interessi totali'],
+    r: '💶 **Costo totale del mutuo**\n\nEsempio €160.000, 25 anni:\n• Al 2,8%: interessi totali **€62.300**\n• Al 3,5%: interessi totali **€80.600**\nDifferenza: **€18.300!**\n\nTrovare il tasso migliore fa la differenza. Consulenza gratuita!\n\n👉 [Simulatore](landing-mutuo.html#calcolatore)'
+  },
+  {
+    k: ['rata sostenibile', 'quanto rata', 'permettermi mutuo'],
+    r: '📊 **Calcola la rata sostenibile**\n\nReddito netto × 0,30 – rate altri finanziamenti = rata mutuo massima.\n\nEsempio: coppia €3.500/mese, rata auto €200 → rata max **€850/mese** → mutuo ~**€183.000** (25 anni, 2,8%).\n\n👉 [Simulatore rata](landing-mutuo.html#calcolatore)'
+  },
+  {
+    k: ['rinegoziazione', 'rinegoziare mutuo'],
+    r: '🔄 **Rinegoziazione mutuo**\n\nPuoi chiedere alla banca di cambiare tasso, allungare durata o ridurre spread. La banca non è obbligata: se rifiuta, fai la **surroga** (gratuita).\n\n📞 [Verifica opzioni](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['leasing immobiliare', 'leasing casa', 'affitto con riscatto', 'rent to buy'],
+    r: '🏠 **Leasing / Rent to Buy**\n\n**Leasing:** canone mensile + riscatto finale, detrazioni maggiorate per under 35.\n**Rent to Buy:** affitti con opzione acquisto, parte del canone scalata dal prezzo.\n\nAlternative intelligenti al mutuo classico. [Parliamone!](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['consulenza gratuita mutuo', 'aiuto mutuo', 'assistenza mutuo'],
+    r: '🆓 **Consulenza mutuo GRATUITA**\n\n✅ Analisi situazione finanziaria\n✅ Confronto 10+ banche partner\n✅ Simulazione rata personalizzata\n✅ Assistenza documentale completa\n✅ Supporto pre-approvazione → rogito\n\n**Tutto gratis, senza impegno.**\n\n📞 **049 884 3484** | 💬 WhatsApp **348 862 1888**\n\n👉 [Pagina mutui con simulatore](landing-mutuo.html)'
+  },
+  {
+    k: ['mutuo padova mercato', 'comprare padova mutuo'],
+    r: '📍 **Mutui a Padova 2026**\n\nPrezzo medio €2.500/mq, mutuo medio €150-200K, durata 25 anni. Tasso fisso migliore da 2,5%.\n\nZone top: Centro, Arcella (investimento), Selvazzano, Abano.\n\nCollab con tutte le banche del territorio. [Consulenza gratuita](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['bce', 'tassi bce', 'politica monetaria'],
+    r: '🏛️ **Tassi BCE e mutuo**\n\nBCE alza tassi → Euribor sale → rate variabili aumentano. BCE abbassa → Euribor scende → rate calano. I fissi sono influenzati indirettamente tramite l\'IRS.\n\nMonitoriamo costantemente per consigliarti il momento giusto.'
+  },
+  {
+    k: ['preammortamento', 'interessi preammortamento'],
+    r: '📋 **Preammortamento**\n\nPeriodo tra erogazione e inizio ammortamento: paghi solo interessi sul capitale erogato. Può durare da pochi giorni a qualche mese.\n\n💡 Stipula a inizio mese per ridurre il preammortamento.'
+  },
+  {
+    k: ['mutuo liquidità', 'prestito ipotecario'],
+    r: '💶 **Mutuo liquidità**\n\nSe hai un immobile libero da ipoteche, puoi ottenere liquidità usandolo come garanzia. LTV 50-60%, durata fino a 30 anni, tasso leggermente più alto.\n\n📞 [Valutazione fattibilità](landing-mutuo.html#formContatto)'
+  },
+  {
+    k: ['accollo mutuo venditore', 'mutuo esistente'],
+    r: '🔄 **Accollo del mutuo**\n\nSubentri nel mutuo del venditore mantenendo le condizioni. Risparmi su istruttoria e perizia. Serve approvazione della banca.\n\nI nostri consulenti valutano la convenienza caso per caso.'
+  },
+
   // ── AFFITTO E LOCAZIONE ──
   {
     k: ['affittare', 'affitto', 'mettere in affitto', 'locazione'],
@@ -1036,6 +1238,11 @@ class RighettoChat {
       return await this.completaStima();
     }
 
+    // Consulenza mutuo — indirizza alla pagina dedicata
+    if (/consule.*mutuo|mutuo gratu|aiuto mutuo|assistenza mutuo|cerco mutuo|voglio mutuo|info mutuo/.test(low)) {
+      return '🏦 **Consulenza Mutuo Gratuita**\n\nOffriamo consulenza **completamente gratuita**:\n✅ Confronto tassi da 10+ banche partner\n✅ Simulazione rata personalizzata\n✅ Assistenza dalla pre-approvazione al rogito\n\n👉 **[Calcola la tua rata — Simulatore Gratuito](landing-mutuo.html)**\n\nOppure chiedimi qualsiasi cosa sui mutui: requisiti, tassi, surroga, agevolazioni under 36, documenti...\n\n📞 **049 884 3484** | 💬 WhatsApp **348 862 1888**';
+    }
+
     // Stima guidata
     if (/stim|valut|vale|valore|prezzo|quanto.*cost|calcol/.test(low)) {
       this.state = 'stima_comune';
@@ -1087,7 +1294,7 @@ class RighettoChat {
 
     // Saluto
     if (/^(ciao|salve|buongiorno|buonasera|hey|hi|hello)/.test(low)) {
-      return '👋 Ciao! Sono **Sara**, l\'assistente di **Righetto Immobiliare**.\n\nPosso aiutarti con:\n• 💰 **Stima valore** del tuo immobile\n• 🔍 **Ricerca immobili** in vendita/affitto\n• 📋 Info su **vendita**, **acquisto**, **affitto**, **mutui**, **tasse**\n• 📞 **Contattare** un agente\n\nCome posso aiutarti?';
+      return '👋 Ciao! Sono **Sara**, l\'assistente di **Righetto Immobiliare**.\n\nPosso aiutarti con:\n• 💰 **Stima valore** del tuo immobile\n• 🔍 **Ricerca immobili** in vendita/affitto\n• 🏦 **Consulenza mutuo** gratuita — [simulatore rata](landing-mutuo.html)\n• 📋 Info su **vendita**, **acquisto**, **affitto**, **tasse**\n• 📞 **Contattare** un agente\n\nCome posso aiutarti?';
     }
 
     // Default
@@ -1510,6 +1717,7 @@ function initChatbotUI() {
         <button class="chat-qbtn" onclick="rigChat.send('🔍 Cerca immobili')">🔍 Cerca immobili</button>
         <button class="chat-qbtn" onclick="rigChat.send('📞 Voglio essere contattato')">📞 Contattami</button>
         <button class="chat-qbtn" onclick="rigChat.send('🕐 Orari e contatti')">🕐 Orari</button>
+        <button class="chat-qbtn" onclick="rigChat.send('🏦 Consulenza mutuo gratuita')">🏦 Mutui</button>
         <button class="chat-qbtn" onclick="rigChat.send('💡 Quanto costa vendere?')">💡 Provvigioni</button>
       </div>
       <div class="chat-input-row">
