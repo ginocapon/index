@@ -1750,21 +1750,36 @@ function autoOpenChatbot() {
   var alreadyShown = sessionStorage.getItem('chatbot_auto_opened');
   if (isHome && !alreadyShown) {
     if (!window.rigChat) {
-      // rigChat non ancora pronto, riprova tra 500ms (max 3 tentativi)
+      // rigChat non ancora pronto, riprova tra 500ms (max 6 tentativi = 3s extra)
       if (!autoOpenChatbot._retries) autoOpenChatbot._retries = 0;
-      if (autoOpenChatbot._retries < 3) {
+      if (autoOpenChatbot._retries < 6) {
         autoOpenChatbot._retries++;
         setTimeout(autoOpenChatbot, 500);
       }
       return;
     }
     sessionStorage.setItem('chatbot_auto_opened', '1');
+    // Apri direttamente senza usare toggle (più affidabile)
     var box = document.getElementById('rig-chat-box');
-    if (!box || !box.classList.contains('open')) {
-      window.rigChat.toggle();
+    if (box && !box.classList.contains('open')) {
+      window.rigChat.open = true;
+      box.classList.add('open');
+      var iconAvatar = document.getElementById('rig-chat-btn-avatar');
+      var iconClose = document.getElementById('rig-chat-icon-close');
+      var pulse = document.getElementById('rig-chat-pulse');
+      var closeBar = document.getElementById('rig-chat-close-bar');
+      if (iconAvatar) iconAvatar.style.display = 'none';
+      if (iconClose) iconClose.style.display = 'block';
+      if (pulse) pulse.style.display = 'none';
+      if (closeBar) closeBar.classList.add('visible');
+      if (document.getElementById('rig-chat-msgs').children.length === 0) {
+        window.rigChat.showWelcome();
+      }
     }
   }
 }
-setTimeout(autoOpenChatbot, 0);
+// Avvia subito + retry con piccolo delay come fallback
+autoOpenChatbot();
+setTimeout(autoOpenChatbot, 300);
 
 })();
