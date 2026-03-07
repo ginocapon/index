@@ -16,7 +16,7 @@
   if (sessionStorage.getItem('welcome_shown')) return;
 
   // ── Avatar Sara — FOTO REALE con animazioni CSS ──
-  var SARA_PHOTO = 'img/sara-avatar.jpg';
+  var SARA_PHOTO = 'img/team/real-state-linda-righetto.webp';
   var SARA_HTML = '<div class="welcome-avatar-photo" id="sara-photo-wrap">' +
     '<img src="' + SARA_PHOTO + '" alt="Sara — Assistente Righetto Immobiliare" class="welcome-avatar-img" id="sara-photo">' +
     '<div class="sara-speaking-ring" id="sara-ring"></div>' +
