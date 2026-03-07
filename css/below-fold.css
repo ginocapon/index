@@ -181,11 +181,12 @@
 .btn-calc{
   width:100%;padding:15px;
   background:linear-gradient(135deg,var(--blu) 0%,var(--blu3) 100%);
-  color:white;border:none;border-radius:8px;font-weight:800;font-size:0.8rem;
+  color:white;border:3px solid rgba(0,200,150,0.55);border-radius:8px;font-weight:800;font-size:0.8rem;
   letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.25s;
   display:flex;align-items:center;justify-content:center;gap:10px;
+  box-shadow:0 0 14px rgba(0,200,150,0.35),0 0 28px rgba(0,180,220,0.15);
 }
-.btn-calc:hover{background:linear-gradient(135deg,var(--testo) 0%,var(--blu) 100%);transform:translateY(-2px);box-shadow:0 12px 32px rgba(21,36,53,0.25)}
+.btn-calc:hover{background:linear-gradient(135deg,var(--testo) 0%,var(--blu) 100%);transform:translateY(-2px);border-color:rgba(0,200,150,0.75);box-shadow:0 0 20px rgba(0,200,150,0.45),0 12px 32px rgba(21,36,53,0.25)}
 .btn-calc svg{width:16px;height:16px}
 #stima-result{
   display:none;margin-top:20px;
