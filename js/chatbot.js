@@ -1740,11 +1740,24 @@ if (document.readyState === 'loading') {
 
 // ── Auto-open chatbot dopo ~4s su homepage (solo prima visita sessione) ──
 // NB: chatbot.js è caricato lazy dopo ~3s, quindi il delay reale è ~4s totali
-function autoOpenChatDesktop() {
+function autoOpenChatbot() {
   var path = location.pathname.replace(/\/+$/, '') || '/';
-  var isHome = path === '/' || path === '/index.html' || path === '/index';
+  var isHome = path === '/' || path === '/index.html' || path === '/index' || path === '/home';
+  // Fallback: se il body ha id/class homepage o se è la root del dominio
+  if (!isHome) {
+    isHome = document.body.id === 'homepage' || document.body.classList.contains('homepage') || path.length <= 1;
+  }
   var alreadyShown = sessionStorage.getItem('chatbot_auto_opened');
-  if (isHome && !alreadyShown && window.rigChat) {
+  if (isHome && !alreadyShown) {
+    if (!window.rigChat) {
+      // rigChat non ancora pronto, riprova tra 500ms (max 3 tentativi)
+      if (!autoOpenChatbot._retries) autoOpenChatbot._retries = 0;
+      if (autoOpenChatbot._retries < 3) {
+        autoOpenChatbot._retries++;
+        setTimeout(autoOpenChatbot, 500);
+      }
+      return;
+    }
     sessionStorage.setItem('chatbot_auto_opened', '1');
     var box = document.getElementById('rig-chat-box');
     if (!box || !box.classList.contains('open')) {
@@ -1752,6 +1765,6 @@ function autoOpenChatDesktop() {
     }
   }
 }
-setTimeout(autoOpenChatDesktop, 1000);
+setTimeout(autoOpenChatbot, 1000);
 
 })();
