@@ -348,7 +348,8 @@ function generateSlug(titolo) {
     'agevolazioni prima casa 2026: bonus, requisiti e come ottenerli': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-agevolazioni-prima-casa-2026' },
     'investire nel mercato immobiliare a padova nel 2026: guida completa': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-investire-immobiliare-padova' },
     'contratto di affitto a padova 2026: canone concordato e guida completa': { img: 'img/foto-servizi/contratti-di-locazione-padova.webp', url: 'blog-contratto-affitto-padova' },
-    'rendimento affitto padova 2026: calcolo e analisi per quartiere': { img: 'img/foto-servizi/contratti-di-locazione-padova.webp', url: 'blog-rendimento-affitto-padova' }
+    'rendimento affitto padova 2026: calcolo e analisi per quartiere': { img: 'img/foto-servizi/contratti-di-locazione-padova.webp', url: 'blog-rendimento-affitto-padova' },
+    'tempi vendita casa padova 2026: quanto ci vuole davvero?': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-tempi-vendita-casa-padova' }
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
@@ -371,7 +372,8 @@ function generateSlug(titolo) {
     { titolo: 'Contratto di Affitto a Padova 2026: Canone Concordato e Guida Completa', categoria: 'Affitti', data: '2026-03-07', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/contratti-di-locazione-padova.webp', url_statico: 'blog-contratto-affitto-padova' },
     { titolo: 'Rendimento Affitto Padova 2026: Calcolo e Analisi per Quartiere', categoria: 'Affitti', data: '2026-03-07', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/contratti-di-locazione-padova.webp', url_statico: 'blog-rendimento-affitto-padova' },
     { titolo: 'Mutuo Prima Casa a Padova: Guida Completa 2026', categoria: 'Consigli acquisto', data: '2026-03-01', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-mutuo-prima-casa-padova' },
-    { titolo: "Ca' Marcello Mestre: Hub Turistico da 70 Milioni", categoria: 'Investimenti', data: '2026-02-24', stato: 'pubblicato', immagine_copertina: 'img/blog/ca-marcello-hero.webp', url_statico: 'blog-ca-marcello-mestre' }
+    { titolo: "Ca' Marcello Mestre: Hub Turistico da 70 Milioni", categoria: 'Investimenti', data: '2026-02-24', stato: 'pubblicato', immagine_copertina: 'img/blog/ca-marcello-hero.webp', url_statico: 'blog-ca-marcello-mestre' },
+    { titolo: 'Tempi Vendita Casa Padova 2026: Quanto Ci Vuole Davvero?', categoria: 'Guida alla vendita', data: '2026-03-08', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-tempi-vendita-casa-padova' }
   ];
   // Carica da Supabase e merge con statici
   let articles = [];

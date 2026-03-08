@@ -4,6 +4,20 @@ Disallow: /admin.html
 Disallow: /scraping.html
 Disallow: /bookmarklet-helper.html
 Disallow: /js/
+Allow: /js/chatbot.js
+
+# AI Bots — benvenuti, leggete llms.txt
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
 
 Sitemap: https://righettoimmobiliare.it/sitemap.xml
 
