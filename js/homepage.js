@@ -306,11 +306,11 @@ function doRicerca() {
   window.location.href = 'immobili?' + p.toString();
 }
 
-/* Attendi Supabase se defer non è ancora pronto */
+/* Attendi Supabase (caricato lazy dopo il render) */
 function waitSBThen(fn,tries){
   initSB();
-  if(sb||tries>8) return fn();
-  setTimeout(function(){waitSBThen(fn,tries+1);},150);
+  if(sb||tries>20) return fn();
+  setTimeout(function(){waitSBThen(fn,(tries||0)+1);},250);
 }
 waitSBThen(loadImmobili,0);
 
