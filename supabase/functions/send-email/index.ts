@@ -1,10 +1,9 @@
 // ═══════════════════════════════════════════════════════════════
 // RIGHETTO IMMOBILIARE — Email Sending Edge Function
-// Invia email via PHP relay sul tuo cPanel — Zero servizi esterni
+// Invia email via Brevo (ex Sendinblue) API
 // Deploy: supabase functions deploy send-email
 // Secrets necessari su Supabase:
-//   MAIL_RELAY_URL = https://righetto-immobiliare.it/api/send-mail.php
-//   MAIL_RELAY_KEY = RighettoMail2026!SecretKey  (stessa del PHP)
+//   BREVO_API_KEY = la tua chiave API Brevo
 // ═══════════════════════════════════════════════════════════════
 
 import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
@@ -16,9 +15,8 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
 };
 
-// ═══ INVIO VIA PHP RELAY (tuo cPanel) ═══
-async function sendViaRelay(options: {
-  action: string;
+// ═══ INVIO VIA BREVO API ═══
+async function sendViaBrevo(options: {
   to_email: string;
   to_name?: string;
   sender_email: string;
@@ -27,26 +25,42 @@ async function sendViaRelay(options: {
   html_body: string;
   reply_to?: string;
 }) {
-  const RELAY_URL = Deno.env.get("MAIL_RELAY_URL") || "https://righetto-immobiliare.it/api/send-mail.php";
-  const RELAY_KEY = Deno.env.get("MAIL_RELAY_KEY") || "RighettoMail2026!SecretKey";
+  const BREVO_KEY = Deno.env.get("BREVO_API_KEY") || "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";
 
-  console.log("Relay:", options.action, "→", options.to_email, "da", options.sender_email);
+  console.log("Brevo: invio a", options.to_email, "da", options.sender_email);
 
-  const resp = await fetch(RELAY_URL, {
+  const resp = await fetch("https://api.brevo.com/v3/smtp/email", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-API-Key": RELAY_KEY,
+      "api-key": BREVO_KEY,
     },
-    body: JSON.stringify(options),
+    body: JSON.stringify({
+      sender: {
+        email: options.sender_email,
+        name: options.sender_name || "Righetto Immobiliare",
+      },
+      to: [
+        {
+          email: options.to_email,
+          name: options.to_name || options.to_email,
+        },
+      ],
+      replyTo: {
+        email: options.reply_to || options.sender_email,
+      },
+      subject: options.subject,
+      htmlContent: options.html_body,
+    }),
   });
 
-  const result = await resp.json();
-
-  if (result.status === "error") {
-    throw new Error(result.error || "Errore dal relay PHP");
+  if (!resp.ok) {
+    const errorBody = await resp.text();
+    console.error("Brevo error:", resp.status, errorBody);
+    throw new Error(`Brevo API error (${resp.status}): ${errorBody}`);
   }
 
+  const result = await resp.json();
   return result;
 }
 
@@ -71,7 +85,7 @@ serve(async (req) => {
     if (action === "track_click") {
       return await trackClick(supabase, {
         queue_id: id,
-        url: url.searchParams.get("url") || "https://righetto-immobiliare.it",
+        url: url.searchParams.get("url") || "https://www.righettoimmobiliare.it",
       });
     }
     if (action === "unsubscribe") {
@@ -167,8 +181,7 @@ async function sendSingleEmail(supabase: any, body: any) {
   console.log("sendSingleEmail: from=" + fromEmail + ", to=" + to_email);
 
   try {
-    await sendViaRelay({
-      action: "send_single",
+    await sendViaBrevo({
       to_email,
       to_name: to_name || "",
       sender_email: fromEmail,
@@ -249,8 +262,7 @@ async function processQueue(supabase: any, body: any) {
     try {
       const trackPixel = `<img src="${Deno.env.get("SUPABASE_URL")}/functions/v1/send-email?action=track_open&id=${item.id}" width="1" height="1" style="display:none" alt="">`;
 
-      await sendViaRelay({
-        action: "send_single",
+      await sendViaBrevo({
         to_email: item.destinatario_email,
         to_name: item.destinatario_nome || "",
         sender_email: config.mittente_email,
@@ -299,8 +311,7 @@ async function sendTestEmail(supabase: any, body: any) {
   console.log("sendTestEmail: from=" + fromEmail + ", to=" + to_email);
 
   try {
-    await sendViaRelay({
-      action: "send_test",
+    await sendViaBrevo({
       to_email: to_email.trim(),
       sender_email: fromEmail,
       sender_name: fromName,
@@ -333,7 +344,7 @@ async function handleUnsubscribe(supabase: any, body: any) {
       <h2 style="color:#2d7a3a">Disiscrizione completata</h2>
       <p>La tua email <strong>${email}</strong> è stata rimossa dalla nostra mailing list.</p>
       <p style="color:#666;font-size:0.9rem">Non riceverai più comunicazioni da Righetto Immobiliare.</p>
-      <p style="margin-top:20px"><a href="https://righetto-immobiliare.it" style="color:#b8860b">Torna al sito</a></p>
+      <p style="margin-top:20px"><a href="https://www.righettoimmobiliare.it" style="color:#b8860b">Torna al sito</a></p>
     </div>
   </body></html>`;
 
@@ -372,7 +383,7 @@ async function trackClick(supabase: any, body: any) {
 
   return new Response(null, {
     status: 302,
-    headers: { ...corsHeaders, Location: body.url || "https://righetto-immobiliare.it" },
+    headers: { ...corsHeaders, Location: body.url || "https://www.righettoimmobiliare.it" },
   });
 }
 
