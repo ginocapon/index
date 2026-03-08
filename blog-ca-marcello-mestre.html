@@ -178,6 +178,11 @@
       "latitude": 45.476956,
       "longitude": 11.845762
     },
+    "sameAs": [
+      "https://www.facebook.com/righettoimmobiliare",
+      "https://www.instagram.com/righettoimmobiliare",
+      "https://www.linkedin.com/company/righetto-immobiliare"
+    ],
     "hasMap": "https://maps.google.com/?q=45.476956,11.845762",
     "areaServed": [
       {"@type": "City", "name": "Padova"},
@@ -311,6 +316,16 @@
       .cta-banner{padding:1.5rem;flex-direction:column;text-align:center}
     }
     .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
+  
+    /* Author bio box */
+    .author-bio{display:flex;gap:1.2rem;align-items:flex-start;background:var(--bianco,#F7F5F1);border:1px solid rgba(44,74,110,.12);border-radius:12px;padding:1.5rem;margin:2rem 0}
+    .author-bio img{width:64px;height:64px;border-radius:50%;object-fit:cover;flex-shrink:0}
+    .author-bio-text{flex:1}
+    .author-bio-text strong{display:block;font-size:.95rem;color:var(--nero,#0A0F1C);margin-bottom:.2rem}
+    .author-bio-text .author-role{font-size:.78rem;color:var(--blu,#2C4A6E);font-weight:600;margin-bottom:.4rem}
+    .author-bio-text p{font-size:.82rem;line-height:1.5;color:#555;margin:0}
+    @media(max-width:600px){.author-bio{flex-direction:column;align-items:center;text-align:center}}
+
   </style>
 </head>
 <body>
@@ -559,6 +574,17 @@
     <button class="share-btn" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copiato!'">Copia link</button>
     <a class="share-btn" href="https://wa.me/?text=Ca%27+Marcello+Mestre%3A+da+area+industriale+a+hub+turistico+da+70+milioni+%E2%80%94+https%3A%2F%2Frighettoimmobiliare.it%2Fblog-ca-marcello-mestre.html" target="_blank" rel="noopener">WhatsApp</a>
     <a class="share-btn" href="mailto:?subject=Ca%27%20Marcello%20Mestre%3A%20riqualificazione%20da%2070%20milioni&body=Leggi%20questo%20articolo%3A%20https%3A%2F%2Frighettoimmobiliare.it%2Fblog-ca-marcello-mestre.html" target="_blank" rel="noopener">Email</a>
+  </div>
+
+
+  <!-- AUTHOR BIO -->
+  <div class="author-bio">
+    <img src="img/team/titolari.webp" alt="Gino Capon - Fondatore Righetto Immobiliare" width="64" height="64" loading="lazy">
+    <div class="author-bio-text">
+      <strong>Gino Capon</strong>
+      <div class="author-role">Fondatore &mdash; Righetto Immobiliare</div>
+      <p>Fondatore di Righetto Immobiliare nel 2000. Oltre 25 anni di esperienza nel mercato immobiliare di Padova e provincia. <a href="chi-siamo">Scopri il team &rarr;</a></p>
+    </div>
   </div>
 
 </div><!-- /art-container -->
