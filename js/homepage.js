@@ -369,7 +369,9 @@ function generateSlug(titolo) {
     { titolo: 'Agevolazioni Prima Casa 2026: Bonus, Requisiti e Come Ottenerli', categoria: 'Fisco', data: '2026-03-07', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-agevolazioni-prima-casa-2026' },
     { titolo: 'Investire nel Mercato Immobiliare a Padova nel 2026: Guida Completa', categoria: 'Consigli acquisto', data: '2026-03-07', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-investire-immobiliare-padova' },
     { titolo: 'Contratto di Affitto a Padova 2026: Canone Concordato e Guida Completa', categoria: 'Affitti', data: '2026-03-07', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/contratti-di-locazione-padova.webp', url_statico: 'blog-contratto-affitto-padova' },
-    { titolo: 'Rendimento Affitto Padova 2026: Calcolo e Analisi per Quartiere', categoria: 'Affitti', data: '2026-03-07', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/contratti-di-locazione-padova.webp', url_statico: 'blog-rendimento-affitto-padova' }
+    { titolo: 'Rendimento Affitto Padova 2026: Calcolo e Analisi per Quartiere', categoria: 'Affitti', data: '2026-03-07', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/contratti-di-locazione-padova.webp', url_statico: 'blog-rendimento-affitto-padova' },
+    { titolo: 'Mutuo Prima Casa a Padova: Guida Completa 2026', categoria: 'Consigli acquisto', data: '2026-03-01', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-mutuo-prima-casa-padova' },
+    { titolo: "Ca' Marcello Mestre: Hub Turistico da 70 Milioni", categoria: 'Investimenti', data: '2026-02-24', stato: 'pubblicato', immagine_copertina: 'img/blog/ca-marcello-hero.webp', url_statico: 'blog-ca-marcello-mestre' }
   ];
   // Carica da Supabase e merge con statici
   let articles = [];
