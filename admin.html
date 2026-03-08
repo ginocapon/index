@@ -4007,7 +4007,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               <div id="emListaClientiSelezionabili" style="flex:1;overflow-y:auto;padding:10px 20px;max-height:400px"></div>
               <div style="padding:12px 20px;border-top:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
                 <span style="font-size:0.82rem;color:var(--caffe2)" id="emSelezionatiCount">0 selezionati</span>
-                <button class="btn" onclick="emConfermaSelezionati()" style="background:var(--oro);color:#fff;border:none;font-weight:600;padding:10px 24px;border-radius:8px">Conferma selezione</button>
+                <button class="btn" onclick="emConfermaSelezionati()" style="background:var(--oro);color:var(--nero);border:none;font-weight:600;padding:10px 24px;border-radius:8px">Conferma selezione</button>
               </div>
             </div>
           </div>
@@ -4018,7 +4018,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
             <!-- Toggle: Visuale / Codice / Landing -->
             <div style="display:flex;gap:0;margin-bottom:16px;border-radius:8px;overflow:hidden;border:2px solid var(--oro)">
-              <button id="emTabVisuale" onclick="emSwitchTab('visuale')" style="flex:1;padding:10px;border:none;cursor:pointer;font-weight:600;font-size:0.85rem;background:var(--oro);color:#fff;transition:all 0.2s">
+              <button id="emTabVisuale" onclick="emSwitchTab('visuale')" style="flex:1;padding:10px;border:none;cursor:pointer;font-weight:600;font-size:0.85rem;background:var(--oro);color:var(--nero);transition:all 0.2s">
                 Editor Visuale (semplice)
               </button>
               <button id="emTabCodice" onclick="emSwitchTab('codice')" style="flex:1;padding:10px;border:none;cursor:pointer;font-weight:600;font-size:0.85rem;background:#f8f6f3;color:var(--caffe);transition:all 0.2s">
@@ -4218,7 +4218,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
             <!-- Tabs: Invio singolo / Multi-programmazione -->
             <div style="display:flex;gap:0;margin-bottom:16px;border-radius:8px;overflow:hidden;border:1px solid #ddd">
-              <button id="emSchedTabSingolo" onclick="emSwitchSchedTab('singolo')" style="flex:1;padding:8px;border:none;cursor:pointer;font-size:0.85rem;background:var(--oro);color:#fff">Invio singolo</button>
+              <button id="emSchedTabSingolo" onclick="emSwitchSchedTab('singolo')" style="flex:1;padding:8px;border:none;cursor:pointer;font-size:0.85rem;background:var(--oro);color:var(--nero)">Invio singolo</button>
               <button id="emSchedTabMulti" onclick="emSwitchSchedTab('multi')" style="flex:1;padding:8px;border:none;cursor:pointer;font-size:0.85rem;background:#f8f6f3;color:var(--caffe)">Multi-programmazione</button>
             </div>
 
@@ -6123,7 +6123,16 @@ const _blogSeedArticles = [
   { titolo: 'Agevolazioni Prima Casa 2026: Bonus, Requisiti e Come Ottenerli', categoria: 'Fisco', data: '2026-03-07', tempo: 11, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🎁', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-agevolazioni-prima-casa-2026', contenuto: '<p>Agevolazioni prima casa 2026: imposta registro 2%, IVA 4%, bonus under 36, detrazioni mutuo.</p>', evidenza: true },
   { titolo: 'Investire nel Mercato Immobiliare a Padova nel 2026: Guida Completa', categoria: 'Consigli acquisto', data: '2026-03-07', tempo: 12, stato: 'pubblicato', autore: 'Gino Capon', emoji: '📈', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-investire-immobiliare-padova', contenuto: '<p>Guida all\'investimento immobiliare a Padova 2026: rendimenti 4-6%, zone migliori, affitto studenti.</p>', evidenza: true },
   { titolo: 'Contratto di Affitto a Padova 2026: Canone Concordato e Guida Completa', categoria: 'Affitti', data: '2026-03-07', tempo: 10, stato: 'pubblicato', autore: 'Gino Capon', emoji: '📝', immagine_copertina: 'img/foto-servizi/contratti-di-locazione-padova.webp', url_statico: 'blog-contratto-affitto-padova', contenuto: '<p>Tipologie di contratto d\'affitto a Padova 2026: 4+4, 3+2, transitorio, studenti. Cedolare secca 10%.</p>', evidenza: true },
-  { titolo: 'Rendimento Affitto Padova 2026: Calcolo e Analisi per Quartiere', categoria: 'Affitti', data: '2026-03-07', tempo: 10, stato: 'pubblicato', autore: 'Gino Capon', emoji: '💹', immagine_copertina: 'img/foto-servizi/contratti-di-locazione-padova.webp', url_statico: 'blog-rendimento-affitto-padova', contenuto: '<p>Rendimento locativo per quartiere a Padova 2026: dal 3.5% del Centro al 6.5% della Zona Universitaria.</p>', evidenza: false }
+  { titolo: 'Rendimento Affitto Padova 2026: Calcolo e Analisi per Quartiere', categoria: 'Affitti', data: '2026-03-07', tempo: 10, stato: 'pubblicato', autore: 'Gino Capon', emoji: '💹', immagine_copertina: 'img/foto-servizi/contratti-di-locazione-padova.webp', url_statico: 'blog-rendimento-affitto-padova', contenuto: '<p>Rendimento locativo per quartiere a Padova 2026: dal 3.5% del Centro al 6.5% della Zona Universitaria.</p>', evidenza: false },
+  { titolo: 'Affitto Studenti Padova 2026: Zone, Prezzi e Guida Completa', categoria: 'Affitti', data: '2026-03-02', tempo: 7, stato: 'pubblicato', autore: 'Gino Capon', emoji: '📚', immagine_copertina: 'img/foto-servizi/contratti-di-locazione-padova.webp', url_statico: 'blog-affitto-studenti-padova', contenuto: '<p>Guida completa all\'affitto per studenti a Padova 2026: zone migliori, prezzi e tipologie contrattuali.</p>', evidenza: true },
+  { titolo: 'Appartamento Nuova Costruzione Limena: 101 mq con Giardino 310 mq in Classe A4', categoria: 'Nuove Costruzioni', data: '2026-03-03', tempo: 10, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🏗️', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-appartamento-nuova-costruzione-limena', contenuto: '<p>Appartamento piano terra 101 mq nuova costruzione a Limena: loggia 33 mq, giardino 310 mq, classe A4.</p>', evidenza: true },
+  { titolo: "Ca' Marcello Mestre: Hub Turistico da 70 Milioni", categoria: 'Investimenti', data: '2026-02-24', tempo: 11, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🏢', immagine_copertina: 'img/blog/ca-marcello-hero.webp', url_statico: 'blog-ca-marcello-mestre', contenuto: '<p>Ca\' Marcello Mestre: 70 milioni, 4 hotel, 2.000 posti letto. Da area industriale a hub turistico.</p>', evidenza: true },
+  { titolo: 'Case in Vendita Padova 2026: Prezzi, Zone e Guida Esperta', categoria: 'Mercato locale', data: '2026-03-01', tempo: 11, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🏘️', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-case-vendita-padova', contenuto: '<p>Case in vendita a Padova e provincia nel 2026: prezzi aggiornati al mq zona per zona.</p>', evidenza: true },
+  { titolo: 'Conviene comprare casa a Padova o restare in affitto? Analisi su 20 anni', categoria: 'Consigli acquisto', data: '2026-03-02', tempo: 14, stato: 'pubblicato', autore: 'Gino Capon', emoji: '⚖️', immagine_copertina: 'img/blog/comprare-affittare-padova.webp', url_statico: 'blog-comprare-affittare-padova', contenuto: '<p>Conviene comprare o affittare a Padova? Analisi con dati OMI, simulazioni mutuo e trend su 20 anni.</p>', evidenza: true },
+  { titolo: "L'impegno quotidiano di un'agenzia immobiliare: tra burocrazia e incertezza mutui", categoria: "Vita d'Agenzia", data: '2026-03-03', tempo: 11, stato: 'pubblicato', autore: 'Gino Capon', emoji: '💼', immagine_copertina: 'img/blog/ufficio-righetto-immobiliare.webp', url_statico: 'blog-impegno-quotidiano-agenzia-immobiliare', contenuto: '<p>Cosa succede ogni giorno in un\'agenzia immobiliare? Burocrazia, mutui e normative a Padova.</p>', evidenza: false },
+  { titolo: 'Mercato Immobiliare Padova 2026: Prezzi, Tendenze e Previsioni', categoria: 'Mercato locale', data: '2026-03-02', tempo: 7, stato: 'pubblicato', autore: 'Gino Capon', emoji: '📊', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-mercato-immobiliare-padova-2026', contenuto: '<p>Analisi completa del mercato immobiliare di Padova nel 2026: prezzi, tendenze e previsioni.</p>', evidenza: true },
+  { titolo: 'Guida ai Quartieri di Padova: Dove Comprare Casa nel 2026', categoria: 'Mercato locale', data: '2026-03-02', tempo: 7, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🗺️', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-quartieri-padova-2026', contenuto: '<p>Scopri i quartieri migliori di Padova per comprare casa nel 2026: prezzi al mq e consigli zona per zona.</p>', evidenza: true },
+  { titolo: 'Mutuo Prima Casa a Padova: Guida Completa 2026', categoria: 'Consigli acquisto', data: '2026-03-01', tempo: 10, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🏦', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-mutuo-prima-casa-padova', contenuto: '<p>Guida al mutuo prima casa a Padova 2026: tassi aggiornati, requisiti, documenti e agevolazioni under 36.</p>', evidenza: true }
 ];
 
 async function getBlogArticles() {
@@ -6898,7 +6907,7 @@ function showMatchingClienti(propertyId) {
       '<span style="font-size:0.82rem;font-weight:600;color:var(--caffe)">Azioni massive (' + matches.length + ' clienti):</span>' +
       '<button class="btn btn-sm" onclick="emBulkEmailFromMatch(\'' + property.id + '\')" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;font-size:0.78rem;padding:6px 14px">Email a tutti</button>' +
       '<button class="btn btn-sm" onclick="emBulkWhatsAppFromMatch(\'' + property.id + '\')" style="background:#25d366;color:#fff;border:none;font-size:0.78rem;padding:6px 14px">WhatsApp a tutti</button>' +
-      '<button class="btn btn-sm" onclick="emSendPropertyNewsletter(\'' + property.id + '\')" style="background:var(--oro);color:#fff;border:none;font-size:0.78rem;padding:6px 14px">Newsletter immobile</button>' +
+      '<button class="btn btn-sm" onclick="emSendPropertyNewsletter(\'' + property.id + '\')" style="background:var(--oro);color:var(--nero);border:none;font-size:0.78rem;padding:6px 14px">Newsletter immobile</button>' +
     '</div>';
     document.getElementById('matchModalBody').innerHTML = bulkActions + document.getElementById('matchModalBody').innerHTML;
   }
@@ -10436,9 +10445,9 @@ checkAuth();
     document.getElementById('emPanelVisuale').style.display = tab === 'visuale' ? 'block' : 'none';
     document.getElementById('emPanelCodice').style.display = tab === 'codice' ? 'block' : 'none';
     document.getElementById('emTabVisuale').style.background = tab === 'visuale' ? 'var(--oro)' : '#f8f6f3';
-    document.getElementById('emTabVisuale').style.color = tab === 'visuale' ? '#fff' : 'var(--caffe)';
+    document.getElementById('emTabVisuale').style.color = tab === 'visuale' ? 'var(--nero)' : 'var(--caffe)';
     document.getElementById('emTabCodice').style.background = tab === 'codice' ? 'var(--oro)' : '#f8f6f3';
-    document.getElementById('emTabCodice').style.color = tab === 'codice' ? '#fff' : 'var(--caffe)';
+    document.getElementById('emTabCodice').style.color = tab === 'codice' ? 'var(--nero)' : 'var(--caffe)';
   };
 
   // ═══ POPOLA LE 3 TENDINE CONTENUTO ═══
@@ -10713,9 +10722,9 @@ checkAuth();
     document.getElementById('emSchedSingolo').style.display = tab === 'singolo' ? 'block' : 'none';
     document.getElementById('emSchedMulti').style.display = tab === 'multi' ? 'block' : 'none';
     document.getElementById('emSchedTabSingolo').style.background = tab === 'singolo' ? 'var(--oro)' : '#f8f6f3';
-    document.getElementById('emSchedTabSingolo').style.color = tab === 'singolo' ? '#fff' : 'var(--caffe)';
+    document.getElementById('emSchedTabSingolo').style.color = tab === 'singolo' ? 'var(--nero)' : 'var(--caffe)';
     document.getElementById('emSchedTabMulti').style.background = tab === 'multi' ? 'var(--oro)' : '#f8f6f3';
-    document.getElementById('emSchedTabMulti').style.color = tab === 'multi' ? '#fff' : 'var(--caffe)';
+    document.getElementById('emSchedTabMulti').style.color = tab === 'multi' ? 'var(--nero)' : 'var(--caffe)';
     // Mostra bottone programma nel multi
     document.getElementById('emBtnProgramma').style.display = tab === 'multi' ? 'inline-block' : 'none';
   };
