@@ -1747,8 +1747,10 @@ function autoOpenChatbot() {
   if (!isHome) {
     isHome = document.body.id === 'homepage' || document.body.classList.contains('homepage') || path.length <= 1;
   }
+  // Disattiva auto-open su mobile (< 768px) — solo desktop/iPad
+  var isMobile = window.innerWidth < 768;
   var alreadyShown = sessionStorage.getItem('chatbot_auto_opened');
-  if (isHome && !alreadyShown) {
+  if (isHome && !alreadyShown && !isMobile) {
     if (!window.rigChat) {
       // rigChat non ancora pronto, riprova tra 500ms (max 6 tentativi = 3s extra)
       if (!autoOpenChatbot._retries) autoOpenChatbot._retries = 0;
