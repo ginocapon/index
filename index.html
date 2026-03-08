@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MHDHHES26"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-9MHDHHES26');
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vendere e Comprare Casa a Padova | Righetto Immobiliare</title>
 <meta name="description" content="Assistenza completa per vendere e comprare casa a Padova e provincia. Dalla valutazione al rogito in tutti i 101 comuni. Dal 2000.">
+<link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://qwkwkemuabfwvwuqrxlu.supabase.co" crossorigin>
 <link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co">
@@ -20,7 +13,8 @@
 <link rel="dns-prefetch" href="https://img.youtube.com">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/cormorant-garamond-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="img/team/titolari.webp" as="image" type="image/webp" fetchpriority="high">
 <meta name="google-site-verification" content="AbK7L5qoV9UFcfjQmtpC5OmD1ZsHx_55NNGYjxlOSxw">
 <meta name="theme-color" content="#2C4A6E">
@@ -43,8 +37,12 @@
 <link rel="stylesheet" href="css/nav-mobile.css" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/scroll-reveal.css" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/below-fold.css" media="print" onload="this.media='all'">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <style>
+/* Critical font-face inline — elimina round-trip a fonts.css per above-fold */
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/montserrat-400.woff2') format('woff2')}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/montserrat-700.woff2') format('woff2')}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:swap;src:url('fonts/montserrat-800.woff2') format('woff2')}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/cormorant-garamond-700.woff2') format('woff2')}
 :root {
   --blu:      #2C4A6E;
   --blu2:     #3A5F8C;
@@ -1477,5 +1475,32 @@ function loadVideo(wrap) {
 })();
 </script>
 <script src="js/scroll-reveal.js" defer></script>
+<!-- GA + Supabase: caricati dopo il render per non competere con risorse critiche -->
+<script>
+(function(){
+  function loadGA(){
+    var s=document.createElement('script');
+    s.src='https://www.googletagmanager.com/gtag/js?id=G-9MHDHHES26';
+    s.async=true;
+    document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag=gtag;
+    gtag('js',new Date());
+    gtag('config','G-9MHDHHES26');
+  }
+  function loadSupabase(){
+    var s=document.createElement('script');
+    s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+    s.onload=function(){if(typeof initSB==='function')initSB();};
+    document.head.appendChild(s);
+  }
+  if('requestIdleCallback' in window){
+    requestIdleCallback(function(){loadGA();loadSupabase();});
+  } else {
+    setTimeout(function(){loadGA();loadSupabase();},1500);
+  }
+})();
+</script>
 </body>
 </html>
