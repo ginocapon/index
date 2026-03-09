@@ -266,18 +266,41 @@ async function inviaContatto(e){
   e.preventDefault();
   const btn = e.target.querySelector('.btn-send');
   btn.textContent='Invio in corso...'; btn.disabled=true;
+  const nome = document.getElementById('cf-nome').value+' '+document.getElementById('cf-cognome').value;
+  const email = document.getElementById('cf-email').value;
+  const telefono = document.getElementById('cf-tel').value;
+  const tipo = document.getElementById('cf-interesse').value;
+  const messaggio = document.getElementById('cf-msg').value;
   const payload = {
-    nome: document.getElementById('cf-nome').value+' '+document.getElementById('cf-cognome').value,
-    email: document.getElementById('cf-email').value,
-    telefono: document.getElementById('cf-tel').value,
-    tipo_richiesta: document.getElementById('cf-interesse').value,
-    messaggio: document.getElementById('cf-msg').value,
-    sorgente: 'homepage',
-    data_richiesta: new Date().toISOString()
+    nome: nome, email: email, telefono: telefono,
+    tipo_richiesta: tipo, messaggio: messaggio,
+    sorgente: 'homepage', data_richiesta: new Date().toISOString()
   };
+  // Salva su Supabase
+  try{ if(sb){ await sb.from('richieste').insert([payload]); } }catch(er){}
+  // Invia email via PHP
   try{
-    if(sb){ await sb.from('richieste').insert([payload]); }
-  }catch(er){}
+    await fetch('https://www.righettoimmobiliare.it/api/send-mail.php',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','X-API-Key':'RighettoMail2026!SecretKey'},
+      body:JSON.stringify({
+        action:'send',
+        to_email:'info@righettoimmobiliare.it',
+        to_name:'Righetto Immobiliare',
+        sender_email: email,
+        sender_name: nome,
+        reply_to: email,
+        subject:'Nuova richiesta dal sito: '+tipo,
+        html_body:'<h2>Nuova richiesta dal sito</h2>'+
+          '<p><strong>Nome:</strong> '+nome+'</p>'+
+          '<p><strong>Email:</strong> '+email+'</p>'+
+          '<p><strong>Telefono:</strong> '+telefono+'</p>'+
+          '<p><strong>Tipo richiesta:</strong> '+tipo+'</p>'+
+          '<p><strong>Messaggio:</strong><br>'+messaggio.replace(/\n/g,'<br>')+'</p>'+
+          '<hr><p style="color:#888;font-size:12px">Inviato dal form contatto homepage — '+new Date().toLocaleString('it-IT')+'</p>'
+      })
+    });
+  }catch(er){ console.warn('Email non inviata:',er); }
   document.getElementById('cf-ok').style.display='block';
   e.target.querySelectorAll('input,select,textarea').forEach(el=>el.value='');
   btn.textContent='✓ Inviato'; btn.style.background='var(--verde)';
