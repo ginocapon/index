@@ -3,7 +3,7 @@
 // Invia email via PHP relay sul tuo cPanel — Zero servizi esterni
 // Deploy: supabase functions deploy send-email
 // Secrets necessari su Supabase:
-//   MAIL_RELAY_URL = https://righetto-immobiliare.it/api/send-mail.php
+//   MAIL_RELAY_URL = https://www.righettoimmobiliare.it/api/send-mail.php
 //   MAIL_RELAY_KEY = RighettoMail2026!SecretKey  (stessa del PHP)
 // ═══════════════════════════════════════════════════════════════
 
@@ -27,7 +27,7 @@ async function sendViaRelay(options: {
   html_body: string;
   reply_to?: string;
 }) {
-  const RELAY_URL = Deno.env.get("MAIL_RELAY_URL") || "https://righetto-immobiliare.it/api/send-mail.php";
+  const RELAY_URL = Deno.env.get("MAIL_RELAY_URL") || "https://www.righettoimmobiliare.it/api/send-mail.php";
   const RELAY_KEY = Deno.env.get("MAIL_RELAY_KEY") || "RighettoMail2026!SecretKey";
 
   console.log("Relay:", options.action, "→", options.to_email, "da", options.sender_email);
@@ -71,7 +71,7 @@ serve(async (req) => {
     if (action === "track_click") {
       return await trackClick(supabase, {
         queue_id: id,
-        url: url.searchParams.get("url") || "https://righetto-immobiliare.it",
+        url: url.searchParams.get("url") || "https://www.righettoimmobiliare.it",
       });
     }
     if (action === "unsubscribe") {
@@ -333,7 +333,7 @@ async function handleUnsubscribe(supabase: any, body: any) {
       <h2 style="color:#2d7a3a">Disiscrizione completata</h2>
       <p>La tua email <strong>${email}</strong> è stata rimossa dalla nostra mailing list.</p>
       <p style="color:#666;font-size:0.9rem">Non riceverai più comunicazioni da Righetto Immobiliare.</p>
-      <p style="margin-top:20px"><a href="https://righetto-immobiliare.it" style="color:#b8860b">Torna al sito</a></p>
+      <p style="margin-top:20px"><a href="https://www.righettoimmobiliare.it" style="color:#b8860b">Torna al sito</a></p>
     </div>
   </body></html>`;
 
@@ -372,7 +372,7 @@ async function trackClick(supabase: any, body: any) {
 
   return new Response(null, {
     status: 302,
-    headers: { ...corsHeaders, Location: body.url || "https://righetto-immobiliare.it" },
+    headers: { ...corsHeaders, Location: body.url || "https://www.righettoimmobiliare.it" },
   });
 }
 
