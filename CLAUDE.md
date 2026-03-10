@@ -18,6 +18,7 @@
    - **Landing pages** → inserire nella tabella Supabase `landing_pages` tramite seed in `admin.html` (`_landingSeedPages`) + aggiungere in array `EM_SITE_PAGES` + il picker email marketing le carica automaticamente dal seed/Supabase
    - **Blog** → registrare in `sitemap.xml`, `blog.html`, `js/homepage.js`, `admin.html` (`_blogSeedArticles`)
    - **Pagine generiche** → registrare in `sitemap.xml` + navigazione
+9. **Data di pubblicazione obbligatoria** — ogni landing page nel seed `_landingSeedPages` in `admin.html` DEVE avere il campo `data_pubblicazione` in formato `YYYY-MM-DD`. Senza questo campo la colonna "Pubblicazione" nell'admin mostra "—" ed è impossibile tracciare quando una pagina è stata pubblicata.
 
 ---
 
