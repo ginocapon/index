@@ -5352,7 +5352,11 @@ const _landingSeedPages = [
   { titolo: 'Vendi il tuo immobile', slug: 'landing-vendita', url: 'landing-vendita.html', categoria: 'vendita', descrizione: 'Landing page per chi vuole vendere casa', stato: 'pubblicata' },
   { titolo: 'Chat Valutazione Gratuita', slug: 'landing-chat-valutazione', url: 'landing-chat-valutazione.html', categoria: 'chat', descrizione: 'Landing con chatbot Linda: valutazione immobiliare conversazionale', stato: 'pubblicata' },
   { titolo: 'Chat Vendita Casa Padova', slug: 'landing-chat-vendita', url: 'landing-chat-vendita.html', categoria: 'chat', descrizione: 'Landing con chatbot Linda: vendita immobiliare conversazionale', stato: 'pubblicata' },
-  { titolo: 'Chat Cambio Agenzia', slug: 'landing-chat-insoddisfatti', url: 'landing-chat-insoddisfatti.html', categoria: 'chat', descrizione: 'Landing con chatbot Linda: per chi vuole cambiare agenzia', stato: 'pubblicata' }
+  { titolo: 'Chat Cambio Agenzia', slug: 'landing-chat-insoddisfatti', url: 'landing-chat-insoddisfatti.html', categoria: 'chat', descrizione: 'Landing con chatbot Linda: per chi vuole cambiare agenzia', stato: 'pubblicata' },
+  { titolo: 'Offerta ENEL Super Luce', slug: 'offerta-enel-luce', url: 'landing/offerta-enel-luce.html', categoria: 'offerta', descrizione: 'Landing statica: ENEL Super Luce 0,126 €/kWh + 14 €/mese', stato: 'pubblicata' },
+  { titolo: 'Offerta ENEL Fix Star Gas', slug: 'offerta-enel-gas', url: 'landing/offerta-enel-gas.html', categoria: 'offerta', descrizione: 'Landing statica: ENEL Fix Star Gas 0,37 €/SMC + 12 €/mese', stato: 'pubblicata' },
+  { titolo: 'Chat Offerta Luce ENEL', slug: 'landing-chat-offerta-luce', url: 'landing-chat-offerta-luce.html', categoria: 'chat', descrizione: 'Landing chatbot: offerta ENEL Super Luce interattiva', stato: 'pubblicata' },
+  { titolo: 'Chat Offerta Gas ENEL', slug: 'landing-chat-offerta-gas', url: 'landing-chat-offerta-gas.html', categoria: 'chat', descrizione: 'Landing chatbot: offerta ENEL Fix Star Gas interattiva', stato: 'pubblicata' }
 ];
 
 async function getLandingPages() {
@@ -10971,6 +10975,10 @@ checkAuth();
     {cat:'landing', file:'landing-chat-valutazione.html', title:'Chat Valutazione Casa Gratuita', desc:'Landing con chatbot Sara: valutazione immobiliare'},
     {cat:'landing', file:'landing-chat-vendita.html', title:'Chat Vendita Casa Padova', desc:'Landing con chatbot Sara: vendita immobiliare'},
     {cat:'landing', file:'landing-chat-insoddisfatti.html', title:'Chat Cambio Agenzia', desc:'Landing con chatbot Sara: per chi vuole cambiare agenzia'},
+    {cat:'landing', file:'landing/offerta-enel-luce.html', title:'ENEL Super Luce 0,126 €/kWh', desc:'Landing statica: offerta luce prezzo bloccato'},
+    {cat:'landing', file:'landing/offerta-enel-gas.html', title:'ENEL Fix Star Gas 0,37 €/SMC', desc:'Landing statica: offerta gas prezzo bloccato'},
+    {cat:'landing', file:'landing-chat-offerta-luce.html', title:'Chat Offerta ENEL Luce', desc:'Landing chatbot: offerta luce interattiva'},
+    {cat:'landing', file:'landing-chat-offerta-gas.html', title:'Chat Offerta ENEL Gas', desc:'Landing chatbot: offerta gas interattiva'},
     // Zone
     {cat:'zona', file:'zona-centro-storico-padova.html', title:'Case in Vendita Centro Storico Padova', desc:'Immobili nel cuore di Padova'},
     {cat:'zona', file:'zona-arcella-padova.html', title:'Case in Vendita Arcella, Padova', desc:'Quartiere Arcella: offerte e prezzi'},
@@ -11690,6 +11698,14 @@ checkAuth();
     'offerta-luce': {
       oggetto: 'Offerta Esclusiva Luce — Blocca il prezzo a 0,1378 €/kWh',
       file: 'templates/email-offerta-luce.html'
+    },
+    'offerta-enel-luce': {
+      oggetto: '{{nome}}, blocca la luce a 0,126 €/kWh — Offerta ENEL esclusiva',
+      file: 'templates/email-offerta-enel-luce.html'
+    },
+    'offerta-enel-gas': {
+      oggetto: '{{nome}}, blocca il gas a 0,37 €/SMC — Offerta ENEL esclusiva',
+      file: 'templates/email-offerta-enel-gas.html'
     },
     'newsletter-normativa': {
       oggetto: '{{nome}}, novità normative immobiliari — cosa cambia per te',
