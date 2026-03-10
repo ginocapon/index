@@ -434,12 +434,6 @@ async function inviaEmailGate(e){
       await sb.from('newsletter_subscribers').upsert([{email:email,nome:nome,telefono:tel||null,interesse:'valutazione',provenienza:'calcolatore-pdf',fonte:'calcolatore-pdf',attivo:true,created_at:new Date().toISOString()}],{onConflict:'email'}).catch(function(){});
     }
   }catch(ex){}
-  // Iscrivi a Brevo
-  try{
-    if(typeof SERVIZI_CONFIG!=='undefined'&&SERVIZI_CONFIG.BREVO_API_KEY){
-      fetch('https://api.brevo.com/v3/contacts',{method:'POST',headers:{'accept':'application/json','content-type':'application/json','api-key':SERVIZI_CONFIG.BREVO_API_KEY},body:JSON.stringify({email:email,attributes:{NOME:nome,TELEFONO:tel||'',INTERESSE:'valutazione',FONTE:'calcolatore-pdf'},listIds:[SERVIZI_CONFIG.BREVO_LIST_ID||11],updateEnabled:true})});
-    }
-  }catch(ex){}
   // GA event
   if(typeof gtag==='function')gtag('event','pdf_lead',{event_category:'conversion',event_label:email});
   // Genera e scarica il PDF

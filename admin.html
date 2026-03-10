@@ -4138,7 +4138,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   </div>
                   <div class="form-group" style="margin:0">
                     <label>Link pulsante</label>
-                    <input type="text" id="emVisualCTALink" placeholder="https://righetto-immobiliare.it/contatti.html" value="https://righetto-immobiliare.it/contatti.html">
+                    <input type="text" id="emVisualCTALink" placeholder="https://righettoimmobiliare.it/contatti.html" value="https://righettoimmobiliare.it/contatti.html">
                   </div>
                 </div>
 
@@ -4150,7 +4150,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   </div>
                   <div class="form-group" style="margin:0">
                     <label>Link 2° pulsante</label>
-                    <input type="text" id="emVisualCTA2Link" placeholder="https://righetto-immobiliare.it/immobili.html">
+                    <input type="text" id="emVisualCTA2Link" placeholder="https://righettoimmobiliare.it/immobili.html">
                   </div>
                 </div>
 
@@ -10537,7 +10537,7 @@ checkAuth();
     const titolo = opt.dataset.titolo;
     const slug = opt.dataset.slug;
     const img = opt.dataset.img;
-    const url = 'https://righetto-immobiliare.it/blog/' + (slug || 'articolo') + '.html';
+    const url = 'https://righettoimmobiliare.it/blog/' + (slug || 'articolo') + '.html';
 
     let html = '';
     if (img) html += '<div style="text-align:center;margin-bottom:16px"><img src="' + escHtml(img) + '" style="max-width:100%;border-radius:8px" alt="' + escHtml(titolo) + '"></div>\n';
@@ -10545,7 +10545,7 @@ checkAuth();
     html += '<p>Gentile {{nome}}, abbiamo pubblicato un nuovo articolo che potrebbe interessarti.</p>\n';
     html += '<p style="text-align:center;margin-top:16px"><a href="' + escHtml(url) + '" style="background:#d4a843;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600">Leggi l\'articolo</a></p>\n';
 
-    emInsertContentInEditor(html, titolo);
+    emInsertContentInEditor(html, titolo, img, url);
     emAddContentPreviewCard('blog', titolo, img, url);
   };
 
@@ -10560,7 +10560,7 @@ checkAuth();
     const tipo = opt.dataset.tipo;
     const comune = opt.dataset.comune;
     const img = opt.dataset.img;
-    const url = 'https://righetto-immobiliare.it/immobile.html?id=' + id;
+    const url = 'https://righettoimmobiliare.it/immobile.html?id=' + id;
 
     let html = '';
     if (img) html += '<div style="text-align:center;margin-bottom:16px"><img src="' + escHtml(img) + '" style="max-width:100%;border-radius:8px" alt="' + escHtml(titolo) + '"></div>\n';
@@ -10572,7 +10572,7 @@ checkAuth();
     html += '</div>\n';
     html += '<p style="text-align:center"><a href="' + escHtml(url) + '" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600">Vedi dettagli immobile</a></p>\n';
 
-    emInsertContentInEditor(html, titolo);
+    emInsertContentInEditor(html, titolo, img, url);
     emAddContentPreviewCard('immobile', (codice ? 'Rif. ' + codice + ' — ' : '') + titolo + (prezzo ? ' — €' + Number(prezzo).toLocaleString('it-IT') : ''), img, url);
   };
 
@@ -10584,24 +10584,31 @@ checkAuth();
     const titolo = opt.dataset.titolo;
     const urlPage = opt.dataset.url;
     const desc = opt.dataset.desc;
-    const url = 'https://righetto-immobiliare.it/' + (urlPage || '');
+    const url = 'https://righettoimmobiliare.it/' + (urlPage || '');
 
     let html = '<h2 style="color:#1a1a2e;margin-bottom:8px">' + escHtml(titolo) + '</h2>\n';
     if (desc) html += '<p style="color:#555">' + escHtml(desc) + '</p>\n';
     html += '<p>Gentile {{nome}}, ti segnaliamo questa pagina che potrebbe interessarti.</p>\n';
     html += '<p style="text-align:center;margin-top:16px"><a href="' + escHtml(url) + '" style="background:#d4a843;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px">Scopri di più</a></p>\n';
 
-    emInsertContentInEditor(html, titolo);
+    emInsertContentInEditor(html, titolo, null, url);
     emAddContentPreviewCard('landing', titolo, null, url);
   };
 
   // Helper: inserisce contenuto nell'editor attivo (visuale o codice)
-  function emInsertContentInEditor(html, titolo) {
+  function emInsertContentInEditor(html, titolo, img, url) {
     const panelVisuale = document.getElementById('emPanelVisuale');
     if (panelVisuale && panelVisuale.style.display !== 'none') {
       // Siamo in modalità visuale: compila i campi
       document.getElementById('emVisualTitle').value = titolo || '';
       document.getElementById('emVisualBody').value = 'Gentile {{nome}},\n\nti segnaliamo un contenuto che potrebbe interessarti.\n\nClicca il pulsante qui sotto per maggiori dettagli.';
+      if (img) {
+        document.getElementById('emVisualImageUrl').value = img;
+        document.getElementById('emImagePreview').innerHTML = '<img src="' + escHtml(img) + '" style="max-width:100%;border-radius:8px">';
+      }
+      if (url) {
+        document.getElementById('emVisualCTALink').value = url;
+      }
       toast('Contenuto caricato nell\'editor visuale — clicca "Genera email" per completare', 'success');
     } else {
       // Siamo in modalità codice: inserisci HTML direttamente
@@ -10901,7 +10908,7 @@ checkAuth();
     preview.style.display = 'block';
     document.getElementById('emLandingPreviewTitle').textContent = page.title;
     document.getElementById('emLandingPreviewDesc').textContent = page.desc;
-    document.getElementById('emLandingPreviewUrl').textContent = 'https://righetto-immobiliare.it/' + page.file;
+    document.getElementById('emLandingPreviewUrl').textContent = 'https://righettoimmobiliare.it/' + page.file;
   };
 
   window.emBuildLandingEmail = function() {
@@ -10912,7 +10919,7 @@ checkAuth();
     const intro = document.getElementById('emLandingIntro').value.trim() ||
       'Gentile {{nome}}, abbiamo un contenuto che potrebbe interessarti:';
     const introHtml = escHtml(intro).replace(/\{\{nome\}\}/gi, '{{nome}}').replace(/\n/g,'<br>');
-    const pageUrl = 'https://righetto-immobiliare.it/' + page.file;
+    const pageUrl = 'https://righettoimmobiliare.it/' + page.file;
     const icon = page.cat === 'blog' ? '📝 Articolo' : page.cat === 'landing' ? '🚀 Offerta' : page.cat === 'zona' ? '📍 Quartiere' : '🔧 Servizio';
 
     const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
@@ -11614,7 +11621,7 @@ checkAuth();
     </div>
 
     <div style="text-align:center;padding:20px 0">
-      <a href="https://righetto-immobiliare.it/contatti.html" style="display:inline-block;background:#d4a843;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:15px;font-weight:bold">Prenota una consulenza gratuita</a>
+      <a href="https://righettoimmobiliare.it/contatti.html" style="display:inline-block;background:#d4a843;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:15px;font-weight:bold">Prenota una consulenza gratuita</a>
     </div>
   </div>
 
@@ -11656,7 +11663,7 @@ checkAuth();
     </div>
 
     <div style="text-align:center;padding:20px 0">
-      <a href="https://righetto-immobiliare.it/immobili.html" style="display:inline-block;background:#d4a843;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:15px;font-weight:bold">Vedi tutti gli immobili</a>
+      <a href="https://righettoimmobiliare.it/immobili.html" style="display:inline-block;background:#d4a843;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:15px;font-weight:bold">Vedi tutti gli immobili</a>
     </div>
   </div>
 
@@ -11687,7 +11694,7 @@ checkAuth();
       Siamo sempre a tua disposizione per qualsiasi esigenza immobiliare.
     </p>
     <div style="margin:30px 0">
-      <a href="https://righetto-immobiliare.it" style="display:inline-block;background:#d4a843;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:15px;font-weight:bold">Visita il nostro sito</a>
+      <a href="https://righettoimmobiliare.it" style="display:inline-block;background:#d4a843;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:15px;font-weight:bold">Visita il nostro sito</a>
     </div>
   </div>
 
@@ -11815,7 +11822,7 @@ checkAuth();
         html += '<div style="text-align:center;padding:20px;font-size:11px;color:#999;border-top:1px solid #eee;margin-top:20px">' +
           'Ricevi questa email perché sei un contatto di Righetto Immobiliare.<br>' +
           '<a href="' + (isPreview ? '#' : '{{UNSUB_URL}}') + '" style="color:#999;text-decoration:underline">Cancella iscrizione</a> | ' +
-          '<a href="https://righetto-immobiliare.it/privacy-policy.html" style="color:#999;text-decoration:underline">Privacy Policy</a><br>' +
+          '<a href="https://righettoimmobiliare.it/privacy-policy.html" style="color:#999;text-decoration:underline">Privacy Policy</a><br>' +
           'Righetto Immobiliare — Via Fratelli Cervi 37, 35129 Padova' +
         '</div>';
       }
@@ -11977,7 +11984,7 @@ checkAuth();
       const html = buildEmailHtml(corpo, nome, false);
 
       // Genera URL disiscrizione unico
-      const unsubUrl = 'https://righetto-immobiliare.it/unsubscribe.html?email=' + encodeURIComponent(c.email);
+      const unsubUrl = 'https://righettoimmobiliare.it/unsubscribe.html?email=' + encodeURIComponent(c.email);
       const finalHtml = html.replace(/\{\{UNSUB_URL\}\}/g, unsubUrl);
 
       try {
@@ -12192,7 +12199,7 @@ checkAuth();
     const prezzo = property.prezzo ? '€ ' + Number(property.prezzo).toLocaleString('it-IT') : 'Prezzo su richiesta';
     const prezzoMq = (property.prezzo && property.superficie) ? '€ ' + Math.round(property.prezzo / property.superficie).toLocaleString('it-IT') + '/mq' : '';
     const slug = property.slug || property.id;
-    const url = 'https://righetto-immobiliare.it/immobile.html?id=' + property.id;
+    const url = 'https://righettoimmobiliare.it/immobile.html?id=' + property.id;
 
     return `<div style="border:2px solid #e0d6c8;border-radius:12px;overflow:hidden;margin:16px 0;max-width:580px">
       ${foto ? '<a href="' + url + '"><img src="' + foto + '" style="width:100%;max-height:250px;object-fit:cover;display:block" alt="' + escHtml(property.titolo || '') + '"></a>' : ''}
@@ -12397,7 +12404,7 @@ checkAuth();
 
     const prezzo = property.prezzo ? '€ ' + Number(property.prezzo).toLocaleString('it-IT') : '';
     const propInfo = (property.codice || '') + ' — ' + (property.titolo || '') + '\n' + (property.comune || '') + '\n' + prezzo + (property.superficie ? ' | ' + property.superficie + ' mq' : '') + (property.camere ? ' | ' + property.camere + ' camere' : '');
-    const url = 'https://righetto-immobiliare.it/immobile.html?id=' + property.id;
+    const url = 'https://righettoimmobiliare.it/immobile.html?id=' + property.id;
 
     // Apri ogni WhatsApp in nuova tab
     const confirmed = confirm('Stai per aprire ' + matches.length + ' conversazioni WhatsApp.\nOgni tab avrà il messaggio pre-compilato.\n\nConfermi?');
@@ -12444,7 +12451,7 @@ checkAuth();
     <p style="font-size:15px;color:#555;line-height:1.7">in base alla tua ricerca, abbiamo trovato ${matches.length} immobili che potrebbero interessarti:</p>
     ${cardsHtml}
     <div style="text-align:center;padding:20px 0">
-      <a href="https://righetto-immobiliare.it/immobili.html" style="display:inline-block;background:#1a1a2e;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:14px">Vedi tutti gli immobili →</a>
+      <a href="https://righettoimmobiliare.it/immobili.html" style="display:inline-block;background:#1a1a2e;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:14px">Vedi tutti gli immobili →</a>
     </div>
   </div>
   <div style="background:#1a1a2e;padding:20px;text-align:center">
@@ -12482,7 +12489,7 @@ checkAuth();
     let msgParts = ['Buongiorno ' + (client.nome || '') + ', ecco gli immobili che corrispondono alla tua ricerca:\n'];
     matches.forEach((i, idx) => {
       const prezzo = i.prezzo ? '€ ' + Number(i.prezzo).toLocaleString('it-IT') : '';
-      const url = 'https://righetto-immobiliare.it/immobile.html?id=' + i.id;
+      const url = 'https://righettoimmobiliare.it/immobile.html?id=' + i.id;
       msgParts.push((idx+1) + '. ' + (i.titolo || i.codice || '') + '\n   ' + (i.comune || '') + ' | ' + prezzo + (i.superficie ? ' | ' + i.superficie + 'mq' : '') + '\n   ' + url);
     });
     msgParts.push('\nPer info: Righetto Immobiliare 049 7808 888');

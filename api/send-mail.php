@@ -2,7 +2,7 @@
 // ═══════════════════════════════════════════════════════════════
 // RIGHETTO IMMOBILIARE — Email Relay PHP (cPanel)
 // Riceve richieste HTTP e invia email via mail() PHP
-// Upload su cPanel: public_html/api/send-mail.php
+// Upload su cPanel: api.righettoimmobiliare.it/send-mail.php
 // ═══════════════════════════════════════════════════════════════
 
 // Chiave segreta per autorizzare le richieste (CAMBIA QUESTA!)
@@ -24,9 +24,23 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Verifica autenticazione
+// Verifica autenticazione — supporta X-API-Key header, Authorization Bearer, e HTTP_X_API_KEY
 $headers = getallheaders();
-$apiKey = $headers['X-API-Key'] ?? $headers['x-api-key'] ?? '';
+$apiKey = $headers['X-API-Key'] ?? $headers['x-api-key'] ?? $headers['X-Api-Key'] ?? '';
+
+// Fallback: alcuni server Apache/cPanel convertono header custom in HTTP_X_API_KEY
+if (!$apiKey && isset($_SERVER['HTTP_X_API_KEY'])) {
+    $apiKey = $_SERVER['HTTP_X_API_KEY'];
+}
+
+// Fallback: controlla anche nel body JSON (per test dalla dashboard Supabase)
+if (!$apiKey) {
+    $rawBody = file_get_contents('php://input');
+    $jsonCheck = json_decode($rawBody, true);
+    if (isset($jsonCheck['api_key'])) {
+        $apiKey = $jsonCheck['api_key'];
+    }
+}
 
 if ($apiKey !== API_SECRET) {
     http_response_code(403);
