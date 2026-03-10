@@ -10,9 +10,9 @@ CREATE TABLE IF NOT EXISTS campagne_email (
     oggetto TEXT NOT NULL,
     preheader TEXT,
     corpo_html TEXT NOT NULL,
-    mittente_email TEXT DEFAULT 'info@righetto-immobiliare.it',
+    mittente_email TEXT DEFAULT 'info@righettoimmobiliare.it',
     mittente_nome TEXT DEFAULT 'Righetto Immobiliare',
-    reply_to TEXT DEFAULT 'info@righetto-immobiliare.it',
+    reply_to TEXT DEFAULT 'info@righettoimmobiliare.it',
     stato TEXT DEFAULT 'bozza' CHECK (stato IN ('bozza','in_coda','in_invio','completata','annullata')),
     totale_destinatari INT DEFAULT 0,
     inviati INT DEFAULT 0,
@@ -174,10 +174,10 @@ VALUES (
     'default',
     'smtps.aruba.it',     -- Cambia con il tuo SMTP (es: smtp.gmail.com, smtp.office365.com)
     465,                   -- 587 per STARTTLS, 465 per SSL
-    'info@righetto-immobiliare.it',  -- Tuo indirizzo email
+    'info@righettoimmobiliare.it',  -- Tuo indirizzo email
     'LA_TUA_PASSWORD',     -- ⚠️ CAMBIA CON LA TUA PASSWORD
     true,
-    'info@righetto-immobiliare.it',
+    'info@righettoimmobiliare.it',
     'Righetto Immobiliare',
     50,    -- Max email per ora (warm-up: inizia basso)
     300    -- Max email per giorno
