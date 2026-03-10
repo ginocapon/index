@@ -225,7 +225,7 @@ ChatFlow.prototype.addInput = function(fields) {
     // Privacy
     var chk = document.createElement('div');
     chk.className = 'cf-form-check';
-    chk.innerHTML = '<label><input type="checkbox" id="cf-gdpr" required> Acconsento al trattamento dei dati. <a href="privacy.html" target="_blank">Privacy</a></label>';
+    chk.innerHTML = '<label><input type="checkbox" id="cf-gdpr" required> Acconsento al trattamento dei dati. <a href="/privacy" target="_blank">Privacy</a></label>';
     form.appendChild(chk);
 
     var btn = document.createElement('button');
