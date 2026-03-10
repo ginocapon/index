@@ -907,7 +907,7 @@ class RighettoChat {
   // ────── SALVA RICHIESTA ──────
   async salvaRichiesta(dati) {
     let supaOk = false;
-    let formspreeOk = false;
+    let emailOk = false;
 
     // Supabase
     if (this.supabase) {
@@ -925,26 +925,25 @@ class RighettoChat {
       } catch { supaOk = false; }
     }
 
-    // Formspree — notifica email
-    if (typeof SERVIZI_CONFIG !== 'undefined' && SERVIZI_CONFIG.FORMSPREE_ID && SERVIZI_CONFIG.FORMSPREE_ID !== 'IL_TUO_FORM_ID') {
+    // Email relay — notifica email
+    if (typeof SERVIZI_CONFIG !== 'undefined' && SERVIZI_CONFIG.EMAIL_RELAY_URL) {
       try {
-        const r = await fetch('https://formspree.io/f/' + SERVIZI_CONFIG.FORMSPREE_ID, {
+        const r = await fetch(SERVIZI_CONFIG.EMAIL_RELAY_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'X-API-Key': SERVIZI_CONFIG.EMAIL_RELAY_KEY },
           body: JSON.stringify({
-            nome: dati.nome,
-            email: dati.email,
-            telefono: dati.telefono,
-            messaggio: dati.note || dati.messaggio,
-            provenienza: 'chatbot',
-            _subject: 'Nuovo contatto dal chatbot: ' + dati.nome
+            action: 'send',
+            to_email: SERVIZI_CONFIG.EMAIL_NOTIFY_TO || 'info@righettoimmobiliare.it',
+            subject: 'Nuovo contatto dal chatbot: ' + dati.nome,
+            html_body: '<b>Nome:</b> ' + dati.nome + '<br><b>Email:</b> ' + (dati.email||'-') + '<br><b>Telefono:</b> ' + (dati.telefono||'-') + '<br><b>Messaggio:</b> ' + (dati.note || dati.messaggio || '-'),
+            reply_to: dati.email || undefined
           })
         });
-        formspreeOk = r.ok;
-      } catch { formspreeOk = false; }
+        emailOk = r.ok;
+      } catch { emailOk = false; }
     }
 
-    return supaOk || formspreeOk;
+    return supaOk || emailOk;
   }
 
   // ────── ELABORA MESSAGGIO ──────
