@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reel Offerta Gas ENEL Fix Star — Risparmia | Righetto Immobiliare</title>
+<meta name="description" content="Scopri l'offerta ENEL Fix Star Gas: 0,37 €/SMC a prezzo bloccato. Animazione interattiva con risparmio stimato di 240 € all'anno. Zero vincoli.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://righettoimmobiliare.it/landing/reel-offerta-gas">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Offerta Gas ENEL Fix Star — Prezzo Bloccato 0,37 €/SMC">
+<meta property="og:description" content="Gas in aumento? Blocca il prezzo a 0,37 €/SMC con ENEL Fix Star Gas. Risparmio medio 240 €/anno.">
+<meta property="og:url" content="https://righettoimmobiliare.it/landing/reel-offerta-gas">
+<meta property="og:site_name" content="Righetto Immobiliare">
+<meta property="og:locale" content="it_IT">
+<meta property="og:image" content="https://righettoimmobiliare.it/img/og-offerta-enel-gas.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Offerta Gas ENEL Fix Star — Prezzo Bloccato 0,37 €/SMC">
+<meta name="twitter:description" content="Blocca il prezzo del gas a 0,37 €/SMC + 12 €/mese. Zero vincoli, attivazione gratuita.">
+<link rel="preload" href="../fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "RealEstateAgent",
+      "@id": "https://righettoimmobiliare.it/#organization",
+      "name": "Righetto Immobiliare",
+      "url": "https://righettoimmobiliare.it",
+      "telephone": "+39-049-884-3484",
+      "email": "info@righettoimmobiliare.it",
+      "address": {"@type": "PostalAddress", "streetAddress": "Via Roma n.96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
+      "geo": {"@type": "GeoCoordinates", "latitude": 45.476956, "longitude": 11.845762},
+      "sameAs": ["https://www.facebook.com/righettoimmobiliare","https://www.instagram.com/righettoimmobiliare","https://www.linkedin.com/company/righetto-immobiliare"]
+    },
+    {
+      "@type": "Offer",
+      "name": "ENEL Fix Star Gas",
+      "description": "Offerta gas a prezzo fisso 0,37 €/SMC + 12 €/mese. Nessun vincolo, nessun costo aggiuntivo.",
+      "price": "0.37",
+      "priceCurrency": "EUR",
+      "validThrough": "2026-03-31",
+      "offeredBy": {"@id": "https://righettoimmobiliare.it/#organization"}
+    },
+    {"@type": "BreadcrumbList", "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://righettoimmobiliare.it/"},
+      {"@type": "ListItem", "position": 2, "name": "Servizio Utenze", "item": "https://righettoimmobiliare.it/servizio-utenze"},
+      {"@type": "ListItem", "position": 3, "name": "Reel Offerta Gas ENEL", "item": "https://righettoimmobiliare.it/landing/reel-offerta-gas"}
+    ]}
+  ]
+}
+</script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .phone {
+    width: 390px;
+    max-width: 100vw;
+    height: 844px;
+    max-height: 100vh;
+    background: #000;
+    border-radius: 48px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 80px rgba(255,100,0,0.3), 0 0 0 2px #333;
+  }
+  @media (max-width: 420px) {
+    .phone {
+      width: 100vw;
+      height: 100vh;
+      border-radius: 0;
+      box-shadow: none;
+    }
+  }
+  .reel {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  /* SCENE BASE */
+  .scene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+  .scene.active { opacity: 1; pointer-events: all; }
+  /* ============ SCENE 1 ============ */
+  .scene-1 {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0500 50%, #0a0a0a 100%);
+  }
+  .scene-1 .bg-fire {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(255,80,0,0.4) 0%, transparent 70%);
+    animation: pulse-fire 1.5s ease-in-out infinite alternate;
+  }
+  @keyframes pulse-fire {
+    from { opacity: 0.6; transform: scaleY(1); }
+    to   { opacity: 1;   transform: scaleY(1.1); }
+  }
+  .scene-1 .emoji-big {
+    font-size: 90px;
+    position: relative;
+    z-index: 2;
+    animation: shake 0.5s ease-in-out 0.3s both;
+  }
+  @keyframes shake {
+    0%,100%{ transform: rotate(0deg) scale(0); opacity:0; }
+    20%{ transform: rotate(-8deg) scale(1.2); opacity:1; }
+    80%{ transform: rotate(4deg) scale(1); opacity:1; }
+  }
+  .scene-1 h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    color: #fff;
+    text-align: center;
+    line-height: 1.1;
+    position: relative;
+    z-index: 2;
+    margin-top: 20px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUp 0.6s ease 0.8s both;
+    text-shadow: 0 0 30px rgba(255,100,0,0.8);
+  }
+  .scene-1 h1 span { color: #FF6A00; }
+  /* ============ SCENE 2 ============ */
+  .scene-2 {
+    background: linear-gradient(160deg, #0d0d0d, #1c0800);
+  }
+  .scene-2 .chart-wrap {
+    width: 80%;
+    margin-bottom: 30px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.5s ease 0.3s both;
+  }
+  .chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    height: 160px;
+    padding: 10px 0;
+    border-bottom: 2px solid #FF6A00;
+  }
+  .bar {
+    flex: 1;
+    background: linear-gradient(to top, #FF6A00, #FFB347);
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    animation: growBar 1s ease 0.5s both;
+    transform-origin: bottom;
+  }
+  .bar:last-child { background: linear-gradient(to top, #ff2200, #ff6a00); }
+  @keyframes growBar {
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
+  }
+  .bar-label {
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    color: #888;
+    white-space: nowrap;
+  }
+  .bar:last-child::after {
+    content: '+18%';
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ff2200;
+    font-weight: 900;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  .scene-2 h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    color: #fff;
+    text-align: center;
+    line-height: 1.1;
+    opacity: 0;
+    animation: slideUp 0.5s ease 1s both;
+  }
+  .scene-2 h2 .red { color: #FF2200; }
+  .scene-2 p {
+    font-size: 16px;
+    color: #aaa;
+    text-align: center;
+    margin-top: 10px;
+    opacity: 0;
+    animation: slideUp 0.5s ease 1.4s both;
+  }
+  /* ============ SCENE 3 ============ */
+  .scene-3 {
+    background: linear-gradient(160deg, #000d1a, #001a33);
+  }
+  .scene-3 .badge {
+    background: linear-gradient(135deg, #003d82, #0066cc);
+    border: 2px solid #0099ff;
+    border-radius: 16px;
+    padding: 30px 40px;
+    text-align: center;
+    box-shadow: 0 0 60px rgba(0,150,255,0.3);
+    opacity: 0;
+    transform: scale(0.8);
+    animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.3s both;
+    width: 85%;
+  }
+  @keyframes popIn {
+    from { opacity:0; transform: scale(0.8); }
+    to   { opacity:1; transform: scale(1); }
+  }
+  .scene-3 .label-offer {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #66ccff;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .scene-3 .brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px;
+    color: #fff;
+    line-height: 1;
+  }
+  .scene-3 .price-wrap {
+    margin-top: 18px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .scene-3 .price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 70px;
+    color: #fff;
+    line-height: 1;
+    animation: countUp 0.8s ease 1s both;
+  }
+  @keyframes countUp {
+    from { opacity:0; transform: translateY(20px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+  .scene-3 .price-unit {
+    font-size: 14px;
+    color: #66ccff;
+    margin-top: 4px;
+  }
+  .scene-3 .locked {
+    font-size: 13px;
+    color: #FFB347;
+    font-weight: 700;
+    margin-top: 8px;
+    letter-spacing: 1px;
+  }
+  /* ============ SCENE 4 ============ */
+  .scene-4 {
+    background: linear-gradient(160deg, #000, #001100);
+  }
+  .scene-4 h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 30px;
+    opacity: 0;
+    animation: slideUp 0.5s ease 0.2s both;
+  }
+  .checks {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(0,255,80,0.2);
+    border-radius: 12px;
+    padding: 16px 20px;
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  .check-item:nth-child(1) { animation: slideInLeft 0.5s ease 0.4s both; }
+  .check-item:nth-child(2) { animation: slideInLeft 0.5s ease 0.7s both; }
+  .check-item:nth-child(3) { animation: slideInLeft 0.5s ease 1.0s both; }
+  @keyframes slideInLeft {
+    from { opacity:0; transform: translateX(-40px); }
+    to   { opacity:1; transform: translateX(0); }
+  }
+  .check-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #00cc44, #00ff66);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    box-shadow: 0 0 20px rgba(0,255,80,0.4);
+  }
+  .check-text {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+  }
+  /* ============ SCENE 5 ============ */
+  .scene-5 {
+    background: linear-gradient(160deg, #0a0500, #1a0800);
+  }
+  .scene-5 .cta-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 85%;
+  }
+  .scene-5 h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 50px;
+    color: #fff;
+    text-align: center;
+    line-height: 1;
+    opacity: 0;
+    animation: slideUp 0.5s ease 0.3s both;
+  }
+  .scene-5 h2 span { color: #FF6A00; }
+  .savings-box {
+    background: linear-gradient(135deg, #1a0800, #2d1200);
+    border: 2px solid #FF6A00;
+    border-radius: 16px;
+    padding: 20px 30px;
+    text-align: center;
+    width: 100%;
+    opacity: 0;
+    animation: popIn 0.6s ease 0.7s both;
+    box-shadow: 0 0 40px rgba(255,106,0,0.3);
+  }
+  .savings-label { font-size: 12px; color: #FF9944; letter-spacing: 2px; text-transform: uppercase; }
+  .savings-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    color: #FF6A00;
+    line-height: 1;
+    margin: 4px 0;
+    text-shadow: 0 0 20px rgba(255,106,0,0.6);
+  }
+  .savings-year { font-size: 13px; color: #aaa; }
+  .cta-btn {
+    display: block;
+    text-decoration: none;
+    background: linear-gradient(135deg, #FF6A00, #FF2200);
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    padding: 18px 40px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(255,80,0,0.5);
+    opacity: 0;
+    animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) 1.1s both;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+    border-radius: 50px;
+  }
+  .url-tag {
+    font-size: 11px;
+    color: #666;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 0.5s ease 1.5s both;
+  }
+  .url-tag span { color: #FF6A00; }
+  /* PROGRESS BAR */
+  .progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 4px;
+    padding: 12px 12px 0;
+    z-index: 100;
+  }
+  .progress-seg {
+    flex: 1;
+    height: 3px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: #fff;
+    width: 0%;
+    border-radius: 2px;
+  }
+  .progress-fill.done { width: 100%; }
+  .progress-fill.active { animation: fillBar var(--dur, 3s) linear forwards; }
+  @keyframes fillBar { from { width:0% } to { width:100% } }
+  /* BRAND BOTTOM */
+  .brand-bottom {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 1px;
+    z-index: 100;
+  }
+  /* REUSABLE ANIMATIONS */
+  @keyframes slideUp {
+    from { opacity:0; transform: translateY(30px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity:0; }
+    to   { opacity:1; }
+  }
+  /* REPLAY BUTTON */
+  .replay-btn {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    background: rgba(255,106,0,0.9);
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    padding: 14px 36px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    z-index: 200;
+    display: none;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  }
+  /* CONTROLS */
+  .tap-zone {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="reel">
+    <!-- PROGRESS -->
+    <div class="progress-bar" id="progressBar">
+      <div class="progress-seg"><div class="progress-fill" id="p0"></div></div>
+      <div class="progress-seg"><div class="progress-fill" id="p1"></div></div>
+      <div class="progress-seg"><div class="progress-fill" id="p2"></div></div>
+      <div class="progress-seg"><div class="progress-fill" id="p3"></div></div>
+      <div class="progress-seg"><div class="progress-fill" id="p4"></div></div>
+    </div>
+    <!-- SCENE 1 -->
+    <div class="scene scene-1" id="scene-0">
+      <div class="bg-fire"></div>
+      <div class="emoji-big">&#128184;</div>
+      <h1>Bolletta del gas<br><span>fuori controllo?</span></h1>
+    </div>
+    <!-- SCENE 2 -->
+    <div class="scene scene-2" id="scene-1">
+      <div class="chart-wrap">
+        <div class="chart-bars">
+          <div class="bar" style="height:55%"><span class="bar-label">Gen</span></div>
+          <div class="bar" style="height:62%"><span class="bar-label">Mar</span></div>
+          <div class="bar" style="height:58%"><span class="bar-label">Mag</span></div>
+          <div class="bar" style="height:70%"><span class="bar-label">Lug</span></div>
+          <div class="bar" style="height:75%"><span class="bar-label">Set</span></div>
+          <div class="bar" style="height:100%"><span class="bar-label">Ott</span></div>
+        </div>
+      </div>
+      <h2>&#128293; Gas salito<br><span class="red">del +18%</span></h2>
+      <p>e gli analisti prevedono ancora +15%</p>
+    </div>
+    <!-- SCENE 3 -->
+    <div class="scene scene-3" id="scene-2">
+      <div class="badge">
+        <div class="label-offer">Offerta Esclusiva</div>
+        <div class="brand">ENEL Fix Star Gas</div>
+        <div class="price-wrap">
+          <div class="price">0,37</div>
+          <div class="price-unit">&euro;/SMC</div>
+          <div class="locked">&#128274; PREZZO FISSO BLOCCATO</div>
+        </div>
+      </div>
+    </div>
+    <!-- SCENE 4 -->
+    <div class="scene scene-4" id="scene-3">
+      <h2>Perch&eacute; sceglierla?</h2>
+      <div class="checks">
+        <div class="check-item">
+          <div class="check-icon">&#10003;</div>
+          <div class="check-text">Zero vincoli contrattuali</div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon">&#10003;</div>
+          <div class="check-text">Attivazione completamente gratuita</div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon">&#10003;</div>
+          <div class="check-text">Consulente dedicato passo passo</div>
+        </div>
+      </div>
+    </div>
+    <!-- SCENE 5 -->
+    <div class="scene scene-5" id="scene-4">
+      <div class="cta-wrap">
+        <h2>Scopri quanto<br><span>risparmi</span> &#128071;</h2>
+        <div class="savings-box">
+          <div class="savings-label">Risparmio medio stimato</div>
+          <div class="savings-amount">&euro;240</div>
+          <div class="savings-year">all'anno con ENEL Fix Star Gas</div>
+        </div>
+        <a href="https://righettoimmobiliare.it/landing-chat-offerta-gas" class="cta-btn">CALCOLA IL TUO RISPARMIO</a>
+        <div class="url-tag">&#128279; <span>righettoimmobiliare.it/landing-chat-offerta-gas</span></div>
+      </div>
+    </div>
+    <!-- BRAND -->
+    <div class="brand-bottom">RIGHETTO IMMOBILIARE &middot; PADOVA</div>
+    <!-- TAP TO ADVANCE -->
+    <div class="tap-zone" id="tapZone"></div>
+    <!-- REPLAY -->
+    <button class="replay-btn" id="replayBtn">&#8634; RIVEDI</button>
+  </div>
+</div>
+<script>
+  var SCENE_DURATIONS = [3000, 4000, 3500, 4000, 5000];
+  var total = SCENE_DURATIONS.length;
+  var current = 0;
+  var timer = null;
+  function showScene(idx) {
+    document.querySelectorAll('.scene').forEach(function(s) { s.classList.remove('active'); });
+    var scene = document.getElementById('scene-' + idx);
+    var clone = scene.cloneNode(true);
+    clone.id = 'scene-' + idx;
+    scene.parentNode.replaceChild(clone, scene);
+    clone.classList.add('active');
+    for (var i = 0; i < total; i++) {
+      var fill = document.getElementById('p' + i);
+      fill.className = 'progress-fill';
+      if (i < idx) { fill.classList.add('done'); }
+      else if (i === idx) {
+        fill.style.setProperty('--dur', SCENE_DURATIONS[idx] / 1000 + 's');
+        fill.classList.add('active');
+      }
+    }
+    clearTimeout(timer);
+    if (idx < total - 1) {
+      timer = setTimeout(function() { nextScene(); }, SCENE_DURATIONS[idx]);
+    } else {
+      setTimeout(function() {
+        document.getElementById('replayBtn').style.display = 'block';
+      }, SCENE_DURATIONS[idx] - 500);
+    }
+  }
+  function nextScene() {
+    if (current < total - 1) {
+      current++;
+      showScene(current);
+    }
+  }
+  document.getElementById('tapZone').addEventListener('click', function(e) {
+    var x = e.clientX;
+    var w = window.innerWidth;
+    if (x > w / 2) { nextScene(); }
+    else { if (current > 0) { current--; showScene(current); } }
+  });
+  document.getElementById('replayBtn').addEventListener('click', function() {
+    this.style.display = 'none';
+    current = 0;
+    showScene(0);
+  });
+  showScene(0);
+</script>
+</body>
+</html>
