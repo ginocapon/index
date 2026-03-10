@@ -10545,7 +10545,7 @@ checkAuth();
     html += '<p>Gentile {{nome}}, abbiamo pubblicato un nuovo articolo che potrebbe interessarti.</p>\n';
     html += '<p style="text-align:center;margin-top:16px"><a href="' + escHtml(url) + '" style="background:#d4a843;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600">Leggi l\'articolo</a></p>\n';
 
-    emInsertContentInEditor(html, titolo);
+    emInsertContentInEditor(html, titolo, img, url);
     emAddContentPreviewCard('blog', titolo, img, url);
   };
 
@@ -10572,7 +10572,7 @@ checkAuth();
     html += '</div>\n';
     html += '<p style="text-align:center"><a href="' + escHtml(url) + '" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600">Vedi dettagli immobile</a></p>\n';
 
-    emInsertContentInEditor(html, titolo);
+    emInsertContentInEditor(html, titolo, img, url);
     emAddContentPreviewCard('immobile', (codice ? 'Rif. ' + codice + ' — ' : '') + titolo + (prezzo ? ' — €' + Number(prezzo).toLocaleString('it-IT') : ''), img, url);
   };
 
@@ -10591,17 +10591,24 @@ checkAuth();
     html += '<p>Gentile {{nome}}, ti segnaliamo questa pagina che potrebbe interessarti.</p>\n';
     html += '<p style="text-align:center;margin-top:16px"><a href="' + escHtml(url) + '" style="background:#d4a843;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px">Scopri di più</a></p>\n';
 
-    emInsertContentInEditor(html, titolo);
+    emInsertContentInEditor(html, titolo, null, url);
     emAddContentPreviewCard('landing', titolo, null, url);
   };
 
   // Helper: inserisce contenuto nell'editor attivo (visuale o codice)
-  function emInsertContentInEditor(html, titolo) {
+  function emInsertContentInEditor(html, titolo, img, url) {
     const panelVisuale = document.getElementById('emPanelVisuale');
     if (panelVisuale && panelVisuale.style.display !== 'none') {
       // Siamo in modalità visuale: compila i campi
       document.getElementById('emVisualTitle').value = titolo || '';
       document.getElementById('emVisualBody').value = 'Gentile {{nome}},\n\nti segnaliamo un contenuto che potrebbe interessarti.\n\nClicca il pulsante qui sotto per maggiori dettagli.';
+      if (img) {
+        document.getElementById('emVisualImageUrl').value = img;
+        document.getElementById('emImagePreview').innerHTML = '<img src="' + escHtml(img) + '" style="max-width:100%;border-radius:8px">';
+      }
+      if (url) {
+        document.getElementById('emVisualCTALink').value = url;
+      }
       toast('Contenuto caricato nell\'editor visuale — clicca "Genera email" per completare', 'success');
     } else {
       // Siamo in modalità codice: inserisci HTML direttamente
