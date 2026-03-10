@@ -185,6 +185,7 @@ ChatFlow.prototype.addButtons = function(options, key) {
           resolve(opt);
         });
       });
+      wrap.appendChild(btn);
     });
 
     row.appendChild(wrap);
