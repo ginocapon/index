@@ -454,13 +454,13 @@ async function sendLead(e){
   if(!gdpr){alert('Accetta la privacy policy');return;}
   const btn=document.querySelector('.fg-submit');btn.disabled=true;btn.textContent='Invio in corso...';
   const msg=[interesse?'Interesse: '+interesse:'',tipoImm?'Tipo: '+tipoImm:'','Zona: '+comune].filter(Boolean).join(' — ');
-  let formspreeOk=false;
-  try{if(typeof SERVIZI_CONFIG!=='undefined'&&SERVIZI_CONFIG.FORMSPREE_ID&&SERVIZI_CONFIG.FORMSPREE_ID!=='IL_TUO_FORM_ID'){const r=await fetch('https://formspree.io/f/'+SERVIZI_CONFIG.FORMSPREE_ID,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({nome,email,telefono:tel,messaggio:msg,newsletter:news?'Si':'No',_subject:'LANDING AGENTE — '+nome})});formspreeOk=r.ok;}}catch(e){}
+  let emailOk=false;
+  try{if(typeof SERVIZI_CONFIG!=='undefined'&&SERVIZI_CONFIG.EMAIL_RELAY_URL){const r=await fetch(SERVIZI_CONFIG.EMAIL_RELAY_URL,{method:'POST',headers:{'Content-Type':'application/json','X-API-Key':SERVIZI_CONFIG.EMAIL_RELAY_KEY},body:JSON.stringify({action:'send',to_email:SERVIZI_CONFIG.EMAIL_NOTIFY_TO||'info@righettoimmobiliare.it',subject:'LANDING AGENTE — '+nome,html_body:'<b>Nome:</b> '+nome+'<br><b>Email:</b> '+(email||'-')+'<br><b>Telefono:</b> '+tel+'<br><b>Messaggio:</b> '+msg+'<br><b>Newsletter:</b> '+(news?'Sì':'No'),reply_to:email||undefined})});emailOk=r.ok;}}catch(e){}
   let supaOk=false;
   try{const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');if(sb){await sb.from('richieste').insert([{nome,email,telefono:tel,messaggio:'[LANDING AGENTE] '+msg,provenienza:'landing-agente',newsletter:news,letto:false}]);supaOk=true;if(news&&email){await sb.from('newsletter_subscribers').upsert([{email,nome,telefono:tel,tipo_immobile:tipoImm||null,zona:comune||null,interesse:interesse||'consulenza',provenienza:'landing-agente',fonte:'landing-agente',attivo:true,created_at:new Date().toISOString()}],{onConflict:'email'}).catch(()=>{});}}}catch(e){}
   if(news&&email){iscriviBrevo(email,nome,{telefono:tel,tipo_immobile:tipoImm,zona:comune,interesse:interesse||'consulenza',fonte:'landing-agente'});}
   btn.disabled=false;btn.textContent='🏠 RICHIEDI VALUTAZIONE GRATUITA';
-  if(formspreeOk||supaOk){document.getElementById('inlineForm').style.display='none';document.getElementById('leadSuccess').style.display='block';}
+  if(emailOk||supaOk){document.getElementById('inlineForm').style.display='none';document.getElementById('leadSuccess').style.display='block';}
   else{alert('Errore. Chiamaci al 049.88.43.484.');}
 }
 </script>
