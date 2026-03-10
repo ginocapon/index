@@ -537,12 +537,6 @@ function scaricaPDF() {
     btn.style.display = 'inline-block';
   }
 }
-async function iscriviBrevo(email,nome,attrs){
-  try{
-    if(typeof SERVIZI_CONFIG==='undefined'||!SERVIZI_CONFIG.BREVO_API_KEY)return;
-    await fetch('https://api.brevo.com/v3/contacts',{method:'POST',headers:{'accept':'application/json','content-type':'application/json','api-key':SERVIZI_CONFIG.BREVO_API_KEY},body:JSON.stringify({email:email,attributes:{NOME:nome,TELEFONO:attrs.telefono||'',TIPO_IMMOBILE:attrs.tipo_immobile||'',ZONA:attrs.zona||'',INTERESSE:attrs.interesse||'generico',FONTE:attrs.fonte||'sito'},listIds:[SERVIZI_CONFIG.BREVO_LIST_ID||11],updateEnabled:true})});
-  }catch(e){}
-}
 let currentStep=1;
 function goStep(n){
   if(n===2&&(!document.getElementById('v-comune').value.trim()||!document.getElementById('v-tipo').value)){alert('Inserisci comune e tipo immobile');return;}
@@ -565,7 +559,6 @@ async function sendLead(e){
   try{if(typeof SERVIZI_CONFIG!=='undefined'&&SERVIZI_CONFIG.EMAIL_RELAY_URL){const r=await fetch(SERVIZI_CONFIG.EMAIL_RELAY_URL,{method:'POST',headers:{'Content-Type':'application/json','X-API-Key':SERVIZI_CONFIG.EMAIL_RELAY_KEY},body:JSON.stringify({action:'send',to_email:SERVIZI_CONFIG.EMAIL_NOTIFY_TO||'info@righettoimmobiliare.it',subject:'LANDING VALUTAZIONE — '+nomeCompleto,html_body:'<b>Nome:</b> '+nomeCompleto+'<br><b>Email:</b> '+(email||'-')+'<br><b>Telefono:</b> '+tel+'<br><b>Dettagli:</b> '+dettagli+'<br><b>Newsletter:</b> '+(news?'Sì':'No'),reply_to:email||undefined})});emailOk=r.ok;}}catch(e){}
   let supaOk=false;
   try{const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');if(sb){await sb.from('richieste').insert([{nome:nomeCompleto,email,telefono:tel,messaggio:'[LANDING VALUTAZIONE] '+dettagli,provenienza:'landing-valutazione',newsletter:news,letto:false}]);supaOk=true;if(news&&email){await sb.from('newsletter_subscribers').upsert([{email,nome:nomeCompleto,telefono:tel,tipo_immobile:tipoImm||null,zona:zonaImm||null,interesse:'valutazione',provenienza:'landing-valutazione',fonte:'landing-valutazione',attivo:true,created_at:new Date().toISOString()}],{onConflict:'email'}).catch(()=>{});}}}catch(e){}
-  if(news&&email){iscriviBrevo(email,nomeCompleto,{telefono:tel,tipo_immobile:tipoImm,zona:zonaImm,interesse:'valutazione',fonte:'landing-valutazione'});}
   btn.disabled=false;btn.textContent='📊 RICHIEDI VALUTAZIONE GRATUITA';
   if(emailOk||supaOk){
     document.getElementById('leadForm').style.display='none';

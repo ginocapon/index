@@ -439,12 +439,6 @@ img{max-width:100%;height:auto;display:block}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="js/config.js" defer></script>
 <script>
-async function iscriviBrevo(email,nome,attrs){
-  try{
-    if(typeof SERVIZI_CONFIG==='undefined'||!SERVIZI_CONFIG.BREVO_API_KEY)return;
-    await fetch('https://api.brevo.com/v3/contacts',{method:'POST',headers:{'accept':'application/json','content-type':'application/json','api-key':SERVIZI_CONFIG.BREVO_API_KEY},body:JSON.stringify({email:email,attributes:{NOME:nome,TELEFONO:attrs.telefono||'',TIPO_IMMOBILE:attrs.tipo_immobile||'',ZONA:attrs.zona||'',INTERESSE:attrs.interesse||'generico',FONTE:attrs.fonte||'sito'},listIds:[SERVIZI_CONFIG.BREVO_LIST_ID||11],updateEnabled:true})});
-  }catch(e){}
-}
 async function sendLead(e){
   e.preventDefault();
   const nome=document.getElementById('a-nome').value.trim(),tel=document.getElementById('a-tel').value.trim(),email=document.getElementById('a-email').value.trim(),comune=document.getElementById('a-comune').value.trim(),gdpr=document.getElementById('a-gdpr').checked,news=document.getElementById('a-news').checked;
@@ -458,7 +452,6 @@ async function sendLead(e){
   try{if(typeof SERVIZI_CONFIG!=='undefined'&&SERVIZI_CONFIG.EMAIL_RELAY_URL){const r=await fetch(SERVIZI_CONFIG.EMAIL_RELAY_URL,{method:'POST',headers:{'Content-Type':'application/json','X-API-Key':SERVIZI_CONFIG.EMAIL_RELAY_KEY},body:JSON.stringify({action:'send',to_email:SERVIZI_CONFIG.EMAIL_NOTIFY_TO||'info@righettoimmobiliare.it',subject:'LANDING AGENTE — '+nome,html_body:'<b>Nome:</b> '+nome+'<br><b>Email:</b> '+(email||'-')+'<br><b>Telefono:</b> '+tel+'<br><b>Messaggio:</b> '+msg+'<br><b>Newsletter:</b> '+(news?'Sì':'No'),reply_to:email||undefined})});emailOk=r.ok;}}catch(e){}
   let supaOk=false;
   try{const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');if(sb){await sb.from('richieste').insert([{nome,email,telefono:tel,messaggio:'[LANDING AGENTE] '+msg,provenienza:'landing-agente',newsletter:news,letto:false}]);supaOk=true;if(news&&email){await sb.from('newsletter_subscribers').upsert([{email,nome,telefono:tel,tipo_immobile:tipoImm||null,zona:comune||null,interesse:interesse||'consulenza',provenienza:'landing-agente',fonte:'landing-agente',attivo:true,created_at:new Date().toISOString()}],{onConflict:'email'}).catch(()=>{});}}}catch(e){}
-  if(news&&email){iscriviBrevo(email,nome,{telefono:tel,tipo_immobile:tipoImm,zona:comune,interesse:interesse||'consulenza',fonte:'landing-agente'});}
   btn.disabled=false;btn.textContent='🏠 RICHIEDI VALUTAZIONE GRATUITA';
   if(emailOk||supaOk){document.getElementById('inlineForm').style.display='none';document.getElementById('leadSuccess').style.display='block';}
   else{alert('Errore. Chiamaci al 049.88.43.484.');}
