@@ -3859,6 +3859,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <option value="vendita">Vendita</option>
                   <option value="valutazione">Valutazione</option>
                   <option value="agente">Agente</option>
+                  <option value="chat">Chat / Chatbot</option>
                   <option value="promozione">Promozione</option>
                   <option value="evento">Evento</option>
                   <option value="altro">Altro</option>
@@ -5312,6 +5313,15 @@ async function toggleAttivo(id, val) {
 // ══════════════════════════════════════
 let landingPages = [];
 
+const _landingSeedPages = [
+  { titolo: 'Valutazione gratuita', slug: 'landing-valutazione', url: 'landing-valutazione.html', categoria: 'valutazione', descrizione: 'Landing page per valutazione gratuita immobile', stato: 'pubblicata' },
+  { titolo: 'Contatta un agente', slug: 'landing-agente', url: 'landing-agente.html', categoria: 'agente', descrizione: 'Landing page per contattare un agente Righetto', stato: 'pubblicata' },
+  { titolo: 'Vendi il tuo immobile', slug: 'landing-vendita', url: 'landing-vendita.html', categoria: 'vendita', descrizione: 'Landing page per chi vuole vendere casa', stato: 'pubblicata' },
+  { titolo: 'Chat Valutazione Gratuita', slug: 'landing-chat-valutazione', url: 'landing-chat-valutazione.html', categoria: 'chat', descrizione: 'Landing con chatbot Linda: valutazione immobiliare conversazionale', stato: 'pubblicata' },
+  { titolo: 'Chat Vendita Casa Padova', slug: 'landing-chat-vendita', url: 'landing-chat-vendita.html', categoria: 'chat', descrizione: 'Landing con chatbot Linda: vendita immobiliare conversazionale', stato: 'pubblicata' },
+  { titolo: 'Chat Cambio Agenzia', slug: 'landing-chat-insoddisfatti', url: 'landing-chat-insoddisfatti.html', categoria: 'chat', descrizione: 'Landing con chatbot Linda: per chi vuole cambiare agenzia', stato: 'pubblicata' }
+];
+
 async function getLandingPages() {
   try {
     const { data, error } = await sb.from('landing_pages').select('*').order('created_at', { ascending: false });
@@ -5321,6 +5331,16 @@ async function getLandingPages() {
     console.warn('Tabella landing_pages non disponibile, uso localStorage:', e.message);
     try { landingPages = JSON.parse(localStorage.getItem('rig_landing_pages') || '[]'); } catch(ex) { landingPages = []; }
   }
+  // Seed: aggiungi landing mancanti
+  const slugEsistenti = new Set(landingPages.map(p => (p.slug || '').toLowerCase()));
+  _landingSeedPages.forEach(s => {
+    if (!slugEsistenti.has(s.slug.toLowerCase())) {
+      const page = { ...s, id: 'seed_' + s.slug, created_at: new Date().toISOString(), updated_at: new Date().toISOString() };
+      landingPages.push(page);
+      // Tenta inserimento su Supabase in background
+      try { sb.from('landing_pages').insert(page).then(() => {}); } catch(ex) {}
+    }
+  });
   try { localStorage.setItem('rig_landing_pages', JSON.stringify(landingPages)); } catch(e) {}
   return landingPages;
 }

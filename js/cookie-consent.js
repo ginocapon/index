@@ -68,7 +68,7 @@
     '<div class="rig-cb-inner">' +
       '<div class="rig-cb-text">' +
         'Questo sito utilizza cookie tecnici necessari al funzionamento. ' +
-        'Per saperne di pi\u00f9 consulta la nostra <a href="cookie-policy.html">Cookie Policy</a>.' +
+        'Per saperne di pi\u00f9 consulta la nostra <a href="/cookie-policy">Cookie Policy</a>.' +
       '</div>' +
       '<div class="rig-cb-btns">' +
         '<button class="rig-cb-btn rig-cb-accept" id="rig-cb-accept">Ho capito</button>' +
