@@ -7,9 +7,13 @@
  */
 
 const SERVIZI_CONFIG = {
-  // ── FORMSPREE ──────────────────────────────────────────
-  // Ricevi un'email ogni volta che qualcuno compila il form di contatto
-  // Vai su https://formspree.io → New Form → copia l'ID (es: "xrgjayzk")
+  // ── EMAIL RELAY (send-mail.php su cPanel) ─────────────
+  // Endpoint per invio email tramite mail() di cPanel
+  EMAIL_RELAY_URL: 'https://api.righettoimmobiliare.it/send-mail.php',
+  EMAIL_RELAY_KEY: 'RighettoMail2026!SecretKey',
+  EMAIL_NOTIFY_TO: 'info@righettoimmobiliare.it',
+
+  // ── FORMSPREE (deprecato — sostituito da email relay) ──
   FORMSPREE_ID: 'IL_TUO_FORM_ID',
 
   // ── BREVO (ex Sendinblue) ──────────────────────────────

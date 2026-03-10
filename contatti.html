@@ -340,26 +340,31 @@ async function sendForm(){
 
   const nomeCompleto = nome + (cognome ? ' ' + cognome : '');
 
-  // ── 1. FORMSPREE — Notifica email ──
-  let formspreeOk = false;
-  if (SERVIZI_CONFIG.FORMSPREE_ID && SERVIZI_CONFIG.FORMSPREE_ID !== 'IL_TUO_FORM_ID') {
+  // ── 1. EMAIL RELAY — Notifica email ──
+  let emailOk = false;
+  if (SERVIZI_CONFIG.EMAIL_RELAY_URL && SERVIZI_CONFIG.EMAIL_RELAY_KEY) {
     try {
-      const r = await fetch('https://formspree.io/f/' + SERVIZI_CONFIG.FORMSPREE_ID, {
+      const bodyParts = ['<b>Nome:</b> ' + nomeCompleto];
+      if (email) bodyParts.push('<b>Email:</b> ' + email);
+      bodyParts.push('<b>Telefono:</b> ' + tel);
+      if (oggetto) bodyParts.push('<b>Oggetto:</b> ' + oggetto);
+      if (zona) bodyParts.push('<b>Zona:</b> ' + zona);
+      if (msg) bodyParts.push('<b>Messaggio:</b><br>' + msg.replace(/\n/g, '<br>'));
+      bodyParts.push('<b>Newsletter:</b> ' + (news ? 'Sì' : 'No'));
+
+      const r = await fetch(SERVIZI_CONFIG.EMAIL_RELAY_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'X-API-Key': SERVIZI_CONFIG.EMAIL_RELAY_KEY },
         body: JSON.stringify({
-          nome: nomeCompleto,
-          email: email,
-          telefono: tel,
-          oggetto: oggetto,
-          zona: zona,
-          messaggio: msg,
-          newsletter: news ? 'Si' : 'No',
-          _subject: 'Nuovo contatto dal sito: ' + nomeCompleto
+          action: 'send',
+          to_email: SERVIZI_CONFIG.EMAIL_NOTIFY_TO || 'info@righettoimmobiliare.it',
+          subject: 'Nuovo contatto dal sito: ' + nomeCompleto,
+          html_body: bodyParts.join('<br>'),
+          reply_to: email || undefined
         })
       });
-      formspreeOk = r.ok;
-    } catch(e) { formspreeOk = false; }
+      emailOk = r.ok;
+    } catch(e) { emailOk = false; }
   }
 
   // ── 2. SUPABASE — Salvataggio database ──
@@ -410,7 +415,7 @@ async function sendForm(){
   btn.disabled = false;
   btn.textContent = 'INVIA MESSAGGIO';
 
-  if (formspreeOk || supaOk) {
+  if (emailOk || supaOk) {
     document.getElementById('success').style.display = 'block';
     btn.style.display = 'none';
     ['f-nome','f-cog','f-tel','f-mail','f-zona','f-msg'].forEach(function(id){
