@@ -4138,7 +4138,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   </div>
                   <div class="form-group" style="margin:0">
                     <label>Link pulsante</label>
-                    <input type="text" id="emVisualCTALink" placeholder="https://www.righettoimmobiliare.it/contatti.html" value="https://www.righettoimmobiliare.it/contatti.html">
+                    <input type="text" id="emVisualCTALink" placeholder="https://www.righettoimmobiliare.it/contatti" value="https://www.righettoimmobiliare.it/contatti">
                   </div>
                 </div>
 
@@ -10609,9 +10609,9 @@ checkAuth();
         document.getElementById('emVisualImageUrl').value = img;
         document.getElementById('emImagePreview').innerHTML = '<img src="' + escHtml(img) + '" style="max-width:100%;border-radius:8px">';
       }
-      if (url) {
-        document.getElementById('emVisualCTALink').value = url;
-      }
+      // CTA sempre fisso: "Contattaci" → pagina contatti (il cliente vede questo)
+      document.getElementById('emVisualCTAText').value = 'Contattaci';
+      document.getElementById('emVisualCTALink').value = 'https://www.righettoimmobiliare.it/contatti';
       toast('Contenuto caricato nell\'editor visuale — clicca "Genera email" per completare', 'success');
     } else {
       // Siamo in modalità codice: inserisci HTML direttamente
@@ -11624,7 +11624,7 @@ checkAuth();
     </div>
 
     <div style="text-align:center;padding:20px 0">
-      <a href="https://www.righettoimmobiliare.it/contatti.html" style="display:inline-block;background:#d4a843;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:15px;font-weight:bold">Prenota una consulenza gratuita</a>
+      <a href="https://www.righettoimmobiliare.it/contatti" style="display:inline-block;background:#d4a843;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:15px;font-weight:bold">Contattaci</a>
     </div>
   </div>
 
