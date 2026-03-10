@@ -10611,6 +10611,15 @@ checkAuth();
       }
       if (url) {
         document.getElementById('emVisualCTALink').value = url;
+        // Aggiorna anche il testo del pulsante in base al tipo di contenuto
+        const ctaTextEl = document.getElementById('emVisualCTAText');
+        if (url.includes('immobile.html')) {
+          ctaTextEl.value = 'Vedi immobile';
+        } else if (url.includes('blog')) {
+          ctaTextEl.value = 'Leggi l\'articolo';
+        } else {
+          ctaTextEl.value = 'Scopri di più';
+        }
       }
       toast('Contenuto caricato nell\'editor visuale — clicca "Genera email" per completare', 'success');
     } else {
