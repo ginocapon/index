@@ -15,7 +15,7 @@
 6. **Mai toccare** DNS, record MX, configurazione cPanel senza conferma esplicita
 7. **URL pulite — MAI .html nei link** — tutti i link interni devono usare URL senza estensione `.html`. GitHub Pages serve automaticamente `pagina.html` quando visiti `/pagina`. I file su disco mantengono l'estensione `.html`, ma ogni `href`, `canonical`, `og:url`, sitemap e link interno deve puntare a URL pulite (es. `/landing-chat-valutazione` e NON `/landing-chat-valutazione.html`)
 8. **Auto-registrazione admin** — ogni nuova pagina creata (landing, blog, immobile) DEVE essere registrata automaticamente in Supabase e nell'admin. Nello specifico:
-   - **Landing pages** → inserire nella tabella Supabase `landing_pages` tramite seed in `admin.html` + aggiungere in array `EM_SITE_PAGES`
+   - **Landing pages** → inserire nella tabella Supabase `landing_pages` tramite seed in `admin.html` (`_landingSeedPages`) + aggiungere in array `EM_SITE_PAGES` + il picker email marketing le carica automaticamente dal seed/Supabase
    - **Blog** → registrare in `sitemap.xml`, `blog.html`, `js/homepage.js`, `admin.html` (`_blogSeedArticles`)
    - **Pagine generiche** → registrare in `sitemap.xml` + navigazione
 

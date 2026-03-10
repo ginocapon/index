@@ -3834,6 +3834,39 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         </div>
       </div>
 
+      <!-- ═══ MODAL ANTEPRIMA LANDING ═══ -->
+      <div class="modal-overlay" id="landingPreviewModal">
+        <div class="modal" style="max-width:680px">
+          <div class="modal-header">
+            <h2 style="font-size:1rem">🔍 Anteprima Landing Page</h2>
+            <button class="modal-close" onclick="closeLandingPreviewModal()">&times;</button>
+          </div>
+          <div class="modal-body" style="padding:0">
+            <div id="landingPreviewIcon" style="width:100%;height:160px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;align-items:center;justify-content:center;font-size:4rem;color:#fff"></div>
+            <div style="padding:24px 28px">
+              <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+                <span class="badge badge-blu" id="landingPreviewCat"></span>
+                <span id="landingPreviewStato" style="margin-left:auto"></span>
+              </div>
+              <h3 style="font-size:1.15rem;margin-bottom:8px;color:var(--nero)" id="landingPreviewTitle"></h3>
+              <p style="font-size:0.85rem;line-height:1.8;color:var(--caffe);margin-bottom:16px" id="landingPreviewDesc"></p>
+              <div style="background:var(--sfondo);border-radius:8px;padding:12px 16px;margin-bottom:16px">
+                <span style="font-size:0.72rem;color:var(--caffe2);display:block;margin-bottom:4px">URL della pagina:</span>
+                <a id="landingPreviewUrl" href="#" target="_blank" style="font-family:monospace;font-size:0.82rem;color:var(--nero);word-break:break-all"></a>
+              </div>
+              <div style="display:flex;gap:10px;align-items:center;padding-top:12px;border-top:1px solid var(--gc);font-size:0.75rem;color:var(--caffe2)">
+                <span id="landingPreviewDateCreated"></span>
+                <span id="landingPreviewDatePub"></span>
+              </div>
+              <div style="display:flex;gap:10px;justify-content:center;margin-top:20px">
+                <a id="landingPreviewOpenBtn" href="#" target="_blank" class="btn btn-primary" style="text-decoration:none">Apri pagina ↗</a>
+                <button class="btn btn-secondary" onclick="closeLandingPreviewModal()">Chiudi</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- ═══ EDITOR LANDING PAGE ═══ -->
       <div class="section" id="sec-landing-editor">
         <div class="table-wrap">
@@ -3867,8 +3900,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               </div>
               <div class="form-group">
                 <label>URL Landing (se già esistente)</label>
-                <input type="text" id="l_url" placeholder="es. landing-valutazione.html">
-                <small style="color:var(--caffe2);font-size:.68rem">Se la pagina HTML esiste già nel sito, inserisci il nome del file.</small>
+                <input type="text" id="l_url" placeholder="es. landing-valutazione">
+                <small style="color:var(--caffe2);font-size:.68rem">Inserisci lo slug senza .html (es. landing-valutazione). GitHub Pages serve automaticamente le URL pulite.</small>
               </div>
               <div class="form-group">
                 <label>Data Pubblicazione Programmata</label>
@@ -5366,21 +5399,24 @@ async function loadLandingList() {
     return;
   }
 
-  wrap.innerHTML = `<table><thead><tr><th style="width:30px"><input type="checkbox" id="landingCheckAll" onchange="toggleAllLanding(this.checked)"></th><th>Titolo</th><th>Tipo</th><th>URL</th><th>Stato</th><th>Pubblicazione</th><th>Azioni</th></tr></thead><tbody>${
+  const catEmoji = {vendita:'🏠',valutazione:'📊',agente:'👤',chat:'💬',promozione:'🎯',evento:'📅',altro:'📄'};
+  wrap.innerHTML = `<table><thead><tr><th></th><th>Titolo</th><th>Tipo</th><th>URL</th><th>Stato</th><th>Pubblicazione</th><th>Azioni</th></tr></thead><tbody>${
     pages.map(p => {
       const statoBadge = p.stato === 'pubblicata' ? '<span class="badge badge-verde">Pubblicata</span>'
         : p.stato === 'programmata' ? '<span class="badge badge-oro">Programmata</span>'
         : '<span class="badge" style="background:var(--caffe3);color:#fff">Bozza</span>';
       const dataPub = p.data_pubblicazione ? formatDateTime(p.data_pubblicazione) : '—';
-      const urlFile = p.url || (p.slug ? p.slug : '—');
+      const urlSlug = (p.slug || p.url || '').replace(/\.html$/,'');
+      const emoji = catEmoji[p.categoria] || '📄';
       return `<tr>
-        <td><input type="checkbox" class="landing-check" value="${p.id}"></td>
+        <td style="font-size:1.8rem;text-align:center">${emoji}</td>
         <td><strong style="font-size:0.88rem">${esc(p.titolo)}</strong>${p.descrizione ? '<br><span style="font-size:0.72rem;color:var(--caffe2)">' + esc(p.descrizione).substring(0, 80) + '</span>' : ''}</td>
         <td><span class="badge badge-blu">${esc(p.categoria || 'altro')}</span></td>
-        <td style="font-size:0.78rem;font-family:monospace"><a href="${esc(urlFile)}" target="_blank" style="color:var(--nero)">${esc(urlFile)}</a></td>
+        <td style="font-size:0.78rem;font-family:monospace"><a href="/${esc(urlSlug)}" target="_blank" style="color:var(--nero)">/${esc(urlSlug)}</a></td>
         <td>${statoBadge}</td>
         <td style="font-size:0.78rem">${dataPub}</td>
         <td style="white-space:nowrap">
+          <button class="btn btn-sm" style="background:var(--sfondo);border:1px solid var(--gc);padding:6px 8px" onclick="previewLandingPage('${p.id}')" title="Anteprima">🔍</button>
           <button class="btn btn-sm btn-secondary" onclick="editLandingPage('${p.id}')">✏️ Modifica</button>
           <button class="btn btn-sm btn-danger" onclick="deleteLandingById('${p.id}')">🗑️</button>
         </td>
@@ -5548,6 +5584,37 @@ async function deleteLandingById(id) {
 function showSectionById(name) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById('sec-' + name).classList.add('active');
+}
+
+// ═══ ANTEPRIMA LANDING PAGE ═══
+function previewLandingPage(id) {
+  const p = landingPages.find(x => x.id == id);
+  if (!p) return;
+  const catEmoji = {vendita:'🏠',valutazione:'📊',agente:'👤',chat:'💬',promozione:'🎯',evento:'📅',altro:'📄'};
+  const catColors = {vendita:'#2C4A6E',valutazione:'#6C63FF',agente:'#00E5A0',chat:'#667eea',promozione:'#FF6B35',evento:'#B8D44A',altro:'#888'};
+  const cat = p.categoria || 'altro';
+  const emoji = catEmoji[cat] || '📄';
+  const color = catColors[cat] || '#667eea';
+  document.getElementById('landingPreviewIcon').innerHTML = '<span style="font-size:4rem">' + emoji + '</span>';
+  document.getElementById('landingPreviewIcon').style.background = 'linear-gradient(135deg,' + color + ' 0%,' + color + '88 100%)';
+  document.getElementById('landingPreviewCat').textContent = cat;
+  document.getElementById('landingPreviewTitle').textContent = p.titolo || '';
+  document.getElementById('landingPreviewDesc').textContent = p.descrizione || 'Nessuna descrizione disponibile.';
+  const slug = (p.slug || p.url || '').replace(/\.html$/, '');
+  const fullUrl = 'https://righettoimmobiliare.it/' + slug;
+  document.getElementById('landingPreviewUrl').textContent = fullUrl;
+  document.getElementById('landingPreviewUrl').href = fullUrl;
+  document.getElementById('landingPreviewOpenBtn').href = '/' + slug;
+  document.getElementById('landingPreviewStato').innerHTML = p.stato === 'pubblicata'
+    ? '<span class="badge badge-verde">Pubblicata</span>'
+    : p.stato === 'programmata' ? '<span class="badge badge-oro">Programmata</span>'
+    : '<span class="badge" style="background:var(--caffe3);color:#fff">Bozza</span>';
+  document.getElementById('landingPreviewDateCreated').textContent = p.created_at ? '📅 Creata: ' + formatDateTime(p.created_at) : '';
+  document.getElementById('landingPreviewDatePub').textContent = p.data_pubblicazione ? '🚀 Pubblicazione: ' + formatDateTime(p.data_pubblicazione) : '';
+  document.getElementById('landingPreviewModal').classList.add('open');
+}
+function closeLandingPreviewModal() {
+  document.getElementById('landingPreviewModal').classList.remove('open');
 }
 
 // ══════════════════════════════════════
@@ -10530,18 +10597,30 @@ checkAuth();
       }
     } catch(e) { console.warn('Immobili picker:', e.message); }
 
-    // 3. Landing Pages
+    // 3. Landing Pages — con fallback seed automatico
     try {
-      const {data: landings} = await sb.from('landing_pages').select('id, titolo, slug, url, categoria, descrizione').order('created_at', {ascending: false});
+      let landings = [];
+      try {
+        const res = await sb.from('landing_pages').select('id, titolo, slug, url, categoria, descrizione').order('created_at', {ascending: false});
+        if (res.data && res.data.length) landings = res.data;
+      } catch(ex) { console.warn('Landing picker Supabase:', ex.message); }
+      // Fallback: se Supabase non ha landing, usa il seed
+      if (!landings.length && landingPages && landingPages.length) {
+        landings = landingPages;
+      } else if (!landings.length && _landingSeedPages) {
+        landings = _landingSeedPages;
+      }
       const sel = document.getElementById('emPickLanding');
-      if (sel && landings) {
+      if (sel && landings.length) {
+        const catEmoji = {vendita:'🏠',valutazione:'📊',agente:'👤',chat:'💬',promozione:'🎯',evento:'📅',altro:'📄'};
         landings.forEach(lp => {
           const opt = document.createElement('option');
-          opt.value = lp.id;
-          opt.textContent = (lp.categoria ? '[' + lp.categoria + '] ' : '') + (lp.titolo || 'Senza titolo');
+          opt.value = lp.id || 'seed_' + lp.slug;
+          const emoji = catEmoji[lp.categoria] || '📄';
+          opt.textContent = emoji + ' ' + (lp.categoria ? '[' + lp.categoria + '] ' : '') + (lp.titolo || 'Senza titolo');
           opt.dataset.titolo = lp.titolo || '';
           opt.dataset.slug = lp.slug || '';
-          opt.dataset.url = lp.url || (lp.slug ? lp.slug + '.html' : '');
+          opt.dataset.url = (lp.slug || lp.url || '').replace(/\.html$/, '');
           opt.dataset.desc = lp.descrizione || '';
           sel.appendChild(opt);
         });
@@ -10557,7 +10636,7 @@ checkAuth();
     const titolo = opt.dataset.titolo;
     const slug = opt.dataset.slug;
     const img = opt.dataset.img;
-    const url = 'https://www.righettoimmobiliare.it/blog/' + (slug || 'articolo') + '.html';
+    const url = 'https://www.righettoimmobiliare.it/' + (slug || 'blog');
 
     let html = '';
     if (img) html += '<div style="text-align:center;margin-bottom:16px"><img src="' + escHtml(img) + '" style="max-width:100%;border-radius:8px" alt="' + escHtml(titolo) + '"></div>\n';
@@ -10581,7 +10660,7 @@ checkAuth();
     const tipo = opt.dataset.tipo;
     const comune = opt.dataset.comune;
     const img = opt.dataset.img;
-    const url = 'https://www.righettoimmobiliare.it/immobile.html?id=' + id;
+    const url = 'https://www.righettoimmobiliare.it/immobile?id=' + id;
 
     let html = '';
     if (img) html += '<div style="text-align:center;margin-bottom:16px"><img src="' + escHtml(img) + '" style="max-width:100%;border-radius:8px" alt="' + escHtml(titolo) + '"></div>\n';
@@ -10934,7 +11013,7 @@ checkAuth();
     preview.style.display = 'block';
     document.getElementById('emLandingPreviewTitle').textContent = page.title;
     document.getElementById('emLandingPreviewDesc').textContent = page.desc;
-    document.getElementById('emLandingPreviewUrl').textContent = 'https://www.righettoimmobiliare.it/' + page.file;
+    document.getElementById('emLandingPreviewUrl').textContent = 'https://www.righettoimmobiliare.it/' + page.file.replace(/\.html$/, '');
   };
 
   window.emBuildLandingEmail = function() {
@@ -10945,7 +11024,7 @@ checkAuth();
     const intro = document.getElementById('emLandingIntro').value.trim() ||
       'Gentile {{nome}}, abbiamo un contenuto che potrebbe interessarti:';
     const introHtml = escHtml(intro).replace(/\{\{nome\}\}/gi, '{{nome}}').replace(/\n/g,'<br>');
-    const pageUrl = 'https://www.righettoimmobiliare.it/' + page.file;
+    const pageUrl = 'https://www.righettoimmobiliare.it/' + page.file.replace(/\.html$/, '');
     const icon = page.cat === 'blog' ? '📝 Articolo' : page.cat === 'landing' ? '🚀 Offerta' : page.cat === 'zona' ? '📍 Quartiere' : '🔧 Servizio';
 
     const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
@@ -12225,7 +12304,7 @@ checkAuth();
     const prezzo = property.prezzo ? '€ ' + Number(property.prezzo).toLocaleString('it-IT') : 'Prezzo su richiesta';
     const prezzoMq = (property.prezzo && property.superficie) ? '€ ' + Math.round(property.prezzo / property.superficie).toLocaleString('it-IT') + '/mq' : '';
     const slug = property.slug || property.id;
-    const url = 'https://www.righettoimmobiliare.it/immobile.html?id=' + property.id;
+    const url = 'https://www.righettoimmobiliare.it/immobile?id=' + property.id;
 
     return `<div style="border:2px solid #e0d6c8;border-radius:12px;overflow:hidden;margin:16px 0;max-width:580px">
       ${foto ? '<a href="' + url + '"><img src="' + foto + '" style="width:100%;max-height:250px;object-fit:cover;display:block" alt="' + escHtml(property.titolo || '') + '"></a>' : ''}
@@ -12430,7 +12509,7 @@ checkAuth();
 
     const prezzo = property.prezzo ? '€ ' + Number(property.prezzo).toLocaleString('it-IT') : '';
     const propInfo = (property.codice || '') + ' — ' + (property.titolo || '') + '\n' + (property.comune || '') + '\n' + prezzo + (property.superficie ? ' | ' + property.superficie + ' mq' : '') + (property.camere ? ' | ' + property.camere + ' camere' : '');
-    const url = 'https://www.righettoimmobiliare.it/immobile.html?id=' + property.id;
+    const url = 'https://www.righettoimmobiliare.it/immobile?id=' + property.id;
 
     // Apri ogni WhatsApp in nuova tab
     const confirmed = confirm('Stai per aprire ' + matches.length + ' conversazioni WhatsApp.\nOgni tab avrà il messaggio pre-compilato.\n\nConfermi?');
@@ -12515,7 +12594,7 @@ checkAuth();
     let msgParts = ['Buongiorno ' + (client.nome || '') + ', ecco gli immobili che corrispondono alla tua ricerca:\n'];
     matches.forEach((i, idx) => {
       const prezzo = i.prezzo ? '€ ' + Number(i.prezzo).toLocaleString('it-IT') : '';
-      const url = 'https://www.righettoimmobiliare.it/immobile.html?id=' + i.id;
+      const url = 'https://www.righettoimmobiliare.it/immobile?id=' + i.id;
       msgParts.push((idx+1) + '. ' + (i.titolo || i.codice || '') + '\n   ' + (i.comune || '') + ' | ' + prezzo + (i.superficie ? ' | ' + i.superficie + 'mq' : '') + '\n   ' + url);
     });
     msgParts.push('\nPer info: Righetto Immobiliare 049 7808 888');
