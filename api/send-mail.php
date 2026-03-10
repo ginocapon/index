@@ -24,13 +24,38 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Verifica autenticazione
+// Verifica autenticazione — supporta X-API-Key header, Authorization Bearer, e HTTP_X_API_KEY
 $headers = getallheaders();
-$apiKey = $headers['X-API-Key'] ?? $headers['x-api-key'] ?? '';
+$apiKey = $headers['X-API-Key'] ?? $headers['x-api-key'] ?? $headers['X-Api-Key'] ?? '';
 
+// Fallback: alcuni server Apache/cPanel convertono header custom in HTTP_X_API_KEY
+if (!$apiKey && isset($_SERVER['HTTP_X_API_KEY'])) {
+    $apiKey = $_SERVER['HTTP_X_API_KEY'];
+}
+
+// Fallback: controlla anche nel body JSON (per test dalla dashboard Supabase)
+if (!$apiKey) {
+    $rawBody = file_get_contents('php://input');
+    $jsonCheck = json_decode($rawBody, true);
+    if (isset($jsonCheck['api_key'])) {
+        $apiKey = $jsonCheck['api_key'];
+    }
+}
+
+// Debug: log degli header ricevuti per diagnostica
 if ($apiKey !== API_SECRET) {
+    $headerList = [];
+    foreach ($headers as $k => $v) {
+        $headerList[] = $k . ': ' . substr($v, 0, 20) . '...';
+    }
     http_response_code(403);
-    echo json_encode(['status' => 'error', 'error' => 'API key non valida']);
+    echo json_encode([
+        'status' => 'error',
+        'error' => 'API key non valida',
+        'debug_headers_received' => $headerList,
+        'debug_key_received' => $apiKey ? substr($apiKey, 0, 10) . '...' : '(vuoto)',
+        'debug_server_key' => isset($_SERVER['HTTP_X_API_KEY']) ? 'presente' : 'assente'
+    ]);
     exit;
 }
 
