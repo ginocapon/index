@@ -35,18 +35,18 @@
             <div style="margin-top:20px">
                 <button class="btn btn-danger" onclick="confirmUnsub()">Confermo la cancellazione</button>
                 <br>
-                <a href="https://righetto-immobiliare.it" class="btn btn-secondary" style="text-decoration:none;display:inline-block;margin-top:8px">Annulla e torna al sito</a>
+                <a href="https://righettoimmobiliare.it" class="btn btn-secondary" style="text-decoration:none;display:inline-block;margin-top:8px">Annulla e torna al sito</a>
             </div>
         </div>
         <div class="content success" id="successSection">
             <h2>Disiscrizione completata</h2>
             <p>La tua email è stata rimossa dalla nostra mailing list.</p>
             <p style="font-size:0.9rem;color:#999">Se cambi idea, puoi sempre reiscriverti dal nostro sito.</p>
-            <a href="https://righetto-immobiliare.it" class="btn btn-secondary" style="text-decoration:none;display:inline-block;margin-top:12px">Torna al sito</a>
+            <a href="https://righettoimmobiliare.it" class="btn btn-secondary" style="text-decoration:none;display:inline-block;margin-top:12px">Torna al sito</a>
         </div>
         <div class="footer">
             Righetto Immobiliare — Via Fratelli Cervi 37, 35129 Padova<br>
-            <a href="https://righetto-immobiliare.it/privacy-policy.html" style="color:#999">Privacy Policy</a>
+            <a href="https://righettoimmobiliare.it/privacy-policy.html" style="color:#999">Privacy Policy</a>
         </div>
     </div>
 
@@ -65,7 +65,7 @@
             document.getElementById('confirmSection').innerHTML =
                 '<h2 style="color:#c0392b;margin-bottom:16px">Link non valido</h2>' +
                 '<p>Questo link di disiscrizione non è valido. Contattaci direttamente se vuoi cancellarti.</p>' +
-                '<a href="https://righetto-immobiliare.it" class="btn btn-secondary" style="text-decoration:none;display:inline-block;margin-top:12px">Torna al sito</a>';
+                '<a href="https://righettoimmobiliare.it" class="btn btn-secondary" style="text-decoration:none;display:inline-block;margin-top:12px">Torna al sito</a>';
         }
 
         async function confirmUnsub() {
@@ -78,7 +78,7 @@
                 document.getElementById('confirmSection').style.display = 'none';
                 document.getElementById('successSection').style.display = 'block';
             } catch(e) {
-                alert('Errore durante la disiscrizione. Per favore contattaci a info@righetto-immobiliare.it');
+                alert('Errore durante la disiscrizione. Per favore contattaci a info@righettoimmobiliare.it');
             }
         }
     </script>

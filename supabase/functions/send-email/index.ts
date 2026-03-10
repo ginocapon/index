@@ -3,7 +3,7 @@
 // Invia email via PHP relay sul tuo cPanel — Zero servizi esterni
 // Deploy: supabase functions deploy send-email
 // Secrets necessari su Supabase:
-//   MAIL_RELAY_URL = https://www.righettoimmobiliare.it/api/send-mail.php
+//   MAIL_RELAY_URL = https://api.righettoimmobiliare.it/send-mail.php
 //   MAIL_RELAY_KEY = RighettoMail2026!SecretKey  (stessa del PHP)
 // ═══════════════════════════════════════════════════════════════
 
@@ -27,7 +27,7 @@ async function sendViaRelay(options: {
   html_body: string;
   reply_to?: string;
 }) {
-  const RELAY_URL = Deno.env.get("MAIL_RELAY_URL") || "https://www.righettoimmobiliare.it/api/send-mail.php";
+  const RELAY_URL = Deno.env.get("MAIL_RELAY_URL") || "https://api.righettoimmobiliare.it/send-mail.php";
   const RELAY_KEY = Deno.env.get("MAIL_RELAY_KEY") || "RighettoMail2026!SecretKey";
 
   console.log("Relay:", options.action, "→", options.to_email, "da", options.sender_email);

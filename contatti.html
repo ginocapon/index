@@ -400,17 +400,6 @@ async function sendForm(){
     }
   } catch(e) { supaOk = false; }
 
-  // ── 3. BREVO — Iscrizione newsletter ──
-  if (news && email && SERVIZI_CONFIG.BREVO_API_KEY) {
-    try {
-      await fetch('https://api.brevo.com/v3/contacts', {
-        method: 'POST',
-        headers: { 'accept': 'application/json', 'content-type': 'application/json', 'api-key': SERVIZI_CONFIG.BREVO_API_KEY },
-        body: JSON.stringify({ email: email, attributes: { NOME: nomeCompleto, TELEFONO: tel, ZONA: zona || '', INTERESSE: 'generico', FONTE: 'form-contatti' }, listIds: [SERVIZI_CONFIG.BREVO_LIST_ID || 11], updateEnabled: true })
-      });
-    } catch(e) { /* newsletter non critica */ }
-  }
-
   // ── RISULTATO ──
   btn.disabled = false;
   btn.textContent = 'INVIA MESSAGGIO';

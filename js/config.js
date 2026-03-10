@@ -16,12 +16,6 @@ const SERVIZI_CONFIG = {
   // ── FORMSPREE (deprecato — sostituito da email relay) ──
   FORMSPREE_ID: 'IL_TUO_FORM_ID',
 
-  // ── BREVO (ex Sendinblue) ──────────────────────────────
-  // Newsletter per nuovi immobili e articoli del blog
-  BREVO_API_KEY: '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',
-  BREVO_LIST_ID: 11,
-  BREVO_FORM_URL: '',
-
   // ── EMAILJS (Email Marketing) ────────────────────────────
   // Vai su https://emailjs.com → Account → Public Key
   // Poi Services → copia Service ID
