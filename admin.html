@@ -10547,6 +10547,7 @@ checkAuth();
 
     emInsertContentInEditor(html, titolo, img, url);
     emAddContentPreviewCard('blog', titolo, img, url);
+    sel.selectedIndex = 0;
   };
 
   // ═══ INSERISCI CONTENUTO DA IMMOBILE ═══
@@ -10574,6 +10575,7 @@ checkAuth();
 
     emInsertContentInEditor(html, titolo, img, url);
     emAddContentPreviewCard('immobile', (codice ? 'Rif. ' + codice + ' — ' : '') + titolo + (prezzo ? ' — €' + Number(prezzo).toLocaleString('it-IT') : ''), img, url);
+    sel.selectedIndex = 0;
   };
 
   // ═══ INSERISCI CONTENUTO DA LANDING PAGE ═══
@@ -10593,6 +10595,7 @@ checkAuth();
 
     emInsertContentInEditor(html, titolo, null, url);
     emAddContentPreviewCard('landing', titolo, null, url);
+    sel.selectedIndex = 0;
   };
 
   // Helper: inserisce contenuto nell'editor attivo (visuale o codice)
