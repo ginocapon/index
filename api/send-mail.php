@@ -2,7 +2,7 @@
 // ═══════════════════════════════════════════════════════════════
 // RIGHETTO IMMOBILIARE — Email Relay PHP (cPanel)
 // Riceve richieste HTTP e invia email via mail() PHP
-// Upload su cPanel: public_html/api/send-mail.php
+// Upload su cPanel: api.righettoimmobiliare.it/send-mail.php
 // ═══════════════════════════════════════════════════════════════
 
 // Chiave segreta per autorizzare le richieste (CAMBIA QUESTA!)
@@ -42,20 +42,9 @@ if (!$apiKey) {
     }
 }
 
-// Debug: log degli header ricevuti per diagnostica
 if ($apiKey !== API_SECRET) {
-    $headerList = [];
-    foreach ($headers as $k => $v) {
-        $headerList[] = $k . ': ' . substr($v, 0, 20) . '...';
-    }
     http_response_code(403);
-    echo json_encode([
-        'status' => 'error',
-        'error' => 'API key non valida',
-        'debug_headers_received' => $headerList,
-        'debug_key_received' => $apiKey ? substr($apiKey, 0, 10) . '...' : '(vuoto)',
-        'debug_server_key' => isset($_SERVER['HTTP_X_API_KEY']) ? 'presente' : 'assente'
-    ]);
+    echo json_encode(['status' => 'error', 'error' => 'API key non valida']);
     exit;
 }
 
