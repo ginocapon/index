@@ -30,7 +30,8 @@
 | **Hosting sito** | GitHub Pages (deploy da `main`) |
 | **Tech Stack** | HTML statico + CSS + JS vanilla + Express.js (dev) |
 | **Database** | Supabase (PostgreSQL) |
-| **Newsletter** | Brevo |
+| **Email Marketing** | Supabase Edge Function (send-email) — sistema integrato nell'admin |
+| **Newsletter** | Raccolta contatti via form → tabella Supabase `newsletter_subscribers` |
 | **Form contatti** | Formspree |
 | **Analytics** | Google Analytics 4 (G-9MHDHHES26) |
 | **Chatbot AI** | "Sara" — assistente virtuale |
