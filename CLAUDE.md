@@ -30,8 +30,10 @@
 | **Hosting sito** | GitHub Pages (deploy da `main`) |
 | **Tech Stack** | HTML statico + CSS + JS vanilla + Express.js (dev) |
 | **Database** | Supabase (PostgreSQL) |
-| **Newsletter** | Brevo |
-| **Form contatti** | Formspree |
+| **API Email** | `api.righettoimmobiliare.it` — PHP relay su cPanel (mail nativa, no Brevo) |
+| **Email Marketing** | Admin → Supabase Edge Function → API relay — sistema completo nell'admin |
+| **Newsletter** | Raccolta contatti via form → tabella Supabase `newsletter_subscribers` |
+| **Form contatti** | Landing/contatti → API relay diretto (`js/config.js` → `EMAIL_RELAY_URL`) |
 | **Analytics** | Google Analytics 4 (G-9MHDHHES26) |
 | **Chatbot AI** | "Sara" — assistente virtuale |
 
