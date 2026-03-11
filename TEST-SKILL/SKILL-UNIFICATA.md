@@ -97,7 +97,7 @@ Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se 
 - **Record MX:** email su cPanel (NON MODIFICARE)
 - **Google Site Verification:** meta tag nel `<head>` di index.html
 
-### 2.3 Struttura File Principale
+### 2.4 Struttura File Principale
 ```
 index.html                          - Homepage (82KB, canvas animato, testimonial, CTA)
 immobili.html                       - Lista immobili (Leaflet.js map, filtri)
