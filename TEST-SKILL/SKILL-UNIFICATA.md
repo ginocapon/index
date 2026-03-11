@@ -1,7 +1,7 @@
 # SKILL UNIFICATA — Righetto Immobiliare
 ## Prompt Operativo Master Consolidato
 
-> **Versione:** 1.4 — 8 Marzo 2026 (4 loop di raffinamento completati)
+> **Versione:** 1.6 — 11 Marzo 2026
 > **Origine:** Fusione e razionalizzazione di SERP-STRATEGY.md (v. 4 marzo) + SKILL-KILLER.md (v1.6 - 7 marzo)
 > **Ultimo aggiornamento Google verificato:** 8 Marzo 2026
 > **Prossima verifica consigliata:** Aprile 2026
@@ -51,7 +51,8 @@ Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se 
 | **Hosting dominio/email** | cPanel (cpanel.righettoimmobiliare.it) |
 | **Tech Stack** | HTML statico + CSS + JS + Express.js (dev) |
 | **Database** | Supabase (PostgreSQL esterno) |
-| **Newsletter** | Brevo (Sendinblue) |
+| **Email Marketing** | Supabase Edge Function (send-email) — sistema completo nell'admin |
+| **Newsletter** | Raccolta contatti via form sito → tabella Supabase `newsletter_subscribers` |
 | **Form contatti** | Formspree |
 | **Analytics** | Google Analytics 4 (G-9MHDHHES26) |
 | **Chatbot AI** | "Sara" — assistente virtuale integrata |
@@ -87,7 +88,12 @@ landing-vendere-casa-padova.html    - Landing ultra-ottimizzata keyword
 landing-valutazione.html            - Landing valutazione
 landing-agente.html                 - Landing agente
 landing-mutuo.html                  - Landing mutuo + simulatore
-admin.html                          - Pannello admin (605KB, Supabase, 2FA)
+landing-chat-offerta-luce.html      - Landing chatbot offerta ENEL Luce
+landing-chat-offerta-gas.html       - Landing chatbot offerta ENEL Gas
+landing/offerta-enel-luce.html      - Landing statica offerta ENEL Super Luce
+landing/offerta-enel-gas.html       - Landing statica offerta ENEL Fix Star Gas
+landing/reel-offerta-gas.html       - Landing animata reel offerta ENEL Gas
+admin.html                          - Pannello admin (Supabase, 2FA, Email Marketing integrato)
 llms.txt                            - File per AI bots (GEO)
 sitemap.xml                         - 54+ URL indicizzati
 robots.txt                          - Direttive crawler
@@ -547,6 +553,15 @@ js/scroll-reveal.js                 - Animazioni scroll
 ---
 
 ## 12. CHANGELOG
+
+### v1.6 - 11 Marzo 2026 (Landing ENEL + Email Marketing in Agenda)
+- **Tech Stack corretto:** Newsletter non usa Brevo, usa Supabase Edge Function per invio + tabella `newsletter_subscribers` per raccolta contatti
+- **Nuove landing ENEL:** offerta-enel-luce, offerta-enel-gas, reel-offerta-gas (in sottocartella `landing/`)
+- **Nuove landing chat ENEL:** landing-chat-offerta-luce, landing-chat-offerta-gas
+- **Fix slug landing ENEL:** aggiunto prefisso `landing/` negli slug admin per URL corrette
+- **Pulsanti azioni immobili:** ingranditi con classe `btn-action` (40x40px min, ombre, bordi)
+- **Campagne email in Agenda:** le email massive ora appaiono nel calendario settimanale con icona busta viola
+- **Struttura file aggiornata** con tutte le nuove landing
 
 ### v1.5 - 8 Marzo 2026 (Implementazione Completa TODO)
 - **CREATI 4 contenuti:** blog-tempi-vendita-casa-padova, zona-vigonza, zona-abano-terme, zona-selvazzano
