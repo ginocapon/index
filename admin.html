@@ -264,6 +264,8 @@ nav { flex: 1; padding: 16px 0; }
 .btn-danger { background: #fde8e8; color: var(--rosso); }
 .btn-danger:hover { background: var(--rosso); color: white; }
 .btn-sm { padding: 6px 12px; font-size: 0.75rem; }
+.btn-action { padding: 10px 14px; font-size: 1.15rem; min-width: 40px; min-height: 40px; border-radius: 10px; justify-content: center; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.btn-action:hover { transform: translateY(-2px); box-shadow: 0 3px 8px rgba(0,0,0,0.15); }
 .btn-icon { padding: 8px; border-radius: 6px; background: var(--sfondo); color: var(--testo); border: none; cursor: pointer; transition: all 0.2s; }
 .btn-icon:hover { background: var(--caffe3); }
 
@@ -948,6 +950,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 .agenda-item.tipo-google .item-icon { background: #34A853; color: white; }
 .agenda-item.tipo-immobile { background: #fef9e0; color: #7d6608; border-left: 3px solid var(--oro); }
 .agenda-item.tipo-immobile .item-icon { background: var(--oro); color: var(--testo); }
+.agenda-item.tipo-email { background: #f3e8fd; color: #6C63FF; border-left: 3px solid #6C63FF; }
+.agenda-item.tipo-email .item-icon { background: #6C63FF; color: white; }
 /* Status overlay on published items */
 .agenda-item.stato-pubblicato { opacity: 0.85; }
 .agenda-item.stato-pubblicato::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: rgba(39,174,96,0.04); pointer-events: none; }
@@ -4921,15 +4925,15 @@ function renderTable(data) {
       <td style="font-size:0.78rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(propNome)}">${escHtml(propNome)}</td>
       <td>${stato}</td>
       <td>
-        <div style="display:flex;gap:6px">
-          <button class="btn btn-secondary btn-sm" onclick="editImmobile('${i.id}')" title="Modifica">✏️</button>
-          <button class="btn btn-sm" onclick="showMatchingClienti('${i.id}')" title="Trova clienti compatibili" style="background:#e3f2fd;color:#1565c0">🤝</button>
-          <button class="btn btn-sm" onclick="printPropertyPdf('${i.id}')" title="Stampa PDF" style="background:#fff3e0;color:#e65100">📄</button>
-          <button class="btn btn-sm" onclick="quickPublishSocial('${i.id}')" title="Pubblica sui Social" style="background:#e8f5e9;color:#1877F2">📢</button>
-          <button class="btn btn-danger btn-sm" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')">🗑️</button>
-          <button class="btn btn-sm" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="${i.in_evidenza ? 'Rimuovi da evidenza' : 'Metti in evidenza'}" style="background:${i.in_evidenza ? '#e74c3c' : 'var(--sfondo)'};border:${i.in_evidenza ? '2px solid #c0392b' : '1px solid #ddd'};font-size:1.1rem;${i.in_evidenza ? 'color:#fff;border-radius:8px' : ''}">${i.in_evidenza ? '⭐' : '☆'}</button>
-          <button class="btn btn-sm" onclick="toggleAttivo('${i.id}',${!i.attivo})" title="Toggle attivo" style="background:var(--sfondo)">${i.attivo ? '👁️' : '🚫'}</button>
-          <button class="btn btn-sm" onclick="previewImmobile('${i.id}')" title="Anteprima rapida" style="background:#e8f5e9;color:#27ae60">🔍</button>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn btn-action btn-secondary" onclick="editImmobile('${i.id}')" title="Modifica">✏️</button>
+          <button class="btn btn-action" onclick="showMatchingClienti('${i.id}')" title="Trova clienti compatibili" style="background:#e3f2fd;color:#1565c0">🤝</button>
+          <button class="btn btn-action" onclick="printPropertyPdf('${i.id}')" title="Stampa PDF" style="background:#fff3e0;color:#e65100">📄</button>
+          <button class="btn btn-action" onclick="quickPublishSocial('${i.id}')" title="Pubblica sui Social" style="background:#e8f5e9;color:#1877F2">📢</button>
+          <button class="btn btn-action btn-danger" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')">🗑️</button>
+          <button class="btn btn-action" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="${i.in_evidenza ? 'Rimuovi da evidenza' : 'Metti in evidenza'}" style="background:${i.in_evidenza ? '#e74c3c' : 'var(--sfondo)'};border:${i.in_evidenza ? '2px solid #c0392b' : '1px solid #ddd'};${i.in_evidenza ? 'color:#fff' : ''}">${i.in_evidenza ? '⭐' : '☆'}</button>
+          <button class="btn btn-action" onclick="toggleAttivo('${i.id}',${!i.attivo})" title="Toggle attivo" style="background:var(--sfondo)">${i.attivo ? '👁️' : '🚫'}</button>
+          <button class="btn btn-action" onclick="previewImmobile('${i.id}')" title="Anteprima rapida" style="background:#e8f5e9;color:#27ae60">🔍</button>
         </div>
       </td>
     </tr>`;
@@ -5353,9 +5357,9 @@ const _landingSeedPages = [
   { titolo: 'Chat Valutazione Gratuita', slug: 'landing-chat-valutazione', url: 'landing-chat-valutazione.html', categoria: 'chat', descrizione: 'Landing con chatbot Linda: valutazione immobiliare conversazionale', stato: 'pubblicata', data_pubblicazione: '2026-01-20' },
   { titolo: 'Chat Vendita Casa Padova', slug: 'landing-chat-vendita', url: 'landing-chat-vendita.html', categoria: 'chat', descrizione: 'Landing con chatbot Linda: vendita immobiliare conversazionale', stato: 'pubblicata', data_pubblicazione: '2026-01-20' },
   { titolo: 'Chat Cambio Agenzia', slug: 'landing-chat-insoddisfatti', url: 'landing-chat-insoddisfatti.html', categoria: 'chat', descrizione: 'Landing con chatbot Linda: per chi vuole cambiare agenzia', stato: 'pubblicata', data_pubblicazione: '2026-01-20' },
-  { titolo: 'Offerta ENEL Super Luce', slug: 'offerta-enel-luce', url: 'landing/offerta-enel-luce.html', categoria: 'offerta', descrizione: 'Landing statica: ENEL Super Luce 0,126 €/kWh + 14 €/mese', stato: 'pubblicata', data_pubblicazione: '2026-03-10' },
-  { titolo: 'Offerta ENEL Fix Star Gas', slug: 'offerta-enel-gas', url: 'landing/offerta-enel-gas.html', categoria: 'offerta', descrizione: 'Landing statica: ENEL Fix Star Gas 0,37 €/SMC + 12 €/mese', stato: 'pubblicata', data_pubblicazione: '2026-03-10' },
-  { titolo: 'Reel Offerta Gas ENEL', slug: 'reel-offerta-gas', url: 'landing/reel-offerta-gas.html', categoria: 'offerta', descrizione: 'Landing animata reel: offerta ENEL Fix Star Gas interattiva', stato: 'pubblicata', data_pubblicazione: '2026-03-10' },
+  { titolo: 'Offerta ENEL Super Luce', slug: 'landing/offerta-enel-luce', url: 'landing/offerta-enel-luce.html', categoria: 'offerta', descrizione: 'Landing statica: ENEL Super Luce 0,126 €/kWh + 14 €/mese', stato: 'pubblicata', data_pubblicazione: '2026-03-10' },
+  { titolo: 'Offerta ENEL Fix Star Gas', slug: 'landing/offerta-enel-gas', url: 'landing/offerta-enel-gas.html', categoria: 'offerta', descrizione: 'Landing statica: ENEL Fix Star Gas 0,37 €/SMC + 12 €/mese', stato: 'pubblicata', data_pubblicazione: '2026-03-10' },
+  { titolo: 'Reel Offerta Gas ENEL', slug: 'landing/reel-offerta-gas', url: 'landing/reel-offerta-gas.html', categoria: 'offerta', descrizione: 'Landing animata reel: offerta ENEL Fix Star Gas interattiva', stato: 'pubblicata', data_pubblicazione: '2026-03-10' },
   { titolo: 'Chat Offerta Luce ENEL', slug: 'landing-chat-offerta-luce', url: 'landing-chat-offerta-luce.html', categoria: 'chat', descrizione: 'Landing chatbot: offerta ENEL Super Luce interattiva', stato: 'pubblicata', data_pubblicazione: '2026-03-10' },
   { titolo: 'Chat Offerta Gas ENEL', slug: 'landing-chat-offerta-gas', url: 'landing-chat-offerta-gas.html', categoria: 'chat', descrizione: 'Landing chatbot: offerta ENEL Fix Star Gas interattiva', stato: 'pubblicata', data_pubblicazione: '2026-03-10' }
 ];
@@ -8044,9 +8048,9 @@ function getMonday(d) {
   return dt;
 }
 function initAgendaWeek() { agendaWeekStart = getMonday(new Date()); }
-function agendaPrevWeek() { agendaWeekStart.setDate(agendaWeekStart.getDate() - 7); renderAgendaGrid(); }
-function agendaNextWeek() { agendaWeekStart.setDate(agendaWeekStart.getDate() + 7); renderAgendaGrid(); }
-function agendaToday()    { agendaWeekStart = getMonday(new Date()); renderAgendaGrid(); }
+async function agendaPrevWeek() { agendaWeekStart.setDate(agendaWeekStart.getDate() - 7); await getAgendaCampagneEmail(); renderAgendaGrid(); }
+async function agendaNextWeek() { agendaWeekStart.setDate(agendaWeekStart.getDate() + 7); await getAgendaCampagneEmail(); renderAgendaGrid(); }
+async function agendaToday()    { agendaWeekStart = getMonday(new Date()); await getAgendaCampagneEmail(); renderAgendaGrid(); }
 
 function dateFmt(d) { return d.toISOString().split('T')[0]; }
 
@@ -8120,11 +8124,25 @@ async function getKwViews() {
   return kwViews;
 }
 
+// ── Load email campaigns for agenda ──
+var agendaCampagneEmail = [];
+async function getAgendaCampagneEmail() {
+  try {
+    var ws = new Date(agendaWeekStart);
+    var we = new Date(ws); we.setDate(we.getDate() + 6); we.setHours(23,59,59);
+    var resp = await sb.from('campagne_email').select('id,nome,oggetto,stato,totale_destinatari,iniziata_il').gte('iniziata_il', ws.toISOString()).lte('iniziata_il', we.toISOString()).order('iniziata_il', { ascending: true });
+    if (resp.error) throw resp.error;
+    agendaCampagneEmail = resp.data || [];
+  } catch(e) {
+    console.warn('Campagne email non disponibili per agenda:', e.message);
+    agendaCampagneEmail = [];
+  }
+}
+
 // ── Load section ──
 async function loadAgendaSection() {
   if (!agendaWeekStart) initAgendaWeek();
-  await getAgendaSchedules();
-  await getKwViews();
+  await Promise.all([getAgendaSchedules(), getKwViews(), getAgendaCampagneEmail()]);
   renderAgendaGrid();
   updateAgendaStats();
   renderKeywordStats();
@@ -8136,6 +8154,23 @@ function expandAllForWeek() {
   agendaSchedules.forEach(function(sched) {
     var items = expandScheduleForWeek(sched, agendaWeekStart);
     agendaExpanded = agendaExpanded.concat(items);
+  });
+  // Aggiungi campagne email massive come eventi agenda
+  (agendaCampagneEmail || []).forEach(function(camp) {
+    if (!camp.iniziata_il) return;
+    var dt = new Date(camp.iniziata_il);
+    var hh = dt.getHours(); var mm = dt.getMinutes();
+    var ora = (hh < 10 ? '0' : '') + hh + ':' + (mm < 10 ? '0' : '') + mm;
+    agendaExpanded.push({
+      id: 'email_' + camp.id,
+      schedule_id: 'email_' + camp.id,
+      tipo: 'email',
+      titolo: (camp.oggetto || camp.nome || 'Campagna email') + ' (' + (camp.totale_destinatari || 0) + ' dest.)',
+      ora: ora,
+      data: dateFmt(dt),
+      stato: camp.stato === 'completata' || camp.stato === 'in_invio' ? 'pubblicato' : 'programmato',
+      is_email_campaign: true
+    });
   });
 }
 
@@ -8219,7 +8254,8 @@ function renderAgendaGrid() {
         var iconSvg = getAgendaTypeIcon(item.tipo);
         var timeLabel = item.ora || '';
 
-        html += '<div class="agenda-item ' + tipoClass + ' ' + statoClass + '" onclick="event.stopPropagation();editAgendaItem(\'' + item.schedule_id + '\')" title="' + escHtml(item.titolo || '') + ' (' + timeLabel + ')">';
+        var clickAction = item.is_email_campaign ? 'event.stopPropagation()' : 'event.stopPropagation();editAgendaItem(\'' + item.schedule_id + '\')';
+        html += '<div class="agenda-item ' + tipoClass + ' ' + statoClass + '" onclick="' + clickAction + '" title="' + escHtml(item.titolo || '') + ' (' + timeLabel + ')">';
         html += '<span class="item-icon">' + iconSvg + '</span>';
         html += '<span class="item-title">' + escHtml(item.titolo || item.tipo || '') + '</span>';
         html += '<span class="item-status">' + statusIcon + '</span>';
@@ -8240,6 +8276,7 @@ function getAgendaTypeIcon(tipo) {
     case 'facebook': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>';
     case 'instagram': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/></svg>';
     case 'google': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/></svg>';
+    case 'email': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>';
     default: return '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>';
   }
 }
