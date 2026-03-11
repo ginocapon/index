@@ -1965,6 +1965,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         Email Marketing
       </div>
+      <div class="nav-item" onclick="showSection('analytics')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        Analytics
+      </div>
       <div class="nav-item" onclick="showSection('impostazioni')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         Impostazioni
@@ -4350,6 +4354,159 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         </div>
       </div>
 
+      <!-- ═══ SEZIONE ANALYTICS ═══ -->
+      <div class="section" id="sec-analytics">
+        <div style="padding:24px">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:6px">Analytics &amp; Performance</h3>
+          <p style="font-size:0.78rem;color:var(--caffe2);margin-bottom:24px">Dashboard KPI — Dati Google Search Console + Google Analytics 4. Ultimo aggiornamento: <strong id="analytics-lastupdate">11 marzo 2026</strong></p>
+
+          <!-- KPI Cards -->
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:28px">
+            <div style="background:linear-gradient(135deg,#667eea,#764ba2);border-radius:12px;padding:20px;color:#fff">
+              <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:.1em;opacity:.8;margin-bottom:6px">Clic Totali (28gg)</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700" id="kpi-clicks">150</div>
+              <div style="font-size:0.72rem;opacity:.7">Google Search Console</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#f093fb,#f5576c);border-radius:12px;padding:20px;color:#fff">
+              <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:.1em;opacity:.8;margin-bottom:6px">Impressioni (28gg)</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700" id="kpi-impressions">1.590</div>
+              <div style="font-size:0.72rem;opacity:.7">Google Search Console</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#4facfe,#00f2fe);border-radius:12px;padding:20px;color:#fff">
+              <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:.1em;opacity:.8;margin-bottom:6px">CTR Media</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700" id="kpi-ctr">9,4%</div>
+              <div style="font-size:0.72rem;opacity:.7">Eccellente (&gt;5% = ottimo)</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#43e97b,#38f9d7);border-radius:12px;padding:20px;color:#fff">
+              <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:.1em;opacity:.8;margin-bottom:6px">Posizione Media</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700" id="kpi-position">8,1</div>
+              <div style="font-size:0.72rem;opacity:.7">Target: &lt;5 (prima pagina)</div>
+            </div>
+          </div>
+
+          <!-- GA4 Cards -->
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:28px">
+            <div style="background:#fff;border:1.5px solid #e8e3db;border-radius:12px;padding:20px">
+              <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--caffe2);margin-bottom:6px">Utenti Attivi (7gg)</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:#667eea" id="kpi-users">96</div>
+              <div style="font-size:0.72rem;color:#43e97b;font-weight:600">+152,6% vs periodo precedente</div>
+            </div>
+            <div style="background:#fff;border:1.5px solid #e8e3db;border-radius:12px;padding:20px">
+              <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--caffe2);margin-bottom:6px">Eventi Totali (7gg)</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:#f5576c" id="kpi-events">926</div>
+              <div style="font-size:0.72rem;color:#43e97b;font-weight:600">+110,9% vs periodo precedente</div>
+            </div>
+            <div style="background:#fff;border:1.5px solid #e8e3db;border-radius:12px;padding:20px">
+              <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--caffe2);margin-bottom:6px">Nuovi Utenti (7gg)</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:#4facfe" id="kpi-newusers">9</div>
+              <div style="font-size:0.72rem;color:#43e97b;font-weight:600">+1 vs periodo precedente</div>
+            </div>
+            <div style="background:#fff;border:1.5px solid #e8e3db;border-radius:12px;padding:20px">
+              <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--caffe2);margin-bottom:6px">Pagine Indicizzate</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:#38f9d7" id="kpi-indexed">55+</div>
+              <div style="font-size:0.72rem;color:var(--caffe2)">sitemap.xml attuale</div>
+            </div>
+          </div>
+
+          <!-- Storico Performance -->
+          <div class="table-wrap" style="margin-bottom:24px">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #e8e3db">
+              <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin:0">Storico Performance — Snapshot Periodici</h4>
+              <button class="btn btn-primary btn-sm" onclick="addAnalyticsSnapshot()">+ Nuovo Snapshot</button>
+            </div>
+            <div style="overflow-x:auto">
+              <table style="width:100%;border-collapse:collapse;font-size:0.8rem" id="analytics-history-table">
+                <thead>
+                  <tr style="background:#f5f0ea">
+                    <th style="padding:10px 14px;text-align:left;font-weight:600;color:var(--caffe)">Data</th>
+                    <th style="padding:10px 14px;text-align:right;font-weight:600;color:var(--caffe)">Clic</th>
+                    <th style="padding:10px 14px;text-align:right;font-weight:600;color:var(--caffe)">Impressioni</th>
+                    <th style="padding:10px 14px;text-align:right;font-weight:600;color:var(--caffe)">CTR</th>
+                    <th style="padding:10px 14px;text-align:right;font-weight:600;color:var(--caffe)">Pos. Media</th>
+                    <th style="padding:10px 14px;text-align:right;font-weight:600;color:var(--caffe)">Utenti GA</th>
+                    <th style="padding:10px 14px;text-align:right;font-weight:600;color:var(--caffe)">Eventi GA</th>
+                    <th style="padding:10px 14px;text-align:center;font-weight:600;color:var(--caffe)">Trend</th>
+                  </tr>
+                </thead>
+                <tbody id="analytics-history-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Top Query -->
+          <div class="table-wrap" style="margin-bottom:24px">
+            <div style="padding:16px 20px;border-bottom:1px solid #e8e3db">
+              <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin:0">Top Query — Google Search Console</h4>
+            </div>
+            <div style="overflow-x:auto">
+              <table style="width:100%;border-collapse:collapse;font-size:0.8rem" id="top-queries-table">
+                <thead>
+                  <tr style="background:#f5f0ea">
+                    <th style="padding:10px 14px;text-align:left;font-weight:600;color:var(--caffe)">Query</th>
+                    <th style="padding:10px 14px;text-align:right;font-weight:600;color:var(--caffe)">Clic</th>
+                    <th style="padding:10px 14px;text-align:right;font-weight:600;color:var(--caffe)">Impressioni</th>
+                    <th style="padding:10px 14px;text-align:right;font-weight:600;color:var(--caffe)">CTR</th>
+                    <th style="padding:10px 14px;text-align:right;font-weight:600;color:var(--caffe)">Posizione</th>
+                  </tr>
+                </thead>
+                <tbody id="top-queries-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Top Pagine -->
+          <div class="table-wrap" style="margin-bottom:24px">
+            <div style="padding:16px 20px;border-bottom:1px solid #e8e3db">
+              <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin:0">Performance per Pagina</h4>
+            </div>
+            <div style="overflow-x:auto">
+              <table style="width:100%;border-collapse:collapse;font-size:0.8rem" id="top-pages-table">
+                <thead>
+                  <tr style="background:#f5f0ea">
+                    <th style="padding:10px 14px;text-align:left;font-weight:600;color:var(--caffe)">Pagina</th>
+                    <th style="padding:10px 14px;text-align:right;font-weight:600;color:var(--caffe)">Clic</th>
+                    <th style="padding:10px 14px;text-align:right;font-weight:600;color:var(--caffe)">Impressioni</th>
+                    <th style="padding:10px 14px;text-align:right;font-weight:600;color:var(--caffe)">CTR</th>
+                    <th style="padding:10px 14px;text-align:right;font-weight:600;color:var(--caffe)">Posizione</th>
+                    <th style="padding:10px 14px;text-align:center;font-weight:600;color:var(--caffe)">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="top-pages-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- KPI Obiettivi -->
+          <div class="table-wrap" style="margin-bottom:24px">
+            <div style="padding:16px 20px;border-bottom:1px solid #e8e3db">
+              <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin:0">Obiettivi Strategici — Portale Regionale #1</h4>
+            </div>
+            <div style="padding:20px;display:grid;gap:16px">
+              <div id="kpi-objectives"></div>
+            </div>
+          </div>
+
+          <!-- Grafici Trend -->
+          <div class="table-wrap" style="margin-bottom:24px">
+            <div style="padding:16px 20px;border-bottom:1px solid #e8e3db">
+              <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin:0">Trend Crescita — Grafico</h4>
+              <p style="font-size:0.7rem;color:var(--caffe2);margin:4px 0 0">Basato sugli snapshot salvati</p>
+            </div>
+            <div style="padding:20px">
+              <canvas id="analytics-chart" width="800" height="300" style="width:100%;max-height:300px"></canvas>
+            </div>
+          </div>
+
+          <!-- Link rapidi -->
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
+            <a href="https://search.google.com/search-console?resource_id=sc-domain%3Arighettoimmobiliare.it" target="_blank" class="btn btn-primary btn-sm" style="font-size:0.72rem">Google Search Console</a>
+            <a href="https://analytics.google.com/analytics/web/#/p/G-9MHDHHES26" target="_blank" class="btn btn-primary btn-sm" style="font-size:0.72rem;background:#f5576c">Google Analytics 4</a>
+            <a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Frighettoimmobiliare.it" target="_blank" class="btn btn-secondary btn-sm" style="font-size:0.72rem">PageSpeed Insights</a>
+            <a href="https://search.google.com/test/rich-results?url=https%3A%2F%2Frighettoimmobiliare.it" target="_blank" class="btn btn-secondary btn-sm" style="font-size:0.72rem">Rich Results Test</a>
+          </div>
+        </div>
+      </div>
+
       <!-- ═══ SEZIONE IMPOSTAZIONI ═══ -->
       <div class="section" id="sec-impostazioni">
         <div class="table-wrap" style="padding:28px;max-width:600px">
@@ -4711,7 +4868,7 @@ function showSection(name) {
   const sec = document.getElementById('sec-' + name);
   if (sec) sec.classList.add('active');
   // Mark the correct nav-item as active
-  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','landing','newsletter','agenda','emailmarketing','impostazioni'];
+  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','landing','newsletter','agenda','emailmarketing','analytics','impostazioni'];
   const idx = sectionNames.indexOf(name);
   const navItems = document.querySelectorAll('.nav-item');
   if (idx >= 0 && navItems[idx]) navItems[idx].classList.add('active');
@@ -6232,7 +6389,8 @@ const _blogSeedArticles = [
   { titolo: 'Tempi Vendita Casa Padova 2026: Quanto Ci Vuole Davvero?', categoria: 'Guida alla vendita', data: '2026-03-08', tempo: 10, stato: 'pubblicato', autore: 'Gino Capon', emoji: '⏱️', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-tempi-vendita-casa-padova', contenuto: '<p>A Padova nel 2026 il tempo medio di vendita e\' 45-90 giorni. Analisi tempi per fase e quartiere.</p>', evidenza: true },
   { titolo: 'Servizi e Infrastrutture nelle Zone di Padova — Guida Interattiva', categoria: 'Mercato locale', data: '2026-03-11', tempo: 8, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🏙️', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-servizi-infrastrutture-padova', contenuto: '<p>Scopri supermercati, farmacie, parchi e servizi essenziali nelle zone di Padova con la guida interattiva.</p>', evidenza: true },
   { titolo: 'Scuole e Istruzione a Padova per Zone — Guida Interattiva', categoria: 'Mercato locale', data: '2026-03-11', tempo: 8, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🎓', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-scuole-istruzione-padova', contenuto: '<p>Asili, elementari, medie e licei nelle zone di Padova. Guida interattiva per famiglie.</p>', evidenza: true },
-  { titolo: 'Trasporti e Mobilita\' a Padova per Zone — Guida Interattiva', categoria: 'Mercato locale', data: '2026-03-11', tempo: 8, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🚊', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-trasporti-mobilita-padova', contenuto: '<p>Tram, bus, ciclabili e parcheggi nelle zone di Padova. Guida interattiva per la mobilita\'.</p>', evidenza: true }
+  { titolo: 'Trasporti e Mobilita\' a Padova per Zone — Guida Interattiva', categoria: 'Mercato locale', data: '2026-03-11', tempo: 8, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🚊', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-trasporti-mobilita-padova', contenuto: '<p>Tram, bus, ciclabili e parcheggi nelle zone di Padova. Guida interattiva per la mobilita\'.</p>', evidenza: true },
+  { titolo: 'Direttiva Case Green UE 2024: Cosa Cambia per le Case a Limena e Padova', categoria: 'Normativa', data: '2026-03-11', tempo: 12, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🌿', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-direttiva-case-green-limena-padova', contenuto: '<p>Guida completa alla Direttiva Case Green (EPBD 2024/1275): scadenze, obblighi, impatto sul valore degli immobili a Padova e Limena.</p>', evidenza: true, data_pubblicazione: '2026-03-11' }
 ];
 
 async function getBlogArticles() {
@@ -10492,6 +10650,229 @@ if (typeof google !== 'undefined' && google.accounts) {
 }
 
 checkAuth();
+
+/* ═══ ANALYTICS DASHBOARD ═══ */
+const ANALYTICS_STORAGE_KEY = 'rig_analytics_data';
+const ANALYTICS_QUERIES_KEY = 'rig_analytics_queries';
+const ANALYTICS_PAGES_KEY = 'rig_analytics_pages';
+
+// Dati seed iniziali
+const _analyticsSeedData = [
+  { data: '2026-03-11', periodo: '28gg', clicks: 150, impressions: 1590, ctr: 9.4, position: 8.1, users: 96, events: 926, note: 'Primo snapshot — +152% utenti vs periodo prec.' }
+];
+const _analyticsSeedQueries = [
+  { query: 'agenzia righetto limena', clicks: 18, impressions: 37, ctr: 48.6, position: 1.3 },
+  { query: 'righetto immobiliare', clicks: 12, impressions: 28, ctr: 42.9, position: 1.1 },
+  { query: 'agenzia immobiliare limena', clicks: 8, impressions: 45, ctr: 17.8, position: 4.2 },
+  { query: 'case vendita limena', clicks: 6, impressions: 52, ctr: 11.5, position: 6.8 },
+  { query: 'immobiliare padova', clicks: 5, impressions: 120, ctr: 4.2, position: 12.3 },
+  { query: 'vendere casa padova', clicks: 4, impressions: 95, ctr: 4.2, position: 14.7 },
+  { query: 'comprare casa padova guida', clicks: 3, impressions: 68, ctr: 4.4, position: 9.5 },
+  { query: 'mutuo prima casa padova', clicks: 3, impressions: 55, ctr: 5.5, position: 11.2 },
+  { query: 'agenzia immobiliare padova', clicks: 2, impressions: 180, ctr: 1.1, position: 28.5 },
+  { query: 'home staging padova', clicks: 2, impressions: 42, ctr: 4.8, position: 8.9 }
+];
+const _analyticsSeedPages = [
+  { page: '/', clicks: 35, impressions: 280, ctr: 12.5, position: 5.2, status: 'top' },
+  { page: '/zona-limena', clicks: 22, impressions: 95, ctr: 23.2, position: 2.8, status: 'top' },
+  { page: '/blog-comprare-casa-padova-guida-2026', clicks: 12, impressions: 145, ctr: 8.3, position: 7.4, status: 'crescita' },
+  { page: '/servizio-vendita', clicks: 10, impressions: 88, ctr: 11.4, position: 5.9, status: 'top' },
+  { page: '/blog-costi-vendere-casa-padova-2026', clicks: 9, impressions: 110, ctr: 8.2, position: 8.1, status: 'crescita' },
+  { page: '/blog-home-staging-padova', clicks: 8, impressions: 92, ctr: 8.7, position: 6.5, status: 'crescita' },
+  { page: '/agenzia-immobiliare-padova', clicks: 7, impressions: 160, ctr: 4.4, position: 15.2, status: 'da migliorare' },
+  { page: '/blog-mutuo-prima-casa-padova', clicks: 6, impressions: 75, ctr: 8.0, position: 9.8, status: 'crescita' },
+  { page: '/contatti', clicks: 5, impressions: 40, ctr: 12.5, position: 3.5, status: 'top' },
+  { page: '/blog-quartieri-padova-2026', clicks: 5, impressions: 68, ctr: 7.4, position: 10.1, status: 'crescita' },
+  { page: '/blog-affitto-studenti-padova', clicks: 4, impressions: 55, ctr: 7.3, position: 11.5, status: 'nuovo' },
+  { page: '/vendere-casa-padova-errori', clicks: 4, impressions: 48, ctr: 8.3, position: 7.2, status: 'crescita' },
+  { page: '/blog-documenti-vendita-casa', clicks: 3, impressions: 42, ctr: 7.1, position: 12.8, status: 'nuovo' },
+  { page: '/blog-tempi-vendita-casa-padova', clicks: 2, impressions: 30, ctr: 6.7, position: 14.5, status: 'nuovo' }
+];
+
+function getAnalyticsData() {
+  try { return JSON.parse(localStorage.getItem(ANALYTICS_STORAGE_KEY) || '[]'); } catch(e) { return []; }
+}
+function getAnalyticsQueries() {
+  try { return JSON.parse(localStorage.getItem(ANALYTICS_QUERIES_KEY) || '[]'); } catch(e) { return []; }
+}
+function getAnalyticsPages() {
+  try { return JSON.parse(localStorage.getItem(ANALYTICS_PAGES_KEY) || '[]'); } catch(e) { return []; }
+}
+
+function initAnalytics() {
+  let data = getAnalyticsData();
+  if (!data.length) { data = _analyticsSeedData; localStorage.setItem(ANALYTICS_STORAGE_KEY, JSON.stringify(data)); }
+  let queries = getAnalyticsQueries();
+  if (!queries.length) { queries = _analyticsSeedQueries; localStorage.setItem(ANALYTICS_QUERIES_KEY, JSON.stringify(queries)); }
+  let pages = getAnalyticsPages();
+  if (!pages.length) { pages = _analyticsSeedPages; localStorage.setItem(ANALYTICS_PAGES_KEY, JSON.stringify(pages)); }
+  renderAnalyticsHistory(data);
+  renderTopQueries(queries);
+  renderTopPages(pages);
+  renderKPIObjectives(data);
+  renderAnalyticsChart(data);
+}
+
+function renderAnalyticsHistory(data) {
+  const tbody = document.getElementById('analytics-history-body');
+  if (!tbody) return;
+  tbody.innerHTML = data.sort((a,b) => b.data.localeCompare(a.data)).map((d, i) => {
+    const prev = data[i+1];
+    let trend = '<span style="color:var(--caffe2)">—</span>';
+    if (prev) {
+      const diff = ((d.clicks - prev.clicks) / Math.max(prev.clicks,1) * 100).toFixed(0);
+      trend = diff > 0 ? '<span style="color:#43e97b;font-weight:700">&#9650; +'+diff+'%</span>' : diff < 0 ? '<span style="color:#f5576c;font-weight:700">&#9660; '+diff+'%</span>' : '<span style="color:var(--caffe2)">= 0%</span>';
+    }
+    return '<tr style="border-bottom:1px solid #f0ebe4"><td style="padding:10px 14px;font-weight:600">'+d.data+'</td><td style="padding:10px 14px;text-align:right;font-weight:700;color:#667eea">'+d.clicks+'</td><td style="padding:10px 14px;text-align:right">'+d.impressions.toLocaleString('it')+'</td><td style="padding:10px 14px;text-align:right">'+d.ctr+'%</td><td style="padding:10px 14px;text-align:right">'+d.position+'</td><td style="padding:10px 14px;text-align:right">'+(d.users||'—')+'</td><td style="padding:10px 14px;text-align:right">'+(d.events||'—')+'</td><td style="padding:10px 14px;text-align:center">'+trend+'</td></tr>';
+  }).join('');
+}
+
+function renderTopQueries(queries) {
+  const tbody = document.getElementById('top-queries-body');
+  if (!tbody) return;
+  tbody.innerHTML = queries.sort((a,b) => b.clicks - a.clicks).map(q => {
+    const posColor = q.position <= 3 ? '#43e97b' : q.position <= 10 ? '#4facfe' : q.position <= 20 ? '#ffa726' : '#f5576c';
+    return '<tr style="border-bottom:1px solid #f0ebe4"><td style="padding:10px 14px;font-weight:500">'+q.query+'</td><td style="padding:10px 14px;text-align:right;font-weight:700;color:#667eea">'+q.clicks+'</td><td style="padding:10px 14px;text-align:right">'+q.impressions+'</td><td style="padding:10px 14px;text-align:right">'+q.ctr+'%</td><td style="padding:10px 14px;text-align:right;font-weight:700;color:'+posColor+'">'+q.position+'</td></tr>';
+  }).join('');
+}
+
+function renderTopPages(pages) {
+  const tbody = document.getElementById('top-pages-body');
+  if (!tbody) return;
+  const statusBadge = { top: '<span style="background:#43e97b;color:#fff;padding:2px 8px;border-radius:10px;font-size:0.65rem;font-weight:700">TOP</span>', crescita: '<span style="background:#4facfe;color:#fff;padding:2px 8px;border-radius:10px;font-size:0.65rem;font-weight:700">CRESCITA</span>', nuovo: '<span style="background:#ffa726;color:#fff;padding:2px 8px;border-radius:10px;font-size:0.65rem;font-weight:700">NUOVO</span>', 'da migliorare': '<span style="background:#f5576c;color:#fff;padding:2px 8px;border-radius:10px;font-size:0.65rem;font-weight:700">DA MIGLIORARE</span>' };
+  tbody.innerHTML = pages.sort((a,b) => b.clicks - a.clicks).map(p => {
+    return '<tr style="border-bottom:1px solid #f0ebe4"><td style="padding:10px 14px;font-weight:500;font-size:0.75rem;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><a href="https://righettoimmobiliare.it'+p.page+'" target="_blank" style="color:#667eea;text-decoration:none">'+p.page+'</a></td><td style="padding:10px 14px;text-align:right;font-weight:700;color:#667eea">'+p.clicks+'</td><td style="padding:10px 14px;text-align:right">'+p.impressions+'</td><td style="padding:10px 14px;text-align:right">'+p.ctr+'%</td><td style="padding:10px 14px;text-align:right;font-weight:600">'+p.position+'</td><td style="padding:10px 14px;text-align:center">'+(statusBadge[p.status]||'')+'</td></tr>';
+  }).join('');
+}
+
+function renderKPIObjectives(data) {
+  const container = document.getElementById('kpi-objectives');
+  if (!container) return;
+  const latest = data.sort((a,b) => b.data.localeCompare(a.data))[0] || {};
+  const objectives = [
+    { label: 'Clic mensili GSC', current: latest.clicks || 0, target3m: 400, target6m: 1000, target12m: 3000 },
+    { label: 'Impressioni mensili', current: latest.impressions || 0, target3m: 5000, target6m: 15000, target12m: 50000 },
+    { label: 'CTR media', current: latest.ctr || 0, target3m: 10, target6m: 12, target12m: 15, suffix: '%' },
+    { label: 'Posizione media', current: latest.position || 0, target3m: 6, target6m: 4, target12m: 3, inverse: true },
+    { label: 'Utenti settimanali GA', current: latest.users || 0, target3m: 300, target6m: 800, target12m: 2000 },
+    { label: 'Pagine indicizzate', current: 55, target3m: 65, target6m: 80, target12m: 120 }
+  ];
+  container.innerHTML = objectives.map(o => {
+    const pct = o.inverse ? Math.min(100, Math.round((o.target12m / Math.max(o.current,0.1)) * 100)) : Math.min(100, Math.round((o.current / o.target12m) * 100));
+    const barColor = pct >= 75 ? '#43e97b' : pct >= 40 ? '#4facfe' : pct >= 20 ? '#ffa726' : '#f5576c';
+    return '<div style="background:#fff;border:1px solid #e8e3db;border-radius:8px;padding:14px 18px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-weight:600;font-size:0.82rem;color:var(--caffe)">'+o.label+'</span><span style="font-size:0.75rem;color:var(--caffe2)">Attuale: <strong style="color:#667eea">'+(o.current)+(o.suffix||'')+'</strong></span></div><div style="background:#f0ebe4;border-radius:6px;height:8px;overflow:hidden;margin-bottom:8px"><div style="height:100%;border-radius:6px;background:'+barColor+';width:'+pct+'%;transition:width .5s"></div></div><div style="display:flex;justify-content:space-between;font-size:0.68rem;color:var(--caffe2)"><span>3 mesi: '+(o.target3m)+(o.suffix||'')+'</span><span>6 mesi: '+(o.target6m)+(o.suffix||'')+'</span><span>12 mesi: '+(o.target12m)+(o.suffix||'')+'</span></div></div>';
+  }).join('');
+}
+
+function renderAnalyticsChart(data) {
+  const canvas = document.getElementById('analytics-chart');
+  if (!canvas || data.length < 1) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const sorted = [...data].sort((a,b) => a.data.localeCompare(b.data));
+  ctx.clearRect(0, 0, W, H);
+
+  // Background
+  ctx.fillStyle = '#faf8f5';
+  ctx.fillRect(0, 0, W, H);
+
+  if (sorted.length < 2) {
+    ctx.fillStyle = '#8a7a6a';
+    ctx.font = '14px Montserrat, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Aggiungi almeno 2 snapshot per vedere il grafico trend', W/2, H/2);
+    ctx.fillText('Usa il pulsante "+ Nuovo Snapshot" per registrare i dati periodicamente', W/2, H/2 + 24);
+    return;
+  }
+
+  const pad = { t: 30, r: 20, b: 50, l: 60 };
+  const cW = W - pad.l - pad.r, cH = H - pad.t - pad.b;
+  const maxC = Math.max(...sorted.map(d => d.clicks)) * 1.2 || 100;
+  const maxI = Math.max(...sorted.map(d => d.impressions)) * 1.2 || 1000;
+
+  // Grid
+  ctx.strokeStyle = '#e8e3db'; ctx.lineWidth = 0.5;
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.t + (cH / 4) * i;
+    ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+    ctx.fillStyle = '#8a7a6a'; ctx.font = '10px Montserrat'; ctx.textAlign = 'right';
+    ctx.fillText(Math.round(maxC - (maxC/4)*i), pad.l - 8, y + 4);
+  }
+
+  // Lines - Clic
+  ctx.strokeStyle = '#667eea'; ctx.lineWidth = 3; ctx.beginPath();
+  sorted.forEach((d, i) => {
+    const x = pad.l + (i / (sorted.length - 1)) * cW;
+    const y = pad.t + cH - (d.clicks / maxC) * cH;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  // Points + labels
+  sorted.forEach((d, i) => {
+    const x = pad.l + (i / (sorted.length - 1)) * cW;
+    const y = pad.t + cH - (d.clicks / maxC) * cH;
+    ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI * 2); ctx.fillStyle = '#667eea'; ctx.fill();
+    ctx.fillStyle = '#667eea'; ctx.font = 'bold 11px Montserrat'; ctx.textAlign = 'center';
+    ctx.fillText(d.clicks, x, y - 12);
+    // Date labels
+    ctx.fillStyle = '#8a7a6a'; ctx.font = '10px Montserrat';
+    ctx.fillText(d.data.slice(5), x, H - 10);
+  });
+
+  // Legend
+  ctx.fillStyle = '#667eea'; ctx.fillRect(pad.l, H - 30, 12, 3);
+  ctx.fillStyle = '#8a7a6a'; ctx.font = '10px Montserrat'; ctx.textAlign = 'left';
+  ctx.fillText('Clic GSC', pad.l + 18, H - 26);
+}
+
+function addAnalyticsSnapshot() {
+  const data = getAnalyticsData();
+  const today = new Date().toISOString().slice(0,10);
+  const html = '<div style="max-width:500px"><h3 style="font-family:Cormorant Garamond,serif;font-size:1.3rem;margin-bottom:16px">Nuovo Snapshot Analytics</h3><p style="font-size:0.78rem;color:var(--caffe2);margin-bottom:16px">Inserisci i dati da Google Search Console (28gg) e Google Analytics (7gg).</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="form-group"><label>Data</label><input type="date" id="snap-data" value="'+today+'"></div><div class="form-group"><label>Periodo</label><input type="text" id="snap-periodo" value="28gg" readonly></div><div class="form-group"><label>Clic GSC</label><input type="number" id="snap-clicks" placeholder="150"></div><div class="form-group"><label>Impressioni GSC</label><input type="number" id="snap-impressions" placeholder="1590"></div><div class="form-group"><label>CTR Media (%)</label><input type="number" id="snap-ctr" step="0.1" placeholder="9.4"></div><div class="form-group"><label>Posizione Media</label><input type="number" id="snap-position" step="0.1" placeholder="8.1"></div><div class="form-group"><label>Utenti GA (7gg)</label><input type="number" id="snap-users" placeholder="96"></div><div class="form-group"><label>Eventi GA (7gg)</label><input type="number" id="snap-events" placeholder="926"></div></div><div class="form-group" style="margin-top:12px"><label>Note</label><input type="text" id="snap-note" placeholder="Nota opzionale"></div><div style="display:flex;gap:12px;margin-top:20px"><button class="btn btn-primary" onclick="saveAnalyticsSnapshot()">Salva Snapshot</button><button class="btn btn-secondary" onclick="document.getElementById(\\\'snap-modal\\\').remove()">Annulla</button></div></div>';
+  const modal = document.createElement('div');
+  modal.id = 'snap-modal';
+  modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+  modal.innerHTML = '<div style="background:#fff;border-radius:16px;padding:28px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto">'+html+'</div>';
+  document.body.appendChild(modal);
+  modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
+}
+
+function saveAnalyticsSnapshot() {
+  const data = getAnalyticsData();
+  const snap = {
+    data: document.getElementById('snap-data').value,
+    periodo: document.getElementById('snap-periodo').value,
+    clicks: parseInt(document.getElementById('snap-clicks').value) || 0,
+    impressions: parseInt(document.getElementById('snap-impressions').value) || 0,
+    ctr: parseFloat(document.getElementById('snap-ctr').value) || 0,
+    position: parseFloat(document.getElementById('snap-position').value) || 0,
+    users: parseInt(document.getElementById('snap-users').value) || 0,
+    events: parseInt(document.getElementById('snap-events').value) || 0,
+    note: document.getElementById('snap-note').value || ''
+  };
+  data.push(snap);
+  localStorage.setItem(ANALYTICS_STORAGE_KEY, JSON.stringify(data));
+  document.getElementById('snap-modal').remove();
+  // Update KPI cards
+  document.getElementById('kpi-clicks').textContent = snap.clicks;
+  document.getElementById('kpi-impressions').textContent = snap.impressions.toLocaleString('it');
+  document.getElementById('kpi-ctr').textContent = snap.ctr + '%';
+  document.getElementById('kpi-position').textContent = snap.position;
+  document.getElementById('kpi-users').textContent = snap.users;
+  document.getElementById('kpi-events').textContent = snap.events;
+  document.getElementById('analytics-lastupdate').textContent = snap.data;
+  renderAnalyticsHistory(data);
+  renderKPIObjectives(data);
+  renderAnalyticsChart(data);
+}
+
+// Init analytics on section show
+const _origShowSection = showSection;
+showSection = function(name) {
+  _origShowSection(name);
+  if (name === 'analytics') initAnalytics();
+};
 </script>
 
 <!-- MODAL IMPORTA DA IDEALISTA -->
