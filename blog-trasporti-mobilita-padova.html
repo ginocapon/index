@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MHDHHES26"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9MHDHHES26');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#00E5A0">
+<title>Trasporti e Mobilita' a Padova per Zone — Guida Interattiva | Righetto Immobiliare</title>
+<meta name="description" content="Tram, bus, piste ciclabili e parcheggi nelle zone di Padova. Guida interattiva per scegliere il quartiere ideale in base alla mobilita'.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://righettoimmobiliare.it/blog-trasporti-mobilita-padova">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Trasporti e Mobilita' a Padova per Zone — Guida Interattiva">
+<meta property="og:description" content="Tram, bus, piste ciclabili e parcheggi nelle zone di Padova. Guida interattiva per scegliere il quartiere in base alla mobilita'.">
+<meta property="og:url" content="https://righettoimmobiliare.it/blog-trasporti-mobilita-padova">
+<meta property="og:site_name" content="Righetto Immobiliare">
+<meta property="og:locale" content="it_IT">
+<meta property="og:image" content="https://righettoimmobiliare.it/img/og-default.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Trasporti e Mobilita' a Padova per Zone — Guida Interattiva">
+<meta name="twitter:description" content="Tram, bus, ciclabili e parcheggi a Padova. Guida interattiva per zone.">
+<meta name="article:author" content="Gino Capon">
+<link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/fonts.css">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#00E5A0;--primary2:#33EDBA;--primary-deep:#003D2B;
+  --fire:#00B878;--mint:#00E5A0;--sun:#A7F3D0;
+  --deep:#0a1f17;--white:#FFFFFF;--offwhite:#FAFAFA;--light:#F0F0F7;
+  --gray:#6B7280;--dark:#111827;--radius:16px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;background:var(--deep);color:var(--dark);line-height:1.7;overflow-x:hidden;min-height:100vh}
+
+.topbar{background:linear-gradient(90deg,var(--primary),var(--fire),var(--primary));background-size:200% 200%;animation:gradShift 4s ease infinite;padding:.6rem 1rem;text-align:center;font-size:.78rem;color:var(--dark);font-weight:600}
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+.chat-header{background:linear-gradient(135deg,#0a1f17,#003D2B);padding:1rem 1.5rem;display:flex;align-items:center;gap:.8rem;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.chat-header-icon{width:48px;height:48px;border-radius:50%;border:3px solid rgba(0,229,160,.4);background:rgba(0,229,160,.15);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.chat-header-info h2{color:#fff;font-size:1rem;font-weight:700;margin:0}
+.chat-header-info p{color:rgba(255,255,255,.7);font-size:.72rem;margin:0}
+.chat-header-status{width:10px;height:10px;background:var(--mint);border-radius:50%;animation:pulse 2s infinite;margin-left:auto;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
+
+.cf-container{max-width:600px;margin:0 auto;min-height:calc(100vh - 120px);display:flex;flex-direction:column}
+.cf-progress-wrap{background:rgba(255,255,255,.08);padding:.5rem 1rem;display:flex;align-items:center;gap:.6rem;position:relative}
+.cf-progress-bar{height:4px;background:linear-gradient(90deg,var(--primary),var(--fire));border-radius:4px;transition:width .5s ease;position:absolute;bottom:0;left:0}
+.cf-progress-label{font-size:.65rem;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.05em}
+
+.cf-chat{flex:1;padding:1rem;overflow-y:auto;display:flex;flex-direction:column;gap:.6rem}
+
+.cf-row{opacity:0;transform:translateY(20px);transition:all .4s ease}
+.cf-row.cf-visible{opacity:1;transform:translateY(0)}
+.cf-row-bot{display:flex;align-items:flex-start;gap:.5rem}
+.cf-row-user{display:flex;justify-content:flex-end}
+.cf-row-image{display:flex;justify-content:center;padding:.3rem 0}
+.cf-row-buttons{display:flex;justify-content:flex-end}
+.cf-row-form{width:100%}
+
+.cf-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--primary);flex-shrink:0;background:rgba(0,229,160,.15);display:flex;align-items:center;justify-content:center;font-size:20px;overflow:hidden}
+
+.cf-bubble{max-width:85%;padding:.75rem 1rem;border-radius:16px;font-size:.88rem;line-height:1.6;animation:fadeIn .3s ease}
+.cf-bubble-bot{background:rgba(255,255,255,.95);color:var(--dark);border-bottom-left-radius:4px;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.cf-bubble-bot strong{color:#00845C}
+.cf-bubble-user{background:var(--primary);color:var(--dark);border-bottom-right-radius:4px;font-weight:600}
+@keyframes fadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+
+.cf-image{width:100%;max-width:480px;border-radius:var(--radius);box-shadow:0 8px 30px rgba(0,0,0,.2);object-fit:cover;aspect-ratio:16/9}
+
+.cf-buttons{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:flex-end}
+.cf-btn{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.25);color:#fff;padding:.55rem 1.1rem;border-radius:50px;font-family:'Montserrat',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .25s;backdrop-filter:blur(4px)}
+.cf-btn:hover{background:var(--primary);border-color:var(--primary);color:var(--dark);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,229,160,.4)}
+.cf-btn-selected{background:var(--primary)!important;border-color:var(--primary)!important;color:var(--dark)!important}
+.cf-btn-disabled{opacity:.4;pointer-events:none}
+
+.cf-form{background:rgba(255,255,255,.95);border-radius:var(--radius);padding:1.2rem;box-shadow:0 8px 30px rgba(0,0,0,.12)}
+.cf-form-group{margin-bottom:.7rem}
+.cf-form-label{display:block;font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gray);margin-bottom:.2rem;font-weight:600}
+.cf-form-input{width:100%;border:2px solid #E5E7EB;border-radius:10px;padding:.6rem .8rem;font-family:'Montserrat',sans-serif;font-size:.85rem;background:#fff;color:var(--dark);transition:border-color .2s}
+.cf-form-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,229,160,.12)}
+.cf-input-error{border-color:#e53e3e!important}
+.cf-form-check{font-size:.7rem;color:var(--gray);margin:.6rem 0;display:flex;align-items:flex-start;gap:.4rem}
+.cf-form-check input{accent-color:var(--primary);margin-top:.15rem;flex-shrink:0}
+.cf-form-check a{color:#00845C}
+.cf-submit{width:100%;background:linear-gradient(135deg,var(--primary),var(--primary2));color:var(--dark);border:none;padding:.75rem;border-radius:12px;font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .3s;margin-top:.5rem}
+.cf-submit:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,229,160,.4)}
+
+.cf-stima{background:linear-gradient(135deg,#0a1f17,#003D2B);border-radius:var(--radius);padding:1.5rem;color:#fff;text-align:center}
+.cf-stima-label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--primary2);margin-bottom:.3rem}
+.cf-stima-value{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:700;color:var(--primary);line-height:1.1}
+.cf-stima-range{font-size:.8rem;color:rgba(255,255,255,.5);margin-top:.3rem}
+.cf-stima-mq{font-size:.76rem;color:var(--mint);margin-top:.2rem}
+
+.cf-success{text-align:center;padding:1.5rem;animation:fadeIn .5s ease}
+.cf-success h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--mint);margin-bottom:.4rem}
+.cf-success p{font-size:.85rem;color:rgba(255,255,255,.6)}
+.cf-success a{color:var(--primary);font-weight:700}
+
+.footer-mini{background:var(--dark);padding:1.5rem;text-align:center;font-size:.7rem;color:rgba(255,255,255,.45)}
+.footer-mini a{color:rgba(255,255,255,.5);margin:0 .5rem;text-decoration:none}.footer-mini a:hover{color:var(--primary)}
+
+@media(max-width:600px){
+  .cf-bubble{max-width:90%;font-size:.84rem}
+  .cf-btn{font-size:.78rem;padding:.5rem .9rem}
+  .cf-stima-value{font-size:2.2rem}
+}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "RealEstateAgent",
+      "@id": "https://righettoimmobiliare.it/#organization",
+      "name": "Righetto Immobiliare",
+      "url": "https://righettoimmobiliare.it",
+      "telephone": "+39-049-884-3484",
+      "address": {"@type": "PostalAddress", "streetAddress": "Via Roma n.96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
+      "geo": {"@type": "GeoCoordinates", "latitude": 45.476956, "longitude": 11.845762},
+      "sameAs": ["https://www.facebook.com/righettoimmobiliare","https://www.instagram.com/righettoimmobiliare","https://www.linkedin.com/company/righetto-immobiliare"]
+    },
+    {
+      "@type": "Article",
+      "headline": "Trasporti e Mobilita' a Padova per Zone — Guida Interattiva",
+      "author": {"@type": "Person", "name": "Gino Capon"},
+      "datePublished": "2026-03-11",
+      "publisher": {"@id": "https://righettoimmobiliare.it/#organization"},
+      "description": "Tram, bus, piste ciclabili e parcheggi nelle zone di Padova. Guida interattiva per scegliere il quartiere in base alla mobilita'."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "Come funziona il tram di Padova?", "acceptedAnswer": {"@type": "Answer", "text": "Il tram SIR1 di Padova collega Pontevigodarzere (nord) a Guizza (sud) attraversando il centro in 30 minuti. Frequenza ogni 8 minuti in ora di punta, ogni 15 minuti negli altri orari. Biglietto singolo 1,50 euro, abbonamento mensile 36 euro. E' il mezzo piu' veloce per attraversare la citta'."}},
+        {"@type": "Question", "name": "Quali zone di Padova sono meglio collegate?", "acceptedAnswer": {"@type": "Answer", "text": "Le zone meglio collegate sono quelle lungo la linea del tram: Centro Storico, Arcella, Guizza e Prato della Valle. Il Centro Storico e' servito da 20+ linee bus, il tram e piste ciclabili capillari. La stazione FS collega Padova a Venezia (26 min) e Bologna (1h15)."}},
+        {"@type": "Question", "name": "Padova e' una citta' ciclabile?", "acceptedAnswer": {"@type": "Answer", "text": "Si', Padova ha oltre 180 km di piste ciclabili ed e' tra le citta' piu' ciclabili d'Italia. Il 30% degli spostamenti urbani avviene in bicicletta. Le zone meglio servite da ciclabili sono Centro Storico, Zona Universitaria, Prato della Valle e Arcella. Il bike sharing Mobike ha 2.000+ bici disponibili."}},
+        {"@type": "Question", "name": "Quanto costa il parcheggio a Padova?", "acceptedAnswer": {"@type": "Answer", "text": "Il Centro Storico e' ZTL: parcheggio in struttura 1,50-2,50 euro/ora, abbonamento residenti 50-120 euro/anno. Le zone esterne hanno parcheggio gratuito o a basso costo. Arcella, Guizza e Sacra Famiglia offrono parcheggio facile e gratuito. I park & ride collegati al tram costano 1-3 euro/giorno."}}
+      ]
+    },
+    {"@type": "BreadcrumbList", "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://righettoimmobiliare.it/"},
+      {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://righettoimmobiliare.it/blog"},
+      {"@type": "ListItem", "position": 3, "name": "Trasporti e Mobilita' Padova", "item": "https://righettoimmobiliare.it/blog-trasporti-mobilita-padova"}
+    ]}
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="topbar">Guida Interattiva: <strong>Trasporti e Mobilita'</strong> nelle Zone di Padova</div>
+
+<div class="chat-header">
+  <div class="chat-header-icon">&#128651;</div>
+  <div class="chat-header-info">
+    <h2>Guida Trasporti Padova</h2>
+    <p>Scopri come muoversi in ogni quartiere</p>
+  </div>
+  <div class="chat-header-status"></div>
+</div>
+
+<main>
+  <div id="chatFlow"></div>
+</main>
+
+<footer class="footer-mini">
+  <div>&copy; 2026 Gruppo Immobiliare Righetto di Capon Gino &mdash; P.IVA 05182390285</div>
+  <div style="margin-top:.4rem"><a href="/">Sito</a><a href="/privacy">Privacy</a><a href="/cookie-policy">Cookie</a><a href="/contatti">Contatti</a></div>
+</footer>
+
+<script src="js/chat-flow.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  /* Database trasporti per zona */
+  var TRASPORTI = {
+    'Centro Storico': {
+      tram: 'Fermata tram Prato della Valle, Ponti Romani, Santo. Frequenza: ogni 8 min in ora di punta. Attraversi tutta Padova in 30 minuti senza auto.',
+      bus: '20+ linee bus urbane convergono in centro. Fermate ogni 200-300m. Linee notturne il venerdi\' e sabato fino all\'1:00.',
+      bici: 'Zona 30 quasi interamente ciclabile. Piste ciclabili dedicate. Bike sharing Mobike con 500+ bici in centro. Rastrelliere ogni 50m.',
+      auto: 'ZTL attiva 7:00-21:00. Parcheggi in struttura: Piazzale Boschetti (1,50 euro/h), Ex-Foro Boario (2 euro/h), Rabin (1,80 euro/h). Abbonamento residenti: 80 euro/anno.',
+      treno: 'Stazione FS Padova a 800m. Venezia in 26 min, Bologna in 1h15, Milano in 2h10, Roma in 3h30. Treni ogni 10-15 min per Venezia.',
+      punteggio: '10/10',
+      nota: 'La zona meglio collegata di Padova. Si puo\' vivere senza auto. Il 40% dei residenti si sposta in bici.'
+    },
+    'Arcella': {
+      tram: 'Fermata tram Pontevigodarzere (capolinea nord), Arcella, Nord — tram ogni 8 min. Centro raggiungibile in 12 minuti.',
+      bus: '8 linee bus (3, 7, 12, 13, 15, 16, 22, 24). Copertura capillare. Frequenza: ogni 10-15 min.',
+      bici: 'Pista ciclabile dedicata fino al centro (3.5 km, 15 min). Bike sharing attivo. Percorso pianeggiante e sicuro.',
+      auto: 'Parcheggio gratuito abbondante. Nessuna ZTL. Uscita tangenziale Nord a 5 min. Autostrada A4 a 8 min.',
+      treno: 'Stazione FS a 1.5 km (raggiungibile in tram in 5 min o in bici in 8 min).',
+      punteggio: '8.5/10',
+      nota: 'Eccellente mobilita\' grazie al tram. Parcheggio facile e gratuito. Ideale per chi lavora in centro ma vuole spazi e prezzi migliori.'
+    },
+    'Guizza': {
+      tram: 'Fermata tram Guizza (capolinea sud). Centro raggiungibile in 15 minuti. Park & ride gratuito con 200 posti.',
+      bus: '5 linee bus (5, 9, 16, 22, 24). Frequenza: ogni 12-20 min. Collegamento diretto con zona industriale e commerciale.',
+      bici: 'Pista ciclabile lungo il Bacchiglione fino al centro (4 km, 18 min). Percorso panoramico e sicuro. Ciclabile anche verso i Colli.',
+      auto: 'Parcheggio libero abbondante. Centro commerciale Le Brentelle con 2.000 posti gratuiti. Tangenziale sud a 5 min.',
+      treno: 'Stazione FS a 3 km (tram + 15 min). Fermata FS Padova Sud prevista nel piano mobilita\' 2028.',
+      punteggio: '7.5/10',
+      nota: 'Il tram ha rivoluzionato la mobilita\' della Guizza. Parcheggio facile, ciclabile panoramica lungo il fiume. Zona in forte miglioramento.'
+    },
+    'Zona Universitaria': {
+      tram: 'Fermate tram Ponti Romani e Santo a 500m. Centro raggiungibile a piedi in 5 minuti.',
+      bus: '12+ linee bus passano dalla zona. Fermate ogni 150m. Altissima frequenza nelle ore universitarie.',
+      bici: 'La zona piu\' ciclabile di Padova dopo il centro. 90% degli studenti si sposta in bici. Rastrelliere ovunque, Mobike capillare.',
+      auto: 'Parcheggio difficile e costoso. Molte strade a ZTL o senso unico. Consigliato NON usare l\'auto in questa zona.',
+      treno: 'Stazione FS a 1 km (15 min a piedi, 5 min in bus).',
+      punteggio: '9/10',
+      nota: 'Zona a misura di pedone e ciclista. Si vive benissimo senza auto. L\'unico svantaggio: parcheggiare e\' quasi impossibile.'
+    },
+    'Prato della Valle': {
+      tram: 'Fermata tram Prato della Valle — una delle fermate principali. Centro in 5 min, Guizza in 10 min, Arcella in 20 min.',
+      bus: '10+ linee bus. Hub di interscambio Prato della Valle. Frequenza: ogni 8-12 min nelle ore di punta.',
+      bici: 'Piste ciclabili in ogni direzione. Prato della Valle e\' un nodo ciclabile. 25 min in bici alla stazione, 10 min al centro.',
+      auto: 'ZTL parziale. Parcheggio Prato della Valle (1,50 euro/h, 300 posti). Abbonamento residenti. Tangenziale a 8 min.',
+      treno: 'Stazione FS a 1.5 km (10 min in tram). Buon collegamento per pendolari.',
+      punteggio: '9/10',
+      nota: 'Hub di trasporti naturale. Il tram e la posizione centrale rendono questa zona strategica per chi si muove molto.'
+    },
+    'Sacra Famiglia': {
+      tram: 'Fermata tram piu\' vicina: Ponti Romani o Santo (1.2 km, 15 min a piedi). Non servita direttamente dal tram.',
+      bus: '4 linee bus (6, 11, 18, AT). Frequenza: ogni 15-20 min. Collegamento con centro e zona ovest.',
+      bici: 'Pista ciclabile verso il centro (2.5 km, 12 min). Percorso pianeggiante. Ciclabile verso Selvazzano e Colli Euganei.',
+      auto: 'Parcheggio gratuito abbondante. Nessuna ZTL. Tangenziale ovest a 5 min. Autostrada A13 a 10 min.',
+      treno: 'Stazione FS a 2.5 km (bus + 15 min). Per pendolari: auto fino al park & ride tram piu\' comodo.',
+      punteggio: '6.5/10',
+      nota: 'Zona residenziale tranquilla. La mobilita\' dipende da auto o bici. Il tram non passa direttamente ma e\' raggiungibile in 15 min.'
+    },
+    'Forcellini': {
+      tram: 'Non servita dal tram. Fermata piu\' vicina a 2.5 km (Guizza). In programma la linea SIR2 che colleghera\' Forcellini.',
+      bus: '3 linee bus (9, 15, 22). Frequenza: ogni 20-25 min. Meno capillare rispetto al centro.',
+      bici: 'Ciclabile verso il centro (4.5 km, 22 min). Percorso in leggera salita verso est. Ciclabile verso i Colli Euganei.',
+      auto: 'Parcheggio facile e gratuito. Zona ideale per chi usa l\'auto. Tangenziale est a 5 min. A4 e A13 a 10 min.',
+      treno: 'Stazione FS a 4 km (bus + 20 min). Per pendolari: auto consigliata.',
+      punteggio: '5.5/10',
+      nota: 'Zona dove l\'auto e\' quasi indispensabile. La futura linea tram SIR2 migliorera\' radicalmente la mobilita\'. Buon investimento.'
+    },
+    'Voltabarozzo': {
+      tram: 'Non servita dal tram. Fermata piu\' vicina: Guizza (2 km). Prevista estensione linea tram nel piano 2028-2030.',
+      bus: '3 linee bus (5, 16, 24). Frequenza: ogni 20 min. Collegamento diretto con Guizza e Le Brentelle.',
+      bici: 'Ciclabile lungo il canale Roncajette (percorso panoramico 8 km). Collegamento al centro in 25 min in bici.',
+      auto: 'Parcheggio gratuito ovunque. Zona a bassa densita\'. Tangenziale sud a 3 min. Ideale per pendolari in auto.',
+      treno: 'Stazione FS a 4.5 km. Fermata FS Padova Sud (prevista 2028) a 1.5 km — rivoluzionera\' la zona.',
+      punteggio: '5/10',
+      nota: 'Oggi la mobilita\' pubblica e\' il punto debole. Ma con il piano 2028-2030 (nuova fermata FS + estensione tram) sara\' una delle zone con il miglior apprezzamento.'
+    }
+  };
+
+  /* Tempi pendolarismo dal centro */
+  var TEMPI = {
+    'Centro Storico': { auto: '0 min', tram: '0 min', bici: '0 min', bus: '0 min' },
+    'Arcella': { auto: '10 min', tram: '12 min', bici: '15 min', bus: '18 min' },
+    'Guizza': { auto: '12 min', tram: '15 min', bici: '18 min', bus: '22 min' },
+    'Zona Universitaria': { auto: '5 min', tram: '3 min', bici: '5 min', bus: '5 min' },
+    'Prato della Valle': { auto: '8 min', tram: '5 min', bici: '10 min', bus: '10 min' },
+    'Sacra Famiglia': { auto: '10 min', tram: '20 min', bici: '12 min', bus: '20 min' },
+    'Forcellini': { auto: '15 min', tram: '25 min', bici: '22 min', bus: '30 min' },
+    'Voltabarozzo': { auto: '15 min', tram: '28 min', bici: '25 min', bus: '30 min' }
+  };
+
+  var steps = [
+    /* Step 1: Benvenuto */
+    { play: function(cf) {
+      return cf.addBubble('<strong>Ciao!</strong> La mobilita\' e\' uno dei fattori piu\' importanti nella scelta di dove comprare casa. E a Padova le differenze tra zone sono enormi!', 'bot', 300)
+        .then(function() { return cf.addBubble('Ti guido alla scoperta di <strong>tram, bus, piste ciclabili, parcheggi e tempi di percorrenza</strong> in ogni zona di Padova. Dati reali aggiornati al 2026.', 'bot', 800); })
+        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q=80', 'Trasporto pubblico e mobilita\' urbana', 600); })
+        .then(function() { return cf.addButtons(['Si, la mobilita\' e\' fondamentale!', 'Quali zone sono meglio collegate?'], 'interesse'); });
+    }},
+    /* Step 2: Come ti muovi */
+    { play: function(cf) {
+      return cf.addBubble('Prima di tutto: <strong>come ti muovi principalmente?</strong> Cosi\' posso consigliarti la zona piu\' adatta.', 'bot', 400)
+        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80', 'Modalita\' di trasporto urbano', 500); })
+        .then(function() { return cf.addButtons([
+          'Auto', 'Bici', 'Mezzi pubblici (tram/bus)', 'Un mix di tutto'
+        ], 'mezzo'); });
+    }},
+    /* Step 3: Dove lavori */
+    { play: function(cf) {
+      var msg = '';
+      if (cf.data.mezzo === 'Auto') {
+        msg = 'Se usi l\'auto, la zona ideale e\' dove trovi <strong>parcheggio facile e tangenziale vicina</strong>. In centro e\' un incubo parcheggere (ZTL + parcheggi costosi), ma fuori dal centro hai spazio libero ovunque.';
+      } else if (cf.data.mezzo === 'Bici') {
+        msg = 'Padova e\' una <strong>citta\' molto ciclabile</strong>: 180 km di piste ciclabili e il 30% degli spostamenti avviene in bici! Il centro e la zona universitaria sono perfetti per i ciclisti.';
+      } else if (cf.data.mezzo === 'Mezzi pubblici (tram/bus)') {
+        msg = 'Il <strong>tram SIR1</strong> e\' il mezzo piu\' veloce: collega Nord (Arcella) a Sud (Guizza) in 30 minuti, passando per il centro. Le zone lungo il tram hanno i migliori collegamenti.';
+      } else {
+        msg = 'Perfetto! Padova offre un buon mix di trasporti. Le <strong>zone vicino al tram</strong> sono le piu\' versatili: tram per il centro, bici per le distanze brevi, auto per la tangenziale.';
+      }
+      return cf.addBubble(msg, 'bot', 400)
+        .then(function() { return cf.addBubble('<strong>Dove lavori?</strong> Cosi\' calcolo i tempi di pendolarismo.', 'bot', 600); })
+        .then(function() { return cf.addButtons([
+          'Centro Padova', 'Zona industriale/tangenziale', 'Fuori Padova (pendolare)', 'Lavoro da casa (smart working)'
+        ], 'lavoro'); });
+    }},
+    /* Step 4: Suggerimento zone */
+    { play: function(cf) {
+      var suggerimento = '';
+      var mezzo = cf.data.mezzo;
+      var lavoro = cf.data.lavoro;
+
+      if (lavoro === 'Centro Padova') {
+        if (mezzo === 'Auto') {
+          suggerimento = 'Se lavori in centro e usi l\'auto: <strong>Arcella</strong> (park & ride tram, 10 min in auto), <strong>Sacra Famiglia</strong> (parcheggio facile, 10 min) o <strong>Guizza</strong> (park & ride, 12 min).';
+        } else if (mezzo === 'Bici') {
+          suggerimento = 'In bici per il centro: <strong>Zona Universitaria</strong> (5 min), <strong>Prato della Valle</strong> (10 min), <strong>Arcella</strong> (15 min). Tutte con piste ciclabili dedicate.';
+        } else {
+          suggerimento = 'Con i mezzi per il centro: <strong>Arcella</strong> (tram 12 min), <strong>Guizza</strong> (tram 15 min), <strong>Prato della Valle</strong> (tram 5 min). Le tre zone meglio collegate.';
+        }
+      } else if (lavoro === 'Zona industriale/tangenziale') {
+        suggerimento = 'Per la zona industriale/tangenziale: <strong>Arcella</strong> (tangenziale nord 5 min), <strong>Voltabarozzo</strong> (tangenziale sud 3 min), <strong>Forcellini</strong> (tangenziale est 5 min). Tutte con parcheggio gratuito.';
+      } else if (lavoro === 'Fuori Padova (pendolare)') {
+        suggerimento = 'Per i pendolari: <strong>Arcella</strong> (stazione FS a 5 min in tram), <strong>Centro Storico</strong> (stazione a 800m), <strong>Zona Universitaria</strong> (stazione a 1 km). Treni ogni 10 min per Venezia, Bologna, Milano.';
+      } else {
+        suggerimento = 'Per lo smart working la mobilita\' e\' meno critica. Puoi scegliere in base a qualita\' della vita: <strong>Guizza</strong> (verde, tranquilla), <strong>Prato della Valle</strong> (prestigio), <strong>Sacra Famiglia</strong> (residenziale).';
+      }
+
+      return cf.addBubble(suggerimento, 'bot', 400)
+        .then(function() { return cf.addBubble('<strong>Quale zona vuoi esplorare nel dettaglio?</strong>', 'bot', 400); })
+        .then(function() { return cf.addButtons([
+          'Centro Storico', 'Arcella', 'Guizza', 'Zona Universitaria'
+        ], 'zona1'); });
+    }},
+    /* Step 5: Info zona */
+    { play: function(cf) {
+      var z = TRASPORTI[cf.data.zona1] || TRASPORTI['Centro Storico'];
+      var t = TEMPI[cf.data.zona1] || TEMPI['Centro Storico'];
+      return cf.addBubble('Ecco la <strong>mobilita\' in ' + cf.data.zona1 + '</strong>:', 'bot', 400)
+        .then(function() {
+          var html = '<div class="cf-stima">' +
+            '<div class="cf-stima-label">PUNTEGGIO MOBILITA\' ' + cf.data.zona1.toUpperCase() + '</div>' +
+            '<div class="cf-stima-value">' + z.punteggio + '</div>' +
+            '<div class="cf-stima-range">Tempi al centro: Auto ' + t.auto + ' | Tram ' + t.tram + ' | Bici ' + t.bici + '</div>' +
+            '<div class="cf-stima-mq">' + z.nota + '</div>' +
+            '</div>';
+          return cf.addBubble(html, 'bot', 600);
+        })
+        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&q=80', 'Mobilita\' in ' + cf.data.zona1, 400); })
+        .then(function() { return cf.addButtons(['Vedi dettagli trasporti', 'Esplora altra zona'], 'azione1'); });
+    }},
+    /* Step 6: Dettagli */
+    { play: function(cf) {
+      if (cf.data.azione1 === 'Esplora altra zona') {
+        return cf.addBubble('<strong>Quale altra zona ti interessa?</strong>', 'bot', 400)
+          .then(function() { return cf.addButtons([
+            'Prato della Valle', 'Sacra Famiglia', 'Forcellini', 'Voltabarozzo'
+          ], 'zona2'); });
+      }
+      var z = TRASPORTI[cf.data.zona1] || TRASPORTI['Centro Storico'];
+      return cf.addBubble('&#128651; <strong>Tram:</strong> ' + z.tram, 'bot', 400)
+        .then(function() { return cf.addBubble('&#128652; <strong>Bus:</strong> ' + z.bus, 'bot', 600); })
+        .then(function() { return cf.addBubble('&#128690; <strong>Bici:</strong> ' + z.bici, 'bot', 600); })
+        .then(function() { return cf.addBubble('&#128663; <strong>Auto e parcheggio:</strong> ' + z.auto, 'bot', 600); })
+        .then(function() { return cf.addBubble('&#128646; <strong>Treno:</strong> ' + z.treno, 'bot', 600); })
+        .then(function() { return cf.addButtons(['Confronta con altra zona', 'Voglio info immobiliari'], 'azione2'); });
+    }},
+    /* Step 7: Confronto o lead */
+    { play: function(cf) {
+      var zona2 = cf.data.zona2 || 'Prato della Valle';
+      if (cf.data.azione1 === 'Esplora altra zona') {
+        var z = TRASPORTI[zona2] || TRASPORTI['Prato della Valle'];
+        var t = TEMPI[zona2] || TEMPI['Prato della Valle'];
+        return cf.addBubble('Ecco la mobilita\' in <strong>' + zona2 + '</strong>:', 'bot', 400)
+          .then(function() {
+            var html = '<div class="cf-stima">' +
+              '<div class="cf-stima-label">PUNTEGGIO MOBILITA\' ' + zona2.toUpperCase() + '</div>' +
+              '<div class="cf-stima-value">' + z.punteggio + '</div>' +
+              '<div class="cf-stima-range">Tempi al centro: Auto ' + t.auto + ' | Tram ' + t.tram + ' | Bici ' + t.bici + '</div>' +
+              '<div class="cf-stima-mq">' + z.nota + '</div>' +
+              '</div>';
+            return cf.addBubble(html, 'bot', 600);
+          })
+          .then(function() { return cf.addBubble('&#128651; <strong>Tram:</strong> ' + z.tram + '<br><br>&#128690; <strong>Bici:</strong> ' + z.bici + '<br><br>&#128663; <strong>Auto:</strong> ' + z.auto, 'bot', 600); })
+          .then(function() { return cf.addButtons(['Voglio info immobiliari', 'Grazie, ho le info che servono'], 'azione_finale'); });
+      }
+      return cf.addBubble('Vuoi <strong>confrontare la mobilita\' di ' + cf.data.zona1 + '</strong> con un\'altra zona?', 'bot', 400)
+        .then(function() { return cf.addButtons([
+          'Prato della Valle', 'Sacra Famiglia', 'Forcellini', 'Voltabarozzo'
+        ], 'zona_confronto'); });
+    }},
+    /* Step 8: Confronto */
+    { play: function(cf) {
+      var zc = cf.data.zona_confronto || cf.data.zona2 || 'Prato della Valle';
+      var z1 = TRASPORTI[cf.data.zona1] || TRASPORTI['Centro Storico'];
+      var z2 = TRASPORTI[zc] || TRASPORTI['Prato della Valle'];
+      if (cf.data.azione2 === 'Voglio info immobiliari' || cf.data.azione_finale === 'Voglio info immobiliari') {
+        return cf.addBubble('<strong>Perfetto!</strong> Conosciamo ogni angolo di Padova e possiamo trovarti la casa ideale per le tue esigenze di mobilita\'.', 'bot', 400)
+          .then(function() { return cf.addImage('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80', 'Consulente immobiliare Padova', 400); })
+          .then(function() { return cf.addButtons(['Contattatemi!', 'Vorrei altre info'], 'decisione_contatto'); });
+      }
+      return cf.addBubble('<strong>Confronto mobilita\' ' + cf.data.zona1 + ' vs ' + zc + ':</strong>', 'bot', 400)
+        .then(function() {
+          var html = '<div class="cf-stima">' +
+            '<div class="cf-stima-label">' + cf.data.zona1.toUpperCase() + ' vs ' + zc.toUpperCase() + '</div>' +
+            '<div class="cf-stima-value">' + z1.punteggio + ' vs ' + z2.punteggio + '</div>' +
+            '<div class="cf-stima-range">Punteggio mobilita\' complessiva</div>' +
+            '</div>';
+          return cf.addBubble(html, 'bot', 600);
+        })
+        .then(function() { return cf.addButtons(['Voglio info immobiliari', 'Grazie, bastano le info'], 'decisione_finale'); });
+    }},
+    /* Step 9: Form contatto */
+    { play: function(cf) {
+      if (cf.data.decisione_finale === 'Grazie, bastano le info' || cf.data.azione_finale === 'Grazie, ho le info che servono') {
+        return cf.addBubble('<strong>Grazie per aver usato la nostra guida!</strong> La mobilita\' fa la differenza nella qualita\' della vita. Se decidi di cercare casa, siamo qui!', 'bot', 400)
+          .then(function() {
+            var html = '<div class="cf-success">' +
+              '<h3>Buona ricerca!</h3>' +
+              '<p>Esplora i nostri immobili: <a href="/immobili">Vedi annunci</a><br>' +
+              'Oppure chiamaci: <a href="tel:+390498843484">049.88.43.484</a></p>' +
+              '</div>';
+            return cf.addBubble(html, 'bot', 600);
+          })
+          .then(function() { return new Promise(function() {}); });
+      }
+      return cf.addBubble('Perfetto! Lasciaci i tuoi dati e ti contatteremo con le <strong>migliori opportunita\' immobiliari</strong> nella zona ideale per la tua mobilita\'.', 'bot', 400)
+        .then(function() { return cf.addBubble('&#127968; Immobili selezionati nella zona che preferisci<br>&#128200; Analisi mobilita\' personalizzata<br>&#128222; Consulenza gratuita e senza impegno', 'bot', 600); })
+        .then(function() {
+          return cf.addInput([
+            { key: 'nome', label: 'Nome', placeholder: 'Il tuo nome', type: 'text' },
+            { key: 'email', label: 'Email', placeholder: 'mario@email.it', type: 'email' },
+            { key: 'telefono', label: 'Telefono', placeholder: '333 123 4567', type: 'tel' }
+          ]);
+        });
+    }},
+    /* Step 10: Successo */
+    { play: function(cf) {
+      return cf.addBubble('<strong>Grazie!</strong> Abbiamo ricevuto la tua richiesta.', 'bot', 300)
+        .then(function() {
+          return cf.addBubble('Un nostro consulente ti contattara\' entro <strong>24 ore</strong> con immobili selezionati nella zona <strong>' + (cf.data.zona1 || 'ideale') + '</strong> per le tue esigenze di mobilita\'.', 'bot', 600);
+        })
+        .then(function() {
+          var html = '<div class="cf-success">' +
+            '<h3>Richiesta inviata!</h3>' +
+            '<p>Hai fretta? Chiamaci subito:<br><a href="tel:+390498843484">049.88.43.484</a><br>' +
+            'o scrivici su <a href="https://wa.me/393497365930" target="_blank">WhatsApp</a></p>' +
+            '</div>';
+          return cf.addBubble(html, 'bot', 800);
+        })
+        .then(function() { return new Promise(function() {}); });
+    }}
+  ];
+
+  new ChatFlow('chatFlow', steps, {
+    flowId: 'guida-trasporti-padova',
+    avatarSrc: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=80&q=80',
+    avatarName: 'Mobilita\'',
+    onStepComplete: function(key, value, data) {
+      gtag('event', 'chat_step', { flow: 'guida-trasporti-padova', step: key, value: value });
+    }
+  });
+
+});
+</script>
+</body>
+</html>
