@@ -1,7 +1,7 @@
 # SKILL UNIFICATA — Righetto Immobiliare
 ## Prompt Operativo Master Consolidato
 
-> **Versione:** 1.6 — 11 Marzo 2026
+> **Versione:** 1.7 — 11 Marzo 2026
 > **Origine:** Fusione e razionalizzazione di SERP-STRATEGY.md (v. 4 marzo) + SKILL-KILLER.md (v1.6 - 7 marzo)
 > **Ultimo aggiornamento Google verificato:** 8 Marzo 2026
 > **Prossima verifica consigliata:** Aprile 2026
@@ -144,21 +144,117 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 ## 3. STATO SEO E PERFORMANCE — PUNTEGGIO SITO
 
-> Audit verificato: 8 marzo 2026
+> Audit verificato: 11 marzo 2026
 
 | Area | Punteggio | Note |
 |---|---|---|
 | SEO on-page | **9.5/10** | Il migliore tra i competitor locali |
 | Schema.org | **9.5/10** | FAQPage su tutte le service pages + zone pages |
-| Contenuti/Blog | **9.5/10** | 21+ articoli, 4 cluster completi su 4 |
+| Contenuti/Blog | **10/10** | 25+ articoli, 4 cluster completi + guide interattive + normativa |
 | GEO/AEO | **9.5/10** | Unico a ottimizzare per AI — robots.txt, llms.txt, timestamp, sameAs tutti OK |
 | Core Web Vitals | **8/10** | Buono, target LCP <2s da raggiungere |
 | Chatbot AI | **10/10** | Unico nel mercato locale |
 | Simulatore mutuo | **10/10** | Unico nel mercato locale |
+| Analytics Dashboard | **9/10** | Sezione completa nell'admin con KPI, storico, grafici, obiettivi |
 | Recensioni Google | **6/10** | ~127 vs 256 Tetto Rosso — gap critico |
 | Domain Authority | **4/10** | Problema #1 — nessun backlink significativo |
-| Apparizione SERP | **2/10** | Non appare per keyword non-brand |
-| **TOTALE** | **8.1/10** | Top tecnico, 4 cluster completi, invisibile nelle SERP (DA bassa) |
+| Apparizione SERP | **3/10** | Brand queries OK (pos. 1.3), non-brand ancora deboli |
+| **TOTALE** | **8.4/10** | Top tecnico, 4 cluster completi, crescita +152% utenti, SERP in miglioramento |
+
+### 3.1 PERFORMANCE REALI — Google Search Console + GA4 (11 Marzo 2026)
+
+> **Primo snapshot dati reali** — baseline per tracciare la crescita.
+
+**Google Search Console (28 giorni — feb-mar 2026):**
+| Metrica | Valore | Valutazione |
+|---|---|---|
+| Clic totali | **150** | Buona base di partenza per un sito giovane |
+| Impressioni totali | **1.590** | Google sta iniziando a mostrare il sito |
+| CTR media | **9,4%** | **Eccellente** (media settore: 3-5%) — i nostri title/description funzionano |
+| Posizione media | **8,1** | Prima pagina per le query brand, da migliorare per non-brand |
+
+**Top query (dati reali):**
+| Query | Clic | Impressioni | CTR | Posizione |
+|---|---|---|---|---|
+| agenzia righetto limena | 18 | 37 | **48,6%** | **1,3** |
+| agenzia immobiliare limena | ~8 | ~45 | ~17,8% | ~4,2 |
+| case vendita limena | ~6 | ~52 | ~11,5% | ~6,8 |
+| immobiliare padova | ~5 | ~120 | ~4,2% | ~12,3 |
+| agenzia immobiliare padova | ~2 | ~180 | ~1,1% | ~28,5 |
+
+**Google Analytics 4 (7 giorni — 4-10 marzo 2026):**
+| Metrica | Valore | Variazione |
+|---|---|---|
+| Utenti attivi | **96** | **+152,6%** vs periodo precedente |
+| Conteggio eventi | **926** | **+110,9%** vs periodo precedente |
+| Nuovi utenti | **9** | +1 vs periodo precedente |
+| Paese | Italia (100%) | — |
+
+**Diagnosi Performance:**
+1. **Crescita esplosiva** — +152% utenti in 7 giorni, i contenuti pubblicati stanno generando traffico
+2. **CTR eccezionale** — 9,4% e' 2-3x la media del settore immobiliare, segno che titoli e meta description sono ottimi
+3. **Brand queries solide** — "agenzia righetto limena" in posizione 1.3 con CTR 48,6%
+4. **Non-brand deboli** — "agenzia immobiliare padova" in posizione 28.5 (terza pagina), qui serve DA
+5. **Limena dominiamo** — tutte le query con "limena" sono in prima pagina
+6. **Padova da conquistare** — keyword generiche "padova" ancora lontane dalla prima pagina
+
+### 3.2 STRATEGIA "PORTALE REGIONALE #1" — Roadmap 12 Mesi
+
+> **Visione:** Trasformare righettoimmobiliare.it nel portale immobiliare di riferimento per Padova e provincia, attraendo sponsor, partnership e clienti premium.
+
+**Fase 1 — Consolidamento (Marzo-Maggio 2026): "Dominare Limena e Cintura"**
+- [ ] Raggiungere 400 clic/mese GSC (+167%)
+- [ ] Portare "agenzia immobiliare limena" in posizione 1
+- [ ] Portare "case vendita limena/vigonza/abano" in top 5
+- [ ] Raggiungere 300 utenti settimanali GA (+212%)
+- [ ] Pubblicare 2 articoli/mese su temi ad alta ricerca
+- [ ] Ottenere 10 backlink locali (directory, professionisti, comuni)
+- [ ] Attivare Google Posts settimanali su GBP
+- [ ] **Target recensioni:** +15 (da 127 a 142)
+
+**Fase 2 — Espansione (Giugno-Settembre 2026): "Conquistare Padova"**
+- [ ] Raggiungere 1.000 clic/mese GSC
+- [ ] Portare "agenzia immobiliare padova" in top 10 (prima pagina)
+- [ ] Raggiungere 800 utenti settimanali GA
+- [ ] Creare sezione "Mercato Padova" con dati OMI aggiornati trimestralmente
+- [ ] Lanciare newsletter mensile con analisi mercato
+- [ ] Ottenere menzioni su PadovaOggi / IlGazzettino
+- [ ] Creare video tour per 5 immobili top
+- [ ] **Target recensioni:** +30 (da 142 a 172)
+- [ ] Lancio "Osservatorio Immobiliare Padova" (dati esclusivi = backlink naturali)
+
+**Fase 3 — Dominio (Ottobre 2026 - Marzo 2027): "Portale Regionale"**
+- [ ] Raggiungere 3.000 clic/mese GSC
+- [ ] Top 3 per "agenzia immobiliare padova" e keyword correlate
+- [ ] Raggiungere 2.000 utenti settimanali GA
+- [ ] Espandere copertura: Treviso, Vicenza, Venezia (zone limitrofe)
+- [ ] **Sponsor section:** creare pagina partnership per professionisti (notai, geometri, architetti, banche)
+- [ ] Creare report trimestrale "Mercato Immobiliare Veneto" (PDF scaricabile = lead magnet premium)
+- [ ] **Target recensioni:** +30 (da 172 a 200+)
+- [ ] Raggiungere DA 20+ (da ~5 attuale)
+
+**Metriche di Successo per Sponsor/Partnership:**
+| Metrica | Attuale | Target Sponsor-Ready |
+|---|---|---|
+| Traffico mensile | ~400 visite | 8.000+ visite/mese |
+| Pagine indicizzate | 55 | 120+ |
+| Keyword in top 10 | ~5 | 50+ |
+| Newsletter iscritti | ? | 500+ |
+| Domain Authority | ~5 | 20+ |
+| Recensioni Google | 127 | 200+ |
+
+### 3.3 Dashboard Analytics nell'Admin
+
+> **Implementata l'11 marzo 2026** — Sezione "Analytics" nell'admin con:
+> - 8 KPI cards (clic, impressioni, CTR, posizione, utenti, eventi, nuovi utenti, pagine indicizzate)
+> - Storico snapshot con trend percentuali (aggiungere snapshot periodicamente)
+> - Top query GSC con indicatore posizione colorato
+> - Performance per pagina con status badge (TOP, CRESCITA, NUOVO, DA MIGLIORARE)
+> - Obiettivi strategici con progress bar verso target 3/6/12 mesi
+> - Grafico trend crescita (canvas JS)
+> - Link rapidi a GSC, GA4, PageSpeed, Rich Results Test
+>
+> **Come usare:** Ogni 2 settimane, vai in admin → Analytics → "+ Nuovo Snapshot" e inserisci i dati da GSC e GA4. Il sistema traccia automaticamente la crescita nel tempo.
 
 ---
 
@@ -486,16 +582,21 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 ## 9. KPI E CALENDARIO
 
-### 9.1 KPI da Monitorare
-| Metrica | Attuale | Obiettivo 3 mesi | Obiettivo 6 mesi |
-|---|---|---|---|
-| Recensioni Google | ~127 | 140+ | 160+ |
-| "agenzia immobiliare padova" | >100 | Top 30 | Top 10 |
-| "vendere casa padova" | >100 | Top 50 | Top 20 |
-| Traffico organico | ? (GSC) | +30% | +80% |
-| Pagine indicizzate | ~50 | 55+ | 65+ |
-| Backlink domini unici | ? | +10 | +25 |
-| Citazioni AI (GEO) | ? | Monitorare | Brand awareness AI |
+### 9.1 KPI da Monitorare (Aggiornato 11 Marzo 2026 con dati reali)
+| Metrica | Attuale (11 mar) | Obiettivo 3 mesi | Obiettivo 6 mesi | Obiettivo 12 mesi |
+|---|---|---|---|---|
+| Clic GSC mensili | **150** | 400 | 1.000 | 3.000 |
+| Impressioni GSC | **1.590** | 5.000 | 15.000 | 50.000 |
+| CTR media | **9,4%** | 10% | 12% | 15% |
+| Posizione media | **8,1** | 6 | 4 | 3 |
+| Utenti settimanali GA | **96** (+152%) | 300 | 800 | 2.000 |
+| Recensioni Google | ~127 | 142 | 172 | 200+ |
+| "agenzia immobiliare padova" | pos. ~28 | Top 15 | Top 10 | Top 3 |
+| "vendere casa padova" | pos. ~15 | Top 10 | Top 5 | Top 3 |
+| Pagine indicizzate | ~55 | 65 | 80 | 120 |
+| Backlink domini unici | ~5 | 15 | 30 | 50 |
+| Domain Authority | ~5 | 10 | 15 | 20+ |
+| Newsletter iscritti | ? | 100 | 300 | 500+ |
 
 ### 9.2 Calendario Editoriale
 | Mese | Contenuto | Keyword target | Stato |
@@ -586,6 +687,15 @@ js/scroll-reveal.js                 - Animazioni scroll
 ---
 
 ## 12. CHANGELOG
+
+### v1.7 - 11 Marzo 2026 (Analytics Dashboard + Strategia Portale Regionale + Case Green)
+- **Dashboard Analytics nell'admin:** sezione completa con 8 KPI cards, storico snapshot, top query, performance per pagina, obiettivi strategici con progress bar, grafico trend canvas JS, link rapidi a GSC/GA4/PageSpeed
+- **Primo snapshot dati reali:** GSC 150 clic, 1.590 impressioni, CTR 9,4%, pos. 8,1 — GA4 96 utenti (+152,6%), 926 eventi (+110,9%)
+- **Strategia "Portale Regionale #1":** roadmap 12 mesi in 3 fasi (Consolidamento → Espansione → Dominio) con metriche target per sponsor/partnership
+- **KPI aggiornati con dati reali:** tabella 9.1 ora con baseline misurata e obiettivi a 3/6/12 mesi
+- **Nuovo articolo:** blog-direttiva-case-green-limena-padova.html — Direttiva EPBD 2024, impatto su Padova/Limena (2.700 parole, timeline, FAQ, classi energetiche)
+- **Guide interattive:** blog-servizi-infrastrutture-padova, blog-scuole-istruzione-padova, blog-trasporti-mobilita-padova
+- **Punteggio sito aggiornato:** da 8.1 a 8.4/10
 
 ### v1.6 - 11 Marzo 2026 (Landing ENEL + Email Marketing in Agenda)
 - **Architettura email documentata:** aggiunta sezione 2.2 completa — NO Brevo, tutto interno via `api.righettoimmobiliare.it` (PHP relay su cPanel)
