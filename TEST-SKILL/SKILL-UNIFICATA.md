@@ -1,7 +1,7 @@
 # SKILL UNIFICATA — Righetto Immobiliare
 ## Prompt Operativo Master Consolidato
 
-> **Versione:** 2.3 — 12 Marzo 2026
+> **Versione:** 2.4 — 12 Marzo 2026
 > **Unica fonte di verita'** — SERP-STRATEGY.md e SKILL-KILLER.md sono stati eliminati, tutto e' qui.
 > **Ultimo aggiornamento Google verificato:** 8 Marzo 2026
 > **Prossima verifica consigliata:** Aprile 2026
@@ -259,21 +259,43 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 ### 3.4 Strumenti Admin — Scraping Articolo + Trend & Idee
 
-**Scraping Articolo** (pulsante nella sezione Blog, accanto a "+ Nuovo Articolo"):
-1. Si apre un modal con 8 categorie immobiliari (mercato Padova, mutui, bonus, case green, investimenti, affitto studenti, compravendita, quartieri)
-2. "Cerca Topic" → Google News RSS via rss2json.com (CORS nativo, nessun proxy fragile)
+**Scraping Articolo** (pulsante nella sezione Blog, accanto a "+ Nuovo Articolo") — **3 step**:
+
+**STEP 1 — Topic:**
+1. Modal con 9 categorie immobiliari (mercato Padova, mutui, bonus, case green, investimenti, affitto studenti, compravendita, quartieri, normative)
+2. "Cerca Topic" → Google News RSS via rss2json.com (CORS nativo)
 3. Seleziona un topic dalla lista OPPURE scrivi titolo personalizzato
-4. "Genera Bozza" → **contenuto 100% originale** (no plagio):
-   - Titolo rielaborato automaticamente (mai copiato dalla fonte) con 4 template randomizzati
-   - 6 sezioni H2 con prospettiva Righetto Immobiliare, dati locali Padova, zone randomizzate
+4. "Avanti: Aggiungi Foto →"
+
+**STEP 2 — Foto:**
+5. **Foto copertina (hero):** l'utente puo' incollare un URL proprio OPPURE cercare foto royalty-free su Unsplash con query personalizzata. Vengono mostrate 6 anteprime cliccabili
+6. **Foto inline (max 3):** URL personalizzati o ricerca Unsplash per ogni foto. Vengono distribuite automaticamente dopo sezione 1, 3 e 5
+7. Preview della foto hero prima di procedere
+8. "Genera Bozza con Foto →"
+
+**STEP 3 — Anteprima e salvataggio:**
+9. **Contenuto 100% originale generato automaticamente** (no plagio):
+   - Titolo rielaborato con 4 template randomizzati (mai copiato dalla fonte)
+   - 6 sezioni H2 con prospettiva Righetto Immobiliare
+   - **Tabella dati per zona** (8 zone Padova: prezzo/mq, variazione, tempi vendita) con fonte OMI/FIAIP
+   - **Highlight box** con 4 numeri chiave del mercato padovano
+   - **Tabella attrattivita' investimento** per zona (target, prospettiva)
+   - **Citazione** di Gino Capon in blockquote
+   - Foto inline distribuite tra le sezioni con `<figure>` e `<figcaption>`
    - 4 FAQ specifiche con risposte originali
-   - Meta description unica, slug generato dal titolo originale
-   - 4 schema JSON-LD (Article, BreadcrumbList, FAQPage, RealEstateAgent)
-5. **Immagine royalty-free automatica** da Unsplash (no API key) con crediti fotografo
-6. Anteprima completa: hero image + titolo + sezioni + FAQ + schema
-7. "Conferma e Salva Bozza" → salva in Supabase (tabella blog) + localStorage + redirect automatico alla sezione Blog dove la bozza appare con badge giallo "Bozza"
+   - Meta description unica, slug dal titolo, 4 schema JSON-LD
+10. Anteprima scrollabile con tutto il contenuto
+11. "Conferma e Salva Bozza" → salva in Supabase + localStorage + redirect a Blog
+
+**TEMPLATE DINAMICO:** gli articoli creati dallo scraping NON hanno file HTML fisici. Usano `blog-articolo.html?s=slug` che:
+- Mostra hero con immagine di copertina + overlay scuro + crediti
+- Renderizza FAQ interattive con accordion
+- Include CTA banner "Contattaci"
+- Articoli correlati automatici per categoria
 
 **REGOLA ANTI-PLAGIO OBBLIGATORIA:** ogni contenuto generato dallo scraping DEVE essere originale. Il topic della fonte viene usato solo come ispirazione — titolo, testo e FAQ vengono rielaborati con la prospettiva di Righetto Immobiliare, dati locali di Padova e fonti ufficiali (OMI, FIAIP, Agenzia Entrate).
+
+**REGOLA IMMAGINI:** mai riutilizzare immagini gia' presenti nel sito (img/foto-servizi, img/blog, img/team). Ogni nuovo articolo deve avere foto NUOVE — o caricate dall'utente o cercate su Unsplash.
 
 **Trend & Idee** (sezione dedicata nella sidebar Admin):
 - Ricerca topic trending per 8 categorie immobiliari italiane
@@ -866,6 +888,14 @@ js/scroll-reveal.js                 - Animazioni scroll
 ---
 
 ## 13. CHANGELOG
+
+### v2.4 - 12 Marzo 2026 (Scraping 3-step: Topic → Foto → Preview con contenuto ricco)
+- **Modal scraping a 3 step:** Step 1 scelta topic (9 categorie + custom + Google News), Step 2 gestione foto (hero + 3 inline con ricerca Unsplash o URL personalizzato), Step 3 anteprima con conferma e salvataggio
+- **Foto hero + 3 inline:** ricerca Unsplash royalty-free integrata (6 risultati per query, click per selezionare), possibilità di incollare URL propri — MAI riutilizzare immagini già presenti nel sito
+- **Contenuto ricco generato:** tabella prezzi/mq per 8 zone Padova con variazione % e tempi vendita, highlight box con 4 statistiche chiave, tabella attrattività investimento per zona, blockquote citazione Gino Capon, lista errori numerata
+- **Figure con didascalia:** immagini inline distribuite tra le sezioni con `<figure><img><figcaption>` e crediti fotografo
+- **Unsplash Source API:** nessuna API key necessaria, URL diretti `source.unsplash.com` con seed unici per evitare duplicati
+- **REGOLA IMMAGINI:** ogni nuovo articolo deve avere foto NUOVE — vietato riutilizzare immagini esistenti del sito
 
 ### v2.3 - 12 Marzo 2026 (Fix 404 articoli + template dinamico migliorato)
 - **Fix link 404 articoli scraping:** gli articoli creati dallo scraping non hanno file HTML fisico — ora il link nell'admin punta correttamente a `blog-articolo?s=slug` (template dinamico) invece di `/slug` (file inesistente)
