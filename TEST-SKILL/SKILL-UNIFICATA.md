@@ -1,7 +1,7 @@
 # SKILL UNIFICATA — Righetto Immobiliare
 ## Prompt Operativo Master Consolidato
 
-> **Versione:** 2.1 — 12 Marzo 2026
+> **Versione:** 2.2 — 12 Marzo 2026
 > **Unica fonte di verita'** — SERP-STRATEGY.md e SKILL-KILLER.md sono stati eliminati, tutto e' qui.
 > **Ultimo aggiornamento Google verificato:** 8 Marzo 2026
 > **Prossima verifica consigliata:** Aprile 2026
@@ -261,15 +261,23 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 **Scraping Articolo** (pulsante nella sezione Blog, accanto a "+ Nuovo Articolo"):
 1. Si apre un modal con 8 categorie immobiliari (mercato Padova, mutui, bonus, case green, investimenti, affitto studenti, compravendita, quartieri)
-2. "Cerca Topic" → scrapa Google News RSS via proxy CORS con fallback multiplo (corsproxy.io, allorigins, cors.sh, corsproxy.org)
+2. "Cerca Topic" → Google News RSS via rss2json.com (CORS nativo, nessun proxy fragile)
 3. Seleziona un topic dalla lista OPPURE scrivi titolo personalizzato
-4. "Genera Bozza" → struttura automatica: 6 sezioni H2, 3 FAQ, meta description, slug, 4 schema JSON-LD (Article, BreadcrumbList, FAQPage, RealEstateAgent)
-5. Anteprima completa con tutti i dettagli
-6. "Conferma e Salva Bozza" → salva in Supabase (tabella blog) con fallback localStorage
+4. "Genera Bozza" → **contenuto 100% originale** (no plagio):
+   - Titolo rielaborato automaticamente (mai copiato dalla fonte) con 4 template randomizzati
+   - 6 sezioni H2 con prospettiva Righetto Immobiliare, dati locali Padova, zone randomizzate
+   - 4 FAQ specifiche con risposte originali
+   - Meta description unica, slug generato dal titolo originale
+   - 4 schema JSON-LD (Article, BreadcrumbList, FAQPage, RealEstateAgent)
+5. **Immagine royalty-free automatica** da Unsplash (no API key) con crediti fotografo
+6. Anteprima completa: hero image + titolo + sezioni + FAQ + schema
+7. "Conferma e Salva Bozza" → salva in Supabase (tabella blog) + localStorage + redirect automatico alla sezione Blog dove la bozza appare con badge giallo "Bozza"
+
+**REGOLA ANTI-PLAGIO OBBLIGATORIA:** ogni contenuto generato dallo scraping DEVE essere originale. Il topic della fonte viene usato solo come ispirazione — titolo, testo e FAQ vengono rielaborati con la prospettiva di Righetto Immobiliare, dati locali di Padova e fonti ufficiali (OMI, FIAIP, Agenzia Entrate).
 
 **Trend & Idee** (sezione dedicata nella sidebar Admin):
 - Ricerca topic trending per 8 categorie immobiliari italiane
-- Risultati da Google News RSS con fonte e data
+- Risultati da Google News RSS via rss2json.com (CORS nativo)
 - Pulsanti "Salva Idea" (localStorage) e "Crea Articolo" (apre modal scraping)
 - Idee salvate riutilizzabili in qualsiasi momento
 
@@ -858,6 +866,15 @@ js/scroll-reveal.js                 - Animazioni scroll
 ---
 
 ## 13. CHANGELOG
+
+### v2.2 - 12 Marzo 2026 (Scraping Articolo v2: anti-plagio, immagini, bozze visibili)
+- **Contenuto 100% originale:** titoli rielaborati con 4 template randomizzati, 6 sezioni H2 con prospettiva Righetto, zone Padova randomizzate, 4 FAQ originali — il topic della fonte e' solo ispirazione, mai copiato
+- **Immagini royalty-free automatiche:** ricerca Unsplash integrata con crediti fotografo, fallback su query generica immobiliare Italia
+- **Bozze ora visibili nella lista Blog:** salvataggio doppio (Supabase + localStorage), merge bozze localStorage in getBlogArticles, redirect automatico a sezione Blog dopo salvataggio
+- **Fix critico showToast → toast():** la funzione showToast non esisteva (il nome corretto e' toast), causava blocco JS che impediva chiusura modal e salvataggio
+- **Proxy CORS rimossi:** sostituiti 4 proxy fragili (corsproxy.io, allorigins, cors.sh, corsproxy.org) con rss2json.com (CORS nativo, stabile)
+- **Regola anti-plagio aggiunta** alla sezione 3.4 Strumenti Admin
+- **SKILL-UNIFICATA.md aggiornata** ad ogni modifica come da regola operativa
 
 ### v2.1 - 12 Marzo 2026 (Consolidamento SKILL + Fix Scraping Articolo)
 - **Eliminato SKILL-KILLER.md** — tutto inglobato qui, unica fonte di verita'
