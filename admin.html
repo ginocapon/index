@@ -6474,6 +6474,17 @@ async function getBlogArticles() {
     console.warn('Supabase blog non disponibile, uso localStorage:', e.message);
     try { blogArticles = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]'); } catch(ex) { blogArticles = []; }
   }
+  // Merge bozze localStorage (salvate dallo scraping articolo)
+  try {
+    var localArticles = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]');
+    var slugsInList = new Set(blogArticles.map(a => a.slug));
+    localArticles.forEach(la => {
+      if (la.id && String(la.id).startsWith('bozza_') && !slugsInList.has(la.slug)) {
+        blogArticles.push(la);
+        slugsInList.add(la.slug);
+      }
+    });
+  } catch(e) {}
   // Seed: aggiungi articoli statici mancanti
   const titoliEsistenti = new Set(blogArticles.map(a => (a.titolo || '').toLowerCase()));
   _blogSeedArticles.forEach(s => {
@@ -13727,6 +13738,8 @@ function scraGenerateDraft() {
 
 async function scraConfirmSave() {
   if (!_scraDraftData) return;
+  var btn = event && event.target ? event.target : null;
+  if (btn) { btn.disabled = true; btn.textContent = 'Salvataggio...'; }
   var newArticle = {
     titolo: _scraDraftData.titolo,
     slug: _scraDraftData.slug,
@@ -13742,28 +13755,37 @@ async function scraConfirmSave() {
     emoji: '📝',
     faq: JSON.stringify(_scraDraftData.faq)
   };
+  var saved = false;
+  // Prova Supabase
   try {
-    // Prova Supabase
     if (typeof sb !== 'undefined' && sb) {
       var { data, error } = await sb.from('blog').insert([newArticle]);
       if (error) throw error;
-    } else {
-      throw new Error('Supabase non inizializzato');
+      saved = true;
     }
-  } catch(e) {
-    // Fallback: salva in localStorage come gli altri articoli
-    try {
-      var existing = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]');
-      newArticle.id = 'bozza_' + Date.now();
+  } catch(e) { console.warn('Supabase insert blog fallito:', e.message); }
+  // Salva sempre anche in localStorage per sicurezza
+  try {
+    var existing = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]');
+    if (!existing.find(a => a.slug === newArticle.slug)) {
+      newArticle.id = newArticle.id || ('bozza_' + Date.now());
       existing.unshift(newArticle);
       localStorage.setItem('rig_blog_articles', JSON.stringify(existing));
-    } catch(ex) {}
-  }
-  toast('Bozza articolo salvata!', 'success');
+      saved = true;
+    }
+  } catch(ex) { console.warn('localStorage fallback fallito:', ex.message); }
+  // Chiudi modal e aggiorna lista
   var modal = document.getElementById('scrapingArticoloModal');
   if (modal) modal.remove();
   _scraDraftData = null;
-  loadBlogList();
+  if (saved) {
+    toast('Bozza salvata! Vai nella sezione Blog per vederla.', 'success');
+  } else {
+    toast('Errore nel salvataggio della bozza', 'error');
+  }
+  await loadBlogList();
+  // Naviga automaticamente alla sezione Blog
+  showSection('blog');
 }
 
 // Auto-load history and auto-run if >7 days when section is opened
