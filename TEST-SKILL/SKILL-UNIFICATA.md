@@ -667,7 +667,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 ## 9. AZIONI TECNICHE — TODO
 
-### 8.1 Bug e Fix Immediati — COMPLETATI 8 Marzo 2026
+### 9.1 Bug e Fix Immediati — COMPLETATI 8 Marzo 2026
 - [x] **immobile.html in sitemap** — gia' presente (verificato)
 - [x] **cormorant-garamond-600.woff2** — 7 file blog hanno preload 600, altri usano 700 correttamente
 - [x] **landing-vendita.html lazy** — immagini sono below-fold, loading="lazy" corretto
@@ -679,20 +679,20 @@ js/scroll-reveal.js                 - Animazioni scroll
 - [x] **Timestamp cornerstone** — aggiunto "Aggiornato: marzo 2026" a 6 articoli principali
 - [x] **llms.txt** — aggiornato con nuove zone e articoli
 
-### 8.2 Contenuti da Creare
+### 9.2 Contenuti da Creare
 - [x] blog-tempi-vendita-casa-padova.html — CREATO 8 marzo 2026
 - [x] zona-vigonza.html — CREATA 8 marzo 2026
 - [x] zona-abano-terme.html — CREATA 8 marzo 2026
 - [x] zona-selvazzano.html — CREATA 8 marzo 2026
 - [ ] Bollino "Verificato Righetto" — brand quality sugli annunci
 
-### 8.3 Ottimizzazioni Performance
+### 9.3 Ottimizzazioni Performance
 - [ ] LCP sotto 2 secondi su tutte le pagine (nuovo target competitivo)
 - [ ] Verificare SVT — nessun caricamento "scattoso" (font swap, image pop-in)
 - [ ] Verificare Engagement Reliability — form, bottoni, menu funzionano su tutti i device
 - [ ] Page Experience consistency — tutte le pagine devono avere performance simile
 
-### 8.4 SEO Tecnico
+### 9.4 SEO Tecnico
 - [ ] **Contenuti unici vs portali** — le descrizioni immobili su Idealista/Immobiliare.it DEVONO essere diverse da quelle sul sito (rischio duplicate content e deindexing)
 - [ ] Internal linking tra blog posts e zone pages (cross-link contestuali)
 - [ ] Verificare indexing in Google Search Console
@@ -701,14 +701,14 @@ js/scroll-reveal.js                 - Animazioni scroll
 - [ ] Aggiungere video content (virtual tour, presentazione agenzia) — genera 66% piu' lead
 - [ ] UTM tags su link GBP per tracciare traffico in GA4
 
-### 8.5 Conversione e Lead Generation
+### 9.5 Conversione e Lead Generation
 - [ ] **Speed-to-lead:** risposta automatica entro 60 secondi (47-59% dei clienti sceglie il primo agente che risponde)
 - [ ] **A/B test CTA:** testare copy diversi (es. "Valutazione Gratuita" vs "Scopri il Valore della Tua Casa")
 - [ ] **Lead magnet segmentati:** CTA diversi per acquirenti (simulatore mutuo) e venditori (valutazione gratuita)
 - [ ] **Video testimonial:** aggiungere video recensioni reali (piu' engaging del solo testo)
 - [ ] **Siti <2s convertono 3x** meglio dei siti lenti — priorita' LCP
 
-### 8.6 GEO/AEO — COMPLETATI 8 Marzo 2026
+### 9.6 GEO/AEO — COMPLETATI 8 Marzo 2026
 - [x] **llms.txt aggiornato** — aggiunte nuove zone (Vigonza, Abano, Selvazzano) e prezzi
 - [x] **robots.txt AI bots** — GPTBot, ClaudeBot, Google-Extended, PerplexityBot tutti Allow + chatbot.js Allow
 - [ ] Assicurare che contenuti importanti NON siano dietro JS client-side (le AI estraggono HTML statico)
@@ -721,7 +721,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 ## 10. KPI E CALENDARIO
 
-### 9.1 KPI da Monitorare (Aggiornato 11 Marzo 2026 con dati reali)
+### 10.1 KPI da Monitorare (Aggiornato 11 Marzo 2026 con dati reali)
 | Metrica | Attuale (11 mar) | Obiettivo 3 mesi | Obiettivo 6 mesi | Obiettivo 12 mesi |
 |---|---|---|---|---|
 | Clic GSC mensili | **150** | 400 | 1.000 | 3.000 |
@@ -737,7 +737,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 | Domain Authority | ~5 | 10 | 15 | 20+ |
 | Newsletter iscritti | ? | 100 | 300 | 500+ |
 
-### 9.2 Calendario Editoriale
+### 10.2 Calendario Editoriale
 | Mese | Contenuto | Keyword target | Stato |
 |---|---|---|---|
 | Marzo 2026 | blog-tempi-vendita-casa-padova.html | "quanto tempo vendere casa padova" | **FATTO** |
@@ -748,7 +748,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 | Maggio 2026 | Articoli fiscali (IMU, bonus) | Long-tail fiscale | TODO |
 | Giugno 2026 | Bollino "Verificato Righetto" | Brand quality | TODO |
 
-### 9.3 Routine di Monitoraggio
+### 10.3 Routine di Monitoraggio
 - **Settimanale:** Performance report in Search Console + Google Posts
 - **Mensile:** Audit metriche SEO + Core Web Vitals + citazioni AI
 - **Trimestrale:** Audit completo contenuti + struttura + competitor
@@ -758,7 +758,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 ## 11. GESTIONE cPanel
 
-### 10.1 Da Eliminare (per liberare spazio)
+### 11.1 Da Eliminare (per liberare spazio)
 | File/Cartella | Dimensione | Motivo |
 |---|---|---|
 | `backup-3.2.2026_10-53-22_wyrighet.tar.gz` | **37.04 GB** | Backup gia' scaricato in locale |
@@ -768,7 +768,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 | `public_html/` contenuto | variabile | Vecchio sito WordPress |
 | Database MySQL | variabile | Database WordPress non necessari |
 
-### 10.2 Da Tenere Assolutamente
+### 11.2 Da Tenere Assolutamente
 - Record DNS (A, CNAME, MX)
 - Dominio registrato
 - Account email attivi
