@@ -1,7 +1,7 @@
 # SKILL UNIFICATA — Righetto Immobiliare
 ## Prompt Operativo Master Consolidato
 
-> **Versione:** 1.9 — 12 Marzo 2026
+> **Versione:** 2.0 — 12 Marzo 2026
 > **Origine:** Fusione e razionalizzazione di SERP-STRATEGY.md (v. 4 marzo) + SKILL-KILLER.md (v1.6 - 7 marzo)
 > **Ultimo aggiornamento Google verificato:** 8 Marzo 2026
 > **Prossima verifica consigliata:** Aprile 2026
@@ -180,7 +180,8 @@ js/scroll-reveal.js                 - Animazioni scroll
 | agenzia immobiliare limena | ~8 | ~45 | ~17,8% | ~4,2 |
 | case vendita limena | ~6 | ~52 | ~11,5% | ~6,8 |
 | immobiliare padova | ~5 | ~120 | ~4,2% | ~12,3 |
-| agenzia immobiliare padova | ~2 | ~180 | ~1,1% | ~28,5 |
+| agenzia immobiliare padova | ~24 | **2.180** | 1,1% | **28,5** |
+| vendere casa padova | ~21 | **495** | 4,2% | **14,7** |
 
 **Google Analytics 4 (7 giorni — 4-10 marzo 2026):**
 | Metrica | Valore | Variazione |
@@ -419,8 +420,8 @@ js/scroll-reveal.js                 - Animazioni scroll
 ### 6.1 Stato SERP (verificato 7 marzo 2026)
 | Keyword | Posizione | Chi appare |
 |---|---|---|
-| "agenzia immobiliare padova" | **NON APPARE** | Immobiliare.it, Tetto Rosso, RicercAttiva, Dove.it, RockAgent |
-| "vendere casa padova agenzia" | **NON APPARE** | Pianeta Casa, Grimaldi, Dove.it, Tetto Rosso, RockAgent |
+| "agenzia immobiliare padova" | **~28,5** (2180 imp, 1,1% CTR) | Immobiliare.it, Tetto Rosso, RicercAttiva, Dove.it, RockAgent |
+| "vendere casa padova" | **~14,7** (495 imp, 4,2% CTR) | Pianeta Casa, Grimaldi, Dove.it, Tetto Rosso, RockAgent |
 | "migliore agenzia immobiliare padova" | **NON APPARE** | Gruppo Bortoletti, SZ Affari, RockAgent, Dove.it |
 | "comprare casa padova" | **NON APPARE** | Idealista, Immobiliare.it, Subito, Tecnocasa |
 | "Righetto Immobiliare Padova" | **SI (brand)** | Idealista, Immobiliare.it, Casa.it, Wikicasa |
@@ -831,6 +832,20 @@ js/scroll-reveal.js                 - Animazioni scroll
 ---
 
 ## 13. CHANGELOG
+
+### v2.0 - 12 Marzo 2026 (Ottimizzazione SEO pagina pillar + Scraping Articolo + Trend Admin)
+- **Ottimizzazione agenzia-immobiliare-padova.html** per le keyword "agenzia immobiliare padova" (pos. 28,5 → target top 10) e "vendere casa padova" (pos. 14,7 → target top 5):
+  - Title tag riscritto con entrambe le keyword target
+  - Meta description con numeri concreti (25 anni, 4.9 stelle, 4,2 mesi) + telefono per CTR
+  - H1 ottimizzato: "Agenzia immobiliare a Padova — vendere casa in 4,2 mesi"
+  - Nuova sezione "Come vendere casa a Padova al miglior prezzo" (6 card, metodo in 5 fasi)
+  - Nuova sezione "Mercato immobiliare Padova 2026: i numeri" (tabella 8 zone con prezzi, trend, tempi)
+  - 4 nuove FAQ specifiche "vendere casa padova" + schema FAQPage aggiornato (da 6 a 10 FAQ)
+  - Fonti citate: OMI, Agenzia Entrate, FIAIP Veneto (E-E-A-T + GEO)
+- **Scraping Articolo nell'Admin:** pulsante accanto a "+ Nuovo Articolo" nel Blog, modal completo con ricerca trend Google News RSS, generazione bozza strutturata, anteprima e salvataggio
+- **Sezione "Trend & Idee" nell'Admin:** ricerca topic trending per 8 categorie immobiliari, salvataggio idee in localStorage
+- **Fix proxy CORS:** sistema fallback multiplo (corsproxy.io, allorigins, cors.sh, corsproxy.org) con timeout 8s
+- **Rimosso pulsante "+ Nuovo Snapshot"** dall'Analytics (automatico ogni 7gg)
 
 ### v1.9 - 12 Marzo 2026 (Audit Auto-settimanale + Fix SEO da Audit)
 - **Audit automatico settimanale:** auto-run ogni 7gg nell'Admin, salvataggio risultati su Supabase (`audit_snapshots`), grafico storico canvas con barre OK/Warning/Errori
