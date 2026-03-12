@@ -6525,7 +6525,7 @@ async function loadBlogList() {
         <td>${a.stato === 'pubblicato' ? '<span class="badge badge-verde">Pubblicato</span>' : '<span class="badge badge-oro">Bozza</span>'}${a.evidenza ? ' <span class="badge badge-blu">★</span>' : ''}</td>
         <td style="white-space:nowrap">
           <button class="btn btn-sm" style="background:var(--sfondo);border:1px solid var(--gc);padding:6px 8px" onclick="previewBlogArticle('${a.id}')" title="Anteprima rapida">🔍</button>
-          ${a.url_statico ? `<a href="/${esc(a.url_statico)}" target="_blank" rel="noopener" class="btn btn-sm" style="background:#e3f2fd;border:1px solid #90caf9;color:#1565c0;padding:6px 8px;text-decoration:none;display:inline-block" title="Vedi pagina pubblicata">🌐</a>` : ''}
+          ${a.url_statico ? `<a href="${a.url_statico.startsWith('blog-articolo') || String(a.id).startsWith('bozza_') || String(a.id).startsWith('art_') ? '/blog-articolo?s=' + encodeURIComponent(a.slug || a.url_statico) : '/' + esc(a.url_statico)}" target="_blank" rel="noopener" class="btn btn-sm" style="background:#e3f2fd;border:1px solid #90caf9;color:#1565c0;padding:6px 8px;text-decoration:none;display:inline-block" title="Vedi pagina pubblicata">🌐</a>` : ''}
           <button class="btn btn-sm btn-secondary" onclick="editBlogArticle('${a.id}')">✏️ Modifica</button>
           <button class="btn btn-sm btn-danger" onclick="deleteBlogById('${a.id}')">🗑️</button>
         </td>

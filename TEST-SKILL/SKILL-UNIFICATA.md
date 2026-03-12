@@ -1,7 +1,7 @@
 # SKILL UNIFICATA — Righetto Immobiliare
 ## Prompt Operativo Master Consolidato
 
-> **Versione:** 2.2 — 12 Marzo 2026
+> **Versione:** 2.3 — 12 Marzo 2026
 > **Unica fonte di verita'** — SERP-STRATEGY.md e SKILL-KILLER.md sono stati eliminati, tutto e' qui.
 > **Ultimo aggiornamento Google verificato:** 8 Marzo 2026
 > **Prossima verifica consigliata:** Aprile 2026
@@ -866,6 +866,13 @@ js/scroll-reveal.js                 - Animazioni scroll
 ---
 
 ## 13. CHANGELOG
+
+### v2.3 - 12 Marzo 2026 (Fix 404 articoli + template dinamico migliorato)
+- **Fix link 404 articoli scraping:** gli articoli creati dallo scraping non hanno file HTML fisico — ora il link nell'admin punta correttamente a `blog-articolo?s=slug` (template dinamico) invece di `/slug` (file inesistente)
+- **Template blog-articolo.html migliorato:** hero con immagine di copertina (se presente) con overlay e crediti fotografo, sezione FAQ interattiva con accordion, CTA banner "Contattaci" con link a /contatti
+- **Fix bozze locali → Supabase:** le bozze con id `bozza_*` ora fanno INSERT (non UPDATE) su Supabase alla pubblicazione, evitando la perdita dell'articolo
+- **Slug e meta_description** aggiunti al payload di saveBlogArticle (mancavano)
+- **REGOLA IMPORTANTE:** gli articoli creati dallo scraping usano il template dinamico `blog-articolo.html`, non file HTML statici. Solo gli articoli nel seed `_blogSeedArticles` hanno file fisici dedicati
 
 ### v2.2 - 12 Marzo 2026 (Scraping Articolo v2: anti-plagio, immagini, bozze visibili)
 - **Contenuto 100% originale:** titoli rielaborati con 4 template randomizzati, 6 sezioni H2 con prospettiva Righetto, zone Padova randomizzate, 4 FAQ originali — il topic della fonte e' solo ispirazione, mai copiato
