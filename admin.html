@@ -1969,6 +1969,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
         Analytics
       </div>
+      <div class="nav-item" onclick="showSection('audit')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
+        Audit Sito
+      </div>
       <div class="nav-item" onclick="showSection('impostazioni')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         Impostazioni
@@ -4538,6 +4542,20 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         </div>
       </div>
 
+      <!-- ══════════ AUDIT SITO ══════════ -->
+      <div class="section" id="sec-audit">
+        <div class="table-wrap" style="padding:28px;">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:8px;">Audit Sito — Controllo Qualita'</h3>
+          <p style="font-size:0.82rem;color:var(--caffe2);margin-bottom:20px;">Analizza tutte le pagine HTML del sito per verificare standard SKILL-UNIFICATA: schema, meta, FAQ, email, performance.</p>
+          <button class="btn btn-primary" id="btnAudit" onclick="runAudit()" style="max-width:320px;margin-bottom:16px;">Avvia Audit Completo</button>
+          <div id="audit-result" style="display:none;background:var(--sfondo);border:1px solid var(--caffe3);border-radius:10px;padding:20px;margin-top:12px;">
+            <div id="audit-summary" style="margin-bottom:16px"></div>
+            <div id="audit-detail" style="font-size:.8rem;color:var(--testo);line-height:1.8;max-height:60vh;overflow-y:auto"></div>
+            <button class="btn btn-secondary" onclick="copyAudit()" style="margin-top:16px;max-width:240px;">Copia Report</button>
+          </div>
+        </div>
+      </div>
+
     </div><!-- /content -->
   </main>
 </div><!-- /appWrapper -->
@@ -4868,7 +4886,7 @@ function showSection(name) {
   const sec = document.getElementById('sec-' + name);
   if (sec) sec.classList.add('active');
   // Mark the correct nav-item as active
-  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','landing','newsletter','agenda','emailmarketing','analytics','impostazioni'];
+  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','landing','newsletter','agenda','emailmarketing','analytics','audit','impostazioni'];
   const idx = sectionNames.indexOf(name);
   const navItems = document.querySelectorAll('.nav-item');
   if (idx >= 0 && navItems[idx]) navItems[idx].classList.add('active');
@@ -4885,6 +4903,7 @@ function showSection(name) {
     newsletter: 'Newsletter Iscritti',
     agenda: 'Agenda Settimanale',
     emailmarketing: 'Email Marketing',
+    audit: 'Audit Sito',
     impostazioni: 'Impostazioni'
   };
   document.getElementById('topbarTitle').textContent = titles[name] || name;
@@ -13077,6 +13096,161 @@ showSection = function(name) {
     }
   };
 })();
+
+// ══════════════════════════════════════
+// AUDIT SITO — Controlla tutte le pagine HTML
+// ══════════════════════════════════════
+var AUDIT_PAGES = [
+  'index.html','contatti.html','chi-siamo.html','servizi.html','faq.html','blog.html',
+  'agenzia-immobiliare-padova.html','immobili.html','immobile.html',
+  'servizio-vendita.html','servizio-locazioni.html','servizio-preliminari.html',
+  'servizio-gestione.html','servizio-valutazioni.html','servizio-utenze.html',
+  'zona-centro-storico-padova.html','zona-arcella-padova.html','zona-universitaria-padova.html',
+  'zona-prato-della-valle-padova.html','zona-sacra-famiglia-padova.html',
+  'zona-forcellini-padova.html','zona-guizza-padova.html','zona-voltabarozzo-padova.html',
+  'zona-limena.html','zona-vigonza.html','zona-abano-terme.html','zona-selvazzano.html',
+  'landing-vendita.html','landing-valutazione.html','landing-agente.html',
+  'landing-mutuo.html','landing-vendere-casa-padova.html',
+  'landing-chat-vendita.html','landing-chat-valutazione.html',
+  'landing-chat-insoddisfatti.html','landing-chat-offerta-luce.html','landing-chat-offerta-gas.html',
+  'vendere-casa-padova-errori.html'
+];
+
+var BLOG_PAGES = [];
+
+async function runAudit() {
+  var btn = document.getElementById('btnAudit');
+  btn.textContent = 'Audit in corso...';
+  btn.disabled = true;
+  document.getElementById('audit-result').style.display = 'block';
+  document.getElementById('audit-summary').innerHTML = '<p style="color:var(--verde)">Caricamento pagine in corso...</p>';
+  document.getElementById('audit-detail').innerHTML = '';
+
+  try {
+    var blogResp = await fetch('/blog.html');
+    var blogHtml = await blogResp.text();
+    var blogMatches = blogHtml.match(/href="(blog-[^"]+?)(?:\.html)?"/g) || [];
+    BLOG_PAGES = [...new Set(blogMatches.map(function(m) {
+      var slug = m.match(/href="([^"]+)"/)[1];
+      return slug.endsWith('.html') ? slug : slug + '.html';
+    }))];
+  } catch(e) { BLOG_PAGES = []; }
+
+  var allPages = AUDIT_PAGES.concat(BLOG_PAGES);
+  var results = [];
+  var totOk = 0, totWarn = 0, totErr = 0;
+
+  for (var i = 0; i < allPages.length; i++) {
+    var page = allPages[i];
+    try {
+      var resp = await fetch('/' + page);
+      if (!resp.ok) { results.push({page:page,status:'ERR',issues:['Pagina non trovata (404)']}); totErr++; continue; }
+      var html = await resp.text();
+      var issues = [];
+      var warnings = [];
+
+      var titleMatch = html.match(/<title>([^<]*)<\/title>/i);
+      if (!titleMatch || !titleMatch[1].trim()) issues.push('Title mancante');
+      else if (titleMatch[1].length > 70) warnings.push('Title troppo lungo: ' + titleMatch[1].length + ' char');
+
+      var descMatch = html.match(/<meta\s+name="description"\s+content="([^"]*)"/i) || html.match(/<meta\s+content="([^"]*)"\s+name="description"/i);
+      if (!descMatch) issues.push('Meta description mancante');
+      else if (descMatch[1].length > 160) warnings.push('Meta description troppo lunga: ' + descMatch[1].length + ' char');
+      else if (descMatch[1].length < 70) warnings.push('Meta description troppo corta: ' + descMatch[1].length + ' char');
+
+      var h1Match = html.match(/<h1[^>]*>/gi);
+      if (!h1Match) issues.push('H1 mancante');
+      else if (h1Match.length > 1) warnings.push('H1 multipli: ' + h1Match.length);
+
+      if (!html.match(/rel="canonical"/i)) issues.push('Canonical mancante');
+
+      var schemas = html.match(/"@type"\s*:\s*"([^"]+)"/g) || [];
+      var schemaTypes = schemas.map(function(s) { return s.match(/"([^"]+)"$/)[1]; });
+      if (schemaTypes.length === 0) issues.push('Schema.org JSON-LD mancante');
+      if (page !== 'index.html' && !schemaTypes.includes('BreadcrumbList')) warnings.push('BreadcrumbList mancante');
+      if (page.startsWith('blog-') && !schemaTypes.includes('FAQPage')) warnings.push('FAQPage mancante (standard blog)');
+      if (page.startsWith('zona-') && !schemaTypes.includes('FAQPage')) warnings.push('FAQPage mancante (standard zona)');
+      if (page.startsWith('servizio-') && !schemaTypes.includes('FAQPage')) warnings.push('FAQPage mancante (standard servizio)');
+
+      if (!html.match(/property="og:title"/i)) warnings.push('og:title mancante');
+      if (!html.match(/property="og:description"/i)) warnings.push('og:description mancante');
+
+      if (html.includes('__cf_email__') || html.includes('email-protection')) issues.push('Email offuscata da Cloudflare (fix necessario)');
+      if (html.includes('email-decode.min.js')) warnings.push('Script email-decode.min.js residuo');
+
+      var heroImg = html.match(/<img[^>]*class="[^"]*hero[^"]*"[^>]*>/i);
+      if (heroImg && heroImg[0].includes('loading="lazy"')) issues.push('loading="lazy" su immagine hero (above-fold)');
+
+      if (!html.match(/preload[^>]*montserrat/i) && !html.match(/preload[^>]*woff2/i)) warnings.push('Font preload mancante');
+
+      var imgs = html.match(/<img\s[^>]*/gi) || [];
+      var noAlt = imgs.filter(function(i) { return !i.match(/alt\s*=/i); }).length;
+      if (noAlt > 0) warnings.push(noAlt + ' immagini senza alt text');
+
+      var noSize = imgs.filter(function(i) { return !i.match(/width\s*=/i) || !i.match(/height\s*=/i); }).length;
+      if (noSize > 0) warnings.push(noSize + ' immagini senza width/height espliciti');
+
+      if (!html.match(/name="robots"/i)) warnings.push('Meta robots mancante');
+
+      if (schemaTypes.includes('RealEstateAgent') && !html.includes('GeoCoordinates')) warnings.push('GeoCoordinates mancante nello schema');
+      if (schemaTypes.includes('RealEstateAgent') && !html.includes('sameAs')) warnings.push('sameAs mancante nello schema');
+
+      if (!html.includes('info@righettoimmobiliare.it')) warnings.push('Email info@ non presente nella pagina');
+
+      if (issues.length > 0) { totErr++; }
+      else if (warnings.length > 0) { totWarn++; }
+      else { totOk++; }
+
+      results.push({page:page, status: issues.length > 0 ? 'ERR' : warnings.length > 0 ? 'WARN' : 'OK', issues:issues, warnings:warnings, schemas:schemaTypes});
+    } catch(e) {
+      results.push({page:page, status:'ERR', issues:['Errore fetch: ' + e.message]});
+      totErr++;
+    }
+  }
+
+  var total = results.length;
+  document.getElementById('audit-summary').innerHTML =
+    '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px">' +
+    '<div style="background:var(--verde);color:#fff;padding:8px 16px;border-radius:8px;font-weight:700">' + totOk + ' OK</div>' +
+    '<div style="background:#f39c12;color:#fff;padding:8px 16px;border-radius:8px;font-weight:700">' + totWarn + ' Warning</div>' +
+    '<div style="background:var(--rosso);color:#fff;padding:8px 16px;border-radius:8px;font-weight:700">' + totErr + ' Errori</div>' +
+    '<div style="background:var(--nero);color:var(--oro);padding:8px 16px;border-radius:8px;font-weight:700">' + total + ' pagine</div>' +
+    '</div>';
+
+  var sorted = results.sort(function(a,b) {
+    var ord = {'ERR':0,'WARN':1,'OK':2};
+    return (ord[a.status]||0) - (ord[b.status]||0);
+  });
+
+  var detailHtml = '';
+  sorted.forEach(function(r) {
+    var color = r.status === 'OK' ? 'var(--verde)' : r.status === 'WARN' ? '#f39c12' : 'var(--rosso)';
+    var icon = r.status === 'OK' ? '✅' : r.status === 'WARN' ? '⚠️' : '❌';
+    detailHtml += '<div style="border-left:3px solid '+color+';padding:6px 12px;margin-bottom:8px;background:rgba(0,0,0,.03);border-radius:0 6px 6px 0">';
+    detailHtml += '<strong style="color:'+color+'">' + icon + '</strong> <strong>' + r.page + '</strong>';
+    if (r.schemas && r.schemas.length) detailHtml += ' <small style="color:var(--caffe2)">[' + r.schemas.join(', ') + ']</small>';
+    if (r.issues && r.issues.length) detailHtml += '<br>' + r.issues.map(function(i){return '<span style="color:var(--rosso)">• '+i+'</span>';}).join('<br>');
+    if (r.warnings && r.warnings.length) detailHtml += '<br>' + r.warnings.map(function(w){return '<span style="color:#f39c12">• '+w+'</span>';}).join('<br>');
+    detailHtml += '</div>';
+  });
+
+  document.getElementById('audit-detail').innerHTML = detailHtml;
+  btn.textContent = 'Avvia Audit Completo';
+  btn.disabled = false;
+}
+
+function copyAudit() {
+  var el = document.getElementById('audit-detail');
+  var text = '=== AUDIT SITO RIGHETTO IMMOBILIARE — ' + new Date().toLocaleDateString('it-IT') + ' ===\n\n';
+  el.querySelectorAll('div[style*="border-left"]').forEach(function(d) {
+    text += d.textContent.replace(/\s+/g, ' ').trim() + '\n';
+  });
+  text += '\n--- Suggerimenti per SKILL-UNIFICATA.md ---\n';
+  text += 'Copia questo report e usalo come input per aggiornare la sezione 9 (Azioni Tecniche) della SKILL.\n';
+  navigator.clipboard.writeText(text).then(function() {
+    showToast('Report audit copiato negli appunti!', 'success');
+  });
+}
 </script>
 </body>
 </html>
