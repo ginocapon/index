@@ -1,7 +1,7 @@
 # SKILL UNIFICATA — Righetto Immobiliare
 ## Prompt Operativo Master Consolidato
 
-> **Versione:** 1.7 — 11 Marzo 2026
+> **Versione:** 1.8 — 12 Marzo 2026
 > **Origine:** Fusione e razionalizzazione di SERP-STRATEGY.md (v. 4 marzo) + SKILL-KILLER.md (v1.6 - 7 marzo)
 > **Ultimo aggiornamento Google verificato:** 8 Marzo 2026
 > **Prossima verifica consigliata:** Aprile 2026
@@ -526,9 +526,148 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 ---
 
-## 8. AZIONI TECNICHE — TODO
+## 8. STANDARD CONTENUTI — Articoli Blog e Descrizioni Immobili
 
-### 8.1 Bug e Fix Immediati — COMPLETATI 8 Marzo 2026
+> Sezione aggiunta v1.8 — Standard operativi per garantire qualita' e coerenza
+> su ogni contenuto pubblicato (blog, zone, immobili).
+
+### 8.1 Standard Articoli Blog — Struttura Obbligatoria
+
+**Lunghezza target:** 2.500-3.500 parole per articoli pillar, 1.500-2.000 per articoli secondari.
+
+**Struttura H-tag:**
+- **H1** unico — keyword primaria + localizzazione ("Padova", zona specifica)
+- **H2** minimo 5-8 per articolo — formato domanda per AEO featured snippet
+- **H3** per sotto-sezioni — approfondimenti, liste, confronti
+- Totale H2+H3: minimo 15, massimo 28 per articolo lungo
+
+**Formato GEO/AEO per ogni sezione:**
+1. **Frase dichiarativa** nelle prime 2 righe (le AI estraggono da qui)
+2. **Risposta diretta** 40-60 parole come primo paragrafo dopo H2
+3. **Approfondimento** con dati, tabelle, liste sotto
+4. Ogni claim **auto-contenuto** — deve avere senso letto isolatamente
+
+**Dati e Fonti (OBBLIGATORIO):**
+- Ogni dato numerico (prezzi/mq, percentuali, tempi) DEVE avere **fonte citata**
+- Fonti accettate: OMI (Osservatorio Mercato Immobiliare), Agenzia Entrate, ISTAT, IlSole24Ore, FIAIP, Comune di Padova, Regione Veneto
+- MAI dati inventati — se non disponibili, scrivere "dato non pubblico" o omettere
+- Aggiornare dati OMI ogni trimestre
+
+**Tabelle comparative (almeno 1 per articolo):**
+- Confronti prezzi/mq tra zone con fonte sotto ogni numero
+- Confronti costi/tempi/requisiti per guide pratiche
+- Formato: Colonna | Dato | Trend | Fonte
+
+**FAQ obbligatorie:**
+- Minimo 5 FAQ per articolo, basate su "People Also Ask" di Google
+- Schema FAQPage JSON-LD obbligatorio
+- Risposte 40-80 parole, dirette e specifiche
+
+**Meta tags articolo:**
+| Campo | Requisito |
+|---|---|
+| Title | Max 60-70 char, keyword + localizzazione |
+| Meta description | Max 155-160 char, con dato numerico e CTA implicita |
+| article:published_time | ISO 8601 (es. 2026-03-04T09:00:00+01:00) |
+| article:author | Nome reale (Gino Capon o Linda Righetto) |
+| article:section | Categoria cluster (es. "Guida alla vendita") |
+| article:tag | 3-5 keyword rilevanti |
+
+**Schema JSON-LD triplo (obbligatorio):**
+1. `Article` — headline, author (Person), publisher, datePublished/Modified, wordCount
+2. `FAQPage` — minimo 5 Question/Answer
+3. `BreadcrumbList` — Home → Blog → Titolo Articolo
+
+**Elementi obbligatori nel corpo:**
+- [ ] Author bio visibile a fine articolo (foto, nome, ruolo, bio, link chi-siamo)
+- [ ] Timestamp "Ultimo aggiornamento" visibile
+- [ ] Internal links a zone pages e service pages correlate (min 3)
+- [ ] CTA contestuale (valutazione, contatto, simulatore mutuo)
+- [ ] Share bar (WhatsApp, Email, Copia link)
+- [ ] Articoli correlati (min 2)
+
+**Stile di scrittura:**
+- Tono autorevole ma accessibile — MAI accademico o burocratico
+- Dati concreti: prezzi/mq, percentuali, statistiche verificabili
+- Target: famiglie e investitori zona Padova/hinterland
+- Keyword locali: sempre includere "Padova" e zone specifiche
+- Citare fonti ufficiali nel testo (non solo in fondo)
+- Transition words 30-35% per leggibilita' (Inoltre, Infatti, Di conseguenza, In particolare, Tuttavia)
+- NO contenuti generici senza localizzazione
+
+**Registrazione quadrupla (gia' in sezione 1.2, ribadita):**
+1. `admin.html` → `_blogSeedArticles` (con `data_pubblicazione` YYYY-MM-DD)
+2. `blog.html` → `articoliStatici`
+3. `js/homepage.js` → `staticMap` + `articoliStatici`
+4. `sitemap.xml` → URL con lastmod e priority 0.8
+
+### 8.2 Standard Descrizioni Immobili — Testi per il Sito
+
+> Le descrizioni immobili sul sito DEVONO essere **diverse** da quelle sui portali
+> (Idealista, Immobiliare.it, Casa.it) per evitare duplicate content e deindexing.
+
+**Struttura descrizione immobile (400-600 parole):**
+
+1. **Apertura emozionale** (2-3 righe) — prima impressione, luce, sensazione
+   - Es: "Luminoso trilocale al secondo piano con terrazzo panoramico, in una delle vie piu' tranquille di Limena."
+2. **Caratteristiche principali** — elenco strutturato
+   - Tipologia, superficie, locali, piano, stato
+   - Classe energetica con IPE
+   - Anno costruzione e eventuali ristrutturazioni
+3. **Descrizione ambienti** — stanza per stanza
+   - Soggiorno, cucina, camere, bagni — con metrature se rilevanti
+   - Dettagli che fanno la differenza (esposizione, vista, materiali)
+4. **Spazi esterni e pertinenze**
+   - Giardino, terrazzo, balcone (con mq)
+   - Garage, cantina, posto auto
+5. **Contesto e zona** — perche' questa posizione e' strategica
+   - Servizi vicini (scuole, supermercati, trasporti)
+   - Link alla zona page corrispondente
+   - Distanza dal centro (km e minuti)
+6. **Chiusura con CTA** — invito a contattare
+   - "Per informazioni o per fissare una visita: 049.88.43.484 / info@righettoimmobiliare.it"
+
+**Regole testi immobili:**
+- MAI copiare la descrizione dal portale — riscrivere con angolo diverso
+- Dati verificati: superficie catastale vs commerciale, classe energetica reale
+- Prezzo con indicazione €/mq per confronto zona
+- NO termini vaghi ("bello", "interessante") — usare aggettivi specifici ("luminoso sud-ovest", "ristrutturato 2023", "riscaldamento autonomo a pavimento")
+- Citare dati OMI della zona per dare contesto al prezzo
+- Se presente virtual tour o video, segnalare con badge dedicato
+
+**Schema JSON-LD per immobile:**
+- Tipo: `RealEstateListing` (o `Product` con `offers`)
+- Campi: name, description, url, image (array), price, priceCurrency
+- address: PostalAddress con zona/comune
+- GeoCoordinates (lat/lng)
+- floorSize, numberOfRooms
+- Collegamento a `RealEstateAgent` (l'agenzia)
+
+### 8.3 Standard Pagine Zona — Struttura Obbligatoria
+
+**Ogni pagina zona-*.html deve contenere:**
+
+1. **H1:** "Case in vendita a [ZONA] — Prezzi, Quartiere e Consigli"
+2. **Intro dichiarativa** (GEO) — 2 frasi con dati OMI (prezzo medio €/mq, trend)
+3. **Sezione "Il quartiere"** — storia, carattere, target residenti
+4. **Tabella prezzi** — confronto per tipologia (appartamento, villa, attico) con fonte OMI
+5. **Servizi e infrastrutture** — scuole, trasporti, commercio, verde
+6. **Pro e Contro** — lista onesta (credibilita' = E-E-A-T)
+7. **FAQ locali** (min 5) — "Quanto costa un bilocale a [ZONA]?", "Conviene investire a [ZONA]?"
+8. **CTA** — valutazione gratuita specifica per la zona
+9. **Link interni** — verso articoli blog correlati e servizi
+
+**Schema obbligatorio zona:**
+- `RealEstateAgent` con `areaServed` specifico
+- `FAQPage` con domande iper-locali
+- `BreadcrumbList`
+- `Place` con `GeoCoordinates` del centro zona
+
+---
+
+## 9. AZIONI TECNICHE — TODO
+
+### 9.1 Bug e Fix Immediati — COMPLETATI 8 Marzo 2026
 - [x] **immobile.html in sitemap** — gia' presente (verificato)
 - [x] **cormorant-garamond-600.woff2** — 7 file blog hanno preload 600, altri usano 700 correttamente
 - [x] **landing-vendita.html lazy** — immagini sono below-fold, loading="lazy" corretto
@@ -540,20 +679,20 @@ js/scroll-reveal.js                 - Animazioni scroll
 - [x] **Timestamp cornerstone** — aggiunto "Aggiornato: marzo 2026" a 6 articoli principali
 - [x] **llms.txt** — aggiornato con nuove zone e articoli
 
-### 8.2 Contenuti da Creare
+### 9.2 Contenuti da Creare
 - [x] blog-tempi-vendita-casa-padova.html — CREATO 8 marzo 2026
 - [x] zona-vigonza.html — CREATA 8 marzo 2026
 - [x] zona-abano-terme.html — CREATA 8 marzo 2026
 - [x] zona-selvazzano.html — CREATA 8 marzo 2026
 - [ ] Bollino "Verificato Righetto" — brand quality sugli annunci
 
-### 8.3 Ottimizzazioni Performance
+### 9.3 Ottimizzazioni Performance
 - [ ] LCP sotto 2 secondi su tutte le pagine (nuovo target competitivo)
 - [ ] Verificare SVT — nessun caricamento "scattoso" (font swap, image pop-in)
 - [ ] Verificare Engagement Reliability — form, bottoni, menu funzionano su tutti i device
 - [ ] Page Experience consistency — tutte le pagine devono avere performance simile
 
-### 8.4 SEO Tecnico
+### 9.4 SEO Tecnico
 - [ ] **Contenuti unici vs portali** — le descrizioni immobili su Idealista/Immobiliare.it DEVONO essere diverse da quelle sul sito (rischio duplicate content e deindexing)
 - [ ] Internal linking tra blog posts e zone pages (cross-link contestuali)
 - [ ] Verificare indexing in Google Search Console
@@ -562,14 +701,14 @@ js/scroll-reveal.js                 - Animazioni scroll
 - [ ] Aggiungere video content (virtual tour, presentazione agenzia) — genera 66% piu' lead
 - [ ] UTM tags su link GBP per tracciare traffico in GA4
 
-### 8.5 Conversione e Lead Generation
+### 9.5 Conversione e Lead Generation
 - [ ] **Speed-to-lead:** risposta automatica entro 60 secondi (47-59% dei clienti sceglie il primo agente che risponde)
 - [ ] **A/B test CTA:** testare copy diversi (es. "Valutazione Gratuita" vs "Scopri il Valore della Tua Casa")
 - [ ] **Lead magnet segmentati:** CTA diversi per acquirenti (simulatore mutuo) e venditori (valutazione gratuita)
 - [ ] **Video testimonial:** aggiungere video recensioni reali (piu' engaging del solo testo)
 - [ ] **Siti <2s convertono 3x** meglio dei siti lenti — priorita' LCP
 
-### 8.6 GEO/AEO — COMPLETATI 8 Marzo 2026
+### 9.6 GEO/AEO — COMPLETATI 8 Marzo 2026
 - [x] **llms.txt aggiornato** — aggiunte nuove zone (Vigonza, Abano, Selvazzano) e prezzi
 - [x] **robots.txt AI bots** — GPTBot, ClaudeBot, Google-Extended, PerplexityBot tutti Allow + chatbot.js Allow
 - [ ] Assicurare che contenuti importanti NON siano dietro JS client-side (le AI estraggono HTML statico)
@@ -580,9 +719,9 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 ---
 
-## 9. KPI E CALENDARIO
+## 10. KPI E CALENDARIO
 
-### 9.1 KPI da Monitorare (Aggiornato 11 Marzo 2026 con dati reali)
+### 10.1 KPI da Monitorare (Aggiornato 11 Marzo 2026 con dati reali)
 | Metrica | Attuale (11 mar) | Obiettivo 3 mesi | Obiettivo 6 mesi | Obiettivo 12 mesi |
 |---|---|---|---|---|
 | Clic GSC mensili | **150** | 400 | 1.000 | 3.000 |
@@ -598,7 +737,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 | Domain Authority | ~5 | 10 | 15 | 20+ |
 | Newsletter iscritti | ? | 100 | 300 | 500+ |
 
-### 9.2 Calendario Editoriale
+### 10.2 Calendario Editoriale
 | Mese | Contenuto | Keyword target | Stato |
 |---|---|---|---|
 | Marzo 2026 | blog-tempi-vendita-casa-padova.html | "quanto tempo vendere casa padova" | **FATTO** |
@@ -609,7 +748,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 | Maggio 2026 | Articoli fiscali (IMU, bonus) | Long-tail fiscale | TODO |
 | Giugno 2026 | Bollino "Verificato Righetto" | Brand quality | TODO |
 
-### 9.3 Routine di Monitoraggio
+### 10.3 Routine di Monitoraggio
 - **Settimanale:** Performance report in Search Console + Google Posts
 - **Mensile:** Audit metriche SEO + Core Web Vitals + citazioni AI
 - **Trimestrale:** Audit completo contenuti + struttura + competitor
@@ -617,9 +756,9 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 ---
 
-## 10. GESTIONE cPanel
+## 11. GESTIONE cPanel
 
-### 10.1 Da Eliminare (per liberare spazio)
+### 11.1 Da Eliminare (per liberare spazio)
 | File/Cartella | Dimensione | Motivo |
 |---|---|---|
 | `backup-3.2.2026_10-53-22_wyrighet.tar.gz` | **37.04 GB** | Backup gia' scaricato in locale |
@@ -629,7 +768,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 | `public_html/` contenuto | variabile | Vecchio sito WordPress |
 | Database MySQL | variabile | Database WordPress non necessari |
 
-### 10.2 Da Tenere Assolutamente
+### 11.2 Da Tenere Assolutamente
 - Record DNS (A, CNAME, MX)
 - Dominio registrato
 - Account email attivi
@@ -638,7 +777,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 ---
 
-## 11. CHECKLIST RAPIDE
+## 12. CHECKLIST RAPIDE
 
 ### Per Ogni Nuova Pagina
 - [ ] Title tag unico (max 60 char) + Meta description (max 160 char)
@@ -686,7 +825,14 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 ---
 
-## 12. CHANGELOG
+## 13. CHANGELOG
+
+### v1.8 - 12 Marzo 2026 (Standard Contenuti + Fix Email + Pulsante Audit)
+- **Nuova sezione 8 "Standard Contenuti":** standard obbligatori per articoli blog (struttura H-tag, formato GEO/AEO, fonti verificate, meta tags, schema triplo, stile scrittura), descrizioni immobili (struttura 400-600 parole, regole anti-duplicate content vs portali, schema RealEstateListing), pagine zona (struttura completa con dati OMI)
+- **Fix email Cloudflare:** rimossa offuscazione `__cf_email__` da 7 file (servizi, servizio-vendita, privacy, immobili, index, chi-siamo, contatti) — email ora in chiaro come `info@righettoimmobiliare.it` con `mailto:` dove appropriato
+- **Rimosso script `email-decode.min.js`** da servizio-vendita, immobili, contatti, index (script Cloudflare non necessario su GitHub Pages)
+- **Pulsante Audit Sito** in scraping.html: genera report completo di tutte le pagine (schema, meta, FAQ, email, performance) con checklist automatica e suggerimenti per la SKILL
+- **Rinumerazione sezioni:** da 12 a 13 sezioni per ospitare la nuova sezione 8
 
 ### v1.7 - 11 Marzo 2026 (Analytics Dashboard + Strategia Portale Regionale + Case Green)
 - **Dashboard Analytics nell'admin:** sezione completa con 8 KPI cards, storico snapshot, top query, performance per pagina, obiettivi strategici con progress bar, grafico trend canvas JS, link rapidi a GSC/GA4/PageSpeed
