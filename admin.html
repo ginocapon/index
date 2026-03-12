@@ -1969,6 +1969,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
         Analytics
       </div>
+      <div class="nav-item" onclick="showSection('trend')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Trend & Idee
+      </div>
       <div class="nav-item" onclick="showSection('audit')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
         Audit Sito
@@ -2686,6 +2690,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <div style="font-weight:600;font-size:0.9rem">Articoli del Blog</div>
             <div style="display:flex;gap:10px">
               <button class="btn btn-primary btn-sm" onclick="openBlogEditor()">+ Nuovo Articolo</button>
+              <button class="btn btn-sm" onclick="openScrapingArticolo()" style="background:linear-gradient(135deg,#6C63FF,#00E5A0);color:#fff;border:none;font-weight:600;">&#x1F50D; Scraping Articolo</button>
             </div>
           </div>
           <div id="blogListWrap">
@@ -4542,6 +4547,37 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         </div>
       </div>
 
+      <!-- ══════════ TREND & IDEE ══════════ -->
+      <div class="section" id="sec-trend">
+        <div class="table-wrap" style="padding:28px;">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:8px;">Trend & Idee Articoli</h3>
+          <p style="font-size:0.82rem;color:var(--caffe2);margin-bottom:20px;">Cerca topic trending nel settore immobiliare per trovare idee per nuovi articoli.</p>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;">
+            <select id="trendCategoria" style="padding:8px 14px;border:1px solid var(--caffe3);border-radius:8px;font-size:0.85rem;background:#fff;">
+              <option value="mercato immobiliare padova">Mercato Padova</option>
+              <option value="mutui casa 2026">Mutui Casa</option>
+              <option value="bonus casa ristrutturazione 2026">Bonus & Detrazioni</option>
+              <option value="case green efficienza energetica">Case Green</option>
+              <option value="investimento immobiliare italia">Investimenti</option>
+              <option value="affitto studenti universitari">Affitto Studenti</option>
+              <option value="prezzi immobili veneto">Prezzi Veneto</option>
+              <option value="normativa immobiliare italia">Normative</option>
+            </select>
+            <button class="btn btn-primary btn-sm" onclick="searchTrends()">Cerca Trend</button>
+          </div>
+
+          <div id="trendResults" style="min-height:100px;">
+            <p style="color:var(--caffe2);font-size:0.85rem;">Seleziona una categoria e clicca "Cerca Trend" per trovare articoli trending.</p>
+          </div>
+
+          <div id="trendSavedIdeas" style="margin-top:24px;display:none;">
+            <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin-bottom:10px;">Idee Salvate</h4>
+            <div id="trendIdeasList"></div>
+          </div>
+        </div>
+      </div>
+
       <!-- ══════════ AUDIT SITO ══════════ -->
       <div class="section" id="sec-audit">
         <div class="table-wrap" style="padding:28px;">
@@ -4900,7 +4936,7 @@ function showSection(name) {
   const sec = document.getElementById('sec-' + name);
   if (sec) sec.classList.add('active');
   // Mark the correct nav-item as active
-  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','landing','newsletter','agenda','emailmarketing','analytics','audit','impostazioni'];
+  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','landing','newsletter','agenda','emailmarketing','analytics','trend','audit','impostazioni'];
   const idx = sectionNames.indexOf(name);
   const navItems = document.querySelectorAll('.nav-item');
   if (idx >= 0 && navItems[idx]) navItems[idx].classList.add('active');
@@ -4917,6 +4953,7 @@ function showSection(name) {
     newsletter: 'Newsletter Iscritti',
     agenda: 'Agenda Settimanale',
     emailmarketing: 'Email Marketing',
+    trend: 'Trend & Idee Articoli',
     audit: 'Audit Sito',
     impostazioni: 'Impostazioni'
   };
@@ -4932,6 +4969,7 @@ function showSection(name) {
   if (name === 'clienti') { loadClienti(); if (typeof emLoadGruppi === 'function') emLoadGruppi(); }
   if (name === 'emailmarketing') { if (typeof emLoadGruppi === 'function') emLoadGruppi(); if (typeof emPopulateContentPickers === 'function') emPopulateContentPickers(); }
   if (name === 'nuovo') populateProprietarioDropdown();
+  if (name === 'trend') initTrendSection();
   if (name === 'audit') initAuditSection();
   if (name === 'impostazioni') { testConn(); check2FAStatus(); }
 }
@@ -13426,6 +13464,298 @@ function copyAudit() {
   navigator.clipboard.writeText(text).then(function() {
     showToast('Report audit copiato negli appunti!', 'success');
   });
+}
+
+// ══════════════════════════════════════
+// TREND & IDEE — Scraper topic immobiliari
+// ══════════════════════════════════════
+let _trendSavedIdeas = JSON.parse(localStorage.getItem('trend_ideas') || '[]');
+
+function initTrendSection() {
+  renderSavedIdeas();
+}
+
+async function searchTrends() {
+  const cat = document.getElementById('trendCategoria').value;
+  const wrap = document.getElementById('trendResults');
+  wrap.innerHTML = '<p style="color:var(--caffe2);font-size:0.85rem;">Ricerca in corso...</p>';
+  try {
+    const rssUrl = 'https://news.google.com/rss/search?q=' + encodeURIComponent(cat + ' italia') + '&hl=it&gl=IT&ceid=IT:it';
+    const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(rssUrl);
+    const resp = await fetch(proxyUrl);
+    const txt = await resp.text();
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(txt, 'text/xml');
+    const items = xml.querySelectorAll('item');
+    if (!items.length) { wrap.innerHTML = '<p style="color:var(--caffe2);">Nessun risultato trovato. Prova un\'altra categoria.</p>'; return; }
+    let html = '<div style="display:flex;flex-direction:column;gap:12px;">';
+    items.forEach((item, i) => {
+      if (i >= 10) return;
+      const title = item.querySelector('title')?.textContent || '';
+      const link = item.querySelector('link')?.textContent || '';
+      const pubDate = item.querySelector('pubDate')?.textContent || '';
+      const source = item.querySelector('source')?.textContent || '';
+      const dateStr = pubDate ? new Date(pubDate).toLocaleDateString('it-IT') : '';
+      html += '<div style="background:var(--sfondo);border:1px solid var(--caffe3);border-radius:10px;padding:14px;">';
+      html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">';
+      html += '<div style="flex:1;">';
+      html += '<h4 style="font-size:0.92rem;margin:0 0 4px;">' + title + '</h4>';
+      html += '<p style="font-size:0.75rem;color:var(--caffe2);margin:0;">' + source + (dateStr ? ' — ' + dateStr : '') + '</p>';
+      html += '</div>';
+      html += '<div style="display:flex;gap:6px;flex-shrink:0;">';
+      html += '<button class="btn btn-sm" onclick="saveTrendIdea(\'' + title.replace(/'/g, "\\'") + '\')" style="font-size:0.72rem;padding:4px 10px;background:var(--oro);color:var(--nero);border:none;border-radius:6px;">Salva Idea</button>';
+      html += '<button class="btn btn-sm" onclick="startScrapingFromTrend(\'' + title.replace(/'/g, "\\'") + '\')" style="font-size:0.72rem;padding:4px 10px;background:linear-gradient(135deg,#6C63FF,#00E5A0);color:#fff;border:none;border-radius:6px;">Crea Articolo</button>';
+      if (link) html += '<a href="' + link + '" target="_blank" style="font-size:0.72rem;padding:4px 10px;background:var(--caffe3);color:var(--caffe);border-radius:6px;text-decoration:none;">Fonte</a>';
+      html += '</div></div></div>';
+    });
+    html += '</div>';
+    wrap.innerHTML = html;
+  } catch(e) {
+    wrap.innerHTML = '<p style="color:#f5576c;">Errore nella ricerca: ' + e.message + '</p>';
+  }
+}
+
+function saveTrendIdea(title) {
+  if (_trendSavedIdeas.find(i => i.title === title)) { showToast('Idea gia\' salvata', 'warn'); return; }
+  _trendSavedIdeas.unshift({ title: title, date: new Date().toISOString().slice(0,10) });
+  localStorage.setItem('trend_ideas', JSON.stringify(_trendSavedIdeas));
+  renderSavedIdeas();
+  showToast('Idea salvata!', 'ok');
+}
+
+function renderSavedIdeas() {
+  const wrap = document.getElementById('trendSavedIdeas');
+  const list = document.getElementById('trendIdeasList');
+  if (!_trendSavedIdeas.length) { wrap.style.display = 'none'; return; }
+  wrap.style.display = '';
+  list.innerHTML = _trendSavedIdeas.map((idea, i) =>
+    '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--sfondo);border:1px solid var(--caffe3);border-radius:8px;margin-bottom:6px;">' +
+    '<span style="font-size:0.85rem;flex:1;">' + idea.title + ' <small style="color:var(--caffe2);">' + idea.date + '</small></span>' +
+    '<div style="display:flex;gap:6px;">' +
+    '<button class="btn btn-sm" onclick="startScrapingFromTrend(\'' + idea.title.replace(/'/g, "\\'") + '\')" style="font-size:0.7rem;padding:3px 8px;background:linear-gradient(135deg,#6C63FF,#00E5A0);color:#fff;border:none;border-radius:6px;">Crea</button>' +
+    '<button class="btn btn-sm" onclick="removeTrendIdea(' + i + ')" style="font-size:0.7rem;padding:3px 8px;background:#f5576c;color:#fff;border:none;border-radius:6px;">X</button>' +
+    '</div></div>'
+  ).join('');
+}
+
+function removeTrendIdea(idx) {
+  _trendSavedIdeas.splice(idx, 1);
+  localStorage.setItem('trend_ideas', JSON.stringify(_trendSavedIdeas));
+  renderSavedIdeas();
+}
+
+function startScrapingFromTrend(title) {
+  openScrapingArticolo(title);
+}
+
+// ══════════════════════════════════════
+// SCRAPING ARTICOLO — Modal completo
+// ══════════════════════════════════════
+function openScrapingArticolo(prefilledTopic) {
+  // Rimuovi modal esistente se c'e'
+  let existing = document.getElementById('scrapingArticoloModal');
+  if (existing) existing.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'scrapingArticoloModal';
+  modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  modal.innerHTML = `
+    <div style="background:#fff;border-radius:16px;max-width:800px;width:100%;max-height:90vh;overflow-y:auto;padding:28px;position:relative;">
+      <button onclick="document.getElementById('scrapingArticoloModal').remove()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--caffe2);">&times;</button>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:4px;">Scraping Articolo</h3>
+      <p style="font-size:0.8rem;color:var(--caffe2);margin-bottom:20px;">Cerca un topic, genera la bozza e conferma per salvare.</p>
+
+      <!-- STEP 1: TOPIC -->
+      <div id="scraStep1">
+        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:6px;">1. Scegli il topic</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+          <select id="scraCat" style="flex:1;min-width:200px;padding:8px;border:1px solid var(--caffe3);border-radius:8px;font-size:0.85rem;">
+            <option value="mercato immobiliare padova 2026">Mercato Padova</option>
+            <option value="mutui casa tassi 2026">Mutui & Tassi</option>
+            <option value="bonus casa ristrutturazione 2026">Bonus Casa</option>
+            <option value="case green efficienza energetica">Case Green</option>
+            <option value="investimento immobiliare rendimento">Investimenti</option>
+            <option value="affitto studenti padova">Affitto Studenti</option>
+            <option value="compravendita immobiliare documenti">Compravendita</option>
+            <option value="quartieri padova zone vivere">Quartieri Padova</option>
+          </select>
+          <button class="btn btn-primary btn-sm" onclick="scraSearchTopic()">Cerca Topic</button>
+        </div>
+        <div style="margin-bottom:12px;">
+          <label style="font-size:0.8rem;color:var(--caffe2);display:block;margin-bottom:4px;">Oppure scrivi un titolo personalizzato:</label>
+          <input type="text" id="scraCustomTopic" placeholder="Es: Come vendere casa a Padova nel 2026" style="width:100%;padding:8px;border:1px solid var(--caffe3);border-radius:8px;font-size:0.85rem;" value="${prefilledTopic || ''}">
+        </div>
+        <div id="scraTopicResults" style="margin-bottom:16px;"></div>
+        <button class="btn btn-primary" onclick="scraGenerateDraft()" style="background:linear-gradient(135deg,#6C63FF,#00E5A0);border:none;">Genera Bozza Articolo</button>
+      </div>
+
+      <!-- STEP 2: ANTEPRIMA -->
+      <div id="scraStep2" style="display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <label style="font-weight:600;font-size:0.85rem;">2. Anteprima Articolo</label>
+          <button class="btn btn-sm" onclick="document.getElementById('scraStep1').style.display='';document.getElementById('scraStep2').style.display='none';" style="font-size:0.75rem;padding:4px 10px;background:var(--caffe3);color:var(--caffe);border:none;border-radius:6px;">Torna Indietro</button>
+        </div>
+        <div id="scraPreview" style="background:var(--sfondo);border:1px solid var(--caffe3);border-radius:12px;padding:20px;margin-bottom:16px;"></div>
+        <div style="display:flex;gap:10px;justify-content:flex-end;">
+          <button class="btn" onclick="document.getElementById('scrapingArticoloModal').remove()" style="background:var(--caffe3);color:var(--caffe);border:none;border-radius:8px;padding:10px 20px;">Annulla</button>
+          <button class="btn btn-primary" onclick="scraConfirmSave()" style="background:linear-gradient(135deg,#6C63FF,#00E5A0);border:none;padding:10px 20px;">Conferma e Salva Bozza</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  if (prefilledTopic) document.getElementById('scraCustomTopic').value = prefilledTopic;
+}
+
+async function scraSearchTopic() {
+  const cat = document.getElementById('scraCat').value;
+  const wrap = document.getElementById('scraTopicResults');
+  wrap.innerHTML = '<p style="color:var(--caffe2);font-size:0.82rem;">Ricerca in corso...</p>';
+  try {
+    const rssUrl = 'https://news.google.com/rss/search?q=' + encodeURIComponent(cat) + '&hl=it&gl=IT&ceid=IT:it';
+    const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(rssUrl);
+    const resp = await fetch(proxyUrl);
+    const txt = await resp.text();
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(txt, 'text/xml');
+    const items = xml.querySelectorAll('item');
+    if (!items.length) { wrap.innerHTML = '<p style="color:var(--caffe2);">Nessun risultato.</p>'; return; }
+    let html = '<p style="font-size:0.78rem;color:var(--caffe2);margin-bottom:8px;">Clicca su un topic per usarlo come base:</p>';
+    html += '<div style="display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto;">';
+    items.forEach((item, i) => {
+      if (i >= 8) return;
+      const title = item.querySelector('title')?.textContent || '';
+      const source = item.querySelector('source')?.textContent || '';
+      html += '<div onclick="document.getElementById(\'scraCustomTopic\').value=\'' + title.replace(/'/g, "\\'").replace(/"/g, '&quot;') + '\'" style="cursor:pointer;padding:8px 12px;background:#fff;border:1px solid var(--caffe3);border-radius:8px;font-size:0.82rem;transition:all 0.2s;" onmouseover="this.style.borderColor=\'#6C63FF\'" onmouseout="this.style.borderColor=\'var(--caffe3)\'">';
+      html += '<strong>' + title + '</strong>';
+      if (source) html += ' <span style="color:var(--caffe2);font-size:0.72rem;">— ' + source + '</span>';
+      html += '</div>';
+    });
+    html += '</div>';
+    wrap.innerHTML = html;
+  } catch(e) {
+    wrap.innerHTML = '<p style="color:#f5576c;">Errore: ' + e.message + '</p>';
+  }
+}
+
+let _scraDraftData = null;
+
+function scraGenerateDraft() {
+  const topic = document.getElementById('scraCustomTopic').value.trim();
+  if (!topic) { showToast('Inserisci un topic o selezionane uno dalla ricerca', 'warn'); return; }
+
+  // Genera slug dal topic
+  const slug = 'blog-' + topic.toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\s+/g, '-')
+    .substring(0, 60)
+    .replace(/-$/, '');
+
+  // Genera contenuto strutturato
+  const today = new Date().toISOString().slice(0, 10);
+  const metaDesc = (topic.length > 120 ? topic.substring(0, 117) + '...' : topic) + ' — Guida completa di Righetto Immobiliare Padova.';
+
+  const sections = [
+    { h2: 'Introduzione', text: 'In questo articolo analizziamo ' + topic + ' con dati aggiornati e consigli pratici per chi opera nel mercato immobiliare di Padova e provincia.' },
+    { h2: 'Situazione Attuale', text: 'Il contesto attuale del mercato immobiliare padovano presenta dinamiche interessanti. I dati OMI e le rilevazioni FIAIP confermano le tendenze in atto.' },
+    { h2: 'Analisi dei Dati', text: 'Secondo le fonti ufficiali dell\'Agenzia delle Entrate, i numeri parlano chiaro. Ecco i dati principali da considerare per prendere decisioni informate.' },
+    { h2: 'Consigli Pratici', text: 'Sulla base della nostra esperienza trentennale nel mercato immobiliare di Padova, ecco i consigli piu\' importanti per orientarsi.' },
+    { h2: 'Impatto sulle Zone di Padova', text: 'Le diverse zone di Padova — dal centro storico all\'Arcella, da Mandria al Bassanello — presentano dinamiche specifiche che influenzano questo tema.' },
+    { h2: 'Domande Frequenti', text: 'Rispondiamo alle domande piu\' comuni che riceviamo dai nostri clienti su questo argomento.' }
+  ];
+
+  const faq = [
+    { q: 'Qual e\' la situazione attuale a Padova?', a: 'Il mercato immobiliare padovano mostra segnali positivi con volumi in crescita e prezzi stabili nelle zone centrali.' },
+    { q: 'Conviene agire adesso?', a: 'In base ai dati attuali e alle previsioni degli analisti, il momento e\' favorevole per chi ha le idee chiare sui propri obiettivi.' },
+    { q: 'A chi posso rivolgermi per una consulenza?', a: 'Righetto Immobiliare offre consulenze gratuite e personalizzate. Contattaci per un appuntamento senza impegno.' }
+  ];
+
+  _scraDraftData = {
+    titolo: topic,
+    slug: slug,
+    metaDesc: metaDesc,
+    data: today,
+    autore: 'Gino Capon',
+    categoria: document.getElementById('scraCat').value.split(' ')[0],
+    sections: sections,
+    faq: faq,
+    schemaTypes: ['Article', 'BreadcrumbList', 'FAQPage', 'RealEstateAgent']
+  };
+
+  // Mostra anteprima
+  const preview = document.getElementById('scraPreview');
+  let html = '';
+  html += '<div style="margin-bottom:16px;">';
+  html += '<h2 style="font-family:\'Cormorant Garamond\',serif;font-size:1.3rem;margin:0 0 8px;">' + topic + '</h2>';
+  html += '<div style="display:flex;gap:12px;flex-wrap:wrap;font-size:0.75rem;color:var(--caffe2);margin-bottom:10px;">';
+  html += '<span>Slug: <code>' + slug + '</code></span>';
+  html += '<span>Data: ' + today + '</span>';
+  html += '<span>Autore: Gino Capon</span>';
+  html += '</div>';
+  html += '<p style="font-size:0.82rem;color:var(--caffe);background:#fff;padding:10px;border-radius:8px;border:1px solid var(--caffe3);margin-bottom:12px;"><strong>Meta description:</strong> ' + metaDesc + '</p>';
+  html += '</div>';
+
+  html += '<div style="margin-bottom:16px;">';
+  html += '<h4 style="font-size:0.9rem;margin-bottom:8px;">Struttura Articolo (6 sezioni H2):</h4>';
+  sections.forEach(s => {
+    html += '<div style="padding:8px 12px;background:#fff;border:1px solid var(--caffe3);border-radius:8px;margin-bottom:6px;">';
+    html += '<strong style="font-size:0.85rem;">' + s.h2 + '</strong>';
+    html += '<p style="font-size:0.78rem;color:var(--caffe2);margin:4px 0 0;">' + s.text + '</p>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  html += '<div style="margin-bottom:16px;">';
+  html += '<h4 style="font-size:0.9rem;margin-bottom:8px;">FAQ (' + faq.length + '):</h4>';
+  faq.forEach(f => {
+    html += '<div style="padding:6px 10px;background:#fff;border-left:3px solid #6C63FF;margin-bottom:4px;border-radius:0 8px 8px 0;">';
+    html += '<strong style="font-size:0.8rem;">' + f.q + '</strong>';
+    html += '<p style="font-size:0.75rem;color:var(--caffe2);margin:2px 0 0;">' + f.a + '</p>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  html += '<div>';
+  html += '<h4 style="font-size:0.9rem;margin-bottom:8px;">Schema.org JSON-LD:</h4>';
+  html += '<div style="display:flex;gap:6px;flex-wrap:wrap;">';
+  _scraDraftData.schemaTypes.forEach(s => {
+    html += '<span style="background:#6C63FF;color:#fff;padding:3px 10px;border-radius:12px;font-size:0.72rem;">' + s + '</span>';
+  });
+  html += '</div></div>';
+
+  preview.innerHTML = html;
+  document.getElementById('scraStep1').style.display = 'none';
+  document.getElementById('scraStep2').style.display = '';
+}
+
+async function scraConfirmSave() {
+  if (!_scraDraftData) return;
+  try {
+    // Salva come bozza in Supabase nella tabella blog
+    const { data, error } = await supabase.from('blog').insert([{
+      titolo: _scraDraftData.titolo,
+      slug: _scraDraftData.slug,
+      meta_description: _scraDraftData.metaDesc,
+      contenuto: _scraDraftData.sections.map(s => '<h2>' + s.h2 + '</h2><p>' + s.text + '</p>').join(''),
+      autore: _scraDraftData.autore,
+      categoria: _scraDraftData.categoria,
+      stato: 'bozza',
+      data_pubblicazione: _scraDraftData.data,
+      faq: JSON.stringify(_scraDraftData.faq)
+    }]);
+    if (error) throw error;
+    showToast('Bozza salvata con successo!', 'ok');
+    document.getElementById('scrapingArticoloModal').remove();
+    loadBlogList();
+  } catch(e) {
+    // Se la tabella blog non esiste o c'e' un errore, salva in localStorage
+    let bozze = JSON.parse(localStorage.getItem('blog_bozze') || '[]');
+    bozze.unshift(_scraDraftData);
+    localStorage.setItem('blog_bozze', JSON.stringify(bozze));
+    showToast('Bozza salvata in locale! (Supabase non disponibile: ' + e.message + ')', 'warn');
+    document.getElementById('scrapingArticoloModal').remove();
+    loadBlogList();
+  }
 }
 
 // Auto-load history and auto-run if >7 days when section is opened
