@@ -1,8 +1,8 @@
 # SKILL UNIFICATA — Righetto Immobiliare
 ## Prompt Operativo Master Consolidato
 
-> **Versione:** 2.0 — 12 Marzo 2026
-> **Origine:** Fusione e razionalizzazione di SERP-STRATEGY.md (v. 4 marzo) + SKILL-KILLER.md (v1.6 - 7 marzo)
+> **Versione:** 2.1 — 12 Marzo 2026
+> **Unica fonte di verita'** — SERP-STRATEGY.md e SKILL-KILLER.md sono stati eliminati, tutto e' qui.
 > **Ultimo aggiornamento Google verificato:** 8 Marzo 2026
 > **Prossima verifica consigliata:** Aprile 2026
 
@@ -126,7 +126,7 @@ landing-chat-offerta-gas.html       - Landing chatbot offerta ENEL Gas
 landing/offerta-enel-luce.html      - Landing statica offerta ENEL Super Luce
 landing/offerta-enel-gas.html       - Landing statica offerta ENEL Fix Star Gas
 landing/reel-offerta-gas.html       - Landing animata reel offerta ENEL Gas
-admin.html                          - Pannello admin (Supabase, 2FA, Email Marketing integrato)
+admin.html                          - Pannello admin (Supabase, 2FA, Email Marketing, Scraping Articolo, Trend & Idee, Audit, Analytics)
 llms.txt                            - File per AI bots (GEO)
 sitemap.xml                         - 54+ URL indicizzati
 robots.txt                          - Direttive crawler
@@ -255,7 +255,33 @@ js/scroll-reveal.js                 - Animazioni scroll
 > - Grafico trend crescita (canvas JS)
 > - Link rapidi a GSC, GA4, PageSpeed, Rich Results Test
 >
-> **Come usare:** Ogni 2 settimane, vai in admin → Analytics → "+ Nuovo Snapshot" e inserisci i dati da GSC e GA4. Il sistema traccia automaticamente la crescita nel tempo.
+> **Automatizzato:** Gli snapshot si registrano automaticamente ogni 7 giorni. Il sistema traccia la crescita nel tempo con grafici trend.
+
+### 3.4 Strumenti Admin — Scraping Articolo + Trend & Idee
+
+**Scraping Articolo** (pulsante nella sezione Blog, accanto a "+ Nuovo Articolo"):
+1. Si apre un modal con 8 categorie immobiliari (mercato Padova, mutui, bonus, case green, investimenti, affitto studenti, compravendita, quartieri)
+2. "Cerca Topic" → scrapa Google News RSS via proxy CORS con fallback multiplo (corsproxy.io, allorigins, cors.sh, corsproxy.org)
+3. Seleziona un topic dalla lista OPPURE scrivi titolo personalizzato
+4. "Genera Bozza" → struttura automatica: 6 sezioni H2, 3 FAQ, meta description, slug, 4 schema JSON-LD (Article, BreadcrumbList, FAQPage, RealEstateAgent)
+5. Anteprima completa con tutti i dettagli
+6. "Conferma e Salva Bozza" → salva in Supabase (tabella blog) con fallback localStorage
+
+**Trend & Idee** (sezione dedicata nella sidebar Admin):
+- Ricerca topic trending per 8 categorie immobiliari italiane
+- Risultati da Google News RSS con fonte e data
+- Pulsanti "Salva Idea" (localStorage) e "Crea Articolo" (apre modal scraping)
+- Idee salvate riutilizzabili in qualsiasi momento
+
+**Audit Sito** (automatico ogni 7 giorni):
+- Analizza tutte le pagine HTML: schema, meta, FAQ, email, performance
+- Salva risultati su Supabase (tabella `audit_snapshots`)
+- Grafico storico con barre OK/Warning/Errori
+
+**Analytics** (snapshot automatici ogni 7 giorni):
+- 8 KPI cards, storico con trend, top query, performance per pagina
+- Obiettivi strategici con progress bar
+- Nessun pulsante manuale — tutto automatizzato
 
 ---
 
@@ -832,6 +858,13 @@ js/scroll-reveal.js                 - Animazioni scroll
 ---
 
 ## 13. CHANGELOG
+
+### v2.1 - 12 Marzo 2026 (Consolidamento SKILL + Fix Scraping Articolo)
+- **Eliminato SKILL-KILLER.md** — tutto inglobato qui, unica fonte di verita'
+- **Fix blocco "Conferma e Salva Bozza"** nello scraping articolo — ora usa `sb` (non `supabase`) e fallback localStorage con chiave `rig_blog_articles`
+- **Nuova sezione 3.4 "Strumenti Admin"** — documentati Scraping Articolo, Trend & Idee, Audit automatico, Analytics automatico
+- **Aggiornato riferimento snapshot** — rimosso "+ Nuovo Snapshot", ora tutto automatico ogni 7gg
+- **Aggiornata struttura file** admin.html con tutte le nuove funzionalita'
 
 ### v2.0 - 12 Marzo 2026 (Ottimizzazione SEO pagina pillar + Scraping Articolo + Trend Admin)
 - **Ottimizzazione agenzia-immobiliare-padova.html** per le keyword "agenzia immobiliare padova" (pos. 28,5 → target top 10) e "vendere casa padova" (pos. 14,7 → target top 5):
