@@ -352,7 +352,8 @@ function generateSlug(titolo) {
     'tempi vendita casa padova 2026: quanto ci vuole davvero?': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-tempi-vendita-casa-padova' },
     'servizi e infrastrutture nelle zone di padova — guida interattiva': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-servizi-infrastrutture-padova' },
     'scuole e istruzione a padova per zone — guida interattiva': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-scuole-istruzione-padova' },
-    'trasporti e mobilita\' a padova per zone — guida interattiva': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-trasporti-mobilita-padova' }
+    'trasporti e mobilita\' a padova per zone — guida interattiva': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-trasporti-mobilita-padova' },
+    'direttiva case green ue 2024: cosa cambia per le case a limena e padova': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-direttiva-case-green-limena-padova' }
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
@@ -379,7 +380,8 @@ function generateSlug(titolo) {
     { titolo: 'Tempi Vendita Casa Padova 2026: Quanto Ci Vuole Davvero?', categoria: 'Guida alla vendita', data: '2026-03-08', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-tempi-vendita-casa-padova' },
     { titolo: 'Servizi e Infrastrutture nelle Zone di Padova — Guida Interattiva', categoria: 'Mercato locale', data: '2026-03-11', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-servizi-infrastrutture-padova' },
     { titolo: 'Scuole e Istruzione a Padova per Zone — Guida Interattiva', categoria: 'Mercato locale', data: '2026-03-11', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-scuole-istruzione-padova' },
-    { titolo: 'Trasporti e Mobilita\' a Padova per Zone — Guida Interattiva', categoria: 'Mercato locale', data: '2026-03-11', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-trasporti-mobilita-padova' }
+    { titolo: 'Trasporti e Mobilita\' a Padova per Zone — Guida Interattiva', categoria: 'Mercato locale', data: '2026-03-11', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-trasporti-mobilita-padova' },
+    { titolo: 'Direttiva Case Green UE 2024: Cosa Cambia per le Case a Limena e Padova', categoria: 'Normativa', data: '2026-03-11', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-direttiva-case-green-limena-padova' }
   ];
   // Carica da Supabase e merge con statici
   let articles = [];
