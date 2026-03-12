@@ -4546,8 +4546,22 @@ tr:hover td { background: rgba(206,224,143,0.06); }
       <div class="section" id="sec-audit">
         <div class="table-wrap" style="padding:28px;">
           <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:8px;">Audit Sito — Controllo Qualita'</h3>
-          <p style="font-size:0.82rem;color:var(--caffe2);margin-bottom:20px;">Analizza tutte le pagine HTML del sito per verificare standard SKILL-UNIFICATA: schema, meta, FAQ, email, performance.</p>
-          <button class="btn btn-primary" id="btnAudit" onclick="runAudit()" style="max-width:320px;margin-bottom:16px;">Avvia Audit Completo</button>
+          <p style="font-size:0.82rem;color:var(--caffe2);margin-bottom:6px;">Analizza tutte le pagine HTML del sito. L'audit si esegue automaticamente ogni 7 giorni.</p>
+          <p id="auditLastRun" style="font-size:0.78rem;color:var(--caffe);margin-bottom:20px;"></p>
+          <button class="btn btn-primary" id="btnAudit" onclick="runAudit(true)" style="max-width:320px;margin-bottom:16px;">Avvia Audit Completo</button>
+
+          <!-- GRAFICO STORICO -->
+          <div id="audit-chart-wrap" style="display:none;background:var(--sfondo);border:1px solid var(--caffe3);border-radius:10px;padding:20px;margin-bottom:16px;">
+            <h4 style="font-size:0.9rem;margin-bottom:12px;color:var(--testo);">Storico Performance</h4>
+            <canvas id="auditChart" width="700" height="220" style="width:100%;max-width:700px;height:auto;"></canvas>
+            <div style="display:flex;gap:16px;margin-top:8px;font-size:.75rem;color:var(--caffe2)">
+              <span><span style="display:inline-block;width:12px;height:12px;background:#27ae60;border-radius:2px;vertical-align:middle;margin-right:4px"></span>OK</span>
+              <span><span style="display:inline-block;width:12px;height:12px;background:#f39c12;border-radius:2px;vertical-align:middle;margin-right:4px"></span>Warning</span>
+              <span><span style="display:inline-block;width:12px;height:12px;background:#e74c3c;border-radius:2px;vertical-align:middle;margin-right:4px"></span>Errori</span>
+            </div>
+          </div>
+
+          <!-- RISULTATO AUDIT -->
           <div id="audit-result" style="display:none;background:var(--sfondo);border:1px solid var(--caffe3);border-radius:10px;padding:20px;margin-top:12px;">
             <div id="audit-summary" style="margin-bottom:16px"></div>
             <div id="audit-detail" style="font-size:.8rem;color:var(--testo);line-height:1.8;max-height:60vh;overflow-y:auto"></div>
@@ -4918,6 +4932,7 @@ function showSection(name) {
   if (name === 'clienti') { loadClienti(); if (typeof emLoadGruppi === 'function') emLoadGruppi(); }
   if (name === 'emailmarketing') { if (typeof emLoadGruppi === 'function') emLoadGruppi(); if (typeof emPopulateContentPickers === 'function') emPopulateContentPickers(); }
   if (name === 'nuovo') populateProprietarioDropdown();
+  if (name === 'audit') initAuditSection();
   if (name === 'impostazioni') { testConn(); check2FAStatus(); }
 }
 
@@ -13098,11 +13113,11 @@ showSection = function(name) {
 })();
 
 // ══════════════════════════════════════
-// AUDIT SITO — Controlla tutte le pagine HTML
+// AUDIT SITO — Auto-audit settimanale con storico Supabase
 // ══════════════════════════════════════
 var AUDIT_PAGES = [
   'index.html','contatti.html','chi-siamo.html','servizi.html','faq.html','blog.html',
-  'agenzia-immobiliare-padova.html','immobili.html','immobile.html',
+  'agenzia-immobiliare-padova.html','immobili.html',
   'servizio-vendita.html','servizio-locazioni.html','servizio-preliminari.html',
   'servizio-gestione.html','servizio-valutazioni.html','servizio-utenze.html',
   'zona-centro-storico-padova.html','zona-arcella-padova.html','zona-universitaria-padova.html',
@@ -13117,13 +13132,152 @@ var AUDIT_PAGES = [
 ];
 
 var BLOG_PAGES = [];
+var _auditSnapshots = [];
 
-async function runAudit() {
+// Ensure table exists (upsert-safe — Supabase ignores if exists)
+async function ensureAuditTable() {
+  // Try to select from the table; if it fails we can't create it from client-side
+  // The table must be created in Supabase dashboard:
+  // CREATE TABLE IF NOT EXISTS audit_snapshots (
+  //   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  //   created_at timestamptz DEFAULT now(),
+  //   total_pages int,
+  //   ok_count int,
+  //   warn_count int,
+  //   err_count int,
+  //   details jsonb
+  // );
+  // ALTER TABLE audit_snapshots ENABLE ROW LEVEL SECURITY;
+  // CREATE POLICY "Allow all for anon" ON audit_snapshots FOR ALL TO anon USING (true) WITH CHECK (true);
+  try {
+    const { data, error } = await sb.from('audit_snapshots').select('id').limit(1);
+    return !error;
+  } catch(e) { return false; }
+}
+
+// Load storico snapshots and render chart
+async function loadAuditHistory() {
+  const tableOk = await ensureAuditTable();
+  if (!tableOk) {
+    document.getElementById('auditLastRun').textContent = 'Tabella audit_snapshots non trovata in Supabase — crea la tabella per abilitare lo storico.';
+    return { snapshots: [], needsRun: true };
+  }
+
+  const { data, error } = await sb.from('audit_snapshots')
+    .select('*')
+    .order('created_at', { ascending: true })
+    .limit(52); // max 1 anno di dati settimanali
+
+  if (error || !data) {
+    _auditSnapshots = [];
+    return { snapshots: [], needsRun: true };
+  }
+
+  _auditSnapshots = data;
+
+  if (data.length > 0) {
+    renderAuditChart(data);
+    const last = data[data.length - 1];
+    const lastDate = new Date(last.created_at);
+    const daysSince = Math.floor((Date.now() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
+    document.getElementById('auditLastRun').textContent =
+      'Ultimo audit: ' + lastDate.toLocaleDateString('it-IT') + ' (' + daysSince + ' giorni fa)' +
+      (daysSince >= 7 ? ' — audit automatico in corso...' : '');
+    return { snapshots: data, needsRun: daysSince >= 7 };
+  }
+
+  document.getElementById('auditLastRun').textContent = 'Nessun audit precedente — primo audit in corso...';
+  return { snapshots: [], needsRun: true };
+}
+
+// Render chart on canvas
+function renderAuditChart(snapshots) {
+  if (snapshots.length < 1) return;
+  var wrap = document.getElementById('audit-chart-wrap');
+  wrap.style.display = 'block';
+  var canvas = document.getElementById('auditChart');
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width, H = canvas.height;
+  var pad = { top: 20, right: 20, bottom: 40, left: 40 };
+  var cW = W - pad.left - pad.right;
+  var cH = H - pad.top - pad.bottom;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Find max
+  var maxVal = 0;
+  snapshots.forEach(function(s) {
+    var t = s.ok_count + s.warn_count + s.err_count;
+    if (t > maxVal) maxVal = t;
+  });
+  if (maxVal === 0) maxVal = 1;
+
+  var n = snapshots.length;
+  var barW = Math.min(Math.floor(cW / n) - 4, 40);
+  var gap = (cW - barW * n) / (n + 1);
+
+  // Grid lines
+  ctx.strokeStyle = '#e0e0e0';
+  ctx.lineWidth = 0.5;
+  for (var g = 0; g <= 4; g++) {
+    var gy = pad.top + cH - (cH * g / 4);
+    ctx.beginPath(); ctx.moveTo(pad.left, gy); ctx.lineTo(W - pad.right, gy); ctx.stroke();
+    ctx.fillStyle = '#999'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
+    ctx.fillText(Math.round(maxVal * g / 4), pad.left - 6, gy + 4);
+  }
+
+  // Bars (stacked: err bottom, warn middle, ok top)
+  snapshots.forEach(function(s, i) {
+    var x = pad.left + gap + i * (barW + gap);
+    var total = s.ok_count + s.warn_count + s.err_count;
+
+    var hErr = (s.err_count / maxVal) * cH;
+    var hWarn = (s.warn_count / maxVal) * cH;
+    var hOk = (s.ok_count / maxVal) * cH;
+
+    var y = pad.top + cH;
+
+    // Errors (red)
+    ctx.fillStyle = '#e74c3c';
+    ctx.fillRect(x, y - hErr, barW, hErr);
+    y -= hErr;
+
+    // Warnings (orange)
+    ctx.fillStyle = '#f39c12';
+    ctx.fillRect(x, y - hWarn, barW, hWarn);
+    y -= hWarn;
+
+    // OK (green)
+    ctx.fillStyle = '#27ae60';
+    ctx.fillRect(x, y - hOk, barW, hOk);
+
+    // Date label
+    var d = new Date(s.created_at);
+    var label = d.getDate() + '/' + (d.getMonth() + 1);
+    ctx.fillStyle = '#666'; ctx.font = '9px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(label, x + barW / 2, pad.top + cH + 16);
+  });
+}
+
+// Save snapshot to Supabase
+async function saveAuditSnapshot(totOk, totWarn, totErr, total, details) {
+  try {
+    await sb.from('audit_snapshots').insert({
+      total_pages: total,
+      ok_count: totOk,
+      warn_count: totWarn,
+      err_count: totErr,
+      details: details
+    });
+  } catch(e) { /* silent fail */ }
+}
+
+async function runAudit(manual) {
   var btn = document.getElementById('btnAudit');
   btn.textContent = 'Audit in corso...';
   btn.disabled = true;
   document.getElementById('audit-result').style.display = 'block';
-  document.getElementById('audit-summary').innerHTML = '<p style="color:var(--verde)">Caricamento pagine in corso...</p>';
+  document.getElementById('audit-summary').innerHTML = '<p style="color:var(--verde)">Analisi pagine in corso...</p>';
   document.getElementById('audit-detail').innerHTML = '';
 
   try {
@@ -13175,27 +13329,27 @@ async function runAudit() {
       if (!html.match(/property="og:title"/i)) warnings.push('og:title mancante');
       if (!html.match(/property="og:description"/i)) warnings.push('og:description mancante');
 
-      if (html.includes('__cf_email__') || html.includes('email-protection')) issues.push('Email offuscata da Cloudflare (fix necessario)');
+      if (html.includes('__cf_email__') || html.includes('email-protection')) issues.push('Email offuscata da Cloudflare');
       if (html.includes('email-decode.min.js')) warnings.push('Script email-decode.min.js residuo');
 
       var heroImg = html.match(/<img[^>]*class="[^"]*hero[^"]*"[^>]*>/i);
-      if (heroImg && heroImg[0].includes('loading="lazy"')) issues.push('loading="lazy" su immagine hero (above-fold)');
+      if (heroImg && heroImg[0].includes('loading="lazy"')) issues.push('loading="lazy" su immagine hero');
 
       if (!html.match(/preload[^>]*montserrat/i) && !html.match(/preload[^>]*woff2/i)) warnings.push('Font preload mancante');
 
       var imgs = html.match(/<img\s[^>]*/gi) || [];
       var noAlt = imgs.filter(function(i) { return !i.match(/alt\s*=/i); }).length;
-      if (noAlt > 0) warnings.push(noAlt + ' immagini senza alt text');
+      if (noAlt > 0) warnings.push(noAlt + ' img senza alt');
 
       var noSize = imgs.filter(function(i) { return !i.match(/width\s*=/i) || !i.match(/height\s*=/i); }).length;
-      if (noSize > 0) warnings.push(noSize + ' immagini senza width/height espliciti');
+      if (noSize > 0) warnings.push(noSize + ' img senza width/height');
 
       if (!html.match(/name="robots"/i)) warnings.push('Meta robots mancante');
 
-      if (schemaTypes.includes('RealEstateAgent') && !html.includes('GeoCoordinates')) warnings.push('GeoCoordinates mancante nello schema');
-      if (schemaTypes.includes('RealEstateAgent') && !html.includes('sameAs')) warnings.push('sameAs mancante nello schema');
+      if (schemaTypes.includes('RealEstateAgent') && !html.includes('GeoCoordinates')) warnings.push('GeoCoordinates mancante');
+      if (schemaTypes.includes('RealEstateAgent') && !html.includes('sameAs')) warnings.push('sameAs mancante');
 
-      if (!html.includes('info@righettoimmobiliare.it')) warnings.push('Email info@ non presente nella pagina');
+      if (!html.includes('info@righettoimmobiliare.it')) warnings.push('Email info@ assente');
 
       if (issues.length > 0) { totErr++; }
       else if (warnings.length > 0) { totWarn++; }
@@ -13209,6 +13363,25 @@ async function runAudit() {
   }
 
   var total = results.length;
+
+  // Save snapshot to Supabase
+  var detailsForDb = results.map(function(r) {
+    return { page: r.page, status: r.status, issues: r.issues || [], warnings: r.warnings || [] };
+  });
+  await saveAuditSnapshot(totOk, totWarn, totErr, total, detailsForDb);
+
+  // Reload chart with new data
+  const { data: fresh } = await sb.from('audit_snapshots')
+    .select('*').order('created_at', { ascending: true }).limit(52);
+  if (fresh && fresh.length > 0) {
+    _auditSnapshots = fresh;
+    renderAuditChart(fresh);
+    var last = fresh[fresh.length - 1];
+    document.getElementById('auditLastRun').textContent =
+      'Ultimo audit: ' + new Date(last.created_at).toLocaleDateString('it-IT') + ' (adesso)';
+  }
+
+  // Render summary
   document.getElementById('audit-summary').innerHTML =
     '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px">' +
     '<div style="background:var(--verde);color:#fff;padding:8px 16px;border-radius:8px;font-weight:700">' + totOk + ' OK</div>' +
@@ -13217,6 +13390,7 @@ async function runAudit() {
     '<div style="background:var(--nero);color:var(--oro);padding:8px 16px;border-radius:8px;font-weight:700">' + total + ' pagine</div>' +
     '</div>';
 
+  // Render detail
   var sorted = results.sort(function(a,b) {
     var ord = {'ERR':0,'WARN':1,'OK':2};
     return (ord[a.status]||0) - (ord[b.status]||0);
@@ -13237,6 +13411,8 @@ async function runAudit() {
   document.getElementById('audit-detail').innerHTML = detailHtml;
   btn.textContent = 'Avvia Audit Completo';
   btn.disabled = false;
+
+  if (manual) showToast('Audit completato: ' + totOk + ' OK, ' + totWarn + ' warning, ' + totErr + ' errori', totErr > 0 ? 'error' : 'success');
 }
 
 function copyAudit() {
@@ -13250,6 +13426,14 @@ function copyAudit() {
   navigator.clipboard.writeText(text).then(function() {
     showToast('Report audit copiato negli appunti!', 'success');
   });
+}
+
+// Auto-load history and auto-run if >7 days when section is opened
+async function initAuditSection() {
+  var hist = await loadAuditHistory();
+  if (hist.needsRun) {
+    await runAudit(false);
+  }
 }
 </script>
 </body>

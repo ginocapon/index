@@ -1,7 +1,7 @@
 # SKILL UNIFICATA — Righetto Immobiliare
 ## Prompt Operativo Master Consolidato
 
-> **Versione:** 1.8 — 12 Marzo 2026
+> **Versione:** 1.9 — 12 Marzo 2026
 > **Origine:** Fusione e razionalizzazione di SERP-STRATEGY.md (v. 4 marzo) + SKILL-KILLER.md (v1.6 - 7 marzo)
 > **Ultimo aggiornamento Google verificato:** 8 Marzo 2026
 > **Prossima verifica consigliata:** Aprile 2026
@@ -667,7 +667,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 ## 9. AZIONI TECNICHE — TODO
 
-### 9.1 Bug e Fix Immediati — COMPLETATI 8 Marzo 2026
+### 9.1 Bug e Fix Immediati — Aggiornati 12 Marzo 2026
 - [x] **immobile.html in sitemap** — gia' presente (verificato)
 - [x] **cormorant-garamond-600.woff2** — 7 file blog hanno preload 600, altri usano 700 correttamente
 - [x] **landing-vendita.html lazy** — immagini sono below-fold, loading="lazy" corretto
@@ -678,6 +678,11 @@ js/scroll-reveal.js                 - Animazioni scroll
 - [x] **Person schema** — aggiunto a landing-agente.html
 - [x] **Timestamp cornerstone** — aggiunto "Aggiornato: marzo 2026" a 6 articoli principali
 - [x] **llms.txt** — aggiornato con nuove zone e articoli
+- [x] **Email offuscata Cloudflare** — fix su 7 pagine (servizi, servizio-vendita, privacy, immobili, index, chi-siamo, contatti) — rimosso `__cf_email__` e `email-decode.min.js`
+- [x] **H1 mancante landing-chat** — aggiunto H1 sr-only a 5 pagine: landing-chat-vendita, landing-chat-valutazione, landing-chat-insoddisfatti, landing-chat-offerta-luce, landing-chat-offerta-gas
+- [x] **Meta description troppo lunghe** — accorciate a ≤160 char su 9 pagine: 6 zone pages, agenzia-immobiliare-padova, landing-mutuo (anche title accorciato), vendere-casa-padova-errori
+- [x] **immobile.html escluso da audit** — e' un template dinamico (genera contenuto via JS)
+- [x] **Audit automatico settimanale** — auto-run ogni 7gg, salvataggio su Supabase (tabella `audit_snapshots`), grafico storico con canvas, nella sezione Admin
 
 ### 9.2 Contenuti da Creare
 - [x] blog-tempi-vendita-casa-padova.html — CREATO 8 marzo 2026
@@ -826,6 +831,14 @@ js/scroll-reveal.js                 - Animazioni scroll
 ---
 
 ## 13. CHANGELOG
+
+### v1.9 - 12 Marzo 2026 (Audit Auto-settimanale + Fix SEO da Audit)
+- **Audit automatico settimanale:** auto-run ogni 7gg nell'Admin, salvataggio risultati su Supabase (`audit_snapshots`), grafico storico canvas con barre OK/Warning/Errori
+- **Pulsante Audit spostato in Admin:** dalla pagina scraping.html alla sidebar Admin (sezione dedicata "Audit Sito")
+- **Fix H1 mancante:** aggiunto H1 sr-only a 5 landing-chat (vendita, valutazione, insoddisfatti, offerta-luce, offerta-gas)
+- **Fix meta description troppo lunghe:** accorciate a ≤160 char su 9 pagine (6 zone, agenzia, landing-mutuo, vendere-casa-padova-errori)
+- **Fix title troppo lungo:** landing-mutuo.html accorciato a ≤70 char
+- **immobile.html escluso dall'audit:** e' template dinamico, non ha title/meta statici
 
 ### v1.8 - 12 Marzo 2026 (Standard Contenuti + Fix Email + Pulsante Audit)
 - **Nuova sezione 8 "Standard Contenuti":** standard obbligatori per articoli blog (struttura H-tag, formato GEO/AEO, fonti verificate, meta tags, schema triplo, stile scrittura), descrizioni immobili (struttura 400-600 parole, regole anti-duplicate content vs portali, schema RealEstateListing), pagine zona (struttura completa con dati OMI)
