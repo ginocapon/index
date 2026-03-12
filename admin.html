@@ -4421,7 +4421,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           <div class="table-wrap" style="margin-bottom:24px">
             <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #e8e3db">
               <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin:0">Storico Performance — Snapshot Periodici</h4>
-              <button class="btn btn-primary btn-sm" onclick="addAnalyticsSnapshot()">+ Nuovo Snapshot</button>
+              <span style="font-size:0.72rem;color:var(--caffe2);">Automatico ogni 7 giorni</span>
             </div>
             <div style="overflow-x:auto">
               <table style="width:100%;border-collapse:collapse;font-size:0.8rem" id="analytics-history-table">
@@ -10853,7 +10853,7 @@ function renderAnalyticsChart(data) {
     ctx.font = '14px Montserrat, sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText('Aggiungi almeno 2 snapshot per vedere il grafico trend', W/2, H/2);
-    ctx.fillText('Usa il pulsante "+ Nuovo Snapshot" per registrare i dati periodicamente', W/2, H/2 + 24);
+    ctx.fillText('Gli snapshot vengono registrati automaticamente ogni 7 giorni', W/2, H/2 + 24);
     return;
   }
 
@@ -13471,6 +13471,25 @@ function copyAudit() {
 // ══════════════════════════════════════
 let _trendSavedIdeas = JSON.parse(localStorage.getItem('trend_ideas') || '[]');
 
+// Helper: fetch via CORS proxy con fallback multiplo
+async function fetchViaProxy(url) {
+  const proxies = [
+    u => 'https://corsproxy.io/?' + encodeURIComponent(u),
+    u => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),
+    u => 'https://proxy.cors.sh/' + u,
+    u => 'https://corsproxy.org/?' + encodeURIComponent(u)
+  ];
+  let lastErr;
+  for (const mkProxy of proxies) {
+    try {
+      const resp = await fetch(mkProxy(url), { signal: AbortSignal.timeout(8000) });
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      return await resp.text();
+    } catch(e) { lastErr = e; }
+  }
+  throw new Error('Tutti i proxy CORS non disponibili. Ultimo errore: ' + (lastErr?.message || 'sconosciuto'));
+}
+
 function initTrendSection() {
   renderSavedIdeas();
 }
@@ -13478,12 +13497,10 @@ function initTrendSection() {
 async function searchTrends() {
   const cat = document.getElementById('trendCategoria').value;
   const wrap = document.getElementById('trendResults');
-  wrap.innerHTML = '<p style="color:var(--caffe2);font-size:0.85rem;">Ricerca in corso...</p>';
+  wrap.innerHTML = '<p style="color:var(--caffe2);font-size:0.85rem;">Ricerca in corso (provo piu\' fonti)...</p>';
   try {
     const rssUrl = 'https://news.google.com/rss/search?q=' + encodeURIComponent(cat + ' italia') + '&hl=it&gl=IT&ceid=IT:it';
-    const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(rssUrl);
-    const resp = await fetch(proxyUrl);
-    const txt = await resp.text();
+    const txt = await fetchViaProxy(rssUrl);
     const parser = new DOMParser();
     const xml = parser.parseFromString(txt, 'text/xml');
     const items = xml.querySelectorAll('item');
@@ -13610,12 +13627,10 @@ function openScrapingArticolo(prefilledTopic) {
 async function scraSearchTopic() {
   const cat = document.getElementById('scraCat').value;
   const wrap = document.getElementById('scraTopicResults');
-  wrap.innerHTML = '<p style="color:var(--caffe2);font-size:0.82rem;">Ricerca in corso...</p>';
+  wrap.innerHTML = '<p style="color:var(--caffe2);font-size:0.82rem;">Ricerca in corso (provo piu\' fonti)...</p>';
   try {
     const rssUrl = 'https://news.google.com/rss/search?q=' + encodeURIComponent(cat) + '&hl=it&gl=IT&ceid=IT:it';
-    const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(rssUrl);
-    const resp = await fetch(proxyUrl);
-    const txt = await resp.text();
+    const txt = await fetchViaProxy(rssUrl);
     const parser = new DOMParser();
     const xml = parser.parseFromString(txt, 'text/xml');
     const items = xml.querySelectorAll('item');
