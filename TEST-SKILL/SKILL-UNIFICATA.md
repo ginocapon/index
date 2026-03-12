@@ -1,7 +1,7 @@
 # SKILL UNIFICATA — Righetto Immobiliare
 ## Prompt Operativo Master Consolidato
 
-> **Versione:** 2.4 — 12 Marzo 2026
+> **Versione:** 2.5 — 12 Marzo 2026
 > **Unica fonte di verita'** — SERP-STRATEGY.md e SKILL-KILLER.md sono stati eliminati, tutto e' qui.
 > **Ultimo aggiornamento Google verificato:** 8 Marzo 2026
 > **Prossima verifica consigliata:** Aprile 2026
@@ -91,13 +91,31 @@ Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se 
 - `js/config.js` — `EMAIL_RELAY_URL`, `EMAIL_RELAY_KEY`
 - `admin.html` — sezione Email Marketing (composizione, invio, tracking)
 
-### 2.3 Architettura DNS (NON TOCCARE MAI)
+### 2.3 Supabase Storage (Foto e Documenti)
+
+**Bucket attivi:**
+
+| Bucket | Contenuto | Prefissi | Max size |
+|---|---|---|---|
+| `foto-immobili` | Foto immobili, planimetrie, 360°, **foto blog** | `(root)` immobili, `blog/` articoli | 10MB |
+| `documenti` | PDF catasto, documenti clienti | `clienti-docs/` | 20MB |
+
+**Policy:** entrambi i bucket hanno accesso **pubblico in lettura** (SELECT). L'upload avviene con la `anon key` di Supabase.
+
+**Naming convention:** `{timestamp}-{slugified-filename}.{ext}` — per le foto blog: `blog/{timestamp}-{slugified-filename}.{ext}`
+
+**Upload da admin.html:**
+- **Immobili:** drag-and-drop nella scheda immobile → `handleFiles(files, 'foto')`
+- **Blog:** drag-and-drop nello step 2 Scraping Articolo → `scraBlogHandleFiles(files)`
+- **Documenti/Planimetrie:** drag-and-drop nelle sezioni dedicate
+
+### 2.4 Architettura DNS (NON TOCCARE MAI)
 - **Record A:** GitHub Pages (185.199.108.153, etc.)
 - **CNAME www:** ginocapon.github.io
 - **Record MX:** email su cPanel (NON MODIFICARE)
 - **Google Site Verification:** meta tag nel `<head>` di index.html
 
-### 2.4 Struttura File Principale
+### 2.5 Struttura File Principale
 ```
 index.html                          - Homepage (82KB, canvas animato, testimonial, CTA)
 immobili.html                       - Lista immobili (Leaflet.js map, filtri)
@@ -268,10 +286,11 @@ js/scroll-reveal.js                 - Animazioni scroll
 4. "Avanti: Aggiungi Foto →"
 
 **STEP 2 — Foto:**
-5. **Foto copertina (hero):** l'utente puo' incollare un URL proprio OPPURE cercare foto royalty-free su Unsplash con query personalizzata. Vengono mostrate 6 anteprime cliccabili
-6. **Foto inline (max 3):** URL personalizzati o ricerca Unsplash per ogni foto. Vengono distribuite automaticamente dopo sezione 1, 3 e 5
-7. Preview della foto hero prima di procedere
-8. "Genera Bozza con Foto →"
+5. **Upload diretto foto (drag-and-drop):** zona di upload in cima allo step. Le foto vengono caricate su Supabase Storage (bucket `foto-immobili`, prefisso `blog/`). La prima foto diventa automaticamente l'hero, le successive vengono distribuite come inline 1, 2, 3. Griglia anteprime con possibilita' di rimuovere singole foto. Formati accettati: JPG, PNG, WEBP (max 10MB)
+6. **Foto copertina (hero):** compilato automaticamente dall'upload, oppure l'utente puo' incollare un URL proprio o cercare foto royalty-free su Unsplash con query personalizzata. Vengono mostrate 6 anteprime cliccabili
+7. **Foto inline (max 3):** compilate automaticamente dall'upload, oppure URL personalizzati o ricerca Unsplash per ogni foto. Vengono distribuite automaticamente dopo sezione 1, 3 e 5
+8. Preview della foto hero prima di procedere
+9. "Genera Bozza con Foto →"
 
 **STEP 3 — Anteprima e salvataggio:**
 9. **Contenuto 100% originale generato automaticamente** (no plagio):
@@ -896,6 +915,14 @@ js/scroll-reveal.js                 - Animazioni scroll
 - **Figure con didascalia:** immagini inline distribuite tra le sezioni con `<figure><img><figcaption>` e crediti fotografo
 - **Unsplash Source API:** nessuna API key necessaria, URL diretti `source.unsplash.com` con seed unici per evitare duplicati
 - **REGOLA IMMAGINI:** ogni nuovo articolo deve avere foto NUOVE — vietato riutilizzare immagini esistenti del sito
+
+### v2.5 - 12 Marzo 2026 (Upload diretto foto blog su Supabase Storage)
+- **Upload drag-and-drop foto blog:** aggiunta zona di upload nello step 2 dello Scraping Articolo, identica a quella degli immobili. Le foto vengono caricate su Supabase Storage (bucket `foto-immobili`, prefisso `blog/`) e distribuite automaticamente nei campi hero + inline
+- **Distribuzione automatica:** prima foto = hero, foto 2/3/4 = inline 1/2/3. Griglia anteprime con rimozione singola
+- **Progress bar:** barra di avanzamento durante il caricamento multiplo
+- **Unsplash come fallback:** la ricerca Unsplash resta disponibile come alternativa all'upload diretto
+- **Storage condiviso:** le foto blog usano lo stesso bucket `foto-immobili` con prefisso `blog/` — stesse policy di accesso pubblico, nessuna configurazione aggiuntiva necessaria
+- **Configurazione Claude Code (Tea):** aggiunto `.claude/hooks/session-start.sh` e `.claude/settings.json` per sessioni remote
 
 ### v2.3 - 12 Marzo 2026 (Fix 404 articoli + template dinamico migliorato)
 - **Fix link 404 articoli scraping:** gli articoli creati dallo scraping non hanno file HTML fisico — ora il link nell'admin punta correttamente a `blog-articolo?s=slug` (template dinamico) invece di `/slug` (file inesistente)

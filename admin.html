@@ -13788,6 +13788,10 @@ async function scraSearchUnsplash(target) {
 }
 
 // ── Upload foto blog su Supabase Storage ──
+// Le foto blog vengono salvate nel bucket 'foto-immobili' con prefisso 'blog/'
+// Il bucket deve avere policy pubblica per SELECT (gia' configurata per le foto immobili)
+// Se il bucket non esiste o non ha policy, le foto non saranno accessibili pubblicamente
+// Per creare il bucket: Supabase Dashboard → Storage → New Bucket → 'foto-immobili' → Public
 var _scraBlogFotos = [];
 
 async function scraBlogHandleFiles(files) {
