@@ -1,7 +1,7 @@
 # SKILL UNIFICATA — Righetto Immobiliare
 ## Prompt Operativo Master Consolidato
 
-> **Versione:** 1.9 — 12 Marzo 2026
+> **Versione:** 2.0 — 12 Marzo 2026
 > **Origine:** Fusione e razionalizzazione di SERP-STRATEGY.md (v. 4 marzo) + SKILL-KILLER.md (v1.6 - 7 marzo)
 > **Ultimo aggiornamento Google verificato:** 8 Marzo 2026
 > **Prossima verifica consigliata:** Aprile 2026
@@ -831,6 +831,12 @@ js/scroll-reveal.js                 - Animazioni scroll
 ---
 
 ## 13. CHANGELOG
+
+### v2.0 - 12 Marzo 2026 (Scraping Articolo + Trend + Automazione completa)
+- **Pulsante "Scraping Articolo"** nella sezione Blog: cerca topic trending da Google News RSS + suggerimenti IA curati per 8 categorie immobiliari, genera bozza strutturata con 6 sezioni H2, schema triplo, FAQ, meta tags — mostra anteprima e salva come bozza su conferma
+- **Sezione "Trend & Idee"** nell'Admin: scraper con 8 categorie (mercato Padova, mutui, bonus, case green, affitti studenti, investimento, ristrutturazioni, normative), link diretti a fonti (Idealista News, Immobiliare.it, Sole 24 Ore, ANSA, Agenzia Entrate, FIAIP), salvataggio idee in localStorage
+- **Audit completamente automatico:** rimosso pulsante manuale, l'audit gira da solo ogni 7gg quando si apre la sezione
+- **Snapshot Analytics automatici:** rimosso pulsante "+ Nuovo Snapshot", etichetta "Aggiornamento automatico settimanale"
 
 ### v1.9 - 12 Marzo 2026 (Audit Auto-settimanale + Fix SEO da Audit)
 - **Audit automatico settimanale:** auto-run ogni 7gg nell'Admin, salvataggio risultati su Supabase (`audit_snapshots`), grafico storico canvas con barre OK/Warning/Errori

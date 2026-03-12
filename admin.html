@@ -1969,6 +1969,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
         Analytics
       </div>
+      <div class="nav-item" onclick="showSection('trend')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 6l-9.5 9.5-5-5L1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        Trend & Idee
+      </div>
       <div class="nav-item" onclick="showSection('audit')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
         Audit Sito
@@ -2686,6 +2690,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <div style="font-weight:600;font-size:0.9rem">Articoli del Blog</div>
             <div style="display:flex;gap:10px">
               <button class="btn btn-primary btn-sm" onclick="openBlogEditor()">+ Nuovo Articolo</button>
+              <button class="btn btn-sm" onclick="openScrapingArticolo()" style="background:#667eea;color:#fff;border:none">Scraping Articolo</button>
             </div>
           </div>
           <div id="blogListWrap">
@@ -4415,8 +4420,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           <!-- Storico Performance -->
           <div class="table-wrap" style="margin-bottom:24px">
             <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #e8e3db">
-              <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin:0">Storico Performance — Snapshot Periodici</h4>
-              <button class="btn btn-primary btn-sm" onclick="addAnalyticsSnapshot()">+ Nuovo Snapshot</button>
+              <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin:0">Storico Performance — Snapshot Automatici</h4>
+              <span style="font-size:0.72rem;color:var(--caffe2)">Aggiornamento automatico settimanale</span>
             </div>
             <div style="overflow-x:auto">
               <table style="width:100%;border-collapse:collapse;font-size:0.8rem" id="analytics-history-table">
@@ -4542,13 +4547,44 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         </div>
       </div>
 
+      <!-- ══════════ TREND & IDEE ARTICOLI ══════════ -->
+      <div class="section" id="sec-trend">
+        <div class="table-wrap" style="padding:28px;">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:8px;">Trend & Idee — Scraper Articoli Immobiliari</h3>
+          <p style="font-size:0.82rem;color:var(--caffe2);margin-bottom:20px;">Cerca automaticamente articoli trending nel settore immobiliare da fonti italiane. Identifica topic ad alto potenziale per il blog.</p>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;">
+            <select id="trendCategory" style="padding:10px 16px;border:1px solid var(--caffe3);border-radius:8px;font-size:0.85rem;background:#fff;min-width:200px">
+              <option value="mercato-padova">Mercato immobiliare Padova</option>
+              <option value="mutui-tassi">Mutui e tassi interesse</option>
+              <option value="bonus-agevolazioni">Bonus casa e agevolazioni</option>
+              <option value="case-green">Direttiva Case Green / efficienza</option>
+              <option value="affitto-studenti">Affitto studenti universitari</option>
+              <option value="investimento">Investimento immobiliare</option>
+              <option value="ristrutturazioni">Ristrutturazioni e superbonus</option>
+              <option value="normative">Normative e tasse immobiliari</option>
+            </select>
+            <button class="btn btn-primary" id="btnTrend" onclick="searchTrends()" style="max-width:200px;">Cerca Trend</button>
+          </div>
+
+          <div id="trend-results" style="display:none;">
+            <div id="trend-list" style="font-size:.82rem;line-height:1.7"></div>
+          </div>
+
+          <!-- IDEE SALVATE -->
+          <div id="trend-saved-wrap" style="display:none;margin-top:24px;border-top:1px solid var(--caffe3);padding-top:20px">
+            <h4 style="font-size:0.95rem;margin-bottom:12px;">Idee Salvate per il Blog</h4>
+            <div id="trend-saved-list" style="font-size:.82rem;line-height:1.7"></div>
+          </div>
+        </div>
+      </div>
+
       <!-- ══════════ AUDIT SITO ══════════ -->
       <div class="section" id="sec-audit">
         <div class="table-wrap" style="padding:28px;">
           <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:8px;">Audit Sito — Controllo Qualita'</h3>
           <p style="font-size:0.82rem;color:var(--caffe2);margin-bottom:6px;">Analizza tutte le pagine HTML del sito. L'audit si esegue automaticamente ogni 7 giorni.</p>
           <p id="auditLastRun" style="font-size:0.78rem;color:var(--caffe);margin-bottom:20px;"></p>
-          <button class="btn btn-primary" id="btnAudit" onclick="runAudit(true)" style="max-width:320px;margin-bottom:16px;">Avvia Audit Completo</button>
 
           <!-- GRAFICO STORICO -->
           <div id="audit-chart-wrap" style="display:none;background:var(--sfondo);border:1px solid var(--caffe3);border-radius:10px;padding:20px;margin-bottom:16px;">
@@ -4900,7 +4936,7 @@ function showSection(name) {
   const sec = document.getElementById('sec-' + name);
   if (sec) sec.classList.add('active');
   // Mark the correct nav-item as active
-  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','landing','newsletter','agenda','emailmarketing','analytics','audit','impostazioni'];
+  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','landing','newsletter','agenda','emailmarketing','analytics','trend','audit','impostazioni'];
   const idx = sectionNames.indexOf(name);
   const navItems = document.querySelectorAll('.nav-item');
   if (idx >= 0 && navItems[idx]) navItems[idx].classList.add('active');
@@ -4917,6 +4953,7 @@ function showSection(name) {
     newsletter: 'Newsletter Iscritti',
     agenda: 'Agenda Settimanale',
     emailmarketing: 'Email Marketing',
+    trend: 'Trend & Idee Articoli',
     audit: 'Audit Sito',
     impostazioni: 'Impostazioni'
   };
@@ -4932,6 +4969,7 @@ function showSection(name) {
   if (name === 'clienti') { loadClienti(); if (typeof emLoadGruppi === 'function') emLoadGruppi(); }
   if (name === 'emailmarketing') { if (typeof emLoadGruppi === 'function') emLoadGruppi(); if (typeof emPopulateContentPickers === 'function') emPopulateContentPickers(); }
   if (name === 'nuovo') populateProprietarioDropdown();
+  if (name === 'trend') initTrendSection();
   if (name === 'audit') initAuditSection();
   if (name === 'impostazioni') { testConn(); check2FAStatus(); }
 }
@@ -10814,8 +10852,8 @@ function renderAnalyticsChart(data) {
     ctx.fillStyle = '#8a7a6a';
     ctx.font = '14px Montserrat, sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('Aggiungi almeno 2 snapshot per vedere il grafico trend', W/2, H/2);
-    ctx.fillText('Usa il pulsante "+ Nuovo Snapshot" per registrare i dati periodicamente', W/2, H/2 + 24);
+    ctx.fillText('Servono almeno 2 snapshot per il grafico trend', W/2, H/2);
+    ctx.fillText('I dati si aggiornano automaticamente ogni settimana', W/2, H/2 + 24);
     return;
   }
 
@@ -13113,6 +13151,411 @@ showSection = function(name) {
 })();
 
 // ══════════════════════════════════════
+// TREND & IDEE — Scraper articoli immobiliari trending
+// ══════════════════════════════════════
+const TREND_QUERIES = {
+  'mercato-padova': 'mercato immobiliare Padova 2026 prezzi case',
+  'mutui-tassi': 'mutui casa tassi interesse 2026 Italia',
+  'bonus-agevolazioni': 'bonus casa agevolazioni fiscali 2026',
+  'case-green': 'direttiva case green efficienza energetica Italia 2026',
+  'affitto-studenti': 'affitto studenti universitari Padova 2026',
+  'investimento': 'investimento immobiliare Italia rendimento 2026',
+  'ristrutturazioni': 'ristrutturazione casa bonus superbonus 2026',
+  'normative': 'tasse immobiliari normative vendita casa 2026'
+};
+
+const TREND_SOURCES = [
+  { name: 'Idealista News', url: 'https://www.idealista.it/news/', icon: '🏠' },
+  { name: 'Immobiliare.it', url: 'https://www.immobiliare.it/news/', icon: '🏡' },
+  { name: 'Il Sole 24 Ore', url: 'https://www.ilsole24ore.com/sez/notizie/casa', icon: '📰' },
+  { name: 'ANSA Economia', url: 'https://www.ansa.it/sito/notizie/economia/', icon: '📡' },
+  { name: 'Agenzia Entrate', url: 'https://www.agenziaentrate.gov.it/', icon: '🏛️' },
+  { name: 'FIAIP', url: 'https://www.fiaip.it/', icon: '📊' }
+];
+
+let _savedTrendIdeas = JSON.parse(localStorage.getItem('rig_trend_ideas') || '[]');
+
+function generateTrendSuggestions(cat) {
+  var suggestions = {
+    'mercato-padova': [
+      { title: 'Prezzi case Padova: analisi quartiere per quartiere 2026', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Padova vs Verona vs Vicenza: dove conviene comprare nel 2026', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Quartieri emergenti Padova: dove i prezzi saliranno nei prossimi 3 anni', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Mercato immobiliare Padova: impatto del nuovo tram sulle valutazioni', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Affitto vs acquisto a Padova: la guida definitiva con i numeri 2026', source: 'Suggerimento IA', date: '', link: '' }
+    ],
+    'mutui-tassi': [
+      { title: 'Tassi mutuo 2026: fisso vs variabile, quale scegliere adesso', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Mutuo under 36 Padova: requisiti aggiornati e banche convenzionate', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Surroga mutuo 2026: quando conviene davvero cambiare banca', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Quanto mutuo puoi permetterti a Padova con uno stipendio medio', source: 'Suggerimento IA', date: '', link: '' }
+    ],
+    'bonus-agevolazioni': [
+      { title: 'Bonus casa 2026: tutte le agevolazioni ancora attive', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Prima casa under 36: cosa cambia nel 2026', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Bonus ristrutturazione 50%: guida pratica con esempi reali', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Ecobonus e sismabonus 2026: guida completa per Padova', source: 'Suggerimento IA', date: '', link: '' }
+    ],
+    'case-green': [
+      { title: 'Classe energetica obbligatoria 2030: cosa fare adesso a Padova', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Quanto costa portare una casa da G a D a Padova: costi reali', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Case green Padova: impatto sui prezzi per quartiere', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Cappotto termico a Padova: costi, tempi e risparmio energetico reale', source: 'Suggerimento IA', date: '', link: '' }
+    ],
+    'affitto-studenti': [
+      { title: 'Affitto studenti Padova 2026: prezzi per quartiere e rendimento', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Investire in un appartamento per studenti a Padova: guida completa', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Contratto transitorio vs cedolare secca: cosa conviene a Padova', source: 'Suggerimento IA', date: '', link: '' }
+    ],
+    'investimento': [
+      { title: 'ROI immobiliare Padova 2026: i quartieri con rendimento > 6%', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Comprare casa per affittarla a Padova: guida passo passo', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Immobili commerciali Padova: opportunita' e rischi 2026', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Nuda proprieta' a Padova: un investimento sottovalutato', source: 'Suggerimento IA', date: '', link: '' }
+    ],
+    'ristrutturazioni': [
+      { title: 'Ristrutturare casa a Padova: costi medi 2026 per tipo di intervento', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Permessi edilizi a Padova: quando serve la CILA, SCIA o permesso', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Ristrutturazione chiavi in mano: come scegliere l impresa a Padova', source: 'Suggerimento IA', date: '', link: '' }
+    ],
+    'normative': [
+      { title: 'Tasse vendita casa 2026: plusvalenza, IMU, notaio — guida completa', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Successione immobiliare Padova: costi, tempi e documenti necessari', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'Donazione immobile: rischi nascosti che pochi conoscono', source: 'Suggerimento IA', date: '', link: '' },
+      { title: 'APE obbligatorio: quando serve e quanto costa a Padova', source: 'Suggerimento IA', date: '', link: '' }
+    ]
+  };
+  return suggestions[cat] || [];
+}
+
+function renderTrendResults(results, cat) {
+  var html = '<div style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap">';
+  TREND_SOURCES.forEach(function(s) {
+    html += '<a href="' + s.url + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:var(--sfondo);border:1px solid var(--caffe3);border-radius:6px;font-size:.72rem;color:var(--testo);text-decoration:none">' + s.icon + ' ' + s.name + '</a>';
+  });
+  html += '</div>';
+
+  if (results.length === 0) {
+    html += '<p style="color:var(--rosso)">Nessun risultato trovato. Prova un\'altra categoria.</p>';
+  } else {
+    results.forEach(function(r, i) {
+      var isSaved = _savedTrendIdeas.some(function(s) { return s.title === r.title; });
+      html += '<div style="border-left:3px solid ' + (r.source === 'Suggerimento IA' ? '#667eea' : 'var(--verde)') + ';padding:8px 14px;margin-bottom:8px;background:rgba(0,0,0,.02);border-radius:0 8px 8px 0;display:flex;justify-content:space-between;align-items:flex-start;gap:12px">';
+      html += '<div>';
+      if (r.link) {
+        html += '<a href="' + r.link + '" target="_blank" rel="noopener" style="color:var(--testo);font-weight:600;text-decoration:none">' + r.title + '</a>';
+      } else {
+        html += '<strong>' + r.title + '</strong>';
+      }
+      html += '<br><small style="color:var(--caffe2)">' + r.source;
+      if (r.date) {
+        var d = new Date(r.date);
+        html += ' — ' + d.toLocaleDateString('it-IT');
+      }
+      html += '</small></div>';
+      if (!isSaved) {
+        html += '<button onclick="saveTrendIdea(' + i + ',\'' + cat + '\')" style="padding:4px 10px;border:1px solid var(--verde);background:transparent;color:var(--verde);border-radius:6px;font-size:.72rem;cursor:pointer;white-space:nowrap">+ Salva</button>';
+      } else {
+        html += '<span style="color:var(--verde);font-size:.72rem">Salvato</span>';
+      }
+      html += '</div>';
+    });
+  }
+
+  document.getElementById('trend-list').innerHTML = html;
+}
+
+var _lastTrendResults = [];
+
+// Override to save results for save function
+var _origSearchTrends = searchTrends;
+searchTrends = async function() {
+  var btn = document.getElementById('btnTrend');
+  btn.textContent = 'Ricerca in corso...';
+  btn.disabled = true;
+
+  var cat = document.getElementById('trendCategory').value;
+  var query = TREND_QUERIES[cat];
+
+  document.getElementById('trend-results').style.display = 'block';
+  document.getElementById('trend-list').innerHTML = '<p style="color:var(--caffe2)">Ricerca in corso per: <strong>' + query + '</strong></p>';
+
+  var results = [];
+  try {
+    var rssUrl = 'https://news.google.com/rss/search?q=' + encodeURIComponent(query) + '&hl=it&gl=IT&ceid=IT:it';
+    var proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(rssUrl);
+    var resp = await fetch(proxyUrl, { signal: AbortSignal.timeout(8000) });
+    if (resp.ok) {
+      var xml = await resp.text();
+      var parser = new DOMParser();
+      var doc = parser.parseFromString(xml, 'text/xml');
+      var items = doc.querySelectorAll('item');
+      items.forEach(function(item, i) {
+        if (i >= 15) return;
+        var title = (item.querySelector('title') || {}).textContent || '';
+        var link = (item.querySelector('link') || {}).textContent || '';
+        var pubDate = (item.querySelector('pubDate') || {}).textContent || '';
+        var source = (item.querySelector('source') || {}).textContent || '';
+        if (title) results.push({ title: title, link: link, date: pubDate, source: source });
+      });
+    }
+  } catch(e) {}
+
+  if (results.length === 0) results = generateTrendSuggestions(cat);
+  _lastTrendResults = results;
+  renderTrendResults(results, cat);
+  btn.textContent = 'Cerca Trend';
+  btn.disabled = false;
+};
+
+function saveTrendIdea(index, cat) {
+  var item = _lastTrendResults[index];
+  if (!item) return;
+  item.category = cat;
+  item.savedAt = new Date().toISOString();
+  _savedTrendIdeas.push(item);
+  localStorage.setItem('rig_trend_ideas', JSON.stringify(_savedTrendIdeas));
+  // Re-render
+  renderTrendResults(_lastTrendResults, cat);
+  renderSavedIdeas();
+  showToast('Idea salvata!', 'success');
+}
+
+function renderSavedIdeas() {
+  if (_savedTrendIdeas.length === 0) {
+    document.getElementById('trend-saved-wrap').style.display = 'none';
+    return;
+  }
+  document.getElementById('trend-saved-wrap').style.display = 'block';
+  var html = '';
+  _savedTrendIdeas.forEach(function(s, i) {
+    html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 12px;margin-bottom:6px;background:rgba(0,0,0,.02);border-radius:6px;border-left:3px solid var(--oro)">';
+    html += '<div><strong>' + s.title + '</strong><br><small style="color:var(--caffe2)">' + (s.category || '') + ' — ' + (s.source || '') + '</small></div>';
+    html += '<button onclick="removeTrendIdea(' + i + ')" style="padding:2px 8px;border:1px solid var(--rosso);background:transparent;color:var(--rosso);border-radius:4px;font-size:.7rem;cursor:pointer">x</button>';
+    html += '</div>';
+  });
+  document.getElementById('trend-saved-list').innerHTML = html;
+}
+
+function removeTrendIdea(index) {
+  _savedTrendIdeas.splice(index, 1);
+  localStorage.setItem('rig_trend_ideas', JSON.stringify(_savedTrendIdeas));
+  renderSavedIdeas();
+}
+
+function initTrendSection() {
+  renderSavedIdeas();
+}
+
+// ══════════════════════════════════════
+// SCRAPING ARTICOLO — Cerca trend + genera bozza + anteprima
+// ══════════════════════════════════════
+function openScrapingArticolo() {
+  var cats = Object.keys(TREND_QUERIES).map(function(k) {
+    var labels = {
+      'mercato-padova':'Mercato Padova','mutui-tassi':'Mutui e Tassi','bonus-agevolazioni':'Bonus Casa',
+      'case-green':'Case Green','affitto-studenti':'Affitto Studenti','investimento':'Investimento',
+      'ristrutturazioni':'Ristrutturazioni','normative':'Normative e Tasse'
+    };
+    return '<option value="'+k+'">'+(labels[k]||k)+'</option>';
+  }).join('');
+
+  var html = '<div style="max-width:700px;max-height:85vh;overflow-y:auto">' +
+    '<h3 style="font-family:Cormorant Garamond,serif;font-size:1.3rem;margin-bottom:6px">Scraping Articolo</h3>' +
+    '<p style="font-size:.78rem;color:var(--caffe2);margin-bottom:20px">Cerca un topic trending, scegli l\'argomento e genera una bozza completa con anteprima.</p>' +
+
+    '<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">' +
+    '<select id="scrape-cat" style="padding:10px 14px;border:1px solid var(--caffe3);border-radius:8px;font-size:.85rem;flex:1;min-width:180px">'+cats+'</select>' +
+    '<button class="btn btn-primary btn-sm" onclick="scrapeSearchTopics()" id="btnScrapeSearch">Cerca Topic</button>' +
+    '</div>' +
+
+    '<div id="scrape-topics" style="display:none;margin-bottom:16px"></div>' +
+
+    '<div id="scrape-custom" style="margin-bottom:16px">' +
+    '<label style="font-size:.78rem;color:var(--caffe)">Oppure inserisci un titolo personalizzato:</label>' +
+    '<div style="display:flex;gap:8px;margin-top:6px">' +
+    '<input type="text" id="scrape-custom-title" placeholder="Es: Bonus prima casa under 36 Padova 2026" style="flex:1;padding:10px 14px;border:1px solid var(--caffe3);border-radius:8px;font-size:.85rem">' +
+    '<button class="btn btn-sm" onclick="scrapeGenerateFromCustom()" style="background:#667eea;color:#fff;border:none;white-space:nowrap">Genera Bozza</button>' +
+    '</div></div>' +
+
+    '<div id="scrape-preview" style="display:none"></div>' +
+
+    '<div style="display:flex;gap:12px;margin-top:16px">' +
+    '<button class="btn btn-secondary btn-sm" onclick="document.getElementById(\'scrape-modal\').remove()">Chiudi</button>' +
+    '</div></div>';
+
+  var modal = document.createElement('div');
+  modal.id = 'scrape-modal';
+  modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+  modal.innerHTML = '<div style="background:#fff;border-radius:16px;padding:28px;width:100%;max-width:740px;max-height:90vh;overflow-y:auto">'+html+'</div>';
+  document.body.appendChild(modal);
+  modal.addEventListener('click', function(e) { if (e.target === modal) modal.remove(); });
+}
+
+var _scrapeTopicResults = [];
+
+async function scrapeSearchTopics() {
+  var btn = document.getElementById('btnScrapeSearch');
+  btn.textContent = 'Cerco...';
+  btn.disabled = true;
+
+  var cat = document.getElementById('scrape-cat').value;
+  var query = TREND_QUERIES[cat];
+  var results = [];
+
+  try {
+    var rssUrl = 'https://news.google.com/rss/search?q=' + encodeURIComponent(query) + '&hl=it&gl=IT&ceid=IT:it';
+    var proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(rssUrl);
+    var resp = await fetch(proxyUrl, { signal: AbortSignal.timeout(8000) });
+    if (resp.ok) {
+      var xml = await resp.text();
+      var doc = new DOMParser().parseFromString(xml, 'text/xml');
+      doc.querySelectorAll('item').forEach(function(item, i) {
+        if (i >= 10) return;
+        var t = (item.querySelector('title')||{}).textContent||'';
+        var l = (item.querySelector('link')||{}).textContent||'';
+        var s = (item.querySelector('source')||{}).textContent||'';
+        if (t) results.push({ title: t, link: l, source: s });
+      });
+    }
+  } catch(e) {}
+
+  if (results.length === 0) {
+    results = generateTrendSuggestions(cat).slice(0, 8);
+  }
+
+  _scrapeTopicResults = results;
+  var wrap = document.getElementById('scrape-topics');
+  wrap.style.display = 'block';
+  var h = '<p style="font-size:.78rem;font-weight:600;margin-bottom:8px">Scegli un topic (clicca per generare la bozza):</p>';
+  results.forEach(function(r, i) {
+    h += '<div onclick="scrapeSelectTopic('+i+')" style="padding:8px 12px;margin-bottom:4px;background:rgba(0,0,0,.02);border-radius:6px;cursor:pointer;border-left:3px solid #667eea;font-size:.82rem" onmouseover="this.style.background=\'rgba(102,126,234,.1)\'" onmouseout="this.style.background=\'rgba(0,0,0,.02)\'">';
+    h += '<strong>' + r.title + '</strong>';
+    if (r.source) h += ' <small style="color:var(--caffe2)">— ' + r.source + '</small>';
+    h += '</div>';
+  });
+  wrap.innerHTML = h;
+
+  btn.textContent = 'Cerca Topic';
+  btn.disabled = false;
+}
+
+function scrapeSelectTopic(idx) {
+  var topic = _scrapeTopicResults[idx];
+  if (!topic) return;
+  scrapeGenerateDraft(topic.title, topic.link);
+}
+
+function scrapeGenerateFromCustom() {
+  var title = document.getElementById('scrape-custom-title').value.trim();
+  if (!title) { showToast('Inserisci un titolo', 'error'); return; }
+  scrapeGenerateDraft(title, '');
+}
+
+function scrapeGenerateDraft(topicTitle, sourceUrl) {
+  var preview = document.getElementById('scrape-preview');
+  preview.style.display = 'block';
+
+  // Generate slug from title
+  var slug = 'blog-' + topicTitle.toLowerCase()
+    .replace(/[àáâã]/g,'a').replace(/[èéêë]/g,'e').replace(/[ìíîï]/g,'i')
+    .replace(/[òóôõ]/g,'o').replace(/[ùúûü]/g,'u')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').substring(0, 60);
+
+  // Generate meta description
+  var metaDesc = topicTitle + '. Guida completa per Padova e provincia con dati aggiornati 2026. Righetto Immobiliare.';
+  if (metaDesc.length > 155) metaDesc = metaDesc.substring(0, 152) + '...';
+
+  // Generate article structure
+  var now = new Date();
+  var dateStr = now.toISOString().slice(0,10);
+
+  var draft = {
+    titolo: topicTitle,
+    slug: slug,
+    categoria: document.getElementById('scrape-cat').value.replace('-',' '),
+    meta_description: metaDesc,
+    data: dateStr,
+    fonte: sourceUrl,
+    sezioni: [
+      { h2: topicTitle, contenuto: '[Introduzione: 60-80 parole con frase dichiarativa + dato numerico specifico]' },
+      { h2: 'Cosa Sapere nel 2026', contenuto: '[Contesto normativo/mercato con fonti: Agenzia Entrate, OMI, FIAIP]' },
+      { h2: 'Situazione a Padova e Provincia', contenuto: '[Dati locali: prezzi/mq per zona, trend, confronto con media regionale]' },
+      { h2: 'Guida Pratica: Come Procedere', contenuto: '[Passi concreti, documenti necessari, tempistiche, costi stimati]' },
+      { h2: 'Vantaggi e Rischi da Considerare', contenuto: '[Tabella pro/contro o lista strutturata con dati verificabili]' },
+      { h2: 'Domande Frequenti (FAQ)', contenuto: '[Min 5 FAQ in formato People Also Ask — domanda -> risposta diretta 40-60 parole]' }
+    ],
+    schema: 'Article + FAQPage + BreadcrumbList',
+    stato: 'bozza'
+  };
+
+  var h = '<div style="border:2px solid #667eea;border-radius:12px;padding:20px;background:#f8f9ff">' +
+    '<h4 style="color:#667eea;margin-bottom:12px">Anteprima Bozza Articolo</h4>' +
+    '<div style="display:grid;grid-template-columns:120px 1fr;gap:6px 12px;font-size:.82rem">' +
+    '<strong>Titolo:</strong><span>' + draft.titolo + '</span>' +
+    '<strong>Slug:</strong><span>' + draft.slug + '</span>' +
+    '<strong>Categoria:</strong><span>' + draft.categoria + '</span>' +
+    '<strong>Data:</strong><span>' + draft.data + '</span>' +
+    '<strong>Meta desc:</strong><span style="color:var(--caffe2)">' + draft.meta_description + ' (' + draft.meta_description.length + ' char)</span>' +
+    '<strong>Schema:</strong><span>' + draft.schema + '</span>' +
+    (draft.fonte ? '<strong>Fonte:</strong><span><a href="'+draft.fonte+'" target="_blank" style="color:#667eea">Link originale</a></span>' : '') +
+    '</div>' +
+
+    '<div style="margin-top:16px">' +
+    '<strong style="font-size:.82rem">Struttura articolo:</strong>';
+
+  draft.sezioni.forEach(function(s) {
+    h += '<div style="margin-top:8px;padding:8px 12px;background:#fff;border-radius:6px;border-left:3px solid var(--oro);font-size:.8rem">' +
+      '<strong>H2: ' + s.h2 + '</strong><br>' +
+      '<span style="color:var(--caffe2)">' + s.contenuto + '</span></div>';
+  });
+
+  h += '</div>' +
+    '<div style="display:flex;gap:12px;margin-top:20px">' +
+    '<button class="btn btn-primary btn-sm" onclick="scrapeConfirmDraft(\'' + encodeURIComponent(JSON.stringify(draft)) + '\')">Salva come Bozza</button>' +
+    '<button class="btn btn-secondary btn-sm" onclick="document.getElementById(\'scrape-preview\').style.display=\'none\'">Annulla</button>' +
+    '</div></div>';
+
+  preview.innerHTML = h;
+}
+
+async function scrapeConfirmDraft(encodedDraft) {
+  var draft = JSON.parse(decodeURIComponent(encodedDraft));
+
+  // Save to Supabase as blog draft
+  try {
+    var { data, error } = await sb.from('blog_articles').insert({
+      titolo: draft.titolo,
+      slug: draft.slug,
+      categoria: draft.categoria,
+      meta_description: draft.meta_description,
+      data_pubblicazione: draft.data,
+      contenuto: JSON.stringify(draft.sezioni),
+      stato: 'bozza',
+      fonte_originale: draft.fonte || null
+    });
+
+    if (error) {
+      // If table doesn't exist, save to localStorage as fallback
+      var drafts = JSON.parse(localStorage.getItem('rig_blog_drafts') || '[]');
+      drafts.push(draft);
+      localStorage.setItem('rig_blog_drafts', JSON.stringify(drafts));
+      showToast('Bozza salvata localmente (tabella blog_articles non trovata in Supabase)', 'warning');
+    } else {
+      showToast('Bozza salvata in Supabase!', 'success');
+    }
+  } catch(e) {
+    var drafts = JSON.parse(localStorage.getItem('rig_blog_drafts') || '[]');
+    drafts.push(draft);
+    localStorage.setItem('rig_blog_drafts', JSON.stringify(drafts));
+    showToast('Bozza salvata localmente', 'success');
+  }
+
+  document.getElementById('scrape-modal').remove();
+  loadBlogList();
+}
+
+// ══════════════════════════════════════
 // AUDIT SITO — Auto-audit settimanale con storico Supabase
 // ══════════════════════════════════════
 var AUDIT_PAGES = [
@@ -13272,10 +13715,8 @@ async function saveAuditSnapshot(totOk, totWarn, totErr, total, details) {
   } catch(e) { /* silent fail */ }
 }
 
-async function runAudit(manual) {
-  var btn = document.getElementById('btnAudit');
-  btn.textContent = 'Audit in corso...';
-  btn.disabled = true;
+async function runAudit() {
+  document.getElementById('auditLastRun').innerHTML = '<span style="color:var(--verde)">Audit in corso...</span>';
   document.getElementById('audit-result').style.display = 'block';
   document.getElementById('audit-summary').innerHTML = '<p style="color:var(--verde)">Analisi pagine in corso...</p>';
   document.getElementById('audit-detail').innerHTML = '';
@@ -13409,10 +13850,7 @@ async function runAudit(manual) {
   });
 
   document.getElementById('audit-detail').innerHTML = detailHtml;
-  btn.textContent = 'Avvia Audit Completo';
-  btn.disabled = false;
-
-  if (manual) showToast('Audit completato: ' + totOk + ' OK, ' + totWarn + ' warning, ' + totErr + ' errori', totErr > 0 ? 'error' : 'success');
+  showToast('Audit completato: ' + totOk + ' OK, ' + totWarn + ' warning, ' + totErr + ' errori', totErr > 0 ? 'error' : 'success');
 }
 
 function copyAudit() {
@@ -13432,7 +13870,7 @@ function copyAudit() {
 async function initAuditSection() {
   var hist = await loadAuditHistory();
   if (hist.needsRun) {
-    await runAudit(false);
+    await runAudit();
   }
 }
 </script>
