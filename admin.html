@@ -13472,22 +13472,14 @@ function copyAudit() {
 let _trendSavedIdeas = JSON.parse(localStorage.getItem('trend_ideas') || '[]');
 
 // Helper: fetch via CORS proxy con fallback multiplo
-async function fetchViaProxy(url) {
-  const proxies = [
-    u => 'https://corsproxy.io/?' + encodeURIComponent(u),
-    u => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),
-    u => 'https://proxy.cors.sh/' + u,
-    u => 'https://corsproxy.org/?' + encodeURIComponent(u)
-  ];
-  let lastErr;
-  for (const mkProxy of proxies) {
-    try {
-      const resp = await fetch(mkProxy(url), { signal: AbortSignal.timeout(8000) });
-      if (!resp.ok) throw new Error('HTTP ' + resp.status);
-      return await resp.text();
-    } catch(e) { lastErr = e; }
-  }
-  throw new Error('Tutti i proxy CORS non disponibili. Ultimo errore: ' + (lastErr?.message || 'sconosciuto'));
+async function fetchGoogleNewsJSON(query) {
+  const rssUrl = 'https://news.google.com/rss/search?q=' + encodeURIComponent(query) + '&hl=it&gl=IT&ceid=IT:it';
+  const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl);
+  const resp = await fetch(apiUrl, { signal: AbortSignal.timeout(12000) });
+  if (!resp.ok) throw new Error('HTTP ' + resp.status);
+  const data = await resp.json();
+  if (data.status !== 'ok' || !data.items || !data.items.length) throw new Error('Nessun risultato trovato');
+  return data.items;
 }
 
 function initTrendSection() {
@@ -13497,21 +13489,16 @@ function initTrendSection() {
 async function searchTrends() {
   const cat = document.getElementById('trendCategoria').value;
   const wrap = document.getElementById('trendResults');
-  wrap.innerHTML = '<p style="color:var(--caffe2);font-size:0.85rem;">Ricerca in corso (provo piu\' fonti)...</p>';
+  wrap.innerHTML = '<p style="color:var(--caffe2);font-size:0.85rem;">Ricerca in corso...</p>';
   try {
-    const rssUrl = 'https://news.google.com/rss/search?q=' + encodeURIComponent(cat + ' italia') + '&hl=it&gl=IT&ceid=IT:it';
-    const txt = await fetchViaProxy(rssUrl);
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(txt, 'text/xml');
-    const items = xml.querySelectorAll('item');
-    if (!items.length) { wrap.innerHTML = '<p style="color:var(--caffe2);">Nessun risultato trovato. Prova un\'altra categoria.</p>'; return; }
+    const items = await fetchGoogleNewsJSON(cat + ' italia');
     let html = '<div style="display:flex;flex-direction:column;gap:12px;">';
     items.forEach((item, i) => {
       if (i >= 10) return;
-      const title = item.querySelector('title')?.textContent || '';
-      const link = item.querySelector('link')?.textContent || '';
-      const pubDate = item.querySelector('pubDate')?.textContent || '';
-      const source = item.querySelector('source')?.textContent || '';
+      const title = item.title || '';
+      const link = item.link || '';
+      const pubDate = item.pubDate || '';
+      const source = item.author || '';
       const dateStr = pubDate ? new Date(pubDate).toLocaleDateString('it-IT') : '';
       html += '<div style="background:var(--sfondo);border:1px solid var(--caffe3);border-radius:10px;padding:14px;">';
       html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">';
@@ -13627,20 +13614,15 @@ function openScrapingArticolo(prefilledTopic) {
 async function scraSearchTopic() {
   const cat = document.getElementById('scraCat').value;
   const wrap = document.getElementById('scraTopicResults');
-  wrap.innerHTML = '<p style="color:var(--caffe2);font-size:0.82rem;">Ricerca in corso (provo piu\' fonti)...</p>';
+  wrap.innerHTML = '<p style="color:var(--caffe2);font-size:0.82rem;">Ricerca in corso...</p>';
   try {
-    const rssUrl = 'https://news.google.com/rss/search?q=' + encodeURIComponent(cat) + '&hl=it&gl=IT&ceid=IT:it';
-    const txt = await fetchViaProxy(rssUrl);
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(txt, 'text/xml');
-    const items = xml.querySelectorAll('item');
-    if (!items.length) { wrap.innerHTML = '<p style="color:var(--caffe2);">Nessun risultato.</p>'; return; }
+    const items = await fetchGoogleNewsJSON(cat);
     let html = '<p style="font-size:0.78rem;color:var(--caffe2);margin-bottom:8px;">Clicca su un topic per usarlo come base:</p>';
     html += '<div style="display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto;">';
     items.forEach((item, i) => {
       if (i >= 8) return;
-      const title = item.querySelector('title')?.textContent || '';
-      const source = item.querySelector('source')?.textContent || '';
+      const title = item.title || '';
+      const source = item.author || '';
       html += '<div onclick="document.getElementById(\'scraCustomTopic\').value=\'' + title.replace(/'/g, "\\'").replace(/"/g, '&quot;') + '\'" style="cursor:pointer;padding:8px 12px;background:#fff;border:1px solid var(--caffe3);border-radius:8px;font-size:0.82rem;transition:all 0.2s;" onmouseover="this.style.borderColor=\'#6C63FF\'" onmouseout="this.style.borderColor=\'var(--caffe3)\'">';
       html += '<strong>' + title + '</strong>';
       if (source) html += ' <span style="color:var(--caffe2);font-size:0.72rem;">— ' + source + '</span>';
