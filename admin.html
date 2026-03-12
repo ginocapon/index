@@ -13586,6 +13586,7 @@ function startScrapingFromTrend(title) {
 // SCRAPING ARTICOLO — Modal completo (3 step)
 // ══════════════════════════════════════
 function openScrapingArticolo(prefilledTopic) {
+  _scraBlogFotos = [];
   let existing = document.getElementById('scrapingArticoloModal');
   if (existing) existing.remove();
 
@@ -13635,12 +13636,27 @@ function openScrapingArticolo(prefilledTopic) {
           <span style="background:#6C63FF;color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;">2</span>
           <span style="background:var(--caffe3);color:var(--caffe2);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;">3</span>
         </div>
-        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:12px;">Aggiungi foto all'articolo</label>
+        <label style="font-weight:600;font-size:0.85rem;display:block;margin-bottom:12px;">Aggiungi foto all\'articolo</label>
+
+        <!-- Upload diretto foto blog -->
+        <div style="background:var(--sfondo);border:2px dashed var(--caffe3);border-radius:10px;padding:18px;margin-bottom:14px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;" id="scraBlogDropZone" ondragover="event.preventDefault();this.style.borderColor=\'#6C63FF\';this.style.background=\'rgba(108,99,255,0.05)\'" ondragleave="this.style.borderColor=\'var(--caffe3)\';this.style.background=\'var(--sfondo)\'" ondrop="event.preventDefault();this.style.borderColor=\'var(--caffe3)\';this.style.background=\'var(--sfondo)\';scraBlogHandleFiles(event.dataTransfer.files)" onclick="document.getElementById(\'scraBlogFileInput\').click()">
+          <div style="font-size:1.5rem;margin-bottom:4px;">📸</div>
+          <div style="font-weight:600;font-size:0.82rem;">Clicca o trascina qui le foto</div>
+          <div style="font-size:0.7rem;color:var(--caffe2);margin-top:2px;">JPG, PNG, WEBP — max 10MB per foto. La prima = hero, le altre = inline</div>
+          <input type="file" id="scraBlogFileInput" multiple accept="image/jpeg,image/png,image/webp" style="display:none" onchange="scraBlogHandleFiles(this.files)">
+        </div>
+        <!-- Progress bar upload -->
+        <div id="scraBlogUploadProgress" style="display:none;align-items:center;gap:8px;margin-bottom:10px;">
+          <div style="flex:1;height:6px;background:var(--caffe3);border-radius:3px;overflow:hidden;"><div id="scraBlogUploadFill" style="width:0%;height:100%;background:linear-gradient(90deg,#6C63FF,#00E5A0);transition:width .3s;border-radius:3px;"></div></div>
+          <span id="scraBlogUploadText" style="font-size:0.72rem;color:var(--caffe2);white-space:nowrap;">Caricamento...</span>
+        </div>
+        <!-- Griglia anteprime foto caricate -->
+        <div id="scraBlogFotoList" style="margin-bottom:14px;"></div>
 
         <!-- Foto copertina -->
         <div style="background:var(--sfondo);border:1px solid var(--caffe3);border-radius:10px;padding:14px;margin-bottom:14px;">
           <label style="font-weight:600;font-size:0.82rem;display:block;margin-bottom:6px;">Foto Copertina (hero)</label>
-          <p style="font-size:0.72rem;color:var(--caffe2);margin-bottom:8px;">Incolla un URL tuo oppure cerca una foto royalty-free su Unsplash.</p>
+          <p style="font-size:0.72rem;color:var(--caffe2);margin-bottom:8px;">Compilato automaticamente dall\'upload, oppure incolla un URL o cerca su Unsplash.</p>
           <input type="text" id="scraHeroImg" placeholder="https://immagine-tua.jpg oppure cerca sotto" style="width:100%;padding:8px;border:1px solid var(--caffe3);border-radius:8px;font-size:0.82rem;margin-bottom:6px;" onchange="scraPreviewHero()">
           <div style="display:flex;gap:6px;margin-bottom:6px;">
             <input type="text" id="scraUnsplashQuery" placeholder="Cerca su Unsplash: es. casa padova, real estate..." style="flex:1;padding:7px;border:1px solid var(--caffe3);border-radius:8px;font-size:0.8rem;">
@@ -13653,7 +13669,7 @@ function openScrapingArticolo(prefilledTopic) {
         <!-- Foto inline -->
         <div style="background:var(--sfondo);border:1px solid var(--caffe3);border-radius:10px;padding:14px;margin-bottom:14px;">
           <label style="font-weight:600;font-size:0.82rem;display:block;margin-bottom:6px;">Foto nel testo (max 3)</label>
-          <p style="font-size:0.72rem;color:var(--caffe2);margin-bottom:8px;">Verranno distribuite tra le sezioni. Incolla URL tuoi o cerca su Unsplash.</p>
+          <p style="font-size:0.72rem;color:var(--caffe2);margin-bottom:8px;">Compilate automaticamente dall\'upload, oppure incolla URL o cerca su Unsplash.</p>
           <div style="display:flex;flex-direction:column;gap:6px;">
             <div style="display:flex;gap:6px;align-items:center;">
               <span style="font-size:.72rem;font-weight:600;min-width:50px;">Foto 1</span>
@@ -13675,7 +13691,7 @@ function openScrapingArticolo(prefilledTopic) {
         </div>
 
         <div style="display:flex;gap:10px;justify-content:space-between;">
-          <button class="btn btn-sm" onclick="document.getElementById('scraStep1').style.display='';document.getElementById('scraStep2Photos').style.display='none';" style="background:var(--caffe3);color:var(--caffe);border:none;border-radius:8px;padding:8px 16px;">← Indietro</button>
+          <button class="btn btn-sm" onclick="document.getElementById(\'scraStep1\').style.display=\'\';document.getElementById(\'scraStep2Photos\').style.display=\'none\';" style="background:var(--caffe3);color:var(--caffe);border:none;border-radius:8px;padding:8px 16px;">← Indietro</button>
           <button class="btn btn-primary" onclick="scraGenerateDraft()" style="background:linear-gradient(135deg,#6C63FF,#00E5A0);border:none;">Genera Bozza con Foto →</button>
         </div>
       </div>
@@ -13769,6 +13785,100 @@ async function scraSearchUnsplash(target) {
   });
   html += '<p style="font-size:.65rem;color:var(--caffe2);width:100%;margin-top:4px;">Foto royalty-free da Unsplash — clicca per selezionare</p>';
   wrap.innerHTML = html;
+}
+
+// ── Upload foto blog su Supabase Storage ──
+var _scraBlogFotos = [];
+
+async function scraBlogHandleFiles(files) {
+  var arr = Array.from(files);
+  if (!arr.length) return;
+
+  var progWrap = document.getElementById('scraBlogUploadProgress');
+  var progFill = document.getElementById('scraBlogUploadFill');
+  var progText = document.getElementById('scraBlogUploadText');
+  progWrap.style.display = 'flex';
+  var done = 0;
+
+  for (var i = 0; i < arr.length; i++) {
+    var file = arr[i];
+    if (file.size > 10 * 1024 * 1024) {
+      toast('⚠️ ' + file.name + ' supera 10MB', 'error');
+      continue;
+    }
+
+    progText.textContent = 'Caricamento ' + (done + 1) + '/' + arr.length + ': ' + file.name;
+    progFill.style.width = Math.round((done / arr.length) * 100) + '%';
+
+    var ts = Date.now();
+    var safeName = 'blog/' + ts + '-' + slugify(file.name);
+
+    try {
+      var res = await sb.storage.from('foto-immobili').upload(safeName, file, {
+        cacheControl: '3600',
+        upsert: false,
+        contentType: file.type
+      });
+
+      if (res.error) {
+        toast('❌ Errore upload: ' + file.name + ' — ' + res.error.message, 'error');
+      } else {
+        var urlRes = sb.storage.from('foto-immobili').getPublicUrl(safeName);
+        var publicUrl = urlRes.data.publicUrl;
+        _scraBlogFotos.push(publicUrl);
+        scraBlogDistribuisciFoto();
+        toast('✅ ' + file.name + ' caricato!', 'success');
+      }
+    } catch (err) {
+      toast('❌ Errore: ' + err.message, 'error');
+    }
+
+    done++;
+    progFill.style.width = Math.round((done / arr.length) * 100) + '%';
+  }
+
+  progText.textContent = '✅ ' + done + ' file caricati';
+  setTimeout(function() { progWrap.style.display = 'none'; }, 2000);
+}
+
+function scraBlogDistribuisciFoto() {
+  // Prima foto = hero, le successive = inline 1, 2, 3
+  if (_scraBlogFotos.length >= 1) {
+    document.getElementById('scraHeroImg').value = _scraBlogFotos[0];
+    scraPreviewHero();
+  }
+  if (_scraBlogFotos.length >= 2) document.getElementById('scraInlineImg1').value = _scraBlogFotos[1];
+  if (_scraBlogFotos.length >= 3) document.getElementById('scraInlineImg2').value = _scraBlogFotos[2];
+  if (_scraBlogFotos.length >= 4) document.getElementById('scraInlineImg3').value = _scraBlogFotos[3];
+
+  // Renderizza griglia anteprime
+  scraBlogRenderFotos();
+}
+
+function scraBlogRenderFotos() {
+  var el = document.getElementById('scraBlogFotoList');
+  if (!_scraBlogFotos.length) { el.innerHTML = ''; return; }
+  var html = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:6px;">';
+  for (var i = 0; i < _scraBlogFotos.length; i++) {
+    var label = i === 0 ? '⭐ Hero' : 'Inline ' + i;
+    html += '<div style="height:80px;border-radius:8px;overflow:hidden;background:url(\'' + _scraBlogFotos[i] + '\') center/cover no-repeat #ccc;position:relative;border:2px solid ' + (i === 0 ? '#6C63FF' : '#ddd') + '">';
+    html += '<button onclick="scraBlogRemoveFoto(' + i + ')" style="position:absolute;top:2px;right:2px;background:rgba(220,50,50,0.9);color:#fff;border:none;border-radius:50%;width:20px;height:20px;cursor:pointer;font-size:10px;line-height:20px;text-align:center;padding:0;">✕</button>';
+    html += '<span style="position:absolute;bottom:2px;left:2px;background:rgba(0,0,0,0.7);color:#fff;font-size:8px;padding:1px 4px;border-radius:3px;">' + label + '</span>';
+    html += '</div>';
+  }
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function scraBlogRemoveFoto(idx) {
+  _scraBlogFotos.splice(idx, 1);
+  // Resetta i campi e ridistribuisci
+  document.getElementById('scraHeroImg').value = '';
+  document.getElementById('scraInlineImg1').value = '';
+  document.getElementById('scraInlineImg2').value = '';
+  document.getElementById('scraInlineImg3').value = '';
+  document.getElementById('scraHeroPreview').innerHTML = '';
+  scraBlogDistribuisciFoto();
 }
 
 // Genera titolo originale (mai copiare dalla fonte)
