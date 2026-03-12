@@ -118,6 +118,28 @@
     .author-bio-text p{font-size:.82rem;line-height:1.5;color:#555;margin:0}
     @media(max-width:600px){.author-bio{flex-direction:column;align-items:center;text-align:center}}
 
+    /* FAQ */
+    .faq-section{margin-top:2.5rem}
+    .faq-section h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--nero);margin-bottom:1.2rem;padding-bottom:.4rem;border-bottom:2px solid var(--oro)}
+    .faq-item{border:1px solid var(--gc);border-radius:8px;margin-bottom:.6rem;overflow:hidden;transition:box-shadow .2s}
+    .faq-item:hover{box-shadow:0 2px 12px rgba(0,0,0,.06)}
+    .faq-q{padding:1rem 1.2rem;font-weight:600;font-size:.88rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff;transition:background .2s}
+    .faq-q:hover{background:var(--sfondo)}
+    .faq-q::after{content:'+';font-size:1.3rem;color:var(--oro);font-weight:300;transition:transform .3s;flex-shrink:0;margin-left:1rem}
+    .faq-item.open .faq-q::after{transform:rotate(45deg)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;background:var(--sfondo)}
+    .faq-a-inner{padding:0 1.2rem 1rem;font-size:.86rem;line-height:1.8;color:var(--grigio)}
+    .faq-item.open .faq-a{max-height:500px}
+
+    /* CTA BANNER */
+    .cta-banner{background:linear-gradient(135deg,var(--nero) 0%,var(--blu) 100%);border-radius:14px;padding:2rem 2.5rem;margin:2.5rem 0;display:flex;align-items:center;gap:2rem;flex-wrap:wrap}
+    .cta-banner-text{flex:1;min-width:260px}
+    .cta-banner h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#fff;margin-bottom:.5rem}
+    .cta-banner p{font-size:.84rem;color:rgba(255,255,255,.55);line-height:1.7}
+    .cta-banner-btn{background:var(--oro);color:var(--nero);padding:.7rem 1.8rem;border-radius:8px;font-size:.85rem;font-weight:700;transition:all .2s;white-space:nowrap;text-decoration:none;display:inline-block}
+    .cta-banner-btn:hover{background:var(--oro2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(184,212,74,.3)}
+    @media(max-width:768px){.cta-banner{padding:1.5rem;flex-direction:column;text-align:center}}
+
   </style>
 </head>
 <body>
@@ -189,24 +211,75 @@ function renderArticle(art, articles) {
     .filter(a => a.id !== art.id && a.stato === 'pubblicato' && a.categoria === art.categoria)
     .slice(0, 2);
 
-  wrap.innerHTML = `
-    <div class="art-hero">
-      <div class="art-hero-inner">
-        <div class="breadcrumb"><a href="/">Home</a> / <a href="blog">Blog</a> / ${esc(art.titolo)}</div>
-        <span class="cat-badge">${esc(art.categoria)}</span>
-        <h1>${esc(art.titolo)}</h1>
-        <div class="art-hero-meta">
-          <div class="av">${(art.autore || 'G')[0]}</div>
-          <span>${esc(art.autore)}</span>
-          <span>&middot;</span>
-          <span>${fmtDate(art.data)}</span>
-          <span>&middot;</span>
-          <span>${art.tempo || 5} min di lettura</span>
+  // Hero con immagine se disponibile
+  var heroHtml = '';
+  if (art.immagine_copertina) {
+    heroHtml = `
+      <div class="art-hero" style="position:relative;padding:0;">
+        <img src="${art.immagine_copertina}" alt="${esc(art.titolo)}" style="width:100%;height:480px;object-fit:cover;display:block;filter:brightness(.4)">
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:3rem 1.5rem 2.5rem;background:linear-gradient(transparent,rgba(21,36,53,.95) 40%)">
+          <div class="art-hero-inner">
+            <div class="breadcrumb"><a href="/">Home</a> / <a href="blog">Blog</a> / ${esc(art.titolo)}</div>
+            <span class="cat-badge">${esc(art.categoria)}</span>
+            <h1>${esc(art.titolo)}</h1>
+            <div class="art-hero-meta">
+              <div class="av">${(art.autore || 'G')[0]}</div>
+              <span>${esc(art.autore)}</span><span>&middot;</span>
+              <span>${fmtDate(art.data)}</span><span>&middot;</span>
+              <span>${art.tempo || 5} min di lettura</span>
+            </div>
+            ${art.immagine_credit ? '<div style="font-size:.65rem;color:rgba(255,255,255,.35);margin-top:.5rem;">Foto: ' + esc(art.immagine_credit) + ' — Unsplash</div>' : ''}
+          </div>
         </div>
+      </div>`;
+  } else {
+    heroHtml = `
+      <div class="art-hero">
+        <div class="art-hero-inner">
+          <div class="breadcrumb"><a href="/">Home</a> / <a href="blog">Blog</a> / ${esc(art.titolo)}</div>
+          <span class="cat-badge">${esc(art.categoria)}</span>
+          <h1>${esc(art.titolo)}</h1>
+          <div class="art-hero-meta">
+            <div class="av">${(art.autore || 'G')[0]}</div>
+            <span>${esc(art.autore)}</span><span>&middot;</span>
+            <span>${fmtDate(art.data)}</span><span>&middot;</span>
+            <span>${art.tempo || 5} min di lettura</span>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  // FAQ section se presenti
+  var faqHtml = '';
+  try {
+    var faqData = typeof art.faq === 'string' ? JSON.parse(art.faq) : art.faq;
+    if (faqData && faqData.length) {
+      faqHtml = '<div class="faq-section"><h2>Domande Frequenti</h2>';
+      faqData.forEach(function(f) {
+        faqHtml += '<div class="faq-item" onclick="this.classList.toggle(\'open\')">';
+        faqHtml += '<div class="faq-q">' + esc(f.q) + '</div>';
+        faqHtml += '<div class="faq-a"><div class="faq-a-inner">' + esc(f.a) + '</div></div>';
+        faqHtml += '</div>';
+      });
+      faqHtml += '</div>';
+    }
+  } catch(e) {}
+
+  // CTA banner
+  var ctaHtml = `
+    <div class="cta-banner">
+      <div class="cta-banner-text">
+        <h3>Hai bisogno di una consulenza?</h3>
+        <p>Contattaci per una valutazione gratuita del tuo immobile o per ricevere consigli personalizzati sul mercato di Padova.</p>
       </div>
-    </div>
+      <a href="/contatti" class="cta-banner-btn">Contattaci</a>
+    </div>`;
+
+  wrap.innerHTML = heroHtml + `
     <div class="art-container">
       <div class="art-content">${art.contenuto}</div>
+      ${faqHtml}
+      ${ctaHtml}
       <div class="share-bar">
         <span>Condividi:</span>
         <button class="share-btn" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copiato!'">Copia link</button>
