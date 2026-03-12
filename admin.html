@@ -4665,7 +4665,7 @@ function checkAuth() {
 }
 
 function grantAccess() {
-  sessionStorage.setItem('rig_admin', 'ok');
+  sessionStorage.setItem('rig_admin', 'success');
   document.getElementById('loginOverlay').style.display = 'none';
   document.getElementById('appWrapper').style.display = 'flex';
   init().catch(err => {
@@ -12497,7 +12497,7 @@ showSection = function(name) {
       });
       const result = await resp.json();
       if (result.status === 'sent') {
-        emLogMsg('Test inviato con successo a ' + testEmail, 'ok');
+        emLogMsg('Test inviato con successo a ' + testEmail, 'success');
         toast('Email di test inviata!', 'success');
       } else {
         throw new Error(result.error || 'Errore Edge Function: ' + JSON.stringify(result));
@@ -12576,7 +12576,7 @@ showSection = function(name) {
 
     for (let i = 0; i < total; i++) {
       if (emStopped) {
-        emLogMsg('Invio fermato dall\'utente dopo ' + sent + ' email', 'warn');
+        emLogMsg('Invio fermato dall\'utente dopo ' + sent + ' email', 'error');
         break;
       }
 
@@ -12592,7 +12592,7 @@ showSection = function(name) {
       // Salta se in blacklist
       if (emBlacklist.has(c.email.toLowerCase())) {
         skipped++;
-        emLogMsg('SKIP (disiscritto) → ' + c.email, 'warn');
+        emLogMsg('SKIP (disiscritto) → ' + c.email, 'error');
         continue;
       }
 
@@ -12627,20 +12627,20 @@ showSection = function(name) {
         if (result.status === 'sent') {
           // ok
         } else if (result.status === 'rate_limited') {
-          emLogMsg('RATE LIMIT raggiunto — pausa 5 minuti...', 'warn');
+          emLogMsg('RATE LIMIT raggiunto — pausa 5 minuti...', 'error');
           await new Promise(r => setTimeout(r, 300000));
           i--; // Riprova
           continue;
         } else if (result.status === 'skipped') {
           skipped++;
-          emLogMsg('SKIP (blacklist) → ' + c.email, 'warn');
+          emLogMsg('SKIP (blacklist) → ' + c.email, 'error');
           continue;
         } else {
           throw new Error(result.error || 'Errore invio');
         }
 
         sent++;
-        emLogMsg('OK → ' + c.email + (nome !== 'Cliente' ? ' (' + nome + ')' : ''), 'ok');
+        emLogMsg('OK → ' + c.email + (nome !== 'Cliente' ? ' (' + nome + ')' : ''), 'success');
 
         // Registra in coda_email
         if (campagnaId) {
@@ -12662,7 +12662,7 @@ showSection = function(name) {
         // Se bounce permanente, aggiungi a blacklist locale
         if (errMsg.includes('550') || errMsg.includes('User unknown') || errMsg.includes('does not exist')) {
           emBlacklist.add(c.email.toLowerCase());
-          emLogMsg('  → Aggiunto a blacklist (bounce permanente)', 'warn');
+          emLogMsg('  → Aggiunto a blacklist (bounce permanente)', 'error');
           try {
             await sb.from('email_blacklist').upsert({email: c.email.toLowerCase(), motivo: 'bounce'});
           } catch(e) {}
@@ -12701,7 +12701,7 @@ showSection = function(name) {
 
   window.emStop = function() {
     emStopped = true;
-    emLogMsg('Stop richiesto — completamento batch in corso...', 'warn');
+    emLogMsg('Stop richiesto — completamento batch in corso...', 'error');
   };
 
   // ═══ PULIZIA LISTA (rimuovi bounce/unsub) ═══
@@ -13450,7 +13450,7 @@ async function runAudit(manual) {
   btn.textContent = 'Avvia Audit Completo';
   btn.disabled = false;
 
-  if (manual) showToast('Audit completato: ' + totOk + ' OK, ' + totWarn + ' warning, ' + totErr + ' errori', totErr > 0 ? 'error' : 'success');
+  if (manual) toast('Audit completato: ' + totOk + ' OK, ' + totWarn + ' warning, ' + totErr + ' errori', totErr > 0 ? 'error' : 'success');
 }
 
 function copyAudit() {
@@ -13462,7 +13462,7 @@ function copyAudit() {
   text += '\n--- Suggerimenti per SKILL-UNIFICATA.md ---\n';
   text += 'Copia questo report e usalo come input per aggiornare la sezione 9 (Azioni Tecniche) della SKILL.\n';
   navigator.clipboard.writeText(text).then(function() {
-    showToast('Report audit copiato negli appunti!', 'success');
+    toast('Report audit copiato negli appunti!', 'success');
   });
 }
 
@@ -13520,11 +13520,11 @@ async function searchTrends() {
 }
 
 function saveTrendIdea(title) {
-  if (_trendSavedIdeas.find(i => i.title === title)) { showToast('Idea gia\' salvata', 'warn'); return; }
+  if (_trendSavedIdeas.find(i => i.title === title)) { toast('Idea gia\' salvata', 'error'); return; }
   _trendSavedIdeas.unshift({ title: title, date: new Date().toISOString().slice(0,10) });
   localStorage.setItem('trend_ideas', JSON.stringify(_trendSavedIdeas));
   renderSavedIdeas();
-  showToast('Idea salvata!', 'ok');
+  toast('Idea salvata!', 'success');
 }
 
 function renderSavedIdeas() {
@@ -13639,7 +13639,7 @@ let _scraDraftData = null;
 
 function scraGenerateDraft() {
   const topic = document.getElementById('scraCustomTopic').value.trim();
-  if (!topic) { showToast('Inserisci un topic o selezionane uno dalla ricerca', 'warn'); return; }
+  if (!topic) { toast('Inserisci un topic o selezionane uno dalla ricerca', 'error'); return; }
 
   // Genera slug dal topic
   const slug = 'blog-' + topic.toLowerCase()
@@ -13759,7 +13759,7 @@ async function scraConfirmSave() {
       localStorage.setItem('rig_blog_articles', JSON.stringify(existing));
     } catch(ex) {}
   }
-  showToast('Bozza articolo salvata!', 'ok');
+  toast('Bozza articolo salvata!', 'success');
   var modal = document.getElementById('scrapingArticoloModal');
   if (modal) modal.remove();
   _scraDraftData = null;
