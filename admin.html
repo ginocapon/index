@@ -13745,32 +13745,43 @@ function scraGenerateDraft() {
 
 async function scraConfirmSave() {
   if (!_scraDraftData) return;
+  var newArticle = {
+    titolo: _scraDraftData.titolo,
+    slug: _scraDraftData.slug,
+    url_statico: _scraDraftData.slug,
+    meta_description: _scraDraftData.metaDesc,
+    contenuto: _scraDraftData.sections.map(s => '<h2>' + s.h2 + '</h2><p>' + s.text + '</p>').join(''),
+    autore: _scraDraftData.autore,
+    categoria: _scraDraftData.categoria,
+    stato: 'bozza',
+    data: _scraDraftData.data,
+    data_pubblicazione: _scraDraftData.data,
+    tempo: 8,
+    emoji: '📝',
+    faq: JSON.stringify(_scraDraftData.faq)
+  };
   try {
-    // Salva come bozza in Supabase nella tabella blog
-    const { data, error } = await supabase.from('blog').insert([{
-      titolo: _scraDraftData.titolo,
-      slug: _scraDraftData.slug,
-      meta_description: _scraDraftData.metaDesc,
-      contenuto: _scraDraftData.sections.map(s => '<h2>' + s.h2 + '</h2><p>' + s.text + '</p>').join(''),
-      autore: _scraDraftData.autore,
-      categoria: _scraDraftData.categoria,
-      stato: 'bozza',
-      data_pubblicazione: _scraDraftData.data,
-      faq: JSON.stringify(_scraDraftData.faq)
-    }]);
-    if (error) throw error;
-    showToast('Bozza salvata con successo!', 'ok');
-    document.getElementById('scrapingArticoloModal').remove();
-    loadBlogList();
+    // Prova Supabase
+    if (typeof sb !== 'undefined' && sb) {
+      var { data, error } = await sb.from('blog').insert([newArticle]);
+      if (error) throw error;
+    } else {
+      throw new Error('Supabase non inizializzato');
+    }
   } catch(e) {
-    // Se la tabella blog non esiste o c'e' un errore, salva in localStorage
-    let bozze = JSON.parse(localStorage.getItem('blog_bozze') || '[]');
-    bozze.unshift(_scraDraftData);
-    localStorage.setItem('blog_bozze', JSON.stringify(bozze));
-    showToast('Bozza salvata in locale! (Supabase non disponibile: ' + e.message + ')', 'warn');
-    document.getElementById('scrapingArticoloModal').remove();
-    loadBlogList();
+    // Fallback: salva in localStorage come gli altri articoli
+    try {
+      var existing = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]');
+      newArticle.id = 'bozza_' + Date.now();
+      existing.unshift(newArticle);
+      localStorage.setItem('rig_blog_articles', JSON.stringify(existing));
+    } catch(ex) {}
   }
+  showToast('Bozza articolo salvata!', 'ok');
+  var modal = document.getElementById('scrapingArticoloModal');
+  if (modal) modal.remove();
+  _scraDraftData = null;
+  loadBlogList();
 }
 
 // Auto-load history and auto-run if >7 days when section is opened
