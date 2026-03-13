@@ -693,12 +693,17 @@ let chatOpen = false;
 let chatInitDone = false;
 
 // ══ RISOLVI URL IMMAGINI SUPABASE ══
-function resolveImageUrl(url) {
+function resolveImageUrl(url, opts) {
   if (!url || typeof url !== 'string') return '';
   url = url.trim();
   if (!url) return '';
   if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) return url;
-  return SUPABASE_URL + '/storage/v1/object/public/' + url.replace(/^\/+/, '');
+  var path = url.replace(/^\/+/, '');
+  if (opts && opts.width) {
+    var q = opts.quality || 75;
+    return SUPABASE_URL + '/storage/v1/render/image/public/' + path + '?width=' + opts.width + '&quality=' + q + '&resize=contain';
+  }
+  return SUPABASE_URL + '/storage/v1/object/public/' + path;
 }
 
 // ══ SEO SLUG ══
@@ -851,8 +856,11 @@ function render(d) {
   document.getElementById('bc-rif').textContent = d.codice ? 'Rif. ' + d.codice : '';
 
   // Gallery
-  lbFotos = Array.isArray(d.foto) ? d.foto.filter(Boolean).map(resolveImageUrl) : [];
-  renderGallery(d, lbFotos);
+  lbFotos = Array.isArray(d.foto) ? d.foto.filter(Boolean).map(function(u){return resolveImageUrl(u);}) : [];
+  var galleryFotos = Array.isArray(d.foto) ? d.foto.filter(Boolean).map(function(u,i){
+    return i === 0 ? resolveImageUrl(u, {width: 1200, quality: 80}) : resolveImageUrl(u, {width: 300, quality: 70});
+  }) : [];
+  renderGallery(d, galleryFotos);
 
   // Hero badges
   const badges = [];
@@ -990,6 +998,8 @@ function renderGallery(d, fotos) {
     const img = document.createElement('img');
     img.src = fotos[0];
     img.alt = d.titolo || '';
+    img.width = 1200;
+    img.height = 800;
     img.onerror = function() { this.style.display = 'none'; };
     main.insertBefore(img, main.firstChild);
     count.textContent = fotos.length + ' foto';
