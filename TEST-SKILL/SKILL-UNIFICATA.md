@@ -1,7 +1,7 @@
 # SKILL UNIFICATA — Righetto Immobiliare
 ## Prompt Operativo Master Consolidato
 
-> **Versione:** 2.4 — 12 Marzo 2026
+> **Versione:** 2.5 — 13 Marzo 2026
 > **Unica fonte di verita'** — SERP-STRATEGY.md e SKILL-KILLER.md sono stati eliminati, tutto e' qui.
 > **Ultimo aggiornamento Google verificato:** 8 Marzo 2026
 > **Prossima verifica consigliata:** Aprile 2026
@@ -749,10 +749,12 @@ js/scroll-reveal.js                 - Animazioni scroll
 - [ ] Bollino "Verificato Righetto" — brand quality sugli annunci
 
 ### 9.3 Ottimizzazioni Performance
+- [x] **Supabase Image Transforms** — 13 Marzo 2026: `resolveImageUrl()` in `homepage.js`, `immobile.html`, `immobili.html` ora usa `/storage/v1/render/image/public/` con parametri `width` e `quality` per ridimensionare le immagini al volo. Risparmio stimato: ~2300 KiB (~85%) sulle immagini Supabase. Dimensioni: card homepage/listing width=600 q=75, gallery hero width=1200 q=80, thumbnails width=300 q=70, lightbox full-size originale.
 - [ ] LCP sotto 2 secondi su tutte le pagine (nuovo target competitivo)
 - [ ] Verificare SVT — nessun caricamento "scattoso" (font swap, image pop-in)
 - [ ] Verificare Engagement Reliability — form, bottoni, menu funzionano su tutti i device
 - [ ] Page Experience consistency — tutte le pagine devono avere performance simile
+- [ ] **Cache headers GitHub Pages** — il TTL di 10 minuti sulle risorse proprietarie (fonts, CSS, JS, immagini locali) e' un limite di GitHub Pages non modificabile. Valutare Cloudflare come proxy per cache piu' aggressiva.
 
 ### 9.4 SEO Tecnico
 - [ ] **Contenuti unici vs portali** — le descrizioni immobili su Idealista/Immobiliare.it DEVONO essere diverse da quelle sul sito (rischio duplicate content e deindexing)
@@ -903,6 +905,13 @@ js/scroll-reveal.js                 - Animazioni scroll
 - **Fix bozze locali → Supabase:** le bozze con id `bozza_*` ora fanno INSERT (non UPDATE) su Supabase alla pubblicazione, evitando la perdita dell'articolo
 - **Slug e meta_description** aggiunti al payload di saveBlogArticle (mancavano)
 - **REGOLA IMPORTANTE:** gli articoli creati dallo scraping usano il template dinamico `blog-articolo.html`, non file HTML statici. Solo gli articoli nel seed `_blogSeedArticles` hanno file fisici dedicati
+
+### v2.3 - 13 Marzo 2026 (Ottimizzazione immagini Supabase — -85% payload)
+- **Supabase Image Transforms:** `resolveImageUrl()` aggiornata in `homepage.js`, `immobile.html`, `immobili.html` per usare endpoint `/storage/v1/render/image/public/` con parametri `width`, `quality`, `resize=contain`
+- **Dimensioni ottimizzate per contesto:** card homepage/listing width=600 q=75, gallery hero width=1200 q=80, thumbnails width=300 q=70, lightbox full-size originale
+- **Width/height espliciti** aggiunti su tutte le immagini dinamiche per ridurre CLS
+- **Risparmio stimato:** ~2300 KiB (~85%) sulle immagini Supabase (da ~2737 KiB a ~400 KiB)
+- **Nota cache GitHub Pages:** TTL 10 min non modificabile senza CDN esterno — documentato in TODO
 
 ### v2.2 - 12 Marzo 2026 (Scraping Articolo v2: anti-plagio, immagini, bozze visibili)
 - **Contenuto 100% originale:** titoli rielaborati con 4 template randomizzati, 6 sezioni H2 con prospettiva Righetto, zone Padova randomizzate, 4 FAQ originali — il topic della fonte e' solo ispirazione, mai copiato
