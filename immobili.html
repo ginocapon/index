@@ -721,12 +721,17 @@
   let currentOp = 'vendita';
 
   // ── RISOLVI URL IMMAGINI SUPABASE ──
-  function resolveImageUrl(url) {
+  function resolveImageUrl(url, opts) {
     if (!url || typeof url !== 'string') return '';
     url = url.trim();
     if (!url) return '';
     if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) return url;
-    return SUPABASE_URL + '/storage/v1/object/public/' + url.replace(/^\/+/, '');
+    var path = url.replace(/^\/+/, '');
+    if (opts && opts.width) {
+      var q = opts.quality || 75;
+      return SUPABASE_URL + '/storage/v1/render/image/public/' + path + '?width=' + opts.width + '&quality=' + q + '&resize=contain';
+    }
+    return SUPABASE_URL + '/storage/v1/object/public/' + path;
   }
 
   // ── COLORI CLASSE ENERGETICA ──
@@ -787,8 +792,8 @@
         garage: !!(i.garage || i.garage_num),
         vt: !!i.virtual_tour,
         yt: !!i.youtube_id,
-        foto: (Array.isArray(i.foto) ? i.foto : []).map(resolveImageUrl).filter(Boolean),
-        fotoPrincipale: resolveImageUrl(i.foto_principale || (i.foto_urls&&i.foto_urls[0]) || ''),
+        foto: (Array.isArray(i.foto) ? i.foto : []).map(function(u){return resolveImageUrl(u, {width: 600, quality: 75});}).filter(Boolean),
+        fotoPrincipale: resolveImageUrl(i.foto_principale || (i.foto_urls&&i.foto_urls[0]) || '', {width: 600, quality: 75}),
         evidenza: !!i.in_evidenza,
         venduto: !!i.venduto,
         affittato: !!i.affittato,
@@ -821,7 +826,7 @@
       const fotoUrl = i.fotoPrincipale || (i.foto.length > 0 ? i.foto[0] : '');
       const fotoCount = i.foto.length;
       const imgHtml = fotoUrl
-        ? '<img src="'+fotoUrl+'" alt="'+i.titolo.replace(/"/g,'&quot;')+'" style="width:100%;height:100%;object-fit:cover;" loading="lazy" onerror="this.parentElement.innerHTML=\''+SVG_PLACEHOLDER.replace(/'/g,"\\'")+'\'">'
+        ? '<img src="'+fotoUrl+'" alt="'+i.titolo.replace(/"/g,'&quot;')+'" width="600" height="400" style="width:100%;height:100%;object-fit:cover;" loading="lazy" onerror="this.parentElement.innerHTML=\''+SVG_PLACEHOLDER.replace(/'/g,"\\'")+'\'">'
         : '<div class="card-img-ph">'+SVG_PLACEHOLDER+'</div>';
       const opLabel = i.op.startsWith('affitto') ? 'Affitto' : i.op === 'asta' ? 'Asta' : 'Vendita';
       const opClass = i.op.startsWith('affitto') ? 'cb-affitto' : i.op === 'asta' ? 'cb-aste' : 'cb-vendita';

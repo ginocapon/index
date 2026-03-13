@@ -66,7 +66,7 @@ const rvObs = new IntersectionObserver(entries=>{
 document.querySelectorAll('.rv').forEach(el=>rvObs.observe(el));
 
 /* ══ RISOLVI URL IMMAGINI SUPABASE ══ */
-function resolveImageUrl(url) {
+function resolveImageUrl(url, opts) {
   if (!url || typeof url !== 'string') return '';
   url = url.trim();
   if (!url) return '';
@@ -74,8 +74,13 @@ function resolveImageUrl(url) {
   if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) return url;
   // Percorso locale (img/, css/, fonts/) → lascia così com'è
   if (url.startsWith('img/') || url.startsWith('./') || url.startsWith('css/') || url.startsWith('fonts/')) return url;
-  // Percorso relativo Supabase Storage → costruisci URL pubblico
-  return SB_URL + '/storage/v1/object/public/' + url.replace(/^\/+/, '');
+  // Percorso relativo Supabase Storage → costruisci URL con transform se richiesto
+  const path = url.replace(/^\/+/, '');
+  if (opts && opts.width) {
+    const q = opts.quality || 75;
+    return SB_URL + '/storage/v1/render/image/public/' + path + '?width=' + opts.width + '&quality=' + q + '&resize=contain';
+  }
+  return SB_URL + '/storage/v1/object/public/' + path;
 }
 
 /* ══ SEO SLUG PER IMMOBILI ══ */
@@ -133,9 +138,9 @@ function renderProps(arr){
       ? `€ ${p.prezzo?.toLocaleString('it-IT')}/mese`
       : `€ ${p.prezzo?.toLocaleString('it-IT')}`;
     const rawImg = p.foto_principale || (p.foto_urls&&p.foto_urls[0]) || (p.foto&&p.foto[0]) || '';
-    const imgUrl = resolveImageUrl(rawImg);
+    const imgUrl = resolveImageUrl(rawImg, {width: 600, quality: 75});
     const imgTag = imgUrl
-      ? `<img src="${imgUrl}" alt="${p.titolo||'Immobile'}" loading="lazy" onerror="this.parentNode.innerHTML='<div class=pi-ph>🏠</div>'">`
+      ? `<img src="${imgUrl}" alt="${p.titolo||'Immobile'}" width="600" height="400" loading="lazy" onerror="this.parentNode.innerHTML='<div class=pi-ph>🏠</div>'">`
       : `<div class="pi-ph">🏠</div>`;
     const propSlug = generatePropertySlug(p);
     return `<a href="immobile?s=${encodeURIComponent(propSlug)}" class="pc">
