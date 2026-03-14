@@ -358,7 +358,19 @@ function generateSlug(titolo) {
     'servizi e infrastrutture nelle zone di padova — guida interattiva': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-servizi-infrastrutture-padova' },
     'scuole e istruzione a padova per zone — guida interattiva': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-scuole-istruzione-padova' },
     'trasporti e mobilita\' a padova per zone — guida interattiva': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-trasporti-mobilita-padova' },
-    'direttiva case green ue 2024: cosa cambia per le case a limena e padova': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-direttiva-case-green-limena-padova' }
+    'direttiva case green ue 2024: cosa cambia per le case a limena e padova': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-direttiva-case-green-limena-padova' },
+    'vendere casa a padova nel 2026: 7 strategie per massimizzare il prezzo': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-vendita-immobiliare-padova-strategie-2026' },
+    'compravendite padova 2026: l\'anno record con 800.000 transazioni in italia': { img: 'img/foto-servizi/gestione-preliminari-padova.webp', url: 'blog-compravendite-padova-record-2026' },
+    'prezzi case padova 2026 zona per zona: mappa completa e previsioni': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-prezzi-case-padova-zona-2026' },
+    'affitti padova 2026: canoni in crescita del +8%, zone e previsioni': { img: 'img/foto-servizi/contratti-di-locazione-padova.webp', url: 'blog-affitti-padova-canoni-2026' },
+    'affitto breve a padova 2026: rendimenti, regole e opportunita\'': { img: 'img/foto-servizi/gestioni-immobili-padova.webp', url: 'blog-affitto-breve-padova-2026' },
+    'affitti padova: perche\' la domanda supera l\'offerta nel 2026': { img: 'img/foto-servizi/attivazione-utenze-e-servizi-padova.webp', url: 'blog-squilibrio-domanda-offerta-affitti-padova' },
+    'crisi immobiliare 2026: cosa succede a padova tra prezzi e compravendite': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-crisi-immobiliare-padova-2026' },
+    'bolla immobiliare a padova nel 2026? analisi dei rischi reali': { img: 'img/foto-servizi/gestione-preliminari-padova.webp', url: 'blog-bolla-immobiliare-padova-2026' },
+    'emergenza casa padova 2026: dati, cause e possibili soluzioni': { img: 'img/foto-servizi/attivazione-utenze-e-servizi-padova.webp', url: 'blog-emergenza-abitativa-padova-2026' },
+    'mutui casa a padova 2026: tassi aggiornati e migliori offerte': { img: 'img/foto-servizi/gestione-preliminari-padova.webp', url: 'blog-mutui-casa-padova-2026' },
+    'surroga mutuo 2026: quando conviene e come risparmiare a padova': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-surroga-mutuo-padova-2026' },
+    'mutuo tasso fisso o variabile nel 2026? guida alla scelta a padova': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-mutuo-fisso-variabile-padova-2026' }
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
@@ -386,7 +398,19 @@ function generateSlug(titolo) {
     { titolo: 'Servizi e Infrastrutture nelle Zone di Padova — Guida Interattiva', categoria: 'Mercato locale', data: '2026-03-11', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-servizi-infrastrutture-padova' },
     { titolo: 'Scuole e Istruzione a Padova per Zone — Guida Interattiva', categoria: 'Mercato locale', data: '2026-03-11', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-scuole-istruzione-padova' },
     { titolo: 'Trasporti e Mobilita\' a Padova per Zone — Guida Interattiva', categoria: 'Mercato locale', data: '2026-03-11', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-trasporti-mobilita-padova' },
-    { titolo: 'Direttiva Case Green UE 2024: Cosa Cambia per le Case a Limena e Padova', categoria: 'Normativa', data: '2026-03-11', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-direttiva-case-green-limena-padova' }
+    { titolo: 'Direttiva Case Green UE 2024: Cosa Cambia per le Case a Limena e Padova', categoria: 'Normativa', data: '2026-03-11', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-direttiva-case-green-limena-padova' },
+    { titolo: 'Vendere Casa a Padova nel 2026: 7 Strategie per Massimizzare il Prezzo', categoria: 'Guida alla vendita', data: '2026-03-14', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-vendita-immobiliare-padova-strategie-2026' },
+    { titolo: 'Compravendite Padova 2026: l\'Anno Record con 800.000 Transazioni in Italia', categoria: 'Mercato locale', data: '2026-03-14', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/gestione-preliminari-padova.webp', url_statico: 'blog-compravendite-padova-record-2026' },
+    { titolo: 'Prezzi Case Padova 2026 Zona per Zona: Mappa Completa e Previsioni', categoria: 'Mercato locale', data: '2026-03-14', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-prezzi-case-padova-zona-2026' },
+    { titolo: 'Affitti Padova 2026: Canoni in Crescita del +8%, Zone e Previsioni', categoria: 'Affitti', data: '2026-03-14', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/contratti-di-locazione-padova.webp', url_statico: 'blog-affitti-padova-canoni-2026' },
+    { titolo: 'Affitto Breve a Padova 2026: Rendimenti, Regole e Opportunita\'', categoria: 'Affitti', data: '2026-03-14', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/gestioni-immobili-padova.webp', url_statico: 'blog-affitto-breve-padova-2026' },
+    { titolo: 'Affitti Padova: Perche\' la Domanda Supera l\'Offerta nel 2026', categoria: 'Affitti', data: '2026-03-14', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/attivazione-utenze-e-servizi-padova.webp', url_statico: 'blog-squilibrio-domanda-offerta-affitti-padova' },
+    { titolo: 'Crisi Immobiliare 2026: Cosa Succede a Padova tra Prezzi e Compravendite', categoria: 'Mercato locale', data: '2026-03-14', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-crisi-immobiliare-padova-2026' },
+    { titolo: 'Bolla Immobiliare a Padova nel 2026? Analisi dei Rischi Reali', categoria: 'Mercato locale', data: '2026-03-14', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/gestione-preliminari-padova.webp', url_statico: 'blog-bolla-immobiliare-padova-2026' },
+    { titolo: 'Emergenza Casa Padova 2026: Dati, Cause e Possibili Soluzioni', categoria: 'Normativa', data: '2026-03-14', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/attivazione-utenze-e-servizi-padova.webp', url_statico: 'blog-emergenza-abitativa-padova-2026' },
+    { titolo: 'Mutui Casa a Padova 2026: Tassi Aggiornati e Migliori Offerte', categoria: 'Consigli acquisto', data: '2026-03-14', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/gestione-preliminari-padova.webp', url_statico: 'blog-mutui-casa-padova-2026' },
+    { titolo: 'Surroga Mutuo 2026: Quando Conviene e Come Risparmiare a Padova', categoria: 'Consigli acquisto', data: '2026-03-14', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-surroga-mutuo-padova-2026' },
+    { titolo: 'Mutuo Tasso Fisso o Variabile nel 2026? Guida alla Scelta a Padova', categoria: 'Consigli acquisto', data: '2026-03-14', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-mutuo-fisso-variabile-padova-2026' }
   ];
   // Carica da Supabase e merge con statici
   let articles = [];

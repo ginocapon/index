@@ -177,7 +177,7 @@ function validateBlogRegistration(file, html) {
   // Check sitemap
   try {
     const sitemap = fs.readFileSync(SITEMAP, 'utf8');
-    if (!sitemap.includes(basename)) {
+    if (!sitemap.includes(slug)) {
       error(file, `NON registrato nella sitemap.xml`);
     } else {
       ok(file, 'Registrato in sitemap.xml');
