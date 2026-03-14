@@ -180,13 +180,13 @@
 .sf-g input::placeholder{color:var(--grigio2)}
 .btn-calc{
   width:100%;padding:15px;
-  background:linear-gradient(135deg,var(--blu) 0%,var(--blu3) 100%);
-  color:white;border:3px solid rgba(0,200,150,0.55);border-radius:8px;font-weight:800;font-size:0.8rem;
+  background:var(--fire, #FF6B35);
+  color:white;border:3px solid rgba(255,107,53,0.55);border-radius:8px;font-weight:800;font-size:0.8rem;
   letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.25s;
   display:flex;align-items:center;justify-content:center;gap:10px;
-  box-shadow:0 0 14px rgba(0,200,150,0.35),0 0 28px rgba(0,180,220,0.15);
+  box-shadow:0 0 14px rgba(255,107,53,0.35),0 0 28px rgba(255,143,94,0.15);
 }
-.btn-calc:hover{background:linear-gradient(135deg,var(--testo) 0%,var(--blu) 100%);transform:translateY(-2px);border-color:rgba(0,200,150,0.75);box-shadow:0 0 20px rgba(0,200,150,0.45),0 12px 32px rgba(21,36,53,0.25)}
+.btn-calc:hover{background:var(--fire2, #FF8F5E);transform:translateY(-2px);border-color:rgba(255,107,53,0.75);box-shadow:0 0 20px rgba(255,107,53,0.45),0 12px 32px rgba(255,107,53,0.25)}
 .btn-calc svg{width:16px;height:16px}
 #stima-result{
   display:none;margin-top:20px;
@@ -301,15 +301,15 @@
 .cs-cta {
   display: inline-flex; align-items: center; gap: 9px;
   margin-top: 26px; padding: 14px 28px; align-self: flex-start;
-  background: var(--blu); color: white; border-radius: 8px;
+  background: var(--fire, #FF6B35); color: white; border-radius: 8px;
   font-weight: 800; font-size: 0.78rem;
   letter-spacing: 1px; text-transform: uppercase;
   border: none; cursor: pointer; transition: all 0.25s;
   text-decoration: none;
 }
 .cs-cta:hover {
-  background: var(--testo); transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(44,74,110,0.22);
+  background: var(--fire2, #FF8F5E); transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(255,107,53,0.35);
 }
 .cs-cta svg { width:15px; height:15px; flex-shrink:0; }
 /* Colonna foto */
@@ -633,13 +633,13 @@ footer{background:var(--testo);color:rgba(255,255,255,0.6);padding:64px 44px 28p
 .fc-group textarea { min-height: 90px; resize: vertical; }
 .btn-send {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  padding: 15px 32px; background: var(--blu); color: white;
+  padding: 15px 32px; background: var(--fire, #FF6B35); color: white;
   border: none; border-radius: 8px;
   font-family: 'Montserrat', sans-serif; font-weight: 800;
   font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase;
   cursor: pointer; transition: all 0.25s; width: 100%;
 }
-.btn-send:hover { background: var(--blu2); transform: translateY(-1px); }
+.btn-send:hover { background: var(--fire2, #FF8F5E); transform: translateY(-1px); }
 .fc-privacy {
   font-size: 0.72rem; color: var(--grigio); margin-top: 14px;
   line-height: 1.6;
