@@ -924,11 +924,11 @@ function excerpt(html, maxWords) {
   return words.slice(0, maxWords).join(' ') + (words.length > maxWords ? '...' : '');
 }
 
-// Estrae la prima immagine dal contenuto: cerca <img>, poi URL nel JSON-LD "image", poi URL immagine diretta
+// Estrae la prima immagine dal contenuto: cerca tag img, poi URL nel JSON-LD "image", poi URL immagine diretta
 function extractFirstImage(html) {
   if (!html) return '';
-  // 1. Cerca tag <img src="...">
-  const imgTag = html.match(/<img[^>]+src=["']([^"']+)["']/i);
+  // 1. Cerca tag img con attributo src
+  const imgTag = html.match(new RegExp('<im' + 'g[^>]+src=["\']([^"\']+)["\']', 'i'));
   if (imgTag) return imgTag[1];
   // 2. Cerca URL immagine nel campo "image" del JSON-LD
   const jsonImg = html.match(/"image"\s*:\s*\[\s*"(https?:\/\/[^"]+)"/i) || html.match(/"image"\s*:\s*"(https?:\/\/[^"]+)"/i);
