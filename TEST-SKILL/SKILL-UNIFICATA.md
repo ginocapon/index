@@ -653,10 +653,12 @@ js/scroll-reveal.js                 - Animazioni scroll
 - NO contenuti generici senza localizzazione
 
 **Registrazione quadrupla (gia' in sezione 1.2, ribadita):**
-1. `admin.html` → `_blogSeedArticles` (con `data_pubblicazione` YYYY-MM-DD)
+1. `admin.html` → `_blogSeedArticles` (**OBBLIGATORIO:** campo `data_pubblicazione: 'YYYY-MM-DD'`)
 2. `blog.html` → `articoliStatici`
 3. `js/homepage.js` → `staticMap` + `articoliStatici`
 4. `sitemap.xml` → URL con lastmod e priority 0.8
+
+> **ATTENZIONE — data_pubblicazione:** Senza questo campo la colonna "Pubblicazione" nell'admin mostra "—" e non e' possibile tracciare quando l'articolo e' stato pubblicato. Il validatore automatico (`validate-page.js`) blocca il commit se manca. Usare la data di pubblicazione effettiva in formato YYYY-MM-DD (es. `data_pubblicazione: '2026-03-15'`).
 
 ### 8.2 Standard Descrizioni Immobili — Testi per il Sito
 
@@ -858,10 +860,12 @@ js/scroll-reveal.js                 - Animazioni scroll
 - [ ] Dati numerici specifici (GEO)
 - [ ] Min 5 FAQ con Schema FAQPage (AEO)
 - [ ] Author bio visibile con link a pagina autore (E-E-A-T)
+- [ ] **Se landing page:** registrata in `_landingSeedPages` di admin.html con `data_pubblicazione: 'YYYY-MM-DD'`
 
 ### Per Ogni Nuovo Articolo Blog
 - [ ] Tutti i punti sopra
 - [ ] Registrato in TUTTI e 4: admin.html, blog.html, homepage.js, sitemap.xml
+- [ ] **`data_pubblicazione: 'YYYY-MM-DD'`** presente nel seed `_blogSeedArticles` di admin.html (BLOCCANTE)
 - [ ] Cross-link con zone pages e service pages correlate
 - [ ] Timestamp "Ultimo aggiornamento" visibile
 
@@ -878,6 +882,8 @@ js/scroll-reveal.js                 - Animazioni scroll
 - `node scripts/validate-page.js --staged` — valida automaticamente
 - Schema mancante = commit BLOCCATO
 - Title mancante = commit BLOCCATO
+- `data_pubblicazione` mancante nel seed admin.html = commit BLOCCATO (blog e landing)
+- Landing page non registrata in `_landingSeedPages` = WARNING
 - Meta description troppo lunga = WARNING (passa)
 
 ### Verifiche Manuali Periodiche
