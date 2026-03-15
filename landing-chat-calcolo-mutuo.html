@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MHDHHES26"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9MHDHHES26');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1B6B3A">
+<title>Calcola la Rata del Mutuo con Linda | Simulatore Gratuito | Righetto</title>
+<meta name="description" content="Calcola la rata del mutuo in chat con Linda. Rispondi a 4 domande e scopri rata, interessi e reddito minimo. Gratuito, senza registrazione. Padova e provincia.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://righettoimmobiliare.it/landing-chat-calcolo-mutuo">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calcola la Rata del Mutuo con Linda — Simulatore Gratuito">
+<meta property="og:description" content="Rispondi a 4 domande e scopri la tua rata mutuo. Gratuito e senza registrazione.">
+<meta property="og:url" content="https://righettoimmobiliare.it/landing-chat-calcolo-mutuo">
+<meta property="og:site_name" content="Righetto Immobiliare">
+<meta property="og:locale" content="it_IT">
+<meta property="og:image" content="https://righettoimmobiliare.it/img/team/real-state-linda-righetto.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calcola la Rata del Mutuo con Linda">
+<meta name="twitter:description" content="Rispondi a 4 domande e scopri la tua rata mutuo. Gratuito e senza registrazione.">
+<meta name="twitter:image" content="https://righettoimmobiliare.it/img/team/real-state-linda-righetto.webp">
+<link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/team/real-state-linda-righetto.webp" as="image" fetchpriority="high">
+<link rel="stylesheet" href="css/fonts.css">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#1B6B3A;--green2:#2A9D5C;--green-deep:#0d4a25;
+  --gold:#D4A017;--gold2:#E8B839;--mint:#00E5A0;
+  --purple:#6C63FF;--fire:#FF6B35;
+  --deep:#0A1F14;--white:#FFFFFF;--offwhite:#FAFAFA;--light:#F0F5F2;
+  --gray:#6B7280;--dark:#111827;--radius:16px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;background:var(--deep);color:var(--dark);line-height:1.7;overflow-x:hidden;min-height:100vh}
+
+/* TOPBAR */
+.topbar{background:linear-gradient(90deg,var(--green),var(--gold),var(--green));background-size:200% 200%;animation:gradShift 4s ease infinite;padding:.6rem 1rem;text-align:center;font-size:.78rem;color:#fff;font-weight:600}
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+/* HEADER */
+.chat-header{background:var(--green);padding:1rem 1.5rem;display:flex;align-items:center;gap:.8rem;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(27,107,58,.3)}
+.chat-header img{width:48px;height:48px;border-radius:50%;border:3px solid rgba(255,255,255,.3);object-fit:cover}
+.chat-header-info h2{color:#fff;font-size:1rem;font-weight:700;margin:0}
+.chat-header-info p{color:rgba(255,255,255,.7);font-size:.72rem;margin:0}
+.chat-header-status{width:10px;height:10px;background:var(--mint);border-radius:50%;animation:pulse 2s infinite;margin-left:auto;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
+
+/* CHAT CONTAINER */
+.cf-container{max-width:600px;margin:0 auto;min-height:calc(100vh - 120px);display:flex;flex-direction:column}
+
+/* PROGRESS */
+.cf-progress-wrap{background:rgba(255,255,255,.08);padding:.5rem 1rem;display:flex;align-items:center;gap:.6rem;position:relative}
+.cf-progress-bar{height:4px;background:linear-gradient(90deg,var(--green),var(--mint));border-radius:4px;transition:width .5s ease;position:absolute;bottom:0;left:0}
+.cf-progress-label{font-size:.65rem;color:rgba(255,255,255,.45);font-weight:600;letter-spacing:.05em}
+
+/* CHAT AREA */
+.cf-chat{flex:1;padding:1rem;overflow-y:auto;display:flex;flex-direction:column;gap:.6rem}
+
+/* ROWS */
+.cf-row{opacity:0;transform:translateY(20px);transition:all .4s ease}
+.cf-row.cf-visible{opacity:1;transform:translateY(0)}
+
+.cf-row-bot{display:flex;align-items:flex-start;gap:.5rem}
+.cf-row-user{display:flex;justify-content:flex-end}
+.cf-row-image{display:flex;justify-content:center;padding:.3rem 0}
+.cf-row-buttons{display:flex;justify-content:flex-end}
+.cf-row-form{width:100%}
+
+/* AVATAR */
+.cf-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--green);flex-shrink:0}
+
+/* BUBBLES */
+.cf-bubble{max-width:85%;padding:.75rem 1rem;border-radius:16px;font-size:.88rem;line-height:1.6;animation:fadeIn .3s ease}
+.cf-bubble-bot{background:rgba(255,255,255,.95);color:var(--dark);border-bottom-left-radius:4px;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.cf-bubble-bot strong{color:var(--green)}
+.cf-bubble-user{background:var(--green);color:#fff;border-bottom-right-radius:4px}
+@keyframes fadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+
+/* IMAGES */
+.cf-image{width:100%;max-width:480px;border-radius:var(--radius);box-shadow:0 8px 30px rgba(0,0,0,.2);object-fit:cover;aspect-ratio:16/9}
+
+/* BUTTONS */
+.cf-buttons{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:flex-end}
+.cf-btn{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.25);color:#fff;padding:.55rem 1.1rem;border-radius:50px;font-family:'Montserrat',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .25s;backdrop-filter:blur(4px)}
+.cf-btn:hover{background:var(--green);border-color:var(--green);transform:translateY(-2px);box-shadow:0 6px 20px rgba(27,107,58,.4)}
+.cf-btn-selected{background:var(--green)!important;border-color:var(--green)!important;color:#fff!important}
+.cf-btn-disabled{opacity:.4;pointer-events:none}
+
+/* FORM */
+.cf-form{background:rgba(255,255,255,.95);border-radius:var(--radius);padding:1.2rem;box-shadow:0 8px 30px rgba(0,0,0,.12)}
+.cf-form-group{margin-bottom:.7rem}
+.cf-form-label{display:block;font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gray);margin-bottom:.2rem;font-weight:600}
+.cf-form-input{width:100%;border:2px solid #E5E7EB;border-radius:10px;padding:.6rem .8rem;font-family:'Montserrat',sans-serif;font-size:.85rem;background:#fff;color:var(--dark);transition:border-color .2s}
+.cf-form-input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(27,107,58,.12)}
+.cf-input-error{border-color:#e53e3e!important}
+.cf-form-check{font-size:.7rem;color:var(--gray);margin:.6rem 0;display:flex;align-items:flex-start;gap:.4rem}
+.cf-form-check input{accent-color:var(--green);margin-top:.15rem;flex-shrink:0}
+.cf-form-check a{color:var(--green)}
+.cf-submit{width:100%;background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;border:none;padding:.75rem;border-radius:12px;font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .3s;margin-top:.5rem}
+.cf-submit:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(27,107,58,.4)}
+
+/* RISULTATO MUTUO */
+.cf-mutuo-result{background:linear-gradient(135deg,var(--green-deep),#0d4a25);border-radius:var(--radius);padding:1.5rem;color:#fff;text-align:center}
+.cf-mutuo-label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--green2);margin-bottom:.3rem}
+.cf-mutuo-rata{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;color:var(--gold2);line-height:1.1}
+.cf-mutuo-rata small{font-size:1rem;color:rgba(255,255,255,.5)}
+.cf-mutuo-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:1rem}
+.cf-mutuo-cell{background:rgba(255,255,255,.08);border-radius:10px;padding:.6rem;text-align:center}
+.cf-mutuo-cell-label{font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5);margin-bottom:.1rem}
+.cf-mutuo-cell-val{font-size:.9rem;font-weight:700;color:#fff}
+
+/* QR CODE RECENSIONE */
+.cf-review{background:linear-gradient(135deg,#FFF8E1,#FFFDE7);border-radius:var(--radius);padding:1.5rem;text-align:center;border:2px solid var(--gold)}
+.cf-review-stars{font-size:1.8rem;margin-bottom:.4rem;letter-spacing:3px}
+.cf-review h3{font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:.3rem}
+.cf-review p{font-size:.8rem;color:var(--gray);line-height:1.6;margin-bottom:1rem}
+.cf-review-qr{width:180px;height:180px;margin:0 auto .8rem;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.1)}
+.cf-review-link{display:inline-flex;align-items:center;gap:.4rem;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--dark);padding:.6rem 1.4rem;border-radius:10px;font-size:.82rem;font-weight:700;transition:all .3s;text-decoration:none}
+.cf-review-link:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(212,160,23,.4)}
+.cf-review-hint{font-size:.68rem;color:var(--gray);margin-top:.6rem}
+
+/* SUCCESS */
+.cf-success{text-align:center;padding:1.5rem;animation:fadeIn .5s ease}
+.cf-success h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--mint);margin-bottom:.4rem}
+.cf-success p{font-size:.85rem;color:rgba(255,255,255,.6)}
+.cf-success a{color:var(--green2);font-weight:700}
+
+/* FOOTER */
+.footer-mini{background:var(--dark);padding:1.5rem;text-align:center;font-size:.7rem;color:rgba(255,255,255,.45)}
+.footer-mini a{color:rgba(255,255,255,.5);margin:0 .5rem}.footer-mini a:hover{color:var(--green)}
+
+@media(max-width:600px){
+  .cf-bubble{max-width:90%;font-size:.84rem}
+  .cf-btn{font-size:.78rem;padding:.5rem .9rem}
+  .cf-mutuo-rata{font-size:2.2rem}
+  .cf-review-qr{width:150px;height:150px}
+}
+</style>
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "RealEstateAgent",
+      "@id": "https://righettoimmobiliare.it/#organization",
+      "name": "Righetto Immobiliare",
+      "url": "https://righettoimmobiliare.it",
+      "telephone": "+39-049-884-3484",
+      "email": "info@righettoimmobiliare.it",
+      "foundingDate": "2000",
+      "areaServed": {"@type": "AdministrativeArea", "name": "Provincia di Padova"},
+      "address": {"@type": "PostalAddress", "streetAddress": "Via Roma n.96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
+      "geo": {"@type": "GeoCoordinates", "latitude": 45.476956, "longitude": 11.845762},
+      "sameAs": [
+        "https://www.facebook.com/righettoimmobiliare",
+        "https://www.instagram.com/righettoimmobiliare",
+        "https://www.linkedin.com/company/righetto-immobiliare"
+      ]
+    },
+    {
+      "@type": "WebApplication",
+      "name": "Calcolatore Rata Mutuo Conversazionale",
+      "description": "Calcola la rata del mutuo rispondendo a 4 domande con Linda, consulente immobiliare. Gratuito e senza registrazione.",
+      "url": "https://righettoimmobiliare.it/landing-chat-calcolo-mutuo",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"},
+      "provider": {"@id": "https://righettoimmobiliare.it/#organization"}
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "Come si calcola la rata del mutuo?", "acceptedAnswer": {"@type": "Answer", "text": "La rata del mutuo si calcola con la formula francese: importo finanziato moltiplicato per il tasso mensile, diviso per (1 meno il fattore di sconto). Serve conoscere importo, tasso annuo e durata in mesi. Il nostro simulatore conversazionale fa il calcolo per te in 4 domande."}},
+        {"@type": "Question", "name": "Qual e la rata di un mutuo da 200.000 euro?", "acceptedAnswer": {"@type": "Answer", "text": "Per un mutuo di 160.000 euro (200.000 euro meno 20% di anticipo) a 25 anni con tasso fisso al 2,8%, la rata mensile e di circa 740 euro. Il calcolo varia in base a tasso e durata."}},
+        {"@type": "Question", "name": "Quanto deve essere il reddito per un mutuo?", "acceptedAnswer": {"@type": "Answer", "text": "La rata del mutuo non deve superare il 30-35% del reddito netto mensile. Per una rata di 700 euro al mese serve un reddito netto di almeno 2.000-2.330 euro mensili."}},
+        {"@type": "Question", "name": "Meglio tasso fisso o variabile nel 2026?", "acceptedAnswer": {"@type": "Answer", "text": "Nel 2026 il tasso fisso si attesta intorno al 2,5-3,5%, il variabile parte dall'Euribor + spread. Il fisso offre certezza sulla rata, il variabile puo convenire se i tassi BCE scendono."}}
+      ]
+    },
+    {"@type": "BreadcrumbList", "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://righettoimmobiliare.it/"},
+      {"@type": "ListItem", "position": 2, "name": "Calcola Rata Mutuo Chat", "item": "https://righettoimmobiliare.it/landing-chat-calcolo-mutuo"}
+    ]}
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="topbar">Calcola la rata del mutuo in chat con Linda — <strong>100% gratuito</strong></div>
+
+<div class="chat-header">
+  <img src="img/team/real-state-linda-righetto.webp" alt="Linda Righetto" width="48" height="48">
+  <div class="chat-header-info">
+    <h2>Linda</h2>
+    <p>Esperta mutui Padova - 25 anni</p>
+  </div>
+  <div class="chat-header-status"></div>
+</div>
+
+<main>
+  <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap">Calcola la Rata del Mutuo a Padova — Simulatore Conversazionale Gratuito</h1>
+  <div id="chatFlow"></div>
+</main>
+
+<footer class="footer-mini">
+  <div>&copy; 2026 Gruppo Immobiliare Righetto di Capon Gino — P.IVA 05182390285</div>
+  <div style="margin-top:.4rem"><a href="/">Sito</a><a href="/privacy">Privacy</a><a href="/cookie-policy">Cookie</a><a href="/contatti">Contatti</a></div>
+</footer>
+
+<script src="js/chat-flow.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // URL recensione Google
+  var GOOGLE_REVIEW_URL = 'https://www.google.com/maps/place/Righetto+Immobiliare';
+
+  // Tassi di mercato marzo 2026
+  var TASSI = { fisso: 2.8, variabile: 2.2, misto: 2.5 };
+
+  // Funzione formato valuta
+  function fmtEur(n) {
+    return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
+  }
+
+  // Calcolo rata mutuo (formula francese)
+  function calcolaRataMutuo(importo, tassoAnnuo, anni) {
+    var r = tassoAnnuo / 100 / 12;
+    var n = anni * 12;
+    if (r === 0) return importo / n;
+    return importo * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  }
+
+  // Genera QR code come SVG (usando API Google Charts)
+  function qrCodeUrl(text) {
+    return 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(text);
+  }
+
+  var steps = [
+    // Step 1: Saluto
+    { play: function(cf) {
+      return cf.addBubble('<strong>Ciao!</strong> Sono Linda, la tua consulente mutui a Padova.', 'bot', 300)
+        .then(function() { return cf.addBubble('Ti aiuto a calcolare la <strong>rata del mutuo</strong> in pochi passaggi. Tutto gratis, senza registrazione!', 'bot', 800); })
+        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80', 'Chiavi casa nuova mutuo Padova', 600); })
+        .then(function() { return cf.addButtons(['Iniziamo!', 'Come funziona?'], 'start'); });
+    }},
+
+    // Step 2: Prezzo immobile
+    { play: function(cf) {
+      var msg = cf.data.start === 'Come funziona?'
+        ? 'Semplice: ti faccio <strong>4 domande</strong> e in 30 secondi hai la rata del mutuo, gli interessi totali e il reddito minimo consigliato.'
+        : 'Perfetto, andiamo!';
+      return cf.addBubble(msg, 'bot', 400)
+        .then(function() { return cf.addBubble('<strong>Quanto costa l\'immobile</strong> che stai valutando?', 'bot', 600); })
+        .then(function() { return cf.addButtons([
+          '100.000 \u20ac', '150.000 \u20ac', '200.000 \u20ac',
+          '250.000 \u20ac', '300.000 \u20ac', 'Altro importo'
+        ], 'prezzo'); });
+    }},
+
+    // Step 2b: Importo personalizzato (solo se "Altro importo")
+    { play: function(cf) {
+      if (cf.data.prezzo !== 'Altro importo') {
+        // Salta questo step
+        return Promise.resolve();
+      }
+      return cf.addBubble('Nessun problema! <strong>Inserisci il prezzo</strong> dell\'immobile:', 'bot', 400)
+        .then(function() {
+          return cf.addInput([
+            { key: 'prezzo_custom', label: 'Prezzo immobile (\u20ac)', placeholder: 'Es. 180000', type: 'number' }
+          ]);
+        });
+    }},
+
+    // Step 3: Anticipo
+    { play: function(cf) {
+      return cf.addBubble('Ottimo! E <strong>quanto anticipo</strong> hai a disposizione?', 'bot', 400)
+        .then(function() { return cf.addBubble('Le banche finanziano fino all\'80%, quindi serve almeno il <strong>20% di anticipo</strong>.', 'bot', 600); })
+        .then(function() { return cf.addButtons([
+          '10%', '20%', '30%', '40%', 'Ho il Fondo Garanzia'
+        ], 'anticipo'); });
+    }},
+
+    // Step 4: Durata
+    { play: function(cf) {
+      var anticipo = cf.data.anticipo;
+      var msg = anticipo === 'Ho il Fondo Garanzia'
+        ? 'Bene, con il <strong>Fondo Garanzia Prima Casa</strong> puoi ottenere fino al 100%!'
+        : 'Perfetto, ' + anticipo + ' di anticipo.';
+      return cf.addBubble(msg, 'bot', 400)
+        .then(function() { return cf.addBubble('Per <strong>quanti anni</strong> vorresti il mutuo?', 'bot', 500); })
+        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80', 'Documenti mutuo casa', 400); })
+        .then(function() { return cf.addButtons([
+          '15 anni', '20 anni', '25 anni', '30 anni'
+        ], 'durata'); });
+    }},
+
+    // Step 5: Tipo tasso
+    { play: function(cf) {
+      return cf.addBubble('Ultima domanda! Che <strong>tipo di tasso</strong> preferisci?', 'bot', 400)
+        .then(function() { return cf.addBubble('Nel 2026 il <strong>fisso</strong> parte dal 2,5%, il <strong>variabile</strong> dall\'Euribor + spread (~2,2%).', 'bot', 600); })
+        .then(function() { return cf.addButtons([
+          'Tasso Fisso (~2,8%)',
+          'Tasso Variabile (~2,2%)',
+          'Tasso Misto (~2,5%)',
+          'Non so, consigliami'
+        ], 'tasso_tipo'); });
+    }},
+
+    // Step 6: RISULTATO + QR code recensione
+    { play: function(cf) {
+      // Calcola i valori
+      var prezzoRaw = cf.data.prezzo;
+      var prezzo;
+      if (prezzoRaw === 'Altro importo') {
+        prezzo = parseFloat(cf.data.prezzo_custom) || 200000;
+      } else {
+        prezzo = parseInt(prezzoRaw.replace(/[^\d]/g, '')) || 200000;
+      }
+
+      var anticipoPct = cf.data.anticipo === 'Ho il Fondo Garanzia' ? 0 : parseInt(cf.data.anticipo) / 100;
+      var anticipo = Math.round(prezzo * anticipoPct);
+      var importo = prezzo - anticipo;
+
+      var anni = parseInt(cf.data.durata) || 25;
+      var tassoLabel = cf.data.tasso_tipo;
+      var tasso;
+      if (tassoLabel.indexOf('Fisso') >= 0) tasso = TASSI.fisso;
+      else if (tassoLabel.indexOf('Variabile') >= 0) tasso = TASSI.variabile;
+      else if (tassoLabel.indexOf('Misto') >= 0) tasso = TASSI.misto;
+      else tasso = TASSI.fisso; // "Non so" -> consiglia fisso
+
+      var rata = calcolaRataMutuo(importo, tasso, anni);
+      var totale = rata * anni * 12;
+      var interessi = totale - importo;
+      var redditoMin = Math.round(rata / 0.30);
+
+      // Salva dati per analytics
+      cf.data.rata_calcolata = Math.round(rata);
+      cf.data.importo_mutuo = importo;
+      cf.data.tasso_usato = tasso;
+
+      // Tracking
+      if (typeof gtag === 'function') {
+        gtag('event', 'chat_calcolo_mutuo', { event_category: 'calcolo-mutuo-chat', importo: importo, rata: Math.round(rata), tasso: tasso });
+      }
+
+      var consiglioTasso = '';
+      if (tassoLabel.indexOf('Non so') >= 0) {
+        consiglioTasso = '<br><br><strong>Il mio consiglio:</strong> con i tassi di marzo 2026, il <strong>fisso al 2,8%</strong> ti da la certezza della rata costante. Ideale per dormire tranquilli!';
+      }
+
+      return cf.addBubble('Ecco il risultato del tuo calcolo!' + consiglioTasso, 'bot', 400)
+        .then(function() {
+          var resultHtml = '<div class="cf-mutuo-result">' +
+            '<div class="cf-mutuo-label">La tua rata mensile stimata</div>' +
+            '<div class="cf-mutuo-rata">' + fmtEur(Math.round(rata)) + ' <small>/mese</small></div>' +
+            '<div class="cf-mutuo-grid">' +
+              '<div class="cf-mutuo-cell"><div class="cf-mutuo-cell-label">Importo mutuo</div><div class="cf-mutuo-cell-val">' + fmtEur(importo) + '</div></div>' +
+              '<div class="cf-mutuo-cell"><div class="cf-mutuo-cell-label">Totale interessi</div><div class="cf-mutuo-cell-val">' + fmtEur(Math.round(interessi)) + '</div></div>' +
+              '<div class="cf-mutuo-cell"><div class="cf-mutuo-cell-label">Totale restituito</div><div class="cf-mutuo-cell-val">' + fmtEur(Math.round(totale)) + '</div></div>' +
+              '<div class="cf-mutuo-cell"><div class="cf-mutuo-cell-label">Reddito minimo</div><div class="cf-mutuo-cell-val">' + fmtEur(redditoMin) + '/mese</div></div>' +
+            '</div>' +
+          '</div>';
+          return cf.addBubble(resultHtml, 'bot', 600);
+        })
+        .then(function() {
+          return cf.addBubble('Questo servizio e <strong>completamente gratuito</strong>, senza registrazione e senza impegno.', 'bot', 800);
+        })
+        .then(function() {
+          return cf.addBubble('Se ti e stato utile, ci faresti un <strong>enorme favore</strong> lasciandoci una recensione su Google. Basta inquadrare il QR code col telefono!', 'bot', 800);
+        })
+        .then(function() {
+          var reviewHtml = '<div class="cf-review">' +
+            '<div class="cf-review-stars">\u2B50\u2B50\u2B50\u2B50\u2B50</div>' +
+            '<h3>Ti e piaciuto? Lasciaci una recensione!</h3>' +
+            '<p>Inquadra il QR code col telefono per aprire direttamente Google e lasciare la tua recensione.</p>' +
+            '<img src="' + qrCodeUrl(GOOGLE_REVIEW_URL) + '" alt="QR Code recensione Google Righetto Immobiliare" class="cf-review-qr" width="180" height="180">' +
+            '<br><a href="' + GOOGLE_REVIEW_URL + '" target="_blank" rel="noopener" class="cf-review-link">\u2B50 Recensione su Google</a>' +
+            '<p class="cf-review-hint">Oppure clicca il pulsante se sei gia dal telefono</p>' +
+          '</div>';
+          return cf.addBubble(reviewHtml, 'bot', 600);
+        })
+        .then(function() {
+          return cf.addButtons(['Fatto! Ho lasciato la recensione', 'Voglio una consulenza gratuita', 'Grazie, per ora basta'], 'post_review');
+        });
+    }},
+
+    // Step 7: Chiusura
+    { play: function(cf) {
+      if (cf.data.post_review === 'Voglio una consulenza gratuita') {
+        return cf.addBubble('<strong>Ottimo!</strong> Puoi contattarci direttamente:', 'bot', 300)
+          .then(function() {
+            var html = '<div class="cf-success">' +
+              '<h3>Contattaci per una consulenza gratuita</h3>' +
+              '<p>Telefono: <a href="tel:+390498843484">049.88.43.484</a><br>' +
+              'WhatsApp: <a href="https://wa.me/393497365930" target="_blank" rel="noopener">349.736.5930</a><br>' +
+              'Email: <a href="mailto:info@righettoimmobiliare.it">info@righettoimmobiliare.it</a></p>' +
+              '<p style="margin-top:.8rem"><a href="/landing-valutazione" style="color:var(--gold2);font-weight:700">\uD83D\uDCCA Richiedi valutazione gratuita immobile</a></p>' +
+            '</div>';
+            return cf.addBubble(html, 'bot', 500);
+          })
+          .then(function() { return new Promise(function() {}); });
+      }
+
+      var grazie = cf.data.post_review === 'Fatto! Ho lasciato la recensione'
+        ? '<strong>Grazie mille per la recensione!</strong> Ci aiuta tantissimo.'
+        : '<strong>Grazie per aver usato il nostro calcolatore!</strong>';
+
+      return cf.addBubble(grazie, 'bot', 300)
+        .then(function() {
+          return cf.addBubble('Se hai bisogno di una <strong>consulenza personalizzata</strong> sul mutuo o vuoi far valutare un immobile, siamo qui per te.', 'bot', 600);
+        })
+        .then(function() {
+          var html = '<div class="cf-success">' +
+            '<h3>Righetto Immobiliare</h3>' +
+            '<p>Telefono: <a href="tel:+390498843484">049.88.43.484</a><br>' +
+            'WhatsApp: <a href="https://wa.me/393497365930" target="_blank" rel="noopener">349.736.5930</a><br><br>' +
+            '<a href="/landing-valutazione" style="color:var(--gold2);font-weight:700">\uD83D\uDCCA Valutazione gratuita immobile</a><br>' +
+            '<a href="/landing-calcolo-mutuo" style="color:var(--green2);font-weight:700">\uD83C\uDFE6 Calcolatore dettagliato mutuo</a></p>' +
+          '</div>';
+          return cf.addBubble(html, 'bot', 800);
+        })
+        .then(function() { return new Promise(function() {}); });
+    }}
+  ];
+
+  new ChatFlow('chatFlow', steps, {
+    flowId: 'calcolo-mutuo',
+    avatarSrc: 'img/team/real-state-linda-righetto.webp',
+    avatarName: 'Linda',
+    onStepComplete: function(key, value, data) {
+      gtag('event', 'chat_step', { flow: 'calcolo-mutuo', step: key, value: value });
+    }
+  });
+
+});
+</script>
+</body>
+</html>
