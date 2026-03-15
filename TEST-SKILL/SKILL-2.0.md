@@ -548,11 +548,11 @@ js/scroll-reveal.js                 - Animazioni scroll
 |---|---|---|
 | Tetto Rosso | 256 recensioni, processo sistematico | Implementare processo post-rogito |
 | RicercAttiva | Blog aggressivo su temi fiscali/legali | Scrivere articoli su successioni, tasse, agevolazioni |
-| venderecasapadova.it | Dominio exact-match, funnel diretto | landing-vendere-casa-padova.html gia' creata |
+| venderecasapadova.it | Dominio exact-match, funnel diretto, tecnica Open House | landing-vendere-casa-padova.html gia' creata; valutare Open House come differenziazione |
 | Pianeta Casa | Widget Google Reviews reale nel sito | Embed reale da implementare |
 | Grimaldi | Magazine mensile, freshness signals | Min 2 articoli blog/mese |
 | Engel & Volkers | Instagram forte (826 follower) | Rafforzare Instagram con reels e storie |
-| Tempocasa | "Immobile Certificato" | Creare bollino "Verificato Righetto" |
+| Tempocasa | "Immobile Certificato", Matterport virtual tour 3D | Creare bollino "Verificato Righetto"; valutare tour 3D professionale |
 
 ---
 
@@ -833,6 +833,7 @@ Per ogni pagina, Google si aspetta di trovare anche le **entita' collegate** al 
 - [ ] Verificare che recensioni Google non siano sparite (nuove policies)
 - [ ] Aggiungere video content (virtual tour, presentazione agenzia) — genera 66% piu' lead
 - [ ] UTM tags su link GBP per tracciare traffico in GA4
+- [ ] Valutare hreflang se si prevede versione EN per clientela internazionale
 
 ### 9.5 Conversione e Lead Generation
 - [ ] **Speed-to-lead:** risposta automatica entro 60 secondi (47-59% dei clienti sceglie il primo agente che risponde)
