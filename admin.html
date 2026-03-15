@@ -4584,11 +4584,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:8px;">Audit Sito — Controllo Qualita'</h3>
           <p style="font-size:0.82rem;color:var(--caffe2);margin-bottom:6px;">Analizza tutte le pagine HTML del sito. L'audit si esegue automaticamente ogni 7 giorni.</p>
           <p id="auditLastRun" style="font-size:0.78rem;color:var(--caffe);margin-bottom:20px;"></p>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
-            <button class="btn btn-primary" id="btnAudit" onclick="runAudit(true)" style="max-width:320px;">Avvia Audit Completo</button>
-            <button class="btn" id="btnSkillPrompt" onclick="lanciaAnalisiSkill()" style="max-width:320px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;cursor:pointer;">Lancia Analisi Skill</button>
-          </div>
-          <p style="font-size:.72rem;color:var(--caffe2);margin-bottom:16px;" id="skillPromptHint">Clicca "Lancia Analisi Skill" per avviare audit + analisi automatica con Claude</p>
+          <button class="btn" id="btnSkillPrompt" onclick="lanciaAnalisiSkill()" style="max-width:380px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;cursor:pointer;margin-bottom:16px;font-size:.9rem;padding:12px 28px;">Lancia Analisi Skill</button>
+          <p style="font-size:.72rem;color:var(--caffe2);margin-bottom:16px;" id="skillPromptHint">Esegue audit completo + mostra analisi Claude con priorita' e KPI</p>
 
           <!-- CRONOLOGIA AUDIT -->
           <div id="audit-cronologia-wrap" style="display:none;background:var(--sfondo);border:1px solid var(--caffe3);border-radius:10px;padding:20px;margin-bottom:16px;">
@@ -13418,9 +13415,8 @@ async function saveAuditSnapshot(totOk, totWarn, totErr, total, details, sintesi
 }
 
 async function runAudit(manual) {
-  var btn = document.getElementById('btnAudit');
-  btn.textContent = 'Audit in corso...';
-  btn.disabled = true;
+  var btn = document.getElementById('btnAudit') || document.getElementById('btnSkillPrompt');
+  if (btn) { btn.textContent = 'Audit in corso...'; btn.disabled = true; }
   document.getElementById('audit-result').style.display = 'block';
   document.getElementById('audit-summary').innerHTML = '<p style="color:var(--verde)">Analisi pagine in corso...</p>';
   document.getElementById('audit-detail').innerHTML = '';
@@ -13556,8 +13552,7 @@ async function runAudit(manual) {
   });
 
   document.getElementById('audit-detail').innerHTML = detailHtml;
-  btn.textContent = 'Avvia Audit Completo';
-  btn.disabled = false;
+  if (btn) { btn.textContent = 'Lancia Analisi Skill'; btn.disabled = false; }
 
   if (manual) toast('Audit completato: ' + totOk + ' OK, ' + totWarn + ' warning, ' + totErr + ' errori', totErr > 0 ? 'error' : 'success');
 }
@@ -13665,18 +13660,17 @@ function generaSintesiFromSnapshot(snapshot) {
 // ═══ LANCIA ANALISI SKILL — Audit + carica analisi Claude da file ═══
 async function lanciaAnalisiSkill() {
   var btn = document.getElementById('btnSkillPrompt');
-  var btnAudit = document.getElementById('btnAudit');
   btn.textContent = 'Audit + Analisi in corso...';
   btn.disabled = true;
-  btnAudit.disabled = true;
 
-  // STEP 1: Esegui audit automatico se non ci sono risultati
-  var el = document.getElementById('audit-detail');
-  if (!el || !el.innerHTML.trim()) {
-    document.getElementById('skillPromptHint').innerHTML =
-      '<span style="color:var(--caffe2);">Step 1/2 — Audit in corso...</span>';
-    await runAudit(false);
-  }
+  // STEP 1: Esegui sempre l'audit fresco
+  document.getElementById('skillPromptHint').innerHTML =
+    '<span style="color:var(--caffe2);">Step 1/2 — Audit in corso...</span>';
+  await runAudit(false);
+
+  // Aggiorna data ultimo audit
+  document.getElementById('auditLastRun').textContent =
+    'Ultimo audit: ' + new Date().toLocaleDateString('it-IT') + ' (adesso)';
 
   // STEP 2: Carica l'ultima analisi Claude dal file
   document.getElementById('skillPromptHint').innerHTML =
@@ -13711,7 +13705,6 @@ async function lanciaAnalisiSkill() {
 
   btn.textContent = 'Lancia Analisi Skill';
   btn.disabled = false;
-  btnAudit.disabled = false;
 }
 
 // ═══ CRONOLOGIA ANALISI SKILL ═══
