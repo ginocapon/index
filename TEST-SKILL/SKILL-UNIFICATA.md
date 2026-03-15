@@ -652,6 +652,66 @@ js/scroll-reveal.js                 - Animazioni scroll
 - Transition words 30-35% per leggibilita' (Inoltre, Infatti, Di conseguenza, In particolare, Tuttavia)
 - NO contenuti generici senza localizzazione
 
+### 8.3 Entity-Based SEO — Regole Anti-Keyword-Stuffing (OBBLIGATORIO)
+
+> **Aggiornamento Marzo 2026:** Google ragiona per **entita' semantiche**, non piu' per keyword esatte ripetute.
+> Ripetere "agenzia immobiliare Padova" 20 volte in una pagina e' **keyword stuffing** e causa penalizzazione.
+> Google riconosce sinonimi, varianti e concetti correlati — il campo semantico conta piu' della singola keyword.
+
+**Principio fondamentale:** Ogni pagina deve coprire un **campo semantico ricco** attorno all'entita' principale,
+usando sinonimi, varianti, termini correlati e contesto. MAI ripetere la stessa frase esatta piu' di 3-4 volte per pagina.
+
+**Regole operative:**
+
+1. **Limite ripetizione keyword:** nessuna frase di 2+ parole deve apparire piu' di **5 volte** in una singola pagina (testo visibile, esclusi tag tecnici come schema JSON-LD)
+2. **"a Padova" / "di Padova":** max **8-10 occorrenze** per pagina (prima erano 20-43 — keyword stuffing critico)
+3. **Nome zona nelle pagine zona:** max **10-12 occorrenze** (prima erano 19-29)
+4. **"Righetto Immobiliare":** max **3-4 menzioni** per pagina
+5. **Title, H1, meta description:** devono usare **varianti diverse** della keyword, MAI la stessa frase esatta in tutti e tre
+6. **H2:** almeno il 50% degli H2 deve usare **sinonimi o riformulazioni**, non ripetere la keyword del title
+
+**Mappa sinonimi obbligatoria per il settore immobiliare:**
+
+| Keyword esatta | Sinonimi e varianti da alternare |
+|---|---|
+| agenzia immobiliare | studio immobiliare, consulenza immobiliare, professionisti del settore, esperti del mercato locale |
+| vendere casa | mettere in vendita un immobile, cedere la proprieta', alienare l'immobile, concludere la compravendita |
+| comprare casa | acquistare un immobile, trovare la casa ideale, investire nel mattone, finalizzare l'acquisto |
+| mutuo prima casa | finanziamento ipotecario, prestito per l'acquisto, credito immobiliare, piano di ammortamento |
+| valutazione immobiliare | stima del valore, perizia dell'immobile, analisi comparativa di mercato, quotazione |
+| affitto / locazione | contratto di locazione, canone mensile, soluzione in affitto, formula locativa |
+| a Padova | nel capoluogo euganeo, nel Padovano, in citta', nel territorio patavino, nell'area metropolitana |
+| mercato immobiliare | comparto residenziale, settore delle compravendite, panorama immobiliare, dinamiche di mercato |
+| prezzi al mq | quotazioni medie, valori di mercato, costo per metro quadrato, listino immobiliare |
+| zona/quartiere | rione, comprensorio, area residenziale, contesto urbano, realta' locale |
+| virtual tour | visita virtuale 360, tour immersivo, esperienza digitale dell'immobile, sopralluogo da remoto |
+| caparra confirmatoria | anticipo contrattuale, garanzia economica, deposito vincolante, somma a conferma |
+| home staging | valorizzazione dell'immobile, allestimento per la vendita, preparazione scenica, restyling pre-vendita |
+| investimento immobiliare | rendimento da locazione, operazione buy-to-let, asset nel mattone, reddito passivo immobiliare |
+
+**Entita' correlate da includere (campo semantico):**
+
+Per ogni pagina, Google si aspetta di trovare anche le **entita' collegate** al topic. Esempio:
+- **Vendita casa:** rogito, notaio, visura catastale, APE, conformita' urbanistica, plusvalenza, agenzia delle entrate
+- **Mutuo:** LTV, spread, TAEG, Euribor, IRS, perizia bancaria, ipoteca, piano ammortamento
+- **Affitto:** cedolare secca, canone concordato, deposito cauzionale, registrazione contratto, sublocazione
+- **Quartiere Padova:** servizi, scuole, trasporti, aree verdi, qualita' della vita, prezzi medi, trend demografico
+- **Caparra:** codice civile art. 1385, clausola risolutiva, inadempimento, recesso, restituzione doppio
+
+**Come applicare in pratica:**
+1. Prima stesura: scrivi naturalmente
+2. Review: cerca ogni frase ripetuta 4+ volte e sostituisci almeno il 50% con sinonimi dalla mappa sopra
+3. H2: riformula come domande naturali, non come ripetizioni del title
+4. Primo paragrafo dopo H2: usa la keyword esatta (per GEO/AEO), poi alterna con varianti
+5. Meta description: usa una variante diversa dal title
+6. Aggiungi entita' correlate nel testo — arricchiscono il campo semantico senza forzare la keyword
+
+**Esempio pratico — PRIMA (keyword stuffing):**
+> "Il **mutuo prima casa a Padova** e' la soluzione per chi vuole comprare. Il **mutuo prima casa a Padova** offre tassi agevolati. Con il **mutuo prima casa a Padova** puoi risparmiare."
+
+**Esempio pratico — DOPO (entity-based SEO):**
+> "Il **mutuo prima casa a Padova** e' la soluzione piu' richiesta nel 2026. Il **finanziamento ipotecario** per l'acquisto della prima abitazione prevede tassi agevolati (Euribor + spread). Con un **prestito immobiliare** nel capoluogo euganeo, le famiglie possono accedere a **detrazioni IRPEF** sugli interessi passivi fino a 4.000 euro/anno."
+
 **Registrazione quadrupla (gia' in sezione 1.2, ribadita):**
 1. `admin.html` → `_blogSeedArticles` (**OBBLIGATORIO:** campo `data_pubblicazione: 'YYYY-MM-DD'`)
 2. `blog.html` → `articoliStatici`
