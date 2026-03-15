@@ -13662,7 +13662,7 @@ function generaSintesiFromSnapshot(snapshot) {
   return parts.join(' — ');
 }
 
-// ═══ LANCIA ANALISI SKILL — Audit automatico + Claude API ═══
+// ═══ LANCIA ANALISI SKILL — Audit + carica analisi Claude da file ═══
 async function lanciaAnalisiSkill() {
   var btn = document.getElementById('btnSkillPrompt');
   var btnAudit = document.getElementById('btnAudit');
@@ -13676,107 +13676,37 @@ async function lanciaAnalisiSkill() {
     document.getElementById('skillPromptHint').innerHTML =
       '<span style="color:var(--caffe2);">Step 1/2 — Audit in corso...</span>';
     await runAudit(false);
-    el = document.getElementById('audit-detail');
   }
 
-  // STEP 2: Prepara dati per Claude
+  // STEP 2: Carica l'ultima analisi Claude dal file
   document.getElementById('skillPromptHint').innerHTML =
-    '<span style="color:var(--caffe2);">Step 2/2 — Invio a Claude via Edge Function...</span>';
+    '<span style="color:var(--caffe2);">Step 2/2 — Caricamento analisi...</span>';
 
-  var summaryEl = document.getElementById('audit-summary');
-  var summaryText = summaryEl ? summaryEl.textContent.trim() : '';
-
-  var reportLines = [];
-  if (el) {
-    el.querySelectorAll('div[style*="border-left"]').forEach(function(d) {
-      var text = d.textContent.replace(/\s+/g, ' ').trim();
-      reportLines.push(text);
-    });
-  }
-
-  var oggi = new Date().toLocaleDateString('it-IT');
-  var auditResults = 'AUDIT ' + oggi + '\n' + summaryText + '\n\n';
-  auditResults += reportLines.join('\n');
-
-  // Carica sezioni 9 e 10 della SKILL-UNIFICATA.md
-  var skillContext = '';
   try {
-    var skillResp = await fetch('/TEST-SKILL/SKILL-UNIFICATA.md');
-    if (skillResp.ok) {
-      var fullSkill = await skillResp.text();
-      var sec9Start = fullSkill.indexOf('## 9.');
-      var sec11Start = fullSkill.indexOf('## 11.');
-      if (sec9Start > -1) {
-        skillContext = fullSkill.substring(sec9Start, sec11Start > -1 ? sec11Start : undefined);
-      }
-    }
-  } catch(e) { /* SKILL non accessibile, procede senza */ }
+    var resp = await fetch('/data/audit-analyses.json?t=' + Date.now());
+    if (!resp.ok) throw new Error('File non trovato');
+    var analyses = await resp.json();
 
-  var snapshotId = null;
-  if (_auditSnapshots && _auditSnapshots.length > 0) {
-    snapshotId = _auditSnapshots[_auditSnapshots.length - 1].id;
-  }
+    if (!analyses || analyses.length === 0) throw new Error('Nessuna analisi disponibile');
 
-  // STEP 3: Chiama Edge Function
-  try {
-    var resp = await fetch(SUPABASE_URL + '/functions/v1/audit-analysis', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + SUPABASE_KEY
-      },
-      body: JSON.stringify({
-        audit_results: auditResults,
-        skill_context: skillContext,
-        snapshot_id: snapshotId
-      })
-    });
+    // Prendi l'ultima analisi (la piu' recente)
+    var latest = analyses[analyses.length - 1];
 
-    var data = await resp.json();
+    // Mostra l'analisi
+    renderAnalisiSkill(latest.analisi, latest.data, latest.ora);
 
-    if (!resp.ok || data.error) {
-      throw new Error(data.error || 'Errore dalla Edge Function');
-    }
+    // Mostra anche la cronologia delle analisi
+    renderCronologiaAnalisi(analyses);
 
-    renderAnalisiSkill(data.analysis);
-    toast('Analisi Skill completata!', 'success');
+    toast('Analisi Skill caricata — ' + latest.data, 'success');
     document.getElementById('skillPromptHint').innerHTML =
-      '<span style="color:var(--verde);font-weight:600;">✓ Analisi completata e salvata in Supabase</span>';
+      '<span style="color:var(--verde);font-weight:600;">✓ Ultima analisi: ' + latest.data + ' — ' + latest.sintesi + '</span>';
 
   } catch(err) {
-    console.error('Errore Edge Function:', err);
-
-    // ═══ FALLBACK: genera il prompt e lo copia negli appunti ═══
-    var prompt = '=== ANALISI SITO RIGHETTO IMMOBILIARE — ' + oggi + ' ===\n\n';
-    prompt += 'ISTRUZIONI: Leggi il file TEST-SKILL/SKILL-UNIFICATA.md e usalo come riferimento operativo.\n';
-    prompt += 'Analizza i risultati dell\'audit qui sotto e:\n';
-    prompt += '1. Identifica le azioni correttive prioritarie secondo la SKILL sezione 9\n';
-    prompt += '2. Verifica lo stato rispetto ai KPI della sezione 10\n';
-    prompt += '3. Controlla i TODO aperti nella sezione 9.3-9.6\n';
-    prompt += '4. Proponi le prossime azioni secondo il calendario editoriale (sezione 10.2)\n\n';
-    prompt += '--- RISULTATI ---\n' + auditResults + '\n';
-
-    var copied = false;
-    try {
-      await navigator.clipboard.writeText(prompt);
-      copied = true;
-    } catch(e) { /* clipboard non disponibile */ }
-
-    // Mostra messaggio chiaro invece di un errore generico
-    var isNotDeployed = err.message.includes('FunctionsHttpError') || err.message.includes('404') || err.message.includes('fetch') || err.message.includes('Failed') || err.message.includes('non configurata');
-
-    if (isNotDeployed) {
-      document.getElementById('skillPromptHint').innerHTML =
-        '<span style="color:#f39c12;font-weight:600;">⚠ Edge Function non ancora attiva</span>' +
-        '<br><span style="color:var(--caffe2);font-size:.72rem;">Per attivarla: <code>supabase secrets set ANTHROPIC_API_KEY=... && supabase functions deploy audit-analysis</code></span>' +
-        (copied ? '<br><span style="color:var(--verde);font-size:.72rem;">✓ Prompt copiato negli appunti — incollalo in Claude Code come alternativa</span>' : '');
-      toast('Edge Function non attiva — prompt copiato negli appunti', 'success');
-    } else {
-      document.getElementById('skillPromptHint').innerHTML =
-        '<span style="color:var(--rosso);">Errore: ' + err.message + '</span>' +
-        (copied ? '<br><span style="color:var(--verde);font-size:.72rem;">✓ Prompt copiato negli appunti come fallback</span>' : '');
-      toast('Errore Edge Function — prompt copiato come fallback', 'error');
-    }
+    console.error('Errore caricamento analisi:', err);
+    document.getElementById('skillPromptHint').innerHTML =
+      '<span style="color:#f39c12;">Nessuna analisi disponibile. Chiedi a Claude Code: "analizza l\'audit e aggiorna data/audit-analyses.json"</span>';
+    toast('Nessuna analisi ancora salvata', 'error');
   }
 
   btn.textContent = 'Lancia Analisi Skill';
@@ -13784,8 +13714,55 @@ async function lanciaAnalisiSkill() {
   btnAudit.disabled = false;
 }
 
+// ═══ CRONOLOGIA ANALISI SKILL ═══
+function renderCronologiaAnalisi(analyses) {
+  var existing = document.getElementById('skill-cronologia');
+  if (existing) existing.remove();
+
+  if (!analyses || analyses.length <= 1) return;
+
+  var container = document.createElement('div');
+  container.id = 'skill-cronologia';
+  container.style.cssText = 'background:var(--sfondo);border:1px solid var(--caffe3);border-radius:10px;padding:16px;margin-top:12px;';
+
+  var html = '<h4 style="font-size:.85rem;margin-bottom:10px;color:var(--testo);">Storico Analisi Skill</h4>';
+  html += '<div style="font-size:.75rem;">';
+
+  // Dal piu' recente al meno recente
+  for (var i = analyses.length - 1; i >= 0; i--) {
+    var a = analyses[i];
+    var color = a.audit.errori > 0 ? '#e74c3c' : a.audit.warning > 0 ? '#f39c12' : '#27ae60';
+    html += '<div style="border-left:3px solid ' + color + ';padding:6px 12px;margin-bottom:6px;background:rgba(0,0,0,.02);border-radius:0 6px 6px 0;cursor:pointer;" onclick="mostraAnalisiStorica(' + i + ')">';
+    html += '<strong>' + a.data + '</strong>';
+    if (a.ora) html += ' <span style="color:var(--caffe2);">' + a.ora + '</span>';
+    html += ' — <span style="color:' + color + ';font-weight:600;">' + a.audit.ok + ' OK, ' + a.audit.warning + ' warn, ' + a.audit.errori + ' err</span>';
+    html += '<br><span style="color:var(--caffe2);">' + (a.sintesi || '') + '</span>';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  container.innerHTML = html;
+
+  var skillResult = document.getElementById('skill-analysis-result');
+  if (skillResult) {
+    skillResult.parentNode.insertBefore(container, skillResult.nextSibling);
+  }
+}
+
+var _allAnalyses = [];
+function mostraAnalisiStorica(index) {
+  fetch('/data/audit-analyses.json?t=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(analyses) {
+      if (analyses[index]) {
+        var a = analyses[index];
+        renderAnalisiSkill(a.analisi, a.data, a.ora);
+      }
+    });
+}
+
 // ═══ RENDERING RISPOSTA CLAUDE ═══
-function renderAnalisiSkill(analysis) {
+function renderAnalisiSkill(analysis, dataAnalisi, oraAnalisi) {
   // Rimuovi box precedente se esiste
   var existing = document.getElementById('skill-analysis-result');
   if (existing) existing.remove();
@@ -13794,11 +13771,14 @@ function renderAnalisiSkill(analysis) {
   container.id = 'skill-analysis-result';
   container.style.cssText = 'background:linear-gradient(135deg,#1a1a2e,#16213e);color:#e0e0e0;border-radius:12px;padding:24px;margin-top:16px;font-size:.82rem;line-height:1.7;position:relative;';
 
+  var displayDate = dataAnalisi || new Date().toLocaleDateString('it-IT');
+  var displayTime = oraAnalisi ? ' ore ' + oraAnalisi : '';
+
   // Header
   var header = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">';
   header += '<div style="display:flex;align-items:center;gap:8px;">';
   header += '<span style="background:linear-gradient(135deg,#667eea,#764ba2);padding:4px 10px;border-radius:6px;font-size:.7rem;font-weight:700;color:#fff;">CLAUDE</span>';
-  header += '<span style="font-weight:600;color:#fff;">Analisi Skill — ' + new Date().toLocaleDateString('it-IT') + '</span>';
+  header += '<span style="font-weight:600;color:#fff;">Analisi Skill — ' + displayDate + displayTime + '</span>';
   header += '</div>';
   header += '<button onclick="copyAnalisiSkill()" style="background:none;border:1px solid rgba(255,255,255,.2);color:#ccc;padding:4px 12px;border-radius:6px;cursor:pointer;font-size:.7rem;">Copia</button>';
   header += '</div>';
