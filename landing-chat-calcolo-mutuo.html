@@ -227,7 +227,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--deep);color:var(--dark
 document.addEventListener('DOMContentLoaded', function() {
 
   // URL recensione Google
-  var GOOGLE_REVIEW_URL = 'https://www.google.com/maps/place/Righetto+Immobiliare';
+  var GOOGLE_REVIEW_URL = 'https://maps.app.goo.gl/xuCiRGDCSKskpTSf6?g_st=ic';
 
   // Tassi di mercato marzo 2026
   var TASSI = { fisso: 2.8, variabile: 2.2, misto: 2.5 };
@@ -386,11 +386,11 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(function() {
           var reviewHtml = '<div class="cf-review">' +
-            '<div class="cf-review-stars">\u2B50\u2B50\u2B50\u2B50\u2B50</div>' +
+            '<div class="cf-review-stars">⭐⭐⭐⭐⭐</div>' +
             '<h3>Ti e piaciuto? Lasciaci una recensione!</h3>' +
             '<p>Inquadra il QR code col telefono per aprire direttamente Google e lasciare la tua recensione.</p>' +
             '<img src="' + qrCodeUrl(GOOGLE_REVIEW_URL) + '" alt="QR Code recensione Google Righetto Immobiliare" class="cf-review-qr" width="180" height="180">' +
-            '<br><a href="' + GOOGLE_REVIEW_URL + '" target="_blank" rel="noopener" class="cf-review-link">\u2B50 Recensione su Google</a>' +
+            '<br><a href="' + GOOGLE_REVIEW_URL + '" target="_blank" rel="noopener" class="cf-review-link">⭐ Recensione su Google</a>' +
             '<p class="cf-review-hint">Oppure clicca il pulsante se sei gia dal telefono</p>' +
           '</div>';
           return cf.addBubble(reviewHtml, 'bot', 600);
