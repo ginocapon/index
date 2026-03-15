@@ -4584,7 +4584,30 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:8px;">Audit Sito — Controllo Qualita'</h3>
           <p style="font-size:0.82rem;color:var(--caffe2);margin-bottom:6px;">Analizza tutte le pagine HTML del sito. L'audit si esegue automaticamente ogni 7 giorni.</p>
           <p id="auditLastRun" style="font-size:0.78rem;color:var(--caffe);margin-bottom:20px;"></p>
-          <button class="btn btn-primary" id="btnAudit" onclick="runAudit(true)" style="max-width:320px;margin-bottom:16px;">Avvia Audit Completo</button>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
+            <button class="btn btn-primary" id="btnAudit" onclick="runAudit(true)" style="max-width:320px;">Avvia Audit Completo</button>
+            <button class="btn" id="btnSkillPrompt" onclick="lanciaAnalisiSkill()" style="max-width:320px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;cursor:pointer;" disabled>Lancia Analisi Skill</button>
+          </div>
+          <p style="font-size:.72rem;color:var(--caffe2);margin-bottom:16px;" id="skillPromptHint">Esegui prima l'audit, poi clicca "Lancia Analisi Skill" per generare il prompt basato su SKILL-UNIFICATA.md</p>
+
+          <!-- CRONOLOGIA AUDIT -->
+          <div id="audit-cronologia-wrap" style="display:none;background:var(--sfondo);border:1px solid var(--caffe3);border-radius:10px;padding:20px;margin-bottom:16px;">
+            <h4 style="font-size:0.9rem;margin-bottom:12px;color:var(--testo);">Cronologia Audit</h4>
+            <div style="overflow-x:auto;">
+              <table style="width:100%;border-collapse:collapse;font-size:.78rem;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--caffe3);text-align:left;">
+                    <th style="padding:8px 6px;color:var(--caffe2);text-transform:uppercase;font-size:.7rem;">Data</th>
+                    <th style="padding:8px 6px;color:var(--caffe2);text-transform:uppercase;font-size:.7rem;">OK</th>
+                    <th style="padding:8px 6px;color:var(--caffe2);text-transform:uppercase;font-size:.7rem;">Warn</th>
+                    <th style="padding:8px 6px;color:var(--caffe2);text-transform:uppercase;font-size:.7rem;">Err</th>
+                    <th style="padding:8px 6px;color:var(--caffe2);text-transform:uppercase;font-size:.7rem;">Sintesi</th>
+                  </tr>
+                </thead>
+                <tbody id="audit-cronologia-body"></tbody>
+              </table>
+            </div>
+          </div>
 
           <!-- GRAFICO STORICO -->
           <div id="audit-chart-wrap" style="display:none;background:var(--sfondo);border:1px solid var(--caffe3);border-radius:10px;padding:20px;margin-bottom:16px;">
@@ -13296,6 +13319,7 @@ async function loadAuditHistory() {
 
   if (data.length > 0) {
     renderAuditChart(data);
+    renderAuditCronologia(data);
     const last = data[data.length - 1];
     const lastDate = new Date(last.created_at);
     const daysSince = Math.floor((Date.now() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
@@ -13379,15 +13403,17 @@ function renderAuditChart(snapshots) {
 }
 
 // Save snapshot to Supabase
-async function saveAuditSnapshot(totOk, totWarn, totErr, total, details) {
+async function saveAuditSnapshot(totOk, totWarn, totErr, total, details, sintesi) {
   try {
-    await sb.from('audit_snapshots').insert({
+    var row = {
       total_pages: total,
       ok_count: totOk,
       warn_count: totWarn,
       err_count: totErr,
       details: details
-    });
+    };
+    if (sintesi) row.sintesi = sintesi;
+    await sb.from('audit_snapshots').insert(row);
   } catch(e) { /* silent fail */ }
 }
 
@@ -13483,11 +13509,12 @@ async function runAudit(manual) {
 
   var total = results.length;
 
-  // Save snapshot to Supabase
+  // Generate sintesi and save snapshot to Supabase
   var detailsForDb = results.map(function(r) {
     return { page: r.page, status: r.status, issues: r.issues || [], warnings: r.warnings || [] };
   });
-  await saveAuditSnapshot(totOk, totWarn, totErr, total, detailsForDb);
+  var sintesi = generaSintesiAudit(results, totOk, totWarn, totErr);
+  await saveAuditSnapshot(totOk, totWarn, totErr, total, detailsForDb, sintesi);
 
   // Reload chart with new data
   const { data: fresh } = await sb.from('audit_snapshots')
@@ -13495,6 +13522,7 @@ async function runAudit(manual) {
   if (fresh && fresh.length > 0) {
     _auditSnapshots = fresh;
     renderAuditChart(fresh);
+    renderAuditCronologia(fresh);
     var last = fresh[fresh.length - 1];
     document.getElementById('auditLastRun').textContent =
       'Ultimo audit: ' + new Date(last.created_at).toLocaleDateString('it-IT') + ' (adesso)';
@@ -13531,6 +13559,14 @@ async function runAudit(manual) {
   btn.textContent = 'Avvia Audit Completo';
   btn.disabled = false;
 
+  // Abilita pulsante Skill dopo audit completato
+  var btnSkill = document.getElementById('btnSkillPrompt');
+  if (btnSkill) {
+    btnSkill.disabled = false;
+    document.getElementById('skillPromptHint').innerHTML =
+      'Audit completato — clicca "Lancia Analisi Skill" per generare il prompt basato su SKILL-UNIFICATA.md';
+  }
+
   if (manual) toast('Audit completato: ' + totOk + ' OK, ' + totWarn + ' warning, ' + totErr + ' errori', totErr > 0 ? 'error' : 'success');
 }
 
@@ -13544,6 +13580,155 @@ function copyAudit() {
   text += 'Copia questo report e usalo come input per aggiornare la sezione 9 (Azioni Tecniche) della SKILL.\n';
   navigator.clipboard.writeText(text).then(function() {
     toast('Report audit copiato negli appunti!', 'success');
+  });
+}
+
+// ═══ GENERAZIONE SINTESI AUTOMATICA ═══
+function generaSintesiAudit(results, totOk, totWarn, totErr) {
+  var total = results.length;
+  var parts = [];
+  parts.push(total + ' pagine analizzate: ' + totOk + ' OK, ' + totWarn + ' warning, ' + totErr + ' errori');
+
+  // Errori critici raggruppati
+  var errPages = results.filter(function(r) { return r.status === 'ERR'; });
+  if (errPages.length > 0) {
+    var issueTypes = {};
+    errPages.forEach(function(r) {
+      (r.issues || []).forEach(function(i) {
+        issueTypes[i] = (issueTypes[i] || 0) + 1;
+      });
+    });
+    var topIssues = Object.keys(issueTypes).sort(function(a,b) { return issueTypes[b] - issueTypes[a]; }).slice(0, 3);
+    parts.push('Problemi principali: ' + topIssues.join(', '));
+  }
+
+  // Warning piu' comuni
+  var warnPages = results.filter(function(r) { return r.status === 'WARN'; });
+  if (warnPages.length > 0) {
+    var warnTypes = {};
+    warnPages.forEach(function(r) {
+      (r.warnings || []).forEach(function(w) {
+        var wClean = w.replace(/: \d+ char/, '').replace(/: \d+/, '');
+        warnTypes[wClean] = (warnTypes[wClean] || 0) + 1;
+      });
+    });
+    var topWarns = Object.keys(warnTypes).sort(function(a,b) { return warnTypes[b] - warnTypes[a]; }).slice(0, 2);
+    if (topWarns.length) parts.push('Warning frequenti: ' + topWarns.join(', '));
+  }
+
+  return parts.join('. ');
+}
+
+// ═══ RENDERING CRONOLOGIA AUDIT ═══
+function renderAuditCronologia(snapshots) {
+  if (!snapshots || snapshots.length === 0) return;
+  var wrap = document.getElementById('audit-cronologia-wrap');
+  wrap.style.display = 'block';
+  var tbody = document.getElementById('audit-cronologia-body');
+
+  // Ordina per data decrescente (piu' recente in alto)
+  var sorted = snapshots.slice().sort(function(a,b) {
+    return new Date(b.created_at) - new Date(a.created_at);
+  });
+
+  var html = '';
+  sorted.forEach(function(s) {
+    var dt = new Date(s.created_at).toLocaleDateString('it-IT', { day:'2-digit', month:'short', year:'numeric' });
+    var sintesi = s.sintesi || generaSintesiFromSnapshot(s);
+    html += '<tr style="border-bottom:1px solid var(--caffe3);">';
+    html += '<td style="padding:8px 6px;white-space:nowrap;font-weight:600;">' + dt + '</td>';
+    html += '<td style="padding:8px 6px;color:#27ae60;font-weight:700;">' + (s.ok_count || 0) + '</td>';
+    html += '<td style="padding:8px 6px;color:#f39c12;font-weight:700;">' + (s.warn_count || 0) + '</td>';
+    html += '<td style="padding:8px 6px;color:#e74c3c;font-weight:700;">' + (s.err_count || 0) + '</td>';
+    html += '<td style="padding:8px 6px;font-size:.75rem;color:var(--caffe2);max-width:400px;">' + sintesi + '</td>';
+    html += '</tr>';
+  });
+
+  tbody.innerHTML = html;
+}
+
+function generaSintesiFromSnapshot(snapshot) {
+  var parts = [];
+  parts.push((snapshot.total_pages || 0) + ' pagine');
+  if (snapshot.err_count > 0) {
+    // Estrai problemi dai details se disponibili
+    var details = snapshot.details || [];
+    var errIssues = {};
+    details.filter(function(d) { return d.status === 'ERR'; }).forEach(function(d) {
+      (d.issues || []).forEach(function(i) { errIssues[i] = (errIssues[i] || 0) + 1; });
+    });
+    var top = Object.keys(errIssues).slice(0, 2);
+    if (top.length) parts.push(top.join(', '));
+    else parts.push(snapshot.err_count + ' errori');
+  }
+  if (snapshot.warn_count > 0 && snapshot.err_count === 0) {
+    parts.push(snapshot.warn_count + ' warning');
+  }
+  if (snapshot.err_count === 0 && snapshot.warn_count === 0) {
+    parts.push('tutto OK');
+  }
+  return parts.join(' — ');
+}
+
+// ═══ LANCIA ANALISI SKILL — Genera prompt per Claude ═══
+function lanciaAnalisiSkill() {
+  var el = document.getElementById('audit-detail');
+  if (!el || !el.innerHTML.trim()) {
+    toast('Esegui prima l\'audit completo', 'error');
+    return;
+  }
+
+  // Costruisci il report audit sintetico
+  var summaryEl = document.getElementById('audit-summary');
+  var summaryText = summaryEl ? summaryEl.textContent.trim() : '';
+
+  var reportLines = [];
+  el.querySelectorAll('div[style*="border-left"]').forEach(function(d) {
+    var text = d.textContent.replace(/\s+/g, ' ').trim();
+    if (text.includes('❌') || text.includes('⚠️')) {
+      reportLines.push(text);
+    }
+  });
+
+  var oggi = new Date().toLocaleDateString('it-IT');
+
+  var prompt = '=== ANALISI SITO RIGHETTO IMMOBILIARE — ' + oggi + ' ===\n\n';
+  prompt += 'ISTRUZIONI: Leggi il file TEST-SKILL/SKILL-UNIFICATA.md e usalo come riferimento operativo.\n';
+  prompt += 'Analizza i risultati dell\'audit qui sotto e:\n';
+  prompt += '1. Identifica le azioni correttive prioritarie secondo la SKILL sezione 9 (Azioni Tecniche)\n';
+  prompt += '2. Verifica lo stato rispetto ai KPI della sezione 10\n';
+  prompt += '3. Controlla se ci sono TODO aperti nella sezione 9.3 (Performance TODO)\n';
+  prompt += '4. Proponi le prossime azioni secondo il calendario editoriale (sezione 10.2)\n';
+  prompt += '5. Aggiorna la sezione 9 con le correzioni completate\n\n';
+  prompt += '--- RISULTATO AUDIT ' + oggi + ' ---\n';
+  prompt += summaryText + '\n\n';
+
+  if (reportLines.length > 0) {
+    prompt += '--- PAGINE CON PROBLEMI ---\n';
+    reportLines.forEach(function(l) { prompt += l + '\n'; });
+  } else {
+    prompt += '--- NESSUN PROBLEMA CRITICO RILEVATO ---\n';
+  }
+
+  prompt += '\n--- AZIONE RICHIESTA ---\n';
+  prompt += 'Sulla base della SKILL-UNIFICATA.md e di questi risultati, genera un piano d\'azione con priorita\'.\n';
+  prompt += 'Salva poi una sintesi di questa analisi nello storico audit.\n';
+
+  navigator.clipboard.writeText(prompt).then(function() {
+    toast('Prompt Skill copiato! Incollalo in Claude per l\'analisi completa.', 'success');
+    document.getElementById('skillPromptHint').innerHTML =
+      '<span style="color:var(--verde);font-weight:600;">✓ Prompt copiato negli appunti — incolla in Claude Code per avviare l\'analisi basata su SKILL-UNIFICATA.md</span>';
+  }).catch(function() {
+    // Fallback: mostra in un textarea
+    var ta = document.createElement('textarea');
+    ta.value = prompt;
+    ta.style.cssText = 'width:100%;height:200px;margin-top:12px;font-size:.75rem;font-family:monospace;background:var(--sfondo);border:1px solid var(--caffe3);border-radius:8px;padding:12px;color:var(--testo);';
+    var container = document.getElementById('audit-result');
+    var existing = container.querySelector('textarea');
+    if (existing) existing.remove();
+    container.appendChild(ta);
+    ta.select();
+    toast('Seleziona e copia il prompt qui sotto', 'success');
   });
 }
 
