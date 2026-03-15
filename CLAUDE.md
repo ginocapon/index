@@ -19,6 +19,7 @@
    - **Blog** → registrare in `sitemap.xml`, `blog.html`, `js/homepage.js`, `admin.html` (`_blogSeedArticles`)
    - **Pagine generiche** → registrare in `sitemap.xml` + navigazione
 9. **Data di pubblicazione obbligatoria** — ogni landing page nel seed `_landingSeedPages` in `admin.html` DEVE avere il campo `data_pubblicazione` in formato `YYYY-MM-DD`. Senza questo campo la colonna "Pubblicazione" nell'admin mostra "—" ed è impossibile tracciare quando una pagina è stata pubblicata.
+10. **Entity-Based SEO (NO keyword stuffing)** — Google ragiona per **entita' semantiche**, NON per keyword ripetute. Nessuna frase di 2+ parole deve apparire piu' di 5 volte per pagina. "a Padova" max 8-10 volte. Usare sinonimi, varianti e campo semantico ricco. Title, H1 e meta description devono usare varianti diverse. Dettagli completi con mappa sinonimi in `TEST-SKILL/SKILL-UNIFICATA.md` sezione 8.3.
 
 ---
 
