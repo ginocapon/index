@@ -4586,9 +4586,9 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           <p id="auditLastRun" style="font-size:0.78rem;color:var(--caffe);margin-bottom:20px;"></p>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
             <button class="btn btn-primary" id="btnAudit" onclick="runAudit(true)" style="max-width:320px;">Avvia Audit Completo</button>
-            <button class="btn" id="btnSkillPrompt" onclick="lanciaAnalisiSkill()" style="max-width:320px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;cursor:pointer;" disabled>Lancia Analisi Skill</button>
+            <button class="btn" id="btnSkillPrompt" onclick="lanciaAnalisiSkill()" style="max-width:320px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;cursor:pointer;">Lancia Analisi Skill</button>
           </div>
-          <p style="font-size:.72rem;color:var(--caffe2);margin-bottom:16px;" id="skillPromptHint">Esegui prima l'audit, poi clicca "Lancia Analisi Skill" per generare il prompt basato su SKILL-UNIFICATA.md</p>
+          <p style="font-size:.72rem;color:var(--caffe2);margin-bottom:16px;" id="skillPromptHint">Clicca "Lancia Analisi Skill" per avviare audit + analisi automatica con Claude</p>
 
           <!-- CRONOLOGIA AUDIT -->
           <div id="audit-cronologia-wrap" style="display:none;background:var(--sfondo);border:1px solid var(--caffe3);border-radius:10px;padding:20px;margin-bottom:16px;">
@@ -13559,14 +13559,6 @@ async function runAudit(manual) {
   btn.textContent = 'Avvia Audit Completo';
   btn.disabled = false;
 
-  // Abilita pulsante Skill dopo audit completato
-  var btnSkill = document.getElementById('btnSkillPrompt');
-  if (btnSkill) {
-    btnSkill.disabled = false;
-    document.getElementById('skillPromptHint').innerHTML =
-      'Audit completato — clicca "Lancia Analisi Skill" per generare il prompt basato su SKILL-UNIFICATA.md';
-  }
-
   if (manual) toast('Audit completato: ' + totOk + ' OK, ' + totWarn + ' warning, ' + totErr + ' errori', totErr > 0 ? 'error' : 'success');
 }
 
@@ -13670,112 +13662,107 @@ function generaSintesiFromSnapshot(snapshot) {
   return parts.join(' — ');
 }
 
-// ═══ LANCIA ANALISI SKILL — Chiama Claude API via Edge Function ═══
+// ═══ LANCIA ANALISI SKILL — Audit + carica analisi Claude da file ═══
 async function lanciaAnalisiSkill() {
+  var btn = document.getElementById('btnSkillPrompt');
+  var btnAudit = document.getElementById('btnAudit');
+  btn.textContent = 'Audit + Analisi in corso...';
+  btn.disabled = true;
+  btnAudit.disabled = true;
+
+  // STEP 1: Esegui audit automatico se non ci sono risultati
   var el = document.getElementById('audit-detail');
   if (!el || !el.innerHTML.trim()) {
-    toast('Esegui prima l\'audit completo', 'error');
-    return;
-  }
-
-  var btn = document.getElementById('btnSkillPrompt');
-  btn.textContent = 'Analisi in corso...';
-  btn.disabled = true;
-  document.getElementById('skillPromptHint').innerHTML =
-    '<span style="color:var(--caffe2);">Invio dati a Claude via Supabase Edge Function...</span>';
-
-  // Costruisci il report audit
-  var summaryEl = document.getElementById('audit-summary');
-  var summaryText = summaryEl ? summaryEl.textContent.trim() : '';
-
-  var reportLines = [];
-  el.querySelectorAll('div[style*="border-left"]').forEach(function(d) {
-    var text = d.textContent.replace(/\s+/g, ' ').trim();
-    reportLines.push(text);
-  });
-
-  var oggi = new Date().toLocaleDateString('it-IT');
-  var auditResults = 'AUDIT ' + oggi + '\n' + summaryText + '\n\n';
-  auditResults += reportLines.join('\n');
-
-  // Carica SKILL-UNIFICATA.md dal sito (sezioni 9 e 10)
-  var skillContext = '';
-  try {
-    var skillResp = await fetch('/TEST-SKILL/SKILL-UNIFICATA.md');
-    if (skillResp.ok) {
-      var fullSkill = await skillResp.text();
-      // Estrai sezioni 9 e 10 (piu' rilevanti per l'analisi)
-      var sec9Start = fullSkill.indexOf('## 9.');
-      var sec11Start = fullSkill.indexOf('## 11.');
-      if (sec9Start > -1 && sec11Start > -1) {
-        skillContext = fullSkill.substring(sec9Start, sec11Start);
-      } else {
-        skillContext = fullSkill.substring(sec9Start > -1 ? sec9Start : 0);
-      }
-      // Aggiungi anche sezione KPI
-      var sec10Start = fullSkill.indexOf('### 10.1');
-      if (sec10Start > -1) {
-        var sec10End = fullSkill.indexOf('## 11.');
-        skillContext = fullSkill.substring(sec9Start > -1 ? sec9Start : 0, sec10End > -1 ? sec10End : undefined);
-      }
-    }
-  } catch(e) { console.log('SKILL-UNIFICATA.md non accessibile:', e); }
-
-  // Ultimo snapshot id per collegare l'analisi
-  var snapshotId = null;
-  if (_auditSnapshots && _auditSnapshots.length > 0) {
-    snapshotId = _auditSnapshots[_auditSnapshots.length - 1].id;
-  }
-
-  try {
-    var resp = await fetch(SUPABASE_URL + '/functions/v1/audit-analysis', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + SUPABASE_KEY
-      },
-      body: JSON.stringify({
-        audit_results: auditResults,
-        skill_context: skillContext,
-        snapshot_id: snapshotId
-      })
-    });
-
-    var data = await resp.json();
-
-    if (!resp.ok || data.error) {
-      throw new Error(data.error || 'Errore dalla Edge Function');
-    }
-
-    // Mostra la risposta di Claude nell'admin
-    renderAnalisiSkill(data.analysis);
-    toast('Analisi Skill completata da Claude!', 'success');
-
     document.getElementById('skillPromptHint').innerHTML =
-      '<span style="color:var(--verde);font-weight:600;">✓ Analisi completata e salvata in Supabase</span>';
+      '<span style="color:var(--caffe2);">Step 1/2 — Audit in corso...</span>';
+    await runAudit(false);
+  }
+
+  // STEP 2: Carica l'ultima analisi Claude dal file
+  document.getElementById('skillPromptHint').innerHTML =
+    '<span style="color:var(--caffe2);">Step 2/2 — Caricamento analisi...</span>';
+
+  try {
+    var resp = await fetch('/data/audit-analyses.json?t=' + Date.now());
+    if (!resp.ok) throw new Error('File non trovato');
+    var analyses = await resp.json();
+
+    if (!analyses || analyses.length === 0) throw new Error('Nessuna analisi disponibile');
+
+    // Prendi l'ultima analisi (la piu' recente)
+    var latest = analyses[analyses.length - 1];
+
+    // Mostra l'analisi
+    renderAnalisiSkill(latest.analisi, latest.data, latest.ora);
+
+    // Mostra anche la cronologia delle analisi
+    renderCronologiaAnalisi(analyses);
+
+    toast('Analisi Skill caricata — ' + latest.data, 'success');
+    document.getElementById('skillPromptHint').innerHTML =
+      '<span style="color:var(--verde);font-weight:600;">✓ Ultima analisi: ' + latest.data + ' — ' + latest.sintesi + '</span>';
 
   } catch(err) {
-    console.error('Errore lanciaAnalisiSkill:', err);
-    toast('Errore: ' + err.message, 'error');
+    console.error('Errore caricamento analisi:', err);
     document.getElementById('skillPromptHint').innerHTML =
-      '<span style="color:var(--rosso);">Errore: ' + err.message + '</span>';
-
-    // Fallback: copia prompt negli appunti
-    var prompt = '=== ANALISI SITO RIGHETTO IMMOBILIARE — ' + oggi + ' ===\n\n';
-    prompt += 'ISTRUZIONI: Leggi il file TEST-SKILL/SKILL-UNIFICATA.md e usalo come riferimento operativo.\n';
-    prompt += 'Analizza i risultati dell\'audit:\n\n' + auditResults;
-    prompt += '\n\nGenera un piano d\'azione con priorita\'.\n';
-    navigator.clipboard.writeText(prompt).catch(function(){});
-    document.getElementById('skillPromptHint').innerHTML +=
-      '<br><span style="color:var(--caffe2);font-size:.7rem;">Fallback: prompt copiato negli appunti — incollalo manualmente in Claude Code</span>';
+      '<span style="color:#f39c12;">Nessuna analisi disponibile. Chiedi a Claude Code: "analizza l\'audit e aggiorna data/audit-analyses.json"</span>';
+    toast('Nessuna analisi ancora salvata', 'error');
   }
 
   btn.textContent = 'Lancia Analisi Skill';
   btn.disabled = false;
+  btnAudit.disabled = false;
+}
+
+// ═══ CRONOLOGIA ANALISI SKILL ═══
+function renderCronologiaAnalisi(analyses) {
+  var existing = document.getElementById('skill-cronologia');
+  if (existing) existing.remove();
+
+  if (!analyses || analyses.length <= 1) return;
+
+  var container = document.createElement('div');
+  container.id = 'skill-cronologia';
+  container.style.cssText = 'background:var(--sfondo);border:1px solid var(--caffe3);border-radius:10px;padding:16px;margin-top:12px;';
+
+  var html = '<h4 style="font-size:.85rem;margin-bottom:10px;color:var(--testo);">Storico Analisi Skill</h4>';
+  html += '<div style="font-size:.75rem;">';
+
+  // Dal piu' recente al meno recente
+  for (var i = analyses.length - 1; i >= 0; i--) {
+    var a = analyses[i];
+    var color = a.audit.errori > 0 ? '#e74c3c' : a.audit.warning > 0 ? '#f39c12' : '#27ae60';
+    html += '<div style="border-left:3px solid ' + color + ';padding:6px 12px;margin-bottom:6px;background:rgba(0,0,0,.02);border-radius:0 6px 6px 0;cursor:pointer;" onclick="mostraAnalisiStorica(' + i + ')">';
+    html += '<strong>' + a.data + '</strong>';
+    if (a.ora) html += ' <span style="color:var(--caffe2);">' + a.ora + '</span>';
+    html += ' — <span style="color:' + color + ';font-weight:600;">' + a.audit.ok + ' OK, ' + a.audit.warning + ' warn, ' + a.audit.errori + ' err</span>';
+    html += '<br><span style="color:var(--caffe2);">' + (a.sintesi || '') + '</span>';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  container.innerHTML = html;
+
+  var skillResult = document.getElementById('skill-analysis-result');
+  if (skillResult) {
+    skillResult.parentNode.insertBefore(container, skillResult.nextSibling);
+  }
+}
+
+var _allAnalyses = [];
+function mostraAnalisiStorica(index) {
+  fetch('/data/audit-analyses.json?t=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(analyses) {
+      if (analyses[index]) {
+        var a = analyses[index];
+        renderAnalisiSkill(a.analisi, a.data, a.ora);
+      }
+    });
 }
 
 // ═══ RENDERING RISPOSTA CLAUDE ═══
-function renderAnalisiSkill(analysis) {
+function renderAnalisiSkill(analysis, dataAnalisi, oraAnalisi) {
   // Rimuovi box precedente se esiste
   var existing = document.getElementById('skill-analysis-result');
   if (existing) existing.remove();
@@ -13784,11 +13771,14 @@ function renderAnalisiSkill(analysis) {
   container.id = 'skill-analysis-result';
   container.style.cssText = 'background:linear-gradient(135deg,#1a1a2e,#16213e);color:#e0e0e0;border-radius:12px;padding:24px;margin-top:16px;font-size:.82rem;line-height:1.7;position:relative;';
 
+  var displayDate = dataAnalisi || new Date().toLocaleDateString('it-IT');
+  var displayTime = oraAnalisi ? ' ore ' + oraAnalisi : '';
+
   // Header
   var header = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">';
   header += '<div style="display:flex;align-items:center;gap:8px;">';
   header += '<span style="background:linear-gradient(135deg,#667eea,#764ba2);padding:4px 10px;border-radius:6px;font-size:.7rem;font-weight:700;color:#fff;">CLAUDE</span>';
-  header += '<span style="font-weight:600;color:#fff;">Analisi Skill — ' + new Date().toLocaleDateString('it-IT') + '</span>';
+  header += '<span style="font-weight:600;color:#fff;">Analisi Skill — ' + displayDate + displayTime + '</span>';
   header += '</div>';
   header += '<button onclick="copyAnalisiSkill()" style="background:none;border:1px solid rgba(255,255,255,.2);color:#ccc;padding:4px 12px;border-radius:6px;cursor:pointer;font-size:.7rem;">Copia</button>';
   header += '</div>';
