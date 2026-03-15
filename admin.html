@@ -13670,66 +13670,154 @@ function generaSintesiFromSnapshot(snapshot) {
   return parts.join(' — ');
 }
 
-// ═══ LANCIA ANALISI SKILL — Genera prompt per Claude ═══
-function lanciaAnalisiSkill() {
+// ═══ LANCIA ANALISI SKILL — Chiama Claude API via Edge Function ═══
+async function lanciaAnalisiSkill() {
   var el = document.getElementById('audit-detail');
   if (!el || !el.innerHTML.trim()) {
     toast('Esegui prima l\'audit completo', 'error');
     return;
   }
 
-  // Costruisci il report audit sintetico
+  var btn = document.getElementById('btnSkillPrompt');
+  btn.textContent = 'Analisi in corso...';
+  btn.disabled = true;
+  document.getElementById('skillPromptHint').innerHTML =
+    '<span style="color:var(--caffe2);">Invio dati a Claude via Supabase Edge Function...</span>';
+
+  // Costruisci il report audit
   var summaryEl = document.getElementById('audit-summary');
   var summaryText = summaryEl ? summaryEl.textContent.trim() : '';
 
   var reportLines = [];
   el.querySelectorAll('div[style*="border-left"]').forEach(function(d) {
     var text = d.textContent.replace(/\s+/g, ' ').trim();
-    if (text.includes('❌') || text.includes('⚠️')) {
-      reportLines.push(text);
-    }
+    reportLines.push(text);
   });
 
   var oggi = new Date().toLocaleDateString('it-IT');
+  var auditResults = 'AUDIT ' + oggi + '\n' + summaryText + '\n\n';
+  auditResults += reportLines.join('\n');
 
-  var prompt = '=== ANALISI SITO RIGHETTO IMMOBILIARE — ' + oggi + ' ===\n\n';
-  prompt += 'ISTRUZIONI: Leggi il file TEST-SKILL/SKILL-UNIFICATA.md e usalo come riferimento operativo.\n';
-  prompt += 'Analizza i risultati dell\'audit qui sotto e:\n';
-  prompt += '1. Identifica le azioni correttive prioritarie secondo la SKILL sezione 9 (Azioni Tecniche)\n';
-  prompt += '2. Verifica lo stato rispetto ai KPI della sezione 10\n';
-  prompt += '3. Controlla se ci sono TODO aperti nella sezione 9.3 (Performance TODO)\n';
-  prompt += '4. Proponi le prossime azioni secondo il calendario editoriale (sezione 10.2)\n';
-  prompt += '5. Aggiorna la sezione 9 con le correzioni completate\n\n';
-  prompt += '--- RISULTATO AUDIT ' + oggi + ' ---\n';
-  prompt += summaryText + '\n\n';
+  // Carica SKILL-UNIFICATA.md dal sito (sezioni 9 e 10)
+  var skillContext = '';
+  try {
+    var skillResp = await fetch('/TEST-SKILL/SKILL-UNIFICATA.md');
+    if (skillResp.ok) {
+      var fullSkill = await skillResp.text();
+      // Estrai sezioni 9 e 10 (piu' rilevanti per l'analisi)
+      var sec9Start = fullSkill.indexOf('## 9.');
+      var sec11Start = fullSkill.indexOf('## 11.');
+      if (sec9Start > -1 && sec11Start > -1) {
+        skillContext = fullSkill.substring(sec9Start, sec11Start);
+      } else {
+        skillContext = fullSkill.substring(sec9Start > -1 ? sec9Start : 0);
+      }
+      // Aggiungi anche sezione KPI
+      var sec10Start = fullSkill.indexOf('### 10.1');
+      if (sec10Start > -1) {
+        var sec10End = fullSkill.indexOf('## 11.');
+        skillContext = fullSkill.substring(sec9Start > -1 ? sec9Start : 0, sec10End > -1 ? sec10End : undefined);
+      }
+    }
+  } catch(e) { console.log('SKILL-UNIFICATA.md non accessibile:', e); }
 
-  if (reportLines.length > 0) {
-    prompt += '--- PAGINE CON PROBLEMI ---\n';
-    reportLines.forEach(function(l) { prompt += l + '\n'; });
-  } else {
-    prompt += '--- NESSUN PROBLEMA CRITICO RILEVATO ---\n';
+  // Ultimo snapshot id per collegare l'analisi
+  var snapshotId = null;
+  if (_auditSnapshots && _auditSnapshots.length > 0) {
+    snapshotId = _auditSnapshots[_auditSnapshots.length - 1].id;
   }
 
-  prompt += '\n--- AZIONE RICHIESTA ---\n';
-  prompt += 'Sulla base della SKILL-UNIFICATA.md e di questi risultati, genera un piano d\'azione con priorita\'.\n';
-  prompt += 'Salva poi una sintesi di questa analisi nello storico audit.\n';
+  try {
+    var resp = await fetch(SUPABASE_URL + '/functions/v1/audit-analysis', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + SUPABASE_KEY
+      },
+      body: JSON.stringify({
+        audit_results: auditResults,
+        skill_context: skillContext,
+        snapshot_id: snapshotId
+      })
+    });
 
-  navigator.clipboard.writeText(prompt).then(function() {
-    toast('Prompt Skill copiato! Incollalo in Claude per l\'analisi completa.', 'success');
+    var data = await resp.json();
+
+    if (!resp.ok || data.error) {
+      throw new Error(data.error || 'Errore dalla Edge Function');
+    }
+
+    // Mostra la risposta di Claude nell'admin
+    renderAnalisiSkill(data.analysis);
+    toast('Analisi Skill completata da Claude!', 'success');
+
     document.getElementById('skillPromptHint').innerHTML =
-      '<span style="color:var(--verde);font-weight:600;">✓ Prompt copiato negli appunti — incolla in Claude Code per avviare l\'analisi basata su SKILL-UNIFICATA.md</span>';
-  }).catch(function() {
-    // Fallback: mostra in un textarea
-    var ta = document.createElement('textarea');
-    ta.value = prompt;
-    ta.style.cssText = 'width:100%;height:200px;margin-top:12px;font-size:.75rem;font-family:monospace;background:var(--sfondo);border:1px solid var(--caffe3);border-radius:8px;padding:12px;color:var(--testo);';
-    var container = document.getElementById('audit-result');
-    var existing = container.querySelector('textarea');
-    if (existing) existing.remove();
-    container.appendChild(ta);
-    ta.select();
-    toast('Seleziona e copia il prompt qui sotto', 'success');
-  });
+      '<span style="color:var(--verde);font-weight:600;">✓ Analisi completata e salvata in Supabase</span>';
+
+  } catch(err) {
+    console.error('Errore lanciaAnalisiSkill:', err);
+    toast('Errore: ' + err.message, 'error');
+    document.getElementById('skillPromptHint').innerHTML =
+      '<span style="color:var(--rosso);">Errore: ' + err.message + '</span>';
+
+    // Fallback: copia prompt negli appunti
+    var prompt = '=== ANALISI SITO RIGHETTO IMMOBILIARE — ' + oggi + ' ===\n\n';
+    prompt += 'ISTRUZIONI: Leggi il file TEST-SKILL/SKILL-UNIFICATA.md e usalo come riferimento operativo.\n';
+    prompt += 'Analizza i risultati dell\'audit:\n\n' + auditResults;
+    prompt += '\n\nGenera un piano d\'azione con priorita\'.\n';
+    navigator.clipboard.writeText(prompt).catch(function(){});
+    document.getElementById('skillPromptHint').innerHTML +=
+      '<br><span style="color:var(--caffe2);font-size:.7rem;">Fallback: prompt copiato negli appunti — incollalo manualmente in Claude Code</span>';
+  }
+
+  btn.textContent = 'Lancia Analisi Skill';
+  btn.disabled = false;
+}
+
+// ═══ RENDERING RISPOSTA CLAUDE ═══
+function renderAnalisiSkill(analysis) {
+  // Rimuovi box precedente se esiste
+  var existing = document.getElementById('skill-analysis-result');
+  if (existing) existing.remove();
+
+  var container = document.createElement('div');
+  container.id = 'skill-analysis-result';
+  container.style.cssText = 'background:linear-gradient(135deg,#1a1a2e,#16213e);color:#e0e0e0;border-radius:12px;padding:24px;margin-top:16px;font-size:.82rem;line-height:1.7;position:relative;';
+
+  // Header
+  var header = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">';
+  header += '<div style="display:flex;align-items:center;gap:8px;">';
+  header += '<span style="background:linear-gradient(135deg,#667eea,#764ba2);padding:4px 10px;border-radius:6px;font-size:.7rem;font-weight:700;color:#fff;">CLAUDE</span>';
+  header += '<span style="font-weight:600;color:#fff;">Analisi Skill — ' + new Date().toLocaleDateString('it-IT') + '</span>';
+  header += '</div>';
+  header += '<button onclick="copyAnalisiSkill()" style="background:none;border:1px solid rgba(255,255,255,.2);color:#ccc;padding:4px 12px;border-radius:6px;cursor:pointer;font-size:.7rem;">Copia</button>';
+  header += '</div>';
+
+  // Converti markdown base in HTML
+  var htmlContent = analysis
+    .replace(/## (.*)/g, '<h4 style="color:#667eea;margin:16px 0 8px;font-size:.95rem;">$1</h4>')
+    .replace(/### (.*)/g, '<h5 style="color:#a78bfa;margin:12px 0 6px;font-size:.85rem;">$1</h5>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong style="color:#fff;">$1</strong>')
+    .replace(/^\- \[x\] (.*)/gm, '<div style="color:#27ae60;">✅ $1</div>')
+    .replace(/^\- \[ \] (.*)/gm, '<div style="color:#f39c12;">⬜ $1</div>')
+    .replace(/^\d+\. (.*)/gm, '<div style="padding-left:8px;border-left:2px solid #667eea;margin:4px 0;">$1</div>')
+    .replace(/^- (.*)/gm, '<div style="padding-left:12px;">• $1</div>')
+    .replace(/\n\n/g, '<br>');
+
+  container.innerHTML = header + '<div id="skill-analysis-text">' + htmlContent + '</div>';
+
+  // Inserisci dopo audit-result
+  var auditResult = document.getElementById('audit-result');
+  auditResult.parentNode.insertBefore(container, auditResult.nextSibling);
+}
+
+function copyAnalisiSkill() {
+  var el = document.getElementById('skill-analysis-text');
+  if (el) {
+    navigator.clipboard.writeText(el.textContent).then(function() {
+      toast('Analisi copiata negli appunti!', 'success');
+    });
+  }
 }
 
 // ══════════════════════════════════════
