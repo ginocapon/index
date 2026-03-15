@@ -4587,9 +4587,9 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           <button class="btn" id="btnSkillPrompt" onclick="lanciaAnalisiSkill()" style="max-width:380px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;cursor:pointer;margin-bottom:16px;font-size:.9rem;padding:12px 28px;">Lancia Analisi Skill</button>
           <p style="font-size:.72rem;color:var(--caffe2);margin-bottom:16px;" id="skillPromptHint">Esegue audit completo + mostra analisi Claude con priorita' e KPI</p>
 
-          <!-- CRONOLOGIA AUDIT -->
-          <div id="audit-cronologia-wrap" style="display:none;background:var(--sfondo);border:1px solid var(--caffe3);border-radius:10px;padding:20px;margin-bottom:16px;">
-            <h4 style="font-size:0.9rem;margin-bottom:12px;color:var(--testo);">Cronologia Audit</h4>
+          <!-- STORICO ANALISI SKILL (caricato da data/audit-analyses.json) -->
+          <div id="skill-storico-wrap" style="display:none;background:var(--sfondo);border:1px solid var(--caffe3);border-radius:10px;padding:20px;margin-bottom:16px;">
+            <h4 style="font-size:0.9rem;margin-bottom:12px;color:var(--testo);">Storico Analisi Skill</h4>
             <div style="overflow-x:auto;">
               <table style="width:100%;border-collapse:collapse;font-size:.78rem;">
                 <thead>
@@ -4601,7 +4601,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                     <th style="padding:8px 6px;color:var(--caffe2);text-transform:uppercase;font-size:.7rem;">Sintesi</th>
                   </tr>
                 </thead>
-                <tbody id="audit-cronologia-body"></tbody>
+                <tbody id="skill-storico-body"></tbody>
               </table>
             </div>
           </div>
@@ -13316,7 +13316,7 @@ async function loadAuditHistory() {
 
   if (data.length > 0) {
     renderAuditChart(data);
-    renderAuditCronologia(data);
+    loadSkillStorico();
     const last = data[data.length - 1];
     const lastDate = new Date(last.created_at);
     const daysSince = Math.floor((Date.now() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
@@ -13518,7 +13518,7 @@ async function runAudit(manual) {
   if (fresh && fresh.length > 0) {
     _auditSnapshots = fresh;
     renderAuditChart(fresh);
-    renderAuditCronologia(fresh);
+    loadSkillStorico();
     var last = fresh[fresh.length - 1];
     document.getElementById('auditLastRun').textContent =
       'Ultimo audit: ' + new Date(last.created_at).toLocaleDateString('it-IT') + ' (adesso)';
@@ -13606,55 +13606,33 @@ function generaSintesiAudit(results, totOk, totWarn, totErr) {
   return parts.join('. ');
 }
 
-// ═══ RENDERING CRONOLOGIA AUDIT ═══
-function renderAuditCronologia(snapshots) {
-  if (!snapshots || snapshots.length === 0) return;
-  var wrap = document.getElementById('audit-cronologia-wrap');
-  wrap.style.display = 'block';
-  var tbody = document.getElementById('audit-cronologia-body');
+// ═══ STORICO ANALISI SKILL (da data/audit-analyses.json) ═══
+async function loadSkillStorico() {
+  try {
+    var resp = await fetch('/data/audit-analyses.json?t=' + Date.now());
+    if (!resp.ok) return;
+    var analyses = await resp.json();
+    if (!analyses || analyses.length === 0) return;
 
-  // Ordina per data decrescente (piu' recente in alto)
-  var sorted = snapshots.slice().sort(function(a,b) {
-    return new Date(b.created_at) - new Date(a.created_at);
-  });
+    var wrap = document.getElementById('skill-storico-wrap');
+    wrap.style.display = 'block';
+    var tbody = document.getElementById('skill-storico-body');
 
-  var html = '';
-  sorted.forEach(function(s) {
-    var dt = new Date(s.created_at).toLocaleDateString('it-IT', { day:'2-digit', month:'short', year:'numeric' });
-    var sintesi = s.sintesi || generaSintesiFromSnapshot(s);
-    html += '<tr style="border-bottom:1px solid var(--caffe3);">';
-    html += '<td style="padding:8px 6px;white-space:nowrap;font-weight:600;">' + dt + '</td>';
-    html += '<td style="padding:8px 6px;color:#27ae60;font-weight:700;">' + (s.ok_count || 0) + '</td>';
-    html += '<td style="padding:8px 6px;color:#f39c12;font-weight:700;">' + (s.warn_count || 0) + '</td>';
-    html += '<td style="padding:8px 6px;color:#e74c3c;font-weight:700;">' + (s.err_count || 0) + '</td>';
-    html += '<td style="padding:8px 6px;font-size:.75rem;color:var(--caffe2);max-width:400px;">' + sintesi + '</td>';
-    html += '</tr>';
-  });
-
-  tbody.innerHTML = html;
-}
-
-function generaSintesiFromSnapshot(snapshot) {
-  var parts = [];
-  parts.push((snapshot.total_pages || 0) + ' pagine');
-  if (snapshot.err_count > 0) {
-    // Estrai problemi dai details se disponibili
-    var details = snapshot.details || [];
-    var errIssues = {};
-    details.filter(function(d) { return d.status === 'ERR'; }).forEach(function(d) {
-      (d.issues || []).forEach(function(i) { errIssues[i] = (errIssues[i] || 0) + 1; });
-    });
-    var top = Object.keys(errIssues).slice(0, 2);
-    if (top.length) parts.push(top.join(', '));
-    else parts.push(snapshot.err_count + ' errori');
-  }
-  if (snapshot.warn_count > 0 && snapshot.err_count === 0) {
-    parts.push(snapshot.warn_count + ' warning');
-  }
-  if (snapshot.err_count === 0 && snapshot.warn_count === 0) {
-    parts.push('tutto OK');
-  }
-  return parts.join(' — ');
+    // Dal piu' recente al meno recente
+    var html = '';
+    for (var i = analyses.length - 1; i >= 0; i--) {
+      var a = analyses[i];
+      var okColor = a.audit.errori > 0 ? '#e74c3c' : a.audit.warning > 0 ? '#f39c12' : '#27ae60';
+      html += '<tr style="border-bottom:1px solid var(--caffe3);cursor:pointer;" onclick="mostraAnalisiStorica(' + i + ')">';
+      html += '<td style="padding:8px 6px;white-space:nowrap;font-weight:600;">' + a.data + (a.ora ? ' <span style=color:var(--caffe2)>' + a.ora + '</span>' : '') + '</td>';
+      html += '<td style="padding:8px 6px;color:#27ae60;font-weight:700;">' + a.audit.ok + '</td>';
+      html += '<td style="padding:8px 6px;color:#f39c12;font-weight:700;">' + a.audit.warning + '</td>';
+      html += '<td style="padding:8px 6px;color:#e74c3c;font-weight:700;">' + a.audit.errori + '</td>';
+      html += '<td style="padding:8px 6px;font-size:.75rem;color:var(--caffe2);max-width:400px;">' + (a.sintesi || '') + '</td>';
+      html += '</tr>';
+    }
+    tbody.innerHTML = html;
+  } catch(e) { /* silenzioso se file non esiste */ }
 }
 
 // ═══ LANCIA ANALISI SKILL — Audit + carica analisi Claude da file ═══
