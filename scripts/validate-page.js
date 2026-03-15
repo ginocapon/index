@@ -204,6 +204,30 @@ function validateBlogRegistration(file, html) {
     }
   } catch(e) {}
 
+  // Check admin.html seed — data_pubblicazione obbligatoria
+  try {
+    const admin = fs.readFileSync(ADMIN_HTML, 'utf8');
+    const seedMatch = admin.match(/const\s+_blogSeedArticles\s*=\s*\[([\s\S]*?)\];/);
+    if (seedMatch) {
+      // Cerca l'articolo nel seed tramite url_statico
+      const seedBlock = seedMatch[1];
+      const slugPattern = new RegExp(`url_statico:\\s*'${slug.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}'`);
+      if (seedBlock.match(slugPattern)) {
+        // Verifica che la stessa entry abbia data_pubblicazione
+        // Trova il blocco { ... } che contiene questo url_statico
+        const entries = seedBlock.split(/\},?\s*\{/);
+        const entry = entries.find(e => e.includes(`'${slug}'`));
+        if (entry && !entry.includes('data_pubblicazione')) {
+          error(file, `Manca data_pubblicazione nel seed _blogSeedArticles di admin.html`);
+        } else if (entry) {
+          ok(file, 'data_pubblicazione presente nel seed admin.html');
+        }
+      } else {
+        error(file, `NON registrato in admin.html (_blogSeedArticles)`);
+      }
+    }
+  } catch(e) {}
+
   // Check author bio
   if (!html.includes('author-bio')) {
     warn(file, 'Manca author bio box');
@@ -230,6 +254,34 @@ function validateGEO(file, html) {
   }
 }
 
+function validateLandingRegistration(file, html) {
+  const basename = path.basename(file);
+  if (!basename.startsWith('landing-') && !file.includes('landing/')) return;
+
+  const slug = basename.replace('.html', '');
+
+  // Check admin.html seed — data_pubblicazione obbligatoria
+  try {
+    const admin = fs.readFileSync(ADMIN_HTML, 'utf8');
+    const seedMatch = admin.match(/const\s+_landingSeedPages\s*=\s*\[([\s\S]*?)\];/);
+    if (seedMatch) {
+      const seedBlock = seedMatch[1];
+      const slugPattern = new RegExp(`slug:\\s*'[^']*${slug.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[^']*'`);
+      if (seedBlock.match(slugPattern)) {
+        const entries = seedBlock.split(/\},?\s*\{/);
+        const entry = entries.find(e => e.includes(slug));
+        if (entry && !entry.includes('data_pubblicazione')) {
+          error(file, `Manca data_pubblicazione nel seed _landingSeedPages di admin.html`);
+        } else if (entry) {
+          ok(file, 'data_pubblicazione presente nel seed admin.html');
+        }
+      } else {
+        warn(file, `NON registrata in admin.html (_landingSeedPages) — non apparira' nell'admin`);
+      }
+    }
+  } catch(e) {}
+}
+
 // ═══ MAIN ═══
 
 function validateFile(filePath) {
@@ -243,6 +295,7 @@ function validateFile(filePath) {
     validateSchema(filePath, html);
     validatePerformance(filePath, html);
     validateBlogRegistration(filePath, html);
+    validateLandingRegistration(filePath, html);
     validateGEO(filePath, html);
   } catch(e) {
     error(filePath, `Impossibile leggere: ${e.message}`);
