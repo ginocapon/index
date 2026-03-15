@@ -4586,9 +4586,9 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           <p id="auditLastRun" style="font-size:0.78rem;color:var(--caffe);margin-bottom:20px;"></p>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
             <button class="btn btn-primary" id="btnAudit" onclick="runAudit(true)" style="max-width:320px;">Avvia Audit Completo</button>
-            <button class="btn" id="btnSkillPrompt" onclick="lanciaAnalisiSkill()" style="max-width:320px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;cursor:pointer;" disabled>Lancia Analisi Skill</button>
+            <button class="btn" id="btnSkillPrompt" onclick="lanciaAnalisiSkill()" style="max-width:320px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;cursor:pointer;">Lancia Analisi Skill</button>
           </div>
-          <p style="font-size:.72rem;color:var(--caffe2);margin-bottom:16px;" id="skillPromptHint">Esegui prima l'audit, poi clicca "Lancia Analisi Skill" per generare il prompt basato su SKILL-UNIFICATA.md</p>
+          <p style="font-size:.72rem;color:var(--caffe2);margin-bottom:16px;" id="skillPromptHint">Clicca "Lancia Analisi Skill" per avviare audit + analisi automatica con Claude</p>
 
           <!-- CRONOLOGIA AUDIT -->
           <div id="audit-cronologia-wrap" style="display:none;background:var(--sfondo);border:1px solid var(--caffe3);border-radius:10px;padding:20px;margin-bottom:16px;">
@@ -13559,14 +13559,6 @@ async function runAudit(manual) {
   btn.textContent = 'Avvia Audit Completo';
   btn.disabled = false;
 
-  // Abilita pulsante Skill dopo audit completato
-  var btnSkill = document.getElementById('btnSkillPrompt');
-  if (btnSkill) {
-    btnSkill.disabled = false;
-    document.getElementById('skillPromptHint').innerHTML =
-      'Audit completato — clicca "Lancia Analisi Skill" per generare il prompt basato su SKILL-UNIFICATA.md';
-  }
-
   if (manual) toast('Audit completato: ' + totOk + ' OK, ' + totWarn + ' warning, ' + totErr + ' errori', totErr > 0 ? 'error' : 'success');
 }
 
@@ -13670,63 +13662,62 @@ function generaSintesiFromSnapshot(snapshot) {
   return parts.join(' — ');
 }
 
-// ═══ LANCIA ANALISI SKILL — Chiama Claude API via Edge Function ═══
+// ═══ LANCIA ANALISI SKILL — Audit automatico + Claude API ═══
 async function lanciaAnalisiSkill() {
+  var btn = document.getElementById('btnSkillPrompt');
+  var btnAudit = document.getElementById('btnAudit');
+  btn.textContent = 'Audit + Analisi in corso...';
+  btn.disabled = true;
+  btnAudit.disabled = true;
+
+  // STEP 1: Esegui audit automatico se non ci sono risultati
   var el = document.getElementById('audit-detail');
   if (!el || !el.innerHTML.trim()) {
-    toast('Esegui prima l\'audit completo', 'error');
-    return;
+    document.getElementById('skillPromptHint').innerHTML =
+      '<span style="color:var(--caffe2);">Step 1/2 — Audit in corso...</span>';
+    await runAudit(false);
+    el = document.getElementById('audit-detail');
   }
 
-  var btn = document.getElementById('btnSkillPrompt');
-  btn.textContent = 'Analisi in corso...';
-  btn.disabled = true;
+  // STEP 2: Prepara dati per Claude
   document.getElementById('skillPromptHint').innerHTML =
-    '<span style="color:var(--caffe2);">Invio dati a Claude via Supabase Edge Function...</span>';
+    '<span style="color:var(--caffe2);">Step 2/2 — Invio a Claude via Edge Function...</span>';
 
-  // Costruisci il report audit
   var summaryEl = document.getElementById('audit-summary');
   var summaryText = summaryEl ? summaryEl.textContent.trim() : '';
 
   var reportLines = [];
-  el.querySelectorAll('div[style*="border-left"]').forEach(function(d) {
-    var text = d.textContent.replace(/\s+/g, ' ').trim();
-    reportLines.push(text);
-  });
+  if (el) {
+    el.querySelectorAll('div[style*="border-left"]').forEach(function(d) {
+      var text = d.textContent.replace(/\s+/g, ' ').trim();
+      reportLines.push(text);
+    });
+  }
 
   var oggi = new Date().toLocaleDateString('it-IT');
   var auditResults = 'AUDIT ' + oggi + '\n' + summaryText + '\n\n';
   auditResults += reportLines.join('\n');
 
-  // Carica SKILL-UNIFICATA.md dal sito (sezioni 9 e 10)
+  // Carica sezioni 9 e 10 della SKILL-UNIFICATA.md
   var skillContext = '';
   try {
     var skillResp = await fetch('/TEST-SKILL/SKILL-UNIFICATA.md');
     if (skillResp.ok) {
       var fullSkill = await skillResp.text();
-      // Estrai sezioni 9 e 10 (piu' rilevanti per l'analisi)
       var sec9Start = fullSkill.indexOf('## 9.');
       var sec11Start = fullSkill.indexOf('## 11.');
-      if (sec9Start > -1 && sec11Start > -1) {
-        skillContext = fullSkill.substring(sec9Start, sec11Start);
-      } else {
-        skillContext = fullSkill.substring(sec9Start > -1 ? sec9Start : 0);
-      }
-      // Aggiungi anche sezione KPI
-      var sec10Start = fullSkill.indexOf('### 10.1');
-      if (sec10Start > -1) {
-        var sec10End = fullSkill.indexOf('## 11.');
-        skillContext = fullSkill.substring(sec9Start > -1 ? sec9Start : 0, sec10End > -1 ? sec10End : undefined);
+      if (sec9Start > -1) {
+        skillContext = fullSkill.substring(sec9Start, sec11Start > -1 ? sec11Start : undefined);
       }
     }
-  } catch(e) { console.log('SKILL-UNIFICATA.md non accessibile:', e); }
+  } catch(e) { /* SKILL non accessibile, procede senza */ }
 
-  // Ultimo snapshot id per collegare l'analisi
   var snapshotId = null;
   if (_auditSnapshots && _auditSnapshots.length > 0) {
     snapshotId = _auditSnapshots[_auditSnapshots.length - 1].id;
   }
 
+  // STEP 3: Chiama Edge Function
   try {
     var resp = await fetch(SUPABASE_URL + '/functions/v1/audit-analysis', {
       method: 'POST',
@@ -13747,31 +13738,50 @@ async function lanciaAnalisiSkill() {
       throw new Error(data.error || 'Errore dalla Edge Function');
     }
 
-    // Mostra la risposta di Claude nell'admin
     renderAnalisiSkill(data.analysis);
-    toast('Analisi Skill completata da Claude!', 'success');
-
+    toast('Analisi Skill completata!', 'success');
     document.getElementById('skillPromptHint').innerHTML =
       '<span style="color:var(--verde);font-weight:600;">✓ Analisi completata e salvata in Supabase</span>';
 
   } catch(err) {
-    console.error('Errore lanciaAnalisiSkill:', err);
-    toast('Errore: ' + err.message, 'error');
-    document.getElementById('skillPromptHint').innerHTML =
-      '<span style="color:var(--rosso);">Errore: ' + err.message + '</span>';
+    console.error('Errore Edge Function:', err);
 
-    // Fallback: copia prompt negli appunti
+    // ═══ FALLBACK: genera il prompt e lo copia negli appunti ═══
     var prompt = '=== ANALISI SITO RIGHETTO IMMOBILIARE — ' + oggi + ' ===\n\n';
     prompt += 'ISTRUZIONI: Leggi il file TEST-SKILL/SKILL-UNIFICATA.md e usalo come riferimento operativo.\n';
-    prompt += 'Analizza i risultati dell\'audit:\n\n' + auditResults;
-    prompt += '\n\nGenera un piano d\'azione con priorita\'.\n';
-    navigator.clipboard.writeText(prompt).catch(function(){});
-    document.getElementById('skillPromptHint').innerHTML +=
-      '<br><span style="color:var(--caffe2);font-size:.7rem;">Fallback: prompt copiato negli appunti — incollalo manualmente in Claude Code</span>';
+    prompt += 'Analizza i risultati dell\'audit qui sotto e:\n';
+    prompt += '1. Identifica le azioni correttive prioritarie secondo la SKILL sezione 9\n';
+    prompt += '2. Verifica lo stato rispetto ai KPI della sezione 10\n';
+    prompt += '3. Controlla i TODO aperti nella sezione 9.3-9.6\n';
+    prompt += '4. Proponi le prossime azioni secondo il calendario editoriale (sezione 10.2)\n\n';
+    prompt += '--- RISULTATI ---\n' + auditResults + '\n';
+
+    var copied = false;
+    try {
+      await navigator.clipboard.writeText(prompt);
+      copied = true;
+    } catch(e) { /* clipboard non disponibile */ }
+
+    // Mostra messaggio chiaro invece di un errore generico
+    var isNotDeployed = err.message.includes('FunctionsHttpError') || err.message.includes('404') || err.message.includes('fetch') || err.message.includes('Failed') || err.message.includes('non configurata');
+
+    if (isNotDeployed) {
+      document.getElementById('skillPromptHint').innerHTML =
+        '<span style="color:#f39c12;font-weight:600;">⚠ Edge Function non ancora attiva</span>' +
+        '<br><span style="color:var(--caffe2);font-size:.72rem;">Per attivarla: <code>supabase secrets set ANTHROPIC_API_KEY=... && supabase functions deploy audit-analysis</code></span>' +
+        (copied ? '<br><span style="color:var(--verde);font-size:.72rem;">✓ Prompt copiato negli appunti — incollalo in Claude Code come alternativa</span>' : '');
+      toast('Edge Function non attiva — prompt copiato negli appunti', 'success');
+    } else {
+      document.getElementById('skillPromptHint').innerHTML =
+        '<span style="color:var(--rosso);">Errore: ' + err.message + '</span>' +
+        (copied ? '<br><span style="color:var(--verde);font-size:.72rem;">✓ Prompt copiato negli appunti come fallback</span>' : '');
+      toast('Errore Edge Function — prompt copiato come fallback', 'error');
+    }
   }
 
   btn.textContent = 'Lancia Analisi Skill';
   btn.disabled = false;
+  btnAudit.disabled = false;
 }
 
 // ═══ RENDERING RISPOSTA CLAUDE ═══
