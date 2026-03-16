@@ -1,7 +1,7 @@
 # SKILL UNIFICATA — RaaS Automazioni
 ## Prompt Operativo Master Consolidato
 
-> **Versione:** 2.1 — 14 Marzo 2026
+> **Versione:** 2.2 — 16 Marzo 2026
 > **Unica fonte di verita'** per sviluppo, manutenzione, contenuti SEO, strategia GEO e AI Agents.
 > **Prossima verifica consigliata:** Giugno 2026
 
@@ -59,53 +59,69 @@ Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se 
 ├── CLAUDE.md                   # Istruzioni automatiche per Claude
 ├── SKILL.md                    # Questo file — unica fonte di verita'
 ├── .nojekyll                   # Disabilita Jekyll su GitHub Pages
+│
 ├── index.html                  # Homepage (hero, servizi, prezzi, FAQ, stats)
+├── chi-siamo.html              # Chi Siamo
+├── contatti.html               # Pagina contatti
+├── servizi.html                # Servizi overview
+├── faq.html                    # FAQ
 ├── blog.html                   # Pagina blog principale
-├── bandi.html                  # Aggregatore bandi (150+ fonti ufficiali)
-├── landing.html                # Landing page conversione
-├── postapremium.html           # Posta premium
-├── brobot.html                 # Chatbot/assistente
+├── immobili.html               # Lista immobili
+├── immobile.html               # Dettaglio immobile (dinamico via JS)
+├── agenzia-immobiliare-padova.html  # Landing agenzia
 ├── privacy.html                # Privacy Policy GDPR
-├── cookie.html                 # Cookie Policy
-├── sitemap.xml                 # 43 URL indicizzate
-├── htaccess                    # Regole server (da rinominare .htaccess se serve)
-├── talk.txt                    # File testo
-├── favicon.ico / .svg / .png   # Icone sito
-├── apple-touch-icon.png        # Icona iOS
+├── cookie-policy.html          # Cookie Policy
+├── admin.html                  # Pannello admin (interno)
+│
+├── blog-*.html                 # 41 articoli blog in root (BlogPosting schema)
+│
+├── servizio-*.html             # 7 pagine servizi specifici
+│   ├── servizio-gestione.html
+│   ├── servizio-locazioni.html
+│   ├── servizio-preliminari.html
+│   ├── servizio-utenze.html
+│   ├── servizio-valutazioni.html
+│   ├── servizio-vendita.html
+│   └── servizio-virtual-tour.html
+│
+├── zona-*.html                 # 14 pagine zone Padova
+│   ├── zona-abano-terme.html
+│   ├── zona-arcella-padova.html
+│   ├── zona-centro-storico-padova.html
+│   ├── ... (e altre 11 zone)
+│   └── zona-voltabarozzo-padova.html
+│
+├── landing-*.html              # 12 landing pages (conversione, chat, offerte)
+├── landing/                    # 5 landing pages offerte energia
+│
+├── vendere-casa-padova-errori.html  # Articolo vendita
+├── articolo-riqualificazione.html   # Articolo riqualificazione
+│
+├── sitemap.xml                 # 88 URL indicizzate
+├── robots.txt                  # Whitelist AI bots + riferimenti file AI
+│
+├── — FILE AI AGENTS —
+├── llms.txt                    # Info sito per AI (standard llmstxt.org)
+├── llms-full.txt               # Contenuto completo pagine in Markdown
+├── ai.json                     # Permessi AI (standard ai-visibility.org.uk v1.1.0)
+├── humans.txt                  # Crediti team
+├── manifest.json               # PWA base
+├── .well-known/
+│   ├── agent.json              # Discovery A2A (Google/Linux Foundation)
+│   ├── mcp.json                # Discovery MCP (Anthropic/Linux Foundation)
+│   └── security.txt            # Policy sicurezza (RFC 9116)
 │
 ├── css/
 │   └── styles.css              # Foglio stile principale
+├── js/                         # JavaScript (homepage.js, chatbot.js, etc.)
+├── assets/                     # Risorse statiche (immagini, media)
+├── data/                       # Dati strutturati JSON
+├── templates/                  # Template email (3 HTML)
+├── instagram/                  # Landing Instagram
 │
-├── assets/                     # Risorse statiche (immagini, media, script)
-├── data/                       # Dati strutturati (bandi.json)
-├── mail-template/              # Template email
-│
-├── robots.txt                 # Whitelist AI bots (GPTBot, ClaudeBot, etc.)
-├── llms.txt                   # Info sito per AI agents (standard llmstxt.org)
-├── admin.html                 # Pannello admin (dashboard, bandi, email, analytics)
-│
-├── en/                         # Versione inglese del sito
-│   ├── index.html              # Homepage EN
-│   └── blog/articoli/          # Blog articoli EN (4 HTML)
-│       ├── geo-generative-engine-optimization-guide-2026.html
-│       ├── performance-based-marketing-revenue-share-model-2026.html
-│       ├── ai-lead-generation-small-business-2026.html
-│       └── website-speed-seo-roi-pure-code-vs-wordpress-2026.html
-│
-├── blog/articoli/              # Articoli blog IT (7 HTML)
-│   ├── 5-automazioni-risparmiare-20-ore-settimana.html
-│   ├── lead-generation-50-lead-qualificati-automazione.html
-│   ├── pagespeed-95-dati-roi.html
-│   ├── sito-vetrina-macchina-business-90-giorni.html
-│   ├── codice-puro-vs-wordpress-2026.html
-│   ├── lead-generation-30-50-lead-mese-2026.html
-│   └── pagespeed-95-guida-ottimizzazione-2026.html
-│
-├── offerta-creator/            # Tool creazione offerte
-├── playzone/                   # Sezione giochi interattivi (20+ pagine)
-├── quiz/quale-tiktoker-sei/    # Quiz virale
-├── tools/generatore-username/  # Generatore username
-└── webstats/                   # Statistiche web
+├── scraping.html               # Tool interno
+├── bookmarklet-helper.html     # Tool interno
+└── unsubscribe.html            # Pagina disiscrizione email
 ```
 
 ### 2.3 Modello di Business — RaaS (Revenue as a Service)
@@ -178,12 +194,11 @@ Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se 
 
 ### 2.6 Struttura Sito Bilingue
 ```
-/                    → Italiano (default)
-/en/                 → English
-/en/index.html       → Homepage EN (con newsletter, chatbot link, video+robot)
-/en/blog/articoli/   → Blog EN (4 articoli pubblicati)
+/                    → Italiano (default, unica versione attiva)
+/en/                 → English (NON ANCORA CREATA — da implementare)
 ```
-Ogni pagina ha `<link rel="alternate" hreflang="it" href="...">` e `<link rel="alternate" hreflang="en" href="...">`
+**NOTA:** La directory /en/ non esiste ancora. Nessuna pagina ha hreflang tags.
+Quando la versione EN verra' creata, aggiungere `<link rel="alternate" hreflang="it/en">` su tutte le pagine.
 
 ### 2.7 Design — Colori e Componenti
 | Elemento | Valore | Note |
@@ -227,7 +242,7 @@ Il sistema bandi usa un orchestratore **Claude + Perplexity** per verificare aut
 - 28 H2/H3 distribuiti + errori umani casuali (5-8 per articolo)
 - SPINTAX 24 varianti social pronte (LinkedIn/Facebook)
 - Meta titles 60/160 char + Meta desc 95/200 char
-- JSON-LD Article + Organization + FAQSchema
+- JSON-LD BlogPosting + Organization + FAQSchema
 - Emoji Unicode moderati (uso professionale)
 - Fonti verificate: IlSole24Ore, Gartner, Google Trends, StatCounter, W3Techs
 
@@ -291,23 +306,23 @@ Inoltre, Infatti, Di conseguenza, In particolare, Tuttavia, Pertanto, Nonostante
 ```json
 {
   "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Prezzi Web Agency 2026: RaaS vs Aruba Confronto Trasparente",
-  "description": "Analisi completa prezzi web agency con dati verificati",
+  "@type": "BlogPosting",
+  "headline": "[TITOLO_ARTICOLO]",
+  "description": "[DESCRIZIONE_ARTICOLO]",
   "author": {
-    "@type": "Organization",
-    "name": "RaaS Automazioni"
+    "@type": "Person",
+    "name": "Gino Capon"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "RaaS Automazioni",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://www.raasautomazioni.it/logo.png"
-    }
+    "name": "Righetto Immobiliare"
   },
   "datePublished": "[DATA_PUBBLICAZIONE]",
-  "dateModified": "[DATA_MODIFICA]"
+  "dateModified": "[DATA_MODIFICA]",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://righettoimmobiliare.it/[FILENAME]"
+  }
 }
 ```
 
@@ -506,7 +521,7 @@ Schema.org e' il ponte critico tra siti web e AI agents. Contenuti con schema ha
 | AggregateRating | Homepage (testimonial) | ALTO | DA FARE |
 | Review | Homepage (testimonial) | ALTO | DA FARE |
 | BreadcrumbList | Tutte le pagine | MEDIO | PARZIALE |
-| BlogPosting | Blog | MEDIO | DA FARE |
+| BlogPosting | Blog (41 articoli) | MEDIO | FATTO |
 | Person | Blog, Chi Siamo | MEDIO | DA FARE |
 | VideoObject | Pagine con video | MEDIO | DA FARE |
 | ItemList | Bandi | MEDIO | DA FARE |
@@ -642,28 +657,30 @@ Schema.org e' il ponte critico tra siti web e AI agents. Contenuti con schema ha
 ### GEO & AI Agents
 - [x] Creare robots.txt con whitelist AI bots (7 bot configurati)
 - [x] Creare llms.txt (standard llmstxt.org)
-- [ ] Creare llms-full.txt (contenuto completo pagine in Markdown)
-- [ ] Creare ai.json (permessi AI — standard ai-visibility.org.uk)
-- [ ] Creare /.well-known/agent.json (discovery A2A — standard Google/Linux Foundation)
-- [ ] Creare /.well-known/mcp.json (discovery MCP — standard Anthropic/Linux Foundation)
+- [x] Creare llms-full.txt (contenuto completo pagine in Markdown)
+- [x] Creare ai.json (permessi AI — standard ai-visibility.org.uk v1.1.0)
+- [x] Creare /.well-known/agent.json (discovery A2A — standard Google/Linux Foundation)
+- [x] Creare /.well-known/mcp.json (discovery MCP — standard Anthropic/Linux Foundation)
 - [ ] Aggiungere AggregateRating schema su testimonial homepage
 - [ ] Aggiungere LocalBusiness schema su homepage
 - [ ] Aggiungere Person schema per fondatore e team
 - [ ] Aggiungere author bio su articoli blog
 - [ ] Aggiungere Table of Contents su articoli blog
 - [ ] Aggiungere date "Ultimo aggiornamento" visibili su blog
-- [ ] Usare BlogPosting invece di Article su blog
+- [x] Usare BlogPosting invece di Article su blog (41 articoli migrati)
 - [ ] Aggiungere ItemList schema su bandi.html
 - [ ] Embed video YouTube su pagine chiave (youtube-nocookie.com per GDPR)
 - [ ] Creare VideoObject schema per video
 - [ ] Aggiungere pulsanti share social su blog
-- [ ] Creare humans.txt
-- [ ] Creare .well-known/security.txt
-- [ ] Creare manifest.json PWA base
+- [x] Creare humans.txt
+- [x] Creare .well-known/security.txt (RFC 9116)
+- [x] Creare manifest.json PWA base
 - [ ] Implementare IndexNow per Bing (ChatGPT usa indice Bing)
 - [ ] Monitoring citazioni AI (Otterly.AI o Peec AI) — settimanale
 - [ ] Registrarsi su directory settoriali italiane
 - [ ] Ottimizzare Google Business Profile (post 2x/settimana)
+- [ ] Aggiungere favicon link `<link rel="icon">` su tutte le pagine
+- [ ] Aggiungere hreflang tags quando sezione EN viene creata
 
 ---
 
@@ -672,15 +689,15 @@ Schema.org e' il ponte critico tra siti web e AI agents. Contenuti con schema ha
 ### 8.1 File Speciali per AI Agents
 | File | Posizione | Scopo | Stato |
 |------|-----------|-------|-------|
-| `robots.txt` | `/robots.txt` | Whitelist crawler AI (7 bot) | FATTO |
+| `robots.txt` | `/robots.txt` | Whitelist crawler AI (7 bot) + riferimenti a tutti i file AI | FATTO |
 | `llms.txt` | `/llms.txt` | Info sito leggibile da AI (standard llmstxt.org, 600+ siti lo usano) | FATTO |
-| `llms-full.txt` | `/llms-full.txt` | Contenuto completo in Markdown | DA FARE |
-| `ai.json` | `/ai.json` | Permessi AI — allow/deny per tipo uso (v1.1.0, ai-visibility.org.uk) | DA FARE |
-| `agent.json` | `/.well-known/agent.json` | Discovery A2A — Google/Linux Foundation, descrive servizi per agenti | DA FARE |
-| `mcp.json` | `/.well-known/mcp.json` | Discovery MCP — Anthropic/Linux Foundation (97M+ download SDK/mese) | DA FARE |
-| `humans.txt` | `/humans.txt` | Crediti team, trasparenza | DA FARE |
-| `security.txt` | `/.well-known/security.txt` | Policy sicurezza | DA FARE |
-| `manifest.json` | `/manifest.json` | PWA base | DA FARE |
+| `llms-full.txt` | `/llms-full.txt` | Contenuto completo in Markdown (tutte le pagine) | FATTO |
+| `ai.json` | `/ai.json` | Permessi AI — allow/deny per tipo uso (v1.1.0, ai-visibility.org.uk) | FATTO |
+| `agent.json` | `/.well-known/agent.json` | Discovery A2A — Google/Linux Foundation, descrive servizi per agenti | FATTO |
+| `mcp.json` | `/.well-known/mcp.json` | Discovery MCP — Anthropic/Linux Foundation (97M+ download SDK/mese) | FATTO |
+| `humans.txt` | `/humans.txt` | Crediti team (Capon Gino, Righetto Linda), trasparenza | FATTO |
+| `security.txt` | `/.well-known/security.txt` | Policy sicurezza (RFC 9116, scadenza 2027-03-16) | FATTO |
+| `manifest.json` | `/manifest.json` | PWA base (nota: servono icone 192x192 e 512x512) | FATTO |
 
 **Nota su llms.txt:** 844.000+ siti lo implementano (Anthropic, Stripe, Cloudflare). Nessuna AI ha confermato ufficialmente di leggerlo, ma e' una scommessa a basso costo con potenziale futuro.
 
@@ -892,16 +909,16 @@ Video embedded prova "Experience" (la prima E di E-E-A-T) a Google. Aumenta temp
 | 1 | Schema.org JSON-LD completo su tutte le pagine | Medio | MOLTO ALTO |
 | 2 | AggregateRating + Review su testimonial | Basso | ALTO |
 | 3 | LocalBusiness + ProfessionalService schema | Basso | ALTO |
-| 4 | BlogPosting + BreadcrumbList + Person su blog | Medio | ALTO |
+| 4 | ~~BlogPosting~~ (FATTO) + BreadcrumbList + Person su blog | Medio | ALTO |
 | 5 | Author bio + Table of Contents su articoli | Medio | MEDIO-ALTO |
 | 6 | ItemList schema su bandi.html | Basso | MEDIO |
 | 7 | Date "Ultimo aggiornamento" visibili | Basso | MEDIO |
 | 8 | IndexNow per Bing | Basso | MEDIO |
-| 9 | ai.json + agent.json + mcp.json | Basso | FUTURO |
+| 9 | ~~ai.json + agent.json + mcp.json~~ (FATTO) | Basso | FUTURO |
 | 10 | Video embed + VideoObject schema | Medio | MEDIO |
 | 11 | Pulsanti share social su blog | Basso | BASSO-MEDIO |
-| 12 | manifest.json PWA base | Basso | BASSO |
-| 13 | humans.txt + security.txt | Basso | BASSO |
+| 12 | ~~manifest.json PWA base~~ (FATTO) | Basso | BASSO |
+| 13 | ~~humans.txt + security.txt~~ (FATTO) | Basso | BASSO |
 | 14 | Monitoring citazioni AI (Otterly.AI) | Basso | ALTO (visibilita') |
 
 ### 8.14 Fonti Verificate
@@ -922,6 +939,21 @@ Video embedded prova "Experience" (la prima E di E-E-A-T) a Google. Aumenta temp
 ---
 
 ## 9. CHANGELOG
+
+### v2.2 - 16 Marzo 2026 (AI Agents completi + BlogPosting + Audit)
+- Creati tutti i file AI agents: llms-full.txt, ai.json, agent.json, mcp.json, humans.txt, security.txt, manifest.json
+- robots.txt aggiornato con riferimenti a tutti i file AI
+- Migrazione Article → BlogPosting su tutti i 41 articoli blog
+- Corretti 3 articoli mancanti di dateModified e mainEntityOfPage
+- Corretta inconsistenza www su blog-direttiva-case-green-limena-padova.html
+- Sezione 2.2 riscritta: struttura file aggiornata alla realta' (88 URL, 41 blog, 14 zone, 7 servizi, 12 landing, file AI)
+- Sezione 2.6: documentato che /en/ non esiste ancora
+- Sezione 3.6: template schema aggiornato a BlogPosting con author Person
+- Sezione 4.5: BlogPosting segnato come FATTO
+- Sezione 7 TODO: segnati completati 8 item GEO/AI agents
+- Sezione 8.1: tabella file AI aggiornata — tutti FATTO
+- Sezione 8.13: segnati completati item 4, 9, 12, 13
+- Aggiunti 2 nuovi TODO: favicon link, hreflang tags
 
 ### v2.1 - 14 Marzo 2026 (Clean URL + PageSpeed 90+)
 - PageSpeed 95+ cambiato in 90+ ovunque nel sito (IT + EN, 20+ file, ~90 occorrenze)
@@ -968,6 +1000,6 @@ Video embedded prova "Experience" (la prima E di E-E-A-T) a Google. Aumenta temp
 
 ---
 
-**VERSIONE:** 2.1 RaaS Automazioni
-**ULTIMO AGGIORNAMENTO:** 14 Marzo 2026
+**VERSIONE:** 2.2 RaaS Automazioni
+**ULTIMO AGGIORNAMENTO:** 16 Marzo 2026
 **PROSSIMO REVIEW:** Giugno 2026 (aggiornamento prezzi Q2, refresh previsioni AI)
