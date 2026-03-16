@@ -5868,7 +5868,7 @@ function previewLandingPage(id) {
   const p = landingPages.find(x => x.id == id);
   if (!p) return;
   const catEmoji = {vendita:'🏠',valutazione:'📊',agente:'👤',chat:'💬',promozione:'🎯',evento:'📅',altro:'📄'};
-  const catColors = {vendita:'#2C4A6E',valutazione:'#6C63FF',agente:'#00E5A0',chat:'#667eea',promozione:'#FF6B35',evento:'#B8D44A',altro:'#888'};
+  const catColors = {vendita:'#2C4A6E',valutazione:'#6C63FF',agente:'#00E5A0',chat:'#667eea',promozione:'#FF6B35',evento:'#FF6B35',altro:'#888'};
   const cat = p.categoria || 'altro';
   const emoji = catEmoji[cat] || '📄';
   const color = catColors[cat] || '#667eea';
