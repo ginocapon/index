@@ -371,7 +371,7 @@ function artUrl(a) {
   if (!ldScript) { ldScript = document.createElement('script'); ldScript.type = 'application/ld+json'; ldScript.id = 'jsonld-article'; document.head.appendChild(ldScript); }
   ldScript.textContent = JSON.stringify({
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     "headline": art.titolo || '',
     "author": { "@type": "Person", "name": art.autore || "Gino Capon", "jobTitle": "Agente Immobiliare", "worksFor": {"@type": "Organization", "name": "Righetto Immobiliare", "url": "https://righettoimmobiliare.it"} },
     "publisher": { "@type": "Organization", "name": "Righetto Immobiliare", "logo": { "@type": "ImageObject", "url": "https://righettoimmobiliare.it/assets/logo.png" } },

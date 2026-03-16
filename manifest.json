@@ -1,0 +1,20 @@
+{
+  "name": "Righetto Immobiliare — Agenzia Immobiliare Padova",
+  "short_name": "Righetto Imm.",
+  "description": "Agenzia immobiliare a Padova e provincia. Vendita, acquisto, locazione e gestione immobili dal 2000.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2C4A6E",
+  "lang": "it",
+  "orientation": "portrait-primary",
+  "categories": ["business", "lifestyle"],
+  "icons": [
+    {
+      "src": "/img/og-default.webp",
+      "sizes": "1200x630",
+      "type": "image/webp",
+      "purpose": "any"
+    }
+  ]
+}
