@@ -1,0 +1,41 @@
+{
+  "name": "Righetto Immobiliare",
+  "description": "Agenzia immobiliare a Padova e provincia — vendita, acquisto, locazione e gestione immobili dal 2000.",
+  "url": "https://righettoimmobiliare.it",
+  "version": "1.0.0",
+  "contact": {
+    "email": "info@righettoimmobiliare.it",
+    "phone": "+39 049 8843484"
+  },
+  "resources": [
+    {
+      "uri": "https://righettoimmobiliare.it/llms.txt",
+      "name": "Informazioni azienda (sintesi)",
+      "description": "Panoramica servizi, area operativa, dati mercato, contatti",
+      "mimeType": "text/plain"
+    },
+    {
+      "uri": "https://righettoimmobiliare.it/llms-full.txt",
+      "name": "Contenuto completo sito",
+      "description": "Tutti i servizi, guide, dati mercato, zone coperte in formato Markdown",
+      "mimeType": "text/plain"
+    },
+    {
+      "uri": "https://righettoimmobiliare.it/faq.html",
+      "name": "FAQ immobiliare Padova",
+      "description": "37+ domande frequenti su acquisto, vendita, locazione, mutui a Padova",
+      "mimeType": "text/html"
+    },
+    {
+      "uri": "https://righettoimmobiliare.it/immobili.html",
+      "name": "Immobili disponibili",
+      "description": "Elenco immobili in vendita e affitto a Padova e provincia",
+      "mimeType": "text/html"
+    }
+  ],
+  "tools": [],
+  "prompts": [],
+  "authentication": {
+    "type": "none"
+  }
+}
