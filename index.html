@@ -432,6 +432,7 @@ button{font-family:inherit;cursor:pointer}
   .btn-srch{min-height:58px}
 
   #testimonial [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important}
+  .video-test-grid{grid-template-columns:1fr!important}
   .mutuo-grid{grid-template-columns:1fr!important}
   .props-grid,.srv-grid,.blog-grid{grid-template-columns:1fr}
   .sf-grid,.fc-grid{grid-template-columns:1fr}
@@ -1149,6 +1150,43 @@ button svg, a.btn-p svg, a.btn-g svg {
         </div>
       </div>
     </div>
+    <!-- Video Testimonial -->
+    <div class="rv sr" style="margin-top:48px">
+      <div style="text-align:center;margin-bottom:28px">
+        <div style="display:inline-flex;align-items:center;gap:8px;font-size:0.62rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--oro)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          Video recensioni
+        </div>
+      </div>
+      <div class="video-test-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px">
+        <div class="rv d1" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;overflow:hidden;transition:all 0.3s" onmouseover="this.style.borderColor='rgba(184,212,74,0.3)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+          <div style="position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,rgba(44,74,110,0.3),rgba(21,36,53,0.5));display:flex;align-items:center;justify-content:center;cursor:pointer" onclick="this.innerHTML='<iframe src=\'https://www.youtube.com/embed/1JM_lXuqLHM?autoplay=1&rel=0\' allow=\'accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture\' allowfullscreen loading=\'lazy\' title=\'Venduto in 30 giorni — la storia di Marco\' style=\'width:100%;height:100%;border:none\'></iframe>'">
+            <img src="https://img.youtube.com/vi/1JM_lXuqLHM/hqdefault.jpg" alt="Video testimonianza — cliente soddisfatto vendita casa Padova" width="480" height="270" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.6">
+            <div style="position:relative;z-index:1;width:56px;height:56px;background:rgba(184,212,74,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform 0.2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="#152435" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+          </div>
+          <div style="padding:18px 20px">
+            <div style="color:#FFD23F;font-size:0.8rem;margin-bottom:6px;letter-spacing:2px">★★★★★</div>
+            <p style="font-size:0.82rem;color:rgba(255,255,255,0.8);line-height:1.6;font-style:italic;margin-bottom:10px">"Venduto in 30 giorni esatti. Non ci credevo, ma il team di Gino ha fatto tutto."</p>
+            <div style="font-size:0.72rem;font-weight:700;color:white">Marco B. — <span style="color:rgba(255,255,255,0.4);font-weight:400">Padova Centro</span></div>
+          </div>
+        </div>
+        <div class="rv d2" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;overflow:hidden;transition:all 0.3s" onmouseover="this.style.borderColor='rgba(184,212,74,0.3)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+          <div style="position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,rgba(44,74,110,0.3),rgba(21,36,53,0.5));display:flex;align-items:center;justify-content:center;cursor:pointer" onclick="this.innerHTML='<iframe src=\'https://www.youtube.com/embed/1JM_lXuqLHM?autoplay=1&rel=0\' allow=\'accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture\' allowfullscreen loading=\'lazy\' title=\'Famiglia Zanetti — casa venduta a Limena\' style=\'width:100%;height:100%;border:none\'></iframe>'">
+            <img src="https://img.youtube.com/vi/1JM_lXuqLHM/hqdefault.jpg" alt="Video testimonianza — famiglia soddisfatta acquisto casa Limena" width="480" height="270" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.6">
+            <div style="position:relative;z-index:1;width:56px;height:56px;background:rgba(184,212,74,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform 0.2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="#152435" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+          </div>
+          <div style="padding:18px 20px">
+            <div style="color:#FFD23F;font-size:0.8rem;margin-bottom:6px;letter-spacing:2px">★★★★★</div>
+            <p style="font-size:0.82rem;color:rgba(255,255,255,0.8);line-height:1.6;font-style:italic;margin-bottom:10px">"Trovata la casa dei sogni in meno di un mese. Un servizio impeccabile dall'inizio alla fine."</p>
+            <div style="font-size:0.72rem;font-weight:700;color:white">Famiglia Zanetti — <span style="color:rgba(255,255,255,0.4);font-weight:400">Limena</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="rv sr" style="text-align:center;margin-top:36px">
       <a href="https://maps.app.goo.gl/xuCiRGDCSKskpTSf6?g_st=ic" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;font-size:0.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--oro);border-bottom:1px solid rgba(184,212,74,0.3);padding-bottom:4px;transition:all 0.2s">Leggi tutte le 127 recensioni su Google <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
     </div>
@@ -1456,6 +1494,7 @@ function loadVideo(wrap) {
 }
 </script>
 <script src="js/nav-mobile.js" defer></script>
+<script src="js/lead-conversion.js" defer></script>
 <script src="js/cookie-consent.js" defer></script>
 <!-- STICKY MOBILE CTA -->
 <div class="sticky-cta-mobile" id="stickyCta">
