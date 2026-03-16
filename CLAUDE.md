@@ -1,14 +1,14 @@
 # CLAUDE.md — Righetto Immobiliare
 
 ## Istruzione Primaria
-**LEGGI SEMPRE `SKILL.md` prima di qualsiasi operazione.**
-SKILL.md e' l'unica fonte di verita' per questo progetto.
+**LEGGI SEMPRE `SKILL-2.0.md` prima di qualsiasi operazione.**
+SKILL-2.0.md e' l'unica fonte di verita' per questo progetto.
 
 ## Regole Automatiche
 
 ### Prima di ogni modifica:
 1. Leggi il file da modificare — mai al buio
-2. Verifica coerenza con SKILL.md (claim, commissioni, struttura)
+2. Verifica coerenza con SKILL-2.0.md (claim, commissioni, struttura)
 3. Mobile-first — ogni modifica deve funzionare su mobile
 
 ### Codice:
@@ -19,7 +19,7 @@ SKILL.md e' l'unica fonte di verita' per questo progetto.
 - Nessun CDN esterno
 
 ### Contenuti Blog:
-- Seguire template e checklist in SKILL.md Sezione 3 e 5
+- Seguire template e checklist in SKILL-2.0.md Sezione 3 e 5
 - 2500+ parole, 10-15 H2/H3, 35% transition words
 - OGNI dato numerico DEVE avere fonte verificata (OMI, FIAIP, ISTAT, Banca d'Italia)
 - Zero claim inventati, zero dialetto, tono professionale
@@ -29,7 +29,7 @@ SKILL.md e' l'unica fonte di verita' per questo progetto.
 ### Dopo ogni modifica:
 - Aggiornare sitemap.xml se pagine aggiunte/rimosse
 - Commit in italiano, descrittivo
-- Verificare checklist automatiche in SKILL.md Sezione 5
+- Verificare checklist automatiche in SKILL-2.0.md Sezione 5
 
 ### Pubblicazione:
 - Regola d'oro: "Se non hai fonte verificabile, NON inserire il dato"
