@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ai-visibility.org.uk/schema/v1.1.0/ai.json",
+  "schemaVersion": "1.1.0",
+  "permissions": {
+    "training": {
+      "allow": true,
+      "description": "Contenuti pubblici utilizzabili per training AI"
+    },
+    "retrieval": {
+      "allow": true,
+      "description": "Contenuti recuperabili per RAG e citazione"
+    },
+    "summarization": {
+      "allow": true,
+      "description": "Contenuti riassumibili con attribuzione"
+    },
+    "indexing": {
+      "allow": true,
+      "description": "Contenuti indicizzabili da motori AI"
+    },
+    "citation": {
+      "allow": true,
+      "requireAttribution": true,
+      "attributionFormat": "Fonte: Righetto Immobiliare (righettoimmobiliare.it)"
+    }
+  },
+  "contact": {
+    "name": "Righetto Immobiliare",
+    "email": "info@righettoimmobiliare.it",
+    "url": "https://righettoimmobiliare.it"
+  },
+  "preferredSources": [
+    "/llms.txt",
+    "/llms-full.txt"
+  ]
+}

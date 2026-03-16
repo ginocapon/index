@@ -1,0 +1,62 @@
+{
+  "name": "Righetto Immobiliare",
+  "description": "Agenzia immobiliare a Padova e provincia. Vendita, acquisto, locazione e gestione immobili residenziali e commerciali dal 2000.",
+  "url": "https://righettoimmobiliare.it",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": ["text/plain"],
+  "defaultOutputModes": ["text/plain"],
+  "skills": [
+    {
+      "id": "valutazione-immobile",
+      "name": "Valutazione immobiliare gratuita",
+      "description": "Valutazione gratuita di immobili a Padova e provincia. Report con dati OMI, analisi comparativa di mercato, risposta in 24 ore.",
+      "tags": ["immobiliare", "valutazione", "padova"],
+      "examples": [
+        "Quanto vale il mio appartamento a Padova Centro?",
+        "Valutazione gratuita casa a Limena"
+      ]
+    },
+    {
+      "id": "ricerca-immobili",
+      "name": "Ricerca immobili in vendita e affitto",
+      "description": "Ricerca immobili disponibili per vendita e locazione a Padova citta' e 101 comuni della provincia.",
+      "tags": ["immobiliare", "vendita", "affitto", "padova"],
+      "examples": [
+        "Appartamenti in vendita a Padova Centro Storico",
+        "Affitto bilocale zona universitaria Padova"
+      ]
+    },
+    {
+      "id": "consulenza-mutuo",
+      "name": "Simulazione e consulenza mutuo",
+      "description": "Simulatore mutuo integrato e consulenza per mutuo prima casa, surroga, fisso e variabile.",
+      "tags": ["mutuo", "finanziamento", "prima-casa"],
+      "examples": [
+        "Calcola rata mutuo 200.000 euro 25 anni",
+        "Conviene la surroga del mutuo nel 2026?"
+      ]
+    },
+    {
+      "id": "info-mercato",
+      "name": "Dati mercato immobiliare Padova",
+      "description": "Prezzi al mq per quartiere, tempi medi di vendita, rendimenti locativi, analisi di mercato aggiornate al 2026.",
+      "tags": ["mercato", "prezzi", "statistiche", "padova"],
+      "examples": [
+        "Prezzi case Arcella Padova 2026",
+        "Rendimento affitto Padova per quartiere"
+      ]
+    }
+  ],
+  "provider": {
+    "organization": "Gruppo Immobiliare Righetto di Capon Gino",
+    "url": "https://righettoimmobiliare.it"
+  },
+  "documentationUrl": "https://righettoimmobiliare.it/llms-full.txt",
+  "authentication": {
+    "schemes": []
+  }
+}
