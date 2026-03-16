@@ -371,7 +371,10 @@ function generateSlug(titolo) {
     'mutui casa a padova 2026: tassi aggiornati e migliori offerte': { img: 'img/foto-servizi/gestione-preliminari-padova.webp', url: 'blog-mutui-casa-padova-2026' },
     'surroga mutuo 2026: quando conviene e come risparmiare a padova': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-surroga-mutuo-padova-2026' },
     'mutuo tasso fisso o variabile nel 2026? guida alla scelta a padova': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-mutuo-fisso-variabile-padova-2026' },
-    'caparra confirmatoria: guida completa per chi compra o vende casa a padova': { img: 'img/foto-servizi/gestione-preliminari-padova.webp', url: 'blog-caparra-confirmatoria-padova' }
+    'caparra confirmatoria: guida completa per chi compra o vende casa a padova': { img: 'img/foto-servizi/gestione-preliminari-padova.webp', url: 'blog-caparra-confirmatoria-padova' },
+    'mercato immobiliare limena 2026: prezzi al mq, trend e analisi': { img: 'img/foto-servizi/gestioni-immobili-padova.webp', url: 'blog-mercato-immobiliare-limena-2026' },
+    'immobili centro storico padova 2026: prezzi, rendimenti e analisi': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-mercato-immobiliare-padova-centro-2026' },
+    'limena o centro padova? dove comprare casa nel 2026: confronto dati': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-limena-vs-padova-centro-dove-comprare-2026' }
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
@@ -412,7 +415,10 @@ function generateSlug(titolo) {
     { titolo: 'Mutui Casa a Padova 2026: Tassi Aggiornati e Migliori Offerte', categoria: 'Consigli acquisto', data: '2026-03-14', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/gestione-preliminari-padova.webp', url_statico: 'blog-mutui-casa-padova-2026' },
     { titolo: 'Surroga Mutuo 2026: Quando Conviene e Come Risparmiare a Padova', categoria: 'Consigli acquisto', data: '2026-03-14', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-surroga-mutuo-padova-2026' },
     { titolo: 'Mutuo Tasso Fisso o Variabile nel 2026? Guida alla Scelta a Padova', categoria: 'Consigli acquisto', data: '2026-03-14', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-mutuo-fisso-variabile-padova-2026' },
-    { titolo: 'Caparra Confirmatoria: Guida Completa per Chi Compra o Vende Casa a Padova', categoria: 'Normativa', data: '2026-03-14', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/gestione-preliminari-padova.webp', url_statico: 'blog-caparra-confirmatoria-padova' }
+    { titolo: 'Caparra Confirmatoria: Guida Completa per Chi Compra o Vende Casa a Padova', categoria: 'Normativa', data: '2026-03-14', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/gestione-preliminari-padova.webp', url_statico: 'blog-caparra-confirmatoria-padova' },
+    { titolo: 'Mercato Immobiliare Limena 2026: Prezzi al mq, Trend e Analisi', categoria: 'Mercato locale', data: '2026-03-16', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/gestioni-immobili-padova.webp', url_statico: 'blog-mercato-immobiliare-limena-2026' },
+    { titolo: 'Immobili Centro Storico Padova 2026: Prezzi, Rendimenti e Analisi', categoria: 'Mercato locale', data: '2026-03-16', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-mercato-immobiliare-padova-centro-2026' },
+    { titolo: 'Limena o Centro Padova? Dove Comprare Casa nel 2026: Confronto Dati', categoria: 'Consigli acquisto', data: '2026-03-16', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-limena-vs-padova-centro-dove-comprare-2026' }
   ];
   // Carica da Supabase e merge con statici
   let articles = [];
