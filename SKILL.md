@@ -35,7 +35,7 @@ Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se 
 - Rispondi in italiano
 - Sii diretto e pratico
 - Proponi sempre prima di agire su operazioni irreversibili
-- Tono professionale B2B — **ZERO dialetto** (settore web agency)
+- Tono professionale — **ZERO dialetto** (settore immobiliare)
 
 ---
 
@@ -103,7 +103,7 @@ Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se 
 ├── vendere-casa-padova-errori.html  # Articolo vendita
 ├── articolo-riqualificazione.html   # Articolo riqualificazione
 │
-├── sitemap.xml                 # 88 URL indicizzate
+├── sitemap.xml                 # 102 URL indicizzate
 ├── robots.txt                  # Whitelist AI bots + riferimenti file AI
 │
 ├── — FILE AI AGENTS —
@@ -118,7 +118,11 @@ Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se 
 │   └── security.txt            # Policy sicurezza (RFC 9116)
 │
 ├── css/
-│   └── styles.css              # Foglio stile principale
+│   ├── below-fold.css          # Stili below-the-fold (principale)
+│   ├── fonts.css               # Font-face declarations
+│   ├── nav-mobile.css          # Navigazione mobile
+│   ├── scroll-reveal.css       # Animazioni scroll
+│   └── welcome-popup.css       # Popup benvenuto
 ├── js/                         # JavaScript (homepage.js, chatbot.js, etc.)
 ├── assets/                     # Risorse statiche (immagini, media)
 ├── data/                       # Dati strutturati JSON
@@ -309,18 +313,18 @@ Inoltre, Infatti, Di conseguenza, In particolare, Tuttavia, Pertanto, Nonostante
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Quanto costa un sito web professionale nel 2026?",
+      "name": "Quanto costa vendere casa a Padova nel 2026?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "I prezzi variano: RaaS 249€/anno bloccato, Aruba da 9,90€ a 59,99€/anno (+506%), agenzie tradizionali 1.500-5.000€ una tantum + rinnovi. Fonte: preventivi ufficiali gennaio 2026."
+        "text": "I costi principali sono: commissione agenzia 3% + IVA per parte (min. 2.500€), tasse sulla plusvalenza se vendita entro 5 anni, spese notarili e certificazioni. Righetto Immobiliare offre valutazione gratuita e senza impegno."
       }
     },
     {
       "@type": "Question",
-      "name": "Cos'e' la garanzia anti-rincaro?",
+      "name": "Qual e' il tempo medio per vendere casa a Padova?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Clausola contrattuale che blocca il prezzo per sempre. Es: RaaS 249€/anno nel 2026 resta 249€ anche nel 2030."
+        "text": "Il tempo medio di vendita a Padova e' di 45-60 giorni con Righetto Immobiliare, grazie a valutazione professionale, foto professionali, virtual tour 360 e promozione multicanale. Fonte: dati interni agenzia, dal 2000."
       }
     }
   ]
@@ -451,7 +455,7 @@ Siti con segnali di esperienza hanno visto +23% dopo Core Update dicembre 2025 (
 1. **Crawling AI** — robots.txt con whitelist completa (GPTBot, ChatGPT-User, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, GoogleOther)
 2. **Struttura per Sintesi** — Risposta diretta nelle prime 2 righe di ogni sezione, poi approfondimento
 3. **Contenuti Citabili** — Dati proprietari, benchmark originali, case study con numeri unici
-4. **Prompt-style** — Ottimizzare per domande conversazionali ("Quale web agency italiana ha prezzi fissi?"), non solo keyword
+4. **Prompt-style** — Ottimizzare per domande conversazionali ("Qual e' la migliore agenzia immobiliare a Padova?"), non solo keyword
 5. **Consenso Multi-Fonte** — Presenza coerente su directory, review, forum, social, pubblicazioni terze
 6. **Aggiornamento Costante** — Date "ultimo aggiornamento" visibili, refresh trimestrale contenuti cornerstone
 7. **Dominio di Nicchia** — Profondita' tematica su argomenti specifici (le AI premiano chi copre un tema in profondita')
@@ -565,7 +569,7 @@ Schema.org e' il ponte critico tra siti web e AI agents. Contenuti con schema ha
    - Trend: Google Trends, Gartner, IlSole24Ore
 
 2. **SOSTITUIRE placeholder:**
-   - [COMPETITOR] → Nome reale (Aruba, Register, Keliweb)
+   - [COMPETITOR] → Nome reale agenzia concorrente (Tetto Rosso, Tecnocasa, Gabetti)
    - [DATO_FONTE] → Numero + fonte tra parentesi
    - [DATA] → Data pubblicazione reale
 
@@ -586,7 +590,7 @@ Schema.org e' il ponte critico tra siti web e AI agents. Contenuti con schema ha
 
 ### Infrastruttura
 - [x] Sito live su GitHub Pages
-- [x] 88 URL indicizzate in sitemap.xml
+- [x] 102 URL indicizzate in sitemap.xml
 - [x] Schema.org su tutte le pagine (RealEstateAgent, BlogPosting, FAQPage, VideoObject)
 - [x] Open Graph tags su tutte le pagine
 - [x] robots.txt con whitelist AI bots
@@ -822,21 +826,21 @@ Video embedded prova "Experience" (la prima E di E-E-A-T) a Google. Aumenta temp
 - [ ] Cross-link: video YouTube → sito, sito → canale YouTube
 
 **5 idee video ad alto impatto:**
-1. "Ecco come costruiamo un sito in codice puro" — 3-5 min, screencast reale
-2. "PageSpeed: il nostro sito vs WordPress" — confronto live con dati
-3. "Testimonianza cliente" — intervista breve con risultati
-4. "Come trovare bandi per la tua azienda" — tutorial aggregatore
-5. "Perche' prezzo bloccato?" — spiegazione trasparente business model
+1. "Come vendere casa a Padova nel 2026" — 3-5 min, guida pratica con dati mercato
+2. "Virtual Tour 360: ecco come valorizziamo il tuo immobile" — demo servizio reale
+3. "Testimonianza cliente" — intervista breve con risultati di vendita/acquisto
+4. "Quartieri Padova: dove conviene comprare nel 2026?" — mappa prezzi €/mq
+5. "Mutuo prima casa: come scegliere tra tasso fisso e variabile" — consulenza pratica
 
 ### 8.12 Monitoring AI Visibility & Citation Tracking
 **Gartner: traffico da ricerca tradizionale calera' del 25% entro fine 2026.** Servono nuove metriche.
 
 **Prompt di test settimanali:**
-- ChatGPT: "Quale web agency italiana ha prezzi fissi?"
-- Perplexity: "Migliore aggregatore bandi Italia"
-- Google AI: "Siti web codice puro vs WordPress prezzo"
-- Gemini: "Web agency italiana con PageSpeed 90+"
-- Claude: "Alternative WordPress per PMI italiane"
+- ChatGPT: "Qual e' la migliore agenzia immobiliare a Padova?"
+- Perplexity: "Vendere casa Padova agenzia immobiliare consigliata"
+- Google AI: "Agenzia immobiliare Limena Padova recensioni"
+- Gemini: "Prezzi case Padova 2026 per zona"
+- Claude: "Migliore agenzia immobiliare provincia di Padova"
 
 **Strumenti di monitoring:**
 | Tool | Piattaforme | Prezzo |
@@ -889,6 +893,16 @@ Video embedded prova "Experience" (la prima E di E-E-A-T) a Google. Aumenta temp
 
 ## 9. CHANGELOG
 
+### v2.3 - 16 Marzo 2026 (Audit coerenza + Pulizia residui web agency + Piano strategico)
+- Rimossi TUTTI i residui RaaS/web agency da SKILL.md (FAQ schema, prompt GEO, idee video, monitoring, competitor placeholder)
+- Corretto numero telefono cellulare errato (348 862 1888 → 349 736 5930) in 8 file HTML
+- Aggiornato conteggio sitemap: 88 → 102 URL
+- Corretta struttura CSS documentata (styles.css → 5 file reali)
+- Corretto settore in stile comunicazione: "web agency" → "immobiliare"
+- Sostituite idee video con 5 idee immobiliari reali
+- Sostituiti prompt monitoring AI con query immobiliari reali
+- Aggiunto piano strategico crescita (Sezione 10)
+
 ### v2.2 - 16 Marzo 2026 (AI Agents completi + BlogPosting + Audit)
 - Creati tutti i file AI agents: llms-full.txt, ai.json, agent.json, mcp.json, humans.txt, security.txt, manifest.json
 - robots.txt aggiornato con riferimenti a tutti i file AI
@@ -938,7 +952,7 @@ Video embedded prova "Experience" (la prima E di E-E-A-T) a Google. Aumenta temp
 - Aggiornato sitemap.xml con 6 nuovi URL
 
 ### v1.0 - 13 Marzo 2026 (Setup iniziale)
-- Creazione SKILL.md unificata per RaaS Automazioni
+- Creazione SKILL.md unificata per Righetto Immobiliare (basata su template RaaS)
 - Integrazione istruzioni SEO blog (ex README.md)
 - Documentazione completa struttura sito e prezzi
 - Performance rules Core Web Vitals 2026
@@ -949,6 +963,166 @@ Video embedded prova "Experience" (la prima E di E-E-A-T) a Google. Aumenta temp
 
 ---
 
-**VERSIONE:** 2.2 Righetto Immobiliare
+## 10. PIANO STRATEGICO CRESCITA — Marzo 2026
+
+### 10.1 Stato Attuale (Audit 16 Marzo 2026)
+| Area | Punteggio | Gap Critico |
+|------|-----------|-------------|
+| SEO on-page | 9.5/10 | — |
+| Schema.org | 9.5/10 | — |
+| Contenuti/Blog | 10/10 | — |
+| GEO/AEO | 9.5/10 | — |
+| Core Web Vitals | 8/10 | LCP <2s da raggiungere |
+| Chatbot AI | 10/10 | — |
+| Simulatore mutuo | 10/10 | — |
+| Analytics Dashboard | 9/10 | — |
+| **Recensioni Google** | **6/10** | **127 vs 256 Tetto Rosso — gap critico** |
+| **Domain Authority** | **4/10** | **Problema #1 — zero backlink significativi** |
+| **Apparizione SERP** | **3/10** | **Brand OK (pos. 1.3), non-brand deboli** |
+| **TOTALE** | **8.4/10** | **3 aree critiche da aggredire** |
+
+**Obiettivo Q2 2026:** Portare DA da 4 a 15+, Recensioni da 127 a 180+, SERP non-brand top 10 per 5 keyword target.
+
+### 10.2 PRIORITA' 1 — Domain Authority (da 4/10 a 15+)
+**Problema:** Zero backlink significativi. Senza DA, le keyword non-brand non si posizionano.
+
+**Azioni immediate (Settimana 1-2):**
+
+| # | Azione | Sforzo | Impatto DA | Come |
+|---|--------|--------|-----------|------|
+| 1 | **Registrazione directory immobiliari** | Basso | +2-3 DA | Immobiliare.it, Casa.it, Idealista, Wikicasa — profilo agenzia con link |
+| 2 | **Google Business Profile ottimizzato** | Basso | +1 DA | Post 2x/settimana, foto, Q&A, link sito |
+| 3 | **Pagine Gialle / Yelp / TripAdvisor** | Basso | +1-2 DA | Profili con NAP coerente + link |
+| 4 | **Camera di Commercio Padova** | Basso | +2 DA | Registrazione nell'elenco aziende online |
+| 5 | **FIAIP directory agenti** | Basso | +2-3 DA | Se iscritti FIAIP, richiedere profilo online |
+
+**Azioni medio termine (Settimana 3-8):**
+
+| # | Azione | Sforzo | Impatto DA | Come |
+|---|--------|--------|-----------|------|
+| 6 | **Guest post su blog immobiliari** | Medio | +3-5 DA | Scrivere articoli per IlSole24Ore Casa, Idealista News, blog FIAIP — con link |
+| 7 | **Dati mercato originali come link bait** | Medio | +5-8 DA | Creare "Report Mercato Immobiliare Padova Q1 2026" con dati OMI esclusivi — giornalisti e blogger linkano dati originali |
+| 8 | **Partnership universita' Padova** | Medio | +5-8 DA | Offrire dati/guida alloggi studenti → link da .edu (.ac.it) |
+| 9 | **Comunicati stampa locali** | Medio | +3-5 DA | PadovaOggi, Il Mattino di Padova, Il Gazzettino — notizie mercato locale con citazione |
+| 10 | **Sponsorship eventi locali** | Medio | +2-3 DA | Fiere, eventi quartiere — menzione sul sito evento |
+
+**Target DA:**
+- Mese 1: DA 4 → 8 (directory + GBP)
+- Mese 3: DA 8 → 15 (guest post + link bait)
+- Mese 6: DA 15 → 25 (PR + partnership)
+
+### 10.3 PRIORITA' 2 — Recensioni Google (da 127 a 250+)
+**Problema:** 127 recensioni vs 256 di Tetto Rosso. Gap di 129 recensioni.
+
+**Sistema automatizzato di raccolta recensioni:**
+
+| # | Azione | Sforzo | Impatto | Recensioni/mese stimate |
+|---|--------|--------|---------|------------------------|
+| 1 | **Email post-rogito automatica** | Basso | ALTO | +4-6/mese |
+| 2 | **WhatsApp follow-up 7gg dopo servizio** | Basso | ALTO | +3-5/mese |
+| 3 | **QR code in ufficio + biglietti visita** | Basso | MEDIO | +2-3/mese |
+| 4 | **Firma email con link recensione** | Basso | MEDIO | +1-2/mese |
+| 5 | **Richiesta a clienti storici (dal 2000)** | Medio | MOLTO ALTO | +30-50 una tantum |
+
+**Implementazione tecnica:**
+- Creare pagina `recensione.html` con redirect a Google Review (short link)
+- Aggiungere NFC tag in ufficio con link diretto
+- Template WhatsApp: "Gentile [Nome], grazie per aver scelto Righetto Immobiliare! La sua opinione e' preziosa — le chiediamo 30 secondi per lasciarci una recensione: [LINK]. Grazie! — Gino e Linda"
+
+**Target:**
+- Mese 1: 127 → 145 (clienti storici + sistema attivo)
+- Mese 3: 145 → 190 (sistema a regime ~15/mese)
+- Mese 6: 190 → 250+ (superare Tetto Rosso)
+
+### 10.4 PRIORITA' 3 — SERP Non-Brand (da 3/10 a 7+)
+**Problema:** Ottime posizioni brand (1.3), ma keyword non-brand ancora deboli.
+
+**Keyword target primarie (transazionali — portano clienti):**
+
+| Keyword | Volume | Difficolta' | Pagina Target | Azione |
+|---------|--------|-------------|---------------|--------|
+| "agenzia immobiliare padova" | 1.300/mese | Alta | agenzia-immobiliare-padova.html | Backlink + contenuto rafforzato |
+| "vendere casa padova" | 720/mese | Media | landing-vendere-casa-padova.html | Cluster contenuti completo |
+| "case in vendita padova" | 2.900/mese | Alta | immobili.html | Schema + filtri + contenuto |
+| "affitto padova" | 1.600/mese | Alta | blog-affitti-padova-canoni-2026.html | Pagina hub dedicata |
+| "valutazione immobile padova" | 480/mese | Media | landing-valutazione.html | CTA + backlink |
+
+**Keyword target secondarie (informazionali — portano DA e traffico):**
+
+| Keyword | Volume | Pagina Target |
+|---------|--------|---------------|
+| "prezzi case padova 2026" | 590/mese | blog-prezzi-case-padova-zona-2026.html |
+| "mutuo prima casa padova" | 390/mese | blog-mutuo-prima-casa-padova.html |
+| "mercato immobiliare padova" | 320/mese | blog-mercato-immobiliare-padova-2026.html |
+| "quartieri padova dove vivere" | 260/mese | blog-quartieri-padova-2026.html |
+
+**Azioni SERP immediate:**
+
+| # | Azione | Sforzo | Impatto SERP |
+|---|--------|--------|-------------|
+| 1 | **Internal linking strategico** | Basso | ALTO — collegare articoli blog ↔ zone ↔ servizi con anchor text ottimizzati |
+| 2 | **Contenuti hub per keyword cluster** | Medio | ALTO — creare pagine pillar che aggregano 5-8 articoli per topic |
+| 3 | **Title tag refresh** | Basso | MEDIO — aggiornare title a keyword esatte cercate (verificare Search Console) |
+| 4 | **FAQ schema su pagine commerciali** | Basso | MEDIO — aggiungere FAQ ricche su landing transazionali |
+| 5 | **Local pack optimization** | Basso | ALTO — GBP + NAP + recensioni = local 3-pack |
+
+### 10.5 PRIORITA' 4 — Core Web Vitals (da 8/10 a 9.5+)
+**Target: LCP < 2s su tutte le pagine.**
+
+| # | Azione | Sforzo | Impatto LCP |
+|---|--------|--------|------------|
+| 1 | **Critical CSS inline** | Medio | -0.3s — estrarre CSS above-fold e inline nell'`<head>` |
+| 2 | **Preload hero image** | Basso | -0.2s — `<link rel="preload" as="image">` su hero |
+| 3 | **Defer non-critical JS** | Basso | -0.1s — chatbot, analytics, scroll-reveal tutti `defer` |
+| 4 | **Font subsetting** | Medio | -0.1s — ridurre dimensione woff2 ai soli caratteri usati |
+
+### 10.6 Calendario Esecutivo — Q2 2026
+
+**SETTIMANA 1 (17-23 Marzo):**
+- [ ] Registrazione su 5 directory immobiliari (Immobiliare.it, Casa.it, Idealista, Wikicasa, PagineGialle)
+- [ ] Ottimizzazione Google Business Profile (foto, post, Q&A)
+- [ ] Creare pagina recensione.html con redirect Google Review
+- [ ] Inviare richiesta recensione a 50 clienti storici via WhatsApp
+- [ ] Implementare internal linking strategico (10 link incrociati blog ↔ zone)
+
+**SETTIMANA 2 (24-30 Marzo):**
+- [ ] Registrazione FIAIP directory + Camera di Commercio
+- [ ] Critical CSS inline su homepage e 5 landing principali
+- [ ] QR code recensioni stampato per ufficio
+- [ ] Firma email con link recensione per Gino e Linda
+- [ ] Title tag refresh su 10 pagine principali (da Search Console)
+
+**SETTIMANA 3-4 (Aprile 1-13):**
+- [ ] Primo guest post (IlSole24Ore Casa o Idealista News)
+- [ ] "Report Mercato Immobiliare Padova Q1 2026" — pagina dati esclusivi
+- [ ] Contattare PadovaOggi / Il Mattino per dati mercato
+- [ ] Creare 3 pagine hub (vendita, affitto, mutui) che aggregano cluster
+- [ ] Template email post-rogito automatica attiva
+
+**SETTIMANA 5-8 (Aprile 14 - Maggio 10):**
+- [ ] 2° e 3° guest post su blog immobiliari
+- [ ] Contatto Universita' Padova per partnership studenti
+- [ ] Sponsorship evento locale (fiera, mercato, evento quartiere)
+- [ ] FAQ schema aggiunto su tutte le landing transazionali
+- [ ] Secondo batch richieste recensioni clienti storici
+
+**KPI Mensili da Tracciare:**
+| KPI | Attuale | Target Mese 1 | Target Mese 3 | Target Mese 6 |
+|-----|---------|--------------|--------------|--------------|
+| Domain Authority | 4 | 8 | 15 | 25 |
+| Recensioni Google | 127 | 145 | 190 | 250+ |
+| Keyword top 10 (non-brand) | ~2 | 5 | 12 | 20 |
+| Keyword top 3 (non-brand) | 0 | 1 | 3 | 8 |
+| Traffico organico mensile | base | +20% | +60% | +150% |
+| LCP medio | ~2.5s | <2.2s | <2.0s | <1.8s |
+| Citazioni AI (prompt test) | 0 | 1 | 3 | 5 |
+
+### 10.7 Regola Anti-Stallo
+> "Se un'azione non produce risultati misurabili in 30 giorni, analizzare, aggiustare o sostituire."
+> Non restare fermi — ogni settimana DEVE avere almeno 3 azioni completate.
+
+---
+
+**VERSIONE:** 2.3 Righetto Immobiliare
 **ULTIMO AGGIORNAMENTO:** 16 Marzo 2026
-**PROSSIMO REVIEW:** Giugno 2026 (aggiornamento prezzi Q2, refresh previsioni AI)
+**PROSSIMO REVIEW:** Giugno 2026 (aggiornamento prezzi Q2, refresh previsioni AI, verifica KPI piano strategico)
