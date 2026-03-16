@@ -158,8 +158,8 @@ js/scroll-reveal.js                 - Animazioni scroll
 | SEO on-page | **9.8/10** | 18 meta desc corrette, 4 title corretti, tutti canonical OK, OG completi |
 | Schema.org | **9.8/10** | RealEstateAgent+FAQPage+BreadcrumbList+Person completi su 95%+ pagine, sameAs e GeoCoordinates ovunque |
 | Contenuti/Blog | **9.8/10** | 40+ articoli, 4 cluster completi, timestamp visibile su tutti, author bio ovunque |
-| GEO/AEO | **9.5/10** | Unico a ottimizzare per AI — robots.txt, llms.txt completo, timestamp, sameAs tutti OK |
-| Core Web Vitals | **8/10** | Buono, target LCP <2s da raggiungere, font preload OK, no will-change permanente |
+| GEO/AEO | **10/10** | Unico a ottimizzare per AI — robots.txt AI bots Allow, llms.txt completo (commissioni, orari, social, landing, 40+ blog), timestamp, sameAs tutti OK |
+| Core Web Vitals | **9/10** | Font preload completo (5 font), --nero definito, font-display:swap, GA4 deferred con requestIdleCallback, CSS critical/below-fold separato. Target LCP <2s quasi raggiunto |
 | Zone Pages | **9.5/10** | 14 zone con Pro/Contro, 5 FAQ schema, tabelle OMI, Place+GeoCoordinates |
 | Chatbot AI | **10/10** | Unico nel mercato locale |
 | Simulatore mutuo | **10/10** | Unico nel mercato locale |
@@ -168,7 +168,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 | Recensioni Google | **6/10** | ~127 vs 256 Tetto Rosso — gap critico |
 | Domain Authority | **4/10** | Problema #1 — nessun backlink significativo |
 | Apparizione SERP | **3/10** | Brand queries OK (pos. 1.3), non-brand ancora deboli, vecchie pagine WP ancora indicizzate |
-| **TOTALE** | **9.0/10** | Conversione quasi perfetta (9.9), SEO tecnico top, DA e SERP unici colli di bottiglia |
+| **TOTALE** | **9.2/10** | On-site perfetto (media 9.8), GEO 10/10, Conversione 9.9/10. Unici colli di bottiglia: DA (4), SERP (3), Recensioni (6) — fattori off-site |
 
 ### 3.1 PERFORMANCE REALI — Google Search Console + GA4 (11 Marzo 2026)
 
