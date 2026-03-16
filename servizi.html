@@ -39,7 +39,7 @@
 <link rel="stylesheet" href="css/welcome-popup.css" media="print" onload="this.media='all'">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--nero:#152435;--bianco:#F7F5F1;--oro:#B8D44A;--grigio:#6B7A8D;--gc:#E1DBD1;--verde:#1E8449;--rosso:#C0392B;--sfondo:#ECE7DF;--blu:#2C4A6E;--blu2:#3A5F8C;--blu3:#4E789A;--azzurro:#8AB4CE;--oro2:#CDED62;--oro-bg:rgba(184,212,74,0.10);--testo:#152435;--carta:#F2EDE7}
+    :root{--nero:#152435;--bianco:#F7F5F1;--oro:#FF6B35;--grigio:#6B7A8D;--gc:#E1DBD1;--verde:#1E8449;--rosso:#C0392B;--sfondo:#ECE7DF;--blu:#2C4A6E;--blu2:#3A5F8C;--blu3:#4E789A;--azzurro:#8AB4CE;--oro2:#FF8F5E;--oro-bg:rgba(255,107,53,0.10);--testo:#152435;--carta:#F2EDE7}
     body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--testo)}
     a{text-decoration:none;color:inherit}
     /* HEADER */
@@ -57,7 +57,7 @@
 .h-btn:hover{background:var(--oro2);transform:translateY(-1px)}
     /* HERO */
     .hero{background:linear-gradient(135deg,var(--nero) 0%,var(--blu) 100%);padding:5rem 1.5rem 4rem;position:relative;overflow:hidden}
-    .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:500px;height:500px;background:radial-gradient(circle,rgba(184,212,74,.10) 0%,transparent 70%);pointer-events:none}
+    .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:500px;height:500px;background:radial-gradient(circle,rgba(255,107,53,.10) 0%,transparent 70%);pointer-events:none}
     .hero-inner{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
     @media(max-width:900px){.hero-inner{grid-template-columns:1fr}}
     .hero-tag{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.85rem}
@@ -66,12 +66,12 @@
     .hero p{font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.85;margin-bottom:1.6rem}
     .hero-btns{display:flex;gap:.65rem;flex-wrap:wrap}
     .btn-gold{background:var(--oro);color:var(--nero);padding:.65rem 1.4rem;border-radius:8px;font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
-    .btn-gold:hover{background:var(--oro2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,212,74,.25)}
+    .btn-gold:hover{background:var(--oro2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,107,53,.25)}
     .btn-outline{border:1px solid rgba(255,255,255,.25);color:#fff;padding:.65rem 1.4rem;border-radius:8px;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:border-color .2s,color .2s}
     .btn-outline:hover{border-color:var(--oro);color:var(--oro)}
     .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
     .hs{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:1.4rem 1rem;text-align:center;backdrop-filter:blur(8px);transition:transform .2s,border-color .2s}
-.hs:hover{transform:translateY(-2px);border-color:rgba(184,212,74,.3)}
+.hs:hover{transform:translateY(-2px);border-color:rgba(255,107,53,.3)}
     .hs-val{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;color:var(--oro)}
     .hs-lbl{font-size:.72rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-top:.25rem}
     /* SERVIZI GRID */
@@ -115,7 +115,7 @@
     .why-inner{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
     @media(max-width:900px){.why-inner{grid-template-columns:1fr}}
     .why-visual{background:var(--nero);border-radius:10px;padding:2.5rem;aspect-ratio:4/3;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
-    .why-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(184,212,74,.15) 0%,transparent 60%)}
+    .why-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(255,107,53,.15) 0%,transparent 60%)}
     .why-big{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:600;color:rgba(255,255,255,.06);position:absolute;top:1rem;right:1.2rem;line-height:1}
     .why-quote{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;font-style:italic;color:#fff;line-height:1.5;position:relative;z-index:1}
     .why-quote strong{font-weight:600;color:var(--oro);font-style:normal}
@@ -128,7 +128,7 @@
     .wi-desc{font-size:.78rem;color:var(--grigio);line-height:1.6}
     /* CTA FINALE */
     .cta-section{background:linear-gradient(135deg,var(--nero) 0%,var(--blu) 100%);padding:5rem 1.5rem;position:relative;overflow:hidden}
-.cta-section::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(184,212,74,.06) 0%,transparent 70%);pointer-events:none}
+.cta-section::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(255,107,53,.06) 0%,transparent 70%);pointer-events:none}
     .cta-inner{max-width:780px;margin:0 auto;text-align:center}
     .cta-inner h2{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:#fff;margin-bottom:.85rem}
     .cta-inner h2 strong{font-weight:600;font-style:italic;color:var(--oro)}

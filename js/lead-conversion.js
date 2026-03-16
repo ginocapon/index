@@ -189,7 +189,7 @@ function showSpeedToLeadConfirmation(container) {
         'La tua richiesta e\' stata ricevuta. <strong>Ti ricontattiamo entro pochi minuti</strong> durante gli orari di apertura.' +
       '</p>' +
       '<div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem">' +
-        '<div style="background:rgba(184,212,74,0.12);border:1px solid rgba(184,212,74,0.25);border-radius:8px;padding:0.6rem 1rem;text-align:center">' +
+        '<div style="background:rgba(255,107,53,0.12);border:1px solid rgba(255,107,53,0.25);border-radius:8px;padding:0.6rem 1rem;text-align:center">' +
           '<div style="font-size:0.62rem;text-transform:uppercase;letter-spacing:1px;color:#6B7A8D;margin-bottom:0.2rem">Tempo medio risposta</div>' +
           '<div style="font-size:1.2rem;font-weight:700;color:#2C4A6E" id="speed-counter">< 30 min</div>' +
         '</div>' +
@@ -218,6 +218,9 @@ function showSpeedToLeadConfirmation(container) {
     response_promise: 'under_30_min',
     lead_name: nome
   });
+
+  // Segna form compilato per disabilitare exit intent
+  try { sessionStorage.setItem('form_submitted', '1'); } catch(e) {}
 }
 
 
@@ -299,7 +302,9 @@ var social_proofs = [
   { text: 'Anna ha simulato il mutuo per un trilocale', time: '28 min fa', icon: 'calc' },
   { text: 'Luca ha prenotato un virtual tour a Selvazzano', time: '1 ora fa', icon: 'eye' },
   { text: '3 nuove richieste di valutazione oggi', time: 'oggi', icon: 'trending' },
-  { text: 'Silvia ha trovato casa ad Albignasego', time: '4 giorni fa', icon: 'heart' }
+  { text: 'Silvia ha trovato casa ad Albignasego', time: '4 giorni fa', icon: 'heart' },
+  { text: '127 recensioni Google — media 4.9/5 stelle', time: 'verificato', icon: 'star' },
+  { text: '350+ immobili gestiti in 101 comuni dal 2000', time: 'dal 2000', icon: 'trending' }
 ];
 
 var proofIndex = 0;
@@ -326,17 +331,18 @@ function showProof() {
   proofIndex++;
 
   var icons = {
-    home: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8D44A" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+    home: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
     check: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E8449" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>',
     calc: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C4A6E" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/></svg>',
     eye: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4E789A" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
-    trending: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B8D44A" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>',
-    heart: '<svg width="16" height="16" viewBox="0 0 24 24" fill="#C0392B" stroke="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>'
+    trending: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>',
+    heart: '<svg width="16" height="16" viewBox="0 0 24 24" fill="#C0392B" stroke="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>',
+    star: '<svg width="16" height="16" viewBox="0 0 24 24" fill="#F4B400" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>'
   };
 
   proofContainer.innerHTML =
     '<div style="display:flex;align-items:flex-start;gap:10px">' +
-      '<div style="width:32px;height:32px;background:rgba(184,212,74,0.12);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">' +
+      '<div style="width:32px;height:32px;background:rgba(255,107,53,0.12);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">' +
         (icons[proof.icon] || icons.home) +
       '</div>' +
       '<div>' +
@@ -415,18 +421,22 @@ function showExitPopup() {
     'box-shadow:0 24px 64px rgba(21,36,53,0.25);position:relative;transform:scale(0.9);transition:transform 0.3s">' +
       '<button onclick="this.closest(\'#exit-overlay\').remove();sessionStorage.setItem(\'exit_dismissed\',\'1\')" ' +
         'style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.4rem;color:#6B7A8D;cursor:pointer;padding:8px" aria-label="Chiudi">&times;</button>' +
-      '<div style="width:56px;height:56px;background:rgba(184,212,74,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem">' +
-        '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B8D44A" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>' +
+      '<div style="width:56px;height:56px;background:rgba(255,107,53,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem">' +
+        '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>' +
       '</div>' +
       '<h3 style="font-family:Cormorant Garamond,serif;font-size:1.6rem;font-weight:700;color:#152435;margin-bottom:0.6rem">' + headline + '</h3>' +
       '<p style="font-size:0.85rem;color:#6B7A8D;line-height:1.7;margin-bottom:1.5rem">' + subtitle + '</p>' +
-      '<a href="' + ctaHref + '" style="display:inline-flex;align-items:center;gap:8px;background:#B8D44A;color:#152435;' +
+      '<a href="' + ctaHref + '" style="display:inline-flex;align-items:center;gap:8px;background:#FF6B35;color:#152435;' +
         'padding:14px 28px;border-radius:8px;font-weight:800;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;' +
         'transition:all 0.2s;text-decoration:none" ' +
         'onclick="trackEvent(\'exit_intent\',\'click\',\'' + ctaText + '\')">' +
         ctaText +
       '</a>' +
-      '<p style="font-size:0.72rem;color:#9AACBD;margin-top:1rem">127 recensioni — 4.9/5 su Google</p>' +
+      '<div style="display:flex;align-items:center;gap:6px;justify-content:center;margin-top:1.2rem;padding:8px 14px;background:rgba(192,57,43,0.06);border:1px solid rgba(192,57,43,0.15);border-radius:8px">' +
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' +
+        '<span style="font-size:0.72rem;color:#C0392B;font-weight:600">Disponibilita\' limitata — rispondiamo entro 30 minuti</span>' +
+      '</div>' +
+      '<p style="font-size:0.72rem;color:#9AACBD;margin-top:0.6rem">127 recensioni — 4.9/5 su Google</p>' +
     '</div>';
 
   document.body.appendChild(overlay);
@@ -489,6 +499,129 @@ function setupTimeTracking() {
 
 
 /* ═══════════════════════════════════════════════════
+   9. STICKY CTA MOBILE — Auto-inject se non presente
+   Garantisce CTA fisso su mobile per ogni pagina
+   ═══════════════════════════════════════════════════ */
+
+function injectStickyCTA() {
+  // Non iniettare se gia' presente nella pagina
+  if (document.querySelector('.sticky-cta-mobile')) return;
+  // Solo mobile
+  if (window.innerWidth > 768) return;
+
+  // Determina CTA primario in base alla pagina
+  var path = location.pathname.replace(/\/$/, '').replace(/\.html$/, '');
+  var primaryText = 'Valutazione Gratis';
+  var primaryHref = 'contatti';
+  var borderColor = 'var(--oro, #FF6B35)';
+
+  if (path.indexOf('vendita') !== -1 || path.indexOf('vendere') !== -1) {
+    primaryText = 'Valutazione Gratis';
+    primaryHref = 'contatti';
+  } else if (path.indexOf('valutazion') !== -1) {
+    primaryText = 'Richiedi Stima';
+    primaryHref = '#form';
+    borderColor = 'var(--purple, #6C63FF)';
+  } else if (path.indexOf('mutuo') !== -1 || path.indexOf('calcolo') !== -1) {
+    primaryText = 'Calcola Mutuo';
+    primaryHref = '#calcolatore';
+    borderColor = 'var(--green, #1B6B3A)';
+  } else if (path.indexOf('agente') !== -1) {
+    primaryText = 'Contattaci';
+    primaryHref = '#contatti';
+    borderColor = 'var(--mint, #00E5A0)';
+  } else if (path.indexOf('locazion') !== -1 || path.indexOf('affitto') !== -1) {
+    primaryText = 'Consulenza Gratis';
+    primaryHref = 'contatti';
+  }
+
+  // Inietta CSS
+  var style = document.createElement('style');
+  style.textContent = '.sticky-cta-mobile{display:none;position:fixed;bottom:0;left:0;right:0;z-index:990;background:rgba(21,36,53,0.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:2px solid ' + borderColor + ';padding:10px 16px;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.22,1,0.36,1);box-shadow:0 -4px 24px rgba(0,0,0,0.2)}.sticky-cta-mobile.visible{transform:translateY(0)}.sticky-cta-inner{display:flex;gap:8px;justify-content:center;align-items:center}.scta-primary{flex:1;text-align:center;padding:12px 8px;border-radius:8px;font-weight:700;font-size:.82rem;background:#FF6B35;color:#152435;text-decoration:none}.scta-wa{width:44px;height:44px;border-radius:8px;background:#25D366;display:flex;align-items:center;justify-content:center;text-decoration:none}.scta-tel{width:44px;height:44px;border-radius:8px;background:transparent;border:1.5px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;text-decoration:none}@media(max-width:768px){.sticky-cta-mobile{display:block}body{padding-bottom:64px}}';
+  document.head.appendChild(style);
+
+  // Inietta HTML
+  var bar = document.createElement('div');
+  bar.className = 'sticky-cta-mobile';
+  bar.id = 'stickyCta';
+  bar.innerHTML = '<div class="sticky-cta-inner">' +
+    '<a href="' + primaryHref + '" class="scta-primary">' + primaryText + '</a>' +
+    '<a href="https://wa.me/393497365930" class="scta-wa" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg></a>' +
+    '<a href="tel:+390498843484" class="scta-tel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 .18H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg></a>' +
+    '</div>';
+  document.body.appendChild(bar);
+
+  // Scroll listener con isteresi
+  var shown = false;
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400 && !shown) {
+      shown = true;
+      bar.classList.add('visible');
+    } else if (window.scrollY <= 200 && shown) {
+      shown = false;
+      bar.classList.remove('visible');
+    }
+  }, { passive: true });
+}
+
+
+/* ═══════════════════════════════════════════════════
+   10. HOMEPAGE FORM COMPATIBILITY
+   Adatta speed-to-lead e segmentazione al form homepage
+   ═══════════════════════════════════════════════════ */
+
+function enhanceHomepageForm() {
+  // Homepage usa ID diversi: contattoForm, cf-nome, cf-interesse, cf-ok
+  var homeForm = document.getElementById('contattoForm');
+  if (!homeForm) return;
+
+  var nomeField = document.getElementById('cf-nome');
+  var interesseField = document.getElementById('cf-interesse');
+  var successDiv = document.getElementById('cf-ok');
+
+  // Segmentazione dal campo interesse
+  if (interesseField) {
+    interesseField.addEventListener('change', function() {
+      var val = interesseField.value || '';
+      var intent = 'neutro';
+      if (val.toLowerCase().indexOf('vend') !== -1 || val.toLowerCase().indexOf('valut') !== -1) {
+        intent = 'venditore';
+      } else if (val.toLowerCase().indexOf('acquist') !== -1 || val.toLowerCase().indexOf('cerc') !== -1 || val.toLowerCase().indexOf('affitt') !== -1) {
+        intent = 'acquirente';
+      }
+      window._leadIntent = intent;
+      trackEvent('lead_segmentation', 'intent_detected', intent, { selected_option: val, source: 'homepage' });
+    });
+  }
+
+  // Speed-to-lead per il form homepage
+  if (successDiv) {
+    var origInvia = window.inviaContatto;
+    if (origInvia) {
+      window.inviaContatto = function(e) {
+        if (nomeField) window._leadNome = (nomeField.value || '').trim();
+        window._leadTime = new Date();
+        return origInvia.apply(this, arguments);
+      };
+    }
+
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(m) {
+        if (m.type === 'attributes' || m.type === 'childList') {
+          var isVisible = successDiv.style.display !== 'none' && successDiv.style.display !== '' && successDiv.innerHTML.trim() !== '';
+          if (isVisible && !successDiv.hasAttribute('data-stl-enhanced')) {
+            successDiv.setAttribute('data-stl-enhanced', '1');
+            showSpeedToLeadConfirmation(successDiv);
+          }
+        }
+      });
+    });
+    observer.observe(successDiv, { attributes: true, attributeFilter: ['style'], childList: true });
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════
    INIT — Avvia tutto dopo il DOM ready
    ═══════════════════════════════════════════════════ */
 
@@ -496,12 +629,14 @@ function init() {
   runABTests();
   setupCTATracking();
   enhanceSpeedToLead();
+  enhanceHomepageForm();
   setupLeadSegmentation();
   patchSupabaseInsert();
   startSocialProof();
   setupExitIntent();
   setupScrollTracking();
   setupTimeTracking();
+  injectStickyCTA();
 }
 
 if (document.readyState === 'loading') {
