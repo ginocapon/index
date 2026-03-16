@@ -518,7 +518,7 @@ Schema.org e' il ponte critico tra siti web e AI agents. Contenuti con schema ha
 - [ ] Link navbar e footer coerenti con tutte le altre pagine
 - [ ] Cookie banner presente
 - [ ] Nessun CDN esterno (codice puro)
-- [ ] GA4 (G-JFM8JG9C2R) presente
+- [ ] GA4 (G-9MHDHHES26) presente
 - [ ] Risposta diretta nelle prime 2 righe di ogni sezione H2 (GEO)
 - [ ] Contenuto risponde a domande conversazionali
 
