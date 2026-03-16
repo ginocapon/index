@@ -84,6 +84,8 @@
     .fsuccess{display:none;text-align:center;padding:2rem;background:rgba(30,132,73,.08);border:1px solid rgba(30,132,73,.2);border-radius:10px;margin-top:1rem}
     .fsuccess h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:.4rem;color:var(--verde)}
     .fsuccess p{font-size:.82rem;color:var(--grigio)}
+    @keyframes pulseUrgency{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.03);opacity:0.9}}
+    @keyframes scaleIn{from{transform:scale(0.5);opacity:0}to{transform:scale(1);opacity:1}}
     /* SIDEBAR INFO */
     .sidebar{display:flex;flex-direction:column;gap:1rem}
     .ibox{background:var(--sfondo);border:1px solid var(--gc);border-radius:10px;overflow:hidden}
@@ -189,7 +191,7 @@
   <div class="hero-inner">
     <div class="htag">Padova e provincia</div>
     <h1>Parliamo del tuo <strong>immobile</strong> a Padova</h1>
-    <p>Siamo a tua disposizione per qualsiasi domanda: vendita, affitto, valutazione, preliminari. Prima consulenza sempre gratuita e senza impegno. Rispondiamo entro 24 ore.</p>
+    <p>Siamo a tua disposizione per qualsiasi domanda: vendita, affitto, valutazione, preliminari. Prima consulenza sempre gratuita e senza impegno. <strong>Ti ricontattiamo entro pochi minuti</strong> durante gli orari di apertura.</p>
   </div>
 </div>
 
@@ -198,7 +200,7 @@
   <div class="fbox sr">
     <div class="fbox-head">
       <h2>Inviaci un messaggio</h2>
-      <p>Compilaci il form e ti ricontatteremo entro 24 ore lavorative</p>
+      <p>Compilaci il form e ti ricontattiamo in pochi minuti</p>
     </div>
     <div class="fbox-body"><form id="contact-form" onsubmit="sendForm();return false;" novalidate>
       <div class="frow">
@@ -235,8 +237,8 @@
       </div>
       <button class="fsubmit" type="submit">Invia messaggio</button>
       <div class="fsuccess" id="success">
-        <h3>✓ Messaggio inviato!</h3>
-        <p>Grazie per averci contattato. Ti risponderemo entro 24 ore lavorative. Se hai urgenza, chiamaci al <strong>049.88.43.484</strong> o scrivici su WhatsApp.</p>
+        <h3>Messaggio inviato!</h3>
+        <p>Grazie per averci contattato. Ti ricontattiamo entro pochi minuti durante gli orari di apertura.</p>
       </div>
     </form></div>
   </div>
@@ -421,6 +423,7 @@ async function sendForm(){
 (function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js';document.body.appendChild(s);}
 setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
 })();</script>
+<script src="js/lead-conversion.js" defer></script>
 <script src="js/cookie-consent.js" defer></script>
 <script src="js/scroll-reveal.js" defer></script>
 <script src="js/welcome-popup.js" defer></script>
