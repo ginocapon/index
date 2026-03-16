@@ -811,7 +811,7 @@ function render(d) {
   // Canonical URL
   let canonical = document.querySelector('link[rel="canonical"]');
   if (!canonical) { canonical = document.createElement('link'); canonical.rel = 'canonical'; document.head.appendChild(canonical); }
-  canonical.href = 'https://ginocapon.github.io/index/immobile.html?s=' + encodeURIComponent(generatePropertySlug(d));
+  canonical.href = 'https://righettoimmobiliare.it/immobile?s=' + encodeURIComponent(generatePropertySlug(d));
 
   // Open Graph
   const setOg = (prop, val) => { let m = document.querySelector('meta[property="og:'+prop+'"]'); if(!m){m=document.createElement('meta');m.setAttribute('property','og:'+prop);document.head.appendChild(m);} m.content=val; };

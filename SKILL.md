@@ -1,19 +1,21 @@
-# SKILL UNIFICATA — Righetto Immobiliare
-## Prompt Operativo Master Consolidato
+# SKILL 2.0 — Righetto Immobiliare
+## Prompt Operativo Master Unificato
 
-> **Versione:** 2.2 — 16 Marzo 2026
-> **Unica fonte di verita'** per sviluppo, manutenzione, contenuti SEO, strategia GEO e AI Agents.
-> **Prossima verifica consigliata:** Giugno 2026
+> **Versione:** 2.0 — 15 Marzo 2026
+> **Unica fonte di verita'** — Sostituisce SKILL-UNIFICATA.md, AUTOMATION-SITE-2026.md e CLAUDE.md
+> **Ultimo aggiornamento Google verificato:** 8 Marzo 2026
+> **Prossima verifica consigliata:** Aprile 2026
 
 ---
 
 ## 1. ISTRUZIONI PER CLAUDE
 
-### 1.1 Verifica Aggiornamenti Google (Consigliata ad Ogni Sessione)
-Prima di ogni sessione di lavoro SEO, ricercare:
+### 1.1 Verifica Aggiornamenti Google (Obbligatoria ad Ogni Sessione)
+Prima di ogni sessione di lavoro, esegui queste ricerche web:
 - `"Google Search updates [mese corrente] [anno corrente]"`
 - `"Core Web Vitals updates [anno corrente]"`
 - `"GEO Generative Engine Optimization updates [anno corrente]"`
+- `"Google Search Console new features [anno corrente]"`
 
 Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se trovi novita'.
 
@@ -22,20 +24,27 @@ Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se 
 2. **Mobile-first** — ogni modifica deve funzionare su mobile
 3. **No librerie extra** — il sito e' volutamente leggero (vanilla HTML/CSS/JS)
 4. **Commit** chiari e descrittivi in italiano
-5. **Aggiorna** sitemap.xml quando aggiungi/rimuovi pagine
-6. **Performance** — mai animazioni sull'elemento LCP; usare opacity/transform, mai filter
-7. **CTA contrast** — minimo 4.5:1 (WCAG AA)
-8. **Commissioni coerenti** — ogni riferimento alle commissioni deve essere: 3% + IVA per parte (min. 2.500€ vendita), 1 mensilita' + IVA (affitto)
-9. **Dati verificati** — ogni dato numerico DEVE avere fonte citata. Se non hai fonte, scrivi "dato non disponibile"
-10. **Zero claim inventati** — nessuna percentuale o statistica senza fonte verificabile
-11. **Claim verificati** — usare solo: 350+ immobili trattati, 101 comuni, 98% soddisfazione, 127 recensioni Google 4.9/5, dal 2000
-12. **URL coerenti** — usare sempre `righettoimmobiliare.it` senza www
+5. **Mai toccare** DNS, record MX, configurazione cPanel senza conferma esplicita
+6. **Aggiorna** sitemap.xml quando aggiungi/rimuovi pagine
+7. **Visual Saliency** — ogni pagina nuova DEVE seguire le regole above-the-fold
+8. **Performance** — mai animazioni sull'elemento LCP senza `animation-play-state: paused`
+9. **Registra ogni nuovo articolo blog** in TUTTI questi punti:
+   - `admin.html` → array `_blogSeedArticles`
+   - `blog.html` → array `articoliStatici`
+   - `js/homepage.js` → oggetto `staticMap` + array `articoliStatici`
+   - `sitemap.xml` → nuovo URL
+10. **URL pulite — MAI .html nei link** — tutti i link interni devono usare URL senza estensione `.html`. GitHub Pages serve automaticamente `pagina.html` quando visiti `/pagina`. I file su disco mantengono l'estensione `.html`, ma ogni `href`, `canonical`, `og:url`, sitemap e link interno deve puntare a URL pulite (es. `/landing-chat-valutazione` e NON `/landing-chat-valutazione.html`)
+11. **Auto-registrazione admin** — ogni nuova pagina creata (landing, blog, immobile) DEVE essere registrata automaticamente:
+    - **Landing pages** → inserire nella tabella Supabase `landing_pages` tramite seed in `admin.html` (`_landingSeedPages`) + aggiungere in array `EM_SITE_PAGES` + il picker email marketing le carica automaticamente dal seed/Supabase
+    - **Blog** → registrare in `sitemap.xml`, `blog.html`, `js/homepage.js`, `admin.html` (`_blogSeedArticles`)
+    - **Pagine generiche** → registrare in `sitemap.xml` + navigazione
+12. **Data di pubblicazione obbligatoria** — ogni landing page nel seed `_landingSeedPages` in `admin.html` DEVE avere il campo `data_pubblicazione` in formato `YYYY-MM-DD`. Senza questo campo la colonna "Pubblicazione" nell'admin mostra "—"
+13. **Entity-Based SEO (NO keyword stuffing)** — Google ragiona per **entita' semantiche**, NON per keyword ripetute. Nessuna frase di 2+ parole deve apparire piu' di 5 volte per pagina. "a Padova" max 8-10 volte. Usare sinonimi, varianti e campo semantico ricco. Title, H1 e meta description devono usare varianti diverse. Dettagli completi nella sezione 8.3
 
 ### 1.3 Stile di Comunicazione
 - Rispondi in italiano
 - Sii diretto e pratico
 - Proponi sempre prima di agire su operazioni irreversibili
-- Tono professionale — **ZERO dialetto** (settore immobiliare)
 
 ---
 
@@ -44,352 +53,272 @@ Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se 
 ### 2.1 Informazioni Generali
 | Campo | Valore |
 |---|---|
-| **Ragione Sociale** | Gruppo Immobiliare Righetto di Capon Gino |
-| **P.IVA** | 05182390285 |
-| **Dominio** | righettoimmobiliare.it (senza www) |
-| **Fondazione** | 2000 |
-| **Sede** | Via Roma n.96, 35010 Limena (PD) |
-| **Telefono** | 049.88.43.484 / Cell: 349 736 5930 |
-| **Email** | info@righettoimmobiliare.it |
-| **Orari** | Lun-Ven 9:00-13:00 / 15:00-19:00, Sab 9:00-13:00 |
-| **Tech Stack** | HTML statico + CSS custom + JS vanilla + Supabase backend |
-| **Framework** | Nessuno — zero dipendenze esterne, codice puro |
-| **Lingue** | Italiano (unica versione attiva) |
-| **Target** | Proprietari e acquirenti immobili — Padova e 101 comuni provincia |
-| **Hosting** | GitHub Pages |
-| **Performance** | PageSpeed 90+ |
+| **Dominio** | righettoimmobiliare.it / www.righettoimmobiliare.it |
+| **Hosting sito** | GitHub Pages (deploy automatico da `main`) |
+| **Hosting dominio/email** | cPanel (cpanel.righettoimmobiliare.it) |
+| **Tech Stack** | HTML statico + CSS + JS + Express.js (dev) |
+| **Database** | Supabase (PostgreSQL esterno) |
+| **API Email** | `api.righettoimmobiliare.it` — PHP relay su cPanel (mail() nativa, NO Brevo) |
+| **Email Marketing** | Admin → Supabase Edge Function → API relay — sistema completo nell'admin |
+| **Newsletter** | Solo raccolta contatti via form sito → tabella Supabase `newsletter_subscribers` |
+| **Form contatti** | Landing/contatti/chatbot → API relay diretto (config in `js/config.js`) |
+| **Analytics** | Google Analytics 4 (G-9MHDHHES26) |
+| **Chatbot AI** | "Sara" — assistente virtuale integrata |
+| **Repository** | GitHub — ginocapon/index |
 
-### 2.2 Struttura File Sito (root — GitHub Pages)
+### 2.2 Architettura Email (NO Brevo — tutto interno)
+
+> **Scelta progettuale:** non usiamo Brevo ne' servizi esterni per l'invio email.
+> Tutto passa per `api.righettoimmobiliare.it` — un relay PHP su cPanel che usa `mail()` nativa.
+> Questo ci da' controllo totale, zero costi, zero limiti di terze parti.
+
+**Flusso email a 2 livelli:**
+
+1. **Frontend → API Relay (diretto)**
+   - Landing pages, form contatti, chatbot Sara
+   - Chiamano `https://api.righettoimmobiliare.it/send-mail.php`
+   - Auth: header `X-API-Key` (configurato in `js/config.js`)
+   - Azioni: `send`, `send_single`, `send_batch`, `ping`
+
+2. **Admin Email Marketing → Supabase Edge Function → API Relay**
+   - Campagne email massive dall'admin
+   - Admin chiama `/functions/v1/send-email` su Supabase
+   - Edge Function gestisce coda, tracking, blacklist, rate limiting
+   - Poi delega invio effettivo al relay PHP
+   - Tabelle: `campagne_email`, `coda_email`, `email_tracking`, `email_blacklist`
+
+3. **Newsletter = solo raccolta contatti**
+   - Form blog, landing, contatti salvano in `newsletter_subscribers`
+   - L'admin mostra lista iscritti con filtri
+   - Per spedire agli iscritti: Email Marketing → seleziona gruppo "Solo Newsletter"
+
+**File chiave:**
+- `api/send-mail.php` — relay PHP (236 righe, su cPanel)
+- `supabase/functions/send-email/index.ts` — Edge Function (407 righe)
+- `js/config.js` — `EMAIL_RELAY_URL`, `EMAIL_RELAY_KEY`
+- `admin.html` — sezione Email Marketing (composizione, invio, tracking)
+
+### 2.3 Architettura DNS (NON TOCCARE MAI)
+- **Record A:** GitHub Pages (185.199.108.153, etc.)
+- **CNAME www:** ginocapon.github.io
+- **Record MX:** email su cPanel (NON MODIFICARE)
+- **Google Site Verification:** meta tag nel `<head>` di index.html
+
+### 2.4 Struttura File Principale
 ```
-/
-├── CLAUDE.md                   # Istruzioni automatiche per Claude
-├── SKILL.md                    # Questo file — unica fonte di verita'
-├── .nojekyll                   # Disabilita Jekyll su GitHub Pages
-│
-├── index.html                  # Homepage (hero, servizi, prezzi, FAQ, stats)
-├── chi-siamo.html              # Chi Siamo
-├── contatti.html               # Pagina contatti
-├── servizi.html                # Servizi overview
-├── faq.html                    # FAQ
-├── blog.html                   # Pagina blog principale
-├── immobili.html               # Lista immobili
-├── immobile.html               # Dettaglio immobile (dinamico via JS)
-├── agenzia-immobiliare-padova.html  # Landing agenzia
-├── privacy.html                # Privacy Policy GDPR
-├── cookie-policy.html          # Cookie Policy
-├── admin.html                  # Pannello admin (interno)
-│
-├── blog-*.html                 # 41 articoli blog in root (BlogPosting schema)
-│
-├── servizio-*.html             # 7 pagine servizi specifici
-│   ├── servizio-gestione.html
-│   ├── servizio-locazioni.html
-│   ├── servizio-preliminari.html
-│   ├── servizio-utenze.html
-│   ├── servizio-valutazioni.html
-│   ├── servizio-vendita.html
-│   └── servizio-virtual-tour.html
-│
-├── zona-*.html                 # 14 pagine zone Padova
-│   ├── zona-abano-terme.html
-│   ├── zona-arcella-padova.html
-│   ├── zona-centro-storico-padova.html
-│   ├── ... (e altre 11 zone)
-│   └── zona-voltabarozzo-padova.html
-│
-├── landing-*.html              # 12 landing pages (conversione, chat, offerte)
-├── landing/                    # 5 landing pages offerte energia
-│
-├── vendere-casa-padova-errori.html  # Articolo vendita
-├── articolo-riqualificazione.html   # Articolo riqualificazione
-│
-├── sitemap.xml                 # 102 URL indicizzate
-├── robots.txt                  # Whitelist AI bots + riferimenti file AI
-│
-├── — FILE AI AGENTS —
-├── llms.txt                    # Info sito per AI (standard llmstxt.org)
-├── llms-full.txt               # Contenuto completo pagine in Markdown
-├── ai.json                     # Permessi AI (standard ai-visibility.org.uk v1.1.0)
-├── humans.txt                  # Crediti team
-├── manifest.json               # PWA base
-├── .well-known/
-│   ├── agent.json              # Discovery A2A (Google/Linux Foundation)
-│   ├── mcp.json                # Discovery MCP (Anthropic/Linux Foundation)
-│   └── security.txt            # Policy sicurezza (RFC 9116)
-│
-├── css/
-│   ├── below-fold.css          # Stili below-the-fold (principale)
-│   ├── fonts.css               # Font-face declarations
-│   ├── nav-mobile.css          # Navigazione mobile
-│   ├── scroll-reveal.css       # Animazioni scroll
-│   └── welcome-popup.css       # Popup benvenuto
-├── js/                         # JavaScript (homepage.js, chatbot.js, etc.)
-├── assets/                     # Risorse statiche (immagini, media)
-├── data/                       # Dati strutturati JSON
-├── templates/                  # Template email (3 HTML)
-├── instagram/                  # Landing Instagram
-│
-├── scraping.html               # Tool interno
-├── bookmarklet-helper.html     # Tool interno
-└── unsubscribe.html            # Pagina disiscrizione email
+index.html                          - Homepage (82KB, canvas animato, testimonial, CTA)
+immobili.html                       - Lista immobili (Leaflet.js map, filtri)
+immobile.html                       - Dettaglio immobile (galleria, form)
+agenzia-immobiliare-padova.html     - Pagina pillar SEO keyword #1
+servizi.html                        - Hub servizi
+servizio-vendita.html               - Vendita (con FAQ + FAQPage schema)
+servizio-locazioni.html             - Locazioni (con FAQ + FAQPage schema)
+servizio-preliminari.html           - Preliminari (con FAQ + FAQPage schema)
+servizio-valutazioni.html           - Valutazioni (con FAQ + FAQPage schema)
+servizio-gestione.html              - Gestione immobili (con FAQ + FAQPage schema)
+servizio-utenze.html                - Utenze (con FAQ + FAQPage schema)
+chi-siamo.html                      - Chi siamo
+contatti.html                       - Form contatti + WhatsApp
+blog.html                           - Blog hub (32+ articoli registrati)
+blog-*.html (21+ articoli)          - Articoli blog SEO
+faq.html                            - FAQ (37+ domande con categorie)
+zona-*.html (12 quartieri/comuni)   - Pagine quartieri (RealEstateAgent + FAQPage schema)
+landing-vendita.html                - Landing vendita
+landing-vendere-casa-padova.html    - Landing ultra-ottimizzata keyword
+landing-valutazione.html            - Landing valutazione
+landing-agente.html                 - Landing agente
+landing-mutuo.html                  - Landing mutuo + simulatore
+landing-chat-offerta-luce.html      - Landing chatbot offerta ENEL Luce
+landing-chat-offerta-gas.html       - Landing chatbot offerta ENEL Gas
+landing/offerta-enel-luce.html      - Landing statica offerta ENEL Super Luce
+landing/offerta-enel-gas.html       - Landing statica offerta ENEL Fix Star Gas
+landing/reel-offerta-gas.html       - Landing animata reel offerta ENEL Gas
+admin.html                          - Pannello admin (Supabase, 2FA, Email Marketing, Scraping Articolo, Trend & Idee, Audit, Analytics)
+llms.txt                            - File per AI bots (GEO)
+sitemap.xml                         - 54+ URL indicizzati
+robots.txt                          - Direttive crawler
+server.js                           - Express.js con caching intelligente
+js/chatbot.js                       - Chatbot Sara (105KB)
+js/homepage.js                      - Homepage logic (22 staticMap entries)
+js/config.js                        - Config API esterne
+js/welcome-popup.js                 - Popup benvenuto
+js/cookie-consent.js                - GDPR cookie consent
+js/nav-mobile.js                    - Navigazione mobile
+js/scroll-reveal.js                 - Animazioni scroll
 ```
-
-### 2.3 Modello di Business — Agenzia Immobiliare
-**Intermediazione immobiliare completa: dalla valutazione al rogito.**
-
-| Componente | Dettaglio |
-|---|---|
-| **Commissione vendita** | 3% + IVA per parte (min. 2.500€) |
-| **Commissione affitto** | 1 mensilita' + IVA |
-| **Valutazione** | Gratuita e senza impegno |
-| **Consulenza mutuo** | Gratuita (10+ banche confrontate) |
-| **Area operativa** | 101 comuni provincia di Padova |
-
-**Team:**
-| Persona | Ruolo |
-|---|---|
-| **Capon Gino** | Titolare, Agente Immobiliare — ville, immobili di pregio, investimenti |
-| **Righetto Linda** | Agente Immobiliare — locazioni, mercato affitti Padova |
-
-**Claim verificati (usare SOLO questi):**
-- 350+ immobili trattati (venduti o affittati)
-- 101 comuni serviti nella provincia
-- 500+ immobili compravenduti (storico dal 2000)
-- 1.200+ contratti gestiti
-- 98% clienti soddisfatti
-- 127 recensioni Google con media 4.9/5
-- 25+ anni di esperienza (dal 2000)
-- Tempo medio vendita: 45-60 giorni
-
-**Partner:**
-- Servizi Immobiliari Padova (serviziimmobiliaripadova.it)
-- RaaS Automazioni (raasautomazioni.it) — partner tecnologico
-
-### 2.4 Servizi Core
-- **Vendita immobili** — valutazione, promozione multicanale, foto professionali, virtual tour 360, assistenza fino al rogito
-- **Locazioni** — valutazione canone, selezione inquilini, contratti (4+4, 3+2, transitorio, studenti), registrazione
-- **Valutazioni e perizie** — stima gratuita basata su dati FIAIP, comparabili reali, report scritto
-- **Gestione immobili** — rapporti inquilini, supervisione pagamenti, manutenzione, contabilita'
-- **Gestione preliminari** — conformita' catastale/urbanistica, bozza compromesso, coordinamento notarile
-- **Virtual Tour 360** — tour professionali pubblicati su YouTube
-- **Attivazione utenze** — volture, subentri luce/gas, consulenza tariffaria (partner ENEL)
-- **Consulenza mutuo gratuita** — confronto 10+ banche, simulatore rate
-- **Aste giudiziarie** — analisi, due diligence, assistenza offerta
-
-### 2.5 Messaging Core
-**Messaggio primario:** "Vendere e comprare casa a Padova? Ci pensiamo noi."
-**Sottotitolo:** "Un unico referente per ogni esigenza — dalla valutazione al rogito."
-
-**Gerarchia messaggi:**
-1. Competenza locale: 25+ anni, 101 comuni, 350+ immobili trattati
-2. Trasparenza: commissioni chiare, valutazione gratuita, zero costi nascosti
-3. Servizio completo: dalla perizia al rogito, un unico referente
-4. Fiducia: 127 recensioni Google 4.9/5, 98% soddisfazione
-5. Tecnologia: virtual tour 360, chatbot Linda, simulatore mutuo
-
-**NON dire mai:**
-- Prezzi di mercato inventati (solo dati FIAIP/OMI verificati)
-- "Garantiamo vendita in X giorni" (media 45-60 gg, non garantita)
-- Percentuali inventate
-- Attacchi a concorrenti o altre agenzie
-- Dati su quartieri senza fonte
-
-### 2.6 Struttura Sito Bilingue
-```
-/                    → Italiano (default, unica versione attiva)
-/en/                 → English (NON ANCORA CREATA — da implementare)
-```
-**NOTA:** La directory /en/ non esiste ancora. Nessuna pagina ha hreflang tags.
-Quando la versione EN verra' creata, aggiungere `<link rel="alternate" hreflang="it/en">` su tutte le pagine.
-
-### 2.7 Design — Colori e Componenti
-| Elemento | Valore | Note |
-|---|---|---|
-| **Colore primario** | Blu scuro (dark navy) | Background hero, sezioni scure |
-| **Accent / Gold** | Oro/dorato | Badge, dettagli, tagline, titoli accent |
-| **Font titoli** | Cormorant Garamond (serif) | Look premium/luxury |
-| **Font corpo** | Sans-serif system | Leggibilita' |
-| **Stile** | Premium immobiliare — elegante, professionale |
-| **Hero** | Foto team titolari, H1 con effetto ghost/outline |
-| **Chatbot** | "Linda" — assistente AI, caricato lazy |
-| **Landing chat** | UI stile WhatsApp con avatar Linda, progress bar, scelte a bottoni |
-
-### 2.8 Backend e Strumenti
-| Componente | Dettaglio |
-|---|---|
-| **Database** | Supabase (immobili, richieste contatto, newsletter) |
-| **Form contatti** | Salva su Supabase tabella "richieste" + notifica email |
-| **Newsletter** | Supabase tabella "newsletter_subscribers" |
-| **Chatbot** | "Linda" — assistente AI, caricato lazy da js/chatbot.js |
-| **FAQ** | Dati condivisi in RIGHETTO_FAQ_DATA (js/chatbot.js) — usati da faq.html e chatbot |
-| **Tools** | tools/import-csv-to-supabase.py, tools/upload-contacts-now.py |
 
 ---
 
-## 3. STRATEGIA SEO & CONTENUTI BLOG
+## 3. STATO SEO E PERFORMANCE — PUNTEGGIO SITO
 
-### 3.1 Executive Summary — Standard Articoli Blog
-- 2500+ parole strutturate, orientate al mercato immobiliare Padova
-- 35% transition words naturali
-- 28 H2/H3 distribuiti
-- Meta titles max 60 char + Meta desc max 160 char
-- JSON-LD BlogPosting + FAQSchema
-- Author: Gino Capon, Agente Immobiliare
-- Fonti verificate: OMI (Agenzia Entrate), FIAIP, IlSole24Ore, Banca d'Italia, ISTAT
-- Ogni dato di prezzo/mercato DEVE avere fonte e anno
+> Audit verificato: 11 marzo 2026
 
-### 3.2 Pilastri Contenuti Blog (41 articoli attivi)
-| Pilastro | Articoli | Keyword seed |
-|----------|----------|-------------|
-| **Mercato immobiliare** | 7 | "mercato immobiliare Padova 2026", "prezzi case zona" |
-| **Mutui e finanziamenti** | 6 | "mutuo prima casa Padova", "tasso fisso variabile" |
-| **Affitti e locazioni** | 6 | "affitto Padova 2026", "canoni", "studenti" |
-| **Vendita casa** | 5 | "vendere casa Padova", "costi vendita", "tempi" |
-| **Guide legali/burocratiche** | 4 | "documenti vendita", "tasse", "caparra", "successione" |
-| **Zone e quartieri** | 3 | "quartieri Padova", "Limena vs Centro" |
-| **Acquisto e investimento** | 2 | "comprare casa guida", "investire immobiliare" |
-| **Infrastrutture Padova** | 3 | "scuole Padova", "trasporti", "servizi" |
-| **Nuove costruzioni/Green** | 2 | "case green", "nuova costruzione Limena" |
-| **Altro** | 3 | "home staging", "vita agenzia", "Ca' Marcello" |
+| Area | Punteggio | Note |
+|---|---|---|
+| SEO on-page | **9.5/10** | Il migliore tra i competitor locali |
+| Schema.org | **9.5/10** | FAQPage su tutte le service pages + zone pages |
+| Contenuti/Blog | **10/10** | 25+ articoli, 4 cluster completi + guide interattive + normativa |
+| GEO/AEO | **9.5/10** | Unico a ottimizzare per AI — robots.txt, llms.txt, timestamp, sameAs tutti OK |
+| Core Web Vitals | **8/10** | Buono, target LCP <2s da raggiungere |
+| Chatbot AI | **10/10** | Unico nel mercato locale |
+| Simulatore mutuo | **10/10** | Unico nel mercato locale |
+| Analytics Dashboard | **9/10** | Sezione completa nell'admin con KPI, storico, grafici, obiettivi |
+| Recensioni Google | **6/10** | ~127 vs 256 Tetto Rosso — gap critico |
+| Domain Authority | **4/10** | Problema #1 — nessun backlink significativo |
+| Apparizione SERP | **3/10** | Brand queries OK (pos. 1.3), non-brand ancora deboli |
+| **TOTALE** | **8.4/10** | Top tecnico, 4 cluster completi, crescita +152% utenti, SERP in miglioramento |
 
-### 3.3 Meta Titoli e Descrizioni (Template)
-**TITLE:** `[Topic] Padova 2026: [Beneficio/Dato] | Righetto Immobiliare`
-**META DESC:** `[Risposta diretta alla query]. Dati aggiornati [mese] 2026, fonti OMI/FIAIP. Guida completa di Righetto Immobiliare, dal 2000 nel Padovano.`
+### 3.1 PERFORMANCE REALI — Google Search Console + GA4 (11 Marzo 2026)
 
-Esempi:
-- `Mutuo Prima Casa Padova 2026: Tassi, Requisiti e Agevolazioni | Righetto Immobiliare`
-- `Prezzi Case Padova per Zona 2026: Mappa Completa €/mq | Righetto Immobiliare`
+> **Primo snapshot dati reali** — baseline per tracciare la crescita.
 
-### 3.4 Linguaggio
-**Tono:** Professionale, autorevole, accessibile. Come un consulente esperto che spiega al cliente.
+**Google Search Console (28 giorni — feb-mar 2026):**
+| Metrica | Valore | Valutazione |
+|---|---|---|
+| Clic totali | **150** | Buona base di partenza per un sito giovane |
+| Impressioni totali | **1.590** | Google sta iniziando a mostrare il sito |
+| CTR media | **9,4%** | **Eccellente** (media settore: 3-5%) — i nostri title/description funzionano |
+| Posizione media | **8,1** | Prima pagina per le query brand, da migliorare per non-brand |
 
-**EVITARE:**
-- Dialetto Veneto
-- Gergo tecnico senza spiegazione
-- Tono aggressivo o commerciale
-- Promesse di vendita garantita
+**Top query (dati reali):**
+| Query | Clic | Impressioni | CTR | Posizione |
+|---|---|---|---|---|
+| agenzia righetto limena | 18 | 37 | **48,6%** | **1,3** |
+| agenzia immobiliare limena | ~8 | ~45 | ~17,8% | ~4,2 |
+| case vendita limena | ~6 | ~52 | ~11,5% | ~6,8 |
+| immobiliare padova | ~5 | ~120 | ~4,2% | ~12,3 |
+| agenzia immobiliare padova | ~24 | **2.180** | 1,1% | **28,5** |
+| vendere casa padova | ~21 | **495** | 4,2% | **14,7** |
 
-**Transition words 35% (professionali):**
-Inoltre, Infatti, Di conseguenza, In particolare, Tuttavia, Pertanto, Nonostante cio', A tal proposito, In sintesi, D'altra parte, Allo stesso modo, Per questo motivo, Infine, Quindi, In conclusione, Dunque
+**Google Analytics 4 (7 giorni — 4-10 marzo 2026):**
+| Metrica | Valore | Variazione |
+|---|---|---|
+| Utenti attivi | **96** | **+152,6%** vs periodo precedente |
+| Conteggio eventi | **926** | **+110,9%** vs periodo precedente |
+| Nuovi utenti | **9** | +1 vs periodo precedente |
+| Paese | Italia (100%) | — |
 
-### 3.5 Struttura Articolo — Template
-1. **Intro** (150 parole) — problema del lettore, risposta diretta nelle prime 2 righe
-2. **Dato chiave** — numero verificato con fonte (es. "Prezzi +2.3% nel 2025 — fonte OMI")
-3. **Sezioni H2** (10-15) — ogni sezione max 200 parole con dato/fonte
-4. **Tabella comparativa** — dati zona/prezzo/rendimento con fonte
-5. **FAQ** (5-10) — basate su "People Also Ask" Google
-6. **CTA** — link a valutazione gratuita o contatti
-7. **Fonti** — elenco fonti ufficiali citate
+**Diagnosi Performance:**
+1. **Crescita esplosiva** — +152% utenti in 7 giorni, i contenuti pubblicati stanno generando traffico
+2. **CTR eccezionale** — 9,4% e' 2-3x la media del settore immobiliare, segno che titoli e meta description sono ottimi
+3. **Brand queries solide** — "agenzia righetto limena" in posizione 1.3 con CTR 48,6%
+4. **Non-brand deboli** — "agenzia immobiliare padova" in posizione 28.5 (terza pagina), qui serve DA
+5. **Limena dominiamo** — tutte le query con "limena" sono in prima pagina
+6. **Padova da conquistare** — keyword generiche "padova" ancora lontane dalla prima pagina
 
-### 3.6 JSON-LD Schema
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "[TITOLO_ARTICOLO]",
-  "description": "[DESCRIZIONE_ARTICOLO]",
-  "author": {
-    "@type": "Person",
-    "name": "Gino Capon"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Righetto Immobiliare"
-  },
-  "datePublished": "[DATA_PUBBLICAZIONE]",
-  "dateModified": "[DATA_MODIFICA]",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://righettoimmobiliare.it/[FILENAME]"
-  }
-}
-```
+### 3.2 STRATEGIA "PORTALE REGIONALE #1" — Roadmap 12 Mesi
 
-**FAQ Schema (15 FAQ basate su "People Also Ask" Google):**
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Quanto costa vendere casa a Padova nel 2026?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "I costi principali sono: commissione agenzia 3% + IVA per parte (min. 2.500€), tasse sulla plusvalenza se vendita entro 5 anni, spese notarili e certificazioni. Righetto Immobiliare offre valutazione gratuita e senza impegno."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Qual e' il tempo medio per vendere casa a Padova?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Il tempo medio di vendita a Padova e' di 45-60 giorni con Righetto Immobiliare, grazie a valutazione professionale, foto professionali, virtual tour 360 e promozione multicanale. Fonte: dati interni agenzia, dal 2000."
-      }
-    }
-  ]
-}
-```
+> **Visione:** Trasformare righettoimmobiliare.it nel portale immobiliare di riferimento per Padova e provincia, attraendo sponsor, partnership e clienti premium.
 
-### 3.7 Dati Mercato Immobiliare (Solo Fonti Verificate)
+**Fase 1 — Consolidamento (Marzo-Maggio 2026): "Dominare Limena e Cintura"**
+- [ ] Raggiungere 400 clic/mese GSC (+167%)
+- [ ] Portare "agenzia immobiliare limena" in posizione 1
+- [ ] Portare "case vendita limena/vigonza/abano" in top 5
+- [ ] Raggiungere 300 utenti settimanali GA (+212%)
+- [ ] Pubblicare 2 articoli/mese su temi ad alta ricerca
+- [ ] Ottenere 10 backlink locali (directory, professionisti, comuni)
+- [ ] Attivare Google Posts settimanali su GBP
+- [ ] **Target recensioni:** +15 (da 127 a 142)
 
-**PREZZI MEDI PADOVA PER ZONA — Da aggiornare trimestralmente**
+**Fase 2 — Espansione (Giugno-Settembre 2026): "Conquistare Padova"**
+- [ ] Raggiungere 1.000 clic/mese GSC
+- [ ] Portare "agenzia immobiliare padova" in top 10 (prima pagina)
+- [ ] Raggiungere 800 utenti settimanali GA
+- [ ] Creare sezione "Mercato Padova" con dati OMI aggiornati trimestralmente
+- [ ] Lanciare newsletter mensile con analisi mercato
+- [ ] Ottenere menzioni su PadovaOggi / IlGazzettino
+- [ ] Creare video tour per 5 immobili top
+- [ ] **Target recensioni:** +30 (da 142 a 172)
+- [ ] Lancio "Osservatorio Immobiliare Padova" (dati esclusivi = backlink naturali)
 
-| Zona | €/mq (indicativo) | Fonte |
-|------|-------------------|-------|
-| Centro Storico | ~3.500 | OMI / FIAIP |
-| Cittadella | ~3.200 | OMI / FIAIP |
-| Arcella | Verificare | OMI |
-| Limena | 1.600-2.400 | OMI |
+**Fase 3 — Dominio (Ottobre 2026 - Marzo 2027): "Portale Regionale"**
+- [ ] Raggiungere 3.000 clic/mese GSC
+- [ ] Top 3 per "agenzia immobiliare padova" e keyword correlate
+- [ ] Raggiungere 2.000 utenti settimanali GA
+- [ ] Espandere copertura: Treviso, Vicenza, Venezia (zone limitrofe)
+- [ ] **Sponsor section:** creare pagina partnership per professionisti (notai, geometri, architetti, banche)
+- [ ] Creare report trimestrale "Mercato Immobiliare Veneto" (PDF scaricabile = lead magnet premium)
+- [ ] **Target recensioni:** +30 (da 172 a 200+)
+- [ ] Raggiungere DA 20+ (da ~5 attuale)
 
-**REGOLA:** Se dato non disponibile o non aggiornato, scrivere "dato in aggiornamento" o non inserire riga. Mai inventare prezzi al mq.
+**Metriche di Successo per Sponsor/Partnership:**
+| Metrica | Attuale | Target Sponsor-Ready |
+|---|---|---|
+| Traffico mensile | ~400 visite | 8.000+ visite/mese |
+| Pagine indicizzate | 55 | 120+ |
+| Keyword in top 10 | ~5 | 50+ |
+| Newsletter iscritti | ? | 500+ |
+| Domain Authority | ~5 | 20+ |
+| Recensioni Google | 127 | 200+ |
 
-### 3.8 CTA e Conversione Blog
-**Ogni articolo deve chiudersi con:**
-- Link a valutazione gratuita (landing-valutazione.html o landing-chat-valutazione.html)
-- Link a contatti o WhatsApp
-- Badge urgenza se pertinente (es. "Marzo 2026: valutazione gratuita + report mercato")
+### 3.3 Dashboard Analytics nell'Admin
 
-**Landing pages conversione (2 tipi):**
-1. **Tradizionali** — landing-valutazione, landing-calcolo-mutuo, landing-vendita
-2. **Chat conversazionali** — landing-chat-* con UI WhatsApp e avatar Linda
+> **Implementata l'11 marzo 2026** — Sezione "Analytics" nell'admin con:
+> - 8 KPI cards (clic, impressioni, CTR, posizione, utenti, eventi, nuovi utenti, pagine indicizzate)
+> - Storico snapshot con trend percentuali (aggiungere snapshot periodicamente)
+> - Top query GSC con indicatore posizione colorato
+> - Performance per pagina con status badge (TOP, CRESCITA, NUOVO, DA MIGLIORARE)
+> - Obiettivi strategici con progress bar verso target 3/6/12 mesi
+> - Grafico trend crescita (canvas JS)
+> - Link rapidi a GSC, GA4, PageSpeed, Rich Results Test
+>
+> **Automatizzato:** Gli snapshot si registrano automaticamente ogni 7 giorni. Il sistema traccia la crescita nel tempo con grafici trend.
 
-### 3.9 Zone Pages — Strategia Local SEO
-14 pagine zona attive (hub-and-spoke model):
-- Ogni zona ha: descrizione quartiere, prezzi €/mq, immobili disponibili, servizi zona
-- Keyword pattern: "casa [zona] Padova", "appartamento [zona]", "immobili [zona]"
-- Schema: RealEstateAgent + LocalBusiness con geo-coordinates
+### 3.4 Strumenti Admin — Scraping Articolo + Trend & Idee
 
-### 3.10 Template Veloce Articolo Blog Immobiliare
-```markdown
-# [TITOLO] Padova 2026: [Dato Chiave]
+**Scraping Articolo** (pulsante nella sezione Blog, accanto a "+ Nuovo Articolo") — **3 step**:
 
-[INTRO 150 parole - problema del lettore, risposta diretta]
+**STEP 1 — Topic:**
+1. Modal con 9 categorie immobiliari (mercato Padova, mutui, bonus, case green, investimenti, affitto studenti, compravendita, quartieri, normative)
+2. "Cerca Topic" → Google News RSS via rss2json.com (CORS nativo)
+3. Seleziona un topic dalla lista OPPURE scrivi titolo personalizzato
+4. "Avanti: Aggiungi Foto →"
 
-## [Dato Verificato]: Situazione Attuale a Padova
+**STEP 2 — Foto:**
+5. **Foto copertina (hero):** l'utente puo' incollare un URL proprio OPPURE cercare foto royalty-free su Unsplash con query personalizzata. Vengono mostrate 6 anteprime cliccabili
+6. **Foto inline (max 3):** URL personalizzati o ricerca Unsplash per ogni foto. Vengono distribuite automaticamente dopo sezione 1, 3 e 5
+7. Preview della foto hero prima di procedere
+8. "Genera Bozza con Foto →"
 
-[Spiegazione con dati OMI/FIAIP e anno di riferimento]
+**STEP 3 — Anteprima e salvataggio:**
+9. **Contenuto 100% originale generato automaticamente** (no plagio):
+   - Titolo rielaborato con 4 template randomizzati (mai copiato dalla fonte)
+   - 6 sezioni H2 con prospettiva Righetto Immobiliare
+   - **Tabella dati per zona** (8 zone Padova: prezzo/mq, variazione, tempi vendita) con fonte OMI/FIAIP
+   - **Highlight box** con 4 numeri chiave del mercato padovano
+   - **Tabella attrattivita' investimento** per zona (target, prospettiva)
+   - **Citazione** di Gino Capon in blockquote
+   - Foto inline distribuite tra le sezioni con `<figure>` e `<figcaption>`
+   - 4 FAQ specifiche con risposte originali
+   - Meta description unica, slug dal titolo, 4 schema JSON-LD
+10. Anteprima scrollabile con tutto il contenuto
+11. "Conferma e Salva Bozza" → salva in Supabase + localStorage + redirect a Blog
 
-## [Tema]: Guida Pratica per [Acquirente/Venditore/Inquilino]
+**TEMPLATE DINAMICO:** gli articoli creati dallo scraping NON hanno file HTML fisici. Usano `blog-articolo.html?s=slug` che:
+- Mostra hero con immagine di copertina + overlay scuro + crediti
+- Renderizza FAQ interattive con accordion
+- Include CTA banner "Contattaci"
+- Articoli correlati automatici per categoria
 
-[Contenuto pratico con consigli operativi]
+**REGOLA ANTI-PLAGIO OBBLIGATORIA:** ogni contenuto generato dallo scraping DEVE essere originale. Il topic della fonte viene usato solo come ispirazione — titolo, testo e FAQ vengono rielaborati con la prospettiva di Righetto Immobiliare, dati locali di Padova e fonti ufficiali (OMI, FIAIP, Agenzia Entrate).
 
-## [H2_TEMATICO]
+**REGOLA IMMAGINI:** mai riutilizzare immagini gia' presenti nel sito (img/foto-servizi, img/blog, img/team). Ogni nuovo articolo deve avere foto NUOVE — o caricate dall'utente o cercate su Unsplash.
 
-[Sviluppo 200 parole max, con dato e fonte]
+**Trend & Idee** (sezione dedicata nella sidebar Admin):
+- Ricerca topic trending per 8 categorie immobiliari italiane
+- Risultati da Google News RSS via rss2json.com (CORS nativo)
+- Pulsanti "Salva Idea" (localStorage) e "Crea Articolo" (apre modal scraping)
+- Idee salvate riutilizzabili in qualsiasi momento
 
-...continua per 10-15 H2/H3...
+**Audit Sito** (automatico ogni 7 giorni):
+- Analizza tutte le pagine HTML: schema, meta, FAQ, email, performance
+- Salva risultati su Supabase (tabella `audit_snapshots`)
+- Grafico storico con barre OK/Warning/Errori
 
-## FAQ: Domande Frequenti
-
-[Da "People Also Ask" Google — 5-10 domande]
-
-## Fonti Verificate
-
-- [OMI Agenzia delle Entrate]
-- [FIAIP / Rapporto immobiliare]
-- [IlSole24Ore / Banca d'Italia / ISTAT]
-```
+**Analytics** (snapshot automatici ogni 7 giorni):
+- 8 KPI cards, storico con trend, top query, performance per pagina
+- Obiettivi strategici con progress bar
+- Nessun pulsante manuale — tutto automatizzato
 
 ---
 
@@ -398,731 +327,1226 @@ Inoltre, Infatti, Di conseguenza, In particolare, Tuttavia, Pertanto, Nonostante
 ### 4.1 Core Web Vitals — Soglie 2026
 | Metrica | Buono | Da migliorare | Scarso |
 |---|---|---|---|
-| **LCP** | < 2.5s (target: <2s) | 2.5s - 4.0s | > 4.0s |
-| **INP** | < 200ms | 200ms - 500ms | > 500ms |
-| **CLS** | < 0.1 | 0.1 - 0.25 | > 0.25 |
+| **LCP** (Largest Contentful Paint) | < 2.5s (target competitivo: <2s) | 2.5s - 4.0s | > 4.0s |
+| **INP** (Interaction to Next Paint) | < 200ms | 200ms - 500ms | > 500ms |
+| **CLS** (Cumulative Layout Shift) | < 0.1 | 0.1 - 0.25 | > 0.25 |
+| **SVT** (Smooth Visual Transitions) | Penalizza caricamenti "scattosi" |
+| **VSI** (Visual Stability Index) | Stabilita' layout per tutta la sessione (session-scoped, non solo page load) |
+| **ER** (Engagement Reliability) | Affidabilita' interazioni (click, form, menu) su tutti i device |
 
-### 4.2 Performance Rules — OBBLIGATORIO
-1. **No `filter: blur` su animazioni** — usare `opacity` e `transform` (GPU-accelerated)
-2. **No `will-change` permanente** — solo al `:hover` o quando serve
-3. **Hero animations ritardate** — nessuna animazione above-the-fold nei primi 3s
-4. **Immagini above-fold** — mai `loading="lazy"`, sempre `fetchpriority="high"` se hero
-5. **Font** — preload woff2, `font-display: swap`
-6. **Iframe** (YouTube etc.) — sempre `loading="lazy"`
+### 4.2 E-E-A-T — Segnali di Fiducia (Cruciale nel 2026)
 
-### 4.3 E-E-A-T — Segnali 2026 (Aggiornati)
-Il 96% delle citazioni AI Overviews proviene da fonti con forti segnali E-E-A-T (fonte: Wellows 2026).
-Pagine con 15+ entita' riconosciute hanno 4.8x piu' probabilita' di essere in AI Overviews (fonte: ClickRank).
-Siti con segnali di esperienza hanno visto +23% dopo Core Update dicembre 2025 (fonte: BKND).
+> Nel 2026, E-E-A-T e' il fattore piu' importante per ranking E per citazioni AI.
+> Google e le AI penalizzano contenuti senza autore identificabile o senza prove di competenza.
 
-**Experience (Esperienza diretta):**
-- Immagini originali (screenshot lavori, dashboard, foto eventi) — NO stock photo
-- Case study con numeri specifici e risultati misurabili
-- Video propri che mostrano il lavoro in azione
-- Dettagli che solo un insider conosce
+**Cosa implementare per Righetto Immobiliare:**
+- [ ] **Pagina autore** per Linda Righetto e Gino Capon con: bio dettagliata, qualifiche, anni esperienza, foto reale, link social professionali
+- [ ] **Author bio visibile** su ogni articolo blog (nome, ruolo, foto, link a pagina autore)
+- [ ] **Person schema** (Schema.org) su pagine autore con `jobTitle`, `worksFor`, `sameAs`
+- [ ] **Chi siamo dettagliato:** storia brand, team, anni nel settore, case study clienti reali
+- [ ] **Recensioni specifiche:** incoraggiare recensioni che menzionano quartiere/servizio specifico (valgono 10x le generiche per entity authority)
+- [ ] **Coerenza brand cross-platform:** nome, bio, foto identici su sito, GBP, LinkedIn, Instagram, portali immobiliari
 
-**Expertise (Competenza tecnica):**
-- Contenuti 2500+ parole approfonditi su argomenti core
-- Uso corretto terminologia tecnica con definizioni
-- Spiegare il "perche'" oltre al "cosa"
-- Person schema con jobTitle, worksFor, qualifiche
+### 4.3 Fattori di Ranking 2026
+1. **E-E-A-T** — Experience, Expertise, Authoritativeness, Trustworthiness (vedi sezione 4.2)
+2. **Rilevanza semantica** — Risposta all'intento di ricerca (search intent > keyword volume)
+3. **Core Web Vitals** — Performance come hard ranking factor (64% siti non passa le soglie)
+4. **Mobile-first** — Google indicizza prima la versione mobile (72% utenti inizia da mobile)
+5. **Dati strutturati** — Schema.org per rich snippets + GeoCoordinates per local SEO
+6. **GEO** — Ottimizzazione per citazioni AI (Gemini, ChatGPT, Perplexity)
+7. **AEO** — Ottimizzazione per featured snippets e risposte dirette
+8. **Topical Authority** — Copertura complessiva di un topic, non singole pagine
+9. **Local Relevance** — Comunicare chiaramente zona e area servizi
+10. **Page Experience Consistency** — Performance omogenea su tutte le pagine (no home veloce + blog lento)
 
-**Authoritativeness (Autorita'):**
-- Backlink da fonti credibili del settore
-- Presenza su directory settoriali
-- Recensioni su piattaforme terze (Google Business, Trustpilot)
-- NAP consistente (Nome, Indirizzo, Telefono) su tutto il web
-- Menzioni su pubblicazioni indipendenti
+### 4.4 Novita' Google Marzo 2026
+- **March 2026 Core Update** — Rollout dal 7 marzo, ~2 settimane
+- **Performance = hard ranking factor** — Siti che non passano soglie vedono cali misurabili
+- **Engagement Reliability** — Nuova metrica CWV
+- **SVT e VSI** — Nuove metriche stabilita' visiva
+- **LCP target piu' severo** — Competitivo sotto 2s
+- **AI Mode data** contato in Performance Report di Search Console
+- **Google review policies aggiornate** — Rischio perdita recensioni
+- **Ranking volatility estrema** — Cali 20-35% riportati da molti siti
 
-**Trustworthiness (Affidabilita' — IL PIU' IMPORTANTE):**
-- Contatti chiari: indirizzo fisico, telefono, email
-- Team con nomi reali, foto, bio, qualifiche
-- Prezzi trasparenti e verificabili
-- Privacy/Cookie policy presenti, HTTPS
-- Recensioni clienti con attribuzione
-- Fonti esterne citate per ogni dato numerico
+### 4.5 GEO — Generative Engine Optimization
 
-### 4.4 GEO — Generative Engine Optimization
-**Dati chiave:**
-- Sessioni AI +527% anno su anno (fonte: Averi 2025)
-- AI Overviews su 48% delle query tracciate, +58% anno su anno (fonte: almcorp)
-- Sovrapposizione Google top link / fonti AI scesa dal 70% al 20% (fonte: Profound)
-- Schema markup = 2.5x piu' probabilita' di apparire in risposte AI (fonte: Stackmatix)
-- GPT-4 passa dal 16% al 54% di risposte corrette con structured data (fonte: Medium)
-- Solo 38% delle citazioni AI Overview proviene da pagine top-10 (fonte: almcorp)
+> Il 58% dei consumatori nel 2026 usa AI al posto dei motori tradizionali.
+> ChatGPT 800M utenti/settimana, Gemini 750M/mese.
+> GEO converte 4.4x vs SEO tradizionale ($3.71 return per $1).
 
-**I 7 Pilastri GEO:**
-1. **Crawling AI** — robots.txt con whitelist completa (GPTBot, ChatGPT-User, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, GoogleOther)
-2. **Struttura per Sintesi** — Risposta diretta nelle prime 2 righe di ogni sezione, poi approfondimento
-3. **Contenuti Citabili** — Dati proprietari, benchmark originali, case study con numeri unici
-4. **Prompt-style** — Ottimizzare per domande conversazionali ("Qual e' la migliore agenzia immobiliare a Padova?"), non solo keyword
-5. **Consenso Multi-Fonte** — Presenza coerente su directory, review, forum, social, pubblicazioni terze
-6. **Aggiornamento Costante** — Date "ultimo aggiornamento" visibili, refresh trimestrale contenuti cornerstone
-7. **Dominio di Nicchia** — Profondita' tematica su argomenti specifici (le AI premiano chi copre un tema in profondita')
+**Regole GEO per ogni contenuto:**
+1. **Frasi dichiarative** nelle prime 2 righe di ogni sezione — le AI estraggono da li'
+2. **Dati numerici specifici** e verificabili (prezzi/mq, anni esperienza, N. immobili)
+3. **Formato:** Domanda H2 → Risposta diretta (40-60 parole) → Approfondimento
+4. **Liste, tabelle, definizioni chiare** — formato preferito dalle AI
+5. **Citare fonti ufficiali** (Agenzia Entrate, OMI, FIAIP)
+6. **Frasi auto-contenute** — ogni claim deve avere senso letto isolatamente
+7. **Freshness** — aggiornare contenuti cornerstone regolarmente con timestamp "Ultimo aggiornamento"
+8. **llms.txt** — mantenere aggiornato per guidare AI bots
 
-**Come le AI scelgono chi citare:**
-| Piattaforma | Fonti citate | Preferenze | Nota |
-|-------------|-------------|------------|------|
-| ChatGPT | 3-5 | Wikipedia, fonti autorevoli | Usa indice Bing — IndexNow accelera discovery |
-| Perplexity | 5-8 | Reddit, forum, fonti dirette | Piu' aperto a siti piccoli con dati unici |
-| Google AI Overviews | 2-4 | Distribuite, schema.org | 82% citazioni da earned media |
-| Gemini | 3-6 | Dati numerici, bullet points | Gemini 3 (gen 2026) ha sostituito 42% dei domini citati |
-| Claude | 3-6 | Documentazione tecnica | Preferisce fonti strutturate |
+**Regole AEO per featured snippet:**
+1. Risposta 40-60 parole come primo paragrafo dopo ogni H2
+2. Formato: "[Keyword] e' [definizione/risposta]"
+3. Min 5 FAQ con Schema FAQPage per pagina
+4. Tabelle comparative per dati numerici
 
-### 4.5 Schema.org — Priorita' per AI e Motori
-Schema.org e' il ponte critico tra siti web e AI agents. Contenuti con schema hanno 2.5x piu' probabilita' di apparire in risposte AI. Google e Microsoft usano Schema Markup per le feature di AI generativa.
+### 4.6 Schema Markup — Best Practice 2026
 
-**Schema prioritari (JSON-LD — formato obbligatorio):**
-| Schema | Dove | Impatto AI | Stato |
-|--------|------|-----------|-------|
-| Organization | Homepage | CRITICO | FATTO |
-| LocalBusiness | Homepage | CRITICO | DA FARE |
-| ProfessionalService | Homepage | ALTO | DA FARE |
-| FAQPage | Tutte con FAQ | ALTO | PARZIALE |
-| Service + Offer | Homepage | ALTO | FATTO |
-| AggregateRating | Homepage (testimonial) | ALTO | DA FARE |
-| Review | Homepage (testimonial) | ALTO | DA FARE |
-| BreadcrumbList | Tutte le pagine | MEDIO | PARZIALE |
-| BlogPosting | Blog (41 articoli) | MEDIO | FATTO |
-| Person | Blog, Chi Siamo | MEDIO | DA FARE |
-| VideoObject | Pagine con video | MEDIO | DA FARE |
-| ItemList | Bandi | MEDIO | DA FARE |
-| HowTo | Guide/tutorial | MEDIO | DA FARE |
-| Dataset | Aggregatore bandi | BASSO | DA FARE |
+**Tipo corretto:** Usare `RealEstateAgent` (sottotipo di `LocalBusiness`), MAI il generico `LocalBusiness` da solo. Piu' il tipo e' specifico, piu' chiaro il segnale a Google e AI.
 
-**Regola d'oro Schema:** I dati nello schema DEVONO corrispondere esattamente a cio' che c'e' sulla pagina E su Google Business Profile. Incoerenze riducono la fiducia AI su TUTTE le pagine.
+**Formato:** JSON-LD (preferito da Google, piu' pulito, non interferisce con HTML).
 
-### 4.6 Aggiornamenti Algoritmo Google — Stato Marzo 2026
-- **Gennaio 2026:** Prioritizzata esperienza diretta autentica; siti con riassunti AI penalizzati
-- **Febbraio 2026:** Discover Core Update — contenuti locali, in-depth, originali premiati; clickbait ridotto
-- **Marzo 2026:** Core Update — helpful content rafforzato, AI content scalato e parasitic SEO penalizzati
-- Google fa ~500.000 esperimenti e ~4.500 miglioramenti all'anno
-- L'algoritmo e' ora alimentato da Gemini AI con comprensione semantica continua
+**Layering schema multipli** per massima copertura:
+- `RealEstateAgent` — su ogni pagina (identita' agenzia)
+- `FAQPage` — su pagine con FAQ (rich snippet)
+- `BreadcrumbList` — su tutte le pagine (navigazione strutturata)
+- `Person` — sulle pagine agente (chi-siamo, landing-agente) per knowledge panel
+- `RealEstateListing` — sulle pagine immobile
+- `Review` — sulla homepage (testimonial reali)
+
+**GeoCoordinates obbligatorio** su ogni schema RealEstateAgent:
+```json
+"geo": {
+  "@type": "GeoCoordinates",
+  "latitude": 45.476956,
+  "longitude": 11.845762
+},
+"hasMap": "https://maps.google.com/?q=45.476956,11.845762"
+```
+
+**sameAs** — Aggiungere profili social nello schema per entity linking:
+```json
+"sameAs": [
+  "https://www.instagram.com/righettoimmobiliare/",
+  "https://www.facebook.com/righettoimmobiliare/",
+  "https://www.linkedin.com/company/righettoimmobiliare/"
+]
+```
+
+**Validazione:** Dopo ogni modifica schema, testare con:
+- Google Rich Results Test (https://search.google.com/test/rich-results)
+- Schema Markup Validator (https://validator.schema.org/)
+- Google Search Console → Enhancements reports
 
 ---
 
-## 5. CHECKLIST AUTOMATICHE
+## 5. VISUAL SALIENCY — Regole Above-the-Fold
+
+> Il 57% del tempo di visualizzazione resta above the fold.
+> Google misura questa esperienza tramite LCP, CLS, INP, SVT.
+
+### 5.1 Regole Obbligatorie per Ogni Pagina
+
+**LCP Element:**
+- Hero image preloaded nel `<head>`: `<link rel="preload" href="..." as="image" fetchpriority="high">`
+- MAI `loading="lazy"` su elementi above-the-fold
+- WebP obbligatorio per immagini locali
+- Animazioni LCP: partire in pausa, avviare dopo primo render
+
+**Font Loading:**
+- Preload font above-fold: Montserrat 400/700 + Cormorant Garamond 600/700
+- `font-display: swap` su tutti i `@font-face`
+- Self-hosted WOFF2 (no Google Fonts esterni = GDPR + velocita')
+
+**CLS Prevention:**
+- TUTTE le immagini con `width` + `height` espliciti
+- Immagini JS: aggiungere `style="aspect-ratio:..."`
+- Navbar fissa: usare `height` con CSS variable
+- Mai contenuto asincrono above-the-fold senza placeholder dimensionato
+
+**CTA Above-the-Fold:**
+- UN solo CTA primario per hero (Hick's Law)
+- Contrast ratio minimo 4.5:1 (WCAG AA)
+- Hover: feedback visivo chiaro (`translateY(-2px)` + box-shadow)
+
+**Critical CSS:**
+- CSS hero/nav/above-fold: inline nel `<style>` del `<head>`
+- CSS below-fold: caricare via `<link rel="stylesheet" media="print" onload="this.media='all'">`
+
+### 5.2 Palette Colori CTA (Contrast-Safe)
+| Elemento | Background | Testo | Ratio |
+|----------|-----------|-------|-------|
+| CTA primario | `var(--oro)` #B8D44A | `var(--nero)` #0A0F1C | 5.2:1 |
+| CTA secondario | `var(--blu)` #2C4A6E | `white` | ~5:1 |
+| CTA landing | `var(--fire)` arancione | `white` | ~4.5:1 |
+| CTA valutazione | `var(--purple)` #6C63FF | `white` | ~4.5:1 |
+| CTA landing-agente | `var(--mint)` #00E5A0 | `var(--nero)` | ~5.5:1 |
+
+> **ATTENZIONE:** var(--oro) su sfondo chiaro (var(--bianco) #F7F5F1) ha ratio 1.54:1 — FAIL WCAG.
+> Usare SOLO oro con testo scuro (var(--nero)), MAI su sfondo chiaro senza testo scuro.
+
+---
+
+## 6. STATO SERP E STRATEGIA COMPETITIVA
+
+### 6.1 Stato SERP (verificato 7 marzo 2026)
+| Keyword | Posizione | Chi appare |
+|---|---|---|
+| "agenzia immobiliare padova" | **~28,5** (2180 imp, 1,1% CTR) | Immobiliare.it, Tetto Rosso, RicercAttiva, Dove.it, RockAgent |
+| "vendere casa padova" | **~14,7** (495 imp, 4,2% CTR) | Pianeta Casa, Grimaldi, Dove.it, Tetto Rosso, RockAgent |
+| "migliore agenzia immobiliare padova" | **NON APPARE** | Gruppo Bortoletti, SZ Affari, RockAgent, Dove.it |
+| "comprare casa padova" | **NON APPARE** | Idealista, Immobiliare.it, Subito, Tecnocasa |
+| "Righetto Immobiliare Padova" | **SI (brand)** | Idealista, Immobiliare.it, Casa.it, Wikicasa |
+
+**Diagnosi:** SEO on-page top tra i locali, domain authority troppo bassa. Competitor nazionali (Dove.it, RockAgent) alzano l'asticella.
+
+### 6.2 Confronto Competitor (aggiornato 7 marzo 2026)
+| Feature | Righetto | Tetto Rosso | RicercAttiva | Pianeta Casa | Dove.it | RockAgent |
+|---|---|---|---|---|---|---|
+| FAQ Pages | **Si (top)** | Si | No | No | No | No |
+| Blog/Content | **Si** | Si | **Si (top)** | Si | **Forte** | **Forte** |
+| Schema.org | **Esteso (top)** | Buono | Buono | Base | Buono | Buono |
+| Recensioni Google | ~127 | **~256** | Poche | ~104 | N/D | N/D |
+| Chatbot AI | **Unico** | No | No | No | No | No |
+| Simulatore mutuo | **Unico** | No | No | No | No | No |
+| GEO/AEO | **Unico** | No | No | No | Parziale | No |
+| Appare in SERP | **NO** | **SI** | **SI** | No | **SI** | **SI** |
+
+### 6.3 Le 4 Priorita' Strategiche (Off-Site)
+
+**PRIORITA' 1 — Google Business Profile (il singolo asset digitale piu' importante per lead locali)**
+
+> GBP ora alimenta le risposte AI di Google, non solo Maps.
+> Profili con foto aggiornate settimanalmente ricevono significativamente piu' interazioni.
+> 87% consumatori legge recensioni online, 73% solo quelle dell'ultimo mese.
+
+- [ ] **Categoria primaria:** "Agenzia Immobiliare" + secondarie: "Consulente Immobiliare", "Valutatore Immobiliare", "Gestione Immobili"
+- [ ] **Descrizione 750 caratteri:** includere aree servite, specialita', keyword locali naturalmente
+- [ ] Aggiungere TUTTI i servizi nel GBP: vendita, acquisto, affitto, valutazione, gestione, virtual tour
+- [ ] **Google Posts OGNI SETTIMANA** (nuovi immobili, articoli blog, offerte) — profili attivi settimanalmente hanno visibilita' maggiore
+- [ ] **Foto settimanali** — 5+ interni ufficio, 3+ esterni, foto team reali (MAI stock), 10+ esempi immobili
+- [ ] Compilare Q&A del profilo GBP (le stesse FAQ del sito)
+- [ ] Verificare attributi completi (orari, accessibilita', servizi, parcheggio)
+- [ ] **UTM tags** sul link al sito per tracciare traffico GBP in GA4
+- [ ] **Embed Google Map** con NAP visibile sul sito (gia' presente in contatti, verificare allineamento)
+
+**PRIORITA' 2 — Recensioni Google (gap critico: 127 vs 256 Tetto Rosso)**
+- [ ] WhatsApp post-rogito con link diretto a Google Review
+- [ ] Obiettivo: +30 recensioni/anno
+- [ ] Script: "Gentile [nome], grazie per aver scelto Righetto Immobiliare! Se il nostro servizio ti ha soddisfatto, ci farebbe piacere una tua recensione su Google: [link]. Ci aiuta molto!"
+- [ ] MAI recensioni false — penalita' = rimozione TUTTE + sospensione GBP + multa AGCM
+
+**PRIORITA' 3 — Backlink Locali (Domain Authority)**
+- [ ] PadovaOggi / IlGazzettino come fonte esperta
+- [ ] Comunicati stampa su quotidiani locali
+- [ ] Collaborazioni geometri, notai, architetti (scambio link)
+- [ ] Directory locali: PagineGialle, Yelp, Cylex, TuttoCitta
+- [ ] Profilo LinkedIn aziendale con contenuti regolari
+- [ ] Profilo FIAIP / FIMAA con link al sito
+- [ ] Guest post su blog immobiliari nazionali
+- [ ] Camera di Commercio di Padova — registrazione con link
+
+**PRIORITA' 4 — Citazioni NAP Consistenti**
+- [ ] Nome/Indirizzo/Telefono IDENTICO ovunque
+- [ ] Formato: "Righetto Immobiliare"
+- [ ] Indirizzo: Via Roma 96, 35010 Limena PD
+- [ ] Telefono: 049 884 3484
+
+### 6.4 Lezioni dai Competitor
+| Competitor | Lezione | Azione |
+|---|---|---|
+| Tetto Rosso | 256 recensioni, processo sistematico | Implementare processo post-rogito |
+| RicercAttiva | Blog aggressivo su temi fiscali/legali | Scrivere articoli su successioni, tasse, agevolazioni |
+| venderecasapadova.it | Dominio exact-match, funnel diretto, tecnica Open House | landing-vendere-casa-padova.html gia' creata; valutare Open House come differenziazione |
+| Pianeta Casa | Widget Google Reviews reale nel sito | Embed reale da implementare |
+| Grimaldi | Magazine mensile, freshness signals | Min 2 articoli blog/mese |
+| Engel & Volkers | Instagram forte (826 follower) | Rafforzare Instagram con reels e storie |
+| Tempocasa | "Immobile Certificato", Matterport virtual tour 3D | Creare bollino "Verificato Righetto"; valutare tour 3D professionale |
+
+---
+
+## 7. CONTENUTI — Topic Cluster e Stato Avanzamento
+
+### 7.1 Cluster "Vendere Casa Padova"
+- [x] servizio-vendita.html (FAQ + FAQPage schema)
+- [x] blog-costi-vendere-casa-padova-2026.html
+- [x] landing-vendere-casa-padova.html
+- [x] blog-documenti-vendita-casa.html
+- [x] blog-tasse-vendita-casa.html
+- [x] blog-tempi-vendita-casa-padova.html
+- **CLUSTER COMPLETO**
+
+### 7.2 Cluster "Comprare Casa Padova"
+- [x] blog-comprare-casa-padova-guida-2026.html
+- [x] blog-mutuo-prima-casa-padova.html
+- [x] blog-agevolazioni-prima-casa-2026.html
+- [x] blog-successione-immobiliare-padova.html
+- [x] blog-investire-immobiliare-padova.html
+- **CLUSTER COMPLETO**
+
+### 7.3 Cluster "Quartieri Padova"
+- [x] blog-quartieri-padova-2026.html
+- [x] 12 pagine zona-*.html (incluse zona-limena, zona-vigonza, zona-abano-terme, zona-selvazzano)
+- [x] agenzia-immobiliare-padova.html (pillar)
+- **CLUSTER COMPLETO**
+
+### 7.4 Cluster "Affitto Padova"
+- [x] blog-affitto-studenti-padova.html
+- [x] servizio-locazioni.html
+- [x] blog-contratto-affitto-padova.html
+- [x] blog-rendimento-affitto-padova.html
+- **CLUSTER COMPLETO**
+
+---
+
+## 8. STANDARD CONTENUTI — Articoli Blog e Descrizioni Immobili
+
+> Sezione aggiunta v1.8 — Standard operativi per garantire qualita' e coerenza
+> su ogni contenuto pubblicato (blog, zone, immobili).
+
+### 8.1 Standard Articoli Blog — Struttura Obbligatoria
+
+**Lunghezza target:** 2.500-3.500 parole per articoli pillar, 1.500-2.000 per articoli secondari.
+
+**Struttura H-tag:**
+- **H1** unico — keyword primaria + localizzazione ("Padova", zona specifica)
+- **H2** minimo 5-8 per articolo — formato domanda per AEO featured snippet
+- **H3** per sotto-sezioni — approfondimenti, liste, confronti
+- Totale H2+H3: minimo 15, massimo 28 per articolo lungo
+
+**Formato GEO/AEO per ogni sezione:**
+1. **Frase dichiarativa** nelle prime 2 righe (le AI estraggono da qui)
+2. **Risposta diretta** 40-60 parole come primo paragrafo dopo H2
+3. **Approfondimento** con dati, tabelle, liste sotto
+4. Ogni claim **auto-contenuto** — deve avere senso letto isolatamente
+
+**Dati e Fonti (OBBLIGATORIO):**
+- Ogni dato numerico (prezzi/mq, percentuali, tempi) DEVE avere **fonte citata**
+- Fonti accettate: OMI (Osservatorio Mercato Immobiliare), Agenzia Entrate, ISTAT, IlSole24Ore, FIAIP, Comune di Padova, Regione Veneto
+- MAI dati inventati — se non disponibili, scrivere "dato non pubblico" o omettere
+- Aggiornare dati OMI ogni trimestre
+
+**Tabelle comparative (almeno 1 per articolo):**
+- Confronti prezzi/mq tra zone con fonte sotto ogni numero
+- Confronti costi/tempi/requisiti per guide pratiche
+- Formato: Colonna | Dato | Trend | Fonte
+
+**FAQ obbligatorie:**
+- Minimo 5 FAQ per articolo, basate su "People Also Ask" di Google
+- Schema FAQPage JSON-LD obbligatorio
+- Risposte 40-80 parole, dirette e specifiche
+
+**Meta tags articolo:**
+| Campo | Requisito |
+|---|---|
+| Title | Max 60-70 char, keyword + localizzazione |
+| Meta description | Max 155-160 char, con dato numerico e CTA implicita |
+| article:published_time | ISO 8601 (es. 2026-03-04T09:00:00+01:00) |
+| article:author | Nome reale (Gino Capon o Linda Righetto) |
+| article:section | Categoria cluster (es. "Guida alla vendita") |
+| article:tag | 3-5 keyword rilevanti |
+
+**Schema JSON-LD triplo (obbligatorio):**
+1. `Article` — headline, author (Person), publisher, datePublished/Modified, wordCount
+2. `FAQPage` — minimo 5 Question/Answer
+3. `BreadcrumbList` — Home → Blog → Titolo Articolo
+
+**Elementi obbligatori nel corpo:**
+- [ ] Author bio visibile a fine articolo (foto, nome, ruolo, bio, link chi-siamo)
+- [ ] Timestamp "Ultimo aggiornamento" visibile
+- [ ] Internal links a zone pages e service pages correlate (min 3)
+- [ ] CTA contestuale (valutazione, contatto, simulatore mutuo)
+- [ ] Share bar (WhatsApp, Email, Copia link)
+- [ ] Articoli correlati (min 2)
+
+**Stile di scrittura:**
+- Tono autorevole ma accessibile — MAI accademico o burocratico
+- Dati concreti: prezzi/mq, percentuali, statistiche verificabili
+- Target: famiglie e investitori zona Padova/hinterland
+- Keyword locali: sempre includere "Padova" e zone specifiche
+- Citare fonti ufficiali nel testo (non solo in fondo)
+- Transition words 30-35% per leggibilita' (Inoltre, Infatti, Di conseguenza, In particolare, Tuttavia)
+- NO contenuti generici senza localizzazione
+
+### 8.3 Entity-Based SEO — Regole Anti-Keyword-Stuffing (OBBLIGATORIO)
+
+> **Aggiornamento Marzo 2026:** Google ragiona per **entita' semantiche**, non piu' per keyword esatte ripetute.
+> Ripetere "agenzia immobiliare Padova" 20 volte in una pagina e' **keyword stuffing** e causa penalizzazione.
+> Google riconosce sinonimi, varianti e concetti correlati — il campo semantico conta piu' della singola keyword.
+
+**Principio fondamentale:** Ogni pagina deve coprire un **campo semantico ricco** attorno all'entita' principale,
+usando sinonimi, varianti, termini correlati e contesto. MAI ripetere la stessa frase esatta piu' di 3-4 volte per pagina.
+
+**Regole operative:**
+
+1. **Limite ripetizione keyword:** nessuna frase di 2+ parole deve apparire piu' di **5 volte** in una singola pagina (testo visibile, esclusi tag tecnici come schema JSON-LD)
+2. **"a Padova" / "di Padova":** max **8-10 occorrenze** per pagina (prima erano 20-43 — keyword stuffing critico)
+3. **Nome zona nelle pagine zona:** max **10-12 occorrenze** (prima erano 19-29)
+4. **"Righetto Immobiliare":** max **3-4 menzioni** per pagina
+5. **Title, H1, meta description:** devono usare **varianti diverse** della keyword, MAI la stessa frase esatta in tutti e tre
+6. **H2:** almeno il 50% degli H2 deve usare **sinonimi o riformulazioni**, non ripetere la keyword del title
+
+**Mappa sinonimi obbligatoria per il settore immobiliare:**
+
+| Keyword esatta | Sinonimi e varianti da alternare |
+|---|---|
+| agenzia immobiliare | studio immobiliare, consulenza immobiliare, professionisti del settore, esperti del mercato locale |
+| vendere casa | mettere in vendita un immobile, cedere la proprieta', alienare l'immobile, concludere la compravendita |
+| comprare casa | acquistare un immobile, trovare la casa ideale, investire nel mattone, finalizzare l'acquisto |
+| mutuo prima casa | finanziamento ipotecario, prestito per l'acquisto, credito immobiliare, piano di ammortamento |
+| valutazione immobiliare | stima del valore, perizia dell'immobile, analisi comparativa di mercato, quotazione |
+| affitto / locazione | contratto di locazione, canone mensile, soluzione in affitto, formula locativa |
+| a Padova | nel capoluogo euganeo, nel Padovano, in citta', nel territorio patavino, nell'area metropolitana |
+| mercato immobiliare | comparto residenziale, settore delle compravendite, panorama immobiliare, dinamiche di mercato |
+| prezzi al mq | quotazioni medie, valori di mercato, costo per metro quadrato, listino immobiliare |
+| zona/quartiere | rione, comprensorio, area residenziale, contesto urbano, realta' locale |
+| virtual tour | visita virtuale 360, tour immersivo, esperienza digitale dell'immobile, sopralluogo da remoto |
+| caparra confirmatoria | anticipo contrattuale, garanzia economica, deposito vincolante, somma a conferma |
+| home staging | valorizzazione dell'immobile, allestimento per la vendita, preparazione scenica, restyling pre-vendita |
+| investimento immobiliare | rendimento da locazione, operazione buy-to-let, asset nel mattone, reddito passivo immobiliare |
+
+**Entita' correlate da includere (campo semantico):**
+
+Per ogni pagina, Google si aspetta di trovare anche le **entita' collegate** al topic. Esempio:
+- **Vendita casa:** rogito, notaio, visura catastale, APE, conformita' urbanistica, plusvalenza, agenzia delle entrate
+- **Mutuo:** LTV, spread, TAEG, Euribor, IRS, perizia bancaria, ipoteca, piano ammortamento
+- **Affitto:** cedolare secca, canone concordato, deposito cauzionale, registrazione contratto, sublocazione
+- **Quartiere Padova:** servizi, scuole, trasporti, aree verdi, qualita' della vita, prezzi medi, trend demografico
+- **Caparra:** codice civile art. 1385, clausola risolutiva, inadempimento, recesso, restituzione doppio
+
+**Come applicare in pratica:**
+1. Prima stesura: scrivi naturalmente
+2. Review: cerca ogni frase ripetuta 4+ volte e sostituisci almeno il 50% con sinonimi dalla mappa sopra
+3. H2: riformula come domande naturali, non come ripetizioni del title
+4. Primo paragrafo dopo H2: usa la keyword esatta (per GEO/AEO), poi alterna con varianti
+5. Meta description: usa una variante diversa dal title
+6. Aggiungi entita' correlate nel testo — arricchiscono il campo semantico senza forzare la keyword
+
+**Esempio pratico — PRIMA (keyword stuffing):**
+> "Il **mutuo prima casa a Padova** e' la soluzione per chi vuole comprare. Il **mutuo prima casa a Padova** offre tassi agevolati. Con il **mutuo prima casa a Padova** puoi risparmiare."
+
+**Esempio pratico — DOPO (entity-based SEO):**
+> "Il **mutuo prima casa a Padova** e' la soluzione piu' richiesta nel 2026. Il **finanziamento ipotecario** per l'acquisto della prima abitazione prevede tassi agevolati (Euribor + spread). Con un **prestito immobiliare** nel capoluogo euganeo, le famiglie possono accedere a **detrazioni IRPEF** sugli interessi passivi fino a 4.000 euro/anno."
+
+**Registrazione quadrupla (gia' in sezione 1.2, ribadita):**
+1. `admin.html` → `_blogSeedArticles` (**OBBLIGATORIO:** campo `data_pubblicazione: 'YYYY-MM-DD'`)
+2. `blog.html` → `articoliStatici`
+3. `js/homepage.js` → `staticMap` + `articoliStatici`
+4. `sitemap.xml` → URL con lastmod e priority 0.8
+
+> **ATTENZIONE — data_pubblicazione:** Senza questo campo la colonna "Pubblicazione" nell'admin mostra "—" e non e' possibile tracciare quando l'articolo e' stato pubblicato. Il validatore automatico (`validate-page.js`) blocca il commit se manca. Usare la data di pubblicazione effettiva in formato YYYY-MM-DD (es. `data_pubblicazione: '2026-03-15'`).
+
+### 8.2 Standard Descrizioni Immobili — Testi per il Sito
+
+> Le descrizioni immobili sul sito DEVONO essere **diverse** da quelle sui portali
+> (Idealista, Immobiliare.it, Casa.it) per evitare duplicate content e deindexing.
+
+**Struttura descrizione immobile (400-600 parole):**
+
+1. **Apertura emozionale** (2-3 righe) — prima impressione, luce, sensazione
+   - Es: "Luminoso trilocale al secondo piano con terrazzo panoramico, in una delle vie piu' tranquille di Limena."
+2. **Caratteristiche principali** — elenco strutturato
+   - Tipologia, superficie, locali, piano, stato
+   - Classe energetica con IPE
+   - Anno costruzione e eventuali ristrutturazioni
+3. **Descrizione ambienti** — stanza per stanza
+   - Soggiorno, cucina, camere, bagni — con metrature se rilevanti
+   - Dettagli che fanno la differenza (esposizione, vista, materiali)
+4. **Spazi esterni e pertinenze**
+   - Giardino, terrazzo, balcone (con mq)
+   - Garage, cantina, posto auto
+5. **Contesto e zona** — perche' questa posizione e' strategica
+   - Servizi vicini (scuole, supermercati, trasporti)
+   - Link alla zona page corrispondente
+   - Distanza dal centro (km e minuti)
+6. **Chiusura con CTA** — invito a contattare
+   - "Per informazioni o per fissare una visita: 049.88.43.484 / info@righettoimmobiliare.it"
+
+**Regole testi immobili:**
+- MAI copiare la descrizione dal portale — riscrivere con angolo diverso
+- Dati verificati: superficie catastale vs commerciale, classe energetica reale
+- Prezzo con indicazione €/mq per confronto zona
+- NO termini vaghi ("bello", "interessante") — usare aggettivi specifici ("luminoso sud-ovest", "ristrutturato 2023", "riscaldamento autonomo a pavimento")
+- Citare dati OMI della zona per dare contesto al prezzo
+- Se presente virtual tour o video, segnalare con badge dedicato
+
+**Schema JSON-LD per immobile:**
+- Tipo: `RealEstateListing` (o `Product` con `offers`)
+- Campi: name, description, url, image (array), price, priceCurrency
+- address: PostalAddress con zona/comune
+- GeoCoordinates (lat/lng)
+- floorSize, numberOfRooms
+- Collegamento a `RealEstateAgent` (l'agenzia)
+
+### 8.3 Standard Pagine Zona — Struttura Obbligatoria
+
+**Ogni pagina zona-*.html deve contenere:**
+
+1. **H1:** "Case in vendita a [ZONA] — Prezzi, Quartiere e Consigli"
+2. **Intro dichiarativa** (GEO) — 2 frasi con dati OMI (prezzo medio €/mq, trend)
+3. **Sezione "Il quartiere"** — storia, carattere, target residenti
+4. **Tabella prezzi** — confronto per tipologia (appartamento, villa, attico) con fonte OMI
+5. **Servizi e infrastrutture** — scuole, trasporti, commercio, verde
+6. **Pro e Contro** — lista onesta (credibilita' = E-E-A-T)
+7. **FAQ locali** (min 5) — "Quanto costa un bilocale a [ZONA]?", "Conviene investire a [ZONA]?"
+8. **CTA** — valutazione gratuita specifica per la zona
+9. **Link interni** — verso articoli blog correlati e servizi
+
+**Schema obbligatorio zona:**
+- `RealEstateAgent` con `areaServed` specifico
+- `FAQPage` con domande iper-locali
+- `BreadcrumbList`
+- `Place` con `GeoCoordinates` del centro zona
+
+---
+
+## 9. AZIONI TECNICHE — TODO
+
+### 9.1 Bug e Fix Immediati — Aggiornati 12 Marzo 2026
+- [x] **immobile.html in sitemap** — gia' presente (verificato)
+- [x] **cormorant-garamond-600.woff2** — 7 file blog hanno preload 600, altri usano 700 correttamente
+- [x] **landing-vendita.html lazy** — immagini sono below-fold, loading="lazy" corretto
+- [x] **Discrepanza articoli** — allineati: homepage.js +2, admin.html +10 articoli
+- [x] **Contrasto oro** — corretti 8 punti in admin.html (color:#fff → color:var(--nero))
+- [x] **robots.txt AI bots** — aggiunti GPTBot, ClaudeBot, Google-Extended, PerplexityBot + Allow chatbot.js
+- [x] **sameAs mancante** — aggiunto RealEstateAgent schema con sameAs a faq.html
+- [x] **Person schema** — aggiunto a landing-agente.html
+- [x] **Timestamp cornerstone** — aggiunto "Aggiornato: marzo 2026" a 6 articoli principali
+- [x] **llms.txt** — aggiornato con nuove zone e articoli
+- [x] **Email offuscata Cloudflare** — fix su 7 pagine (servizi, servizio-vendita, privacy, immobili, index, chi-siamo, contatti) — rimosso `__cf_email__` e `email-decode.min.js`
+- [x] **H1 mancante landing-chat** — aggiunto H1 sr-only a 5 pagine: landing-chat-vendita, landing-chat-valutazione, landing-chat-insoddisfatti, landing-chat-offerta-luce, landing-chat-offerta-gas
+- [x] **Meta description troppo lunghe** — accorciate a ≤160 char su 9 pagine: 6 zone pages, agenzia-immobiliare-padova, landing-mutuo (anche title accorciato), vendere-casa-padova-errori
+- [x] **immobile.html escluso da audit** — e' un template dinamico (genera contenuto via JS)
+- [x] **Audit automatico settimanale** — auto-run ogni 7gg, salvataggio su Supabase (tabella `audit_snapshots`), grafico storico con canvas, nella sezione Admin
+
+### 9.2 Contenuti da Creare
+- [x] blog-tempi-vendita-casa-padova.html — CREATO 8 marzo 2026
+- [x] zona-vigonza.html — CREATA 8 marzo 2026
+- [x] zona-abano-terme.html — CREATA 8 marzo 2026
+- [x] zona-selvazzano.html — CREATA 8 marzo 2026
+- [ ] Bollino "Verificato Righetto" — brand quality sugli annunci
+
+### 9.3 Ottimizzazioni Performance
+- [x] **Supabase Image Transforms** — 13 Marzo 2026: `resolveImageUrl()` in `homepage.js`, `immobile.html`, `immobili.html` ora usa `/storage/v1/render/image/public/` con parametri `width` e `quality` per ridimensionare le immagini al volo. Risparmio stimato: ~2300 KiB (~85%) sulle immagini Supabase. Dimensioni: card homepage/listing width=600 q=75, gallery hero width=1200 q=80, thumbnails width=300 q=70, lightbox full-size originale.
+- [ ] LCP sotto 2 secondi su tutte le pagine (nuovo target competitivo)
+- [ ] Verificare SVT — nessun caricamento "scattoso" (font swap, image pop-in)
+- [ ] Verificare Engagement Reliability — form, bottoni, menu funzionano su tutti i device
+- [ ] Page Experience consistency — tutte le pagine devono avere performance simile
+- [ ] **Cache headers GitHub Pages** — il TTL di 10 minuti sulle risorse proprietarie (fonts, CSS, JS, immagini locali) e' un limite di GitHub Pages non modificabile. Valutare Cloudflare come proxy per cache piu' aggressiva.
+
+### 9.4 SEO Tecnico
+- [ ] **Contenuti unici vs portali** — le descrizioni immobili su Idealista/Immobiliare.it DEVONO essere diverse da quelle sul sito (rischio duplicate content e deindexing)
+- [ ] Internal linking tra blog posts e zone pages (cross-link contestuali)
+- [ ] Verificare indexing in Google Search Console
+- [ ] Richiedere indicizzazione manuale nuove pagine via GSC
+- [ ] Verificare che recensioni Google non siano sparite (nuove policies)
+- [ ] Aggiungere video content (virtual tour, presentazione agenzia) — genera 66% piu' lead
+- [ ] UTM tags su link GBP per tracciare traffico in GA4
+- [ ] Valutare hreflang se si prevede versione EN per clientela internazionale
+
+### 9.5 Conversione e Lead Generation
+- [ ] **Speed-to-lead:** risposta automatica entro 60 secondi (47-59% dei clienti sceglie il primo agente che risponde)
+- [ ] **A/B test CTA:** testare copy diversi (es. "Valutazione Gratuita" vs "Scopri il Valore della Tua Casa")
+- [ ] **Lead magnet segmentati:** CTA diversi per acquirenti (simulatore mutuo) e venditori (valutazione gratuita)
+- [ ] **Video testimonial:** aggiungere video recensioni reali (piu' engaging del solo testo)
+- [ ] **Siti <2s convertono 3x** meglio dei siti lenti — priorita' LCP
+
+### 9.6 GEO/AEO — COMPLETATI 8 Marzo 2026
+- [x] **llms.txt aggiornato** — aggiunte nuove zone (Vigonza, Abano, Selvazzano) e prezzi
+- [x] **robots.txt AI bots** — GPTBot, ClaudeBot, Google-Extended, PerplexityBot tutti Allow + chatbot.js Allow
+- [ ] Assicurare che contenuti importanti NON siano dietro JS client-side (le AI estraggono HTML statico)
+- [x] **Timestamp "Ultimo aggiornamento"** — aggiunto a 6 articoli cornerstone
+- [x] **sameAs** — presente su tutte le pagine principali (47/48), faq.html corretto
+- [x] **BreadcrumbList** — presente su 48 pagine (tutte tranne index.html che non lo richiede)
+- [x] **Person schema** — presente su chi-siamo.html e landing-agente.html
+
+---
+
+## 10. KPI E CALENDARIO
+
+### 10.1 KPI da Monitorare (Aggiornato 11 Marzo 2026 con dati reali)
+| Metrica | Attuale (11 mar) | Obiettivo 3 mesi | Obiettivo 6 mesi | Obiettivo 12 mesi |
+|---|---|---|---|---|
+| Clic GSC mensili | **150** | 400 | 1.000 | 3.000 |
+| Impressioni GSC | **1.590** | 5.000 | 15.000 | 50.000 |
+| CTR media | **9,4%** | 10% | 12% | 15% |
+| Posizione media | **8,1** | 6 | 4 | 3 |
+| Utenti settimanali GA | **96** (+152%) | 300 | 800 | 2.000 |
+| Recensioni Google | ~127 | 142 | 172 | 200+ |
+| "agenzia immobiliare padova" | pos. ~28 | Top 15 | Top 10 | Top 3 |
+| "vendere casa padova" | pos. ~15 | Top 10 | Top 5 | Top 3 |
+| Pagine indicizzate | ~55 | 65 | 80 | 120 |
+| Backlink domini unici | ~5 | 15 | 30 | 50 |
+| Domain Authority | ~5 | 10 | 15 | 20+ |
+| Newsletter iscritti | ? | 100 | 300 | 500+ |
+
+### 10.2 Calendario Editoriale
+| Mese | Contenuto | Keyword target | Stato |
+|---|---|---|---|
+| Marzo 2026 | blog-tempi-vendita-casa-padova.html | "quanto tempo vendere casa padova" | **FATTO** |
+| Marzo 2026 | zona-vigonza.html | "case vigonza", "immobiliare vigonza" | **FATTO** (anticipato) |
+| Marzo 2026 | zona-abano-terme.html | "case abano terme" | **FATTO** (anticipato) |
+| Marzo 2026 | zona-selvazzano.html | "case selvazzano dentro" | **FATTO** (anticipato) |
+| Aprile 2026 | Video presentazione agenzia | Brand awareness + engagement | TODO |
+| Maggio 2026 | Articoli fiscali (IMU, bonus) | Long-tail fiscale | TODO |
+| Giugno 2026 | Bollino "Verificato Righetto" | Brand quality | TODO |
+
+### 10.3 Routine di Monitoraggio
+- **Settimanale:** Performance report in Search Console + Google Posts
+- **Mensile:** Audit metriche SEO + Core Web Vitals + citazioni AI
+- **Trimestrale:** Audit completo contenuti + struttura + competitor
+- **Ad ogni Google Update:** Verificare impatto sul sito
+
+---
+
+## 11. GESTIONE cPanel
+
+### 11.1 Da Eliminare (per liberare spazio)
+| File/Cartella | Dimensione | Motivo |
+|---|---|---|
+| `backup-3.2.2026_10-53-22_wyrighet.tar.gz` | **37.04 GB** | Backup gia' scaricato in locale |
+| `public_htmlcopia140422.zip` | **11.37 GB** | Backup WordPress 2022 — obsoleto |
+| `error_log*` / `error_log_php*` | variabile | Log errori vecchi |
+| `sp_mysql_bk/` | variabile | Backup MySQL WordPress — non serve |
+| `public_html/` contenuto | variabile | Vecchio sito WordPress |
+| Database MySQL | variabile | Database WordPress non necessari |
+
+### 11.2 Da Tenere Assolutamente
+- Record DNS (A, CNAME, MX)
+- Dominio registrato
+- Account email attivi
+- Certificato SSL
+- Cartelle: `mail/`, `etc/`, `ssl/`, `cache/`, `logs/`, `tmp/`
+
+---
+
+## 12. CHECKLIST RAPIDE
 
 ### Per Ogni Nuova Pagina
-- [ ] Title tag unico (max 60 char)
-- [ ] Meta description unica (max 160 char)
-- [ ] H1 unico con keyword conversazionale (prompt-style)
-- [ ] Schema.org JSON-LD (BreadcrumbList + tipo specifico)
-- [ ] Open Graph tags (og:title, og:description, og:url, og:image, og:type, og:locale)
-- [ ] `<meta name="theme-color">`
-- [ ] `<link rel="canonical">`
-- [ ] Hero image con `fetchpriority="high"`, mai `loading="lazy"` above-fold
-- [ ] Font preload woff2
-- [ ] CTA primario con contrasto >= 4.5:1
+- [ ] Title tag unico (max 60 char) + Meta description (max 160 char)
+- [ ] H1 unico + Alt text su tutte le immagini
+- [ ] Schema.org (RealEstateAgent + GeoCoordinates + FAQPage + BreadcrumbList + sameAs social)
+- [ ] Open Graph tags + Canonical URL
+- [ ] Hero image preloaded + font above-fold preloaded
+- [ ] Nessun `loading="lazy"` above-the-fold
+- [ ] CTA primario con contrast >= 4.5:1 (MAI var(--oro) con color:#fff)
+- [ ] Critical CSS inline, rest deferred
+- [ ] Link interni verso pagine correlate
 - [ ] Registrato in sitemap.xml
-- [ ] Link navbar e footer coerenti con tutte le altre pagine
-- [ ] Cookie banner presente
-- [ ] Nessun CDN esterno (codice puro)
-- [ ] GA4 (G-JFM8JG9C2R) presente
-- [ ] Risposta diretta nelle prime 2 righe di ogni sezione H2 (GEO)
-- [ ] Contenuto risponde a domande conversazionali
+- [ ] Frasi dichiarative prime 2 righe (GEO)
+- [ ] Dati numerici specifici (GEO)
+- [ ] Min 5 FAQ con Schema FAQPage (AEO)
+- [ ] Author bio visibile con link a pagina autore (E-E-A-T)
+- [ ] **Se landing page:** registrata in `_landingSeedPages` di admin.html con `data_pubblicazione: 'YYYY-MM-DD'`
 
 ### Per Ogni Nuovo Articolo Blog
-- [ ] 2500+ parole strutturate
-- [ ] 28 H2/H3 distribuiti
-- [ ] 35% transition words professionali
-- [ ] Errori umani casuali (5-8, max 1 ogni 300 parole)
-- [ ] Meta titles 60/160 char + desc 95/200 char
-- [ ] JSON-LD BlogPosting + FAQPage + BreadcrumbList
-- [ ] 15 FAQ basate su ricerche reali ("People Also Ask")
-- [ ] Tabelle confronto con FONTI CITATE
-- [ ] Ogni dato numerico ha [FONTE] verificata
-- [ ] Link fonti ufficiali preservati
-- [ ] Zero claim inventati
-- [ ] Zero attacchi personali a concorrenti
-- [ ] SPINTAX social pronto (LinkedIn/Facebook)
-- [ ] Tono professionale B2B — zero dialetto
-- [ ] Author bio con Person schema
-- [ ] Table of Contents con anchor link
-- [ ] Data "Ultimo aggiornamento" visibile
-- [ ] Pulsanti condivisione social (LinkedIn, X, Facebook)
+- [ ] Tutti i punti sopra
+- [ ] Registrato in TUTTI e 4: admin.html, blog.html, homepage.js, sitemap.xml
+- [ ] **`data_pubblicazione: 'YYYY-MM-DD'`** presente nel seed `_blogSeedArticles` di admin.html (BLOCCANTE)
+- [ ] Cross-link con zone pages e service pages correlate
+- [ ] Timestamp "Ultimo aggiornamento" visibile
 
-### Per Ogni Modifica CSS
-- [ ] Mobile-first: stili base per mobile, `@media` per desktop
-- [ ] No `filter` su animazioni — solo `opacity` e `transform`
-- [ ] No `will-change` permanente
-- [ ] Contrasto minimo 4.5:1 su CTA
+### Per Ogni Nuova Zona Page
+- [ ] Tutti i punti "Per Ogni Nuova Pagina"
+- [ ] Schema Place con GeoCoordinates + sameAs
+- [ ] Schema RealEstateAgent con aggregateRating
+- [ ] Registrato in blog.html (array articoliStatici con categoria "Mercato locale")
+- [ ] Registrato in sitemap.xml
+- [ ] Aggiornato llms.txt con nuova zona e prezzi
+- [ ] Aggiunto link nel footer di tutte le zone pages
 
-### Per Ogni Modifica JS
-- [ ] Vanilla JS — nessun framework, nessuna libreria
-- [ ] Performance: nessun blocco rendering
-- [ ] Chatbot caricato con delay
+### Verifiche Post-Modifica (AUTOMATICHE via pre-commit hook)
+- `node scripts/validate-page.js --staged` — valida automaticamente
+- Schema mancante = commit BLOCCATO
+- Title mancante = commit BLOCCATO
+- `data_pubblicazione` mancante nel seed admin.html = commit BLOCCATO (blog e landing)
+- Landing page non registrata in `_landingSeedPages` = WARNING
+- Meta description troppo lunga = WARNING (passa)
 
-### Commit
-- [ ] Messaggio in italiano, descrittivo
-- [ ] Nessun file sensibile (.env, credenziali)
+### Audit Automation (Admin)
+- **Pulsante "Lancia Analisi Skill"** nell'admin → esegue audit completo + carica analisi Claude
+- Storico salvato in `data/audit-analyses.json` con data, ora, risultati audit, problemi, analisi completa e sintesi
+- Ogni analisi include: stato audit (OK/warning/errori), azioni prioritarie, stato KPI, TODO aperti
+- La tabella "Storico Analisi Skill" mostra cronologia cliccabile con sintesi per ogni run
+- Per aggiungere una nuova analisi: Claude esegue audit, analizza risultati con SKILL, salva in JSON
 
----
-
-## 6. ISTRUZIONI PUBBLICAZIONE
-
-### Prima di Pubblicare Qualsiasi Contenuto:
-
-1. **VERIFICARE [DATO] su fonte ufficiale:**
-   - Prezzi: preventivi ufficiali richiesti (screenshot/PDF)
-   - Performance: Google PageSpeed Insights (screenshot)
-   - Trend: Google Trends, Gartner, IlSole24Ore
-
-2. **SOSTITUIRE placeholder:**
-   - [COMPETITOR] → Nome reale agenzia concorrente (Tetto Rosso, Tecnocasa, Gabetti)
-   - [DATO_FONTE] → Numero + fonte tra parentesi
-   - [DATA] → Data pubblicazione reale
-
-3. **AGGIORNARE trimestrale:**
-   - Prezzi competitors (verificare rinnovi)
-   - Dati PageSpeed (ripetere test)
-   - Bonus/agevolazioni statali
-
-4. **CITARE fonte sotto ogni tabella/grafico**
-
-### Regola d'Oro
-> "Se non hai fonte verificabile, NON inserire il dato."
-> Meglio scrivere "dato non disponibile" che inventare numeri.
+### Verifiche Manuali Periodiche
+- [ ] Contrasto WCAG: mai var(--oro) come bg con testo bianco (ratio 1.54:1 = FAIL)
+- [ ] Allineamento array: blog.html, homepage.js, admin.html devono avere gli stessi articoli
+- [ ] robots.txt: AI bots (GPTBot, ClaudeBot, Google-Extended, PerplexityBot) NON bloccati
+- [ ] llms.txt: aggiornato con nuovi contenuti e prezzi
+- [ ] Timestamp cornerstone: aggiornare ogni mese
 
 ---
 
-## 7. TODO — Azioni Future
+## 13. DESIGN SYSTEM UNIVERSALE
 
-### Infrastruttura
-- [x] Sito live su GitHub Pages
-- [x] 102 URL indicizzate in sitemap.xml
-- [x] Schema.org su tutte le pagine (RealEstateAgent, BlogPosting, FAQPage, VideoObject)
-- [x] Open Graph tags su tutte le pagine
-- [x] robots.txt con whitelist AI bots
+> Estratto e generalizzato dal progetto Righetto Immobiliare. Replicabile su qualsiasi settore.
 
-### Contenuti
-- [x] 41 articoli blog pubblicati (mercato, mutui, affitti, vendita, zone)
-- [x] 14 pagine zona Padova
-- [x] 7 pagine servizi
-- [x] 12 landing pages (incluse 6 chat conversazionali)
-- [ ] Creare nuovi articoli blog seguendo template Sezione 3
-- [ ] Aggiornare dati mercato OMI/FIAIP trimestralmente
+### 13.1 Variabili CSS
 
-### Tecnico
-- [ ] Implementare `prefers-reduced-motion` per accessibilita'
-- [ ] Critical CSS inline per LCP <2s
+```css
+:root {
+  /* === COLORI PRIMARI === */
+  --primario:    #2C4A6E;   /* Colore brand principale */
+  --primario-2:  #3A5F8C;   /* Hover state */
+  --primario-3:  #4E789A;   /* Accento light */
 
-### GEO & AI Agents
-- [x] Creare robots.txt con whitelist AI bots (7 bot configurati)
-- [x] Creare llms.txt (standard llmstxt.org)
-- [x] Creare llms-full.txt (contenuto completo pagine in Markdown)
-- [x] Creare ai.json (permessi AI — standard ai-visibility.org.uk v1.1.0)
-- [x] Creare /.well-known/agent.json (discovery A2A — standard Google/Linux Foundation)
-- [x] Creare /.well-known/mcp.json (discovery MCP — standard Anthropic/Linux Foundation)
-- [ ] Aggiungere AggregateRating schema su testimonial homepage
-- [ ] Aggiungere LocalBusiness schema su homepage
-- [ ] Aggiungere Person schema per fondatore e team
-- [ ] Aggiungere author bio su articoli blog
-- [ ] Aggiungere Table of Contents su articoli blog
-- [ ] Aggiungere date "Ultimo aggiornamento" visibili su blog
-- [x] Usare BlogPosting invece di Article su blog (41 articoli migrati)
-- [ ] Aggiungere ItemList schema su bandi.html
-- [ ] Embed video YouTube su pagine chiave (youtube-nocookie.com per GDPR)
-- [ ] Creare VideoObject schema per video
-- [ ] Aggiungere pulsanti share social su blog
-- [x] Creare humans.txt
-- [x] Creare .well-known/security.txt (RFC 9116)
-- [x] Creare manifest.json PWA base
-- [ ] Implementare IndexNow per Bing (ChatGPT usa indice Bing)
-- [ ] Monitoring citazioni AI (Otterly.AI o Peec AI) — settimanale
-- [ ] Registrarsi su directory settoriali italiane
-- [ ] Ottimizzare Google Business Profile (post 2x/settimana)
-- [ ] Aggiungere favicon link `<link rel="icon">` su tutte le pagine
-- [ ] Aggiungere hreflang tags quando sezione EN viene creata
+  /* === COLORI ACCENT (CTA) === */
+  --accent:      #B8D44A;   /* CTA primario — SOLO con testo scuro */
+  --accent-2:    #CDED62;   /* Hover CTA */
+  --accent-3:    #DFF09A;   /* Accent extra light */
+  --accent-bg:   rgba(184,212,74,0.10); /* Background badge */
 
----
+  /* === NEUTRALI === */
+  --nero:        #152435;   /* Testo principale */
+  --bianco:      #F7F5F1;   /* Background principale */
+  --sfondo:      #ECE7DF;   /* Background sezioni alternate */
+  --sfondo-2:    #E1DBD1;   /* Background cards */
+  --carta:       #F2EDE7;   /* Background input/form */
 
-## 8. STRATEGIA GEO, AI AGENTS & PREVISIONI 2026-2028
+  /* === TESTO === */
+  --testo:       #152435;   /* Body text */
+  --grigio:      #6B7A8D;   /* Testo secondario */
+  --grigio-2:    #9AACBD;   /* Testo disabled/hint */
 
-### 8.1 File Speciali per AI Agents
-| File | Posizione | Scopo | Stato |
-|------|-----------|-------|-------|
-| `robots.txt` | `/robots.txt` | Whitelist crawler AI (7 bot) + riferimenti a tutti i file AI | FATTO |
-| `llms.txt` | `/llms.txt` | Info sito leggibile da AI (standard llmstxt.org, 600+ siti lo usano) | FATTO |
-| `llms-full.txt` | `/llms-full.txt` | Contenuto completo in Markdown (tutte le pagine) | FATTO |
-| `ai.json` | `/ai.json` | Permessi AI — allow/deny per tipo uso (v1.1.0, ai-visibility.org.uk) | FATTO |
-| `agent.json` | `/.well-known/agent.json` | Discovery A2A — Google/Linux Foundation, descrive servizi per agenti | FATTO |
-| `mcp.json` | `/.well-known/mcp.json` | Discovery MCP — Anthropic/Linux Foundation (97M+ download SDK/mese) | FATTO |
-| `humans.txt` | `/humans.txt` | Crediti team (Capon Gino, Righetto Linda), trasparenza | FATTO |
-| `security.txt` | `/.well-known/security.txt` | Policy sicurezza (RFC 9116, scadenza 2027-03-16) | FATTO |
-| `manifest.json` | `/manifest.json` | PWA base (nota: servono icone 192x192 e 512x512) | FATTO |
+  /* === STATUS === */
+  --verde:       #1E8449;   /* Success */
+  --rosso:       #C0392B;   /* Error */
 
-**Nota su llms.txt:** 844.000+ siti lo implementano (Anthropic, Stripe, Cloudflare). Nessuna AI ha confermato ufficialmente di leggerlo, ma e' una scommessa a basso costo con potenziale futuro.
+  /* === LAYOUT === */
+  --nav-h:       74px;      /* Altezza navbar */
+  --max-w:       1200px;    /* Max-width contenuto */
+  --max-w-lg:    1400px;    /* Max-width sezioni larghe */
+  --radius:      12px;      /* Border radius standard */
+  --radius-sm:   8px;       /* Border radius piccolo */
+  --radius-pill: 50px;      /* Pill/badge */
+}
 
-### 8.2 Standard Emergenti per AI Agents
+@media (max-width: 768px) {
+  :root { --nav-h: 64px; }
+}
+```
 
-**NLWeb (Natural Language Web) — Microsoft:**
-Protocollo open-source (MIT) creato da R.V. Guha (inventore di RSS, RDF e Schema.org). Trasforma siti web in endpoint conversazionali per AI agents. Funziona consumando il markup Schema.org esistente. Ogni istanza NLWeb e' anche un server MCP. Chiamato "l'HTML della generazione AI."
-- **Azione:** Avere Schema.org completo e' gia' la base per NLWeb.
-- Fonte: searchengineland.com, github.com/microsoft/NLWeb
+**REGOLA colori personalizzati:** Quando si cambia colore primario:
+1. Sostituire `--primario` col colore scelto
+2. Calcolare `--primario-2` (+15% luminosita') e `--primario-3` (+30% luminosita')
+3. Verificare contrast ratio >= 4.5:1 per testo su sfondo
+4. Se `--accent` su sfondo chiaro ha contrast < 4.5:1 → usare SOLO con testo scuro
 
-**MCP (Model Context Protocol) — Anthropic:**
-Donato alla Linux Foundation (dic 2025). Co-fondato da Anthropic, Block, OpenAI. Supportato da Google, Microsoft, AWS, Cloudflare. 97M+ download SDK/mese. Permette agli AI agents di interagire con servizi strutturati.
-- **Azione:** Preparare `/.well-known/mcp.json` come endpoint di discovery.
-- Fonte: modelcontextprotocol.io, anthropic.com
+### 13.2 Tipografia
 
-**A2A (Agent-to-Agent) — Google:**
-Protocollo sotto Linux Foundation. Usa `/.well-known/agent.json` per discovery tra agenti. Complementare a MCP.
-- **Azione:** Preparare agent card con descrizione servizi.
-- Fonte: a2aprotocol.ai
+| Elemento | Font | Size | Weight | Line-height |
+|----------|------|------|--------|-------------|
+| H1 (hero) | Cormorant Garamond | clamp(2.5rem, 6vw, 5rem) | 700 | 1.05 |
+| H2 (sezione) | Cormorant Garamond | clamp(2rem, 3.5vw, 3rem) | 700 | 1.15 |
+| H3 (card/sub) | Cormorant Garamond | 1.35rem | 600 | 1.3 |
+| Body | Montserrat | 0.9rem – 1.05rem | 400 | 1.85 |
+| Label/Tag | Montserrat | 0.62rem – 0.78rem | 600–800 | 1.4 |
+| CTA button | Montserrat | 0.78rem – 0.85rem | 800 | 1.2 |
 
-**WebMCP — Chrome 145+ (feb 2026):**
-Permette ai siti di esporre form e strumenti come tool dichiarativi per AI agents nel browser.
-- **Azione:** Monitorare — quando si stabilizza, i form contatto/preventivo diventano tool AI.
-- Fonte: dev.to/czmilo
+**Regole tipografiche:**
+- Label/tag: SEMPRE `text-transform: uppercase; letter-spacing: 1.5px–3.5px`
+- H1 accent: `<strong>` con `font-weight: 600; font-style: italic`
+- Body text: colore `--grigio` per descrizioni, `--testo` per contenuto principale
+- Hero text su sfondo scuro: `text-shadow: 0 2px 24px rgba(8,16,30,0.55)`
 
-**NIST AI Agent Standards Initiative (feb 2026):**
-Standard per ecosistemi di agenti AI interoperabili e sicuri.
-- **Azione:** Monitorare per compliance futura.
-- Fonte: nist.gov
+### 13.3 Spacing System
 
-**IndexNow — Bing:**
-80M+ siti, 5B+ submission/giorno. 22% dei click Bing proviene da URL IndexNow. Google NON lo supporta, ma ChatGPT usa l'indice Bing → indicizzazione Bing piu' rapida = discovery ChatGPT piu' rapida.
-- **Azione:** Implementare per contenuti blog (semplice script al deploy).
-- Fonte: bing.com/indexnow
+| Contesto | Desktop | Tablet | Mobile |
+|----------|---------|--------|--------|
+| Sezione padding | 90px 44px | 60px 28px | 60px 20px |
+| Card padding | 28px 24px | 24px 20px | 20px 16px |
+| Grid gap | 24px | 24px | 16px |
+| Eyebrow → Heading | 12px–22px | — | — |
+| Heading → Content | 22px–32px | — | — |
+| Content → CTA | 40px | — | — |
+| Form field gap | 16px | — | — |
 
-### 8.3 Zero-Click Search — Numeri e Strategia
-**Stato 2026:**
-- 60% delle ricerche Google finisce senza click (fonte: Bain & Company). Su mobile: 77%
-- Query con AI Overviews: 83% zero-click. AI Mode: 93% zero-click
-- AI Overviews riducono i click del 58% (fonte: Ahrefs, feb 2026)
-- MA: il traffico AI converte **23x meglio** del tradizionale organico, con valore economico **4.4x superiore** (fonte: click-vision.com)
-- I brand sono **6.5x piu' probabili** di essere citati tramite fonti terze
+### 13.4 Breakpoint Responsive
 
-**Strategia anti-zero-click:**
-1. Shift KPI da traffico a **visibilita'**: citazioni AI, brand mentions, snippet appearances
-2. Ottimizzare per inclusione nelle risposte: formato Q&A, definizioni concise, dati strutturati
-3. Costruire presenza su siti autorevoli esterni (i brand citati tramite terze parti hanno 6.5x piu' citazioni)
-4. Ottimizzare conversione del traffico che arriva (qualita' molto piu' alta)
+| Breakpoint | Target | Azione |
+|------------|--------|--------|
+| `max-width: 1024px` | Laptop | Grid 3→2 colonne |
+| `max-width: 900px` | Tablet landscape | Footer/form collapse |
+| **`max-width: 768px`** | **Tablet portrait** | **Navbar → hamburger, grid → 1 col** |
+| `max-width: 600px` | Mobile grande | Card grid → 1 col, padding ridotto |
+| `max-width: 520px` | Mobile piccolo | Popup/modal compatti |
 
-**Previsione 2027:** 75% delle query informazionali risolte direttamente nelle interfacce di ricerca
-**Previsione 2028:** Zero-click diventa il default. Solo query transazionali e ricerca complessa generano click
+### 13.5 Shadow System
 
-### 8.4 Google AI Overviews & AI Mode — Evoluzione
-**Stato 2026:**
-- AI Overviews su **48% delle query** tracciate (+58% anno su anno)
-- Gemini 3 e' il modello di default (gen 2026)
-- Penetrazione per settore: Sanita' 88%, Education 83%, B2B Tech 82%, Ristoranti 78%
-- Gli utenti possono fare domande di follow-up direttamente da AI Overviews
-- Google ha lanciato Universal Commerce Protocol (UCP) — checkout diretto dentro AI Mode
+```css
+/* Livelli di elevazione */
+--shadow-xs:  0 2px 16px rgba(21,36,53,0.05);    /* Card base */
+--shadow-sm:  0 6px 20px rgba(21,36,53,0.08);     /* Card hover lieve */
+--shadow-md:  0 20px 50px rgba(21,36,53,0.14);    /* Card hover forte */
+--shadow-lg:  0 30px 100px rgba(0,0,0,0.4);       /* Hero/overlay */
+--shadow-cta: 0 6px 20px rgba(184,212,74,0.35);   /* CTA button glow */
+```
 
-**Previsione 2027:** AI Overviews su >60% delle query. Risposte personalizzate basate su cronologia
-**Previsione 2028:** AI Overviews diventano l'esperienza predefinita. SERP tradizionale (10 link blu) limitata a query di nicchia
+### 13.6 Animazioni
 
-### 8.5 Voice Search & Assistenti AI
-**Stato 2026:**
-- 8.4 miliardi di assistenti vocali in uso globale (fonte: DemandSage)
-- 65%+ ricerche locali via voce. 71% utenti preferisce voce a digitazione
-- Europa: 25% del mercato globale voice assistant
-- Voice commerce: $80 miliardi nel 2026
-- Mercato voice assistant: da $7.35B (2024) a $33.74B (2030), CAGR 26.5%
+```css
+/* Easing curves standard */
+--ease-out:    cubic-bezier(0.16, 1, 0.3, 1);     /* Scroll reveal */
+--ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1); /* Card lift */
+--ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);    /* Menu slide */
 
-**Azioni per sito statico italiano:**
-- Ottimizzare per query conversazionali in italiano ("Quanto costa un sito web per un ristorante a Milano?")
-- Implementare FAQ schema e markup speakable
-- Google Business Profile completo — gli assistenti vocali attingono pesantemente da GBP
-- Ottimizzazione voice in italiano = vantaggio competitivo (quasi nessuno lo fa)
+/* Scroll Reveal */
+.sr        { opacity:0; transform: translateY(28px);  transition: all 0.7s var(--ease-out); }
+.sr-left   { opacity:0; transform: translateX(-32px); transition: all 0.7s var(--ease-out); }
+.sr-right  { opacity:0; transform: translateX(32px);  transition: all 0.7s var(--ease-out); }
+.sr-scale  { opacity:0; transform: scale(0.88);       transition: all 0.7s var(--ease-out); }
+.sr.visible, .sr-left.visible, .sr-right.visible, .sr-scale.visible {
+  opacity: 1; transform: none;
+}
 
-**Previsione 2027:** AI conversazionale domina 70% interazioni cliente. Voice ads a $19B
-**Previsione 2028:** Voice search diventa "agentica" — non solo cerca info ma prenota, confronta, acquista
+/* Stagger delays */
+.sr-d1 { transition-delay: 0.08s; }
+.sr-d2 { transition-delay: 0.16s; }
+.sr-d3 { transition-delay: 0.24s; }
+.sr-d4 { transition-delay: 0.32s; }
+.sr-d5 { transition-delay: 0.40s; }
+.sr-d6 { transition-delay: 0.48s; }
 
-### 8.6 Multimodal Search (Testo + Immagine + Video + Voce)
-**Stato 2026:**
-- Google Lens: >12 miliardi di ricerche visive/mese
-- Ricerca multimodale e' il nuovo standard Google: foto + domanda vocale = query unica
-- Short-form video (Shorts, Reels, TikTok) e' il formato contenuto piu' universale 2026
-- Google AI "legge" trascrizioni video e "guarda" frame per trovare risposte
+/* Hero background zoom */
+@keyframes slowZoom { from { transform: scale(1.05); } to { transform: scale(1.10); } }
 
-**Azioni per sito statico:**
-- Immagini di qualita' con alt text descrittivo + ImageObject schema
-- Video brevi (case study, demo servizi) con VideoObject schema
-- Trascrizioni testuali sotto ogni video (doppio contenuto per AI)
-- Embed YouTube con `youtube-nocookie.com` per GDPR, `loading="lazy"` su iframe
+/* Fade up ingresso */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(36px); } to { opacity: 1; transform: translateY(0); } }
 
-**Previsione 2027:** Vector-based retrieval sostituisce keyword matching. Silos contenuto (testo/immagine/video) si dissolvono
-**Previsione 2028:** App multimodali AI mostrano +45% conversioni in Europa. Voice search +20-35% featured snippets
+/* Card lift hover */
+.card-lift { transition: transform 0.3s var(--ease-bounce), box-shadow 0.3s ease; }
+.card-lift:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
 
-### 8.7 AI Agents & Commercio Agentico — La Rivoluzione 2026-2028
-**Stato 2026:**
-- Traffico da AI agents cresciuto **+1.300%** in 9 mesi (fonte: McKinsey)
-- OpenAI + Walmart: acquisti dentro ChatGPT. PayPal: Agentic Toolkit. Visa/Mastercard: tool pagamento agenti
-- Google: Universal Commerce Protocol (UCP) per commercio agentico in AI Mode
-- Linux Foundation: Agentic AI Foundation (Anthropic, Google, Microsoft, OpenAI, Block)
+/* Link underline reveal */
+.link-reveal { position: relative; }
+.link-reveal::after {
+  content: ''; position: absolute; bottom: -2px; left: 0;
+  width: 0; height: 2px; background: var(--accent);
+  transition: width 0.35s var(--ease-out);
+}
+.link-reveal:hover::after { width: 100%; }
 
-**Le 3 fasi del commercio agentico:**
-| Fase | Periodo | Descrizione |
-|------|---------|-------------|
-| 1 | 2025-2026 | AI ricerca e consiglia, umano decide e compra |
-| 2 | 2027 | AI compra autonomamente con approvazione umana |
-| 3 | 2028+ | Negoziazione agent-to-agent su scala |
-
-**Previsione 2027:** Gartner: agenti AI tagliano gap costo-valore nei contratti di servizi di almeno 50%
-**Previsione 2028:** Gartner: agenti AI intermedieranno >$15 trilioni in spesa B2B. 90% acquisti B2B gestiti da AI. 33% software enterprise con AI agentica integrata
-
-**CRITICO per Righetto Immobiliare:** Se catalogo servizi, prezzi e proposta di valore non sono machine-readable (Schema.org), gli AI agents **non ti troveranno**. Implementare Service, Offer, RealEstateAgent, PriceSpecification completi.
-
-### 8.8 SEO Tradizionale vs GEO — Evoluzione
-**Stato 2026:**
-- Mercato SEO: da $75B (2023) a $88.9B (2024), CAGR 18.3%
-- SEO non muore, si trasforma. La pratica diventa "strategia di visibilita'"
-- Traffico da LLM/AI search supererà l'organico tradizionale entro 2028 (fonte: Semrush)
-- Servono entrambe le strategie: SEO tradizionale + GEO
-
-**Cosa sostituisce il SEO puro:**
-1. **GEO** — ottimizzazione per risposte AI (ChatGPT, Perplexity, Claude, Gemini)
-2. **Search Experience Optimization** — ottimizzare l'esperienza, non il motore
-3. **Multi-platform search** — Google, YouTube, TikTok, Instagram, Reddit sono tutti motori di ricerca
-
-**Previsione 2027:** Mercato SEO proiettato a $170B entro 2028 (CAGR 17.6%). SEO + GEO diventa strategia obbligatoria
-**Previsione 2028:** Traffico AI supera organico tradizionale. Professionisti SEO diventano "strateghi di visibilita'"
-
-### 8.9 Local SEO Italia — Trend PMI
-**Stato 2026:**
-- 26.7% delle PMI italiane ha adottato almeno una soluzione AI (in accelerazione)
-- 56% del traffico web italiano da smartphone
-- Google Business Profile e' ora l'hub locale AI-powered primario (Maps, local pack, AI Overviews)
-- Recensioni anonime Google lanciate — piu' recensioni attese, incluse negative
-- Social media (Instagram, TikTok, Facebook) funzionano come motori di ricerca locali
-
-**Azioni specifiche per PMI italiana:**
-1. Google Business Profile: post 2x/settimana, foto/video regolari, rispondere a TUTTE le recensioni
-2. LocalBusiness + Service schema con NAP (Nome, Indirizzo, Telefono) completo
-3. Query conversazionali italiane ("miglior agenzia web vicino a me")
-4. Presenza su social come motori di ricerca (Instagram, TikTok per discovery locale)
-5. Strategia gestione recensioni anonime
-
-**Previsione 2027:** AI-driven local discovery domina. Aziende con AI nel marketing: +25-35% conversioni, -30% costi operativi
-**Previsione 2028:** AI agents scoprono e raccomandano business locali autonomamente. Senza dati machine-readable = invisibili
-
-### 8.10 Previsioni Algoritmo Google 2027-2028
-**2027:**
-- Integrazione completa AI generativa nel ranking core
-- Contenuti valutati per significato contestuale, non keyword matching
-- Machine learning rileva pattern comportamentali utente e anticipa esigenze
-- Topical authority diventa il segnale dominante — Google valuta quanto bene un sito copre un intero argomento
-
-**2028:**
-- Segnali tradizionali (backlink, keyword density) significativamente deprecati
-- Entity-based understanding, segnali autore, verifica autenticita' contenuti dominano
-- Aggiornamenti algoritmo diventano continui (non piu' "eventi")
-- Potenziali nuove metriche CWV per responsivita' AI-interaction, voice-query readiness, caricamento multimodale
-
-### 8.11 Video — Strategia Completa
-Video embedded prova "Experience" (la prima E di E-E-A-T) a Google. Aumenta tempo sulla pagina = segnale qualita'. YouTube e' il secondo motore di ricerca al mondo. Le AI analizzano trascrizioni e frame video per risposte.
-
-**Checklist implementazione:**
-- [ ] Embed YouTube su pagine chiave (servizi, chi siamo, case study)
-- [ ] Usare `youtube-nocookie.com` per GDPR
-- [ ] `loading="lazy"` su iframe
-- [ ] Schema VideoObject per ogni video
-- [ ] Titoli/descrizioni video ottimizzati in italiano
-- [ ] Trascrizione testuale sotto il video
-- [ ] Thumbnail personalizzata
-- [ ] Cross-link: video YouTube → sito, sito → canale YouTube
-
-**5 idee video ad alto impatto:**
-1. "Come vendere casa a Padova nel 2026" — 3-5 min, guida pratica con dati mercato
-2. "Virtual Tour 360: ecco come valorizziamo il tuo immobile" — demo servizio reale
-3. "Testimonianza cliente" — intervista breve con risultati di vendita/acquisto
-4. "Quartieri Padova: dove conviene comprare nel 2026?" — mappa prezzi €/mq
-5. "Mutuo prima casa: come scegliere tra tasso fisso e variabile" — consulenza pratica
-
-### 8.12 Monitoring AI Visibility & Citation Tracking
-**Gartner: traffico da ricerca tradizionale calera' del 25% entro fine 2026.** Servono nuove metriche.
-
-**Prompt di test settimanali:**
-- ChatGPT: "Qual e' la migliore agenzia immobiliare a Padova?"
-- Perplexity: "Vendere casa Padova agenzia immobiliare consigliata"
-- Google AI: "Agenzia immobiliare Limena Padova recensioni"
-- Gemini: "Prezzi case Padova 2026 per zona"
-- Claude: "Migliore agenzia immobiliare provincia di Padova"
-
-**Strumenti di monitoring:**
-| Tool | Piattaforme | Prezzo |
-|------|------------|--------|
-| Peec AI | 10 motori AI (ChatGPT, Gemini, Perplexity, Claude, Copilot, Grok, DeepSeek) | Da verificare |
-| Otterly.AI | Google AIO, ChatGPT, Perplexity, Gemini, Copilot | $29/mese |
-| Semrush AI Toolkit | ChatGPT, Perplexity, Google AIO | Parte di Semrush |
-| Ahrefs Brand Radar | ChatGPT, Perplexity, Bing Copilot | Parte di Ahrefs |
-
-**KPI da tracciare:**
-- Share of Voice nelle risposte AI
-- Rapporto Citazione vs Menzione
-- Analisi sentiment
-- Frequenza apparizione per prompt target
-
-### 8.13 Piano Implementazione Prioritizzato
-| # | Azione | Sforzo | Impatto |
-|---|--------|--------|---------|
-| 1 | Schema.org JSON-LD completo su tutte le pagine | Medio | MOLTO ALTO |
-| 2 | AggregateRating + Review su testimonial | Basso | ALTO |
-| 3 | LocalBusiness + ProfessionalService schema | Basso | ALTO |
-| 4 | ~~BlogPosting~~ (FATTO) + BreadcrumbList + Person su blog | Medio | ALTO |
-| 5 | Author bio + Table of Contents su articoli | Medio | MEDIO-ALTO |
-| 6 | ItemList schema su bandi.html | Basso | MEDIO |
-| 7 | Date "Ultimo aggiornamento" visibili | Basso | MEDIO |
-| 8 | IndexNow per Bing | Basso | MEDIO |
-| 9 | ~~ai.json + agent.json + mcp.json~~ (FATTO) | Basso | FUTURO |
-| 10 | Video embed + VideoObject schema | Medio | MEDIO |
-| 11 | Pulsanti share social su blog | Basso | BASSO-MEDIO |
-| 12 | ~~manifest.json PWA base~~ (FATTO) | Basso | BASSO |
-| 13 | ~~humans.txt + security.txt~~ (FATTO) | Basso | BASSO |
-| 14 | Monitoring citazioni AI (Otterly.AI) | Basso | ALTO (visibilita') |
-
-### 8.14 Fonti Verificate
-**GEO:** Search Engine Land (searchengineland.com), Firebrand (firebrand.marketing), First Page Sage (firstpagesage.com), Averi (averi.ai)
-**Schema & AI:** Stackmatix (stackmatix.com), Digidop (digidop.com), Yext (yext.com), SchemaApp (schemaapp.com)
-**Standard AI:** llmstxt.org, modelcontextprotocol.io, a2aprotocol.ai, ai-visibility.org.uk, nist.gov
-**Zero-Click:** Bain & Company (bain.com), click-vision.com, Ahrefs (ahrefs.com)
-**Voice Search:** DemandSage (demandsage.com), nextmsc.com, WebFX (webfx.com)
-**AI Overviews:** almcorp.com, seranking.com, blog.google
-**Commercio Agentico:** McKinsey (mckinsey.com), Gartner (via digitalcommerce360.com), JP Morgan (jpmorgan.com)
-**SEO Evolution:** Neil Patel (neilpatel.com), Backlinko (backlinko.com), Semrush (semrush.com)
-**Local SEO Italia:** ivemind.com, kexworks.com, searchenginejournal.com
-**Algoritmo Google:** ClickRank (clickrank.ai), quantifimedia.com, developers.google.com
-**Citation Tracking:** Otterly.AI (otterly.ai), Peec AI (peec.ai), siftly.ai
-**Multimodal:** searcheseverywhere.com, think4ai.com
-**Video SEO:** marketermilk.com, numerounoweb.com
+/* Accessibilita': rispetta preferenze utente */
+@media (prefers-reduced-motion: reduce) {
+  .sr, .sr-left, .sr-right, .sr-scale { opacity: 1; transform: none; transition: none; }
+}
+```
 
 ---
 
-## 9. CHANGELOG
+## 14. COMPONENTI E TEMPLATE HTML
 
-### v2.3 - 16 Marzo 2026 (Audit coerenza + Pulizia residui web agency + Piano strategico)
-- Rimossi TUTTI i residui RaaS/web agency da SKILL.md (FAQ schema, prompt GEO, idee video, monitoring, competitor placeholder)
-- Corretto numero telefono cellulare errato (348 862 1888 → 349 736 5930) in 8 file HTML
-- Aggiornato conteggio sitemap: 88 → 102 URL
-- Corretta struttura CSS documentata (styles.css → 5 file reali)
-- Corretto settore in stile comunicazione: "web agency" → "immobiliare"
-- Sostituite idee video con 5 idee immobiliari reali
-- Sostituiti prompt monitoring AI con query immobiliari reali
-- Aggiunto piano strategico crescita (Sezione 10)
+### 14.1 Card Grid
 
-### v2.2 - 16 Marzo 2026 (AI Agents completi + BlogPosting + Audit)
-- Creati tutti i file AI agents: llms-full.txt, ai.json, agent.json, mcp.json, humans.txt, security.txt, manifest.json
-- robots.txt aggiornato con riferimenti a tutti i file AI
-- Migrazione Article → BlogPosting su tutti i 41 articoli blog
-- Corretti 3 articoli mancanti di dateModified e mainEntityOfPage
-- Corretta inconsistenza www su blog-direttiva-case-green-limena-padova.html
-- Sezione 2.2 riscritta: struttura file aggiornata alla realta' (88 URL, 41 blog, 14 zone, 7 servizi, 12 landing, file AI)
-- Sezione 2.6: documentato che /en/ non esiste ancora
-- Sezione 3.6: template schema aggiornato a BlogPosting con author Person
-- Sezione 4.5: BlogPosting segnato come FATTO
-- Sezione 7 TODO: segnati completati 8 item GEO/AI agents
-- Sezione 8.1: tabella file AI aggiornata — tutti FATTO
-- Sezione 8.13: segnati completati item 4, 9, 12, 13
-- Aggiunti 2 nuovi TODO: favicon link, hreflang tags
+```html
+<div class="card-grid">
+  <div class="card card-lift sr sr-d1">
+    <div class="card-icon">[emoji/svg]</div>
+    <h3 class="card-title">[Titolo]</h3>
+    <p class="card-desc">[Descrizione]</p>
+    <a href="#" class="card-link link-reveal">Scopri di piu' →</a>
+  </div>
+</div>
+```
 
-### v2.1 - 14 Marzo 2026 (Clean URL + PageSpeed 90+)
-- PageSpeed 95+ cambiato in 90+ ovunque nel sito (IT + EN, 20+ file, ~90 occorrenze)
-- Rimossa estensione .html da tutti i link interni (21 file, ~100 link)
-- Aggiornati canonical, og:url, JSON-LD, hreflang con URL puliti
-- Riordinati articoli blog.html: 3 nuovi (14 Marzo) in cima
-- Aggiornato llms.txt con URL puliti e PageSpeed 90+
-- Mantenuto admin.html e playzone (link relativi interni)
+```css
+.card-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+@media(max-width:900px) { .card-grid { grid-template-columns:repeat(2,1fr); } }
+@media(max-width:600px) { .card-grid { grid-template-columns:1fr; } }
 
-### v2.0 - 14 Marzo 2026 (GEO + AI Agents + Previsioni 2026-2028)
-- Sezione 8 completamente riscritta: 14 sotto-sezioni integrate
-- Previsioni Google/AI 2026-2028 con fonti verificate (20+ fonti)
-- Standard emergenti: NLWeb (Microsoft), MCP (Anthropic), A2A (Google), WebMCP, IndexNow
-- Zero-click search: dati aggiornati (60% Google, 83% AI Overviews, 93% AI Mode)
-- Voice search Italia: 65% ricerche locali via voce, mercato $33.74B entro 2030
-- Multimodal search: Google Lens 12B+ ricerche/mese, strategie video
-- Commercio agentico: 3 fasi, $15T B2B entro 2028 (Gartner)
-- Local SEO Italia: 26.7% PMI con AI, strategie GBP
-- AI citation tracking: strumenti e KPI (Otterly.AI, Peec AI, Semrush)
-- Piano implementazione prioritizzato (14 azioni)
-- Eliminato REPORT-GEO-AI-2026.md separato (tutto integrato qui)
-- Aggiornate checklist (sezione 5) con requisiti GEO
-- Aggiornata sezione E-E-A-T con dati 2026
-- Aggiornata sezione Schema.org con tabella priorita' AI
-- Aggiornato algoritmo Google (3 update 2026 documentati)
+.card { background:var(--bianco); border:1px solid rgba(44,74,110,0.08); border-radius:var(--radius); padding:28px 24px; }
+.card-icon { font-size:2rem; margin-bottom:16px; }
+.card-title { font-family:'Cormorant Garamond',serif; font-size:1.35rem; font-weight:600; margin-bottom:8px; }
+.card-desc { font-size:0.85rem; color:var(--grigio); line-height:1.75; margin-bottom:16px; }
+.card-link { font-size:0.78rem; font-weight:600; color:var(--primario); text-transform:uppercase; letter-spacing:1px; }
+```
 
-### v1.1 - 14 Marzo 2026 (GEO base)
-- Creato robots.txt con whitelist AI bots
-- Creato llms.txt per AI agents
-- Convertiti 3 articoli .txt in .html con GA4
-- Aggiunto OG tags, canonical, theme-color a tutte le pagine
-- Aggiunto Schema.org JSON-LD a blog.html e bandi.html
-- Aggiornato sitemap.xml con 6 nuovi URL
+### 14.2 CTA Buttons
 
-### v1.0 - 13 Marzo 2026 (Setup iniziale)
-- Creazione SKILL.md unificata per Righetto Immobiliare (basata su template RaaS)
-- Integrazione istruzioni SEO blog (ex README.md)
-- Documentazione completa struttura sito e prezzi
-- Performance rules Core Web Vitals 2026
-- Checklist automatiche per pagine, articoli, CSS, JS
-- Template articolo blog con standard 2500 parole
-- Tabelle competitive con fonti verificate
-- Piano migrazione da Serverplan a GitHub
+```css
+/* Primario — accent su sfondo scuro */
+.btn-accent {
+  display:inline-block; background:var(--accent); color:var(--nero);
+  padding:15px 32px; border-radius:var(--radius-sm);
+  font-family:'Montserrat',sans-serif; font-weight:800; font-size:0.78rem;
+  letter-spacing:1px; text-transform:uppercase; transition:all 0.25s;
+}
+.btn-accent:hover { background:var(--accent-2); transform:translateY(-2px); box-shadow:var(--shadow-cta); }
 
----
+/* Secondario — outline su sfondo scuro */
+.btn-outline {
+  display:inline-block; border:1px solid rgba(255,255,255,0.2); color:#fff;
+  padding:15px 32px; border-radius:var(--radius-sm);
+  font-family:'Montserrat',sans-serif; font-weight:600; font-size:0.78rem;
+  letter-spacing:1px; text-transform:uppercase; transition:all 0.25s;
+}
+.btn-outline:hover { border-color:var(--accent); color:var(--accent); }
 
-## 10. PIANO STRATEGICO CRESCITA — Marzo 2026
+/* Terziario — scuro su sfondo chiaro */
+.btn-dark {
+  display:inline-block; background:var(--nero); color:#fff;
+  padding:15px 32px; border-radius:var(--radius-sm);
+  font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.78rem;
+  letter-spacing:1px; text-transform:uppercase; transition:all 0.25s;
+}
+.btn-dark:hover { background:var(--accent); color:var(--nero); transform:translateY(-2px); }
+```
 
-### 10.1 Stato Attuale (Audit 16 Marzo 2026)
-| Area | Punteggio | Gap Critico |
-|------|-----------|-------------|
-| SEO on-page | 9.5/10 | — |
-| Schema.org | 9.5/10 | — |
-| Contenuti/Blog | 10/10 | — |
-| GEO/AEO | 9.5/10 | — |
-| Core Web Vitals | 8/10 | LCP <2s da raggiungere |
-| Chatbot AI | 10/10 | — |
-| Simulatore mutuo | 10/10 | — |
-| Analytics Dashboard | 9/10 | — |
-| **Recensioni Google** | **6/10** | **127 vs 256 Tetto Rosso — gap critico** |
-| **Domain Authority** | **4/10** | **Problema #1 — zero backlink significativi** |
-| **Apparizione SERP** | **3/10** | **Brand OK (pos. 1.3), non-brand deboli** |
-| **TOTALE** | **8.4/10** | **3 aree critiche da aggredire** |
+### 14.3 Form Contatti
 
-**Obiettivo Q2 2026:** Portare DA da 4 a 15+, Recensioni da 127 a 180+, SERP non-brand top 10 per 5 keyword target.
+```html
+<div class="form-box">
+  <div class="form-head">
+    <h3>[Titolo Form]</h3>
+    <p>[Sottotitolo]</p>
+  </div>
+  <form class="form-body">
+    <div class="form-grid">
+      <div class="field">
+        <label for="nome">Nome *</label>
+        <input type="text" id="nome" name="nome" required>
+      </div>
+      <div class="field">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+    </div>
+    <div class="field">
+      <label for="telefono">Telefono</label>
+      <input type="tel" id="telefono" name="telefono">
+    </div>
+    <div class="field">
+      <label for="messaggio">Messaggio *</label>
+      <textarea id="messaggio" name="messaggio" rows="4" required></textarea>
+    </div>
+    <button type="submit" class="btn-accent form-submit">Invia Messaggio</button>
+  </form>
+</div>
+```
 
-### 10.2 PRIORITA' 1 — Domain Authority (da 4/10 a 15+)
-**Problema:** Zero backlink significativi. Senza DA, le keyword non-brand non si posizionano.
+```css
+.form-box { background:var(--bianco); border:1px solid rgba(44,74,110,0.08); border-radius:var(--radius); overflow:hidden; }
+.form-head { padding:32px 32px 16px; }
+.form-head h3 { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:600; }
+.form-body { padding:0 32px 32px; }
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+@media(max-width:600px) { .form-grid { grid-template-columns:1fr; } }
 
-**Azioni immediate (Settimana 1-2):**
+.field { margin-bottom:16px; }
+.field label { display:block; font-size:0.62rem; font-weight:600; text-transform:uppercase; letter-spacing:1.5px; color:var(--grigio); margin-bottom:6px; }
+.field input, .field textarea, .field select {
+  width:100%; padding:12px 14px; border:1px solid rgba(44,74,110,0.12); border-radius:var(--radius-sm);
+  font-family:'Montserrat',sans-serif; font-size:0.85rem; color:var(--testo); background:var(--carta);
+  transition:border-color 0.2s;
+}
+.field input:focus, .field textarea:focus, .field select:focus {
+  outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(44,74,110,0.1);
+}
+```
 
-| # | Azione | Sforzo | Impatto DA | Come |
-|---|--------|--------|-----------|------|
-| 1 | **Registrazione directory immobiliari** | Basso | +2-3 DA | Immobiliare.it, Casa.it, Idealista, Wikicasa — profilo agenzia con link |
-| 2 | **Google Business Profile ottimizzato** | Basso | +1 DA | Post 2x/settimana, foto, Q&A, link sito |
-| 3 | **Pagine Gialle / Yelp / TripAdvisor** | Basso | +1-2 DA | Profili con NAP coerente + link |
-| 4 | **Camera di Commercio Padova** | Basso | +2 DA | Registrazione nell'elenco aziende online |
-| 5 | **FIAIP directory agenti** | Basso | +2-3 DA | Se iscritti FIAIP, richiedere profilo online |
+### 14.4 FAQ / Accordion
 
-**Azioni medio termine (Settimana 3-8):**
+```html
+<div class="faq-list">
+  <div class="faq-item sr">
+    <button class="faq-btn" aria-expanded="false">
+      <span class="faq-q">[Domanda]</span>
+      <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer"><p>[Risposta]</p></div>
+  </div>
+</div>
+```
 
-| # | Azione | Sforzo | Impatto DA | Come |
-|---|--------|--------|-----------|------|
-| 6 | **Guest post su blog immobiliari** | Medio | +3-5 DA | Scrivere articoli per IlSole24Ore Casa, Idealista News, blog FIAIP — con link |
-| 7 | **Dati mercato originali come link bait** | Medio | +5-8 DA | Creare "Report Mercato Immobiliare Padova Q1 2026" con dati OMI esclusivi — giornalisti e blogger linkano dati originali |
-| 8 | **Partnership universita' Padova** | Medio | +5-8 DA | Offrire dati/guida alloggi studenti → link da .edu (.ac.it) |
-| 9 | **Comunicati stampa locali** | Medio | +3-5 DA | PadovaOggi, Il Mattino di Padova, Il Gazzettino — notizie mercato locale con citazione |
-| 10 | **Sponsorship eventi locali** | Medio | +2-3 DA | Fiere, eventi quartiere — menzione sul sito evento |
+```css
+.faq-item { background:var(--bianco); border-radius:var(--radius); border:1px solid rgba(44,74,110,0.09); margin-bottom:12px; overflow:hidden; }
+.faq-btn { width:100%; text-align:left; padding:20px 22px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:14px; background:none; border:none; font-family:'Montserrat',sans-serif; font-size:0.92rem; font-weight:600; color:var(--testo); }
+.faq-icon { width:28px; height:28px; border-radius:50%; background:var(--sfondo); border:1px solid rgba(44,74,110,0.12); display:flex; align-items:center; justify-content:center; transition:all 0.3s; flex-shrink:0; font-size:1.1rem; }
+.faq-item.open .faq-icon { background:var(--accent); color:var(--nero); transform:rotate(45deg); }
+.faq-answer { max-height:0; overflow:hidden; transition:max-height 0.4s ease, padding 0.3s ease; padding:0 22px; font-size:0.85rem; color:var(--grigio); line-height:1.75; }
+.faq-item.open .faq-answer { max-height:500px; padding:0 22px 20px; }
+```
 
-**Target DA:**
-- Mese 1: DA 4 → 8 (directory + GBP)
-- Mese 3: DA 8 → 15 (guest post + link bait)
-- Mese 6: DA 15 → 25 (PR + partnership)
-
-### 10.3 PRIORITA' 2 — Recensioni Google (da 127 a 250+)
-**Problema:** 127 recensioni vs 256 di Tetto Rosso. Gap di 129 recensioni.
-
-**Sistema automatizzato di raccolta recensioni:**
-
-| # | Azione | Sforzo | Impatto | Recensioni/mese stimate |
-|---|--------|--------|---------|------------------------|
-| 1 | **Email post-rogito automatica** | Basso | ALTO | +4-6/mese |
-| 2 | **WhatsApp follow-up 7gg dopo servizio** | Basso | ALTO | +3-5/mese |
-| 3 | **QR code in ufficio + biglietti visita** | Basso | MEDIO | +2-3/mese |
-| 4 | **Firma email con link recensione** | Basso | MEDIO | +1-2/mese |
-| 5 | **Richiesta a clienti storici (dal 2000)** | Medio | MOLTO ALTO | +30-50 una tantum |
-
-**Implementazione tecnica:**
-- Creare pagina `recensione.html` con redirect a Google Review (short link)
-- Aggiungere NFC tag in ufficio con link diretto
-- Template WhatsApp: "Gentile [Nome], grazie per aver scelto Righetto Immobiliare! La sua opinione e' preziosa — le chiediamo 30 secondi per lasciarci una recensione: [LINK]. Grazie! — Gino e Linda"
-
-**Target:**
-- Mese 1: 127 → 145 (clienti storici + sistema attivo)
-- Mese 3: 145 → 190 (sistema a regime ~15/mese)
-- Mese 6: 190 → 250+ (superare Tetto Rosso)
-
-### 10.4 PRIORITA' 3 — SERP Non-Brand (da 3/10 a 7+)
-**Problema:** Ottime posizioni brand (1.3), ma keyword non-brand ancora deboli.
-
-**Keyword target primarie (transazionali — portano clienti):**
-
-| Keyword | Volume | Difficolta' | Pagina Target | Azione |
-|---------|--------|-------------|---------------|--------|
-| "agenzia immobiliare padova" | 1.300/mese | Alta | agenzia-immobiliare-padova.html | Backlink + contenuto rafforzato |
-| "vendere casa padova" | 720/mese | Media | landing-vendere-casa-padova.html | Cluster contenuti completo |
-| "case in vendita padova" | 2.900/mese | Alta | immobili.html | Schema + filtri + contenuto |
-| "affitto padova" | 1.600/mese | Alta | blog-affitti-padova-canoni-2026.html | Pagina hub dedicata |
-| "valutazione immobile padova" | 480/mese | Media | landing-valutazione.html | CTA + backlink |
-
-**Keyword target secondarie (informazionali — portano DA e traffico):**
-
-| Keyword | Volume | Pagina Target |
-|---------|--------|---------------|
-| "prezzi case padova 2026" | 590/mese | blog-prezzi-case-padova-zona-2026.html |
-| "mutuo prima casa padova" | 390/mese | blog-mutuo-prima-casa-padova.html |
-| "mercato immobiliare padova" | 320/mese | blog-mercato-immobiliare-padova-2026.html |
-| "quartieri padova dove vivere" | 260/mese | blog-quartieri-padova-2026.html |
-
-**Azioni SERP immediate:**
-
-| # | Azione | Sforzo | Impatto SERP |
-|---|--------|--------|-------------|
-| 1 | **Internal linking strategico** | Basso | ALTO — collegare articoli blog ↔ zone ↔ servizi con anchor text ottimizzati |
-| 2 | **Contenuti hub per keyword cluster** | Medio | ALTO — creare pagine pillar che aggregano 5-8 articoli per topic |
-| 3 | **Title tag refresh** | Basso | MEDIO — aggiornare title a keyword esatte cercate (verificare Search Console) |
-| 4 | **FAQ schema su pagine commerciali** | Basso | MEDIO — aggiungere FAQ ricche su landing transazionali |
-| 5 | **Local pack optimization** | Basso | ALTO — GBP + NAP + recensioni = local 3-pack |
-
-### 10.5 PRIORITA' 4 — Core Web Vitals (da 8/10 a 9.5+)
-**Target: LCP < 2s su tutte le pagine.**
-
-| # | Azione | Sforzo | Impatto LCP |
-|---|--------|--------|------------|
-| 1 | **Critical CSS inline** | Medio | -0.3s — estrarre CSS above-fold e inline nell'`<head>` |
-| 2 | **Preload hero image** | Basso | -0.2s — `<link rel="preload" as="image">` su hero |
-| 3 | **Defer non-critical JS** | Basso | -0.1s — chatbot, analytics, scroll-reveal tutti `defer` |
-| 4 | **Font subsetting** | Medio | -0.1s — ridurre dimensione woff2 ai soli caratteri usati |
-
-### 10.6 Calendario Esecutivo — Q2 2026
-
-**SETTIMANA 1 (17-23 Marzo):**
-- [ ] Registrazione su 5 directory immobiliari (Immobiliare.it, Casa.it, Idealista, Wikicasa, PagineGialle)
-- [ ] Ottimizzazione Google Business Profile (foto, post, Q&A)
-- [ ] Creare pagina recensione.html con redirect Google Review
-- [ ] Inviare richiesta recensione a 50 clienti storici via WhatsApp
-- [ ] Implementare internal linking strategico (10 link incrociati blog ↔ zone)
-
-**SETTIMANA 2 (24-30 Marzo):**
-- [ ] Registrazione FIAIP directory + Camera di Commercio
-- [ ] Critical CSS inline su homepage e 5 landing principali
-- [ ] QR code recensioni stampato per ufficio
-- [ ] Firma email con link recensione per Gino e Linda
-- [ ] Title tag refresh su 10 pagine principali (da Search Console)
-
-**SETTIMANA 3-4 (Aprile 1-13):**
-- [ ] Primo guest post (IlSole24Ore Casa o Idealista News)
-- [ ] "Report Mercato Immobiliare Padova Q1 2026" — pagina dati esclusivi
-- [ ] Contattare PadovaOggi / Il Mattino per dati mercato
-- [ ] Creare 3 pagine hub (vendita, affitto, mutui) che aggregano cluster
-- [ ] Template email post-rogito automatica attiva
-
-**SETTIMANA 5-8 (Aprile 14 - Maggio 10):**
-- [ ] 2° e 3° guest post su blog immobiliari
-- [ ] Contatto Universita' Padova per partnership studenti
-- [ ] Sponsorship evento locale (fiera, mercato, evento quartiere)
-- [ ] FAQ schema aggiunto su tutte le landing transazionali
-- [ ] Secondo batch richieste recensioni clienti storici
-
-**KPI Mensili da Tracciare:**
-| KPI | Attuale | Target Mese 1 | Target Mese 3 | Target Mese 6 |
-|-----|---------|--------------|--------------|--------------|
-| Domain Authority | 4 | 8 | 15 | 25 |
-| Recensioni Google | 127 | 145 | 190 | 250+ |
-| Keyword top 10 (non-brand) | ~2 | 5 | 12 | 20 |
-| Keyword top 3 (non-brand) | 0 | 1 | 3 | 8 |
-| Traffico organico mensile | base | +20% | +60% | +150% |
-| LCP medio | ~2.5s | <2.2s | <2.0s | <1.8s |
-| Citazioni AI (prompt test) | 0 | 1 | 3 | 5 |
-
-### 10.7 Regola Anti-Stallo
-> "Se un'azione non produce risultati misurabili in 30 giorni, analizzare, aggiustare o sostituire."
-> Non restare fermi — ogni settimana DEVE avere almeno 3 azioni completate.
+```javascript
+// FAQ toggle
+document.querySelectorAll('.faq-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+    btn.setAttribute('aria-expanded', !wasOpen);
+  });
+});
+```
 
 ---
 
-**VERSIONE:** 2.3 Righetto Immobiliare
-**ULTIMO AGGIORNAMENTO:** 16 Marzo 2026
-**PROSSIMO REVIEW:** Giugno 2026 (aggiornamento prezzi Q2, refresh previsioni AI, verifica KPI piano strategico)
+## 15. I 4 LOOP DI VALIDAZIONE
+
+> Ogni volta che Claude genera o modifica una pagina, DEVE eseguire questi 4 loop **in sequenza**.
+> Ogni loop ricontrolla **tutta la struttura del sito** e **tutte le regole** da capo.
+
+### LOOP 1 — STRUTTURA & HTML (25 check per pagina)
+
+| # | Check | Tipo | Azione se fallisce |
+|---|-------|------|-------------------|
+| 1 | DOCTYPE html presente | Struttura | Aggiungere |
+| 2 | `<html lang="it">` | Struttura | Correggere |
+| 3 | `<meta charset="UTF-8">` | Struttura | Aggiungere |
+| 4 | `<meta viewport>` responsive | Struttura | Aggiungere |
+| 5 | `<meta theme-color>` presente | Struttura | Aggiungere |
+| 6 | Font preload nel `<head>` | Performance | Aggiungere |
+| 7 | Hero image preload (se hero presente) | Performance | Aggiungere |
+| 8 | Critical CSS inline nel `<head>` | Performance | Aggiungere |
+| 9 | CSS non-critical con deferred loading | Performance | Convertire a deferred |
+| 10 | Skip link primo elemento del body | Accessibilita' | Aggiungere |
+| 11 | `<header>` con navbar presente | Struttura | Aggiungere |
+| 12 | Nav-mobile con hamburger menu | Struttura | Aggiungere |
+| 13 | Breadcrumb presente (se non homepage) | SEO | Aggiungere |
+| 14 | `<main id="main-content">` presente | Accessibilita' | Aggiungere |
+| 15 | Hero section come prima sezione | Struttura | Riordinare |
+| 16 | Sezioni con classe `.sec` + `.sec-inner` | Struttura | Correggere |
+| 17 | Footer completo (brand, link, legal) | Struttura | Aggiungere |
+| 18 | JS deferred in fondo al body | Performance | Spostare/aggiungere defer |
+| 19 | Tutte le immagini con `width` + `height` | Performance | Aggiungere |
+| 20 | Tutte le immagini con `alt` text | Accessibilita' | Aggiungere |
+| 21 | Hero image con `loading="eager"` | Performance | Correggere |
+| 22 | Immagini below-fold con `loading="lazy"` | Performance | Aggiungere |
+| 23 | Formato WebP per immagini locali | Performance | Segnalare |
+| 24 | `aria-label` su bottoni icon-only | Accessibilita' | Aggiungere |
+| 25 | `aria-hidden="true"` su SVG decorativi | Accessibilita' | Aggiungere |
+
+### LOOP 2 — SEO & SCHEMA (25 check per pagina)
+
+| # | Check | Tipo | Azione se fallisce |
+|---|-------|------|-------------------|
+| 1 | `<title>` presente e unico | SEO | Aggiungere/correggere |
+| 2 | `<title>` max 70 caratteri | SEO | Accorciare |
+| 3 | `<meta description>` presente | SEO | Aggiungere |
+| 4 | `<meta description>` max 160 char | SEO | Accorciare |
+| 5 | Un solo `<h1>` per pagina | SEO | Correggere gerarchia |
+| 6 | `<link rel="canonical">` con URL assoluto | SEO | Aggiungere |
+| 7 | `<meta robots>` presente | SEO | Aggiungere |
+| 8 | `og:title` presente | Social | Aggiungere |
+| 9 | `og:description` presente | Social | Aggiungere |
+| 10 | `og:image` presente (1200x630) | Social | Aggiungere |
+| 11 | `og:url` presente | Social | Aggiungere |
+| 12 | `twitter:card` presente | Social | Aggiungere |
+| 13 | Schema JSON-LD attivita' (tipo corretto) | Schema | Aggiungere |
+| 14 | Schema con `sameAs` (social links) | Schema | Aggiungere |
+| 15 | Schema `BreadcrumbList` (se non homepage) | Schema | Aggiungere |
+| 16 | Schema `FAQPage` (se FAQ presenti) | Schema | Aggiungere |
+| 17 | Schema `Article` (se blog post) | Schema | Aggiungere |
+| 18 | Pagina registrata in `sitemap.xml` | SEO | Aggiungere |
+| 19 | URL sitemap con `lastmod` aggiornato | SEO | Aggiornare data |
+| 20 | Internal linking coerente | SEO | Segnalare link mancanti |
+| 21 | GEO: frasi dichiarative in apertura sezione | GEO | Riscrivere |
+| 22 | GEO: dati numerici specifici presenti | GEO | Aggiungere |
+| 23 | GEO: formato H2 domanda → risposta diretta | GEO | Ristrutturare |
+| 24 | E-E-A-T: author bio su blog post | E-E-A-T | Aggiungere |
+| 25 | Contrast ratio CTA >= 4.5:1 | Accessibilita' | Correggere colori |
+
+### LOOP 3 — COERENZA GLOBALE & REGISTRI (18 check)
+
+| # | Check | Tipo | Azione se fallisce |
+|---|-------|------|-------------------|
+| 1 | TUTTE le pagine in `sitemap.xml` | Registro | Aggiungere mancanti |
+| 2 | `sitemap.xml` senza pagine inesistenti | Registro | Rimuovere |
+| 3 | `robots.txt` referenzia sitemap corretto | Registro | Correggere |
+| 4 | Navigazione (header) include tutte le pagine | Coerenza | Aggiornare nav |
+| 5 | Footer link coerenti con nav | Coerenza | Allineare |
+| 6 | Blog listing include tutti gli articoli | Registro | Aggiungere |
+| 7 | CSS variabili coerenti tra pagine | Design | Allineare |
+| 8 | Font stack identico su tutte le pagine | Design | Correggere |
+| 9 | Breakpoint responsive coerenti | Design | Allineare |
+| 10 | Stile CTA buttons uniforme | Design | Correggere |
+| 11 | Naming convention classi CSS uniforme | Design | Rinominare |
+| 12 | Spacing/padding coerente tra sezioni | Design | Allineare |
+| 13 | Schema.org `name`, `url`, `telephone` identici | Schema | Allineare |
+| 14 | Open Graph image presente per ogni pagina | Social | Creare/aggiungere |
+| 15 | Nessun link rotto (href a pagine esistenti) | Coerenza | Correggere |
+| 16 | GA4 tracking code presente su tutte le pagine | Analytics | Aggiungere |
+| 17 | Cookie consent su tutte le pagine | GDPR | Aggiungere script |
+| 18 | `CLAUDE.md` aggiornato con nuove pagine | Documentazione | Aggiornare |
+
+### LOOP 4 — PERFORMANCE & MOBILE (25 check)
+
+| # | Check | Tipo | Azione se fallisce |
+|---|-------|------|-------------------|
+| 1 | Critical CSS inline copre above-the-fold | Performance | Espandere critical CSS |
+| 2 | CSS non-critical caricato con deferred | Performance | Convertire a `media="print"` |
+| 3 | Font preload presenti per tutti i font critici | Performance | Aggiungere `<link rel="preload">` |
+| 4 | `font-display: swap` su tutti i @font-face | Performance | Aggiungere |
+| 5 | Hero image con `fetchpriority="high"` | Performance | Aggiungere attributo |
+| 6 | Nessun `loading="lazy"` su immagini above-the-fold | Performance | Rimuovere |
+| 7 | Tutte le immagini below-fold con `loading="lazy"` | Performance | Aggiungere |
+| 8 | Immagini con `width` + `height` espliciti (no CLS) | Performance | Aggiungere dimensioni |
+| 9 | Nessun CSS/JS render-blocking non necessario | Performance | Aggiungere defer/async |
+| 10 | JS con attributo `defer` (non blocca parsing) | Performance | Aggiungere `defer` |
+| 11 | Navbar responsive: hamburger < 768px | Mobile | Verificare breakpoint |
+| 12 | Grid collassa correttamente a 1 colonna | Mobile | Testare media queries |
+| 13 | Touch target >= 44x44px su bottoni mobile | Mobile | Aumentare padding |
+| 14 | Font-size minimo 16px su input (no zoom iOS) | Mobile | Correggere font-size |
+| 15 | CTA sticky mobile presente (se landing page) | Mobile | Aggiungere |
+| 16 | `<meta viewport>` con `width=device-width` | Mobile | Correggere |
+| 17 | Nessun overflow orizzontale su mobile | Mobile | Fix CSS (max-width/overflow) |
+| 18 | Padding ridotto su mobile (3rem 1rem) | Mobile | Aggiungere media query |
+| 19 | Immagini in formato WebP | Performance | Convertire/segnalare |
+| 20 | `dns-prefetch` per domini esterni usati | Performance | Aggiungere |
+| 21 | `preconnect` per CDN/API critici | Performance | Aggiungere |
+| 22 | Nessun CSS inutilizzato (> 50% unused) | Performance | Rimuovere o spostare |
+| 23 | Animazioni con `will-change` dove necessario | Performance | Aggiungere |
+| 24 | `prefers-reduced-motion` rispettata | Accessibilita' | Aggiungere media query |
+| 25 | Scrollbar custom presente e coerente | Design | Aggiungere CSS |
+
+**Report finale Loop 4:**
+- Totale check eseguiti: 93 per pagina × N pagine + 18 globali
+- Fix applicati automaticamente
+- Warning che richiedono decisione dell'utente
+- Stato: PASS / FAIL per ogni loop
+- Score stimato Lighthouse (Performance, Accessibility, SEO, Best Practices)
+
+---
+
+## 16. CHANGELOG
+
+### v3.0 - 15 Marzo 2026 (SKILL 2.0 — Fusione completa 3 documenti)
+- **Fusione SKILL-UNIFICATA.md + AUTOMATION-SITE-2026.md + CLAUDE.md** in un unico documento master
+- **Regole 10-13 da CLAUDE.md:** URL pulite (no .html), auto-registrazione admin, data pubblicazione obbligatoria, Entity-Based SEO (no keyword stuffing)
+- **Sezione 13 — Design System Universale:** variabili CSS, tipografia, spacing system, breakpoint responsive, shadow system, animazioni con easing curves e scroll reveal
+- **Sezione 14 — Componenti e Template HTML:** card grid, CTA buttons (accent/outline/dark), form contatti, FAQ accordion con toggle JS
+- **Sezione 15 — 4 Loop di Validazione (93+ check):** Loop 1 Struttura (25), Loop 2 SEO & Schema (25), Loop 3 Coerenza Globale (18), Loop 4 Performance & Mobile (25)
+- **Sezione 12.7 — Audit Automation:** pulsante "Lancia Analisi Skill" nell'admin con storico analisi in JSON
+- **Entity-Based SEO** confermato in sezione 8.3 con mappa sinonimi completa e regole anti-keyword-stuffing
+- **Checklist aggiornata** con verifiche audit automation
+
+### v2.4 - 12 Marzo 2026 (Scraping 3-step: Topic → Foto → Preview con contenuto ricco)
+- **Modal scraping a 3 step:** Step 1 scelta topic (9 categorie + custom + Google News), Step 2 gestione foto (hero + 3 inline con ricerca Unsplash o URL personalizzato), Step 3 anteprima con conferma e salvataggio
+- **Foto hero + 3 inline:** ricerca Unsplash royalty-free integrata (6 risultati per query, click per selezionare), possibilità di incollare URL propri — MAI riutilizzare immagini già presenti nel sito
+- **Contenuto ricco generato:** tabella prezzi/mq per 8 zone Padova con variazione % e tempi vendita, highlight box con 4 statistiche chiave, tabella attrattività investimento per zona, blockquote citazione Gino Capon, lista errori numerata
+- **Figure con didascalia:** immagini inline distribuite tra le sezioni con `<figure><img><figcaption>` e crediti fotografo
+- **Unsplash Source API:** nessuna API key necessaria, URL diretti `source.unsplash.com` con seed unici per evitare duplicati
+- **REGOLA IMMAGINI:** ogni nuovo articolo deve avere foto NUOVE — vietato riutilizzare immagini esistenti del sito
+
+### v2.3 - 12 Marzo 2026 (Fix 404 articoli + template dinamico migliorato)
+- **Fix link 404 articoli scraping:** gli articoli creati dallo scraping non hanno file HTML fisico — ora il link nell'admin punta correttamente a `blog-articolo?s=slug` (template dinamico) invece di `/slug` (file inesistente)
+- **Template blog-articolo.html migliorato:** hero con immagine di copertina (se presente) con overlay e crediti fotografo, sezione FAQ interattiva con accordion, CTA banner "Contattaci" con link a /contatti
+- **Fix bozze locali → Supabase:** le bozze con id `bozza_*` ora fanno INSERT (non UPDATE) su Supabase alla pubblicazione, evitando la perdita dell'articolo
+- **Slug e meta_description** aggiunti al payload di saveBlogArticle (mancavano)
+- **REGOLA IMPORTANTE:** gli articoli creati dallo scraping usano il template dinamico `blog-articolo.html`, non file HTML statici. Solo gli articoli nel seed `_blogSeedArticles` hanno file fisici dedicati
+
+### v2.3 - 13 Marzo 2026 (Ottimizzazione immagini Supabase — -85% payload)
+- **Supabase Image Transforms:** `resolveImageUrl()` aggiornata in `homepage.js`, `immobile.html`, `immobili.html` per usare endpoint `/storage/v1/render/image/public/` con parametri `width`, `quality`, `resize=contain`
+- **Dimensioni ottimizzate per contesto:** card homepage/listing width=600 q=75, gallery hero width=1200 q=80, thumbnails width=300 q=70, lightbox full-size originale
+- **Width/height espliciti** aggiunti su tutte le immagini dinamiche per ridurre CLS
+- **Risparmio stimato:** ~2300 KiB (~85%) sulle immagini Supabase (da ~2737 KiB a ~400 KiB)
+- **Nota cache GitHub Pages:** TTL 10 min non modificabile senza CDN esterno — documentato in TODO
+
+### v2.2 - 12 Marzo 2026 (Scraping Articolo v2: anti-plagio, immagini, bozze visibili)
+- **Contenuto 100% originale:** titoli rielaborati con 4 template randomizzati, 6 sezioni H2 con prospettiva Righetto, zone Padova randomizzate, 4 FAQ originali — il topic della fonte e' solo ispirazione, mai copiato
+- **Immagini royalty-free automatiche:** ricerca Unsplash integrata con crediti fotografo, fallback su query generica immobiliare Italia
+- **Bozze ora visibili nella lista Blog:** salvataggio doppio (Supabase + localStorage), merge bozze localStorage in getBlogArticles, redirect automatico a sezione Blog dopo salvataggio
+- **Fix critico showToast → toast():** la funzione showToast non esisteva (il nome corretto e' toast), causava blocco JS che impediva chiusura modal e salvataggio
+- **Proxy CORS rimossi:** sostituiti 4 proxy fragili (corsproxy.io, allorigins, cors.sh, corsproxy.org) con rss2json.com (CORS nativo, stabile)
+- **Regola anti-plagio aggiunta** alla sezione 3.4 Strumenti Admin
+- **SKILL-UNIFICATA.md aggiornata** ad ogni modifica come da regola operativa
+
+### v2.1 - 12 Marzo 2026 (Consolidamento SKILL + Fix Scraping Articolo)
+- **Eliminato SKILL-KILLER.md** — tutto inglobato qui, unica fonte di verita'
+- **Fix blocco "Conferma e Salva Bozza"** nello scraping articolo — ora usa `sb` (non `supabase`) e fallback localStorage con chiave `rig_blog_articles`
+- **Nuova sezione 3.4 "Strumenti Admin"** — documentati Scraping Articolo, Trend & Idee, Audit automatico, Analytics automatico
+- **Aggiornato riferimento snapshot** — rimosso "+ Nuovo Snapshot", ora tutto automatico ogni 7gg
+- **Aggiornata struttura file** admin.html con tutte le nuove funzionalita'
+
+### v2.0 - 12 Marzo 2026 (Ottimizzazione SEO pagina pillar + Scraping Articolo + Trend Admin)
+- **Ottimizzazione agenzia-immobiliare-padova.html** per le keyword "agenzia immobiliare padova" (pos. 28,5 → target top 10) e "vendere casa padova" (pos. 14,7 → target top 5):
+  - Title tag riscritto con entrambe le keyword target
+  - Meta description con numeri concreti (25 anni, 4.9 stelle, 4,2 mesi) + telefono per CTR
+  - H1 ottimizzato: "Agenzia immobiliare a Padova — vendere casa in 4,2 mesi"
+  - Nuova sezione "Come vendere casa a Padova al miglior prezzo" (6 card, metodo in 5 fasi)
+  - Nuova sezione "Mercato immobiliare Padova 2026: i numeri" (tabella 8 zone con prezzi, trend, tempi)
+  - 4 nuove FAQ specifiche "vendere casa padova" + schema FAQPage aggiornato (da 6 a 10 FAQ)
+  - Fonti citate: OMI, Agenzia Entrate, FIAIP Veneto (E-E-A-T + GEO)
+- **Scraping Articolo nell'Admin:** pulsante accanto a "+ Nuovo Articolo" nel Blog, modal completo con ricerca trend Google News RSS, generazione bozza strutturata, anteprima e salvataggio
+- **Sezione "Trend & Idee" nell'Admin:** ricerca topic trending per 8 categorie immobiliari, salvataggio idee in localStorage
+- **Fix proxy CORS:** sistema fallback multiplo (corsproxy.io, allorigins, cors.sh, corsproxy.org) con timeout 8s
+- **Rimosso pulsante "+ Nuovo Snapshot"** dall'Analytics (automatico ogni 7gg)
+
+### v1.9 - 12 Marzo 2026 (Audit Auto-settimanale + Fix SEO da Audit)
+- **Audit automatico settimanale:** auto-run ogni 7gg nell'Admin, salvataggio risultati su Supabase (`audit_snapshots`), grafico storico canvas con barre OK/Warning/Errori
+- **Pulsante Audit spostato in Admin:** dalla pagina scraping.html alla sidebar Admin (sezione dedicata "Audit Sito")
+- **Fix H1 mancante:** aggiunto H1 sr-only a 5 landing-chat (vendita, valutazione, insoddisfatti, offerta-luce, offerta-gas)
+- **Fix meta description troppo lunghe:** accorciate a ≤160 char su 9 pagine (6 zone, agenzia, landing-mutuo, vendere-casa-padova-errori)
+- **Fix title troppo lungo:** landing-mutuo.html accorciato a ≤70 char
+- **immobile.html escluso dall'audit:** e' template dinamico, non ha title/meta statici
+
+### v1.8 - 12 Marzo 2026 (Standard Contenuti + Fix Email + Pulsante Audit)
+- **Nuova sezione 8 "Standard Contenuti":** standard obbligatori per articoli blog (struttura H-tag, formato GEO/AEO, fonti verificate, meta tags, schema triplo, stile scrittura), descrizioni immobili (struttura 400-600 parole, regole anti-duplicate content vs portali, schema RealEstateListing), pagine zona (struttura completa con dati OMI)
+- **Fix email Cloudflare:** rimossa offuscazione `__cf_email__` da 7 file (servizi, servizio-vendita, privacy, immobili, index, chi-siamo, contatti) — email ora in chiaro come `info@righettoimmobiliare.it` con `mailto:` dove appropriato
+- **Rimosso script `email-decode.min.js`** da servizio-vendita, immobili, contatti, index (script Cloudflare non necessario su GitHub Pages)
+- **Pulsante Audit Sito** in scraping.html: genera report completo di tutte le pagine (schema, meta, FAQ, email, performance) con checklist automatica e suggerimenti per la SKILL
+- **Rinumerazione sezioni:** da 12 a 13 sezioni per ospitare la nuova sezione 8
+
+### v1.7 - 11 Marzo 2026 (Analytics Dashboard + Strategia Portale Regionale + Case Green)
+- **Dashboard Analytics nell'admin:** sezione completa con 8 KPI cards, storico snapshot, top query, performance per pagina, obiettivi strategici con progress bar, grafico trend canvas JS, link rapidi a GSC/GA4/PageSpeed
+- **Primo snapshot dati reali:** GSC 150 clic, 1.590 impressioni, CTR 9,4%, pos. 8,1 — GA4 96 utenti (+152,6%), 926 eventi (+110,9%)
+- **Strategia "Portale Regionale #1":** roadmap 12 mesi in 3 fasi (Consolidamento → Espansione → Dominio) con metriche target per sponsor/partnership
+- **KPI aggiornati con dati reali:** tabella 9.1 ora con baseline misurata e obiettivi a 3/6/12 mesi
+- **Nuovo articolo:** blog-direttiva-case-green-limena-padova.html — Direttiva EPBD 2024, impatto su Padova/Limena (2.700 parole, timeline, FAQ, classi energetiche)
+- **Guide interattive:** blog-servizi-infrastrutture-padova, blog-scuole-istruzione-padova, blog-trasporti-mobilita-padova
+- **Punteggio sito aggiornato:** da 8.1 a 8.4/10
+
+### v1.6 - 11 Marzo 2026 (Landing ENEL + Email Marketing in Agenda)
+- **Architettura email documentata:** aggiunta sezione 2.2 completa — NO Brevo, tutto interno via `api.righettoimmobiliare.it` (PHP relay su cPanel)
+- **Nuove landing ENEL:** offerta-enel-luce, offerta-enel-gas, reel-offerta-gas (in sottocartella `landing/`)
+- **Nuove landing chat ENEL:** landing-chat-offerta-luce, landing-chat-offerta-gas
+- **Fix slug landing ENEL:** aggiunto prefisso `landing/` negli slug admin per URL corrette
+- **Pulsanti azioni immobili:** ingranditi con classe `btn-action` (40x40px min, ombre, bordi)
+- **Campagne email in Agenda:** le email massive ora appaiono nel calendario settimanale con icona busta viola
+- **Struttura file aggiornata** con tutte le nuove landing
+
+### v1.5 - 8 Marzo 2026 (Implementazione Completa TODO)
+- **CREATI 4 contenuti:** blog-tempi-vendita-casa-padova, zona-vigonza, zona-abano-terme, zona-selvazzano
+- **RISOLTI tutti i 5 bug** sezione 8.1 (sitemap, font, lazy, discrepanza articoli, contrasto oro)
+- **Completati 7 fix GEO/AEO:** robots.txt AI bots, llms.txt, sameAs faq.html, Person schema landing-agente, timestamp cornerstone, BreadcrumbList verificato
+- **Allineati array articoli** su blog.html, homepage.js, admin.html (ora tutti sincronizzati)
+- **CLAUDE.md creato** per attivazione automatica skill su ogni sessione Claude
+- **Checklist nuova zona page** aggiunta alle checklist rapide
+- **Verifiche manuali periodiche** aggiunte come sezione permanente
+- **Calendario editoriale aggiornato** — tutti i contenuti marzo anticipati e completati
+- **Punteggio sito aggiornato** — 4 cluster ora completi su 4
+
+### v1.4 - 8 Marzo 2026 (Loop 4 — Verifica Finale)
+- Fix numerazione sezioni duplicate (due 4.3 → ora 4.2-4.6 corrette)
+- Aggiunta nota su contenuti unici vs portali (rischio duplicate content Idealista/Immobiliare.it)
+- Aggiunta statistica: 64% siti non passa soglie CWV
+- Raffinata priorita' search intent > keyword volume nei fattori di ranking
+- Verifica coerenza strutturale documento completa
+
+### v1.3 - 8 Marzo 2026 (Loop 3 — E-E-A-T e Entity Authority)
+- Aggiunta sezione 4.2 E-E-A-T completa con checklist implementativa
+- Aggiunti: pagina autore, author bio su blog, Person schema, coerenza brand cross-platform
+- Aggiunta nota su recensioni specifiche (quartiere/servizio) per entity authority
+- Author bio aggiunta nella checklist rapida per ogni nuova pagina
+
+### v1.2 - 8 Marzo 2026 (Loop 2 — GBP, Conversione, Lead Generation)
+- GBP sezione ampliata: descrizione 750 char, categorie specifiche, foto per tipo, UTM tags
+- Aggiunto dato: 87% consumatori legge recensioni, 73% solo ultimo mese
+- Aggiunta sezione 8.5 Conversione e Lead Generation (speed-to-lead, A/B test, lead magnet segmentati, video testimonial)
+- UTM tags per tracciamento GBP in GA4
+
+### v1.1 - 8 Marzo 2026 (Loop 1 — Schema, llms.txt, AI Crawlers)
+- Schema sezione riscritta: layering multiplo (RealEstateAgent + FAQPage + BreadcrumbList + Person + Review)
+- Aggiunto sameAs per entity linking (profili social nello schema)
+- Aggiunti tool validazione: Rich Results Test, Schema Markup Validator
+- llms.txt contestualizzato: adozione <0.005% ma zero costo, futuro standard
+- Aggiunta verifica robots.txt per AI bots (GPTBot, ClaudeBot, Google-Extended)
+- Aggiunti TODO: BreadcrumbList su tutte le pagine, Person schema su chi-siamo e landing-agente
+
+### v1.0 - 8 Marzo 2026 (Creazione Skill Unificata)
+- **Fusione** di SERP-STRATEGY.md e SKILL-KILLER.md in documento unico
+- **Eliminata ridondanza:** stato SERP, competitor, strategie, calendario — tutto in un unico punto
+- **Aggiornato stato reale** del progetto con audit 8 marzo
+- **SERP-STRATEGY.md era parzialmente obsoleto:** molti TODO gia' completati
+- **SKILL-KILLER.md aveva duplicazioni interne:** sezione competitor ripetuta, checklist ridondanti
+- **Aggiunti nuovi insight 2026 dal web** (10+ fonti consultate)
+- **Identificati 5 bug reali** nel progetto
+- **Struttura razionalizzata:** da 874 righe (2 file) a 1 file organizzato senza ripetizioni
+
+---
+
+*SKILL 2.0 — Un solo documento per governarli tutti.*
