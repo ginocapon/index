@@ -1,4 +1,4 @@
-# SKILL UNIFICATA — RaaS Automazioni
+# SKILL UNIFICATA — Righetto Immobiliare
 ## Prompt Operativo Master Consolidato
 
 > **Versione:** 2.2 — 16 Marzo 2026
@@ -25,11 +25,11 @@ Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se 
 5. **Aggiorna** sitemap.xml quando aggiungi/rimuovi pagine
 6. **Performance** — mai animazioni sull'elemento LCP; usare opacity/transform, mai filter
 7. **CTA contrast** — minimo 4.5:1 (WCAG AA)
-8. **Prezzi bloccati** — ogni riferimento ai prezzi deve essere coerente: Base 299€/anno, E-commerce 399€/anno + 3% commissione performance
+8. **Commissioni coerenti** — ogni riferimento alle commissioni deve essere: 3% + IVA per parte (min. 2.500€ vendita), 1 mensilita' + IVA (affitto)
 9. **Dati verificati** — ogni dato numerico DEVE avere fonte citata. Se non hai fonte, scrivi "dato non disponibile"
 10. **Zero claim inventati** — nessuna percentuale o statistica senza fonte verificabile
-11. **Anti-plagio bandi** — i titoli dei bandi in data/bandi.json devono essere parafrasi originali, MAI copiati dal sito ufficiale. Formato: "NomeBando — Descrizione Breve Originale". I link devono corrispondere esattamente alla pagina ufficiale verificata
-12. **Link verificati** — ogni url_bando deve essere controllato contro la fonte ufficiale prima dell'inserimento. URL errati danneggiano la credibilita
+11. **Claim verificati** — usare solo: 350+ immobili trattati, 101 comuni, 98% soddisfazione, 127 recensioni Google 4.9/5, dal 2000
+12. **URL coerenti** — usare sempre `righettoimmobiliare.it` senza www
 
 ### 1.3 Stile di Comunicazione
 - Rispondi in italiano
@@ -44,14 +44,20 @@ Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se 
 ### 2.1 Informazioni Generali
 | Campo | Valore |
 |---|---|
-| **Dominio** | raasautomazioni.it / www.raasautomazioni.it |
-| **Tech Stack** | HTML statico + CSS custom + JS vanilla |
+| **Ragione Sociale** | Gruppo Immobiliare Righetto di Capon Gino |
+| **P.IVA** | 05182390285 |
+| **Dominio** | righettoimmobiliare.it (senza www) |
+| **Fondazione** | 2000 |
+| **Sede** | Via Roma n.96, 35010 Limena (PD) |
+| **Telefono** | 049.88.43.484 / Cell: 349 736 5930 |
+| **Email** | info@righettoimmobiliare.it |
+| **Orari** | Lun-Ven 9:00-13:00 / 15:00-19:00, Sab 9:00-13:00 |
+| **Tech Stack** | HTML statico + CSS custom + JS vanilla + Supabase backend |
 | **Framework** | Nessuno — zero dipendenze esterne, codice puro |
-| **Lingue** | Italiano (principale), Inglese (/en/ — attivo) |
-| **Target** | PMI, professionisti, startup — B2B |
-| **Mercato** | Italia + UK/USA/Global (bilingue) |
-| **Hosting** | GitHub Pages (migrazione da Serverplan in corso) |
-| **Garanzia** | PageSpeed 90+ garantito, prezzi bloccati per sempre |
+| **Lingue** | Italiano (unica versione attiva) |
+| **Target** | Proprietari e acquirenti immobili — Padova e 101 comuni provincia |
+| **Hosting** | GitHub Pages |
+| **Performance** | PageSpeed 90+ |
 
 ### 2.2 Struttura File Sito (root — GitHub Pages)
 ```
@@ -124,73 +130,65 @@ Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se 
 └── unsubscribe.html            # Pagina disiscrizione email
 ```
 
-### 2.3 Modello di Business — RaaS (Revenue as a Service)
-**Il sito e' la porta d'ingresso. Il vero valore e' portare clienti.**
+### 2.3 Modello di Business — Agenzia Immobiliare
+**Intermediazione immobiliare completa: dalla valutazione al rogito.**
 
 | Componente | Dettaglio |
 |---|---|
-| **Fee d'ingresso (sito)** | Base 299€/anno, E-commerce 399€/anno |
-| **Commissione performance** | 3% sul fatturato totale generato dai nuovi lead/contatti portati |
-| **Dashboard trasparenza** | Ogni cliente accede a una pagina per verificare performance, lead, contatti generati |
-| **Contratto** | Lock-in con doppia sottoscrizione (Art. 1341 c.c.), penale decrescente, diritto audit |
+| **Commissione vendita** | 3% + IVA per parte (min. 2.500€) |
+| **Commissione affitto** | 1 mensilita' + IVA |
+| **Valutazione** | Gratuita e senza impegno |
+| **Consulenza mutuo** | Gratuita (10+ banche confrontate) |
+| **Area operativa** | 101 comuni provincia di Padova |
 
-**Pacchetti sito (fee d'ingresso):**
-| Pacchetto | Prezzo/Anno | Incluso |
-|---|---|---|
-| **Base** | 299€ | Sito vetrina/aziendale, hosting, SSL, PageSpeed 90+, SEO base, chatbot AI |
-| **E-commerce** | 399€ | Tutto Base + catalogo prodotti, carrello, pagamenti, gestione ordini |
+**Team:**
+| Persona | Ruolo |
+|---|---|
+| **Capon Gino** | Titolare, Agente Immobiliare — ville, immobili di pregio, investimenti |
+| **Righetto Linda** | Agente Immobiliare — locazioni, mercato affitti Padova |
 
-**Il modello performance (3% commissione):**
-- Commissione calcolata sul fatturato totale generato da nuovi contatti/lead portati tramite il sito e le campagne RaaS
-- Tracking via UTM, form dedicati, numeri telefono tracciati, CRM integrato
-- Riconciliazione trimestrale con dati verificabili
-- Dashboard cliente con accesso in tempo reale a tutte le metriche
-- Diritto di audit contrattuale per entrambe le parti
+**Claim verificati (usare SOLO questi):**
+- 350+ immobili trattati (venduti o affittati)
+- 101 comuni serviti nella provincia
+- 500+ immobili compravenduti (storico dal 2000)
+- 1.200+ contratti gestiti
+- 98% clienti soddisfatti
+- 127 recensioni Google con media 4.9/5
+- 25+ anni di esperienza (dal 2000)
+- Tempo medio vendita: 45-60 giorni
 
-**Riferimenti modelli simili nel mondo:**
-- Wunderkind (USA): $204.7M fatturato 2024, pioniere "Revenue as a Service"
-- Il 3% e' aggressivamente competitivo (mercato: 5-15%)
-- Fee d'ingresso 299-399€ molto bassa (mercato: $2.500-$10.000+)
-
-**Clausole contrattuali obbligatorie (legge italiana):**
-- Doppia sottoscrizione specifica per clausola lock-in (Art. 1341 c.c.)
-- Penale di recesso proporzionale e decrescente (Art. 1384 c.c.)
-- Definizione chiara attribuzione lead e meccanismo audit
-- Data portability garantita (evitare Art. 9, L.192/1998 — dipendenza economica)
-- Durata massima consigliata: 24 mesi
-
-**Claim verificati:**
-- 150+ progetti completati
-- 98% soddisfazione clienti
-- 3.2M€ valore generato nel portfolio
-- ROI medio 300% entro 6 mesi (automazioni)
+**Partner:**
+- Servizi Immobiliari Padova (serviziimmobiliaripadova.it)
+- RaaS Automazioni (raasautomazioni.it) — partner tecnologico
 
 ### 2.4 Servizi Core
-- Realizzazione siti web in codice puro (no WordPress)
-- **Lead generation e acquisizione clienti** (servizio primario)
-- Dashboard performance trasparente per ogni cliente
-- Garanzia PageSpeed 90+
-- Prezzo sito bloccato per sempre (anti-rincaro)
-- SEO + GEO (Generative Engine Optimization)
-- Aggregatore bandi: monitoraggio 150+ fonti ufficiali
-- Automazioni business
-- Sito bilingue IT/EN
+- **Vendita immobili** — valutazione, promozione multicanale, foto professionali, virtual tour 360, assistenza fino al rogito
+- **Locazioni** — valutazione canone, selezione inquilini, contratti (4+4, 3+2, transitorio, studenti), registrazione
+- **Valutazioni e perizie** — stima gratuita basata su dati FIAIP, comparabili reali, report scritto
+- **Gestione immobili** — rapporti inquilini, supervisione pagamenti, manutenzione, contabilita'
+- **Gestione preliminari** — conformita' catastale/urbanistica, bozza compromesso, coordinamento notarile
+- **Virtual Tour 360** — tour professionali pubblicati su YouTube
+- **Attivazione utenze** — volture, subentri luce/gas, consulenza tariffaria (partner ENEL)
+- **Consulenza mutuo gratuita** — confronto 10+ banche, simulatore rate
+- **Aste giudiziarie** — analisi, due diligence, assistenza offerta
 
 ### 2.5 Messaging Core
-**Messaggio primario (IT):** "Ti portiamo clienti. Guadagniamo solo se guadagni tu."
-**Messaggio primario (EN):** "We bring you clients. We only earn when you earn."
+**Messaggio primario:** "Vendere e comprare casa a Padova? Ci pensiamo noi."
+**Sottotitolo:** "Un unico referente per ogni esigenza — dalla valutazione al rogito."
 
 **Gerarchia messaggi:**
-1. Performance-based: portiamo clienti, paghi solo sui risultati
-2. Trasparenza: dashboard verificabile, tutto nero su bianco
-3. Tecnologia: codice puro, AI, SEO/GEO, PageSpeed 90+
-4. Prezzo d'ingresso accessibile: 299-399€/anno per il sito
+1. Competenza locale: 25+ anni, 101 comuni, 350+ immobili trattati
+2. Trasparenza: commissioni chiare, valutazione gratuita, zero costi nascosti
+3. Servizio completo: dalla perizia al rogito, un unico referente
+4. Fiducia: 127 recensioni Google 4.9/5, 98% soddisfazione
+5. Tecnologia: virtual tour 360, chatbot Linda, simulatore mutuo
 
 **NON dire mai:**
-- "Vendiamo siti web" (il sito e' il mezzo, non il prodotto)
-- "Garantiamo X lead" (senza contratto specifico)
+- Prezzi di mercato inventati (solo dati FIAIP/OMI verificati)
+- "Garantiamo vendita in X giorni" (media 45-60 gg, non garantita)
 - Percentuali inventate
-- Attacchi a concorrenti
+- Attacchi a concorrenti o altre agenzie
+- Dati su quartieri senza fonte
 
 ### 2.6 Struttura Sito Bilingue
 ```
@@ -203,104 +201,81 @@ Quando la versione EN verra' creata, aggiungere `<link rel="alternate" hreflang=
 ### 2.7 Design — Colori e Componenti
 | Elemento | Valore | Note |
 |---|---|---|
-| **Colore primario** | #e63946 (rosso acceso) | Tutti i pulsanti CTA, link hover, accenti |
-| **Colore primario dark** | #c1121f | Gradienti, hover pulsanti |
-| **Accent** | #f4a261 (arancione) | Badge, dettagli secondari |
-| **Dark** | #1a2f47 | Background hero, sezioni scure |
-| **Video showcase** | Sotto la hero, layout grid: robot 3D (sx) + video (dx) |
-| **Robot 3D** | Stile Star Wars, CSS puro, animazione float, braccio che indica il video |
-| **Newsletter EN** | Sopra il footer nella pagina /en/, form Formspree |
+| **Colore primario** | Blu scuro (dark navy) | Background hero, sezioni scure |
+| **Accent / Gold** | Oro/dorato | Badge, dettagli, tagline, titoli accent |
+| **Font titoli** | Cormorant Garamond (serif) | Look premium/luxury |
+| **Font corpo** | Sans-serif system | Leggibilita' |
+| **Stile** | Premium immobiliare — elegante, professionale |
+| **Hero** | Foto team titolari, H1 con effetto ghost/outline |
+| **Chatbot** | "Linda" — assistente AI, caricato lazy |
+| **Landing chat** | UI stile WhatsApp con avatar Linda, progress bar, scelte a bottoni |
 
-### 2.8 Sistema Bandi — Verifica Link con AI
-Il sistema bandi usa un orchestratore **Claude + Perplexity** per verificare automaticamente che ogni URL corrisponda alla pagina ufficiale del bando.
-
+### 2.8 Backend e Strumenti
 | Componente | Dettaglio |
 |---|---|
-| **Scraper** | `tools/scrape-bandi.js` — scraping da fonti ufficiali |
-| **Verificatore** | `tools/verify-links-perplexity.js` — Claude + Perplexity sonar-pro |
-| **Sync** | `tools/sync-bandi.js` — sincronizzazione con Supabase |
-| **Cron** | GitHub Actions ogni lunedi 08:00 UTC |
-| **API Keys** | `ANTHROPIC_API_KEY` + `PERPLEXITY_API_KEY` (GitHub Secrets) |
-
-**Flusso verifica:**
-1. Lo scraper trova nuovi bandi
-2. Per ogni bando, Claude chiede a Perplexity di cercare il link ufficiale
-3. Claude valida il risultato e aggiorna `url_bando` se trova un URL migliore
-4. Ogni bando ha campo `link_verificato` (boolean) e `data_verifica` (ISO date)
-
-**Flag CLI:**
-- `--skip-verify` — salta la verifica Perplexity (utile per test rapidi)
-- `--dry-run` — non salva modifiche
+| **Database** | Supabase (immobili, richieste contatto, newsletter) |
+| **Form contatti** | Salva su Supabase tabella "richieste" + notifica email |
+| **Newsletter** | Supabase tabella "newsletter_subscribers" |
+| **Chatbot** | "Linda" — assistente AI, caricato lazy da js/chatbot.js |
+| **FAQ** | Dati condivisi in RIGHETTO_FAQ_DATA (js/chatbot.js) — usati da faq.html e chatbot |
+| **Tools** | tools/import-csv-to-supabase.py, tools/upload-contacts-now.py |
 
 ---
 
 ## 3. STRATEGIA SEO & CONTENUTI BLOG
 
-### 3.1 Executive Summary — Standard Articoli
-- 2500+ parole AI-proof strutturate
+### 3.1 Executive Summary — Standard Articoli Blog
+- 2500+ parole strutturate, orientate al mercato immobiliare Padova
 - 35% transition words naturali
-- 28 H2/H3 distribuiti + errori umani casuali (5-8 per articolo)
-- SPINTAX 24 varianti social pronte (LinkedIn/Facebook)
-- Meta titles 60/160 char + Meta desc 95/200 char
-- JSON-LD BlogPosting + Organization + FAQSchema
-- Emoji Unicode moderati (uso professionale)
-- Fonti verificate: IlSole24Ore, Gartner, Google Trends, StatCounter, W3Techs
+- 28 H2/H3 distribuiti
+- Meta titles max 60 char + Meta desc max 160 char
+- JSON-LD BlogPosting + FAQSchema
+- Author: Gino Capon, Agente Immobiliare
+- Fonti verificate: OMI (Agenzia Entrate), FIAIP, IlSole24Ore, Banca d'Italia, ISTAT
+- Ogni dato di prezzo/mercato DEVE avere fonte e anno
 
-### 3.2 Ricerca Keywords e Competitors
-**SEED:** "{Sito web|Web agency|Realizzazione siti} {professionale|aziendale|vetrina} {prezzo|costo|preventivo} 2026"
-
-**LSI Locali:** "prezzo sito web", "web agency {citta'}", "PageSpeed ottimizzazione", "WordPress vs codice puro", "garanzia anti-rincaro"
-
-**SPINTAX SOCIAL (24 varianti LinkedIn/Facebook):**
-```
-{siti web|web agency|digital marketing} {prezzi trasparenti|anti-rincaro|bloccati}!
-RaaS 249€/anno vs Aruba 9,90€ poi 59,99€ — Confronto reale
-PageSpeed 90+ | Codice puro | Zero plugin
-Scopri: [link]
-#WebAgency2026 #SitiWeb #DigitalMarketing
-```
-
-**ISTRUZIONE COMPETITORS:** I competitors menzionati devono avere:
-- Preventivi ufficiali richiesti (screenshot/PDF)
-- Prezzi pubblici verificabili online
-- Dati performance da fonti terze (Trustpilot, Google Reviews)
+### 3.2 Pilastri Contenuti Blog (41 articoli attivi)
+| Pilastro | Articoli | Keyword seed |
+|----------|----------|-------------|
+| **Mercato immobiliare** | 7 | "mercato immobiliare Padova 2026", "prezzi case zona" |
+| **Mutui e finanziamenti** | 6 | "mutuo prima casa Padova", "tasso fisso variabile" |
+| **Affitti e locazioni** | 6 | "affitto Padova 2026", "canoni", "studenti" |
+| **Vendita casa** | 5 | "vendere casa Padova", "costi vendita", "tempi" |
+| **Guide legali/burocratiche** | 4 | "documenti vendita", "tasse", "caparra", "successione" |
+| **Zone e quartieri** | 3 | "quartieri Padova", "Limena vs Centro" |
+| **Acquisto e investimento** | 2 | "comprare casa guida", "investire immobiliare" |
+| **Infrastrutture Padova** | 3 | "scuole Padova", "trasporti", "servizi" |
+| **Nuove costruzioni/Green** | 2 | "case green", "nuova costruzione Limena" |
+| **Altro** | 3 | "home staging", "vita agenzia", "Ca' Marcello" |
 
 ### 3.3 Meta Titoli e Descrizioni (Template)
-**TITLE 60 char:** `Prezzi Web Agency 2026: RaaS vs Aruba [+506%]`
-**TITLE 160 char:** `Prezzi Web Agency 2026: RaaS 249€ Fisso vs Aruba 9,90€→59,99€ (+506%). Confronto Trasparente, PageSpeed 90+, Codice Puro vs WordPress. Dati Verificati.`
-**META 95 char:** `Prezzi web agency 2026: RaaS 249€ bloccato vs Aruba +506% rincaro. Confronto trasparente verificato.`
-**META 200 char:** `Confronto prezzi web agency 2026: RaaS 249€/anno bloccato per sempre vs Aruba 9,90€ poi 59,99€ (+506%). PageSpeed 90+, codice puro, garanzia anti-rincaro. Fonti: preventivi ufficiali, Gartner 2025.`
+**TITLE:** `[Topic] Padova 2026: [Beneficio/Dato] | Righetto Immobiliare`
+**META DESC:** `[Risposta diretta alla query]. Dati aggiornati [mese] 2026, fonti OMI/FIAIP. Guida completa di Righetto Immobiliare, dal 2000 nel Padovano.`
 
-### 3.4 Linguaggio 92% Umano
-**Errori naturali (5-8 casuali, MAI forzati, max 1 ogni 300 parole):**
-- "prezzibloccati" (incollato senza spazio)
-- "ristrutturazzione" (doppia Z casuale)
-- "," mancante: "Infatti Aruba rincarano"
-- "202 6" (spazio nel numero)
+Esempi:
+- `Mutuo Prima Casa Padova 2026: Tassi, Requisiti e Agevolazioni | Righetto Immobiliare`
+- `Prezzi Case Padova per Zona 2026: Mappa Completa €/mq | Righetto Immobiliare`
+
+### 3.4 Linguaggio
+**Tono:** Professionale, autorevole, accessibile. Come un consulente esperto che spiega al cliente.
 
 **EVITARE:**
-- Dialetto Veneto (settore professionale B2B)
-- Troppi errori consecutivi
-- Errori strategici (devono sembrare naturali)
+- Dialetto Veneto
+- Gergo tecnico senza spiegazione
+- Tono aggressivo o commerciale
+- Promesse di vendita garantita
 
 **Transition words 35% (professionali):**
 Inoltre, Infatti, Di conseguenza, In particolare, Tuttavia, Pertanto, Nonostante cio', A tal proposito, In sintesi, D'altra parte, Allo stesso modo, Per questo motivo, Infine, Quindi, In conclusione, Dunque
 
-### 3.5 Struttura Articolo 2500 Parole — H2 Obbligatori (28 totali)
-1. "Prezzi Web Agency 2026: [DATO_GARTNER] sul Mercato Italiano"
-2. "RaaS vs Aruba vs Register: Tabella Comparativa Prezzi Reali"
-3. "Il Problema dei Costi Nascosti nelle Web Agency"
-4. "Strategia Anti-Rincaro RaaS: Come Funziona"
-5. "Codice Puro vs WordPress: Confronto Performance Reale"
-6. "Case Study: Risparmio Cliente su 5 Anni"
-7. "Garanzia PageSpeed 90+: Cosa Significa Legalmente"
-8. "Come Scegliere la Web Agency Giusta: 7 Domande"
-9. "Lead Generation Garantita: 30-50 Lead/Mese Realistici?"
-10. "Tecnologia 2026: Trend Web Agency (Fonte: Gartner)"
-11. "FAQ: 15 Domande Frequenti su Prezzi e Garanzie"
-12. "Fonti Ufficiali: Dove Verificare i Dati"
-
-**Ogni sezione: max 200 parole. Ogni dato numerico con [FONTE] citata.**
+### 3.5 Struttura Articolo — Template
+1. **Intro** (150 parole) — problema del lettore, risposta diretta nelle prime 2 righe
+2. **Dato chiave** — numero verificato con fonte (es. "Prezzi +2.3% nel 2025 — fonte OMI")
+3. **Sezioni H2** (10-15) — ogni sezione max 200 parole con dato/fonte
+4. **Tabella comparativa** — dati zona/prezzo/rendimento con fonte
+5. **FAQ** (5-10) — basate su "People Also Ask" Google
+6. **CTA** — link a valutazione gratuita o contatti
+7. **Fonti** — elenco fonti ufficiali citate
 
 ### 3.6 JSON-LD Schema
 ```json
@@ -352,81 +327,64 @@ Inoltre, Infatti, Di conseguenza, In particolare, Tuttavia, Pertanto, Nonostante
 }
 ```
 
-### 3.7 Tabelle Competitive (Solo Dati Verificati)
+### 3.7 Dati Mercato Immobiliare (Solo Fonti Verificate)
 
-**PREZZI WEB AGENCY 2026 — Fonte: Preventivi Ufficiali**
+**PREZZI MEDI PADOVA PER ZONA — Da aggiornare trimestralmente**
 
-| Provider | Anno 1 | Anno 2 | Anno 5 | Totale 5 Anni | Fonte |
-|----------|--------|--------|--------|---------------|-------|
-| RaaS Business | 249€ | 249€ | 249€ | 1.245€ | Listino pubblico |
-| Aruba Hosting | 9,90€ | 59,99€ | 59,99€ | 4.159€* | Preventivo 10/01/26 |
-| Register.it | 890€ | 600€ | 600€ | 3.290€ | Preventivo 15/01/26 |
-| Keliweb | 1.200€ | 540€ | 540€ | 3.360€ | Preventivo 18/01/26 |
+| Zona | €/mq (indicativo) | Fonte |
+|------|-------------------|-------|
+| Centro Storico | ~3.500 | OMI / FIAIP |
+| Cittadella | ~3.200 | OMI / FIAIP |
+| Arcella | Verificare | OMI |
+| Limena | 1.600-2.400 | OMI |
 
-*Include realizzazione sito, hosting, plugin, manutenzione
+**REGOLA:** Se dato non disponibile o non aggiornato, scrivere "dato in aggiornamento" o non inserire riga. Mai inventare prezzi al mq.
 
-**CONFRONTO PERFORMANCE — Dati PageSpeed Insights**
+### 3.8 CTA e Conversione Blog
+**Ogni articolo deve chiudersi con:**
+- Link a valutazione gratuita (landing-valutazione.html o landing-chat-valutazione.html)
+- Link a contatti o WhatsApp
+- Badge urgenza se pertinente (es. "Marzo 2026: valutazione gratuita + report mercato")
 
-| Tecnologia | PSI Mobile | PSI Desktop | Tempo Caricamento | Fonte |
-|------------|-----------|-------------|-------------------|-------|
-| Codice Puro (RaaS) | 90-98 | 98-100 | 0.2s | Screenshot PSI |
-| WordPress (Aruba) | 45-65 | 60-75 | 3.2s | Screenshot PSI |
+**Landing pages conversione (2 tipi):**
+1. **Tradizionali** — landing-valutazione, landing-calcolo-mutuo, landing-vendita
+2. **Chat conversazionali** — landing-chat-* con UI WhatsApp e avatar Linda
 
-**REGOLA:** Se dato non disponibile, scrivere "dato non pubblico" o non inserire riga.
+### 3.9 Zone Pages — Strategia Local SEO
+14 pagine zona attive (hub-and-spoke model):
+- Ogni zona ha: descrizione quartiere, prezzi €/mq, immobili disponibili, servizi zona
+- Keyword pattern: "casa [zona] Padova", "appartamento [zona]", "immobili [zona]"
+- Schema: RealEstateAgent + LocalBusiness con geo-coordinates
 
-### 3.8 Sponsor Block (400 Parole — Claim Verificabili)
-**Punti da includere:**
-- 249€/anno bloccato per sempre (contratto scritto)
-- PageSpeed 90+ garantito (o lavoriamo gratis)
-- Zero costi nascosti: hosting, SSL, modifiche incluse anno 1
-- Codice proprietario: niente WordPress, niente plugin, niente vulnerabilita'
-- Risparmio 5 anni: 1.245€ vs 4.159€ Aruba
-
-**NON SCRIVERE MAI:**
-- "Beffiamo concorrenti"
-- "30 lead garantiti" (se non contrattualmente vero)
-- Percentuali inventate
-- Nomi concorrenti in termini denigratori
-
-### 3.9 Performance Stimate (Con Segnalazione)
-| Mese | Lead stimati | Traffic organico | NOTA |
-|------|--------------|------------------|------|
-| 1 | 5-10 | 200-400 | Dipende da settore/zona |
-| 3 | 15-25 | 800-1.2K | Dato stimato medio |
-| 6 | 30-50 | 3-5K | Dato stimato medio |
-| 12 | 60-100 | 10-20K | Dato stimato medio |
-
-**Tutti i numeri sono proiezioni basate su trend medi settore, NON garantiti.**
-
-### 3.10 Template Veloce Articolo
+### 3.10 Template Veloce Articolo Blog Immobiliare
 ```markdown
-# [TITOLO_ARTICOLO]
+# [TITOLO] Padova 2026: [Dato Chiave]
 
-[INTRO 150 parole - problema del lettore]
+[INTRO 150 parole - problema del lettore, risposta diretta]
 
-## [DATO_VERIFICATO]: Il Problema dei Rincari
+## [Dato Verificato]: Situazione Attuale a Padova
 
-[Spiegazione con esempio concreto Aruba 9,90€→59,99€]
+[Spiegazione con dati OMI/FIAIP e anno di riferimento]
 
-## Confronto Trasparente: RaaS vs [COMPETITOR]
+## [Tema]: Guida Pratica per [Acquirente/Venditore/Inquilino]
 
-[Tabella prezzi 5 anni con fonti]
+[Contenuto pratico con consigli operativi]
 
 ## [H2_TEMATICO]
 
-[Sviluppo 200 parole max]
+[Sviluppo 200 parole max, con dato e fonte]
 
-...continua per 28 H2/H3...
+...continua per 10-15 H2/H3...
 
-## FAQ: 15 Domande Frequenti
+## FAQ: Domande Frequenti
 
-[Da "People Also Ask" Google]
+[Da "People Also Ask" Google — 5-10 domande]
 
 ## Fonti Verificate
 
-- [Link IlSole24Ore]
-- [Link Gartner Report]
-- [Link preventivi ufficiali]
+- [OMI Agenzia delle Entrate]
+- [FIAIP / Rapporto immobiliare]
+- [IlSole24Ore / Banca d'Italia / ISTAT]
 ```
 
 ---
@@ -626,33 +584,24 @@ Schema.org e' il ponte critico tra siti web e AI agents. Contenuti con schema ha
 
 ## 7. TODO — Azioni Future
 
-### Migrazione GitHub
-- [x] Copiare file sito nel repo (71 file)
-- [x] Spostare da public_html/ a root per GitHub Pages
-- [x] Aggiungere .nojekyll
-- [ ] Attivare GitHub Pages nelle impostazioni repo (branch main, root /)
-- [ ] Aggiungere custom domain raasautomazioni.it
-- [ ] Aggiornare DNS su Serverplan: puntare a GitHub Pages
-- [ ] Verificare HTTPS con certificato GitHub
-- [ ] Verificare che tutte le 43 pagine funzionino
-- [ ] Testare PageSpeed post-migrazione
+### Infrastruttura
+- [x] Sito live su GitHub Pages
+- [x] 88 URL indicizzate in sitemap.xml
+- [x] Schema.org su tutte le pagine (RealEstateAgent, BlogPosting, FAQPage, VideoObject)
+- [x] Open Graph tags su tutte le pagine
+- [x] robots.txt con whitelist AI bots
 
 ### Contenuti
-- [x] Convertire articoli .txt in .html (3 articoli convertiti)
+- [x] 41 articoli blog pubblicati (mercato, mutui, affitti, vendita, zone)
+- [x] 14 pagine zona Padova
+- [x] 7 pagine servizi
+- [x] 12 landing pages (incluse 6 chat conversazionali)
 - [ ] Creare nuovi articoli blog seguendo template Sezione 3
-- [ ] Aggiornare dati competitors con preventivi Q1 2026
-
-### SEO & Visibilita'
-- [x] Registrare/aggiornare Google Business Profile
-- [x] Schema.org su tutte le pagine
-- [x] Open Graph tags su tutte le pagine
-- [x] Verificare robots.txt permissivo per AI bots
+- [ ] Aggiornare dati mercato OMI/FIAIP trimestralmente
 
 ### Tecnico
-- [ ] Collegare form contatti a backend email
 - [ ] Implementare `prefers-reduced-motion` per accessibilita'
 - [ ] Critical CSS inline per LCP <2s
-- [ ] Verificare HTTPS su GitHub Pages
 
 ### GEO & AI Agents
 - [x] Creare robots.txt con whitelist AI bots (7 bot configurati)
@@ -811,7 +760,7 @@ Standard per ecosistemi di agenti AI interoperabili e sicuri.
 **Previsione 2027:** Gartner: agenti AI tagliano gap costo-valore nei contratti di servizi di almeno 50%
 **Previsione 2028:** Gartner: agenti AI intermedieranno >$15 trilioni in spesa B2B. 90% acquisti B2B gestiti da AI. 33% software enterprise con AI agentica integrata
 
-**CRITICO per RaaS:** Se catalogo servizi, prezzi e proposta di valore non sono machine-readable (Schema.org), gli AI agents **non ti troveranno**. Implementare Service, Offer, Organization, PriceSpecification completi.
+**CRITICO per Righetto Immobiliare:** Se catalogo servizi, prezzi e proposta di valore non sono machine-readable (Schema.org), gli AI agents **non ti troveranno**. Implementare Service, Offer, RealEstateAgent, PriceSpecification completi.
 
 ### 8.8 SEO Tradizionale vs GEO — Evoluzione
 **Stato 2026:**
@@ -1000,6 +949,6 @@ Video embedded prova "Experience" (la prima E di E-E-A-T) a Google. Aumenta temp
 
 ---
 
-**VERSIONE:** 2.2 RaaS Automazioni
+**VERSIONE:** 2.2 Righetto Immobiliare
 **ULTIMO AGGIORNAMENTO:** 16 Marzo 2026
 **PROSSIMO REVIEW:** Giugno 2026 (aggiornamento prezzi Q2, refresh previsioni AI)
