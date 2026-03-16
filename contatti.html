@@ -84,6 +84,8 @@
     .fsuccess{display:none;text-align:center;padding:2rem;background:rgba(30,132,73,.08);border:1px solid rgba(30,132,73,.2);border-radius:10px;margin-top:1rem}
     .fsuccess h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:.4rem;color:var(--verde)}
     .fsuccess p{font-size:.82rem;color:var(--grigio)}
+    @keyframes pulseUrgency{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.03);opacity:0.9}}
+    @keyframes scaleIn{from{transform:scale(0.5);opacity:0}to{transform:scale(1);opacity:1}}
     /* SIDEBAR INFO */
     .sidebar{display:flex;flex-direction:column;gap:1rem}
     .ibox{background:var(--sfondo);border:1px solid var(--gc);border-radius:10px;overflow:hidden}

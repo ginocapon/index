@@ -150,7 +150,6 @@ function enhanceSpeedToLead() {
   if (successDiv) {
     var originalForm = document.getElementById('contact-form');
     if (originalForm) {
-      var origSubmit = originalForm.onsubmit;
       // Sovrascriviamo sendForm per aggiungere speed-to-lead
       var origSendForm = window.sendForm;
       if (origSendForm) {
@@ -477,7 +476,6 @@ function setupScrollTracking() {
 
 function setupTimeTracking() {
   var intervals = [30, 60, 120, 300];
-  var start = Date.now();
 
   intervals.forEach(function(sec) {
     setTimeout(function() {

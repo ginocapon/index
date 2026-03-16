@@ -895,7 +895,7 @@ Per ogni pagina, Google si aspetta di trovare anche le **entita' collegate** al 
 - [ ] Verificare indexing in Google Search Console
 - [ ] Richiedere indicizzazione manuale nuove pagine via GSC
 - [ ] Verificare che recensioni Google non siano sparite (nuove policies)
-- [ ] Aggiungere video content (virtual tour, presentazione agenzia) — genera 66% piu' lead
+- [x] Aggiungere video content — video testimonial con facade YouTube in homepage (virtual tour dedicato ancora da fare)
 - [ ] UTM tags su link GBP per tracciare traffico in GA4
 - [ ] Valutare hreflang se si prevede versione EN per clientela internazionale
 
