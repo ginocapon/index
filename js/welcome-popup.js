@@ -563,6 +563,8 @@
 
   // ── CTA: Apri chatbot (con disintegrazione) ──
   document.getElementById('welcome-chatbot').addEventListener('click', function () {
+    // Segna come aperto per evitare che auto-open lo riapra
+    sessionStorage.setItem('chatbot_auto_opened', '1');
     closePopup(function () {
       setTimeout(function () {
         if (window.rigChat && typeof window.rigChat.toggle === 'function') {
