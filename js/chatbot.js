@@ -1738,8 +1738,7 @@ if (document.readyState === 'loading') {
   initChatbotUI();
 }
 
-// ── Auto-open chatbot dopo ~3s su homepage (solo prima visita sessione) ──
-// NB: chatbot.js è caricato lazy dopo ~3s, quindi il delay reale è ~3s totali
+// ── Auto-open chatbot dopo ~2s su homepage desktop (solo prima visita sessione) ──
 function autoOpenChatbot() {
   var path = location.pathname.replace(/\/+$/, '') || '/';
   var isHome = path === '/' || path === '/index.html' || path === '/index' || path === '/home';
@@ -1747,21 +1746,25 @@ function autoOpenChatbot() {
   if (!isHome) {
     isHome = document.body.id === 'homepage' || document.body.classList.contains('homepage') || path.length <= 1;
   }
+  // Fallback extra: dominio senza path
+  if (!isHome) {
+    isHome = location.pathname === '' || location.pathname === '/';
+  }
   // Disattiva auto-open su mobile (< 768px) — solo desktop/iPad
   var isMobile = window.innerWidth < 768;
   var alreadyShown = sessionStorage.getItem('chatbot_auto_opened');
   if (isHome && !alreadyShown && !isMobile) {
-    if (!window.rigChat) {
-      // rigChat non ancora pronto, riprova tra 500ms (max 6 tentativi = 3s extra)
+    if (!window.rigChat || !document.getElementById('rig-chat-box')) {
+      // rigChat non ancora pronto, riprova tra 500ms (max 12 tentativi = 6s extra)
       if (!autoOpenChatbot._retries) autoOpenChatbot._retries = 0;
-      if (autoOpenChatbot._retries < 6) {
+      if (autoOpenChatbot._retries < 12) {
         autoOpenChatbot._retries++;
         setTimeout(autoOpenChatbot, 500);
       }
       return;
     }
     sessionStorage.setItem('chatbot_auto_opened', '1');
-    // Apri direttamente senza usare toggle (più affidabile)
+    // Apri direttamente senza usare toggle (piu' affidabile)
     var box = document.getElementById('rig-chat-box');
     if (box && !box.classList.contains('open')) {
       window.rigChat.open = true;
@@ -1780,8 +1783,7 @@ function autoOpenChatbot() {
     }
   }
 }
-// Avvia subito + retry con piccolo delay come fallback
-autoOpenChatbot();
-setTimeout(autoOpenChatbot, 300);
+// Delay iniziale 2s + retry automatico ogni 500ms
+setTimeout(autoOpenChatbot, 2000);
 
 })();
