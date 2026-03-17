@@ -21,7 +21,7 @@ SKILL-2.0.md e' l'unica fonte di verita' per questo progetto.
 ### Contenuti Blog:
 - Seguire template e checklist in SKILL-2.0.md Sezione 3 e 5
 - 2500+ parole, 10-15 H2/H3, 35% transition words
-- OGNI dato numerico DEVE avere fonte verificata (OMI, FIAIP, ISTAT, Banca d'Italia)
+- OGNI dato numerico DEVE avere fonte verificata (OMI, FIMAA, ISTAT, Banca d'Italia)
 - Zero claim inventati, zero dialetto, tono professionale
 - Commissioni: 3% + IVA per parte (min. 2.500€ vendita), 1 mensilita' + IVA (affitto)
 - Claim consentiti: 350+ immobili, 101 comuni, 98% soddisfazione, 127 recensioni 4.9/5, dal 2000

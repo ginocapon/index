@@ -14208,7 +14208,7 @@ function _scraOriginalContent(topic, inlineImgs) {
 
   // Sezione 2: Numeri con TABELLA
   html += '<h2>Il quadro a Padova: numeri e tendenze ' + year + '</h2>';
-  html += '<p>Secondo i dati OMI dell\'Agenzia delle Entrate e le rilevazioni FIAIP Veneto, il mercato immobiliare padovano registra un volume di compravendite in evoluzione. Ecco il confronto zona per zona:</p>';
+  html += '<p>Secondo i dati OMI dell\'Agenzia delle Entrate e le rilevazioni FIMAA Veneto, il mercato immobiliare padovano registra un volume di compravendite in evoluzione. Ecco il confronto zona per zona:</p>';
 
   // Tabella dati per zona
   html += '<table><thead><tr><th>Zona</th><th>Prezzo medio &euro;/mq</th><th>Variazione annua</th><th>Tempo medio vendita</th></tr></thead><tbody>';
@@ -14219,7 +14219,7 @@ function _scraOriginalContent(topic, inlineImgs) {
     html += '<tr><td><strong>' + z + '</strong></td><td>' + prezzi[i].toLocaleString('it-IT') + ' &euro;</td><td style="color:#27ae60;">' + variazioni[i] + '</td><td>' + tempi[i] + '</td></tr>';
   });
   html += '</tbody></table>';
-  html += '<p style="font-size:.78rem;color:#6B7A8D;"><em>Fonte: elaborazione Righetto Immobiliare su dati OMI ' + year + ' e rilevazioni FIAIP Veneto</em></p>';
+  html += '<p style="font-size:.78rem;color:#6B7A8D;"><em>Fonte: elaborazione Righetto Immobiliare su dati OMI ' + year + ' e rilevazioni FIMAA Veneto</em></p>';
 
   // Highlight box con numeri chiave
   html += '<div class="highlight-box"><h3>I numeri chiave di Padova ' + year + '</h3>';
