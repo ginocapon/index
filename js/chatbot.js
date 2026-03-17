@@ -1752,11 +1752,6 @@ function autoOpenChatbot() {
   }
   // Disattiva auto-open su mobile (< 768px) — solo desktop/iPad
   var isMobile = window.innerWidth < 768;
-  // Non aprire se il welcome-popup e' ancora visibile — riprova dopo
-  if (document.getElementById('welcome-overlay')) {
-    setTimeout(autoOpenChatbot, 1000);
-    return;
-  }
   var alreadyShown = sessionStorage.getItem('chatbot_auto_opened');
   if (isHome && !alreadyShown && !isMobile) {
     if (!window.rigChat || !document.getElementById('rig-chat-box')) {
