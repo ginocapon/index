@@ -1324,12 +1324,13 @@ function initChatbotUI() {
     background: #CEE08F; display: inline-block;
   }
   .chat-close {
-    background: rgba(255,255,255,0.15); border: none; color: white;
-    width: 30px; height: 30px; border-radius: 8px; cursor: pointer;
-    font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s;
+    background: rgba(255,255,255,0.2); border: none; color: white;
+    width: 38px; height: 38px; border-radius: 10px; cursor: pointer;
+    font-size: 1.35rem; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, transform 0.15s;
+    flex-shrink: 0;
   }
-  .chat-close:hover { background: rgba(255,255,255,0.28); }
+  .chat-close:hover { background: rgba(255,255,255,0.35); transform: scale(1.1); }
   .chat-msgs {
     flex: 1; overflow-y: auto; padding: 16px 14px;
     display: flex; flex-direction: column; gap: 10px;
@@ -1431,14 +1432,14 @@ function initChatbotUI() {
   }
   .chat-rating-thanks.visible { opacity: 1; }
   #rig-chat-close-bar {
-    display: none; text-align: center; margin-top: 6px;
+    display: none; text-align: center; margin-top: 8px;
   }
   #rig-chat-close-bar button {
     background: #3A5578; color: #fff; border: none;
-    padding: 5px 16px; border-radius: 20px; font-family: inherit;
-    font-size: 0.68rem; font-weight: 600; cursor: pointer;
-    letter-spacing: 0.03em; transition: background 0.2s, transform 0.15s;
-    box-shadow: 0 2px 8px rgba(58,85,120,0.3);
+    padding: 10px 28px; border-radius: 24px; font-family: inherit;
+    font-size: 0.82rem; font-weight: 700; cursor: pointer;
+    letter-spacing: 0.04em; transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 3px 12px rgba(58,85,120,0.4);
   }
   #rig-chat-close-bar button:hover { background: #CEE08F; color: #152435; transform: scale(1.05); }
   #rig-chat-close-bar.visible { display: block; }
