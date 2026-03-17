@@ -21,8 +21,7 @@ initSB();
 const nav = document.getElementById('navbar');
 window.addEventListener('scroll',()=>{ nav.classList.toggle('scrolled', window.scrollY>60); });
 
-/* ══ HERO BG: avvia animazione dopo LCP ══ */
-requestAnimationFrame(()=>{const hb=document.getElementById('hero-bg');if(hb)hb.classList.add('loaded');});
+/* ══ HERO BG: animazione parte subito (no delay per LCP) ══ */
 
 /* ══ BURGER MENU — gestito da js/nav-mobile.js ══ */
 
@@ -70,15 +69,20 @@ function resolveImageUrl(url, opts) {
   if (!url || typeof url !== 'string') return '';
   url = url.trim();
   if (!url) return '';
-  // Già URL completo
+  // URL Supabase completo → converti in render/image per ridimensionamento+webp
+  if (url.includes('supabase.co/storage/v1/object/public/') && opts && opts.width) {
+    var q = opts.quality || 75;
+    return url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/') + '?width=' + opts.width + '&quality=' + q + '&resize=contain&format=webp';
+  }
+  // Già URL completo (non Supabase o senza opts)
   if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) return url;
   // Percorso locale (img/, css/, fonts/) → lascia così com'è
   if (url.startsWith('img/') || url.startsWith('./') || url.startsWith('css/') || url.startsWith('fonts/')) return url;
-  // Percorso relativo Supabase Storage → costruisci URL con transform se richiesto
-  const path = url.replace(/^\/+/, '');
+  // Percorso relativo Supabase Storage → costruisci URL con transform
+  var path = url.replace(/^\/+/, '');
   if (opts && opts.width) {
-    const q = opts.quality || 75;
-    return SB_URL + '/storage/v1/render/image/public/' + path + '?width=' + opts.width + '&quality=' + q + '&resize=contain';
+    var q2 = opts.quality || 75;
+    return SB_URL + '/storage/v1/render/image/public/' + path + '?width=' + opts.width + '&quality=' + q2 + '&resize=contain&format=webp';
   }
   return SB_URL + '/storage/v1/object/public/' + path;
 }
