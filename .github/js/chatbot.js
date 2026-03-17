@@ -2,7 +2,7 @@
  * RIGHETTO IMMOBILIARE — Chatbot Universale
  * Versione 2.0 — Febbraio 2026
  * Include: stima prezzi, ricerca immobili, form contatto, FAQ
- * Dati prezzi: FIAIP Padova, Immobiliare.it, Idealista 2025-2026
+ * Dati prezzi: FIMAA Padova, Immobiliare.it, Idealista 2025-2026
  */
 
 (function() {
@@ -34,7 +34,7 @@ function generatePropertySlug(d) {
 
 // ══════════════════════════════════════════════
 // DATABASE PREZZI — PROVINCIA DI PADOVA 2025-2026
-// Fonte: FIAIP Padova, Immobiliare.it, Idealista, OMI Agenzia Entrate
+// Fonte: FIMAA Padova, Immobiliare.it, Idealista, OMI Agenzia Entrate
 // ══════════════════════════════════════════════
 const PREZZI_COMUNI = {
   // PADOVA CITTÀ — zona per zona

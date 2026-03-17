@@ -286,7 +286,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 9. **Contenuto 100% originale generato automaticamente** (no plagio):
    - Titolo rielaborato con 4 template randomizzati (mai copiato dalla fonte)
    - 6 sezioni H2 con prospettiva Righetto Immobiliare
-   - **Tabella dati per zona** (8 zone Padova: prezzo/mq, variazione, tempi vendita) con fonte OMI/FIAIP
+   - **Tabella dati per zona** (8 zone Padova: prezzo/mq, variazione, tempi vendita) con fonte OMI/FIMAA
    - **Highlight box** con 4 numeri chiave del mercato padovano
    - **Tabella attrattivita' investimento** per zona (target, prospettiva)
    - **Citazione** di Gino Capon in blockquote
@@ -302,7 +302,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 - Include CTA banner "Contattaci"
 - Articoli correlati automatici per categoria
 
-**REGOLA ANTI-PLAGIO OBBLIGATORIA:** ogni contenuto generato dallo scraping DEVE essere originale. Il topic della fonte viene usato solo come ispirazione — titolo, testo e FAQ vengono rielaborati con la prospettiva di Righetto Immobiliare, dati locali di Padova e fonti ufficiali (OMI, FIAIP, Agenzia Entrate).
+**REGOLA ANTI-PLAGIO OBBLIGATORIA:** ogni contenuto generato dallo scraping DEVE essere originale. Il topic della fonte viene usato solo come ispirazione — titolo, testo e FAQ vengono rielaborati con la prospettiva di Righetto Immobiliare, dati locali di Padova e fonti ufficiali (OMI, FIMAA, Agenzia Entrate).
 
 **REGOLA IMMAGINI:** mai riutilizzare immagini gia' presenti nel sito (img/foto-servizi, img/blog, img/team). Ogni nuovo articolo deve avere foto NUOVE — o caricate dall'utente o cercate su Unsplash.
 
@@ -382,7 +382,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 2. **Dati numerici specifici** e verificabili (prezzi/mq, anni esperienza, N. immobili)
 3. **Formato:** Domanda H2 → Risposta diretta (40-60 parole) → Approfondimento
 4. **Liste, tabelle, definizioni chiare** — formato preferito dalle AI
-5. **Citare fonti ufficiali** (Agenzia Entrate, OMI, FIAIP)
+5. **Citare fonti ufficiali** (Agenzia Entrate, OMI, FIMAA)
 6. **Frasi auto-contenute** — ogni claim deve avere senso letto isolatamente
 7. **Freshness** — aggiornare contenuti cornerstone regolarmente con timestamp "Ultimo aggiornamento"
 8. **llms.txt** — mantenere aggiornato per guidare AI bots
@@ -538,7 +538,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 - [ ] Collaborazioni geometri, notai, architetti (scambio link)
 - [ ] Directory locali: PagineGialle, Yelp, Cylex, TuttoCitta
 - [ ] Profilo LinkedIn aziendale con contenuti regolari
-- [ ] Profilo FIAIP / FIMAA con link al sito
+- [ ] Profilo FIMAA / FIMAA con link al sito
 - [ ] Guest post su blog immobiliari nazionali
 - [ ] Camera di Commercio di Padova — registrazione con link
 
@@ -618,7 +618,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 **Dati e Fonti (OBBLIGATORIO):**
 - Ogni dato numerico (prezzi/mq, percentuali, tempi) DEVE avere **fonte citata**
-- Fonti accettate: OMI (Osservatorio Mercato Immobiliare), Agenzia Entrate, ISTAT, IlSole24Ore, FIAIP, Comune di Padova, Regione Veneto
+- Fonti accettate: OMI (Osservatorio Mercato Immobiliare), Agenzia Entrate, ISTAT, IlSole24Ore, FIMAA, Comune di Padova, Regione Veneto
 - MAI dati inventati — se non disponibili, scrivere "dato non pubblico" o omettere
 - Aggiornare dati OMI ogni trimestre
 
@@ -1537,7 +1537,7 @@ document.querySelectorAll('.faq-btn').forEach(btn => {
   - Nuova sezione "Come vendere casa a Padova al miglior prezzo" (6 card, metodo in 5 fasi)
   - Nuova sezione "Mercato immobiliare Padova 2026: i numeri" (tabella 8 zone con prezzi, trend, tempi)
   - 4 nuove FAQ specifiche "vendere casa padova" + schema FAQPage aggiornato (da 6 a 10 FAQ)
-  - Fonti citate: OMI, Agenzia Entrate, FIAIP Veneto (E-E-A-T + GEO)
+  - Fonti citate: OMI, Agenzia Entrate, FIMAA Veneto (E-E-A-T + GEO)
 - **Scraping Articolo nell'Admin:** pulsante accanto a "+ Nuovo Articolo" nel Blog, modal completo con ricerca trend Google News RSS, generazione bozza strutturata, anteprima e salvataggio
 - **Sezione "Trend & Idee" nell'Admin:** ricerca topic trending per 8 categorie immobiliari, salvataggio idee in localStorage
 - **Fix proxy CORS:** sistema fallback multiplo (corsproxy.io, allorigins, cors.sh, corsproxy.org) con timeout 8s
