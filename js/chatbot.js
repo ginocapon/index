@@ -1738,45 +1738,22 @@ if (document.readyState === 'loading') {
   initChatbotUI();
 }
 
-// ── Auto-open anteprima chat dopo 3s su homepage (ogni visita, desktop+mobile) ──
+// ── Auto-open anteprima chat dopo caricamento su homepage (ogni visita) ──
 function autoOpenChatbot() {
-  var path = location.pathname.replace(/\/+$/, '') || '/';
-  var isHome = path === '/' || path === '/index.html' || path === '/index' || path === '/home';
-  if (!isHome) {
-    isHome = document.body.id === 'homepage' || document.body.classList.contains('homepage') || path.length <= 1;
-  }
-  if (!isHome) {
-    isHome = location.pathname === '' || location.pathname === '/';
-  }
-  if (!isHome) return;
   if (!window.rigChat || !document.getElementById('rig-chat-box')) {
     if (!autoOpenChatbot._retries) autoOpenChatbot._retries = 0;
-    if (autoOpenChatbot._retries < 12) {
+    if (autoOpenChatbot._retries < 20) {
       autoOpenChatbot._retries++;
       setTimeout(autoOpenChatbot, 500);
     }
     return;
   }
-  var box = document.getElementById('rig-chat-box');
-  if (box && !box.classList.contains('open')) {
-    window.rigChat.open = true;
-    box.classList.add('open');
-    var iconAvatar = document.getElementById('rig-chat-btn-avatar');
-    var iconClose = document.getElementById('rig-chat-icon-close');
-    var pulse = document.getElementById('rig-chat-pulse');
-    var closeBar = document.getElementById('rig-chat-close-bar');
-    if (iconAvatar) iconAvatar.style.display = 'none';
-    if (iconClose) iconClose.style.display = 'block';
-    if (pulse) pulse.style.display = 'none';
-    if (closeBar) closeBar.classList.add('visible');
-    if (document.getElementById('rig-chat-msgs').children.length === 0) {
-      window.rigChat.showWelcome();
-    }
+  // Usa toggle() per garantire coerenza stato
+  if (!window.rigChat.open) {
+    window.rigChat.toggle();
   }
 }
-// chatbot.js viene caricato lazy dopo ~3s, quindi rigChat potrebbe
-// non essere ancora pronto. Avviamo subito con retry automatico.
+// Apri automaticamente appena il widget e' pronto
 autoOpenChatbot();
-setTimeout(autoOpenChatbot, 300);
 
 })();
