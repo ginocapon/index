@@ -605,12 +605,13 @@ function initChatbotUI() {
     background: #CEE08F; display: inline-block;
   }
   .chat-close {
-    background: rgba(255,255,255,0.15); border: none; color: white;
-    width: 30px; height: 30px; border-radius: 8px; cursor: pointer;
-    font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s;
+    background: rgba(255,255,255,0.2); border: none; color: white;
+    width: 38px; height: 38px; border-radius: 10px; cursor: pointer;
+    font-size: 1.35rem; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, transform 0.15s;
+    flex-shrink: 0;
   }
-  .chat-close:hover { background: rgba(255,255,255,0.28); }
+  .chat-close:hover { background: rgba(255,255,255,0.35); transform: scale(1.1); }
   .chat-msgs {
     flex: 1; overflow-y: auto; padding: 16px 14px;
     display: flex; flex-direction: column; gap: 10px;
