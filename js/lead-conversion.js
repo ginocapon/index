@@ -304,7 +304,27 @@ var social_proofs = [
   { text: '3 nuove richieste di valutazione oggi', time: 'oggi', icon: 'trending' },
   { text: 'Silvia ha trovato casa ad Albignasego', time: '4 giorni fa', icon: 'heart' },
   { text: '127 recensioni Google — media 4.9/5 stelle', time: 'verificato', icon: 'star' },
-  { text: '350+ immobili gestiti in 101 comuni dal 2000', time: 'dal 2000', icon: 'trending' }
+  { text: '350+ immobili gestiti in 101 comuni dal 2000', time: 'dal 2000', icon: 'trending' },
+  { text: 'Giulia ha chiesto info per un bilocale a Vigonza', time: '8 min fa', icon: 'home' },
+  { text: 'Roberto ha venduto un appartamento in zona Arcella', time: '3 giorni fa', icon: 'check' },
+  { text: 'Federica ha richiesto una stima gratuita a Rubano', time: '45 min fa', icon: 'home' },
+  { text: 'Famiglia Moretti ha acquistato casa a Ponte San Nicolo', time: '1 settimana fa', icon: 'heart' },
+  { text: 'Andrea ha prenotato una visita a Sacra Famiglia', time: '2 ore fa', icon: 'eye' },
+  { text: '5 immobili venduti questa settimana', time: 'aggiornato', icon: 'trending' },
+  { text: 'Elena ha richiesto una valutazione a Voltabarozzo', time: '35 min fa', icon: 'home' },
+  { text: 'Paolo ha simulato il mutuo per una villetta a Limena', time: '1 ora fa', icon: 'calc' },
+  { text: 'Chiara ha trovato il trilocale ideale in centro', time: '5 giorni fa', icon: 'heart' },
+  { text: 'Famiglia Basso ha venduto villa ad Abano Terme', time: '6 giorni fa', icon: 'check' },
+  { text: 'Matteo ha chiesto info su un attico in Prato della Valle', time: '18 min fa', icon: 'home' },
+  { text: '98% clienti soddisfatti — dal 2000', time: 'verificato', icon: 'star' },
+  { text: 'Laura ha prenotato un virtual tour a Guizza', time: '3 ore fa', icon: 'eye' },
+  { text: 'Davide ha richiesto una stima a Forcellini', time: '22 min fa', icon: 'home' },
+  { text: 'Famiglia Rossi ha acquistato casa a Selvazzano', time: '1 settimana fa', icon: 'heart' },
+  { text: 'Sara ha calcolato la rata mutuo per un bilocale', time: '40 min fa', icon: 'calc' },
+  { text: 'Giovanni ha venduto appartamento a Limena in 60 giorni', time: '2 settimane fa', icon: 'check' },
+  { text: 'Valutazioni gratuite completate oggi: 4', time: 'oggi', icon: 'trending' },
+  { text: 'Alessia ha chiesto info per affitto a zona universitaria', time: '15 min fa', icon: 'home' },
+  { text: 'Famiglia Conte ha venduto casa a Curtarolo', time: '5 giorni fa', icon: 'check' }
 ];
 
 var proofIndex = 0;
@@ -373,8 +393,8 @@ function startSocialProof() {
   // Prima notifica dopo 25 secondi
   setTimeout(function() {
     showProof();
-    // Poi ogni 45 secondi
-    setInterval(showProof, 45000);
+    // Poi ogni 60 secondi
+    setInterval(showProof, 60000);
   }, 25000);
 }
 
