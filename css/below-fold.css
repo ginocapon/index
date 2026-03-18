@@ -730,3 +730,13 @@ footer{background:var(--testo);color:rgba(255,255,255,0.6);padding:64px 44px 28p
   .sticky-cta-mobile{display:block}
   body{padding-bottom:64px}
 }
+
+/* ── Accessibilita': rispetta preferenze riduzione movimento ── */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
+}
+
+/* ── Performance mobile: riduce backdrop-filter su dispositivi lenti ── */
+@media(max-width:768px){
+  .sticky-cta-mobile{backdrop-filter:none;-webkit-backdrop-filter:none}
+}

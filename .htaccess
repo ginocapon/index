@@ -46,6 +46,20 @@
   AddOutputFilterByType DEFLATE text/html text/css application/javascript text/javascript application/json image/svg+xml font/woff2 application/font-woff2
 </IfModule>
 
+# ── Security Headers ──
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# ── ETag disabilitato (usa Cache-Control) ──
+<IfModule mod_headers.c>
+  Header unset ETag
+</IfModule>
+FileETag None
+
 # ── Redirect www → non-www ──
 <IfModule mod_rewrite.c>
   RewriteEngine On
