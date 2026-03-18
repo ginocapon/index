@@ -888,11 +888,81 @@ Per ogni pagina, Google si aspetta di trovare anche le **entita' collegate** al 
 
 ### 9.3 Ottimizzazioni Performance
 - [x] **Supabase Image Transforms** — 13 Marzo 2026: `resolveImageUrl()` in `homepage.js`, `immobile.html`, `immobili.html` ora usa `/storage/v1/render/image/public/` con parametri `width` e `quality` per ridimensionare le immagini al volo. Risparmio stimato: ~2300 KiB (~85%) sulle immagini Supabase. Dimensioni: card homepage/listing width=600 q=75, gallery hero width=1200 q=80, thumbnails width=300 q=70, lightbox full-size originale.
+- [x] **Cache-busting ?v=N su tutti i CSS/JS** — 18 Marzo 2026: aggiunto parametro `?v=3` a tutti i riferimenti CSS e JS in 88 file HTML. Cache CSS/JS estesa da 1 mese a 1 anno con flag `immutable` nel `.htaccess`. Il cache-busting garantisce refresh immediato ad ogni aggiornamento incrementando il numero di versione.
+- [x] **Immagini WebP come formato primario** — tutti i `<picture>` e `<img>` puntano direttamente a `.webp`. I file `.png` nella cartella `img/foto-servizi/` sono ridondanti e possono essere eliminati (nessun HTML li referenzia).
 - [ ] LCP sotto 2 secondi su tutte le pagine (nuovo target competitivo)
 - [ ] Verificare SVT — nessun caricamento "scattoso" (font swap, image pop-in)
 - [ ] Verificare Engagement Reliability — form, bottoni, menu funzionano su tutti i device
 - [ ] Page Experience consistency — tutte le pagine devono avere performance simile
 - [ ] **Cache headers GitHub Pages** — il TTL di 10 minuti sulle risorse proprietarie (fonts, CSS, JS, immagini locali) e' un limite di GitHub Pages non modificabile. Valutare Cloudflare come proxy per cache piu' aggressiva.
+
+### 9.3b Strategia Cache e Performance — Regole per Ogni Nuovo Sito
+
+> **Applicabile a qualsiasi sito statico su hosting tradizionale (cPanel, Plesk, VPS).**
+> GitHub Pages ha limiti diversi (cache 10 min non modificabile, no .htaccess).
+
+**1. Cache-Busting obbligatorio su CSS/JS:**
+- OGNI riferimento CSS e JS negli HTML DEVE avere un parametro `?v=N` (es. `css/fonts.css?v=3`)
+- Quando modifichi un CSS o JS, incrementa il numero di versione in TUTTI gli HTML che lo referenziano (es. `?v=3` → `?v=4`)
+- Questo permette di tenere cache molto lunga (1 anno) senza rischio di servire versioni vecchie
+- **MAI** linkare CSS/JS senza parametro `?v=` — la cache del provider/browser servira' la versione vecchia
+
+**2. .htaccess — Configurazione cache standard:**
+```apache
+# Immagini e font: 1 anno, immutable
+ExpiresByType image/webp "access plus 1 year"
+ExpiresByType image/jpeg "access plus 1 year"
+ExpiresByType image/png "access plus 1 year"
+ExpiresByType image/svg+xml "access plus 1 year"
+ExpiresByType font/woff2 "access plus 1 year"
+Header set Cache-Control "public, max-age=31536000, immutable"
+
+# CSS e JS: 1 anno con cache-busting via ?v=
+ExpiresByType text/css "access plus 1 year"
+ExpiresByType application/javascript "access plus 1 year"
+Header set Cache-Control "public, max-age=31536000, immutable"
+
+# HTML: mai cachare (sempre fresco)
+ExpiresByType text/html "access plus 0 seconds"
+Header set Cache-Control "no-cache, must-revalidate"
+
+# Compressione Gzip obbligatoria
+AddOutputFilterByType DEFLATE text/html text/css application/javascript text/javascript application/json image/svg+xml
+
+# ETag disabilitato (usa Cache-Control)
+Header unset ETag
+FileETag None
+```
+
+**3. Formato immagini:**
+- Usare SEMPRE WebP come formato primario (30-50% piu' leggero di PNG/JPEG)
+- Se servono fallback per browser vecchi, usare tag `<picture>` con `<source type="image/webp">` + `<img src="fallback.jpg">`
+- Se il sito non ha utenti su browser vecchi (IE11), puntare direttamente a `.webp` senza fallback
+- **NON tenere PNG/JPEG duplicati nel repo se nessun HTML li referenzia** — sono peso morto
+
+**4. Security Headers (standard per ogni sito):**
+```apache
+Header set X-Content-Type-Options "nosniff"
+Header set X-Frame-Options "SAMEORIGIN"
+Header set Referrer-Policy "strict-origin-when-cross-origin"
+Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+```
+
+**5. Redirect www → non-www (o viceversa):**
+- Scegliere UNA versione e fare redirect 301 permanente
+- Per Righetto: senza www (`righettoimmobiliare.it`)
+
+**6. Checklist performance per ogni nuovo sito:**
+- [ ] `.htaccess` con cache 1 anno per statici + cache-busting `?v=` su CSS/JS
+- [ ] Compressione Gzip attiva
+- [ ] Immagini in formato WebP
+- [ ] Font con `font-display: swap` + preload above-fold
+- [ ] CSS critical inline, rest deferred (`media="print" onload="this.media='all'"`)
+- [ ] JS con `defer` (mai `async` per script che dipendono l'uno dall'altro)
+- [ ] Nessun `loading="lazy"` above-the-fold
+- [ ] Security headers attivi
+- [ ] ETag disabilitato (Cache-Control basta)
+- [ ] Redirect www configurato
 
 ### 9.4 SEO Tecnico
 - [ ] **Contenuti unici vs portali** — le descrizioni immobili su Idealista/Immobiliare.it DEVONO essere diverse da quelle sul sito (rischio duplicate content e deindexing)
@@ -997,6 +1067,7 @@ Per ogni pagina, Google si aspetta di trovare anche le **entita' collegate** al 
 - [ ] Nessun `loading="lazy"` above-the-fold
 - [ ] CTA primario con contrast >= 4.5:1 (MAI var(--oro) con color:#fff)
 - [ ] Critical CSS inline, rest deferred
+- [ ] **Tutti i CSS/JS con `?v=N`** — mai linkare senza parametro cache-busting
 - [ ] Link interni verso pagine correlate
 - [ ] Registrato in sitemap.xml
 - [ ] Frasi dichiarative prime 2 righe (GEO)
@@ -1480,6 +1551,13 @@ document.querySelectorAll('.faq-btn').forEach(btn => {
 ---
 
 ## 16. CHANGELOG
+
+### v3.1 - 18 Marzo 2026 (Cache-busting + Strategia Performance per nuovi siti)
+- **Cache-busting `?v=3` su 88 file HTML** — tutti i riferimenti CSS e JS ora hanno parametro di versione
+- **Cache CSS/JS estesa a 1 anno** con flag `immutable` nel `.htaccess` (prima era 1 mese)
+- **Nuova sezione 9.3b "Strategia Cache e Performance"** — regole replicabili per ogni nuovo sito su hosting tradizionale: configurazione .htaccess standard, cache-busting obbligatorio, formato WebP, security headers, checklist completa
+- **Checklist aggiornata** (sezione 12) — aggiunto punto "Tutti i CSS/JS con `?v=N`" nella checklist "Per Ogni Nuova Pagina"
+- **Confermato:** i file `.png` in `img/foto-servizi/` sono ridondanti (nessun HTML li referenzia, solo `.webp` usati)
 
 ### v3.0 - 15 Marzo 2026 (SKILL 2.0 — Fusione completa 3 documenti)
 - **Fusione SKILL-UNIFICATA.md + AUTOMATION-SITE-2026.md + CLAUDE.md** in un unico documento master
