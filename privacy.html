@@ -24,10 +24,10 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/fonts.css">
-  <link rel="stylesheet" href="css/nav-mobile.css">
-  <link rel="stylesheet" href="css/scroll-reveal.css" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="css/welcome-popup.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="css/fonts.css?v=3">
+  <link rel="stylesheet" href="css/nav-mobile.css?v=3">
+  <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/welcome-popup.css?v=3" media="print" onload="this.media='all'">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--nero:#0a0a0a;--bianco:#f5f2ed;--oro:#c9a84c;--grigio:#6b6560;--gc:#e8e4de;--sfondo:#f0ece6}
@@ -199,14 +199,14 @@
   </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-<script src="js/nav-mobile.js" defer></script>
-<script src="js/config.js"></script>
+<script src="js/nav-mobile.js?v=3" defer></script>
+<script src="js/config.js?v=3"></script>
 <script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */
 (function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js';document.body.appendChild(s);}
 setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
 })();</script>
-<script src="js/cookie-consent.js" defer></script>
-<script src="js/scroll-reveal.js" defer></script>
-<script src="js/welcome-popup.js" defer></script>
+<script src="js/cookie-consent.js?v=3" defer></script>
+<script src="js/scroll-reveal.js?v=3" defer></script>
+<script src="js/welcome-popup.js?v=3" defer></script>
 </body>
 </html>
