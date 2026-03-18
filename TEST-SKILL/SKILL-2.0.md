@@ -39,7 +39,7 @@ Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se 
     - **Blog** → registrare in `sitemap.xml`, `blog.html`, `js/homepage.js`, `admin.html` (`_blogSeedArticles`)
     - **Pagine generiche** → registrare in `sitemap.xml` + navigazione
 12. **Data di pubblicazione obbligatoria** — ogni landing page nel seed `_landingSeedPages` in `admin.html` DEVE avere il campo `data_pubblicazione` in formato `YYYY-MM-DD`. Senza questo campo la colonna "Pubblicazione" nell'admin mostra "—"
-13. **Entity-Based SEO (NO keyword stuffing)** — Google ragiona per **entita' semantiche**, NON per keyword ripetute. Nessuna frase di 2+ parole deve apparire piu' di 5 volte per pagina. "a Padova" max 8-10 volte. Usare sinonimi, varianti e campo semantico ricco. Title, H1 e meta description devono usare varianti diverse. Dettagli completi nella sezione 8.3
+13. **Entity-Based SEO + Neural Matching (NO keyword stuffing)** — Google ragiona per **entita' semantiche** e **corrispondenza concettuale profonda** (Neural Matching/RankEmbed). Nessuna frase di 2+ parole deve apparire piu' di 5 volte per pagina. "a Padova" max 8-10 volte. Usare sinonimi, varianti e campo semantico ricco. Title, H1 e meta description devono usare varianti diverse. Ogni pagina deve coprire l'intero spazio concettuale del topic (copertura 80%+, co-occorrenze semantiche 70%+, intent chiaro entro 100 parole). Dettagli completi nella sezione 8.3
 
 ### 1.3 Stile di Comunicazione
 - Rispondi in italiano
@@ -664,11 +664,26 @@ js/scroll-reveal.js                 - Animazioni scroll
 - Transition words 30-35% per leggibilita' (Inoltre, Infatti, Di conseguenza, In particolare, Tuttavia)
 - NO contenuti generici senza localizzazione
 
-### 8.3 Entity-Based SEO — Regole Anti-Keyword-Stuffing (OBBLIGATORIO)
+### 8.3 Entity-Based SEO + Neural Matching — Ottimizzazione Semantica Completa (OBBLIGATORIO)
 
 > **Aggiornamento Marzo 2026:** Google ragiona per **entita' semantiche**, non piu' per keyword esatte ripetute.
 > Ripetere "agenzia immobiliare Padova" 20 volte in una pagina e' **keyword stuffing** e causa penalizzazione.
 > Google riconosce sinonimi, varianti e concetti correlati — il campo semantico conta piu' della singola keyword.
+>
+> **Neural Matching (RankEmbed):** Sistema AI di Google (attivo dal 2018, potenziato 2025-2026) che collega
+> query e pagine a livello **concettuale profondo**, non solo lessicale. Funziona come **re-ranker**: prima
+> Google recupera risultati con l'indice tradizionale, poi Neural Matching ri-ordina in base alla corrispondenza
+> semantica. Una pagina su "cedere la proprieta' nel Padovano" puo' posizionarsi per "vendere casa a Padova"
+> anche senza quelle keyword esatte — se il campo concettuale e' coperto.
+> **Zero impatto tecnico** — sono regole editoriali, nessun script/CSS/codice aggiunto.
+
+**Due livelli di ottimizzazione:**
+- **Livello 1 — Lessicale:** evitare keyword stuffing, usare sinonimi e varianti (regole anti-ripetizione)
+- **Livello 2 — Semantico profondo (Neural Matching):** coprire l'intero spazio concettuale del topic, allineare l'intento, garantire profondita' tematica
+
+---
+
+#### LIVELLO 1 — Regole Anti-Keyword-Stuffing
 
 **Principio fondamentale:** Ogni pagina deve coprire un **campo semantico ricco** attorno all'entita' principale,
 usando sinonimi, varianti, termini correlati e contesto. MAI ripetere la stessa frase esatta piu' di 3-4 volte per pagina.
@@ -710,19 +725,115 @@ Per ogni pagina, Google si aspetta di trovare anche le **entita' collegate** al 
 - **Quartiere Padova:** servizi, scuole, trasporti, aree verdi, qualita' della vita, prezzi medi, trend demografico
 - **Caparra:** codice civile art. 1385, clausola risolutiva, inadempimento, recesso, restituzione doppio
 
-**Come applicare in pratica:**
-1. Prima stesura: scrivi naturalmente
-2. Review: cerca ogni frase ripetuta 4+ volte e sostituisci almeno il 50% con sinonimi dalla mappa sopra
-3. H2: riformula come domande naturali, non come ripetizioni del title
-4. Primo paragrafo dopo H2: usa la keyword esatta (per GEO/AEO), poi alterna con varianti
-5. Meta description: usa una variante diversa dal title
-6. Aggiungi entita' correlate nel testo — arricchiscono il campo semantico senza forzare la keyword
+---
+
+#### LIVELLO 2 — Neural Matching (Ottimizzazione Semantica Profonda)
+
+> **Come funziona:** Google traduce query e pagine in **vettori nello stesso spazio multidimensionale**.
+> Piu' il vettore della tua pagina e' vicino al vettore della query, piu' sei rilevante.
+> Per avvicinare i vettori servono: copertura concettuale completa, intent match e profondita' tematica.
+> **Impatto stimato:** guadagno di 5-15 posizioni su query non-brand (es. "agenzia immobiliare padova" da pos. 28 a pos. 13-18).
+
+**1. Copertura Concettuale Completa (Topic Coverage)**
+
+Ogni pagina deve rispondere non solo alla keyword principale, ma a TUTTE le domande
+che un utente potrebbe avere su quel topic:
+
+| Topic pagina | Concetti che DEVONO essere presenti |
+|---|---|
+| Vendita casa Padova | processo di vendita, tempistiche medie, documenti necessari, costi (notaio, agenzia, tasse), valutazione preliminare, come scegliere l'agenzia, errori da evitare, mercato attuale |
+| Mutuo prima casa | requisiti reddituali, differenza tasso fisso/variabile, LTV, spread, Euribor/IRS, detrazioni fiscali, tempi approvazione, documenti banca, perizia, ipoteca |
+| Quartiere (es. Arcella) | confini geografici, storia, servizi (scuole, trasporti, commercio), prezzi medi attuali, trend, pro/contro, tipologia abitanti, progetti urbanistici, confronto con quartieri simili |
+| Affitto studenti Padova | canone medio per zona, cedolare secca, contratto transitorio vs 4+4, deposito cauzionale, diritti/doveri, universita' vicine, trasporti |
+
+**Regola:** se un competitor copre 8 sottotopic su 10 e tu ne copri 5, Neural Matching favorira' il competitor
+anche se le tue 5 sezioni sono scritte meglio.
+
+**2. Intent Mapping — Una Pagina per Ogni Intento**
+
+Neural Matching valuta l'allineamento tra l'**intento** della query e il **purpose** della pagina.
+Non mischiare intenti diversi nella stessa pagina:
+
+| Intento | Tipo pagina corretta | Errore da evitare |
+|---|---|---|
+| Informazionale ("come vendere casa") | Articolo blog/guida | Pagina servizio con CTA aggressive |
+| Navigazionale ("righetto immobiliare") | Homepage/chi siamo | Redirect a landing promozionale |
+| Transazionale ("valutazione casa gratis padova") | Landing page dedicata | Articolo blog generico |
+| Commerciale ("migliore agenzia immobiliare padova") | Pagina pillar + recensioni | Lista servizi senza social proof |
+
+**Regola:** title, H1 e primo paragrafo DEVONO dichiarare chiaramente l'intento della pagina
+entro le prime 100 parole. Neural Matching decide la rilevanza nei primi secondi di analisi.
+
+**3. Co-occorrenze Semantiche (Semantic Co-occurrence)**
+
+Google si aspetta che certi concetti appaiano INSIEME. Se mancano, la pagina risulta incompleta:
+
+| Topic | Coppie obbligatorie |
+|---|---|
+| Vendita | vendita + rogito + notaio + APE + conformita' urbanistica |
+| Mutuo | mutuo + tasso + banca + perizia + ipoteca + LTV |
+| Affitto | affitto + contratto + deposito + registrazione + cedolare secca |
+| Valutazione | valutazione + comparativa + OMI + mq + classe energetica |
+| Ristrutturazione | ristrutturazione + bonus + CILA + classe energetica + capitolato |
+| Acquisto | acquisto + proposta + caparra + compromesso + rogito |
+
+**Regola:** ogni articolo/pagina deve contenere almeno il **70% delle co-occorrenze** previste per il suo topic.
+
+**4. Profondita' vs Superficialita' (Depth Signal)**
+
+Neural Matching premia pagine che vanno in profondita' su UN topic
+rispetto a pagine che toccano molti topic superficialmente.
+
+**Segnali di profondita':**
+- Dati numerici specifici e aggiornati (NON generici)
+- Tabelle comparative con fonti (OMI, FIMAA, ISTAT)
+- FAQ che rispondono a domande SPECIFICHE (non generiche)
+- Esempi concreti localizzati (es. "un trilocale in zona Arcella a 185.000 euro" > "una casa a Padova")
+- Citazioni di normative specifiche (art. 1385 c.c., D.Lgs. 28/2010)
+
+**Regola:** meglio 1 articolo da 3.000 parole che copre tutto il topic
+che 3 articoli da 1.000 parole che si sovrappongono (cannibalizzazione).
+
+**5. Freshness Signal per Neural Matching**
+
+Le pagine con contenuti aggiornati ricevono un boost nel re-ranking:
+- **Timestamp visibile** "Ultimo aggiornamento: [data]" su ogni pagina cornerstone
+- **Aggiornare dati** OMI/prezzi almeno ogni trimestre
+- **Aggiungere sezioni** quando cambiano normative o mercato
+- **dateModified** nello schema JSON-LD DEVE corrispondere all'ultimo aggiornamento reale
+
+---
+
+#### COME APPLICARE IN PRATICA (Livello 1 + Livello 2)
+
+1. Prima stesura: scrivi naturalmente coprendo TUTTI i sottotopic previsti (vedi tabella Topic Coverage)
+2. Verifica intent: il title e primo paragrafo dichiarano chiaramente l'intento? (informazionale/transazionale/commerciale)
+3. Review keyword: cerca ogni frase ripetuta 4+ volte e sostituisci almeno il 50% con sinonimi dalla mappa sopra
+4. Review co-occorrenze: verifica che almeno il 70% delle coppie semantiche obbligatorie sia presente
+5. H2: riformula come domande naturali, non come ripetizioni del title
+6. Primo paragrafo dopo H2: usa la keyword esatta (per GEO/AEO), poi alterna con varianti
+7. Meta description: usa una variante diversa dal title
+8. Aggiungi entita' correlate nel testo — arricchiscono il campo semantico senza forzare la keyword
+9. Verifica profondita': ci sono dati numerici specifici, tabelle, esempi localizzati, riferimenti normativi?
+10. Timestamp: aggiorna "Ultimo aggiornamento" e dateModified nello schema
 
 **Esempio pratico — PRIMA (keyword stuffing):**
 > "Il **mutuo prima casa a Padova** e' la soluzione per chi vuole comprare. Il **mutuo prima casa a Padova** offre tassi agevolati. Con il **mutuo prima casa a Padova** puoi risparmiare."
 
-**Esempio pratico — DOPO (entity-based SEO):**
-> "Il **mutuo prima casa a Padova** e' la soluzione piu' richiesta nel 2026. Il **finanziamento ipotecario** per l'acquisto della prima abitazione prevede tassi agevolati (Euribor + spread). Con un **prestito immobiliare** nel capoluogo euganeo, le famiglie possono accedere a **detrazioni IRPEF** sugli interessi passivi fino a 4.000 euro/anno."
+**Esempio pratico — DOPO (entity-based SEO + Neural Matching):**
+> "Il **mutuo prima casa a Padova** e' la soluzione piu' richiesta nel 2026. Il **finanziamento ipotecario** per l'acquisto della prima abitazione prevede tassi agevolati (Euribor + spread). Con un **prestito immobiliare** nel capoluogo euganeo, le famiglie possono accedere a **detrazioni IRPEF** sugli interessi passivi fino a 4.000 euro/anno. La **perizia bancaria** richiede in media 10-15 giorni, con un LTV massimo dell'80% del valore stimato dall'istituto di credito."
+
+#### CHECKLIST NEURAL MATCHING — Prima di Pubblicare
+
+- [ ] La pagina copre almeno l'80% dei sottotopic previsti per la keyword principale?
+- [ ] L'intento (informazionale/transazionale/commerciale) e' chiaro entro le prime 100 parole?
+- [ ] Sono presenti almeno il 70% delle co-occorrenze semantiche obbligatorie per il topic?
+- [ ] Ci sono dati numerici specifici e localizzati (non generici)?
+- [ ] Le FAQ rispondono a domande reali e specifiche (non filler)?
+- [ ] Il timestamp e' aggiornato e coerente con dateModified nello schema?
+- [ ] La pagina va in profondita' su UN topic (no multi-topic superficiale)?
+- [ ] Nessuna frase di 2+ parole ripetuta piu' di 5 volte?
+- [ ] Title, H1 e meta description usano varianti diverse?
 
 **Registrazione quadrupla (gia' in sezione 1.2, ribadita):**
 1. `admin.html` → `_blogSeedArticles` (**OBBLIGATORIO:** campo `data_pubblicazione: 'YYYY-MM-DD'`)
@@ -1566,7 +1677,7 @@ document.querySelectorAll('.faq-btn').forEach(btn => {
 - **Sezione 14 — Componenti e Template HTML:** card grid, CTA buttons (accent/outline/dark), form contatti, FAQ accordion con toggle JS
 - **Sezione 15 — 4 Loop di Validazione (93+ check):** Loop 1 Struttura (25), Loop 2 SEO & Schema (25), Loop 3 Coerenza Globale (18), Loop 4 Performance & Mobile (25)
 - **Sezione 12.7 — Audit Automation:** pulsante "Lancia Analisi Skill" nell'admin con storico analisi in JSON
-- **Entity-Based SEO** confermato in sezione 8.3 con mappa sinonimi completa e regole anti-keyword-stuffing
+- **Entity-Based SEO + Neural Matching** confermato in sezione 8.3 con mappa sinonimi completa, regole anti-keyword-stuffing, copertura concettuale, intent mapping, co-occorrenze semantiche e checklist pre-pubblicazione
 - **Checklist aggiornata** con verifiche audit automation
 
 ### v2.4 - 12 Marzo 2026 (Scraping 3-step: Topic → Foto → Preview con contenuto ricco)
