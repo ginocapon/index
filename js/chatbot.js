@@ -1738,8 +1738,9 @@ if (document.readyState === 'loading') {
   initChatbotUI();
 }
 
-// ── Auto-open anteprima chat dopo caricamento su homepage (ogni visita) ──
+// ── Auto-open anteprima chat dopo caricamento su homepage (solo desktop) ──
 function autoOpenChatbot() {
+  if (window.innerWidth <= 768) return; // Mobile: non aprire automaticamente
   if (!window.rigChat || !document.getElementById('rig-chat-box')) {
     if (!autoOpenChatbot._retries) autoOpenChatbot._retries = 0;
     if (autoOpenChatbot._retries < 20) {
