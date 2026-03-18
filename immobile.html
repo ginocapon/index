@@ -21,10 +21,10 @@
   <link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
-    <link rel="stylesheet" href="css/fonts.css">
-  <link rel="stylesheet" href="css/nav-mobile.css">
-  <link rel="stylesheet" href="css/scroll-reveal.css" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="css/welcome-popup.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="css/fonts.css?v=3">
+  <link rel="stylesheet" href="css/nav-mobile.css?v=3">
+  <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/welcome-popup.css?v=3" media="print" onload="this.media='all'">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
@@ -1206,7 +1206,7 @@ window.addEventListener('scroll', () => {
     if (el && el.getBoundingClientRect().top < 140) cur = i;
   });
   document.querySelectorAll('.sn-btn').forEach((b, i) => b.classList.toggle('active', i === cur));
-});
+},{passive:true});
 
 // ══ FORM ══
 function scrollToForm() {
@@ -1859,9 +1859,9 @@ init().catch(function(err) {
 });
 </script>
 <!-- Chatbot globale disabilitato su questa pagina: usa il chatbot dedicato all'immobile -->
-<script src="js/nav-mobile.js" defer></script>
-<script src="js/cookie-consent.js" defer></script>
-<script src="js/scroll-reveal.js" defer></script>
-<script src="js/welcome-popup.js" defer></script>
+<script src="js/nav-mobile.js?v=3" defer></script>
+<script src="js/cookie-consent.js?v=3" defer></script>
+<script src="js/scroll-reveal.js?v=3" defer></script>
+<script src="js/welcome-popup.js?v=3" defer></script>
 </body>
 </html>
