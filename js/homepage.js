@@ -306,13 +306,16 @@ function doRicerca() {
   window.location.href = 'immobili?' + p.toString();
 }
 
-/* Attendi Supabase (caricato lazy dopo il render) — ritardo 2s per non competere con risorse critiche */
+/* Attendi Supabase (caricato lazy dopo il render) */
 function waitSBThen(fn,tries){
   initSB();
   if(sb||tries>20) return fn();
   setTimeout(function(){waitSBThen(fn,(tries||0)+1);},250);
 }
-setTimeout(function(){ waitSBThen(loadImmobili,0); }, 2000);
+/* Mobile: skip caricamento immobili (CTA diretto a /immobili) — Desktop: ritardo 2s */
+if(window.innerWidth > 768){
+  setTimeout(function(){ waitSBThen(loadImmobili,0); }, 2000);
+}
 
 // ══ BLOG DINAMICO HOMEPAGE ══
 function generateSlug(titolo) {
