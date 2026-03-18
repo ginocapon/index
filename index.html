@@ -43,6 +43,7 @@
 @font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/montserrat-700.woff2') format('woff2')}
 @font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:swap;src:url('fonts/montserrat-800.woff2') format('woff2')}
 @font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/cormorant-garamond-700.woff2') format('woff2')}
+.skip-link{position:absolute;top:-40px;left:0;background:var(--blu);color:#fff;padding:8px 16px;z-index:10000;font-size:0.9rem;transition:top 0.2s}.skip-link:focus{top:0}
 :root {
   --blu:      #2C4A6E;
   --blu2:     #3A5F8C;
@@ -1128,7 +1129,7 @@ button svg, a.btn-p svg, a.btn-g svg {
         <div style="color:#FFD23F;font-size:0.9rem;margin-bottom:10px;letter-spacing:2px">★★★★★</div>
         <p style="font-size:0.84rem;color:rgba(255,255,255,0.8);line-height:1.8;font-style:italic;margin-bottom:16px">"Venduto in 38 giorni al prezzo che volevamo. Professionali, disponibili e trasparenti. Consigliatissimi!"</p>
         <div style="display:flex;align-items:center;gap:10px">
-          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" alt="Marco B." width="36" height="36" style="border-radius:50%;border:2px solid var(--oro);object-fit:cover">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" alt="Marco B." width="36" height="36" loading="lazy" style="border-radius:50%;border:2px solid var(--oro);object-fit:cover">
           <div><div style="font-size:0.75rem;font-weight:700;color:white">Marco e Silvia B.</div><div style="font-size:0.65rem;color:rgba(255,255,255,0.4)">Appartamento — Padova Centro</div></div>
         </div>
       </div>
@@ -1136,7 +1137,7 @@ button svg, a.btn-p svg, a.btn-g svg {
         <div style="color:#FFD23F;font-size:0.9rem;margin-bottom:10px;letter-spacing:2px">★★★★★</div>
         <p style="font-size:0.84rem;color:rgba(255,255,255,0.8);line-height:1.8;font-style:italic;margin-bottom:16px">"Avevo provato da solo per 6 mesi. Con Righetto, venduto in 3 settimane a un prezzo superiore. Linda e il chatbot sono una marcia in piu."</p>
         <div style="display:flex;align-items:center;gap:10px">
-          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face" alt="Andrea T." width="36" height="36" style="border-radius:50%;border:2px solid var(--oro);object-fit:cover">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face" alt="Andrea T." width="36" height="36" loading="lazy" style="border-radius:50%;border:2px solid var(--oro);object-fit:cover">
           <div><div style="font-size:0.75rem;font-weight:700;color:white">Andrea T.</div><div style="font-size:0.65rem;color:rgba(255,255,255,0.4)">Villa bifamiliare — Selvazzano</div></div>
         </div>
       </div>
@@ -1144,7 +1145,7 @@ button svg, a.btn-p svg, a.btn-g svg {
         <div style="color:#FFD23F;font-size:0.9rem;margin-bottom:10px;letter-spacing:2px">★★★★★</div>
         <p style="font-size:0.84rem;color:rgba(255,255,255,0.8);line-height:1.8;font-style:italic;margin-bottom:16px">"Documenti, notaio, tutto gestito. Non pensavamo che mettere in vendita potesse essere cosi semplice. Gino e il team fanno la differenza."</p>
         <div style="display:flex;align-items:center;gap:10px">
-          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face" alt="Famiglia Zanetti" width="36" height="36" style="border-radius:50%;border:2px solid var(--oro);object-fit:cover">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face" alt="Famiglia Zanetti" width="36" height="36" loading="lazy" style="border-radius:50%;border:2px solid var(--oro);object-fit:cover">
           <div><div style="font-size:0.75rem;font-weight:700;color:white">Famiglia Zanetti</div><div style="font-size:0.65rem;color:rgba(255,255,255,0.4)">Casa indipendente — Limena</div></div>
         </div>
       </div>
@@ -1187,7 +1188,7 @@ button svg, a.btn-p svg, a.btn-g svg {
       </div>
     </div>
     <div class="rv sr" style="text-align:center;margin-top:36px">
-      <a href="https://maps.app.goo.gl/xuCiRGDCSKskpTSf6?g_st=ic" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;font-size:0.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--oro);border-bottom:1px solid rgba(255,107,53,0.3);padding-bottom:4px;transition:all 0.2s">Leggi tutte le 127 recensioni su Google <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
+      <a href="https://maps.app.goo.gl/xuCiRGDCSKskpTSf6?g_st=ic" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;font-size:0.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--oro);border-bottom:1px solid rgba(255,107,53,0.3);padding-bottom:4px;transition:all 0.2s">Leggi tutte le 127 recensioni su Google <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
     </div>
   </div>
 </section>
@@ -1457,7 +1458,7 @@ button svg, a.btn-p svg, a.btn-g svg {
     <div class="f-col"><h5>Servizi</h5><ul><li><a href="servizi#vendita">Vendita</a></li><li><a href="servizi#affitto">Affitto</a></li><li><a href="servizi#valutazione">Valutazione</a></li><li><a href="servizi#virtual-tour">Virtual Tour 360°</a></li><li><a href="servizi#aste">Aste Giudiziarie</a></li><li><a href="landing-mutuo">Consulenza Mutuo</a></li></ul></div>
     <div class="f-col"><h5>Contatti</h5><ul><li><a href="tel:+390498843484">📞 049.88.43.484</a></li><li><a href="mailto:info@righettoimmobiliare.it">📧 info@righettoimmobiliare.it</a></li><li><a href="contatti">📍 Via Roma n.96, Limena (PD)</a></li><li><a href="contatti">🕐 Lun–Ven: 9–19</a></li><li><a href="contatti">🕐 Sab: 9:00–12:30</a></li></ul></div>
   </div>
-  <div style="border-top:1px solid rgba(255,255,255,.06);padding-top:.8rem;margin-bottom:.8rem;display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.72rem;color:rgba(255,255,255,.4)"><span>Partner:</span><a href="https://www.serviziimmobiliaripadova.it" target="_blank" rel="noopener" style="color:rgba(255,255,255,.5);transition:color .2s">Servizi Immobiliari Padova</a><a href="https://www.raasautomazioni.it" target="_blank" rel="noopener" style="color:rgba(255,255,255,.5);transition:color .2s">RAAS Automazioni</a></div>
+  <div style="border-top:1px solid rgba(255,255,255,.06);padding-top:.8rem;margin-bottom:.8rem;display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.72rem;color:rgba(255,255,255,.4)"><span>Partner:</span><a href="https://www.serviziimmobiliaripadova.it" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,.5);transition:color .2s">Servizi Immobiliari Padova</a><a href="https://www.raasautomazioni.it" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,.5);transition:color .2s">RAAS Automazioni</a></div>
   <div class="footer-bottom">
     <span>© 2026 Gruppo Immobiliare Righetto di Capon Gino — P.IVA 05182390285 — Limena (PD)</span>
     <div style="display:flex;gap:20px"><a href="privacy">Privacy Policy</a><a href="cookie-policy">Cookie Policy</a><a href="#" data-cookie-prefs>Preferenze Cookie</a></div>
@@ -1499,7 +1500,7 @@ function loadVideo(wrap) {
 <div class="sticky-cta-mobile" id="stickyCta">
   <div class="sticky-cta-inner">
     <a href="vendere-casa-padova-errori" class="scta-primary">Valutazione Gratis</a>
-    <a href="https://wa.me/393497365930" class="scta-wa" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="https://wa.me/393497365930" class="scta-wa" target="_blank" rel="noopener noreferrer">WhatsApp</a>
     <a href="tel:+390498843484" class="scta-tel">Chiama</a>
   </div>
 </div>

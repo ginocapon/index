@@ -57,6 +57,7 @@
 ]
 </script>
 <style>
+.skip-link{position:absolute;top:-40px;left:0;background:#2C4A6E;color:#fff;padding:8px 16px;z-index:10000;font-size:0.9rem;transition:top 0.2s}.skip-link:focus{top:0}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--blu:#2C4A6E;--blu2:#3A5F8C;--blu3:#4E789A;--azzurro:#8AB4CE;--oro:#FF6B35;--oro2:#FF8F5E;--sfondo:#ECE7DF;--sfondo2:#E1DBD1;--bianco:#F7F5F1;--carta:#F2EDE7;--testo:#152435;--testo2:#2C4A6E;--grigio:#6B7A8D;--grigio2:#9AACBD;--rosso:#C0392B;--verde:#1E8449;--fire:#FF6B35;--nav-h:74px}
 html{scroll-behavior:smooth}
@@ -164,6 +165,7 @@ footer a{color:var(--oro)}
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 <nav id="navbar">
   <a href="/" class="nav-logo"><span class="nav-logo-name">Righetto Immobiliare</span><span class="nav-logo-tag">Dal 2000 a Padova</span></a>
   <ul class="nav-links">
@@ -457,7 +459,7 @@ async function inviaEmailGate(e){
 <div class="sticky-cta-mobile" id="stickyCta">
   <div class="sticky-cta-inner">
     <a href="#stima" class="scta-primary">Calcola Valore</a>
-    <a href="https://wa.me/393497365930" class="scta-wa" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="https://wa.me/393497365930" class="scta-wa" target="_blank" rel="noopener noreferrer">WhatsApp</a>
     <a href="tel:+390498843484" class="scta-tel">Chiama</a>
   </div>
 </div>
