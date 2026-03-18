@@ -35,6 +35,7 @@
 <link rel="stylesheet" href="css/fonts.css">
 
 <style>
+.skip-link{position:absolute;top:-40px;left:0;background:#2C4A6E;color:#fff;padding:8px 16px;z-index:10000;font-size:0.9rem;transition:top 0.2s}.skip-link:focus{top:0}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --green:#1B6B3A;--green2:#2A9D5C;--green-deep:#0d4a25;
@@ -200,6 +201,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--deep);color:var(--dark
 </script>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
 <div class="topbar">Calcola la rata del mutuo in chat con Linda — <strong>100% gratuito</strong></div>
 
@@ -212,7 +214,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--deep);color:var(--dark
   <div class="chat-header-status"></div>
 </div>
 
-<main>
+<main id="main-content">
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap">Calcola la Rata del Mutuo a Padova — Simulatore Conversazionale Gratuito</h1>
   <div id="chatFlow"></div>
 </main>
@@ -390,7 +392,7 @@ document.addEventListener('DOMContentLoaded', function() {
             '<h3>Ti e piaciuto? Lasciaci una recensione!</h3>' +
             '<p>Inquadra il QR code col telefono per aprire direttamente Google e lasciare la tua recensione.</p>' +
             '<img src="' + qrCodeUrl(GOOGLE_REVIEW_URL) + '" alt="QR Code recensione Google Righetto Immobiliare" class="cf-review-qr" width="180" height="180">' +
-            '<br><a href="' + GOOGLE_REVIEW_URL + '" target="_blank" rel="noopener" class="cf-review-link">⭐ Recensione su Google</a>' +
+            '<br><a href="' + GOOGLE_REVIEW_URL + '" target="_blank" rel="noopener noreferrer" class="cf-review-link">⭐ Recensione su Google</a>' +
             '<p class="cf-review-hint">Oppure clicca il pulsante se sei gia dal telefono</p>' +
           '</div>';
           return cf.addBubble(reviewHtml, 'bot', 600);
@@ -408,7 +410,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var html = '<div class="cf-success">' +
               '<h3>Contattaci per una consulenza gratuita</h3>' +
               '<p>Telefono: <a href="tel:+390498843484">049.88.43.484</a><br>' +
-              'WhatsApp: <a href="https://wa.me/393497365930" target="_blank" rel="noopener">349.736.5930</a><br>' +
+              'WhatsApp: <a href="https://wa.me/393497365930" target="_blank" rel="noopener noreferrer">349.736.5930</a><br>' +
               'Email: <a href="mailto:info@righettoimmobiliare.it">info@righettoimmobiliare.it</a></p>' +
               '<p style="margin-top:.8rem"><a href="/landing-valutazione" style="color:var(--gold2);font-weight:700">\uD83D\uDCCA Richiedi valutazione gratuita immobile</a></p>' +
             '</div>';
@@ -429,7 +431,7 @@ document.addEventListener('DOMContentLoaded', function() {
           var html = '<div class="cf-success">' +
             '<h3>Righetto Immobiliare</h3>' +
             '<p>Telefono: <a href="tel:+390498843484">049.88.43.484</a><br>' +
-            'WhatsApp: <a href="https://wa.me/393497365930" target="_blank" rel="noopener">349.736.5930</a><br><br>' +
+            'WhatsApp: <a href="https://wa.me/393497365930" target="_blank" rel="noopener noreferrer">349.736.5930</a><br><br>' +
             '<a href="/landing-valutazione" style="color:var(--gold2);font-weight:700">\uD83D\uDCCA Valutazione gratuita immobile</a><br>' +
             '<a href="/landing-calcolo-mutuo" style="color:var(--green2);font-weight:700">\uD83C\uDFE6 Calcolatore dettagliato mutuo</a></p>' +
           '</div>';
