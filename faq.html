@@ -189,7 +189,7 @@
       <h3>Non trovi la risposta?</h3>
       <p>Contattaci direttamente. La consulenza iniziale è sempre gratuita.</p>
       <a href="contatti">Contattaci ora</a>
-      <a href="https://wa.me/393497365930" target="_blank" class="wa">WhatsApp</a>
+      <a href="https://wa.me/393497365930" target="_blank" rel="noopener noreferrer" class="wa">WhatsApp</a>
     </div>
   </div>
 </div>
@@ -320,7 +320,7 @@ function searchFaq(){const q=document.getElementById('faq-search-input').value.t
     return md
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
       .replace(/\n/g, '<br>');
   }
 

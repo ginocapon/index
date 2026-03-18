@@ -35,6 +35,7 @@
 <link rel="stylesheet" href="css/fonts.css">
 
 <style>
+.skip-link{position:absolute;top:-40px;left:0;background:#2C4A6E;color:#fff;padding:8px 16px;z-index:10000;font-size:0.9rem;transition:top 0.2s}.skip-link:focus{top:0}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --purple:#6C63FF;--purple2:#8B83FF;--purple-deep:#2D1B69;
@@ -175,6 +176,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--deep);color:var(--dark
 </script>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
 <div class="topbar">Scopri quanto vale davvero la tua casa a Padova — <strong>Gratuito e senza impegno</strong></div>
 
@@ -187,7 +189,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--deep);color:var(--dark
   <div class="chat-header-status"></div>
 </div>
 
-<main>
+<main id="main-content">
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap">Quanto Vale la Tua Casa a Padova — Valutazione Gratuita</h1>
   <div id="chatFlow"></div>
 </main>
@@ -312,7 +314,7 @@ document.addEventListener('DOMContentLoaded', function() {
           var html = '<div class="cf-success">' +
             '<h3>Richiesta inviata!</h3>' +
             '<p>Nel frattempo puoi chiamarci:<br><a href="tel:+390498843484">049.88.43.484</a><br>' +
-            'o scriverci su <a href="https://wa.me/393497365930" target="_blank">WhatsApp</a></p>' +
+            'o scriverci su <a href="https://wa.me/393497365930" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>' +
             '</div>';
           return cf.addBubble(html, 'bot', 800);
         })

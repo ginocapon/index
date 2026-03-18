@@ -35,6 +35,7 @@
 <link rel="stylesheet" href="css/fonts.css">
 
 <style>
+.skip-link{position:absolute;top:-40px;left:0;background:#2C4A6E;color:#fff;padding:8px 16px;z-index:10000;font-size:0.9rem;transition:top 0.2s}.skip-link:focus{top:0}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --purple:#6C63FF;--purple2:#8B83FF;--purple-deep:#2D1B69;
@@ -162,6 +163,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--deep);color:var(--dark
 </script>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
 <div class="topbar">Il tuo immobile e in vendita da mesi? — <strong>Scopri cosa cambiare</strong></div>
 
@@ -174,7 +176,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--deep);color:var(--dark
   <div class="chat-header-status"></div>
 </div>
 
-<main>
+<main id="main-content">
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap">Rilancia la Vendita del Tuo Immobile a Padova</h1>
   <div id="chatFlow"></div>
 </main>
@@ -357,7 +359,7 @@ document.addEventListener('DOMContentLoaded', function() {
             '<h3>Richiesta inviata!</h3>' +
             '<p>Il tuo immobile merita di piu.<br>Ci pensiamo noi.<br><br>' +
             '<a href="tel:+390498843484">049.88.43.484</a><br>' +
-            '<a href="https://wa.me/393497365930" target="_blank">WhatsApp</a></p>' +
+            '<a href="https://wa.me/393497365930" target="_blank" rel="noopener noreferrer">WhatsApp</a></p>' +
             '</div>';
           return cf.addBubble(html, 'bot', 800);
         })

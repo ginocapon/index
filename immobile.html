@@ -554,7 +554,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             info@righettoimmobiliare.it
           </a>
-          <a id="waLink" href="#" class="agent-contact" target="_blank" style="background:#25d366;border-color:#25d366;color:#fff;">
+          <a id="waLink" href="#" class="agent-contact" target="_blank" rel="noopener noreferrer" style="background:#25d366;border-color:#25d366;color:#fff;">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
             Scrivi su WhatsApp
           </a>
@@ -949,7 +949,7 @@ function render(d) {
       if (isImg) {
         planHtml += `<div class="plan-item" onclick="openLightboxCustom('${url}')"><img src="${url}" alt="${nome}" loading="lazy"></div>`;
       } else {
-        planHtml += `<div class="plan-item"><a href="${url}" target="_blank" class="plan-pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg><span>${nome}</span></a></div>`;
+        planHtml += `<div class="plan-item"><a href="${url}" target="_blank" rel="noopener noreferrer" class="plan-pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg><span>${nome}</span></a></div>`;
       }
     });
     planHtml += '</div>';
