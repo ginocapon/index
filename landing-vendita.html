@@ -33,7 +33,7 @@
 <link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80" as="image" fetchpriority="high">
-<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/fonts.css?v=3">
 
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -603,7 +603,7 @@ function loadVideoVendita(w){
 
 <!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-<script src="js/config.js" defer></script>
+<script src="js/config.js?v=3" defer></script>
 <script>
 async function sendLead(e){
   e.preventDefault();
@@ -656,7 +656,7 @@ setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach
 <script>
 (function(){var b=document.getElementById('stickyCta');if(!b)return;var s=false;window.addEventListener('scroll',function(){if(window.scrollY>400&&!s){s=true;b.classList.add('visible')}else if(window.scrollY<=200&&s){s=false;b.classList.remove('visible')}},{passive:true})})();
 </script>
-<script src="js/lead-conversion.js" defer></script>
-<script src="js/cookie-consent.js" defer></script>
+<script src="js/lead-conversion.js?v=3" defer></script>
+<script src="js/cookie-consent.js?v=3" defer></script>
 </body>
 </html>
