@@ -69,21 +69,12 @@ function resolveImageUrl(url, opts) {
   if (!url || typeof url !== 'string') return '';
   url = url.trim();
   if (!url) return '';
-  // URL Supabase completo → converti in render/image per ridimensionamento+webp
-  if (url.includes('supabase.co/storage/v1/object/public/') && opts && opts.width) {
-    var q = opts.quality || 75;
-    return url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/') + '?width=' + opts.width + '&quality=' + q + '&resize=contain&format=webp';
-  }
-  // Già URL completo (non Supabase o senza opts)
+  // URL completo (Supabase, http, data) → usa direttamente senza render/image
   if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) return url;
   // Percorso locale (img/, css/, fonts/) → lascia così com'è
   if (url.startsWith('img/') || url.startsWith('./') || url.startsWith('css/') || url.startsWith('fonts/')) return url;
-  // Percorso relativo Supabase Storage → costruisci URL con transform
+  // Percorso relativo Supabase Storage → costruisci URL object/public
   var path = url.replace(/^\/+/, '');
-  if (opts && opts.width) {
-    var q2 = opts.quality || 75;
-    return SB_URL + '/storage/v1/render/image/public/' + path + '?width=' + opts.width + '&quality=' + q2 + '&resize=contain&format=webp';
-  }
   return SB_URL + '/storage/v1/object/public/' + path;
 }
 
@@ -315,13 +306,13 @@ function doRicerca() {
   window.location.href = 'immobili?' + p.toString();
 }
 
-/* Attendi Supabase (caricato lazy dopo il render) */
+/* Attendi Supabase (caricato lazy dopo il render) — ritardo 2s per non competere con risorse critiche */
 function waitSBThen(fn,tries){
   initSB();
   if(sb||tries>20) return fn();
   setTimeout(function(){waitSBThen(fn,(tries||0)+1);},250);
 }
-waitSBThen(loadImmobili,0);
+setTimeout(function(){ waitSBThen(loadImmobili,0); }, 2000);
 
 // ══ BLOG DINAMICO HOMEPAGE ══
 function generateSlug(titolo) {
