@@ -19,7 +19,7 @@ initSB();
 
 /* ══ NAVBAR SCROLL ══ */
 const nav = document.getElementById('navbar');
-window.addEventListener('scroll',()=>{ nav.classList.toggle('scrolled', window.scrollY>60); });
+window.addEventListener('scroll',()=>{ nav.classList.toggle('scrolled', window.scrollY>60); },{passive:true});
 
 /* ══ HERO BG: animazione parte subito (no delay per LCP) ══ */
 

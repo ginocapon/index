@@ -1206,7 +1206,7 @@ window.addEventListener('scroll', () => {
     if (el && el.getBoundingClientRect().top < 140) cur = i;
   });
   document.querySelectorAll('.sn-btn').forEach((b, i) => b.classList.toggle('active', i === cur));
-});
+},{passive:true});
 
 // ══ FORM ══
 function scrollToForm() {
