@@ -71,7 +71,7 @@ jobs:
               repo: context.repo.repo,
               title: title,
               body: process.env.REPORT_BODY,
-              labels: ['audit', 'automatico']
+              labels: ['audit']
             });
           env:
             REPORT_BODY: ${{ steps.report.outputs.body }}
