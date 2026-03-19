@@ -1,0 +1,110 @@
+# ============================================================
+# AUDIT SETTIMANALE SKILL-2.0 — Righetto Immobiliare
+# Ogni venerdi' alle 07:00 CET controlla tutte le regole
+# e apre una Issue GitHub con il report completo.
+# ============================================================
+
+name: "Audit Settimanale SKILL-2.0"
+
+on:
+  schedule:
+    # Ogni venerdi' alle 06:00 UTC = 07:00 CET (ora italiana invernale)
+    # In ora legale (CEST) sara' alle 08:00 — accettabile
+    - cron: '0 6 * * 5'
+
+  # Permette esecuzione manuale dal tab Actions
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  audit:
+    name: "Audit SKILL-2.0"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Esegui audit
+        id: audit
+        run: |
+          cd $GITHUB_WORKSPACE
+          bash scripts/audit-skill.sh audit-report.md
+
+      - name: Leggi report
+        id: report
+        run: |
+          # Salva il report come output (gestisce multiline)
+          {
+            echo 'body<<ENDOFREPORT'
+            cat audit-report.md
+            echo 'ENDOFREPORT'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Crea Issue con report
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('it-IT', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            });
+
+            const errors = '${{ steps.audit.outputs.errors }}';
+            const warnings = '${{ steps.audit.outputs.warnings }}';
+            const health = '${{ steps.audit.outputs.health }}';
+
+            let emoji = '🟢';
+            if (parseInt(errors) > 0) emoji = '🔴';
+            else if (parseInt(warnings) > 5) emoji = '🟡';
+
+            const title = `${emoji} Audit SKILL-2.0 — ${dateStr} (${health}% salute)`;
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: process.env.REPORT_BODY,
+              labels: ['audit', 'automatico']
+            });
+          env:
+            REPORT_BODY: ${{ steps.report.outputs.body }}
+
+      - name: Invia notifica email (via API relay)
+        if: always()
+        run: |
+          HEALTH="${{ steps.audit.outputs.health }}"
+          ERRORS="${{ steps.audit.outputs.errors }}"
+          WARNINGS="${{ steps.audit.outputs.warnings }}"
+          DATE=$(date '+%d/%m/%Y')
+
+          if [ "$ERRORS" -gt 0 ]; then
+            EMOJI="🔴"
+            STATUS="ERRORI CRITICI: $ERRORS"
+          elif [ "$WARNINGS" -gt 5 ]; then
+            EMOJI="🟡"
+            STATUS="$WARNINGS avvisi da valutare"
+          else
+            EMOJI="🟢"
+            STATUS="Tutto OK"
+          fi
+
+          # Leggi il report e converti a testo per email
+          REPORT_TEXT=$(cat audit-report.md | head -100)
+
+          # Invia email tramite il relay PHP esistente
+          curl -s -X POST "https://api.righettoimmobiliare.it/send-mail.php" \
+            -H "Content-Type: application/json" \
+            -H "X-API-Key: ${{ secrets.EMAIL_RELAY_KEY }}" \
+            -d "{
+              \"action\": \"send_single\",
+              \"to\": \"info@righettoimmobiliare.it\",
+              \"subject\": \"$EMOJI Audit SKILL-2.0 del $DATE — Salute: ${HEALTH}% — $STATUS\",
+              \"body\": \"<h2>Audit Settimanale SKILL-2.0</h2><p><strong>Data:</strong> $DATE</p><p><strong>Salute:</strong> ${HEALTH}%</p><p><strong>Errori:</strong> $ERRORS | <strong>Avvisi:</strong> $WARNINGS</p><hr><p>Report completo disponibile nelle <a href='https://github.com/ginocapon/index/issues?q=label:audit'>Issue GitHub</a></p><p><em>Audit automatico — ogni venerdi ore 07:00</em></p>\"
+            }" || echo "⚠️ Email non inviata (chiave API mancante o errore relay)"
