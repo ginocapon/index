@@ -9,8 +9,12 @@
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://qwkwkemuabfwvwuqrxlu.supabase.co" crossorigin>
 <link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co">
+<link rel="dns-prefetch" href="https://www.youtube.com">
+<link rel="dns-prefetch" href="https://img.youtube.com">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="img/team/titolari.webp" as="image" type="image/webp" fetchpriority="high">
 <meta name="google-site-verification" content="AbK7L5qoV9UFcfjQmtpC5OmD1ZsHx_55NNGYjxlOSxw">
@@ -33,7 +37,7 @@
 <link rel="stylesheet" href="css/fonts.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/nav-mobile.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="css/below-fold.css?v=4" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/below-fold.css?v=3" media="print" onload="this.media='all'">
 <style>
 /* Critical font-face inline — elimina round-trip a fonts.css per above-fold */
 @font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/montserrat-400.woff2') format('woff2')}
@@ -78,6 +82,67 @@ button{font-family:inherit;cursor:pointer}
 ::-webkit-scrollbar-track{background:var(--sfondo)}
 ::-webkit-scrollbar-thumb{background:var(--blu3);border-radius:3px}
 
+#ricerca {
+  background: var(--testo);
+  padding: 0; position: relative; z-index: 50;
+  box-shadow: 0 6px 32px rgba(21,36,53,0.22);
+  border-top: 3px solid var(--oro);
+}
+.ricerca-wrap {
+  max-width: 1200px; margin: 0 auto;
+}
+.r-tabs {
+  display: flex; border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 0 28px; overflow-x: auto;
+}
+.r-tab {
+  padding: 14px 20px; background: none; border: none;
+  font-family: 'Montserrat',sans-serif; font-size: 0.72rem;
+  font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.72); cursor: pointer; white-space: nowrap;
+  border-bottom: 3px solid transparent; margin-bottom: -1px;
+  transition: all 0.2s;
+}
+.r-tab:hover { color: rgba(255,255,255,0.90); }
+.r-tab.active { color: white; border-bottom-color: var(--oro); }
+.r-filtri {
+  display: flex; align-items: stretch; flex-wrap: nowrap;
+  min-height: 64px;
+}
+.r-field {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 10px 20px;
+  border-right: 1px solid rgba(255,255,255,0.07);
+}
+.r-field label {
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.65);
+  margin-bottom: 3px;
+}
+.r-field select, .r-field input {
+  background: none; border: none; outline: none;
+  font-family: 'Montserrat',sans-serif; font-size: 0.88rem;
+  font-weight: 600; color: white; width: 100%;
+  -webkit-appearance: none; appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(255,255,255,0.35)'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0 center;
+  padding-right: 16px;
+}
+.r-field input { background-image: none; padding-right: 0; }
+.r-field input::placeholder { color: rgba(255,255,255,0.60); }
+.r-field select option { background: var(--testo); color: white; }
+.r-field select optgroup { background: var(--testo); color: rgba(255,255,255,0.72); font-style: normal; font-size: 0.78rem; }
+.r-btn-cerca {
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; padding: 0 36px;
+  background: var(--oro); color: var(--testo);
+  font-family: 'Montserrat',sans-serif;
+  font-weight: 800; font-size: 0.8rem; letter-spacing: 1.5px;
+  text-transform: uppercase; border: none; cursor: pointer;
+  transition: all 0.22s; white-space: nowrap; min-width: 140px;
+}
+.r-btn-cerca:hover { background: var(--oro2); }
 .r-bot-hint {
   display: flex; align-items: center; gap: 12px;
   padding: 12px 28px; font-size: 0.78rem;
@@ -91,6 +156,12 @@ button{font-family:inherit;cursor:pointer}
   background: rgba(255,107,53,0.12); border: 1.5px solid rgba(255,107,53,0.35);
   display: flex; align-items: center; justify-content: center;
 }
+@media(max-width:768px){
+  .r-filtri { flex-direction: column; }
+  .r-field { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .r-btn-cerca { min-height: 56px; width: 100%; }
+}
+
 #navbar{
   position:fixed;top:0;left:0;right:0;z-index:1000;
   height:var(--nav-h);display:flex;align-items:center;
@@ -206,7 +277,10 @@ button{font-family:inherit;cursor:pointer}
     );
 }
 
-.hero-grain { display: none; }
+.hero-grain {
+  position: absolute; inset: 0; z-index: 2; opacity: 0.025; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 .hero-inner {
   position: relative; z-index: 3;
   width: 100%; max-width: 860px;
@@ -215,7 +289,7 @@ button{font-family:inherit;cursor:pointer}
   display: flex; flex-direction: column;
   align-items: center; text-align: center;
 }
-.hero-left { width: 100%; }
+.hero-left { animation: fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.2s both; width: 100%; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(36px)} to{opacity:1;transform:translateY(0)} }
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 14px;
@@ -258,7 +332,7 @@ button{font-family:inherit;cursor:pointer}
   border-top: 1px solid rgba(255,255,255,0.18);
   padding-top: 32px;
   width: 100%; justify-content: center;
-  animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0s both;
+  animation: fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.45s both;
 }
 .h-stat {
   flex: 1; max-width: 180px;
@@ -749,7 +823,7 @@ button svg, a.btn-p svg, a.btn-g svg {
 
 <!-- HERO -->
 <section id="hero">
-  <div id="hero-bg"><img src="img/team/titolari.webp" alt="Righetto Immobiliare Padova" width="1200" height="630" fetchpriority="high" decoding="sync"></div>
+  <div id="hero-bg"><img src="img/team/titolari.webp" alt="Righetto Immobiliare Padova" width="1200" height="630" fetchpriority="high"></div>
   <div class="hero-veil"></div>
   <div class="hero-grain"></div>
   <div class="hero-inner">
