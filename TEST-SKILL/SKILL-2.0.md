@@ -317,6 +317,19 @@ js/scroll-reveal.js                 - Animazioni scroll
 - Salva risultati su Supabase (tabella `audit_snapshots`)
 - Grafico storico con barre OK/Warning/Errori
 
+**Audit Automatico SKILL-2.0 via GitHub Actions** (ogni venerdi' ore 07:00 CET):
+- Workflow: `.github/workflows/audit-settimanale.yml`
+- Script: `scripts/audit-skill.sh`
+- **Eseguibile anche manualmente:** Actions → "Audit Settimanale SKILL-2.0" → Run workflow
+- **Output:** Issue GitHub con label `audit` + email riepilogativa a info@righettoimmobiliare.it
+- **16 controlli per pagina:** meta description, canonical, URL pulite (no .html), Open Graph, Schema JSON-LD (RealEstateAgent, GeoCoordinates, sameAs, dateModified), BreadcrumbList, font-display:swap, keyword stuffing ("a Padova" max 10), CDN esterni vietati, framework vietati, link interni con .html, GA4, viewport mobile, filter:blur, will-change, placeholder non sostituiti
+- **Controlli globali:** sitemap.xml, robots.txt (regole AI bots), llms.txt (GEO)
+- **Controlli specifici blog:** FAQPage schema, author bio (E-E-A-T), timestamp visibile
+- **Controlli zone:** FAQPage, GeoCoordinates, dati OMI
+- **Controlli servizi:** FAQPage schema
+- **Email:** inviata tramite API relay interno (secret `EMAIL_RELAY_KEY` in GitHub Actions)
+- **Autorizzazione permanente** — il workflow gira automaticamente ogni venerdi' finche' non viene disabilitato
+
 **Analytics** (snapshot automatici ogni 7 giorni):
 - 8 KPI cards, storico con trend, top query, performance per pagina
 - Obiettivi strategici con progress bar
@@ -1662,6 +1675,16 @@ document.querySelectorAll('.faq-btn').forEach(btn => {
 ---
 
 ## 16. CHANGELOG
+
+### v3.2 - 19 Marzo 2026 (Audit Automatico SKILL-2.0 via GitHub Actions)
+- **Nuovo workflow GitHub Actions** (`.github/workflows/audit-settimanale.yml`): audit automatico ogni venerdi' alle 07:00 CET
+- **Script audit** (`scripts/audit-skill.sh`): 16 controlli per pagina + controlli globali + controlli specifici blog/zone/servizi
+- **Issue GitHub automatica** con label `audit` e report completo in markdown
+- **Email riepilogativa** a info@righettoimmobiliare.it tramite API relay interno
+- **Secret GitHub:** `EMAIL_RELAY_KEY` configurato per invio email automatico
+- **Eseguibile manualmente** dal tab Actions → "Audit Settimanale SKILL-2.0" → Run workflow
+- **Autorizzazione permanente** — gira automaticamente finche' non disabilitato
+- **Documentazione aggiunta** nella sezione 3.4 (Strumenti Admin)
 
 ### v3.1 - 18 Marzo 2026 (Cache-busting + Strategia Performance per nuovi siti)
 - **Cache-busting `?v=3` su 88 file HTML** — tutti i riferimenti CSS e JS ora hanno parametro di versione
