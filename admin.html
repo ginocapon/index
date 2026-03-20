@@ -6595,7 +6595,7 @@ async function loadBlogList() {
         <td>${a.stato === 'pubblicato' ? '<span class="badge badge-verde">Pubblicato</span>' : '<span class="badge badge-oro">Bozza</span>'}${a.evidenza ? ' <span class="badge badge-blu">★</span>' : ''}</td>
         <td style="white-space:nowrap">
           <button class="btn btn-sm" style="background:var(--sfondo);border:1px solid var(--gc);padding:6px 8px" onclick="previewBlogArticle('${a.id}')" title="Anteprima rapida">🔍</button>
-          ${a.url_statico ? `<a href="${a.url_statico.startsWith('blog-articolo') || String(a.id).startsWith('bozza_') || String(a.id).startsWith('art_') ? '/blog-articolo?s=' + encodeURIComponent(a.slug || a.url_statico) : '/' + esc(a.url_statico)}" target="_blank" rel="noopener" class="btn btn-sm" style="background:#e3f2fd;border:1px solid #90caf9;color:#1565c0;padding:6px 8px;text-decoration:none;display:inline-block" title="Vedi pagina pubblicata">🌐</a>` : ''}
+          <a href="${a.url_statico && String(a.id).startsWith('seed_') ? '/' + esc(a.url_statico) : '/blog-articolo?s=' + encodeURIComponent(a.slug || generateSlug(a.titolo))}" target="_blank" rel="noopener" class="btn btn-sm" style="background:#e3f2fd;border:1px solid #90caf9;color:#1565c0;padding:6px 8px;text-decoration:none;display:inline-block" title="Vedi pagina pubblicata">🌐</a>
           <button class="btn btn-sm btn-secondary" onclick="editBlogArticle('${a.id}')">✏️ Modifica</button>
           <button class="btn btn-sm btn-danger" onclick="deleteBlogById('${a.id}')">🗑️</button>
         </td>
@@ -6690,13 +6690,12 @@ async function saveBlogArticle() {
   const stato = document.querySelector('input[name=b_stato]:checked').value;
 
   const slug = document.getElementById('b_slug').value || generateSlug(titolo);
-  // Preserva url_statico solo per articoli gia' esistenti con pagina HTML dedicata
+  // Preserva url_statico solo per articoli seed con pagina HTML dedicata
   const existingArt = editId ? blogArticles.find(a => a.id === editId) : null;
-  const hasStaticPage = existingArt && existingArt.url_statico && !String(existingArt.id).startsWith('art_') && !String(existingArt.id).startsWith('bozza_');
-  const payload = {
+  const hasStaticPage = existingArt && existingArt.url_statico && String(existingArt.id).startsWith('seed_');
+  // Payload Supabase: solo colonne che esistono nella tabella
+  const supaPayload = {
     titolo,
-    slug: slug,
-    url_statico: hasStaticPage ? existingArt.url_statico : null,
     categoria: document.getElementById('b_categoria').value,
     autore: document.getElementById('b_autore').value || 'Capon Gino',
     data: document.getElementById('b_data').value || new Date().toISOString().split('T')[0],
@@ -6706,24 +6705,30 @@ async function saveBlogArticle() {
     contenuto,
     stato,
     evidenza: document.getElementById('b_evidenza').checked,
-    meta_description: (titolo.substring(0, 110) + ' | Righetto Immobiliare Padova'),
-    data_pubblicazione: stato === 'pubblicato' ? new Date().toISOString() : null,
     updated_at: new Date().toISOString()
+  };
+  // Payload completo per localStorage (include campi extra)
+  const fullPayload = {
+    ...supaPayload,
+    slug: slug,
+    url_statico: hasStaticPage ? existingArt.url_statico : null,
+    meta_description: (titolo.substring(0, 110) + ' | Righetto Immobiliare Padova'),
+    data_pubblicazione: stato === 'pubblicato' ? new Date().toISOString() : null
   };
 
   // Se l'id e' una bozza locale (bozza_*), fai INSERT su Supabase (non update)
-  const isBozzaLocale = editId && String(editId).startsWith('bozza_');
+  const isBozzaLocale = editId && (String(editId).startsWith('bozza_') || String(editId).startsWith('art_'));
 
   try {
     let error, newId;
-    if (editId && !isBozzaLocale) {
+    if (editId && !isBozzaLocale && !String(editId).startsWith('seed_')) {
       // Articolo esistente su Supabase → update
-      const res = await sb.from('blog').update(payload).eq('id', editId);
+      const res = await sb.from('blog').update(supaPayload).eq('id', editId);
       error = res.error;
       newId = editId;
     } else {
       // Nuovo articolo o bozza locale → insert su Supabase
-      const res = await sb.from('blog').insert(payload).select('id');
+      const res = await sb.from('blog').insert(supaPayload).select('id');
       error = res.error;
       newId = (res.data && res.data[0]) ? res.data[0].id : null;
     }
@@ -6736,12 +6741,23 @@ async function saveBlogArticle() {
         localStorage.setItem('rig_blog_articles', JSON.stringify(localArts));
       } catch(ex) {}
     }
-    toast('✅ Articolo salvato!', 'success');
+    // Aggiorna anche localStorage con l'id Supabase per coerenza
+    if (newId) {
+      try {
+        var localArts2 = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]');
+        var existIdx = localArts2.findIndex(a => a.slug === slug || (a.titolo || '').toLowerCase() === titolo.toLowerCase());
+        var fullWithId = { ...fullPayload, id: newId };
+        if (existIdx >= 0) localArts2[existIdx] = fullWithId;
+        else localArts2.push(fullWithId);
+        localStorage.setItem('rig_blog_articles', JSON.stringify(localArts2));
+      } catch(ex) {}
+    }
+    toast('✅ Articolo salvato su Supabase!', 'success');
   } catch(e) {
     console.warn('Errore salvataggio blog su Supabase:', e.message);
     // Fallback localStorage
     const articles = blogArticles;
-    const article = { ...payload, id: editId || 'art_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6) };
+    const article = { ...fullPayload, id: editId || 'art_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6) };
     if (editId) {
       const idx = articles.findIndex(a => a.id === editId);
       if (idx >= 0) articles[idx] = article;
@@ -14356,20 +14372,26 @@ async function scraConfirmSave() {
   if (!_scraDraftData) return;
   var btn = event && event.target ? event.target : null;
   if (btn) { btn.disabled = true; btn.textContent = 'Salvataggio...'; }
-  var newArticle = {
+  // Payload Supabase: solo colonne esistenti nella tabella
+  var supaArticle = {
     titolo: _scraDraftData.titolo,
-    slug: _scraDraftData.slug,
-    url_statico: _scraDraftData.slug,
-    meta_description: _scraDraftData.metaDesc,
     contenuto: _scraDraftData.contenutoHtml || '',
     autore: _scraDraftData.autore,
     categoria: _scraDraftData.categoria,
     stato: 'bozza',
     data: _scraDraftData.data,
-    data_pubblicazione: _scraDraftData.data,
     tempo: 8,
     emoji: '📝',
     immagine_copertina: _scraDraftData.immagine || '',
+    evidenza: false
+  };
+  // Payload completo per localStorage (include campi extra)
+  var newArticle = {
+    ...supaArticle,
+    slug: _scraDraftData.slug,
+    url_statico: null,
+    meta_description: _scraDraftData.metaDesc,
+    data_pubblicazione: _scraDraftData.data,
     immagine_credit: _scraDraftData.immagine_credit || '',
     faq: JSON.stringify(_scraDraftData.faq)
   };
@@ -14377,8 +14399,9 @@ async function scraConfirmSave() {
   // Prova Supabase
   try {
     if (typeof sb !== 'undefined' && sb) {
-      var { data, error } = await sb.from('blog').insert([newArticle]);
+      var { data, error } = await sb.from('blog').insert([supaArticle]).select('id');
       if (error) throw error;
+      if (data && data[0]) newArticle.id = data[0].id;
       saved = true;
     }
   } catch(e) { console.warn('Supabase insert blog fallito:', e.message); }
