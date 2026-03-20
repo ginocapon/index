@@ -6534,7 +6534,7 @@ async function getBlogArticles() {
     var localArticles = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]');
     var slugsInList = new Set(blogArticles.map(a => a.slug));
     localArticles.forEach(la => {
-      if (la.id && String(la.id).startsWith('bozza_') && !slugsInList.has(la.slug)) {
+      if (la.id && (String(la.id).startsWith('bozza_') || String(la.id).startsWith('art_')) && !slugsInList.has(la.slug)) {
         blogArticles.push(la);
         slugsInList.add(la.slug);
       }
@@ -6704,6 +6704,7 @@ async function saveBlogArticle() {
     stato,
     evidenza: document.getElementById('b_evidenza').checked,
     meta_description: (titolo.substring(0, 110) + ' | Righetto Immobiliare Padova'),
+    data_pubblicazione: stato === 'pubblicato' ? new Date().toISOString() : null,
     updated_at: new Date().toISOString()
   };
 
