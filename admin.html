@@ -6690,10 +6690,13 @@ async function saveBlogArticle() {
   const stato = document.querySelector('input[name=b_stato]:checked').value;
 
   const slug = document.getElementById('b_slug').value || generateSlug(titolo);
+  // Preserva url_statico solo per articoli gia' esistenti con pagina HTML dedicata
+  const existingArt = editId ? blogArticles.find(a => a.id === editId) : null;
+  const hasStaticPage = existingArt && existingArt.url_statico && !String(existingArt.id).startsWith('art_') && !String(existingArt.id).startsWith('bozza_');
   const payload = {
     titolo,
     slug: slug,
-    url_statico: slug,
+    url_statico: hasStaticPage ? existingArt.url_statico : null,
     categoria: document.getElementById('b_categoria').value,
     autore: document.getElementById('b_autore').value || 'Capon Gino',
     data: document.getElementById('b_data').value || new Date().toISOString().split('T')[0],
