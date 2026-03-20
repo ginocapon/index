@@ -308,6 +308,17 @@ async function initBlog() {
     console.warn('Blog Supabase non disponibile, uso localStorage:', e.message);
     try { allArticles = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]').filter(a => a.stato === 'pubblicato'); } catch(ex) { allArticles = []; }
   }
+  // Merge articoli salvati in locale (fallback quando Supabase INSERT fallisce)
+  try {
+    var localArticles = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]');
+    var slugsInList = new Set(allArticles.map(a => a.slug));
+    localArticles.forEach(la => {
+      if (la.id && (String(la.id).startsWith('bozza_') || String(la.id).startsWith('art_')) && la.stato === 'pubblicato' && !slugsInList.has(la.slug)) {
+        allArticles.push(la);
+        slugsInList.add(la.slug);
+      }
+    });
+  } catch(e) {}
   // Articoli statici (pagine HTML dedicate)
   const articoliStatici = [
     {
