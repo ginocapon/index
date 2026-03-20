@@ -296,6 +296,7 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 let sbBlog = null;
 let allArticles = [];
 let currentCat = '';
+let _staticSlugs = new Set();
 
 async function initBlog() {
   try {
@@ -968,6 +969,8 @@ async function initBlog() {
       evidenza: true
     }
   ];
+  // Set di slug con pagina HTML dedicata (per artUrl)
+  _staticSlugs = new Set(articoliStatici.map(s => s.url_statico).filter(Boolean));
   // Merge: arricchisci articoli da Supabase con dati statici (immagine, url) se mancanti,
   // oppure aggiungi articoli statici non presenti in Supabase
   const staticByTitle = {};
@@ -1033,8 +1036,10 @@ function generateSlug(titolo) {
   return s;
 }
 function artUrl(a) {
-  if (a.url_statico) return a.url_statico;
-  return 'blog-articolo?s=' + encodeURIComponent(generateSlug(a.titolo));
+  // Solo articoli seed con pagina HTML dedicata usano url_statico diretto
+  // Articoli creati da admin usano sempre il lettore dinamico blog-articolo?s=
+  if (a.url_statico && _staticSlugs && _staticSlugs.has(a.url_statico)) return a.url_statico;
+  return 'blog-articolo?s=' + encodeURIComponent(a.slug || generateSlug(a.titolo));
 }
 
 function fmtDate(d) {
