@@ -915,7 +915,7 @@ function render(d) {
     `<div class="char-row"><span class="lbl">${r[0]}</span><span class="val">${r[1]}</span></div>`).join('');
 
   // Descrizione
-  document.getElementById('descText').textContent = d.descrizione || d.note_interne || 'Descrizione non disponibile.';
+  document.getElementById('descText').textContent = d.descrizione || 'Descrizione non disponibile.';
 
   // Dettagli comfort
   renderDettagli(d);
@@ -1442,7 +1442,7 @@ async function downloadPDF() {
   y += 16;
 
   // ── DESCRIZIONE (prominente, subito dopo specs) ──
-  const descTesto = d.descrizione || d.note_interne || d.descrizione_pubblica || '';
+  const descTesto = d.descrizione || '';
   if (descTesto) {
     y = sectionTitle('DESCRIZIONE', y);
     doc.setFont('helvetica', 'normal');
