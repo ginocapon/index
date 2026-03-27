@@ -22,7 +22,7 @@ const SERVIZI_CONFIG = {
             'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc'
           },
           body: JSON.stringify({
-            action: 'send',
+            action: 'send_test',
             to_email: this.EMAIL_NOTIFY_TO,
             sender_email: 'info@righettoimmobiliare.it',
             sender_name: 'Righetto Immobiliare',
