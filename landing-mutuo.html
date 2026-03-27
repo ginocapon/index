@@ -791,13 +791,12 @@ async function sendMutuoLead(e) {
 
   var emailOk = false;
   try {
-    if (typeof SERVIZI_CONFIG !== 'undefined' && SERVIZI_CONFIG.EMAIL_RELAY_URL) {
-      var r = await fetch(SERVIZI_CONFIG.EMAIL_RELAY_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-API-Key': SERVIZI_CONFIG.EMAIL_RELAY_KEY },
-        body: JSON.stringify({ action: 'send', to_email: SERVIZI_CONFIG.EMAIL_NOTIFY_TO || 'info@righettoimmobiliare.it', subject: 'LANDING MUTUO — ' + nomeCompleto, html_body: '<b>Nome:</b> ' + nomeCompleto + '<br><b>Email:</b> ' + (email||'-') + '<br><b>Telefono:</b> ' + tel + '<br><b>Messaggio:</b> ' + messaggio, reply_to: email || undefined })
+    if (typeof SERVIZI_CONFIG !== 'undefined') {
+      emailOk = await SERVIZI_CONFIG.sendNotifica({
+        subject: 'LANDING MUTUO — ' + nomeCompleto,
+        html_body: '<b>Nome:</b> ' + nomeCompleto + '<br><b>Email:</b> ' + (email||'-') + '<br><b>Telefono:</b> ' + tel + '<br><b>Messaggio:</b> ' + messaggio,
+        reply_to: email || undefined
       });
-      emailOk = r.ok;
     }
   } catch(e) {}
 

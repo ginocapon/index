@@ -277,6 +277,18 @@ async function inviaContatto(e){
   };
   try{
     if(sb){ await sb.from('richieste').insert([payload]); }
+    if(typeof SERVIZI_CONFIG !== 'undefined'){
+      await SERVIZI_CONFIG.sendNotifica({
+        subject: 'Nuovo contatto dal sito: ' + payload.nome,
+        html_body: '<b>Nome:</b> ' + payload.nome +
+          '<br><b>Email:</b> ' + payload.email +
+          '<br><b>Telefono:</b> ' + payload.telefono +
+          '<br><b>Interesse:</b> ' + (payload.tipo_richiesta || '-') +
+          '<br><b>Messaggio:</b> ' + (payload.messaggio || '-') +
+          '<br><b>Sorgente:</b> ' + payload.sorgente,
+        reply_to: payload.email
+      });
+    }
   }catch(er){}
   document.getElementById('cf-ok').style.display='block';
   e.target.querySelectorAll('input,select,textarea').forEach(el=>el.value='');
