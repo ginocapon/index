@@ -277,22 +277,16 @@ async function inviaContatto(e){
   };
   try{
     if(sb){ await sb.from('richieste').insert([payload]); }
-    if(typeof SERVIZI_CONFIG !== 'undefined' && SERVIZI_CONFIG.EMAIL_RELAY_URL){
-      await fetch(SERVIZI_CONFIG.EMAIL_RELAY_URL, {
-        method: 'POST',
-        headers: {'Content-Type':'application/json','X-API-Key': SERVIZI_CONFIG.EMAIL_RELAY_KEY},
-        body: JSON.stringify({
-          action: 'send',
-          to_email: SERVIZI_CONFIG.EMAIL_NOTIFY_TO || 'info@righettoimmobiliare.it',
-          subject: 'Nuovo contatto dal sito: ' + payload.nome,
-          html_body: '<b>Nome:</b> ' + payload.nome +
-            '<br><b>Email:</b> ' + payload.email +
-            '<br><b>Telefono:</b> ' + payload.telefono +
-            '<br><b>Interesse:</b> ' + (payload.tipo_richiesta || '-') +
-            '<br><b>Messaggio:</b> ' + (payload.messaggio || '-') +
-            '<br><b>Sorgente:</b> ' + payload.sorgente,
-          reply_to: payload.email
-        })
+    if(typeof SERVIZI_CONFIG !== 'undefined'){
+      await SERVIZI_CONFIG.sendNotifica({
+        subject: 'Nuovo contatto dal sito: ' + payload.nome,
+        html_body: '<b>Nome:</b> ' + payload.nome +
+          '<br><b>Email:</b> ' + payload.email +
+          '<br><b>Telefono:</b> ' + payload.telefono +
+          '<br><b>Interesse:</b> ' + (payload.tipo_richiesta || '-') +
+          '<br><b>Messaggio:</b> ' + (payload.messaggio || '-') +
+          '<br><b>Sorgente:</b> ' + payload.sorgente,
+        reply_to: payload.email
       });
     }
   }catch(er){}

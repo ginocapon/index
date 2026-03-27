@@ -925,21 +925,14 @@ class RighettoChat {
       } catch { supaOk = false; }
     }
 
-    // Email relay — notifica email
-    if (typeof SERVIZI_CONFIG !== 'undefined' && SERVIZI_CONFIG.EMAIL_RELAY_URL) {
+    // Notifica email via Supabase Edge Function
+    if (typeof SERVIZI_CONFIG !== 'undefined') {
       try {
-        const r = await fetch(SERVIZI_CONFIG.EMAIL_RELAY_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'X-API-Key': SERVIZI_CONFIG.EMAIL_RELAY_KEY },
-          body: JSON.stringify({
-            action: 'send',
-            to_email: SERVIZI_CONFIG.EMAIL_NOTIFY_TO || 'info@righettoimmobiliare.it',
-            subject: 'Nuovo contatto dal chatbot: ' + dati.nome,
-            html_body: '<b>Nome:</b> ' + dati.nome + '<br><b>Email:</b> ' + (dati.email||'-') + '<br><b>Telefono:</b> ' + (dati.telefono||'-') + '<br><b>Messaggio:</b> ' + (dati.note || dati.messaggio || '-'),
-            reply_to: dati.email || undefined
-          })
+        emailOk = await SERVIZI_CONFIG.sendNotifica({
+          subject: 'Nuovo contatto dal chatbot: ' + dati.nome,
+          html_body: '<b>Nome:</b> ' + dati.nome + '<br><b>Email:</b> ' + (dati.email||'-') + '<br><b>Telefono:</b> ' + (dati.telefono||'-') + '<br><b>Messaggio:</b> ' + (dati.note || dati.messaggio || '-'),
+          reply_to: dati.email || undefined
         });
-        emailOk = r.ok;
       } catch { emailOk = false; }
     }
 

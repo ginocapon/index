@@ -1229,17 +1229,33 @@ async function sendForm() {
   btn.disabled = true;
 
   // Save to Supabase richieste
+  const msg = document.getElementById('f-msg').value || '';
   await sb.from('richieste').insert({
     nome,
     telefono: tel,
-    email: document.getElementById('f-msg').value ? '' : '',
-    messaggio: document.getElementById('f-msg').value || '',
+    email: '',
+    messaggio: msg,
     tipo_immobile: immobile?.titolo || '',
     provenienza: 'form',
     letto: false,
     codice_immobile: immobile?.codice || '',
     immobile_id: immobile?.id || null,
   });
+  // Notifica email
+  try {
+    await fetch(SUPABASE_URL + '/functions/v1/send-email', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','Authorization':'Bearer '+SUPABASE_KEY},
+      body: JSON.stringify({
+        action: 'send',
+        to_email: 'info@righettoimmobiliare.it',
+        sender_email: 'info@righettoimmobiliare.it',
+        sender_name: 'Righetto Immobiliare',
+        subject: 'Richiesta immobile: ' + (immobile?.titolo || immobile?.codice || 'N/D') + ' — ' + nome,
+        html_body: '<b>Nome:</b> ' + nome + '<br><b>Telefono:</b> ' + tel + '<br><b>Immobile:</b> ' + (immobile?.titolo||'-') + ' (' + (immobile?.codice||'-') + ')' + (msg ? '<br><b>Messaggio:</b> ' + msg : '')
+      })
+    });
+  } catch(e) {}
 
   btn.textContent = '✓ Richiesta inviata!';
   btn.style.background = '#27ae60';
