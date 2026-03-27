@@ -436,6 +436,7 @@ async function inviaEmailGate(e){
       await sb.from('richieste').insert([{nome:nome,email:email,telefono:tel||null,messaggio:'[PDF VALUTAZIONE] '+JSON.stringify(window._stimaDati||{}),provenienza:'calcolatore-pdf',newsletter:true,letto:false}]);
       await sb.from('newsletter_subscribers').upsert([{email:email,nome:nome,telefono:tel||null,interesse:'valutazione',provenienza:'calcolatore-pdf',fonte:'calcolatore-pdf',attivo:true,created_at:new Date().toISOString()}],{onConflict:'email'}).catch(function(){});
     }
+    if(typeof SERVIZI_CONFIG!=='undefined'){await SERVIZI_CONFIG.sendNotifica({subject:'PDF Valutazione scaricato — '+nome,html_body:'<b>Nome:</b> '+nome+'<br><b>Email:</b> '+email+(tel?'<br><b>Telefono:</b> '+tel:'')+'<br><b>Provenienza:</b> calcolatore-pdf',reply_to:email});}
   }catch(ex){}
   // GA event
   if(typeof gtag==='function')gtag('event','pdf_lead',{event_category:'conversion',event_label:email});
