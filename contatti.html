@@ -343,32 +343,22 @@ async function sendForm(){
 
   const nomeCompleto = nome + (cognome ? ' ' + cognome : '');
 
-  // ── 1. EMAIL RELAY — Notifica email ──
+  // ── 1. NOTIFICA EMAIL — Supabase Edge Function ──
   let emailOk = false;
-  if (SERVIZI_CONFIG.EMAIL_RELAY_URL && SERVIZI_CONFIG.EMAIL_RELAY_KEY) {
-    try {
-      const bodyParts = ['<b>Nome:</b> ' + nomeCompleto];
-      if (email) bodyParts.push('<b>Email:</b> ' + email);
-      bodyParts.push('<b>Telefono:</b> ' + tel);
-      if (oggetto) bodyParts.push('<b>Oggetto:</b> ' + oggetto);
-      if (zona) bodyParts.push('<b>Zona:</b> ' + zona);
-      if (msg) bodyParts.push('<b>Messaggio:</b><br>' + msg.replace(/\n/g, '<br>'));
-      bodyParts.push('<b>Newsletter:</b> ' + (news ? 'Sì' : 'No'));
-
-      const r = await fetch(SERVIZI_CONFIG.EMAIL_RELAY_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-API-Key': SERVIZI_CONFIG.EMAIL_RELAY_KEY },
-        body: JSON.stringify({
-          action: 'send',
-          to_email: SERVIZI_CONFIG.EMAIL_NOTIFY_TO || 'info@righettoimmobiliare.it',
-          subject: 'Nuovo contatto dal sito: ' + nomeCompleto,
-          html_body: bodyParts.join('<br>'),
-          reply_to: email || undefined
-        })
-      });
-      emailOk = r.ok;
-    } catch(e) { emailOk = false; }
-  }
+  try {
+    const bodyParts = ['<b>Nome:</b> ' + nomeCompleto];
+    if (email) bodyParts.push('<b>Email:</b> ' + email);
+    bodyParts.push('<b>Telefono:</b> ' + tel);
+    if (oggetto) bodyParts.push('<b>Oggetto:</b> ' + oggetto);
+    if (zona) bodyParts.push('<b>Zona:</b> ' + zona);
+    if (msg) bodyParts.push('<b>Messaggio:</b><br>' + msg.replace(/\n/g, '<br>'));
+    bodyParts.push('<b>Newsletter:</b> ' + (news ? 'Sì' : 'No'));
+    emailOk = await SERVIZI_CONFIG.sendNotifica({
+      subject: 'Nuovo contatto dal sito: ' + nomeCompleto,
+      html_body: bodyParts.join('<br>'),
+      reply_to: email || undefined
+    });
+  } catch(e) { emailOk = false; }
 
   // ── 2. SUPABASE — Salvataggio database ──
   let supaOk = false;

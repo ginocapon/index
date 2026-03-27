@@ -465,15 +465,17 @@
   </div>
 </footer>
 <script>
-function sendForm(){
+async function sendForm(){
   const n=document.getElementById('f-nome').value.trim();
   const t=document.getElementById('f-tel').value.trim();
-  const g=document.getElementById('f-gdpr').checked;
   if(!n||!t){alert('Inserisci nome e telefono');return}
-  if(!g){alert('Accetta la privacy policy');return}
-  const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');
-  if(sb){sb.from('richieste').insert([{nome:n,telefono:t,messaggio:'Richiesta gestione immobili',provenienza:'form-gestione',letto:false}]).then(()=>{alert('Richiesta inviata! Ti ricontatteremo presto.')}).catch(()=>alert('Errore. Chiama il 049.88.43.484'))}
-  else{alert('Richiesta registrata. Ti ricontatteremo!')}
+  if(!document.getElementById('f-gdpr').checked){alert('Accetta la privacy policy');return}
+  try{
+    const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');
+    if(sb){await sb.from('richieste').insert([{nome:n,telefono:t,messaggio:'Richiesta gestione immobili',provenienza:'form-gestione',letto:false}]);}
+    if(typeof SERVIZI_CONFIG!=='undefined'){await SERVIZI_CONFIG.sendNotifica({subject:'Form Gestione Immobili — '+n,html_body:'<b>Nome:</b> '+n+'<br><b>Telefono:</b> '+t+'<br><b>Pagina:</b> Richiesta gestione immobili'});}
+    alert('Richiesta inviata! Ti ricontatteremo presto.');
+  }catch(e){alert('Errore. Chiama il 049.88.43.484')}
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
