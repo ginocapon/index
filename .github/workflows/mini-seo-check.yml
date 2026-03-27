@@ -1,0 +1,135 @@
+# ============================================================
+# MINI SEO CHECK — Righetto Immobiliare
+# Basato su regole skill-seo.md
+# Ogni venerdi' alle 07:00 CET — check leggero e veloce
+# Focus: meta tags, schema critico, keyword stuffing, GEO, freshness, URL pulite
+# ============================================================
+
+name: "Mini SEO Check (skill-seo.md)"
+
+on:
+  schedule:
+    # Ogni venerdi' alle 06:00 UTC = 07:00 CET (ora italiana invernale)
+    - cron: '0 6 * * 5'
+
+  # Esecuzione manuale dal tab Actions
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  mini-seo:
+    name: "Mini SEO Check"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Rendi script eseguibile
+        run: chmod +x scripts/mini-seo-check.sh
+
+      - name: Esegui Mini SEO Check
+        id: seocheck
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          bash scripts/mini-seo-check.sh mini-seo-report.md
+          echo "success=true" >> "$GITHUB_OUTPUT"
+
+      - name: Leggi report
+        if: always()
+        id: report
+        run: |
+          if [ -f mini-seo-report.md ]; then
+            {
+              echo 'body<<ENDOFREPORT'
+              cat mini-seo-report.md
+              echo ''
+              echo 'ENDOFREPORT'
+            } >> "$GITHUB_OUTPUT"
+          else
+            echo "body=Errore: il report SEO non e' stato generato." >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Crea Issue con report SEO
+        if: always() && steps.report.outputs.body
+        uses: actions/github-script@v7
+        env:
+          REPORT_BODY: ${{ steps.report.outputs.body }}
+          SEO_ERRORS: ${{ steps.seocheck.outputs.errors || '?' }}
+          SEO_WARNINGS: ${{ steps.seocheck.outputs.warnings || '?' }}
+          SEO_HEALTH: ${{ steps.seocheck.outputs.health || '?' }}
+        with:
+          script: |
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('it-IT', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            });
+
+            const errors = process.env.SEO_ERRORS;
+            const warnings = process.env.SEO_WARNINGS;
+            const health = process.env.SEO_HEALTH;
+
+            let emoji = '🟢';
+            if (errors !== '?' && parseInt(errors) > 0) emoji = '🔴';
+            else if (warnings !== '?' && parseInt(warnings) > 10) emoji = '🟡';
+
+            const title = `${emoji} Mini SEO Check — ${dateStr} (${health}% salute SEO)`;
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: process.env.REPORT_BODY,
+              labels: ['seo-check']
+            });
+
+            core.info(`Issue SEO creata: ${title}`);
+
+      - name: Invia notifica email (solo se errori critici)
+        if: always() && steps.seocheck.outputs.success == 'true' && steps.seocheck.outputs.errors != '0'
+        env:
+          EMAIL_RELAY_KEY: ${{ secrets.EMAIL_RELAY_KEY }}
+        run: |
+          HEALTH="${{ steps.seocheck.outputs.health }}"
+          ERRORS="${{ steps.seocheck.outputs.errors }}"
+          WARNINGS="${{ steps.seocheck.outputs.warnings }}"
+          DATE=$(date '+%d/%m/%Y')
+
+          if [ -z "$EMAIL_RELAY_KEY" ]; then
+            echo "⚠️ Secret EMAIL_RELAY_KEY non configurato — email non inviata"
+            exit 0
+          fi
+
+          EMAIL_BODY="<h2>Mini SEO Check — skill-seo.md</h2>"
+          EMAIL_BODY+="<p><strong>Data:</strong> $DATE</p>"
+          EMAIL_BODY+="<p><strong>Salute SEO:</strong> ${HEALTH}%</p>"
+          EMAIL_BODY+="<p><strong>Errori critici:</strong> $ERRORS | <strong>Avvisi:</strong> $WARNINGS</p>"
+          EMAIL_BODY+="<p style='color:#C0392B'><strong>Attenzione: errori SEO critici rilevati!</strong></p>"
+          EMAIL_BODY+="<hr>"
+          EMAIL_BODY+="<p>Dettagli nelle <a href='https://github.com/${{ github.repository }}/issues?q=label%3Aseo-check+sort%3Acreated-desc'>Issue GitHub (label: seo-check)</a></p>"
+          EMAIL_BODY+="<p><em>Mini SEO Check automatico ogni venerdì ore 07:00 CET — basato su skill-seo.md</em></p>"
+
+          PAYLOAD=$(jq -n \
+            --arg action "send_single" \
+            --arg to "info@righettoimmobiliare.it" \
+            --arg subject "🔴 Mini SEO Check del $DATE — ${ERRORS} errori critici — Salute: ${HEALTH}%" \
+            --arg body "$EMAIL_BODY" \
+            '{action: $action, to: $to, subject: $subject, body: $body}')
+
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
+            "https://api.righettoimmobiliare.it/send-mail.php" \
+            -H "Content-Type: application/json" \
+            -H "X-API-Key: $EMAIL_RELAY_KEY" \
+            -d "$PAYLOAD")
+
+          if [ "$HTTP_CODE" = "200" ]; then
+            echo "✅ Email alert inviata a info@righettoimmobiliare.it"
+          else
+            echo "⚠️ Email non inviata (HTTP $HTTP_CODE)"
+          fi
