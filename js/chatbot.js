@@ -738,7 +738,7 @@ window.RIGHETTO_FAQ_DATA = FAQ_DATA;
 class RighettoChat {
   constructor() {
     this.messages = [];
-    this.state = 'idle'; // idle | stima_* | contatto_* | ricerca_tipo_op | ricerca_zona
+    this.state = 'idle'; // idle | stima_* | venditore_padova_* | contatto_* | ricerca_tipo_op | ricerca_zona
     this.stimaData = {};
     this.contattoPending = null;
     this.ricercaData = {};
@@ -1015,7 +1015,65 @@ class RighettoChat {
       return await this.cercaImmobiliCatalogo(this.ricercaData.tipo_op, zona);
     }
 
+    // ── STATO: percorso venditore Padova ──
+    if (this.state === 'venditore_padova_zona') {
+      this.stimaData = {
+        comune: 'Padova',
+        zona: msg.trim(),
+        tipo: 'appartamento'
+      };
+      this.state = 'venditore_padova_tipo';
+      return '🏠 Perfetto. Che tipologia vuoi vendere?\nEs: appartamento, attico, villa, bifamiliare...';
+    }
+
+    if (this.state === 'venditore_padova_tipo') {
+      this.stimaData.tipo = msg.trim();
+      this.state = 'venditore_padova_mq';
+      return '📐 Quanti metri quadri ha l\'immobile?\nInserisci solo il numero (es: 95)';
+    }
+
+    if (this.state === 'venditore_padova_mq') {
+      const n = parseFloat(msg.replace(/[^0-9,.]/g, '').replace(',', '.'));
+      if (isNaN(n) || n < 1) return '❌ Inserisci un numero valido (es: 95)';
+      this.stimaData.mq = n;
+      this.state = 'venditore_padova_stato';
+      return '🔧 Stato dell\'immobile?\nnuovo · ristrutturato · ottimo · buono · discreto · da ristrutturare';
+    }
+
+    if (this.state === 'venditore_padova_stato') {
+      this.stimaData.stato = msg.trim();
+      const stima = this.stimaPrezzo('Padova', this.stimaData.tipo, this.stimaData.mq, this.stimaData.stato);
+      this.state = 'venditore_padova_contatto';
+      return `📊 Prima fascia di valore per **${this.stimaData.zona || 'Padova'}**:\n\n` +
+        `• Min: **${this.formatPrice(stima.min)}**\n` +
+        `• Medio: **${this.formatPrice(stima.medio)}**\n` +
+        `• Max: **${this.formatPrice(stima.max)}**\n\n` +
+        `Vuoi una valutazione ufficiale gratuita con sopralluogo? Scrivi **si** oppure **no**.`;
+    }
+
+    if (this.state === 'venditore_padova_contatto') {
+      if (/^s(i|ì)|certo|ok|va bene|volenti|yes/.test(low)) {
+        this.state = 'contatto_nome';
+        this.contattoPending = {
+          provenienza: 'chatbot',
+          tipo_lead: 'venditore',
+          focus: 'Padova',
+          note: `Lead venditore Padova - zona: ${this.stimaData.zona || '-'}, tipologia: ${this.stimaData.tipo || '-'}, mq: ${this.stimaData.mq || '-'}, stato: ${this.stimaData.stato || '-'}`
+        };
+        return 'Ottimo, attivo subito la richiesta prioritaria per venditore Padova.\n\n**Come ti chiami?** (Nome e Cognome)';
+      }
+      this.state = 'idle';
+      return 'Perfetto, nessun problema. Se vuoi posso comunque prepararti una stima piu\' dettagliata per zona o metterti in contatto con un consulente quando preferisci.';
+    }
+
     // ── INTENT DETECTION ──
+
+    // Venditore focalizzato su Padova
+    if (/vendere.*padova|vendo.*padova|voglio vendere.*padova|acquisizion.*padova/.test(low)) {
+      this.state = 'venditore_padova_zona';
+      this.stimaData = { comune: 'Padova' };
+      return 'Perfetto, ti aiuto subito con il percorso dedicato ai proprietari di Padova.\n\nIn quale **zona/quartiere** si trova l\'immobile? (Es: Arcella, Guizza, Centro Storico, Forcellini)';
+    }
 
     // Stima diretta inline (es: "stima appartamento 85mq a Padova buono stato")
     const stimaInline = this.parseStimInline(msg);
