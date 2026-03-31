@@ -4368,7 +4368,24 @@ tr:hover td { background: rgba(206,224,143,0.06); }
       <div class="section" id="sec-analytics">
         <div style="padding:24px">
           <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:6px">Analytics &amp; Performance</h3>
-          <p style="font-size:0.78rem;color:var(--caffe2);margin-bottom:24px">Dashboard KPI — Dati Google Search Console + Google Analytics 4. Ultimo aggiornamento: <strong id="analytics-lastupdate">11 marzo 2026</strong></p>
+          <p style="font-size:0.78rem;color:var(--caffe2);margin-bottom:12px">Dashboard KPI — Dati Google Search Console + Google Analytics 4. Ultimo aggiornamento: <strong id="analytics-lastupdate">11 marzo 2026</strong></p>
+          <p style="font-size:0.72rem;color:var(--caffe2);margin-bottom:16px;line-height:1.55;max-width:920px">
+            <strong>Flusso indipendente (senza API Google):</strong> i dati pubblicati sul sito arrivano dal file nel repository
+            <code style="font-size:0.68rem;background:#f0ebe4;padding:2px 6px;border-radius:4px">data/analytics-dashboard.json</code>
+            (stesso concetto di <code style="font-size:0.68rem;background:#f0ebe4;padding:2px 6px;border-radius:4px">data/audit-analyses.json</code> per gli audit).
+            Apri Search Console / GA4 a mano, aggiorni il JSON in Cursor o chiedi a Claude di farlo, poi <strong>commit + push</strong>.
+            Qui sotto puoi anche modificare in browser: le bozze restano locali finche&apos; non scarichi il file per GitHub.
+            L&apos;<strong>audit tecnico HTML</strong> e su <a href="https://github.com/ginocapon/index/actions" target="_blank" rel="noopener">GitHub Actions</a> (nessuna API).
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;align-items:center">
+            <button type="button" class="btn btn-primary btn-sm" onclick="addAnalyticsSnapshot()" style="font-size:0.78rem">Registra snapshot KPI (GSC+GA)</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="openAnalyticsQueriesEditor()" style="font-size:0.78rem">Aggiorna Top Query (JSON)</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="openAnalyticsPagesEditor()" style="font-size:0.78rem">Aggiorna Pagine (JSON)</button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="exportAnalyticsDashboardForRepo()" style="font-size:0.78rem">Scarica per GitHub (analytics-dashboard.json)</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="analyticsSyncFromRepoFile()" style="font-size:0.78rem">Sincronizza dal sito (scarta bozza locale)</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="exportAnalyticsBackup()" style="font-size:0.78rem">Backup completo (legacy)</button>
+            <label class="btn btn-secondary btn-sm" style="font-size:0.78rem;margin:0;cursor:pointer">Importa backup<input type="file" accept="application/json" style="display:none" onchange="importAnalyticsBackup(event)"></label>
+          </div>
 
           <!-- KPI Cards -->
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:28px">
@@ -4420,9 +4437,9 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
           <!-- Storico Performance -->
           <div class="table-wrap" style="margin-bottom:24px">
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #e8e3db">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #e8e3db;flex-wrap:wrap;gap:8px">
               <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin:0">Storico Performance — Snapshot Periodici</h4>
-              <span style="font-size:0.72rem;color:var(--caffe2);">Automatico ogni 7 giorni</span>
+              <span style="font-size:0.72rem;color:var(--caffe2);">Manuale: pulsante &laquo;Registra snapshot KPI&raquo; — oppure automatizzare in futuro con API GSC/GA + Supabase</span>
             </div>
             <div style="overflow-x:auto">
               <table style="width:100%;border-collapse:collapse;font-size:0.8rem" id="analytics-history-table">
@@ -10848,10 +10865,60 @@ checkAuth();
 const ANALYTICS_STORAGE_KEY = 'rig_analytics_data';
 const ANALYTICS_QUERIES_KEY = 'rig_analytics_queries';
 const ANALYTICS_PAGES_KEY = 'rig_analytics_pages';
+const ANALYTICS_DIRTY_KEY = 'rig_analytics_dirty';
+const ANALYTICS_REPO_URL = '/data/analytics-dashboard.json';
+
+function markAnalyticsDirty() {
+  try { localStorage.setItem(ANALYTICS_DIRTY_KEY, '1'); } catch(e) {}
+}
+
+async function fetchAnalyticsFromRepo() {
+  const r = await fetch(ANALYTICS_REPO_URL + '?t=' + Date.now(), { cache: 'no-store' });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+
+function applyRepoAnalyticsToLocalStorage(j) {
+  if (Array.isArray(j.snapshots) && j.snapshots.length) {
+    localStorage.setItem(ANALYTICS_STORAGE_KEY, JSON.stringify(j.snapshots));
+  }
+  if (Array.isArray(j.queries) && j.queries.length) {
+    localStorage.setItem(ANALYTICS_QUERIES_KEY, JSON.stringify(j.queries));
+  }
+  if (Array.isArray(j.pages) && j.pages.length) {
+    localStorage.setItem(ANALYTICS_PAGES_KEY, JSON.stringify(j.pages));
+  }
+  window.__rigIndexedPages = typeof j.indexedPages === 'number' ? j.indexedPages : 55;
+  var lu = document.getElementById('analytics-lastupdate');
+  if (lu && j.lastUpdated) lu.textContent = j.lastUpdated;
+}
+
+function analyticsSyncFromRepoFile() {
+  try { localStorage.removeItem(ANALYTICS_DIRTY_KEY); } catch(e) {}
+  initAnalytics();
+  toast('Sincronizzazione dal file sul sito avviata…', 'success');
+}
+
+function exportAnalyticsDashboardForRepo() {
+  var payload = {
+    lastUpdated: new Date().toISOString().slice(0, 10),
+    indexedPages: typeof window.__rigIndexedPages === 'number' ? window.__rigIndexedPages : 55,
+    snapshots: getAnalyticsData(),
+    queries: getAnalyticsQueries(),
+    pages: getAnalyticsPages()
+  };
+  var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'analytics-dashboard.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast('Sostituisci data/analytics-dashboard.json nel repo e fai push', 'success');
+}
 
 // Dati seed iniziali
 const _analyticsSeedData = [
-  { data: '2026-03-11', periodo: '28gg', clicks: 150, impressions: 1590, ctr: 9.4, position: 8.1, users: 96, events: 926, note: 'Primo snapshot — +152% utenti vs periodo prec.' }
+  { data: '2026-03-11', periodo: '28gg', clicks: 150, impressions: 1590, ctr: 9.4, position: 8.1, users: 96, events: 926, newusers: 9, note: 'Primo snapshot — +152% utenti vs periodo prec.' }
 ];
 const _analyticsSeedQueries = [
   { query: 'agenzia righetto limena', clicks: 18, impressions: 37, ctr: 48.6, position: 1.3 },
@@ -10893,12 +10960,39 @@ function getAnalyticsPages() {
 }
 
 function initAnalytics() {
+  var dirty = false;
+  try { dirty = localStorage.getItem(ANALYTICS_DIRTY_KEY) === '1'; } catch(e) {}
+
+  if (!dirty) {
+    fetchAnalyticsFromRepo().then(function(j) {
+      applyRepoAnalyticsToLocalStorage(j);
+      initAnalyticsAfterLoad();
+    }).catch(function() {
+      window.__rigIndexedPages = window.__rigIndexedPages || 55;
+      initAnalyticsAfterLoad();
+    });
+  } else {
+    window.__rigIndexedPages = window.__rigIndexedPages || 55;
+    initAnalyticsAfterLoad();
+  }
+}
+
+function initAnalyticsAfterLoad() {
   let data = getAnalyticsData();
   if (!data.length) { data = _analyticsSeedData; localStorage.setItem(ANALYTICS_STORAGE_KEY, JSON.stringify(data)); }
   let queries = getAnalyticsQueries();
   if (!queries.length) { queries = _analyticsSeedQueries; localStorage.setItem(ANALYTICS_QUERIES_KEY, JSON.stringify(queries)); }
   let pages = getAnalyticsPages();
   if (!pages.length) { pages = _analyticsSeedPages; localStorage.setItem(ANALYTICS_PAGES_KEY, JSON.stringify(pages)); }
+  var latest = data.slice().sort(function(a, b) { return b.data.localeCompare(a.data); })[0] || {};
+  if (document.getElementById('kpi-clicks')) document.getElementById('kpi-clicks').textContent = latest.clicks != null ? latest.clicks : '—';
+  if (document.getElementById('kpi-impressions')) document.getElementById('kpi-impressions').textContent = latest.impressions != null ? Number(latest.impressions).toLocaleString('it') : '—';
+  if (document.getElementById('kpi-ctr')) document.getElementById('kpi-ctr').textContent = latest.ctr != null ? String(latest.ctr).replace('.', ',') + '%' : '—';
+  if (document.getElementById('kpi-position')) document.getElementById('kpi-position').textContent = latest.position != null ? String(latest.position).replace('.', ',') : '—';
+  if (document.getElementById('kpi-users')) document.getElementById('kpi-users').textContent = latest.users != null ? latest.users : '—';
+  if (document.getElementById('kpi-events')) document.getElementById('kpi-events').textContent = latest.events != null ? latest.events : '—';
+  if (document.getElementById('kpi-newusers')) document.getElementById('kpi-newusers').textContent = latest.newusers != null ? latest.newusers : '—';
+  if (document.getElementById('kpi-indexed')) document.getElementById('kpi-indexed').textContent = (window.__rigIndexedPages != null ? window.__rigIndexedPages : 55) + '+';
   renderAnalyticsHistory(data);
   renderTopQueries(queries);
   renderTopPages(pages);
@@ -10948,7 +11042,7 @@ function renderKPIObjectives(data) {
     { label: 'CTR media', current: latest.ctr || 0, target3m: 10, target6m: 12, target12m: 15, suffix: '%' },
     { label: 'Posizione media', current: latest.position || 0, target3m: 6, target6m: 4, target12m: 3, inverse: true },
     { label: 'Utenti settimanali GA', current: latest.users || 0, target3m: 300, target6m: 800, target12m: 2000 },
-    { label: 'Pagine indicizzate', current: 55, target3m: 65, target6m: 80, target12m: 120 }
+    { label: 'Pagine indicizzate', current: (typeof window.__rigIndexedPages === 'number' ? window.__rigIndexedPages : 55), target3m: 65, target6m: 80, target12m: 120 }
   ];
   container.innerHTML = objectives.map(o => {
     const pct = o.inverse ? Math.min(100, Math.round((o.target12m / Math.max(o.current,0.1)) * 100)) : Math.min(100, Math.round((o.current / o.target12m) * 100));
@@ -10974,7 +11068,7 @@ function renderAnalyticsChart(data) {
     ctx.font = '14px Montserrat, sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText('Aggiungi almeno 2 snapshot per vedere il grafico trend', W/2, H/2);
-    ctx.fillText('Gli snapshot vengono registrati automaticamente ogni 7 giorni', W/2, H/2 + 24);
+    ctx.fillText('Aggiorna data/analytics-dashboard.json nel repo oppure Registra snapshot', W/2, H/2 + 24);
     return;
   }
 
@@ -11047,17 +11141,107 @@ function saveAnalyticsSnapshot() {
   data.push(snap);
   localStorage.setItem(ANALYTICS_STORAGE_KEY, JSON.stringify(data));
   document.getElementById('snap-modal').remove();
-  // Update KPI cards
-  document.getElementById('kpi-clicks').textContent = snap.clicks;
-  document.getElementById('kpi-impressions').textContent = snap.impressions.toLocaleString('it');
-  document.getElementById('kpi-ctr').textContent = snap.ctr + '%';
-  document.getElementById('kpi-position').textContent = snap.position;
-  document.getElementById('kpi-users').textContent = snap.users;
-  document.getElementById('kpi-events').textContent = snap.events;
+  markAnalyticsDirty();
   document.getElementById('analytics-lastupdate').textContent = snap.data;
-  renderAnalyticsHistory(data);
-  renderKPIObjectives(data);
-  renderAnalyticsChart(data);
+  initAnalyticsAfterLoad();
+}
+
+function openAnalyticsJsonModal(title, storageKey, reinitFn) {
+  let current = [];
+  try { current = JSON.parse(localStorage.getItem(storageKey) || '[]'); } catch(e) {}
+  const jsonStr = JSON.stringify(current, null, 2);
+  const html = '<div style="max-width:640px"><h3 style="font-family:Cormorant Garamond,serif;font-size:1.25rem;margin-bottom:10px">' + title + '</h3><p style="font-size:0.75rem;color:var(--caffe2);margin-bottom:12px">Formato array JSON. Query: <code>query, clicks, impressions, ctr, position</code>. Pagine: <code>page, clicks, impressions, ctr, position, status</code> (status: top | crescita | nuovo | da migliorare).</p><textarea id="analytics-json-ta" style="width:100%;min-height:260px;font-family:monospace;font-size:0.72rem;padding:10px;border:1px solid #e8e3db;border-radius:8px"></textarea><div style="display:flex;gap:10px;margin-top:16px"><button type="button" class="btn btn-primary" id="analytics-json-save">Salva</button><button type="button" class="btn btn-secondary" id="analytics-json-cancel">Annulla</button></div></div>';
+  const modal = document.createElement('div');
+  modal.id = 'analytics-json-modal';
+  modal.dataset.storageKey = storageKey;
+  modal.dataset.reinitFn = reinitFn;
+  modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+  modal.innerHTML = '<div style="background:#fff;border-radius:16px;padding:24px;max-width:680px;width:100%;max-height:92vh;overflow-y:auto">' + html + '</div>';
+  document.body.appendChild(modal);
+  var ta = modal.querySelector('#analytics-json-ta');
+  if (ta) ta.value = jsonStr;
+  modal.querySelector('#analytics-json-save').addEventListener('click', saveAnalyticsJsonModalSubmit);
+  modal.querySelector('#analytics-json-cancel').addEventListener('click', function() { modal.remove(); });
+  modal.addEventListener('click', function(e) { if (e.target === modal) modal.remove(); });
+}
+
+function saveAnalyticsJsonModalSubmit() {
+  const modal = document.getElementById('analytics-json-modal');
+  if (!modal) return;
+  const storageKey = modal.dataset.storageKey;
+  const reinitFn = modal.dataset.reinitFn;
+  const ta = document.getElementById('analytics-json-ta');
+  if (!ta) return;
+  let parsed;
+  try {
+    parsed = JSON.parse(ta.value);
+  } catch (err) {
+    alert('JSON non valido: ' + err.message);
+    return;
+  }
+  if (!Array.isArray(parsed)) {
+    alert('Il file deve essere un array JSON [...]');
+    return;
+  }
+  localStorage.setItem(storageKey, JSON.stringify(parsed));
+  modal.remove();
+  markAnalyticsDirty();
+  if (reinitFn === 'queries') {
+    renderTopQueries(getAnalyticsQueries());
+    toast('Top Query aggiornate', 'success');
+  } else if (reinitFn === 'pages') {
+    renderTopPages(getAnalyticsPages());
+    toast('Pagine aggiornate', 'success');
+  }
+}
+
+function openAnalyticsQueriesEditor() {
+  openAnalyticsJsonModal('Top Query — incolla array JSON', ANALYTICS_QUERIES_KEY, 'queries');
+}
+
+function openAnalyticsPagesEditor() {
+  openAnalyticsJsonModal('Performance per pagina — incolla array JSON', ANALYTICS_PAGES_KEY, 'pages');
+}
+
+function exportAnalyticsBackup() {
+  const payload = {
+    exported_at: new Date().toISOString(),
+    analytics_snapshots: getAnalyticsData(),
+    analytics_queries: getAnalyticsQueries(),
+    analytics_pages: getAnalyticsPages()
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'righetto-analytics-backup-' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast('Backup scaricato', 'success');
+}
+
+function importAnalyticsBackup(ev) {
+  const f = ev.target.files && ev.target.files[0];
+  if (!f) return;
+  const reader = new FileReader();
+  reader.onload = function() {
+    try {
+      const o = JSON.parse(reader.result);
+      if (o.snapshots) localStorage.setItem(ANALYTICS_STORAGE_KEY, JSON.stringify(o.snapshots));
+      else if (o.analytics_snapshots) localStorage.setItem(ANALYTICS_STORAGE_KEY, JSON.stringify(o.analytics_snapshots));
+      if (o.queries) localStorage.setItem(ANALYTICS_QUERIES_KEY, JSON.stringify(o.queries));
+      else if (o.analytics_queries) localStorage.setItem(ANALYTICS_QUERIES_KEY, JSON.stringify(o.analytics_queries));
+      if (o.pages) localStorage.setItem(ANALYTICS_PAGES_KEY, JSON.stringify(o.pages));
+      else if (o.analytics_pages) localStorage.setItem(ANALYTICS_PAGES_KEY, JSON.stringify(o.analytics_pages));
+      if (typeof o.indexedPages === 'number') window.__rigIndexedPages = o.indexedPages;
+      markAnalyticsDirty();
+      initAnalyticsAfterLoad();
+      toast('Backup importato. Ricarica la sezione se serve.', 'success');
+    } catch (err) {
+      alert('File non valido: ' + err.message);
+    }
+    ev.target.value = '';
+  };
+  reader.readAsText(f);
 }
 
 // Init analytics on section show
