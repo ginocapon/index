@@ -1,0 +1,96 @@
+# ============================================================
+# VENERDÌ RIGRETTO — promemoria piano 90 giorni + Cursor
+# Ogni venerdì alle 06:30 UTC (~07:30 CET) crea un'Issue con:
+# - settimana 1–12 e tema della fase
+# - checklist ricorrente
+# - prompt da incollare in Cursor (l'agente non può partire da solo)
+# ============================================================
+
+name: "Venerdì Righetto — piano settimanale"
+
+on:
+  schedule:
+    - cron: "30 6 * * 5"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  promemoria:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Crea Issue promemoria + prompt Cursor
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const anchor = new Date(Date.UTC(2026, 2, 31));
+            const now = new Date();
+            const msWeek = 7 * 24 * 60 * 60 * 1000;
+            let w = Math.floor((now.getTime() - anchor.getTime()) / msWeek) + 1;
+            if (w < 1) w = 1;
+            if (w > 12) w = ((w - 1) % 12) + 1;
+
+            const themes = [
+              { focus: "Baseline & Search Console", out: "Esporta GSC; elenco 5 URL da migliorare (CTR o pos. 11–20)." },
+              { focus: "Link interni pillar", out: "Da homepage + 3 blog forti → link verso 2 pagine in crescita o da migliorare." },
+              { focus: "Blog: nuovo o refresh", out: "1 articolo nuovo O 1 esistente con +FAQ/schema e data aggiornamento." },
+              { focus: "Zone locali", out: "1 scheda zona o ampliamento testo unico + internal link." },
+              { focus: "Immagini & LCP", out: "Audit LCP home + 2 blog; ottimizzare 1 hero o lazy-load." },
+              { focus: "Landing conversione", out: "1 landing: CTA, copy sopra piega, +200 parole uniche." },
+              { focus: "Schema allineamento", out: "Pagine con 1 solo JSON-LD → set minimo coerente." },
+              { focus: "Recensioni & trust", out: "Recensioni Google su 3 pagine chiave; NAP su contatti." },
+              { focus: "Contenuti money", out: "1 pezzo lungo o refresh con internal link forti." },
+              { focus: "Cluster affitti/studenti", out: "Link blog → servizio-locazioni e zona universitaria." },
+              { focus: "Sitemap vs HTML", out: "Confronto sitemap/file; fix orphan o lastmod." },
+              { focus: "Review trimestrale", out: "Report trimestre; 3 test titoli meta; piano prossimi 90 gg." },
+            ];
+            const t = themes[w - 1];
+            const dateStr = now.toLocaleDateString("it-IT", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              timeZone: "Europe/Rome",
+            });
+
+            const body = `## Promemoria automatico — piano 90 giorni
+
+**Data (Italia):** ${dateStr}  
+**Settimana ciclo:** **${w}/12**  
+**Tema fase:** ${t.focus}  
+**Output minimo atteso:** ${t.out}
+
+---
+
+### Checklist venerdì (spunta in Issue o a mano)
+
+- [ ] Search Console ultimi 7/28 gg: 1 opportunità + 1 anomalia
+- [ ] **Almeno 1 modifica** nel repo (contenuto, link interno, meta, schema o fix)
+- [ ] Google Business Profile: post, foto o risposta recensione
+- [ ] 1 URL top traffico su mobile: CTA ok?
+- [ ] Scelta **una sola priorità** per lunedì–giovedì prossimi
+
+---
+
+### Incolla questo messaggio in Cursor (chat)
+
+\`\`\`text
+È il venerdì Righetto. Leggi la skill \`righetto-venerdi-sito-90giorni\` e dammi il blocco "Venerdì Righetto" per la settimana ${w}/12 con azioni concrete sul repo progetti/index (file da toccare e commit).
+\`\`\`
+
+---
+
+_Issue creata dal workflow \`.github/workflows/venerdi-righetto-piano.yml\` (cron venerdì ~07:30 CET)._
+`;
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `📅 Venerdì Righetto — Settimana ${w}/12 (${t.focus})`,
+              body,
+            });
+
+            core.info(`Issue creata: settimana ${w}/12`);
