@@ -434,7 +434,8 @@ function showExitPopup() {
     ? 'Richiedi una valutazione gratuita — scopri il valore reale del tuo immobile in 24 ore.'
     : 'Parlaci delle tue esigenze: ti aiutiamo a trovare la casa perfetta a Padova e provincia.';
   var ctaText = isVenditore ? 'Valutazione Gratuita' : 'Parla con un Agente';
-  var ctaHref = isVenditore ? 'vendere-casa-padova-errori' : 'contatti';
+  var onLandingVendere = location.pathname.indexOf('landing-vendere-casa-padova') !== -1;
+  var ctaHref = isVenditore ? (onLandingVendere ? '#richiedi' : 'vendere-casa-padova-errori') : 'contatti';
 
   overlay.innerHTML =
     '<div style="background:#fff;border-radius:16px;max-width:460px;width:100%;padding:40px 36px;text-align:center;' +
@@ -535,7 +536,10 @@ function injectStickyCTA() {
   var primaryHref = 'contatti';
   var borderColor = 'var(--oro, #FF6B35)';
 
-  if (path.indexOf('vendita') !== -1 || path.indexOf('vendere') !== -1) {
+  if (path.indexOf('landing-vendere-casa-padova') !== -1) {
+    primaryText = 'Stima gratuita';
+    primaryHref = '#richiedi';
+  } else if (path.indexOf('vendita') !== -1 || path.indexOf('vendere') !== -1) {
     primaryText = 'Valutazione Gratis';
     primaryHref = 'contatti';
   } else if (path.indexOf('valutazion') !== -1) {
@@ -646,6 +650,9 @@ function enhanceHomepageForm() {
    ═══════════════════════════════════════════════════ */
 
 function init() {
+  if (location.pathname.indexOf('landing-vendere-casa-padova') !== -1) {
+    window._leadIntent = 'venditore';
+  }
   runABTests();
   setupCTATracking();
   enhanceSpeedToLead();
