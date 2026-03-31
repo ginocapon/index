@@ -1,0 +1,93 @@
+# Aggiunge una riga allo storico in data/analytics-dashboard.json e fa push su main.
+#
+# Token:
+# - Di solito basta GITHUB_TOKEN (permissions contents: write). Nessun segreto da creare.
+# - Se l'organizzazione blocca il push del token predefinito, crea un PAT fine-grained
+#   (solo Contents: Read+Write su questo repo) e salvalo come repository secret:
+#   ACTIONS_ANALYTICS_PAT
+#
+# Chi può usare il segreto: solo GitHub Actions (e chi ha permesso "Actions secrets" sul repo).
+# L'AI o il sito pubblico non leggono mai il PAT.
+name: Append analytics snapshot
+
+on:
+  workflow_dispatch:
+    inputs:
+      clicks:
+        description: 'GSC — clic (28 gg)'
+        required: true
+        default: '0'
+      impressions:
+        description: 'GSC — impressioni'
+        required: true
+        default: '0'
+      ctr:
+        description: 'GSC — CTR medio (%)'
+        required: true
+        default: '0'
+      position:
+        description: 'GSC — posizione media'
+        required: true
+        default: '0'
+      users:
+        description: 'GA4 — utenti (7 gg)'
+        required: true
+        default: '0'
+      events:
+        description: 'GA4 — eventi (7 gg)'
+        required: true
+        default: '0'
+      newusers:
+        description: 'GA4 — nuovi utenti (7 gg, opzionale)'
+        required: false
+        default: ''
+      indexed_pages:
+        description: 'Pagine indicizzate (opzionale, vuoto = non modificare)'
+        required: false
+        default: ''
+      note:
+        description: 'Nota (opzionale)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.ACTIONS_ANALYTICS_PAT || github.token }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Append snapshot to JSON
+        env:
+          SNAP_CLICKS: ${{ github.event.inputs.clicks }}
+          SNAP_IMPRESSIONS: ${{ github.event.inputs.impressions }}
+          SNAP_CTR: ${{ github.event.inputs.ctr }}
+          SNAP_POSITION: ${{ github.event.inputs.position }}
+          SNAP_USERS: ${{ github.event.inputs.users }}
+          SNAP_EVENTS: ${{ github.event.inputs.events }}
+          SNAP_NEWUSERS: ${{ github.event.inputs.newusers }}
+          SNAP_INDEXED_PAGES: ${{ github.event.inputs.indexed_pages }}
+          SNAP_NOTE: ${{ github.event.inputs.note }}
+        run: node scripts/append-analytics-snapshot.mjs
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/analytics-dashboard.json
+          if git diff --staged --quiet; then
+            echo "Nessuna modifica da committare"
+            exit 0
+          fi
+          git commit -m "chore(analytics): snapshot ${GITHUB_RUN_ID}"
+          git push
