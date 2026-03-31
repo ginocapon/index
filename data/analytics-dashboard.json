@@ -1,5 +1,5 @@
 {
-  "_comment": "Fonte interna senza API: aggiorna questo file a mano o con Cursor/Claude dai numeri GSC/GA, poi commit + push. L'admin carica /data/analytics-dashboard.json sul sito.",
+  "_comment": "Senza API Google. Aggiorna da admin (download JSON), da Cursor, oppure workflow GitHub Actions \"Append analytics snapshot\" (commit automatico). Vedi .github/workflows/append-analytics-snapshot.yml",
   "lastUpdated": "2026-03-11",
   "indexedPages": 55,
   "snapshots": [
