@@ -31,6 +31,30 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # Password admin: resta nel secret ADMIN_PASSWORD, non nel codice del repo.
+      # Imposta in GitHub → Settings → Secrets and variables → Actions → New repository secret.
+      - name: Inject admin password into admin.html
+        env:
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+        run: |
+          python3 << 'PY'
+          import json, os
+          from pathlib import Path
+          path = Path("admin.html")
+          text = path.read_text(encoding="utf-8")
+          token = "__RIGHETTO_ADMIN_PW_JSON__"
+          pwd = os.environ.get("ADMIN_PASSWORD") or ""
+          if not pwd:
+            print("::error::Imposta il repository secret ADMIN_PASSWORD (stessa password dell'admin) altrimenti il login non funziona sul sito pubblicato.")
+            exit(1)
+          if token not in text:
+            print("::error::Placeholder admin password non trovato in admin.html")
+            exit(1)
+          path.write_text(text.replace(token, json.dumps(pwd)), encoding="utf-8")
+          print("OK: admin.html preparato per il deploy (password non in chiaro nel repo).")
+          PY
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
