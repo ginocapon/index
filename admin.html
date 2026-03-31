@@ -4368,23 +4368,20 @@ tr:hover td { background: rgba(206,224,143,0.06); }
       <div class="section" id="sec-analytics">
         <div style="padding:24px">
           <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:6px">Analytics &amp; Performance</h3>
-          <p style="font-size:0.78rem;color:var(--caffe2);margin-bottom:12px">Dashboard KPI — Dati Google Search Console + Google Analytics 4. Ultimo aggiornamento: <strong id="analytics-lastupdate">11 marzo 2026</strong></p>
-          <p style="font-size:0.72rem;color:var(--caffe2);margin-bottom:16px;line-height:1.55;max-width:920px">
-            <strong>Flusso indipendente (senza API Google):</strong> i dati pubblicati sul sito arrivano dal file nel repository
-            <code style="font-size:0.68rem;background:#f0ebe4;padding:2px 6px;border-radius:4px">data/analytics-dashboard.json</code>
-            (stesso concetto di <code style="font-size:0.68rem;background:#f0ebe4;padding:2px 6px;border-radius:4px">data/audit-analyses.json</code> per gli audit).
-            Apri Search Console / GA4 a mano, aggiorni il JSON in Cursor o chiedi a Claude di farlo, poi <strong>commit + push</strong>.
-            Qui sotto puoi anche modificare in browser: le bozze restano locali finche&apos; non scarichi il file per GitHub.
-            L&apos;<strong>audit tecnico HTML</strong> e su <a href="https://github.com/ginocapon/index/actions" target="_blank" rel="noopener">GitHub Actions</a> (nessuna API).
+          <p style="font-size:0.78rem;color:var(--caffe2);margin-bottom:12px">Dashboard KPI — Google Search Console + Google Analytics 4. Ultimo aggiornamento: <strong id="analytics-lastupdate">11 marzo 2026</strong></p>
+          <p style="font-size:0.72rem;color:var(--caffe2);margin-bottom:20px;line-height:1.55;max-width:920px">
+            Tutto <strong>senza API Google</strong>: leggi i numeri in GSC e GA4, poi aggiorni da qui. Per pubblicare sul sito sostituisci
+            <code style="font-size:0.68rem;background:#f0ebe4;padding:2px 6px;border-radius:4px">data/analytics-dashboard.json</code> nel repo e fai push (come per gli audit).
+            L&apos;<strong>audit HTML</strong> resta su <a href="https://github.com/ginocapon/index/actions" target="_blank" rel="noopener">GitHub Actions</a>.
           </p>
-          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;align-items:center">
-            <button type="button" class="btn btn-primary btn-sm" onclick="addAnalyticsSnapshot()" style="font-size:0.78rem">Registra snapshot KPI (GSC+GA)</button>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="openAnalyticsQueriesEditor()" style="font-size:0.78rem">Aggiorna Top Query (JSON)</button>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="openAnalyticsPagesEditor()" style="font-size:0.78rem">Aggiorna Pagine (JSON)</button>
-            <button type="button" class="btn btn-primary btn-sm" onclick="exportAnalyticsDashboardForRepo()" style="font-size:0.78rem">Scarica per GitHub (analytics-dashboard.json)</button>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="analyticsSyncFromRepoFile()" style="font-size:0.78rem">Sincronizza dal sito (scarta bozza locale)</button>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="exportAnalyticsBackup()" style="font-size:0.78rem">Backup completo (legacy)</button>
-            <label class="btn btn-secondary btn-sm" style="font-size:0.78rem;margin:0;cursor:pointer">Importa backup<input type="file" accept="application/json" style="display:none" onchange="importAnalyticsBackup(event)"></label>
+          <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:28px;max-width:560px">
+            <button type="button" class="btn btn-primary" onclick="openAnalyticsVerificaModal()" style="font-size:1.05rem;padding:16px 24px;font-weight:600;border:none;background:linear-gradient(135deg,#5a67d8,#6b46c1);border-radius:12px;box-shadow:0 4px 14px rgba(102,126,234,0.35)">
+              Verifica e aggiorna GSC + GA4
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="exportAnalyticsPdfReport()" style="font-size:0.95rem;padding:14px 22px;border-radius:12px;border:2px solid #c4b8a8;background:#fff;color:var(--caffe);font-weight:600">
+              Scarica report PDF (performance + parole chiave + pagine)
+            </button>
+            <p style="font-size:0.68rem;color:var(--caffe2);margin:0;line-height:1.45">Il PDF si apre in una nuova scheda: usa <strong>Stampa → Salva come PDF</strong> nel browser.</p>
           </div>
 
           <!-- KPI Cards -->
@@ -4439,7 +4436,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           <div class="table-wrap" style="margin-bottom:24px">
             <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #e8e3db;flex-wrap:wrap;gap:8px">
               <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin:0">Storico Performance — Snapshot Periodici</h4>
-              <span style="font-size:0.72rem;color:var(--caffe2);">Manuale: pulsante &laquo;Registra snapshot KPI&raquo; — oppure automatizzare in futuro con API GSC/GA + Supabase</span>
+              <span style="font-size:0.72rem;color:var(--caffe2);">Registra nuovi periodi da &laquo;Verifica e aggiorna GSC + GA4&raquo;</span>
             </div>
             <div style="overflow-x:auto">
               <table style="width:100%;border-collapse:collapse;font-size:0.8rem" id="analytics-history-table">
@@ -10899,6 +10896,111 @@ function analyticsSyncFromRepoFile() {
   toast('Sincronizzazione dal file sul sito avviata…', 'success');
 }
 
+function _analyticsEscapeHtml(s) {
+  if (s == null) return '';
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function closeAnalyticsVerificaModal() {
+  var m = document.getElementById('analytics-verifica-modal');
+  if (m) m.remove();
+}
+
+function openAnalyticsVerificaModal() {
+  closeAnalyticsVerificaModal();
+  var wrap = document.createElement('div');
+  wrap.id = 'analytics-verifica-modal';
+  wrap.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px';
+  wrap.innerHTML = '<div style="background:#fff;border-radius:16px;padding:28px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,.2)">' +
+    '<h3 style="font-family:Cormorant Garamond,serif;font-size:1.45rem;margin:0 0 8px 0">Verifica GSC + GA4</h3>' +
+    '<p style="font-size:0.76rem;color:var(--caffe2);line-height:1.5;margin:0 0 18px 0">Apri le console, annota i valori dell&apos;ultimo periodo (GSC 28gg, GA4 7gg), poi aggiorna qui. Nessuna API: i dati restano sotto il tuo controllo.</p>' +
+    '<ol style="font-size:0.78rem;color:var(--caffe);margin:0 0 18px 1.1rem;padding:0;line-height:1.65">' +
+    '<li><a href="https://search.google.com/search-console" target="_blank" rel="noopener">Search Console</a> — Prestazioni</li>' +
+    '<li><a href="https://analytics.google.com/" target="_blank" rel="noopener">Google Analytics 4</a> — Rapporti</li>' +
+    '</ol>' +
+    '<div style="display:flex;flex-direction:column;gap:10px">' +
+    '<button type="button" class="btn btn-secondary" style="width:100%;text-align:left" onclick="closeAnalyticsVerificaModal();analyticsSyncFromRepoFile()">Riallinea con il file già pubblicato sul sito</button>' +
+    '<button type="button" class="btn btn-primary" style="width:100%" onclick="closeAnalyticsVerificaModal();addAnalyticsSnapshot()">Inserisci nuovo snapshot (numeri GSC + GA4)</button>' +
+    '<button type="button" class="btn btn-secondary" style="width:100%" onclick="closeAnalyticsVerificaModal();openAnalyticsQueriesEditor()">Parole chiave — modifica elenco (JSON)</button>' +
+    '<button type="button" class="btn btn-secondary" style="width:100%" onclick="closeAnalyticsVerificaModal();openAnalyticsPagesEditor()">Pagine — modifica elenco (JSON)</button>' +
+    '<hr style="border:none;border-top:1px solid #e8e3db;margin:8px 0">' +
+    '<button type="button" class="btn btn-primary" style="width:100%;background:linear-gradient(135deg,#2d7a4f,#1e5c3a);border:none" onclick="exportAnalyticsDashboardForRepo();closeAnalyticsVerificaModal()">Scarica JSON per GitHub (analytics-dashboard.json)</button>' +
+    '<p style="font-size:0.68rem;color:var(--caffe2);margin:0">Sostituisci il file in <code>data/</code>, commit e push per aggiornare il sito.</p>' +
+    '<details style="margin-top:12px;font-size:0.74rem;color:var(--caffe2)"><summary style="cursor:pointer;font-weight:600;color:var(--caffe)">Backup e ripristino</summary>' +
+    '<div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">' +
+    '<button type="button" class="btn btn-secondary btn-sm" onclick="exportAnalyticsBackup()">Scarica backup JSON (legacy)</button>' +
+    '<label class="btn btn-secondary btn-sm" style="margin:0;cursor:pointer;text-align:center">Importa backup<input type="file" accept="application/json" style="display:none" onchange="importAnalyticsBackup(event)"></label>' +
+    '</div></details>' +
+    '<button type="button" class="btn btn-secondary" style="width:100%;margin-top:16px" onclick="closeAnalyticsVerificaModal()">Chiudi</button>' +
+    '</div></div>';
+  wrap.addEventListener('click', function(e) { if (e.target === wrap) closeAnalyticsVerificaModal(); });
+  document.body.appendChild(wrap);
+}
+
+function exportAnalyticsPdfReport() {
+  var data = getAnalyticsData().slice().sort(function(a, b) { return b.data.localeCompare(a.data); });
+  var queries = getAnalyticsQueries();
+  var pages = getAnalyticsPages();
+  var latest = data[0] || {};
+  var lu = document.getElementById('analytics-lastupdate');
+  var lastTxt = lu ? lu.textContent : '';
+  var idx = document.getElementById('kpi-indexed');
+  var idxTxt = idx ? idx.textContent : '';
+
+  function rowSnap(d) {
+    return '<tr><td>' + _analyticsEscapeHtml(d.data) + '</td><td style="text-align:right">' + (d.clicks != null ? d.clicks : '—') + '</td><td style="text-align:right">' + (d.impressions != null ? Number(d.impressions).toLocaleString('it') : '—') + '</td><td style="text-align:right">' + (d.ctr != null ? String(d.ctr).replace('.', ',') + '%' : '—') + '</td><td style="text-align:right">' + (d.position != null ? String(d.position).replace('.', ',') : '—') + '</td><td style="text-align:right">' + (d.users != null ? d.users : '—') + '</td><td style="text-align:right">' + (d.events != null ? d.events : '—') + '</td><td style="text-align:right">' + (d.newusers != null ? d.newusers : '—') + '</td></tr>';
+  }
+  function rowQ(q) {
+    return '<tr><td>' + _analyticsEscapeHtml(q.query) + '</td><td style="text-align:right">' + (q.clicks != null ? q.clicks : '—') + '</td><td style="text-align:right">' + (q.impressions != null ? Number(q.impressions).toLocaleString('it') : '—') + '</td><td style="text-align:right">' + (q.ctr != null ? String(q.ctr).replace('.', ',') + '%' : '—') + '</td><td style="text-align:right">' + (q.position != null ? String(q.position).replace('.', ',') : '—') + '</td></tr>';
+  }
+  function rowP(p) {
+    return '<tr><td>' + _analyticsEscapeHtml(p.page) + '</td><td style="text-align:right">' + (p.clicks != null ? p.clicks : '—') + '</td><td style="text-align:right">' + (p.impressions != null ? Number(p.impressions).toLocaleString('it') : '—') + '</td><td style="text-align:right">' + (p.ctr != null ? String(p.ctr).replace('.', ',') + '%' : '—') + '</td><td style="text-align:right">' + (p.position != null ? String(p.position).replace('.', ',') : '—') + '</td><td>' + _analyticsEscapeHtml(p.status || '—') + '</td></tr>';
+  }
+
+  var summaryRows =
+    '<tr><td>Clic (28gg)</td><td style="text-align:right">' + (latest.clicks != null ? latest.clicks : '—') + '</td></tr>' +
+    '<tr><td>Impressioni</td><td style="text-align:right">' + (latest.impressions != null ? Number(latest.impressions).toLocaleString('it') : '—') + '</td></tr>' +
+    '<tr><td>CTR</td><td style="text-align:right">' + (latest.ctr != null ? String(latest.ctr).replace('.', ',') + '%' : '—') + '</td></tr>' +
+    '<tr><td>Posizione media</td><td style="text-align:right">' + (latest.position != null ? String(latest.position).replace('.', ',') : '—') + '</td></tr>' +
+    '<tr><td>Utenti GA (7gg)</td><td style="text-align:right">' + (latest.users != null ? latest.users : '—') + '</td></tr>' +
+    '<tr><td>Eventi GA</td><td style="text-align:right">' + (latest.events != null ? latest.events : '—') + '</td></tr>' +
+    '<tr><td>Nuovi utenti</td><td style="text-align:right">' + (latest.newusers != null ? latest.newusers : '—') + '</td></tr>' +
+    '<tr><td>Pagine indicizzate</td><td style="text-align:right">' + _analyticsEscapeHtml(idxTxt || '—') + '</td></tr>';
+
+  var html = '<!DOCTYPE html><html lang="it"><head><meta charset="utf-8"><title>Report Analytics — Righetto</title>' +
+    '<style>body{font-family:Segoe UI,system-ui,sans-serif;color:#222;padding:24px;max-width:900px;margin:0 auto;font-size:12px}' +
+    'h1{font-size:20px;margin:0 0 4px 0}h2{font-size:14px;margin:24px 0 8px 0;border-bottom:2px solid #667eea;padding-bottom:4px}' +
+    '.meta{color:#666;margin-bottom:20px;font-size:11px}table{width:100%;border-collapse:collapse;margin-bottom:8px}' +
+    'th,td{border:1px solid #ccc;padding:6px 8px}th{background:#f0f0f0;text-align:left;font-size:11px}' +
+    'th.num,td.num{text-align:right}@media print{body{padding:12px}}</style></head><body>' +
+    '<h1>Righetto Immobiliare — Analytics &amp; Performance</h1>' +
+    '<div class="meta">Generato il ' + _analyticsEscapeHtml(new Date().toLocaleString('it-IT')) + ' · Ultimo aggiornamento dashboard: ' + _analyticsEscapeHtml(lastTxt) + '</div>' +
+    '<h2>Riepilogo ultimo periodo</h2><table><tbody>' + summaryRows + '</tbody></table>' +
+    '<h2>Storico snapshot</h2><table><thead><tr><th>Data</th><th class="num">Clic</th><th class="num">Impr.</th><th class="num">CTR</th><th class="num">Pos.</th><th class="num">Utenti</th><th class="num">Eventi</th><th class="num">Nuovi</th></tr></thead><tbody>' +
+    (data.length ? data.map(rowSnap).join('') : '<tr><td colspan="8">Nessuno snapshot</td></tr>') + '</tbody></table>' +
+    '<h2>Parole chiave (Search Console)</h2><table><thead><tr><th>Query</th><th class="num">Clic</th><th class="num">Impr.</th><th class="num">CTR</th><th class="num">Pos.</th></tr></thead><tbody>' +
+    (queries.length ? queries.map(rowQ).join('') : '<tr><td colspan="5">Nessuna query</td></tr>') + '</tbody></table>' +
+    '<h2>Performance per pagina</h2><table><thead><tr><th>Pagina</th><th class="num">Clic</th><th class="num">Impr.</th><th class="num">CTR</th><th class="num">Pos.</th><th>Status</th></tr></thead><tbody>' +
+    (pages.length ? pages.map(rowP).join('') : '<tr><td colspan="6">Nessuna pagina</td></tr>') + '</tbody></table>' +
+    '<p style="margin-top:28px;font-size:10px;color:#888">Report interno — dati da dashboard admin (GSC/GA4 inseriti manualmente).</p>' +
+    '</body></html>';
+
+  var w = window.open('', '_blank');
+  if (!w) {
+    toast('Abilita i popup per stampare il PDF', 'error');
+    return;
+  }
+  w.document.write(html);
+  w.document.close();
+  setTimeout(function() {
+    try { w.focus(); w.print(); } catch (e) {}
+  }, 300);
+}
+
 function exportAnalyticsDashboardForRepo() {
   var payload = {
     lastUpdated: new Date().toISOString().slice(0, 10),
@@ -11116,7 +11218,7 @@ function renderAnalyticsChart(data) {
 function addAnalyticsSnapshot() {
   const data = getAnalyticsData();
   const today = new Date().toISOString().slice(0,10);
-  const html = '<div style="max-width:500px"><h3 style="font-family:Cormorant Garamond,serif;font-size:1.3rem;margin-bottom:16px">Nuovo Snapshot Analytics</h3><p style="font-size:0.78rem;color:var(--caffe2);margin-bottom:16px">Inserisci i dati da Google Search Console (28gg) e Google Analytics (7gg).</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="form-group"><label>Data</label><input type="date" id="snap-data" value="'+today+'"></div><div class="form-group"><label>Periodo</label><input type="text" id="snap-periodo" value="28gg" readonly></div><div class="form-group"><label>Clic GSC</label><input type="number" id="snap-clicks" placeholder="150"></div><div class="form-group"><label>Impressioni GSC</label><input type="number" id="snap-impressions" placeholder="1590"></div><div class="form-group"><label>CTR Media (%)</label><input type="number" id="snap-ctr" step="0.1" placeholder="9.4"></div><div class="form-group"><label>Posizione Media</label><input type="number" id="snap-position" step="0.1" placeholder="8.1"></div><div class="form-group"><label>Utenti GA (7gg)</label><input type="number" id="snap-users" placeholder="96"></div><div class="form-group"><label>Eventi GA (7gg)</label><input type="number" id="snap-events" placeholder="926"></div></div><div class="form-group" style="margin-top:12px"><label>Note</label><input type="text" id="snap-note" placeholder="Nota opzionale"></div><div style="display:flex;gap:12px;margin-top:20px"><button class="btn btn-primary" onclick="saveAnalyticsSnapshot()">Salva Snapshot</button><button class="btn btn-secondary" onclick="document.getElementById(\\\'snap-modal\\\').remove()">Annulla</button></div></div>';
+  const html = '<div style="max-width:500px"><h3 style="font-family:Cormorant Garamond,serif;font-size:1.3rem;margin-bottom:16px">Nuovo Snapshot Analytics</h3><p style="font-size:0.78rem;color:var(--caffe2);margin-bottom:16px">Inserisci i dati da Google Search Console (28gg) e Google Analytics (7gg).</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="form-group"><label>Data</label><input type="date" id="snap-data" value="'+today+'"></div><div class="form-group"><label>Periodo</label><input type="text" id="snap-periodo" value="28gg" readonly></div><div class="form-group"><label>Clic GSC</label><input type="number" id="snap-clicks" placeholder="150"></div><div class="form-group"><label>Impressioni GSC</label><input type="number" id="snap-impressions" placeholder="1590"></div><div class="form-group"><label>CTR Media (%)</label><input type="number" id="snap-ctr" step="0.1" placeholder="9.4"></div><div class="form-group"><label>Posizione Media</label><input type="number" id="snap-position" step="0.1" placeholder="8.1"></div><div class="form-group"><label>Utenti GA (7gg)</label><input type="number" id="snap-users" placeholder="96"></div><div class="form-group"><label>Eventi GA (7gg)</label><input type="number" id="snap-events" placeholder="926"></div><div class="form-group"><label>Nuovi utenti (7gg)</label><input type="number" id="snap-newusers" placeholder="9"></div></div><div class="form-group" style="margin-top:12px"><label>Note</label><input type="text" id="snap-note" placeholder="Nota opzionale"></div><div style="display:flex;gap:12px;margin-top:20px"><button class="btn btn-primary" onclick="saveAnalyticsSnapshot()">Salva Snapshot</button><button class="btn btn-secondary" onclick="document.getElementById(\\\'snap-modal\\\').remove()">Annulla</button></div></div>';
   const modal = document.createElement('div');
   modal.id = 'snap-modal';
   modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
@@ -11138,6 +11240,11 @@ function saveAnalyticsSnapshot() {
     events: parseInt(document.getElementById('snap-events').value) || 0,
     note: document.getElementById('snap-note').value || ''
   };
+  var nuRaw = document.getElementById('snap-newusers') && document.getElementById('snap-newusers').value;
+  if (nuRaw !== '' && nuRaw != null) {
+    var n = parseInt(nuRaw, 10);
+    if (!isNaN(n)) snap.newusers = n;
+  }
   data.push(snap);
   localStorage.setItem(ANALYTICS_STORAGE_KEY, JSON.stringify(data));
   document.getElementById('snap-modal').remove();
