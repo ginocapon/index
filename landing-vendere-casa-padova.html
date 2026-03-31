@@ -305,6 +305,19 @@ footer{background:var(--nero);padding:3rem 1.5rem 1.5rem}
   </div>
 </section>
 
+<!-- MICRO CTA VENDITORE -->
+<section class="sec" style="padding-top:2rem;padding-bottom:2rem">
+  <div class="sec-inner sr" style="background:#fff;border:1px solid #e8e4de;border-left:4px solid var(--oro);padding:1.2rem 1.1rem;border-radius:8px">
+    <p style="font-size:.9rem;color:var(--grigio);line-height:1.7;margin-bottom:.8rem;">
+      Vuoi una fascia di prezzo realistica per vendere a Padova senza perdere mesi? Compila il form qui sotto oppure chiamaci ora.
+    </p>
+    <div class="cta-btns" style="justify-content:flex-start;gap:.55rem;">
+      <a href="#richiedi" class="btn-gold">Richiedi stima gratuita</a>
+      <a href="tel:+390498843484" class="btn-outline" style="border-color:#d9d2c8;color:#2C4A6E;">Chiama 049.88.43.484</a>
+    </div>
+  </div>
+</section>
+
 <!-- FORM -->
 <div class="page-grid" id="richiedi">
   <div>
@@ -318,7 +331,7 @@ footer{background:var(--nero);padding:3rem 1.5rem 1.5rem}
       <p>Scopri quanto vale il tuo immobile in citta'</p>
     </div>
     <div class="fb-body">
-      <form onsubmit="return false;" novalidate>
+      <form id="landing-vendita-form" onsubmit="return false;" novalidate>
       <div class="field"><label for="f-nome">Nome e Cognome *</label><input type="text" id="f-nome" placeholder="Mario Rossi"></div>
       <div class="field"><label for="f-tel">Telefono *</label><input type="tel" id="f-tel" placeholder="333 123 4567"></div>
       <div class="field"><label for="f-email">Email</label><input type="email" id="f-email" placeholder="mario@email.it"></div>
@@ -330,7 +343,7 @@ footer{background:var(--nero);padding:3rem 1.5rem 1.5rem}
       </div>
       <div class="field"><label for="f-note">Note</label><textarea id="f-note" placeholder="Metratura, piano, stato dell'immobile, tempistiche desiderate..."></textarea></div>
       <div class="fchk"><input type="checkbox" id="f-gdpr"><label for="f-gdpr">Acconsento al trattamento dei dati ai sensi del GDPR</label></div>
-      <button class="fsub" onclick="sendForm()">Richiedi stima senza impegno</button>
+      <button class="fsub fc-submit" onclick="sendForm()">Richiedi stima senza impegno</button>
       </form>
       <a href="tel:+390498843484" class="fb-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>Oppure chiama <strong>049.88.43.484</strong></a>
     </div>
@@ -376,14 +389,28 @@ footer{background:var(--nero);padding:3rem 1.5rem 1.5rem}
 async function sendForm(){
   const n=document.getElementById('f-nome').value.trim();
   const t=document.getElementById('f-tel').value.trim();
+  const e=document.getElementById('f-email').value.trim();
+  const z=document.getElementById('f-zona').value.trim();
+  const tipo=document.getElementById('f-tipo').value.trim();
+  const note=document.getElementById('f-note').value.trim();
   if(!n||!t){alert('Inserisci nome e telefono');return}
   if(!document.getElementById('f-gdpr').checked){alert('Accetta la privacy policy');return}
   try{
+    const dettaglioLead='Richiesta valutazione da landing vendere casa padova' +
+      (z ? ' | Zona: '+z : '') +
+      (tipo ? ' | Tipo: '+tipo : '') +
+      (note ? ' | Note: '+note : '');
     const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');
-    if(sb){await sb.from('richieste').insert([{nome:n,telefono:t,messaggio:'Richiesta valutazione da landing vendere casa padova',provenienza:'form-vendere-casa-padova',letto:false}]);}
-    if(typeof SERVIZI_CONFIG!=='undefined'){await SERVIZI_CONFIG.sendNotifica({subject:'Landing Vendere Casa Padova — '+n,html_body:'<b>Nome:</b> '+n+'<br><b>Telefono:</b> '+t+'<br><b>Pagina:</b> Richiesta valutazione da landing vendere casa padova'});}
+    if(sb){await sb.from('richieste').insert([{nome:n,email:e||null,telefono:t,messaggio:dettaglioLead,provenienza:'form-vendere-casa-padova-v2',letto:false}]);}
+    if(typeof SERVIZI_CONFIG!=='undefined'){await SERVIZI_CONFIG.sendNotifica({subject:'Landing Vendere Casa Padova — '+n,html_body:'<b>Nome:</b> '+n+'<br><b>Email:</b> '+(e||'-')+'<br><b>Telefono:</b> '+t+'<br><b>Zona:</b> '+(z||'-')+'<br><b>Tipologia:</b> '+(tipo||'-')+'<br><b>Note:</b> '+(note||'-')+'<br><b>Pagina:</b> Richiesta valutazione da landing vendere casa padova'});}
+    if(typeof gtag==='function'){gtag('event','generate_lead',{event_category:'form_submit',event_label:'landing_vendere_padova',lead_type:'venditore',lead_focus:'padova'});}
+    try{sessionStorage.setItem('form_submitted','1');}catch(x){}
+    window._leadIntent='venditore';
     alert('Richiesta inviata! Ti ricontatteremo entro 24 ore.');
-  }catch(e){alert('Errore. Chiama il 049.88.43.484')}
+  }catch(err){
+    if(typeof gtag==='function'){gtag('event','exception',{description:'landing_vendere_padova_sendform_error',fatal:false});}
+    alert('Errore. Chiama il 049.88.43.484')
+  }
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
@@ -392,7 +419,7 @@ async function sendForm(){
 <script>(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js';document.body.appendChild(s);}
 setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
 })();</script>
-<script src="js/lead-conversion.js?v=3" defer></script>
+<script src="js/lead-conversion.js?v=4" defer></script>
 <script src="js/cookie-consent.js?v=3" defer></script>
 <script src="js/scroll-reveal.js?v=3" defer></script>
 <script src="js/welcome-popup.js?v=3" defer></script>
