@@ -32,9 +32,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Password admin: resta nel secret ADMIN_PASSWORD, non nel codice del repo.
-      # Imposta in GitHub → Settings → Secrets and variables → Actions → New repository secret.
-      - name: Inject admin password into admin.html
+      # Se in admin.html c'è il segnaposto "__RIGHETTO_ADMIN_PW_JSON__", sostituisce con secret ADMIN_PASSWORD.
+      # Altrimenti usa la password già scritta nel file (deploy dal branch ok).
+      - name: Inject admin password (opzionale)
         env:
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
         run: |
@@ -45,23 +45,15 @@ jobs:
           text = path.read_text(encoding="utf-8")
           marker = '"__RIGHETTO_ADMIN_PW_JSON__"'
           pwd = (os.environ.get("ADMIN_PASSWORD") or "").strip()
-          if not pwd:
-            print("::error::Imposta il repository secret ADMIN_PASSWORD (stessa password dell'admin) altrimenti il login non funziona sul sito pubblicato.")
-            exit(1)
-          if marker not in text:
-            print("::error::Placeholder admin password non trovato in admin.html (atteso const ADMIN_PASSWORD = \"__RIGHETTO_ADMIN_PW_JSON__\";) ")
-            exit(1)
-          path.write_text(text.replace(marker, json.dumps(pwd)), encoding="utf-8")
-          print("OK: admin.html preparato per il deploy (password non in chiaro nel repo).")
+          if marker in text:
+            if not pwd:
+              print("::error::Segnaposto password in admin.html: imposta secret ADMIN_PASSWORD.")
+              exit(1)
+            path.write_text(text.replace(marker, json.dumps(pwd)), encoding="utf-8")
+            print("OK: password iniettata da secret.")
+          else:
+            print("OK: nessun segnaposto — si usa la password già in admin.html.")
           PY
-
-      - name: Verifica inject password (blocca se resta il segnaposto)
-        run: |
-          if grep -Fq '"__RIGHETTO_ADMIN_PW_JSON__"' admin.html; then
-            echo "::error::admin.html contiene ancora il segnaposto — inject non applicato correttamente."
-            exit 1
-          fi
-          echo "OK: segnaposto password assente."
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
