@@ -93,4 +93,4 @@ _Issue creata dal workflow \`.github/workflows/venerdi-righetto-piano.yml\` (cro
               body,
             });
 
-            core.info(`Issue creata: settimana ${w}/12`);
+            console.log(`Issue creata: settimana ${w}/12`);
