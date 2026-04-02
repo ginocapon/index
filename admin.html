@@ -4695,7 +4695,7 @@ function checkAuth() {
     window.history.replaceState({}, '', window.location.pathname);
   }
 
-  if (session === 'ok') {
+  if (session === 'ok' || session === 'success') {
     // Already authenticated this session (password + 2FA already verified)
     grantAccess();
   } else if (urlKey === URL_KEY) {
@@ -4712,7 +4712,7 @@ function checkAuth() {
 }
 
 function grantAccess() {
-  sessionStorage.setItem('rig_admin', 'success');
+  sessionStorage.setItem('rig_admin', 'ok');
   document.getElementById('loginOverlay').style.display = 'none';
   document.getElementById('appWrapper').style.display = 'flex';
   init().catch(err => {
@@ -4723,12 +4723,24 @@ function grantAccess() {
 }
 
 function doLogin() {
-  const pass = document.getElementById('loginPass').value;
-  if (pass !== ADMIN_PASSWORD) {
-    document.getElementById('loginError').style.display = 'block';
+  const errEl = document.getElementById('loginError');
+  const pass = document.getElementById('loginPass').value.trim();
+  /* Se vedi questo valore, il file online non passa dal workflow che inietta il secret (o cache vecchia). */
+  if (ADMIN_PASSWORD === '__RIGHETTO_ADMIN_PW_JSON__') {
+    errEl.textContent = 'Sito senza password da deploy: in GitHub esegui «Deploy static content to Pages» (secret ADMIN_PASSWORD) e imposta Pages solo su GitHub Actions. Poi svuota cache.';
+    errEl.style.display = 'block';
     document.getElementById('loginPass').style.borderColor = 'var(--rosso)';
     return;
   }
+  if (pass !== ADMIN_PASSWORD) {
+    errEl.textContent = 'Password non corretta (controlla maiuscole/spazi; deve coincidere col secret ADMIN_PASSWORD).';
+    errEl.style.display = 'block';
+    document.getElementById('loginPass').style.borderColor = 'var(--rosso)';
+    return;
+  }
+  errEl.textContent = 'Password non corretta';
+  errEl.style.display = 'none';
+  document.getElementById('loginPass').style.borderColor = '';
 
   // Password OK — check if 2FA is enabled
   const totpSecret = localStorage.getItem('rig_2fa_secret');

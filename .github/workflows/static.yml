@@ -44,7 +44,7 @@ jobs:
           path = Path("admin.html")
           text = path.read_text(encoding="utf-8")
           marker = '"__RIGHETTO_ADMIN_PW_JSON__"'
-          pwd = os.environ.get("ADMIN_PASSWORD") or ""
+          pwd = (os.environ.get("ADMIN_PASSWORD") or "").strip()
           if not pwd:
             print("::error::Imposta il repository secret ADMIN_PASSWORD (stessa password dell'admin) altrimenti il login non funziona sul sito pubblicato.")
             exit(1)
