@@ -55,6 +55,14 @@ jobs:
           print("OK: admin.html preparato per il deploy (password non in chiaro nel repo).")
           PY
 
+      - name: Verifica inject password (blocca se resta il segnaposto)
+        run: |
+          if grep -Fq '"__RIGHETTO_ADMIN_PW_JSON__"' admin.html; then
+            echo "::error::admin.html contiene ancora il segnaposto — inject non applicato correttamente."
+            exit 1
+          fi
+          echo "OK: segnaposto password assente."
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

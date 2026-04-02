@@ -4666,7 +4666,20 @@ const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
 /* In CI la stringa segnaposto viene sostituita con json.dumps(secret) — nel repo resta JS valido */
 const ADMIN_PASSWORD = "__RIGHETTO_ADMIN_PW_JSON__";
+/**
+ * EMERGENZA (solo se il login non va mai): stessa password del secret GitHub, tra apici.
+ * Il workflow sostituisce solo la riga sopra; questa riga resta e fa funzionare anche deploy "dal branch".
+ * Quando l'inject funziona, lascia '' e rimuovi dal commit prima possibile (è pubblica su GitHub).
+ */
+const ADMIN_PASSWORD_OVERRIDE = '';
+
 const URL_KEY = 'RIG2024';
+
+function effectiveAdminPassword() {
+  if (ADMIN_PASSWORD !== '__RIGHETTO_ADMIN_PW_JSON__') return ADMIN_PASSWORD;
+  const o = (ADMIN_PASSWORD_OVERRIDE || '').trim();
+  return o || ADMIN_PASSWORD;
+}
 
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -4725,15 +4738,15 @@ function grantAccess() {
 function doLogin() {
   const errEl = document.getElementById('loginError');
   const pass = document.getElementById('loginPass').value.trim();
-  /* Se vedi questo valore, il file online non passa dal workflow che inietta il secret (o cache vecchia). */
-  if (ADMIN_PASSWORD === '__RIGHETTO_ADMIN_PW_JSON__') {
-    errEl.textContent = 'Sito senza password da deploy: in GitHub esegui «Deploy static content to Pages» (secret ADMIN_PASSWORD) e imposta Pages solo su GitHub Actions. Poi svuota cache.';
+  const eff = effectiveAdminPassword();
+  if (eff === '__RIGHETTO_ADMIN_PW_JSON__') {
+    errEl.textContent = 'Password non configurata sul sito: esegui «Deploy static content to Pages», secret ADMIN_PASSWORD, Pages = GitHub Actions. In emergenza chiedi allo sviluppatore ADMIN_PASSWORD_OVERRIDE in admin.html (poi rimuovere).';
     errEl.style.display = 'block';
     document.getElementById('loginPass').style.borderColor = 'var(--rosso)';
     return;
   }
-  if (pass !== ADMIN_PASSWORD) {
-    errEl.textContent = 'Password non corretta (controlla maiuscole/spazi; deve coincidere col secret ADMIN_PASSWORD).';
+  if (pass !== eff) {
+    errEl.textContent = 'Password non corretta (uguale al secret o a ADMIN_PASSWORD_OVERRIDE se lo usi).';
     errEl.style.display = 'block';
     document.getElementById('loginPass').style.borderColor = 'var(--rosso)';
     return;
