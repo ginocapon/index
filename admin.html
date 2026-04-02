@@ -659,6 +659,17 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 .upload-label { font-size: 0.88rem; font-weight: 600; color: var(--testo); margin-bottom: 4px; }
 .upload-hint { font-size: 0.72rem; color: var(--caffe2); }
 
+.foto-thumb-cell {
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+.foto-thumb-cell:active { cursor: grabbing; }
+.foto-thumb-cell.foto-drag-over {
+  outline: 3px solid var(--oro);
+  outline-offset: 2px;
+}
+
 .upload-progress {
   background: var(--sfondo);
   border-radius: 8px;
@@ -6211,17 +6222,71 @@ function addFotoUrl() {
   document.getElementById('fotoUrlInput').value = '';
 }
 
+function escFotoUrlAttr(url) {
+  return String(url || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+}
+
 function renderFotos() {
   const el = document.getElementById('fotoList');
   if (!currentFotos.length) { el.innerHTML = '<div style="font-size:0.78rem;color:var(--caffe2);padding:8px">Nessuna foto ancora</div>'; return; }
-  const W = el.offsetWidth || 800;
-  const colW = Math.floor((W - 50) / 6);
-  el.innerHTML = '<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:12px;width:100%">' + currentFotos.map((url, i) => `
-    <div style="height:120px;border-radius:8px;overflow:hidden;background:url('${url}') center/cover no-repeat #ccc;position:relative;border:2px solid #ddd">
-      <button onclick="removeFoto(${i})" style="position:absolute;top:3px;right:3px;background:rgba(220,50,50,0.9);color:#fff;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:11px;line-height:22px;text-align:center;padding:0;z-index:9">✕</button>
+  el.innerHTML = '<p style="font-size:0.72rem;color:var(--caffe2);margin:8px 0 0">Trascina le foto per cambiare ordine. La <strong>prima</strong> è la foto principale (anche in elenco e card).</p>' +
+    '<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:12px;width:100%">' + currentFotos.map((url, i) => `
+    <div class="foto-thumb-cell" draggable="true" title="Trascina per riordinare"
+      ondragstart="fotoDragStart(event,${i})" ondragover="fotoDragOver(event)" ondragleave="fotoDragLeave(event)"
+      ondrop="fotoDrop(event,${i})" ondragend="fotoDragEnd(event)"
+      style="height:120px;border-radius:8px;overflow:hidden;position:relative;border:2px solid #ddd;background:#ccc">
+      <img src="${escFotoUrlAttr(url)}" alt="" draggable="false" style="width:100%;height:100%;object-fit:cover;pointer-events:none;display:block">
+      <button type="button" onclick="event.stopPropagation();removeFoto(${i})" style="position:absolute;top:3px;right:3px;background:rgba(220,50,50,0.9);color:#fff;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:11px;line-height:22px;text-align:center;padding:0;z-index:9">✕</button>
+      <div style="position:absolute;top:3px;left:3px;display:flex;gap:2px;z-index:8">
+        <button type="button" onclick="event.stopPropagation();fotoMove(${i},-1)" ${i===0?'disabled':''} style="padding:0 4px;min-width:22px;height:22px;border:none;border-radius:4px;background:rgba(0,0,0,0.55);color:#fff;font-size:10px;cursor:pointer;opacity:${i===0?0.35:1}" title="Sposta a sinistra">◀</button>
+        <button type="button" onclick="event.stopPropagation();fotoMove(${i},1)" ${i===currentFotos.length-1?'disabled':''} style="padding:0 4px;min-width:22px;height:22px;border:none;border-radius:4px;background:rgba(0,0,0,0.55);color:#fff;font-size:10px;cursor:pointer;opacity:${i===currentFotos.length-1?0.35:1}" title="Sposta a destra">▶</button>
+      </div>
       <span style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,0.6);color:#fff;font-size:9px;padding:1px 4px;border-radius:3px">${i===0?'⭐':i+1}</span>
     </div>
   `).join('') + '</div>';
+}
+
+function fotoMove(i, delta) {
+  const j = i + delta;
+  if (j < 0 || j >= currentFotos.length) return;
+  const u = currentFotos[i];
+  currentFotos[i] = currentFotos[j];
+  currentFotos[j] = u;
+  renderFotos();
+}
+
+function fotoDragStart(e, i) {
+  e.dataTransfer.setData('text/plain', String(i));
+  e.dataTransfer.effectAllowed = 'move';
+  e.currentTarget.style.opacity = '0.45';
+}
+
+function fotoDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const cell = e.currentTarget.closest('.foto-thumb-cell');
+  if (cell) cell.classList.add('foto-drag-over');
+}
+
+function fotoDragLeave(e) {
+  const cell = e.currentTarget.closest('.foto-thumb-cell');
+  if (cell) cell.classList.remove('foto-drag-over');
+}
+
+function fotoDrop(e, toIdx) {
+  e.preventDefault();
+  const cell = e.currentTarget.closest('.foto-thumb-cell');
+  if (cell) cell.classList.remove('foto-drag-over');
+  const from = parseInt(e.dataTransfer.getData('text/plain'), 10);
+  if (isNaN(from) || from === toIdx) return;
+  const u = currentFotos.splice(from, 1)[0];
+  currentFotos.splice(toIdx, 0, u);
+  renderFotos();
+}
+
+function fotoDragEnd(e) {
+  e.currentTarget.style.opacity = '1';
+  document.querySelectorAll('.foto-thumb-cell').forEach(function (n) { n.classList.remove('foto-drag-over'); });
 }
 
 function removeFoto(i) {
