@@ -22,10 +22,13 @@ jobs:
   promemoria:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: Crea Issue promemoria + prompt Cursor
         uses: actions/github-script@v7
         with:
           script: |
+            const fs = require("fs");
             const anchor = new Date(Date.UTC(2026, 2, 31));
             const now = new Date();
             const msWeek = 7 * 24 * 60 * 60 * 1000;
@@ -56,12 +59,57 @@ jobs:
               timeZone: "Europe/Rome",
             });
 
+            const monthIt = parseInt(
+              new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Rome", month: "numeric" }).format(now),
+              10
+            );
+            const editorialByMonth = {
+              4: {
+                titolo: "Aprile — Acquisizione 2.0 & digital farming",
+                bullets:
+                  "- Filone sito: processo dopo primo contatto online; EPBD/classe energetica con fonti ufficiali (niente allarmismi).\n- Off-site: alert portali/social + tempi di risposta (checklist interna).",
+              },
+              5: {
+                titolo: "Maggio — Visibilità, dati OMI/CMA, zone locali",
+                bullets:
+                  "- Blog/servizio: report di mercato vs stima generica; guida lettura OMI per zona.\n- SEO: 1 quartiere/comune; Linda: flusso telefono ↔ report (vedi `js/chatbot.js` / landing chat).",
+              },
+              6: {
+                titolo: "Giugno — Recensioni, video, casi documentati, GMB",
+                bullets:
+                  "- Casi studio solo con numeri verificabili; allineare blocco recensioni su 3 pagine chiave.\n- Reels/TikTok da clip esistenti; GBP 1 post/foto a settimana.",
+              },
+            };
+            const ed = editorialByMonth[monthIt] || {
+              titolo: "Fuori Q2",
+              bullets:
+                "- Aggiorna `docs/piano-editoriale-q2-2026.md` o crea il piano trimestre successivo.\n- Mantieni il ciclo 12 settimane dalla skill `righetto-venerdi-sito-90giorni`.",
+            };
+            let docSnippet = "";
+            try {
+              docSnippet = fs.readFileSync("docs/piano-editoriale-q2-2026.md", "utf8");
+            } catch (e) {
+              docSnippet = "";
+            }
+            const docNote = docSnippet
+              ? "\n\n_Documento completo in repo: `docs/piano-editoriale-q2-2026.md`_"
+              : "\n\n_(File `docs/piano-editoriale-q2-2026.md` non trovato nel branch)_";
+
             const body = `## Promemoria automatico — piano 90 giorni
 
 **Data (Italia):** ${dateStr}  
 **Settimana ciclo:** **${w}/12**  
 **Tema fase:** ${t.focus}  
 **Output minimo atteso:** ${t.out}
+
+---
+
+### Linea editoriale mese corrente (Q2 2026)
+
+**${ed.titolo}**
+
+${ed.bullets}
+${docNote}
 
 ---
 
