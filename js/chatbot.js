@@ -189,7 +189,7 @@ const FAQ_DATA = [
   },
   {
     k: ['commissione', 'provvigione', 'costo agenzia', 'quanto costa', 'spesa agenzia', 'percentuale'],
-    r: '💰 **Provvigioni Righetto Immobiliare**\n\n**Vendita:**\n• Acquirente: 3% + IVA (min. €2.500)\n• Venditore: 3% + IVA (min. €2.500)\n\n**Affitto:**\n• Un mese di canone + IVA\n\nTutte le nostre provvigioni includono: valutazione, fotografia professionale, virtual tour 360°, gestione pratiche.'
+    r: '💰 **Compenso di mediazione**\n\nL\'importo e le condizioni economiche **non sono pubblicati online**: vengono spiegati e concordati **in sede** al momento del mandato, in modo chiaro e senza sorprese.\n\nNel servizio sono inclusi, tra l\'altro: **valutazione**, **foto professionali**, **virtual tour 360°** e **gestione delle pratiche** fino al rogito o alla stipula.\n\n📞 Per un preventivo personalizzato: **049 884 3484** o passa in Via Roma 96, Limena.'
   },
   {
     k: ['valutazione', 'valutare', 'stima', 'vale', 'valore', 'quanto vale'],
@@ -231,7 +231,7 @@ const FAQ_DATA = [
   },
   {
     k: ['spese acquisto', 'costi acquisto', 'imposte acquisto'],
-    r: '🧾 **Costi per l\'acquisto di un immobile**\n\n**Da privato (prima casa):**\n• Imposta di registro: 2% del valore catastale\n• Imposta ipotecaria: €50\n• Imposta catastale: €50\n\n**Da costruttore (con IVA):**\n• IVA: 4% prima casa / 10% seconda casa\n• Imposta di registro: €200\n\n**Sempre:**\n• Notaio: €2.000-€4.000\n• Agenzia: 3% + IVA'
+    r: '🧾 **Costi per l\'acquisto di un immobile**\n\n**Da privato (prima casa):**\n• Imposta di registro: 2% del valore catastale\n• Imposta ipotecaria: €50\n• Imposta catastale: €50\n\n**Da costruttore (con IVA):**\n• IVA: 4% prima casa / 10% seconda casa\n• Imposta di registro: €200\n\n**Sempre:**\n• Notaio: €2.000-€4.000\n• Mediazione: da concordare con l\'agenzia (in sede)'
   },
   // ── MUTUO E FINANZIAMENTI ──
   {
@@ -464,8 +464,8 @@ const FAQ_DATA = [
     r: '🏢 **Sì, gestiamo immobili commerciali:**\n\n• Negozi e locali\n• Uffici\n• Capannoni e magazzini\n\nStrategie **B2B dedicate** con promozione su canali professionali e network imprenditoriale.'
   },
   {
-    k: ['compenso', 'provvigione', 'quanto costa', 'commissione agenzia'],
-    r: '💶 **Provvigione solo sul venduto**, percentuale standard di mercato. Trasparente dall\'inizio, concordata nel mandato. **Nessun costo anticipato**, nessuna sorpresa. Paghi solo quando la vendita è conclusa.'
+    k: ['compenso', 'quanto costa vendere', 'costo vendita agenzia'],
+    r: '💶 **Compenso di mediazione**\n\nL\'importo **non è pubblicato online**: si definisce **in sede** nel mandato, in modo chiaro. **Nessun costo anticipato** per valorizzazione e promozione: il corrispettivo concordato si applica secondo quanto pattuito nel contratto di mediazione.'
   },
 
   // ═══════════════════════════════════════════════
@@ -1561,7 +1561,7 @@ function initChatbotUI() {
         <button class="chat-qbtn" onclick="rigChat.send('🔍 Cerca immobili')">🔍 Cerca immobili</button>
         <button class="chat-qbtn" onclick="rigChat.send('📞 Voglio essere contattato')">📞 Contattami</button>
         <button class="chat-qbtn" onclick="rigChat.send('🕐 Orari e contatti')">🕐 Orari</button>
-        <button class="chat-qbtn" onclick="rigChat.send('💡 Quanto costa vendere?')">💡 Provvigioni</button>
+        <button class="chat-qbtn" onclick="rigChat.send('💡 Quanto costa vendere?')">💡 Costi vendita</button>
       </div>
       <div class="chat-input-row">
         <textarea id="rig-chat-input" placeholder="Scrivi un messaggio..." rows="1"

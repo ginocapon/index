@@ -23,7 +23,7 @@ SKILL-2.0.md e' l'unica fonte di verita' per questo progetto.
 - 2500+ parole, 10-15 H2/H3, 35% transition words
 - OGNI dato numerico DEVE avere fonte verificata (OMI, FIMAA, ISTAT, Banca d'Italia)
 - Zero claim inventati, zero dialetto, tono professionale
-- Commissioni: 3% + IVA per parte (min. 2.500€ vendita), 1 mensilita' + IVA (affitto)
+- Compenso mediazione: non pubblicare tariffe o percentuali online; sempre da concordare in sede nel mandato (blog e testi istituzionali allineati).
 - Claim consentiti: 350+ immobili, 101 comuni, 98% soddisfazione, 127 recensioni 4.9/5, dal 2000
 
 ### Dopo ogni modifica:
