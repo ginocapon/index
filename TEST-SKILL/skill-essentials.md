@@ -12,8 +12,7 @@
 | Soddisfazione clienti | 98% |
 | Recensioni Google | 127 da 4.9/5 |
 | Attivi dal | 2000 |
-| Commissione vendita | 3% + IVA per parte (min. 2.500€) |
-| Commissione affitto | 1 mensilità + IVA |
+| Compenso mediazione | Da concordare in sede; non pubblicare listini sul sito |
 
 > **REGOLA D'ORO:** Se non hai fonte verificabile, NON inserire il dato.
 > Sostituire TUTTI i placeholder [DATO], [ZONA], [FONTE] prima di pubblicare.

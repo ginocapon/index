@@ -158,7 +158,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 | SEO on-page | **9.8/10** | 18 meta desc corrette, 4 title corretti, tutti canonical OK, OG completi |
 | Schema.org | **9.8/10** | RealEstateAgent+FAQPage+BreadcrumbList+Person completi su 95%+ pagine, sameAs e GeoCoordinates ovunque |
 | Contenuti/Blog | **9.8/10** | 40+ articoli, 4 cluster completi, timestamp visibile su tutti, author bio ovunque |
-| GEO/AEO | **10/10** | Unico a ottimizzare per AI — robots.txt AI bots Allow, llms.txt completo (commissioni, orari, social, landing, 40+ blog), timestamp, sameAs tutti OK |
+| GEO/AEO | **10/10** | Unico a ottimizzare per AI — robots.txt AI bots Allow, llms.txt completo (servizi, orari, social, landing, 40+ blog; tariffe mediazione solo in sede, non online), timestamp, sameAs tutti OK |
 | Core Web Vitals | **9/10** | Font preload completo (5 font), --nero definito, font-display:swap, GA4 deferred con requestIdleCallback, CSS critical/below-fold separato. Target LCP <2s quasi raggiunto |
 | Zone Pages | **9.5/10** | 14 zone con Pro/Contro, 5 FAQ schema, tabelle OMI, Place+GeoCoordinates |
 | Chatbot AI | **10/10** | Unico nel mercato locale |

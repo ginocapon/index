@@ -188,7 +188,7 @@ const FAQ_DATA = [
   },
   {
     k: ['commissione', 'provvigione', 'costo', 'quanto costa', 'spesa', 'percentuale'],
-    r: '💰 **Provvigioni Righetto Immobiliare**\n\n**Vendita:**\n• Acquirente: 3% + IVA (min. €2.500)\n• Venditore: 3% + IVA (min. €2.500)\n\n**Affitto:**\n• Un mese di canone + IVA\n\nTutte le nostre provvigioni includono: valutazione, fotografia professionale, virtual tour 360°, gestione pratiche.'
+    r: '💰 **Compenso di mediazione**\n\nL\'importo **non e\' pubblicato online**: viene concordato **in sede** nel mandato, in modo chiaro.\n\nIl servizio include valutazione, foto professionali, virtual tour 360° e gestione pratiche.\n\n📞 **049 884 3484** — Limena (PD), copertura provincia.'
   },
   {
     k: ['valutazione', 'valutare', 'stima', 'vale', 'valore', 'quanto vale'],
