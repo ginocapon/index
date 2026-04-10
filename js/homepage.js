@@ -386,12 +386,12 @@ function generateSlug(titolo) {
     'mercato immobiliare sacro cuore padova: guida omi zona d6 e valori 2026': { img: 'img/blog/padova-arcella-gesu-buon-pastore.jpg', url: 'blog-mercato-sacrocuore-padova-omi-2026' },
     'immobili centro storico padova 2026: prezzi, rendimenti e analisi': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-mercato-immobiliare-padova-centro-2026' },
     'limena o centro padova? dove comprare casa nel 2026: confronto dati': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-limena-vs-padova-centro-dove-comprare-2026' },
-    'mutui a tasso fisso nel padovano: dati banca d\'italia e orientamento 2026': { img: 'img/foto-servizi/gestione-preliminari-padova.webp', url: 'blog-mutui-tasso-fisso-bancaitalia-padova-2026' },
-    'quotazioni e locazioni a padova: omi e monitor istat 2026': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-quotazioni-locazioni-omi-istat-padova-2026' },
-    'compravendite nel veneto e sulla cintura di padova: lettura dei dati 2026': { img: 'img/foto-servizi/gestione-preliminari-padova.webp', url: 'blog-compravendite-veneto-cintura-padova-2026' },
-    'imposte di registro e ipotecarie nella compravendita: guida per il padovano': { img: 'img/foto-servizi/attivazione-utenze-e-servizi-padova.webp', url: 'blog-imposte-registro-catasto-compravendita-padova-2026' },
-    'dal prezzo alla proposta: percorso operativo per vendere nel padovano (2026)': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-percorso-vendita-immobile-padova-2026' },
-    'geopolitica, energia e tassi: effetti sul mercato immobiliare e cautele pratiche': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-immobiliare-geopolitica-energia-tassi-2026' }
+    'mutui a tasso fisso nel padovano: dati banca d\'italia e orientamento 2026': { img: 'img/blog/limena-oratorio-beata-vergine-rosario.jpg', url: 'blog-mutui-tasso-fisso-bancaitalia-padova-2026' },
+    'quotazioni e locazioni a padova: omi e monitor istat 2026': { img: 'img/blog/padova-arcella-gesu-buon-pastore.jpg', url: 'blog-quotazioni-locazioni-omi-istat-padova-2026' },
+    'compravendite nel veneto e sulla cintura di padova: lettura dei dati 2026': { img: 'img/blog/comprare-affittare-padova.webp', url: 'blog-compravendite-veneto-cintura-padova-2026' },
+    'imposte di registro e ipotecarie nella compravendita: guida per il padovano': { img: 'img/blog/tasse-vendita-casa.webp', url: 'blog-imposte-registro-catasto-compravendita-padova-2026' },
+    'dal prezzo alla proposta: percorso operativo per vendere nel padovano (2026)': { img: 'img/blog/home-staging.webp', url: 'blog-percorso-vendita-immobile-padova-2026' },
+    'geopolitica, energia e tassi: effetti sul mercato immobiliare e cautele pratiche': { img: 'img/blog/blog-geopolitica-fiore-carrarmato.webp', url: 'blog-immobiliare-geopolitica-energia-tassi-2026' }
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
@@ -437,12 +437,12 @@ function generateSlug(titolo) {
     { titolo: 'Mercato Immobiliare Sacro Cuore Padova: Guida OMI Zona D6 e Valori 2026', categoria: 'Mercato locale', data: '2026-04-01', stato: 'pubblicato', immagine_copertina: 'img/blog/padova-arcella-gesu-buon-pastore.jpg', url_statico: 'blog-mercato-sacrocuore-padova-omi-2026' },
     { titolo: 'Immobili Centro Storico Padova 2026: Prezzi, Rendimenti e Analisi', categoria: 'Mercato locale', data: '2026-03-16', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-mercato-immobiliare-padova-centro-2026' },
     { titolo: 'Limena o Centro Padova? Dove Comprare Casa nel 2026: Confronto Dati', categoria: 'Consigli acquisto', data: '2026-03-16', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-limena-vs-padova-centro-dove-comprare-2026' },
-    { titolo: 'Mutui a tasso fisso nel Padovano: dati Banca d\'Italia e orientamento 2026', categoria: 'Finanziamenti', data: '2026-04-03', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/gestione-preliminari-padova.webp', url_statico: 'blog-mutui-tasso-fisso-bancaitalia-padova-2026' },
-    { titolo: 'Quotazioni e locazioni a Padova: OMI e monitor ISTAT 2026', categoria: 'Mercato locale', data: '2026-04-03', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-quotazioni-locazioni-omi-istat-padova-2026' },
-    { titolo: 'Compravendite nel Veneto e sulla cintura di Padova: lettura dei dati 2026', categoria: 'Mercato locale', data: '2026-04-03', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/gestione-preliminari-padova.webp', url_statico: 'blog-compravendite-veneto-cintura-padova-2026' },
-    { titolo: 'Imposte di registro e ipotecarie nella compravendita: guida per il Padovano', categoria: 'Fisco', data: '2026-04-03', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/attivazione-utenze-e-servizi-padova.webp', url_statico: 'blog-imposte-registro-catasto-compravendita-padova-2026' },
-    { titolo: 'Dal prezzo alla proposta: percorso operativo per vendere nel Padovano (2026)', categoria: 'Guida alla vendita', data: '2026-04-03', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-percorso-vendita-immobile-padova-2026' },
-    { titolo: 'Geopolitica, energia e tassi: effetti sul mercato immobiliare e cautele pratiche', categoria: 'Mercato locale', data: '2026-04-03', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-immobiliare-geopolitica-energia-tassi-2026' }
+    { titolo: 'Mutui a tasso fisso nel Padovano: dati Banca d\'Italia e orientamento 2026', categoria: 'Finanziamenti', data: '2026-04-03', stato: 'pubblicato', immagine_copertina: 'img/blog/limena-oratorio-beata-vergine-rosario.jpg', url_statico: 'blog-mutui-tasso-fisso-bancaitalia-padova-2026' },
+    { titolo: 'Quotazioni e locazioni a Padova: OMI e monitor ISTAT 2026', categoria: 'Mercato locale', data: '2026-04-03', stato: 'pubblicato', immagine_copertina: 'img/blog/padova-arcella-gesu-buon-pastore.jpg', url_statico: 'blog-quotazioni-locazioni-omi-istat-padova-2026' },
+    { titolo: 'Compravendite nel Veneto e sulla cintura di Padova: lettura dei dati 2026', categoria: 'Mercato locale', data: '2026-04-03', stato: 'pubblicato', immagine_copertina: 'img/blog/comprare-affittare-padova.webp', url_statico: 'blog-compravendite-veneto-cintura-padova-2026' },
+    { titolo: 'Imposte di registro e ipotecarie nella compravendita: guida per il Padovano', categoria: 'Fisco', data: '2026-04-03', stato: 'pubblicato', immagine_copertina: 'img/blog/tasse-vendita-casa.webp', url_statico: 'blog-imposte-registro-catasto-compravendita-padova-2026' },
+    { titolo: 'Dal prezzo alla proposta: percorso operativo per vendere nel Padovano (2026)', categoria: 'Guida alla vendita', data: '2026-04-03', stato: 'pubblicato', immagine_copertina: 'img/blog/home-staging.webp', url_statico: 'blog-percorso-vendita-immobile-padova-2026' },
+    { titolo: 'Geopolitica, energia e tassi: effetti sul mercato immobiliare e cautele pratiche', categoria: 'Mercato locale', data: '2026-04-03', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-geopolitica-fiore-carrarmato.webp', url_statico: 'blog-immobiliare-geopolitica-energia-tassi-2026' }
   ];
   // Carica da Supabase e merge con statici
   let articles = [];
