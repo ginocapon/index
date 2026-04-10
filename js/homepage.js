@@ -344,6 +344,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'righetto immobiliare: bilancio 2025, valori e soluzioni affitto nel 2026': { img: 'img/team/titolari.webp', url: 'blog-righetto-bilancio-2025-soluzioni-affitto-2026' },
     'guida ai quartieri di padova: dove comprare casa nel 2026': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-quartieri-padova-2026' },
     'affitto studenti padova 2026: zone, prezzi e guida completa': { img: 'img/foto-servizi/contratti-di-locazione-padova.webp', url: 'blog-affitto-studenti-padova' },
     'mercato immobiliare padova 2026: prezzi, tendenze e previsioni': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-mercato-immobiliare-padova-2026' },
@@ -395,6 +396,7 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    { titolo: 'Righetto Immobiliare: bilancio 2025, valori e soluzioni affitto nel 2026', categoria: 'Vita d\'Agenzia', data: '2026-04-10', stato: 'pubblicato', immagine_copertina: 'img/team/titolari.webp', url_statico: 'blog-righetto-bilancio-2025-soluzioni-affitto-2026' },
     { titolo: 'Home Staging Padova: Come Vendere Casa Prima e Meglio', categoria: 'Guida alla vendita', data: '2026-03-06', stato: 'pubblicato', immagine_copertina: 'img/blog/home-staging.webp', url_statico: 'blog-home-staging-padova' },
     { titolo: 'Vendere Casa a Padova: 7 Errori Costosi da Evitare', categoria: 'Guida alla vendita', data: '2026-03-06', stato: 'pubblicato', immagine_copertina: 'img/team/titolari.webp', url_statico: 'vendere-casa-padova-errori' },
     { titolo: 'Comprare Casa a Padova nel 2026: Guida Definitiva Passo dopo Passo', categoria: 'Consigli acquisto', data: '2026-03-04', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-comprare-casa-padova-guida-2026' },
@@ -437,12 +439,12 @@ function generateSlug(titolo) {
     { titolo: 'Mercato Immobiliare Sacro Cuore Padova: Guida OMI Zona D6 e Valori 2026', categoria: 'Mercato locale', data: '2026-04-01', stato: 'pubblicato', immagine_copertina: 'img/blog/padova-arcella-gesu-buon-pastore.jpg', url_statico: 'blog-mercato-sacrocuore-padova-omi-2026' },
     { titolo: 'Immobili Centro Storico Padova 2026: Prezzi, Rendimenti e Analisi', categoria: 'Mercato locale', data: '2026-03-16', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'blog-mercato-immobiliare-padova-centro-2026' },
     { titolo: 'Limena o Centro Padova? Dove Comprare Casa nel 2026: Confronto Dati', categoria: 'Consigli acquisto', data: '2026-03-16', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url_statico: 'blog-limena-vs-padova-centro-dove-comprare-2026' },
-    { titolo: 'Mutui a tasso fisso nel Padovano: dati Banca d\'Italia e orientamento 2026', categoria: 'Finanziamenti', data: '2026-04-03', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-mutui-coppia-giovani-padova.webp', url_statico: 'blog-mutui-tasso-fisso-bancaitalia-padova-2026' },
-    { titolo: 'Quotazioni e locazioni a Padova: OMI e monitor ISTAT 2026', categoria: 'Mercato locale', data: '2026-04-03', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-omi-professionisti-ufficio.webp', url_statico: 'blog-quotazioni-locazioni-omi-istat-padova-2026' },
-    { titolo: 'Compravendite nel Veneto e sulla cintura di Padova: lettura dei dati 2026', categoria: 'Mercato locale', data: '2026-04-03', stato: 'pubblicato', immagine_copertina: 'img/blog/comprare-affittare-padova.webp', url_statico: 'blog-compravendite-veneto-cintura-padova-2026' },
-    { titolo: 'Imposte di registro e ipotecarie nella compravendita: guida per il Padovano', categoria: 'Fisco', data: '2026-04-03', stato: 'pubblicato', immagine_copertina: 'img/blog/tasse-vendita-casa.webp', url_statico: 'blog-imposte-registro-catasto-compravendita-padova-2026' },
-    { titolo: 'Dal prezzo alla proposta: percorso operativo per vendere nel Padovano (2026)', categoria: 'Guida alla vendita', data: '2026-04-03', stato: 'pubblicato', immagine_copertina: 'img/blog/home-staging.webp', url_statico: 'blog-percorso-vendita-immobile-padova-2026' },
-    { titolo: 'Geopolitica, energia e tassi: effetti sul mercato immobiliare e cautele pratiche', categoria: 'Mercato locale', data: '2026-04-03', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-geopolitica-fiore-carrarmato.webp', url_statico: 'blog-immobiliare-geopolitica-energia-tassi-2026' }
+    { titolo: 'Mutui a tasso fisso nel Padovano: dati Banca d\'Italia e orientamento 2026', categoria: 'Finanziamenti', data: '2026-04-10', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-mutui-coppia-giovani-padova.webp', url_statico: 'blog-mutui-tasso-fisso-bancaitalia-padova-2026' },
+    { titolo: 'Quotazioni e locazioni a Padova: OMI e monitor ISTAT 2026', categoria: 'Mercato locale', data: '2026-04-10', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-omi-professionisti-ufficio.webp', url_statico: 'blog-quotazioni-locazioni-omi-istat-padova-2026' },
+    { titolo: 'Compravendite nel Veneto e sulla cintura di Padova: lettura dei dati 2026', categoria: 'Mercato locale', data: '2026-04-10', stato: 'pubblicato', immagine_copertina: 'img/blog/comprare-affittare-padova.webp', url_statico: 'blog-compravendite-veneto-cintura-padova-2026' },
+    { titolo: 'Imposte di registro e ipotecarie nella compravendita: guida per il Padovano', categoria: 'Fisco', data: '2026-04-10', stato: 'pubblicato', immagine_copertina: 'img/blog/tasse-vendita-casa.webp', url_statico: 'blog-imposte-registro-catasto-compravendita-padova-2026' },
+    { titolo: 'Dal prezzo alla proposta: percorso operativo per vendere nel Padovano (2026)', categoria: 'Guida alla vendita', data: '2026-04-10', stato: 'pubblicato', immagine_copertina: 'img/blog/home-staging.webp', url_statico: 'blog-percorso-vendita-immobile-padova-2026' },
+    { titolo: 'Geopolitica, energia e tassi: effetti sul mercato immobiliare e cautele pratiche', categoria: 'Mercato locale', data: '2026-04-10', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-geopolitica-fiore-carrarmato.webp', url_statico: 'blog-immobiliare-geopolitica-energia-tassi-2026' }
   ];
   // Carica da Supabase e merge con statici
   let articles = [];
