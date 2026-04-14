@@ -150,3 +150,37 @@
 #main-content > section:not(#hero) .sec-h2.w {
   border-bottom-color: rgba(255, 107, 53, 0.42);
 }
+
+/* —— Mobile: hero non più alto del viewport, tab ricerca comode, pill più leggibili —— */
+@media (max-width: 768px) {
+  /* Specificità > #hero nel <style> inline */
+  main#main-content #hero {
+    min-height: 520px;
+    min-height: min(620px, 100vh);
+    min-height: min(620px, 100dvh);
+  }
+  @supports (height: 100svh) {
+    main#main-content #hero {
+      min-height: min(620px, 100svh);
+    }
+  }
+
+  .hero-trust-pills span {
+    font-size: 0.68rem;
+    letter-spacing: 1.8px;
+    padding: 8px 16px;
+  }
+
+  #ricerca .r-tab {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .hero-promo {
+    justify-content: center;
+    text-align: center;
+  }
+}
