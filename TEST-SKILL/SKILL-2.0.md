@@ -1100,9 +1100,9 @@ Le pagine con contenuti aggiornati ricevono un boost nel re-ranking:
 - [x] **Sticky CTA mobile** — gia' presente su 6 pagine + auto-inject JS su 8 restanti, ora A/B testato
 
 ### 9.2 Contenuti da Creare
-- [ ] **Blog statici — layout 8.1b (`css/blog-rich.css`)** — migrare gradualmente ogni `blog-*.html`: link al CSS in `<head>`,
-  poi TOC, metriche con fonte, tabelle in `.blog-rich-table-wrap`, CTA chiusura blu/nero + bottone oro, correlati.
-  Priorita': articoli pillar e pagine con piu' click in GSC (non tutto in un solo sprint).
+- [ ] **Blog statici — layout 8.1b (`css/blog-rich.css`)** — migrare gradualmente gli altri `blog-*.html` oltre ai 7 gia' aggiornati (aprile 2026):
+  Piazzola Brenta, Vigonza-Rubano, APE acquisto, Planimetria, Permuta, Mutui tasso fisso BdI, Bilancio Righetto 2025.
+  Priorita' successiva: pillar e pagine con piu' click in GSC.
 - [x] blog-tempi-vendita-casa-padova.html — CREATO 8 marzo 2026
 - [x] zona-vigonza.html — CREATA 8 marzo 2026
 - [x] zona-abano-terme.html — CREATA 8 marzo 2026
