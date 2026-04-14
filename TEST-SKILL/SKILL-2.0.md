@@ -704,6 +704,75 @@ js/scroll-reveal.js                 - Animazioni scroll
 - Transition words 30-35% per leggibilita' (Inoltre, Infatti, Di conseguenza, In particolare, Tuttavia)
 - NO contenuti generici senza localizzazione
 
+### 8.1b Layout long-read, engagement e alternanza grafica (Righetto)
+
+> **Riferimento esterno (solo ispirazione):** articoli tipo "magazine" (hero chiaro, indice, metriche, tabelle con fonte,
+> callout, FAQ, CTA finale, correlati) aumentano **tempo in pagina** e scansionabilita'. Su Righetto si adotta lo **stesso
+> principio editoriale**, ma **rispettando i vincoli del progetto** (Sezione 5, `CLAUDE.md`).
+
+**Vincoli tecnici (non negoziabili):**
+
+- Solo **HTML/CSS/JS vanilla** — nessun framework, **nessun CDN esterno** (niente Google Fonts nel contenuto: usare
+  `fonts.css` / font self-hosted gia' in pagina).
+- Animazioni e hover: **solo `opacity` e `transform`** — **vietato** `filter: blur(...)` sulle animazioni.
+- **No `will-change` permanente** su elementi decorativi.
+- CTA: contrasto minimo **4.5:1** (WCAG AA) — palette ufficiale Sezione **5.2** (`--oro` + testo `--nero`, oppure `--blu` + bianco).
+- **CTA di chiusura articolo:** **non** usare sfondi rossi accesi o aggressivi. Preferire **gradiente blu → nero**
+  (brand) con bottone **arancione** (`--oro`) e testo scuro — pattern in `css/blog-rich.css` (classe `blog-rich-cta-strip`).
+- **Contenuto CMS (Supabase / admin):** salvare **solo frammento HTML del corpo** — **mai** incollare pagine complete
+  (`<!DOCTYPE>`, `<html>`, `<head>`, `<meta>` nel corpo). Il lettore `blog-articolo.html` sanifica il body, ma la fonte
+  deve restare pulita per evitare doppi schema e DOM corrotti.
+
+**Foglio di stile condiviso — `css/blog-rich.css`:**
+
+- Caricato da **`blog-articolo.html`** (articoli dinamici). Per ogni **`blog-*.html`** statico, aggiungere nella `<head>`:
+  `<link rel="stylesheet" href="css/blog-rich.css?v=1">` (stesso `?v=` delle altre risorse quando si aggiorna).
+- Tutte le classi sono **prefissate** `blog-rich-*` e funzionano **solo dentro** `.art-content` (no impatto su header/footer).
+
+**Blocchi raccomandati (copiare/incollare nel corpo e riempire):**
+
+1. **Indice (TOC)** — `nav.blog-rich-toc` o `div.blog-rich-toc` con titolo + `<ol>` di link interni (`href="#id-sezione"`).
+   Ogni **H2** citato nell'indice deve avere **`id`** stabile (slug ASCII).
+2. **Badge aggiornamento** — `span.blog-rich-badge` (es. "Aggiornato: aprile 2026") quando il contenuto e' stato rivisto.
+3. **Metriche a scheda** — `div.blog-rich-stats` > tre `div.blog-rich-stat` con `.blog-rich-stat-value`, `.blog-rich-stat-label`,
+   `.blog-rich-stat-src` (obbligatoria **fonte** sotto ogni numero, come da 8.1).
+4. **Callout** — `div.blog-rich-callout` per sintesi / "in sintesi" / avvertenze normative.
+5. **Tabella premium** — `div.blog-rich-table-wrap` > `<table>`; riga evidenziata: `tr.blog-rich-row-highlight`;
+   sotto la tabella: `p.blog-rich-table-source` con citazione fonti (OMI, ISTAT, Banca d'Italia, …).
+6. **CTA di chiusura (non rossa)** — `section.blog-rich-cta-strip` > `.blog-rich-cta-inner` > H2 + testo + link
+   `a.blog-rich-btn` verso `contatti` o CTA pertinente; `.blog-rich-cta-sub` per micro-copy secondario.
+7. **Correlati inline** — `div.blog-rich-related` con `a.blog-rich-related-card` (2–3 link interni verso altri articoli/zone).
+8. **Box fonti** — `div.blog-rich-sources` con lista di link/titoli documentali verificabili.
+
+**Alternanza tra articoli ("visual rhythm"):**
+
+- Alternare **3 layout mentali** per non rendere tutto uguale:
+  - **Modalita' A — "dati"**: subito dopo l'intro, TOC + tabella comparativa + callout.
+  - **Modalita' B — "guida"**: TOC dopo il primo H2; metriche a meta' articolo; CTA strip prima delle FAQ.
+  - **Modalita' C — "storytelling"**: callout in apertura; metriche sparse; correlati prima del box fonti.
+- **Immagini:** almeno 1 figura ogni 2–3 H2 dove esiste materiale (foto reale, grafico da fonte, schema). Sempre
+  `width`/`height` o `aspect-ratio` (Sezione 5.1 CLS).
+
+**Pulsanti "3D" (leggeri, conformi):**
+
+- Effetto tridimensionale solo con **`border-radius`**, **`box-shadow`** stratificato leggero e su **`:hover`**:
+  `transform: translateY(-2px)` + ombra piu' ampia. **Vietato** usare blur animato o parallasse pesante.
+
+**Checklist prima di pubblicare un articolo "ricco":**
+
+- [ ] `blog-rich.css` incluso se pagina statica `blog-*.html`
+- [ ] Nessun dato numerico senza fonte visibile (tabella, callout o nota)
+- [ ] FAQ + JSON-LD allineati (gia' obbligatori in 8.1)
+- [ ] CTA finale con **blu/nero + bottone oro**, non rosso pieno
+- [ ] Link interni (zone, servizi, altri blog) **funzionanti** e non duplicati
+- [ ] Verifica mobile: TOC, tabella (`overflow-x: auto` nel wrap), schede metriche a colonna singola
+
+**Migrazione articoli esistenti (lavoro graduale):**
+
+- Non e' obbligatorio aggiornare tutti i file in un solo intervento: priorita' **pillar** e articoli con traffico GSC.
+- Ogni migrazione: stesso articolo in `blog.html` / `homepage.js` / `sitemap` gia' registrato — si interviene solo sul
+  markup dentro `.art-content` + link al CSS.
+
 ### 8.3 Entity-Based SEO + Neural Matching — Ottimizzazione Semantica Completa (OBBLIGATORIO)
 
 > **Aggiornamento Marzo 2026:** Google ragiona per **entita' semantiche**, non piu' per keyword esatte ripetute.
@@ -1031,6 +1100,9 @@ Le pagine con contenuti aggiornati ricevono un boost nel re-ranking:
 - [x] **Sticky CTA mobile** — gia' presente su 6 pagine + auto-inject JS su 8 restanti, ora A/B testato
 
 ### 9.2 Contenuti da Creare
+- [ ] **Blog statici — layout 8.1b (`css/blog-rich.css`)** — migrare gradualmente ogni `blog-*.html`: link al CSS in `<head>`,
+  poi TOC, metriche con fonte, tabelle in `.blog-rich-table-wrap`, CTA chiusura blu/nero + bottone oro, correlati.
+  Priorita': articoli pillar e pagine con piu' click in GSC (non tutto in un solo sprint).
 - [x] blog-tempi-vendita-casa-padova.html — CREATO 8 marzo 2026
 - [x] zona-vigonza.html — CREATA 8 marzo 2026
 - [x] zona-abano-terme.html — CREATA 8 marzo 2026
