@@ -1129,6 +1129,9 @@ Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 - [ ] **Siti <2s convertono 3x** meglio dei siti lenti — priorita' LCP (gia' buono, target <2s)
 
 ### 9.6 GEO/AEO — COMPLETATI 8 Marzo 2026
+- [x] **Lotto zona Aprile 2026** — tutte le `zona-*.html`: correzione chiusura hero (`</section></div>...`), blocco **FAQ visibile** (`<details>`) prima del CTA allineato al JSON-LD FAQPage gia' presente, CSS `.zona-faq-*`. Script: `scripts/zona_aeo_faq_visible.py` (rieseguibile; salta se sezione gia' presente).
+- [x] **blog-articolo.html** — `injectFaqJsonLd(art)`: genera/rimuove `<script id="jsonld-faq">` FAQPage da `art.faq` (Supabase) dopo il render; su articolo non trovato rimuove il blocco.
+- [ ] **H2 in formato domanda** su ogni sezione `.sec` delle pagine zona — passo redazionale successivo (snippet 40-60 parole: gia' coperti in parte dai primi paragrafi esistenti; valutare riscrittura titoli senza duplicare testo).
 - [x] **llms.txt aggiornato** — aggiunte nuove zone (Vigonza, Abano, Selvazzano) e prezzi
 - [x] **robots.txt AI bots** — GPTBot, ClaudeBot, Google-Extended, PerplexityBot tutti Allow + chatbot.js Allow
 - [ ] Assicurare che contenuti importanti NON siano dietro JS client-side (le AI estraggono HTML statico)
