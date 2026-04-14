@@ -1,0 +1,221 @@
+{
+  "_meta": {
+    "base_url": "https://righettoimmobiliare.it",
+    "nota_orario_cron": "GitHub Actions usa UTC. venerdì 07:30 UTC ≈ 09:30 Europe/Rome con ora legale (CEST). In inverno (CET) valutare cron 08:30 UTC.",
+    "nota_pubblicazione": "Questo piano NON pubblica articoli sul sito né post Meta da solo: servono token API, revisione umana (fonti OMI/ISTAT ecc.) e immagini salvate in repo. Il workflow crea un'Issue settimanale con copy suggerito e link.",
+    "nota_immagini": "Non usare hotlink a CDN esterni nel sito. Per foto stock: licenza Unsplash (o stock acquistato), scaricare, ottimizzare webp in img/blog/, credito in didascalia dove richiesto. Evitare le stesse hero già usate nei blog (vedi img_gia_usate_in_repo)."
+  },
+  "img_gia_usate_in_repo": [
+    "img/foto-servizi/vendita-immobili-padova.webp",
+    "img/foto-servizi/valutazioni-e-perizie-padova.webp",
+    "img/foto-servizi/gestioni-immobili-padova.webp",
+    "img/foto-servizi/gestione-preliminari-padova.webp",
+    "img/foto-servizi/attivazione-utenze-e-servizi-padova.webp",
+    "img/foto-servizi/contratti-di-locazione-padova.webp",
+    "img/blog/tasse-vendita-casa.webp",
+    "img/blog/successione-immobiliare.webp",
+    "img/blog/rendimento-affitto.webp",
+    "img/blog/padova-arcella-gesu-buon-pastore.jpg",
+    "img/blog/limena-oratorio-beata-vergine-rosario.jpg",
+    "img/blog/investire-immobiliare-padova.webp",
+    "img/blog/ufficio-righetto-immobiliare.webp",
+    "img/blog/home-staging.webp",
+    "img/blog/documenti-vendita-casa.webp",
+    "img/team/titolari.webp"
+  ],
+  "slots": [
+    {
+      "friday_iso": "2026-04-04",
+      "titolo_issue_suffix": "Limena & locazioni",
+      "obiettivo": "Rafforzare cluster Limena + affitti con pagine già indicizzate.",
+      "urls_da_promuovere": [
+        "https://righettoimmobiliare.it/zona-limena",
+        "https://righettoimmobiliare.it/blog-mercato-immobiliare-limena-2026",
+        "https://righettoimmobiliare.it/blog-limena-vs-padova-centro-dove-comprare-2026",
+        "https://righettoimmobiliare.it/servizio-locazioni",
+        "https://righettoimmobiliare.it/blog-affitti-padova-canoni-2026"
+      ],
+      "titoli_social_suggeriti": [
+        "Limena vicino a Padova: cosa sapere su canoni e domanda locativa (link in bio)",
+        "Comprare a Limena o in centro? Una guida con confronto onesto"
+      ],
+      "immagine_stock_nuova": {
+        "fonte": "Unsplash (licenza Unsplash)",
+        "pagina_riferimento": "https://unsplash.com/s/photos/modern-suburban-house-italy",
+        "istruzione": "Scegliere 1 immagine, scaricare alta risoluzione, salvare come img/blog/hero-piano-2026-04-04-limena.webp (nome univoco), non riusare file in img_gia_usate_in_repo."
+      }
+    },
+    {
+      "friday_iso": "2026-04-11",
+      "titolo_issue_suffix": "Università & studenti",
+      "obiettivo": "Collegare affitti brevi/studenti con zona Prato e servizio locazioni.",
+      "urls_da_promuovere": [
+        "https://righettoimmobiliare.it/zona-universitaria-padova",
+        "https://righettoimmobiliare.it/blog-checklist-affitto-studenti-padova-2026",
+        "https://righettoimmobiliare.it/blog-affitto-breve-padova-2026",
+        "https://righettoimmobiliare.it/zona-prato-della-valle-padova",
+        "https://righettoimmobiliare.it/servizio-locazioni"
+      ],
+      "titoli_social_suggeriti": [
+        "Checklist affitto per studenti a Padova: cosa verificare prima della caparra",
+        "Zona universitaria: domande che ci fanno più spesso sui contratti"
+      ],
+      "immagine_stock_nuova": {
+        "fonte": "Unsplash",
+        "pagina_riferimento": "https://unsplash.com/s/photos/university-campus-architecture-europe",
+        "istruzione": "Scaricare e salvare img/blog/hero-piano-2026-04-11-studenti.webp; evitare volti riconoscibili senza release."
+      }
+    },
+    {
+      "friday_iso": "2026-04-18",
+      "titolo_issue_suffix": "Vendita: costi & tempi",
+      "obiettivo": "Money content: costi vendita, tempi, valutazioni.",
+      "urls_da_promuovere": [
+        "https://righettoimmobiliare.it/blog-costi-vendere-casa-padova-2026",
+        "https://righettoimmobiliare.it/blog-tempi-vendita-casa-padova",
+        "https://righettoimmobiliare.it/servizio-valutazioni",
+        "https://righettoimmobiliare.it/servizio-vendita",
+        "https://righettoimmobiliare.it/blog-vendita-immobiliare-padova-strategie-2026"
+      ],
+      "titoli_social_suggeriti": [
+        "Quanto costa davvero vendere casa a Padova? Tasse, notaio e agenzia in un unico post",
+        "Tempi di vendita: cosa influenza di più il calendario (senza promesse magiche)"
+      ],
+      "immagine_stock_nuova": {
+        "fonte": "Unsplash",
+        "pagina_riferimento": "https://unsplash.com/s/photos/real-estate-documents-keys",
+        "istruzione": "img/blog/hero-piano-2026-04-18-vendita.webp"
+      }
+    },
+    {
+      "friday_iso": "2026-04-25",
+      "titolo_issue_suffix": "Mutui & tassi",
+      "obiettivo": "Cluster mutuo: documenti, fisso/variabile, fonti Banca d'Italia dove già citate negli articoli.",
+      "urls_da_promuovere": [
+        "https://righettoimmobiliare.it/blog-mutui-casa-padova-2026",
+        "https://righettoimmobiliare.it/blog-mutuo-prima-casa-padova",
+        "https://righettoimmobiliare.it/blog-mutuo-fisso-variabile-padova-2026",
+        "https://righettoimmobiliare.it/blog-mutui-tasso-fisso-bancaitalia-padova-2026",
+        "https://righettoimmobiliare.it/blog-mutuo-documenti-tempi-prima-casa-padova-2026"
+      ],
+      "titoli_social_suggeriti": [
+        "Mutuo prima casa nel Padovano: documenti e tempistiche in sintesi",
+        "Fisso o variabile: domande da portare in banca (non solo tasso nominale)"
+      ],
+      "immagine_stock_nuova": {
+        "fonte": "Unsplash",
+        "pagina_riferimento": "https://unsplash.com/s/photos/bank-office-minimal",
+        "istruzione": "img/blog/hero-piano-2026-04-25-mutui.webp"
+      }
+    },
+    {
+      "friday_iso": "2026-05-02",
+      "titolo_issue_suffix": "Centro storico & Prato",
+      "obiettivo": "Zone premium + pezzo mercato centro 2026.",
+      "urls_da_promuovere": [
+        "https://righettoimmobiliare.it/zona-centro-storico-padova",
+        "https://righettoimmobiliare.it/zona-prato-della-valle-padova",
+        "https://righettoimmobiliare.it/blog-mercato-immobiliare-padova-centro-2026",
+        "https://righettoimmobiliare.it/blog-quartieri-padova-2026",
+        "https://righettoimmobiliare.it/blog-prezzi-case-padova-zona-2026"
+      ],
+      "titoli_social_suggeriti": [
+        "Centro storico vs Prato: due anime di Padova, due logiche di mercato",
+        "Dove conviene comprare nel 2026? Partiamo dai dati, non dai meme"
+      ],
+      "immagine_stock_nuova": {
+        "fonte": "Unsplash",
+        "pagina_riferimento": "https://unsplash.com/s/photos/italian-historic-city-square",
+        "istruzione": "img/blog/hero-piano-2026-05-02-centro.webp (evitare stock già identico a investire-immobiliare-padova.webp)"
+      }
+    },
+    {
+      "friday_iso": "2026-05-09",
+      "titolo_issue_suffix": "Cintura: Vigonza Rubano Selvazzano",
+      "obiettivo": "Internal link tra comuni della cintura e blog compravendite Veneto.",
+      "urls_da_promuovere": [
+        "https://righettoimmobiliare.it/zona-vigonza",
+        "https://righettoimmobiliare.it/zona-rubano",
+        "https://righettoimmobiliare.it/zona-selvazzano",
+        "https://righettoimmobiliare.it/blog-compravendite-veneto-cintura-padova-2026",
+        "https://righettoimmobiliare.it/blog-limena-vicino-padova-comprare-2026"
+      ],
+      "titoli_social_suggeriti": [
+        "Comprare in cintura: Vigonza, Rubano, Selvazzano — cosa chiediamo sempre ai venditori",
+        "Veneto e Padova: perché guardare anche i numeri fuori dal ring"
+      ],
+      "immagine_stock_nuova": {
+        "fonte": "Unsplash",
+        "pagina_riferimento": "https://unsplash.com/s/photos/residential-street-europe",
+        "istruzione": "img/blog/hero-piano-2026-05-09-cintura.webp"
+      }
+    },
+    {
+      "friday_iso": "2026-05-16",
+      "titolo_issue_suffix": "Arcella & Sacro Cuore / OMI",
+      "obiettivo": "Quartieri nord + articolo OMI Sacro Cuore.",
+      "urls_da_promuovere": [
+        "https://righettoimmobiliare.it/zona-arcella-padova",
+        "https://righettoimmobiliare.it/blog-mercato-sacrocuore-padova-omi-2026",
+        "https://righettoimmobiliare.it/blog-quotazioni-locazioni-omi-istat-padova-2026",
+        "https://righettoimmobiliare.it/blog-mercato-immobiliare-padova-2026",
+        "https://righettoimmobiliare.it/servizio-valutazioni"
+      ],
+      "titoli_social_suggeriti": [
+        "Sacro Cuore e dintorni: come leggere le quotazioni OMI senza farsi ingannare",
+        "Arcella: domande da compratori che conoscono già il quartiere"
+      ],
+      "immagine_stock_nuova": {
+        "fonte": "Unsplash",
+        "pagina_riferimento": "https://unsplash.com/s/photos/apartment-building-facade",
+        "istruzione": "img/blog/hero-piano-2026-05-16-arcella.webp; non sostituire foto storiche locali già in uso (gesu-buon-pastore.jpg)."
+      }
+    },
+    {
+      "friday_iso": "2026-05-23",
+      "titolo_issue_suffix": "Agenzia & fiducia",
+      "obiettivo": "Conversione: perché scegliere agenzia, impegno quotidiano, servizi.",
+      "urls_da_promuovere": [
+        "https://righettoimmobiliare.it/blog-scegliere-agenzia-immobiliare-padova-2026",
+        "https://righettoimmobiliare.it/blog-impegno-quotidiano-agenzia-immobiliare",
+        "https://righettoimmobiliare.it/chi-siamo",
+        "https://righettoimmobiliare.it/servizio-gestione",
+        "https://righettoimmobiliare.it/blog"
+      ],
+      "titoli_social_suggeriti": [
+        "Come riconoscere un'agenzia che lavora sulle pratiche, non solo sulle foto",
+        "Cosa significa \"impegno quotidiano\" in un'agenzia immobiliare (esempi concreti)"
+      ],
+      "immagine_stock_nuova": {
+        "fonte": "Unsplash",
+        "pagina_riferimento": "https://unsplash.com/s/photos/professional-handshake-office",
+        "istruzione": "img/blog/hero-piano-2026-05-23-agenzia.webp"
+      }
+    },
+    {
+      "friday_iso": "2026-05-30",
+      "titolo_issue_suffix": "Piazzola & provincia (bozza)",
+      "obiettivo": "Piazzola non ha pagina dedicata: usare filtri immobili + contenuti Limena/Veneto come ponte; pianificare pezzo unico con dati verificati.",
+      "urls_da_promuovere": [
+        "https://righettoimmobiliare.it/immobili",
+        "https://righettoimmobiliare.it/blog-compravendite-veneto-cintura-padova-2026",
+        "https://righettoimmobiliare.it/blog-limena-vs-padova-centro-dove-comprare-2026",
+        "https://righettoimmobiliare.it/servizio-vendita",
+        "https://righettoimmobiliare.it/contatti"
+      ],
+      "titoli_social_suggeriti": [
+        "Piazzola sul Brenta e dintorni: cerchi casa? Ecco da dove partire sul nostro sito",
+        "Provincia di Padova: compravendite e trend — link alle analisi già pubblicate"
+      ],
+      "bozza_articolo_futuro": {
+        "slug_proposto": "blog-mercato-immobiliare-piazzola-brenta-2026",
+        "nota": "Scrivere solo con dati OMI/ISTAT verificabili per il comune; aggiornare sitemap dopo pubblicazione."
+      },
+      "immagine_stock_nuova": {
+        "fonte": "Unsplash",
+        "pagina_riferimento": "https://unsplash.com/s/photos/small-italian-town-river",
+        "istruzione": "img/blog/hero-piano-2026-05-30-piazzola.webp"
+      }
+    }
+  ]
+}
