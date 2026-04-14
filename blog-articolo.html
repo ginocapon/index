@@ -343,15 +343,48 @@ function injectFaqJsonLd(art) {
 }
 
 function generateSlug(titolo) {
-  let s = (titolo || '').toLowerCase()
+  let s = String(titolo || '')
+    .replace(/\u2019/g, "'").replace(/\u2018/g, "'").replace(/\u2013/g, '-').replace(/\u2014/g, '-')
+    .toLowerCase()
     .replace(/[àáâãäå]/g,'a').replace(/[èéêë]/g,'e').replace(/[ìíîï]/g,'i')
     .replace(/[òóôõö]/g,'o').replace(/[ùúûü]/g,'u').replace(/[ç]/g,'c')
-    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,80);
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,80).replace(/-+$/g,'');
   if (!s.endsWith('-padova') && !s.endsWith('padova')) s += '-padova';
   return s;
 }
+
+/** Slug da URL: collassa trattini doppi (link vecchi dopo slice(0,80) con trattino finale). */
+function normalizeSlugKey(s) {
+  return String(s || '').replace(/-+/g, '-').replace(/^-|-$/g, '');
+}
+
+/**
+ * Alias: titoli alternativi / campagne che devono aprire la pagina statica gia' pubblicata.
+ * Chiave = slug richiesto (come in ?s=), valore = path senza .html (GitHub Pages).
+ */
+var BLOG_SLUG_STATIC_REDIRECT = {
+  'comprare-casa-o-affittare-la-verita-dei-numeri-dopo-30-anni-padova': 'blog-comprare-affittare-padova'
+};
+
+function findArticleBySlug(all, slugRaw) {
+  if (!slugRaw || !all || !all.length) return null;
+  var slug = normalizeSlugKey(slugRaw);
+  var slugLo = slug.toLowerCase();
+  for (var i = 0; i < all.length; i++) {
+    var a = all[i];
+    if (!a) continue;
+    var fromSlug = (a.slug && String(a.slug).trim()) ? normalizeSlugKey(a.slug) : '';
+    if (fromSlug && (fromSlug === slug || fromSlug.toLowerCase() === slugLo)) return a;
+    var fromTitle = generateSlug(a.titolo);
+    if (fromTitle === slug) return a;
+    if (normalizeSlugKey(fromTitle) === slug) return a;
+  }
+  return null;
+}
+
 function artUrl(a) {
-  return 'blog-articolo?s=' + encodeURIComponent(generateSlug(a.titolo));
+  if (a && a.url_statico) return a.url_statico;
+  return 'blog-articolo?s=' + encodeURIComponent((a.slug && String(a.slug).trim()) || generateSlug(a.titolo));
 }
 
 (async function() {
@@ -363,13 +396,15 @@ function artUrl(a) {
   let art = null, allData = [];
   try {
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    const { data: all } = await sb.from('blog').select('*').eq('stato', 'pubblicato');
-    if (all) {
-      allData = all;
-      // Cerca per slug (priorità)
-      if (slug) art = all.find(a => generateSlug(a.titolo) === slug);
-      // Fallback per ID (vecchi link)
-      if (!art && id) art = all.find(a => a.id === id);
+    const { data: all } = await sb.from('blog').select('*');
+    if (all && all.length) {
+      var pub = all.filter(function(a) {
+        var st = String(a.stato || '').toLowerCase();
+        return st === 'pubblicato' || st === 'published';
+      });
+      allData = pub.length ? pub : all;
+      if (slug) art = findArticleBySlug(allData, slug);
+      if (!art && id) art = allData.find(function(a) { return a.id === id; });
     }
   } catch(e) {
     console.warn('Blog Supabase non disponibile:', e.message);
@@ -379,9 +414,21 @@ function artUrl(a) {
   if (!art) {
     let articles = [];
     try { articles = JSON.parse(localStorage.getItem('rig_blog_articles') || '[]'); } catch(ex) {}
-    if (slug) art = articles.find(a => generateSlug(a.titolo) === slug);
-    if (!art && id) art = articles.find(a => a.id === id);
-    allData = articles;
+    var pubL = articles.filter(function(a) {
+      var st = String(a.stato || '').toLowerCase();
+      return st === 'pubblicato' || st === 'published';
+    });
+    allData = pubL.length ? pubL : articles;
+    if (slug) art = findArticleBySlug(allData, slug);
+    if (!art && id) art = allData.find(function(a) { return a.id === id; });
+  }
+
+  if (!art && slug) {
+    var red = BLOG_SLUG_STATIC_REDIRECT[normalizeSlugKey(slug)] || BLOG_SLUG_STATIC_REDIRECT[slug];
+    if (red) {
+      location.replace(red);
+      return;
+    }
   }
 
   if (!art) {

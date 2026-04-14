@@ -6724,10 +6724,12 @@ function getExcerpt(html, maxWords) {
 }
 
 function generateSlug(titolo) {
-  let s = (titolo || '').toLowerCase()
+  let s = String(titolo || '')
+    .replace(/\u2019/g, "'").replace(/\u2018/g, "'").replace(/\u2013/g, '-').replace(/\u2014/g, '-')
+    .toLowerCase()
     .replace(/[àáâãäå]/g,'a').replace(/[èéêë]/g,'e').replace(/[ìíîï]/g,'i')
     .replace(/[òóôõö]/g,'o').replace(/[ùúûü]/g,'u').replace(/[ç]/g,'c')
-    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,80);
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,80).replace(/-+$/g,'');
   if (!s.endsWith('-padova') && !s.endsWith('padova')) s += '-padova';
   return s;
 }
@@ -6771,7 +6773,7 @@ function editBlogArticle(id) {
   document.getElementById('b_emoji').value = a.emoji || '🏠';
   document.getElementById('b_tempo').value = a.tempo || 5;
   document.getElementById('b_immagine_copertina').value = a.immagine_copertina || '';
-  document.getElementById('b_slug').value = generateSlug(a.titolo);
+  document.getElementById('b_slug').value = (a.slug && String(a.slug).trim()) || generateSlug(a.titolo);
   document.getElementById('b_contenuto').value = a.contenuto || '';
   const stato = a.stato || 'bozza';
   const radio = document.querySelector(`input[name=b_stato][value=${stato}]`);

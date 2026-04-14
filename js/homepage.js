@@ -331,10 +331,12 @@ if(window.innerWidth > 768){
 
 // ══ BLOG DINAMICO HOMEPAGE ══
 function generateSlug(titolo) {
-  let s = (titolo || '').toLowerCase()
+  let s = String(titolo || '')
+    .replace(/\u2019/g, "'").replace(/\u2018/g, "'").replace(/\u2013/g, '-').replace(/\u2014/g, '-')
+    .toLowerCase()
     .replace(/[àáâãäå]/g,'a').replace(/[èéêë]/g,'e').replace(/[ìíîï]/g,'i')
     .replace(/[òóôõö]/g,'o').replace(/[ùúûü]/g,'u').replace(/[ç]/g,'c')
-    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,80);
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,80).replace(/-+$/g,'');
   if (!s.endsWith('-padova') && !s.endsWith('padova')) s += '-padova';
   return s;
 }
@@ -351,7 +353,7 @@ function generateSlug(titolo) {
     'conviene comprare casa a padova o restare in affitto? analisi su 20 anni': { img: 'img/blog/comprare-affittare-padova.webp', url: 'blog-comprare-affittare-padova' },
     'case in vendita padova 2026: prezzi, zone migliori e guida completa': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-case-vendita-padova' },
     'mutuo prima casa a padova: guida completa 2026': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-mutuo-prima-casa-padova' },
-    "ca' marcello mestre: riqualificazione e investimento nel veneto": { img: 'img/blog/ca-marcello-hero.webp', url: 'blog-ca-marcello-mestre' },
+    "ca' marcello mestre: riqualificazione e investimento nel veneto": { img: 'img/blog/ca-marcello-hero.webp', url: 'articolo-riqualificazione' },
     "l'impegno quotidiano di un'agenzia immobiliare: tra burocrazia e incertezza mutui": { img: 'img/blog/ufficio-righetto-immobiliare.webp', url: 'blog-impegno-quotidiano-agenzia-immobiliare' },
     'appartamento nuova costruzione limena: 101 mq con giardino 310 mq in classe a4': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-appartamento-nuova-costruzione-limena' },
     'comprare casa a padova nel 2026: guida definitiva passo dopo passo': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-comprare-casa-padova-guida-2026' },

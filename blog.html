@@ -916,7 +916,7 @@ async function initBlog() {
       stato: 'pubblicato',
       autore: 'Gino Capon',
       immagine_copertina: 'img/blog/ca-marcello-hero.webp',
-      url_statico: 'blog-ca-marcello-mestre',
+      url_statico: 'articolo-riqualificazione',
       contenuto: 'Ca\' Marcello a Mestre: un progetto di riqualificazione che trasforma una storica villa veneta in un\'opportunita\' di investimento immobiliare unica nel territorio.',
       evidenza: false
     },
@@ -1232,10 +1232,12 @@ function extractFirstImage(html) {
 }
 
 function generateSlug(titolo) {
-  let s = (titolo || '').toLowerCase()
+  let s = String(titolo || '')
+    .replace(/\u2019/g, "'").replace(/\u2018/g, "'").replace(/\u2013/g, '-').replace(/\u2014/g, '-')
+    .toLowerCase()
     .replace(/[àáâãäå]/g,'a').replace(/[èéêë]/g,'e').replace(/[ìíîï]/g,'i')
     .replace(/[òóôõö]/g,'o').replace(/[ùúûü]/g,'u').replace(/[ç]/g,'c')
-    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,80);
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,80).replace(/-+$/g,'');
   if (!s.endsWith('-padova') && !s.endsWith('padova')) s += '-padova';
   return s;
 }
