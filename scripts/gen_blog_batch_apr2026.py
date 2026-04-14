@@ -828,8 +828,8 @@ def assemble(meta):
         bc_ld,
         hero_alt,
     ) = meta
-    pub = "2026-04-04T09:30:00+02:00"
-    mod = "2026-04-04T09:30:00+02:00"
+    pub = "2026-04-14T09:30:00+02:00"
+    mod = "2026-04-14T09:30:00+02:00"
     imgs = [hero_img, "img/foto-servizi/gestione-preliminari-padova.webp"]
     og_img = hero_img
     parts = [
