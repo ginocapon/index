@@ -310,6 +310,38 @@ function showNotFound() {
   document.getElementById('articleContent').innerHTML = '<div class="not-found"><div style="font-size:4rem;margin-bottom:1rem">&#128196;</div><h2>Articolo non trovato</h2><p style="color:var(--grigio);margin-top:.5rem">L\'articolo potrebbe essere stato rimosso o il link non è valido.</p><a href="blog" style="display:inline-block;margin-top:1.5rem;background:var(--oro);color:var(--nero);padding:.6rem 1.5rem;border-radius:8px;font-weight:600;font-size:.85rem">&larr; Torna al blog</a></div>';
 }
 
+/** JSON-LD FAQPage da art.faq (Supabase) — allineato allo snippet visibile in pagina (AEO/GEO). */
+function injectFaqJsonLd(art) {
+  var el = document.getElementById('jsonld-faq');
+  var faqData = [];
+  try {
+    faqData = typeof art.faq === 'string' ? JSON.parse(art.faq) : (art.faq || []);
+    if (!Array.isArray(faqData)) faqData = [];
+  } catch (e) { faqData = []; }
+  if (!faqData.length) {
+    if (el) el.remove();
+    return;
+  }
+  var mainEntity = faqData.map(function (f) {
+    var q = (f && f.q ? String(f.q) : '').trim();
+    var a = (f && f.a ? String(f.a) : '').trim();
+    if (!q || !a) return null;
+    return { '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } };
+  }).filter(Boolean);
+  if (!mainEntity.length) {
+    if (el) el.remove();
+    return;
+  }
+  var obj = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: mainEntity };
+  if (!el) {
+    el = document.createElement('script');
+    el.type = 'application/ld+json';
+    el.id = 'jsonld-faq';
+    document.head.appendChild(el);
+  }
+  el.textContent = JSON.stringify(obj);
+}
+
 function generateSlug(titolo) {
   let s = (titolo || '').toLowerCase()
     .replace(/[àáâãäå]/g,'a').replace(/[èéêë]/g,'e').replace(/[ìíîï]/g,'i')
@@ -352,7 +384,12 @@ function artUrl(a) {
     allData = articles;
   }
 
-  if (!art) { showNotFound(); return; }
+  if (!art) {
+    var fq = document.getElementById('jsonld-faq');
+    if (fq) fq.remove();
+    showNotFound();
+    return;
+  }
 
   // Aggiorna URL nel browser con slug SEO pulito (senza UUID)
   const correctSlug = generateSlug(art.titolo);
@@ -382,6 +419,7 @@ function artUrl(a) {
   });
 
   renderArticle(art, allData || []);
+  injectFaqJsonLd(art);
 })();
 </script>
 <script src="js/nav-mobile.js?v=3" defer></script>
