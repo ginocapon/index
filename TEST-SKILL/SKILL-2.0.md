@@ -423,6 +423,16 @@ js/scroll-reveal.js                 - Animazioni scroll
 3. **SEM (Ads)** — ogni nuova landing per campagne deve rispettare **stesso standard** di canonical, meta, mobile-first e CTA del sito; variabili UTM opzionali ma link pubblici senza `.html`.
 4. **Audit automatico** (`.github/workflows/audit-settimanale.yml`) continua a essere la **fonte oggettiva** su meta, canonical, schema, keyword stuffing, `llms.txt`: integrare manualmente solo cio' che lo script non misura (tono, transition words, % AEO in prosa).
 
+### 4.5.2 Guardrail URL, ancore e visibilita' (obbligatorio)
+
+> Ogni intervento AEO/SEO su titoli o contenuti **non** deve degradare URL indicizzati, canonical o fragment interni.
+
+1. **Non modificare** path pubblici (`/blog-...`, `/zona-...`), `rel="canonical"`, `og:url`, voci in `sitemap.xml`, slug file su disco vs URL pulite senza coordinamento (checklist deploy).
+2. **Frammenti `#`:** se un `<h2 id="...">` cambia testo ma **mantiene lo stesso `id`**, i link `href="#id"` restano validi. **Non rinominare `id`** senza aggiornare **tutti** i `href` interni, TOC, eventuali CTA e link da email/admin.
+3. **TOC / indice:** si puo' aggiornare il **testo** del link (`<a href="#budget">...</a>`) per allinearlo all'H2; **non** cambiare l'`href` se non si aggiornano anche gli `id` corrispondenti nella pagina.
+4. **Riscritture AEO (H2 domanda):** preservare **keyword primarie** del paragrafo sottostante (Padova, quartiere, mutuo, OMI, ecc.) nel titolo o nel primo capoverso; evitare titoli generici che diluiscono il segnale.
+5. **Script automatici** (`apply_*_h2_*.py`): dopo ogni run, verificare a campione TOC vs H2 e assenza di `??` in titoli.
+
 ### 4.6 Schema Markup — Best Practice 2026
 
 **Tipo corretto:** Usare `RealEstateAgent` (sottotipo di `LocalBusiness`), MAI il generico `LocalBusiness` da solo. Piu' il tipo e' specifico, piu' chiaro il segnale a Google e AI.
