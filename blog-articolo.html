@@ -192,7 +192,7 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
@@ -363,14 +363,16 @@ function normalizeSlugKey(s) {
  * Chiave = slug richiesto (come in ?s=), valore = path senza .html (GitHub Pages).
  */
 var BLOG_SLUG_STATIC_REDIRECT = {
-  'comprare-casa-o-affittare-la-verita-dei-numeri-dopo-30-anni-padova': 'blog-comprare-affittare-padova'
+  'comprare-casa-o-affittare-la-verita-dei-numeri-dopo-30-anni-padova': 'blog-comprare-affittare-padova',
+  'ca-marcello-mestre-hub-turistico-da-70-milioni-padova': 'blog-ca-marcello-mestre'
 };
 
 function findArticleBySlug(all, slugRaw) {
   if (!slugRaw || !all || !all.length) return null;
   var slug = normalizeSlugKey(slugRaw);
   var slugLo = slug.toLowerCase();
-  for (var i = 0; i < all.length; i++) {
+  var i;
+  for (i = 0; i < all.length; i++) {
     var a = all[i];
     if (!a) continue;
     var fromSlug = (a.slug && String(a.slug).trim()) ? normalizeSlugKey(a.slug) : '';
@@ -378,6 +380,25 @@ function findArticleBySlug(all, slugRaw) {
     var fromTitle = generateSlug(a.titolo);
     if (fromTitle === slug) return a;
     if (normalizeSlugKey(fromTitle) === slug) return a;
+  }
+  /* Slug "corti" nei link (es. senza sottotitolo): slug DB piu' lungo che inizia con lo stesso prefisso */
+  var slugBase = slug.replace(/-padova$/i, '');
+  if (slugBase.length >= 12) {
+    var candidates = [];
+    for (i = 0; i < all.length; i++) {
+      var b = all[i];
+      if (!b || !b.titolo) continue;
+      var ft = generateSlug(b.titolo);
+      var ftBase = ft.replace(/-padova$/i, '');
+      if (ftBase.indexOf(slugBase) === 0) {
+        candidates.push({ b: b, len: ftBase.length });
+      }
+    }
+    if (candidates.length === 1) return candidates[0].b;
+    if (candidates.length > 1) {
+      candidates.sort(function(x, y) { return y.len - x.len; });
+      return candidates[0].b;
+    }
   }
   return null;
 }
