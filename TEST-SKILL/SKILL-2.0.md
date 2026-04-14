@@ -323,7 +323,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 - **Eseguibile anche manualmente:** Actions → "Audit Settimanale SKILL-2.0" → Run workflow
 - **Output:** Issue GitHub con label `audit` + email riepilogativa a info@righettoimmobiliare.it
 - **16 controlli per pagina:** meta description, canonical, URL pulite (no .html), Open Graph, Schema JSON-LD (RealEstateAgent, GeoCoordinates, sameAs, dateModified), BreadcrumbList, font-display:swap, keyword stuffing ("a Padova" max 10), CDN esterni vietati, framework vietati, link interni con .html, GA4, viewport mobile, filter:blur, will-change, placeholder non sostituiti
-- **Controlli globali:** sitemap.xml, robots.txt (regole AI bots), llms.txt (GEO)
+- **Controlli globali:** sitemap.xml, robots.txt (regole AI bots), llms.txt (GEO), lessico SEO+AI / AEO / SEM (allineamento contenuti a §4.5.1 — revisione manuale o checklist redazionale)
 - **Controlli specifici blog:** FAQPage schema, author bio (E-E-A-T), timestamp visibile
 - **Controlli zone:** FAQPage, GeoCoordinates, dati OMI
 - **Controlli servizi:** FAQPage schema
@@ -405,6 +405,23 @@ js/scroll-reveal.js                 - Animazioni scroll
 2. Formato: "[Keyword] e' [definizione/risposta]"
 3. Min 5 FAQ con Schema FAQPage per pagina
 4. Tabelle comparative per dati numerici
+
+### 4.5.1 Lessico: SEO + AI, AEO, GEO, SEM (combinazioni di mercato)
+
+> Spesso si sentono acronimi accoppiati a "AI" o usati come sinonimi. Qui **definizioni operative** per Righetto e **legame** con le sezioni gia' presenti in questo file.
+
+| Termine | Significato (breve) | Cosa copriamo sul sito statico | Riferimento SKILL |
+|--------|----------------------|--------------------------------|-------------------|
+| **SEO + AI** | SEO classico (indicizzazione, intent, contenuti) **piu'** segnali che aiutano **modelli e crawler AI** a citare correttamente il brand | Contenuti chiari, E-E-A-T, `llms.txt`, `robots.txt` (Allow bot AI dove previsto), JSON-LD, **no claim inventati** | §4.2 E-E-A-T, §4.5 GEO, §4.6 Schema, `llms.txt` |
+| **AEO** | **Answer Engine Optimization** — contenuti strutturati per **risposte dirette** (snippet, People Also Ask, assistenti) | H2 in formato domanda dove possibile, primo paragrafo dopo H2 40-60 parole, **FAQPage** + FAQ visibili, tabelle | §4.5 regole AEO, checklist blog §5 |
+| **GEO** | **Generative Engine Optimization** — ottimizzazione per **citazioni in risposte generate** (Gemini, ChatGPT, Perplexity, AI Overviews) | Frasi dichiarative in apertura sezione, dati verificabili, `llms.txt` aggiornato, freshness | §4.5 GEO |
+| **SEM** | **Search Engine Marketing** in senso lato = visibilita' sui motori **organico + a pagamento** | **Sito:** landing con CTA chiare, URL pulite, tracking GA4, allineamento messaggio annuncio↔landing se si usano **Google Ads** (fuori repo). **Nota:** campagne Ads **non** vivono nel codice GitHub; la SKILL copre **asset on-site** (landing, velocita', coerenza keyword) | §4.3 ranking, landing in architettura |
+
+**Regole aggiuntive (bundle):**
+1. **Non confondere** GEO con geolocalizzazione geografica: qui GEO = *Generative*, non "geo targeting" generico.
+2. **SEO + AI** non significa "testo scritto da bot senza revisione": significa **contenuti umani** ottimizzati anche per **consumo da sistemi AI** (struttura, factuality, fonti).
+3. **SEM (Ads)** — ogni nuova landing per campagne deve rispettare **stesso standard** di canonical, meta, mobile-first e CTA del sito; variabili UTM opzionali ma link pubblici senza `.html`.
+4. **Audit automatico** (`.github/workflows/audit-settimanale.yml`) continua a essere la **fonte oggettiva** su meta, canonical, schema, keyword stuffing, `llms.txt`: integrare manualmente solo cio' che lo script non misura (tono, transition words, % AEO in prosa).
 
 ### 4.6 Schema Markup — Best Practice 2026
 
