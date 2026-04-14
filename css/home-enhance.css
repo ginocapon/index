@@ -1,0 +1,152 @@
+/* Homepage polish — vanilla, mobile-first; solo opacity/transform per micro-motion */
+
+/* —— Hero: gerarchia CTA e promo —— */
+.hero-trust-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 14px;
+  margin-bottom: 18px;
+}
+.hero-trust-pills span {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(15, 26, 42, 0.35);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+}
+.hero-meta-line {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 auto 10px;
+  max-width: 560px;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+.hero-promo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 107, 53, 0.18);
+  border: 1px solid rgba(255, 107, 53, 0.35);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 0.72rem;
+  color: var(--oro3);
+  font-weight: 700;
+  margin-bottom: 22px;
+  max-width: 100%;
+  text-align: left;
+  line-height: 1.35;
+}
+.hero-promo-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--oro);
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: heroPromoPulse 1.6s ease-in-out infinite;
+}
+@keyframes heroPromoPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.65; transform: scale(0.92); }
+}
+
+.hero-cta-primary.btn-g {
+  box-shadow: 0 4px 20px rgba(255, 107, 53, 0.28);
+}
+.hero-cta-primary.btn-g:hover {
+  box-shadow: 0 10px 28px rgba(255, 107, 53, 0.4);
+}
+
+.hero-cta-secondary.btn-g {
+  background: transparent !important;
+  border: 2px solid rgba(255, 255, 255, 0.55) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+.hero-cta-secondary.btn-g:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.85) !important;
+  color: #fff !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Statistiche hero: layout mobile a griglia */
+@media (max-width: 640px) {
+  .hero-stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding-top: 28px;
+    margin-top: 40px;
+  }
+  .h-stat {
+    max-width: none;
+    padding: 16px 14px;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .h-stat:nth-child(2n) {
+    border-right: none;
+  }
+  .h-stat:nth-child(n + 3) {
+    border-bottom: none;
+  }
+}
+
+/* —— Ricerca: focus e tab attiva —— */
+.r-tab {
+  transition: color 0.2s, border-color 0.2s, opacity 0.2s;
+}
+.r-tab:focus-visible {
+  outline: 2px solid var(--oro);
+  outline-offset: 2px;
+}
+.r-field:focus-within label {
+  color: rgba(255, 255, 255, 0.92);
+}
+.r-field select:focus,
+.r-field input:focus {
+  color: #fff;
+}
+.r-btn-cerca:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.95);
+  outline-offset: 2px;
+}
+.r-tabs {
+  position: relative;
+}
+@media (max-width: 768px) {
+  .r-tabs::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 1px;
+    width: 36px;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, var(--testo));
+    opacity: 0.85;
+  }
+}
+
+/* —— Sezioni: ritmo titoli (allinea al blog) —— */
+#main-content > section:not(#hero) .eyebrow {
+  margin-bottom: 14px;
+}
+#main-content > section:not(#hero) .sec-h2 {
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(255, 107, 53, 0.22);
+  display: inline-block;
+  max-width: 100%;
+}
+#main-content > section:not(#hero) .sec-h2.w {
+  border-bottom-color: rgba(255, 107, 53, 0.42);
+}
