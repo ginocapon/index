@@ -1,18 +1,18 @@
 /**
- * Componenti "long read" dentro .art-content — Righetto Immobiliare
+ * Componenti long-read blog — Righetto Immobiliare (classi `blog-rich-*`, anche fuori da `.art-content` per CTA a fine pagina)
  * Solo variabili già definite sulla pagina (:root --nero, --oro, --blu, …)
  * Hover: solo transform + box-shadow (no filter: blur)
  */
 
-.art-content .blog-rich-toc {
+.blog-rich-toc {
   background: var(--carta, #f2ede7);
   border: 1px solid var(--gc, #e1dbd1);
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
   margin: 0 0 1.75rem;
 }
-.art-content .blog-rich-toc h2,
-.art-content .blog-rich-toc h3 {
+.blog-rich-toc h2,
+.blog-rich-toc h3 {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.15rem;
   margin: 0 0 0.75rem;
@@ -20,25 +20,25 @@
   border: 0;
   color: var(--nero, #152435);
 }
-.art-content .blog-rich-toc ol {
+.blog-rich-toc ol {
   margin: 0;
   padding-left: 1.25rem;
 }
-.art-content .blog-rich-toc li {
+.blog-rich-toc li {
   margin-bottom: 0.35rem;
   font-size: 0.88rem;
 }
-.art-content .blog-rich-toc a {
+.blog-rich-toc a {
   color: var(--blu, #2c4a6e);
   text-decoration: none;
   font-weight: 500;
 }
-.art-content .blog-rich-toc a:hover {
+.blog-rich-toc a:hover {
   color: var(--oro, #ff6b35);
   text-decoration: underline;
 }
 
-.art-content .blog-rich-badge {
+.blog-rich-badge {
   display: inline-block;
   font-size: 0.68rem;
   font-weight: 700;
@@ -51,82 +51,82 @@
   margin-bottom: 1rem;
 }
 
-.art-content .blog-rich-stats {
+.blog-rich-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.85rem;
   margin: 1.5rem 0;
 }
 @media (max-width: 640px) {
-  .art-content .blog-rich-stats {
+  .blog-rich-stats {
     grid-template-columns: 1fr;
   }
 }
-.art-content .blog-rich-stat {
+.blog-rich-stat {
   background: #fff;
   border: 1px solid var(--gc, #e1dbd1);
   border-radius: 10px;
   padding: 1rem 0.85rem;
   text-align: center;
 }
-.art-content .blog-rich-stat .blog-rich-stat-value {
+.blog-rich-stat .blog-rich-stat-value {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.85rem;
   font-weight: 700;
   color: var(--nero, #152435);
   line-height: 1.1;
 }
-.art-content .blog-rich-stat .blog-rich-stat-label {
+.blog-rich-stat .blog-rich-stat-label {
   font-size: 0.78rem;
   color: var(--grigio, #6b7a8d);
   margin-top: 0.35rem;
   line-height: 1.35;
 }
-.art-content .blog-rich-stat .blog-rich-stat-src {
+.blog-rich-stat .blog-rich-stat-src {
   font-size: 0.68rem;
   color: var(--grigio, #6b7a8d);
   margin-top: 0.4rem;
   font-style: italic;
 }
 
-.art-content .blog-rich-callout {
+.blog-rich-callout {
   background: linear-gradient(135deg, rgba(44, 74, 110, 0.06), rgba(255, 107, 53, 0.06));
   border-left: 4px solid var(--oro, #ff6b35);
   padding: 1.1rem 1.25rem;
   border-radius: 0 10px 10px 0;
   margin: 1.5rem 0;
 }
-.art-content .blog-rich-callout strong {
+.blog-rich-callout strong {
   display: block;
   font-size: 0.95rem;
   margin-bottom: 0.35rem;
   color: var(--nero, #152435);
 }
-.art-content .blog-rich-callout p {
+.blog-rich-callout p {
   margin: 0;
   font-size: 0.88rem;
   color: var(--grigio, #6b7a8d);
 }
 
-.art-content .blog-rich-table-wrap {
+.blog-rich-table-wrap {
   overflow-x: auto;
   margin: 1.25rem 0;
   border-radius: 10px;
   border: 1px solid var(--gc, #e1dbd1);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
-.art-content .blog-rich-table-wrap table {
+.blog-rich-table-wrap table {
   width: 100%;
   border-collapse: collapse;
   background: #fff;
   font-size: 0.84rem;
   margin: 0;
 }
-.art-content .blog-rich-table-wrap thead {
+.blog-rich-table-wrap thead {
   background: var(--blu, #2c4a6e);
   color: #fff;
 }
-.art-content .blog-rich-table-wrap th {
+.blog-rich-table-wrap th {
   padding: 0.65rem 0.85rem;
   text-align: left;
   font-weight: 600;
@@ -134,19 +134,19 @@
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
-.art-content .blog-rich-table-wrap td {
+.blog-rich-table-wrap td {
   padding: 0.65rem 0.85rem;
   border-bottom: 1px solid var(--gc, #e1dbd1);
   color: var(--testo, #152435);
 }
-.art-content .blog-rich-table-wrap tbody tr:hover {
+.blog-rich-table-wrap tbody tr:hover {
   background: var(--sfondo, #ece7df);
 }
-.art-content .blog-rich-table-wrap tr.blog-rich-row-highlight {
+.blog-rich-table-wrap tr.blog-rich-row-highlight {
   background: rgba(255, 107, 53, 0.08);
   font-weight: 600;
 }
-.art-content p.blog-rich-table-source {
+p.blog-rich-table-source {
   font-size: 0.72rem;
   color: var(--grigio, #6b7a8d);
   font-style: italic;
@@ -154,7 +154,7 @@
 }
 
 /* CTA chiusura: NO rosso pieno — blu → nero, bottone oro (contrasto AA) */
-.art-content .blog-rich-cta-strip {
+.blog-rich-cta-strip {
   background: linear-gradient(135deg, var(--blu, #2c4a6e) 0%, var(--nero, #152435) 100%);
   color: rgba(247, 245, 241, 0.92);
   padding: 2rem 1.5rem;
@@ -164,7 +164,7 @@
   position: relative;
   overflow: hidden;
 }
-.art-content .blog-rich-cta-strip::before {
+.blog-rich-cta-strip::before {
   content: '';
   position: absolute;
   top: -40%;
@@ -175,13 +175,13 @@
   border-radius: 50%;
   pointer-events: none;
 }
-.art-content .blog-rich-cta-inner {
+.blog-rich-cta-inner {
   position: relative;
   z-index: 1;
   max-width: 36rem;
   margin: 0 auto;
 }
-.art-content .blog-rich-cta-strip h2 {
+.blog-rich-cta-strip h2 {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(1.35rem, 4vw, 1.75rem);
   color: #fff;
@@ -189,20 +189,20 @@
   padding: 0;
   margin: 0 0 0.65rem;
 }
-.art-content .blog-rich-cta-strip h2 em {
+.blog-rich-cta-strip h2 em {
   font-style: italic;
   color: var(--oro2, #ff8f5e);
 }
-.art-content .blog-rich-cta-strip .blog-rich-cta-text {
+.blog-rich-cta-strip .blog-rich-cta-text {
   font-size: 0.9rem;
   line-height: 1.65;
   color: rgba(247, 245, 241, 0.88);
   margin-bottom: 1.25rem;
 }
-.art-content .blog-rich-cta-strip .blog-rich-cta-text strong {
+.blog-rich-cta-strip .blog-rich-cta-text strong {
   color: #fff;
 }
-.art-content a.blog-rich-btn {
+a.blog-rich-btn {
   display: inline-block;
   background: var(--oro, #ff6b35);
   color: var(--nero, #152435);
@@ -215,28 +215,28 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
-.art-content a.blog-rich-btn:hover {
+a.blog-rich-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(255, 107, 53, 0.35);
 }
-.art-content .blog-rich-cta-sub {
+.blog-rich-cta-sub {
   display: block;
   margin-top: 0.75rem;
   font-size: 0.76rem;
   color: rgba(247, 245, 241, 0.65);
 }
 
-.art-content .blog-rich-related {
+.blog-rich-related {
   display: grid;
   gap: 0.75rem;
   margin: 1.25rem 0;
 }
 @media (min-width: 560px) {
-  .art-content .blog-rich-related {
+  .blog-rich-related {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-.art-content a.blog-rich-related-card {
+a.blog-rich-related-card {
   display: block;
   background: #fff;
   border: 1px solid var(--gc, #e1dbd1);
@@ -246,45 +246,45 @@
   color: var(--testo, #152435);
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
-.art-content a.blog-rich-related-card:hover {
+a.blog-rich-related-card:hover {
   border-color: var(--oro, #ff6b35);
   transform: translateY(-2px);
 }
-.art-content a.blog-rich-related-card strong {
+a.blog-rich-related-card strong {
   display: block;
   font-size: 0.92rem;
   color: var(--nero, #152435);
   margin-bottom: 0.25rem;
 }
-.art-content a.blog-rich-related-card span {
+a.blog-rich-related-card span {
   font-size: 0.8rem;
   color: var(--grigio, #6b7a8d);
 }
 
-.art-content .blog-rich-sources {
+.blog-rich-sources {
   background: #fff;
   border: 1px solid var(--gc, #e1dbd1);
   border-radius: 10px;
   padding: 1.1rem 1.25rem;
   margin: 1.5rem 0;
 }
-.art-content .blog-rich-sources h3 {
+.blog-rich-sources h3 {
   margin-top: 0;
   font-size: 1rem;
 }
-.art-content .blog-rich-sources ul {
+.blog-rich-sources ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.art-content .blog-rich-sources li {
+.blog-rich-sources li {
   padding: 0.25rem 0;
   font-size: 0.78rem;
   color: var(--grigio, #6b7a8d);
   padding-left: 1rem;
   position: relative;
 }
-.art-content .blog-rich-sources li::before {
+.blog-rich-sources li::before {
   content: '\2192';
   position: absolute;
   left: 0;
