@@ -216,7 +216,7 @@
     .map-placeholder p{font-size:.82rem}
 
     /* MODAL */
-    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(4px)}
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s}
     .modal-overlay.open{opacity:1;pointer-events:all}
     .modal{background:#fff;border-radius:10px;max-width:680px;width:100%;max-height:90vh;overflow-y:auto;transform:translateY(20px);transition:transform .3s}
     .modal-overlay.open .modal{transform:translateY(0)}
@@ -646,9 +646,7 @@
 <div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
   <div class="modal" id="modal-box">
     <div class="modal-head">
-      <div class="card-img-ph" style="width:100%;height:240px;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="40" height="40" style="opacity:.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-      </div>
+      <div id="modal-hero" class="modal-hero-wrap" style="width:100%;height:260px;background:var(--gc);position:relative;overflow:hidden"></div>
       <button class="modal-close" onclick="closeModal()" aria-label="Chiudi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="modal-body" id="modal-body">
@@ -1102,6 +1100,36 @@
     filterCards();
   }
 
+  // ── MODAL: hero immagine (stesso URL delle card) ──
+  function setModalHero(d) {
+    const hero = document.getElementById('modal-hero');
+    if (!hero) return;
+    hero.innerHTML = '';
+    let imgUrl = d.fotoPrincipale || (d.foto && d.foto.length ? d.foto[0] : '');
+    if (!imgUrl && d._raw) {
+      const r = d._raw;
+      const p = r.foto_principale || (Array.isArray(r.foto) && r.foto[0]) || (Array.isArray(r.foto_urls) && r.foto_urls[0]);
+      if (p) imgUrl = resolveImageUrl(String(p), { width: 900, quality: 80 });
+    }
+    if (!imgUrl) {
+      hero.innerHTML = '<div class="card-img-ph" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center">' + SVG_PLACEHOLDER + '</div>';
+      return;
+    }
+    const img = document.createElement('img');
+    img.className = 'modal-img';
+    img.src = imgUrl;
+    img.alt = d.titolo || 'Immobile';
+    img.width = 900;
+    img.height = 585;
+    img.loading = 'eager';
+    img.decoding = 'async';
+    img.fetchPriority = 'high';
+    img.onerror = function() {
+      hero.innerHTML = '<div class="card-img-ph" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center">' + SVG_PLACEHOLDER + '</div>';
+    };
+    hero.appendChild(img);
+  }
+
   // ── MODAL ──
   function openCard(e, el) {
     e.preventDefault();
@@ -1109,6 +1137,8 @@
     const urlSlug = new URL(el.href, location.origin).searchParams.get('s') || '';
     const d = immobili.find(i => generatePropertySlug(i) === urlSlug || i.rif === rif);
     if (!d) { window.location.href = el.href; return; }
+
+    setModalHero(d);
 
     const mediaIcons = [];
     if (d.yt) mediaIcons.push('<span style="background:var(--rosso);color:#fff;font-size:.6rem;padding:.15rem .4rem;border-radius:1px;font-weight:600;">&#9654; VIDEO</span>');
