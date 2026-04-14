@@ -1131,7 +1131,8 @@ Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 ### 9.6 GEO/AEO — COMPLETATI 8 Marzo 2026
 - [x] **Lotto zona Aprile 2026** — tutte le `zona-*.html`: correzione chiusura hero (`</section></div>...`), blocco **FAQ visibile** (`<details>`) prima del CTA allineato al JSON-LD FAQPage gia' presente, CSS `.zona-faq-*`. Script: `scripts/zona_aeo_faq_visible.py` (rieseguibile; salta se sezione gia' presente).
 - [x] **blog-articolo.html** — `injectFaqJsonLd(art)`: genera/rimuove `<script id="jsonld-faq">` FAQPage da `art.faq` (Supabase) dopo il render; su articolo non trovato rimuove il blocco.
-- [ ] **H2 in formato domanda** su ogni sezione `.sec` delle pagine zona — passo redazionale successivo (snippet 40-60 parole: gia' coperti in parte dai primi paragrafi esistenti; valutare riscrittura titoli senza duplicare testo).
+- [x] **H2 in formato domanda** su ogni sezione `.sec` delle pagine `zona-*.html` — titoli riscritti (Aprile 2026). Script: `scripts/apply_zona_h2_aeo.py`. Snippet visivo: regola CSS sul primo `<p>` in `.sec-text`.
+- [x] **Blog statici H2 AEO** — `scripts/apply_blog_h2_aeo.py` (pattern ripetuti + guide/strategie) e `scripts/apply_blog_h2_question_suffix.py` (suffisso `?` controllato sui titoli senza interrogativo). Escluso `blog-articolo.html` (dinamico).
 - [x] **llms.txt aggiornato** — aggiunte nuove zone (Vigonza, Abano, Selvazzano) e prezzi
 - [x] **robots.txt AI bots** — GPTBot, ClaudeBot, Google-Extended, PerplexityBot tutti Allow + chatbot.js Allow
 - [ ] Assicurare che contenuti importanti NON siano dietro JS client-side (le AI estraggono HTML statico)
