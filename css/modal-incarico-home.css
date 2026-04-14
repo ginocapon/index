@@ -1,0 +1,171 @@
+/* Modal incarico vendita — solo desktop (su mobile il root è nascosto anche via JS) */
+@media (max-width: 768px) {
+  .ri-incarico-root {
+    display: none !important;
+  }
+}
+
+.ri-incarico-root {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+.ri-incarico-root.is-open {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+}
+
+.ri-incarico-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 15, 28, 0.72);
+  cursor: pointer;
+}
+
+.ri-incarico-panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+  background: var(--bianco, #f7f5f1);
+  border-radius: 14px;
+  padding: 36px 32px 32px;
+  box-shadow: 0 24px 64px rgba(10, 15, 28, 0.35);
+  border: 1px solid rgba(44, 74, 110, 0.12);
+  transform: translateY(16px) scale(0.98);
+  opacity: 0;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease;
+}
+.ri-incarico-root.is-open .ri-incarico-panel {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.ri-incarico-x {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  color: var(--testo2, #2c4a6e);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.ri-incarico-x:hover {
+  background: rgba(44, 74, 110, 0.08);
+  color: var(--testo, #152435);
+}
+.ri-incarico-x:focus-visible {
+  outline: 2px solid var(--oro, #ff6b35);
+  outline-offset: 2px;
+}
+
+.ri-incarico-kicker {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--oro, #ff6b35);
+  margin-bottom: 10px;
+}
+
+.ri-incarico-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.65rem, 3vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--testo, #152435);
+  margin: 0 0 14px;
+  padding-right: 36px;
+}
+
+.ri-incarico-lead {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--testo2, #2c4a6e);
+  margin: 0 0 14px;
+  font-weight: 600;
+}
+
+.ri-incarico-body {
+  font-size: 0.86rem;
+  line-height: 1.75;
+  color: var(--grigio, #6b7a8d);
+  margin: 0 0 26px;
+}
+
+.ri-incarico-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ri-incarico-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 15px 22px;
+  border-radius: 8px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-sizing: border-box;
+}
+.ri-incarico-btn:focus-visible {
+  outline: 2px solid var(--oro, #ff6b35);
+  outline-offset: 2px;
+}
+
+.ri-incarico-btn--pri {
+  background: var(--oro, #ff6b35);
+  color: var(--nero, #0a0f1c);
+  box-shadow: 0 4px 18px rgba(255, 107, 53, 0.35);
+}
+.ri-incarico-btn--pri:hover {
+  background: var(--oro2, #ff8f5e);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(255, 107, 53, 0.4);
+}
+
+.ri-incarico-btn--sec {
+  background: transparent;
+  color: var(--testo2, #2c4a6e);
+  border: 2px solid rgba(44, 74, 110, 0.35);
+}
+.ri-incarico-btn--sec:hover {
+  border-color: var(--blu3, #4e789a);
+  color: var(--blu, #2c4a6e);
+  transform: translateY(-1px);
+}
+
+.ri-incarico-foot {
+  margin-top: 18px;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--grigio2, #9aacbd);
+}
