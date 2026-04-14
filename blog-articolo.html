@@ -198,6 +198,26 @@ const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
 
 function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+
+/**
+ * Contenuti da CMS a volte sono pagine HTML complete o includono <meta>/<link> nel corpo:
+ * il parser del browser puo' spostarli nella <head> e rompere la pagina (schermata vuota).
+ * Estrae il body e rimuove nodi che non devono stare nel contenuto articolo.
+ */
+function extractBlogBodyHtml(html) {
+  var raw = String(html || '').trim();
+  if (!raw) return '';
+  try {
+    var doc = new DOMParser().parseFromString(raw, 'text/html');
+    var b = doc.body;
+    if (!b) return raw;
+    b.querySelectorAll('meta, link, title, script').forEach(function (n) { n.remove(); });
+    var inner = b.innerHTML.trim();
+    return inner || raw;
+  } catch (e) {
+    return raw;
+  }
+}
 function fmtDate(d) {
   if (!d) return '';
   return new Date(d).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -275,9 +295,10 @@ function renderArticle(art, articles) {
       <a href="/contatti" class="cta-banner-btn">Contattaci</a>
     </div>`;
 
+  var bodyHtml = extractBlogBodyHtml(art.contenuto);
   wrap.innerHTML = heroHtml + `
     <div class="art-container">
-      <div class="art-content">${art.contenuto}</div>
+      <div class="art-content">${bodyHtml}</div>
       ${faqHtml}
       ${ctaHtml}
       <div class="share-bar">
@@ -367,6 +388,14 @@ var BLOG_SLUG_STATIC_REDIRECT = {
   'ca-marcello-mestre-hub-turistico-da-70-milioni-padova': 'blog-ca-marcello-mestre'
 };
 
+/** Slug lunghi da titoli estesi / bozze: il record Supabase ha titolo breve, generateSlug() e' piu' corto. */
+var BLOG_SLUG_LEGACY_CANONICAL = {
+  'umidita-negli-scantinati-a-padova-cause-tecniche-prove-scientifiche-e-soluzioni-padova': 'umidita-negli-scantinati-a-padova',
+  'umidita-scantinati-padova-cause-soluzioni-padova': 'umidita-negli-scantinati-a-padova',
+  'servizi-immobiliari-2026-crescita-digitale-e-nuove-opportunita-righetto-immobili-padova': 'servizi-immobiliari-2026-padova',
+  'servizi-immobiliari-2026-crescita-digitale-e-nuove-opportunita-righetto-immobiliare-padova': 'servizi-immobiliari-2026-padova'
+};
+
 function findArticleBySlug(all, slugRaw) {
   if (!slugRaw || !all || !all.length) return null;
   var slug = normalizeSlugKey(slugRaw);
@@ -410,7 +439,13 @@ function artUrl(a) {
 
 (async function() {
   const params = new URLSearchParams(window.location.search);
-  const slug = params.get('s');
+  var slugParam = params.get('s');
+  var slug = slugParam;
+  if (slugParam) {
+    var slugNorm = normalizeSlugKey(slugParam);
+    if (BLOG_SLUG_LEGACY_CANONICAL[slugNorm]) slug = BLOG_SLUG_LEGACY_CANONICAL[slugNorm];
+    else if (BLOG_SLUG_LEGACY_CANONICAL[slugParam]) slug = BLOG_SLUG_LEGACY_CANONICAL[slugParam];
+  }
   const id = params.get('id'); // retrocompatibilità vecchi link
   if (!slug && !id) { showNotFound(); return; }
 
