@@ -1,6 +1,6 @@
 # ============================================================
 # VENERDÌ RIGRETTO — promemoria piano 90 giorni + Cursor
-# Ogni venerdì alle 06:30 UTC (~07:30 CET) crea un'Issue con:
+# Ogni venerdì alle 07:30 UTC (~09:30 CEST / Europa-Roma in ora legale) crea un'Issue con:
 # - settimana 1–12 e tema della fase
 # - checklist ricorrente
 # - prompt da incollare in Cursor (l'agente non può partire da solo)
@@ -10,7 +10,8 @@ name: "Venerdì Righetto — piano settimanale"
 
 on:
   schedule:
-    - cron: "30 6 * * 5"
+    # 07:30 UTC = ~09:30 Europe/Rome con CEST. In CET invernale valutare 08:30 UTC.
+    - cron: "30 7 * * 5"
 
   workflow_dispatch:
 
@@ -95,6 +96,75 @@ jobs:
               ? "\n\n_Documento completo in repo: `docs/piano-editoriale-q2-2026.md`_"
               : "\n\n_(File `docs/piano-editoriale-q2-2026.md` non trovato nel branch)_";
 
+            function romeYmd(d) {
+              return new Intl.DateTimeFormat("en-CA", {
+                timeZone: "Europe/Rome",
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+              }).format(d);
+            }
+            const todayRome = romeYmd(now);
+            let piano60 = "";
+            try {
+              const raw = fs.readFileSync("data/piano-contenuti-60g.json", "utf8");
+              const cal = JSON.parse(raw);
+              const slot = (cal.slots || []).find((s) => s.friday_iso === todayRome);
+              if (slot) {
+                const urls = (slot.urls_da_promuovere || [])
+                  .map((u) => `- ${u}`)
+                  .join("\n");
+                const social = (slot.titoli_social_suggeriti || [])
+                  .map((s) => `- ${s}`)
+                  .join("\n");
+                const img = slot.immagine_stock_nuova || {};
+                const imgBlock =
+                  img.pagina_riferimento || img.istruzione
+                    ? `\n**Immagine (stock licenziata — non hotlink sul sito):**\n- Fonte: ${img.fonte || "stock"}\n- Ricerca/download: ${img.pagina_riferimento || "—"}\n- ${img.istruzione || ""}\n`
+                    : "";
+                const bozza = slot.bozza_articolo_futuro
+                  ? `\n**Bozza articolo futuro:** slug proposto \`${slot.bozza_articolo_futuro.slug_proposto || ""}\` — ${slot.bozza_articolo_futuro.nota || ""}\n`
+                  : "";
+                piano60 = `
+
+---
+
+## Piano contenuti ~60 giorni — slot di oggi (${slot.friday_iso})
+
+**Focus:** ${slot.titolo_issue_suffix || "—"}  
+**Obiettivo:** ${slot.obiettivo || "—"}
+
+### URL da promuovere (copy-paste)
+${urls || "- (nessuno)"}
+
+### Titoli social suggeriti (adattare tono Righetto)
+${social || "- (nessuno)"}
+${imgBlock}${bozza}
+_Limiti automazione: niente pubblicazione diretta su righettoimmobiliare.it o Meta da questo job; revisione umana e asset in \`img/\` obbligatori._`;
+              } else {
+                const next = (cal.slots || [])
+                  .map((s) => s.friday_iso)
+                  .filter((iso) => iso >= todayRome)
+                  .sort()[0];
+                piano60 = `
+
+---
+
+## Piano contenuti ~60 giorni
+
+Nessuno slot per **${todayRome}** in \`data/piano-contenuti-60g.json\`.  
+${next ? `Prossimo venerdì pianificato: **${next}**.` : "Aggiungi nuove date in \`slots\`."}`;
+              }
+            } catch (e) {
+              piano60 = `
+
+---
+
+## Piano contenuti ~60 giorni
+
+_File \`data/piano-contenuti-60g.json\` assente o non valido: ${String(e)}_`;
+            }
+
             const body = `## Promemoria automatico — piano 90 giorni
 
 **Data (Italia):** ${dateStr}  
@@ -128,16 +198,17 @@ ${docNote}
 \`\`\`text
 È il venerdì Righetto. Leggi la skill \`righetto-venerdi-sito-90giorni\` e dammi il blocco "Venerdì Righetto" per la settimana ${w}/12 con azioni concrete sul repo progetti/index (file da toccare e commit).
 \`\`\`
+${piano60}
 
 ---
 
-_Issue creata dal workflow \`.github/workflows/venerdi-righetto-piano.yml\` (cron venerdì ~07:30 CET)._
+_Issue creata dal workflow \`.github/workflows/venerdi-righetto-piano.yml\` (cron venerdì 07:30 UTC ≈ 09:30 Europe/Rome in CEST)._
 `;
 
             await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: `📅 Venerdì Righetto — Settimana ${w}/12 (${t.focus})`,
+              title: `📅 Venerdì Righetto — Settimana ${w}/12 (${t.focus}) + piano 60g`,
               body,
             });
 
