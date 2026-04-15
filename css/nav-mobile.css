@@ -36,12 +36,18 @@ header{position:relative}
 }
 .nav-mobile a:hover{color:var(--blu,#2C4A6E)}
 .nav-mobile-cta{
-  margin-top:20px!important;background:var(--oro,#FF6B35);color:var(--testo,#152435)!important;
-  padding:16px 28px!important;border-radius:8px;text-align:center;
-  font-family:'Montserrat',sans-serif!important;font-size:.85rem!important;
-  font-weight:800!important;letter-spacing:1px;border:none;
+  margin-top:20px!important;
+  background:linear-gradient(180deg,#ff9a6e 0%,#ff6b35 42%,#e85f2e 100%)!important;
+  color:var(--nero,#0a0f1c)!important;
+  padding:16px 28px!important;border-radius:10px;text-align:center;
+  font-family:'Montserrat',sans-serif!important;font-size:.88rem!important;
+  font-weight:800!important;letter-spacing:.08em;
+  border:1px solid rgba(255,255,255,.35);
   border-bottom:none!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.4) inset,0 4px 0 #b8431a,0 10px 22px rgba(0,0,0,.18);
+  transition:transform .2s ease,box-shadow .2s ease;
 }
+.nav-mobile-cta:active{transform:translateY(2px)}
 
 /* ═══ GESTIONALE LINK (solo se loggato) ═══ */
 .gestionale-link{
@@ -102,4 +108,106 @@ header .nav-login-btn:hover{color:var(--oro,#FF6B35)!important;border-color:var(
   .nav-mobile{top:64px}
   .gestionale-link{display:none!important}
   .nav-login-btn{display:none!important}
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FASCIA HEADER come index (solo pagine con <header>, non .homepage)
+   Sovrascrive i blocchi <style> inline con !important mirato
+   ═══════════════════════════════════════════════════════════ */
+body:not(.homepage) header:first-of-type {
+  background: rgba(10, 15, 28, 0.52) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 8px 28px rgba(0, 0, 0, 0.22) !important;
+}
+
+body:not(.homepage) header .logo,
+body:not(.homepage) header .hlogo {
+  color: #fff !important;
+}
+
+body:not(.homepage) header nav > a,
+body:not(.homepage) header .hnav > a {
+  font-size: 0.83rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.11em !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  position: relative;
+  padding-bottom: 4px !important;
+  text-decoration: none !important;
+}
+
+body:not(.homepage) header nav > a::after,
+body:not(.homepage) header .hnav > a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--oro, #ff6b35);
+  transition: width 0.25s ease;
+}
+
+body:not(.homepage) header nav > a:hover,
+body:not(.homepage) header .hnav > a:hover,
+body:not(.homepage) header nav > a.active,
+body:not(.homepage) header .hnav > a.active {
+  color: #fff !important;
+}
+
+body:not(.homepage) header nav > a:hover::after,
+body:not(.homepage) header .hnav > a:hover::after,
+body:not(.homepage) header nav > a.active::after,
+body:not(.homepage) header .hnav > a.active::after {
+  width: 100%;
+}
+
+body:not(.homepage) header nav > a.active,
+body:not(.homepage) header .hnav > a.active {
+  color: var(--oro, #ff6b35) !important;
+}
+
+body:not(.homepage) header .h-tel {
+  color: rgba(255, 255, 255, 0.82) !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+}
+
+body:not(.homepage) header .h-btn {
+  background: linear-gradient(180deg, #ff9a6e 0%, #ff6b35 42%, #e85f2e 100%) !important;
+  color: var(--nero, #0a0f1c) !important;
+  padding: 11px 22px !important;
+  border-radius: 8px !important;
+  font-weight: 800 !important;
+  font-size: 0.76rem !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  border: 1px solid rgba(255, 255, 255, 0.38) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.45) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.12) inset,
+    0 4px 0 #b8431a,
+    0 10px 22px rgba(0, 0, 0, 0.28) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
+}
+
+body:not(.homepage) header .h-btn:hover {
+  background: linear-gradient(180deg, #ffb08a 0%, #ff7d4a 42%, #f06832 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.1) inset,
+    0 5px 0 #9a3815,
+    0 14px 28px rgba(0, 0, 0, 0.32) !important;
+}
+
+body:not(.homepage) header .h-btn:active {
+  transform: translateY(1px) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.35) inset,
+    0 3px 0 #b8431a,
+    0 5px 14px rgba(0, 0, 0, 0.22) !important;
 }
