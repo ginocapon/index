@@ -329,6 +329,139 @@ if(window.innerWidth > 768){
   setTimeout(function(){ waitSBThen(loadImmobili,0); }, 2000);
 }
 
+/* ══ MODAL INCARICO VENDITA (solo desktop ≥769px, max 1 volta per sessione) — prima di loadBlogHome così il bind esiste anche se Supabase non fa await ══ */
+(function () {
+  const SK = 'ri_incarico_vendita_v2';
+  const mqDesk = window.matchMedia('(min-width: 769px)');
+  let pendingHref = null;
+  let rootEl = null;
+  let prevFocus = null;
+  let keyHandler = null;
+
+  function desk() { return mqDesk.matches; }
+  function shown() { return sessionStorage.getItem(SK) === '1'; }
+  function mark() { sessionStorage.setItem(SK, '1'); }
+
+  function ensureDom() {
+    if (document.getElementById('ri-incarico-root')) {
+      rootEl = document.getElementById('ri-incarico-root');
+      return;
+    }
+    document.body.insertAdjacentHTML('beforeend', ''
+      + '<div id="ri-incarico-root" class="ri-incarico-root" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="ri-incarico-title">'
+      + '  <div class="ri-incarico-backdrop" data-ri-incarico-dismiss="1"></div>'
+      + '  <div class="ri-incarico-panel">'
+      + '    <button type="button" class="ri-incarico-x" data-ri-incarico-dismiss="1" aria-label="Chiudi finestra">&times;</button>'
+      + '    <div class="ri-incarico-kicker">Consulenza vendita</div>'
+      + '    <h2 id="ri-incarico-title" class="ri-incarico-title">Affidaci l&rsquo;incarico per la vendita nel Padovano</h2>'
+      + '    <p class="ri-incarico-lead">Se stai approfondendo le nostre guide, &egrave; il momento giusto per un confronto professionale senza impegno.</p>'
+      + '    <p class="ri-incarico-body">Un unico referente segue l&rsquo;immobile dall&rsquo;analisi di mercato alla strategia di valorizzazione e alla trattativa. Onorari e modalit&agrave; di incarico chiari fin dal primo incontro in agenzia.</p>'
+      + '    <div class="ri-incarico-actions">'
+      + '      <a href="contatti" class="ri-incarico-btn ri-incarico-btn--pri" id="ri-incarico-cta">Richiedi consulenza per la vendita</a>'
+      + '      <button type="button" class="ri-incarico-btn ri-incarico-btn--sec ri-incarico-foc" id="ri-incarico-secondary"></button>'
+      + '    </div>'
+      + '    <p class="ri-incarico-foot">Puoi chiudere in qualsiasi momento (anche con Esc). Questo messaggio non comparir&agrave; di nuovo in questa sessione.</p>'
+      + '  </div>'
+      + '</div>');
+    rootEl = document.getElementById('ri-incarico-root');
+    const sec = document.getElementById('ri-incarico-secondary');
+    const cta = document.getElementById('ri-incarico-cta');
+    rootEl.addEventListener('click', function (e) {
+      if (!e.target.closest('[data-ri-incarico-dismiss]')) return;
+      closeModal(pendingHref || null);
+    });
+    if (sec) sec.addEventListener('click', function () { closeModal(pendingHref || null); });
+    if (cta) cta.addEventListener('click', function (e) {
+      e.preventDefault();
+      closeModal(null);
+      window.location.href = 'contatti';
+    });
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape' && rootEl && rootEl.classList.contains('is-open')) {
+      e.preventDefault();
+      closeModal(pendingHref || null);
+    }
+  }
+
+  function openModal(href) {
+    if (!desk() || shown()) return false;
+    mark();
+    pendingHref = href || null;
+    ensureDom();
+    if (!rootEl) return false;
+    const sec = document.getElementById('ri-incarico-secondary');
+    if (sec) sec.textContent = pendingHref ? 'Continua a leggere la guida' : 'Chiudi';
+    rootEl.classList.add('is-open');
+    rootEl.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    prevFocus = document.activeElement;
+    keyHandler = onKey;
+    document.addEventListener('keydown', keyHandler);
+    const fb = rootEl.querySelector('.ri-incarico-foc');
+    if (fb && typeof fb.focus === 'function') setTimeout(function () { fb.focus(); }, 60);
+    return true;
+  }
+
+  function closeModal(navHref) {
+    if (!rootEl) return;
+    rootEl.classList.remove('is-open');
+    rootEl.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (keyHandler) document.removeEventListener('keydown', keyHandler);
+    keyHandler = null;
+    const h = navHref;
+    pendingHref = null;
+    if (prevFocus && typeof prevFocus.focus === 'function') try { prevFocus.focus(); } catch (x) {}
+    prevFocus = null;
+    if (h) window.location.href = h;
+  }
+
+  function bindGrid(gridEl) {
+    if (!gridEl || gridEl.dataset.riIncaricoBound === '1') return;
+    gridEl.dataset.riIncaricoBound = '1';
+    gridEl.addEventListener('click', function (ev) {
+      const card = ev.target.closest('.blog-card');
+      if (!card || !gridEl.contains(card)) return;
+      const href = card.getAttribute('data-card-href');
+      if (!href) return;
+      if (!desk() || shown()) {
+        window.location.href = href;
+        return;
+      }
+      ev.preventDefault();
+      openModal(href);
+    });
+    gridEl.addEventListener('keydown', function (ev) {
+      if (ev.key !== 'Enter' && ev.key !== ' ') return;
+      const card = ev.target.closest('.blog-card');
+      if (!card || !gridEl.contains(card)) return;
+      const href = card.getAttribute('data-card-href');
+      if (!href) return;
+      ev.preventDefault();
+      if (!desk() || shown()) {
+        window.location.href = href;
+        return;
+      }
+      openModal(href);
+    });
+  }
+
+  const blogSec = document.getElementById('blog');
+  if (blogSec) {
+    const io = new IntersectionObserver(function (ents) {
+      if (!ents[0] || !ents[0].isIntersecting) return;
+      if (!desk() || shown()) return;
+      io.disconnect();
+      openModal(null);
+    }, { threshold: 0.12, rootMargin: '0px 0px 0px 0px' });
+    io.observe(blogSec);
+  }
+
+  window._rigBindIncaricoGrid = bindGrid;
+})();
+
 // ══ BLOG DINAMICO HOMEPAGE ══
 function generateSlug(titolo) {
   let s = String(titolo || '')
@@ -512,137 +645,4 @@ function generateSlug(titolo) {
   // Attiva animazione reveal sulle card appena create
   grid.querySelectorAll('.rv').forEach(el => { if(typeof rvObs!=='undefined') rvObs.observe(el); else el.classList.add('vis'); });
   if (typeof window._rigBindIncaricoGrid === 'function') window._rigBindIncaricoGrid(grid);
-})();
-
-/* ══ MODAL INCARICO VENDITA (solo desktop ≥769px, max 1 volta per sessione) ══ */
-(function () {
-  const SK = 'ri_incarico_vendita_shown';
-  const mqDesk = window.matchMedia('(min-width: 769px)');
-  let pendingHref = null;
-  let rootEl = null;
-  let prevFocus = null;
-  let keyHandler = null;
-
-  function desk() { return mqDesk.matches; }
-  function shown() { return sessionStorage.getItem(SK) === '1'; }
-  function mark() { sessionStorage.setItem(SK, '1'); }
-
-  function ensureDom() {
-    if (document.getElementById('ri-incarico-root')) {
-      rootEl = document.getElementById('ri-incarico-root');
-      return;
-    }
-    document.body.insertAdjacentHTML('beforeend', ''
-      + '<div id="ri-incarico-root" class="ri-incarico-root" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="ri-incarico-title">'
-      + '  <div class="ri-incarico-backdrop" data-ri-incarico-dismiss="1"></div>'
-      + '  <div class="ri-incarico-panel">'
-      + '    <button type="button" class="ri-incarico-x" data-ri-incarico-dismiss="1" aria-label="Chiudi finestra">&times;</button>'
-      + '    <div class="ri-incarico-kicker">Consulenza vendita</div>'
-      + '    <h2 id="ri-incarico-title" class="ri-incarico-title">Affidaci l&rsquo;incarico per la vendita nel Padovano</h2>'
-      + '    <p class="ri-incarico-lead">Se stai approfondendo le nostre guide, &egrave; il momento giusto per un confronto professionale senza impegno.</p>'
-      + '    <p class="ri-incarico-body">Un unico referente segue l&rsquo;immobile dall&rsquo;analisi di mercato alla strategia di valorizzazione e alla trattativa. Onorari e modalit&agrave; di incarico chiari fin dal primo incontro in agenzia.</p>'
-      + '    <div class="ri-incarico-actions">'
-      + '      <a href="contatti" class="ri-incarico-btn ri-incarico-btn--pri" id="ri-incarico-cta">Richiedi consulenza per la vendita</a>'
-      + '      <button type="button" class="ri-incarico-btn ri-incarico-btn--sec ri-incarico-foc" id="ri-incarico-secondary"></button>'
-      + '    </div>'
-      + '    <p class="ri-incarico-foot">Puoi chiudere in qualsiasi momento (anche con Esc). Questo messaggio non comparir&agrave; di nuovo in questa sessione.</p>'
-      + '  </div>'
-      + '</div>');
-    rootEl = document.getElementById('ri-incarico-root');
-    const sec = document.getElementById('ri-incarico-secondary');
-    const cta = document.getElementById('ri-incarico-cta');
-    rootEl.addEventListener('click', function (e) {
-      if (!e.target.closest('[data-ri-incarico-dismiss]')) return;
-      closeModal(pendingHref || null);
-    });
-    if (sec) sec.addEventListener('click', function () { closeModal(pendingHref || null); });
-    if (cta) cta.addEventListener('click', function (e) {
-      e.preventDefault();
-      closeModal(null);
-      window.location.href = 'contatti';
-    });
-  }
-
-  function onKey(e) {
-    if (e.key === 'Escape' && rootEl && rootEl.classList.contains('is-open')) {
-      e.preventDefault();
-      closeModal(pendingHref || null);
-    }
-  }
-
-  function openModal(href) {
-    if (!desk() || shown()) return false;
-    mark();
-    pendingHref = href || null;
-    ensureDom();
-    if (!rootEl) return false;
-    const sec = document.getElementById('ri-incarico-secondary');
-    if (sec) sec.textContent = pendingHref ? 'Continua a leggere la guida' : 'Chiudi';
-    rootEl.classList.add('is-open');
-    rootEl.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    prevFocus = document.activeElement;
-    keyHandler = onKey;
-    document.addEventListener('keydown', keyHandler);
-    const fb = rootEl.querySelector('.ri-incarico-foc');
-    if (fb && typeof fb.focus === 'function') setTimeout(function () { fb.focus(); }, 60);
-    return true;
-  }
-
-  function closeModal(navHref) {
-    if (!rootEl) return;
-    rootEl.classList.remove('is-open');
-    rootEl.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    if (keyHandler) document.removeEventListener('keydown', keyHandler);
-    keyHandler = null;
-    const h = navHref;
-    pendingHref = null;
-    if (prevFocus && typeof prevFocus.focus === 'function') try { prevFocus.focus(); } catch (x) {}
-    prevFocus = null;
-    if (h) window.location.href = h;
-  }
-
-  function bindGrid(gridEl) {
-    if (!gridEl || gridEl.dataset.riIncaricoBound === '1') return;
-    gridEl.dataset.riIncaricoBound = '1';
-    gridEl.addEventListener('click', function (ev) {
-      const card = ev.target.closest('.blog-card');
-      if (!card || !gridEl.contains(card)) return;
-      const href = card.getAttribute('data-card-href');
-      if (!href) return;
-      if (!desk() || shown()) {
-        window.location.href = href;
-        return;
-      }
-      ev.preventDefault();
-      openModal(href);
-    });
-    gridEl.addEventListener('keydown', function (ev) {
-      if (ev.key !== 'Enter' && ev.key !== ' ') return;
-      const card = ev.target.closest('.blog-card');
-      if (!card || !gridEl.contains(card)) return;
-      const href = card.getAttribute('data-card-href');
-      if (!href) return;
-      ev.preventDefault();
-      if (!desk() || shown()) {
-        window.location.href = href;
-        return;
-      }
-      openModal(href);
-    });
-  }
-
-  const blogSec = document.getElementById('blog');
-  if (blogSec) {
-    const io = new IntersectionObserver(function (ents) {
-      if (!ents[0] || !ents[0].isIntersecting) return;
-      if (!desk() || shown()) return;
-      io.disconnect();
-      openModal(null);
-    }, { threshold: 0.14, rootMargin: '0px 0px -5% 0px' });
-    io.observe(blogSec);
-  }
-
-  window._rigBindIncaricoGrid = bindGrid;
 })();
