@@ -1,0 +1,56 @@
+/* Hero “blu” con foto in penombra (gradiente statico sopra immagine — no blur animato)
+   Per usare le PNG allegate in chat: copiale in img/hero/ e sostituisci gli url() qui sotto. */
+
+body.page-hero-servizi .hero,
+body.page-hero-faq .hero,
+body.page-hero-blog .hero,
+body.page-hero-chi-siamo .hero {
+  background-color: var(--nero, #152435);
+  background-repeat: no-repeat, no-repeat;
+  background-size: auto, cover;
+  background-position: center, center center;
+}
+
+/* Servizi: ufficio / contesto professionale */
+body.page-hero-servizi .hero {
+  background-image:
+    linear-gradient(135deg, rgba(10, 15, 28, 0.9) 0%, rgba(21, 36, 53, 0.82) 48%, rgba(44, 74, 110, 0.76) 100%),
+    url("../img/blog/ufficio-righetto-immobiliare.webp");
+}
+
+/* FAQ: contesto documenti / pratiche */
+body.page-hero-faq .hero {
+  background-image:
+    linear-gradient(135deg, rgba(10, 15, 28, 0.92) 0%, rgba(21, 36, 53, 0.86) 50%, rgba(44, 74, 110, 0.8) 100%),
+    url("../img/foto-servizi/gestione-preliminari-padova.webp");
+  background-position: center, center 42%;
+}
+
+/* Blog: mercato / consulenza */
+body.page-hero-blog .hero {
+  background-image:
+    linear-gradient(135deg, rgba(10, 15, 28, 0.9) 0%, rgba(21, 36, 53, 0.84) 50%, rgba(44, 74, 110, 0.78) 100%),
+    url("../img/foto-servizi/vendita-immobili-padova.webp");
+}
+
+/* Chi siamo: stessa foto home (titolari), crop visi — immagine verticale */
+body.page-hero-chi-siamo .hero {
+  background-image:
+    linear-gradient(135deg, rgba(10, 15, 28, 0.88) 0%, rgba(21, 36, 53, 0.82) 45%, rgba(44, 74, 110, 0.78) 100%),
+    url("../img/team/titolari.webp");
+  background-position: center, center 22%;
+}
+
+@media (max-width: 900px) {
+  body.page-hero-chi-siamo .hero {
+    background-position: center, center 14%;
+  }
+}
+
+/* Riduce il alone arancione ::before così non compete con la foto */
+body.page-hero-servizi .hero::before,
+body.page-hero-faq .hero::before,
+body.page-hero-blog .hero::before,
+body.page-hero-chi-siamo .hero::before {
+  opacity: 0.22;
+}
