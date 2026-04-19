@@ -177,6 +177,22 @@ const MULT_TIPOLOGIA = {
 // ══════════════════════════════════════════════
 // FAQ E RISPOSTE PREDEFINITE
 // ══════════════════════════════════════════════
+/**
+ * Step 3 — Copertura blog <-> FAQ (manutenzione):
+ * Gli slug in `articoliStatici` (blog.html) coprono mercato, fisco, mutui, affitti, zone, guide.
+ * Le voci con `blog`/`blogTitle` qui devono aggiornarsi se si rinomina un articolo o si cambia url_statico.
+ * Articoli senza keyword dedicata nel bot restano raggiungibili da voce "blog" / "articoli blog" o dalla pagina blog.
+ */
+/** Se presente faq.blog (slug senza .html), append link approfondimento blog. */
+function righettoFaqReply(faq) {
+  var t = faq.r;
+  if (faq.blog) {
+    var lab = faq.blogTitle || 'Articolo sul blog';
+    t += '\n\n📎 **Leggi anche:** [' + lab + '](https://righettoimmobiliare.it/' + faq.blog + ')';
+  }
+  return t;
+}
+
 const FAQ_DATA = [
   // ── INFO AGENZIA ──
   {
@@ -223,7 +239,9 @@ const FAQ_DATA = [
   // ── ACQUISTO ──
   {
     k: ['prima casa', 'agevolazioni', 'under 36', 'giovani'],
-    r: '🏡 **Agevolazioni prima casa**\n\n**Requisiti:**\n• Non possedere altri immobili nello stesso comune\n• Residenza nel comune entro 18 mesi\n• Non aver già usufruito del bonus\n\n**Vantaggi:**\n• Imposta di registro al 2% (anziché 9%)\n• Per under 36: esenzione totale imposte e credito IVA\n• Detrazioni interessi mutuo fino a €4.000/anno'
+    r: '🏡 **Agevolazioni prima casa**\n\n**Requisiti:**\n• Non possedere altri immobili nello stesso comune\n• Residenza nel comune entro 18 mesi\n• Non aver già usufruito del bonus\n\n**Vantaggi:**\n• Imposta di registro al 2% (anziché 9%)\n• Per under 36: esenzione totale imposte e credito IVA\n• Detrazioni interessi mutuo fino a €4.000/anno',
+    blog: 'blog-agevolazioni-prima-casa-2026',
+    blogTitle: 'Agevolazioni prima casa 2026'
   },
   {
     k: ['caparra', 'deposito', 'anticipo', 'acconto'],
@@ -233,14 +251,271 @@ const FAQ_DATA = [
     k: ['spese acquisto', 'costi acquisto', 'imposte acquisto'],
     r: '🧾 **Costi per l\'acquisto di un immobile**\n\n**Da privato (prima casa):**\n• Imposta di registro: 2% del valore catastale\n• Imposta ipotecaria: €50\n• Imposta catastale: €50\n\n**Da costruttore (con IVA):**\n• IVA: 4% prima casa / 10% seconda casa\n• Imposta di registro: €200\n\n**Sempre:**\n• Notaio: €2.000-€4.000\n• Mediazione: da concordare con l\'agenzia (in sede)'
   },
+  // ── APPROFONDIMENTI BLOG (keyword lunghe/specifiche; ordine prima del mutuo generico) ──
+  {
+    k: ['omi mobile', 'quotazioni omi', 'prezzi omi', 'omi istat', 'monitor istat locazioni', 'banca dati omi'],
+    r: '📊 **OMI e dati ufficiali**\n\nPer orientarsi su prezzi e canoni conviene usare le **quotazioni OMI** dell\'Agenzia delle Entrate e incrociarle con i **monitor ISTAT** sulle locazioni, senza improvvisare.',
+    blog: 'blog-quotazioni-locazioni-omi-istat-padova-2026',
+    blogTitle: 'Quotazioni e locazioni: OMI e ISTAT 2026'
+  },
+  {
+    k: ['indagine mutui banca italia', 'mutui banca d\'italia', 'tassi banca italia mutui', 'andamento mutui italia'],
+    r: '🏦 **Mutui e tassi: lettura prudente**\n\nL\'Indagine sui mutui e i aggregati pubblicati da **Banca d\'Italia** aiutano a capire il contesto dei tassi; la scelta resta sempre personale e va verificata in banca.',
+    blog: 'blog-mutui-tasso-fisso-bancaitalia-padova-2026',
+    blogTitle: 'Mutui a tasso fisso: dati Banca d\'Italia 2026'
+  },
+  {
+    k: ['compravendite veneto', 'transazioni veneto', 'cintura padova', 'mercato veneto immobiliare'],
+    r: '📈 **Compravendite in Veneto e cintura**\n\nUtile leggere volumi e contesto regionale prima di decidere tempi e prezzo sul singolo immobile.',
+    blog: 'blog-compravendite-veneto-cintura-padova-2026',
+    blogTitle: 'Compravendite Veneto e cintura Padova'
+  },
+  {
+    k: ['imposta di registro compravendita', 'imposte registro ipotecaria catastale', 'tasse registro acquisto'],
+    r: '🧾 **Imposte da privato o costruttore**\n\nRegistro, ipotecaria e catastale nella compravendita seguono regole distinte da altre voci (es. plusvalenza venditore). Conviene verificare il proprio caso.',
+    blog: 'blog-imposte-registro-catasto-compravendita-padova-2026',
+    blogTitle: 'Imposte di registro e ipotecarie: guida'
+  },
+  {
+    k: ['fasi vendita immobile', 'percorso vendita casa', 'dal prezzo alla proposta', 'checklist venditore'],
+    r: '🏠 **Vendere nel Padovano**\n\nDalla valutazione alla proposta e al rogito: fasi, ruoli e documentazione vanno pianificati per non perdere acquirenti.',
+    blog: 'blog-percorso-vendita-immobile-padova-2026',
+    blogTitle: 'Percorso operativo di vendita 2026'
+  },
+  {
+    k: ['geopolitica immobiliare', 'tassi bce mercato casa', 'energia e mutui', 'crisi energetica casa'],
+    r: '🌍 **Contesto macro**\n\nTassi, energia e fiducia delle famiglie influenzano il mercato: utile inquadrare i rischi senza confonderli con consulenze d\'investimento.',
+    blog: 'blog-immobiliare-geopolitica-energia-tassi-2026',
+    blogTitle: 'Geopolitica, energia e tassi'
+  },
+  {
+    k: ['scegliere agenzia immobiliare', 'checklist agenzia', 'mandato vendita domande', 'come scegliere agenzia padova'],
+    r: '🏢 **Scegliere l\'agenzia**\n\nDomande in sede su mandato, marketing, verifiche documentali e tempi: una checklist riduce rischi.',
+    blog: 'blog-scegliere-agenzia-immobiliare-padova-2026',
+    blogTitle: 'Scegliere agenzia a Padova: checklist'
+  },
+  {
+    k: ['comprare a limena', 'limena vicino padova', 'prima cintura padova comprare'],
+    r: '🏡 **Limena e prima cintura**\n\nSpostamenti, servizi e lettura prezzi rispetto al capoluogo: tema frequente per chi valuta fuori mura.',
+    blog: 'blog-limena-vicino-padova-comprare-2026',
+    blogTitle: 'Comprare vicino a Padova: Limena'
+  },
+  {
+    k: ['documenti mutuo rogito', 'sequenza mutuo acquisto', 'tempi mutuo prima casa'],
+    r: '🏦 **Mutuo e tempi di compravendita**\n\nAllineare istruttoria, perizia e documentazione dell\'immobile evita ritardi tra preliminare e rogito.',
+    blog: 'blog-mutuo-documenti-tempi-prima-casa-padova-2026',
+    blogTitle: 'Mutuo: documenti e tempi fino al rogito'
+  },
+  {
+    k: ['affitto studenti checklist', 'cauzione studenti padova', 'contratto studenti università'],
+    r: '🎓 **Affitto per studenti**\n\nContratto, cauzione, zone e obblighi: una checklist aiuta genitori e studenti prima della firma.',
+    blog: 'blog-checklist-affitto-studenti-padova-2026',
+    blogTitle: 'Checklist affitto studenti Padova'
+  },
+  {
+    k: ['strategie vendere casa', 'massimizzare prezzo vendita', 'negoziazione vendita padova'],
+    r: '📈 **Strategia di vendita**\n\nPricing, valorizzazione, documenti e tempi incidono sul risultato: conviene un approccio strutturato.',
+    blog: 'blog-vendita-immobiliare-padova-strategie-2026',
+    blogTitle: '7 strategie per vendere a Padova'
+  },
+  {
+    k: ['record compravendite', 'transazioni italia 2026', 'volumi compravendite'],
+    r: '📊 **Volumi di mercato**\n\nLettura dei dati sulle compravendite aiuta a capire fase del ciclo e aspettative, sempre con attenzione al locale.',
+    blog: 'blog-compravendite-padova-record-2026',
+    blogTitle: 'Compravendite e contesto 2026'
+  },
+  {
+    k: ['prezzi zona per zona', 'mappa prezzi padova', 'quartiere più caro padova'],
+    r: '🗺️ **Prezzi per zona**\n\nConfrontare le zone con dati aggiornati riduce errori di prezzo in vendita e in acquisto.',
+    blog: 'blog-prezzi-case-padova-zona-2026',
+    blogTitle: 'Prezzi case Padova zona per zona'
+  },
+  {
+    k: ['canoni affitto padova', 'affitti cari padova', 'affitto medio padova'],
+    r: '🏘️ **Canoni e mercato locazioni**\n\nDomanda, offerta e zone trainano i canoni: conviene verificare aggiornamenti periodici.',
+    blog: 'blog-affitti-padova-canoni-2026',
+    blogTitle: 'Affitti Padova: canoni e zone'
+  },
+  {
+    k: ['cedolare secca affitto breve', 'cin affitto breve', 'rendimento airbnb padova'],
+    r: '🏖️ **Affitto breve**\n\nRegole fiscali, adempimenti e rendimenti vanno valutati caso per caso sul territorio.',
+    blog: 'blog-affitto-breve-padova-2026',
+    blogTitle: 'Affitto breve a Padova 2026'
+  },
+  {
+    k: ['domanda offerta affitti', 'poco in affitto padova', 'carenza alloggi'],
+    r: '📉 **Domanda vs offerta**\n\nQuando l\'offerta locativa non segue la domanda, i canoni e i tempi di ricerca cambiano: tema centrale nel Padovano.',
+    blog: 'blog-squilibrio-domanda-offerta-affitti-padova',
+    blogTitle: 'Squilibrio domanda-offerta affitti'
+  },
+  {
+    k: ['crisi immobiliare padova', 'compravendite calano', 'mercato in frenata'],
+    r: '⚠️ **Fase di mercato**\n\nPrezzi, volumi e tassi vanno letti insieme: scenari diversi richiedono cautela nelle decisioni.',
+    blog: 'blog-crisi-immobiliare-padova-2026',
+    blogTitle: 'Crisi immobiliare: cosa succede a Padova'
+  },
+  {
+    k: ['bolla immobiliare', 'rischio bolla padova', 'affordability immobiliare'],
+    r: '🎈 **Rischio bolla**\n\nIndicatori e confronti storici aiutano a capire se il mercato è surriscaldato o in equilibrio relativo.',
+    blog: 'blog-bolla-immobiliare-padova-2026',
+    blogTitle: 'Bolla immobiliare a Padova?'
+  },
+  {
+    k: ['emergenza abitativa', 'housing padova', 'caro affitti politiche'],
+    r: '🏚️ **Emergenza abitativa**\n\nDati, cause e possibili interventi sono dibattito pubblico: utile distinguere notizie da strumenti operativi (contratto, reddito, zona).',
+    blog: 'blog-emergenza-abitativa-padova-2026',
+    blogTitle: 'Emergenza casa Padova'
+  },
+  {
+    k: ['mutui migliori offerte padova', 'rata mutuo esempio', 'spread mutuo 2026'],
+    r: '🏦 **Mutuo per acquisto**\n\nConfronto tra offerte e simulazioni è il passo pratico dopo la pre-istruttoria: le condizioni variano per profilo.',
+    blog: 'blog-mutui-casa-padova-2026',
+    blogTitle: 'Mutui casa a Padova 2026'
+  },
+  {
+    k: ['case green', 'epbd', 'direttiva prestazione energetica', 'classe energetica obblighi futuri'],
+    r: '🌿 **Normativa energetica edifici**\n\nLa direttiva europea e le recepimenti nazionali possono incidere su obblighi e valorizzazioni: verificare aggiornamenti con un tecnico.',
+    blog: 'blog-direttiva-case-green-limena-padova',
+    blogTitle: 'Direttiva Case Green e edifici'
+  },
+  {
+    k: ['guida comprare casa padova', 'passi acquisto casa', 'prima casa passo dopo passo'],
+    r: '🏠 **Acquisto nel Padovano**\n\nDalla ricerca al rogito: passi, costi e errori comuni sono trattati in guida dedicata.',
+    blog: 'blog-comprare-casa-padova-guida-2026',
+    blogTitle: 'Comprare casa a Padova: guida 2026'
+  },
+  {
+    k: ['costi vendere casa', 'spese vendita venditore', 'quanto costa vendere'],
+    r: '💰 **Costi da venditore**\n\nOltre al compenso di mediazione (da concordare in sede), ci sono voci tecniche e fiscali da pianificare.',
+    blog: 'blog-costi-vendere-casa-padova-2026',
+    blogTitle: 'Costi per vendere casa a Padova'
+  },
+  {
+    k: ['bilancio agenzia righetto', 'risultati agenzia 2025', 'affitti obiettivi 2026'],
+    r: '📋 **Vita d\'agenzia**\n\nServizi, numeri e obiettivi sul segmento locazioni: trasparenza sul lavoro di squadra.',
+    blog: 'blog-righetto-bilancio-2025-soluzioni-affitto-2026',
+    blogTitle: 'Bilancio 2025 e affitti 2026'
+  },
+  {
+    k: ['errori vendere casa', 'sbagli vendita', 'prezzo sbagliato vendita'],
+    r: '⚠️ **Errori da evitare**\n\nPrezzo, documenti e promozione: alcuni errori pesano molto sul risultato finale.',
+    blog: 'vendere-casa-padova-errori',
+    blogTitle: '7 errori costosi in vendita'
+  },
+  {
+    k: ['quartieri padova dove comprare', 'miglior quartiere famiglie padova', 'guida quartieri'],
+    r: '🗺️ **Quartieri**\n\nServizi, prezzi e stile di vita cambiano per zona: una mappa ragionata aiuta la scelta.',
+    blog: 'blog-quartieri-padova-2026',
+    blogTitle: 'Guida ai quartieri di Padova'
+  },
+  {
+    k: ['affitto stanze studenti', 'zona universitaria affitto', 'canone studenti padova'],
+    r: '🎓 **Studenti**\n\nZone, tipologie contrattuali e prezzi: mercato dedicato nel capoluogo.',
+    blog: 'blog-affitto-studenti-padova',
+    blogTitle: 'Affitto studenti Padova'
+  },
+  {
+    k: ['comprare o affittare', 'conviene affittare', 'conviene comprare casa'],
+    r: '⚖️ **Comprare vs affittare**\n\nOrizzonte temporale, costi e mutuo: conviene fare conti su scenari realistici.',
+    blog: 'blog-comprare-affittare-padova',
+    blogTitle: 'Comprare o restare in affitto'
+  },
+  {
+    k: ['case in vendita padova', 'prezzo medio mq padova', 'mercato vendita padova'],
+    r: '🏘️ **Case in vendita**\n\nPanoramica su prezzi medi, zone e domande frequenti sul mercato padovano.',
+    blog: 'blog-case-vendita-padova',
+    blogTitle: 'Case in vendita Padova'
+  },
+  {
+    k: ['bonus prima casa', 'agevolazioni fiscali acquisto', 'under 36 prima casa'],
+    r: '🎁 **Agevolazioni**\n\nRequisiti e agevolazioni cambiano nel tempo: verificare sempre testi ufficiali e il proprio profilo.',
+    blog: 'blog-agevolazioni-prima-casa-2026',
+    blogTitle: 'Agevolazioni prima casa 2026'
+  },
+  {
+    k: ['rendimento locativo', 'yield affitto', 'investimento affitto padova'],
+    r: '📈 **Rendimento da locazione**\n\nCalcolo per zone e costi da sottrarre: utile per confrontare con altre asset class.',
+    blog: 'blog-rendimento-affitto-padova',
+    blogTitle: 'Rendimento affitto per quartiere'
+  },
+  {
+    k: ['contratto affitto canone concordato', 'cedolare secca 10', 'contratto 3+2 padova'],
+    r: '📄 **Contratto di locazione**\n\nTipologie e opzioni fiscali vanno scelte in base al caso con assistenza.',
+    blog: 'blog-contratto-affitto-padova',
+    blogTitle: 'Contratto di affitto a Padova'
+  },
+  {
+    k: ['servizi zona supermercati', 'infrastrutture quartiere', 'dove fare spesa padova'],
+    r: '🛒 **Servizi per zona**\n\nMappa ragionata su servizi essenziali e infrastrutture per chi sceglie il quartiere.',
+    blog: 'blog-servizi-infrastrutture-padova',
+    blogTitle: 'Servizi e infrastrutture per zone'
+  },
+  {
+    k: ['scuole padova', 'asilo quartiere', 'liceo vicino casa'],
+    r: '🎒 **Scuole e istruzione**\n\nPer famiglie: orientamento per zone con riferimento a offerta scolastica.',
+    blog: 'blog-scuole-istruzione-padova',
+    blogTitle: 'Scuole a Padova per zone'
+  },
+  {
+    k: ['tram padova', 'bus quartiere', 'mobilità padova'],
+    r: '🚊 **Trasporti**\n\nTram, bus e mobilità dolce incidono sulla qualità dello spostamento quotidiano.',
+    blog: 'blog-trasporti-mobilita-padova',
+    blogTitle: 'Trasporti e mobilità per zone'
+  },
+  {
+    k: ['mercato limena omi', 'comprare casa limena', 'prezzi limena 2026'],
+    r: '🏡 **Limena**\n\nTerritorio, OMI e identità del mercato locale in sintesi.',
+    blog: 'blog-mercato-immobiliare-limena-2026',
+    blogTitle: 'Mercato immobiliare Limena'
+  },
+  {
+    k: ['sacro cuore padova', 'zona omi d6', 'torre pontevigodarzere mercato'],
+    r: '📍 **Sacro Cuore / zona OMI**\n\nMicrozona e confronti con quartieri limitrofi.',
+    blog: 'blog-mercato-sacrocuore-padova-omi-2026',
+    blogTitle: 'Mercato Sacro Cuore e OMI D6'
+  },
+  {
+    k: ['centro storico investimento', 'rendimento centro padova', 'prezzi centro storico 2026'],
+    r: '🏛️ **Centro storico**\n\nPrezzi, rendimenti e lettura per chi compra o investe nel cuore della città.',
+    blog: 'blog-mercato-immobiliare-padova-centro-2026',
+    blogTitle: 'Mercato centro storico Padova'
+  },
+  {
+    k: ['limena o centro padova', 'meglio limena o padova', 'confronto limena padova'],
+    r: '⚖️ **Limena vs centro**\n\nConfronto su prezzi, servizi e stile di vita con dati ragionati.',
+    blog: 'blog-limena-vs-padova-centro-dove-comprare-2026',
+    blogTitle: 'Limena o centro Padova?'
+  },
+  {
+    k: ['ca marcello mestre', 'marcello mestre', 'hub mestre turismo'],
+    r: '🏗️ **Progetto Mestre**\n\nRiqualificazione e contesto urbano nel Veneto orientale.',
+    blog: 'blog-ca-marcello-mestre',
+    blogTitle: 'Ca\' Marcello Mestre'
+  },
+  {
+    k: ['caparra confirmatoria', 'art. 1385', '1385 codice civile', 'doppia caparra'],
+    r: '💶 **Caparra confirmatoria**\n\nStrumento tipico al compromesso: effetti in caso di inadempimento vanno compresi prima di firmare.',
+    blog: 'blog-caparra-confirmatoria-padova',
+    blogTitle: 'Caparra confirmatoria: guida'
+  },
+  {
+    k: ['blog righetto', 'articoli blog', 'leggere articolo', 'approfondimento blog'],
+    r: '📚 **Blog Righetto Immobiliare**\n\nTrovi guide su acquisto, vendita, affitti, mutui, fisco e mercato locale aggiornate al 2026.',
+    blog: 'blog',
+    blogTitle: 'Tutti gli articoli del blog'
+  },
   // ── MUTUO E FINANZIAMENTI ──
   {
     k: ['mutuo', 'finanziamento', 'banca', 'prestito', 'rate'],
-    r: '🏦 **Consulenza Mutuo**\n\nOffriamo consulenza gratuita per il mutuo:\n• Analisi della tua situazione finanziaria\n• Confronto offerte da 10+ banche\n• Supporto pratiche notarili\n\nContattaci per un appuntamento!'
+    r: '🏦 **Consulenza Mutuo**\n\nOffriamo consulenza gratuita per il mutuo:\n• Analisi della tua situazione finanziaria\n• Confronto offerte da 10+ banche\n• Supporto pratiche notarili\n\nContattaci per un appuntamento!',
+    blog: 'blog-mutui-casa-padova-2026',
+    blogTitle: 'Mutui casa a Padova: guida'
   },
   {
     k: ['tasso', 'fisso', 'variabile', 'spread', 'euribor'],
-    r: '📊 **Tasso fisso o variabile?**\n\n**Tasso fisso:** rata costante per tutta la durata del mutuo. Ideale per chi vuole sicurezza e stabilità. Attualmente intorno al 2,5-3,5%.\n\n**Tasso variabile:** segue l\'andamento dell\'Euribor. Rata iniziale più bassa ma può crescere. Adatto a chi ha margine di flessibilità.\n\nPossiamo metterti in contatto con i nostri consulenti creditizi.'
+    r: '📊 **Tasso fisso o variabile?**\n\n**Tasso fisso:** rata costante per tutta la durata del mutuo. Ideale per chi vuole sicurezza e stabilità. Attualmente intorno al 2,5-3,5%.\n\n**Tasso variabile:** segue l\'andamento dell\'Euribor. Rata iniziale più bassa ma può crescere. Adatto a chi ha margine di flessibilità.\n\nPossiamo metterti in contatto con i nostri consulenti creditizi.',
+    blog: 'blog-mutuo-fisso-variabile-padova-2026',
+    blogTitle: 'Mutuo tasso fisso o variabile 2026'
   },
   {
     k: ['requisiti mutuo', 'ottenere mutuo', 'quanto posso chiedere', 'rata massima'],
@@ -248,7 +523,9 @@ const FAQ_DATA = [
   },
   {
     k: ['surroga', 'sostituzione mutuo', 'portabilità'],
-    r: '🔄 **Surroga del mutuo**\n\nLa surroga (o portabilità) permette di trasferire il mutuo a un\'altra banca con condizioni migliori, **senza costi** per il mutuatario. È un diritto previsto dalla Legge Bersani. Conviene quando i tassi di mercato sono più bassi rispetto a quelli del tuo mutuo attuale.'
+    r: '🔄 **Surroga del mutuo**\n\nLa surroga (o portabilità) permette di trasferire il mutuo a un\'altra banca con condizioni migliori, **senza costi** per il mutuatario. È un diritto previsto dalla Legge Bersani. Conviene quando i tassi di mercato sono più bassi rispetto a quelli del tuo mutuo attuale.',
+    blog: 'blog-surroga-mutuo-padova-2026',
+    blogTitle: 'Surroga mutuo 2026 a Padova'
   },
   // ── AFFITTO E LOCAZIONE ──
   {
@@ -274,7 +551,9 @@ const FAQ_DATA = [
   },
   {
     k: ['plusvalenza', 'tassa vendita', 'guadagno vendita'],
-    r: '💰 **Plusvalenza sulla vendita**\n\nSe vendi un immobile **entro 5 anni** dall\'acquisto e realizzi un guadagno, devi pagare la tassa sulla plusvalenza. Puoi scegliere:\n• Tassazione IRPEF ordinaria\n• Imposta sostitutiva del **26%**\n\n**Esenzione:** se l\'immobile è stato adibito a prima casa per la maggior parte del periodo.'
+    r: '💰 **Plusvalenza sulla vendita**\n\nSe vendi un immobile **entro 5 anni** dall\'acquisto e realizzi un guadagno, devi pagare la tassa sulla plusvalenza. Puoi scegliere:\n• Tassazione IRPEF ordinaria\n• Imposta sostitutiva del **26%**\n\n**Esenzione:** se l\'immobile è stato adibito a prima casa per la maggior parte del periodo.',
+    blog: 'blog-tasse-vendita-casa',
+    blogTitle: 'Tasse sulla vendita casa'
   },
   {
     k: ['spese detraibili', 'detrazioni', 'detrazione fiscale', '730'],
@@ -283,7 +562,9 @@ const FAQ_DATA = [
   // ── DOCUMENTI ──
   {
     k: ['documenti', 'ape', 'certificato', 'pratiche', 'catasto'],
-    r: '📋 **Documenti per la vendita**\n\nServiranno:\n• APE (Attestato Prestazione Energetica)\n• Planimetria catastale aggiornata\n• Atto di provenienza\n• Visura catastale\n• Certificato di abitabilità/agibilità\n• Conformità urbanistica\n• Conformità impianti\n\nNon preoccuparti — ti aiutiamo a raccogliere tutto!'
+    r: '📋 **Documenti per la vendita**\n\nServiranno:\n• APE (Attestato Prestazione Energetica)\n• Planimetria catastale aggiornata\n• Atto di provenienza\n• Visura catastale\n• Certificato di abitabilità/agibilità\n• Conformità urbanistica\n• Conformità impianti\n\nNon preoccuparti — ti aiutiamo a raccogliere tutto!',
+    blog: 'blog-documenti-vendita-casa',
+    blogTitle: 'Documenti per vendere casa'
   },
   {
     k: ['classe energetica', 'energetica', 'attestato energetico', 'consumo'],
@@ -318,7 +599,9 @@ const FAQ_DATA = [
   // ── INVESTIMENTI IMMOBILIARI ──
   {
     k: ['investimento', 'investire', 'rendimento', 'rendita', 'reddito'],
-    r: '📈 **Investire in immobili a Padova**\n\nI rendimenti medi lordi a Padova:\n• **Appartamenti centro:** 4-5% annuo\n• **Bilocali zona università:** 6-7% annuo\n• **Locali commerciali:** 6-8% annuo\n• **Box/garage:** 5-7% annuo\n\nPadova è una piazza universitaria molto dinamica con forte domanda di affitti. Contattateci per un\'analisi personalizzata.'
+    r: '📈 **Investire in immobili a Padova**\n\nI rendimenti medi lordi a Padova:\n• **Appartamenti centro:** 4-5% annuo\n• **Bilocali zona università:** 6-7% annuo\n• **Locali commerciali:** 6-8% annuo\n• **Box/garage:** 5-7% annuo\n\nPadova è una piazza universitaria molto dinamica con forte domanda di affitti. Contattateci per un\'analisi personalizzata.',
+    blog: 'blog-investire-immobiliare-padova',
+    blogTitle: 'Investire nel mercato immobiliare Padova'
   },
   {
     k: ['affitto breve', 'airbnb', 'turistico', 'b&b'],
@@ -347,7 +630,9 @@ const FAQ_DATA = [
   // ── SUCCESSIONE E DONAZIONE ──
   {
     k: ['successione', 'eredità', 'eredi', 'defunto', 'ereditare'],
-    r: '⚖️ **Successione immobiliare**\n\nIn caso di eredità:\n• Dichiarazione di successione entro **12 mesi** dal decesso\n• Imposta di successione: 4% (coniuge/figli, franchigia €1M), 6% (fratelli, franchigia €100K), 8% (altri)\n• Voltura catastale obbligatoria\n• Se più eredi: possibilità di vendita con accordo unanime o divisione giudiziale\n\nVi assistiamo anche nella vendita di immobili ereditati.'
+    r: '⚖️ **Successione immobiliare**\n\nIn caso di eredità:\n• Dichiarazione di successione entro **12 mesi** dal decesso\n• Imposta di successione: 4% (coniuge/figli, franchigia €1M), 6% (fratelli, franchigia €100K), 8% (altri)\n• Voltura catastale obbligatoria\n• Se più eredi: possibilità di vendita con accordo unanime o divisione giudiziale\n\nVi assistiamo anche nella vendita di immobili ereditati.',
+    blog: 'blog-successione-immobiliare-padova',
+    blogTitle: 'Casa ereditata: tasse e vendita'
   },
   {
     k: ['donazione', 'donare', 'regalare casa'],
@@ -433,7 +718,9 @@ const FAQ_DATA = [
   },
   {
     k: ['home staging', 'staging', 'allestimento'],
-    r: '🎨 **Sì, offriamo home staging:**\n\n• **Staging virtuale gratuito** nelle foto (rendering digitale)\n• **Staging fisico opzionale** per immobili vuoti\n\nL\'home staging aumenta la velocità di vendita del **+20%** e il prezzo finale fino al **+5%**.'
+    r: '🎨 **Sì, offriamo home staging:**\n\n• **Staging virtuale gratuito** nelle foto (rendering digitale)\n• **Staging fisico opzionale** per immobili vuoti\n\nL\'home staging aumenta la velocità di vendita del **+20%** e il prezzo finale fino al **+5%**.',
+    blog: 'blog-home-staging-padova',
+    blogTitle: 'Home staging a Padova'
   },
   {
     k: ['privacy visite', 'discrezione', 'riservatezza', 'nda'],
@@ -1131,7 +1418,7 @@ class RighettoChat {
     // FAQ (con fuzzy matching per errori di battitura)
     for (const faq of FAQ_DATA) {
       if (this.fuzzyMatchKeyword(low, faq.k)) {
-        return faq.r;
+        return righettoFaqReply(faq);
       }
     }
 

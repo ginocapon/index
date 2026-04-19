@@ -175,8 +175,17 @@ const MULT_TIPOLOGIA = {
 };
 
 // ══════════════════════════════════════════════
-// FAQ E RISPOSTE PREDEFINITE
+// FAQ E RISPOSTE PREDEFINITE (subset; allineato a js/chatbot.js per link blog)
 // ══════════════════════════════════════════════
+function righettoFaqReply(faq) {
+  var t = faq.r;
+  if (faq.blog) {
+    var lab = faq.blogTitle || 'Articolo sul blog';
+    t += '\n\n📎 **Leggi anche:** [' + lab + '](https://righettoimmobiliare.it/' + faq.blog + ')';
+  }
+  return t;
+}
+
 const FAQ_DATA = [
   {
     k: ['orari', 'apertura', 'chiuso', 'aperto', 'quando'],
@@ -199,8 +208,34 @@ const FAQ_DATA = [
     r: '📸 **Servizio Fotografico Professionale**\n\nOgni immobile riceve:\n• Foto professionali con reflex\n• Post-produzione colori\n• Virtual Tour 360° con Pannellum\n• Video YouTube\n• Planimetrie CAD\n\nTutto **incluso** nel nostro servizio!'
   },
   {
+    k: ['quotazioni omi', 'omi istat', 'monitor istat locazioni'],
+    r: '📊 **OMI e canoni**\n\nPer prezzi e locazioni conviene usare fonti ufficiali (OMI, ISTAT) e interpretarle con cautela.',
+    blog: 'blog-quotazioni-locazioni-omi-istat-padova-2026',
+    blogTitle: 'OMI e ISTAT 2026'
+  },
+  {
+    k: ['guida comprare casa', 'passi acquisto casa'],
+    r: '🏠 **Acquisto**\n\nDalla ricerca al rogito: passi e costi nel Padovano.',
+    blog: 'blog-comprare-casa-padova-guida-2026',
+    blogTitle: 'Comprare casa a Padova 2026'
+  },
+  {
+    k: ['surroga', 'sostituzione mutuo', 'portabilità'],
+    r: '🔄 **Surroga**\n\nPortabilità del mutuo tra banche quando conviene per il profilo.',
+    blog: 'blog-surroga-mutuo-padova-2026',
+    blogTitle: 'Surroga mutuo Padova'
+  },
+  {
+    k: ['blog righetto', 'articoli blog'],
+    r: '📚 **Blog**\n\nGuide su mercato, mutui, affitti e fisco.',
+    blog: 'blog',
+    blogTitle: 'Blog'
+  },
+  {
     k: ['mutuo', 'finanziamento', 'banca', 'prestito', 'rate'],
-    r: '🏦 **Consulenza Mutuo**\n\nOffriamo consulenza gratuita per il mutuo:\n• Analisi della tua situazione finanziaria\n• Confronto offerte da 10+ banche\n• Supporto pratiche notarili\n\nContattaci per un appuntamento!'
+    r: '🏦 **Consulenza Mutuo**\n\nOffriamo consulenza gratuita per il mutuo:\n• Analisi della tua situazione finanziaria\n• Confronto offerte da 10+ banche\n• Supporto pratiche notarili\n\nContattaci per un appuntamento!',
+    blog: 'blog-mutui-casa-padova-2026',
+    blogTitle: 'Mutui casa Padova'
   },
   {
     k: ['vendere', 'vendita', 'mettere in vendita', 'affidare'],
@@ -212,7 +247,9 @@ const FAQ_DATA = [
   },
   {
     k: ['documenti', 'ape', 'certificato', 'pratiche', 'catasto'],
-    r: '📋 **Documenti per la vendita**\n\nServiranno:\n• APE (Attestato Prestazione Energetica)\n• Planimetria catastale aggiornata\n• Atto di provenienza\n• Dichiarazione di abitabilità\n• Conformità impianti\n\nNon preoccuparti — ti aiutiamo a raccogliere tutto!'
+    r: '📋 **Documenti per la vendita**\n\nServiranno:\n• APE (Attestato Prestazione Energetica)\n• Planimetria catastale aggiornata\n• Atto di provenienza\n• Dichiarazione di abitabilità\n• Conformità impianti\n\nNon preoccuparti — ti aiutiamo a raccogliere tutto!',
+    blog: 'blog-documenti-vendita-casa',
+    blogTitle: 'Documenti vendita'
   }
 ];
 
@@ -438,7 +475,7 @@ class RighettoChat {
     // FAQ
     for (const faq of FAQ_DATA) {
       if (faq.k.some(k => low.includes(k))) {
-        return faq.r;
+        return righettoFaqReply(faq);
       }
     }
 
