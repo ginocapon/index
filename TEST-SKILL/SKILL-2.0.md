@@ -773,6 +773,61 @@ js/scroll-reveal.js                 - Animazioni scroll
 - Ogni migrazione: stesso articolo in `blog.html` / `homepage.js` / `sitemap` gia' registrato — si interviene solo sul
   markup dentro `.art-content` + link al CSS.
 
+### 8.1c Qualità corpo, SEO 2026, crawler AI e GEO/AEO (OBBLIGATORIO — prima pubblicazione)
+
+> **Obiettivo:** contenuti utili per utente e motori, segnale pulito per **Neural Matching** e per **estrazione risposta**
+> (snippet, assistenti, citazioni). Il «riempimento» meccanico danneggia fiducia, SEO e qualità percepita da sistemi AI.
+
+**1) Divieto di «fabbrica di paragrafi»**
+
+- **Vietato** usare cicli (`for`, template) che ripetono la **stessa frase** o lo **stesso blocco** cambiando solo
+  l'incipit, per raggiungere un numero di parole o un `wordCount` nello schema.
+- Eccezione minima: **al massimo 24** paragrafi da template **solo se** ogni paragrafo differisce in **sostanza**
+  (fonte, leva, azione) e non solo in transizione iniziale; preferire **prosa unica** (H2, liste, tabelle, callout).
+- Ogni nuovo **script di generazione batch** (`scripts/*.py`) deve includere un **controllo automatico** che fallisce
+  (o avvisa in CI) se più di **2** paragrafi `<p>` del corpo hanno **testo normalizzato identico**.
+
+**2) `wordCount` nello schema BlogPosting / Article**
+
+- Deve riflettere il **corpo principale** reale (intro + sezioni + FAQ visibili solo se incluse nel conteggio documentato),
+  **non** boilerplate ripetuto artificiosamente.
+- Non sommare testo duplicato intenzionalmente per superare soglie.
+
+**3) Disclaimer e nota mediazione**
+
+- **Un solo** blocco disclaimer generale per pagina (salvo esigenze normative distinte).
+- **Una sola** nota compensi/mediazione in linea con `CLAUDE.md` e mandato in sede.
+
+**4) Immagini copertina articoli (`blog-*.html`, CMS)**
+
+- **Vietato** caricare asset editoriali da `unsplash.com`, `images.unsplash.com`, `source.unsplash.com` o CDN esterni
+  non previsti dal progetto (`CLAUDE.md`): solo path sotto `img/` o URL assoluti `https://righettoimmobiliare.it/img/...`.
+- Formato preferito: **WebP**, proporzione consigliata **1200×630** (Open Graph), peso tipico **sotto ~120 KiB**
+  dopo export mirato (qualità ~80–85).
+- Evitare PNG/JPEG **piccoli** upscalati nell'hero (sfocatura e LCP peggiore).
+- Dopo nuove copertine: allineare `og:image`, `BlogPosting.image`, `src` hero, `blog.html`, `js/homepage.js`, `admin.html`
+  se l'articolo è in elenco statico.
+
+**5) SEO tecnico e contenuto (sinergia)**
+
+- Snellire il testo significa **togliere ripetizione inutile**, non ridurre fonti o profondità: mantenere **tabelle fonti**,
+  link istituzionali (OMI, ISTAT, Banca d'Italia, BCE, Entrate) e **internal link** utili (Sezione 8.1).
+- **Entity / anti-stuffing:** restano valide le regole della Sezione **8.3** (nessuna frase 2+ parole >5 volte, «a Padova»
+  limitato, sinonimi).
+
+**6) GEO / AEO (risposte da motori e assistenti)**
+
+- Le risposte estratte sono migliori se ogni **H2** ha **primo capoverso** diretto (40–60 parole) e **claim** isolabili,
+  senza loop di frasi quasi uguali che confondono il ranker e riduono utilità per l'utente.
+
+**7) Checklist obbligatoria quando si genera un nuovo articolo o pagina (anche via script)**
+
+- [ ] Nessun paragrafo duplicato oltre le soglie del punto 1.
+- [ ] Copertina WebP (o piano di conversione immediata) + dimensioni dichiarate coerenti con layout.
+- [ ] `wordCount` coerente con corpo reale.
+- [ ] Schema triplo (BlogPosting / FAQ / Breadcrumb) allineato al contenuto visibile.
+- [ ] Registrazione in `blog.html`, `homepage.js`, `admin.html`, `sitemap.xml` se applicabile (processo gia' definito altrove).
+
 ### 8.3 Entity-Based SEO + Neural Matching — Ottimizzazione Semantica Completa (OBBLIGATORIO)
 
 > **Aggiornamento Marzo 2026:** Google ragiona per **entita' semantiche**, non piu' per keyword esatte ripetute.
@@ -1811,8 +1866,8 @@ document.querySelectorAll('.faq-btn').forEach(btn => {
 - **Foto hero + 3 inline:** ricerca Unsplash royalty-free integrata (6 risultati per query, click per selezionare), possibilità di incollare URL propri — MAI riutilizzare immagini già presenti nel sito
 - **Contenuto ricco generato:** tabella prezzi/mq per 8 zone Padova con variazione % e tempi vendita, highlight box con 4 statistiche chiave, tabella attrattività investimento per zona, blockquote citazione Gino Capon, lista errori numerata
 - **Figure con didascalia:** immagini inline distribuite tra le sezioni con `<figure><img><figcaption>` e crediti fotografo
-- **Unsplash Source API:** nessuna API key necessaria, URL diretti `source.unsplash.com` con seed unici per evitare duplicati
-- **REGOLA IMMAGINI:** ogni nuovo articolo deve avere foto NUOVE — vietato riutilizzare immagini esistenti del sito
+- **Immagini in pagina:** **vietati** `images.unsplash.com`, `source.unsplash.com` e CDN esterni per asset editoriali; usare solo file in `img/` (self-hosted). Per anteprime admin usare path locali o `img/og-default.webp`, non generatori remoti.
+- **REGOLA IMMAGINI:** ogni nuovo articolo deve avere foto coerenti e licenziabili; preferire scatti/commissioni propri o stock gia' in repo — vedi anche **8.1c** (WebP hero).
 
 ### v2.3 - 12 Marzo 2026 (Fix 404 articoli + template dinamico migliorato)
 - **Fix link 404 articoli scraping:** gli articoli creati dallo scraping non hanno file HTML fisico — ora il link nell'admin punta correttamente a `blog-articolo?s=slug` (template dinamico) invece di `/slug` (file inesistente)
