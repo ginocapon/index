@@ -38,7 +38,7 @@
 <link rel="stylesheet" href="css/nav-mobile.css?v=4" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/below-fold.css?v=3" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="css/home-enhance.css?v=5" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/home-enhance.css?v=6" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/modal-incarico-home.css?v=2" media="all">
 <style>
 /* Critical font-face inline — elimina round-trip a fonts.css per above-fold */
@@ -170,7 +170,8 @@ button{font-family:inherit;cursor:pointer}
   justify-content:space-between;padding:0 44px;
   transition:background 0.4s,border-color 0.4s,box-shadow 0.4s;
   border-bottom:1px solid rgba(255,255,255,0.14);
-  background:rgba(10,15,28,0.72);
+  /* Opacità alta: evita che il titolo hero “passi” sotto il menu (effetto sovrapposizione) */
+  background:rgba(10,15,28,0.94);
   box-shadow:0 1px 0 rgba(255,255,255,0.08) inset,0 8px 28px rgba(0,0,0,0.22);
 }
 #navbar.scrolled{
@@ -280,7 +281,8 @@ button{font-family:inherit;cursor:pointer}
 #hero {
   position: relative;
   height: 100vh; min-height: 700px;
-  display: flex; align-items: center; justify-content: center;
+  /* flex-start: il centraggio verticale spingeva il titolo sotto la navbar fissa */
+  display: flex; align-items: flex-start; justify-content: center;
   overflow: hidden;
 }
 #hero-bg {
@@ -318,7 +320,8 @@ button{font-family:inherit;cursor:pointer}
   position: relative; z-index: 3;
   width: 100%; max-width: 860px;
   margin: 0 auto; padding: 0 44px;
-  padding-top: calc(var(--nav-h) + 52px);
+  padding-top: calc(var(--nav-h) + 64px);
+  padding-bottom: 48px;
   display: flex; flex-direction: column;
   align-items: center; text-align: center;
 }
@@ -343,6 +346,9 @@ button{font-family:inherit;cursor:pointer}
   letter-spacing: -0.5px;
 }
 .hero-h1 em { font-style: italic; color: var(--oro); }
+/* Righe titolo come blocchi: niente sovrapposizione tra “Vendere…” e “casa a…” */
+.hero-h1 .hero-line { display: block; }
+.hero-h1 .hero-line + .hero-line { margin-top: 0.06em; }
 .hero-h1 .ghost {
   display: block;
   margin-top: 0.28em;
@@ -450,7 +456,7 @@ button{font-family:inherit;cursor:pointer}
   .nav-links,.nav-cta{display:none}
   .nav-burger{display:flex}
   #evidenza,#servizi,#perche,#mutuo-hp,#stima,#blog,#faq-hp,#form-contatto,footer{padding-left:20px;padding-right:20px}
-  .hero-inner{grid-template-columns:1fr;padding:0 20px;padding-top:calc(var(--nav-h) + 36px);padding-bottom:88px}
+  .hero-inner{grid-template-columns:1fr;padding:0 20px;padding-top:calc(var(--nav-h) + 44px);padding-bottom:88px}
   .hero-right{display:none}
   #hero-bg img{object-position:center 20%}
   .hero-h1{font-size:clamp(1.85rem,7.5vw,2.65rem);line-height:1.24}
@@ -867,8 +873,8 @@ button svg, a.btn-p svg, a.btn-g svg {
   <div class="hero-inner">
     <div class="hero-left">
       <h1 class="hero-h1">
-        Vendere e comprare<br>
-        casa a <em>Padova?</em><br>
+        <span class="hero-line">Vendere e comprare</span>
+        <span class="hero-line">casa a <em>Padova?</em></span>
         <span class="ghost">Ci pensiamo noi.</span>
       </h1>
       <div class="hero-trust-pills">
