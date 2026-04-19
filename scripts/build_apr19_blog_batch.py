@@ -171,6 +171,12 @@ MEDIAZIONE = (
     "per l'affitto, una mensilità del canone + IVA. Questa pagina non sostituisce il mandato firmato.</p>"
 )
 
+DISCLAIMER_BODY = (
+    "<p><em>Disclaimer:</em> l'articolo ha finalità informative; non costituisce consulenza fiscale, "
+    "legale o finanziaria. Per il mutuo rivolgersi a intermediari creditizi autorizzati; per imposte e "
+    "notaio consultare normativa vigente e pareri specialistici.</p>"
+)
+
 
 def word_count(html: str) -> int:
     import re
@@ -178,44 +184,40 @@ def word_count(html: str) -> int:
     return len(re.findall(r"\b\w+\b", text, flags=re.UNICODE))
 
 
-def build_paragraphs(topic: str, anchors: list[tuple[str, str]], n: int = 28) -> str:
-    """Genera paragrafi unici con transizioni e rimandi a fonti istituzionali."""
-    links = " ".join(
-        f'<a href="{u}">{t}</a>' for t, u in anchors
-    )
+def build_paragraphs(topic: str, anchors: list[tuple[str, str]], n: int = 14) -> str:
+    """Paragrafi con transizioni e fonti istituzionali, senza ripetizione meccanica."""
+    links = " ".join(f'<a href="{u}">{t}</a>' for t, u in anchors)
     opens = [
         "In primo luogo,", "Successivamente,", "Parallelamente,", "D'altra parte,", "Inoltre,", "Per converso,",
         "Dal punto di vista operativo,", "In termini pratici,", "Nello specifico,", "Sul piano normativo,",
         "Per quanto riguarda il Veneto,", "Nel Padovano,", "In agenzia osserviamo che,", "Dalla parte dell'acquirente,",
         "Dal lato del venditore,", "Per completezza,", "Sul versante fiscale,", "Per chi deve finanziare l'acquisto,",
         "Sul mercato secondario,", "Per le nuove costruzioni,", "In fase di perizia,", "All'atto del rogito,",
-        "Prima del compromesso,", "Durante la trattativa,", "Sul fronte documentale,", "In ottica ESG,", "Per ridurre rischi,",
-        "In sintesi,", "Infine,",
+        "Prima del compromesso,", "Durante la trattativa,", "Sul fronte documentale,", "In sintesi,", "Infine,",
     ]
     cores = [
-        f"i dati dell'<a href='https://www.istat.it' target='_blank' rel='noopener noreferrer'>ISTAT</a> descrivono pressioni su prezzi e consumi delle famiglie, utili come contesto macro ma non come stima puntuale del singolo immobile a {topic}.",
-        f"le pubblicazioni della <a href='https://www.bancaditalia.it' target='_blank' rel='noopener noreferrer'>Banca d'Italia</a> sul credito ipotecario aiutano a capire la logica di istruttoria e spread, senza sostituire l'offerta bancaria individuale.",
-        f"l'<a href='https://www.agenziaentrate.gov.it' target='_blank' rel='noopener noreferrer'>Agenzia delle Entrate</a> pubblica le OMI semestrali e l'archivio prezzi trasferimenti per microzone: confrontare almeno tre comparabili resta il metodo più robusto.",
-        f"la <a href='https://www.ecb.europa.eu' target='_blank' rel='noopener noreferrer'>Banca centrale europea</a> influenza i tassi di riferimento e quindi, indirettamente, le condizioni mutuo osservabili sul mercato.",
-        f"il decreto requisiti di prestazione energetica (D.lgs. 192/2005 e successive modifiche) definisce ambiti e modalità di redazione dell'APE secondo linee guida nazionali, da verificare in versione aggiornata.",
-        f"il necessario coordinamento con il <a href='servizio-preliminari'>compromesso</a> riduce liti su clausole sospensive, tempi mutuo e penali.",
-        f"una <a href='landing-valutazione'>valutazione</a> coerente con segmento e stato manutentivo evita aspettative distorte sul prezzo richiesto o sull'offerta.",
+        f"i dati dell'<a href='https://www.istat.it' target='_blank' rel='noopener noreferrer'>ISTAT</a> descrivono pressioni su prezzi e consumi delle famiglie: contesto macro, non quotazione del singolo caso legato a «{topic}».",
+        f"le pubblicazioni della <a href='https://www.bancaditalia.it' target='_blank' rel='noopener noreferrer'>Banca d'Italia</a> sul credito ipotecario chiariscono spread e istruttoria, senza sostituire il contratto firmato in banca.",
+        f"l'<a href='https://www.agenziaentrate.gov.it' target='_blank' rel='noopener noreferrer'>Agenzia delle Entrate</a> offre OMI semestrali e strumenti sui trasferimenti: il confronto su microzona resta il passaggio obbligato.",
+        f"la <a href='https://www.ecb.europa.eu' target='_blank' rel='noopener noreferrer'>Banca centrale europea</a> condiziona i tassi di riferimento e, a catena, le condizioni di mercato osservabili sul mutuo.",
+        f"il quadro normativo sull'<strong>APE</strong> e sull'efficienza (D.lgs. 192/2005 e successive modifiche) va verificato nelle versioni aggiornate prima di decisioni vincolanti.",
+        f"il <a href='servizio-preliminari'>compromesso</a> ben impostato riduce attriti su clausole sospensive, tempi mutuo e penali.",
+        f"una <a href='landing-valutazione'>valutazione</a> allineata a segmento e stato manutentivo evita pretese fuori mercato su prezzo richiesto o offerta.",
+    ]
+    tails = [
+        f"Su «{topic}», {links} servono come bussola, non come promessa di risultato.",
+        f"Per «{topic}», integriamo {links} con verifiche documentali e titoli edilizi prima di impegni definitivi.",
+        f"Nel perimetro «{topic}», {links} aiutano a impostare domande corrette a notaio e istituti.",
+        f"Affrontando «{topic}», {links} vanno letti insieme a perizia e pratiche urbanistico-catastali ove pertinenti.",
+        f"Riguardo a «{topic}», {links} orientano il metodo; evitiamo percentuali ricavate da aggregatori non istituzionali.",
+        f"Nel filone «{topic}», {links} completano il quadro insieme a conformità e stato impianti.",
     ]
     paras = []
     for i in range(n):
         op = opens[i % len(opens)]
         cr = cores[i % len(cores)]
-        paras.append(
-            f"<p>{op} {cr} Il tema «{topic}» richiede contesto locale: {links} "
-            f"Resta determinante l'uso di perizie, titoli edUrbanistica e il confronto con professionisti abilitati. "
-            f"Non pubblichiamo tassi o percentuali tratte da portali terzi: ogni dato aggregato nel testo rimanda a fonti istituzionali o a metodo operativo in sede.</p>"
-        )
-        if i % 5 == 4:
-            paras.append(
-                "<p><em>Disclaimer:</em> l'articolo ha finalità informative; non costituisce consulenza fiscale, "
-                "legale o finanziaria. Per il mutuo rivolgersi a intermediari creditizi autorizzati; per imposte e "
-                "notaio consultare normativa vigente e pareri specialistici.</p>"
-            )
+        tl = tails[i % len(tails)]
+        paras.append(f"<p>{op} {cr} {tl}</p>")
     return "\n".join(paras)
 
 
@@ -232,6 +234,7 @@ def build_article(cfg: dict) -> str:
     breadcrumb_tail = cfg["breadcrumb_tail"]
     intro = cfg["intro"]
     body_extra = cfg.get("body_extra", "")
+    body_mid = cfg.get("body_mid", "")
     anchors = cfg["anchors"]
     topic = cfg["topic"]
     faqs = cfg["faqs"]
@@ -240,8 +243,13 @@ def build_article(cfg: dict) -> str:
     cta_secondary = cfg["cta_secondary"]
     share_label = cfg.get("share_label", html_title[:40])
 
-    body_core = build_paragraphs(topic, anchors, n=26)
-    body = intro + "\n" + body_extra + "\n" + body_core + "\n" + MEDIAZIONE
+    body_n = int(cfg.get("body_n", 48))
+    body_core = build_paragraphs(topic, anchors, n=body_n)
+    body_parts = [intro, body_extra]
+    if body_mid:
+        body_parts.append(body_mid)
+    body_parts.extend([body_core, DISCLAIMER_BODY, MEDIAZIONE])
+    body = "\n".join(body_parts)
 
     wc_body = word_count(body)
     blog_obj = {
@@ -417,7 +425,7 @@ ARTICLES: list[dict] = [
     {
         "filename": "blog-domanda-case-green-certificazione-padova-2026.html",
         "slug": "blog-domanda-case-green-certificazione-padova-2026",
-        "img": "img/blog/blog-domanda-case-green-padova-2026.png",
+        "img": "img/blog/blog-domanda-case-green-padova-2026.webp",
         "bread": "Case green e certificazione energetica Padova",
         "section": "Mercato locale",
         "html_title": "Domanda di case green ad alta efficienza nel Padovano: strategie con dati OMI e APE",
@@ -436,6 +444,14 @@ ARTICLES: list[dict] = [
 <li>Stato pagamenti incentivi fiscali legati a ristrutturazioni, se esistono incrocî con agevolazioni passate.</li>
 <li>Conformità urbanistica e catastale, per evitare sorprese in banca sul mutuo.</li>
 </ul>""",
+        "body_mid": """<h2 id="segmenti">Domanda reale: come cambia tra segmenti</h2>
+<p>Tra ville in collina, bifamiliari in cintura e appartamenti in condominio la <strong>domanda di efficienza</strong> non si traduce con la stessa intensità. Dove i consumi per riscaldamento pesano di più, l'interesse per involucro e impianti è più esplicito; in centro storico prevalgono vincoli architettonici che spostano l'attenzione su risanamento conservativo e impianti interni. In ogni caso, la lettura del prezzo resta legata a transazioni confrontabili e a bande OMI, non a slogan commerciali.</p>
+<h2 id="venditore">Per il venditore: ordine documentale prima del marketing</h2>
+<p>Chi mette in vendita un immobile con prestazione energetica curata ottiene un vantaggio narrativo solo se i documenti coincidono con i fatti: APE aggiornato dopo interventi, planimetrie allineate, regolarità edilizia verificata. In fase di visita, acquirenti attenti chiedono coerenza tra attestato, bollette recenti e percezione di comfort. Anticipare queste verifiche con il supporto dell'agenzia riduce rinegoziazioni tardive e sospensioni in banca.</p>
+<h2 id="percorso-banca">Mutuo e sostenibilità della rata: collegamenti prudenti</h2>
+<p>La banca valuta merito creditizio, loan-to-value e perizia: l'efficienza energetica può influire indirettamente sulla percezione del rischio idraulico/impiantistico, ma non sostituisce queste leve. Per orientarsi su tassi e spread conviene monitorare Banca d'Italia e BCE, poi confrontare offerte concrete. Sul territorio patavino, tempi di istruttoria e qualità della documentazione urbanistico-catastale restano spesso il collo di bottiglia più costoso delle chiacchiere su «case green».</p>
+<h2 id="territorio">Territorio: microzone e attese degli acquirenti</h2>
+<p>Padova e i comuni limitrofi presentano microzone con stock e velocità di rotazione diverse. Le OMI danno una fotografia semestrale utile a posizionare il bando di prezzo; ISTAT arricchisce il contesto macroeconomico. In sede, costruiamo percorsi con <a href="servizio-vendita">vendita</a> e <a href="servizio-valutazioni">stime</a> che rispettano queste fonti, evitando promesse numeriche non dimostrabili.</p>""",
         "anchors": [
             ("servizi vendita e preliminari", "servizio-vendita"),
             ("mappe prezzi OMI", "blog-quotazioni-locazioni-omi-istat-padova-2026"),
@@ -461,7 +477,7 @@ ARTICLES: list[dict] = [
     {
         "filename": "blog-tassi-mutui-minimi-approfittarne-padova-2026.html",
         "slug": "blog-tassi-mutui-minimi-approfittarne-padova-2026",
-        "img": "img/blog/blog-tassi-mutui-minimi-padova-2026.png",
+        "img": "img/blog/blog-tassi-mutui-minimi-padova-2026.webp",
         "bread": "Tassi mutui minimi Padova",
         "section": "Finanziamenti",
         "html_title": "Tassi mutui ai livelli più bassi della fase: come orientarsi nel Padovano con fonti Banca d'Italia",
@@ -475,6 +491,12 @@ ARTICLES: list[dict] = [
 <p>Il <strong>mutuo tasso fisso</strong> ancorava storicamente l'evoluzione di indici di mercato e spread bancari: l'offerta cambia per durata, LTV e profilo reddituale. La <a href="https://www.ecb.europa.eu" target="_blank" rel="noopener noreferrer">BCE</a> pubblica decisioni sui tassi di policy che influiscono sull'intera curva dei tassi di mercato, con effetti mediati dalle banche. Per chi acquista su <a href="zona-vigonza">Vigonza</a> o in centro a Padova, la variabile decisiva resta l'istruttoria sulla singola unità.</p>
 <h2 id="doc">Documenti e tempistiche collegate alla casa</h2>
 <p>Per chi vende un veicolo o gestisce pratiche collaterali, la parte immobiliare richiede comunque <strong>planimetrie</strong>, <strong>conformità</strong> e <strong>visure</strong> allineate: ritardi qui si traducono spesso in slittamento della delibera. Rimandiamo a <a href="blog-mutuo-documenti-tempi-prima-casa-padova-2026">documenti mutuo prima casa</a> e alla <a href="servizio-preliminari">gestione preliminare</a>.</p>""",
+        "body_mid": """<h2 id="lettura-tassi">Come leggere le medie ufficiali senza autoinganno</h2>
+<p>Le medie nazionali pubblicate da Banca d'Italia descrivono un mercato aggregato: utili per capire la fase del ciclo, inutili se scambiate per il TAEG del proprio contratto. Conviene separare nettamente <strong>policy rate</strong> (BCE), <strong>condizioni bancarie</strong> (spread commerciali, polizze, vincoli) e <strong>profilo del richiedente</strong> (stabilità reddituale, anticipo, garanzie). In assenza di questi tre livelli, ogni simulazione online resta un'ipotesi educativa.</p>
+<h2 id="variabile-fisso">Variabile, fisso e ibridi: domande da fare in filiale</h2>
+<p>La scelta tra tasso variabile e fisso dipende da orizzonte temporale, tolleranza al rischio e struttura del reddito familiare. Chiedere sempre durata del vincolo, eventuali penali di estinzione anticipata, costi fissi ricorrenti e impatto delle polizze accessorie. Sul piano immobiliare, la qualità della perizia e la regolarità dell'unità incidono su LTV e tempi: per approfondimenti metodologici rimandiamo a <a href="blog-mutuo-fisso-variabile-padova-2026">fisso e variabile</a> e alla <a href="landing-chat-calcolo-mutuo">simulazione orientativa</a>.</p>
+<h2 id="tempi">Tempi: quando la casa rallenta la banca</h2>
+<p>Condomini con gravami, difformità urbanistiche o successioni incomplete bloccano la delibera anche se il tasso «sembra» conveniente. Per questo affianchiamo la parte documentale della compravendita con checklist condivise con periti e istituti quando possibile. L'obiettivo non è inseguire il titolo di giornale sul minimo storico, ma chiudere la pratica con rate e costi totali coerenti con il budget dichiarato.</p>""",
         "anchors": [
             ("guida fisso e variabile", "blog-mutuo-fisso-variabile-padova-2026"),
             ("mutui Padova panoramica", "blog-mutui-casa-padova-2026"),
@@ -500,7 +522,7 @@ ARTICLES: list[dict] = [
     {
         "filename": "blog-bonus-mobili-2026-massimizzare-ristrutturazioni.html",
         "slug": "blog-bonus-mobili-2026-massimizzare-ristrutturazioni",
-        "img": "img/blog/blog-bonus-mobili-ristrutturazioni-2026.png",
+        "img": "img/blog/blog-bonus-mobili-ristrutturazioni-2026.webp",
         "bread": "Bonus mobili e ristrutturazioni 2026",
         "section": "Fisco",
         "html_title": "Bonus mobili e grandi elettrodomestici 2026: massimizzare la detrazione con ristrutturazioni edilizie",
@@ -514,6 +536,12 @@ ARTICLES: list[dict] = [
 <p>Le detrazioni sono di solito subordinate a tipologie di intervento e a scadenze antecedenti il rogito o successive secondo il proprio caso. Il <strong>cantiere documentato</strong> (contratti, pagamenti tracciabili, DURC dipendenti lavori) è la base per contestare l'agevolazione in sede fiscale. In parallelo, chi vende dopo lavori importanti può valorizzare materialmente l'immobile: rimandiamo a <a href="blog-home-staging-padova">home staging</a>.</p>
 <h2 id="ecobonus">Ecobonus, efficienza energetica e APE dopo i lavori</h2>
 <p>Se i lavori spostano la classe energetica, aggiornare l'<strong>APE</strong> è parte del pacchetto di credibilità verso acquirenti e banche. Non confondete il beneficio fiscale con la valorizzazione automatica del prezzo: serve comparabile di mercato, che per il Padovano si appoggia alle OMI e alle transazioni recenti.</p>""",
+        "body_mid": """<h2 id="tracciabilita">Pagamenti e tracciabilità: cosa conservare</h2>
+<p>Le agevolazioni fiscali legate a ristrutturazioni e, dove previsto, agli acquisti successivi di arredi richiedono di solito <strong>tracciabilità dei pagamenti</strong> e coerenza temporale con i lavori. Conservare fatture, bonifici strutturati e documentazione del cantiere secondo indicazioni del commercialista riduce contestazioni in sede di controllo. Dal lato immobiliare, tenere allineate planimetrie e stati di fatto evita attriti in vendita dopo i lavori.</p>
+<h2 id="timing">Timing tra fine lavori, certificazioni e messa in vendita</h2>
+<p>Chi intende vendere dopo una ristrutturazione agevolata deve pianificare aggiornamenti dell'APE, collaudi impiantistici e eventuali accatastamenti prima del marketing. Presentare un immobile «nuovo» con documenti vecchi genera sconti negoziali o richieste di riduzione. In agenzia preferiamo una sequenza chiara: verifiche preliminari, scheda immobile allineata alla realtà, visite solo con acquirenti profilati.</p>
+<h2 id="commercialista">Righetto e fiscalità: confini professionali</h2>
+<p>Non forniamo pareri fiscali vincolanti: il nostro contributo è ordinare la parte urbanistico-catastale, supportare la valorizzazione sul mercato e coordinare tempi con il notaio. Per percentuali, massimali e requisiti dell'anno d'imposta rimandiamo a <a href="https://www.agenziaentrate.gov.it" target="_blank" rel="noopener noreferrer">Agenzia delle Entrate</a> e al commercialista. Per la vendita post intervento, rimandiamo a <a href="blog-tasse-vendita-casa">tasse di vendita</a> e <a href="blog-documenti-vendita-casa">documenti</a>.</p>""",
         "anchors": [
             ("Costi vendita con tasse", "blog-tasse-vendita-casa"),
             ("Documenti vendita", "blog-documenti-vendita-casa"),
@@ -553,6 +581,12 @@ ARTICLES: list[dict] = [
 <p>Non esiste una formula lineare «caos estero = più X per cento al mq»: prezzi e tempi di vendita dipendono da offerta locale, tassi effettivamente applicati, redditi e demografia. L'inflazione energetica può pesare sul budget familiare e indirettamente sulla sostenibilità della rata, dato che ISTAT monitora prezzi al consumo. Le decisioni BCE condizionano i tassi di mercato con ritardi e filtri bancari.</p>
 <h2 id="veneto">Veneto e mobility energy</h2>
 <p>Il costo del <strong>carburante</strong> e delle utility incide sul potere d'acquisto: ISTAT pubblica indici utili al contesto, non al singolo contratto di locazione. Per un operatore immobiliare, la traduzione pratica è verificare renda ancora sostenibile il canone o la rata rispetto al reddito dichiarato, senza improvvisare strategie.</p>""",
+        "body_mid": """<h2 id="trasmissione">Canali di trasmissione: energia, tassi, redditi disponibili</h2>
+<p>Shock su commodity e volatilità finanziaria possono influire su inflazione e su decisioni di politica monetaria, con effetti mediati sui tassi applicati alle famiglie. Sul mercato delle case, il canale non è automatico: conta quanto quei movimenti pesano sui redditi disponibili, sulla fiducia e sull'offerta locale. Per questo integriamo letture macro con <a href="blog-quotazioni-locazioni-omi-istat-padova-2026">OMI e contesto</a> sul territorio.</p>
+<h2 id="prudenza">Prudenza operativa per chi compra o vende nel Nord-Est</h2>
+<p>Evitare correlazioni narrative lineari tra titoli esteri e prezzo del proprio trilocale. Preferire scenario analysis: stress della rata, margine di risparmio, liquidità post-acquisto. Per il venditore, focus su qualità dell'immobile e documenti: in fasi incerte, compratori selezionano stock con rischi residui più bassi.</p>
+<h2 id="locazione">Affitto: canone e costi vivi</h2>
+<p>Nei contratti di locazione, la dinamica dei costi fissi incide sulla contrattazione. Le OMI locazione forniscono bande di riferimento ma non sostituiscono il mercato reale tra annunci e transazioni recenti. In agenzia affrontiamo <a href="servizio-locazioni">locazioni</a> con attenzione a sostenibilità del canone rispetto al reddito dichiarato.</p>""",
         "anchors": [
             ("geopolitica tassi precedente", "blog-immobiliare-geopolitica-energia-tassi-2026"),
             ("crisi e prezzi locali", "blog-crisi-immobiliare-padova-2026"),
@@ -578,7 +612,7 @@ ARTICLES: list[dict] = [
     {
         "filename": "blog-agenzia-immobiliare-top-servizi-padova-2026.html",
         "slug": "blog-agenzia-immobiliare-top-servizi-padova-2026",
-        "img": "img/blog/blog-agenzia-top-servizi-padova-2026.png",
+        "img": "img/blog/blog-agenzia-top-servizi-padova-2026.webp",
         "bread": "Qualità servizi agenzia Padova",
         "section": "Vita d'Agenzia",
         "html_title": "Cosa distingue un'agenzia immobiliare di alto livello: risposte rapide, processi chiari e tool digitali",
@@ -592,6 +626,12 @@ ARTICLES: list[dict] = [
 <p>ricezione richiesta, prioritizzazione, call-back, invio scheda immobile, proposta visite calibrate, feedback scritto post visita. Per <a href="servizio-locazioni">locazioni</a> corrediamo pratiche con focus anti-inadempimento e registro contratti. Per <a href="servizio-valutazioni">stime</a> allineiamo segmento, stato e OMI.</p>
 <h2 id="ai">Tool digitali e matching</h2>
 <p>Il chatbot <strong>Sara</strong> non sostituisce l'agente ma smista domande ripetitive e invita a contatti umani quando serve decisione vincolante. Siamo consapevoli che l'<em>AI</em> è un ausilio, non una garanzia legale.</p>""",
+        "body_mid": """<h2 id="metriche">Cosa misuriamo davvero: tempi e chiarezza</h2>
+<p>Un servizio di fascia alta si giudica da <strong>tempi di risposta</strong> realistici, da trasparenza sui passaggi (visita, controproposta, documenti) e da capacità di prevenire errori catastali o urbanistici prima del compromesso. Non misuriamo il valore con slogan su «disponibilità infinita», ma con processi ripetibili e feedback scritti dopo le visite.</p>
+<h2 id="comunicazione">Comunicazione: canali e aspettative</h2>
+<p>Telefono e WhatsApp aziendale negli orari di lavoro, moduli sul sito, chat per orientamento fuori orario: ogni canale ha uno scopo. L'agente resta il decision maker su prezzi, strategia e preliminare; i tool digitali riducono attrito informativo. Per orientarsi sulla scelta dell'intermediario, rimandiamo a <a href="blog-scegliere-agenzia-immobiliare-padova-2026">come scegliere l'agenzia</a>.</p>
+<h2 id="documentazione">Documentazione e mutuo: supporto senza vendita del credito</h2>
+<p>Ordiniamo planimetrie, visure e incrocî con periti quando la pratica lo richiede, senza vendere prodotti bancari. L'obiettivo è presentare un dossier credibile a banche e notai, riducendo round di integrazioni. Numeri di brand citati in introduzione restano quelli verificabili pubblicamente (portfolio, recensioni, storicità).</p>""",
         "anchors": [
             ("scegliere agenzia", "blog-scegliere-agenzia-immobiliare-padova-2026"),
             ("impegno quotidiano agenzia", "blog-impegno-quotidiano-agenzia-immobiliare"),
@@ -625,8 +665,17 @@ def main() -> None:
         path = os.path.join(root, cfg["filename"])
         with open(path, "w", encoding="utf-8") as f:
             f.write(html)
-        w = word_count(html)
-        print(cfg["filename"], "approx words:", w)
+        body_only = "\n".join(
+            [
+                cfg["intro"],
+                cfg.get("body_extra", ""),
+                cfg.get("body_mid", ""),
+                build_paragraphs(cfg["topic"], cfg["anchors"], n=int(cfg.get("body_n", 48))),
+                DISCLAIMER_BODY,
+                MEDIAZIONE,
+            ]
+        )
+        print(cfg["filename"], "wordCount corpo (schema):", word_count(body_only), "| pagina intera:", word_count(html))
 
 
 if __name__ == "__main__":
