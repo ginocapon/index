@@ -38,7 +38,7 @@
 <link rel="stylesheet" href="css/nav-mobile.css?v=4" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/below-fold.css?v=3" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="css/home-enhance.css?v=4" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/home-enhance.css?v=5" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/modal-incarico-home.css?v=2" media="all">
 <style>
 /* Critical font-face inline — elimina round-trip a fonts.css per above-fold */
@@ -337,7 +337,7 @@ button{font-family:inherit;cursor:pointer}
 .hero-h1 {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2.35rem, 6.2vw, 5.5rem);
-  font-weight: 700; line-height: 1.12; color: white;
+  font-weight: 700; line-height: 1.22; color: white;
   margin-bottom: 22px;
   text-shadow: 0 2px 24px rgba(8,16,30,0.55), 0 1px 3px rgba(8,16,30,0.4);
   letter-spacing: -0.5px;
@@ -345,10 +345,11 @@ button{font-family:inherit;cursor:pointer}
 .hero-h1 em { font-style: italic; color: var(--oro); }
 .hero-h1 .ghost {
   display: block;
-  margin-top: 0.12em;
+  margin-top: 0.28em;
   -webkit-text-stroke: 1.5px rgba(255,255,255,0.55);
   color: transparent;
-  line-height: 1.15;
+  line-height: 1.35;
+  padding-bottom: 0.06em;
 }
 .hero-p {
   font-size: 1.05rem; color: rgba(255,255,255,0.88);
@@ -452,7 +453,8 @@ button{font-family:inherit;cursor:pointer}
   .hero-inner{grid-template-columns:1fr;padding:0 20px;padding-top:calc(var(--nav-h) + 36px);padding-bottom:88px}
   .hero-right{display:none}
   #hero-bg img{object-position:center 20%}
-  .hero-h1{font-size:clamp(1.85rem,7.5vw,2.65rem);line-height:1.14}
+  .hero-h1{font-size:clamp(1.85rem,7.5vw,2.65rem);line-height:1.24}
+  .hero-h1 .ghost{margin-top:0.22em;line-height:1.38;-webkit-text-stroke:1.25px rgba(255,255,255,0.5)}
 
   
   .btn-p,.btn-g,.btn-calc,.btn-send,.btn-srch,.btn-src{
@@ -484,8 +486,8 @@ button{font-family:inherit;cursor:pointer}
   footer{padding:48px 20px 28px}
 }
 @media(max-width:480px){
-  .hero-h1{font-size:clamp(1.65rem,6.8vw,2.2rem)}
-  .hero-h1 .ghost{-webkit-text-stroke:1.2px rgba(255,255,255,0.5)}
+  .hero-h1{font-size:clamp(1.65rem,6.8vw,2.2rem);line-height:1.26}
+  .hero-h1 .ghost{margin-top:0.2em;line-height:1.4;-webkit-text-stroke:1.1px rgba(255,255,255,0.48)}
   .h-stat-grid{grid-template-columns:1fr 1fr}
 }
 
