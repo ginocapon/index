@@ -38,7 +38,7 @@
 <link rel="stylesheet" href="css/nav-mobile.css?v=4" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/below-fold.css?v=3" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="css/home-enhance.css?v=2" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/home-enhance.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/modal-incarico-home.css?v=2" media="all">
 <style>
 /* Critical font-face inline — elimina round-trip a fonts.css per above-fold */
@@ -170,7 +170,7 @@ button{font-family:inherit;cursor:pointer}
   justify-content:space-between;padding:0 44px;
   transition:background 0.4s,border-color 0.4s,box-shadow 0.4s;
   border-bottom:1px solid rgba(255,255,255,0.14);
-  background:rgba(10,15,28,0.52);
+  background:rgba(10,15,28,0.72);
   box-shadow:0 1px 0 rgba(255,255,255,0.08) inset,0 8px 28px rgba(0,0,0,0.22);
 }
 #navbar.scrolled{
@@ -318,7 +318,7 @@ button{font-family:inherit;cursor:pointer}
   position: relative; z-index: 3;
   width: 100%; max-width: 860px;
   margin: 0 auto; padding: 0 44px;
-  padding-top: calc(var(--nav-h) + 28px);
+  padding-top: calc(var(--nav-h) + 52px);
   display: flex; flex-direction: column;
   align-items: center; text-align: center;
 }
@@ -336,8 +336,8 @@ button{font-family:inherit;cursor:pointer}
 }
 .hero-h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3rem, 7vw, 6rem);
-  font-weight: 700; line-height: 1.05; color: white;
+  font-size: clamp(2.35rem, 6.2vw, 5.5rem);
+  font-weight: 700; line-height: 1.12; color: white;
   margin-bottom: 22px;
   text-shadow: 0 2px 24px rgba(8,16,30,0.55), 0 1px 3px rgba(8,16,30,0.4);
   letter-spacing: -0.5px;
@@ -345,8 +345,10 @@ button{font-family:inherit;cursor:pointer}
 .hero-h1 em { font-style: italic; color: var(--oro); }
 .hero-h1 .ghost {
   display: block;
+  margin-top: 0.12em;
   -webkit-text-stroke: 1.5px rgba(255,255,255,0.55);
   color: transparent;
+  line-height: 1.15;
 }
 .hero-p {
   font-size: 1.05rem; color: rgba(255,255,255,0.88);
@@ -447,10 +449,10 @@ button{font-family:inherit;cursor:pointer}
   .nav-links,.nav-cta{display:none}
   .nav-burger{display:flex}
   #evidenza,#servizi,#perche,#mutuo-hp,#stima,#blog,#faq-hp,#form-contatto,footer{padding-left:20px;padding-right:20px}
-  .hero-inner{grid-template-columns:1fr;padding:0 20px;padding-top:calc(var(--nav-h) + 20px);padding-bottom:88px}
+  .hero-inner{grid-template-columns:1fr;padding:0 20px;padding-top:calc(var(--nav-h) + 36px);padding-bottom:88px}
   .hero-right{display:none}
   #hero-bg img{object-position:center 20%}
-  .hero-h1{font-size:2.8rem}
+  .hero-h1{font-size:clamp(1.85rem,7.5vw,2.65rem);line-height:1.14}
 
   
   .btn-p,.btn-g,.btn-calc,.btn-send,.btn-srch,.btn-src{
@@ -482,7 +484,8 @@ button{font-family:inherit;cursor:pointer}
   footer{padding:48px 20px 28px}
 }
 @media(max-width:480px){
-  .hero-h1{font-size:2.3rem}
+  .hero-h1{font-size:clamp(1.65rem,6.8vw,2.2rem)}
+  .hero-h1 .ghost{-webkit-text-stroke:1.2px rgba(255,255,255,0.5)}
   .h-stat-grid{grid-template-columns:1fr 1fr}
 }
 

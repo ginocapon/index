@@ -1840,7 +1840,7 @@ function initChatbotUI() {
           <h4>Linda — Righetto Immobiliare</h4>
           <span>Online — rispondiamo subito</span>
         </div>
-        <button class="chat-close" onclick="rigChat.toggle()" aria-label="Chiudi chat">✕</button>
+        <button type="button" class="chat-close" onclick="rigChat.toggle()" aria-label="Chiudi chat">✕</button>
       </div>
       <div class="chat-msgs" id="rig-chat-msgs"></div>
       <div class="chat-quick-btns" id="rig-quick-btns">
@@ -1861,14 +1861,14 @@ function initChatbotUI() {
         </button>
       </div>
     </div>
-    <button id="rig-chat-btn" onclick="rigChat.toggle()" aria-label="Chatta con Linda">
-      <img id="rig-chat-btn-avatar" src="${SARA_AVATAR}" alt="Linda" id="rig-chat-icon">
+    <button id="rig-chat-btn" type="button" onclick="rigChat.toggle()" aria-label="Chatta con Linda">
+      <img id="rig-chat-btn-avatar" src="${SARA_AVATAR}" alt="Linda">
       <svg id="rig-chat-icon-close" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" style="display:none">
         <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
       </svg>
       <span id="rig-chat-pulse"></span>
     </button>
-    <div id="rig-chat-close-bar"><button onclick="rigChat.toggle()">Chiudi chat</button></div>
+    <div id="rig-chat-close-bar"><button type="button" onclick="rigChat.toggle()">Chiudi chat</button></div>
   </div>`;
 
   document.body.insertAdjacentHTML('beforeend', html);
@@ -1883,13 +1883,14 @@ function initChatbotUI() {
     toggle() {
       this.open = !this.open;
       const box = document.getElementById('rig-chat-box');
+      if (!box) return;
       const iconAvatar = document.getElementById('rig-chat-btn-avatar');
       const iconClose = document.getElementById('rig-chat-icon-close');
       const pulse = document.getElementById('rig-chat-pulse');
       const closeBar = document.getElementById('rig-chat-close-bar');
       box.classList.toggle('open', this.open);
       if (iconAvatar) iconAvatar.style.display = this.open ? 'none' : 'block';
-      iconClose.style.display = this.open ? 'block' : 'none';
+      if (iconClose) iconClose.style.display = this.open ? 'block' : 'none';
       if (pulse) pulse.style.display = this.open ? 'none' : 'block';
       if (closeBar) closeBar.classList.toggle('visible', this.open);
       if (this.open && document.getElementById('rig-chat-msgs').children.length === 0) {
@@ -2047,26 +2048,8 @@ function initChatbotUI() {
       }
     }
   };
-
-  // Mostra recensione alla chiusura se ci sono stati almeno 2 messaggi
-  const origToggle = window.rigChat.toggle.bind(window.rigChat);
-  window.rigChat.toggle = function() {
-    const wasOpen = this.open;
-    origToggle();
-    if (wasOpen && this.msgCount >= 2) {
-      this.showRating();
-      // Riapri brevemente per mostrare le stelline
-      if (!this.open) {
-        this.open = true;
-        const box = document.getElementById('rig-chat-box');
-        box.classList.add('open');
-        const iconAvatar = document.getElementById('rig-chat-btn-avatar');
-        const iconClose = document.getElementById('rig-chat-icon-close');
-        if (iconAvatar) iconAvatar.style.display = 'none';
-        iconClose.style.display = 'block';
-      }
-    }
-  };
+  // Nota: niente riapertura forzata in chiusura (prima bloccava la X dopo 2+ messaggi).
+  // Valutazione opzionale: si puo' richiamare showRating() da altro flusso senza tenere aperta la finestra.
 }
 
 // ── Auto-inizializzazione ──
