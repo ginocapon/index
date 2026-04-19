@@ -295,13 +295,13 @@ document.addEventListener('DOMContentLoaded', function() {
     { play: function(cf) {
       return cf.addBubble('<strong>Ciao!</strong> Stai cercando casa a Padova e vuoi sapere quali servizi trovi in ogni quartiere?', 'bot', 300)
         .then(function() { return cf.addBubble('Ti guido alla scoperta di <strong>supermercati, farmacie, parchi, strutture sanitarie e sportive</strong> in ogni zona di Padova. Dati reali da OpenStreetMap aggiornati al 2026.', 'bot', 800); })
-        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1573108037329-37aa135a142e?w=600&q=80', 'Vista panoramica di Padova con servizi', 600); })
+        .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Vista panoramica di Padova con servizi', 600); })
         .then(function() { return cf.addButtons(['Si, voglio esplorare!', 'Quali zone coprite?'], 'interesse'); });
     }},
     /* Step 2: Cosa cerchi */
     { play: function(cf) {
       return cf.addBubble('Perfetto! Prima di tutto: <strong>cosa conta di piu\'</strong> per te nella scelta del quartiere?', 'bot', 400)
-        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80', 'Famiglia che sceglie casa', 500); })
+        .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Famiglia che sceglie casa', 500); })
         .then(function() { return cf.addButtons([
           'Supermercati e negozi', 'Parchi e aree verdi', 'Servizi sanitari', 'Un po\' di tutto'
         ], 'priorita'); });
@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', function() {
             '</div>';
           return cf.addBubble(html, 'bot', 600);
         })
-        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1567521464027-f127ff144326?w=600&q=80', 'Mappa servizi ' + cf.data.zona1, 400); })
+        .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Mappa servizi ' + cf.data.zona1, 400); })
         .then(function() { return cf.addButtons(['Vedi dettagli servizi', 'Esplora altra zona'], 'azione1'); });
     }},
     /* Step 6: Dettagli o altra zona */
@@ -397,7 +397,7 @@ document.addEventListener('DOMContentLoaded', function() {
       var z2 = SERVIZI[zc] || SERVIZI['Prato della Valle'];
       if (cf.data.azione2 === 'Voglio info immobiliari' || cf.data.azione_finale === 'Voglio info immobiliari') {
         return cf.addBubble('<strong>Ottima scelta!</strong> Righetto Immobiliare conosce ogni angolo di Padova. Lasciaci i tuoi dati e ti contatteremo con le <strong>migliori opportunita\' immobiliari</strong> nella zona che preferisci.', 'bot', 400)
-          .then(function() { return cf.addImage('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80', 'Consulente immobiliare', 400); })
+          .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Consulente immobiliare', 400); })
           .then(function() { return cf.addButtons(['Contattatemi!', 'Prima vorrei altre info'], 'decisione_contatto'); });
       }
       return cf.addBubble('<strong>Confronto ' + cf.data.zona1 + ' vs ' + zc + ':</strong>', 'bot', 400)
@@ -455,7 +455,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   new ChatFlow('chatFlow', steps, {
     flowId: 'guida-servizi-padova',
-    avatarSrc: 'https://images.unsplash.com/photo-1573108037329-37aa135a142e?w=80&q=80',
+    avatarSrc: 'https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp',
     avatarName: 'Guida',
     onStepComplete: function(key, value, data) {
       gtag('event', 'chat_step', { flow: 'guida-servizi-padova', step: key, value: value });

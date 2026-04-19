@@ -184,6 +184,33 @@ def word_count(html: str) -> int:
     return len(re.findall(r"\b\w+\b", text, flags=re.UNICODE))
 
 
+# Limite massimo paragrafi da template (build_paragraphs) — allineato a TEST-SKILL/SKILL-2.0.md sezione 8.1c
+MAX_TEMPLATE_PARAGRAPHS = 50
+
+
+def assert_body_paragraph_diversity(html: str, max_identical: int = 2) -> None:
+    """Fallisce se troppi <p> hanno lo stesso testo (normalizzato). Cfr. skill 8.1c."""
+    import re
+    from collections import Counter
+
+    paras = re.findall(r"<p[^>]*>(.*?)</p>", html, flags=re.IGNORECASE | re.DOTALL)
+    texts: list[str] = []
+    for raw in paras:
+        t = re.sub(r"<[^>]+>", " ", raw)
+        t = re.sub(r"\s+", " ", t).strip().lower()
+        if len(t) < 48:
+            continue
+        texts.append(t)
+    if not texts:
+        return
+    top = Counter(texts).most_common(1)[0]
+    if top[1] > max_identical:
+        raise ValueError(
+            f"Corpo blog: {top[1]} paragrafi quasi identici (max {max_identical}). "
+            "Ridurre template o aggiungere prosa unica (SKILL 8.1c)."
+        )
+
+
 def build_paragraphs(topic: str, anchors: list[tuple[str, str]], n: int = 14) -> str:
     """Paragrafi con transizioni e fonti istituzionali, senza ripetizione meccanica."""
     links = " ".join(f'<a href="{u}">{t}</a>' for t, u in anchors)
@@ -243,13 +270,19 @@ def build_article(cfg: dict) -> str:
     cta_secondary = cfg["cta_secondary"]
     share_label = cfg.get("share_label", html_title[:40])
 
-    body_n = int(cfg.get("body_n", 48))
+    body_n = int(cfg.get("body_n", 44))
+    if body_n > MAX_TEMPLATE_PARAGRAPHS:
+        raise ValueError(
+            f"body_n={body_n} supera MAX_TEMPLATE_PARAGRAPHS={MAX_TEMPLATE_PARAGRAPHS}. "
+            "Aggiungere prosa unica (body_mid) invece di allungare il template (SKILL 8.1c)."
+        )
     body_core = build_paragraphs(topic, anchors, n=body_n)
     body_parts = [intro, body_extra]
     if body_mid:
         body_parts.append(body_mid)
     body_parts.extend([body_core, DISCLAIMER_BODY, MEDIAZIONE])
     body = "\n".join(body_parts)
+    assert_body_paragraph_diversity(body)
 
     wc_body = word_count(body)
     blog_obj = {
@@ -547,6 +580,7 @@ ARTICLES: list[dict] = [
             ("Documenti vendita", "blog-documenti-vendita-casa"),
         ],
         "topic": "bonus mobili e fiscalità ristrutturazioni",
+        "body_n": 46,
         "keywords": ["bonus mobili", "detrazioni IRPEF", "ristrutturazione"],
         "faqs": [
             ("Posso detrarre mobili senza ristrutturazione?", "La disciplina prevede requisiti specifici: verificare il testo di legge vigente e i requisiti per l'anno d'imposta."),
@@ -567,7 +601,7 @@ ARTICLES: list[dict] = [
     {
         "filename": "blog-geopolitica-ucraina-prezzi-mutui-italia-veneto-2026.html",
         "slug": "blog-geopolitica-ucraina-prezzi-mutui-italia-veneto-2026",
-        "img": "img/blog/blog-geopolitica-mercato-immobiliare-italia-2026.png",
+        "img": "img/blog/blog-geopolitica-mercato-immobiliare-italia-2026.webp",
         "bread": "Geopolitica e mercato immobiliare",
         "section": "Mercato locale",
         "html_title": "Geopolitica, energia e mutui: effetti possibili su case nel Nord-Est e lettura prudenziale 2026",
@@ -637,6 +671,7 @@ ARTICLES: list[dict] = [
             ("impegno quotidiano agenzia", "blog-impegno-quotidiano-agenzia-immobiliare"),
         ],
         "topic": "qualità servizi agenzia immobiliare padovana",
+        "body_n": 50,
         "keywords": ["agenzia immobiliare Padova", "servizi vendita", "Righetto"],
         "faqs": [
             ("Rispondete di notte?", "Fuori orario l'orientamento passa dalla chat e dai moduli; in orario telefono e WhatsApp aziendale."),
@@ -670,7 +705,7 @@ def main() -> None:
                 cfg["intro"],
                 cfg.get("body_extra", ""),
                 cfg.get("body_mid", ""),
-                build_paragraphs(cfg["topic"], cfg["anchors"], n=int(cfg.get("body_n", 48))),
+                build_paragraphs(cfg["topic"], cfg["anchors"], n=int(cfg.get("body_n", 44))),
                 DISCLAIMER_BODY,
                 MEDIAZIONE,
             ]

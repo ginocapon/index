@@ -22,7 +22,7 @@
 <meta property="og:url" content="https://righettoimmobiliare.it/landing-chat-offerta-luce">
 <meta property="og:site_name" content="Righetto Immobiliare">
 <meta property="og:locale" content="it_IT">
-<meta property="og:image" content="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1200&q=80">
+<meta property="og:image" content="https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -186,14 +186,14 @@ document.addEventListener('DOMContentLoaded', function() {
     { play: function(cf) {
       return cf.addBubble('<strong>Ciao!</strong> Sei stanco di bollette della luce sempre pi&uacute; alte?', 'bot', 300)
         .then(function() { return cf.addBubble('In questo momento abbiamo un\'offerta <strong>ENEL Super Luce</strong> esclusiva per i nostri clienti. Ti faccio qualche domanda per capire se fa al caso tuo.', 'bot', 800); })
-        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&q=80', 'Lampadine a basso consumo energetico', 600); })
+        .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Lampadine a basso consumo energetico', 600); })
         .then(function() { return cf.addButtons(['Si, le bollette sono troppo alte!', 'Quanto posso risparmiare?'], 'interesse'); });
     }},
     // Step 2: Situazione mercato
     { play: function(cf) {
       return cf.addBubble('Lo sapevi? Le <strong>tensioni geopolitiche in Medio Oriente</strong> stanno facendo impennare i prezzi dell\'energia in tutta Europa.', 'bot', 400)
         .then(function() { return cf.addBubble('Da gennaio 2026 la componente energia &egrave; gi&agrave; aumentata del <strong>12% rispetto al trimestre precedente</strong>. E le previsioni non sono buone.', 'bot', 800); })
-        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600&q=80', 'Andamento prezzi energia elettrica', 600); })
+        .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Andamento prezzi energia elettrica', 600); })
         .then(function() { return cf.addButtons(['Come posso proteggermi?', 'Qual &egrave; l\'offerta?'], 'reazione_mercato'); });
     }},
     // Step 3: Presenta offerta
@@ -217,13 +217,13 @@ document.addEventListener('DOMContentLoaded', function() {
         : '<strong>E la parte migliore?</strong> Nessun vincolo, nessun costo di attivazione, nessuna sorpresa. Puoi recedere quando vuoi.';
       return cf.addBubble(msg, 'bot', 400)
         .then(function() { return cf.addBubble('In pi&uacute;, hai un <strong>operatore dedicato</strong> che ti segue in tutto: ti spiega l\'andamento dei costi dell\'energia, ti aiuta con le bollette e con qualsiasi dubbio.', 'bot', 800); })
-        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80', 'Consulente che assiste un cliente', 600); })
+        .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Consulente che assiste un cliente', 600); })
         .then(function() { return cf.addButtons(['Perfetto, voglio saperne di pi&uacute;', 'Quanto risparmierei?'], 'interesse_dettaglio'); });
     }},
     // Step 5: Tipo abitazione
     { play: function(cf) {
       return cf.addBubble('Per capire quanto puoi risparmiare, dimmi: <strong>che tipo di abitazione</strong> hai?', 'bot', 400)
-        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80', 'Interno di casa luminosa', 400); })
+        .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Interno di casa luminosa', 400); })
         .then(function() { return cf.addButtons([
           'Appartamento', 'Villa / Villetta', 'Casa indipendente', 'Bilocale / Monolocale'
         ], 'tipo_abitazione'); });
@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Step 6: Nucleo familiare
     { play: function(cf) {
       return cf.addBubble('<strong>Quante persone</strong> vivono in casa?', 'bot', 400)
-        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80', 'Famiglia in soggiorno', 400); })
+        .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Famiglia in soggiorno', 400); })
         .then(function() { return cf.addButtons([
           '1-2 persone', '3-4 persone', '5+ persone'
         ], 'nucleo'); });
@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', function() {
           .then(function() { return cf.addButtons(['Ok, mi hai convinto!', 'Vorrei essere ricontattato'], 'rassicurazione'); });
       } else {
         return cf.addBubble('<strong>Ottima scelta!</strong> Ricorda: l\'offerta scade il <strong>31 marzo 2026</strong>. Con le tensioni in Medio Oriente, i prezzi dell\'energia continueranno a salire. Bloccare adesso &egrave; la mossa giusta.', 'bot', 400)
-          .then(function() { return cf.addImage('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80', 'Risparmio in bolletta', 400); })
+          .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Risparmio in bolletta', 400); })
           .then(function() { return cf.addButtons(['Procediamo!'], 'conferma_attivazione'); });
       }
     }},
@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   new ChatFlow('chatFlow', steps, {
     flowId: 'offerta-enel-luce',
-    avatarSrc: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=80&q=80',
+    avatarSrc: 'https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp',
     avatarName: 'Energia',
     onStepComplete: function(key, value, data) {
       gtag('event', 'chat_step', { flow: 'offerta-enel-luce', step: key, value: value });

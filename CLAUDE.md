@@ -1,8 +1,8 @@
 # CLAUDE.md — Righetto Immobiliare
 
 ## Istruzione Primaria
-**LEGGI SEMPRE `SKILL-2.0.md` prima di qualsiasi operazione.**
-SKILL-2.0.md e' l'unica fonte di verita' per questo progetto.
+**LEGGI SEMPRE `SKILL-2.0.md` (in root: indice) e il testo completo in `TEST-SKILL/SKILL-2.0.md` prima di qualsiasi operazione.**
+La skill e' l'unica fonte di verita' per questo progetto.
 
 ## Regole Automatiche
 
@@ -19,8 +19,9 @@ SKILL-2.0.md e' l'unica fonte di verita' per questo progetto.
 - Nessun CDN esterno
 
 ### Contenuti Blog:
-- Seguire template e checklist in SKILL-2.0.md Sezione 3 e 5
-- 2500+ parole, 10-15 H2/H3, 35% transition words
+- Seguire template e checklist in `TEST-SKILL/SKILL-2.0.md` Sezioni 3, 5 e **8.1c** (anti-riempimento, asset, wordCount onesto)
+- 2500+ parole nel corpo utile (no «fabbrica» di paragrafi identici), 10-15 H2/H3, 35% transition words
+- **Vietato** gonfiare il `wordCount` con loop di paragrafi sostanzialmente uguali; copertine blog hero in **WebP** 1200×630 leggere (Sezione 8.1c)
 - OGNI dato numerico DEVE avere fonte verificata (OMI, FIMAA, ISTAT, Banca d'Italia)
 - Zero claim inventati, zero dialetto, tono professionale
 - Compenso mediazione: non pubblicare tariffe o percentuali online; sempre da concordare in sede nel mandato (blog e testi istituzionali allineati).

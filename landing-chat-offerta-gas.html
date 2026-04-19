@@ -22,7 +22,7 @@
 <meta property="og:url" content="https://righettoimmobiliare.it/landing-chat-offerta-gas">
 <meta property="og:site_name" content="Righetto Immobiliare">
 <meta property="og:locale" content="it_IT">
-<meta property="og:image" content="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=1200&q=80">
+<meta property="og:image" content="https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -186,14 +186,14 @@ document.addEventListener('DOMContentLoaded', function() {
     { play: function(cf) {
       return cf.addBubble('<strong>Ciao!</strong> La bolletta del gas ti preoccupa, soprattutto con l\'inverno alle porte?', 'bot', 300)
         .then(function() { return cf.addBubble('Abbiamo negoziato un\'offerta <strong>ENEL Fix Star Gas</strong> in esclusiva per i nostri clienti. Ti faccio qualche domanda per capire se fa al caso tuo.', 'bot', 800); })
-        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&q=80', 'Fornello a gas cucina domestica', 600); })
+        .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Fornello a gas cucina domestica', 600); })
         .then(function() { return cf.addButtons(['Si, il gas costa troppo!', 'Quanto posso risparmiare?'], 'interesse'); });
     }},
     // Step 2: Situazione mercato gas
     { play: function(cf) {
       return cf.addBubble('Il mercato del gas &egrave; in piena turbolenza. Le <strong>guerre in Medio Oriente</strong> e le tensioni sui gasdotti europei stanno spingendo i prezzi verso l\'alto.', 'bot', 400)
         .then(function() { return cf.addBubble('Da ottobre 2025 il prezzo del gas &egrave; gi&agrave; aumentato del <strong>18%</strong>. E le previsioni per i prossimi mesi non sono incoraggianti: gli analisti prevedono <strong>ulteriori rialzi del 10-15%</strong>.', 'bot', 800); })
-        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600&q=80', 'Andamento prezzi gas naturale', 600); })
+        .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Andamento prezzi gas naturale', 600); })
         .then(function() { return cf.addButtons(['Come posso proteggermi?', 'Qual &egrave; l\'offerta?'], 'reazione_mercato'); });
     }},
     // Step 3: Presenta offerta
@@ -217,13 +217,13 @@ document.addEventListener('DOMContentLoaded', function() {
         : '<strong>E c\'&egrave; di pi&uacute;!</strong> Nessun vincolo contrattuale, zero costi di attivazione, nessuna spesa nascosta. Puoi cambiare idea quando vuoi.';
       return cf.addBubble(msg, 'bot', 400)
         .then(function() { return cf.addBubble('Inoltre hai un <strong>operatore dedicato</strong> che ti segue personalmente: ti spiega l\'andamento dei costi del gas, ti aiuta a leggere la bolletta e ti assiste per qualsiasi problema.', 'bot', 800); })
-        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80', 'Consulente che assiste un cliente', 600); })
+        .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Consulente che assiste un cliente', 600); })
         .then(function() { return cf.addButtons(['Ottimo, voglio saperne di pi&uacute;', 'Quanto risparmierei?'], 'interesse_dettaglio'); });
     }},
     // Step 5: Tipo riscaldamento
     { play: function(cf) {
       return cf.addBubble('Per stimare il tuo risparmio: <strong>come riscaldi casa</strong>?', 'bot', 400)
-        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&q=80', 'Interno soggiorno riscaldato', 400); })
+        .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Interno soggiorno riscaldato', 400); })
         .then(function() { return cf.addButtons([
           'Caldaia a gas', 'Riscaldamento autonomo', 'Centralizzato con gas', 'Solo acqua calda e cucina'
         ], 'tipo_riscaldamento'); });
@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Step 6: Dimensione casa
     { play: function(cf) {
       return cf.addBubble('<strong>Quanto &egrave; grande</strong> la tua casa?', 'bot', 400)
-        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80', 'Interno casa spaziosa', 400); })
+        .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Interno casa spaziosa', 400); })
         .then(function() { return cf.addButtons([
           'Fino a 60 mq', '60-100 mq', '100-150 mq', 'Oltre 150 mq'
         ], 'dimensione'); });
@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', function() {
           .then(function() { return cf.addButtons(['Ok, procediamo!', 'Vorrei essere ricontattato'], 'rassicurazione'); });
       } else {
         return cf.addBubble('<strong>Ottima scelta!</strong> L\'offerta scade il <strong>31 marzo 2026</strong>. Con le tensioni geopolitiche in Medio Oriente, il gas continuer&agrave; a costare di pi&uacute;. Bloccare adesso &egrave; la decisione giusta.', 'bot', 400)
-          .then(function() { return cf.addImage('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80', 'Risparmio in bolletta', 400); })
+          .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Risparmio in bolletta', 400); })
           .then(function() { return cf.addButtons(['Procediamo!'], 'conferma_attivazione'); });
       }
     }},
@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   new ChatFlow('chatFlow', steps, {
     flowId: 'offerta-enel-gas',
-    avatarSrc: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=80&q=80',
+    avatarSrc: 'https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp',
     avatarName: 'Gas',
     onStepComplete: function(key, value, data) {
       gtag('event', 'chat_step', { flow: 'offerta-enel-gas', step: key, value: value });

@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
     { play: function(cf) {
       return cf.addBubble('<strong>Ciao!</strong> Sono Linda, la tua consulente mutui a Padova.', 'bot', 300)
         .then(function() { return cf.addBubble('Ti aiuto a calcolare la <strong>rata del mutuo</strong> in pochi passaggi. Tutto gratis, senza registrazione!', 'bot', 800); })
-        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80', 'Chiavi casa nuova mutuo Padova', 600); })
+        .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Chiavi casa nuova mutuo Padova', 600); })
         .then(function() { return cf.addButtons(['Iniziamo!', 'Come funziona?'], 'start'); });
     }},
 
@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function() {
         : 'Perfetto, ' + anticipo + ' di anticipo.';
       return cf.addBubble(msg, 'bot', 400)
         .then(function() { return cf.addBubble('Per <strong>quanti anni</strong> vorresti il mutuo?', 'bot', 500); })
-        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80', 'Documenti mutuo casa', 400); })
+        .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Documenti mutuo casa', 400); })
         .then(function() { return cf.addButtons([
           '15 anni', '20 anni', '25 anni', '30 anni'
         ], 'durata'); });

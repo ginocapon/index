@@ -1,0 +1,15 @@
+---
+description: Righetto — qualità contenuti SEO/GEO 2026 e asset blog (obbligatorio)
+globs: "*.html,scripts/**/*.py,TEST-SKILL/SKILL-2.0.md,CLAUDE.md,SKILL-2.0.md"
+alwaysApply: false
+---
+
+# Prima di generare o pubblicare articoli / pagine statiche
+
+1. Leggere **`TEST-SKILL/SKILL-2.0.md`** (indice in root `SKILL-2.0.md`): sezioni **8.1**, **8.1c**, **8.3**.
+2. **Vietato** gonfiare il corpo con loop di paragrafi `<p>` sostanzialmente identici solo per `wordCount` / schema.
+3. Script batch: rispettare `MAX_TEMPLATE_PARAGRAPHS` e `assert_body_paragraph_diversity` in `scripts/build_apr19_blog_batch.py` (o equivalente in nuovi script).
+4. Copertine articoli blog: **WebP** consigliato, **1200×630**, peso contenuto (ordine di grandezza **&lt;120 KiB**); aggiornare `og:image`, schema `image`, hero `src`, `blog.html`, `js/homepage.js`, `admin.html` se presenti in seed statici.
+4b. **Nessun Unsplash / CDN immagini esterni** per hero, gallerie e chat script: solo `img/` e dominio `righettoimmobiliare.it`.
+5. Disclaimer generico e nota mediazione: **una volta** per pagina (salvo eccezioni normative).
+6. Dopo nuove URL: `sitemap.xml`; commit in italiano; nessun CDN esterno (regole progetto).

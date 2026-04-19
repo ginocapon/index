@@ -295,13 +295,13 @@ document.addEventListener('DOMContentLoaded', function() {
     { play: function(cf) {
       return cf.addBubble('<strong>Ciao!</strong> Stai cercando casa a Padova e le <strong>scuole per i tuoi figli</strong> sono una priorita\'?', 'bot', 300)
         .then(function() { return cf.addBubble('Ti guido alla scoperta delle <strong>scuole di ogni ordine e grado</strong> in ogni zona di Padova: asili, elementari, medie, licei e universita\'. Dati aggiornati al 2026.', 'bot', 800); })
-        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=80', 'Scuola con bambini a Padova', 600); })
+        .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Scuola con bambini a Padova', 600); })
         .then(function() { return cf.addButtons(['Si, le scuole sono fondamentali!', 'Quali zone hanno scuole migliori?'], 'interesse'); });
     }},
     /* Step 2: Eta' figli */
     { play: function(cf) {
       return cf.addBubble('Perfetto! Per darti le informazioni piu\' utili: <strong>che eta\' hanno i tuoi figli</strong> (o che eta\' avranno)?', 'bot', 400)
-        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80', 'Bambini a scuola', 500); })
+        .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Bambini a scuola', 500); })
         .then(function() { return cf.addButtons([
           'Asilo nido (0-3 anni)', 'Infanzia/elementari (3-10)', 'Medie (11-13)', 'Superiori/universita\' (14+)'
         ], 'eta_figli'); });
@@ -354,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function() {
             '</div>';
           return cf.addBubble(html, 'bot', 600);
         })
-        .then(function() { return cf.addImage('https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=80', 'Scuole in ' + cf.data.zona1, 400); })
+        .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Scuole in ' + cf.data.zona1, 400); })
         .then(function() { return cf.addButtons(['Vedi tutte le scuole', 'Esplora altra zona'], 'azione1'); });
     }},
     /* Step 6: Dettagli */
@@ -403,7 +403,7 @@ document.addEventListener('DOMContentLoaded', function() {
       var z2 = SCUOLE[zc] || SCUOLE['Prato della Valle'];
       if (cf.data.azione2 === 'Voglio info immobiliari' || cf.data.azione_finale === 'Voglio info immobiliari') {
         return cf.addBubble('<strong>Ottima scelta!</strong> Conosciamo ogni zona di Padova e possiamo trovarti <strong>casa vicino alle scuole migliori</strong> per i tuoi figli, nel tuo budget.', 'bot', 400)
-          .then(function() { return cf.addImage('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80', 'Consulente immobiliare', 400); })
+          .then(function() { return cf.addImage('https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp', 'Consulente immobiliare', 400); })
           .then(function() { return cf.addButtons(['Contattatemi!', 'Vorrei altre informazioni'], 'decisione_contatto'); });
       }
       return cf.addBubble('<strong>Confronto scuole ' + cf.data.zona1 + ' vs ' + zc + ':</strong>', 'bot', 400)
@@ -461,7 +461,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   new ChatFlow('chatFlow', steps, {
     flowId: 'guida-scuole-padova',
-    avatarSrc: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=80&q=80',
+    avatarSrc: 'https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp',
     avatarName: 'Scuole',
     onStepComplete: function(key, value, data) {
       gtag('event', 'chat_step', { flow: 'guida-scuole-padova', step: key, value: value });
