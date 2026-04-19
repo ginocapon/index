@@ -78,6 +78,20 @@
   transform: translateY(-2px) !important;
 }
 
+/* Evita sovrapposizione testi su CTA affiancati / stretti */
+#hero .hero-btns {
+  gap: 12px;
+  align-items: stretch;
+}
+#hero .hero-btns .btn-g {
+  white-space: normal;
+  line-height: 1.35;
+  text-align: center;
+  min-height: 48px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
 /* Statistiche hero: layout mobile a griglia */
 @media (max-width: 640px) {
   .hero-stats-row {
@@ -153,6 +167,13 @@
 
 /* —— Mobile: hero non più alto del viewport, tab ricerca comode, pill più leggibili —— */
 @media (max-width: 768px) {
+  /* Pill sotto il titolo: non salire sotto il menu hamburger */
+  .hero-trust-pills {
+    margin-top: 4px;
+    position: relative;
+    z-index: 1;
+  }
+
   /* Specificità > #hero nel <style> inline */
   main#main-content #hero {
     min-height: 520px;
