@@ -1,10 +1,12 @@
 # SKILL 2.0 — Righetto Immobiliare
 ## Prompt Operativo Master Unificato
 
-> **Versione:** 2.0 — 15 Marzo 2026
+> **Versione:** 2.0 — 15 Marzo 2026 (patch contenuti **3 Aprile 2026**)
 > **Unica fonte di verita'** — Sostituisce SKILL-UNIFICATA.md, AUTOMATION-SITE-2026.md e CLAUDE.md
 > **Ultimo aggiornamento Google verificato:** 8 Marzo 2026
 > **Prossima verifica consigliata:** Aprile 2026
+>
+> **Changelog 3 Aprile 2026:** eliminata la CTA Google legacy (sfondo rosso `#B71C1C`) su **45+** pagine (`blog-*`, `landing-*`); sostituita con `section.blog-rich-cta-strip` + link `css/blog-rich.css?v=2` dove mancava. Script riutilizzabili in `scripts/`: `migrate_legacy_red_google_cta.py`, `ensure_blog_rich_css_link.py`, `blog_add_rich_css_and_footer_cta.py`. Allineati claim aggressivi su `landing-vendita.html`, `landing-vendere-casa-padova.html`, `landing-agente.html` e messaggi chat (`landing-chat-vendita`, `landing-chat-insoddisfatti`) ai numeri consentiti in `CLAUDE.md`. `blog-articolo.html`: aggiunto `blog-rich.css` + CTA strip statica sotto il corpo dinamico.
 
 ---
 
@@ -725,9 +727,9 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 **Foglio di stile condiviso — `css/blog-rich.css`:**
 
-- Caricato da **`blog-articolo.html`** (articoli dinamici). Per ogni **`blog-*.html`** statico, aggiungere nella `<head>`:
-  `<link rel="stylesheet" href="css/blog-rich.css?v=1">` (stesso `?v=` delle altre risorse quando si aggiorna).
-- Tutte le classi sono **prefissate** `blog-rich-*` e funzionano **solo dentro** `.art-content` (no impatto su header/footer).
+- Caricato da **`blog-articolo.html`** (articoli dinamici) e dalle pagine che usano i componenti. Per ogni **`blog-*.html`** statico, aggiungere nella `<head>`:
+  `<link rel="stylesheet" href="css/blog-rich.css?v=2">` (stesso `?v=` delle altre risorse quando si aggiorna il foglio).
+- Le classi `blog-rich-*` sono definite in `css/blog-rich.css` (anche **fuori** da `.art-content`, es. CTA strip a fine `main`); il corpo articolo resta in `.art-content` dove presente.
 
 **Blocchi raccomandati (copiare/incollare nel corpo e riempire):**
 
@@ -1155,9 +1157,9 @@ Le pagine con contenuti aggiornati ricevono un boost nel re-ranking:
 - [x] **Sticky CTA mobile** — gia' presente su 6 pagine + auto-inject JS su 8 restanti, ora A/B testato
 
 ### 9.2 Contenuti da Creare
-- [ ] **Blog statici — layout 8.1b (`css/blog-rich.css`)** — migrare gradualmente gli altri `blog-*.html` oltre ai 7 gia' aggiornati (aprile 2026):
-  Piazzola Brenta, Vigonza-Rubano, APE acquisto, Planimetria, Permuta, Mutui tasso fisso BdI, Bilancio Righetto 2025.
-  Priorita' successiva: pillar e pagine con piu' click in GSC.
+- [x] **Blog / landing — CTA chiusura 8.1b** — (3 aprile 2026) rimossa CTA rossa duplicata; `blog-rich-cta-strip` + CSS su tutti i `blog-*.html` interessati e landings con form. Restano miglioramenti **editoriali** graduali (TOC, fonti, badge data) per articoli a bassa priorita' GSC.
+- [ ] **Blog statici — arricchimento corpo 8.1b** (prosa, `blog-rich-toc`, tabelle con `blog-rich-table-source` dove servono dati):
+  priorita' pillar + top click GSC; script di supporto in `scripts/` come sopra.
 - [x] blog-tempi-vendita-casa-padova.html — CREATO 8 marzo 2026
 - [x] zona-vigonza.html — CREATA 8 marzo 2026
 - [x] zona-abano-terme.html — CREATA 8 marzo 2026
