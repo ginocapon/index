@@ -5286,7 +5286,67 @@ function resetForm() {
 
 // ══════════════════════════════════════
 // GENERA VIA CASUALE per indirizzo_mappa
+// (Photon come percorso principale: da browser Nominatim è spesso bloccato o rate-limited)
 // ══════════════════════════════════════
+async function _photonCenterForComune(comune) {
+  const url = 'https://photon.komoot.io/api?q=' + encodeURIComponent(comune + ', Italia') + '&lang=it&limit=1';
+  const resp = await fetch(url, { headers: { Accept: 'application/json' } });
+  if (!resp.ok) return null;
+  const j = await resp.json();
+  const f = j.features && j.features[0];
+  if (!f || !f.geometry || !Array.isArray(f.geometry.coordinates)) return null;
+  const lon = f.geometry.coordinates[0];
+  const lat = f.geometry.coordinates[1];
+  if (typeof lat !== 'number' || typeof lon !== 'number') return null;
+  return { lat, lon };
+}
+
+async function _collectViePhoton(lat, lon, comuneNorm) {
+  const vie = [];
+  const tentativi = 10;
+  for (let i = 0; i < tentativi; i++) {
+    const angolo = Math.random() * 2 * Math.PI;
+    const raggio = 0.002 + Math.random() * 0.008;
+    const rLat = lat + raggio * Math.sin(angolo);
+    const rLon = lon + raggio * Math.cos(angolo);
+    const url = 'https://photon.komoot.io/reverse?lat=' + rLat + '&lon=' + rLon + '&lang=it';
+    const r = await fetch(url, { headers: { Accept: 'application/json' } });
+    if (!r.ok) { await new Promise(t => setTimeout(t, 250)); continue; }
+    const data = await r.json();
+    const feat = data.features && data.features[0];
+    const p = feat && feat.properties;
+    const via = p && (p.street || (p.type === 'street' ? p.name : null) || (p.osm_key === 'highway' ? p.name : null));
+    if (via && via.length > 2) {
+      const v = String(via).trim();
+      if (v.toLowerCase() !== comuneNorm && !vie.includes(v)) vie.push(v);
+    }
+    await new Promise(t => setTimeout(t, 120));
+  }
+  return vie;
+}
+
+async function _collectVieNominatim(lat, lon) {
+  const vie = [];
+  const tentativi = 6;
+  for (let i = 0; i < tentativi; i++) {
+    const angolo = Math.random() * 2 * Math.PI;
+    const raggio = 0.002 + Math.random() * 0.006;
+    const rLat = lat + raggio * Math.sin(angolo);
+    const rLon = lon + raggio * Math.cos(angolo);
+    const r = await fetch('https://nominatim.openstreetmap.org/reverse?format=json&lat=' + rLat + '&lon=' + rLon + '&zoom=16&addressdetails=1', {
+      headers: { Accept: 'application/json' }
+    });
+    if (!r.ok) { await new Promise(t => setTimeout(t, 1100)); continue; }
+    const data = await r.json();
+    if (data && data.address && data.address.road) {
+      const via = data.address.road;
+      if (!vie.includes(via)) vie.push(via);
+    }
+    await new Promise(t => setTimeout(t, 1100));
+  }
+  return vie;
+}
+
 async function generaViaCasuale() {
   const btn = document.getElementById('btnGeneraVia');
   const comune = (document.getElementById('f_comune').value || 'Padova').trim();
@@ -5296,41 +5356,38 @@ async function generaViaCasuale() {
   btn.textContent = '⏳ Cerco...';
 
   try {
-    // Cerca vie reali nel comune tramite Nominatim (OpenStreetMap)
-    const query = encodeURIComponent(comune + ', Provincia di Padova, Italia');
-    const resp = await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + query);
-    const centro = await resp.json();
-    if (!centro || !centro.length) { toast('Comune non trovato: ' + comune, 'error'); return; }
-
-    const lat = parseFloat(centro[0].lat);
-    const lon = parseFloat(centro[0].lon);
-
-    // Cerca strade nel raggio del centro del comune (reverse geocoding con variazioni casuali)
-    const vie = [];
-    const tentativi = 8;
-    for (let i = 0; i < tentativi; i++) {
-      // Offset casuale: ~200-800m in direzione casuale
-      const angolo = Math.random() * 2 * Math.PI;
-      const raggio = 0.002 + Math.random() * 0.006; // ~200-800m in gradi
-      const rLat = lat + raggio * Math.sin(angolo);
-      const rLon = lon + raggio * Math.cos(angolo);
-
-      const r = await fetch('https://nominatim.openstreetmap.org/reverse?format=json&lat=' + rLat + '&lon=' + rLon + '&zoom=16&addressdetails=1');
-      const data = await r.json();
-      if (data && data.address && data.address.road) {
-        const via = data.address.road;
-        if (!vie.includes(via)) vie.push(via);
+    const comuneNorm = comune.toLowerCase().trim();
+    let centre = await _photonCenterForComune(comune);
+    let vie = [];
+    if (centre) {
+      try {
+        vie = await _collectViePhoton(centre.lat, centre.lon, comuneNorm);
+      } catch (pe) {
+        console.warn('Photon reverse fallito, provo Nominatim:', pe);
       }
-      // Rispetta rate-limit Nominatim (1 req/sec)
-      await new Promise(r => setTimeout(r, 1100));
     }
 
-    if (vie.length === 0) {
-      toast('Nessuna via trovata per ' + comune + '. Inseriscila manualmente.', 'error');
+    if (!vie.length) {
+      if (!centre) {
+        const query = encodeURIComponent(comune + ', Provincia di Padova, Italia');
+        const resp = await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + query, {
+          headers: { Accept: 'application/json' }
+        });
+        if (resp.ok) {
+          const arr = await resp.json();
+          if (arr && arr.length) {
+            centre = { lat: parseFloat(arr[0].lat), lon: parseFloat(arr[0].lon) };
+          }
+        }
+      }
+      if (centre) vie = await _collectVieNominatim(centre.lat, centre.lon);
+    }
+
+    if (!vie.length) {
+      toast('Nessuna via trovata per ' + comune + '. Inseriscila manualmente o riprova più tardi.', 'error');
       return;
     }
 
-    // Scegli una via casuale tra quelle trovate
     const viaScelta = vie[Math.floor(Math.random() * vie.length)];
     const risultato = viaScelta + ', ' + comune;
     document.getElementById('f_indirizzo_mappa').value = risultato;
@@ -5338,7 +5395,7 @@ async function generaViaCasuale() {
 
   } catch (e) {
     console.error('Errore generazione via:', e);
-    toast('Errore nella ricerca. Riprova.', 'error');
+    toast('Errore nella ricerca: ' + (e.message || 'riprova'), 'error');
   } finally {
     btn.disabled = false;
     btn.textContent = '🎲 Genera via';
@@ -5406,15 +5463,40 @@ function editImmobile(id) {
 async function saveImmobile(e) {
   e.preventDefault();
   const btn = document.getElementById('btnSalva');
+  const codiceInput = document.getElementById('f_codice');
   btn.disabled = true;
   btn.innerHTML = '<div class="spinner" style="width:16px;height:16px;border-width:2px"></div> Salvataggio...';
 
   const id = document.getElementById('editId').value;
   const titolo = document.getElementById('f_titolo').value.trim();
   const slug = titolo.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  const codiceVal = (codiceInput.value || '').trim();
+  const codiceForDb = codiceVal || null;
+
+  if (codiceVal) {
+    let q = sb.from('immobili').select('id,titolo').eq('codice', codiceVal);
+    if (id) q = q.neq('id', id);
+    const { data: conflictRows, error: conflictErr } = await q.limit(1);
+    if (conflictErr) {
+      btn.disabled = false;
+      btn.innerHTML = '💾 Salva Immobile';
+      toast('Impossibile verificare il codice: ' + conflictErr.message, 'error');
+      return;
+    }
+    if (conflictRows && conflictRows.length) {
+      btn.disabled = false;
+      btn.innerHTML = '💾 Salva Immobile';
+      codiceInput.style.borderColor = 'var(--rosso)';
+      const other = conflictRows[0];
+      toast('Il codice "' + codiceVal + '" è già usato da un altro immobile (' + (other.titolo || other.id) + '). Usa un riferimento diverso oppure apri quella scheda dalla lista «Immobili» per modificarla.', 'error');
+      codiceInput.focus();
+      return;
+    }
+  }
+  codiceInput.style.borderColor = '';
 
   const payload = {
-    codice: document.getElementById('f_codice').value || null,
+    codice: codiceForDb,
     titolo,
     slug,
     tipo_operazione: document.getElementById('f_tipo_operazione').value,
@@ -5582,7 +5664,14 @@ async function saveImmobile(e) {
   btn.innerHTML = '💾 Salva Immobile';
 
   if (error) {
-    toast('Errore: ' + error.message, 'error');
+    const msg = error.message || '';
+    if (msg.includes('immobili_codice_key') || msg.includes('duplicate key') && msg.includes('codice')) {
+      toast('Il codice inserito è già presente nel database. Cambia il campo «Codice» (Rif.) o modifica l’immobile esistente con quello stesso riferimento.', 'error');
+      const ci = document.getElementById('f_codice');
+      if (ci) { ci.style.borderColor = 'var(--rosso)'; ci.focus(); }
+    } else {
+      toast('Errore: ' + msg, 'error');
+    }
   } else {
     toast(id ? 'Immobile aggiornato!' : 'Immobile creato!', 'success');
     document.getElementById('editId').value = '';
@@ -6427,10 +6516,15 @@ function getPrefisso() {
 
 async function generaCodice() {
   const pfx = getPrefisso();
-  // Conta quanti immobili hanno già quel prefisso
   const { data } = await sb.from('immobili').select('codice').ilike('codice', pfx + '%');
-  const num = (data?.length || 0) + 1;
-  const codice = pfx + String(num).padStart(4, '0');
+  let max = 0;
+  const escPfx = pfx.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp('^' + escPfx + '(\\d+)$', 'i');
+  (data || []).forEach(row => {
+    const m = (row.codice || '').trim().match(re);
+    if (m) max = Math.max(max, parseInt(m[1], 10));
+  });
+  const codice = pfx + String(max + 1).padStart(4, '0');
   document.getElementById('f_codice').value = codice;
   document.getElementById('f_codice').style.borderColor = 'var(--verde)';
   setTimeout(() => document.getElementById('f_codice').style.borderColor = '', 1500);
@@ -6564,6 +6658,11 @@ let blogArticles = [];
 
 // Articoli con pagina HTML dedicata — seed automatico
 const _blogSeedArticles = [
+  { titolo: 'Patrimonio casa e resilienza urbana: lezioni dal contesto globale per il Nord-Est', categoria: 'Mercato e famiglie', data: '2026-05-12', tempo: 12, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🏛️', immagine_copertina: 'img/blog/blog-patrimonio-casa-resilienza-mercati-globali-2026.png', url_statico: 'blog-patrimonio-casa-resilienza-mercati-globali-2026', contenuto: '<p>Patrimonio abitativo, illiquidità e micro-mercati nel Padovano.</p>', evidenza: true, data_pubblicazione: '2026-05-12' },
+  { titolo: 'Mutui più selettivi: come le banche valutano reddito e garanzie nel 2026', categoria: 'Finanziamenti', data: '2026-05-12', tempo: 11, stato: 'pubblicato', autore: 'Gino Capon', emoji: '💳', immagine_copertina: 'img/blog/blog-mutui-selettivi-banche-padova-2026.png', url_statico: 'blog-mutui-selettivi-banche-padova-2026', contenuto: '<p>LTV, istruttoria e prudenza bancaria: lettura per chi compra nel territorio.</p>', evidenza: true, data_pubblicazione: '2026-05-12' },
+  { titolo: 'Tensioni in Medio Oriente e mercato immobiliare italiano: canali economici (non cronaca)', categoria: 'Economia', data: '2026-05-12', tempo: 11, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🌐', immagine_copertina: 'img/blog/blog-mercato-italiano-tensioni-medio-oriente-2026.png', url_statico: 'blog-mercato-italiano-tensioni-medio-oriente-2026', contenuto: '<p>Energia, politica monetaria e fiducia: trasmissione macro senza allarmismi.</p>', evidenza: true, data_pubblicazione: '2026-05-12' },
+  { titolo: 'Prospettive mercato residenziale Italia: come leggere le ricerche di settore nel 2026', categoria: 'Mercato', data: '2026-05-12', tempo: 12, stato: 'pubblicato', autore: 'Gino Capon', emoji: '📑', immagine_copertina: 'img/blog/blog-prospettive-mercato-residenziale-italia-2026.png', url_statico: 'blog-prospettive-mercato-residenziale-italia-2026', contenuto: '<p>Report di settore, nominali vs reali, confronto con il micro-mercato locale.</p>', evidenza: false, data_pubblicazione: '2026-05-12' },
+  { titolo: 'Previsioni immobiliari e scenari di conflitto: come usarle senza allarmismi', categoria: 'Analisi', data: '2026-05-12', tempo: 11, stato: 'pubblicato', autore: 'Gino Capon', emoji: '📉', immagine_copertina: 'img/blog/blog-previsioni-immobiliari-scenari-geopolitica-2026.png', url_statico: 'blog-previsioni-immobiliari-scenari-geopolitica-2026', contenuto: '<p>Scenario analysis e stress test pratici per famiglie acquirenti.</p>', evidenza: false, data_pubblicazione: '2026-05-12' },
   { titolo: 'Domanda di case green ad alta efficienza nel Padovano: strategie con dati OMI e APE', categoria: 'Mercato locale', data: '2026-04-19', tempo: 16, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🌿', immagine_copertina: 'img/blog/blog-domanda-case-green-padova-2026.webp', url_statico: 'blog-domanda-case-green-certificazione-padova-2026', contenuto: '<p>APE, OMI e domanda di immobili efficienti nel Padovano: metodo senza dati inventati.</p>', evidenza: true, data_pubblicazione: '2026-04-19' },
   { titolo: 'Tassi mutui ai livelli più bassi della fase: come orientarsi nel Padovano con fonti Banca d\'Italia', categoria: 'Finanziamenti', data: '2026-04-19', tempo: 15, stato: 'pubblicato', autore: 'Gino Capon', emoji: '📉', immagine_copertina: 'img/blog/blog-tassi-mutui-minimi-padova-2026.webp', url_statico: 'blog-tassi-mutui-minimi-approfittarne-padova-2026', contenuto: '<p>BCE, Banca d\'Italia e simulazioni: lettura prudente sul mutuo.</p>', evidenza: true, data_pubblicazione: '2026-04-19' },
   { titolo: 'Bonus mobili e grandi elettrodomestici 2026: massimizzare la detrazione con ristrutturazioni edilizie', categoria: 'Fisco', data: '2026-04-19', tempo: 14, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🪑', immagine_copertina: 'img/blog/blog-bonus-mobili-ristrutturazioni-2026.webp', url_statico: 'blog-bonus-mobili-2026-massimizzare-ristrutturazioni', contenuto: '<p>Ristrutturazioni e mobili: verificare normativa vigente e Agenzia delle Entrate.</p>', evidenza: true, data_pubblicazione: '2026-04-19' },

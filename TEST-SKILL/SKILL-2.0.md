@@ -830,6 +830,21 @@ js/scroll-reveal.js                 - Animazioni scroll
 - [ ] Schema triplo (BlogPosting / FAQ / Breadcrumb) allineato al contenuto visibile.
 - [ ] Registrazione in `blog.html`, `homepage.js`, `admin.html`, `sitemap.xml` se applicabile (processo gia' definito altrove).
 
+### 8.2.5 AEO / ricerca assistita — AI Overviews, AI Mode e agent (OBBLIGATORIO su pillar macro 2026+)
+
+> **Perchee' esiste:** una parte crescente delle ricerche informative passa da **sintesi generate** (Google AI Overviews, AI Mode, assistenti). Le pagine che vogliono essere estratte con fedelta' devono somigliare a **risposte strutturate**, non a testo vago.
+
+**Obbligatorio per ogni nuovo articolo blog su trend, geopolitica, mutui o mercato nazionale:**
+
+1. **Box entro le prime 150 parole** (visibile, non solo schema): *Per chi e' questo articolo*, *In sintesi* (3–5 bullet fattuali), *Cosa questo articolo **non** e'* (es. non consulenza d'investimento / non previsione personale).
+2. **H2/H3 in forma di domanda** dove ha senso, allineate a come gli utenti (e gli agent) formulano le query.
+3. **FAQPage JSON-LD** con `acceptedAnswer.text` **copiato o equivalente** al testo espanso nella pagina (no mismatch).
+4. **Fonti nel corpo**: link o menzione esplicita di istituzioni (BCE, Banca d'Italia, ISTAT, Agenzia delle Entrate, OMI) quando si parla di numeri o contesto macro — aumenta estrabilita' e trust.
+5. **Disambiguazione visiva**: se l'immagine di copertina e' **illustrativa** o rappresenta un contesto urbano non italiano, dirlo in **didascalia** o nota breve sotto l'hero (onesto per utenti e per modelli che leggono HTML).
+6. Dopo pubblicazione: aggiungere l'URL in **`llms.txt`** (sezione blog) entro il ciclo di lavoro, cosi' i crawler AI hanno il nuovo percorso indicizzato nel file dedicato.
+
+Questa sezione **integra** la 8.3 (entita' e neural matching), non la sostituisce.
+
 ### 8.3 Entity-Based SEO + Neural Matching — Ottimizzazione Semantica Completa (OBBLIGATORIO)
 
 > **Aggiornamento Marzo 2026:** Google ragiona per **entita' semantiche**, non piu' per keyword esatte ripetute.
