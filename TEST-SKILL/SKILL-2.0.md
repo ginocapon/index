@@ -845,6 +845,20 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 Questa sezione **integra** la 8.3 (entita' e neural matching), non la sostituisce.
 
+### 8.2.6 Landing commerciali / acquisizione incarichi (non blog)
+
+> Pagine **servizio** o **conversione** (es. valutazione riservata, segnalazioni da studi professionali) che **non** sono articoli blog: stessi principi AEO/conformità, schema diverso dal `BlogPosting`.
+
+**Obbligatorio:**
+
+1. **Canonical e OG** senza `.html`; compenso mediazione **mai** in chiaro (solo rinvio in sede / mandato), coerente con `CLAUDE.md`.
+2. **Box in apertura** (analogo a 8.2.5 dove ha senso): *Per chi e'*, *In sintesi*, *Cosa non e'* — riduce ambiguità per ricerca assistita.
+3. **FAQ visibile** + **FAQPage JSON-LD** con risposte **uguali o equivalenti** al testo espanso (`<details>` va bene).
+4. **BreadcrumbList** + **WebPage** (e/o **Service** / **ProfessionalService** in `about` se appropriato); **non** inventare `BlogPosting` se non e' un articolo.
+5. **Immagini:** preferire **WebP** leggero hero ~1200×630 (§8.1c); foto sede/reali ammesse sotto `img/` — `alt` descrittivi e onesti.
+6. **Wiring:** `sitemap.xml`, voce in **`llms.txt`** (sezione servizi), link da **`servizi.html`** e **footer**; se centrale per l'offerta, arricchire **`hasOfferCatalog`** in `servizi.html` (JSON-LD).
+7. **Non obbligatorio:** `blog.html`, `js/homepage.js` articoli statici, `admin.html` seed — salvo si voglia duplicare evidenza in homepage blog.
+
 ### 8.3 Entity-Based SEO + Neural Matching — Ottimizzazione Semantica Completa (OBBLIGATORIO)
 
 > **Aggiornamento Marzo 2026:** Google ragiona per **entita' semantiche**, non piu' per keyword esatte ripetute.
