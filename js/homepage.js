@@ -627,6 +627,19 @@ function generateSlug(titolo) {
   articoliStatici.forEach(s => {
     if (!titoliEsistenti.has(s.titolo.toLowerCase())) articles.push(s);
   });
+  // Stesso titolo in Supabase + elenco statico: prevale la riga curata (data, copertina, url_statico)
+  const staticByTitolo = Object.fromEntries(articoliStatici.map(s => [(s.titolo || '').toLowerCase(), s]));
+  articles = articles.map(a => {
+    const st = staticByTitolo[(a.titolo || '').toLowerCase()];
+    return st ? Object.assign({}, a, st) : a;
+  });
+  const visti = new Set();
+  articles = articles.filter(a => {
+    const k = (a.titolo || '').toLowerCase();
+    if (visti.has(k)) return false;
+    visti.add(k);
+    return true;
+  });
   // Arricchisci con immagini/url statici se mancanti
   articles.forEach(a => {
     const key = (a.titolo || '').toLowerCase();
@@ -636,9 +649,13 @@ function generateSlug(titolo) {
       if (!a.url_statico) a.url_statico = s.url;
     }
   });
-  // Ordina per data e prendi i 3 piu' recenti
-  articles.sort((a,b) => new Date(b.data) - new Date(a.data));
-  articles = articles.slice(0, 3);
+  function tsArticolo(a) {
+    const d = a.data || a.data_pubblicazione;
+    const t = d ? new Date(d).getTime() : 0;
+    return Number.isFinite(t) ? t : 0;
+  }
+  articles.sort((a, b) => tsArticolo(b) - tsArticolo(a));
+  articles = articles.slice(0, 6);
   function extractImg(a) {
     if (a.immagine_copertina) return resolveImageUrl(a.immagine_copertina);
     if (!a.contenuto) return '';
