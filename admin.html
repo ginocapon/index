@@ -2605,8 +2605,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <div class="form-grid">
                   <div class="form-group">
                     <label>YouTube Video ID</label>
-                    <input type="text" id="f_youtube_id" placeholder="es. H93UW4SX8zQ">
-                    <small style="color:var(--caffe2);font-size:0.72rem">Dall'URL youtube.com/watch?v=<strong>QUESTO</strong></small>
+                    <input type="text" id="f_youtube_id" placeholder="es. H93UW4SX8zQ o incolla l'URL completo">
+                    <small style="color:var(--caffe2);font-size:0.72rem">ID 11 caratteri dopo <code>watch?v=</code> oppure incolla l’URL: in salvataggio viene estratto solo l’ID. Se il video non si vede, su YouTube Studio verifica che sia <strong>Pubblico</strong> e che incorporamento non sia disattivato.</small>
                   </div>
                   <div class="form-group form-full">
                     <label>🌐 Virtual Tour URL (Idealista, Kuula, Matterport...)</label>
@@ -5044,6 +5044,22 @@ function generatePropertySlug(d) {
   ).filter(Boolean).join('-');
 }
 
+/** Salva solo l'ID 11 caratteri (accetta anche URL incollati da YouTube) */
+function normalizeYouTubeIdForDb(raw) {
+  if (!raw || typeof raw !== 'string') return null;
+  const s = raw.trim();
+  if (!s) return null;
+  if (/^[a-zA-Z0-9_-]{11}$/.test(s)) return s;
+  let m = s.match(/[?&]v=([a-zA-Z0-9_-]{11})(?:[^0-9A-Za-z_-]|$)/);
+  if (m) return m[1];
+  m = s.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/);
+  if (m) return m[1];
+  m = s.match(/youtu\.be\/([a-zA-Z0-9_-]{11})/);
+  if (m) return m[1];
+  m = s.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+
 // LOAD IMMOBILI
 // ══════════════════════════════════════
 // Ricerca proprietario con clessidra (autocomplete live)
@@ -5533,7 +5549,7 @@ async function saveImmobile(e) {
     planimetrie: currentPlanimetrie,
     documenti: currentDocumenti,
     virtual_tour_scenes: currentVtScenes,
-    youtube_id: document.getElementById('f_youtube_id').value || null,
+    youtube_id: normalizeYouTubeIdForDb(document.getElementById('f_youtube_id').value),
     virtual_tour: document.getElementById('f_virtual_tour').value || null,
     // Ambienti
     soggiorno: document.getElementById('f_soggiorno').checked,
@@ -5741,9 +5757,54 @@ const _landingSeedPages = [
   { titolo: 'Vendere Casa a Padova', slug: 'landing-vendere-casa-padova', url: 'landing-vendere-casa-padova.html', categoria: 'vendita', descrizione: 'Landing ultra-ottimizzata keyword vendere casa Padova con CTA valutazione', stato: 'pubblicata', data_pubblicazione: '2026-03-01' }
 ];
 
+function landingPublicationRaw(p) {
+  if (!p) return null;
+  const v = p.data_pubblicazione ?? p.dataPubblicazione;
+  return v != null && String(v).trim() !== '' ? v : null;
+}
+
+function publicationTimeMs(p) {
+  const raw = landingPublicationRaw(p);
+  if (raw == null) return null;
+  const s = typeof raw === 'string' ? raw.trim() : String(raw);
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) {
+    const [y, m, d] = s.split('-').map(Number);
+    return Date.UTC(y, m - 1, d, 12, 0, 0);
+  }
+  const t = new Date(raw).getTime();
+  return Number.isNaN(t) ? null : t;
+}
+
+function sortLandingPagesByPublicationDesc(arr) {
+  if (!arr || !arr.length) return arr || [];
+  return [...arr].sort((a, b) => {
+    const ta = publicationTimeMs(a);
+    const tb = publicationTimeMs(b);
+    if (ta != null && tb != null && tb !== ta) return tb - ta;
+    if (ta == null && tb != null) return 1;
+    if (ta != null && tb == null) return -1;
+    const ca = a.created_at ? new Date(a.created_at).getTime() : 0;
+    const cb = b.created_at ? new Date(b.created_at).getTime() : 0;
+    if (cb !== ca) return cb - ca;
+    const ua = a.updated_at ? new Date(a.updated_at).getTime() : 0;
+    const ub = b.updated_at ? new Date(b.updated_at).getTime() : 0;
+    if (ub !== ua) return ub - ua;
+    return String((b.titolo || '')).localeCompare(String(a.titolo || ''), 'it');
+  });
+}
+
 async function getLandingPages() {
   try {
-    const { data, error } = await sb.from('landing_pages').select('*').order('created_at', { ascending: false });
+    let data = null;
+    let error = null;
+    const ordered = await sb.from('landing_pages').select('*').order('data_pubblicazione', { ascending: false, nullsFirst: false }).order('created_at', { ascending: false });
+    data = ordered.data;
+    error = ordered.error;
+    if (error) {
+      const fallback = await sb.from('landing_pages').select('*').order('created_at', { ascending: false });
+      data = fallback.data;
+      error = fallback.error;
+    }
     if (error) throw error;
     landingPages = data || [];
   } catch(e) {
@@ -5764,7 +5825,7 @@ async function getLandingPages() {
   });
   // Backfill: aggiorna data_pubblicazione mancante da seed
   landingPages.forEach(p => {
-    if (!p.data_pubblicazione) {
+    if (!landingPublicationRaw(p)) {
       const seed = seedBySlug[(p.slug || '').toLowerCase()];
       if (seed && seed.data_pubblicazione) {
         p.data_pubblicazione = seed.data_pubblicazione;
@@ -5775,6 +5836,7 @@ async function getLandingPages() {
       }
     }
   });
+  landingPages = sortLandingPagesByPublicationDesc(landingPages);
   try { localStorage.setItem('rig_landing_pages', JSON.stringify(landingPages)); } catch(e) {}
   return landingPages;
 }
@@ -5800,13 +5862,15 @@ async function loadLandingList() {
     return;
   }
 
-  const catEmoji = {vendita:'🏠',valutazione:'📊',agente:'👤',chat:'💬',promozione:'🎯',evento:'📅',altro:'📄'};
+  const catEmoji = {vendita:'🏠',valutazione:'📊',agente:'👤',chat:'💬',promozione:'🎯',evento:'📅',collaborazione:'🤝',mutuo:'🏦',offerta:'⚡',altro:'📄'};
+  const rows = sortLandingPagesByPublicationDesc(pages);
   wrap.innerHTML = `<table><thead><tr><th></th><th>Titolo</th><th>Tipo</th><th>URL</th><th>Stato</th><th>Pubblicazione</th><th>Azioni</th></tr></thead><tbody>${
-    pages.map(p => {
+    rows.map(p => {
       const statoBadge = p.stato === 'pubblicata' ? '<span class="badge badge-verde">Pubblicata</span>'
         : p.stato === 'programmata' ? '<span class="badge badge-oro">Programmata</span>'
         : '<span class="badge" style="background:var(--caffe3);color:#fff">Bozza</span>';
-      const dataPub = p.data_pubblicazione ? formatDateTime(p.data_pubblicazione) : '—';
+      const dpRow = landingPublicationRaw(p);
+      const dataPub = dpRow ? formatDateTime(dpRow) : '—';
       const urlSlug = (p.slug || p.url || '').replace(/\.html$/,'');
       const emoji = catEmoji[p.categoria] || '📄';
       return `<tr>
@@ -5839,7 +5903,8 @@ function toggleAllLanding(checked) {
 function checkScheduledLandings(pages) {
   const now = new Date();
   pages.forEach(p => {
-    if (p.stato === 'programmata' && p.data_pubblicazione && new Date(p.data_pubblicazione) <= now) {
+    const dp = landingPublicationRaw(p);
+    if (p.stato === 'programmata' && dp && new Date(dp) <= now) {
       p.stato = 'pubblicata';
       updateLandingStatus(p.id, 'pubblicata');
     }
@@ -5897,7 +5962,8 @@ async function editLandingPage(id) {
   document.getElementById('l_slug').value = p.slug || '';
   document.getElementById('l_categoria').value = p.categoria || 'altro';
   document.getElementById('l_url').value = p.url || '';
-  document.getElementById('l_data_pub').value = p.data_pubblicazione ? p.data_pubblicazione.slice(0, 16) : '';
+  const dpEdit = landingPublicationRaw(p);
+  document.getElementById('l_data_pub').value = dpEdit ? String(dpEdit).slice(0, 16) : '';
   document.getElementById('l_data_fine').value = p.data_fine ? p.data_fine.slice(0, 16) : '';
   document.getElementById('l_descrizione').value = p.descrizione || '';
   const statoRadio = document.querySelector('input[name=l_stato][value="' + (p.stato || 'bozza') + '"]');
@@ -5991,7 +6057,7 @@ function showSectionById(name) {
 function previewLandingPage(id) {
   const p = landingPages.find(x => x.id == id);
   if (!p) return;
-  const catEmoji = {vendita:'🏠',valutazione:'📊',agente:'👤',chat:'💬',promozione:'🎯',evento:'📅',altro:'📄'};
+  const catEmoji = {vendita:'🏠',valutazione:'📊',agente:'👤',chat:'💬',promozione:'🎯',evento:'📅',collaborazione:'🤝',mutuo:'🏦',offerta:'⚡',altro:'📄'};
   const catColors = {vendita:'#2C4A6E',valutazione:'#6C63FF',agente:'#00E5A0',chat:'#667eea',promozione:'#FF6B35',evento:'#FF6B35',altro:'#888'};
   const cat = p.categoria || 'altro';
   const emoji = catEmoji[cat] || '📄';
@@ -6011,7 +6077,8 @@ function previewLandingPage(id) {
     : p.stato === 'programmata' ? '<span class="badge badge-oro">Programmata</span>'
     : '<span class="badge" style="background:var(--caffe3);color:#fff">Bozza</span>';
   document.getElementById('landingPreviewDateCreated').textContent = p.created_at ? '📅 Creata: ' + formatDateTime(p.created_at) : '';
-  document.getElementById('landingPreviewDatePub').textContent = p.data_pubblicazione ? '🚀 Pubblicazione: ' + formatDateTime(p.data_pubblicazione) : '';
+  const dpPrev = landingPublicationRaw(p);
+  document.getElementById('landingPreviewDatePub').textContent = dpPrev ? '🚀 Pubblicazione: ' + formatDateTime(dpPrev) : '';
   document.getElementById('landingPreviewModal').classList.add('open');
 }
 function closeLandingPreviewModal() {
@@ -11844,7 +11911,7 @@ showSection = function(name) {
       }
       const sel = document.getElementById('emPickLanding');
       if (sel && landings.length) {
-        const catEmoji = {vendita:'🏠',valutazione:'📊',agente:'👤',chat:'💬',promozione:'🎯',evento:'📅',altro:'📄'};
+        const catEmoji = {vendita:'🏠',valutazione:'📊',agente:'👤',chat:'💬',promozione:'🎯',evento:'📅',collaborazione:'🤝',mutuo:'🏦',offerta:'⚡',altro:'📄'};
         landings.forEach(lp => {
           const opt = document.createElement('option');
           opt.value = lp.id || 'seed_' + lp.slug;
