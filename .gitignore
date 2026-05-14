@@ -1,3 +1,5 @@
+righetto_social/config/settings.json
+
 node_modules/
 supabase/.temp/
 # Evita commit accidentale di una copia annidata del repo

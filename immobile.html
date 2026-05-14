@@ -797,6 +797,22 @@ function cap(s) {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
+/** Accetta ID 11 caratteri o URL youtube.com / youtu.be — necessario se in DB è salvato il link intero */
+function normalizeYouTubeId(raw) {
+  if (raw == null || raw === '') return '';
+  const s = String(raw).trim();
+  if (!s) return '';
+  if (/^[a-zA-Z0-9_-]{11}$/.test(s)) return s;
+  let m = s.match(/[?&]v=([a-zA-Z0-9_-]{11})(?:[^0-9A-Za-z_-]|$)/);
+  if (m) return m[1];
+  m = s.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/);
+  if (m) return m[1];
+  m = s.match(/youtu\.be\/([a-zA-Z0-9_-]{11})/);
+  if (m) return m[1];
+  m = s.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/);
+  return m ? m[1] : '';
+}
+
 function render(d) {
   // Meta SEO — ricco di dettagli come Idealista
   const tipologia = cap(d.tipologia || d.categoria || 'Immobile');
@@ -863,12 +879,14 @@ function render(d) {
   }) : [];
   renderGallery(d, galleryFotos);
 
+  const ytNorm = normalizeYouTubeId(d.youtube_id);
+
   // Hero badges
   const badges = [];
   if (d.tipo_operazione === 'vendita') badges.push('<span class="gi-badge gb-vendita">Vendita</span>');
   if (d.tipo_operazione === 'affitto' || d.tipo_operazione?.includes('affitto')) badges.push('<span class="gi-badge gb-affitto">Affitto</span>');
   if (d.in_evidenza) badges.push('<span class="gi-badge gb-evidenza">★ In evidenza</span>');
-  if (d.youtube_id) badges.push('<span class="gi-badge gb-yt">▶ Video</span>');
+  if (ytNorm) badges.push('<span class="gi-badge gb-yt">▶ Video</span>');
   if (d.virtual_tour) badges.push('<span class="gi-badge gb-vt">● Tour 360°</span>');
   document.getElementById('heroBadges').innerHTML = badges.join('');
   document.getElementById('heroPrice').textContent = fmt(d.prezzo);
@@ -924,8 +942,8 @@ function render(d) {
   renderEnergia(d);
 
   // YouTube
-  if (d.youtube_id) {
-    ytId = d.youtube_id;
+  if (ytNorm) {
+    ytId = ytNorm;
     document.getElementById('s-video').style.display = 'block';
     document.getElementById('nav-video').style.display = 'inline-block';
   }
@@ -1187,9 +1205,20 @@ document.addEventListener('keydown', e => {
 });
 
 // ══ YOUTUBE ══
+function escapeIframeTitleAttr(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+}
 function loadYT() {
   if (!ytId) return;
-  document.getElementById('ytBox').innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?autoplay=1" allow="autoplay;encrypted-media;fullscreen" allowfullscreen></iframe>`;
+  const id = String(ytId).replace(/[^a-zA-Z0-9_-]/g, '');
+  if (id.length !== 11) return;
+  const src = 'https://www.youtube.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0';
+  const t = immobile && immobile.titolo && String(immobile.titolo).trim();
+  const vidTitle = t ? escapeIframeTitleAttr(t) : 'Video dell\'immobile';
+  document.getElementById('ytBox').innerHTML =
+    '<iframe src="' + src + '" title="' + vidTitle + '" loading="lazy" ' +
+    'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+    'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
 }
 
 // ══ SCROLL NAV ══
