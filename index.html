@@ -38,7 +38,7 @@
 <link rel="stylesheet" href="css/nav-mobile.css?v=4" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/below-fold.css?v=3" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="css/home-enhance.css?v=6" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/home-enhance.css?v=7" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/modal-incarico-home.css?v=2" media="all">
 <style>
 /* Critical font-face inline — elimina round-trip a fonts.css per above-fold */
@@ -85,28 +85,28 @@ button{font-family:inherit;cursor:pointer}
 ::-webkit-scrollbar-thumb{background:var(--blu3);border-radius:3px}
 
 #ricerca {
-  background: var(--testo);
+  background: var(--oro);
   padding: 0; position: relative; z-index: 50;
-  box-shadow: 0 6px 32px rgba(21,36,53,0.22);
-  border-top: 3px solid var(--oro);
+  box-shadow: 0 6px 28px rgba(255,107,53,0.35);
+  border-top: 3px solid var(--blu);
 }
 .ricerca-wrap {
   max-width: 1200px; margin: 0 auto;
 }
 .r-tabs {
-  display: flex; border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex; border-bottom: 1px solid rgba(21,36,53,0.14);
   padding: 0 28px; overflow-x: auto;
 }
 .r-tab {
   padding: 14px 20px; background: none; border: none;
   font-family: 'Montserrat',sans-serif; font-size: 0.72rem;
   font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-  color: rgba(255,255,255,0.72); cursor: pointer; white-space: nowrap;
+  color: rgba(21,36,53,0.72); cursor: pointer; white-space: nowrap;
   border-bottom: 3px solid transparent; margin-bottom: -1px;
   transition: all 0.2s;
 }
-.r-tab:hover { color: rgba(255,255,255,0.90); }
-.r-tab.active { color: white; border-bottom-color: var(--oro); }
+.r-tab:hover { color: var(--testo); }
+.r-tab.active { color: var(--testo); border-bottom-color: var(--blu); }
 .r-filtri {
   display: flex; align-items: stretch; flex-wrap: nowrap;
   min-height: 64px;
@@ -115,52 +115,52 @@ button{font-family:inherit;cursor:pointer}
   flex: 1; min-width: 0;
   display: flex; flex-direction: column; justify-content: center;
   padding: 10px 20px;
-  border-right: 1px solid rgba(255,255,255,0.07);
+  border-right: 1px solid rgba(21,36,53,0.12);
 }
 .r-field label {
   font-size: 0.56rem; font-weight: 700; letter-spacing: 2.5px;
-  text-transform: uppercase; color: rgba(255,255,255,0.65);
+  text-transform: uppercase; color: rgba(21,36,53,0.58);
   margin-bottom: 3px;
 }
 .r-field select, .r-field input {
   background: none; border: none; outline: none;
   font-family: 'Montserrat',sans-serif; font-size: 0.88rem;
-  font-weight: 600; color: white; width: 100%;
+  font-weight: 600; color: var(--testo); width: 100%;
   -webkit-appearance: none; appearance: none; cursor: pointer;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(255,255,255,0.35)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23152435' fill-opacity='0.45'/%3E%3C/svg%3E");
   background-repeat: no-repeat; background-position: right 0 center;
   padding-right: 16px;
 }
 .r-field input { background-image: none; padding-right: 0; }
-.r-field input::placeholder { color: rgba(255,255,255,0.60); }
+.r-field input::placeholder { color: rgba(21,36,53,0.50); }
 .r-field select option { background: var(--testo); color: white; }
 .r-field select optgroup { background: var(--testo); color: rgba(255,255,255,0.72); font-style: normal; font-size: 0.78rem; }
 .r-btn-cerca {
   display: flex; align-items: center; justify-content: center;
   gap: 10px; padding: 0 36px;
-  background: var(--oro); color: var(--testo);
+  background: var(--blu); color: #fff;
   font-family: 'Montserrat',sans-serif;
   font-weight: 800; font-size: 0.8rem; letter-spacing: 1.5px;
   text-transform: uppercase; border: none; cursor: pointer;
-  transition: all 0.22s; white-space: nowrap; min-width: 140px;
+  transition: background 0.22s, color 0.22s, transform 0.2s; white-space: nowrap; min-width: 140px;
 }
-.r-btn-cerca:hover { background: var(--oro2); }
+.r-btn-cerca:hover { background: var(--blu2); color: #fff; }
 .r-bot-hint {
   display: flex; align-items: center; gap: 12px;
   padding: 12px 28px; font-size: 0.78rem;
-  color: rgba(255,255,255,0.72);
-  border-top: 1px solid rgba(255,255,255,0.06);
+  color: rgba(21,36,53,0.82);
+  border-top: 1px solid rgba(21,36,53,0.12);
 }
-.r-bot-hint strong { color: var(--oro); cursor: pointer; font-weight: 700; }
+.r-bot-hint strong { color: var(--blu); cursor: pointer; font-weight: 700; }
 .r-bot-hint strong:hover { text-decoration: underline; }
 .r-bot-avatar {
   width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
-  background: rgba(255,107,53,0.12); border: 1.5px solid rgba(255,107,53,0.35);
+  background: rgba(44,74,110,0.12); border: 1.5px solid rgba(44,74,110,0.35);
   display: flex; align-items: center; justify-content: center;
 }
 @media(max-width:768px){
   .r-filtri { flex-direction: column; }
-  .r-field { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .r-field { border-right: none; border-bottom: 1px solid rgba(21,36,53,0.12); }
   .r-btn-cerca { min-height: 56px; width: 100%; }
 }
 
@@ -1071,10 +1071,10 @@ button svg, a.btn-p svg, a.btn-g svg {
     </div>
     <div class="r-bot-hint">
       <div class="r-bot-avatar">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--oro)" stroke-width="2" style="width:18px;height:18px;flex-shrink:0" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blu)" stroke-width="2" style="width:18px;height:18px;flex-shrink:0" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
       </div>
       <span>Non sai da dove iniziare?&nbsp;
-        <strong style="color:var(--oro);cursor:pointer" onclick="window.saraBot && saraBot.open()">Chiedi a Linda</strong>
+        <strong style="color:var(--blu);cursor:pointer" onclick="window.saraBot && saraBot.open()">Chiedi a Linda</strong>
         &nbsp;— la nostra AI ti guida nella ricerca e stima il valore di qualsiasi immobile.
       </span>
     </div>
