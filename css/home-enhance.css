@@ -146,8 +146,8 @@
     bottom: 1px;
     width: 36px;
     pointer-events: none;
-    background: linear-gradient(90deg, transparent, var(--oro));
-    opacity: 0.95;
+    background: linear-gradient(90deg, transparent, var(--blu));
+    opacity: 0.92;
   }
 }
 
