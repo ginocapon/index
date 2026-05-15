@@ -120,19 +120,19 @@
   transition: color 0.2s, border-color 0.2s, opacity 0.2s;
 }
 .r-tab:focus-visible {
-  outline: 2px solid var(--blu);
+  outline: 2px solid var(--oro);
   outline-offset: 2px;
 }
 .r-field:focus-within label {
-  color: #fff;
+  color: var(--nero);
 }
 .r-field select:focus,
 .r-field input:focus {
-  color: #fff;
+  color: var(--nero);
 }
 .r-btn-cerca:focus-visible {
-  outline: 3px solid var(--blu);
-  outline-offset: 3px;
+  outline: 3px solid rgba(255, 255, 255, 0.95);
+  outline-offset: 2px;
 }
 .r-tabs {
   position: relative;
@@ -147,7 +147,7 @@
     width: 36px;
     pointer-events: none;
     background: linear-gradient(90deg, transparent, var(--blu));
-    opacity: 0.92;
+    opacity: 0.85;
   }
 }
 
