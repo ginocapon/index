@@ -2106,15 +2106,17 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                     <option value="appartamento">Appartamento</option>
                     <option value="villa">Villa</option>
                     <option value="villetta">Villetta</option>
-                    <option value="attico">Attico</option>
+                    <option value="bifamiliare">Bi-familiare</option>
+                    <option value="attico">Attico / Mansarda</option>
                     <option value="bilocale">Bilocale</option>
                     <option value="trilocale">Trilocale</option>
                     <option value="monolocale">Monolocale</option>
                     <option value="ufficio">Ufficio</option>
                     <option value="negozio">Negozio</option>
+                    <option value="locale">Locale commerciale</option>
                     <option value="capannone">Capannone</option>
-                    <option value="terreno">Terreno</option>
-                    <option value="garage">Garage</option>
+                    <option value="terreno">Terreno / Rurale</option>
+                    <option value="garage">Garage / Box</option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -3319,13 +3321,19 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <select id="clienteTipologia">
                   <option value="">Qualsiasi</option>
                   <option value="appartamento">Appartamento</option>
-                  <option value="villa">Villa / Bifamiliare</option>
+                  <option value="villa">Villa</option>
+                  <option value="villetta">Villetta</option>
+                  <option value="bifamiliare">Bi-familiare</option>
                   <option value="attico">Attico / Mansarda</option>
-                  <option value="casa indipendente">Casa Indipendente</option>
-                  <option value="ufficio">Ufficio / Studio</option>
-                  <option value="negozio">Negozio / Locale</option>
+                  <option value="bilocale">Bilocale</option>
+                  <option value="trilocale">Trilocale</option>
+                  <option value="monolocale">Monolocale</option>
+                  <option value="casa indipendente">Casa indipendente</option>
+                  <option value="ufficio">Ufficio</option>
+                  <option value="negozio">Negozio</option>
+                  <option value="locale">Locale commerciale</option>
                   <option value="capannone">Capannone</option>
-                  <option value="terreno">Terreno</option>
+                  <option value="terreno">Terreno / Rurale</option>
                   <option value="garage">Garage / Box</option>
                 </select>
               </div>
@@ -3666,7 +3674,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <option value="Appartamento">Appartamento</option>
                 <option value="Villa / Villetta">Villa / Villetta</option>
                 <option value="Casa indipendente">Casa indipendente</option>
-                <option value="Bifamiliare">Bifamiliare</option>
+                <option value="Bifamiliare">Bi-familiare</option>
                 <option value="Rustico / Casale">Rustico / Casale</option>
                 <option value="Terreno">Terreno</option>
                 <option value="Commerciale / Ufficio">Commerciale / Ufficio</option>
@@ -6562,12 +6570,14 @@ const PREFISSI = {
   appartamento: 'APP',
   villa: 'VIL',
   villetta: 'VLT',
+  bifamiliare: 'BIF',
   attico: 'ATT',
   bilocale: 'BIL',
   trilocale: 'TRI',
   monolocale: 'MON',
   ufficio: 'UFF',
   negozio: 'NEG',
+  locale: 'LOC',
   capannone: 'CAP',
   terreno: 'TER',
   garage: 'GAR',

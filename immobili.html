@@ -677,11 +677,13 @@
         <select id="f-tipo" onchange="filterCards()">
           <option value="">Tutte</option>
           <option value="appartamento">Appartamento</option>
-          <option value="villa">Villa / Villetta</option>
-          <option value="bifamiliare">Bifamiliare</option>
+          <option value="villa">Villa</option>
+          <option value="villetta">Villetta</option>
+          <option value="bifamiliare">Bi-familiare</option>
           <option value="attico">Attico / Mansarda</option>
           <option value="bilocale">Bilocale</option>
           <option value="trilocale">Trilocale</option>
+          <option value="monolocale">Monolocale</option>
           <option value="ufficio">Ufficio</option>
           <option value="negozio">Negozio</option>
           <option value="locale">Locale commerciale</option>
@@ -1179,6 +1181,31 @@
   }
 
   // ── FILTER ──
+  /** Allinea tipologia DB (slug) e varianti testuali; Villa vs Villetta vs Bi-familiare. */
+  function tipologiaMatch(tipoRaw, titoloLower, filter) {
+    if (!filter) return true;
+    const t = (tipoRaw || '').toLowerCase().trim();
+    const tit = (titoloLower || '').toLowerCase();
+    const f = filter.toLowerCase();
+    if (f === 'bifamiliare') {
+      if (t.includes('bifamil') || t.includes('bi-famil') || t.includes('bi famili')) return true;
+      if (tit.includes('bifamil') || tit.includes('bi-famil') || tit.includes('bi famili')) return true;
+      return false;
+    }
+    if (f === 'villetta') {
+      return t.includes('villetta') || t.includes('a schiera') || (t.includes('schiera') && !t.includes('bifamil'));
+    }
+    if (f === 'villa') {
+      if (t.includes('villetta')) return false;
+      if (t.includes('bifamil') || t.includes('bi-famil') || t.includes('bi famili')) return false;
+      return t.includes('villa');
+    }
+    if (f === 'attico') return t.includes('attico') || t.includes('mansarda');
+    if (f === 'locale') return t.includes('locale');
+    if (f === 'garage') return t.includes('garage') || t.includes('box') || t.includes('posto auto');
+    return t.includes(f);
+  }
+
   function filterCards() {
     const zona = (document.getElementById('zona-input').value || '').toLowerCase();
     const tipo = document.getElementById('f-tipo').value;
@@ -1199,13 +1226,12 @@
 
     cards.forEach(c => {
       const cOp = c.dataset.op || 'vendita';
-      const cTipo = (c.dataset.tipo || '').toLowerCase();
       const cPrezzo = parseInt(c.dataset.prezzo) || 0;
       const cMq = parseInt(c.dataset.mq) || 0;
       const cCamere = parseInt(c.dataset.camere) || 0;
       const cBagni = parseInt(c.dataset.bagni) || 0;
       const cComune = (c.dataset.comune || '').toLowerCase();
-      const cTitle = c.querySelector('.card-title').textContent.toLowerCase();
+      const cTitle = (c.querySelector('.card-title') && c.querySelector('.card-title').textContent) ? c.querySelector('.card-title').textContent.toLowerCase() : '';
       const cAnno = parseInt(c.dataset.anno) || 0;
       const cStato = (c.dataset.stato || '').toLowerCase();
 
@@ -1218,8 +1244,8 @@
       } else {
         if (cOp !== currentOp) show = false;
       }
-      // Tipologia
-      if (tipo && !cTipo.includes(tipo)) show = false;
+      // Tipologia (slug + varianti; titolo usato solo per Bi-familiare se il campo DB non è aggiornato)
+      if (tipo && !tipologiaMatch(c.dataset.tipo || '', cTitle, tipo)) show = false;
       // Prezzo max
       if (cPrezzo > prezzoMax) show = false;
       // Camere min
