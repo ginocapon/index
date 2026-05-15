@@ -66,44 +66,57 @@
     .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:6px;font-size:.76rem;font-weight:500;text-decoration:none;letter-spacing:.04em;white-space:nowrap;transition:all .2s}
 .h-btn:hover{background:var(--oro2);transform:translateY(-1px)}
 
-    /* ── HERO SEARCH BAR (allineato a homepage #ricerca) ── */
+    /* ── HERO SEARCH BAR (sfondo blu; titoli leggibili; box filtri arancio in evidenza) ── */
     .hero-search{
-      background:var(--oro);
+      background:linear-gradient(135deg,var(--nero) 0%,var(--blu) 55%,#355a7d 100%);
       padding:2rem 1.5rem 0;
       position:relative;
       overflow:hidden;
-      box-shadow:0 6px 28px rgba(255,107,53,.35);
-      border-top:3px solid var(--blu);
+      box-shadow:0 8px 32px rgba(10,15,28,.38);
+      border-top:3px solid var(--oro);
     }
     .hero-search::before{
       content:'';
       position:absolute;
-      top:-60px;
-      right:-60px;
-      width:400px;
-      height:400px;
-      background:radial-gradient(circle,rgba(44,74,110,.12) 0%,transparent 70%);
+      top:-80px;
+      right:-40px;
+      width:420px;
+      height:420px;
+      background:radial-gradient(circle,rgba(255,107,53,.14) 0%,transparent 68%);
       pointer-events:none;
     }
     .hero-search-inner{max-width:1380px;margin:0 auto;position:relative;z-index:1}
     .hero-title{
       font-family:'Cormorant Garamond',serif;
-      font-size:2rem;
-      font-weight:300;
+      font-size:2.05rem;
+      font-weight:400;
       color:#fff;
-      margin-bottom:.85rem;
+      margin-bottom:.75rem;
       font-style:italic;
-      text-shadow:0 1px 3px rgba(0,0,0,.2);
+      line-height:1.28;
+      text-shadow:0 2px 6px rgba(0,0,0,.45),0 1px 0 rgba(0,0,0,.25);
     }
-    .hero-title strong{font-weight:600;font-style:normal;color:var(--blu)}
-    .hero-last-up{font-size:.85rem;color:rgba(255,255,255,.88);margin-top:.35rem;font-weight:600;text-shadow:0 1px 2px rgba(0,0,0,.15)}
+    .hero-title strong{
+      font-weight:700;
+      font-style:normal;
+      color:var(--oro);
+      text-shadow:0 2px 8px rgba(0,0,0,.35);
+    }
+    .hero-last-up{
+      font-size:.92rem;
+      color:#fff;
+      margin-top:.45rem;
+      font-weight:700;
+      letter-spacing:.03em;
+      text-shadow:0 2px 8px rgba(0,0,0,.5),0 1px 0 rgba(0,0,0,.2);
+    }
 
-    .s-tabs{display:flex;gap:8px;margin-bottom:0;padding:8px 0 0;border-bottom:1px solid rgba(255,255,255,.28);flex-wrap:wrap}
+    .s-tabs{display:flex;gap:8px;margin-bottom:0;padding:10px 0 0;border-bottom:1px solid rgba(255,255,255,.22);flex-wrap:wrap}
     .s-tab{
       padding:.65rem 1.1rem;
-      border:2px solid var(--blu);
+      border:2px solid rgba(255,255,255,.55);
       border-radius:10px;
-      background:rgba(44,74,110,.22);
+      background:rgba(255,255,255,.1);
       color:#fff;
       font-family:'Montserrat',sans-serif;
       font-size:.72rem;
@@ -111,12 +124,18 @@
       letter-spacing:.1em;
       text-transform:uppercase;
       cursor:pointer;
-      transition:background .2s,border-color .2s,box-shadow .2s;
-      text-shadow:0 1px 2px rgba(0,0,0,.18);
-      box-shadow:0 1px 0 rgba(255,255,255,.12) inset;
+      transition:background .2s,border-color .2s,box-shadow .2s,color .2s;
+      text-shadow:0 1px 3px rgba(0,0,0,.35);
+      box-shadow:0 1px 0 rgba(255,255,255,.1) inset;
     }
-    .s-tab:hover{background:rgba(44,74,110,.38);border-color:var(--blu2);color:#fff}
-    .s-tab.active{background:var(--blu);border-color:var(--blu);color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.55),0 2px 8px rgba(21,36,53,.25)}
+    .s-tab:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.85);color:#fff}
+    .s-tab.active{
+      background:var(--oro);
+      border-color:rgba(255,255,255,.92);
+      color:var(--nero);
+      text-shadow:none;
+      box-shadow:0 0 0 2px var(--blu2),0 4px 14px rgba(0,0,0,.28);
+    }
 
     .search-box{
       background:transparent;
@@ -139,7 +158,7 @@
       border:2px solid rgba(255,255,255,.95);
       box-shadow:0 0 0 3px var(--blu),0 2px 10px rgba(21,36,53,.15);
       border-radius:10px;
-      background:transparent;
+      background:var(--oro);
       box-sizing:border-box;
     }
     .sb-field.sb-zona{flex:1.15;min-width:200px}
@@ -147,9 +166,9 @@
       font-size:.58rem;
       letter-spacing:.12em;
       text-transform:uppercase;
-      color:rgba(255,255,255,.95);
+      color:rgba(21,36,53,.72);
       font-weight:800;
-      text-shadow:0 1px 2px rgba(0,0,0,.2);
+      text-shadow:none;
     }
     .sb-field select,.sb-field input{
       border:none;
@@ -159,24 +178,25 @@
       font-size:.9rem;
       font-weight:700;
       background:transparent;
-      color:#fff;
+      color:var(--testo);
       width:100%;
       transition:opacity .2s;
       -webkit-appearance:none;
       appearance:none;
       cursor:pointer;
       outline:none;
-      text-shadow:0 1px 2px rgba(0,0,0,.22);
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23ffffff' fill-opacity='0.92'/%3E%3C/svg%3E");
+      text-shadow:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23152435' fill-opacity='0.55'/%3E%3C/svg%3E");
       background-repeat:no-repeat;
       background-position:right 0 center;
       padding-right:1.1rem;
     }
     .sb-field input{background-image:none;padding-right:0}
+    .sb-field input::placeholder{color:rgba(21,36,53,.45);font-weight:600}
     .sb-field select:focus,.sb-field input:focus{opacity:1}
     .sb-field select option,.sb-field select optgroup{background:var(--testo);color:#fff}
     .sb-zona-wrap{position:relative}
-    .sb-zona-wrap svg{position:absolute;left:0;top:50%;transform:translateY(-50%);width:14px;height:14px;color:rgba(255,255,255,.88);pointer-events:none}
+    .sb-zona-wrap svg{position:absolute;left:0;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--blu);pointer-events:none;opacity:.9}
     .sb-zona-wrap select{padding-left:1.65rem!important;width:100%}
     .sb-sep{display:none}
     .sb-search-btn{
@@ -241,16 +261,16 @@
       border:2px solid rgba(255,255,255,.95);
       box-shadow:0 0 0 3px var(--blu),0 2px 8px rgba(21,36,53,.12);
       border-radius:10px;
-      background:transparent;
+      background:var(--oro);
       box-sizing:border-box;
     }
     .af-field label{
       font-size:.56rem;
       letter-spacing:.1em;
       text-transform:uppercase;
-      color:rgba(255,255,255,.92);
+      color:rgba(21,36,53,.72);
       font-weight:800;
-      text-shadow:0 1px 2px rgba(0,0,0,.18);
+      text-shadow:none;
     }
     .af-field select,.af-field input{
       border:none;
@@ -260,14 +280,14 @@
       font-size:.82rem;
       font-weight:700;
       background:transparent;
-      color:#fff;
+      color:var(--testo);
       outline:none;
       width:100%;
       cursor:pointer;
       -webkit-appearance:none;
       appearance:none;
-      text-shadow:0 1px 2px rgba(0,0,0,.2);
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23ffffff' fill-opacity='0.92'/%3E%3C/svg%3E");
+      text-shadow:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23152435' fill-opacity='0.55'/%3E%3C/svg%3E");
       background-repeat:no-repeat;
       background-position:right 0 center;
       padding-right:1rem;
@@ -277,7 +297,7 @@
     .af-field select:focus,.af-field input:focus{border:none}
     .af-range{display:flex;align-items:center;gap:.35rem}
     .af-range input{flex:1}
-    .af-range span{font-size:.72rem;color:rgba(255,255,255,.85)}
+    .af-range span{font-size:.72rem;color:rgba(21,36,53,.72);font-weight:600}
 
     /* ── LAYOUT ── */
     .page{max-width:1380px;margin:0 auto;padding:1.4rem 1.5rem;display:grid;grid-template-columns:1fr;gap:1.4rem;align-items:start}
@@ -457,7 +477,7 @@
   "@type": "SearchResultsPage",
   "name": "Immobili in vendita e affitto a Padova",
   "url": "https://righettoimmobiliare.it/immobili",
-      "dateModified": "2026-04-15",
+      "dateModified": "2026-05-15",
   "description": "Cerca immobili in vendita e affitto a Padova e nei 101 comuni della provincia.",
   "mainEntity": {
     "@type": "ItemList",
