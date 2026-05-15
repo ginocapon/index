@@ -124,15 +124,15 @@
   outline-offset: 2px;
 }
 .r-field:focus-within label {
-  color: var(--testo);
+  color: #fff;
 }
 .r-field select:focus,
 .r-field input:focus {
-  color: var(--testo);
+  color: #fff;
 }
 .r-btn-cerca:focus-visible {
-  outline: 3px solid rgba(255, 255, 255, 0.95);
-  outline-offset: 2px;
+  outline: 3px solid var(--blu);
+  outline-offset: 3px;
 }
 .r-tabs {
   position: relative;
