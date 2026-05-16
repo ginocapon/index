@@ -1,0 +1,10 @@
+{
+  "scheduler": {
+    "timezone": "Europe/Rome",
+    "run_windows_local_time": [
+      ["09:30", "11:30"],
+      ["13:00", "14:30"],
+      ["18:30", "21:00"]
+    ]
+  }
+}
