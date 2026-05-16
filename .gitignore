@@ -1,5 +1,10 @@
 righetto_social/config/settings.json
 
+# Segreti (Meta, Supabase service_role, ecc.) — non committare
+.env
+.env.*
+!.env.example
+
 node_modules/
 supabase/.temp/
 # Evita commit accidentale di una copia annidata del repo
