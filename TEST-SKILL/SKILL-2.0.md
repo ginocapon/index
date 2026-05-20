@@ -6,6 +6,8 @@
 > **Ultimo aggiornamento Google verificato:** 8 Marzo 2026
 > **Prossima verifica consigliata:** Aprile 2026
 >
+> **Changelog 20 Maggio 2026:** nuova **`skill-forms-leads.md`** — form landing/blog obbligatori: invio in pagina via `sendNotifica` + `richieste`, no redirect GET a Contatti, no GET su `send-mail.php`; `context-map.json` aggiornato.
+>
 > **Changelog 3 Aprile 2026:** eliminata la CTA Google legacy (sfondo rosso `#B71C1C`) su **45+** pagine (`blog-*`, `landing-*`); sostituita con `section.blog-rich-cta-strip` + link `css/blog-rich.css?v=2` dove mancava. Script riutilizzabili in `scripts/`: `migrate_legacy_red_google_cta.py`, `ensure_blog_rich_css_link.py`, `blog_add_rich_css_and_footer_cta.py`. Allineati claim aggressivi su `landing-vendita.html`, `landing-vendere-casa-padova.html`, `landing-agente.html` e messaggi chat (`landing-chat-vendita`, `landing-chat-insoddisfatti`) ai numeri consentiti in `CLAUDE.md`. `blog-articolo.html`: aggiunto `blog-rich.css` + CTA strip statica sotto il corpo dinamico.
 
 ---
@@ -63,7 +65,7 @@ Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se 
 | **API Email** | `api.righettoimmobiliare.it` — PHP relay su cPanel (mail() nativa, NO Brevo) |
 | **Email Marketing** | Admin → Supabase Edge Function → API relay — sistema completo nell'admin |
 | **Newsletter** | Solo raccolta contatti via form sito → tabella Supabase `newsletter_subscribers` |
-| **Form contatti** | Landing/contatti/chatbot → API relay diretto (config in `js/config.js`) |
+| **Form contatti** | Landing/blog/contatti/chatbot → `js/config.js` `sendNotifica()` → Edge `send-email` → relay PHP (vedi `skill-forms-leads.md`) |
 | **Analytics** | Google Analytics 4 (G-9MHDHHES26) |
 | **Chatbot AI** | "Sara" — assistente virtuale integrata |
 | **Repository** | GitHub — ginocapon/index |
@@ -74,15 +76,18 @@ Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se 
 > Tutto passa per `api.righettoimmobiliare.it` — un relay PHP su cPanel che usa `mail()` nativa.
 > Questo ci da' controllo totale, zero costi, zero limiti di terze parti.
 
-**Flusso email a 2 livelli:**
+**Flusso lead (sito pubblico) — obbligatorio su landing/blog/form:**
 
-1. **Frontend → API Relay (diretto)**
-   - Landing pages, form contatti, chatbot Sara
-   - Chiamano `https://api.righettoimmobiliare.it/send-mail.php`
-   - Auth: header `X-API-Key` (configurato in `js/config.js`)
-   - Azioni: `send`, `send_single`, `send_batch`, `ping`
+1. **Frontend** — `SERVIZI_CONFIG.sendNotifica()` (`js/config.js`) → **POST** Supabase Edge `/functions/v1/send-email` (`action: send_test`)
+2. **Edge Function** → **POST** `api.righettoimmobiliare.it/send-mail.php` (mai GET; mai chiamata diretta dal browser)
+3. **Supabase** — insert `richieste` con `provenienza` = slug pagina
+4. **UX** — invio in un passaggio, success inline; **vietato** solo `method="get"` verso `/contatti` senza `sendNotifica`
 
-2. **Admin Email Marketing → Supabase Edge Function → API Relay**
+> Skill dedicata: **`TEST-SKILL/skill-forms-leads.md`**. File modello: `contatti.html`, `landing-consulenza-immobiliare-gratuita.html`.
+
+**Flusso admin (campagne marketing):**
+
+1. **Admin Email Marketing → Supabase Edge Function → API Relay**
    - Campagne email massive dall'admin
    - Admin chiama `/functions/v1/send-email` su Supabase
    - Edge Function gestisce coda, tracking, blacklist, rate limiting
@@ -97,7 +102,8 @@ Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se 
 **File chiave:**
 - `api/send-mail.php` — relay PHP (236 righe, su cPanel)
 - `supabase/functions/send-email/index.ts` — Edge Function (407 righe)
-- `js/config.js` — `EMAIL_RELAY_URL`, `EMAIL_RELAY_KEY`
+- `js/config.js` — `sendNotifica()` (Edge Function, non URL relay nel browser)
+- `TEST-SKILL/skill-forms-leads.md` — checklist form landing/blog
 - `admin.html` — sezione Email Marketing (composizione, invio, tracking)
 
 ### 2.3 Architettura DNS (NON TOCCARE MAI)

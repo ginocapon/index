@@ -222,6 +222,20 @@ document.querySelectorAll('.faq-btn').forEach(btn => {
 
 ---
 
+## 7b. FORM LEAD (landing / servizi)
+
+Ogni landing con modulo contatto deve rispettare **`skill-forms-leads.md`** (logica) e questo blocco UI:
+
+- Wrapper `.v-form` o `.fbox-body` + `onsubmit` che blocca submit nativo
+- Checkbox GDPR `.v-chk` / `.fchk` con `required`
+- Pulsante submit full-width, stato disabled + testo «Invio in corso...»
+- Success box `.v-success` / `.fsuccess` — sfondo `#e8f5e9`, titolo serif, nascondere campi con `.is-sent .v-form-fields { display:none }`
+- **Un solo passaggio** — niente CTA «Continua su Contatti» come unico invio
+
+Script in fondo pagina: `config.js` + Supabase **senza defer** se handler inline subito sotto (vedi skill-forms-leads).
+
+---
+
 ## 8. CACHE E PERFORMANCE (Regole tecniche)
 
 ```apache
@@ -241,6 +255,6 @@ AddOutputFilterByType DEFLATE text/html text/css application/javascript image/sv
 - [ ] Immagini in formato WebP
 - [ ] Font con `font-display: swap` + preload above-fold
 - [ ] CSS critical inline, rest deferred (`media="print" onload="this.media='all'"`)
-- [ ] JS con `defer` (non `async` se dipendenze tra script)
+- [ ] JS con `defer` (non `async` se dipendenze tra script) — **eccezione:** pagine con form lead inline → `config.js` + Supabase senza defer (skill-forms-leads)
 - [ ] Nessun `loading="lazy"` above-the-fold
 - [ ] Security headers: `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`
