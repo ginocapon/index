@@ -24,23 +24,26 @@
 
 ## 2. ARCHITETTURA EMAIL (NO Brevo — tutto interno)
 
-**Flusso a 2 livelli:**
+**Flusso lead dal sito (landing, blog, contatti, chatbot):**
 
-1. **Frontend → API Relay (diretto)**
-   - Landing, form contatti, chatbot Sara
-   - Endpoint: `https://api.righettoimmobiliare.it/send-mail.php`
-   - Auth: header `X-API-Key` (config in `js/config.js`)
-   - Azioni: `send`, `send_single`, `send_batch`, `ping`
+1. **Browser** → `SERVIZI_CONFIG.sendNotifica()` in `js/config.js`
+2. **POST** → Supabase Edge Function `/functions/v1/send-email` (`action: send_test` → `info@righettoimmobiliare.it`)
+3. **Edge Function** → **POST** `https://api.righettoimmobiliare.it/send-mail.php` (header `X-API-Key`; **solo POST** — GET risponde `Solo POST`)
+4. Parallelo: insert tabella Supabase **`richieste`** (anon key) con campo **`provenienza`**
 
-2. **Admin Email Marketing → Supabase Edge Function → API Relay**
+> Implementazione obbligatoria: **`skill-forms-leads.md`**. Riferimento: `contatti.html`, `landing-consulenza-immobiliare-gratuita.html`.
+
+**Flusso admin (campagne marketing):**
+
+1. **Admin Email Marketing → Supabase Edge Function → API Relay**
    - Campagne massive dall'admin
    - Edge Function gestisce coda, tracking, blacklist, rate limiting
    - Tabelle Supabase: `campagne_email`, `coda_email`, `email_tracking`, `email_blacklist`
 
 **File chiave:**
-- `api/send-mail.php` — relay PHP (su cPanel)
+- `js/config.js` — `sendNotifica()` → Edge Function (frontend **non** chiama `send-mail.php` direttamente)
+- `api/send-mail.php` — relay PHP (solo server-side / Edge)
 - `supabase/functions/send-email/index.ts` — Edge Function
-- `js/config.js` — `EMAIL_RELAY_URL`, `EMAIL_RELAY_KEY`
 - `admin.html` — sezione Email Marketing
 
 ---

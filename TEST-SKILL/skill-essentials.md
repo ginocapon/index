@@ -33,6 +33,7 @@
 10. **CTA contrasto minimo 4.5:1** (WCAG AA) — MAI `var(--oro)` / `#FF6B35` con testo bianco
 11. **URL pulite** — MAI `.html` nei link interni. Tutti gli `href`, canonical, og:url, sitemap → senza `.html`
 12. **Cache-busting obbligatorio** — ogni CSS/JS linkato DEVE avere `?v=N`. Incrementare ad ogni modifica
+13. **Form lead (landing / blog / servizi)** — invio **in pagina** con `SERVIZI_CONFIG.sendNotifica()` + insert Supabase `richieste`; **mai** solo redirect GET a Contatti; **mai** chiamare `send-mail.php` dal browser. Dettaglio: **`TEST-SKILL/skill-forms-leads.md`**
 
 ### Registrazione automatica nuove pagine
 - **Blog** → `admin.html` (`_blogSeedArticles` con `data_pubblicazione: 'YYYY-MM-DD'`) + `blog.html` + `js/homepage.js` (staticMap + articoliStatici) + `sitemap.xml`
@@ -64,12 +65,14 @@
 - [ ] Min 5 FAQ con Schema FAQPage (AEO)
 - [ ] Author bio visibile (E-E-A-T) — solo blog
 - [ ] Se landing: `data_pubblicazione: 'YYYY-MM-DD'` in `_landingSeedPages`
+- [ ] Se landing o form lead: checklist **`skill-forms-leads.md`** (invio diretto, GDPR, provenienza, success inline)
 
 ### Checklist aggiuntiva blog
 - [ ] Registrato in TUTTI e 4: admin.html + blog.html + homepage.js + sitemap.xml
 - [ ] `data_pubblicazione: 'YYYY-MM-DD'` nel seed (BLOCCANTE per commit)
 - [ ] Cross-link con zone pages e service pages (min 3)
 - [ ] Timestamp "Ultimo aggiornamento" visibile
+- [ ] Se form/CTA lead in articolo: **`skill-forms-leads.md`** (stesso flusso di `contatti.html`)
 
 ### Checklist aggiuntiva zona page
 - [ ] Schema `Place` con `GeoCoordinates` + `sameAs`

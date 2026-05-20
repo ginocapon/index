@@ -4,6 +4,8 @@
 **LEGGI SEMPRE `SKILL-2.0.md` (in root: indice) e il testo completo in `TEST-SKILL/SKILL-2.0.md` prima di qualsiasi operazione.**
 La skill e' l'unica fonte di verita' per questo progetto.
 
+**Routing task:** `TEST-SKILL/context-map.json` — carica anche **`TEST-SKILL/skill-forms-leads.md`** per ogni **landing**, **blog con form/CTA lead** o fix invio email.
+
 ## Regole Automatiche
 
 ### Prima di ogni modifica:
@@ -17,6 +19,11 @@ La skill e' l'unica fonte di verita' per questo progetto.
 - No `will-change` permanente
 - CTA contrasto minimo 4.5:1 (WCAG AA)
 - Nessun CDN esterno
+
+### Form lead (landing / blog / servizi):
+- Invio **in pagina** (un passaggio): `SERVIZI_CONFIG.sendNotifica()` + insert Supabase `richieste` con `provenienza`
+- **Vietato:** solo redirect GET a `/contatti`; aprire `send-mail.php` nel browser (`Solo POST`)
+- Dettaglio completo: **`TEST-SKILL/skill-forms-leads.md`** — modello: `contatti.html`, `landing-consulenza-immobiliare-gratuita.html`
 
 ### Contenuti Blog:
 - Seguire template e checklist in `TEST-SKILL/SKILL-2.0.md` Sezioni 3, 5 e **8.1c** (anti-riempimento, asset, wordCount onesto)

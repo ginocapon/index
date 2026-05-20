@@ -1,19 +1,24 @@
 {
   "_note": "Routing guide: quale skill caricare per ogni tipo di task. skill-essentials.md va SEMPRE caricata.",
-  "_version": "1.0 — Marzo 2026",
+  "_version": "1.1 — Maggio 2026",
 
   "always_load": "TEST-SKILL/skill-essentials.md",
 
   "tasks": {
     "nuova_landing_page": {
-      "skills": ["skill-essentials.md", "skill-context.md", "skill-design.md"],
-      "token_stimati": "~1.400",
-      "note": "Serve architettura + componenti UI"
+      "skills": ["skill-essentials.md", "skill-forms-leads.md", "skill-context.md", "skill-design.md"],
+      "token_stimati": "~1.800",
+      "note": "Serve architettura + componenti UI + form invio diretto (sendNotifica + richieste)"
     },
     "nuovo_articolo_blog": {
-      "skills": ["skill-essentials.md", "skill-content.md"],
-      "token_stimati": "~1.800",
-      "note": "Serve template blog + standard contenuti + cluster"
+      "skills": ["skill-essentials.md", "skill-content.md", "skill-forms-leads.md"],
+      "token_stimati": "~2.000",
+      "note": "Serve template blog + contenuti; se CTA/form lead → skill-forms-leads"
+    },
+    "form_lead_invio_email": {
+      "skills": ["skill-essentials.md", "skill-forms-leads.md", "skill-context.md"],
+      "token_stimati": "~1.200",
+      "note": "Fix o nuovo form: POST send-email, provenienza, GDPR, no redirect GET a contatti"
     },
     "nuova_zona_page": {
       "skills": ["skill-essentials.md", "skill-content.md", "skill-seo.md"],

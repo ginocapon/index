@@ -67,6 +67,7 @@
 - [ ] Timestamp "Ultimo aggiornamento" visibile
 - [ ] Internal links a zone pages e service pages correlate (min 3)
 - [ ] CTA contestuale (valutazione, contatto, simulatore mutuo)
+- [ ] **Form lead in pagina** (se presente): seguire **`skill-forms-leads.md`** — invio diretto con `sendNotifica` + `richieste`, `provenienza: blog-{slug}`; non usare solo link a Contatti come sostituto dell’invio
 - [ ] Share bar (WhatsApp, Email, Copia link)
 - [ ] Articoli correlati (min 2)
 - [ ] Almeno 1 tabella comparativa con fonte
