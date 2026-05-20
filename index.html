@@ -1537,7 +1537,7 @@ button svg, a.btn-p svg, a.btn-g svg {
     <div class="fc-form">
       <div class="fc-ey">Siamo qui per te</div>
       <h2 class="fc-title">Parliamo del<br>tuo <span>immobile</span></h2>
-      <form id="contattoForm" onsubmit="inviaContatto(event)">
+      <form id="contattoForm" data-rig-lead-form data-provenienza="homepage" data-fields='{"nome":["#cf-nome","#cf-cognome"],"tel":"#cf-tel","email":"#cf-email","msg":"#cf-msg","gdpr":"#cf-gdpr"}' novalidate>
         <div class="fc-grid">
           <div class="fc-group"><label for="cf-nome">Nome *</label><input type="text" id="cf-nome" placeholder="Mario" required></div>
           <div class="fc-group"><label for="cf-cognome">Cognome *</label><input type="text" id="cf-cognome" placeholder="Rossi" required></div>
@@ -1562,8 +1562,8 @@ button svg, a.btn-p svg, a.btn-g svg {
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           Invia Richiesta
         </button>
-        <div class="fc-privacy">Inviando il modulo accetti la nostra <a href="privacy">Privacy Policy</a>. I tuoi dati saranno usati esclusivamente per rispondere alla tua richiesta.</div>
-        <div id="cf-ok"></div>
+        <label class="fc-privacy" style="display:flex;align-items:flex-start;gap:.5rem;margin:.5rem 0"><input type="checkbox" id="cf-gdpr" required style="margin-top:.2rem"><span>Acconsento al trattamento dei dati (GDPR). <a href="privacy">Privacy Policy</a>.</span></label>
+        <div class="rig-lead-success" id="cf-ok" style="display:none;margin-top:1rem;padding:1rem;background:#e8f5e9;border-radius:8px;text-align:center;color:#1b5e20"><h3 style="font-size:1.1rem;margin-bottom:.3rem">Messaggio inviato!</h3><p style="font-size:.85rem">Grazie. Ti ricontattiamo presto.</p></div>
       </form>
     </div>
   </div>
@@ -1595,7 +1595,9 @@ button svg, a.btn-p svg, a.btn-g svg {
   </div>
 </footer>
 
-<script src="js/config.js?v=3" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js?v=4"></script>
+<script src="js/rig-lead-form.js?v=1"></script>
 <script>/* Chatbot lazy: carica solo su interazione utente o dopo 8s */
 (function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=4';document.body.appendChild(s);}
 setTimeout(l,8000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});

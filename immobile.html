@@ -680,6 +680,7 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js?v=4"></script>
 <script>
 // ══ CONFIG ══
 const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
@@ -735,7 +736,7 @@ async function init() {
   // Strategy: if slug present, load all active and match by slug
   // If id/codice present, do direct lookup (backward compatibility)
   if (slug) {
-    const { data: all } = await sb.from('immobili').select('*');
+    const { data: all } = await sb.from('immobili').select('*').eq('attivo', true);
     if (all) {
       art = all.find(a => generatePropertySlug(a) === slug);
       // Fallback: try matching just the codice part from the slug

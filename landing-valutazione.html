@@ -522,8 +522,8 @@ img{max-width:100%;height:auto;display:block}
   <div style="margin-top:.4rem"><a href="/">Sito</a><a href="privacy">Privacy</a><a href="cookie-policy">Cookie</a><a href="contatti">Contatti</a></div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-<script src="js/config.js?v=3" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js?v=4"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="js/valutazione-pdf.js?v=3"></script>
@@ -569,7 +569,7 @@ async function sendLead(e){
   const zonaImm=document.getElementById('v-comune').value.trim();
   const dettagli=[tipoImm?'Tipo: '+tipoImm:'',zonaImm?'Zona: '+zonaImm:'',document.getElementById('v-mq').value?document.getElementById('v-mq').value+' mq':'',document.getElementById('v-vani').value||'',document.getElementById('v-stato').value?'Stato: '+document.getElementById('v-stato').value:'',document.getElementById('v-piano').value?'Piano: '+document.getElementById('v-piano').value:'',document.getElementById('v-garage').value?'Garage: '+document.getElementById('v-garage').value:'',document.getElementById('v-motivo').value?'Motivo: '+document.getElementById('v-motivo').value:''].filter(Boolean).join(' | ');
   let emailOk=false;
-  try{if(typeof SERVIZI_CONFIG!=='undefined'){emailOk=await SERVIZI_CONFIG.sendNotifica({subject:'LANDING VALUTAZIONE — '+nomeCompleto,html_body:'<b>Nome:</b> '+nomeCompleto+'<br><b>Email:</b> '+(email||'-')+'<br><b>Telefono:</b> '+tel+'<br><b>Dettagli:</b> '+dettagli+'<br><b>Newsletter:</b> '+(news?'Sì':'No'),reply_to:email||undefined});}}catch(e){}
+  try{if(typeof SERVIZI_CONFIG!=='undefined'){emailOk=await SERVIZI_CONFIG.sendNotifica({subject:'Nuovo contatto dal sito: '+nomeCompleto,html_body:'<b>Nome:</b> '+nomeCompleto+'<br><b>Email:</b> '+(email||'-')+'<br><b>Telefono:</b> '+tel+'<br><b>Dettagli:</b> '+dettagli+'<br><b>Newsletter:</b> '+(news?'Sì':'No'),reply_to:email||undefined});}}catch(e){}
   let supaOk=false;
   try{const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');if(sb){await sb.from('richieste').insert([{nome:nomeCompleto,email,telefono:tel,messaggio:'[LANDING VALUTAZIONE] '+dettagli,provenienza:'landing-valutazione',newsletter:news,letto:false}]);supaOk=true;if(news&&email){await sb.from('newsletter_subscribers').upsert([{email,nome:nomeCompleto,telefono:tel,tipo_immobile:tipoImm||null,zona:zonaImm||null,interesse:'valutazione',provenienza:'landing-valutazione',fonte:'landing-valutazione',attivo:true,created_at:new Date().toISOString()}],{onConflict:'email'}).catch(()=>{});}}}catch(e){}
   btn.disabled=false;btn.textContent='📊 RICHIEDI LA TUA STIMA SENZA IMPEGNO';

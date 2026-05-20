@@ -63,6 +63,7 @@ footer{background:linear-gradient(180deg,var(--nero),#0d1a2a);color:rgba(255,255
 .skip-link{position:absolute;top:-100%;background:var(--oro);color:var(--nero);padding:.46rem .9rem;z-index:9999}.skip-link:focus{top:0}
 @media(max-width:700px){.art-hero-img{height:288px}}
 </style>
+  <link rel="stylesheet" href="css/blog-lead-form.css?v=1">
 </head>
 <body>
 <a href="#main-content" class="skip-link">Contenuto principale</a>
@@ -166,9 +167,35 @@ footer{background:linear-gradient(180deg,var(--nero),#0d1a2a);color:rgba(255,255
 <a class="cta-deep" href="blog-planimetria-catastale-compravendita-padova-2026" style="background:var(--blu);color:#fff">Planimetrie e rogito</a>
 <div id="faq" style="margin-top:2rem"><h2 style="font-family:'Cormorant Garamond',serif;font-size:1.62rem;border-bottom:2px solid var(--oro);margin-bottom:.9rem">Domande frequenti</h2><div class="faq-item"><div class="faq-q">Esiste già un nuovo condono nel 2026?</div><div class="faq-a"><div class="faq-a-inner">Al maggio 2026 si tratta di proposte emendative alla Manovra e dibattito parlamentare: non è legge fino a approvazione definitiva.</div></div></div><div class="faq-item"><div class="faq-q">Cosa differenzia la proposta FdI dal condono 2003?</div><div class="faq-a"><div class="faq-a-inner">La proposta citata punterebbe a sanare abusi entro settembre 2025 su tutto il territorio, con perimetro diverso dal condono campano 2003 ancora in discussione.</div></div></div><div class="faq-item"><div class="faq-q">Balconi e tettoie rientrano?</div><div class="faq-a"><div class="faq-a-inner">Nelle ricostruzioni stampa compaiono portici, tettoie, balconi e ristrutturazioni senza aumento volumetria — verificare testo finale se approvato.</div></div></div><div class="faq-item"><div class="faq-q">Devo aspettare a vendere?</div><div class="faq-a"><div class="faq-a-inner">No per default: la regolarità urbanistica oggi resta quella vigente; ogni futura sanatoria avrà requisiti e costi propri.</div></div></div><div class="faq-item"><div class="faq-q">Chi verifica lo stato dell'immobile a Padova?</div><div class="faq-a"><div class="faq-a-inner">Geometra, tecnico o agenzia con due diligence documentale prima del rogito — vedi anche servizio preliminari.</div></div></div></div><div class="author-bio"><img src="img/team/titolari.webp" alt="Gino Capon Righetto Immobiliare" width="64" height="64" loading="lazy"><div><strong>Gino Capon</strong><p style="font-size:.8rem;color:#555">Titolare — Righetto Immobiliare, Limena (PD). Analisi di mercato per famiglie e investitori nel territorio patavino.</p><p style="font-size:.78rem;margin-top:.4rem"><a href="chi-siamo">Chi siamo</a></p></div></div><div class="related"><h3 style="font-family:'Cormorant Garamond',serif">Articoli correlati</h3><ul style="margin-left:1.1rem;margin-top:.4rem"><li><a href="blog-planimetria-catastale-compravendita-padova-2026">Planimetria e compravendita</a></li><li><a href="blog-ape-prestazione-energetica-acquisto-padova-2026">APE e acquisto</a></li><li><a href="landing-consulenza-immobiliare-gratuita">Consulenza gratuita</a></li></ul></div>
 </div></div>
+
+<section class="blog-lead-wrap" id="richiedi-consulenza" aria-labelledby="blog-lead-title">
+  <h2 id="blog-lead-title">Richiedi una consulenza gratuita</h2>
+  <form data-rig-lead-form data-provenienza="blog-condono-edilizio-proposte-2026" data-pagina="blog-condono-edilizio-proposte-2026" data-msg-prefix="[Blog]" novalidate>
+    <div class="bl-fields">
+      <label for="bl-nome">Nome e cognome *</label>
+      <input type="text" id="bl-nome" required autocomplete="name" placeholder="Mario Rossi">
+      <label for="bl-tel">Telefono *</label>
+      <input type="tel" id="bl-tel" required autocomplete="tel" placeholder="333 123 4567">
+      <label for="bl-email">Email</label>
+      <input type="email" id="bl-email" autocomplete="email" placeholder="mario@email.it">
+      <label for="bl-msg">Messaggio (opzionale)</label>
+      <textarea id="bl-msg" placeholder="Comune, obiettivo vendita/acquisto…"></textarea>
+      <label class="bl-chk"><input type="checkbox" id="bl-gdpr" required> Acconsento al trattamento dei dati (GDPR). <a href="privacy-policy">Privacy</a></label>
+      <button type="submit">Invia richiesta</button>
+    </div>
+    <div class="rig-lead-success">
+      <h3>Messaggio inviato!</h3>
+      <p>Grazie. Ti ricontattiamo entro pochi minuti negli orari di apertura.</p>
+    </div>
+  </form>
+</section>
+
 </main>
 <footer><div class="fi">&copy; 2026 Gruppo Immobiliare Righetto — P.IVA 05182390285 — Via Roma 96, Limena (PD)</div></footer>
 <script>document.querySelectorAll('.faq-q').forEach(function(q){q.addEventListener('click',function(){var p=this.parentElement,o=p.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(function(x){x.classList.remove('open');});if(!o)p.classList.add('open');});});</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js?v=4"></script>
+<script src="js/rig-lead-form.js?v=1"></script>
 <script src="js/nav-mobile.js?v=3" defer></script>
 <script src="js/cookie-consent.js?v=3" defer></script>
 </body></html>

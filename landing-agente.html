@@ -447,10 +447,12 @@ img{max-width:100%;height:auto;display:block}
   <div style="margin-top:.4rem"><a href="/">Sito</a><a href="privacy">Privacy</a><a href="cookie-policy">Cookie</a><a href="contatti">Contatti</a></div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-<script src="js/config.js?v=3" defer></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js?v=4"></script>
+<script src="js/rig-lead-form.js?v=1"></script>
 <script>
-async function sendLead(e){
+async function send(e){
   e.preventDefault();
   const nome=document.getElementById('a-nome').value.trim(),tel=document.getElementById('a-tel').value.trim(),email=document.getElementById('a-email').value.trim(),comune=document.getElementById('a-comune').value.trim(),gdpr=document.getElementById('a-gdpr').checked,news=document.getElementById('a-news').checked;
   const interesse=document.getElementById('a-interesse').value;

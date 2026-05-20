@@ -451,7 +451,7 @@
       <p>Rispondiamo entro 24 ore — nessun impegno</p>
     </div>
     <div class="fb-body">
-      <form onsubmit="return false;" novalidate>
+      <form data-rig-lead-form data-provenienza="form-preliminari" data-extra-labels='{"#f-note":"Note"}' novalidate>
       <div class="field"><label for="f-nome">Nome e Cognome *</label><input type="text" id="f-nome" placeholder="Mario Rossi"></div>
       <div class="field"><label for="f-tel">Telefono *</label><input type="tel" id="f-tel" placeholder="333 123 4567"></div>
       <div class="field"><label for="f-email">Email</label><input type="email" id="f-email" placeholder="mario@email.it"></div>
@@ -463,7 +463,8 @@
       <div class="field"><label for="f-comune">Comune dell'immobile</label><input type="text" id="f-comune" placeholder="Es. Padova, Limena, Selvazzano..."></div>
       <div class="field"><label for="f-note">Note</label><textarea id="f-note" placeholder="Descrivi brevemente la tua esigenza: tipo di immobile, tempistiche, eventuali problematiche note..."></textarea></div>
       <div class="fchk"><input type="checkbox" id="f-gdpr"><label for="f-gdpr">Acconsento al trattamento dei dati ai sensi del GDPR</label></div>
-      <button class="fsub" onclick="sendForm()">Richiedi consulenza</button>
+      <button class="fsub" type="submit">Richiedi consulenza</button>
+      <div class="rig-lead-success"><h3>Messaggio inviato!</h3><p>Grazie. Ti ricontattiamo entro pochi minuti durante gli orari di apertura.</p></div>
       </form>
       <a href="tel:+390498843484" class="fb-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>Oppure chiama <strong>049.88.43.484</strong></a>
     </div>
@@ -482,23 +483,12 @@
     <div class="fbot"><span>© 2026 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
   </div>
 </footer>
-<script>
-async function sendForm(){
-  const n=document.getElementById('f-nome').value.trim();
-  const t=document.getElementById('f-tel').value.trim();
-  if(!n||!t){alert('Inserisci nome e telefono');return}
-  if(!document.getElementById('f-gdpr').checked){alert('Accetta la privacy policy');return}
-  try{
-    const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');
-    if(sb){await sb.from('richieste').insert([{nome:n,telefono:t,messaggio:'Richiesta assistenza preliminare di compravendita',provenienza:'form-preliminari',letto:false}]);}
-    if(typeof SERVIZI_CONFIG!=='undefined'){await SERVIZI_CONFIG.sendNotifica({subject:'Form Preliminari — '+n,html_body:'<b>Nome:</b> '+n+'<br><b>Telefono:</b> '+t+'<br><b>Pagina:</b> Richiesta assistenza preliminare di compravendita'});}
-    alert('Richiesta inviata! Ti ricontatteremo entro 24 ore.');
-  }catch(e){alert('Errore. Chiama il 049.88.43.484')}
-}
-</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js?v=4"></script>
+<script src="js/rig-lead-form.js?v=1"></script>
 <script src="js/nav-mobile.js?v=3" defer></script>
-<script src="js/config.js?v=3" defer></script>
+<script src="js/config.js?v=4"></script>
 <script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */
 (function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=4';document.body.appendChild(s);}
 setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
