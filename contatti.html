@@ -204,7 +204,11 @@
       <h2>Inviaci un messaggio</h2>
       <p>Compilaci il form e ti ricontattiamo in pochi minuti</p>
     </div>
-    <div class="fbox-body"><form id="contact-form" onsubmit="sendForm();return false;" novalidate>
+    <div class="fbox-body">
+    <div id="prefill-hint" style="display:none;margin-bottom:1rem;padding:.85rem 1rem;background:var(--oro-bg);border:1px solid rgba(255,107,53,.25);border-radius:10px;font-size:.85rem;line-height:1.5">
+      <strong>Ultimo passo:</strong> i dati dalla landing sono già inseriti. Spunta la privacy e clicca <strong>Invia messaggio</strong> per inviarci la richiesta (stesso sistema che riceve la mail in agenzia).
+    </div>
+    <form id="contact-form" onsubmit="sendForm();return false;" novalidate>
       <div class="frow">
         <div class="field"><label for="f-nome">Nome <span style="color:var(--oro)">*</span></label><input type="text" id="f-nome" placeholder="Mario"></div>
         <div class="field"><label for="f-cog">Cognome <span style="color:var(--oro)">*</span></label><input type="text" id="f-cog" placeholder="Rossi"></div>
@@ -323,6 +327,51 @@
 <script src="js/nav-mobile.js?v=3" defer></script>
 <script src="js/config.js?v=3" defer></script>
 <script>
+(function prefillContattiFromUrl() {
+  var q = new URLSearchParams(window.location.search);
+  if (!q.toString()) return;
+  var nome = q.get('nome');
+  var tel = q.get('telefono') || q.get('tel');
+  var mail = q.get('email') || q.get('mail');
+  var msg = q.get('messaggio') || q.get('msg');
+  var oggetto = q.get('oggetto');
+  var tipo = q.get('tipo');
+  var prov = q.get('provenienza');
+  var form = document.getElementById('contact-form');
+  if (form && prov) form.dataset.provenienza = prov;
+  if (nome) {
+    var parts = nome.trim().split(/\s+/);
+    var fn = document.getElementById('f-nome');
+    var fc = document.getElementById('f-cog');
+    if (fn) fn.value = parts[0] || '';
+    if (fc) fc.value = parts.slice(1).join(' ') || '';
+  }
+  if (tel && document.getElementById('f-tel')) document.getElementById('f-tel').value = tel;
+  if (mail && document.getElementById('f-mail')) document.getElementById('f-mail').value = mail;
+  var sel = document.getElementById('f-obj');
+  var map = { vendita: 'Voglio vendere un immobile', acquisto: 'Voglio acquistare un immobile', affitto: 'Voglio affittare un immobile', investimento: 'Altro', valutazione: 'Valutazione gratuita del mio immobile' };
+  if (sel && tipo && map[tipo]) {
+    for (var i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].text === map[tipo]) { sel.selectedIndex = i; break; }
+    }
+  } else if (sel && oggetto) {
+    for (var j = 0; j < sel.options.length; j++) {
+      if (sel.options[j].text === 'Altro') { sel.selectedIndex = j; break; }
+    }
+  }
+  var fmsg = document.getElementById('f-msg');
+  if (fmsg) {
+    var lines = [];
+    if (oggetto) lines.push(oggetto);
+    if (tipo && map[tipo]) lines.push('Obiettivo: ' + map[tipo]);
+    if (msg) lines.push(msg);
+    if (lines.length) fmsg.value = lines.join('\n');
+  }
+  var hint = document.getElementById('prefill-hint');
+  if (hint && (nome || tel || oggetto)) hint.style.display = 'block';
+  if (form) form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+})();
+
 async function sendForm(){
   const nome = document.getElementById('f-nome').value.trim();
   const cognome = document.getElementById('f-cog').value.trim();
@@ -373,7 +422,7 @@ async function sendForm(){
         email: email,
         telefono: tel,
         messaggio: (oggetto ? '[' + oggetto + '] ' : '') + (zona ? 'Zona: ' + zona + ' — ' : '') + msg,
-        provenienza: 'form-contatti',
+        provenienza: (document.getElementById('contact-form') && document.getElementById('contact-form').dataset.provenienza) || 'form-contatti',
         newsletter: news,
         letto: false
       }]);
@@ -399,6 +448,12 @@ async function sendForm(){
 
   if (emailOk || supaOk) {
     document.getElementById('success').style.display = 'block';
+    var okP = document.querySelector('#success p');
+    if (okP) {
+      okP.textContent = emailOk
+        ? 'Grazie per averci contattato. Ti ricontattiamo entro pochi minuti durante gli orari di apertura.'
+        : 'Richiesta salvata nel gestionale. L\'avviso email all\'agenzia non è partito: controlla Admin → Richieste o richiama il 049 884 3484.';
+    }
     btn.style.display = 'none';
     ['f-nome','f-cog','f-tel','f-mail','f-zona','f-msg'].forEach(function(id){
       document.getElementById(id).value = '';
