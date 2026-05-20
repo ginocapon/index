@@ -32,8 +32,17 @@ const SERVIZI_CONFIG = {
           })
         }
       );
+      if (!r.ok) {
+        try {
+          const err = await r.json();
+          console.warn('sendNotifica fallita:', err);
+        } catch (_) { console.warn('sendNotifica HTTP', r.status); }
+      }
       return r.ok;
-    } catch(e) { return false; }
+    } catch(e) {
+      console.warn('sendNotifica errore rete:', e);
+      return false;
+    }
   },
 
   // ── EMAILJS (Email Marketing) ────────────────────────────
