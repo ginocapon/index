@@ -957,6 +957,30 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 .agenda-item.tipo-facebook .item-icon { background: #1877F2; color: white; }
 .agenda-item.tipo-instagram { background: #fde8f0; color: #c0392b; border-left: 3px solid #E1306C; }
 .agenda-item.tipo-instagram .item-icon { background: linear-gradient(45deg,#f09433,#dc2743); color: white; }
+.agenda-item.tipo-facebook_post { background: #e7f0ff; color: #1565c0; border-left: 3px solid #1877F2; }
+.agenda-item.tipo-facebook_post .item-icon { background: #1877F2; color: white; }
+.agenda-item.tipo-ig-story { background: #f3e5f5; color: #6a1b9a; border-left: 3px solid #9c27b0; }
+.agenda-item.tipo-ig-story .item-icon { background: linear-gradient(135deg,#ce93d8,#7b1fa2); color: white; }
+.agenda-item.tipo-ig-reel { background: #fce4ec; color: #880e4f; border-left: 3px solid #e91e63; }
+.agenda-item.tipo-ig-reel .item-icon { background: linear-gradient(135deg,#f48fb1,#ad1457); color: white; }
+.agenda-type-badge {
+  display: inline-block;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-right: 6px;
+  vertical-align: middle;
+  background: rgba(21,36,53,0.12);
+  color: var(--nero);
+}
+.agenda-item.tipo-facebook .agenda-type-badge,
+.agenda-item.tipo-facebook_post .agenda-type-badge { background: rgba(24,119,242,0.2); color: #0d47a1; }
+.agenda-item.tipo-instagram .agenda-type-badge { background: rgba(225,48,108,0.18); color: #880e4f; }
+.agenda-item.tipo-ig-story .agenda-type-badge { background: rgba(156,39,176,0.22); color: #4a148c; }
+.agenda-item.tipo-ig-reel .agenda-type-badge { background: rgba(233,30,99,0.22); color: #880e4f; }
 .agenda-item.tipo-google { background: #e8f5e9; color: #1b5e20; border-left: 3px solid #34A853; }
 .agenda-item.tipo-google .item-icon { background: #34A853; color: white; }
 .agenda-item.tipo-immobile { background: #fef9e0; color: #7d6608; border-left: 3px solid var(--oro); }
@@ -3715,12 +3739,100 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           </div>
         </div>
 
+        <details style="margin:0 0 14px;padding:12px 14px;background:#f5f8fc;border:1px solid rgba(44,74,110,0.18);border-radius:10px;font-size:0.78rem;line-height:1.55;color:var(--nero)">
+          <summary style="cursor:pointer;font-weight:700;color:#1565c0;user-select:none">Come si collega all&apos;automazione Meta · credenziali da tenere fuori dall&apos;admin</summary>
+          <p style="margin:10px 0 6px"><strong>Questa agenda</strong> organizza <em>cosa</em> pubblicare e <em>quando</em> (Facebook post, IG feed, Storia, Reel, Google, blog). La pubblicazione effettiva la fa uno <strong>script sul server</strong> (Python/Node + cron) che legge le righe da Supabase tabella <code>pianificazioni</code> (o backup locale se il DB non ha una colonna extra).</p>
+          <p style="margin:6px 0"><strong>Variabili tipiche</strong> per gli script (mai nel codice versionato):</p>
+          <ul style="margin:6px 0;padding-left:1.2rem">
+            <li><code>META_APP_ID</code>, <code>META_APP_SECRET</code></li>
+            <li><code>FACEBOOK_PAGE_ACCESS_TOKEN</code> (long-lived, con permessi Pagina)</li>
+            <li><code>INSTAGRAM_BUSINESS_ACCOUNT_ID</code> (IG User ID collegato alla Pagina)</li>
+          </ul>
+          <p style="margin:8px 0 0;font-size:0.74rem;color:var(--caffe2)"><strong>Link media</strong>: URL pagina immobile/blog (anteprima link). <strong>URL media diretto</strong>: .jpg/.webp/.png per foto o .mp4 pubblico per Reel/Storie video. <strong>Spintax</strong> nel campo testo: usa <code>{variante A|variante B}</code>. Se Supabase dà errore in salvataggio, esegui ad es. <code style="font-size:0.68rem">ALTER TABLE pianificazioni ADD COLUMN IF NOT EXISTS link_media text; ALTER TABLE pianificazioni ADD COLUMN IF NOT EXISTS corpo_spintax text; ALTER TABLE pianificazioni ADD COLUMN IF NOT EXISTS media_direct_url text;</code>. Il worker pubblica solo se parte tra l&apos;<strong>ora slot</strong> e <strong>slot + PUBLISH_WINDOW_MINUTES</strong> (default 18 min nel file <code>.env</code> dello script): pianifica il cron ogni 5–10 min in quel tratto.</p>
+        </details>
+
         <!-- Stats rapide agenda -->
         <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
           <div class="stat-card"><div class="stat-num" id="statAgendaTot">0</div><div class="stat-label">Programmati</div></div>
           <div class="stat-card green"><div class="stat-num" id="statAgendaPub">0</div><div class="stat-label">Pubblicati</div></div>
           <div class="stat-card blue"><div class="stat-num" id="statAgendaOggi">0</div><div class="stat-label">Oggi</div></div>
           <div class="stat-card" style="border-left-color:var(--caffe)"><div class="stat-num" id="statAgendaSettimana">0</div><div class="stat-label">Questa Settimana</div></div>
+        </div>
+
+        <div style="margin:0 0 16px;padding:14px 16px;background:#fffdf8;border:1px solid rgba(206,224,143,0.55);border-radius:10px;font-size:0.8rem;line-height:1.45;color:var(--nero)">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px">
+            <strong style="font-size:0.9rem;color:var(--caffe)">Pubblicazioni casuali (cron-style)</strong>
+            <span style="font-size:0.72rem;color:var(--caffe2)">Priorità ultimi 10 immobili + 10 articoli; poi archivio, landing e pagine sito. Non sostituisce programmi manuali.</span>
+          </div>
+          <div class="form-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;align-items:end">
+            <div class="form-group" style="margin:0">
+              <label style="font-size:0.72rem">Base URL sito</label>
+              <input type="url" id="autoPub_site_base" value="https://righettoimmobiliare.it" style="width:100%;padding:6px 8px;border:1px solid var(--caffe3);border-radius:8px;font-size:0.78rem">
+            </div>
+            <div class="form-group" style="margin:0">
+              <label style="font-size:0.72rem">Ogni quanti giorni</label>
+              <input type="number" id="autoPub_interval" value="2" min="1" max="30" style="width:100%;padding:6px 8px;border:1px solid var(--caffe3);border-radius:8px;font-size:0.78rem">
+            </div>
+            <div class="form-group" style="margin:0">
+              <label style="font-size:0.72rem">Orizzonte (giorni)</label>
+              <input type="number" id="autoPub_horizon_days" value="28" min="7" max="180" style="width:100%;padding:6px 8px;border:1px solid var(--caffe3);border-radius:8px;font-size:0.78rem">
+            </div>
+            <div class="form-group" style="margin:0">
+              <label style="font-size:0.72rem">Max slot da creare</label>
+              <input type="number" id="autoPub_max_slots" value="5" min="1" max="60" style="width:100%;padding:6px 8px;border:1px solid var(--caffe3);border-radius:8px;font-size:0.78rem">
+            </div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:14px;margin:12px 0;font-size:0.78rem">
+            <label class="check-item"><input type="checkbox" id="autoPub_mix_fb" checked> Picchi orari <strong>Facebook</strong> (mattina/pranzo/sera)</label>
+            <label class="check-item"><input type="checkbox" id="autoPub_mix_ig" checked> Picchi orari <strong>Instagram</strong></label>
+            <label class="check-item"><input type="checkbox" id="autoPub_only_active" checked> Solo immobili attivi (non venduti/affittati)</label>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin:4px 0 12px;font-size:0.76rem;color:var(--caffe2)">
+            <span style="font-weight:600;color:var(--nero)">Tipi da alternare:</span>
+            <label class="check-item"><input type="checkbox" id="autoPub_type_fb_feed" checked> FB feed (link)</label>
+            <label class="check-item"><input type="checkbox" id="autoPub_type_ig_feed" checked> IG feed (foto da copertina/immobile)</label>
+            <label class="check-item"><input type="checkbox" id="autoPub_type_ig_story" checked> IG storia (stessa immagine se disponibile)</label>
+            <label class="check-item"><input type="checkbox" id="autoPub_type_ig_reel"> IG reel (serve tuo .mp4 in URL diretto — non generato qui)</label>
+          </div>
+          <div class="form-group" style="margin:0 0 10px">
+            <label style="font-size:0.72rem">URL extra (uno per riga, path o URL completo)</label>
+            <textarea id="autoPub_extra_urls" rows="2" placeholder="/landing-mutuo&#10;https://youtube.com/..." style="width:100%;padding:8px;border:1px solid var(--caffe3);border-radius:8px;font-size:0.76rem;font-family:inherit"></textarea>
+          </div>
+          <div class="form-group" style="margin:0 0 8px">
+            <label style="font-size:0.72rem">Banca keyword / frasi (una per riga o separate da virgola; entrano nello spintax con altre varianti)</label>
+            <textarea id="autoPub_keyword_bank" rows="3" placeholder="es.&#10;mutuo prima casa&#10;trilocale ristrutturato&#10;investimento studenti Padova" style="width:100%;padding:8px;border:1px solid var(--caffe3);border-radius:8px;font-size:0.76rem;font-family:inherit" onchange="autoPubPersistPrefs()" onblur="autoPubPersistPrefs()"></textarea>
+          </div>
+          <div class="form-group" style="margin:0 0 8px">
+            <label style="font-size:0.72rem">Keyword da Trends / ricerche (incolla qui dopo aver controllato Google Trends; il browser non può leggerle da solo)</label>
+            <textarea id="autoPub_trends_kw" rows="2" placeholder="Una keyword per riga…" style="width:100%;padding:8px;border:1px solid var(--caffe3);border-radius:8px;font-size:0.76rem;font-family:inherit" onchange="autoPubPersistPrefs()" onblur="autoPubPersistPrefs()"></textarea>
+            <button type="button" class="btn btn-sm" style="margin-top:6px" onclick="autoPubOpenTrendsHint()">Apri Google Trends (IT) con query suggerita</button>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin:8px 0;font-size:0.76rem">
+            <label class="check-item"><input type="checkbox" id="autoPub_random_gallery" checked> Immobile: foto <strong>casuale</strong> dalla galleria (post/storie)</label>
+            <label class="check-item"><input type="checkbox" id="autoPub_ai_placeholder"> Se manca foto: immagine <strong>generata</strong> (servizio esterno Pollinations, solo fallback)</label>
+          </div>
+          <div class="form-group" style="margin:0 0 10px">
+            <label style="font-size:0.72rem">URL immagine statica di fallback (opzionale; usata se non c’è foto scheda né generazione)</label>
+            <input type="url" id="autoPub_fallback_static_url" placeholder="https://…jpg" style="width:100%;padding:6px 8px;border:1px solid var(--caffe3);border-radius:8px;font-size:0.78rem" onchange="autoPubPersistPrefs()" onblur="autoPubPersistPrefs()">
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+            <button type="button" class="btn btn-primary btn-sm" onclick="generateAutoAgendaSlots()">Genera slot casuali</button>
+            <span style="font-size:0.72rem;color:var(--caffe2)">Crea una riga in agenda per ogni data (stesso modello della programmazione manuale). Lo script Meta sul server legge <code>pianificazioni</code> ed esclude righe già pubblicate.</span>
+          </div>
+        </div>
+
+        <div style="margin:0 0 16px;padding:14px 16px;background:#f4f7fb;border:1px solid rgba(71,85,105,0.28);border-radius:10px;font-size:0.8rem;line-height:1.45;color:var(--nero)">
+          <strong style="font-size:0.9rem;color:var(--caffe)">Post già pubblicati — Pagina Facebook</strong>
+          <p style="margin:8px 0;font-size:0.73rem;color:var(--caffe2)">Elenco da Graph API (<code>published_posts</code>): sono i contenuti <strong>già online</strong>, non l&apos;agenda interna di Meta Business Suite (spesso non esposta via API). Per aggiornare: crea la tabella <code style="font-size:0.66rem">facebook_feed_cache</code> (<code style="font-size:0.66rem">sql/facebook-feed-cache.sql</code>), poi sul PC <code style="font-size:0.66rem">python sync_facebook_feed.py</code> con <code style="font-size:0.66rem">SUPABASE_KEY</code> service_role. Permesso token utile: <code style="font-size:0.66rem">pages_read_engagement</code>.</p>
+          <button type="button" class="btn btn-primary btn-sm" onclick="loadFacebookFeedCache()">Carica elenco da Supabase</button>
+          <div id="fbFeedCacheWrap" style="margin-top:12px;max-height:340px;overflow:auto;font-size:0.72rem"></div>
+        </div>
+
+        <div style="margin:0 0 16px;padding:14px 16px;background:#fdf8fc;border:1px solid rgba(120,80,120,0.25);border-radius:10px;font-size:0.8rem;line-height:1.45;color:var(--nero)">
+          <strong style="font-size:0.9rem;color:var(--caffe)">Contenuti già pubblicati — Instagram Business</strong>
+          <p style="margin:8px 0;font-size:0.73rem;color:var(--caffe2)">Elenco da Graph API (<code>/{ig-user-id}/media</code>): post/reel/carousel <strong>già online</strong>. SQL: <code style="font-size:0.66rem">sql/instagram-feed-cache.sql</code>. Sync PC: <code style="font-size:0.66rem">python sync_instagram_feed.py</code> (stesso <code style="font-size:0.66rem">.env</code> del worker + <code style="font-size:0.66rem">META_IG_USER_ID</code>). Permesso token: <code style="font-size:0.66rem">instagram_basic</code>.</p>
+          <button type="button" class="btn btn-primary btn-sm" onclick="loadInstagramFeedCache()">Carica elenco da Supabase</button>
+          <div id="igFeedCacheWrap" style="margin-top:12px;max-height:340px;overflow:auto;font-size:0.72rem"></div>
         </div>
 
         <!-- Griglia settimanale -->
@@ -3763,13 +3875,21 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           <div class="modal-body">
             <input type="hidden" id="agendaEditId">
             <div class="form-grid">
-              <div class="form-group">
-                <label>Piattaforma</label>
+              <div class="form-group form-full">
+                <label>Tipo pubblicazione</label>
                 <select id="agenda_tipo" onchange="agendaTipoChange()">
-                  <option value="facebook">Facebook</option>
-                  <option value="instagram">Instagram</option>
-                  <option value="google">Google Business</option>
-                  <option value="blog">Pubblicazione Blog</option>
+                  <optgroup label="Facebook">
+                    <option value="facebook_post">Post in Pagina (feed)</option>
+                  </optgroup>
+                  <optgroup label="Instagram">
+                    <option value="instagram_feed">Post nel feed</option>
+                    <option value="instagram_story">Storia</option>
+                    <option value="instagram_reel">Reel</option>
+                  </optgroup>
+                  <optgroup label="Altri canali">
+                    <option value="google">Google Business</option>
+                    <option value="blog">Pubblicazione blog (sito)</option>
+                  </optgroup>
                 </select>
               </div>
               <div class="form-group">
@@ -3789,6 +3909,21 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <label>Titolo / Descrizione</label>
                 <input type="text" id="agenda_titolo" placeholder="Es. Post lancio nuovo appartamento...">
               </div>
+              <div class="form-group form-full">
+                <label>Link media (opzionale)</label>
+                <input type="url" id="agenda_link_media" placeholder="https://…">
+                <p id="agenda_link_media_hint" style="font-size:0.72rem;color:var(--caffe2);margin-top:4px;line-height:1.4"></p>
+              </div>
+              <div class="form-group form-full">
+                <label>URL media diretto (opzionale)</label>
+                <input type="url" id="agenda_media_direct" placeholder="https://…/foto.webp oppure …/video.mp4">
+                <p style="font-size:0.7rem;color:var(--caffe2);margin-top:4px">HTTPS pubblico. Immagine: feed FB come foto, IG feed/storia. Video .mp4: reel/storia video. Se vuoto, lo script usa la pagina in &quot;Link media&quot; e/o copertina.</p>
+              </div>
+              <div class="form-group form-full">
+                <label>Testo pubblicazione (spintax)</label>
+                <textarea id="agenda_corpo_spintax" rows="4" placeholder="{Scopri|Guarda|Nuovo} … Usa {A|B|C} per varianti casuali al momento della pubblicazione."></textarea>
+                <p style="font-size:0.7rem;color:var(--caffe2);margin-top:4px">Se vuoto, usa il titolo. HTML viene ignorato dallo script.</p>
+              </div>
 
               <div class="section-divider">Programmazione Ricorrente</div>
 
@@ -3798,7 +3933,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               </div>
               <div class="form-group">
                 <label>&nbsp;</label>
-                <p style="font-size:0.75rem;color:var(--caffe2);margin-top:2px">L'orario in cui verr&agrave; pubblicato ogni giorno selezionato</p>
+                <p style="font-size:0.75rem;color:var(--caffe2);margin-top:2px"><strong>Ora nominale dello slot.</strong> Il worker pubblica solo se viene eseguito tra quest&apos;ora e +<strong id="agenda_wm_hint">18</strong> minuti (configura <code>PUBLISH_WINDOW_MINUTES</code> nel <code>.env</code> di <code>publish_from_agenda.py</code>, stesso valore qui sotto solo indicativo).</p>
               </div>
 
               <div class="form-group form-full">
@@ -4677,7 +4812,14 @@ const ADMIN_PASSWORD = "Spazio1999!";
 
 const URL_KEY = 'RIG2024';
 
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+/* Deve coincidere con public.righetto_admin_secret() in sql/rls-security-hardening.sql */
+const RIG_ADMIN_RLS_SECRET = 'RIG_SB_ADMIN_2026_CAMBIA_QUESTO_SEGRETO_LUNGO';
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+  global: {
+    headers: { 'x-righetto-admin': RIG_ADMIN_RLS_SECRET }
+  }
+});
 
 let currentFotos = [];
 let currentPlanimetrie = [];
@@ -4724,6 +4866,7 @@ function grantAccess() {
   sessionStorage.setItem('rig_admin', 'ok');
   document.getElementById('loginOverlay').style.display = 'none';
   document.getElementById('appWrapper').style.display = 'flex';
+  autoPubRestorePrefs();
   init().catch(err => {
     console.error('Errore inizializzazione:', err);
     document.getElementById('immobiliTableWrap').innerHTML = '<div class="empty-state"><h3>Errore di connessione</h3><p style="margin-top:8px;font-size:0.82rem;color:var(--rosso)">Impossibile caricare i dati. Ricarica la pagina.</p></div>';
@@ -5202,9 +5345,10 @@ function renderTable(data) {
       ? `<img src="${foto}" class="prop-thumb" onerror="this.style.display='none'">`
       : `<div class="prop-thumb-placeholder">📷</div>`;
 
+    const isAttivo = i.attivo === true || i.attivo === 'true' || i.attivo === 1;
     const stato = i.venduto ? `<span class="badge badge-rosso">Venduto</span>`
       : i.affittato ? `<span class="badge badge-rosso">Affittato</span>`
-      : i.attivo ? `<span class="badge badge-verde">Attivo</span>`
+      : isAttivo ? `<span class="badge badge-verde">Attivo</span>`
       : `<span class="badge badge-grigio">Disattivo</span>`;
 
     const tipo = i.tipo_operazione === 'vendita' ? `<span class="badge badge-blu">Vendita</span>`
@@ -5238,7 +5382,7 @@ function renderTable(data) {
           <button class="btn btn-action" onclick="quickPublishSocial('${i.id}')" title="Pubblica sui Social" style="background:#e8f5e9;color:#1877F2">📢</button>
           <button class="btn btn-action btn-danger" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')">🗑️</button>
           <button class="btn btn-action" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="${i.in_evidenza ? 'Rimuovi da evidenza' : 'Metti in evidenza'}" style="background:${i.in_evidenza ? '#e74c3c' : 'var(--sfondo)'};border:${i.in_evidenza ? '2px solid #c0392b' : '1px solid #ddd'};${i.in_evidenza ? 'color:#fff' : ''}">${i.in_evidenza ? '⭐' : '☆'}</button>
-          <button class="btn btn-action" onclick="toggleAttivo('${i.id}',${!i.attivo})" title="Toggle attivo" style="background:var(--sfondo)">${i.attivo ? '👁️' : '🚫'}</button>
+          <button class="btn btn-action" onclick="toggleAttivo('${i.id}',${!isAttivo})" title="Toggle attivo" style="background:var(--sfondo)">${isAttivo ? '👁️' : '🚫'}</button>
           <button class="btn btn-action" onclick="previewImmobile('${i.id}')" title="Anteprima rapida" style="background:#e8f5e9;color:#27ae60">🔍</button>
         </div>
       </td>
@@ -5730,14 +5874,62 @@ async function deleteImmobile(id, titolo) {
   await loadImmobili();
 }
 
+/** Toggle attivo/evidenza: RPC (affidabile) poi UPDATE con header admin. */
+async function _immobilePatchBool(id, patch, okMsg) {
+  const secret = typeof RIG_ADMIN_RLS_SECRET !== 'undefined' ? RIG_ADMIN_RLS_SECRET : '';
+  let data = null;
+  let error = null;
+
+  if (patch.attivo !== undefined && Object.keys(patch).length === 1 && secret) {
+    ({ data, error } = await sb.rpc('rig_admin_set_attivo', {
+      p_id: id,
+      p_attivo: !!patch.attivo,
+      p_secret: secret
+    }));
+  } else if (patch.in_evidenza !== undefined && Object.keys(patch).length === 1 && secret) {
+    ({ data, error } = await sb.rpc('rig_admin_set_evidenza', {
+      p_id: id,
+      p_in_evidenza: !!patch.in_evidenza,
+      p_secret: secret
+    }));
+  }
+
+  if (error && (error.message || '').includes('Could not find the function')) {
+    error = null;
+    data = null;
+  }
+
+  if (!data && !error) {
+    ({ data, error } = await sb.from('immobili').update(patch).eq('id', id).select('id'));
+  }
+
+  if (error) {
+    const hint = (error.message || '').includes('admin_unauthorized')
+      ? ' Segreto admin non valido: allinea RIG_ADMIN_RLS_SECRET in admin.html con righetto_admin_secret() in Supabase.'
+      : (error.message || '').includes('Could not find the function')
+        ? ' Esegui sql/rig-admin-rpc-immobili.sql in Supabase, oppure fai deploy di admin.html con header x-righetto-admin.'
+        : '';
+    toast('Errore Supabase: ' + error.message + hint, 'error');
+    return false;
+  }
+  if (!data || (Array.isArray(data) && !data.length)) {
+    toast(
+      'Modifica non salvata. 1) Esegui sql/rig-admin-rpc-immobili.sql in Supabase  2) Pubblica admin.html aggiornato (Ctrl+F5).',
+      'error'
+    );
+    return false;
+  }
+  await loadImmobili();
+  toast(okMsg, 'success');
+  return true;
+}
+
 async function toggleEvidenza(id, val) {
-  const { error } = await sb.from('immobili').update({ in_evidenza: val }).eq('id', id);
-  if (!error) { await loadImmobili(); toast(val ? '⭐ In evidenza!' : 'Rimosso da evidenza'); }
+  await _immobilePatchBool(id, { in_evidenza: !!val }, val ? '⭐ In evidenza!' : 'Rimosso da evidenza');
 }
 
 async function toggleAttivo(id, val) {
-  const { error } = await sb.from('immobili').update({ attivo: val }).eq('id', id);
-  if (!error) { await loadImmobili(); toast(val ? '✅ Immobile attivato' : '🚫 Immobile disattivato'); }
+  await _immobilePatchBool(id, { attivo: !!val }, val ? '✅ Immobile attivato' : '🚫 Immobile disattivato');
 }
 
 // ══════════════════════════════════════
@@ -8677,6 +8869,37 @@ let agendaExpanded = [];     // expanded single-day occurrences for current view
 let agendaWeekStart = null;
 let kwViews = {};
 
+function normalizeAgendaTipo(tipo) {
+  if (!tipo) return 'facebook_post';
+  if (tipo === 'facebook') return 'facebook_post';
+  if (tipo === 'instagram') return 'instagram_feed';
+  return tipo;
+}
+
+function agendaTipoCssClass(tipo) {
+  var t = normalizeAgendaTipo(tipo);
+  if (t === 'instagram_story') return 'tipo-ig-story';
+  if (t === 'instagram_reel') return 'tipo-ig-reel';
+  if (t === 'instagram_feed') return 'tipo-instagram';
+  if (t === 'facebook_post') return 'tipo-facebook_post';
+  if (t === 'google') return 'tipo-google';
+  if (t === 'blog') return 'tipo-blog';
+  return 'tipo-blog';
+}
+
+function agendaTipoShortLabel(tipo) {
+  var t = normalizeAgendaTipo(tipo);
+  switch (t) {
+    case 'facebook_post': return 'FB';
+    case 'instagram_feed': return 'IG';
+    case 'instagram_story': return 'Storia';
+    case 'instagram_reel': return 'Reel';
+    case 'google': return 'Google';
+    case 'blog': return 'Blog';
+    default: return '';
+  }
+}
+
 // ── Helpers ──
 function getMonday(d) {
   const dt = new Date(d);
@@ -8725,6 +8948,9 @@ function expandScheduleForWeek(sched, weekStart) {
       contenuto: sched.contenuto,
       titolo: sched.titolo,
       riferimento_id: sched.riferimento_id,
+      link_media: sched.link_media || '',
+      corpo_spintax: sched.corpo_spintax || '',
+      media_direct_url: sched.media_direct_url || '',
       keywords: sched.keywords || [],
       ora: ora,
       data: dateFmt(d),
@@ -8813,6 +9039,17 @@ function expandAllForWeek() {
   });
 }
 
+// ── Allinea alla finestra del worker (PUBLISH_WINDOW_MINUTES default .env = 18) ──
+var AGENDA_PUBLISH_WINDOW_MIN = 18;
+function agendaSlotWindowEndLabel(oraStr, plusMin) {
+  var p = (oraStr || '12:00').split(':');
+  var d = new Date();
+  d.setHours(parseInt(p[0], 10) || 0, parseInt(p[1], 10) || 0, 0, 0);
+  d.setMinutes(d.getMinutes() + plusMin);
+  var eh = d.getHours(), em = d.getMinutes();
+  return (eh < 10 ? '0' : '') + eh + ':' + (em < 10 ? '0' : '') + em;
+}
+
 // ── Render the weekly grid ──
 function renderAgendaGrid() {
   expandAllForWeek();
@@ -8885,18 +9122,21 @@ function renderAgendaGrid() {
       html += '<div class="agenda-cell' + (isToday ? ' today-col' : '') + '" onclick="openAgendaNewItem(\'' + dateStr + '\',\'' + hour + '\')">';
 
       cellItems.forEach(function(item) {
-        var tipoClass = 'tipo-' + (item.tipo || 'blog');
+        var tipoClass = agendaTipoCssClass(item.tipo);
         var statoClass = 'stato-' + (item.stato || 'programmato');
         var statusIcon = item.stato === 'pubblicato'
           ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#27ae60" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>'
           : '<svg width="14" height="14" viewBox="0 0 24 24" fill="#e67e22"><path d="M6 2v6l4 4-4 4v6h12v-6l-4-4 4-4V2H6zm10 15.5V20H8v-2.5l4-4 4 4zm-4-5l-4-4V4h8v4.5l-4 4z"/></svg>';
         var iconSvg = getAgendaTypeIcon(item.tipo);
         var timeLabel = item.ora || '';
+        var badge = agendaTipoShortLabel(item.tipo);
 
         var clickAction = item.is_email_campaign ? 'event.stopPropagation()' : 'event.stopPropagation();editAgendaItem(\'' + item.schedule_id + '\')';
-        html += '<div class="agenda-item ' + tipoClass + ' ' + statoClass + '" onclick="' + clickAction + '" title="' + escHtml(item.titolo || '') + ' (' + timeLabel + ')">';
+        var winEnd = agendaSlotWindowEndLabel(timeLabel, AGENDA_PUBLISH_WINDOW_MIN);
+        var tipRaw = (item.titolo || '') + ' · slot ' + timeLabel + '→' + winEnd + ' (worker max +' + AGENDA_PUBLISH_WINDOW_MIN + ' min)';
+        html += '<div class="agenda-item ' + tipoClass + ' ' + statoClass + '" onclick="' + clickAction + '" title="' + escHtml(tipRaw) + '">';
         html += '<span class="item-icon">' + iconSvg + '</span>';
-        html += '<span class="item-title">' + escHtml(item.titolo || item.tipo || '') + '</span>';
+        html += '<span class="item-title"><span class="agenda-type-badge">' + escHtml(badge) + '</span>' + escHtml(item.titolo || item.tipo || '') + '</span>';
         html += '<span class="item-status">' + statusIcon + '</span>';
         html += '</div>';
       });
@@ -8910,10 +9150,15 @@ function renderAgendaGrid() {
 }
 
 function getAgendaTypeIcon(tipo) {
-  switch(tipo) {
+  var t = normalizeAgendaTipo(tipo);
+  switch(t) {
     case 'blog': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>';
+    case 'facebook_post':
     case 'facebook': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>';
+    case 'instagram_feed':
     case 'instagram': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/></svg>';
+    case 'instagram_story': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>';
+    case 'instagram_reel': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><path fill="#fff" d="M10 9v6l5-3-5-3z"/></svg>';
     case 'google': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/></svg>';
     case 'email': return '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>';
     default: return '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>';
@@ -8963,9 +9208,12 @@ function updateAgendaStats() {
 function openAgendaNewItem(dateStr, hour) {
   document.getElementById('agendaEditId').value = '';
   document.getElementById('agendaModalTitle').textContent = 'Programma Pubblicazione Ricorrente';
-  document.getElementById('agenda_tipo').value = 'facebook';
+  document.getElementById('agenda_tipo').value = 'facebook_post';
   document.getElementById('agenda_contenuto').value = 'immobile';
   document.getElementById('agenda_titolo').value = '';
+  document.getElementById('agenda_link_media').value = '';
+  if (document.getElementById('agenda_media_direct')) document.getElementById('agenda_media_direct').value = '';
+  if (document.getElementById('agenda_corpo_spintax')) document.getElementById('agenda_corpo_spintax').value = '';
   document.getElementById('agenda_ora').value = hour || '12:30';
   document.getElementById('agenda_keywords').value = '';
   document.getElementById('agenda_note').value = '';
@@ -8988,6 +9236,7 @@ function openAgendaNewItem(dateStr, hour) {
 
   populateAgendaRefSelect();
   document.getElementById('agenda_riferimento').value = '';
+  agendaTipoChange();
   agendaPreviewDates();
   document.getElementById('agendaModal').classList.add('open');
 
@@ -9001,9 +9250,12 @@ function editAgendaItem(id) {
   if (!sched) return;
   document.getElementById('agendaEditId').value = sched.id;
   document.getElementById('agendaModalTitle').textContent = 'Modifica Programmazione';
-  document.getElementById('agenda_tipo').value = sched.tipo || 'facebook';
+  document.getElementById('agenda_tipo').value = normalizeAgendaTipo(sched.tipo || 'facebook_post');
   document.getElementById('agenda_contenuto').value = sched.contenuto || 'immobile';
   document.getElementById('agenda_titolo').value = sched.titolo || '';
+  document.getElementById('agenda_link_media').value = sched.link_media || '';
+  if (document.getElementById('agenda_media_direct')) document.getElementById('agenda_media_direct').value = sched.media_direct_url || '';
+  if (document.getElementById('agenda_corpo_spintax')) document.getElementById('agenda_corpo_spintax').value = sched.corpo_spintax || '';
   document.getElementById('agenda_ora').value = sched.ora || '12:30';
   document.getElementById('agenda_data_inizio').value = sched.data_inizio || '';
   document.getElementById('agenda_data_fine').value = sched.data_fine || '';
@@ -9017,6 +9269,7 @@ function editAgendaItem(id) {
 
   populateAgendaRefSelect();
   document.getElementById('agenda_riferimento').value = sched.riferimento_id || '';
+  agendaTipoChange();
   agendaPreviewDates();
   document.getElementById('agendaModal').classList.add('open');
   bindAgendaPreviewListeners();
@@ -9086,7 +9339,21 @@ function agendaPreviewDates() {
 }
 
 // ── Content type switching ──
-function agendaTipoChange() { populateAgendaRefSelect(); }
+function agendaTipoChange() {
+  populateAgendaRefSelect();
+  var tipo = document.getElementById('agenda_tipo').value;
+  var hint = document.getElementById('agenda_link_media_hint');
+  if (!hint) return;
+  var hints = {
+    facebook_post: 'Per anteprima link: URL pagina immobile/blog o YouTube. Per foto senza link: URL pubblico .jpg/.webp.',
+    instagram_feed: 'Opzionale: URL immagine principale (HTTPS pubblico) se lo script non usa solo immobile/blog.',
+    instagram_story: 'Consigliato: URL immagine o video verticale pubblico (HTTPS).',
+    instagram_reel: 'Serve URL diretto a file .mp4 pubblico (non la pagina web di YouTube).',
+    google: 'Opzionale: URL scheda o materiale da allegare al post.',
+    blog: 'Di solito basta l&apos;articolo selezionato sotto; link media solo se serve asset dedicato.'
+  };
+  hint.innerHTML = hints[tipo] || '';
+}
 function agendaContenutoChange() { populateAgendaRefSelect(); }
 function agendaRefChange() {
   var sel = document.getElementById('agenda_riferimento');
@@ -9121,6 +9388,595 @@ function populateAgendaRefSelect() {
   }
 }
 
+function autoPubStripHtml(html) {
+  if (!html) return '';
+  try {
+    var d = document.createElement('div');
+    d.innerHTML = String(html);
+    var t = d.textContent || d.innerText || '';
+    return t.replace(/\s+/g, ' ').trim();
+  } catch (e1) {
+    return String(html).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+}
+
+var AUTO_PUB_STOP_IT = { il: 1, lo: 1, la: 1, i: 1, gli: 1, le: 1, un: 1, uno: 1, una: 1, di: 1, da: 1, in: 1, a: 1, al: 1, dal: 1, del: 1, dei: 1, delle: 1, nell: 1, sul: 1, per: 1, con: 1, su: 1, tra: 1, fra: 1, che: 1, non: 1, ma: 1, come: 1, anche: 1, solo: 1, tutto: 1, questo: 1, questa: 1, sono: 1, essere: 1, stato: 1, stata: 1, stati: 1, delle: 1, degli: 1, qui: 1, cosa: 1, quando: 1, dove: 1, molto: 1, gia: 1, già: 1, ha: 1, hanno: 1, pu: 1, può: 1, pi: 1, più: 1, suo: 1, sua: 1, sue: 1, nei: 1, nelle: 1 };
+
+function autoPubTokenizeKeywords(text, maxN) {
+  var raw = String(text || '').toLowerCase().replace(/[^a-zàèéìòùóúäöüñ0-9\s-]/gi, ' ');
+  var parts = raw.split(/\s+/).filter(Boolean);
+  var out = [];
+  var seen = {};
+  for (var i = 0; i < parts.length && out.length < (maxN || 14); i++) {
+    var w = parts[i];
+    if (w.length < 4 || AUTO_PUB_STOP_IT[w]) continue;
+    if (seen[w]) continue;
+    seen[w] = 1;
+    out.push(w);
+  }
+  return out;
+}
+
+function autoPubParseLines(elId) {
+  var el = document.getElementById(elId);
+  if (!el || !el.value) return [];
+  return el.value.split(/[\n,;]+/).map(function(s) { return s.trim(); }).filter(Boolean);
+}
+
+function autoPubShuffle(arr, rnd) {
+  var a = arr.slice();
+  rnd = rnd || Math.random;
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(rnd() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+function autoPubSpinFromPool(pool, rnd, minOpts, maxOpts) {
+  var ps = autoPubShuffle(pool, rnd);
+  var n = Math.min(maxOpts || 12, Math.max(minOpts || 4, ps.length));
+  if (ps.length === 0) return '{immobiliare|casa|blog}';
+  if (ps.length === 1) return ps[0];
+  var slice = ps.slice(0, Math.min(n, ps.length));
+  if (slice.length < 2) slice.push(ps[0]);
+  return '{' + slice.join('|') + '}';
+}
+
+function autoPubSanitizePrompt(s) {
+  return String(s || '').replace(/[^a-zA-ZÀ-ÿ0-9\s,.-]/g, ' ').replace(/\s+/g, ' ').trim().substring(0, 240);
+}
+
+function autoPubPollinationsCoverUrl(cand) {
+  var basePrompt = 'Italian professional real estate photography bright interior editorial quality no text no watermark';
+  if (cand.contenuto === 'immobile') {
+    var im = allImmobili.find(function(x) { return x.id === cand.ref; });
+    if (im) {
+      basePrompt = [im.tipologia, im.tipo_operazione, im.comune, (im.titolo || im.codice || '').substring(0, 48)].filter(Boolean).join(' ');
+      basePrompt += ', professional property photo Italy, no text';
+    }
+  } else if (cand.ref && cand.contenuto === 'articolo') {
+    var a = blogArticles.find(function(x) { return x.id === cand.ref; });
+    if (a) basePrompt = (a.categoria || '') + ' ' + (a.titolo || '').substring(0, 80) + ', editorial photography Italy real estate, no text';
+  }
+  basePrompt = autoPubSanitizePrompt(basePrompt);
+  return 'https://image.pollinations.ai/prompt/' + encodeURIComponent(basePrompt) + '?width=1080&height=1350&nologo=true';
+}
+
+function autoPubRestorePrefs() {
+  try {
+    var kb = localStorage.getItem('rig_autoPub_kw_bank');
+    var tr = localStorage.getItem('rig_autoPub_trends_kw');
+    var fu = localStorage.getItem('rig_autoPub_fallback_img');
+    if (kb && document.getElementById('autoPub_keyword_bank')) document.getElementById('autoPub_keyword_bank').value = kb;
+    if (tr && document.getElementById('autoPub_trends_kw')) document.getElementById('autoPub_trends_kw').value = tr;
+    if (fu && document.getElementById('autoPub_fallback_static_url')) document.getElementById('autoPub_fallback_static_url').value = fu;
+  } catch (e2) {}
+}
+
+function autoPubPersistPrefs() {
+  try {
+    var kb = document.getElementById('autoPub_keyword_bank');
+    var tr = document.getElementById('autoPub_trends_kw');
+    var fu = document.getElementById('autoPub_fallback_static_url');
+    if (kb) localStorage.setItem('rig_autoPub_kw_bank', kb.value);
+    if (tr) localStorage.setItem('rig_autoPub_trends_kw', tr.value);
+    if (fu) localStorage.setItem('rig_autoPub_fallback_img', fu.value);
+  } catch (e3) {}
+}
+
+function autoPubOpenTrendsHint() {
+  var q = 'affitto vendita casa Padova';
+  var list = autoPubFilterImmobili();
+  if (list && list.length) {
+    var im = list[0];
+    q = [im.tipo_operazione || 'vendita', im.tipologia || 'immobile', im.comune || 'Padova'].filter(Boolean).join(' ');
+  }
+  window.open('https://trends.google.com/trends/explore?geo=IT&q=' + encodeURIComponent(q), '_blank');
+}
+
+function autoPubGetBaseUrl() {
+  var el = document.getElementById('autoPub_site_base');
+  var u = (el && el.value.trim()) || 'https://righettoimmobiliare.it';
+  return u.replace(/\/$/, '');
+}
+
+function autoPubFilterImmobili() {
+  var only = document.getElementById('autoPub_only_active') && document.getElementById('autoPub_only_active').checked;
+  if (!only) return allImmobili.slice();
+  return allImmobili.filter(function(i) {
+    return i.attivo && !i.venduto && !i.affittato;
+  });
+}
+
+var AUTO_PEAK_FB = ['09:15','12:30','18:15','20:00'];
+var AUTO_PEAK_IG = ['11:00','13:30','19:30','21:00'];
+
+function autoPubPickPeakHour(slotIndex, mixFb, mixIg) {
+  if (mixFb && mixIg) {
+    return slotIndex % 2 === 0
+      ? AUTO_PEAK_FB[slotIndex % AUTO_PEAK_FB.length]
+      : AUTO_PEAK_IG[slotIndex % AUTO_PEAK_IG.length];
+  }
+  if (mixIg) return AUTO_PEAK_IG[slotIndex % AUTO_PEAK_IG.length];
+  return AUTO_PEAK_FB[slotIndex % AUTO_PEAK_FB.length];
+}
+
+function agendaAbsoluteCoverFromCand(cand, rnd) {
+  rnd = rnd || Math.random;
+  var base = autoPubGetBaseUrl().replace(/\/$/, '');
+  var randGal = !document.getElementById('autoPub_random_gallery') || document.getElementById('autoPub_random_gallery').checked;
+  if (cand.contenuto === 'immobile') {
+    var im = allImmobili.find(function(x) { return x.id === cand.ref; });
+    if (!im || !Array.isArray(im.foto) || !im.foto.length) return '';
+    var idx = randGal ? Math.floor(rnd() * im.foto.length) : 0;
+    var u = im.foto[idx];
+    if (typeof u !== 'string') return '';
+    return u.indexOf('http') === 0 ? u : base + '/' + String(u).replace(/^\/+/, '');
+  }
+  if (cand.contenuto === 'articolo' && cand.ref) {
+    var a = blogArticles.find(function(x) { return x.id === cand.ref; });
+    if (!a || !a.immagine_copertina) return '';
+    var ic = a.immagine_copertina;
+    return ic.indexOf('http') === 0 ? ic : base + '/' + String(ic).replace(/^\/+/, '');
+  }
+  return '';
+}
+
+function autoPubMakeSpintaxBody(cand, rnd) {
+  rnd = rnd || Math.random;
+  var im = null;
+  var art = null;
+  if (cand.contenuto === 'immobile' && cand.ref) im = allImmobili.find(function(x) { return x.id === cand.ref; });
+  if (cand.contenuto === 'articolo' && cand.ref) art = blogArticles.find(function(x) { return x.id === cand.ref; });
+
+  var rawTitle = String(cand.titolo || '').replace(/\s*[·]\s*auto\s*$/i, '').replace(/^[\uD83C-\uDBFF\uDC00-\uDFFF\s]+/, '').trim();
+  var shortTitle = rawTitle.substring(0, 72);
+
+  var city = im ? String(im.comune || '').trim() : '';
+  var tipoOp = im ? String(im.tipo_operazione || '').trim() : '';
+  var tipol = im ? String(im.tipologia || im.categoria || '').trim() : '';
+  var prezzoFmt = im && im.prezzo ? '€ ' + Number(im.prezzo).toLocaleString('it-IT') : '';
+  var mqStr = im && im.superficie ? String(im.superficie) + ' mq' : '';
+  var localiStr = im && im.locali ? String(im.locali) + ' locali' : '';
+
+  var descSrc = im ? (im.descrizione || '') : (art ? (art.contenuto || '') : '');
+  var plainDesc = autoPubStripHtml(descSrc).substring(0, 360);
+  var extracted = autoPubTokenizeKeywords(plainDesc + ' ' + shortTitle + ' ' + city + ' ' + tipol, 16);
+
+  var bank = autoPubParseLines('autoPub_keyword_bank');
+  var trends = autoPubParseLines('autoPub_trends_kw');
+  var mergedKw = [];
+  var seenKw = {};
+  function pushKw(k) {
+    var x = String(k).trim();
+    if (x.length < 2 || seenKw[x.toLowerCase()]) return;
+    seenKw[x.toLowerCase()] = 1;
+    mergedKw.push(x);
+  }
+  bank.forEach(pushKw);
+  trends.forEach(pushKw);
+  extracted.forEach(pushKw);
+
+  var hooks = ['Nuovo in lista', 'Da vedere', 'Segnalazione', 'Opportunità sul territorio', 'Scopri sul sito', 'Aggiornamento', 'In vetrina', 'Scheda completa', 'Dettagli aggiornati', 'Novità portafoglio', 'Non perdertela', 'Chiedi una visita', 'Info in privato', 'Link in bio'];
+  var hooks2 = ['Righetto Immobiliare', 'Il nostro team', 'Consulenza su misura', 'Padova e provincia', 'Immobili reali', 'Affidabilità locale'];
+
+  var hookSpin = autoPubSpinFromPool(hooks, rnd, 10, 14);
+  var brandSpin = autoPubSpinFromPool(hooks2, rnd, 4, 6);
+
+  var kwSpin = mergedKw.length >= 2
+    ? autoPubSpinFromPool(mergedKw, rnd, Math.min(12, mergedKw.length), Math.min(24, mergedKw.length))
+    : '{immobiliare|casa|affitto|vendita|investimento|mutuo|garage|balcone}';
+
+  var factParts = [];
+  if (tipoOp) factParts.push(tipoOp);
+  if (tipol) factParts.push(tipol);
+  if (prezzoFmt) factParts.push(prezzoFmt);
+  if (mqStr) factParts.push(mqStr);
+  if (localiStr) factParts.push(localiStr);
+  if (city) factParts.push(city);
+
+  var factSpin = '';
+  if (factParts.length >= 2) factSpin = autoPubSpinFromPool(factParts, rnd, 3, Math.min(6, factParts.length));
+  else if (city) factSpin = '{' + city + '|Zona richiesta|Territorio|Provincia}';
+  else factSpin = '{Scopri online|Tutti i dettagli|Maggiori info|Approfondisci}';
+
+  var mid = '{Scheda sul sito|Articolo completo|Approfondimento|Leggi tutto|Sfoglia il blog|Tutte le foto}';
+
+  var hashPool = ['#immobiliare', '#casa', '#veneto', '#realestate', '#home', '#mutuo'];
+  if (city) {
+    var slugCity = city.replace(/\s+/g, '').toLowerCase().replace(/[^a-zàèéòù]/gi, '');
+    if (slugCity.length > 2) hashPool.push('#' + slugCity);
+  }
+  var hashSpin = autoPubSpinFromPool(hashPool, rnd, 2, 5);
+
+  var parts = [hookSpin + ' — ' + shortTitle, factSpin, mid, kwSpin, brandSpin + ' ' + hashSpin];
+  var out = parts.join('. ');
+  if (out.length > 1900) out = out.substring(0, 1897) + '\u2026';
+  return out;
+}
+
+function weightedRandomPick(pool, rndF) {
+  var rnd = rndF || Math.random;
+  var tw = 0;
+  for (var i = 0; i < pool.length; i++) tw += Math.max(1, pool[i].w);
+  var r = rnd() * tw;
+  for (var j = 0; j < pool.length; j++) {
+    r -= Math.max(1, pool[j].w);
+    if (r <= 0) return pool[j];
+  }
+  return pool[pool.length - 1];
+}
+
+function autoPubBuildCandidatePool() {
+  var base = autoPubGetBaseUrl();
+  var pool = [];
+
+  var imList = autoPubFilterImmobili().slice().sort(function(a, b) {
+    var ua = new Date(a.updated_at || a.created_at || 0).getTime();
+    var ub = new Date(b.updated_at || b.created_at || 0).getTime();
+    return ub - ua;
+  });
+
+  imList.slice(0, 10).forEach(function(i, idx) {
+    pool.push({
+      w: 22 - idx,
+      contenuto: 'immobile',
+      ref: i.id,
+      titolo: '🏠 ' + String(i.titolo || i.codice || 'Immobile').substring(0, 72),
+      link: base + '/immobile?s=' + encodeURIComponent(generatePropertySlug(i)),
+      tipoMedia: 'immobile'
+    });
+  });
+  imList.slice(10).forEach(function(i) {
+    pool.push({
+      w: 4,
+      contenuto: 'immobile',
+      ref: i.id,
+      titolo: '🏠 ' + String(i.titolo || '').substring(0, 72),
+      link: base + '/immobile?s=' + encodeURIComponent(generatePropertySlug(i)),
+      tipoMedia: 'immobile'
+    });
+  });
+
+  var blogs = blogArticles.slice().sort(function(a, b) {
+    var ua = new Date(a.updated_at || a.created_at || 0).getTime();
+    var ub = new Date(b.updated_at || b.created_at || 0).getTime();
+    return ub - ua;
+  });
+  blogs.slice(0, 10).forEach(function(a, idx) {
+    var slug = a.slug || generateSlug(a.titolo || '');
+    pool.push({
+      w: 22 - idx,
+      contenuto: 'articolo',
+      ref: a.id,
+      titolo: '📝 ' + String(a.titolo || 'Articolo').substring(0, 72),
+      link: base + '/blog-articolo?s=' + encodeURIComponent(slug),
+      tipoMedia: 'blog'
+    });
+  });
+  blogs.slice(10).forEach(function(a) {
+    var slug = a.slug || generateSlug(a.titolo || '');
+    pool.push({
+      w: 4,
+      contenuto: 'articolo',
+      ref: a.id,
+      titolo: '📝 ' + String(a.titolo || '').substring(0, 72),
+      link: base + '/blog-articolo?s=' + encodeURIComponent(slug),
+      tipoMedia: 'blog'
+    });
+  });
+
+  (landingPages || []).forEach(function(p) {
+    if ((p.stato || '') === 'bozza') return;
+    var path = p.url ? String(p.url) : ('/' + (p.slug || ''));
+    if (!path.startsWith('/')) path = '/' + path;
+    pool.push({
+      w: 3,
+      contenuto: 'articolo',
+      ref: null,
+      titolo: '📋 ' + String(p.titolo || p.slug || 'Landing').substring(0, 72),
+      link: base.replace(/\/$/, '') + path,
+      tipoMedia: 'landing'
+    });
+  });
+
+  ['/','/immobili','/blog','/chi-siamo','/servizi','/contatti','/faq'].forEach(function(path) {
+    pool.push({
+      w: 2,
+      contenuto: 'articolo',
+      ref: null,
+      titolo: '🌐 ' + (path === '/' ? 'Homepage' : path),
+      link: base.replace(/\/$/, '') + (path === '/' ? '/' : path),
+      tipoMedia: 'sito'
+    });
+  });
+
+  var extra = (document.getElementById('autoPub_extra_urls') && document.getElementById('autoPub_extra_urls').value) || '';
+  extra.split(/\n+/).map(function(s) { return s.trim(); }).filter(Boolean).forEach(function(line) {
+    var url = line.indexOf('http') === 0 ? line : base.replace(/\/$/, '') + (line.startsWith('/') ? line : '/' + line);
+    pool.push({
+      w: 3,
+      contenuto: 'articolo',
+      ref: null,
+      titolo: '🔗 ' + line.substring(0, 66),
+      link: url,
+      tipoMedia: 'extra'
+    });
+  });
+
+  return pool;
+}
+
+async function generateAutoAgendaSlots() {
+  if (!confirm('Generare slot casuali in agenda? Verranno aggiunte nuove righe (massimo il numero indicato), senza rimuovere quelle manuali.')) return;
+
+  autoPubPersistPrefs();
+
+  var interval = Math.max(1, parseInt(document.getElementById('autoPub_interval').value, 10) || 2);
+  var horizon = Math.max(interval, parseInt(document.getElementById('autoPub_horizon_days').value, 10) || 28);
+  var maxSlots = Math.max(1, parseInt(document.getElementById('autoPub_max_slots').value, 10) || 5);
+  var mixFb = document.getElementById('autoPub_mix_fb').checked;
+  var mixIg = document.getElementById('autoPub_mix_ig').checked;
+
+  var tipi = [];
+  var elFb = document.getElementById('autoPub_type_fb_feed');
+  var elIgF = document.getElementById('autoPub_type_ig_feed');
+  var elIgS = document.getElementById('autoPub_type_ig_story');
+  var elIgR = document.getElementById('autoPub_type_ig_reel');
+  if (elFb && elFb.checked) tipi.push('facebook_post');
+  if (elIgF && elIgF.checked) tipi.push('instagram_feed');
+  if (elIgS && elIgS.checked) tipi.push('instagram_story');
+  if (elIgR && elIgR.checked) tipi.push('instagram_reel');
+  if (!tipi.length) {
+    toast('Seleziona almeno un tipo (FB feed, IG feed, storia, reel).', 'error');
+    return;
+  }
+
+  if (!mixFb && !mixIg) {
+    toast('Seleziona almeno fascia oraria Facebook o Instagram.', 'error');
+    return;
+  }
+
+  var pool = autoPubBuildCandidatePool();
+  if (!pool.length) {
+    toast('Nessun contenuto nel pool (carica immobili/blog o aggiungi URL extra).', 'error');
+    return;
+  }
+
+  var dates = [];
+  var start = new Date();
+  start.setDate(start.getDate() + 1);
+  start.setHours(0, 0, 0, 0);
+  var endLimit = new Date(start);
+  endLimit.setDate(endLimit.getDate() + horizon);
+
+  for (var cursor = new Date(start); cursor <= endLimit && dates.length < maxSlots; cursor.setDate(cursor.getDate() + interval)) {
+    dates.push(new Date(cursor));
+  }
+
+  var rnd = Math.random;
+  var usedKeys = {};
+  var inserted = 0;
+
+  for (var i = 0; i < dates.length; i++) {
+    var day = dates[i];
+    var jsDay = day.getDay();
+    var peak = autoPubPickPeakHour(i, mixFb, mixIg);
+    var tipoPub = tipi[i % tipi.length];
+
+    var cand = null;
+    var tries = 0;
+    while (tries < 50) {
+      cand = weightedRandomPick(pool, rnd);
+      var key = String(cand.ref || cand.link || '') + '|' + dateFmt(day);
+      if (!usedKeys[key]) {
+        usedKeys[key] = true;
+        break;
+      }
+      tries++;
+    }
+
+    var ds = dateFmt(day);
+    var titolo = cand.titolo + ' · auto';
+    var note = '[AUTO] ' + cand.tipoMedia + ' · ' + cand.link;
+    var coverAbs = agendaAbsoluteCoverFromCand(cand, rnd);
+    var bodySpintax = autoPubMakeSpintaxBody(cand, rnd);
+
+    var kwPayload = [];
+    try {
+      kwPayload = autoPubParseLines('autoPub_keyword_bank').concat(autoPubParseLines('autoPub_trends_kw')).slice(0, 24);
+    } catch (kwE) { kwPayload = []; }
+
+    var mediaDirect = null;
+    if (tipoPub === 'instagram_reel') {
+      mediaDirect = null;
+    } else if (tipoPub === 'instagram_story' || tipoPub === 'instagram_feed' || tipoPub === 'facebook_post') {
+      mediaDirect = coverAbs || null;
+      if (!mediaDirect) {
+        var stEl = document.getElementById('autoPub_fallback_static_url');
+        var st = stEl && stEl.value.trim();
+        if (st) mediaDirect = st;
+      }
+      if (!mediaDirect && document.getElementById('autoPub_ai_placeholder') && document.getElementById('autoPub_ai_placeholder').checked) {
+        mediaDirect = autoPubPollinationsCoverUrl(cand);
+      }
+    }
+
+    var payload = {
+      tipo: tipoPub,
+      contenuto: cand.contenuto,
+      titolo: titolo,
+      riferimento_id: cand.ref || null,
+      ora: peak,
+      giorni: [jsDay],
+      data_inizio: ds,
+      data_fine: ds,
+      keywords: kwPayload,
+      note: note,
+      link_media: cand.link,
+      corpo_spintax: bodySpintax,
+      media_direct_url: mediaDirect,
+      updated_at: new Date().toISOString(),
+      created_at: new Date().toISOString()
+    };
+
+    try {
+      var res = await sb.from('pianificazioni').insert(payload);
+      if (res.error) throw res.error;
+      inserted++;
+    } catch (e) {
+      console.warn('Agenda auto locale:', e.message || e);
+      agendaSchedules.push(Object.assign({}, payload, { id: 'sched_auto_' + Date.now() + '_' + i + '_' + Math.random().toString(36).slice(2, 6) }));
+      try { localStorage.setItem('rig_agenda_schedules', JSON.stringify(agendaSchedules)); } catch (ex) {}
+      inserted++;
+    }
+  }
+
+  toast(inserted + ' pianificazioni casuali create.', 'success');
+  await getAgendaSchedules();
+  renderAgendaGrid();
+  renderKeywordStats();
+}
+
+/** Ultimi post Pagina FB (tabella facebook_feed_cache), aggiornata da sync_facebook_feed.py */
+window.__fbCacheRows = [];
+
+async function loadFacebookFeedCache() {
+  var wrap = document.getElementById('fbFeedCacheWrap');
+  if (!wrap) return;
+  wrap.innerHTML = '<p style="color:var(--caffe2);margin:0">Caricamento…</p>';
+  try {
+    var res = await sb.from('facebook_feed_cache').select('post_id,message,permalink_url,picture_url,created_time,synced_at').order('created_time', { ascending: false }).limit(50);
+    if (res.error) throw res.error;
+    var rows = res.data || [];
+    window.__fbCacheRows = rows;
+    if (!rows.length) {
+      wrap.innerHTML = '<p style="margin:0;color:var(--caffe2)">Nessun record. Esegui lo SQL <code style="font-size:0.68rem">sql/facebook-feed-cache.sql</code> su Supabase e sul PC <code style="font-size:0.68rem">python sync_facebook_feed.py</code> (chiave service_role).</p>';
+      return;
+    }
+    var tb = '<table style="width:100%;border-collapse:collapse"><thead><tr style="text-align:left;border-bottom:1px solid var(--caffe3)"><th style="padding:4px 6px">Quando</th><th style="padding:4px 6px">Testo</th><th style="padding:4px 6px;width:1%">Azioni</th></tr></thead><tbody>';
+    rows.forEach(function(r) {
+      var dt = r.created_time ? String(r.created_time).replace('T', ' ').slice(0, 16) : '—';
+      var msg = String(r.message || '(nessun testo / solo media)').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      if (msg.length > 140) msg = msg.slice(0, 137) + '\u2026';
+      tb += '<tr style="border-bottom:1px solid rgba(0,0,0,0.06)"><td style="padding:6px;vertical-align:top;white-space:nowrap">' + dt + '</td><td style="padding:6px;vertical-align:top">' + msg + '</td><td style="padding:6px;vertical-align:top;white-space:nowrap">';
+      tb += '<button type="button" class="btn btn-sm" onclick="openAgendaReuseFromFacebook(' + JSON.stringify(r.post_id) + ')">Riutilizza</button> ';
+      if (r.permalink_url) tb += '<a href="' + String(r.permalink_url).replace(/&/g, '&amp;').replace(/"/g, '&quot;') + '" target="_blank" rel="noopener noreferrer">Apri</a>';
+      tb += '</td></tr>';
+    });
+    tb += '</tbody></table>';
+    wrap.innerHTML = tb;
+  } catch (err) {
+    console.warn(err);
+    wrap.innerHTML = '<p style="margin:0;color:var(--rosso)">' + (err.message || String(err)) + '</p>';
+    toast('Cache Facebook: errore (manca tabella o policy RLS)', 'error');
+  }
+}
+
+function openAgendaReuseFromFacebook(postId) {
+  var rows = window.__fbCacheRows || [];
+  var row = rows.find(function(x) { return x.post_id === postId; });
+  if (!row) {
+    toast('Riga non trovata: ricarica l\'elenco.', 'error');
+    return;
+  }
+  openAgendaNewItem(dateFmt(new Date()), '18:30');
+  var snippet = (row.message || row.post_id || '').trim();
+  document.getElementById('agenda_titolo').value = 'Reuse FB · ' + snippet.substring(0, 72);
+  if (document.getElementById('agenda_corpo_spintax')) document.getElementById('agenda_corpo_spintax').value = row.message || '';
+  document.getElementById('agenda_link_media').value = row.permalink_url || '';
+  if (document.getElementById('agenda_media_direct')) document.getElementById('agenda_media_direct').value = row.picture_url || '';
+  document.getElementById('agenda_note').value = '[reuse FB post_id=' + row.post_id + ']';
+  document.getElementById('agenda_tipo').value = 'facebook_post';
+  document.getElementById('agenda_contenuto').value = 'articolo';
+  agendaTipoChange();
+  toast('Nuovo slot agenda: non modifica il post già pubblicato. Aggiorna date e salva.', 'success');
+}
+
+window.__igCacheRows = [];
+
+function agendaIgDirectUrl(row) {
+  if (!row) return '';
+  var t = String(row.media_type || '').toUpperCase();
+  if (t === 'IMAGE') return row.media_url || row.thumbnail_url || '';
+  if (t === 'VIDEO' || t === 'REELS') return row.thumbnail_url || row.media_url || '';
+  return row.media_url || row.thumbnail_url || '';
+}
+
+async function loadInstagramFeedCache() {
+  var wrap = document.getElementById('igFeedCacheWrap');
+  if (!wrap) return;
+  wrap.innerHTML = '<p style="color:var(--caffe2);margin:0">Caricamento…</p>';
+  try {
+    var res = await sb.from('instagram_feed_cache').select('media_id,caption,permalink,media_url,thumbnail_url,media_type,timestamp,synced_at').order('timestamp', { ascending: false }).limit(50);
+    if (res.error) throw res.error;
+    var rows = res.data || [];
+    window.__igCacheRows = rows;
+    if (!rows.length) {
+      wrap.innerHTML = '<p style="margin:0;color:var(--caffe2)">Nessun record. Esegui <code style="font-size:0.68rem">sql/instagram-feed-cache.sql</code> su Supabase e <code style="font-size:0.68rem">python sync_instagram_feed.py</code> sul PC.</p>';
+      return;
+    }
+    var tb = '<table style="width:100%;border-collapse:collapse"><thead><tr style="text-align:left;border-bottom:1px solid var(--caffe3)"><th style="padding:4px 6px">Quando</th><th style="padding:4px 6px">Tipo</th><th style="padding:4px 6px">Caption</th><th style="padding:4px 6px;width:1%">Azioni</th></tr></thead><tbody>';
+    rows.forEach(function(r) {
+      var dt = r.timestamp ? String(r.timestamp).replace('T', ' ').slice(0, 16) : '—';
+      var cap = String(r.caption || '(nessuna caption)').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      if (cap.length > 120) cap = cap.slice(0, 117) + '\u2026';
+      var mt = String(r.media_type || '—');
+      tb += '<tr style="border-bottom:1px solid rgba(0,0,0,0.06)"><td style="padding:6px;vertical-align:top;white-space:nowrap">' + dt + '</td><td style="padding:6px;vertical-align:top;white-space:nowrap;font-size:0.68rem">' + mt + '</td><td style="padding:6px;vertical-align:top">' + cap + '</td><td style="padding:6px;vertical-align:top;white-space:nowrap">';
+      tb += '<button type="button" class="btn btn-sm" onclick="openAgendaReuseFromInstagram(' + JSON.stringify(r.media_id) + ')">Riutilizza</button> ';
+      if (r.permalink) tb += '<a href="' + String(r.permalink).replace(/&/g, '&amp;').replace(/"/g, '&quot;') + '" target="_blank" rel="noopener noreferrer">Apri</a>';
+      tb += '</td></tr>';
+    });
+    tb += '</tbody></table>';
+    wrap.innerHTML = tb;
+  } catch (err) {
+    console.warn(err);
+    wrap.innerHTML = '<p style="margin:0;color:var(--rosso)">' + (err.message || String(err)) + '</p>';
+    toast('Cache Instagram: errore (manca tabella o policy RLS)', 'error');
+  }
+}
+
+function openAgendaReuseFromInstagram(mediaId) {
+  var rows = window.__igCacheRows || [];
+  var row = rows.find(function(x) { return x.media_id === mediaId; });
+  if (!row) {
+    toast('Riga non trovata: ricarica l\'elenco.', 'error');
+    return;
+  }
+  openAgendaNewItem(dateFmt(new Date()), '19:00');
+  var snippet = (row.caption || row.media_id || '').trim();
+  document.getElementById('agenda_titolo').value = 'Reuse IG · ' + snippet.substring(0, 72);
+  if (document.getElementById('agenda_corpo_spintax')) document.getElementById('agenda_corpo_spintax').value = row.caption || '';
+  document.getElementById('agenda_link_media').value = row.permalink || '';
+  if (document.getElementById('agenda_media_direct')) document.getElementById('agenda_media_direct').value = agendaIgDirectUrl(row);
+  document.getElementById('agenda_note').value = '[reuse IG media_id=' + row.media_id + ' type=' + (row.media_type || '') + ']';
+  document.getElementById('agenda_tipo').value = 'instagram_feed';
+  document.getElementById('agenda_contenuto').value = 'articolo';
+  agendaTipoChange();
+  toast('Nuovo slot feed IG: non ripubblica il vecchio post. Per Reel/Storia cambia il tipo nel modulo.', 'success');
+}
+
 // ── Save schedule ──
 async function saveAgendaItem() {
   var titolo = document.getElementById('agenda_titolo').value.trim();
@@ -9151,6 +10007,9 @@ async function saveAgendaItem() {
     data_fine: fine,
     keywords: keywords,
     note: document.getElementById('agenda_note').value.trim(),
+    link_media: (document.getElementById('agenda_link_media') && document.getElementById('agenda_link_media').value.trim()) || null,
+    corpo_spintax: (document.getElementById('agenda_corpo_spintax') && document.getElementById('agenda_corpo_spintax').value.trim()) || null,
+    media_direct_url: (document.getElementById('agenda_media_direct') && document.getElementById('agenda_media_direct').value.trim()) || null,
     updated_at: new Date().toISOString()
   };
 
