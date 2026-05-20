@@ -604,10 +604,12 @@ function loadVideoVendita(w){
 </footer>
 
 <!-- SCRIPTS -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-<script src="js/config.js?v=3" defer></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js?v=4"></script>
+<script src="js/rig-lead-form.js?v=1"></script>
 <script>
-async function sendLead(e){
+async function send(e){
   e.preventDefault();
   const nome=document.getElementById('l-nome').value.trim();
   const cognome=document.getElementById('l-cognome').value.trim();

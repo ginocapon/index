@@ -42,13 +42,29 @@ Browser (landing/blog/contatti)
 
 ---
 
-## 3. Template script (copia da contatti)
+## 3. Modulo condiviso (preferito)
+
+Per servizi, blog e landing semplici usa **`js/rig-lead-form.js`** con attributi sul form:
+
+```html
+<form data-rig-lead-form data-provenienza="servizio-vendita" data-extra-labels='{"#f-comune":"Comune"}' novalidate>
+  ...
+  <div class="rig-lead-success" style="display:none">...</div>
+</form>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js?v=4"></script>
+<script src="js/rig-lead-form.js?v=1"></script>
+```
+
+Migrazione batch: `python tools/migrate-forms-leads.py`
+
+## 3b. Template script manuale (copia da contatti)
 
 In fondo alla pagina, **prima** dello script inline di invio:
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/config.js?v=3"></script>
+<script src="js/config.js?v=4"></script>
 ```
 
 > **Senza `defer`** su queste due righe se lo script di submit è subito sotto. In alternativa: tutto `defer` + invio solo su `DOMContentLoaded` o al click dopo `await` su disponibilità di `SERVIZI_CONFIG`.

@@ -60,6 +60,7 @@ footer{background:linear-gradient(180deg,var(--nero),#0d1a2a);color:rgba(255,255
 @media(max-width:700px){.art-hero-img{height:288px}}
 .skip-link{position:absolute;top:-100%;background:var(--oro);color:var(--nero);padding:.46rem .9rem;z-index:9999}.skip-link:focus{top:0}
 </style>
+  <link rel="stylesheet" href="css/blog-lead-form.css?v=1">
 </head>
 <body>
 <a href="#main-content" class="skip-link">Contenuto principale</a>
@@ -123,9 +124,35 @@ footer{background:linear-gradient(180deg,var(--nero),#0d1a2a);color:rgba(255,255
 <li><a href="blog-prezzi-case-padova-zona-2026">Prezzi per zona</a></li>
 </ul></div>
 </div></div>
+
+<section class="blog-lead-wrap" id="richiedi-consulenza" aria-labelledby="blog-lead-title">
+  <h2 id="blog-lead-title">Richiedi una consulenza gratuita</h2>
+  <form data-rig-lead-form data-provenienza="blog-prospettive-mercato-residenziale-italia-2026" data-pagina="blog-prospettive-mercato-residenziale-italia-2026" data-msg-prefix="[Blog]" novalidate>
+    <div class="bl-fields">
+      <label for="bl-nome">Nome e cognome *</label>
+      <input type="text" id="bl-nome" required autocomplete="name" placeholder="Mario Rossi">
+      <label for="bl-tel">Telefono *</label>
+      <input type="tel" id="bl-tel" required autocomplete="tel" placeholder="333 123 4567">
+      <label for="bl-email">Email</label>
+      <input type="email" id="bl-email" autocomplete="email" placeholder="mario@email.it">
+      <label for="bl-msg">Messaggio (opzionale)</label>
+      <textarea id="bl-msg" placeholder="Comune, obiettivo vendita/acquisto…"></textarea>
+      <label class="bl-chk"><input type="checkbox" id="bl-gdpr" required> Acconsento al trattamento dei dati (GDPR). <a href="privacy-policy">Privacy</a></label>
+      <button type="submit">Invia richiesta</button>
+    </div>
+    <div class="rig-lead-success">
+      <h3>Messaggio inviato!</h3>
+      <p>Grazie. Ti ricontattiamo entro pochi minuti negli orari di apertura.</p>
+    </div>
+  </form>
+</section>
+
 </main>
 <footer><div class="fi">&copy; 2026 Gruppo Immobiliare Righetto — P.IVA 05182390285</div></footer>
 <script>document.querySelectorAll('.faq-q').forEach(function(q){q.addEventListener('click',function(){var p=this.parentElement,o=p.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(function(x){x.classList.remove('open');});if(!o)p.classList.add('open');});});</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js?v=4"></script>
+<script src="js/rig-lead-form.js?v=1"></script>
 <script src="js/nav-mobile.js?v=3" defer></script>
 <script src="js/cookie-consent.js?v=3" defer></script><script src="js/scroll-reveal.js?v=3" defer></script><script src="js/welcome-popup.js?v=3" defer></script>
 </body>
