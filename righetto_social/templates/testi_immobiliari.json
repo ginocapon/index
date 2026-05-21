@@ -1,0 +1,19 @@
+{
+  "tipologie": {
+    "vendita_appartamento": {
+      "titolo_pattern": "Nuovo annuncio | {zona} — {tipologia}",
+      "corpo_pattern": "🏠 {tipologia} in {zona}.\nSuperficie indicativa {mq} m². Richiesta {prezzo}.\n📞 Per informazioni e visita: contattaci in agenzia.",
+      "hashtag_suggeriti": ["#immobiliare", "#padova", "#casa", "#righettoimmobiliare"]
+    },
+    "affitto": {
+      "titolo_pattern": "Affitto | {zona}",
+      "corpo_pattern": "Chiavi in mano in {zona}. Contratto {tipo_contratto}.\nDettagli e disponibilità in agenzia.",
+      "hashtag_suggeriti": ["#affitto", "#padova", "#immobiliare"]
+    },
+    "agenzia_branding": {
+      "titolo_pattern": "{titolo_custom}",
+      "corpo_pattern": "{testo_custom}",
+      "hashtag_suggeriti": ["#righettoimmobiliare", "#padova"]
+    }
+  }
+}
