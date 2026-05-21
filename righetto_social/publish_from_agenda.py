@@ -31,6 +31,30 @@ PUB_ERR = "| PUB_ERR:"
 UA = "Mozilla/5.0 (compatible; RighettoAgendaBot/1.0; +https://righettoimmobiliare.it)"
 
 
+def expand_spintax(text: str) -> str:
+    """Sostituisce {a|b|c} con una variante (prima opzione = stabile per cron)."""
+    if not text:
+        return text
+
+    def repl(m: re.Match[str]) -> str:
+        parts = [p.strip() for p in m.group(1).split("|") if p.strip()]
+        return parts[0] if parts else ""
+
+    prev = None
+    out = text
+    while prev != out:
+        prev = out
+        out = re.sub(r"\{([^{}]+)\}", repl, out)
+    return out
+
+
+def caption_for_row(row: dict[str, Any]) -> str:
+    sp = (row.get("corpo_spintax") or "").strip()
+    if sp:
+        return expand_spintax(sp)[:2200]
+    return (row.get("titolo") or "Post").strip()[:2200]
+
+
 def load_env() -> None:
     load_dotenv(ROOT / ".env")
 
@@ -247,8 +271,10 @@ def main() -> int:
         rid = row.get("id")
         tipo = (row.get("tipo") or "").strip()
         titolo = (row.get("titolo") or "Post").strip()
+        caption = caption_for_row(row)
         note = row.get("note") or ""
         url_page = extract_public_url(row)
+        media_direct = (row.get("media_direct_url") or "").strip()
 
         if tipo in ("instagram_story", "instagram_reel"):
             msg = f"Tipo {tipo} non automatizzato in questo script (serve video/API dedicate)."
@@ -286,7 +312,7 @@ def main() -> int:
                     version=graph_v,
                     page_id=page_id,
                     token=token,
-                    message=titolo,
+                    message=caption or titolo,
                     link=url_page,
                 )
                 parts_log.append(f"fb={out.get('id','ok')}")
@@ -294,14 +320,18 @@ def main() -> int:
             elif tipo == "instagram_feed":
                 if not ig_id:
                     raise RuntimeError("META_IG_USER_ID mancante")
-                img = fetch_og_image(url_page)
+                img = media_direct if media_direct.startswith("http") else None
                 if not img:
-                    raise RuntimeError("Impossibile ricavare og:image dall'URL pagina")
+                    img = fetch_og_image(url_page)
+                if not img:
+                    raise RuntimeError(
+                        "Immagine mancante: media_direct_url o og:image dalla pagina"
+                    )
                 out = ig_create_and_publish(
                     version=graph_v,
                     ig_user_id=ig_id,
                     token=token,
-                    caption=titolo,
+                    caption=caption or titolo,
                     image_url=img,
                 )
                 parts_log.append(f"ig={out.get('publish', {}).get('id', 'ok')}")

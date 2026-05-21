@@ -1983,6 +1983,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
       <div class="nav-item" onclick="showSection('social')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         Social
+        <span class="nav-badge" id="badgeSocialBozze" style="display:none">0</span>
       </div>
       <div class="nav-item" onclick="showSection('landing')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
@@ -3511,6 +3512,23 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <div class="table-wrap" style="padding:28px;max-width:800px">
           <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:6px">Pubblicazione Social Media</h3>
           <p style="font-size:0.82rem;color:var(--caffe2);margin-bottom:20px">Configura le API per pubblicare gli immobili direttamente sui social media</p>
+
+          <div style="background:#fffdf8;border:2px solid var(--oro);border-radius:12px;padding:18px;margin-bottom:24px">
+            <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px">
+              <div>
+                <h4 style="font-size:1.05rem;color:var(--caffe);margin:0 0 4px">Bozze da pubblicare</h4>
+                <p style="font-size:0.76rem;color:var(--caffe2);margin:0;max-width:520px">3 slot/settimana (lun, mer, ven — no sab/dom). Generazione senza AI a pagamento: testi da template + contenuti sito. Tu approvi → va in Agenda → lo script Meta pubblica.</p>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button type="button" class="btn btn-primary btn-sm" onclick="generateWeeklySocialDrafts()">Genera bozze settimanali</button>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="loadSocialBozze()">Aggiorna elenco</button>
+              </div>
+            </div>
+            <p style="font-size:0.72rem;color:var(--caffe2);margin:0 0 10px">Prima esegui <code style="font-size:0.68rem">sql/bozze-social.sql</code> su Supabase. Reel: carica il tuo .mp4 sul sito e incolla l&apos;URL nella bozza prima di approvare. Guida server: <code style="font-size:0.68rem">righetto_social/README.md</code>.</p>
+            <div id="socialBozzeWrap" style="font-size:0.8rem;max-height:420px;overflow:auto">
+              <p style="color:var(--caffe2);margin:0">Caricamento bozze…</p>
+            </div>
+          </div>
 
           <!-- FACEBOOK -->
           <div style="background:var(--sfondo);border-radius:12px;padding:18px;margin-bottom:16px">
@@ -8128,6 +8146,244 @@ function quickPublishSocial(id) {
   }, 200);
 }
 
+window.__socialBozzeRows = [];
+
+function socialBozzeExpandSpintax(text) {
+  if (!text) return '';
+  var out = String(text);
+  var prev;
+  do {
+    prev = out;
+    out = out.replace(/\{([^{}]+)\}/g, function(_, inner) {
+      var parts = inner.split('|').map(function(p) { return p.trim(); }).filter(Boolean);
+      return parts[0] || '';
+    });
+  } while (prev !== out);
+  return out;
+}
+
+function socialBozzeNextWeekdays(count) {
+  var out = [];
+  var cursor = new Date();
+  cursor.setDate(cursor.getDate() + 1);
+  cursor.setHours(0, 0, 0, 0);
+  var allow = { 1: true, 3: true, 5: true };
+  while (out.length < count) {
+    if (allow[cursor.getDay()]) out.push(new Date(cursor));
+    cursor.setDate(cursor.getDate() + 1);
+    if (out.length === 0 && (cursor - new Date()) > 86400000 * 25) break;
+  }
+  return out;
+}
+
+function socialBozzeDateFmt(d) {
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+
+async function getSocialBozzeRows() {
+  window.__socialBozzeLoadError = '';
+  try {
+    var res = await sb.from('bozze_social').select('*').eq('stato', 'bozza').order('data_pubblicazione_proposta', { ascending: true });
+    if (res.error) {
+      window.__socialBozzeLoadError = res.error.message || String(res.error);
+      console.warn('bozze_social:', res.error);
+    } else if (res.data && res.data.length) {
+      return res.data;
+    }
+  } catch (e) {
+    window.__socialBozzeLoadError = e.message || String(e);
+    console.warn('bozze_social:', e);
+  }
+  try {
+    var local = JSON.parse(localStorage.getItem('rig_social_bozze') || '[]');
+    var loc = local.filter(function(b) { return (b.stato || 'bozza') === 'bozza'; });
+    if (loc.length) return loc;
+  } catch (ex) { /* ignore */ }
+  return [];
+}
+
+async function loadSocialBozze() {
+  var wrap = document.getElementById('socialBozzeWrap');
+  if (!wrap) {
+    toast('Sezione Social non trovata: aggiorna admin.html sul server (carica la versione del progetto index).', 'error');
+    return;
+  }
+  wrap.innerHTML = '<p style="color:var(--caffe2);margin:0">Caricamento…</p>';
+  var rows = await getSocialBozzeRows();
+  window.__socialBozzeRows = rows;
+  var badge = document.getElementById('badgeSocialBozze');
+  if (badge) {
+    if (rows.length) { badge.textContent = rows.length; badge.style.display = ''; }
+    else { badge.style.display = 'none'; }
+  }
+  var err = window.__socialBozzeLoadError || '';
+  if (!rows.length) {
+    var msg = '<div style="padding:10px 12px;background:#fff8e6;border:1px solid #e6c200;border-radius:8px;margin-bottom:10px">';
+    msg += '<strong style="color:#856404">Nessuna bozza visibile.</strong><ul style="margin:8px 0 0;padding-left:1.2rem;font-size:0.76rem;color:var(--caffe2)">';
+    msg += '<li>Sei nel menu <strong>Social</strong> (non Immobili)?</li>';
+    msg += '<li>Clicca <strong>Genera bozze settimanali</strong> qui sopra</li>';
+    msg += '<li>Su Supabase hai eseguito <code>sql/bozze-social.sql</code>?</li>';
+    msg += '<li>Admin aggiornato sul sito? (file locale: progetti/index/admin.html)</li>';
+    msg += '</ul></div>';
+    if (err) {
+      msg += '<p style="margin:0;color:#c0392b;font-size:0.74rem"><strong>Errore Supabase:</strong> ' + escHtml(err) + '</p>';
+      if (err.indexOf('bozze_social') >= 0 || err.indexOf('PGRST') >= 0) {
+        msg += '<p style="margin:8px 0 0;font-size:0.72rem">→ Esegui <code>sql/bozze-social.sql</code> nel SQL Editor Supabase.</p>';
+      }
+    } else {
+      msg += '<p style="margin:8px 0 0;color:var(--caffe2);font-size:0.74rem">Oppure da PowerShell: <code>python genera_bozze_settimanali.py</code></p>';
+    }
+    wrap.innerHTML = msg;
+    return;
+  }
+  var tb = '<table style="width:100%;border-collapse:collapse"><thead><tr style="text-align:left;border-bottom:1px solid var(--caffe3)"><th>Data</th><th>Tipo</th><th>Titolo</th><th>Azioni</th></tr></thead><tbody>';
+  rows.forEach(function(b) {
+    var dt = (b.data_pubblicazione_proposta || '—') + ' ' + (b.ora_proposta || '');
+    var tit = escHtml(String(b.titolo || '').slice(0, 80));
+    var tipo = escHtml(b.tipo_canale || '') + ' · ' + escHtml(b.fonte || '');
+    var reelNote = (b.tipo_canale === 'instagram_reel' && !b.media_direct_url) ? ' <span style="color:#c0392b">(manca URL .mp4)</span>' : '';
+    tb += '<tr style="border-bottom:1px solid rgba(0,0,0,0.06)"><td style="padding:8px;vertical-align:top;white-space:nowrap">' + escHtml(dt) + '</td><td style="padding:8px;vertical-align:top;font-size:0.72rem">' + tipo + '</td><td style="padding:8px">' + tit + reelNote;
+    if (b.link_pagina) tb += '<br><a href="' + escHtml(b.link_pagina) + '" target="_blank" rel="noopener" style="font-size:0.68rem">Apri link</a>';
+    tb += '</td><td style="padding:8px;white-space:nowrap"><button type="button" class="btn btn-sm btn-primary" onclick="approveSocialBozza(' + JSON.stringify(b.id) + ')">Approva</button> <button type="button" class="btn btn-sm" onclick="rejectSocialBozza(' + JSON.stringify(b.id) + ')">Rifiuta</button></td></tr>';
+  });
+  tb += '</tbody></table>';
+  wrap.innerHTML = tb;
+}
+
+async function saveSocialBozzaRow(row) {
+  try {
+    var res = await sb.from('bozze_social').insert(row);
+    if (!res.error) return res.data;
+  } catch (e) { console.warn(e); }
+  var local = [];
+  try { local = JSON.parse(localStorage.getItem('rig_social_bozze') || '[]'); } catch (ex) {}
+  row.id = row.id || ('bozza_soc_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6));
+  local.push(row);
+  localStorage.setItem('rig_social_bozze', JSON.stringify(local));
+  return row;
+}
+
+async function generateWeeklySocialDrafts() {
+  if (!confirm('Generare bozze per i prossimi lun/mer/ven? Non sostituiscono quelle già in attesa.')) return;
+  var base = (document.getElementById('autoPub_site_base') && document.getElementById('autoPub_site_base').value.trim()) || 'https://righettoimmobiliare.it';
+  base = base.replace(/\/$/, '');
+  var days = socialBozzeNextWeekdays(3);
+  if (days.length < 3) {
+    toast('Impossibile calcolare 3 giorni lavorativi.', 'error');
+    return;
+  }
+  var peaks = ['09:45', '12:30', '18:45'];
+  var hashtags = ['#padova', '#immobiliare', '#righettoimmobiliare', '#consulenzaimmobiliare', '#venditacasa'];
+  var pool = autoPubBuildCandidatePool();
+  var imm = pool.filter(function(p) { return p.tipoMedia === 'immobile'; })[0];
+  var land = pool.filter(function(p) { return p.tipoMedia === 'landing'; })[0];
+  var blog = pool.filter(function(p) { return p.tipoMedia === 'blog'; })[0];
+  var inserted = 0;
+
+  if (imm) {
+    await saveSocialBozzaRow({
+      stato: 'bozza', tipo_canale: 'instagram_feed', fonte: 'immobile',
+      titolo: imm.titolo.replace(/^🏠\s*/, '🏠 '),
+      corpo: '{Scopri a Padova|In esclusiva}: ' + socialBozzeExpandSpintax(imm.titolo) + '\n\n' + hashtags.join(' '),
+      link_pagina: imm.link, riferimento_id: imm.ref,
+      data_pubblicazione_proposta: socialBozzeDateFmt(days[0]), ora_proposta: peaks[0],
+      hashtags: hashtags, note: 'Generato da Admin — bozze settimanali'
+    });
+    inserted++;
+  }
+  if (land) {
+    await saveSocialBozzaRow({
+      stato: 'bozza', tipo_canale: 'facebook_post', fonte: 'landing',
+      titolo: land.titolo, corpo: '{Landing|Servizio dedicato}: ' + land.link + '\n\n' + hashtags.join(' '),
+      link_pagina: land.link, data_pubblicazione_proposta: socialBozzeDateFmt(days[1]), ora_proposta: peaks[1],
+      hashtags: hashtags, note: 'Generato da Admin'
+    });
+    inserted++;
+  }
+  var reelLink = base + '/landing-consulenza-immobiliare-gratuita.html';
+  var reelSuffix = '';
+  if (blog) {
+    reelLink = blog.link;
+    reelSuffix = ' · ' + String(blog.titolo || '').replace(/^📝\s*/, '').slice(0, 60);
+  }
+  await saveSocialBozzaRow({
+    stato: 'bozza', tipo_canale: 'instagram_reel', fonte: 'reel_manuale',
+    titolo: '{Il mercato a Padova|Consulenza gratuita}: prenota in agenzia' + reelSuffix,
+    corpo: 'Reel: incolla URL .mp4 in media_direct_url prima di approvare.\n049 8755543\n\n' + hashtags.join(' '),
+    link_pagina: reelLink,
+    riferimento_id: blog ? blog.ref : null,
+    data_pubblicazione_proposta: socialBozzeDateFmt(days[2]), ora_proposta: '07:15',
+    hashtags: hashtags, note: 'Video da caricare manualmente'
+  });
+  inserted++;
+  toast(inserted + ' bozze create. Controlla testi e reel prima di approvare.', 'success');
+  await loadSocialBozze();
+}
+
+async function approveSocialBozza(id) {
+  var rows = window.__socialBozzeRows || [];
+  var b = rows.find(function(x) { return x.id === id; });
+  if (!b) { toast('Bozza non trovata.', 'error'); return; }
+  if (b.tipo_canale === 'instagram_reel' && !(b.media_direct_url || '').trim()) {
+    var url = prompt('URL pubblico del file .mp4 (HTTPS sul sito):');
+    if (!url || url.indexOf('http') !== 0) {
+      toast('Reel: serve URL video HTTPS prima di approvare.', 'error');
+      return;
+    }
+    b.media_direct_url = url.trim();
+    try { await sb.from('bozze_social').update({ media_direct_url: b.media_direct_url }).eq('id', id); } catch (e) {}
+  }
+  var ds = b.data_pubblicazione_proposta || socialBozzeDateFmt(new Date());
+  var jsDay = new Date(ds + 'T12:00:00').getDay();
+  var corpo = socialBozzeExpandSpintax(b.corpo || b.titolo || '');
+  var payload = {
+    tipo: b.tipo_canale || 'facebook_post',
+    contenuto: b.fonte === 'immobile' ? 'immobile' : 'articolo',
+    titolo: (b.titolo || 'Post').slice(0, 200),
+    riferimento_id: b.riferimento_id || null,
+    ora: b.ora_proposta || '12:30',
+    giorni: [jsDay],
+    data_inizio: ds,
+    data_fine: ds,
+    keywords: b.hashtags || [],
+    note: '[BOZZA_APPROVATA] id=' + id,
+    link_media: b.link_pagina || null,
+    corpo_spintax: b.corpo || null,
+    media_direct_url: b.media_direct_url || null,
+    updated_at: new Date().toISOString(),
+    created_at: new Date().toISOString()
+  };
+  try {
+    var res = await sb.from('pianificazioni').insert(payload);
+    if (res.error) throw res.error;
+  } catch (e) {
+    agendaSchedules.push(Object.assign({}, payload, { id: 'sched_bozza_' + Date.now() }));
+    try { localStorage.setItem('rig_agenda_schedules', JSON.stringify(agendaSchedules)); } catch (ex) {}
+  }
+  try {
+    await sb.from('bozze_social').update({ stato: 'approvata', updated_at: new Date().toISOString() }).eq('id', id);
+  } catch (e) {
+    var local = JSON.parse(localStorage.getItem('rig_social_bozze') || '[]');
+    local = local.map(function(x) { return x.id === id ? Object.assign({}, x, { stato: 'approvata' }) : x; });
+    localStorage.setItem('rig_social_bozze', JSON.stringify(local));
+  }
+  toast('Bozza approvata → inserita in Agenda.', 'success');
+  await loadSocialBozze();
+  if (typeof getAgendaSchedules === 'function') { await getAgendaSchedules(); renderAgendaGrid(); }
+}
+
+async function rejectSocialBozza(id) {
+  if (!confirm('Rifiutare questa bozza?')) return;
+  try {
+    await sb.from('bozze_social').update({ stato: 'rifiutata', updated_at: new Date().toISOString() }).eq('id', id);
+  } catch (e) {
+    var local = JSON.parse(localStorage.getItem('rig_social_bozze') || '[]').filter(function(x) { return x.id !== id; });
+    localStorage.setItem('rig_social_bozze', JSON.stringify(local));
+  }
+  toast('Bozza rifiutata.', 'success');
+  await loadSocialBozze();
+}
+
 function loadSocialSection() {
   // Load saved configs
   const fbPageId = localStorage.getItem('social_fb_page_id') || '';
@@ -8173,6 +8429,7 @@ function loadSocialSection() {
     document.getElementById('gbpStatus').style.color = 'var(--verde)';
     document.getElementById('gbpAccount').textContent = localStorage.getItem('social_gbp_name') || '';
   }
+  loadSocialBozze();
 }
 
 function saveSocialConfig(platform) {
