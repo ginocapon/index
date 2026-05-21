@@ -3,3 +3,4 @@ config/settings.json
 __pycache__/
 *.pyc
 content/bozze_generate/bozza_*.json
+generated-reels/*.mp4

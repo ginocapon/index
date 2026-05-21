@@ -337,33 +337,49 @@ def build_bozze_list(
     b_row = pick_blog(blog)
     news = rss[0] if rss else None
     reel_link = BASE_SITE + "/landing-consulenza-immobiliare-gratuita.html"
+    reel_fonte = "landing"
+    reel_ref: str | None = str(l_row.get("id") or "") if l_row else None
     reel_titolo_extra = ""
-    if b_row:
+    if i_row:
+        reel_fonte = "immobile"
+        reel_ref = str(i_row.get("id") or "")
+        reel_link = f"{BASE_SITE}/immobile?s={slug_immobile(i_row)}"
+        reel_titolo_extra = f" · {i_row.get('titolo', '')[:80]}"
+    elif b_row:
+        reel_fonte = "blog"
+        reel_ref = str(b_row.get("id") or "")
         slug = b_row.get("slug") or ""
         reel_link = f"{BASE_SITE}/blog-articolo?s={slug}"
         reel_titolo_extra = f" · {b_row.get('titolo', '')[:80]}"
+    elif l_row:
+        path = l_row.get("url") or f"/{l_row.get('slug', '')}"
+        if not str(path).startswith("/"):
+            path = "/" + str(path)
+        reel_link = BASE_SITE.rstrip("/") + path
+        reel_titolo_extra = f" · {l_row.get('titolo', '')[:80]}"
     elif news:
         reel_titolo_extra = f" · {news['titolo'][:80]}"
         reel_link = news["link"]
+        reel_fonte = "notizia_esterna"
 
     reel = make_bozza(
         slot_date=slots[2],
         ora="07:15",
         tipo_canale="instagram_reel",
-        fonte="reel_manuale",
+        fonte=reel_fonte,
         titolo=(
             "{Il mercato a Padova|La tua casa vale più di quanto pensi}: "
             "consulenza gratuita" + reel_titolo_extra
         ),
         corpo=(
-            "Reel: carica il file .mp4 sul sito e incolla l'URL in media_direct_url prima di approvare.\n"
+            "MP4 generato automaticamente dalle foto del contenuto.\n"
             "CTA: Prenota la tua consulenza gratuita — 049 8755543\n\n"
             + " ".join(HASHTAGS_BASE)
         ),
         link=reel_link,
-        ref=str(b_row.get("id") or "") if b_row else None,
+        ref=reel_ref,
         meta={
-            "video_richiesto": True,
+            "video_auto": True,
             "durata_target_sec": "10-15",
             "notizia_rss": news,
         },
@@ -409,12 +425,27 @@ def main() -> int:
     saved_file = 0
     table_missing = False
 
+    gen_reel = os.environ.get("GENERA_REEL_AUTO", "1").strip() not in ("0", "false", "no")
+
     for b in bozze:
+        inserted_row: dict[str, Any] | None = None
         try:
-            client.table("bozze_social").insert(b).execute()
+            ins = client.table("bozze_social").insert(b).execute()
+            inserted_row = (ins.data or [None])[0]
             saved_db += 1
             tit_safe = b["titolo"][:60].encode("ascii", "replace").decode("ascii")
             print(f"[Supabase] {tit_safe} ({b['data_pubblicazione_proposta']})")
+            if (
+                gen_reel
+                and b.get("tipo_canale") == "instagram_reel"
+                and inserted_row
+            ):
+                try:
+                    from genera_reel import find_ffmpeg, process_bozza
+
+                    process_bozza(client, inserted_row, ffmpeg=find_ffmpeg())
+                except Exception as reel_err:
+                    print(f"[reel] Non generato: {reel_err}", file=sys.stderr)
         except APIError as e:
             if "bozze_social" in str(e) and ("PGRST205" in str(e) or "does not exist" in str(e)):
                 table_missing = True

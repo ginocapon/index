@@ -3517,14 +3517,14 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px">
               <div>
                 <h4 style="font-size:1.05rem;color:var(--caffe);margin:0 0 4px">Bozze da pubblicare</h4>
-                <p style="font-size:0.76rem;color:var(--caffe2);margin:0;max-width:520px">3 slot/settimana (lun, mer, ven — no sab/dom). Generazione senza AI a pagamento: testi da template + contenuti sito. Tu approvi → va in Agenda → lo script Meta pubblica.</p>
+                <p style="font-size:0.76rem;color:var(--caffe2);margin:0;max-width:520px">3 slot/settimana (lun, mer, ven). Testi da template; <strong>Reel MP4</strong> creato sul PC da foto immobile/blog/landing (FFmpeg). Approvi → Agenda → script Meta.</p>
               </div>
               <div style="display:flex;gap:8px;flex-wrap:wrap">
                 <button type="button" class="btn btn-primary btn-sm" onclick="generateWeeklySocialDrafts()">Genera bozze settimanali</button>
                 <button type="button" class="btn btn-secondary btn-sm" onclick="loadSocialBozze()">Aggiorna elenco</button>
               </div>
             </div>
-            <p style="font-size:0.72rem;color:var(--caffe2);margin:0 0 10px">Prima esegui <code style="font-size:0.68rem">sql/bozze-social.sql</code> su Supabase. Reel: carica il tuo .mp4 sul sito e incolla l&apos;URL nella bozza prima di approvare. Guida server: <code style="font-size:0.68rem">righetto_social/README.md</code>.</p>
+            <p style="font-size:0.72rem;color:var(--caffe2);margin:0 0 10px">Reel: sul PC <code style="font-size:0.68rem">python genera_reel.py --pending</code> (dopo <code>winget install ffmpeg</code>). L&apos;URL .mp4 compare in tabella; poi Approva. Guida: <code style="font-size:0.68rem">righetto_social/README.md</code>.</p>
             <div id="socialBozzeWrap" style="font-size:0.8rem;max-height:420px;overflow:auto">
               <p style="color:var(--caffe2);margin:0">Caricamento bozze…</p>
             </div>
@@ -3810,7 +3810,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <label class="check-item"><input type="checkbox" id="autoPub_type_fb_feed" checked> FB feed (link)</label>
             <label class="check-item"><input type="checkbox" id="autoPub_type_ig_feed" checked> IG feed (foto da copertina/immobile)</label>
             <label class="check-item"><input type="checkbox" id="autoPub_type_ig_story" checked> IG storia (stessa immagine se disponibile)</label>
-            <label class="check-item"><input type="checkbox" id="autoPub_type_ig_reel"> IG reel (serve tuo .mp4 in URL diretto — non generato qui)</label>
+            <label class="check-item"><input type="checkbox" id="autoPub_type_ig_reel"> IG reel (MP4 da <code>genera_reel.py</code> sul PC)</label>
           </div>
           <div class="form-group" style="margin:0 0 10px">
             <label style="font-size:0.72rem">URL extra (uno per riga, path o URL completo)</label>
@@ -8241,9 +8241,11 @@ async function loadSocialBozze() {
     var dt = (b.data_pubblicazione_proposta || '—') + ' ' + (b.ora_proposta || '');
     var tit = escHtml(String(b.titolo || '').slice(0, 80));
     var tipo = escHtml(b.tipo_canale || '') + ' · ' + escHtml(b.fonte || '');
-    var reelNote = (b.tipo_canale === 'instagram_reel' && !b.media_direct_url) ? ' <span style="color:#c0392b">(manca URL .mp4)</span>' : '';
+    var reelNote = (b.tipo_canale === 'instagram_reel' && !b.media_direct_url) ? ' <span style="color:#c0392b">(manca MP4 — esegui genera_reel.py sul PC)</span>' : '';
+    if (b.tipo_canale === 'instagram_reel' && b.media_direct_url) reelNote = ' <span style="color:#27ae60">(MP4 pronto)</span>';
     tb += '<tr style="border-bottom:1px solid rgba(0,0,0,0.06)"><td style="padding:8px;vertical-align:top;white-space:nowrap">' + escHtml(dt) + '</td><td style="padding:8px;vertical-align:top;font-size:0.72rem">' + tipo + '</td><td style="padding:8px">' + tit + reelNote;
-    if (b.link_pagina) tb += '<br><a href="' + escHtml(b.link_pagina) + '" target="_blank" rel="noopener" style="font-size:0.68rem">Apri link</a>';
+    if (b.link_pagina) tb += '<br><a href="' + escHtml(b.link_pagina) + '" target="_blank" rel="noopener" style="font-size:0.68rem">Pagina</a>';
+    if (b.media_direct_url) tb += ' <a href="' + escHtml(b.media_direct_url) + '" target="_blank" rel="noopener" style="font-size:0.68rem">Video</a>';
     tb += '</td><td style="padding:8px;white-space:nowrap"><button type="button" class="btn btn-sm btn-primary" onclick="approveSocialBozza(' + JSON.stringify(b.id) + ')">Approva</button> <button type="button" class="btn btn-sm" onclick="rejectSocialBozza(' + JSON.stringify(b.id) + ')">Rifiuta</button></td></tr>';
   });
   tb += '</tbody></table>';

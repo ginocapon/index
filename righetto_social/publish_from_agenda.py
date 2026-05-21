@@ -158,6 +158,40 @@ def graph_feed_post(
     return r.json()
 
 
+def ig_reel_create_and_publish(
+    *,
+    version: str,
+    ig_user_id: str,
+    token: str,
+    caption: str,
+    video_url: str,
+) -> dict[str, Any]:
+    url_m = f"https://graph.facebook.com/{version}/{ig_user_id}/media"
+    r1 = requests.post(
+        url_m,
+        params={
+            "access_token": token,
+            "media_type": "REELS",
+            "video_url": video_url,
+            "caption": caption[:2200],
+        },
+        timeout=180,
+    )
+    r1.raise_for_status()
+    cid = r1.json().get("id")
+    if not cid:
+        raise RuntimeError(f"IG reel media senza id: {r1.text}")
+
+    url_p = f"https://graph.facebook.com/{version}/{ig_user_id}/media_publish"
+    r2 = requests.post(
+        url_p,
+        params={"access_token": token, "creation_id": cid},
+        timeout=180,
+    )
+    r2.raise_for_status()
+    return {"container": r1.json(), "publish": r2.json()}
+
+
 def ig_create_and_publish(
     *,
     version: str,
@@ -276,8 +310,8 @@ def main() -> int:
         url_page = extract_public_url(row)
         media_direct = (row.get("media_direct_url") or "").strip()
 
-        if tipo in ("instagram_story", "instagram_reel"):
-            msg = f"Tipo {tipo} non automatizzato in questo script (serve video/API dedicate)."
+        if tipo == "instagram_story":
+            msg = "Storia video non automatizzata in questo script."
             print(f"[skip] {rid}: {msg}")
             if not args.dry_run:
                 patch_note(sb, rid, note, f" {PUB_ERR} {msg}")
@@ -335,6 +369,24 @@ def main() -> int:
                     image_url=img,
                 )
                 parts_log.append(f"ig={out.get('publish', {}).get('id', 'ok')}")
+
+            elif tipo == "instagram_reel":
+                if not ig_id:
+                    raise RuntimeError("META_IG_USER_ID mancante")
+                video = media_direct if media_direct.lower().endswith(".mp4") else ""
+                if not video:
+                    raise RuntimeError(
+                        "Reel: media_direct_url deve essere .mp4 pubblico HTTPS "
+                        "(genera con python genera_reel.py --pending)"
+                    )
+                out = ig_reel_create_and_publish(
+                    version=graph_v,
+                    ig_user_id=ig_id,
+                    token=token,
+                    caption=caption or titolo,
+                    video_url=video,
+                )
+                parts_log.append(f"ig_reel={out.get('publish', {}).get('id', 'ok')}")
 
             else:
                 msg = f"Tipo sconosciuto o non supportato: {tipo}"
