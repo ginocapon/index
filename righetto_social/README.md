@@ -57,10 +57,15 @@ Requisiti token Meta: `pages_manage_posts`, `pages_read_engagement`, `instagram_
 30 6 * * * cd /path/righetto_social && python sync_facebook_feed.py && python sync_instagram_feed.py
 ```
 
-## Reel e video
+## Reel MP4 automatici (FFmpeg)
 
-Il prompt «Remotion + OpenAI + reel giornaliero 07:00» **non è incluso** (costi API + stack Node separato).  
-Per i Reel: prepari tu il `.mp4` (1080×1920), lo carichi sul sito, incolli l’URL in `media_direct_url` sulla bozza, poi approvi.
+```powershell
+winget install ffmpeg
+cd righetto_social
+python genera_reel.py --pending
+```
+
+Crea MP4 1080×1920 dalle foto immobile/blog/landing, carica su Storage (`foto-immobili/reels/`) e aggiorna la bozza. Con `GENERA_REEL_AUTO=1` in `.env` succede anche dopo `genera_bozze_settimanali.py`.
 
 ## Sicurezza — checklist
 
@@ -69,11 +74,11 @@ Per i Reel: prepari tu il `.mp4` (1080×1920), lo carichi sul sito, incolli l’
 | `pianificazioni` / `bozze_social` scrivibili da chiunque con chiave `anon` | Alto se non hardened | Esegui `sql/rls-security-hardening-safe.sql` e cambia `righetto_admin_secret()` |
 | Token Meta in `localStorage` (sezione Social admin) | Medio | Preferire solo `.env` sul server; non salvare token in browser in produzione |
 | Chiave Supabase `anon` nel frontend admin | Noto | Limitare con RLS + header `x-righetto-admin` |
-| Reel/story non automatizzati in `publish_from_agenda.py` | By design | Solo feed/link finché non c’è URL video pubblico |
+| Reel | Automatizzati se `media_direct_url` è .mp4 HTTPS | `genera_reel.py` + `publish_from_agenda.py` |
 
 ## Cosa NON fa questo pacchetto
 
-- Generazione video cinematografica (Remotion/FFmpeg/OpenAI).
+- Remotion/OpenAI/voiceover AI (solo slideshow FFmpeg locale).
 - Voiceover AI o sottotitoli automatici.
 - Pubblicazione TikTok via API.
 - Copia integrale articoli Sole24/ADE (solo titolo + link RSS + testo tuo in spintax).
