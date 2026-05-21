@@ -1,0 +1,120 @@
+{
+  "immobile": {
+    "titoli_spintax": [
+      "{Nuovo incarico a Padova|In esclusiva a Padova}: {titolo}",
+      "{Scopri questo immobile|Opportunita a Padova}: {titolo}"
+    ],
+    "corpo_spintax": [
+      "{Visita su appuntamento|Richiedi informazioni}: {zona} — {dettaglio}.\n{Consulenza gratuita in agenzia|Prenota una visita senza impegno}.\nTel. 049 8755543 · righettoimmobiliare.it"
+    ],
+    "hashtags": [
+      "#padova",
+      "#immobiliare",
+      "#righettoimmobiliare",
+      "#casa",
+      "#venditacasa",
+      "#affittopadova",
+      "#mercatoimmobiliare",
+      "#agenziaimmobiliare",
+      "#immobilipadova",
+      "#consulenzaimmobiliare",
+      "#nuovoannuncio",
+      "#proprieta"
+    ],
+    "canali_settimana": [
+      { "giorno_offset": 0, "ora": "09:45", "tipo": "instagram_reel" },
+      { "giorno_offset": 2, "ora": "12:30", "tipo": "instagram_feed" },
+      { "giorno_offset": 4, "ora": "18:45", "tipo": "facebook_post" }
+    ]
+  },
+  "blog": {
+    "titoli_spintax": [
+      "{Approfondimento|Articolo}: {titolo}",
+      "{Sul blog|Leggi ora}: {titolo}"
+    ],
+    "corpo_spintax": [
+      "{Guida pratica|Approfondimento} per chi {vende|acquista} a Padova: {titolo}.\n{Link in bio|Leggi l articolo completo} — consulenza senza impegno."
+    ],
+    "hashtags": [
+      "#padova",
+      "#blogimmobiliare",
+      "#righettoimmobiliare",
+      "#consulenzaimmobiliare",
+      "#mutuo",
+      "#tasse",
+      "#mercatoimmobiliare",
+      "#primacasa",
+      "#venditacasa",
+      "#investimentiimmobiliari",
+      "#normative",
+      "#guida"
+    ],
+    "canali_settimana": [
+      { "giorno_offset": 0, "ora": "11:15", "tipo": "instagram_feed" },
+      { "giorno_offset": 2, "ora": "13:00", "tipo": "facebook_post" },
+      { "giorno_offset": 4, "ora": "12:00", "tipo": "instagram_feed" }
+    ]
+  },
+  "landing": {
+    "titoli_spintax": [
+      "{Servizio dedicato|Landing}: {titolo}",
+      "{Scopri il servizio|Percorso su misura}: {titolo}"
+    ],
+    "corpo_spintax": [
+      "{Consulenza gratuita|Percorso guidato} — {titolo}.\n{Compila il form|Richiedi informazioni} in pochi minuti. {Padova e provincia|Zona Padova}."
+    ],
+    "hashtags": [
+      "#padova",
+      "#righettoimmobiliare",
+      "#consulenzagratuita",
+      "#valutazioneimmobile",
+      "#venderecasa",
+      "#mutuo",
+      "#landing",
+      "#serviziimmobiliari",
+      "#agenziaimmobiliare",
+      "#immobilipadova",
+      "#assistenza",
+      "#contatti"
+    ],
+    "canali_settimana": [
+      { "giorno_offset": 0, "ora": "12:45", "tipo": "facebook_post" },
+      { "giorno_offset": 2, "ora": "11:30", "tipo": "instagram_feed" },
+      { "giorno_offset": 4, "ora": "18:30", "tipo": "facebook_post" }
+    ]
+  },
+  "agenzia": {
+    "titoli_spintax": [
+      "{Righetto Immobiliare|La tua agenzia a Padova}: {titolo}",
+      "{Dal 2000 a Padova|Esperienza locale}: {titolo}"
+    ],
+    "corpo_spintax": [
+      "{350+ immobili|Oltre 350 annunci} · {101 comuni|Padova e provincia}.\n{Consulenza gratuita|Prenota in agenzia}: {pagina}.\n049 8755543"
+    ],
+    "hashtags": [
+      "#padova",
+      "#righettoimmobiliare",
+      "#agenziaimmobiliare",
+      "#immobilipadova",
+      "#consulenzaimmobiliare",
+      "#dal2000",
+      "#professionisti",
+      "#venditacasa",
+      "#acquistocasa",
+      "#territorio",
+      "#contatti",
+      "#soddisfazioneclienti"
+    ],
+    "canali_settimana": [
+      { "giorno_offset": 0, "ora": "18:50", "tipo": "instagram_feed" },
+      { "giorno_offset": 2, "ora": "18:15", "tipo": "facebook_post" },
+      { "giorno_offset": 4, "ora": "09:40", "tipo": "instagram_reel" }
+    ]
+  },
+  "pagine_agenzia": [
+    { "path": "/", "titolo": "Homepage — annunci e servizi" },
+    { "path": "/chi-siamo", "titolo": "Chi siamo — esperienza dal 2000" },
+    { "path": "/contatti", "titolo": "Contatti e consulenza gratuita" },
+    { "path": "/servizi", "titolo": "Servizi per venditori e acquirenti" }
+  ]
+}

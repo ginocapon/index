@@ -1,10 +1,12 @@
 """
-Genera 3 bozze/settimana (lun, mer, ven) senza API AI a pagamento.
-Fonti: Supabase immobili/blog/landing + titoli RSS istituzionali (solo titolo+link).
+Genera bozze social: 3 invii/settimana per sezione (immobile, blog, landing, agenzia).
+Spintax + minimo 10 hashtag. Lun/mer/ven — no sab/dom.
 
 Uso:
   python genera_bozze_settimanali.py
   python genera_bozze_settimanali.py --dry-run
+  python genera_bozze_settimanali.py --programma-agenda
+  python genera_bozze_settimanali.py --settimane 2
 """
 
 from __future__ import annotations
@@ -29,22 +31,64 @@ ROOT = Path(__file__).resolve().parent
 BASE_SITE = "https://righettoimmobiliare.it"
 TZ = ZoneInfo("Europe/Rome")
 
-HASHTAGS_BASE = [
-    "#padova",
-    "#immobiliare",
-    "#righettoimmobiliare",
-    "#consulenzaimmobiliare",
-    "#venditacasa",
-    "#investimentiimmobiliari",
-]
+TEMPLATES_PATH = ROOT / "templates" / "social_sezioni.json"
+POSTS_PER_SECTION = 3
+SECTIONS = ("immobile", "blog", "landing", "agenzia")
 
 RSS_FEEDS = [
     ("Sole 24 Ore", "https://www.ilsole24ore.com/rss/economia.xml"),
     ("Agenzia delle Entrate", "https://www.agenziaentrate.gov.it/wps/content/Nsilib/NPI/IT/Comunicati/rss"),
 ]
 
-PEAK_HOURS = ["09:45", "12:30", "18:45"]
 WEEKDAY_SLOTS = (0, 2, 4)  # lun=0, mer=2, ven=4 (Python weekday)
+
+
+def load_templates() -> dict[str, Any]:
+    with TEMPLATES_PATH.open(encoding="utf-8") as f:
+        return json.load(f)
+
+
+def resolve_image_url(url: str, supabase_url: str) -> str:
+    u = (url or "").strip()
+    if not u:
+        return ""
+    if u.startswith(("http://", "https://")):
+        return u
+    path = u.lstrip("/")
+    if path.startswith("foto-immobili/"):
+        return f"{supabase_url.rstrip('/')}/storage/v1/object/public/{path}"
+    return f"{BASE_SITE.rstrip('/')}/{path}"
+
+
+def apply_pattern(pattern: str, ctx: dict[str, str]) -> str:
+    out = pattern
+    for k, v in ctx.items():
+        out = out.replace("{" + k + "}", v)
+    return out
+
+
+def pick_rotating(pool: list[dict], index: int) -> dict | None:
+    if not pool:
+        return None
+    return pool[index % len(pool)]
+
+
+def week_monday_on_or_after(d: date) -> date:
+    cursor = d
+    while cursor.weekday() != 0:
+        cursor += timedelta(days=1)
+    return cursor
+
+
+def immobile_photos(i: dict, supabase_url: str) -> list[str]:
+    urls: list[str] = []
+    val = i.get("foto")
+    if isinstance(val, list):
+        for u in val:
+            abs_u = resolve_image_url(str(u), supabase_url)
+            if abs_u and abs_u not in urls:
+                urls.append(abs_u)
+    return urls[:4]
 
 
 def load_env() -> None:
@@ -254,6 +298,7 @@ def make_bozza(
     corpo: str,
     link: str,
     ref: str | None,
+    hashtags: list[str],
     media_url: str | None = None,
     meta: dict | None = None,
 ) -> dict[str, Any]:
@@ -263,7 +308,7 @@ def make_bozza(
         "fonte": fonte,
         "titolo": titolo[:220],
         "corpo": corpo,
-        "hashtags": HASHTAGS_BASE,
+        "hashtags": hashtags,
         "link_pagina": link,
         "media_direct_url": media_url,
         "riferimento_id": ref,
@@ -275,117 +320,159 @@ def make_bozza(
     }
 
 
-def build_bozze_list(
-    imm: list[dict], blog: list[dict], land: list[dict], rss: list[dict[str, str]]
+def build_section_bozze(
+    section: str,
+    tpl: dict[str, Any],
+    *,
+    week_monday: date,
+    week_index: int,
+    imm: list[dict],
+    blog: list[dict],
+    land: list[dict],
+    supabase_url: str,
 ) -> list[dict[str, Any]]:
-    today = datetime.now(tz=TZ).date()
-    start = today + timedelta(days=1)
-    slots = next_weekday_slots(start, 3)
-    if len(slots) < 3:
-        raise RuntimeError("Impossibile trovare 3 giorni lun/mer/ven nel prossimo mese.")
+    sec = tpl.get(section) or {}
+    canali = sec.get("canali_settimana") or []
+    tags = list(sec.get("hashtags") or [])[:15]
+    if len(tags) < 10:
+        raise RuntimeError(f"Sezione {section}: servono almeno 10 hashtag nel template")
+
+    titoli_p = sec.get("titoli_spintax") or ["{titolo}"]
+    corpi_p = sec.get("corpo_spintax") or ["{titolo}"]
 
     bozze: list[dict[str, Any]] = []
+    link = ""
+    ref: str | None = None
+    media_url: str | None = None
+    ctx: dict[str, str] = {
+        "titolo": "Righetto Immobiliare",
+        "zona": "Padova",
+        "dettaglio": "",
+        "pagina": "il sito",
+    }
 
-    i_row = pick_immobile(imm)
-    if i_row:
-        link = f"{BASE_SITE}/immobile?s={slug_immobile(i_row)}"
-        tit = f"🏠 {i_row.get('titolo', 'Nuovo incarico')}"
-        corpo = (
-            "{Scopri questo immobile a Padova|In esclusiva a Padova}: "
-            f"{i_row.get('zona', 'zona centrale')}. "
-            "{Richiedi informazioni|Prenota una visita} in agenzia.\n\n"
-            + " ".join(HASHTAGS_BASE[:6])
+    if section == "immobile":
+        row = pick_rotating(
+            [i for i in imm if i.get("attivo")], week_index
+        ) or pick_immobile(imm)
+        if not row:
+            return []
+        link = f"{BASE_SITE}/immobile?s={slug_immobile(row)}"
+        ref = str(row.get("id") or "")
+        ctx["titolo"] = str(row.get("titolo") or "Immobile")
+        ctx["zona"] = str(row.get("zona") or row.get("comune") or "Padova")
+        prezzo = row.get("prezzo")
+        ctx["dettaglio"] = (
+            f"da € {int(prezzo):,}".replace(",", ".") if prezzo else "su richiesta"
         )
-        bozze.append(
-            make_bozza(
-                slot_date=slots[0],
-                ora=PEAK_HOURS[0],
-                tipo_canale="instagram_feed",
-                fonte="immobile",
-                titolo=tit,
-                corpo=corpo,
-                link=link,
-                ref=str(i_row.get("id") or ""),
-            )
-        )
+        photos = immobile_photos(row, supabase_url)
+        if photos:
+            media_url = photos[0]
 
-    l_row = pick_landing(land)
-    if l_row:
-        path = l_row.get("url") or f"/{l_row.get('slug', '')}"
+    elif section == "blog":
+        row = pick_rotating(
+            [b for b in blog if (b.get("stato") or "") == "pubblicato"], week_index
+        ) or pick_blog(blog)
+        if not row:
+            return []
+        slug = row.get("slug") or row.get("url_statico") or ""
+        link = f"{BASE_SITE}/blog-articolo?s={slug}"
+        ref = str(row.get("id") or "")
+        ctx["titolo"] = str(row.get("titolo") or "Articolo")
+        media_url = resolve_image_url(
+            str(row.get("immagine_copertina") or ""), supabase_url
+        ) or None
+
+    elif section == "landing":
+        rows = [p for p in land if (p.get("stato") or "") != "bozza"]
+        row = pick_rotating(rows, week_index) or pick_landing(land)
+        if not row:
+            return []
+        path = row.get("url") or f"/{row.get('slug', '')}"
         if not str(path).startswith("/"):
             path = "/" + str(path)
         link = BASE_SITE.rstrip("/") + path
-        tit = f"📋 {l_row.get('titolo', 'Landing')}"
-        corpo = (
-            "{Consulenza dedicata|Servizio su misura} — "
-            f"{l_row.get('titolo', 'approfondimento')}.\n"
-            f"Link: {link}\n\n" + " ".join(HASHTAGS_BASE)
-        )
+        ref = str(row.get("id") or "")
+        ctx["titolo"] = str(row.get("titolo") or "Landing")
+        ctx["pagina"] = ctx["titolo"]
+
+    elif section == "agenzia":
+        pages = tpl.get("pagine_agenzia") or []
+        pg = pages[week_index % len(pages)] if pages else {"path": "/", "titolo": "Home"}
+        path = pg.get("path", "/")
+        link = BASE_SITE.rstrip("/") + (path if path.startswith("/") else "/" + path)
+        ctx["titolo"] = str(pg.get("titolo") or "Righetto Immobiliare")
+        ctx["pagina"] = ctx["titolo"]
+        ref = None
+
+    for slot in canali[:POSTS_PER_SECTION]:
+        off = int(slot.get("giorno_offset", 0))
+        slot_date = week_monday + timedelta(days=off)
+        if slot_date.weekday() not in WEEKDAY_SLOTS:
+            continue
+        tipo = slot.get("tipo") or "facebook_post"
+        titolo = apply_pattern(titoli_p[week_index % len(titoli_p)], ctx)
+        corpo = apply_pattern(corpi_p[week_index % len(corpi_p)], ctx)
+        corpo += "\n\n" + " ".join(tags)
+
+        mv = media_url
+        if tipo == "instagram_reel":
+            mv = None
+
         bozze.append(
             make_bozza(
-                slot_date=slots[1],
-                ora=PEAK_HOURS[1],
-                tipo_canale="facebook_post",
-                fonte="landing",
-                titolo=tit,
+                slot_date=slot_date,
+                ora=str(slot.get("ora") or "12:30"),
+                tipo_canale=tipo,
+                fonte=section,
+                titolo=titolo,
                 corpo=corpo,
                 link=link,
-                ref=str(l_row.get("id") or ""),
+                ref=ref,
+                hashtags=tags,
+                media_url=mv,
+                meta={"settimana": week_index, "video_auto": tipo == "instagram_reel"},
             )
         )
-
-    b_row = pick_blog(blog)
-    news = rss[0] if rss else None
-    reel_link = BASE_SITE + "/landing-consulenza-immobiliare-gratuita.html"
-    reel_fonte = "landing"
-    reel_ref: str | None = str(l_row.get("id") or "") if l_row else None
-    reel_titolo_extra = ""
-    if i_row:
-        reel_fonte = "immobile"
-        reel_ref = str(i_row.get("id") or "")
-        reel_link = f"{BASE_SITE}/immobile?s={slug_immobile(i_row)}"
-        reel_titolo_extra = f" · {i_row.get('titolo', '')[:80]}"
-    elif b_row:
-        reel_fonte = "blog"
-        reel_ref = str(b_row.get("id") or "")
-        slug = b_row.get("slug") or ""
-        reel_link = f"{BASE_SITE}/blog-articolo?s={slug}"
-        reel_titolo_extra = f" · {b_row.get('titolo', '')[:80]}"
-    elif l_row:
-        path = l_row.get("url") or f"/{l_row.get('slug', '')}"
-        if not str(path).startswith("/"):
-            path = "/" + str(path)
-        reel_link = BASE_SITE.rstrip("/") + path
-        reel_titolo_extra = f" · {l_row.get('titolo', '')[:80]}"
-    elif news:
-        reel_titolo_extra = f" · {news['titolo'][:80]}"
-        reel_link = news["link"]
-        reel_fonte = "notizia_esterna"
-
-    reel = make_bozza(
-        slot_date=slots[2],
-        ora="07:15",
-        tipo_canale="instagram_reel",
-        fonte=reel_fonte,
-        titolo=(
-            "{Il mercato a Padova|La tua casa vale più di quanto pensi}: "
-            "consulenza gratuita" + reel_titolo_extra
-        ),
-        corpo=(
-            "MP4 generato automaticamente dalle foto del contenuto.\n"
-            "CTA: Prenota la tua consulenza gratuita — 049 8755543\n\n"
-            + " ".join(HASHTAGS_BASE)
-        ),
-        link=reel_link,
-        ref=reel_ref,
-        meta={
-            "video_auto": True,
-            "durata_target_sec": "10-15",
-            "notizia_rss": news,
-        },
-    )
-    bozze.append(reel)
     return bozze
+
+
+def build_bozze_list(
+    imm: list[dict],
+    blog: list[dict],
+    land: list[dict],
+    _rss: list[dict[str, str]],
+    *,
+    settimane: int = 1,
+) -> list[dict[str, Any]]:
+    tpl = load_templates()
+    supabase_url = env_or_empty("SUPABASE_URL") or BASE_SITE
+    today = datetime.now(tz=TZ).date()
+    start_monday = week_monday_on_or_after(today + timedelta(days=1))
+
+    all_bozze: list[dict[str, Any]] = []
+    for w in range(settimane):
+        monday = start_monday + timedelta(days=7 * w)
+        for section in SECTIONS:
+            all_bozze.extend(
+                build_section_bozze(
+                    section,
+                    tpl,
+                    week_monday=monday,
+                    week_index=w,
+                    imm=imm,
+                    blog=blog,
+                    land=land,
+                    supabase_url=supabase_url,
+                )
+            )
+
+    if len(all_bozze) < 8:
+        print(
+            f"Attenzione: generate solo {len(all_bozze)} bozze (minimo consigliato 8).",
+            file=sys.stderr,
+        )
+    return all_bozze
 
 
 def main() -> int:
@@ -395,13 +482,24 @@ def main() -> int:
         action="store_true",
         help="Anteprima JSON; senza .env usa dati demo",
     )
+    parser.add_argument(
+        "--settimane",
+        type=int,
+        default=1,
+        help="Settimane da pianificare (default 1 = 12 bozze)",
+    )
+    parser.add_argument(
+        "--programma-agenda",
+        action="store_true",
+        help="Dopo insert, crea righe in pianificazioni (min 8)",
+    )
     args = parser.parse_args()
     load_env()
 
     try:
         imm, blog, land = load_content_sources(dry_run=args.dry_run)
         rss = fetch_rss_titles()
-        bozze = build_bozze_list(imm, blog, land, rss)
+        bozze = build_bozze_list(imm, blog, land, rss, settimane=max(1, args.settimane))
     except RuntimeError as e:
         print(e, file=sys.stderr)
         return 1
@@ -461,7 +559,18 @@ def main() -> int:
                 raise
 
     if saved_db:
-        print(f"OK: {saved_db} bozze in Supabase. Admin > Social > Approva.")
+        print(
+            f"OK: {saved_db} bozze (12/settimana: 3× immobile, blog, landing, agenzia). "
+            "Admin > Social > Approva."
+        )
+        if args.programma_agenda:
+            import subprocess
+
+            r = subprocess.run(
+                [sys.executable, str(ROOT / "programma_da_bozze.py"), "--min", "8"],
+                cwd=str(ROOT),
+            )
+            return r.returncode
     if saved_file:
         print(
             f"OK: {saved_file} bozze in content/bozze_generate/.\n"

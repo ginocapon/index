@@ -1,13 +1,35 @@
 # Righetto Social — automazione Meta (senza AI a pagamento)
 
-## Flusso consigliato
+## Flusso consigliato (12 post/settimana + 8+ in agenda)
 
-1. **Genera bozze** (lun/mer/ven, no sab/dom):
-   - Da Admin → **Social** → «Genera bozze settimanali», oppure
-   - Sul PC/server: `python genera_bozze_settimanali.py` (cron domenica sera).
-2. **Approva** in Admin → elenco «Bozze da pubblicare» (controlli testo, reel con URL `.mp4`).
-3. All’approvazione si crea una riga in **`pianificazioni`** (Agenda).
-4. **Pubblicazione automatica**: `publish_from_agenda.py` via cron ogni 5–10 min nelle finestre orarie.
+Ogni settimana (lun/mer/ven, no sab/dom) vengono create **3 bozze per sezione**:
+
+| Sezione | Contenuto | Media |
+|---------|-----------|--------|
+| **Immobile** | Reel + IG feed + FB | Video reel (più foto), foto singola per feed |
+| **Blog** | IG + FB + IG | Copertina articolo |
+| **Landing** | FB + IG + FB | Immagine landing |
+| **Agenzia** | IG + FB + Reel | Homepage, chi-siamo, contatti, servizi |
+
+Ogni bozza ha **spintax** nel testo e **almeno 10 hashtag** specialistici.
+
+```powershell
+cd righetto_social
+
+# 1) Crea 12 bozze in Supabase
+python genera_bozze_settimanali.py
+
+# 2) Genera MP4 per i reel (immobili + agenzia; blog/landing = 1 foto ripetuta)
+python genera_reel.py --pending
+
+# 3) Admin → Social → controlla → Approva (oppure programma da terminale)
+python programma_da_bozze.py --min 8
+
+# 4) Pubblicazione Meta (token in .env)
+python publish_from_agenda.py --dry-run
+```
+
+Opzionale tutto-in-uno dopo le bozze: `python genera_bozze_settimanali.py --programma-agenda` (salta approvazione manuale).
 
 ## Setup iniziale
 

@@ -29,6 +29,10 @@ from supabase import Client, create_client
 
 ROOT = Path(__file__).resolve().parent
 OUT_LOCAL = ROOT / "generated-reels"
+MUSIC_CANDIDATES = (
+    ROOT / "assets" / "reel_music.mp3",
+    ROOT / "assets" / "reel_music.m4a",
+)
 BASE_SITE = "https://righettoimmobiliare.it"
 TZ = ZoneInfo("Europe/Rome")
 UA = "Mozilla/5.0 (compatible; RighettoReelGen/1.0; +https://righettoimmobiliare.it)"
@@ -196,6 +200,8 @@ def collect_photo_urls(
 def download_images(urls: list[str], dest: Path) -> list[Path]:
     dest.mkdir(parents=True, exist_ok=True)
     paths: list[Path] = []
+    if len(urls) == 1:
+        urls = urls * min(3, MAX_IMAGES)
     for i, url in enumerate(urls):
         try:
             r = requests.get(url, headers={"User-Agent": UA}, timeout=40)
@@ -301,6 +307,41 @@ def build_mp4(
         raise RuntimeError(f"FFmpeg errore:\n{proc.stderr[-1200:]}")
 
 
+def mix_background_music(video: Path, ffmpeg: str) -> Path:
+    music = next((p for p in MUSIC_CANDIDATES if p.is_file()), None)
+    if not music:
+        return video
+    vol = os.environ.get("REEL_MUSIC_VOLUME", "0.22").strip()
+    out = video.with_name(video.stem + "_audio.mp4")
+    cmd = [
+        ffmpeg,
+        "-y",
+        "-i",
+        str(video),
+        "-i",
+        str(music),
+        "-map",
+        "0:v",
+        "-map",
+        "1:a",
+        "-c:v",
+        "copy",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "128k",
+        "-af",
+        f"volume={vol}",
+        "-shortest",
+        str(out),
+    ]
+    proc = subprocess.run(cmd, capture_output=True, text=True)
+    if proc.returncode != 0:
+        print(f"[musica] skip: {proc.stderr[-400:]}", file=sys.stderr)
+        return video
+    return out
+
+
 def upload_mp4(sb: Client, local_path: Path, slug: str) -> str:
     supabase_url = req_env("SUPABASE_URL").rstrip("/")
     bucket = os.environ.get("REEL_STORAGE_BUCKET", "foto-immobili").strip()
@@ -360,6 +401,7 @@ def process_bozza(sb: Client, bozza: dict[str, Any], *, ffmpeg: str) -> str | No
         if len(slides) < 1:
             return None
         build_mp4(slides, local_mp4, title=title, subtitle=subtitle, ffmpeg=ffmpeg)
+        local_mp4 = mix_background_music(local_mp4, ffmpeg)
 
     public_url = upload_mp4(sb, local_mp4, slug)
     bid = bozza.get("id")
