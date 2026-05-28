@@ -1,0 +1,193 @@
+/**
+ * Genera titolo e corpo Issue per il promemoria venerdì Righetto.
+ * Usato da .github/workflows/venerdi-righetto-piano.yml
+ */
+const fs = require("fs");
+
+function romeYmd(d) {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Rome",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(d);
+}
+
+function buildPiano60(now) {
+  const todayRome = romeYmd(now);
+  try {
+    const raw = fs.readFileSync("data/piano-contenuti-60g.json", "utf8");
+    const cal = JSON.parse(raw);
+    const slot = (cal.slots || []).find((s) => s.friday_iso === todayRome);
+    if (slot) {
+      const urls = (slot.urls_da_promuovere || []).map((u) => `- ${u}`).join("\n");
+      const social = (slot.titoli_social_suggeriti || []).map((s) => `- ${s}`).join("\n");
+      const img = slot.immagine_stock_nuova || {};
+      const imgBlock =
+        img.pagina_riferimento || img.istruzione
+          ? `\n**Immagine (stock licenziata — non hotlink sul sito):**\n- Fonte: ${img.fonte || "stock"}\n- Ricerca/download: ${img.pagina_riferimento || "—"}\n- ${img.istruzione || ""}\n`
+          : "";
+      const bozza = slot.bozza_articolo_futuro
+        ? `\n**Bozza articolo futuro:** slug proposto \`${slot.bozza_articolo_futuro.slug_proposto || ""}\` — ${slot.bozza_articolo_futuro.nota || ""}\n`
+        : "";
+      return `
+
+---
+
+## Piano contenuti ~60 giorni — slot di oggi (${slot.friday_iso})
+
+**Focus:** ${slot.titolo_issue_suffix || "—"}  
+**Obiettivo:** ${slot.obiettivo || "—"}
+
+### URL da promuovere (copy-paste)
+${urls || "- (nessuno)"}
+
+### Titoli social suggeriti (adattare tono Righetto)
+${social || "- (nessuno)"}
+${imgBlock}${bozza}
+_Limiti automazione: niente pubblicazione diretta su righettoimmobiliare.it o Meta da questo job; revisione umana e asset in \`img/\` obbligatori._`;
+    }
+    const next = (cal.slots || [])
+      .map((s) => s.friday_iso)
+      .filter((iso) => iso >= todayRome)
+      .sort()[0];
+    return `
+
+---
+
+## Piano contenuti ~60 giorni
+
+Nessuno slot per **${todayRome}** in \`data/piano-contenuti-60g.json\`.  
+${next ? `Prossimo venerdì pianificato: **${next}**.` : "Aggiungi nuove date in \`slots\`."}`;
+  } catch (e) {
+    return `
+
+---
+
+## Piano contenuti ~60 giorni
+
+_File \`data/piano-contenuti-60g.json\` assente o non valido: ${String(e)}_`;
+  }
+}
+
+function buildVenerdiIssue(now = new Date()) {
+  const anchor = new Date(Date.UTC(2026, 2, 31));
+  const msWeek = 7 * 24 * 60 * 60 * 1000;
+  let w = Math.floor((now.getTime() - anchor.getTime()) / msWeek) + 1;
+  if (w < 1) w = 1;
+  if (w > 12) w = ((w - 1) % 12) + 1;
+
+  const themes = [
+    { focus: "Baseline & Search Console", out: "Esporta GSC; elenco 5 URL da migliorare (CTR o pos. 11–20)." },
+    { focus: "Link interni pillar", out: "Da homepage + 3 blog forti → link verso 2 pagine in crescita o da migliorare." },
+    { focus: "Blog: nuovo o refresh", out: "1 articolo nuovo O 1 esistente con +FAQ/schema e data aggiornamento." },
+    { focus: "Zone locali", out: "1 scheda zona o ampliamento testo unico + internal link." },
+    { focus: "Immagini & LCP", out: "Audit LCP home + 2 blog; ottimizzare 1 hero o lazy-load." },
+    { focus: "Landing conversione", out: "1 landing: CTA, copy sopra piega, +200 parole uniche." },
+    { focus: "Schema allineamento", out: "Pagine con 1 solo JSON-LD → set minimo coerente." },
+    { focus: "Recensioni & trust", out: "Recensioni Google su 3 pagine chiave; NAP su contatti." },
+    { focus: "Contenuti money", out: "1 pezzo lungo o refresh con internal link forti." },
+    { focus: "Cluster affitti/studenti", out: "Link blog → servizio-locazioni e zona universitaria." },
+    { focus: "Sitemap vs HTML", out: "Confronto sitemap/file; fix orphan o lastmod." },
+    { focus: "Review trimestrale", out: "Report trimestre; 3 test titoli meta; piano prossimi 90 gg." },
+  ];
+  const t = themes[w - 1];
+  const dateStr = now.toLocaleDateString("it-IT", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "Europe/Rome",
+  });
+
+  const monthIt = parseInt(
+    new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Rome", month: "numeric" }).format(now),
+    10
+  );
+  const editorialByMonth = {
+    4: {
+      titolo: "Aprile — Acquisizione 2.0 & digital farming",
+      bullets:
+        "- Filone sito: processo dopo primo contatto online; EPBD/classe energetica con fonti ufficiali (niente allarmismi).\n- Off-site: alert portali/social + tempi di risposta (checklist interna).",
+    },
+    5: {
+      titolo: "Maggio — Visibilità, dati OMI/CMA, zone locali",
+      bullets:
+        "- Blog/servizio: report di mercato vs stima generica; guida lettura OMI per zona.\n- SEO: 1 quartiere/comune; Linda: flusso telefono ↔ report (vedi `js/chatbot.js` / landing chat).",
+    },
+    6: {
+      titolo: "Giugno — Recensioni, video, casi documentati, GMB",
+      bullets:
+        "- Casi studio solo con numeri verificabili; allineare blocco recensioni su 3 pagine chiave.\n- Reels/TikTok da clip esistenti; GBP 1 post/foto a settimana.",
+    },
+  };
+  const ed = editorialByMonth[monthIt] || {
+    titolo: "Fuori Q2",
+    bullets:
+      "- Aggiorna `docs/piano-editoriale-q2-2026.md` o crea il piano trimestre successivo.\n- Mantieni il ciclo 12 settimane dalla skill `righetto-venerdi-sito-90giorni`.",
+  };
+
+  let docSnippet = "";
+  try {
+    docSnippet = fs.readFileSync("docs/piano-editoriale-q2-2026.md", "utf8");
+  } catch (_e) {
+    docSnippet = "";
+  }
+  const docNote = docSnippet
+    ? "\n\n_Documento completo in repo: `docs/piano-editoriale-q2-2026.md`_"
+    : "\n\n_(File `docs/piano-editoriale-q2-2026.md` non trovato nel branch)_";
+
+  const piano60 = buildPiano60(now);
+  const body = `## Promemoria automatico — piano 90 giorni
+
+**Data (Italia):** ${dateStr}  
+**Settimana ciclo:** **${w}/12**  
+**Tema fase:** ${t.focus}  
+**Output minimo atteso:** ${t.out}
+
+---
+
+### Linea editoriale mese corrente (Q2 2026)
+
+**${ed.titolo}**
+
+${ed.bullets}
+${docNote}
+
+---
+
+### Checklist venerdì (spunta in Issue o a mano)
+
+- [ ] Search Console ultimi 7/28 gg: 1 opportunità + 1 anomalia
+- [ ] **Almeno 1 modifica** nel repo (contenuto, link interno, meta, schema o fix)
+- [ ] Google Business Profile: post, foto o risposta recensione
+- [ ] 1 URL top traffico su mobile: CTA ok?
+- [ ] Scelta **una sola priorità** per lunedì–giovedì prossimi
+
+---
+
+### Incolla questo messaggio in Cursor (chat)
+
+\`\`\`text
+È il venerdì Righetto. Leggi la skill \`righetto-venerdi-sito-90giorni\` e dammi il blocco "Venerdì Righetto" per la settimana ${w}/12 con azioni concrete sul repo progetti/index (file da toccare e commit).
+\`\`\`
+${piano60}
+
+---
+
+_Issue creata dal workflow \`.github/workflows/venerdi-righetto-piano.yml\` (cron venerdì 07:30 UTC ≈ 09:30 Europe/Rome in CEST)._
+`;
+
+  return {
+    title: `📅 Venerdì Righetto — Settimana ${w}/12 (${t.focus}) + piano 60g`,
+    body,
+    week: w,
+  };
+}
+
+module.exports = { buildVenerdiIssue };
+
+if (require.main === module) {
+  const { title, body, week } = buildVenerdiIssue();
+  console.log(JSON.stringify({ title, week, bodyLength: body.length }));
+}
