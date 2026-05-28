@@ -14,8 +14,8 @@
 <title>Admin — Righetto Immobiliare</title>
 <link rel="stylesheet" href="css/fonts.css?v=3">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script async src="https://apis.google.com/js/api.js"></script>
-<script async src="https://accounts.google.com/gsi/client"></script>
+<script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+<script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
 <script async src="https://cdn.jsdelivr.net/npm/otpauth@9/dist/otpauth.umd.min.js"></script>
 <style>
 :root {
@@ -3510,78 +3510,39 @@ tr:hover td { background: rgba(206,224,143,0.06); }
       <!-- ═══ SEZIONE SOCIAL MEDIA ═══ -->
       <div class="section" id="sec-social">
         <div class="table-wrap" style="padding:28px;max-width:800px">
-          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:6px">Pubblicazione Social Media</h3>
-          <p style="font-size:0.82rem;color:var(--caffe2);margin-bottom:20px">Configura le API per pubblicare gli immobili direttamente sui social media</p>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:6px">Social — bozze e Agenda</h3>
+          <p style="font-size:0.82rem;color:var(--caffe2);margin-bottom:20px">Qui <strong>non</strong> inserisci token Meta. Generi o approvi bozze; la pubblicazione su Facebook/Instagram usa solo <code>righetto_social\.env</code> sul PC.</p>
 
           <div style="background:#fffdf8;border:2px solid var(--oro);border-radius:12px;padding:18px;margin-bottom:24px">
             <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px">
               <div>
                 <h4 style="font-size:1.05rem;color:var(--caffe);margin:0 0 4px">Bozze da pubblicare</h4>
-                <p style="font-size:0.76rem;color:var(--caffe2);margin:0;max-width:520px">3 slot/settimana (lun, mer, ven). Testi da template; <strong>Reel MP4</strong> creato sul PC da foto immobile/blog/landing (FFmpeg). Approvi → Agenda → script Meta.</p>
+                <p style="font-size:0.76rem;color:var(--caffe2);margin:0;max-width:520px"><strong>12 post/settimana</strong> (lun/mer/ven): immobile, blog, landing, agenzia — testi da template + spintax. <strong>+2 notizie RSS</strong> (mar/gio, Sole24/ADE/Milano Finanza, testo originale): <code>python genera_bozze_settimanali.py</code> sul PC. Reel: <code>genera_reel.py --pending</code>. Poi <strong>Approva</strong> → Agenda → Meta + Google Business.</p>
               </div>
               <div style="display:flex;gap:8px;flex-wrap:wrap">
-                <button type="button" class="btn btn-primary btn-sm" onclick="generateWeeklySocialDrafts()">Genera bozze settimanali</button>
+                <button type="button" class="btn btn-primary btn-sm" onclick="generateWeeklySocialDrafts()">Genera 12 bozze (auto)</button>
                 <button type="button" class="btn btn-secondary btn-sm" onclick="loadSocialBozze()">Aggiorna elenco</button>
               </div>
             </div>
-            <p style="font-size:0.72rem;color:var(--caffe2);margin:0 0 10px">Reel: sul PC <code style="font-size:0.68rem">python genera_reel.py --pending</code> (dopo <code>winget install ffmpeg</code>). L&apos;URL .mp4 compare in tabella; poi Approva. Guida: <code style="font-size:0.68rem">righetto_social/README.md</code>.</p>
+            <p style="font-size:0.72rem;color:var(--caffe2);margin:0 0 10px">Automatico: immobili attivi, articoli blog pubblicati, landing attive, pagine agenzia. Oppure sotto scegli un contenuto e crea una bozza singola. Reel: <code>python genera_reel.py --pending</code> sul PC.</p>
             <div id="socialBozzeWrap" style="font-size:0.8rem;max-height:420px;overflow:auto">
               <p style="color:var(--caffe2);margin:0">Caricamento bozze…</p>
             </div>
           </div>
 
-          <!-- FACEBOOK -->
-          <div style="background:var(--sfondo);border-radius:12px;padding:18px;margin-bottom:16px">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-              <div style="width:36px;height:36px;border-radius:8px;background:#1877F2;display:flex;align-items:center;justify-content:center">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-              </div>
-              <div>
-                <div style="font-weight:700;font-size:0.95rem;color:var(--nero)">Facebook Page</div>
-                <div style="font-size:0.75rem;color:var(--caffe2)" id="fbStatus">Non configurato</div>
-              </div>
-            </div>
-            <div class="form-grid">
-              <div class="form-group">
-                <label>Page ID</label>
-                <input type="text" id="socialFbPageId" placeholder="Es. 1234567890">
-              </div>
-              <div class="form-group">
-                <label>Page Access Token</label>
-                <input type="password" id="socialFbToken" placeholder="Token di lunga durata">
-              </div>
-            </div>
-            <div style="display:flex;gap:8px;margin-top:8px">
-              <button class="btn btn-sm btn-secondary" onclick="testFbConnection()">Test Connessione</button>
-              <button class="btn btn-sm btn-primary" onclick="saveSocialConfig('fb')">Salva</button>
-            </div>
-          </div>
-
-          <!-- INSTAGRAM -->
-          <div style="background:var(--sfondo);border-radius:12px;padding:18px;margin-bottom:16px">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-              <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="white"/></svg>
-              </div>
-              <div>
-                <div style="font-weight:700;font-size:0.95rem;color:var(--nero)">Instagram Business</div>
-                <div style="font-size:0.75rem;color:var(--caffe2)" id="igStatus">Non configurato</div>
-              </div>
-            </div>
-            <div class="form-grid">
-              <div class="form-group">
-                <label>Instagram Business Account ID</label>
-                <input type="text" id="socialIgAccountId" placeholder="Dall'API Graph di Facebook">
-              </div>
-              <div class="form-group">
-                <label>Access Token (stesso di Facebook)</label>
-                <input type="password" id="socialIgToken" placeholder="Usa lo stesso token Facebook">
-              </div>
-            </div>
-            <div style="display:flex;gap:8px;margin-top:8px">
-              <button class="btn btn-sm btn-secondary" onclick="testIgConnection()">Test Connessione</button>
-              <button class="btn btn-sm btn-primary" onclick="saveSocialConfig('ig')">Salva</button>
-            </div>
+          <!-- META: unica fonte = righetto_social/.env (script Python) -->
+          <div style="background:#e8f4ea;border:2px solid var(--verde);border-radius:12px;padding:18px;margin-bottom:16px">
+            <div style="font-weight:700;font-size:0.95rem;color:var(--nero);margin-bottom:8px">Facebook + Instagram — configurazione unica</div>
+            <p style="font-size:0.78rem;color:var(--caffe2);margin:0 0 10px;line-height:1.55">
+              <strong>Non serve compilare i campi qui sotto.</strong> Bozze, Agenda e pubblicazione automatica usano solo il file sul PC:
+              <code style="font-size:0.72rem">righetto_social\.env</code>
+            </p>
+            <pre style="margin:0 0 10px;padding:10px 12px;background:#fff;border-radius:8px;font-size:0.7rem;overflow:auto;line-height:1.45">META_PAGE_ID=...
+META_PAGE_ACCESS_TOKEN=EAAG...
+META_IG_USER_ID=...</pre>
+            <p style="font-size:0.74rem;color:var(--caffe2);margin:0 0 6px"><strong>Tu (manuale):</strong> Agenda → giorno + ora → doppio clic <code>pubblica_adesso.bat</code> oppure <code>python publish_from_agenda.py --modo manuale</code></p>
+            <p style="font-size:0.74rem;color:var(--caffe2);margin:0 0 8px"><strong>Cron automatico:</strong> domenica <code>cron_settimanale.bat</code> (bozze + notizie RSS); lun–ven ogni 5–10 min <code>cron_pubblica.bat</code> (Meta + Google). Verifica token: <code>verifica_meta.bat</code></p>
+            <div style="font-size:0.75rem;color:var(--caffe2)" id="fbStatus">Token Meta: solo file .env sul PC (non qui)</div>
           </div>
 
           <!-- GOOGLE BUSINESS PROFILE -->
@@ -3616,56 +3577,49 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <p style="font-size:0.78rem;color:var(--caffe2)">TikTok non supporta la pubblicazione diretta da siti web. Quando pubblichi un immobile, verr&agrave; generata una scheda visiva ottimizzata che potrai scaricare e caricare manualmente su TikTok.</p>
           </div>
 
-          <!-- PUBBLICA IMMOBILE -->
+          <!-- BOZZA MANUALE DA CONTENUTO -->
           <div style="background:white;border:2px solid var(--caffe3);border-radius:12px;padding:18px;margin-top:24px">
-            <h4 style="font-size:1rem;color:var(--nero);margin-bottom:12px">Pubblica Immobile sui Social</h4>
-            <div class="form-group" style="margin-bottom:12px">
-              <label>Seleziona Immobile</label>
-              <select id="socialPropertySelect" style="width:100%">
-                <option value="">— Seleziona un immobile —</option>
+            <h4 style="font-size:1rem;color:var(--nero);margin-bottom:8px">Bozza singola (scegli tu il contenuto)</h4>
+            <p style="font-size:0.74rem;color:var(--caffe2);margin:0 0 12px">Non pubblica subito sui social: crea una riga in bozze → Approva → Agenda → script con .env.</p>
+            <div class="form-group" style="margin-bottom:10px">
+              <label>Immobile</label>
+              <select id="socialPropertySelect" style="width:100%" onchange="showSocialPropertyPreview(this.value)">
+                <option value="">— opzionale —</option>
               </select>
             </div>
-            <div id="socialPropertyPreview" style="display:none;background:var(--sfondo);border-radius:8px;padding:12px;margin-bottom:12px"></div>
+            <div id="socialPropertyPreview" style="display:none;background:var(--sfondo);border-radius:8px;padding:12px;margin-bottom:10px"></div>
+            <div class="form-group" style="margin-bottom:10px">
+              <label>Articolo blog</label>
+              <select id="socialBlogSelect" style="width:100%" onchange="showSocialBlogPreview(this.value)">
+                <option value="">— opzionale —</option>
+              </select>
+            </div>
+            <div id="socialBlogPreview" style="display:none;background:var(--sfondo);border-radius:8px;padding:12px;margin-bottom:10px"></div>
+            <div class="form-group" style="margin-bottom:12px">
+              <label>Landing page</label>
+              <select id="socialLandingSelect" style="width:100%">
+                <option value="">— opzionale —</option>
+              </select>
+            </div>
             <div style="display:flex;gap:8px;flex-wrap:wrap">
-              <button class="btn btn-sm" onclick="publishToFacebook()" style="background:#1877F2;color:white">Pubblica su Facebook</button>
-              <button class="btn btn-sm" onclick="publishToInstagram()" style="background:linear-gradient(45deg,#f09433,#dc2743);color:white">Pubblica su Instagram</button>
-              <button class="btn btn-sm" onclick="publishToGBP()" style="background:#4285F4;color:white">Pubblica su Google</button>
-              <button class="btn btn-sm" onclick="generateTikTokImage()" style="background:#000;color:white">Genera per TikTok</button>
+              <button type="button" class="btn btn-sm btn-primary" onclick="createSocialBozzaFromSelection('immobile')">Bozza da immobile</button>
+              <button type="button" class="btn btn-sm btn-primary" onclick="createSocialBozzaFromSelection('blog')">Bozza da articolo</button>
+              <button type="button" class="btn btn-sm btn-primary" onclick="createSocialBozzaFromSelection('landing')">Bozza da landing</button>
+              <button type="button" class="btn btn-sm" onclick="generateTikTokImage()">Scheda TikTok (download)</button>
             </div>
             <div id="socialPublishResult" style="margin-top:12px;font-size:0.82rem;display:none"></div>
-          </div>
-
-          <!-- PUBBLICA ARTICOLO BLOG -->
-          <div style="background:white;border:2px solid var(--caffe3);border-radius:12px;padding:18px;margin-top:16px">
-            <h4 style="font-size:1rem;color:var(--nero);margin-bottom:12px">Pubblica Articolo Blog sui Social</h4>
-            <div class="form-group" style="margin-bottom:12px">
-              <label>Seleziona Articolo</label>
-              <select id="socialBlogSelect" style="width:100%" onchange="showSocialBlogPreview(this.value)">
-                <option value="">— Seleziona un articolo —</option>
-              </select>
-            </div>
-            <div id="socialBlogPreview" style="display:none;background:var(--sfondo);border-radius:8px;padding:12px;margin-bottom:12px"></div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap">
-              <button class="btn btn-sm" onclick="publishBlogToFacebook()" style="background:#1877F2;color:white">Pubblica su Facebook</button>
-              <button class="btn btn-sm" onclick="publishBlogToInstagram()" style="background:linear-gradient(45deg,#f09433,#dc2743);color:white">Pubblica su Instagram</button>
-              <button class="btn btn-sm" onclick="publishBlogToGBP()" style="background:#4285F4;color:white">Pubblica su Google</button>
-            </div>
-            <div id="socialBlogPublishResult" style="margin-top:12px;font-size:0.82rem;display:none"></div>
           </div>
 
           <!-- GUIDA SETUP -->
           <details style="margin-top:20px">
             <summary style="font-weight:600;font-size:0.9rem;color:var(--nero);cursor:pointer">Come configurare le API</summary>
             <div style="font-size:0.82rem;color:var(--caffe2);padding:12px 0;line-height:1.7">
-              <p><strong>Facebook + Instagram:</strong></p>
+              <p><strong>Facebook + Instagram (pubblicazione automatica):</strong></p>
               <ol style="padding-left:20px;margin-bottom:12px">
-                <li>Vai su <a href="https://developers.facebook.com" target="_blank">developers.facebook.com</a></li>
-                <li>Crea un'app di tipo "Business"</li>
-                <li>Aggiungi il prodotto "Facebook Login"</li>
-                <li>In Strumenti > Esplora API Graph, genera un Token di Pagina</li>
-                <li>Per il token di lunga durata: usa il debug token e estendilo</li>
-                <li>Il Page ID lo trovi nelle Impostazioni della Pagina Facebook</li>
-                <li>L'Instagram Business Account ID: vai su API Graph Explorer, chiama <code>/me/accounts</code> poi <code>/{page-id}?fields=instagram_business_account</code></li>
+                <li>Token e ID solo in <code>righetto_social\.env</code> sul PC (<code>META_PAGE_ID</code>, <code>META_PAGE_ACCESS_TOKEN</code>, <code>META_IG_USER_ID</code>)</li>
+                <li>Bozze e Approva in questo admin → tabella <code>pianificazioni</code></li>
+                <li>Pubblicazione: <code>python publish_from_agenda.py</code> (o attività pianificata Windows)</li>
+                <li>Per trovare Page ID / IG ID la prima volta: Graph API Explorer → <code>me/accounts</code> → <code>PAGE_ID?fields=instagram_business_account</code></li>
               </ol>
               <p><strong>Google Business Profile:</strong></p>
               <ol style="padding-left:20px;margin-bottom:12px">
@@ -3951,7 +3905,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               </div>
               <div class="form-group">
                 <label>&nbsp;</label>
-                <p style="font-size:0.75rem;color:var(--caffe2);margin-top:2px"><strong>Ora nominale dello slot.</strong> Il worker pubblica solo se viene eseguito tra quest&apos;ora e +<strong id="agenda_wm_hint">18</strong> minuti (configura <code>PUBLISH_WINDOW_MINUTES</code> nel <code>.env</code> di <code>publish_from_agenda.py</code>, stesso valore qui sotto solo indicativo).</p>
+                <p style="font-size:0.75rem;color:var(--caffe2);margin-top:2px"><strong>Ora del post.</strong> Tu scegli giorno e ora in Agenda. Quando vuoi pubblicare: <code>pubblica_adesso.bat</code> (rispetta l&apos;orario impostato) o <code>--forza</code> per anticipare. Il cron automatico usa un percorso separato (<code>cron_pubblica.bat</code>).</p>
               </div>
 
               <div class="form-group form-full">
@@ -4832,7 +4786,7 @@ const ADMIN_PASSWORD = "Spazio1999!";
 const URL_KEY = 'RIG2024';
 
 /* Deve coincidere con public.righetto_admin_secret() in sql/rls-security-hardening.sql */
-const RIG_ADMIN_RLS_SECRET = 'RIG_SB_ADMIN_2026_CAMBIA_QUESTO_SEGRETO_LUNGO';
+const RIG_ADMIN_RLS_SECRET = 'sEwKPRkWMb-vUHFYpuqtrQWkOobWV28TKZaaQeKUpI63WRgnDhyeiV0yrVL6wdSR';
 
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
   global: {
@@ -8148,6 +8102,130 @@ function quickPublishSocial(id) {
 
 window.__socialBozzeRows = [];
 
+var SOCIAL_SECTIONS_TPL = {"immobile":{"titoli_spintax":["{Nuovo incarico a Padova|In esclusiva a Padova}: {titolo}","{Scopri questo immobile|Opportunita a Padova}: {titolo}"],"corpo_spintax":["{Visita su appuntamento|Richiedi informazioni}: {zona} — {dettaglio}.\n{Consulenza gratuita in agenzia|Prenota una visita senza impegno}.\nTel. 049 8755543 · righettoimmobiliare.it"],"hashtags":["#padova","#immobiliare","#righettoimmobiliare","#casa","#venditacasa","#affittopadova","#mercatoimmobiliare","#agenziaimmobiliare","#immobilipadova","#consulenzaimmobiliare","#nuovoannuncio","#proprieta"],"canali_settimana":[{"giorno_offset":0,"ora":"09:45","tipo":"instagram_reel"},{"giorno_offset":2,"ora":"12:30","tipo":"instagram_feed"},{"giorno_offset":4,"ora":"18:45","tipo":"facebook_post"}]},"blog":{"titoli_spintax":["{Approfondimento|Articolo}: {titolo}","{Sul blog|Leggi ora}: {titolo}"],"corpo_spintax":["{Guida pratica|Approfondimento} per chi {vende|acquista} a Padova: {titolo}.\n{Link in bio|Leggi l articolo completo} — consulenza senza impegno."],"hashtags":["#padova","#blogimmobiliare","#righettoimmobiliare","#consulenzaimmobiliare","#mutuo","#tasse","#mercatoimmobiliare","#primacasa","#venditacasa","#investimentiimmobiliari","#normative","#guida"],"canali_settimana":[{"giorno_offset":0,"ora":"11:15","tipo":"instagram_feed"},{"giorno_offset":2,"ora":"13:00","tipo":"facebook_post"},{"giorno_offset":4,"ora":"12:00","tipo":"instagram_feed"}]},"landing":{"titoli_spintax":["{Servizio dedicato|Landing}: {titolo}","{Scopri il servizio|Percorso su misura}: {titolo}"],"corpo_spintax":["{Consulenza gratuita|Percorso guidato} — {titolo}.\n{Compila il form|Richiedi informazioni} in pochi minuti. {Padova e provincia|Zona Padova}."],"hashtags":["#padova","#righettoimmobiliare","#consulenzagratuita","#valutazioneimmobile","#venderecasa","#mutuo","#landing","#serviziimmobiliari","#agenziaimmobiliare","#immobilipadova","#assistenza","#contatti"],"canali_settimana":[{"giorno_offset":0,"ora":"12:45","tipo":"facebook_post"},{"giorno_offset":2,"ora":"11:30","tipo":"instagram_feed"},{"giorno_offset":4,"ora":"18:30","tipo":"facebook_post"}]},"agenzia":{"titoli_spintax":["{Righetto Immobiliare|La tua agenzia a Padova}: {titolo}","{Dal 2000 a Padova|Esperienza locale}: {titolo}"],"corpo_spintax":["{350+ immobili|Oltre 350 annunci} · {101 comuni|Padova e provincia}.\n{Consulenza gratuita|Prenota in agenzia}: {pagina}.\n049 8755543"],"hashtags":["#padova","#righettoimmobiliare","#agenziaimmobiliare","#immobilipadova","#consulenzaimmobiliare","#dal2000","#professionisti","#venditacasa","#acquistocasa","#territorio","#contatti","#soddisfazioneclienti"],"canali_settimana":[{"giorno_offset":0,"ora":"18:50","tipo":"instagram_feed"},{"giorno_offset":2,"ora":"18:15","tipo":"facebook_post"},{"giorno_offset":4,"ora":"09:40","tipo":"instagram_reel"}]},"pagine_agenzia":[{"path":"/","titolo":"Homepage — annunci e servizi"},{"path":"/chi-siamo","titolo":"Chi siamo — esperienza dal 2000"},{"path":"/contatti","titolo":"Contatti e consulenza gratuita"},{"path":"/servizi","titolo":"Servizi per venditori e acquirenti"}]};
+
+function socialBozzeApplyPattern(pattern, ctx) {
+  var out = String(pattern || '');
+  Object.keys(ctx || {}).forEach(function(k) {
+    out = out.split('{' + k + '}').join(ctx[k]);
+  });
+  return out;
+}
+
+function socialBozzeWeekMonday(fromDate) {
+  var c = new Date(fromDate);
+  c.setDate(c.getDate() + 1);
+  c.setHours(0, 0, 0, 0);
+  while (c.getDay() !== 1) c.setDate(c.getDate() + 1);
+  return c;
+}
+
+function socialBozzeDedupeKey(b) {
+  return [String(b.data_pubblicazione_proposta || '').slice(0, 10), b.fonte, b.tipo_canale, b.ora_proposta].join('|');
+}
+
+async function socialBozzeFetchExistingKeys(fromIso, toIso) {
+  var keys = {};
+  try {
+    var res = await sb.from('bozze_social').select('data_pubblicazione_proposta,fonte,tipo_canale,ora_proposta,stato')
+      .gte('data_pubblicazione_proposta', fromIso).lte('data_pubblicazione_proposta', toIso);
+    if (res.error) return keys;
+    (res.data || []).forEach(function(r) {
+      if ((r.stato || '') === 'rifiutata') return;
+      keys[[String(r.data_pubblicazione_proposta || '').slice(0, 10), r.fonte, r.tipo_canale, r.ora_proposta].join('|')] = true;
+    });
+  } catch (e) { /* ignore */ }
+  return keys;
+}
+
+function socialBozzeActiveImmobili() {
+  return (allImmobili || []).filter(function(i) {
+    return i.attivo && !i.venduto && !i.affittato;
+  }).sort(function(a, b) {
+    return String(b.created_at || '').localeCompare(String(a.created_at || ''));
+  });
+}
+
+function socialBozzePublishedBlog() {
+  return (blogArticles || []).filter(function(b) {
+    return (b.stato || 'pubblicato') === 'pubblicato';
+  }).sort(function(a, b) {
+    return String(b.data_pubblicazione || b.created_at || '').localeCompare(String(a.data_pubblicazione || a.created_at || ''));
+  });
+}
+
+function socialBozzeActiveLandings() {
+  return (landingPages || []).filter(function(p) { return (p.stato || '') !== 'bozza'; });
+}
+
+function socialBozzeBuildSectionRows(section, tpl, weekMonday, weekIndex, base) {
+  var sec = tpl[section] || {};
+  var tags = (sec.hashtags || []).slice(0, 15);
+  var titoliP = sec.titoli_spintax || ['{titolo}'];
+  var corpiP = sec.corpo_spintax || ['{titolo}'];
+  var canali = (sec.canali_settimana || []).slice(0, 3);
+  var rows = [];
+  var ctx = { titolo: 'Righetto Immobiliare', zona: 'Padova', dettaglio: '', pagina: 'il sito' };
+  var link = '', ref = null, mediaUrl = null;
+
+  if (section === 'immobile') {
+    var imms = socialBozzeActiveImmobili();
+    var row = imms[weekIndex % Math.max(1, imms.length)] || imms[0];
+    if (!row) return rows;
+    link = base + '/immobile?s=' + encodeURIComponent(generatePropertySlug(row));
+    ref = String(row.id || '');
+    ctx.titolo = String(row.titolo || 'Immobile');
+    ctx.zona = String(row.zona || row.comune || 'Padova');
+    ctx.dettaglio = row.prezzo ? ('da € ' + Number(row.prezzo).toLocaleString('it-IT')) : 'su richiesta';
+    var foto = row.foto_principale || (row.foto_urls && row.foto_urls[0]) || (Array.isArray(row.foto) && row.foto[0]) || '';
+    if (foto) mediaUrl = String(foto).indexOf('http') === 0 ? foto : (SUPABASE_URL.replace(/\/$/, '') + '/storage/v1/object/public/' + String(foto).replace(/^\//, ''));
+  } else if (section === 'blog') {
+    var blogs = socialBozzePublishedBlog();
+    var b = blogs[weekIndex % Math.max(1, blogs.length)] || blogs[0];
+    if (!b) return rows;
+    var slug = b.slug || generateSlug(b.titolo || '');
+    link = base + '/blog-articolo?s=' + encodeURIComponent(slug);
+    ref = String(b.id || '');
+    ctx.titolo = String(b.titolo || 'Articolo');
+    if (b.immagine_copertina) mediaUrl = b.immagine_copertina;
+  } else if (section === 'landing') {
+    var lands = socialBozzeActiveLandings();
+    var l = lands[weekIndex % Math.max(1, lands.length)] || lands[0];
+    if (!l) return rows;
+    var path = l.url ? String(l.url) : ('/' + (l.slug || ''));
+    if (path.indexOf('/') !== 0) path = '/' + path;
+    link = base.replace(/\/$/, '') + path;
+    ref = String(l.id || '');
+    ctx.titolo = String(l.titolo || 'Landing');
+    ctx.pagina = ctx.titolo;
+  } else if (section === 'agenzia') {
+    var pages = tpl.pagine_agenzia || [];
+    var pg = pages[weekIndex % Math.max(1, pages.length)] || pages[0] || { path: '/', titolo: 'Home' };
+    link = base.replace(/\/$/, '') + (pg.path.indexOf('/') === 0 ? pg.path : '/' + pg.path);
+    ctx.titolo = String(pg.titolo || 'Righetto Immobiliare');
+    ctx.pagina = ctx.titolo;
+    ref = null;
+  }
+
+  canali.forEach(function(slot) {
+    var slotDate = new Date(weekMonday);
+    slotDate.setDate(slotDate.getDate() + Number(slot.giorno_offset || 0));
+    var wd = slotDate.getDay();
+    if (wd !== 1 && wd !== 3 && wd !== 5) return;
+    var tipo = slot.tipo || 'facebook_post';
+    var titolo = socialBozzeApplyPattern(titoliP[weekIndex % titoliP.length], ctx);
+    var corpo = socialBozzeApplyPattern(corpiP[weekIndex % corpiP.length], ctx) + '\n\n' + tags.join(' ');
+    rows.push({
+      stato: 'bozza', tipo_canale: tipo, fonte: section, titolo: titolo.slice(0, 220), corpo: corpo,
+      hashtags: tags, link_pagina: link, media_direct_url: (tipo === 'instagram_reel') ? null : mediaUrl,
+      riferimento_id: ref, data_pubblicazione_proposta: socialBozzeDateFmt(slotDate),
+      ora_proposta: slot.ora || '12:30', note: 'Generato da Admin — 12 bozze/settimana',
+      meta: { settimana: weekIndex, video_auto: tipo === 'instagram_reel' }, updated_at: new Date().toISOString()
+    });
+  });
+  return rows;
+}
+
 function socialBozzeExpandSpintax(text) {
   if (!text) return '';
   var out = String(text);
@@ -8160,6 +8238,20 @@ function socialBozzeExpandSpintax(text) {
     });
   } while (prev !== out);
   return out;
+}
+
+function socialBozzeJsWeekday(isoDate) {
+  var py = new Date(String(isoDate).slice(0, 10) + 'T12:00:00').getDay();
+  var map = { 0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 0 };
+  return map[py] !== undefined ? map[py] : 0;
+}
+
+async function socialBozzaAlreadyInAgenda(bozzaId) {
+  try {
+    var res = await sb.from('pianificazioni').select('id').ilike('note', '%id=' + bozzaId + '%').limit(1);
+    if (res.error) return false;
+    return !!(res.data && res.data.length);
+  } catch (e) { return false; }
 }
 
 function socialBozzeNextWeekdays(count) {
@@ -8246,7 +8338,7 @@ async function loadSocialBozze() {
     tb += '<tr style="border-bottom:1px solid rgba(0,0,0,0.06)"><td style="padding:8px;vertical-align:top;white-space:nowrap">' + escHtml(dt) + '</td><td style="padding:8px;vertical-align:top;font-size:0.72rem">' + tipo + '</td><td style="padding:8px">' + tit + reelNote;
     if (b.link_pagina) tb += '<br><a href="' + escHtml(b.link_pagina) + '" target="_blank" rel="noopener" style="font-size:0.68rem">Pagina</a>';
     if (b.media_direct_url) tb += ' <a href="' + escHtml(b.media_direct_url) + '" target="_blank" rel="noopener" style="font-size:0.68rem">Video</a>';
-    tb += '</td><td style="padding:8px;white-space:nowrap"><button type="button" class="btn btn-sm btn-primary" onclick="approveSocialBozza(' + JSON.stringify(b.id) + ')">Approva</button> <button type="button" class="btn btn-sm" onclick="rejectSocialBozza(' + JSON.stringify(b.id) + ')">Rifiuta</button></td></tr>';
+    tb += '</td><td style="padding:8px;white-space:nowrap"><button type="button" class="btn btn-sm btn-primary" data-bozza-id="' + escHtml(String(b.id)) + '" onclick="approveSocialBozza(this.dataset.bozzaId, this)">Approva</button> <button type="button" class="btn btn-sm" data-bozza-id="' + escHtml(String(b.id)) + '" onclick="rejectSocialBozza(this.dataset.bozzaId)">Rifiuta</button></td></tr>';
   });
   tb += '</tbody></table>';
   wrap.innerHTML = tb;
@@ -8266,113 +8358,155 @@ async function saveSocialBozzaRow(row) {
 }
 
 async function generateWeeklySocialDrafts() {
-  if (!confirm('Generare bozze per i prossimi lun/mer/ven? Non sostituiscono quelle già in attesa.')) return;
-  var base = (document.getElementById('autoPub_site_base') && document.getElementById('autoPub_site_base').value.trim()) || 'https://righettoimmobiliare.it';
+  if (!confirm('Generare fino a 12 bozze (immobile, blog, landing, agenzia) per la prossima settimana lun/mer/ven? Le slot già presenti vengono saltate.')) return;
+  var base = autoPubGetBaseUrl ? autoPubGetBaseUrl() : 'https://righettoimmobiliare.it';
   base = base.replace(/\/$/, '');
-  var days = socialBozzeNextWeekdays(3);
-  if (days.length < 3) {
-    toast('Impossibile calcolare 3 giorni lavorativi.', 'error');
-    return;
-  }
-  var peaks = ['09:45', '12:30', '18:45'];
-  var hashtags = ['#padova', '#immobiliare', '#righettoimmobiliare', '#consulenzaimmobiliare', '#venditacasa'];
-  var pool = autoPubBuildCandidatePool();
-  var imm = pool.filter(function(p) { return p.tipoMedia === 'immobile'; })[0];
-  var land = pool.filter(function(p) { return p.tipoMedia === 'landing'; })[0];
-  var blog = pool.filter(function(p) { return p.tipoMedia === 'blog'; })[0];
-  var inserted = 0;
-
-  if (imm) {
-    await saveSocialBozzaRow({
-      stato: 'bozza', tipo_canale: 'instagram_feed', fonte: 'immobile',
-      titolo: imm.titolo.replace(/^🏠\s*/, '🏠 '),
-      corpo: '{Scopri a Padova|In esclusiva}: ' + socialBozzeExpandSpintax(imm.titolo) + '\n\n' + hashtags.join(' '),
-      link_pagina: imm.link, riferimento_id: imm.ref,
-      data_pubblicazione_proposta: socialBozzeDateFmt(days[0]), ora_proposta: peaks[0],
-      hashtags: hashtags, note: 'Generato da Admin — bozze settimanali'
-    });
-    inserted++;
-  }
-  if (land) {
-    await saveSocialBozzaRow({
-      stato: 'bozza', tipo_canale: 'facebook_post', fonte: 'landing',
-      titolo: land.titolo, corpo: '{Landing|Servizio dedicato}: ' + land.link + '\n\n' + hashtags.join(' '),
-      link_pagina: land.link, data_pubblicazione_proposta: socialBozzeDateFmt(days[1]), ora_proposta: peaks[1],
-      hashtags: hashtags, note: 'Generato da Admin'
-    });
-    inserted++;
-  }
-  var reelLink = base + '/landing-consulenza-immobiliare-gratuita.html';
-  var reelSuffix = '';
-  if (blog) {
-    reelLink = blog.link;
-    reelSuffix = ' · ' + String(blog.titolo || '').replace(/^📝\s*/, '').slice(0, 60);
-  }
-  await saveSocialBozzaRow({
-    stato: 'bozza', tipo_canale: 'instagram_reel', fonte: 'reel_manuale',
-    titolo: '{Il mercato a Padova|Consulenza gratuita}: prenota in agenzia' + reelSuffix,
-    corpo: 'Reel: incolla URL .mp4 in media_direct_url prima di approvare.\n049 8755543\n\n' + hashtags.join(' '),
-    link_pagina: reelLink,
-    riferimento_id: blog ? blog.ref : null,
-    data_pubblicazione_proposta: socialBozzeDateFmt(days[2]), ora_proposta: '07:15',
-    hashtags: hashtags, note: 'Video da caricare manualmente'
+  var monday = socialBozzeWeekMonday(new Date());
+  var fromIso = socialBozzeDateFmt(monday);
+  var end = new Date(monday); end.setDate(end.getDate() + 6);
+  var toIso = socialBozzeDateFmt(end);
+  var existing = await socialBozzeFetchExistingKeys(fromIso, toIso);
+  var tpl = SOCIAL_SECTIONS_TPL;
+  var sections = ['immobile', 'blog', 'landing', 'agenzia'];
+  var allRows = [];
+  sections.forEach(function(sec) {
+    allRows = allRows.concat(socialBozzeBuildSectionRows(sec, tpl, monday, 0, base));
   });
-  inserted++;
-  toast(inserted + ' bozze create. Controlla testi e reel prima di approvare.', 'success');
+  var saved = 0, skipped = 0;
+  for (var i = 0; i < allRows.length; i++) {
+    var b = allRows[i];
+    if (existing[socialBozzeDedupeKey(b)]) { skipped++; continue; }
+    var ins = await sb.from('bozze_social').insert(b);
+    if (ins.error) {
+      toast('Errore insert: ' + (ins.error.message || ins.error), 'error');
+      continue;
+    }
+    existing[socialBozzeDedupeKey(b)] = true;
+    saved++;
+  }
+  toast(saved + ' bozze create (' + skipped + ' già presenti). Approva → Agenda. Reel: genera_reel.py sul PC.', saved ? 'success' : 'error');
   await loadSocialBozze();
 }
 
-async function approveSocialBozza(id) {
-  var rows = window.__socialBozzeRows || [];
-  var b = rows.find(function(x) { return x.id === id; });
-  if (!b) { toast('Bozza non trovata.', 'error'); return; }
-  if (b.tipo_canale === 'instagram_reel' && !(b.media_direct_url || '').trim()) {
-    var url = prompt('URL pubblico del file .mp4 (HTTPS sul sito):');
-    if (!url || url.indexOf('http') !== 0) {
-      toast('Reel: serve URL video HTTPS prima di approvare.', 'error');
+async function createSocialBozzaFromSelection(kind) {
+  var base = autoPubGetBaseUrl ? autoPubGetBaseUrl() : 'https://righettoimmobiliare.it';
+  base = base.replace(/\/$/, '');
+  var monday = socialBozzeWeekMonday(new Date());
+  var nextSlot = new Date(monday);
+  var wd = nextSlot.getDay();
+  if (wd !== 1 && wd !== 3 && wd !== 5) {
+    while (nextSlot.getDay() !== 1 && nextSlot.getDay() !== 3 && nextSlot.getDay() !== 5) nextSlot.setDate(nextSlot.getDate() + 1);
+  }
+  var tpl = SOCIAL_SECTIONS_TPL;
+  var row = null;
+  if (kind === 'immobile') {
+    var id = document.getElementById('socialPropertySelect').value;
+    if (!id) { toast('Seleziona un immobile', 'error'); return; }
+    var im = allImmobili.find(function(x) { return String(x.id) === String(id); });
+    if (!im) { toast('Immobile non trovato', 'error'); return; }
+    var saved = im; var orig = allImmobili.slice();
+    allImmobili = [im].concat(orig.filter(function(x) { return String(x.id) !== String(id); }));
+    row = socialBozzeBuildSectionRows('immobile', tpl, monday, 0, base)[0];
+    allImmobili = orig;
+    if (!row) { toast('Impossibile creare bozza immobile', 'error'); return; }
+  } else if (kind === 'blog') {
+    var bid = document.getElementById('socialBlogSelect').value;
+    if (!bid) { toast('Seleziona un articolo', 'error'); return; }
+    var art = blogArticles.find(function(x) { return String(x.id) === String(bid); });
+    if (!art) { toast('Articolo non trovato', 'error'); return; }
+    var ob = blogArticles.slice(); blogArticles = [art].concat(blogArticles.filter(function(x) { return String(x.id) !== String(bid); }));
+    row = socialBozzeBuildSectionRows('blog', tpl, monday, 0, base)[0];
+    blogArticles = ob;
+  } else if (kind === 'landing') {
+    var lid = document.getElementById('socialLandingSelect').value;
+    if (!lid) { toast('Seleziona una landing', 'error'); return; }
+    var lp = (landingPages || []).find(function(x) { return String(x.id) === String(lid); });
+    if (!lp) { toast('Landing non trovata', 'error'); return; }
+    var ol = landingPages.slice(); landingPages = [lp].concat((landingPages || []).filter(function(x) { return String(x.id) !== String(lid); }));
+    row = socialBozzeBuildSectionRows('landing', tpl, monday, 0, base)[0];
+    landingPages = ol;
+  }
+  if (!row) { toast('Nessuna bozza generata', 'error'); return; }
+  row.data_pubblicazione_proposta = socialBozzeDateFmt(nextSlot);
+  row.note = 'Bozza manuale Admin — ' + kind;
+  var ins = await sb.from('bozze_social').insert(row);
+  if (ins.error) { toast('Errore: ' + (ins.error.message || ins.error), 'error'); return; }
+  toast('Bozza creata. Controlla in elenco e clicca Approva.', 'success');
+  await loadSocialBozze();
+}
+
+async function approveSocialBozza(id, btnEl) {
+  if (!id) { toast('ID bozza mancante.', 'error'); return; }
+  var btn = btnEl || null;
+  if (btn) { btn.disabled = true; btn.textContent = '…'; }
+  try {
+    var fresh = await sb.from('bozze_social').select('*').eq('id', id).limit(1);
+    if (fresh.error) throw fresh.error;
+    var b = (fresh.data && fresh.data[0]) || (window.__socialBozzeRows || []).find(function(x) { return String(x.id) === String(id); });
+    if (!b) { toast('Bozza non trovata in Supabase.', 'error'); return; }
+
+    if (await socialBozzaAlreadyInAgenda(id)) {
+      var up = await sb.from('bozze_social').update({ stato: 'programmata', updated_at: new Date().toISOString() }).eq('id', id);
+      if (up.error) throw up.error;
+      toast('Già in Agenda: bozza archiviata.', 'success');
+      await loadSocialBozze();
       return;
     }
-    b.media_direct_url = url.trim();
-    try { await sb.from('bozze_social').update({ media_direct_url: b.media_direct_url }).eq('id', id); } catch (e) {}
-  }
-  var ds = b.data_pubblicazione_proposta || socialBozzeDateFmt(new Date());
-  var jsDay = new Date(ds + 'T12:00:00').getDay();
-  var corpo = socialBozzeExpandSpintax(b.corpo || b.titolo || '');
-  var payload = {
-    tipo: b.tipo_canale || 'facebook_post',
-    contenuto: b.fonte === 'immobile' ? 'immobile' : 'articolo',
-    titolo: (b.titolo || 'Post').slice(0, 200),
-    riferimento_id: b.riferimento_id || null,
-    ora: b.ora_proposta || '12:30',
-    giorni: [jsDay],
-    data_inizio: ds,
-    data_fine: ds,
-    keywords: b.hashtags || [],
-    note: '[BOZZA_APPROVATA] id=' + id,
-    link_media: b.link_pagina || null,
-    corpo_spintax: b.corpo || null,
-    media_direct_url: b.media_direct_url || null,
-    updated_at: new Date().toISOString(),
-    created_at: new Date().toISOString()
-  };
-  try {
+
+    if (b.tipo_canale === 'instagram_reel' && !(b.media_direct_url || '').trim()) {
+      var url = prompt('Reel senza MP4: incolla URL .mp4 (HTTPS) oppure Annulla.\nSul PC: python genera_reel.py --pending');
+      if (url && url.indexOf('http') === 0) {
+        b.media_direct_url = url.trim();
+        var mu = await sb.from('bozze_social').update({ media_direct_url: b.media_direct_url }).eq('id', id);
+        if (mu.error) throw mu.error;
+      } else if (!confirm('Reel senza video: approvare comunque? (potrai aggiungere MP4 in Agenda)')) {
+        toast('Approvazione annullata.', 'error');
+        return;
+      }
+    }
+
+    var ds = String(b.data_pubblicazione_proposta || socialBozzeDateFmt(new Date())).slice(0, 10);
+    var payload = {
+      tipo: b.tipo_canale || 'facebook_post',
+      contenuto: b.fonte === 'immobile' ? 'immobile' : 'articolo',
+      titolo: socialBozzeExpandSpintax(String(b.titolo || 'Post')).slice(0, 200),
+      riferimento_id: b.riferimento_id || null,
+      ora: b.ora_proposta || '12:30',
+      giorni: [socialBozzeJsWeekday(ds)],
+      data_inizio: ds,
+      data_fine: ds,
+      keywords: Array.isArray(b.hashtags) ? b.hashtags : [],
+      note: '[BOZZA_APPROVATA] id=' + id,
+      link_media: b.link_pagina || null,
+      corpo_spintax: b.corpo || null,
+      media_direct_url: b.media_direct_url || null,
+      updated_at: new Date().toISOString(),
+      created_at: new Date().toISOString()
+    };
+
     var res = await sb.from('pianificazioni').insert(payload);
-    if (res.error) throw res.error;
+    if (res.error) {
+      var msg = (res.error.message || res.error.details || String(res.error));
+      if (/row-level security|42501|policy/i.test(msg)) {
+        throw new Error('Permesso negato (RLS). Esegui sql/rls-security-hardening-safe.sql e verifica header admin.');
+      }
+      throw new Error(msg);
+    }
+
+    var st = await sb.from('bozze_social').update({ stato: 'programmata', updated_at: new Date().toISOString() }).eq('id', id);
+    if (st.error) throw st.error;
+
+    toast('Approvata → compare in Agenda (' + ds + ' ' + payload.ora + ').', 'success');
+    await loadSocialBozze();
+    if (typeof getAgendaSchedules === 'function') { await getAgendaSchedules(); renderAgendaGrid(); }
   } catch (e) {
-    agendaSchedules.push(Object.assign({}, payload, { id: 'sched_bozza_' + Date.now() }));
-    try { localStorage.setItem('rig_agenda_schedules', JSON.stringify(agendaSchedules)); } catch (ex) {}
+    console.error('approveSocialBozza', e);
+    toast('Errore approvazione: ' + (e.message || String(e)), 'error');
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'Approva'; }
   }
-  try {
-    await sb.from('bozze_social').update({ stato: 'approvata', updated_at: new Date().toISOString() }).eq('id', id);
-  } catch (e) {
-    var local = JSON.parse(localStorage.getItem('rig_social_bozze') || '[]');
-    local = local.map(function(x) { return x.id === id ? Object.assign({}, x, { stato: 'approvata' }) : x; });
-    localStorage.setItem('rig_social_bozze', JSON.stringify(local));
-  }
-  toast('Bozza approvata → inserita in Agenda.', 'success');
-  await loadSocialBozze();
-  if (typeof getAgendaSchedules === 'function') { await getAgendaSchedules(); renderAgendaGrid(); }
 }
+window.approveSocialBozza = approveSocialBozza;
 
 async function rejectSocialBozza(id) {
   if (!confirm('Rifiutare questa bozza?')) return;
@@ -8387,44 +8521,46 @@ async function rejectSocialBozza(id) {
 }
 
 function loadSocialSection() {
-  // Load saved configs
-  const fbPageId = localStorage.getItem('social_fb_page_id') || '';
-  const fbToken = localStorage.getItem('social_fb_token') || '';
-  const igAccountId = localStorage.getItem('social_ig_account_id') || '';
-  const igToken = localStorage.getItem('social_ig_token') || '';
+  var fbSt = document.getElementById('fbStatus');
+  if (fbSt) {
+    fbSt.textContent = 'Pubblicazione Meta: righetto_social/.env + publish_from_agenda.py';
+    fbSt.style.color = 'var(--verde)';
+  }
 
-  document.getElementById('socialFbPageId').value = fbPageId;
-  document.getElementById('socialFbToken').value = fbToken;
-  document.getElementById('socialIgAccountId').value = igAccountId;
-  document.getElementById('socialIgToken').value = igToken;
-
-  document.getElementById('fbStatus').textContent = fbPageId ? 'Configurato' : 'Non configurato';
-  document.getElementById('fbStatus').style.color = fbPageId ? 'var(--verde)' : 'var(--caffe2)';
-  document.getElementById('igStatus').textContent = igAccountId ? 'Configurato' : 'Non configurato';
-  document.getElementById('igStatus').style.color = igAccountId ? 'var(--verde)' : 'var(--caffe2)';
-
-  // Populate property selector
   const sel = document.getElementById('socialPropertySelect');
-  sel.innerHTML = '<option value="">— Seleziona un immobile —</option>';
-  allImmobili.filter(i => i.attivo && !i.venduto && !i.affittato).forEach(i => {
-    const opt = document.createElement('option');
-    opt.value = i.id;
-    opt.textContent = (i.codice || '') + ' — ' + (i.titolo || 'Senza titolo') + ' — ' + (i.prezzo ? '€' + Number(i.prezzo).toLocaleString('it-IT') : 'N/D');
-    sel.appendChild(opt);
-  });
-  sel.onchange = function() { showSocialPropertyPreview(this.value); };
+  if (sel) {
+    sel.innerHTML = '<option value="">— opzionale —</option>';
+    allImmobili.filter(i => i.attivo && !i.venduto && !i.affittato).forEach(i => {
+      const opt = document.createElement('option');
+      opt.value = i.id;
+      opt.textContent = (i.codice || '') + ' — ' + (i.titolo || 'Senza titolo');
+      sel.appendChild(opt);
+    });
+    sel.onchange = function() { showSocialPropertyPreview(this.value); };
+  }
 
-  // Populate blog article selector
   const blogSel = document.getElementById('socialBlogSelect');
-  blogSel.innerHTML = '<option value="">— Seleziona un articolo —</option>';
-  blogArticles.forEach(function(a) {
-    const opt = document.createElement('option');
-    opt.value = a.id;
-    opt.textContent = (a.emoji || '') + ' ' + (a.titolo || 'Senza titolo') + ' — ' + (a.categoria || '') + (a.stato === 'pubblicato' ? ' (Pubblicato)' : ' (Bozza)');
-    blogSel.appendChild(opt);
-  });
+  if (blogSel) {
+    blogSel.innerHTML = '<option value="">— opzionale —</option>';
+    (blogArticles || []).filter(function(a) { return (a.stato || 'pubblicato') === 'pubblicato'; }).forEach(function(a) {
+      const opt = document.createElement('option');
+      opt.value = a.id;
+      opt.textContent = (a.titolo || 'Articolo');
+      blogSel.appendChild(opt);
+    });
+  }
 
-  // Check GBP
+  const landSel = document.getElementById('socialLandingSelect');
+  if (landSel) {
+    landSel.innerHTML = '<option value="">— opzionale —</option>';
+    (landingPages || []).filter(function(p) { return (p.stato || '') !== 'bozza'; }).forEach(function(p) {
+      const opt = document.createElement('option');
+      opt.value = p.id;
+      opt.textContent = (p.titolo || p.slug || 'Landing');
+      landSel.appendChild(opt);
+    });
+  }
+
   const gbpLocation = localStorage.getItem('social_gbp_location');
   if (gbpLocation) {
     document.getElementById('gbpStatus').textContent = 'Connesso';
@@ -8432,21 +8568,6 @@ function loadSocialSection() {
     document.getElementById('gbpAccount').textContent = localStorage.getItem('social_gbp_name') || '';
   }
   loadSocialBozze();
-}
-
-function saveSocialConfig(platform) {
-  if (platform === 'fb') {
-    localStorage.setItem('social_fb_page_id', document.getElementById('socialFbPageId').value.trim());
-    localStorage.setItem('social_fb_token', document.getElementById('socialFbToken').value.trim());
-    document.getElementById('fbStatus').textContent = 'Configurato';
-    document.getElementById('fbStatus').style.color = 'var(--verde)';
-  } else if (platform === 'ig') {
-    localStorage.setItem('social_ig_account_id', document.getElementById('socialIgAccountId').value.trim());
-    localStorage.setItem('social_ig_token', document.getElementById('socialIgToken').value.trim());
-    document.getElementById('igStatus').textContent = 'Configurato';
-    document.getElementById('igStatus').style.color = 'var(--verde)';
-  }
-  toast('Configurazione salvata!', 'success');
 }
 
 function showSocialPropertyPreview(id) {
@@ -8537,285 +8658,19 @@ function buildBlogSocialCaption(a) {
   return caption;
 }
 
-async function publishBlogToFacebook() {
-  var id = document.getElementById('socialBlogSelect').value;
-  if (!id) { toast('Seleziona un articolo', 'error'); return; }
-  var a = blogArticles.find(function(x) { return x.id == id; });
-  if (!a) return;
-
-  var pageId = localStorage.getItem('social_fb_page_id');
-  var token = localStorage.getItem('social_fb_token');
-  if (!pageId || !token) { toast('Configura Facebook prima (Page ID + Token)', 'error'); return; }
-
-  var caption = buildBlogSocialCaption(a);
-  var cover = a.immagine_copertina || '';
-  var link = 'https://www.righettoimmobiliare.it/blog-articolo.html?s=' + (a.slug || '');
-
-  try {
-    toast('Pubblicazione articolo su Facebook...', 'success');
-    var res;
-    if (cover) {
-      res = await fetch('https://graph.facebook.com/v22.0/' + pageId + '/photos', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: cover, caption: caption, access_token: token })
-      });
-    } else {
-      res = await fetch('https://graph.facebook.com/v22.0/' + pageId + '/feed', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: caption, link: link, access_token: token })
-      });
-    }
-    var data = await res.json();
-    if (data.error) { showBlogPublishResult('Errore: ' + data.error.message, 'error'); return; }
-    showBlogPublishResult('Articolo pubblicato su Facebook! ID: ' + (data.id || data.post_id), 'success');
-  } catch(e) {
-    showBlogPublishResult('Errore di rete: ' + e.message, 'error');
-  }
-}
-
-async function publishBlogToInstagram() {
-  var id = document.getElementById('socialBlogSelect').value;
-  if (!id) { toast('Seleziona un articolo', 'error'); return; }
-  var a = blogArticles.find(function(x) { return x.id == id; });
-  if (!a) return;
-
-  var igAccountId = localStorage.getItem('social_ig_account_id');
-  var token = localStorage.getItem('social_ig_token');
-  if (!igAccountId || !token) { toast('Configura Instagram prima', 'error'); return; }
-
-  var cover = a.immagine_copertina || '';
-  if (!cover) { toast('L\'articolo deve avere un\'immagine di copertina per Instagram', 'error'); return; }
-
-  var caption = buildBlogSocialCaption(a);
-
-  try {
-    toast('Pubblicazione articolo su Instagram...', 'success');
-    var createRes = await fetch('https://graph.facebook.com/v22.0/' + igAccountId + '/media', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ image_url: cover, caption: caption, access_token: token })
-    });
-    var createData = await createRes.json();
-    if (createData.error) { showBlogPublishResult('Errore: ' + createData.error.message, 'error'); return; }
-
-    var publishRes = await fetch('https://graph.facebook.com/v22.0/' + igAccountId + '/media_publish', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ creation_id: createData.id, access_token: token })
-    });
-    var publishData = await publishRes.json();
-    if (publishData.error) { showBlogPublishResult('Errore pubblicazione: ' + publishData.error.message, 'error'); return; }
-    showBlogPublishResult('Articolo pubblicato su Instagram! ID: ' + publishData.id, 'success');
-  } catch(e) {
-    showBlogPublishResult('Errore di rete: ' + e.message, 'error');
-  }
-}
-
-async function publishBlogToGBP() {
-  var id = document.getElementById('socialBlogSelect').value;
-  if (!id) { toast('Seleziona un articolo', 'error'); return; }
-  var a = blogArticles.find(function(x) { return x.id == id; });
-  if (!a) return;
-
-  var gbpLocation = localStorage.getItem('social_gbp_location');
-  var gbpToken = localStorage.getItem('social_gbp_access_token');
-  if (!gbpLocation || !gbpToken) { toast('Configura Google Business Profile prima', 'error'); return; }
-
-  var link = 'https://www.righettoimmobiliare.it/blog-articolo.html?s=' + (a.slug || '');
-  var summary = (a.emoji || '') + ' ' + (a.titolo || '') + ' - ' + (a.categoria || '');
-
-  try {
-    toast('Pubblicazione articolo su Google Business...', 'success');
-    var res = await fetch('https://mybusiness.googleapis.com/v4/' + gbpLocation + '/localPosts', {
-      method: 'POST',
-      headers: { 'Authorization': 'Bearer ' + gbpToken, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        topicType: 'STANDARD',
-        languageCode: 'it',
-        summary: summary.substring(0, 1500),
-        callToAction: { actionType: 'LEARN_MORE', url: link }
-      })
-    });
-    var data = await res.json();
-    if (data.error) { showBlogPublishResult('Errore: ' + (data.error.message || JSON.stringify(data.error)), 'error'); return; }
-    showBlogPublishResult('Articolo pubblicato su Google Business!', 'success');
-  } catch(e) {
-    showBlogPublishResult('Errore di rete: ' + e.message, 'error');
-  }
-}
-
-// ── FACEBOOK PUBLISHING ──
-async function testFbConnection() {
-  const pageId = document.getElementById('socialFbPageId').value.trim() || localStorage.getItem('social_fb_page_id');
-  const token = document.getElementById('socialFbToken').value.trim() || localStorage.getItem('social_fb_token');
-  if (!pageId || !token) { toast('Inserisci Page ID e Token', 'error'); return; }
-  try {
-    const res = await fetch('https://graph.facebook.com/v22.0/' + pageId + '?fields=name,fan_count&access_token=' + token);
-    const data = await res.json();
-    if (data.error) { toast('Errore: ' + data.error.message, 'error'); return; }
-    toast('Connesso a: ' + data.name + ' (' + (data.fan_count || 0) + ' fan)', 'success');
-    document.getElementById('fbStatus').textContent = 'Connesso: ' + data.name;
-    document.getElementById('fbStatus').style.color = 'var(--verde)';
-  } catch(e) { toast('Errore di rete: ' + e.message, 'error'); }
-}
-
 async function publishToFacebook() {
-  const id = document.getElementById('socialPropertySelect').value;
-  if (!id) { toast('Seleziona un immobile', 'error'); return; }
-  const i = allImmobili.find(x => x.id == id);
-  if (!i) return;
-
-  const pageId = localStorage.getItem('social_fb_page_id');
-  const token = localStorage.getItem('social_fb_token');
-  if (!pageId || !token) { toast('Configura Facebook prima (Page ID + Token)', 'error'); return; }
-
-  const caption = buildSocialCaption(i);
-  const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
-
-  try {
-    toast('Pubblicazione su Facebook...', 'success');
-    let res;
-    if (foto) {
-      // Post with photo
-      res = await fetch('https://graph.facebook.com/v22.0/' + pageId + '/photos', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: foto, caption: caption, access_token: token })
-      });
-    } else {
-      // Text-only post
-      res = await fetch('https://graph.facebook.com/v22.0/' + pageId + '/feed', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: caption, access_token: token })
-      });
-    }
-    const data = await res.json();
-    if (data.error) {
-      showPublishResult('Errore Facebook: ' + data.error.message, 'error');
-      toast('Errore Facebook: ' + data.error.message, 'error');
-    } else {
-      showPublishResult('Pubblicato su Facebook! ID: ' + (data.id || data.post_id), 'success');
-      toast('Pubblicato su Facebook!', 'success');
-    }
-  } catch(e) {
-    showPublishResult('Errore di rete: ' + e.message, 'error');
-    toast('Errore: ' + e.message, 'error');
-  }
+  toast('Pubblicazione automatica: Approva le bozze e usa publish_from_agenda.py con .env', 'error');
 }
+async function publishToInstagram() { return publishToFacebook(); }
+async function publishToGBP() { toast('Google Business: usa la sezione GBP sopra se serve.', 'error'); }
+async function publishBlogToFacebook() { return publishToFacebook(); }
+async function publishBlogToInstagram() { return publishToFacebook(); }
+async function publishBlogToGBP() { return publishToGBP(); }
+async function testFbConnection() { toast('Test Meta: python publish_from_agenda.py --dry-run (token in .env)', 'success'); }
+async function testIgConnection() { return testFbConnection(); }
+function saveSocialConfig() { toast('Token Meta solo in righetto_social/.env', 'success'); }
 
-// ── INSTAGRAM PUBLISHING ──
-async function testIgConnection() {
-  const accountId = document.getElementById('socialIgAccountId').value.trim() || localStorage.getItem('social_ig_account_id');
-  const token = document.getElementById('socialIgToken').value.trim() || localStorage.getItem('social_ig_token');
-  if (!accountId || !token) { toast('Inserisci Account ID e Token', 'error'); return; }
-  try {
-    const res = await fetch('https://graph.facebook.com/v22.0/' + accountId + '?fields=username,followers_count&access_token=' + token);
-    const data = await res.json();
-    if (data.error) { toast('Errore: ' + data.error.message, 'error'); return; }
-    toast('Connesso a: @' + data.username + ' (' + (data.followers_count || 0) + ' follower)', 'success');
-    document.getElementById('igStatus').textContent = 'Connesso: @' + data.username;
-    document.getElementById('igStatus').style.color = 'var(--verde)';
-  } catch(e) { toast('Errore di rete: ' + e.message, 'error'); }
-}
 
-async function publishToInstagram() {
-  const id = document.getElementById('socialPropertySelect').value;
-  if (!id) { toast('Seleziona un immobile', 'error'); return; }
-  const i = allImmobili.find(x => x.id == id);
-  if (!i) return;
-
-  const accountId = localStorage.getItem('social_ig_account_id');
-  const token = localStorage.getItem('social_ig_token');
-  if (!accountId || !token) { toast('Configura Instagram prima', 'error'); return; }
-
-  const caption = buildSocialCaption(i);
-  const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
-  if (!foto) { toast('Serve almeno una foto per Instagram', 'error'); return; }
-
-  try {
-    toast('Pubblicazione su Instagram...', 'success');
-
-    // Check if multiple photos for carousel
-    const allPhotos = (i.foto_urls || i.foto || []).filter(Boolean);
-
-    if (allPhotos.length > 1 && allPhotos.length <= 10) {
-      // CAROUSEL POST
-      // Step 1: Create carousel items
-      const itemIds = [];
-      for (const photoUrl of allPhotos.slice(0, 10)) {
-        const itemRes = await fetch('https://graph.facebook.com/v22.0/' + accountId + '/media', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ image_url: photoUrl, is_carousel_item: true, access_token: token })
-        });
-        const itemData = await itemRes.json();
-        if (itemData.id) itemIds.push(itemData.id);
-      }
-      // Step 2: Create carousel container
-      const containerRes = await fetch('https://graph.facebook.com/v22.0/' + accountId + '/media', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ media_type: 'CAROUSEL', children: itemIds, caption: caption, access_token: token })
-      });
-      const container = await containerRes.json();
-      if (container.error) { showPublishResult('Errore Instagram: ' + container.error.message, 'error'); return; }
-
-      // Step 3: Publish
-      await waitForIgMedia(container.id, token);
-      const pubRes = await fetch('https://graph.facebook.com/v22.0/' + accountId + '/media_publish', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ creation_id: container.id, access_token: token })
-      });
-      const pubData = await pubRes.json();
-      if (pubData.error) { showPublishResult('Errore Instagram: ' + pubData.error.message, 'error'); }
-      else { showPublishResult('Pubblicato su Instagram (carousel ' + allPhotos.length + ' foto)!', 'success'); toast('Pubblicato su Instagram!', 'success'); }
-
-    } else {
-      // SINGLE IMAGE POST
-      // Step 1: Create media container
-      const containerRes = await fetch('https://graph.facebook.com/v22.0/' + accountId + '/media', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ image_url: foto, caption: caption, access_token: token })
-      });
-      const container = await containerRes.json();
-      if (container.error) { showPublishResult('Errore Instagram: ' + container.error.message, 'error'); return; }
-
-      // Step 2: Wait for processing and publish
-      await waitForIgMedia(container.id, token);
-      const pubRes = await fetch('https://graph.facebook.com/v22.0/' + accountId + '/media_publish', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ creation_id: container.id, access_token: token })
-      });
-      const pubData = await pubRes.json();
-      if (pubData.error) { showPublishResult('Errore Instagram: ' + pubData.error.message, 'error'); }
-      else { showPublishResult('Pubblicato su Instagram!', 'success'); toast('Pubblicato su Instagram!', 'success'); }
-    }
-  } catch(e) {
-    showPublishResult('Errore: ' + e.message, 'error');
-    toast('Errore: ' + e.message, 'error');
-  }
-}
-
-async function waitForIgMedia(containerId, token) {
-  // Instagram needs processing time. Poll status for up to 30 seconds.
-  for (let attempt = 0; attempt < 10; attempt++) {
-    await new Promise(r => setTimeout(r, 3000));
-    try {
-      const res = await fetch('https://graph.facebook.com/v22.0/' + containerId + '?fields=status_code&access_token=' + token);
-      const data = await res.json();
-      if (data.status_code === 'FINISHED') return;
-      if (data.status_code === 'ERROR') throw new Error('Errore elaborazione media Instagram');
-    } catch(e) { /* continue polling */ }
-  }
-}
-
-// ── GOOGLE BUSINESS PROFILE ──
 let gbpTokenClient = null;
 
 function connectGBP() {
@@ -8883,7 +8738,7 @@ async function handleGBPAuth(resp) {
         '2) Abilita queste API:\n' +
         '   - My Business Account Management API\n' +
         '   - My Business Business Information API\n' +
-        '3) Se le hai già abilitate e l\'errore persiste,\n' +
+        '3) Se le hai giÃ  abilitate e l\'errore persiste,\n' +
         '   devi richiedere accesso alle GBP API:\n' +
         '   developers.google.com/my-business/content/basic-setup');
       return;
@@ -8914,11 +8769,11 @@ async function handleGBPAuth(resp) {
         'Stato HTTP: ' + accRes.status + ' (OK)\n' +
         'Risposta API: ' + JSON.stringify(accData) + '\n\n' +
         'VERIFICA:\n' +
-        '1) L\'email qui sopra è quella che gestisce la tua\n' +
+        '1) L\'email qui sopra Ã¨ quella che gestisce la tua\n' +
         '   scheda Google Business?\n\n' +
         '2) Vai su business.google.com e controlla con\n' +
-        '   quale account sei loggato lì\n\n' +
-        '3) Se l\'email è corretta, potrebbe servire richiedere\n' +
+        '   quale account sei loggato lÃ¬\n\n' +
+        '3) Se l\'email Ã¨ corretta, potrebbe servire richiedere\n' +
         '   accesso API su:\n' +
         '   developers.google.com/my-business/content/basic-setup\n\n' +
         'Fai uno SCREENSHOT di questo messaggio!');
@@ -8963,55 +8818,7 @@ async function handleGBPAuth(resp) {
   }
 }
 
-async function publishToGBP() {
-  const id = document.getElementById('socialPropertySelect').value;
-  if (!id) { toast('Seleziona un immobile', 'error'); return; }
-  const i = allImmobili.find(x => x.id == id);
-  if (!i) return;
 
-  const gbpToken = localStorage.getItem('social_gbp_access_token');
-  const gbpLocation = localStorage.getItem('social_gbp_location');
-  if (!gbpToken || !gbpLocation) { toast('Connetti Google Business prima', 'error'); return; }
-
-  const prezzo = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : '';
-  const tipo = i.tipo_operazione === 'vendita' ? 'In vendita' : i.tipo_operazione?.startsWith('affitto') ? 'In affitto' : '';
-  const summary = tipo + ': ' + (i.titolo || '') + ' - ' + (i.comune || '') + (prezzo ? ' - ' + prezzo : '') + (i.superficie ? ' - ' + i.superficie + ' mq' : '') + '\nRif. ' + (i.codice || '') + ' | Righetto Immobiliare';
-  const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
-
-  try {
-    toast('Pubblicazione su Google Business...', 'success');
-    const postBody = {
-      languageCode: 'it',
-      summary: summary,
-      topicType: 'STANDARD',
-    };
-    if (foto) {
-      postBody.media = [{ mediaFormat: 'PHOTO', sourceUrl: foto }];
-    }
-    const res = await fetch('https://mybusiness.googleapis.com/v4/' + gbpLocation + '/localPosts', {
-      method: 'POST',
-      headers: { 'Authorization': 'Bearer ' + gbpToken, 'Content-Type': 'application/json' },
-      body: JSON.stringify(postBody)
-    });
-    if (res.status === 401) {
-      localStorage.removeItem('social_gbp_access_token');
-      document.getElementById('gbpStatus').textContent = 'Non configurato';
-      document.getElementById('gbpStatus').style.color = '';
-      document.getElementById('gbpAccount').textContent = '';
-      showPublishResult('Token scaduto. Riconnetti Google Business e riprova', 'error');
-      return;
-    }
-    const data = await res.json();
-    if (data.error) {
-      showPublishResult('Errore Google: ' + (data.error.message || JSON.stringify(data.error)), 'error');
-    } else {
-      showPublishResult('Pubblicato su Google Business Profile!', 'success');
-      toast('Pubblicato su Google Business!', 'success');
-    }
-  } catch(e) {
-    showPublishResult('Errore: ' + e.message, 'error');
-  }
-}
 
 // ── TIKTOK IMAGE GENERATOR ──
 function generateTikTokImage() {
@@ -11005,14 +10812,21 @@ async function showEmail(emailId) {
   updatePreviewStarButton();
 }
 
-// GAPI init
+// GAPI init (onload script api.js — evita gapi.client undefined)
 function gapiLoaded() {
+  if (typeof gapi === 'undefined') return;
   gapi.load('client', async () => {
     await gapi.client.init({
       discoveryDocs: [GMAIL_DISCOVERY_DOC],
     });
     gapiInited = true;
+    if (gmailAccessToken && gapi.client) {
+      gapi.client.setToken({ access_token: gmailAccessToken });
+    }
     maybeEnableAuth();
+    if (gmailAccessToken && document.getElementById('sec-posta')?.classList.contains('active')) {
+      refreshEmails();
+    }
   });
 }
 
@@ -11040,14 +10854,23 @@ function handleAuthResponse(resp) {
     return;
   }
   gmailAccessToken = resp.access_token;
+  if (gapiInited && typeof gapi !== 'undefined' && gapi.client) {
+    gapi.client.setToken({ access_token: gmailAccessToken });
+  }
   document.getElementById('emailAuthBanner').style.display = 'none';
   document.getElementById('emailClient').style.display = 'block';
   document.getElementById('emailStatusText').textContent = 'Connesso';
   document.getElementById('emailStatusText').style.color = 'var(--verde)';
   toast('Gmail connesso!', 'success');
   saveCurrentAccount();
-  loadGmailLabels();
-  refreshEmails();
+  if (gapiInited) {
+    loadGmailLabels();
+    refreshEmails();
+  } else if (typeof gapi !== 'undefined') {
+    gapiLoaded();
+  } else {
+    toast('Attendi il caricamento Gmail API e clicca Aggiorna', 'error');
+  }
 }
 
 function gmailAuth() {
@@ -11531,6 +11354,12 @@ async function saveLabelModal() {
 async function refreshEmails() {
   if (demoMode) { renderEmailList(); toast('(DEMO) Lista aggiornata', 'success'); return; }
   if (!gmailAccessToken) return;
+  if (!gapiInited || typeof gapi === 'undefined' || !gapi.client) {
+    if (typeof gapi !== 'undefined' && !gapiInited) gapiLoaded();
+    toast('Gmail API in caricamento… riprova tra 2 secondi (pulsante Aggiorna)', 'error');
+    return;
+  }
+  gapi.client.setToken({ access_token: gmailAccessToken });
 
   const listArea = document.getElementById('emailListItems');
   const loading = document.getElementById('emailListLoading');
@@ -12264,13 +12093,7 @@ function unlinkProperty(emailId) {
 
 // ── INIT GMAIL API ON LOAD ──
 
-// Defer Gmail API initialization
-if (typeof gapi !== 'undefined') {
-  gapiLoaded();
-}
-if (typeof google !== 'undefined' && google.accounts) {
-  gisLoaded();
-}
+// gapiLoaded/gisLoaded via onload sugli script Google (evita race async)
 
 checkAuth();
 
