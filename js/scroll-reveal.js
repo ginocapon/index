@@ -41,22 +41,13 @@
     observer.observe(el);
   });
 
-  // Card blog inserite dopo initBlog(): osserva e mostra senza reload
+  // Griglia blog: card inserite dopo initBlog() — sempre visibili (no opacity:0)
   window.revealBlogCards = function() {
     var grid = document.getElementById('artGrid');
     if (!grid) return;
-    Array.prototype.forEach.call(grid.children, function(el, i) {
-      if (!el.classList.contains('sr')) {
-        el.classList.add('sr');
-        if (i < 6) el.classList.add('sr-d' + (i + 1));
-      }
-      if (el.classList.contains('visible')) return;
-      if ('IntersectionObserver' in window) {
-        observer.observe(el);
-        if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
-      } else {
-        el.classList.add('visible');
-      }
+    Array.prototype.forEach.call(grid.children, function(el) {
+      el.classList.remove('sr', 'sr-d1', 'sr-d2', 'sr-d3', 'sr-d4', 'sr-d5', 'sr-d6');
+      el.classList.add('visible');
     });
   };
 

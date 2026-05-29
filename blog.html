@@ -102,7 +102,8 @@
     .art-author{display:flex;align-items:center;gap:.3rem}
     .art-av{width:20px;height:20px;border-radius:50%;background:var(--oro);display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:700;color:var(--nero)}
     .art-read{font-size:.68rem;color:var(--oro)}
-    /* GRID ARTICOLI */
+    /* GRID ARTICOLI — sempre visibile (no scroll-reveal che lascia opacity:0) */
+    #artGrid .acard{opacity:1!important;transform:none!important}
     .art-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:2rem}
     @media(max-width:600px){.art-grid{grid-template-columns:1fr}}
     .acard{border:1px solid var(--gc);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;display:block;transition:transform .2s,box-shadow .2s}
@@ -239,7 +240,7 @@
     <div id="featuredSection" class="sr"></div>
 
     <div style="font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--grigio);margin-bottom:.7rem;font-weight:500">Tutti gli articoli</div>
-    <div class="art-grid sr-stagger" id="artGrid"></div>
+    <div class="art-grid" id="artGrid"></div>
   </div>
 
   <!-- SIDEBAR -->
@@ -1442,12 +1443,7 @@ async function initBlog() {
 function finishBlogReveal() {
   var feat = document.getElementById('featuredSection');
   if (feat) feat.classList.add('visible');
-  function runReveal() {
-    if (typeof window.revealBlogCards === 'function') window.revealBlogCards();
-  }
-  runReveal();
-  setTimeout(runReveal, 0);
-  setTimeout(runReveal, 300);
+  if (typeof window.revealBlogCards === 'function') window.revealBlogCards();
 }
 
 function getArticles() {
@@ -1589,6 +1585,10 @@ function renderBlog() {
         </div>
       </a>
     `}).join('');
+    Array.prototype.forEach.call(gridEl.children, function(el) {
+      el.classList.remove('sr','sr-d1','sr-d2','sr-d3','sr-d4','sr-d5','sr-d6');
+      el.classList.add('visible');
+    });
   }
 
   // Sidebar recenti
@@ -1644,7 +1644,7 @@ initBlog();
 setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
 })();</script>
 <script src="js/cookie-consent.js?v=3" defer></script>
-<script src="js/scroll-reveal.js?v=4" defer></script>
+<script src="js/scroll-reveal.js?v=5" defer></script>
 <script src="js/welcome-popup.js?v=3" defer></script>
 </body>
 </html>
