@@ -479,6 +479,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'documenti necessari per la compravendita di un immobile: guida pratica per venditori e acquirenti': { img: 'img/blog/blog-documenti-compravendita-rogito-padova-2026.webp', url: 'blog-documenti-compravendita-rogito-padova-2026' },
     'sondaggio abitativo banca d\'italia q1 2026: ltv 77,2% e mutuo al 64,5%': { img: 'img/blog/blog-sondaggio-bancaditalia-q1-2026.webp', url: 'blog-sondaggio-bancaditalia-q1-2026-padova' },
     'costi costruzione istat marzo 2026: +0,8% mensile, indice 117,2': { img: 'img/blog/blog-costi-costruzione-istat-padova-2026.webp', url: 'blog-costi-costruzione-istat-padova-2026' },
     'barometro mutui crif q1 2026: domanda -12,4%, importo medio 161.059 €': { img: 'img/blog/blog-barometro-mutui-crif-padova-2026.webp', url: 'blog-barometro-mutui-crif-padova-2026' },
@@ -551,6 +552,7 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    { titolo: "Documenti necessari per la compravendita di un immobile: guida pratica per venditori e acquirenti", categoria: 'Normativa', data: '2026-05-29', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-documenti-compravendita-rogito-padova-2026.webp', url_statico: 'blog-documenti-compravendita-rogito-padova-2026' },
     { titolo: "Sondaggio abitativo Banca d'Italia Q1 2026: LTV 77,2% e mutuo al 64,5%", categoria: "Mercato immobiliare", data: '2026-05-27', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-sondaggio-bancaditalia-q1-2026.webp', url_statico: 'blog-sondaggio-bancaditalia-q1-2026-padova' },
     { titolo: "Costi costruzione ISTAT marzo 2026: +0,8% mensile, indice 117,2", categoria: "Mercato immobiliare", data: '2026-05-27', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-costi-costruzione-istat-padova-2026.webp', url_statico: 'blog-costi-costruzione-istat-padova-2026' },
     { titolo: "Barometro mutui CRIF Q1 2026: domanda -12,4%, importo medio 161.059 €", categoria: "Finanziamenti", data: '2026-05-27', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-barometro-mutui-crif-padova-2026.webp', url_statico: 'blog-barometro-mutui-crif-padova-2026' },
