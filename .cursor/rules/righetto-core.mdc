@@ -1,0 +1,43 @@
+---
+description: Righetto — routing skill, claim e regole d'oro (sempre attivo)
+alwaysApply: true
+---
+
+# Righetto Immobiliare — core
+
+**Fonte di verità:** `TEST-SKILL/SKILL-2.0.md` (indice root: `SKILL-2.0.md`).  
+**Routing task:** `TEST-SKILL/context-map.json` — carica i moduli skill indicati per ogni tipo di lavoro.
+
+## Claim consentiti (verificati)
+350+ immobili · 101 comuni · 98% soddisfazione · 127 recensioni 4.9/5 · dal 2000.  
+**Mediazione:** da concordare in sede — **mai** listini o percentuali online.
+
+## Regola d'oro
+Se non hai fonte verificabile (OMI, FIMAA, ISTAT, Banca d'Italia, ADE…), **non inserire il dato**.
+
+## Stack (non cambiare)
+HTML/CSS/JS **vanilla** · GitHub Pages · Supabase · **zero CDN esterni** · URL interne **senza** `.html`.
+
+## Prima di ogni modifica
+1. Leggi il file da modificare.
+2. Mobile-first + WCAG AA (CTA: **mai** `#FF6B35` con testo bianco).
+3. CSS/JS linkati con `?v=N` (incrementa a ogni modifica).
+4. Nuove URL → `sitemap.xml`.
+5. Commit in italiano; **no** DNS/MX/cPanel senza conferma esplicita.
+
+## Moduli skill (carica su richiesta o via rule scoped)
+| Task | File |
+|------|------|
+| Sempre | `TEST-SKILL/skill-essentials.md` |
+| Blog / zone / contenuti | `skill-content.md` + §8.1a/8.1c in SKILL-2.0 |
+| SEO / audit | `skill-seo.md` |
+| UI / CSS | `skill-design.md` |
+| Form lead | `skill-forms-leads.md` |
+| Social Meta/GBP | `skill-social-automation.md` |
+| Architettura repo | `skill-context.md` |
+| Regole Cursor | `skill-cursor-rules.md` |
+
+## Automazioni repo
+- Pre-commit: `node scripts/validate-page.js --staged`
+- Anti-doppioni blog: `python scripts/check_doppioni_sito.py` **prima** di scrivere
+- Audit: `.github/workflows/audit-settimanale.yml` (venerdì)

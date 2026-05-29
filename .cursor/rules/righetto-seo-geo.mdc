@@ -1,0 +1,32 @@
+---
+description: Righetto — SEO/GEO/AEO, zone pages, sitemap, llms.txt, audit
+globs: "zona-*.html,sitemap.xml,llms.txt,robots.txt,agenzia-immobiliare-padova.html,TEST-SKILL/skill-seo.md"
+alwaysApply: false
+---
+
+# SEO, GEO e visibilità AI
+
+Dettaglio: **`TEST-SKILL/skill-seo.md`** · Neural Matching §8.3 in **`SKILL-2.0.md`**.
+
+## On-page (ogni pagina)
+- Title unico ≤60 char · meta description ≤160 · **H1 unico**
+- Canonical + OG senza `.html`
+- Schema: `RealEstateAgent`, `FAQPage`, `BreadcrumbList` dove applicabile
+- Zone: `Place` + `GeoCoordinates` · Pro/Contro 4+4 · min 5 FAQ schema
+
+## GEO / AEO
+- Prime 2 righe: frasi **dichiarative** con entità (Padova, servizio, dato)
+- Dati numerici con fonte nel testo
+- `llms.txt` aggiornato dopo nuovi pillar/blog/zone
+- `robots.txt`: **non** bloccare GPTBot, ClaudeBot, Google-Extended, PerplexityBot
+
+## Entity SEO (no keyword stuffing)
+- Nessuna frase 2+ parole >5 volte/pagina
+- "a Padova" max 8–10 volte · sinonimi e varianti
+- Copertura semantica 80%+ del topic
+
+## Dopo nuove URL
+- `sitemap.xml` · link interni correlati · footer zone allineato
+
+## KPI riferimento (GSC mar 2026)
+CTR ~9,4% · brand pos ~1,3 · collo di bottiglia: DA/backlink off-site

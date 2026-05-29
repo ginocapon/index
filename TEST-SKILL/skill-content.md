@@ -28,6 +28,15 @@
 
 ## 2. STANDARD ARTICOLI BLOG
 
+### 2.0 Anti-doppioni — prima di scrivere (BLOCCANTE)
+
+> Dettaglio completo: **`TEST-SKILL/SKILL-2.0.md` §8.1a**. Regola sintetica per ogni nuovo articolo.
+
+1. **Non iniziare a scrivere** finche' non hai verificato che titolo, slug e angolo editoriale **non esistono gia'** sul sito.
+2. Esegui `python scripts/check_doppioni_sito.py` e consulta `blog.html` (`articoliStatici`), i file `blog-*.html`, Supabase `blog`, cluster in **§1** di questo file.
+3. **Se e' un doppione o troppo simile** (stesso macro-tema, stesse H2, stesso evento geopolitico gia' trattato): **STOP** → ricerca web su **fonte istituzionale** (OMI, Banca d'Italia, ISTAT, BCE, MEF, Agenzia Entrate, FIMAA) → scegli **altro argomento** con utilita' per Padova/hinterland.
+4. Proponi 2–3 alternative con fonte se la richiesta era generica; procedi solo dopo tema univoco confermato.
+
 ### Struttura obbligatoria
 - **Lunghezza:** 2.500-3.500 parole (pillar) / 1.500-2.000 (secondari)
 - **H1:** unico — keyword primaria + localizzazione

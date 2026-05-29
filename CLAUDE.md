@@ -4,7 +4,9 @@
 **LEGGI SEMPRE `SKILL-2.0.md` (in root: indice) e il testo completo in `TEST-SKILL/SKILL-2.0.md` prima di qualsiasi operazione.**
 La skill e' l'unica fonte di verita' per questo progetto.
 
-**Routing task:** `TEST-SKILL/context-map.json` — carica anche **`TEST-SKILL/skill-forms-leads.md`** per ogni **landing**, **blog con form/CTA lead** o fix invio email.
+**Routing task:** `TEST-SKILL/context-map.json` — carica anche **`TEST-SKILL/skill-forms-leads.md`** per ogni **landing**, **blog con form/CTA lead** o fix invio email; **`TEST-SKILL/skill-social-automation.md`** per bozze/agenda/cron Meta/Instagram/reel/Google Business in `righetto_social/`.
+
+**Regole Cursor (`.mdc` scoped):** vedi **`TEST-SKILL/skill-cursor-rules.md`** — `righetto-core.mdc` sempre attiva; le altre si attivano su blog, HTML/CSS, form, social, SEO, admin/SQL.
 
 ## Regole Automatiche
 
@@ -26,7 +28,8 @@ La skill e' l'unica fonte di verita' per questo progetto.
 - Dettaglio completo: **`TEST-SKILL/skill-forms-leads.md`** — modello: `contatti.html`, `landing-consulenza-immobiliare-gratuita.html`
 
 ### Contenuti Blog:
-- Seguire template e checklist in `TEST-SKILL/SKILL-2.0.md` Sezioni 3, 5 e **8.1c** (anti-riempimento, asset, wordCount onesto)
+- **Prima di scrivere:** verificare che l'articolo non sia un doppione (§**8.1a**): catalogo `blog.html` / `blog-*.html` / Supabase + `python scripts/check_doppioni_sito.py`; se tema gia' coperto → ricerca web su fonte istituzionale e altro argomento
+- Seguire template e checklist in `TEST-SKILL/SKILL-2.0.md` Sezioni 3, 5, **8.1a** e **8.1c** (anti-doppioni, anti-riempimento, asset, wordCount onesto)
 - 2500+ parole nel corpo utile (no «fabbrica» di paragrafi identici), 10-15 H2/H3, 35% transition words
 - **Vietato** gonfiare il `wordCount` con loop di paragrafi sostanzialmente uguali; copertine blog hero in **WebP** 1200×630 leggere (Sezione 8.1c)
 - OGNI dato numerico DEVE avere fonte verificata (OMI, FIMAA, ISTAT, Banca d'Italia)

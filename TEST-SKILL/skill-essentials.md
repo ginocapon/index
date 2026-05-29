@@ -1,6 +1,6 @@
 # SKILL-ESSENTIALS — Righetto Immobiliare
 > Carica SEMPRE questo file. Contiene le regole operative core.
-> Versione estratta da SKILL-2.0.md — Marzo 2026
+> Versione estratta da SKILL-2.0.md — Maggio 2026
 
 ---
 
@@ -68,6 +68,7 @@
 - [ ] Se landing o form lead: checklist **`skill-forms-leads.md`** (invio diretto, GDPR, provenienza, success inline)
 
 ### Checklist aggiuntiva blog
+- [ ] **Anti-doppioni (§8.1a):** `check_doppioni_sito.py` + verifica titolo/slug/tema **prima** di scrivere; se doppione → altro argomento da fonte istituzionale (web)
 - [ ] Registrato in TUTTI e 4: admin.html + blog.html + homepage.js + sitemap.xml
 - [ ] `data_pubblicazione: 'YYYY-MM-DD'` nel seed (BLOCCANTE per commit)
 - [ ] Cross-link con zone pages e service pages (min 3)
@@ -114,3 +115,20 @@ Eseguire sempre in sequenza dopo ogni modifica:
 | **Loop 4** | Performance & Mobile (critical CSS, font, lazy/eager, JS defer, responsive, touch target, WebP) | 25 |
 
 > Dettaglio completo di ogni check: vedi SKILL-2.0.txt sezioni 15.1–15.4
+
+---
+
+## 5. SOCIAL / META / GBP (cron `righetto_social/`)
+
+- Skill dedicata: **`skill-social-automation.md`** (rotazione catalogo, token PAGE, reel, checklist avvio).
+- Sintesi: `SKILL-2.0.md` §**10.4**. Non committare `.env`; non copiare testi RSS.
+
+---
+
+## 6. CURSOR RULES (`.mdc` scoped)
+
+- Documentazione: **`skill-cursor-rules.md`**
+- **`righetto-core.mdc`** → sempre attiva (claim, stack, routing)
+- Altre rule si attivano sui file: blog, HTML/CSS, form, social, SEO, SQL/admin
+- **`context-map.json`** v1.2 collega task → skill + hint rule
+- Aggiornare le `.mdc` solo come **estratto**; la modifica operativa va in `skill-*.md` / `SKILL-2.0.md`

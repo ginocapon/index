@@ -1,0 +1,30 @@
+---
+description: Righetto — form lead landing/blog, invio in pagina, GDPR, Supabase richieste
+globs: "landing-*.html,contatti.html,servizi.html,servizio-*.html,js/rig-lead-form.js,js/config.js,css/blog-lead-form.css"
+alwaysApply: false
+---
+
+# Form lead — invio in pagina
+
+Dettaglio: **`TEST-SKILL/skill-forms-leads.md`**. Modello: `contatti.html`, `landing-consulenza-immobiliare-gratuita.html`.
+
+## Obbligatorio
+1. Invio **in pagina** (un passaggio) — no solo redirect GET a `/contatti`
+2. `SERVIZI_CONFIG.sendNotifica()` → Edge `send-email` → relay PHP
+3. Insert Supabase `richieste` con `provenienza` = slug pagina
+4. Successo **inline** (box verde, nascondi form)
+5. Checkbox **GDPR** obbligatoria
+
+## Vietato
+| Errore | Motivo |
+|--------|--------|
+| `action="contatti" method="get"` come unico invio | Nessuna email/DB |
+| Aprire `send-mail.php` nel browser | Solo POST server-side |
+| `config.js` defer + handler che invia al primo load | Race `SERVIZI_CONFIG` undefined |
+
+## Modulo condiviso (preferito)
+`js/rig-lead-form.js` + `data-rig-lead-form` + `data-provenienza="slug-pagina"`
+
+## Landing nuova
+- Seed `admin.html` → `_landingSeedPages` con `data_pubblicazione`
+- `sitemap.xml` + checklist `skill-essentials.md` §2

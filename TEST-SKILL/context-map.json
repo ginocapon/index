@@ -1,19 +1,34 @@
 {
   "_note": "Routing guide: quale skill caricare per ogni tipo di task. skill-essentials.md va SEMPRE caricata.",
-  "_version": "1.1 — Maggio 2026",
+  "_version": "1.2 — Maggio 2026 (Cursor rules scoped .mdc)",
 
   "always_load": "TEST-SKILL/skill-essentials.md",
+
+  "cursor_rules": {
+    "_doc": "TEST-SKILL/skill-cursor-rules.md — regole .cursor/rules/*.mdc si attivano sui globs; core sempre attiva",
+    "always": ".cursor/rules/righetto-core.mdc",
+    "by_glob": {
+      "html_css_js": ".cursor/rules/righetto-vanilla-ui.mdc",
+      "blog": ".cursor/rules/righetto-blog-publish.mdc",
+      "forms_landing": ".cursor/rules/righetto-forms-leads.mdc",
+      "social": ".cursor/rules/righetto-social-automation.mdc",
+      "seo_geo": ".cursor/rules/righetto-seo-geo.mdc",
+      "supabase_admin": ".cursor/rules/righetto-supabase-admin.mdc"
+    }
+  },
 
   "tasks": {
     "nuova_landing_page": {
       "skills": ["skill-essentials.md", "skill-forms-leads.md", "skill-context.md", "skill-design.md"],
+      "cursor_rules": ["righetto-vanilla-ui.mdc", "righetto-forms-leads.mdc"],
       "token_stimati": "~1.800",
       "note": "Serve architettura + componenti UI + form invio diretto (sendNotifica + richieste)"
     },
     "nuovo_articolo_blog": {
       "skills": ["skill-essentials.md", "skill-content.md", "skill-forms-leads.md"],
+      "cursor_rules": ["righetto-blog-publish.mdc"],
       "token_stimati": "~2.000",
-      "note": "Serve template blog + contenuti; se CTA/form lead → skill-forms-leads"
+      "note": "BLOCCANTE §8.1a: anti-doppioni prima di scrivere (check_doppioni_sito.py + catalogo); se doppione → ricerca web fonte istituzionale e altro tema. Poi template blog; se CTA/form lead → skill-forms-leads"
     },
     "form_lead_invio_email": {
       "skills": ["skill-essentials.md", "skill-forms-leads.md", "skill-context.md"],
@@ -27,11 +42,13 @@
     },
     "audit_seo": {
       "skills": ["skill-essentials.md", "skill-seo.md"],
+      "cursor_rules": ["righetto-seo-geo.mdc"],
       "token_stimati": "~2.200",
       "note": "Serve stato SERP + requisiti Google + KPI"
     },
     "fix_css_design": {
       "skills": ["skill-essentials.md", "skill-design.md"],
+      "cursor_rules": ["righetto-vanilla-ui.mdc"],
       "token_stimati": "~1.300",
       "note": "Serve design system + componenti"
     },
@@ -49,6 +66,12 @@
       "skills": ["skill-essentials.md", "skill-seo.md", "skill-content.md", "skill-design.md", "skill-context.md"],
       "token_stimati": "~5.500",
       "note": "Usare solo per audit mensile completo"
+    },
+    "automazione_social_meta_gbp": {
+      "skills": ["skill-essentials.md", "skill-social-automation.md"],
+      "cursor_rules": ["righetto-social-automation.mdc"],
+      "token_stimati": "~2.200",
+      "note": "Bozze settimanali, rotazione immobili, publish_from_agenda, token PAGE, reel, cron — righetto_social/"
     }
   },
 
@@ -89,6 +112,18 @@
       "script": "scripts/validate-page.js",
       "trigger": "git commit",
       "blocca": ["schema mancante", "title mancante", "data_pubblicazione mancante"]
+    },
+    "social_bozze_settimanali": {
+      "batch": "righetto_social/cron_settimanale.bat",
+      "schedule": "Domenica 20:00 (Task Scheduler Windows o cron Linux)",
+      "script": "righetto_social/genera_bozze_settimanali.py",
+      "output": "~16 bozze in bozze_social — rotazione catalogo + 2 RSS"
+    },
+    "social_pubblica_agenda": {
+      "batch": "righetto_social/cron_pubblica.bat",
+      "schedule": "Lun–ven ogni 5–10 min, fasce 09:30–11:30 / 13–14:30 / 18:30–21 Europe/Rome",
+      "script": "righetto_social/publish_from_agenda.py --modo cron",
+      "output": "Post Facebook, Instagram, mirror GBP da pianificazioni"
     }
   }
 }

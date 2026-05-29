@@ -1,0 +1,31 @@
+---
+description: Righetto — bozze/agenda Meta, Instagram, reel, Google Business (righetto_social)
+globs: "righetto_social/**,TEST-SKILL/skill-social-automation.md"
+alwaysApply: false
+---
+
+# Automazione social
+
+Dettaglio: **`TEST-SKILL/skill-social-automation.md`** · sintesi **`SKILL-2.0.md` §10.4**.
+
+## Obiettivo
+~16 contenuti/settimana · catalogo sito + ≥2 RSS (testo originale) · FB + IG + GBP.
+
+## Rotazione (regola d'oro)
+- **3 slot/settimana** per sezione · **contenuti diversi** (no stesso immobile reel+feed+FB stessa settimana)
+- Pool immobili: `attivo=true`, non venduto/affittato · ordine codice
+- Script: `genera_bozze_settimanali.py`, `publish_from_agenda.py --modo cron`
+
+## Copy BLOCCANTE (§2b) — immobili e blog sito
+- **Titolo:** identico al sito (`immobili.titolo` / `blog.titolo`) — no spintax sul titolo
+- **Caption:** titolo + 2–4 righe utili + **URL HTTPS** `righettoimmobiliare.it` + hashtag
+- **No** tariffe mediazione online
+- RSS esterni: eccezione (titolo rielaborato + link fonte)
+
+## Sicurezza
+- **Mai** committare `.env` o token Meta
+- Verifica token: `righetto_social/verifica_meta.py`
+
+## Cron (Windows)
+- Domenica 20:00 → `cron_settimanale.bat` (bozze)
+- Lun–ven fasce → `cron_pubblica.bat` (agenda)
