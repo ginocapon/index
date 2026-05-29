@@ -4,7 +4,19 @@ Il contenuto completo della skill (SEO, GEO, blog, checklist, architettura) si t
 
 **[`TEST-SKILL/SKILL-2.0.md`](TEST-SKILL/SKILL-2.0.md)**
 
-Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutturali. Le regole operative aggiunte nel 2026 sulla qualità del corpo e sugli asset immagine sono nella sezione **8.1c** del file sopra.
+Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutturali. Prima di ogni **nuovo** articolo blog: **§8.1a anti-doppioni** (catalogo + `scripts/check_doppioni_sito.py`; se doppione → altro argomento da fonte istituzionale sul web). Qualità corpo e asset: **§8.1c**.
+
+**Regole Cursor scoped:** [`TEST-SKILL/skill-cursor-rules.md`](TEST-SKILL/skill-cursor-rules.md) — 7 file `.mdc` in `.cursor/rules/` (pattern awesome-cursorrules).
+
+**Changelog rapido (29 maggio 2026 — pomeriggio):** architettura Cursor — `skill-cursor-rules.md` + 7 `.mdc` scoped; deprecato `righetto-seo-2026.mdc`; `context-map.json` v1.2.
+
+**Changelog rapido (29 maggio 2026):** blog — anti-doppioni **BLOCCANTE** prima di scrivere: §8.1a in `TEST-SKILL/SKILL-2.0.md`, §2.0 in `skill-content.md`.
+
+**Changelog rapido (28 maggio 2026):** social — titolo pari pari + link e hashtag in caption per immobili/blog: **`TEST-SKILL/skill-social-automation.md`** §2b.
+
+**Changelog rapido (25 maggio 2026):** social operativo — rotazione completa catalogo (3 slot/sett.), token PAGE, retry reel 9007: **`TEST-SKILL/skill-social-automation.md`** + sezione **10.4**; avvio da domani con `righetto_social/`.
+
+**Changelog rapido (21 maggio 2026):** automazione social — cron bozze + notizie RSS (Sole24/ADE/Milano Finanza, no copiatura) + Google Business: sezione **10.4** in `TEST-SKILL/SKILL-2.0.md`; script in `righetto_social/`.
 
 **Changelog rapido (20 maggio 2026):** form lead — `TEST-SKILL/skill-forms-leads.md` (landing/blog: invio diretto `sendNotifica`, no doppio passaggio Contatti).
 

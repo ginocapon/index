@@ -1,0 +1,33 @@
+---
+description: Righetto — HTML/CSS/JS vanilla, design system, performance mobile
+globs: "**/*.html,css/**/*.css,js/**/*.js,index.html"
+alwaysApply: false
+---
+
+# UI e frontend vanilla
+
+Dettaglio: **`TEST-SKILL/skill-design.md`** + regole in **`skill-essentials.md`**.
+
+## Vietato
+- Framework (React, Vue, Tailwind…) e librerie CDN esterne
+- `filter: blur` su animazioni — solo `opacity` e `transform`
+- `will-change` permanente
+- `loading="lazy"` su LCP / above-the-fold
+- Animazioni sull'elemento LCP senza `animation-play-state: paused` iniziale
+
+## Obbligatorio
+- **Mobile-first**; touch target ≥ 44px
+- CTA primario: contrasto ≥ 4.5:1 — arancione `#FF6B35` solo con testo **scuro** `#152435`
+- Critical CSS inline; resto deferred: `media="print" onload="this.media='all'"`
+- Ogni modifica a CSS/JS → incrementa `?v=N` nel link
+- Link interni senza `.html` (canonical, og:url, href, sitemap coerenti)
+- Immagini hero/blog: WebP preferito, `img/` locale — **no** Unsplash/CDN esterni
+
+## Pattern homepage / sezioni
+- Griglia evidenza: 9 card uniformi (`PROPS_PREVIEW` in `js/homepage.js`)
+- Servizi: 4 card in fila desktop (`css/below-fold.css`)
+- Scroll-reveal: card blog/evidenza **sempre visibili** (no `opacity:0` bloccante)
+
+## Dopo modifica UI
+- Verifica responsive 768px e 480px
+- Se nuova pagina: checklist `skill-essentials.md` §2

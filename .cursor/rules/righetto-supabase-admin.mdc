@@ -1,0 +1,27 @@
+---
+description: Righetto — Supabase RLS, admin immobili/blog, SQL hardening
+globs: "sql/**/*.sql,admin.html,supabase/**"
+alwaysApply: false
+---
+
+# Supabase e admin
+
+Dettaglio: **`TEST-SKILL/skill-context.md`** · SQL in `sql/rls-*.sql`.
+
+## Principi (ispirati a best practice auth/RLS)
+- Client pubblico: **mai** esporre dati sensibili via policy permissive
+- Admin: preferire RPC (`rig-admin-rpc-immobili.sql`) se header admin non arriva a PostgREST
+- Verificare RLS su: `immobili`, `blog`, `richieste`, `bozze_social`, tabelle marketing
+- Dopo migration SQL: test read anon + test path admin
+
+## Admin (`admin.html`)
+- Seed blog: `_blogSeedArticles` — `data_pubblicazione` obbligatoria
+- Seed landing: `_landingSeedPages`
+- Toggle evidenza/attivo: RPC se patch singolo campo
+
+## Vietato in commit
+- Secret admin live, API key relay, token Meta, `.env`
+
+## Script utili
+- `tools/check_rls_exposure.py`
+- `tools/check_live_admin_secret.py` (solo locale, non committare output con segreti)

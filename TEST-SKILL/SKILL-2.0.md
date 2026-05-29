@@ -6,6 +6,12 @@
 > **Ultimo aggiornamento Google verificato:** 8 Marzo 2026
 > **Prossima verifica consigliata:** Aprile 2026
 >
+> **Changelog 29 maggio 2026 (pomeriggio):** **Cursor rules scoped** — `TEST-SKILL/skill-cursor-rules.md` + 7 file `.cursor/rules/*.mdc` (core, UI, blog, forms, social, SEO/GEO, Supabase); `context-map.json` v1.2; deprecato `righetto-seo-2026.mdc`.
+>
+> **Changelog 29 maggio 2026:** blog — **anti-doppioni BLOCCANTE** prima di ogni nuovo articolo: verifica catalogo + script; se tema già coperto → ricerca web su fonte istituzionale e altro argomento (§8.1a, `skill-content.md` §2.0, `scripts/check_doppioni_sito.py`).
+>
+> **Changelog 28 maggio 2026:** social — copy obbligatorio immobili/blog: titolo pari pari, link + hashtag in caption (§2b `skill-social-automation.md`, §10.4).
+
 > **Changelog 20 Maggio 2026:** nuova **`skill-forms-leads.md`** — form landing/blog obbligatori: invio in pagina via `sendNotifica` + `richieste`, no redirect GET a Contatti, no GET su `send-mail.php`; `context-map.json` aggiornato.
 >
 > **Changelog 3 Aprile 2026:** eliminata la CTA Google legacy (sfondo rosso `#B71C1C`) su **45+** pagine (`blog-*`, `landing-*`); sostituita con `section.blog-rich-cta-strip` + link `css/blog-rich.css?v=2` dove mancava. Script riutilizzabili in `scripts/`: `migrate_legacy_red_google_cta.py`, `ensure_blog_rich_css_link.py`, `blog_add_rich_css_and_footer_cta.py`. Allineati claim aggressivi su `landing-vendita.html`, `landing-vendere-casa-padova.html`, `landing-agente.html` e messaggi chat (`landing-chat-vendita`, `landing-chat-insoddisfatti`) ai numeri consentiti in `CLAUDE.md`. `blog-articolo.html`: aggiunto `blog-rich.css` + CTA strip statica sotto il corpo dinamico.
@@ -44,11 +50,27 @@ Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se 
     - **Pagine generiche** → registrare in `sitemap.xml` + navigazione
 12. **Data di pubblicazione obbligatoria** — ogni landing page nel seed `_landingSeedPages` in `admin.html` DEVE avere il campo `data_pubblicazione` in formato `YYYY-MM-DD`. Senza questo campo la colonna "Pubblicazione" nell'admin mostra "—"
 13. **Entity-Based SEO + Neural Matching (NO keyword stuffing)** — Google ragiona per **entita' semantiche** e **corrispondenza concettuale profonda** (Neural Matching/RankEmbed). Nessuna frase di 2+ parole deve apparire piu' di 5 volte per pagina. "a Padova" max 8-10 volte. Usare sinonimi, varianti e campo semantico ricco. Title, H1 e meta description devono usare varianti diverse. Ogni pagina deve coprire l'intero spazio concettuale del topic (copertura 80%+, co-occorrenze semantiche 70%+, intent chiaro entro 100 parole). Dettagli completi nella sezione 8.3
+14. **Anti-doppioni blog (BLOCCANTE — prima di scrivere)** — ogni nuovo articolo richiede verifica catalogo esistente (§8.1a): slug, titolo, angolo editoriale e cluster. Se il tema proposto e' gia' coperto o troppo simile, **non scrivere**: cercare sul web un argomento diverso con fonte istituzionale verificabile (OMI, Banca d'Italia, ISTAT, BCE, MEF, Agenzia Entrate, FIMAA) e proporre quello.
 
 ### 1.3 Stile di Comunicazione
 - Rispondi in italiano
 - Sii diretto e pratico
 - Proponi sempre prima di agire su operazioni irreversibili
+
+### 1.4 Regole Cursor (agenti AI — Maggio 2026)
+
+Architettura a **due layer** (dettaglio: **`skill-cursor-rules.md`**):
+
+| Layer | Percorso | Ruolo |
+|-------|----------|--------|
+| Fonte di verità | `TEST-SKILL/SKILL-2.0.md` + `skill-*.md` | Manuale completo SEO, blog, legal, automazioni |
+| Trigger scoped | `.cursor/rules/*.mdc` | Checklist brevi attive sui file aperti in Cursor |
+
+**Sempre attiva:** `righetto-core.mdc` (claim, stack vanilla, routing `context-map.json`).
+
+**Scoped (globs):** `righetto-vanilla-ui`, `righetto-blog-publish`, `righetto-forms-leads`, `righetto-social-automation`, `righetto-seo-geo`, `righetto-supabase-admin`.
+
+> Non importare rule generiche React/Next da cataloghi esterni: stack Righetto = HTML statico + Supabase.
 
 ---
 
@@ -650,6 +672,58 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 ### 8.1 Standard Articoli Blog — Struttura Obbligatoria
 
+### 8.1a Anti-doppioni catalogo — prima di scrivere (BLOCCANTE)
+
+> **Quando:** prima di proporre titolo, slug, outline, batch o HTML di un **nuovo** articolo blog (anche richieste tipo «3 immobiliare + 2 geopolitica»).
+> **Se salti questo passo, l'articolo non va in produzione.**
+
+**1) Inventario obbligatorio del catalogo esistente**
+
+Consultare almeno:
+
+- `blog.html` → array `articoliStatici` (`url_statico`, `titolo`, `categoria`)
+- File statici `blog-*.html` in root (canonical = slug)
+- `sitemap.xml` — URL blog
+- Supabase tabella `blog` (`titolo`, `stato`)
+- `admin.html` → `_blogSeedArticles`; `js/homepage.js` → `staticMap` / `articoliStatici`
+- Cluster gia' coperti in **`TEST-SKILL/skill-content.md`** sezione 1
+
+**2) Script di verifica (sessione corrente)**
+
+```bash
+python scripts/check_doppioni_sito.py
+```
+
+Exit code `0` **non basta da solo**: serve anche controllo **semantico** del tema proposto (titolo, H1, keyword primaria, intent).
+
+**3) Criteri di rifiuto — non creare l'articolo se:**
+
+- Esiste gia' lo stesso `url_statico` / slug / file `blog-{slug}.html`
+- Titolo uguale o quasi uguale (normalizzato; overlap evidente)
+- Stesso **angolo editoriale** su macro-tema gia' pubblicato (es. secondo articolo «mutui BCE 2026» con stesse fonti e stesse H2; secondo pezzo geopolitica sullo stesso evento senza nuova leva per acquirente/venditore Padova)
+- Il tema rientra in un cluster gia' segnato **COMPLETO** in `skill-content.md` senza gap reale da colmare
+
+**4) Se il tema proposto e' doppione o troppo simile**
+
+1. **STOP** — non scrivere HTML ne' registrare slug
+2. **Ricerca web** su fonti istituzionali: OMI, Banca d'Italia, ISTAT, MEF, BCE, Agenzia Entrate, FIMAA, comunicati ufficiali (ANSA economia, Sole24Ore con dato da fonte primaria)
+3. Scegliere **argomento diverso** con fonte verificabile e utilita' per famiglie/investitori Padova e hinterland
+4. Se la richiesta era generica: proporre **2–3 alternative** (titolo provvisorio + fonte + perche' non e' doppione) prima di procedere
+
+**5) Eccezione limitata**
+
+Aggiornamento sostanziale di articolo **esistente** (nuova edizione anno, dati OMI trimestre): stesso slug, `dateModified` e nota «aggiornamento» visibile — **non** contare come nuovo articolo.
+
+**6) Checklist bloccante (prima di scrivere una riga)**
+
+- [ ] Eseguito `python scripts/check_doppioni_sito.py` nella sessione
+- [ ] Ricerca in repo su titolo/slug/keyword proposti (`blog.html`, `blog-*.html`, grep titolo)
+- [ ] Confermato che `blog-{slug}.html` e voce `url_statico` non esistono
+- [ ] Tema non duplica intent di articolo pubblicato negli ultimi 90 giorni
+- [ ] Se era doppione: nuovo tema scelto da ricerca web + fonte istituzionale citata nel planning
+
+---
+
 **Lunghezza target:** 2.500-3.500 parole per articoli pillar, 1.500-2.000 per articoli secondari.
 
 **Struttura H-tag:**
@@ -830,6 +904,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 **7) Checklist obbligatoria quando si genera un nuovo articolo o pagina (anche via script)**
 
+- [ ] **Anti-doppioni (§8.1a)** completato prima di scrivere — tema non duplica catalogo; se era doppione, sostituito con argomento da ricerca web su fonte ufficiale.
 - [ ] Nessun paragrafo duplicato oltre le soglie del punto 1.
 - [ ] Copertina WebP (o piano di conversione immediata) + dimensioni dichiarate coerenti con layout.
 - [ ] `wordCount` coerente con corpo reale.
@@ -1351,6 +1426,62 @@ Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 - **Mensile:** Audit metriche SEO + Core Web Vitals + citazioni AI
 - **Trimestrale:** Audit completo contenuti + struttura + competitor
 - **Ad ogni Google Update:** Verificare impatto sul sito
+
+### 10.4 Automazione social e Google Business (cron `righetto_social/`)
+
+**Documentazione operativa completa (agg. 25 maggio 2026):** [`TEST-SKILL/skill-social-automation.md`](skill-social-automation.md) — **fonte di verità** per rotazione, token Meta, reel, checklist avvio, troubleshooting.
+
+**Obiettivo:** ~16 bozze/settimana senza AI a pagamento — contenuti sito + notizie da fonti autorevoli, pubblicati su Meta e sulla scheda Google [Gruppo Immobiliare Righetto](https://www.google.com/maps/place/Gruppo+Immobiliare+Righetto/).
+
+| Frequenza | Script / batch | Output |
+|-----------|----------------|--------|
+| Domenica 20:00 | `cron_settimanale.bat` → `genera_bozze_settimanali.py` | 12 bozze (3 slot/sett. × 4 sezioni) + **2 notizie RSS** (FB + Google) |
+| Lun–ven ogni 5–10 min | `cron_pubblica.bat` → `verifica_meta.py` + `publish_from_agenda.py --modo cron` | Post Meta + GBP da agenda |
+| Dopo bozze | `genera_reel.py --pending` | MP4 reel su Storage (`foto-immobili/reels/`) |
+| Manuale | Admin → Social → **Approva** → `programma_da_bozze.py` | Righe in `pianificazioni` |
+
+#### Copy social immobili e blog (BLOCCANTE)
+
+Dettaglio in **§2b** di [`skill-social-automation.md`](skill-social-automation.md):
+
+- **Titolo** del post/storia/reel = **identico** a `immobili.titolo` / `blog.titolo` (niente spintax sul titolo).
+- **Descrizione/caption:** link URL completo immobile o articolo + **≥10 hashtag `#`** da keyword ad alto volume (Padova/immobiliare) + campi SEO DB; spintax solo nel corpo secondario.
+
+#### Rotazione catalogo (immobili, blog, landing, agenzia)
+
+- **3 contenuti diversi a settimana** per sezione (lun/mer/ven): es. immobile → reel + IG feed + FB su **tre annunci diversi**, non lo stesso tre volte.
+- **Ciclo completo:** tutti gli elementi del pool (immobili `attivo=true`, articoli pubblicati, landing, pagine agenzia) → poi **ricomincia da capo**.
+- Indice calcolato da bozze già create (`bozze_social.fonte`, stato ≠ `rifiutata`). Pool immobili ordinato per **codice**.
+- Se pochi annunci in rotazione: verificare `attivo` in Supabase (molti annunci sito possono non essere flaggati attivi).
+
+#### Token Meta (obbligatorio token **PAGINA**)
+
+```powershell
+cd righetto_social
+python estrai_token_pagina.py --scrivi-env   # dopo token utente in .env
+python verifica_meta.py                      # deve dire: Token tipo PAGE
+```
+
+- `META_PAGE_ID=1036863892837936`, `META_IG_USER_ID=17841424134341557`.
+- **Mai** incollare token in PowerShell; solo `.env` locale. Non committare `.env`.
+
+#### Reel Instagram
+
+- Errore 9007 «media non pronto» → `ig_media_publish_with_retry` in `publish_from_agenda.py` (retry ~15 s).
+- Retry manuale: `python publish_from_agenda.py --modo manuale --riprova-errati`.
+
+#### Avvio operativo (primo giorno)
+
+1. `verifica_meta.py`  
+2. `publish_from_agenda.py --riprova-errati` se errori in agenda  
+3. Domenica o manuale: `genera_bozze_settimanali.py` → `genera_reel.py --pending` → Approva → `programma_da_bozze.py --min 8`  
+4. Task Scheduler: `cron_settimanale.bat` + `cron_pubblica.bat`
+
+**Notizie esterne (≥2/settimana):** RSS **Sole 24 Ore**, **Agenzia delle Entrate**, **Milano Finanza**. Zero copiatura; titolo SEO Padova; spintax originale; mar/gio; `facebook_post` + `google`.
+
+**Google Business:** `GOOGLE_GBP_*` in `.env`; `GBP_MIRROR_META=1` replica Meta→GBP. OAuth può dare 429 se abusato — attendere e riprovare. Storie IG non automatizzate.
+
+**Token:** Meta e Google solo in `.env` sul PC/server — mai in admin/localStorage in produzione.
 
 ---
 

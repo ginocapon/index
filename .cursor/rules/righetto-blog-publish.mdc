@@ -1,0 +1,37 @@
+---
+description: Righetto — pubblicazione blog, anti-doppioni, asset e registrazione 4 punti
+globs: "blog-*.html,blog.html,scripts/**/*.py,scripts/check_doppioni_sito.py,img/blog/**"
+alwaysApply: false
+---
+
+# Blog — qualità e pubblicazione
+
+Dettaglio: **`TEST-SKILL/skill-content.md`**, **`SKILL-2.0.md` §8.1a, §8.1, §8.1c, §8.3**.
+
+## BLOCCANTE — prima di scrivere (§8.1a)
+1. Esegui `python scripts/check_doppioni_sito.py`
+2. Verifica titolo/slug/cluster in `blog.html`, `blog-*.html`, admin seed
+3. Se doppione o tema troppo simile → **STOP** → ricerca web su fonte istituzionale → altro argomento
+
+## Corpo articolo
+- 2500+ parole **utili** (no loop di paragrafi identici per gonfiare `wordCount`)
+- 10–15 H2/H3 · ~35% transition words
+- Ogni dato numerico con **fonte** verificata
+- Disclaimer mediazione **una volta** per pagina
+- Script batch: `MAX_TEMPLATE_PARAGRAPHS` + diversità paragrafi (vedi `build_*_blog*.py`)
+
+## Copertina
+- WebP **1200×630**, target **<120 KiB**
+- Allinea: `og:image`, schema `BlogPosting.image`, hero `src`
+
+## Registrazione obbligatoria (tutti e 4)
+- `admin.html` → `_blogSeedArticles` con `data_pubblicazione: 'YYYY-MM-DD'`
+- `blog.html` → `articoliStatici`
+- `js/homepage.js` → `staticMap` + `articoliStatici`
+- `sitemap.xml` → URL senza `.html`
+
+## Dopo pubblicazione
+- Cross-link zone/servizi (min 3)
+- Timestamp "Ultimo aggiornamento" visibile
+- Aggiorna `llms.txt` se pillar o dati mercato
+- Form/CTA lead → **`skill-forms-leads.md`**
