@@ -479,6 +479,11 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'sondaggio abitativo banca d\'italia q1 2026: ltv 77,2% e mutuo al 64,5%': { img: 'img/blog/blog-sondaggio-bancaditalia-q1-2026.webp', url: 'blog-sondaggio-bancaditalia-q1-2026-padova' },
+    'costi costruzione istat marzo 2026: +0,8% mensile, indice 117,2': { img: 'img/blog/blog-costi-costruzione-istat-padova-2026.webp', url: 'blog-costi-costruzione-istat-padova-2026' },
+    'barometro mutui crif q1 2026: domanda -12,4%, importo medio 161.059 €': { img: 'img/blog/blog-barometro-mutui-crif-padova-2026.webp', url: 'blog-barometro-mutui-crif-padova-2026' },
+    'dazi usa-ue e mercato padovano 2026: turnberry 15%, filiera veneto': { img: 'img/blog/blog-dazi-usa-ue-mercato-padova-2026.webp', url: 'blog-dazi-usa-ue-mercato-padova-2026' },
+    'eurocamera e accordo dazi usa 2026: compromesso strasburgo, sunset 2029': { img: 'img/blog/blog-eurocamera-accordo-dazi-usa-2026.webp', url: 'blog-eurocamera-accordo-dazi-usa-2026' },
     'righetto immobiliare: bilancio 2025, valori e soluzioni affitto nel 2026': { img: 'img/team/titolari.webp', url: 'blog-righetto-bilancio-2025-soluzioni-affitto-2026' },
     'guida ai quartieri di padova: dove comprare casa nel 2026': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-quartieri-padova-2026' },
     'affitto studenti padova 2026: zone, prezzi e guida completa': { img: 'img/foto-servizi/contratti-di-locazione-padova.webp', url: 'blog-affitto-studenti-padova' },
@@ -546,6 +551,11 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    { titolo: "Sondaggio abitativo Banca d'Italia Q1 2026: LTV 77,2% e mutuo al 64,5%", categoria: "Mercato immobiliare", data: '2026-05-27', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-sondaggio-bancaditalia-q1-2026.webp', url_statico: 'blog-sondaggio-bancaditalia-q1-2026-padova' },
+    { titolo: "Costi costruzione ISTAT marzo 2026: +0,8% mensile, indice 117,2", categoria: "Mercato immobiliare", data: '2026-05-27', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-costi-costruzione-istat-padova-2026.webp', url_statico: 'blog-costi-costruzione-istat-padova-2026' },
+    { titolo: "Barometro mutui CRIF Q1 2026: domanda -12,4%, importo medio 161.059 €", categoria: "Finanziamenti", data: '2026-05-27', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-barometro-mutui-crif-padova-2026.webp', url_statico: 'blog-barometro-mutui-crif-padova-2026' },
+    { titolo: "Dazi USA-UE e mercato padovano 2026: Turnberry 15%, filiera Veneto", categoria: "Economia", data: '2026-05-27', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-dazi-usa-ue-mercato-padova-2026.webp', url_statico: 'blog-dazi-usa-ue-mercato-padova-2026' },
+    { titolo: "Eurocamera e accordo dazi USA 2026: compromesso Strasburgo, sunset 2029", categoria: "Economia", data: '2026-05-27', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-eurocamera-accordo-dazi-usa-2026.webp', url_statico: 'blog-eurocamera-accordo-dazi-usa-2026' },
     { titolo: 'Patrimonio casa e resilienza urbana: lezioni dal contesto globale per il Nord-Est', categoria: 'Mercato e famiglie', data: '2026-05-12', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-patrimonio-casa-resilienza-mercati-globali-2026.png', url_statico: 'blog-patrimonio-casa-resilienza-mercati-globali-2026' },
     { titolo: 'Mutui più selettivi: come le banche valutano reddito e garanzie nel 2026', categoria: 'Finanziamenti', data: '2026-05-12', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-mutui-selettivi-banche-padova-2026.png', url_statico: 'blog-mutui-selettivi-banche-padova-2026' },
     { titolo: 'Tensioni in Medio Oriente e mercato immobiliare italiano: canali economici (non cronaca)', categoria: 'Economia', data: '2026-05-12', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-mercato-italiano-tensioni-medio-oriente-2026.png', url_statico: 'blog-mercato-italiano-tensioni-medio-oriente-2026' },
