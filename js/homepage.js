@@ -94,25 +94,41 @@ function generatePropertySlug(d) {
   ).filter(Boolean).join('-');
 }
 
+const PROPS_PREVIEW = 9;
+
+function escProp(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+}
+
+function propExcerpt(p, maxWords) {
+  maxWords = maxWords || 20;
+  const raw = String(p.descrizione || '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (!raw) return '';
+  const words = raw.split(/\s+/);
+  if (words.length <= maxWords) return raw;
+  return words.slice(0, maxWords).join(' ') + '…';
+}
+
 /* ══ IMMOBILI DA SUPABASE ══ */
 async function loadImmobili(){
   if(!sb){ showDemoProps(); return; }
   try{
-    // Prima carica gli immobili in evidenza
     const {data:evidenza,error:e1} = await sb.from('immobili').select('*')
       .eq('attivo',true).eq('venduto',false).eq('in_evidenza',true)
-      .order('created_at',{ascending:false}).limit(6);
+      .order('created_at',{ascending:false}).limit(PROPS_PREVIEW);
     let risultati = (e1 || !evidenza) ? [] : evidenza;
-    // Se meno di 4, riempi con gli ultimi immobili attivi (non gia' inclusi)
-    if(risultati.length < 4){
+    if(risultati.length < PROPS_PREVIEW){
       const ids = risultati.map(r=>r.id);
       const {data:altri} = await sb.from('immobili').select('*')
         .eq('attivo',true).eq('venduto',false).eq('affittato',false)
-        .order('created_at',{ascending:false}).limit(8);
+        .order('created_at',{ascending:false}).limit(PROPS_PREVIEW + 6);
       if(altri){
         for(const a of altri){
           if(!ids.includes(a.id)){ risultati.push(a); ids.push(a.id); }
-          if(risultati.length>=6) break;
+          if(risultati.length >= PROPS_PREVIEW) break;
         }
       }
     }
@@ -124,8 +140,7 @@ async function loadImmobili(){
 function renderProps(arr){
   const grid = document.getElementById('propsGrid');
   if(!arr||!arr.length){ showDemoProps(); return; }
-  grid.innerHTML = arr.slice(0,6).map((p,i)=>{
-    const isFirst = i===0;
+  grid.innerHTML = arr.slice(0, PROPS_PREVIEW).map((p)=>{
     const tipo = p.tipo_operazione || p.tipo_contratto || 'vendita';
     const tipClass = tipo==='affitto'?'ta':tipo==='asta'?'te':'tv';
     const tipLabel = tipo==='affitto'?'Affitto':tipo==='asta'?'Asta':'Vendita';
@@ -133,11 +148,13 @@ function renderProps(arr){
       ? `€ ${p.prezzo?.toLocaleString('it-IT')}/mese`
       : `€ ${p.prezzo?.toLocaleString('it-IT')}`;
     const rawImg = p.foto_principale || (p.foto_urls&&p.foto_urls[0]) || (p.foto&&p.foto[0]) || '';
-    const imgUrl = resolveImageUrl(rawImg, {width: 600, quality: 75});
+    const imgUrl = resolveImageUrl(rawImg, {width: 800, quality: 80});
     const imgTag = imgUrl
-      ? `<img src="${imgUrl}" alt="${p.titolo||'Immobile'}" width="600" height="400" loading="lazy" onerror="this.parentNode.innerHTML='<div class=pi-ph>🏠</div>'">`
+      ? `<img src="${imgUrl}" alt="${escProp(p.titolo||'Immobile')}" width="800" height="600" loading="lazy" onerror="this.parentNode.innerHTML='<div class=pi-ph>🏠</div>'">`
       : `<div class="pi-ph">🏠</div>`;
     const propSlug = generatePropertySlug(p);
+    const desc = propExcerpt(p);
+    const loc = `${p.comune||'Padova'}${p.indirizzo?' — '+p.indirizzo:''}`;
     return `<a href="immobile?s=${encodeURIComponent(propSlug)}" class="pc">
       <div class="pi">
         ${imgTag}
@@ -147,15 +164,16 @@ function renderProps(arr){
       </div>
       <div class="pb">
         <div class="pp">${price}</div>
-        <div class="pn">${p.titolo||'Immobile a '+p.comune}</div>
+        <div class="pn">${escProp(p.titolo||'Immobile a '+(p.comune||'Padova'))}</div>
+        ${desc ? `<div class="pd">${escProp(desc)}</div>` : ''}
         <div class="ploc">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          ${p.comune||'Padova'}${p.indirizzo?' — '+p.indirizzo:''}
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;min-width:14px;max-width:14px;flex-shrink:0;display:block" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          ${escProp(loc)}
         </div>
         <div class="pfeats">
-          ${p.superficie?`<span class="pfeat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/></svg>${p.superficie} mq</span>`:''}
-          ${p.locali?`<span class="pfeat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>${p.locali} loc.</span>`:''}
-          ${p.bagni?`<span class="pfeat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><path d="M4 12h16M4 6h16M4 18h16"/></svg>${p.bagni} bagni</span>`:''}
+          ${p.superficie?`<span class="pfeat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;min-width:14px;max-width:14px;flex-shrink:0;display:block" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/></svg>${p.superficie} mq</span>`:''}
+          ${p.locali?`<span class="pfeat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;min-width:14px;max-width:14px;flex-shrink:0;display:block" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>${p.locali} loc.</span>`:''}
+          ${p.bagni?`<span class="pfeat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;min-width:14px;max-width:14px;flex-shrink:0;display:block" aria-hidden="true"><path d="M4 12h16M4 6h16M4 18h16"/></svg>${p.bagni} bagni</span>`:''}
         </div>
       </div>
     </a>`;
@@ -164,11 +182,15 @@ function renderProps(arr){
 
 function showDemoProps(){
   const DEMO=[
-    {id:'d1',tipo_contratto:'vendita',prezzo:295000,titolo:'Appartamento luminoso con balcone',comune:'Padova',superficie:88,locali:3,bagni:1,in_evidenza:true},
-    {id:'d2',tipo_contratto:'vendita',prezzo:480000,titolo:'Villa con giardino e garage doppio',comune:'Selvazzano Dentro',superficie:180,locali:5,bagni:2,in_evidenza:false},
-    {id:'d3',tipo_contratto:'affitto',prezzo:850,titolo:'Bilocale arredato vicino all\'università',comune:'Padova',superficie:52,locali:2,bagni:1,in_evidenza:false},
-    {id:'d4',tipo_contratto:'vendita',prezzo:165000,titolo:'Trilocale ristrutturato centro storico',comune:'Monselice',superficie:74,locali:3,bagni:1,in_evidenza:false},
-    {id:'d5',tipo_contratto:'asta',prezzo:112000,titolo:'Appartamento piano terzo con ascensore',comune:'Cittadella',superficie:65,locali:2,bagni:1,in_evidenza:false},
+    {id:'d1',tipo_contratto:'vendita',prezzo:295000,titolo:'Appartamento luminoso con balcone',comune:'Padova',superficie:88,locali:3,bagni:1,in_evidenza:true,descrizione:'Trilocale ristrutturato con doppia esposizione, cucina abitabile e posto auto coperto in zona servita.'},
+    {id:'d2',tipo_contratto:'vendita',prezzo:480000,titolo:'Villa con giardino e garage doppio',comune:'Selvazzano Dentro',superficie:180,locali:5,bagni:2,in_evidenza:true,descrizione:'Villa unifamiliare su lotto curato, ampi spazi esterni e finiture di pregio a due passi dai Colli Euganei.'},
+    {id:'d3',tipo_contratto:'affitto',prezzo:850,titolo:'Bilocale arredato vicino all\'università',comune:'Padova',superficie:52,locali:2,bagni:1,in_evidenza:false,descrizione:'Soluzione ideale per studenti o giovani professionisti, completamente arredata e pronta all\'uso.'},
+    {id:'d4',tipo_contratto:'vendita',prezzo:165000,titolo:'Trilocale ristrutturato centro storico',comune:'Monselice',superficie:74,locali:3,bagni:1,in_evidenza:false,descrizione:'Appartamento in palazzo d\'epoca con travi a vista, impianti aggiornati e vista sul centro medievale.'},
+    {id:'d5',tipo_contratto:'asta',prezzo:112000,titolo:'Appartamento piano terzo con ascensore',comune:'Cittadella',superficie:65,locali:2,bagni:1,in_evidenza:false,descrizione:'Unità abitativa compatta in edificio servito, ottima base per primo acquisto o investimento locativo.'},
+    {id:'d6',tipo_contratto:'vendita',prezzo:365000,titolo:'Casa singola ristrutturata ad Altichiero',comune:'Padova',superficie:145,locali:4,bagni:2,in_evidenza:true,descrizione:'Porzione di villa bifamiliare con giardino privato, classe energetica B e doppio box.'},
+    {id:'d7',tipo_contratto:'vendita',prezzo:228000,titolo:'Quadrilocale con terrazzo panoramico',comune:'Abano Terme',superficie:110,locali:4,bagni:2,in_evidenza:false,descrizione:'Ampia metratura, terrazzo vivibile e posizione comoda verso Padova e le Terme Euganee.'},
+    {id:'d8',tipo_contratto:'affitto',prezzo:720,titolo:'Trilocale con cantina e posto auto',comune:'Limena',superficie:78,locali:3,bagni:1,in_evidenza:false,descrizione:'Appartamento in condominio tranquillo, spese contenute e collegamento rapido con la tangenziale.'},
+    {id:'d9',tipo_contratto:'vendita',prezzo:198000,titolo:'Villetta a schiera con giardino',comune:'Vigonza',superficie:120,locali:4,bagni:2,in_evidenza:true,descrizione:'Soluzione indipendente su tre livelli, ideale per famiglia, con doppio ingresso e area verde esclusiva.'},
   ];
   renderProps(DEMO);
 }
