@@ -1,7 +1,12 @@
 /* VIDEO PRESENTAZIONE */
-#video-intro { background: var(--bianco); padding: 60px 44px; }
-.video-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 48px; }
+#video-intro { background: var(--bianco); padding: 56px 44px; }
+.video-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 40px; }
 .video-text { flex: 1; min-width: 260px; }
+#video-intro .sec-p{
+  font-size:1.08rem;font-weight:500;
+  color:color-mix(in srgb,var(--grigio) 72%,var(--testo) 28%);
+  line-height:1.75;max-width:520px;margin-top:12px;
+}
 .video-text .sec-p { margin-bottom: 18px; }
 .video-wrap { flex: 1 1 560px; max-width: 640px; position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(21,36,53,0.14); aspect-ratio: 16/9; background: #000; cursor: pointer; }
 .video-wrap iframe { width: 100%; height: 100%; border: 0; }
@@ -147,9 +152,64 @@
 .ps-l{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.65);font-weight:700;margin-top:8px}
 .ps-d{font-size:0.8rem;color:rgba(255,255,255,0.68);margin-top:6px;line-height:1.6}
 /* STIMA */
-#stima{background:var(--sfondo);padding:90px 44px}
-.stima-inner{max-width:1200px;margin:0 auto}
-.stima-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:start;margin-top:50px}
+#stima{background:var(--sfondo);padding:72px 44px}
+.stima-inner{max-width:1140px;margin:0 auto}
+#stima .sec-p{
+  font-size:1.08rem;font-weight:500;
+  color:color-mix(in srgb,var(--grigio) 72%,var(--testo) 28%);
+  line-height:1.72;max-width:520px;margin-top:14px;
+}
+.stima-layout{display:grid;grid-template-columns:1.08fr 0.92fr;gap:32px;align-items:center;margin-top:0}
+.stima-badge{
+  display:inline-block;background:var(--oro);color:var(--testo);
+  padding:5px 12px;border-radius:6px;font-size:0.62rem;font-weight:800;
+  letter-spacing:0.04em;margin-bottom:10px;animation:pulseUrgency 2.5s infinite;
+}
+.stima-copy .sec-h2{margin-bottom:0;line-height:1.12}
+.stima-copy .sec-h2 em{color:var(--oro);font-style:italic}
+.stima-cta{margin-top:20px;display:inline-flex}
+.stima-panel{
+  background:var(--bianco);border-radius:14px;padding:24px 20px;
+  border:1px solid rgba(44,74,110,0.1);
+  box-shadow:0 6px 28px rgba(21,36,53,0.07);
+}
+.stima-panel-head{
+  display:flex;align-items:center;gap:10px;margin-bottom:18px;
+  padding-bottom:14px;border-bottom:1px solid rgba(44,74,110,0.08);
+}
+.stima-panel-ico{
+  width:42px;height:42px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--blu) 0%,var(--blu3) 100%);
+  display:flex;align-items:center;justify-content:center;font-size:1.15rem;
+  box-shadow:0 6px 16px rgba(44,74,110,0.22);
+}
+.stima-panel-title{font-size:0.78rem;font-weight:700;color:var(--testo);line-height:1.35}
+.stima-panel-sub{font-size:0.68rem;color:var(--grigio);font-weight:500;margin-top:2px;line-height:1.4}
+.stima-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stima-stat{text-align:center;padding:10px 6px;border-radius:8px;background:var(--sfondo)}
+.stima-stat-n{
+  font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:700;
+  color:var(--blu);line-height:1.05;
+}
+.stima-stat-n sup{font-size:0.55em;vertical-align:super}
+.stima-stat-l{
+  font-size:0.58rem;letter-spacing:1.4px;text-transform:uppercase;
+  color:var(--grigio);font-weight:700;margin-top:5px;line-height:1.3;
+}
+@media(max-width:900px){
+  #stima{padding:52px 20px}
+  .stima-layout{grid-template-columns:1fr;gap:22px}
+  .stima-panel{max-width:520px;width:100%;margin:0 auto}
+}
+@media(max-width:480px){
+  #stima{padding:44px 18px}
+  .stima-layout{gap:18px}
+  .stima-stats{gap:8px}
+  .stima-stat{padding:8px 4px}
+  .stima-stat-n{font-size:1.55rem}
+  .stima-cta{width:100%;justify-content:center;text-align:center}
+  #stima .sec-p{font-size:1rem;line-height:1.68}
+}
 .stima-feats{margin-top:30px;display:flex;flex-direction:column;gap:11px}
 .stima-feat{display:flex;align-items:center;gap:12px;font-size:0.82rem;color:var(--testo);font-weight:500}
 .stima-feat::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--oro);flex-shrink:0}
@@ -264,8 +324,9 @@
 }
 .cs-h2 span { color: var(--blu); font-style: italic; }
 .cs-intro {
-  font-size: 0.95rem; color: var(--grigio);
-  line-height: 1.9; margin-bottom: 30px;
+  font-size: 1.02rem; font-weight: 500;
+  color: color-mix(in srgb, var(--grigio) 68%, var(--testo) 32%);
+  line-height: 1.82; margin-bottom: 22px;
   padding-left: 18px;
   border-left: 3px solid var(--oro);
   font-style: italic;
