@@ -40,4 +40,27 @@
   document.querySelectorAll('.sr, .sr-left, .sr-right, .sr-scale').forEach(function(el) {
     observer.observe(el);
   });
+
+  // Card blog inserite dopo initBlog(): osserva e mostra senza reload
+  window.revealBlogCards = function() {
+    var grid = document.getElementById('artGrid');
+    if (!grid) return;
+    Array.prototype.forEach.call(grid.children, function(el, i) {
+      if (!el.classList.contains('sr')) {
+        el.classList.add('sr');
+        if (i < 6) el.classList.add('sr-d' + (i + 1));
+      }
+      if (el.classList.contains('visible')) return;
+      if ('IntersectionObserver' in window) {
+        observer.observe(el);
+        if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+      } else {
+        el.classList.add('visible');
+      }
+    });
+  };
+
+  if (document.getElementById('artGrid') && document.getElementById('artGrid').children.length) {
+    window.revealBlogCards();
+  }
 })();
