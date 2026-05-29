@@ -303,6 +303,18 @@ let _staticSlugs = new Set();
 async function initBlog() {
   // Articoli statici (pagine HTML dedicate) — mostrati subito, senza attendere Supabase
   const articoliStatici = [
+    {
+      titolo: "Documenti necessari per la compravendita di un immobile: guida pratica per venditori e acquirenti",
+      categoria: "Normativa",
+      data: '2026-05-29',
+      tempo: 14,
+      stato: 'pubblicato',
+      autore: 'Gino Capon',
+      immagine_copertina: 'img/blog/blog-documenti-compravendita-rogito-padova-2026.webp',
+      url_statico: 'blog-documenti-compravendita-rogito-padova-2026',
+      contenuto: 'Checklist rogito: identità, provenienza, titoli edilizi, APE, condominio, preliminare.',
+      evidenza: true
+    },
 {
       "titolo": "Sondaggio abitativo Banca d'Italia Q1 2026: LTV 77,2% e mutuo al 64,5%",
       "categoria": "Mercato immobiliare",
@@ -1592,7 +1604,7 @@ function renderBlog() {
   }
 
   // Sidebar recenti
-  const recent = all.slice(0, 4);
+  const recent = all.slice(0, 6);
   document.getElementById('recentSidebar').innerHTML = recent.length
     ? recent.map(a => {
         const riImg = a.immagine_copertina || extractFirstImage(a.contenuto);
