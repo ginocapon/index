@@ -1,0 +1,207 @@
+{
+  "generated": "2026-05-27",
+  "date_display": "27 maggio 2026",
+  "files": [
+    {
+      "filename": "blog-sondaggio-bancaditalia-q1-2026-padova.html",
+      "slug": "blog-sondaggio-bancaditalia-q1-2026-padova",
+      "wordCount_body": 2506
+    },
+    {
+      "filename": "blog-costi-costruzione-istat-padova-2026.html",
+      "slug": "blog-costi-costruzione-istat-padova-2026",
+      "wordCount_body": 2455
+    },
+    {
+      "filename": "blog-barometro-mutui-crif-padova-2026.html",
+      "slug": "blog-barometro-mutui-crif-padova-2026",
+      "wordCount_body": 2534
+    },
+    {
+      "filename": "blog-dazi-usa-ue-mercato-padova-2026.html",
+      "slug": "blog-dazi-usa-ue-mercato-padova-2026",
+      "wordCount_body": 2463
+    },
+    {
+      "filename": "blog-eurocamera-accordo-dazi-usa-2026.html",
+      "slug": "blog-eurocamera-accordo-dazi-usa-2026",
+      "wordCount_body": 2551
+    }
+  ],
+  "blog_html_articoliStatici": [
+    {
+      "titolo": "Sondaggio abitativo Banca d'Italia Q1 2026: LTV 77,2% e mutuo al 64,5%",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-05-27",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-sondaggio-bancaditalia-q1-2026.webp",
+      "url_statico": "blog-sondaggio-bancaditalia-q1-2026-padova",
+      "tempo": 12,
+      "autore": "Gino Capon",
+      "contenuto": "Comunicato maggio 2026: tempi vendita 5,2 mesi, sconto 7,3%, affitti in crescita più lenta.",
+      "evidenza": true
+    },
+    {
+      "titolo": "Costi costruzione ISTAT marzo 2026: +0,8% mensile, indice 117,2",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-05-27",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-costi-costruzione-istat-padova-2026.webp",
+      "url_statico": "blog-costi-costruzione-istat-padova-2026",
+      "tempo": 12,
+      "autore": "Gino Capon",
+      "contenuto": "Pressione su materiali e manodopera: budget ristrutturazioni e nuovo nel Padovano.",
+      "evidenza": true
+    },
+    {
+      "titolo": "Barometro mutui CRIF Q1 2026: domanda -12,4%, importo medio 161.059 €",
+      "categoria": "Finanziamenti",
+      "data": "2026-05-27",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-barometro-mutui-crif-padova-2026.webp",
+      "url_statico": "blog-barometro-mutui-crif-padova-2026",
+      "tempo": 11,
+      "autore": "Gino Capon",
+      "contenuto": "Durata 25-30 anni al 43,5%: lettura per acquirenti nel Padovano.",
+      "evidenza": true
+    },
+    {
+      "titolo": "Dazi USA-UE e mercato padovano 2026: Turnberry 15%, filiera Veneto",
+      "categoria": "Economia",
+      "data": "2026-05-27",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-dazi-usa-ue-mercato-padova-2026.webp",
+      "url_statico": "blog-dazi-usa-ue-mercato-padova-2026",
+      "tempo": 12,
+      "autore": "Gino Capon",
+      "contenuto": "Canali occupazione e credito verso mutui e compravendite — non cronaca Medio Oriente.",
+      "evidenza": false
+    },
+    {
+      "titolo": "Eurocamera e accordo dazi USA 2026: compromesso Strasburgo, sunset 2029",
+      "categoria": "Economia",
+      "data": "2026-05-27",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-eurocamera-accordo-dazi-usa-2026.webp",
+      "url_statico": "blog-eurocamera-accordo-dazi-usa-2026",
+      "tempo": 11,
+      "autore": "Gino Capon",
+      "contenuto": "Salvaguardie acciaio/alluminio e orizzonte 2029: lettura per imprese e famiglie padovane.",
+      "evidenza": false
+    }
+  ],
+  "admin_blogSeedArticles": [
+    {
+      "titolo": "Sondaggio abitativo Banca d'Italia Q1 2026: LTV 77,2% e mutuo al 64,5%",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-05-27",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-sondaggio-bancaditalia-q1-2026.webp",
+      "url_statico": "blog-sondaggio-bancaditalia-q1-2026-padova",
+      "tempo": 12,
+      "autore": "Gino Capon",
+      "contenuto": "<p>Comunicato maggio 2026: tempi vendita 5,2 mesi, sconto 7,3%, affitti in crescita più lenta.</p>",
+      "evidenza": true,
+      "emoji": "🏦",
+      "data_pubblicazione": "2026-05-27"
+    },
+    {
+      "titolo": "Costi costruzione ISTAT marzo 2026: +0,8% mensile, indice 117,2",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-05-27",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-costi-costruzione-istat-padova-2026.webp",
+      "url_statico": "blog-costi-costruzione-istat-padova-2026",
+      "tempo": 12,
+      "autore": "Gino Capon",
+      "contenuto": "<p>Pressione su materiali e manodopera: budget ristrutturazioni e nuovo nel Padovano.</p>",
+      "evidenza": true,
+      "emoji": "🏗️",
+      "data_pubblicazione": "2026-05-27"
+    },
+    {
+      "titolo": "Barometro mutui CRIF Q1 2026: domanda -12,4%, importo medio 161.059 €",
+      "categoria": "Finanziamenti",
+      "data": "2026-05-27",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-barometro-mutui-crif-padova-2026.webp",
+      "url_statico": "blog-barometro-mutui-crif-padova-2026",
+      "tempo": 11,
+      "autore": "Gino Capon",
+      "contenuto": "<p>Durata 25-30 anni al 43,5%: lettura per acquirenti nel Padovano.</p>",
+      "evidenza": true,
+      "emoji": "📊",
+      "data_pubblicazione": "2026-05-27"
+    },
+    {
+      "titolo": "Dazi USA-UE e mercato padovano 2026: Turnberry 15%, filiera Veneto",
+      "categoria": "Economia",
+      "data": "2026-05-27",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-dazi-usa-ue-mercato-padova-2026.webp",
+      "url_statico": "blog-dazi-usa-ue-mercato-padova-2026",
+      "tempo": 12,
+      "autore": "Gino Capon",
+      "contenuto": "<p>Canali occupazione e credito verso mutui e compravendite — non cronaca Medio Oriente.</p>",
+      "evidenza": false,
+      "emoji": "🌐",
+      "data_pubblicazione": "2026-05-27"
+    },
+    {
+      "titolo": "Eurocamera e accordo dazi USA 2026: compromesso Strasburgo, sunset 2029",
+      "categoria": "Economia",
+      "data": "2026-05-27",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-eurocamera-accordo-dazi-usa-2026.webp",
+      "url_statico": "blog-eurocamera-accordo-dazi-usa-2026",
+      "tempo": 11,
+      "autore": "Gino Capon",
+      "contenuto": "<p>Salvaguardie acciaio/alluminio e orizzonte 2029: lettura per imprese e famiglie padovane.</p>",
+      "evidenza": false,
+      "emoji": "🇪🇺",
+      "data_pubblicazione": "2026-05-27"
+    }
+  ],
+  "homepage_js_articoliStatici": [
+    {
+      "titolo": "Sondaggio abitativo Banca d'Italia Q1 2026: LTV 77,2% e mutuo al 64,5%",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-05-27",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-sondaggio-bancaditalia-q1-2026.webp",
+      "url_statico": "blog-sondaggio-bancaditalia-q1-2026-padova"
+    },
+    {
+      "titolo": "Costi costruzione ISTAT marzo 2026: +0,8% mensile, indice 117,2",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-05-27",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-costi-costruzione-istat-padova-2026.webp",
+      "url_statico": "blog-costi-costruzione-istat-padova-2026"
+    },
+    {
+      "titolo": "Barometro mutui CRIF Q1 2026: domanda -12,4%, importo medio 161.059 €",
+      "categoria": "Finanziamenti",
+      "data": "2026-05-27",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-barometro-mutui-crif-padova-2026.webp",
+      "url_statico": "blog-barometro-mutui-crif-padova-2026"
+    },
+    {
+      "titolo": "Dazi USA-UE e mercato padovano 2026: Turnberry 15%, filiera Veneto",
+      "categoria": "Economia",
+      "data": "2026-05-27",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-dazi-usa-ue-mercato-padova-2026.webp",
+      "url_statico": "blog-dazi-usa-ue-mercato-padova-2026"
+    },
+    {
+      "titolo": "Eurocamera e accordo dazi USA 2026: compromesso Strasburgo, sunset 2029",
+      "categoria": "Economia",
+      "data": "2026-05-27",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-eurocamera-accordo-dazi-usa-2026.webp",
+      "url_statico": "blog-eurocamera-accordo-dazi-usa-2026"
+    }
+  ]
+}
