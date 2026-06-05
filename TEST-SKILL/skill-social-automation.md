@@ -1,6 +1,6 @@
 # Skill — Automazione social Meta + Google Business (`righetto_social/`)
 
-**Versione:** 28 maggio 2026 — copy social immobili/blog (titolo pari pari, link + hashtag in caption).  
+**Versione:** 30 maggio 2026 — agenda 4 slot (10/13/15/19), rotazione catalogo, fix cron `settings.json`.  
 **Indice principale:** `TEST-SKILL/SKILL-2.0.md` sezione **10.4** (sintesi).  
 **Implementazione:** cartella `righetto_social/`, README tecnico locale.
 
@@ -34,6 +34,33 @@
 **Importante:** se in Supabase pochi immobili hanno `attivo=true`, il pool è piccolo (es. 21 su 350+). Per rotazione ampia → allineare flag `attivo` sugli annunci pubblicati sul sito.
 
 **Notizie RSS:** logica separata (mar/gio, 2/settimana), non in rotazione immobili.
+
+---
+
+## 2c. Agenda giornaliera — 4 fasce (10 / 13 / 15 / 19)
+
+**Script:** `programma_oggi_slot.py` — rotazione **catalogo completo**.
+
+| Regola | Dettaglio |
+|--------|-----------|
+| **Volume/giorno** | **4 immobili** + **4 articoli blog** + pagine sito (landing + agenzia) |
+| **Pagine sito** | Ogni landing/pagina agenzia **2 volte a settimana** (rotazione) |
+| **Fasce** | `10:00`, `13:00`, `15:00`, `19:00` |
+| **Stagger** | In ogni fascia: **+0 min** immobile → **+15 min** blog → **+30 min** pagina sito |
+| **Minimo tra post diversi** | **15 minuti** (FB/IG stesso contenuto: +2 min) |
+| **Canali** | `facebook_post` + `instagram_feed` |
+| **Ripetizioni** | Vietate nello stesso giorno (stesso immobile/articolo/pagina) |
+| **Ciclo** | Immobili ordine **codice**; blog `pubblicato`; landing + `pagine_agenzia` in template |
+
+**Comandi:**
+
+```powershell
+cd righetto_social
+python programma_oggi_slot.py --dry-run --ciclo-completo
+python programma_oggi_slot.py --ciclo-completo
+```
+
+**Esempio fascia 10:00:** imm 10:00 → blog 10:15 → pagina sito 10:30 (se in turno settimanale).
 
 ---
 
@@ -109,17 +136,37 @@ https://righettoimmobiliare.it/blog-articolo?s={slug}
 
 ---
 
-## 3. Calendario automatico
+## 3. Calendario — manuale (cron Windows **disabilitato**)
 
-| Quando | Cosa | Comando / batch |
-|--------|------|-----------------|
-| **Domenica 20:00** | Bozze settimana successiva | `cron_settimanale.bat` → `genera_bozze_settimanali.py` |
-| Dopo bozze | MP4 reel | `genera_reel.py --pending` (o `GENERA_REEL_AUTO=1` in `.env`) |
-| Domenica / lunedì | Approvazione + agenda | Admin → Social → **Approva** oppure `programma_da_bozze.py --min 8` |
-| **Lun–ven** ogni 5–10 min | Pubblicazione | `cron_pubblica.bat` → `verifica_meta.py` + `publish_from_agenda.py --modo cron` |
-| Finestre orarie (Rome) | Slot agenda | 09:30–11:30, 13:00–14:30, 18:30–21:00 (vedi `config/settings.example.json`) |
+**Policy PC Righetto (giu 2026):** niente `RighettoSocialPubblica` ogni 10 min. L’utente **pianifica ogni giorno** contenuti e orari; pubblicazione su richiesta o con orari concordati in chat.
 
-Giorni post sito: **solo lun / mer / ven** (no sab/dom).
+| Quando | Cosa | Comando |
+|--------|------|---------|
+| **Ogni giorno** | Agenda slot (4 imm + 4 blog + sito) | `python programma_oggi_slot.py --include-oggi --giorni YYYY-MM-DD` |
+| **Quando pubblicare** | Tu o agente dopo token OK | `.\pubblica_adesso.ps1` oppure `publish_from_agenda.py --modo manuale` / `--forza` |
+| **Token ~60 gg** | Rinnovo PAGE | `.\rinnova_token.ps1` |
+| **Disabilita cron** | Task Scheduler | `.\disabilita_cron_windows.ps1` |
+
+**Cron automatico (opzionale, non attivo):** `installa_cron_windows.ps1` + `config/settings.json` + `cron_pubblica.bat` — solo se l’utente lo richiede esplicitamente.
+
+Giorni post agenda 4 slot: come deciso giorno per giorno (non ciclo automatico in background).
+
+### Errore cron — nulla pubblicato (maggio 2026)
+
+| Causa | Sintomo | Fix |
+|-------|---------|-----|
+| **`config/settings.json` assente** | `scheduler.py` → `Finestra OK: False`; cron esce subito | `copy config\settings.example.json config\settings.json` |
+| Finestre disallineate | Slot agenda 10:00 ma cron attivo solo 09:30–11:30 | Allineare `run_windows_local_time` agli slot §2c |
+| Task Scheduler non attivo | Nessun log mattutino | Registrare `cron_pubblica.bat` ogni 5–10 min |
+| Token USER invece di PAGE | `verifica_meta.py` fallisce | `estrai_token_pagina.py --scrivi-env` |
+
+**Verifica rapida:**
+
+```powershell
+python scheduler.py --dry-run          # Finestra OK: True nell'orario slot
+python publish_from_agenda.py --dry-run --modo cron
+python verifica_meta.py
+```
 
 ---
 
@@ -214,23 +261,25 @@ Eseguire in ordine su PC con `.env` configurato:
 ```powershell
 cd C:\Users\Utente\progetti\index\righetto_social
 
+# 0) Cron — OBBLIGATORIO (errore maggio 2026: file mancante = zero post)
+copy config\settings.example.json config\settings.json
+python scheduler.py --dry-run
+
 # 1) Token e API
 python verifica_meta.py
 
-# 2) Se ci sono errori in agenda da ieri
-python publish_from_agenda.py --modo manuale --riprova-errati
+# 2) Agenda rotazione catalogo (da domani, ciclo completo imm+blog)
+python programma_oggi_slot.py --dry-run --ciclo-completo
+python programma_oggi_slot.py --ciclo-completo
 
-# 3) Bozze già generate? Altrimenti (o domenica prossima):
-python genera_bozze_settimanali.py
-python genera_reel.py --pending
-# Admin → Social → Approva
-python programma_da_bozze.py --min 8
+# 3) Se ci sono errori in agenda da ieri
+python publish_from_agenda.py --modo manuale --riprova-errati
 
 # 4) Anteprima pubblicazione
 python publish_from_agenda.py --dry-run --modo cron
 ```
 
-**Task Scheduler Windows:** registrare `cron_settimanale.bat` (dom 20:00) e `cron_pubblica.bat` (lun–ven ogni 5–10 min nelle fasce).
+**Task Scheduler Windows:** `cron_pubblica.bat` ogni 5–10 min (lun–dom finché c’è agenda). Opzionale: `cron_settimanale.bat` (dom 20:00).
 
 **GBP (quando sbloccato 429):** admin → collega Google → copia token/parent in `.env` → test post `tipo=google`.
 
@@ -242,7 +291,9 @@ python publish_from_agenda.py --dry-run --modo cron
 |--------|---------|
 | Anteprima bozze | `python genera_bozze_settimanali.py --dry-run` |
 | 2 settimane bozze | `python genera_bozze_settimanali.py --settimane 2` |
-| Tutto in agenda | `python genera_bozze_settimanali.py --programma-agenda` |
+| Anteprima agenda 4 slot | `python programma_oggi_slot.py --dry-run --ciclo-completo` |
+| Ciclo completo catalogo | `python programma_oggi_slot.py --ciclo-completo` |
+| Verifica cron | `python scheduler.py --dry-run` |
 | Un post | `python publish_from_agenda.py --id UUID` |
 | Forza prima dell’ora | `--forza` |
 | Sync feed | `sync_facebook_feed.py`, `sync_instagram_feed.py` |
@@ -254,7 +305,10 @@ python publish_from_agenda.py --dry-run --modo cron
 | File | Ruolo |
 |------|--------|
 | `genera_bozze_settimanali.py` | Bozze + rotazione catalogo |
+| `programma_oggi_slot.py` | Agenda 4 slot — rotazione imm + blog |
 | `programma_da_bozze.py` | Bozze → `pianificazioni` |
+| `config/settings.json` | **Obbligatorio** per cron (copiare da `settings.example.json`) |
+| `scheduler.py` | Verifica finestra oraria locale |
 | `publish_from_agenda.py` | Pubblicazione Meta/GBP + retry reel |
 | `genera_reel.py` | MP4 1080×1920 → Storage |
 | `verifica_meta.py` | Diagnostica token PAGE/USER |
@@ -277,6 +331,7 @@ python publish_from_agenda.py --dry-run --modo cron
 
 | Sintomo | Azione |
 |---------|--------|
+| **Cron non pubblica nulla** | Verificare `config/settings.json` esiste; `python scheduler.py --dry-run` |
 | `Unsupported post` ID `965706979395378` | `META_IG_USER_ID` errato → usare `17841424134341557` + token pagina |
 | Token USER in verifica | `python estrai_token_pagina.py --scrivi-env` |
 | Reel 9007 | Attendere retry automatico o `--riprova-errati` |

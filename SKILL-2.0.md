@@ -8,6 +8,10 @@ Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutt
 
 **Regole Cursor scoped:** [`TEST-SKILL/skill-cursor-rules.md`](TEST-SKILL/skill-cursor-rules.md) — 7 file `.mdc` in `.cursor/rules/` (pattern awesome-cursorrules).
 
+**Changelog rapido (3 giugno 2026):** 6 articoli blog guide acquirenti/fisco; Google-Agent §1.1b in `TEST-SKILL/SKILL-2.0.md`; `llms.txt` e `ai.json` aggiornati.
+
+**Changelog rapido (30 maggio 2026):** social — agenda **4 slot** (10/13/15/19), rotazione catalogo `programma_oggi_slot.py --ciclo-completo`, fix cron **`config/settings.json` obbligatorio**: **`TEST-SKILL/skill-social-automation.md`** §2c e §3.
+
 **Changelog rapido (29 maggio 2026 — pomeriggio):** architettura Cursor — `skill-cursor-rules.md` + 7 `.mdc` scoped; deprecato `righetto-seo-2026.mdc`; `context-map.json` v1.2.
 
 **Changelog rapido (29 maggio 2026):** blog — anti-doppioni **BLOCCANTE** prima di scrivere: §8.1a in `TEST-SKILL/SKILL-2.0.md`, §2.0 in `skill-content.md`.

@@ -501,6 +501,12 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'gestione spese casa dopo l\'acquisto a padova 2026: energia, imu, dispensa': { img: 'img/blog/blog-gestione-spese-casa-padova-2026.webp', url: 'blog-gestione-spese-casa-risparmio-padova-2026' },
+    'come scegliere l\'immobile giusto a padova 2026: zona, luce, condominio': { img: 'img/blog/blog-scegliere-immobile-giusto-padova-2026.webp', url: 'blog-scegliere-immobile-giusto-padova-2026' },
+    'quattro imposte al rogito prima casa padova 2026: iva, registro, ipotecaria, catastale': { img: 'img/blog/blog-quattro-imposte-rogitio-prima-casa-padova-2026.webp', url: 'blog-quattro-imposte-rogitio-prima-casa-padova-2026' },
+    'costi proprietà padova 2026: acquisto, possesso, vendita e plusvalenza 26%': { img: 'img/blog/blog-costi-proprieta-acquisto-possesso-vendita-padova-2026.webp', url: 'blog-costi-proprieta-acquisto-possesso-vendita-padova-2026' },
+    'dieci errori da evitare nell\'acquisto casa a padova 2026': { img: 'img/blog/blog-dieci-errori-acquisto-casa-padova-2026.webp', url: 'blog-dieci-errori-acquisto-casa-padova-2026' },
+    'checklist verifiche prima del compromesso a padova 2026': { img: 'img/blog/blog-checklist-verifiche-prima-compromesso-padova-2026.webp', url: 'blog-checklist-verifiche-prima-compromesso-padova-2026' },
     'documenti necessari per la compravendita di un immobile: guida pratica per venditori e acquirenti': { img: 'img/blog/blog-documenti-compravendita-rogito-padova-2026.webp', url: 'blog-documenti-compravendita-rogito-padova-2026' },
     'sondaggio abitativo banca d\'italia q1 2026: ltv 77,2% e mutuo al 64,5%': { img: 'img/blog/blog-sondaggio-bancaditalia-q1-2026.webp', url: 'blog-sondaggio-bancaditalia-q1-2026-padova' },
     'costi costruzione istat marzo 2026: +0,8% mensile, indice 117,2': { img: 'img/blog/blog-costi-costruzione-istat-padova-2026.webp', url: 'blog-costi-costruzione-istat-padova-2026' },
@@ -574,6 +580,12 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    { titolo: "Gestione spese casa dopo l'acquisto a Padova 2026: energia, IMU, dispensa", categoria: "Guida acquirenti", data: '2026-06-03', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-gestione-spese-casa-padova-2026.webp', url_statico: 'blog-gestione-spese-casa-risparmio-padova-2026' },
+    { titolo: "Come scegliere l'immobile giusto a Padova 2026: zona, luce, condominio", categoria: "Guida acquirenti", data: '2026-06-03', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-scegliere-immobile-giusto-padova-2026.webp', url_statico: 'blog-scegliere-immobile-giusto-padova-2026' },
+    { titolo: "Quattro imposte al rogito prima casa Padova 2026: IVA, registro, ipotecaria, catastale", categoria: "Fisco", data: '2026-06-03', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-quattro-imposte-rogitio-prima-casa-padova-2026.webp', url_statico: 'blog-quattro-imposte-rogitio-prima-casa-padova-2026' },
+    { titolo: "Costi proprietà Padova 2026: acquisto, possesso, vendita e plusvalenza 26%", categoria: "Fisco", data: '2026-06-03', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-costi-proprieta-acquisto-possesso-vendita-padova-2026.webp', url_statico: 'blog-costi-proprieta-acquisto-possesso-vendita-padova-2026' },
+    { titolo: "Dieci errori da evitare nell'acquisto casa a Padova 2026", categoria: "Guida acquirenti", data: '2026-06-03', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-dieci-errori-acquisto-casa-padova-2026.webp', url_statico: 'blog-dieci-errori-acquisto-casa-padova-2026' },
+    { titolo: "Checklist verifiche prima del compromesso a Padova 2026", categoria: "Normativa", data: '2026-06-03', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-checklist-verifiche-prima-compromesso-padova-2026.webp', url_statico: 'blog-checklist-verifiche-prima-compromesso-padova-2026' },
     { titolo: "Documenti necessari per la compravendita di un immobile: guida pratica per venditori e acquirenti", categoria: 'Normativa', data: '2026-05-29', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-documenti-compravendita-rogito-padova-2026.webp', url_statico: 'blog-documenti-compravendita-rogito-padova-2026' },
     { titolo: "Sondaggio abitativo Banca d'Italia Q1 2026: LTV 77,2% e mutuo al 64,5%", categoria: "Mercato immobiliare", data: '2026-05-27', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-sondaggio-bancaditalia-q1-2026.webp', url_statico: 'blog-sondaggio-bancaditalia-q1-2026-padova' },
     { titolo: "Costi costruzione ISTAT marzo 2026: +0,8% mensile, indice 117,2", categoria: "Mercato immobiliare", data: '2026-05-27', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-costi-costruzione-istat-padova-2026.webp', url_statico: 'blog-costi-costruzione-istat-padova-2026' },

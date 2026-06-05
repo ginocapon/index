@@ -3,8 +3,10 @@
 
 > **Versione:** 2.0 — 15 Marzo 2026 (patch contenuti **3 Aprile 2026**)
 > **Unica fonte di verita'** — Sostituisce SKILL-UNIFICATA.md, AUTOMATION-SITE-2026.md e CLAUDE.md
-> **Ultimo aggiornamento Google verificato:** 8 Marzo 2026
-> **Prossima verifica consigliata:** Aprile 2026
+> **Ultimo aggiornamento Google verificato:** 3 Giugno 2026
+> **Prossima verifica consigliata:** Luglio 2026
+>
+> **Changelog 3 giugno 2026:** **Google-Agent** (user-triggered fetcher, 20 mar 2026) — IP in `user-triggered-agents.json`; ignora robots.txt; AEO: prime 2 righe dichiarative, `llms.txt`/`ai.json` aggiornati; non bloccare in WAF. Doc: [Google User-Triggered Fetchers](https://developers.google.com/crawling/docs/crawlers-fetchers/google-user-triggered-fetchers).
 >
 > **Changelog 29 maggio 2026 (pomeriggio):** **Cursor rules scoped** — `TEST-SKILL/skill-cursor-rules.md` + 7 file `.cursor/rules/*.mdc` (core, UI, blog, forms, social, SEO/GEO, Supabase); `context-map.json` v1.2; deprecato `righetto-seo-2026.mdc`.
 >
@@ -28,6 +30,26 @@ Prima di ogni sessione di lavoro, esegui queste ricerche web:
 - `"Google Search Console new features [anno corrente]"`
 
 Confronta con la sezione "Stato Aggiornamenti Google" e aggiorna questo file se trovi novita'.
+
+### 1.1b Google-Agent e crawler user-triggered (verificato 3 giugno 2026)
+
+Google ha aggiunto **Google-Agent** (20 marzo 2026) alla lista ufficiale dei [user-triggered fetchers](https://developers.google.com/crawling/docs/crawlers-fetchers/google-user-triggered-fetchers): agenti su infrastruttura Google (es. Project Mariner) che navigano il web **su richiesta dell'utente**.
+
+| Aspetto | Implicazione per righettoimmobiliare.it |
+|---------|------------------------------------------|
+| **robots.txt** | Google-Agent **non** è governato da Disallow — come Read Aloud / Site Verifier |
+| **Verifica IP** | Range in `user-triggered-agents.json` su [developers.google.com/crawling/ipranges/](https://developers.google.com/crawling/ipranges/) |
+| **WAF/CDN** | Non bloccare pattern «non-browser» se matchano IP Google-Agent — rischio invisibilità per task AI |
+| **Web Bot Auth** | Sperimentale (`https://agent.bot.goog`) — monitorare, non dipendere ancora in produzione |
+| **Fetch limit** | Crawler Google: default primi **15 MB** file (feb 2026); HTML articoli blog restano sotto soglia |
+| **Contenuto** | `llms.txt`, `ai.json`, schema `BlogPosting` + box AEO in cima articoli = massima leggibilità agenti |
+
+**Checklist implementazione (sito Righetto):**
+- [x] `robots.txt` — commento Google-Agent + AI bots Allow
+- [x] `llms.txt` — aggiornato a ogni batch blog
+- [x] `ai.json` — retrieval/citation allow
+- [ ] Log server: verificare eventuali blocchi WAF su User-Agent `Google-Agent`
+- [ ] Prime 2 righe dichiarative + FAQ schema su ogni nuovo articolo (già standard §8.1)
 
 ### 1.2 Regole Operative
 1. **Leggi prima** il file da modificare — mai al buio
@@ -1429,16 +1451,28 @@ Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 
 ### 10.4 Automazione social e Google Business (cron `righetto_social/`)
 
-**Documentazione operativa completa (agg. 25 maggio 2026):** [`TEST-SKILL/skill-social-automation.md`](skill-social-automation.md) — **fonte di verità** per rotazione, token Meta, reel, checklist avvio, troubleshooting.
+**Documentazione operativa completa (agg. 30 maggio 2026):** [`TEST-SKILL/skill-social-automation.md`](skill-social-automation.md) — **fonte di verità** per rotazione, agenda 4 slot, token Meta, **errore cron `settings.json`**, troubleshooting.
 
-**Obiettivo:** ~16 bozze/settimana senza AI a pagamento — contenuti sito + notizie da fonti autorevoli, pubblicati su Meta e sulla scheda Google [Gruppo Immobiliare Righetto](https://www.google.com/maps/place/Gruppo+Immobiliare+Righetto/).
+**Obiettivo:** rotazione catalogo immobili + blog su Facebook/Instagram (4 post/giorno) + notizie RSS + GBP.
 
 | Frequenza | Script / batch | Output |
 |-----------|----------------|--------|
-| Domenica 20:00 | `cron_settimanale.bat` → `genera_bozze_settimanali.py` | 12 bozze (3 slot/sett. × 4 sezioni) + **2 notizie RSS** (FB + Google) |
-| Lun–ven ogni 5–10 min | `cron_pubblica.bat` → `verifica_meta.py` + `publish_from_agenda.py --modo cron` | Post Meta + GBP da agenda |
-| Dopo bozze | `genera_reel.py --pending` | MP4 reel su Storage (`foto-immobili/reels/`) |
-| Manuale | Admin → Social → **Approva** → `programma_da_bozze.py` | Righe in `pianificazioni` |
+| Setup | `config/settings.example.json` → **`config/settings.json`** | Finestre cron 10/13/15/19 (**obbligatorio**) |
+| Agenda | `programma_oggi_slot.py --ciclo-completo` | 2 imm + 2 blog/giorno, ciclo completo pool |
+| Ogni 5–10 min | `cron_pubblica.bat` → `verifica_meta.py` + `publish_from_agenda.py --modo cron` | Post Meta da agenda |
+| Domenica (opz.) | `cron_settimanale.bat` → `genera_bozze_settimanali.py` | Bozze settimanali + RSS |
+| Dopo reel | `genera_reel.py --pending` | MP4 reel |
+
+#### Agenda 4 fasce (10 / 13 / 15 / 19)
+
+- **4 immobili + 4 blog al giorno**; pagine sito (landing + agenzia) **2 volte a settimana** ciascuna.
+- Stagger **15 min** tra contenuti diversi nella stessa fascia (+0 imm, +15 blog, +30 pagina).
+- Script: `programma_oggi_slot.py --ciclo-completo` (default **da domani**).
+- Dettaglio: **§2c** in [`skill-social-automation.md`](skill-social-automation.md).
+
+#### Errore cron — mattina senza post (maggio 2026)
+
+Se `config/settings.json` **manca**, `scheduler.py` restituisce sempre `Finestra OK: False` e il cron non pubblica. Fix: copiare `settings.example.json` → `settings.json` con fasce **10–11, 13–14, 15–16, 19–20**. Vedi skill §3.
 
 #### Copy social immobili e blog (BLOCCANTE)
 
@@ -1472,10 +1506,12 @@ python verifica_meta.py                      # deve dire: Token tipo PAGE
 
 #### Avvio operativo (primo giorno)
 
-1. `verifica_meta.py`  
-2. `publish_from_agenda.py --riprova-errati` se errori in agenda  
-3. Domenica o manuale: `genera_bozze_settimanali.py` → `genera_reel.py --pending` → Approva → `programma_da_bozze.py --min 8`  
-4. Task Scheduler: `cron_settimanale.bat` + `cron_pubblica.bat`
+1. **`copy config\settings.example.json config\settings.json`** (obbligatorio per cron)  
+2. `python verifica_meta.py`  
+3. `python programma_oggi_slot.py --ciclo-completo` (agenda rotazione)  
+4. `python scheduler.py --dry-run` (Finestra OK durante slot)  
+5. Task Scheduler: `cron_pubblica.bat` ogni 5–10 min  
+6. Se errori in agenda: `publish_from_agenda.py --modo manuale --riprova-errati`
 
 **Notizie esterne (≥2/settimana):** RSS **Sole 24 Ore**, **Agenzia delle Entrate**, **Milano Finanza**. Zero copiatura; titolo SEO Padova; spintax originale; mar/gio; `facebook_post` + `google`.
 

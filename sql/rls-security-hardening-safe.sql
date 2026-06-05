@@ -54,7 +54,7 @@ RETURNS text LANGUAGE sql IMMUTABLE AS $$
 $$;
 
 CREATE OR REPLACE FUNCTION public.righetto_is_admin_request()
-RETURNS boolean LANGUAGE sql STABLE AS $$
+RETURNS boolean LANGUAGE sql STABLE SECURITY DEFINER SET search_path = public AS $$
   SELECT coalesce(
     nullif(trim(current_setting('request.headers', true)::json ->> 'x-righetto-admin'), ''),
     ''
@@ -286,12 +286,42 @@ $$;
 
 SELECT public._rig_apply_rls_policies();
 
+-- ═══ 3) RPC admin: is_admin_request sì (policy RLS), admin_secret no ═══
+GRANT EXECUTE ON FUNCTION public.righetto_is_admin_request() TO anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.righetto_admin_secret() FROM anon, authenticated;
+
+-- ═══ 4) Disiscrizione newsletter (anon: solo RPC, no lettura blacklist) ═══
+CREATE OR REPLACE FUNCTION public.disiscrivi_email(p_email text, p_motivo text DEFAULT 'disiscrizione')
+RETURNS void
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+BEGIN
+  IF to_regclass('public.email_blacklist') IS NULL THEN
+    RETURN;
+  END IF;
+  INSERT INTO public.email_blacklist (email, motivo)
+  VALUES (lower(trim(p_email)), coalesce(nullif(trim(p_motivo), ''), 'disiscrizione'))
+  ON CONFLICT (email) DO NOTHING;
+
+  IF to_regclass('public.coda_email') IS NOT NULL THEN
+    DELETE FROM public.coda_email
+    WHERE lower(destinatario_email) = lower(trim(p_email))
+      AND stato = 'in_coda';
+  END IF;
+END;
+$$;
+
+REVOKE ALL ON FUNCTION public.disiscrivi_email(text, text) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.disiscrivi_email(text, text) TO anon, authenticated;
+
 -- Verifica rapida
 SELECT tablename, rowsecurity
 FROM pg_tables
 WHERE schemaname = 'public'
   AND tablename IN (
     'immobili','blog','richieste','clienti','pianificazioni',
-    'smtp_config','campagne_email','facebook_feed_cache'
+    'smtp_config','campagne_email','facebook_feed_cache','bozze_social'
   )
 ORDER BY tablename;

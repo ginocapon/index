@@ -57,23 +57,31 @@ def sb_client() -> Client:
     return create_client(req_env("SUPABASE_URL"), req_env("SUPABASE_KEY"))
 
 
-def find_ffmpeg() -> str:
+def find_ffmpeg(*, required: bool = True) -> str:
+    custom = os.environ.get("FFMPEG_PATH", "").strip()
+    if custom and Path(custom).is_file():
+        return custom
     path = shutil.which("ffmpeg")
     if path:
         return path
     for candidate in (
         r"C:\ffmpeg\bin\ffmpeg.exe",
         r"C:\Program Files\ffmpeg\bin\ffmpeg.exe",
+        str(Path(os.environ.get("LOCALAPPDATA", "")) / "Microsoft" / "WinGet" / "Links" / "ffmpeg.exe"),
     ):
-        if Path(candidate).is_file():
+        if candidate and Path(candidate).is_file():
             return candidate
-    print(
-        "FFmpeg non trovato. Installalo e aggiungilo al PATH:\n"
+    winget_root = Path(os.environ.get("LOCALAPPDATA", "")) / "Microsoft" / "WinGet" / "Packages"
+    if winget_root.is_dir():
+        for ff in winget_root.glob("**/ffmpeg.exe"):
+            if ff.is_file():
+                return str(ff)
+    msg = (
+        "FFmpeg non trovato. Installa e riapri PowerShell:\n"
         "  winget install ffmpeg\n"
-        "  oppure https://www.gyan.dev/ffmpeg/builds/",
-        file=sys.stderr,
+        "  oppure https://www.gyan.dev/ffmpeg/builds/"
     )
-    sys.exit(2)
+    raise RuntimeError(msg)
 
 
 def resolve_image_url(url: str, supabase_url: str) -> str:
@@ -262,11 +270,12 @@ def build_mp4(
     safe_sub = ffmpeg_safe_text(subtitle, 36)
 
     for i in range(n):
+        # scale+pad (no zoompan: su Windows può impiegare 10+ min per reel)
         chain = (
             f"[{i}:v]scale=1080:1920:force_original_aspect_ratio=decrease,"
             f"pad=1080:1920:(ow-iw)/2:(oh-ih)/2:color={BG},"
-            f"zoompan=z='min(zoom+0.0012,1.06)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':"
-            f"d={d_frames}:s=1080x1920:fps=30"
+            f"setsar=1,"
+            f"fps=30,trim=duration={SEC_PER_SLIDE},setpts=PTS-STARTPTS"
         )
         if i == 0 and ff:
             chain += (
@@ -368,6 +377,61 @@ def expand_spintax(text: str) -> str:
     return out
 
 
+def process_agenda_row(sb: Client, row: dict[str, Any], *, ffmpeg: str) -> str | None:
+    if (row.get("tipo") or "") != "instagram_reel":
+        return None
+    if (row.get("media_direct_url") or "").strip().lower().endswith(".mp4"):
+        print(f"Skip {row.get('id')}: MP4 gia presente")
+        return row.get("media_direct_url")
+
+    supabase_url = req_env("SUPABASE_URL")
+    fonte = str(row.get("contenuto") or "").strip().lower()
+    if fonte == "articolo":
+        fonte = "blog"
+    urls = collect_photo_urls(
+        sb=sb,
+        supabase_url=supabase_url,
+        fonte=fonte,
+        ref=row.get("riferimento_id"),
+        link_pagina=row.get("link_media"),
+    )
+    if not urls:
+        media = (row.get("media_direct_url") or "").strip()
+        if media.startswith("http") and not media.lower().endswith(".mp4"):
+            urls = [media]
+    if not urls:
+        print(f"Skip {row.get('id')}: nessuna immagine", file=sys.stderr)
+        return None
+
+    title = expand_spintax(row.get("titolo") or "Righetto Immobiliare")
+    subtitle = "Consulenza gratuita · Padova"
+    stamp = datetime.now(tz=TZ).strftime("%Y%m%d_%H%M%S")
+    slug = re.sub(r"[^a-z0-9]+", "-", title.lower())[:40].strip("-") or "reel"
+    slug = f"{stamp}_{slug}"
+
+    OUT_LOCAL.mkdir(parents=True, exist_ok=True)
+    local_mp4 = OUT_LOCAL / f"{slug}.mp4"
+
+    with tempfile.TemporaryDirectory(prefix="rig_reel_") as tmp:
+        slides = download_images(urls, Path(tmp))
+        if len(slides) < 1:
+            return None
+        build_mp4(slides, local_mp4, title=title, subtitle=subtitle, ffmpeg=ffmpeg)
+        local_mp4 = mix_background_music(local_mp4, ffmpeg)
+
+    public_url = upload_mp4(sb, local_mp4, slug)
+    rid = row.get("id")
+    if rid:
+        sb.table("pianificazioni").update(
+            {
+                "media_direct_url": public_url,
+                "updated_at": datetime.now(tz=TZ).isoformat(),
+            }
+        ).eq("id", rid).execute()
+    print(f"OK reel agenda: {public_url}")
+    return public_url
+
+
 def process_bozza(sb: Client, bozza: dict[str, Any], *, ffmpeg: str) -> str | None:
     if (bozza.get("tipo_canale") or "") != "instagram_reel":
         return None
@@ -421,6 +485,11 @@ def process_bozza(sb: Client, bozza: dict[str, Any], *, ffmpeg: str) -> str | No
 def main() -> int:
     parser = argparse.ArgumentParser(description="Genera MP4 reel da foto sito")
     parser.add_argument("--pending", action="store_true", help="Tutte le bozze reel senza mp4")
+    parser.add_argument(
+        "--agenda-pending",
+        action="store_true",
+        help="Righe pianificazioni instagram_reel senza mp4",
+    )
     parser.add_argument("--bozza-id", type=str, help="UUID bozza singola")
     args = parser.parse_args()
     load_env()
@@ -430,6 +499,22 @@ def main() -> int:
     if args.bozza_id:
         res = sb.table("bozze_social").select("*").eq("id", args.bozza_id).limit(1).execute()
         rows = res.data or []
+        processor = lambda r: process_bozza(sb, r, ffmpeg=ffmpeg)
+    elif args.agenda_pending:
+        res = (
+            sb.table("pianificazioni")
+            .select("*")
+            .eq("tipo", "instagram_reel")
+            .gte("data_inizio", datetime.now(tz=TZ).date().isoformat())
+            .execute()
+        )
+        rows = [
+            r
+            for r in (res.data or [])
+            if not (r.get("media_direct_url") or "").strip().lower().endswith(".mp4")
+            and "PUB_OK" not in str(r.get("note") or "")
+        ]
+        processor = lambda r: process_agenda_row(sb, r, ffmpeg=ffmpeg)
     elif args.pending:
         res = (
             sb.table("bozze_social")
@@ -439,18 +524,19 @@ def main() -> int:
             .execute()
         )
         rows = res.data or []
+        processor = lambda r: process_bozza(sb, r, ffmpeg=ffmpeg)
     else:
         parser.print_help()
         return 1
 
     if not rows:
-        print("Nessuna bozza reel da elaborare.")
+        print("Nessuna reel da elaborare.")
         return 0
 
     ok = 0
     for row in rows:
         try:
-            if process_bozza(sb, row, ffmpeg=ffmpeg):
+            if processor(row):
                 ok += 1
         except Exception as e:
             print(f"Errore bozza {row.get('id')}: {e}", file=sys.stderr)

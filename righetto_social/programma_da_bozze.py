@@ -78,17 +78,56 @@ def bozza_to_pianificazione(b: dict[str, Any]) -> dict[str, Any]:
         "keywords": tags if isinstance(tags, list) else [],
         "note": f"[DA_BOZZA] id={b.get('id')}",
         "link_media": b.get("link_pagina"),
-        "corpo_spintax": b.get("corpo"),
+        "corpo_spintax": corpo,
         "media_direct_url": b.get("media_direct_url"),
         "updated_at": datetime.now(tz=TZ).isoformat(),
         "created_at": datetime.now(tz=TZ).isoformat(),
     }
 
 
+def _safe_print(msg: str) -> None:
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except (AttributeError, OSError):
+        pass
+    text = msg.encode("ascii", "replace").decode("ascii")
+    print(text, flush=True)
+
+
+def _already_scheduled(client: Any, bozza_id: str) -> bool:
+    needle = f"id={bozza_id}"
+    res = (
+        client.table("pianificazioni")
+        .select("id")
+        .ilike("note", f"%{needle}%")
+        .limit(1)
+        .execute()
+    )
+    return bool(res.data)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--min", type=int, default=8, help="Minimo bozze da programmare")
     parser.add_argument("--bozza-id", type=str, default="")
+    parser.add_argument(
+        "--dal",
+        type=str,
+        default="",
+        help="Solo bozze con data_pubblicazione_proposta >= YYYY-MM-DD",
+    )
+    parser.add_argument(
+        "--al",
+        type=str,
+        default="",
+        help="Solo bozze con data_pubblicazione_proposta <= YYYY-MM-DD",
+    )
+    parser.add_argument(
+        "--max",
+        type=int,
+        default=0,
+        help="Massimo righe da creare (0 = tutte)",
+    )
     parser.add_argument(
         "--solo-approvate",
         action="store_true",
@@ -111,13 +150,30 @@ def main() -> int:
             .execute()
         )
         rows = res.data or []
+        if args.dal:
+            rows = [
+                r
+                for r in rows
+                if str(r.get("data_pubblicazione_proposta") or "")[:10] >= args.dal
+            ]
+        if args.al:
+            rows = [
+                r
+                for r in rows
+                if str(r.get("data_pubblicazione_proposta") or "")[:10] <= args.al
+            ]
 
     if len(rows) < args.min and not args.bozza_id:
         print(f"Solo {len(rows)} bozze (min {args.min}). Genera prima con genera_bozze_settimanali.py")
         return 1
 
     n = 0
+    skipped = 0
     for b in rows:
+        bid = str(b.get("id") or "")
+        if bid and _already_scheduled(client, bid):
+            skipped += 1
+            continue
         payload = bozza_to_pianificazione(b)
         client.table("pianificazioni").insert(payload).execute()
         client.table("bozze_social").update(
@@ -127,9 +183,13 @@ def main() -> int:
             }
         ).eq("id", b["id"]).execute()
         n += 1
-        print(f"[agenda] {payload['data_inizio']} {payload['ora']} {payload['tipo']} — {payload['titolo'][:50]}")
+        _safe_print(
+            f"[agenda] {payload['data_inizio']} {payload['ora']} {payload['tipo']} - {payload['titolo'][:50]}"
+        )
+        if args.max and n >= args.max:
+            break
 
-    print(f"OK: {n} righe in pianificazioni. Cron: publish_from_agenda.py")
+    _safe_print(f"OK: {n} righe in pianificazioni (skip {skipped}). Cron: publish_from_agenda.py")
     return 0
 
 

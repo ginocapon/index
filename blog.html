@@ -303,6 +303,78 @@ let _staticSlugs = new Set();
 async function initBlog() {
   // Articoli statici (pagine HTML dedicate) — mostrati subito, senza attendere Supabase
   const articoliStatici = [
+{
+      "titolo": "Gestione spese casa dopo l'acquisto a Padova 2026: energia, IMU, dispensa",
+      "categoria": "Guida acquirenti",
+      "data": "2026-06-03",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-gestione-spese-casa-padova-2026.webp",
+      "url_statico": "blog-gestione-spese-casa-risparmio-padova-2026",
+      "tempo": 12,
+      "autore": "Gino Capon",
+      "contenuto": "Economia domestica in chiave immobiliare: possesso, manutenzione e risparmio nel Padovano.",
+      "evidenza": true
+    },
+{
+      "titolo": "Come scegliere l'immobile giusto a Padova 2026: zona, luce, condominio",
+      "categoria": "Guida acquirenti",
+      "data": "2026-06-03",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-scegliere-immobile-giusto-padova-2026.webp",
+      "url_statico": "blog-scegliere-immobile-giusto-padova-2026",
+      "tempo": 12,
+      "autore": "Gino Capon",
+      "contenuto": "Criteri verificabili per acquirenti: microzona, impianti, condominio e documenti.",
+      "evidenza": true
+    },
+{
+      "titolo": "Quattro imposte al rogito prima casa Padova 2026: IVA, registro, ipotecaria, catastale",
+      "categoria": "Fisco",
+      "data": "2026-06-03",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-quattro-imposte-rogitio-prima-casa-padova-2026.webp",
+      "url_statico": "blog-quattro-imposte-rogitio-prima-casa-padova-2026",
+      "tempo": 11,
+      "autore": "Gino Capon",
+      "contenuto": "Calcolo al notaio, DPR 131/1986, ISEE under 36 — angolo operativo distinto dalle agevolazioni.",
+      "evidenza": false
+    },
+{
+      "titolo": "Costi proprietà Padova 2026: acquisto, possesso, vendita e plusvalenza 26%",
+      "categoria": "Fisco",
+      "data": "2026-06-03",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-costi-proprieta-acquisto-possesso-vendita-padova-2026.webp",
+      "url_statico": "blog-costi-proprieta-acquisto-possesso-vendita-padova-2026",
+      "tempo": 12,
+      "autore": "Gino Capon",
+      "contenuto": "Ciclo completo privato/costruttore, IMU, TARI e plusvalenza — guida pratica Padovano.",
+      "evidenza": false
+    },
+{
+      "titolo": "Dieci errori da evitare nell'acquisto casa a Padova 2026",
+      "categoria": "Guida acquirenti",
+      "data": "2026-06-03",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-dieci-errori-acquisto-casa-padova-2026.webp",
+      "url_statico": "blog-dieci-errori-acquisto-casa-padova-2026",
+      "tempo": 11,
+      "autore": "Gino Capon",
+      "contenuto": "Pre-approvazione, visite, condominio, timing: errori con costo nel Padovano.",
+      "evidenza": false
+    },
+{
+      "titolo": "Checklist verifiche prima del compromesso a Padova 2026",
+      "categoria": "Normativa",
+      "data": "2026-06-03",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-checklist-verifiche-prima-compromesso-padova-2026.webp",
+      "url_statico": "blog-checklist-verifiche-prima-compromesso-padova-2026",
+      "tempo": 12,
+      "autore": "Gino Capon",
+      "contenuto": "Documenti, impianti, struttura e mutuo: due diligence pre-preliminare nel Padovano.",
+      "evidenza": false
+    },
     {
       titolo: "Documenti necessari per la compravendita di un immobile: guida pratica per venditori e acquirenti",
       categoria: "Normativa",
@@ -1137,7 +1209,7 @@ async function initBlog() {
       stato: 'pubblicato',
       autore: 'Gino Capon',
       immagine_copertina: 'img/blog/ca-marcello-hero.webp',
-      url_statico: 'articolo-riqualificazione',
+      url_statico: 'blog-ca-marcello-mestre',
       contenuto: 'Ca\' Marcello a Mestre: un progetto di riqualificazione che trasforma una storica villa veneta in un\'opportunita\' di investimento immobiliare unica nel territorio.',
       evidenza: false
     },
@@ -1332,6 +1404,18 @@ async function initBlog() {
       url_statico: 'zona-ponte-san-nicolo',
       contenuto: 'Guida completa agli immobili a Ponte San Nicolo\': prezzi medi 1.500-2.200 euro/mq, comune a sud di Padova, frazioni Roncaglia e Rio.',
       evidenza: false
+    },
+    {
+      titolo: 'Case in Vendita Limena: Prezzi, Zone e Guida',
+      categoria: 'Mercato locale',
+      data: '2026-03-07',
+      tempo: 7,
+      stato: 'pubblicato',
+      autore: 'Gino Capon',
+      immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp',
+      url_statico: 'zona-limena',
+      contenuto: 'Sede Righetto Immobiliare: prezzi medi, servizi e immobili in vendita e affitto a Limena, prima cintura di Padova.',
+      evidenza: true
     },
     {
       titolo: 'Caparra Confirmatoria: Guida Completa per Chi Compra o Vende Casa a Padova',

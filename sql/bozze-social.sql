@@ -24,19 +24,5 @@ CREATE INDEX IF NOT EXISTS idx_bozze_social_stato ON public.bozze_social (stato,
 
 COMMENT ON TABLE public.bozze_social IS 'Bozze post social in attesa di approvazione admin';
 
+-- Policy sicure: eseguire sql/rls-security-hardening-safe.sql dopo CREATE TABLE
 ALTER TABLE public.bozze_social ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY "bozze_social_anon_select"
-  ON public.bozze_social FOR SELECT TO anon USING (true);
-
-CREATE POLICY "bozze_social_anon_insert"
-  ON public.bozze_social FOR INSERT TO anon WITH CHECK (true);
-
-CREATE POLICY "bozze_social_anon_update"
-  ON public.bozze_social FOR UPDATE TO anon USING (true) WITH CHECK (true);
-
-CREATE POLICY "bozze_social_anon_delete"
-  ON public.bozze_social FOR DELETE TO anon USING (true);
-
-CREATE POLICY "bozze_social_authenticated_all"
-  ON public.bozze_social FOR ALL TO authenticated USING (true) WITH CHECK (true);

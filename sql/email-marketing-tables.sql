@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS gruppi_email (
 );
 
 ALTER TABLE gruppi_email ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Allow all for anon" ON gruppi_email FOR ALL USING (true) WITH CHECK (true);
+-- Policy sicure: eseguire sql/rls-security-hardening-safe.sql dopo CREATE TABLE
 
 -- Aggiungi colonna gruppo a campagne_email (se non esiste)
 DO $$ BEGIN
@@ -113,12 +113,7 @@ ALTER TABLE email_blacklist ENABLE ROW LEVEL SECURITY;
 ALTER TABLE email_tracking ENABLE ROW LEVEL SECURITY;
 ALTER TABLE smtp_config ENABLE ROW LEVEL SECURITY;
 
--- Permetti tutto per anon (admin panel)
-CREATE POLICY "Allow all for anon" ON campagne_email FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all for anon" ON coda_email FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all for anon" ON email_blacklist FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all for anon" ON email_tracking FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all for anon" ON smtp_config FOR ALL USING (true) WITH CHECK (true);
+-- Policy sicure: eseguire sql/rls-security-hardening-safe.sql (admin via header x-righetto-admin)
 
 -- ═══ FUNZIONE: Aggiungi alla blacklist e rimuovi da coda ═══
 CREATE OR REPLACE FUNCTION disiscrivi_email(p_email TEXT, p_motivo TEXT DEFAULT 'disiscrizione')

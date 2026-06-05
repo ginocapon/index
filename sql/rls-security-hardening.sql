@@ -22,6 +22,8 @@ CREATE OR REPLACE FUNCTION public.righetto_is_admin_request()
 RETURNS boolean
 LANGUAGE sql
 STABLE
+SECURITY DEFINER
+SET search_path = public
 AS $$
   SELECT coalesce(
     nullif(trim(current_setting('request.headers', true)::json ->> 'x-righetto-admin'), ''),
