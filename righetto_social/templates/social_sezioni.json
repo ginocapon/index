@@ -1,11 +1,10 @@
 {
   "immobile": {
     "titoli_spintax": [
-      "{Nuovo incarico a Padova|In esclusiva a Padova}: {titolo}",
-      "{Scopri questo immobile|Opportunita a Padova}: {titolo}"
+      "{titolo}"
     ],
     "corpo_spintax": [
-      "{Visita su appuntamento|Richiedi informazioni}: {zona} — {dettaglio}.\n{Consulenza gratuita in agenzia|Prenota una visita senza impegno}.\nTel. 049 8755543 · righettoimmobiliare.it"
+      "{Visita su appuntamento|Richiedi informazioni}: {zona} — {dettaglio}.\n{Consulenza gratuita in agenzia|Prenota una visita senza impegno}.\nTel. 049 8755543\n\n{link}"
     ],
     "hashtags": [
       "#padova",
@@ -29,11 +28,10 @@
   },
   "blog": {
     "titoli_spintax": [
-      "{Approfondimento|Articolo}: {titolo}",
-      "{Sul blog|Leggi ora}: {titolo}"
+      "{titolo}"
     ],
     "corpo_spintax": [
-      "{Guida pratica|Approfondimento} per chi {vende|acquista} a Padova: {titolo}.\n{Link in bio|Leggi l articolo completo} — consulenza senza impegno."
+      "{Guida pratica|Approfondimento} per chi {vende|acquista} a Padova.\n{Leggi l articolo completo|Approfondisci sul blog} ↓\n\n{link}"
     ],
     "hashtags": [
       "#padova",
@@ -110,6 +108,36 @@
       { "giorno_offset": 2, "ora": "18:15", "tipo": "facebook_post" },
       { "giorno_offset": 4, "ora": "09:40", "tipo": "instagram_reel" }
     ]
+  },
+  "notizia_esterna": {
+    "titoli_spintax": [
+      "{Mercato immobiliare Padova|Casa e finanza a Padova}: {tema}",
+      "{Imposte e casa Padova|Fisco e immobili a Padova}: {tema}",
+      "{Consulenza immobiliare Padova|Padova e provincia}: aggiornamento su {tema}"
+    ],
+    "corpo_spintax": [
+      "{In sintesi|Da monitorare} per chi {vende|acquista} a Padova: {tema}.\n{Fonte|Approfondimento ufficiale}: {fonte}. {Commento Righetto|Lettura consigliata}: testo originale, {link alla fonte|dettagli sul sito della fonte}.\n{Consulenza gratuita in agenzia|Prenota senza impegno}: righettoimmobiliare.it/contatti · Tel. 049 8755543",
+      "{Tema rilevante|Notizia utile} per il {mercato immobiliare padovano|settore casa a Padova}: {tema}.\n{Segnalato da|Da {fonte}}: rielaborazione in chiave locale — {nessuna copia|zero copiatura} dell articolo.\n{Valutazione immobile|Consulenza vendita/acquisto}: Righetto Immobiliare, Limena (PD)."
+    ],
+    "hashtags": [
+      "#padova",
+      "#immobiliare",
+      "#righettoimmobiliare",
+      "#mercatoimmobiliare",
+      "#tasse",
+      "#mutuo",
+      "#fisco",
+      "#normative",
+      "#consulenzaimmobiliare",
+      "#immobilipadova",
+      "#finanza",
+      "#notizie"
+    ],
+    "slot_settimana": [
+      { "giorno_offset": 1, "ora": "10:30" },
+      { "giorno_offset": 3, "ora": "11:00" }
+    ],
+    "canali": ["facebook_post", "google"]
   },
   "pagine_agenzia": [
     { "path": "/", "titolo": "Homepage — annunci e servizi" },

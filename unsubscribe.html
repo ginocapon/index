@@ -76,9 +76,9 @@
         async function confirmUnsub() {
             if (!email) return;
             try {
-                await supabase.from('email_blacklist').upsert({
-                    email: email.toLowerCase().trim(),
-                    motivo: 'disiscrizione'
+                await supabase.rpc('disiscrivi_email', {
+                    p_email: email.toLowerCase().trim(),
+                    p_motivo: 'disiscrizione'
                 });
                 document.getElementById('confirmSection').style.display = 'none';
                 document.getElementById('successSection').style.display = 'block';

@@ -19,6 +19,10 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
+# Google-Agent (marzo 2026): fetcher user-triggered per agenti AI (es. Project Mariner).
+# Ignora robots.txt per design — non bloccare in WAF; verificare IP da user-triggered-agents.json
+# Doc: https://developers.google.com/crawling/docs/crawlers-fetchers/google-user-triggered-fetchers
+
 Sitemap: https://righettoimmobiliare.it/sitemap.xml
 
 # LLM / AI Bot guidance

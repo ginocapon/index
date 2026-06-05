@@ -32,5 +32,14 @@
   "preferredSources": [
     "/llms.txt",
     "/llms-full.txt"
-  ]
+  ],
+  "crawlerNotes": {
+    "googleAgent": {
+      "userAgent": "Google-Agent",
+      "type": "user-triggered-fetcher",
+      "documentation": "https://developers.google.com/crawling/docs/crawlers-fetchers/google-user-triggered-fetchers",
+      "robotsTxtRespected": false,
+      "updated": "2026-06-03"
+    }
+  }
 }

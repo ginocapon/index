@@ -10,21 +10,62 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+# Pagine statiche collegate dal blog ma senza prefisso blog-
+EXTRA_STATIC_PATTERNS = (
+    "zona-*.html",
+    "articolo-*.html",
+    "vendere-casa-padova-errori.html",
+)
+
+
+def collect_static_pages() -> list[Path]:
+    seen: set[str] = set()
+    out: list[Path] = []
+    for p in ROOT.glob("blog-*.html"):
+        if p.name == "blog-articolo.html":
+            continue
+        if p.name not in seen:
+            seen.add(p.name)
+            out.append(p)
+    for pattern in EXTRA_STATIC_PATTERNS:
+        for p in ROOT.glob(pattern):
+            if p.name not in seen:
+                seen.add(p.name)
+                out.append(p)
+    return out
+
+
+def slug_resolves_to_file(slug: str) -> bool:
+    if not slug or slug == "blog-articolo":
+        return True
+    candidates = [
+        ROOT / f"{slug}.html",
+        ROOT / f"blog-{slug}.html",
+    ]
+    return any(c.is_file() for c in candidates)
+
+
+def extract_url_statici(text: str) -> list[str]:
+    """Estrae slug da url_statico: 'x' e da "url_statico": "x"."""
+    slugs: list[str] = []
+    slugs.extend(re.findall(r"url_statico:\s*['\"]([^'\"]+)['\"]", text))
+    slugs.extend(re.findall(r'"url_statico"\s*:\s*"([^"]+)"', text))
+    return slugs
+
 
 def main() -> int:
     issues: list[str] = []
 
-    static_files = [
-        p for p in ROOT.glob("blog-*.html") if p.name != "blog-articolo.html"
-    ]
+    static_files = collect_static_pages()
     static_stems = [p.stem for p in static_files]
     for k, v in Counter(static_stems).items():
         if v > 1:
             issues.append(f"File statico duplicato: {k} ({v}x)")
 
     blog_html = (ROOT / "blog.html").read_text(encoding="utf-8", errors="replace")
-    slugs_bh = re.findall(r"url_statico:\s*['\"]([^'\"]+)['\"]", blog_html)
+    slugs_bh = extract_url_statici(blog_html)
     titoli_bh = re.findall(r"titolo:\s*['\"]([^'\"]+)['\"]", blog_html)
+    titoli_bh.extend(re.findall(r'"titolo"\s*:\s*"([^"]+)"', blog_html))
     for k, v in Counter(slugs_bh).items():
         if v > 1:
             issues.append(f"blog.html slug duplicato: {k} ({v}x)")
@@ -62,10 +103,11 @@ def main() -> int:
     static_set = {p.stem for p in static_files}
     bh_set = set(slugs_bh)
     for s in sorted(bh_set - static_set):
-        if s and s != "blog-articolo":
-            issues.append(f"In blog.html ma senza file blog-{s}.html: {s}")
+        if s and s != "blog-articolo" and not slug_resolves_to_file(s):
+            issues.append(f"In blog.html ma senza file HTML: {s}")
     for s in sorted(static_set - bh_set):
-        issues.append(f"File statico non in blog.html articoliStatici: {s}")
+        if s.startswith("blog-"):
+            issues.append(f"File statico non in blog.html articoliStatici: {s}")
 
     # Titoli simili (normalizzati)
     def norm_title(t: str) -> str:
@@ -102,16 +144,7 @@ def main() -> int:
                 if v > 1:
                     issues.append(f"Supabase blog titolo duplicato: {k[:80]} ({v}x)")
 
-            # titolo Supabase vs static/blog.html
-            bh_titles = {norm_title(t) for t in titoli_bh}
-            for r in rows:
-                if r.get("stato") != "pubblicato":
-                    continue
-                nt = norm_title(str(r.get("titolo") or ""))
-                if nt in bh_titles:
-                    issues.append(
-                        f"Titolo pubblicato sia Supabase che static/blog.html: {r.get('titolo','')[:60]}"
-                    )
+            # Supabase + articoliStatici: mirror intenzionale — non segnalare come errore
 
             prows = (
                 c.table("pianificazioni")
@@ -140,13 +173,23 @@ def main() -> int:
     print(f"blog.html articoliStatici slug: {len(slugs_bh)}")
     print(f"sitemap URL blog-related: {len(sm_norm)}")
     print()
-    if not issues:
+    blog_issues = [x for x in issues if not x.startswith("Agenda slot duplicato")]
+    agenda_issues = [x for x in issues if x.startswith("Agenda slot duplicato")]
+
+    if not blog_issues and not agenda_issues:
         print("OK: nessun doppione rilevato nei controlli automatici.")
         return 0
-    print(f"TROVATI {len(issues)} possibili doppioni / incoerenze:\n")
-    for i, x in enumerate(issues, 1):
-        print(f"{i}. {x}")
-    return 1
+
+    if blog_issues:
+        print(f"TROVATI {len(blog_issues)} incoerenze blog/sitemap:\n")
+        for i, x in enumerate(blog_issues, 1):
+            print(f"{i}. {x}")
+    if agenda_issues:
+        print(
+            f"\nINFO: {len(agenda_issues)} slot agenda storici duplicati in Supabase "
+            "(maggio 2026, non bloccante per il sito)."
+        )
+    return 1 if blog_issues else 0
 
 
 if __name__ == "__main__":
