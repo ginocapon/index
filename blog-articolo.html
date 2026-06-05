@@ -396,7 +396,9 @@ function normalizeSlugKey(s) {
  */
 var BLOG_SLUG_STATIC_REDIRECT = {
   'comprare-casa-o-affittare-la-verita-dei-numeri-dopo-30-anni-padova': 'blog-comprare-affittare-padova',
-  'ca-marcello-mestre-hub-turistico-da-70-milioni-padova': 'blog-ca-marcello-mestre'
+  'ca-marcello-mestre-hub-turistico-da-70-milioni-padova': 'blog-ca-marcello-mestre',
+  'righetto-immobiliare-dal-2000-storia-zone-e-ultime-acquisizioni-padova': 'blog-righetto-storia-territorio-acquisizioni-2026',
+  'blog-righetto-storia-territorio-acquisizioni-2026': 'blog-righetto-storia-territorio-acquisizioni-2026'
 };
 
 /** Slug lunghi da titoli estesi / bozze: il record Supabase ha titolo breve, generateSlug() e' piu' corto. */
@@ -503,6 +505,14 @@ function artUrl(a) {
     if (fq) fq.remove();
     showNotFound();
     return;
+  }
+
+  if (slug) {
+    var redHit = BLOG_SLUG_STATIC_REDIRECT[normalizeSlugKey(slug)] || BLOG_SLUG_STATIC_REDIRECT[slug];
+    if (redHit) {
+      location.replace(redHit);
+      return;
+    }
   }
 
   // Aggiorna URL nel browser con slug SEO pulito (senza UUID)

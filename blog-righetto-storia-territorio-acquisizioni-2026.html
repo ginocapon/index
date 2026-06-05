@@ -35,14 +35,17 @@ header{background:var(--nero);position:sticky;top:0;z-index:100}
 .logo{font-family:'Cormorant Garamond',serif;color:#fff;font-size:1.28rem;font-weight:600}.logo span{color:var(--oro);font-style:italic}
 nav{display:flex;flex:1;gap:.2rem}nav a{color:rgba(255,255,255,.72);font-size:.81rem;padding:.4rem .72rem}nav a.active{color:var(--oro)}
 .h-btn{background:var(--oro);color:var(--nero);padding:.4rem .88rem;border-radius:6px;font-size:.76rem;font-weight:600}
-.art-hero{position:relative;overflow:hidden;background:var(--nero)}
-.art-hero-video{width:100%;height:min(52vw,480px);min-height:280px;object-fit:cover;display:block;opacity:.88}
-.art-hero-overlay{position:absolute;inset:auto 0 0 0;padding:2.65rem 1.5rem;background:linear-gradient(transparent,rgba(21,36,53,.96) 35%)}
+.art-video-top{background:var(--nero);padding:0}
+.art-video-top video{width:100%;max-height:520px;min-height:300px;object-fit:cover;display:block;background:#000}
+.art-video-cap{max-width:820px;margin:0 auto;padding:.55rem 1.5rem 0;font-size:.72rem;color:var(--grigio)}
+.art-hero{background:linear-gradient(135deg,var(--nero),var(--blu));padding:2.2rem 1.5rem 2.5rem;color:#fff}
 .art-hero-inner{max-width:820px;margin:0 auto}
-.breadcrumb{font-size:.72rem;color:rgba(255,255,255,.45);margin-bottom:.86rem}.breadcrumb a{color:rgba(255,255,255,.55)}
+.art-hero .breadcrumb{font-size:.72rem;color:rgba(255,255,255,.45);margin-bottom:.86rem}
+.art-hero .breadcrumb a{color:rgba(255,255,255,.6)}
 .cat-badge{font-size:.57rem;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,107,53,.2);color:var(--oro);padding:.24rem .68rem;font-weight:700;display:inline-block;margin-bottom:.72rem}
-.art-hero h1{font-family:'Cormorant Garamond',serif;font-size:1.95rem;font-weight:300;color:#fff;line-height:1.2}.art-hero h1 strong{font-weight:600;font-style:italic}
-.art-hero-meta{display:flex;gap:1rem;align-items:center;font-size:.8rem;color:rgba(255,255,255,.5);margin-top:.92rem;flex-wrap:wrap}
+.art-hero h1{font-family:'Cormorant Garamond',serif;font-size:1.95rem;font-weight:300;color:#fff;line-height:1.2;margin-bottom:0}
+.art-hero h1 strong{font-weight:600;font-style:italic}
+.art-hero-meta{display:flex;gap:1rem;align-items:center;font-size:.8rem;color:rgba(255,255,255,.55);margin-top:.92rem;flex-wrap:wrap}
 .av{width:36px;height:36px;border-radius:50%;background:var(--oro);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--nero)}
 .art-container{max-width:820px;margin:0 auto;padding:2.4rem 1.5rem 3.55rem}
 .art-content{font-size:.91rem;line-height:1.88}
@@ -55,10 +58,14 @@ nav{display:flex;flex:1;gap:.2rem}nav a{color:rgba(255,255,255,.72);font-size:.8
 .art-content th{background:var(--sfondo)}
 .aeo-box{border:2px solid var(--blu);border-radius:12px;padding:1.15rem 1.3rem;margin-bottom:1.65rem;background:linear-gradient(135deg,rgba(44,74,110,.07),rgba(255,107,53,.06))}
 .aeo-box h2{font-family:'Montserrat',sans-serif;font-size:.95rem;text-transform:uppercase;letter-spacing:.06em;color:var(--blu);margin:0 0 .55rem;border:none;padding:0}
-.acq-card{display:grid;grid-template-columns:140px 1fr;gap:1rem;margin:1.35rem 0;padding:1rem;border:1px solid var(--gc);border-radius:12px;background:#fff}
-.acq-card img{width:140px;height:105px;object-fit:cover;border-radius:8px}
-.acq-meta{font-size:.78rem;color:var(--grigio);margin:.35rem 0}
-.acq-card ul{font-size:.84rem;margin:.5rem 0 0 1rem}
+.acq-block{margin:2rem 0 2.5rem;padding-bottom:2rem;border-bottom:1px solid var(--gc)}
+.acq-block:last-of-type{border-bottom:none}
+.acq-preview{width:100%;max-height:340px;object-fit:cover;border-radius:12px;margin:.6rem 0 1rem;display:block}
+.acq-meta{font-size:.82rem;color:var(--grigio);margin:.35rem 0 .85rem;line-height:1.6}
+.acq-fatti{background:var(--sfondo);border:1px solid var(--gc);border-radius:10px;padding:.9rem 1.1rem;margin:1rem 0;font-size:.84rem}
+.acq-fatti ul{margin:.4rem 0 0 1.1rem}
+.acq-cta{display:inline-flex;margin-top:.65rem;font-weight:700;font-size:.8rem;background:var(--blu);color:#fff;padding:.55rem 1.1rem;border-radius:8px;text-decoration:none}
+.acq-cta:hover{opacity:.92}
 .tag-row{display:flex;flex-wrap:wrap;gap:.45rem;margin:1.5rem 0}
 .tag-row span{font-size:.72rem;background:var(--sfondo);border:1px solid var(--gc);padding:.28rem .62rem;border-radius:999px;color:var(--blu);font-weight:600}
 .cta-deep{display:inline-flex;background:linear-gradient(180deg,var(--oro2),var(--oro));color:var(--nero);font-weight:800;padding:.8rem 1.62rem;border-radius:10px;font-size:.8rem;margin:1rem .75rem 1rem 0}
@@ -69,7 +76,7 @@ nav{display:flex;flex:1;gap:.2rem}nav a{color:rgba(255,255,255,.72);font-size:.8
 .related{background:var(--sfondo);border:1px solid var(--gc);padding:1.32rem;border-radius:10px}
 footer{background:linear-gradient(180deg,var(--nero),#0d1a2a);color:rgba(255,255,255,.65);padding:2.35rem 1.5rem;font-size:.75rem}
 .skip-link{position:absolute;top:-100%;background:var(--oro);color:var(--nero);padding:.46rem .9rem;z-index:9999}.skip-link:focus{top:0}
-@media(max-width:600px){.acq-card{grid-template-columns:1fr}.acq-card img{width:100%;height:180px}}
+@media(max-width:600px){.art-video-top video{min-height:220px}}
 </style>
 </head>
 <body>
@@ -81,17 +88,18 @@ footer{background:linear-gradient(180deg,var(--nero),#0d1a2a);color:rgba(255,255
 </div><button class="nav-burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button></header>
 <div class="nav-mobile" id="navMobile"><a href="/">Home</a><a href="immobili">Immobili</a><a href="chi-siamo">Chi siamo</a><a href="blog">Blog</a><a href="contatti">Contatti</a></div>
 <main id="main-content">
-<div class="art-hero">
-  <video class="art-hero-video" autoplay muted loop playsinline poster="img/team/titolari.webp" aria-label="Video introduttivo Righetto Immobiliare — agenzia Padova e provincia">
-    <source src="img/blog/righetto-storia-hero.mp4" type="video/mp4">
+<div class="art-video-top">
+  <video controls autoplay muted loop playsinline poster="img/team/titolari.webp" aria-label="Video Righetto Immobiliare — agenzia immobiliare Padova e provincia dal 2000">
+    <source src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/blog/righetto-storia-hero.mp4" type="video/mp4">
   </video>
-  <div class="art-hero-overlay"><div class="art-hero-inner">
-    <div class="breadcrumb"><a href="/">Home</a> / <a href="blog">Blog</a> / Storia e acquisizioni</div>
-    <span class="cat-badge">Vita d'Agenzia</span>
-    <h1><strong>Righetto Immobiliare</strong> dal 2000 a oggi: territorio, zone e ultime acquisizioni</h1>
-    <div class="art-hero-meta"><div class="av">G</div><span>Gino Capon</span><span>4 giugno 2026</span><span>Aggiornato: 4 giugno 2026</span></div>
-  </div></div>
 </div>
+<p class="art-video-cap">Video introduttivo Righetto Immobiliare — attiva l'audio con i controlli del player.</p>
+<div class="art-hero"><div class="art-hero-inner">
+  <div class="breadcrumb"><a href="/">Home</a> / <a href="blog">Blog</a> / Storia e acquisizioni</div>
+  <span class="cat-badge">Vita d'Agenzia</span>
+  <h1><strong>Righetto Immobiliare</strong> dal 2000 a oggi: territorio, zone e ultime acquisizioni</h1>
+  <div class="art-hero-meta"><div class="av">G</div><span>Gino Capon</span><span>4 giugno 2026</span><span>Aggiornato: 4 giugno 2026</span></div>
+</div></div>
 <div class="art-container"><div class="art-content">
 
 <div class="aeo-box">
@@ -124,80 +132,85 @@ footer{background:linear-gradient(180deg,var(--nero),#0d1a2a);color:rgba(255,255
 </table>
 <p>Oltre alle pagine zona, pubblichiamo analisi di mercato su <a href="blog-quartieri-padova-2026">quartieri padovani</a>, <a href="blog-mercato-immobiliare-limena-2026">Limena</a> e la <a href="agenzia-immobiliare-padova">guida agenzia Padova</a>. Per confronti prezzo/mq usiamo sempre riferimenti verificabili come le quotazioni <a href="https://www.agenziaentrate.gov.it" target="_blank" rel="noopener noreferrer">OMI dell'Agenzia delle Entrate</a>, integrate alla valutazione in sede.</p>
 
-<h2>Le ultime 5 acquisizioni sul portale: punto per punto</h2>
-<p>Di seguito le cinque proposte più recenti inserite sul <a href="immobili">portale immobili</a> (ordinamento per data di inserimento, stato <strong>attivo</strong> e <strong>non venduto</strong> al 28 maggio 2026). Per ciascuna: anteprima fotografica, sintesi operativa e link alla scheda completa.</p>
+<h2>Le ultime 5 acquisizioni sul portale: racconto e anteprime</h2>
+<p>Qui sotto trovi le <strong>cinque proposte più recenti</strong> caricate sul nostro <a href="immobili">portale immobili</a> (ordine per data di inserimento, incarichi <strong>attivi</strong> al 28 maggio 2026). Per ognuna: <strong>foto anteprima</strong>, racconto in parole nostre e scheda completa con galleria e planimetrie.</p>
 
-<div class="acq-card" id="lp0286">
-  <img src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963017206-casa-singola-altichiero-4-.jpg" alt="Anteprima casa singola ristrutturata Altichiero Padova — LP0286 Righetto" width="140" height="105" loading="lazy">
-  <div>
-    <h3>1. Casa singola ristrutturata ad Altichiero — LP0286</h3>
-    <p class="acq-meta"><strong>€365.000</strong> · 230 mq · 8 locali · 2 bagni · Classe <strong>C</strong> · <a href="immobile?s=casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno">Vedi scheda</a></p>
-    <ul>
-      <li><strong>Tipologia:</strong> villetta indipendente, stato <strong>ristrutturato</strong>, piano terra con massima privacy.</li>
-      <li><strong>Zona:</strong> <strong>Altichiero</strong>, quartiere verde di Padova, vicino a servizi e collegamenti.</li>
-      <li><strong>Punti forti:</strong> circa <strong>230 mq</strong>, <strong>garage</strong> e <strong>giardino</strong>, vista sul verde, finiture moderne post-intervento.</li>
-      <li><strong>Per chi:</strong> famiglia che cerca spazi ampi senza condominio, con capitolato già aggiornato.</li>
-    </ul>
-  </div>
-</div>
+<article class="acq-block" id="lp0286">
+  <h3>1. Casa singola ristrutturata ad Altichiero — codice LP0286</h3>
+  <img class="acq-preview" src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963017206-casa-singola-altichiero-4-.jpg" alt="Anteprima fotografica casa singola ristrutturata Altichiero Padova LP0286" width="820" height="340" loading="eager">
+  <p class="acq-meta"><strong>€365.000</strong> · <strong>230 mq</strong> · 8 locali · 2 bagni · villetta · stato <strong>ristrutturato</strong> · classe energetica <strong>C</strong> (IPE 122 kWh/m²a) · <strong>garage</strong> e <strong>giardino</strong></p>
+  <p>Inserita a fine maggio 2026, questa <strong>casa indipendente</strong> ad <strong>Altichiero</strong> rappresenta il segmento «pronto abitare» con metrature generose: circa <strong>230 mq</strong> su un unico livello a piano terra, con massima privacy e vista aperta sul verde. L'intervento di ristrutturazione completa ha aggiornato impianti e finiture, riducendo i tempi tra compromesso e rogito per una famiglia che non vuole cantieri.</p>
+  <p>La posizione in Via Beato Arnaldo da Limena collega rapidamente il quartiere residenziale di Altichiero ai servizi di <strong>Padova nord</strong> e alla tangenziale. In agenzia la proponiamo a chi cerca indipendenza senza condominio, con spazi per lavoro in casa, taverna o zona hobby, e pertinenza auto coperta.</p>
+  <div class="acq-fatti"><strong>In sintesi operativa</strong><ul>
+    <li>Tipologia: villetta singola ristrutturata, 8 vani utili.</li>
+    <li>Quartiere: Altichiero (PD) — contesto verde, vicino a servizi.</li>
+    <li>Pertinenze: garage e giardino privato.</li>
+    <li>Target: famiglia numerosa o coppia che vuole casa già modernizzata.</li>
+  </ul></div>
+  <a class="acq-cta" href="immobile?s=casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno">Apri scheda LP0286 — foto e planimetrie</a>
+</article>
 
-<div class="acq-card" id="lp0284">
-  <img src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730308158-chatgpt-image-25-mag-2026-15-49-27.png" alt="Anteprima casa con giardino Grisignano di Zocco — LP0284 Righetto" width="140" height="105" loading="lazy">
-  <div>
-    <h3>2. Casa singola con ampio giardino — Grisignano di Zocco LP0284-V</h3>
-    <p class="acq-meta"><strong>€150.000</strong> · 120 mq · 5 locali · 1 bagno · Classe <strong>F</strong> · <a href="immobile?s=casa-singola-con-ampio-giardino-a-grisignano-di-zocco">Vedi scheda</a></p>
-    <ul>
-      <li><strong>Tipologia:</strong> casa singola su circa <strong>120 mq</strong>, stato <strong>da ristrutturare</strong> — margine di personalizzazione.</li>
-      <li><strong>Scoperto:</strong> giardino privato di quasi <strong>800 mq</strong>, ideale per famiglia o hobby outdoor.</li>
-      <li><strong>Posizione:</strong> comune di <strong>Grisignano di Zocco</strong>, fronte strada principale, contesto verde.</li>
-      <li><strong>Extra:</strong> <strong>garage</strong> presente; prezzo di ingresso contenuto per chi accetta un progetto di riqualificazione.</li>
-    </ul>
-  </div>
-</div>
+<article class="acq-block" id="lp0284">
+  <h3>2. Casa singola con ampio giardino a Grisignano — LP0284-V</h3>
+  <img class="acq-preview" src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730308158-chatgpt-image-25-mag-2026-15-49-27.png" alt="Anteprima casa con giardino 800 mq Grisignano di Zocco LP0284" width="820" height="340" loading="lazy">
+  <p class="acq-meta"><strong>€150.000</strong> · <strong>120 mq</strong> · 5 locali · 1 bagno · da ristrutturare · classe <strong>F</strong> · giardino circa <strong>800 mq</strong> · <strong>garage</strong></p>
+  <p>Questa acquisizione punta su un altro profilo: <strong>prezzo di ingresso</strong> e <strong>potenziale di personalizzazione</strong>. La casa singola di Grisignano di Zocco sviluppa circa 120 mq ed è circondata da uno scoperto eccezionale per la fascia — quasi <strong>800 mq di giardino</strong> — raro a questa cifra nel Padovano orientale.</p>
+  <p>L'immobile è <strong>da ristrutturare</strong>: ideale per acquirenti con progetto chiaro (efficientamento, redistribuzione interna, ampliamento veranda). La visibilità su Viale Kennedy garantisce accessibilità; il garage aggiunge valore pratico. In trattativa valutiamo sempre budget lavori e tempi con tecnico di fiducia prima del compromesso.</p>
+  <div class="acq-fatti"><strong>In sintesi operativa</strong><ul>
+    <li>Comune: Grisignano di Zocco — campagna a due passi da Padova est.</li>
+    <li>Punto di forza: rapporto prezzo / metri di giardino.</li>
+    <li>Stato: grezzo funzionale — margine progettuale.</li>
+    <li>Target: famiglia con bambini, animali o passione orto/bricolage.</li>
+  </ul></div>
+  <a class="acq-cta" href="immobile?s=casa-singola-con-ampio-giardino-a-grisignano-di-zocco">Apri scheda LP0284-V</a>
+</article>
 
-<div class="acq-card" id="lp0285">
-  <img src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730032024-casa-singola-piccola-21-.png" alt="Anteprima casa con scoperto Grisignano di Zocco — LP0285 Righetto" width="140" height="105" loading="lazy">
-  <div>
-    <h3>3. Casa singola con ampio scoperto — Grisignano LP0285-V</h3>
-    <p class="acq-meta"><strong>€110.000</strong> · 140 mq · 6 locali · 1 bagno · Classe <strong>F</strong> · <a href="immobile?s=casa-singola-con-ampio-scoperto-a-grisignano-di-zocco">Vedi scheda</a></p>
-    <ul>
-      <li><strong>Tipologia:</strong> villetta su <strong>due livelli</strong> per circa <strong>140 mq</strong>, da ristrutturare.</li>
-      <li><strong>Layout:</strong> sei locali distribuiti su più piani — potenziale per nucleo familiare o divisione funzionale.</li>
-      <li><strong>Scoperto:</strong> giardino privato; posizione strategica nel comune di <strong>Grisignano di Zocco</strong>.</li>
-      <li><strong>Target:</strong> acquirente che cerca prezzo di acquisto basso e progetto su misura.</li>
-    </ul>
-  </div>
-</div>
+<article class="acq-block" id="lp0285">
+  <h3>3. Casa singola con scoperto a Grisignano — LP0285-V</h3>
+  <img class="acq-preview" src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730032024-casa-singola-piccola-21-.png" alt="Anteprima casa su due livelli Grisignano di Zocco LP0285" width="820" height="340" loading="lazy">
+  <p class="acq-meta"><strong>€110.000</strong> · <strong>140 mq</strong> su due livelli · 6 locali · 1 bagno · da ristrutturare · classe <strong>F</strong> · <strong>giardino</strong></p>
+  <p>Accanto alla proposta LP0284, abbiamo acquisito un'altra <strong>villetta indipendente</strong> nello stesso comune, disposta su <strong>due piani</strong> per circa 140 mq complessivi. Sei locali permettono doppio soggiorno, studio, camerette per figli o spazio per genitori conviventi.</p>
+  <p>Il prezzo richiesto — <strong>€110.000</strong> — colloca l'annuncio tra le opportunità più accessibili del nostro portafoglio attuale, con il trade-off onesto di un immobile da ripensare negli interni. Il giardino privato e la posizione fronte strada in Viale Kennedy completano il quadro per chi cerca terreno edificabile «già fatto» con possibilità di crescita nel tempo.</p>
+  <div class="acq-fatti"><strong>In sintesi operativa</strong><ul>
+    <li>Layout: 6 locali su due livelli — flessibilità per nuclei familiari diversi.</li>
+    <li>Investimento lavori: da preventivare prima dell'offerta vincolante.</li>
+    <li>Confronto OMI: utile incrociare con quotazioni Grisignano su Agenzia Entrate.</li>
+    <li>Target: prima casa con budget contenuto e visione di riqualificazione.</li>
+  </ul></div>
+  <a class="acq-cta" href="immobile?s=casa-singola-con-ampio-scoperto-a-grisignano-di-zocco">Apri scheda LP0285-V</a>
+</article>
 
-<div class="acq-card" id="la0317">
-  <img src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777994309447-000-appartamento-2-piano-mandria-padova-righetto-immobiliare-1-wmk-0.jpg" alt="Anteprima quadrilocale Mandria Padova — LA0317 Righetto" width="140" height="105" loading="lazy">
-  <div>
-    <h3>4. Quadrilocale a Mandria — LA0317</h3>
-    <p class="acq-meta"><strong>€200.000</strong> · 90 mq · 5 locali · 1 bagno · Classe <strong>E</strong> · <a href="immobile?s=elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova">Vedi scheda</a></p>
-    <ul>
-      <li><strong>Tipologia:</strong> appartamento <strong>quadrilocale</strong> al <strong>secondo piano</strong>, palazzina residenziale tranquilla.</li>
-      <li><strong>Zona:</strong> <strong>Mandria</strong>, quartiere residenziale del comune di Padova, ben servito.</li>
-      <li><strong>Stato:</strong> <strong>ristrutturato</strong>, soluzione pronta per prima casa o investimento familiare.</li>
-      <li><strong>Per chi:</strong> coppia o famiglia piccola che privilegia silenzio e vicinanza ai servizi urbani.</li>
-    </ul>
-  </div>
-</div>
+<article class="acq-block" id="la0317">
+  <h3>4. Quadrilocale elegante a Mandria — LA0317</h3>
+  <img class="acq-preview" src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777994309447-000-appartamento-2-piano-mandria-padova-righetto-immobiliare-1-wmk-0.jpg" alt="Anteprima appartamento quadrilocale Mandria Padova LA0317" width="820" height="340" loading="lazy">
+  <p class="acq-meta"><strong>€200.000</strong> · <strong>90 mq</strong> · 5 locali (quadrilocale) · 1 bagno · secondo piano · <strong>ristrutturato</strong> · classe <strong>E</strong></p>
+  <p>A maggio abbiamo pubblicato questo <strong>quadrilocale al secondo piano</strong> in <strong>Mandria</strong>, una delle zone residenziali più tranquille del comune di Padova. La palazzina è silenziosa e ben abitata; l'appartamento è già <strong>ristrutturato</strong>, quindi adatto a chi deve entrare con tempi brevi — coppie, famiglie con un figlio, o acquirenti che vogliono evitare imprevisti in sede di perizia mutuo.</p>
+  <p>Via Rovereto offre un contesto di villette e servizi di prossimità, con collegamento rapido verso il centro e la tangenziale. Il prezzo di <strong>€200.000</strong> per 90 mq ristrutturati posiziona l'offerta nella fascia media del quartiere: in visita verifichiamo luce naturale, orientamento e spese condominiali per un confronto trasparente con altre proposte Mandria/Sacrocuore.</p>
+  <div class="acq-fatti"><strong>In sintesi operativa</strong><ul>
+    <li>Piano: secondo, senza ascensore — da valutare in base alle esigenze.</li>
+    <li>Stato: ristrutturato — impianti e finiture già aggiornati.</li>
+    <li>Uso ideale: prima casa o base familiare stabile.</li>
+    <li>Documentazione: APE classe E in scheda.</li>
+  </ul></div>
+  <a class="acq-cta" href="immobile?s=elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova">Apri scheda LA0317</a>
+</article>
 
-<div class="acq-card" id="lp0283">
-  <img src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777567859897-sacro-cuore-bi-familiare-righetto-10-.png" alt="Anteprima bifamiliare Sacrocuore Padova — LP0283 Righetto" width="140" height="105" loading="lazy">
-  <div>
-    <h3>5. Bifamiliare indipendente a Sacrocuore — LP0283</h3>
-    <p class="acq-meta"><strong>€230.000</strong> · 100 mq · 4 locali · 2 bagni · Classe <strong>D</strong> · <a href="immobile?s=bi-familiare-indipendente-in-vendita-nel-cuore-di-sacrocuore-padova">Vedi scheda</a></p>
-    <ul>
-      <li><strong>Tipologia:</strong> porzione di <strong>bifamiliare indipendente</strong> su un piano, circa <strong>100 mq</strong>.</li>
-      <li><strong>Zona:</strong> <strong>Sacrocuore</strong>, quartiere residenziale apprezzato, contesto tranquillo.</li>
-      <li><strong>Dotazioni:</strong> <strong>giardino</strong>, <strong>due bagni</strong>, stato <strong>ristrutturato</strong>.</li>
-      <li><strong>Per chi:</strong> famiglia che vuole indipendenza parziale senza i costi di una villetta intera in città.</li>
-    </ul>
-  </div>
-</div>
+<article class="acq-block" id="lp0283">
+  <h3>5. Bifamiliare indipendente a Sacrocuore — LP0283</h3>
+  <img class="acq-preview" src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777567859897-sacro-cuore-bi-familiare-righetto-10-.png" alt="Anteprima bifamiliare Sacrocuore Padova LP0283" width="820" height="340" loading="lazy">
+  <p class="acq-meta"><strong>€230.000</strong> · <strong>100 mq</strong> · 4 locali · <strong>2 bagni</strong> · porzione indipendente · <strong>ristrutturato</strong> · classe <strong>D</strong> · <strong>giardino</strong></p>
+  <p>Chiudiamo il tour con una porzione di <strong>bifamiliare indipendente</strong> nel cuore di <strong>Sacrocuore</strong>, quartiere consolidato e richiesto da famiglie padovane. L'unità è disposta su un unico piano per circa 100 mq, con <strong>doppi servizi</strong> e <strong>giardino</strong> riservato — combinazione che in città riduce i costi rispetto a una villetta intera mantenendo privacy superiore all'appartamento in condominio.</p>
+  <p>L'intervento di ristrutturazione già eseguito e la classe energetica <strong>D</strong> facilitano mutuo e rogito. Sacrocuore offre vicinanza a scuole, commercio e collegamenti verso il centro; per approfondire il contesto di mercato leggi anche la nostra guida <a href="blog-mercato-sacrocuore-padova-omi-2026">Sacrocuore e OMI 2026</a>.</p>
+  <div class="acq-fatti"><strong>In sintesi operativa</strong><ul>
+    <li>Tipologia: porzione di bifamiliare — ingresso indipendente.</li>
+    <li>Bagni: 2 — comfort per famiglia o home office + ospiti.</li>
+    <li>Prezzo: €230.000 — fascia medio-alta per il quartiere, giustificata dallo stato.</li>
+    <li>Target: chi vuole giardino in città senza gestire un'intera villa.</li>
+  </ul></div>
+  <a class="acq-cta" href="immobile?s=bi-familiare-indipendente-in-vendita-nel-cuore-di-sacrocuore-padova">Apri scheda LP0283</a>
+</article>
 
-<p>Tutte le schede sono consultabili anche da <a href="immobili?op=vendita">immobili in vendita</a> con filtri per comune, prezzo e metratura. Per visite e documentazione aggiuntiva: <a href="tel:+390498843484">049.88.43.484</a> o <a href="contatti">contatti</a>.</p>
+<p>Tutte le schede sono consultabili da <a href="immobili?op=vendita">immobili in vendita</a> con filtri per comune, prezzo e metratura. Per visite: <a href="tel:+390498843484">049.88.43.484</a> o <a href="contatti">contatti</a>.</p>
 
 <h2>Come lavoriamo ogni nuova acquisizione</h2>
 <p>Ogni incarico segue un percorso che abbiamo descritto in <a href="servizio-vendita">servizio vendita</a> e <a href="blog-percorso-vendita-immobile-padova-2026">percorso di vendita 2026</a>: valutazione allineata al segmento, shooting fotografico e video ove utile, pubblicazione multicanale (sito, portali, social) e gestione trattativa con documenti in ordine. Il compenso di mediazione si concorda <strong>in sede</strong> nel mandato — non pubblichiamo listini online, in linea con la prassi professionale.</p>
