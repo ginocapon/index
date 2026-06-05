@@ -520,7 +520,9 @@ function generateSlug(titolo) {
     'conviene comprare casa a padova o restare in affitto? analisi su 20 anni': { img: 'img/blog/comprare-affittare-padova.webp', url: 'blog-comprare-affittare-padova' },
     'case in vendita padova 2026: prezzi, zone migliori e guida completa': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-case-vendita-padova' },
     'mutuo prima casa a padova: guida completa 2026': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-mutuo-prima-casa-padova' },
-    "ca' marcello mestre: riqualificazione e investimento nel veneto": { img: 'img/blog/ca-marcello-hero.webp', url: 'articolo-riqualificazione' },
+    "ca' marcello mestre: riqualificazione e investimento nel veneto": { img: 'img/blog/ca-marcello-hero.webp', url: 'blog-ca-marcello-mestre' },
+    "ca' marcello mestre: hub turistico da 70 milioni": { img: 'img/blog/ca-marcello-hero.webp', url: 'blog-ca-marcello-mestre' },
+    'case in vendita limena: prezzi, zone e guida': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'zona-limena' },
     "l'impegno quotidiano di un'agenzia immobiliare: tra burocrazia e incertezza mutui": { img: 'img/blog/ufficio-righetto-immobiliare.webp', url: 'blog-impegno-quotidiano-agenzia-immobiliare' },
     'appartamento nuova costruzione limena: 101 mq con giardino 310 mq in classe a4': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-appartamento-nuova-costruzione-limena' },
     'comprare casa a padova nel 2026: guida definitiva passo dopo passo': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-comprare-casa-padova-guida-2026' },
@@ -655,7 +657,8 @@ function generateSlug(titolo) {
     { titolo: 'Compravendite nel Veneto e sulla cintura di Padova: lettura dei dati 2026', categoria: 'Mercato locale', data: '2026-04-10', stato: 'pubblicato', immagine_copertina: 'img/blog/comprare-affittare-padova.webp', url_statico: 'blog-compravendite-veneto-cintura-padova-2026' },
     { titolo: 'Imposte di registro e ipotecarie nella compravendita: guida per il Padovano', categoria: 'Fisco', data: '2026-04-10', stato: 'pubblicato', immagine_copertina: 'img/blog/tasse-vendita-casa.webp', url_statico: 'blog-imposte-registro-catasto-compravendita-padova-2026' },
     { titolo: 'Dal prezzo alla proposta: percorso operativo per vendere nel Padovano (2026)', categoria: 'Guida alla vendita', data: '2026-04-10', stato: 'pubblicato', immagine_copertina: 'img/blog/home-staging.webp', url_statico: 'blog-percorso-vendita-immobile-padova-2026' },
-    { titolo: 'Geopolitica, energia e tassi: effetti sul mercato immobiliare e cautele pratiche', categoria: 'Mercato locale', data: '2026-04-10', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-geopolitica-fiore-carrarmato.webp', url_statico: 'blog-immobiliare-geopolitica-energia-tassi-2026' }
+    { titolo: 'Geopolitica, energia e tassi: effetti sul mercato immobiliare e cautele pratiche', categoria: 'Mercato locale', data: '2026-04-10', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-geopolitica-fiore-carrarmato.webp', url_statico: 'blog-immobiliare-geopolitica-energia-tassi-2026' },
+    { titolo: 'Case in Vendita Limena: Prezzi, Zone e Guida', categoria: 'Mercato locale', data: '2026-03-07', stato: 'pubblicato', immagine_copertina: 'img/foto-servizi/vendita-immobili-padova.webp', url_statico: 'zona-limena' }
   ];
   // Carica da Supabase e merge con statici
   let articles = [];

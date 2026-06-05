@@ -6,6 +6,9 @@ righetto_social/config/settings.json
 !.env.example
 
 node_modules/
+__pycache__/
+*.py[cod]
+scripts/__pycache__/
 supabase/.temp/
 # Evita commit accidentale di una copia annidata del repo
 /progetti/
