@@ -1,6 +1,9 @@
 (function () {
   'use strict';
 
+  var SB_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
+  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
+
   var params = new URLSearchParams(window.location.search);
   var slug = params.get('slug') || '';
   var embed = params.get('embed') === '1';
@@ -24,6 +27,93 @@
 
   function clamp(v, min, max) {
     return Math.max(min, Math.min(max, v));
+  }
+
+  function generatePropertySlug(d) {
+    if (!d) return '';
+    var parts = [
+      d.tipologia || d.categoria || 'immobile',
+      d.tipo_operazione || d.tipo_contratto || 'vendita',
+      d.comune || 'padova',
+      d.codice || ''
+    ];
+    return parts.map(function (p) {
+      return String(p || '').toLowerCase()
+        .replace(/[àáâãäå]/g, 'a').replace(/[èéêë]/g, 'e').replace(/[ìíîï]/g, 'i')
+        .replace(/[òóôõö]/g, 'o').replace(/[ùúûü]/g, 'u').replace(/ç/g, 'c').replace(/ñ/g, 'n')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    }).filter(Boolean).join('-');
+  }
+
+  function immobiliSearchHref(d) {
+    var tab = String(d.tipo_operazione || d.tipo_contratto || 'vendita').indexOf('affitto') === 0 ? 'affitto' : 'vendita';
+    var q = new URLSearchParams();
+    q.set('tab', tab);
+    if (d.comune) q.set('zona', d.comune);
+    return 'immobili?' + q.toString();
+  }
+
+  function tourFromProperty(p) {
+    var scenes = (p.virtual_tour_scenes || []).filter(function (s) {
+      return s && (s.url || s.thumbnail);
+    });
+    if (!scenes.length) return null;
+    return {
+      titolo: p.titolo || 'Immobile',
+      comune: p.comune || 'Padova',
+      codice: p.codice || '',
+      immobileHref: 'immobile?s=' + encodeURIComponent(generatePropertySlug(p)),
+      searchHref: immobiliSearchHref(p),
+      scenes: scenes.map(function (s, i) {
+        return {
+          id: 's' + i,
+          nome: s.nome || ('Stanza ' + (i + 1)),
+          img: s.url || s.thumbnail
+        };
+      })
+    };
+  }
+
+  function tourFromCatalogEntry(tour) {
+    if (!tour || !tour.scenes || !tour.scenes.length) return null;
+    return {
+      titolo: tour.titolo || 'Immobile',
+      comune: tour.comune || 'Padova',
+      codice: tour.codice || '',
+      immobileHref: 'immobile?s=' + encodeURIComponent(slug),
+      searchHref: 'immobili?tab=vendita' + (tour.comune ? '&zona=' + encodeURIComponent(tour.comune) : ''),
+      scenes: tour.scenes
+    };
+  }
+
+  function loadTourFromSupabase(tourSlug) {
+    if (!window.supabase) return Promise.reject(new Error('no sb'));
+    var sb = window.supabase.createClient(SB_URL, SB_KEY);
+    return sb.from('immobili').select('*')
+      .eq('slug', tourSlug)
+      .eq('attivo', true)
+      .eq('venduto', false)
+      .eq('affittato', false)
+      .maybeSingle()
+      .then(function (res) {
+        if (res.error || !res.data) throw new Error('not found');
+        var tour = tourFromProperty(res.data);
+        if (!tour) throw new Error('no scenes');
+        return tour;
+      });
+  }
+
+  function loadTourFromJson(tourSlug) {
+    return fetch('data/visite-virtuali.json')
+      .then(function (r) {
+        if (!r.ok) throw new Error('catalog');
+        return r.json();
+      })
+      .then(function (data) {
+        var tour = tourFromCatalogEntry(data[tourSlug]);
+        if (!tour) throw new Error('missing');
+        return tour;
+      });
   }
 
   function applyTransform() {
@@ -158,7 +248,11 @@
 
     if (els.title) els.title.textContent = tour.titolo;
     if (els.location) els.location.textContent = tour.comune + (tour.codice ? ' · ' + tour.codice : '');
-    if (els.immobileLink) els.immobileLink.href = 'immobile?s=' + encodeURIComponent(slug);
+    if (els.immobileLink) {
+      els.immobileLink.href = tour.searchHref || 'immobili';
+      var txt = els.immobileLink.querySelector('.vv-btn-text');
+      if (txt) txt.textContent = 'Annunci';
+    }
 
     renderThumbs();
     bindViewport();
@@ -211,21 +305,11 @@
       return;
     }
 
-    fetch('data/visite-virtuali.json')
-      .then(function (r) {
-        if (!r.ok) throw new Error('Catalogo visite non disponibile');
-        return r.json();
-      })
-      .then(function (data) {
-        var tour = data[slug];
-        if (!tour || !tour.scenes || !tour.scenes.length) {
-          showError('Visita virtuale non ancora disponibile per questo immobile.');
-          return;
-        }
-        initUI(tour);
-      })
+    loadTourFromSupabase(slug)
+      .catch(function () { return loadTourFromJson(slug); })
+      .then(function (tour) { initUI(tour); })
       .catch(function () {
-        showError('Impossibile caricare la visita virtuale. Riprova tra qualche istante.');
+        showError('Visita virtuale non disponibile per questo immobile. L\'annuncio potrebbe essere stato venduto o rimosso.');
       });
   }
 
