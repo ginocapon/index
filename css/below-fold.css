@@ -165,6 +165,117 @@
   .vt-stage:hover .vt-3d-frame,
   .vt-card-link:focus-visible .vt-3d-frame { transform: translateY(-4px) scale(1.01); }
 }
+
+/* ═══ Recensioni: 1 video + marquee ═══ */
+.rec-block { margin-top: 48px; }
+.rec-head {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--oro);
+  margin: 0 auto 28px;
+  width: 100%;
+  justify-content: center;
+}
+.rec-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 24px;
+  align-items: stretch;
+}
+.rec-video-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+.rec-video-card:hover { border-color: rgba(255,107,53,0.3); }
+.rec-video-play {
+  position: relative;
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, rgba(44,74,110,0.3), rgba(21,36,53,0.5));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.rec-video-play img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+}
+.rec-play-btn {
+  position: relative;
+  z-index: 1;
+  width: 56px;
+  height: 56px;
+  background: rgba(255,107,53,0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+.rec-video-play:hover .rec-play-btn,
+.rec-video-play:focus-visible .rec-play-btn { transform: scale(1.08); }
+.rec-video-caption { padding: 18px 20px; }
+.rec-stars { color: #FFD23F; font-size: 0.8rem; margin-bottom: 6px; letter-spacing: 2px; }
+.rec-quote {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.6;
+  font-style: italic;
+  margin: 0 0 10px;
+}
+.rec-author {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fff;
+}
+.rec-author span { color: rgba(255,255,255,0.65); font-weight: 400; }
+.rec-marquee-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.04);
+  min-height: 320px;
+  mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+}
+.rec-marquee-track {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  animation: rec-scroll 52s linear infinite;
+}
+.rec-item {
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+@keyframes rec-scroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+@media(max-width:768px){
+  .rec-marquee-wrap { min-height: 280px; }
+  .rec-marquee-track { animation-duration: 58s; }
+}
+@media(prefers-reduced-motion:reduce){
+  .rec-marquee-track { animation: none; }
+}
 .vt-card-play {
   position: absolute;
   inset: 0;
