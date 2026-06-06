@@ -37,7 +37,8 @@
 <link rel="stylesheet" href="css/fonts.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/nav-mobile.css?v=4" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="css/below-fold.css?v=7" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/below-fold.css?v=10" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/visita-virtuale.css?v=1" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/home-enhance.css?v=9" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/modal-incarico-home.css?v=2" media="all">
 <style>
@@ -529,7 +530,7 @@ button{font-family:inherit;cursor:pointer}
   .btn-srch{min-height:58px}
 
   #testimonial [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important}
-  .video-test-grid{grid-template-columns:1fr!important}
+  .vt-grid{grid-template-columns:1fr!important}
   .mutuo-grid{grid-template-columns:1fr!important}
   .props-grid,.srv-grid,.blog-grid{grid-template-columns:1fr}
   .sf-grid,.fc-grid{grid-template-columns:1fr}
@@ -856,7 +857,7 @@ button svg, a.btn-p svg, a.btn-g svg {
       "@type": "VideoObject",
       "name": "Righetto Immobiliare dal 2000 — la nostra agenzia",
       "description": "Spot Righetto Immobiliare: storia dal 2000, territorio Padova e provincia, zone servite e metodo di lavoro. Agenzia a Limena con 350+ immobili gestiti.",
-      "thumbnailUrl": "https://righettoimmobiliare.it/img/team/titolari.webp",
+      "thumbnailUrl": "https://righettoimmobiliare.it/img/team/righetto-noi-ci-siamo-video-poster.png",
       "uploadDate": "2026-06-04",
       "contentUrl": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/blog/righetto-storia-hero.mp4",
       "embedUrl": "https://righettoimmobiliare.it/blog-righetto-storia-territorio-acquisizioni-2026",
@@ -1151,14 +1152,12 @@ button svg, a.btn-p svg, a.btn-g svg {
       </div>
       <div class="eyebrow">Scopri chi siamo</div>
       <h2 class="sec-h2">La nostra<br>agenzia</h2>
-      <p class="sec-p">Il nostro ultimo spot racconta chi siamo dal 2000 a oggi: territorio Padova e provincia, zone che seguiamo e il modo in cui lavoriamo ogni giorno. Assistente AI Linda disponibile 24/7 per ogni tua domanda.</p>
+      <p class="sec-p">Il nostro ultimo spot racconta chi siamo dal 2000 a oggi: territorio Padova e provincia, zone che seguiamo e le <a href="blog-righetto-storia-territorio-acquisizioni-2026" style="color:var(--blu);font-weight:600;text-decoration:underline">ultime acquisizioni sul portale</a>. Clicca il video per il riassunto completo. Assistente AI Linda disponibile 24/7.</p>
     </div>
     <div class="video-stage sr" id="videoStage">
       <div class="video-3d-frame">
-        <div class="video-wrap" id="videoWrap" onclick="loadVideo(this)">
-          <video class="video-native" id="hpAgencyVideo" playsinline preload="metadata" poster="img/team/titolari.webp" aria-label="Video Righetto Immobiliare — la nostra agenzia dal 2000">
-            <source src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/blog/righetto-storia-hero.mp4" type="video/mp4">
-          </video>
+        <a class="video-wrap video-wrap-link" id="videoWrap" href="blog-righetto-storia-territorio-acquisizioni-2026" aria-label="Righetto dal 2000: storia, zone e ultime acquisizioni — apri il riassunto">
+          <img class="video-poster-img" src="img/team/righetto-noi-ci-siamo-video-poster.png" alt="Righetto Immobiliare — Noi ci siamo, video storia e acquisizioni" width="1280" height="720" loading="lazy">
           <div class="video-vignette"></div>
           <div class="video-facade">
             <div class="play-btn" aria-hidden="true">
@@ -1167,13 +1166,13 @@ button svg, a.btn-p svg, a.btn-g svg {
           </div>
           <div class="video-spot-badge">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            <span>Guarda il video</span>
+            <span>Storia e acquisizioni</span>
           </div>
           <div class="video-bar">
             <span class="video-bar-label">Righetto dal 2000</span>
-            <span class="video-bar-duration">&#9654; Nuovo</span>
+            <span class="video-bar-duration">&#9654; Riassunto</span>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </div>
@@ -1289,41 +1288,76 @@ button svg, a.btn-p svg, a.btn-g svg {
         </div>
       </div>
     </div>
-    <!-- Video Testimonial -->
+    <!-- Visite virtuali — card 3D -->
     <div class="rv sr" style="margin-top:48px">
       <div style="text-align:center;margin-bottom:28px">
         <div style="display:inline-flex;align-items:center;gap:8px;font-size:0.62rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--oro)">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-          Video recensioni
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          Visite virtuali 360°
         </div>
+        <p class="vt-intro">Interni e esterni fotografati da noi su immobili reali in provincia di Padova: scorri le stanze come in visita, prima ancora di uscire di casa.</p>
       </div>
-      <div class="video-test-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px">
-        <div class="rv d1" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;overflow:hidden;transition:all 0.3s" onmouseover="this.style.borderColor='rgba(255,107,53,0.3)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
-          <div style="position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,rgba(44,74,110,0.3),rgba(21,36,53,0.5));display:flex;align-items:center;justify-content:center;cursor:pointer" onclick="this.innerHTML='<iframe src=\'https://www.youtube.com/embed/1JM_lXuqLHM?autoplay=1&rel=0\' allow=\'accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture\' allowfullscreen loading=\'lazy\' title=\'Venduto in 30 giorni — la storia di Marco\' style=\'width:100%;height:100%;border:none\'></iframe>'">
-            <img src="https://img.youtube.com/vi/1JM_lXuqLHM/hqdefault.jpg" alt="Video testimonianza — cliente soddisfatto vendita casa Padova" width="480" height="270" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.6">
-            <div style="position:relative;z-index:1;width:56px;height:56px;background:rgba(255,107,53,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform 0.2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="#152435" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <div class="vt-grid sr-stagger">
+        <button type="button" class="vt-card-link rv d1" onclick="openVisitaTour('casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno')" aria-label="Avvia visita virtuale — casa singola ad Altichiero, Padova">
+          <div class="vt-stage vt-tilt-l">
+            <div class="vt-3d-frame">
+              <div class="vt-img-wrap">
+                <img src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963017206-casa-singola-altichiero-4-.jpg" alt="Visita virtuale — interni casa singola ad Altichiero, Padova" width="640" height="480" loading="lazy">
+                <span class="vt-badge" aria-hidden="true">360°</span>
+                <span class="vt-card-play" aria-hidden="true"><span class="vt-card-play-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#152435" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg></span></span>
+              </div>
+            </div>
+            <div class="vt-caption">
+              <strong>Altichiero — Padova</strong>
+              <span>9 ambienti · casa singola ristrutturata</span>
             </div>
           </div>
-          <div style="padding:18px 20px">
-            <div style="color:#FFD23F;font-size:0.8rem;margin-bottom:6px;letter-spacing:2px">★★★★★</div>
-            <p style="font-size:0.82rem;color:rgba(255,255,255,0.8);line-height:1.6;font-style:italic;margin-bottom:10px">"Venduto in 30 giorni esatti. Non ci credevo, ma il team di Gino ha fatto tutto."</p>
-            <div style="font-size:0.72rem;font-weight:700;color:white">Marco B. — <span style="color:rgba(255,255,255,0.65);font-weight:400">Padova Centro</span></div>
-          </div>
-        </div>
-        <div class="rv d2" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;overflow:hidden;transition:all 0.3s" onmouseover="this.style.borderColor='rgba(255,107,53,0.3)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
-          <div style="position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,rgba(44,74,110,0.3),rgba(21,36,53,0.5));display:flex;align-items:center;justify-content:center;cursor:pointer" onclick="this.innerHTML='<iframe src=\'https://www.youtube.com/embed/1JM_lXuqLHM?autoplay=1&rel=0\' allow=\'accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture\' allowfullscreen loading=\'lazy\' title=\'Famiglia Zanetti — casa venduta a Limena\' style=\'width:100%;height:100%;border:none\'></iframe>'">
-            <img src="https://img.youtube.com/vi/1JM_lXuqLHM/hqdefault.jpg" alt="Video testimonianza — famiglia soddisfatta acquisto casa Limena" width="480" height="270" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.6">
-            <div style="position:relative;z-index:1;width:56px;height:56px;background:rgba(255,107,53,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform 0.2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="#152435" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </button>
+        <button type="button" class="vt-card-link rv d2" onclick="openVisitaTour('casa-singola-con-ampio-giardino-a-grisignano-di-zocco')" aria-label="Avvia visita virtuale — casa con giardino a Grisignano di Zocco">
+          <div class="vt-stage vt-tilt-r">
+            <div class="vt-3d-frame">
+              <div class="vt-img-wrap">
+                <img src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730308158-chatgpt-image-25-mag-2026-15-49-27.png" alt="Visita virtuale — casa con ampio giardino a Grisignano di Zocco" width="640" height="480" loading="lazy">
+                <span class="vt-badge" aria-hidden="true">360°</span>
+                <span class="vt-card-play" aria-hidden="true"><span class="vt-card-play-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#152435" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg></span></span>
+              </div>
+            </div>
+            <div class="vt-caption">
+              <strong>Grisignano di Zocco</strong>
+              <span>8 ambienti · giardino e spazi esterni</span>
             </div>
           </div>
-          <div style="padding:18px 20px">
-            <div style="color:#FFD23F;font-size:0.8rem;margin-bottom:6px;letter-spacing:2px">★★★★★</div>
-            <p style="font-size:0.82rem;color:rgba(255,255,255,0.8);line-height:1.6;font-style:italic;margin-bottom:10px">"Trovata la casa dei sogni in meno di un mese. Un servizio impeccabile dall'inizio alla fine."</p>
-            <div style="font-size:0.72rem;font-weight:700;color:white">Famiglia Zanetti — <span style="color:rgba(255,255,255,0.65);font-weight:400">Limena</span></div>
+        </button>
+        <button type="button" class="vt-card-link rv d3" onclick="openVisitaTour('elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova')" aria-label="Avvia visita virtuale — quadrilocale a Mandria, Padova">
+          <div class="vt-stage vt-tilt-r">
+            <div class="vt-3d-frame">
+              <div class="vt-img-wrap">
+                <img src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777994309447-000-appartamento-2-piano-mandria-padova-righetto-immobiliare-1-wmk-0.jpg" alt="Visita virtuale — appartamento quadrilocale a Mandria, Padova" width="640" height="480" loading="lazy">
+                <span class="vt-badge" aria-hidden="true">360°</span>
+                <span class="vt-card-play" aria-hidden="true"><span class="vt-card-play-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#152435" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg></span></span>
+              </div>
+            </div>
+            <div class="vt-caption">
+              <strong>Mandria — Padova</strong>
+              <span>9 ambienti · quadrilocale luminoso</span>
+            </div>
           </div>
-        </div>
+        </button>
+        <button type="button" class="vt-card-link rv d4" onclick="openVisitaTour('bi-familiare-indipendente-in-vendita-nel-cuore-di-sacrocuore-padova')" aria-label="Avvia visita virtuale — bi-familiare a Sacrocuore, Padova">
+          <div class="vt-stage vt-tilt-l">
+            <div class="vt-3d-frame">
+              <div class="vt-img-wrap">
+                <img src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777567859897-sacro-cuore-bi-familiare-righetto-10-.png" alt="Visita virtuale — bi-familiare indipendente a Sacrocuore, Padova" width="640" height="480" loading="lazy">
+                <span class="vt-badge" aria-hidden="true">360°</span>
+                <span class="vt-card-play" aria-hidden="true"><span class="vt-card-play-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#152435" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg></span></span>
+              </div>
+            </div>
+            <div class="vt-caption">
+              <strong>Sacrocuore — Padova</strong>
+              <span>8 ambienti · bi-familiare indipendente</span>
+            </div>
+          </div>
+        </button>
       </div>
     </div>
     <div class="rv sr" style="text-align:center;margin-top:36px">
@@ -1628,29 +1662,39 @@ setTimeout(l,8000);['scroll','touchstart','mousemove','keydown','click'].forEach
 })();</script>
 <script src="js/homepage.js?v=7" defer></script>
 <script>
-/* ══ VIDEO FACADE — riproduce MP4 Righetto al click ══ */
-function loadVideo(wrap) {
-  var vid = wrap.querySelector('.video-native');
-  var f = wrap.querySelector('.video-facade');
-  var v = wrap.querySelector('.video-vignette');
-  var b = wrap.querySelector('.video-spot-badge');
-  var bar = wrap.querySelector('.video-bar');
-  if (!vid) return;
-  if (f) f.style.display = 'none';
-  if (v) v.style.display = 'none';
-  if (b) b.style.display = 'none';
-  if (bar) bar.style.display = 'none';
-  wrap.classList.add('is-playing');
-  wrap.onclick = null;
-  vid.controls = true;
-  vid.muted = false;
-  var p = vid.play();
-  if (p && p.catch) p.catch(function() { vid.muted = true; vid.play(); });
+function openVisitaTour(slug) {
+  var modal = document.getElementById('vtModal');
+  var frame = document.getElementById('vtModalFrame');
+  if (!modal || !frame || !slug) return;
+  frame.src = 'visita-virtuale.html?slug=' + encodeURIComponent(slug) + '&embed=1';
+  modal.classList.add('is-open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
 }
+function closeVisitaTour() {
+  var modal = document.getElementById('vtModal');
+  var frame = document.getElementById('vtModalFrame');
+  if (!modal) return;
+  modal.classList.remove('is-open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  if (frame) frame.src = 'about:blank';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeVisitaTour();
+});
 </script>
 <script src="js/nav-mobile.js?v=3" defer></script>
 <script src="js/lead-conversion.js?v=4" defer></script>
 <script src="js/cookie-consent.js?v=3" defer></script>
+<!-- Modal visita virtuale -->
+<div class="vt-modal" id="vtModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Visita virtuale immobile">
+  <div class="vt-modal-backdrop" onclick="closeVisitaTour()"></div>
+  <div class="vt-modal-panel">
+    <button type="button" class="vt-modal-close" onclick="closeVisitaTour()" aria-label="Chiudi visita virtuale">&times;</button>
+    <iframe class="vt-modal-frame" id="vtModalFrame" title="Visita virtuale Righetto Immobiliare" loading="lazy"></iframe>
+  </div>
+</div>
 <!-- STICKY MOBILE CTA -->
 <div class="sticky-cta-mobile" id="stickyCta">
   <div class="sticky-cta-inner">

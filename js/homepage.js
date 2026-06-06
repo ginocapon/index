@@ -501,7 +501,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
-    'righetto immobiliare dal 2000: storia, zone e ultime acquisizioni': { img: 'img/team/titolari.webp', url: 'blog-righetto-storia-territorio-acquisizioni-2026' },
+    'righetto immobiliare dal 2000: storia, zone e ultime acquisizioni': { img: 'img/team/righetto-noi-ci-siamo-video-poster.png', url: 'blog-righetto-storia-territorio-acquisizioni-2026' },
     'gestione spese casa dopo l\'acquisto a padova 2026: energia, imu, dispensa': { img: 'img/blog/blog-gestione-spese-casa-padova-2026.webp', url: 'blog-gestione-spese-casa-risparmio-padova-2026' },
     'come scegliere l\'immobile giusto a padova 2026: zona, luce, condominio': { img: 'img/blog/blog-scegliere-immobile-giusto-padova-2026.webp', url: 'blog-scegliere-immobile-giusto-padova-2026' },
     'quattro imposte al rogito prima casa padova 2026: iva, registro, ipotecaria, catastale': { img: 'img/blog/blog-quattro-imposte-rogitio-prima-casa-padova-2026.webp', url: 'blog-quattro-imposte-rogitio-prima-casa-padova-2026' },
@@ -583,7 +583,7 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
-    { titolo: "Righetto Immobiliare dal 2000: storia, zone e ultime acquisizioni", categoria: "Vita d'Agenzia", data: '2026-06-04', stato: 'pubblicato', immagine_copertina: 'img/team/titolari.webp', url_statico: 'blog-righetto-storia-territorio-acquisizioni-2026' },
+    { titolo: "Righetto Immobiliare dal 2000: storia, zone e ultime acquisizioni", categoria: "Vita d'Agenzia", data: '2026-06-04', stato: 'pubblicato', immagine_copertina: 'img/team/righetto-noi-ci-siamo-video-poster.png', url_statico: 'blog-righetto-storia-territorio-acquisizioni-2026' },
     { titolo: "Gestione spese casa dopo l'acquisto a Padova 2026: energia, IMU, dispensa", categoria: "Guida acquirenti", data: '2026-06-03', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-gestione-spese-casa-padova-2026.webp', url_statico: 'blog-gestione-spese-casa-risparmio-padova-2026' },
     { titolo: "Come scegliere l'immobile giusto a Padova 2026: zona, luce, condominio", categoria: "Guida acquirenti", data: '2026-06-03', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-scegliere-immobile-giusto-padova-2026.webp', url_statico: 'blog-scegliere-immobile-giusto-padova-2026' },
     { titolo: "Quattro imposte al rogito prima casa Padova 2026: IVA, registro, ipotecaria, catastale", categoria: "Fisco", data: '2026-06-03', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-quattro-imposte-rogitio-prima-casa-padova-2026.webp', url_statico: 'blog-quattro-imposte-rogitio-prima-casa-padova-2026' },
