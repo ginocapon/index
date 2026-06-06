@@ -8,8 +8,15 @@
 // Chiave segreta per autorizzare le richieste (CAMBIA QUESTA!)
 define('API_SECRET', 'RighettoMail2026!SecretKey');
 
-// CORS
-header('Access-Control-Allow-Origin: *');
+// CORS — solo domini Righetto (Edge Function server-side non invia Origin)
+$allowed_origins = ['https://righettoimmobiliare.it', 'https://www.righettoimmobiliare.it'];
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+if ($origin && in_array($origin, $allowed_origins, true)) {
+    header('Access-Control-Allow-Origin: ' . $origin);
+} else {
+    header('Access-Control-Allow-Origin: https://righettoimmobiliare.it');
+}
+header('Vary: Origin');
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-API-Key');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Content-Type: application/json; charset=utf-8');
