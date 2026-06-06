@@ -90,12 +90,12 @@ python tools/check_live_admin_secret.py   # opzionale: allineamento segreto admi
 
 | Livello | Rilevazione | Stato | Remediation |
 |---------|-------------|-------|-------------|
-| 🔴 Critico | `ADMIN_PASSWORD` in chiaro in `admin.html` (repo pubblico GitHub) | **Aperto** | Usare placeholder CI + secret; password lunga unica; 2FA obbligatorio |
+| 🔴 Critico | `ADMIN_PASSWORD` in chiaro in `admin.html` (repo pubblico GitHub) | **Risolto** | Placeholder `__RIGHETTO_ADMIN_PW_JSON__` + secret GitHub `ADMIN_PASSWORD` |
 | 🔴 Critico | `API_SECRET` default in `api/send-mail.php` nel repo | **Aperto** | Ruotare su cPanel; non committare valore produzione |
 | 🟠 Alto | `RIG_ADMIN_RLS_SECRET` nel client admin (chiunque legge il sorgente) | **Mitigato** | Necessario per RLS header; ruotare periodicamente; preferire RPC admin (`rig-admin-rpc-immobili.sql`) |
-| 🟠 Alto | Edge `send_test` invocabile con anon key; body può teorizzare destinatario custom | **Da verificare** | Hardcodare `to_email` lato Edge; rate limit IP |
+| 🟠 Alto | Edge `send_test` invocabile con anon key; body può teorizzare destinatario custom | **Risolto** | `send_test` pubblico → solo `info@righettoimmobiliare.it`; admin con header `x-righetto-admin` + secret Edge `RIG_ADMIN_RLS_SECRET` |
 | 🟡 Medio | Chiave Supabase `anon` in molti JS (normale) | **OK se RLS** | Eseguire `check_rls_exposure.py` ogni revisione |
-| 🟡 Medio | CORS `*` su `send-mail.php` | **Aperto** | Limitare a `righettoimmobiliare.it` + Supabase Edge |
+| 🟡 Medio | CORS `*` su `send-mail.php` | **Risolto** | CORS limitato a domini Righetto |
 | 🟢 OK | `robots.txt` blocca `/admin.html` | OK | — |
 | 🟢 OK | `sql/rls-security-hardening.sql` documentato | OK | Verificare applicato in progetto live |
 | 🟢 OK | `.gitignore` esclude `.env` | OK | — |
@@ -105,9 +105,11 @@ python tools/check_live_admin_secret.py   # opzionale: allineamento segreto admi
 
 ## 5. HARDENING PRIORITARIO (backlog)
 
-1. **Password admin fuori dal repo** — workflow `static.yml` già supporta `ADMIN_PASSWORD` secret.
-2. **Edge `sendTestEmail`** — forzare destinatario `info@righettoimmobiliare.it`; ignorare `to_email` dal client pubblico.
+1. ~~**Password admin fuori dal repo**~~ — fatto: verificare secret `ADMIN_PASSWORD` in GitHub Actions.
+2. ~~**Edge `sendTestEmail`**~~ — fatto: deploy Edge + secret Supabase `RIG_ADMIN_RLS_SECRET` = valore in `admin.html`.
 3. **RLS live** — rieseguire `sql/rls-security-hardening.sql` se mail Supabase segnala «publicly accessible».
+4. **Deploy Edge `send-email`** dopo modifica sicurezza: `supabase secrets set RIG_ADMIN_RLS_SECRET=<stesso valore di admin.html>` poi `supabase functions deploy send-email`.
+5. **GitHub** — secret `ADMIN_PASSWORD` obbligatorio (workflow `static.yml` inietta in `admin.html`).
 4. **CSP header** — valutare Content-Security-Policy su GitHub Pages (via meta o proxy futuro).
 5. **WAF** — non bloccare Google-Agent / bot AI legittimi (vedi SKILL-2.0 §1.1b).
 

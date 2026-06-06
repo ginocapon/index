@@ -42,12 +42,10 @@ else
 fi
 
 # Password admin in chiaro
-if grep -q 'const ADMIN_PASSWORD = "' admin.html 2>/dev/null; then
-  if grep -q '__RIGHETTO_ADMIN_PW_JSON__' admin.html 2>/dev/null; then
-    log_ok "admin.html usa placeholder CI per password"
-  else
-    log_err "ADMIN_PASSWORD in chiaro in admin.html — usare secret GitHub ADMIN_PASSWORD"
-  fi
+if grep -q '__RIGHETTO_ADMIN_PW_JSON__' admin.html 2>/dev/null; then
+  log_ok "admin.html usa placeholder CI per password (secret GitHub ADMIN_PASSWORD)"
+elif grep -qE 'const ADMIN_PASSWORD = "[^"]+";' admin.html 2>/dev/null; then
+  log_err "ADMIN_PASSWORD in chiaro in admin.html — usare __RIGHETTO_ADMIN_PW_JSON__ + secret GitHub"
 else
   log_ok "Nessuna ADMIN_PASSWORD letterale in admin.html"
 fi

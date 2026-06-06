@@ -12,9 +12,18 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-righetto-admin",
   "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
 };
+
+const NOTIFY_EMAIL = (Deno.env.get("NOTIFY_EMAIL") || "info@righettoimmobiliare.it").trim();
+
+function isAdminRequest(req: Request): boolean {
+  const expected = (Deno.env.get("RIG_ADMIN_RLS_SECRET") || "").trim();
+  if (!expected) return false;
+  const got = (req.headers.get("x-righetto-admin") || "").trim();
+  return got === expected;
+}
 
 // ═══ INVIO VIA PHP RELAY (tuo cPanel) ═══
 async function sendViaRelay(options: {
@@ -93,7 +102,7 @@ serve(async (req) => {
 
     if (action === "send_single") return await sendSingleEmail(supabase, body);
     if (action === "process_queue") return await processQueue(supabase, body);
-    if (action === "send_test") return await sendTestEmail(supabase, body);
+    if (action === "send_test") return await sendTestEmail(supabase, body, req);
     if (action === "unsubscribe") return await handleUnsubscribe(supabase, body);
     if (action === "track_open") return await trackOpen(supabase, body);
     if (action === "track_click") return await trackClick(supabase, body);
@@ -283,9 +292,11 @@ async function processQueue(supabase: any, body: any) {
 }
 
 // ═══ EMAIL DI TEST ═══
-async function sendTestEmail(supabase: any, body: any) {
-  const { to_email, subject, html_body, sender_email, sender_name, reply_to } = body;
+async function sendTestEmail(supabase: any, body: any, req: Request) {
+  const { subject, html_body, sender_email, sender_name, reply_to } = body;
   const config = await getEmailConfig(supabase);
+  const admin = isAdminRequest(req);
+  const to_email = admin && body.to_email ? body.to_email : NOTIFY_EMAIL;
 
   if (!to_email || !isValidEmail(to_email)) {
     return jsonResponse({ status: "error", error: "Email destinatario non valida: " + (to_email || "(vuoto)") }, 400);

@@ -4780,8 +4780,8 @@ META_IG_USER_ID=...</pre>
 // ══════════════════════════════════════
 const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
-/* Password admin: in repo (visibile su GitHub). Opzionale: in CI si può ancora usare il segnaposto "__RIGHETTO_ADMIN_PW_JSON__" + secret ADMIN_PASSWORD. */
-const ADMIN_PASSWORD = "Spazio1999!";
+/* Password admin: iniettata in CI da secret GitHub ADMIN_PASSWORD (static.yml). Non committare password in chiaro. */
+const ADMIN_PASSWORD = "__RIGHETTO_ADMIN_PW_JSON__";
 
 const URL_KEY = 'RIG2024';
 
@@ -14290,7 +14290,8 @@ showSection = function(name) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + SUPABASE_KEY
+          'Authorization': 'Bearer ' + SUPABASE_KEY,
+          'x-righetto-admin': RIG_ADMIN_RLS_SECRET
         },
         body: JSON.stringify({
           action: 'send_test',
@@ -14416,7 +14417,8 @@ showSection = function(name) {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + SUPABASE_KEY
+            'Authorization': 'Bearer ' + SUPABASE_KEY,
+            'x-righetto-admin': RIG_ADMIN_RLS_SECRET
           },
           body: JSON.stringify({
             action: 'send_single',
