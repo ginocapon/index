@@ -47,6 +47,7 @@ Allineato a `context-map.json`:
 | Audit SEO | essentials + seo | `righetto-seo-geo` |
 | Social cron | essentials + social-automation | `righetto-social-automation` |
 | RLS / admin | essentials + context | `righetto-supabase-admin` |
+| Audit sicurezza (2×/sett.) | essentials + security | `righetto-supabase-admin` |
 
 ---
 
