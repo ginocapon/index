@@ -1588,7 +1588,7 @@ function initChatbotUI() {
   const engine = new RighettoChat();
 
   // Avatar Linda — foto reale
-  const SARA_AVATAR = "img/team/real-state-linda-righetto.webp";
+  const SARA_AVATAR = "img/team/real-state-linda-righetto.webp?v=20260606";
 
   const html = `
   <style>
