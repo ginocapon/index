@@ -24,7 +24,7 @@
 1. **Leggi prima** il file da modificare — mai al buio
 2. **Mobile-first** — ogni modifica deve funzionare su mobile
 3. **No librerie extra** — vanilla HTML/CSS/JS (zero framework, zero CDN esterni)
-4. **Commit** chiari e descrittivi in italiano
+4. **Commit + push automatici** — vedi §1.1 sotto (non chiedere conferma a fine task)
 5. **Mai toccare** DNS, record MX, cPanel senza conferma esplicita dell'utente
 6. **Aggiorna sitemap.xml** quando aggiungi/rimuovi pagine
 7. **Performance** — mai animazioni sull'elemento LCP senza `animation-play-state: paused`
@@ -43,7 +43,24 @@
 ### Stile di comunicazione
 - Rispondi in italiano
 - Diretto e pratico
-- Proponi sempre prima di agire su operazioni irreversibili
+- Proponi sempre prima di agire su operazioni irreversibili (eccetto commit/push: vedi §1.1)
+
+### 1.1 Commit e push automatici (OBBLIGATORIO — giugno 2026)
+Dopo **ogni** task che produce o modifica file nel repo (pagine, blog, CSS/JS, script, asset, skill, sitemap, seed admin), l'agente **committa e pusha senza chiedere** — così il sito su GitHub Pages si aggiorna e non si sprecano turni a «vuoi push?».
+
+**Flusso standard (fine task):**
+1. `git status` + `git diff` — verifica cosa va incluso
+2. **Non** aggiungere `.env`, credenziali, segreti
+3. `git add` solo file pertinenti al task
+4. Commit in **italiano**, 1–2 frasi sul *perché*
+5. `git push origin main` (o branch del task con `-u` se diverso da `main`)
+6. In risposta all'utente: hash commit + conferma push (breve)
+
+**Eccezioni (NON commit/push):**
+- Solo domande, review o spiegazioni **senza** modifiche ai file
+- L'utente chiede esplicitamente di **non** committare o di lasciare bozza locale
+- Hook pre-commit fallito → correggere e **nuovo** commit (mai `--no-verify` salvo richiesta esplicita)
+- Working tree già pulito → niente commit vuoto
 
 ---
 
@@ -87,6 +104,8 @@
 ---
 
 ## 3. VERIFICHE POST-MODIFICA
+
+- [ ] **Commit + push eseguiti** se ci sono file modificati (§1.1) — non delegare all'utente
 
 **Automatiche (pre-commit hook):**
 - `node scripts/validate-page.js --staged`

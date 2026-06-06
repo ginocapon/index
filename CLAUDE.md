@@ -39,7 +39,7 @@ La skill e' l'unica fonte di verita' per questo progetto.
 
 ### Dopo ogni modifica:
 - Aggiornare sitemap.xml se pagine aggiunte/rimosse
-- Commit in italiano, descrittivo
+- **Commit + push automatici** (senza chiedere): vedi `TEST-SKILL/skill-essentials.md` §**1.1** — messaggio in italiano, no `.env`/segreti, poi `git push`
 - Verificare checklist automatiche in SKILL-2.0.md Sezione 5
 
 ### Pubblicazione:
