@@ -40,8 +40,9 @@
   pointer-events: none;
 }
 .video-wrap { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 16/9; background: #000; cursor: pointer; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12); }
+.video-wrap-link { display: block; text-decoration: none; color: inherit; }
 .video-wrap.is-playing { cursor: default; }
-.video-native { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.video-native, .video-poster-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
 .video-wrap:not(.is-playing) .video-native { pointer-events: none; }
 /* Vignetta */
 .video-vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.25) 100%), linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 30%, transparent 60%, rgba(0,0,0,0.45) 100%); z-index: 1; pointer-events: none; }
@@ -69,6 +70,100 @@
   .video-3d-frame { transform: none; }
   .video-stage:hover .video-3d-frame { transform: translateY(-4px) scale(1.01); }
   #video-intro { padding: 48px 20px; }
+}
+/* VISITE VIRTUALI — card 3D (stesso linguaggio di .video-3d-frame) */
+.vt-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 24px; }
+.vt-card-link {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  text-decoration: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+.vt-stage { perspective: 900px; }
+.vt-3d-frame {
+  position: relative;
+  padding: 6px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, var(--oro) 0%, var(--blu2) 55%, var(--nero) 100%);
+  box-shadow:
+    0 22px 44px rgba(21,36,53,0.26),
+    0 10px 22px rgba(255,107,53,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.4),
+    inset 0 -2px 6px rgba(21,36,53,0.3);
+  transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), box-shadow 0.45s ease;
+}
+.vt-tilt-l .vt-3d-frame { transform: rotateY(-5deg) rotateX(3deg) translateZ(0); }
+.vt-tilt-r .vt-3d-frame { transform: rotateY(5deg) rotateX(3deg) translateZ(0); }
+.vt-stage:hover .vt-3d-frame,
+.vt-card-link:focus-visible .vt-3d-frame {
+  transform: rotateY(0deg) rotateX(0deg) translateY(-6px) scale(1.02);
+  box-shadow:
+    0 30px 58px rgba(21,36,53,0.3),
+    0 14px 28px rgba(255,107,53,0.24),
+    inset 0 1px 0 rgba(255,255,255,0.48);
+}
+.vt-3d-frame::after {
+  content: '';
+  position: absolute;
+  inset: -8px -14px -14px 6px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(255,107,53,0.16), rgba(44,74,110,0.1));
+  filter: blur(16px);
+  z-index: -1;
+  pointer-events: none;
+}
+.vt-img-wrap {
+  position: relative;
+  isolation: isolate;
+  border-radius: 13px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background: #0d1828;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
+}
+.vt-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.vt-stage:hover .vt-img-wrap img,
+.vt-card-link:focus-visible .vt-img-wrap img { transform: scale(1.04); }
+.vt-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(21,36,53,0.78);
+  border: 1px solid rgba(255,107,53,0.45);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.92);
+}
+.vt-caption { margin-top: 14px; padding: 0 4px; }
+.vt-caption strong { display: block; font-size: 0.82rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.vt-caption span { font-size: 0.72rem; color: rgba(255,255,255,0.68); line-height: 1.5; }
+.vt-intro { font-size: 0.82rem; color: rgba(255,255,255,0.72); line-height: 1.65; max-width: 520px; margin: 10px auto 0; }
+@media(max-width:768px){
+  .vt-grid { grid-template-columns: 1fr; gap: 24px; }
+  .vt-tilt-l .vt-3d-frame,
+  .vt-tilt-r .vt-3d-frame { transform: none; }
+  .vt-stage:hover .vt-3d-frame,
+  .vt-card-link:focus-visible .vt-3d-frame { transform: translateY(-4px) scale(1.01); }
 }
 /* EVIDENZA */
 #evidenza{background:var(--sfondo);padding:90px 44px}

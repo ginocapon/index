@@ -1,0 +1,68 @@
+{
+  "casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno": {
+    "titolo": "Casa singola ad Altichiero",
+    "comune": "Padova",
+    "codice": "LP0286",
+    "cover": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963017206-casa-singola-altichiero-4-.jpg",
+    "scenes": [
+      { "id": "esterno", "nome": "Esterno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963012437-casa-singola-altichiero-1-.png" },
+      { "id": "ingresso", "nome": "Ingresso", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963017206-casa-singola-altichiero-4-.jpg" },
+      { "id": "soggiorno", "nome": "Soggiorno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963022064-casa-singola-altichiero-7-.jpg" },
+      { "id": "zona-pranzo", "nome": "Zona pranzo", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963020395-casa-singola-altichiero-6-.jpg" },
+      { "id": "cucina", "nome": "Cucina", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963023225-casa-singola-altichiero-10-.jpg" },
+      { "id": "camera-1", "nome": "Camera da letto", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963024109-casa-singola-altichiero-12-.jpg" },
+      { "id": "camera-2", "nome": "Seconda camera", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963025620-casa-singola-altichiero-15-.jpg" },
+      { "id": "bagno", "nome": "Bagno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963026188-casa-singola-altichiero-16-.jpg" },
+      { "id": "giardino", "nome": "Giardino", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963031190-casa-singola-altichiero-27-.jpg" }
+    ]
+  },
+  "casa-singola-con-ampio-giardino-a-grisignano-di-zocco": {
+    "titolo": "Casa con giardino — Grisignano",
+    "comune": "Grisignano di Zocco",
+    "codice": "LP0284-V",
+    "cover": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730308158-chatgpt-image-25-mag-2026-15-49-27.png",
+    "scenes": [
+      { "id": "esterno", "nome": "Esterno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730308158-chatgpt-image-25-mag-2026-15-49-27.png" },
+      { "id": "facciata", "nome": "Facciata", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730311536-chatgpt-image-25-mag-2026-15-40-32.png" },
+      { "id": "soggiorno", "nome": "Soggiorno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730266664-casa-singola-un-piano-8-.png" },
+      { "id": "zona-giorno", "nome": "Zona giorno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730268551-casa-singola-un-piano-9-.png" },
+      { "id": "cucina", "nome": "Cucina", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730271146-casa-singola-un-piano-10-.png" },
+      { "id": "camera", "nome": "Camera da letto", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730272941-casa-singola-un-piano-11-.png" },
+      { "id": "bagno", "nome": "Bagno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730274243-casa-singola-un-piano-12-.png" },
+      { "id": "giardino", "nome": "Giardino", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730284289-casa-singola-un-piano-1-.png" }
+    ]
+  },
+  "elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova": {
+    "titolo": "Quadrilocale a Mandria",
+    "comune": "Padova",
+    "codice": "LA0317",
+    "cover": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777994309447-000-appartamento-2-piano-mandria-padova-righetto-immobiliare-1-wmk-0.jpg",
+    "scenes": [
+      { "id": "ingresso", "nome": "Ingresso", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777994309447-000-appartamento-2-piano-mandria-padova-righetto-immobiliare-1-wmk-0.jpg" },
+      { "id": "soggiorno", "nome": "Soggiorno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777994302076-005-appartamento-2-piano-mandria-padova-righetto-immobiliare-5-wmk-0.jpg" },
+      { "id": "zona-pranzo", "nome": "Zona pranzo", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777994302441-006-appartamento-2-piano-mandria-padova-righetto-immobiliare-6-wmk-0.jpg" },
+      { "id": "cucina", "nome": "Cucina", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777994302852-007-appartamento-2-piano-mandria-padova-righetto-immobiliare-4-wmk-0.jpg" },
+      { "id": "balcone", "nome": "Balcone", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777994303160-008-appartamento-2-piano-mandria-padova-righetto-immobiliare-10-wmk-0.jpg" },
+      { "id": "camera-1", "nome": "Camera matrimoniale", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777994304852-014-camera-da-letto-luminosa-e-moderna-wmk-0.png" },
+      { "id": "camera-2", "nome": "Seconda camera", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777994305815-015-appartamento-2-piano-mandria-padova-righetto-immobiliare-11-wmk-0.jpg" },
+      { "id": "bagno", "nome": "Bagno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777994306383-017-appartamento-2-piano-mandria-padova-righetto-immobiliare-15-wmk-0.jpg" },
+      { "id": "corridoio", "nome": "Corridoio", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777994306666-018-corridoio-minimalista-e-luminoso-wmk-0.png" }
+    ]
+  },
+  "bi-familiare-indipendente-in-vendita-nel-cuore-di-sacrocuore-padova": {
+    "titolo": "Bi-familiare a Sacrocuore",
+    "comune": "Padova",
+    "codice": "LP0283",
+    "cover": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777567859897-sacro-cuore-bi-familiare-righetto-10-.png",
+    "scenes": [
+      { "id": "esterno", "nome": "Esterno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777567835671-sacro-cuore-bi-familiare-righetto-1-.png" },
+      { "id": "facciata", "nome": "Facciata", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777567859897-sacro-cuore-bi-familiare-righetto-10-.png" },
+      { "id": "soggiorno", "nome": "Soggiorno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777567837354-sacro-cuore-bi-familiare-righetto-2-.jpg" },
+      { "id": "zona-giorno", "nome": "Zona giorno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777567847859-sacro-cuore-bi-familiare-righetto-5-.jpg" },
+      { "id": "cucina", "nome": "Cucina", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777567851237-sacro-cuore-bi-familiare-righetto-6-.jpg" },
+      { "id": "camera", "nome": "Camera da letto", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777567841113-sacro-cuore-bi-familiare-righetto-3-.jpg" },
+      { "id": "studio", "nome": "Studio", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777567844533-sacro-cuore-bi-familiare-righetto-4-.jpg" },
+      { "id": "bagno", "nome": "Bagno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777567849554-sacro-cuore-bi-familiare-righetto-5-.png" }
+    ]
+  }
+}
