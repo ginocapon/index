@@ -2,40 +2,28 @@
 name: Deploy static content to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
   actions: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Se in admin.html c'è il segnaposto "__RIGHETTO_ADMIN_PW_JSON__", sostituisce con secret ADMIN_PASSWORD.
-      # Altrimenti usa la password già scritta nel file (deploy dal branch ok).
-      - name: Inject admin password (opzionale)
+      - name: Inject admin password
         env:
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
         run: |
@@ -58,14 +46,19 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Upload artifact
-        id: pages-artifact
+
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
           path: '.'
 
-      # Re-run o retry upload possono lasciare 2 artifact "github-pages" nello stesso run.
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Prune duplicate github-pages artifacts
         env:
           GH_TOKEN: ${{ github.token }}
