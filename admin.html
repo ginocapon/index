@@ -4805,6 +4805,20 @@ let allImmobili = [];
 // ══════════════════════════════════════
 let pendingTotpSecret = null; // used during 2FA setup
 
+function isLiveAdminHost() {
+  const host = (location.hostname || '').replace(/^www\./i, '');
+  return host === 'righettoimmobiliare.it' || host.endsWith('.github.io');
+}
+
+function warnIfAdminPasswordNotDeployed() {
+  if (ADMIN_PASSWORD !== '__RIGHETTO_ADMIN_PW_JSON__' || !isLiveAdminHost()) return false;
+  const errEl = document.getElementById('loginError');
+  if (!errEl) return true;
+  errEl.textContent = 'Password non pubblicata sul sito: in GitHub vai su Settings → Pages → Source = GitHub Actions, poi riesegui il workflow Deploy static content to Pages (deve essere verde).';
+  errEl.style.display = 'block';
+  return true;
+}
+
 function checkAuth() {
   const params = new URLSearchParams(window.location.search);
   const urlKey = params.get('key');
@@ -4832,6 +4846,8 @@ function checkAuth() {
     } else {
       grantAccess();
     }
+  } else {
+    warnIfAdminPasswordNotDeployed();
   }
 }
 
@@ -4849,6 +4865,7 @@ function grantAccess() {
 
 function doLogin() {
   const errEl = document.getElementById('loginError');
+  if (warnIfAdminPasswordNotDeployed()) return;
   const pass = document.getElementById('loginPass').value.trim();
   if (pass !== ADMIN_PASSWORD) {
     errEl.textContent = 'Password non corretta.';
