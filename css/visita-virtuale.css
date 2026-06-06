@@ -7,9 +7,7 @@
   --vv-muted: rgba(255, 255, 255, 0.62);
 }
 
-*, *::before, *::after { box-sizing: border-box; }
-
-html, body {
+body.vv-page {
   margin: 0;
   height: 100%;
   background: var(--vv-bg);
@@ -302,86 +300,6 @@ html, body {
 
 .vv-error p { color: var(--vv-muted); font-size: 0.85rem; max-width: 320px; line-height: 1.6; }
 
-/* Modal homepage */
-.vt-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.vt-modal.is-open { display: flex; }
-
-.vt-modal-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(10, 18, 32, 0.82);
-}
-
-.vt-modal-panel {
-  position: relative;
-  width: min(1100px, 100%);
-  height: min(82vh, 760px);
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 107, 53, 0.35);
-  background: #000;
-}
-
-.vt-modal-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 2;
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.92);
-  color: #152435;
-  font-size: 1.4rem;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.vt-modal-frame {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
-}
-
-.vt-card-play {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  background: rgba(10, 18, 32, 0.22);
-  transition: background 0.25s ease;
-}
-
-.vt-stage:hover .vt-card-play { background: rgba(10, 18, 32, 0.08); }
-
-.vt-card-play-icon {
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  background: rgba(255, 107, 53, 0.92);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
-  transition: transform 0.25s ease;
-}
-
-.vt-stage:hover .vt-card-play-icon { transform: scale(1.1); }
-
 @media (max-width: 768px) {
   .vv-topbar { padding: 10px 12px; }
   .vv-btn-text { display: none; }
@@ -389,5 +307,4 @@ html, body {
   .vv-nav-prev { left: 8px; }
   .vv-nav-next { right: 8px; }
   .vv-thumb { flex-basis: 78px; }
-  .vt-modal-panel { height: min(78vh, 640px); border-radius: 14px; }
 }
