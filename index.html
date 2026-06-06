@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="css/fonts.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/nav-mobile.css?v=4" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="css/below-fold.css?v=12" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/below-fold.css?v=13" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/home-enhance.css?v=9" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/modal-incarico-home.css?v=2" media="all">
 <style>
@@ -528,7 +528,7 @@ button{font-family:inherit;cursor:pointer}
   .srch-f{border-right:none;border-bottom:1px solid rgba(44,74,110,0.08)}
   .btn-srch{min-height:58px}
 
-  .vt-grid,.rec-layout{grid-template-columns:1fr!important}
+  .vt-grid{grid-template-columns:1fr!important}
   .mutuo-grid{grid-template-columns:1fr!important}
   .props-grid,.srv-grid,.blog-grid{grid-template-columns:1fr}
   .sf-grid,.fc-grid{grid-template-columns:1fr}
@@ -1260,79 +1260,7 @@ button svg, a.btn-p svg, a.btn-g svg {
       <h2 class="sec-h2 w">Cosa dicono i nostri <em style="color:var(--oro);font-style:italic">clienti</em></h2>
       <p class="sec-p" style="color:rgba(255,255,255,0.72);margin:12px auto 0;text-align:center">Lo studio ha ottenuto 127 recensioni con una media di 4.9 stelle su Google. I nostri clienti raccontano esperienze reali di vendita e acquisto nel capoluogo euganeo e nell'hinterland.</p>
     </div>
-    <!-- Visite virtuali — card 3D -->
-    <div class="rv sr" style="margin-top:48px">
-      <div style="text-align:center;margin-bottom:28px">
-        <div style="display:inline-flex;align-items:center;gap:8px;font-size:0.62rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--oro)">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-          Visite virtuali 360°
-        </div>
-        <p class="vt-intro">Interni e esterni fotografati da noi su immobili reali in provincia di Padova: scorri le stanze come in visita, prima ancora di uscire di casa.</p>
-      </div>
-      <div class="vt-grid sr-stagger">
-        <button type="button" class="vt-card-link rv d1" onclick="openVisitaTour('casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno')" aria-label="Avvia visita virtuale — casa singola ad Altichiero, Padova">
-          <div class="vt-stage vt-tilt-l">
-            <div class="vt-3d-frame">
-              <div class="vt-img-wrap">
-                <img src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963017206-casa-singola-altichiero-4-.jpg" alt="Visita virtuale — interni casa singola ad Altichiero, Padova" width="640" height="480" loading="lazy">
-                <span class="vt-badge" aria-hidden="true">360°</span>
-                <span class="vt-card-play" aria-hidden="true"><span class="vt-card-play-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#152435" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg></span></span>
-              </div>
-            </div>
-            <div class="vt-caption">
-              <strong>Altichiero — Padova</strong>
-              <span>9 ambienti · casa singola ristrutturata</span>
-            </div>
-          </div>
-        </button>
-        <button type="button" class="vt-card-link rv d2" onclick="openVisitaTour('casa-singola-con-ampio-giardino-a-grisignano-di-zocco')" aria-label="Avvia visita virtuale — casa con giardino a Grisignano di Zocco">
-          <div class="vt-stage vt-tilt-r">
-            <div class="vt-3d-frame">
-              <div class="vt-img-wrap">
-                <img src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730308158-chatgpt-image-25-mag-2026-15-49-27.png" alt="Visita virtuale — casa con ampio giardino a Grisignano di Zocco" width="640" height="480" loading="lazy">
-                <span class="vt-badge" aria-hidden="true">360°</span>
-                <span class="vt-card-play" aria-hidden="true"><span class="vt-card-play-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#152435" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg></span></span>
-              </div>
-            </div>
-            <div class="vt-caption">
-              <strong>Grisignano di Zocco</strong>
-              <span>8 ambienti · giardino e spazi esterni</span>
-            </div>
-          </div>
-        </button>
-        <button type="button" class="vt-card-link rv d3" onclick="openVisitaTour('elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova')" aria-label="Avvia visita virtuale — quadrilocale a Mandria, Padova">
-          <div class="vt-stage vt-tilt-r">
-            <div class="vt-3d-frame">
-              <div class="vt-img-wrap">
-                <img src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777994309447-000-appartamento-2-piano-mandria-padova-righetto-immobiliare-1-wmk-0.jpg" alt="Visita virtuale — appartamento quadrilocale a Mandria, Padova" width="640" height="480" loading="lazy">
-                <span class="vt-badge" aria-hidden="true">360°</span>
-                <span class="vt-card-play" aria-hidden="true"><span class="vt-card-play-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#152435" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg></span></span>
-              </div>
-            </div>
-            <div class="vt-caption">
-              <strong>Mandria — Padova</strong>
-              <span>9 ambienti · quadrilocale luminoso</span>
-            </div>
-          </div>
-        </button>
-        <button type="button" class="vt-card-link rv d4" onclick="openVisitaTour('bi-familiare-indipendente-in-vendita-nel-cuore-di-sacrocuore-padova')" aria-label="Avvia visita virtuale — bi-familiare a Sacrocuore, Padova">
-          <div class="vt-stage vt-tilt-l">
-            <div class="vt-3d-frame">
-              <div class="vt-img-wrap">
-                <img src="https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777567859897-sacro-cuore-bi-familiare-righetto-10-.png" alt="Visita virtuale — bi-familiare indipendente a Sacrocuore, Padova" width="640" height="480" loading="lazy">
-                <span class="vt-badge" aria-hidden="true">360°</span>
-                <span class="vt-card-play" aria-hidden="true"><span class="vt-card-play-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#152435" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg></span></span>
-              </div>
-            </div>
-            <div class="vt-caption">
-              <strong>Sacrocuore — Padova</strong>
-              <span>8 ambienti · bi-familiare indipendente</span>
-            </div>
-          </div>
-        </button>
-      </div>
-    </div>
-    <!-- Recensioni: 1 video + scorrimento automatico -->
+    <!-- Recensioni: video a sinistra, scorrimento a destra (mobile: sotto il video) -->
     <div class="rec-block rv sr">
       <div class="rec-head">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
@@ -1375,6 +1303,17 @@ button svg, a.btn-p svg, a.btn-g svg {
           </div>
         </div>
       </div>
+    </div>
+    <!-- Visite virtuali — ultimi immobili con tour (caricamento automatico da Supabase) -->
+    <div class="rv sr vt-section">
+      <div style="text-align:center;margin-bottom:28px">
+        <div style="display:inline-flex;align-items:center;gap:8px;font-size:0.62rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--oro)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          Visite virtuali 360°
+        </div>
+        <p class="vt-intro">Gli ultimi immobili inseriti con tour fotografato da noi: scorri le stanze come in visita, prima ancora di uscire di casa.</p>
+      </div>
+      <div id="vtGridHome" class="vt-grid sr-stagger" aria-live="polite"></div>
     </div>
     <div class="rv sr" style="text-align:center;margin-top:36px">
       <a href="https://maps.app.goo.gl/xuCiRGDCSKskpTSf6?g_st=ic" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;font-size:0.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--oro);border-bottom:1px solid rgba(255,107,53,0.3);padding-bottom:4px;transition:all 0.2s">Leggi tutte le 127 recensioni su Google <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
@@ -1676,7 +1615,7 @@ button svg, a.btn-p svg, a.btn-g svg {
 (function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=5';document.body.appendChild(s);}
 setTimeout(l,8000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
 })();</script>
-<script src="js/homepage.js?v=7" defer></script>
+<script src="js/homepage.js?v=8" defer></script>
 <script>
 function recPlayVideo(el) {
   if (!el || el.querySelector('iframe')) return;

@@ -99,6 +99,9 @@ const PROPS_PREVIEW = 9;
 function escProp(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 }
+function escAttr(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
 
 function propExcerpt(p, maxWords) {
   maxWords = maxWords || 20;
@@ -178,6 +181,79 @@ function renderProps(arr){
       </div>
     </a>`;
   }).join('');
+}
+
+const VT_PREVIEW = 4;
+
+function hasVirtualTour(p) {
+  return Array.isArray(p.virtual_tour_scenes) && p.virtual_tour_scenes.some(function(s) {
+    return s && (s.url || s.thumbnail);
+  });
+}
+
+function vtCaptionLine(p) {
+  const n = (p.virtual_tour_scenes || []).filter(function(s) { return s && (s.url || s.thumbnail); }).length;
+  const tipo = String(p.titolo || p.tipologia || 'Immobile').trim();
+  const short = tipo.length > 52 ? tipo.slice(0, 52) + '…' : tipo;
+  return n + ' ambienti · ' + short;
+}
+
+function vtImmobiliHref(p) {
+  const tab = (p.tipo_operazione || p.tipo_contratto || 'vendita').startsWith('affitto') ? 'affitto' : 'vendita';
+  const params = new URLSearchParams();
+  params.set('tab', tab);
+  if (p.comune) params.set('zona', p.comune);
+  return 'immobili?' + params.toString();
+}
+
+function renderVisiteVirtualiHome(arr) {
+  const grid = document.getElementById('vtGridHome');
+  if (!grid || !arr.length) return;
+  const tilts = ['vt-tilt-l', 'vt-tilt-r', 'vt-tilt-r', 'vt-tilt-l'];
+  grid.innerHTML = arr.map(function(p, i) {
+    const slug = String(p.slug || '').trim();
+    if (!slug) return '';
+    const coverRaw = p.foto_principale || (p.foto_urls && p.foto_urls[0]) || (p.foto && p.foto[0]) || '';
+    const scene0 = (p.virtual_tour_scenes || []).find(function(s) { return s && (s.url || s.thumbnail); });
+    const cover = resolveImageUrl(coverRaw || (scene0 && (scene0.url || scene0.thumbnail)) || '');
+    const comune = p.comune || 'Padova';
+    const href = vtImmobiliHref(p);
+    const label = 'Avvia visita virtuale — ' + (p.titolo || comune);
+    const imgTag = cover
+      ? '<img src="' + escAttr(cover) + '" alt="Visita virtuale — ' + escAttr(p.titolo || comune) + '" width="640" height="480" loading="lazy">'
+      : '<div class="vt-img-ph" aria-hidden="true">360°</div>';
+    return '<button type="button" class="vt-card-link rv d' + (i + 1) + '" data-vt-slug="' + escAttr(slug) + '" onclick="openVisitaTour(this.dataset.vtSlug)" aria-label="' + escAttr(label) + '">'
+      + '<div class="vt-stage ' + tilts[i % tilts.length] + '">'
+      + '<div class="vt-3d-frame"><div class="vt-img-wrap">' + imgTag
+      + '<span class="vt-badge" aria-hidden="true">360°</span>'
+      + '<span class="vt-card-play" aria-hidden="true"><span class="vt-card-play-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#152435" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg></span></span>'
+      + '</div></div>'
+      + '<div class="vt-caption"><strong>' + escProp(comune) + '</strong>'
+      + '<span>' + escProp(vtCaptionLine(p)) + '</span>'
+      + '<a class="vt-annuncio-link" href="' + escAttr(href) + '" onclick="event.stopPropagation()">Cerca tra gli annunci' + (comune ? ' a ' + escProp(comune) : '') + ' →</a>'
+      + '</div></div></button>';
+  }).join('');
+  grid.querySelectorAll('.rv').forEach(function(el) {
+    if (typeof rvObs !== 'undefined') rvObs.observe(el);
+    else el.classList.add('vis');
+  });
+}
+
+async function loadVisiteVirtualiHome() {
+  const grid = document.getElementById('vtGridHome');
+  if (!grid || !sb) return;
+  try {
+    const { data, error } = await sb.from('immobili').select('*')
+      .eq('attivo', true)
+      .eq('venduto', false)
+      .eq('affittato', false)
+      .order('created_at', { ascending: false })
+      .limit(48);
+    if (error || !data || !data.length) return;
+    const tours = data.filter(hasVirtualTour).slice(0, VT_PREVIEW);
+    if (!tours.length) return;
+    renderVisiteVirtualiHome(tours);
+  } catch (e) {}
 }
 
 function showDemoProps(){
@@ -350,6 +426,8 @@ function waitSBThen(fn,tries){
 if(window.innerWidth > 768){
   setTimeout(function(){ waitSBThen(loadImmobili,0); }, 2000);
 }
+/* Visite virtuali homepage: ultimi inseriti con tour, tutti i viewport */
+setTimeout(function(){ waitSBThen(loadVisiteVirtualiHome,0); }, 1200);
 
 /* ══ MODAL INCARICO VENDITA (solo desktop ≥769px, max 1 volta per sessione) — prima di loadBlogHome così il bind esiste anche se Supabase non fa await ══ */
 (function () {
