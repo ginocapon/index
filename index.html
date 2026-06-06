@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="css/fonts.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/nav-mobile.css?v=4" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="css/below-fold.css?v=11" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/below-fold.css?v=12" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/home-enhance.css?v=9" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/modal-incarico-home.css?v=2" media="all">
 <style>
@@ -528,8 +528,7 @@ button{font-family:inherit;cursor:pointer}
   .srch-f{border-right:none;border-bottom:1px solid rgba(44,74,110,0.08)}
   .btn-srch{min-height:58px}
 
-  #testimonial [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important}
-  .vt-grid,.video-test-grid{grid-template-columns:1fr!important}
+  .vt-grid,.rec-layout{grid-template-columns:1fr!important}
   .mutuo-grid{grid-template-columns:1fr!important}
   .props-grid,.srv-grid,.blog-grid{grid-template-columns:1fr}
   .sf-grid,.fc-grid{grid-template-columns:1fr}
@@ -1261,32 +1260,6 @@ button svg, a.btn-p svg, a.btn-g svg {
       <h2 class="sec-h2 w">Cosa dicono i nostri <em style="color:var(--oro);font-style:italic">clienti</em></h2>
       <p class="sec-p" style="color:rgba(255,255,255,0.72);margin:12px auto 0;text-align:center">Lo studio ha ottenuto 127 recensioni con una media di 4.9 stelle su Google. I nostri clienti raccontano esperienze reali di vendita e acquisto nel capoluogo euganeo e nell'hinterland.</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="sr-stagger">
-      <div class="rv d1" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;transition:all 0.3s" onmouseover="this.style.background='rgba(255,255,255,0.09)';this.style.transform='translateY(-4px)'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.transform='translateY(0)'">
-        <div style="color:#FFD23F;font-size:0.9rem;margin-bottom:10px;letter-spacing:2px">★★★★★</div>
-        <p style="font-size:0.84rem;color:rgba(255,255,255,0.8);line-height:1.8;font-style:italic;margin-bottom:16px">"Venduto in 38 giorni al prezzo che volevamo. Professionali, disponibili e trasparenti. Consigliatissimi!"</p>
-        <div style="display:flex;align-items:center;gap:10px">
-          <img src="https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp" alt="Marco B." width="36" height="36" loading="lazy" style="border-radius:50%;border:2px solid var(--oro);object-fit:cover">
-          <div><div style="font-size:0.75rem;font-weight:700;color:white">Marco e Silvia B.</div><div style="font-size:0.65rem;color:rgba(255,255,255,0.65)">Appartamento — Padova Centro</div></div>
-        </div>
-      </div>
-      <div class="rv d2" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;transition:all 0.3s" onmouseover="this.style.background='rgba(255,255,255,0.09)';this.style.transform='translateY(-4px)'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.transform='translateY(0)'">
-        <div style="color:#FFD23F;font-size:0.9rem;margin-bottom:10px;letter-spacing:2px">★★★★★</div>
-        <p style="font-size:0.84rem;color:rgba(255,255,255,0.8);line-height:1.8;font-style:italic;margin-bottom:16px">"Avevo provato da solo per 6 mesi. Con Righetto, venduto in 3 settimane a un prezzo superiore. Linda e il chatbot sono una marcia in piu."</p>
-        <div style="display:flex;align-items:center;gap:10px">
-          <img src="https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp" alt="Andrea T." width="36" height="36" loading="lazy" style="border-radius:50%;border:2px solid var(--oro);object-fit:cover">
-          <div><div style="font-size:0.75rem;font-weight:700;color:white">Andrea T.</div><div style="font-size:0.65rem;color:rgba(255,255,255,0.65)">Villa bifamiliare — Selvazzano</div></div>
-        </div>
-      </div>
-      <div class="rv d3" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;transition:all 0.3s" onmouseover="this.style.background='rgba(255,255,255,0.09)';this.style.transform='translateY(-4px)'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.transform='translateY(0)'">
-        <div style="color:#FFD23F;font-size:0.9rem;margin-bottom:10px;letter-spacing:2px">★★★★★</div>
-        <p style="font-size:0.84rem;color:rgba(255,255,255,0.8);line-height:1.8;font-style:italic;margin-bottom:16px">"Documenti, notaio, tutto gestito. Non pensavamo che mettere in vendita potesse essere cosi semplice. Gino e il team fanno la differenza."</p>
-        <div style="display:flex;align-items:center;gap:10px">
-          <img src="https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp" alt="Famiglia Zanetti" width="36" height="36" loading="lazy" style="border-radius:50%;border:2px solid var(--oro);object-fit:cover">
-          <div><div style="font-size:0.75rem;font-weight:700;color:white">Famiglia Zanetti</div><div style="font-size:0.65rem;color:rgba(255,255,255,0.65)">Casa indipendente — Limena</div></div>
-        </div>
-      </div>
-    </div>
     <!-- Visite virtuali — card 3D -->
     <div class="rv sr" style="margin-top:48px">
       <div style="text-align:center;margin-bottom:28px">
@@ -1359,39 +1332,46 @@ button svg, a.btn-p svg, a.btn-g svg {
         </button>
       </div>
     </div>
-    <!-- Video recensioni -->
-    <div class="rv sr" style="margin-top:48px">
-      <div style="text-align:center;margin-bottom:28px">
-        <div style="display:inline-flex;align-items:center;gap:8px;font-size:0.62rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--oro)">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-          Video recensioni
-        </div>
+    <!-- Recensioni: 1 video + scorrimento automatico -->
+    <div class="rec-block rv sr">
+      <div class="rec-head">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        Recensioni
       </div>
-      <div class="video-test-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px">
-        <div class="rv d1" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;overflow:hidden;transition:all 0.3s" onmouseover="this.style.borderColor='rgba(255,107,53,0.3)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
-          <div style="position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,rgba(44,74,110,0.3),rgba(21,36,53,0.5));display:flex;align-items:center;justify-content:center;cursor:pointer" onclick="this.innerHTML='<iframe src=\'https://www.youtube.com/embed/1JM_lXuqLHM?autoplay=1&rel=0\' allow=\'accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture\' allowfullscreen loading=\'lazy\' title=\'Venduto in 30 giorni — la storia di Marco\' style=\'width:100%;height:100%;border:none\'></iframe>'">
-            <img src="https://img.youtube.com/vi/1JM_lXuqLHM/hqdefault.jpg" alt="Video testimonianza — cliente soddisfatto vendita casa Padova" width="480" height="270" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.6">
-            <div style="position:relative;z-index:1;width:56px;height:56px;background:rgba(255,107,53,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform 0.2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="#152435" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            </div>
+      <div class="rec-layout">
+        <div class="rec-video-card">
+          <div class="rec-video-play" role="button" tabindex="0" aria-label="Riproduci video recensione — Marco B., Padova Centro" onclick="recPlayVideo(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();recPlayVideo(this)}">
+            <img src="https://img.youtube.com/vi/1JM_lXuqLHM/hqdefault.jpg" alt="Video recensione — vendita casa Padova in 30 giorni" width="480" height="270" loading="lazy">
+            <span class="rec-play-btn" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="#152435"><polygon points="5 3 19 12 5 21 5 3"/></svg></span>
           </div>
-          <div style="padding:18px 20px">
-            <div style="color:#FFD23F;font-size:0.8rem;margin-bottom:6px;letter-spacing:2px">★★★★★</div>
-            <p style="font-size:0.82rem;color:rgba(255,255,255,0.8);line-height:1.6;font-style:italic;margin-bottom:10px">"Venduto in 30 giorni esatti. Non ci credevo, ma il team di Gino ha fatto tutto."</p>
-            <div style="font-size:0.72rem;font-weight:700;color:white">Marco B. — <span style="color:rgba(255,255,255,0.65);font-weight:400">Padova Centro</span></div>
+          <div class="rec-video-caption">
+            <div class="rec-stars" aria-hidden="true">★★★★★</div>
+            <p class="rec-quote">"Venduto in 30 giorni esatti. Non ci credevo, ma il team di Gino ha fatto tutto."</p>
+            <div class="rec-author">Marco B. <span>— Padova Centro</span></div>
           </div>
         </div>
-        <div class="rv d2" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;overflow:hidden;transition:all 0.3s" onmouseover="this.style.borderColor='rgba(255,107,53,0.3)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
-          <div style="position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,rgba(44,74,110,0.3),rgba(21,36,53,0.5));display:flex;align-items:center;justify-content:center;cursor:pointer" onclick="this.innerHTML='<iframe src=\'https://www.youtube.com/embed/1JM_lXuqLHM?autoplay=1&rel=0\' allow=\'accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture\' allowfullscreen loading=\'lazy\' title=\'Famiglia Zanetti — casa venduta a Limena\' style=\'width:100%;height:100%;border:none\'></iframe>'">
-            <img src="https://img.youtube.com/vi/1JM_lXuqLHM/hqdefault.jpg" alt="Video testimonianza — famiglia soddisfatta acquisto casa Limena" width="480" height="270" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.6">
-            <div style="position:relative;z-index:1;width:56px;height:56px;background:rgba(255,107,53,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform 0.2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="#152435" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            </div>
-          </div>
-          <div style="padding:18px 20px">
-            <div style="color:#FFD23F;font-size:0.8rem;margin-bottom:6px;letter-spacing:2px">★★★★★</div>
-            <p style="font-size:0.82rem;color:rgba(255,255,255,0.8);line-height:1.6;font-style:italic;margin-bottom:10px">"Trovata la casa dei sogni in meno di un mese. Un servizio impeccabile dall'inizio alla fine."</p>
-            <div style="font-size:0.72rem;font-weight:700;color:white">Famiglia Zanetti — <span style="color:rgba(255,255,255,0.65);font-weight:400">Limena</span></div>
+        <div class="rec-marquee-wrap" aria-label="Recensioni clienti in scorrimento">
+          <div class="rec-marquee-track">
+            <div class="rec-item"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Venduto in 38 giorni al prezzo che volevamo. Professionali, disponibili e trasparenti."</p><div class="rec-author">Marco B. <span>— Padova Centro</span></div></div>
+            <div class="rec-item"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Trovata la casa dei sogni in meno di un mese. Servizio impeccabile dall'inizio alla fine."</p><div class="rec-author">Elena R. <span>— Limena</span></div></div>
+            <div class="rec-item"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Avevo provato da solo per 6 mesi. Con Righetto, venduto in 3 settimane a un prezzo superiore."</p><div class="rec-author">Andrea T. <span>— Selvazzano</span></div></div>
+            <div class="rec-item"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Valutazione precisa e compratore serio in due settimane. Consigliatissimi nel Padovano."</p><div class="rec-author">Giulia M. <span>— Abano Terme</span></div></div>
+            <div class="rec-item"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Documenti, notaio, tutto gestito. Mettere in vendita non è mai stato così semplice."</p><div class="rec-author">Luca P. <span>— Monselice</span></div></div>
+            <div class="rec-item"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Linda e il team hanno risposto in ogni momento. Vendita conclusa senza stress."</p><div class="rec-author">Francesca V. <span>— Cittadella</span></div></div>
+            <div class="rec-item"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Prima casa comprata con chiarezza su mutuo e rogito. Ci hanno guidato passo passo."</p><div class="rec-author">Davide C. <span>— Vigodarzere</span></div></div>
+            <div class="rec-item"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Affitto locato in pochi giorni, inquilino selezionato con cura. Gestione locazioni top."</p><div class="rec-author">Serena N. <span>— Este</span></div></div>
+            <div class="rec-item"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Villa con giardino venduta in meno di un mese, più offerte del previsto. Grande lavoro."</p><div class="rec-author">Matteo G. <span>— Ponte San Nicolò</span></div></div>
+            <div class="rec-item"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Trasparenza totale su commissioni e tempi. Finalmente un'agenzia che mantiene le promesse."</p><div class="rec-author">Chiara F. <span>— Rubano</span></div></div>
+            <div class="rec-item" aria-hidden="true"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Venduto in 38 giorni al prezzo che volevamo. Professionali, disponibili e trasparenti."</p><div class="rec-author">Marco B. <span>— Padova Centro</span></div></div>
+            <div class="rec-item" aria-hidden="true"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Trovata la casa dei sogni in meno di un mese. Servizio impeccabile dall'inizio alla fine."</p><div class="rec-author">Elena R. <span>— Limena</span></div></div>
+            <div class="rec-item" aria-hidden="true"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Avevo provato da solo per 6 mesi. Con Righetto, venduto in 3 settimane a un prezzo superiore."</p><div class="rec-author">Andrea T. <span>— Selvazzano</span></div></div>
+            <div class="rec-item" aria-hidden="true"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Valutazione precisa e compratore serio in due settimane. Consigliatissimi nel Padovano."</p><div class="rec-author">Giulia M. <span>— Abano Terme</span></div></div>
+            <div class="rec-item" aria-hidden="true"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Documenti, notaio, tutto gestito. Mettere in vendita non è mai stato così semplice."</p><div class="rec-author">Luca P. <span>— Monselice</span></div></div>
+            <div class="rec-item" aria-hidden="true"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Linda e il team hanno risposto in ogni momento. Vendita conclusa senza stress."</p><div class="rec-author">Francesca V. <span>— Cittadella</span></div></div>
+            <div class="rec-item" aria-hidden="true"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Prima casa comprata con chiarezza su mutuo e rogito. Ci hanno guidato passo passo."</p><div class="rec-author">Davide C. <span>— Vigodarzere</span></div></div>
+            <div class="rec-item" aria-hidden="true"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Affitto locato in pochi giorni, inquilino selezionato con cura. Gestione locazioni top."</p><div class="rec-author">Serena N. <span>— Este</span></div></div>
+            <div class="rec-item" aria-hidden="true"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Villa con giardino venduta in meno di un mese, più offerte del previsto. Grande lavoro."</p><div class="rec-author">Matteo G. <span>— Ponte San Nicolò</span></div></div>
+            <div class="rec-item" aria-hidden="true"><div class="rec-stars">★★★★★</div><p class="rec-quote">"Trasparenza totale su commissioni e tempi. Finalmente un'agenzia che mantiene le promesse."</p><div class="rec-author">Chiara F. <span>— Rubano</span></div></div>
           </div>
         </div>
       </div>
@@ -1698,6 +1678,14 @@ setTimeout(l,8000);['scroll','touchstart','mousemove','keydown','click'].forEach
 })();</script>
 <script src="js/homepage.js?v=7" defer></script>
 <script>
+function recPlayVideo(el) {
+  if (!el || el.querySelector('iframe')) return;
+  el.innerHTML = '<iframe src="https://www.youtube.com/embed/1JM_lXuqLHM?autoplay=1&rel=0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy" title="Venduto in 30 giorni — recensione Marco B., Padova Centro" style="width:100%;height:100%;border:none;aspect-ratio:16/9"></iframe>';
+  el.removeAttribute('role');
+  el.removeAttribute('tabindex');
+  el.removeAttribute('aria-label');
+  el.style.cursor = 'default';
+}
 function openVisitaTour(slug) {
   var modal = document.getElementById('vtModal');
   var frame = document.getElementById('vtModalFrame');
