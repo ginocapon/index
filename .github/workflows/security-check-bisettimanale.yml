@@ -1,0 +1,67 @@
+# ============================================================
+# SECURITY CHECK BISETTIMANALE — Righetto Immobiliare
+# Martedì e venerdì 06:00 UTC — controlli statici segreti/admin
+# Checklist completa: TEST-SKILL/skill-security.md
+# ============================================================
+
+name: "Security Check Bisettimanale"
+
+on:
+  schedule:
+    - cron: '0 6 * * 2'  # Martedì
+    - cron: '0 6 * * 5'  # Venerdì
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  security:
+    name: "Security static check"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Esegui security-check.sh
+        id: sec
+        run: |
+          bash scripts/security-check.sh security-report.md
+        continue-on-error: true
+
+      - name: Apri o aggiorna issue security
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.existsSync('security-report.md')
+              ? fs.readFileSync('security-report.md', 'utf8')
+              : 'Report non generato';
+            const title = `🔒 Security check — ${new Date().toISOString().slice(0, 10)}`;
+            const body = report + '\n\n---\n_Vedi TEST-SKILL/skill-security.md per checklist completa e `python tools/check_rls_exposure.py` in locale._';
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'security',
+              state: 'open',
+              per_page: 5
+            });
+            if (issues.data.length > 0) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issues.data[0].number,
+                body
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['security']
+              });
+            }

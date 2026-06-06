@@ -120,6 +120,14 @@ Dopo **ogni** task che produce o modifica file nel repo (pagine, blog, CSS/JS, s
 - `llms.txt`: aggiornato con nuovi contenuti e prezzi
 - Timestamp cornerstone: aggiornare ogni mese
 
+### Sicurezza — 2 volte a settimana (OBBLIGATORIO)
+**Skill:** **`TEST-SKILL/skill-security.md`** — martedì e venerdì (o su richiesta «revisione sicurezza»).
+
+1. `bash scripts/security-check.sh` (statico, anche in CI)
+2. `python tools/check_rls_exposure.py` (locale, richiede `.env`)
+3. Checklist §3 in `skill-security.md` (admin, Edge email, segreti)
+4. Issue GitHub label `security` aggiornata dal workflow `security-check-bisettimanale.yml`
+
 ---
 
 ## 4. I 4 LOOP DI VALIDAZIONE (sintesi)
@@ -144,7 +152,16 @@ Eseguire sempre in sequenza dopo ogni modifica:
 
 ---
 
-## 6. CURSOR RULES (`.mdc` scoped)
+## 6. SICUREZZA (antihacker)
+
+- Modulo dedicato: **`skill-security.md`**
+- **2×/settimana:** martedì + venerdì — revisione generale (segreti, RLS, admin, spam email, XSS)
+- **Mai in commit:** `.env`, password admin, `service_role`, token Meta, API relay produzione
+- Script: `scripts/security-check.sh`, `tools/check_rls_exposure.py`
+
+---
+
+## 7. CURSOR RULES (`.mdc` scoped)
 
 - Documentazione: **`skill-cursor-rules.md`**
 - **`righetto-core.mdc`** → sempre attiva (claim, stack, routing)

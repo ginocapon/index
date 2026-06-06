@@ -67,6 +67,12 @@
       "token_stimati": "~5.500",
       "note": "Usare solo per audit mensile completo"
     },
+    "audit_sicurezza": {
+      "skills": ["skill-essentials.md", "skill-security.md", "skill-context.md"],
+      "cursor_rules": ["righetto-supabase-admin.mdc"],
+      "token_stimati": "~1.800",
+      "note": "2×/settimana (martedì + venerdì): scripts/security-check.sh + check_rls_exposure.py + checklist skill-security §3"
+    },
     "automazione_social_meta_gbp": {
       "skills": ["skill-essentials.md", "skill-social-automation.md"],
       "cursor_rules": ["righetto-social-automation.mdc"],
@@ -124,6 +130,14 @@
       "schedule": "Lun–ven ogni 5–10 min, fasce 09:30–11:30 / 13–14:30 / 18:30–21 Europe/Rome",
       "script": "righetto_social/publish_from_agenda.py --modo cron",
       "output": "Post Facebook, Instagram, mirror GBP da pianificazioni"
+    },
+    "security_check_bisettimanale": {
+      "workflow": ".github/workflows/security-check-bisettimanale.yml",
+      "schedule": "Martedì e venerdì 06:00 UTC (08:00 CET)",
+      "script": "scripts/security-check.sh",
+      "locale": "python tools/check_rls_exposure.py (con .env)",
+      "skill": "TEST-SKILL/skill-security.md",
+      "output": "Issue GitHub label 'security' + checklist §3 manuale"
     }
   }
 }

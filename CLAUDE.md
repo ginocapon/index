@@ -4,7 +4,7 @@
 **LEGGI SEMPRE `SKILL-2.0.md` (in root: indice) e il testo completo in `TEST-SKILL/SKILL-2.0.md` prima di qualsiasi operazione.**
 La skill e' l'unica fonte di verita' per questo progetto.
 
-**Routing task:** `TEST-SKILL/context-map.json` — carica anche **`TEST-SKILL/skill-forms-leads.md`** per ogni **landing**, **blog con form/CTA lead** o fix invio email; **`TEST-SKILL/skill-social-automation.md`** per bozze/agenda/cron Meta/Instagram/reel/Google Business in `righetto_social/`.
+**Routing task:** `TEST-SKILL/context-map.json` — carica anche **`TEST-SKILL/skill-forms-leads.md`** per ogni **landing**, **blog con form/CTA lead** o fix invio email; **`TEST-SKILL/skill-social-automation.md`** per bozze/agenda/cron Meta/Instagram/reel/Google Business in `righetto_social/`; **`TEST-SKILL/skill-security.md`** per audit sicurezza (2×/settimana: martedì e venerdì).
 
 **Regole Cursor (`.mdc` scoped):** vedi **`TEST-SKILL/skill-cursor-rules.md`** — `righetto-core.mdc` sempre attiva; le altre si attivano su blog, HTML/CSS, form, social, SEO, admin/SQL.
 

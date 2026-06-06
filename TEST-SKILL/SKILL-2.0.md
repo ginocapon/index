@@ -369,6 +369,12 @@ js/scroll-reveal.js                 - Animazioni scroll
 - Salva risultati su Supabase (tabella `audit_snapshots`)
 - Grafico storico con barre OK/Warning/Errori
 
+**Security check bisettimanale** (martedì + venerdì ore 08:00 CET):
+- Skill: **`TEST-SKILL/skill-security.md`**
+- Workflow: `.github/workflows/security-check-bisettimanale.yml`
+- Script: `scripts/security-check.sh` (+ locale `python tools/check_rls_exposure.py`)
+- **Output:** Issue GitHub label `security` — checklist antihacker (segreti, RLS, admin, spam)
+
 **Audit Automatico SKILL-2.0 via GitHub Actions** (ogni venerdi' ore 07:00 CET):
 - Workflow: `.github/workflows/audit-settimanale.yml`
 - Script: `scripts/audit-skill.sh`
