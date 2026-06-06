@@ -55,7 +55,7 @@ Google ha aggiunto **Google-Agent** (20 marzo 2026) alla lista ufficiale dei [us
 1. **Leggi prima** il file da modificare — mai al buio
 2. **Mobile-first** — ogni modifica deve funzionare su mobile
 3. **No librerie extra** — il sito e' volutamente leggero (vanilla HTML/CSS/JS)
-4. **Commit** chiari e descrittivi in italiano
+4. **Commit + push automatici** a fine task (senza chiedere conferma) — dettaglio in `skill-essentials.md` §**1.1**
 5. **Mai toccare** DNS, record MX, configurazione cPanel senza conferma esplicita
 6. **Aggiorna** sitemap.xml quando aggiungi/rimuovi pagine
 7. **Visual Saliency** — ogni pagina nuova DEVE seguire le regole above-the-fold
@@ -1580,7 +1580,10 @@ python verifica_meta.py                      # deve dire: Token tipo PAGE
 - [ ] Aggiornato llms.txt con nuova zona e prezzi
 - [ ] Aggiunto link nel footer di tutte le zone pages
 
-### Verifiche Post-Modifica (AUTOMATICHE via pre-commit hook)
+### Verifiche Post-Modifica
+- [ ] **Commit + push** eseguiti se il working tree ha modifiche pertinenti (`skill-essentials.md` §1.1)
+
+**Hook pre-commit (automatici):**
 - `node scripts/validate-page.js --staged` — valida automaticamente
 - Schema mancante = commit BLOCCATO
 - Title mancante = commit BLOCCATO

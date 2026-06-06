@@ -23,7 +23,8 @@ HTML/CSS/JS **vanilla** · GitHub Pages · Supabase · **zero CDN esterni** · U
 2. Mobile-first + WCAG AA (CTA: **mai** `#FF6B35` con testo bianco).
 3. CSS/JS linkati con `?v=N` (incrementa a ogni modifica).
 4. Nuove URL → `sitemap.xml`.
-5. Commit in italiano; **no** DNS/MX/cPanel senza conferma esplicita.
+5. **Commit + push automatici** a fine task se ci sono file modificati (`skill-essentials.md` §1.1) — non chiedere conferma; **no** `.env`/segreti in commit.
+6. **No** DNS/MX/cPanel senza conferma esplicita.
 
 ## Moduli skill (carica su richiesta o via rule scoped)
 | Task | File |
