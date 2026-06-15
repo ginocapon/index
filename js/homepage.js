@@ -579,6 +579,11 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'compravendite italia q1 2026: dati agenzia entrate e lettura padova': { img: 'img/blog/blog-compravendite-italia-q1-agenzia-entrate-2026.webp', url: 'blog-compravendite-italia-q1-agenzia-entrate-2026-padova' },
+    'affitti q1 2026: canoni fimaa +3-4% e mercato studenti padova': { img: 'img/blog/blog-affitti-canoni-fimaa-q1-2026-padova.webp', url: 'blog-affitti-canoni-fimaa-q1-2026-padova' },
+    'nuove costruzioni veneto 2026: +14,6% ade e cintura padovana': { img: 'img/blog/blog-nuove-costruzioni-mercato-veneto-2026-padova.webp', url: 'blog-nuove-costruzioni-mercato-veneto-2026-padova' },
+    'piano casa decreto 66/2026: 100mila alloggi e impatto padova': { img: 'img/blog/blog-piano-casa-decreto-66-2026-padova.webp', url: 'blog-piano-casa-decreto-66-2026-padova' },
+    'bce giugno 2026: +25 bp, euribor e mutui a padova': { img: 'img/blog/blog-bce-tassi-mutui-giugno-2026-padova.webp', url: 'blog-bce-tassi-mutui-giugno-2026-padova' },
     'righetto immobiliare dal 2000: storia, zone e ultime acquisizioni': { img: 'img/team/righetto-noi-ci-siamo-video-poster.png', url: 'blog-righetto-storia-territorio-acquisizioni-2026' },
     'gestione spese casa dopo l\'acquisto a padova 2026: energia, imu, dispensa': { img: 'img/blog/blog-gestione-spese-casa-padova-2026.webp', url: 'blog-gestione-spese-casa-risparmio-padova-2026' },
     'come scegliere l\'immobile giusto a padova 2026: zona, luce, condominio': { img: 'img/blog/blog-scegliere-immobile-giusto-padova-2026.webp', url: 'blog-scegliere-immobile-giusto-padova-2026' },
@@ -661,6 +666,46 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+{
+      "titolo": "Compravendite Italia Q1 2026: dati Agenzia Entrate e lettura Padova",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-compravendite-italia-q1-agenzia-entrate-2026.webp",
+      "url_statico": "blog-compravendite-italia-q1-agenzia-entrate-2026-padova"
+    },
+{
+      "titolo": "Affitti Q1 2026: canoni FIMAA +3-4% e mercato studenti Padova",
+      "categoria": "Mercato locazione",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-affitti-canoni-fimaa-q1-2026-padova.webp",
+      "url_statico": "blog-affitti-canoni-fimaa-q1-2026-padova"
+    },
+{
+      "titolo": "Nuove costruzioni Veneto 2026: +14,6% ADE e cintura padovana",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-nuove-costruzioni-mercato-veneto-2026-padova.webp",
+      "url_statico": "blog-nuove-costruzioni-mercato-veneto-2026-padova"
+    },
+{
+      "titolo": "Piano Casa decreto 66/2026: 100mila alloggi e impatto Padova",
+      "categoria": "Normativa",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-piano-casa-decreto-66-2026-padova.webp",
+      "url_statico": "blog-piano-casa-decreto-66-2026-padova"
+    },
+{
+      "titolo": "BCE giugno 2026: +25 bp, Euribor e mutui a Padova",
+      "categoria": "Mutui e credito",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-bce-tassi-mutui-giugno-2026-padova.webp",
+      "url_statico": "blog-bce-tassi-mutui-giugno-2026-padova"
+    },
     { titolo: "Righetto Immobiliare dal 2000: storia, zone e ultime acquisizioni", categoria: "Vita d'Agenzia", data: '2026-06-04', stato: 'pubblicato', immagine_copertina: 'img/team/righetto-noi-ci-siamo-video-poster.png', url_statico: 'blog-righetto-storia-territorio-acquisizioni-2026' },
     { titolo: "Gestione spese casa dopo l'acquisto a Padova 2026: energia, IMU, dispensa", categoria: "Guida acquirenti", data: '2026-06-03', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-gestione-spese-casa-padova-2026.webp', url_statico: 'blog-gestione-spese-casa-risparmio-padova-2026' },
     { titolo: "Come scegliere l'immobile giusto a Padova 2026: zona, luce, condominio", categoria: "Guida acquirenti", data: '2026-06-03', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-scegliere-immobile-giusto-padova-2026.webp', url_statico: 'blog-scegliere-immobile-giusto-padova-2026' },

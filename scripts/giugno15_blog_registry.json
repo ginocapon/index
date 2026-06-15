@@ -1,0 +1,207 @@
+{
+  "generated": "2026-06-15",
+  "date_display": "15 giugno 2026",
+  "files": [
+    {
+      "filename": "blog-compravendite-italia-q1-agenzia-entrate-2026-padova.html",
+      "slug": "blog-compravendite-italia-q1-agenzia-entrate-2026-padova",
+      "wordCount_body": 2421
+    },
+    {
+      "filename": "blog-affitti-canoni-fimaa-q1-2026-padova.html",
+      "slug": "blog-affitti-canoni-fimaa-q1-2026-padova",
+      "wordCount_body": 2484
+    },
+    {
+      "filename": "blog-nuove-costruzioni-mercato-veneto-2026-padova.html",
+      "slug": "blog-nuove-costruzioni-mercato-veneto-2026-padova",
+      "wordCount_body": 2504
+    },
+    {
+      "filename": "blog-piano-casa-decreto-66-2026-padova.html",
+      "slug": "blog-piano-casa-decreto-66-2026-padova",
+      "wordCount_body": 2426
+    },
+    {
+      "filename": "blog-bce-tassi-mutui-giugno-2026-padova.html",
+      "slug": "blog-bce-tassi-mutui-giugno-2026-padova",
+      "wordCount_body": 2405
+    }
+  ],
+  "blog_html_articoliStatici": [
+    {
+      "titolo": "Compravendite Italia Q1 2026: dati Agenzia Entrate e lettura Padova",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-compravendite-italia-q1-agenzia-entrate-2026.webp",
+      "url_statico": "blog-compravendite-italia-q1-agenzia-entrate-2026-padova",
+      "tempo": 11,
+      "autore": "Gino Capon",
+      "contenuto": "Comunicato ADE 10 giugno: +4,4%, mutuo 47,8%, prima casa 73%, nuovo +14,6% — lettura Veneto.",
+      "evidenza": true
+    },
+    {
+      "titolo": "Affitti Q1 2026: canoni FIMAA +3-4% e mercato studenti Padova",
+      "categoria": "Mercato locazione",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-affitti-canoni-fimaa-q1-2026-padova.webp",
+      "url_statico": "blog-affitti-canoni-fimaa-q1-2026-padova",
+      "tempo": 11,
+      "autore": "Gino Capon",
+      "contenuto": "FIMAA Sentiment Q1: canoni in crescita, domanda 64%, offerta 58% — angolo Padova studenti.",
+      "evidenza": true
+    },
+    {
+      "titolo": "Nuove costruzioni Veneto 2026: +14,6% ADE e cintura padovana",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-nuove-costruzioni-mercato-veneto-2026-padova.webp",
+      "url_statico": "blog-nuove-costruzioni-mercato-veneto-2026-padova",
+      "tempo": 10,
+      "autore": "Gino Capon",
+      "contenuto": "Segmento nuovo +14,6% Q1 ADE, classe energetica e cantieri cintura Limena.",
+      "evidenza": false
+    },
+    {
+      "titolo": "Piano Casa decreto 66/2026: 100mila alloggi e impatto Padova",
+      "categoria": "Normativa",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-piano-casa-decreto-66-2026-padova.webp",
+      "url_statico": "blog-piano-casa-decreto-66-2026-padova",
+      "tempo": 12,
+      "autore": "Gino Capon",
+      "contenuto": "DL 66 G.U. maggio 2026: calmierati, garanzie locazione, conversione luglio — guida Padova.",
+      "evidenza": true
+    },
+    {
+      "titolo": "BCE giugno 2026: +25 bp, Euribor e mutui a Padova",
+      "categoria": "Mutui e credito",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-bce-tassi-mutui-giugno-2026-padova.webp",
+      "url_statico": "blog-bce-tassi-mutui-giugno-2026-padova",
+      "tempo": 11,
+      "autore": "Gino Capon",
+      "contenuto": "BCE 11 giugno: deposito 2,25%, TAEG 3,80-4,15%, rata +15-50€ — aggiornamento Padova.",
+      "evidenza": true
+    }
+  ],
+  "admin_blogSeedArticles": [
+    {
+      "titolo": "Compravendite Italia Q1 2026: dati Agenzia Entrate e lettura Padova",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-compravendite-italia-q1-agenzia-entrate-2026.webp",
+      "url_statico": "blog-compravendite-italia-q1-agenzia-entrate-2026-padova",
+      "tempo": 11,
+      "autore": "Gino Capon",
+      "contenuto": "<p>Comunicato ADE 10 giugno: +4,4%, mutuo 47,8%, prima casa 73%, nuovo +14,6% — lettura Veneto.</p>",
+      "evidenza": true,
+      "emoji": "📊",
+      "data_pubblicazione": "2026-06-15"
+    },
+    {
+      "titolo": "Affitti Q1 2026: canoni FIMAA +3-4% e mercato studenti Padova",
+      "categoria": "Mercato locazione",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-affitti-canoni-fimaa-q1-2026-padova.webp",
+      "url_statico": "blog-affitti-canoni-fimaa-q1-2026-padova",
+      "tempo": 11,
+      "autore": "Gino Capon",
+      "contenuto": "<p>FIMAA Sentiment Q1: canoni in crescita, domanda 64%, offerta 58% — angolo Padova studenti.</p>",
+      "evidenza": true,
+      "emoji": "🔑",
+      "data_pubblicazione": "2026-06-15"
+    },
+    {
+      "titolo": "Nuove costruzioni Veneto 2026: +14,6% ADE e cintura padovana",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-nuove-costruzioni-mercato-veneto-2026-padova.webp",
+      "url_statico": "blog-nuove-costruzioni-mercato-veneto-2026-padova",
+      "tempo": 10,
+      "autore": "Gino Capon",
+      "contenuto": "<p>Segmento nuovo +14,6% Q1 ADE, classe energetica e cantieri cintura Limena.</p>",
+      "evidenza": false,
+      "emoji": "🏗️",
+      "data_pubblicazione": "2026-06-15"
+    },
+    {
+      "titolo": "Piano Casa decreto 66/2026: 100mila alloggi e impatto Padova",
+      "categoria": "Normativa",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-piano-casa-decreto-66-2026-padova.webp",
+      "url_statico": "blog-piano-casa-decreto-66-2026-padova",
+      "tempo": 12,
+      "autore": "Gino Capon",
+      "contenuto": "<p>DL 66 G.U. maggio 2026: calmierati, garanzie locazione, conversione luglio — guida Padova.</p>",
+      "evidenza": true,
+      "emoji": "⚖️",
+      "data_pubblicazione": "2026-06-15"
+    },
+    {
+      "titolo": "BCE giugno 2026: +25 bp, Euribor e mutui a Padova",
+      "categoria": "Mutui e credito",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-bce-tassi-mutui-giugno-2026-padova.webp",
+      "url_statico": "blog-bce-tassi-mutui-giugno-2026-padova",
+      "tempo": 11,
+      "autore": "Gino Capon",
+      "contenuto": "<p>BCE 11 giugno: deposito 2,25%, TAEG 3,80-4,15%, rata +15-50€ — aggiornamento Padova.</p>",
+      "evidenza": true,
+      "emoji": "🏦",
+      "data_pubblicazione": "2026-06-15"
+    }
+  ],
+  "homepage_js_articoliStatici": [
+    {
+      "titolo": "Compravendite Italia Q1 2026: dati Agenzia Entrate e lettura Padova",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-compravendite-italia-q1-agenzia-entrate-2026.webp",
+      "url_statico": "blog-compravendite-italia-q1-agenzia-entrate-2026-padova"
+    },
+    {
+      "titolo": "Affitti Q1 2026: canoni FIMAA +3-4% e mercato studenti Padova",
+      "categoria": "Mercato locazione",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-affitti-canoni-fimaa-q1-2026-padova.webp",
+      "url_statico": "blog-affitti-canoni-fimaa-q1-2026-padova"
+    },
+    {
+      "titolo": "Nuove costruzioni Veneto 2026: +14,6% ADE e cintura padovana",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-nuove-costruzioni-mercato-veneto-2026-padova.webp",
+      "url_statico": "blog-nuove-costruzioni-mercato-veneto-2026-padova"
+    },
+    {
+      "titolo": "Piano Casa decreto 66/2026: 100mila alloggi e impatto Padova",
+      "categoria": "Normativa",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-piano-casa-decreto-66-2026-padova.webp",
+      "url_statico": "blog-piano-casa-decreto-66-2026-padova"
+    },
+    {
+      "titolo": "BCE giugno 2026: +25 bp, Euribor e mutui a Padova",
+      "categoria": "Mutui e credito",
+      "data": "2026-06-15",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-bce-tassi-mutui-giugno-2026-padova.webp",
+      "url_statico": "blog-bce-tassi-mutui-giugno-2026-padova"
+    }
+  ]
+}
