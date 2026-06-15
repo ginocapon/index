@@ -184,6 +184,13 @@ function renderProps(arr){
 }
 
 const VT_PREVIEW = 4;
+/** Ordine fisso homepage: 4 tour nel catalogo locale */
+const VT_CATALOG_ORDER = [
+  'casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno',
+  'elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova',
+  'casa-singola-con-ampio-giardino-a-grisignano-di-zocco',
+  'bi-familiare-indipendente-in-vendita-nel-cuore-di-sacrocuore-padova'
+];
 
 function hasVirtualTour(p) {
   return Array.isArray(p.virtual_tour_scenes) && p.virtual_tour_scenes.some(function(s) {
@@ -239,18 +246,99 @@ function renderVisiteVirtualiHome(arr) {
   });
 }
 
+function catalogEntryToProperty(slug, entry) {
+  if (!entry || !entry.scenes || !entry.scenes.length) return null;
+  return {
+    slug: slug,
+    titolo: entry.titolo || 'Immobile',
+    comune: entry.comune || 'Padova',
+    tipo_operazione: 'vendita',
+    tipo_contratto: 'vendita',
+    foto_principale: entry.cover || (entry.scenes[0] && entry.scenes[0].img) || '',
+    virtual_tour_scenes: entry.scenes.map(function(s) {
+      return { nome: s.nome, url: s.img, thumbnail: s.img };
+    })
+  };
+}
+
+function mergeVtCatalogSupplement(tours, catalog, maxAdd) {
+  if (!catalog || maxAdd <= 0) return tours;
+  var used = {};
+  tours.forEach(function(p) { if (p.slug) used[p.slug] = true; });
+  var slugs = Object.keys(catalog);
+  for (var i = 0; i < slugs.length && tours.length < VT_PREVIEW; i++) {
+    var slug = slugs[i];
+    if (used[slug]) continue;
+    var prop = catalogEntryToProperty(slug, catalog[slug]);
+    if (!prop || !hasVirtualTour(prop)) continue;
+    tours.push(prop);
+    used[slug] = true;
+    maxAdd--;
+    if (maxAdd <= 0) break;
+  }
+  return tours;
+}
+
+async function fetchVtCatalog() {
+  try {
+    var res = await fetch('data/visite-virtuali.json');
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (e) {
+    return null;
+  }
+}
+
+function toursFromCatalog(catalog, slugs) {
+  if (!catalog) return [];
+  var list = slugs || Object.keys(catalog);
+  var out = [];
+  for (var i = 0; i < list.length && out.length < VT_PREVIEW; i++) {
+    var slug = list[i];
+    var prop = catalogEntryToProperty(slug, catalog[slug]);
+    if (prop && hasVirtualTour(prop)) out.push(prop);
+  }
+  return out;
+}
+
+function enrichToursFromSupabase(tours, data) {
+  if (!data || !data.length) return tours;
+  var bySlug = {};
+  data.forEach(function(p) {
+    if (p.slug && hasVirtualTour(p)) bySlug[p.slug] = p;
+  });
+  return tours.map(function(t) {
+    return bySlug[t.slug] || t;
+  });
+}
+
 async function loadVisiteVirtualiHome() {
   const grid = document.getElementById('vtGridHome');
-  if (!grid || !sb) return;
+  if (!grid) return;
   try {
-    const { data, error } = await sb.from('immobili').select('*')
-      .eq('attivo', true)
-      .eq('venduto', false)
-      .eq('affittato', false)
-      .order('created_at', { ascending: false })
-      .limit(48);
-    if (error || !data || !data.length) return;
-    const tours = data.filter(hasVirtualTour).slice(0, VT_PREVIEW);
+    var catalog = await fetchVtCatalog();
+    var tours = toursFromCatalog(catalog, VT_CATALOG_ORDER);
+
+    initSB();
+    if (sb) {
+      const { data, error } = await sb.from('immobili').select('*')
+        .eq('attivo', true)
+        .eq('venduto', false)
+        .eq('affittato', false)
+        .order('created_at', { ascending: false })
+        .limit(48);
+      if (!error && data && data.length) {
+        if (tours.length) {
+          tours = enrichToursFromSupabase(tours, data);
+        } else {
+          tours = data.filter(hasVirtualTour).slice(0, VT_PREVIEW);
+        }
+        if (tours.length < VT_PREVIEW) {
+          tours = mergeVtCatalogSupplement(tours, catalog, VT_PREVIEW - tours.length);
+        }
+      }
+    }
+
     if (!tours.length) return;
     renderVisiteVirtualiHome(tours);
   } catch (e) {}
@@ -426,8 +514,8 @@ function waitSBThen(fn,tries){
 if(window.innerWidth > 768){
   setTimeout(function(){ waitSBThen(loadImmobili,0); }, 2000);
 }
-/* Visite virtuali homepage: ultimi inseriti con tour, tutti i viewport */
-setTimeout(function(){ waitSBThen(loadVisiteVirtualiHome,0); }, 1200);
+/* Visite virtuali homepage: catalogo locale (4 tour) + arricchimento Supabase */
+setTimeout(loadVisiteVirtualiHome, 600);
 
 /* ══ MODAL INCARICO VENDITA (solo desktop ≥769px, max 1 volta per sessione) — prima di loadBlogHome così il bind esiste anche se Supabase non fa await ══ */
 (function () {
