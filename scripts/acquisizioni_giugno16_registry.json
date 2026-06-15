@@ -1,0 +1,90 @@
+{
+  "generated": "2026-06-16",
+  "date_display": "16 giugno 2026",
+  "files": [
+    {
+      "filename": "blog-ultime-acquisizioni-residenziali-padova-giugno-2026.html",
+      "slug": "blog-ultime-acquisizioni-residenziali-padova-giugno-2026",
+      "wordCount_body": 2239
+    },
+    {
+      "filename": "blog-ultime-acquisizioni-commerciali-padova-giugno-2026.html",
+      "slug": "blog-ultime-acquisizioni-commerciali-padova-giugno-2026",
+      "wordCount_body": 2002
+    }
+  ],
+  "blog_html_articoliStatici": [
+    {
+      "titolo": "Ultime 5 acquisizioni residenziali Padova 2026: tour portale Righetto",
+      "categoria": "Vita d'Agenzia",
+      "data": "2026-06-16",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-ultime-acquisizioni-residenziali-padova-giugno-2026.webp",
+      "url_statico": "blog-ultime-acquisizioni-residenziali-padova-giugno-2026",
+      "tempo": 10,
+      "autore": "Gino Capon",
+      "contenuto": "LP0286, LP0285-V, LA0317, LP0283, LP0281 — ville e appartamenti attivi con foto e schede.",
+      "evidenza": false
+    },
+    {
+      "titolo": "Ultime 5 acquisizioni commerciali Padova 2026: uffici e capannoni",
+      "categoria": "Vita d'Agenzia",
+      "data": "2026-06-16",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-ultime-acquisizioni-commerciali-padova-giugno-2026.webp",
+      "url_statico": "blog-ultime-acquisizioni-commerciali-padova-giugno-2026",
+      "tempo": 10,
+      "autore": "Gino Capon",
+      "contenuto": "Uffici, capannoni Rubano/Limena e locale commerciale — ultime 5 proposte attive con schede.",
+      "evidenza": false
+    }
+  ],
+  "admin_blogSeedArticles": [
+    {
+      "titolo": "Ultime 5 acquisizioni residenziali Padova 2026: tour portale Righetto",
+      "categoria": "Vita d'Agenzia",
+      "data": "2026-06-16",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-ultime-acquisizioni-residenziali-padova-giugno-2026.webp",
+      "url_statico": "blog-ultime-acquisizioni-residenziali-padova-giugno-2026",
+      "tempo": 10,
+      "autore": "Gino Capon",
+      "contenuto": "<p>LP0286, LP0285-V, LA0317, LP0283, LP0281 — ville e appartamenti attivi con foto e schede.</p>",
+      "evidenza": false,
+      "emoji": "🏠",
+      "data_pubblicazione": "2026-06-16"
+    },
+    {
+      "titolo": "Ultime 5 acquisizioni commerciali Padova 2026: uffici e capannoni",
+      "categoria": "Vita d'Agenzia",
+      "data": "2026-06-16",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-ultime-acquisizioni-commerciali-padova-giugno-2026.webp",
+      "url_statico": "blog-ultime-acquisizioni-commerciali-padova-giugno-2026",
+      "tempo": 10,
+      "autore": "Gino Capon",
+      "contenuto": "<p>Uffici, capannoni Rubano/Limena e locale commerciale — ultime 5 proposte attive con schede.</p>",
+      "evidenza": false,
+      "emoji": "🏢",
+      "data_pubblicazione": "2026-06-16"
+    }
+  ],
+  "homepage_js_articoliStatici": [
+    {
+      "titolo": "Ultime 5 acquisizioni residenziali Padova 2026: tour portale Righetto",
+      "categoria": "Vita d'Agenzia",
+      "data": "2026-06-16",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-ultime-acquisizioni-residenziali-padova-giugno-2026.webp",
+      "url_statico": "blog-ultime-acquisizioni-residenziali-padova-giugno-2026"
+    },
+    {
+      "titolo": "Ultime 5 acquisizioni commerciali Padova 2026: uffici e capannoni",
+      "categoria": "Vita d'Agenzia",
+      "data": "2026-06-16",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-ultime-acquisizioni-commerciali-padova-giugno-2026.webp",
+      "url_statico": "blog-ultime-acquisizioni-commerciali-padova-giugno-2026"
+    }
+  ]
+}

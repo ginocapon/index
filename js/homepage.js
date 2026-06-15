@@ -140,6 +140,17 @@ async function loadImmobili(){
   }catch(e){ showDemoProps(); }
 }
 
+function getPropFotos(p) {
+  const rawList = Array.isArray(p.foto) ? p.foto : (Array.isArray(p.foto_urls) ? p.foto_urls : []);
+  const fromArr = rawList
+    .map(function(u) { return resolveImageUrl(u, {width: 800, quality: 80}); })
+    .filter(Boolean);
+  if (fromArr.length) return fromArr;
+  const raw = p.foto_principale || (p.foto_urls && p.foto_urls[0]) || '';
+  const single = resolveImageUrl(raw, {width: 800, quality: 80});
+  return single ? [single] : [];
+}
+
 function renderProps(arr){
   const grid = document.getElementById('propsGrid');
   if(!arr||!arr.length){ showDemoProps(); return; }
@@ -150,17 +161,18 @@ function renderProps(arr){
     const price = tipo==='affitto'
       ? `€ ${p.prezzo?.toLocaleString('it-IT')}/mese`
       : `€ ${p.prezzo?.toLocaleString('it-IT')}`;
-    const rawImg = p.foto_principale || (p.foto_urls&&p.foto_urls[0]) || (p.foto&&p.foto[0]) || '';
-    const imgUrl = resolveImageUrl(rawImg, {width: 800, quality: 80});
-    const imgTag = imgUrl
-      ? `<img src="${imgUrl}" alt="${escProp(p.titolo||'Immobile')}" width="800" height="600" loading="lazy" onerror="this.parentNode.innerHTML='<div class=pi-ph>🏠</div>'">`
-      : `<div class="pi-ph">🏠</div>`;
+    const fotos = getPropFotos(p);
+    const imgBlock = (typeof RigPhotoCarousel !== 'undefined' && fotos.length)
+      ? RigPhotoCarousel.buildHtml(fotos, p.titolo || 'Immobile')
+      : (fotos.length
+        ? `<img src="${fotos[0]}" alt="${escProp(p.titolo||'Immobile')}" width="800" height="600" loading="lazy" onerror="this.parentNode.innerHTML='<div class=pi-ph>🏠</div>'">`
+        : `<div class="pi-ph">🏠</div>`);
     const propSlug = generatePropertySlug(p);
     const desc = propExcerpt(p);
     const loc = `${p.comune||'Padova'}${p.indirizzo?' — '+p.indirizzo:''}`;
-    return `<a href="immobile?s=${encodeURIComponent(propSlug)}" class="pc">
+    return `<a href="immobile?s=${encodeURIComponent(propSlug)}" class="pc" onclick="if(window.RigPhotoCarousel&&RigPhotoCarousel.wasDragging(this))event.preventDefault();">
       <div class="pi">
-        ${imgTag}
+        ${imgBlock}
         <span class="ptag ${tipClass}">${tipLabel}</span>
         ${p.in_evidenza?'<span class="pev">★ Evidenza</span>':''}
         ${p.virtual_tour?'<span class="pvt">360° Tour</span>':''}
@@ -181,6 +193,7 @@ function renderProps(arr){
       </div>
     </a>`;
   }).join('');
+  if (typeof RigPhotoCarousel !== 'undefined') RigPhotoCarousel.initAll(grid);
 }
 
 const VT_PREVIEW = 4;
@@ -667,6 +680,8 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'ultime 5 acquisizioni residenziali padova 2026: tour portale righetto': { img: 'img/blog/blog-ultime-acquisizioni-residenziali-padova-giugno-2026.webp', url: 'blog-ultime-acquisizioni-residenziali-padova-giugno-2026' },
+    'ultime 5 acquisizioni commerciali padova 2026: uffici e capannoni': { img: 'img/blog/blog-ultime-acquisizioni-commerciali-padova-giugno-2026.webp', url: 'blog-ultime-acquisizioni-commerciali-padova-giugno-2026' },
     'compravendite italia q1 2026: dati agenzia entrate e lettura padova': { img: 'img/blog/blog-compravendite-italia-q1-agenzia-entrate-2026.webp', url: 'blog-compravendite-italia-q1-agenzia-entrate-2026-padova' },
     'affitti q1 2026: canoni fimaa +3-4% e mercato studenti padova': { img: 'img/blog/blog-affitti-canoni-fimaa-q1-2026-padova.webp', url: 'blog-affitti-canoni-fimaa-q1-2026-padova' },
     'nuove costruzioni veneto 2026: +14,6% ade e cintura padovana': { img: 'img/blog/blog-nuove-costruzioni-mercato-veneto-2026-padova.webp', url: 'blog-nuove-costruzioni-mercato-veneto-2026-padova' },
@@ -754,6 +769,22 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+{
+      "titolo": "Ultime 5 acquisizioni residenziali Padova 2026: tour portale Righetto",
+      "categoria": "Vita d'Agenzia",
+      "data": "2026-06-16",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-ultime-acquisizioni-residenziali-padova-giugno-2026.webp",
+      "url_statico": "blog-ultime-acquisizioni-residenziali-padova-giugno-2026"
+    },
+{
+      "titolo": "Ultime 5 acquisizioni commerciali Padova 2026: uffici e capannoni",
+      "categoria": "Vita d'Agenzia",
+      "data": "2026-06-16",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-ultime-acquisizioni-commerciali-padova-giugno-2026.webp",
+      "url_statico": "blog-ultime-acquisizioni-commerciali-padova-giugno-2026"
+    },
 {
       "titolo": "Compravendite Italia Q1 2026: dati Agenzia Entrate e lettura Padova",
       "categoria": "Mercato immobiliare",

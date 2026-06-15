@@ -78,6 +78,12 @@
       "cursor_rules": ["righetto-social-automation.mdc"],
       "token_stimati": "~2.200",
       "note": "Bozze settimanali, rotazione immobili, publish_from_agenda, token PAGE, reel, cron — righetto_social/"
+    },
+    "testo_social_post_storia_landing": {
+      "skills": ["skill-essentials.md", "skill-social-automation.md"],
+      "cursor_rules": ["righetto-social-automation.mdc"],
+      "token_stimati": "~800",
+      "note": "Consegna in chat: §2b.1 — DESCRIZIONE spintax + LINK + KEYWORD # (post, storia, reel, landing IG/FB/GBP)"
     }
   },
 

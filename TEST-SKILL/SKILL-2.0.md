@@ -12,6 +12,7 @@
 >
 > **Changelog 29 maggio 2026:** blog — **anti-doppioni BLOCCANTE** prima di ogni nuovo articolo: verifica catalogo + script; se tema già coperto → ricerca web su fonte istituzionale e altro argomento (§8.1a, `skill-content.md` §2.0, `scripts/check_doppioni_sito.py`).
 >
+> **Changelog 16 giugno 2026:** social — schema consegna agente §2b.1: DESCRIZIONE spintax + LINK + KEYWORD `#` per post/storia/reel/landing in chat.
 > **Changelog 28 maggio 2026:** social — copy obbligatorio immobili/blog: titolo pari pari, link + hashtag in caption (§2b `skill-social-automation.md`, §10.4).
 
 > **Changelog 20 Maggio 2026:** nuova **`skill-forms-leads.md`** — form landing/blog obbligatori: invio in pagina via `sendNotifica` + `richieste`, no redirect GET a Contatti, no GET su `send-mail.php`; `context-map.json` aggiornato.
@@ -1486,6 +1487,7 @@ Dettaglio in **§2b** di [`skill-social-automation.md`](skill-social-automation.
 
 - **Titolo** del post/storia/reel = **identico** a `immobili.titolo` / `blog.titolo` (niente spintax sul titolo).
 - **Descrizione/caption:** link URL completo immobile o articolo + **≥10 hashtag `#`** da keyword ad alto volume (Padova/immobiliare) + campi SEO DB; spintax solo nel corpo secondario.
+- **Consegna manuale in chat** (post / storia / reel / landing social): schema fisso **§2b.1** in `skill-social-automation.md` — blocchi **DESCRIZIONE** (spintax) + **LINK** + **KEYWORD** (`#`, min. 8–12).
 
 #### Rotazione catalogo (immobili, blog, landing, agenzia)
 
