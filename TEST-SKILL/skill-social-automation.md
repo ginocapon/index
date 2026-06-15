@@ -1,6 +1,6 @@
 # Skill — Automazione social Meta + Google Business (`righetto_social/`)
 
-**Versione:** 30 maggio 2026 — agenda 4 slot (10/13/15/19), rotazione catalogo, fix cron `settings.json`.  
+**Versione:** 16 giugno 2026 — §2b.1 schema consegna agente (DESCRIZIONE + LINK + KEYWORD). Agenda 4 slot (10/13/15/19), rotazione catalogo.  
 **Indice principale:** `TEST-SKILL/SKILL-2.0.md` sezione **10.4** (sintesi).  
 **Implementazione:** cartella `righetto_social/`, README tecnico locale.
 
@@ -118,6 +118,55 @@ https://righettoimmobiliare.it/blog-articolo?s={slug}
 
 #padova #blogimmobiliare #… (≥10, allineati a keywords articolo)
 ```
+
+### 2b.1 Schema consegna agente — post, storia, landing social (BLOCCANTE su richiesta utente)
+
+**Quando l’utente chiede** un testo per **post**, **storia**, **reel** o **landing da pubblicare sui social** (Meta / Instagram / Google Business), l’agente consegna **sempre** questo schema a blocchi — non prosa libera senza struttura.
+
+| Blocco | Contenuto | Regole |
+|--------|-----------|--------|
+| **DESCRIZIONE** | Corpo caption in **spintax** `{opzione A\|opzione B\|opzione C}` | Spintax **solo** qui (e righe secondarie), **mai** sul titolo. Testo **breve** (Instagram: preferire &lt;500 caratteri testo+hashtag). Tono Righetto, **no** tariffe mediazione. |
+| **LINK** | URL HTTPS su **riga dedicata** | Dominio `righettoimmobiliare.it`. Immobile: `/immobile?s={slug}`. Blog statico: `/{url_statico}` o `/blog-articolo?s={slug}`. Landing: `/{slug-landing}`. |
+| **KEYWORD** | Hashtag con prefisso **`#`** (nel brief: «keyword con asterisco» = cancelletto `#`) | **Minimo 8–12**, mix base (`#padova` `#righettoimmobiliare` `#immobiliare`) + keyword **specifiche** del contenuto (zona, tipologia, tema articolo). Una riga o blocco finale. **Vietato** omettere i `#`. |
+
+**Ordine obbligatorio nella risposta:** DESCRIZIONE → LINK → KEYWORD.
+
+**Template di consegna (copia-incolla per l’utente):**
+
+```text
+## DESCRIZIONE
+{Titolo esatto da sito — prima riga, senza spintax}
+
+{Frase hook|Variante hook}: {dettaglio zona/prezzo/tema}.
+{Seconda riga utile|Altra variante}: {beneficio o CTA breve}.
+👉 {Leggi l’articolo|Scopri di più|Richiedi info}
+
+## LINK
+https://righettoimmobiliare.it/{percorso-canonical}
+
+## KEYWORD
+#padova #immobiliare #righettoimmobiliare #… (≥8–12, specifici contenuto)
+```
+
+**Esempi per canale:**
+
+| Canale | Note |
+|--------|------|
+| **Post feed IG/FB** | Tutti e tre i blocchi; link in caption (IG: anche sticker link o bio). |
+| **Storia** | Stesso schema in didascalia; link sticker se disponibile. |
+| **Reel** | Caption = stesso schema (descrizione breve + link + keyword). |
+| **Landing social** | DESCRIZIONE con spintax sul beneficio landing; LINK = URL landing; KEYWORD su servizio (es. `#valutazionegratuita`). |
+
+**Blog con `url_statico`:** preferire link diretto `https://righettoimmobiliare.it/blog-…` (senza `.html`) se la pagina HTML dedicata esiste; altrimenti `blog-articolo?s=`.
+
+**Checklist agente (consegna testo social in chat):**
+
+- [ ] Tre blocchi etichettati: **DESCRIZIONE** · **LINK** · **KEYWORD**
+- [ ] Spintax nella descrizione (≥1 blocco `{…|…}`)
+- [ ] Titolo immobile/blog = identico al sito (prima riga descrizione)
+- [ ] URL canonico HTTPS su riga dedicata sotto `## LINK`
+- [ ] ≥8 hashtag `#` sotto `## KEYWORD`
+- [ ] Lunghezza adatta a IG (non muro di testo)
 
 ### Checklist agente / script (prima di salvare bozza o agenda)
 

@@ -39,6 +39,7 @@
   <link rel="stylesheet" href="css/nav-mobile.css?v=4">
   <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/welcome-popup.css?v=3" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/prop-photo-carousel.css?v=1">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
@@ -343,8 +344,8 @@
     /* CARD IMAGE */
     .card-img{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--gc)}
     .card.list-view .card-img{aspect-ratio:unset;height:100%;min-height:180px}
-    .card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
-    .card:hover .card-img img{transform:scale(1.04)}
+    .card-img > img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+    .card:hover .card-img > img{transform:scale(1.04)}
     .card-img-ph{width:100%;height:100%;background:linear-gradient(135deg,#e8e4de,#d4cfc8);display:flex;align-items:center;justify-content:center}
     .card-img-ph svg{width:32px;height:32px;opacity:.2}
 
@@ -422,6 +423,7 @@
     .modal-close{position:absolute;top:1rem;right:1rem;width:34px;height:34px;background:rgba(0,0,0,.6);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10}
     .modal-close svg{width:14px;height:14px;color:#fff}
     .modal-head{position:relative}
+    .modal-hero-wrap{width:100%;height:260px;background:var(--gc);position:relative;overflow:hidden}
 
     /* CTA BANNER */
     .cta-banner-search{max-width:1380px;margin:0 auto;padding:0 1.5rem 1rem}
@@ -897,6 +899,7 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/prop-photo-carousel.js?v=1"></script>
 <script>
   // ── CONFIG SUPABASE ──
   const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
@@ -1012,10 +1015,9 @@
       return;
     }
     grid.innerHTML = immobili.map(i => {
-      const fotoUrl = i.fotoPrincipale || (i.foto.length > 0 ? i.foto[0] : '');
       const fotoCount = i.foto.length;
-      const imgHtml = fotoUrl
-        ? '<img src="'+fotoUrl+'" alt="'+i.titolo.replace(/"/g,'&quot;')+'" width="600" height="400" style="width:100%;height:100%;object-fit:cover;" loading="lazy" onerror="this.parentElement.innerHTML=\''+SVG_PLACEHOLDER.replace(/'/g,"\\'")+'\'">'
+      const imgHtml = fotoCount > 0
+        ? RigPhotoCarousel.buildHtml(i.foto, i.titolo)
         : '<div class="card-img-ph">'+SVG_PLACEHOLDER+'</div>';
       const opLabel = i.op.startsWith('affitto') ? 'Affitto' : i.op === 'asta' ? 'Asta' : 'Vendita';
       const opClass = i.op.startsWith('affitto') ? 'cb-affitto' : i.op === 'asta' ? 'cb-aste' : 'cb-vendita';
@@ -1056,6 +1058,7 @@
         + '</div>'
         + '</a>';
     }).join('');
+    RigPhotoCarousel.initAll(grid);
     filterCards();
   }
 
@@ -1318,34 +1321,28 @@
     const hero = document.getElementById('modal-hero');
     if (!hero) return;
     hero.innerHTML = '';
-    let imgUrl = d.fotoPrincipale || (d.foto && d.foto.length ? d.foto[0] : '');
-    if (!imgUrl && d._raw) {
+    let fotos = Array.isArray(d.foto) ? d.foto.filter(Boolean) : [];
+    if (!fotos.length && d._raw) {
       const r = d._raw;
-      const p = r.foto_principale || (Array.isArray(r.foto) && r.foto[0]) || (Array.isArray(r.foto_urls) && r.foto_urls[0]);
-      if (p) imgUrl = resolveImageUrl(String(p), { width: 900, quality: 80 });
+      const rawList = Array.isArray(r.foto) ? r.foto : [];
+      fotos = rawList.map(function(u){ return resolveImageUrl(String(u), { width: 900, quality: 80 }); }).filter(Boolean);
+      if (!fotos.length) {
+        const p = r.foto_principale || (Array.isArray(r.foto_urls) && r.foto_urls[0]);
+        if (p) fotos = [resolveImageUrl(String(p), { width: 900, quality: 80 })];
+      }
     }
-    if (!imgUrl) {
+    if (!fotos.length && d.fotoPrincipale) fotos = [d.fotoPrincipale];
+    if (!fotos.length) {
       hero.innerHTML = '<div class="card-img-ph" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center">' + SVG_PLACEHOLDER + '</div>';
       return;
     }
-    const img = document.createElement('img');
-    img.className = 'modal-img';
-    img.src = imgUrl;
-    img.alt = d.titolo || 'Immobile';
-    img.width = 900;
-    img.height = 585;
-    img.loading = 'eager';
-    img.decoding = 'async';
-    img.fetchPriority = 'high';
-    img.onerror = function() {
-      hero.innerHTML = '<div class="card-img-ph" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center">' + SVG_PLACEHOLDER + '</div>';
-    };
-    hero.appendChild(img);
+    RigPhotoCarousel.mount(hero, { urls: fotos, alt: d.titolo || 'Immobile' });
   }
 
   // ── MODAL ──
   function openCard(e, el) {
     e.preventDefault();
+    if (typeof RigPhotoCarousel !== 'undefined' && RigPhotoCarousel.wasDragging(el)) return;
     const rif = el.querySelector('.cf-ref') ? el.querySelector('.cf-ref').textContent.replace('Rif. ','') : '';
     const urlSlug = new URL(el.href, location.origin).searchParams.get('s') || '';
     const d = immobili.find(i => generatePropertySlug(i) === urlSlug || i.rif === rif);

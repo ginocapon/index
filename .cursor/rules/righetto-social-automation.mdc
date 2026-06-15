@@ -28,6 +28,12 @@ Rotazione catalogo immobili + blog · FB + IG feed · 4 slot/giorno · GBP opzio
 - **Caption:** titolo + 2–4 righe + **URL HTTPS** + ≥10 hashtag
 - **No** tariffe mediazione online
 
+## Consegna testo social in chat (§2b.1) — post · storia · reel · landing
+Sempre **tre blocchi** nell’ordine:
+1. **DESCRIZIONE** — spintax `{A|B}`, breve, titolo sito in prima riga
+2. **LINK** — URL `righettoimmobiliare.it` su riga dedicata
+3. **KEYWORD** — hashtag con `#` (≥8–12), specifici contenuto
+
 ## Sicurezza
 - **Mai** committare `.env` o token Meta
 - Token PAGE: `verifica_meta.py` + `estrai_token_pagina.py --scrivi-env`

@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="css/nav-mobile.css?v=4">
   <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/welcome-popup.css?v=3" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/prop-photo-carousel.css?v=1">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
@@ -70,6 +71,7 @@
     @media(max-width:768px){.gallery-main{aspect-ratio:4/3}}
     .gallery-main img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
     .gallery-main:hover img{transform:scale(1.02)}
+    .gallery-main:has(.rig-carousel):hover img{transform:none}
     .gallery-no-foto{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;color:rgba(255,255,255,.2)}
     .gallery-no-foto svg{width:60px;height:60px}
     .gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 50%);pointer-events:none}
@@ -367,7 +369,7 @@
 
 <!-- GALLERY -->
 <div class="gallery-wrap" id="galleryWrap">
-  <div class="gallery-main" onclick="openLightbox(0)" id="galleryMain">
+  <div class="gallery-main" id="galleryMain">
     <div class="gallery-no-foto" id="galleryPlaceholder">
       <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
       <p style="font-size:.8rem">Foto non disponibili</p>
@@ -681,6 +683,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/config.js?v=4"></script>
+<script src="js/prop-photo-carousel.js?v=1"></script>
 <script>
 // ══ CONFIG ══
 const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
@@ -690,6 +693,7 @@ const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 let immobile = null;
 let lbFotos = [];
 let lbIdx = 0;
+let galleryIdx = 0;
 let ytId = null;
 let chatOpen = false;
 let chatInitDone = false;
@@ -739,11 +743,16 @@ async function init() {
     const { data: all } = await sb.from('immobili').select('*').eq('attivo', true);
     if (all) {
       art = all.find(a => generatePropertySlug(a) === slug);
-      // Fallback: try matching just the codice part from the slug
+      // Fallback: slug legacy salvato in Supabase (caption social / portali)
+      if (!art) {
+        const slugLo = slug.toLowerCase();
+        art = all.find(a => (a.slug || '').toLowerCase() === slugLo);
+      }
+      // Fallback: codice in coda allo slug SEO (es. …-lp0285-v)
       if (!art) {
         const slugParts = slug.split('-');
         const lastPart = slugParts[slugParts.length - 1].toUpperCase();
-        art = all.find(a => a.codice && a.codice.toUpperCase() === lastPart);
+        art = all.find(a => a.codice && a.codice.trim().toUpperCase() === lastPart);
       }
     }
   }
@@ -1012,19 +1021,22 @@ function renderGallery(d, fotos) {
   const main = document.getElementById('galleryMain');
   const thumbs = document.getElementById('galleryThumbs');
   const count = document.getElementById('fotoCountHero');
+  main.querySelectorAll('img, .gallery-carousel-host').forEach(function(el) { el.remove(); });
 
   if (fotos.length > 0) {
     document.getElementById('galleryPlaceholder').style.display = 'none';
-    const img = document.createElement('img');
-    img.src = fotos[0];
-    img.alt = d.titolo || '';
-    img.width = 1200;
-    img.height = 800;
-    img.onerror = function() { this.style.display = 'none'; };
-    main.insertBefore(img, main.firstChild);
+    const host = document.createElement('div');
+    host.className = 'gallery-carousel-host';
+    main.insertBefore(host, main.firstChild);
+    galleryIdx = 0;
+    RigPhotoCarousel.mount(host, {
+      urls: fotos,
+      alt: d.titolo || 'Immobile',
+      onChange: function(i) { galleryIdx = i; }
+    });
     count.textContent = fotos.length + ' foto';
 
-    // Thumbnails (max 4)
+    thumbs.innerHTML = '';
     const shown = Math.min(fotos.length, 4);
     for (let i = 1; i < shown; i++) {
       const gt = document.createElement('div');
@@ -1046,6 +1058,12 @@ function renderGallery(d, fotos) {
     count.textContent = '0 foto';
     thumbs.style.display = 'none';
   }
+
+  main.onclick = function(e) {
+    if (e.target.closest('.rig-carousel-nav')) return;
+    if (typeof RigPhotoCarousel !== 'undefined' && RigPhotoCarousel.wasDragging(main)) return;
+    openLightbox(galleryIdx);
+  };
 }
 
 function renderDettagli(d) {
