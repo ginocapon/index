@@ -39,7 +39,7 @@
   <link rel="stylesheet" href="css/nav-mobile.css?v=4">
   <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/welcome-popup.css?v=3" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="css/prop-photo-carousel.css?v=1">
+<link rel="stylesheet" href="css/prop-photo-carousel.css?v=2">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
@@ -899,7 +899,7 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/prop-photo-carousel.js?v=1"></script>
+<script src="js/prop-photo-carousel.js?v=2"></script>
 <script>
   // ── CONFIG SUPABASE ──
   const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
@@ -1342,6 +1342,7 @@
   // ── MODAL ──
   function openCard(e, el) {
     e.preventDefault();
+    if (e.target.closest('.rig-carousel-nav')) return;
     if (typeof RigPhotoCarousel !== 'undefined' && RigPhotoCarousel.wasDragging(el)) return;
     const rif = el.querySelector('.cf-ref') ? el.querySelector('.cf-ref').textContent.replace('Rif. ','') : '';
     const urlSlug = new URL(el.href, location.origin).searchParams.get('s') || '';
