@@ -40,6 +40,11 @@
     }
   }
 
+  function slideWidth(state) {
+    var vp = state.root.querySelector('.rig-carousel-viewport');
+    return (vp && vp.offsetWidth) || state.root.offsetWidth || 0;
+  }
+
   function buildHtml(urls, alt) {
     var list = (urls || []).filter(Boolean);
     if (!list.length) return '';
@@ -50,8 +55,8 @@
     }).join('');
     var nav = '';
     if (list.length > 1) {
-      nav = '<button type="button" class="rig-carousel-nav rig-carousel-prev" aria-label="Foto precedente" tabindex="-1">&#8249;</button>'
-        + '<button type="button" class="rig-carousel-nav rig-carousel-next" aria-label="Foto successiva" tabindex="-1">&#8250;</button>'
+      nav = '<span role="button" class="rig-carousel-nav rig-carousel-prev" aria-label="Foto precedente" tabindex="0">&#8249;</span>'
+        + '<span role="button" class="rig-carousel-nav rig-carousel-next" aria-label="Foto successiva" tabindex="0">&#8250;</span>'
         + '<span class="rig-carousel-counter" aria-live="polite">1 / ' + list.length + '</span>';
     }
     return '<div class="rig-carousel" data-rig-carousel tabindex="0" aria-roledescription="carousel">'
@@ -63,7 +68,8 @@
     var el = state.root;
     var track = el.querySelector('.rig-carousel-track');
     if (!track) return;
-    track.style.transform = 'translate3d(' + (-state.index * 100) + '%,0,0)';
+    var w = slideWidth(state);
+    track.style.transform = 'translate3d(' + (-state.index * w) + 'px,0,0)';
     var counter = el.querySelector('.rig-carousel-counter');
     if (counter) counter.textContent = (state.index + 1) + ' / ' + state.total;
     var dots = el.querySelectorAll('.rig-carousel-dot');
@@ -77,6 +83,25 @@
     if (state.total < 2) return;
     state.index = (state.index + delta + state.total) % state.total;
     updateUI(state);
+  }
+
+  function bindNav(btn, state, delta) {
+    if (!btn) return;
+    function act(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      go(state, delta);
+    }
+    btn.addEventListener('click', act);
+    btn.addEventListener('pointerdown', function (e) {
+      e.stopPropagation();
+    });
+    btn.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        go(state, delta);
+      }
+    });
   }
 
   function mount(container, opts) {
@@ -111,25 +136,12 @@
 
     if (total < 2) return state;
 
-    var prev = el.querySelector('.rig-carousel-prev');
-    var next = el.querySelector('.rig-carousel-next');
-    if (prev) {
-      prev.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        go(state, -1);
-      });
-    }
-    if (next) {
-      next.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        go(state, 1);
-      });
-    }
+    bindNav(el.querySelector('.rig-carousel-prev'), state, -1);
+    bindNav(el.querySelector('.rig-carousel-next'), state, 1);
 
     function onPointerDown(e) {
       if (e.button > 0) return;
+      if (e.target.closest('.rig-carousel-nav')) return;
       state.dragging = true;
       state.didDrag = false;
       state.startX = e.clientX;
@@ -150,8 +162,8 @@
       if (!state.didDrag) return;
       e.preventDefault();
       state.deltaX = dx;
-      var pct = (-state.index * 100) + (dx / el.offsetWidth) * 100;
-      track.style.transform = 'translate3d(' + pct + '%,0,0)';
+      var w = slideWidth(state);
+      track.style.transform = 'translate3d(' + (-state.index * w + dx) + 'px,0,0)';
     }
 
     function onPointerUp(e) {
@@ -175,6 +187,7 @@
     el.addEventListener('pointercancel', onPointerUp);
 
     el.addEventListener('click', function (e) {
+      if (e.target.closest('.rig-carousel-nav')) return;
       if (state.didDrag) {
         e.preventDefault();
         e.stopPropagation();
@@ -185,6 +198,14 @@
       if (e.key === 'ArrowLeft') { e.preventDefault(); go(state, -1); }
       if (e.key === 'ArrowRight') { e.preventDefault(); go(state, 1); }
     });
+
+    if (!el._rigResizeBound) {
+      el._rigResizeBound = true;
+      window.addEventListener('resize', function () {
+        var st = getState(el);
+        if (st) updateUI(st);
+      });
+    }
 
     return state;
   }

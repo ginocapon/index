@@ -170,7 +170,7 @@ function renderProps(arr){
     const propSlug = generatePropertySlug(p);
     const desc = propExcerpt(p);
     const loc = `${p.comune||'Padova'}${p.indirizzo?' — '+p.indirizzo:''}`;
-    return `<a href="immobile?s=${encodeURIComponent(propSlug)}" class="pc" onclick="if(window.RigPhotoCarousel&&RigPhotoCarousel.wasDragging(this))event.preventDefault();">
+    return `<a href="immobile?s=${encodeURIComponent(propSlug)}" class="pc" onclick="if(event.target.closest('.rig-carousel-nav')){event.preventDefault();return false;}if(window.RigPhotoCarousel&&RigPhotoCarousel.wasDragging(this))event.preventDefault();">
       <div class="pi">
         ${imgBlock}
         <span class="ptag ${tipClass}">${tipLabel}</span>
