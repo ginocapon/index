@@ -13,6 +13,7 @@
 > **Changelog 29 maggio 2026:** blog — **anti-doppioni BLOCCANTE** prima di ogni nuovo articolo: verifica catalogo + script; se tema già coperto → ricerca web su fonte istituzionale e altro argomento (§8.1a, `skill-content.md` §2.0, `scripts/check_doppioni_sito.py`).
 >
 > **Changelog 16 giugno 2026:** social — schema consegna agente §2b.1: DESCRIZIONE spintax + LINK + KEYWORD `#` per post/storia/reel/landing in chat.
+> **Changelog 16 giugno 2026 (b):** blog — formato **tour portale acquisizioni mix v2** (`skill-content.md` §4.1): 5 residenziali + 2 uffici affitto + capannone, Grisignano in evidenza, layout card moderno; script `build_acquisizioni_giugno16.py`.
 > **Changelog 28 maggio 2026:** social — copy obbligatorio immobili/blog: titolo pari pari, link + hashtag in caption (§2b `skill-social-automation.md`, §10.4).
 
 > **Changelog 20 Maggio 2026:** nuova **`skill-forms-leads.md`** — form landing/blog obbligatori: invio in pagina via `sendNotifica` + `richieste`, no redirect GET a Contatti, no GET su `send-mail.php`; `context-map.json` aggiornato.

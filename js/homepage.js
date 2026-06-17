@@ -680,7 +680,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
-    'ultime 5 acquisizioni residenziali padova 2026: tour portale righetto': { img: 'img/blog/blog-ultime-acquisizioni-residenziali-padova-giugno-2026.webp', url: 'blog-ultime-acquisizioni-residenziali-padova-giugno-2026' },
+    'acquisizioni portale righetto giugno 2026: case, uffici e capannone': { img: 'img/blog/blog-ultime-acquisizioni-residenziali-padova-giugno-2026.webp', url: 'blog-ultime-acquisizioni-residenziali-padova-giugno-2026' },
     'ultime 5 acquisizioni commerciali padova 2026: uffici e capannoni': { img: 'img/blog/blog-ultime-acquisizioni-commerciali-padova-giugno-2026.webp', url: 'blog-ultime-acquisizioni-commerciali-padova-giugno-2026' },
     'compravendite italia q1 2026: dati agenzia entrate e lettura padova': { img: 'img/blog/blog-compravendite-italia-q1-agenzia-entrate-2026.webp', url: 'blog-compravendite-italia-q1-agenzia-entrate-2026-padova' },
     'affitti q1 2026: canoni fimaa +3-4% e mercato studenti padova': { img: 'img/blog/blog-affitti-canoni-fimaa-q1-2026-padova.webp', url: 'blog-affitti-canoni-fimaa-q1-2026-padova' },
@@ -770,7 +770,7 @@ function generateSlug(titolo) {
   // Articoli statici (sempre presenti)
   const articoliStatici = [
 {
-      "titolo": "Ultime 5 acquisizioni residenziali Padova 2026: tour portale Righetto",
+      "titolo": "Acquisizioni portale Righetto giugno 2026: case, uffici e capannone",
       "categoria": "Vita d'Agenzia",
       "data": "2026-06-16",
       "stato": "pubblicato",

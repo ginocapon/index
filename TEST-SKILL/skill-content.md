@@ -137,6 +137,43 @@
 
 ---
 
+## 4.1 Articolo blog «Tour portale acquisizioni» (formato mix v2 — giugno 2026)
+
+**Modello:** `blog-ultime-acquisizioni-residenziali-padova-giugno-2026` · generatore `scripts/build_acquisizioni_giugno16.py` (`build_mix_body`).
+
+### Quando usarlo
+- Aggiornamento periodico del **portafoglio attivo** (non duplicare articoli solo-residenziale + solo-commerciale se l’utente chiede **un unico tour**).
+- Stesso `url_statico` può essere **rivisto** (titolo/H1/meta aggiornati, `dateModified` in schema).
+
+### Contenuto obbligatorio
+| Blocco | Regola |
+|--------|--------|
+| **5 residenziali** | Ultimi attivi da Supabase; **prima scheda = immobile in evidenza editoriale** (es. Grisignano LP0285-V), poi le altre per data acquisizione |
+| **+ commerciale** | **2 uffici in affitto** + **1 capannone** in **ordine di acquisizione** (non alfabetico) |
+| **Dati** | Solo da `scripts/acquisizioni_giugno16_data.json` / portale — codice incarico, prezzo, mq, APE |
+| **Link scheda** | `immobile?s={slug}` senza `www` |
+
+### Layout moderno (CSS inline articolo)
+- `kpi-strip` — 4 numeri sintesi (schede, res, com, comuni)
+- `portale-nav` — anchor jump (Grisignano, residenziale, commerciale, tabella, FAQ)
+- `acq-card` + `seg-chip` (Residenziale / Commerciale / In evidenza)
+- `is-spotlight` sulla card in apertura
+- Tabella confronto **tutte** le schede (8 righe)
+- FAQ + form lead `data-provenienza` = slug articolo
+
+### Titolo / SEO (esempio rivista 16 giugno 2026)
+- **H1:** «Nuove acquisizioni dal portale Righetto — 5 case, uffici in affitto e capannone»
+- **Title:** «Acquisizioni portale Righetto giugno 2026 | Case e commerciali»
+- **Hero:** foto primo immobile in evidenza (Grisignano), non necessariamente il più recente cronologicamente
+
+### Checklist agente
+- [ ] Grisignano (o incarico richiesto) **per primo** con badge In evidenza
+- [ ] UFF2105a → CAP1609a → uff2189a (o ordine acquisizione verificato su DB)
+- [ ] `blog.html`, `admin.html`, `homepage.js` titolo allineato al nuovo H1
+- [ ] Articolo solo-commerciale resta come deep-dive linkato, non doppione del mix
+
+---
+
 ## 5. ENTITY-BASED SEO + NEURAL MATCHING
 
 > Google ragiona per entità semantiche. Ripetere la stessa keyword causa penalizzazione.

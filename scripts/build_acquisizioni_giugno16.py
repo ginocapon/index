@@ -13,6 +13,7 @@ DATE_IT = "16 giugno 2026"
 DATE_ISO = "2026-06-16"
 TIME_TS = "2026-06-16T09:00:00+02:00"
 DATA_PORTALE = "16 giugno 2026"
+DATE_MOD_ISO = "2026-06-16"
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = json.loads((Path(__file__).parent / "acquisizioni_giugno16_data.json").read_text(encoding="utf-8"))
@@ -63,7 +64,26 @@ nav{display:flex;flex:1;gap:.2rem}nav a{color:rgba(255,255,255,.72);font-size:.8
 .related{background:var(--sfondo);border:1px solid var(--gc);padding:1.32rem;border-radius:10px}
 footer{background:linear-gradient(180deg,var(--nero),#0d1a2a);color:rgba(255,255,255,.65);padding:2.35rem 1.5rem;font-size:.75rem}
 .skip-link{position:absolute;top:-100%;background:var(--oro);color:var(--nero);padding:.46rem .9rem;z-index:9999}.skip-link:focus{top:0}
-@media(max-width:600px){.art-hero-img{height:260px}}
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem;margin:1.2rem 0 1.6rem}
+.kpi-strip div{background:var(--sfondo);border:1px solid var(--gc);border-radius:10px;padding:.75rem .85rem;text-align:center}
+.kpi-strip strong{display:block;font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--blu)}
+.kpi-strip span{font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--grigio)}
+.portale-nav{display:flex;flex-wrap:wrap;gap:.45rem;margin:1rem 0 1.8rem}
+.portale-nav a{font-size:.72rem;font-weight:600;background:#fff;border:1px solid var(--gc);color:var(--blu);padding:.35rem .75rem;border-radius:999px;text-decoration:none}
+.portale-nav a:hover{border-color:var(--oro);color:var(--nero)}
+.sec-divider{display:flex;align-items:center;gap:.75rem;margin:2.4rem 0 1rem}
+.sec-divider h2{margin:0;border:none;padding:0;font-size:1.45rem}
+.sec-divider::after{content:'';flex:1;height:1px;background:var(--gc)}
+.acq-card{border:1px solid var(--gc);border-radius:14px;padding:1.15rem 1.2rem 1.35rem;margin:1.35rem 0;background:#fff;box-shadow:0 8px 24px rgba(21,36,53,.05)}
+.acq-card.is-spotlight{border-color:var(--oro);box-shadow:0 10px 28px rgba(255,107,53,.12)}
+.acq-card-head{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;margin-bottom:.55rem}
+.seg-chip{font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:.2rem .55rem;border-radius:999px}
+.seg-res{background:rgba(44,74,110,.12);color:var(--blu)}
+.seg-com{background:rgba(255,107,53,.15);color:#9a3d12}
+.seg-evi{background:var(--oro);color:var(--nero)}
+.acq-card h3{font-family:'Cormorant Garamond',serif;font-size:1.22rem;margin:0;line-height:1.3;color:var(--nero)}
+.acq-card .acq-preview{border-radius:10px;margin:.75rem 0 1rem}
+@media(max-width:600px){.art-hero-img{height:260px}.kpi-strip{grid-template-columns:repeat(2,1fr)}}
 </style>
 <link rel="stylesheet" href="css/blog-lead-form.css?v=1">"""
 
@@ -81,6 +101,15 @@ FOOTER = """
 
 RES_TOP5 = [p for p in DATA["res"] if p.get("codice")][:5]
 COM_TOP5 = DATA["com"][:5]
+
+RES_BY_CODE = {p["codice"]: p for p in DATA["res"] if p.get("codice")}
+COM_BY_CODE = {p["codice"]: p for p in DATA["com"]}
+
+# Mix portale v2: Grisignano in evidenza + 4 residenziali + 2 uffici affitto + 1 capannone (ordine acquisizione commerciale)
+RES_MIX_ORDER = ["LP0285-V", "LP0286", "LA0317", "LP0283", "LP0281"]
+COM_MIX_PICK = ["UFF2105a", "CAP1609a", "uff2189a"]
+RES_MIX = [RES_BY_CODE[c] for c in RES_MIX_ORDER]
+COM_MIX = [COM_BY_CODE[c] for c in COM_MIX_PICK]
 
 
 def word_count(html: str) -> int:
@@ -135,22 +164,29 @@ def meta_line(p: dict) -> str:
     return " · ".join(parts)
 
 
-def acq_block(idx: int, p: dict, paras: list[str], fatti: list[str], alt: str) -> str:
+def acq_block(idx: int, p: dict, paras: list[str], fatti: list[str], alt: str, segment: str = "res", spotlight: bool = False) -> str:
     cod = p["codice"]
     slug = p["slug"]
     tit = p["titolo"]
-    h3 = f"{idx}. {tit} — codice {cod}"
+    seg_cls = "seg-res" if segment == "res" else "seg-com"
+    seg_lbl = "Residenziale" if segment == "res" else "Commerciale"
+    chips = f'<span class="seg-chip {seg_cls}">{seg_lbl}</span>'
+    if spotlight:
+        chips += '<span class="seg-chip seg-evi">In evidenza</span>'
+    card_cls = "acq-card is-spotlight" if spotlight else "acq-card"
     body = "".join(f"<p>{t}</p>" for t in paras)
     fli = "".join(f"<li>{f}</li>" for f in fatti)
     img = p.get("foto0") or ""
     load = "eager" if idx == 1 else "lazy"
-    return f"""<article class="acq-block" id="{cod.lower().replace(' ', '')}">
-  <h3>{escape(h3)}</h3>
+    cta_lbl = "Apri scheda" if segment == "res" else "Vedi scheda"
+    return f"""<article class="{card_cls}" id="{cod.lower().replace(' ', '')}">
+  <div class="acq-card-head">{chips}<span style="font-size:.68rem;color:var(--grigio);margin-left:auto">#{idx} · {escape(cod)}</span></div>
+  <h3>{escape(tit)}</h3>
   <img class="acq-preview" src="{escape(img)}" alt="{escape(alt)}" width="820" height="340" loading="{load}">
   <p class="acq-meta">{meta_line(p)}</p>
   {body}
   <div class="acq-fatti"><strong>In sintesi operativa</strong><ul>{fli}</ul></div>
-  <a class="acq-cta" href="immobile?s={escape(slug)}">Apri scheda {escape(cod)} — foto e planimetrie</a>
+  <a class="acq-cta" href="immobile?s={escape(slug)}">{cta_lbl} {escape(cod)} — foto e planimetrie</a>
 </article>"""
 
 
@@ -332,6 +368,141 @@ COM_NARRATIVES = {
         ],
     },
 }
+
+
+def build_mix_body() -> str:
+    res_blocks = []
+    for i, p in enumerate(RES_MIX, 1):
+        n = RES_NARRATIVES[p["codice"]]
+        res_blocks.append(acq_block(i, p, n["paras"], n["fatti"], n["alt"], segment="res", spotlight=(p["codice"] == "LP0285-V")))
+    res_html = "\n".join(res_blocks)
+
+    com_blocks = []
+    for j, p in enumerate(COM_MIX, len(RES_MIX) + 1):
+        n = COM_NARRATIVES[p["codice"]]
+        com_blocks.append(acq_block(j, p, n["paras"], n["fatti"], n["alt"], segment="com"))
+    com_html = "\n".join(com_blocks)
+
+    return f"""
+<div class="aeo-box">
+<h2>In sintesi</h2>
+<p style="font-size:.84rem;margin:0 0 .6rem">Tour aggiornato del <strong>portale Righetto Immobiliare</strong> al <strong>{DATA_PORTALE}</strong>: <strong>5 proposte residenziali</strong> (con <strong>Grisignano di Zocco in apertura</strong>), più <strong>2 uffici in affitto</strong> a Limena e un <strong>capannone</strong> a Rubano — foto, prezzi e link scheda.</p>
+<ul style="font-size:.84rem">
+<li><strong>8 incarichi attivi</strong> in un unico articolo: vendita abitativa + commerciale</li>
+<li>Residenziale: da <strong>€110.000</strong> (Grisignano) a <strong>€365.000</strong> (Altichiero)</li>
+<li>Commerciale in ordine di acquisizione: UFF2105a → CAP1609a → uff2189a</li>
+</ul>
+</div>
+
+<div class="kpi-strip" aria-label="Numeri selezione portale">
+  <div><strong>8</strong><span>schede attive</span></div>
+  <div><strong>5</strong><span>residenziali</span></div>
+  <div><strong>3</strong><span>commerciali</span></div>
+  <div><strong>101</strong><span>comuni serviti</span></div>
+</div>
+
+<nav class="portale-nav" aria-label="Salta alla sezione">
+  <a href="#lp0285-v">Grisignano</a>
+  <a href="#residenziale">Tutte le case</a>
+  <a href="#commerciale">Uffici e capannone</a>
+  <a href="#confronto">Tabella rapida</a>
+  <a href="#faq">FAQ</a>
+</nav>
+
+<p>Questo formato <strong>portale mix</strong> sostituisce la versione solo residenziale: stesso URL, layout a card più leggibile su mobile e desktop, con segmentazione chiara tra abitazioni e spazi professionali. I dati provengono dal database portale (Supabase) — non sono stime di mercato inventate.</p>
+<p>Il contesto macro resta quello del Q1 2026: compravendite nazionali <strong>+4,4%</strong> (Agenzia delle Entrate) e mutuo al <strong>47,8%</strong> delle operazioni — approfondimento in <a href="blog-compravendite-italia-q1-agenzia-entrate-2026-padova">compravendite Q1 2026</a>. Per il racconto agenzia: <a href="blog-righetto-storia-territorio-acquisizioni-2026">storia Righetto e acquisizioni</a>.</p>
+
+<div class="sec-divider" id="residenziale"><h2>Residenziale — 5 case e appartamenti</h2></div>
+<p>Apriamo con <strong>LP0285-V a Grisignano di Zocco</strong>: casa su due livelli con ampio scoperto a prezzo di ingresso, poi le altre quattro acquisizioni residenziali più recenti tra Padova città e provincia.</p>
+{res_html}
+
+<div class="sec-divider" id="commerciale"><h2>Commerciale — uffici in affitto e capannone</h2></div>
+<p>Dopo il blocco residenziale, tre proposte <strong>commerciali</strong> in ordine di acquisizione sul portale: due <strong>uffici in affitto</strong> a Limena (zona direzionale e industriale) e un <strong>capannone in vendita</strong> a Rubano con lotto ampio. Per l'elenco completo solo commerciale vedi anche <a href="blog-ultime-acquisizioni-commerciali-padova-giugno-2026">articolo commerciali giugno 2026</a>.</p>
+{com_html}
+
+<h2 id="confronto">Confronto rapido — tutte le schede</h2>
+<table>
+<thead><tr><th>Codice</th><th>Segmento</th><th>Zona</th><th>Prezzo / canone</th><th>Nota</th></tr></thead>
+<tbody>
+<tr><td>LP0285-V</td><td>Residenziale</td><td>Grisignano di Zocco</td><td>€110.000</td><td>In evidenza — 6 locali, da ristrutturare</td></tr>
+<tr><td>LP0286</td><td>Residenziale</td><td>Padova Altichiero</td><td>€365.000</td><td>Villetta ristrutturata 230 mq</td></tr>
+<tr><td>LA0317</td><td>Residenziale</td><td>Padova Mandria</td><td>€200.000</td><td>Quadrilocale ristrutturato</td></tr>
+<tr><td>LP0283</td><td>Residenziale</td><td>Padova Sacrocuore</td><td>€230.000</td><td>Bifamiliare con giardino</td></tr>
+<tr><td>LP0281</td><td>Residenziale</td><td>Padova Montà</td><td>€145.000</td><td>Terrazza, da ristrutturare</td></tr>
+<tr><td>UFF2105a</td><td>Commerciale</td><td>Limena</td><td>€800/mese + IVA</td><td>Ufficio ~90 mq, classe B</td></tr>
+<tr><td>CAP1609a</td><td>Commerciale</td><td>Rubano</td><td>€360.000</td><td>Capannone ~550 mq + lotto</td></tr>
+<tr><td>uff2189a</td><td>Commerciale</td><td>Limena</td><td>€1.100/mese</td><td>Ufficio ~140 mq, 4 vani</td></tr>
+</tbody>
+</table>
+
+<h2>Come prenotare visita o richiedere documenti</h2>
+<ol>
+<li>Sfoglia <a href="immobili">tutto il portale</a> o apri la scheda dal codice incarico (es. LP0285-V).</li>
+<li>Chiama <a href="tel:+390498843484">049.88.43.484</a> o usa il form in fondo pagina indicando codice e fascia oraria.</li>
+<li>Per residenziale con mutuo: simulazione rata (<a href="landing-mutuo">landing mutuo</a>) e pre-approvazione banca.</li>
+<li>Per uffici: verifica destinazione d'uso e spese prima della proposta locazione.</li>
+<li>Per capannone: sopralluogo tecnico su accessi carrai e stato copertura.</li>
+</ol>
+
+<h2>Perché Grisignano apre la selezione</h2>
+<p>LP0285-V concentra ciò che molti acquirenti cercano nel 2026: <strong>metrature generose</strong>, <strong>scoperto privato</strong> e prezzo sotto la soglia psicologica dei €150.000 nel Padovano. È da ristrutturare — quindi richiede budget lavori esplicito — ma offre margine progettuale raro a questa cifra. Per confronto con il capoluogo, le guide zona e OMI restano il riferimento istituzionale prima di formulare offerta.</p>
+
+<h2>Acquirente residenziale: APE, mutuo e stato immobile</h2>
+<p>Chi punta a LP0286 o LA0317 (già ristrutturati) ha percorso mutuo più lineare; chi valuta LP0285-V o LP0281 deve integrare preventivo impresa. La quota mutuo al <strong>47,8%</strong> nel Q1 2026 (ADE) conferma il ruolo del credito, senza sostituire due diligence su conformità e spese. Tassi aggiornati: <a href="blog-bce-tassi-mutui-giugno-2026-padova">BCE e mutui giugno 2026</a>. Per prima casa, incrociare requisiti con <a href="blog-agevolazioni-prima-casa-2026">agevolazioni prima casa 2026</a> e simulazione personalizzata in sede.</p>
+
+<h2>Imprenditore e professionista: uffici Limena</h2>
+<p>UFF2105a e uff2189a coprono fasce diverse (90 mq studio elegante vs 140 mq open space modulabile). Canoni €800 e €1.100/mese vanno letti con IVA, spese e durata contratto commerciale — tema affrontato in <a href="servizio-locazioni">servizio locazioni</a> Righetto. Limena resta hub tra Padova e cintura nord: parcheggi e viabilità sono variabili decisive in visita.</p>
+
+<h2>Capannone Rubano: profilo operativo</h2>
+<p>CAP1609a unisce capannone diviso in due unità reunibili, uffici al piano superiore e lotto esterno di circa 3.500 mq. Prezzo <strong>€360.000</strong> per ~550 mq coperti posiziona l'offerta nel segmento artigianale/logistica leggera della cintura ovest. Stato da ristrutturare e classe G impongono analisi impianti e destinazione urbanistica con tecnico prima del compromesso.</p>
+
+<h2>Venditore: come entra un nuovo incarico</h2>
+<p>Ogni scheda elencata nasce da mandato dopo <strong>valutazione comparativa</strong> e shooting professionale. Il compenso di mediazione si concorda <strong>nel mandato</strong> — non pubblichiamo listini online. Valutazione gratuita: <a href="landing-valutazione">landing valutazione</a>.</p>
+
+<h2>Virtual tour e gallerie fotografiche</h2>
+<p>Le schede portale includono gallerie navigabili (swipe su anteprima) e, dove disponibile, <a href="visite-virtuali">visite virtuali 360°</a>. L'articolo integra il racconto; i dati ufficiali restano sempre in scheda immobile.</p>
+
+<h2>Microzone residenziali in sintesi</h2>
+<p><strong>Altichiero (LP0286)</strong> — villetta ristrutturata su un livello, target famiglie che vogliono entrare senza cantiere. <strong>Mandria (LA0317)</strong> — quadrilocale silenzioso, prima casa con servizi di quartiere. <strong>Sacrocuore (LP0283)</strong> — porzione bifamiliare con doppi servizi e giardino in città. <strong>Montà (LP0281)</strong> — metrature ampie e terrazza, trade-off ristrutturazione. Incrociare sempre con <a href="blog-quartieri-padova-2026">guida quartieri Padova 2026</a> per contesto prezzi.</p>
+
+<h2>Domande che riceviamo in agenzia</h2>
+<p><strong>«Posso visitare Grisignano e Padova lo stesso giorno?»</strong> — Sì, se gli appuntamenti sono compatibili: segnala priorità e budget per un giro efficiente.</p>
+<p><strong>«LP0284 è disponibile?»</strong> — LP0284-V non risulta attivo; in evidenza c'è LP0285-V, profilo analogo su due livelli.</p>
+<p><strong>«Gli uffici sono arredati?»</strong> — Stato in scheda; in visita verifichiamo impianti, soppalco e spese condominiali.</p>
+<p><strong>«Il capannone è divisibile?»</strong> — CAP1609a oggi in due unità con possibilità di reunificazione — da confermare in trattativa con progetto d'uso.</p>
+
+<h2>Collegamenti utili sul sito</h2>
+<p>Filtra <a href="immobili?op=vendita">vendita</a> o <a href="immobili?op=affitto">affitto</a> per tipologia; per capannoni e uffici usa i filtri avanzati in <a href="immobili">catalogo completo</a>. Servizi correlati: <a href="servizio-vendita">vendita</a>, <a href="servizio-locazioni">locazioni commerciali</a>, <a href="landing-valutazione">valutazione gratuita</a>. Checklist acquirente: <a href="blog-checklist-verifiche-prima-compromesso-padova-2026">verifiche pre-compromesso Padova</a>.</p>
+
+<h2>Checklist rapida prima dell'offerta</h2>
+<ul>
+<li><strong>Residenziale:</strong> APE, planimetria, spese condominiali, agibilità.</li>
+<li><strong>Ufficio:</strong> destinazione d'uso, contratto commerciale, spese e parcheggio.</li>
+<li><strong>Capannone:</strong> accessi carrai, altezze, portate pavimento, vincoli urbanistici.</li>
+</ul>
+<p>Supporto documentale in trattativa riservata; acquirente libero di nominare tecnico e notaio di fiducia.</p>
+
+<h2>Numeri Righetto (claim verificati)</h2>
+<table>
+<thead><tr><th>Indicatore</th><th>Valore</th></tr></thead>
+<tbody>
+<tr><td>Operatività</td><td>Dal <strong>2000</strong>, sede Limena (PD)</td></tr>
+<tr><td>Portafoglio</td><td><strong>350+</strong> immobili gestiti</td></tr>
+<tr><td>Territorio</td><td><strong>101</strong> comuni</td></tr>
+<tr><td>Soddisfazione</td><td><strong>98%</strong></td></tr>
+<tr><td>Recensioni Google</td><td><strong>127</strong> · media <strong>4,9/5</strong></td></tr>
+</tbody>
+</table>
+
+<div class="tag-row" aria-label="Keyword social">
+  <span>#RighettoImmobiliare</span><span>#CasePadova</span><span>#GrisignanoDiZocco</span>
+  <span>#UfficioLimena</span><span>#CapannonePadova</span><span>#Acquisizioni2026</span><span>#Padova</span>
+</div>
+<p style="font-size:.8rem;color:var(--grigio)"><em>Ultimo aggiornamento: {DATE_IT}. Prezzi e disponibilità come da portale; verificare scheda immobile prima di visita o proposta.</em></p>
+<a class="cta-deep" href="immobili">Sfoglia portale</a>
+<a class="cta-deep" href="immobili?op=vendita" style="background:var(--blu);color:#fff">Solo vendita</a>
+<a class="cta-deep" href="landing-valutazione" style="background:var(--nero);color:#fff">Valutazione gratuita</a>
+"""
 
 
 def build_res_body() -> str:
@@ -560,7 +731,7 @@ def build_com_body() -> str:
 <p>Il Veneto resta tra le regioni con tessuto PMI denso: domanda di metri commerciali segue cicli economici diversi dal residenziale. Per macro-dati usiamo fonti istituzionali (ISTAT, camera di commercio) in articoli di mercato; qui restiamo sulle singole schede attive.</p>
 
 <h2>Collegamenti utili sul sito Righetto</h2>
-<p>Oltre alle schede singole, puoi esplorare <a href="immobili">tutto il portale</a> filtrando per tipologia ufficio, capannone o negozio. Per il racconto dell'agenzia e mix residenziale-commerciale vedi <a href="blog-righetto-storia-territorio-acquisizioni-2026">storia e acquisizioni 2026</a> e il nuovo focus <a href="blog-ultime-acquisizioni-residenziali-padova-giugno-2026">residenziale giugno 2026</a>.</p>
+<p>Oltre alle schede singole, puoi esplorare <a href="immobili">tutto il portale</a> filtrando per tipologia ufficio, capannone o negozio. Per il tour mix residenziale + commerciale vedi <a href="blog-ultime-acquisizioni-residenziali-padova-giugno-2026">acquisizioni portale giugno 2026</a> e <a href="blog-righetto-storia-territorio-acquisizioni-2026">storia e acquisizioni 2026</a>.</p>
 
 <h2>Checklist visita capannone o ufficio</h2>
 <ol>
@@ -591,38 +762,38 @@ ARTICLES = [
         "filename": "blog-ultime-acquisizioni-residenziali-padova-giugno-2026.html",
         "slug": "blog-ultime-acquisizioni-residenziali-padova-giugno-2026",
         "img": "img/blog/blog-ultime-acquisizioni-residenziali-padova-giugno-2026.webp",
-        "hero_img": RES_TOP5[0]["foto0"],
-        "html_title": "Ultime 5 acquisizioni residenziali Padova 2026 | Righetto Blog",
-        "og_title": "Case e appartamenti: ultime 5 acquisizioni sul portale Righetto",
-        "meta_desc": "Villette e appartamenti più recenti su portale Righetto: Altichiero, Grisignano, Mandria, Sacrocuore, Montà. Foto, prezzi e schede aggiornate giugno 2026.",
-        "schema_headline": "Ultime acquisizioni residenziali Padova 2026: cinque proposte dal portale Righetto",
+        "hero_img": RES_MIX[0]["foto0"],
+        "html_title": "Acquisizioni portale Righetto giugno 2026 | Case e commerciali",
+        "og_title": "Portale Righetto: Grisignano in evidenza, case, uffici e capannone",
+        "meta_desc": "Tour aggiornato portale Righetto: Grisignano LP0285-V in apertura, 4 case Padova, 2 uffici Limena in affitto e capannone Rubano. Foto e schede giugno 2026.",
+        "schema_headline": "Acquisizioni portale Righetto giugno 2026: residenziale e commerciale in un tour",
         "section": "Vita d'Agenzia",
-        "cat_badge": "Vita d'Agenzia",
-        "bread": "Acquisizioni residenziali 2026",
-        "breadcrumb_tail": "Acquisizioni residenziali",
-        "h1": "<strong>Ultime 5 acquisizioni residenziali</strong> a Padova e provincia: tour dal portale Righetto",
-        "hero_alt": "Ultime acquisizioni residenziali Padova — copertina blog Righetto Immobiliare giugno 2026",
-        "body_fn": build_res_body,
+        "cat_badge": "Portale Righetto",
+        "bread": "Acquisizioni portale 2026",
+        "breadcrumb_tail": "Acquisizioni portale",
+        "h1": "<strong>Nuove acquisizioni dal portale Righetto</strong> — 5 case, uffici in affitto e capannone",
+        "hero_alt": "Casa Grisignano di Zocco LP0285-V — copertina tour portale Righetto giugno 2026",
+        "body_fn": build_mix_body,
         "faqs": [
-            ("Quali sono le ultime acquisizioni residenziali?", "Al 16 giugno 2026 le più recenti attive sono LP0286 Altichiero, LP0285-V Grisignano, LA0317 Mandria, LP0283 Sacrocuore e LP0281 Montà — ordine per data inserimento portale."),
-            ("Come prenoto una visita?", "Telefono 049.88.43.484, pagina contatti o form in fondo articolo con codice incarico."),
-            ("I prezzi sono negoziabili?", "Ogni trattativa è individuale; il prezzo in scheda è quello richiesto alla pubblicazione."),
-            ("Fate anche locazioni residenziali?", "Sì, oltre alla vendita — filtra il portale per operazione."),
-            ("Dove vedo tutte le case?", "Su immobili in vendita con filtri comune, prezzo e tipologia."),
-            ("Questo articolo sostituisce la scheda immobile?", "No: integra con racconto e link; dati ufficiali restano in scheda."),
+            ("Quali immobili sono nel tour aggiornato?", "8 schede: LP0285-V Grisignano (in evidenza), LP0286, LA0317, LP0283, LP0281 residenziali; UFF2105a e uff2189a uffici affitto Limena; CAP1609a capannone Rubano."),
+            ("Perché Grisignano è per prima?", "LP0285-V è in evidenza editoriale per prezzo di ingresso e ampio scoperto; seguono le altre case per data acquisizione residenziale."),
+            ("Come prenoto una visita?", "049.88.43.484, contatti o form in fondo articolo con codice incarico."),
+            ("Ci sono solo case?", "No: l'articolo include anche due uffici in affitto e un capannone in vendita."),
+            ("I prezzi sono negoziabili?", "Ogni trattativa è individuale; prezzo o canone come da scheda alla pubblicazione."),
+            ("Questo articolo sostituisce la scheda?", "No: integra con racconto e link; dati ufficiali restano in scheda immobile."),
         ],
         "related": [
+            ("Acquisizioni solo commerciali", "blog-ultime-acquisizioni-commerciali-padova-giugno-2026"),
             ("Storia Righetto e acquisizioni", "blog-righetto-storia-territorio-acquisizioni-2026"),
             ("Compravendite Q1 2026", "blog-compravendite-italia-q1-agenzia-entrate-2026-padova"),
-            ("Scegliere immobile giusto", "blog-scegliere-immobile-giusto-padova-2026"),
         ],
         "lead_ids": ("bl-nome-res", "bl-tel-res", "bl-email-res", "bl-msg-res", "bl-gdpr-res"),
         "registry": {
-            "titolo": "Ultime 5 acquisizioni residenziali Padova 2026: tour portale Righetto",
+            "titolo": "Acquisizioni portale Righetto giugno 2026: case, uffici e capannone",
             "categoria": "Vita d'Agenzia",
-            "tempo": 10,
-            "contenuto": "LP0286, LP0285-V, LA0317, LP0283, LP0281 — ville e appartamenti attivi con foto e schede.",
-            "evidenza": False,
+            "tempo": 12,
+            "contenuto": "Grisignano LP0285-V in evidenza, 4 residenziali Padova, 2 uffici affitto Limena, capannone Rubano — tour mix portale.",
+            "evidenza": True,
             "emoji": "🏠",
         },
     },
@@ -652,7 +823,7 @@ ARTICLES = [
         ],
         "related": [
             ("Storia e acquisizioni Righetto", "blog-righetto-storia-territorio-acquisizioni-2026"),
-            ("Acquisizioni residenziali", "blog-ultime-acquisizioni-residenziali-padova-giugno-2026"),
+            ("Acquisizioni portale mix", "blog-ultime-acquisizioni-residenziali-padova-giugno-2026"),
             ("Servizio locazioni", "servizio-locazioni"),
         ],
         "lead_ids": ("bl-nome-com", "bl-tel-com", "bl-email-com", "bl-msg-com", "bl-gdpr-com"),
@@ -687,7 +858,7 @@ def build_html(cfg: dict, body: str, wc: int) -> str:
         "author": {"@type": "Person", "name": "Gino Capon"},
         "publisher": {"@type": "Organization", "name": "Righetto Immobiliare", "url": "https://righettoimmobiliare.it"},
         "datePublished": DATE_ISO,
-        "dateModified": DATE_ISO,
+        "dateModified": DATE_MOD_ISO,
         "mainEntityOfPage": {"@type": "WebPage", "@id": f"https://righettoimmobiliare.it/{slug}"},
         "articleSection": cfg["section"],
         "wordCount": wc,
