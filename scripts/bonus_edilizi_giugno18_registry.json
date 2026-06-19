@@ -1,0 +1,43 @@
+{
+  "generated": "2026-06-18",
+  "blog_html_articoliStatici": [
+    {
+      "titolo": "Bonus edilizi 2026: detrazioni 50% e ecobonus per Padova",
+      "categoria": "Fisco e ristrutturazioni",
+      "data": "2026-06-18",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-bonus-edilizi-2026-incentivi-casa-padova.webp",
+      "url_statico": "blog-bonus-edilizi-2026-incentivi-casa-padova",
+      "tempo": 12,
+      "autore": "Gino Capon",
+      "contenuto": "Legge 199/2025: 50% prima casa, 36% altrove, max 96.000€. Ecobonus, sismabonus e checklist per il Padovano.",
+      "evidenza": true
+    }
+  ],
+  "admin_blogSeedArticles": [
+    {
+      "titolo": "Bonus edilizi 2026: detrazioni 50% e ecobonus per Padova",
+      "categoria": "Fisco e ristrutturazioni",
+      "tempo": 12,
+      "contenuto": "Legge 199/2025: 50% prima casa, 36% altrove, max 96.000€. Ecobonus, sismabonus e checklist per il Padovano.",
+      "evidenza": true,
+      "emoji": "🏗️",
+      "data": "2026-06-18",
+      "stato": "pubblicato",
+      "autore": "Gino Capon",
+      "immagine_copertina": "img/blog/blog-bonus-edilizi-2026-incentivi-casa-padova.webp",
+      "url_statico": "blog-bonus-edilizi-2026-incentivi-casa-padova",
+      "data_pubblicazione": "2026-06-18T09:00:00+02:00"
+    }
+  ],
+  "homepage_js_articoliStatici": [
+    {
+      "titolo": "Bonus edilizi 2026: detrazioni 50% e ecobonus per Padova",
+      "categoria": "Fisco e ristrutturazioni",
+      "data": "2026-06-18",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-bonus-edilizi-2026-incentivi-casa-padova.webp",
+      "url_statico": "blog-bonus-edilizi-2026-incentivi-casa-padova"
+    }
+  ]
+}
