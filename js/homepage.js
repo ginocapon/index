@@ -680,6 +680,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'bonus edilizi 2026: detrazioni 50% e ecobonus per padova': { img: 'img/blog/blog-bonus-edilizi-2026-incentivi-casa-padova.webp', url: 'blog-bonus-edilizi-2026-incentivi-casa-padova' },
     'acquisizioni portale righetto giugno 2026: case, uffici e capannone': { img: 'img/blog/blog-ultime-acquisizioni-residenziali-padova-giugno-2026.webp', url: 'blog-ultime-acquisizioni-residenziali-padova-giugno-2026' },
     'ultime 5 acquisizioni commerciali padova 2026: uffici e capannoni': { img: 'img/blog/blog-ultime-acquisizioni-commerciali-padova-giugno-2026.webp', url: 'blog-ultime-acquisizioni-commerciali-padova-giugno-2026' },
     'compravendite italia q1 2026: dati agenzia entrate e lettura padova': { img: 'img/blog/blog-compravendite-italia-q1-agenzia-entrate-2026.webp', url: 'blog-compravendite-italia-q1-agenzia-entrate-2026-padova' },
@@ -769,6 +770,14 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+{
+      "titolo": "Bonus edilizi 2026: detrazioni 50% e ecobonus per Padova",
+      "categoria": "Fisco e ristrutturazioni",
+      "data": "2026-06-18",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-bonus-edilizi-2026-incentivi-casa-padova.webp",
+      "url_statico": "blog-bonus-edilizi-2026-incentivi-casa-padova"
+    },
 {
       "titolo": "Acquisizioni portale Righetto giugno 2026: case, uffici e capannone",
       "categoria": "Vita d'Agenzia",

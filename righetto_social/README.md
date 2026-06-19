@@ -38,6 +38,10 @@ python genera_bozze_settimanali.py
 # 2) Genera MP4 per i reel (immobili + agenzia; blog/landing = 1 foto ripetuta)
 python genera_reel.py --pending
 
+# 2b) Reel tour portale acquisizioni (intro agenzia + slideshow foto, 9:16 FB/IG)
+python genera_reel_portale_acquisizioni.py --tour
+python genera_reel_portale_acquisizioni.py --codice LP0285-V
+
 # 3) Admin → Social → controlla → Approva (oppure programma da terminale)
 python programma_da_bozze.py --min 8
 
