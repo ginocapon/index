@@ -7062,11 +7062,14 @@ async function getBlogArticles() {
       blogArticles.push({ ...s, id: 'seed_' + s.url_statico });
     }
   });
-  // Backfill: aggiorna data_pubblicazione mancante da seed
+  // Backfill: url_statico, categoria, immagine da seed + data_pubblicazione
   blogArticles.forEach(a => {
-    if (!a.data_pubblicazione) {
-      const seed = seedByTitolo[(a.titolo || '').toLowerCase()];
-      if (seed && seed.data_pubblicazione) {
+    const seed = seedByTitolo[(a.titolo || '').toLowerCase()];
+    if (seed) {
+      if (!a.url_statico && seed.url_statico) a.url_statico = seed.url_statico;
+      if (!a.immagine_copertina && seed.immagine_copertina) a.immagine_copertina = seed.immagine_copertina;
+      if (!a.categoria && seed.categoria) a.categoria = seed.categoria;
+      if (!a.data_pubblicazione && seed.data_pubblicazione) {
         a.data_pubblicazione = seed.data_pubblicazione;
         if (a.id && !String(a.id).startsWith('seed_')) {
           try { sb.from('blog').update({ data_pubblicazione: seed.data_pubblicazione }).eq('id', a.id).then(() => {}); } catch(ex) {}
@@ -7108,7 +7111,7 @@ async function loadBlogList() {
         <td>${a.stato === 'pubblicato' ? '<span class="badge badge-verde">Pubblicato</span>' : '<span class="badge badge-oro">Bozza</span>'}${a.evidenza ? ' <span class="badge badge-blu">★</span>' : ''}</td>
         <td style="white-space:nowrap">
           <button class="btn btn-sm" style="background:var(--sfondo);border:1px solid var(--gc);padding:6px 8px" onclick="previewBlogArticle('${a.id}')" title="Anteprima rapida">🔍</button>
-          <a href="${a.url_statico && String(a.id).startsWith('seed_') ? '/' + esc(a.url_statico) : '/blog-articolo?s=' + encodeURIComponent(a.slug || generateSlug(a.titolo))}" target="_blank" rel="noopener" class="btn btn-sm" style="background:#e3f2fd;border:1px solid #90caf9;color:#1565c0;padding:6px 8px;text-decoration:none;display:inline-block" title="Vedi pagina pubblicata">🌐</a>
+          <a href="${blogPublicHref(a)}" target="_blank" rel="noopener" class="btn btn-sm" style="background:#e3f2fd;border:1px solid #90caf9;color:#1565c0;padding:6px 8px;text-decoration:none;display:inline-block" title="Vedi pagina pubblicata">🌐</a>
           <button class="btn btn-sm btn-secondary" onclick="editBlogArticle('${a.id}')">✏️ Modifica</button>
           <button class="btn btn-sm btn-danger" onclick="deleteBlogById('${a.id}')">🗑️</button>
         </td>
@@ -7123,6 +7126,15 @@ function formatDate(d) {
   const dt = new Date(d);
   return dt.toLocaleDateString('it-IT', { day: 'numeric', month: 'short', year: 'numeric' });
 }
+function blogPublicHref(a) {
+  const seed = _blogSeedArticles.find(function(s) {
+    return (s.titolo || '').toLowerCase() === (a.titolo || '').toLowerCase();
+  });
+  if (seed && seed.url_statico) return '/' + seed.url_statico;
+  if (a.url_statico && String(a.id).startsWith('seed_')) return '/' + a.url_statico;
+  return '/blog-articolo?s=' + encodeURIComponent(a.slug || generateSlug(a.titolo));
+}
+
 function getExcerpt(html, maxWords) {
   let clean = (html || '')
     .replace(/<script[\s\S]*?<\/script>/gi, '')
