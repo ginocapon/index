@@ -1,0 +1,30 @@
+{
+  "proprietario": "Sig. Turato Antonio",
+  "tipologia": "Bifamiliare",
+  "data": "2026-06-15",
+  "valore": 240000,
+  "superficie_commerciale": 196.3,
+  "espressione_superficie": "[(94,05 + 14,50) × 1,15] + [(88,78 × 1,15) × 0,70] = 124,83 + 71,47 = 196,30 mq",
+  "calcolo_superficie": [
+    {
+      "livello": "Piano terra",
+      "dettaglio": "Interno 94,05 mq + portici 14,50 mq → netto 108,55 mq × 1,15",
+      "mq": "124,83 mq"
+    },
+    {
+      "livello": "Sottotetto",
+      "dettaglio": "Netto 88,78 mq × 1,15 = 102,10 mq × 0,70",
+      "mq": "71,47 mq"
+    }
+  ],
+  "allegati_pdf": "c:\\Users\\Utente\\Downloads\\pinate e prospetti (2).pdf",
+  "output_nome": "Perizia_Turato_Antonio_Bifamiliare.pdf",
+  "planimetrie_labels": [
+    "Planimetria piano terra",
+    "Planimetria piano primo / sottotetto"
+  ],
+  "prospetti_labels": [
+    "Prospetto est",
+    "Prospetto ovest"
+  ]
+}

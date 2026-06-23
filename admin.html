@@ -8130,7 +8130,7 @@ ${tagHtml(sicurezza, 'Sicurezza & Tecnologia')}
 ${ceHtml}
 ${planHtml}
 <div class="footer">
-  <strong>Righetto Immobiliare</strong> \u2014 Via Roma 96, Limena (PD) \u2014 Tel: 049.88.43.484 \u2014 info@righettoimmobiliare.it \u2014 www.righettoimmobiliare.it<br>
+  <strong>Righetto Immobiliare</strong> \u2014 Via Roma 96, Limena (PD) \u2014 Tel: 049.8843484 \u2014 info@righettoimmobiliare.it \u2014 www.righettoimmobiliare.it<br>
   Documento generato il ${new Date().toLocaleDateString('it-IT')} \u2014 Le informazioni non costituiscono elemento contrattuale
 </div>
 </body></html>`);
@@ -8152,7 +8152,7 @@ function quickPublishSocial(id) {
 
 window.__socialBozzeRows = [];
 
-var SOCIAL_SECTIONS_TPL = {"immobile":{"titoli_spintax":["{Nuovo incarico a Padova|In esclusiva a Padova}: {titolo}","{Scopri questo immobile|Opportunita a Padova}: {titolo}"],"corpo_spintax":["{Visita su appuntamento|Richiedi informazioni}: {zona} — {dettaglio}.\n{Consulenza gratuita in agenzia|Prenota una visita senza impegno}.\nTel. 049 8755543 · righettoimmobiliare.it"],"hashtags":["#padova","#immobiliare","#righettoimmobiliare","#casa","#venditacasa","#affittopadova","#mercatoimmobiliare","#agenziaimmobiliare","#immobilipadova","#consulenzaimmobiliare","#nuovoannuncio","#proprieta"],"canali_settimana":[{"giorno_offset":0,"ora":"09:45","tipo":"instagram_reel"},{"giorno_offset":2,"ora":"12:30","tipo":"instagram_feed"},{"giorno_offset":4,"ora":"18:45","tipo":"facebook_post"}]},"blog":{"titoli_spintax":["{Approfondimento|Articolo}: {titolo}","{Sul blog|Leggi ora}: {titolo}"],"corpo_spintax":["{Guida pratica|Approfondimento} per chi {vende|acquista} a Padova: {titolo}.\n{Link in bio|Leggi l articolo completo} — consulenza senza impegno."],"hashtags":["#padova","#blogimmobiliare","#righettoimmobiliare","#consulenzaimmobiliare","#mutuo","#tasse","#mercatoimmobiliare","#primacasa","#venditacasa","#investimentiimmobiliari","#normative","#guida"],"canali_settimana":[{"giorno_offset":0,"ora":"11:15","tipo":"instagram_feed"},{"giorno_offset":2,"ora":"13:00","tipo":"facebook_post"},{"giorno_offset":4,"ora":"12:00","tipo":"instagram_feed"}]},"landing":{"titoli_spintax":["{Servizio dedicato|Landing}: {titolo}","{Scopri il servizio|Percorso su misura}: {titolo}"],"corpo_spintax":["{Consulenza gratuita|Percorso guidato} — {titolo}.\n{Compila il form|Richiedi informazioni} in pochi minuti. {Padova e provincia|Zona Padova}."],"hashtags":["#padova","#righettoimmobiliare","#consulenzagratuita","#valutazioneimmobile","#venderecasa","#mutuo","#landing","#serviziimmobiliari","#agenziaimmobiliare","#immobilipadova","#assistenza","#contatti"],"canali_settimana":[{"giorno_offset":0,"ora":"12:45","tipo":"facebook_post"},{"giorno_offset":2,"ora":"11:30","tipo":"instagram_feed"},{"giorno_offset":4,"ora":"18:30","tipo":"facebook_post"}]},"agenzia":{"titoli_spintax":["{Righetto Immobiliare|La tua agenzia a Padova}: {titolo}","{Dal 2000 a Padova|Esperienza locale}: {titolo}"],"corpo_spintax":["{350+ immobili|Oltre 350 annunci} · {101 comuni|Padova e provincia}.\n{Consulenza gratuita|Prenota in agenzia}: {pagina}.\n049 8755543"],"hashtags":["#padova","#righettoimmobiliare","#agenziaimmobiliare","#immobilipadova","#consulenzaimmobiliare","#dal2000","#professionisti","#venditacasa","#acquistocasa","#territorio","#contatti","#soddisfazioneclienti"],"canali_settimana":[{"giorno_offset":0,"ora":"18:50","tipo":"instagram_feed"},{"giorno_offset":2,"ora":"18:15","tipo":"facebook_post"},{"giorno_offset":4,"ora":"09:40","tipo":"instagram_reel"}]},"pagine_agenzia":[{"path":"/","titolo":"Homepage — annunci e servizi"},{"path":"/chi-siamo","titolo":"Chi siamo — esperienza dal 2000"},{"path":"/contatti","titolo":"Contatti e consulenza gratuita"},{"path":"/servizi","titolo":"Servizi per venditori e acquirenti"}]};
+var SOCIAL_SECTIONS_TPL = {"immobile":{"titoli_spintax":["{Nuovo incarico a Padova|In esclusiva a Padova}: {titolo}","{Scopri questo immobile|Opportunita a Padova}: {titolo}"],"corpo_spintax":["{Visita su appuntamento|Richiedi informazioni}: {zona} — {dettaglio}.\n{Consulenza gratuita in agenzia|Prenota una visita senza impegno}.\nTel. 049.8843484 · righettoimmobiliare.it"],"hashtags":["#padova","#immobiliare","#righettoimmobiliare","#casa","#venditacasa","#affittopadova","#mercatoimmobiliare","#agenziaimmobiliare","#immobilipadova","#consulenzaimmobiliare","#nuovoannuncio","#proprieta"],"canali_settimana":[{"giorno_offset":0,"ora":"09:45","tipo":"instagram_reel"},{"giorno_offset":2,"ora":"12:30","tipo":"instagram_feed"},{"giorno_offset":4,"ora":"18:45","tipo":"facebook_post"}]},"blog":{"titoli_spintax":["{Approfondimento|Articolo}: {titolo}","{Sul blog|Leggi ora}: {titolo}"],"corpo_spintax":["{Guida pratica|Approfondimento} per chi {vende|acquista} a Padova: {titolo}.\n{Link in bio|Leggi l articolo completo} — consulenza senza impegno."],"hashtags":["#padova","#blogimmobiliare","#righettoimmobiliare","#consulenzaimmobiliare","#mutuo","#tasse","#mercatoimmobiliare","#primacasa","#venditacasa","#investimentiimmobiliari","#normative","#guida"],"canali_settimana":[{"giorno_offset":0,"ora":"11:15","tipo":"instagram_feed"},{"giorno_offset":2,"ora":"13:00","tipo":"facebook_post"},{"giorno_offset":4,"ora":"12:00","tipo":"instagram_feed"}]},"landing":{"titoli_spintax":["{Servizio dedicato|Landing}: {titolo}","{Scopri il servizio|Percorso su misura}: {titolo}"],"corpo_spintax":["{Consulenza gratuita|Percorso guidato} — {titolo}.\n{Compila il form|Richiedi informazioni} in pochi minuti. {Padova e provincia|Zona Padova}."],"hashtags":["#padova","#righettoimmobiliare","#consulenzagratuita","#valutazioneimmobile","#venderecasa","#mutuo","#landing","#serviziimmobiliari","#agenziaimmobiliare","#immobilipadova","#assistenza","#contatti"],"canali_settimana":[{"giorno_offset":0,"ora":"12:45","tipo":"facebook_post"},{"giorno_offset":2,"ora":"11:30","tipo":"instagram_feed"},{"giorno_offset":4,"ora":"18:30","tipo":"facebook_post"}]},"agenzia":{"titoli_spintax":["{Righetto Immobiliare|La tua agenzia a Padova}: {titolo}","{Dal 2000 a Padova|Esperienza locale}: {titolo}"],"corpo_spintax":["{350+ immobili|Oltre 350 annunci} · {101 comuni|Padova e provincia}.\n{Consulenza gratuita|Prenota in agenzia}: {pagina}.\n049.8843484"],"hashtags":["#padova","#righettoimmobiliare","#agenziaimmobiliare","#immobilipadova","#consulenzaimmobiliare","#dal2000","#professionisti","#venditacasa","#acquistocasa","#territorio","#contatti","#soddisfazioneclienti"],"canali_settimana":[{"giorno_offset":0,"ora":"18:50","tipo":"instagram_feed"},{"giorno_offset":2,"ora":"18:15","tipo":"facebook_post"},{"giorno_offset":4,"ora":"09:40","tipo":"instagram_reel"}]},"pagine_agenzia":[{"path":"/","titolo":"Homepage — annunci e servizi"},{"path":"/chi-siamo","titolo":"Chi siamo — esperienza dal 2000"},{"path":"/contatti","titolo":"Contatti e consulenza gratuita"},{"path":"/servizi","titolo":"Servizi per venditori e acquirenti"}]};
 
 function socialBozzeApplyPattern(pattern, ctx) {
   var out = String(pattern || '');
@@ -8657,7 +8657,7 @@ function buildSocialCaption(i) {
   if (i.aria_condizionata) highlights.push('Climatizzato');
   if (highlights.length) caption += highlights.join(' | ') + '\n\n';
   caption += 'Rif. ' + (i.codice || '') + '\n';
-  caption += 'Righetto Immobiliare | Tel: 049.88.43.484\n';
+  caption += 'Righetto Immobiliare | Tel: 049.8843484\n';
   caption += '#immobiliare #' + (i.comune || 'padova').toLowerCase().replace(/\s+/g, '') + ' #' + (i.tipo_operazione || 'vendita') + ' #casainvendita #righettoimmobiliare';
   return caption;
 }
@@ -8701,7 +8701,7 @@ function buildBlogSocialCaption(a) {
   if (txt.split(/\s+/).length > 40) excerpt += '...';
   caption += excerpt + '\n\n';
   caption += 'Leggi l\'articolo completo su righettoimmobiliare.it/blog-articolo.html?s=' + (a.slug || '') + '\n\n';
-  caption += 'Righetto Immobiliare | Tel: 049.88.43.484\n';
+  caption += 'Righetto Immobiliare | Tel: 049.8843484\n';
   // Hashtags from category
   var cat = (a.categoria || '').toLowerCase().replace(/\s+/g, '');
   caption += '#immobiliare #padova #' + cat + ' #blog #righettoimmobiliare';
@@ -8964,7 +8964,7 @@ function generateTikTokImage() {
     ctx.fillRect(0, 1800, 1080, 120);
     ctx.font = '28px "Segoe UI", Arial';
     ctx.fillStyle = '#CEE08F';
-    ctx.fillText('Rif. ' + (i.codice || '') + '  |  Tel: 049.88.43.484', 540, 1850);
+    ctx.fillText('Rif. ' + (i.codice || '') + '  |  Tel: 049.8843484', 540, 1850);
     ctx.font = '24px "Segoe UI", Arial';
     ctx.fillStyle = '#B0C8E0';
     ctx.fillText('www.righettoimmobiliare.it', 540, 1885);
@@ -13261,8 +13261,8 @@ showSection = function(name) {
     html += `
   <div style="background:#1a1a2e;padding:24px 30px;text-align:center">
     <p style="color:#d4a843;margin:0 0 8px;font-size:14px;font-weight:bold">Righetto Immobiliare</p>
-    <p style="color:#999;margin:0 0 4px;font-size:12px">Via Fratelli Cervi 37, 35129 Padova</p>
-    <p style="color:#999;margin:0 0 12px;font-size:12px">Tel: 049 7808 888 | info@righettoimmobiliare.it</p>
+    <p style="color:#999;margin:0 0 4px;font-size:12px">Via Roma n.96, 35010 Limena (PD)</p>
+    <p style="color:#999;margin:0 0 12px;font-size:12px">Tel: 049.8843484 | info@righettoimmobiliare.it</p>
     <p style="color:#666;font-size:11px;margin:0">{{unsubscribe_link}}</p>
   </div>
 </div>
@@ -13396,13 +13396,13 @@ showSection = function(name) {
       </div>
     </div>
 
-    <p style="font-size:14px;color:#888;text-align:center">Hai domande? Rispondi a questa email o chiamaci al <strong>049 7808 888</strong></p>
+    <p style="font-size:14px;color:#888;text-align:center">Hai domande? Rispondi a questa email o chiamaci al <strong>049.8843484</strong></p>
   </div>
 
   <div style="background:#1a1a2e;padding:24px 30px;text-align:center">
     <p style="color:#d4a843;margin:0 0 8px;font-size:14px;font-weight:bold">Righetto Immobiliare</p>
-    <p style="color:#999;margin:0 0 4px;font-size:12px">Via Fratelli Cervi 37, 35129 Padova</p>
-    <p style="color:#999;margin:0 0 12px;font-size:12px">Tel: 049 7808 888 | info@righettoimmobiliare.it</p>
+    <p style="color:#999;margin:0 0 4px;font-size:12px">Via Roma n.96, 35010 Limena (PD)</p>
+    <p style="color:#999;margin:0 0 12px;font-size:12px">Tel: 049.8843484 | info@righettoimmobiliare.it</p>
     <p style="color:#666;font-size:11px;margin:0">{{unsubscribe_link}}</p>
   </div>
 </div>
@@ -14089,8 +14089,8 @@ showSection = function(name) {
   <!-- Footer -->
   <div style="background:#1a1a2e;padding:24px 30px;text-align:center">
     <p style="color:#d4a843;margin:0 0 8px;font-size:14px;font-weight:bold">Righetto Immobiliare</p>
-    <p style="color:#999;margin:0 0 4px;font-size:12px">Via Fratelli Cervi 37, 35129 Padova</p>
-    <p style="color:#999;margin:0 0 12px;font-size:12px">Tel: 049 7808 888 | info@righettoimmobiliare.it</p>
+    <p style="color:#999;margin:0 0 4px;font-size:12px">Via Roma n.96, 35010 Limena (PD)</p>
+    <p style="color:#999;margin:0 0 12px;font-size:12px">Tel: 049.8843484 | info@righettoimmobiliare.it</p>
     <p style="color:#666;font-size:11px;margin:0">{{unsubscribe_link}}</p>
   </div>
 </div>
@@ -14130,8 +14130,8 @@ showSection = function(name) {
 
   <div style="background:#1a1a2e;padding:24px 30px;text-align:center">
     <p style="color:#d4a843;margin:0 0 8px;font-size:14px;font-weight:bold">Righetto Immobiliare</p>
-    <p style="color:#999;margin:0 0 4px;font-size:12px">Via Fratelli Cervi 37, 35129 Padova</p>
-    <p style="color:#999;margin:0 0 12px;font-size:12px">Tel: 049 7808 888 | info@righettoimmobiliare.it</p>
+    <p style="color:#999;margin:0 0 4px;font-size:12px">Via Roma n.96, 35010 Limena (PD)</p>
+    <p style="color:#999;margin:0 0 12px;font-size:12px">Tel: 049.8843484 | info@righettoimmobiliare.it</p>
     <p style="color:#666;font-size:11px;margin:0">{{unsubscribe_link}}</p>
   </div>
 </div>
@@ -14161,7 +14161,7 @@ showSection = function(name) {
 
   <div style="background:#1a1a2e;padding:24px 30px;text-align:center">
     <p style="color:#d4a843;margin:0 0 8px;font-size:14px;font-weight:bold">Righetto Immobiliare</p>
-    <p style="color:#999;margin:0;font-size:12px">Via Fratelli Cervi 37, 35129 Padova | 049 7808 888</p>
+    <p style="color:#999;margin:0;font-size:12px">Via Roma n.96, 35010 Limena (PD) | 049.8843484</p>
     <p style="color:#666;font-size:11px;margin:8px 0 0">{{unsubscribe_link}}</p>
   </div>
 </div>
@@ -14284,7 +14284,7 @@ showSection = function(name) {
           'Ricevi questa email perché sei un contatto di Righetto Immobiliare.<br>' +
           '<a href="' + (isPreview ? '#' : '{{UNSUB_URL}}') + '" style="color:#999;text-decoration:underline">Cancella iscrizione</a> | ' +
           '<a href="https://www.righettoimmobiliare.it/privacy-policy.html" style="color:#999;text-decoration:underline">Privacy Policy</a><br>' +
-          'Righetto Immobiliare — Via Fratelli Cervi 37, 35129 Padova' +
+          'Righetto Immobiliare — Via Roma n.96, 35010 Limena (PD)' +
         '</div>';
       }
     }
@@ -14784,11 +14784,11 @@ showSection = function(name) {
     <p style="font-size:15px;color:#555;line-height:1.7">Gentile <strong>${escHtml(nome)}</strong>,</p>
     <p style="font-size:15px;color:#555;line-height:1.7">in base alla tua ricerca, abbiamo selezionato un immobile che potrebbe interessarti:</p>
     ${cardHtml}
-    <p style="font-size:14px;color:#888;text-align:center;margin-top:20px">Vuoi saperne di più? Rispondi a questa email o chiamaci al <strong>049 7808 888</strong></p>
+    <p style="font-size:14px;color:#888;text-align:center;margin-top:20px">Vuoi saperne di più? Rispondi a questa email o chiamaci al <strong>049.8843484</strong></p>
   </div>
   <div style="background:#1a1a2e;padding:20px;text-align:center">
     <p style="color:#d4a843;margin:0 0 6px;font-size:13px;font-weight:bold">Righetto Immobiliare</p>
-    <p style="color:#999;margin:0;font-size:11px">Via Fratelli Cervi 37, 35129 Padova | 049 7808 888</p>
+    <p style="color:#999;margin:0;font-size:11px">Via Roma n.96, 35010 Limena (PD) | 049.8843484</p>
     <p style="color:#666;font-size:10px;margin:8px 0 0">{{unsubscribe_link}}</p>
   </div>
 </div></body></html>`;
@@ -14832,11 +14832,11 @@ showSection = function(name) {
     <p style="font-size:15px;color:#555;line-height:1.7">Gentile <strong>{{nome}}</strong>,</p>
     <p style="font-size:15px;color:#555;line-height:1.7">abbiamo un immobile che corrisponde alla tua ricerca:</p>
     ${cardHtml}
-    <p style="font-size:14px;color:#888;text-align:center;margin-top:20px">Interessato? Rispondi a questa email o chiamaci al <strong>049 7808 888</strong></p>
+    <p style="font-size:14px;color:#888;text-align:center;margin-top:20px">Interessato? Rispondi a questa email o chiamaci al <strong>049.8843484</strong></p>
   </div>
   <div style="background:#1a1a2e;padding:20px;text-align:center">
     <p style="color:#d4a843;margin:0 0 6px;font-size:13px;font-weight:bold">Righetto Immobiliare</p>
-    <p style="color:#999;margin:0;font-size:11px">Via Fratelli Cervi 37, 35129 Padova | 049 7808 888</p>
+    <p style="color:#999;margin:0;font-size:11px">Via Roma n.96, 35010 Limena (PD) | 049.8843484</p>
     <p style="color:#666;font-size:10px;margin:8px 0 0">{{unsubscribe_link}}</p>
   </div>
 </div></body></html>`;
@@ -14876,7 +14876,7 @@ showSection = function(name) {
     matches.forEach((c, idx) => {
       const tel = c.telefono.replace(/\s+/g, '').replace(/^(\+39|0039)/, '');
       if (!tel || tel.length < 6) return;
-      const msg = encodeURIComponent('Buongiorno ' + (c.nome || '') + ', le proponiamo questo immobile:\n\n' + propInfo + '\n\n' + url + '\n\nPer info: Righetto Immobiliare 049 7808 888');
+      const msg = encodeURIComponent('Buongiorno ' + (c.nome || '') + ', le proponiamo questo immobile:\n\n' + propInfo + '\n\n' + url + '\n\nPer info: Righetto Immobiliare 049.8843484');
       setTimeout(() => {
         window.open('https://wa.me/39' + tel + '?text=' + msg, '_blank');
       }, idx * 1500); // 1.5s delay tra ogni apertura
@@ -14919,7 +14919,7 @@ showSection = function(name) {
   </div>
   <div style="background:#1a1a2e;padding:20px;text-align:center">
     <p style="color:#d4a843;margin:0 0 6px;font-size:13px;font-weight:bold">Righetto Immobiliare</p>
-    <p style="color:#999;margin:0;font-size:11px">Via Fratelli Cervi 37, 35129 Padova | 049 7808 888</p>
+    <p style="color:#999;margin:0;font-size:11px">Via Roma n.96, 35010 Limena (PD) | 049.8843484</p>
     <p style="color:#666;font-size:10px;margin:8px 0 0">{{unsubscribe_link}}</p>
   </div>
 </div></body></html>`;
@@ -14955,7 +14955,7 @@ showSection = function(name) {
       const url = 'https://www.righettoimmobiliare.it/immobile?id=' + i.id;
       msgParts.push((idx+1) + '. ' + (i.titolo || i.codice || '') + '\n   ' + (i.comune || '') + ' | ' + prezzo + (i.superficie ? ' | ' + i.superficie + 'mq' : '') + '\n   ' + url);
     });
-    msgParts.push('\nPer info: Righetto Immobiliare 049 7808 888');
+    msgParts.push('\nPer info: Righetto Immobiliare 049.8843484');
 
     const msg = encodeURIComponent(msgParts.join('\n'));
     window.open('https://wa.me/39' + tel + '?text=' + msg, '_blank');
@@ -16006,7 +16006,7 @@ function _scraOriginalFaq(topic) {
     { q: 'Come influisce "' + topic + '" sul valore della mia casa a Padova?', a: 'L\'impatto varia in base alla zona e alla tipologia dell\'immobile. Una valutazione gratuita da parte di un professionista locale consente di avere un quadro preciso e aggiornato al mercato reale di Padova.' },
     { q: 'Quali documenti servono per vendere casa a Padova nel ' + year + '?', a: 'Servono APE in corso di validita\', visura catastale aggiornata, planimetria conforme, certificato di conformita\' urbanistica e documentazione condominiale. Il nostro team verifica tutto gratuitamente prima della messa in vendita.' },
     { q: 'Conviene aspettare o agire adesso?', a: 'Nella nostra esperienza, il momento migliore per vendere o comprare e\' quando si hanno le idee chiare e la documentazione in ordine. Le condizioni di mercato a Padova sono attualmente favorevoli per chi e\' preparato.' },
-    { q: 'Posso avere una consulenza gratuita?', a: 'Assolutamente si\'. Righetto Immobiliare offre valutazioni gratuite e consulenze personalizzate senza impegno. Contattaci al 049.88.43.484 o tramite il form sul sito.' }
+    { q: 'Posso avere una consulenza gratuita?', a: 'Assolutamente si\'. Righetto Immobiliare offre valutazioni gratuite e consulenze personalizzate senza impegno. Contattaci al 049.8843484 o tramite il form sul sito.' }
   ];
 }
 

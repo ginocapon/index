@@ -12,7 +12,7 @@ Casa singola ~230 mq {ristrutturata|completamente rinnovata}, 4 camere, 2 bagni,
 Prezzo richiesto: € 365.000 — {ideale per famiglie|ottima per chi cerca spazi}.
 
 {Visita su appuntamento|Prenota una visita}: consulenza gratuita in agenzia.
-Tel. 049 8755543
+Tel. 049.8843484
 
 https://righettoimmobiliare.it/immobile?s=casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno
 
@@ -30,7 +30,7 @@ Casa singola ~120 mq + giardino privato ~800 mq, garage e piazzale.
 € 150.000 — {tra Vicenza e Padova|posizione strategica A4}.
 
 {Richiedi informazioni|Scopri di più} — visita senza impegno.
-049 8755543
+049.8843484
 
 https://righettoimmobiliare.it/immobile?s=casa-singola-con-ampio-giardino-a-grisignano-di-zocco
 
@@ -48,7 +48,7 @@ Casa singola ~140 mq su 2 livelli, {da ristrutturare|ampio margine di personaliz
 € 110.000.
 
 {Prenota visita|Contattaci}: consulenza gratuita Righetto Immobiliare.
-049 8755543
+049.8843484
 
 https://righettoimmobiliare.it/immobile?s=casa-singola-con-ampio-scoperto-a-grisignano-di-zocco
 
@@ -66,7 +66,7 @@ https://righettoimmobiliare.it/immobile?s=casa-singola-con-ampio-scoperto-a-gris
 € 200.000 — {zona tranquilla|quartiere residenziale}.
 
 {Visita su appuntamento|Richiedi informazioni}.
-049 8755543
+049.8843484
 
 https://righettoimmobiliare.it/immobile?s=elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova
 
@@ -84,7 +84,7 @@ https://righettoimmobiliare.it/immobile?s=elegante-appartamento-quadrilocale-in-
 {Completamente ristrutturata|Pronta da vivere}.
 
 Consulenza gratuita — {prenota visita|chiamaci}.
-049 8755543
+049.8843484
 
 https://righettoimmobiliare.it/immobile?s=bi-familiare-indipendente-in-vendita-nel-cuore-di-sacrocuore-padova
 
@@ -102,7 +102,7 @@ Terrazza abitabile, garage doppio, {senza spese condominiali|indipendente}.
 € 145.000.
 
 {Visita su appuntamento|Scopri l'immobile}.
-049 8755543
+049.8843484
 
 https://righettoimmobiliare.it/immobile?s=padova-monta-porzione-di-bi-familiare-con-terrazza-abitabile
 
@@ -119,7 +119,7 @@ https://righettoimmobiliare.it/immobile?s=padova-monta-porzione-di-bi-familiare-
 Appartamento € 150.000 — {vicino a Padova|zona Limena Righetto}.
 
 {Richiedi dettagli|Prenota visita}: consulenza gratuita.
-049 8755543
+049.8843484
 
 https://righettoimmobiliare.it/immobile?s=appartamento
 
@@ -136,7 +136,7 @@ https://righettoimmobiliare.it/immobile?s=appartamento
 € 800/mese + IVA — spese condominiali € 60/mese.
 
 {Ideale per studi|Per professionisti e PMI} nel Padovano.
-049 8755543
+049.8843484
 
 https://righettoimmobiliare.it/immobile?s=ufficio-in-affitto-in-via-del-santo-s-n-c
 
@@ -153,7 +153,7 @@ https://righettoimmobiliare.it/immobile?s=ufficio-in-affitto-in-via-del-santo-s-
 € 360.000 — {due unità reunibili|flessibile per logistica/artigianato}.
 
 {Richiedi informazioni|Visita su appuntamento}.
-049 8755543
+049.8843484
 
 https://righettoimmobiliare.it/immobile?s=capannone-in-vendita-a-rubano
 
@@ -170,7 +170,7 @@ https://righettoimmobiliare.it/immobile?s=capannone-in-vendita-a-rubano
 {Attualmente affittato|Reddito da locazione} a azienda referenziata.
 € 730.000.
 
-Consulenza gratuita Righetto Immobiliare — 049 8755543
+Consulenza gratuita Righetto Immobiliare — 049.8843484
 
 https://righettoimmobiliare.it/immobile?s=capannone-in-vendita-in-via-roma-s-n-c
 

@@ -646,7 +646,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 - [ ] Nome/Indirizzo/Telefono IDENTICO ovunque
 - [ ] Formato: "Righetto Immobiliare"
 - [ ] Indirizzo: Via Roma 96, 35010 Limena PD
-- [ ] Telefono: 049 884 3484
+- [ ] Telefono: 049.8843484
 
 ### 6.4 Lezioni dai Competitor
 | Competitor | Lezione | Azione |
@@ -1173,7 +1173,7 @@ Le pagine con contenuti aggiornati ricevono un boost nel re-ranking:
    - Link alla zona page corrispondente
    - Distanza dal centro (km e minuti)
 6. **Chiusura con CTA** — invito a contattare
-   - "Per informazioni o per fissare una visita: 049.88.43.484 / info@righettoimmobiliare.it"
+   - "Per informazioni o per fissare una visita: 049.8843484 / info@righettoimmobiliare.it"
 
 **Regole testi immobili:**
 - MAI copiare la descrizione dal portale — riscrivere con angolo diverso

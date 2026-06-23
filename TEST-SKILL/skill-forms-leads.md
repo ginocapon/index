@@ -116,7 +116,7 @@ async function sendLeadForm(e) {
     document.getElementById('lead-form').classList.add('is-sent');
     document.getElementById('lead-ok').style.display = 'block';
   } else {
-    alert('Errore nell\'invio. Chiama il 049.88.43.484 o scrivi a info@righettoimmobiliare.it');
+    alert('Errore nell\'invio. Chiama il 049.8843484 o scrivi a info@righettoimmobiliare.it');
   }
 }
 </script>

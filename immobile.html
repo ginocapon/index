@@ -334,7 +334,7 @@
     <div class="h-cta">
       <a class="h-tel" href="tel:+390498843484">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
-        049.88.43.484
+        049.8843484
       </a>
       <a class="h-btn" href="contatti">Valutazione gratuita</a>
     </div>
@@ -551,7 +551,7 @@
           </a>
           <a href="tel:+390498843484" class="agent-contact">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
-            049.88.43.484 (ufficio)
+            049.8843484 (ufficio)
           </a>
           <a href="mailto:info@righttoimmobiliare.it" class="agent-contact">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -589,8 +589,12 @@
           <label for="f-msg" class="sr-only">Messaggio</label>
           <textarea placeholder="Messaggio..." id="f-msg"></textarea>
           <label class="form-check" for="f-gdpr">
-            <input type="checkbox" id="f-gdpr">
-            Acconsento al trattamento dei dati personali (GDPR)
+            <input type="checkbox" id="f-gdpr" required>
+            Ho preso visione dell'<a href="privacy" target="_blank" rel="noopener">informativa privacy</a> (Reg. UE 2016/679) e acconsento al trattamento per finalità contrattuali e di legge (punti a) e b)). *
+          </label>
+          <label class="form-check form-check-opt" for="f-marketing">
+            <input type="checkbox" id="f-marketing" class="rig-gdpr-marketing" name="gdpr_marketing">
+            Acconsento al trattamento per finalità di marketing, soddisfazione clienti e comunicazioni commerciali (punti c), d) ed e) dell'informativa — facoltativo, revocabile in qualsiasi momento.
           </label>
           <button class="form-submit" onclick="sendForm()">Invia richiesta</button>
         </div>
@@ -666,7 +670,7 @@
   <div class="footer-inner">
     <div>
       <div class="footer-logo">Righetto <span>Immobiliare</span></div>
-      <div style="margin-top:.4rem;">Via Roma n.96 — Limena (PD) · Tel: 049.88.43.484</div>
+      <div style="margin-top:.4rem;">Via Roma n.96 — Limena (PD) · Tel: 049.8843484</div>
     </div>
     <div class="footer-links">
       <a href="immobili">Immobili</a>
@@ -1270,8 +1274,9 @@ async function sendForm() {
   const nome = document.getElementById('f-nome').value.trim();
   const tel = document.getElementById('f-tel').value.trim();
   const gdpr = document.getElementById('f-gdpr').checked;
+  const marketing = document.getElementById('f-marketing').checked;
   if (!nome || !tel) { showToast('Inserisci nome e telefono'); return; }
-  if (!gdpr) { showToast('Accetta il trattamento dei dati'); return; }
+  if (!gdpr) { showToast('Accetta l\'informativa privacy per procedere'); return; }
   const btn = document.querySelector('.form-submit');
   btn.textContent = '⏳ Invio in corso...';
   btn.disabled = true;
@@ -1285,6 +1290,7 @@ async function sendForm() {
     messaggio: msg,
     tipo_immobile: immobile?.titolo || '',
     provenienza: 'form',
+    newsletter: marketing,
     letto: false,
     codice_immobile: immobile?.codice || '',
     immobile_id: immobile?.id || null,
@@ -1398,7 +1404,7 @@ async function downloadPDF() {
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(7);
   doc.setTextColor(200, 210, 220);
-  doc.text('Via Roma n.96, Limena (PD)  |  Tel: 049.88.43.484  |  www.righettoimmobiliare.it', m, 17);
+  doc.text('Via Roma n.96, Limena (PD)  |  Tel: 049.8843484  |  www.righettoimmobiliare.it', m, 17);
   // Tipo badge + Rif
   const tipoLabel = (d.tipo_operazione || '').toUpperCase();
   doc.setFillColor(...VERDE);
@@ -1736,7 +1742,7 @@ async function downloadPDF() {
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(6.5);
     doc.setTextColor(200, 210, 220);
-    doc.text('Righetto Immobiliare \u2014 Via Roma n.96, Limena (PD) \u2014 Tel: 049.88.43.484 \u2014 info@righettoimmobiliare.it', m, 291);
+    doc.text('Righetto Immobiliare \u2014 Via Roma n.96, Limena (PD) \u2014 Tel: 049.8843484 \u2014 info@righettoimmobiliare.it', m, 291);
     doc.setTextColor(...VERDE);
     doc.text('Rif. ' + (d.codice || 'N/D') + '  |  Pag. ' + p + '/' + totalPages + '  |  ' + new Date().toLocaleDateString('it-IT'), W - m, 291, { align: 'right' });
   }

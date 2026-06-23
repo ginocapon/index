@@ -94,7 +94,7 @@ footer a{color:var(--oro2)}
     <p>Vendere, comprare o investire nel Padovano senza partire alla cieca. Un professionista ti aiuta a inquadrare obiettivi, tempi e documenti — senza pagare il primo incontro.</p>
     <div class="v-cta">
       <a class="v-btn v-btn-primary" href="#prenota">📅 Prenota consulenza gratuita</a>
-      <a class="v-btn v-btn-secondary" href="tel:+390498843484">📞 049 884 3484</a>
+      <a class="v-btn v-btn-secondary" href="tel:+390498843484">📞 049.8843484</a>
     </div>
     <div class="v-trust">
       <span>Dal 2000 nel territorio</span>
@@ -151,8 +151,9 @@ footer a{color:var(--oro2)}
     <textarea id="msg" placeholder="Es. appartamento a Padova, 90 mq, classe E…"></textarea>
     <label class="v-chk">
       <input type="checkbox" id="gdpr" required>
-      <span>Acconsento al trattamento dei dati (GDPR). <a href="privacy-policy">Privacy Policy</a></span>
+      <span>Ho preso visione dell'<a href="privacy" target="_blank" rel="noopener">informativa privacy</a> (Reg. UE 2016/679) e acconsento al trattamento per finalità contrattuali e di legge (punti a) e b)). *</span>
     </label>
+        <label class="v-chk v-chk-opt"><input type="checkbox" class="rig-gdpr-marketing" name="gdpr_marketing"> <span>Acconsento al trattamento per finalità di marketing, soddisfazione clienti e comunicazioni commerciali (punti c), d) ed e) dell'informativa — <em>facoltativo</em>, revocabile in qualsiasi momento.</span></label>
     <button type="submit" class="v-submit">Invia richiesta consulenza gratuita</button>
     <p class="note">Nessun costo per il primo incontro. Ti ricontattiamo al telefono indicato.</p>
     </div>
@@ -195,6 +196,7 @@ async function sendConsulenzaForm(e) {
   var msg = document.getElementById('msg').value.trim();
   if (!nomeRaw || !tel) { alert('Inserisci nome e telefono'); return; }
   if (!document.getElementById('gdpr').checked) { alert('Accetta la privacy policy per procedere'); return; }
+  var marketing = document.querySelector('.rig-gdpr-marketing') && document.querySelector('.rig-gdpr-marketing').checked;
 
   var parts = nomeRaw.split(/\s+/);
   var nome = parts[0] || '';
@@ -217,6 +219,7 @@ async function sendConsulenzaForm(e) {
       bodyParts.push('<b>Obiettivo:</b> ' + tipoLabel);
       if (msg) bodyParts.push('<b>Messaggio:</b><br>' + msg.replace(/\n/g, '<br>'));
       bodyParts.push('<b>Pagina:</b> landing-consulenza-immobiliare-gratuita');
+      if (marketing) bodyParts.push('<b>Consenso marketing (c/d/e):</b> Sì');
       emailOk = await SERVIZI_CONFIG.sendNotifica({
         subject: 'Nuovo contatto dal sito: ' + nomeCompleto,
         html_body: bodyParts.join('<br>'),
@@ -235,7 +238,7 @@ async function sendConsulenzaForm(e) {
         telefono: tel,
         messaggio: messaggioDb,
         provenienza: 'landing-consulenza-immobiliare-gratuita',
-        newsletter: false,
+        newsletter: !!marketing,
         letto: false
       }]);
       supaOk = true;
@@ -250,10 +253,10 @@ async function sendConsulenzaForm(e) {
     document.getElementById('consulenza-ok').style.display = 'block';
     var okP = document.querySelector('#consulenza-ok p');
     if (okP && !emailOk) {
-      okP.textContent = 'Richiesta registrata. Se non ricevi notizie, chiama il 049.88.43.484.';
+      okP.textContent = 'Richiesta registrata. Se non ricevi notizie, chiama il 049.8843484.';
     }
   } else {
-    alert('Errore nell\'invio. Chiama il 049.88.43.484 o scrivi a info@righettoimmobiliare.it');
+    alert('Errore nell\'invio. Chiama il 049.8843484 o scrivi a info@righettoimmobiliare.it');
   }
 }
 </script>

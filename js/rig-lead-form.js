@@ -1,11 +1,12 @@
 /**
  * Righetto — invio lead unificato (landing, blog, servizi, homepage)
- * Richiede: supabase-js + config.js caricati prima (senza defer) oppure dopo DOMContentLoaded.
+ * GDPR: consenso obbligatorio a/b + marketing facoltativo c/d/e
  */
 (function (global) {
   var SB_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
   var SB_ANON =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
+  var TEL = '049.8843484';
 
   function val(sel) {
     if (!sel) return '';
@@ -15,7 +16,7 @@
 
   function checked(sel) {
     var el = typeof sel === 'string' ? document.querySelector(sel) : sel;
-    return el ? !!el.checked : true;
+    return el ? !!el.checked : false;
   }
 
   function resolveField(form, spec) {
@@ -41,7 +42,8 @@
           tel: resolveField(form, cfg.tel),
           email: resolveField(form, cfg.email),
           msg: resolveField(form, cfg.msg),
-          gdpr: resolveField(form, cfg.gdpr)
+          gdpr: resolveField(form, cfg.gdpr),
+          gdprMarketing: resolveField(form, cfg.gdprMarketing)
         };
       } catch (e) {}
     }
@@ -51,7 +53,10 @@
       tel: form.querySelector('#bl-tel, #f-tel, #cf-tel, #tel, [name="telefono"]'),
       email: form.querySelector('#bl-email, #f-email, #f-mail, #cf-email, #email, [name="email"]'),
       msg: form.querySelector('#bl-msg, #f-msg, #f-note, #cf-msg, #msg, [name="messaggio"]'),
-      gdpr: form.querySelector('#bl-gdpr, #f-gdpr, #gdpr, [name="gdpr"]')
+      gdpr: form.querySelector(
+        '#bl-gdpr, #f-gdpr, #gdpr, [name="gdpr"], input[id*="bl-gdpr"][required], input[id*="gdpr"][required]'
+      ),
+      gdprMarketing: form.querySelector('.rig-gdpr-marketing, #f-gdpr-marketing, [name="gdpr_marketing"]')
     };
   }
 
@@ -68,6 +73,9 @@
         });
       } catch (e) {}
     }
+    if (fields.gdprMarketing && checked(fields.gdprMarketing)) {
+      parts.push('Consenso marketing (c/d/e): SI');
+    }
     return parts.join(' | ') || baseMsg || '';
   }
 
@@ -81,13 +89,14 @@
     var msg = val(fields.msg);
     var provenienza = form.getAttribute('data-provenienza') || 'form-sito';
     var prefix = form.getAttribute('data-msg-prefix') || '';
+    var marketingOk = fields.gdprMarketing ? checked(fields.gdprMarketing) : false;
 
     if (!nomeCompleto || !tel) {
       alert('Inserisci nome e telefono');
       return false;
     }
     if (fields.gdpr && !checked(fields.gdpr)) {
-      alert('Accetta la privacy policy per procedere');
+      alert('Accetta l\'informativa privacy (finalità contrattuali e di legge) per procedere');
       return false;
     }
 
@@ -105,6 +114,7 @@
     if (email) bodyParts.push('<b>Email:</b> ' + email);
     if (messaggioDb) bodyParts.push('<b>Messaggio:</b><br>' + messaggioDb.replace(/\n/g, '<br>'));
     bodyParts.push('<b>Pagina:</b> ' + pagina);
+    if (marketingOk) bodyParts.push('<b>Consenso marketing (c/d/e):</b> Sì');
 
     var emailOk = false;
     try {
@@ -130,7 +140,7 @@
             telefono: tel,
             messaggio: messaggioDb || null,
             provenienza: provenienza,
-            newsletter: false,
+            newsletter: marketingOk,
             letto: false
           }
         ]);
@@ -151,12 +161,11 @@
       if (ok) ok.style.display = 'block';
       var okP = ok && ok.querySelector('p');
       if (okP && !emailOk) {
-        okP.textContent =
-          'Richiesta registrata. Se non ricevi notizie, chiama il 049.88.43.484.';
+        okP.textContent = 'Richiesta registrata. Se non ricevi notizie, chiama il ' + TEL + '.';
       }
       return true;
     }
-    alert('Errore nell\'invio. Chiama il 049.88.43.484 o scrivi a info@righettoimmobiliare.it');
+    alert('Errore nell\'invio. Chiama il ' + TEL + ' o scrivi a info@righettoimmobiliare.it');
     return false;
   }
 

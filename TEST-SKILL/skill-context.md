@@ -131,6 +131,6 @@ Ogni nuovo articolo blog DEVE essere registrato in TUTTI e 4:
 
 - **Nome:** Righetto Immobiliare
 - **Indirizzo:** Via Roma 96, 35010 Limena PD
-- **Telefono:** 049 884 3484
+- **Telefono:** 049.8843484
 - **Email:** info@righettoimmobiliare.it
 - **URL:** righettoimmobiliare.it (senza www)
