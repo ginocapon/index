@@ -1,0 +1,43 @@
+{
+  "generated": "2026-06-23",
+  "blog_html_articoliStatici": [
+    {
+      "titolo": "Casa vendibile tra 5 anni: APE, Case Green e posizione a Padova",
+      "categoria": "Mercato e sostenibilità",
+      "data": "2026-06-23",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-casa-vendibile-5-anni-case-green-padova-2026.webp",
+      "url_statico": "blog-casa-vendibile-5-anni-case-green-padova-2026",
+      "tempo": 14,
+      "autore": "Gino Capon",
+      "contenuto": "Analisi 5 articoli top su Google, CRIF/FIAIP, orizzonte 2031 e esempi LP0286 Altichiero e LA0317 Mandria.",
+      "evidenza": true
+    }
+  ],
+  "admin_blogSeedArticles": [
+    {
+      "titolo": "Casa vendibile tra 5 anni: APE, Case Green e posizione a Padova",
+      "categoria": "Mercato e sostenibilità",
+      "tempo": 14,
+      "contenuto": "<p>Analisi 5 articoli top su Google, CRIF/FIAIP, orizzonte 2031 e esempi LP0286 Altichiero e LA0317 Mandria.</p>",
+      "evidenza": true,
+      "emoji": "🏡",
+      "data": "2026-06-23",
+      "stato": "pubblicato",
+      "autore": "Gino Capon",
+      "immagine_copertina": "img/blog/blog-casa-vendibile-5-anni-case-green-padova-2026.webp",
+      "url_statico": "blog-casa-vendibile-5-anni-case-green-padova-2026",
+      "data_pubblicazione": "2026-06-23T09:00:00+02:00"
+    }
+  ],
+  "homepage_js_articoliStatici": [
+    {
+      "titolo": "Casa vendibile tra 5 anni: APE, Case Green e posizione a Padova",
+      "categoria": "Mercato e sostenibilità",
+      "data": "2026-06-23",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-casa-vendibile-5-anni-case-green-padova-2026.webp",
+      "url_statico": "blog-casa-vendibile-5-anni-case-green-padova-2026"
+    }
+  ]
+}
