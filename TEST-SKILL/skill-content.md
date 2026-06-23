@@ -121,7 +121,7 @@
 3. **Descrizione ambienti** — stanza per stanza con metrature se rilevanti
 4. **Spazi esterni e pertinenze** — giardino, terrazzo, garage, cantina (con mq)
 5. **Contesto e zona** — servizi vicini, link alla zona page, distanza dal centro
-6. **CTA chiusura** — "Per info o visita: 049.88.43.484 / info@righettoimmobiliare.it"
+6. **CTA chiusura** — "Per info o visita: 049.8843484 / info@righettoimmobiliare.it"
 
 ### Regole testi immobili
 - MAI copiare dal portale — riscrivere con angolo diverso

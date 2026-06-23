@@ -197,7 +197,7 @@ const FAQ_DATA = [
   // ── INFO AGENZIA ──
   {
     k: ['orari', 'apertura', 'chiuso', 'aperto', 'quando'],
-    r: '🕐 **Orari Righetto Immobiliare**\nLunedì–Venerdì: 9:00–13:00 / 15:00–19:00\nSabato: 9:00–12:30\nDomenica: Chiuso\n\n📞 Tel: 049 884 3484 · Cell: 349 736 5930\n📧 info@righettoimmobiliare.it'
+    r: '🕐 **Orari Righetto Immobiliare**\nLunedì–Venerdì: 9:00–13:00 / 15:00–19:00\nSabato: 9:00–12:30\nDomenica: Chiuso\n\n📞 Tel: 049.8843484 · Cell: 349 736 5930\n📧 info@righettoimmobiliare.it'
   },
   {
     k: ['dove', 'sede', 'indirizzo', 'ufficio', 'trovare'],
@@ -205,7 +205,7 @@ const FAQ_DATA = [
   },
   {
     k: ['commissione', 'provvigione', 'costo agenzia', 'quanto costa', 'spesa agenzia', 'percentuale'],
-    r: '💰 **Compenso di mediazione**\n\nL\'importo e le condizioni economiche **non sono pubblicati online**: vengono spiegati e concordati **in sede** al momento del mandato, in modo chiaro e senza sorprese.\n\nNel servizio sono inclusi, tra l\'altro: **valutazione**, **foto professionali**, **virtual tour 360°** e **gestione delle pratiche** fino al rogito o alla stipula.\n\n📞 Per un preventivo personalizzato: **049 884 3484** o passa in Via Roma 96, Limena.'
+    r: '💰 **Compenso di mediazione**\n\nL\'importo e le condizioni economiche **non sono pubblicati online**: vengono spiegati e concordati **in sede** al momento del mandato, in modo chiaro e senza sorprese.\n\nNel servizio sono inclusi, tra l\'altro: **valutazione**, **foto professionali**, **virtual tour 360°** e **gestione delle pratiche** fino al rogito o alla stipula.\n\n📞 Per un preventivo personalizzato: **049.8843484** o passa in Via Roma 96, Limena.'
   },
   {
     k: ['valutazione', 'valutare', 'stima', 'vale', 'valore', 'quanto vale'],
@@ -674,7 +674,7 @@ const FAQ_DATA = [
   // ═══════════════════════════════════════════════
   {
     k: ['valutazione gratuita', 'senza impegno', 'valutazione gratis'],
-    r: '✅ **La valutazione gratuita è davvero senza impegno.** Analizziamo il tuo immobile con comparabili reali di mercato e ti forniamo un report dettagliato per decidere se procedere con noi. Nessun vincolo, nessun costo.\n\n📞 Chiama il **049 884 3484** o scrivi *"contattami"* per prenotare.'
+    r: '✅ **La valutazione gratuita è davvero senza impegno.** Analizziamo il tuo immobile con comparabili reali di mercato e ti forniamo un report dettagliato per decidere se procedere con noi. Nessun vincolo, nessun costo.\n\n📞 Chiama il **049.8843484** o scrivi *"contattami"* per prenotare.'
   },
   {
     k: ['tempo vendita', 'quanto tempo', 'vendere veloce', 'tempi vendita'],

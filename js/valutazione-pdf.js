@@ -229,7 +229,7 @@ async function generaValutazionePDF(dati) {
   doc.setFontSize(10);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(...purple);
-  doc.text('049.88.43.484', ctaX, y + 41);
+  doc.text('049.8843484', ctaX, y + 41);
   doc.setTextColor(...fire);
   doc.text('WhatsApp: 349 736 5930', ctaX, y + 49);
 
@@ -252,7 +252,7 @@ async function generaValutazionePDF(dati) {
   doc.setFontSize(7);
   doc.setTextColor(180, 180, 190);
   doc.text('Righetto Immobiliare — Via Roma 96, Limena (PD) — P.IVA 05182390285', W / 2, H - 11, { align: 'center' });
-  doc.text('righettoimmobiliare.it  |  info@righettoimmobiliare.it  |  049.88.43.484', W / 2, H - 6, { align: 'center' });
+  doc.text('righettoimmobiliare.it  |  info@righettoimmobiliare.it  |  049.8843484', W / 2, H - 6, { align: 'center' });
 
   /* === SALVA === */
   const nomeFile = 'Valutazione-' + (dati.comune || 'Immobile').replace(/[^a-zA-Z0-9àèéìòù ]/g, '').replace(/ +/g, '-') + '.pdf';

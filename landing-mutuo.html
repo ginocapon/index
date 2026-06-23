@@ -648,13 +648,17 @@ img{max-width:100%;height:auto;display:block}
           </div>
           <div style="display:flex;align-items:flex-start;gap:.4rem;font-size:.68rem;color:var(--gray);margin-bottom:1rem">
             <input type="checkbox" id="c-gdpr" required style="accent-color:var(--green);flex-shrink:0;margin-top:.15rem;width:15px;height:15px">
-            <label for="c-gdpr">Acconsento al trattamento dei dati. <a href="privacy" style="color:var(--green)">Privacy</a></label>
+            <label for="c-gdpr">Ho preso visione dell'<a href="privacy" target="_blank" rel="noopener">informativa privacy</a> (Reg. UE 2016/679) e acconsento al trattamento per finalità contrattuali e di legge (punti a) e b)). *</label>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:.4rem;font-size:.68rem;color:var(--gray);margin-bottom:.6rem">
+            <input type="checkbox" id="c-marketing" class="rig-gdpr-marketing" name="gdpr_marketing" style="accent-color:var(--green);flex-shrink:0;margin-top:.15rem;width:15px;height:15px">
+            <label for="c-marketing">Acconsento al trattamento per finalità di marketing, soddisfazione clienti e comunicazioni commerciali (punti c), d) ed e) dell'informativa — facoltativo, revocabile in qualsiasi momento.</label>
           </div>
           <button type="submit" class="cc-btn">📞 Richiedi consulenza gratuita</button>
         </form>
         <div id="mutuoSuccess" style="display:none;text-align:center;padding:2rem 1rem">
           <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--green);margin-bottom:.4rem">Richiesta inviata! 🎉</h3>
-          <p style="font-size:.82rem;color:var(--gray)">Un nostro consulente ti contatterera entro 24 ore.<br><a href="tel:+390498843484" style="color:var(--green);font-weight:700">049.88.43.484</a></p>
+          <p style="font-size:.82rem;color:var(--gray)">Un nostro consulente ti contatterera entro 24 ore.<br><a href="tel:+390498843484" style="color:var(--green);font-weight:700">049.8843484</a></p>
         </div>
       </div>
     </div>
@@ -667,7 +671,7 @@ img{max-width:100%;height:auto;display:block}
   <p>Scegliere il mutuo giusto ti fa risparmiare migliaia di euro in interessi. La nostra consulenza e gratuita — non hai nulla da perdere.</p>
   <a href="#calcolatore" class="cta-btn">🏦 Calcola la tua rata gratis</a>
   <div class="cta-channels">
-    <div class="cta-ch">📞 <a href="tel:+390498843484">049.88.43.484</a></div>
+    <div class="cta-ch">📞 <a href="tel:+390498843484">049.8843484</a></div>
     <div class="cta-ch">💬 <a href="https://wa.me/393497365930" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
   </div>
 </section>
@@ -780,6 +784,7 @@ async function sendMutuoLead(e) {
   var tipo = document.getElementById('c-tipo').value;
   var note = document.getElementById('c-note').value.trim();
   var gdpr = document.getElementById('c-gdpr').checked;
+  var marketing = document.getElementById('c-marketing') && document.getElementById('c-marketing').checked;
 
   if (!nome || !tel) { alert('Inserisci nome e telefono'); return; }
   if (!gdpr) { alert('Accetta la privacy policy'); return; }
@@ -795,7 +800,7 @@ async function sendMutuoLead(e) {
     if (typeof SERVIZI_CONFIG !== 'undefined') {
       emailOk = await SERVIZI_CONFIG.sendNotifica({
         subject: 'LANDING MUTUO — ' + nomeCompleto,
-        html_body: '<b>Nome:</b> ' + nomeCompleto + '<br><b>Email:</b> ' + (email||'-') + '<br><b>Telefono:</b> ' + tel + '<br><b>Messaggio:</b> ' + messaggio,
+        html_body: '<b>Nome:</b> ' + nomeCompleto + '<br><b>Email:</b> ' + (email||'-') + '<br><b>Telefono:</b> ' + tel + '<br><b>Messaggio:</b> ' + messaggio + (marketing ? '<br><b>Consenso marketing (c/d/e):</b> Sì' : ''),
         reply_to: email || undefined
       });
     }
@@ -808,7 +813,7 @@ async function sendMutuoLead(e) {
       await sb.from('richieste').insert([{
         nome: nomeCompleto, email: email, telefono: tel,
         messaggio: messaggio, provenienza: 'landing-mutuo',
-        newsletter: false, letto: false
+        newsletter: !!marketing, letto: false
       }]);
       supaOk = true;
     }
@@ -823,7 +828,7 @@ async function sendMutuoLead(e) {
       gtag('event', 'lead_mutuo', { event_category: 'mutuo', tipo: tipo });
     }
   } else {
-    alert('Errore. Chiamaci al 049.88.43.484 o scrivici su WhatsApp.');
+    alert('Errore. Chiamaci al 049.8843484 o scrivici su WhatsApp.');
   }
 }
 </script>

@@ -197,7 +197,7 @@ const FAQ_DATA = [
   },
   {
     k: ['commissione', 'provvigione', 'costo', 'quanto costa', 'spesa', 'percentuale'],
-    r: '💰 **Compenso di mediazione**\n\nL\'importo **non e\' pubblicato online**: viene concordato **in sede** nel mandato, in modo chiaro.\n\nIl servizio include valutazione, foto professionali, virtual tour 360° e gestione pratiche.\n\n📞 **049 884 3484** — Limena (PD), copertura provincia.'
+    r: '💰 **Compenso di mediazione**\n\nL\'importo **non e\' pubblicato online**: viene concordato **in sede** nel mandato, in modo chiaro.\n\nIl servizio include valutazione, foto professionali, virtual tour 360° e gestione pratiche.\n\n📞 **049.8843484** — Limena (PD), copertura provincia.'
   },
   {
     k: ['valutazione', 'valutare', 'stima', 'vale', 'valore', 'quanto vale'],

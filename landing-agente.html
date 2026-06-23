@@ -412,17 +412,17 @@ img{max-width:100%;height:auto;display:block}
           <select class="fg-field" id="a-interesse"><option value="">Cosa ti interessa?</option><option value="acquisto">Acquistare un immobile</option><option value="vendita">Vendere un immobile</option><option value="affitto">Affittare un immobile</option><option value="valutazione">Valutazione gratuita</option><option value="consulenza">Consulenza generica</option></select>
           <select class="fg-field" id="a-tipo"><option value="">Tipo immobile</option><option>Appartamento</option><option>Villa / Villetta</option><option>Casa indipendente</option><option>Bifamiliare</option><option>Rustico / Casale</option><option>Terreno</option><option>Commerciale / Ufficio</option></select>
         </div>
-        <div class="fg-chk"><input type="checkbox" id="a-gdpr" required><label for="a-gdpr">Accetto la <a href="privacy">privacy policy</a></label></div>
-        <div class="fg-chk"><input type="checkbox" id="a-news" checked><label for="a-news">Desidero ricevere aggiornamenti su immobili nella mia zona e articoli dal blog</label></div>
+        <div class="fg-chk"><input type="checkbox" id="a-gdpr" required><label for="a-gdpr">Ho preso visione dell'<a href="privacy" target="_blank" rel="noopener">informativa privacy</a> (Reg. UE 2016/679) e acconsento al trattamento per finalità contrattuali e di legge (punti a) e b)). *</label></div>
+        <div class="fg-chk"><input type="checkbox" id="a-news" checked class="rig-gdpr-marketing" name="gdpr_marketing">Acconsento al trattamento per finalità di marketing, soddisfazione clienti e comunicazioni commerciali (punti c), d) ed e) dell'informativa — <em>facoltativo</em>, revocabile in qualsiasi momento.</div>
         <button type="submit" class="fg-submit">🏠 Richiedi valutazione gratuita</button>
       </form>
       <div class="cta-success" id="leadSuccess">
         <h3>Richiesta inviata! 🎉</h3>
-        <p>Ti contatteremo entro 24 ore. <a href="tel:+390498843484" style="color:var(--mint);font-weight:700">049.88.43.484</a></p>
+        <p>Ti contatteremo entro 24 ore. <a href="tel:+390498843484" style="color:var(--mint);font-weight:700">049.8843484</a></p>
       </div>
     </div>
     <div class="cta-channels">
-      <div class="cta-ch">📞 <a href="tel:+390498843484">049.88.43.484</a></div>
+      <div class="cta-ch">📞 <a href="tel:+390498843484">049.8843484</a></div>
       <div class="cta-ch">💬 <a href="https://wa.me/393497365930" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
     </div>
   </div>
@@ -450,7 +450,7 @@ img{max-width:100%;height:auto;display:block}
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/config.js?v=4"></script>
-<script src="js/rig-lead-form.js?v=1"></script>
+<script src="js/rig-lead-form.js?v=2"></script>
 <script>
 async function send(e){
   e.preventDefault();
@@ -467,7 +467,7 @@ async function send(e){
   try{const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');if(sb){await sb.from('richieste').insert([{nome,email,telefono:tel,messaggio:'[LANDING AGENTE] '+msg,provenienza:'landing-agente',newsletter:news,letto:false}]);supaOk=true;if(news&&email){await sb.from('newsletter_subscribers').upsert([{email,nome,telefono:tel,tipo_immobile:tipoImm||null,zona:comune||null,interesse:interesse||'consulenza',provenienza:'landing-agente',fonte:'landing-agente',attivo:true,created_at:new Date().toISOString()}],{onConflict:'email'}).catch(()=>{});}}}catch(e){}
   btn.disabled=false;btn.textContent='🏠 RICHIEDI VALUTAZIONE GRATUITA';
   if(emailOk||supaOk){document.getElementById('inlineForm').style.display='none';document.getElementById('leadSuccess').style.display='block';}
-  else{alert('Errore. Chiamaci al 049.88.43.484.');}
+  else{alert('Errore. Chiamaci al 049.8843484.');}
 }
 </script>
 <script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */

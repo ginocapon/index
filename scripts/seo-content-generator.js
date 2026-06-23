@@ -24,7 +24,7 @@ const AZIENDA = {
   ragioneSociale: 'Gruppo Immobiliare Righetto di Capon Gino',
   settore: 'Agenzia immobiliare',
   sito: 'https://righettoimmobiliare.it',
-  telefono: '049 884 3484',
+  telefono: '049.8843484',
   cellulare: '349 736 5930',
   indirizzo: 'Via Roma, 96',
   cap: '35010',

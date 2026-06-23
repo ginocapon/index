@@ -99,7 +99,7 @@ Ogni testo di pubblicazione (corpo, `corpo_spintax`, caption reel/storia) deve c
 { titolo esatto da Supabase }
 
 {Visita su appuntamento|Richiedi informazioni}: {comune} — {dettaglio prezzo/mq}.
-Tel. 049 8755543
+Tel. 049.8843484
 
 https://righettoimmobiliare.it/immobile?s={slug}
 
