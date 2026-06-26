@@ -44,6 +44,17 @@ jobs:
             print("OK: nessun segnaposto — si usa la password già in admin.html.")
           PY
 
+      - name: Sync Open Graph immobili (anteprima social)
+        env:
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: |
+          if [ -n "$SUPABASE_KEY" ]; then
+            python3 scripts/sync_og_immobili.py
+          else
+            echo "SUPABASE_KEY assente — deploy con share-immobile-*.html già in repo"
+            ls share-immobile-*.html 2>/dev/null | wc -l || true
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

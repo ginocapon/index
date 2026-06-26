@@ -28,6 +28,10 @@ from dotenv import load_dotenv
 from supabase import Client, create_client
 
 ROOT = Path(__file__).resolve().parent
+_SCRIPTS = ROOT.parent / "scripts"
+if str(_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS))
+from righetto_immobile_slug import generate_property_slug, share_immobile_url
 
 PUB_OK = "| PUB_OK:"
 PUB_ERR = "| PUB_ERR:"
@@ -182,10 +186,11 @@ def mirror_meta_to_gbp(
 
 
 def slug_immobile(i: dict) -> str:
-    tit = (i.get("titolo") or "immobile").lower()
-    tit = re.sub(r"[^a-z0-9]+", "-", tit).strip("-")[:80]
-    cod = (i.get("codice") or i.get("id") or "")[:12]
-    return f"{tit}-{cod}" if cod else tit
+    return generate_property_slug(i)
+
+
+def link_immobile_social(i: dict) -> str:
+    return share_immobile_url(generate_property_slug(i))
 
 
 def extract_public_url(row: dict[str, Any]) -> str:
@@ -207,11 +212,12 @@ def resolve_public_url(sb: Client, row: dict[str, Any]) -> str:
         return ""
     try:
         if contenuto == "immobile" or (row.get("tipo") or "").startswith("instagram"):
-            res = sb.table("immobili").select("id,titolo,codice,slug").eq("id", ref).limit(1).execute()
+            res = sb.table("immobili").select(
+                "id,titolo,codice,slug,tipologia,categoria,tipo_operazione,comune"
+            ).eq("id", ref).limit(1).execute()
             data = (res.data or [{}])[0]
             if data.get("id"):
-                slug = data.get("slug") or slug_immobile(data)
-                return f"{BASE_SITE}/immobile?s={slug}"
+                return link_immobile_social(data)
         res = sb.table("blog").select("id,slug,url_statico").eq("id", ref).limit(1).execute()
         data = (res.data or [{}])[0]
         if data.get("id"):
