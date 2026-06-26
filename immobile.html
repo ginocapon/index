@@ -848,7 +848,7 @@ function render(d) {
   const setOg = (prop, val) => { let m = document.querySelector('meta[property="og:'+prop+'"]'); if(!m){m=document.createElement('meta');m.setAttribute('property','og:'+prop);document.head.appendChild(m);} m.content=val; };
   setOg('title', seoTitle);
   setOg('description', seoDesc);
-  setOg('url', canonical.href);
+  setOg('url', shareImmobileUrl(d));
   if (Array.isArray(d.foto) && d.foto[0]) setOg('image', resolveImageUrl(d.foto[0]));
   setOg('type', 'website');
 
@@ -1322,13 +1322,18 @@ function toggleFav() {
   btn.classList.toggle('on');
   showToast(btn.classList.contains('on') ? '❤️ Aggiunto ai preferiti!' : 'Rimosso dai preferiti');
 }
+function shareImmobileUrl(d) {
+  const slug = generatePropertySlug(d || immobile);
+  return 'https://righettoimmobiliare.it/share-immobile-' + slug;
+}
 function shareLink() {
+  const url = shareImmobileUrl();
   if (navigator.share) {
-    navigator.share({ title: immobile?.titolo || 'Righetto Immobiliare', url: window.location.href });
+    navigator.share({ title: immobile?.titolo || 'Righetto Immobiliare', url });
   } else copyLink();
 }
 function copyLink() {
-  navigator.clipboard.writeText(window.location.href).then(() => showToast('Link copiato! 📋'));
+  navigator.clipboard.writeText(shareImmobileUrl()).then(() => showToast('Link copiato! 📋'));
 }
 
 // ══ TOAST ══

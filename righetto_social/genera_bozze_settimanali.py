@@ -561,11 +561,20 @@ def _existing_rss_links(client: Any, from_iso: str, to_iso: str) -> set[str]:
     return links
 
 
+_SCRIPTS = Path(__file__).resolve().parent.parent / "scripts"
+if str(_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS))
+from righetto_immobile_slug import generate_property_slug, share_immobile_url
+
+
 def slug_immobile(i: dict) -> str:
-    tit = (i.get("titolo") or "immobile").lower()
-    tit = re.sub(r"[^a-z0-9]+", "-", tit).strip("-")[:80]
-    cod = (i.get("codice") or i.get("id") or "")[:12]
-    return f"{tit}-{cod}" if cod else tit
+    """Slug SEO (tipologia-operazione-comune-codice) — allineato al sito."""
+    return generate_property_slug(i)
+
+
+def link_immobile_social(i: dict) -> str:
+    """URL per anteprima Facebook/WhatsApp (OG statico)."""
+    return share_immobile_url(generate_property_slug(i))
 
 
 def make_bozza(
@@ -601,7 +610,7 @@ def make_bozza(
 
 
 def _ctx_from_immobile(row: dict, supabase_url: str) -> tuple[dict[str, str], str, str | None, str | None]:
-    link = f"{BASE_SITE}/immobile?s={slug_immobile(row)}"
+    link = link_immobile_social(row)
     ref = str(row.get("id") or "")
     prezzo = row.get("prezzo")
     dettaglio = (
