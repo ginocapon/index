@@ -1,0 +1,43 @@
+{
+  "generated": "2026-06-24",
+  "blog_html_articoliStatici": [
+    {
+      "titolo": "Case più vendute nel Padovano: tipologie e metrature nel 2026",
+      "categoria": "Mercato locale",
+      "data": "2026-06-24",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-case-piu-vendute-padova-2026.webp",
+      "url_statico": "blog-case-piu-vendute-tipologie-padova-2026",
+      "tempo": 13,
+      "autore": "Gino Capon",
+      "contenuto": "Dati OMI e FIMAA su tipologie e mq più scambiati, lettura Padova e novità LA0319, LP0286, LP0285-V.",
+      "evidenza": true
+    }
+  ],
+  "admin_blogSeedArticles": [
+    {
+      "titolo": "Case più vendute nel Padovano: tipologie e metrature nel 2026",
+      "categoria": "Mercato locale",
+      "tempo": 13,
+      "contenuto": "<p>Dati OMI e FIMAA su tipologie e mq più scambiati, lettura Padova e novità LA0319, LP0286, LP0285-V.</p>",
+      "evidenza": true,
+      "emoji": "📊",
+      "data": "2026-06-24",
+      "stato": "pubblicato",
+      "autore": "Gino Capon",
+      "immagine_copertina": "img/blog/blog-case-piu-vendute-padova-2026.webp",
+      "url_statico": "blog-case-piu-vendute-tipologie-padova-2026",
+      "data_pubblicazione": "2026-06-24T09:00:00+02:00"
+    }
+  ],
+  "homepage_js_articoliStatici": [
+    {
+      "titolo": "Case più vendute nel Padovano: tipologie e metrature nel 2026",
+      "categoria": "Mercato locale",
+      "data": "2026-06-24",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-case-piu-vendute-padova-2026.webp",
+      "url_statico": "blog-case-piu-vendute-tipologie-padova-2026"
+    }
+  ]
+}

@@ -680,6 +680,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'case più vendute nel padovano: tipologie e metrature nel 2026': { img: 'img/blog/blog-case-piu-vendute-padova-2026.webp', url: 'blog-case-piu-vendute-tipologie-padova-2026' },
     'casa vendibile tra 5 anni: ape, case green e posizione a padova': { img: 'img/blog/blog-casa-vendibile-5-anni-case-green-padova-2026.webp', url: 'blog-casa-vendibile-5-anni-case-green-padova-2026' },
     'bonus edilizi 2026: detrazioni 50% e ecobonus per padova': { img: 'img/blog/blog-bonus-edilizi-2026-incentivi-casa-padova.webp', url: 'blog-bonus-edilizi-2026-incentivi-casa-padova' },
     'acquisizioni portale righetto giugno 2026: case, uffici e capannone': { img: 'img/blog/blog-ultime-acquisizioni-residenziali-padova-giugno-2026.webp', url: 'blog-ultime-acquisizioni-residenziali-padova-giugno-2026' },
@@ -771,6 +772,14 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+{
+      "titolo": "Case più vendute nel Padovano: tipologie e metrature nel 2026",
+      "categoria": "Mercato locale",
+      "data": "2026-06-24",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-case-piu-vendute-padova-2026.webp",
+      "url_statico": "blog-case-piu-vendute-tipologie-padova-2026"
+    },
 {
       "titolo": "Casa vendibile tra 5 anni: APE, Case Green e posizione a Padova",
       "categoria": "Mercato e sostenibilità",
