@@ -1,4 +1,22 @@
 {
+  "appartamento-elegante-con-ampio-terrazzo-in-zona-sacro-cuore-padova": {
+    "titolo": "Appartamento con terrazzo — Sacro Cuore",
+    "comune": "Padova",
+    "codice": "LA0319",
+    "immobile_href": "immobile?s=appartamento-vendita-padova-la0319",
+    "cover": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1782493221609-000-appartamento-altichiero-primo-piano-16-wmk-0.png",
+    "scenes": [
+      { "id": "terrazzo", "nome": "Terrazzo", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1782493221609-000-appartamento-altichiero-primo-piano-16-wmk-0.png" },
+      { "id": "soggiorno", "nome": "Soggiorno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1782493223105-002-appartamento-altichiero-primo-piano-1-wmk-0.png" },
+      { "id": "zona-giorno", "nome": "Zona giorno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1782493224271-003-appartamento-altichiero-primo-piano-3-wmk-0.png" },
+      { "id": "cucina", "nome": "Cucina", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1782493227622-007-appartamento-altichiero-primo-piano-5-wmk-0.png" },
+      { "id": "camera-1", "nome": "Camera da letto", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1782493231753-011-appartamento-altichiero-primo-piano-8-wmk-0.png" },
+      { "id": "camera-2", "nome": "Seconda camera", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1782493233014-012-appartamento-altichiero-primo-piano-9-wmk-0.png" },
+      { "id": "bagno", "nome": "Bagno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1782493235061-014-appartamento-altichiero-primo-piano-10-wmk-0.png" },
+      { "id": "corridoio", "nome": "Corridoio", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1782493236053-015-appartamento-altichiero-primo-piano-11-wmk-0.png" },
+      { "id": "terrazzo-vista", "nome": "Vista terrazzo", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1782493240192-023-appartamento-altichiero-primo-piano-28-wmk-0.jpg" }
+    ]
+  },
   "casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno": {
     "titolo": "Casa singola ad Altichiero",
     "comune": "Padova",
@@ -14,22 +32,6 @@
       { "id": "camera-2", "nome": "Seconda camera", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963025620-casa-singola-altichiero-15-.jpg" },
       { "id": "bagno", "nome": "Bagno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963026188-casa-singola-altichiero-16-.jpg" },
       { "id": "giardino", "nome": "Giardino", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963031190-casa-singola-altichiero-27-.jpg" }
-    ]
-  },
-  "casa-singola-con-ampio-giardino-a-grisignano-di-zocco": {
-    "titolo": "Casa con giardino — Grisignano",
-    "comune": "Grisignano di Zocco",
-    "codice": "LP0284-V",
-    "cover": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730308158-chatgpt-image-25-mag-2026-15-49-27.png",
-    "scenes": [
-      { "id": "esterno", "nome": "Esterno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730308158-chatgpt-image-25-mag-2026-15-49-27.png" },
-      { "id": "facciata", "nome": "Facciata", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730311536-chatgpt-image-25-mag-2026-15-40-32.png" },
-      { "id": "soggiorno", "nome": "Soggiorno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730266664-casa-singola-un-piano-8-.png" },
-      { "id": "zona-giorno", "nome": "Zona giorno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730268551-casa-singola-un-piano-9-.png" },
-      { "id": "cucina", "nome": "Cucina", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730271146-casa-singola-un-piano-10-.png" },
-      { "id": "camera", "nome": "Camera da letto", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730272941-casa-singola-un-piano-11-.png" },
-      { "id": "bagno", "nome": "Bagno", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730274243-casa-singola-un-piano-12-.png" },
-      { "id": "giardino", "nome": "Giardino", "img": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730284289-casa-singola-un-piano-1-.png" }
     ]
   },
   "elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova": {

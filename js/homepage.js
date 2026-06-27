@@ -199,9 +199,9 @@ function renderProps(arr){
 const VT_PREVIEW = 4;
 /** Ordine fisso homepage: 4 tour nel catalogo locale */
 const VT_CATALOG_ORDER = [
+  'appartamento-elegante-con-ampio-terrazzo-in-zona-sacro-cuore-padova',
   'casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno',
   'elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova',
-  'casa-singola-con-ampio-giardino-a-grisignano-di-zocco',
   'bi-familiare-indipendente-in-vendita-nel-cuore-di-sacrocuore-padova'
 ];
 
@@ -250,7 +250,7 @@ function renderVisiteVirtualiHome(arr) {
       + '</div></div>'
       + '<div class="vt-caption"><strong>' + escProp(comune) + '</strong>'
       + '<span>' + escProp(vtCaptionLine(p)) + '</span>'
-      + '<a class="vt-annuncio-link" href="' + escAttr(href) + '" onclick="event.stopPropagation()">Cerca tra gli annunci' + (comune ? ' a ' + escProp(comune) : '') + ' →</a>'
+      + '<a class="vt-annuncio-link" href="' + escAttr(p.immobile_href || ('immobile?s=' + encodeURIComponent(generatePropertySlug(p)))) + '" onclick="event.stopPropagation()">Vedi scheda annuncio →</a>'
       + '</div></div></button>';
   }).join('');
   grid.querySelectorAll('.rv').forEach(function(el) {
@@ -267,6 +267,8 @@ function catalogEntryToProperty(slug, entry) {
     comune: entry.comune || 'Padova',
     tipo_operazione: 'vendita',
     tipo_contratto: 'vendita',
+    codice: entry.codice || '',
+    immobile_href: entry.immobile_href || '',
     foto_principale: entry.cover || (entry.scenes[0] && entry.scenes[0].img) || '',
     virtual_tour_scenes: entry.scenes.map(function(s) {
       return { nome: s.nome, url: s.img, thumbnail: s.img };

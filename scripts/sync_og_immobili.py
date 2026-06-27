@@ -115,7 +115,7 @@ def build_share_html(entry: dict) -> str:
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="robots" content="noindex, follow, max-image-preview:large">
 <link rel="canonical" href="{escape(app_url)}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Righetto Immobiliare">

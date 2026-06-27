@@ -80,7 +80,7 @@
       titolo: tour.titolo || 'Immobile',
       comune: tour.comune || 'Padova',
       codice: tour.codice || '',
-      immobileHref: 'immobile?s=' + encodeURIComponent(slug),
+      immobileHref: tour.immobile_href || ('immobile?s=' + encodeURIComponent(slug)),
       searchHref: 'immobili?tab=vendita' + (tour.comune ? '&zona=' + encodeURIComponent(tour.comune) : ''),
       scenes: tour.scenes
     };

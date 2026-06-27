@@ -1,6 +1,6 @@
 # Skill — Automazione social Meta + Google Business (`righetto_social/`)
 
-**Versione:** 16 giugno 2026 — §2b.1 schema consegna agente (DESCRIZIONE + LINK + KEYWORD). Agenda 4 slot (10/13/15/19), rotazione catalogo.  
+**Versione:** 26 giugno 2026 — §2b link social `share-immobile-*` (OG) vs URL sito `immobile?s=` (SEO); §2b.1 invariato.  
 **Indice principale:** `TEST-SKILL/SKILL-2.0.md` sezione **10.4** (sintesi).  
 **Implementazione:** cartella `righetto_social/`, README tecnico locale.
 
@@ -85,8 +85,11 @@ Ogni testo di pubblicazione (corpo, `corpo_spintax`, caption reel/storia) deve c
 1. **Titolo** (ripetuto in prima riga se il canale non ha campo titolo separato — stesso testo, pari pari).
 2. **2–4 righe utili** — zona, tipologia, prezzo/indicazione (immobili) o incipit/guide (blog); tono professionale Righetto; **no tariffe mediazione**.
 3. **Link URL completo** dell’immobile o dell’articolo, su riga dedicata (HTTPS, dominio `righettoimmobiliare.it`):
-   - Immobile: `https://righettoimmobiliare.it/immobile?s={slug}` (slug da titolo+codice come in `genera_bozze_settimanali.slug_immobile`).
-   - Blog: `https://righettoimmobiliare.it/blog-articolo?s={slug}`.
+   - **Immobile — solo caption social (FB/IG/WA):** `https://righettoimmobiliare.it/share-immobile-{slug-seo}` — pagina con Open Graph statico; **non** sostituisce l’URL del sito.
+   - **Immobile — sito / blog / Google / link interni:** resta `https://righettoimmobiliare.it/immobile?s={slug-seo}` (canonical indicizzabile). **Vietato** cambiare CTA blog, homepage o sitemap a `share-immobile`.
+   - Slug SEO = `tipologia-operazione-comune-codice` (`scripts/righetto_immobile_slug.py`, allineato a `generatePropertySlug()`).
+   - Post già pubblicati con `immobile?s=` **slug legacy** (titolo): il link continua a funzionare sul sito; per nuova anteprima usare `share-immobile-{slug-seo}` o l’alias legacy se generato da `sync_og_immobili.py`.
+   - Blog: `https://righettoimmobiliare.it/blog-articolo?s={slug}` oppure `/{url_statico}` se pagina HTML dedicata.
 4. **Hashtag `#`** — **minimo 10**, in coda al testo, ricavati da:
    - parole chiave **ad alto volume di ricerca** coerenti con Padova / immobiliare (es. mutuo, affitto studenti, quartiere, tipologia);
    - campi SEO già in DB se presenti (`blog.keywords`, `immobili` comune/zona/tipologia);
@@ -101,10 +104,12 @@ Ogni testo di pubblicazione (corpo, `corpo_spintax`, caption reel/storia) deve c
 {Visita su appuntamento|Richiedi informazioni}: {comune} — {dettaglio prezzo/mq}.
 Tel. 049.8843484
 
-https://righettoimmobiliare.it/immobile?s={slug}
+https://righettoimmobiliare.it/share-immobile-{slug-seo}
 
 #padova #immobiliare #righettoimmobiliare #… (≥10 totali, anche specifici zona/tipologia)
 ```
+
+> **Visibilità SEO:** la pagina `share-immobile-*` ha `noindex` + `canonical` → `immobile?s={slug-seo}`. L’utente viene reindirizzato alla scheda reale. Zero perdita di posizionamento su Google.
 
 **Esempio blog (schema):**
 
@@ -126,7 +131,7 @@ https://righettoimmobiliare.it/blog-articolo?s={slug}
 | Blocco | Contenuto | Regole |
 |--------|-----------|--------|
 | **DESCRIZIONE** | Corpo caption in **spintax** `{opzione A\|opzione B\|opzione C}` | Spintax **solo** qui (e righe secondarie), **mai** sul titolo. Testo **breve** (Instagram: preferire &lt;500 caratteri testo+hashtag). Tono Righetto, **no** tariffe mediazione. |
-| **LINK** | URL HTTPS su **riga dedicata** | Dominio `righettoimmobiliare.it`. Immobile: `/immobile?s={slug}`. Blog statico: `/{url_statico}` o `/blog-articolo?s={slug}`. Landing: `/{slug-landing}`. |
+| **LINK** | URL HTTPS su **riga dedicata** | Dominio `righettoimmobiliare.it`. **Immobile (social):** `/share-immobile-{slug-seo}`. **Sito/blog (CTA interne):** `/immobile?s={slug-seo}` — non mescolare. Blog statico: `/{url_statico}` o `/blog-articolo?s={slug}`. Landing: `/{slug-landing}`. |
 | **KEYWORD** | Hashtag con prefisso **`#`** (nel brief: «keyword con asterisco» = cancelletto `#`) | **Minimo 8–12**, mix base (`#padova` `#righettoimmobiliare` `#immobiliare`) + keyword **specifiche** del contenuto (zona, tipologia, tema articolo). Una riga o blocco finale. **Vietato** omettere i `#`. |
 
 **Ordine obbligatorio nella risposta:** DESCRIZIONE → LINK → KEYWORD.
@@ -178,10 +183,13 @@ https://righettoimmobiliare.it/{percorso-canonical}
 
 ### Allineamento codice
 
+- **Anteprima social immobili (giu 2026):** `scripts/sync_og_immobili.py` genera `share-immobile-*.html` (OG statico, `noindex`, canonical → `immobile?s=`). Verifica: `python scripts/verify_og_immobili.py`. Rigenerare dopo ogni nuovo annuncio attivo.
+- `scripts/righetto_immobile_slug.py` — slug SEO condiviso con sito e social.
+- `genera_bozze_settimanali.py` / `publish_from_agenda.py` — link caption immobile = `share_immobile_url()`; **non** modificare link interni sito.
 - `templates/social_sezioni.json`: per `immobile` e `blog`, `titoli_spintax` deve essere solo `["{titolo}"]` (o equivalente senza varianti).
 - Script `genera_bozze_settimanali.py`, `programma_ultimi_10.py`, bozze manuali in admin: rispettare questa sezione.
 - Righe già in `pianificazioni`: allineare con `python aggiorna_agenda_copy.py` (salta righe con `PUB_OK` in note).
-- Facebook: oltre al parametro `link` API, il **messaggio** deve comunque includere l’URL (obbligatorio per IG e per coerenza cross-canale).
+- Facebook: oltre al parametro `link` API, il **messaggio** deve comunque includere l’URL share (obbligatorio per IG e per coerenza cross-canale).
 
 ---
 

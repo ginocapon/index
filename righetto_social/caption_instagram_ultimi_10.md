@@ -1,5 +1,6 @@
 # Instagram — ultimi 10 immobili (spintax)
-# Titolo = pari pari al sito · Link in caption · Hashtag da template immobile
+# Titolo = pari pari al sito · Link share (anteprima FB) · Hashtag da template immobile
+# URL sito/SEO resta immobile?s= — qui solo link social con Open Graph statico
 
 ---
 
@@ -14,27 +15,26 @@ Prezzo richiesto: € 365.000 — {ideale per famiglie|ottima per chi cerca spaz
 {Visita su appuntamento|Prenota una visita}: consulenza gratuita in agenzia.
 Tel. 049.8843484
 
-https://righettoimmobiliare.it/immobile?s=casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno
+https://righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0286
 
 #padova #immobiliare #righettoimmobiliare #casa #venditacasa #altichiero #casasingola #mercatoimmobiliare #agenziaimmobiliare #immobilipadova #consulenzaimmobiliare #nuovoannuncio #proprieta
 ```
 
 ---
 
-## 2. LP0284-V — Casa con giardino Grisignano
-**Titolo:** Casa singola con ampio giardino a Grisignano di Zocco
+## 2. LA0319 — Appartamento Sacro Cuore (sostituisce LP0284-V non attivo)
+**Titolo:** Appartamento elegante con ampio terrazzo in zona Sacro Cuore, Padova
 
 ```
-{Opportunità|Proposta} in vendita — Grisignano di Zocco (PD).
-Casa singola ~120 mq + giardino privato ~800 mq, garage e piazzale.
-€ 150.000 — {tra Vicenza e Padova|posizione strategica A4}.
+{Nuovo incarico|In vendita} — Sacro Cuore, Padova.
+Appartamento ~90 mq, terrazzo ampio, 5 locali. € 195.000.
 
-{Richiedi informazioni|Scopri di più} — visita senza impegno.
+{Richiedi informazioni|Scopri di più} — visita su appuntamento.
 049.8843484
 
-https://righettoimmobiliare.it/immobile?s=casa-singola-con-ampio-giardino-a-grisignano-di-zocco
+https://righettoimmobiliare.it/share-immobile-appartamento-vendita-padova-la0319
 
-#padova #immobiliare #righettoimmobiliare #casa #venditacasa #grisignano #giardino #mercatoimmobiliare #agenziaimmobiliare #immobilipadova #consulenzaimmobiliare #nuovoannuncio #proprieta
+#padova #immobiliare #righettoimmobiliare #casa #venditacasa #sacrocuore #appartamento #mercatoimmobiliare #agenziaimmobiliare #immobilipadova #consulenzaimmobiliare #nuovoannuncio #proprieta
 ```
 
 ---
@@ -50,7 +50,7 @@ Casa singola ~140 mq su 2 livelli, {da ristrutturare|ampio margine di personaliz
 {Prenota visita|Contattaci}: consulenza gratuita Righetto Immobiliare.
 049.8843484
 
-https://righettoimmobiliare.it/immobile?s=casa-singola-con-ampio-scoperto-a-grisignano-di-zocco
+https://righettoimmobiliare.it/share-immobile-villetta-vendita-grisignano-di-zocco-lp0285-v
 
 #padova #immobiliare #righettoimmobiliare #casa #venditacasa #grisignano #ristrutturazione #mercatoimmobiliare #agenziaimmobiliare #immobilipadova #consulenzaimmobiliare #nuovoannuncio #proprieta
 ```
@@ -68,7 +68,7 @@ https://righettoimmobiliare.it/immobile?s=casa-singola-con-ampio-scoperto-a-gris
 {Visita su appuntamento|Richiedi informazioni}.
 049.8843484
 
-https://righettoimmobiliare.it/immobile?s=elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova
+https://righettoimmobiliare.it/share-immobile-appartamento-vendita-padova-la0317
 
 #padova #immobiliare #righettoimmobiliare #casa #venditacasa #mandria #quadrilocale #mercatoimmobiliare #agenziaimmobiliare #immobilipadova #consulenzaimmobiliare #nuovoannuncio #proprieta
 ```
@@ -86,7 +86,7 @@ https://righettoimmobiliare.it/immobile?s=elegante-appartamento-quadrilocale-in-
 Consulenza gratuita — {prenota visita|chiamaci}.
 049.8843484
 
-https://righettoimmobiliare.it/immobile?s=bi-familiare-indipendente-in-vendita-nel-cuore-di-sacrocuore-padova
+https://righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0283
 
 #padova #immobiliare #righettoimmobiliare #casa #venditacasa #sacrocuore #bifamiliare #mercatoimmobiliare #agenziaimmobiliare #immobilipadova #consulenzaimmobiliare #nuovoannuncio #proprieta
 ```
@@ -104,7 +104,7 @@ Terrazza abitabile, garage doppio, {senza spese condominiali|indipendente}.
 {Visita su appuntamento|Scopri l'immobile}.
 049.8843484
 
-https://righettoimmobiliare.it/immobile?s=padova-monta-porzione-di-bi-familiare-con-terrazza-abitabile
+https://righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0281
 
 #padova #immobiliare #righettoimmobiliare #casa #venditacasa #monta #terrazza #mercatoimmobiliare #agenziaimmobiliare #immobilipadova #consulenzaimmobiliare #nuovoannuncio #proprieta
 ```
@@ -121,7 +121,7 @@ Appartamento € 150.000 — {vicino a Padova|zona Limena Righetto}.
 {Richiedi dettagli|Prenota visita}: consulenza gratuita.
 049.8843484
 
-https://righettoimmobiliare.it/immobile?s=appartamento
+https://righettoimmobiliare.it/share-immobile-appartamento-vendita-limena
 
 #padova #immobiliare #righettoimmobiliare #casa #venditacasa #limena #appartamento #mercatoimmobiliare #agenziaimmobiliare #immobilipadova #consulenzaimmobiliare #nuovoannuncio #proprieta
 ```
@@ -138,7 +138,7 @@ https://righettoimmobiliare.it/immobile?s=appartamento
 {Ideale per studi|Per professionisti e PMI} nel Padovano.
 049.8843484
 
-https://righettoimmobiliare.it/immobile?s=ufficio-in-affitto-in-via-del-santo-s-n-c
+https://righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2105a
 
 #padova #immobiliare #righettoimmobiliare #affittopadova #ufficio #limena #mercatoimmobiliare #agenziaimmobiliare #immobilipadova #consulenzaimmobiliare #nuovoannuncio #proprieta
 ```
@@ -155,7 +155,7 @@ https://righettoimmobiliare.it/immobile?s=ufficio-in-affitto-in-via-del-santo-s-
 {Richiedi informazioni|Visita su appuntamento}.
 049.8843484
 
-https://righettoimmobiliare.it/immobile?s=capannone-in-vendita-a-rubano
+https://righettoimmobiliare.it/share-immobile-capannone-vendita-rubano-cap1609a
 
 #padova #immobiliare #righettoimmobiliare #capannone #rubano #investimentiimmobiliari #mercatoimmobiliare #agenziaimmobiliare #immobilipadova #consulenzaimmobiliare #nuovoannuncio #proprieta
 ```
@@ -172,7 +172,7 @@ https://righettoimmobiliare.it/immobile?s=capannone-in-vendita-a-rubano
 
 Consulenza gratuita Righetto Immobiliare — 049.8843484
 
-https://righettoimmobiliare.it/immobile?s=capannone-in-vendita-in-via-roma-s-n-c
+https://righettoimmobiliare.it/share-immobile-capannone-vendita-limena-cap1687
 
 #padova #immobiliare #righettoimmobiliare #capannone #limena #investimentiimmobiliari #mercatoimmobiliare #agenziaimmobiliare #immobilipadova #consulenzaimmobiliare #nuovoannuncio #proprieta
 ```
