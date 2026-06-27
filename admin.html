@@ -5185,6 +5185,18 @@ function generatePropertySlug(d) {
   ).filter(Boolean).join('-');
 }
 
+/** URL scheda immobile (SEO, sito, blog, Google) — non sostituire con share-immobile */
+function immobileAppUrl(d) {
+  var base = (typeof SITE_BASE !== 'undefined' && SITE_BASE) ? SITE_BASE.replace(/\/$/, '') : 'https://righettoimmobiliare.it';
+  return base + '/immobile?s=' + encodeURIComponent(generatePropertySlug(d));
+}
+
+/** Solo anteprima Facebook/Instagram/WhatsApp — noindex, canonical resta su immobile?s= */
+function shareImmobileUrl(d) {
+  var base = (typeof SITE_BASE !== 'undefined' && SITE_BASE) ? SITE_BASE.replace(/\/$/, '') : 'https://righettoimmobiliare.it';
+  return base + '/share-immobile-' + generatePropertySlug(d);
+}
+
 /** Salva solo l'ID 11 caratteri (accetta anche URL incollati da YouTube) */
 function normalizeYouTubeIdForDb(raw) {
   if (!raw || typeof raw !== 'string') return null;
@@ -8224,7 +8236,7 @@ function socialBozzeBuildSectionRows(section, tpl, weekMonday, weekIndex, base) 
     var imms = socialBozzeActiveImmobili();
     var row = imms[weekIndex % Math.max(1, imms.length)] || imms[0];
     if (!row) return rows;
-    link = base + '/immobile?s=' + encodeURIComponent(generatePropertySlug(row));
+    link = shareImmobileUrl(row);
     ref = String(row.id || '');
     ctx.titolo = String(row.titolo || 'Immobile');
     ctx.zona = String(row.zona || row.comune || 'Padova');
@@ -9790,7 +9802,7 @@ function autoPubBuildCandidatePool() {
       contenuto: 'immobile',
       ref: i.id,
       titolo: '🏠 ' + String(i.titolo || i.codice || 'Immobile').substring(0, 72),
-      link: base + '/immobile?s=' + encodeURIComponent(generatePropertySlug(i)),
+      link: shareImmobileUrl(i),
       tipoMedia: 'immobile'
     });
   });
@@ -9800,7 +9812,7 @@ function autoPubBuildCandidatePool() {
       contenuto: 'immobile',
       ref: i.id,
       titolo: '🏠 ' + String(i.titolo || '').substring(0, 72),
-      link: base + '/immobile?s=' + encodeURIComponent(generatePropertySlug(i)),
+      link: shareImmobileUrl(i),
       tipoMedia: 'immobile'
     });
   });

@@ -10,6 +10,8 @@ Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutt
 
 **Changelog rapido (27 maggio 2026):** sicurezza — audit generale + revisione **2×/settimana** (martedì/venerdì): **`TEST-SKILL/skill-security.md`**, `scripts/security-check.sh`, workflow `security-check-bisettimanale.yml`.
 
+**Changelog rapido (26 giugno 2026):** social — anteprima FB immobili: URL `share-immobile-*` (OG statico) **solo caption**; sito resta `immobile?s=` — **`TEST-SKILL/skill-social-automation.md`** §2b + §10.4.
+
 **Changelog rapido (6 giugno 2026):** commit + push **automatici** a fine task — `TEST-SKILL/skill-essentials.md` §1.1, `CLAUDE.md`, `righetto-core.mdc`.
 
 **Changelog rapido (3 giugno 2026):** 6 articoli blog guide acquirenti/fisco; Google-Agent §1.1b in `TEST-SKILL/SKILL-2.0.md`; `llms.txt` e `ai.json` aggiornati.

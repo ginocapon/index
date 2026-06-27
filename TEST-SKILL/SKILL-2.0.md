@@ -12,6 +12,7 @@
 >
 > **Changelog 29 maggio 2026:** blog — **anti-doppioni BLOCCANTE** prima di ogni nuovo articolo: verifica catalogo + script; se tema già coperto → ricerca web su fonte istituzionale e altro argomento (§8.1a, `skill-content.md` §2.0, `scripts/check_doppioni_sito.py`).
 >
+> **Changelog 26 giugno 2026:** social — anteprima FB immobili: `share-immobile-*` solo caption; URL sito `immobile?s=` invariato (§2b, §10.4 `skill-social-automation.md`).
 > **Changelog 16 giugno 2026:** social — schema consegna agente §2b.1: DESCRIZIONE spintax + LINK + KEYWORD `#` per post/storia/reel/landing in chat.
 > **Changelog 16 giugno 2026 (b):** blog — formato **tour portale acquisizioni mix v2** (`skill-content.md` §4.1): 5 residenziali + 2 uffici affitto + capannone, Grisignano in evidenza, layout card moderno; script `build_acquisizioni_giugno16.py`.
 > **Changelog 28 maggio 2026:** social — copy obbligatorio immobili/blog: titolo pari pari, link + hashtag in caption (§2b `skill-social-automation.md`, §10.4).
@@ -1489,6 +1490,18 @@ Dettaglio in **§2b** di [`skill-social-automation.md`](skill-social-automation.
 - **Titolo** del post/storia/reel = **identico** a `immobili.titolo` / `blog.titolo` (niente spintax sul titolo).
 - **Descrizione/caption:** link URL completo immobile o articolo + **≥10 hashtag `#`** da keyword ad alto volume (Padova/immobiliare) + campi SEO DB; spintax solo nel corpo secondario.
 - **Consegna manuale in chat** (post / storia / reel / landing social): schema fisso **§2b.1** in `skill-social-automation.md` — blocchi **DESCRIZIONE** (spintax) + **LINK** + **KEYWORD** (`#`, min. 8–12).
+
+#### Anteprima Facebook/WhatsApp immobili — due URL (giu 2026)
+
+| Uso | URL | Note |
+|-----|-----|------|
+| **Sito, blog, Google, CTA interne** | `https://righettoimmobiliare.it/immobile?s={slug-seo}` | Canonical indicizzabile — **non cambiare** |
+| **Caption FB/IG/WA, API Meta `link`** | `https://righettoimmobiliare.it/share-immobile-{slug-seo}` | OG statico; `noindex` + redirect → scheda reale |
+
+- Generazione: `python scripts/sync_og_immobili.py` (dopo nuovo annuncio `attivo=true`).
+- Verifica: `python scripts/verify_og_immobili.py`.
+- Alias **slug legacy** (titolo): pagine `share-immobile-{legacy}` per post storici senza perdere anteprima.
+- **Vietato:** sostituire link interni sito/sitemap con `share-immobile` (rischio duplicati SEO).
 
 #### Rotazione catalogo (immobili, blog, landing, agenzia)
 
