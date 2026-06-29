@@ -102,6 +102,53 @@ else
   log_err "llms.txt MANCANTE (richiesto da SKILL-2.0 per GEO)"
 fi
 
+echo "" >> "$REPORT_FILE"
+echo "### 1.4 Pagine autore E-E-A-T (§4.2)" >> "$REPORT_FILE"
+for author in gino-capon linda-righetto; do
+  if [ -f "${author}.html" ]; then
+    AUTHOR_CONTENT=$(cat "${author}.html")
+    if echo "$AUTHOR_CONTENT" | grep -qi '"@type".*Person'; then
+      log_ok "${author}.html presente con Person schema"
+    else
+      log_warn "${author}.html senza Person schema (E-E-A-T)"
+    fi
+    if echo "$AUTHOR_CONTENT" | grep -qi 'rel="canonical"'; then
+      if grep -qi "$author" sitemap.xml 2>/dev/null; then
+        log_ok "${author} in sitemap.xml"
+      else
+        log_warn "${author} NON in sitemap.xml"
+      fi
+    else
+      log_warn "${author}.html — canonical mancante"
+    fi
+  else
+    log_err "${author}.html MANCANTE (E-E-A-T §4.2)"
+  fi
+done
+
+echo "" >> "$REPORT_FILE"
+echo "### 1.5 CTA Visita guidata live (immobile.html)" >> "$REPORT_FILE"
+if [ -f immobile.html ]; then
+  IMM_CONTENT=$(cat immobile.html)
+  if echo "$IMM_CONTENT" | grep -q 'visitaLiveGuidata'; then
+    log_ok "immobile.html — funzione visitaLiveGuidata() presente"
+  else
+    log_err "immobile.html — visitaLiveGuidata() assente"
+  fi
+  if echo "$IMM_CONTENT" | grep -qi 'Visita guidata live'; then
+    log_ok "immobile.html — CTA Visita guidata live visibile"
+  else
+    log_warn "immobile.html — testo CTA Visita live assente"
+  fi
+  if echo "$IMM_CONTENT" | grep -qi 'Visita guidata live (video)'; then
+    log_ok "immobile.html — opzione form visita live"
+  else
+    log_warn "immobile.html — select form senza opzione visita live"
+  fi
+else
+  log_warn "immobile.html non trovato (template dinamico)"
+fi
+
 # ============================================================
 # SEZIONE 2: CONTROLLI PER PAGINA
 # ============================================================

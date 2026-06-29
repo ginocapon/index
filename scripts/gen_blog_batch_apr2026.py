@@ -318,7 +318,7 @@ def author_bio():
     <div class="author-bio-text">
       <strong>Gino Capon</strong>
       <div class="author-role">Fondatore &mdash; Righetto Immobiliare</div>
-      <p>Dal 2000 operiamo nel mercato residenziale del capoluogo euganeo e della provincia, con oltre 350 transazioni seguite e presenza in oltre 101 comuni. <a href="chi-siamo">Chi siamo</a></p>
+      <p>Dal 2000 operiamo nel mercato residenziale del capoluogo euganeo e della provincia, con oltre 350 transazioni seguite e presenza in oltre 101 comuni. <a href="gino-capon">Profilo autore</a></p>
     </div>
   </div>"""
 

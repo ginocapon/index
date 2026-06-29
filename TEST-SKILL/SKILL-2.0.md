@@ -3,8 +3,11 @@
 
 > **Versione:** 2.0 — 15 Marzo 2026 (patch contenuti **3 Aprile 2026**)
 > **Unica fonte di verita'** — Sostituisce SKILL-UNIFICATA.md, AUTOMATION-SITE-2026.md e CLAUDE.md
-> **Ultimo aggiornamento Google verificato:** 3 Giugno 2026
+> **Ultimo aggiornamento Google verificato:** 27 Giugno 2026
 > **Prossima verifica consigliata:** Luglio 2026
+>
+> **Changelog 27 giugno 2026 (pomeriggio):** E-E-A-T — pagine autore `/gino-capon`, `/linda-righetto`; CTA Visita guidata live su `immobile.html`; audit settimanale §1.4–1.5 in `audit-skill.sh`.
+> **Changelog 27 giugno 2026:** Google Search Central — guida AI Overviews (§4.4b).
 >
 > **Changelog 3 giugno 2026:** **Google-Agent** (user-triggered fetcher, 20 mar 2026) — IP in `user-triggered-agents.json`; ignora robots.txt; AEO: prime 2 righe dichiarative, `llms.txt`/`ai.json` aggiornati; non bloccare in WAF. Doc: [Google User-Triggered Fetchers](https://developers.google.com/crawling/docs/crawlers-fetchers/google-user-triggered-fetchers).
 >
@@ -384,7 +387,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 - **Eseguibile anche manualmente:** Actions → "Audit Settimanale SKILL-2.0" → Run workflow
 - **Output:** Issue GitHub con label `audit` + email riepilogativa a info@righettoimmobiliare.it
 - **16 controlli per pagina:** meta description, canonical, URL pulite (no .html), Open Graph, Schema JSON-LD (RealEstateAgent, GeoCoordinates, sameAs, dateModified), BreadcrumbList, font-display:swap, keyword stuffing ("a Padova" max 10), CDN esterni vietati, framework vietati, link interni con .html, GA4, viewport mobile, filter:blur, will-change, placeholder non sostituiti
-- **Controlli globali:** sitemap.xml, robots.txt (regole AI bots), llms.txt (GEO), lessico SEO+AI / AEO / SEM (allineamento contenuti a §4.5.1 — revisione manuale o checklist redazionale)
+- **Controlli globali:** sitemap.xml, robots.txt (regole AI bots), llms.txt (GEO), **pagine autore E-E-A-T** (`gino-capon.html`, `linda-righetto.html` §1.4), **CTA Visita guidata live** su `immobile.html` (§1.5), lessico SEO+AI / AEO / SEM
 - **Controlli specifici blog:** FAQPage schema, author bio (E-E-A-T), timestamp visibile
 - **Controlli zone:** FAQPage, GeoCoordinates, dati OMI
 - **Controlli servizi:** FAQPage schema
@@ -416,14 +419,26 @@ js/scroll-reveal.js                 - Animazioni scroll
 > Google e le AI penalizzano contenuti senza autore identificabile o senza prove di competenza.
 
 **Cosa implementare per Righetto Immobiliare:**
-- [ ] **Pagina autore** per Linda Righetto e Gino Capon con: bio dettagliata, qualifiche, anni esperienza, foto reale, link social professionali
-- [ ] **Author bio visibile** su ogni articolo blog (nome, ruolo, foto, link a pagina autore)
-- [ ] **Person schema** (Schema.org) su pagine autore con `jobTitle`, `worksFor`, `sameAs`
+- [x] **Pagina autore** per Linda Righetto e Gino Capon (`/linda-righetto`, `/gino-capon`) — bio, foto, Person schema, FAQ (giu 2026)
+- [x] **Author bio visibile** su ogni articolo blog con **link a pagina autore** (88 blog patchati giu 2026; nuovi: `gino-capon` in template batch)
+- [x] **Person schema** (Schema.org) su pagine autore con `jobTitle`, `worksFor`, `sameAs`
 - [ ] **Chi siamo dettagliato:** storia brand, team, anni nel settore, case study clienti reali
 - [ ] **Recensioni specifiche:** incoraggiare recensioni che menzionano quartiere/servizio specifico (valgono 10x le generiche per entity authority)
 - [ ] **Coerenza brand cross-platform:** nome, bio, foto identici su sito, GBP, LinkedIn, Instagram, portali immobiliari
 
-### 4.3 Fattori di Ranking 2026
+### 4.2b CTA Visita guidata live (scheda immobile)
+
+> Pattern «Visita in Comodità» (benchmark Tecnocasa) — implementato giu 2026 su `immobile.html`.
+
+**Requisiti obbligatori:**
+- Box sidebar `#visita-live-cta` con testo «Visita guidata live» e bottone `visitaLiveGuidata()`
+- WhatsApp precompilato con rif. immobile, zona e URL canonical
+- Opzione form `Visita guidata live (video)` nel select richieste
+- Evento GA4 `visita_live_click` (se gtag disponibile)
+- **Audit settimanale:** `scripts/audit-skill.sh` §1.5
+
+**Non rimuovere** senza sostituire con equivalente conversione — controllato dal cron venerdì.
+
 1. **E-E-A-T** — Experience, Expertise, Authoritativeness, Trustworthiness (vedi sezione 4.2)
 2. **Rilevanza semantica** — Risposta all'intento di ricerca (search intent > keyword volume)
 3. **Core Web Vitals** — Performance come hard ranking factor (64% siti non passa le soglie)
@@ -435,7 +450,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 9. **Local Relevance** — Comunicare chiaramente zona e area servizi
 10. **Page Experience Consistency** — Performance omogenea su tutte le pagine (no home veloce + blog lento)
 
-### 4.4 Novita' Google Marzo 2026
+### 4.4 Novita' Google Marzo–Giugno 2026
 - **March 2026 Core Update** — Rollout dal 7 marzo, ~2 settimane
 - **Performance = hard ranking factor** — Siti che non passano soglie vedono cali misurabili
 - **Engagement Reliability** — Nuova metrica CWV
@@ -444,6 +459,36 @@ js/scroll-reveal.js                 - Animazioni scroll
 - **AI Mode data** contato in Performance Report di Search Console
 - **Google review policies aggiornate** — Rischio perdita recensioni
 - **Ranking volatility estrema** — Cali 20-35% riportati da molti siti
+
+### 4.4b Google Search — AI Overviews e AI Mode (guida ufficiale, verificato giugno 2026)
+
+> Fonte: [Google Search Central — Optimizing for generative AI features](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide) e [AI features and your website](https://developers.google.com/search/docs/appearance/ai-features).
+
+**Cosa dice Google (sintesi operativa):**
+
+| Affermazione Google | Implicazione Righetto |
+|---------------------|------------------------|
+| **Stesse regole SEO** valgono per AI Overviews e AI Mode | Continuare §4.1 CWV, §4.2 E-E-A-T, §4.6 schema, contenuti people-first |
+| Pagina **indicizzata + snippet** = eleggibile come link di supporto in AI Overview | Sitemap, canonical, noindex errati, `immobile` dinamico con share-immobile per social OK |
+| **Nessun markup schema “AI-specific”** obbligatorio | FAQPage / BlogPosting / RealEstateAgent restano per rich result + chiarezza, non “hack AI” |
+| **Ignorare hack:** chunking artificiale, `llms.txt` **per Google**, menzioni inautentiche | Non frammentare articoli; non comprare citazioni; non dipendere da `llms.txt` **solo** per Google |
+| Contenuto **unico, esperienza reale**, prospettiva non replicabile da aggregatori | Testi immobili originali vs portali; dati OMI/FIMAA; tour 360 e acquisizioni reali |
+| **GBP aggiornato** = superficie anche per risposte AI locali | Post GBP settimanali, foto, recensioni (gap vs Tetto Rosso §3 skill-seo) |
+| **Search Console** — report performance **Generative AI** (impressioni, no click separati) | Monitorare settimanalmente in GSC; non aspettarsi metriche click dedicate |
+
+**Posizione Righetto su `llms.txt` / `ai.json` (allineamento post-guida Google):**
+
+- **Per Google Search / AI Overviews:** file **non richiesti** — mantenerli **non danneggia**, ma non sostituiscono SEO on-page.
+- **Per ChatGPT, Claude, Perplexity, Gemini app:** restano **utili** come indice citabile → **continuare** ad aggiornare `llms.txt` + `llms-full.txt` + `ai.json` a ogni batch blog (§1.1b).
+- **Priorità reale per visibilità AI Google:** box AEO §8.2.5, FAQ allineate, fonti istituzionali, E-E-A-T autore, contenuto non duplicato.
+
+**Checklist post-guida (giu 2026):**
+- [x] SEO tecnico: robots Allow crawl, sitemap, canonical
+- [x] Struttura risposta: box “In sintesi” su articoli pillar recenti
+- [x] **E-E-A-T:** pagine autore Gino + Linda (§4.2 — giu 2026)
+- [ ] **Author bio** su **tutti** i blog con link `/gino-capon` o `/linda-righetto` (audit §1.4 + script patch)
+- [ ] GSC: attivare monitoraggio tab **Generative AI** se disponibile sull’account
+- [ ] Evitare in future: testi “ottimizzati per AI” ripetitivi, farm citazioni, micro-chunking H2
 
 ### 4.5 GEO — Generative Engine Optimization
 
@@ -459,7 +504,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 5. **Citare fonti ufficiali** (Agenzia Entrate, OMI, FIMAA)
 6. **Frasi auto-contenute** — ogni claim deve avere senso letto isolatamente
 7. **Freshness** — aggiornare contenuti cornerstone regolarmente con timestamp "Ultimo aggiornamento"
-8. **llms.txt** — mantenere aggiornato per guidare AI bots
+8. **llms.txt / ai.json** — opzionali per **Google** (§4.4b); **consigliati** per altri assistenti — aggiornare a ogni batch blog
 
 **Regole AEO per featured snippet:**
 1. Risposta 40-60 parole come primo paragrafo dopo ogni H2
@@ -473,9 +518,9 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 | Termine | Significato (breve) | Cosa copriamo sul sito statico | Riferimento SKILL |
 |--------|----------------------|--------------------------------|-------------------|
-| **SEO + AI** | SEO classico (indicizzazione, intent, contenuti) **piu'** segnali che aiutano **modelli e crawler AI** a citare correttamente il brand | Contenuti chiari, E-E-A-T, `llms.txt`, `robots.txt` (Allow bot AI dove previsto), JSON-LD, **no claim inventati** | §4.2 E-E-A-T, §4.5 GEO, §4.6 Schema, `llms.txt` |
+| **SEO + AI** | SEO classico **piu'** segnali per crawler/modelli | E-E-A-T, JSON-LD, contenuti dichiarativi; `llms.txt`/`ai.json` **utili per non-Google**, non obbligatori per Google (§4.4b) | §4.2, §4.4b, §4.5, §4.6 |
 | **AEO** | **Answer Engine Optimization** — contenuti strutturati per **risposte dirette** (snippet, People Also Ask, assistenti) | H2 in formato domanda dove possibile, primo paragrafo dopo H2 40-60 parole, **FAQPage** + FAQ visibili, tabelle | §4.5 regole AEO, checklist blog §5 |
-| **GEO** | **Generative Engine Optimization** — ottimizzazione per **citazioni in risposte generate** (Gemini, ChatGPT, Perplexity, AI Overviews) | Frasi dichiarative in apertura sezione, dati verificabili, `llms.txt` aggiornato, freshness | §4.5 GEO |
+| **GEO** | Citazioni in risposte generate (Gemini app, ChatGPT, Perplexity, AI Overviews se contenuto unico) | Frasi dichiarative, dati verificabili, freshness; **no** farm menzioni (Google giu 2026) | §4.4b, §4.5, §8.2.5 |
 | **SEM** | **Search Engine Marketing** in senso lato = visibilita' sui motori **organico + a pagamento** | **Sito:** landing con CTA chiare, URL pulite, tracking GA4, allineamento messaggio annuncio↔landing se si usano **Google Ads** (fuori repo). **Nota:** campagne Ads **non** vivono nel codice GitHub; la SKILL copre **asset on-site** (landing, velocita', coerenza keyword) | §4.3 ranking, landing in architettura |
 
 **Regole aggiuntive (bundle):**
@@ -953,7 +998,7 @@ Aggiornamento sostanziale di articolo **esistente** (nuova edizione anno, dati O
 3. **FAQPage JSON-LD** con `acceptedAnswer.text` **copiato o equivalente** al testo espanso nella pagina (no mismatch).
 4. **Fonti nel corpo**: link o menzione esplicita di istituzioni (BCE, Banca d'Italia, ISTAT, Agenzia delle Entrate, OMI) quando si parla di numeri o contesto macro — aumenta estrabilita' e trust.
 5. **Disambiguazione visiva**: se l'immagine di copertina e' **illustrativa** o rappresenta un contesto urbano non italiano, dirlo in **didascalia** o nota breve sotto l'hero (onesto per utenti e per modelli che leggono HTML).
-6. Dopo pubblicazione: aggiungere l'URL in **`llms.txt`** (sezione blog) entro il ciclo di lavoro, cosi' i crawler AI hanno il nuovo percorso indicizzato nel file dedicato.
+6. Dopo pubblicazione: aggiungere l'URL in **`llms.txt`** (sezione blog) — **consigliato per assistenti non-Google**; per Google Search seguire §4.4b (SEO standard, no dipendenza da llms.txt).
 
 Questa sezione **integra** la 8.3 (entita' e neural matching), non la sostituisce.
 

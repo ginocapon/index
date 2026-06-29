@@ -65,7 +65,8 @@
 | SVT/VSI/ER | Nuove metriche stabilità (March 2026 Core Update) | — |
 
 ### E-E-A-T (Cruciale 2026)
-- [ ] Pagina autore per Linda Righetto e Gino Capon (bio, qualifiche, foto, social)
+- [x] Pagina autore Gino Capon (`/gino-capon`) e Linda Righetto (`/linda-righetto`) — Person schema, FAQ
+- [ ] Author bio blog con link pagina autore (patch: `scripts/patch_author_bio_links.py`)
 - [ ] Author bio visibile su ogni articolo blog
 - [ ] Person schema con `jobTitle`, `worksFor`, `sameAs`
 - [ ] Chi siamo dettagliato con storia brand e case study
@@ -102,6 +103,7 @@
 ## 5. GEO — Generative Engine Optimization
 
 > 58% dei consumatori usa AI nel 2026. GEO converte 4.4x vs SEO tradizionale.
+> **Aggiornamento giu 2026 (Google ufficiale):** per **Google Search / AI Overviews** valgono le stesse regole SEO — `llms.txt` **non obbligatorio** per Google; evitare farm citazioni e micro-chunking. Vedi `SKILL-2.0.md` §**4.4b**.
 
 **Regole per ogni contenuto:**
 1. Frasi **dichiarative** nelle prime 2 righe di ogni sezione (AI estraggono da qui)
@@ -111,7 +113,7 @@
 5. Citare fonti ufficiali (Agenzia Entrate, OMI, FIMAA)
 6. Frasi auto-contenute (ogni claim deve avere senso isolatamente)
 7. Timestamp "Ultimo aggiornamento" su contenuti cornerstone
-8. `llms.txt` aggiornato ad ogni nuovo contenuto
+8. `llms.txt` + `ai.json` — **consigliati** per ChatGPT/Perplexity/Claude; opzionali per Google (§4.4b)
 
 **AEO per featured snippet:**
 1. Risposta 40-60 parole come primo paragrafo dopo ogni H2

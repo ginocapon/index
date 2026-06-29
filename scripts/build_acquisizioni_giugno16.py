@@ -897,10 +897,10 @@ def build_html(cfg: dict, body: str, wc: int) -> str:
 <a href="#main-content" class="skip-link">Contenuto principale</a>
 <header><div class="hi">
   <a href="/" class="logo">Righetto <span>Immobiliare</span></a>
-  <nav><a href="/">Home</a><a href="immobili">Immobili</a><a href="chi-siamo">Chi siamo</a><a href="blog" class="active">Blog</a><a href="contatti">Contatti</a></nav>
+  <nav><a href="/">Home</a><a href="immobili">Immobili</a><a href="gino-capon">Profilo autore</a><a href="blog" class="active">Blog</a><a href="contatti">Contatti</a></nav>
   <a class="h-btn" href="landing-valutazione">Valutazione gratuita</a>
 </div><button class="nav-burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button></header>
-<div class="nav-mobile" id="navMobile"><a href="/">Home</a><a href="immobili">Immobili</a><a href="chi-siamo">Chi siamo</a><a href="blog">Blog</a><a href="contatti">Contatti</a></div>
+<div class="nav-mobile" id="navMobile"><a href="/">Home</a><a href="immobili">Immobili</a><a href="gino-capon">Profilo autore</a><a href="blog">Blog</a><a href="contatti">Contatti</a></div>
 <main id="main-content">
 <div class="art-hero">
   <img class="art-hero-img" src="{cfg["hero_img"]}" alt="{cfg["hero_alt"]}" width="1280" height="420" fetchpriority="high">
@@ -914,7 +914,7 @@ def build_html(cfg: dict, body: str, wc: int) -> str:
 <div class="art-container"><div class="art-content">
 {body}
 {faq_html(cfg["faqs"])}
-<div class="author-bio"><img src="img/team/titolari.webp" alt="Gino Capon Righetto Immobiliare" width="64" height="64" loading="lazy"><div><strong>Gino Capon</strong><p style="font-size:.8rem;color:#555">Titolare — Righetto Immobiliare, Limena (PD). Mediazione immobiliare su Padova e provincia dal 2000.</p><p style="font-size:.78rem;margin-top:.4rem"><a href="chi-siamo">Chi siamo</a> · <a href="blog-righetto-storia-territorio-acquisizioni-2026">Storia e acquisizioni</a></p></div></div>
+<div class="author-bio"><img src="img/team/titolari.webp" alt="Gino Capon Righetto Immobiliare" width="64" height="64" loading="lazy"><div><strong>Gino Capon</strong><p style="font-size:.8rem;color:#555">Titolare — Righetto Immobiliare, Limena (PD). Mediazione immobiliare su Padova e provincia dal 2000.</p><p style="font-size:.78rem;margin-top:.4rem"><a href="gino-capon">Profilo autore</a> · <a href="blog-righetto-storia-territorio-acquisizioni-2026">Storia e acquisizioni</a></p></div></div>
 <div class="related"><h3 style="font-family:'Cormorant Garamond',serif">Articoli correlati</h3><ul style="margin-left:1.1rem;margin-top:.4rem">{rel}</ul></div>
 </div></div>
 {lead_form(slug, cfg["lead_ids"])}
