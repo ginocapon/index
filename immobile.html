@@ -218,6 +218,15 @@
     .agent-contact{display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;background:var(--bianco);border:1px solid var(--gc);border-radius:2px;text-decoration:none;color:var(--nero);font-size:.79rem;transition:border-color .2s}
     .agent-contact:hover{border-color:var(--oro)}
     .agent-contact svg{width:13px;height:13px;color:var(--oro);flex-shrink:0}
+    .visita-live-box{border-color:var(--blu);background:linear-gradient(180deg,#f0f4f8 0%,#fff 100%)}
+    .visita-live-box .side-body{padding:1.1rem}
+    .vl-badge{display:inline-block;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;background:var(--blu);color:#fff;padding:.22rem .55rem;border-radius:2px;font-weight:600;margin-bottom:.55rem}
+    .visita-live-box h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;margin-bottom:.35rem;color:var(--nero)}
+    .vl-desc{font-size:.78rem;color:var(--grigio);line-height:1.65;margin-bottom:.85rem}
+    .cta-visita-live{background:var(--blu);color:#fff;padding:.72rem 1rem;border:none;border-radius:2px;font-family:'Montserrat',sans-serif;font-size:.78rem;letter-spacing:.04em;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:.45rem;transition:opacity .2s,transform .2s}
+    .cta-visita-live:hover{opacity:.92;transform:translateY(-1px)}
+    .cta-visita-live svg{width:15px;height:15px;flex-shrink:0}
+    .vl-note{font-size:.68rem;color:var(--grigio);margin-top:.55rem;text-align:center;line-height:1.45}
     .form-fields{display:flex;flex-direction:column;gap:.45rem}
     .form-fields input,.form-fields textarea,.form-fields select{border:1px solid var(--gc);border-radius:2px;padding:.5rem .65rem;font-family:'Montserrat',sans-serif;font-size:.82rem;background:var(--bianco);color:var(--nero);width:100%;transition:border-color .2s}
     .form-fields input:focus,.form-fields textarea:focus,.form-fields select:focus{outline:none;border-color:var(--oro)}
@@ -519,7 +528,7 @@
           </button>
           <button class="cta-secondary" onclick="prenotaVisita()">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            Prenota visita
+            Prenota visita in agenzia
           </button>
           <button class="cta-pdf" onclick="downloadPDF()">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -530,6 +539,20 @@
             Stampa
           </button>
         </div>
+      </div>
+    </div>
+
+    <!-- VISITA GUIDATA LIVE -->
+    <div class="side-box visita-live-box" id="visita-live-cta">
+      <div class="side-body">
+        <span class="vl-badge">Visita in comodità</span>
+        <h3>Visita guidata live</h3>
+        <p class="vl-desc">Un agente Righetto ti accompagna in videochiamata mentre esplora l'immobile — come se fossi sul posto, senza spostarti.</p>
+        <button type="button" class="cta-visita-live" onclick="visitaLiveGuidata()" aria-label="Richiedi visita guidata live su WhatsApp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+          Richiedi visita live
+        </button>
+        <p class="vl-note">WhatsApp · risposta entro 2 ore in orario ufficio (lun–ven 9–19, sab 9–12)</p>
       </div>
     </div>
 
@@ -553,7 +576,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18a2 2 0 011.99-2H5a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
             049.8843484 (ufficio)
           </a>
-          <a href="mailto:info@righttoimmobiliare.it" class="agent-contact">
+          <a href="mailto:info@righettoimmobiliare.it" class="agent-contact">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             info@righettoimmobiliare.it
           </a>
@@ -583,6 +606,7 @@
           <select id="f-interesse">
             <option value="">Tipo di richiesta</option>
             <option>Voglio fissare una visita</option>
+            <option>Visita guidata live (video)</option>
             <option>Voglio maggiori informazioni</option>
             <option>Voglio fare una proposta</option>
           </select>
@@ -1269,6 +1293,23 @@ function scrollToForm() {
 function prenotaVisita() {
   document.getElementById('f-interesse').value = 'Voglio fissare una visita';
   scrollToForm();
+}
+function visitaLiveGuidata() {
+  const d = immobile || {};
+  const cod = d.codice || '';
+  const tit = d.titolo || 'Immobile';
+  const comune = d.comune || 'Padova';
+  const slug = new URLSearchParams(location.search).get('s') || '';
+  const url = 'https://righettoimmobiliare.it/immobile?s=' + slug;
+  const testo = 'Ciao Righetto, vorrei una VISITA GUIDATA LIVE (video) per:\n'
+    + '• Rif. ' + cod + ' — ' + tit + '\n'
+    + '• Zona: ' + comune + '\n'
+    + '• ' + url + '\n\n'
+    + 'Disponibilità per la videochiamata: ';
+  if (typeof gtag === 'function') {
+    gtag('event', 'visita_live_click', { event_category: 'immobile', event_label: cod || tit });
+  }
+  window.open('https://wa.me/393497365930?text=' + encodeURIComponent(testo), '_blank', 'noopener,noreferrer');
 }
 async function sendForm() {
   const nome = document.getElementById('f-nome').value.trim();

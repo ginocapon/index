@@ -80,7 +80,7 @@ Dopo **ogni** task che produce o modifica file nel repo (pagine, blog, CSS/JS, s
 - [ ] Frasi dichiarative prime 2 righe (GEO)
 - [ ] Dati numerici specifici con fonte (GEO)
 - [ ] Min 5 FAQ con Schema FAQPage (AEO)
-- [ ] Author bio visibile (E-E-A-T) — solo blog
+- [ ] Author bio visibile (E-E-A-T) — blog: link a `/gino-capon` o `/linda-righetto`
 - [ ] Se landing: `data_pubblicazione: 'YYYY-MM-DD'` in `_landingSeedPages`
 - [ ] Se landing o form lead: checklist **`skill-forms-leads.md`** (invio diretto, GDPR, provenienza, success inline)
 

@@ -234,7 +234,7 @@ def build_article(cfg: dict) -> tuple[str, int]:
 <a class="cta-deep" href="{cfg["cta_primary"][1]}">{cfg["cta_primary"][0]}</a>
 <a class="cta-deep" href="{cfg["cta_secondary"][1]}" style="background:var(--blu);color:#fff">{cfg["cta_secondary"][0]}</a>
 {faq_html(cfg["faqs"])}
-<div class="author-bio"><img src="img/team/titolari.webp" alt="Gino Capon Righetto Immobiliare" width="64" height="64" loading="lazy"><div><strong>Gino Capon</strong><p style="font-size:.8rem;color:#555">Titolare — Righetto Immobiliare, Limena (PD). Analisi di mercato per famiglie e investitori nel territorio patavino.</p><p style="font-size:.78rem;margin-top:.4rem"><a href="chi-siamo">Chi siamo</a></p></div></div>
+<div class="author-bio"><img src="img/team/titolari.webp" alt="Gino Capon Righetto Immobiliare" width="64" height="64" loading="lazy"><div><strong>Gino Capon</strong><p style="font-size:.8rem;color:#555">Titolare — Righetto Immobiliare, Limena (PD). Analisi di mercato per famiglie e investitori nel territorio patavino.</p><p style="font-size:.78rem;margin-top:.4rem"><a href="gino-capon">Profilo autore</a></p></div></div>
 <div class="related"><h3 style="font-family:'Cormorant Garamond',serif">Articoli correlati</h3><ul style="margin-left:1.1rem;margin-top:.4rem">{rel_html}</ul></div>
 </div></div>
 <section class="blog-lead-wrap" id="richiedi-consulenza" aria-labelledby="blog-lead-title">
