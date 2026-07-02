@@ -10,6 +10,8 @@ Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutt
 
 **Changelog rapido (27 maggio 2026):** sicurezza — audit generale + revisione **2×/settimana** (martedì/venerdì): **`TEST-SKILL/skill-security.md`**, `scripts/security-check.sh`, workflow `security-check-bisettimanale.yml`.
 
+**Changelog rapido (2 luglio 2026):** batch blog **Housing Veneto 2026** (5 articoli studenti/lavoratori); sotto-cluster in `skill-content.md`; script `build_blog_housing_veneto_lug2026.py`.
+
 **Changelog rapido (27 giugno 2026 — pomeriggio):** E-E-A-T pagine `/gino-capon`, `/linda-righetto`; CTA Visita live su `immobile.html`; audit `audit-skill.sh` §1.4–1.5.
 
 **Changelog rapido (27 giugno 2026):** Google AI Overviews integrato in §**4.4b**.

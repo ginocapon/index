@@ -23,6 +23,16 @@
 ### Cluster "Affitto Padova" ✅ COMPLETO
 - blog-affitto-studenti-padova.html, servizio-locazioni.html
 - blog-contratto-affitto-padova.html, blog-rendimento-affitto-padova.html
+- blog-affitti-padova-canoni-2026.html, blog-checklist-affitto-studenti-padova-2026.html
+
+### Sotto-cluster "Housing Veneto 2026" (studenti + lavoratori) — luglio 2026
+Filone editoriale: **canoni stanze**, **studentati ESU/PNRR/privati**, **residenze green**, **Vicenza calmierati**, **housing lavoratori Edilcassa**. Fonti obbligatorie: Immobiliare.it Insights, FIMAA, ESU Padova, Università Padova, Edilcassa/Confartigianato Veneto — **non** citare titoli o testi di testate locali come fonte.
+- blog-stanza-universitaria-padova-canoni-2026.html (Linda — Insights +46% vs 2020)
+- blog-studentati-veneto-2026-posti-letto.html (Linda — ESU, Camplus, PNRR)
+- blog-residenze-green-padova-tribloc-2026.html (Linda — riuso NZEB via Gozzi)
+- blog-vicenza-residenze-universitarie-calmierate-2026.html (Linda — PNRR calmierati)
+- blog-housing-lavoratori-veneto-edilcassa-2026.html (Gino — fondo garanzia contratto edile)
+Script batch: `scripts/build_blog_housing_veneto_lug2026.py` + `register_housing_veneto_lug2026.py`
 
 ---
 

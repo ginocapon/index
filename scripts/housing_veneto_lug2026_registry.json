@@ -1,0 +1,207 @@
+{
+  "generated": "2026-07-02",
+  "date_display": "2 luglio 2026",
+  "files": [
+    {
+      "filename": "blog-stanza-universitaria-padova-canoni-2026.html",
+      "slug": "blog-stanza-universitaria-padova-canoni-2026",
+      "wordCount_body": 2026
+    },
+    {
+      "filename": "blog-studentati-veneto-2026-posti-letto.html",
+      "slug": "blog-studentati-veneto-2026-posti-letto",
+      "wordCount_body": 2020
+    },
+    {
+      "filename": "blog-residenze-green-padova-tribloc-2026.html",
+      "slug": "blog-residenze-green-padova-tribloc-2026",
+      "wordCount_body": 1901
+    },
+    {
+      "filename": "blog-vicenza-residenze-universitarie-calmierate-2026.html",
+      "slug": "blog-vicenza-residenze-universitarie-calmierate-2026",
+      "wordCount_body": 1900
+    },
+    {
+      "filename": "blog-housing-lavoratori-veneto-edilcassa-2026.html",
+      "slug": "blog-housing-lavoratori-veneto-edilcassa-2026",
+      "wordCount_body": 1900
+    }
+  ],
+  "blog_html_articoliStatici": [
+    {
+      "titolo": "Stanza universitaria Padova 2026: canoni 490€ e +46%",
+      "categoria": "Locazioni",
+      "data": "2026-07-02",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/foto-servizi/contratti-di-locazione-padova.webp",
+      "url_statico": "blog-stanza-universitaria-padova-canoni-2026",
+      "tempo": 11,
+      "autore": "Linda Righetto",
+      "contenuto": "Canone medio stanza 490€ (+46% vs 2020) da Immobiliare.it Insights; FIMAA, ESU, tram e periferia.",
+      "evidenza": true
+    },
+    {
+      "titolo": "Studentati Veneto 2026: posti letto ESU, privati e PNRR",
+      "categoria": "Locazioni",
+      "data": "2026-07-02",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/foto-servizi/gestioni-immobili-padova.webp",
+      "url_statico": "blog-studentati-veneto-2026-posti-letto",
+      "tempo": 10,
+      "autore": "Linda Righetto",
+      "contenuto": "Nuovi posti letto Padova Vicenza Venezia: ESU, Camplus, PNRR e strutture miste.",
+      "evidenza": false
+    },
+    {
+      "titolo": "Residenze green Padova Tribloc 2026: 180 camere NZEB",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-07-02",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/foto-servizi/valutazioni-e-perizie-padova.webp",
+      "url_statico": "blog-residenze-green-padova-tribloc-2026",
+      "tempo": 9,
+      "autore": "Linda Righetto",
+      "contenuto": "Riuso torri Gozzi/Tribloc: 180 camere green, Swadeshi/Brainville, apertura 2026/27.",
+      "evidenza": false
+    },
+    {
+      "titolo": "Vicenza residenze universitarie calmierate 2026: PNRR e Querini",
+      "categoria": "Locazioni",
+      "data": "2026-07-02",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/foto-servizi/gestione-preliminari-padova.webp",
+      "url_statico": "blog-vicenza-residenze-universitarie-calmierate-2026",
+      "tempo": 9,
+      "autore": "Linda Righetto",
+      "contenuto": "Posti letto calmierati Vicenza: PNRR, ESU 30%, rigenerazione Casa Querini/Saudino.",
+      "evidenza": false
+    },
+    {
+      "titolo": "Housing lavoratori Veneto 2026: Edilcassa fondo 250.000€",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-07-02",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/foto-servizi/vendita-immobili-padova.webp",
+      "url_statico": "blog-housing-lavoratori-veneto-edilcassa-2026",
+      "tempo": 10,
+      "autore": "Gino Capon",
+      "contenuto": "Fondo garanzia Edilcassa 250.000€, contratto 2025/26, corporate housing imprese edili venete.",
+      "evidenza": false
+    }
+  ],
+  "admin_blogSeedArticles": [
+    {
+      "titolo": "Stanza universitaria Padova 2026: canoni 490€ e +46%",
+      "categoria": "Locazioni",
+      "data": "2026-07-02",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/foto-servizi/contratti-di-locazione-padova.webp",
+      "url_statico": "blog-stanza-universitaria-padova-canoni-2026",
+      "tempo": 11,
+      "autore": "Linda Righetto",
+      "contenuto": "<p>Canone medio stanza 490€ (+46% vs 2020) da Immobiliare.it Insights; FIMAA, ESU, tram e periferia.</p>",
+      "evidenza": true,
+      "emoji": "🎓",
+      "data_pubblicazione": "2026-07-02"
+    },
+    {
+      "titolo": "Studentati Veneto 2026: posti letto ESU, privati e PNRR",
+      "categoria": "Locazioni",
+      "data": "2026-07-02",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/foto-servizi/gestioni-immobili-padova.webp",
+      "url_statico": "blog-studentati-veneto-2026-posti-letto",
+      "tempo": 10,
+      "autore": "Linda Righetto",
+      "contenuto": "<p>Nuovi posti letto Padova Vicenza Venezia: ESU, Camplus, PNRR e strutture miste.</p>",
+      "evidenza": false,
+      "emoji": "🏫",
+      "data_pubblicazione": "2026-07-02"
+    },
+    {
+      "titolo": "Residenze green Padova Tribloc 2026: 180 camere NZEB",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-07-02",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/foto-servizi/valutazioni-e-perizie-padova.webp",
+      "url_statico": "blog-residenze-green-padova-tribloc-2026",
+      "tempo": 9,
+      "autore": "Linda Righetto",
+      "contenuto": "<p>Riuso torri Gozzi/Tribloc: 180 camere green, Swadeshi/Brainville, apertura 2026/27.</p>",
+      "evidenza": false,
+      "emoji": "🌿",
+      "data_pubblicazione": "2026-07-02"
+    },
+    {
+      "titolo": "Vicenza residenze universitarie calmierate 2026: PNRR e Querini",
+      "categoria": "Locazioni",
+      "data": "2026-07-02",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/foto-servizi/gestione-preliminari-padova.webp",
+      "url_statico": "blog-vicenza-residenze-universitarie-calmierate-2026",
+      "tempo": 9,
+      "autore": "Linda Righetto",
+      "contenuto": "<p>Posti letto calmierati Vicenza: PNRR, ESU 30%, rigenerazione Casa Querini/Saudino.</p>",
+      "evidenza": false,
+      "emoji": "🏘️",
+      "data_pubblicazione": "2026-07-02"
+    },
+    {
+      "titolo": "Housing lavoratori Veneto 2026: Edilcassa fondo 250.000€",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-07-02",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/foto-servizi/vendita-immobili-padova.webp",
+      "url_statico": "blog-housing-lavoratori-veneto-edilcassa-2026",
+      "tempo": 10,
+      "autore": "Gino Capon",
+      "contenuto": "<p>Fondo garanzia Edilcassa 250.000€, contratto 2025/26, corporate housing imprese edili venete.</p>",
+      "evidenza": false,
+      "emoji": "🏗️",
+      "data_pubblicazione": "2026-07-02"
+    }
+  ],
+  "homepage_js_articoliStatici": [
+    {
+      "titolo": "Stanza universitaria Padova 2026: canoni 490€ e +46%",
+      "categoria": "Locazioni",
+      "data": "2026-07-02",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/foto-servizi/contratti-di-locazione-padova.webp",
+      "url_statico": "blog-stanza-universitaria-padova-canoni-2026"
+    },
+    {
+      "titolo": "Studentati Veneto 2026: posti letto ESU, privati e PNRR",
+      "categoria": "Locazioni",
+      "data": "2026-07-02",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/foto-servizi/gestioni-immobili-padova.webp",
+      "url_statico": "blog-studentati-veneto-2026-posti-letto"
+    },
+    {
+      "titolo": "Residenze green Padova Tribloc 2026: 180 camere NZEB",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-07-02",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/foto-servizi/valutazioni-e-perizie-padova.webp",
+      "url_statico": "blog-residenze-green-padova-tribloc-2026"
+    },
+    {
+      "titolo": "Vicenza residenze universitarie calmierate 2026: PNRR e Querini",
+      "categoria": "Locazioni",
+      "data": "2026-07-02",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/foto-servizi/gestione-preliminari-padova.webp",
+      "url_statico": "blog-vicenza-residenze-universitarie-calmierate-2026"
+    },
+    {
+      "titolo": "Housing lavoratori Veneto 2026: Edilcassa fondo 250.000€",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-07-02",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/foto-servizi/vendita-immobili-padova.webp",
+      "url_statico": "blog-housing-lavoratori-veneto-edilcassa-2026"
+    }
+  ]
+}
