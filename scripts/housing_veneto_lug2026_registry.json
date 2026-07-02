@@ -5,27 +5,27 @@
     {
       "filename": "blog-stanza-universitaria-padova-canoni-2026.html",
       "slug": "blog-stanza-universitaria-padova-canoni-2026",
-      "wordCount_body": 2026
+      "wordCount_body": 2093
     },
     {
       "filename": "blog-studentati-veneto-2026-posti-letto.html",
       "slug": "blog-studentati-veneto-2026-posti-letto",
-      "wordCount_body": 2020
+      "wordCount_body": 2080
     },
     {
       "filename": "blog-residenze-green-padova-tribloc-2026.html",
       "slug": "blog-residenze-green-padova-tribloc-2026",
-      "wordCount_body": 1901
+      "wordCount_body": 1961
     },
     {
       "filename": "blog-vicenza-residenze-universitarie-calmierate-2026.html",
       "slug": "blog-vicenza-residenze-universitarie-calmierate-2026",
-      "wordCount_body": 1900
+      "wordCount_body": 1957
     },
     {
       "filename": "blog-housing-lavoratori-veneto-edilcassa-2026.html",
       "slug": "blog-housing-lavoratori-veneto-edilcassa-2026",
-      "wordCount_body": 1900
+      "wordCount_body": 1964
     }
   ],
   "blog_html_articoliStatici": [
@@ -34,7 +34,7 @@
       "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/contratti-di-locazione-padova.webp",
+      "immagine_copertina": "img/blog/blog-affitti-canoni-fimaa-q1-2026-padova.webp",
       "url_statico": "blog-stanza-universitaria-padova-canoni-2026",
       "tempo": 11,
       "autore": "Linda Righetto",
@@ -46,7 +46,7 @@
       "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/gestioni-immobili-padova.webp",
+      "immagine_copertina": "img/blog/blog-nuove-costruzioni-mercato-veneto-2026-padova.webp",
       "url_statico": "blog-studentati-veneto-2026-posti-letto",
       "tempo": 10,
       "autore": "Linda Righetto",
@@ -55,10 +55,10 @@
     },
     {
       "titolo": "Residenze green Padova Tribloc 2026: 180 camere NZEB",
-      "categoria": "Mercato immobiliare",
+      "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/valutazioni-e-perizie-padova.webp",
+      "immagine_copertina": "img/blog/blog-domanda-case-green-padova-2026.webp",
       "url_statico": "blog-residenze-green-padova-tribloc-2026",
       "tempo": 9,
       "autore": "Linda Righetto",
@@ -70,7 +70,7 @@
       "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/gestione-preliminari-padova.webp",
+      "immagine_copertina": "img/blog/blog-piano-casa-decreto-66-2026-padova.webp",
       "url_statico": "blog-vicenza-residenze-universitarie-calmierate-2026",
       "tempo": 9,
       "autore": "Linda Righetto",
@@ -79,10 +79,10 @@
     },
     {
       "titolo": "Housing lavoratori Veneto 2026: Edilcassa fondo 250.000€",
-      "categoria": "Mercato immobiliare",
+      "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/vendita-immobili-padova.webp",
+      "immagine_copertina": "img/blog/blog-costi-costruzione-istat-padova-2026.webp",
       "url_statico": "blog-housing-lavoratori-veneto-edilcassa-2026",
       "tempo": 10,
       "autore": "Gino Capon",
@@ -96,7 +96,7 @@
       "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/contratti-di-locazione-padova.webp",
+      "immagine_copertina": "img/blog/blog-affitti-canoni-fimaa-q1-2026-padova.webp",
       "url_statico": "blog-stanza-universitaria-padova-canoni-2026",
       "tempo": 11,
       "autore": "Linda Righetto",
@@ -110,7 +110,7 @@
       "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/gestioni-immobili-padova.webp",
+      "immagine_copertina": "img/blog/blog-nuove-costruzioni-mercato-veneto-2026-padova.webp",
       "url_statico": "blog-studentati-veneto-2026-posti-letto",
       "tempo": 10,
       "autore": "Linda Righetto",
@@ -121,10 +121,10 @@
     },
     {
       "titolo": "Residenze green Padova Tribloc 2026: 180 camere NZEB",
-      "categoria": "Mercato immobiliare",
+      "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/valutazioni-e-perizie-padova.webp",
+      "immagine_copertina": "img/blog/blog-domanda-case-green-padova-2026.webp",
       "url_statico": "blog-residenze-green-padova-tribloc-2026",
       "tempo": 9,
       "autore": "Linda Righetto",
@@ -138,7 +138,7 @@
       "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/gestione-preliminari-padova.webp",
+      "immagine_copertina": "img/blog/blog-piano-casa-decreto-66-2026-padova.webp",
       "url_statico": "blog-vicenza-residenze-universitarie-calmierate-2026",
       "tempo": 9,
       "autore": "Linda Righetto",
@@ -149,10 +149,10 @@
     },
     {
       "titolo": "Housing lavoratori Veneto 2026: Edilcassa fondo 250.000€",
-      "categoria": "Mercato immobiliare",
+      "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/vendita-immobili-padova.webp",
+      "immagine_copertina": "img/blog/blog-costi-costruzione-istat-padova-2026.webp",
       "url_statico": "blog-housing-lavoratori-veneto-edilcassa-2026",
       "tempo": 10,
       "autore": "Gino Capon",
@@ -168,7 +168,7 @@
       "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/contratti-di-locazione-padova.webp",
+      "immagine_copertina": "img/blog/blog-affitti-canoni-fimaa-q1-2026-padova.webp",
       "url_statico": "blog-stanza-universitaria-padova-canoni-2026"
     },
     {
@@ -176,15 +176,15 @@
       "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/gestioni-immobili-padova.webp",
+      "immagine_copertina": "img/blog/blog-nuove-costruzioni-mercato-veneto-2026-padova.webp",
       "url_statico": "blog-studentati-veneto-2026-posti-letto"
     },
     {
       "titolo": "Residenze green Padova Tribloc 2026: 180 camere NZEB",
-      "categoria": "Mercato immobiliare",
+      "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/valutazioni-e-perizie-padova.webp",
+      "immagine_copertina": "img/blog/blog-domanda-case-green-padova-2026.webp",
       "url_statico": "blog-residenze-green-padova-tribloc-2026"
     },
     {
@@ -192,15 +192,15 @@
       "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/gestione-preliminari-padova.webp",
+      "immagine_copertina": "img/blog/blog-piano-casa-decreto-66-2026-padova.webp",
       "url_statico": "blog-vicenza-residenze-universitarie-calmierate-2026"
     },
     {
       "titolo": "Housing lavoratori Veneto 2026: Edilcassa fondo 250.000€",
-      "categoria": "Mercato immobiliare",
+      "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/vendita-immobili-padova.webp",
+      "immagine_copertina": "img/blog/blog-costi-costruzione-istat-padova-2026.webp",
       "url_statico": "blog-housing-lavoratori-veneto-edilcassa-2026"
     }
   ]

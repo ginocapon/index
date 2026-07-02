@@ -88,6 +88,9 @@ Dopo **ogni** task che produce o modifica file nel repo (pagine, blog, CSS/JS, s
 - [ ] **Anti-doppioni (§8.1a):** `check_doppioni_sito.py` + verifica titolo/slug/tema **prima** di scrivere; se doppione → altro argomento da fonte istituzionale (web)
 - [ ] Registrato in TUTTI e 4: admin.html + blog.html + homepage.js + sitemap.xml
 - [ ] `data_pubblicazione: 'YYYY-MM-DD'` nel seed (BLOCCANTE per commit)
+- [ ] Copertina + corpo: foto **realistiche** (§2.1 `skill-content.md`); **no** illustrazioni/AI/3D; ≥3 figure + ≥2 SVG colorati
+- [ ] Elenco blog/homepage articoli: **solo ordine per data** (no featured che nasconde articoli)
+- [ ] **Secondo passaggio auto-verifica** (§8.1c.8): validate-page + grep registri + campione immagini — eseguito dall'agente
 - [ ] Cross-link con zone pages e service pages (min 3)
 - [ ] Timestamp "Ultimo aggiornamento" visibile
 - [ ] Se form/CTA lead in articolo: **`skill-forms-leads.md`** (stesso flusso di `contatti.html`)

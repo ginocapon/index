@@ -60,6 +60,9 @@ nav{display:flex;flex:1;gap:.2rem}nav a{color:rgba(255,255,255,.72);font-size:.8
 .stat-label{font-size:.68rem;color:rgba(255,255,255,.5);margin-top:.3rem;text-transform:uppercase;letter-spacing:.5px}
 .chart-wrap{background:var(--sfondo);border:1px solid var(--gc);border-radius:12px;padding:1.2rem;margin:1.4rem 0}
 .chart-wrap figcaption{font-size:.72rem;color:var(--grigio);margin-top:.6rem;text-align:center}
+.blog-fig{margin:1.65rem 0;border-radius:12px;overflow:hidden;border:1px solid var(--gc);background:#fff}
+.blog-fig img{width:100%;height:auto;display:block;max-height:380px;object-fit:cover}
+.blog-fig figcaption{font-size:.72rem;color:var(--grigio);padding:.7rem .95rem;background:var(--sfondo);line-height:1.55}
 .cta-deep{display:inline-flex;background:linear-gradient(180deg,var(--oro2),var(--oro));color:var(--nero);font-weight:800;padding:.8rem 1.62rem;border-radius:10px;font-size:.8rem;margin:1rem .75rem 1rem 0}
 .faq-item{border:1px solid var(--gc);border-radius:8px;margin-bottom:.5rem}
 .faq-q{padding:.86rem .98rem;font-weight:600;font-size:.84rem;cursor:pointer}.faq-a{max-height:0;overflow:hidden;transition:max-height .35s;background:var(--sfondo)}
@@ -159,6 +162,139 @@ def chart_padova_canoni() -> str:
 </svg>
 <figcaption>Dati indicativi da Immobiliare.it Insights (marzo 2026). Verificare sempre l'annuncio e la zona.</figcaption>
 </figure>"""
+
+
+def blog_fig(src: str, alt: str, caption: str) -> str:
+    return f"""<figure class="blog-fig">
+<img src="{src}" alt="{alt}" width="820" height="460" loading="lazy">
+<figcaption>{caption}</figcaption>
+</figure>"""
+
+
+ASSETS = {
+    "stanza": {
+        "hero": "img/blog/blog-affitti-canoni-fimaa-q1-2026-padova.webp",
+        "hero_alt": "Mercato affitti Padova — canoni stanze universitarie FIMAA 2026",
+        "figs": [
+            ("img/blog/blog-scegliere-immobile-giusto-padova-2026.webp", "Visita a un appartamento in affitto a Padova con agente immobiliare", "Due diligence in visita: luce, impianti e planimetria prima del contratto transitorio."),
+            ("img/blog/blog-gestione-spese-casa-padova-2026.webp", "Gestione spese domestiche in appartamento condiviso a Padova", "Canone, utenze e spese condominiali: budget realistico per studenti fuori sede."),
+            ("img/blog/blog-prezzi-padova-provincia-2026.webp", "Panorama abitativo provincia di Padova", "Periferie tram e cintura: alternative al Portello con canoni spesso inferiori."),
+        ],
+    },
+    "studentati": {
+        "hero": "img/blog/blog-nuove-costruzioni-mercato-veneto-2026-padova.webp",
+        "hero_alt": "Cantieri e nuove costruzioni nel Veneto — ampliamento housing studentesco",
+        "figs": [
+            ("img/blog/blog-piano-casa-decreto-66-2026-padova.webp", "Edificio residenziale e politiche abitative in Veneto", "Politiche abitative e nuovo stock: collegamento con bandi PNRR e decreto Piano Casa."),
+            ("img/blog/blog-case-piu-vendute-padova-2026.webp", "Tipologie abitative più richieste nel mercato padovano", "Domanda studenti e nuclei familiari convive sullo stesso comparto residenziale."),
+            ("img/blog/blog-inline-tipologie-case-vendute-padova-2026.webp", "Distribuzione tipologie immobili nel Padovano", "Monolocali e bilocali restano formati chiave anche per posti letto condivisi."),
+        ],
+    },
+    "green": {
+        "hero": "img/blog/blog-domanda-case-green-padova-2026.webp",
+        "hero_alt": "Edificio ad alta efficienza energetica — residenze green per studenti a Padova",
+        "figs": [
+            ("img/blog/blog-inline-green-vs-brown-padova-2026.webp", "Confronto edificio efficiente e edificio datato a Padova", "Classe energetica e costi bolletta: vantaggio NZEB per inquilini fuori sede."),
+            ("img/blog/blog-casa-vendibile-5-anni-case-green-padova-2026.webp", "Riqualificazione energetica appartamento nel Padovano", "Interventi green aumentano attrattività locativa studentesca."),
+            ("img/blog/blog-bonus-edilizi-2026-incentivi-casa-padova.webp", "Incentivi edilizi per efficientamento energetico in Veneto", "Bonus e riqualificazione sostengono progetti NZEB come Tribloc."),
+        ],
+    },
+    "vicenza": {
+        "hero": "img/blog/blog-piano-casa-decreto-66-2026-padova.webp",
+        "hero_alt": "Residenze calmierate e rigenerazione urbana nel Veneto",
+        "figs": [
+            ("img/blog/blog-inline-posizione-padova-2026.webp", "Posizione e servizi urbani nel Veneto orientale", "Microzona e servizi incidono sul canone calmierato vs libero."),
+            ("img/blog/blog-inline-superfici-case-vendute-padova-2026.webp", "Superfici abitative tipiche nel mercato veneto", "Camere e metri quadri: standard posti letto PNRR e mercato libero."),
+            ("img/blog/blog-agenzia-top-servizi-padova-2026.webp", "Consulenza immobiliare Righetto per locazioni in Veneto", "Supporto contrattuale per studenti e famiglie — mediazione concordata in mandato."),
+        ],
+    },
+    "lavoratori": {
+        "hero": "img/blog/blog-costi-costruzione-istat-padova-2026.webp",
+        "hero_alt": "Cantiere edile nel Veneto — housing lavoratori e costi costruzione ISTAT",
+        "figs": [
+            ("img/blog/blog-ultime-acquisizioni-commerciali-padova-giugno-2026.webp", "Uffici e capannoni in gestione Righetto nel Padovano", "Corporate housing spesso affianca unità produttive e uffici."),
+            ("img/blog/blog-ultime-acquisizioni-residenziali-padova-giugno-2026.webp", "Appartamenti residenziali disponibili per squadre edili fuori sede", "Trilocali e quadrilocali adatti a co-housing temporaneo lavoratori."),
+            ("img/blog/blog-righetto-storia-territorio-acquisizioni-2026.webp", "Territorio veneto servito da Righetto Immobiliare", "101 comuni coperti — locazioni anche per imprese edili fuori sede."),
+        ],
+    },
+}
+
+
+def chart_donut_canali() -> str:
+    return """<figure class="chart-wrap" aria-label="Ripartizione posti letto per canale">
+<svg viewBox="0 0 420 240" width="100%" height="240" role="img">
+<title>Canali posti letto universitari Veneto</title>
+<circle cx="130" cy="120" r="70" fill="#ECE7DF"/>
+<path d="M130 50 A70 70 0 0 1 200 120 L130 120 Z" fill="#2C4A6E"/>
+<path d="M200 120 A70 70 0 0 1 130 190 L130 120 Z" fill="#FF6B35"/>
+<path d="M130 190 A70 70 0 0 1 60 120 L130 120 Z" fill="#4E789A"/>
+<path d="M60 120 A70 70 0 0 1 130 50 L130 120 Z" fill="#8AB4CE"/>
+<rect x="240" y="70" width="14" height="14" fill="#2C4A6E"/><text x="262" y="82" font-size="11" fill="#152435">ESU pubblico</text>
+<rect x="240" y="98" width="14" height="14" fill="#FF6B35"/><text x="262" y="110" font-size="11" fill="#152435">Privati (Camplus)</text>
+<rect x="240" y="126" width="14" height="14" fill="#4E789A"/><text x="262" y="138" font-size="11" fill="#152435">PNRR / riuso</text>
+<rect x="240" y="154" width="14" height="14" fill="#8AB4CE"/><text x="262" y="166" font-size="11" fill="#152435">Mercato libero</text>
+</svg>
+<figcaption>Schema indicativo ripartizione offerta posti letto — proporzioni illustrative, non dato ISTAT.</figcaption>
+</figure>"""
+
+
+def chart_energy_compare() -> str:
+    return """<figure class="chart-wrap" aria-label="Confronto spesa energetica NZEB vs classe G">
+<svg viewBox="0 0 420 200" width="100%" height="200" role="img">
+<title>Spesa energetica indicativa NZEB vs edificio classe G</title>
+<text x="210" y="22" text-anchor="middle" font-size="12" fill="#152435">Costo energetico mensile stimato (€/camera)</text>
+<rect x="70" y="50" width="80" height="110" fill="#C0392B" rx="6"/>
+<text x="110" y="105" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">95 €</text>
+<text x="110" y="175" text-anchor="middle" fill="#6B7A8D" font-size="10">Classe G</text>
+<rect x="170" y="80" width="80" height="80" fill="#FF8F5E" rx="6"/>
+<text x="210" y="125" text-anchor="middle" fill="#152435" font-size="13" font-weight="700">65 €</text>
+<text x="210" y="175" text-anchor="middle" fill="#6B7A8D" font-size="10">Classe C</text>
+<rect x="270" y="110" width="80" height="50" fill="#2C4A6E" rx="6"/>
+<text x="310" y="140" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">35 €</text>
+<text x="310" y="175" text-anchor="middle" fill="#6B7A8D" font-size="10">NZEB</text>
+</svg>
+<figcaption>Stime illustrative per confronto efficienza — verificare bollette reali e APE.</figcaption>
+</figure>"""
+
+
+def chart_edilcassa_bar() -> str:
+    return """<figure class="chart-wrap" aria-label="Confronto fondo Edilcassa e deposito cauzionale">
+<svg viewBox="0 0 420 210" width="100%" height="210" role="img">
+<title>Fondo Edilcassa 250000 euro vs deposito affitto tipico</title>
+<text x="210" y="22" text-anchor="middle" font-size="12" fill="#152435">Confronto importi (scala diversa — solo orientamento)</text>
+<rect x="55" y="45" width="120" height="130" fill="#2C4A6E" rx="6"/>
+<text x="115" y="95" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">250.000 €</text>
+<text x="115" y="190" text-anchor="middle" fill="#6B7A8D" font-size="10">Fondo Edilcassa Veneto</text>
+<rect x="245" y="130" width="120" height="45" fill="#FF6B35" rx="6"/>
+<text x="305" y="158" text-anchor="middle" fill="#152435" font-size="12" font-weight="700">2–3 mesi</text>
+<text x="305" y="190" text-anchor="middle" fill="#6B7A8D" font-size="10">Deposito affitto tipico</text>
+</svg>
+<figcaption>Fondo garanzia contratto edile ≠ deposito cauzionale locazione — fonti Edilcassa/Confartigianato Veneto.</figcaption>
+</figure>"""
+
+
+def chart_tram_zones() -> str:
+    return """<figure class="chart-wrap" aria-label="Canoni indicativi per fascia zona Padova">
+<svg viewBox="0 0 420 220" width="100%" height="220" role="img">
+<title>Canoni stanza per zona collegata al tram</title>
+<polyline points="60,160 120,140 180,120 240,100 300,85 360,75" fill="none" stroke="#FF6B35" stroke-width="3"/>
+<circle cx="60" cy="160" r="5" fill="#2C4A6E"/><circle cx="120" cy="140" r="5" fill="#2C4A6E"/>
+<circle cx="180" cy="120" r="5" fill="#2C4A6E"/><circle cx="240" cy="100" r="5" fill="#2C4A6E"/>
+<circle cx="300" cy="85" r="5" fill="#2C4A6E"/><circle cx="360" cy="75" r="5" fill="#2C4A6E"/>
+<text x="60" y="185" font-size="9" fill="#6B7A8D">Guizza</text>
+<text x="115" y="185" font-size="9" fill="#6B7A8D">Arcella</text>
+<text x="165" y="185" font-size="9" fill="#6B7A8D">P.Brenta</text>
+<text x="225" y="185" font-size="9" fill="#6B7A8D">Cittadella</text>
+<text x="285" y="185" font-size="9" fill="#6B7A8D">Portello</text>
+<text x="345" y="185" font-size="9" fill="#6B7A8D">Centro</text>
+<text x="210" y="210" text-anchor="middle" font-size="10" fill="#6B7A8D">Trend indicativo verso centro — Immobiliare.it Insights + comparabili</text>
+</svg>
+<figcaption>Andamento indicativo canoni lungo assi tram TPL — non listino ufficiale.</figcaption>
+</figure>"""
+
+
+def figs_html(key: str) -> str:
+    return "\n".join(blog_fig(s, a, c) for s, a, c in ASSETS[key]["figs"])
 
 
 def table_veneto_canoni() -> str:
@@ -790,12 +926,16 @@ def build_body_stanza_padova() -> str:
 <p>Padova concentra una delle università storiche d'Europa; l'<strong>Università di Padova</strong> traina domanda abitativa costante. Quando posti letto pubblici e privati non coprono tutti gli iscritti, il mercato libero fissa prezzi sulle <strong>stanze singole</strong>. <strong>Immobiliare.it Insights</strong> (marzo 2026) indica circa <strong>490 euro</strong> di media, contro <strong>335 euro</strong> nel 2020: +46% che riflette domanda, energetico e stock limitato in centro.</p>
 <p>Non confondere media portale e singolo annuncio: spese, arredo e piano cambiano il canone. Incrociare con OMI Agenzia delle Entrate aiuta a capire se un prezzo è coerente con la microzona. In agenzia vediamo ricerche concentrate tra maggio e luglio; chi arriva a settembre trova meno scelta e canoni più rigidi.</p>
 {chart_padova_canoni()}
+{blog_fig(*ASSETS["stanza"]["figs"][0])}
 <h2>FIMAA Veneto e prassi contrattuale</h2>
 <p>La <strong>FIMAA</strong> del Veneto segnala, nel locativo studentesco, maggiore attenzione a contratti registrati, caparre documentate e regolamenti di convivenza. Proprietari che sottovalutano la manutenzione (caldaia, infissi, impianto elettrico) perdono competitività rispetto a studentati nuovi. Il <a href="servizio-locazioni">servizio locazioni</a> Righetto supporta redazione contratto e consegna chiavi; compenso mediazione concordato in mandato, senza listini online.</p>
 <h2>ESU Padova: studentato pubblico e graduatorie</h2>
 <p>L'<strong>ESU Padova</strong> eroga borse e gestisce posti letto a canone calmierato per studenti con requisiti di merito e reddito. Bandi e scadenze sono sul sito ufficiale ESU: ogni posto assegnato riduce marginalmente la pressione sul libero, ma migliaia restano fuori graduatoria. Chi non accede allo studentato deve pianificare budget allineato ai dati Insights o spostarsi verso periferie col tram.</p>
+{blog_fig(*ASSETS["stanza"]["figs"][1])}
 <h2>Tram e periferia: strategia budget</h2>
 <p>Arcella, Guizza, Ponte di Brenta e Cittadella, servite dal <strong>tram</strong> TPL Padova, offrono spesso camere sotto la media del Portello. Il trade-off è tempo di spostamento e convivenza in appartamento condiviso. Genitori fuori Veneto possono usare <a href="visite-virtuali">visite virtuali</a> prima del contratto. La scheda <a href="zona-universitaria-padova">zona universitaria</a> descrive servizi e viabilità del cuore universitario.</p>
+{blog_fig(*ASSETS["stanza"]["figs"][2])}
+{chart_tram_zones()}
 <div class="kpi-strip">
   <div><strong>490 €</strong><span>media 2026</span></div>
   <div><strong>335 €</strong><span>media 2020</span></div>
@@ -850,11 +990,15 @@ def build_body_studentati_veneto() -> str:
 <tr><td><strong>PNRR / rigenerazione</strong></td><td>Finanziamenti per housing studentesco e riuso edifici</td><td>Progetti urbani autorizzati a Padova, Vicenza, Venezia Mestre</td></tr>
 </tbody>
 </table>
+{blog_fig(*ASSETS["studentati"]["figs"][0])}
+{chart_donut_canali()}
 <h2>Padova: ampliamento stock e strutture miste</h2>
 <p>A Padova convivono padiglioni ESU, residenze private e progetti di conversione ex uffici (es. torri Tribloc/Gozzi, trattati in articolo dedicato sul blog). Le <strong>strutture miste</strong> uniscono capitali privati e vincoli di accessibilità per studenti: canoni intermedi tra studentato puro e libero mercato. L'<strong>Università di Padova</strong> partecipa a protocolli per prossimità ai dipartimenti e trasporti.</p>
 <p>Per studenti fuori graduatoria ESU, l'effetto netto di nuovi letti è positivo ma graduale: ogni migliaio di posti libera pressione su quartiere, non azzera i picchi di settembre. FIMAA Veneto osserva che annunci in appartamento restano molto attivi fino a ottobre.</p>
+{blog_fig(*ASSETS["studentati"]["figs"][1])}
 <h2>Vicenza e Venezia: stesso fenomeno, contesti diversi</h2>
 <p>A Vicenza l'offerta cresce con rigenerazione urbana e posti PNRR calmierati (vedi articolo Casa Querini/Saudino). A Venezia la complessità logistica spinge verso Mestre e terraferma: nuovi letti PNRR e convenzioni ESU mirano a trattenere studenti fuori dal mercato turistico-short term del centro laguna. ISTAT descrive il Veneto come regione con alta mobilità studentesca intra-regionale.</p>
+{blog_fig(*ASSETS["studentati"]["figs"][2])}
 <div class="kpi-strip">
   <div><strong>ESU</strong><span>pubblico calmierato</span></div>
   <div><strong>Camplus</strong><span>privato servizi</span></div>
@@ -905,6 +1049,8 @@ def build_body_green_tribloc() -> str:
 <p>Il riuso di edifici direzionali per <strong>housing studentesco</strong> risponde a due obiettivi: ridurre vuoti urbani e aumentare posti letto senza consumo di suolo agricolo. A Padova, l'area <strong>Gozzi / Tribloc</strong> — torri simbolo dello sviluppo office degli anni passati — è oggetto di un progetto autorizzato che prevede circa <strong>180 stanze</strong>, spazi comuni e criteri <strong>quasi zero energy (NZEB)</strong>. Il nome dell'operatore (<strong>Swadeshi</strong>, gruppo <strong>Brainville</strong>) compare negli atti pubblici di progetto: non è marketing Righetto, ma fatto urbanistico verificabile.</p>
 <h2>Green building e NZEB: cosa cambia per l'inquilino</h2>
 <p>Edifici NZEB limitano dispersione termica e costi bolletta — variabile rilevante per studenti fuori sede. Pannelli, ventilazione controllata e monitoraggio consumi sono standard del riqualificazione profonda rispetto a simple retrofit cosmetico. FIMAA e normativa energetica nazionale spingono in questa direzione anche per locazioni non turistiche.</p>
+{blog_fig(*ASSETS["green"]["figs"][0])}
+{chart_energy_compare()}
 <figure class="chart-wrap">
 <table>
 <caption style="caption-side:bottom;font-size:.72rem;color:var(--grigio);padding-top:.5rem">Timeline indicativa progetto Tribloc — verificare atti comunali</caption>
@@ -917,10 +1063,12 @@ def build_body_green_tribloc() -> str:
 </tbody>
 </table>
 </figure>
+{blog_fig(*ASSETS["green"]["figs"][1])}
 <h2>Posizione urbana e collegamenti</h2>
 <p>L'area Gozzi dialoga con reti bus e tram padovane; studenti devono calcolare tempi fino ai dipartimenti (Scienze, Ingegneria, Economia). Confronto con <a href="zona-universitaria-padova">zona universitaria</a> e <a href="blog-affitto-studenti-padova">affitto studenti</a> aiuta a decidere se attendere apertura residenza o cercare subito sul libero.</p>
 <h2>Impatto sul mercato locativo padovano</h2>
 <p>180 camere non risolvono da sole il gap tra iscritti e posti letto, ma segnalano trend: riuso office + green + gestione professionale. Proprietari di appartamenti condivisi competono con servizi e bollette basse delle residenze nuove. Immobiliare.it Insights documenta canoni stanza in crescita: offerta strutturata può assorbire fascia media-alta.</p>
+{blog_fig(*ASSETS["green"]["figs"][2])}
 <h2>Visite e due diligence</h2>
 <p>Fino all'apertura, verificare avanzamento cantiere su fonti comunali e comunicati Regione Veneto. Per immobili già disponibili sul mercato, <a href="visite-virtuali">visite virtuali</a> Righetto restano strumento utile a famiglie fuori provincia.</p>
 <div class="kpi-strip">
@@ -958,6 +1106,7 @@ def build_body_vicenza_calmierati() -> str:
 <p>Vicenza ospita sedi universitarie collegate al sistema veneto; studenti fuori sede competono per poche camere rispetto a Padova o Verona. <strong>ISTAT</strong> e dati Regione Veneto descrivono un territorio con occupazione elevata e affitti in tensione. Nuovi posti letto PNRR mirano a canoni più accessibili del libero mercato.</p>
 <h2>Canoni calmierati e convenzione ESU</h2>
 <p>I bandi PNRR per student housing prevedono spesso <strong>canoni calmierati</strong> e riserva di posti per studenti ammessi tramite <strong>ESU</strong> (circa 30% nelle convenzioni tipiche — verificare bando specifico Casa Querini). Resto dei posti può andare a lavoratori giovani o studenti a mercato con tariffe inferiori al centro storico.</p>
+{blog_fig(*ASSETS["vicenza"]["figs"][0])}
 <h2>Casa Querini e rigenerazione Saudino</h2>
 <p>Il complesso <strong>Casa Querini</strong>, oggetto di rigenerazione urbana con progettazione <strong>Saudino</strong>, illustra come edifici storici o underused possano diventare residenze studenti con standard moderni. Facciate, vincoli paesaggistici e accessibilità richiedono tempi cantieristici più lunghi del container temporaneo. Comune di Vicenza e Regione Veneto pubblicano avanzamento lavori.</p>
 <table>
@@ -969,10 +1118,13 @@ def build_body_vicenza_calmierati() -> str:
 <tr><td>Libero mercato centro</td><td>Canone pieno</td><td>Chi non accede a residenze</td></tr>
 </tbody>
 </table>
+{blog_fig(*ASSETS["vicenza"]["figs"][1])}
+{chart_donut_canali()}
 <h2>Confronto con Padova e Veneto</h2>
 <p>Leggere anche <a href="blog-studentati-veneto-2026-posti-letto">studentati Veneto 2026</a> e <a href="blog-affitti-padova-canoni-2026">canoni Padova</a> per quadro regionale. FIMAA segnala crescente professionalizzazione gestioni residenza.</p>
 <h2>Proprietari vicentini</h2>
 <p>Più posti calmierati spostano marginalmente domanda dal libero; immobili mal mantenuti perdono appeal. <a href="servizio-locazioni">Servizio locazioni</a> Righetto copre anche Vicenza nel territorio 101 comuni.</p>
+{blog_fig(*ASSETS["vicenza"]["figs"][2])}
 <h2>Graduatoria ESU e tempistiche domanda</h2>
 <p>La convenzione ESU su quota indicativa 30% posti Casa Querini richiede domanda entro finestra bando con ISEE e certificati merito aggiornati. ESU Padova e territorialità Vicenza pubblicano calendari distinti: non perdere scadenze per attendere esito PNRR senza piano B sul libero. ISTAT segnala che ritardi domanda riducono probabilità posto calmierato a settembre.</p>
 <p>Documentazione incompleta esclude dalla graduatoria: verificare checklist ESU prima dell'invio. Parallelamente, monitorare annunci libero mercato Vicenza con canoni allineati a comparabili FIMAA e OMI microzona.</p>
@@ -1011,6 +1163,7 @@ def build_body_edilcassa_lavoratori() -> str:
 </div>
 <h2>Edilcassa Veneto e fondo garanzia 250.000 euro</h2>
 <p><strong>Edilcassa</strong>, cassa edile del sistema Confartigianato, gestisce contributi, formazione e tutele per imprese edili. Nel Veneto, il contratto regionale di edilizia <strong>2025/2026</strong> prevede un <strong>fondo di garanzia da 250.000 euro</strong> a supporto di imprese e lavoratori in difficoltà contributiva o occupazionale — dato comunicato da <strong>Edilcassa / Confartigianato Veneto</strong>. Non è un prestito immobiliare, ma strumento di stabilizzazione del comparto che indirettamente influenza domanda di alloggi per cantieri temporanei.</p>
+{blog_fig(*ASSETS["lavoratori"]["figs"][0])}
 <h2>Fondo Edilcassa vs garanzie locative classiche</h2>
 <table>
 <thead><tr><th>Strumento</th><th>Finalità</th><th>Soggetti</th><th>Importo indicativo</th></tr></thead>
@@ -1021,10 +1174,13 @@ def build_body_edilcassa_lavoratori() -> str:
 <tr><td><strong>Fideiussione corporate housing</strong></td><td>Imprese garantiscono alloggio dipendenti</td><td>Società appaltatrice</td><td>Contratto quadro</td></tr>
 </tbody>
 </table>
+{chart_edilcassa_bar()}
+{blog_fig(*ASSETS["lavoratori"]["figs"][1])}
 <h2>Corporate housing e co-housing per lavoratori edili</h2>
 <p>Cantieri temporanei nel Veneto richiedono alloggi per squadre fuori sede. Il modello <strong>corporate housing</strong> — appartamenti o co-living affittati da imprese venete del settore edile per dipendenti e subappaltatori — riduce turnover e costi di ricerca alloggio. Non sostituisce contratti regolari: servono cap, regolamento convivenza e conformità urbanistica. Edilcassa e Confartigianato Veneto non gestiscono direttamente queste locazioni.</p>
 <h2>Legame con mercato immobiliare padovano</h2>
 <p>Righetto segue locazioni anche per lavoratori e famiglie nel <strong>Padovano</strong> (101 comuni). Imprese che cercano unità multi-camera per staff possono usare <a href="servizio-locazioni">servizio locazioni</a>; compenso mediazione concordato in mandato. ISTAT descrive mobilità lavorativa veneta tra province.</p>
+{blog_fig(*ASSETS["lavoratori"]["figs"][2])}
 <h2>Regione Veneto e contratto edilizia</h2>
 <p>Il contratto collettivo regionale 2025/2026 definisce anche welfare edilcassa: fondo garanzia va letto nel testo integrale Confartigianato Veneto, non in estratti social. Imprenditori verificano con consulente del lavoro e cassa edile aderenza e modalità accesso.</p>
 <div class="kpi-strip">
@@ -1355,6 +1511,13 @@ ARTICLES = [
 
 
 def main() -> None:
+    asset_keys = {
+        "blog-stanza-universitaria-padova-canoni-2026": "stanza",
+        "blog-studentati-veneto-2026-posti-letto": "studentati",
+        "blog-residenze-green-padova-tribloc-2026": "green",
+        "blog-vicenza-residenze-universitarie-calmierate-2026": "vicenza",
+        "blog-housing-lavoratori-veneto-edilcassa-2026": "lavoratori",
+    }
     registry = {
         "generated": DATE_ISO,
         "date_display": DATE_IT,
@@ -1364,6 +1527,12 @@ def main() -> None:
         "homepage_js_articoliStatici": [],
     }
     for cfg in ARTICLES:
+        ak = asset_keys[cfg["slug"]]
+        cfg["img"] = ASSETS[ak]["hero"]
+        cfg["hero_img"] = ASSETS[ak]["hero"]
+        cfg["hero_alt"] = ASSETS[ak]["hero_alt"]
+        cfg["registry"]["categoria"] = "Affitti"
+        cfg["registry"]["evidenza"] = False
         body = cfg["body_fn"]() + COMMON_BODY_TAIL
         wc = word_count(body)
         if wc < MIN_BODY_WORDS:

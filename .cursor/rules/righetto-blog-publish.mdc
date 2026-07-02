@@ -20,9 +20,17 @@ Dettaglio: **`TEST-SKILL/skill-content.md`**, **`SKILL-2.0.md` §8.1a, §8.1, §
 - Disclaimer mediazione **una volta** per pagina
 - Script batch: `MAX_TEMPLATE_PARAGRAPHS` + diversità paragrafi (vedi `build_*_blog*.py`)
 
-## Copertina
-- WebP **1200×630**, target **<120 KiB**
-- Allinea: `og:image`, schema `BlogPosting.image`, hero `src`
+## Copertina e corpo — foto **realistiche**
+- WebP **1200×630**, target **<120 KiB** — **fotografia reale**, tema Padova/Veneto/immobiliare
+- **Vietato:** illustrazioni 3D, AI fantasy, avatar, stock con scritte decorative; **no** hero generico `foto-servizi` se non tematico
+- Corpo: **≥3** `<figure>` foto + **≥2** SVG colorati con fonte (`skill-content.md` §2.1)
+- Allinea: `og:image`, schema `BlogPosting.image`, hero `src`, registry 4 punti
+
+## Elenco blog (solo articoli — **non** portale immobili)
+- `blog.html` + homepage blog: **solo ordine data**, niente sezione «In evidenza» che toglie card dalla griglia
+
+## Secondo passaggio obbligatorio (agente)
+Prima di chiudere: `check_doppioni_sito.py` → `validate-page.js` → grep 4 registri → verifica immagini realistiche sotto `img/` → ordine data OK. Se fallisce, fix e ripeti.
 
 ## Registrazione obbligatoria (tutti e 4)
 - `admin.html` → `_blogSeedArticles` con `data_pubblicazione: 'YYYY-MM-DD'`
