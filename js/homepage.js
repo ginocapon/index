@@ -781,15 +781,15 @@ function generateSlug(titolo) {
   const articoliStatici = [
 {
       "titolo": "Stanza universitaria Padova 2026: canoni 490€ e +46%",
-      "categoria": "Locazioni",
+      "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
       "immagine_copertina": "img/foto-servizi/contratti-di-locazione-padova.webp",
       "url_statico": "blog-stanza-universitaria-padova-canoni-2026"
     },
-{
+    {
       "titolo": "Studentati Veneto 2026: posti letto ESU, privati e PNRR",
-      "categoria": "Locazioni",
+      "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
       "immagine_copertina": "img/foto-servizi/gestioni-immobili-padova.webp",
@@ -805,7 +805,7 @@ function generateSlug(titolo) {
     },
 {
       "titolo": "Vicenza residenze universitarie calmierate 2026: PNRR e Querini",
-      "categoria": "Locazioni",
+      "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
       "immagine_copertina": "img/foto-servizi/gestione-preliminari-padova.webp",

@@ -210,7 +210,7 @@
     <div>
       <div class="htag">Blog & Risorse</div>
       <h1>Guide, consigli e<br>notizie sul <strong>mercato immobiliare</strong></h1>
-            <p class="last-update" style="font-size:0.85rem;color:#6b7280;margin-top:0.5rem;">Ultimo aggiornamento: Maggio 2026</p>
+            <p class="last-update" style="font-size:0.85rem;color:#6b7280;margin-top:0.5rem;">Ultimo aggiornamento: Luglio 2026</p>
       <p>Articoli pratici su vendita, affitto, normativa e mercato di Padova e provincia. Aggiornati ogni settimana dai nostri esperti.</p>
     </div>
     <div class="search-wrap">
@@ -236,10 +236,7 @@
 
 <div class="page">
   <div>
-    <!-- IN EVIDENZA (dinamico) -->
-    <div id="featuredSection" class="sr"></div>
-
-    <div style="font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--grigio);margin-bottom:.7rem;font-weight:500">Tutti gli articoli</div>
+    <div style="font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--grigio);margin-bottom:.7rem;font-weight:500">Tutti gli articoli — dal più recente</div>
     <div class="art-grid" id="artGrid"></div>
   </div>
 
@@ -305,7 +302,7 @@ async function initBlog() {
   const articoliStatici = [
 {
       "titolo": "Stanza universitaria Padova 2026: canoni 490€ e +46%",
-      "categoria": "Locazioni",
+      "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
       "immagine_copertina": "img/foto-servizi/contratti-di-locazione-padova.webp",
@@ -313,11 +310,11 @@ async function initBlog() {
       "tempo": 11,
       "autore": "Linda Righetto",
       "contenuto": "Canone medio stanza 490€ (+46% vs 2020) da Immobiliare.it Insights; FIMAA, ESU, tram e periferia.",
-      "evidenza": true
+      "evidenza": false
     },
 {
       "titolo": "Studentati Veneto 2026: posti letto ESU, privati e PNRR",
-      "categoria": "Locazioni",
+      "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
       "immagine_copertina": "img/foto-servizi/gestioni-immobili-padova.webp",
@@ -341,7 +338,7 @@ async function initBlog() {
     },
 {
       "titolo": "Vicenza residenze universitarie calmierate 2026: PNRR e Querini",
-      "categoria": "Locazioni",
+      "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
       "immagine_copertina": "img/foto-servizi/gestione-preliminari-padova.webp",
@@ -1723,15 +1720,19 @@ async function initBlog() {
       if (s.url_statico) staticSlugsInList.add(s.url_statico);
     }
   });
-  allArticles.sort((a,b) => new Date(b.data) - new Date(a.data));
+  allArticles.sort((a, b) => articleTs(b) - articleTs(a));
   renderBlog();
   finishBlogReveal();
 }
 
 function finishBlogReveal() {
-  var feat = document.getElementById('featuredSection');
-  if (feat) feat.classList.add('visible');
   if (typeof window.revealBlogCards === 'function') window.revealBlogCards();
+}
+
+function articleTs(a) {
+  const d = a.data || a.data_pubblicazione;
+  const t = d ? new Date(d).getTime() : 0;
+  return Number.isFinite(t) ? t : 0;
 }
 
 function getArticles() {
@@ -1804,66 +1805,20 @@ function renderBlog() {
   const all = getArticles();
   const search = (document.getElementById('blogSearch').value || '').toLowerCase();
 
-  let filtered = all;
+  let filtered = all.slice();
   if (currentCat) filtered = filtered.filter(a => a.categoria === currentCat);
   if (search) filtered = filtered.filter(a =>
     (a.titolo || '').toLowerCase().includes(search) ||
     (a.contenuto || '').toLowerCase().includes(search) ||
     (a.categoria || '').toLowerCase().includes(search)
   );
-
-  // Featured (articoli in evidenza)
-  const featEl = document.getElementById('featuredSection');
-  const evidenza = filtered.filter(a => a.evidenza);
-  const shownInFeatured = new Set();
-  if (evidenza.length > 0) {
-    const big = evidenza[0];
-    const smalls = evidenza.slice(1, 3);
-    shownInFeatured.add(big);
-    smalls.forEach(function(x) { shownInFeatured.add(x); });
-    let bigImg = big.immagine_copertina || extractFirstImage(big.contenuto);
-    if (big.url_statico === 'blog-righetto-storia-territorio-acquisizioni-2026') {
-      bigImg = 'img/team/righetto-noi-ci-siamo-video-poster.png';
-    }
-    featEl.innerHTML = `
-      <div style="font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--grigio);margin-bottom:.7rem;font-weight:500">In evidenza</div>
-      <div class="featured">
-        <a class="art-big" href="${artUrl(big)}">
-          <div class="art-img">${bigImg ? '<img src="'+bigImg+'" alt="'+esc(big.titolo)+'" width="600" height="260" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.outerHTML=\'<div class=art-img-ph>'+(big.emoji||'&#128221;')+'</div>\'">' : '<div class="art-img-ph">'+(big.emoji || '&#128221;')+'</div>'}<span class="art-cat">${esc(big.categoria)}</span></div>
-          <div class="art-body">
-            <div class="art-date">${fmtDate(big.data)}</div>
-            <div class="art-title">${esc(big.titolo)}</div>
-            <div class="art-excerpt">${esc(excerpt(big.contenuto, 30))}</div>
-            <div class="art-meta"><div class="art-author"><div class="art-av">${(big.autore||'G')[0]}</div>${esc(big.autore)}</div><span class="art-read">${big.tempo || 5} min di lettura</span></div>
-          </div>
-        </a>
-        ${smalls.map(a => {
-          const smImg = a.immagine_copertina || extractFirstImage(a.contenuto);
-          return `
-          <a class="art-sm" href="${artUrl(a)}">
-            <div class="art-img">${smImg ? '<img src="'+smImg+'" alt="'+esc(a.titolo)+'" width="120" height="120" style="width:100%;height:100%;object-fit:cover" loading="lazy">' : '<div class="art-img-ph">'+(a.emoji || '&#128221;')+'</div>'}<span class="art-cat">${esc(a.categoria)}</span></div>
-            <div class="art-body">
-              <div class="art-date">${fmtDate(a.data)}</div>
-              <div class="art-title">${esc(a.titolo)}</div>
-              <div class="art-meta"><div class="art-author"><div class="art-av">${(a.autore||'G')[0]}</div></div><span class="art-read">${a.tempo || 5} min</span></div>
-            </div>
-          </a>
-        `}).join('')}
-      </div>`;
-  } else {
-    featEl.innerHTML = '';
-  }
-
-  // Grid: tutti tranne i 3 gia' mostrati in "In evidenza" (prima i con evidenza rischiavano di sparire dalla lista)
-  const grid = evidenza.length > 0
-    ? filtered.filter(a => !shownInFeatured.has(a))
-    : filtered;
+  filtered.sort((a, b) => articleTs(b) - articleTs(a));
 
   const gridEl = document.getElementById('artGrid');
-  if (grid.length === 0 && evidenza.length === 0) {
-    gridEl.innerHTML = '<div class="blog-empty"><div style="font-size:3rem;margin-bottom:1rem">📝</div><h3>Nessun articolo ancora</h3><p>I nuovi articoli appariranno qui appena pubblicati dall\'admin.</p></div>';
+  if (filtered.length === 0) {
+    gridEl.innerHTML = '<div class="blog-empty"><div style="font-size:3rem;margin-bottom:1rem">📝</div><h3>Nessun articolo trovato</h3><p>Prova un\'altra categoria o modifica la ricerca.</p></div>';
   } else {
-    gridEl.innerHTML = grid.map(a => {
+    gridEl.innerHTML = filtered.map(a => {
       const cardImg = a.immagine_copertina || extractFirstImage(a.contenuto);
       return `
       <a class="acard" href="${artUrl(a)}">
@@ -1872,7 +1827,7 @@ function renderBlog() {
           <span class="acard-cat">${esc(a.categoria)}</span>
           <div class="acard-title">${esc(a.titolo)}</div>
           <div class="acard-excerpt">${esc(excerpt(a.contenuto, 30))}</div>
-          <div class="acard-meta"><span>${fmtDateShort(a.data)}</span><span>${a.tempo || 5} min</span></div>
+          <div class="acard-meta"><span>${fmtDateShort(a.data || a.data_pubblicazione)}</span><span>${a.tempo || 5} min</span></div>
         </div>
       </a>
     `}).join('');
