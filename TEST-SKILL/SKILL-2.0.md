@@ -6,6 +6,7 @@
 > **Ultimo aggiornamento Google verificato:** 27 Giugno 2026
 > **Prossima verifica consigliata:** Luglio 2026
 >
+> **Changelog 2 luglio 2026:** blog — batch **Housing Veneto 2026** (5 articoli): canoni stanze Padova (Immobiliare.it Insights), studentati ESU/PNRR, residenze green Tribloc, Vicenza calmierati, housing lavoratori Edilcassa; sotto-cluster in `skill-content.md`; script `build_blog_housing_veneto_lug2026.py`.
 > **Changelog 27 giugno 2026 (pomeriggio):** E-E-A-T — pagine autore `/gino-capon`, `/linda-righetto`; CTA Visita guidata live su `immobile.html`; audit settimanale §1.4–1.5 in `audit-skill.sh`.
 > **Changelog 27 giugno 2026:** Google Search Central — guida AI Overviews (§4.4b).
 >
