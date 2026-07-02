@@ -90,6 +90,48 @@ Script batch: `scripts/build_blog_housing_veneto_lug2026.py` + `register_housing
 - [ ] Share bar (WhatsApp, Email, Copia link)
 - [ ] Articoli correlati (min 2)
 - [ ] Almeno 1 tabella comparativa con fonte
+- [ ] **Min 3 immagini fotografiche realistiche** nel corpo (vedi §2.1) + **almeno 2 grafici SVG colorati** a tema (tabelle + chart inline)
+- [ ] Copertina hero **fotografica realistica** dedicata (non stock generica con scritte decorative)
+
+### 2.1 Blog — immagini, elenco e auto-verifica (OBBLIGATORIO — tutti gli articoli)
+
+> Applica a **ogni** `blog-*.html` nuovo o rivisto, al seed admin e alla sezione blog in homepage. **Non** riguarda il portale immobili (vendita/affitto) né `in_evidenza` sulle schede immobile.
+
+#### A) Foto **realistiche** — vietate immagini immaginarie
+
+| Consentito | Vietato |
+|---|---|
+| Fotografie reali o photo-realistiche: appartamenti, stanze, facciate, tram/città Padova-Veneto, studenti/lavoratori in contesto **credibile** (non cartone) | Illustrazioni 3D, avatar, personaggi generati da AI, scene fantasy, volti «plastic» o stile videogioco |
+| Asset in `img/blog/` dedicati per articolo (WebP 1200×630 hero, corpo ~800–1200 px larghezza) | Copertine generiche `img/foto-servizi/*` con **testo sovrapposto** o messaggio marketing che non spiega l’articolo |
+| Foto scattate/fornite dal cliente o già in repo con soggetto **coerente** al titolo | Unsplash/CDN esterni (già vietati in §8.1c) |
+| Didascalia breve sotto ogni `<figure>` (contesto, non claim inventati) | Watermark, slogan stock, date finte, percentuali stampate sull’immagine |
+
+**Regola pratica:** se l’immagine non potrebbe essere scattata con una macchina fotografica in Padova/provincia o in agenzia → **non usarla**. I **grafici dati** restano **SVG/HTML colorati** (Immobiliare.it Insights, OMI, FIMAA…) — non sostituiscono le foto.
+
+**Per articolo (minimo):**
+1. **1 copertina hero** fotografica tematica
+2. **≥ 3 figure nel corpo** (`<figure class="blog-fig">`) distribuite tra le sezioni H2
+3. **≥ 2 chart-wrap SVG** multicolore con legenda e `figcaption` + fonte
+
+#### B) Elenco blog e homepage — **solo ordine per data**
+
+- **`blog.html`:** griglia unica ordinata per `data` / `data_pubblicazione` (più recente in alto). **Nessuna** sezione «In evidenza» che nasconde articoli dalla lista.
+- **`js/homepage.js` (`loadBlogHome`):** ultimi 6 articoli **per data** — stesso criterio del blog.
+- Il flag `evidenza` nel seed admin resta opzionale (badge in pannello); **non** deve spostare l’ordine pubblico.
+- Categoria filtro blog: allineare a pulsanti esistenti (es. `Affitti`, non `Locazioni` orfana).
+
+#### C) Secondo passaggio obbligatorio (agente — prima di dire «fatto»)
+
+Dopo generazione o patch, l’agente **esegue sempre** (non delegare all’utente):
+
+1. `python scripts/check_doppioni_sito.py`
+2. `node scripts/validate-page.js blog-{slug}.html` (o elenco file toccati)
+3. Grep: slug in `blog.html`, `admin.html`, `js/homepage.js`, `sitemap.xml`
+4. Controllo manuale campione: hero + 3 figure = path sotto `img/` esistenti; **nessuna** URL esterna immagine; **nessuna** illustrazione AI/3D
+5. Verifica elenco blog: nuovi articoli visibili in cima per data (no featured che li esclude)
+6. Solo dopo pass 1+2: commit/push se previsto da task
+
+Se un controllo fallisce → **correggere e ripetere pass 2** prima di chiudere il task.
 
 ### Stile di scrittura
 - Tono autorevole ma accessibile — MAI accademico o burocratico

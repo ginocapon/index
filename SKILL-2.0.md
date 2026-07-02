@@ -4,11 +4,13 @@ Il contenuto completo della skill (SEO, GEO, blog, checklist, architettura) si t
 
 **[`TEST-SKILL/SKILL-2.0.md`](TEST-SKILL/SKILL-2.0.md)**
 
-Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutturali. Prima di ogni **nuovo** articolo blog: **§8.1a anti-doppioni** (catalogo + `scripts/check_doppioni_sito.py`; se doppione → altro argomento da fonte istituzionale sul web). Qualità corpo e asset: **§8.1c**.
+Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutturali. Prima di ogni **nuovo** articolo blog: **§8.1a anti-doppioni** (catalogo + `scripts/check_doppioni_sito.py`; se doppione → altro argomento da fonte istituzionale sul web). Qualità corpo, **foto realistiche** e auto-verifica: **§8.1c** + **`skill-content.md` §2.1**.
 
 **Regole Cursor scoped:** [`TEST-SKILL/skill-cursor-rules.md`](TEST-SKILL/skill-cursor-rules.md) — 7 file `.mdc` in `.cursor/rules/` (pattern awesome-cursorrules).
 
 **Changelog rapido (27 maggio 2026):** sicurezza — audit generale + revisione **2×/settimana** (martedì/venerdì): **`TEST-SKILL/skill-security.md`**, `scripts/security-check.sh`, workflow `security-check-bisettimanale.yml`.
+
+**Changelog rapido (2 luglio 2026 — b):** blog — foto **realistiche** (no AI/3D), elenco solo per **data**, **secondo passaggio auto-verifica** agente — `skill-content.md` §2.1, `SKILL-2.0.md` §8.1c.
 
 **Changelog rapido (2 luglio 2026):** batch blog **Housing Veneto 2026** (5 articoli studenti/lavoratori); sotto-cluster in `skill-content.md`; script `build_blog_housing_veneto_lug2026.py`.
 

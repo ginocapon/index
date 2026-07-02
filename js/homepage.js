@@ -682,11 +682,11 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
-    'stanza universitaria padova 2026: canoni 490€ e +46%': { img: 'img/foto-servizi/contratti-di-locazione-padova.webp', url: 'blog-stanza-universitaria-padova-canoni-2026' },
-    'studentati veneto 2026: posti letto esu, privati e pnrr': { img: 'img/foto-servizi/gestioni-immobili-padova.webp', url: 'blog-studentati-veneto-2026-posti-letto' },
-    'residenze green padova tribloc 2026: 180 camere nzeb': { img: 'img/foto-servizi/valutazioni-e-perizie-padova.webp', url: 'blog-residenze-green-padova-tribloc-2026' },
-    'vicenza residenze universitarie calmierate 2026: pnrr e querini': { img: 'img/foto-servizi/gestione-preliminari-padova.webp', url: 'blog-vicenza-residenze-universitarie-calmierate-2026' },
-    'housing lavoratori veneto 2026: edilcassa fondo 250.000€': { img: 'img/foto-servizi/vendita-immobili-padova.webp', url: 'blog-housing-lavoratori-veneto-edilcassa-2026' },
+    'stanza universitaria padova 2026: canoni 490€ e +46%': { img: 'img/blog/blog-affitti-canoni-fimaa-q1-2026-padova.webp', url: 'blog-stanza-universitaria-padova-canoni-2026' },
+    'studentati veneto 2026: posti letto esu, privati e pnrr': { img: 'img/blog/blog-nuove-costruzioni-mercato-veneto-2026-padova.webp', url: 'blog-studentati-veneto-2026-posti-letto' },
+    'residenze green padova tribloc 2026: 180 camere nzeb': { img: 'img/blog/blog-domanda-case-green-padova-2026.webp', url: 'blog-residenze-green-padova-tribloc-2026' },
+    'vicenza residenze universitarie calmierate 2026: pnrr e querini': { img: 'img/blog/blog-piano-casa-decreto-66-2026-padova.webp', url: 'blog-vicenza-residenze-universitarie-calmierate-2026' },
+    'housing lavoratori veneto 2026: edilcassa fondo 250.000€': { img: 'img/blog/blog-costi-costruzione-istat-padova-2026.webp', url: 'blog-housing-lavoratori-veneto-edilcassa-2026' },
     'case più vendute nel padovano: tipologie e metrature nel 2026': { img: 'img/blog/blog-case-piu-vendute-padova-2026.webp', url: 'blog-case-piu-vendute-tipologie-padova-2026' },
     'casa vendibile tra 5 anni: ape, case green e posizione a padova': { img: 'img/blog/blog-casa-vendibile-5-anni-case-green-padova-2026.webp', url: 'blog-casa-vendibile-5-anni-case-green-padova-2026' },
     'bonus edilizi 2026: detrazioni 50% e ecobonus per padova': { img: 'img/blog/blog-bonus-edilizi-2026-incentivi-casa-padova.webp', url: 'blog-bonus-edilizi-2026-incentivi-casa-padova' },
@@ -784,7 +784,7 @@ function generateSlug(titolo) {
       "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/contratti-di-locazione-padova.webp",
+      "immagine_copertina": "img/blog/blog-affitti-canoni-fimaa-q1-2026-padova.webp",
       "url_statico": "blog-stanza-universitaria-padova-canoni-2026"
     },
     {
@@ -792,15 +792,15 @@ function generateSlug(titolo) {
       "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/gestioni-immobili-padova.webp",
+      "immagine_copertina": "img/blog/blog-nuove-costruzioni-mercato-veneto-2026-padova.webp",
       "url_statico": "blog-studentati-veneto-2026-posti-letto"
     },
 {
       "titolo": "Residenze green Padova Tribloc 2026: 180 camere NZEB",
-      "categoria": "Mercato immobiliare",
+      "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/valutazioni-e-perizie-padova.webp",
+      "immagine_copertina": "img/blog/blog-domanda-case-green-padova-2026.webp",
       "url_statico": "blog-residenze-green-padova-tribloc-2026"
     },
 {
@@ -808,15 +808,15 @@ function generateSlug(titolo) {
       "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/gestione-preliminari-padova.webp",
+      "immagine_copertina": "img/blog/blog-piano-casa-decreto-66-2026-padova.webp",
       "url_statico": "blog-vicenza-residenze-universitarie-calmierate-2026"
     },
 {
       "titolo": "Housing lavoratori Veneto 2026: Edilcassa fondo 250.000€",
-      "categoria": "Mercato immobiliare",
+      "categoria": "Affitti",
       "data": "2026-07-02",
       "stato": "pubblicato",
-      "immagine_copertina": "img/foto-servizi/vendita-immobili-padova.webp",
+      "immagine_copertina": "img/blog/blog-costi-costruzione-istat-padova-2026.webp",
       "url_statico": "blog-housing-lavoratori-veneto-edilcassa-2026"
     },
 {

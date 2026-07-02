@@ -6,6 +6,7 @@
 > **Ultimo aggiornamento Google verificato:** 27 Giugno 2026
 > **Prossima verifica consigliata:** Luglio 2026
 >
+> **Changelog 2 luglio 2026 (b):** blog — **§8.1c/§8.1d** foto **realistiche** (vietate illustrazioni/AI/3D); elenco blog solo per **data**; **secondo passaggio auto-verifica** obbligatorio agente; dettaglio in `skill-content.md` §2.1.
 > **Changelog 2 luglio 2026:** blog — batch **Housing Veneto 2026** (5 articoli): canoni stanze Padova (Immobiliare.it Insights), studentati ESU/PNRR, residenze green Tribloc, Vicenza calmierati, housing lavoratori Edilcassa; sotto-cluster in `skill-content.md`; script `build_blog_housing_veneto_lug2026.py`.
 > **Changelog 27 giugno 2026 (pomeriggio):** E-E-A-T — pagine autore `/gino-capon`, `/linda-righetto`; CTA Visita guidata live su `immobile.html`; audit settimanale §1.4–1.5 in `audit-skill.sh`.
 > **Changelog 27 giugno 2026:** Google Search Central — guida AI Overviews (§4.4b).
@@ -363,7 +364,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 **REGOLA ANTI-PLAGIO OBBLIGATORIA:** ogni contenuto generato dallo scraping DEVE essere originale. Il topic della fonte viene usato solo come ispirazione — titolo, testo e FAQ vengono rielaborati con la prospettiva di Righetto Immobiliare, dati locali di Padova e fonti ufficiali (OMI, FIMAA, Agenzia Entrate).
 
-**REGOLA IMMAGINI:** mai riutilizzare immagini gia' presenti nel sito (img/foto-servizi, img/blog, img/team). Ogni nuovo articolo deve avere foto NUOVE — o caricate dall'utente o cercate su Unsplash.
+**REGOLA IMMAGINI (blog pubblicati):** solo path `img/blog/` o asset locali — **fotografie realistiche** tematiche (§8.1c, `skill-content.md` §2.1). Vietate illustrazioni/AI/3D, CDN Unsplash su pagine live, riuso acritico di `foto-servizi` con scritte generiche. Ogni articolo: hero dedicato + ≥3 figure corpo.
 
 **Trend & Idee** (sezione dedicata nella sidebar Admin):
 - Ricerca topic trending per 8 categorie immobiliari italiane
@@ -957,15 +958,34 @@ Aggiornamento sostanziale di articolo **esistente** (nuova edizione anno, dati O
 - **Un solo** blocco disclaimer generale per pagina (salvo esigenze normative distinte).
 - **Una sola** nota compensi/mediazione in linea con `CLAUDE.md` e mandato in sede.
 
-**4) Immagini copertina articoli (`blog-*.html`, CMS)**
+**4) Immagini copertina e corpo articoli (`blog-*.html`, CMS)**
 
+- **Solo fotografie realistiche** — appartamenti, città, persone in contesto credibile. **Vietate** illustrazioni 3D, avatar AI, scene fantasy, volti generati, stock con scritte decorative senza valore informativo. Dettaglio operativo: **`skill-content.md` §2.1**.
 - **Vietato** caricare asset editoriali da `unsplash.com`, `images.unsplash.com`, `source.unsplash.com` o CDN esterni
   non previsti dal progetto (`CLAUDE.md`): solo path sotto `img/` o URL assoluti `https://righettoimmobiliare.it/img/...`.
 - Formato preferito: **WebP**, proporzione consigliata **1200×630** (Open Graph), peso tipico **sotto ~120 KiB**
   dopo export mirato (qualità ~80–85).
+- **Corpo:** min **3** `<figure>` fotografiche + min **2** grafici **SVG colorati** con fonte in `figcaption` (i grafici non sostituiscono le foto).
 - Evitare PNG/JPEG **piccoli** upscalati nell'hero (sfocatura e LCP peggiore).
+- Evitare riuso acritico di `img/foto-servizi/*` come hero se l’immagine non è tematica o contiene testo marketing generico.
 - Dopo nuove copertine: allineare `og:image`, `BlogPosting.image`, `src` hero, `blog.html`, `js/homepage.js`, `admin.html`
   se l'articolo è in elenco statico.
+
+**4b) Elenco pubblico blog (solo articoli — non immobili portale)**
+
+- `blog.html` e sezione blog in `homepage.js`: ordine **esclusivamente per data** (`data` / `data_pubblicazione`), più recente in alto.
+- **Nessun** blocco «In evidenza» che rimuove articoli dalla griglia principale. Flag `evidenza` = solo admin/badge opzionale.
+
+**8) Secondo passaggio auto-verifica (agente — BLOCCANTE prima di chiudere task blog)**
+
+> L’agente **non** consegna al cliente senza aver rieseguito i controlli. L’utente non deve verificare al posto dell’agente.
+
+1. `python scripts/check_doppioni_sito.py`
+2. `node scripts/validate-page.js` sui file `blog-*.html` modificati
+3. Registrazione 4 punti: grep slug in `blog.html`, `admin.html`, `js/homepage.js`, `sitemap.xml`
+4. Campione visivo: hero + figure interne = file reali sotto `img/`; zero illustrazioni AI/3D; zero hotlink esterni
+5. Elenco blog: articoli nuovi in cima per data su `/blog` (simulazione merge Supabase + statici)
+6. Se fallisce → fix + ripetere pass 2. Vedi checklist punto 7 e **`skill-content.md` §2.1C**.
 
 **5) SEO tecnico e contenuto (sinergia)**
 
@@ -983,10 +1003,11 @@ Aggiornamento sostanziale di articolo **esistente** (nuova edizione anno, dati O
 
 - [ ] **Anti-doppioni (§8.1a)** completato prima di scrivere — tema non duplica catalogo; se era doppione, sostituito con argomento da ricerca web su fonte ufficiale.
 - [ ] Nessun paragrafo duplicato oltre le soglie del punto 1.
-- [ ] Copertina WebP (o piano di conversione immediata) + dimensioni dichiarate coerenti con layout.
+- [ ] Copertina **fotografica realistica** WebP + ≥3 figure corpo + ≥2 SVG colorati (§2.1 `skill-content.md`).
 - [ ] `wordCount` coerente con corpo reale.
 - [ ] Schema triplo (BlogPosting / FAQ / Breadcrumb) allineato al contenuto visibile.
 - [ ] Registrazione in `blog.html`, `homepage.js`, `admin.html`, `sitemap.xml` se applicabile (processo gia' definito altrove).
+- [ ] **Secondo passaggio auto-verifica (§8.1c punto 8)** eseguito dall'agente con esito OK.
 
 ### 8.2.5 AEO / ricerca assistita — AI Overviews, AI Mode e agent (OBBLIGATORIO su pillar macro 2026+)
 
