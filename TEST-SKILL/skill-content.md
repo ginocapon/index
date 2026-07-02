@@ -85,7 +85,7 @@ Script batch: `scripts/build_blog_housing_veneto_lug2026.py` + `register_housing
 - [ ] Author bio visibile a fine articolo (foto, nome, ruolo, link chi-siamo)
 - [ ] Timestamp "Ultimo aggiornamento" visibile
 - [ ] Internal links a zone pages e service pages correlate (min 3)
-- [ ] CTA contestuale (valutazione, contatto, simulatore mutuo)
+- [ ] **Sezione «Cosa può fare Righetto»** con quesito + 3–4 soluzioni operative linkate (§2.2)
 - [ ] **Form lead in pagina** (se presente): seguire **`skill-forms-leads.md`** — invio diretto con `sendNotifica` + `richieste`, `provenienza: blog-{slug}`; non usare solo link a Contatti come sostituto dell’invio
 - [ ] Share bar (WhatsApp, Email, Copia link)
 - [ ] Articoli correlati (min 2)
@@ -132,6 +132,40 @@ Dopo generazione o patch, l’agente **esegue sempre** (non delegare all’utent
 6. Solo dopo pass 1+2: commit/push se previsto da task
 
 Se un controllo fallisce → **correggere e ripetere pass 2** prima di chiudere il task.
+
+### 2.2 Slug, keyword e sezione «Cosa può fare Righetto» (OBBLIGATORIO)
+
+#### A) Anti-sovrapposizione slug e keyword
+
+Prima di pubblicare un batch, verificare che slug e H1 **non ripetano** le stesse radici su articoli diversi (es. evitare 5 slug con `padova-2026`, `residenze-universitarie`, `studenti`).
+
+| Regola | Esempio |
+|---|---|
+| **1 keyword primaria distinta** per articolo dello stesso filone | `tribloc-gozzi-nzeb` vs `casa-querini-calmierati` vs `edilcassa-garanzia-affitto` |
+| Variare localizzazione nel slug solo se centrale al tema | Non mettere `padova` in 3 slug su 5 dello stesso batch |
+| Controllare cluster §1 + `check_doppioni_sito.py` | Non duplicare `blog-affitto-studenti-padova` / `blog-affitti-padova-canoni-2026` |
+| H2 in formato domanda **diversi** tra articoli correlati | Un articolo sui canoni, uno sui canali ESU/PNRR, uno sul riuso edilizio |
+
+**Slug già pubblicati:** non cambiare URL live senza redirect 301 e aggiornamento sitemap — per batch futuri applicare la regola in fase di naming.
+
+#### B) Sezione soluzioni Righetto
+
+Ogni articolo che pone un **quesito al lettore** (studenti, proprietari, imprese) deve includere, subito dopo sintesi/KPI:
+
+```html
+<div class="righetto-sol">
+  <h2>Cosa può fare Righetto</h2>
+  <p><strong>Il quesito:</strong> …</p>
+  <ul>
+    <li><strong>Soluzione concreta</strong> — descrizione operativa (<a href="servizio-locazioni">link servizio</a>)</li>
+  </ul>
+  <p><em>Mediazione concordata in sede — nessun listino online.</em></p>
+</div>
+```
+
+- **Min 3, max 4** soluzioni per articolo, tutte **realizzabili** con servizi/pagine esistenti (`servizio-locazioni`, `servizio-gestione`, `landing-valutazione`, `visite-virtuali`, checklist blog correlate).
+- **Vietato:** promettere accesso ESU/Camplus/PNRR, canoni garantiti, percentuali mediazione.
+- Collegare al **form lead** in fondo pagina con `provenienza: blog-{slug}`.
 
 ### Stile di scrittura
 - Tono autorevole ma accessibile — MAI accademico o burocratico

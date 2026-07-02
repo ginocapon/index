@@ -6,6 +6,7 @@
 > **Ultimo aggiornamento Google verificato:** 27 Giugno 2026
 > **Prossima verifica consigliata:** Luglio 2026
 >
+> **Changelog 2 luglio 2026 (c):** blog — **§2.2** slug/keyword anti-sovrapposizione + sezione **«Cosa può fare Righetto»** (quesito + 3–4 soluzioni); dettaglio in `skill-content.md` §2.2.
 > **Changelog 2 luglio 2026 (b):** blog — **§8.1c/§8.1d** foto **realistiche** (vietate illustrazioni/AI/3D); elenco blog solo per **data**; **secondo passaggio auto-verifica** obbligatorio agente; dettaglio in `skill-content.md` §2.1.
 > **Changelog 2 luglio 2026:** blog — batch **Housing Veneto 2026** (5 articoli): canoni stanze Padova (Immobiliare.it Insights), studentati ESU/PNRR, residenze green Tribloc, Vicenza calmierati, housing lavoratori Edilcassa; sotto-cluster in `skill-content.md`; script `build_blog_housing_veneto_lug2026.py`.
 > **Changelog 27 giugno 2026 (pomeriggio):** E-E-A-T — pagine autore `/gino-capon`, `/linda-righetto`; CTA Visita guidata live su `immobile.html`; audit settimanale §1.4–1.5 in `audit-skill.sh`.
@@ -1004,6 +1005,7 @@ Aggiornamento sostanziale di articolo **esistente** (nuova edizione anno, dati O
 - [ ] **Anti-doppioni (§8.1a)** completato prima di scrivere — tema non duplica catalogo; se era doppione, sostituito con argomento da ricerca web su fonte ufficiale.
 - [ ] Nessun paragrafo duplicato oltre le soglie del punto 1.
 - [ ] Copertina **fotografica realistica** WebP + ≥3 figure corpo + ≥2 SVG colorati (§2.1 `skill-content.md`).
+- [ ] Sezione **«Cosa può fare Righetto»** con quesito e 3–4 soluzioni operative (§2.2 `skill-content.md`).
 - [ ] `wordCount` coerente con corpo reale.
 - [ ] Schema triplo (BlogPosting / FAQ / Breadcrumb) allineato al contenuto visibile.
 - [ ] Registrazione in `blog.html`, `homepage.js`, `admin.html`, `sitemap.xml` se applicabile (processo gia' definito altrove).

@@ -63,6 +63,10 @@ nav{display:flex;flex:1;gap:.2rem}nav a{color:rgba(255,255,255,.72);font-size:.8
 .blog-fig{margin:1.65rem 0;border-radius:12px;overflow:hidden;border:1px solid var(--gc);background:#fff}
 .blog-fig img{width:100%;height:auto;display:block;max-height:380px;object-fit:cover}
 .blog-fig figcaption{font-size:.72rem;color:var(--grigio);padding:.7rem .95rem;background:var(--sfondo);line-height:1.55}
+.righetto-sol{border:2px solid var(--oro);border-radius:12px;padding:1.15rem 1.3rem;margin:1.65rem 0 2rem;background:linear-gradient(135deg,rgba(255,107,53,.08),rgba(44,74,110,.05))}
+.righetto-sol h2{font-family:'Montserrat',sans-serif;font-size:.95rem;text-transform:uppercase;letter-spacing:.06em;color:var(--oro);margin:0 0 .65rem;border:none;padding:0}
+.righetto-sol ul{font-size:.84rem;margin:.75rem 0 .55rem 1.15rem}
+.righetto-sol li{margin-bottom:.45rem}
 .cta-deep{display:inline-flex;background:linear-gradient(180deg,var(--oro2),var(--oro));color:var(--nero);font-weight:800;padding:.8rem 1.62rem;border-radius:10px;font-size:.8rem;margin:1rem .75rem 1rem 0}
 .faq-item{border:1px solid var(--gc);border-radius:8px;margin-bottom:.5rem}
 .faq-q{padding:.86rem .98rem;font-weight:600;font-size:.84rem;cursor:pointer}.faq-a{max-height:0;overflow:hidden;transition:max-height .35s;background:var(--sfondo)}
@@ -295,6 +299,171 @@ def chart_tram_zones() -> str:
 
 def figs_html(key: str) -> str:
     return "\n".join(blog_fig(s, a, c) for s, a, c in ASSETS[key]["figs"])
+
+
+def soluzione_box(question: str, items: list[tuple[str, str, str, str]]) -> str:
+    """items: titolo, descrizione, testo link, href."""
+    lis = "".join(
+        f"<li><strong>{t}</strong> — {d} (<a href=\"{h}\">{lt}</a>)</li>"
+        for t, d, lt, h in items
+    )
+    return f"""<div class="righetto-sol">
+<h2>Cosa può fare Righetto</h2>
+<p style="font-size:.86rem;margin:0 0 .5rem"><strong>Il quesito:</strong> {question}</p>
+<ul>{lis}</ul>
+<p style="font-size:.78rem;color:var(--grigio);margin:0"><em>Mediazione e compenso concordati in sede nel mandato — nessun listino percentuale online. Tel. 049.8843484 · <a href="landing-consulenza-immobiliare-gratuita">consulenza gratuita</a>.</em></p>
+</div>"""
+
+
+SOL_STANZA = soluzione_box(
+    "Canoni intorno a 490 € al mese (+46% vs 2020): dove trovare una stanza senza pagare il premium del Portello?",
+    [
+        (
+            "Ricerca mirata periferie tram",
+            "Shortlist su Arcella, Guizza, Ponte di Brenta e Cittadella con confronto annuncio vs Immobiliare.it Insights, FIMAA e OMI",
+            "servizio locazioni",
+            "servizio-locazioni",
+        ),
+        (
+            "Visita a distanza per famiglie fuori Veneto",
+            "Tour 360° dove disponibile e galleria scheda immobile, poi visita fisica solo sui finalisti",
+            "visite virtuali",
+            "visite-virtuali",
+        ),
+        (
+            "Checklist prima della caparra",
+            "Contratto transitorio o 4+4, caparra, APE e registrazione — passi obbligati per studenti",
+            "checklist affitto studenti",
+            "blog-checklist-affitto-studenti-padova-2026",
+        ),
+        (
+            "Supporto ai proprietari",
+            "Posizionamento canone vs mercato, qualifica inquilino e contratto registrato",
+            "servizio locazioni",
+            "servizio-locazioni",
+        ),
+    ],
+)
+
+SOL_STUDENTATI = soluzione_box(
+    "ESU, Camplus e PNRR non coprono tutti: come orientarsi tra graduatoria e mercato libero?",
+    [
+        (
+            "Piano parallelo maggio–agosto",
+            "Candidatura ESU (Sportello Studente su esu.pd.it) e ricerca sul libero senza bloccare la caparra finché i tempi bando lo consentono",
+            "servizio locazioni",
+            "servizio-locazioni",
+        ),
+        (
+            "Confronto costo totale",
+            "Canone + utenze + abbonamento TPL tra Padova, Vicenza e Mestre — evita risparmi illusori lontani dalle facoltà",
+            "zona universitaria Padova",
+            "zona-universitaria-padova",
+        ),
+        (
+            "Valutazione canone per chi affitta",
+            "Allineamento pre-asked season a FIMAA e Insights per appartamenti condivisi",
+            "valutazione gratuita",
+            "landing-valutazione",
+        ),
+        (
+            "Contratto e convivenza",
+            "Modelli, registro, clausole coinquilino ed Erasmus",
+            "servizio locazioni",
+            "servizio-locazioni",
+        ),
+    ],
+)
+
+SOL_GREEN = soluzione_box(
+    "Con Tribloc previsto per l'A.A. 2026/27: conviene attendere o cercare subito sul mercato libero?",
+    [
+        (
+            "Piano B entro luglio",
+            "Contratto transitorio o annuale sul libero fino a eventuale switch — senza restare senza alloggio a settembre",
+            "servizio locazioni",
+            "servizio-locazioni",
+        ),
+        (
+            "Due diligence Gozzi vs Portello",
+            "Tempi TPL verso dipartimento e costo totale (canone + bollette) rispetto a edifici NZEB",
+            "zona universitaria",
+            "zona-universitaria-padova",
+        ),
+        (
+            "Alternative già disponibili",
+            "Visite virtuali e schede portale su immobili attualmente locabili, senza attendere il cantiere",
+            "visite virtuali",
+            "visite-virtuali",
+        ),
+        (
+            "Proprietari in area Gozzi",
+            "Riqualificazione e APE per competere con l'offerta green strutturata",
+            "valutazione immobile",
+            "landing-valutazione",
+        ),
+    ],
+)
+
+SOL_VICENZA = soluzione_box(
+    "Come accedere ai calmierati PNRR (Casa Querini) e cosa fare se non si entra in graduatoria ESU?",
+    [
+        (
+            "Doppia traccia ESU + libero",
+            "Domanda ESU Vicenza (quota convenzione ~30% posti) e monitoraggio annunci in parallelo",
+            "servizio locazioni",
+            "servizio-locazioni",
+        ),
+        (
+            "Soluzione interina 2026–2027",
+            "Casa Querini operativa entro giugno 2027 — locazione temporanea o pendolarismo se serve ingresso autunno 2026",
+            "servizio locazioni Vicenza",
+            "servizio-locazioni",
+        ),
+        (
+            "Vicenza vs Padova",
+            "Confronto canone calmierato + trasporti vs stanza Padova periferia tram se il corso è in altra città",
+            "canoni stanza Padova",
+            "blog-stanza-universitaria-padova-canoni-2026",
+        ),
+        (
+            "Proprietari nel territorio",
+            "Locazione a studenti e lavoratori con contratto e documentazione a norma (101 comuni serviti)",
+            "servizio locazioni",
+            "servizio-locazioni",
+        ),
+    ],
+)
+
+SOL_EDILCASSA = soluzione_box(
+    "Il fondo Edilcassa 250.000 € aiuta l'operai a trovare casa? Cosa possono fare le imprese edili?",
+    [
+        (
+            "Locazioni B2B per squadre",
+            "Trilocali e quadrilocali in cintura (Limena, Rubano, provincia Padova) con contratto quadro intestato all'impresa",
+            "servizio locazioni",
+            "servizio-locazioni",
+        ),
+        (
+            "Garanzie locative e fondo Edilcassa",
+            "Il fondo sostiene le garanzie richieste dal proprietario agli operai iscritti Edilcassa — Righetto struttura trattativa tra impresa, inquilino e locatore",
+            "consulenza locazione",
+            "landing-consulenza-immobiliare-gratuita",
+        ),
+        (
+            "Gestione multi-inquilino",
+            "Turnover fine cantiere, regolamento convivenza e rendicontazione canoni",
+            "servizio gestione",
+            "servizio-gestione",
+        ),
+        (
+            "Valutazione immobile da locare",
+            "Adeguamento normativo e rendimento prima del mandato a imprese",
+            "valutazione gratuita",
+            "landing-valutazione",
+        ),
+    ],
+)
 
 
 def table_veneto_canoni() -> str:
@@ -922,6 +1091,7 @@ def build_body_stanza_padova() -> str:
   <div class="stat-card"><div class="stat-num">335 €</div><div class="stat-label">Riferimento 2020</div></div>
   <div class="stat-card"><div class="stat-num">60k+</div><div class="stat-label">Iscritti Uni PD</div></div>
 </div>
+{SOL_STANZA}
 <h2>Canoni stanza universitaria: cosa dicono i dati</h2>
 <p>Padova concentra una delle università storiche d'Europa; l'<strong>Università di Padova</strong> traina domanda abitativa costante. Quando posti letto pubblici e privati non coprono tutti gli iscritti, il mercato libero fissa prezzi sulle <strong>stanze singole</strong>. <strong>Immobiliare.it Insights</strong> (marzo 2026) indica circa <strong>490 euro</strong> di media, contro <strong>335 euro</strong> nel 2020: +46% che riflette domanda, energetico e stock limitato in centro.</p>
 <p>Non confondere media portale e singolo annuncio: spese, arredo e piano cambiano il canone. Incrociare con OMI Agenzia delle Entrate aiuta a capire se un prezzo è coerente con la microzona. In agenzia vediamo ricerche concentrate tra maggio e luglio; chi arriva a settembre trova meno scelta e canoni più rigidi.</p>
@@ -979,6 +1149,7 @@ def build_body_studentati_veneto() -> str:
   <div class="stat-card"><div class="stat-num">ESU</div><div class="stat-label">Canone calmierato</div></div>
   <div class="stat-card"><div class="stat-num">Mix</div><div class="stat-label">Pubblico + privato</div></div>
 </div>
+{SOL_STUDENTATI}
 <h2>Perché servono nuovi posti letto in Veneto</h2>
 <p>Padova, Venezia e Vicenza condividono crescita di iscritti universitari e limiti dello stock abitativo storico. Senza nuove camere in studentato, il mercato libero assorbe la domanda con canoni in salita — tema trattato in <a href="blog-affitti-padova-canoni-2026">affitti Padova canoni 2026</a> e nelle rilevazioni <strong>Immobiliare.it Insights</strong>. La <strong>Regione Veneto</strong> coordina investimenti e convenzioni con atenei ed enti territoriali; l'<strong>ESU Padova</strong> resta riferimento per posti pubblici e graduatorie (<a href="https://www.esu.pd.it" target="_blank" rel="noopener noreferrer">esu.pd.it</a>).</p>
 <h2>Pubblico, privato e PNRR: tre motori dell'offerta</h2>
@@ -1045,6 +1216,7 @@ def build_body_green_tribloc() -> str:
   <div class="stat-card"><div class="stat-num">2026/27</div><div class="stat-label">Apertura</div></div>
   <div class="stat-card"><div class="stat-num">Riuso</div><div class="stat-label">Ex uffici</div></div>
 </div>
+{SOL_GREEN}
 <h2>Da torri uffici a housing studentesco: il caso Tribloc</h2>
 <p>Il riuso di edifici direzionali per <strong>housing studentesco</strong> risponde a due obiettivi: ridurre vuoti urbani e aumentare posti letto senza consumo di suolo agricolo. A Padova, l'area <strong>Gozzi / Tribloc</strong> — torri simbolo dello sviluppo office degli anni passati — è oggetto di un progetto autorizzato che prevede circa <strong>180 stanze</strong>, spazi comuni e criteri <strong>quasi zero energy (NZEB)</strong>. Il nome dell'operatore (<strong>Swadeshi</strong>, gruppo <strong>Brainville</strong>) compare negli atti pubblici di progetto: non è marketing Righetto, ma fatto urbanistico verificabile.</p>
 <h2>Green building e NZEB: cosa cambia per l'inquilino</h2>
@@ -1102,6 +1274,7 @@ def build_body_vicenza_calmierati() -> str:
   <div class="stat-card"><div class="stat-num">VI</div><div class="stat-label">Vicenza</div></div>
   <div class="stat-card"><div class="stat-num">Mix</div><div class="stat-label">Rigenerazione</div></div>
 </div>
+{SOL_VICENZA}
 <h2>Vicenza: domanda universitaria e carenza camere</h2>
 <p>Vicenza ospita sedi universitarie collegate al sistema veneto; studenti fuori sede competono per poche camere rispetto a Padova o Verona. <strong>ISTAT</strong> e dati Regione Veneto descrivono un territorio con occupazione elevata e affitti in tensione. Nuovi posti letto PNRR mirano a canoni più accessibili del libero mercato.</p>
 <h2>Canoni calmierati e convenzione ESU</h2>
@@ -1161,6 +1334,7 @@ def build_body_edilcassa_lavoratori() -> str:
   <div class="stat-card"><div class="stat-num">Edilcassa</div><div class="stat-label">Confartigianato VI</div></div>
   <div class="stat-card"><div class="stat-num">Housing</div><div class="stat-label">Co-living lavoratori</div></div>
 </div>
+{SOL_EDILCASSA}
 <h2>Edilcassa Veneto e fondo garanzia 250.000 euro</h2>
 <p><strong>Edilcassa</strong>, cassa edile del sistema Confartigianato, gestisce contributi, formazione e tutele per imprese edili. Nel Veneto, il contratto regionale di edilizia <strong>2025/2026</strong> prevede un <strong>fondo di garanzia da 250.000 euro</strong> a supporto di imprese e lavoratori in difficoltà contributiva o occupazionale — dato comunicato da <strong>Edilcassa / Confartigianato Veneto</strong>. Non è un prestito immobiliare, ma strumento di stabilizzazione del comparto che indirettamente influenza domanda di alloggi per cantieri temporanei.</p>
 {blog_fig(*ASSETS["lavoratori"]["figs"][0])}
