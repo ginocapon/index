@@ -110,6 +110,8 @@ def main() -> int:
             issues.append(f"File statico non in blog.html articoliStatici: {s}")
 
     # Titoli simili (normalizzati)
+    skimm_path = ROOT / "TEST-SKILL" / "skimm.json"
+
     def norm_title(t: str) -> str:
         return re.sub(r"\s+", " ", t.lower().strip())[:120]
 
@@ -168,6 +170,24 @@ def main() -> int:
             print(f"Supabase: {len(rows)} blog, {len(prows)} pianificazioni")
     except Exception as e:
         print(f"Supabase skip: {e}", file=sys.stderr)
+
+    if skimm_path.is_file():
+        try:
+            skimm = json.loads(skimm_path.read_text(encoding="utf-8"))
+            kws = [a.get("kw_primaria", "") for a in skimm.get("articles", []) if a.get("kw_primaria")]
+            for k, v in Counter(kws).items():
+                if v > 1:
+                    slugs = [
+                        a["slug"]
+                        for a in skimm["articles"]
+                        if a.get("kw_primaria") == k
+                    ]
+                    issues.append(f"skimm kw_primaria duplicata `{k}`: {', '.join(slugs)}")
+            print(f"skimm.json: {skimm.get('count', len(skimm.get('articles', [])))} articoli catalogati")
+        except Exception as e:
+            print(f"skimm.json skip: {e}", file=sys.stderr)
+    else:
+        print("skimm.json assente — eseguire: python scripts/build_skimm.py", file=sys.stderr)
 
     print(f"File blog statici: {len(static_files)}")
     print(f"blog.html articoliStatici slug: {len(slugs_bh)}")

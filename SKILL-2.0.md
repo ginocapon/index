@@ -4,9 +4,11 @@ Il contenuto completo della skill (SEO, GEO, blog, checklist, architettura) si t
 
 **[`TEST-SKILL/SKILL-2.0.md`](TEST-SKILL/SKILL-2.0.md)**
 
-Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutturali. Prima di ogni **nuovo** articolo blog: **§8.1a anti-doppioni** (catalogo + `scripts/check_doppioni_sito.py`; se doppione → altro argomento da fonte istituzionale sul web). Qualità corpo, **foto realistiche** e auto-verifica: **§8.1c** + **`skill-content.md` §2.1**.
+Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutturali. Prima di ogni **nuovo** articolo blog: **`TEST-SKILL/skimm.md`** + **§8.1a** (`check_doppioni_sito.py` + `build_skimm.py`). Qualità: **§8.1c** + **`skill-content.md` §2.1–2.2**.
 
 **Regole Cursor scoped:** [`TEST-SKILL/skill-cursor-rules.md`](TEST-SKILL/skill-cursor-rules.md) — 7 file `.mdc` in `.cursor/rules/` (pattern awesome-cursorrules).
+
+**Changelog rapido (3 luglio 2026):** blog — **`TEST-SKILL/skimm.md`** catalogo keyword/intent + `scripts/build_skimm.py`.
 
 **Changelog rapido (27 maggio 2026):** sicurezza — audit generale + revisione **2×/settimana** (martedì/venerdì): **`TEST-SKILL/skill-security.md`**, `scripts/security-check.sh`, workflow `security-check-bisettimanale.yml`.
 

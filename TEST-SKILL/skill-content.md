@@ -43,9 +43,11 @@ Script batch: `scripts/build_blog_housing_veneto_lug2026.py` + `register_housing
 > Dettaglio completo: **`TEST-SKILL/SKILL-2.0.md` §8.1a**. Regola sintetica per ogni nuovo articolo.
 
 1. **Non iniziare a scrivere** finche' non hai verificato che titolo, slug e angolo editoriale **non esistono gia'** sul sito.
-2. Esegui `python scripts/check_doppioni_sito.py` e consulta `blog.html` (`articoliStatici`), i file `blog-*.html`, Supabase `blog`, cluster in **§1** di questo file.
-3. **Se e' un doppione o troppo simile** (stesso macro-tema, stesse H2, stesso evento geopolitico gia' trattato): **STOP** → ricerca web su **fonte istituzionale** (OMI, Banca d'Italia, ISTAT, BCE, MEF, Agenzia Entrate, FIMAA) → scegli **altro argomento** con utilita' per Padova/hinterland.
-4. Proponi 2–3 alternative con fonte se la richiesta era generica; procedi solo dopo tema univoco confermato.
+2. Leggi **`TEST-SKILL/skimm.md`** (catalogo keyword/intent) e verifica `kw_primaria` univoca in §3.
+3. Esegui `python scripts/check_doppioni_sito.py` e `python scripts/build_skimm.py` (aggiorna catalogo se batch nuovo).
+4. Consulta `blog.html` (`articoliStatici`), i file `blog-*.html`, Supabase `blog`, cluster in **§1** di questo file.
+5. **Se e' un doppione o troppo simile** (stesso macro-tema, stesse H2, stesso evento geopolitico gia' trattato): **STOP** → ricerca web su **fonte istituzionale** → altro argomento con utilita' per Padova/hinterland.
+6. Proponi 2–3 alternative con fonte se la richiesta era generica; vedi **`skimm.md` §1.2** per strategie long-tail.
 
 ### Struttura obbligatoria
 - **Lunghezza:** 2.500-3.500 parole (pillar) / 1.500-2.000 (secondari)
@@ -134,6 +136,8 @@ Dopo generazione o patch, l’agente **esegue sempre** (non delegare all’utent
 Se un controllo fallisce → **correggere e ripetere pass 2** prima di chiudere il task.
 
 ### 2.2 Slug, keyword e sezione «Cosa può fare Righetto» (OBBLIGATORIO)
+
+> Registro completo articoli + matrice rischi: **`TEST-SKILL/skimm.md`** (generato da `python scripts/build_skimm.py`).
 
 #### A) Anti-sovrapposizione slug e keyword
 
