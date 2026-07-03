@@ -43,6 +43,10 @@ nav{display:flex;flex:1;gap:.2rem}nav a{color:rgba(255,255,255,.72);font-size:.8
 .art-content a{color:var(--blu);text-decoration:underline}
 .aeo-box{border:2px solid var(--blu);border-radius:12px;padding:1.15rem 1.3rem;margin-bottom:1.65rem;background:linear-gradient(135deg,rgba(44,74,110,.07),rgba(255,107,53,.06))}
 .aeo-box h2{font-family:'Montserrat',sans-serif;font-size:.95rem;text-transform:uppercase;letter-spacing:.06em;color:var(--blu);margin:0 0 .55rem;border:none;padding:0}
+.intro-lead{background:linear-gradient(160deg,#fff 0%,var(--sfondo) 100%);border:1px solid var(--gc);border-radius:14px;padding:1.35rem 1.5rem 1.1rem;margin-bottom:1.75rem}
+.intro-lead p{font-size:.93rem;line-height:1.92;color:var(--nero)}
+.intro-lead .lead-kicker{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blu);font-weight:700;margin-bottom:.65rem;display:block}
+.vignette-hero{margin:1.1rem 0 0;border:2px solid var(--blu);background:#fff}
 .ask-card{background:var(--sfondo);border:1px solid var(--gc);border-left:5px solid var(--blu);border-radius:0 12px 12px 0;padding:1rem 1.2rem;margin:1rem 0}
 .vignette-wrap{background:var(--sfondo);border:1px solid var(--gc);border-radius:12px;padding:1.2rem;margin:1.3rem 0}
 .vignette-wrap figcaption{font-size:.72rem;color:var(--grigio);margin-top:.6rem;text-align:center;line-height:1.5}
@@ -92,6 +96,43 @@ FAQS = [
 def wc(html: str) -> int:
     t = re.sub(r"<[^>]+>", " ", html)
     return len(re.sub(r"\s+", " ", t).strip().split())
+
+
+def v0_interrogatorio_scuola() -> str:
+    return """<figure class="vignette-wrap vignette-hero" aria-label="Cliente che interroga l'agente come a scuola">
+<svg viewBox="0 0 560 240" width="100%" height="240" role="img">
+<title>Interrogatorio in agenzia: il cliente alza la mano, l'agente alla lavagna</title>
+<rect x="0" y="0" width="560" height="240" fill="#F7F5F1"/>
+<!-- lavagna -->
+<rect x="140" y="28" width="380" height="100" rx="6" fill="#2d5a3d" stroke="#1e3d28" stroke-width="3"/>
+<text x="330" y="58" text-anchor="middle" font-size="11" fill="#c8e6c9" font-family="Montserrat,sans-serif" font-weight="700">APPUNTAMENTO — LEZIONE 1</text>
+<text x="330" y="82" text-anchor="middle" font-size="10" fill="#fff">Visura? · Condominio? · Consegna?</text>
+<text x="330" y="102" text-anchor="middle" font-size="10" fill="#FF8F5E">Difformità sanabili?</text>
+<!-- agente -->
+<circle cx="115" cy="88" r="26" fill="#FF8F5E"/>
+<text x="115" y="96" text-anchor="middle" font-size="20">👔</text>
+<rect x="88" y="118" width="54" height="55" rx="6" fill="#2C4A6E"/>
+<text x="115" y="148" text-anchor="middle" font-size="8" fill="#fff">AGENTE</text>
+<line x1="130" y1="100" x2="175" y2="75" stroke="#152435" stroke-width="2"/>
+<text x="175" y="72" font-size="14" fill="#152435">→</text>
+<!-- cliente con mano alzata -->
+<rect x="28" y="155" width="95" height="58" rx="8" fill="#fff" stroke="#FF6B35" stroke-width="2"/>
+<circle cx="52" cy="178" r="14" fill="#FF8F5E"/>
+<text x="52" y="183" text-anchor="middle" font-size="12">🙋</text>
+<text x="88" y="175" font-size="9" fill="#152435" font-weight="700">CLIENTE</text>
+<text x="88" y="192" font-size="8" fill="#6B7A8D">«Professore,</text>
+<text x="88" y="204" font-size="8" fill="#6B7A8D">la visura?»</text>
+<!-- banchi -->
+<rect x="200" y="165" width="70" height="38" rx="4" fill="#ECE7DF" stroke="#E1DBD1"/>
+<rect x="290" y="165" width="70" height="38" rx="4" fill="#ECE7DF" stroke="#E1DBD1"/>
+<rect x="380" y="165" width="70" height="38" rx="4" fill="#ECE7DF" stroke="#E1DBD1"/>
+<text x="235" y="188" text-anchor="middle" font-size="8" fill="#6B7A8D">catasto</text>
+<text x="325" y="188" text-anchor="middle" font-size="8" fill="#6B7A8D">spese</text>
+<text x="415" y="188" text-anchor="middle" font-size="8" fill="#6B7A8D">rogito</text>
+<text x="280" y="228" text-anchor="middle" font-size="10" fill="#6B7A8D">Non è umiliazione: è preparazione. L'agente preparato risponde come un buon docente.</text>
+</svg>
+<figcaption>L'interrogatorio che non offende — se le domande sono sul serio e le risposte sono chiare.</figcaption>
+</figure>"""
 
 
 def v1_puntualita() -> str:
@@ -166,18 +207,18 @@ def body() -> str:
     return f"""
 <div class="aeo-box">
 <h2>In sintesi</h2>
-<p><strong>Appuntamento con agenzia immobiliare a Padova: cinque domande da fare e cinque cose da pretendere.</strong> Puntualità reciproca, informazioni chiare su prezzo e immobile, disclosure su problemi strutturali, documentazione catastale di base, spese condominiali deliberate, tempi di consegna e difformità edilizie con indicazione se sanabili. Guida ironica ma operativa Righetto Immobiliare — complemento all'articolo su <a href="blog-5-errori-visita-immobile-padova-2026">cosa non fare in visita</a>.</p>
+<p><strong>Prima pagina da appuntamento serio:</strong> cinque domande da porre all'agenzia immobiliare e cinque risposte che puoi pretendere — puntualità, chiarezza, struttura, catasto e condominio, tempi di consegna e difformità sanabili. Guida Righetto Immobiliare, Padova e 101 comuni. Complemento a <a href="blog-5-errori-visita-immobile-padova-2026">cosa non fare in visita</a>.</p>
 </div>
 
-<p>Hai prenotato visita o consulenza in agenzia. Ottimo. Ora evita il film italiano medio: <em>«ah queste cose si vedono al rogito»</em>, detto con sorriso da commesso di scarpe. No. Alcune cose si vedono <strong>prima</strong>, a voce alta, con l'agente che ha l'incarico e conosce l'immobile meglio di chi legge tre righe su Idealista.</p>
+<div class="intro-lead">
+<span class="lead-kicker">Prima pagina — senza frasi fatte</span>
+{v0_interrogatorio_scuola()}
+<p>Immagina l'appuntamento in agenzia come un <strong>interrogatorio a scuola</strong> — ma con posti invertiti nei ruoli che contano: tu alzi la mano e chiedi; l'agente, se è preparato, risponde con la sicurezza di chi conosce l'incarico. Non è scontato, non è aggressivo: è il modo più rapido per capire se quell'immobile merita una seconda visita o se conviene alzarsi e andare a cercare altrove.</p>
+<p>Molti acquirenti entrano in agenzia come in una vetrina: guardano, annuiscono, escono. Poi al rogito scoprono il tetto condominiale da rifare o la veranda senza titolo. Il professionista che ti riceve <strong>non è un ostacolo da aggirare</strong> — è la persona che ha parlato con il venditore, ha le chiavi e ha visto altri clienti reagire allo stesso annuncio. Interrogarlo con metodo non ti rende difficile: ti rende acquirente.</p>
+<p>Qui sotto trovi le cinque domande essenziali, ciascuna con vignetta, cosa pretendere come risposta minima e cosa fare se l'agenzia arranca. Per il dettaglio legale da notaio: <a href="blog-documenti-compravendita-rogito-padova-2026">guida documenti rogito</a>. Per gli errori da evitare come cliente: <a href="blog-5-errori-visita-immobile-padova-2026">5 errori in visita</a>.</p>
+</div>
 
-<p>Questo articolo non è un elenco legale da notaio — per quello c'è la <a href="blog-documenti-compravendita-rogito-padova-2026">guida documenti rogito</a>. È la <strong>lista delle domande che un acquirente sveglio fa seduto al tavolo</strong>, prima ancora di chiedere se è trattabile (già detto: non alla soglia). Con vignette scherzose, perché imparare con un sorriso resta più facile che con un verbale.</p>
-
-<p>Il mercato padovano del 2026 è veloce: immobili ben posizionati ricevono visite in giorni. Chi arriva all'appuntamento <strong>senza domande</strong> sembra curioso; chi arriva con cinque domande precise sembra acquirente. La differenza, alla fine, si traduce in priorità sulle chiamate dell'agente — lo stesso meccanismo che abbiamo descritto per i clienti rispettosi nell'articolo sugli errori in visita.</p>
-
-<p>In questa guida trovi per ogni domanda: <strong>cosa chiedere</strong>, <strong>cosa pretendere</strong> (risposta minima accettabile) e <strong>cosa fare se l'agenzia arranca</strong>. Non serve essere avvocati. Serve essere persone che rispettano il proprio tempo.</p>
-
-<div class="ask-card"><strong>Pretesa legittima:</strong> un'agenzia seria non si offende se chiedi — si offende se <em>non</em> sai chiedere e poi litighi al compromesso. Porta un foglio con le cinque domande se serve: non sei a un esame, sei a un acquisto che può valere centinaia di migliaia di euro.</div>
+<div class="ask-card"><strong>Il quaderno delle cinque domande:</strong> portalo in tasca o nel telefono. Non sei in supplenza — stai valutando un acquisto che può durare vent'anni.</div>
 
 <h2 id="domanda-1">1. Puntualità — pretendila, e rispettala tu</h2>
 
@@ -425,7 +466,7 @@ def build_html(content: str, words: int) -> str:
 <div class="art-hero-overlay"><div class="art-hero-inner">
 <div class="breadcrumb"><a href="/">Home</a> / <a href="blog">Blog</a> / Appuntamento agenzia</div>
 <span class="cat-badge">Consigli acquisto</span>
-<h1><strong>5 domande da fare</strong> in agenzia — e cosa pretendere (senza vergogna)</h1>
+<h1><strong>5 domande da fare</strong> in agenzia — il cliente interroga, l'agente risponde</h1>
 <div class="art-hero-meta"><div class="av">G</div><span>Gino Capon</span><span>{DATE_IT}</span><span>11 min</span></div>
 </div></div>
 </div>
