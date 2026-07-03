@@ -92,6 +92,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 - **Batch max 5 articoli** con radici slug diverse (vedi §1.3).
 - Prima di ogni batch: `build_skimm.py` + `check_doppioni_sito.py` + questo file §3.
 - Report automatico venerdì 07:00 → `info@righettoimmobiliare.it` (workflow `venerdi-contenuti-freschezza.yml`).
+- **Checklist agente venerdì:** `skill-massimo-punteggio.md` **§4** (compliance 0/0, patch script, matrice 8/8).
 
 ---
 

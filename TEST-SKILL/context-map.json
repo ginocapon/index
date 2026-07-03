@@ -127,9 +127,11 @@
       "output": "Issue GitHub label 'seo-check' — focus su regole skill-seo.md"
     },
     "google_compliance_check": {
-      "workflow": "locale + venerdì",
+      "workflow": "locale + venerdì (agente)",
       "script": "scripts/google-compliance-check.py",
-      "output": "google-compliance-report.md — tutte le regole Google 2026"
+      "patch": ["scripts/patch_righetto_sol_blog.py", "scripts/patch_compliance_warns.py"],
+      "target": "0 ERR, 0 WARN — skill-massimo-punteggio.md §4",
+      "output": "google-compliance-report.md (gitignore, rigenerabile)"
     },
     "venerdi_contenuti_freschezza": {
       "workflow": ".github/workflows/venerdi-contenuti-freschezza.yml",

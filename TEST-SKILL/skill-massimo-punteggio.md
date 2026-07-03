@@ -157,7 +157,60 @@ Verifica rapida post-modifica: homepage play video, `immobili?vt=1` filtra tour,
 
 ---
 
-## 4. Priorità fix quando punteggio < 100%
+## 4. Checklist venerdì — controllo completo (agente + cron)
+
+> **Quando:** ogni venerdì, dopo le GitHub Actions (~07:00 CEST) o su richiesta «cosa fare questa settimana».  
+> **Ordine:** leggere prima questa sezione, poi email/Issue `info@righettoimmobiliare.it`.
+
+### 4.1 Automazioni già attive (non rifare a mano se OK)
+
+| Ora (CEST) | Workflow | Output |
+|---|---|---|
+| 07:00 | `venerdi-contenuti-freschezza.yml` | Issue `contenuti-freschezza` + email SKIMM/pillar/5 azioni |
+| 07:00 | `audit-settimanale.yml` | Issue `audit` + email audit SKILL |
+| 07:00 | `mini-seo-check.yml` | Issue `seo-check` |
+| 08:00 (mar+ven) | `security-check-bisettimanale.yml` | Issue `security` |
+
+### 4.2 Comandi agente (locale — obbligatori se WARN/ERR o dopo modifiche settimana)
+
+```bash
+python scripts/google-compliance-check.py      # target: 0 ERR, 0 WARN
+python scripts/build_skimm.py                  # 0 angoli indefiniti
+python scripts/check_doppioni_sito.py          # prima di nuovo articolo
+python scripts/venerdi-contenuti-freschezza.py # anteprima report (opzionale)
+```
+
+**Se compliance < 100%:**
+
+```bash
+python scripts/patch_righetto_sol_blog.py      # righetto-sol mancante
+python scripts/patch_compliance_warns.py       # title/meta/geo/breadcrumb/stuffing
+python scripts/google-compliance-check.py      # ri-verifica fino a 0/0
+```
+
+### 4.3 Verifica manuale rapida (5 min)
+
+- [ ] Matrice **8/8** (`§3b`): Player, Alert, Tour, Live + Blog, Zone, Chat, Valut.
+- [ ] Homepage: play video spot; `/immobili`: alert, filtro tour 360°, CTA visita live
+- [ ] Issue/email venerdì: applicare **azione prioritaria #1** del report contenuti
+- [ ] Search Console (se disponibile): 1 query da migliorare (CTR o pos. 11–20)
+
+### 4.4 Ritmo editoriale minimo
+
+| Frequenza | Azione |
+|---|---|
+| Settimanale | 1 articolo nuovo **oppure** refresh dato su articolo top traffico |
+| Settimanale | Timestamp «Ultimo aggiornamento» su pillar toccati |
+| Mensile | 1 refresh OMI/BCE/FIMAA su articolo mercato |
+| Su segnalazione cron | `ANGLE_OVERRIDES` in `build_skimm.py` per angoli generici |
+
+### 4.5 Unico gap off-site
+
+Backlink / Domain Authority — PR esterno, non codice. Non blocca il deploy.
+
+---
+
+## 5. Priorità fix quando punteggio < 100%
 
 1. Errori rossi `google-compliance-check.py`
 2. Angoli SKIMM incompleti → `ANGLE_OVERRIDES` in `build_skimm.py`

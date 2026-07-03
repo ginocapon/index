@@ -3,6 +3,7 @@
 
 > **Versione:** 2.0 — 15 Marzo 2026 (patch contenuti **3 Aprile 2026**)
 > **Gate obbligatorio agente:** **`TEST-SKILL/skill-massimo-punteggio.md`** — leggere prima di ogni modifica.
+> **Changelog 3 luglio 2026 — e):** checklist venerdì unificata — `skill-massimo-punteggio.md` §4.
 > **Changelog 3 luglio 2026 — d):** batch `righetto-sol` su tutti i blog — `scripts/patch_righetto_sol_blog.py`, `css/blog-rich.css?v=3`.
 > **Changelog 3 luglio 2026 — c):** `skill-massimo-punteggio.md` + `google-compliance-check.py` (checklist Google completa, strumenti gratuiti).
 > **Unica fonte di verita'** — Sostituisce SKILL-UNIFICATA.md, AUTOMATION-SITE-2026.md e CLAUDE.md
@@ -1044,6 +1045,16 @@ Aggiornamento sostanziale di articolo **esistente** (nuova edizione anno, dati O
 - Dopo ogni batch: commit `skimm.md` + `skimm.json` insieme agli HTML
 
 **Secret richiesto:** `EMAIL_RELAY_KEY` in GitHub repo secrets (stesso di `audit-settimanale.yml`).
+
+**Compliance on-site (agente — ogni venerdì o dopo batch):**
+
+```bash
+python scripts/google-compliance-check.py    # target: Salute 100%, 0 ERR, 0 WARN
+python scripts/patch_righetto_sol_blog.py    # righetto-sol su blog privi
+python scripts/patch_compliance_warns.py     # WARN residui title/meta/geo/stuffing
+```
+
+Checklist completa venerdì: **`skill-massimo-punteggio.md` §4** (automazioni, comandi, verifica 8/8, ritmo editoriale).
 
 ### 8.2.5 AEO / ricerca assistita — AI Overviews, AI Mode e agent (OBBLIGATORIO su pillar macro 2026+)
 
