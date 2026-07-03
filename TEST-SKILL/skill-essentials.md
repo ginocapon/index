@@ -1,4 +1,5 @@
 # SKILL-ESSENTIALS — Righetto Immobiliare
+> **GATE:** leggi prima **`TEST-SKILL/skill-massimo-punteggio.md`** (checklist Google completa + strumenti gratuiti).  
 > Carica SEMPRE questo file. Contiene le regole operative core.
 > Versione estratta da SKILL-2.0.md — Maggio 2026
 

@@ -2,17 +2,13 @@
   "generated": "2026-07-03",
   "count": 99,
   "risks": [
-    "Intent simile `acquisto-e-prima-casa`: blog-caparra-confirmatoria-padova, blog-comprare-affittare-padova, blog-planimetria-catastale-compravendita-padova-2026, blog-scegliere-immobile-giusto-padova-2026",
     "Intent simile `breakdown-costi`: blog-costi-proprieta-acquisto-possesso-vendita-padova-2026, blog-costi-costruzione-istat-padova-2026",
     "Intent simile `territorio-limena`: blog-limena-vicino-padova-comprare-2026, blog-mercato-immobiliare-limena-2026, blog-appartamento-nuova-costruzione-limena, blog-direttiva-case-green-limena-padova",
     "Intent simile `fisco-normativa`: blog-quattro-imposte-rogitio-prima-casa-padova-2026, blog-bonus-mobili-2026-massimizzare-ristrutturazioni, blog-imposte-registro-catasto-compravendita-padova-2026, blog-tasse-vendita-casa",
     "Intent simile `analisi-scenari`: blog-bolla-immobiliare-padova-2026, blog-previsioni-immobiliari-scenari-geopolitica-2026, blog-prospettive-mercato-residenziale-italia-2026",
-    "Intent simile `mercato-e-dati`: blog-case-piu-vendute-tipologie-padova-2026, blog-compravendite-veneto-cintura-padova-2026, blog-crisi-immobiliare-padova-2026, blog-mercato-immobiliare-padova-2026…",
     "Intent simile `territorio-padova`: blog-prezzi-case-padova-zona-2026, blog-scuole-istruzione-padova, blog-servizi-infrastrutture-padova, blog-trasporti-mobilita-padova",
     "Intent simile `mutui-cluster`: blog-mutui-selettivi-banche-padova-2026, blog-mutuo-fisso-variabile-padova-2026, blog-mutuo-prima-casa-padova, blog-tassi-mutui-minimi-approfittarne-padova-2026",
     "Intent simile `documenti-operativi`: blog-mutuo-documenti-tempi-prima-casa-padova-2026, blog-documenti-compravendita-rogito-padova-2026, blog-documenti-vendita-casa",
-    "Intent simile `servizi-e-istituzionale`: blog-permuta-immobiliare-padova-2026, blog-successione-immobiliare-padova",
-    "Intent simile `vendita`: blog-case-vendita-padova, blog-home-staging-padova, blog-offerta-stock-vendita-italia-2026, blog-tempi-vendita-casa-padova",
     "Intent simile `vita-agenzia-brand`: blog-ca-marcello-mestre, blog-impegno-quotidiano-agenzia-immobiliare",
     "Token slug sovrausato `mercato` (9 articoli) — variare radice nei prossimi batch",
     "Coppia da non fondere (Insights 490 vs pillar +8%): blog-stanza-universitaria-padova-canoni-2026 ↔ blog-affitti-padova-canoni-2026",
@@ -49,9 +45,9 @@
       "title": "Caparra Confirmatoria: Guida Completa Compravendita Padova",
       "categoria": "",
       "cluster": "Acquisto e prima casa",
-      "kw_primaria": "caparra-confirmatoria",
-      "angolo": "Angolo da definire — verificare overlap cluster (Caparra Confirmatoria: Guida Completa Compravendita Padova)",
-      "intent": "acquisto-e-prima-casa",
+      "kw_primaria": "caparra-confirmatoria-compravendita",
+      "angolo": "Caparra confirmatoria vs penitenziale — guida operativa rogito",
+      "intent": "acquisto-caparra-normativa",
       "h1": "Caparra Confirmatoria: Guida Completa per Chi Compra o Vende Casa a Padova"
     },
     {
@@ -71,9 +67,9 @@
       "title": "Comprare o Affittare Casa a Padova? Analisi Dati Reali su 20 Anni",
       "categoria": "",
       "cluster": "Acquisto e prima casa",
-      "kw_primaria": "comprare-affittare",
-      "angolo": "Angolo da definire — verificare overlap cluster (Comprare o Affittare Casa a Padova? Analisi Dati Reali su 20)",
-      "intent": "acquisto-e-prima-casa",
+      "kw_primaria": "comprare-affittare-confronto-padova",
+      "angolo": "Confronto dati comprare vs affittare — decisione budget",
+      "intent": "acquisto-vs-locazione",
       "h1": "Conviene comprare casa a Padova o restare in affitto?Analisi reale dei costi su 20 anni"
     },
     {
@@ -137,9 +133,9 @@
       "title": "Planimetria catastale e compravendita nel Padovano: controlli prima del rogito (2026)",
       "categoria": "",
       "cluster": "Acquisto e prima casa",
-      "kw_primaria": "planimetria-catastale-compravendita",
-      "angolo": "Angolo da definire — verificare overlap cluster (Planimetria catastale e compravendita nel Padovano: controll)",
-      "intent": "acquisto-e-prima-casa",
+      "kw_primaria": "planimetria-catastale-verifica-rogito",
+      "angolo": "Controllo planimetria pre-rogito — non checklist generica",
+      "intent": "acquisto-documenti-catasto",
       "h1": "Planimetria catastale e compravendita nel Padovano (2026)"
     },
     {
@@ -159,9 +155,9 @@
       "title": "Come scegliere l'immobile giusto a Padova 2026: zona, luce, condominio, impianti",
       "categoria": "",
       "cluster": "Acquisto e prima casa",
-      "kw_primaria": "scegliere-immobile-giusto",
-      "angolo": "Angolo da definire — verificare overlap cluster (Come scegliere l'immobile giusto a Padova 2026: zona, luce, )",
-      "intent": "acquisto-e-prima-casa",
+      "kw_primaria": "scegliere-immobile-zona-luce-padova",
+      "angolo": "Criteri scelta immobile (zona, luce, spese) — non guida 10 passi",
+      "intent": "acquisto-criteri-scelta",
       "h1": "Scegliere l'immobile giusto a Padova: criteri oltre il prezzo al metro quadro"
     },
     {
@@ -346,9 +342,9 @@
       "title": "Gestione spese casa dopo l'acquisto a Padova 2026: energia, IMU, dispensa",
       "categoria": "",
       "cluster": "Altri / trasversali",
-      "kw_primaria": "gestione-spese-casa-risparmio",
-      "angolo": "Angolo da definire — verificare overlap cluster (Gestione spese casa dopo l'acquisto a Padova 2026: energia, )",
-      "intent": "altri-/-trasversali",
+      "kw_primaria": "gestione-spese-casa-possesso-padova",
+      "angolo": "Spese possesso post-acquisto (energia, IMU) — non costi rogito",
+      "intent": "possesso-costi-gestione",
       "h1": "Gestione spese casa dopo l'acquisto a Padova: risparmio, manutenzione e valore dell'immobile"
     },
     {
@@ -379,9 +375,9 @@
       "title": "Condono edilizio 2026: proposte in Manovra | Guida Padova",
       "categoria": "",
       "cluster": "Fisco e normativa",
-      "kw_primaria": "condono-edilizio-proposte",
-      "angolo": "Angolo da definire — verificare overlap cluster (Condono edilizio 2026: proposte in Manovra | Guida Padova)",
-      "intent": "fisco-e-normativa",
+      "kw_primaria": "condono-edilizio-manovra-2026",
+      "angolo": "Proposte normative condono — non bonus edilizi",
+      "intent": "normativa-condono",
       "h1": "Sanatorie edilizie: cosa è davvero in discussione (e cosa non è ancora legge)"
     },
     {
@@ -412,9 +408,9 @@
       "title": "Investimenti immobiliari 2026: trend da Real Estate Summit | Padova",
       "categoria": "",
       "cluster": "Investimenti",
-      "kw_primaria": "trend-investimenti-immobiliari-summit",
-      "angolo": "Angolo da definire — verificare overlap cluster (Investimenti immobiliari 2026: trend da Real Estate Summit |)",
-      "intent": "investimenti",
+      "kw_primaria": "trend-investimenti-summit-2026",
+      "angolo": "Evento Real Estate Summit — non investire Padova pillar",
+      "intent": "investimenti-evento-summit",
       "h1": "Real Estate 2026: credito, living innovativo e rigenerazione — guida per il Padovano"
     },
     {
@@ -434,9 +430,9 @@
       "title": "Patrimonio casa e resilienza urbana: lezioni dal contesto globale per il Nord-Est",
       "categoria": "",
       "cluster": "Macro e geopolitica",
-      "kw_primaria": "patrimonio-casa-resilienza-mercati-globali",
-      "angolo": "Angolo da definire — verificare overlap cluster (Patrimonio casa e resilienza urbana: lezioni dal contesto gl)",
-      "intent": "macro-e-geopolitica",
+      "kw_primaria": "patrimonio-casa-resilienza-urbana",
+      "angolo": "Resilienza patrimonio vs shock globali — macro trasversale",
+      "intent": "macro-patrimonio-resilienza",
       "h1": "Patrimonio casa e resilienza urbana: contesto globale, scelte locali"
     },
     {
@@ -456,9 +452,9 @@
       "title": "Case più vendute a Padova: tipologie e metrature 2026",
       "categoria": "",
       "cluster": "Mercato e dati",
-      "kw_primaria": "case-piu-vendute-tipologie",
-      "angolo": "Angolo da definire — verificare overlap cluster (Case più vendute a Padova: tipologie e metrature 2026)",
-      "intent": "mercato-e-dati",
+      "kw_primaria": "case-piu-vendute-tipologie-padova",
+      "angolo": "Tipologie/metrature più vendute — dato mercato locale",
+      "intent": "mercato-tipologie-vendita",
       "h1": "Case più vendute nel Padovano: tipologie, metrature e cosa chiede il mercato nel 2026"
     },
     {
@@ -489,9 +485,9 @@
       "title": "Compravendite Veneto e cintura Padova: lettura dati territoriali 2026",
       "categoria": "",
       "cluster": "Mercato e dati",
-      "kw_primaria": "compravendite-cintura",
-      "angolo": "Angolo da definire — verificare overlap cluster (Compravendite Veneto e cintura Padova: lettura dati territor)",
-      "intent": "mercato-e-dati",
+      "kw_primaria": "compravendite-veneto-cintura-padova",
+      "angolo": "Transazioni cintura Padovana — non Q1 nazionale ADE",
+      "intent": "mercato-transazioni-cintura",
       "h1": "Compravendite nel Veneto e sulla cintura del capoluogo patavino"
     },
     {
@@ -511,9 +507,9 @@
       "title": "Crisi Immobiliare Padova 2026: Prezzi e Compravendite",
       "categoria": "",
       "cluster": "Mercato e dati",
-      "kw_primaria": "crisi-immobiliare",
-      "angolo": "Angolo da definire — verificare overlap cluster (Crisi Immobiliare Padova 2026: Prezzi e Compravendite)",
-      "intent": "mercato-e-dati",
+      "kw_primaria": "crisi-immobiliare-padova-analisi",
+      "angolo": "Scenario crisi/correzione locale — fonte verificata, no allarmismo",
+      "intent": "mercato-scenario-crisi",
       "h1": "Crisi Immobiliare 2026: Cosa Succede a Padova tra Prezzi e Compravendite"
     },
     {
@@ -544,9 +540,9 @@
       "title": "Mercato Immobiliare Padova 2026: Prezzi, Tendenze e Previsioni",
       "categoria": "",
       "cluster": "Mercato e dati",
-      "kw_primaria": "mercato-immobiliare",
-      "angolo": "Angolo da definire — verificare overlap cluster (Mercato Immobiliare Padova 2026: Prezzi, Tendenze e Previsio)",
-      "intent": "mercato-e-dati",
+      "kw_primaria": "mercato-immobiliare-padova-pillar-2026",
+      "angolo": "Pillar mercato città prezzi/trend — non quartiere singolo",
+      "intent": "mercato-pillar-citta",
       "h1": "Mercato Immobiliare Padova 2026: Prezzi, Tendenze e Previsioni"
     },
     {
@@ -555,9 +551,9 @@
       "title": "Immobili Centro Storico Padova 2026: Prezzi, Rendimenti e Analisi",
       "categoria": "",
       "cluster": "Mercato e dati",
-      "kw_primaria": "mercato-immobiliare-centro",
-      "angolo": "Angolo da definire — verificare overlap cluster (Immobili Centro Storico Padova 2026: Prezzi, Rendimenti e An)",
-      "intent": "mercato-e-dati",
+      "kw_primaria": "mercato-centro-storico-padova",
+      "angolo": "Micro-mercato Centro Storico — non pillar città intera",
+      "intent": "mercato-quartiere-centro",
       "h1": "Immobili nel Centro Storico di Padova: Analisi 2026"
     },
     {
@@ -566,9 +562,9 @@
       "title": "Mercato immobiliare a Piazzola sul Brenta nel 2026: come leggere OMI e contesto provinciale",
       "categoria": "",
       "cluster": "Mercato e dati",
-      "kw_primaria": "mercato-immobiliare-piazzola-sul-brenta",
-      "angolo": "Angolo da definire — verificare overlap cluster (Mercato immobiliare a Piazzola sul Brenta nel 2026: come leg)",
-      "intent": "mercato-e-dati",
+      "kw_primaria": "mercato-piazzola-sul-brenta",
+      "angolo": "Mercato Piazzola/comuni PD — geografia diversa da Padova",
+      "intent": "mercato-territorio-piazzola",
       "h1": "Mercato immobiliare a Piazzola sul Brenta nel 2026: metodo OMI e contesto"
     },
     {
@@ -599,9 +595,9 @@
       "title": "Nuove costruzioni Veneto 2026: +14,6% e cintura PD",
       "categoria": "",
       "cluster": "Mercato e dati",
-      "kw_primaria": "nuove-costruzioni-mercato",
-      "angolo": "Angolo da definire — verificare overlap cluster (Nuove costruzioni Veneto 2026: +14,6% e cintura PD)",
-      "intent": "mercato-e-dati",
+      "kw_primaria": "nuove-costruzioni-veneto-plus-14",
+      "angolo": "Dato permessi/cantieri +14,6% Veneto — non costi costruzione ISTAT",
+      "intent": "mercato-nuove-costruzioni",
       "h1": "Nuove costruzioni nel Veneto 2026: +14,6% ADE e cintura padovana"
     },
     {
@@ -632,9 +628,9 @@
       "title": "Prezzi case Padova 2026: -4% in città, provincia traina | FIAIP",
       "categoria": "",
       "cluster": "Mercato e dati",
-      "kw_primaria": "prezzi-provincia-fiaip",
-      "angolo": "Angolo da definire — verificare overlap cluster (Prezzi case Padova 2026: -4% in città, provincia traina | FI)",
-      "intent": "mercato-e-dati",
+      "kw_primaria": "prezzi-padova-provincia-fiaip",
+      "angolo": "FIMAA -4% città / provincia traina — non OMI quartieri",
+      "intent": "mercato-dato-fiaip",
       "h1": "Padova in flessione, provincia in crescita: dati FIAIP e cosa fare nel 2026"
     },
     {
@@ -797,9 +793,9 @@
       "title": "Permuta immobiliare nel Padovano: come funziona e quali cautele adottare (2026)",
       "categoria": "",
       "cluster": "Servizi e istituzionale",
-      "kw_primaria": "permuta-immobiliare",
-      "angolo": "Angolo da definire — verificare overlap cluster (Permuta immobiliare nel Padovano: come funziona e quali caut)",
-      "intent": "servizi-e-istituzionale",
+      "kw_primaria": "permuta-immobiliare-padova-operativa",
+      "angolo": "Permuta operativa cautele — servizio agenzia",
+      "intent": "servizi-permuta",
       "h1": "Permuta immobiliare nel Padovano: struttura e cautele (2026)"
     },
     {
@@ -819,9 +815,9 @@
       "title": "Casa Ereditata Padova: Successione e Vendita",
       "categoria": "",
       "cluster": "Servizi e istituzionale",
-      "kw_primaria": "successione-immobiliare",
-      "angolo": "Angolo da definire — verificare overlap cluster (Casa Ereditata Padova: Successione e Vendita)",
-      "intent": "servizi-e-istituzionale",
+      "kw_primaria": "successione-immobile-ereditato-padova",
+      "angolo": "Casa ereditata vendita/successione — non imposte rogito",
+      "intent": "servizi-successione",
       "h1": "Casa Ereditata a Padova:Cosa Fare, Tasse e Come Venderla nel 2026"
     },
     {
@@ -929,9 +925,9 @@
       "title": "Case in Vendita Padova 2026: Prezzi, Zone e Guida Esperta",
       "categoria": "",
       "cluster": "Vendita",
-      "kw_primaria": "case-vendita",
-      "angolo": "Angolo da definire — verificare overlap cluster (Case in Vendita Padova 2026: Prezzi, Zone e Guida Esperta)",
-      "intent": "vendita",
+      "kw_primaria": "case-vendita-padova-guida-zone",
+      "angolo": "Guida zone/prezzi vendita evergreen — pillar acquirenti vendita",
+      "intent": "vendita-guida-zone",
       "h1": "Case in Vendita a Padova nel 2026: Prezzi, Zone Migliori e Guida Completa"
     },
     {
@@ -973,9 +969,9 @@
       "title": "Home Staging Padova: Vendere Casa Prima e Meglio",
       "categoria": "",
       "cluster": "Vendita",
-      "kw_primaria": "home-staging",
-      "angolo": "Angolo da definire — verificare overlap cluster (Home Staging Padova: Vendere Casa Prima e Meglio)",
-      "intent": "vendita",
+      "kw_primaria": "home-staging-vendita-padova",
+      "angolo": "Home staging pre-vendita — non strategie pricing",
+      "intent": "vendita-home-staging",
       "h1": "La tua casa non si vende?Il problema potrebbe essere la presentazione"
     },
     {
@@ -995,9 +991,9 @@
       "title": "Stock case in vendita Italia: -5% nel Q1 2026 | Guida Padova",
       "categoria": "",
       "cluster": "Vendita",
-      "kw_primaria": "offerta-stock-vendita",
-      "angolo": "Angolo da definire — verificare overlap cluster (Stock case in vendita Italia: -5% nel Q1 2026 | Guida Padova)",
-      "intent": "vendita",
+      "kw_primaria": "stock-vendita-italia-q1-minus-5",
+      "angolo": "Stock nazionale -5% Q1 — non record transazioni Padova",
+      "intent": "mercato-stock-nazionale",
       "h1": "Menù case in vendita più scarso: cosa cambia per chi compra o vende a Padova"
     },
     {
@@ -1028,9 +1024,9 @@
       "title": "Tempi Vendita Casa Padova 2026: Quanto Ci Vuole Davvero?",
       "categoria": "",
       "cluster": "Vendita",
-      "kw_primaria": "tempi-vendita-casa",
-      "angolo": "Angolo da definire — verificare overlap cluster (Tempi Vendita Casa Padova 2026: Quanto Ci Vuole Davvero?)",
-      "intent": "vendita",
+      "kw_primaria": "tempi-vendita-casa-padova-medi",
+      "angolo": "Tempi medi vendita reali Padova — non costi vendita",
+      "intent": "vendita-tempi",
       "h1": "Tempi Vendita Casa a Padova nel 2026: Quanto Ci Vuole Davvero?"
     },
     {
@@ -1050,9 +1046,9 @@
       "title": "Cosa distingue un'agenzia immobiliare di alto livello: risposte rapide, processi chiari e tool digitali",
       "categoria": "",
       "cluster": "Vita d'agenzia",
-      "kw_primaria": "agenzia-immobiliare-top-servizi",
-      "angolo": "Angolo da definire — verificare overlap cluster (Cosa distingue un'agenzia immobiliare di alto livello: rispo)",
-      "intent": "vita-d'agenzia",
+      "kw_primaria": "agenzia-immobiliare-servizi-top-padova",
+      "angolo": "Servizi differenzianti agenzia — E-E-A-T conversione",
+      "intent": "vita-agenzia-servizi",
       "h1": "Un'agenzia immobiliare di fascia alta: cosa deve offrire oggi (e cosa offriamo noi)"
     },
     {

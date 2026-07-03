@@ -97,19 +97,15 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 
 ## 2. Stato verifica automatica
 
-**17 avvisi** al generazione 2026-07-03:
+**13 avvisi** al generazione 2026-07-03:
 
-- Intent simile `acquisto-e-prima-casa`: blog-caparra-confirmatoria-padova, blog-comprare-affittare-padova, blog-planimetria-catastale-compravendita-padova-2026, blog-scegliere-immobile-giusto-padova-2026
 - Intent simile `breakdown-costi`: blog-costi-proprieta-acquisto-possesso-vendita-padova-2026, blog-costi-costruzione-istat-padova-2026
 - Intent simile `territorio-limena`: blog-limena-vicino-padova-comprare-2026, blog-mercato-immobiliare-limena-2026, blog-appartamento-nuova-costruzione-limena, blog-direttiva-case-green-limena-padova
 - Intent simile `fisco-normativa`: blog-quattro-imposte-rogitio-prima-casa-padova-2026, blog-bonus-mobili-2026-massimizzare-ristrutturazioni, blog-imposte-registro-catasto-compravendita-padova-2026, blog-tasse-vendita-casa
 - Intent simile `analisi-scenari`: blog-bolla-immobiliare-padova-2026, blog-previsioni-immobiliari-scenari-geopolitica-2026, blog-prospettive-mercato-residenziale-italia-2026
-- Intent simile `mercato-e-dati`: blog-case-piu-vendute-tipologie-padova-2026, blog-compravendite-veneto-cintura-padova-2026, blog-crisi-immobiliare-padova-2026, blog-mercato-immobiliare-padova-2026…
 - Intent simile `territorio-padova`: blog-prezzi-case-padova-zona-2026, blog-scuole-istruzione-padova, blog-servizi-infrastrutture-padova, blog-trasporti-mobilita-padova
 - Intent simile `mutui-cluster`: blog-mutui-selettivi-banche-padova-2026, blog-mutuo-fisso-variabile-padova-2026, blog-mutuo-prima-casa-padova, blog-tassi-mutui-minimi-approfittarne-padova-2026
 - Intent simile `documenti-operativi`: blog-mutuo-documenti-tempi-prima-casa-padova-2026, blog-documenti-compravendita-rogito-padova-2026, blog-documenti-vendita-casa
-- Intent simile `servizi-e-istituzionale`: blog-permuta-immobiliare-padova-2026, blog-successione-immobiliare-padova
-- Intent simile `vendita`: blog-case-vendita-padova, blog-home-staging-padova, blog-offerta-stock-vendita-italia-2026, blog-tempi-vendita-casa-padova
 - Intent simile `vita-agenzia-brand`: blog-ca-marcello-mestre, blog-impegno-quotidiano-agenzia-immobiliare
 - Token slug sovrausato `mercato` (9 articoli) — variare radice nei prossimi batch
 - Coppia da non fondere (Insights 490 vs pillar +8%): blog-stanza-universitaria-padova-canoni-2026 ↔ blog-affitti-padova-canoni-2026
@@ -129,17 +125,17 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 |---|---|---|
 | `blog-agevolazioni-prima-casa-2026` | `agevolazioni-prima-casa-2026` | Bonus e requisiti prima casa — non imposte rogito |
 | `blog-ape-prestazione-energetica-acquisto-padova-2026` | `ape-prestazione-energetica-acquisto` | APE in fase acquisto — non direttiva Case Green |
-| `blog-caparra-confirmatoria-padova` | `caparra-confirmatoria` | Angolo da definire — verificare overlap cluster (Caparra Confirmatoria: Guida Completa Compravendita Padova) |
+| `blog-caparra-confirmatoria-padova` | `caparra-confirmatoria-compravendita` | Caparra confirmatoria vs penitenziale — guida operativa rogito |
 | `blog-checklist-verifiche-prima-compromesso-padova-2026` | `checklist-verifiche-prima-compromesso` | Checklist pre-compromesso operativa — non guida acquisto generica |
-| `blog-comprare-affittare-padova` | `comprare-affittare` | Angolo da definire — verificare overlap cluster (Comprare o Affittare Casa a Padova? Analisi Dati Reali su 20) |
+| `blog-comprare-affittare-padova` | `comprare-affittare-confronto-padova` | Confronto dati comprare vs affittare — decisione budget |
 | `blog-comprare-casa-padova-guida-2026` | `comprare-casa-padova-guida-pillar` | Guida acquisto 10 passi — pillar prima casa Padova |
 | `blog-costi-proprieta-acquisto-possesso-vendita-padova-2026` | `costi-proprieta-acquisto-possesso-vendita` | Breakdown costi numerici — fonte verificabile obbligatoria |
 | `blog-dieci-errori-acquisto-casa-padova-2026` | `dieci-errori-acquisto-casa-padova` | Errori comuni acquirente — intent educativo |
 | `blog-limena-vicino-padova-comprare-2026` | `limena-vicino-comprare` | Focus Limena/cintura — non generico Padova centro |
 | `blog-limena-vs-padova-centro-dove-comprare-2026` | `limena-centro-confronto-acquisto` | Confronto Limena vs Centro — decisione acquirente |
-| `blog-planimetria-catastale-compravendita-padova-2026` | `planimetria-catastale-compravendita` | Angolo da definire — verificare overlap cluster (Planimetria catastale e compravendita nel Padovano: controll) |
+| `blog-planimetria-catastale-compravendita-padova-2026` | `planimetria-catastale-verifica-rogito` | Controllo planimetria pre-rogito — non checklist generica |
 | `blog-quattro-imposte-rogitio-prima-casa-padova-2026` | `quattro-imposte-rogitio-prima-casa` | Fisco/normativa — non dati mercato |
-| `blog-scegliere-immobile-giusto-padova-2026` | `scegliere-immobile-giusto` | Angolo da definire — verificare overlap cluster (Come scegliere l'immobile giusto a Padova 2026: zona, luce, ) |
+| `blog-scegliere-immobile-giusto-padova-2026` | `scegliere-immobile-zona-luce-padova` | Criteri scelta immobile (zona, luce, spese) — non guida 10 passi |
 | `blog-vigonza-rubano-comprare-casa-cintura-2026` | `vigonza-rubano-comprare-casa-cintura` | Focus Vigonza/Rubano — geografia cintura |
 
 ### Affitti e locazioni (15)
@@ -166,7 +162,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
-| `blog-gestione-spese-casa-risparmio-padova-2026` | `gestione-spese-casa-risparmio` | Angolo da definire — verificare overlap cluster (Gestione spese casa dopo l'acquisto a Padova 2026: energia, ) |
+| `blog-gestione-spese-casa-risparmio-padova-2026` | `gestione-spese-casa-possesso-padova` | Spese possesso post-acquisto (energia, IMU) — non costi rogito |
 
 ### Fisco e normativa (4)
 
@@ -174,7 +170,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 |---|---|---|
 | `blog-bonus-edilizi-2026-incentivi-casa-padova` | `bonus-edilizi-2026-incentivi` | Incentivi fiscali edilizia 2026 — non decreto urbanistica |
 | `blog-bonus-mobili-2026-massimizzare-ristrutturazioni` | `bonus-mobili-massimizzare-ristrutturazioni` | Fisco/normativa — non dati mercato |
-| `blog-condono-edilizio-proposte-2026` | `condono-edilizio-proposte` | Angolo da definire — verificare overlap cluster (Condono edilizio 2026: proposte in Manovra / Guida Padova) |
+| `blog-condono-edilizio-proposte-2026` | `condono-edilizio-manovra-2026` | Proposte normative condono — non bonus edilizi |
 | `blog-piano-casa-decreto-66-2026-padova` | `piano-casa-decreto-66-padova` | Normativa Decreto 66 edilizia — non bonus fiscali |
 
 ### Investimenti (2)
@@ -182,37 +178,37 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
 | `blog-investire-immobiliare-padova` | `investire-immobiliare-padova-rendimenti` | Investimento locativo Padova — non trend summit |
-| `blog-trend-investimenti-immobiliari-summit-2026` | `trend-investimenti-immobiliari-summit` | Angolo da definire — verificare overlap cluster (Investimenti immobiliari 2026: trend da Real Estate Summit /) |
+| `blog-trend-investimenti-immobiliari-summit-2026` | `trend-investimenti-summit-2026` | Evento Real Estate Summit — non investire Padova pillar |
 
 ### Macro e geopolitica (2)
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
 | `blog-eurocamera-accordo-dazi-usa-2026` | `eurocamera-accordo-dazi-sunset-2029` | Accordo istituzionale EU-USA — non filiera padovana |
-| `blog-patrimonio-casa-resilienza-mercati-globali-2026` | `patrimonio-casa-resilienza-mercati-globali` | Angolo da definire — verificare overlap cluster (Patrimonio casa e resilienza urbana: lezioni dal contesto gl) |
+| `blog-patrimonio-casa-resilienza-mercati-globali-2026` | `patrimonio-casa-resilienza-urbana` | Resilienza patrimonio vs shock globali — macro trasversale |
 
 ### Mercato e dati (20)
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
 | `blog-bolla-immobiliare-padova-2026` | `bolla-immobiliare` | Analisi scenari/proiezioni — citare fonte, no predizioni inventate |
-| `blog-case-piu-vendute-tipologie-padova-2026` | `case-piu-vendute-tipologie` | Angolo da definire — verificare overlap cluster (Case più vendute a Padova: tipologie e metrature 2026) |
+| `blog-case-piu-vendute-tipologie-padova-2026` | `case-piu-vendute-tipologie-padova` | Tipologie/metrature più vendute — dato mercato locale |
 | `blog-compravendite-italia-q1-agenzia-entrate-2026-padova` | `compravendite-italia-q1-ade` | Dato nazionale Q1 ADE — non record Padova locale |
 | `blog-compravendite-padova-record-2026` | `compravendite-padova-record-2026` | Record transazioni territorio — non stock nazionale |
-| `blog-compravendite-veneto-cintura-padova-2026` | `compravendite-cintura` | Angolo da definire — verificare overlap cluster (Compravendite Veneto e cintura Padova: lettura dati territor) |
+| `blog-compravendite-veneto-cintura-padova-2026` | `compravendite-veneto-cintura-padova` | Transazioni cintura Padovana — non Q1 nazionale ADE |
 | `blog-costi-costruzione-istat-padova-2026` | `costi-costruzione-istat` | Breakdown costi numerici — fonte verificabile obbligatoria |
-| `blog-crisi-immobiliare-padova-2026` | `crisi-immobiliare` | Angolo da definire — verificare overlap cluster (Crisi Immobiliare Padova 2026: Prezzi e Compravendite) |
+| `blog-crisi-immobiliare-padova-2026` | `crisi-immobiliare-padova-analisi` | Scenario crisi/correzione locale — fonte verificata, no allarmismo |
 | `blog-dazi-usa-ue-mercato-padova-2026` | `dazi-usa-ue-filiera-veneto-padova` | Impatto occupazione/credito Padova — non cronaca Strasburgo |
 | `blog-mercato-immobiliare-limena-2026` | `mercato-immobiliare-limena` | Focus Limena/cintura — non generico Padova centro |
-| `blog-mercato-immobiliare-padova-2026` | `mercato-immobiliare` | Angolo da definire — verificare overlap cluster (Mercato Immobiliare Padova 2026: Prezzi, Tendenze e Previsio) |
-| `blog-mercato-immobiliare-padova-centro-2026` | `mercato-immobiliare-centro` | Angolo da definire — verificare overlap cluster (Immobili Centro Storico Padova 2026: Prezzi, Rendimenti e An) |
-| `blog-mercato-immobiliare-piazzola-sul-brenta-2026` | `mercato-immobiliare-piazzola-sul-brenta` | Angolo da definire — verificare overlap cluster (Mercato immobiliare a Piazzola sul Brenta nel 2026: come leg) |
+| `blog-mercato-immobiliare-padova-2026` | `mercato-immobiliare-padova-pillar-2026` | Pillar mercato città prezzi/trend — non quartiere singolo |
+| `blog-mercato-immobiliare-padova-centro-2026` | `mercato-centro-storico-padova` | Micro-mercato Centro Storico — non pillar città intera |
+| `blog-mercato-immobiliare-piazzola-sul-brenta-2026` | `mercato-piazzola-sul-brenta` | Mercato Piazzola/comuni PD — geografia diversa da Padova |
 | `blog-mercato-italiano-tensioni-medio-oriente-2026` | `mercato-italiano-tensioni-medio-oriente` | Macro/geopolitica — impatto locale, non cronaca |
 | `blog-mercato-sacrocuore-padova-omi-2026` | `mercato-sacrocuore-omi` | Dato OMI/quotazioni ufficiali — non opinioni |
-| `blog-nuove-costruzioni-mercato-veneto-2026-padova` | `nuove-costruzioni-mercato` | Angolo da definire — verificare overlap cluster (Nuove costruzioni Veneto 2026: +14,6% e cintura PD) |
+| `blog-nuove-costruzioni-mercato-veneto-2026-padova` | `nuove-costruzioni-veneto-plus-14` | Dato permessi/cantieri +14,6% Veneto — non costi costruzione ISTAT |
 | `blog-previsioni-immobiliari-scenari-geopolitica-2026` | `previsioni-immobiliari-scenari-geopolitica` | Analisi scenari/proiezioni — citare fonte, no predizioni inventate |
 | `blog-prezzi-case-padova-zona-2026` | `prezzi-case-zona` | Territorio Padova — internal link a pagina zona |
-| `blog-prezzi-padova-provincia-fiaip-2026` | `prezzi-provincia-fiaip` | Angolo da definire — verificare overlap cluster (Prezzi case Padova 2026: -4% in città, provincia traina / FI) |
+| `blog-prezzi-padova-provincia-fiaip-2026` | `prezzi-padova-provincia-fiaip` | FIMAA -4% città / provincia traina — non OMI quartieri |
 | `blog-prospettive-mercato-residenziale-italia-2026` | `prospettive-mercato-residenziale` | Analisi scenari/proiezioni — citare fonte, no predizioni inventate |
 | `blog-sondaggio-bancaditalia-q1-2026-padova` | `sondaggio-bancaditalia` | Dato trimestrale verificato — aggiornare al prossimo Q |
 
@@ -237,9 +233,9 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
-| `blog-permuta-immobiliare-padova-2026` | `permuta-immobiliare` | Angolo da definire — verificare overlap cluster (Permuta immobiliare nel Padovano: come funziona e quali caut) |
+| `blog-permuta-immobiliare-padova-2026` | `permuta-immobiliare-padova-operativa` | Permuta operativa cautele — servizio agenzia |
 | `blog-scegliere-agenzia-immobiliare-padova-2026` | `scegliere-agenzia-immobiliare-padova` | Criteri scelta agenzia — trust/conversione locale |
-| `blog-successione-immobiliare-padova` | `successione-immobiliare` | Angolo da definire — verificare overlap cluster (Casa Ereditata Padova: Successione e Vendita) |
+| `blog-successione-immobiliare-padova` | `successione-immobile-ereditato-padova` | Casa ereditata vendita/successione — non imposte rogito |
 
 ### Sostenibilità e APE (2)
 
@@ -264,23 +260,23 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
 | `blog-casa-vendibile-5-anni-case-green-padova-2026` | `casa-vendibile-case-green-5-anni` | Vendibilità futura classe energetica — non Tribloc né domanda |
-| `blog-case-vendita-padova` | `case-vendita` | Angolo da definire — verificare overlap cluster (Case in Vendita Padova 2026: Prezzi, Zone e Guida Esperta) |
+| `blog-case-vendita-padova` | `case-vendita-padova-guida-zone` | Guida zone/prezzi vendita evergreen — pillar acquirenti vendita |
 | `blog-costi-vendere-casa-padova-2026` | `costi-vendere-casa-padova` | Breakdown costi vendita numerici — non strategie |
 | `blog-documenti-compravendita-rogito-padova-2026` | `documenti-compravendita-rogito` | Documenti operativi rogito/pratica — non strategia |
 | `blog-documenti-vendita-casa` | `documenti-vendita-casa` | Documenti operativi rogito/pratica — non strategia |
-| `blog-home-staging-padova` | `home-staging` | Angolo da definire — verificare overlap cluster (Home Staging Padova: Vendere Casa Prima e Meglio) |
+| `blog-home-staging-padova` | `home-staging-vendita-padova` | Home staging pre-vendita — non strategie pricing |
 | `blog-imposte-registro-catasto-compravendita-padova-2026` | `imposte-registro-catasto-compravendita` | Fisco/normativa — non dati mercato |
-| `blog-offerta-stock-vendita-italia-2026` | `offerta-stock-vendita` | Angolo da definire — verificare overlap cluster (Stock case in vendita Italia: -5% nel Q1 2026 / Guida Padova) |
+| `blog-offerta-stock-vendita-italia-2026` | `stock-vendita-italia-q1-minus-5` | Stock nazionale -5% Q1 — non record transazioni Padova |
 | `blog-percorso-vendita-immobile-padova-2026` | `percorso-vendita-immobile` | Strategia operativa vendita/acquisto — pillar intent |
 | `blog-tasse-vendita-casa` | `tasse-vendita-casa` | Fisco/normativa — non dati mercato |
-| `blog-tempi-vendita-casa-padova` | `tempi-vendita-casa` | Angolo da definire — verificare overlap cluster (Tempi Vendita Casa Padova 2026: Quanto Ci Vuole Davvero?) |
+| `blog-tempi-vendita-casa-padova` | `tempi-vendita-casa-padova-medi` | Tempi medi vendita reali Padova — non costi vendita |
 | `blog-vendita-immobiliare-padova-strategie-2026` | `vendita-immobiliare-strategie-padova` | Strategie vendita 2026 — pillar venditori |
 
 ### Vita d'agenzia (6)
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
-| `blog-agenzia-immobiliare-top-servizi-padova-2026` | `agenzia-immobiliare-top-servizi` | Angolo da definire — verificare overlap cluster (Cosa distingue un'agenzia immobiliare di alto livello: rispo) |
+| `blog-agenzia-immobiliare-top-servizi-padova-2026` | `agenzia-immobiliare-servizi-top-padova` | Servizi differenzianti agenzia — E-E-A-T conversione |
 | `blog-ca-marcello-mestre` | `marcello-mestre` | Vita d'agenzia / brand story — non guida mercato |
 | `blog-impegno-quotidiano-agenzia-immobiliare` | `impegno-quotidiano-agenzia-immobiliare` | Vita d'agenzia / brand story — non guida mercato |
 | `blog-righetto-storia-territorio-acquisizioni-2026` | `righetto-storia-territorio-acquisizioni` | Showcase portafoglio — E-E-A-T vita d'agenzia |

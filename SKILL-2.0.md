@@ -4,9 +4,11 @@ Il contenuto completo della skill (SEO, GEO, blog, checklist, architettura) si t
 
 **[`TEST-SKILL/SKILL-2.0.md`](TEST-SKILL/SKILL-2.0.md)**
 
-Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutturali. Prima di ogni **nuovo** articolo blog: **`TEST-SKILL/skimm.md`** + **§8.1a** (`check_doppioni_sito.py` + `build_skimm.py`). Qualità: **§8.1c** + **`skill-content.md` §2.1–2.2**.
+Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutturali. **Gate obbligatorio:** **`TEST-SKILL/skill-massimo-punteggio.md`**. Blog: **`TEST-SKILL/skimm.md`** + **§8.1a**. Qualità: **§8.1c** + **`skill-content.md` §2.1–2.2**.
 
 **Regole Cursor scoped:** [`TEST-SKILL/skill-cursor-rules.md`](TEST-SKILL/skill-cursor-rules.md) — 7 file `.mdc` in `.cursor/rules/` (pattern awesome-cursorrules).
+
+**Changelog rapido (3 luglio 2026 — c):** **`skill-massimo-punteggio.md`** + `google-compliance-check.py` — checklist Google completa.
 
 **Changelog rapido (3 luglio 2026 — b):** cron venerdì 07:00 CEST contenuti/SKIMM + email info@ — `venerdi-contenuti-freschezza.yml`, §8.1d.
 

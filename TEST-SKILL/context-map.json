@@ -2,7 +2,7 @@
   "_note": "Routing guide: quale skill caricare per ogni tipo di task. skill-essentials.md va SEMPRE caricata.",
   "_version": "1.2 — Maggio 2026 (Cursor rules scoped .mdc)",
 
-  "always_load": "TEST-SKILL/skill-essentials.md",
+  "always_load": "TEST-SKILL/skill-essentials.md,TEST-SKILL/skill-massimo-punteggio.md",
 
   "cursor_rules": {
     "_doc": "TEST-SKILL/skill-cursor-rules.md — regole .cursor/rules/*.mdc si attivano sui globs; core sempre attiva",
@@ -41,7 +41,7 @@
       "note": "Serve struttura zona + SEO locale + schema"
     },
     "audit_seo": {
-      "skills": ["skill-essentials.md", "skill-seo.md"],
+      "skills": ["skill-essentials.md", "skill-massimo-punteggio.md", "skill-seo.md"],
       "cursor_rules": ["righetto-seo-geo.mdc"],
       "token_stimati": "~2.200",
       "note": "Serve stato SERP + requisiti Google + KPI"
@@ -125,6 +125,11 @@
       "schedule": "Ogni venerdì 07:00 CET (assieme ad audit)",
       "script": "scripts/mini-seo-check.sh",
       "output": "Issue GitHub label 'seo-check' — focus su regole skill-seo.md"
+    },
+    "google_compliance_check": {
+      "workflow": "locale + venerdì",
+      "script": "scripts/google-compliance-check.py",
+      "output": "google-compliance-report.md — tutte le regole Google 2026"
     },
     "venerdi_contenuti_freschezza": {
       "workflow": ".github/workflows/venerdi-contenuti-freschezza.yml",

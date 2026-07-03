@@ -1,0 +1,157 @@
+# SKILL-MASSIMO-PUNTEGGIO — Righetto Immobiliare
+
+> **GATE OBBLIGATORIO:** leggere questo file **prima di ogni modifica** al sito (HTML, CSS, JS, blog, skill).  
+> Obiettivo: **10/10** su SEO tecnico, contenuti, CWV, E-E-A-T, GEO/AEO — nessuna regola Google esclusa.
+
+**Ordine lettura sessione (non saltare):**
+1. Questo file (`skill-massimo-punteggio.md`)
+2. `skill-essentials.md`
+3. `TEST-SKILL/skimm.md` (se blog/contenuti)
+4. Modulo task da `context-map.json` (seo → `skill-seo.md`, UI → `skill-design.md`, …)
+5. File HTML/CSS da modificare
+
+---
+
+## 1. Strumenti gratuiti (zero costo — usare sempre)
+
+| Strumento | URL / comando | Cosa verifica |
+|---|---|---|
+| **Google PageSpeed Insights** | https://pagespeed.web.dev/ | LCP, INP, CLS, opportunità |
+| **Lighthouse CLI** | `npx lighthouse URL --only-categories=performance,seo,accessibility,best-practices` | Audit locale completo |
+| **Google Search Console** | https://search.google.com/search-console | Indicizzazione, CWV campo, query |
+| **Rich Results Test** | https://search.google.com/test/rich-results | Schema JSON-LD valido |
+| **Schema Markup Validator** | https://validator.schema.org/ | Errori structured data |
+| **Mobile-Friendly Test** | https://search.google.com/test/mobile-friendly | Mobile-first indexing |
+| **WAVE** | https://wave.webaim.org/ | Accessibilità WCAG |
+| **axe DevTools** | Estensione Chrome gratuita | A11y automatica |
+| **Built-in repo** | `python scripts/google-compliance-check.py` | Checklist Google completa repo |
+| **Built-in repo** | `python scripts/build_skimm.py` + `check_doppioni_sito.py` | Anti-doppioni + keyword |
+| **Built-in repo** | `node scripts/validate-page.js --staged` | Pre-commit pagine |
+| **Built-in repo** | `bash scripts/mini-seo-check.sh` | Meta, schema, GEO, freshness |
+| **Built-in repo** | `bash scripts/audit-skill.sh` | Audit SKILL-2.0 strutturale |
+| **Built-in repo** | `python scripts/venerdi-contenuti-freschezza.py` | Blog corposità + pillar |
+
+**Routine post-modifica (locale):**
+```bash
+python scripts/google-compliance-check.py
+node scripts/validate-page.js --file pagina-modificata.html
+python scripts/build_skimm.py   # se tocchi blog
+```
+
+---
+
+## 2. Checklist Google 2026 — TUTTE le regole (nessuna esclusa)
+
+### 2.1 Indicizzazione e crawl
+- [ ] `robots.txt` non blocca pagine importanti né bot AI utili (GPTBot, Google-Extended, PerplexityBot)
+- [ ] `sitemap.xml` aggiornata, URL senza `.html`, `lastmod` coerente
+- [ ] Canonical unica per URL, senza `.html`
+- [ ] No link interni con `.html`
+- [ ] `noindex` solo su pagine admin/helper/404
+- [ ] HTTPS, no mixed content
+- [ ] Mobile-first: layout OK a 375px
+
+### 2.2 On-page SEO
+- [ ] `<title>` unico, ≤60 caratteri, keyword + località
+- [ ] Meta description unica, ≤160 caratteri, dato/beneficio
+- [ ] H1 unico allineato al title (variante, non copia)
+- [ ] Gerarchia H2/H3 logica, H2 domanda per AEO dove possibile
+- [ ] Alt text descrittivo su ogni `<img>`
+- [ ] OG + Twitter Card completi
+- [ ] Keyword stuffing: max 5× stessa frase 2+ parole; max 10× «a/di Padova»
+
+### 2.3 Core Web Vitals
+- [ ] LCP < 2,5s (target < 2s) — preload hero + font critici
+- [ ] INP < 200ms — no JS pesante above-fold
+- [ ] CLS < 0,1 — dimensioni esplicite img, no layout shift
+- [ ] No `loading="lazy"` su LCP/hero
+- [ ] CSS critico inline; resto `media="print" onload`
+- [ ] No `filter: blur` su animazioni; no `will-change` permanente
+- [ ] Immagini WebP, hero < 150 KiB dove possibile
+
+### 2.4 Structured Data (Schema.org)
+- [ ] `RealEstateAgent` + `GeoCoordinates` + `sameAs` su ogni pagina pubblica
+- [ ] `FAQPage` su blog, zone, servizi, FAQ, landing conversione
+- [ ] `BreadcrumbList` su tutte le pagine tranne homepage
+- [ ] `BlogPosting` + `dateModified` su articoli
+- [ ] `Person` su pagine autore e bio blog
+- [ ] FAQ JSON-LD = testo visibile (no mismatch)
+
+### 2.5 E-E-A-T (Experience, Expertise, Authority, Trust)
+- [ ] Pagine autore `/gino-capon`, `/linda-righetto` linkate da blog
+- [ ] Bio autore visibile su articoli
+- [ ] «Cosa può fare Righetto» su articoli nuovi/refresh
+- [ ] Claim solo verificati (350+, 101 comuni, 127 recensioni, dal 2000)
+- [ ] Mediazione: mai tariffe online
+- [ ] Fonti istituzionali per ogni dato numerico
+- [ ] Timestamp «Ultimo aggiornamento» su cornerstone
+
+### 2.6 Helpful Content / qualità
+- [ ] 2500+ parole utili su pillar blog (no loop paragrafi uguali)
+- [ ] Risposta 40–60 parole dopo ogni H2 (AEO)
+- [ ] Box sintesi prime 150 parole su articoli macro
+- [ ] Sezione Righetto con soluzioni operative linkate
+- [ ] ≥3 foto realistiche + ≥2 SVG a tema per articolo
+- [ ] Anti-doppioni: `skimm.md` + script prima di nuovo articolo
+
+### 2.7 GEO / AI search
+- [ ] `llms.txt` + `ai.json` aggiornati con nuovi URL pillar
+- [ ] Frasi dichiarative auto-contenute (estraibili da AI)
+- [ ] §4.4b SKILL-2.0: per Google Search, SEO standard (no farm citazioni)
+
+### 2.8 Accessibilità (WCAG AA)
+- [ ] Contrasto CTA ≥ 4,5:1 — **mai** `#FF6B35` con testo bianco
+- [ ] Skip link, focus visibile, label form
+- [ ] `aria-label` su CTA icon-only
+- [ ] Touch target ≥ 44px su mobile
+
+### 2.9 Spacing e UI (skill-design §13.3)
+- [ ] Sezione padding mobile: 60px 20px
+- [ ] Grid gap mobile: 16px
+- [ ] Heading → content: 22–32px
+- [ ] Content → CTA: 40px
+- [ ] Coerenza `var(--*)` palette Righetto
+
+### 2.10 Local SEO
+- [ ] NAP coerente (Via Roma 96, Limena, 049.8843484)
+- [ ] Pagine zona con OMI, Pro/Contro, FAQ
+- [ ] Internal link blog ↔ zone ↔ servizi (min 3)
+
+---
+
+## 3. Punteggio target per area
+
+| Area | Target | Script verifica |
+|---|---|---|
+| SEO on-page | 10/10 | `google-compliance-check.py` §2 |
+| Schema | 10/10 | `validate-page.js` |
+| Blog/SKIMM | 10/10 | `build_skimm.py` (0 angoli indefiniti) |
+| CWV | 9–10/10 | PageSpeed Insights |
+| E-E-A-T | 10/10 | author links + righetto-sol |
+| GEO | 10/10 | llms.txt + AEO box |
+| A11y | 10/10 | WAVE / axe |
+| Freschezza | 10/10 | `venerdi-contenuti-freschezza.py` |
+
+**Unico gap strutturale noto (off-site):** Domain Authority / backlink — richiede PR esterno, non solo codice.
+
+---
+
+## 4. Priorità fix quando punteggio < 100%
+
+1. Errori rossi `google-compliance-check.py`
+2. Angoli SKIMM incompleti → `ANGLE_OVERRIDES` in `build_skimm.py`
+3. Pillar senza link blog (servizi, valutazioni)
+4. Articoli thin < 1500 parole (top traffico GSC)
+5. Sezione Righetto mancante su pillar blog
+6. CWV: LCP hero, font preload
+7. Spacing mobile incoerente su pagine ad alto traffico
+
+---
+
+## 5. Collegamenti
+
+- Dettaglio SEO: `skill-seo.md`
+- Contenuti blog: `skill-content.md` + `skimm.md`
+- Design/spacing: `SKILL-2.0.md` §13
+- Cron venerdì: `SKILL-2.0.md` §8.1d
+- Architettura: `skill-context.md`

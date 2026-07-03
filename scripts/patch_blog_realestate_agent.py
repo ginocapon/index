@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Informativa Privacy — Righetto Immobiliare</title>
-<meta name="description" content="Informativa privacy Righetto Immobiliare: trattamento dati personali, diritti GDPR e contatti del titolare. Agenzia immobiliare Limena (Padova).">
-<link rel="canonical" href="https://righettoimmobiliare.it/privacy">
-<meta http-equiv="refresh" content="0;url=/privacy">
-<script>location.replace('/privacy');</script>
+#!/usr/bin/env python3
+"""Inietta JSON-LD RealEstateAgent su blog che ne sono privi."""
+from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+
+AGENT_BLOCK = """
   <!-- JSON-LD RealEstateAgent -->
   <script type="application/ld+json">
   {
@@ -50,9 +46,41 @@
     "priceRange": "$$"
   }
   </script>
+"""
 
-</head>
-<body>
-<p>Reindirizzamento all'informativa privacy… <a href="/privacy">Clicca qui</a>.</p>
-</body>
-</html>
+
+def patch(path: Path) -> bool:
+    text = path.read_text(encoding="utf-8")
+    if '"@type": "RealEstateAgent"' in text or '"RealEstateAgent"' in text:
+        return False
+    marker = "  <style>"
+    if marker not in text:
+        marker = "</head>"
+    if marker not in text:
+        return False
+    if AGENT_BLOCK.strip() in text:
+        return False
+    new_text = text.replace(marker, AGENT_BLOCK + "\n" + marker, 1)
+    if new_text == text:
+        return False
+    path.write_text(new_text, encoding="utf-8")
+    return True
+
+
+def main() -> None:
+    n = 0
+    targets = sorted(ROOT.glob("blog-*.html"))
+    targets += sorted(ROOT.glob("share-immobile-*.html"))
+    for extra in ("privacy.html", "privacy-policy.html", "cookie-policy.html", "visita-virtuale.html"):
+        p = ROOT / extra
+        if p.exists():
+            targets.append(p)
+    for p in targets:
+        if patch(p):
+            n += 1
+            print("patched", p.name)
+    print(f"Done: {n} blog aggiornati")
+
+
+if __name__ == "__main__":
+    main()
