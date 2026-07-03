@@ -205,7 +205,7 @@ llms.txt                            - File per AI bots (GEO)
 sitemap.xml                         - 54+ URL indicizzati
 robots.txt                          - Direttive crawler
 server.js                           - Express.js con caching intelligente
-js/chatbot.js                       - Chatbot Sara (105KB)
+js/chatbot.js                       - Chatbot Linda (FAQ + stima + lead)
 js/homepage.js                      - Homepage logic (22 staticMap entries)
 js/config.js                        - Config API esterne
 js/welcome-popup.js                 - Popup benvenuto
@@ -1055,6 +1055,31 @@ python scripts/patch_compliance_warns.py     # WARN residui title/meta/geo/stuff
 ```
 
 Checklist completa venerdì: **`skill-massimo-punteggio.md` §4** (automazioni, comandi, verifica 8/8, ritmo editoriale).
+
+### 8.1e Chatbot Linda — FAQ ↔ blog (OBBLIGATORIO dopo batch blog)
+
+> **File:** `js/chatbot.js` — assistente **Linda** (rule-based, non LLM). Espone `window.RIGHETTO_FAQ_DATA` per `faq.html`.
+
+**Flusso dopo ogni articolo nuovo o batch blog:**
+
+1. Rigenera skimm: `python scripts/build_skimm.py`
+2. Audita gap: `python scripts/audit_chatbot_faq.py` — confronta **102 slug** `skimm.json` vs voci `blog:` in `FAQ_DATA`
+3. Per ogni articolo ad **alta domanda utente** (acquisto, visita, mutuo, affitti, documenti, territorio): aggiungi voce in `FAQ_DATA` con:
+   - `k`: 4–6 keyword **specifiche** (no duplicati che shadowano voci precedenti — primo match vince)
+   - `r`: tono **professionale e rassicurante**, claim solo da tabella consentiti, commissioni **sempre** «da concordare in sede»
+   - `blog` + `blogTitle`: slug senza `.html`
+4. Allinea `faq.html` `FAQ_PAGE_MAP` se servono chiavi mutuo/servizi mancanti
+5. Incrementa **`chatbot.js?v=N`** su tutte le pagine che lo caricano (lazy loader o `<script defer>`)
+6. Fix noti: telefono lead **`049.8843484`**, no placeholder `049 000 0000`
+
+**Regole tono Linda:**
+
+- Risposta breve strutturata (emoji moderati), poi CTA naturale (*stima*, *contattami*, link simulatore mutuo)
+- Mai percentuali mediazione online; mai dati inventati
+- Fallback default: suggerimenti esempio + invito a riformulare (non «non ho capito» secco)
+- Duplicati keyword da evitare: `tempo vendita`, `affitto breve`, `donazione`, `ufficio` generico
+
+**Copertura target:** **102/102** slug blog con keyword dedicata (audit: `scripts/audit_chatbot_faq.py`); voce «articoli blog» come fallback generico.
 
 ### 8.2.5 AEO / ricerca assistita — AI Overviews, AI Mode e agent (OBBLIGATORIO su pillar macro 2026+)
 

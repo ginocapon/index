@@ -78,7 +78,7 @@ admin.html                        Pannello admin (Supabase, 2FA, Email Marketing
 llms.txt                          File per AI bots (GEO)
 sitemap.xml                       54+ URL indicizzati
 robots.txt                        Direttive crawler (AI bots: Allow)
-js/chatbot.js                     Chatbot Sara (105KB)
+js/chatbot.js                     Chatbot Linda (FAQ + stima + lead)
 js/homepage.js                    Homepage logic (22 staticMap entries)
 js/config.js                      Config API esterne
 js/lead-conversion.js             Lead engine (A/B test, exit intent, sticky CTA, speed-to-lead)

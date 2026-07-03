@@ -15,7 +15,7 @@ DATE_IT = "3 luglio 2026"
 DATE_ISO = "2026-07-03"
 TIME_TS = "2026-07-03T16:00:00+02:00"
 MIN_BODY_WORDS = 2500
-HERO = "img/blog/blog-documenti-compravendita-rogito-padova-2026.webp"
+HERO = "img/blog/blog-5-domande-appuntamento-agenzia-padova-2026.webp"
 
 # Reuse style block pattern from sibling script (trimmed identical)
 STYLE = r"""<style>
