@@ -35,6 +35,7 @@
 ```bash
 python scripts/google-compliance-check.py
 python scripts/patch_righetto_sol_blog.py   # se manca righetto-sol su blog
+python scripts/patch_compliance_warns.py    # title/meta/geo/breadcrumb/stuffing
 node scripts/validate-page.js --file pagina-modificata.html
 python scripts/build_skimm.py   # se tocchi blog
 ```
@@ -134,6 +135,8 @@ python scripts/build_skimm.py   # se tocchi blog
 | Freschezza | 10/10 | `venerdi-contenuti-freschezza.py` |
 
 **Unico gap strutturale noto (off-site):** Domain Authority / backlink — richiede PR esterno, non solo codice.
+
+**Compliance repo (luglio 2026):** `python scripts/google-compliance-check.py` → target **0 ERR / 0 WARN** dopo batch `patch_righetto_sol_blog.py` + `patch_compliance_warns.py`.
 
 ---
 
