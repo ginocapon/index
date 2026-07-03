@@ -129,8 +129,13 @@
     "google_compliance_check": {
       "workflow": "locale + venerdì (agente)",
       "script": "scripts/google-compliance-check.py",
-      "patch": ["scripts/patch_righetto_sol_blog.py", "scripts/patch_compliance_warns.py"],
-      "target": "0 ERR, 0 WARN — skill-massimo-punteggio.md §4",
+      "patch": [
+        "scripts/patch_cdn_local.py",
+        "scripts/patch_compliance_warns.py",
+        "scripts/patch_audit_warns.py",
+        "scripts/patch_righetto_sol_blog.py"
+      ],
+      "target": "100% — 0 ERR, 0 WARN — skill-massimo-punteggio.md §4",
       "output": "google-compliance-report.md (gitignore, rigenerabile)"
     },
     "venerdi_contenuti_freschezza": {

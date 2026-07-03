@@ -53,8 +53,8 @@ META_ERR=0
 for page in $PAGES; do
   name=$(basename "$page")
 
-  # Title presente e lunghezza
-  title=$(grep -oP '(?<=<title>).*?(?=</title>)' "$page" | head -1)
+  # Title presente e lunghezza (supporta attributi su <title>)
+  title=$(sed -n 's/.*<title[^>]*>\([^<]*\)<\/title>.*/\1/p' "$page" | head -1)
   if [ -z "$title" ]; then
     echo "  ❌ $name — Title mancante" >> "$REPORT_FILE"
     ERRORS=$((ERRORS+1)); META_ERR=$((META_ERR+1))
@@ -68,8 +68,11 @@ for page in $PAGES; do
     fi
   fi
 
-  # Meta description
-  metadesc=$(grep -oP '(?<=<meta name="description" content=")[^"]*' "$page" | head -1)
+  # Meta description (attributi in qualsiasi ordine)
+  metadesc=$(grep -oiP '<meta[^>]*name="description"[^>]*>' "$page" | head -1 | grep -oP 'content="\K[^"]+' | head -1)
+  if [ -z "$metadesc" ]; then
+    metadesc=$(grep -oiP '<meta[^>]*content="[^"]*"[^>]*name="description"[^>]*>' "$page" | head -1 | grep -oP 'content="\K[^"]+' | head -1)
+  fi
   if [ -z "$metadesc" ]; then
     echo "  ❌ $name — Meta description mancante" >> "$REPORT_FILE"
     ERRORS=$((ERRORS+1)); META_ERR=$((META_ERR+1))
@@ -164,25 +167,24 @@ KS_WARNINGS=0
 for page in $PAGES; do
   name=$(basename "$page")
 
-  # Estrai solo testo visibile (approssimazione: rimuovi tag HTML)
-  text=$(sed 's/<[^>]*>//g; s/&nbsp;/ /g; s/&amp;/\&/g' "$page" | tr '[:upper:]' '[:lower:]')
+  # Estrai conteggi da testo visibile (esclude script/style/JSON-LD)
+  count_padova=$(python3 scripts/audit_helpers.py "$page" padova 2>/dev/null || echo 0)
+  count_agenzia=$(python3 scripts/audit_helpers.py "$page" agenzia 2>/dev/null || echo 0)
+  count_righetto=$(python3 scripts/audit_helpers.py "$page" righetto 2>/dev/null || echo 0)
 
-  # "a padova" max 10 occorrenze
-  count_padova=$(echo "$text" | grep -oi 'a padova\|di padova' | wc -l)
+  # "a padova" / "di padova" max 10 occorrenze nel testo visibile
   if [ "$count_padova" -gt 10 ]; then
     echo "  ⚠️ $name — 'a/di Padova' ripetuto $count_padova volte (max 10)" >> "$REPORT_FILE"
     WARNINGS=$((WARNINGS+1)); KS_WARNINGS=$((KS_WARNINGS+1))
   fi
 
   # "agenzia immobiliare" max 5 occorrenze
-  count_agenzia=$(echo "$text" | grep -oi 'agenzia immobiliare' | wc -l)
   if [ "$count_agenzia" -gt 5 ]; then
     echo "  ⚠️ $name — 'agenzia immobiliare' ripetuto $count_agenzia volte (max 5)" >> "$REPORT_FILE"
     WARNINGS=$((WARNINGS+1)); KS_WARNINGS=$((KS_WARNINGS+1))
   fi
 
   # "righetto immobiliare" max 4 occorrenze
-  count_righetto=$(echo "$text" | grep -oi 'righetto immobiliare' | wc -l)
   if [ "$count_righetto" -gt 4 ]; then
     echo "  ⚠️ $name — 'Righetto Immobiliare' ripetuto $count_righetto volte (max 4)" >> "$REPORT_FILE"
     WARNINGS=$((WARNINGS+1)); KS_WARNINGS=$((KS_WARNINGS+1))

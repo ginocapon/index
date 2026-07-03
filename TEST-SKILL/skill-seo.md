@@ -4,22 +4,27 @@
 
 ---
 
-## 1. PUNTEGGIO SITO (Audit 16 Marzo 2026)
+## 1. PUNTEGGIO SITO (Audit 3 Luglio 2026)
 
 | Area | Punteggio | Note |
 |---|---|---|
-| SEO on-page | 9.8/10 | 18 meta desc corrette, canonical OK, OG completi |
-| Schema.org | 9.8/10 | RealEstateAgent+FAQPage+BreadcrumbList+Person su 95%+ pagine |
-| Contenuti/Blog | 9.8/10 | 40+ articoli, 4 cluster completi, timestamp visibile |
-| GEO/AEO | 10/10 | Unico ad ottimizzare per AI — llms.txt completo |
-| Core Web Vitals | 9/10 | Font preload completo, CSS critical/below-fold separato |
-| Zone Pages | 9.5/10 | 14 zone con Pro/Contro, 5 FAQ schema, tabelle OMI |
-| Chatbot AI | 10/10 | Unico nel mercato locale |
-| Conversione/Lead | 9.9/10 | 10 sistemi su 14 pagine (A/B, exit intent, sticky CTA) |
-| Recensioni Google | 6/10 | ~127 vs 256 Tetto Rosso — gap critico |
-| Domain Authority | 4/10 | Problema #1 — nessun backlink significativo |
-| Apparizione SERP | 3/10 | Brand OK (pos. 1.3), non-brand deboli |
-| **TOTALE** | **9.2/10** | Off-site unico collo di bottiglia |
+| SEO on-page | **10/10** | `mini-seo-check.sh` — 0 ERR, 0 WARN |
+| Schema.org | **10/10** | RealEstateAgent + FAQPage + BreadcrumbList + dateModified |
+| Compliance Google | **10/10** | `google-compliance-check.py` — 0 ERR, 0 WARN |
+| Audit SKILL-2.0 | **10/10** | `audit-skill.sh` — 0 ERR, 0 WARN (luglio 2026) |
+| Contenuti/Blog | 9.8/10 | 102 articoli SKIMM, timestamp visibile |
+| GEO/AEO | 10/10 | llms.txt + ai.json + bot AI non bloccati |
+| Core Web Vitals | 9/10 | Font preload, vendor locale, no CDN jsdelivr/cdnjs |
+| **TOTALE on-site** | **10/10** | Batch: `patch_cdn_local.py` + `patch_compliance_warns.py` + `patch_audit_warns.py` |
+
+### Verifica automatica (luglio 2026)
+```bash
+python3 scripts/google-compliance-check.py   # 100%
+bash scripts/mini-seo-check.sh             # 100%
+bash scripts/audit-skill.sh                  # 100%
+```
+
+**Keyword stuffing:** conteggi solo su **testo visibile** (esclusi `<script>`/`<style>`), con **word boundary** (`\ba Padova\b` — non substring tipo «casa Padova»). Script: `audit_helpers.py`.
 
 ---
 
