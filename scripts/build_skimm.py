@@ -89,7 +89,171 @@ ANGLE_OVERRIDES: dict[str, dict] = {
         "angolo": "Accordo istituzionale EU-USA — non filiera padovana",
         "intent": "macro-istituzionale",
     },
+    "blog-mutui-casa-padova-2026": {
+        "kw_primaria": "mutui-casa-padova-guida-pillar",
+        "angolo": "Pillar mutui Padova evergreen — non singolo meeting BCE",
+        "intent": "mutui-pillar",
+    },
+    "blog-comprare-casa-padova-guida-2026": {
+        "kw_primaria": "comprare-casa-padova-guida-pillar",
+        "angolo": "Guida acquisto 10 passi — pillar prima casa Padova",
+        "intent": "acquisto-pillar",
+    },
+    "blog-affitto-breve-padova-2026": {
+        "kw_primaria": "affitto-breve-padova-rendimenti-regole",
+        "angolo": "Short-term rental rendimenti/normativa — non locazione 4+4",
+        "intent": "affitto-breve-investitori",
+    },
+    "blog-emergenza-abitativa-padova-2026": {
+        "kw_primaria": "emergenza-abitativa-padova-dati",
+        "angolo": "Gap domanda/offerta abitativa — non canoni singoli",
+        "intent": "affitti-sistemico",
+    },
+    "blog-quotazioni-locazioni-omi-istat-padova-2026": {
+        "kw_primaria": "quotazioni-locazioni-omi-istat-padova",
+        "angolo": "Monitor OMI/ISTAT locazioni — non FIMAA né Insights",
+        "intent": "affitti-dato-istituzionale",
+    },
+    "blog-domanda-case-green-certificazione-padova-2026": {
+        "kw_primaria": "domanda-case-green-certificazione-ape",
+        "angolo": "Domanda acquirenti su APE/green — non progetto Tribloc",
+        "intent": "green-domanda-mercato",
+    },
+    "blog-casa-vendibile-5-anni-case-green-padova-2026": {
+        "kw_primaria": "casa-vendibile-case-green-5-anni",
+        "angolo": "Vendibilità futura classe energetica — non Tribloc né domanda",
+        "intent": "vendita-green-futuro",
+    },
+    "blog-barometro-mutui-crif-padova-2026": {
+        "kw_primaria": "barometro-mutui-crif-padova",
+        "angolo": "Dato CRIF erogazioni — non BCE né guida pillar",
+        "intent": "mutui-dato-crif",
+    },
+    "blog-surroga-mutuo-padova-2026": {
+        "kw_primaria": "surroga-mutuo-padova-operativa",
+        "angolo": "Surroga operativa costi/tempi — non tassi BCE",
+        "intent": "mutui-surroga",
+    },
+    "blog-compravendite-padova-record-2026": {
+        "kw_primaria": "compravendite-padova-record-2026",
+        "angolo": "Record transazioni territorio — non stock nazionale",
+        "intent": "mercato-transazioni-padova",
+    },
+    "blog-compravendite-italia-q1-agenzia-entrate-2026-padova": {
+        "kw_primaria": "compravendite-italia-q1-ade",
+        "angolo": "Dato nazionale Q1 ADE — non record Padova locale",
+        "intent": "mercato-dato-nazionale",
+    },
+    "blog-quartieri-padova-2026": {
+        "kw_primaria": "quartieri-padova-prezzi-omi",
+        "angolo": "Mappa quartieri prezzi OMI — pillar territorio città",
+        "intent": "territorio-quartieri-pillar",
+    },
+    "blog-limena-vs-padova-centro-dove-comprare-2026": {
+        "kw_primaria": "limena-centro-confronto-acquisto",
+        "angolo": "Confronto Limena vs Centro — decisione acquirente",
+        "intent": "territorio-confronto-limena",
+    },
+    "blog-investire-immobiliare-padova": {
+        "kw_primaria": "investire-immobiliare-padova-rendimenti",
+        "angolo": "Investimento locativo Padova — non trend summit",
+        "intent": "investimento-pillar",
+    },
+    "blog-righetto-bilancio-2025-soluzioni-affitto-2026": {
+        "kw_primaria": "righetto-bilancio-affitto-soluzioni",
+        "angolo": "Case study agenzia + soluzioni affitto — E-E-A-T",
+        "intent": "vita-agenzia-affitti",
+    },
+    "blog-ultime-acquisizioni-residenziali-padova-giugno-2026": {
+        "kw_primaria": "acquisizioni-residenziali-padova-giugno",
+        "angolo": "Showcase portafoglio residenziale — vita d'agenzia",
+        "intent": "acquisizioni-residenziali",
+    },
+    "blog-ultime-acquisizioni-commerciali-padova-giugno-2026": {
+        "kw_primaria": "acquisizioni-commerciali-padova-giugno",
+        "angolo": "Showcase portafoglio commerciale — distinto residenziale",
+        "intent": "acquisizioni-commerciali",
+    },
+    "blog-piano-casa-decreto-66-2026-padova": {
+        "kw_primaria": "piano-casa-decreto-66-padova",
+        "angolo": "Normativa Decreto 66 edilizia — non bonus fiscali",
+        "intent": "normativa-edilizia",
+    },
+    "blog-bonus-edilizi-2026-incentivi-casa-padova": {
+        "kw_primaria": "bonus-edilizi-2026-incentivi",
+        "angolo": "Incentivi fiscali edilizia 2026 — non decreto urbanistica",
+        "intent": "fisco-incentivi",
+    },
+    "blog-scegliere-agenzia-immobiliare-padova-2026": {
+        "kw_primaria": "scegliere-agenzia-immobiliare-padova",
+        "angolo": "Criteri scelta agenzia — trust/conversione locale",
+        "intent": "servizi-scelta-agenzia",
+    },
+    "blog-vendita-immobiliare-padova-strategie-2026": {
+        "kw_primaria": "vendita-immobiliare-strategie-padova",
+        "angolo": "Strategie vendita 2026 — pillar venditori",
+        "intent": "vendita-pillar",
+    },
+    "blog-costi-vendere-casa-padova-2026": {
+        "kw_primaria": "costi-vendere-casa-padova",
+        "angolo": "Breakdown costi vendita numerici — non strategie",
+        "intent": "vendita-costi",
+    },
+    "blog-checklist-verifiche-prima-compromesso-padova-2026": {
+        "kw_primaria": "checklist-verifiche-prima-compromesso",
+        "angolo": "Checklist pre-compromesso operativa — non guida acquisto generica",
+        "intent": "acquisto-checklist",
+    },
+    "blog-dieci-errori-acquisto-casa-padova-2026": {
+        "kw_primaria": "dieci-errori-acquisto-casa-padova",
+        "angolo": "Errori comuni acquirente — intent educativo",
+        "intent": "acquisto-errori",
+    },
+    "blog-agevolazioni-prima-casa-2026": {
+        "kw_primaria": "agevolazioni-prima-casa-2026",
+        "angolo": "Bonus e requisiti prima casa — non imposte rogito",
+        "intent": "fisco-prima-casa",
+    },
+    "blog-ape-prestazione-energetica-acquisto-padova-2026": {
+        "kw_primaria": "ape-prestazione-energetica-acquisto",
+        "angolo": "APE in fase acquisto — non direttiva Case Green",
+        "intent": "green-ape-acquisto",
+    },
+    "blog-geopolitica-ucraina-prezzi-mutui-italia-veneto-2026": {
+        "kw_primaria": "geopolitica-ucraina-mutui-veneto",
+        "angolo": "Canale geopolitica→tassi Veneto — non dazi USA",
+        "intent": "macro-geopolitica-mutui",
+    },
+    "blog-immobiliare-geopolitica-energia-tassi-2026": {
+        "kw_primaria": "geopolitica-energia-tassi-immobiliare",
+        "angolo": "Energia/tassi macro immobiliare — pillar trasversale",
+        "intent": "macro-energia-tassi",
+    },
 }
+
+# Pattern automatici angolo editoriale (se non in ANGLE_OVERRIDES)
+ANGLE_AUTO_PATTERNS: list[tuple[re.Pattern[str], str, str]] = [
+    (re.compile(r"checklist", re.I), "checklist-operativa", "Checklist operativa step-by-step — non dato mercato"),
+    (re.compile(r"errori", re.I), "errori-educativo", "Errori comuni da evitare — intent educativo"),
+    (re.compile(r"acquisizioni", re.I), "vita-agenzia-showcase", "Showcase portafoglio — E-E-A-T vita d'agenzia"),
+    (re.compile(r"righetto-storia|righetto-bilancio|impegno-quotidiano|ca-marcello", re.I), "vita-agenzia-brand", "Vita d'agenzia / brand story — non guida mercato"),
+    (re.compile(r"limena", re.I), "territorio-limena", "Focus Limena/cintura — non generico Padova centro"),
+    (re.compile(r"vigonza|rubano", re.I), "territorio-cintura", "Focus Vigonza/Rubano — geografia cintura"),
+    (re.compile(r"q1-2026|q1-", re.I), "dato-trimestrale", "Dato trimestrale verificato — aggiornare al prossimo Q"),
+    (re.compile(r"sondaggio-bancaditalia", re.I), "dato-bancaditalia", "Sondaggio Banca d'Italia — fonte istituzionale"),
+    (re.compile(r"omi|quotazioni", re.I), "dato-omi", "Dato OMI/quotazioni ufficiali — non opinioni"),
+    (re.compile(r"costi-", re.I), "breakdown-costi", "Breakdown costi numerici — fonte verificabile obbligatoria"),
+    (re.compile(r"documenti-", re.I), "documenti-operativi", "Documenti operativi rogito/pratica — non strategia"),
+    (re.compile(r"strategie|percorso-", re.I), "strategia-operativa", "Strategia operativa vendita/acquisto — pillar intent"),
+    (re.compile(r"guida-\d{4}|comprare-casa.*guida", re.I), "guida-pillar", "Guida pillar evergreen — non evento datato"),
+    (re.compile(r"previsioni|prospettive|bolla", re.I), "analisi-scenari", "Analisi scenari/proiezioni — citare fonte, no predizioni inventate"),
+    (re.compile(r"bonus|agevolazioni|imposte|tasse|fisco", re.I), "fisco-normativa", "Fisco/normativa — non dati mercato"),
+    (re.compile(r"mutuo|mutui", re.I), "mutui-cluster", "Cluster mutui — distinguere da pillar e eventi BCE"),
+    (re.compile(r"affitto|affitti|locaz", re.I), "affitti-cluster", "Cluster affitti — verificare matrice §4 prima di pubblicare"),
+    (re.compile(r"green|ape|nzbe", re.I), "sostenibilita-cluster", "Sostenibilità/APE — distinguere Tribloc vs domanda vs vendibilità"),
+    (re.compile(r"geopolitica|dazi|ucraina|medio-oriente", re.I), "macro-trasversale", "Macro/geopolitica — impatto locale, non cronaca"),
+    (re.compile(r"quartieri|zona-|servizi-infrastrutture|scuole|trasporti", re.I), "territorio-padova", "Territorio Padova — internal link a pagina zona"),
+]
 
 CLUSTER_RULES: list[tuple[str, tuple[str, ...]]] = [
     ("Affitti e locazioni", ("affitto", "affitti", "stanza", "locaz", "housing", "studentati", "residenze-universitarie", "rendimento-affitto", "contratto-affitto", "canoni-fimaa", "emergenza-abitativa", "affitto-breve", "quotazioni-locazioni")),
@@ -206,12 +370,18 @@ def derive_kw(slug: str, override: dict | None) -> str:
 def derive_angolo(slug: str, title: str, override: dict | None) -> str:
     if override and override.get("angolo"):
         return override["angolo"]
+    for pattern, _intent_hint, angolo in ANGLE_AUTO_PATTERNS:
+        if pattern.search(slug):
+            return angolo
     return f"Angolo da definire — verificare overlap cluster ({title[:60]})"
 
 
 def derive_intent(slug: str, cluster: str, override: dict | None) -> str:
     if override and override.get("intent"):
         return override["intent"]
+    for pattern, intent_hint, _angolo in ANGLE_AUTO_PATTERNS:
+        if pattern.search(slug):
+            return intent_hint
     return cluster.lower().replace(" ", "-")[:40]
 
 
@@ -346,6 +516,42 @@ def render_md(catalog: list[dict], risks: list[str]) -> str:
         "- `studentato-esu-bando-2026-27` (evento bando, distinto da posti-letto sistemico)",
         "- `rubano-limena-affitto-lavoratori-cantiere` (B2B locale, distinto da edilcassa)",
         "- `mestre-affitti-studenti-ca-foscari` (geografia diversa da Padova)",
+        "",
+        "### 1.7 Freschezza contenuti — vantaggio competitivo vs portali",
+        "",
+        "Obiettivo: **bucare Google** con topical authority + segnali freshness che i competitor (Tetto Rosso, RicercAttiva) non hanno a questo livello.",
+        "",
+        "| Segnale Google 2026 | Obbligo Righetto | Frequenza |",
+        "|---|---|---|",
+        "| **dateModified** schema BlogPosting | Su ogni articolo + visibile «Ultimo aggiornamento» | Ogni revisione |",
+        "| **Corpo corposo** (2500+ parole utili) | No paragrafi duplicati; fonti istituzionali | Nuovi articoli |",
+        "| **Cosa può fare Righetto** | Sezione `righetto-sol` con 3–4 soluzioni linkate | Ogni articolo nuovo/refresh |",
+        "| **Foto realistiche + grafici SVG** | Min 3 foto + 2 chart a tema | Ogni articolo |",
+        "| **Hub blog aggiornato** | `blog.html` + homepage `#blog` sempre per data | Settimanale (venerdì) |",
+        "| **llms.txt / ai.json** | Nuovi slug pillar entro 48h dalla pubblicazione | Ogni batch |",
+        "| **Internal link** | 3+ link contestuali verso zone/servizi/pillar | Ogni articolo |",
+        "",
+        "### 1.8 Pagine pillar — refresh obbligatorio",
+        "",
+        "Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:",
+        "",
+        "| Pagina | Minimo contenuto | Link blog richiesti |",
+        "|---|---|---|",
+        "| `/` (index) | Hero freshness + sezione blog dinamica | ≥3 articoli recenti |",
+        "| `/blog` | Hero «Ultimo aggiornamento» + N articoli | Hub completo |",
+        "| `/agenzia-immobiliare-padova` | E-E-A-T locale, FAQ | ≥2 guide mercato |",
+        "| `/servizio-locazioni` | Cluster affitti/studenti | ≥3 articoli affitti |",
+        "| `/servizio-valutazioni` | Trust + CTA valutazione | ≥2 guide vendita |",
+        "| `/chi-siamo` | Storia dal 2000, autori | Link autori + acquisizioni |",
+        "| `/immobili` | Catalogo + filtri | — |",
+        "",
+        "### 1.9 Ritmo editoriale anti-cannibalizzazione",
+        "",
+        "- **1 articolo nuovo/settimana** minimo (venerdì pubblicazione ideale).",
+        "- **1 refresh/mese** di un pillar esistente (dato OMI, BCE, FIMAA aggiornato).",
+        "- **Batch max 5 articoli** con radici slug diverse (vedi §1.3).",
+        "- Prima di ogni batch: `build_skimm.py` + `check_doppioni_sito.py` + questo file §3.",
+        "- Report automatico venerdì 07:00 → `info@righettoimmobiliare.it` (workflow `venerdi-contenuti-freschezza.yml`).",
         "",
         "---",
         "",

@@ -6,6 +6,7 @@
 > **Ultimo aggiornamento Google verificato:** 27 Giugno 2026
 > **Prossima verifica consigliata:** Luglio 2026
 >
+> **Changelog 3 luglio 2026 — b):** cron venerdì 07:00 CEST — `venerdi-contenuti-freschezza.yml` + email `info@righettoimmobiliare.it`; skimm §1.7–1.9 competitività blog.
 > **Changelog 3 luglio 2026:** blog — **`TEST-SKILL/skimm.md`** catalogo keyword/intent (99 articoli) + `scripts/build_skimm.py`; integrato in `check_doppioni_sito.py` e §8.1a.
 > **Changelog 2 luglio 2026 (c):** blog — **§2.2** slug/keyword anti-sovrapposizione + sezione **«Cosa può fare Righetto»**; dettaglio in `skill-content.md` §2.2.
 > **Changelog 2 luglio 2026 (b):** blog — **§8.1c/§8.1d** foto **realistiche** (vietate illustrazioni/AI/3D); elenco blog solo per **data**; **secondo passaggio auto-verifica** obbligatorio agente; dettaglio in `skill-content.md` §2.1.
@@ -1014,6 +1015,32 @@ Aggiornamento sostanziale di articolo **esistente** (nuova edizione anno, dati O
 - [ ] Schema triplo (BlogPosting / FAQ / Breadcrumb) allineato al contenuto visibile.
 - [ ] Registrazione in `blog.html`, `homepage.js`, `admin.html`, `sitemap.xml` se applicabile (processo gia' definito altrove).
 - [ ] **Secondo passaggio auto-verifica (§8.1c punto 8)** eseguito dall'agente con esito OK.
+
+### 8.1d Freschezza contenuti e cron venerdì (OBBLIGATORIO — competitività SERP)
+
+> **Perché:** il vantaggio Righetto vs Tetto Rosso / RicercAttiva non è solo il catalogo immobili, ma **topical authority** del blog (99+ guide corpose, aggiornate). Google 2026 premia **helpful content**, **E-E-A-T** e **segnali freshness**.
+
+**Automazione GitHub Actions** — ogni **venerdì ore 07:00 CEST** (`05:00 UTC`):
+
+| Workflow | Script | Output |
+|---|---|---|
+| `venerdi-contenuti-freschezza.yml` | `scripts/venerdi-contenuti-freschezza.py` + `build_skimm.py` | Issue label `contenuti-freschezza` + **email a `info@righettoimmobiliare.it`** |
+
+**Cosa verifica il cron settimanale:**
+
+1. Rigenera **`TEST-SKILL/skimm.md`** / `skimm.json` (keyword, angoli, rischi anti-doppioni)
+2. Conta articoli **thin** (<1500 parole), senza FAQ, senza sezione Righetto, senza timestamp
+3. Audita **pagine pillar** (homepage, blog, agenzia, servizi, chi-siamo, FAQ) — parole, link blog, schema
+4. Elenca **keyword libere** da `skimm.md` §1.6 pronte per nuovo articolo
+5. Propone **5 azioni prioritarie** per la settimana successiva
+
+**Ritmo editoriale minimo (skill-content.md §2.3):**
+
+- **1 articolo nuovo/settimana** (pubblicazione ideale venerdì)
+- **1 refresh/mese** di articolo o pillar con dato aggiornato (OMI, BCE, FIMAA)
+- Dopo ogni batch: commit `skimm.md` + `skimm.json` insieme agli HTML
+
+**Secret richiesto:** `EMAIL_RELAY_KEY` in GitHub repo secrets (stesso di `audit-settimanale.yml`).
 
 ### 8.2.5 AEO / ricerca assistita — AI Overviews, AI Mode e agent (OBBLIGATORIO su pillar macro 2026+)
 

@@ -187,9 +187,23 @@
 - **Fase 3 (Ott 2026-Mar 2027):** Portale regionale → 3.000 clic/mese
 
 ### Routine monitoraggio
+- **Settimanale (venerdì 07:00 CEST):** `venerdi-contenuti-freschezza.py` — SKIMM + blog corposità + pillar + email `info@righettoimmobiliare.it`
 - **Settimanale:** GSC Performance Report + Google Posts
 - **Mensile:** Core Web Vitals + citazioni AI
 - **Trimestrale:** Audit completo + competitor + dati OMI aggiornati
+
+### Vantaggio competitivo contenuti (luglio 2026)
+
+| Leva | Righetto | Tetto Rosso / portali |
+|---|---|---|
+| Guide originali blog | 99+ articoli corposi | Poche guide generiche |
+| Freschezza settimanale | Cron + timestamp visibile | Solo annunci |
+| Anti-doppioni SKIMM | Catalogo keyword/intent | — |
+| GEO / llms.txt | Sì | No |
+| Chatbot AI | Linda 24/7 | No |
+| Sezione soluzioni agenzia | «Cosa può fare Righetto» | No |
+
+Pagine pillar da refreshare ogni settimana (verificate dal cron): `/`, `/blog`, `/agenzia-immobiliare-padova`, `/servizio-locazioni`, `/servizio-valutazioni`, `/chi-siamo`.
 
 ---
 
