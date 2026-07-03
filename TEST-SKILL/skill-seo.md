@@ -187,7 +187,7 @@
 - **Fase 3 (Ott 2026-Mar 2027):** Portale regionale → 3.000 clic/mese
 
 ### Routine monitoraggio
-- **Settimanale (venerdì 07:00 CEST):** `venerdi-contenuti-freschezza.py` — SKIMM + blog corposità + pillar + email `info@righettoimmobiliare.it`
+- **Settimanale (venerdì 07:00 CEST):** `venerdi-contenuti-freschezza.py` — SKIMM + blog + pillar + email `info@`; compliance: **`skill-massimo-punteggio.md` §4**
 - **Settimanale:** GSC Performance Report + Google Posts
 - **Mensile:** Core Web Vitals + citazioni AI
 - **Trimestrale:** Audit completo + competitor + dati OMI aggiornati
