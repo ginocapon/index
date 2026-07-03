@@ -10,5 +10,9 @@ __pycache__/
 *.py[cod]
 scripts/__pycache__/
 supabase/.temp/
+# Report audit locali (rigenerabili)
+google-compliance-report.md
+venerdi-contenuti-report.md
+scripts/_tmp_perizia/
 # Evita commit accidentale di una copia annidata del repo
 /progetti/

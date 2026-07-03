@@ -133,7 +133,8 @@ def check_page(path: Path) -> None:
     text = visible_text(raw)
     if text.count("agenzia immobiliare") > 5:
         log_warn(f"{name}: possibile stuffing 'agenzia immobiliare'")
-    if text.count("a padova") + text.count("di padova") > 10:
+    padova_hits = len(re.findall(r"\ba\s+padova\b", text)) + len(re.findall(r"\bdi\s+padova\b", text))
+    if padova_hits > 10:
         log_warn(f"{name}: possibile stuffing 'a/di Padova'")
 
 
