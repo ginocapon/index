@@ -85,7 +85,7 @@ Dopo **ogni** task che produce o modifica file nel repo (pagine, blog, CSS/JS, s
 - [ ] Se landing o form lead: checklist **`skill-forms-leads.md`** (invio diretto, GDPR, provenienza, success inline)
 
 ### Checklist aggiuntiva blog
-- [ ] **Anti-doppioni (§8.1a):** `check_doppioni_sito.py` + verifica titolo/slug/tema **prima** di scrivere; se doppione → altro argomento da fonte istituzionale (web)
+- [ ] **Anti-doppioni (§8.1a):** `TEST-SKILL/skimm.md` + `check_doppioni_sito.py` + `build_skimm.py` **prima** di scrivere; kw_primaria univoca; se doppione → altro argomento da fonte istituzionale
 - [ ] Registrato in TUTTI e 4: admin.html + blog.html + homepage.js + sitemap.xml
 - [ ] `data_pubblicazione: 'YYYY-MM-DD'` nel seed (BLOCCANTE per commit)
 - [ ] Copertina + corpo: foto **realistiche** (§2.1 `skill-content.md`); **no** illustrazioni/AI/3D; ≥3 figure + ≥2 SVG colorati

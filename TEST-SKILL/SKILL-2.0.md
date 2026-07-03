@@ -6,7 +6,8 @@
 > **Ultimo aggiornamento Google verificato:** 27 Giugno 2026
 > **Prossima verifica consigliata:** Luglio 2026
 >
-> **Changelog 2 luglio 2026 (c):** blog — **§2.2** slug/keyword anti-sovrapposizione + sezione **«Cosa può fare Righetto»** (quesito + 3–4 soluzioni); dettaglio in `skill-content.md` §2.2.
+> **Changelog 3 luglio 2026:** blog — **`TEST-SKILL/skimm.md`** catalogo keyword/intent (99 articoli) + `scripts/build_skimm.py`; integrato in `check_doppioni_sito.py` e §8.1a.
+> **Changelog 2 luglio 2026 (c):** blog — **§2.2** slug/keyword anti-sovrapposizione + sezione **«Cosa può fare Righetto»**; dettaglio in `skill-content.md` §2.2.
 > **Changelog 2 luglio 2026 (b):** blog — **§8.1c/§8.1d** foto **realistiche** (vietate illustrazioni/AI/3D); elenco blog solo per **data**; **secondo passaggio auto-verifica** obbligatorio agente; dettaglio in `skill-content.md` §2.1.
 > **Changelog 2 luglio 2026:** blog — batch **Housing Veneto 2026** (5 articoli): canoni stanze Padova (Immobiliare.it Insights), studentati ESU/PNRR, residenze green Tribloc, Vicenza calmierati, housing lavoratori Edilcassa; sotto-cluster in `skill-content.md`; script `build_blog_housing_veneto_lug2026.py`.
 > **Changelog 27 giugno 2026 (pomeriggio):** E-E-A-T — pagine autore `/gino-capon`, `/linda-righetto`; CTA Visita guidata live su `immobile.html`; audit settimanale §1.4–1.5 in `audit-skill.sh`.
@@ -760,6 +761,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 Consultare almeno:
 
+- **`TEST-SKILL/skimm.md`** — catalogo keyword primaria, angolo editoriale, matrice rischi (§3–§4); generato da `scripts/build_skimm.py`
 - `blog.html` → array `articoliStatici` (`url_statico`, `titolo`, `categoria`)
 - File statici `blog-*.html` in root (canonical = slug)
 - `sitemap.xml` — URL blog
@@ -771,6 +773,8 @@ Consultare almeno:
 
 ```bash
 python scripts/check_doppioni_sito.py
+python scripts/build_skimm.py
+python scripts/build_skimm.py --check "blog-slug-proposto" "kw-primaria-unica" "cluster"
 ```
 
 Exit code `0` **non basta da solo**: serve anche controllo **semantico** del tema proposto (titolo, H1, keyword primaria, intent).

@@ -6,12 +6,15 @@ alwaysApply: false
 
 # Blog — qualità e pubblicazione
 
-Dettaglio: **`TEST-SKILL/skill-content.md`**, **`SKILL-2.0.md` §8.1a, §8.1, §8.1c, §8.3**.
+Dettaglio: **`TEST-SKILL/skill-content.md`**, **`TEST-SKILL/skimm.md`**, **`SKILL-2.0.md` §8.1a, §8.1, §8.1c, §8.3**.
 
 ## BLOCCANTE — prima di scrivere (§8.1a)
-1. Esegui `python scripts/check_doppioni_sito.py`
-2. Verifica titolo/slug/cluster in `blog.html`, `blog-*.html`, admin seed
-3. Se doppione o tema troppo simile → **STOP** → ricerca web su fonte istituzionale → altro argomento
+1. Leggi **`TEST-SKILL/skimm.md`** §3–§4 (keyword primaria + coppie a non fondere)
+2. Esegui `python scripts/check_doppioni_sito.py`
+3. Esegui `python scripts/build_skimm.py` dopo ogni batch (aggiorna catalogo)
+4. Verifica titolo/slug/cluster in `blog.html`, `blog-*.html`, admin seed
+5. Proposta nuova: `python scripts/build_skimm.py --check "slug" "kw-primaria" "cluster"`
+6. Se doppione o tema troppo simile → **STOP** → ricerca web su fonte istituzionale → altro argomento
 
 ## Corpo articolo
 - 2500+ parole **utili** (no loop di paragrafi identici per gonfiare `wordCount`)
