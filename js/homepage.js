@@ -682,6 +682,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    '«so tutto io»: staging, documenti, ape e prezzo giusto': { img: 'img/blog/blog-documenti-compravendita-rogito-padova-2026.webp', url: 'blog-so-tutto-io-venditore-presuntuoso-padova-2026' },
     'stanza universitaria padova 2026: canoni 490€ e +46%': { img: 'img/blog/blog-affitti-canoni-fimaa-q1-2026-padova.webp', url: 'blog-stanza-universitaria-padova-canoni-2026' },
     'studentati veneto 2026: posti letto esu, privati e pnrr': { img: 'img/blog/blog-nuove-costruzioni-mercato-veneto-2026-padova.webp', url: 'blog-studentati-veneto-2026-posti-letto' },
     'residenze green padova tribloc 2026: 180 camere nzeb': { img: 'img/blog/blog-domanda-case-green-padova-2026.webp', url: 'blog-residenze-green-padova-tribloc-2026' },

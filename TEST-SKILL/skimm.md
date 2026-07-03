@@ -92,7 +92,6 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 - **Batch max 5 articoli** con radici slug diverse (vedi §1.3).
 - Prima di ogni batch: `build_skimm.py` + `check_doppioni_sito.py` + questo file §3.
 - Report automatico venerdì 07:00 → `info@righettoimmobiliare.it` (workflow `venerdi-contenuti-freschezza.yml`).
-- **Checklist agente venerdì:** `skill-massimo-punteggio.md` **§4** (compliance 0/0, patch script, matrice 8/8).
 
 ---
 
@@ -114,7 +113,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 - Coppia da non fondere (Tribloc vs Case Green generico): blog-residenze-green-padova-tribloc-2026 ↔ blog-domanda-case-green-certificazione-padova-2026
 - Coppia da non fondere (Evento BCE vs guida mutui): blog-bce-tassi-mutui-giugno-2026-padova ↔ blog-mutui-casa-padova-2026
 
-**Articoli catalogati:** 99
+**Articoli catalogati:** 100
 
 ---
 
@@ -159,11 +158,12 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-studentati-veneto-2026-posti-letto` | `posti-letto-esu-camplus-pnrr-veneto` | Canali offerta regionale (ESU/privati/PNRR) — non singolo canone stanza |
 | `blog-vicenza-residenze-universitarie-calmierate-2026` | `casa-querini-calmierati-vicenza` | Vicenza PNRR Saudino — non Padova né Tribloc |
 
-### Altri / trasversali (1)
+### Altri / trasversali (2)
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
 | `blog-gestione-spese-casa-risparmio-padova-2026` | `gestione-spese-casa-possesso-padova` | Spese possesso post-acquisto (energia, IMU) — non costi rogito |
+| `blog-so-tutto-io-venditore-presuntuoso-padova-2026` | `venditore-presuntuoso-staging-documenti-ape` | Verità dal campo / tono provocatorio — non guida tecnica staging o solo documenti |
 
 ### Fisco e normativa (4)
 

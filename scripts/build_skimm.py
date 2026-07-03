@@ -14,6 +14,11 @@ OUT_JSON = ROOT / "TEST-SKILL" / "skimm.json"
 
 # Angolo editoriale esplicito (evita cannibalizzazione SEO tra articoli vicini)
 ANGLE_OVERRIDES: dict[str, dict] = {
+    "blog-so-tutto-io-venditore-presuntuoso-padova-2026": {
+        "kw_primaria": "venditore-presuntuoso-staging-documenti-ape",
+        "angolo": "Verità dal campo / tono provocatorio — non guida tecnica staging o solo documenti",
+        "intent": "vendita-mindset-venditore",
+    },
     "blog-stanza-universitaria-padova-canoni-2026": {
         "kw_primaria": "canone-stanza-insights-490-padova",
         "angolo": "Dato Immobiliare.it Insights (+46% vs 2020) e periferie tram — non FIMAA Q1",
