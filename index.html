@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="css/fonts.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/nav-mobile.css?v=4" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="css/below-fold.css?v=14" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/below-fold.css?v=15" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/prop-photo-carousel.css?v=2">
 <link rel="stylesheet" href="css/home-enhance.css?v=9" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/modal-incarico-home.css?v=2" media="all">
@@ -858,7 +858,7 @@ button svg, a.btn-p svg, a.btn-g svg {
       "description": "Spot Righetto Immobiliare: storia dal 2000, territorio Padova e provincia, zone servite e metodo di lavoro. Agenzia a Limena con 350+ immobili gestiti.",
       "thumbnailUrl": "https://righettoimmobiliare.it/img/team/righetto-noi-ci-siamo-video-poster.png",
       "uploadDate": "2026-06-04",
-      "contentUrl": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/blog/righetto-storia-hero.mp4",
+      "contentUrl": "https://righettoimmobiliare.it/img/blog/righetto-storia-hero.mp4",
       "embedUrl": "https://righettoimmobiliare.it/blog-righetto-storia-territorio-acquisizioni-2026",
       "publisher": {
         "@type": "Organization",
@@ -1152,27 +1152,30 @@ button svg, a.btn-p svg, a.btn-g svg {
       </div>
       <div class="eyebrow">Scopri chi siamo</div>
       <h2 class="sec-h2">La nostra<br>agenzia</h2>
-      <p class="sec-p">Il nostro ultimo spot racconta chi siamo dal 2000 a oggi: territorio Padova e provincia, zone che seguiamo e le <a href="blog-righetto-storia-territorio-acquisizioni-2026" style="color:var(--blu);font-weight:600;text-decoration:underline">ultime acquisizioni sul portale</a>. Clicca il video per il riassunto completo. Assistente AI Linda disponibile 24/7.</p>
+      <p class="sec-p">Il nostro spot racconta chi siamo dal 2000 a oggi: territorio Padova e provincia, zone che seguiamo e le <a href="blog-righetto-storia-territorio-acquisizioni-2026" style="color:var(--blu);font-weight:600;text-decoration:underline">ultime acquisizioni sul portale</a>. Premi play per il video — oppure leggi il riassunto nell'articolo. Assistente AI Linda disponibile 24/7.</p>
     </div>
     <div class="video-stage sr" id="videoStage">
       <div class="video-3d-frame">
-        <a class="video-wrap video-wrap-link" id="videoWrap" href="blog-righetto-storia-territorio-acquisizioni-2026" aria-label="Righetto dal 2000: storia, zone e ultime acquisizioni — apri il riassunto">
-          <img class="video-poster-img" src="img/team/righetto-noi-ci-siamo-video-poster.png" alt="Righetto Immobiliare — Noi ci siamo, video storia e acquisizioni" width="1280" height="720" loading="lazy">
+        <div class="video-wrap" id="videoWrap" role="button" tabindex="0" aria-label="Riproduci video Righetto dal 2000 — storia e territorio">
+          <video class="video-native" id="righettoSpot" poster="img/team/righetto-noi-ci-siamo-video-poster.png" preload="metadata" playsinline controls>
+            <source src="img/blog/righetto-storia-hero.mp4" type="video/mp4">
+          </video>
+          <img class="video-poster-img" id="videoPosterFallback" src="img/team/righetto-noi-ci-siamo-video-poster.png" alt="" width="1280" height="720" loading="lazy" hidden>
           <div class="video-vignette"></div>
-          <div class="video-facade">
+          <div class="video-facade" id="videoFacade">
             <div class="play-btn" aria-hidden="true">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--blu)" stroke="none"><path d="M8 5v14l11-7z"/></svg>
             </div>
           </div>
           <div class="video-spot-badge">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            <span>Storia e acquisizioni</span>
+            <span>Video spot</span>
           </div>
           <div class="video-bar">
             <span class="video-bar-label">Righetto dal 2000</span>
-            <span class="video-bar-duration">&#9654; Riassunto</span>
+            <span class="video-bar-duration" id="videoBarDuration">&#9654; Play</span>
           </div>
-        </a>
+        </div>
       </div>
     </div>
   </div>
@@ -1650,6 +1653,51 @@ function closeVisitaTour() {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeVisitaTour();
 });
+</script>
+<script>
+(function(){
+  var wrap = document.getElementById('videoWrap');
+  var video = document.getElementById('righettoSpot');
+  var facade = document.getElementById('videoFacade');
+  var durationEl = document.getElementById('videoBarDuration');
+  if (!wrap || !video) return;
+
+  function playVideo() {
+    wrap.classList.add('is-playing');
+    video.setAttribute('controls', '');
+    var p = video.play();
+    if (p && typeof p.catch === 'function') p.catch(function(){});
+  }
+
+  function onPlayRequest(e) {
+    if (wrap.classList.contains('is-playing')) return;
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    playVideo();
+  }
+
+  if (facade) facade.addEventListener('click', onPlayRequest);
+  wrap.addEventListener('click', function(e) {
+    if (!wrap.classList.contains('is-playing') && e.target !== video) onPlayRequest(e);
+  });
+  wrap.addEventListener('keydown', function(e) {
+    if ((e.key === 'Enter' || e.key === ' ') && !wrap.classList.contains('is-playing')) {
+      e.preventDefault();
+      playVideo();
+    }
+  });
+
+  video.addEventListener('loadedmetadata', function() {
+    if (durationEl && video.duration && isFinite(video.duration)) {
+      var m = Math.floor(video.duration / 60);
+      var s = Math.floor(video.duration % 60);
+      durationEl.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+    }
+  });
+
+  video.addEventListener('ended', function() {
+    wrap.classList.remove('is-playing');
+  });
+})();
 </script>
 <script src="js/nav-mobile.js?v=3" defer></script>
 <script src="js/lead-conversion.js?v=4" defer></script>
