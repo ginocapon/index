@@ -1,0 +1,560 @@
+# -*- coding: utf-8 -*-
+"""5 errori in visita immobile — luglio 2026.
+Esegui: python scripts/build_blog_5_errori_visita_lug2026.py
+"""
+from __future__ import annotations
+
+import json
+import re
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+SLUG = "blog-5-errori-visita-immobile-padova-2026"
+FILENAME = f"{SLUG}.html"
+DATE_IT = "3 luglio 2026"
+DATE_ISO = "2026-07-03"
+TIME_TS = "2026-07-03T14:00:00+02:00"
+MIN_BODY_WORDS = 2500
+HERO = "img/blog/blog-checklist-verifiche-prima-compromesso-padova-2026.webp"
+
+STYLE_BLOCK = r"""<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--nero:#152435;--bianco:#F7F5F1;--oro:#FF6B35;--grigio:#6B7A8D;--gc:#E1DBD1;--sfondo:#ECE7DF;--blu:#2C4A6E}
+body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--nero)}
+header{background:var(--nero);position:sticky;top:0;z-index:100}
+.hi{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:74px;display:flex;align-items:center;gap:2rem}
+.logo{font-family:'Cormorant Garamond',serif;color:#fff;font-size:1.28rem;font-weight:600}.logo span{color:var(--oro);font-style:italic}
+nav{display:flex;flex:1;gap:.2rem}nav a{color:rgba(255,255,255,.72);font-size:.81rem;padding:.4rem .72rem}nav a.active{color:var(--oro)}
+.h-btn{background:var(--oro);color:var(--nero);padding:.4rem .88rem;border-radius:6px;font-size:.76rem;font-weight:600}
+.art-hero{position:relative}.art-hero-img{width:100%;height:420px;object-fit:cover;display:block;filter:brightness(.5)}
+.art-hero-overlay{position:absolute;inset:auto 0 0 0;padding:2.2rem 1.5rem;background:linear-gradient(transparent,rgba(21,36,53,.94))}
+.art-hero-inner{max-width:820px;margin:0 auto}
+.breadcrumb{font-size:.72rem;color:rgba(255,255,255,.45);margin-bottom:.86rem}.breadcrumb a{color:rgba(255,255,255,.55)}
+.cat-badge{font-size:.57rem;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,107,53,.2);color:var(--oro);padding:.24rem .68rem;font-weight:700;display:inline-block;margin-bottom:.72rem}
+.art-hero h1{font-family:'Cormorant Garamond',serif;font-size:1.95rem;font-weight:300;color:#fff;line-height:1.2}.art-hero h1 strong{font-weight:600;font-style:italic}
+.art-hero-meta{display:flex;gap:1rem;align-items:center;font-size:.8rem;color:rgba(255,255,255,.5);margin-top:.92rem;flex-wrap:wrap}
+.av{width:36px;height:36px;border-radius:50%;background:var(--oro);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--nero)}
+.art-container{max-width:820px;margin:0 auto;padding:2.4rem 1.5rem 3.55rem}
+.art-content{font-size:.91rem;line-height:1.88}
+.art-content h2{font-family:'Cormorant Garamond',serif;font-size:1.68rem;margin:2.28rem 0 .68rem;border-bottom:2px solid var(--oro);padding-bottom:.34rem}
+.art-content p{margin-bottom:1.04rem}.art-content ul,.art-content ol{margin:0 0 1rem 1.28rem}
+.art-content a{color:var(--blu);text-decoration:underline}
+.aeo-box{border:2px solid var(--blu);border-radius:12px;padding:1.15rem 1.3rem;margin-bottom:1.65rem;background:linear-gradient(135deg,rgba(44,74,110,.07),rgba(255,107,53,.06))}
+.aeo-box h2{font-family:'Montserrat',sans-serif;font-size:.95rem;text-transform:uppercase;letter-spacing:.06em;color:var(--blu);margin:0 0 .55rem;border:none;padding:0}
+.err-card{background:var(--sfondo);border:1px solid var(--gc);border-left:5px solid var(--oro);border-radius:0 12px 12px 0;padding:1rem 1.2rem;margin:1rem 0}
+.err-card strong{color:var(--nero)}
+.vignette-wrap{background:var(--sfondo);border:1px solid var(--gc);border-radius:12px;padding:1.2rem;margin:1.3rem 0}
+.vignette-wrap figcaption{font-size:.72rem;color:var(--grigio);margin-top:.6rem;text-align:center;line-height:1.5}
+.blog-fig{margin:1.65rem 0;border-radius:12px;overflow:hidden;border:1px solid var(--gc)}
+.blog-fig img{width:100%;height:auto;display:block;max-height:380px;object-fit:cover}
+.blog-fig figcaption{font-size:.72rem;color:var(--grigio);padding:.7rem .95rem;background:var(--sfondo)}
+.righetto-sol{border:2px solid var(--oro);border-radius:12px;padding:1.15rem 1.3rem;margin:1.65rem 0 2rem;background:linear-gradient(135deg,rgba(255,107,53,.08),rgba(44,74,110,.05))}
+.righetto-sol h2{font-family:'Montserrat',sans-serif;font-size:.95rem;text-transform:uppercase;letter-spacing:.06em;color:var(--oro);margin:0 0 .65rem}
+.righetto-sol ul{font-size:.84rem;margin:.75rem 0 .55rem 1.15rem}
+blockquote{border-left:4px solid var(--oro);background:var(--sfondo);padding:1rem 1.2rem;margin:1.2rem 0;font-style:italic;color:var(--grigio)}
+.faq-item{border:1px solid var(--gc);border-radius:8px;margin-bottom:.5rem}
+.faq-q{padding:.86rem .98rem;font-weight:600;font-size:.84rem;cursor:pointer}.faq-a{max-height:0;overflow:hidden;transition:max-height .35s;background:var(--sfondo)}
+.faq-item.open .faq-a{max-height:480px}.faq-a-inner{padding:0 .98rem .86rem;font-size:.83rem;color:var(--grigio)}
+.author-bio,.related{margin:1.5rem 0;padding:1.3rem;border:1px solid var(--gc);border-radius:10px}
+footer{background:var(--nero);color:rgba(255,255,255,.65);padding:2rem 1.5rem;font-size:.75rem}
+.skip-link{position:absolute;top:-100%;background:var(--oro);color:var(--nero);padding:.46rem .9rem;z-index:9999}.skip-link:focus{top:0}
+@media(max-width:700px){.art-hero-img{height:260px}.art-hero h1{font-size:1.5rem}}
+</style>
+<link rel="stylesheet" href="css/blog-rich.css?v=3">
+<link rel="stylesheet" href="css/blog-lead-form.css?v=2">"""
+
+FOOTER = """
+</main>
+<footer><div class="fi">&copy; 2026 Gruppo Immobiliare Righetto — P.IVA 05182390285</div></footer>
+<script>document.querySelectorAll('.faq-q').forEach(function(q){q.addEventListener('click',function(){var p=this.parentElement,o=p.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(function(x){x.classList.remove('open');});if(!o)p.classList.add('open');});});</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js?v=4"></script>
+<script src="js/rig-lead-form.js?v=2"></script>
+<script src="js/nav-mobile.js?v=3" defer></script>
+<script src="js/cookie-consent.js?v=3" defer></script>
+</body></html>"""
+
+FAQS = [
+    ("Posso chiedere se il prezzo è trattabile alla prima visita?",
+     "Meglio no, o almeno non come prima domanda. Prima osserva l'immobile, fai domande tecniche utili e valuta se ti convince. La trattativa ha senso quando hai un interesse concreto, non come apertura di conversazione alla porta d'ingresso."),
+    ("Quando ha senso iniziare a trattare il prezzo?",
+     "Quando hai visto l'immobile con calma, hai confrontato comparabili, hai chiaro il budget e intendi fare una proposta seria. Iniziare a negoziare senza conviction fa perdere credibilità e tempo a entrambe le parti."),
+    ("Cosa succede se arrivo in ritardo alla visita senza avvisare?",
+     "L'agente ha spesso altre visite in fila e il venditore o l'inquilino ha liberato la casa per te. Il ritardo non comunicato viene registrato come mancanza di rispetto; in agenzia si parla di clienti poco collaborativi."),
+    ("Devo rispondere se l'agente chiede cosa ne penso dell'immobile?",
+     "Sì, anche con un «grazie, ci rifletto» o «non fa per noi». Il silenzio totale chiude il rapporto: alla prossima occasione l'agente darà priorità a chi comunica in modo cortese."),
+    ("Posso mandare un parente o un amico a vedere l'immobile al posto mio?",
+     "No, salvo casi concordati esplicitamente. Il diretto interessato deve vedere personalmente: mandare terzi è la peggiore perdita di tempo per te (non capisci l'immobile) e per l'agente (appuntamento non produttivo)."),
+]
+
+
+def word_count(html: str) -> int:
+    text = re.sub(r"<[^>]+>", " ", html)
+    return len(re.sub(r"\s+", " ", text).strip().split())
+
+
+def v1_trattabile() -> str:
+    return """<figure class="vignette-wrap" aria-label="Vignetta: è trattabile alla soglia">
+<svg viewBox="0 0 520 200" width="100%" height="200" role="img">
+<title>Prima domanda: è trattabile?</title>
+<rect x="20" y="40" width="120" height="140" fill="#2C4A6E" rx="4"/>
+<rect x="155" y="70" width="200" height="110" fill="#ECE7DF" stroke="#152435"/>
+<text x="255" y="115" text-anchor="middle" font-size="11" fill="#152435">SOGLIA CASA</text>
+<circle cx="400" cy="100" r="35" fill="#FF8F5E"/>
+<text x="400" y="92" text-anchor="middle" font-size="20">🙋</text>
+<rect x="355" y="125" width="90" height="28" rx="14" fill="#C0392B"/>
+<text x="400" y="144" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">È TRATTABILE?</text>
+<text x="255" y="175" text-anchor="middle" font-size="9" fill="#6B7A8D">Prima domanda · zero secondi di visita</text>
+</svg>
+<figcaption>Error #1 — La trattativa si apre dopo, non alla campanella.</figcaption>
+</figure>"""
+
+
+def v2_trattativa_precoce() -> str:
+    return """<figure class="vignette-wrap" aria-label="Vignetta: trattativa senza conviction">
+<svg viewBox="0 0 520 200" width="100%" height="200" role="img">
+<title>Stretta di mano su immobile non amato</title>
+<rect x="40" y="50" width="180" height="100" fill="#8B4513" opacity=".3" rx="6"/>
+<text x="130" y="95" text-anchor="middle" font-size="28">🏚</text>
+<text x="130" y="125" text-anchor="middle" font-size="9" fill="#C0392B">Non mi convince</text>
+<path d="M280 90 L340 90" stroke="#152435" stroke-width="8" stroke-linecap="round"/>
+<path d="M280 100 L340 100" stroke="#FF6B35" stroke-width="8" stroke-linecap="round"/>
+<text x="400" y="88" font-size="11" fill="#152435" font-weight="700">-30.000 €</text>
+<text x="400" y="108" font-size="11" fill="#152435" font-weight="700">subito!</text>
+<text x="260" y="175" text-anchor="middle" font-size="9" fill="#6B7A8D">Trattativa prima del cuore = zero credibilità</text>
+</svg>
+<figcaption>Error #2 — Negoziare senza essere convinti è teatro, non acquisto.</figcaption>
+</figure>"""
+
+
+def v3_superficiale() -> str:
+    return """<figure class="vignette-wrap" aria-label="Vignetta: visita superficiale">
+<svg viewBox="0 0 520 200" width="100%" height="200" role="img">
+<title>Visita lampo con smartphone</title>
+<circle cx="120" cy="100" r="40" fill="#FF8F5E"/>
+<text x="120" y="108" text-anchor="middle" font-size="24">🏃</text>
+<rect x="200" y="60" width="140" height="90" fill="#ECE7DF" stroke="#2C4A6E"/>
+<text x="270" y="100" text-anchor="middle" font-size="10" fill="#6B7A8D">2 minuti</text>
+<rect x="380" y="75" width="50" height="80" rx="8" fill="#152435"/>
+<text x="405" y="115" text-anchor="middle" font-size="18">📱</text>
+<text x="260" y="175" text-anchor="middle" font-size="9" fill="#6B7A8D">Passaggio veloce = si passa per superficiali</text>
+</svg>
+<figcaption>Error #3 — Chi corre non vede umidità, orientamento, rumori.</figcaption>
+</figure>"""
+
+
+def v4_ritardo_ghost() -> str:
+    return """<figure class="vignette-wrap" aria-label="Vignetta: ritardo e silenzio">
+<svg viewBox="0 0 520 200" width="100%" height="200" role="img">
+<title>Ritardo, nessuna chiamata, messaggio ignorato</title>
+<circle cx="100" cy="90" r="45" fill="none" stroke="#C0392B" stroke-width="4"/>
+<text x="100" y="98" text-anchor="middle" font-size="22">⏰</text>
+<text x="100" y="155" text-anchor="middle" font-size="9" fill="#C0392B">+25 min</text>
+<rect x="180" y="55" width="150" height="70" rx="10" fill="#E3F2FD" stroke="#90CAF9"/>
+<text x="255" y="88" text-anchor="middle" font-size="10" fill="#1565C0">Cosa ne pensate?</text>
+<text x="255" y="108" text-anchor="middle" font-size="9" fill="#6B7A8D">messaggio agente</text>
+<rect x="360" y="70" width="120" height="40" rx="8" fill="#ECE7DF"/>
+<text x="420" y="96" text-anchor="middle" font-size="10" fill="#6B7A8D">…visto ✓✓</text>
+<text x="260" y="175" text-anchor="middle" font-size="9" fill="#6B7A8D">Ritardo + ghosting = cliente non collaborativo</text>
+</svg>
+<figcaption>Error #4 — Rispetto e comunicazione: due binari obbligatori.</figcaption>
+</figure>"""
+
+
+def v5_parente() -> str:
+    return """<figure class="vignette-wrap" aria-label="Vignetta: parente al posto dell'interessato">
+<svg viewBox="0 0 520 200" width="100%" height="200" role="img">
+<title>Il cugino alla visita</title>
+<rect x="30" y="45" width="110" height="130" fill="#2C4A6E" rx="6"/>
+<text x="85" y="105" text-anchor="middle" font-size="11" fill="#fff">AGENTE</text>
+<circle cx="220" cy="100" r="38" fill="#FF8F5E"/>
+<text x="220" y="108" text-anchor="middle" font-size="22">👴</text>
+<text x="220" y="155" text-anchor="middle" font-size="9" fill="#152435">«Sono il vicino»</text>
+<rect x="300" y="70" width="180" height="55" rx="8" fill="#FFF3E0" stroke="#FF6B35"/>
+<text x="390" y="95" text-anchor="middle" font-size="9" fill="#152435">Dovevo venire io ma</text>
+<text x="390" y="112" text-anchor="middle" font-size="9" fill="#152435">mando mia zia / il cugino</text>
+<text x="260" y="185" text-anchor="middle" font-size="9" fill="#C0392B" font-weight="700">Peggior perdita di tempo per tutti</text>
+</svg>
+<figcaption>Error #5 — Solo il diretto interessato conta in visita.</figcaption>
+</figure>"""
+
+
+def build_body() -> str:
+    return f"""
+<div class="aeo-box">
+<h2>In sintesi</h2>
+<p><strong>Visita un immobile a Padova con rispetto e metodo.</strong> Non chiedere subito se è trattabile, non aprire trattative senza conviction, non fare visite lampo, non arrivare in ritardo senza avvisare, non ignorare il follow-up dell'agente e non mandare parenti o vicini al posto tuo. Sono cinque errori frequenti che fanno etichettare i clienti come poco collaborativi — e alla prossima occasione l'agenzia darà priorità ad altri. Guida Righetto Immobiliare, dal 2000 su 101 comuni del Padovano.</p>
+</div>
+
+<p>Parliamo spesso di <strong>agenti immobiliari scorretti</strong>. Giusto. Ma nel nostro lavoro quotidiano — decine di visite a settimana tra Padova, Limena, Abano, Selvazzano e provincia — vediamo anche l'altra faccia: <strong>clienti che non portano rispetto al rapporto</strong>, trattato come se la mediazione fosse un favore occasionale e non un mestiere che richiede organizzazione, puntualità e cortesia reciproca.</p>
+
+<p>L'articolo precedente sul venditore presuntuoso (<a href="blog-so-tutto-io-venditore-presuntuoso-padova-2026">«So tutto io»</a>) guardava la trattativa dal lato di chi vende. Qui invertiamo la prospettiva: <strong>chi compra o affitta</strong> e come si comporta in visita. Perché il mercato non è fatto solo di professionisti da correggere — è fatto di incontri, e gli incontri funzionano se entrambe le parti giocano la stessa partita.</p>
+
+<p>Non è moralismo: è <strong>pragmatismo</strong>. Un agente coordina chiavi, proprietari, altre visite, spostamenti e follow-up. Chi si comporta male viene ricordato — non per vendetta, ma perché il tempo è finito e i clienti collaborativi meritano priorità. Ecco <strong>cinque cose da non fare</strong> quando vai a vedere un immobile, con vignette che fanno sorridere (o arrossire).</p>
+
+<p>In sintesi rapida, prima delle vignette: (1) non chiedere subito se è trattabile; (2) non negoziare se non sei convinto; (3) non fare la visita di passaggio; (4) non ritardare o sparire dopo il follow-up; (5) non mandare terzi al posto tuo. Sono comportamenti che, ripetuti, cambiano il modo in cui l'agenzia ti percepisce — e nel mercato padovano del 2026, dove buoni immobili si muovono in giorni, quella percezione conta.</p>
+
+<div class="err-card"><strong>Regola d'oro:</strong> la visita è un appuntamento professionale, non un giro turistico né un reality show del ribasso. Chi rispetta il tempo altrui viene ricordato — nel bene.</div>
+
+<h2 id="errore-1">1. «È trattabile?» — la prima domanda che non dovresti fare</h2>
+
+<p>Apri la porta, fai due passi nel soggiorno e chiedi: <em>«Ma è trattabile?»</em>. L'agente sorride, il venditore che ascolta in cuffia sospira, tu hai appena comunicato una sola cosa: <strong>non ti interessa l'immobile, ti interessa solo lo sconto</strong>.</p>
+
+<p>Il prezzo si discute quando c'è un <strong>interesse reale</strong>, dopo aver capito metratura, stato, spese condominiali, orientamento, rumori, luce. Chiederlo alla soglia è come chiedere lo sconto in cassa prima di aprire il menu. Tecnicamente possibile, socialmente disastroso.</p>
+
+{v1_trattabile()}
+
+<p>Cosa fare invece: visita con calma, prendi appunti (anche mentali), confronta con altri annunci che hai visto online. Se ti piace, allora si apre il dialogo su budget e proposta — magari con una <a href="servizio-valutazioni">valutazione comparativa</a> o una seconda visita con tecnico. La trattativa è il <em>dessert</em>, non l'antipasto.</p>
+
+<p>In agenzia annotiamo mentalmente chi fa questa domanda alla soglia: non per giudicare il carattere, ma per capire se investire altre due visite su immobili simili. Il tempo dell'agente è una risorsa condivisa tra tutti i clienti in cerca. Un acquirente che prima capisce, poi propone, viene percepito come <strong>partner di trattativa</strong>; chi chiede lo sconto come saluto viene percepito come curioso — e i curiosi non ricevono le anteprime sugli incarichi in arrivo.</p>
+
+<h3>Domande utili al posto di «è trattabile?»</h3>
+<ul>
+<li>Da quanto è in vendita e quante visite ha avuto?</li>
+<li>Ci sono lavori condominiali deliberati?</li>
+<li>La planimetria è conforme? APE di che classe?</li>
+<li>Perché vendono — acquisto altro immobile, trasferimento, eredità?</li>
+<li>Entro quando vorrebbero chiudere?</li>
+</ul>
+<p>Queste domande dimostrano serietà e ti danno munizioni reali per una futura offerta, se l'immobile ti convince.</p>
+
+<h2 id="errore-2">2. Iniziare la trattativa senza essere ancora convinti</h2>
+
+<p>Variante avanzata dell'errore uno: non solo chiedi se è trattabile, ma <strong>lanci cifre</strong> su un immobile che non ti convince. «Metto 180, ma solo se scendono di 40». L'agente registra: trattativa fantasma, perdita di tempo, possibile perdita di credibilità quando — se mai — farai una proposta seria su un altro incarico.</p>
+
+<p>La negoziazione ha senso quando hai <strong>conviction</strong>: questa casa può essere la nostra, il prezzo è l'ultimo ostacolo, siamo pronti a formalizzare. Senza quel passaggio interiore stai solo esercitando la voce da commerciante del mercato rionale — e l'agente lo capisce in trenta secondi.</p>
+
+{v2_trattativa_precoce()}
+
+<blockquote>Trattare senza amare (o almeno senza voler bene) l'immobile è come fare una proposta di matrimonio a qualcuno che hai visto in ascensore.</blockquote>
+
+<p>Se non sei convinto, dillo con eleganza: «Grazie, non è la tipologia che cerchiamo». L'agente ti proporrà altro. Se sei indeciso, chiedi una seconda visita o materiali aggiuntivi (planimetria, APE, spese). Non aprire il capitolo prezzo per riempire il silenzio.</p>
+
+<p>A Padova — dove convivono studenti, famiglie e investitori sullo stesso mercato — la concorrenza su trilocali ben posizionati è alta. Chi inizia a trattare su un immobile che non ama spesso lo fa per <strong>allenare la voce</strong> prima di andare sul target vero. L'agente lo capisce: non è la tua prima trattativa della vita, ma è la sua decima della giornata. La credibilità si consuma in fretta.</p>
+
+<p>La sequenza corretta: prima visita → riflessione 24-48 ore → eventuale seconda visita → proposta scritta con condizioni chiare (mutuo, vendita altro immobile, tempi rogito). Saltare i passaggi intermedi significa chiedere all'agente di fare il lavoro emotivo al posto tuo — e non è nel mandato.</p>
+
+<h2 id="errore-3">3. Visite superficiali — passare per chi non ha davvero intenzione</h2>
+
+<p>Entri, guardi il soffitto, scrolli il telefono, chiedi «quanto è grande?» quando la metratura è nell'annuncio, esci in quattro minuti. Per te è un giro; per l'agente è un buco in agenda; per il proprietario è qualcuno in casa sua che non ha nemmeno tolto le scarpe (metaforicamente).</p>
+
+<p>Chi visita così <strong>passa per superficiale</strong> — e quando quell'agente riceve l'incarico perfetto per te, pensa due volte prima di chiamarti. Non per cattiveria: perché hai dimostrato di non investire attenzione nel processo.</p>
+
+{v3_superficiale()}
+
+<figure class="blog-fig">
+<img src="img/blog/blog-scegliere-immobile-giusto-padova-2026.webp" alt="Visita attenta a un appartamento a Padova con agente immobiliare" width="820" height="460" loading="lazy">
+<figcaption>Visita seria: luce, spazi, rumori, planimetria. Non una corsa tra un caffè e l'altro.</figcaption>
+</figure>
+
+<p>Checklist minima in visita (anche 20 minuti ben usati): orientamento e luce, stato infissi e pavimenti, odori e ventilazione, rumori da strada o vicini, spese condominiali indicative, conformità che salta all'occhio (tamponamenti, verande). Per approfondire: <a href="blog-checklist-verifiche-prima-compromesso-padova-2026">checklist prima del compromesso</a> e <a href="blog-dieci-errori-acquisto-casa-padova-2026">dieci errori in acquisto</a>.</p>
+
+<p>Chi visita cinque immobili in un pomeriggio senza ricordarsi quale aveva il bagno cieco non sta comprando — sta <strong>collezionando foto mentali confuse</strong>. Meglio due visite concentrate con domande scritte sul telefono (note, non social) che un tour disneylandiano del Padovano. L'agente preferisce accompagnarti su due target seri che su cinque passerelle.</p>
+
+<p>Segnali che stai facendo sul serio: misuri mentalmente dove starebbe il divano, chiedi dell'impianto elettrico, guardi dal balcone, ascolti se si sente il tram o la tangenziale. Segnali che passi per superficiale: foto al soffitto stucco, battuta sul prezzo al primo minuto, uscita prima di vedere la cantina o il ripostiglio.</p>
+
+<h2 id="errore-4">4. Ritardi, imprevisti non comunicati e silenzio sul feedback</h2>
+
+<p>L'agente è in porta alle 10:00. Tu arrivi alle 10:25 senza messaggio. Oppure salti l'appuntamento perché «è uscito un imprevisto» — capitano, ma <strong>senza avvisare</strong> è maleducazione pura. Il venditore ha liberato la mattina, l'agente ha rinunciato a un'altra visita: tutto per niente.</p>
+
+<p>Peggio ancora: dopo la visita l'agente ti scrive cortesemente <em>«Cosa ne ha pensato? Posso aiutarla con altro?»</em> e tu <strong>non rispondi mai</strong>. Nemmeno un «grazie, non fa per noi». Il messaggio resta in sospeso, il CRM dell'agenzia annota: cliente non collaborativo. Alla prossima occasione — anche se ti interessasse — <strong>non sarai in cima alla lista</strong>.</p>
+
+{v4_ritardo_ghost()}
+
+<p>Il rapporto con un professionista che dialoga tutto il giorno con le persone si costruisce su <strong>micro-gesti</strong>: puntualità, un messaggio se tardi, una risposta anche negativa. Non è Instagram: il ghosting qui ha conseguenze concrete sulla priorità delle future proposte.</p>
+
+<p>Scenario reale (ricorrente): appuntamento alle 18:00 in zona Arcella, proprietario che lavora fino alle 17:30 per aprirti. Tu non arrivi, non rispondi al telefono. L'agente si scusa al venditore, perde credibilità sull'incarico e annota il tuo nominativo. Due settimane dopo chiedi info su un quadrilocale in Guizza: la scheda c'è, ma la chiamata di conferma arriva <em>dopo</em> quella al cliente che alla visita precedente ha scritto «non fa per noi, grazie mille».</p>
+
+<p>Non devi comprare. Devi solo <strong>comunicare come adulti</strong>. «Ci abbiamo pensato, preferiamo altro» basta e avanza. Il silenzio interpreta disinteresse totale — e disinteresse totale non merita priorità quando il mercato accelera.</p>
+
+<h3>Imprevisti: come gestirli bene</h3>
+<ul>
+<li>Chiamata o messaggio <strong>almeno 30 minuti prima</strong> se ritardi o salti.</li>
+<li>Proponi subito un nuovo slot — non lasciare il vuoto.</li>
+<li>Se l'immobile non convince, rispondi entro 48 ore al follow-up.</li>
+<li>Se ti interessa, di' che vuoi una seconda visita: segnale forte di collaborazione.</li>
+</ul>
+
+<h2 id="errore-5">5. Mandare amico, parente o vicino — la peggiore perdita di tempo</h2>
+
+<p>Il classico finale: «Io non posso venire, mando mia madre / mio cognato / il vicino di casa che capisce di case». No. <strong>Solo il diretto interessato</strong> deve vedere l'immobile che potenzialmente comprerà o affitterà con i propri occhi, con i propri criteri, con la propria sensibilità ai difetti.</p>
+
+<p>Il parente non sa cosa cercate voi, non potrà rispondere alle domande dell'agente su budget e tempistiche, non firmerà il compromesso. Risultato: <strong>appuntamento bruciato</strong> per l'agenzia, informazione inutile per te, fastidio per il proprietario. È forse la peggiore perdita di tempo per tutti — e la più evitabile.</p>
+
+{v5_parente()}
+
+<figure class="blog-fig">
+<img src="img/blog/blog-dieci-errori-acquisto-casa-padova-2026.webp" alt="Errori comuni nell'acquisto immobiliare a Padova" width="820" height="460" loading="lazy">
+<figcaption>Acquistare casa è una decisione familiare — ma la visita decisiva la fa chi compra.</figcaption>
+</figure>
+
+<p>Eccezione ragionata: seconda visita con partner o genitore che contribuisce all'acquisto, concordata con l'agente. Non sostituisce la prima visita del decisore principale.</p>
+
+<p>Il «mando mia sorella perché abita vicino» è un classico: la sorella non sa il tuo budget, non sente la stessa emozione sul terrazzo, non noterà l'umidità che a te dà fastidio. Torni tu, giorni dopo, con domande che l'agente ha già risposto al parente — <strong>doppio lavoro, zero efficienza</strong>. In più il venditore, che ha diritto a sapere chi entra in casa, percepisce disorganizzazione.</p>
+
+<p>Se non puoi in quel slot, <strong>riprogramma</strong>. Se sei fuori regione, chiedi tour virtuale o videochiamata in casa (dove l'agenzia lo offre) prima di far salire in aereo il suocero. Rispetti tutti e risparmi tempo.</p>
+
+<h2 id="reciproco">Non solo agenti «cattivi»: anche clienti che meritano di essere richiamati al rispetto</h2>
+
+<p>Il settore immobiliare ha problemi reali: annunci fuorvianti, risposte lente, pressione sul prezzo. Ma <strong>non è tutta colpa dell'agenzia</strong>. Molti professionisti seri — noi compresi, dal 2000, 350+ immobili, 127 recensioni Google a 4,9/5 — organizzano il lavoro con orari, appuntamenti e follow-up strutturati. Chi non rispetta quel ritmo si esclude da solo dal circolo dei clienti prioritari.</p>
+
+<p>Se vuoi essere trattato come cliente serio: preparati, sii puntuale, comunica, visita personalmente, rispondi. L'agente ti ricompenserà con <strong>anticipo sulle novità</strong>, disponibilità per visite extra e supporto in trattativa — compenso di mediazione sempre <strong>da concordare in sede</strong>, mai listini online.</p>
+
+<div class="righetto-sol">
+<h2>Cosa può fare Righetto</h2>
+<p style="font-size:.86rem;margin:0 0 .5rem"><strong>Il quesito:</strong> Voglio visitare immobili a Padova in modo serio — come organizzo il percorso?</p>
+<ul>
+<li><strong>Visite concordate</strong> — Appuntamento con diretto interessato, scheda immobile e materiali prima della visita. (<a href="immobili">catalogo immobili</a>)</li>
+<li><strong>Seconda visita mirata</strong> — Con tecnico, geometra o familiare solo dopo la prima valutazione. (<a href="visite-virtuali">visite virtuali</a> dove disponibili)</li>
+<li><strong>Supporto trattativa</strong> — Proposta scritta quando c'è interesse reale, non chiacchiere alla soglia. (<a href="servizio-vendita">servizio vendita</a> / acquisto)</li>
+<li><strong>Consulenza gratuita</strong> — Budget, zone, tempistiche prima di perdere visite a caso. (<a href="landing-consulenza-immobiliare-gratuita">consulenza gratuita</a>)</li>
+</ul>
+<p style="font-size:.78rem;color:var(--grigio);margin:0"><em>Tel. 049.8843484 · Mediazione concordata in mandato.</em></p>
+</div>
+
+<p>Porta rispetto al professionista che ti apre una porta: il mercato immobiliare di Padova è competitivo, ma la cortesia — come la preparation — <strong>non costa nulla e paga dividendi</strong>. Le cinque vignette sopra sono ironia; il messaggio è serio: collaborare bene significa essere richiamati quando arriva l'immobile giusto.</p>
+
+<h2 id="come-fare-bene">Il lato opposto: come diventare il cliente che l'agente richiama per primo</h2>
+
+<p>Non serve adulare nessuno. Basta l'opposto degli errori sopra:</p>
+<ol>
+<li><strong>Visita preparata</strong> — hai letto l'annuncio, porti domande, rispetti i tempi.</li>
+<li><strong>Onestà sul gradimento</strong> — «mi piace / non mi piace» senza trattativa fantasma.</li>
+<li><strong>Puntualità e comunicazione</strong> — ritardi avvisati, imprevisti gestiti.</li>
+<li><strong>Feedback cortese</strong> — anche un no chiaro chiude il cerchio con rispetto.</li>
+<li><strong>Presenza del decisore</strong> — tu (o chi compra davvero) alla prima visita.</li>
+</ol>
+
+<p>Questo profilo riceve WhatsApp con anteprime («sta entrando un trilocale in zona Forcellini, vuole vederlo domani?»), slot preferenziali e supporto nella proposta. Non è favoritismo: è <strong>merito operativo</strong> — e funziona anche se poi non compri, purché tu abbia giocato le carte della cortesia.</p>
+
+<h2 id="agente-corretto">E l'agente? Deve essere corretto anche lui</h2>
+
+<p>Il rapporto è bidirezionale. Un agente serio risponde entro tempi ragionevoli, non nasconde difetti evidenti, prepara la visita (chiavi, luce accesa, annuncio allineato alla realtà), rispetta il tuo no senza insistenze aggressive. Se non succede, cambia agenzia — ma non usare la cattiva esperienza altrui come scusa per comportamenti che <strong>tu</strong> controlli.</p>
+
+<p>Righetto Immobiliare opera dal <strong>2000</strong> su <strong>101 comuni</strong>, con <strong>350+ immobili</strong> gestiti e <strong>98% di soddisfazione</strong> (127 recensioni Google, 4,9/5). Organizziamo visite con agenda condivisa proprio perché il rispetto del tempo — tuo, nostro, del venditore — è la base di ogni trattativa che poi chiude al rogito.</p>
+
+<figure class="blog-fig">
+<img src="img/blog/blog-inline-tipologie-case-vendute-padova-2026.webp" alt="Tipologie immobili più richieste nel mercato padovano" width="820" height="460" loading="lazy">
+<figcaption>Mercato attivo nel Padovano: chi visita bene ha più chance di intercettare l'immobile giusto prima degli altri.</figcaption>
+</figure>
+
+<p>Per iniziare un percorso ordinato — budget, zone, mutuo, tempistiche — parte dalla <a href="blog-comprare-casa-padova-guida-2026">guida acquisto Padova 2026</a> o dalla <a href="contatti">richiesta consulenza</a>. E alla prossima visita, lascia a casa la domanda «è trattabile?» finché non hai visto davvero la cucina.</p>
+
+<h2 id="social">Da condividere (senza vergogna)</h2>
+
+<p>Se ti sei riconosciuto in una vignetta, non è un attacco: è un invito a fare meglio la prossima volta. Condividere questi cinque errori aiuta amici e parenti che stanno cercando casa a Padova a non bruciare occasioni — e aiuta anche gli agenti onesti a lavorare con clienti più consapevoli. Il settore migliora quando <strong>entrambi i lati</strong> alzano l'asticella, non quando si punta solo il dito verso l'altro.</p>
+<p>Da un agente immobiliare serio in visita: meritiamo clienti altrettanto seri, punto finale.</p>
+"""
+
+
+def faq_html() -> str:
+    items = "".join(
+        f'<div class="faq-item"><div class="faq-q">{q}</div><div class="faq-a"><div class="faq-a-inner">{a}</div></div></div>'
+        for q, a in FAQS
+    )
+    return f'<div id="faq"><h2 style="font-family:\'Cormorant Garamond\',serif;font-size:1.62rem;border-bottom:2px solid var(--oro);margin-bottom:.9rem">Domande frequenti</h2>{items}</div>'
+
+
+def lead_form() -> str:
+    return f"""<section class="blog-lead-wrap" id="richiedi-consulenza">
+  <h2>Prenota una visita seria — ti richiamiamo noi</h2>
+  <form data-rig-lead-form data-provenienza="{SLUG}" data-pagina="{SLUG}" data-msg-prefix="[Blog]" novalidate>
+    <div class="bl-fields">
+      <label for="bl-nome">Nome e cognome *</label>
+      <input type="text" id="bl-nome" required autocomplete="name" placeholder="Mario Rossi">
+      <label for="bl-tel">Telefono *</label>
+      <input type="tel" id="bl-tel" required autocomplete="tel" placeholder="333 123 4567">
+      <label for="bl-email">Email</label>
+      <input type="email" id="bl-email" autocomplete="email">
+      <label for="bl-msg">Zona o codice immobile (opzionale)</label>
+      <textarea id="bl-msg" placeholder="Es. trilocale Arcella, codice LP0286…"></textarea>
+      <label class="bl-chk"><input type="checkbox" id="bl-gdpr" required> Acconsento al trattamento dati (GDPR). <a href="privacy">Privacy</a> *</label>
+      <button type="submit">Richiedi visita / consulenza</button>
+    </div>
+    <div class="rig-lead-success"><h3>Inviato!</h3><p>Ti ricontattiamo a breve.</p></div>
+  </form>
+</section>"""
+
+
+def build_html(body: str, wc: int) -> str:
+    meta = "5 errori in visita immobile a Padova: non chiedere se è trattabile, non trattare senza conviction, rispetto e puntualità. Guida Righetto con vignette."
+    blog = {
+        "@context": "https://schema.org", "@type": "BlogPosting",
+        "headline": "5 cose da NON fare in visita immobile — guida con vignette",
+        "description": meta, "image": [f"https://righettoimmobiliare.it/{HERO}"],
+        "author": {"@type": "Person", "name": "Gino Capon", "worksFor": {"@type": "RealEstateAgent", "name": "Gruppo Immobiliare Righetto di Capon Gino"}},
+        "publisher": {"@type": "Organization", "name": "Righetto Immobiliare"},
+        "datePublished": DATE_ISO, "dateModified": DATE_ISO,
+        "mainEntityOfPage": {"@type": "WebPage", "@id": f"https://righettoimmobiliare.it/{SLUG}"},
+        "articleSection": "Consigli acquisto", "wordCount": wc, "inLanguage": "it-IT",
+    }
+    faq_ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQS
+    ]}
+    rea = {
+        "@context": "https://schema.org", "@type": "RealEstateAgent",
+        "name": "Gruppo Immobiliare Righetto di Capon Gino", "url": "https://righettoimmobiliare.it",
+        "telephone": "+390498843484",
+        "address": {"@type": "PostalAddress", "streetAddress": "Via Roma n.96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
+        "geo": {"@type": "GeoCoordinates", "latitude": 45.4447, "longitude": 11.8454},
+        "sameAs": ["https://www.facebook.com/righettoimmobiliare", "https://www.instagram.com/righettoimmobiliare", "https://www.linkedin.com/company/righetto-immobiliare"],
+    }
+    rel = [
+        ("Checklist verifiche prima del compromesso", "blog-checklist-verifiche-prima-compromesso-padova-2026"),
+        ("Dieci errori acquisto casa Padova", "blog-dieci-errori-acquisto-casa-padova-2026"),
+        ("Scegliere l'immobile giusto", "blog-scegliere-immobile-giusto-padova-2026"),
+        ("Comprare casa Padova guida 2026", "blog-comprare-casa-padova-guida-2026"),
+        ("Catalogo immobili", "immobili"),
+        ("Consulenza gratuita", "landing-consulenza-immobiliare-gratuita"),
+    ]
+    rel_html = "".join(f'<li><a href="{u}">{t}</a></li>' for t, u in rel)
+    return f"""<!DOCTYPE html>
+<html lang="it">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MHDHHES26"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-9MHDHHES26');</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>5 errori in visita immobile Padova | Righetto</title>
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://righettoimmobiliare.it/{SLUG}">
+<meta property="og:title" content="5 cose da NON fare quando visiti un immobile">
+<meta property="og:description" content="{meta}">
+<meta property="og:url" content="https://righettoimmobiliare.it/{SLUG}">
+<meta property="og:image" content="https://righettoimmobiliare.it/{HERO}">
+<meta name="description" content="{meta}">
+<script type="application/ld+json">{json.dumps(blog, ensure_ascii=False)}</script>
+<script type="application/ld+json">{json.dumps(faq_ld, ensure_ascii=False)}</script>
+<script type="application/ld+json">{json.dumps(rea, ensure_ascii=False)}</script>
+<link rel="stylesheet" href="css/fonts.css?v=3"><link rel="stylesheet" href="css/nav-mobile.css?v=4">
+{STYLE_BLOCK}
+</head>
+<body>
+<a href="#main-content" class="skip-link">Contenuto</a>
+<header><div class="hi">
+<a href="/" class="logo">Righetto <span>Immobiliare</span></a>
+<nav><a href="/">Home</a><a href="immobili">Immobili</a><a href="gino-capon">Profilo autore</a><a href="blog" class="active">Blog</a><a href="contatti">Contatti</a></nav>
+<a class="h-btn" href="immobili">Vedi annunci</a>
+</div></header>
+<main id="main-content">
+<div class="art-hero">
+<img class="art-hero-img" src="{HERO}" alt="Visita immobile a Padova — checklist e buone pratiche" width="1280" height="420" fetchpriority="high">
+<div class="art-hero-overlay"><div class="art-hero-inner">
+<div class="breadcrumb"><a href="/">Home</a> / <a href="blog">Blog</a> / Visite immobiliari</div>
+<span class="cat-badge">Etichetta in visita</span>
+<h1><strong>5 cose da NON fare</strong> quando vai a vedere un immobile</h1>
+<div class="art-hero-meta"><div class="av">G</div><span>Gino Capon</span><span>{DATE_IT}</span><span>11 min</span></div>
+</div></div>
+</div>
+<div class="art-container"><div class="art-content">
+{body}
+{faq_html()}
+<div class="author-bio"><img src="img/team/titolari.webp" alt="Gino Capon" width="64" height="64" loading="lazy"><div><strong>Gino Capon</strong><p style="font-size:.8rem;color:#555">Righetto Immobiliare — Padova e provincia dal 2000.</p><a href="gino-capon">Profilo autore</a></div></div>
+<div class="related"><h3>Correlati</h3><ul>{rel_html}</ul></div>
+</div></div>
+{lead_form()}
+{FOOTER}"""
+
+
+def patch_blog_html() -> None:
+    path = ROOT / "blog.html"
+    text = path.read_text(encoding="utf-8")
+    if SLUG in text:
+        return
+    entry = """{
+      "titolo": "5 errori in visita immobile: cosa NON fare a Padova",
+      "categoria": "Consigli acquisto",
+      "data": "2026-07-03",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-checklist-verifiche-prima-compromesso-padova-2026.webp",
+      "url_statico": "blog-5-errori-visita-immobile-padova-2026",
+      "tempo": 11,
+      "autore": "Gino Capon",
+      "contenuto": "Trattabile alla soglia, trattativa precoce, visite superficiali, ritardi e parente al posto tuo — 5 vignette.",
+      "evidenza": true
+    },
+"""
+    text = text.replace("  const articoliStatici = [\n", "  const articoliStatici = [\n" + entry, 1)
+    path.write_text(text, encoding="utf-8")
+
+
+def patch_sitemap() -> None:
+    path = ROOT / "sitemap.xml"
+    text = path.read_text(encoding="utf-8")
+    if SLUG in text:
+        return
+    url = f"  <url><loc>https://righettoimmobiliare.it/{SLUG}</loc><lastmod>{DATE_ISO}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n"
+    text = text.replace(
+        "  <url><loc>https://righettoimmobiliare.it/blog-so-tutto-io-venditore-presuntuoso-padova-2026</loc>",
+        url + "  <url><loc>https://righettoimmobiliare.it/blog-so-tutto-io-venditore-presuntuoso-padova-2026</loc>",
+        1,
+    )
+    path.write_text(text, encoding="utf-8")
+
+
+def patch_admin() -> None:
+    path = ROOT / "admin.html"
+    text = path.read_text(encoding="utf-8")
+    if SLUG in text:
+        return
+    entry = (
+        "  { titolo: \"5 errori in visita immobile: cosa NON fare a Padova\", categoria: \"Consigli acquisto\", "
+        "data: '2026-07-03', tempo: 11, stato: 'pubblicato', autore: 'Gino Capon', emoji: '🚪', "
+        f"immagine_copertina: '{HERO}', url_statico: '{SLUG}', "
+        "contenuto: \"<p>5 errori in visita: trattabile, trattativa precoce, superficiali, ritardi, parente al posto tuo.</p>\", "
+        "evidenza: true, data_pubblicazione: '2026-07-03' },\n"
+    )
+    text = text.replace("const _blogSeedArticles = [\n", "const _blogSeedArticles = [\n" + entry, 1)
+    path.write_text(text, encoding="utf-8")
+
+
+def patch_homepage() -> None:
+    path = ROOT / "js/homepage.js"
+    text = path.read_text(encoding="utf-8")
+    if SLUG in text:
+        return
+    sm = f"    '5 errori in visita immobile: cosa non fare a padova': {{ img: '{HERO}', url: '{SLUG}' }},\n"
+    text = text.replace("  const staticMap = {\n", "  const staticMap = {\n" + sm, 1)
+    art = f"""    {{
+      "titolo": "5 errori in visita immobile: cosa NON fare a Padova",
+      "categoria": "Consigli acquisto",
+      "data": "2026-07-03",
+      "stato": "pubblicato",
+      "immagine_copertina": "{HERO}",
+      "url_statico": "{SLUG}"
+    }},
+"""
+    text = text.replace('  const articoliStatici = [\n', '  const articoliStatici = [\n' + art, 1)
+    path.write_text(text, encoding="utf-8")
+
+
+def patch_skimm() -> None:
+    path = ROOT / "scripts/build_skimm.py"
+    text = path.read_text(encoding="utf-8")
+    if SLUG in text:
+        return
+    block = f'''    "{SLUG}": {{
+        "kw_primaria": "errori-visita-immobile-etichetta",
+        "angolo": "Etichetta visita / tono ironico acquirente — non checklist rogito né errori acquisto generici",
+        "intent": "visita-immobile-comportamento",
+    }},
+'''
+    text = text.replace("ANGLE_OVERRIDES: dict[str, dict] = {\n", "ANGLE_OVERRIDES: dict[str, dict] = {\n" + block, 1)
+    path.write_text(text, encoding="utf-8")
+
+
+def main() -> None:
+    body = build_body()
+    wc = word_count(body)
+    if wc < MIN_BODY_WORDS:
+        raise SystemExit(f"Corpo {wc} < {MIN_BODY_WORDS}")
+    (ROOT / FILENAME).write_text(build_html(body, wc), encoding="utf-8")
+    patch_blog_html()
+    patch_sitemap()
+    patch_admin()
+    patch_homepage()
+    patch_skimm()
+    print(f"OK {FILENAME} — {wc} parole")
+
+
+if __name__ == "__main__":
+    main()
