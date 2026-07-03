@@ -60,7 +60,13 @@
     "ottimizzazione_contenuto": {
       "skills": ["skill-essentials.md", "skill-content.md", "skill-seo.md"],
       "token_stimati": "~2.800",
-      "note": "Serve Neural Matching + sinonimi + GEO"
+      "note": "Serve Neural Matching + sinonimi + GEO; venerdì: venerdi-contenuti-freschezza.py"
+    },
+    "venerdi_contenuti_skimm": {
+      "skills": ["skill-essentials.md", "skill-content.md", "skill-seo.md"],
+      "cursor_rules": ["righetto-blog-publish.mdc"],
+      "token_stimati": "~2.400",
+      "note": "Report settimanale SKIMM + pillar + keyword libere — §8.1d SKILL-2.0, skimm.md §1.7–1.9"
     },
     "audit_completo": {
       "skills": ["skill-essentials.md", "skill-seo.md", "skill-content.md", "skill-design.md", "skill-context.md"],
@@ -119,6 +125,12 @@
       "schedule": "Ogni venerdì 07:00 CET (assieme ad audit)",
       "script": "scripts/mini-seo-check.sh",
       "output": "Issue GitHub label 'seo-check' — focus su regole skill-seo.md"
+    },
+    "venerdi_contenuti_freschezza": {
+      "workflow": ".github/workflows/venerdi-contenuti-freschezza.yml",
+      "schedule": "Ogni venerdì 05:00 UTC = 07:00 CEST",
+      "script": "scripts/venerdi-contenuti-freschezza.py",
+      "output": "Issue label 'contenuti-freschezza' + email info@righettoimmobiliare.it — SKIMM + blog + pillar"
     },
     "pre_commit_validator": {
       "script": "scripts/validate-page.js",

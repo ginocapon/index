@@ -49,6 +49,29 @@ Script batch: `scripts/build_blog_housing_veneto_lug2026.py` + `register_housing
 5. **Se e' un doppione o troppo simile** (stesso macro-tema, stesse H2, stesso evento geopolitico gia' trattato): **STOP** → ricerca web su **fonte istituzionale** → altro argomento con utilita' per Padova/hinterland.
 6. Proponi 2–3 alternative con fonte se la richiesta era generica; vedi **`skimm.md` §1.2** per strategie long-tail.
 
+### 2.3 Cron venerdì — freschezza e competitività (automatico)
+
+Ogni **venerdì ore 07:00 CEST** GitHub Actions esegue:
+
+```bash
+python scripts/venerdi-contenuti-freschezza.py   # report + email info@
+python scripts/build_skimm.py                      # rigenera catalogo
+python scripts/check_doppioni_sito.py              # anti-doppioni
+```
+
+Workflow: `.github/workflows/venerdi-contenuti-freschezza.yml` — Issue label `contenuti-freschezza`.
+
+**Obiettivo competitivo:** superare portali competitor con **volume** (99+ guide), **corposità** (2500+ parole pillar), **freschezza** (aggiornamento settimanale visibile), **E-E-A-T** (sezione Righetto, autori Linda/Gino). Regole complete: **`skimm.md` §1.7–1.9** e **`SKILL-2.0.md` §8.1d**.
+
+**Ritmo minimo umano (se il cron segnala gap):**
+
+| Frequenza | Azione |
+|---|---|
+| Settimanale | 1 articolo nuovo O 1 refresh dato su articolo esistente |
+| Settimanale | Verificare pillar (homepage hero freshness, blog hub, servizi) |
+| Mensile | Completare 3+ `ANGLE_OVERRIDES` in `build_skimm.py` |
+| Mensile | Aggiornare `llms.txt` con slug pillar nuovi |
+
 ### Struttura obbligatoria
 - **Lunghezza:** 2.500-3.500 parole (pillar) / 1.500-2.000 (secondari)
 - **H1:** unico — keyword primaria + localizzazione

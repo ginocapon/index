@@ -1,0 +1,160 @@
+# ============================================================
+# VENERDÌ CONTENUTI & FRESCHEZZA — Righetto Immobiliare
+# Ogni venerdì alle 05:00 UTC = 07:00 CEST (ora legale)
+# SKIMM + blog corposità + pagine pillar + email a info@
+# ============================================================
+
+name: "Venerdì Contenuti & Freschezza (SKIMM)"
+
+on:
+  schedule:
+    - cron: "0 5 * * 5"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  contenuti-freschezza:
+    name: "Audit contenuti settimanale"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Esegui audit contenuti + SKIMM
+        id: audit
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          python scripts/venerdi-contenuti-freschezza.py
+          python scripts/check_doppioni_sito.py >> venerdi-contenuti-report.md 2>&1 || true
+
+      - name: Leggi report
+        if: always()
+        id: report
+        run: |
+          if [ -f venerdi-contenuti-report.md ]; then
+            {
+              echo 'body<<ENDOFREPORT'
+              cat venerdi-contenuti-report.md
+              echo ''
+              echo 'ENDOFREPORT'
+            } >> "$GITHUB_OUTPUT"
+          else
+            echo "body=Errore: report non generato." >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Crea Issue con report
+        if: always() && steps.report.outputs.body
+        uses: actions/github-script@v7
+        env:
+          REPORT_BODY: ${{ steps.report.outputs.body }}
+          HEALTH: ${{ steps.audit.outputs.health || '?' }}
+          WARNINGS: ${{ steps.audit.outputs.warnings || '?' }}
+          ARTICLES: ${{ steps.audit.outputs.articles || '?' }}
+        with:
+          script: |
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('it-IT', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            });
+            const health = process.env.HEALTH;
+            const warnings = process.env.WARNINGS;
+            const articles = process.env.ARTICLES;
+            let emoji = '🟢';
+            if (parseInt(warnings) > 8) emoji = '🟡';
+            if (parseInt(health) < 70) emoji = '🔴';
+            const title = `${emoji} Venerdì Contenuti — ${dateStr} (${articles} blog, salute ${health}%)`;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body: process.env.REPORT_BODY,
+              labels: ['contenuti-freschezza', 'skimm']
+            });
+
+      - name: Invia email riepilogo a info@righettoimmobiliare.it
+        if: always() && steps.audit.outputs.success == 'true'
+        env:
+          EMAIL_RELAY_KEY: ${{ secrets.EMAIL_RELAY_KEY }}
+        run: |
+          HEALTH="${{ steps.audit.outputs.health }}"
+          WARNINGS="${{ steps.audit.outputs.warnings }}"
+          ERRORS="${{ steps.audit.outputs.errors }}"
+          ARTICLES="${{ steps.audit.outputs.articles }}"
+          SKIMM_RISKS="${{ steps.audit.outputs.skimm_risks }}"
+          THIN="${{ steps.audit.outputs.thin_articles }}"
+          NO_SOL="${{ steps.audit.outputs.no_righetto_sol }}"
+          FREE_KW="${{ steps.audit.outputs.free_keywords }}"
+          UNDEF="${{ steps.audit.outputs.undefined_angles }}"
+          DATE=$(date '+%d/%m/%Y')
+
+          if [ -z "$EMAIL_RELAY_KEY" ]; then
+            echo "⚠️ Secret EMAIL_RELAY_KEY non configurato — email non inviata"
+            exit 0
+          fi
+
+          if [ "$ERRORS" -gt 0 ] 2>/dev/null; then
+            EMOJI="🔴"
+            STATUS="Errori: $ERRORS"
+          elif [ "$WARNINGS" -gt 5 ] 2>/dev/null; then
+            EMOJI="🟡"
+            STATUS="$WARNINGS avvisi da valutare"
+          else
+            EMOJI="🟢"
+            STATUS="Contenuti in buona salute"
+          fi
+
+          EMAIL_BODY="<h2>Venerdì Contenuti &amp; Freschezza — Righetto</h2>"
+          EMAIL_BODY+="<p><strong>Data:</strong> $DATE (report automatico settimanale)</p>"
+          EMAIL_BODY+="<p><strong>Salute contenuti:</strong> ${HEALTH}% — $STATUS</p>"
+          EMAIL_BODY+="<hr>"
+          EMAIL_BODY+="<h3>📊 Blog &amp; SKIMM</h3>"
+          EMAIL_BODY+="<ul>"
+          EMAIL_BODY+="<li><strong>${ARTICLES}</strong> articoli blog catalogati</li>"
+          EMAIL_BODY+="<li><strong>${SKIMM_RISKS}</strong> avvisi SKIMM (anti-doppioni)</li>"
+          EMAIL_BODY+="<li><strong>${UNDEF}</strong> angoli editoriali da completare</li>"
+          EMAIL_BODY+="<li><strong>${THIN}</strong> articoli sotto 1500 parole</li>"
+          EMAIL_BODY+="<li><strong>${NO_SOL}</strong> articoli senza sezione «Cosa può fare Righetto»</li>"
+          EMAIL_BODY+="<li><strong>${FREE_KW}</strong> keyword libere pronte per nuovo articolo</li>"
+          EMAIL_BODY+="</ul>"
+          EMAIL_BODY+="<h3>✅ Azioni consigliate questa settimana</h3>"
+          EMAIL_BODY+="<ol>"
+          EMAIL_BODY+="<li>1 articolo nuovo (kw da TEST-SKILL/skimm.md §1.6)</li>"
+          EMAIL_BODY+="<li>Refresh timestamp/dato su 1 pillar o articolo esistente</li>"
+          EMAIL_BODY+="<li>Verificare pagine pillar (homepage, blog, servizi, agenzia)</li>"
+          EMAIL_BODY+="<li>Aggiornare llms.txt se pubblicato nuovo slug</li>"
+          EMAIL_BODY+="</ol>"
+          EMAIL_BODY+="<hr>"
+          EMAIL_BODY+="<p>Report completo: <a href='https://github.com/${{ github.repository }}/issues?q=label%3Acontenuti-freschezza+sort%3Acreated-desc'>Issue GitHub (label: contenuti-freschezza)</a></p>"
+          EMAIL_BODY+="<p><em>Cron ogni venerdì ore 07:00 CEST — scripts/venerdi-contenuti-freschezza.py + build_skimm.py</em></p>"
+
+          PAYLOAD=$(jq -n \
+            --arg action "send_single" \
+            --arg to "info@righettoimmobiliare.it" \
+            --arg subject "$EMOJI Venerdì Contenuti $DATE — ${ARTICLES} blog, salute ${HEALTH}% — $STATUS" \
+            --arg body "$EMAIL_BODY" \
+            '{action: $action, to: $to, subject: $subject, body: $body}')
+
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
+            "https://api.righettoimmobiliare.it/send-mail.php" \
+            -H "Content-Type: application/json" \
+            -H "X-API-Key: $EMAIL_RELAY_KEY" \
+            -d "$PAYLOAD")
+
+          if [ "$HTTP_CODE" = "200" ]; then
+            echo "✅ Email inviata a info@righettoimmobiliare.it"
+          else
+            echo "⚠️ Email non inviata (HTTP $HTTP_CODE)"
+          fi

@@ -8,6 +8,8 @@ Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutt
 
 **Regole Cursor scoped:** [`TEST-SKILL/skill-cursor-rules.md`](TEST-SKILL/skill-cursor-rules.md) — 7 file `.mdc` in `.cursor/rules/` (pattern awesome-cursorrules).
 
+**Changelog rapido (3 luglio 2026 — b):** cron venerdì 07:00 CEST contenuti/SKIMM + email info@ — `venerdi-contenuti-freschezza.yml`, §8.1d.
+
 **Changelog rapido (3 luglio 2026):** blog — **`TEST-SKILL/skimm.md`** catalogo keyword/intent + `scripts/build_skimm.py`.
 
 **Changelog rapido (27 maggio 2026):** sicurezza — audit generale + revisione **2×/settimana** (martedì/venerdì): **`TEST-SKILL/skill-security.md`**, `scripts/security-check.sh`, workflow `security-check-bisettimanale.yml`.

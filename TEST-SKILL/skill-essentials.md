@@ -86,6 +86,7 @@ Dopo **ogni** task che produce o modifica file nel repo (pagine, blog, CSS/JS, s
 
 ### Checklist aggiuntiva blog
 - [ ] **Anti-doppioni (§8.1a):** `TEST-SKILL/skimm.md` + `check_doppioni_sito.py` + `build_skimm.py` **prima** di scrivere; kw_primaria univoca; se doppione → altro argomento da fonte istituzionale
+- [ ] **Venerdì contenuti:** verificare report `venerdi-contenuti-freschezza` (Issue/email) e applicare azioni prioritarie
 - [ ] Registrato in TUTTI e 4: admin.html + blog.html + homepage.js + sitemap.xml
 - [ ] `data_pubblicazione: 'YYYY-MM-DD'` nel seed (BLOCCANTE per commit)
 - [ ] Copertina + corpo: foto **realistiche** (§2.1 `skill-content.md`); **no** illustrazioni/AI/3D; ≥3 figure + ≥2 SVG colorati

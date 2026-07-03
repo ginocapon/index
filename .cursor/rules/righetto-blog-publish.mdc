@@ -45,4 +45,9 @@ Prima di chiudere: `check_doppioni_sito.py` → `validate-page.js` → grep 4 re
 - Cross-link zone/servizi (min 3)
 - Timestamp "Ultimo aggiornamento" visibile
 - Aggiorna `llms.txt` se pillar o dati mercato
+- `python scripts/build_skimm.py` + commit `skimm.md`/`skimm.json`
 - Form/CTA lead → **`skill-forms-leads.md`**
+
+## Cron venerdì (automatico)
+- `venerdi-contenuti-freschezza.yml` — 07:00 CEST — email `info@righettoimmobiliare.it`
+- Leggi Issue label `contenuti-freschezza` per azioni settimana
