@@ -113,7 +113,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 - Coppia da non fondere (Tribloc vs Case Green generico): blog-residenze-green-padova-tribloc-2026 ↔ blog-domanda-case-green-certificazione-padova-2026
 - Coppia da non fondere (Evento BCE vs guida mutui): blog-bce-tassi-mutui-giugno-2026-padova ↔ blog-mutui-casa-padova-2026
 
-**Articoli catalogati:** 101
+**Articoli catalogati:** 102
 
 ---
 
@@ -158,10 +158,11 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-studentati-veneto-2026-posti-letto` | `posti-letto-esu-camplus-pnrr-veneto` | Canali offerta regionale (ESU/privati/PNRR) — non singolo canone stanza |
 | `blog-vicenza-residenze-universitarie-calmierate-2026` | `casa-querini-calmierati-vicenza` | Vicenza PNRR Saudino — non Padova né Tribloc |
 
-### Altri / trasversali (3)
+### Altri / trasversali (4)
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
+| `blog-5-domande-appuntamento-agenzia-padova-2026` | `domande-appuntamento-agenzia-pretese` | Domande da fare in agenzia / tono ironico — non errori visita né solo documenti rogito |
 | `blog-5-errori-visita-immobile-padova-2026` | `errori-visita-immobile-etichetta` | Etichetta visita / tono ironico acquirente — non checklist rogito né errori acquisto generici |
 | `blog-gestione-spese-casa-risparmio-padova-2026` | `gestione-spese-casa-possesso-padova` | Spese possesso post-acquisto (energia, IMU) — non costi rogito |
 | `blog-so-tutto-io-venditore-presuntuoso-padova-2026` | `venditore-presuntuoso-staging-documenti-ape` | Verità dal campo / tono provocatorio — non guida tecnica staging o solo documenti |

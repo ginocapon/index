@@ -682,6 +682,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    '5 domande in agenzia: cosa chiedere e pretendere a padova': { img: 'img/blog/blog-documenti-compravendita-rogito-padova-2026.webp', url: 'blog-5-domande-appuntamento-agenzia-padova-2026' },
     '5 errori in visita immobile: cosa non fare a padova': { img: 'img/blog/blog-checklist-verifiche-prima-compromesso-padova-2026.webp', url: 'blog-5-errori-visita-immobile-padova-2026' },
     '«so tutto io»: staging, documenti, ape e prezzo giusto': { img: 'img/blog/blog-documenti-compravendita-rogito-padova-2026.webp', url: 'blog-so-tutto-io-venditore-presuntuoso-padova-2026' },
     'stanza universitaria padova 2026: canoni 490€ e +46%': { img: 'img/blog/blog-affitti-canoni-fimaa-q1-2026-padova.webp', url: 'blog-stanza-universitaria-padova-canoni-2026' },
