@@ -309,6 +309,23 @@ nav { flex: 1; padding: 16px 0; }
   overflow: hidden;
   box-shadow: 0 2px 12px rgba(0,0,0,0.04);
 }
+#blogListWrap { overflow-x: auto; }
+.blog-idx {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 1.55rem;
+  padding: 0 0.45rem;
+  margin-right: 0.45rem;
+  border-radius: 6px;
+  background: var(--nero);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
 .table-head {
   padding: 16px 24px;
   display: flex;
@@ -2726,7 +2743,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
         <div class="table-wrap">
           <div class="table-head">
-            <div style="font-weight:600;font-size:0.9rem">Articoli del Blog</div>
+            <div id="blogTableTitle" style="font-weight:600;font-size:0.9rem">Articoli del Blog</div>
             <div style="display:flex;gap:10px">
               <button class="btn btn-primary btn-sm" onclick="openBlogEditor()">+ Nuovo Articolo</button>
               <button class="btn btn-sm" onclick="openScrapingArticolo()" style="background:linear-gradient(135deg,#6C63FF,#00E5A0);color:#fff;border:none;font-weight:600;">&#x1F50D; Scraping Articolo</button>
@@ -7121,16 +7138,16 @@ async function loadBlogList() {
     return;
   }
   const sorted = articles.sort((a, b) => new Date(b.data) - new Date(a.data));
-  const tableHead = document.querySelector('#sec-blog .table-head > div');
+  const tableHead = document.getElementById('blogTableTitle');
   if (tableHead) {
     tableHead.innerHTML = `Articoli del Blog <span style="color:var(--caffe2);font-weight:500;font-size:0.82rem">(${pub} pubblicati · ${tot} totali)</span>`;
   }
-  wrap.innerHTML = `<table><thead><tr><th style="width:40px;text-align:center">#</th><th></th><th>Titolo</th><th>Categoria</th><th>Data</th><th>Pubblicazione</th><th>Stato</th><th>Azioni</th></tr></thead><tbody>${
+  wrap.innerHTML = `<table><thead><tr><th style="width:36px;text-align:center">#</th><th style="width:44px"></th><th>Titolo</th><th>Categoria</th><th>Data</th><th>Pubblicazione</th><th>Stato</th><th>Azioni</th></tr></thead><tbody>${
     sorted.map((a, i) => `
       <tr>
-        <td style="font-size:0.78rem;font-weight:700;color:var(--caffe);text-align:center;vertical-align:middle">${i + 1}</td>
+        <td style="font-size:0.82rem;font-weight:700;color:#fff;background:var(--nero);text-align:center;vertical-align:middle;border-radius:0">${i + 1}</td>
         <td style="font-size:1.8rem;text-align:center">${a.emoji || '📝'}</td>
-        <td><strong style="font-size:0.88rem">${esc(a.titolo)}</strong><br><span style="font-size:0.72rem;color:var(--caffe2)">${getExcerpt(a.contenuto, 60)}</span></td>
+        <td><strong style="font-size:0.88rem;display:flex;align-items:flex-start;gap:0.35rem;flex-wrap:wrap"><span class="blog-idx" aria-hidden="true">#${i + 1}</span><span>${esc(a.titolo)}</span></strong><br><span style="font-size:0.72rem;color:var(--caffe2)">${getExcerpt(a.contenuto, 60)}</span></td>
         <td><span class="badge badge-blu">${esc(a.categoria)}</span></td>
         <td style="font-size:0.8rem">${formatDate(a.data)}</td>
         <td style="font-size:0.78rem">${a.data_pubblicazione ? formatDateTime(a.data_pubblicazione) : '—'}</td>
