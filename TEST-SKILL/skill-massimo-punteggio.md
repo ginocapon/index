@@ -34,6 +34,7 @@
 **Routine post-modifica (locale):**
 ```bash
 python scripts/google-compliance-check.py
+python scripts/patch_righetto_sol_blog.py   # se manca righetto-sol su blog
 node scripts/validate-page.js --file pagina-modificata.html
 python scripts/build_skimm.py   # se tocchi blog
 ```
@@ -127,7 +128,7 @@ python scripts/build_skimm.py   # se tocchi blog
 | Schema | 10/10 | `validate-page.js` |
 | Blog/SKIMM | 10/10 | `build_skimm.py` (0 angoli indefiniti) |
 | CWV | 9–10/10 | PageSpeed Insights |
-| E-E-A-T | 10/10 | author links + righetto-sol |
+| E-E-A-T | 10/10 | author links + `righetto-sol` su **tutti** i blog (`patch_righetto_sol_blog.py`) |
 | GEO | 10/10 | llms.txt + AEO box |
 | A11y | 10/10 | WAVE / axe |
 | Freschezza | 10/10 | `venerdi-contenuti-freschezza.py` |
@@ -159,7 +160,7 @@ Verifica rapida post-modifica: homepage play video, `immobili?vt=1` filtra tour,
 2. Angoli SKIMM incompleti → `ANGLE_OVERRIDES` in `build_skimm.py`
 3. Pillar senza link blog (servizi, valutazioni)
 4. Articoli thin < 1500 parole (top traffico GSC)
-5. Sezione Righetto mancante su pillar blog
+5. Sezione Righetto mancante su pillar blog → `python scripts/patch_righetto_sol_blog.py`
 6. CWV: LCP hero, font preload
 7. Spacing mobile incoerente su pagine ad alto traffico
 
