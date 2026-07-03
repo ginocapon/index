@@ -2,6 +2,8 @@
 ## Prompt Operativo Master Unificato
 
 > **Versione:** 2.0 — 15 Marzo 2026 (patch contenuti **3 Aprile 2026**)
+> **Gate obbligatorio agente:** **`TEST-SKILL/skill-massimo-punteggio.md`** — leggere prima di ogni modifica.
+> **Changelog 3 luglio 2026 — c):** `skill-massimo-punteggio.md` + `google-compliance-check.py` (checklist Google completa, strumenti gratuiti).
 > **Unica fonte di verita'** — Sostituisce SKILL-UNIFICATA.md, AUTOMATION-SITE-2026.md e CLAUDE.md
 > **Ultimo aggiornamento Google verificato:** 27 Giugno 2026
 > **Prossima verifica consigliata:** Luglio 2026

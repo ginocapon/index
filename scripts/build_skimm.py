@@ -229,6 +229,121 @@ ANGLE_OVERRIDES: dict[str, dict] = {
         "angolo": "Energia/tassi macro immobiliare — pillar trasversale",
         "intent": "macro-energia-tassi",
     },
+    "blog-caparra-confirmatoria-padova": {
+        "kw_primaria": "caparra-confirmatoria-compravendita",
+        "angolo": "Caparra confirmatoria vs penitenziale — guida operativa rogito",
+        "intent": "acquisto-caparra-normativa",
+    },
+    "blog-comprare-affittare-padova": {
+        "kw_primaria": "comprare-affittare-confronto-padova",
+        "angolo": "Confronto dati comprare vs affittare — decisione budget",
+        "intent": "acquisto-vs-locazione",
+    },
+    "blog-planimetria-catastale-compravendita-padova-2026": {
+        "kw_primaria": "planimetria-catastale-verifica-rogito",
+        "angolo": "Controllo planimetria pre-rogito — non checklist generica",
+        "intent": "acquisto-documenti-catasto",
+    },
+    "blog-scegliere-immobile-giusto-padova-2026": {
+        "kw_primaria": "scegliere-immobile-zona-luce-padova",
+        "angolo": "Criteri scelta immobile (zona, luce, spese) — non guida 10 passi",
+        "intent": "acquisto-criteri-scelta",
+    },
+    "blog-gestione-spese-casa-risparmio-padova-2026": {
+        "kw_primaria": "gestione-spese-casa-possesso-padova",
+        "angolo": "Spese possesso post-acquisto (energia, IMU) — non costi rogito",
+        "intent": "possesso-costi-gestione",
+    },
+    "blog-condono-edilizio-proposte-2026": {
+        "kw_primaria": "condono-edilizio-manovra-2026",
+        "angolo": "Proposte normative condono — non bonus edilizi",
+        "intent": "normativa-condono",
+    },
+    "blog-trend-investimenti-immobiliari-summit-2026": {
+        "kw_primaria": "trend-investimenti-summit-2026",
+        "angolo": "Evento Real Estate Summit — non investire Padova pillar",
+        "intent": "investimenti-evento-summit",
+    },
+    "blog-patrimonio-casa-resilienza-mercati-globali-2026": {
+        "kw_primaria": "patrimonio-casa-resilienza-urbana",
+        "angolo": "Resilienza patrimonio vs shock globali — macro trasversale",
+        "intent": "macro-patrimonio-resilienza",
+    },
+    "blog-case-piu-vendute-tipologie-padova-2026": {
+        "kw_primaria": "case-piu-vendute-tipologie-padova",
+        "angolo": "Tipologie/metrature più vendute — dato mercato locale",
+        "intent": "mercato-tipologie-vendita",
+    },
+    "blog-compravendite-veneto-cintura-padova-2026": {
+        "kw_primaria": "compravendite-veneto-cintura-padova",
+        "angolo": "Transazioni cintura Padovana — non Q1 nazionale ADE",
+        "intent": "mercato-transazioni-cintura",
+    },
+    "blog-crisi-immobiliare-padova-2026": {
+        "kw_primaria": "crisi-immobiliare-padova-analisi",
+        "angolo": "Scenario crisi/correzione locale — fonte verificata, no allarmismo",
+        "intent": "mercato-scenario-crisi",
+    },
+    "blog-mercato-immobiliare-padova-2026": {
+        "kw_primaria": "mercato-immobiliare-padova-pillar-2026",
+        "angolo": "Pillar mercato città prezzi/trend — non quartiere singolo",
+        "intent": "mercato-pillar-citta",
+    },
+    "blog-mercato-immobiliare-padova-centro-2026": {
+        "kw_primaria": "mercato-centro-storico-padova",
+        "angolo": "Micro-mercato Centro Storico — non pillar città intera",
+        "intent": "mercato-quartiere-centro",
+    },
+    "blog-mercato-immobiliare-piazzola-sul-brenta-2026": {
+        "kw_primaria": "mercato-piazzola-sul-brenta",
+        "angolo": "Mercato Piazzola/comuni PD — geografia diversa da Padova",
+        "intent": "mercato-territorio-piazzola",
+    },
+    "blog-nuove-costruzioni-mercato-veneto-2026-padova": {
+        "kw_primaria": "nuove-costruzioni-veneto-plus-14",
+        "angolo": "Dato permessi/cantieri +14,6% Veneto — non costi costruzione ISTAT",
+        "intent": "mercato-nuove-costruzioni",
+    },
+    "blog-prezzi-padova-provincia-fiaip-2026": {
+        "kw_primaria": "prezzi-padova-provincia-fiaip",
+        "angolo": "FIMAA -4% città / provincia traina — non OMI quartieri",
+        "intent": "mercato-dato-fiaip",
+    },
+    "blog-permuta-immobiliare-padova-2026": {
+        "kw_primaria": "permuta-immobiliare-padova-operativa",
+        "angolo": "Permuta operativa cautele — servizio agenzia",
+        "intent": "servizi-permuta",
+    },
+    "blog-successione-immobiliare-padova": {
+        "kw_primaria": "successione-immobile-ereditato-padova",
+        "angolo": "Casa ereditata vendita/successione — non imposte rogito",
+        "intent": "servizi-successione",
+    },
+    "blog-case-vendita-padova": {
+        "kw_primaria": "case-vendita-padova-guida-zone",
+        "angolo": "Guida zone/prezzi vendita evergreen — pillar acquirenti vendita",
+        "intent": "vendita-guida-zone",
+    },
+    "blog-home-staging-padova": {
+        "kw_primaria": "home-staging-vendita-padova",
+        "angolo": "Home staging pre-vendita — non strategie pricing",
+        "intent": "vendita-home-staging",
+    },
+    "blog-offerta-stock-vendita-italia-2026": {
+        "kw_primaria": "stock-vendita-italia-q1-minus-5",
+        "angolo": "Stock nazionale -5% Q1 — non record transazioni Padova",
+        "intent": "mercato-stock-nazionale",
+    },
+    "blog-tempi-vendita-casa-padova": {
+        "kw_primaria": "tempi-vendita-casa-padova-medi",
+        "angolo": "Tempi medi vendita reali Padova — non costi vendita",
+        "intent": "vendita-tempi",
+    },
+    "blog-agenzia-immobiliare-top-servizi-padova-2026": {
+        "kw_primaria": "agenzia-immobiliare-servizi-top-padova",
+        "angolo": "Servizi differenzianti agenzia — E-E-A-T conversione",
+        "intent": "vita-agenzia-servizi",
+    },
 }
 
 # Pattern automatici angolo editoriale (se non in ANGLE_OVERRIDES)
@@ -373,7 +488,8 @@ def derive_angolo(slug: str, title: str, override: dict | None) -> str:
     for pattern, _intent_hint, angolo in ANGLE_AUTO_PATTERNS:
         if pattern.search(slug):
             return angolo
-    return f"Angolo da definire — verificare overlap cluster ({title[:60]})"
+    core = slug.replace("blog-", "").replace("-padova", "").replace("-2026", "")
+    return f"Angolo {core[:48]} — intent dedicato, verificare matrice §4"
 
 
 def derive_intent(slug: str, cluster: str, override: dict | None) -> str:

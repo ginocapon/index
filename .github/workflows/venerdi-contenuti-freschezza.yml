@@ -35,6 +35,7 @@ jobs:
         run: |
           cd "$GITHUB_WORKSPACE"
           python scripts/venerdi-contenuti-freschezza.py
+          python scripts/google-compliance-check.py >> venerdi-contenuti-report.md 2>&1 || true
           python scripts/check_doppioni_sito.py >> venerdi-contenuti-report.md 2>&1 || true
 
       - name: Leggi report

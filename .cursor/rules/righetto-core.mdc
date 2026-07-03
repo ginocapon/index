@@ -19,6 +19,7 @@ Se non hai fonte verificabile (OMI, FIMAA, ISTAT, Banca d'Italia, ADE…), **non
 HTML/CSS/JS **vanilla** · GitHub Pages · Supabase · **zero CDN esterni** · URL interne **senza** `.html`.
 
 ## Prima di ogni modifica
+0. Leggi **`TEST-SKILL/skill-massimo-punteggio.md`** (gate Google 10/10 — non divagare).
 1. Leggi il file da modificare.
 2. Mobile-first + WCAG AA (CTA: **mai** `#FF6B35` con testo bianco).
 3. CSS/JS linkati con `?v=N` (incrementa a ogni modifica).
@@ -29,7 +30,7 @@ HTML/CSS/JS **vanilla** · GitHub Pages · Supabase · **zero CDN esterni** · U
 ## Moduli skill (carica su richiesta o via rule scoped)
 | Task | File |
 |------|------|
-| Sempre | `TEST-SKILL/skill-essentials.md` |
+| Sempre | `TEST-SKILL/skill-essentials.md` + **`TEST-SKILL/skill-massimo-punteggio.md`** |
 | Blog / zone / contenuti | `skill-content.md` + §8.1a/8.1c in SKILL-2.0 |
 | SEO / audit | `skill-seo.md` |
 | UI / CSS | `skill-design.md` |
