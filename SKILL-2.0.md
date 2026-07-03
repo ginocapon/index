@@ -8,6 +8,8 @@ Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutt
 
 **Regole Cursor scoped:** [`TEST-SKILL/skill-cursor-rules.md`](TEST-SKILL/skill-cursor-rules.md) — 7 file `.mdc` in `.cursor/rules/` (pattern awesome-cursorrules).
 
+**Changelog rapido (3 luglio 2026 — f):** chatbot Linda — §**8.1e** FAQ↔blog, `scripts/audit_chatbot_faq.py`, +38 voci FAQ da skimm.
+
 **Changelog rapido (3 luglio 2026 — e):** checklist venerdì unificata — `skill-massimo-punteggio.md` §4 (compliance 0/0, cron, 8/8, patch script).
 
 **Changelog rapido (3 luglio 2026 — d):** batch E-E-A-T — `scripts/patch_righetto_sol_blog.py` + `righetto-sol` su tutti i blog; CSS in `blog-rich.css?v=3`.

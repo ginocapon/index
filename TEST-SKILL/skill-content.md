@@ -67,9 +67,10 @@ Workflow: `.github/workflows/venerdi-contenuti-freschezza.yml` — Issue label `
 python scripts/google-compliance-check.py          # target 0 ERR / 0 WARN
 python scripts/patch_righetto_sol_blog.py          # se manca righetto-sol
 python scripts/patch_compliance_warns.py           # title/meta/geo/stuffing
+python scripts/audit_chatbot_faq.py                # gap blog ↔ FAQ Linda (dopo batch)
 ```
 
-Checklist operativa unificata: **`skill-massimo-punteggio.md` §4**.
+Checklist operativa unificata: **`skill-massimo-punteggio.md` §4**. Manutenzione chatbot: **`SKILL-2.0.md` §8.1e**.
 
 **Obiettivo competitivo:** superare portali competitor con **volume** (99+ guide), **corposità** (2500+ parole pillar), **freschezza** (aggiornamento settimanale visibile), **E-E-A-T** (sezione Righetto, autori Linda/Gino). Regole complete: **`skimm.md` §1.7–1.9** e **`SKILL-2.0.md` §8.1d**.
 
