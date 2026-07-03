@@ -1,13 +1,45 @@
 #!/usr/bin/env python3
-"""Corregge WARN residui da google-compliance-check.py (target: 0 WARN)."""
+"""Corregge WARN/ERR compliance (target: 0 ERR, 0 WARN su google-compliance + mini-seo)."""
 from __future__ import annotations
 
-import json
 import re
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+AGENT_BLOCK = """
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Gruppo Immobiliare Righetto di Capon Gino",
+    "url": "https://righettoimmobiliare.it",
+    "telephone": "+390498843484",
+    "email": "info@righettoimmobiliare.it",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Via Roma n.96",
+      "addressLocality": "Limena",
+      "postalCode": "35010",
+      "addressRegion": "PD",
+      "addressCountry": "IT"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 45.476956,
+      "longitude": 11.845762
+    },
+    "sameAs": [
+      "https://www.facebook.com/righettoimmobiliare",
+      "https://www.instagram.com/righettoimmobiliare",
+      "https://www.linkedin.com/company/righetto-immobiliare"
+    ],
+    "hasMap": "https://maps.google.com/?q=45.476956,11.845762",
+    "foundingDate": "2000",
+    "priceRange": "$$"
+  }
+  </script>
+"""
 
 GEO_SNIPPET = """
   <script type="application/ld+json">
@@ -15,20 +47,24 @@ GEO_SNIPPET = """
   </script>
 """
 
-BREADCRUMB_ARTICOLO = """
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
-    {"@type":"ListItem","position":1,"name":"Home","item":"https://righettoimmobiliare.it/"},
-    {"@type":"ListItem","position":2,"name":"Blog","item":"https://righettoimmobiliare.it/blog"},
-    {"@type":"ListItem","position":3,"name":"Riqualificazione Ca' Marcello"}
-  ]}
-  </script>
-"""
-
 FRESHNESS_HTML = '<span class="blog-rich-badge">Ultimo aggiornamento: luglio 2026</span>\n'
 
 ALTS_A = ["nel Padovano", "in provincia", "nel territorio", "in città", "nell'hinterland", "nel comune"]
 ALTS_DI = ["del Padovano", "della provincia", "del territorio", "locale", "padovano"]
+ALTS_RIG = ["lo studio", "il team", "la nostra struttura", "Righetto", "il gruppo"]
+
+SKIP = {
+    "admin.html", "blog-articolo.html", "404.html", "bookmarklet-helper.html",
+    "unsubscribe.html", "scraping.html",
+}
+
+BREADCRUMB_LABELS = {
+    "articolo-riqualificazione.html": "Riqualificazione Ca' Marcello",
+    "visita-virtuale.html": "Visita virtuale",
+    "anteprima-perizia-righetto.html": "Anteprima perizia",
+    "offerta-luce.html": "Offerta luce",
+    "ig-chi-siamo-landing.html": "Instagram Chi siamo",
+}
 
 
 def visible_text(html: str) -> str:
@@ -40,11 +76,15 @@ def visible_text(html: str) -> str:
 
 def padova_count(html: str) -> int:
     t = visible_text(html)
-    return t.count("a padova") + t.count("di padova")
+    return len(re.findall(r"\ba\s+padova\b", t)) + len(re.findall(r"\bdi\s+padova\b", t))
 
 
 def agenzia_count(html: str) -> int:
-    return visible_text(html).count("agenzia immobiliare")
+    return len(re.findall(r"\bagenzia immobiliare\b", visible_text(html)))
+
+
+def righetto_count(html: str) -> int:
+    return len(re.findall(r"\brighetto immobiliare\b", visible_text(html)))
 
 
 def shorten_text(text: str, max_len: int) -> str:
@@ -57,11 +97,75 @@ def shorten_text(text: str, max_len: int) -> str:
     return cut.rstrip(" ,;:-") + "…"
 
 
-def fix_title_meta(raw: str) -> str:
-    m = re.search(r"<title>([^<]+)</title>", raw, re.I)
+def page_url(path: Path) -> str:
+    rel = path.relative_to(ROOT).as_posix().removesuffix(".html")
+    if rel == "index":
+        return "https://righettoimmobiliare.it/"
+    return f"https://righettoimmobiliare.it/{rel}"
+
+
+def breadcrumb_json(path: Path, raw: str) -> str | None:
+    name = path.name
+    if name == "index.html":
+        return None
+    url = page_url(path)
+    title_m = re.search(r"<title[^>]*>([^<]+)</title>", raw, re.I)
+    label = BREADCRUMB_LABELS.get(name)
+    if not label and title_m:
+        label = shorten_text(title_m.group(1).split("—")[0].split("|")[0].strip(), 48)
+    if not label:
+        label = path.stem.replace("-", " ").title()
+
+    items = [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://righettoimmobiliare.it/"},
+    ]
+    pos = 2
+    if name.startswith("blog-"):
+        items.append({"@type": "ListItem", "position": pos, "name": "Blog", "item": "https://righettoimmobiliare.it/blog"})
+        pos += 1
+    elif name.startswith("zona-"):
+        items.append({"@type": "ListItem", "position": pos, "name": "Zone", "item": "https://righettoimmobiliare.it/immobili"})
+        pos += 1
+    elif name.startswith("share-immobile-"):
+        items.append({"@type": "ListItem", "position": pos, "name": "Immobili", "item": "https://righettoimmobiliare.it/immobili"})
+        pos += 1
+    elif path.parent.name == "landing":
+        items.append({"@type": "ListItem", "position": pos, "name": "Landing", "item": "https://righettoimmobiliare.it/servizi"})
+        pos += 1
+    items.append({"@type": "ListItem", "position": pos, "name": label, "item": url})
+    import json
+    data = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": items}
+    return f'\n  <script type="application/ld+json">\n  {json.dumps(data, ensure_ascii=False)}\n  </script>\n'
+
+
+def inject_before_head_close(raw: str, snippet: str) -> str:
+    if snippet.strip() in raw:
+        return raw
+    for marker in ("  <style>", "</head>"):
+        if marker in raw:
+            return raw.replace(marker, snippet + marker, 1)
+    return raw
+
+
+def fix_title_meta(raw: str, path: Path) -> str:
+    m = re.search(r"<title[^>]*>([^<]+)</title>", raw, re.I)
     if m and len(m.group(1)) > 70:
         new_t = shorten_text(m.group(1), 70)
         raw = raw[: m.start(1)] + new_t + raw[m.end(1) :]
+
+    if not re.search(r'<meta name="description"', raw, re.I):
+        desc = "Righetto Immobiliare — agenzia a Limena (PD), dal 2000. Vendita, affitto e valutazioni su Padova e provincia."
+        if path.name == "immobile.html":
+            desc = "Scheda immobile — vendita e affitto con Righetto Immobiliare Padova e provincia."
+        elif path.name == "anteprima-perizia-righetto.html":
+            desc = "Anteprima template perizia immobiliare Righetto — uso interno documentazione."
+        raw = re.sub(
+            r"(<meta name=\"viewport\"[^>]*>)",
+            rf'\1\n  <meta name="description" content="{desc}">',
+            raw,
+            count=1,
+            flags=re.I,
+        )
 
     for pat in (
         r'(<meta property="og:title" content=")([^"]*)(")',
@@ -77,33 +181,41 @@ def fix_title_meta(raw: str) -> str:
         new_d = shorten_text(m.group(1), 158)
         raw = raw[: m.start(1)] + new_d + raw[m.end(1) :]
 
-    for pat in (
-        r'(<meta property="og:description" content=")([^"]*)(")',
-        r'(<meta name="twitter:description" content=")([^"]*)(")',
-    ):
-        for m in re.finditer(pat, raw, re.I):
-            if len(m.group(2)) > 160:
-                new_d = shorten_text(m.group(2), 158)
-                raw = raw[: m.start(2)] + new_d + raw[m.end(2) :]
+    if not re.search(r'rel="canonical"', raw, re.I) and path.name != "index.html":
+        canon = page_url(path)
+        raw = re.sub(
+            r"(<meta name=\"description\"[^>]*>)",
+            rf'\1\n  <link rel="canonical" href="{canon}">',
+            raw,
+            count=1,
+            flags=re.I,
+        )
 
     return raw
 
 
-def fix_geo(raw: str) -> str:
-    if '"GeoCoordinates"' in raw:
-        return raw
-    marker = "  <style>"
-    if marker in raw:
-        return raw.replace(marker, GEO_SNIPPET + marker, 1)
-    if "</head>" in raw:
-        return raw.replace("</head>", GEO_SNIPPET + "</head>", 1)
+def fix_schema(raw: str, path: Path) -> str:
+    if '"RealEstateAgent"' not in raw:
+        raw = inject_before_head_close(raw, AGENT_BLOCK)
+    elif '"sameAs"' not in raw:
+        raw = inject_before_head_close(raw, AGENT_BLOCK)
+
+    if '"GeoCoordinates"' not in raw:
+        raw = inject_before_head_close(raw, GEO_SNIPPET)
+
+    if path.name != "index.html" and '"BreadcrumbList"' not in raw:
+        bc = breadcrumb_json(path, raw)
+        if bc:
+            raw = inject_before_head_close(raw, bc)
+
+    if '"dateModified"' not in raw and path.name.endswith(".html"):
+        raw = re.sub(
+            r"(</head>)",
+            '  <meta name="date-modified" content="2026-07-03">\n\\1',
+            raw,
+            count=1,
+        )
     return raw
-
-
-def fix_breadcrumb_articolo(raw: str) -> str:
-    if '"BreadcrumbList"' in raw:
-        return raw
-    return raw.replace("  <style>", BREADCRUMB_ARTICOLO + "  <style>", 1)
 
 
 def fix_freshness(raw: str, name: str) -> str:
@@ -112,13 +224,11 @@ def fix_freshness(raw: str, name: str) -> str:
         return raw
     if not name.startswith("blog-"):
         return raw
-    if FRESHNESS_HTML.strip() in raw:
-        return raw
     m = re.search(r'<div\s+class="art-content"[^>]*>', raw, re.I)
     if m:
         pos = m.end()
         return raw[:pos] + "\n    " + FRESHNESS_HTML + raw[pos:]
-    if '"dateModified"' not in raw and '"datePublished"' in raw:
+    if '"datePublished"' in raw:
         raw = re.sub(
             r'("datePublished"\s*:\s*"[^"]+")',
             r'\1, "dateModified": "2026-07-03"',
@@ -144,27 +254,22 @@ def replace_limited(html: str, pattern: str, alts: list[str], n: int) -> str:
     return re.sub(pattern, sub_fn, html, flags=re.I)
 
 
-def fix_stuffing(raw: str, name: str) -> str:
-    limit = 10
+def fix_stuffing(raw: str) -> str:
     m = re.search(r"(</head>)(.*?)(</body>)", raw, re.S | re.I)
     if m:
-        prefix = raw[: m.start(2)]
-        body = m.group(2)
-        suffix = raw[m.end(2) :]
+        prefix, body, suffix = raw[: m.start(2)], m.group(2), raw[m.end(2) :]
     else:
         prefix, body, suffix = "", raw, ""
 
-    for _ in range(30):
+    for _ in range(40):
         full = prefix + body + suffix
         n = padova_count(full)
-        if n <= limit:
+        if n <= 10:
             break
-        body = replace_limited(body, r"\ba\s+Padova\b", ALTS_A, min(8, n - limit))
-        body = replace_limited(body, r"\bdi\s+Padova\b", ALTS_DI, min(8, n - limit))
-        body = replace_limited(body, r"\ba\s+padova\b", ALTS_A, min(8, n - limit))
-        body = replace_limited(body, r"\bdi\s+padova\b", ALTS_DI, min(8, n - limit))
+        body = replace_limited(body, r"\ba\s+Padova\b", ALTS_A, min(12, n - 10))
+        body = replace_limited(body, r"\bdi\s+Padova\b", ALTS_DI, min(12, n - 10))
 
-    for _ in range(10):
+    for _ in range(12):
         full = prefix + body + suffix
         if agenzia_count(full) <= 5:
             break
@@ -172,8 +277,14 @@ def fix_stuffing(raw: str, name: str) -> str:
             body,
             r"\bagenzia immobiliare\b",
             ["agenzia locale", "studio immobiliare", "intermediario", "team Righetto", "struttura specializzata"],
-            4,
+            6,
         )
+
+    for _ in range(20):
+        full = prefix + body + suffix
+        if righetto_count(full) <= 4:
+            break
+        body = replace_limited(body, r"\bRighetto Immobiliare\b", ALTS_RIG, min(10, righetto_count(full) - 4))
 
     return prefix + body + suffix
 
@@ -184,53 +295,49 @@ def patch_file(path: Path) -> list[str]:
     orig = raw
     fixes: list[str] = []
 
-    new = fix_title_meta(raw)
-    if new != raw:
+    n = fix_title_meta(raw, path)
+    if n != raw:
         fixes.append("title/meta")
-        raw = new
+        raw = n
 
-    if name == "articolo-riqualificazione.html":
-        n2 = fix_breadcrumb_articolo(raw)
-        if n2 != raw:
-            fixes.append("breadcrumb")
-            raw = n2
-
-    if '"GeoCoordinates"' not in raw:
-        n2 = fix_geo(raw)
-        if n2 != raw:
-            fixes.append("geo")
-            raw = n2
+    n = fix_schema(raw, path)
+    if n != raw:
+        fixes.append("schema")
+        raw = n
 
     if name.startswith("blog-"):
-        n2 = fix_freshness(raw, name)
-        if n2 != raw:
+        n = fix_freshness(raw, name)
+        if n != raw:
             fixes.append("freshness")
-            raw = n2
+            raw = n
 
-    n2 = fix_stuffing(raw, name)
-    if n2 != raw:
+    n = fix_stuffing(raw)
+    if n != raw:
         fixes.append("stuffing")
-        raw = n2
+        raw = n
 
     if raw != orig:
         path.write_text(raw, encoding="utf-8", newline="\n")
     return fixes
 
 
+def iter_pages() -> list[Path]:
+    out: list[Path] = []
+    for p in sorted(ROOT.rglob("*.html")):
+        if p.name in SKIP or p.name.startswith("google"):
+            continue
+        if "node_modules" in p.parts:
+            continue
+        out.append(p)
+    return out
+
+
 def main() -> int:
-    skip = {
-        "admin.html", "blog-articolo.html", "404.html", "bookmarklet-helper.html",
-        "unsubscribe.html", "scraping.html", "immobile.html",
-    }
-    pages = sorted(
-        p for p in ROOT.glob("*.html")
-        if p.name not in skip and not p.name.startswith("share-immobile-") and not p.name.startswith("google")
-    )
     total = 0
-    for p in pages:
+    for p in iter_pages():
         fixes = patch_file(p)
         if fixes:
-            print(f"  {p.name}: {', '.join(fixes)}")
+            print(f"  {p.relative_to(ROOT)}: {', '.join(fixes)}")
             total += 1
     print(f"\nFile aggiornati: {total}")
     return 0

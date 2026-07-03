@@ -24,7 +24,7 @@
 
 1. **Leggi prima** il file da modificare — mai al buio
 2. **Mobile-first** — ogni modifica deve funzionare su mobile
-3. **No librerie extra** — vanilla HTML/CSS/JS (zero framework, zero CDN esterni)
+3. **No librerie extra** — vanilla HTML/CSS/JS; librerie solo in `js/vendor/` (supabase, jspdf, qrcode) — zero CDN jsdelivr/cdnjs/fonts.googleapis
 4. **Commit + push automatici** — vedi §1.1 sotto (non chiedere conferma a fine task)
 5. **Mai toccare** DNS, record MX, cPanel senza conferma esplicita dell'utente
 6. **Aggiorna sitemap.xml** quando aggiungi/rimuovi pagine

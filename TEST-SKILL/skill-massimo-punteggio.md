@@ -28,16 +28,22 @@
 | **Built-in repo** | `python scripts/build_skimm.py` + `check_doppioni_sito.py` | Anti-doppioni + keyword |
 | **Built-in repo** | `node scripts/validate-page.js --staged` | Pre-commit pagine |
 | **Built-in repo** | `bash scripts/mini-seo-check.sh` | Meta, schema, GEO, freshness |
+| **Built-in repo** | `python scripts/patch_cdn_local.py` | CDN → `js/vendor/` (supabase, jspdf, qrcode) |
+| **Built-in repo** | `python scripts/patch_audit_warns.py` | GA4, dateModified JSON-LD, OG, freshness blog |
+| **Built-in repo** | `python scripts/audit_helpers.py` | Conteggi keyword su testo visibile (word boundary) |
 | **Built-in repo** | `bash scripts/audit-skill.sh` | Audit SKILL-2.0 strutturale |
 | **Built-in repo** | `python scripts/venerdi-contenuti-freschezza.py` | Blog corposità + pillar |
 
 **Routine post-modifica (locale):**
 ```bash
 python scripts/google-compliance-check.py
-python scripts/patch_righetto_sol_blog.py   # se manca righetto-sol su blog
-python scripts/patch_compliance_warns.py    # title/meta/geo/breadcrumb/stuffing
+python scripts/patch_cdn_local.py              # se tocchi JS Supabase/PDF/QR
+python scripts/patch_compliance_warns.py       # title/meta/geo/breadcrumb/stuffing
+python scripts/patch_audit_warns.py            # GA4, dateModified, OG
+python scripts/patch_righetto_sol_blog.py      # se manca righetto-sol su blog
 node scripts/validate-page.js --file pagina-modificata.html
 python scripts/build_skimm.py   # se tocchi blog
+bash scripts/mini-seo-check.sh && bash scripts/audit-skill.sh
 ```
 
 ---
@@ -136,7 +142,7 @@ python scripts/build_skimm.py   # se tocchi blog
 
 **Unico gap strutturale noto (off-site):** Domain Authority / backlink — richiede PR esterno, non solo codice.
 
-**Compliance repo (luglio 2026):** `python scripts/google-compliance-check.py` → target **0 ERR / 0 WARN** dopo batch `patch_righetto_sol_blog.py` + `patch_compliance_warns.py`.
+**Compliance repo (luglio 2026):** `python scripts/google-compliance-check.py` + `bash scripts/mini-seo-check.sh` + `bash scripts/audit-skill.sh` → target **100% / 0 ERR / 0 WARN** dopo batch `patch_cdn_local.py` + `patch_compliance_warns.py` + `patch_audit_warns.py`.
 
 ---
 
@@ -175,6 +181,8 @@ Verifica rapida post-modifica: homepage play video, `immobili?vt=1` filtra tour,
 
 ```bash
 python scripts/google-compliance-check.py      # target: 0 ERR, 0 WARN
+python scripts/patch_cdn_local.py              # CDN esterni → js/vendor/
+python scripts/patch_audit_warns.py            # GA4, dateModified, OG, freshness
 python scripts/build_skimm.py                  # 0 angoli indefiniti
 python scripts/check_doppioni_sito.py          # prima di nuovo articolo
 python scripts/venerdi-contenuti-freschezza.py # anteprima report (opzionale)

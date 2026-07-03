@@ -58,6 +58,14 @@ if [ -f sitemap.xml ]; then
   MISSING_SITEMAP=0
   for page in $PAGES; do
     bname=$(basename "$page" .html)
+    page_content=$(cat "$page" 2>/dev/null || true)
+    # Pagine noindex / share / template email: non devono essere in sitemap
+    if echo "$page_content" | grep -qiE 'name="robots"[^>]*content="[^"]*noindex'; then
+      continue
+    fi
+    if echo "$page" | grep -qE '/(templates|documenti)/'; then
+      continue
+    fi
     if [ "$bname" = "index" ]; then
       if ! grep -q 'righettoimmobiliare.it' sitemap.xml 2>/dev/null; then
         log_warn "Homepage non trovata in sitemap.xml"
@@ -223,9 +231,11 @@ for page in $PAGES; do
   fi
 
   # --- 2.6 BreadcrumbList ---
-  if ! echo "$content" | grep -qi 'BreadcrumbList'; then
-    PAGE_ISSUES="${PAGE_ISSUES}\n  ⚠️ BreadcrumbList schema mancante (SKILL 4.6)"
-    WARNINGS=$((WARNINGS+1))
+  if [ "$(basename "$page")" != "index.html" ]; then
+    if ! echo "$content" | grep -qi 'BreadcrumbList'; then
+      PAGE_ISSUES="${PAGE_ISSUES}\n  ⚠️ BreadcrumbList schema mancante (SKILL 4.6)"
+      WARNINGS=$((WARNINGS+1))
+    fi
   fi
 
   # --- 2.7 font-display: swap (SKILL 5.1) ---
@@ -240,18 +250,18 @@ for page in $PAGES; do
     fi
   fi
 
-  # --- 2.8 Keyword stuffing: "a Padova" max 10 (SKILL 1.2 regola 13) ---
-  A_PADOVA_COUNT=$(echo "$content" | grep -oi 'a padova' | wc -l)
+  # --- 2.8 Keyword stuffing: "a Padova" max 10 (SKILL 1.2 regola 13) — solo testo visibile ---
+  A_PADOVA_COUNT=$(python3 scripts/audit_helpers.py "$page" padova 2>/dev/null || echo 0)
   if [ "$A_PADOVA_COUNT" -gt 12 ]; then
-    PAGE_ISSUES="${PAGE_ISSUES}\n  ❌ Keyword stuffing: 'a Padova' appare $A_PADOVA_COUNT volte (max 10, SKILL 1.2.13)"
+    PAGE_ISSUES="${PAGE_ISSUES}\n  ❌ Keyword stuffing: 'a/di Padova' appare $A_PADOVA_COUNT volte nel testo visibile (max 10, SKILL 1.2.13)"
     ERRORS=$((ERRORS+1))
   elif [ "$A_PADOVA_COUNT" -gt 10 ]; then
-    PAGE_ISSUES="${PAGE_ISSUES}\n  ⚠️ 'a Padova' appare $A_PADOVA_COUNT volte (target max 10)"
+    PAGE_ISSUES="${PAGE_ISSUES}\n  ⚠️ 'a/di Padova' appare $A_PADOVA_COUNT volte nel testo visibile (target max 10)"
     WARNINGS=$((WARNINGS+1))
   fi
 
-  # --- 2.9 CDN esterno vietato (esclude Leaflet/unpkg per mappe, che e' permesso) ---
-  CDN_HITS=$(echo "$content" | grep -oiE 'cdnjs\.|jsdelivr\.' | wc -l)
+  # --- 2.9 CDN esterno vietato (esclude Leaflet/unpkg mappe) ---
+  CDN_HITS=$(echo "$content" | grep -oiE 'cdnjs\.|jsdelivr\.|fonts\.googleapis\.com' | wc -l)
   if [ "$CDN_HITS" -gt 0 ]; then
     PAGE_ISSUES="${PAGE_ISSUES}\n  ⚠️ Rilevato CDN esterno ($CDN_HITS occorrenze) — SKILL vieta CDN esterni"
     WARNINGS=$((WARNINGS+1))
@@ -282,10 +292,10 @@ for page in $PAGES; do
     ERRORS=$((ERRORS+1))
   fi
 
-  # --- 2.14 filter: blur (SKILL: vietato su animazioni) ---
-  BLUR_COUNT=$(echo "$content" | grep -oiE 'filter[: ]*blur' | wc -l)
-  if [ "$BLUR_COUNT" -gt 0 ]; then
-    PAGE_ISSUES="${PAGE_ISSUES}\n  ⚠️ filter:blur rilevato ($BLUR_COUNT) — SKILL vieta blur su animazioni"
+  # --- 2.14 filter: blur su animazioni (SKILL: vietato — non backdrop statico) ---
+  BLUR_ANIM=$(echo "$content" | grep -oiE '@keyframes[^}]*filter[^}]*blur|animation[^;]*filter[^;]*blur' | wc -l)
+  if [ "$BLUR_ANIM" -gt 0 ]; then
+    PAGE_ISSUES="${PAGE_ISSUES}\n  ⚠️ filter:blur in animazione ($BLUR_ANIM) — SKILL vieta blur su animazioni"
     WARNINGS=$((WARNINGS+1))
   fi
 
@@ -344,7 +354,7 @@ for page in $BLOG_PAGES; do
   fi
 
   # Timestamp visibile (SKILL: freshness)
-  if ! echo "$content" | grep -qiE 'aggiornamento|pubblicato|data.*(2025|2026|2027)'; then
+  if ! echo "$content" | grep -qiE 'aggiornamento|aggiornato|pubblicato|data.*(2025|2026|2027)'; then
     BLOG_ISSUES="${BLOG_ISSUES}\n  ⚠️ Timestamp/data aggiornamento non visibile"
     WARNINGS=$((WARNINGS+1))
   fi

@@ -5,14 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vendere e Comprare Casa a Padova | Righetto Immobiliare</title>
 <meta name="description" content="Vuoi vendere o comprare casa a Padova? Assistenza completa dalla valutazione al rogito in tutti i 101 comuni della provincia.">
-<link rel="dns-prefetch" href="https://www.googletagmanager.com">
-<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-<link rel="preconnect" href="https://qwkwkemuabfwvwuqrxlu.supabase.co" crossorigin>
+<link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="https://qwkwkemuabfwvwuqrxlu.supabase.co" crossorigin>
 <link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co">
 <link rel="dns-prefetch" href="https://www.youtube.com">
-<link rel="dns-prefetch" href="https://img.youtube.com">
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="dns-prefetch" href="https://img.youtube.com"><link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
@@ -1614,7 +1610,7 @@ button svg, a.btn-p svg, a.btn-g svg {
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/vendor/supabase.min.js" defer></script>
 <script src="js/config.js?v=4"></script>
 <script src="js/rig-lead-form.js?v=2"></script>
 <script>/* Chatbot lazy: carica solo su interazione utente o dopo 8s */
@@ -1746,7 +1742,7 @@ document.addEventListener('keydown', function(e) {
   }
   function loadSupabase(){
     var s=document.createElement('script');
-    s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+    s.src='js/vendor/supabase.min.js';
     s.onload=function(){if(typeof initSB==='function')initSB();};
     document.head.appendChild(s);
   }
