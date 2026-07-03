@@ -291,3 +291,39 @@ a.blog-rich-related-card span {
   color: var(--blu, #2c4a6e);
   font-size: 0.7rem;
 }
+
+/* Sezione E-E-A-T «Cosa può fare Righetto» — skill-content §2.2 */
+.righetto-sol {
+  border: 2px solid var(--oro, #ff6b35);
+  border-radius: 12px;
+  padding: 1.15rem 1.3rem;
+  margin: 1.65rem 0 2rem;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.08), rgba(44, 74, 110, 0.05));
+}
+.art-content .righetto-sol h2,
+.righetto-sol h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--oro, #ff6b35);
+  margin: 0 0 0.65rem;
+  border: none;
+  padding: 0;
+}
+.righetto-sol-quesito {
+  font-size: 0.86rem;
+  margin: 0 0 0.5rem;
+}
+.righetto-sol ul {
+  font-size: 0.84rem;
+  margin: 0.75rem 0 0.55rem 1.15rem;
+}
+.righetto-sol li {
+  margin-bottom: 0.45rem;
+}
+.righetto-sol-foot {
+  font-size: 0.78rem;
+  color: var(--grigio, #6b7a8d);
+  margin: 0;
+}

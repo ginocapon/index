@@ -193,6 +193,7 @@ Ogni articolo che pone un **quesito al lettore** (studenti, proprietari, imprese
 - **Min 3, max 4** soluzioni per articolo, tutte **realizzabili** con servizi/pagine esistenti (`servizio-locazioni`, `servizio-gestione`, `landing-valutazione`, `visite-virtuali`, checklist blog correlate).
 - **Vietato:** promettere accesso ESU/Camplus/PNRR, canoni garantiti, percentuali mediazione.
 - Collegare al **form lead** in fondo pagina con `provenienza: blog-{slug}`.
+- **Batch esistenti:** `python scripts/patch_righetto_sol_blog.py` — inietta `righetto-sol` su tutti i `blog-*.html` privi (priorità ~20 slug pillar in testa allo script).
 
 ### Stile di scrittura
 - Tono autorevole ma accessibile — MAI accademico o burocratico
