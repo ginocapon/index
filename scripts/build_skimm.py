@@ -14,6 +14,11 @@ OUT_JSON = ROOT / "TEST-SKILL" / "skimm.json"
 
 # Angolo editoriale esplicito (evita cannibalizzazione SEO tra articoli vicini)
 ANGLE_OVERRIDES: dict[str, dict] = {
+    "blog-5-domande-appuntamento-agenzia-padova-2026": {
+        "kw_primaria": "domande-appuntamento-agenzia-pretese",
+        "angolo": "Domande da fare in agenzia / tono ironico — non errori visita né solo documenti rogito",
+        "intent": "appuntamento-agenzia-acquirente",
+    },
     "blog-5-errori-visita-immobile-padova-2026": {
         "kw_primaria": "errori-visita-immobile-etichetta",
         "angolo": "Etichetta visita / tono ironico acquirente — non checklist rogito né errori acquisto generici",
