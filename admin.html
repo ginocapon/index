@@ -7120,9 +7120,15 @@ async function loadBlogList() {
     wrap.innerHTML = '<div class="empty-state"><h3>Nessun articolo</h3><p style="margin-top:8px">Clicca "+ Nuovo Articolo" per iniziare</p></div>';
     return;
   }
-  wrap.innerHTML = `<table><thead><tr><th></th><th>Titolo</th><th>Categoria</th><th>Data</th><th>Pubblicazione</th><th>Stato</th><th>Azioni</th></tr></thead><tbody>${
-    articles.sort((a,b) => new Date(b.data) - new Date(a.data)).map(a => `
+  const sorted = articles.sort((a, b) => new Date(b.data) - new Date(a.data));
+  const tableHead = document.querySelector('#sec-blog .table-head > div');
+  if (tableHead) {
+    tableHead.innerHTML = `Articoli del Blog <span style="color:var(--caffe2);font-weight:500;font-size:0.82rem">(${pub} pubblicati · ${tot} totali)</span>`;
+  }
+  wrap.innerHTML = `<table><thead><tr><th style="width:40px;text-align:center">#</th><th></th><th>Titolo</th><th>Categoria</th><th>Data</th><th>Pubblicazione</th><th>Stato</th><th>Azioni</th></tr></thead><tbody>${
+    sorted.map((a, i) => `
       <tr>
+        <td style="font-size:0.78rem;font-weight:700;color:var(--caffe);text-align:center;vertical-align:middle">${i + 1}</td>
         <td style="font-size:1.8rem;text-align:center">${a.emoji || '📝'}</td>
         <td><strong style="font-size:0.88rem">${esc(a.titolo)}</strong><br><span style="font-size:0.72rem;color:var(--caffe2)">${getExcerpt(a.contenuto, 60)}</span></td>
         <td><span class="badge badge-blu">${esc(a.categoria)}</span></td>
