@@ -326,6 +326,18 @@
 
     /* ACTIVE FILTERS TAGS */
     .active-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.85rem}
+    .quick-filters{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.85rem}
+    .qf-chip{padding:.42rem .8rem;border:1.5px solid var(--blu);background:#fff;color:var(--blu);border-radius:20px;font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.04em;cursor:pointer;transition:background .2s,color .2s}
+    .qf-chip.active,.qf-chip:hover{background:var(--blu);color:#fff}
+    .alert-immobili{background:linear-gradient(135deg,#eef2f6 0%,var(--carta) 100%);border:1px solid var(--gc);border-radius:8px;padding:1rem 1.1rem;margin-bottom:1rem}
+    .alert-immobili-inner{display:flex;flex-direction:column;gap:.7rem}
+    .alert-immobili-text strong{display:block;font-family:'Cormorant Garamond',serif;font-size:1.08rem;color:var(--nero);margin-bottom:.15rem}
+    .alert-immobili-text span{font-size:.78rem;color:var(--grigio)}
+    .alert-immobili-form{display:flex;flex-wrap:wrap;gap:.5rem;align-items:stretch}
+    .alert-immobili-form input,.alert-immobili-form select{flex:1;min-width:130px;padding:.55rem .7rem;border:1px solid var(--gc);border-radius:4px;font-family:'Montserrat',sans-serif;font-size:.8rem;background:#fff}
+    .alert-immobili-form button{padding:.55rem 1rem;background:var(--blu);color:#fff;border:none;border-radius:4px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+    .alert-immobili-form button:hover{opacity:.92}
+    .alert-immobili-msg{font-size:.78rem;margin:0}
     .atag{display:flex;align-items:center;gap:.3rem;padding:.22rem .55rem;background:var(--nero);color:#fff;border-radius:2px;font-size:.7rem}
     .atag button{background:none;border:none;color:rgba(255,255,255,.6);cursor:pointer;font-size:.8rem;line-height:1;padding:0;display:flex;align-items:center}
     .atag button:hover{color:#fff}
@@ -373,10 +385,12 @@
     .cs{display:flex;align-items:center;gap:.28rem;font-size:.75rem;color:var(--grigio)}
     .cs svg{width:13px;height:13px;color:var(--gc);flex-shrink:0}
     .cs strong{color:var(--nero);font-weight:500}
-    .card-footer{display:flex;align-items:center;justify-content:space-between;padding:.55rem 1.1rem;border-top:1px solid var(--gc);background:var(--bianco)}
+    .card-footer{display:flex;align-items:center;justify-content:space-between;gap:.5rem;flex-wrap:wrap;padding:.55rem 1.1rem;border-top:1px solid var(--gc);background:var(--bianco)}
     .cf-ref{font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--grigio)}
     .cf-ce{font-size:.6rem;font-weight:700;padding:.12rem .38rem;border-radius:1px}
     .cf-agent{font-size:.7rem;color:var(--grigio)}
+    .cf-live{font-size:.62rem;padding:.32rem .6rem;background:var(--blu);color:#fff;border:none;border-radius:2px;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;font-weight:700;margin-left:auto;flex-shrink:0;font-family:'Montserrat',sans-serif}
+    .cf-live:hover{opacity:.9}
     .fav-btn{position:absolute;top:.6rem;right:.6rem;width:30px;height:30px;background:rgba(255,255,255,.9);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,transform .15s;z-index:3;backdrop-filter:blur(4px)}
     .fav-btn:hover{background:#fff;transform:scale(1.1)}
     .fav-btn svg{width:14px;height:14px;color:var(--grigio)}
@@ -548,7 +562,7 @@
 <div class="hero-search">
   <div class="hero-search-inner">
     <h1 class="hero-title">Trova il tuo <strong>immobile ideale</strong><br>a Padova e provincia</h1>
-    <p class="hero-last-up">Ultimo aggiornamento: aprile 2026</p>
+    <p class="hero-last-up">Ultimo aggiornamento: luglio 2026</p>
     <div class="s-tabs">
       <button class="s-tab active" onclick="setTab(this,'vendita')">Acquisto</button>
       <button class="s-tab" onclick="setTab(this,'affitto')">Affitto</button>
@@ -795,8 +809,48 @@
       </div>
     </div>
 
+    <!-- ALERT NUOVI IMMOBILI -->
+    <div class="alert-immobili" id="alert-immobili">
+      <div class="alert-immobili-inner">
+        <div class="alert-immobili-text">
+          <strong>Alert nuovi immobili</strong>
+          <span>Ricevi un'email quando pubblichiamo annunci che corrispondono ai tuoi criteri — gratis, nessun impegno.</span>
+        </div>
+        <div class="alert-immobili-form">
+          <input type="email" id="alert-email" placeholder="La tua email" autocomplete="email" aria-label="Email per alert immobili">
+          <select id="alert-zona" aria-label="Zona per alert immobili">
+            <option value="">Tutta la provincia</option>
+            <option value="padova">Padova</option>
+            <option value="padova centro">Padova Centro</option>
+            <option value="Albignasego">Albignasego</option>
+            <option value="Abano Terme">Abano Terme</option>
+            <option value="Monselice">Monselice</option>
+            <option value="Este">Este</option>
+            <option value="Camposampiero">Camposampiero</option>
+            <option value="Vigonza">Vigonza</option>
+            <option value="Selvazzano Dentro">Selvazzano Dentro</option>
+          </select>
+          <select id="alert-tipo" aria-label="Tipologia per alert immobili">
+            <option value="">Tutte le tipologie</option>
+            <option value="appartamento">Appartamento</option>
+            <option value="villa">Villa</option>
+            <option value="villetta">Villetta</option>
+            <option value="attico">Attico / Mansarda</option>
+            <option value="locale">Locale commerciale</option>
+          </select>
+          <button type="button" onclick="iscriviAlertImmobili()">Attiva alert</button>
+        </div>
+        <p id="alert-msg" class="alert-immobili-msg" hidden></p>
+      </div>
+    </div>
+
     <!-- ACTIVE TAGS -->
     <div class="active-tags" id="active-tags"></div>
+
+    <!-- FILTRI RAPIDI -->
+    <div class="quick-filters" id="quick-filters" role="group" aria-label="Filtri rapidi">
+      <button type="button" class="qf-chip" id="qf-vt" onclick="toggleVtFilter(this)">Solo tour 360°</button>
+    </div>
 
     <!-- GRID IMMOBILI (caricato dinamicamente da Supabase) -->
     <div class="imm-grid sr-stagger" id="imm-grid">
@@ -911,6 +965,7 @@
   let immobili = [];
   let currentView = 'grid';
   let currentOp = 'vendita';
+  let filterVtOnly = false;
 
   // ── RISOLVI URL IMMAGINI SUPABASE ──
   function resolveImageUrl(url, opts) {
@@ -1038,7 +1093,7 @@
       const ceColor = CE_COLORS[i.ce] || {bg:'#999',tx:'#fff'};
       const ceHtml = i.ce ? '<span class="cf-ce" style="background:'+ceColor.bg+';color:'+ceColor.tx+'">'+i.ce+'</span>' : '';
       const cardSlug = generatePropertySlug(i);
-      return '<a class="card" href="immobile?s='+encodeURIComponent(cardSlug)+'" data-tipo="'+i.tipo+'" data-prezzo="'+i.prezzo+'" data-mq="'+i.mq+'" data-camere="'+i.camere+'" data-bagni="'+i.bagni+'" data-comune="'+(i.comune||'').toLowerCase()+'" data-vt="'+(i.vt?'1':'')+'" data-yt="'+(i.yt?'1':'')+'" data-giardino="'+(i.giardino?'1':'')+'" data-garage="'+(i.garage?'1':'')+'" data-op="'+i.op+'" data-anno="'+i.anno+'" data-stato="'+(i.stato||'').toLowerCase()+'" data-piscina="'+(i.piscina?'1':'')+'" data-mansarda="'+(i.mansarda?'1':'')+'" data-taverna="'+(i.taverna?'1':'')+'" data-vista="'+(i.vistaAperta?'1':'')+'" onclick="openCard(event,this)">'
+      return '<a class="card" href="immobile?s='+encodeURIComponent(cardSlug)+'" data-slug="'+cardSlug+'" data-tipo="'+i.tipo+'" data-prezzo="'+i.prezzo+'" data-mq="'+i.mq+'" data-camere="'+i.camere+'" data-bagni="'+i.bagni+'" data-comune="'+(i.comune||'').toLowerCase()+'" data-vt="'+(i.vt?'1':'')+'" data-yt="'+(i.yt?'1':'')+'" data-giardino="'+(i.giardino?'1':'')+'" data-garage="'+(i.garage?'1':'')+'" data-op="'+i.op+'" data-anno="'+i.anno+'" data-stato="'+(i.stato||'').toLowerCase()+'" data-piscina="'+(i.piscina?'1':'')+'" data-mansarda="'+(i.mansarda?'1':'')+'" data-taverna="'+(i.taverna?'1':'')+'" data-vista="'+(i.vistaAperta?'1':'')+'" onclick="openCard(event,this)">'
         + '<div class="card-img">'
         + imgHtml
         + '<div class="card-badges">'+badges+'</div>'
@@ -1053,8 +1108,9 @@
         + '<div class="card-specs">'+specs+'</div>'
         + '</div>'
         + '<div class="card-footer">'
-        + (i.rif ? '<span class="cf-ref">Rif. '+i.rif+'</span>' : '')
+        + (i.rif ? '<span class="cf-ref">Rif. '+i.rif+'</span>' : '<span class="cf-ref"></span>')
         + ceHtml
+        + '<button type="button" class="cf-live" onclick="event.preventDefault();event.stopPropagation();visitaLiveCard(this)" data-slug="'+cardSlug+'" aria-label="Richiedi visita guidata live per '+i.titolo.replace(/"/g,'&quot;')+'">Visita live</button>'
         + '</div>'
         + '</a>';
     }).join('');
@@ -1183,6 +1239,66 @@
     btn.title = btn.classList.contains('on') ? 'Salvato!' : 'Salva';
   }
 
+  function toggleVtFilter(btn) {
+    filterVtOnly = !filterVtOnly;
+    btn.classList.toggle('active', filterVtOnly);
+    filterCards();
+  }
+
+  function visitaLiveCard(btn) {
+    const slug = btn.dataset.slug || '';
+    const d = immobili.find(i => generatePropertySlug(i) === slug);
+    const cod = d ? (d.rif || '') : '';
+    const tit = d ? (d.titolo || 'Immobile') : 'Immobile';
+    const comune = d ? (d.comune || 'Padova') : 'Padova';
+    const url = 'https://righettoimmobiliare.it/immobile?s=' + slug;
+    const testo = 'Ciao Righetto, vorrei una VISITA GUIDATA LIVE (video) per:\n'
+      + '• Rif. ' + cod + ' — ' + tit + '\n'
+      + '• Zona: ' + comune + '\n'
+      + '• ' + url + '\n\n'
+      + 'Disponibilità per la videochiamata: ';
+    if (typeof gtag === 'function') {
+      gtag('event', 'visita_live_click', { event_category: 'immobili', event_label: cod || tit });
+    }
+    window.open('https://wa.me/393497365930?text=' + encodeURIComponent(testo), '_blank', 'noopener,noreferrer');
+  }
+
+  async function iscriviAlertImmobili() {
+    const email = (document.getElementById('alert-email').value || '').trim();
+    const zona = document.getElementById('alert-zona').value || '';
+    const tipo = document.getElementById('alert-tipo').value || '';
+    const msgEl = document.getElementById('alert-msg');
+    if (!email || !email.includes('@')) {
+      msgEl.hidden = false;
+      msgEl.style.color = 'var(--rosso)';
+      msgEl.textContent = 'Inserisci un\'email valida.';
+      return;
+    }
+    const interesse = 'alert-immobili' + (zona ? '|zona:' + zona : '') + (tipo ? '|tipo:' + tipo : '') + '|op:' + currentOp;
+    try {
+      if (sb) {
+        await sb.from('newsletter_subscribers').upsert([{
+          email: email,
+          fonte: 'immobili-catalogo',
+          interesse: interesse,
+          attivo: true,
+          created_at: new Date().toISOString()
+        }], { onConflict: 'email' });
+      }
+      msgEl.hidden = false;
+      msgEl.style.color = 'var(--verde)';
+      msgEl.textContent = 'Alert attivato! Ti avviseremo ai nuovi annunci.';
+      document.getElementById('alert-email').value = '';
+      if (typeof gtag === 'function') {
+        gtag('event', 'alert_immobili', { event_category: 'immobili', event_label: zona || 'tutta-provincia' });
+      }
+    } catch (e) {
+      msgEl.hidden = false;
+      msgEl.style.color = 'var(--rosso)';
+      msgEl.textContent = 'Errore. Riprova più tardi o contattaci.';
+    }
+  }
+
   // ── FILTER ──
   /** Allinea tipologia DB (slug) e varianti testuali; Villa vs Villetta vs Bi-familiare. */
   function tipologiaMatch(tipoRaw, titoloLower, filter) {
@@ -1274,6 +1390,8 @@
       if (extraFiltro === 'vista' && c.dataset.vista !== '1') show = false;
       if (extraFiltro === 'mansarda' && c.dataset.mansarda !== '1') show = false;
       if (extraFiltro === 'taverna' && c.dataset.taverna !== '1') show = false;
+      // Virtual tour 360°
+      if (filterVtOnly && c.dataset.vt !== '1') show = false;
 
       c.style.display = show ? '' : 'none';
       if (show) visible++;
@@ -1313,6 +1431,9 @@
     document.getElementById('f-anno').value = '';
     document.getElementById('f-stato').value = '';
     document.getElementById('f-extra').value = '';
+    filterVtOnly = false;
+    const qfVt = document.getElementById('qf-vt');
+    if (qfVt) qfVt.classList.remove('active');
     filterCards();
   }
 
@@ -1343,6 +1464,7 @@
   function openCard(e, el) {
     e.preventDefault();
     if (e.target.closest('.rig-carousel-nav')) return;
+    if (e.target.closest('.cf-live')) return;
     if (typeof RigPhotoCarousel !== 'undefined' && RigPhotoCarousel.wasDragging(el)) return;
     const rif = el.querySelector('.cf-ref') ? el.querySelector('.cf-ref').textContent.replace('Rif. ','') : '';
     const urlSlug = new URL(el.href, location.origin).searchParams.get('s') || '';
@@ -1397,6 +1519,7 @@
     const zona = params.get('zona');
     const prezzoMax = params.get('prezzo_max');
     const mqMin = params.get('mq_min');
+    const vtOnly = params.get('vt');
 
     // Attiva il tab corretto
     if (tab && ['vendita', 'affitto', 'aste'].includes(tab)) {
@@ -1463,6 +1586,12 @@
         if (lastOpt.value) bestOpt = lastOpt.value;
       }
       if (bestOpt) fMq.value = bestOpt;
+    }
+
+    if (vtOnly === '1' || vtOnly === 'true') {
+      filterVtOnly = true;
+      const qfVt = document.getElementById('qf-vt');
+      if (qfVt) qfVt.classList.add('active');
     }
   }
 

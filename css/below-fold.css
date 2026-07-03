@@ -41,7 +41,9 @@
 }
 .video-wrap { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 16/9; background: #000; cursor: pointer; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12); }
 .video-wrap-link { display: block; text-decoration: none; color: inherit; }
-.video-wrap.is-playing { cursor: default; }
+.video-wrap.is-playing .video-facade,
+.video-wrap.is-playing .video-bar { opacity: 0; pointer-events: none; transition: opacity 0.35s ease; }
+.video-wrap.is-playing .video-vignette { opacity: 0; }
 .video-native, .video-poster-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
 .video-wrap:not(.is-playing) .video-native { pointer-events: none; }
 /* Vignetta */

@@ -136,6 +136,23 @@ python scripts/build_skimm.py   # se tocchi blog
 
 ---
 
+## 3b. Matrice funzionalità competitive (8/8 — zero costo aggiuntivo)
+
+| Feature | Stato | Implementazione |
+|---|---|---|
+| **Blog** | OK | ~99 articoli + SKIMM + cron venerdì |
+| **Zone** | OK | 14 pagine zona OMI + FAQ |
+| **Chat** | OK | Linda AI (`js/chatbot.js`) |
+| **Valut.** | OK | Landing + servizio valutazioni |
+| **Player** | OK | `<video>` nativo homepage (`index.html` + `righetto-storia-hero.mp4`) |
+| **Alert** | OK | Iscrizione alert su `immobili.html` → `newsletter_subscribers` (`interesse: alert-immobili`) |
+| **Tour** | OK | Filtro «Solo tour 360°» su catalogo + tour su scheda immobile |
+| **Live** | OK | CTA «Visita live» su card catalogo + scheda (`visitaLiveGuidata` / WhatsApp) |
+
+Verifica rapida post-modifica: homepage play video, `immobili?vt=1` filtra tour, alert iscrizione, pulsante live su card.
+
+---
+
 ## 4. Priorità fix quando punteggio < 100%
 
 1. Errori rossi `google-compliance-check.py`
