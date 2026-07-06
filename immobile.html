@@ -750,7 +750,15 @@
 // ══ CONFIG ══
 const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+let sb;
+function initSB() {
+  try { if (window.supabase) sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) { console.error('Supabase init error:', e); }
+}
+function waitSBThen(fn, tries) {
+  if (window.supabase) { initSB(); if (sb) return fn(); }
+  if ((tries || 0) > 40) { showError(); return; }
+  setTimeout(function(){ waitSBThen(fn, (tries || 0) + 1); }, 250);
+}
 
 let immobile = null;
 let lbFotos = [];
@@ -2005,9 +2013,11 @@ async function initPropertyMap(d) {
   }
 }
 
-init().catch(function(err) {
-  console.error('Errore caricamento immobile:', err);
-  showError();
+waitSBThen(function() {
+  init().catch(function(err) {
+    console.error('Errore caricamento immobile:', err);
+    showError();
+  });
 });
 </script>
 <!-- Chatbot globale disabilitato su questa pagina: usa il chatbot dedicato all'immobile -->

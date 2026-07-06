@@ -956,8 +956,19 @@
   const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
   let sb;
-  try { sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) { console.error('Supabase init error:', e); }
-  window._sb = sb;
+  function initSB() {
+    try { if (window.supabase) sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) { console.error('Supabase init error:', e); }
+    window._sb = sb;
+  }
+  function waitSBThen(fn, tries) {
+    if (window.supabase) { initSB(); if (sb) return fn(); }
+    if ((tries || 0) > 40) {
+      const grid = document.getElementById('imm-grid');
+      if (grid) grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;"><p style="color:var(--rosso);font-size:.85rem">Errore nel caricamento degli immobili. Riprova.</p></div>';
+      return;
+    }
+    setTimeout(function(){ waitSBThen(fn, (tries || 0) + 1); }, 250);
+  }
 
   let immobili = [];
   let currentView = 'grid';
@@ -1592,9 +1603,11 @@
     }
   }
 
-  // ── INIT ──
-  applyUrlParams();
-  loadImmobili();
+  // ── INIT (attende js/vendor/supabase.min.js defer) ──
+  waitSBThen(function() {
+    applyUrlParams();
+    loadImmobili();
+  });
 </script>
 <script src="js/nav-mobile.js?v=3" defer></script>
 <script src="js/config.js?v=3" defer></script>
