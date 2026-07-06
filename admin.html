@@ -13,7 +13,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin — Righetto Immobiliare</title>
 <link rel="stylesheet" href="css/fonts.css?v=3">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/vendor/supabase.min.js"></script>
+<script src="js/supabase-bridge.js?v=1"></script>
+<script src="js/supabase-bridge.js?v=1"></script>
 <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
 <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
 <script async src="https://cdn.jsdelivr.net/npm/otpauth@9/dist/otpauth.umd.min.js"></script>
@@ -4805,7 +4807,9 @@ const URL_KEY = 'RIG2024';
 /* Deve coincidere con public.righetto_admin_secret() in sql/rls-security-hardening.sql */
 const RIG_ADMIN_RLS_SECRET = 'sEwKPRkWMb-vUHFYpuqtrQWkOobWV28TKZaaQeKUpI63WRgnDhyeiV0yrVL6wdSR';
 
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+const _rigSbLib = window.rigSupabaseLib && window.rigSupabaseLib();
+if (!_rigSbLib) throw new Error('Supabase non caricato — ricarica la pagina admin.');
+const sb = _rigSbLib.createClient(SUPABASE_URL, SUPABASE_KEY, {
   global: {
     headers: { 'x-righetto-admin': RIG_ADMIN_RLS_SECRET }
   }

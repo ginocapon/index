@@ -949,7 +949,8 @@
   </div>
 </footer>
 
-<script src="js/vendor/supabase.min.js" defer></script>
+<script src="js/vendor/supabase.min.js"></script>
+<script src="js/supabase-bridge.js?v=1"></script>
 <script src="js/prop-photo-carousel.js?v=2"></script>
 <script>
   // ── CONFIG SUPABASE ──
@@ -957,17 +958,22 @@
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
   let sb;
   function initSB() {
-    try { if (window.supabase) sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) { console.error('Supabase init error:', e); }
+    try {
+      var lib = window.rigSupabaseLib && window.rigSupabaseLib();
+      if (lib) sb = lib.createClient(SUPABASE_URL, SUPABASE_KEY);
+    } catch (e) { console.error('Supabase init error:', e); }
     window._sb = sb;
   }
-  function waitSBThen(fn, tries) {
-    if (window.supabase) { initSB(); if (sb) return fn(); }
-    if ((tries || 0) > 40) {
-      const grid = document.getElementById('imm-grid');
-      if (grid) grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;"><p style="color:var(--rosso);font-size:.85rem">Errore nel caricamento degli immobili. Riprova.</p></div>';
-      return;
-    }
-    setTimeout(function(){ waitSBThen(fn, (tries || 0) + 1); }, 250);
+  function sbLoadFail() {
+    const grid = document.getElementById('imm-grid');
+    if (grid) grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;"><p style="color:var(--rosso);font-size:.85rem">Errore nel caricamento degli immobili. <button type="button" onclick="location.reload()" style="background:none;border:none;color:var(--oro);cursor:pointer;font:inherit;text-decoration:underline">Riprova</button></p></div>';
+  }
+  function waitSBThen(fn) {
+    window.rigWaitSupabase(function () {
+      initSB();
+      if (sb) fn();
+      else sbLoadFail();
+    }, { onFail: sbLoadFail });
   }
 
   let immobili = [];

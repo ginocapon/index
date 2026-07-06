@@ -743,7 +743,8 @@
   </div>
 </footer>
 
-<script src="js/vendor/supabase.min.js" defer></script>
+<script src="js/vendor/supabase.min.js"></script>
+<script src="js/supabase-bridge.js?v=1"></script>
 <script src="js/config.js?v=4"></script>
 <script src="js/prop-photo-carousel.js?v=2"></script>
 <script>
@@ -752,12 +753,17 @@ const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
 let sb;
 function initSB() {
-  try { if (window.supabase) sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) { console.error('Supabase init error:', e); }
+  try {
+    var lib = window.rigSupabaseLib && window.rigSupabaseLib();
+    if (lib) sb = lib.createClient(SUPABASE_URL, SUPABASE_KEY);
+  } catch (e) { console.error('Supabase init error:', e); }
 }
-function waitSBThen(fn, tries) {
-  if (window.supabase) { initSB(); if (sb) return fn(); }
-  if ((tries || 0) > 40) { showError(); return; }
-  setTimeout(function(){ waitSBThen(fn, (tries || 0) + 1); }, 250);
+function waitSBThen(fn) {
+  window.rigWaitSupabase(function () {
+    initSB();
+    if (sb) fn();
+    else showError();
+  }, { onFail: showError });
 }
 
 let immobile = null;

@@ -2,8 +2,12 @@
 const SB_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
 let sb;
-function initSB(){try{if(window.supabase&&!sb)sb=window.supabase.createClient(SB_URL,SB_KEY);}catch(e){}}
-initSB();
+function initSB() {
+  try {
+    var lib = window.rigSupabaseLib && window.rigSupabaseLib();
+    if (lib && !sb) sb = lib.createClient(SB_URL, SB_KEY);
+  } catch (e) { console.error('Supabase init error:', e); }
+}
 
 
 
@@ -117,7 +121,7 @@ function propExcerpt(p, maxWords) {
 
 /* ══ IMMOBILI DA SUPABASE ══ */
 async function loadImmobili(){
-  if(!sb){ showDemoProps(); return; }
+  if(!sb){ showPropsLoadError(); return; }
   try{
     const {data:evidenza,error:e1} = await sb.from('immobili').select('*')
       .eq('attivo',true).eq('venduto',false).eq('in_evidenza',true)
@@ -135,9 +139,21 @@ async function loadImmobili(){
         }
       }
     }
-    if(!risultati.length){ showDemoProps(); return; }
+    if(!risultati.length){ showPropsEmpty(); return; }
     renderProps(risultati);
-  }catch(e){ showDemoProps(); }
+  }catch(e){ console.error('Errore caricamento immobili homepage:', e); showPropsLoadError(); }
+}
+
+function showPropsLoadError() {
+  const grid = document.getElementById('propsGrid');
+  if (!grid) return;
+  grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--grigio);font-size:.85rem;padding:2rem 1rem">Annunci momentaneamente non disponibili. <a href="immobili" style="color:var(--oro)">Vai al catalogo completo</a></p>';
+}
+
+function showPropsEmpty() {
+  const grid = document.getElementById('propsGrid');
+  if (!grid) return;
+  grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--grigio);font-size:.85rem;padding:2rem 1rem">Nessun annuncio in evidenza al momento. <a href="immobili" style="color:var(--oro)">Sfoglia tutti gli immobili</a></p>';
 }
 
 function getPropFotos(p) {
@@ -153,7 +169,7 @@ function getPropFotos(p) {
 
 function renderProps(arr){
   const grid = document.getElementById('propsGrid');
-  if(!arr||!arr.length){ showDemoProps(); return; }
+  if(!arr||!arr.length){ showPropsEmpty(); return; }
   grid.innerHTML = arr.slice(0, PROPS_PREVIEW).map((p)=>{
     const tipo = p.tipo_operazione || p.tipo_contratto || 'vendita';
     const tipClass = tipo==='affitto'?'ta':tipo==='asta'?'te':'tv';
@@ -519,15 +535,23 @@ function doRicerca() {
   window.location.href = 'immobili?' + p.toString();
 }
 
-/* Attendi Supabase (caricato lazy dopo il render) */
-function waitSBThen(fn,tries){
+/* Attendi Supabase (sync + bridge in index.html) */
+function waitSBThen(fn){
+  if (typeof window.rigWaitSupabase === 'function') {
+    window.rigWaitSupabase(function () {
+      initSB();
+      if (sb) fn();
+      else showPropsLoadError();
+    }, { onFail: showPropsLoadError });
+    return;
+  }
   initSB();
-  if(sb||tries>20) return fn();
-  setTimeout(function(){waitSBThen(fn,(tries||0)+1);},250);
+  if (sb) return fn();
+  showPropsLoadError();
 }
 /* Mobile: skip caricamento immobili (CTA diretto a /immobili) — Desktop: ritardo 2s */
 if(window.innerWidth > 768){
-  setTimeout(function(){ waitSBThen(loadImmobili,0); }, 2000);
+  setTimeout(function(){ waitSBThen(loadImmobili); }, 2000);
 }
 /* Visite virtuali homepage: catalogo locale (4 tour) + arricchimento Supabase */
 setTimeout(loadVisiteVirtualiHome, 600);
