@@ -21,7 +21,7 @@ PREFETCH_CDN = re.compile(
 )
 
 SKIP = {
-    "admin.html", "blog-articolo.html", "404.html", "bookmarklet-helper.html",
+    "blog-articolo.html", "404.html", "bookmarklet-helper.html",
     "unsubscribe.html", "scraping.html",
 }
 
@@ -43,7 +43,10 @@ def patch_file(path: Path) -> list[str]:
         fixes.append(f"prefetch-cdn×{n}")
 
     if SUPABASE_CDN.search(raw):
-        sup = f'<script src="{prefix}js/vendor/supabase.min.js" defer></script>'
+        sup = (
+            f'<script src="{prefix}js/vendor/supabase.min.js"></script>\n'
+            f'<script src="{prefix}js/supabase-bridge.js?v=1"></script>'
+        )
         raw = SUPABASE_CDN.sub(sup, raw)
         # dedupe identical consecutive supabase tags
         raw = re.sub(

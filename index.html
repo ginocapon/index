@@ -1610,7 +1610,8 @@ button svg, a.btn-p svg, a.btn-g svg {
   </div>
 </footer>
 
-<script src="js/vendor/supabase.min.js" defer></script>
+<script src="js/vendor/supabase.min.js"></script>
+<script src="js/supabase-bridge.js?v=1"></script>
 <script src="js/config.js?v=4"></script>
 <script src="js/rig-lead-form.js?v=2"></script>
 <script>/* Chatbot lazy: carica solo su interazione utente o dopo 8s */
@@ -1618,7 +1619,7 @@ button svg, a.btn-p svg, a.btn-g svg {
 setTimeout(l,8000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
 })();</script>
 <script src="js/prop-photo-carousel.js?v=2" defer></script>
-<script src="js/homepage.js?v=15" defer></script>
+<script src="js/homepage.js?v=16" defer></script>
 <script>
 function recPlayVideo(el) {
   if (!el || el.querySelector('iframe')) return;
@@ -1740,16 +1741,10 @@ document.addEventListener('keydown', function(e) {
     gtag('js',new Date());
     gtag('config','G-9MHDHHES26');
   }
-  function loadSupabase(){
-    var s=document.createElement('script');
-    s.src='js/vendor/supabase.min.js';
-    s.onload=function(){if(typeof initSB==='function')initSB();};
-    document.head.appendChild(s);
-  }
   if('requestIdleCallback' in window){
-    requestIdleCallback(function(){loadGA();loadSupabase();});
+    requestIdleCallback(loadGA);
   } else {
-    setTimeout(function(){loadGA();loadSupabase();},1500);
+    setTimeout(loadGA, 1500);
   }
 })();
 </script>
