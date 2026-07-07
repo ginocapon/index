@@ -786,7 +786,7 @@
   <!-- RISULTATI -->
   <div>
     <div class="results-head">
-      <div class="results-count"><strong id="res-count">12</strong> <span>immobili trovati</span></div>
+      <div class="results-count"><strong id="res-count">—</strong> <span>immobili trovati</span></div>
       <div class="results-controls">
         <select class="sort-sel" onchange="sortCards(this.value)">
           <option value="default">Rilevanza</option>
@@ -1609,7 +1609,7 @@
     }
   }
 
-  // ── INIT (attende js/vendor/supabase.min.js defer) ──
+  // ── INIT ──
   waitSBThen(function() {
     applyUrlParams();
     loadImmobili();
