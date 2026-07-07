@@ -95,6 +95,7 @@ Molte aziende riconoscono un **rimborso giornaliero contenuto** che deve coprire
 | Landing demo (noindex) | `landing-demo-loft-adiacenti-padova-vicenza` |
 | Provenienza form servizio | `form-loft-aziende` |
 | Provenienza form demo | `landing-demo-loft-adiacenti-padova-vicenza` |
+| Admin seed | `_landingSeedPages` in `admin.html` (slug servizio + demo) |
 
 **Form lead:** `data-rig-lead-form` + `SERVIZI_CONFIG.sendNotifica()` + insert Supabase `richieste` — vedi `skill-forms-leads.md`.
 
