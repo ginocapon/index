@@ -138,5 +138,6 @@ Usare solo claim verificati da `context-map.json`:
 
 - `skill-forms-leads.md` — moduli e provenienza
 - `skill-content.md` — articoli blog (verificare anti-doppioni §8.1a)
+- **Blog pillar:** `blog-loft-aziende-cucina-condivisa-padova-vicenza-2026` (luglio 2026) — distinto da `blog-housing-lavoratori-veneto-edilcassa-2026`
 - `skill-design.md` — contrasto CTA, mobile-first
 - `skill-seo.md` — pagina servizio indicizzabile
