@@ -807,6 +807,12 @@ function generateSlug(titolo) {
   // Articoli statici (sempre presenti)
   const articoliStatici = [
     {
+      "titolo": "Loft aziendali con cucina condivisa tra Padova e Vicenza",
+      "categoria": "Affitti",
+      "data": "2026-07-07",
+      "immagine_copertina": "img/blog/blog-loft-aziende-cucina-condivisa-padova-vicenza-2026.webp",
+      "url_statico": "blog-loft-aziende-cucina-condivisa-padova-vicenza-2026"
+    },    {
       "titolo": "5 errori in visita immobile: cosa NON fare a Padova",
       "categoria": "Consigli acquisto",
       "data": "2026-07-03",
