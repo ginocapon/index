@@ -24,6 +24,12 @@
       "token_stimati": "~1.800",
       "note": "Serve architettura + componenti UI + form invio diretto (sendNotifica + richieste)"
     },
+    "loft_aziende_media_durata": {
+      "skills": ["skill-essentials.md", "skill-gestione-loft-aziende.md", "skill-forms-leads.md", "skill-design.md"],
+      "cursor_rules": ["righetto-vanilla-ui.mdc", "righetto-forms-leads.mdc"],
+      "token_stimati": "~2.200",
+      "note": "Linee guida TEST-SKILL/skill-gestione-loft-aziende.md · pagina servizio-loft-aziende-media-durata · asset solo img/guida-loft-aziende/"
+    },
     "nuovo_articolo_blog": {
       "skills": ["skill-essentials.md", "skill-content.md", "skill-forms-leads.md"],
       "cursor_rules": ["righetto-blog-publish.mdc"],
