@@ -76,7 +76,7 @@ FOOTER = """
 <script>document.querySelectorAll('.faq-q').forEach(function(q){q.addEventListener('click',function(){var p=this.parentElement,o=p.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(function(x){x.classList.remove('open');});if(!o)p.classList.add('open');});});</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/config.js?v=4"></script>
-<script src="js/rig-lead-form.js?v=1"></script>
+<script src="js/rig-lead-form.js?v=3"></script>
 <script src="js/nav-mobile.js?v=3" defer></script>
 <script src="js/cookie-consent.js?v=3" defer></script>
 </body></html>

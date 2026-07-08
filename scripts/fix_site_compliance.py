@@ -230,7 +230,7 @@ def main() -> None:
     bumped_js = bump_asset_version("rig-lead-form.js", "2")
     bumped_css = bump_asset_version("blog-lead-form.css", "2")
     print(f"File aggiornati: {len(changed)}")
-    print(f"rig-lead-form.js?v=2 in {bumped_js} pagine")
+    print(f"rig-lead-form.js?v=3 in {bumped_js} pagine")
     print(f"blog-lead-form.css?v=2 in {bumped_css} pagine")
     for c in changed[:40]:
         print(f"  - {c}")

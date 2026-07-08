@@ -7,6 +7,41 @@
   var SB_ANON =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
   var TEL = '049.8843484';
+  var HP_NAME = 'rig_website_url';
+
+  function ensureHoneypot(form) {
+    if (form.querySelector('[data-rig-hp="1"]')) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'rig-hp';
+    wrap.setAttribute('aria-hidden', 'true');
+    wrap.style.cssText =
+      'position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;';
+    var id = 'rig-hp-' + Math.random().toString(36).slice(2, 9);
+    var label = document.createElement('label');
+    label.setAttribute('for', id);
+    label.textContent = 'Sito web aziendale';
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.name = HP_NAME;
+    input.id = id;
+    input.setAttribute('data-rig-hp', '1');
+    input.setAttribute('tabindex', '-1');
+    input.setAttribute('autocomplete', 'off');
+    wrap.appendChild(label);
+    wrap.appendChild(input);
+    form.insertBefore(wrap, form.firstChild);
+  }
+
+  function isBotSubmission(form) {
+    var hp = form.querySelector('[data-rig-hp="1"]');
+    return !!(hp && String(hp.value || '').trim());
+  }
+
+  function showFakeSuccess(form) {
+    form.classList.add('is-sent');
+    var ok = form.querySelector('.rig-lead-success');
+    if (ok) ok.style.display = 'block';
+  }
 
   function val(sel) {
     if (!sel) return '';
@@ -80,6 +115,11 @@
   }
 
   async function submitLead(form) {
+    if (isBotSubmission(form)) {
+      showFakeSuccess(form);
+      return true;
+    }
+
     var fields = parseFields(form);
     var nome = fields.nome && fields.nome.value != null ? fields.nome.value : val(fields.nome);
     var cognome = val(fields.cognome);
@@ -172,6 +212,7 @@
   function bindForm(form) {
     if (form.dataset.rigBound === '1') return;
     form.dataset.rigBound = '1';
+    ensureHoneypot(form);
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       submitLead(form);

@@ -262,7 +262,7 @@ ARTICLE = {
 def main() -> int:
     gen_images()
     html, wc = build_article(ARTICLE)
-    html = html.replace("rig-lead-form.js?v=1", "rig-lead-form.js?v=2")
+    html = html.replace("rig-lead-form.js?v=3", "rig-lead-form.js?v=3")
     html = html.replace("blog-lead-form.css?v=1", "blog-lead-form.css?v=2")
     out = ROOT / ARTICLE["filename"]
     out.write_text(html, encoding="utf-8")

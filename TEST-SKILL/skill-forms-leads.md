@@ -53,7 +53,7 @@ Per servizi, blog e landing semplici usa **`js/rig-lead-form.js`** con attributi
 </form>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/config.js?v=4"></script>
-<script src="js/rig-lead-form.js?v=1"></script>
+<script src="js/rig-lead-form.js?v=3"></script>
 ```
 
 Migrazione batch: `python tools/migrate-forms-leads.py`
