@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, follow">
+<title>Pagina non trovata — Righetto Immobiliare</title>
+<link rel="stylesheet" href="css/fonts.css?v=3">
+<script src="js/redirects-404.js?v=1"></script>
+<script>
+(function () {
+  var map = window.RIGHETTO_REDIRECTS || {};
+  var path = location.pathname.replace(/\/+$/, '') || '/';
+  var qs = location.search || '';
+  var key = path + qs;
+  var target = map[key] || map[path];
+  if (!target && path === '/blog-articolo' && qs.indexOf('s=') > -1) {
+    var slug = new URLSearchParams(qs).get('s');
+    if (slug) {
+      target = map['/blog-articolo?s=' + slug] || (slug.indexOf('blog-') === 0 ? '/' + slug : '/blog');
+    }
+  }
+  if (!target && path.indexOf('/share-immobile-') === 0) target = '/immobili';
+  if (!target && path === '/immobile' && qs) target = '/immobili';
+  if (target) {
+    location.replace(target);
+    return;
+  }
+})();
+</script>
+<style>
+  body{font-family:system-ui,sans-serif;background:#f0ece6;color:#152435;margin:0;padding:2rem 1.25rem;text-align:center}
+  h1{font-size:1.35rem;margin:0 0 .5rem}
+  p{color:#6b7a8d;line-height:1.6;max-width:28rem;margin:0 auto 1.25rem}
+  a{color:#2c4a6e;font-weight:600}
+</style>
+</head>
+<body>
+<h1>Pagina non trovata</h1>
+<p>L'indirizzo potrebbe essere cambiato o l'immobile non è più disponibile.</p>
+<p><a href="/">Home</a> · <a href="/immobili">Immobili in vendita e affitto</a> · <a href="/contatti">Contatti</a></p>
+</body>
+</html>
