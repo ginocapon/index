@@ -57,6 +57,9 @@ jobs:
             ls share-immobile-*.html 2>/dev/null | wc -l || true
           fi
 
+      - name: Build SEO redirects (404 + stub 301)
+        run: python3 scripts/build_seo_redirects.py
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

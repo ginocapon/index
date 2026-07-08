@@ -866,6 +866,13 @@ async function init() {
 function showError() {
   document.getElementById('loadingScreen').classList.add('hide');
   document.getElementById('errorPage').style.display = 'block';
+  var robots = document.querySelector('meta[name="robots"]');
+  if (robots) robots.setAttribute('content', 'noindex, follow');
+  setTimeout(function () {
+    if (document.getElementById('errorPage').style.display === 'block') {
+      location.replace('/immobili');
+    }
+  }, 4000);
 }
 
 function hideLoading() {

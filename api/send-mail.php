@@ -27,6 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    header('Allow: POST, OPTIONS');
     echo json_encode(['status' => 'error', 'error' => 'Solo POST']);
     exit;
 }
