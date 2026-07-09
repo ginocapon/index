@@ -1,7 +1,7 @@
 # ============================================================
 # VENERDÌ CONTENUTI & FRESCHEZZA — Righetto Immobiliare
 # Ogni venerdì alle 05:00 UTC = 07:00 CEST (ora legale)
-# SKIMM + blog corposità + pagine pillar + email a info@
+# SKIMM + blog + SEO intelligence + probe + report email completo → info@
 # ============================================================
 
 name: "Venerdì Contenuti & Freschezza (SKIMM)"
@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   issues: write
 
 jobs:
@@ -39,6 +39,36 @@ jobs:
           python scripts/probe_live_urls.py || true
           python scripts/google-compliance-check.py >> venerdi-contenuti-report.md 2>&1 || true
           python scripts/check_doppioni_sito.py >> venerdi-contenuti-report.md 2>&1 || true
+
+      - name: Genera report email completo (blocchi + trend settimanale)
+        if: always()
+        id: email_report
+        env:
+          CONTENT_HEALTH: ${{ steps.audit.outputs.health }}
+          CONTENT_ARTICLES: ${{ steps.audit.outputs.articles }}
+          CONTENT_WARNINGS: ${{ steps.audit.outputs.warnings }}
+          CONTENT_ERRORS: ${{ steps.audit.outputs.errors }}
+          CONTENT_SKIMM_RISKS: ${{ steps.audit.outputs.skimm_risks }}
+          CONTENT_THIN: ${{ steps.audit.outputs.thin_articles }}
+          CONTENT_NO_SOL: ${{ steps.audit.outputs.no_righetto_sol }}
+          CONTENT_FREE_KW: ${{ steps.audit.outputs.free_keywords }}
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          python scripts/venerdi-report-email.py
+
+      - name: Salva storico trend GSC nel repo
+        if: always() && steps.email_report.outputs.email_ready == 'true'
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/gsc-weekly-history.json
+          if git diff --staged --quiet; then
+            echo "Storico GSC invariato — nessun commit"
+          else
+            git commit -m "chore(seo): snapshot GSC settimanale $(date +%Y-%m-%d)"
+            git push
+          fi
 
       - name: Leggi report
         if: always()
@@ -87,70 +117,28 @@ jobs:
               labels: ['contenuti-freschezza', 'skimm']
             });
 
-      - name: Invia email riepilogo a info@righettoimmobiliare.it
-        if: always() && steps.audit.outputs.success == 'true'
+      - name: Invia report email completo a info@righettoimmobiliare.it
+        if: always() && steps.email_report.outputs.email_ready == 'true'
         env:
           EMAIL_RELAY_KEY: ${{ secrets.EMAIL_RELAY_KEY }}
         run: |
-          HEALTH="${{ steps.audit.outputs.health }}"
-          WARNINGS="${{ steps.audit.outputs.warnings }}"
-          ERRORS="${{ steps.audit.outputs.errors }}"
-          ARTICLES="${{ steps.audit.outputs.articles }}"
-          SKIMM_RISKS="${{ steps.audit.outputs.skimm_risks }}"
-          THIN="${{ steps.audit.outputs.thin_articles }}"
-          NO_SOL="${{ steps.audit.outputs.no_righetto_sol }}"
-          FREE_KW="${{ steps.audit.outputs.free_keywords }}"
-          UNDEF="${{ steps.audit.outputs.undefined_angles }}"
-          DATE=$(date '+%d/%m/%Y')
-
           if [ -z "$EMAIL_RELAY_KEY" ]; then
             echo "⚠️ Secret EMAIL_RELAY_KEY non configurato — email non inviata"
             exit 0
           fi
 
-          if [ "$ERRORS" -gt 0 ] 2>/dev/null; then
-            EMOJI="🔴"
-            STATUS="Errori: $ERRORS"
-          elif [ "$WARNINGS" -gt 5 ] 2>/dev/null; then
-            EMOJI="🟡"
-            STATUS="$WARNINGS avvisi da valutare"
-          else
-            EMOJI="🟢"
-            STATUS="Contenuti in buona salute"
+          if [ ! -f venerdi-email-report.html ] || [ ! -f venerdi-email-subject.txt ]; then
+            echo "⚠️ File report email mancanti"
+            exit 0
           fi
 
-          EMAIL_BODY="<h2>Venerdì Contenuti &amp; Freschezza — Righetto</h2>"
-          EMAIL_BODY+="<p><strong>Data:</strong> $DATE (report automatico settimanale)</p>"
-          EMAIL_BODY+="<p><strong>Salute contenuti:</strong> ${HEALTH}% — $STATUS</p>"
-          EMAIL_BODY+="<hr>"
-          EMAIL_BODY+="<h3>📊 Blog &amp; SKIMM</h3>"
-          EMAIL_BODY+="<ul>"
-          EMAIL_BODY+="<li><strong>${ARTICLES}</strong> articoli blog catalogati</li>"
-          EMAIL_BODY+="<li><strong>${SKIMM_RISKS}</strong> avvisi SKIMM (anti-doppioni)</li>"
-          EMAIL_BODY+="<li><strong>${UNDEF}</strong> angoli editoriali da completare</li>"
-          EMAIL_BODY+="<li><strong>${THIN}</strong> articoli sotto 1500 parole</li>"
-          EMAIL_BODY+="<li><strong>${NO_SOL}</strong> articoli senza sezione «Cosa può fare Righetto»</li>"
-          EMAIL_BODY+="<li><strong>${FREE_KW}</strong> keyword libere pronte per nuovo articolo</li>"
-          EMAIL_BODY+="</ul>"
-          EMAIL_BODY+="<h3>🔍 SEO Intelligence (PAGE SCORE)</h3>"
-          EMAIL_BODY+="<p>Vedi sezione <strong>SEO/GEO Intelligence</strong> nel report Issue — decisioni SOSTENERE / AGGIUNGERE / GEO.</p>"
-          EMAIL_BODY+="<p>Aggiorna ogni venerdì: <code>data/gsc-keywords-priority.json</code> (export GSC 7+28 gg).</p>"
-          EMAIL_BODY+="<h3>✅ Azioni consigliate questa settimana</h3>"
-          EMAIL_BODY+="<ol>"
-          EMAIL_BODY+="<li>1 refresh SOSTENERE (pagina imp≥20, 0 click — vedi SEO Intelligence)</li>"
-          EMAIL_BODY+="<li>1 articolo nuovo solo se gap confermato (kw da skimm.md §1.6 / gsc-keywords-priority.json)</li>"
-          EMAIL_BODY+="<li>Refresh timestamp/dato su 1 pillar o articolo winner</li>"
-          EMAIL_BODY+="<li>Verificare pagine pillar (homepage, blog, servizi, agenzia)</li>"
-          EMAIL_BODY+="<li>Aggiornare llms.txt se pubblicato nuovo slug</li>"
-          EMAIL_BODY+="</ol>"
-          EMAIL_BODY+="<hr>"
-          EMAIL_BODY+="<p>Report completo: <a href='https://github.com/${{ github.repository }}/issues?q=label%3Acontenuti-freschezza+sort%3Acreated-desc'>Issue GitHub (label: contenuti-freschezza)</a></p>"
-          EMAIL_BODY+="<p><em>Cron ogni venerdì ore 07:00 CEST — scripts/venerdi-contenuti-freschezza.py + build_skimm.py</em></p>"
+          SUBJECT=$(cat venerdi-email-subject.txt)
+          EMAIL_BODY=$(cat venerdi-email-report.html)
 
           PAYLOAD=$(jq -n \
             --arg action "send_single" \
             --arg to "info@righettoimmobiliare.it" \
-            --arg subject "$EMOJI Venerdì Contenuti $DATE — ${ARTICLES} blog, salute ${HEALTH}% — $STATUS" \
+            --arg subject "$SUBJECT" \
             --arg body "$EMAIL_BODY" \
             '{action: $action, to: $to, subject: $subject, body: $body}')
 
@@ -161,7 +149,7 @@ jobs:
             -d "$PAYLOAD")
 
           if [ "$HTTP_CODE" = "200" ]; then
-            echo "✅ Email inviata a info@righettoimmobiliare.it"
+            echo "✅ Report email inviato a info@righettoimmobiliare.it"
           else
             echo "⚠️ Email non inviata (HTTP $HTTP_CODE)"
           fi

@@ -1,0 +1,26 @@
+{
+  "updated": "2026-07-09",
+  "note": "URL da verificare ogni venerdì (probe live + promemoria GSC Ispezione URL). Non inviare come sitemap.",
+  "pillar": [
+    "https://righettoimmobiliare.it/",
+    "https://righettoimmobiliare.it/immobili",
+    "https://righettoimmobiliare.it/servizio-vendita",
+    "https://righettoimmobiliare.it/agenzia-immobiliare-padova",
+    "https://righettoimmobiliare.it/zona-limena",
+    "https://righettoimmobiliare.it/blog"
+  ],
+  "limena_cluster": [
+    "https://righettoimmobiliare.it/blog-affitti-limena-2026",
+    "https://righettoimmobiliare.it/blog-mercato-immobiliare-limena-2026",
+    "https://righettoimmobiliare.it/blog-limena-vs-padova-centro-dove-comprare-2026",
+    "https://righettoimmobiliare.it/blog-appartamento-nuova-costruzione-limena",
+    "https://righettoimmobiliare.it/blog-scegliere-agenzia-immobiliare-padova-2026"
+  ],
+  "affitti_cluster": [
+    "https://righettoimmobiliare.it/blog-affitto-transitorio-padova-durata-2026",
+    "https://righettoimmobiliare.it/blog-rubano-limena-affitto-lavoratori-2026",
+    "https://righettoimmobiliare.it/blog-rendimento-affitto-padova",
+    "https://righettoimmobiliare.it/blog-contratto-affitto-padova",
+    "https://righettoimmobiliare.it/blog-affitto-studenti-padova"
+  ]
+}
