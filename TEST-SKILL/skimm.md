@@ -87,11 +87,26 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 
 ### 1.9 Ritmo editoriale anti-cannibalizzazione
 
-- **1 articolo nuovo/settimana** minimo (venerdì pubblicazione ideale).
+- **1 articolo nuovo/settimana** minimo (venerdì pubblicazione ideale) — **solo se** `venerdi-seo-intelligence.py` segnala gap **AGGIUNGERE** e `check_doppioni_sito.py` è OK.
+- **1 refresh SOSTENERE/settimana** prioritario su pagina con imp≥20 e 0 click (GSC).
 - **1 refresh/mese** di un pillar esistente (dato OMI, BCE, FIMAA aggiornato).
 - **Batch max 5 articoli** con radici slug diverse (vedi §1.3).
 - Prima di ogni batch: `build_skimm.py` + `check_doppioni_sito.py` + questo file §3.
 - Report automatico venerdì 07:00 → `info@righettoimmobiliare.it` (workflow `venerdi-contenuti-freschezza.yml`).
+
+### 1.10 PAGE SCORE — quando scrivere vs quando rinforzare
+
+> Dettaglio completo: **`skill-seo.md` §11** · Script: `scripts/venerdi-seo-intelligence.py`
+
+| Segnale GSC | Decisione | Esempio Righetto |
+|---|---|---|
+| imp ≥ 20, click = 0 | **SOSTENERE** | `blog-rendimento-affitto-padova` (139 imp) |
+| imp ≥ 8, nessuna pagina dedicata | **AGGIUNGERE** | `affitti limena` |
+| click ≥ 5, score alto | **MANTENERE** | `blog-affitto-studenti-padova` |
+| 2 articoli SKIMM stesso intent | **CONSOLIDARE** | territorio-limena (4 articoli) — link mesh, no 5° |
+| FAQ assente su pillar | **GEO** | `agenzia-immobiliare-padova` |
+
+**Regola d'oro:** prima **SOSTENERE**, poi **AGGIUNGERE**. Non pubblicare articoli nuovi se ci sono pagine con 0 click e 50+ impressioni.
 
 ---
 

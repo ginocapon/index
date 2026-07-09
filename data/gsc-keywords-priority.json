@@ -1,0 +1,58 @@
+{
+  "updated": "2026-07-09",
+  "source": "GSC manuale — aggiornare ogni venerdì (Prestazioni 7+28 gg)",
+  "note": "Esporta CSV da GSC e sovrascrivi data/gsc-export-queries.csv e data/gsc-export-pages.csv quando disponibili",
+  "queries_brand": [
+    {"q": "gruppo immobiliare righetto", "clicks": 14, "impressions": 29},
+    {"q": "immobiliare righetto limena", "clicks": 11, "impressions": 16},
+    {"q": "righetto immobiliare", "clicks": 9, "impressions": 20},
+    {"q": "immobiliare righetto", "clicks": 8, "impressions": 15},
+    {"q": "agenzia righetto limena", "clicks": 1, "impressions": 7}
+  ],
+  "queries_growth": [
+    {"q": "affitti limena", "clicks": 0, "impressions": 12, "intent": "affitto-locale"},
+    {"q": "agenzia immobiliare limena", "clicks": 0, "impressions": 13, "intent": "agenzia-locale"},
+    {"q": "omi padova", "clicks": 0, "impressions": 14, "intent": "dato-ufficiale"},
+    {"q": "affitto limena", "clicks": 0, "impressions": 5, "intent": "affitto-locale"},
+    {"q": "affitti a limena", "clicks": 0, "impressions": 4, "intent": "affitto-locale"},
+    {"q": "appartamento in affitto limena", "clicks": 0, "impressions": 4, "intent": "affitto-locale"},
+    {"q": "appartamento limena", "clicks": 0, "impressions": 5, "intent": "comprare-affitto"},
+    {"q": "immobiliare limena", "clicks": 0, "impressions": 5, "intent": "generico-locale"},
+    {"q": "canone concordato padova", "clicks": 1, "impressions": 3, "intent": "affitto-normativa"},
+    {"q": "immobiliare", "clicks": 0, "impressions": 28, "intent": "generico-broad"},
+    {"q": "gergo immobiliare padova", "clicks": 0, "impressions": 3, "intent": "educational"}
+  ],
+  "pages_winners": [
+    {"url": "/", "clicks": 63, "impressions": 525},
+    {"url": "/blog-affitto-studenti-padova", "clicks": 8, "impressions": 271},
+    {"url": "/blog-contratto-affitto-padova", "clicks": 6, "impressions": 150}
+  ],
+  "pages_refresh_priority": [
+    {"url": "/blog-rendimento-affitto-padova", "clicks": 0, "impressions": 139, "action": "sostenere-meta"},
+    {"url": "/agenzia-immobiliare-padova", "clicks": 0, "impressions": 68, "action": "sostenere-meta"},
+    {"url": "/zona-limena", "clicks": 0, "impressions": 3, "action": "sostenere-affitti-title"},
+    {"url": "/blog-affitto-breve-padova-2026", "clicks": 0, "impressions": 10, "action": "sostenere-snippet"}
+  ],
+  "keyword_gaps_new": [
+    {
+      "kw": "affitti limena 2026",
+      "slug_proposto": "blog-affitti-limena-2026",
+      "rationale": "Cluster affitti Limena: 30+ imp/sett, zero pagina dedicata affitto"
+    },
+    {
+      "kw": "omi padova affitti spiegati",
+      "slug_proposto": "blog-omi-padova-quotazioni-affitti-2026",
+      "rationale": "Query corta omi padova — titoli attuali troppo lunghi"
+    },
+    {
+      "kw": "affitto transitorio padova durata",
+      "slug_proposto": "blog-affitto-transitorio-padova-durata-2026",
+      "rationale": "Da skimm §1.6 — intent normativo distinto"
+    },
+    {
+      "kw": "rubano limena affitto lavoratori",
+      "slug_proposto": "blog-rubano-limena-affitto-lavoratori-2026",
+      "rationale": "B2B cintura — collega Edilcassa + zona Rubano"
+    }
+  ]
+}

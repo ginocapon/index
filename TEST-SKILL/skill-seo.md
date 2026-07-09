@@ -193,6 +193,8 @@ bash scripts/audit-skill.sh                  # 100%
 
 ### Routine monitoraggio
 - **Settimanale (venerdì 07:00 CEST):** `venerdi-contenuti-freschezza.py` — SKIMM + blog + pillar + email `info@`; compliance: **`skill-massimo-punteggio.md` §4**
+- **Settimanale (venerdì, manuale GSC):** checklist **`§10`** — 10 URL chiave, sitemap, 404/5xx
+- **Lunedì (follow-up GSC):** verifica esito richieste indicizzazione + trend 404/5xx — **`§10.3`**
 - **Settimanale:** GSC Performance Report + Google Posts
 - **Mensile:** Core Web Vitals + citazioni AI
 - **Trimestrale:** Audit completo + competitor + dati OMI aggiornati
@@ -220,3 +222,113 @@ Pagine pillar da refreshare ogni settimana (verificate dal cron): `/`, `/blog`, 
 - [ ] UTM tags su link GBP per tracciare traffico in GA4
 - [ ] Verificare recensioni Google non sparite (nuove policies Marzo 2026)
 - [ ] Bollino "Verificato Righetto" sugli annunci
+
+---
+
+## 10. SEARCH CONSOLE — ROUTINE SETTIMANALE (venerdì + lunedì)
+
+> **Proprietà:** `righettoimmobiliare.it` (tipo **Dominio**) — include www e non-www. Non serve una seconda proprietà con `www`.  
+> **URL da usare in ispezione e canonical:** `https://righettoimmobiliare.it/...` (senza `www`, senza `.html`).  
+> **Skill operativa venerdì:** `.cursor/skills/righetto-venerdi-sito-90giorni/SKILL.md` § Search Console.
+
+### 10.1 Dieci pagine chiave (indicizzazione manuale / verifica)
+
+| # | URL |
+|---|---|
+| 1 | `https://righettoimmobiliare.it/` |
+| 2 | `https://righettoimmobiliare.it/servizio-vendita` |
+| 3 | `https://righettoimmobiliare.it/agenzia-immobiliare-padova` |
+| 4 | `https://righettoimmobiliare.it/zona-limena` |
+| 5 | `https://righettoimmobiliare.it/immobili` |
+| 6 | `https://righettoimmobiliare.it/blog-limena-vs-padova-centro-dove-comprare-2026` |
+| 7 | `https://righettoimmobiliare.it/blog-mercato-immobiliare-limena-2026` |
+| 8 | `https://righettoimmobiliare.it/blog-appartamento-nuova-costruzione-limena` |
+| 9 | `https://righettoimmobiliare.it/blog-scegliere-agenzia-immobiliare-padova-2026` |
+| 10 | `https://righettoimmobiliare.it/blog` |
+
+**Priorità query (da Prestazioni 3 mesi):** cluster Limena + brand Righetto — allineare blog 6–8 al traffico locale.
+
+### 10.2 Checklist venerdì (~15 min, utente in GSC)
+
+1. **Prestazioni** (7 + 28 gg): 1 opportunità (CTR basso o pos. 11–20) + 1 anomalia.
+2. **Indicizzazione → Pagine:** se fix SEO deployati → **Convalida correzione** su report **404** e **5xx** aperti.
+3. **Sitemap:** inviare/reinviare `sitemap.xml` (stato **Operazione riuscita**).
+4. **Ispezione URL** (barra in alto): per ogni URL §10.1 — se non indicizzata e nessuna richiesta recente → **Richiedi indicizzazione** (max ~10/giorno).
+5. **Non indicizzare manualmente** URL legacy: `/home`, `/agenzia`, `/blog-articolo?s=...`, `/api/send-mail.php`.
+
+**Procedura ispezione:** barra «Controlla qualsiasi URL» → incolla URL §10.1 → Invio → **Richiedi indicizzazione** → Invia.
+
+### 10.3 Follow-up lunedì (~10 min)
+
+- [ ] Tutte e 10 le URL §10.1: «URL presente su Google» **oppure** «Richiesta di indicizzazione inviata il …»
+- [ ] Canonical in ispezione = stesso URL senza `www`
+- [ ] Report 404/5xx: conteggio in calo vs settimana precedente
+- [ ] Agente repo: `python scripts/probe_live_urls.py` → `data/url-probe-latest.json` (target **0 issue**); committare snapshot se deploy recente
+
+### 10.4 Probe e redirect (agente, venerdì o post-deploy)
+
+```bash
+python scripts/build_seo_redirects.py   # rigenera 404.html, js/redirects-404.js, stub
+python scripts/probe_live_urls.py       # audit live ~460 URL
+```
+
+Asset: `404.html`, `js/redirects-404.js`, `data/redirects-301.json`, `data/url-probe-latest.json` (snapshot sempre in repo).
+
+---
+
+## 11. PAGE SCORE — framework decisionale (cron venerdì)
+
+> **Script:** `python scripts/venerdi-seo-intelligence.py`  
+> **Dati:** `data/gsc-keywords-priority.json` (+ opz. `data/gsc-export-queries.csv`, `data/gsc-export-pages.csv`)  
+> **Output:** `venerdi-seo-intelligence-report.md` (unito al report Issue `contenuti-freschezza`)
+
+### 11.1 Formula PAGE SCORE (0–100)
+
+| Fattore | Peso | Cosa misura |
+|---|---:|---|
+| **GSC potential** | 25% | Impressioni alte + CTR basso = opportunità refresh |
+| **Content depth** | 20% | Parole utili (soglia 1500 / 2500) |
+| **Freshness + GEO** | 20% | FAQPage, righetto-sol, dateModified, box AEO |
+| **Internal mesh** | 15% | Link verso blog/zone/servizi |
+| **Keyword fit** | 20% | Title/meta allineati a query GSC (es. affitti Limena) |
+
+### 11.2 Decisioni automatiche
+
+| Etichetta | Significato | Azione settimana |
+|---|---|---|
+| **SOSTENERE** | imp ≥ 20, 0 click **oppure** thin content | Rifare title/meta + 1 sezione + 3 link interni |
+| **GEO** | Manca FAQ/box sintesi su pagina strategica | FAQ schema + allineamento Linda (`audit_chatbot_faq.py`) |
+| **AGGIUNGERE** | Keyword in `keyword_gaps_new` senza slug | 1 articolo nuovo (dopo `check_doppioni_sito.py`) |
+| **MANTENERE** | Score alto + click stabili | Solo timestamp / dato mensile |
+| **CONSOLIDARE** | 2+ URL SKIMM stesso intent | Redirect 301 + internal link (no terzo articolo) |
+| **MONITORARE** | Nessun trigger | Nessuna azione |
+
+### 11.3 Ritmo venerdì (utente + agente)
+
+1. **Utente (10 min):** GSC → Prestazioni 7+28 gg → aggiorna `data/gsc-keywords-priority.json` (o CSV in `data/`).
+2. **Cron 07:00 CEST:** `venerdi-contenuti-freschezza.py` + `venerdi-seo-intelligence.py` + `probe_live_urls.py`.
+3. **Agente:** esegue **priorità 1 SOSTENERE** dalla Issue; **max 1 AGGIUNGERE** se gap confermato.
+4. **Lunedì:** verifica GSC §10.3 + confronto report settimana precedente.
+
+### 11.4 Cluster editoriali 2026 (da GSC + screening)
+
+| Cluster | Stato | Prossima mossa |
+|---|---|---|
+| **Affitti Padova** | 🟢 winner (`affitto-studenti`, `contratto-affitto`) | SOSTENERE `rendimento-affitto` (139 imp, 0 click) |
+| **Limena locale** | 🟡 imp alte, pagine vendita-centric | AGGIUNGERE `affitti-limena-2026` + refresh `zona-limena` title |
+| **OMI / dati ufficiali** | 🟡 query `omi padova` | SOSTENERE titolo articolo OMI esistente |
+| **Brand Righetto** | 🟢 90%+ click | MANTENERE — non cannibalizzare con articoli generici |
+| **Zone pages (14)** | 🟡 solo «vendita» in title | Batch GEO: vendita **e** affitto in title/H1 |
+| **B2B cintura** | 🟡 uffici/capannoni in acquisizioni | AGGIUNGERE `rubano-limena-affitto-lavoratori` (skimm §1.6) |
+
+### 11.5 Idee GEO originali (rotazione — non tutte insieme)
+
+1. **Risposta in 40 parole** in cima agli articoli money (snippet AI / Linda).
+2. **Mesh Limena:** 6 articoli territorio-limena ↔ `zona-limena` ↔ `immobili?zona=limena`.
+3. **Widget acquisizioni zona** da Supabase nelle `zona-*.html` (contenuto unico vs portali).
+4. **FAQ Linda = FAQ schema** — stessa risposta su sito e chatbot (`audit_chatbot_faq.py`).
+5. **llms.txt dinamico:** top 10 URL GSC winner aggiornati mensilmente.
+6. **Gergo immobiliare Padova** — glossario AEO (query GSC 3 imp, bassa competizione).
+7. **Università → affitto** bridge da query medicina/università verso `affitto-studenti`.
+8. **Tour 360 / visita live** in evidenza su card Limena (contenuto non duplicabile dai portali).
+
