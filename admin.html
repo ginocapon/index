@@ -6609,6 +6609,8 @@ async function handleFiles(files, bucket) {
       if (bucket === 'foto') {
         currentFotos.push(publicUrl);
         renderFotos();
+        toast('✅ ' + file.name + ' caricato!', 'success');
+        toast('📦 Sync GitHub Pages: python scripts/migrate_supabase_media.py --photos --update-db', 'info');
       } else if (bucket === 'planimetrie') {
         currentPlanimetrie.push({ url: publicUrl, nome: file.name });
         renderPlanimetrie();

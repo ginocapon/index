@@ -1,0 +1,46 @@
+{
+  "stato": "bozza",
+  "media_locale_reel": "assets/blog-rtc-studenti-padova-2026/blog-rtc-studenti-padova-2026-reel-10s.mp4",
+  "tipo_canale": "instagram_feed",
+  "tipo_canale_reel": "instagram_reel",
+  "fonte": "blog",
+  "titolo": "Relazione tecnico-commerciale affitto studenti Padova 2026",
+  "corpo_spintax": "Relazione tecnico-commerciale affitto studenti Padova 2026\n\n{Hai un appartamento da mettere a reddito|Stai valutando l'affitto per studenti}? {Non basta il canone di mercato|Serve un'analisi completa}: {studentato vs locazione tradizionale|confronto costo totale per lo studente}, {appartamento tipo 110-130 m²|distribuzione interna}, {4 / 5 / 6 camere|piante schematiche} e {scelta fiscale|4+4 o canone concordato}.\n\n{Metodo Righetto|Guida sul blog}: {tabelle|verifiche preventive} e {conclusioni|strategia} per la primissima cintura padovana.\n👉 {Leggi l'articolo|Scopri il metodo completo}\n\nTel. 049.8843484\n\nhttps://righettoimmobiliare.it/blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026",
+  "link_pagina": "https://righettoimmobiliare.it/blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026",
+  "riferimento_id": "blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026",
+  "hashtags": [
+    "#padova",
+    "#affittostudenti",
+    "#universitàpadova",
+    "#locazione",
+    "#studenti",
+    "#investimentoimmobiliare",
+    "#primacintura",
+    "#studentato",
+    "#canoneconcordato",
+    "#cedolaresecca",
+    "#contrattoaffitto",
+    "#immobiliare",
+    "#righettoimmobiliare",
+    "#blogimmobiliare",
+    "#consulenzaimmobiliare",
+    "#mercatoimmobiliare",
+    "#agenziaimmobiliare",
+    "#affittopadova",
+    "#guida"
+  ],
+  "media_locale_carousel": [
+    "assets/blog-rtc-studenti-padova-2026/ig-rtc-studenti-padova-cover-square.png",
+    "assets/blog-rtc-studenti-padova-2026/ig-rtc-studenti-padova-infografica-square.png",
+    "assets/blog-rtc-studenti-padova-2026/ig-rtc-studenti-padova-cta-square.png"
+  ],
+  "media_locale_carousel_vertical": [
+    "assets/blog-rtc-studenti-padova-2026/ig-rtc-studenti-padova-cover.png",
+    "assets/blog-rtc-studenti-padova-2026/ig-rtc-studenti-padova-slide2.png",
+    "assets/blog-rtc-studenti-padova-2026/ig-rtc-studenti-padova-slide3-cta.png"
+  ],
+  "media_direct_url": "https://righettoimmobiliare.it/img/foto-servizi/valutazioni-e-perizie-padova.webp",
+  "pubblica_facebook": true,
+  "pubblica_instagram": true,
+  "note": "Carosello IG: PNG square/vertical in assets/. Reel 10s: blog-rtc-studenti-padova-2026-reel-10s.mp4 (genera_reel_rtc_studenti.py)."
+}

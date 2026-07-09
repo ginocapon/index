@@ -1,16 +1,16 @@
 {
-  "generated": "2026-06-26",
+  "generated": "2026-07-09",
   "bySlug": {
-    "appartamento-vendita-padova-la0319": {
-      "codice": "LA0319",
-      "titolo": "Appartamento elegante con ampio terrazzo in zona Sacro Cuore, Padova",
-      "seo_slug": "appartamento-vendita-padova-la0319",
-      "title": "Appartamento in vendita a Padova — Righetto Immobiliare Padova",
-      "description": "Appartamento · 90 m² · 5 locali · € 195.000 · Rif. LA0319 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1782493221609-000-appartamento-altichiero-primo-piano-16-wmk-0.png",
-      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-vendita-padova-la0319",
-      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-vendita-padova-la0319",
-      "share_file": "share-immobile-appartamento-vendita-padova-la0319.html"
+    "ufficio-vendita-limena-uff2247": {
+      "codice": "UFF2247",
+      "titolo": "Ufficio in Centro Storico a Limena al primo piano",
+      "seo_slug": "ufficio-vendita-limena-uff2247",
+      "title": "Ufficio in vendita a Limena — Righetto Immobiliare Padova",
+      "description": "Ufficio · 90 m² · 2 locali · € 180.000 · Rif. UFF2247 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/UFF2247/001-1783520917843-000-ufficio-barchessa-2-wmk-0.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-ufficio-vendita-limena-uff2247",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-vendita-limena-uff2247",
+      "share_file": "share-immobile-ufficio-vendita-limena-uff2247.html"
     },
     "villetta-vendita-padova-lp0286": {
       "codice": "LP0286",
@@ -18,7 +18,7 @@
       "seo_slug": "villetta-vendita-padova-lp0286",
       "title": "Villetta in vendita a Padova — Righetto Immobiliare Padova",
       "description": "Villetta · 230 m² · 8 locali · € 365.000 · Rif. LP0286 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963017206-casa-singola-altichiero-4-.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/LP0286/001-1779963017206-casa-singola-altichiero-4.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0286",
       "app_url": "https://righettoimmobiliare.it/immobile?s=villetta-vendita-padova-lp0286",
       "share_file": "share-immobile-villetta-vendita-padova-lp0286.html"
@@ -28,8 +28,8 @@
       "titolo": "Casa singola con ampio scoperto a Grisignano di Zocco",
       "seo_slug": "villetta-vendita-grisignano-di-zocco-lp0285-v",
       "title": "Villetta in vendita a Grisignano di Zocco — Righetto Immobiliare Padova",
-      "description": "Villetta · 140 m² · 6 locali · € 110.000 · Rif. LP0285-V · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730032024-casa-singola-piccola-21-.png",
+      "description": "Villetta · 140 m² · 6 locali · € 105.000 · Rif. LP0285-V · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LP0285-V/001-1783334008482-whatsapp-image-2026-07-06-at-12-22-31-4.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-grisignano-di-zocco-lp0285-v",
       "app_url": "https://righettoimmobiliare.it/immobile?s=villetta-vendita-grisignano-di-zocco-lp0285-v",
       "share_file": "share-immobile-villetta-vendita-grisignano-di-zocco-lp0285-v.html"
@@ -40,7 +40,7 @@
       "seo_slug": "appartamento-vendita-padova-la0317",
       "title": "Appartamento in vendita a Padova — Righetto Immobiliare Padova",
       "description": "Appartamento · 90 m² · 5 locali · € 200.000 · Rif. LA0317 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777994309447-000-appartamento-2-piano-mandria-padova-righetto-immobiliare-1-wmk-0.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/LA0317/001-1777994309447-000-appartamento-2-piano-mandria-padova-righet.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-vendita-padova-la0317",
       "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-vendita-padova-la0317",
       "share_file": "share-immobile-appartamento-vendita-padova-la0317.html"
@@ -51,7 +51,7 @@
       "seo_slug": "villetta-vendita-padova-lp0283",
       "title": "Villetta in vendita a Padova — Righetto Immobiliare Padova",
       "description": "Villetta · 100 m² · 4 locali · € 230.000 · Rif.  LP0283  · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777567859897-sacro-cuore-bi-familiare-righetto-10-.png",
+      "image": "https://righettoimmobiliare.it/img/immobili/LP0283/001-1777567859897-sacro-cuore-bi-familiare-righetto-10.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0283",
       "app_url": "https://righettoimmobiliare.it/immobile?s=villetta-vendita-padova-lp0283",
       "share_file": "share-immobile-villetta-vendita-padova-lp0283.html"
@@ -62,7 +62,7 @@
       "seo_slug": "villetta-vendita-padova-lp0281",
       "title": "Villetta in vendita a Padova — Righetto Immobiliare Padova",
       "description": "Villetta · 160 m² · 5 locali · € 145.000 · Rif. LP0281 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777106116405-000-bifamilaire-monta-padova-righetto-immobiliare-14-wmk-0.png",
+      "image": "https://righettoimmobiliare.it/img/immobili/LP0281/001-1777106116405-000-bifamilaire-monta-padova-righetto-immobili.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0281",
       "app_url": "https://righettoimmobiliare.it/immobile?s=villetta-vendita-padova-lp0281",
       "share_file": "share-immobile-villetta-vendita-padova-lp0281.html"
@@ -73,7 +73,7 @@
       "seo_slug": "appartamento-vendita-limena",
       "title": "Appartamento in vendita a Limena — Righetto Immobiliare Padova",
       "description": "Appartamento · 65 m² · 3 locali · € 150.000 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1774605801532-bi-camere-limena-centro-storico-2-.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/f728c860-5941-4a74-80ea-9ceca9fa1ff0/001-1774605801532-bi-camere-limena-centro-storico-2.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-vendita-limena",
       "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-vendita-limena",
       "share_file": "share-immobile-appartamento-vendita-limena.html"
@@ -84,7 +84,7 @@
       "seo_slug": "ufficio-affitto-commerciale-limena-uff2105a",
       "title": "Ufficio in affitto a Limena — Righetto Immobiliare Padova",
       "description": "Ufficio · 90 m² · 2 locali · € 800 · Rif. UFF2105a · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1774539931517-000-ufficio-100mq-9-wmk-0.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/UFF2105a/001-1783588479776-ufficio-barchessa-6.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2105a",
       "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-affitto-commerciale-limena-uff2105a",
       "share_file": "share-immobile-ufficio-affitto-commerciale-limena-uff2105a.html"
@@ -95,7 +95,7 @@
       "seo_slug": "capannone-vendita-rubano-cap1609a",
       "title": "Capannone in vendita a Rubano — Righetto Immobiliare Padova",
       "description": "Capannone · 550 m² · 6 locali · € 360.000 · Rif. CAP1609a · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1775130731703-chatgpt-image-2-apr-2026-13-52-01.png",
+      "image": "https://righettoimmobiliare.it/img/immobili/CAP1609a/001-1775130731703-chatgpt-image-2-apr-2026-13-52-01.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-capannone-vendita-rubano-cap1609a",
       "app_url": "https://righettoimmobiliare.it/immobile?s=capannone-vendita-rubano-cap1609a",
       "share_file": "share-immobile-capannone-vendita-rubano-cap1609a.html"
@@ -106,7 +106,7 @@
       "seo_slug": "capannone-vendita-limena-cap1687",
       "title": "Capannone in vendita a Limena — Righetto Immobiliare Padova",
       "description": "Capannone · 4 locali · € 730.000 · Rif. CAP1687 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772466603404-999-643894af-2b59-4ddb-982e-3f6fa6f56801-y-3728210613.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/CAP1687/001-1772466603404-999-643894af-2b59-4ddb-982e-3f6fa6f56801-y-372.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-capannone-vendita-limena-cap1687",
       "app_url": "https://righettoimmobiliare.it/immobile?s=capannone-vendita-limena-cap1687",
       "share_file": "share-immobile-capannone-vendita-limena-cap1687.html"
@@ -117,7 +117,7 @@
       "seo_slug": "ufficio-affitto-commerciale-limena-uff2189a",
       "title": "Ufficio in affitto a Limena — Righetto Immobiliare Padova",
       "description": "Ufficio · 140 m² · 4 locali · € 1.100 · Rif. uff2189a · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772466109374-006-ufficio-secondo-piano-limena-4-wmk-0.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/uff2189a/001-1772466109374-006-ufficio-secondo-piano-limena-4-wmk-0.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2189a",
       "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-affitto-commerciale-limena-uff2189a",
       "share_file": "share-immobile-ufficio-affitto-commerciale-limena-uff2189a.html"
@@ -128,7 +128,7 @@
       "seo_slug": "negozio-affitto-commerciale-limena-neg2173a",
       "title": "Negozio in affitto a Limena — Righetto Immobiliare Padova",
       "description": "Negozio · 150 m² · 2 locali · € 1.200 · Rif. NEG2173a · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772465563188-003-d8f60fda-0661-449e-8f2e-76b5c350259f.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/NEG2173a/001-1772465563188-003-d8f60fda-0661-449e-8f2e-76b5c350259f.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-negozio-affitto-commerciale-limena-neg2173a",
       "app_url": "https://righettoimmobiliare.it/immobile?s=negozio-affitto-commerciale-limena-neg2173a",
       "share_file": "share-immobile-negozio-affitto-commerciale-limena-neg2173a.html"
@@ -139,7 +139,7 @@
       "seo_slug": "ufficio-affitto-commerciale-limena-uff2195a",
       "title": "Ufficio in affitto a Limena — Righetto Immobiliare Padova",
       "description": "Ufficio · 40 m² · 2 locali · € 550 · Rif. UFF2195a · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772464956827-002-ufficio-limena-orafi-venti-rightto-immobiliare-6.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/UFF2195a/001-1772464956827-002-ufficio-limena-orafi-venti-rightto-immobil.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2195a",
       "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-affitto-commerciale-limena-uff2195a",
       "share_file": "share-immobile-ufficio-affitto-commerciale-limena-uff2195a.html"
@@ -150,7 +150,7 @@
       "seo_slug": "monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
       "title": "Monolocale in affitto a Chiesanuova - Brusegana — Righetto Immobiliare Padova",
       "description": "Monolocale · 1 locali · € 630 · Rif. STUD1 05 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772464533600-012-foto-camera-singola-rubano-studentato-4.png",
+      "image": "https://righettoimmobiliare.it/img/immobili/STUD105/001-1772464533600-012-foto-camera-singola-rubano-studentato-4.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
       "app_url": "https://righettoimmobiliare.it/immobile?s=monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
       "share_file": "share-immobile-monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05.html"
@@ -161,7 +161,7 @@
       "seo_slug": "terreno-vendita-villafranca-padovana-t0021",
       "title": "Terreno in vendita a Villafranca Padovana — Righetto Immobiliare Padova",
       "description": "Terreno · 1000 m² · 3 locali · € 135.000 · Rif. T0021 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772463834846-000-m-cee.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/T0021/001-1772463834846-000-m-cee.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-terreno-vendita-villafranca-padovana-t0021",
       "app_url": "https://righettoimmobiliare.it/immobile?s=terreno-vendita-villafranca-padovana-t0021",
       "share_file": "share-immobile-terreno-vendita-villafranca-padovana-t0021.html"
@@ -172,7 +172,7 @@
       "seo_slug": "appartamento-vendita-rubano-la0309",
       "title": "Appartamento in vendita a Rubano — Righetto Immobiliare Padova",
       "description": "Appartamento · 148 m² · 5 locali · € 295.000 · Rif. LA0309 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772463645994-000-immagine-2025-10-08-103112.png",
+      "image": "https://righettoimmobiliare.it/img/immobili/LA0309/001-1772463645994-000-immagine-2025-10-08-103112.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-vendita-rubano-la0309",
       "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-vendita-rubano-la0309",
       "share_file": "share-immobile-appartamento-vendita-rubano-la0309.html"
@@ -183,7 +183,7 @@
       "seo_slug": "residenziale-vendita-limena-la0312",
       "title": "Residenziale in vendita a Limena — Righetto Immobiliare Padova",
       "description": "Immobile · 105 m² · 5 locali · € 335.000 · Rif. LA0312 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772207661378-000-photo-2024-03-27-09-47-09.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/LA0312/001-1772207661378-000-photo-2024-03-27-09-47-09.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-residenziale-vendita-limena-la0312",
       "app_url": "https://righettoimmobiliare.it/immobile?s=residenziale-vendita-limena-la0312",
       "share_file": "share-immobile-residenziale-vendita-limena-la0312.html"
@@ -194,7 +194,7 @@
       "seo_slug": "villa-vendita-curtarolo-la0307",
       "title": "Villa in vendita a Curtarolo — Righetto Immobiliare Padova",
       "description": "Villa · 350 m² · 8 locali · € 375.000 · Rif. LA0307 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772206804826-003-img-3022-wmk-0.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/LA0307/001-1772206804826-003-img-3022-wmk-0.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-villa-vendita-curtarolo-la0307",
       "app_url": "https://righettoimmobiliare.it/immobile?s=villa-vendita-curtarolo-la0307",
       "share_file": "share-immobile-villa-vendita-curtarolo-la0307.html"
@@ -205,7 +205,7 @@
       "seo_slug": "negozio-affitto-commerciale-limena-neg2236",
       "title": "Negozio in affitto a Limena — Righetto Immobiliare Padova",
       "description": "Negozio · 50 m² · 2 locali · € 600 · Rif. NEG2236 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1771956150770-007-foto-negozio-6.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/NEG2236/001-1771956150770-007-foto-negozio-6.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-negozio-affitto-commerciale-limena-neg2236",
       "app_url": "https://righettoimmobiliare.it/immobile?s=negozio-affitto-commerciale-limena-neg2236",
       "share_file": "share-immobile-negozio-affitto-commerciale-limena-neg2236.html"
@@ -216,7 +216,7 @@
       "seo_slug": "ufficio-vendita-padova-uff2245",
       "title": "Ufficio in vendita a Padova — Righetto Immobiliare Padova",
       "description": "Ufficio · 50 m² · 2 locali · € 58.000 · Rif. UFF2245 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1771955649256-999-ufficio-piano-terra-guizza-1-wmk-0.png",
+      "image": "https://righettoimmobiliare.it/img/immobili/UFF2245/001-1771955649256-999-ufficio-piano-terra-guizza-1-wmk-0.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-ufficio-vendita-padova-uff2245",
       "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-vendita-padova-uff2245",
       "share_file": "share-immobile-ufficio-vendita-padova-uff2245.html"
@@ -227,7 +227,7 @@
       "seo_slug": "capannone-affitto-commerciale-piazzola-sul-brenta-cap1678",
       "title": "Capannone in affitto a Piazzola Sul Brenta — Righetto Immobiliare Padova",
       "description": "Capannone · 1200 m² · 3 locali · € 6.000 · Rif. CAP1678 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1771954853428-010-capannone-piazzola-da-1200mq-17-wmk-0.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/CAP1678/001-1771954853428-010-capannone-piazzola-da-1200mq-17-wmk-0.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-capannone-affitto-commerciale-piazzola-sul-brenta-cap1678",
       "app_url": "https://righettoimmobiliare.it/immobile?s=capannone-affitto-commerciale-piazzola-sul-brenta-cap1678",
       "share_file": "share-immobile-capannone-affitto-commerciale-piazzola-sul-brenta-cap1678.html"
@@ -238,23 +238,23 @@
       "seo_slug": "capannone-affitto-commerciale-limena-cap1680",
       "title": "Capannone in affitto a Limena — Righetto Immobiliare Padova",
       "description": "Capannone · 1900 m² · 1 locali · € 8.500 · Rif. CAP1680 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1771676746472-000-capannone-limena-8-wmk-0.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/CAP1680/001-1771676746472-000-capannone-limena-8-wmk-0.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-capannone-affitto-commerciale-limena-cap1680",
       "app_url": "https://righettoimmobiliare.it/immobile?s=capannone-affitto-commerciale-limena-cap1680",
       "share_file": "share-immobile-capannone-affitto-commerciale-limena-cap1680.html"
     }
   },
   "byLegacySlug": {
-    "appartamento-elegante-con-ampio-terrazzo-in-zona-sacro-cuore-padova": {
-      "codice": "LA0319",
-      "titolo": "Appartamento elegante con ampio terrazzo in zona Sacro Cuore, Padova",
-      "seo_slug": "appartamento-vendita-padova-la0319",
-      "title": "Appartamento in vendita a Padova — Righetto Immobiliare Padova",
-      "description": "Appartamento · 90 m² · 5 locali · € 195.000 · Rif. LA0319 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1782493221609-000-appartamento-altichiero-primo-piano-16-wmk-0.png",
-      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-vendita-padova-la0319",
-      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-vendita-padova-la0319",
-      "share_file": "share-immobile-appartamento-vendita-padova-la0319.html"
+    "ufficio-in-centro-storico-a-limena-al-primo-piano": {
+      "codice": "UFF2247",
+      "titolo": "Ufficio in Centro Storico a Limena al primo piano",
+      "seo_slug": "ufficio-vendita-limena-uff2247",
+      "title": "Ufficio in vendita a Limena — Righetto Immobiliare Padova",
+      "description": "Ufficio · 90 m² · 2 locali · € 180.000 · Rif. UFF2247 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/UFF2247/001-1783520917843-000-ufficio-barchessa-2-wmk-0.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-ufficio-vendita-limena-uff2247",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-vendita-limena-uff2247",
+      "share_file": "share-immobile-ufficio-vendita-limena-uff2247.html"
     },
     "casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno": {
       "codice": "LP0286",
@@ -262,7 +262,7 @@
       "seo_slug": "villetta-vendita-padova-lp0286",
       "title": "Villetta in vendita a Padova — Righetto Immobiliare Padova",
       "description": "Villetta · 230 m² · 8 locali · € 365.000 · Rif. LP0286 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963017206-casa-singola-altichiero-4-.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/LP0286/001-1779963017206-casa-singola-altichiero-4.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0286",
       "app_url": "https://righettoimmobiliare.it/immobile?s=villetta-vendita-padova-lp0286",
       "share_file": "share-immobile-villetta-vendita-padova-lp0286.html"
@@ -272,8 +272,8 @@
       "titolo": "Casa singola con ampio scoperto a Grisignano di Zocco",
       "seo_slug": "villetta-vendita-grisignano-di-zocco-lp0285-v",
       "title": "Villetta in vendita a Grisignano di Zocco — Righetto Immobiliare Padova",
-      "description": "Villetta · 140 m² · 6 locali · € 110.000 · Rif. LP0285-V · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730032024-casa-singola-piccola-21-.png",
+      "description": "Villetta · 140 m² · 6 locali · € 105.000 · Rif. LP0285-V · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LP0285-V/001-1783334008482-whatsapp-image-2026-07-06-at-12-22-31-4.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-grisignano-di-zocco-lp0285-v",
       "app_url": "https://righettoimmobiliare.it/immobile?s=villetta-vendita-grisignano-di-zocco-lp0285-v",
       "share_file": "share-immobile-villetta-vendita-grisignano-di-zocco-lp0285-v.html"
@@ -284,7 +284,7 @@
       "seo_slug": "appartamento-vendita-padova-la0317",
       "title": "Appartamento in vendita a Padova — Righetto Immobiliare Padova",
       "description": "Appartamento · 90 m² · 5 locali · € 200.000 · Rif. LA0317 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777994309447-000-appartamento-2-piano-mandria-padova-righetto-immobiliare-1-wmk-0.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/LA0317/001-1777994309447-000-appartamento-2-piano-mandria-padova-righet.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-vendita-padova-la0317",
       "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-vendita-padova-la0317",
       "share_file": "share-immobile-appartamento-vendita-padova-la0317.html"
@@ -295,7 +295,7 @@
       "seo_slug": "villetta-vendita-padova-lp0283",
       "title": "Villetta in vendita a Padova — Righetto Immobiliare Padova",
       "description": "Villetta · 100 m² · 4 locali · € 230.000 · Rif.  LP0283  · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777567859897-sacro-cuore-bi-familiare-righetto-10-.png",
+      "image": "https://righettoimmobiliare.it/img/immobili/LP0283/001-1777567859897-sacro-cuore-bi-familiare-righetto-10.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0283",
       "app_url": "https://righettoimmobiliare.it/immobile?s=villetta-vendita-padova-lp0283",
       "share_file": "share-immobile-villetta-vendita-padova-lp0283.html"
@@ -306,7 +306,7 @@
       "seo_slug": "villetta-vendita-padova-lp0281",
       "title": "Villetta in vendita a Padova — Righetto Immobiliare Padova",
       "description": "Villetta · 160 m² · 5 locali · € 145.000 · Rif. LP0281 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777106116405-000-bifamilaire-monta-padova-righetto-immobiliare-14-wmk-0.png",
+      "image": "https://righettoimmobiliare.it/img/immobili/LP0281/001-1777106116405-000-bifamilaire-monta-padova-righetto-immobili.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0281",
       "app_url": "https://righettoimmobiliare.it/immobile?s=villetta-vendita-padova-lp0281",
       "share_file": "share-immobile-villetta-vendita-padova-lp0281.html"
@@ -317,7 +317,7 @@
       "seo_slug": "appartamento-vendita-limena",
       "title": "Appartamento in vendita a Limena — Righetto Immobiliare Padova",
       "description": "Appartamento · 65 m² · 3 locali · € 150.000 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1774605801532-bi-camere-limena-centro-storico-2-.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/f728c860-5941-4a74-80ea-9ceca9fa1ff0/001-1774605801532-bi-camere-limena-centro-storico-2.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-vendita-limena",
       "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-vendita-limena",
       "share_file": "share-immobile-appartamento-vendita-limena.html"
@@ -328,7 +328,7 @@
       "seo_slug": "ufficio-affitto-commerciale-limena-uff2105a",
       "title": "Ufficio in affitto a Limena — Righetto Immobiliare Padova",
       "description": "Ufficio · 90 m² · 2 locali · € 800 · Rif. UFF2105a · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1774539931517-000-ufficio-100mq-9-wmk-0.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/UFF2105a/001-1783588479776-ufficio-barchessa-6.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2105a",
       "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-affitto-commerciale-limena-uff2105a",
       "share_file": "share-immobile-ufficio-affitto-commerciale-limena-uff2105a.html"
@@ -339,7 +339,7 @@
       "seo_slug": "capannone-vendita-rubano-cap1609a",
       "title": "Capannone in vendita a Rubano — Righetto Immobiliare Padova",
       "description": "Capannone · 550 m² · 6 locali · € 360.000 · Rif. CAP1609a · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1775130731703-chatgpt-image-2-apr-2026-13-52-01.png",
+      "image": "https://righettoimmobiliare.it/img/immobili/CAP1609a/001-1775130731703-chatgpt-image-2-apr-2026-13-52-01.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-capannone-vendita-rubano-cap1609a",
       "app_url": "https://righettoimmobiliare.it/immobile?s=capannone-vendita-rubano-cap1609a",
       "share_file": "share-immobile-capannone-vendita-rubano-cap1609a.html"
@@ -350,7 +350,7 @@
       "seo_slug": "capannone-vendita-limena-cap1687",
       "title": "Capannone in vendita a Limena — Righetto Immobiliare Padova",
       "description": "Capannone · 4 locali · € 730.000 · Rif. CAP1687 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772466603404-999-643894af-2b59-4ddb-982e-3f6fa6f56801-y-3728210613.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/CAP1687/001-1772466603404-999-643894af-2b59-4ddb-982e-3f6fa6f56801-y-372.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-capannone-vendita-limena-cap1687",
       "app_url": "https://righettoimmobiliare.it/immobile?s=capannone-vendita-limena-cap1687",
       "share_file": "share-immobile-capannone-vendita-limena-cap1687.html"
@@ -361,7 +361,7 @@
       "seo_slug": "ufficio-affitto-commerciale-limena-uff2195a",
       "title": "Ufficio in affitto a Limena — Righetto Immobiliare Padova",
       "description": "Ufficio · 40 m² · 2 locali · € 550 · Rif. UFF2195a · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772464956827-002-ufficio-limena-orafi-venti-rightto-immobiliare-6.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/UFF2195a/001-1772464956827-002-ufficio-limena-orafi-venti-rightto-immobil.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2195a",
       "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-affitto-commerciale-limena-uff2195a",
       "share_file": "share-immobile-ufficio-affitto-commerciale-limena-uff2195a.html"
@@ -372,7 +372,7 @@
       "seo_slug": "negozio-affitto-commerciale-limena-neg2173a",
       "title": "Negozio in affitto a Limena — Righetto Immobiliare Padova",
       "description": "Negozio · 150 m² · 2 locali · € 1.200 · Rif. NEG2173a · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772465563188-003-d8f60fda-0661-449e-8f2e-76b5c350259f.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/NEG2173a/001-1772465563188-003-d8f60fda-0661-449e-8f2e-76b5c350259f.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-negozio-affitto-commerciale-limena-neg2173a",
       "app_url": "https://righettoimmobiliare.it/immobile?s=negozio-affitto-commerciale-limena-neg2173a",
       "share_file": "share-immobile-negozio-affitto-commerciale-limena-neg2173a.html"
@@ -383,7 +383,7 @@
       "seo_slug": "monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
       "title": "Monolocale in affitto a Chiesanuova - Brusegana — Righetto Immobiliare Padova",
       "description": "Monolocale · 1 locali · € 630 · Rif. STUD1 05 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772464533600-012-foto-camera-singola-rubano-studentato-4.png",
+      "image": "https://righettoimmobiliare.it/img/immobili/STUD105/001-1772464533600-012-foto-camera-singola-rubano-studentato-4.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
       "app_url": "https://righettoimmobiliare.it/immobile?s=monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
       "share_file": "share-immobile-monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05.html"
@@ -394,7 +394,7 @@
       "seo_slug": "terreno-vendita-villafranca-padovana-t0021",
       "title": "Terreno in vendita a Villafranca Padovana — Righetto Immobiliare Padova",
       "description": "Terreno · 1000 m² · 3 locali · € 135.000 · Rif. T0021 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772463834846-000-m-cee.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/T0021/001-1772463834846-000-m-cee.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-terreno-vendita-villafranca-padovana-t0021",
       "app_url": "https://righettoimmobiliare.it/immobile?s=terreno-vendita-villafranca-padovana-t0021",
       "share_file": "share-immobile-terreno-vendita-villafranca-padovana-t0021.html"
@@ -405,7 +405,7 @@
       "seo_slug": "appartamento-vendita-rubano-la0309",
       "title": "Appartamento in vendita a Rubano — Righetto Immobiliare Padova",
       "description": "Appartamento · 148 m² · 5 locali · € 295.000 · Rif. LA0309 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772463645994-000-immagine-2025-10-08-103112.png",
+      "image": "https://righettoimmobiliare.it/img/immobili/LA0309/001-1772463645994-000-immagine-2025-10-08-103112.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-vendita-rubano-la0309",
       "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-vendita-rubano-la0309",
       "share_file": "share-immobile-appartamento-vendita-rubano-la0309.html"
@@ -416,7 +416,7 @@
       "seo_slug": "residenziale-vendita-limena-la0312",
       "title": "Residenziale in vendita a Limena — Righetto Immobiliare Padova",
       "description": "Immobile · 105 m² · 5 locali · € 335.000 · Rif. LA0312 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772207661378-000-photo-2024-03-27-09-47-09.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/LA0312/001-1772207661378-000-photo-2024-03-27-09-47-09.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-residenziale-vendita-limena-la0312",
       "app_url": "https://righettoimmobiliare.it/immobile?s=residenziale-vendita-limena-la0312",
       "share_file": "share-immobile-residenziale-vendita-limena-la0312.html"
@@ -427,7 +427,7 @@
       "seo_slug": "villa-vendita-curtarolo-la0307",
       "title": "Villa in vendita a Curtarolo — Righetto Immobiliare Padova",
       "description": "Villa · 350 m² · 8 locali · € 375.000 · Rif. LA0307 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772206804826-003-img-3022-wmk-0.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/LA0307/001-1772206804826-003-img-3022-wmk-0.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-villa-vendita-curtarolo-la0307",
       "app_url": "https://righettoimmobiliare.it/immobile?s=villa-vendita-curtarolo-la0307",
       "share_file": "share-immobile-villa-vendita-curtarolo-la0307.html"
@@ -438,7 +438,7 @@
       "seo_slug": "negozio-affitto-commerciale-limena-neg2236",
       "title": "Negozio in affitto a Limena — Righetto Immobiliare Padova",
       "description": "Negozio · 50 m² · 2 locali · € 600 · Rif. NEG2236 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1771956150770-007-foto-negozio-6.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/NEG2236/001-1771956150770-007-foto-negozio-6.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-negozio-affitto-commerciale-limena-neg2236",
       "app_url": "https://righettoimmobiliare.it/immobile?s=negozio-affitto-commerciale-limena-neg2236",
       "share_file": "share-immobile-negozio-affitto-commerciale-limena-neg2236.html"
@@ -449,7 +449,7 @@
       "seo_slug": "ufficio-vendita-padova-uff2245",
       "title": "Ufficio in vendita a Padova — Righetto Immobiliare Padova",
       "description": "Ufficio · 50 m² · 2 locali · € 58.000 · Rif. UFF2245 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1771955649256-999-ufficio-piano-terra-guizza-1-wmk-0.png",
+      "image": "https://righettoimmobiliare.it/img/immobili/UFF2245/001-1771955649256-999-ufficio-piano-terra-guizza-1-wmk-0.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-ufficio-vendita-padova-uff2245",
       "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-vendita-padova-uff2245",
       "share_file": "share-immobile-ufficio-vendita-padova-uff2245.html"
@@ -460,7 +460,7 @@
       "seo_slug": "capannone-affitto-commerciale-piazzola-sul-brenta-cap1678",
       "title": "Capannone in affitto a Piazzola Sul Brenta — Righetto Immobiliare Padova",
       "description": "Capannone · 1200 m² · 3 locali · € 6.000 · Rif. CAP1678 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1771954853428-010-capannone-piazzola-da-1200mq-17-wmk-0.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/CAP1678/001-1771954853428-010-capannone-piazzola-da-1200mq-17-wmk-0.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-capannone-affitto-commerciale-piazzola-sul-brenta-cap1678",
       "app_url": "https://righettoimmobiliare.it/immobile?s=capannone-affitto-commerciale-piazzola-sul-brenta-cap1678",
       "share_file": "share-immobile-capannone-affitto-commerciale-piazzola-sul-brenta-cap1678.html"
@@ -471,23 +471,23 @@
       "seo_slug": "capannone-affitto-commerciale-limena-cap1680",
       "title": "Capannone in affitto a Limena — Righetto Immobiliare Padova",
       "description": "Capannone · 1900 m² · 1 locali · € 8.500 · Rif. CAP1680 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1771676746472-000-capannone-limena-8-wmk-0.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/CAP1680/001-1771676746472-000-capannone-limena-8-wmk-0.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-capannone-affitto-commerciale-limena-cap1680",
       "app_url": "https://righettoimmobiliare.it/immobile?s=capannone-affitto-commerciale-limena-cap1680",
       "share_file": "share-immobile-capannone-affitto-commerciale-limena-cap1680.html"
     }
   },
   "byCodice": {
-    "LA0319": {
-      "codice": "LA0319",
-      "titolo": "Appartamento elegante con ampio terrazzo in zona Sacro Cuore, Padova",
-      "seo_slug": "appartamento-vendita-padova-la0319",
-      "title": "Appartamento in vendita a Padova — Righetto Immobiliare Padova",
-      "description": "Appartamento · 90 m² · 5 locali · € 195.000 · Rif. LA0319 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1782493221609-000-appartamento-altichiero-primo-piano-16-wmk-0.png",
-      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-vendita-padova-la0319",
-      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-vendita-padova-la0319",
-      "share_file": "share-immobile-appartamento-vendita-padova-la0319.html"
+    "UFF2247": {
+      "codice": "UFF2247",
+      "titolo": "Ufficio in Centro Storico a Limena al primo piano",
+      "seo_slug": "ufficio-vendita-limena-uff2247",
+      "title": "Ufficio in vendita a Limena — Righetto Immobiliare Padova",
+      "description": "Ufficio · 90 m² · 2 locali · € 180.000 · Rif. UFF2247 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/UFF2247/001-1783520917843-000-ufficio-barchessa-2-wmk-0.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-ufficio-vendita-limena-uff2247",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-vendita-limena-uff2247",
+      "share_file": "share-immobile-ufficio-vendita-limena-uff2247.html"
     },
     "LP0286": {
       "codice": "LP0286",
@@ -495,7 +495,7 @@
       "seo_slug": "villetta-vendita-padova-lp0286",
       "title": "Villetta in vendita a Padova — Righetto Immobiliare Padova",
       "description": "Villetta · 230 m² · 8 locali · € 365.000 · Rif. LP0286 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963017206-casa-singola-altichiero-4-.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/LP0286/001-1779963017206-casa-singola-altichiero-4.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0286",
       "app_url": "https://righettoimmobiliare.it/immobile?s=villetta-vendita-padova-lp0286",
       "share_file": "share-immobile-villetta-vendita-padova-lp0286.html"
@@ -505,8 +505,8 @@
       "titolo": "Casa singola con ampio scoperto a Grisignano di Zocco",
       "seo_slug": "villetta-vendita-grisignano-di-zocco-lp0285-v",
       "title": "Villetta in vendita a Grisignano di Zocco — Righetto Immobiliare Padova",
-      "description": "Villetta · 140 m² · 6 locali · € 110.000 · Rif. LP0285-V · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779730032024-casa-singola-piccola-21-.png",
+      "description": "Villetta · 140 m² · 6 locali · € 105.000 · Rif. LP0285-V · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LP0285-V/001-1783334008482-whatsapp-image-2026-07-06-at-12-22-31-4.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-grisignano-di-zocco-lp0285-v",
       "app_url": "https://righettoimmobiliare.it/immobile?s=villetta-vendita-grisignano-di-zocco-lp0285-v",
       "share_file": "share-immobile-villetta-vendita-grisignano-di-zocco-lp0285-v.html"
@@ -517,7 +517,7 @@
       "seo_slug": "appartamento-vendita-padova-la0317",
       "title": "Appartamento in vendita a Padova — Righetto Immobiliare Padova",
       "description": "Appartamento · 90 m² · 5 locali · € 200.000 · Rif. LA0317 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777994309447-000-appartamento-2-piano-mandria-padova-righetto-immobiliare-1-wmk-0.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/LA0317/001-1777994309447-000-appartamento-2-piano-mandria-padova-righet.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-vendita-padova-la0317",
       "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-vendita-padova-la0317",
       "share_file": "share-immobile-appartamento-vendita-padova-la0317.html"
@@ -528,7 +528,7 @@
       "seo_slug": "villetta-vendita-padova-lp0283",
       "title": "Villetta in vendita a Padova — Righetto Immobiliare Padova",
       "description": "Villetta · 100 m² · 4 locali · € 230.000 · Rif.  LP0283  · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777567859897-sacro-cuore-bi-familiare-righetto-10-.png",
+      "image": "https://righettoimmobiliare.it/img/immobili/LP0283/001-1777567859897-sacro-cuore-bi-familiare-righetto-10.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0283",
       "app_url": "https://righettoimmobiliare.it/immobile?s=villetta-vendita-padova-lp0283",
       "share_file": "share-immobile-villetta-vendita-padova-lp0283.html"
@@ -539,7 +539,7 @@
       "seo_slug": "villetta-vendita-padova-lp0281",
       "title": "Villetta in vendita a Padova — Righetto Immobiliare Padova",
       "description": "Villetta · 160 m² · 5 locali · € 145.000 · Rif. LP0281 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1777106116405-000-bifamilaire-monta-padova-righetto-immobiliare-14-wmk-0.png",
+      "image": "https://righettoimmobiliare.it/img/immobili/LP0281/001-1777106116405-000-bifamilaire-monta-padova-righetto-immobili.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0281",
       "app_url": "https://righettoimmobiliare.it/immobile?s=villetta-vendita-padova-lp0281",
       "share_file": "share-immobile-villetta-vendita-padova-lp0281.html"
@@ -550,7 +550,7 @@
       "seo_slug": "ufficio-affitto-commerciale-limena-uff2105a",
       "title": "Ufficio in affitto a Limena — Righetto Immobiliare Padova",
       "description": "Ufficio · 90 m² · 2 locali · € 800 · Rif. UFF2105a · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1774539931517-000-ufficio-100mq-9-wmk-0.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/UFF2105a/001-1783588479776-ufficio-barchessa-6.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2105a",
       "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-affitto-commerciale-limena-uff2105a",
       "share_file": "share-immobile-ufficio-affitto-commerciale-limena-uff2105a.html"
@@ -561,7 +561,7 @@
       "seo_slug": "capannone-vendita-rubano-cap1609a",
       "title": "Capannone in vendita a Rubano — Righetto Immobiliare Padova",
       "description": "Capannone · 550 m² · 6 locali · € 360.000 · Rif. CAP1609a · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1775130731703-chatgpt-image-2-apr-2026-13-52-01.png",
+      "image": "https://righettoimmobiliare.it/img/immobili/CAP1609a/001-1775130731703-chatgpt-image-2-apr-2026-13-52-01.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-capannone-vendita-rubano-cap1609a",
       "app_url": "https://righettoimmobiliare.it/immobile?s=capannone-vendita-rubano-cap1609a",
       "share_file": "share-immobile-capannone-vendita-rubano-cap1609a.html"
@@ -572,7 +572,7 @@
       "seo_slug": "capannone-vendita-limena-cap1687",
       "title": "Capannone in vendita a Limena — Righetto Immobiliare Padova",
       "description": "Capannone · 4 locali · € 730.000 · Rif. CAP1687 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772466603404-999-643894af-2b59-4ddb-982e-3f6fa6f56801-y-3728210613.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/CAP1687/001-1772466603404-999-643894af-2b59-4ddb-982e-3f6fa6f56801-y-372.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-capannone-vendita-limena-cap1687",
       "app_url": "https://righettoimmobiliare.it/immobile?s=capannone-vendita-limena-cap1687",
       "share_file": "share-immobile-capannone-vendita-limena-cap1687.html"
@@ -583,7 +583,7 @@
       "seo_slug": "ufficio-affitto-commerciale-limena-uff2189a",
       "title": "Ufficio in affitto a Limena — Righetto Immobiliare Padova",
       "description": "Ufficio · 140 m² · 4 locali · € 1.100 · Rif. uff2189a · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772466109374-006-ufficio-secondo-piano-limena-4-wmk-0.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/uff2189a/001-1772466109374-006-ufficio-secondo-piano-limena-4-wmk-0.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2189a",
       "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-affitto-commerciale-limena-uff2189a",
       "share_file": "share-immobile-ufficio-affitto-commerciale-limena-uff2189a.html"
@@ -594,7 +594,7 @@
       "seo_slug": "negozio-affitto-commerciale-limena-neg2173a",
       "title": "Negozio in affitto a Limena — Righetto Immobiliare Padova",
       "description": "Negozio · 150 m² · 2 locali · € 1.200 · Rif. NEG2173a · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772465563188-003-d8f60fda-0661-449e-8f2e-76b5c350259f.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/NEG2173a/001-1772465563188-003-d8f60fda-0661-449e-8f2e-76b5c350259f.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-negozio-affitto-commerciale-limena-neg2173a",
       "app_url": "https://righettoimmobiliare.it/immobile?s=negozio-affitto-commerciale-limena-neg2173a",
       "share_file": "share-immobile-negozio-affitto-commerciale-limena-neg2173a.html"
@@ -605,7 +605,7 @@
       "seo_slug": "ufficio-affitto-commerciale-limena-uff2195a",
       "title": "Ufficio in affitto a Limena — Righetto Immobiliare Padova",
       "description": "Ufficio · 40 m² · 2 locali · € 550 · Rif. UFF2195a · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772464956827-002-ufficio-limena-orafi-venti-rightto-immobiliare-6.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/UFF2195a/001-1772464956827-002-ufficio-limena-orafi-venti-rightto-immobil.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2195a",
       "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-affitto-commerciale-limena-uff2195a",
       "share_file": "share-immobile-ufficio-affitto-commerciale-limena-uff2195a.html"
@@ -616,7 +616,7 @@
       "seo_slug": "monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
       "title": "Monolocale in affitto a Chiesanuova - Brusegana — Righetto Immobiliare Padova",
       "description": "Monolocale · 1 locali · € 630 · Rif. STUD1 05 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772464533600-012-foto-camera-singola-rubano-studentato-4.png",
+      "image": "https://righettoimmobiliare.it/img/immobili/STUD105/001-1772464533600-012-foto-camera-singola-rubano-studentato-4.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
       "app_url": "https://righettoimmobiliare.it/immobile?s=monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
       "share_file": "share-immobile-monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05.html"
@@ -627,7 +627,7 @@
       "seo_slug": "terreno-vendita-villafranca-padovana-t0021",
       "title": "Terreno in vendita a Villafranca Padovana — Righetto Immobiliare Padova",
       "description": "Terreno · 1000 m² · 3 locali · € 135.000 · Rif. T0021 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772463834846-000-m-cee.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/T0021/001-1772463834846-000-m-cee.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-terreno-vendita-villafranca-padovana-t0021",
       "app_url": "https://righettoimmobiliare.it/immobile?s=terreno-vendita-villafranca-padovana-t0021",
       "share_file": "share-immobile-terreno-vendita-villafranca-padovana-t0021.html"
@@ -638,7 +638,7 @@
       "seo_slug": "appartamento-vendita-rubano-la0309",
       "title": "Appartamento in vendita a Rubano — Righetto Immobiliare Padova",
       "description": "Appartamento · 148 m² · 5 locali · € 295.000 · Rif. LA0309 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772463645994-000-immagine-2025-10-08-103112.png",
+      "image": "https://righettoimmobiliare.it/img/immobili/LA0309/001-1772463645994-000-immagine-2025-10-08-103112.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-vendita-rubano-la0309",
       "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-vendita-rubano-la0309",
       "share_file": "share-immobile-appartamento-vendita-rubano-la0309.html"
@@ -649,7 +649,7 @@
       "seo_slug": "residenziale-vendita-limena-la0312",
       "title": "Residenziale in vendita a Limena — Righetto Immobiliare Padova",
       "description": "Immobile · 105 m² · 5 locali · € 335.000 · Rif. LA0312 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772207661378-000-photo-2024-03-27-09-47-09.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/LA0312/001-1772207661378-000-photo-2024-03-27-09-47-09.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-residenziale-vendita-limena-la0312",
       "app_url": "https://righettoimmobiliare.it/immobile?s=residenziale-vendita-limena-la0312",
       "share_file": "share-immobile-residenziale-vendita-limena-la0312.html"
@@ -660,7 +660,7 @@
       "seo_slug": "villa-vendita-curtarolo-la0307",
       "title": "Villa in vendita a Curtarolo — Righetto Immobiliare Padova",
       "description": "Villa · 350 m² · 8 locali · € 375.000 · Rif. LA0307 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1772206804826-003-img-3022-wmk-0.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/LA0307/001-1772206804826-003-img-3022-wmk-0.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-villa-vendita-curtarolo-la0307",
       "app_url": "https://righettoimmobiliare.it/immobile?s=villa-vendita-curtarolo-la0307",
       "share_file": "share-immobile-villa-vendita-curtarolo-la0307.html"
@@ -671,7 +671,7 @@
       "seo_slug": "negozio-affitto-commerciale-limena-neg2236",
       "title": "Negozio in affitto a Limena — Righetto Immobiliare Padova",
       "description": "Negozio · 50 m² · 2 locali · € 600 · Rif. NEG2236 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1771956150770-007-foto-negozio-6.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/NEG2236/001-1771956150770-007-foto-negozio-6.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-negozio-affitto-commerciale-limena-neg2236",
       "app_url": "https://righettoimmobiliare.it/immobile?s=negozio-affitto-commerciale-limena-neg2236",
       "share_file": "share-immobile-negozio-affitto-commerciale-limena-neg2236.html"
@@ -682,7 +682,7 @@
       "seo_slug": "ufficio-vendita-padova-uff2245",
       "title": "Ufficio in vendita a Padova — Righetto Immobiliare Padova",
       "description": "Ufficio · 50 m² · 2 locali · € 58.000 · Rif. UFF2245 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1771955649256-999-ufficio-piano-terra-guizza-1-wmk-0.png",
+      "image": "https://righettoimmobiliare.it/img/immobili/UFF2245/001-1771955649256-999-ufficio-piano-terra-guizza-1-wmk-0.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-ufficio-vendita-padova-uff2245",
       "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-vendita-padova-uff2245",
       "share_file": "share-immobile-ufficio-vendita-padova-uff2245.html"
@@ -693,7 +693,7 @@
       "seo_slug": "capannone-affitto-commerciale-piazzola-sul-brenta-cap1678",
       "title": "Capannone in affitto a Piazzola Sul Brenta — Righetto Immobiliare Padova",
       "description": "Capannone · 1200 m² · 3 locali · € 6.000 · Rif. CAP1678 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1771954853428-010-capannone-piazzola-da-1200mq-17-wmk-0.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/CAP1678/001-1771954853428-010-capannone-piazzola-da-1200mq-17-wmk-0.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-capannone-affitto-commerciale-piazzola-sul-brenta-cap1678",
       "app_url": "https://righettoimmobiliare.it/immobile?s=capannone-affitto-commerciale-piazzola-sul-brenta-cap1678",
       "share_file": "share-immobile-capannone-affitto-commerciale-piazzola-sul-brenta-cap1678.html"
@@ -704,7 +704,7 @@
       "seo_slug": "capannone-affitto-commerciale-limena-cap1680",
       "title": "Capannone in affitto a Limena — Righetto Immobiliare Padova",
       "description": "Capannone · 1900 m² · 1 locali · € 8.500 · Rif. CAP1680 · Righetto Immobiliare Padova",
-      "image": "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1771676746472-000-capannone-limena-8-wmk-0.jpg",
+      "image": "https://righettoimmobiliare.it/img/immobili/CAP1680/001-1771676746472-000-capannone-limena-8-wmk-0.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-capannone-affitto-commerciale-limena-cap1680",
       "app_url": "https://righettoimmobiliare.it/immobile?s=capannone-affitto-commerciale-limena-cap1680",
       "share_file": "share-immobile-capannone-affitto-commerciale-limena-cap1680.html"
