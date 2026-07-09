@@ -315,8 +315,8 @@ Asset: `404.html`, `js/redirects-404.js`, `data/redirects-301.json`, `data/url-p
 | Cluster | Stato | Prossima mossa |
 |---|---|---|
 | **Affitti Padova** | 🟢 winner (`affitto-studenti`, `contratto-affitto`) | SOSTENERE `rendimento-affitto` (139 imp, 0 click) |
-| **Limena locale** | 🟡 imp alte, pagine vendita-centric | AGGIUNGERE `affitti-limena-2026` + refresh `zona-limena` title |
-| **OMI / dati ufficiali** | 🟡 query `omi padova` | SOSTENERE titolo articolo OMI esistente |
+| **Limena locale** | 🟢 articolo `blog-affitti-limena-2026` live | MANTENERE + mesh link; refresh canoni se FIMAA/OMI nuovo semestre |
+| **OMI / dati ufficiali** | 🟢 title «OMI Padova» aggiornato | MANTENERE; refresh dato al prossimo semestre ADE |
 | **Brand Righetto** | 🟢 90%+ click | MANTENERE — non cannibalizzare con articoli generici |
 | **Zone pages (14)** | 🟡 solo «vendita» in title | Batch GEO: vendita **e** affitto in title/H1 |
 | **B2B cintura** | 🟡 uffici/capannoni in acquisizioni | AGGIUNGERE `rubano-limena-affitto-lavoratori` (skimm §1.6) |

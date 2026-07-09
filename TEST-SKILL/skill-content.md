@@ -20,6 +20,12 @@
 - blog-quartieri-padova-2026.html, agenzia-immobiliare-padova.html (pillar)
 - 14 pagine zona-*.html (limena, vigonza, abano-terme, selvazzano + altri 10)
 
+### Sotto-cluster "Affitti Limena" (luglio 2026)
+- `blog-affitti-limena-2026.html` — kw **affitti limena** (GSC gap chiuso)
+- Mesh obbligatorio con: `zona-limena`, `blog-mercato-immobiliare-limena-2026`, `blog-rendimento-affitto-padova`, `blog-contratto-affitto-padova`
+- Fonti istituzionali in articolo: **OMI ADE**, **ISTAT**, **FIMAA** (link interni + portali ufficiali)
+- Script: `scripts/build_blog_affitti_limena_2026.py` + `register_affitti_limena_2026.py`
+
 ### Cluster "Affitto Padova" ✅ COMPLETO
 - blog-affitto-studenti-padova.html, servizio-locazioni.html
 - blog-contratto-affitto-padova.html, blog-rendimento-affitto-padova.html

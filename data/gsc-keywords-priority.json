@@ -35,14 +35,9 @@
   ],
   "keyword_gaps_new": [
     {
-      "kw": "affitti limena 2026",
-      "slug_proposto": "blog-affitti-limena-2026",
-      "rationale": "Cluster affitti Limena: 30+ imp/sett, zero pagina dedicata affitto"
-    },
-    {
       "kw": "omi padova affitti spiegati",
       "slug_proposto": "blog-omi-padova-quotazioni-affitti-2026",
-      "rationale": "Query corta omi padova — titoli attuali troppo lunghi"
+      "rationale": "Query corta omi padova — titolo articolo OMI aggiornato luglio 2026"
     },
     {
       "kw": "affitto transitorio padova durata",
@@ -53,6 +48,13 @@
       "kw": "rubano limena affitto lavoratori",
       "slug_proposto": "blog-rubano-limena-affitto-lavoratori-2026",
       "rationale": "B2B cintura — collega Edilcassa + zona Rubano"
+    }
+  ],
+  "published_this_week": [
+    {
+      "slug": "blog-affitti-limena-2026",
+      "kw": "affitti limena",
+      "date": "2026-07-09"
     }
   ]
 }
