@@ -64,14 +64,25 @@ def cap(s: str) -> str:
 
 
 def first_photo(row: dict) -> str:
+    def to_public(u: str) -> str:
+        u = (u or "").strip()
+        if not u:
+            return ""
+        if u.startswith("img/"):
+            return f"{SITE}/{u}"
+        if u.startswith("http://") or u.startswith("https://"):
+            return u
+        return ""
+
     foto = row.get("foto") or []
     if isinstance(foto, list) and foto:
-        u = str(foto[0]).strip()
-        if u.startswith("http"):
-            return u
+        hit = to_public(str(foto[0]))
+        if hit:
+            return hit
     fp = row.get("foto_principale") or ""
-    if fp and str(fp).startswith("http"):
-        return str(fp)
+    hit = to_public(str(fp))
+    if hit:
+        return hit
     return f"{SITE}/img/team/titolari.webp"
 
 

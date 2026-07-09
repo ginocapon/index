@@ -68,18 +68,17 @@ const rvObs = new IntersectionObserver(entries=>{
 },{threshold:0.12});
 document.querySelectorAll('.rv').forEach(el=>rvObs.observe(el));
 
-/* ══ RISOLVI URL IMMAGINI SUPABASE ══ */
+/* ══ RISOLVI URL IMMAGINI (js/media-url.js) ══ */
 function resolveImageUrl(url, opts) {
+  if (window.RigMedia && typeof window.RigMedia.resolveImageUrl === 'function') {
+    return window.RigMedia.resolveImageUrl(url, opts);
+  }
   if (!url || typeof url !== 'string') return '';
   url = url.trim();
   if (!url) return '';
-  // URL completo (Supabase, http, data) → usa direttamente senza render/image
   if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) return url;
-  // Percorso locale (img/, css/, fonts/) → lascia così com'è
-  if (url.startsWith('img/') || url.startsWith('./') || url.startsWith('css/') || url.startsWith('fonts/')) return url;
-  // Percorso relativo Supabase Storage → costruisci URL object/public
-  var path = url.replace(/^\/+/, '');
-  return SB_URL + '/storage/v1/object/public/' + path;
+  if (url.startsWith('img/')) return 'https://righettoimmobiliare.it/' + url;
+  return url;
 }
 
 /* ══ SEO SLUG PER IMMOBILI ══ */

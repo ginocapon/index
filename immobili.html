@@ -951,6 +951,7 @@
 
 <script src="js/vendor/supabase.min.js"></script>
 <script src="js/supabase-bridge.js?v=1"></script>
+<script src="js/media-url.js?v=1"></script>
 <script src="js/prop-photo-carousel.js?v=2"></script>
 <script>
   // ── CONFIG SUPABASE ──
@@ -981,17 +982,17 @@
   let currentOp = 'vendita';
   let filterVtOnly = false;
 
-  // ── RISOLVI URL IMMAGINI SUPABASE ──
+  // ── RISOLVI URL IMMAGINI (js/media-url.js) ──
   function resolveImageUrl(url, opts) {
+    if (window.RigMedia && typeof window.RigMedia.resolveImageUrl === 'function') {
+      return window.RigMedia.resolveImageUrl(url, opts);
+    }
     if (!url || typeof url !== 'string') return '';
     url = url.trim();
     if (!url) return '';
     if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) return url;
+    if (url.startsWith('img/')) return 'https://righettoimmobiliare.it/' + url;
     var path = url.replace(/^\/+/, '');
-    if (opts && opts.width) {
-      var q = opts.quality || 75;
-      return SUPABASE_URL + '/storage/v1/render/image/public/' + path + '?width=' + opts.width + '&quality=' + q + '&resize=contain';
-    }
     return SUPABASE_URL + '/storage/v1/object/public/' + path;
   }
 

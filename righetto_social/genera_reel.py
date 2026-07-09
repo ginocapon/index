@@ -352,6 +352,16 @@ def mix_background_music(video: Path, ffmpeg: str) -> Path:
 
 
 def upload_mp4(sb: Client, local_path: Path, slug: str) -> str:
+    """Pubblica reel su GitHub Pages (default) o Supabase Storage (legacy)."""
+    use_local = os.environ.get("REEL_LOCAL", "1").strip().lower() in ("1", "true", "yes")
+    if use_local:
+        dest_dir = ROOT.parent / "img" / "video" / "reels"
+        dest_dir.mkdir(parents=True, exist_ok=True)
+        safe = re.sub(r"[^a-zA-Z0-9_-]", "-", slug)[:80] or "reel"
+        dest = dest_dir / f"{safe}.mp4"
+        shutil.copy2(local_path, dest)
+        return f"{BASE_SITE}/img/video/reels/{safe}.mp4"
+
     supabase_url = req_env("SUPABASE_URL").rstrip("/")
     bucket = os.environ.get("REEL_STORAGE_BUCKET", "foto-immobili").strip()
     storage_path = f"reels/{slug}.mp4"
