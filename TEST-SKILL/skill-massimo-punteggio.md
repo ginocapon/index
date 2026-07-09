@@ -181,11 +181,13 @@ Verifica rapida post-modifica: homepage play video, `immobili?vt=1` filtra tour,
 
 ```bash
 python scripts/google-compliance-check.py      # target: 0 ERR, 0 WARN
+python scripts/venerdi-seo-intelligence.py     # PAGE SCORE + SOSTENERE/AGGIUNGERE
 python scripts/patch_cdn_local.py              # CDN esterni → js/vendor/
 python scripts/patch_audit_warns.py            # GA4, dateModified, OG, freshness
 python scripts/build_skimm.py                  # 0 angoli indefiniti
 python scripts/check_doppioni_sito.py          # prima di nuovo articolo
 python scripts/venerdi-contenuti-freschezza.py # anteprima report (opzionale)
+python scripts/probe_live_urls.py              # 0 issue su URL live
 ```
 
 **Se compliance < 100%:**
@@ -201,7 +203,8 @@ python scripts/google-compliance-check.py      # ri-verifica fino a 0/0
 - [ ] Matrice **8/8** (`§3b`): Player, Alert, Tour, Live + Blog, Zone, Chat, Valut.
 - [ ] Homepage: play video spot; `/immobili`: alert, filtro tour 360°, CTA visita live
 - [ ] Issue/email venerdì: applicare **azione prioritaria #1** del report contenuti
-- [ ] Search Console (se disponibile): 1 query da migliorare (CTR o pos. 11–20)
+- [ ] **Search Console** — checklist completa: **`skill-seo.md` §10** (10 URL chiave, sitemap, 404/5xx); follow-up **lunedì** se richieste manuali in corso
+- [ ] **SEO Intelligence** — leggere report `venerdi-seo-intelligence-report.md` / Issue: eseguire **1× SOSTENERE** prima di nuovo articolo (**`skill-seo.md` §11**)
 
 ### 4.4 Ritmo editoriale minimo
 

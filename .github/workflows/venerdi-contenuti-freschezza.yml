@@ -35,6 +35,8 @@ jobs:
         run: |
           cd "$GITHUB_WORKSPACE"
           python scripts/venerdi-contenuti-freschezza.py
+          python scripts/venerdi-seo-intelligence.py
+          python scripts/probe_live_urls.py || true
           python scripts/google-compliance-check.py >> venerdi-contenuti-report.md 2>&1 || true
           python scripts/check_doppioni_sito.py >> venerdi-contenuti-report.md 2>&1 || true
 
@@ -130,10 +132,14 @@ jobs:
           EMAIL_BODY+="<li><strong>${NO_SOL}</strong> articoli senza sezione «Cosa può fare Righetto»</li>"
           EMAIL_BODY+="<li><strong>${FREE_KW}</strong> keyword libere pronte per nuovo articolo</li>"
           EMAIL_BODY+="</ul>"
+          EMAIL_BODY+="<h3>🔍 SEO Intelligence (PAGE SCORE)</h3>"
+          EMAIL_BODY+="<p>Vedi sezione <strong>SEO/GEO Intelligence</strong> nel report Issue — decisioni SOSTENERE / AGGIUNGERE / GEO.</p>"
+          EMAIL_BODY+="<p>Aggiorna ogni venerdì: <code>data/gsc-keywords-priority.json</code> (export GSC 7+28 gg).</p>"
           EMAIL_BODY+="<h3>✅ Azioni consigliate questa settimana</h3>"
           EMAIL_BODY+="<ol>"
-          EMAIL_BODY+="<li>1 articolo nuovo (kw da TEST-SKILL/skimm.md §1.6)</li>"
-          EMAIL_BODY+="<li>Refresh timestamp/dato su 1 pillar o articolo esistente</li>"
+          EMAIL_BODY+="<li>1 refresh SOSTENERE (pagina imp≥20, 0 click — vedi SEO Intelligence)</li>"
+          EMAIL_BODY+="<li>1 articolo nuovo solo se gap confermato (kw da skimm.md §1.6 / gsc-keywords-priority.json)</li>"
+          EMAIL_BODY+="<li>Refresh timestamp/dato su 1 pillar o articolo winner</li>"
           EMAIL_BODY+="<li>Verificare pagine pillar (homepage, blog, servizi, agenzia)</li>"
           EMAIL_BODY+="<li>Aggiornare llms.txt se pubblicato nuovo slug</li>"
           EMAIL_BODY+="</ol>"
