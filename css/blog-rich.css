@@ -327,3 +327,60 @@ a.blog-rich-related-card span {
   color: var(--grigio, #6b7a8d);
   margin: 0;
 }
+
+/* Figure blog — proporzione 19:9, niente stiramento (skill-content §2.1D) */
+.blog-fig {
+  margin: 1.5rem 0;
+}
+.blog-fig__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 19 / 9;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+  background: var(--sfondo, #ece7df);
+}
+.blog-fig__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+.blog-fig figcaption {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--grigio, #6b7a8d);
+  margin-top: 0.5rem;
+  line-height: 1.45;
+}
+
+/* Hero articolo — stessa proporzione 19:9 su desktop, tablet e mobile */
+.art-hero {
+  position: relative;
+  overflow: hidden;
+}
+.art-hero__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 19 / 9;
+  overflow: hidden;
+}
+.art-hero__frame .art-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  filter: brightness(0.42);
+}
+.art-hero-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 3rem 1.5rem 2.5rem;
+  background: linear-gradient(transparent, rgba(21, 36, 53, 0.95) 40%);
+  z-index: 1;
+}

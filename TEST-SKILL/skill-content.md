@@ -144,15 +144,28 @@ Checklist operativa unificata: **`skill-massimo-punteggio.md` §4**. Manutenzion
 | Consentito | Vietato |
 |---|---|
 | Fotografie reali o photo-realistiche: appartamenti, stanze, facciate, tram/città Padova-Veneto, studenti/lavoratori in contesto **credibile** (non cartone) | Illustrazioni 3D, avatar, personaggi generati da AI, scene fantasy, volti «plastic» o stile videogioco |
-| Asset in `img/blog/` dedicati per articolo (WebP 1200×630 hero, corpo ~800–1200 px larghezza) | Copertine generiche `img/foto-servizi/*` con **testo sovrapposto** o messaggio marketing che non spiega l’articolo |
+| Asset in `img/blog/` dedicati per articolo (WebP **1900×900** hero 19:9, corpo stessa proporzione) | Copertine generiche `img/foto-servizi/*` con **testo sovrapposto** o messaggio marketing che non spiega l’articolo |
 | Foto scattate/fornite dal cliente o già in repo con soggetto **coerente** al titolo | Unsplash/CDN esterni (già vietati in §8.1c) |
 | Didascalia breve sotto ogni `<figure>` (contesto, non claim inventati) | Watermark, slogan stock, date finte, percentuali stampate sull’immagine |
+| **Proporzione 19:9** con `aspect-ratio` + `object-fit: cover` — **vietato** `width:100%` senza contenitore (no stiramento) | Altezza fissa hero (es. `height:480px`) che schiaccia o allunga le foto |
 
 **Regola pratica:** se l’immagine non potrebbe essere scattata con una macchina fotografica in Padova/provincia o in agenzia → **non usarla**. I **grafici dati** restano **SVG/HTML colorati** (Immobiliare.it Insights, OMI, FIMAA…) — non sostituiscono le foto.
 
+#### D) Proporzioni 19:9 — hero e figure corpo (luglio 2026)
+
+| Elemento | Markup obbligatorio | CSS |
+|---|---|---|
+| **Hero** | `<div class="art-hero"><div class="art-hero__frame"><img class="art-hero-img" … width="1900" height="900">` | `css/blog-rich.css` — `.art-hero__frame { aspect-ratio: 19/9 }` + `object-fit: cover` |
+| **Figure corpo** | `<figure class="blog-fig"><div class="blog-fig__frame"><img … width="1900" height="900">` | `.blog-fig__frame { aspect-ratio: 19/9 }` |
+| **Export file** | Ritaglio/crop in **19:9** prima del deploy (es. 1900×900 o 1280×606 WebP) | `width`/`height` HTML = rapporto 19:9 reale |
+
+- **Desktop, tablet e mobile:** stessa proporzione — il contenitore scala in larghezza, l’immagine **non** si stiracchia.
+- **Vietato:** `style="width:100%"` su `<img>` senza wrapper `aspect-ratio`; altezze fisse tipo `height:480px` / `height:300px` sull’hero.
+- **OG/social:** allineare `og:image` alla stessa foto hero (crop 19:9 accettabile anche se alcuni social preferiscono ~1.91:1).
+
 **Per articolo (minimo):**
 1. **1 copertina hero** fotografica tematica
-2. **≥ 3 figure nel corpo** (`<figure class="blog-fig">`) distribuite tra le sezioni H2
+2. **≥ 3 figure nel corpo** (`<figure class="blog-fig">` + `blog-fig__frame`) distribuite tra le sezioni H2
 3. **≥ 2 chart-wrap SVG** multicolore con legenda e `figcaption` + fonte
 
 #### B) Elenco blog e homepage — **solo ordine per data**
@@ -169,7 +182,7 @@ Dopo generazione o patch, l’agente **esegue sempre** (non delegare all’utent
 1. `python scripts/check_doppioni_sito.py`
 2. `node scripts/validate-page.js blog-{slug}.html` (o elenco file toccati)
 3. Grep: slug in `blog.html`, `admin.html`, `js/homepage.js`, `sitemap.xml`
-4. Controllo manuale campione: hero + 3 figure = path sotto `img/` esistenti; **nessuna** URL esterna immagine; **nessuna** illustrazione AI/3D
+4. Controllo manuale campione: hero + 3 figure = path sotto `img/` esistenti; **proporzione 19:9** (`art-hero__frame`, `blog-fig__frame`); zero URL esterna immagine; zero illustrazione AI/3D
 5. Verifica elenco blog: nuovi articoli visibili in cima per data (no featured che li esclude)
 6. Solo dopo pass 1+2: commit/push se previsto da task
 
@@ -211,6 +224,24 @@ Ogni articolo che pone un **quesito al lettore** (studenti, proprietari, imprese
 - **Vietato:** promettere accesso ESU/Camplus/PNRR, canoni garantiti, percentuali mediazione.
 - Collegare al **form lead** in fondo pagina con `provenienza: blog-{slug}`.
 - **Batch esistenti:** `python scripts/patch_righetto_sol_blog.py` — inietta `righetto-sol` su tutti i `blog-*.html` privi (priorità ~20 slug pillar in testa allo script).
+
+### 2.3 Articoli con anno nel slug (2024, 2025) — Google e cannibalizzazione
+
+> **Prima di scrivere:** `python scripts/check_doppioni_sito.py` + catalogo `skimm.md` §1.6 (anti-doppioni tema).
+
+| Situazione | Cosa fare con Google | Esempio repo |
+|---|---|---|
+| **Stesso tema, anno vecchio** | Pubblicare versione **2026** aggiornata; stub **noindex** sul vecchio slug + redirect in `js/redirects-404.js`; **non** in sitemap il 2024 | `blog-affitti-canoni-fimaa-q1-2024` → `…-2026` |
+| **Tema storico / bilancio** | **Tenere** slug con anno se il contenuto è intrinsecamente di quell'anno (E-E-A-T, brand) | `blog-righetto-bilancio-2025-soluzioni-affitto-2026` — index, in sitemap |
+| **Dati nel testo 2024/2025** | OK se **fonte citata** (FIMAA, ISTAT, FIAIP) — non è obsoleto, è contesto | Tabelle confronto anni in articoli mercato |
+| **Due URL stesso intent** | **CONSOLIDARE:** redirect + internal link verso URL canonico; non terzo articolo sullo stesso cluster | Limena: `mercato-limena-2026` + `affitti-limena-2026` (intent distinti) |
+
+**Regola Google-friendly:**
+1. **Un canonical** per intent — slug anno nuovo vince su dati correnti.
+2. Stub redirect: `noindex, follow` + `canonical` verso URL **senza www** + voce in `redirects-404.js`.
+3. Non cancellare stub 2024: preservano backlink e segnali GSC.
+4. In GSC: dopo redirect, **Richiedi indicizzazione** solo sulla versione 2026; il 2024 sparisce da solo (noindex).
+5. `blog-righetto-bilancio-2025-*` resta finché il 2026 non esiste — poi stesso schema stub.
 
 ### Stile di scrittura
 - Tono autorevole ma accessibile — MAI accademico o burocratico

@@ -371,7 +371,7 @@ js/scroll-reveal.js                 - Animazioni scroll
 
 **REGOLA ANTI-PLAGIO OBBLIGATORIA:** ogni contenuto generato dallo scraping DEVE essere originale. Il topic della fonte viene usato solo come ispirazione — titolo, testo e FAQ vengono rielaborati con la prospettiva di Righetto Immobiliare, dati locali di Padova e fonti ufficiali (OMI, FIMAA, Agenzia Entrate).
 
-**REGOLA IMMAGINI (blog pubblicati):** solo path `img/blog/` o asset locali — **fotografie realistiche** tematiche (§8.1c, `skill-content.md` §2.1). Vietate illustrazioni/AI/3D, CDN Unsplash su pagine live, riuso acritico di `foto-servizi` con scritte generiche. Ogni articolo: hero dedicato + ≥3 figure corpo.
+**REGOLA IMMAGINI (blog pubblicati):** solo path `img/blog/` o asset locali — **fotografie realistiche** tematiche (§8.1c, `skill-content.md` §2.1). Proporzione **19:9** obbligatoria (hero + figure). Vietate illustrazioni/AI/3D, CDN Unsplash su pagine live, riuso acritico di `foto-servizi` con scritte generiche. Ogni articolo: hero dedicato + ≥3 figure corpo.
 
 **Trend & Idee** (sezione dedicata nella sidebar Admin):
 - Ricerca topic trending per 8 categorie immobiliari italiane
@@ -973,8 +973,8 @@ Aggiornamento sostanziale di articolo **esistente** (nuova edizione anno, dati O
 - **Solo fotografie realistiche** — appartamenti, città, persone in contesto credibile. **Vietate** illustrazioni 3D, avatar AI, scene fantasy, volti generati, stock con scritte decorative senza valore informativo. Dettaglio operativo: **`skill-content.md` §2.1**.
 - **Vietato** caricare asset editoriali da `unsplash.com`, `images.unsplash.com`, `source.unsplash.com` o CDN esterni
   non previsti dal progetto (`CLAUDE.md`): solo path sotto `img/` o URL assoluti `https://righettoimmobiliare.it/img/...`.
-- Formato preferito: **WebP**, proporzione consigliata **1200×630** (Open Graph), peso tipico **sotto ~120 KiB**
-  dopo export mirato (qualità ~80–85).
+- Formato preferito: **WebP**, proporzione obbligatoria **19:9** (export **1900×900** o **1280×606**), peso tipico **sotto ~120 KiB**
+  dopo export mirato (qualità ~80–85). Hero e figure corpo: wrapper `art-hero__frame` / `blog-fig__frame` in `css/blog-rich.css` + `object-fit: cover` — **mai** stirare con `width:100%` senza `aspect-ratio`.
 - **Corpo:** min **3** `<figure>` fotografiche + min **2** grafici **SVG colorati** con fonte in `figcaption` (i grafici non sostituiscono le foto).
 - Evitare PNG/JPEG **piccoli** upscalati nell'hero (sfocatura e LCP peggiore).
 - Evitare riuso acritico di `img/foto-servizi/*` come hero se l’immagine non è tematica o contiene testo marketing generico.
