@@ -192,7 +192,7 @@ bash scripts/audit-skill.sh                  # 100%
 - **Fase 3 (Ott 2026-Mar 2027):** Portale regionale → 3.000 clic/mese
 
 ### Routine monitoraggio
-- **Settimanale (venerdì 07:00 CEST):** `venerdi-contenuti-freschezza.py` — SKIMM + blog + pillar + email `info@`; compliance: **`skill-massimo-punteggio.md` §4**
+- **Settimanale (venerdì 07:00 CEST):** `venerdi-contenuti-freschezza.py` + `venerdi-report-email.py` — SKIMM + blog + pillar + **report email completo** a `info@` (§11.6); compliance: **`skill-massimo-punteggio.md` §4**
 - **Settimanale (venerdì, manuale GSC):** checklist **`§10`** — 10 URL chiave, sitemap, 404/5xx
 - **Lunedì (follow-up GSC):** verifica esito richieste indicizzazione + trend 404/5xx — **`§10.3`**
 - **Settimanale:** GSC Performance Report + Google Posts
@@ -306,9 +306,35 @@ Asset: `404.html`, `js/redirects-404.js`, `data/redirects-301.json`, `data/url-p
 ### 11.3 Ritmo venerdì (utente + agente)
 
 1. **Utente (10 min):** GSC → Prestazioni 7+28 gg → aggiorna `data/gsc-keywords-priority.json` (o CSV in `data/`).
-2. **Cron 07:00 CEST:** `venerdi-contenuti-freschezza.py` + `venerdi-seo-intelligence.py` + `probe_live_urls.py`.
-3. **Agente:** esegue **priorità 1 SOSTENERE** dalla Issue; **max 1 AGGIUNGERE** se gap confermato.
-4. **Lunedì:** verifica GSC §10.3 + confronto report settimana precedente.
+2. **Cron 07:00 CEST:** `venerdi-contenuti-freschezza.py` + `venerdi-seo-intelligence.py` + `probe_live_urls.py` + **`venerdi-report-email.py`**.
+3. **Email automatica** a `info@righettoimmobiliare.it` — report HTML a blocchi (vedi §11.6).
+4. **Agente:** esegue **priorità 1 SOSTENERE** dalla Issue; **max 1 AGGIUNGERE** se gap confermato.
+5. **Lunedì:** verifica GSC §10.3 + confronto report settimana precedente.
+
+### 11.6 Report email settimanale (cron venerdì 07:00 CEST)
+
+**Workflow:** `.github/workflows/venerdi-contenuti-freschezza.yml`  
+**Script:** `scripts/venerdi-report-email.py`  
+**Destinatario:** `info@righettoimmobiliare.it` (via `api.righettoimmobiliare.it/send-mail.php` + secret `EMAIL_RELAY_KEY`)
+
+**Blocchi email (ordine fisso):**
+
+| # | Blocco | Fonte dati |
+|---|---|---|
+| 1 | Sintesi esecutiva | salute contenuti, blog, sitemap, probe |
+| 2 | GSC performance + trend | `gsc-keywords-priority.json` + `gsc-weekly-history.json` (Δ settimana e dall'inizio tracking) |
+| 3 | Tecnico e indicizzazione | probe live su `gsc-indexing-priority.json` + conteggio sitemap |
+| 4 | SEO Intelligence SOSTENERE | `venerdi-seo-intelligence-report.md` |
+| 5 | Contenuti e SKIMM | audit contenuti + `published_this_week` |
+| 6 | Azioni priorità | SOSTENERE, GSC manuale, gap keyword, MANTENERE |
+
+**Storico trend:** `data/gsc-weekly-history.json` — snapshot append ogni venerdì (click brand, impression home, articoli, probe issue). Il cron committa automaticamente il file aggiornato su `main` così i Δ settimana/settimana e YTD restano nel repo. Prima settimana = baseline; dal secondo venerdì compaiono Δ%.
+
+**Baseline storica GSC (16 mesi):** `data/gsc-baseline-16m.json` — export screenshot 09/07/2026: **2.470 click**, **35.500 impression**, CTR **7%**, posizione media **9,2**. Top query: `righetto immobiliare` (380 click). Il report email §2 include sempre questo riferimento per contestualizzare i numeri settimanali.
+
+**Indicizzazione automatica (probe HTTP):** verifica che le URL in `data/gsc-indexing-priority.json` rispondano 200. Lo stato «presente su Google» resta **manuale** in GSC (Ispezione URL, §10.2) — non confondere con sitemap.
+
+**Regola:** l'email parte **sempre** (`if: always()`), anche se l'audit contenuti ha avvisi — così si vede il trend anche nelle settimane «gialle».
 
 ### 11.4 Cluster editoriali 2026 (da GSC + screening)
 

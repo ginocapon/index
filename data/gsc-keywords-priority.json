@@ -1,7 +1,8 @@
 {
   "updated": "2026-07-09",
   "source": "GSC manuale — aggiornare ogni venerdì (Prestazioni 7+28 gg)",
-  "note": "Esporta CSV da GSC e sovrascrivi data/gsc-export-queries.csv e data/gsc-export-pages.csv quando disponibili",
+  "note": "Esporta CSV da GSC e sovrascrivi data/gsc-export-queries.csv e data/gsc-export-pages.csv quando disponibili. Baseline storica 16 mesi: data/gsc-baseline-16m.json (09/07/2026)",
+  "baseline_16m_ref": "data/gsc-baseline-16m.json",
   "queries_brand": [
     {"q": "gruppo immobiliare righetto", "clicks": 14, "impressions": 29},
     {"q": "immobiliare righetto limena", "clicks": 11, "impressions": 16},

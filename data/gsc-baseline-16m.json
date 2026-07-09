@@ -1,0 +1,32 @@
+{
+  "captured": "2026-07-09",
+  "source": "GSC Prestazioni — screenshot utente, proprietà righettoimmobiliare.it",
+  "period": "16 mesi",
+  "period_note": "Finestra GSC «16 mesi» esportata il 09/07/2026. Riferimento storico per report settimanali e confronto trend.",
+  "totals": {
+    "clicks": 2470,
+    "impressions": 35500,
+    "ctr_pct": 7.0,
+    "avg_position": 9.2
+  },
+  "trend_note": "Grafico: impression in forte crescita da ~marzo 2026 (picchi >200/giorno a giugno 2026). Click in salita più graduale ma coerente con la visibilità.",
+  "top_queries": [
+    {"q": "righetto immobiliare", "clicks": 380, "impressions": 1176, "cluster": "brand"},
+    {"q": "immobiliare righetto limena", "clicks": 270, "impressions": 584, "cluster": "brand-limena"},
+    {"q": "gruppo immobiliare righetto", "clicks": 170, "impressions": 428, "cluster": "brand"},
+    {"q": "agenzia immobiliare limena", "clicks": 141, "impressions": 1521, "cluster": "limena-locale"},
+    {"q": "righetto immobiliare limena", "clicks": 138, "impressions": 281, "cluster": "brand-limena"},
+    {"q": "agenzia righetto limena", "clicks": 133, "impressions": 443, "cluster": "brand-limena"},
+    {"q": "immobiliare righetto", "clicks": 114, "impressions": 1125, "cluster": "brand"},
+    {"q": "agenzie immobiliari limena", "clicks": 71, "impressions": 496, "cluster": "limena-locale"}
+  ],
+  "insights": [
+    "Brand Righetto = motore principale: le prime 7 query contengono «righetto» o «limena».",
+    "CTR media 7% — forte riconoscimento brand; metadata efficaci su query locali.",
+    "Posizione media 9.2 — in media prima pagina Google sui termini target.",
+    "agenzia immobiliare limena: 141 click su 1521 imp (CTR ~9%) — cluster Limena da sostenere con contenuti affitti.",
+    "Crescita impression da mar 2026 conferma che blog + zone pages stanno aumentando la visibilità."
+  ],
+  "top_queries_brand_clicks_sum": 1316,
+  "top_queries_brand_note": "Somma click top 8 query brand/Limena = 1316 (~53% dei 2470 click totali 16m)"
+}
