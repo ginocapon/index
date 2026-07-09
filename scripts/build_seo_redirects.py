@@ -41,6 +41,10 @@ MANUAL: dict[str, str] = {
     "/contatti.html": "/contatti",
     "/servizi.html": "/servizi",
     "/blog.html": "/blog",
+    "/blog-bonus-edilizi-2024-incentivi-casa-padova": "/blog-bonus-edilizi-2026-incentivi-casa-padova",
+    "/blog-affitti-canoni-fimaa-q1-2024-padova": "/blog-affitti-canoni-fimaa-q1-2026-padova",
+    "/blog-vigonza-rubano-comprare-casa-cintura-2024": "/blog-vigonza-rubano-comprare-casa-cintura-2026",
+    "/blog-piano-casa-decreto-salva-casa-padova": "/blog-piano-casa-decreto-66-2026-padova",
 }
 
 BLOG_ARTICOLO_REDIRECTS = {

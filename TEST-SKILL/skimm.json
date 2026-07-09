@@ -1,10 +1,13 @@
 {
-  "generated": "2026-07-03",
-  "count": 102,
+  "generated": "2026-07-09",
+  "count": 108,
   "risks": [
+    "KW primaria duplicata `vigonza-rubano-comprare-casa-cintura`: blog-vigonza-rubano-comprare-casa-cintura-2024, blog-vigonza-rubano-comprare-casa-cintura-2026",
     "Intent simile `breakdown-costi`: blog-costi-proprieta-acquisto-possesso-vendita-padova-2026, blog-costi-costruzione-istat-padova-2026",
-    "Intent simile `territorio-limena`: blog-limena-vicino-padova-comprare-2026, blog-mercato-immobiliare-limena-2026, blog-appartamento-nuova-costruzione-limena, blog-direttiva-case-green-limena-padova",
-    "Intent simile `fisco-normativa`: blog-quattro-imposte-rogitio-prima-casa-padova-2026, blog-bonus-mobili-2026-massimizzare-ristrutturazioni, blog-imposte-registro-catasto-compravendita-padova-2026, blog-tasse-vendita-casa",
+    "Intent simile `territorio-limena`: blog-limena-vicino-padova-comprare-2026, blog-affitti-limena-2026, blog-mercato-immobiliare-limena-2026, blog-appartamento-nuova-costruzione-limena…",
+    "Intent simile `fisco-normativa`: blog-quattro-imposte-rogitio-prima-casa-padova-2026, blog-bonus-edilizi-2024-incentivi-casa-padova, blog-bonus-mobili-2026-massimizzare-ristrutturazioni, blog-imposte-registro-catasto-compravendita-padova-2026…",
+    "Intent simile `territorio-cintura`: blog-vigonza-rubano-comprare-casa-cintura-2024, blog-vigonza-rubano-comprare-casa-cintura-2026",
+    "Intent simile `dato-trimestrale`: blog-affitti-canoni-fimaa-q1-2024-padova, blog-sondaggio-bancaditalia-q1-2026-padova",
     "Intent simile `analisi-scenari`: blog-bolla-immobiliare-padova-2026, blog-previsioni-immobiliari-scenari-geopolitica-2026, blog-prospettive-mercato-residenziale-italia-2026",
     "Intent simile `territorio-padova`: blog-prezzi-case-padova-zona-2026, blog-scuole-istruzione-padova, blog-servizi-infrastrutture-padova, blog-trasporti-mobilita-padova",
     "Intent simile `mutui-cluster`: blog-mutui-selettivi-banche-padova-2026, blog-mutuo-fisso-variabile-padova-2026, blog-mutuo-prima-casa-padova, blog-tassi-mutui-minimi-approfittarne-padova-2026",
@@ -161,6 +164,17 @@
       "h1": "Scegliere l'immobile giusto a Padova: criteri oltre il prezzo al metro quadro"
     },
     {
+      "slug": "blog-vigonza-rubano-comprare-casa-cintura-2024",
+      "file": "blog-vigonza-rubano-comprare-casa-cintura-2024.html",
+      "title": "Reindirizzamento — Righetto Immobiliare",
+      "categoria": "",
+      "cluster": "Acquisto e prima casa",
+      "kw_primaria": "vigonza-rubano-comprare-casa-cintura",
+      "angolo": "Focus Vigonza/Rubano — geografia cintura",
+      "intent": "territorio-cintura",
+      "h1": ""
+    },
+    {
       "slug": "blog-vigonza-rubano-comprare-casa-cintura-2026",
       "file": "blog-vigonza-rubano-comprare-casa-cintura-2026.html",
       "title": "Vigonza e Rubano: guida all'acquisto nella cintura del capoluogo…",
@@ -172,6 +186,17 @@
       "h1": "Vigonza e Rubano: guida all'acquisto in cintura (2026)"
     },
     {
+      "slug": "blog-affitti-canoni-fimaa-q1-2024-padova",
+      "file": "blog-affitti-canoni-fimaa-q1-2024-padova.html",
+      "title": "Reindirizzamento — Righetto Immobiliare",
+      "categoria": "",
+      "cluster": "Affitti e locazioni",
+      "kw_primaria": "affitti-canoni-fimaa-2024",
+      "angolo": "Dato trimestrale verificato — aggiornare al prossimo Q",
+      "intent": "dato-trimestrale",
+      "h1": ""
+    },
+    {
       "slug": "blog-affitti-canoni-fimaa-q1-2026-padova",
       "file": "blog-affitti-canoni-fimaa-q1-2026-padova.html",
       "title": "Affitti Q1 2026: canoni FIMAA e studenti Padova",
@@ -181,6 +206,17 @@
       "angolo": "Rilevazione trimestrale FIMAA — non Insights 490€",
       "intent": "affitti-dato-trimestrale",
       "h1": "Affitti Q1 2026: canoni FIMAA in crescita e mercato studenti a Padova"
+    },
+    {
+      "slug": "blog-affitti-limena-2026",
+      "file": "blog-affitti-limena-2026.html",
+      "title": "Affitti Limena 2026: Canoni, Quartieri e Guida Completa",
+      "categoria": "",
+      "cluster": "Affitti e locazioni",
+      "kw_primaria": "affitti-limena",
+      "angolo": "Focus Limena/cintura — non generico Padova centro",
+      "intent": "territorio-limena",
+      "h1": "Affitti Limena 2026: canoni, quartieri e guida completa"
     },
     {
       "slug": "blog-affitti-padova-canoni-2026",
@@ -262,7 +298,7 @@
     {
       "slug": "blog-quotazioni-locazioni-omi-istat-padova-2026",
       "file": "blog-quotazioni-locazioni-omi-istat-padova-2026.html",
-      "title": "Quotazioni e locazioni Padova: OMI e monitor ISTAT senza improvvisare",
+      "title": "OMI Padova 2026: Quotazioni Affitti e Prezzi — Guida Ufficiale",
       "categoria": "",
       "cluster": "Affitti e locazioni",
       "kw_primaria": "quotazioni-locazioni-omi-istat-padova",
@@ -273,13 +309,13 @@
     {
       "slug": "blog-rendimento-affitto-padova",
       "file": "blog-rendimento-affitto-padova.html",
-      "title": "Rendimento Affitto Padova 2026: Calcolo per Quartiere",
+      "title": "Rendimento Affitto Padova e Limena 2026: Calcolo Quartieri",
       "categoria": "",
       "cluster": "Affitti e locazioni",
       "kw_primaria": "rendimento-locativo-quartieri-padova",
       "angolo": "Yield % per quartiere investitori",
       "intent": "investimento-locativo",
-      "h1": "Rendimento Affitto Padova 2026:Calcolo e Analisi per Quartiere"
+      "h1": "Rendimento affitto Padova e Limena 2026:Calcolo per quartiere"
     },
     {
       "slug": "blog-righetto-bilancio-2025-soluzioni-affitto-2026",
@@ -290,7 +326,7 @@
       "kw_primaria": "righetto-bilancio-affitto-soluzioni",
       "angolo": "Case study agenzia + soluzioni affitto — E-E-A-T",
       "intent": "vita-agenzia-affitti",
-      "h1": "Righetto Immobiliare: il 2025 dei clienti e il 2026 della locazione"
+      "h1": "il team: il 2025 dei clienti e il 2026 della locazione"
     },
     {
       "slug": "blog-squilibrio-domanda-offerta-affitti-padova",
@@ -345,7 +381,7 @@
       "kw_primaria": "domande-appuntamento-agenzia-pretese",
       "angolo": "Domande da fare in agenzia / tono ironico — non errori visita né solo documenti rogito",
       "intent": "appuntamento-agenzia-acquirente",
-      "h1": "5 domande da fare in agenzia — e cosa pretendere (senza vergogna)"
+      "h1": "5 domande da fare in agenzia — il cliente interroga, l'agente risponde"
     },
     {
       "slug": "blog-5-errori-visita-immobile-padova-2026",
@@ -370,6 +406,17 @@
       "h1": "Gestione spese casa dopo l'acquisto a Padova: risparmio, manutenzione e valore dell'immobile"
     },
     {
+      "slug": "blog-loft-aziende-cucina-condivisa-padova-vicenza-2026",
+      "file": "blog-loft-aziende-cucina-condivisa-padova-vicenza-2026.html",
+      "title": "Loft aziende Padova-Vicenza: cucina condivisa HR 2026",
+      "categoria": "",
+      "cluster": "Altri / trasversali",
+      "kw_primaria": "loft-aziende-cucina-condivisa-vicenza",
+      "angolo": "Angolo loft-aziende-cucina-condivisa-vicenza — intent dedicato, verificare matrice §4",
+      "intent": "altri-/-trasversali",
+      "h1": "Loft aziendali con cucina condivisa tra Padova e Vicenza — problemi HR e soluzioni"
+    },
+    {
       "slug": "blog-so-tutto-io-venditore-presuntuoso-padova-2026",
       "file": "blog-so-tutto-io-venditore-presuntuoso-padova-2026.html",
       "title": "«So tutto io»: staging, documenti, APE",
@@ -379,6 +426,17 @@
       "angolo": "Verità dal campo / tono provocatorio — non guida tecnica staging o solo documenti",
       "intent": "vendita-mindset-venditore",
       "h1": "«So tutto io» — ma di vendite ne ha fatta forse una, e la casa parla da sola"
+    },
+    {
+      "slug": "blog-bonus-edilizi-2024-incentivi-casa-padova",
+      "file": "blog-bonus-edilizi-2024-incentivi-casa-padova.html",
+      "title": "Reindirizzamento — Righetto Immobiliare",
+      "categoria": "",
+      "cluster": "Fisco e normativa",
+      "kw_primaria": "bonus-edilizi-2024-incentivi-casa",
+      "angolo": "Fisco/normativa — non dati mercato",
+      "intent": "fisco-normativa",
+      "h1": ""
     },
     {
       "slug": "blog-bonus-edilizi-2026-incentivi-casa-padova",
@@ -423,6 +481,17 @@
       "angolo": "Normativa Decreto 66 edilizia — non bonus fiscali",
       "intent": "normativa-edilizia",
       "h1": "Piano Casa decreto 66/2026: cosa prevede e cosa cambia a Padova"
+    },
+    {
+      "slug": "blog-piano-casa-decreto-salva-casa-padova",
+      "file": "blog-piano-casa-decreto-salva-casa-padova.html",
+      "title": "Reindirizzamento — Righetto Immobiliare",
+      "categoria": "",
+      "cluster": "Fisco e normativa",
+      "kw_primaria": "piano-casa-decreto-salva-casa",
+      "angolo": "Angolo piano-casa-decreto-salva-casa — intent dedicato, verificare matrice §4",
+      "intent": "fisco-e-normativa",
+      "h1": ""
     },
     {
       "slug": "blog-investire-immobiliare-padova",
@@ -1115,7 +1184,7 @@
       "kw_primaria": "righetto-storia-territorio-acquisizioni",
       "angolo": "Showcase portafoglio — E-E-A-T vita d'agenzia",
       "intent": "vita-agenzia-showcase",
-      "h1": "Righetto Immobiliare dal 2000 a oggi: territorio, zone e ultime acquisizioni"
+      "h1": "il team dal 2000 a oggi: territorio, zone e ultime acquisizioni"
     },
     {
       "slug": "blog-ultime-acquisizioni-commerciali-padova-giugno-2026",
