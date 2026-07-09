@@ -1,13 +1,14 @@
 {
   "generated": "2026-07-09",
-  "count": 108,
+  "count": 110,
   "risks": [
     "KW primaria duplicata `vigonza-rubano-comprare-casa-cintura`: blog-vigonza-rubano-comprare-casa-cintura-2024, blog-vigonza-rubano-comprare-casa-cintura-2026",
     "Intent simile `breakdown-costi`: blog-costi-proprieta-acquisto-possesso-vendita-padova-2026, blog-costi-costruzione-istat-padova-2026",
-    "Intent simile `territorio-limena`: blog-limena-vicino-padova-comprare-2026, blog-affitti-limena-2026, blog-mercato-immobiliare-limena-2026, blog-appartamento-nuova-costruzione-limena…",
+    "Intent simile `territorio-limena`: blog-limena-vicino-padova-comprare-2026, blog-affitti-limena-2026, blog-rubano-limena-affitto-lavoratori-2026, blog-mercato-immobiliare-limena-2026…",
     "Intent simile `fisco-normativa`: blog-quattro-imposte-rogitio-prima-casa-padova-2026, blog-bonus-edilizi-2024-incentivi-casa-padova, blog-bonus-mobili-2026-massimizzare-ristrutturazioni, blog-imposte-registro-catasto-compravendita-padova-2026…",
     "Intent simile `territorio-cintura`: blog-vigonza-rubano-comprare-casa-cintura-2024, blog-vigonza-rubano-comprare-casa-cintura-2026",
     "Intent simile `dato-trimestrale`: blog-affitti-canoni-fimaa-q1-2024-padova, blog-sondaggio-bancaditalia-q1-2026-padova",
+    "Intent simile `affitti-cluster`: blog-affitto-transitorio-padova-durata-2026, blog-squilibrio-domanda-offerta-affitti-padova",
     "Intent simile `analisi-scenari`: blog-bolla-immobiliare-padova-2026, blog-previsioni-immobiliari-scenari-geopolitica-2026, blog-prospettive-mercato-residenziale-italia-2026",
     "Intent simile `territorio-padova`: blog-prezzi-case-padova-zona-2026, blog-scuole-istruzione-padova, blog-servizi-infrastrutture-padova, blog-trasporti-mobilita-padova",
     "Intent simile `mutui-cluster`: blog-mutui-selettivi-banche-padova-2026, blog-mutuo-fisso-variabile-padova-2026, blog-mutuo-prima-casa-padova, blog-tassi-mutui-minimi-approfittarne-padova-2026",
@@ -252,6 +253,17 @@
       "h1": "Affitto Studenti Padova 2026: Zone, Prezzi e Guida Completa"
     },
     {
+      "slug": "blog-affitto-transitorio-padova-durata-2026",
+      "file": "blog-affitto-transitorio-padova-durata-2026.html",
+      "title": "Affitto Transitorio Padova 2026: Durata, Requisiti e Guida Completa",
+      "categoria": "",
+      "cluster": "Affitti e locazioni",
+      "kw_primaria": "affitto-transitorio-durata",
+      "angolo": "Cluster affitti — verificare matrice §4 prima di pubblicare",
+      "intent": "affitti-cluster",
+      "h1": "Affitto transitorio Padova 2026: durata, requisiti e guida completa"
+    },
+    {
       "slug": "blog-checklist-affitto-studenti-padova-2026",
       "file": "blog-checklist-affitto-studenti-padova-2026.html",
       "title": "Checklist affitto per studenti a Padova 2026: contratto, cauzione…",
@@ -327,6 +339,17 @@
       "angolo": "Case study agenzia + soluzioni affitto — E-E-A-T",
       "intent": "vita-agenzia-affitti",
       "h1": "il team: il 2025 dei clienti e il 2026 della locazione"
+    },
+    {
+      "slug": "blog-rubano-limena-affitto-lavoratori-2026",
+      "file": "blog-rubano-limena-affitto-lavoratori-2026.html",
+      "title": "Affitto Rubano e Limena per Lavoratori 2026: Guida Cintura Padova",
+      "categoria": "",
+      "cluster": "Affitti e locazioni",
+      "kw_primaria": "rubano-limena-affitto-lavoratori",
+      "angolo": "Focus Limena/cintura — non generico Padova centro",
+      "intent": "territorio-limena",
+      "h1": "Affitto Rubano e Limena per lavoratori 2026: guida cintura Padova"
     },
     {
       "slug": "blog-squilibrio-domanda-offerta-affitti-padova",

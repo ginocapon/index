@@ -97,14 +97,15 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 
 ## 2. Stato verifica automatica
 
-**16 avvisi** al generazione 2026-07-09:
+**17 avvisi** al generazione 2026-07-09:
 
 - KW primaria duplicata `vigonza-rubano-comprare-casa-cintura`: blog-vigonza-rubano-comprare-casa-cintura-2024, blog-vigonza-rubano-comprare-casa-cintura-2026
 - Intent simile `breakdown-costi`: blog-costi-proprieta-acquisto-possesso-vendita-padova-2026, blog-costi-costruzione-istat-padova-2026
-- Intent simile `territorio-limena`: blog-limena-vicino-padova-comprare-2026, blog-affitti-limena-2026, blog-mercato-immobiliare-limena-2026, blog-appartamento-nuova-costruzione-limena…
+- Intent simile `territorio-limena`: blog-limena-vicino-padova-comprare-2026, blog-affitti-limena-2026, blog-rubano-limena-affitto-lavoratori-2026, blog-mercato-immobiliare-limena-2026…
 - Intent simile `fisco-normativa`: blog-quattro-imposte-rogitio-prima-casa-padova-2026, blog-bonus-edilizi-2024-incentivi-casa-padova, blog-bonus-mobili-2026-massimizzare-ristrutturazioni, blog-imposte-registro-catasto-compravendita-padova-2026…
 - Intent simile `territorio-cintura`: blog-vigonza-rubano-comprare-casa-cintura-2024, blog-vigonza-rubano-comprare-casa-cintura-2026
 - Intent simile `dato-trimestrale`: blog-affitti-canoni-fimaa-q1-2024-padova, blog-sondaggio-bancaditalia-q1-2026-padova
+- Intent simile `affitti-cluster`: blog-affitto-transitorio-padova-durata-2026, blog-squilibrio-domanda-offerta-affitti-padova
 - Intent simile `analisi-scenari`: blog-bolla-immobiliare-padova-2026, blog-previsioni-immobiliari-scenari-geopolitica-2026, blog-prospettive-mercato-residenziale-italia-2026
 - Intent simile `territorio-padova`: blog-prezzi-case-padova-zona-2026, blog-scuole-istruzione-padova, blog-servizi-infrastrutture-padova, blog-trasporti-mobilita-padova
 - Intent simile `mutui-cluster`: blog-mutui-selettivi-banche-padova-2026, blog-mutuo-fisso-variabile-padova-2026, blog-mutuo-prima-casa-padova, blog-tassi-mutui-minimi-approfittarne-padova-2026
@@ -116,7 +117,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 - Coppia da non fondere (Tribloc vs Case Green generico): blog-residenze-green-padova-tribloc-2026 ↔ blog-domanda-case-green-certificazione-padova-2026
 - Coppia da non fondere (Evento BCE vs guida mutui): blog-bce-tassi-mutui-giugno-2026-padova ↔ blog-mutui-casa-padova-2026
 
-**Articoli catalogati:** 108
+**Articoli catalogati:** 110
 
 ---
 
@@ -142,7 +143,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-vigonza-rubano-comprare-casa-cintura-2024` | `vigonza-rubano-comprare-casa-cintura` | Focus Vigonza/Rubano — geografia cintura |
 | `blog-vigonza-rubano-comprare-casa-cintura-2026` | `vigonza-rubano-comprare-casa-cintura` | Focus Vigonza/Rubano — geografia cintura |
 
-### Affitti e locazioni (17)
+### Affitti e locazioni (19)
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
@@ -152,6 +153,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-affitti-padova-canoni-2026` | `affitti-padova-canoni-trend-2026` | Pillar canoni città +8% — non stanza singola Insights |
 | `blog-affitto-breve-padova-2026` | `affitto-breve-padova-rendimenti-regole` | Short-term rental rendimenti/normativa — non locazione 4+4 |
 | `blog-affitto-studenti-padova` | `guida-affitto-studenti-padova` | Guida evergreen zone/contratti — non dato anno |
+| `blog-affitto-transitorio-padova-durata-2026` | `affitto-transitorio-durata` | Cluster affitti — verificare matrice §4 prima di pubblicare |
 | `blog-checklist-affitto-studenti-padova-2026` | `checklist-contratto-studenti-padova` | Checklist operativa caparra/contratto — non mercato |
 | `blog-contratto-affitto-padova` | `contratto-affitto-tipologie-padova` | 4+4, 3+2, transitorio, cedolare — normativa |
 | `blog-emergenza-abitativa-padova-2026` | `emergenza-abitativa-padova-dati` | Gap domanda/offerta abitativa — non canoni singoli |
@@ -159,6 +161,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-quotazioni-locazioni-omi-istat-padova-2026` | `quotazioni-locazioni-omi-istat-padova` | Monitor OMI/ISTAT locazioni — non FIMAA né Insights |
 | `blog-rendimento-affitto-padova` | `rendimento-locativo-quartieri-padova` | Yield % per quartiere investitori |
 | `blog-righetto-bilancio-2025-soluzioni-affitto-2026` | `righetto-bilancio-affitto-soluzioni` | Case study agenzia + soluzioni affitto — E-E-A-T |
+| `blog-rubano-limena-affitto-lavoratori-2026` | `rubano-limena-affitto-lavoratori` | Focus Limena/cintura — non generico Padova centro |
 | `blog-squilibrio-domanda-offerta-affitti-padova` | `squilibrio-domanda-offerta-affitti` | Cluster affitti — verificare matrice §4 prima di pubblicare |
 | `blog-stanza-universitaria-padova-canoni-2026` | `canone-stanza-insights-490-padova` | Dato Immobiliare.it Insights (+46% vs 2020) e periferie tram — non FIMAA Q1 |
 | `blog-studentati-veneto-2026-posti-letto` | `posti-letto-esu-camplus-pnrr-veneto` | Canali offerta regionale (ESU/privati/PNRR) — non singolo canone stanza |
