@@ -137,10 +137,17 @@ def register_llms() -> None:
     path.write_text(text, encoding="utf-8")
 
 
+def register_admin() -> None:
+    """Allinea admin da blog.html (idempotente su slug già presenti)."""
+    import subprocess
+    subprocess.run(["python", str(ROOT / "scripts" / "sync_admin_blog_seed.py")], check=True)
+
+
 def main() -> None:
     register_blog_html()
     register_sitemap()
     register_llms()
+    register_admin()
     print("Registrazione batch luglio 2026 completata.")
 
 

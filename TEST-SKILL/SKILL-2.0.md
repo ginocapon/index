@@ -992,7 +992,7 @@ Aggiornamento sostanziale di articolo **esistente** (nuova edizione anno, dati O
 
 1. `python scripts/check_doppioni_sito.py`
 2. `node scripts/validate-page.js` sui file `blog-*.html` modificati
-3. Registrazione 4 punti: grep slug in `blog.html`, `admin.html`, `js/homepage.js`, `sitemap.xml`
+3. Registrazione 4 punti: grep slug in `blog.html`, **`admin.html`**, `js/homepage.js`, `sitemap.xml` — oppure `python scripts/sync_admin_blog_seed.py` dopo batch
 4. Campione visivo: hero + figure interne = file reali sotto `img/`; zero illustrazioni AI/3D; zero hotlink esterni
 5. Elenco blog: articoli nuovi in cima per data su `/blog` (simulazione merge Supabase + statici)
 6. Se fallisce → fix + ripetere pass 2. Vedi checklist punto 7 e **`skill-content.md` §2.1C**.
@@ -1017,7 +1017,7 @@ Aggiornamento sostanziale di articolo **esistente** (nuova edizione anno, dati O
 - [ ] Sezione **«Cosa può fare Righetto»** con quesito e 3–4 soluzioni operative (§2.2 `skill-content.md`).
 - [ ] `wordCount` coerente con corpo reale.
 - [ ] Schema triplo (BlogPosting / FAQ / Breadcrumb) allineato al contenuto visibile.
-- [ ] Registrazione in `blog.html`, `homepage.js`, `admin.html`, `sitemap.xml` se applicabile (processo gia' definito altrove).
+- [ ] Registrazione in `blog.html`, **`admin.html` (`_blogSeedArticles`)**, `homepage.js`, `sitemap.xml` se applicabile (processo gia' definito altrove; sync: `scripts/sync_admin_blog_seed.py`).
 - [ ] **Secondo passaggio auto-verifica (§8.1c punto 8)** eseguito dall'agente con esito OK.
 
 ### 8.1d Freschezza contenuti e cron venerdì (OBBLIGATORIO — competitività SERP)
