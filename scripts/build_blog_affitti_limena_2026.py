@@ -15,7 +15,7 @@ DATE_IT = "9 luglio 2026"
 DATE_ISO = "2026-07-09"
 TIME_TS = "2026-07-09T09:00:00+02:00"
 MIN_BODY_WORDS = 2500
-HERO = "img/blog/blog-affitti-canoni-fimaa-q1-2026-padova.webp"
+HERO = "img/blog/limena-oratorio-beata-vergine-rosario.jpg"
 TITLE = "Affitti Limena 2026: Canoni, Quartieri e Guida Completa"
 META = (
     "Affitti Limena 2026: guida a canoni, quartieri e appartamenti in affitto. "
@@ -82,8 +82,9 @@ STYLE_BLOCK = r"""<style>
     .h-cta{display:flex;gap:.65rem;align-items:center}.h-tel{color:rgba(255,255,255,.75);font-size:.78rem}
     .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:6px;font-size:.76rem;font-weight:500}
     .art-hero{position:relative;overflow:hidden}
-    .art-hero-img{width:100%;height:480px;object-fit:cover;display:block;filter:brightness(.42)}
-    .art-hero-overlay{position:absolute;bottom:0;left:0;right:0;padding:3rem 1.5rem 2.5rem;background:linear-gradient(transparent,rgba(21,36,53,.95) 40%)}
+    .art-hero__frame{position:relative;width:100%;aspect-ratio:19/9;overflow:hidden}
+    .art-hero__frame .art-hero-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:brightness(.42)}
+    .art-hero-overlay{position:absolute;bottom:0;left:0;right:0;padding:3rem 1.5rem 2.5rem;background:linear-gradient(transparent,rgba(21,36,53,.95) 40%);z-index:1}
     .art-hero-inner{max-width:820px;margin:0 auto}
     .breadcrumb{font-size:.72rem;color:rgba(255,255,255,.45);margin-bottom:1rem}.breadcrumb a{color:rgba(255,255,255,.55)}
     .cat-badge{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,107,53,.2);color:var(--oro);padding:.25rem .7rem;font-weight:700;margin-bottom:.8rem;display:inline-block}
@@ -128,10 +129,10 @@ STYLE_BLOCK = r"""<style>
     .fi{max-width:1380px;margin:0 auto}
     .fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2rem;margin-bottom:1.5rem}
     .flogo{font-family:'Cormorant Garamond',serif;color:#fff;font-size:1.1rem}.flogo span{color:var(--oro);font-style:italic}
-    @media(max-width:768px){.art-hero-img{height:300px}.art-hero h1{font-size:1.75rem}}
+    @media(max-width:768px){.art-hero h1{font-size:1.75rem}}
     .skip-link{position:absolute;top:-100%;background:var(--oro);color:var(--nero);padding:.5rem 1rem;z-index:9999}.skip-link:focus{top:0}
   </style>
-  <link rel="stylesheet" href="css/blog-rich.css?v=3">
+  <link rel="stylesheet" href="css/blog-rich.css?v=4">
   <link rel="stylesheet" href="css/blog-lead-form.css?v=2">"""
 
 
@@ -179,9 +180,11 @@ def body() -> str:
 <p>L'OMI pubblica, per ogni comune, fasce minimo-medio-massimo separate per <strong>locazione</strong> e per stato dell'immobile (normale, ottimo, ecc.). Per Limena dovete aprire il <a href="{OMI_URL}" target="_blank" rel="noopener noreferrer">portale quotazioni immobiliari ADE</a>, selezionare il comune, la tipologia (abitazione civile, villetta, ecc.) e la finalità locazione. Il PDF o l'export Excel riportano valori semestrali aggiornati: sono riferimenti statistici, non il canone certo del vostro terzo piano con vista campagna.</p>
 <p>Per imparare a leggere OMI insieme agli indici ISTAT sulle abitazioni, usate la nostra guida <a href="blog-quotazioni-locazioni-omi-istat-padova-2026">quotazioni e locazioni OMI e ISTAT Padova</a>. Lì spieghiamo differenza tra indice macro ISTAT (<a href="{ISTAT_URL}" target="_blank" rel="noopener noreferrer">archivio prezzi immobili ISTAT</a>) e micro-zona OMI — strumenti complementari, non sostitutivi.</p>
 
-<figure style="margin:1.5rem 0">
-<img src="img/foto-servizi/valutazioni-e-perizie-padova.webp" alt="Valutazione immobiliare e lettura quotazioni OMI per locazioni Limena" width="1200" height="800" loading="lazy" style="width:100%;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.1)">
-<figcaption style="text-align:center;font-size:.78rem;color:var(--grigio);margin-top:.5rem">Stima locativa: OMI fornisce il contesto zonale; l'agenzia incrocia comparabili e stato dell'immobile.</figcaption>
+<figure class="blog-fig">
+<div class="blog-fig__frame">
+<img src="img/blog/blog-inline-posizione-padova-2026.webp" alt="Limena nella cintura nord di Padova — contesto territoriale per affitti e locazioni" width="1900" height="900" loading="lazy">
+</div>
+<figcaption>La prima cintura padovana: Limena si colloca tra capoluogo e hinterland — utile per confrontare OMI su più comuni.</figcaption>
 </figure>
 
 <h3>Perché non pubblichiamo €/mq OMI per Limena in questo articolo?</h3>
@@ -204,9 +207,11 @@ def body() -> str:
 <h2 id="quartieri">Quali zone di Limena interessano di più chi cerca affitto?</h2>
 <p>Il nucleo storico intorno a Via Roma e al <strong>Oratorio della Beata Vergine del Rosario</strong> resta un riferimento identitario: qui trovate case di media taglia, vicinanza ai servizi e percorribilità pedonale. Le aree periferiche verso Campo San Pieretto o Confine offrono spesso villette e bifamiliari adatte a famiglie con due auto. Non esiste un «quartiere studenti» come in zona universitaria padovana: la domanda è più legata al lavoro e alla prossimità al capoluogo.</p>
 
-<figure style="margin:1.5rem 0">
-<img src="img/blog/limena-oratorio-beata-vergine-rosario.jpg" alt="Oratorio Beata Vergine del Rosario Limena — centro storico e contesto residenziale" width="1200" height="800" loading="lazy" style="width:100%;border-radius:12px">
-<figcaption style="text-align:center;font-size:.78rem;color:var(--grigio);margin-top:.5rem">Centro Limena: servizi, identità del territorio e collegamenti verso Padova.</figcaption>
+<figure class="blog-fig">
+<div class="blog-fig__frame">
+<img src="img/team/righetto-ufficio-sede-2026.png" alt="Sede Righetto Immobiliare Via Roma 96 Limena — agenzia affitti sul territorio" width="1900" height="900" loading="lazy">
+</div>
+<figcaption>Via Roma 96, Limena: punto di riferimento per visite, contratti e ricerca appartamenti in affitto.</figcaption>
 </figure>
 
 <h3>Centro vs periferia: cosa cambia nel canone?</h3>
@@ -215,9 +220,11 @@ def body() -> str:
 <h2 id="tipologie">Che tipologie di appartamento affitto Limena sono più richieste?</h2>
 <p><strong>Bilocali e trilocali</strong> con cucina abitabile e almeno un posto auto coperto o box domina le richieste da coppie e famiglie giovani. I monolocali hanno mercato più limitato salvo proposte ristrutturate per single. Le <strong>villette a schiera</strong> con giardino attirano inquilini con bambini e animali domestici — verificare sempre regolamento condominiale e contratto. Gli immobili di recente costruzione (classe energetica migliore) possono giustificare canoni nella fascia alta OMI se arredati e con spese contenute.</p>
 
-<figure style="margin:1.5rem 0">
-<img src="img/foto-servizi/gestioni-immobili-padova.webp" alt="Gestione locazioni e affitti — servizio agenzia immobiliare Padova Limena" width="1200" height="800" loading="lazy" style="width:100%;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.1)">
-<figcaption style="text-align:center;font-size:.78rem;color:var(--grigio);margin-top:.5rem">Gestione locazioni: selezione inquilino, contratto e allineamento canone al mercato.</figcaption>
+<figure class="blog-fig">
+<div class="blog-fig__frame">
+<img src="img/blog/blog-ultime-acquisizioni-residenziali-padova-giugno-2026.webp" alt="Appartamenti residenziali in locazione nel Padovano — tipologie richieste a Limena" width="1900" height="900" loading="lazy">
+</div>
+<figcaption>Bilocali e trilocali con box restano le tipologie più richieste da famiglie e pendolari in cintura.</figcaption>
 </figure>
 
 <h3>Arredato o vuoto: cosa preferisce il mercato Limena?</h3>
@@ -464,7 +471,9 @@ def build_html(content: str, words: int) -> str:
 
 <main id="main-content">
 <div class="art-hero">
-  <img class="art-hero-img" src="{HERO}" alt="Affitti Limena 2026 — canoni locazione e mercato residenziale Padova" width="1200" height="630" fetchpriority="high">
+  <div class="art-hero__frame">
+  <img class="art-hero-img" src="{HERO}" alt="Centro storico Limena — Oratorio della Beata Vergine del Rosario, contesto residenziale affitti 2026" width="1900" height="900" fetchpriority="high">
+  </div>
   <div class="art-hero-overlay"><div class="art-hero-inner">
     <div class="breadcrumb"><a href="/">Home</a> / <a href="blog">Blog</a> / Affitti Limena</div>
     <span class="cat-badge">Mercato locazione</span>
