@@ -64,6 +64,11 @@ table.cost-table .tot td{background:rgba(201,168,76,.15);font-weight:700}
 .tag-pill{display:inline-block;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:.2rem .5rem;border-radius:4px;margin-bottom:.35rem}
 .tag-std{background:#e3f2fd;color:#1565c0}
 .tag-conc{background:#e8f5e9;color:#2e7d32}
+.tag-ced{background:#fff8e1;color:#e65100}
+.v-disclaimer{background:#fff8e1;border:1px solid #ffcc80;border-radius:14px;padding:1.25rem 1.35rem;font-size:.82rem;color:#5d4037;line-height:1.75}
+.v-disclaimer strong{color:#bf360c}
+.contract-grid{display:grid;gap:1rem;margin:1.2rem 0}
+@media(min-width:700px){.contract-grid{grid-template-columns:1fr}}
 .chart-box{background:#fff;border:1px solid var(--sfondo);border-radius:14px;padding:1.2rem;margin:1.2rem 0}
 .chart-title{font-size:.82rem;font-weight:700;color:var(--blu);margin-bottom:.85rem}
 .chart-bars{display:flex;flex-direction:column;gap:.55rem}
@@ -130,35 +135,102 @@ footer a{color:var(--oro2)}
 </section>
 
 <section class="v-section wide" id="calcola">
-  <h2>Tipologie di contratto</h2>
-  <p class="v-lead">Per i contratti più diffusi in zona Padova distinguiamo il <strong>4+4 a canone libero</strong> (con cedolare secca al 21% per il proprietario) e il <strong>3+2 a canone concordato</strong> (cedolare secca al 10%, canone calmierato, asseverazione obbligatoria).</p>
+  <h2>I tre profili di contratto</h2>
+  <p class="v-lead">A Padova non si tratta di una sola formula: conviene distinguere <strong>tre situazioni</strong> che l'inquilino incontra più spesso. La <strong>cedolare secca</strong> non è un contratto a sé, ma un <em>regime fiscale del proprietario</em> che cambia gli oneri di registrazione per l'inquilino — e solo il <strong>canone concordato</strong> prevede l'<strong>asseverazione</strong>.</p>
+
+  <div class="contract-grid">
+    <div class="v-card">
+      <span class="tag-pill tag-std">1 · Contratto ordinario</span>
+      <h3>4+4 a canone libero (senza cedolare secca)</h3>
+      <p>Durata <strong>4+4 anni</strong>, canone <strong>liberamente pattuito</strong> tra le parti. Il proprietario può tassare il reddito in <strong>IRPEF</strong> (o altra via ordinaria): in questo caso il contratto va registrato con <strong>imposta di registro al 2% annuo</strong> sul canone, ripartita al 50% tra locatore e conduttore, più bollo di registrazione.</p>
+      <p><strong>Per l'inquilino:</strong> deposito 3 mensilità, prima rata, quota registro (~50% del 2% annuo), bollo indicativo, condominio, agenzia da concordare. <strong>Nessuna asseverazione.</strong></p>
+    </div>
+    <div class="v-card">
+      <span class="tag-pill tag-ced">2 · Ordinario + cedolare secca 21%</span>
+      <h3>Sempre 4+4 a canone libero, ma con cedolare secca</h3>
+      <p>Stesso contratto <strong>ordinario 4+4</strong>, ma il proprietario opta per la <strong>cedolare secca al 21%</strong> (imposta sostitutiva sul canone). In questa configurazione gli oneri di <strong>imposta di registro e bollo</strong> per l'inquilino sono in genere <strong>assenti o molto ridotti</strong> rispetto al punto 1.</p>
+      <p><strong>Per l'inquilino:</strong> deposito 3 mensilità, prima mensilità, spese condominiali, provvigione agenzia. <strong>Nessuna asseverazione</strong> — è la differenza principale rispetto al canone concordato.</p>
+    </div>
+    <div class="v-card">
+      <span class="tag-pill tag-conc">3 · Canone concordato + cedolare 10%</span>
+      <h3>3+2 a canone calmierato (concordato)</h3>
+      <p>Contratto <strong>3+2</strong> con canone fissato dalle <strong>tabelle comunali</strong> (di solito più basso del libero). Il proprietario usa quasi sempre la <strong>cedolare secca al 10%</strong>. È l'unica delle tre formule che richiede l'<strong>asseverazione del canone</strong> da tecnico abilitato (circa <strong>170–200 €</strong>, da confermare con lo studio).</p>
+      <p><strong>Per l'inquilino:</strong> deposito 3 mensilità, prima mensilità (su canone calmierato), <strong>costo asseverazione</strong>, condominio, agenzia. Onèri di registro in genere non come nel punto 1.</p>
+    </div>
+  </div>
+
+  <h3>Sunto costi inquilino per tipologia</h3>
+  <p class="v-lead" style="margin-bottom:.75rem">Esempio indicativo su canone libero <strong>600 €/mese</strong> (ordinario) e concordato <strong>500 €/mese</strong> (tabella). Cifre orientative — vedi nota a fine pagina.</p>
   <div class="tbl-wrap">
-    <table class="cost-table" aria-label="Confronto tipologie contratto locazione">
+    <table class="cost-table" aria-label="Sunto costi inquilino per tipologia contratto">
       <thead>
-        <tr><th>Tipologia</th><th>Canone</th><th>Fiscalità proprietario</th><th>Costi extra inquilino</th></tr>
+        <tr>
+          <th>Voce</th>
+          <th>1 · Ordinario (registro)</th>
+          <th>2 · Cedolare secca 21%</th>
+          <th>3 · Concordato 3+2</th>
+        </tr>
       </thead>
       <tbody>
         <tr>
-          <td><span class="tag-pill tag-std">Ordinario 4+4</span><br>Canone libero</td>
-          <td>Concordato tra le parti</td>
-          <td>Cedolare secca 21% o IRPEF</td>
-          <td>Imposta di registro 2% annuo (quota 50% inquilino) + bollo registrazione</td>
+          <td><strong>Canone mensile (es.)</strong></td>
+          <td class="num">600 €</td>
+          <td class="num">600 €</td>
+          <td class="num">500 € (tabella)</td>
         </tr>
         <tr>
-          <td><span class="tag-pill tag-conc">Concordato 3+2</span><br>Canone calmierato</td>
-          <td>Secondo tabelle comunali</td>
-          <td>Cedolare secca 10%</td>
-          <td>Asseverazione canone (circa 170–200 €) + eventuali oneri registrazione</td>
+          <td><strong>Deposito cauzionale (3 mesi)</strong></td>
+          <td class="num">1.800 €</td>
+          <td class="num">1.800 €</td>
+          <td class="num">1.500 €</td>
+        </tr>
+        <tr>
+          <td><strong>Prima mensilità in ingresso</strong></td>
+          <td class="num">600 €</td>
+          <td class="num">600 €</td>
+          <td class="num">500 €</td>
+        </tr>
+        <tr>
+          <td><strong>Asseverazione canone</strong></td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">170 – 200 €</td>
+        </tr>
+        <tr>
+          <td><strong>Imposta registro (quota inquilino)</strong></td>
+          <td class="num">~72 €/anno*</td>
+          <td class="num">Di solito no</td>
+          <td class="num">Di solito no</td>
+        </tr>
+        <tr>
+          <td><strong>Bollo / registrazione</strong></td>
+          <td class="num">~50 € + IVA*</td>
+          <td class="num">Di solito no</td>
+          <td class="num">Da pratica</td>
+        </tr>
+        <tr>
+          <td><strong>Spese condominiali</strong></td>
+          <td class="num" colspan="3">Da preventivo mensile o trimestrale</td>
+        </tr>
+        <tr>
+          <td><strong>Provvigione agenzia</strong></td>
+          <td class="num" colspan="3">Da definire con l'agente preposto in sede</td>
+        </tr>
+        <tr class="tot">
+          <td><strong>Totale ingresso indicativo</strong><br><span style="font-weight:400;font-size:.7rem">senza agenzia né condominio</span></td>
+          <td class="num">~2.520 €*</td>
+          <td class="num">~2.400 €</td>
+          <td class="num">~2.170 – 2.200 €</td>
         </tr>
       </tbody>
     </table>
   </div>
-  <p class="v-note">La scelta del regime fiscale è del proprietario; l'inquilino deve comunque conoscere gli oneri di ingresso e quelli ricorrenti prima di impegnarsi.</p>
+  <p class="v-note">* Sul contratto ordinario con registro: 2% annuo sul canone totale, metà a carico inquilino; bollo indicativo. Con <strong>cedolare secca</strong> (punti 2 e 3) questi oneri per l'inquilino in genere non si applicano come nel punto 1.</p>
 </section>
 
 <section class="v-section wide">
-  <h2>Costi all'ingresso (tutti i contratti)</h2>
-  <p class="v-lead">Salvo diversa pattuizione scritta, chi entra in locazione deve prevedere queste voci. L'importo dipende dal canone mensile concordato.</p>
+  <h2>Costi comuni all'ingresso</h2>
+  <p class="v-lead">Indipendentemente dal profilo scelto, valgono quasi sempre queste voci. L'importo dipende dal canone pattuito.</p>
   <div class="tbl-wrap">
     <table class="cost-table" aria-label="Costi ingresso locazione inquilino">
       <thead>
@@ -211,8 +283,8 @@ footer a{color:var(--oro2)}
 </section>
 
 <section class="v-section wide">
-  <h2>Imposta di registro e bollo (contratto ordinario)</h2>
-  <p class="v-lead">Sui contratti a canone libero senza cedolare secca sostitutiva, l'<strong>imposta di registro è del 2% annuo</strong> sul canone complessivo e si <strong>divide al 50% tra locatore e conduttore</strong>. Si aggiunge la voce di <strong>registrazione con marca da bollo indicativa di 50 € + IVA</strong> (importi da confermare in base alla pratica ADE).</p>
+  <h2>Imposta di registro e bollo (solo profilo 1)</h2>
+  <p class="v-lead">Questa sezione riguarda il <strong>contratto ordinario senza cedolare secca</strong> (profilo 1). Nei profili con <strong>cedolare secca al 21% o al 10%</strong> l'inquilino di solito <strong>non sostiene</strong> questi oneri come nel caso ordinario con registro.</p>
 
   <div class="split-fig" aria-label="Ripartizione imposta di registro">
     <div class="split-card"><div class="big">2%</div><div class="lbl">imposta annua sul canone totale</div></div>
@@ -237,8 +309,8 @@ footer a{color:var(--oro2)}
 </section>
 
 <section class="v-section wide">
-  <h2>Canone concordato: asseverazione</h2>
-  <p class="v-lead">Per i contratti <strong>3+2 a canone concordato</strong> serve l'<strong>asseverazione</strong> del canone da parte di un tecnico abilitato. Il costo va <strong>richiesto al professionista</strong> e di solito si aggira tra <strong>170 e 200 €</strong> (importo variabile per comune e studio).</p>
+  <h2>Asseverazione (solo profilo 3 — concordato)</h2>
+  <p class="v-lead">L'<strong>asseverazione</strong> è richiesta <strong>solo</strong> per i contratti <strong>3+2 a canone concordato</strong>. Nei contratti ordinario e in quelli con <strong>cedolare secca al 21%</strong> (profili 1 e 2) <strong>non è prevista</strong>.</p>
   <div class="tbl-wrap">
     <table class="cost-table" aria-label="Costi canone concordato">
       <thead>
@@ -256,9 +328,9 @@ footer a{color:var(--oro2)}
 <section class="v-section">
   <h2>Checklist prima di firmare</h2>
   <div class="v-card"><h3>1. Chiedi il prospetto completo</h3><p>Canone, deposito, condominio, registro, asseverazione (se concordato) e provvigione agenzia — tutto per iscritto.</p></div>
-  <div class="v-card"><h3>2. Verifica il contratto</h3><p>4+4 libero o 3+2 concordato: durata, recesso, spese e manutenzioni ordinarie vs straordinarie.</p></div>
+  <div class="v-card"><h3>2. Verifica il contratto</h3><p>Ordinario con registro, ordinario con cedolare 21%, o concordato 3+2: durata, recesso, spese e se è prevista l'asseverazione.</p></div>
   <div class="v-card"><h3>3. Parla con l'agente preposto</h3><p>I compensi di mediazione e le modalità di pagamento si definiscono in agenzia, in base al servizio richiesto.</p></div>
-  <p class="v-note">Questa pagina ha finalità informative e non sostituisce pareri legali o fiscali. Gli importi possono variare per normativa vigente e clausole contrattuali.</p>
+  <p class="v-note">Prima di firmare, chiedi sempre il prospetto scritto all'agente Righetto preposto alla pratica.</p>
 </section>
 
 <section class="v-section" id="richiedi">
@@ -282,8 +354,9 @@ footer a{color:var(--oro2)}
       </select>
       <label for="tipo">Tipo contratto</label>
       <select id="tipo">
-        <option value="ordinario">4+4 canone libero</option>
-        <option value="concordato">3+2 canone concordato</option>
+        <option value="ordinario-registro">1 · Ordinario 4+4 (con registro)</option>
+        <option value="ordinario-cedolare">2 · Ordinario 4+4 + cedolare secca 21%</option>
+        <option value="concordato">3 · Concordato 3+2 + cedolare 10%</option>
         <option value="non-so">Non so ancora</option>
       </select>
       <label for="msg">Messaggio (opzionale)</label>
@@ -305,6 +378,15 @@ footer a{color:var(--oro2)}
     </div>
   </form>
   <p style="text-align:center;margin-top:1rem;font-size:.82rem">Scopri anche il nostro <a href="servizio-locazioni">servizio locazioni</a> completo.</p>
+</section>
+
+<section class="v-section wide" aria-labelledby="disclaimer-title">
+  <div class="v-disclaimer" id="disclaimer">
+    <h2 id="disclaimer-title" style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#bf360c;margin-bottom:.5rem;border:none;padding:0">Nota importante</h2>
+    <p>Le cifre, le tabelle e le descrizioni su questa pagina hanno <strong>valore puramente orientativo</strong>: servono a dare un'infarinatura e a chiarire le differenze tra le formule più diffuse, <strong>non costituiscono legge</strong> né consulenza legale o fiscale.</p>
+    <p>Ogni importo e ogni ripartizione dovrà essere <strong>confermato e discusso con l'agente di zona Righetto</strong> preposto al tuo caso, in base all'immobile, al contratto scelto dal proprietario e alla normativa vigente al momento della stipula.</p>
+    <p>Gli oneri possono <strong>variare</strong> in funzione della situazione concreta (clausole contrattuali, accordi tra le parti, aggiornamenti ADE, spese condominiali, garanzie richieste e altri fattori che si presenteranno in sede).</p>
+  </div>
 </section>
 </main>
 
@@ -332,7 +414,12 @@ async function sendCostiForm(e) {
 
   var nomeCompleto = nomeRaw;
   var canoneLabel = { 'fino-500': 'Fino a 500 €', '500-700': '500–700 €', '700-900': '700–900 €', 'oltre-900': 'Oltre 900 €' }[canone] || 'Non indicato';
-  var tipoLabel = { ordinario: '4+4 canone libero', concordato: '3+2 concordato', 'non-so': 'Non so ancora' }[tipo] || tipo;
+  var tipoLabel = {
+    'ordinario-registro': '1 · Ordinario 4+4 con registro',
+    'ordinario-cedolare': '2 · Ordinario 4+4 + cedolare secca 21%',
+    concordato: '3 · Concordato 3+2 + cedolare 10%',
+    'non-so': 'Non so ancora'
+  }[tipo] || tipo;
   var messaggioDb = '[Costi locazione inquilino] Canone: ' + canoneLabel + ' — Contratto: ' + tipoLabel + (msg ? ' — ' + msg : '');
 
   var btn = document.querySelector('.v-submit');
