@@ -996,6 +996,7 @@ Aggiornamento sostanziale di articolo **esistente** (nuova edizione anno, dati O
 - **Nessun elenco fisso** di slug in `homepage.js` — vietato `VT_CATALOG_ORDER` statico.
 - Fonte: Supabase `immobili` filtrati `attivo=true`, `venduto=false`, `affittato=false`, ordinati `created_at` DESC; primi **4** con `virtual_tour_scenes` (dopo merge `data/visite-virtuali.json` per cover/scene locali).
 - Annuncio disattivato in admin → **non** compare in homepage (aggiornamento automatico a ogni visita; controllo venerdì in `skill-massimo-punteggio.md` §4 e skill venerdì).
+- Disattivato ma ancora `attivo` in DB: in `data/visite-virtuali.json` impostare `"homepage": false` sullo slug (es. LA0319 Sacro Cuore).
 - Nuovo immobile con tour: scene in admin + voce in `data/visite-virtuali.json`; bump `homepage.js?v=N`.
 
 **8) Secondo passaggio auto-verifica (agente — BLOCCANTE prima di chiudere task blog)**
