@@ -157,10 +157,10 @@ bash scripts/mini-seo-check.sh && bash scripts/audit-skill.sh
 | **Valut.** | OK | Landing + servizio valutazioni |
 | **Player** | OK | `<video>` nativo homepage (`index.html` + `righetto-storia-hero.mp4`) |
 | **Alert** | OK | Iscrizione alert su `immobili.html` → `newsletter_subscribers` (`interesse: alert-immobili`) |
-| **Tour** | OK | Filtro «Solo tour 360°» su catalogo + tour su scheda immobile |
+| **Tour** | OK | Filtro «Solo tour 360°» su catalogo + tour su scheda immobile + **homepage `#vtGridHome`**: ultimi 4 immobili **attivi** con tour da Supabase (`loadVisiteVirtualiHome`) |
 | **Live** | OK | CTA «Visita live» su card catalogo + scheda (`visitaLiveGuidata` / WhatsApp) |
 
-Verifica rapida post-modifica: homepage play video, `immobili?vt=1` filtra tour, alert iscrizione, pulsante live su card.
+Verifica rapida post-modifica: homepage play video, **homepage 4 card tour = solo annunci attivi con scene**, `immobili?vt=1` filtra tour, alert iscrizione, pulsante live su card.
 
 ---
 
