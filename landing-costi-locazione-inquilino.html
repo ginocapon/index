@@ -4,7 +4,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9MHDHHES26"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9MHDHHES26');</script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#2C4A6E">
 <title>Costi locazione inquilino Padova | Righetto Immobiliare</title>
 <meta name="description" content="Guida costi per chi affitta a Padova: deposito 3 mensilità, prima rata, registro 2%, asseverazione concordato e spese condominiali. Trasparenza Righetto.">
@@ -24,8 +24,8 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--nero:#152435;--bianco:#F7F5F1;--oro:#C9A84C;--oro2:#E8C56A;--blu:#2C4A6E;--grigio:#6B7A8D;--sfondo:#ECE7DF;--verde:#2E7D52;--rosso:#B33A3A}
-html{scroll-behavior:smooth}
-body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--nero);line-height:1.7}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--nero);line-height:1.7;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
 .skip-link{position:absolute;top:-100%;background:var(--blu);color:#fff;padding:.5rem 1rem;z-index:9999;font-weight:700}.skip-link:focus{top:0}
 .topbar{background:linear-gradient(90deg,var(--blu),#3d6288);color:#fff;text-align:center;padding:.55rem 1rem;font-size:.74rem;font-weight:600}
 .v-hero{min-height:92vh;display:flex;flex-direction:column;background:var(--nero)}
@@ -53,7 +53,8 @@ body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--ne
 .v-card{background:#fff;border:1px solid var(--sfondo);border-radius:14px;padding:1.1rem 1.2rem;margin-bottom:.75rem;box-shadow:0 8px 28px rgba(21,36,53,.06)}
 .v-card h3{font-size:.92rem;color:var(--blu);margin-bottom:.25rem}
 .v-card p{font-size:.82rem;color:var(--grigio)}
-.tbl-wrap{overflow-x:auto;margin:1rem 0;border-radius:12px;border:1px solid var(--sfondo);background:#fff}
+.tbl-wrap{overflow-x:auto;margin:1rem 0;border-radius:12px;border:1px solid var(--sfondo);background:#fff;-webkit-overflow-scrolling:touch}
+.tbl-hint{display:none;font-size:.72rem;color:var(--grigio);margin:-.35rem 0 .65rem}
 table.cost-table{width:100%;border-collapse:collapse;font-size:.78rem;min-width:520px}
 table.cost-table th,table.cost-table td{padding:.65rem .75rem;text-align:left;border-bottom:1px solid var(--sfondo);vertical-align:top}
 table.cost-table th{background:var(--blu);color:#fff;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em}
@@ -119,6 +120,51 @@ footer a{color:var(--oro2)}
   .split-fig{grid-template-columns:repeat(4,1fr)}
 }
 @media(max-width:560px){.split-fig{grid-template-columns:1fr 1fr}.chart-row{grid-template-columns:1fr;gap:.2rem}}
+@media(max-width:767px){
+  .topbar{font-size:.8rem;padding:.65rem 1rem;padding-top:max(.65rem, env(safe-area-inset-top))}
+  .v-hero{min-height:auto;background:var(--nero)}
+  .v-hero-media{flex:none;min-height:38vh;max-height:44vh}
+  .v-hero-media img{object-position:center 18%}
+  .v-hero-media::after{background:linear-gradient(180deg,rgba(21,36,53,.05) 0%,var(--nero) 100%)}
+  .v-hero-copy{
+    margin-top:0;
+    background:var(--nero);
+    padding:1.35rem 1.15rem 1.75rem;
+    padding-bottom:max(1.75rem, env(safe-area-inset-bottom));
+    max-width:none;
+  }
+  .v-tag{font-size:.72rem}
+  .v-hero-copy h1{font-size:2.15rem}
+  .v-hero-copy p{font-size:.95rem;color:rgba(255,255,255,.92)}
+  .v-btn{font-size:.92rem;padding:1rem 1.2rem}
+  .v-trust{font-size:.74rem;color:rgba(255,255,255,.78)}
+  .v-section{padding:2.4rem 1.15rem}
+  .v-section h2{font-size:1.85rem}
+  .v-section h3{font-size:1.2rem}
+  .v-lead{font-size:.92rem}
+  .v-note{font-size:.78rem}
+  .v-card p{font-size:.88rem;line-height:1.65}
+  .tag-pill{font-size:.68rem}
+  .pro-con-box{font-size:.82rem}
+  .pro-con-box h4{font-size:.72rem}
+  .tbl-hint{display:block}
+  table.cost-table{font-size:.84rem;min-width:480px}
+  table.cost-table th,table.cost-table td{padding:.75rem .8rem}
+  table.cost-table th{font-size:.72rem}
+  .chart-row{font-size:.78rem}
+  .chart-legend{font-size:.74rem}
+  .split-card .lbl{font-size:.78rem}
+  .v-disclaimer{font-size:.88rem}
+  .v-form input,.v-form select,.v-form textarea{font-size:16px}
+  .v-form label,.v-chk{font-size:.78rem}
+  .calc-form input,.calc-form select{font-size:16px}
+  .calc-form label{font-size:.72rem}
+  .calc-table{font-size:.86rem}
+  .calc-table th,.calc-table td{padding:.75rem .85rem}
+  .calc-table th{font-size:.72rem}
+  .calc-foot{font-size:.74rem}
+  footer{padding-bottom:max(1.5rem, env(safe-area-inset-bottom))}
+}
 /* Calcolatore costi ingresso */
 .calc-wrap{background:linear-gradient(165deg,#152435 0%,#2C4A6E 55%,#3d6288 100%);border-radius:20px;padding:1.5rem 1.35rem 1.75rem;color:#fff;box-shadow:0 20px 50px rgba(21,36,53,.22)}
 .calc-wrap h2{color:#fff;border-bottom-color:var(--oro2);margin-bottom:.5rem}
@@ -337,6 +383,7 @@ footer a{color:var(--oro2)}
 
   <h3>Sunto costi inquilino per tipologia</h3>
   <p class="v-lead" style="margin-bottom:.75rem">Esempio indicativo su canone <strong>600 €/mese</strong> per tutti e tre i profili. Cifre orientative — vedi nota a fine pagina.</p>
+  <p class="tbl-hint" aria-hidden="true">↔ Scorri la tabella verso destra per vedere tutte le colonne</p>
   <div class="tbl-wrap">
     <table class="cost-table" aria-label="Sunto costi inquilino per tipologia contratto">
       <thead>
@@ -407,6 +454,7 @@ footer a{color:var(--oro2)}
 <section class="v-section wide">
   <h2>Costi comuni all'ingresso</h2>
   <p class="v-lead">Indipendentemente dal profilo scelto, valgono quasi sempre queste voci. L'importo dipende dal canone pattuito.</p>
+  <p class="tbl-hint" aria-hidden="true">↔ Scorri la tabella se non vedi tutte le colonne</p>
   <div class="tbl-wrap">
     <table class="cost-table" aria-label="Costi ingresso locazione inquilino">
       <thead>
@@ -469,6 +517,7 @@ footer a{color:var(--oro2)}
     <div class="split-card"><div class="big">50 €</div><div class="lbl">+ IVA bollo registrazione (indicativo)</div></div>
   </div>
 
+  <p class="tbl-hint" aria-hidden="true">↔ Scorri la tabella se non vedi tutte le colonne</p>
   <div class="tbl-wrap">
     <table class="cost-table" aria-label="Esempio calcolo imposta registro">
       <thead>
@@ -487,6 +536,7 @@ footer a{color:var(--oro2)}
 <section class="v-section wide">
   <h2>Asseverazione (solo profilo 3 — concordato)</h2>
   <p class="v-lead">L'<strong>asseverazione</strong> è richiesta <strong>solo</strong> per i contratti <strong>3+2 a canone concordato</strong>. Nei contratti ordinario e in quelli con <strong>cedolare secca al 21%</strong> (profili 1 e 2) <strong>non è prevista</strong>.</p>
+  <p class="tbl-hint" aria-hidden="true">↔ Scorri la tabella se non vedi tutte le colonne</p>
   <div class="tbl-wrap">
     <table class="cost-table" aria-label="Costi canone concordato">
       <thead>
