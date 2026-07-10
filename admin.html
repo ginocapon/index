@@ -4899,6 +4899,7 @@ const sb = _rigSbLib.createClient(SUPABASE_URL, SUPABASE_KEY, {
     headers: { 'x-righetto-admin': RIG_ADMIN_RLS_SECRET }
   }
 });
+window.sb = sb;
 
 let currentFotos = [];
 let currentPlanimetrie = [];
@@ -5255,7 +5256,7 @@ function showSection(name) {
     emailmarketing: 'Email Marketing',
     trend: 'Trend & Idee Articoli',
     audit: 'Audit Sito',
-    documentigenerali: 'Documenti Generali',
+    documentigenerali: 'Locazioni',
     impostazioni: 'Impostazioni'
   };
   document.getElementById('topbarTitle').textContent = titles[name] || name;
@@ -16298,6 +16299,6 @@ async function initAuditSection() {
   }
 }
 </script>
-<script src="js/admin-documenti-generali.js?v=1"></script>
+<script src="js/admin-documenti-generali.js?v=2"></script>
 </body>
 </html>
