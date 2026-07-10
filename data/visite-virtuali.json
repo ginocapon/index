@@ -54,11 +54,11 @@
       }
     ]
   },
-  "ufficio-vendita-limena-uff2247": {
+  "ufficio-in-centro-storico-a-limena-al-primo-piano": {
     "titolo": "Ufficio in barchessa — Limena centro",
     "comune": "Limena",
     "codice": "UFF2247",
-    "immobile_href": "immobile?s=ufficio-vendita-limena-uff2247",
+    "immobile_href": "immobile?s=ufficio-in-centro-storico-a-limena-al-primo-piano",
     "cover": "img/immobili/UFF2247/001-1783520917843-000-ufficio-barchessa-2-wmk-0.webp",
     "scenes": [
       {
@@ -104,7 +104,6 @@
     ]
   },
   "casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno": {
-    "homepage": false,
     "titolo": "Casa singola ad Altichiero",
     "comune": "Padova",
     "codice": "LP0286",
@@ -158,7 +157,6 @@
     ]
   },
   "elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova": {
-    "homepage": false,
     "titolo": "Quadrilocale a Mandria",
     "comune": "Padova",
     "codice": "LA0317",
