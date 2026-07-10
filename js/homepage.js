@@ -263,10 +263,14 @@ function vtImmobiliHref(p) {
 function vtCoverUrl(p, catalog) {
   var found = findVtCatalogEntry(p, catalog);
   var cat = found ? found.entry : null;
-  var coverRaw = (cat && cat.cover) || p.foto_principale || (p.foto_urls && p.foto_urls[0]) || (p.foto && p.foto[0]) || '';
+  var coverRaw = (cat && cat.cover) || p.foto_principale || (p.foto && p.foto[0]) || (p.foto_urls && p.foto_urls[0]) || '';
   var scene0 = (p.virtual_tour_scenes || []).find(function(s) { return s && (s.url || s.thumbnail); });
   if (!coverRaw && scene0) coverRaw = scene0.url || scene0.thumbnail;
-  return resolveImageUrl(coverRaw || '');
+  var resolved = resolveImageUrl(coverRaw || '');
+  if (resolved && /supabase\.co\/storage/.test(resolved) && p.foto && p.foto[0]) {
+    resolved = resolveImageUrl(p.foto[0]);
+  }
+  return resolved;
 }
 
 function renderVisiteVirtualiHome(arr, catalog) {
@@ -435,6 +439,18 @@ function mergeTourWithCatalog(tour, catalog) {
   if (cat.scenes && cat.scenes.length) {
     merged.virtual_tour_scenes = cat.scenes.map(function(s) {
       return { nome: s.nome, url: s.img, thumbnail: s.img };
+    });
+  } else if (Array.isArray(merged.virtual_tour_scenes)) {
+    merged.virtual_tour_scenes = merged.virtual_tour_scenes.map(function(s) {
+      if (!s) return s;
+      var raw = s.url || s.thumbnail || '';
+      if (raw.indexOf('img/') === 0) return s;
+      var local = resolveImageUrl(raw);
+      if (local && local.indexOf('/img/immobili/') !== -1) {
+        var path = local.split('.it/')[1] || local;
+        return { nome: s.nome, url: path, thumbnail: path };
+      }
+      return s;
     });
   }
   if (!String(merged.slug || '').trim() && found.key) merged.slug = found.key;

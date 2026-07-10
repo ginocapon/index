@@ -121,16 +121,25 @@
   }
 
   function loadTourFromJson(tourSlug) {
-    return fetch('data/visite-virtuali.json')
-      .then(function (r) {
-        if (!r.ok) throw new Error('catalog');
+    var urls = ['/data/visite-virtuali.json', 'data/visite-virtuali.json'];
+    function tryFetch(i) {
+      if (i >= urls.length) return Promise.reject(new Error('catalog'));
+      return fetch(urls[i], { cache: 'no-store' }).then(function (r) {
+        if (!r.ok) return tryFetch(i + 1);
         return r.json();
-      })
-      .then(function (data) {
-        var tour = tourFromCatalogEntry(findCatalogTour(data, tourSlug));
-        if (!tour) throw new Error('missing');
-        return tour;
-      });
+      }).catch(function () { return tryFetch(i + 1); });
+    }
+    return tryFetch(0).then(function (data) {
+      var tour = tourFromCatalogEntry(findCatalogTour(data, tourSlug));
+      if (!tour) throw new Error('missing');
+      return tour;
+    });
+  }
+
+  function loadTour(slug) {
+    return loadTourFromJson(slug).catch(function () {
+      return loadTourFromSupabase(slug);
+    });
   }
 
   function applyTransform() {
@@ -326,8 +335,12 @@
       return;
     }
 
-    loadTourFromSupabase(slug)
-      .catch(function () { return loadTourFromJson(slug); })
+    var manifestReady = (window.RigMedia && RigMedia.loadManifest)
+      ? RigMedia.loadManifest()
+      : Promise.resolve();
+
+    manifestReady
+      .then(function () { return loadTour(slug); })
       .then(function (tour) { initUI(tour); })
       .catch(function () {
         showError('Visita virtuale non disponibile per questo immobile. L\'annuncio potrebbe essere stato venduto o rimosso.');
