@@ -274,7 +274,7 @@ function renderVisiteVirtualiHome(arr, catalog) {
   if (!grid || !arr.length) return;
   const tilts = ['vt-tilt-l', 'vt-tilt-r', 'vt-tilt-r', 'vt-tilt-l'];
   grid.innerHTML = arr.map(function(p, i) {
-    const slug = String(p.slug || '').trim();
+    const slug = vtResolveSlug(p, catalog);
     if (!slug) return '';
     const cover = vtCoverUrl(p, catalog);
     const comune = p.comune || 'Padova';
@@ -317,32 +317,56 @@ function catalogEntryToProperty(slug, entry) {
   };
 }
 
-function mergeVtCatalogSupplement(tours, catalog, maxAdd) {
+function mergeVtCatalogSupplement(tours, catalog, activeData, maxAdd) {
   if (!catalog || maxAdd <= 0) return tours;
+  var activeCodes = {};
+  if (activeData && activeData.length) {
+    activeData.forEach(function(r) {
+      if (!isActiveListing(r)) return;
+      var c = String(r.codice || '').trim().toUpperCase();
+      if (c) activeCodes[c] = true;
+    });
+  }
   var used = {};
-  tours.forEach(function(p) { if (p.slug) used[p.slug] = true; });
+  tours.forEach(function(p) {
+    var s = String(p.slug || '').trim();
+    if (s) used[s] = true;
+  });
   var slugs = Object.keys(catalog);
-  for (var i = 0; i < slugs.length && tours.length < VT_PREVIEW; i++) {
+  for (var i = 0; i < slugs.length && tours.length < VT_PREVIEW && maxAdd > 0; i++) {
     var slug = slugs[i];
+    var entry = catalog[slug];
+    if (!entry || entry.homepage === false) continue;
     if (used[slug]) continue;
-    var prop = catalogEntryToProperty(slug, catalog[slug]);
+    var cod = String(entry.codice || '').trim().toUpperCase();
+    if (activeData && activeData.length && (!cod || !activeCodes[cod])) continue;
+    var prop = catalogEntryToProperty(slug, entry);
     if (!prop || !hasVirtualTour(prop)) continue;
     tours.push(prop);
     used[slug] = true;
     maxAdd--;
-    if (maxAdd <= 0) break;
   }
   return tours;
 }
 
 async function fetchVtCatalog() {
-  try {
-    var res = await fetch('data/visite-virtuali.json');
-    if (!res.ok) return null;
-    return await res.json();
-  } catch (e) {
-    return null;
+  var urls = ['/data/visite-virtuali.json', 'data/visite-virtuali.json'];
+  for (var u = 0; u < urls.length; u++) {
+    try {
+      var res = await fetch(urls[u], { cache: 'no-store' });
+      if (!res.ok) continue;
+      var json = await res.json();
+      if (json && typeof json === 'object' && Object.keys(json).length) return json;
+    } catch (e) {}
   }
+  return null;
+}
+
+function vtResolveSlug(p, catalog) {
+  var slug = String(p.slug || '').trim();
+  if (slug) return slug;
+  var found = findVtCatalogEntry(p, catalog);
+  return found ? found.key : '';
 }
 
 function toursFromSupabaseActive(data, catalog) {
@@ -363,11 +387,13 @@ async function loadVisiteVirtualiHome() {
   const grid = document.getElementById('vtGridHome');
   if (!grid) return;
   try {
+    var catalogPromise = fetchVtCatalog();
     if (typeof RigMedia !== 'undefined' && RigMedia.loadManifest) {
       await RigMedia.loadManifest();
     }
-    var catalog = await fetchVtCatalog();
+    var catalog = await catalogPromise;
     var tours = [];
+    var activeData = null;
 
     initSB();
     if (sb) {
@@ -378,7 +404,15 @@ async function loadVisiteVirtualiHome() {
         .order('created_at', { ascending: false })
         .limit(60);
       if (!error && data && data.length) {
+        activeData = data;
         tours = toursFromSupabaseActive(data, catalog);
+        if (tours.length < VT_PREVIEW && !catalog) {
+          catalog = await fetchVtCatalog();
+          if (catalog) tours = toursFromSupabaseActive(data, catalog);
+        }
+        if (tours.length < VT_PREVIEW && catalog) {
+          tours = mergeVtCatalogSupplement(tours, catalog, data, VT_PREVIEW - tours.length);
+        }
       }
     }
 
@@ -403,6 +437,7 @@ function mergeTourWithCatalog(tour, catalog) {
       return { nome: s.nome, url: s.img, thumbnail: s.img };
     });
   }
+  if (!String(merged.slug || '').trim() && found.key) merged.slug = found.key;
   return merged;
 }
 
