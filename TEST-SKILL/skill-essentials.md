@@ -36,6 +36,29 @@
 12. **Cache-busting obbligatorio** — ogni CSS/JS linkato DEVE avere `?v=N`. Incrementare ad ogni modifica
 13. **Form lead (landing / blog / servizi)** — invio **in pagina** con `SERVIZI_CONFIG.sendNotifica()` + insert Supabase `richieste`; **mai** solo redirect GET a Contatti; **mai** chiamare `send-mail.php` dal browser. Dettaglio: **`TEST-SKILL/skill-forms-leads.md`**
 14. **Foto annunci (luglio 2026)** — servite da `righettoimmobiliare.it/img/immobili/` (GitHub Pages). Dopo upload in admin: sync **automatico** ogni 6 h via `.github/workflows/sync-media-github.yml` — **non** chiedere all'utente comandi manuali. Dettaglio: **`TEST-SKILL/skill-media-migration.md`**
+15. **Title e meta description (BLOCCANTE)** — su **ogni** pagina HTML creata o modificata: vedi **§1.2** sotto; verificare con `validate-page.js` **prima** del commit
+
+### 1.2 Title e Meta — gate obbligatorio (luglio 2026)
+
+**Applies to:** blog, zone, landing, servizi, pillar, pagine generiche — qualsiasi contenuto con `<title>` e meta description.
+
+| Campo | Target SEO (ideale) | Massimo (audit admin = warning) |
+|-------|---------------------|----------------------------------|
+| `<title>` | **≤60 caratteri** | **≤70** (oltre = warning in Audit Sito) |
+| `meta name="description"` | **120–155 caratteri** | **≤160** (oltre = warning) |
+
+**Regola agente (BLOCCANTE a fine task contenuti):**
+1. Contare i caratteri di title e meta **prima** di committare.
+2. Eseguire `node scripts/validate-page.js --file percorso-pagina.html` (o `--staged`).
+3. Se title >70 o meta >160 → **accorciare** nel file; non consegnare con warning evitabili.
+4. Title, H1 e meta devono usare **varianti diverse** (mai la stessa frase ripetuta).
+
+**Template zone (evitare):** `Case in Vendita e Affitto a {Zona}, Padova | Righetto Immobiliare` (~73 char).  
+**Preferire:** `{Zona} Padova: vendita e affitto | Righetto` oppure `Affitti e vendita {Zona} Padova | Righetto`.
+
+**Strumenti allineati:** Audit admin → Audit Sito · pre-commit `validate-page.js` · venerdì `mini-seo-check.sh` · batch `patch_compliance_warns.py`.
+
+Dettaglio SEO: **`skill-massimo-punteggio.md` §2.2** · **`skill-content.md`** meta articolo · **`skill-seo.md`**.
 
 ### Registrazione automatica nuove pagine
 - **Blog** → `admin.html` (`_blogSeedArticles` con `data_pubblicazione: 'YYYY-MM-DD'`) + `blog.html` + `js/homepage.js` (staticMap + articoliStatici) + `sitemap.xml`
@@ -68,7 +91,7 @@ Dopo **ogni** task che produce o modifica file nel repo (pagine, blog, CSS/JS, s
 
 ## 2. CHECKLIST PER OGNI NUOVA PAGINA
 
-- [ ] Title unico (max 60 char) + Meta description (max 160 char)
+- [ ] **Title/meta (§1.2 BLOCCANTE):** title ≤60 (max 70), meta 120–155 (max 160) — `validate-page.js` OK
 - [ ] H1 unico + Alt text su tutte le immagini
 - [ ] Schema.org: `RealEstateAgent` + `GeoCoordinates` + `FAQPage` + `BreadcrumbList` + `sameAs` social
 - [ ] Open Graph tags + Canonical URL (senza `.html`)
@@ -111,6 +134,7 @@ Dopo **ogni** task che produce o modifica file nel repo (pagine, blog, CSS/JS, s
 
 ## 3. VERIFICHE POST-MODIFICA
 
+- [ ] **Title e meta verificati** su ogni HTML toccato — §1.2 + `node scripts/validate-page.js --file …`
 - [ ] **Commit + push eseguiti** se ci sono file modificati (§1.1) — non delegare all'utente
 
 **Automatiche (pre-commit hook):**

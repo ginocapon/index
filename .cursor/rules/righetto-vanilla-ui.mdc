@@ -30,4 +30,5 @@ Dettaglio: **`TEST-SKILL/skill-design.md`** + regole in **`skill-essentials.md`*
 
 ## Dopo modifica UI
 - Verifica responsive 768px e 480px
+- Se nuova/modificata pagina HTML: **§1.2 `skill-essentials.md`** + `node scripts/validate-page.js --file …`
 - Se nuova pagina: checklist `skill-essentials.md` §2

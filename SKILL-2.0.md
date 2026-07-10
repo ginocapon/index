@@ -8,6 +8,8 @@ Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutt
 
 **Regole Cursor scoped:** [`TEST-SKILL/skill-cursor-rules.md`](TEST-SKILL/skill-cursor-rules.md) — 7 file `.mdc` in `.cursor/rules/` (pattern awesome-cursorrules).
 
+**Changelog rapido (10 luglio 2026):** title/meta gate obbligatorio su ogni contenuto — `skill-essentials.md` **§1.2** + `validate-page.js` (≤60/≤70 title, ≤160 meta).
+
 **Changelog rapido (9 luglio 2026):** media annunci — foto/reel su GitHub Pages (`img/immobili/`, `img/video/reels/`); sync automatico ogni 6 h (`sync-media-github.yml`); **`TEST-SKILL/skill-media-migration.md`**.
 
 **Changelog rapido (3 luglio 2026 — f):** chatbot Linda — §**8.1e** FAQ↔blog, `scripts/audit_chatbot_faq.py`, +38 voci FAQ da skimm.

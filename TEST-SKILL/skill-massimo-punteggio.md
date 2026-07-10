@@ -60,8 +60,9 @@ bash scripts/mini-seo-check.sh && bash scripts/audit-skill.sh
 - [ ] Mobile-first: layout OK a 375px
 
 ### 2.2 On-page SEO
-- [ ] `<title>` unico, ≤60 caratteri, keyword + località
-- [ ] Meta description unica, ≤160 caratteri, dato/beneficio
+- [ ] `<title>` unico, **≤60 caratteri** (max **70** — soglia audit admin), keyword + località
+- [ ] Meta description unica, **120–155 caratteri** (max **160**), dato/beneficio
+- [ ] **Verifica automatica:** `node scripts/validate-page.js --file pagina.html` a fine task contenuti (`skill-essentials.md` §1.2)
 - [ ] H1 unico allineato al title (variante, non copia)
 - [ ] Gerarchia H2/H3 logica, H2 domanda per AEO dove possibile
 - [ ] Alt text descrittivo su ogni `<img>`
