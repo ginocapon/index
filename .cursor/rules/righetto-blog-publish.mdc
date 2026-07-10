@@ -33,7 +33,7 @@ Dettaglio: **`TEST-SKILL/skill-content.md`**, **`TEST-SKILL/skimm.md`**, **`SKIL
 - `blog.html` + homepage blog: **solo ordine data**, niente sezione «In evidenza» che toglie card dalla griglia
 
 ## Secondo passaggio obbligatorio (agente)
-Prima di chiudere: `check_doppioni_sito.py` → `validate-page.js` → grep 4 registri → verifica immagini realistiche sotto `img/` → ordine data OK. Se fallisce, fix e ripeti.
+Prima di chiudere: `check_doppioni_sito.py` → **`validate-page.js`** (title ≤70, meta ≤160 — §1.2 essentials) → grep 4 registri → verifica immagini realistiche sotto `img/` → ordine data OK. Se fallisce, fix e ripeti.
 
 ## Registrazione obbligatoria (tutti e 4)
 - `admin.html` → `_blogSeedArticles` con `data_pubblicazione: 'YYYY-MM-DD'`

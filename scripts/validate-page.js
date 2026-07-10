@@ -60,13 +60,15 @@ function validateMeta(file, html) {
   // Title tag
   const title = html.match(/<title>(.*?)<\/title>/s);
   if (!title) return error(file, 'Manca <title> tag');
-  if (title[1].length > 70) warn(file, `Title troppo lungo (${title[1].length} char, max 60-70)`);
+  if (title[1].length > 70) warn(file, `Title troppo lungo (${title[1].length} char, max 70 — target 60)`);
+  else if (title[1].length > 60) warn(file, `Title oltre target SEO (${title[1].length} char, ideale ≤60)`);
   else ok(file, `Title OK (${title[1].length} char)`);
 
   // Meta description
   const desc = html.match(/<meta\s+name="description"\s+content="([^"]*)"/);
   if (!desc) return error(file, 'Manca meta description');
-  if (desc[1].length > 170) warn(file, `Meta description troppo lunga (${desc[1].length} char, max 160)`);
+  if (desc[1].length > 160) warn(file, `Meta description troppo lunga (${desc[1].length} char, max 160)`);
+  else if (desc[1].length > 155) warn(file, `Meta description oltre target (${desc[1].length} char, ideale ≤155)`);
   else ok(file, `Meta description OK (${desc[1].length} char)`);
 
   // H1

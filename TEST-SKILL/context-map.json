@@ -22,7 +22,7 @@
       "skills": ["skill-essentials.md", "skill-forms-leads.md", "skill-context.md", "skill-design.md"],
       "cursor_rules": ["righetto-vanilla-ui.mdc", "righetto-forms-leads.mdc"],
       "token_stimati": "~1.800",
-      "note": "Serve architettura + componenti UI + form invio diretto (sendNotifica + richieste)"
+      "note": "Serve architettura + componenti UI + form invio diretto (sendNotifica + richieste). Title/meta §1.2 + validate-page.js"
     },
     "loft_aziende_media_durata": {
       "skills": ["skill-essentials.md", "skill-gestione-loft-aziende.md", "skill-forms-leads.md", "skill-design.md"],
@@ -34,7 +34,7 @@
       "skills": ["skill-essentials.md", "skill-content.md", "skill-forms-leads.md"],
       "cursor_rules": ["righetto-blog-publish.mdc"],
       "token_stimati": "~2.000",
-      "note": "BLOCCANTE §8.1a: leggi TEST-SKILL/skimm.md + check_doppioni_sito.py + build_skimm.py; kw_primaria univoca; se doppione → altro tema da fonte istituzionale. Poi template blog; se CTA/form lead → skill-forms-leads"
+      "note": "BLOCCANTE §8.1a: leggi TEST-SKILL/skimm.md + check_doppioni_sito.py + build_skimm.py; kw_primaria univoca; se doppione → altro tema da fonte istituzionale. Poi template blog; se CTA/form lead → skill-forms-leads. Title/meta: skill-essentials §1.2 + validate-page.js"
     },
     "form_lead_invio_email": {
       "skills": ["skill-essentials.md", "skill-forms-leads.md", "skill-context.md"],
@@ -44,7 +44,7 @@
     "nuova_zona_page": {
       "skills": ["skill-essentials.md", "skill-content.md", "skill-seo.md"],
       "token_stimati": "~2.500",
-      "note": "Serve struttura zona + SEO locale + schema"
+      "note": "Serve struttura zona + SEO locale + schema. Title zona ≤60 char (max 70) — §1.2 skill-essentials"
     },
     "audit_seo": {
       "skills": ["skill-essentials.md", "skill-massimo-punteggio.md", "skill-seo.md"],

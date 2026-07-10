@@ -9,7 +9,9 @@ alwaysApply: false
 Dettaglio: **`TEST-SKILL/skill-seo.md`** · Neural Matching §8.3 in **`SKILL-2.0.md`**.
 
 ## On-page (ogni pagina)
-- Title unico ≤60 char · meta description ≤160 · **H1 unico**
+- Title **≤60 char** (max **70** audit) · meta **120–155** (max **160**) — **`skill-essentials.md` §1.2**
+- Verifica: `node scripts/validate-page.js --file …` a fine task
+- **H1 unico** · varianti diverse da title/meta
 - Canonical + OG senza `.html`
 - Schema: `RealEstateAgent`, `FAQPage`, `BreadcrumbList` dove applicabile
 - Zone: `Place` + `GeoCoordinates` · Pro/Contro 4+4 · min 5 FAQ schema

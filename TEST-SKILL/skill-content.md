@@ -108,15 +108,18 @@ Checklist operativa unificata: **`skill-massimo-punteggio.md` §4**. Manutenzion
 - MAI dati inventati — se non disponibili: "dato non pubblico" o omettere
 - Aggiornare dati OMI ogni trimestre
 
-### Meta tags articolo
-| Campo | Requisito |
-|---|---|
-| Title | Max 60-70 char, keyword + localizzazione |
-| Meta description | Max 155-160 char, con dato numerico e CTA implicita |
-| article:published_time | ISO 8601 (es. 2026-03-04T09:00:00+01:00) |
-| article:author | Gino Capon o Linda Righetto |
-| article:section | Categoria cluster (es. "Guida alla vendita") |
-| article:tag | 3-5 keyword rilevanti |
+### Meta tags articolo — gate §1.2 `skill-essentials.md`
+
+| Campo | Target | Max audit |
+|---|---|---|
+| Title | **≤60 char**, keyword + localizzazione | **70** |
+| Meta description | **120–155 char**, dato numerico + CTA implicita | **160** |
+| article:published_time | ISO 8601 (es. 2026-03-04T09:00:00+01:00) | — |
+| article:author | Gino Capon o Linda Righetto | — |
+| article:section | Categoria cluster (es. "Guida alla vendita") | — |
+| article:tag | 3-5 keyword rilevanti | — |
+
+Prima del commit: `node scripts/validate-page.js --file blog-….html`. Title/H1/meta = **varianti diverse**.
 
 ### Schema JSON-LD triplo (obbligatorio)
 1. `Article` — headline, author (Person), publisher, datePublished/Modified, wordCount

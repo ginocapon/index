@@ -61,6 +61,17 @@ bash scripts/audit-skill.sh                  # 100%
 
 ## 4. REQUISITI GOOGLE 2026
 
+### 4.0 Title e Meta — gate obbligatorio (`skill-essentials.md` §1.2)
+
+Su **ogni** pagina (blog, zona, landing, servizio, pillar):
+
+| Campo | Target | Max (audit admin) |
+|---|---|---|
+| `<title>` | ≤60 char | ≤70 |
+| Meta description | 120–155 char | ≤160 |
+
+**Agente:** `node scripts/validate-page.js --file pagina.html` prima del commit. Zone: evitare template titolo >70 char.
+
 ### Core Web Vitals — Soglie
 | Metrica | Buono | Scarso |
 |---|---|---|

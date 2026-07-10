@@ -19,6 +19,10 @@ La skill e' l'unica fonte di verita' per questo progetto.
 - Foto pubbliche su `img/immobili/` (GitHub Pages) — **sync automatico ogni 6 h** (`sync-media-github.yml`)
 - Dopo upload in admin: **non** chiedere comandi manuali all'utente; dettaglio: **`TEST-SKILL/skill-media-migration.md`**
 
+### Title e meta (luglio 2026 — ogni contenuto):
+- **`TEST-SKILL/skill-essentials.md` §1.2** — title ≤60 (max 70), meta ≤160
+- Prima del commit: `node scripts/validate-page.js --file pagina.html`
+
 ### Codice:
 - Solo HTML/CSS/JS vanilla — zero framework, zero librerie esterne
 - No `filter: blur` su animazioni — solo `opacity` e `transform`
