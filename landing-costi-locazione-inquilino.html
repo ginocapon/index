@@ -621,6 +621,7 @@ footer a{color:var(--oro2)}
 </footer>
 <div id="calc-print-sheet" hidden aria-hidden="true"></div>
 <script src="js/vendor/supabase.min.js"></script>
+<script src="js/vendor/jspdf.umd.min.js"></script>
 <script src="js/config.js?v=4"></script>
 <script>
 var SB_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
@@ -712,6 +713,139 @@ function printCostiCalcPdf() {
   var pack = window._calcLastResult;
   if (!pack) return;
 
+  var btn = document.querySelector('.calc-btn-pdf');
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = '⏳ Generazione PDF…';
+  }
+
+  function done() {
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = '📄 Scarica PDF / Stampa';
+    }
+  }
+
+  try {
+    if (window.jspdf && window.jspdf.jsPDF) {
+      generaCostiCalcPDF(pack);
+      done();
+      return;
+    }
+  } catch (err) {
+    console.error('PDF jsPDF:', err);
+  }
+
+  try {
+    printCostiCalcIframe(pack);
+  } catch (err2) {
+    alert('Impossibile generare il PDF. Riprova o contattaci al 049.8843484.');
+  }
+  done();
+}
+
+function generaCostiCalcPDF(pack) {
+  var data = pack.data;
+  var result = pack.result;
+  var tipoLabel = pack.tipoLabel;
+  var oggi = new Date().toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+  var jsPDF = window.jspdf.jsPDF;
+  var doc = new jsPDF({ unit: 'mm', format: 'a4' });
+  var W = 210;
+  var blu = [44, 74, 110];
+  var oro = [201, 168, 76];
+  var grigio = [107, 122, 141];
+  var y = 18;
+
+  doc.setFillColor.apply(doc, blu);
+  doc.rect(0, 0, W, 42, 'F');
+  doc.setFillColor.apply(doc, oro);
+  doc.rect(0, 42, W, 2, 'F');
+
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(20);
+  doc.setFont('helvetica', 'bold');
+  doc.text('RIGHETTO IMMOBILIARE', W / 2, 14, { align: 'center' });
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Via Roma n.96 — 35010 Limena (PD) · P.IVA 05182390285', W / 2, 22, { align: 'center' });
+  doc.setFontSize(13);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Prospetto costi ingresso locazione', W / 2, 34, { align: 'center' });
+
+  y = 52;
+  doc.setTextColor.apply(doc, blu);
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'bold');
+  doc.text(tipoLabel, 15, y);
+  y += 6;
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor.apply(doc, grigio);
+  doc.text('Canone mensile: ' + fmtEuro(data.canone) + ' · Generato il ' + oggi, 15, y);
+  y += 10;
+
+  doc.setFillColor.apply(doc, blu);
+  doc.rect(15, y, W - 30, 8, 'F');
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(8);
+  doc.setFont('helvetica', 'bold');
+  doc.text('VOCE', 18, y + 5.5);
+  doc.text('IMPORTO', W - 18, y + 5.5, { align: 'right' });
+  y += 8;
+
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(21, 36, 53);
+  result.rows.forEach(function (row, i) {
+    if (row.skip) return;
+    if (row.optional && !row.amount) return;
+    if (i % 2 === 0) {
+      doc.setFillColor(245, 242, 237);
+      doc.rect(15, y, W - 30, 9, 'F');
+    }
+    doc.text(row.label, 18, y + 6);
+    doc.setFont('helvetica', 'bold');
+    doc.text(fmtEuro(row.amount), W - 18, y + 6, { align: 'right' });
+    doc.setFont('helvetica', 'normal');
+    y += 9;
+  });
+
+  doc.setFillColor.apply(doc, oro);
+  doc.rect(15, y, W - 30, 11, 'F');
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(21, 36, 53);
+  doc.text('Totale indicativo ingresso', 18, y + 7);
+  doc.setFontSize(12);
+  doc.text(fmtEuro(result.totale), W - 18, y + 7.5, { align: 'right' });
+  doc.setFontSize(8);
+  y += 14;
+
+  doc.setFont('helvetica', 'italic');
+  doc.setTextColor.apply(doc, grigio);
+  doc.text('Provvigione agenzia: da concordare in sede con l\'agente Righetto preposto.', 15, y, { maxWidth: W - 30 });
+  y += 10;
+  doc.text('Nota: cifre orientative, non vincolanti. Conferma ogni importo con l\'agente di zona.', 15, y, { maxWidth: W - 30 });
+
+  y += 18;
+  doc.setFillColor(236, 231, 223);
+  doc.roundedRect(15, y, W - 30, 28, 3, 3, 'F');
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor.apply(doc, blu);
+  doc.setFontSize(10);
+  doc.text('Contatti Righetto Immobiliare', 20, y + 8);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  doc.setTextColor(21, 36, 53);
+  doc.text('Tel. 049.8843484 · Cell. 349 736 5930', 20, y + 15);
+  doc.text('info@righettoimmobiliare.it · righettoimmobiliare.it', 20, y + 21);
+
+  doc.setFontSize(7);
+  doc.setTextColor.apply(doc, grigio);
+  doc.text('© 2026 Gruppo Immobiliare Righetto — Guida costi locazione inquilino', W / 2, 285, { align: 'center' });
+
+  doc.save('Prospetto-costi-locazione-Righetto.pdf');
+}
+
+function printCostiCalcIframe(pack) {
   var data = pack.data;
   var result = pack.result;
   var tipoLabel = pack.tipoLabel;
@@ -725,39 +859,26 @@ function printCostiCalcPdf() {
   });
   rowsHtml += '<tr style="background:#f5f0e6"><td style="padding:12px;font-weight:700">Totale indicativo ingresso</td><td style="padding:12px;text-align:right;font-weight:700;font-size:1.1rem">' + fmtEuro(result.totale) + '</td></tr>';
 
-  var printHtml = '<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><title>Prospetto costi locazione — Righetto</title><style>' +
-    'body{font-family:Georgia,serif;color:#152435;margin:0;padding:32px 40px;line-height:1.5}' +
-    '.head{border-bottom:3px solid #C9A84C;padding-bottom:16px;margin-bottom:24px}' +
-    '.brand{font-size:1.5rem;font-weight:700;color:#2C4A6E}.brand span{color:#C9A84C;font-style:italic}' +
-    '.meta{font-size:.85rem;color:#6B7A8D;margin-top:8px}' +
-    'h1{font-size:1.35rem;margin:0 0 8px;color:#2C4A6E}' +
-    '.sub{font-size:.9rem;color:#6B7A8D;margin-bottom:20px}' +
-    'table{width:100%;border-collapse:collapse;font-size:.88rem;margin:16px 0}' +
-    'th{background:#2C4A6E;color:#fff;padding:10px 12px;text-align:left;font-size:.75rem;text-transform:uppercase}' +
-    '.foot{margin-top:28px;padding-top:16px;border-top:1px solid #ddd;font-size:.78rem;color:#6B7A8D}' +
-    '.contacts{background:#ECE7DF;padding:14px 18px;border-radius:8px;margin-top:16px;font-size:.85rem}' +
-    '@media print{body{padding:20px}}' +
-    '</style></head><body>' +
-    '<div class="head"><div class="brand">Righetto <span>Immobiliare</span></div>' +
-    '<div class="meta">Via Roma n.96 — 35010 Limena (PD) · P.IVA 05182390285</div></div>' +
-    '<h2 style="font-size:1.35rem;margin:0 0 8px;color:#2C4A6E;border:none">Prospetto costi ingresso locazione</h2>' +
-    '<p class="sub">' + tipoLabel + '<br>Canone mensile: ' + fmtEuro(data.canone) + ' · Generato il ' + oggi + '</p>' +
+  var html = '<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><title>Prospetto costi locazione</title><style>body{font-family:Georgia,serif;color:#152435;margin:0;padding:32px 40px}table{width:100%;border-collapse:collapse}th{background:#2C4A6E;color:#fff;padding:10px}</style></head><body>' +
+    '<h2 style="color:#2C4A6E">Righetto Immobiliare — Prospetto costi ingresso</h2>' +
+    '<p>' + tipoLabel + '<br>Canone: ' + fmtEuro(data.canone) + ' · ' + oggi + '</p>' +
     '<table><thead><tr><th>Voce</th><th style="text-align:right">Importo</th></tr></thead><tbody>' + rowsHtml + '</tbody></table>' +
-    '<p style="font-size:.8rem"><strong>Nota:</strong> cifre orientative, non vincolanti. Esclusa provvigione agenzia (da concordare in sede). Conferma ogni importo con l\'agente Righetto preposto.</p>' +
-    '<div class="contacts"><strong>Contatti</strong><br>Tel. 049.8843484 · Cell. 349 736 5930<br>info@righettoimmobiliare.it · righettoimmobiliare.it</div>' +
-    '<div class="foot">© 2026 Gruppo Immobiliare Righetto di Capon Gino — Documento generato dalla guida costi locazione inquilino.</div>' +
-    '</body></html>';
+    '<p style="font-size:.8rem">Tel. 049.8843484 · info@righettoimmobiliare.it</p></body></html>';
 
-  var w = window.open('', '_blank', 'noopener,noreferrer');
-  if (!w) {
-    alert('Consenti i popup per scaricare il PDF, oppure usa Stampa pagina (Ctrl+P) sulla tabella.');
-    return;
+  var frame = document.getElementById('calc-print-frame');
+  if (!frame) {
+    frame = document.createElement('iframe');
+    frame.id = 'calc-print-frame';
+    frame.setAttribute('title', 'Stampa prospetto costi');
+    frame.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden';
+    document.body.appendChild(frame);
   }
-  w.document.open();
-  w.document.write(printHtml);
-  w.document.close();
-  w.focus();
-  setTimeout(function () { w.print(); }, 400);
+  var doc = frame.contentWindow.document;
+  doc.open();
+  doc.write(html);
+  doc.close();
+  frame.contentWindow.focus();
+  frame.contentWindow.print();
 }
 
 document.addEventListener('DOMContentLoaded', updateCostiCalc);
