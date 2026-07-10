@@ -62,6 +62,7 @@ ALTER TABLE IF EXISTS public.email_blacklist ENABLE ROW LEVEL SECURITY;
 ALTER TABLE IF EXISTS public.email_tracking ENABLE ROW LEVEL SECURITY;
 ALTER TABLE IF EXISTS public.smtp_config ENABLE ROW LEVEL SECURITY;
 ALTER TABLE IF EXISTS public.gruppi_email ENABLE ROW LEVEL SECURITY;
+ALTER TABLE IF EXISTS public.documenti_generali ENABLE ROW LEVEL SECURITY;
 
 DO $$
 BEGIN
@@ -199,6 +200,12 @@ CREATE POLICY "smtp_config_admin_all"
 DROP POLICY IF EXISTS "gruppi_email_admin_all" ON public.gruppi_email;
 CREATE POLICY "gruppi_email_admin_all"
   ON public.gruppi_email FOR ALL TO anon
+  USING (public.righetto_is_admin_request())
+  WITH CHECK (public.righetto_is_admin_request());
+
+DROP POLICY IF EXISTS "documenti_generali_admin_all" ON public.documenti_generali;
+CREATE POLICY "documenti_generali_admin_all"
+  ON public.documenti_generali FOR ALL TO anon
   USING (public.righetto_is_admin_request())
   WITH CHECK (public.righetto_is_admin_request());
 
