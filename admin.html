@@ -804,6 +804,51 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 }
 .doc-del:hover { background: #c0392b; }
 
+/* DOCUMENTI GENERALI */
+.doc-gen-rif-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.doc-gen-rif-card {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 14px; background: linear-gradient(135deg, #fffef5 0%, #fff 100%);
+  border: 1px solid var(--oro2); border-left: 4px solid var(--oro);
+  border-radius: 10px;
+}
+.doc-gen-rif-arrows, .doc-gen-gruppo-arrows { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+.doc-gen-rif-arrows button, .doc-gen-gruppo-arrows button {
+  width: 28px; height: 24px; border: 1px solid var(--caffe3); background: #fff;
+  border-radius: 6px; cursor: pointer; font-size: 10px; color: var(--nero);
+}
+.doc-gen-rif-arrows button:disabled, .doc-gen-gruppo-arrows button:disabled { opacity: 0.35; cursor: default; }
+.doc-gen-rif-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.doc-gen-title-input, .doc-gen-link-input, .doc-gen-note-input {
+  width: 100%; padding: 8px 10px; border: 1px solid var(--caffe3); border-radius: 8px;
+  font-size: 0.82rem; font-family: inherit;
+}
+.doc-gen-title-lg { font-weight: 600; font-size: 0.92rem; }
+.doc-gen-rif-open { font-size: 0.75rem; color: var(--nero); }
+.doc-gen-card {
+  background: #fff; border: 1px solid var(--caffe3); border-radius: 12px;
+  padding: 16px; margin-bottom: 16px;
+}
+.doc-gen-card-head { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; }
+.doc-gen-del-gruppo {
+  background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 4px; flex-shrink: 0;
+}
+.doc-gen-drop { margin-bottom: 12px; min-height: 100px; }
+.doc-gen-file-row {
+  display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+  background: var(--sfondo); border-radius: 8px; margin-bottom: 6px; border: 1px solid var(--caffe3);
+}
+.doc-gen-file-arrows { display: flex; flex-direction: column; gap: 2px; }
+.doc-gen-file-arrows button {
+  width: 24px; height: 20px; border: none; background: rgba(58,85,120,0.12);
+  border-radius: 4px; cursor: pointer; font-size: 9px;
+}
+.doc-gen-file-arrows button:disabled { opacity: 0.3; cursor: default; }
+.doc-gen-file-icon { font-size: 1.3rem; flex-shrink: 0; }
+.doc-gen-file-info { flex: 1; min-width: 0; }
+.doc-gen-file-name { font-size: 0.8rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.doc-gen-file-meta { font-size: 0.68rem; color: var(--caffe2); }
+
 /* VT SCENES */
 .vt-scene-card {
   background: var(--sfondo);
@@ -2031,6 +2076,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
       <div class="nav-item" onclick="showSection('audit')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
         Audit Sito
+      </div>
+      <div class="nav-item" onclick="showSection('documentigenerali')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Documenti Generali
       </div>
       <div class="nav-item" onclick="showSection('impostazioni')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -4677,6 +4726,42 @@ META_IG_USER_ID=...</pre>
         </div>
       </div>
 
+      <!-- ═══ SEZIONE DOCUMENTI GENERALI ═══ -->
+      <div class="section" id="sec-documentigenerali">
+        <div class="stats-grid">
+          <div class="stat-card" style="border-left-color:var(--oro)"><div class="stat-num" id="statDocGenRif">0</div><div class="stat-label">Riferimenti in alto</div></div>
+          <div class="stat-card blue"><div class="stat-num" id="statDocGenArg">0</div><div class="stat-label">Argomenti / contratti</div></div>
+          <div class="stat-card green"><div class="stat-num" id="statDocGenFile">0</div><div class="stat-label">File totali</div></div>
+          <div class="stat-card" style="border-left-color:var(--caffe2)"><div class="stat-num" style="font-size:0.72rem;padding-top:8px"><span id="docGenModeBadge" style="display:inline-block;padding:4px 10px;border-radius:6px;font-weight:600">—</span></div><div class="stat-label">Archivio</div></div>
+        </div>
+
+        <div style="margin-bottom:16px;padding:12px 16px;background:#fff8e1;border:1px solid #ffe082;border-radius:8px;font-size:0.82rem;color:#5d4037">
+          <strong>Documenti Generali</strong> — archivio contratti, modelli Word/PDF e allegati. I <strong>riferimenti in alto</strong> restano sempre visibili per le pagine informative su come lavoriamo con i clienti (landing / servizi).
+        </div>
+
+        <div class="table-wrap" style="margin-bottom:20px;padding:16px 20px">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:14px">
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;margin:0">⭐ Pagine di riferimento (sempre in alto)</h3>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="docGenAddGruppo('riferimento')">+ Riferimento</button>
+          </div>
+          <p style="font-size:0.78rem;color:var(--caffe2);margin:0 0 12px">Collegamenti rapidi a landing o pagine che spiegano il metodo Righetto. Usa le frecce per l'ordine.</p>
+          <div id="docGenRiferimenti"></div>
+        </div>
+
+        <div class="table-wrap">
+          <div class="table-head">
+            <div style="font-weight:600;font-size:0.9rem">Archivio documenti</div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+              <input type="search" id="docGenSearch" placeholder="Cerca titolo o file…" oninput="docGenFilterList()" style="padding:8px 12px;border:1px solid var(--caffe3);border-radius:8px;font-size:0.82rem;min-width:200px">
+              <button type="button" class="btn btn-primary btn-sm" onclick="docGenAddGruppo('documento')">+ Nuovo argomento</button>
+            </div>
+          </div>
+          <div style="padding:16px 20px" id="docGenArchivio">
+            <div class="empty-state"><h3>Caricamento…</h3></div>
+          </div>
+        </div>
+      </div>
+
       <!-- ═══ SEZIONE IMPOSTAZIONI ═══ -->
       <div class="section" id="sec-impostazioni">
         <div class="table-wrap" style="padding:28px;max-width:600px">
@@ -5151,7 +5236,7 @@ function showSection(name) {
   const sec = document.getElementById('sec-' + name);
   if (sec) sec.classList.add('active');
   // Mark the correct nav-item as active
-  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','landing','newsletter','agenda','emailmarketing','analytics','trend','audit','impostazioni'];
+  const sectionNames = ['immobili','nuovo','richieste','posta','blog','clienti','social','landing','newsletter','agenda','emailmarketing','analytics','trend','audit','documentigenerali','impostazioni'];
   const idx = sectionNames.indexOf(name);
   const navItems = document.querySelectorAll('.nav-item');
   if (idx >= 0 && navItems[idx]) navItems[idx].classList.add('active');
@@ -5170,6 +5255,7 @@ function showSection(name) {
     emailmarketing: 'Email Marketing',
     trend: 'Trend & Idee Articoli',
     audit: 'Audit Sito',
+    documentigenerali: 'Documenti Generali',
     impostazioni: 'Impostazioni'
   };
   document.getElementById('topbarTitle').textContent = titles[name] || name;
@@ -5186,6 +5272,7 @@ function showSection(name) {
   if (name === 'nuovo') populateProprietarioDropdown();
   if (name === 'trend') initTrendSection();
   if (name === 'audit') initAuditSection();
+  if (name === 'documentigenerali' && typeof loadDocumentiGenerali === 'function') loadDocumentiGenerali();
   if (name === 'impostazioni') { testConn(); check2FAStatus(); }
 }
 
@@ -16211,5 +16298,6 @@ async function initAuditSection() {
   }
 }
 </script>
+<script src="js/admin-documenti-generali.js?v=1"></script>
 </body>
 </html>
