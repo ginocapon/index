@@ -3,9 +3,16 @@
   'use strict';
 
   var DOC_GEN_LS_KEY = 'rig_documenti_generali_v1';
+  var DOC_GEN_MAX_MB = 20;
+  var DOC_GEN_ACCEPT = '.pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.webp,.zip';
+  var DOC_GEN_ALLOWED_EXT = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'jpg', 'jpeg', 'png', 'webp', 'zip'];
   var docGenGruppi = [];
   var docGenUseLocal = false;
   var docGenFilter = '';
+
+  function getSb() {
+    return window.sb || null;
+  }
 
   function esc(s) {
     if (typeof escHtml === 'function') return escHtml(s);
@@ -18,6 +25,20 @@
 
   function genLocalId() {
     return 'local_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+  }
+
+  function storagePublicUrl(bucket, path) {
+    var client = getSb();
+    if (!client) return '';
+    var res = client.storage.from(bucket).getPublicUrl(path);
+    if (res && res.data && res.data.publicUrl) return res.data.publicUrl;
+    if (res && res.publicUrl) return res.publicUrl;
+    return '';
+  }
+
+  function isAllowedDocFile(file) {
+    var ext = (file.name.split('.').pop() || '').toLowerCase();
+    return DOC_GEN_ALLOWED_EXT.indexOf(ext) >= 0;
   }
 
   function normalizeFileList(raw) {
@@ -69,11 +90,11 @@
       },
       {
         id: genLocalId(),
-        titolo: 'Contratti locazione studenti',
+        titolo: 'Locazioni',
         tipo: 'documento',
         ordine: 0,
         link_url: '',
-        note: 'Modelli Word, PDF e allegati JPG',
+        note: 'Modelli Word, PDF, ZIP e allegati JPG',
         file: []
       }
     ];
@@ -83,7 +104,8 @@
     if (!g || !g.id) return;
     g.updated_at = new Date().toISOString();
     g.file = normalizeFileList(g.file);
-    if (docGenUseLocal || !window.sb) {
+    var client = getSb();
+    if (docGenUseLocal || !client) {
       saveLocal();
       return;
     }
@@ -98,7 +120,7 @@
       updated_at: g.updated_at
     };
     if (!row.id) {
-      var ins = await sb.from('documenti_generali').insert({
+      var ins = await client.from('documenti_generali').insert({
         titolo: row.titolo,
         tipo: row.tipo,
         ordine: row.ordine,
@@ -110,23 +132,25 @@
       g.id = ins.data.id;
       return;
     }
-    var upd = await sb.from('documenti_generali').update(row).eq('id', g.id);
+    var upd = await client.from('documenti_generali').update(row).eq('id', g.id);
     if (upd.error) throw upd.error;
   }
 
   async function deleteGruppoDb(id) {
-    if (docGenUseLocal || !window.sb || String(id).startsWith('local_')) return;
-    await sb.from('documenti_generali').delete().eq('id', id);
+    var client = getSb();
+    if (docGenUseLocal || !client || String(id).startsWith('local_')) return;
+    await client.from('documenti_generali').delete().eq('id', id);
   }
 
   window.loadDocumentiGenerali = async function () {
     docGenFilter = (document.getElementById('docGenSearch') || {}).value || '';
     docGenUseLocal = false;
     docGenGruppi = [];
+    var client = getSb();
 
-    if (window.sb) {
+    if (client) {
       try {
-        var res = await sb.from('documenti_generali').select('*').order('ordine', { ascending: true });
+        var res = await client.from('documenti_generali').select('*').order('ordine', { ascending: true });
         if (res.error) {
           if (res.error.code === '42P01' || (res.error.message || '').indexOf('documenti_generali') >= 0) {
             docGenUseLocal = true;
@@ -199,7 +223,7 @@
     });
   }
 
-  function renderFileList(g, gi) {
+  function renderFileList(g) {
     var files = normalizeFileList(g.file);
     if (!files.length) {
       return '<div style="font-size:0.78rem;color:var(--caffe2);padding:8px 0">Nessun file — trascina o clicca per caricare</div>';
@@ -224,8 +248,7 @@
     }).join('');
   }
 
-  function renderRiferimentoCard(g, gi) {
-    var realIdx = docGenGruppi.findIndex(function (x) { return x.id === g.id; });
+  function renderRiferimentoCard(g) {
     return '<div class="doc-gen-rif-card" data-id="' + esc(g.id) + '">' +
       '<div class="doc-gen-rif-arrows">' +
       '<button type="button" onclick="docGenGruppoMove(\'' + g.id + '\',-1)" title="Sposta a sinistra">◀</button>' +
@@ -248,18 +271,18 @@
       '<button type="button" onclick="docGenGruppoMove(\'' + g.id + '\',1)" title="Sposta giù">▼</button>' +
       '</div>' +
       '<div style="flex:1;min-width:0">' +
-      '<input type="text" class="doc-gen-title-input doc-gen-title-lg" value="' + esc(g.titolo) + '" placeholder="Titolo argomento (es. Contratto studenti 4+4)" onchange="docGenUpdateField(\'' + g.id + '\',\'titolo\',this.value)" onblur="docGenSaveGruppo(\'' + g.id + '\')">' +
+      '<input type="text" class="doc-gen-title-input doc-gen-title-lg" value="' + esc(g.titolo) + '" placeholder="Titolo argomento (es. Locazioni studenti, contratti 4+4)" onchange="docGenUpdateField(\'' + g.id + '\',\'titolo\',this.value)" onblur="docGenSaveGruppo(\'' + g.id + '\')">' +
       '<input type="text" class="doc-gen-note-input" value="' + esc(g.note || '') + '" placeholder="Nota breve (opzionale)" onchange="docGenUpdateField(\'' + g.id + '\',\'note\',this.value)" onblur="docGenSaveGruppo(\'' + g.id + '\')">' +
       '</div>' +
       '<button type="button" class="doc-gen-del-gruppo" onclick="docGenDeleteGruppo(\'' + g.id + '\')" title="Elimina argomento">🗑️</button>' +
       '</div>' +
-      '<div class="upload-zone doc-gen-drop" id="docGenDrop-' + esc(g.id) + '" onclick="document.getElementById(\'docGenInput-' + esc(g.id) + '\').click()" ondragover="onDragOver(event)" ondragleave="docGenDragLeave(event,\'' + g.id + '\')" ondrop="docGenOnDrop(event,\'' + g.id + '\')">' +
+      '<div class="upload-zone doc-gen-drop" id="docGenDrop-' + esc(g.id) + '" onclick="docGenPickFiles(\'' + g.id + '\')" ondragover="onDragOver(event)" ondragleave="docGenDragLeave(event,\'' + g.id + '\')" ondrop="docGenOnDrop(event,\'' + g.id + '\')">' +
       '<div style="font-size:1.5rem;margin-bottom:6px">📁</div>' +
       '<div style="font-size:0.82rem;font-weight:600">Trascina file qui o clicca</div>' +
-      '<div style="font-size:0.72rem;color:var(--caffe2);margin-top:4px">Word, PDF, JPG, PNG, Excel — max 20 MB</div>' +
-      '<input type="file" id="docGenInput-' + esc(g.id) + '" multiple style="display:none" onchange="docGenUploadFiles(\'' + g.id + '\',this.files);this.value=\'\'">' +
+      '<div style="font-size:0.72rem;color:var(--caffe2);margin-top:4px">Word, PDF, JPG, PNG, Excel, ZIP — max ' + DOC_GEN_MAX_MB + ' MB</div>' +
+      '<input type="file" id="docGenInput-' + esc(g.id) + '" multiple accept="' + DOC_GEN_ACCEPT + '" style="display:none" onchange="docGenUploadFiles(\'' + g.id + '\',this.files);this.value=\'\'">' +
       '</div>' +
-      '<div class="doc-gen-files">' + renderFileList(g, 0) + '</div>' +
+      '<div class="doc-gen-files">' + renderFileList(g) + '</div>' +
       '</div>';
   }
 
@@ -283,6 +306,11 @@
   function findGruppo(id) {
     return docGenGruppi.find(function (g) { return g.id === id; });
   }
+
+  window.docGenPickFiles = function (id) {
+    var input = document.getElementById('docGenInput-' + id);
+    if (input) input.click();
+  };
 
   window.docGenFilterList = function () {
     docGenFilter = (document.getElementById('docGenSearch') || {}).value || '';
@@ -311,7 +339,7 @@
     var sameTipo = docGenGruppi.filter(function (g) { return g.tipo === tipo; });
     var g = {
       id: genLocalId(),
-      titolo: tipo === 'riferimento' ? 'Nuovo riferimento' : 'Nuovo argomento',
+      titolo: tipo === 'riferimento' ? 'Nuovo riferimento' : 'Locazioni',
       tipo: tipo,
       ordine: sameTipo.length,
       link_url: tipo === 'riferimento' ? '/servizio-locazioni' : '',
@@ -403,6 +431,7 @@
 
   window.docGenOnDrop = function (e, id) {
     e.preventDefault();
+    e.stopPropagation();
     var el = document.getElementById('docGenDrop-' + id);
     if (el) el.classList.remove('drag-over');
     if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
@@ -412,38 +441,62 @@
 
   window.docGenUploadFiles = async function (id, files) {
     var g = findGruppo(id);
-    if (!g || !files || !files.length || !window.sb) {
-      toast('Upload non disponibile', 'error');
+    var client = getSb();
+    if (!g || !files || !files.length) return;
+    if (!client) {
+      toast('Upload non disponibile — ricarica la pagina admin', 'error');
       return;
     }
+
     g.file = normalizeFileList(g.file);
+    var uploaded = 0;
+
     for (var i = 0; i < files.length; i++) {
       var file = files[i];
-      if (file.size > 20 * 1024 * 1024) {
-        toast('File troppo grande (max 20 MB): ' + file.name, 'error');
+      if (!isAllowedDocFile(file)) {
+        toast('Formato non supportato: ' + file.name + ' (usa Word, PDF, JPG, Excel o ZIP)', 'error');
+        continue;
+      }
+      if (file.size > DOC_GEN_MAX_MB * 1024 * 1024) {
+        toast('File troppo grande (max ' + DOC_GEN_MAX_MB + ' MB): ' + file.name, 'error');
         continue;
       }
       var ext = (file.name.split('.').pop() || 'bin').toLowerCase();
       var slug = typeof slugify === 'function' ? slugify(file.name) : file.name.replace(/[^a-z0-9.]/gi, '-');
       var path = 'generali/' + String(g.id).replace(/[^a-zA-Z0-9_-]/g, '') + '/' + Date.now() + '-' + slug;
-      var up = await sb.storage.from('documenti').upload(path, file, {
-        cacheControl: '3600',
-        upsert: false,
-        contentType: file.type || 'application/octet-stream'
-      });
-      if (up.error) {
-        toast('Errore upload: ' + up.error.message, 'error');
-        continue;
+      var mime = file.type || 'application/octet-stream';
+      if (ext === 'zip' && !mime) mime = 'application/zip';
+
+      try {
+        var up = await client.storage.from('documenti').upload(path, file, {
+          cacheControl: '3600',
+          upsert: false,
+          contentType: mime
+        });
+        if (up.error) {
+          toast('Errore upload: ' + up.error.message, 'error');
+          continue;
+        }
+        var publicUrl = storagePublicUrl('documenti', path);
+        if (!publicUrl) {
+          toast('Upload ok ma URL non disponibile per: ' + file.name, 'error');
+          continue;
+        }
+        g.file.push({
+          url: publicUrl,
+          nome: file.name,
+          tipo: ext,
+          ordine: g.file.length
+        });
+        uploaded++;
+        toast('Caricato: ' + file.name, 'success');
+      } catch (err) {
+        toast('Errore upload: ' + (err.message || err), 'error');
       }
-      var urlData = sb.storage.from('documenti').getPublicUrl(path);
-      g.file.push({
-        url: urlData.data.publicUrl,
-        nome: file.name,
-        tipo: ext,
-        ordine: g.file.length
-      });
-      toast('Caricato: ' + file.name, 'success');
     }
+
+    if (!uploaded) return;
+
     try {
       await persistGruppo(g);
     } catch (e) {
