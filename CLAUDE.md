@@ -4,16 +4,20 @@
 **LEGGI SEMPRE `SKILL-2.0.md` (in root: indice) e il testo completo in `TEST-SKILL/SKILL-2.0.md` prima di qualsiasi operazione.**
 La skill e' l'unica fonte di verita' per questo progetto.
 
-**Routing task:** `TEST-SKILL/context-map.json` — carica anche **`TEST-SKILL/skill-forms-leads.md`** per ogni **landing**, **blog con form/CTA lead** o fix invio email; **`TEST-SKILL/skill-social-automation.md`** per bozze/agenda/cron Meta/Instagram/reel/Google Business in `righetto_social/`; **`TEST-SKILL/skill-security.md`** per audit sicurezza (2×/settimana: martedì e venerdì).
+**Routing task:** `TEST-SKILL/context-map.json` — carica anche **`TEST-SKILL/skill-forms-leads.md`** per ogni **landing**, **blog con form/CTA lead** o fix invio email; **`TEST-SKILL/skill-social-automation.md`** per bozze/agenda/cron Meta/Instagram/reel/Google Business in `righetto_social/`; **`TEST-SKILL/skill-media-migration.md`** per foto annunci, sync Supabase→GitHub, reel locali, egress Storage; **`TEST-SKILL/skill-security.md`** per audit sicurezza (2×/settimana: martedì e venerdì).
 
 **Regole Cursor (`.mdc` scoped):** vedi **`TEST-SKILL/skill-cursor-rules.md`** — `righetto-core.mdc` sempre attiva; le altre si attivano su blog, HTML/CSS, form, social, SEO, admin/SQL.
 
 ## Regole Automatiche
 
-### Prima di ogni modifica:
+### Dopo ogni modifica:
 1. Leggi il file da modificare — mai al buio
 2. Verifica coerenza con SKILL-2.0.md (claim, commissioni, struttura)
 3. Mobile-first — ogni modifica deve funzionare su mobile
+
+### Media annunci (luglio 2026):
+- Foto pubbliche su `img/immobili/` (GitHub Pages) — **sync automatico ogni 6 h** (`sync-media-github.yml`)
+- Dopo upload in admin: **non** chiedere comandi manuali all'utente; dettaglio: **`TEST-SKILL/skill-media-migration.md`**
 
 ### Codice:
 - Solo HTML/CSS/JS vanilla — zero framework, zero librerie esterne

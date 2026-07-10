@@ -3,6 +3,7 @@
 
 > **Versione:** 2.0 — 15 Marzo 2026 (patch contenuti **3 Aprile 2026**)
 > **Gate obbligatorio agente:** **`TEST-SKILL/skill-massimo-punteggio.md`** — leggere prima di ogni modifica.
+> **Changelog 9 luglio 2026:** media annunci — foto/reel su GitHub Pages; sync automatico `sync-media-github.yml` ogni 6 h; **`skill-media-migration.md`**.
 > **Changelog 3 luglio 2026 — e):** checklist venerdì unificata — `skill-massimo-punteggio.md` §4.
 > **Changelog 3 luglio 2026 — d):** batch `righetto-sol` su tutti i blog — `scripts/patch_righetto_sol_blog.py`, `css/blog-rich.css?v=3`.
 > **Changelog 3 luglio 2026 — c):** `skill-massimo-punteggio.md` + `google-compliance-check.py` (checklist Google completa, strumenti gratuiti).
@@ -121,6 +122,9 @@ Architettura a **due layer** (dettaglio: **`skill-cursor-rules.md`**):
 | **Hosting dominio/email** | cPanel (cpanel.righettoimmobiliare.it) |
 | **Tech Stack** | HTML statico + CSS + JS + Express.js (dev) |
 | **Database** | Supabase (PostgreSQL esterno) |
+| **Media annunci (pubblico)** | GitHub Pages — `img/immobili/{CODICE}/`, `img/video/reels/` |
+| **Supabase Storage** | Staging upload admin (`foto-immobili`, svuotato da CI) + `documenti` (PDF privati) |
+| **Sync media** | Automatico ogni 6 h — `.github/workflows/sync-media-github.yml` (vedi §10.5, `skill-media-migration.md`) |
 | **API Email** | `api.righettoimmobiliare.it` — PHP relay su cPanel (mail() nativa, NO Brevo) |
 | **Email Marketing** | Admin → Supabase Edge Function → API relay — sistema completo nell'admin |
 | **Newsletter** | Solo raccolta contatti via form sito → tabella Supabase `newsletter_subscribers` |
@@ -1679,6 +1683,34 @@ python verifica_meta.py                      # deve dire: Token tipo PAGE
 **Google Business:** `GOOGLE_GBP_*` in `.env`; `GBP_MIRROR_META=1` replica Meta→GBP. OAuth può dare 429 se abusato — attendere e riprovare. Storie IG non automatizzate.
 
 **Token:** Meta e Google solo in `.env` sul PC/server — mai in admin/localStorage in produzione.
+
+---
+
+### 10.5 Sync media annunci — Supabase → GitHub Pages (luglio 2026)
+
+**Documentazione operativa:** [`TEST-SKILL/skill-media-migration.md`](skill-media-migration.md) — **fonte di verità** per foto annunci, reel, egress, manifest.
+
+**Architettura:** le foto pubbliche vivono su `righettoimmobiliare.it/img/immobili/{CODICE}/` (GitHub Pages). Supabase Storage `foto-immobili` è solo **staging** dopo upload admin; la CI lo svuota dopo ogni sync.
+
+| Frequenza | Workflow / script | Output |
+|-----------|-------------------|--------|
+| Ogni 6 h | `.github/workflows/sync-media-github.yml` | `sync_media_automation.py` → migrate + purge + commit/push |
+| Manuale CI | `workflow_dispatch` su GitHub Actions | Stesso flusso |
+| Locale urgente | `python scripts/sync_media_automation.py` | Solo se utente chiede urgenza |
+
+**Flusso automatico:**
+1. Admin carica foto → Supabase `foto-immobili` (temporaneo)
+2. CI scarica → WebP in `img/immobili/`, aggiorna `immobili.foto[]`, `media-manifest.json`, `share-immobile-*.html`
+3. Commit + push su `main` → GitHub Pages
+4. Purge bucket `foto-immobili`
+
+**Regola agente (BLOCCANTE):** dopo upload in admin **non** chiedere all'utente comandi manuali — messaggio: «foto sul sito entro ~6 ore» (toast in `admin.html`).
+
+**Secret GitHub Actions:** `SUPABASE_KEY` (service_role).
+
+**Reel:** `REEL_LOCAL=1` → `img/video/reels/` — non Supabase Storage (vedi §10.4 reel + `skill-media-migration.md` §3).
+
+**Codice:** `js/media-url.js`, `scripts/migrate_supabase_media.py`, `scripts/purge_supabase_foto_immobili.py`.
 
 ---
 

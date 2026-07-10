@@ -35,6 +35,7 @@
 11. **URL pulite** — MAI `.html` nei link interni. Tutti gli `href`, canonical, og:url, sitemap → senza `.html`
 12. **Cache-busting obbligatorio** — ogni CSS/JS linkato DEVE avere `?v=N`. Incrementare ad ogni modifica
 13. **Form lead (landing / blog / servizi)** — invio **in pagina** con `SERVIZI_CONFIG.sendNotifica()` + insert Supabase `richieste`; **mai** solo redirect GET a Contatti; **mai** chiamare `send-mail.php` dal browser. Dettaglio: **`TEST-SKILL/skill-forms-leads.md`**
+14. **Foto annunci (luglio 2026)** — servite da `righettoimmobiliare.it/img/immobili/` (GitHub Pages). Dopo upload in admin: sync **automatico** ogni 6 h via `.github/workflows/sync-media-github.yml` — **non** chiedere all'utente comandi manuali. Dettaglio: **`TEST-SKILL/skill-media-migration.md`**
 
 ### Registrazione automatica nuove pagine
 - **Blog** → `admin.html` (`_blogSeedArticles` con `data_pubblicazione: 'YYYY-MM-DD'`) + `blog.html` + `js/homepage.js` (staticMap + articoliStatici) + `sitemap.xml`
@@ -158,6 +159,16 @@ Eseguire sempre in sequenza dopo ogni modifica:
 
 ---
 
+## 5b. MEDIA ANNUNCI — sync automatico (luglio 2026)
+
+- Skill dedicata: **`skill-media-migration.md`**
+- Sintesi: `SKILL-2.0.md` §**10.5**
+- **Dopo upload foto in admin:** sync GitHub Actions ogni **6 h** — **non** chiedere comandi all'utente
+- Workflow: `.github/workflows/sync-media-github.yml` · script: `scripts/sync_media_automation.py`
+- Foto pubbliche: `img/immobili/` · reel: `img/video/reels/` (`REEL_LOCAL=1`)
+
+---
+
 ## 6. SICUREZZA (antihacker)
 
 - Modulo dedicato: **`skill-security.md`**
@@ -172,5 +183,5 @@ Eseguire sempre in sequenza dopo ogni modifica:
 - Documentazione: **`skill-cursor-rules.md`**
 - **`righetto-core.mdc`** → sempre attiva (claim, stack, routing)
 - Altre rule si attivano sui file: blog, HTML/CSS, form, social, SEO, SQL/admin
-- **`context-map.json`** v1.2 collega task → skill + hint rule
+- **`context-map.json`** v1.3 collega task → skill + hint rule
 - Aggiornare le `.mdc` solo come **estratto**; la modifica operativa va in `skill-*.md` / `SKILL-2.0.md`

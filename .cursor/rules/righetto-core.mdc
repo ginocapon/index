@@ -38,9 +38,11 @@ HTML/CSS/JS **vanilla** · GitHub Pages · Supabase · **zero CDN esterni** · U
 | Social Meta/GBP | `skill-social-automation.md` |
 | Sicurezza (2×/sett.) | `skill-security.md` |
 | Architettura repo | `skill-context.md` |
+| Media foto/reel (sync auto) | `skill-media-migration.md` |
 | Regole Cursor | `skill-cursor-rules.md` |
 
 ## Automazioni repo
 - Pre-commit: `node scripts/validate-page.js --staged`
 - Anti-doppioni blog: `python scripts/check_doppioni_sito.py` **prima** di scrivere
 - Audit: `.github/workflows/audit-settimanale.yml` (venerdì)
+- **Sync foto annunci:** `.github/workflows/sync-media-github.yml` (ogni 6 h) — dopo upload admin, niente comandi manuali

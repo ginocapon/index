@@ -29,7 +29,7 @@ Le `.mdc` **non sostituiscono** la skill: la **indirizzano** e applicano guardra
 | `righetto-forms-leads.mdc` | false | `landing-*`, form, `rig-lead-form.js` | `skill-forms-leads.md` |
 | `righetto-social-automation.mdc` | false | `righetto_social/**` | `skill-social-automation.md` |
 | `righetto-seo-geo.mdc` | false | `zona-*`, `sitemap.xml`, `llms.txt` | `skill-seo.md` |
-| `righetto-supabase-admin.mdc` | false | `sql/**`, `admin.html` | `skill-context.md` |
+| `righetto-supabase-admin.mdc` | false | `sql/**`, `admin.html`, `scripts/sync_media*.py`, `scripts/migrate_supabase_media.py`, `scripts/purge_supabase*.py` | `skill-context.md`, **`skill-media-migration.md`** |
 
 **Deprecato:** `righetto-seo-2026.mdc` → sostituito da `righetto-blog-publish.mdc` + `righetto-seo-geo.mdc`.
 
@@ -46,7 +46,8 @@ Allineato a `context-map.json`:
 | Fix CSS / homepage | essentials + design | `righetto-vanilla-ui` |
 | Audit SEO | essentials + seo | `righetto-seo-geo` |
 | Social cron | essentials + social-automation | `righetto-social-automation` |
-| RLS / admin | essentials + context | `righetto-supabase-admin` |
+| RLS / admin / foto annunci | essentials + context + **media-migration** | `righetto-supabase-admin` |
+| Sync media / egress Supabase | essentials + **media-migration** | `righetto-supabase-admin` |
 | Audit sicurezza (2×/sett.) | essentials + security | `righetto-supabase-admin` |
 
 ---
@@ -71,5 +72,6 @@ Il repo potrebbe contribuire a awesome-cursorrules una rule **"Static HTML Real 
 - Pre-commit: `scripts/validate-page.js`
 - Anti-doppioni: `scripts/check_doppioni_sito.py`
 - Audit venerdì: `.github/workflows/audit-settimanale.yml`, `mini-seo-check.yml`
+- **Sync foto annunci:** `.github/workflows/sync-media-github.yml` (ogni 6 h) — vedi `skill-media-migration.md`
 
 Dettaglio automazioni: `context-map.json` → `automazioni_attive`.

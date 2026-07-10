@@ -13,6 +13,8 @@
 | Hosting dominio/email | cPanel (cpanel.righettoimmobiliare.it) |
 | Tech Stack | HTML statico + CSS + JS vanilla + Express.js (solo dev) |
 | Database | Supabase (PostgreSQL esterno) |
+| **Media pubblici annunci** | **GitHub Pages** — `img/immobili/{CODICE}/`, `img/video/reels/` (sync auto ogni 6 h) |
+| **Supabase Storage** | Solo staging upload admin (`foto-immobili`, svuotato da CI) + bucket `documenti` (PDF privati) |
 | API Email | `api.righettoimmobiliare.it` — PHP relay su cPanel (mail() nativa) |
 | Email Marketing | Admin → Supabase Edge Function → API relay |
 | Newsletter | Solo raccolta contatti → tabella `newsletter_subscribers` |
@@ -57,6 +59,21 @@
 
 ---
 
+## 3b. MEDIA ANNUNCI (luglio 2026)
+
+**Fonte di verità:** [`TEST-SKILL/skill-media-migration.md`](skill-media-migration.md)
+
+| Fase | Dove | Note |
+|------|------|------|
+| Upload admin | Supabase `foto-immobili` | Staging temporaneo |
+| Pubblicazione sito | `righettoimmobiliare.it/img/immobili/` | GitHub Pages, zero egress |
+| Automazione | `sync-media-github.yml` | Cron 6 h + `workflow_dispatch` |
+| Reel Instagram | `img/video/reels/` | `REEL_LOCAL=1` in `righetto_social` |
+
+**Regola agente:** dopo upload foto in admin **non** istruire l'utente a lanciare script — sync automatico entro ~6 ore.
+
+---
+
 ## 4. STRUTTURA FILE PRINCIPALE
 
 ```
@@ -84,7 +101,12 @@ js/config.js                      Config API esterne
 js/lead-conversion.js             Lead engine (A/B test, exit intent, sticky CTA, speed-to-lead)
 scripts/validate-page.js          Pre-commit validator (blocca commit se schema/title mancanti)
 scripts/audit-skill.sh            Audit automatico settimanale
+scripts/sync_media_automation.py  Sync foto Supabase → img/ (CI + locale)
 .github/workflows/audit-settimanale.yml   Cron job venerdì 07:00 CET
+.github/workflows/sync-media-github.yml   Sync foto annunci ogni 6 h
+img/immobili/{CODICE}/          Foto annunci WebP (fonte pubblica)
+js/media-url.js                 resolveImageUrl — locale + manifest
+data/media-manifest.json        Mappa URL legacy Supabase → path locale
 ```
 
 ---
