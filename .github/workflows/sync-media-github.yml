@@ -1,0 +1,50 @@
+# Sync automatico foto annunci: Supabase Storage -> img/ GitHub Pages + purge
+# Dopo upload in admin, entro ~6 ore le foto sono sul sito senza comandi manuali.
+
+name: Sync media immobili (Supabase -> GitHub)
+
+on:
+  schedule:
+    # Ogni 6 ore (00:30 06:30 12:30 18:30 UTC)
+    - cron: "30 0,6,12,18 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-media:
+    name: Migra foto e pubblica su Pages
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Dipendenze (WebP)
+        run: pip install --quiet Pillow
+
+      - name: Sync Supabase -> img/ + purge Storage
+        env:
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python scripts/sync_media_automation.py
+
+      - name: Commit e push se ci sono nuove immagini
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add img/immobili img/video/reels img/video/blog data/media-manifest.json data/visite-virtuali.json data/og-immobili.json share-immobile-*.html 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "Nessun file nuovo — sito gia aggiornato"
+          else
+            git commit -m "chore(media): sync foto immobili da Supabase ($(date -u +%Y-%m-%d))"
+            git push
+            echo "Push completato — GitHub Pages si aggiorna"
+          fi

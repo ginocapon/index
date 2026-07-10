@@ -1,6 +1,6 @@
 {
   "_note": "Routing guide: quale skill caricare per ogni tipo di task. skill-essentials.md va SEMPRE caricata.",
-  "_version": "1.2 — Maggio 2026 (Cursor rules scoped .mdc)",
+  "_version": "1.3 — Luglio 2026 (sync media automatico GitHub Actions)",
 
   "always_load": "TEST-SKILL/skill-essentials.md,TEST-SKILL/skill-massimo-punteggio.md",
 
@@ -96,6 +96,18 @@
       "cursor_rules": ["righetto-social-automation.mdc"],
       "token_stimati": "~800",
       "note": "Consegna in chat: §2b.1 — DESCRIZIONE spintax + LINK + KEYWORD # (post, storia, reel, landing IG/FB/GBP)"
+    },
+    "upload_foto_admin_sync_media": {
+      "skills": ["skill-essentials.md", "skill-media-migration.md", "skill-context.md"],
+      "cursor_rules": ["righetto-supabase-admin.mdc"],
+      "token_stimati": "~1.000",
+      "note": "Foto annunci: admin → Supabase temporaneo → sync automatico ogni 6h (sync-media-github.yml). NON chiedere comandi manuali all'utente salvo urgenza esplicita."
+    },
+    "migrazione_media_supabase": {
+      "skills": ["skill-essentials.md", "skill-media-migration.md", "skill-context.md"],
+      "cursor_rules": ["righetto-supabase-admin.mdc"],
+      "token_stimati": "~1.500",
+      "note": "img/immobili, media-manifest, purge foto-immobili, js/media-url.js — vedi skill-media-migration.md § Per agenti IA"
     }
   },
 
@@ -174,6 +186,15 @@
       "locale": "python tools/check_rls_exposure.py (con .env)",
       "skill": "TEST-SKILL/skill-security.md",
       "output": "Issue GitHub label 'security' + checklist §3 manuale"
+    },
+    "sync_media_immobili_github": {
+      "workflow": ".github/workflows/sync-media-github.yml",
+      "schedule": "Ogni 6 ore (00:30 06:30 12:30 18:30 UTC) + workflow_dispatch",
+      "script": "scripts/sync_media_automation.py",
+      "secret": "SUPABASE_KEY (service_role) in GitHub Actions",
+      "skill": "TEST-SKILL/skill-media-migration.md",
+      "output": "Scarica foto da Supabase → img/immobili/ WebP, aggiorna DB/manifest/share-immobile, commit+push main, purge bucket foto-immobili",
+      "note_utente": "Dopo upload admin: attendere max ~6h — nessun comando manuale richiesto"
     }
   }
 }

@@ -8,6 +8,8 @@ Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutt
 
 **Regole Cursor scoped:** [`TEST-SKILL/skill-cursor-rules.md`](TEST-SKILL/skill-cursor-rules.md) — 7 file `.mdc` in `.cursor/rules/` (pattern awesome-cursorrules).
 
+**Changelog rapido (9 luglio 2026):** media annunci — foto/reel su GitHub Pages (`img/immobili/`, `img/video/reels/`); sync automatico ogni 6 h (`sync-media-github.yml`); **`TEST-SKILL/skill-media-migration.md`**.
+
 **Changelog rapido (3 luglio 2026 — f):** chatbot Linda — §**8.1e** FAQ↔blog, `scripts/audit_chatbot_faq.py`, +38 voci FAQ da skimm.
 
 **Changelog rapido (3 luglio 2026 — e):** checklist venerdì unificata — `skill-massimo-punteggio.md` §4 (compliance 0/0, cron, 8/8, patch script).

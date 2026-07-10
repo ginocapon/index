@@ -6,6 +6,22 @@
 
 ---
 
+## Per gli agenti IA (BLOCCANTE — luglio 2026)
+
+**Carica questo file** per: upload foto in admin, sync media, egress Supabase, reel MP4, `img/immobili/`, `js/media-url.js`.
+
+| Regola | Dettaglio |
+|--------|-----------|
+| **Sync automatico** | Dopo upload in admin **non** chiedere all'utente comandi manuali. GitHub Actions `sync-media-github.yml` gira ogni **6 h** (+ `workflow_dispatch`). |
+| **Messaggio utente** | «Le foto saranno sul sito entro ~6 ore» — toast già in `admin.html`. |
+| **Manuale** | Solo se l'utente chiede urgenza: `python scripts/sync_media_automation.py` + commit/push. |
+| **URL foto pubbliche** | `img/immobili/{CODICE}/…` su GitHub Pages — **non** Supabase Storage per annunci live. |
+| **Reel** | `REEL_LOCAL=1` → `img/video/reels/` — **non** bucket `foto-immobili`. |
+| **Secret CI** | `SUPABASE_KEY` (service_role) in GitHub Actions — mai in commit. |
+| **Vietato** | Suggerire purge/sync manuale come flusso normale; ripristinare URL `supabase.co/storage` su annunci attivi. |
+
+---
+
 ## Struttura file
 
 ```
@@ -43,16 +59,25 @@ python scripts/migrate_supabase_media.py --videos
 python scripts/migrate_supabase_media.py --visite
 ```
 
-### 2. Dopo ogni upload foto in admin
+### 2. Dopo ogni upload foto in admin (automatico)
 
-L'admin carica ancora su Supabase (browser). Poi sul PC:
+**Non serve più lanciare comandi a mano.** Il workflow GitHub Actions
+`.github/workflows/sync-media-github.yml` gira **ogni 6 ore** (e su richiesta manuale):
 
+1. Scarica nuove foto da Supabase → `img/immobili/`
+2. Aggiorna DB, manifest, share social
+3. Commit + push su `main`
+4. Svuota bucket `foto-immobili` su Supabase
+
+**Dopo upload in admin:** attendi al massimo ~6 ore (spesso meno). Toast in admin lo conferma.
+
+**Manuale (solo se urgente):**
 ```powershell
-python scripts/migrate_supabase_media.py --photos --update-db --sync-og
-git add img/ data/media-manifest.json share-immobile-*.html
-git commit -m "Sync foto immobili su GitHub Pages"
-git push
+python scripts/sync_media_automation.py
+git add img/ data/ share-immobile-*.html && git commit -m "Sync foto" && git push
 ```
+
+**Secret GitHub:** `SUPABASE_KEY` (service_role) in Settings → Secrets → Actions.
 
 ### 3. Reel Instagram
 

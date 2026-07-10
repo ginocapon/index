@@ -1,12 +1,21 @@
 ---
-description: Righetto — Supabase RLS, admin immobili/blog, SQL hardening
-globs: "sql/**/*.sql,admin.html,supabase/**"
+description: Righetto — Supabase RLS, admin immobili/blog, SQL hardening, sync media
+globs: "sql/**/*.sql,admin.html,supabase/**,scripts/sync_media*.py,scripts/migrate_supabase_media.py,scripts/purge_supabase*.py"
 alwaysApply: false
 ---
 
 # Supabase e admin
 
-Dettaglio: **`TEST-SKILL/skill-context.md`** · SQL in `sql/rls-*.sql`.
+Dettaglio: **`TEST-SKILL/skill-context.md`** · media foto: **`TEST-SKILL/skill-media-migration.md`** · SQL in `sql/rls-*.sql`.
+
+## Foto annunci — sync automatico (luglio 2026)
+
+1. Admin carica ancora su Supabase Storage (`foto-immobili`) come staging temporaneo
+2. GitHub Actions `sync-media-github.yml` (ogni **6 h** + manuale) esegue `scripts/sync_media_automation.py`
+3. Foto pubbliche su `img/immobili/{CODICE}/` → commit+push → GitHub Pages
+4. DB `immobili.foto[]` aggiornato a path locali; bucket `foto-immobili` svuotato
+
+**Agente:** non chiedere all'utente comandi sync/purge — toast admin: «entro ~6 h». Manuale solo su richiesta urgente.
 
 ## Principi (ispirati a best practice auth/RLS)
 - Client pubblico: **mai** esporre dati sensibili via policy permissive
@@ -25,3 +34,5 @@ Dettaglio: **`TEST-SKILL/skill-context.md`** · SQL in `sql/rls-*.sql`.
 ## Script utili
 - `tools/check_rls_exposure.py`
 - `tools/check_live_admin_secret.py` (solo locale, non committare output con segreti)
+- `scripts/sync_media_automation.py` — orchestratore sync (anche in CI)
+- `scripts/migrate_supabase_media.py` — migrazione foto/video/manifest

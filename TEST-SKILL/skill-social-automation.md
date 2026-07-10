@@ -284,7 +284,7 @@ Messaggio: *«Il contenuto multimediale non è pronto»* (code 9007 / subcode 22
 python publish_from_agenda.py --modo manuale --forza --riprova-errati
 ```
 
-Reel: `media_direct_url` deve essere `.mp4` HTTPS pubblico (Storage `foto-immobili/reels/`).
+Reel: `media_direct_url` deve essere `.mp4` HTTPS pubblico su **`https://righettoimmobiliare.it/img/video/reels/`** (`REEL_LOCAL=1` in `genera_reel.py`). **Non** più Supabase Storage `foto-immobili/reels/`.
 
 ---
 
@@ -367,7 +367,7 @@ python publish_from_agenda.py --dry-run --modo cron
 | `config/settings.json` | **Obbligatorio** per cron (copiare da `settings.example.json`) |
 | `scheduler.py` | Verifica finestra oraria locale |
 | `publish_from_agenda.py` | Pubblicazione Meta/GBP + retry reel |
-| `genera_reel.py` | MP4 1080×1920 → Storage |
+| `genera_reel.py` | MP4 1080×1920 → `img/video/reels/` (con `REEL_LOCAL=1`) |
 | `verifica_meta.py` | Diagnostica token PAGE/USER |
 | `estrai_token_pagina.py` | User token → PAGE token in `.env` |
 | `templates/social_sezioni.json` | Slot, spintax, hashtag, canali |

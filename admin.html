@@ -6610,7 +6610,7 @@ async function handleFiles(files, bucket) {
         currentFotos.push(publicUrl);
         renderFotos();
         toast('✅ ' + file.name + ' caricato!', 'success');
-        toast('📦 Sync GitHub Pages: python scripts/migrate_supabase_media.py --photos --update-db', 'info');
+        toast('Le foto saranno sul sito entro ~6 h (sync automatico GitHub).', 'info');
       } else if (bucket === 'planimetrie') {
         currentPlanimetrie.push({ url: publicUrl, nome: file.name });
         renderPlanimetrie();
