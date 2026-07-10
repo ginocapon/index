@@ -212,21 +212,15 @@ function renderProps(arr){
 }
 
 const VT_PREVIEW = 4;
-/** Ordine fisso homepage: 4 tour nel catalogo locale */
-const VT_CATALOG_ORDER = [
-  'appartamento-elegante-con-ampio-terrazzo-in-zona-sacro-cuore-padova',
-  'ufficio-vendita-limena-uff2247',
-  'elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova',
-  'bi-familiare-indipendente-in-vendita-nel-cuore-di-sacrocuore-padova'
-];
-const VT_EXCLUDE_SLUGS = {
-  'casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno': true
-};
 
 function hasVirtualTour(p) {
   return Array.isArray(p.virtual_tour_scenes) && p.virtual_tour_scenes.some(function(s) {
     return s && (s.url || s.thumbnail);
   });
+}
+
+function isActiveListing(p) {
+  return !!(p && p.attivo !== false && !p.venduto && !p.affittato);
 }
 
 function vtCaptionLine(p) {
@@ -308,7 +302,7 @@ function mergeVtCatalogSupplement(tours, catalog, maxAdd) {
   var slugs = Object.keys(catalog);
   for (var i = 0; i < slugs.length && tours.length < VT_PREVIEW; i++) {
     var slug = slugs[i];
-    if (used[slug] || VT_EXCLUDE_SLUGS[slug]) continue;
+    if (used[slug]) continue;
     var prop = catalogEntryToProperty(slug, catalog[slug]);
     if (!prop || !hasVirtualTour(prop)) continue;
     tours.push(prop);
@@ -329,17 +323,45 @@ async function fetchVtCatalog() {
   }
 }
 
-function toursFromCatalog(catalog, slugs) {
-  if (!catalog) return [];
-  var list = slugs || Object.keys(catalog);
-  var out = [];
-  for (var i = 0; i < list.length && out.length < VT_PREVIEW; i++) {
-    var slug = list[i];
-    if (VT_EXCLUDE_SLUGS[slug]) continue;
-    var prop = catalogEntryToProperty(slug, catalog[slug]);
-    if (prop && hasVirtualTour(prop)) out.push(prop);
+function toursFromSupabaseActive(data, catalog) {
+  if (!data || !data.length) return [];
+  var tours = [];
+  for (var i = 0; i < data.length && tours.length < VT_PREVIEW; i++) {
+    var row = data[i];
+    if (!isActiveListing(row)) continue;
+    var merged = mergeTourWithCatalog(row, catalog);
+    if (!hasVirtualTour(merged)) continue;
+    tours.push(merged);
   }
-  return out;
+  return tours;
+}
+
+async function loadVisiteVirtualiHome() {
+  const grid = document.getElementById('vtGridHome');
+  if (!grid) return;
+  try {
+    if (typeof RigMedia !== 'undefined' && RigMedia.loadManifest) {
+      await RigMedia.loadManifest();
+    }
+    var catalog = await fetchVtCatalog();
+    var tours = [];
+
+    initSB();
+    if (sb) {
+      const { data, error } = await sb.from('immobili').select('*')
+        .eq('attivo', true)
+        .eq('venduto', false)
+        .eq('affittato', false)
+        .order('created_at', { ascending: false })
+        .limit(60);
+      if (!error && data && data.length) {
+        tours = toursFromSupabaseActive(data, catalog);
+      }
+    }
+
+    if (!tours.length) return;
+    renderVisiteVirtualiHome(tours.slice(0, VT_PREVIEW), catalog);
+  } catch (e) {}
 }
 
 function mergeTourWithCatalog(tour, catalog) {
@@ -357,62 +379,6 @@ function mergeTourWithCatalog(tour, catalog) {
     });
   }
   return merged;
-}
-
-function enrichToursFromSupabase(tours, data, catalog) {
-  if (!data || !data.length) {
-    return tours.map(function(t) { return mergeTourWithCatalog(t, catalog); });
-  }
-  var bySlug = {};
-  data.forEach(function(p) {
-    if (p.slug && hasVirtualTour(p) && !p.venduto && !p.affittato) bySlug[p.slug] = p;
-  });
-  return tours.map(function(t) {
-    var merged = bySlug[t.slug] ? Object.assign({}, t, bySlug[t.slug]) : t;
-    return mergeTourWithCatalog(merged, catalog);
-  });
-}
-
-async function loadVisiteVirtualiHome() {
-  const grid = document.getElementById('vtGridHome');
-  if (!grid) return;
-  try {
-    if (typeof RigMedia !== 'undefined' && RigMedia.loadManifest) {
-      await RigMedia.loadManifest();
-    }
-    var catalog = await fetchVtCatalog();
-    var tours = toursFromCatalog(catalog, VT_CATALOG_ORDER);
-
-    initSB();
-    if (sb) {
-      const { data, error } = await sb.from('immobili').select('*')
-        .eq('attivo', true)
-        .eq('venduto', false)
-        .eq('affittato', false)
-        .order('created_at', { ascending: false })
-        .limit(48);
-      if (!error && data && data.length) {
-        if (tours.length) {
-          tours = enrichToursFromSupabase(tours, data, catalog);
-        } else {
-          tours = data.filter(hasVirtualTour).slice(0, VT_PREVIEW).map(function(p) {
-            return mergeTourWithCatalog(p, catalog);
-          });
-        }
-        if (tours.length < VT_PREVIEW) {
-          tours = mergeVtCatalogSupplement(tours, catalog, VT_PREVIEW - tours.length);
-        }
-      } else if (catalog) {
-        tours = tours.map(function(t) { return mergeTourWithCatalog(t, catalog); });
-      }
-    } else if (catalog) {
-      tours = tours.map(function(t) { return mergeTourWithCatalog(t, catalog); });
-    }
-
-    tours = tours.filter(function(p) { return p.slug && !VT_EXCLUDE_SLUGS[p.slug]; });
-    if (!tours.length) return;
-    renderVisiteVirtualiHome(tours.slice(0, VT_PREVIEW), catalog);
-  } catch (e) {}
 }
 
 function showDemoProps(){

@@ -36,7 +36,8 @@
 12. **Cache-busting obbligatorio** — ogni CSS/JS linkato DEVE avere `?v=N`. Incrementare ad ogni modifica
 13. **Form lead (landing / blog / servizi)** — invio **in pagina** con `SERVIZI_CONFIG.sendNotifica()` + insert Supabase `richieste`; **mai** solo redirect GET a Contatti; **mai** chiamare `send-mail.php` dal browser. Dettaglio: **`TEST-SKILL/skill-forms-leads.md`**
 14. **Foto annunci (luglio 2026)** — servite da `righettoimmobiliare.it/img/immobili/` (GitHub Pages). Dopo upload in admin: sync **automatico** ogni 6 h via `.github/workflows/sync-media-github.yml` — **non** chiedere all'utente comandi manuali. Dettaglio: **`TEST-SKILL/skill-media-migration.md`**
-15. **Title e meta description (BLOCCANTE)** — su **ogni** pagina HTML creata o modificata: vedi **§1.2** sotto; verificare con `validate-page.js` **prima** del commit
+15. **Homepage — Visite virtuali 360° (`#vtGridHome`)** — **nessun elenco fisso** in `homepage.js`. A ogni caricamento (e verifica venerdì): Supabase `immobili` con `attivo=true`, `venduto=false`, `affittato=false`, ordine `created_at` DESC; primi **4** con `virtual_tour_scenes` (scene arricchite da `data/visite-virtuali.json` se mancanti). Immobili disattivati **non** compaiono. Nuovo annuncio con tour: aggiornare `data/visite-virtuali.json` (cover + scene) e scene in admin; bump `homepage.js?v=N`.
+16. **Title e meta description (BLOCCANTE)** — su **ogni** pagina HTML creata o modificata: vedi **§1.2** sotto; verificare con `validate-page.js` **prima** del commit
 
 ### 1.2 Title e Meta — gate obbligatorio (luglio 2026)
 
