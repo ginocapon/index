@@ -103,6 +103,23 @@
       });
   }
 
+  function findCatalogTour(data, tourSlug) {
+    if (!data || !tourSlug) return null;
+    if (data[tourSlug]) return data[tourSlug];
+    var slugLo = tourSlug.toLowerCase();
+    var keys = Object.keys(data);
+    for (var i = 0; i < keys.length; i++) {
+      if (keys[i].toLowerCase() === slugLo) return data[keys[i]];
+    }
+    var parts = tourSlug.split('-');
+    var codice = parts[parts.length - 1].toUpperCase();
+    for (var j = 0; j < keys.length; j++) {
+      var entry = data[keys[j]];
+      if (entry && String(entry.codice || '').trim().toUpperCase() === codice) return entry;
+    }
+    return null;
+  }
+
   function loadTourFromJson(tourSlug) {
     return fetch('data/visite-virtuali.json')
       .then(function (r) {
@@ -110,7 +127,7 @@
         return r.json();
       })
       .then(function (data) {
-        var tour = tourFromCatalogEntry(data[tourSlug]);
+        var tour = tourFromCatalogEntry(findCatalogTour(data, tourSlug));
         if (!tour) throw new Error('missing');
         return tour;
       });

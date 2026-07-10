@@ -224,10 +224,25 @@ function isActiveListing(p) {
   return p.attivo === true || p.attivo === 1 || p.attivo === 'true';
 }
 
-function isBlockedFromVtHome(row, catalog) {
+function findVtCatalogEntry(row, catalog) {
+  if (!row || !catalog) return null;
   var slug = String(row.slug || '').trim();
-  if (!slug || !catalog || !catalog[slug]) return false;
-  return catalog[slug].homepage === false;
+  if (slug && catalog[slug]) return { key: slug, entry: catalog[slug] };
+  var codice = String(row.codice || '').trim().toUpperCase();
+  if (!codice) return null;
+  var keys = Object.keys(catalog);
+  for (var i = 0; i < keys.length; i++) {
+    var entry = catalog[keys[i]];
+    if (entry && String(entry.codice || '').trim().toUpperCase() === codice) {
+      return { key: keys[i], entry: entry };
+    }
+  }
+  return null;
+}
+
+function isBlockedFromVtHome(row, catalog) {
+  var found = findVtCatalogEntry(row, catalog);
+  return !!(found && found.entry.homepage === false);
 }
 
 function vtCaptionLine(p) {
@@ -246,8 +261,8 @@ function vtImmobiliHref(p) {
 }
 
 function vtCoverUrl(p, catalog) {
-  var slug = String(p.slug || '').trim();
-  var cat = catalog && slug ? catalog[slug] : null;
+  var found = findVtCatalogEntry(p, catalog);
+  var cat = found ? found.entry : null;
   var coverRaw = (cat && cat.cover) || p.foto_principale || (p.foto_urls && p.foto_urls[0]) || (p.foto && p.foto[0]) || '';
   var scene0 = (p.virtual_tour_scenes || []).find(function(s) { return s && (s.url || s.thumbnail); });
   if (!coverRaw && scene0) coverRaw = scene0.url || scene0.thumbnail;
@@ -373,11 +388,13 @@ async function loadVisiteVirtualiHome() {
 }
 
 function mergeTourWithCatalog(tour, catalog) {
-  if (!tour || !tour.slug || !catalog || !catalog[tour.slug]) return tour;
-  var cat = catalog[tour.slug];
+  var found = findVtCatalogEntry(tour, catalog);
+  if (!found) return tour;
+  var cat = found.entry;
   var merged = Object.assign({}, tour);
   if (cat.cover) merged.foto_principale = cat.cover;
-  if (cat.immobile_href) merged.immobile_href = cat.immobile_href;
+  if (tour.slug) merged.immobile_href = 'immobile?s=' + encodeURIComponent(tour.slug);
+  else if (cat.immobile_href) merged.immobile_href = cat.immobile_href;
   if (cat.titolo) merged.titolo = cat.titolo;
   if (cat.comune) merged.comune = cat.comune;
   if (cat.codice) merged.codice = cat.codice;
