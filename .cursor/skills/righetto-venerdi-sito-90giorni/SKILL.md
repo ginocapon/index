@@ -56,7 +56,7 @@ Usa questa lista nell'output per l'utente; adatta alle priorità della settimana
 5. **Prossima settimana**: 1 sola priorità numerata (la più impattante).
 6. **Probe tecnico (repo):** `python scripts/probe_live_urls.py` → verificare `data/url-probe-latest.json` (target: 0 issue su ~460 URL); committare snapshot se ci sono fix deployati.
 7. **Homepage visite virtuali:** aprire `/` → sezione «Visite virtuali 360°» deve mostrare **solo** immobili **attivi** con tour (max 4, più recenti in admin). Se un annuncio è disattivato non deve comparire. Nuovo acquisito con tour: entry in `data/visite-virtuali.json` + scene in admin.
-8. **Admin — annunci disattivati:** verificare che venduti/ritirati abbiano `attivo=false` in admin (non solo `homepage:false` nel JSON tour). Codici da controllare se segnalati: LP0286, LA0317, LA0319. Skill: `righetto-immobili-admin` § annunci disattivati.
+8. **Admin — annunci disattivati:** verificare che venduti/ritirati abbiano `attivo=false` in admin (non solo `homepage:false` nel JSON tour). Esempi disattivati: LA0319, LP0286. **LA0317 Mandria è in vendita** — deve restare attivo e nel tour se ha scene.
 
 ## Search Console — verifica ogni venerdì (+ follow-up lunedì)
 

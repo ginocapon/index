@@ -39,7 +39,7 @@ Quando un immobile è **venduto, ritirato o non più in portafoglio**, servono *
 
 **Solo `homepage: false` non basta** se in Supabase resta `attivo=true` — l'annuncio compare ancora in catalogo e può entrare nei tour.
 
-**Codici esempio disattivati:** LA0319 (Sacro Cuore terrazzo), LP0286 (Altichiero), LA0317 (Mandria) — verificare stato in admin a ogni venerdì.
+**Codici esempio disattivati:** LA0319 (Sacro Cuore terrazzo), LP0286 (Altichiero — rimosso dal sito). **In vendita:** LA0317 (Mandria) — non mettere `homepage: false`.
 
 ## Homepage — Visite virtuali 360° (`#vtGridHome`)
 
