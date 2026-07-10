@@ -1,8 +1,19 @@
 {
   "_note": "Routing guide: quale skill caricare per ogni tipo di task. skill-essentials.md va SEMPRE caricata.",
-  "_version": "1.3 — Luglio 2026 (sync media automatico GitHub Actions)",
+  "_version": "1.4 — Luglio 2026 (Cursor Skills + Commands in .cursor/)",
 
   "always_load": "TEST-SKILL/skill-essentials.md,TEST-SKILL/skill-massimo-punteggio.md",
+
+  "cursor_skills": {
+    "_doc": "TEST-SKILL/skill-cursor-rules.md §2b — indici operativi in .cursor/skills/",
+    "righetto-core-task": { "command": "/sito", "path": ".cursor/skills/righetto-core-task/SKILL.md" },
+    "righetto-blog": { "command": "/blog", "path": ".cursor/skills/righetto-blog/SKILL.md" },
+    "righetto-landing": { "command": "/landing", "path": ".cursor/skills/righetto-landing/SKILL.md" },
+    "righetto-fix-mobile": { "command": "/mobile", "path": ".cursor/skills/righetto-fix-mobile/SKILL.md" },
+    "righetto-immobili-admin": { "command": "/immobili", "path": ".cursor/skills/righetto-immobili-admin/SKILL.md" },
+    "righetto-venerdi-sito-90giorni": { "command": "/venerdi", "path": ".cursor/skills/righetto-venerdi-sito-90giorni/SKILL.md" },
+    "righetto-perizia": { "command": "/perizia", "path": ".cursor/skills/righetto-perizia/SKILL.md" }
+  },
 
   "cursor_rules": {
     "_doc": "TEST-SKILL/skill-cursor-rules.md — regole .cursor/rules/*.mdc si attivano sui globs; core sempre attiva",

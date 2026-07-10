@@ -12,10 +12,13 @@
 | **`TEST-SKILL/SKILL-2.0.md`** | Manuale operativo completo (SEO, blog, architettura, checklist) |
 | **`TEST-SKILL/skill-*.md`** | Moduli caricati per task (content, seo, design, forms, social…) |
 | **`TEST-SKILL/context-map.json`** | Routing: quale skill per quale task |
+| **`.cursor/skills/*/SKILL.md`** | **Indice operativo** Cursor — trigger + checklist breve → punta a `TEST-SKILL/` |
+| **`.cursor/commands/*.md`** | **Slash command** in chat (`/blog`, `/landing`…) — wrapper verso le skill |
 | **`.cursor/rules/*.mdc`** | **Trigger automatici** Cursor per file aperti — estratto actionable, zero duplicazione massiva |
 | **`CLAUDE.md`** | Entry point per agenti Claude/Cursor |
 
-Le `.mdc` **non sostituiscono** la skill: la **indirizzano** e applicano guardrail quando lavori su file specifici.
+Le `.mdc` **non sostituiscono** la skill: la **indirizzano** e applicano guardrail quando lavori su file specifici.  
+Le **Cursor Skills** (`.cursor/skills/`) **non duplicano** `TEST-SKILL/`: dicono all'agente *quando* e *quali moduli* caricare.
 
 ---
 
@@ -35,20 +38,39 @@ Le `.mdc` **non sostituiscono** la skill: la **indirizzano** e applicano guardra
 
 ---
 
+## 2b. Cursor Skills + Commands (luglio 2026)
+
+| Skill progetto | Command `/` | Trigger utente | Moduli `TEST-SKILL/` |
+|----------------|-------------|----------------|----------------------|
+| `righetto-core-task` | `/sito` | task generico sul sito | essentials + massimo-punteggio |
+| `righetto-blog` | `/blog` | nuovo articolo, blog su… | content + skimm + forms (se CTA) |
+| `righetto-landing` | `/landing` | landing, form lead, conversione | forms-leads + design + context |
+| `righetto-fix-mobile` | `/mobile` | iPhone, mobile, responsive rotto | design |
+| `righetto-immobili-admin` | `/immobili` | foto admin, tour 360°, sync | media-migration + context |
+| `righetto-venerdi-sito-90giorni` | `/venerdi` | piano settimanale, venerdì, 90 giorni | essentials + seo + content |
+| `righetto-perizia` | `/perizia` | perizia PDF, stima immobile | — (script `genera_perizia_*.py`) |
+
+Percorsi: `.cursor/skills/<nome>/SKILL.md` · `.cursor/commands/<nome>.md`
+
+**Manutenzione:** regola operativa nuova → prima `TEST-SKILL/skill-*.md`, poi estratto in `.cursor/skills/` se cambia il workflow.
+
+---
+
 ## 3. Routing task → skill + rule
 
 Allineato a `context-map.json`:
 
-| Task | Skill da caricare | Rule Cursor (hint) |
-|------|-------------------|-------------------|
-| Nuovo articolo blog | essentials + content + forms (se CTA) | `righetto-blog-publish` |
-| Nuova landing | essentials + forms + design + context | `righetto-forms-leads` + `righetto-vanilla-ui` |
-| Fix CSS / homepage | essentials + design | `righetto-vanilla-ui` |
-| Audit SEO | essentials + seo | `righetto-seo-geo` |
-| Social cron | essentials + social-automation | `righetto-social-automation` |
-| RLS / admin / foto annunci | essentials + context + **media-migration** | `righetto-supabase-admin` |
-| Sync media / egress Supabase | essentials + **media-migration** | `righetto-supabase-admin` |
-| Audit sicurezza (2×/sett.) | essentials + security | `righetto-supabase-admin` |
+| Task | Cursor Skill | Skill da caricare | Rule Cursor (hint) |
+|------|--------------|-------------------|-------------------|
+| Nuovo articolo blog | `righetto-blog` | essentials + content + forms (se CTA) | `righetto-blog-publish` |
+| Nuova landing | `righetto-landing` | essentials + forms + design + context | `righetto-forms-leads` + `righetto-vanilla-ui` |
+| Fix CSS / mobile | `righetto-fix-mobile` | essentials + design | `righetto-vanilla-ui` |
+| Audit SEO | — | essentials + seo | `righetto-seo-geo` |
+| Piano venerdì | `righetto-venerdi-sito-90giorni` | essentials + seo + content | `righetto-blog-publish` |
+| Social cron | — | essentials + social-automation | `righetto-social-automation` |
+| RLS / admin / foto annunci | `righetto-immobili-admin` | essentials + context + **media-migration** | `righetto-supabase-admin` |
+| Sync media / egress Supabase | `righetto-immobili-admin` | essentials + **media-migration** | `righetto-supabase-admin` |
+| Audit sicurezza (2×/sett.) | — | essentials + security | `righetto-supabase-admin` |
 
 ---
 
