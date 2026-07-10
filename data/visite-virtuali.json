@@ -53,6 +53,55 @@
       }
     ]
   },
+  "ufficio-vendita-limena-uff2247": {
+    "titolo": "Ufficio in barchessa — Limena centro",
+    "comune": "Limena",
+    "codice": "UFF2247",
+    "immobile_href": "immobile?s=ufficio-vendita-limena-uff2247",
+    "cover": "img/immobili/UFF2247/001-1783520917843-000-ufficio-barchessa-2-wmk-0.webp",
+    "scenes": [
+      {
+        "id": "facciata",
+        "nome": "Barchessa storica",
+        "img": "img/immobili/UFF2247/001-1783520917843-000-ufficio-barchessa-2-wmk-0.webp"
+      },
+      {
+        "id": "ingresso",
+        "nome": "Ingresso",
+        "img": "img/immobili/UFF2247/002-1783520918338-001-ufficio-barchessa-6-mod-01-wmk-0.webp"
+      },
+      {
+        "id": "open-space",
+        "nome": "Open space",
+        "img": "img/immobili/UFF2247/006-1783520920472-006-ufficio-barchessa-1-wmk-0.webp"
+      },
+      {
+        "id": "zona-lavoro",
+        "nome": "Zona lavoro",
+        "img": "img/immobili/UFF2247/007-1783520921588-007-ufficio-barchessa-4-wmk-0.webp"
+      },
+      {
+        "id": "dettaglio-1",
+        "nome": "Dettaglio ambienti",
+        "img": "img/immobili/UFF2247/011-1783520924365-015-ufficio-100mq-1-wmk-0.webp"
+      },
+      {
+        "id": "dettaglio-2",
+        "nome": "Seconda area",
+        "img": "img/immobili/UFF2247/013-1783520925025-017-ufficio-100mq-2-wmk-0.webp"
+      },
+      {
+        "id": "vista",
+        "nome": "Vista complessiva",
+        "img": "img/immobili/UFF2247/015-1783520925763-020-ufficio-barchessa-1-wmk-0.webp"
+      },
+      {
+        "id": "finale",
+        "nome": "Spazio operativo",
+        "img": "img/immobili/UFF2247/016-1783520926127-022-ufficio-100mq-7-wmk-0.webp"
+      }
+    ]
+  },
   "casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno": {
     "titolo": "Casa singola ad Altichiero",
     "comune": "Padova",
