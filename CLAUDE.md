@@ -8,6 +8,8 @@ La skill e' l'unica fonte di verita' per questo progetto.
 
 **Regole Cursor (`.mdc` scoped):** vedi **`TEST-SKILL/skill-cursor-rules.md`** — `righetto-core.mdc` sempre attiva; le altre si attivano su blog, HTML/CSS, form, social, SEO, admin/SQL.
 
+**Cursor Skills (luglio 2026):** indici operativi in `.cursor/skills/*/SKILL.md` con slash commands (`/blog`, `/seo`, `/social`, `/zona`, `/sicurezza`, …) — mappa completa in `skill-cursor-rules.md` §2b e `context-map.json` → `cursor_skills`.
+
 ## Regole Automatiche
 
 ### Dopo ogni modifica:

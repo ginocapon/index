@@ -34,14 +34,20 @@ description: >-
 
 ## Routing verso skill specializzate
 
-| Task | Skill progetto |
-|------|----------------|
-| Nuovo articolo blog | `righetto-blog` |
-| Landing / form lead | `righetto-landing` |
-| Fix mobile / iPhone | `righetto-fix-mobile` |
-| Foto admin / tour 360° | `righetto-immobili-admin` |
-| Piano venerdì / 90 giorni | `righetto-venerdi-sito-90giorni` (personale) |
-| Perizia PDF | `righetto-perizia` |
+| Task | Skill progetto | Command |
+|------|----------------|---------|
+| Nuovo articolo blog | `righetto-blog` | `/blog` |
+| Landing / form lead | `righetto-landing` | `/landing` |
+| Fix mobile / iPhone | `righetto-fix-mobile` | `/mobile` |
+| Foto admin / tour 360° | `righetto-immobili-admin` | `/immobili` |
+| Audit SEO / meta / schema | `righetto-seo` | `/seo` |
+| Pagina zona / quartiere | `righetto-zona` | `/zona` |
+| Social / copy post | `righetto-social` | `/social` |
+| Audit sicurezza | `righetto-security` | `/sicurezza` |
+| Piano venerdì / 90 giorni | `righetto-venerdi-sito-90giorni` | `/venerdi` |
+| Perizia PDF | `righetto-perizia` | `/perizia` |
+
+Mappa completa: `TEST-SKILL/skill-cursor-rules.md` §2b
 
 ## Rules Cursor attive
 
