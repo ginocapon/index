@@ -222,6 +222,31 @@ document.querySelectorAll('.faq-btn').forEach(btn => {
 
 ---
 
+## 7c. HERO LANDING — MOBILE (iPhone)
+
+Pattern validato su `landing-costi-locazione-inquilino.html` (luglio 2026).
+
+**Problema tipico:** testo bianco illeggibile — il blocco copy con `margin-top` negativo finisce sullo sfondo chiaro del body, non sulla foto.
+
+**Layout mobile obbligatorio (split, non overlap):**
+
+| Elemento | Regola |
+|----------|--------|
+| `.v-hero` | `min-height: auto`, `background: var(--nero)` |
+| `.v-hero-media` | Altezza fissa ~38–44vh, `flex: none` |
+| `.v-hero-copy` | **Sotto** la foto, `margin-top: 0`, `background: var(--nero)` |
+| Viewport | `viewport-fit=cover` + safe-area su body/footer |
+| Input form | `font-size: 16px` minimo (no zoom Safari) |
+| Tabelle | Hint scroll + `-webkit-overflow-scrolling: touch` |
+
+**Vietato su mobile:** testo bianco che si estende oltre l'overlay scuro della foto verso il body chiaro.
+
+**Tabelle larghe:** prima di `.tbl-wrap` inserire `<p class="tbl-hint" aria-hidden="true">↔ Scorri la tabella…</p>` (visibile solo `@media max-width 767px`); su `.tbl-wrap` usare `-webkit-overflow-scrolling: touch`.
+
+Skill operativa: `.cursor/skills/righetto-fix-mobile/SKILL.md` (lezione consolidata).
+
+---
+
 ## 7b. FORM LEAD (landing / servizi)
 
 Ogni landing con modulo contatto deve rispettare **`skill-forms-leads.md`** (logica) e questo blocco UI:

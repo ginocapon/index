@@ -30,7 +30,17 @@ description: >-
 - [ ] File letto prima di modificare
 - [ ] Title ≤60 (max 70), meta ≤160 — `node scripts/validate-page.js --file pagina.html`
 - [ ] `sitemap.xml` se nuova/rimossa URL
-- [ ] Commit + push automatici se ci sono file modificati (§1.1 skill-essentials) — no `.env`/segreti
+- [ ] **Commit:** a fine task se ci sono modifiche (messaggio in italiano, no `.env`/segreti)
+- [ ] **Push:** solo se l'utente lo chiede esplicitamente («push», «pushia», «metti online»). Senza richiesta → commit locale o solo file modificati, **no push**
+
+## Lezioni consolidate (aggiornare dopo ogni fix)
+
+Dopo un fix importante, l'utente può dire: *«aggiorna skill con questa lezione»* → documentare in:
+- skill specializzata (es. `righetto-fix-mobile`)
+- `TEST-SKILL/skill-design.md` o modulo pertinente
+- changelog `SKILL-2.0.md`
+
+Lezioni già registrate (luglio 2026): hero landing iPhone, tour 360° slug/codice, annunci disattivati admin+catalogo.
 
 ## Routing verso skill specializzate
 

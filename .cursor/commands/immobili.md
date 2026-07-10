@@ -6,4 +6,4 @@ Sync foto: automatico ogni 6 h — **non** chiedere comandi manuali salvo urgenz
 
 Tour 360° homepage: max 4 attivi da Supabase + `data/visite-virtuali.json`.
 
-Fine task: commit + push solo se file repo modificati.
+Fine task: commit se file repo modificati. Push se l'utente lo chiede.
