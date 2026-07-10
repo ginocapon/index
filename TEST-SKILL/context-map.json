@@ -1,6 +1,6 @@
 {
   "_note": "Routing guide: quale skill caricare per ogni tipo di task. skill-essentials.md va SEMPRE caricata.",
-  "_version": "1.4 — Luglio 2026 (Cursor Skills + Commands in .cursor/)",
+  "_version": "1.5 — Luglio 2026 (Cursor Skills complete: seo, social, security, zona)",
 
   "always_load": "TEST-SKILL/skill-essentials.md,TEST-SKILL/skill-massimo-punteggio.md",
 
@@ -12,7 +12,11 @@
     "righetto-fix-mobile": { "command": "/mobile", "path": ".cursor/skills/righetto-fix-mobile/SKILL.md" },
     "righetto-immobili-admin": { "command": "/immobili", "path": ".cursor/skills/righetto-immobili-admin/SKILL.md" },
     "righetto-venerdi-sito-90giorni": { "command": "/venerdi", "path": ".cursor/skills/righetto-venerdi-sito-90giorni/SKILL.md" },
-    "righetto-perizia": { "command": "/perizia", "path": ".cursor/skills/righetto-perizia/SKILL.md" }
+    "righetto-perizia": { "command": "/perizia", "path": ".cursor/skills/righetto-perizia/SKILL.md" },
+    "righetto-seo": { "command": "/seo", "path": ".cursor/skills/righetto-seo/SKILL.md" },
+    "righetto-social": { "command": "/social", "path": ".cursor/skills/righetto-social/SKILL.md" },
+    "righetto-security": { "command": "/sicurezza", "path": ".cursor/skills/righetto-security/SKILL.md" },
+    "righetto-zona": { "command": "/zona", "path": ".cursor/skills/righetto-zona/SKILL.md" }
   },
 
   "cursor_rules": {

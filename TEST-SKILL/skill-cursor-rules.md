@@ -49,6 +49,10 @@ Le **Cursor Skills** (`.cursor/skills/`) **non duplicano** `TEST-SKILL/`: dicono
 | `righetto-immobili-admin` | `/immobili` | foto admin, tour 360°, sync | media-migration + context |
 | `righetto-venerdi-sito-90giorni` | `/venerdi` | piano settimanale, venerdì, 90 giorni | essentials + seo + content |
 | `righetto-perizia` | `/perizia` | perizia PDF, stima immobile | — (script `genera_perizia_*.py`) |
+| `righetto-seo` | `/seo` | audit SEO, meta, schema, GSC, PAGE SCORE | seo + massimo-punteggio |
+| `righetto-social` | `/social` | bozze Meta/IG/GBP, copy post/reel | social-automation |
+| `righetto-security` | `/sicurezza` | audit sicurezza 2×/sett, RLS, admin | security + context |
+| `righetto-zona` | `/zona` | scheda zona, quartiere, SEO locale | content + seo |
 
 Percorsi: `.cursor/skills/<nome>/SKILL.md` · `.cursor/commands/<nome>.md`
 
@@ -65,12 +69,13 @@ Allineato a `context-map.json`:
 | Nuovo articolo blog | `righetto-blog` | essentials + content + forms (se CTA) | `righetto-blog-publish` |
 | Nuova landing | `righetto-landing` | essentials + forms + design + context | `righetto-forms-leads` + `righetto-vanilla-ui` |
 | Fix CSS / mobile | `righetto-fix-mobile` | essentials + design | `righetto-vanilla-ui` |
-| Audit SEO | — | essentials + seo | `righetto-seo-geo` |
+| Audit SEO / meta / schema | `righetto-seo` | essentials + seo + massimo-punteggio | `righetto-seo-geo` |
+| Nuova / update zona | `righetto-zona` | essentials + content + seo | `righetto-seo-geo` |
 | Piano venerdì | `righetto-venerdi-sito-90giorni` | essentials + seo + content | `righetto-blog-publish` |
-| Social cron | — | essentials + social-automation | `righetto-social-automation` |
+| Social cron / copy post | `righetto-social` | essentials + social-automation | `righetto-social-automation` |
 | RLS / admin / foto annunci | `righetto-immobili-admin` | essentials + context + **media-migration** | `righetto-supabase-admin` |
 | Sync media / egress Supabase | `righetto-immobili-admin` | essentials + **media-migration** | `righetto-supabase-admin` |
-| Audit sicurezza (2×/sett.) | — | essentials + security | `righetto-supabase-admin` |
+| Audit sicurezza (2×/sett.) | `righetto-security` | essentials + security + context | `righetto-supabase-admin` |
 
 ---
 

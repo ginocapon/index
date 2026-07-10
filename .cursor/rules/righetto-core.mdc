@@ -6,7 +6,8 @@ alwaysApply: true
 # Righetto Immobiliare — core
 
 **Fonte di verità:** `TEST-SKILL/SKILL-2.0.md` (indice root: `SKILL-2.0.md`).  
-**Routing task:** `TEST-SKILL/context-map.json` — carica i moduli skill indicati per ogni tipo di lavoro.
+**Routing task:** `TEST-SKILL/context-map.json` — carica i moduli skill indicati per ogni tipo di lavoro.  
+**Cursor Skills:** `.cursor/skills/*/SKILL.md` — indici operativi con slash `/blog` `/seo` ecc. (mappa §2b in `skill-cursor-rules.md`).
 
 ## Claim consentiti (verificati)
 350+ immobili · 101 comuni · 98% soddisfazione · 127 recensioni 4.9/5 · dal 2000.  
@@ -41,6 +42,9 @@ HTML/CSS/JS **vanilla** · GitHub Pages · Supabase · **zero CDN esterni** · U
 | Media foto/reel (sync auto) | `skill-media-migration.md` |
 | Title/meta ogni contenuto | `skill-essentials.md` **§1.2** |
 | Regole Cursor | `skill-cursor-rules.md` |
+
+## Cursor Skills + Commands (luglio 2026)
+Indici in `.cursor/skills/` · slash in chat: `/sito` `/blog` `/landing` `/mobile` `/seo` `/zona` `/social` `/sicurezza` `/immobili` `/venerdi` `/perizia` — mappa `skill-cursor-rules.md` §2b.
 
 ## Automazioni repo
 - Pre-commit: `node scripts/validate-page.js --staged`
