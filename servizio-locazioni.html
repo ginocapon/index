@@ -21,11 +21,11 @@
 <meta property="og:url" content="https://righettoimmobiliare.it/servizio-locazioni">
 <meta property="og:site_name" content="Righetto Immobiliare">
 <meta property="og:locale" content="it_IT">
-<meta property="og:image" content="https://righettoimmobiliare.it/img/foto-servizi/locazione-padova-og.webp">
+<meta property="og:image" content="https://righettoimmobiliare.it/img/foto-servizi/locazioni-padova-og.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Contratti di Locazione — Righetto Immobiliare Padova">
 <meta name="twitter:description" content="Gestione completa contratti di locazione a Padova: qualifica inquilini, contratti su misura, registrazione telematica, assistenza morosità. 25+ anni di…">
-<meta name="twitter:image" content="https://righettoimmobiliare.it/img/foto-servizi/locazione-padova-og.webp">
+<meta name="twitter:image" content="https://righettoimmobiliare.it/img/foto-servizi/locazioni-padova-og.webp">
 <meta name="description" content="Contratti di locazione a Padova: qualifica inquilini, contratti 4+4, 3+2, transitori, Airbnb e registrazione gratuita. Righetto Immobiliare.">
   <link rel="stylesheet" href="css/fonts.css?v=3">
   <link rel="stylesheet" href="css/nav-mobile.css?v=4">
@@ -50,18 +50,15 @@
     .bc-inner{max-width:1380px;margin:0 auto;display:flex;align-items:center;gap:.4rem;font-size:.7rem;color:rgba(255,255,255,.3)}
     .bc-inner a{color:rgba(255,255,255,.3);transition:color .2s}.bc-inner a:hover{color:var(--oro)}
     .bc-inner svg{width:9px;height:9px;flex-shrink:0}
-    /* HERO */
-    .hero{background:var(--nero);padding:5rem 1.5rem 4rem;position:relative;overflow:hidden}
-    .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.12) 0%,transparent 70%)}
-    .hero-inner{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
-    @media(max-width:900px){.hero-inner{grid-template-columns:1fr}}
-    .htag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.7rem}
-    .hero h1{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:#fff;line-height:1.15;margin-bottom:1rem}
-    .hero h1 strong{font-weight:600;font-style:italic}
-    .hero-locazioni-bg{background:linear-gradient(180deg,rgba(10,10,10,.9) 0%,rgba(10,10,10,.72) 38%,rgba(10,10,10,.88) 100%),url('img/foto-servizi/contratti-di-locazione-padova.webp') center/cover no-repeat}
-    .hero-bg-word{position:absolute;top:10%;left:50%;transform:translateX(-50%);font-family:'DM Sans',sans-serif;font-size:clamp(2.6rem,8vw,5.2rem);font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.92);text-shadow:0 4px 28px rgba(0,0,0,.45);z-index:0;pointer-events:none;white-space:nowrap}
-    .hero-locazioni-bg .hero-inner{position:relative;z-index:1}
-    .hero p{font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.9;margin-bottom:1.5rem}
+    /* HERO LOCAZIONI */
+    .hero-loc{position:relative;min-height:min(88vh,820px);padding:4.5rem 1.5rem 3.5rem;overflow:hidden;display:flex;align-items:center}
+    .hero-loc-media{position:absolute;inset:0;background:url('img/foto-servizi/servizio-locazioni-hero-bg.webp') center/cover no-repeat;transform:scale(1.02);filter:blur(1px) saturate(0.9)}
+    .hero-loc-shade{position:absolute;inset:0;background:linear-gradient(115deg,rgba(8,8,8,.88) 0%,rgba(8,8,8,.72) 42%,rgba(8,8,8,.55) 100%)}
+    .hero-loc-content{position:relative;z-index:2;max-width:1380px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+    @media(max-width:900px){.hero-loc-content{grid-template-columns:1fr;gap:2rem}.hero-loc{min-height:auto;padding:4rem 1.25rem 3rem}}
+    .hero-loc-title{font-family:'DM Sans',sans-serif;font-size:clamp(3rem,11vw,6.5rem);font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:#fff;line-height:1;margin:0 0 .85rem;font-style:normal}
+    .hero-loc-lead{font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--oro);margin-bottom:1rem;letter-spacing:.04em}
+    .hero-loc-text{font-size:.9rem;color:rgba(255,255,255,.55);line-height:1.9;margin-bottom:1.25rem;max-width:520px}
     .hero-btns{display:flex;gap:.65rem;flex-wrap:wrap}
     .btn-gold{background:var(--oro);color:var(--nero);padding:.65rem 1.4rem;border-radius:2px;font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
     .btn-gold:hover{background:#d4b86a}
@@ -181,7 +178,7 @@
   },
   "areaServed": {"@type": "AdministrativeArea", "name": "Provincia di Padova"},
   "description": "Gestione completa contratti di locazione a Padova: qualifica inquilini, contratti su misura 4+4, 3+2, transitori, Airbnb, registrazione telematica, assistenza morosità e polizze affitto sicuro.",
-  "image": "https://righettoimmobiliare.it/img/foto-servizi/locazione-padova-og.webp"
+  "image": "https://righettoimmobiliare.it/img/foto-servizi/locazioni-padova-og.webp"
 }
 </script>
 <script type="application/ld+json">
@@ -226,14 +223,15 @@
 
 <main id="main-content">
 <!-- HERO -->
-<section class="hero hero-locazioni-bg">
-  <div class="hero-bg-word" aria-hidden="true">Locazione</div>
-  <div class="hero-inner">
+<section class="hero-loc" aria-labelledby="hero-loc-title">
+  <div class="hero-loc-media" aria-hidden="true"></div>
+  <div class="hero-loc-shade" aria-hidden="true"></div>
+  <div class="hero-loc-content">
     <div>
-      <div class="htag">Servizio locazioni</div>
-      <h1>Gestiamo i tuoi<br><strong>contratti di locazione</strong><br>in provincia di <strong>Padova</strong></h1>
-      <p>Dalla ricerca dell'inquilino ideale alla registrazione del contratto, dalla gestione del rapporto locativo fino alla risoluzione di eventuali problematiche. Affitto sicuro, zero stress, massima redditivita.</p>
-      <p class="last-update" style="font-size:0.85rem;color:#6b7280;margin-top:0.5rem;">Ultimo aggiornamento: Marzo 2026</p>
+      <h1 id="hero-loc-title" class="hero-loc-title">Locazioni</h1>
+      <p class="hero-loc-lead">Padova e provincia</p>
+      <p class="hero-loc-text">Dalla ricerca dell'inquilino ideale alla registrazione del contratto, dalla gestione del rapporto locativo fino alla risoluzione di eventuali problematiche. Affitto sicuro, zero stress, massima redditivita.</p>
+      <p class="last-update" style="font-size:0.85rem;color:rgba(255,255,255,.35);margin-bottom:1.25rem">Ultimo aggiornamento: Marzo 2026</p>
       <div class="hero-btns">
         <a href="#richiedi" class="btn-gold">Consulenza gratuita</a>
         <a href="https://wa.me/393497365930?text=Vorrei%20informazioni%20sulla%20locazione%20del%20mio%20immobile.%20Quando%20possiamo%20parlarne?" class="btn-outline" target="_blank" rel="noopener noreferrer">WhatsApp</a>
