@@ -90,6 +90,15 @@
       },
       {
         id: genLocalId(),
+        titolo: 'Costi locazione inquilino',
+        tipo: 'riferimento',
+        ordine: 1,
+        link_url: '/landing-costi-locazione-inquilino',
+        note: 'Guida deposito, registro, asseverazione e spese ingresso',
+        file: []
+      },
+      {
+        id: genLocalId(),
         titolo: 'Locazioni',
         tipo: 'documento',
         ordine: 0,
