@@ -11,14 +11,14 @@
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://righettoimmobiliare.it/landing-costi-locazione-inquilino">
 <link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="img/blog/landing-costi-locazione-inquilino-hero.webp" as="image" fetchpriority="high">
+<link rel="preload" href="img/team/linda-righetto.webp" as="image" fetchpriority="high">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Costi locazione per l'inquilino — guida Padova">
 <meta property="og:description" content="Deposito, prima mensilità, imposta di registro, asseverazione canone concordato e spese condominiali spiegati in modo chiaro.">
 <meta property="og:url" content="https://righettoimmobiliare.it/landing-costi-locazione-inquilino">
-<meta property="og:image" content="https://righettoimmobiliare.it/img/blog/landing-costi-locazione-inquilino-hero.webp">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="1600">
+<meta property="og:image" content="https://righettoimmobiliare.it/img/team/linda-righetto.webp">
+<meta property="og:image:width" content="663">
+<meta property="og:image:height" content="1179">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"RealEstateAgent","name":"Righetto Immobiliare","url":"https://righettoimmobiliare.it","telephone":"+39-049-884-3484","address":{"@type":"PostalAddress","streetAddress":"Via Roma n.96","addressLocality":"Limena","postalCode":"35010","addressRegion":"PD","addressCountry":"IT"},"geo":{"@type":"GeoCoordinates","latitude":45.476956,"longitude":11.845762},"sameAs":["https://www.facebook.com/righettoimmobiliare","https://www.instagram.com/righettoimmobiliare","https://www.linkedin.com/company/righetto-immobiliare"],"areaServed":"Provincia di Padova"},{"@type":"WebPage","name":"Costi locazione inquilino","url":"https://righettoimmobiliare.it/landing-costi-locazione-inquilino","dateModified":"2026-07-10","description":"Guida trasparente ai costi sostenuti dall'inquilino in una locazione a Padova e provincia."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://righettoimmobiliare.it/"},{"@type":"ListItem","position":2,"name":"Locazioni","item":"https://righettoimmobiliare.it/servizio-locazioni"},{"@type":"ListItem","position":3,"name":"Costi inquilino","item":"https://righettoimmobiliare.it/landing-costi-locazione-inquilino"}]}]}</script>
 <link rel="stylesheet" href="css/fonts.css?v=3">
 <style>
@@ -30,7 +30,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--ne
 .topbar{background:linear-gradient(90deg,var(--blu),#3d6288);color:#fff;text-align:center;padding:.55rem 1rem;font-size:.74rem;font-weight:600}
 .v-hero{min-height:92vh;display:flex;flex-direction:column;background:var(--nero)}
 .v-hero-media{position:relative;flex:1;min-height:52vh;max-height:68vh}
-.v-hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 15%}
+.v-hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
 .v-hero-media::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,53,.1) 0%,rgba(21,36,53,.9) 88%)}
 .v-hero-copy{position:relative;margin-top:-4.5rem;padding:0 1.35rem 1.5rem;z-index:2;color:#fff;max-width:520px;margin-left:auto;margin-right:auto;width:100%}
 .v-tag{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--oro2);font-weight:700;margin-bottom:.5rem}
@@ -119,6 +119,45 @@ footer a{color:var(--oro2)}
   .split-fig{grid-template-columns:repeat(4,1fr)}
 }
 @media(max-width:560px){.split-fig{grid-template-columns:1fr 1fr}.chart-row{grid-template-columns:1fr;gap:.2rem}}
+/* Calcolatore costi ingresso */
+.calc-wrap{background:linear-gradient(165deg,#152435 0%,#2C4A6E 55%,#3d6288 100%);border-radius:20px;padding:1.5rem 1.35rem 1.75rem;color:#fff;box-shadow:0 20px 50px rgba(21,36,53,.22)}
+.calc-wrap h2{color:#fff;border-bottom-color:var(--oro2);margin-bottom:.5rem}
+.calc-wrap .v-lead{color:rgba(255,255,255,.72)}
+.calc-panel{display:grid;gap:1.25rem;margin-top:1.25rem}
+@media(min-width:768px){.calc-panel{grid-template-columns:1fr 1.15fr;align-items:start}}
+.calc-form{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:1.2rem 1.25rem}
+.calc-form label{display:block;font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.65);margin:.65rem 0 .25rem;font-weight:600}
+.calc-form label:first-child{margin-top:0}
+.calc-form input,.calc-form select{width:100%;padding:.7rem .85rem;border:1.5px solid rgba(255,255,255,.2);border-radius:10px;font-family:inherit;font-size:.9rem;background:rgba(255,255,255,.95);color:var(--nero)}
+.calc-form .calc-hint{font-size:.68rem;color:rgba(255,255,255,.5);margin-top:.35rem;line-height:1.45}
+.calc-condo-opt{display:flex;gap:.5rem;margin-top:.5rem;flex-wrap:wrap}
+.calc-condo-opt label.calc-radio{display:flex;align-items:center;gap:.35rem;font-size:.72rem;text-transform:none;letter-spacing:0;color:rgba(255,255,255,.8);margin:0;cursor:pointer;font-weight:500}
+.calc-condo-opt input{accent-color:var(--oro2);width:auto}
+.calc-results{background:#fff;border-radius:16px;overflow:hidden;color:var(--nero);box-shadow:0 12px 36px rgba(0,0,0,.18)}
+.calc-results-head{background:linear-gradient(90deg,var(--oro),var(--oro2));padding:.85rem 1.15rem}
+.calc-results-head h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--nero);margin:0;font-weight:700}
+.calc-results-head p{font-size:.68rem;color:rgba(21,36,53,.7);margin:.2rem 0 0}
+.calc-table{width:100%;border-collapse:collapse;font-size:.8rem}
+.calc-table th,.calc-table td{padding:.7rem 1rem;text-align:left;border-bottom:1px solid var(--sfondo);vertical-align:middle}
+.calc-table th{background:var(--blu);color:#fff;font-size:.66rem;text-transform:uppercase;letter-spacing:.06em}
+.calc-table tr:last-child td{border-bottom:none}
+.calc-table .calc-num{text-align:right;font-weight:700;color:var(--blu);white-space:nowrap;font-variant-numeric:tabular-nums}
+.calc-table tr.calc-muted td{color:var(--grigio);font-size:.74rem}
+.calc-table tr.calc-muted .calc-num{color:var(--grigio);font-weight:500}
+.calc-table tr.calc-tot td{background:linear-gradient(90deg,rgba(44,74,110,.08),rgba(201,168,76,.12));font-weight:700;font-size:.88rem}
+.calc-table tr.calc-tot .calc-num{color:var(--nero);font-size:1rem}
+.calc-table tr.calc-skip td{text-decoration:line-through;opacity:.45}
+.calc-foot{padding:.75rem 1rem;font-size:.68rem;color:var(--grigio);background:var(--sfondo);line-height:1.5}
+.calc-actions{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1rem}
+.calc-actions-light{padding:0 1rem 1rem;margin-top:0}
+.calc-btn-pdf{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.85rem 1.25rem;border-radius:12px;font-weight:700;font-size:.82rem;border:none;cursor:pointer;background:var(--oro);color:var(--nero);transition:transform .2s}
+.calc-btn-pdf:hover{transform:translateY(-2px)}
+.calc-btn-recalc{padding:.85rem 1rem;border-radius:12px;font-weight:600;font-size:.78rem;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;cursor:pointer}
+@media print{
+  body *{visibility:hidden}
+  #calc-print-sheet,#calc-print-sheet *{visibility:visible}
+  #calc-print-sheet{position:absolute;left:0;top:0;width:100%;padding:0}
+}
 </style>
 </head>
 <body>
@@ -128,7 +167,7 @@ footer a{color:var(--oro2)}
 <main id="main">
 <section class="v-hero" aria-labelledby="hero-title">
   <div class="v-hero-media">
-    <img src="img/blog/landing-costi-locazione-inquilino-hero.webp" alt="Consulente Righetto Immobiliare — guida costi locazione per inquilini" width="800" height="1200" fetchpriority="high">
+    <img src="img/team/linda-righetto.webp" alt="Linda Righetto — agente locazioni Righetto Immobiliare Padova" width="663" height="1179" fetchpriority="high">
   </div>
   <div class="v-hero-copy">
     <p class="v-tag">Righetto Immobiliare · Locazioni</p>
@@ -136,6 +175,7 @@ footer a{color:var(--oro2)}
     <p>Deposito, prima mensilità, imposte di registrazione, eventuale asseverazione del canone concordato e spese condominiali: ecco cosa sostiene di solito l'inquilino, spiegato in modo chiaro prima della firma.</p>
     <div class="v-cta">
       <a class="v-btn v-btn-primary" href="#calcola">📋 Vedi tabelle costi</a>
+      <a class="v-btn v-btn-secondary" href="#calcolatore">🧮 Calcola i tuoi costi</a>
       <a class="v-btn v-btn-secondary" href="#richiedi">💬 Chiedi al nostro agente</a>
     </div>
     <div class="v-trust">
@@ -461,6 +501,55 @@ footer a{color:var(--oro2)}
   </div>
 </section>
 
+<section class="v-section wide" id="calcolatore">
+  <div class="calc-wrap">
+    <h2>Calcola i costi del tuo ingresso</h2>
+    <p class="v-lead">Inserisci il tipo di contratto, il canone mensile e le spese condominiali: ottieni subito un <strong>prospetto indicativo</strong> con deposito (3 mensilità calcolate in automatico), oneri fiscali e asseverazione se prevista. Puoi scaricarlo in PDF con i contatti Righetto.</p>
+
+    <div class="calc-panel">
+      <div class="calc-form">
+        <label for="calc-tipo">Tipo di contratto</label>
+        <select id="calc-tipo" onchange="updateCostiCalc()">
+          <option value="ordinario-registro">1 · Ordinario 4+4 (con registro)</option>
+          <option value="ordinario-cedolare">2 · Ordinario 4+4 + cedolare secca 21%</option>
+          <option value="concordato">3 · Concordato 3+2 + cedolare 10%</option>
+        </select>
+
+        <label for="calc-canone">Canone mensile (€)</label>
+        <input type="number" id="calc-canone" min="0" step="10" value="600" placeholder="Es. 600" oninput="updateCostiCalc()">
+
+        <label for="calc-cond">Spese condominiali mensili (€)</label>
+        <input type="number" id="calc-cond" min="0" step="5" value="80" placeholder="Es. 80 — 0 se non previste" oninput="updateCostiCalc()">
+        <div class="calc-condo-opt" role="group" aria-label="Modalità condominio in ingresso">
+          <label class="calc-radio"><input type="radio" name="calc-cond-mode" value="mese" checked onchange="updateCostiCalc()"> Primo mese</label>
+          <label class="calc-radio"><input type="radio" name="calc-cond-mode" value="trim" onchange="updateCostiCalc()"> Acconto trimestrale (×3)</label>
+        </div>
+        <p class="calc-hint">Il deposito cauzionale (3 mensilità) e gli altri oneri si aggiornano automaticamente. Valori orientativi — conferma sempre con l'agente Righetto.</p>
+      </div>
+
+      <div class="calc-results" id="calc-results" aria-live="polite">
+        <div class="calc-results-head">
+          <h3 id="calc-result-title">Il tuo prospetto ingresso</h3>
+          <p id="calc-result-sub">Contratto ordinario 4+4 · Canone 600 €/mese</p>
+        </div>
+        <table class="calc-table" aria-label="Dettaglio costi ingresso calcolati">
+          <thead>
+            <tr><th>Voce</th><th style="text-align:right">Importo</th></tr>
+          </thead>
+          <tbody id="calc-tbody"></tbody>
+        </table>
+        <div class="calc-foot" id="calc-foot-note">Esclusa provvigione agenzia (da concordare in sede). Il deposito viene restituito a fine locazione salvo trattenute.</div>
+        <div class="calc-actions calc-actions-light">
+          <button type="button" class="calc-btn-pdf" onclick="printCostiCalcPdf()">📄 Scarica PDF / Stampa</button>
+        </div>
+      </div>
+    </div>
+    <div class="calc-actions" style="margin-top:.75rem">
+      <button type="button" class="calc-btn-recalc" onclick="updateCostiCalc()">↻ Ricalcola</button>
+    </div>
+  </div>
+</section>
+
 <section class="v-section">
   <h2>Checklist prima di firmare</h2>
   <div class="v-card"><h3>1. Chiedi il prospetto completo</h3><p>Canone, deposito, condominio, registro, asseverazione (se concordato) e provvigione agenzia — tutto per iscritto.</p></div>
@@ -530,11 +619,148 @@ footer a{color:var(--oro2)}
   <p>© 2026 Gruppo Immobiliare Righetto — Via Roma 96, 35010 Limena (PD) — P.IVA 05182390285</p>
   <p style="margin-top:.4rem"><a href="/">Home</a> · <a href="contatti">Contatti</a> · <a href="privacy-policy">Privacy</a></p>
 </footer>
+<div id="calc-print-sheet" hidden aria-hidden="true"></div>
 <script src="js/vendor/supabase.min.js"></script>
 <script src="js/config.js?v=4"></script>
 <script>
 var SB_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
 var SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
+
+var CALC_BOLLO_IVA = 61;
+var CALC_ASSEVERAZIONE = 185;
+var CALC_TIPO_LABELS = {
+  'ordinario-registro': '1 · Ordinario 4+4 (con registro)',
+  'ordinario-cedolare': '2 · Ordinario 4+4 + cedolare secca 21%',
+  concordato: '3 · Concordato 3+2 + cedolare 10%'
+};
+
+function fmtEuro(n) {
+  var v = Math.round(Number(n) || 0);
+  return v.toLocaleString('it-IT') + ' €';
+}
+
+function getCalcInputs() {
+  var tipo = document.getElementById('calc-tipo').value;
+  var canone = Math.max(0, parseFloat(document.getElementById('calc-canone').value) || 0);
+  var condMese = Math.max(0, parseFloat(document.getElementById('calc-cond').value) || 0);
+  var condMode = (document.querySelector('input[name="calc-cond-mode"]:checked') || {}).value || 'mese';
+  return { tipo: tipo, canone: canone, condMese: condMese, condMode: condMode };
+}
+
+function computeCostiCalc(data) {
+  var deposito = data.canone * 3;
+  var primaMens = data.canone;
+  var condIngresso = data.condMode === 'trim' ? data.condMese * 3 : data.condMese;
+  var registro = 0;
+  var bollo = 0;
+  var asseverazione = 0;
+  var noteReg = '';
+
+  if (data.tipo === 'ordinario-registro') {
+    registro = data.canone * 12 * 0.02 * 0.5;
+    bollo = CALC_BOLLO_IVA;
+    noteReg = 'Quota inquilino 50% su imposta 2% annua';
+  } else if (data.tipo === 'concordato') {
+    asseverazione = CALC_ASSEVERAZIONE;
+  }
+
+  var totale = deposito + primaMens + condIngresso + registro + bollo + asseverazione;
+  var rows = [
+    { label: 'Deposito cauzionale (3 mensilità)', amount: deposito, auto: true },
+    { label: 'Prima mensilità canone', amount: primaMens, auto: false },
+    { label: data.condMode === 'trim' ? 'Acconto condominio trimestrale' : 'Spese condominiali (1° mese)', amount: condIngresso, auto: false, optional: !condIngresso }
+  ];
+
+  if (data.tipo === 'ordinario-registro') {
+    rows.push({ label: 'Imposta registro (quota inquilino, annua)', amount: registro, note: noteReg });
+    rows.push({ label: 'Bollo registrazione (indicativo + IVA)', amount: bollo });
+  } else if (data.tipo === 'ordinario-cedolare') {
+    rows.push({ label: 'Imposta registro', amount: 0, skip: true, note: 'Di solito non a carico inquilino (cedolare 21%)' });
+    rows.push({ label: 'Bollo registrazione', amount: 0, skip: true });
+  } else {
+    rows.push({ label: 'Asseverazione canone concordato (indicativa)', amount: asseverazione, note: 'Circa 170–200 € — valore medio indicativo' });
+    rows.push({ label: 'Imposta registro', amount: 0, skip: true, note: 'Di solito non come profilo 1' });
+  }
+
+  return { rows: rows, totale: totale, deposito: deposito, registro: registro, bollo: bollo, asseverazione: asseverazione, condIngresso: condIngresso };
+}
+
+function updateCostiCalc() {
+  var data = getCalcInputs();
+  var result = computeCostiCalc(data);
+  var tipoLabel = CALC_TIPO_LABELS[data.tipo] || data.tipo;
+
+  document.getElementById('calc-result-title').textContent = 'Totale indicativo ingresso: ' + fmtEuro(result.totale);
+  document.getElementById('calc-result-sub').textContent = tipoLabel + ' · Canone ' + fmtEuro(data.canone) + '/mese';
+
+  var html = '';
+  result.rows.forEach(function (row) {
+    var cls = row.skip ? ' calc-skip' : (row.optional ? ' calc-muted' : '');
+    var note = row.note ? '<br><span style="font-weight:400;font-size:.68rem;color:var(--grigio)">' + row.note + '</span>' : '';
+    var amt = row.skip ? '—' : (row.optional && !row.amount ? '—' : fmtEuro(row.amount));
+    html += '<tr class="' + cls.trim() + '"><td>' + row.label + note + (row.auto ? ' <span style="font-size:.65rem;color:var(--oro)">auto</span>' : '') + '</td><td class="calc-num">' + amt + '</td></tr>';
+  });
+  html += '<tr class="calc-tot"><td>Totale da sostenere in ingresso (indicativo)</td><td class="calc-num">' + fmtEuro(result.totale) + '</td></tr>';
+  html += '<tr class="calc-muted"><td>Provvigione agenzia</td><td class="calc-num">Da concordare</td></tr>';
+
+  document.getElementById('calc-tbody').innerHTML = html;
+  window._calcLastResult = { data: data, result: result, tipoLabel: tipoLabel };
+}
+
+function printCostiCalcPdf() {
+  if (!window._calcLastResult) updateCostiCalc();
+  var pack = window._calcLastResult;
+  if (!pack) return;
+
+  var data = pack.data;
+  var result = pack.result;
+  var tipoLabel = pack.tipoLabel;
+  var oggi = new Date().toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  var rowsHtml = '';
+  result.rows.forEach(function (row) {
+    if (row.skip) return;
+    if (row.optional && !row.amount) return;
+    rowsHtml += '<tr><td style="padding:10px 12px;border-bottom:1px solid #e8e4de">' + row.label + '</td><td style="padding:10px 12px;border-bottom:1px solid #e8e4de;text-align:right;font-weight:700;color:#2C4A6E">' + fmtEuro(row.amount) + '</td></tr>';
+  });
+  rowsHtml += '<tr style="background:#f5f0e6"><td style="padding:12px;font-weight:700">Totale indicativo ingresso</td><td style="padding:12px;text-align:right;font-weight:700;font-size:1.1rem">' + fmtEuro(result.totale) + '</td></tr>';
+
+  var printHtml = '<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><title>Prospetto costi locazione — Righetto</title><style>' +
+    'body{font-family:Georgia,serif;color:#152435;margin:0;padding:32px 40px;line-height:1.5}' +
+    '.head{border-bottom:3px solid #C9A84C;padding-bottom:16px;margin-bottom:24px}' +
+    '.brand{font-size:1.5rem;font-weight:700;color:#2C4A6E}.brand span{color:#C9A84C;font-style:italic}' +
+    '.meta{font-size:.85rem;color:#6B7A8D;margin-top:8px}' +
+    'h1{font-size:1.35rem;margin:0 0 8px;color:#2C4A6E}' +
+    '.sub{font-size:.9rem;color:#6B7A8D;margin-bottom:20px}' +
+    'table{width:100%;border-collapse:collapse;font-size:.88rem;margin:16px 0}' +
+    'th{background:#2C4A6E;color:#fff;padding:10px 12px;text-align:left;font-size:.75rem;text-transform:uppercase}' +
+    '.foot{margin-top:28px;padding-top:16px;border-top:1px solid #ddd;font-size:.78rem;color:#6B7A8D}' +
+    '.contacts{background:#ECE7DF;padding:14px 18px;border-radius:8px;margin-top:16px;font-size:.85rem}' +
+    '@media print{body{padding:20px}}' +
+    '</style></head><body>' +
+    '<div class="head"><div class="brand">Righetto <span>Immobiliare</span></div>' +
+    '<div class="meta">Via Roma n.96 — 35010 Limena (PD) · P.IVA 05182390285</div></div>' +
+    '<h2 style="font-size:1.35rem;margin:0 0 8px;color:#2C4A6E;border:none">Prospetto costi ingresso locazione</h2>' +
+    '<p class="sub">' + tipoLabel + '<br>Canone mensile: ' + fmtEuro(data.canone) + ' · Generato il ' + oggi + '</p>' +
+    '<table><thead><tr><th>Voce</th><th style="text-align:right">Importo</th></tr></thead><tbody>' + rowsHtml + '</tbody></table>' +
+    '<p style="font-size:.8rem"><strong>Nota:</strong> cifre orientative, non vincolanti. Esclusa provvigione agenzia (da concordare in sede). Conferma ogni importo con l\'agente Righetto preposto.</p>' +
+    '<div class="contacts"><strong>Contatti</strong><br>Tel. 049.8843484 · Cell. 349 736 5930<br>info@righettoimmobiliare.it · righettoimmobiliare.it</div>' +
+    '<div class="foot">© 2026 Gruppo Immobiliare Righetto di Capon Gino — Documento generato dalla guida costi locazione inquilino.</div>' +
+    '</body></html>';
+
+  var w = window.open('', '_blank', 'noopener,noreferrer');
+  if (!w) {
+    alert('Consenti i popup per scaricare il PDF, oppure usa Stampa pagina (Ctrl+P) sulla tabella.');
+    return;
+  }
+  w.document.open();
+  w.document.write(printHtml);
+  w.document.close();
+  w.focus();
+  setTimeout(function () { w.print(); }, 400);
+}
+
+document.addEventListener('DOMContentLoaded', updateCostiCalc);
 
 async function sendCostiForm(e) {
   e.preventDefault();
