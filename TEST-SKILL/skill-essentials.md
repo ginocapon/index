@@ -36,7 +36,7 @@
 12. **Cache-busting obbligatorio** — ogni CSS/JS linkato DEVE avere `?v=N`. Incrementare ad ogni modifica
 13. **Form lead (landing / blog / servizi)** — invio **in pagina** con `SERVIZI_CONFIG.sendNotifica()` + insert Supabase `richieste`; **mai** solo redirect GET a Contatti; **mai** chiamare `send-mail.php` dal browser. Dettaglio: **`TEST-SKILL/skill-forms-leads.md`**
 14. **Foto annunci (luglio 2026)** — servite da `righettoimmobiliare.it/img/immobili/` (GitHub Pages). Dopo upload in admin: sync **automatico** ogni 6 h via `.github/workflows/sync-media-github.yml` — **non** chiedere all'utente comandi manuali. Dettaglio: **`TEST-SKILL/skill-media-migration.md`**
-15. **Homepage — Visite virtuali 360° (`#vtGridHome`)** — **nessun elenco fisso** in `homepage.js`. A ogni caricamento (e verifica venerdì): Supabase `immobili` con `attivo=true`, `venduto=false`, `affittato=false`, ordine `created_at` DESC; primi **4** con `virtual_tour_scenes` (scene arricchite da `data/visite-virtuali.json` se mancanti). Immobili disattivati **non** compaiono. Nuovo annuncio con tour: aggiornare `data/visite-virtuali.json` (cover + scene) e scene in admin; bump `homepage.js?v=N`.
+15. **Homepage — Visite virtuali 360° (`#vtGridHome`)** — **nessun elenco fisso** in `homepage.js`. A ogni caricamento (e verifica venerdì): Supabase `immobili` con `attivo=true`, `venduto=false`, `affittato=false`, ordine `created_at` DESC; primi **4** con `virtual_tour_scenes` (scene arricchite da `data/visite-virtuali.json` se mancanti). Immobili disattivati: **`attivo=false` in admin** + opz. `"homepage": false` in `visite-virtuali.json`. Match catalogo per **codice** se slug Supabase ≠ key JSON. Nuovo annuncio con tour: aggiornare `data/visite-virtuali.json` (cover + scene + slug DB) e scene in admin; bump `homepage.js?v=N`.
 16. **Title e meta description (BLOCCANTE)** — su **ogni** pagina HTML creata o modificata: vedi **§1.2** sotto; verificare con `validate-page.js` **prima** del commit
 
 ### 1.2 Title e Meta — gate obbligatorio (luglio 2026)
@@ -71,10 +71,15 @@ Dettaglio SEO: **`skill-massimo-punteggio.md` §2.2** · **`skill-content.md`** 
 - Diretto e pratico
 - Proponi sempre prima di agire su operazioni irreversibili (eccetto commit/push: vedi §1.1)
 
-### 1.1 Commit e push automatici (OBBLIGATORIO — giugno 2026)
-Dopo **ogni** task che produce o modifica file nel repo (pagine, blog, CSS/JS, script, asset, skill, sitemap, seed admin), l'agente **committa e pusha senza chiedere** — così il sito su GitHub Pages si aggiorna e non si sprecano turni a «vuoi push?».
+### 1.1 Commit e push (giugno 2026 — agg. luglio 2026)
 
-**Flusso standard (fine task):**
+**Commit:** dopo task con file modificati, committare con messaggio in italiano (no `.env`/segreti).
+
+**Push:**
+- Se l'utente chiede esplicitamente (**«push»**, **«pushia»**, **«metti online»**) → `git push` subito dopo il commit.
+- Se l'utente **non** chiede push → solo commit (o modifiche locali), **non** pushare senza conferma.
+
+**Flusso standard (fine task con push richiesto):**
 1. `git status` + `git diff` — verifica cosa va incluso
 2. **Non** aggiungere `.env`, credenziali, segreti
 3. `git add` solo file pertinenti al task

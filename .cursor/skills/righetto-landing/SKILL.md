@@ -30,7 +30,8 @@ description: >-
 - [ ] Success box inline — nascondere campi dopo invio
 - [ ] Mobile-first: input `font-size: 16px` minimo (no zoom iOS)
 - [ ] CTA contrasto 4.5:1 — **mai** oro `#FF6B35` con testo bianco
-- [ ] Hero: testo leggibile su mobile (pannello scuro sotto foto se sfondo chiaro)
+- [ ] Hero mobile: split foto + pannello scuro sotto (no `margin-top` negativo su sfondo chiaro) — `righetto-fix-mobile` + `skill-design.md` §7c
+- [ ] Tabelle larghe mobile: `<p class="tbl-hint">↔ Scorri la tabella…</p>` prima di `.tbl-wrap` + `-webkit-overflow-scrolling: touch` (vedi `landing-costi-locazione-inquilino.html`)
 - [ ] Title ≤60, meta ≤160 — `validate-page.js`
 - [ ] Bump `?v=N` su CSS/JS modificati
 - [ ] Nessun listino mediazione online

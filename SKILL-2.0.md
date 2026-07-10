@@ -8,6 +8,10 @@ Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutt
 
 **Regole Cursor scoped:** [`TEST-SKILL/skill-cursor-rules.md`](TEST-SKILL/skill-cursor-rules.md) — 7 file `.mdc` in `.cursor/rules/` (pattern awesome-cursorrules).
 
+**Changelog rapido (10 luglio 2026 — d):** sistema Skills Cursor — lezioni consolidate (hero mobile, tour 360°, annunci disattivati, push su richiesta); mappa `.cursor/skills/README.md`; checklist venerdì §8 admin.
+
+**Changelog rapido (10 luglio 2026 — c):** fix mobile landing hero — pannello scuro sotto foto su iPhone (`landing-costi-locazione-inquilino`); lezione in `skill-design.md` §7c + `.cursor/skills/righetto-fix-mobile/SKILL.md`.
+
 **Changelog rapido (10 luglio 2026 — b):** homepage visite virtuali — ultimi 4 immobili **attivi** con tour da Supabase (`js/homepage.js` `loadVisiteVirtualiHome`); regola in `skill-essentials.md` §1 regola 15.
 
 **Changelog rapido (10 luglio 2026):** title/meta gate obbligatorio su ogni contenuto — `skill-essentials.md` **§1.2** + `validate-page.js` (≤60/≤70 title, ≤160 meta).

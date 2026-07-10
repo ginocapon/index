@@ -22,11 +22,46 @@ description: >-
 3. Verifica CTA visibile senza scroll eccessivo
 4. Form: input ≥16px, checkbox cliccabili, submit full-width
 
+## Lezione consolidata — hero landing su iPhone (luglio 2026)
+
+**Caso reale:** `landing-costi-locazione-inquilino.html` — titolo e paragrafo bianchi illeggibili su Safari iOS.
+
+**Causa:** `.v-hero-copy` con `margin-top` negativo si sovrappone alla foto ma **prosegue sullo sfondo chiaro** del `body` (`--bianco`); il gradiente sulla foto non copre quella zona → testo bianco su bianco.
+
+**Fix mobile-only (`@media (max-width: 767px)`):**
+
+1. **Rimuovere** `margin-top` negativo sul blocco testo
+2. **Separare** foto e copy: foto in alto (≈38–44vh), copy **sotto** con `background: var(--nero)` fisso
+3. Gradiente foto → `linear-gradient(..., var(--nero) 100%)` per transizione pulita
+4. `viewport-fit=cover` + `env(safe-area-inset-*)` su body/footer
+5. `-webkit-text-size-adjust: 100%` su `html`
+6. Input/select/textarea `font-size: 16px` (anti-zoom iOS)
+7. Tabelle larghe: hint «↔ Scorri la tabella» + `-webkit-overflow-scrolling: touch`
+
+**Modello CSS (pattern `.v-hero` split):**
+
+```css
+@media (max-width: 767px) {
+  .v-hero { min-height: auto; background: var(--nero); }
+  .v-hero-media { flex: none; min-height: 38vh; max-height: 44vh; }
+  .v-hero-copy {
+    margin-top: 0;
+    background: var(--nero);
+    padding: 1.35rem 1.15rem 1.75rem;
+    padding-bottom: max(1.75rem, env(safe-area-inset-bottom));
+  }
+}
+```
+
+**Regola:** su landing con foto portrait e testo bianco, **non affidarsi** al solo overlay sulla foto — su mobile usare **pannello scuro dedicato** sotto l'immagine.
+
+Vedi anche `TEST-SKILL/skill-design.md` §7c.
+
 ## Fix comuni (priorità)
 
 | Problema | Soluzione |
 |----------|-----------|
-| Testo bianco su hero chiaro | Pannello scuro fisso sotto foto (`background: var(--nero)` o overlay) |
+| Testo bianco su hero chiaro | Pannello scuro fisso sotto foto — vedi lezione sopra |
 | Zoom automatico iOS su input | `font-size: 16px` minimo su input/textarea/select |
 | Overflow orizzontale | `max-width: 100%`, `overflow-x: hidden` su body, immagini `width:100%` |
 | CTA oro illeggibile | Testo `var(--nero)` su `#FF6B35`, mai bianco |

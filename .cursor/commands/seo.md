@@ -6,4 +6,4 @@ Esegui audit: `google-compliance-check.py`, `mini-seo-check.sh`, `probe_live_url
 
 Report: issue trovate + fix proposti. Se PAGE SCORE: priorità SOSTENERE prima di nuovi articoli.
 
-Fine task: validate-page su file toccati, commit + push in italiano.
+Fine task: validate-page su file toccati, commit in italiano. Push se l'utente lo chiede.
