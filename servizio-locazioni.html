@@ -21,11 +21,11 @@
 <meta property="og:url" content="https://righettoimmobiliare.it/servizio-locazioni">
 <meta property="og:site_name" content="Righetto Immobiliare">
 <meta property="og:locale" content="it_IT">
-<meta property="og:image" content="https://righettoimmobiliare.it/img/foto-servizi/locazioni-padova-og.webp">
+<meta property="og:image" content="https://righettoimmobiliare.it/img/foto-servizi/locazione-padova-og.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Contratti di Locazione — Righetto Immobiliare Padova">
 <meta name="twitter:description" content="Gestione completa contratti di locazione a Padova: qualifica inquilini, contratti su misura, registrazione telematica, assistenza morosità. 25+ anni di…">
-<meta name="twitter:image" content="https://righettoimmobiliare.it/img/foto-servizi/locazioni-padova-og.webp">
+<meta name="twitter:image" content="https://righettoimmobiliare.it/img/foto-servizi/locazione-padova-og.webp">
 <meta name="description" content="Contratti di locazione a Padova: qualifica inquilini, contratti 4+4, 3+2, transitori, Airbnb e registrazione gratuita. Righetto Immobiliare.">
   <link rel="stylesheet" href="css/fonts.css?v=3">
   <link rel="stylesheet" href="css/nav-mobile.css?v=4">
@@ -58,9 +58,9 @@
     .htag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.7rem}
     .hero h1{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:#fff;line-height:1.15;margin-bottom:1rem}
     .hero h1 strong{font-weight:600;font-style:italic}
-    .hero-title-stamp{font-family:'DM Sans',sans-serif;font-size:clamp(2.4rem,7vw,4rem);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#fff;font-style:normal;line-height:1.05;margin-bottom:.45rem}
-    .hero-lead-stamp{font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--oro);margin-bottom:1rem;letter-spacing:.03em}
-    .hero-right{display:flex;flex-direction:column;gap:.75rem}
+    .hero-locazioni-bg{background:linear-gradient(180deg,rgba(10,10,10,.9) 0%,rgba(10,10,10,.72) 38%,rgba(10,10,10,.88) 100%),url('img/foto-servizi/contratti-di-locazione-padova.webp') center/cover no-repeat}
+    .hero-bg-word{position:absolute;top:10%;left:50%;transform:translateX(-50%);font-family:'DM Sans',sans-serif;font-size:clamp(2.6rem,8vw,5.2rem);font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.92);text-shadow:0 4px 28px rgba(0,0,0,.45);z-index:0;pointer-events:none;white-space:nowrap}
+    .hero-locazioni-bg .hero-inner{position:relative;z-index:1}
     .hero p{font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.9;margin-bottom:1.5rem}
     .hero-btns{display:flex;gap:.65rem;flex-wrap:wrap}
     .btn-gold{background:var(--oro);color:var(--nero);padding:.65rem 1.4rem;border-radius:2px;font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
@@ -72,9 +72,6 @@
     .hstat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:1.2rem 1.4rem;display:flex;align-items:center;gap:1rem}
     .hstat-val{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;color:var(--oro);flex-shrink:0;min-width:80px}
     .hstat-lbl{font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.5}
-    /* HERO IMAGE */
-    .hero-img{border-radius:4px;overflow:hidden;position:relative;aspect-ratio:16/10}
-    .hero-img img{width:100%;height:100%;object-fit:cover;display:block;border-radius:4px}
     /* SEZIONI */
     .sec{padding:5rem 1.5rem}
     .sec.bg{background:var(--sfondo)}
@@ -184,7 +181,7 @@
   },
   "areaServed": {"@type": "AdministrativeArea", "name": "Provincia di Padova"},
   "description": "Gestione completa contratti di locazione a Padova: qualifica inquilini, contratti su misura 4+4, 3+2, transitori, Airbnb, registrazione telematica, assistenza morosità e polizze affitto sicuro.",
-  "image": "https://righettoimmobiliare.it/img/foto-servizi/locazioni-padova-og.webp"
+  "image": "https://righettoimmobiliare.it/img/foto-servizi/locazione-padova-og.webp"
 }
 </script>
 <script type="application/ld+json">
@@ -229,12 +226,12 @@
 
 <main id="main-content">
 <!-- HERO -->
-<section class="hero">
+<section class="hero hero-locazioni-bg">
+  <div class="hero-bg-word" aria-hidden="true">Locazione</div>
   <div class="hero-inner">
     <div>
       <div class="htag">Servizio locazioni</div>
-      <h1 class="hero-title-stamp">Locazioni</h1>
-      <p class="hero-lead-stamp">in provincia di Padova</p>
+      <h1>Gestiamo i tuoi<br><strong>contratti di locazione</strong><br>in provincia di <strong>Padova</strong></h1>
       <p>Dalla ricerca dell'inquilino ideale alla registrazione del contratto, dalla gestione del rapporto locativo fino alla risoluzione di eventuali problematiche. Affitto sicuro, zero stress, massima redditivita.</p>
       <p class="last-update" style="font-size:0.85rem;color:#6b7280;margin-top:0.5rem;">Ultimo aggiornamento: Marzo 2026</p>
       <div class="hero-btns">
@@ -242,15 +239,10 @@
         <a href="https://wa.me/393497365930?text=Vorrei%20informazioni%20sulla%20locazione%20del%20mio%20immobile.%20Quando%20possiamo%20parlarne?" class="btn-outline" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
     </div>
-    <div class="hero-right">
-      <div class="hero-img">
-        <img src="img/foto-servizi/locazioni-padova.webp" alt="Servizio locazioni Righetto Immobiliare Padova" width="640" height="400" fetchpriority="high">
-      </div>
-      <div class="hero-stats">
+    <div class="hero-stats">
       <div class="hstat"><div class="hstat-val">18</div><div class="hstat-lbl">giorni in media per trovare un inquilino qualificato. Grazie alla nostra rete e alla promozione mirata riduciamo i tempi di vacancy.</div></div>
       <div class="hstat"><div class="hstat-val">99%</div><div class="hstat-lbl">dei contratti gestiti da noi sono perfettamente regolari e registrati. Nessun rischio fiscale o legale per il proprietario.</div></div>
       <div class="hstat"><div class="hstat-val">25+</div><div class="hstat-lbl">anni di esperienza nella gestione di locazioni a Padova e provincia. Conosciamo il mercato degli affitti in ogni zona.</div></div>
-      </div>
     </div>
   </div>
 </section>
