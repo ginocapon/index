@@ -77,6 +77,55 @@
     }
   }
 
+  var DOC_GEN_REQUIRED_RIF = [
+    {
+      titolo: 'Come lavoriamo con i clienti',
+      link_url: '/servizio-locazioni',
+      note: 'Pagina servizio locazioni — metodo Righetto'
+    },
+    {
+      titolo: 'Costi locazione inquilino',
+      link_url: '/landing-costi-locazione-inquilino',
+      note: 'Guida deposito, registro, asseverazione e spese ingresso'
+    }
+  ];
+
+  function normalizeLinkPath(url) {
+    var u = String(url || '').trim().toLowerCase();
+    if (!u) return '';
+    if (u.indexOf('http') === 0) {
+      try { u = new URL(u).pathname; } catch (e) { /* ignore */ }
+    }
+    return u.replace(/\/+$/, '') || '/';
+  }
+
+  async function ensureDefaultRiferimenti() {
+    var added = false;
+    var existing = docGenGruppi.filter(function (g) { return g.tipo === 'riferimento'; });
+    var paths = existing.map(function (g) { return normalizeLinkPath(g.link_url); });
+
+    for (var i = 0; i < DOC_GEN_REQUIRED_RIF.length; i++) {
+      var req = DOC_GEN_REQUIRED_RIF[i];
+      var path = normalizeLinkPath(req.link_url);
+      if (paths.indexOf(path) >= 0) continue;
+      var g = {
+        id: genLocalId(),
+        titolo: req.titolo,
+        tipo: 'riferimento',
+        ordine: existing.length,
+        link_url: req.link_url,
+        note: req.note || '',
+        file: []
+      };
+      docGenGruppi.push(g);
+      existing.push(g);
+      paths.push(path);
+      added = true;
+      try { await persistGruppo(g); } catch (e) { /* ignore */ }
+    }
+    return added;
+  }
+
   function seedDefaults() {
     return [
       {
@@ -199,6 +248,8 @@
         try { await persistGruppo(docGenGruppi[i]); } catch (e) { /* ignore */ }
       }
     }
+
+    await ensureDefaultRiferimenti();
 
     sortGruppi();
     renderDocumentiGenerali();
