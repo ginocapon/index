@@ -2024,6 +2024,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
         Nuovo Immobile
       </div>
+      <div class="nav-item" onclick="showSection('documentigenerali')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Documenti Generali
+      </div>
       <div class="nav-item" onclick="showSection('richieste')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         Richieste
@@ -2076,10 +2080,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
       <div class="nav-item" onclick="showSection('audit')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
         Audit Sito
-      </div>
-      <div class="nav-item" onclick="showSection('documentigenerali')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        Documenti Generali
       </div>
       <div class="nav-item" onclick="showSection('impostazioni')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -2541,7 +2541,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <label class="check-item"><input type="checkbox" id="f_raffreddamento_pavimento"> Raffredd. a Pavimento</label>
                   <label class="check-item"><input type="checkbox" id="f_termopompa"> Termopompa</label>
                   <label class="check-item"><input type="checkbox" id="f_predisposizione_aria"> Predisposizione Aria Cond.</label>
-                  <label class="check-item"><input type="checkbox" id="f_contacolori"> Contacolori</label>
+                  <label class="check-item"><input type="checkbox" id="f_conta_calorie"> Conta Calorie</label>
                   <label class="check-item"><input type="checkbox" id="f_pannelli_fotovoltaici"> ☀️ Pannelli Fotovoltaici</label>
                   <label class="check-item"><input type="checkbox" id="f_pannelli_solari"> 🌞 Pannelli Solari</label>
                   <label class="check-item"><input type="checkbox" id="f_impianto_geotermico"> Geotermico</label>
@@ -5712,7 +5712,7 @@ function editImmobile(id) {
     'giardino_condominiale','piano_interrato','piano_terra','primo_piano','ultimo_piano',
     'ingresso_indipendente','canna_fumaria','animali_ammessi','annuncio_prestigio',
     'chiavi_agenzia','immobile_garantito','riscaldamento_autonomo',
-    'riscaldamento_centralizzato','aria_condizionata'];
+    'riscaldamento_centralizzato','aria_condizionata','conta_calorie'];
   bools.forEach(f => {
     const el = document.getElementById('f_' + f);
     if (el) el.checked = !!imm[f];
@@ -5880,6 +5880,7 @@ async function saveImmobile(e) {
     pannelli_fotovoltaici: document.getElementById('f_pannelli_fotovoltaici')?.checked||false,
     pannelli_solari: document.getElementById('f_pannelli_solari')?.checked||false,
     impianto_geotermico: document.getElementById('f_impianto_geotermico')?.checked||false,
+    conta_calorie: document.getElementById('f_conta_calorie')?.checked||false,
     // Altri comfort
     allarme: document.getElementById('f_allarme')?.checked||false,
     domotica: document.getElementById('f_domotica')?.checked||false,
@@ -8117,6 +8118,7 @@ function printPropertyPdf(id) {
   if (i.pannelli_fotovoltaici) clima.push('Fotovoltaico');
   if (i.pannelli_solari) clima.push('Solare termico');
   if (i.impianto_geotermico) clima.push('Geotermico');
+  if (i.conta_calorie) clima.push('Conta calorie');
 
   // Comfort
   const comfort = [];
