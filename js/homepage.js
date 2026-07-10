@@ -215,10 +215,13 @@ const VT_PREVIEW = 4;
 /** Ordine fisso homepage: 4 tour nel catalogo locale */
 const VT_CATALOG_ORDER = [
   'appartamento-elegante-con-ampio-terrazzo-in-zona-sacro-cuore-padova',
-  'casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno',
+  'ufficio-vendita-limena-uff2247',
   'elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova',
   'bi-familiare-indipendente-in-vendita-nel-cuore-di-sacrocuore-padova'
 ];
+const VT_EXCLUDE_SLUGS = {
+  'casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno': true
+};
 
 function hasVirtualTour(p) {
   return Array.isArray(p.virtual_tour_scenes) && p.virtual_tour_scenes.some(function(s) {
@@ -241,21 +244,28 @@ function vtImmobiliHref(p) {
   return 'immobili?' + params.toString();
 }
 
-function renderVisiteVirtualiHome(arr) {
+function vtCoverUrl(p, catalog) {
+  var slug = String(p.slug || '').trim();
+  var cat = catalog && slug ? catalog[slug] : null;
+  var coverRaw = (cat && cat.cover) || p.foto_principale || (p.foto_urls && p.foto_urls[0]) || (p.foto && p.foto[0]) || '';
+  var scene0 = (p.virtual_tour_scenes || []).find(function(s) { return s && (s.url || s.thumbnail); });
+  if (!coverRaw && scene0) coverRaw = scene0.url || scene0.thumbnail;
+  return resolveImageUrl(coverRaw || '');
+}
+
+function renderVisiteVirtualiHome(arr, catalog) {
   const grid = document.getElementById('vtGridHome');
   if (!grid || !arr.length) return;
   const tilts = ['vt-tilt-l', 'vt-tilt-r', 'vt-tilt-r', 'vt-tilt-l'];
   grid.innerHTML = arr.map(function(p, i) {
     const slug = String(p.slug || '').trim();
     if (!slug) return '';
-    const coverRaw = p.foto_principale || (p.foto_urls && p.foto_urls[0]) || (p.foto && p.foto[0]) || '';
-    const scene0 = (p.virtual_tour_scenes || []).find(function(s) { return s && (s.url || s.thumbnail); });
-    const cover = resolveImageUrl(coverRaw || (scene0 && (scene0.url || scene0.thumbnail)) || '');
+    const cover = vtCoverUrl(p, catalog);
     const comune = p.comune || 'Padova';
     const href = vtImmobiliHref(p);
     const label = 'Avvia visita virtuale — ' + (p.titolo || comune);
     const imgTag = cover
-      ? '<img src="' + escAttr(cover) + '" alt="Visita virtuale — ' + escAttr(p.titolo || comune) + '" width="640" height="480" loading="lazy">'
+      ? '<img src="' + escAttr(cover) + '" alt="Visita virtuale — ' + escAttr(p.titolo || comune) + '" width="640" height="480" loading="lazy" decoding="async" onerror="this.classList.add(\'vt-img-broken\')">'
       : '<div class="vt-img-ph" aria-hidden="true">360°</div>';
     return '<button type="button" class="vt-card-link rv d' + (i + 1) + '" data-vt-slug="' + escAttr(slug) + '" onclick="openVisitaTour(this.dataset.vtSlug)" aria-label="' + escAttr(label) + '">'
       + '<div class="vt-stage ' + tilts[i % tilts.length] + '">'
@@ -298,7 +308,7 @@ function mergeVtCatalogSupplement(tours, catalog, maxAdd) {
   var slugs = Object.keys(catalog);
   for (var i = 0; i < slugs.length && tours.length < VT_PREVIEW; i++) {
     var slug = slugs[i];
-    if (used[slug]) continue;
+    if (used[slug] || VT_EXCLUDE_SLUGS[slug]) continue;
     var prop = catalogEntryToProperty(slug, catalog[slug]);
     if (!prop || !hasVirtualTour(prop)) continue;
     tours.push(prop);
@@ -325,20 +335,41 @@ function toursFromCatalog(catalog, slugs) {
   var out = [];
   for (var i = 0; i < list.length && out.length < VT_PREVIEW; i++) {
     var slug = list[i];
+    if (VT_EXCLUDE_SLUGS[slug]) continue;
     var prop = catalogEntryToProperty(slug, catalog[slug]);
     if (prop && hasVirtualTour(prop)) out.push(prop);
   }
   return out;
 }
 
-function enrichToursFromSupabase(tours, data) {
-  if (!data || !data.length) return tours;
+function mergeTourWithCatalog(tour, catalog) {
+  if (!tour || !tour.slug || !catalog || !catalog[tour.slug]) return tour;
+  var cat = catalog[tour.slug];
+  var merged = Object.assign({}, tour);
+  if (cat.cover) merged.foto_principale = cat.cover;
+  if (cat.immobile_href) merged.immobile_href = cat.immobile_href;
+  if (cat.titolo) merged.titolo = cat.titolo;
+  if (cat.comune) merged.comune = cat.comune;
+  if (cat.codice) merged.codice = cat.codice;
+  if (cat.scenes && cat.scenes.length) {
+    merged.virtual_tour_scenes = cat.scenes.map(function(s) {
+      return { nome: s.nome, url: s.img, thumbnail: s.img };
+    });
+  }
+  return merged;
+}
+
+function enrichToursFromSupabase(tours, data, catalog) {
+  if (!data || !data.length) {
+    return tours.map(function(t) { return mergeTourWithCatalog(t, catalog); });
+  }
   var bySlug = {};
   data.forEach(function(p) {
-    if (p.slug && hasVirtualTour(p)) bySlug[p.slug] = p;
+    if (p.slug && hasVirtualTour(p) && !p.venduto && !p.affittato) bySlug[p.slug] = p;
   });
   return tours.map(function(t) {
-    return bySlug[t.slug] || t;
+    var merged = bySlug[t.slug] ? Object.assign({}, t, bySlug[t.slug]) : t;
+    return mergeTourWithCatalog(merged, catalog);
   });
 }
 
@@ -346,6 +377,9 @@ async function loadVisiteVirtualiHome() {
   const grid = document.getElementById('vtGridHome');
   if (!grid) return;
   try {
+    if (typeof RigMedia !== 'undefined' && RigMedia.loadManifest) {
+      await RigMedia.loadManifest();
+    }
     var catalog = await fetchVtCatalog();
     var tours = toursFromCatalog(catalog, VT_CATALOG_ORDER);
 
@@ -359,18 +393,25 @@ async function loadVisiteVirtualiHome() {
         .limit(48);
       if (!error && data && data.length) {
         if (tours.length) {
-          tours = enrichToursFromSupabase(tours, data);
+          tours = enrichToursFromSupabase(tours, data, catalog);
         } else {
-          tours = data.filter(hasVirtualTour).slice(0, VT_PREVIEW);
+          tours = data.filter(hasVirtualTour).slice(0, VT_PREVIEW).map(function(p) {
+            return mergeTourWithCatalog(p, catalog);
+          });
         }
         if (tours.length < VT_PREVIEW) {
           tours = mergeVtCatalogSupplement(tours, catalog, VT_PREVIEW - tours.length);
         }
+      } else if (catalog) {
+        tours = tours.map(function(t) { return mergeTourWithCatalog(t, catalog); });
       }
+    } else if (catalog) {
+      tours = tours.map(function(t) { return mergeTourWithCatalog(t, catalog); });
     }
 
+    tours = tours.filter(function(p) { return p.slug && !VT_EXCLUDE_SLUGS[p.slug]; });
     if (!tours.length) return;
-    renderVisiteVirtualiHome(tours);
+    renderVisiteVirtualiHome(tours.slice(0, VT_PREVIEW), catalog);
   } catch (e) {}
 }
 

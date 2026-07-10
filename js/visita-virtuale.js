@@ -129,6 +129,10 @@
     applyTransform();
   }
 
+  function mediaUrl(url) {
+    return typeof resolveImageUrl === 'function' ? resolveImageUrl(url) : url;
+  }
+
   function setScene(i) {
     if (!state.tour || !state.tour.scenes.length) return;
     state.index = (i + state.tour.scenes.length) % state.tour.scenes.length;
@@ -145,7 +149,7 @@
       els.sceneImg.classList.add('is-ready');
       fitScene();
     };
-    els.sceneImg.src = scene.img;
+    els.sceneImg.src = mediaUrl(scene.img);
     els.sceneImg.alt = 'Visita virtuale — ' + scene.nome + ', ' + state.tour.titolo;
 
     var thumbs = document.querySelectorAll('.vv-thumb');
@@ -222,7 +226,7 @@
     if (!els.thumbs || !state.tour) return;
     els.thumbs.innerHTML = state.tour.scenes.map(function (scene, i) {
       return '<button type="button" class="vv-thumb' + (i === 0 ? ' is-active' : '') + '" data-idx="' + i + '" aria-label="' + scene.nome + '">' +
-        '<img src="' + scene.img + '" alt="" loading="lazy" width="92" height="69">' +
+        '<img src="' + mediaUrl(scene.img) + '" alt="" loading="lazy" width="92" height="69">' +
         '<span>' + scene.nome + '</span></button>';
     }).join('');
 
