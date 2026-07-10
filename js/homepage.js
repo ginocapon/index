@@ -220,7 +220,14 @@ function hasVirtualTour(p) {
 }
 
 function isActiveListing(p) {
-  return !!(p && p.attivo !== false && !p.venduto && !p.affittato);
+  if (!p || p.venduto || p.affittato) return false;
+  return p.attivo === true || p.attivo === 1 || p.attivo === 'true';
+}
+
+function isBlockedFromVtHome(row, catalog) {
+  var slug = String(row.slug || '').trim();
+  if (!slug || !catalog || !catalog[slug]) return false;
+  return catalog[slug].homepage === false;
 }
 
 function vtCaptionLine(p) {
@@ -329,6 +336,7 @@ function toursFromSupabaseActive(data, catalog) {
   for (var i = 0; i < data.length && tours.length < VT_PREVIEW; i++) {
     var row = data[i];
     if (!isActiveListing(row)) continue;
+    if (isBlockedFromVtHome(row, catalog)) continue;
     var merged = mergeTourWithCatalog(row, catalog);
     if (!hasVirtualTour(merged)) continue;
     tours.push(merged);
