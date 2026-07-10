@@ -65,6 +65,18 @@ table.cost-table .tot td{background:rgba(201,168,76,.15);font-weight:700}
 .tag-std{background:#e3f2fd;color:#1565c0}
 .tag-conc{background:#e8f5e9;color:#2e7d32}
 .tag-ced{background:#fff8e1;color:#e65100}
+.pro-con-grid{display:grid;gap:1rem;margin:1.1rem 0 0}
+.pro-con-pair{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+@media(max-width:560px){.pro-con-pair{grid-template-columns:1fr}}
+.pro-con-box{border-radius:12px;padding:.9rem 1rem;font-size:.76rem;line-height:1.55}
+.pro-con-box h4{font-size:.66rem;text-transform:uppercase;letter-spacing:.07em;margin-bottom:.4rem;font-weight:700}
+.pro-con-inq{background:#e8f4fc;border:1px solid #b3d9f2}
+.pro-con-inq h4{color:#1565c0}
+.pro-con-prop{background:#f5f0e6;border:1px solid #e0d4b8}
+.pro-con-prop h4{color:#6d4c2a}
+.pro-con-box ul{margin:.2rem 0 0 1rem;padding:0}
+.pro-con-box li{margin:.2rem 0}
+.pro-con-box .sub{font-size:.68rem;color:var(--grigio);margin-top:.5rem;font-style:italic}
 .v-disclaimer{background:#fff8e1;border:1px solid #ffcc80;border-radius:14px;padding:1.25rem 1.35rem;font-size:.82rem;color:#5d4037;line-height:1.75}
 .v-disclaimer strong{color:#bf360c}
 .contract-grid{display:grid;gap:1rem;margin:1.2rem 0}
@@ -144,20 +156,144 @@ footer a{color:var(--oro2)}
       <h3>4+4 a canone libero (senza cedolare secca)</h3>
       <p>Durata <strong>4+4 anni</strong>, canone <strong>liberamente pattuito</strong> tra le parti. Il proprietario può tassare il reddito in <strong>IRPEF</strong> (o altra via ordinaria): in questo caso il contratto va registrato con <strong>imposta di registro al 2% annuo</strong> sul canone, ripartita al 50% tra locatore e conduttore, più bollo di registrazione.</p>
       <p><strong>Per l'inquilino:</strong> deposito 3 mensilità, prima rata, quota registro (~50% del 2% annuo), bollo indicativo, condominio, agenzia da concordare. <strong>Nessuna asseverazione.</strong></p>
+      <div class="pro-con-grid">
+        <div class="pro-con-pair">
+          <div class="pro-con-box pro-con-inq">
+            <h4>Vantaggi inquilino</h4>
+            <ul>
+              <li>Canone <strong>liberamente negoziabile</strong> con il proprietario</li>
+              <li>Durata lunga <strong>4+4 anni</strong> — maggiore stabilità abitativa</li>
+              <li>Possibile <strong>recesso anticipato</strong> con preavviso di almeno 6 mesi (L. 431/1998, gravi motivi)</li>
+              <li><strong>Nessuna asseverazione</strong> all'ingresso</li>
+            </ul>
+          </div>
+          <div class="pro-con-box pro-con-prop">
+            <h4>Vantaggi proprietario</h4>
+            <ul>
+              <li>Canone <strong>da concordare liberamente</strong>, non vincolato a tabelle comunali</li>
+              <li>Durata <strong>4+4</strong> con rinnovo ordinario — rapporto stabile</li>
+              <li><strong>Rivalutazione ISTAT</strong> del canone ogni anno (se prevista nel contratto)</li>
+              <li>Scelta tra <strong>IRPEF</strong> o, in alternativa, passaggio alla cedolare secca</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pro-con-pair">
+          <div class="pro-con-box pro-con-inq">
+            <h4>Limiti inquilino</h4>
+            <ul>
+              <li><strong>Imposta di registro</strong> annua (quota 50% sul 2% del canone) + bollo</li>
+              <li>Canone potenzialmente <strong>più alto</strong> rispetto al concordato</li>
+              <li>Recesso anticipato solo con <strong>motivi previsti dalla legge</strong></li>
+            </ul>
+          </div>
+          <div class="pro-con-box pro-con-prop">
+            <h4>Limiti proprietario</h4>
+            <ul>
+              <li>Obbligo di <strong>registrazione</strong> con imposta di registro al 2%</li>
+              <li>Tassazione in <strong>IRPEF</strong> se non si opta per la cedolare secca</li>
+              <li>Canone non aggiornabile liberamente oltre <strong>ISTAT</strong> e clausole contrattuali</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="v-card">
       <span class="tag-pill tag-ced">2 · Ordinario + cedolare secca 21%</span>
       <h3>Sempre 4+4 a canone libero, ma con cedolare secca</h3>
       <p>Stesso contratto <strong>ordinario 4+4</strong>, ma il proprietario opta per la <strong>cedolare secca al 21%</strong> (imposta sostitutiva sul canone). In questa configurazione gli oneri di <strong>imposta di registro e bollo</strong> per l'inquilino sono in genere <strong>assenti o molto ridotti</strong> rispetto al punto 1.</p>
       <p><strong>Per l'inquilino:</strong> deposito 3 mensilità, prima mensilità, spese condominiali, provvigione agenzia. <strong>Nessuna asseverazione</strong> — è la differenza principale rispetto al canone concordato.</p>
+      <div class="pro-con-grid">
+        <div class="pro-con-pair">
+          <div class="pro-con-box pro-con-inq">
+            <h4>Vantaggi inquilino</h4>
+            <ul>
+              <li>In genere <strong>nessun onere di registro</strong> né bollo come nel profilo 1</li>
+              <li>Stessa durata <strong>4+4</strong> e canone libero negoziabile</li>
+              <li>Costi in ingresso in genere <strong>più bassi</strong> (niente quota registro)</li>
+              <li><strong>Nessuna asseverazione</strong></li>
+            </ul>
+          </div>
+          <div class="pro-con-box pro-con-prop">
+            <h4>Vantaggi proprietario</h4>
+            <ul>
+              <li><strong>Cedolare secca al 21%</strong> — imposta sostitutiva, gestione fiscale semplificata</li>
+              <li>Canone <strong>libero</strong>, non legato alle tabelle comunali</li>
+              <li>Niente ripartizione imposta di registro con l'inquilino</li>
+              <li>Durata <strong>4+4</strong> con rivalutazione ISTAT</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pro-con-pair">
+          <div class="pro-con-box pro-con-inq">
+            <h4>Limiti inquilino</h4>
+            <ul>
+              <li>Canone <strong>non calmierato</strong> — può essere superiore al concordato</li>
+              <li>Nessun beneficio delle <strong>tabelle comunali</strong> riservate al 3+2</li>
+              <li>Recesso e durata regolati come contratto ordinario</li>
+            </ul>
+          </div>
+          <div class="pro-con-box pro-con-prop">
+            <h4>Limiti proprietario</h4>
+            <ul>
+              <li>Scelta cedolare <strong>vincolante</strong> per la durata del contratto in corso</li>
+              <li>Aliquota <strong>21%</strong> (non il 10% del concordato)</li>
+              <li>Canone non aggiornabile oltre <strong>ISTAT</strong> e accordi contrattuali</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="v-card">
       <span class="tag-pill tag-conc">3 · Canone concordato + cedolare 10%</span>
       <h3>3+2 a canone calmierato (concordato)</h3>
       <p>Contratto <strong>3+2</strong> con canone fissato dalle <strong>tabelle comunali</strong> (di solito più basso del libero). Il proprietario usa quasi sempre la <strong>cedolare secca al 10%</strong>. È l'unica delle tre formule che richiede l'<strong>asseverazione del canone</strong> da tecnico abilitato (circa <strong>170–200 €</strong>, da confermare con lo studio).</p>
       <p><strong>Per l'inquilino:</strong> deposito 3 mensilità, prima mensilità (su canone calmierato), <strong>costo asseverazione</strong>, condominio, agenzia. Onèri di registro in genere non come nel punto 1.</p>
+      <div class="pro-con-grid">
+        <div class="pro-con-pair">
+          <div class="pro-con-box pro-con-inq">
+            <h4>Vantaggi inquilino</h4>
+            <ul>
+              <li>Canone <strong>calmierato</strong> dalle tabelle comunali — spesso più basso del libero</li>
+              <li>In genere <strong>no imposta di registro</strong> come nel profilo 1</li>
+              <li>Durata <strong>3+2</strong> — utile per esigenze temporanee (es. studenti, trasferimenti)</li>
+              <li>Deposito e prima rata calcolati su canone <strong>più contenuto</strong></li>
+            </ul>
+          </div>
+          <div class="pro-con-box pro-con-prop">
+            <h4>Vantaggi proprietario</h4>
+            <ul>
+              <li><strong>Cedolare secca al 10%</strong> — aliquota ridotta rispetto al 21%</li>
+              <li>Incentivi per <strong>canone concordato</strong> nel mercato padovano</li>
+              <li>Contratto tipico per <strong>studenti e locazioni brevi-medie</strong></li>
+              <li>Niente ripartizione registro con l'inquilino</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pro-con-pair">
+          <div class="pro-con-box pro-con-inq">
+            <h4>Limiti inquilino</h4>
+            <ul>
+              <li><strong>Asseverazione obbligatoria</strong> (circa 170–200 €, da confermare in sede)</li>
+              <li>Durata <strong>3+2</strong> — meno lunga del 4+4 ordinario</li>
+              <li>Canone <strong>non negoziabile</strong> al di fuori delle tabelle</li>
+              <li>Rinnovo e condizioni da verificare con l'agente</li>
+            </ul>
+          </div>
+          <div class="pro-con-box pro-con-prop">
+            <h4>Limiti proprietario</h4>
+            <ul>
+              <li>Canone <strong>bloccato</strong> dalle tabelle comunali di Padova</li>
+              <li>Costo e pratica di <strong>asseverazione</strong> obbligatoria</li>
+              <li>Durata <strong>3+2</strong> — rinnovo non automatico come nel 4+4</li>
+              <li>Redditività potenzialmente <strong>inferiore</strong> al canone libero</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <p class="v-note">Per ogni profilo sopra trovi <strong>vantaggi e limiti</strong> per inquilino e proprietario. Di seguito il confronto numerico dei costi in ingresso.</p>
 
   <h3>Sunto costi inquilino per tipologia</h3>
   <p class="v-lead" style="margin-bottom:.75rem">Esempio indicativo su canone libero <strong>600 €/mese</strong> (ordinario) e concordato <strong>500 €/mese</strong> (tabella). Cifre orientative — vedi nota a fine pagina.</p>
