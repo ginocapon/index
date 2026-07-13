@@ -1,0 +1,24 @@
+{
+  "checked_at": "2026-07-13T14:55:23.799310+00:00",
+  "site": "https://righettoimmobiliare.it",
+  "ok": [
+    "ga-consent.js live OK (Consent Mode v2 + G-PHEL8KXLBX)",
+    "/agenzia-immobiliare-padova: solo ga-consent.js",
+    "/zona-limena: solo ga-consent.js",
+    "/blog-quotazioni-locazioni-omi-istat-padova-2026: solo ga-consent.js",
+    "/contatti: solo ga-consent.js",
+    "llms.txt live: 190 link blog",
+    "ai.json live: GA4 + Consent Mode documentati",
+    "robots.txt: crawler AI presenti",
+    "Simulazione consenso: default denied -> update on grant -> config OK"
+  ],
+  "issues": [],
+  "simulation": {
+    "step1_default": true,
+    "step2_grant": true,
+    "step3_config": true,
+    "measurement_id": "G-PHEL8KXLBX",
+    "note": "Eventi GA4 in Realtime richiedono browser con consenso analitici attivo"
+  },
+  "pass": true
+}
