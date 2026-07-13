@@ -34,7 +34,14 @@ jobs:
       - name: Sync Supabase -> img/ + purge Storage
         env:
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-        run: python scripts/sync_media_automation.py
+        run: |
+          if [ -z "$SUPABASE_KEY" ]; then
+            echo "::warning::SUPABASE_KEY assente in GitHub Secrets — sync saltato."
+            echo "Aggiungi il secret: repo Settings → Secrets and variables → Actions → SUPABASE_KEY (chiave service_role Supabase)."
+            exit 0
+          fi
+          python scripts/sync_media_automation.py
+          python scripts/verify_media_migration.py
 
       - name: Commit e push se ci sono nuove immagini
         run: |
