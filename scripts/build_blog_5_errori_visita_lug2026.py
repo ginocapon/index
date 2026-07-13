@@ -411,8 +411,8 @@ def build_html(body: str, wc: int) -> str:
     return f"""<!DOCTYPE html>
 <html lang="it">
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MHDHHES26"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-9MHDHHES26');</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PHEL8KXLBX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-PHEL8KXLBX');</script>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>5 errori in visita immobile Padova | Righetto</title>
 <meta name="robots" content="index, follow, max-image-preview:large">

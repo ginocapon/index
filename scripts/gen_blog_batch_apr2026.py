@@ -51,12 +51,12 @@ def head_block(title, desc, canonical_path, og_image, published, modified, secti
     return f"""<!DOCTYPE html>
 <html lang="it">
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MHDHHES26"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PHEL8KXLBX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){{dataLayer.push(arguments);}}
   gtag('js', new Date());
-  gtag('config', 'G-9MHDHHES26');
+  gtag('config', 'G-PHEL8KXLBX');
 </script>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#2C4A6E">

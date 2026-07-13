@@ -18,7 +18,7 @@
 | API Email | `api.righettoimmobiliare.it` — PHP relay su cPanel (mail() nativa) |
 | Email Marketing | Admin → Supabase Edge Function → API relay |
 | Newsletter | Solo raccolta contatti → tabella `newsletter_subscribers` |
-| Analytics | Google Analytics 4 (G-9MHDHHES26) |
+| Analytics | Google Analytics 4 (G-PHEL8KXLBX) |
 | Chatbot AI | "Sara" — assistente virtuale integrata |
 | Repository | GitHub — ginocapon/index |
 
