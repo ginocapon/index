@@ -36,8 +36,18 @@ Patch batch se WARN: `patch_compliance_warns.py`, `patch_audit_warns.py`, `patch
 ## GEO / AEO
 
 - Prime 2 righe dichiarative con entità (Padova, servizio, dato fonte)
-- `llms.txt` aggiornato dopo nuovi pillar/blog/zone
+- `llms.txt` aggiornato dopo nuovi pillar/blog/zone — script: `python scripts/sync_llms_catalog.py`
 - `robots.txt`: non bloccare GPTBot, ClaudeBot, Google-Extended, PerplexityBot
+- GA4: `G-PHEL8KXLBX` + Consent Mode v2 via `js/ga-consent.js` (banner `cookie-consent.js?v=4`)
+
+## GSC — monitoraggio AI Mode / AIO (venerdì)
+
+In **Prestazioni** (28 gg, confronto periodo precedente):
+
+1. Filtro query: `omi`, `affitti limena`, `agenzia immobiliare` + varianti non-brand
+2. Tab **Filtri** → se disponibile segmento **AI** / **Panoramica ricerca con AI** (account beta)
+3. Annotare in `data/gsc-keywords-priority.json`: query growth, pages SOSTENERE, `refreshed_this_week`
+4. Dopo refresh meta: richiedi indicizzazione max 10 URL/giorno (lista in skill venerdì)
 
 ## Entity SEO (no stuffing)
 

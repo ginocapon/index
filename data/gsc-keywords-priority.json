@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-09",
+  "updated": "2026-07-13",
   "source": "GSC manuale — aggiornare ogni venerdì (Prestazioni 7+28 gg)",
   "note": "Esporta CSV da GSC e sovrascrivi data/gsc-export-queries.csv e data/gsc-export-pages.csv quando disponibili. Baseline storica 16 mesi: data/gsc-baseline-16m.json (09/07/2026)",
   "baseline_16m_ref": "data/gsc-baseline-16m.json",
@@ -37,9 +37,16 @@
   "keyword_gaps_new": [
     {
       "kw": "omi padova affitti spiegati",
-      "slug_proposto": "blog-omi-padova-quotazioni-affitti-2026",
-      "rationale": "Query corta omi padova — titolo articolo OMI aggiornato luglio 2026"
+      "slug_proposto": "blog-quotazioni-locazioni-omi-istat-padova-2026",
+      "rationale": "Query corta omi padova — pillar esistente aggiornato luglio 2026 (box AEO + FAQ)"
     }
+  ],
+  "refreshed_this_week": [
+    {"url": "/blog-rendimento-affitto-padova", "action": "sostenere-meta", "date": "2026-07-13"},
+    {"url": "/agenzia-immobiliare-padova", "action": "sostenere-meta", "date": "2026-07-13"},
+    {"url": "/zona-limena", "action": "sostenere-affitti-title", "date": "2026-07-13"},
+    {"url": "/blog-affitto-breve-padova-2026", "action": "sostenere-snippet", "date": "2026-07-13"},
+    {"url": "/blog-quotazioni-locazioni-omi-istat-padova-2026", "action": "pillar-aeo", "date": "2026-07-13"}
   ],
   "published_this_week": [
     {

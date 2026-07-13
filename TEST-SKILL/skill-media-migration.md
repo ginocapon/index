@@ -77,7 +77,17 @@ python scripts/sync_media_automation.py
 git add img/ data/ share-immobile-*.html && git commit -m "Sync foto" && git push
 ```
 
-**Secret GitHub:** `SUPABASE_KEY` (service_role) in Settings → Secrets → Actions.
+**Secret GitHub:** `SUPABASE_KEY` (service_role) in Settings → Secrets and variables → Actions → Repository secrets.
+
+### Setup secret (una tantum, manuale)
+
+1. Supabase Dashboard → Project Settings → API → copia **service_role** (non anon).
+2. GitHub repo `index` → Settings → Secrets and variables → Actions → **New repository secret**.
+3. Nome: `SUPABASE_KEY` — valore: chiave service_role.
+4. Verifica: Actions → `sync-media-github.yml` → **Run workflow** → job deve completare (non «SUPABASE_KEY mancante»).
+5. Locale: stessa chiave in `.env` (gitignored) per `python scripts/sync_media_automation.py` urgente.
+
+**Senza secret:** il workflow termina in skip — il sito resta servito da `img/immobili/` già migrati; nuove foto in admin attendono sync manuale o secret.
 
 ### 3. Reel Instagram
 
