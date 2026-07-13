@@ -8,12 +8,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 GA4 = """<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MHDHHES26"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PHEL8KXLBX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-9MHDHHES26');
+  gtag('config', 'G-PHEL8KXLBX');
 </script>
 """
 
@@ -29,7 +29,7 @@ def vendor_prefix(path: Path) -> str:
 
 
 def fix_ga4(raw: str) -> str:
-    if re.search(r"G-9MHDHHES26|googletagmanager", raw, re.I):
+    if re.search(r"G-PHEL8KXLBX|googletagmanager", raw, re.I):
         return raw
     if "<head>" in raw:
         return raw.replace("<head>", "<head>\n" + GA4, 1)

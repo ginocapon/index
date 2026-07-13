@@ -281,7 +281,7 @@ for page in $PAGES; do
   fi
 
   # --- 2.12 GA4 presente ---
-  if ! echo "$content" | grep -qiE 'G-9MHDHHES26|gtag|googletagmanager'; then
+  if ! echo "$content" | grep -qiE 'G-PHEL8KXLBX|gtag|googletagmanager'; then
     PAGE_ISSUES="${PAGE_ISSUES}\n  ⚠️ Google Analytics 4 non rilevato"
     WARNINGS=$((WARNINGS+1))
   fi

@@ -130,7 +130,7 @@ Architettura a **due layer** (dettaglio: **`skill-cursor-rules.md`**):
 | **Email Marketing** | Admin → Supabase Edge Function → API relay — sistema completo nell'admin |
 | **Newsletter** | Solo raccolta contatti via form sito → tabella Supabase `newsletter_subscribers` |
 | **Form contatti** | Landing/blog/contatti/chatbot → `js/config.js` `sendNotifica()` → Edge `send-email` → relay PHP (vedi `skill-forms-leads.md`) |
-| **Analytics** | Google Analytics 4 (G-9MHDHHES26) |
+| **Analytics** | Google Analytics 4 (G-PHEL8KXLBX) |
 | **Chatbot AI** | "Sara" — assistente virtuale integrata |
 | **Repository** | GitHub — ginocapon/index |
 
