@@ -35,7 +35,21 @@ SKIP_HTML = {
     "unsubscribe.html",
     "scraping.html",
     "immobile.html",
+    "landing-demo-loft-adiacenti-padova-vicenza.html",
 }
+
+
+def is_redirect_stub(raw: str) -> bool:
+    low = raw.lower()
+    if "reindirizzamento" in low and ('http-equiv="refresh"' in low or "location.replace" in low):
+        return True
+    return False
+
+
+def is_demo_noindex(raw: str, name: str) -> bool:
+    if not name.startswith("landing-demo-"):
+        return False
+    return "noindex" in raw.lower() and "nofollow" in raw.lower()
 
 SKIP_PREFIXES = ("share-immobile-", "google")
 
@@ -195,6 +209,9 @@ def main() -> int:
     )
     REPORT.append(f"\n## 4. Pagine HTML ({len(pages)})")
     for p in pages:
+        raw = p.read_text(encoding="utf-8", errors="replace")
+        if is_redirect_stub(raw) or is_demo_noindex(raw, p.name):
+            continue
         check_page(p)
 
     check_skimm()

@@ -1704,8 +1704,10 @@ python verifica_meta.py                      # deve dire: Token tipo PAGE
 | Frequenza | Workflow / script | Output |
 |-----------|-------------------|--------|
 | Ogni 6 h | `.github/workflows/sync-media-github.yml` | `sync_media_automation.py` → migrate + purge + commit/push |
-| Manuale CI | `workflow_dispatch` su GitHub Actions | Stesso flusso |
-| Locale urgente | `python scripts/sync_media_automation.py` | Solo se utente chiede urgenza |
+| Manuale CI | `workflow_dispatch` su GitHub Actions | Stesso flusso — **PC spento OK** |
+| Locale urgente | `python scripts/sync_media_automation.py` | Solo se utente chiede urgenza **e PC acceso** |
+
+**PC spento la sera:** **nessun impatto** sul sync automatico né su GitHub Pages — tutto gira su GitHub/Supabase cloud. Orari job (CEST): 02:30, 08:30, 14:30, 20:30.
 
 **Flusso automatico:**
 1. Admin carica foto → Supabase `foto-immobili` (temporaneo)

@@ -12,9 +12,10 @@
 
 | Regola | Dettaglio |
 |--------|-----------|
-| **Sync automatico** | Dopo upload in admin **non** chiedere all'utente comandi manuali. GitHub Actions `sync-media-github.yml` gira ogni **6 h** (+ `workflow_dispatch`). |
+| **Sync automatico** | Dopo upload in admin **non** chiedere all'utente comandi manuali. GitHub Actions `sync-media-github.yml` gira ogni **6 h** su **server GitHub** (+ `workflow_dispatch`). **Il PC spento la sera non influisce.** |
 | **Messaggio utente** | «Le foto saranno sul sito entro ~6 ore» — toast già in `admin.html`. |
-| **Manuale** | Solo se l'utente chiede urgenza: `python scripts/sync_media_automation.py` + commit/push. |
+| **PC spento** | **Nessun impatto** sul sync automatico (Actions + Pages sono cloud). Serve il PC **solo** per sync locale urgente o upload in admin. |
+| **Manuale** | Solo se l'utente chiede urgenza **e il PC è acceso**: `python scripts/sync_media_automation.py` + commit/push. |
 | **URL foto pubbliche** | `img/immobili/{CODICE}/…` su GitHub Pages — **non** Supabase Storage per annunci live. |
 | **Reel** | `REEL_LOCAL=1` → `img/video/reels/` — **non** bucket `foto-immobili`. |
 | **Secret CI** | `SUPABASE_KEY` (service_role) in GitHub Actions — mai in commit. |
@@ -59,19 +60,29 @@ python scripts/migrate_supabase_media.py --videos
 python scripts/migrate_supabase_media.py --visite
 ```
 
-### 2. Dopo ogni upload foto in admin (automatico)
+### 2. Dopo ogni upload foto in admin (automatico — cloud, PC spento OK)
 
-**Non serve più lanciare comandi a mano.** Il workflow GitHub Actions
-`.github/workflows/sync-media-github.yml` gira **ogni 6 ore** (e su richiesta manuale):
+**Non serve il PC acceso.** Il workflow gira su **GitHub Actions** (`ubuntu-latest`), non sul computer di Gino.
+
+**Orari sync (cron UTC → Italia estate CEST):**
+
+| UTC | Italia (CEST) |
+|-----|----------------|
+| 00:30 | 02:30 |
+| 06:30 | 08:30 |
+| 12:30 | 14:30 |
+| 18:30 | 20:30 |
+
+Quindi anche con PC spento la sera, il job delle **02:30** e **08:30** elabora le foto caricate in admin.
 
 1. Scarica nuove foto da Supabase → `img/immobili/`
 2. Aggiorna DB, manifest, share social
-3. Commit + push su `main`
+3. Commit + push su `main` → GitHub Pages (deploy automatico, PC spento OK)
 4. Svuota bucket `foto-immobili` su Supabase
 
 **Dopo upload in admin:** attendi al massimo ~6 ore (spesso meno). Toast in admin lo conferma.
 
-**Manuale (solo se urgente):**
+**Manuale (solo se urgente e PC acceso):**
 ```powershell
 python scripts/sync_media_automation.py
 git add img/ data/ share-immobile-*.html && git commit -m "Sync foto" && git push
