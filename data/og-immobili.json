@@ -1,6 +1,39 @@
 {
-  "generated": "2026-07-09",
+  "generated": "2026-07-13",
   "bySlug": {
+    "appartamento-affitto-residenziale-limena-lf0230": {
+      "codice": "LF0230",
+      "titolo": "AFFITTO LIMENA 2 CAMERE ARREDATO",
+      "seo_slug": "appartamento-affitto-residenziale-limena-lf0230",
+      "title": "Appartamento in affitto a LIMENA — Righetto Immobiliare Padova",
+      "description": "Appartamento · 100 m² · 3 locali · € 650 · Rif. LF0230 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF0230/001-1783678064873-999-img-2537-wmk-0.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-limena-lf0230",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-limena-lf0230",
+      "share_file": "share-immobile-appartamento-affitto-residenziale-limena-lf0230.html"
+    },
+    "appartamento-affitto-residenziale-limena-lf0001": {
+      "codice": "LF0001",
+      "titolo": "AFFITTO LIMENA MINI ARREDATO",
+      "seo_slug": "appartamento-affitto-residenziale-limena-lf0001",
+      "title": "Appartamento in affitto a LIMENA — Righetto Immobiliare Padova",
+      "description": "Appartamento · 54 m² · 2 locali · € 550 · Rif. LF0001 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF0001/001-1783673734888-affitto-limena-mini-arredato-1.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-limena-lf0001",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-limena-lf0001",
+      "share_file": "share-immobile-appartamento-affitto-residenziale-limena-lf0001.html"
+    },
+    "appartamento-affitto-residenziale-padova-lf303sx": {
+      "codice": "LF303SX",
+      "titolo": "AFFITTO LIMENA 2 CAMERE MANDARDATO",
+      "seo_slug": "appartamento-affitto-residenziale-padova-lf303sx",
+      "title": "Appartamento in affitto a Padova — Righetto Immobiliare Padova",
+      "description": "Appartamento · 80 m² · 3 locali · € 600 · Rif. LF303SX · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF303SX/001-1783673383250-limena-2c-arredato.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-padova-lf303sx",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-padova-lf303sx",
+      "share_file": "share-immobile-appartamento-affitto-residenziale-padova-lf303sx.html"
+    },
     "ufficio-vendita-limena-uff2247": {
       "codice": "UFF2247",
       "titolo": "Ufficio in Centro Storico a Limena al primo piano",
@@ -245,6 +278,39 @@
     }
   },
   "byLegacySlug": {
+    "affitto-limena-2-camere-arredato": {
+      "codice": "LF0230",
+      "titolo": "AFFITTO LIMENA 2 CAMERE ARREDATO",
+      "seo_slug": "appartamento-affitto-residenziale-limena-lf0230",
+      "title": "Appartamento in affitto a LIMENA — Righetto Immobiliare Padova",
+      "description": "Appartamento · 100 m² · 3 locali · € 650 · Rif. LF0230 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF0230/001-1783678064873-999-img-2537-wmk-0.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-limena-lf0230",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-limena-lf0230",
+      "share_file": "share-immobile-appartamento-affitto-residenziale-limena-lf0230.html"
+    },
+    "affitto-limena-mini-arredato": {
+      "codice": "LF0001",
+      "titolo": "AFFITTO LIMENA MINI ARREDATO",
+      "seo_slug": "appartamento-affitto-residenziale-limena-lf0001",
+      "title": "Appartamento in affitto a LIMENA — Righetto Immobiliare Padova",
+      "description": "Appartamento · 54 m² · 2 locali · € 550 · Rif. LF0001 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF0001/001-1783673734888-affitto-limena-mini-arredato-1.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-limena-lf0001",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-limena-lf0001",
+      "share_file": "share-immobile-appartamento-affitto-residenziale-limena-lf0001.html"
+    },
+    "affitto-limena-2-camere-mandardato": {
+      "codice": "LF303SX",
+      "titolo": "AFFITTO LIMENA 2 CAMERE MANDARDATO",
+      "seo_slug": "appartamento-affitto-residenziale-padova-lf303sx",
+      "title": "Appartamento in affitto a Padova — Righetto Immobiliare Padova",
+      "description": "Appartamento · 80 m² · 3 locali · € 600 · Rif. LF303SX · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF303SX/001-1783673383250-limena-2c-arredato.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-padova-lf303sx",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-padova-lf303sx",
+      "share_file": "share-immobile-appartamento-affitto-residenziale-padova-lf303sx.html"
+    },
     "ufficio-in-centro-storico-a-limena-al-primo-piano": {
       "codice": "UFF2247",
       "titolo": "Ufficio in Centro Storico a Limena al primo piano",
@@ -478,6 +544,39 @@
     }
   },
   "byCodice": {
+    "LF0230": {
+      "codice": "LF0230",
+      "titolo": "AFFITTO LIMENA 2 CAMERE ARREDATO",
+      "seo_slug": "appartamento-affitto-residenziale-limena-lf0230",
+      "title": "Appartamento in affitto a LIMENA — Righetto Immobiliare Padova",
+      "description": "Appartamento · 100 m² · 3 locali · € 650 · Rif. LF0230 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF0230/001-1783678064873-999-img-2537-wmk-0.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-limena-lf0230",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-limena-lf0230",
+      "share_file": "share-immobile-appartamento-affitto-residenziale-limena-lf0230.html"
+    },
+    "LF0001": {
+      "codice": "LF0001",
+      "titolo": "AFFITTO LIMENA MINI ARREDATO",
+      "seo_slug": "appartamento-affitto-residenziale-limena-lf0001",
+      "title": "Appartamento in affitto a LIMENA — Righetto Immobiliare Padova",
+      "description": "Appartamento · 54 m² · 2 locali · € 550 · Rif. LF0001 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF0001/001-1783673734888-affitto-limena-mini-arredato-1.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-limena-lf0001",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-limena-lf0001",
+      "share_file": "share-immobile-appartamento-affitto-residenziale-limena-lf0001.html"
+    },
+    "LF303SX": {
+      "codice": "LF303SX",
+      "titolo": "AFFITTO LIMENA 2 CAMERE MANDARDATO",
+      "seo_slug": "appartamento-affitto-residenziale-padova-lf303sx",
+      "title": "Appartamento in affitto a Padova — Righetto Immobiliare Padova",
+      "description": "Appartamento · 80 m² · 3 locali · € 600 · Rif. LF303SX · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF303SX/001-1783673383250-limena-2c-arredato.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-padova-lf303sx",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-padova-lf303sx",
+      "share_file": "share-immobile-appartamento-affitto-residenziale-padova-lf303sx.html"
+    },
     "UFF2247": {
       "codice": "UFF2247",
       "titolo": "Ufficio in Centro Storico a Limena al primo piano",
