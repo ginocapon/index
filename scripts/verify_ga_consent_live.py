@@ -44,7 +44,7 @@ def main() -> int:
         for needle in [
             GA_ID,
             "analytics_storage",
-            "denied",
+            "'denied'",
             "rigGaConsentUpdate",
             "gtag('consent', 'default'",
         ]:
@@ -61,12 +61,9 @@ def main() -> int:
             continue
         if "googletagmanager.com/gtag/js?id=" + GA_ID in html:
             issues.append(f"{path}: gtag inline ancora presente (deploy non aggiornato?)")
-        has_consent = "ga-consent.js" in html or (
-            path in ("/", "/index.html") and "ga-consent.js" in html
-        )
         if path in ("/", "/index.html"):
             if "ga-consent.js" not in html:
-                issues.append(f"{path}: index senza ga-consent.js (idle loader)")
+                issues.append(f"{path}: index senza riferimento ga-consent.js (idle loader)")
         elif "ga-consent.js" not in html:
             issues.append(f"{path}: ga-consent.js assente")
         else:
@@ -105,15 +102,14 @@ def main() -> int:
 
     # 4) Simulazione flusso consenso (logica statica)
     sim = {
-        "step1_default": "analytics_storage=denied" in js if code == 200 else False,
-        "step2_grant": "analytics_storage: prefs.analytics ? 'granted' : 'denied'" in js
-        or "analytics ? 'granted'" in js,
-        "step3_config": f"gtag('config', GA_ID" in js or f"'config', GA_ID" in js,
+        "step1_default": "'denied'" in js and "analytics_storage" in js,
+        "step2_grant": "analytics ? 'granted'" in js or "prefs.analytics ? 'granted'" in js,
+        "step3_config": "gtag('config', GA_ID" in js,
         "measurement_id": GA_ID,
         "note": "Eventi GA4 in Realtime richiedono browser con consenso analitici attivo",
     }
     if all([sim["step1_default"], sim["step2_grant"], sim["step3_config"]]):
-        ok.append("Simulazione consenso: default denied → update on grant → config OK")
+        ok.append("Simulazione consenso: default denied -> update on grant -> config OK")
     else:
         issues.append(f"Simulazione consenso incompleta: {sim}")
 
