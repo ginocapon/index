@@ -45,6 +45,9 @@ MANUAL: dict[str, str] = {
     "/blog-affitti-canoni-fimaa-q1-2024-padova": "/blog-affitti-canoni-fimaa-q1-2026-padova",
     "/blog-vigonza-rubano-comprare-casa-cintura-2024": "/blog-vigonza-rubano-comprare-casa-cintura-2026",
     "/blog-piano-casa-decreto-salva-casa-padova": "/blog-piano-casa-decreto-66-2026-padova",
+    "/landing-demo-albergo-statale-padova-vicenza": "/landing-demo-loft-adiacenti-padova-vicenza",
+    "/landing-demo-hotel-mini-loft-padova-vicenza": "/landing-demo-loft-adiacenti-padova-vicenza",
+    "/landing-demo-hotel-venice-grisignano": "/landing-demo-loft-adiacenti-padova-vicenza",
 }
 
 BLOG_ARTICOLO_REDIRECTS = {
@@ -210,29 +213,8 @@ def existing_page_paths() -> set[str]:
 
 
 def write_stub_files(redirects: dict[str, str]) -> list[str]:
-    existing = existing_page_paths()
-    created: list[str] = []
-    for src, dst in redirects.items():
-        if "?" in src or src.endswith("/"):
-            continue
-        stem = src.lstrip("/")
-        if not stem or stem.endswith(".php"):
-            continue
-        if src in existing:
-            continue
-        out = ROOT / stem
-        if not stem.endswith(".html"):
-            out = ROOT / (stem + ".html")
-        if out.is_file():
-            continue
-        canonical = abs_url(dst)
-        target = abs_url(dst)
-        out.write_text(
-            REDIRECT_STUB_TEMPLATE.format(canonical=canonical, target=target),
-            encoding="utf-8",
-        )
-        created.append(str(out.relative_to(ROOT)))
-    return created
+    """Nessuno stub HTML in root: redirect via 404.html + js/redirects-404.js (audit compliance pulito)."""
+    return []
 
 
 def write_redirects_json(redirects: dict[str, str]) -> None:
@@ -275,11 +257,14 @@ def patch_htaccess(redirects: dict[str, str]) -> None:
 
 
 def write_trailing_slash_indexes(redirects: dict[str, str]) -> list[str]:
+    skip_folders = {"wp-admin", "api"}
     created: list[str] = []
     for src, dst in redirects.items():
         if not src.endswith("/") or src == "/":
             continue
         folder = src.strip("/")
+        if folder in skip_folders:
+            continue
         idx = ROOT / folder / "index.html"
         if idx.is_file():
             continue

@@ -1,6 +1,6 @@
 # SKIMM — Blog Keyword & Intent Map (Righetto)
 
-> **Generato:** 2026-07-09 · Script: `python scripts/build_skimm.py`
+> **Generato:** 2026-07-13 · Script: `python scripts/build_skimm.py`
 > **Uso:** prima di ogni nuovo articolo — anti-doppioni semantici + keyword per «bucare» Google senza cannibalizzare.
 > **Companion:** `check_doppioni_sito.py` (tecnico) + `skill-content.md` §2.0–2.2 + `SKILL-2.0.md` §8.1a.
 
@@ -97,15 +97,12 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 
 ## 2. Stato verifica automatica
 
-**17 avvisi** al generazione 2026-07-09:
+**14 avvisi** al generazione 2026-07-13:
 
-- KW primaria duplicata `vigonza-rubano-comprare-casa-cintura`: blog-vigonza-rubano-comprare-casa-cintura-2024, blog-vigonza-rubano-comprare-casa-cintura-2026
 - Intent simile `breakdown-costi`: blog-costi-proprieta-acquisto-possesso-vendita-padova-2026, blog-costi-costruzione-istat-padova-2026
 - Intent simile `territorio-limena`: blog-limena-vicino-padova-comprare-2026, blog-affitti-limena-2026, blog-rubano-limena-affitto-lavoratori-2026, blog-mercato-immobiliare-limena-2026…
-- Intent simile `fisco-normativa`: blog-quattro-imposte-rogitio-prima-casa-padova-2026, blog-bonus-edilizi-2024-incentivi-casa-padova, blog-bonus-mobili-2026-massimizzare-ristrutturazioni, blog-imposte-registro-catasto-compravendita-padova-2026…
-- Intent simile `territorio-cintura`: blog-vigonza-rubano-comprare-casa-cintura-2024, blog-vigonza-rubano-comprare-casa-cintura-2026
-- Intent simile `dato-trimestrale`: blog-affitti-canoni-fimaa-q1-2024-padova, blog-sondaggio-bancaditalia-q1-2026-padova
-- Intent simile `affitti-cluster`: blog-affitto-transitorio-padova-durata-2026, blog-squilibrio-domanda-offerta-affitti-padova
+- Intent simile `fisco-normativa`: blog-quattro-imposte-rogitio-prima-casa-padova-2026, blog-bonus-mobili-2026-massimizzare-ristrutturazioni, blog-imposte-registro-catasto-compravendita-padova-2026, blog-tasse-vendita-casa
+- Intent simile `affitti-cluster`: blog-affitto-transitorio-padova-durata-2026, blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026, blog-squilibrio-domanda-offerta-affitti-padova
 - Intent simile `analisi-scenari`: blog-bolla-immobiliare-padova-2026, blog-previsioni-immobiliari-scenari-geopolitica-2026, blog-prospettive-mercato-residenziale-italia-2026
 - Intent simile `territorio-padova`: blog-prezzi-case-padova-zona-2026, blog-scuole-istruzione-padova, blog-servizi-infrastrutture-padova, blog-trasporti-mobilita-padova
 - Intent simile `mutui-cluster`: blog-mutui-selettivi-banche-padova-2026, blog-mutuo-fisso-variabile-padova-2026, blog-mutuo-prima-casa-padova, blog-tassi-mutui-minimi-approfittarne-padova-2026
@@ -117,13 +114,13 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 - Coppia da non fondere (Tribloc vs Case Green generico): blog-residenze-green-padova-tribloc-2026 ↔ blog-domanda-case-green-certificazione-padova-2026
 - Coppia da non fondere (Evento BCE vs guida mutui): blog-bce-tassi-mutui-giugno-2026-padova ↔ blog-mutui-casa-padova-2026
 
-**Articoli catalogati:** 110
+**Articoli catalogati:** 107
 
 ---
 
 ## 3. Catalogo completo per cluster
 
-### Acquisto e prima casa (15)
+### Acquisto e prima casa (14)
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
@@ -140,14 +137,12 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-planimetria-catastale-compravendita-padova-2026` | `planimetria-catastale-verifica-rogito` | Controllo planimetria pre-rogito — non checklist generica |
 | `blog-quattro-imposte-rogitio-prima-casa-padova-2026` | `quattro-imposte-rogitio-prima-casa` | Fisco/normativa — non dati mercato |
 | `blog-scegliere-immobile-giusto-padova-2026` | `scegliere-immobile-zona-luce-padova` | Criteri scelta immobile (zona, luce, spese) — non guida 10 passi |
-| `blog-vigonza-rubano-comprare-casa-cintura-2024` | `vigonza-rubano-comprare-casa-cintura` | Focus Vigonza/Rubano — geografia cintura |
 | `blog-vigonza-rubano-comprare-casa-cintura-2026` | `vigonza-rubano-comprare-casa-cintura` | Focus Vigonza/Rubano — geografia cintura |
 
 ### Affitti e locazioni (19)
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
-| `blog-affitti-canoni-fimaa-q1-2024-padova` | `affitti-canoni-fimaa-2024` | Dato trimestrale verificato — aggiornare al prossimo Q |
 | `blog-affitti-canoni-fimaa-q1-2026-padova` | `fimaa-q1-2026-canoni-veneto` | Rilevazione trimestrale FIMAA — non Insights 490€ |
 | `blog-affitti-limena-2026` | `affitti-limena` | Focus Limena/cintura — non generico Padova centro |
 | `blog-affitti-padova-canoni-2026` | `affitti-padova-canoni-trend-2026` | Pillar canoni città +8% — non stanza singola Insights |
@@ -159,6 +154,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-emergenza-abitativa-padova-2026` | `emergenza-abitativa-padova-dati` | Gap domanda/offerta abitativa — non canoni singoli |
 | `blog-housing-lavoratori-veneto-edilcassa-2026` | `edilcassa-fondo-garanzia-locazione-lavoratori` | Fondo 250k€ garanzie affitto operai — non studenti né canoni |
 | `blog-quotazioni-locazioni-omi-istat-padova-2026` | `quotazioni-locazioni-omi-istat-padova` | Monitor OMI/ISTAT locazioni — non FIMAA né Insights |
+| `blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026` | `relazione-tecnico-commerciale-affitto-studenti` | Cluster affitti — verificare matrice §4 prima di pubblicare |
 | `blog-rendimento-affitto-padova` | `rendimento-locativo-quartieri-padova` | Yield % per quartiere investitori |
 | `blog-righetto-bilancio-2025-soluzioni-affitto-2026` | `righetto-bilancio-affitto-soluzioni` | Case study agenzia + soluzioni affitto — E-E-A-T |
 | `blog-rubano-limena-affitto-lavoratori-2026` | `rubano-limena-affitto-lavoratori` | Focus Limena/cintura — non generico Padova centro |
@@ -177,16 +173,14 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-loft-aziende-cucina-condivisa-padova-vicenza-2026` | `loft-aziende-cucina-condivisa-vicenza` | Angolo loft-aziende-cucina-condivisa-vicenza — intent dedicato, verificare matrice §4 |
 | `blog-so-tutto-io-venditore-presuntuoso-padova-2026` | `venditore-presuntuoso-staging-documenti-ape` | Verità dal campo / tono provocatorio — non guida tecnica staging o solo documenti |
 
-### Fisco e normativa (6)
+### Fisco e normativa (4)
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
-| `blog-bonus-edilizi-2024-incentivi-casa-padova` | `bonus-edilizi-2024-incentivi-casa` | Fisco/normativa — non dati mercato |
 | `blog-bonus-edilizi-2026-incentivi-casa-padova` | `bonus-edilizi-2026-incentivi` | Incentivi fiscali edilizia 2026 — non decreto urbanistica |
 | `blog-bonus-mobili-2026-massimizzare-ristrutturazioni` | `bonus-mobili-massimizzare-ristrutturazioni` | Fisco/normativa — non dati mercato |
 | `blog-condono-edilizio-proposte-2026` | `condono-edilizio-manovra-2026` | Proposte normative condono — non bonus edilizi |
 | `blog-piano-casa-decreto-66-2026-padova` | `piano-casa-decreto-66-padova` | Normativa Decreto 66 edilizia — non bonus fiscali |
-| `blog-piano-casa-decreto-salva-casa-padova` | `piano-casa-decreto-salva-casa` | Angolo piano-casa-decreto-salva-casa — intent dedicato, verificare matrice §4 |
 
 ### Investimenti (2)
 

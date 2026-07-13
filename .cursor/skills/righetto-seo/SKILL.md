@@ -22,7 +22,12 @@ python scripts/google-compliance-check.py
 bash scripts/mini-seo-check.sh
 bash scripts/audit-skill.sh
 python scripts/probe_live_urls.py
+python scripts/audit_geo_ai_postdeploy.py
+python scripts/verify_ga_consent_live.py
+node scripts/simulate_ga4_consent.cjs
 ```
+
+Report snapshot: `data/geo-ai-audit-latest.json`, `data/ga-consent-verify-latest.json`
 
 Patch batch se WARN: `patch_compliance_warns.py`, `patch_audit_warns.py`, `patch_cdn_local.py`
 
