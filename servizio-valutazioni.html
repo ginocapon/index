@@ -150,6 +150,11 @@
     .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.6);margin-bottom:.3rem;transition:color .2s}.fcol a:hover{color:var(--oro)}
     .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.55);flex-wrap:wrap;gap:.4rem}
     .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
+    .val-cta-sticky{display:none}
+    @media(max-width:768px){
+      .val-cta-sticky{display:flex;position:sticky;top:62px;z-index:90;background:var(--nero);padding:.65rem 1rem;gap:.5rem;justify-content:center;border-bottom:1px solid rgba(201,168,76,.25)}
+      .val-cta-sticky a{flex:1;text-align:center;background:var(--oro);color:var(--nero);padding:.55rem .75rem;border-radius:2px;font-size:.76rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+    }
   </style>
 
 <script type="application/ld+json">
@@ -224,6 +229,10 @@
   <a href="contatti" class="nav-mobile-cta">Parla con noi</a>
 </div>
 <div class="bc"><div class="bc-inner"><a href="/">Home</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg><a href="servizi">Servizi</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg><span>Valutazioni e Perizie</span></div></div>
+<div class="val-cta-sticky" aria-label="Richiedi valutazione">
+  <a href="#richiedi">Valutazione gratuita</a>
+  <a href="tel:+390498843484">Chiama ora</a>
+</div>
 
 <main id="main-content">
 <!-- HERO -->
@@ -233,7 +242,7 @@
       <div class="htag">Valutazioni e perizie immobiliari</div>
       <h1>Quanto vale il tuo<br><strong>immobile?</strong> La risposta<br><strong>professionale</strong></h1>
       <p>Valutazioni di mercato gratuite basate su 15.000+ comparabili reali e perizie accreditate ABI per banche, tribunali e successioni. Oltre 25 anni di esperienza nel mercato immobiliare padovano per darti un valore preciso, documentato e difendibile.</p>
-      <p class="last-update" style="font-size:0.85rem;color:#6b7280;margin-top:0.5rem;">Ultimo aggiornamento: Marzo 2026</p>
+      <p class="last-update" style="font-size:0.85rem;color:#6b7280;margin-top:0.5rem;">Ultimo aggiornamento: luglio 2026</p>
       <div class="hero-btns">
         <a href="#richiedi" class="btn-gold">Richiedi stima senza impegno</a>
         <a href="https://wa.me/393497365930?text=Vorrei%20una%20valutazione%20del%20mio%20immobile.%20Quando%20possiamo%20fissare%20un%20sopralluogo?" class="btn-outline" target="_blank" rel="noopener noreferrer">WhatsApp</a>
@@ -377,6 +386,10 @@
         <div style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin-bottom:.45rem">Strategia</div>
         <div style="font-weight:600;font-size:.92rem">Strategie vendita 2026</div>
       </a>
+      <a href="blog-rendimento-affitto-padova" style="display:block;background:#fff;border:1px solid var(--gc);border-radius:8px;padding:1.25rem 1.35rem">
+        <div style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--oro);margin-bottom:.45rem">Investimento</div>
+        <div style="font-weight:600;font-size:.92rem">Rendimento affitto Padova e Limena</div>
+      </a>
     </div>
   </div>
 </section>
@@ -500,7 +513,7 @@
     <div class="fgrid">
       <div><div class="flogo">Righetto <span>Immobiliare</span></div><div class="finfo">Via Roma n.96 — 35010 Limena (PD)<br>Tel: 049.8843484 · Cell: 349 736 5930<br>info@righettoimmobiliare.it</div></div>
       <div class="fcol"><div class="fh">Servizi</div><a href="servizio-vendita">Vendita</a><a href="servizio-locazioni">Locazioni</a><a href="servizio-preliminari">Preliminari</a><a href="servizio-gestione">Gestione Immobili</a><a href="servizio-valutazioni">Valutazioni e Perizie</a><a href="servizio-utenze">Utenze</a></div>
-      <div class="fcol"><div class="fh">Immobili</div><a href="immobili?op=vendita">In vendita</a><a href="immobili?op=affitto">In affitto</a><div class="fh" style="margin-top:.8rem">Quartieri</div><a href="zona-centro-storico-padova">Centro Storico</a><a href="zona-arcella-padova">Arcella</a><a href="zona-universitaria-padova">Zona Universitaria</a><a href="zona-prato-della-valle-padova">Prato della Valle</a><a href="zona-sacra-famiglia-padova">Sacra Famiglia</a><a href="zona-forcellini-padova">Forcellini</a><a href="zona-guizza-padova">Guizza</a><a href="zona-voltabarozzo-padova">Voltabarozzo</a></div>
+      <div class="fcol"><div class="fh">Immobili</div><a href="immobili?op=vendita">In vendita</a><a href="immobili?op=affitto">In affitto</a><div class="fh" style="margin-top:.8rem">Quartieri</div><a href="zona-limena">Limena</a><a href="zona-centro-storico-padova">Centro Storico</a><a href="zona-arcella-padova">Arcella</a><a href="zona-universitaria-padova">Zona Universitaria</a><a href="zona-prato-della-valle-padova">Prato della Valle</a><a href="zona-sacra-famiglia-padova">Sacra Famiglia</a><a href="zona-forcellini-padova">Forcellini</a><a href="zona-guizza-padova">Guizza</a><a href="zona-voltabarozzo-padova">Voltabarozzo</a></div>
       <div class="fcol"><div class="fh">Info</div><a href="chi-siamo">Chi siamo</a><a href="faq">FAQ</a><a href="contatti">Contatti</a><a href="privacy">Privacy</a><a href="cookie-policy">Cookie Policy</a><a href="#" data-cookie-prefs>Preferenze Cookie</a></div>
     </div>
     <div class="fbot"><span>&copy; 2026 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>

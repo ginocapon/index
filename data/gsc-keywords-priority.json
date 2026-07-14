@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-13",
+  "updated": "2026-07-14",
   "source": "GSC manuale — aggiornare ogni venerdì (Prestazioni 7+28 gg)",
   "note": "Esporta CSV da GSC e sovrascrivi data/gsc-export-queries.csv e data/gsc-export-pages.csv quando disponibili. Baseline storica 16 mesi: data/gsc-baseline-16m.json (09/07/2026)",
   "baseline_16m_ref": "data/gsc-baseline-16m.json",
@@ -64,5 +64,10 @@
       "kw": "rubano limena affitto lavoratori",
       "date": "2026-07-09"
     }
-  ]
+  ],
+  "internal_links_limena": {
+    "completed": "2026-07-14",
+    "ref": "data/internal-links-limena-2026.json",
+    "pages": ["/", "/blog-affitto-studenti-padova", "/agenzia-immobiliare-padova", "/servizio-locazioni", "/servizio-valutazioni"]
+  }
 }

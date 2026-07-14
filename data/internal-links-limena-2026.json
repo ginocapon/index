@@ -1,0 +1,17 @@
+{
+  "completed_at": "2026-07-14",
+  "cluster": "affitti-limena",
+  "target_urls": [
+    "/zona-limena",
+    "/blog-affitti-limena-2026"
+  ],
+  "source_pages": [
+    {"from": "/", "links": ["zona-limena", "blog-affitti-limena-2026"], "placement": "hero-p, territorio-chip, footer-quartieri"},
+    {"from": "/blog-affitto-studenti-padova", "links": ["zona-limena", "blog-affitti-limena-2026"], "placement": "related, faq-limena-cintura"},
+    {"from": "/agenzia-immobiliare-padova", "links": ["zona-limena", "blog-affitti-limena-2026"], "placement": "callout"},
+    {"from": "/servizio-locazioni", "links": ["zona-limena", "blog-affitti-limena-2026"], "placement": "guide-grid"},
+    {"from": "/servizio-valutazioni", "links": ["zona-limena", "blog-rendimento-affitto-padova"], "placement": "footer-quartieri, guide-grid, mobile-cta"}
+  ],
+  "sitemap_lastmod": "2026-07-14",
+  "gsc_queries_target": ["affitti limena", "agenzia immobiliare limena"]
+}
