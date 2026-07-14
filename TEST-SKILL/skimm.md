@@ -1,6 +1,6 @@
 # SKIMM — Blog Keyword & Intent Map (Righetto)
 
-> **Generato:** 2026-07-13 · Script: `python scripts/build_skimm.py`
+> **Generato:** 2026-07-14 · Script: `python scripts/build_skimm.py`
 > **Uso:** prima di ogni nuovo articolo — anti-doppioni semantici + keyword per «bucare» Google senza cannibalizzare.
 > **Companion:** `check_doppioni_sito.py` (tecnico) + `skill-content.md` §2.0–2.2 + `SKILL-2.0.md` §8.1a.
 
@@ -97,7 +97,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 
 ## 2. Stato verifica automatica
 
-**14 avvisi** al generazione 2026-07-13:
+**14 avvisi** al generazione 2026-07-14:
 
 - Intent simile `breakdown-costi`: blog-costi-proprieta-acquisto-possesso-vendita-padova-2026, blog-costi-costruzione-istat-padova-2026
 - Intent simile `territorio-limena`: blog-limena-vicino-padova-comprare-2026, blog-affitti-limena-2026, blog-rubano-limena-affitto-lavoratori-2026, blog-mercato-immobiliare-limena-2026…
