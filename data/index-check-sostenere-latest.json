@@ -1,0 +1,66 @@
+{
+  "checked_at": "2026-07-14T07:46:23.983341+00:00",
+  "pages": [
+    {
+      "path": "/zona-limena",
+      "live_status": 200,
+      "title": "Affitti e Case a Limena (PD) | Agenzia Righetto",
+      "meta_len": 152,
+      "canonical": "https://righettoimmobiliare.it/zona-limena",
+      "sitemap_lastmod": "2026-07-14",
+      "google_index": {
+        "indexed_signal": "likely_yes",
+        "note": "URL compare in site: Google"
+      }
+    },
+    {
+      "path": "/agenzia-immobiliare-padova",
+      "live_status": 200,
+      "title": "Agenzia Immobiliare Limena e Padova | Righetto dal 2000",
+      "meta_len": 140,
+      "canonical": "https://righettoimmobiliare.it/agenzia-immobiliare-padova",
+      "sitemap_lastmod": "2026-07-14",
+      "google_index": {
+        "indexed_signal": "likely_yes",
+        "note": "URL compare in site: Google"
+      }
+    },
+    {
+      "path": "/blog-rendimento-affitto-padova",
+      "live_status": 200,
+      "title": "Rendimento Affitto Padova e Limena 2026: Calcolo Quartieri",
+      "meta_len": 156,
+      "canonical": "https://righettoimmobiliare.it/blog-rendimento-affitto-padova",
+      "sitemap_lastmod": "2026-07-14",
+      "google_index": {
+        "indexed_signal": "likely_yes",
+        "note": "URL compare in site: Google"
+      }
+    },
+    {
+      "path": "/blog-affitto-breve-padova-2026",
+      "live_status": 200,
+      "title": "Affitto Breve a Padova 2026: Rendimenti, Regole e Opportunit&agrave;",
+      "meta_len": 154,
+      "canonical": "https://righettoimmobiliare.it/blog-affitto-breve-padova-2026",
+      "sitemap_lastmod": "2026-07-14",
+      "google_index": {
+        "indexed_signal": "likely_yes",
+        "note": "URL compare in site: Google"
+      }
+    },
+    {
+      "path": "/blog-quotazioni-locazioni-omi-istat-padova-2026",
+      "live_status": 200,
+      "title": "OMI Padova 2026: Quotazioni Affitti e Prezzi — Guida Ufficiale",
+      "meta_len": 160,
+      "canonical": "https://righettoimmobiliare.it/blog-quotazioni-locazioni-omi-istat-padova-2026",
+      "sitemap_lastmod": "2026-07-14",
+      "google_index": {
+        "indexed_signal": "likely_yes",
+        "note": "URL compare in site: Google"
+      }
+    }
+  ],
+  "gsc_note": "Conferma definitiva solo in GSC → Ispezione URL (non in Sitemap inviate)"
+}
