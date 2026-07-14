@@ -1,5 +1,6 @@
 # SKILL-ESSENTIALS — Righetto Immobiliare
 > **GATE:** leggi prima **`TEST-SKILL/skill-massimo-punteggio.md`** (checklist Google completa + strumenti gratuiti).  
+> **Memoria progressi:** **`TEST-SKILL/skill-memoria-progressi.md`** — cronostoria SEO e prossimi passi (leggere prima di «cosa fare per migliorare»).  
 > Carica SEMPRE questo file. Contiene le regole operative core.
 > Versione estratta da SKILL-2.0.md — Maggio 2026
 

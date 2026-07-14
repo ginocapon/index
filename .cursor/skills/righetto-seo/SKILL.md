@@ -11,7 +11,8 @@ description: >-
 
 ## Prima di iniziare
 
-1. `TEST-SKILL/skill-essentials.md` + `TEST-SKILL/skill-massimo-punteggio.md`
+1. **`TEST-SKILL/skill-memoria-progressi.md`** — stato, piano 95%, prossimi passi (non ripartire da zero)
+2. `TEST-SKILL/skill-essentials.md` + `TEST-SKILL/skill-massimo-punteggio.md`
 2. `TEST-SKILL/skill-seo.md` (framework completo)
 3. Per refresh contenuti: anche `TEST-SKILL/skill-content.md`
 

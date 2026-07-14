@@ -19,6 +19,7 @@ description: >-
 
 ## Quando applicare questa skill
 
+0. Leggi **`TEST-SKILL/skill-memoria-progressi.md`** — §Prossimi passi e piano 8 settimane (non proporre azioni fuori linea).
 1. **È venerdì** e l'utente apre la chat (anche senza domanda esplicita): proponi in apertura un blocco breve "Venerdì Righetto — questa settimana fare…".
 2. L'utente chiede **cosa fare**, **programma settimanale**, **90 giorni**, **prossimi mesi**, **check sito**.
 3. L'utente tagga **Righetto** o **sito immobiliare** insieme a pianificazione.
