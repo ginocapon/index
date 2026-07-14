@@ -2,7 +2,7 @@
   "_note": "Routing guide: quale skill caricare per ogni tipo di task. skill-essentials.md va SEMPRE caricata.",
   "_version": "1.5 — Luglio 2026 (Cursor Skills complete: seo, social, security, zona)",
 
-  "always_load": "TEST-SKILL/skill-essentials.md,TEST-SKILL/skill-massimo-punteggio.md",
+  "always_load": "TEST-SKILL/skill-essentials.md,TEST-SKILL/skill-massimo-punteggio.md,TEST-SKILL/skill-memoria-progressi.md",
 
   "cursor_skills": {
     "_doc": "TEST-SKILL/skill-cursor-rules.md §2b — indici operativi in .cursor/skills/",
@@ -62,7 +62,7 @@
       "note": "Serve struttura zona + SEO locale + schema. Title zona ≤60 char (max 70) — §1.2 skill-essentials"
     },
     "audit_seo": {
-      "skills": ["skill-essentials.md", "skill-massimo-punteggio.md", "skill-seo.md"],
+      "skills": ["skill-essentials.md", "skill-massimo-punteggio.md", "skill-memoria-progressi.md", "skill-seo.md"],
       "cursor_rules": ["righetto-seo-geo.mdc"],
       "token_stimati": "~2.200",
       "note": "Serve stato SERP + requisiti Google + KPI"
@@ -79,7 +79,7 @@
       "note": "Serve struttura file + DNS + API email"
     },
     "ottimizzazione_contenuto": {
-      "skills": ["skill-essentials.md", "skill-content.md", "skill-seo.md"],
+      "skills": ["skill-essentials.md", "skill-memoria-progressi.md", "skill-content.md", "skill-seo.md"],
       "token_stimati": "~2.800",
       "note": "Serve Neural Matching + sinonimi + GEO; venerdì: venerdi-contenuti-freschezza.py"
     },

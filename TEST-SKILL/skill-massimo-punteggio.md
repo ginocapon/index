@@ -143,7 +143,7 @@ bash scripts/mini-seo-check.sh && bash scripts/audit-skill.sh
 
 **Unico gap strutturale noto (off-site):** Domain Authority / backlink — richiede PR esterno, non solo codice.
 
-**Compliance repo (luglio 2026):** `python scripts/google-compliance-check.py` + `bash scripts/mini-seo-check.sh` + `bash scripts/audit-skill.sh` → target **100% / 0 ERR / 0 WARN** dopo batch `patch_cdn_local.py` + `patch_compliance_warns.py` + `patch_audit_warns.py`.
+**Compliance repo (luglio 2026):** `python scripts/google-compliance-check.py` → **100% / 0 ERR / 0 WARN** (14/07/2026). Batch patch se regressione: `patch_cdn_local.py` + `patch_compliance_warns.py` + `patch_audit_warns.py`.
 
 ---
 
