@@ -25,7 +25,7 @@ Allow: /
 # Ignora robots.txt per design — non bloccare in WAF; verificare IP da user-triggered-agents.json
 # Doc: https://developers.google.com/crawling/docs/crawlers-fetchers/google-user-triggered-fetchers
 
-Sitemap: https://www.righettoimmobiliare.it/sitemap.xml
+Sitemap: https://righettoimmobiliare.it/sitemap.xml
 
 # LLM / AI Bot guidance
 # See llms.txt for structured information about this site
