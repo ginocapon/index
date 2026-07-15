@@ -105,6 +105,7 @@
 | GA4 + Consent Mode v2 | ✅ |
 | Compliance 100% | ✅ |
 | Link interni Limena | ✅ |
+| www → apex redirect | ✅ 15/07/2026 — DNS Serverplan + GitHub Pages |
 | `SUPABASE_KEY` GitHub Actions | ⚠️ verificare secret |
 | GBP post settimanale | Manuale utente |
 | Backlink / DA | Gap off-site |
@@ -120,6 +121,8 @@
 | 13/07/2026 | Sprint GEO/AI + SOSTENERE 5 URL | llms 107/107, Consent Mode |
 | 14/07/2026 | Compliance 100% + memoria skill | 4 WARN chiusi |
 | 14/07/2026 | Sprint S2+S3+S6: link Limena, FAQ studenti, CTA valutazioni | 5 pagine, sitemap lastmod |
+| 15/07/2026 | DNS apex + GitHub custom domain senza www | www→apex 301 verificato live |
+| 15/07/2026 | Repo: CNAME + robots.txt sitemap allineati | Coerente con canonical |
 
 ---
 
