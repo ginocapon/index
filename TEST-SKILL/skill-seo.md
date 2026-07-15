@@ -316,17 +316,21 @@ Asset: `404.html`, `js/redirects-404.js`, `data/redirects-301.json`, `data/url-p
 
 ### 11.3 Ritmo venerdì (utente + agente)
 
-1. **Utente (10 min):** GSC → Prestazioni 7+28 gg → aggiorna `data/gsc-keywords-priority.json` (o CSV in `data/`).
-2. **Cron 07:00 CEST:** `venerdi-contenuti-freschezza.py` + `venerdi-seo-intelligence.py` + `probe_live_urls.py` + **`venerdi-report-email.py`**.
-3. **Email automatica** a `info@righettoimmobiliare.it` — report HTML a blocchi (vedi §11.6).
+1. **Utente (15 min):** GSC → Prestazioni 7+28 gg → aggiorna `data/gsc-keywords-priority.json`; Indicizzazione → Pagine → aggiorna `data/gsc-indexing-weekly.json`; opzionale GA4 → `data/ga4-weekly.json`.
+2. **Cron 07:00 CEST:** `venerdi-contenuti-freschezza.py` + `venerdi-seo-intelligence.py` + `probe_live_urls.py` + **`venerdi-report-email.py`** + **`venerdi-report-pdf.py`**.
+3. **Email automatica** a `info@righettoimmobiliare.it` — oggetto **`Verifica indicizzazioni — Righetto — {data}`** + HTML 7 blocchi + **PDF allegato** (vedi §11.6).
 4. **Agente:** esegue **priorità 1 SOSTENERE** dalla Issue; **max 1 AGGIUNGERE** se gap confermato.
 5. **Lunedì:** verifica GSC §10.3 + confronto report settimana precedente.
 
 ### 11.6 Report email settimanale (cron venerdì 07:00 CEST)
 
 **Workflow:** `.github/workflows/venerdi-contenuti-freschezza.yml`  
-**Script:** `scripts/venerdi-report-email.py`  
+**Script:** `scripts/venerdi-report-email.py` + `scripts/venerdi-report-pdf.py`  
 **Destinatario:** `info@righettoimmobiliare.it` (via `api.righettoimmobiliare.it/send-mail.php` + secret `EMAIL_RELAY_KEY`)
+
+**Oggetto email (fisso):** `Verifica indicizzazioni — Righetto — {YYYY-MM-DD} — salute {N}% · probe {N} issue`
+
+**Allegato PDF:** `verifica-indicizzazioni-righetto-{data}.pdf` — grafici matplotlib da storico GSC, barre indicizzazione, GA4 (se compilato), baseline 16 mesi, checklist operativa.
 
 **Blocchi email (ordine fisso):**
 
@@ -334,10 +338,21 @@ Asset: `404.html`, `js/redirects-404.js`, `data/redirects-301.json`, `data/url-p
 |---|---|---|
 | 1 | Sintesi esecutiva | salute contenuti, blog, sitemap, probe |
 | 2 | GSC performance + trend | `gsc-keywords-priority.json` + `gsc-weekly-history.json` (Δ settimana e dall'inizio tracking) |
-| 3 | Tecnico e indicizzazione | probe live su `gsc-indexing-priority.json` + conteggio sitemap |
+| 3 | Tecnico e indicizzazione | probe live + `gsc-indexing-weekly.json` (conteggi GSC manuali) |
 | 4 | SEO Intelligence SOSTENERE | `venerdi-seo-intelligence-report.md` |
 | 5 | Contenuti e SKIMM | audit contenuti + `published_this_week` |
-| 6 | Azioni priorità | SOSTENERE, GSC manuale, gap keyword, MANTENERE |
+| 6 | Azioni priorità (repo/agente) | SOSTENERE, gap keyword, MANTENERE, probe |
+| 7 | **Cosa fare TU** | checklist GSC/GA4/GBP — specchio ultima pagina PDF |
+
+**JSON aggiornamento manuale (utente, ogni venerdì prima o dopo il cron):**
+
+| File | Cosa annotare |
+|---|---|
+| `data/gsc-keywords-priority.json` | Prestazioni 7+28 gg, query growth, pages refresh |
+| `data/gsc-indexing-weekly.json` | Indicizzate / non indicizzate / motivi (redirect, scansionata…) + flag `manual_checks` |
+| `data/ga4-weekly.json` | Sessioni, utenti, pageview 7 gg + top pagine (opzionale ma abilita grafico GA4 nel PDF) |
+
+**Deploy PHP:** dopo modifica `api/send-mail.php` (supporto allegati MIME) — **ricaricare su cPanel** `api.righettoimmobiliare.it`.
 
 **Storico trend:** `data/gsc-weekly-history.json` — snapshot append ogni venerdì (click brand, impression home, articoli, probe issue). Il cron committa automaticamente il file aggiornato su `main` così i Δ settimana/settimana e YTD restano nel repo. Prima settimana = baseline; dal secondo venerdì compaiono Δ%.
 

@@ -26,6 +26,8 @@ GSC_JSON = ROOT / "data" / "gsc-keywords-priority.json"
 HISTORY_JSON = ROOT / "data" / "gsc-weekly-history.json"
 BASELINE_JSON = ROOT / "data" / "gsc-baseline-16m.json"
 INDEX_JSON = ROOT / "data" / "gsc-indexing-priority.json"
+INDEXING_WEEKLY_JSON = ROOT / "data" / "gsc-indexing-weekly.json"
+GA4_WEEKLY_JSON = ROOT / "data" / "ga4-weekly.json"
 PROBE_JSON = ROOT / "data" / "url-probe-latest.json"
 SKIMM_JSON = ROOT / "TEST-SKILL" / "skimm.json"
 SITEMAP = ROOT / "sitemap.xml"
@@ -266,6 +268,52 @@ def baseline_16m_html(baseline: dict) -> str:
     )
 
 
+def manual_tasks_html(indexing: dict, ga4: dict) -> str:
+    checks = indexing.get("manual_checks", {}) if isinstance(indexing, dict) else {}
+    ga4_ok = isinstance(ga4, dict) and ga4.get("sessions_7d") is not None
+    idx_updated = indexing.get("updated", "—") if isinstance(indexing, dict) else "—"
+    reasons = indexing.get("by_reason", {}) if isinstance(indexing, dict) else {}
+
+    def chk(done: bool, title: str, detail: str) -> str:
+        mark = "✅" if done else "☐"
+        style = "color:#276749" if done else ""
+        return f"<li style='{style}'><strong>{mark} {escape(title)}</strong> — {escape(detail)}</li>"
+
+    items = [
+        chk(True, "GSC Prestazioni 7+28 gg", "Aggiorna data/gsc-keywords-priority.json (prima del cron 07:00)"),
+        chk(
+            idx_updated != "—",
+            "GSC Indicizzazione → Pagine",
+            f"Aggiorna data/gsc-indexing-weekly.json — ultimo: {idx_updated}",
+        ),
+        chk(
+            checks.get("convalida_16_crawled", False),
+            "Convalida correzione",
+            f"16 «scansionata non indicizzata» — attuale: {reasons.get('crawled_not_indexed', '?')}",
+        ),
+        chk(
+            checks.get("prestazioni_affitti_limena", False),
+            "Prestazioni «affitti limena»",
+            "CTR o posizione 11–20 in GSC",
+        ),
+        chk(checks.get("sitemap_ok", False), "Sitemap", "Stato «elaborata correttamente» — no reinvio quotidiano"),
+        chk(False, "Ispezione URL ×10", "Lista in data/gsc-indexing-priority.json (max ~10/giorno)"),
+        chk(ga4_ok, "GA4 ultimi 7 gg", "Compila data/ga4-weekly.json (sessioni, utenti, top pagine)"),
+        chk(False, "Google Business Profile", "1 post, foto o risposta recensione"),
+    ]
+    note = indexing.get("note", "") if isinstance(indexing, dict) else ""
+    note_html = f"<p style='font-size:13px;color:#c53030'>📌 {escape(note)}</p>" if note else ""
+    return (
+        "<p><strong>~15 minuti manuali</strong> — spunta in GSC/GA4/GBP, poi aggiorna i JSON nel repo "
+        "se vuoi grafici PDF più precisi la settimana dopo.</p>"
+        + note_html
+        + "<ul style='line-height:1.8'>"
+        + "".join(items)
+        + "</ul>"
+        + "<p style='font-size:12px;color:#718096'>Stessa checklist nel PDF allegato (ultima pagina).</p>"
+    )
+
+
 def build_html(
     today: str,
     snapshot: dict,
@@ -275,6 +323,8 @@ def build_html(
     sustain: list[dict],
     index_probes: list[dict],
     baseline_16m: dict | None = None,
+    indexing_weekly: dict | None = None,
+    ga4_weekly: dict | None = None,
 ) -> str:
     health = content.get("health", snapshot.get("content_health_pct", 0))
     emoji = "🟢" if health >= 80 else ("🟡" if health >= 70 else "🔴")
@@ -344,9 +394,20 @@ def build_html(
         for g in gaps[:3]
     ) or "<li>Nessun gap aperto</li>"
 
+    indexing_weekly = indexing_weekly or {}
+    idx_reasons = indexing_weekly.get("by_reason", {})
+    idx_summary_rows = [
+        ["Indicizzate (filtro sitemap)", str(indexing_weekly.get("indexed", "—")), "GSC manuale"],
+        ["Non indicizzate", str(indexing_weekly.get("not_indexed", "—")), "GSC manuale"],
+        ["Reindirizzamento", str(idx_reasons.get("redirect", "—")), "Dovrebbe scendere post-fix apex"],
+        ["Scansionata, non indicizzata", str(idx_reasons.get("crawled_not_indexed", "—")), "Convalida se aperte"],
+        ["Rilevata, non indicizzata", str(idx_reasons.get("discovered_not_indexed", "—")), "Monitorare"],
+    ]
+
     blocks = [
-        f"<p style='font-size:15px'><strong>{emoji} Report settimanale Righetto Immobiliare</strong><br>"
-        f"Data: {today} · Generato automaticamente ogni venerdì ore 07:00 CEST</p>",
+        f"<p style='font-size:15px'><strong>{emoji} Verifica indicizzazioni — Righetto Immobiliare</strong><br>"
+        f"Data: {today} · Generato automaticamente ogni venerdì ore 07:00 CEST<br>"
+        f"<em>Allegato PDF con grafici GSC, indicizzazione e checklist operativa.</em></p>",
         section("1. Sintesi esecutiva", table(["Metrica", "Valore", "Δ vs sett. scorsa"], exec_rows)),
         section(
             "2. Google Search Console — performance e trend",
@@ -370,6 +431,9 @@ def build_html(
                 else "<p>✅ Tutte le URL prioritarie rispondono HTTP 200.</p>"
             )
             + f"<p>Sitemap: <code>https://righettoimmobiliare.it/sitemap.xml</code> — {snapshot['sitemap_urls']} URL catalogate.</p>"
+            + "<h3>Stato indicizzazione GSC (aggiornamento manuale)</h3>"
+            + table(["Metrica", "Valore", "Nota"], idx_summary_rows)
+            + "<p style='font-size:12px;color:#718096'>Fonte: <code>data/gsc-indexing-weekly.json</code> — aggiornare ogni venerdì da GSC → Indicizzazione → Pagine.</p>"
         ),
         section(
             "4. SEO Intelligence — SOSTENERE / refresh",
@@ -388,18 +452,19 @@ def build_html(
             + "<h3>Pubblicati questa settimana</h3>" + pub_html
         ),
         section(
-            "6. Azioni priorità prossima settimana",
+            "6. Azioni priorità prossima settimana (repo / agente)",
             "<ol>"
             "<li><strong>SOSTENERE:</strong> 1 refresh su pagina imp≥20 e 0 click (vedi blocco 4)</li>"
-            "<li><strong>GSC manuale:</strong> Ispezione URL su 10 pagine chiave (lista in data/gsc-indexing-priority.json)</li>"
             "<li><strong>AGGIUNGERE:</strong> max 1 articolo solo se gap confermato:</li>"
             f"<ul>{gap_list}</ul>"
             "<li><strong>MANTENERE:</strong> timestamp su 1 winner GSC</li>"
             "<li><strong>Probe:</strong> 0 issue su url-probe-latest.json dopo ogni deploy</li>"
             "</ol>"
         ),
+        section("7. Cosa fare TU questa settimana", manual_tasks_html(indexing_weekly, ga4_weekly or {})),
         "<hr><p style='font-size:12px;color:#718096'>"
         "Report completo Markdown: Issue GitHub label <code>contenuti-freschezza</code> · "
+        "PDF: <code>data/venerdi-report-latest.pdf</code> · "
         "Cron: <code>venerdi-contenuti-freschezza.yml</code> + <code>venerdi-report-email.py</code>"
         "</p>",
     ]
@@ -428,18 +493,20 @@ def main() -> int:
     if not isinstance(baseline, dict):
         baseline = {}
 
+    indexing_weekly = load_json(INDEXING_WEEKLY_JSON, {})
+    ga4_weekly = load_json(GA4_WEEKLY_JSON, {})
+    if not isinstance(indexing_weekly, dict):
+        indexing_weekly = {}
+    if not isinstance(ga4_weekly, dict):
+        ga4_weekly = {}
+
     html = build_html(
-        today, snapshot, prev, ytd, content, sustain, index_probes, baseline
+        today, snapshot, prev, ytd, content, sustain, index_probes, baseline,
+        indexing_weekly, ga4_weekly,
     )
     OUT_HTML.write_text(html, encoding="utf-8")
 
-    emoji = "🟢" if health >= 80 else ("🟡" if health >= 70 else "🔴")
-    idx_ok = sum(1 for p in index_probes if p["ok"])
-    subject = (
-        f"{emoji} Report settimanale Righetto {today} — "
-        f"{blog_count} blog, salute {health}%, GSC brand {snapshot['brand_clicks']} click, "
-        f"indicizzazione {idx_ok}/{len(index_probes)} OK"
-    )
+    subject = f"Verifica indicizzazioni — Righetto — {today} — salute {health}% · probe {snapshot['probe_issues']} issue"
     OUT_SUBJECT.write_text(subject, encoding="utf-8")
 
     gh = os.environ.get("GITHUB_OUTPUT")
