@@ -4,7 +4,7 @@
 >
 > **Aggiornare:** a ogni audit significativo, deploy SEO, fix GSC o sprint completato (1 riga in §Log + eventuale modifica §Stato / §Prossimi passi).
 >
-> **Collegamenti:** `data/gsc-keywords-priority.json` · `data/gsc-weekly-history.json` · `data/gsc-baseline-16m.json` · `data/geo-ai-audit-latest.json` · `data/url-probe-latest.json` · `data/internal-links-limena-2026.json`
+> **Collegamenti:** `data/gsc-keywords-priority.json` · `data/gsc-weekly-history.json` · `data/gsc-baseline-16m.json` · `data/gsc-indexing-weekly.json` · `data/ga4-weekly.json` · `data/geo-ai-audit-latest.json` · `data/url-probe-latest.json` · `data/internal-links-limena-2026.json`
 
 ---
 
@@ -47,7 +47,8 @@
 
 | Frequenza | Azione | Dove |
 |-----------|--------|------|
-| **Venerdì 07:00** | Cron GitHub: SKIMM, audit, mini-seo, email | Automatico |
+| **Venerdì 07:00** | Cron GitHub: SKIMM, audit, email **«Verifica indicizzazioni»** + PDF | Automatico — §11.6 skill-seo |
+| **Venerdì ~15 min** | Aggiorna `gsc-indexing-weekly.json` + opz. `ga4-weekly.json` | Utente — abilita grafici PDF |
 | **Venerdì ~45 min** | GSC + 1 fix repo | `/venerdi` skill |
 | **Settimana macrociclo** | Tema 12 settimane (ancora 31/03/2026) | `righetto-venerdi-sito-90giorni` |
 | **Mar + Ven 08:00** | Security check | `security-check-bisettimanale.yml` |
@@ -106,6 +107,8 @@
 | Compliance 100% | ✅ |
 | Link interni Limena | ✅ |
 | www → apex redirect | ✅ 15/07/2026 — DNS Serverplan + GitHub Pages |
+| Email venerdì + PDF GSC/GA4 | ✅ 15/07/2026 — `venerdi-report-pdf.py` + allegato MIME |
+| `send-mail.php` allegati | ⚠️ ricaricare su cPanel dopo deploy repo |
 | `SUPABASE_KEY` GitHub Actions | ⚠️ verificare secret |
 | GBP post settimanale | Manuale utente |
 | Backlink / DA | Gap off-site |
@@ -123,15 +126,24 @@
 | 14/07/2026 | Sprint S2+S3+S6: link Limena, FAQ studenti, CTA valutazioni | 5 pagine, sitemap lastmod |
 | 15/07/2026 | DNS apex + GitHub custom domain senza www | www→apex 301 verificato live |
 | 15/07/2026 | Repo: CNAME + robots.txt sitemap allineati | Coerente con canonical |
+| 15/07/2026 | Email venerdì: oggetto «Verifica indicizzazioni» + PDF + blocco 7 checklist utente | Cron + skill §11.6 |
+
+---
+
+## Appuntamento verifica (22 luglio 2026)
+
+Dopo fix DNS apex (15/07): **controllare in GSC** se il bucket **«pagina con reindirizzamento»** (era ~74 nel filtro sitemap) è sceso. Aggiornare `data/gsc-indexing-weekly.json` → il PDF del venerdì 18/07 e 25/07 mostrerà il trend a barre.
 
 ---
 
 ## Prossimi passi (per l'agente)
 
-1. **Utente GSC:** Convalida 16 + Prestazioni `affitti limena` + reinvia `sitemap.xml`
-2. **Venerdì S7:** export CSV GSC → `data/gsc-export-*.csv`
-3. **S4:** PSI su `/` e 1 blog — annotare LCP in memoria
-4. **Verifica:** `SUPABASE_KEY` in GitHub Secrets
+1. **Utente GSC:** Convalida 16 + Prestazioni `affitti limena` — aggiorna `gsc-indexing-weekly.json`
+2. **cPanel:** ricarica `api/send-mail.php` (versione con allegati PDF)
+3. **22/07:** verifica calo «reindirizzamento» GSC post-fix www
+4. **Venerdì S7:** export CSV GSC → `data/gsc-export-*.csv` + compila `ga4-weekly.json`
+5. **S4:** PSI su `/` e 1 blog — annotare LCP in memoria
+6. **Verifica:** `SUPABASE_KEY` in GitHub Secrets
 
 ---
 

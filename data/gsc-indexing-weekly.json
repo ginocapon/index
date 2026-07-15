@@ -1,0 +1,18 @@
+{
+  "updated": "2026-07-15",
+  "source": "GSC manuale — aggiornare ogni venerdì (Indicizzazione → Pagine)",
+  "note": "Dopo fix DNS apex 15/07: le «reindirizzamento» dovrebbero scendere in 1-2 settimane",
+  "sitemap_urls": 166,
+  "indexed": 7,
+  "not_indexed": 142,
+  "by_reason": {
+    "redirect": 74,
+    "discovered_not_indexed": 52,
+    "crawled_not_indexed": 16
+  },
+  "manual_checks": {
+    "sitemap_ok": true,
+    "convalida_16_crawled": false,
+    "prestazioni_affitti_limena": false
+  }
+}

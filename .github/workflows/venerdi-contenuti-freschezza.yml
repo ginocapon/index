@@ -29,6 +29,11 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: scripts/requirements-venerdi.txt
+
+      - name: Dipendenze report PDF
+        run: pip install -r scripts/requirements-venerdi.txt
 
       - name: Esegui audit contenuti + SKIMM
         id: audit
@@ -55,6 +60,7 @@ jobs:
         run: |
           cd "$GITHUB_WORKSPACE"
           python scripts/venerdi-report-email.py
+          python scripts/venerdi-report-pdf.py
 
       - name: Salva storico trend GSC nel repo
         if: always() && steps.email_report.outputs.email_ready == 'true'
@@ -134,13 +140,29 @@ jobs:
 
           SUBJECT=$(cat venerdi-email-subject.txt)
           EMAIL_BODY=$(cat venerdi-email-report.html)
+          PDF_B64=""
+          PDF_NAME="verifica-indicizzazioni-righetto-$(date +%Y-%m-%d).pdf"
+          if [ -f data/venerdi-report-latest.pdf ]; then
+            PDF_B64=$(base64 -w 0 data/venerdi-report-latest.pdf)
+          fi
 
-          PAYLOAD=$(jq -n \
-            --arg action "send_single" \
-            --arg to "info@righettoimmobiliare.it" \
-            --arg subject "$SUBJECT" \
-            --arg body "$EMAIL_BODY" \
-            '{action: $action, to: $to, subject: $subject, body: $body}')
+          if [ -n "$PDF_B64" ]; then
+            PAYLOAD=$(jq -n \
+              --arg action "send_single" \
+              --arg to_email "info@righettoimmobiliare.it" \
+              --arg subject "$SUBJECT" \
+              --arg html_body "$EMAIL_BODY" \
+              --arg attachment_base64 "$PDF_B64" \
+              --arg attachment_filename "$PDF_NAME" \
+              '{action: $action, to_email: $to_email, subject: $subject, html_body: $html_body, attachment_base64: $attachment_base64, attachment_filename: $attachment_filename}')
+          else
+            PAYLOAD=$(jq -n \
+              --arg action "send_single" \
+              --arg to_email "info@righettoimmobiliare.it" \
+              --arg subject "$SUBJECT" \
+              --arg html_body "$EMAIL_BODY" \
+              '{action: $action, to_email: $to_email, subject: $subject, html_body: $html_body}')
+          fi
 
           HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
             "https://api.righettoimmobiliare.it/send-mail.php" \

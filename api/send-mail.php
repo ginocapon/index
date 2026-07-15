@@ -98,7 +98,16 @@ if ($action === 'send' || $action === 'send_single' || $action === 'send_test') 
         $subject = '[TEST] ' . $subject;
     }
 
-    $result = sendEmail($to, $toName, $fromEmail, $fromName, $subject, $htmlBody, $replyTo);
+    $attachment = null;
+    if (!empty($input['attachment_base64']) && !empty($input['attachment_filename'])) {
+        $attachment = [
+            'filename' => $input['attachment_filename'],
+            'content_base64' => $input['attachment_base64'],
+            'mime' => $input['attachment_mime'] ?? 'application/pdf',
+        ];
+    }
+
+    $result = sendEmail($to, $toName, $fromEmail, $fromName, $subject, $htmlBody, $replyTo, $attachment);
 
     if ($result === true) {
         echo json_encode(['status' => 'sent', 'to' => $to, 'message' => 'Email inviata a ' . $to]);
@@ -182,9 +191,9 @@ echo json_encode(['status' => 'error', 'error' => 'Azione non riconosciuta: ' . 
 // ═══════════════════════════════════════════════════════════════
 // FUNZIONE INVIO EMAIL
 // ═══════════════════════════════════════════════════════════════
-function sendEmail($to, $toName, $fromEmail, $fromName, $subject, $htmlBody, $replyTo) {
-    // Boundary per MIME
-    $boundary = '----=_Part_' . md5(uniqid(mt_rand(), true));
+function sendEmail($to, $toName, $fromEmail, $fromName, $subject, $htmlBody, $replyTo, $attachment = null) {
+    $mixedBoundary = '----=_Mixed_' . md5(uniqid(mt_rand(), true));
+    $altBoundary = '----=_Alt_' . md5(uniqid(mt_rand(), true));
 
     // Header From con nome
     $fromHeader = $fromName
@@ -196,8 +205,12 @@ function sendEmail($to, $toName, $fromEmail, $fromName, $subject, $htmlBody, $re
     $headers[] = 'From: ' . $fromHeader;
     $headers[] = 'Reply-To: ' . ($replyTo ?: $fromEmail);
     $headers[] = 'MIME-Version: 1.0';
-    $headers[] = 'Content-Type: multipart/alternative; boundary="' . $boundary . '"';
-    $headers[] = 'X-Mailer: RighettoImmobiliare/1.0';
+    if ($attachment) {
+        $headers[] = 'Content-Type: multipart/mixed; boundary="' . $mixedBoundary . '"';
+    } else {
+        $headers[] = 'Content-Type: multipart/alternative; boundary="' . $altBoundary . '"';
+    }
+    $headers[] = 'X-Mailer: RighettoImmobiliare/1.1';
     $headers[] = 'List-Unsubscribe: <mailto:' . $fromEmail . '?subject=CANCELLAMI>';
     $headers[] = 'List-Unsubscribe-Post: List-Unsubscribe=One-Click';
 
@@ -206,19 +219,37 @@ function sendEmail($to, $toName, $fromEmail, $fromName, $subject, $htmlBody, $re
     $textBody = html_entity_decode($textBody, ENT_QUOTES, 'UTF-8');
     $textBody = preg_replace('/\n{3,}/', "\n\n", trim($textBody));
 
-    // Corpo MIME multipart
+    $altPart = '';
+    $altPart .= '--' . $altBoundary . "\r\n";
+    $altPart .= "Content-Type: text/plain; charset=UTF-8\r\n";
+    $altPart .= "Content-Transfer-Encoding: base64\r\n\r\n";
+    $altPart .= chunk_split(base64_encode($textBody)) . "\r\n";
+    $altPart .= '--' . $altBoundary . "\r\n";
+    $altPart .= "Content-Type: text/html; charset=UTF-8\r\n";
+    $altPart .= "Content-Transfer-Encoding: base64\r\n\r\n";
+    $altPart .= chunk_split(base64_encode($htmlBody)) . "\r\n";
+    $altPart .= '--' . $altBoundary . "--\r\n";
+
     $body = '';
-    $body .= '--' . $boundary . "\r\n";
-    $body .= "Content-Type: text/plain; charset=UTF-8\r\n";
-    $body .= "Content-Transfer-Encoding: base64\r\n\r\n";
-    $body .= chunk_split(base64_encode($textBody)) . "\r\n";
-
-    $body .= '--' . $boundary . "\r\n";
-    $body .= "Content-Type: text/html; charset=UTF-8\r\n";
-    $body .= "Content-Transfer-Encoding: base64\r\n\r\n";
-    $body .= chunk_split(base64_encode($htmlBody)) . "\r\n";
-
-    $body .= '--' . $boundary . "--\r\n";
+    if ($attachment) {
+        $body .= '--' . $mixedBoundary . "\r\n";
+        $body .= 'Content-Type: multipart/alternative; boundary="' . $altBoundary . '"' . "\r\n\r\n";
+        $body .= $altPart . "\r\n";
+        $filename = preg_replace('/[^\w.\-]/', '_', $attachment['filename']);
+        $mime = $attachment['mime'] ?? 'application/pdf';
+        $raw = base64_decode($attachment['content_base64'], true);
+        if ($raw === false) {
+            return 'attachment_base64 non valido';
+        }
+        $body .= '--' . $mixedBoundary . "\r\n";
+        $body .= 'Content-Type: ' . $mime . '; name="' . $filename . '"' . "\r\n";
+        $body .= "Content-Transfer-Encoding: base64\r\n";
+        $body .= 'Content-Disposition: attachment; filename="' . $filename . '"' . "\r\n\r\n";
+        $body .= chunk_split(base64_encode($raw)) . "\r\n";
+        $body .= '--' . $mixedBoundary . "--\r\n";
+    } else {
+        $body = $altPart;
+    }
 
     // Destinatario con nome
     $toFormatted = $toName

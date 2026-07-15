@@ -1,0 +1,10 @@
+{
+  "updated": null,
+  "source": "GA4 manuale — Prestazioni ultimi 7 giorni, aggiornare ogni venerdì",
+  "note": "Esporta da GA4 → Report → Esporta CSV oppure annota qui i numeri. Il PDF userà questi dati quando presenti.",
+  "sessions_7d": null,
+  "users_7d": null,
+  "pageviews_7d": null,
+  "top_pages": [],
+  "conversions_lead": null
+}

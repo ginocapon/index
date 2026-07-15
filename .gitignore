@@ -15,6 +15,9 @@ google-compliance-report.md
 audit-report.md
 mini-seo-report.md
 venerdi-contenuti-report.md
+venerdi-email-report.html
+venerdi-email-subject.txt
+data/venerdi-report-latest.pdf
 scripts/_tmp_perizia/
 # Evita commit accidentale di una copia annidata del repo
 /progetti/
