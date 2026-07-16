@@ -2,2471 +2,2371 @@
   {
     "path": "/",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/"
+    "final": "https://righettoimmobiliare.it/"
   },
   {
     "path": "/admin",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/admin"
+    "final": "https://righettoimmobiliare.it/admin"
   },
   {
     "path": "/admin.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/admin.html"
-  },
-  {
-    "path": "/agenzia",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/agenzia"
+    "final": "https://righettoimmobiliare.it/admin.html"
   },
   {
     "path": "/agenzia-immobiliare-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/agenzia-immobiliare-padova"
+    "final": "https://righettoimmobiliare.it/agenzia-immobiliare-padova"
   },
   {
     "path": "/agenzia-immobiliare-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/agenzia-immobiliare-padova.html"
-  },
-  {
-    "path": "/agenzia.html",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/agenzia.html"
+    "final": "https://righettoimmobiliare.it/agenzia-immobiliare-padova.html"
   },
   {
     "path": "/api/send-mail.php",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/api/send-mail.php"
+    "final": "https://righettoimmobiliare.it/api/send-mail.php"
   },
   {
     "path": "/articolo-riqualificazione",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/articolo-riqualificazione"
+    "final": "https://righettoimmobiliare.it/articolo-riqualificazione"
   },
   {
     "path": "/articolo-riqualificazione.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/articolo-riqualificazione.html"
+    "final": "https://righettoimmobiliare.it/articolo-riqualificazione.html"
   },
   {
     "path": "/blog",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog"
+    "final": "https://righettoimmobiliare.it/blog"
   },
   {
     "path": "/blog-5-domande-appuntamento-agenzia-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-5-domande-appuntamento-agenzia-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-5-domande-appuntamento-agenzia-padova-2026"
   },
   {
     "path": "/blog-5-domande-appuntamento-agenzia-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-5-domande-appuntamento-agenzia-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-5-domande-appuntamento-agenzia-padova-2026.html"
   },
   {
     "path": "/blog-5-errori-visita-immobile-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-5-errori-visita-immobile-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-5-errori-visita-immobile-padova-2026"
   },
   {
     "path": "/blog-5-errori-visita-immobile-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-5-errori-visita-immobile-padova-2026.html"
-  },
-  {
-    "path": "/blog-affitti-canoni-fimaa-q1-2024-padova",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-affitti-canoni-fimaa-q1-2024-padova"
-  },
-  {
-    "path": "/blog-affitti-canoni-fimaa-q1-2024-padova.html",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-affitti-canoni-fimaa-q1-2024-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-5-errori-visita-immobile-padova-2026.html"
   },
   {
     "path": "/blog-affitti-canoni-fimaa-q1-2026-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-affitti-canoni-fimaa-q1-2026-padova"
+    "final": "https://righettoimmobiliare.it/blog-affitti-canoni-fimaa-q1-2026-padova"
   },
   {
     "path": "/blog-affitti-canoni-fimaa-q1-2026-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-affitti-canoni-fimaa-q1-2026-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-affitti-canoni-fimaa-q1-2026-padova.html"
   },
   {
     "path": "/blog-affitti-limena-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-affitti-limena-2026"
+    "final": "https://righettoimmobiliare.it/blog-affitti-limena-2026"
   },
   {
     "path": "/blog-affitti-limena-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-affitti-limena-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-affitti-limena-2026.html"
   },
   {
     "path": "/blog-affitti-padova-canoni-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-affitti-padova-canoni-2026"
+    "final": "https://righettoimmobiliare.it/blog-affitti-padova-canoni-2026"
   },
   {
     "path": "/blog-affitti-padova-canoni-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-affitti-padova-canoni-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-affitti-padova-canoni-2026.html"
   },
   {
     "path": "/blog-affitto-breve-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-affitto-breve-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-affitto-breve-padova-2026"
   },
   {
     "path": "/blog-affitto-breve-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-affitto-breve-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-affitto-breve-padova-2026.html"
   },
   {
     "path": "/blog-affitto-studenti-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-affitto-studenti-padova"
+    "final": "https://righettoimmobiliare.it/blog-affitto-studenti-padova"
   },
   {
     "path": "/blog-affitto-studenti-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-affitto-studenti-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-affitto-studenti-padova.html"
   },
   {
     "path": "/blog-affitto-transitorio-padova-durata-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-affitto-transitorio-padova-durata-2026"
+    "final": "https://righettoimmobiliare.it/blog-affitto-transitorio-padova-durata-2026"
   },
   {
     "path": "/blog-affitto-transitorio-padova-durata-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-affitto-transitorio-padova-durata-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-affitto-transitorio-padova-durata-2026.html"
   },
   {
     "path": "/blog-agenzia-immobiliare-top-servizi-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-agenzia-immobiliare-top-servizi-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-agenzia-immobiliare-top-servizi-padova-2026"
   },
   {
     "path": "/blog-agenzia-immobiliare-top-servizi-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-agenzia-immobiliare-top-servizi-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-agenzia-immobiliare-top-servizi-padova-2026.html"
   },
   {
     "path": "/blog-agevolazioni-prima-casa-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-agevolazioni-prima-casa-2026"
+    "final": "https://righettoimmobiliare.it/blog-agevolazioni-prima-casa-2026"
   },
   {
     "path": "/blog-agevolazioni-prima-casa-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-agevolazioni-prima-casa-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-agevolazioni-prima-casa-2026.html"
   },
   {
     "path": "/blog-ape-prestazione-energetica-acquisto-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-ape-prestazione-energetica-acquisto-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-ape-prestazione-energetica-acquisto-padova-2026"
   },
   {
     "path": "/blog-ape-prestazione-energetica-acquisto-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-ape-prestazione-energetica-acquisto-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-ape-prestazione-energetica-acquisto-padova-2026.html"
   },
   {
     "path": "/blog-appartamento-nuova-costruzione-limena",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-appartamento-nuova-costruzione-limena"
+    "final": "https://righettoimmobiliare.it/blog-appartamento-nuova-costruzione-limena"
   },
   {
     "path": "/blog-appartamento-nuova-costruzione-limena.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-appartamento-nuova-costruzione-limena.html"
+    "final": "https://righettoimmobiliare.it/blog-appartamento-nuova-costruzione-limena.html"
   },
   {
     "path": "/blog-articolo",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo"
+    "final": "https://righettoimmobiliare.it/blog-articolo"
   },
   {
     "path": "/blog-articolo.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo.html"
+    "final": "https://righettoimmobiliare.it/blog-articolo.html"
   },
   {
     "path": "/blog-articolo?s=blog-5-domande-appuntamento-agenzia-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-5-domande-appuntamento-agenzia-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-5-domande-appuntamento-agenzia-padova-2026"
   },
   {
     "path": "/blog-articolo?s=blog-5-errori-visita-immobile-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-5-errori-visita-immobile-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-5-errori-visita-immobile-padova-2026"
   },
   {
     "path": "/blog-articolo?s=blog-affitti-canoni-fimaa-q1-2026-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-affitti-canoni-fimaa-q1-2026-padova"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-affitti-canoni-fimaa-q1-2026-padova"
   },
   {
     "path": "/blog-articolo?s=blog-affitti-limena-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-affitti-limena-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-affitti-limena-2026"
   },
   {
     "path": "/blog-articolo?s=blog-affitto-transitorio-padova-durata-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-affitto-transitorio-padova-durata-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-affitto-transitorio-padova-durata-2026"
   },
   {
     "path": "/blog-articolo?s=blog-barometro-mutui-crif-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-barometro-mutui-crif-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-barometro-mutui-crif-padova-2026"
   },
   {
     "path": "/blog-articolo?s=blog-bce-tassi-mutui-giugno-2026-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-bce-tassi-mutui-giugno-2026-padova"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-bce-tassi-mutui-giugno-2026-padova"
   },
   {
     "path": "/blog-articolo?s=blog-bonus-edilizi-2026-incentivi-casa-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-bonus-edilizi-2026-incentivi-casa-padova"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-bonus-edilizi-2026-incentivi-casa-padova"
   },
   {
     "path": "/blog-articolo?s=blog-casa-vendibile-5-anni-case-green-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-casa-vendibile-5-anni-case-green-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-casa-vendibile-5-anni-case-green-padova-2026"
   },
   {
     "path": "/blog-articolo?s=blog-case-piu-vendute-tipologie-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-case-piu-vendute-tipologie-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-case-piu-vendute-tipologie-padova-2026"
   },
   {
     "path": "/blog-articolo?s=blog-checklist-verifiche-prima-compromesso-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-checklist-verifiche-prima-compromesso-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-checklist-verifiche-prima-compromesso-padova-2026"
   },
   {
     "path": "/blog-articolo?s=blog-compravendite-italia-q1-agenzia-entrate-2026-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-compravendite-italia-q1-agenzia-entrate-2026-padova"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-compravendite-italia-q1-agenzia-entrate-2026-padova"
   },
   {
     "path": "/blog-articolo?s=blog-costi-costruzione-istat-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-costi-costruzione-istat-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-costi-costruzione-istat-padova-2026"
   },
   {
     "path": "/blog-articolo?s=blog-costi-proprieta-acquisto-possesso-vendita-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-costi-proprieta-acquisto-possesso-vendita-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-costi-proprieta-acquisto-possesso-vendita-padova-2026"
   },
   {
     "path": "/blog-articolo?s=blog-dazi-usa-ue-mercato-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-dazi-usa-ue-mercato-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-dazi-usa-ue-mercato-padova-2026"
   },
   {
     "path": "/blog-articolo?s=blog-dieci-errori-acquisto-casa-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-dieci-errori-acquisto-casa-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-dieci-errori-acquisto-casa-padova-2026"
   },
   {
     "path": "/blog-articolo?s=blog-eurocamera-accordo-dazi-usa-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-eurocamera-accordo-dazi-usa-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-eurocamera-accordo-dazi-usa-2026"
   },
   {
     "path": "/blog-articolo?s=blog-gestione-spese-casa-risparmio-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-gestione-spese-casa-risparmio-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-gestione-spese-casa-risparmio-padova-2026"
   },
   {
     "path": "/blog-articolo?s=blog-housing-lavoratori-veneto-edilcassa-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-housing-lavoratori-veneto-edilcassa-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-housing-lavoratori-veneto-edilcassa-2026"
   },
   {
     "path": "/blog-articolo?s=blog-loft-aziende-cucina-condivisa-padova-vicenza-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-loft-aziende-cucina-condivisa-padova-vicenza-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-loft-aziende-cucina-condivisa-padova-vicenza-2026"
   },
   {
     "path": "/blog-articolo?s=blog-nuove-costruzioni-mercato-veneto-2026-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-nuove-costruzioni-mercato-veneto-2026-padova"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-nuove-costruzioni-mercato-veneto-2026-padova"
   },
   {
     "path": "/blog-articolo?s=blog-piano-casa-decreto-66-2026-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-piano-casa-decreto-66-2026-padova"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-piano-casa-decreto-66-2026-padova"
   },
   {
     "path": "/blog-articolo?s=blog-quattro-imposte-rogitio-prima-casa-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-quattro-imposte-rogitio-prima-casa-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-quattro-imposte-rogitio-prima-casa-padova-2026"
   },
   {
     "path": "/blog-articolo?s=blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026"
   },
   {
     "path": "/blog-articolo?s=blog-residenze-green-padova-tribloc-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-residenze-green-padova-tribloc-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-residenze-green-padova-tribloc-2026"
   },
   {
     "path": "/blog-articolo?s=blog-righetto-storia-territorio-acquisizioni-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-righetto-storia-territorio-acquisizioni-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-righetto-storia-territorio-acquisizioni-2026"
   },
   {
     "path": "/blog-articolo?s=blog-rubano-limena-affitto-lavoratori-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-rubano-limena-affitto-lavoratori-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-rubano-limena-affitto-lavoratori-2026"
   },
   {
     "path": "/blog-articolo?s=blog-scegliere-immobile-giusto-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-scegliere-immobile-giusto-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-scegliere-immobile-giusto-padova-2026"
   },
   {
     "path": "/blog-articolo?s=blog-so-tutto-io-venditore-presuntuoso-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-so-tutto-io-venditore-presuntuoso-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-so-tutto-io-venditore-presuntuoso-padova-2026"
   },
   {
     "path": "/blog-articolo?s=blog-sondaggio-bancaditalia-q1-2026-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-sondaggio-bancaditalia-q1-2026-padova"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-sondaggio-bancaditalia-q1-2026-padova"
   },
   {
     "path": "/blog-articolo?s=blog-stanza-universitaria-padova-canoni-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-stanza-universitaria-padova-canoni-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-stanza-universitaria-padova-canoni-2026"
   },
   {
     "path": "/blog-articolo?s=blog-studentati-veneto-2026-posti-letto",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-studentati-veneto-2026-posti-letto"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-studentati-veneto-2026-posti-letto"
   },
   {
     "path": "/blog-articolo?s=blog-ultime-acquisizioni-commerciali-padova-giugno-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-ultime-acquisizioni-commerciali-padova-giugno-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-ultime-acquisizioni-commerciali-padova-giugno-2026"
   },
   {
     "path": "/blog-articolo?s=blog-ultime-acquisizioni-residenziali-padova-giugno-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-ultime-acquisizioni-residenziali-padova-giugno-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-ultime-acquisizioni-residenziali-padova-giugno-2026"
   },
   {
     "path": "/blog-articolo?s=blog-vicenza-residenze-universitarie-calmierate-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-articolo?s=blog-vicenza-residenze-universitarie-calmierate-2026"
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-vicenza-residenze-universitarie-calmierate-2026"
   },
   {
     "path": "/blog-barometro-mutui-crif-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-barometro-mutui-crif-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-barometro-mutui-crif-padova-2026"
   },
   {
     "path": "/blog-barometro-mutui-crif-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-barometro-mutui-crif-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-barometro-mutui-crif-padova-2026.html"
   },
   {
     "path": "/blog-bce-tassi-mutui-giugno-2026-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-bce-tassi-mutui-giugno-2026-padova"
+    "final": "https://righettoimmobiliare.it/blog-bce-tassi-mutui-giugno-2026-padova"
   },
   {
     "path": "/blog-bce-tassi-mutui-giugno-2026-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-bce-tassi-mutui-giugno-2026-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-bce-tassi-mutui-giugno-2026-padova.html"
   },
   {
     "path": "/blog-bolla-immobiliare-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-bolla-immobiliare-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-bolla-immobiliare-padova-2026"
   },
   {
     "path": "/blog-bolla-immobiliare-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-bolla-immobiliare-padova-2026.html"
-  },
-  {
-    "path": "/blog-bonus-edilizi-2024-incentivi-casa-padova",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-bonus-edilizi-2024-incentivi-casa-padova"
-  },
-  {
-    "path": "/blog-bonus-edilizi-2024-incentivi-casa-padova.html",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-bonus-edilizi-2024-incentivi-casa-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-bolla-immobiliare-padova-2026.html"
   },
   {
     "path": "/blog-bonus-edilizi-2026-incentivi-casa-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-bonus-edilizi-2026-incentivi-casa-padova"
+    "final": "https://righettoimmobiliare.it/blog-bonus-edilizi-2026-incentivi-casa-padova"
   },
   {
     "path": "/blog-bonus-edilizi-2026-incentivi-casa-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-bonus-edilizi-2026-incentivi-casa-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-bonus-edilizi-2026-incentivi-casa-padova.html"
   },
   {
     "path": "/blog-bonus-mobili-2026-massimizzare-ristrutturazioni",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-bonus-mobili-2026-massimizzare-ristrutturazioni"
+    "final": "https://righettoimmobiliare.it/blog-bonus-mobili-2026-massimizzare-ristrutturazioni"
   },
   {
     "path": "/blog-bonus-mobili-2026-massimizzare-ristrutturazioni.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-bonus-mobili-2026-massimizzare-ristrutturazioni.html"
+    "final": "https://righettoimmobiliare.it/blog-bonus-mobili-2026-massimizzare-ristrutturazioni.html"
   },
   {
     "path": "/blog-ca-marcello-mestre",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-ca-marcello-mestre"
+    "final": "https://righettoimmobiliare.it/blog-ca-marcello-mestre"
   },
   {
     "path": "/blog-ca-marcello-mestre.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-ca-marcello-mestre.html"
+    "final": "https://righettoimmobiliare.it/blog-ca-marcello-mestre.html"
   },
   {
     "path": "/blog-caparra-confirmatoria-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-caparra-confirmatoria-padova"
+    "final": "https://righettoimmobiliare.it/blog-caparra-confirmatoria-padova"
   },
   {
     "path": "/blog-caparra-confirmatoria-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-caparra-confirmatoria-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-caparra-confirmatoria-padova.html"
   },
   {
     "path": "/blog-casa-vendibile-5-anni-case-green-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-casa-vendibile-5-anni-case-green-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-casa-vendibile-5-anni-case-green-padova-2026"
   },
   {
     "path": "/blog-casa-vendibile-5-anni-case-green-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-casa-vendibile-5-anni-case-green-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-casa-vendibile-5-anni-case-green-padova-2026.html"
   },
   {
     "path": "/blog-case-piu-vendute-tipologie-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-case-piu-vendute-tipologie-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-case-piu-vendute-tipologie-padova-2026"
   },
   {
     "path": "/blog-case-piu-vendute-tipologie-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-case-piu-vendute-tipologie-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-case-piu-vendute-tipologie-padova-2026.html"
   },
   {
     "path": "/blog-case-vendita-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-case-vendita-padova"
+    "final": "https://righettoimmobiliare.it/blog-case-vendita-padova"
   },
   {
     "path": "/blog-case-vendita-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-case-vendita-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-case-vendita-padova.html"
   },
   {
     "path": "/blog-checklist-affitto-studenti-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-checklist-affitto-studenti-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-checklist-affitto-studenti-padova-2026"
   },
   {
     "path": "/blog-checklist-affitto-studenti-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-checklist-affitto-studenti-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-checklist-affitto-studenti-padova-2026.html"
   },
   {
     "path": "/blog-checklist-verifiche-prima-compromesso-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-checklist-verifiche-prima-compromesso-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-checklist-verifiche-prima-compromesso-padova-2026"
   },
   {
     "path": "/blog-checklist-verifiche-prima-compromesso-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-checklist-verifiche-prima-compromesso-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-checklist-verifiche-prima-compromesso-padova-2026.html"
   },
   {
     "path": "/blog-comprare-affittare-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-comprare-affittare-padova"
+    "final": "https://righettoimmobiliare.it/blog-comprare-affittare-padova"
   },
   {
     "path": "/blog-comprare-affittare-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-comprare-affittare-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-comprare-affittare-padova.html"
   },
   {
     "path": "/blog-comprare-casa-padova-guida-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-comprare-casa-padova-guida-2026"
+    "final": "https://righettoimmobiliare.it/blog-comprare-casa-padova-guida-2026"
   },
   {
     "path": "/blog-comprare-casa-padova-guida-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-comprare-casa-padova-guida-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-comprare-casa-padova-guida-2026.html"
   },
   {
     "path": "/blog-compravendite-italia-q1-agenzia-entrate-2026-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-compravendite-italia-q1-agenzia-entrate-2026-padova"
+    "final": "https://righettoimmobiliare.it/blog-compravendite-italia-q1-agenzia-entrate-2026-padova"
   },
   {
     "path": "/blog-compravendite-italia-q1-agenzia-entrate-2026-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-compravendite-italia-q1-agenzia-entrate-2026-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-compravendite-italia-q1-agenzia-entrate-2026-padova.html"
   },
   {
     "path": "/blog-compravendite-padova-record-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-compravendite-padova-record-2026"
+    "final": "https://righettoimmobiliare.it/blog-compravendite-padova-record-2026"
   },
   {
     "path": "/blog-compravendite-padova-record-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-compravendite-padova-record-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-compravendite-padova-record-2026.html"
   },
   {
     "path": "/blog-compravendite-veneto-cintura-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-compravendite-veneto-cintura-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-compravendite-veneto-cintura-padova-2026"
   },
   {
     "path": "/blog-compravendite-veneto-cintura-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-compravendite-veneto-cintura-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-compravendite-veneto-cintura-padova-2026.html"
   },
   {
     "path": "/blog-condono-edilizio-proposte-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-condono-edilizio-proposte-2026"
+    "final": "https://righettoimmobiliare.it/blog-condono-edilizio-proposte-2026"
   },
   {
     "path": "/blog-condono-edilizio-proposte-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-condono-edilizio-proposte-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-condono-edilizio-proposte-2026.html"
   },
   {
     "path": "/blog-contratto-affitto-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-contratto-affitto-padova"
+    "final": "https://righettoimmobiliare.it/blog-contratto-affitto-padova"
   },
   {
     "path": "/blog-contratto-affitto-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-contratto-affitto-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-contratto-affitto-padova.html"
   },
   {
     "path": "/blog-costi-costruzione-istat-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-costi-costruzione-istat-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-costi-costruzione-istat-padova-2026"
   },
   {
     "path": "/blog-costi-costruzione-istat-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-costi-costruzione-istat-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-costi-costruzione-istat-padova-2026.html"
   },
   {
     "path": "/blog-costi-proprieta-acquisto-possesso-vendita-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-costi-proprieta-acquisto-possesso-vendita-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-costi-proprieta-acquisto-possesso-vendita-padova-2026"
   },
   {
     "path": "/blog-costi-proprieta-acquisto-possesso-vendita-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-costi-proprieta-acquisto-possesso-vendita-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-costi-proprieta-acquisto-possesso-vendita-padova-2026.html"
   },
   {
     "path": "/blog-costi-vendere-casa-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-costi-vendere-casa-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-costi-vendere-casa-padova-2026"
   },
   {
     "path": "/blog-costi-vendere-casa-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-costi-vendere-casa-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-costi-vendere-casa-padova-2026.html"
   },
   {
     "path": "/blog-crisi-immobiliare-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-crisi-immobiliare-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-crisi-immobiliare-padova-2026"
   },
   {
     "path": "/blog-crisi-immobiliare-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-crisi-immobiliare-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-crisi-immobiliare-padova-2026.html"
   },
   {
     "path": "/blog-dazi-usa-ue-mercato-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-dazi-usa-ue-mercato-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-dazi-usa-ue-mercato-padova-2026"
   },
   {
     "path": "/blog-dazi-usa-ue-mercato-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-dazi-usa-ue-mercato-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-dazi-usa-ue-mercato-padova-2026.html"
   },
   {
     "path": "/blog-dieci-errori-acquisto-casa-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-dieci-errori-acquisto-casa-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-dieci-errori-acquisto-casa-padova-2026"
   },
   {
     "path": "/blog-dieci-errori-acquisto-casa-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-dieci-errori-acquisto-casa-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-dieci-errori-acquisto-casa-padova-2026.html"
   },
   {
     "path": "/blog-direttiva-case-green-limena-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-direttiva-case-green-limena-padova"
+    "final": "https://righettoimmobiliare.it/blog-direttiva-case-green-limena-padova"
   },
   {
     "path": "/blog-direttiva-case-green-limena-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-direttiva-case-green-limena-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-direttiva-case-green-limena-padova.html"
   },
   {
     "path": "/blog-documenti-compravendita-rogito-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-documenti-compravendita-rogito-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-documenti-compravendita-rogito-padova-2026"
   },
   {
     "path": "/blog-documenti-compravendita-rogito-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-documenti-compravendita-rogito-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-documenti-compravendita-rogito-padova-2026.html"
   },
   {
     "path": "/blog-documenti-vendita-casa",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-documenti-vendita-casa"
+    "final": "https://righettoimmobiliare.it/blog-documenti-vendita-casa"
   },
   {
     "path": "/blog-documenti-vendita-casa.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-documenti-vendita-casa.html"
+    "final": "https://righettoimmobiliare.it/blog-documenti-vendita-casa.html"
   },
   {
     "path": "/blog-domanda-case-green-certificazione-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-domanda-case-green-certificazione-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-domanda-case-green-certificazione-padova-2026"
   },
   {
     "path": "/blog-domanda-case-green-certificazione-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-domanda-case-green-certificazione-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-domanda-case-green-certificazione-padova-2026.html"
   },
   {
     "path": "/blog-emergenza-abitativa-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-emergenza-abitativa-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-emergenza-abitativa-padova-2026"
   },
   {
     "path": "/blog-emergenza-abitativa-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-emergenza-abitativa-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-emergenza-abitativa-padova-2026.html"
   },
   {
     "path": "/blog-eurocamera-accordo-dazi-usa-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-eurocamera-accordo-dazi-usa-2026"
+    "final": "https://righettoimmobiliare.it/blog-eurocamera-accordo-dazi-usa-2026"
   },
   {
     "path": "/blog-eurocamera-accordo-dazi-usa-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-eurocamera-accordo-dazi-usa-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-eurocamera-accordo-dazi-usa-2026.html"
   },
   {
     "path": "/blog-geopolitica-ucraina-prezzi-mutui-italia-veneto-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-geopolitica-ucraina-prezzi-mutui-italia-veneto-2026"
+    "final": "https://righettoimmobiliare.it/blog-geopolitica-ucraina-prezzi-mutui-italia-veneto-2026"
   },
   {
     "path": "/blog-geopolitica-ucraina-prezzi-mutui-italia-veneto-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-geopolitica-ucraina-prezzi-mutui-italia-veneto-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-geopolitica-ucraina-prezzi-mutui-italia-veneto-2026.html"
   },
   {
     "path": "/blog-gestione-spese-casa-risparmio-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-gestione-spese-casa-risparmio-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-gestione-spese-casa-risparmio-padova-2026"
   },
   {
     "path": "/blog-gestione-spese-casa-risparmio-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-gestione-spese-casa-risparmio-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-gestione-spese-casa-risparmio-padova-2026.html"
   },
   {
     "path": "/blog-home-staging-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-home-staging-padova"
+    "final": "https://righettoimmobiliare.it/blog-home-staging-padova"
   },
   {
     "path": "/blog-home-staging-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-home-staging-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-home-staging-padova.html"
   },
   {
     "path": "/blog-housing-lavoratori-veneto-edilcassa-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-housing-lavoratori-veneto-edilcassa-2026"
+    "final": "https://righettoimmobiliare.it/blog-housing-lavoratori-veneto-edilcassa-2026"
   },
   {
     "path": "/blog-housing-lavoratori-veneto-edilcassa-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-housing-lavoratori-veneto-edilcassa-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-housing-lavoratori-veneto-edilcassa-2026.html"
   },
   {
     "path": "/blog-immobiliare-geopolitica-energia-tassi-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-immobiliare-geopolitica-energia-tassi-2026"
+    "final": "https://righettoimmobiliare.it/blog-immobiliare-geopolitica-energia-tassi-2026"
   },
   {
     "path": "/blog-immobiliare-geopolitica-energia-tassi-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-immobiliare-geopolitica-energia-tassi-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-immobiliare-geopolitica-energia-tassi-2026.html"
   },
   {
     "path": "/blog-impegno-quotidiano-agenzia-immobiliare",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-impegno-quotidiano-agenzia-immobiliare"
+    "final": "https://righettoimmobiliare.it/blog-impegno-quotidiano-agenzia-immobiliare"
   },
   {
     "path": "/blog-impegno-quotidiano-agenzia-immobiliare.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-impegno-quotidiano-agenzia-immobiliare.html"
+    "final": "https://righettoimmobiliare.it/blog-impegno-quotidiano-agenzia-immobiliare.html"
   },
   {
     "path": "/blog-imposte-registro-catasto-compravendita-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-imposte-registro-catasto-compravendita-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-imposte-registro-catasto-compravendita-padova-2026"
   },
   {
     "path": "/blog-imposte-registro-catasto-compravendita-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-imposte-registro-catasto-compravendita-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-imposte-registro-catasto-compravendita-padova-2026.html"
   },
   {
     "path": "/blog-investire-immobiliare-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-investire-immobiliare-padova"
+    "final": "https://righettoimmobiliare.it/blog-investire-immobiliare-padova"
   },
   {
     "path": "/blog-investire-immobiliare-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-investire-immobiliare-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-investire-immobiliare-padova.html"
   },
   {
     "path": "/blog-limena-vicino-padova-comprare-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-limena-vicino-padova-comprare-2026"
+    "final": "https://righettoimmobiliare.it/blog-limena-vicino-padova-comprare-2026"
   },
   {
     "path": "/blog-limena-vicino-padova-comprare-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-limena-vicino-padova-comprare-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-limena-vicino-padova-comprare-2026.html"
   },
   {
     "path": "/blog-limena-vs-padova-centro-dove-comprare-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-limena-vs-padova-centro-dove-comprare-2026"
+    "final": "https://righettoimmobiliare.it/blog-limena-vs-padova-centro-dove-comprare-2026"
   },
   {
     "path": "/blog-limena-vs-padova-centro-dove-comprare-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-limena-vs-padova-centro-dove-comprare-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-limena-vs-padova-centro-dove-comprare-2026.html"
   },
   {
     "path": "/blog-loft-aziende-cucina-condivisa-padova-vicenza-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-loft-aziende-cucina-condivisa-padova-vicenza-2026"
+    "final": "https://righettoimmobiliare.it/blog-loft-aziende-cucina-condivisa-padova-vicenza-2026"
   },
   {
     "path": "/blog-loft-aziende-cucina-condivisa-padova-vicenza-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-loft-aziende-cucina-condivisa-padova-vicenza-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-loft-aziende-cucina-condivisa-padova-vicenza-2026.html"
   },
   {
     "path": "/blog-mercato-immobiliare-limena-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mercato-immobiliare-limena-2026"
+    "final": "https://righettoimmobiliare.it/blog-mercato-immobiliare-limena-2026"
   },
   {
     "path": "/blog-mercato-immobiliare-limena-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mercato-immobiliare-limena-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-mercato-immobiliare-limena-2026.html"
   },
   {
     "path": "/blog-mercato-immobiliare-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mercato-immobiliare-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-mercato-immobiliare-padova-2026"
   },
   {
     "path": "/blog-mercato-immobiliare-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mercato-immobiliare-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-mercato-immobiliare-padova-2026.html"
   },
   {
     "path": "/blog-mercato-immobiliare-padova-centro-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mercato-immobiliare-padova-centro-2026"
+    "final": "https://righettoimmobiliare.it/blog-mercato-immobiliare-padova-centro-2026"
   },
   {
     "path": "/blog-mercato-immobiliare-padova-centro-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mercato-immobiliare-padova-centro-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-mercato-immobiliare-padova-centro-2026.html"
   },
   {
     "path": "/blog-mercato-immobiliare-piazzola-sul-brenta-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mercato-immobiliare-piazzola-sul-brenta-2026"
+    "final": "https://righettoimmobiliare.it/blog-mercato-immobiliare-piazzola-sul-brenta-2026"
   },
   {
     "path": "/blog-mercato-immobiliare-piazzola-sul-brenta-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mercato-immobiliare-piazzola-sul-brenta-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-mercato-immobiliare-piazzola-sul-brenta-2026.html"
   },
   {
     "path": "/blog-mercato-italiano-tensioni-medio-oriente-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mercato-italiano-tensioni-medio-oriente-2026"
+    "final": "https://righettoimmobiliare.it/blog-mercato-italiano-tensioni-medio-oriente-2026"
   },
   {
     "path": "/blog-mercato-italiano-tensioni-medio-oriente-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mercato-italiano-tensioni-medio-oriente-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-mercato-italiano-tensioni-medio-oriente-2026.html"
   },
   {
     "path": "/blog-mercato-sacrocuore-padova-omi-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mercato-sacrocuore-padova-omi-2026"
+    "final": "https://righettoimmobiliare.it/blog-mercato-sacrocuore-padova-omi-2026"
   },
   {
     "path": "/blog-mercato-sacrocuore-padova-omi-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mercato-sacrocuore-padova-omi-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-mercato-sacrocuore-padova-omi-2026.html"
   },
   {
     "path": "/blog-mutui-casa-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mutui-casa-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-mutui-casa-padova-2026"
   },
   {
     "path": "/blog-mutui-casa-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mutui-casa-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-mutui-casa-padova-2026.html"
   },
   {
     "path": "/blog-mutui-selettivi-banche-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mutui-selettivi-banche-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-mutui-selettivi-banche-padova-2026"
   },
   {
     "path": "/blog-mutui-selettivi-banche-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mutui-selettivi-banche-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-mutui-selettivi-banche-padova-2026.html"
   },
   {
     "path": "/blog-mutui-tasso-fisso-bancaitalia-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mutui-tasso-fisso-bancaitalia-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-mutui-tasso-fisso-bancaitalia-padova-2026"
   },
   {
     "path": "/blog-mutui-tasso-fisso-bancaitalia-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mutui-tasso-fisso-bancaitalia-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-mutui-tasso-fisso-bancaitalia-padova-2026.html"
   },
   {
     "path": "/blog-mutuo-documenti-tempi-prima-casa-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mutuo-documenti-tempi-prima-casa-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-mutuo-documenti-tempi-prima-casa-padova-2026"
   },
   {
     "path": "/blog-mutuo-documenti-tempi-prima-casa-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mutuo-documenti-tempi-prima-casa-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-mutuo-documenti-tempi-prima-casa-padova-2026.html"
   },
   {
     "path": "/blog-mutuo-fisso-variabile-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mutuo-fisso-variabile-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-mutuo-fisso-variabile-padova-2026"
   },
   {
     "path": "/blog-mutuo-fisso-variabile-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mutuo-fisso-variabile-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-mutuo-fisso-variabile-padova-2026.html"
   },
   {
     "path": "/blog-mutuo-prima-casa-padova",
-    "status": 200,
+    "status": 503,
     "final": "https://www.righettoimmobiliare.it/blog-mutuo-prima-casa-padova"
   },
   {
     "path": "/blog-mutuo-prima-casa-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-mutuo-prima-casa-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-mutuo-prima-casa-padova.html"
   },
   {
     "path": "/blog-nuove-costruzioni-mercato-veneto-2026-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-nuove-costruzioni-mercato-veneto-2026-padova"
+    "final": "https://righettoimmobiliare.it/blog-nuove-costruzioni-mercato-veneto-2026-padova"
   },
   {
     "path": "/blog-nuove-costruzioni-mercato-veneto-2026-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-nuove-costruzioni-mercato-veneto-2026-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-nuove-costruzioni-mercato-veneto-2026-padova.html"
   },
   {
     "path": "/blog-offerta-stock-vendita-italia-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-offerta-stock-vendita-italia-2026"
+    "final": "https://righettoimmobiliare.it/blog-offerta-stock-vendita-italia-2026"
   },
   {
     "path": "/blog-offerta-stock-vendita-italia-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-offerta-stock-vendita-italia-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-offerta-stock-vendita-italia-2026.html"
   },
   {
     "path": "/blog-patrimonio-casa-resilienza-mercati-globali-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-patrimonio-casa-resilienza-mercati-globali-2026"
+    "final": "https://righettoimmobiliare.it/blog-patrimonio-casa-resilienza-mercati-globali-2026"
   },
   {
     "path": "/blog-patrimonio-casa-resilienza-mercati-globali-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-patrimonio-casa-resilienza-mercati-globali-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-patrimonio-casa-resilienza-mercati-globali-2026.html"
   },
   {
     "path": "/blog-percorso-vendita-immobile-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-percorso-vendita-immobile-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-percorso-vendita-immobile-padova-2026"
   },
   {
     "path": "/blog-percorso-vendita-immobile-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-percorso-vendita-immobile-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-percorso-vendita-immobile-padova-2026.html"
   },
   {
     "path": "/blog-permuta-immobiliare-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-permuta-immobiliare-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-permuta-immobiliare-padova-2026"
   },
   {
     "path": "/blog-permuta-immobiliare-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-permuta-immobiliare-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-permuta-immobiliare-padova-2026.html"
   },
   {
     "path": "/blog-piano-casa-decreto-66-2026-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-piano-casa-decreto-66-2026-padova"
+    "final": "https://righettoimmobiliare.it/blog-piano-casa-decreto-66-2026-padova"
   },
   {
     "path": "/blog-piano-casa-decreto-66-2026-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-piano-casa-decreto-66-2026-padova.html"
-  },
-  {
-    "path": "/blog-piano-casa-decreto-salva-casa-padova",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-piano-casa-decreto-salva-casa-padova"
-  },
-  {
-    "path": "/blog-piano-casa-decreto-salva-casa-padova.html",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-piano-casa-decreto-salva-casa-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-piano-casa-decreto-66-2026-padova.html"
   },
   {
     "path": "/blog-planimetria-catastale-compravendita-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-planimetria-catastale-compravendita-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-planimetria-catastale-compravendita-padova-2026"
   },
   {
     "path": "/blog-planimetria-catastale-compravendita-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-planimetria-catastale-compravendita-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-planimetria-catastale-compravendita-padova-2026.html"
   },
   {
     "path": "/blog-previsioni-immobiliari-scenari-geopolitica-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-previsioni-immobiliari-scenari-geopolitica-2026"
+    "final": "https://righettoimmobiliare.it/blog-previsioni-immobiliari-scenari-geopolitica-2026"
   },
   {
     "path": "/blog-previsioni-immobiliari-scenari-geopolitica-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-previsioni-immobiliari-scenari-geopolitica-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-previsioni-immobiliari-scenari-geopolitica-2026.html"
   },
   {
     "path": "/blog-prezzi-case-padova-zona-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-prezzi-case-padova-zona-2026"
+    "final": "https://righettoimmobiliare.it/blog-prezzi-case-padova-zona-2026"
   },
   {
     "path": "/blog-prezzi-case-padova-zona-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-prezzi-case-padova-zona-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-prezzi-case-padova-zona-2026.html"
   },
   {
     "path": "/blog-prezzi-padova-provincia-fiaip-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-prezzi-padova-provincia-fiaip-2026"
+    "final": "https://righettoimmobiliare.it/blog-prezzi-padova-provincia-fiaip-2026"
   },
   {
     "path": "/blog-prezzi-padova-provincia-fiaip-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-prezzi-padova-provincia-fiaip-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-prezzi-padova-provincia-fiaip-2026.html"
   },
   {
     "path": "/blog-prospettive-mercato-residenziale-italia-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-prospettive-mercato-residenziale-italia-2026"
+    "final": "https://righettoimmobiliare.it/blog-prospettive-mercato-residenziale-italia-2026"
   },
   {
     "path": "/blog-prospettive-mercato-residenziale-italia-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-prospettive-mercato-residenziale-italia-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-prospettive-mercato-residenziale-italia-2026.html"
   },
   {
     "path": "/blog-quartieri-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-quartieri-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-quartieri-padova-2026"
   },
   {
     "path": "/blog-quartieri-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-quartieri-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-quartieri-padova-2026.html"
   },
   {
     "path": "/blog-quattro-imposte-rogitio-prima-casa-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-quattro-imposte-rogitio-prima-casa-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-quattro-imposte-rogitio-prima-casa-padova-2026"
   },
   {
     "path": "/blog-quattro-imposte-rogitio-prima-casa-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-quattro-imposte-rogitio-prima-casa-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-quattro-imposte-rogitio-prima-casa-padova-2026.html"
   },
   {
     "path": "/blog-quotazioni-locazioni-omi-istat-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-quotazioni-locazioni-omi-istat-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-quotazioni-locazioni-omi-istat-padova-2026"
   },
   {
     "path": "/blog-quotazioni-locazioni-omi-istat-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-quotazioni-locazioni-omi-istat-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-quotazioni-locazioni-omi-istat-padova-2026.html"
   },
   {
     "path": "/blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026"
   },
   {
     "path": "/blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026.html"
   },
   {
     "path": "/blog-rendimento-affitto-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-rendimento-affitto-padova"
+    "final": "https://righettoimmobiliare.it/blog-rendimento-affitto-padova"
   },
   {
     "path": "/blog-rendimento-affitto-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-rendimento-affitto-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-rendimento-affitto-padova.html"
   },
   {
     "path": "/blog-residenze-green-padova-tribloc-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-residenze-green-padova-tribloc-2026"
+    "final": "https://righettoimmobiliare.it/blog-residenze-green-padova-tribloc-2026"
   },
   {
     "path": "/blog-residenze-green-padova-tribloc-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-residenze-green-padova-tribloc-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-residenze-green-padova-tribloc-2026.html"
   },
   {
     "path": "/blog-righetto-bilancio-2025-soluzioni-affitto-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-righetto-bilancio-2025-soluzioni-affitto-2026"
+    "final": "https://righettoimmobiliare.it/blog-righetto-bilancio-2025-soluzioni-affitto-2026"
   },
   {
     "path": "/blog-righetto-bilancio-2025-soluzioni-affitto-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-righetto-bilancio-2025-soluzioni-affitto-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-righetto-bilancio-2025-soluzioni-affitto-2026.html"
   },
   {
     "path": "/blog-righetto-storia-territorio-acquisizioni-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-righetto-storia-territorio-acquisizioni-2026"
+    "final": "https://righettoimmobiliare.it/blog-righetto-storia-territorio-acquisizioni-2026"
   },
   {
     "path": "/blog-righetto-storia-territorio-acquisizioni-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-righetto-storia-territorio-acquisizioni-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-righetto-storia-territorio-acquisizioni-2026.html"
   },
   {
     "path": "/blog-rubano-limena-affitto-lavoratori-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-rubano-limena-affitto-lavoratori-2026"
+    "final": "https://righettoimmobiliare.it/blog-rubano-limena-affitto-lavoratori-2026"
   },
   {
     "path": "/blog-rubano-limena-affitto-lavoratori-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-rubano-limena-affitto-lavoratori-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-rubano-limena-affitto-lavoratori-2026.html"
   },
   {
     "path": "/blog-scegliere-agenzia-immobiliare-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-scegliere-agenzia-immobiliare-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-scegliere-agenzia-immobiliare-padova-2026"
   },
   {
     "path": "/blog-scegliere-agenzia-immobiliare-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-scegliere-agenzia-immobiliare-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-scegliere-agenzia-immobiliare-padova-2026.html"
   },
   {
     "path": "/blog-scegliere-immobile-giusto-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-scegliere-immobile-giusto-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-scegliere-immobile-giusto-padova-2026"
   },
   {
     "path": "/blog-scegliere-immobile-giusto-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-scegliere-immobile-giusto-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-scegliere-immobile-giusto-padova-2026.html"
   },
   {
     "path": "/blog-scuole-istruzione-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-scuole-istruzione-padova"
+    "final": "https://righettoimmobiliare.it/blog-scuole-istruzione-padova"
   },
   {
     "path": "/blog-scuole-istruzione-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-scuole-istruzione-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-scuole-istruzione-padova.html"
   },
   {
     "path": "/blog-servizi-infrastrutture-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-servizi-infrastrutture-padova"
+    "final": "https://righettoimmobiliare.it/blog-servizi-infrastrutture-padova"
   },
   {
     "path": "/blog-servizi-infrastrutture-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-servizi-infrastrutture-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-servizi-infrastrutture-padova.html"
   },
   {
     "path": "/blog-so-tutto-io-venditore-presuntuoso-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-so-tutto-io-venditore-presuntuoso-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-so-tutto-io-venditore-presuntuoso-padova-2026"
   },
   {
     "path": "/blog-so-tutto-io-venditore-presuntuoso-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-so-tutto-io-venditore-presuntuoso-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-so-tutto-io-venditore-presuntuoso-padova-2026.html"
   },
   {
     "path": "/blog-sondaggio-bancaditalia-q1-2026-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-sondaggio-bancaditalia-q1-2026-padova"
+    "final": "https://righettoimmobiliare.it/blog-sondaggio-bancaditalia-q1-2026-padova"
   },
   {
     "path": "/blog-sondaggio-bancaditalia-q1-2026-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-sondaggio-bancaditalia-q1-2026-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-sondaggio-bancaditalia-q1-2026-padova.html"
   },
   {
     "path": "/blog-squilibrio-domanda-offerta-affitti-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-squilibrio-domanda-offerta-affitti-padova"
+    "final": "https://righettoimmobiliare.it/blog-squilibrio-domanda-offerta-affitti-padova"
   },
   {
     "path": "/blog-squilibrio-domanda-offerta-affitti-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-squilibrio-domanda-offerta-affitti-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-squilibrio-domanda-offerta-affitti-padova.html"
   },
   {
     "path": "/blog-stanza-universitaria-padova-canoni-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-stanza-universitaria-padova-canoni-2026"
+    "final": "https://righettoimmobiliare.it/blog-stanza-universitaria-padova-canoni-2026"
   },
   {
     "path": "/blog-stanza-universitaria-padova-canoni-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-stanza-universitaria-padova-canoni-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-stanza-universitaria-padova-canoni-2026.html"
   },
   {
     "path": "/blog-studentati-veneto-2026-posti-letto",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-studentati-veneto-2026-posti-letto"
+    "final": "https://righettoimmobiliare.it/blog-studentati-veneto-2026-posti-letto"
   },
   {
     "path": "/blog-studentati-veneto-2026-posti-letto.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-studentati-veneto-2026-posti-letto.html"
+    "final": "https://righettoimmobiliare.it/blog-studentati-veneto-2026-posti-letto.html"
   },
   {
     "path": "/blog-successione-immobiliare-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-successione-immobiliare-padova"
+    "final": "https://righettoimmobiliare.it/blog-successione-immobiliare-padova"
   },
   {
     "path": "/blog-successione-immobiliare-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-successione-immobiliare-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-successione-immobiliare-padova.html"
   },
   {
     "path": "/blog-surroga-mutuo-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-surroga-mutuo-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-surroga-mutuo-padova-2026"
   },
   {
     "path": "/blog-surroga-mutuo-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-surroga-mutuo-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-surroga-mutuo-padova-2026.html"
   },
   {
     "path": "/blog-tasse-vendita-casa",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-tasse-vendita-casa"
+    "final": "https://righettoimmobiliare.it/blog-tasse-vendita-casa"
   },
   {
     "path": "/blog-tasse-vendita-casa.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-tasse-vendita-casa.html"
+    "final": "https://righettoimmobiliare.it/blog-tasse-vendita-casa.html"
   },
   {
     "path": "/blog-tassi-mutui-minimi-approfittarne-padova-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-tassi-mutui-minimi-approfittarne-padova-2026"
+    "final": "https://righettoimmobiliare.it/blog-tassi-mutui-minimi-approfittarne-padova-2026"
   },
   {
     "path": "/blog-tassi-mutui-minimi-approfittarne-padova-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-tassi-mutui-minimi-approfittarne-padova-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-tassi-mutui-minimi-approfittarne-padova-2026.html"
   },
   {
     "path": "/blog-tempi-vendita-casa-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-tempi-vendita-casa-padova"
+    "final": "https://righettoimmobiliare.it/blog-tempi-vendita-casa-padova"
   },
   {
     "path": "/blog-tempi-vendita-casa-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-tempi-vendita-casa-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-tempi-vendita-casa-padova.html"
   },
   {
     "path": "/blog-trasporti-mobilita-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-trasporti-mobilita-padova"
+    "final": "https://righettoimmobiliare.it/blog-trasporti-mobilita-padova"
   },
   {
     "path": "/blog-trasporti-mobilita-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-trasporti-mobilita-padova.html"
+    "final": "https://righettoimmobiliare.it/blog-trasporti-mobilita-padova.html"
   },
   {
     "path": "/blog-trend-investimenti-immobiliari-summit-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-trend-investimenti-immobiliari-summit-2026"
+    "final": "https://righettoimmobiliare.it/blog-trend-investimenti-immobiliari-summit-2026"
   },
   {
     "path": "/blog-trend-investimenti-immobiliari-summit-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-trend-investimenti-immobiliari-summit-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-trend-investimenti-immobiliari-summit-2026.html"
   },
   {
     "path": "/blog-ultime-acquisizioni-commerciali-padova-giugno-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-ultime-acquisizioni-commerciali-padova-giugno-2026"
+    "final": "https://righettoimmobiliare.it/blog-ultime-acquisizioni-commerciali-padova-giugno-2026"
   },
   {
     "path": "/blog-ultime-acquisizioni-commerciali-padova-giugno-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-ultime-acquisizioni-commerciali-padova-giugno-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-ultime-acquisizioni-commerciali-padova-giugno-2026.html"
   },
   {
     "path": "/blog-ultime-acquisizioni-residenziali-padova-giugno-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-ultime-acquisizioni-residenziali-padova-giugno-2026"
+    "final": "https://righettoimmobiliare.it/blog-ultime-acquisizioni-residenziali-padova-giugno-2026"
   },
   {
     "path": "/blog-ultime-acquisizioni-residenziali-padova-giugno-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-ultime-acquisizioni-residenziali-padova-giugno-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-ultime-acquisizioni-residenziali-padova-giugno-2026.html"
   },
   {
     "path": "/blog-vendita-immobiliare-padova-strategie-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-vendita-immobiliare-padova-strategie-2026"
+    "final": "https://righettoimmobiliare.it/blog-vendita-immobiliare-padova-strategie-2026"
   },
   {
     "path": "/blog-vendita-immobiliare-padova-strategie-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-vendita-immobiliare-padova-strategie-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-vendita-immobiliare-padova-strategie-2026.html"
   },
   {
     "path": "/blog-vicenza-residenze-universitarie-calmierate-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-vicenza-residenze-universitarie-calmierate-2026"
+    "final": "https://righettoimmobiliare.it/blog-vicenza-residenze-universitarie-calmierate-2026"
   },
   {
     "path": "/blog-vicenza-residenze-universitarie-calmierate-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-vicenza-residenze-universitarie-calmierate-2026.html"
-  },
-  {
-    "path": "/blog-vigonza-rubano-comprare-casa-cintura-2024",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-vigonza-rubano-comprare-casa-cintura-2024"
-  },
-  {
-    "path": "/blog-vigonza-rubano-comprare-casa-cintura-2024.html",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-vigonza-rubano-comprare-casa-cintura-2024.html"
+    "final": "https://righettoimmobiliare.it/blog-vicenza-residenze-universitarie-calmierate-2026.html"
   },
   {
     "path": "/blog-vigonza-rubano-comprare-casa-cintura-2026",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-vigonza-rubano-comprare-casa-cintura-2026"
+    "final": "https://righettoimmobiliare.it/blog-vigonza-rubano-comprare-casa-cintura-2026"
   },
   {
     "path": "/blog-vigonza-rubano-comprare-casa-cintura-2026.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog-vigonza-rubano-comprare-casa-cintura-2026.html"
+    "final": "https://righettoimmobiliare.it/blog-vigonza-rubano-comprare-casa-cintura-2026.html"
   },
   {
     "path": "/blog.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/blog.html"
+    "final": "https://righettoimmobiliare.it/blog.html"
   },
   {
     "path": "/bookmarklet-helper",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/bookmarklet-helper"
+    "final": "https://righettoimmobiliare.it/bookmarklet-helper"
   },
   {
     "path": "/bookmarklet-helper.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/bookmarklet-helper.html"
+    "final": "https://righettoimmobiliare.it/bookmarklet-helper.html"
   },
   {
     "path": "/chi-siamo",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/chi-siamo"
+    "final": "https://righettoimmobiliare.it/chi-siamo"
   },
   {
     "path": "/chi-siamo.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/chi-siamo.html"
+    "final": "https://righettoimmobiliare.it/chi-siamo.html"
   },
   {
     "path": "/contatti",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/contatti"
+    "final": "https://righettoimmobiliare.it/contatti"
   },
   {
     "path": "/contatti.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/contatti.html"
+    "final": "https://righettoimmobiliare.it/contatti.html"
   },
   {
     "path": "/cookie-policy",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/cookie-policy"
+    "final": "https://righettoimmobiliare.it/cookie-policy"
   },
   {
     "path": "/cookie-policy.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/cookie-policy.html"
+    "final": "https://righettoimmobiliare.it/cookie-policy.html"
   },
   {
     "path": "/faq",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/faq"
+    "final": "https://righettoimmobiliare.it/faq"
   },
   {
     "path": "/faq.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/faq.html"
+    "final": "https://righettoimmobiliare.it/faq.html"
   },
   {
     "path": "/gino-capon",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/gino-capon"
+    "final": "https://righettoimmobiliare.it/gino-capon"
   },
   {
     "path": "/gino-capon.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/gino-capon.html"
-  },
-  {
-    "path": "/home",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/home"
-  },
-  {
-    "path": "/home.html",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/home.html"
+    "final": "https://righettoimmobiliare.it/gino-capon.html"
   },
   {
     "path": "/immobile",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/immobile"
+    "final": "https://righettoimmobiliare.it/immobile"
   },
   {
     "path": "/immobile.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/immobile.html"
+    "final": "https://righettoimmobiliare.it/immobile.html"
   },
   {
     "path": "/immobili",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/immobili"
+    "final": "https://righettoimmobiliare.it/immobili"
   },
   {
     "path": "/immobili.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/immobili.html"
+    "final": "https://righettoimmobiliare.it/immobili.html"
   },
   {
     "path": "/index",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/index"
+    "final": "https://righettoimmobiliare.it/index"
   },
   {
     "path": "/index.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/index.html"
+    "final": "https://righettoimmobiliare.it/index.html"
   },
   {
     "path": "/landing-agente",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-agente"
+    "final": "https://righettoimmobiliare.it/landing-agente"
   },
   {
     "path": "/landing-agente.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-agente.html"
+    "final": "https://righettoimmobiliare.it/landing-agente.html"
   },
   {
     "path": "/landing-calcolo-mutuo",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-calcolo-mutuo"
+    "final": "https://righettoimmobiliare.it/landing-calcolo-mutuo"
   },
   {
     "path": "/landing-calcolo-mutuo.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-calcolo-mutuo.html"
+    "final": "https://righettoimmobiliare.it/landing-calcolo-mutuo.html"
   },
   {
     "path": "/landing-chat-calcolo-mutuo",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-chat-calcolo-mutuo"
+    "final": "https://righettoimmobiliare.it/landing-chat-calcolo-mutuo"
   },
   {
     "path": "/landing-chat-calcolo-mutuo.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-chat-calcolo-mutuo.html"
+    "final": "https://righettoimmobiliare.it/landing-chat-calcolo-mutuo.html"
   },
   {
     "path": "/landing-chat-insoddisfatti",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-chat-insoddisfatti"
+    "final": "https://righettoimmobiliare.it/landing-chat-insoddisfatti"
   },
   {
     "path": "/landing-chat-insoddisfatti.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-chat-insoddisfatti.html"
+    "final": "https://righettoimmobiliare.it/landing-chat-insoddisfatti.html"
   },
   {
     "path": "/landing-chat-offerta-gas",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-chat-offerta-gas"
+    "final": "https://righettoimmobiliare.it/landing-chat-offerta-gas"
   },
   {
     "path": "/landing-chat-offerta-gas.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-chat-offerta-gas.html"
+    "final": "https://righettoimmobiliare.it/landing-chat-offerta-gas.html"
   },
   {
     "path": "/landing-chat-offerta-luce",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-chat-offerta-luce"
+    "final": "https://righettoimmobiliare.it/landing-chat-offerta-luce"
   },
   {
     "path": "/landing-chat-offerta-luce.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-chat-offerta-luce.html"
+    "final": "https://righettoimmobiliare.it/landing-chat-offerta-luce.html"
   },
   {
     "path": "/landing-chat-valutazione",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-chat-valutazione"
+    "final": "https://righettoimmobiliare.it/landing-chat-valutazione"
   },
   {
     "path": "/landing-chat-valutazione.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-chat-valutazione.html"
+    "final": "https://righettoimmobiliare.it/landing-chat-valutazione.html"
   },
   {
     "path": "/landing-chat-vendita",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-chat-vendita"
+    "final": "https://righettoimmobiliare.it/landing-chat-vendita"
   },
   {
     "path": "/landing-chat-vendita.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-chat-vendita.html"
+    "final": "https://righettoimmobiliare.it/landing-chat-vendita.html"
   },
   {
     "path": "/landing-consulenza-immobiliare-gratuita",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-consulenza-immobiliare-gratuita"
+    "final": "https://righettoimmobiliare.it/landing-consulenza-immobiliare-gratuita"
   },
   {
     "path": "/landing-consulenza-immobiliare-gratuita.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-consulenza-immobiliare-gratuita.html"
+    "final": "https://righettoimmobiliare.it/landing-consulenza-immobiliare-gratuita.html"
   },
   {
     "path": "/landing-costi-locazione-inquilino",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-costi-locazione-inquilino"
+    "final": "https://righettoimmobiliare.it/landing-costi-locazione-inquilino"
   },
   {
     "path": "/landing-costi-locazione-inquilino.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-costi-locazione-inquilino.html"
-  },
-  {
-    "path": "/landing-demo-albergo-statale-padova-vicenza",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-demo-albergo-statale-padova-vicenza"
-  },
-  {
-    "path": "/landing-demo-albergo-statale-padova-vicenza.html",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-demo-albergo-statale-padova-vicenza.html"
-  },
-  {
-    "path": "/landing-demo-hotel-mini-loft-padova-vicenza",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-demo-hotel-mini-loft-padova-vicenza"
-  },
-  {
-    "path": "/landing-demo-hotel-mini-loft-padova-vicenza.html",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-demo-hotel-mini-loft-padova-vicenza.html"
-  },
-  {
-    "path": "/landing-demo-hotel-venice-grisignano",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-demo-hotel-venice-grisignano"
-  },
-  {
-    "path": "/landing-demo-hotel-venice-grisignano.html",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-demo-hotel-venice-grisignano.html"
+    "final": "https://righettoimmobiliare.it/landing-costi-locazione-inquilino.html"
   },
   {
     "path": "/landing-demo-loft-adiacenti-padova-vicenza",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-demo-loft-adiacenti-padova-vicenza"
+    "final": "https://righettoimmobiliare.it/landing-demo-loft-adiacenti-padova-vicenza"
   },
   {
     "path": "/landing-demo-loft-adiacenti-padova-vicenza.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-demo-loft-adiacenti-padova-vicenza.html"
+    "final": "https://righettoimmobiliare.it/landing-demo-loft-adiacenti-padova-vicenza.html"
   },
   {
     "path": "/landing-mutuo",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-mutuo"
+    "final": "https://righettoimmobiliare.it/landing-mutuo"
   },
   {
     "path": "/landing-mutuo.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-mutuo.html"
+    "final": "https://righettoimmobiliare.it/landing-mutuo.html"
   },
   {
     "path": "/landing-valutazione",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-valutazione"
+    "final": "https://righettoimmobiliare.it/landing-valutazione"
   },
   {
     "path": "/landing-valutazione.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-valutazione.html"
+    "final": "https://righettoimmobiliare.it/landing-valutazione.html"
   },
   {
     "path": "/landing-vendere-casa-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-vendere-casa-padova"
+    "final": "https://righettoimmobiliare.it/landing-vendere-casa-padova"
   },
   {
     "path": "/landing-vendere-casa-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-vendere-casa-padova.html"
+    "final": "https://righettoimmobiliare.it/landing-vendere-casa-padova.html"
   },
   {
     "path": "/landing-vendita",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-vendita"
+    "final": "https://righettoimmobiliare.it/landing-vendita"
   },
   {
     "path": "/landing-vendita.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/landing-vendita.html"
+    "final": "https://righettoimmobiliare.it/landing-vendita.html"
   },
   {
     "path": "/linda-righetto",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/linda-righetto"
+    "final": "https://righettoimmobiliare.it/linda-righetto"
   },
   {
     "path": "/linda-righetto.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/linda-righetto.html"
+    "final": "https://righettoimmobiliare.it/linda-righetto.html"
   },
   {
     "path": "/privacy",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/privacy"
+    "final": "https://righettoimmobiliare.it/privacy"
   },
   {
     "path": "/privacy-policy",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/privacy-policy"
+    "final": "https://righettoimmobiliare.it/privacy-policy"
   },
   {
     "path": "/privacy-policy.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/privacy-policy.html"
+    "final": "https://righettoimmobiliare.it/privacy-policy.html"
   },
   {
     "path": "/privacy.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/privacy.html"
-  },
-  {
-    "path": "/righetto",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/righetto"
-  },
-  {
-    "path": "/righetto.html",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/righetto.html"
+    "final": "https://righettoimmobiliare.it/privacy.html"
   },
   {
     "path": "/scraping",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/scraping"
+    "final": "https://righettoimmobiliare.it/scraping"
   },
   {
     "path": "/scraping.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/scraping.html"
+    "final": "https://righettoimmobiliare.it/scraping.html"
   },
   {
     "path": "/segnalazione-immobili-professionisti-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/segnalazione-immobili-professionisti-padova"
+    "final": "https://righettoimmobiliare.it/segnalazione-immobili-professionisti-padova"
   },
   {
     "path": "/segnalazione-immobili-professionisti-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/segnalazione-immobili-professionisti-padova.html"
+    "final": "https://righettoimmobiliare.it/segnalazione-immobili-professionisti-padova.html"
   },
   {
     "path": "/servizi",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/servizi"
+    "final": "https://righettoimmobiliare.it/servizi"
   },
   {
     "path": "/servizi.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/servizi.html"
+    "final": "https://righettoimmobiliare.it/servizi.html"
   },
   {
     "path": "/servizio-gestione",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/servizio-gestione"
+    "final": "https://righettoimmobiliare.it/servizio-gestione"
   },
   {
     "path": "/servizio-gestione.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/servizio-gestione.html"
+    "final": "https://righettoimmobiliare.it/servizio-gestione.html"
   },
   {
     "path": "/servizio-locazioni",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/servizio-locazioni"
+    "final": "https://righettoimmobiliare.it/servizio-locazioni"
   },
   {
     "path": "/servizio-locazioni.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/servizio-locazioni.html"
+    "final": "https://righettoimmobiliare.it/servizio-locazioni.html"
   },
   {
     "path": "/servizio-loft-aziende-media-durata",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/servizio-loft-aziende-media-durata"
+    "final": "https://righettoimmobiliare.it/servizio-loft-aziende-media-durata"
   },
   {
     "path": "/servizio-loft-aziende-media-durata.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/servizio-loft-aziende-media-durata.html"
+    "final": "https://righettoimmobiliare.it/servizio-loft-aziende-media-durata.html"
   },
   {
     "path": "/servizio-preliminari",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/servizio-preliminari"
+    "final": "https://righettoimmobiliare.it/servizio-preliminari"
   },
   {
     "path": "/servizio-preliminari.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/servizio-preliminari.html"
+    "final": "https://righettoimmobiliare.it/servizio-preliminari.html"
   },
   {
     "path": "/servizio-utenze",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/servizio-utenze"
+    "final": "https://righettoimmobiliare.it/servizio-utenze"
   },
   {
     "path": "/servizio-utenze.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/servizio-utenze.html"
+    "final": "https://righettoimmobiliare.it/servizio-utenze.html"
   },
   {
     "path": "/servizio-valutazioni",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/servizio-valutazioni"
+    "final": "https://righettoimmobiliare.it/servizio-valutazioni"
   },
   {
     "path": "/servizio-valutazioni.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/servizio-valutazioni.html"
+    "final": "https://righettoimmobiliare.it/servizio-valutazioni.html"
   },
   {
     "path": "/servizio-vendita",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/servizio-vendita"
+    "final": "https://righettoimmobiliare.it/servizio-vendita"
   },
   {
     "path": "/servizio-vendita.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/servizio-vendita.html"
+    "final": "https://righettoimmobiliare.it/servizio-vendita.html"
   },
   {
     "path": "/servizio-virtual-tour",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/servizio-virtual-tour"
+    "final": "https://righettoimmobiliare.it/servizio-virtual-tour"
   },
   {
     "path": "/servizio-virtual-tour.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/servizio-virtual-tour.html"
+    "final": "https://righettoimmobiliare.it/servizio-virtual-tour.html"
   },
   {
     "path": "/share-immobile-affitto-limena-2-camere-arredato",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-affitto-limena-2-camere-arredato"
+    "final": "https://righettoimmobiliare.it/share-immobile-affitto-limena-2-camere-arredato"
   },
   {
     "path": "/share-immobile-affitto-limena-2-camere-arredato.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-affitto-limena-2-camere-arredato.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-affitto-limena-2-camere-arredato.html"
   },
   {
     "path": "/share-immobile-affitto-limena-2-camere-mandardato",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-affitto-limena-2-camere-mandardato"
+    "final": "https://righettoimmobiliare.it/share-immobile-affitto-limena-2-camere-mandardato"
   },
   {
     "path": "/share-immobile-affitto-limena-2-camere-mandardato.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-affitto-limena-2-camere-mandardato.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-affitto-limena-2-camere-mandardato.html"
   },
   {
     "path": "/share-immobile-affitto-limena-mini-arredato",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-affitto-limena-mini-arredato"
+    "final": "https://righettoimmobiliare.it/share-immobile-affitto-limena-mini-arredato"
   },
   {
     "path": "/share-immobile-affitto-limena-mini-arredato.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-affitto-limena-mini-arredato.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-affitto-limena-mini-arredato.html"
   },
   {
     "path": "/share-immobile-appartamento",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-appartamento"
+    "final": "https://righettoimmobiliare.it/share-immobile-appartamento"
   },
   {
     "path": "/share-immobile-appartamento-affitto-residenziale-limena-lf0001",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-limena-lf0001"
+    "final": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-limena-lf0001"
   },
   {
     "path": "/share-immobile-appartamento-affitto-residenziale-limena-lf0001.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-limena-lf0001.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-limena-lf0001.html"
   },
   {
     "path": "/share-immobile-appartamento-affitto-residenziale-limena-lf0230",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-limena-lf0230"
+    "final": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-limena-lf0230"
   },
   {
     "path": "/share-immobile-appartamento-affitto-residenziale-limena-lf0230.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-limena-lf0230.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-limena-lf0230.html"
   },
   {
     "path": "/share-immobile-appartamento-affitto-residenziale-padova-lf303sx",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-padova-lf303sx"
+    "final": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-padova-lf303sx"
   },
   {
     "path": "/share-immobile-appartamento-affitto-residenziale-padova-lf303sx.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-padova-lf303sx.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-padova-lf303sx.html"
   },
   {
     "path": "/share-immobile-appartamento-vendita-limena",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-appartamento-vendita-limena"
+    "final": "https://righettoimmobiliare.it/share-immobile-appartamento-vendita-limena"
   },
   {
     "path": "/share-immobile-appartamento-vendita-limena.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-appartamento-vendita-limena.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-appartamento-vendita-limena.html"
   },
   {
     "path": "/share-immobile-appartamento-vendita-padova-la0317",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-appartamento-vendita-padova-la0317"
+    "final": "https://righettoimmobiliare.it/share-immobile-appartamento-vendita-padova-la0317"
   },
   {
     "path": "/share-immobile-appartamento-vendita-padova-la0317.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-appartamento-vendita-padova-la0317.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-appartamento-vendita-padova-la0317.html"
   },
   {
     "path": "/share-immobile-appartamento-vendita-rubano-la0309",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-appartamento-vendita-rubano-la0309"
+    "final": "https://righettoimmobiliare.it/share-immobile-appartamento-vendita-rubano-la0309"
   },
   {
     "path": "/share-immobile-appartamento-vendita-rubano-la0309.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-appartamento-vendita-rubano-la0309.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-appartamento-vendita-rubano-la0309.html"
   },
   {
     "path": "/share-immobile-appartamento.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-appartamento.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-appartamento.html"
   },
   {
     "path": "/share-immobile-bi-familiare-indipendente-in-vendita-nel-cuore-di-sacrocuore-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-bi-familiare-indipendente-in-vendita-nel-cuore-di-sacrocuore-padova"
+    "final": "https://righettoimmobiliare.it/share-immobile-bi-familiare-indipendente-in-vendita-nel-cuore-di-sacrocuore-padova"
   },
   {
     "path": "/share-immobile-bi-familiare-indipendente-in-vendita-nel-cuore-di-sacrocuore-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-bi-familiare-indipendente-in-vendita-nel-cuore-di-sacrocuore-padova.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-bi-familiare-indipendente-in-vendita-nel-cuore-di-sacrocuore-padova.html"
   },
   {
     "path": "/share-immobile-camera-in-affitto-a-chiesanuova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-camera-in-affitto-a-chiesanuova"
+    "final": "https://righettoimmobiliare.it/share-immobile-camera-in-affitto-a-chiesanuova"
   },
   {
     "path": "/share-immobile-camera-in-affitto-a-chiesanuova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-camera-in-affitto-a-chiesanuova.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-camera-in-affitto-a-chiesanuova.html"
   },
   {
     "path": "/share-immobile-capannone-affitto-commerciale-limena-cap1680",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-capannone-affitto-commerciale-limena-cap1680"
+    "final": "https://righettoimmobiliare.it/share-immobile-capannone-affitto-commerciale-limena-cap1680"
   },
   {
     "path": "/share-immobile-capannone-affitto-commerciale-limena-cap1680.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-capannone-affitto-commerciale-limena-cap1680.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-capannone-affitto-commerciale-limena-cap1680.html"
   },
   {
     "path": "/share-immobile-capannone-affitto-commerciale-piazzola-sul-brenta-cap1678",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-capannone-affitto-commerciale-piazzola-sul-brenta-cap1678"
+    "final": "https://righettoimmobiliare.it/share-immobile-capannone-affitto-commerciale-piazzola-sul-brenta-cap1678"
   },
   {
     "path": "/share-immobile-capannone-affitto-commerciale-piazzola-sul-brenta-cap1678.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-capannone-affitto-commerciale-piazzola-sul-brenta-cap1678.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-capannone-affitto-commerciale-piazzola-sul-brenta-cap1678.html"
   },
   {
     "path": "/share-immobile-capannone-in-affitto-a-piazzola-sul-brenta",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-capannone-in-affitto-a-piazzola-sul-brenta"
+    "final": "https://righettoimmobiliare.it/share-immobile-capannone-in-affitto-a-piazzola-sul-brenta"
   },
   {
     "path": "/share-immobile-capannone-in-affitto-a-piazzola-sul-brenta.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-capannone-in-affitto-a-piazzola-sul-brenta.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-capannone-in-affitto-a-piazzola-sul-brenta.html"
   },
   {
     "path": "/share-immobile-capannone-in-affitto-in-via-beato-arnaldo-da-limena",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-capannone-in-affitto-in-via-beato-arnaldo-da-limena"
+    "final": "https://righettoimmobiliare.it/share-immobile-capannone-in-affitto-in-via-beato-arnaldo-da-limena"
   },
   {
     "path": "/share-immobile-capannone-in-affitto-in-via-beato-arnaldo-da-limena.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-capannone-in-affitto-in-via-beato-arnaldo-da-limena.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-capannone-in-affitto-in-via-beato-arnaldo-da-limena.html"
   },
   {
     "path": "/share-immobile-capannone-in-vendita-a-rubano",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-capannone-in-vendita-a-rubano"
+    "final": "https://righettoimmobiliare.it/share-immobile-capannone-in-vendita-a-rubano"
   },
   {
     "path": "/share-immobile-capannone-in-vendita-a-rubano.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-capannone-in-vendita-a-rubano.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-capannone-in-vendita-a-rubano.html"
   },
   {
     "path": "/share-immobile-capannone-in-vendita-in-via-roma-s-n-c",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-capannone-in-vendita-in-via-roma-s-n-c"
+    "final": "https://righettoimmobiliare.it/share-immobile-capannone-in-vendita-in-via-roma-s-n-c"
   },
   {
     "path": "/share-immobile-capannone-in-vendita-in-via-roma-s-n-c.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-capannone-in-vendita-in-via-roma-s-n-c.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-capannone-in-vendita-in-via-roma-s-n-c.html"
   },
   {
     "path": "/share-immobile-capannone-vendita-limena-cap1687",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-capannone-vendita-limena-cap1687"
+    "final": "https://righettoimmobiliare.it/share-immobile-capannone-vendita-limena-cap1687"
   },
   {
     "path": "/share-immobile-capannone-vendita-limena-cap1687.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-capannone-vendita-limena-cap1687.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-capannone-vendita-limena-cap1687.html"
   },
   {
     "path": "/share-immobile-capannone-vendita-rubano-cap1609a",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-capannone-vendita-rubano-cap1609a"
+    "final": "https://righettoimmobiliare.it/share-immobile-capannone-vendita-rubano-cap1609a"
   },
   {
     "path": "/share-immobile-capannone-vendita-rubano-cap1609a.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-capannone-vendita-rubano-cap1609a.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-capannone-vendita-rubano-cap1609a.html"
   },
   {
     "path": "/share-immobile-casa-indipendente-in-vendita-in-via-saint-maurice",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-casa-indipendente-in-vendita-in-via-saint-maurice"
+    "final": "https://righettoimmobiliare.it/share-immobile-casa-indipendente-in-vendita-in-via-saint-maurice"
   },
   {
     "path": "/share-immobile-casa-indipendente-in-vendita-in-via-saint-maurice.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-casa-indipendente-in-vendita-in-via-saint-maurice.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-casa-indipendente-in-vendita-in-via-saint-maurice.html"
   },
   {
     "path": "/share-immobile-casa-singola-con-ampio-scoperto-a-grisignano-di-zocco",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-casa-singola-con-ampio-scoperto-a-grisignano-di-zocco"
+    "final": "https://righettoimmobiliare.it/share-immobile-casa-singola-con-ampio-scoperto-a-grisignano-di-zocco"
   },
   {
     "path": "/share-immobile-casa-singola-con-ampio-scoperto-a-grisignano-di-zocco.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-casa-singola-con-ampio-scoperto-a-grisignano-di-zocco.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-casa-singola-con-ampio-scoperto-a-grisignano-di-zocco.html"
   },
   {
     "path": "/share-immobile-casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno"
+    "final": "https://righettoimmobiliare.it/share-immobile-casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno"
   },
   {
     "path": "/share-immobile-casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-casa-singola-ristrutturata-ad-altichiero-padova-ampi-spazi-e-comfort-moderno.html"
   },
   {
     "path": "/share-immobile-elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova"
+    "final": "https://righettoimmobiliare.it/share-immobile-elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova"
   },
   {
     "path": "/share-immobile-elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-elegante-appartamento-quadrilocale-in-vendita-a-mandria-padova.html"
   },
   {
     "path": "/share-immobile-locale-in-affitto-a-limena",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-locale-in-affitto-a-limena"
+    "final": "https://righettoimmobiliare.it/share-immobile-locale-in-affitto-a-limena"
   },
   {
     "path": "/share-immobile-locale-in-affitto-a-limena.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-locale-in-affitto-a-limena.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-locale-in-affitto-a-limena.html"
   },
   {
     "path": "/share-immobile-monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05"
+    "final": "https://righettoimmobiliare.it/share-immobile-monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05"
   },
   {
     "path": "/share-immobile-monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05.html"
   },
   {
     "path": "/share-immobile-negozio-affitto-commerciale-limena-neg2173a",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-negozio-affitto-commerciale-limena-neg2173a"
+    "final": "https://righettoimmobiliare.it/share-immobile-negozio-affitto-commerciale-limena-neg2173a"
   },
   {
     "path": "/share-immobile-negozio-affitto-commerciale-limena-neg2173a.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-negozio-affitto-commerciale-limena-neg2173a.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-negozio-affitto-commerciale-limena-neg2173a.html"
   },
   {
     "path": "/share-immobile-negozio-affitto-commerciale-limena-neg2236",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-negozio-affitto-commerciale-limena-neg2236"
+    "final": "https://righettoimmobiliare.it/share-immobile-negozio-affitto-commerciale-limena-neg2236"
   },
   {
     "path": "/share-immobile-negozio-affitto-commerciale-limena-neg2236.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-negozio-affitto-commerciale-limena-neg2236.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-negozio-affitto-commerciale-limena-neg2236.html"
   },
   {
     "path": "/share-immobile-negozio-in-affitto-a-limena",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-negozio-in-affitto-a-limena"
+    "final": "https://righettoimmobiliare.it/share-immobile-negozio-in-affitto-a-limena"
   },
   {
     "path": "/share-immobile-negozio-in-affitto-a-limena.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-negozio-in-affitto-a-limena.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-negozio-in-affitto-a-limena.html"
   },
   {
     "path": "/share-immobile-padova-monta-porzione-di-bi-familiare-con-terrazza-abitabile",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-padova-monta-porzione-di-bi-familiare-con-terrazza-abitabile"
+    "final": "https://righettoimmobiliare.it/share-immobile-padova-monta-porzione-di-bi-familiare-con-terrazza-abitabile"
   },
   {
     "path": "/share-immobile-padova-monta-porzione-di-bi-familiare-con-terrazza-abitabile.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-padova-monta-porzione-di-bi-familiare-con-terrazza-abitabile.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-padova-monta-porzione-di-bi-familiare-con-terrazza-abitabile.html"
   },
   {
     "path": "/share-immobile-quadrilocale-in-vendita-a-limena",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-quadrilocale-in-vendita-a-limena"
+    "final": "https://righettoimmobiliare.it/share-immobile-quadrilocale-in-vendita-a-limena"
   },
   {
     "path": "/share-immobile-quadrilocale-in-vendita-a-limena.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-quadrilocale-in-vendita-a-limena.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-quadrilocale-in-vendita-a-limena.html"
   },
   {
     "path": "/share-immobile-quadrilocale-in-vendita-a-rubano",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-quadrilocale-in-vendita-a-rubano"
+    "final": "https://righettoimmobiliare.it/share-immobile-quadrilocale-in-vendita-a-rubano"
   },
   {
     "path": "/share-immobile-quadrilocale-in-vendita-a-rubano.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-quadrilocale-in-vendita-a-rubano.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-quadrilocale-in-vendita-a-rubano.html"
   },
   {
     "path": "/share-immobile-residenziale-vendita-limena-la0312",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-residenziale-vendita-limena-la0312"
+    "final": "https://righettoimmobiliare.it/share-immobile-residenziale-vendita-limena-la0312"
   },
   {
     "path": "/share-immobile-residenziale-vendita-limena-la0312.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-residenziale-vendita-limena-la0312.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-residenziale-vendita-limena-la0312.html"
   },
   {
     "path": "/share-immobile-terreno-in-vendita-a-villafranca-padovana",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-terreno-in-vendita-a-villafranca-padovana"
+    "final": "https://righettoimmobiliare.it/share-immobile-terreno-in-vendita-a-villafranca-padovana"
   },
   {
     "path": "/share-immobile-terreno-in-vendita-a-villafranca-padovana.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-terreno-in-vendita-a-villafranca-padovana.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-terreno-in-vendita-a-villafranca-padovana.html"
   },
   {
     "path": "/share-immobile-terreno-vendita-villafranca-padovana-t0021",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-terreno-vendita-villafranca-padovana-t0021"
+    "final": "https://righettoimmobiliare.it/share-immobile-terreno-vendita-villafranca-padovana-t0021"
   },
   {
     "path": "/share-immobile-terreno-vendita-villafranca-padovana-t0021.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-terreno-vendita-villafranca-padovana-t0021.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-terreno-vendita-villafranca-padovana-t0021.html"
   },
   {
     "path": "/share-immobile-ufficio-affitto-commerciale-limena-uff2105a",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2105a"
+    "final": "https://righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2105a"
   },
   {
     "path": "/share-immobile-ufficio-affitto-commerciale-limena-uff2105a.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2105a.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2105a.html"
   },
   {
     "path": "/share-immobile-ufficio-affitto-commerciale-limena-uff2189a",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2189a"
+    "final": "https://righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2189a"
   },
   {
     "path": "/share-immobile-ufficio-affitto-commerciale-limena-uff2189a.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2189a.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2189a.html"
   },
   {
     "path": "/share-immobile-ufficio-affitto-commerciale-limena-uff2195a",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2195a"
+    "final": "https://righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2195a"
   },
   {
     "path": "/share-immobile-ufficio-affitto-commerciale-limena-uff2195a.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2195a.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2195a.html"
   },
   {
     "path": "/share-immobile-ufficio-in-affitto-a-limena",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-ufficio-in-affitto-a-limena"
+    "final": "https://righettoimmobiliare.it/share-immobile-ufficio-in-affitto-a-limena"
   },
   {
     "path": "/share-immobile-ufficio-in-affitto-a-limena.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-ufficio-in-affitto-a-limena.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-ufficio-in-affitto-a-limena.html"
   },
   {
     "path": "/share-immobile-ufficio-in-affitto-in-via-del-santo-s-n-c",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-ufficio-in-affitto-in-via-del-santo-s-n-c"
+    "final": "https://righettoimmobiliare.it/share-immobile-ufficio-in-affitto-in-via-del-santo-s-n-c"
   },
   {
     "path": "/share-immobile-ufficio-in-affitto-in-via-del-santo-s-n-c.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-ufficio-in-affitto-in-via-del-santo-s-n-c.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-ufficio-in-affitto-in-via-del-santo-s-n-c.html"
   },
   {
     "path": "/share-immobile-ufficio-in-centro-storico-a-limena-al-primo-piano",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-ufficio-in-centro-storico-a-limena-al-primo-piano"
+    "final": "https://righettoimmobiliare.it/share-immobile-ufficio-in-centro-storico-a-limena-al-primo-piano"
   },
   {
     "path": "/share-immobile-ufficio-in-centro-storico-a-limena-al-primo-piano.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-ufficio-in-centro-storico-a-limena-al-primo-piano.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-ufficio-in-centro-storico-a-limena-al-primo-piano.html"
   },
   {
     "path": "/share-immobile-ufficio-in-vendita-a-piazze",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-ufficio-in-vendita-a-piazze"
+    "final": "https://righettoimmobiliare.it/share-immobile-ufficio-in-vendita-a-piazze"
   },
   {
     "path": "/share-immobile-ufficio-in-vendita-a-piazze.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-ufficio-in-vendita-a-piazze.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-ufficio-in-vendita-a-piazze.html"
   },
   {
     "path": "/share-immobile-ufficio-vendita-limena-uff2247",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-ufficio-vendita-limena-uff2247"
+    "final": "https://righettoimmobiliare.it/share-immobile-ufficio-vendita-limena-uff2247"
   },
   {
     "path": "/share-immobile-ufficio-vendita-limena-uff2247.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-ufficio-vendita-limena-uff2247.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-ufficio-vendita-limena-uff2247.html"
   },
   {
     "path": "/share-immobile-ufficio-vendita-padova-uff2245",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-ufficio-vendita-padova-uff2245"
+    "final": "https://righettoimmobiliare.it/share-immobile-ufficio-vendita-padova-uff2245"
   },
   {
     "path": "/share-immobile-ufficio-vendita-padova-uff2245.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-ufficio-vendita-padova-uff2245.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-ufficio-vendita-padova-uff2245.html"
   },
   {
     "path": "/share-immobile-villa-vendita-curtarolo-la0307",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-villa-vendita-curtarolo-la0307"
+    "final": "https://righettoimmobiliare.it/share-immobile-villa-vendita-curtarolo-la0307"
   },
   {
     "path": "/share-immobile-villa-vendita-curtarolo-la0307.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-villa-vendita-curtarolo-la0307.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-villa-vendita-curtarolo-la0307.html"
   },
   {
     "path": "/share-immobile-villetta-vendita-grisignano-di-zocco-lp0285-v",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-villetta-vendita-grisignano-di-zocco-lp0285-v"
+    "final": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-grisignano-di-zocco-lp0285-v"
   },
   {
     "path": "/share-immobile-villetta-vendita-grisignano-di-zocco-lp0285-v.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-villetta-vendita-grisignano-di-zocco-lp0285-v.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-grisignano-di-zocco-lp0285-v.html"
   },
   {
     "path": "/share-immobile-villetta-vendita-padova-lp0281",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0281"
+    "final": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0281"
   },
   {
     "path": "/share-immobile-villetta-vendita-padova-lp0281.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0281.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0281.html"
   },
   {
     "path": "/share-immobile-villetta-vendita-padova-lp0283",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0283"
+    "final": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0283"
   },
   {
     "path": "/share-immobile-villetta-vendita-padova-lp0283.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0283.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0283.html"
   },
   {
     "path": "/share-immobile-villetta-vendita-padova-lp0286",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0286"
+    "final": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0286"
   },
   {
     "path": "/share-immobile-villetta-vendita-padova-lp0286.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0286.html"
+    "final": "https://righettoimmobiliare.it/share-immobile-villetta-vendita-padova-lp0286.html"
   },
   {
     "path": "/sitemap.xml",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/sitemap.xml"
+    "final": "https://righettoimmobiliare.it/sitemap.xml"
   },
   {
     "path": "/unsubscribe",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/unsubscribe"
+    "final": "https://righettoimmobiliare.it/unsubscribe"
   },
   {
     "path": "/unsubscribe.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/unsubscribe.html"
+    "final": "https://righettoimmobiliare.it/unsubscribe.html"
   },
   {
     "path": "/valutazione-vendita-riservata-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/valutazione-vendita-riservata-padova"
+    "final": "https://righettoimmobiliare.it/valutazione-vendita-riservata-padova"
   },
   {
     "path": "/valutazione-vendita-riservata-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/valutazione-vendita-riservata-padova.html"
+    "final": "https://righettoimmobiliare.it/valutazione-vendita-riservata-padova.html"
   },
   {
     "path": "/vendere-casa-padova-errori",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/vendere-casa-padova-errori"
+    "final": "https://righettoimmobiliare.it/vendere-casa-padova-errori"
   },
   {
     "path": "/vendere-casa-padova-errori.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/vendere-casa-padova-errori.html"
+    "final": "https://righettoimmobiliare.it/vendere-casa-padova-errori.html"
+  },
+  {
+    "path": "/venerdi-email-report",
+    "status": 404,
+    "final": "https://www.righettoimmobiliare.it/venerdi-email-report"
+  },
+  {
+    "path": "/venerdi-email-report.html",
+    "status": 404,
+    "final": "https://www.righettoimmobiliare.it/venerdi-email-report.html"
   },
   {
     "path": "/visita-virtuale",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/visita-virtuale"
+    "final": "https://righettoimmobiliare.it/visita-virtuale"
   },
   {
     "path": "/visita-virtuale.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/visita-virtuale.html"
-  },
-  {
-    "path": "/wp-admin",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/wp-admin"
-  },
-  {
-    "path": "/wp-admin.html",
-    "status": 200,
-    "final": "https://www.righettoimmobiliare.it/wp-admin.html"
+    "final": "https://righettoimmobiliare.it/visita-virtuale.html"
   },
   {
     "path": "/zona-abano-terme",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-abano-terme"
+    "final": "https://righettoimmobiliare.it/zona-abano-terme"
   },
   {
     "path": "/zona-abano-terme.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-abano-terme.html"
+    "final": "https://righettoimmobiliare.it/zona-abano-terme.html"
   },
   {
     "path": "/zona-arcella-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-arcella-padova"
+    "final": "https://righettoimmobiliare.it/zona-arcella-padova"
   },
   {
     "path": "/zona-arcella-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-arcella-padova.html"
+    "final": "https://righettoimmobiliare.it/zona-arcella-padova.html"
   },
   {
     "path": "/zona-centro-storico-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-centro-storico-padova"
+    "final": "https://righettoimmobiliare.it/zona-centro-storico-padova"
   },
   {
     "path": "/zona-centro-storico-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-centro-storico-padova.html"
+    "final": "https://righettoimmobiliare.it/zona-centro-storico-padova.html"
   },
   {
     "path": "/zona-forcellini-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-forcellini-padova"
+    "final": "https://righettoimmobiliare.it/zona-forcellini-padova"
   },
   {
     "path": "/zona-forcellini-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-forcellini-padova.html"
+    "final": "https://righettoimmobiliare.it/zona-forcellini-padova.html"
   },
   {
     "path": "/zona-guizza-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-guizza-padova"
+    "final": "https://righettoimmobiliare.it/zona-guizza-padova"
   },
   {
     "path": "/zona-guizza-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-guizza-padova.html"
+    "final": "https://righettoimmobiliare.it/zona-guizza-padova.html"
   },
   {
     "path": "/zona-limena",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-limena"
+    "final": "https://righettoimmobiliare.it/zona-limena"
   },
   {
     "path": "/zona-limena.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-limena.html"
+    "final": "https://righettoimmobiliare.it/zona-limena.html"
   },
   {
     "path": "/zona-ponte-san-nicolo",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-ponte-san-nicolo"
+    "final": "https://righettoimmobiliare.it/zona-ponte-san-nicolo"
   },
   {
     "path": "/zona-ponte-san-nicolo.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-ponte-san-nicolo.html"
+    "final": "https://righettoimmobiliare.it/zona-ponte-san-nicolo.html"
   },
   {
     "path": "/zona-prato-della-valle-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-prato-della-valle-padova"
+    "final": "https://righettoimmobiliare.it/zona-prato-della-valle-padova"
   },
   {
     "path": "/zona-prato-della-valle-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-prato-della-valle-padova.html"
+    "final": "https://righettoimmobiliare.it/zona-prato-della-valle-padova.html"
   },
   {
     "path": "/zona-rubano",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-rubano"
+    "final": "https://righettoimmobiliare.it/zona-rubano"
   },
   {
     "path": "/zona-rubano.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-rubano.html"
+    "final": "https://righettoimmobiliare.it/zona-rubano.html"
   },
   {
     "path": "/zona-sacra-famiglia-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-sacra-famiglia-padova"
+    "final": "https://righettoimmobiliare.it/zona-sacra-famiglia-padova"
   },
   {
     "path": "/zona-sacra-famiglia-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-sacra-famiglia-padova.html"
+    "final": "https://righettoimmobiliare.it/zona-sacra-famiglia-padova.html"
   },
   {
     "path": "/zona-selvazzano",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-selvazzano"
+    "final": "https://righettoimmobiliare.it/zona-selvazzano"
   },
   {
     "path": "/zona-selvazzano.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-selvazzano.html"
+    "final": "https://righettoimmobiliare.it/zona-selvazzano.html"
   },
   {
     "path": "/zona-universitaria-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-universitaria-padova"
+    "final": "https://righettoimmobiliare.it/zona-universitaria-padova"
   },
   {
     "path": "/zona-universitaria-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-universitaria-padova.html"
+    "final": "https://righettoimmobiliare.it/zona-universitaria-padova.html"
   },
   {
     "path": "/zona-vigonza",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-vigonza"
+    "final": "https://righettoimmobiliare.it/zona-vigonza"
   },
   {
     "path": "/zona-vigonza.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-vigonza.html"
+    "final": "https://righettoimmobiliare.it/zona-vigonza.html"
   },
   {
     "path": "/zona-voltabarozzo-padova",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-voltabarozzo-padova"
+    "final": "https://righettoimmobiliare.it/zona-voltabarozzo-padova"
   },
   {
     "path": "/zona-voltabarozzo-padova.html",
     "status": 200,
-    "final": "https://www.righettoimmobiliare.it/zona-voltabarozzo-padova.html"
+    "final": "https://righettoimmobiliare.it/zona-voltabarozzo-padova.html"
   }
 ]
