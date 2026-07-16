@@ -1,18 +1,29 @@
 {
-  "updated": "2026-07-14",
-  "source": "GSC manuale — aggiornare ogni venerdì (Prestazioni 7+28 gg)",
-  "note": "Esporta CSV da GSC e sovrascrivi data/gsc-export-queries.csv e data/gsc-export-pages.csv quando disponibili. Baseline storica 16 mesi: data/gsc-baseline-16m.json (09/07/2026)",
+  "updated": "2026-07-16",
+  "source": "GSC screenshot utente — sera 16/07/2026 (Prestazioni 28 gg, Web)",
+  "capture_ref": "data/gsc-captures/2026-07-16-prestazioni-28gg.png",
+  "note": "Dati estratti da screenshot GSC 16/07/2026 sera — periodo 17/06–13/07/2026. Baseline storica 16 mesi: data/gsc-baseline-16m.json",
   "baseline_16m_ref": "data/gsc-baseline-16m.json",
+  "summary_28d": {
+    "period_start": "2026-06-17",
+    "period_end": "2026-07-13",
+    "clicks": 271,
+    "impressions": 4220,
+    "ctr_pct": 6.4,
+    "avg_position": 7.7
+  },
   "queries_brand": [
-    {"q": "gruppo immobiliare righetto", "clicks": 14, "impressions": 29},
-    {"q": "immobiliare righetto limena", "clicks": 11, "impressions": 16},
-    {"q": "righetto immobiliare", "clicks": 9, "impressions": 20},
-    {"q": "immobiliare righetto", "clicks": 8, "impressions": 15},
-    {"q": "agenzia righetto limena", "clicks": 1, "impressions": 7}
+    {"q": "gruppo immobiliare righetto", "clicks": 40, "impressions": 105},
+    {"q": "righetto immobiliare", "clicks": 40, "impressions": 85},
+    {"q": "immobiliare righetto limena", "clicks": 38, "impressions": 58},
+    {"q": "immobiliare righetto", "clicks": 23, "impressions": 59},
+    {"q": "righetto immobiliare limena", "clicks": 8, "impressions": 13},
+    {"q": "agenzia righetto limena", "clicks": 5, "impressions": 19}
   ],
   "queries_growth": [
-    {"q": "affitti limena", "clicks": 0, "impressions": 12, "intent": "affitto-locale"},
-    {"q": "agenzia immobiliare limena", "clicks": 0, "impressions": 13, "intent": "agenzia-locale"},
+    {"q": "affitti limena", "clicks": 3, "impressions": 39, "intent": "affitto-locale"},
+    {"q": "agenzia immobiliare limena", "clicks": 5, "impressions": 58, "intent": "agenzia-locale"},
+    {"q": "agenzie immobiliari limena", "clicks": 3, "impressions": 33, "intent": "agenzia-locale"},
     {"q": "omi padova", "clicks": 0, "impressions": 14, "intent": "dato-ufficiale"},
     {"q": "affitto limena", "clicks": 0, "impressions": 5, "intent": "affitto-locale"},
     {"q": "affitti a limena", "clicks": 0, "impressions": 4, "intent": "affitto-locale"},
