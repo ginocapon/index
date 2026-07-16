@@ -13,6 +13,6 @@
   "manual_checks": {
     "sitemap_ok": true,
     "convalida_16_crawled": false,
-    "prestazioni_affitti_limena": false
+    "prestazioni_affitti_limena": true
   }
 }
