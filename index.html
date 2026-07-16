@@ -31,7 +31,7 @@
 <meta name="twitter:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
 <link rel="canonical" href="https://righettoimmobiliare.it/">
 <link rel="stylesheet" href="css/fonts.css?v=3" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="css/nav-mobile.css?v=4" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/nav-mobile.css?v=5" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/below-fold.css?v=15" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/prop-photo-carousel.css?v=2">
@@ -244,11 +244,12 @@ button{font-family:inherit;cursor:pointer}
 }
 #navbar.scrolled .nav-logo-name{color:var(--blu)}
 #navbar.scrolled .nav-logo-tag{color:var(--blu3)}
-.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none;flex-wrap:nowrap}
 .nav-links a{
   font-size:0.83rem;font-weight:700;letter-spacing:1.5px;
   text-transform:uppercase;color:rgba(255,255,255,0.88);
   transition:color 0.2s;position:relative;padding-bottom:4px;
+  white-space:nowrap;
 }
 .nav-links a::after{
   content:'';position:absolute;bottom:0;left:0;
@@ -500,11 +501,20 @@ button{font-family:inherit;cursor:pointer}
   .fc-foto{height:320px}
   .footer-inner{grid-template-columns:1fr 1fr}
 }
-@media(max-width:768px){
+@media(max-width:1200px){
+  .nav-links{gap:16px}
+  .nav-links a{font-size:0.76rem;letter-spacing:1px}
+  .nav-cta{font-size:0.72rem!important;padding:10px 18px}
+  .nav-login-btn{font-size:0.68rem;padding:6px 12px}
+}
+@media(max-width:1024px){
   :root{--nav-h:64px}
   #navbar{padding:0 20px}
-  .nav-links,.nav-cta{display:none}
+  .nav-links{display:none}
   .nav-burger{display:flex}
+  .nav-mobile{top:var(--nav-h)}
+}
+@media(max-width:768px){
   #evidenza,#servizi,#perche,#mutuo-hp,#stima,#blog,#faq-hp,#form-contatto,footer{padding-left:20px;padding-right:20px}
   .hero-inner{grid-template-columns:1fr;padding:0 20px;padding-top:calc(var(--nav-h) + 44px);padding-bottom:88px}
   .hero-right{display:none}

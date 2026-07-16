@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Blog senza blog-rich: aggiunge link CSS + CTA strip standard prima di </main> (se manca)."""
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ STRIP = """
 MARKERS = [
     '<link rel="stylesheet" href="css/welcome-popup.css?v=3" media="print" onload="this.media=\'all\'">',
     '<link rel="stylesheet" href="css/welcome-popup.css?v=3">',
-    '<link rel="stylesheet" href="css/fonts.css?v=3"><link rel="stylesheet" href="css/nav-mobile.css?v=4">',
+    '<link rel="stylesheet" href="css/fonts.css?v=3"><link rel="stylesheet" href="css/nav-mobile.css?v=5">',
     '<link rel="stylesheet" href="css/fonts.css?v=3">',
 ]
 

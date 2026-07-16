@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """Genera blog-affitti-limena-2026.html — affitti Limena 2026.
 Esegui da repo root: python scripts/build_blog_affitti_limena_2026.py
 """
@@ -451,7 +451,7 @@ def build_html(content: str, words: int) -> str:
   <meta property="article:author" content="Gino Capon">
   <meta property="article:section" content="Mercato locazione">
   <meta name="description" content="{META}">
-  <link rel="stylesheet" href="css/fonts.css?v=3"><link rel="stylesheet" href="css/nav-mobile.css?v=4">
+  <link rel="stylesheet" href="css/fonts.css?v=3"><link rel="stylesheet" href="css/nav-mobile.css?v=5">
   <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="css/welcome-popup.css?v=3" media="print" onload="this.media='all'">
   <script type="application/ld+json">{json.dumps(blog_ld, ensure_ascii=False)}</script>

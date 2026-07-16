@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """Genera 5 articoli blog aprile 2026 — Righetto. Esegui da repo root: python3 scripts/build_apr19_blog_batch.py"""
 from __future__ import annotations
 
@@ -41,7 +41,7 @@ HEAD_TOP = """<!DOCTYPE html>
   <meta property="article:section" content="{section}">
   <meta name="description" content="{meta_desc}">
   <link rel="stylesheet" href="css/fonts.css?v=3">
-  <link rel="stylesheet" href="css/nav-mobile.css?v=4">
+  <link rel="stylesheet" href="css/nav-mobile.css?v=5">
   <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="css/welcome-popup.css?v=3" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="css/blog-rich.css?v=2">

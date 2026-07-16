@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """Articolo provocatorio venditore presuntuoso — luglio 2026.
 Esegui da repo root: python scripts/build_blog_so_tutto_io_lug2026.py
 """
@@ -538,7 +538,7 @@ def build_html(body: str, wc: int) -> str:
 <script type="application/ld+json">{json.dumps(faq_obj, ensure_ascii=False)}</script>
 <script type="application/ld+json">{json.dumps({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://righettoimmobiliare.it/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://righettoimmobiliare.it/blog"},{"@type":"ListItem","position":3,"name":"So tutto io venditore presuntuoso"}]}, ensure_ascii=False)}</script>
 <script type="application/ld+json">{json.dumps(rea_obj, ensure_ascii=False)}</script>
-<link rel="stylesheet" href="css/fonts.css?v=3"><link rel="stylesheet" href="css/nav-mobile.css?v=4">
+<link rel="stylesheet" href="css/fonts.css?v=3"><link rel="stylesheet" href="css/nav-mobile.css?v=5">
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
 {STYLE_BLOCK}
 </head>
