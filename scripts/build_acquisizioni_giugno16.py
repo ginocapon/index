@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """Genera 2 articoli acquisizioni (residenziale + commerciale) — giugno 2026.
 Esegui da repo root: python scripts/build_acquisizioni_giugno16.py
 """
@@ -889,7 +889,7 @@ def build_html(cfg: dict, body: str, wc: int) -> str:
 <script type="application/ld+json">{json.dumps(blog_obj, ensure_ascii=False)}</script>
 <script type="application/ld+json">{json.dumps(faq_obj, ensure_ascii=False)}</script>
 <script type="application/ld+json">{{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{{"@type":"ListItem","position":1,"name":"Home","item":"https://righettoimmobiliare.it/"}},{{"@type":"ListItem","position":2,"name":"Blog","item":"https://righettoimmobiliare.it/blog"}},{{"@type":"ListItem","position":3,"name":"{cfg["bread"]}"}}]}}</script>
-<link rel="stylesheet" href="css/fonts.css?v=3"><link rel="stylesheet" href="css/nav-mobile.css?v=4">
+<link rel="stylesheet" href="css/fonts.css?v=3"><link rel="stylesheet" href="css/nav-mobile.css?v=5">
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
 {STYLE_ACQ}
 </head>

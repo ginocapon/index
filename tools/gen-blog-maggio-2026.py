@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """Genera 4 articoli blog + aggiorna lista statica (eseguire: python tools/gen-blog-maggio-2026.py)"""
 from pathlib import Path
 
@@ -27,7 +27,7 @@ HEAD = """<!DOCTYPE html>
 <script type="application/ld+json">{article_ld}</script>
 <script type="application/ld+json">{faq_ld}</script>
 <script type="application/ld+json">{bread_ld}</script>
-<link rel="stylesheet" href="css/fonts.css?v=3"><link rel="stylesheet" href="css/nav-mobile.css?v=4">
+<link rel="stylesheet" href="css/fonts.css?v=3"><link rel="stylesheet" href="css/nav-mobile.css?v=5">
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
 <style>
 *,*::before,*::after{{box-sizing:border-box;margin:0;padding:0}}

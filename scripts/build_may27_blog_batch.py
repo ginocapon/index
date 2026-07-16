@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """Genera 5 articoli blog 27 maggio 2026 — Righetto. Esegui da repo root:
 python scripts/build_may27_blog_batch.py
 """
@@ -207,7 +207,7 @@ def build_article(cfg: dict) -> tuple[str, int]:
 <script type="application/ld+json">{json.dumps(blog_obj, ensure_ascii=False)}</script>
 <script type="application/ld+json">{json.dumps(faq_obj, ensure_ascii=False)}</script>
 <script type="application/ld+json">{json.dumps(bread_obj, ensure_ascii=False)}</script>
-<link rel="stylesheet" href="css/fonts.css?v=3"><link rel="stylesheet" href="css/nav-mobile.css?v=4">
+<link rel="stylesheet" href="css/fonts.css?v=3"><link rel="stylesheet" href="css/nav-mobile.css?v=5">
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
 {STYLE_BLOCK}
 </head>

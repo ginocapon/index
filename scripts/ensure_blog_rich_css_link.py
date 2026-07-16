@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Aggiunge css/blog-rich.css?v=2 se la pagina usa blog-rich-cta-strip ma non include il foglio."""
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ LINK = '  <link rel="stylesheet" href="css/blog-rich.css?v=2">\n'
 MARKERS = [
     '<link rel="stylesheet" href="css/welcome-popup.css?v=3">',
     '<link rel="stylesheet" href="css/welcome-popup.css?v=3" media="print" onload="this.media=\'all\'">',
-    '<link rel="stylesheet" href="css/fonts.css?v=3"><link rel="stylesheet" href="css/nav-mobile.css?v=4">',
+    '<link rel="stylesheet" href="css/fonts.css?v=3"><link rel="stylesheet" href="css/nav-mobile.css?v=5">',
     '<link rel="stylesheet" href="css/fonts.css?v=3">',
 ]
 

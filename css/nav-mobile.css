@@ -99,15 +99,65 @@ header .nav-login-btn:hover{color:var(--oro,#FF6B35)!important;border-color:var(
   border-bottom:none!important;
 }
 
-@media(max-width:768px){
+/* Desktop compatto — tablet / finestra stretta (evita menu “gigante”) */
+@media (max-width: 1200px) and (min-width: 1025px) {
+  .hi,
+  .header-inner {
+    gap: 1rem !important;
+  }
+  body:not(.homepage) header nav > a,
+  body:not(.homepage) header .hnav > a {
+    font-size: 0.74rem !important;
+    letter-spacing: 0.07em !important;
+    padding: 0.35rem 0.5rem !important;
+  }
+  body:not(.homepage) header .h-tel {
+    font-size: 0.72rem !important;
+  }
+  body:not(.homepage) header .h-btn {
+    font-size: 0.7rem !important;
+    padding: 9px 14px !important;
+  }
+  .nav-login-btn,
+  .gestionale-link {
+    font-size: 0.68rem !important;
+    padding: 6px 12px !important;
+  }
+}
+
+@media (max-width: 1024px) {
   /* Nasconde navigazione desktop, mostra burger */
-  .hi nav,.hi .h-cta{display:none!important}
-  .header-inner .hnav,.header-inner .h-cta{display:none!important}
-  .nav-burger{display:flex!important}
-  .hi,.header-inner{height:64px!important}
-  .nav-mobile{top:64px}
-  .gestionale-link{display:none!important}
-  .nav-login-btn{display:none!important}
+  .hi nav,
+  .hi .h-cta,
+  .hi > .h-btn,
+  .hi > .nav-login-btn,
+  .hi > .gestionale-link {
+    display: none !important;
+  }
+  .header-inner .hnav,
+  .header-inner .h-cta {
+    display: none !important;
+  }
+  .nav-burger {
+    display: flex !important;
+  }
+  .hi,
+  .header-inner {
+    height: 64px !important;
+  }
+  .nav-mobile {
+    top: 64px;
+  }
+  .gestionale-link,
+  .nav-login-btn {
+    display: none !important;
+  }
+  body.homepage #navbar .nav-links {
+    display: none !important;
+  }
+  body.homepage .nav-burger {
+    display: flex !important;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════

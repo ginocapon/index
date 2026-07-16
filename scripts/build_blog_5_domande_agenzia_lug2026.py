@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """5 domande da fare all'agenzia in appuntamento — luglio 2026.
 Esegui: python scripts/build_blog_5_domande_agenzia_lug2026.py
 """
@@ -450,7 +450,7 @@ def build_html(content: str, words: int) -> str:
 <script type="application/ld+json">{json.dumps(faq_ld, ensure_ascii=False)}</script>
 <script type="application/ld+json">{json.dumps(rea, ensure_ascii=False)}</script>
 <script type="application/ld+json">{json.dumps(bread, ensure_ascii=False)}</script>
-<link rel="stylesheet" href="css/fonts.css?v=3"><link rel="stylesheet" href="css/nav-mobile.css?v=4">
+<link rel="stylesheet" href="css/fonts.css?v=3"><link rel="stylesheet" href="css/nav-mobile.css?v=5">
 {STYLE}
 </head>
 <body>
