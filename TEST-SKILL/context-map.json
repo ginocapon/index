@@ -46,10 +46,12 @@
       "note": "Linee guida TEST-SKILL/skill-gestione-loft-aziende.md · pagina servizio-loft-aziende-media-durata · asset solo img/guida-loft-aziende/"
     },
     "nuovo_articolo_blog": {
-      "skills": ["skill-essentials.md", "skill-content.md", "skill-forms-leads.md"],
+      "skills": ["skill-essentials.md", "skill-editorial-queue.md", "skill-content.md", "skill-forms-leads.md", "skill-memoria-progressi.md"],
       "cursor_rules": ["righetto-blog-publish.mdc"],
-      "token_stimati": "~2.000",
-      "note": "BLOCCANTE §8.1a: leggi TEST-SKILL/skimm.md + check_doppioni_sito.py + build_skimm.py; kw_primaria univoca; se doppione → altro tema da fonte istituzionale. Poi template blog; se CTA/form lead → skill-forms-leads. Title/meta: skill-essentials §1.2 + validate-page.js"
+      "cursor_skills": ["righetto-blog"],
+      "data": ["data/editorial-queue.json", "data/gsc-keywords-priority.json"],
+      "token_stimati": "~2.200",
+      "note": "Leggi coda editoriale PRIMA: prossimo scheduled da data/editorial-queue.json. BLOCCANTE §8.1a: skimm + check_doppioni_sito.py; SOSTENERE GSC prima di AGGIUNGERE; discovery web se coda < 3. skill-editorial-queue.md = sequenza automatica."
     },
     "form_lead_invio_email": {
       "skills": ["skill-essentials.md", "skill-forms-leads.md", "skill-context.md"],

@@ -1,0 +1,104 @@
+{
+  "updated": "2026-07-17",
+  "policy": "Max 1 blog AGGIUNGERE/settimana. Prima SOSTENERE da gsc-keywords-priority.json se pages_refresh_priority ha 0 click e >50 impr. Anti-doppioni BLOCCANTE prima di ogni publish.",
+  "workflow_skill": "TEST-SKILL/skill-editorial-queue.md",
+  "discovery": {
+    "when": "Ogni venerdì post-cron O quando scheduled < 3",
+    "sources": ["GSC gsc-keywords-priority.json", "SKIMM gap", "web search fonti istituzionali"],
+    "output": "Aggiungi item status=proposed in coda + aggiorna skill-memoria-progressi §Log"
+  },
+  "items": [
+    {
+      "id": "eq-001",
+      "status": "published",
+      "priority": 0,
+      "target_week": "2026-07-17",
+      "published_date": "2026-07-17",
+      "slug": "blog-mandato-esclusivo-padova-perche-conviene-2026",
+      "kw_primaria": "mandato esclusivo padova",
+      "intent": "conversione-venditori",
+      "title": "Mandato esclusivo Padova 2026: Perché conviene davvero",
+      "cluster": "vendita",
+      "conversion": true,
+      "notes": "Pillar esclusiva — push incarico Righetto"
+    },
+    {
+      "id": "eq-002",
+      "status": "scheduled",
+      "priority": 1,
+      "target_week": "2026-07-24",
+      "slug": "blog-agenzia-immobiliare-limena-come-scegliere-2026",
+      "kw_primaria": "agenzia immobiliare limena",
+      "intent": "agenzia-locale",
+      "title": "Agenzia immobiliare a Limena: come scegliere senza errori (2026)",
+      "cluster": "limena-local",
+      "gsc_signal": "5 clic / 58 impr (16/07)",
+      "different_from": "blog-scegliere-agenzia-immobiliare-padova-2026",
+      "research_refs": ["GSC queries_growth", "zona-limena"],
+      "hero_concept": "Villa moderna Limena, tramonto, coppia con tablet — minimal luxury",
+      "hype_sources_read": []
+    },
+    {
+      "id": "eq-003",
+      "status": "scheduled",
+      "priority": 2,
+      "target_week": "2026-07-31",
+      "slug": "blog-caro-affitti-padova-under-35-guida-2026",
+      "kw_primaria": "caro affitti padova giovani",
+      "intent": "affitto-giovani",
+      "title": "Caro affitti Padova 2026: sopravvivere se hai meno di 35 anni",
+      "cluster": "affitti-padova",
+      "gsc_signal": "affitti limena 3 clic — cluster giovani",
+      "different_from": "blog-emergenza-abitativa-padova-2026",
+      "verified_data": {
+        "affitti_plus_43pct": "CNA / Osservatorio ADE 2019-2025",
+        "stanze_335_490": "Immobiliare.it Insights / Il Gazzettino mar 2026",
+        "1090_euro_70mq": "CNA Padova"
+      },
+      "research_refs": [
+        "https://www.corrieredelleconomia.it/2026/06/09/affitti-fuori-controllo-in-veneto-padova-e-venezia-guidano-i-rincari/",
+        "https://www.ilgazzettino.it/nordest/padova/affitti_prezzi_stanze_studenti_aumenti-9522717.html"
+      ],
+      "hero_concept": "Skyline Padova neon overlay, under-35 — cyber-minimal"
+    },
+    {
+      "id": "eq-004",
+      "status": "scheduled",
+      "priority": 3,
+      "target_week": "2026-08-07",
+      "slug": "blog-coliving-padova-limena-giovani-professionisti-2026",
+      "kw_primaria": "coliving padova limena",
+      "intent": "trend-giovani",
+      "title": "Coliving nel Padovano: nuova frontiera per chi non vuole il coinquilino a caso",
+      "cluster": "housing-innovazione",
+      "different_from": "blog-loft-aziende-cucina-condivisa-padova-vicenza-2026",
+      "research_refs": [
+        "https://www.wired.it/article/coliving-startup-habyt/",
+        "https://distrettocasainvestimenti.com/co-living-in-italia/"
+      ],
+      "hero_concept": "Open space vetro-acciaio, coworking — futuristic hospitality",
+      "caution": "Non promettere servizi coliving Righetto — guida + locazioni tradizionali"
+    },
+    {
+      "id": "eq-005",
+      "status": "scheduled",
+      "priority": 4,
+      "target_week": "2026-08-14",
+      "slug": "blog-prima-casa-under-36-consap-padova-2026",
+      "kw_primaria": "prima casa under 36 consap padova",
+      "intent": "acquisto-giovani",
+      "title": "Prima casa under 36 nel 2026: cosa funziona davvero (e cosa è scaduto)",
+      "cluster": "mutuo-prima-casa",
+      "different_from": "blog-agevolazioni-prima-casa-2026",
+      "verified_data": {
+        "bonus_fiscale_scaduto": "31/12/2024 — NotaiOnline/Money.it",
+        "consap_80_fino": "31/12/2027 — Legge 207/2024"
+      },
+      "research_refs": [
+        "https://www.money.it/mutuo-giovani-under-36-garanzia-statale-requisiti-e-come-funziona",
+        "https://notaionline.it/guida/mutuo-prima-casa-under-36-agevolazioni/"
+      ],
+      "hero_concept": "Coppia under-30, aesthetic fintech clean"
+    }
+  ]
+}

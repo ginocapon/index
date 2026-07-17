@@ -29,6 +29,7 @@
 
 ### Cosa fare — ordine di priorità
 
+0. **Coda editoriale** → `data/editorial-queue.json` + `TEST-SKILL/skill-editorial-queue.md` (agente pubblica prossimo `scheduled` senza chiedere tema)
 1. **SOSTENERE** prima di pubblicare nuovo blog → `pages_refresh_priority` in `gsc-keywords-priority.json`
 2. **1 modifica concreta/settimana** nel repo (venerdì) — mai solo teoria
 3. **Compliance 0 ERR** prima di nuovi contenuti massivi
@@ -50,7 +51,7 @@
 |-----------|--------|------|
 | **Venerdì 07:00** | Cron GitHub: SKIMM, audit, email **«Verifica indicizzazioni»** + PDF | Automatico — §11.6 skill-seo |
 | **Venerdì ~15 min** | Aggiorna `gsc-indexing-weekly.json` + opz. `ga4-weekly.json` | Utente — abilita grafici PDF |
-| **Venerdì ~45 min** | GSC + 1 fix repo | `/venerdi` skill |
+| **Venerdì ~45 min** | GSC + 1 fix repo **o blog da coda** | `/venerdi` + `editorial-queue.json` |
 | **Settimana macrociclo** | Tema 12 settimane (ancora 31/03/2026) | `righetto-venerdi-sito-90giorni` |
 | **Mar + Ven 08:00** | Security check | `security-check-bisettimanale.yml` |
 | **Ogni 6 h** | Sync foto immobili | `sync-media-github.yml` (+ `SUPABASE_KEY`) |
@@ -112,7 +113,7 @@
 | Email venerdì + PDF GSC/GA4 | ✅ 15/07/2026 — `venerdi-report-pdf.py` + allegato MIME |
 | `send-mail.php` allegati | ⚠️ ricaricare su cPanel dopo deploy repo |
 | `SUPABASE_KEY` GitHub Actions | ⚠️ verificare secret |
-| GBP post settimanale | Manuale utente |
+| Blog publish automatico (agente) | ✅ coda `data/editorial-queue.json` |
 | Backlink / DA | Gap off-site |
 
 ---
@@ -131,6 +132,7 @@
 | 15/07/2026 | Email venerdì: oggetto «Verifica indicizzazioni» + PDF + blocco 7 checklist utente | Cron + skill §11.6 |
 | 16/07/2026 | Fix WCAG CTA homepage · probe apex 474 URL · GSC JSON da screenshot sera | Compliance 100% |
 | 17/07/2026 | Cron venerdì email OK · GSC 271 clic / brand 154 · blog mandato esclusivo | 108 blog, kw conversione |
+| 17/07/2026 | Coda editoriale automatica: editorial-queue.json + skill-editorial-queue.md | 4 blog schedulati lug-ago |
 
 ---
 
@@ -142,9 +144,9 @@ Dopo fix DNS apex (15/07): **controllare in GSC** se il bucket **«pagina con re
 
 1. **Utente GSC:** aggiorna Indicizzazione post-venerdì 17/07 + Convalida 16
 2. **22/07:** verifica calo «reindirizzamento» GSC post-fix apex
-3. **Blog S2:** agenzia immobiliare Limena (se GSC conferma crescita)
-4. **PSI** su `/` e 1 blog — annotare LCP
-5. **Opzionale:** `ga4-weekly.json` + export CSV GSC
+3. **Blog S2:** agenzia immobiliare Limena — **in coda** eq-002 24/07 (`editorial-queue.json`)
+4. **Discovery:** quando scheduled < 3 → web + GSC → nuove proposte in coda
+5. **PSI** su `/` e 1 blog — annotare LCP
 
 ---
 
