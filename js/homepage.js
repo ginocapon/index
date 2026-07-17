@@ -889,6 +889,13 @@ function generateSlug(titolo) {
   // Articoli statici (sempre presenti)
   const articoliStatici = [
     {
+      "titolo": "Mandato esclusivo Padova 2026: Perché conviene davvero",
+      "categoria": "Guida alla vendita",
+      "data": "2026-07-17",
+      "immagine_copertina": "img/foto-servizi/vendita-immobili-padova.webp",
+      "url_statico": "blog-mandato-esclusivo-padova-perche-conviene-2026"
+    },
+    {
       "titolo": "Loft aziendali con cucina condivisa tra Padova e Vicenza",
       "categoria": "Affitti",
       "data": "2026-07-07",
