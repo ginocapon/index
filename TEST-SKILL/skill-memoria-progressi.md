@@ -8,19 +8,20 @@
 
 ---
 
-## Stato sintetico (ultimo aggiornamento: 14 luglio 2026, pomeriggio)
+## Stato sintetico (ultimo aggiornamento: 17 luglio 2026, mattina)
 
 | KPI | Valore | Target 95% | Note |
 |-----|--------|------------|------|
 | Compliance repo | **100%** (0 ERR, 0 WARN) | 100% | ✅ |
-| Probe URL live | **494 URL, 0 errori** | 0 issue | `probe_live_urls.py` |
-| GEO / AI / GA4 | **PASS** | PASS | 107 blog in llms, Consent v2 |
+| Probe URL live | **474 URL, apex OK** | 0 issue | Aggiornato 16/07 post-DNS |
+| GEO / AI / GA4 | **PASS** | PASS | 108 blog in llms, Consent v2 |
 | Link interni cluster Limena | **5 pagine sorgente** | Fatto | `internal-links-limena-2026.json` |
-| GSC indicizzate | **74** pagine | Monitorare | OK |
-| GSC «scansionata non indicizzata» | **16** | → 0 in report | Lag GSC — Convalida utente |
-| Content health (cron) | **85%** | 95% | 14 avvisi SKIMM = monitoraggio anti-doppioni (non bug) |
-| SERP 16 mesi | 2.470 click, CTR **7%**, pos. **9,2** | +non-brand | Baseline `gsc-baseline-16m.json` |
-| Score complessivo stimato | **~88%** | **95%** | Manca tempo Google + GSC manuale + PSI |
+| GSC Prestazioni 28 gg | **271 clic, 4.22K impr, CTR 6,4%, pos. 7,7** | Monitorare | Snapshot 16/07 sera (screenshot) |
+| GSC brand query | **154 clic** (6 query) | Crescita | vs 43 sett. precedente |
+| affitti limena | **3 clic / 39 impr** | Crescita | Primi clic non-brand Limena |
+| GSC indicizzazione | **7/166** (snapshot 15/07) | Monitorare | Verificare post-DNS ~22/07 |
+| Content health (cron) | **85%** | 95% | 14 avvisi SKIMM = cluster |
+| Score complessivo stimato | **~90%** | **95%** | +A11y fix CTA 16/07 |
 
 ---
 
@@ -79,12 +80,13 @@
 
 ## Cluster SEO prioritari (non-brand)
 
-| Query | Imp (snapshot 13/07) | Azione | Stato |
+| Query | Imp (snapshot 16/07) | Azione | Stato |
 |-------|----------------------|--------|-------|
-| affitti limena | 12 | blog + zona + **link interni 5 pagine** | ✅ deploy 14/07 |
-| agenzia immobiliare limena | 13 | agenzia SOSTENERE + link zona | ✅ |
-| omi padova | 14 | pillar OMI AEO | ✅ 13/07 |
-| blog-rendimento-affitto-padova | 139 imp, 0 click | SOSTENERE + link da valutazioni | ✅ meta + link |
+| affitti limena | 39 impr, **3 clic** | blog + zona + link interni | ✅ misurare |
+| agenzia immobiliare limena | 58 impr, **5 clic** | agenzia SOSTENERE + nuovo blog Limena (S2) | ☐ |
+| mandato esclusivo padova | — | **blog 17/07** conversione venditori | ✅ pubblicato |
+| omi padova | 14 impr | pillar OMI AEO | ✅ 13/07 |
+| blog-rendimento-affitto-padova | 139 imp, 0 click | SOSTENERE — misurare CTR | ☐ monitor |
 
 ---
 
@@ -102,7 +104,7 @@
 
 | Sistema | Stato |
 |---------|--------|
-| llms.txt / ai.json / 107 blog | ✅ |
+| llms.txt / ai.json / 108 blog | ✅ |
 | GA4 + Consent Mode v2 | ✅ |
 | Compliance 100% | ✅ |
 | Link interni Limena | ✅ |
@@ -127,10 +129,10 @@
 | 15/07/2026 | DNS apex + GitHub custom domain senza www | www→apex 301 verificato live |
 | 15/07/2026 | Repo: CNAME + robots.txt sitemap allineati | Coerente con canonical |
 | 15/07/2026 | Email venerdì: oggetto «Verifica indicizzazioni» + PDF + blocco 7 checklist utente | Cron + skill §11.6 |
+| 16/07/2026 | Fix WCAG CTA homepage · probe apex 474 URL · GSC JSON da screenshot sera | Compliance 100% |
+| 17/07/2026 | Cron venerdì email OK · GSC 271 clic / brand 154 · blog mandato esclusivo | 108 blog, kw conversione |
 
 ---
-
-## Appuntamento verifica (22 luglio 2026)
 
 Dopo fix DNS apex (15/07): **controllare in GSC** se il bucket **«pagina con reindirizzamento»** (era ~74 nel filtro sitemap) è sceso. Aggiornare `data/gsc-indexing-weekly.json` → il PDF del venerdì 18/07 e 25/07 mostrerà il trend a barre.
 
@@ -138,16 +140,15 @@ Dopo fix DNS apex (15/07): **controllare in GSC** se il bucket **«pagina con re
 
 ## Prossimi passi (per l'agente)
 
-1. **Utente GSC:** Convalida 16 + Prestazioni `affitti limena` — aggiorna `gsc-indexing-weekly.json`
-2. **cPanel:** ricarica `api/send-mail.php` (versione con allegati PDF)
-3. **22/07:** verifica calo «reindirizzamento» GSC post-fix www
-4. **Venerdì S7:** export CSV GSC → `data/gsc-export-*.csv` + compila `ga4-weekly.json`
-5. **S4:** PSI su `/` e 1 blog — annotare LCP in memoria
-6. **Verifica:** `SUPABASE_KEY` in GitHub Secrets
+1. **Utente GSC:** aggiorna Indicizzazione post-venerdì 17/07 + Convalida 16
+2. **22/07:** verifica calo «reindirizzamento» GSC post-fix apex
+3. **Blog S2:** agenzia immobiliare Limena (se GSC conferma crescita)
+4. **PSI** su `/` e 1 blog — annotare LCP
+5. **Opzionale:** `ga4-weekly.json` + export CSV GSC
 
 ---
 
-## Come usare questo file (agente)
+## Appuntamento verifica (22 luglio 2026)
 
 ```
 1. Leggi §Stato sintetico + §Prossimi passi
