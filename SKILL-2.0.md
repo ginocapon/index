@@ -8,7 +8,7 @@ Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutt
 
 **Regole Cursor scoped:** [`TEST-SKILL/skill-cursor-rules.md`](TEST-SKILL/skill-cursor-rules.md) — 7 file `.mdc` in `.cursor/rules/` (pattern awesome-cursorrules).
 
-**Changelog rapido (17 luglio 2026):** blog conversione **mandato esclusivo Padova** · GSC snapshot 16/07 in `gsc-keywords-priority.json` · memoria progressi aggiornata (~90% score).
+**Changelog rapido (17 luglio 2026 — b):** coda editoriale automatica — `data/editorial-queue.json` + **`TEST-SKILL/skill-editorial-queue.md`** (4 blog schedulati, discovery settimanale); routing in `context-map.json` + `/blog` + `/venerdi`.
 
 **Changelog rapido (10 luglio 2026 — d):** sistema Skills Cursor — lezioni consolidate (hero mobile, tour 360°, annunci disattivati, push su richiesta); mappa `.cursor/skills/README.md`; checklist venerdì §8 admin.
 

@@ -20,6 +20,7 @@ description: >-
 ## Quando applicare questa skill
 
 0. Leggi **`TEST-SKILL/skill-memoria-progressi.md`** — §Prossimi passi e piano 8 settimane (non proporre azioni fuori linea).
+0b. Leggi **`data/editorial-queue.json`** — prossimo blog `scheduled` + discovery se coda < 3 item.
 1. **È venerdì** e l'utente apre la chat (anche senza domanda esplicita): proponi in apertura un blocco breve "Venerdì Righetto — questa settimana fare…".
 2. L'utente chiede **cosa fare**, **programma settimanale**, **90 giorni**, **prossimi mesi**, **check sito**.
 3. L'utente tagga **Righetto** o **sito immobiliare** insieme a pianificazione.
@@ -51,7 +52,7 @@ description: >-
 Usa questa lista nell'output per l'utente; adatta alle priorità della settimana del macrociclo.
 
 1. **Dati**: Search Console (ultimi 7/28 gg) — 1 opportunità e 1 anomalia. **Vedi § Search Console sotto** (checklist completa 10 URL + sitemap + 404/5xx).
-2. **Pubblicato**: 1 modifica concreta nel repo (articolo, link interno, meta, schema, o fix tecnico).
+2. **Pubblicato**: 1 modifica concreta nel repo — **se settimana macrociclo 3 (Blog):** pubblica prossimo item da `data/editorial-queue.json` (`scheduled`) seguendo `TEST-SKILL/skill-editorial-queue.md`; altrimenti SOSTENERE o fix tecnico.
 3. **Local**: Google Business Profile — 1 post o foto o risposta a recensione (azione manuale utente). **Se attivo cron `righetto_social/`:** verificare post notizie RSS (mar/gio) e mirror Meta→GBP in `.env`.
 4. **Qualità**: un URL a caso tra top traffico — mobile ok? CTA visibile senza scroll eccessivo?
 5. **Prossima settimana**: 1 sola priorità numerata (la più impattante).
