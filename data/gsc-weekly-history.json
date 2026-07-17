@@ -254,6 +254,87 @@
           "rationale": "Query corta omi padova — pillar esistente aggiornato luglio 2026 (box AEO + FAQ)"
         }
       ]
+    },
+    {
+      "date": "2026-07-17",
+      "blog_articles": 108,
+      "sitemap_urls": 166,
+      "probe_total": 472,
+      "probe_issues": 0,
+      "content_health_pct": 100,
+      "brand_clicks": 154,
+      "brand_impressions": 339,
+      "home_clicks": 63,
+      "home_impressions": 525,
+      "queries_growth_count": 12,
+      "queries_growth_zero_click_imp": 68,
+      "pages_refresh_priority": [
+        {
+          "url": "/blog-rendimento-affitto-padova",
+          "clicks": 0,
+          "impressions": 139,
+          "action": "sostenere-meta"
+        },
+        {
+          "url": "/agenzia-immobiliare-padova",
+          "clicks": 0,
+          "impressions": 68,
+          "action": "sostenere-meta"
+        },
+        {
+          "url": "/zona-limena",
+          "clicks": 0,
+          "impressions": 3,
+          "action": "sostenere-affitti-title"
+        },
+        {
+          "url": "/blog-affitto-breve-padova-2026",
+          "clicks": 0,
+          "impressions": 10,
+          "action": "sostenere-snippet"
+        }
+      ],
+      "pages_winners": [
+        {
+          "url": "/",
+          "clicks": 63,
+          "impressions": 525
+        },
+        {
+          "url": "/blog-affitto-studenti-padova",
+          "clicks": 8,
+          "impressions": 271
+        },
+        {
+          "url": "/blog-contratto-affitto-padova",
+          "clicks": 6,
+          "impressions": 150
+        }
+      ],
+      "published_this_week": [
+        {
+          "slug": "blog-affitti-limena-2026",
+          "kw": "affitti limena",
+          "date": "2026-07-09"
+        },
+        {
+          "slug": "blog-affitto-transitorio-padova-durata-2026",
+          "kw": "affitto transitorio padova durata",
+          "date": "2026-07-09"
+        },
+        {
+          "slug": "blog-rubano-limena-affitto-lavoratori-2026",
+          "kw": "rubano limena affitto lavoratori",
+          "date": "2026-07-09"
+        }
+      ],
+      "keyword_gaps": [
+        {
+          "kw": "omi padova affitti spiegati",
+          "slug_proposto": "blog-quotazioni-locazioni-omi-istat-padova-2026",
+          "rationale": "Query corta omi padova — pillar esistente aggiornato luglio 2026 (box AEO + FAQ)"
+        }
+      ]
     }
   ]
 }
