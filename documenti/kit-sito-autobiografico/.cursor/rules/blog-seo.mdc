@@ -1,0 +1,17 @@
+---
+description: Blog, sitemap, llms — SEO contenuti
+globs: ["blog-*", "**/sitemap.xml", "llms.txt", "llms-full.txt", "ai.json"]
+alwaysApply: false
+---
+
+# Blog e SEO contenuti
+
+Carica: `TEST-SKILL/skill-content.md` + `skill-seo.md`
+
+- Anti-doppioni prima di nuovo articolo
+- Title ≤60, meta ≤160
+- Bio autore + link Chi sono
+- FAQ schema = testo visibile
+- Aggiorna sitemap.xml
+- Max 1 articolo nuovo/settimana
+- Tono autobiografico autentico

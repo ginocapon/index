@@ -1,0 +1,21 @@
+{
+  "updated": "YYYY-MM-DD",
+  "items": [
+    {
+      "id": "eq-001",
+      "status": "scheduled",
+      "slug": "blog-la-mia-storia-nel-fitness",
+      "kw": "personal trainer [città]",
+      "week": "YYYY-MM-DD",
+      "notes": "Primo articolo pillar autobiografico"
+    },
+    {
+      "id": "eq-002",
+      "status": "scheduled",
+      "slug": "blog-prima-lezione-cosa-aspettarsi",
+      "kw": "prima volta in palestra [città]",
+      "week": "YYYY-MM-DD",
+      "notes": ""
+    }
+  ]
+}

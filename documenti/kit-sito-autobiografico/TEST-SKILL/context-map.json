@@ -1,0 +1,66 @@
+{
+  "_note": "Routing: quale skill caricare per ogni task. skill-essentials + skill-massimo-punteggio SEMPRE.",
+  "_version": "1.0 — kit sito autobiografico 2026",
+
+  "always_load": "TEST-SKILL/skill-essentials.md,TEST-SKILL/skill-massimo-punteggio.md",
+
+  "cursor_skills": {
+    "core-task": { "command": "/sito", "path": ".cursor/skills/core-task/SKILL.md" },
+    "blog": { "command": "/blog", "path": ".cursor/skills/blog/SKILL.md" },
+    "seo": { "command": "/seo", "path": ".cursor/skills/seo/SKILL.md" },
+    "mobile": { "command": "/mobile", "path": ".cursor/skills/mobile/SKILL.md" },
+    "venerdi": { "command": "/venerdi", "path": ".cursor/skills/venerdi/SKILL.md" },
+    "chi-sono": { "command": "/chi-sono", "path": ".cursor/skills/chi-sono/SKILL.md" }
+  },
+
+  "cursor_rules": {
+    "always": ".cursor/rules/core.mdc",
+    "by_glob": {
+      "html_css_js": ".cursor/rules/vanilla-ui.mdc",
+      "blog_seo": ".cursor/rules/blog-seo.mdc"
+    }
+  },
+
+  "tasks": {
+    "modifica_generica_sito": {
+      "skills": ["skill-essentials.md"],
+      "cursor_skills": ["core-task"]
+    },
+    "pagina_chi_sono_storia": {
+      "skills": ["skill-essentials.md", "skill-content.md", "skill-seo.md"],
+      "cursor_skills": ["chi-sono"],
+      "note": "Bio autentica, schema Person, foto reali, E-E-A-T"
+    },
+    "nuovo_articolo_blog": {
+      "skills": ["skill-essentials.md", "skill-content.md"],
+      "cursor_skills": ["blog"],
+      "data": ["data/editorial-queue.json"],
+      "note": "Anti-doppioni BLOCCANTE. Max 1/settimana. Bio autore footer."
+    },
+    "audit_seo_gsc": {
+      "skills": ["skill-essentials.md", "skill-seo.md"],
+      "cursor_skills": ["seo"],
+      "data": ["data/gsc-indexing-weekly.json", "data/gsc-keywords-priority.json"]
+    },
+    "fix_mobile_responsive": {
+      "skills": ["skill-essentials.md", "skill-design.md"],
+      "cursor_skills": ["mobile"]
+    },
+    "form_contatti": {
+      "skills": ["skill-essentials.md", "skill-forms-contatti.md"],
+      "note": "GDPR, success inline, no segreti in repo"
+    },
+    "google_business_social": {
+      "skills": ["skill-essentials.md", "skill-social-gbp.md"],
+      "note": "NAP identico al sito"
+    },
+    "piano_venerdi": {
+      "skills": ["skill-essentials.md", "skill-seo.md", "skill-content.md"],
+      "cursor_skills": ["venerdi"]
+    },
+    "nuova_pagina_servizio": {
+      "skills": ["skill-essentials.md", "skill-content.md", "skill-seo.md", "skill-design.md"],
+      "note": "FAQ 5+, schema LocalBusiness se sede, sitemap"
+    }
+  }
+}
