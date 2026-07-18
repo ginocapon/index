@@ -1,0 +1,22 @@
+{
+  "updated": "YYYY-MM-DD",
+  "source": "GSC manuale — venerdì, Indicizzazione → Pagine",
+  "sitemap_main": {
+    "url": "https://[dominio].it/sitemap.xml",
+    "status": "Riuscita",
+    "discovered_pages": 0
+  },
+  "indexed": 0,
+  "not_indexed": 0,
+  "by_reason": {
+    "redirect": 0,
+    "crawled_not_indexed": 0,
+    "not_found_404": 0,
+    "discovered_not_indexed": 0,
+    "alternate_canonical": 0
+  },
+  "manual_checks": {
+    "sitemap_ok": false,
+    "note": ""
+  }
+}

@@ -1,0 +1,35 @@
+---
+description: Core — sito autobiografico, SEO, claim, regole d'oro (sempre attivo)
+alwaysApply: true
+---
+
+# Sito autobiografico — core
+
+**Fonte di verità:** `SKILL-2.0.md` + `TEST-SKILL/skill-essentials.md`  
+**Routing:** `TEST-SKILL/context-map.json`  
+**Slash:** `/sito` `/seo` `/blog` `/mobile` `/venerdi` `/chi-sono`
+
+## Regola d'oro
+Se non hai fonte verificabile, **non inserire il dato**. Storia e numeri devono essere **veri**.
+
+## Prima di ogni modifica
+0. Leggi `TEST-SKILL/skill-massimo-punteggio.md`
+1. Leggi il file da modificare
+2. Mobile-first + WCAG AA (CTA contrasto ≥ 4,5:1)
+3. CSS/JS con `?v=N` — incrementa a ogni modifica
+4. Nuove URL → `sitemap.xml`
+5. Commit solo se richiesto; push solo se esplicito
+6. No DNS/hosting senza conferma
+
+## Moduli skill
+| Task | File |
+|------|------|
+| Sempre | skill-essentials + skill-massimo-punteggio |
+| SEO / GSC | skill-seo.md |
+| Blog / bio | skill-content.md |
+| UI / mobile | skill-design.md |
+| Form | skill-forms-contatti.md |
+| GBP / social | skill-social-gbp.md |
+
+## Dati da compilare
+Tabella claim in `skill-essentials.md` — NAP uguale su sito e Google Maps.

@@ -1,0 +1,17 @@
+---
+description: HTML/CSS/JS — mobile, performance, WCAG
+globs: ["**/*.html", "css/**", "js/**"]
+alwaysApply: false
+---
+
+# UI vanilla — sito autobiografico
+
+Carica: `TEST-SKILL/skill-design.md` + `skill-essentials.md`
+
+- Mobile-first 375px
+- CSS/JS `?v=N` ad ogni modifica
+- No lazy su hero/LCP
+- Contrasto CTA ≥ 4,5:1
+- No CDN esterni
+- Touch target ≥ 44px
+- Foto reali con alt text
