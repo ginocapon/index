@@ -552,6 +552,8 @@ def build() -> Path:
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     doc.save(str(OUT))
+    agg = OUT.parent / "Modello-Mandato-Esclusivo-Vendita-Righetto-2026-agg.docx"
+    doc.save(str(agg))
     return OUT
 
 
