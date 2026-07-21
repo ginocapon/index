@@ -154,11 +154,13 @@ def build() -> Path:
     add_mixed(
         doc,
         [
-            ("3.1 — Corresponsabilità pro quota. ", True),
+            ("3.1 — Corresponsabilità pro quota (11/11). ", True),
             (
                 "Il compenso di mediazione è dovuto dai comproprietari pro quota, in misura "
                 "corrispondente alla rispettiva quota di proprietà risultante da atti o da elenco "
-                "allegato, salvo diverso accordo scritto tra le parti e l'AI.",
+                "allegato. Ciascun comproprietario è tenuto al pagamento per intero (11/11) della "
+                "propria quota di provvigione, calcolata sulla provvigione complessiva di cui al "
+                "presente articolo, salvo diverso accordo scritto tra le parti e l'AI.",
                 False,
             ),
         ],
@@ -191,16 +193,33 @@ def build() -> Path:
     add_mixed(
         doc,
         [
-            ("3.4 — Rifiuto al rogito e variazioni sostanziali (comproprietà). ", True),
+            ("3.4 — Accordo commerciale a prezzo di mandato e obbligo di cooperare. ", True),
             (
-                "Qualora, accettata una proposta d'acquisto conforme al presente incarico e alle "
-                "condizioni economiche in essa indicate, uno o più comproprietari si rifiutino, senza "
-                "giustificato motivo, di procedere al rogito notarile, ovvero si rifiutino per "
-                "variazioni sostanziali degli accordi già conclusi o per modifiche del prezzo pattuito "
-                "nella proposta accettata, il comproprietario il cui comportamento abbia determinato "
-                "il mancato perfezionamento dell'affare resterà tenuto, per intero, al pagamento del "
-                "compenso di mediazione dovuto all'AI, ferma restando per il resto l'applicazione delle "
-                "norme di legge in materia di solidarietà tra contraenti.",
+                "In presenza di pluralità di comproprietari, il perfezionamento dell'affare richiede "
+                "il consenso di tutti. Quando, per effetto dell'attività dell'AI, sia stato definito "
+                "un accordo commerciale con un potenziale acquirente — a titolo esemplificativo: "
+                "proposta d'acquisto accettata, compromesso o contratto preliminare — per un prezzo "
+                "pari o superiore a quello indicato al punto 2, i comproprietari non potranno "
+                "opporsi al perfezionamento dell'affare senza giustificato motivo. Il comproprietario "
+                "che, in tale ipotesi, si rifiuti di sottoscrivere gli atti necessari (rogito, "
+                "preliminare o altro atto concordato) resterà tenuto, per intero, al pagamento del "
+                "compenso di mediazione maturato ai sensi del presente articolo 3, nonché della "
+                "penale di cui all'art. 7, pari al 100% (11/11) della provvigione pattuita sul "
+                "prezzo di perfezionamento.",
+                False,
+            ),
+        ],
+    )
+    add_mixed(
+        doc,
+        [
+            ("Eccezione — proposta o accordo sotto prezzo dell'incarico. ", True),
+            (
+                "Se l'accordo commerciale o la proposta prevedono un prezzo inferiore a quello "
+                "indicato nel presente incarico (a titolo esemplificativo: incarico a € 300.000,00 "
+                "e proposta a importo inferiore), ciascun comproprietario potrà liberamente non "
+                "prestare il consenso, ridiscutere la proposta con l'AI e con gli altri "
+                "comproprietari, senza incorrere in penali né in obbligo di compenso ex art. 3.4.",
                 False,
             ),
         ],
@@ -209,9 +228,10 @@ def build() -> Path:
         doc,
         "Per «giustificato motivo» si intende, a titolo esemplificativo, l'impossibilità oggettiva di "
         "trasferire per vincoli giurisdizionali non imputabili al Venditore, ovvero cause di forza "
-        "maggiore debitamente documentate; non costituiscono giustificato motivo il mero ripensamento, "
-        "la richiesta di prezzi superiori a quelli già accettati nella proposta vincolante, o la "
-        "modifica unilaterale delle condizioni già pattuite.",
+        "maggiore debitamente documentate, ovvero variazioni sostanziali delle condizioni dell'immobile "
+        "emerse dopo l'accettazione e non imputabili al Venditore. Non costituiscono giustificato motivo "
+        "il mero ripensamento di un singolo comproprietario quando la proposta è conforme all'incarico "
+        "e al prezzo richiesto.",
     )
 
     add_article(doc, "4", "Durata dell'incarico")
@@ -224,13 +244,26 @@ def build() -> Path:
         "dell'incarico.",
     )
 
-    add_article(doc, "5", "Proposta d'acquisto")
+    add_article(doc, "5", "Proposta d'acquisto e contratto preliminare")
     add_body(
         doc,
         "L'AI è autorizzata a raccogliere proposte d'acquisto da aspiranti acquirenti, nonché a "
         "trattenere a titolo di deposito infruttifero assegni intestati alla parte venditrice, e a "
         "restituire i medesimi assegni in caso di mancata conclusione dell'affare per cause non "
         "imputabili all'acquirente proponente.",
+    )
+    add_mixed(
+        doc,
+        [
+            ("Preliminare. ", True),
+            (
+                "L'AI è autorizzata ad assistere le parti nella stipula del contratto preliminare di "
+                "compravendita. Il Venditore si impegna a rispettare gli obblighi assunti verso "
+                "l'acquirente con tale atto e a cooperare per il perfezionamento del rogito "
+                "definitivo nei termini concordati.",
+                False,
+            ),
+        ],
     )
 
     add_article(doc, "6", "Esclusiva")
@@ -258,8 +291,8 @@ def build() -> Path:
     add_body(
         doc,
         "A seguito di specifica trattativa individuale, viene pattuita una penale pari al 100% "
-        "(cento per cento) della provvigione pattuita, a carico del Venditore e a favore dell'AI, "
-        "nei seguenti casi:",
+        "(cento per cento — 11/11) della provvigione pattuita ai sensi dell'art. 3, a carico del "
+        "Venditore e a favore dell'AI, nei seguenti casi:",
     )
     add_bullets(
         doc,
@@ -272,8 +305,10 @@ def build() -> Path:
             "vendita diretta dell'immobile o comunque senza l'ausilio dell'AI, in violazione "
             "dell'esclusiva;",
             "rifiuto al rogito o mancato perfezionamento dell'affare imputabile a uno o più "
-            "comproprietari nei casi di cui all'art. 3, comma 3.4, con obbligo del comproprietario "
-            "inadempiente di corrispondere per intero il compenso di mediazione maturato;",
+            "comproprietari nei casi di cui all'art. 3, comma 3.4 — fermo restando il diritto di "
+            "ogni comproprietario di non firmare ove la proposta sia per prezzo inferiore a quello "
+            "indicato al punto 2 — con obbligo del comproprietario inadempiente di corrispondere "
+            "per intero il compenso di mediazione maturato;",
             "rifiuto del Venditore di accettare una proposta di acquisto conforme al presente "
             "incarico e al prezzo richiesto, salvo giustificato motivo documentato.",
         ],
@@ -310,17 +345,67 @@ def build() -> Path:
     add_mixed(
         doc,
         [
-            ("Visite e accesso — giorno settimanale. ", True),
+            ("Visite e accesso — giorno settimanale e comproprietario residente. ", True),
             (
                 "Dalla sottoscrizione del presente contratto, il Venditore riconosce all'AI la "
                 "facoltà di organizzare sopralluoghi con potenziali acquirenti per almeno un giorno "
-                "alla settimana, in fasce orarie concordate con ragionevole preavviso. Qualora uno o "
-                "più comproprietari risiedano nell'immobile, essi conferiscono all'AI mandato "
-                "operativo per la gestione degli accessi e si obbligano a concordare modalità e orari "
-                "che consentano le visite. Il comproprietario residente che, senza giustificato "
-                "motivo, renda impossibile o ostacoli in modo reiterato i sopralluoghi risponde di "
-                "inadempimento contrattuale, con applicazione di quanto previsto agli artt. 7, lett. a), "
-                "e 3, ove compatibile.",
+                "alla settimana, da concordare con l'AI all'avvio dell'incarico, in fasce orarie "
+                "comunicate con ragionevole preavviso. Qualora uno o più comproprietari abbiano la "
+                "residenza nell'immobile, essi garantiscono la disponibilità in tale giorno, salvo "
+                "diverso accordo scritto con il comproprietario interessato. Qualora in tale giorno "
+                "il comproprietario residente non possa garantire l'accesso per giusta causa (a "
+                "titolo esemplificativo: impossibilità oggettiva, emergenza sanitaria, obblighi "
+                "lavorativi non prevedibili), ne darà tempestiva comunicazione all'AI, che "
+                "concorderà un nuovo appuntamento con l'acquirente interessato. Il comproprietario "
+                "residente che, senza giustificato motivo, renda impossibile o ostacoli in modo "
+                "reiterato i sopralluoghi risponde di inadempimento contrattuale, con applicazione "
+                "di quanto previsto agli artt. 7, lett. a), e 3, ove compatibile.",
+                False,
+            ),
+        ],
+    )
+    add_mixed(
+        doc,
+        [
+            ("Documentazione catastale e urbanistica. ", True),
+            (
+                "Dalla sottoscrizione dell'accordo con l'acquirente (proposta accettata, preliminare "
+                "o atto equivalente), il Venditore si obbliga a mettere a disposizione dell'AI e "
+                "dell'acquirente, entro un termine concordato, tutta la documentazione catastale, "
+                "urbanistica ed edilizia necessaria alla corretta definizione dell'affare, completa "
+                "e in ordine.",
+                False,
+            ),
+        ],
+    )
+    add_mixed(
+        doc,
+        [
+            ("Consegna dell'immobile. ", True),
+            (
+                "Decorso il contratto preliminare, la consegna dell'immobile all'acquirente "
+                "avverrà entro e non oltre sei (6) mesi dalla stipula del preliminare stesso, salvo "
+                "diverso accordo scritto tra venditore, acquirente e AI.",
+                False,
+            ),
+        ],
+    )
+    add_mixed(
+        doc,
+        [
+            ("Inadempimento del comproprietario residente — spese e preliminare. ", True),
+            (
+                "Il comproprietario che abbia la residenza nell'immobile e, per motivi non previsti "
+                "nel presente contratto né giustificati ai sensi dell'art. 3, non consenta la "
+                "liberazione dell'immobile o l'accesso per visite e consegna nei termini concordati, "
+                "resterà responsabile delle spese, dei danni e degli oneri consequenziali derivanti "
+                "dagli accordi con futuri acquirenti e con l'AI. Ove sia stato stipulato un "
+                "contratto preliminare e l'inadempimento sia imputabile al Venditore residente, "
+                "quest'ultimo — nei limiti di legge e degli obblighi assunti nel preliminare — "
+                "dovrà far fronte alle conseguenze previste dal contratto preliminare stesso, ivi "
+                "compresa, ove applicabile, la restituzione della caparra confirmatoria in misura "
+                "doppia all'acquirente, nonché al compenso di mediazione maturato e dovuto all'AI "
+                "ai sensi dell'art. 3.",
                 False,
             ),
         ],
@@ -397,9 +482,11 @@ def build() -> Path:
         doc,
         "A mente del Codice del Consumo (D.lgs. 206/2005), le parti dichiarano che le clausole del "
         "presente contratto sono state illustrate e oggetto di specifica trattativa individuale, in "
-        "particolare quelle relative all'esclusiva, al compenso pro quota, al rifiuto al rogito di "
-        "cui all'art. 3, alle visite settimanali, alla comunicazione di gravami e alle penali di "
-        "cui all'art. 7, la cui approvazione è espressa in piena coscienza.",
+        "particolare quelle relative all'esclusiva, al compenso pro quota (11/11), all'accordo "
+        "commerciale e al rifiuto di firma di cui all'art. 3, al preliminare di cui all'art. 5, "
+        "alle visite del comproprietario residente, alla documentazione catastale, alla consegna "
+        "entro sei mesi, alla comunicazione di gravami e alle penali di cui all'art. 7, la cui "
+        "approvazione è espressa in piena coscienza.",
     )
     add_body(
         doc,
