@@ -54,13 +54,14 @@ def add_bullets(doc: Document, items: list[str]) -> None:
         r.font.size = Pt(11)
 
 
-def add_box(doc: Document, text: str) -> None:
-    p = doc.add_paragraph()
-    p.paragraph_format.left_indent = Cm(0.5)
-    r = p.add_run(text)
-    r.font.name = "Times New Roman"
-    r.font.size = Pt(10.5)
-    r.italic = True
+def add_table(doc: Document, headers: list[str], rows: list[list[str]]) -> None:
+    table = doc.add_table(rows=1 + len(rows), cols=len(headers))
+    table.style = "Table Grid"
+    for i, h in enumerate(headers):
+        table.rows[0].cells[i].text = h
+    for ri, row in enumerate(rows):
+        for ci, cell in enumerate(row):
+            table.rows[ri + 1].cells[ci].text = cell
 
 
 def build() -> Path:
@@ -75,125 +76,126 @@ def build() -> Path:
     today = date.today().strftime("%d/%m/%Y")
 
     add_center(doc, "GRUPPO IMMOBILIARE RIGHETTO", bold=True, size=13)
-    add_center(doc, "Allegato B — Scheda informativa per i comproprietari", bold=True, size=12)
-    add_center(doc, "Mandato esclusivo di vendita", size=11)
-    add_center(
-        doc,
-        f"Da leggere e firmare prima o insieme al contratto di incarico · revisione {today}",
-        size=10,
-    )
+    add_center(doc, "Allegato B — Cosa sapere prima di firmare", bold=True, size=12)
+    add_center(doc, "Mandato esclusivo · comproprietari", size=11)
+    add_center(doc, f"Revisione {today}", size=10)
     doc.add_paragraph()
 
     add_body(
         doc,
-        "Questa pagina riassume, in linguaggio chiaro, i punti principali del mandato. "
-        "Il testo completo e vincolante resta quello del contratto di mediazione sottoscritto in agenzia.",
+        "Questa scheda spiega in modo semplice le regole del mandato. Fa fede il contratto "
+        "firmato in agenzia; qui trovi solo un riassunto per capire chi paga cosa.",
     )
     doc.add_paragraph()
 
-    add_heading(doc, "1. Provvigione — come si divide")
+    add_heading(doc, "1. La provvigione — chi paga quanto")
+    add_body(
+        doc,
+        "La provvigione dell'agenzia (es. 3% + IVA sul prezzo di vendita) si divide in base "
+        "alla quota di proprietà di ciascuno.",
+    )
+    add_table(
+        doc,
+        ["Situazione", "Chi paga", "Quanto"],
+        [
+            [
+                "Vendita conclusa e tutti firmano",
+                "Ogni comproprietario",
+                "Solo la propria parte (es. 1/3 se tre fratelli uguali)",
+            ],
+            [
+                "Uno vuole vendere a prezzo pieno e firma",
+                "Chi firma",
+                "Solo la propria parte — non paga per gli altri",
+            ],
+            [
+                "Uno si rifiuta di firmare a prezzo pieno senza motivo valido",
+                "Solo chi rifiuta",
+                "Penale = tutta la provvigione (100%)",
+            ],
+            [
+                "Offerta sotto il prezzo del mandato",
+                "—",
+                "Nessuna penale; si può ridiscutere",
+            ],
+        ],
+    )
+    add_body(
+        doc,
+        "Esempio numerico: casa € 300.000, provvigione 3% = € 9.000 (+ IVA). Tre fratelli al "
+        "33,33% ciascuno → ognuno paga € 3.000 (+ IVA) se la vendita si chiude. Se uno solo si "
+        "rifiuta di firmare a € 300.000 senza motivo valido → quello paga € 9.000 (+ IVA) "
+        "all'agenzia a titolo di penale; gli altri no.",
+        bold=True,
+    )
+
+    add_heading(doc, "2. Acquirente al prezzo del mandato")
     add_bullets(
         doc,
         [
-            "La provvigione dell'agenzia (es. 3% + IVA sul prezzo di vendita) si calcola sul prezzo "
-            "effettivo concordato con l'acquirente.",
-            "In caso di comproprietà, ogni proprietario paga la propria parte in base alla quota di "
-            "proprietà (es. due fratelli al 50% → ciascuno metà della provvigione).",
-            "Ognuno è tenuto a corrispondere per intero (11/11) la propria quota: non si può pagare "
-            "solo una frazione della propria parte.",
+            "Se l'agenzia trova un acquirente al prezzo del mandato (o superiore), tutti devono "
+            "collaborare per chiudere (proposta, preliminare, rogito).",
+            "Non basta che uno solo sia d'accordo: servono tutti per vendere.",
+            "Chi si rifiuta senza motivo serio documentato paga personalmente la penale pari "
+            "all'intera provvigione.",
+            "Chi firma e collabora paga solo la propria quota, se la vendita si conclude.",
         ],
     )
 
-    add_heading(doc, "2. Se c'è un acquirente al prezzo del mandato")
-    add_box(
+    add_heading(doc, "3. Offerta più bassa del mandato")
+    add_body(
         doc,
-        "In sintesi: se l'agenzia trova un acquirente disposto a pagare almeno il prezzo indicato "
-        "nel mandato, tutti i comproprietari devono collaborare per concludere la vendita "
-        "(proposta, preliminare, rogito).",
-    )
-    add_bullets(
-        doc,
-        [
-            "Non si può opporsi senza un motivo serio e documentato (es. vincoli legali, forza "
-            "maggiore — non il semplice «ci ripenso»).",
-            "Chi si rifiuta di firmare in questa situazione risponde personalmente: deve pagare la "
-            "provvigione maturata e la penale prevista dal contratto (pari al 100% / 11/11 della "
-            "provvigione pattuita).",
-        ],
-    )
-
-    add_heading(doc, "3. Se il prezzo proposto è più basso del mandato")
-    add_bullets(
-        doc,
-        [
-            "Ognuno resta libero di non accettare e di ridiscutere l'offerta con l'agenzia e con "
-            "gli altri proprietari.",
-            "In questo caso non scattano penali né obbligo di provvigione per il solo rifiuto.",
-        ],
+        "Se l'acquirente propone meno del prezzo del mandato (es. mandato € 300.000, offerta "
+        "€ 280.000), ognuno è libero di non firmare e di ridiscutere. Nessuna penale e nessuna "
+        "provvigione solo per il rifiuto.",
     )
 
     add_heading(doc, "4. Visite — chi abita in casa")
     add_bullets(
         doc,
         [
-            "L'agenzia organizzerà le visite con gli acquirenti per almeno un giorno a settimana, "
-            "da concordare all'inizio (giorno e fasce orarie).",
-            "Se un comproprietario risiede nell'immobile, deve garantire l'accesso in quel giorno, "
-            "salvo diverso accordo scritto.",
-            "Se in quel giorno non è possibile per giusta causa (malattia, emergenza, impegno "
-            "imprevisto), va comunicato subito all'agenzia per fissare un altro appuntamento.",
-            "Bloccare le visite senza motivo valido può comportare penali e inadempimento contrattuale.",
+            "Almeno un giorno a settimana per le visite, concordato all'inizio.",
+            "Chi vive nell'immobile deve permettere l'accesso, salvo accordo diverso scritto.",
+            "Impossibilità per motivo serio: avvisare subito l'agenzia e fissare altro appuntamento.",
+            "Bloccare le visite senza motivo può comportare penali.",
         ],
     )
 
-    add_heading(doc, "5. Documenti, preliminare e consegna")
+    add_heading(doc, "5. Documenti, preliminare, consegna")
     add_bullets(
         doc,
         [
-            "Dall'accordo con l'acquirente (proposta accettata o preliminare), tutti devono mettere "
-            "a disposizione la documentazione catastale e urbanistica completa (planimetrie, APE, "
-            "eventuali regolarizzazioni).",
-            "L'agenzia può assistere nella stipula del contratto preliminare; chi firma si impegna "
-            "a rispettare quanto concordato.",
-            "Dopo il preliminare, la consegna dell'immobile all'acquirente deve avvenire entro "
-            "6 mesi, salvo diverso accordo scritto tra tutte le parti.",
+            "Dall'accordo con l'acquirente: documenti catastali e urbanistici completi.",
+            "Preliminare: chi firma si impegna a rispettare quanto concordato.",
+            "Consegna casa all'acquirente entro 6 mesi dal preliminare, salvo altro accordo scritto.",
         ],
     )
 
     add_heading(doc, "6. Chi vive in casa e non libera l'immobile")
-    add_box(
+    add_body(
         doc,
-        "Se il comproprietario residente, senza motivi previsti dal contratto, non consente "
-        "visite, liberazione o consegna nei termini concordati, risponde delle spese e dei danni "
-        "che ne derivano verso acquirenti e agenzia.",
-    )
-    add_bullets(
-        doc,
-        [
-            "Se è già stato firmato un preliminare e l'inadempimento è imputabile a chi abita in "
-            "casa, potranno applicarsi anche le conseguenze previste dal preliminare — tra cui, "
-            "ove previsto dalla legge e dal contratto con l'acquirente, la restituzione del doppio "
-            "della caparra — oltre alla provvigione dovuta all'agenzia.",
-        ],
+        "Se chi abita in casa, senza motivi previsti dal contratto, non consente visite o "
+        "consegna, risponde di spese e danni verso acquirenti e agenzia. Con preliminare già "
+        "firmato, possono valere anche le regole del preliminare (es. doppia caparra "
+        "all'acquirente, ove previsto).",
     )
 
-    add_heading(doc, "7. Cosa conviene fare prima di firmare")
+    add_heading(doc, "7. Prima di firmare")
     add_bullets(
         doc,
         [
-            "Verificare che l'elenco comproprietari e quote (Allegato A) sia corretto.",
-            "Concordare subito il giorno settimanale per le visite se qualcuno abita nell'immobile.",
-            "Comunicare all'agenzia ipoteche, pignoramenti o altri vincoli sulla propria quota, se presenti.",
-            "Chiarire dubbi in agenzia: 049.8843484 · info@righettoimmobiliare.it",
+            "Controllare Allegato A (nomi e quote).",
+            "Concordare il giorno delle visite se qualcuno abita in casa.",
+            "Segnalare ipoteche o vincoli sulla propria quota.",
+            "Dubbi? 049.8843484 · info@righettoimmobiliare.it",
         ],
     )
 
     doc.add_paragraph()
     add_body(
         doc,
-        "Dichiarazione di presa visione — Dichiaro di aver ricevuto e letto la presente scheda "
-        "informativa e di aver avuto modo di porre domande in agenzia prima della sottoscrizione "
-        "del mandato esclusivo.",
+        "Dichiarazione — Dichiaro di aver letto questa scheda e di aver potuto fare domande in "
+        "agenzia prima di firmare il mandato.",
         bold=True,
     )
     doc.add_paragraph()
@@ -206,9 +208,7 @@ def build() -> Path:
 
     add_body(
         doc,
-        f"Documento interno Righetto Immobiliare — revisione {today}. Allegato B informativo, "
-        "non sostitutivo del contratto di mediazione. Verificare con consulenza legale/notarile "
-        "prima dell'uso operativo.",
+        f"Allegato B informativo — revisione {today}. Non sostituisce il contratto di mediazione.",
         size=9,
     )
 

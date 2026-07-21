@@ -154,84 +154,91 @@ def build() -> Path:
     add_mixed(
         doc,
         [
-            ("3.1 — Corresponsabilità pro quota (11/11). ", True),
+            ("3.1 — Come si divide la provvigione (comproprietà). ", True),
             (
-                "Il compenso di mediazione è dovuto dai comproprietari pro quota, in misura "
-                "corrispondente alla rispettiva quota di proprietà risultante da atti o da elenco "
-                "allegato. Ciascun comproprietario è tenuto al pagamento per intero (11/11) della "
-                "propria quota di provvigione, calcolata sulla provvigione complessiva di cui al "
-                "presente articolo, salvo diverso accordo scritto tra le parti e l'AI.",
-                False,
-            ),
-        ],
-    )
-    add_mixed(
-        doc,
-        [
-            ("3.2 — Maturazione. ", True),
-            (
-                "Tale compenso maturerà e dovrà essere corrisposto al momento dell'avvenuta "
-                "conoscenza da parte dell'acquirente dell'accettazione della proposta di acquisto.",
-                False,
-            ),
-        ],
-    )
-    add_mixed(
-        doc,
-        [
-            ("3.3 — Perfezionamento dell'affare. ", True),
-            (
-                "Il compenso sarà in ogni caso dovuto in tutti i casi in cui la vendita si perfezioni "
-                "per effetto dell'intervento dell'AI e, quindi, a titolo esemplificativo e non "
-                "esaustivo, anche nel caso in cui la vendita si effettui dopo la scadenza dell'incarico "
-                "ma con soggetti contattati dall'AI, ovvero quando il proponente l'acquisto sostituisca "
-                "a sé altri soggetti in sede di rogito definitivo.",
-                False,
-            ),
-        ],
-    )
-    add_mixed(
-        doc,
-        [
-            ("3.4 — Accordo commerciale a prezzo di mandato e obbligo di cooperare. ", True),
-            (
-                "In presenza di pluralità di comproprietari, il perfezionamento dell'affare richiede "
-                "il consenso di tutti. Quando, per effetto dell'attività dell'AI, sia stato definito "
-                "un accordo commerciale con un potenziale acquirente — a titolo esemplificativo: "
-                "proposta d'acquisto accettata, compromesso o contratto preliminare — per un prezzo "
-                "pari o superiore a quello indicato al punto 2, i comproprietari non potranno "
-                "opporsi al perfezionamento dell'affare senza giustificato motivo. Il comproprietario "
-                "che, in tale ipotesi, si rifiuti di sottoscrivere gli atti necessari (rogito, "
-                "preliminare o altro atto concordato) resterà tenuto, per intero, al pagamento del "
-                "compenso di mediazione maturato ai sensi del presente articolo 3, nonché della "
-                "penale di cui all'art. 7, pari al 100% (11/11) della provvigione pattuita sul "
-                "prezzo di perfezionamento.",
-                False,
-            ),
-        ],
-    )
-    add_mixed(
-        doc,
-        [
-            ("Eccezione — proposta o accordo sotto prezzo dell'incarico. ", True),
-            (
-                "Se l'accordo commerciale o la proposta prevedono un prezzo inferiore a quello "
-                "indicato nel presente incarico (a titolo esemplificativo: incarico a € 300.000,00 "
-                "e proposta a importo inferiore), ciascun comproprietario potrà liberamente non "
-                "prestare il consenso, ridiscutere la proposta con l'AI e con gli altri "
-                "comproprietari, senza incorrere in penali né in obbligo di compenso ex art. 3.4.",
+                "In caso di più proprietari, la provvigione totale si ripartisce in base alla "
+                "quota di ciascuno (Allegato A o atti). Ogni comproprietario paga solo la propria "
+                "parte, per intero: non a rate e non «a metà» della propria quota.",
                 False,
             ),
         ],
     )
     add_body(
         doc,
-        "Per «giustificato motivo» si intende, a titolo esemplificativo, l'impossibilità oggettiva di "
-        "trasferire per vincoli giurisdizionali non imputabili al Venditore, ovvero cause di forza "
-        "maggiore debitamente documentate, ovvero variazioni sostanziali delle condizioni dell'immobile "
-        "emerse dopo l'accettazione e non imputabili al Venditore. Non costituiscono giustificato motivo "
-        "il mero ripensamento di un singolo comproprietario quando la proposta è conforme all'incarico "
-        "e al prezzo richiesto.",
+        "Esempio: immobile € 300.000, provvigione 3% = € 9.000 (+ IVA). Tre fratelli con quota "
+        "1/3 ciascuno → provvigione totale € 9.000: ciascuno paga € 3.000 (+ IVA sulla propria "
+        "quota). Chi firma e conclude la vendita non paga la provvigione degli altri.",
+    )
+    add_mixed(
+        doc,
+        [
+            ("3.2 — Quando matura. ", True),
+            (
+                "La provvigione matura al momento in cui l'acquirente viene a conoscenza "
+                "dell'accettazione della proposta di acquisto.",
+                False,
+            ),
+        ],
+    )
+    add_mixed(
+        doc,
+        [
+            ("3.3 — Quando è comunque dovuta. ", True),
+            (
+                "La provvigione resta dovuta se la vendita si perfeziona per effetto dell'attività "
+                "dell'AI — anche dopo la scadenza del mandato, se l'acquirente era stato contattato "
+                "dall'AI, ovvero se il proponente viene sostituito da altri al rogito.",
+                False,
+            ),
+        ],
+    )
+    add_mixed(
+        doc,
+        [
+            ("3.4 — Acquirente al prezzo del mandato: tutti devono collaborare. ", True),
+            (
+                "Se l'agenzia ha trovato un acquirente disposto a pagare almeno il prezzo indicato "
+                "al punto 2 (proposta accettata, preliminare o altro accordo), tutti i comproprietari "
+                "devono cooperare per concludere la vendita. Non basta che uno solo voglia vendere: "
+                "serve il consenso di tutti per il rogito.",
+                False,
+            ),
+        ],
+    )
+    add_mixed(
+        doc,
+        [
+            ("Chi si rifiuta senza motivo valido ", True),
+            (
+                "(senza firmare preliminare o rogito pur avendo un acquirente al prezzo di mandato) "
+                "resta personalmente obbligato a corrispondere all'AI, a titolo di penale, l'importo "
+                "pari al 100% della provvigione totale calcolata sul prezzo di quell'affare (11/11 "
+                "della provvigione pattuita). Chi invece ha collaborato e firmato non paga la quota "
+                "altrui: paga solo la propria parte di provvigione di cui al comma 3.1, se e quando "
+                "la vendita si conclude.",
+                False,
+            ),
+        ],
+    )
+    add_mixed(
+        doc,
+        [
+            ("3.5 — Prezzo proposto più basso del mandato. ", True),
+            (
+                "Se l'offerta o l'accordo prevedono un prezzo inferiore a quello del punto 2 "
+                "(es. mandato € 300.000 e offerta € 280.000), ogni comproprietario è libero di non "
+                "firmare e di ridiscutere l'offerta con l'agenzia e con gli altri. In tal caso non "
+                "scattano penali e non è dovuta provvigione solo per il fatto del rifiuto.",
+                False,
+            ),
+        ],
+    )
+    add_body(
+        doc,
+        "Motivo valido per opporsi (solo a prezzo pieno): vincoli legali oggettivi, forza maggiore "
+        "documentata, fatti gravi emersi dopo l'accettazione e non imputabili al venditore. Non è "
+        "motivo valido il semplice ripensamento («ci ho ripensato») quando l'offerta rispetta prezzo "
+        "e condizioni del mandato.",
     )
 
     add_article(doc, "4", "Durata dell'incarico")
@@ -290,28 +297,30 @@ def build() -> Path:
     add_article(doc, "7", "Clausola penale")
     add_body(
         doc,
-        "A seguito di specifica trattativa individuale, viene pattuita una penale pari al 100% "
-        "(cento per cento — 11/11) della provvigione pattuita ai sensi dell'art. 3, a carico del "
-        "Venditore e a favore dell'AI, nei seguenti casi:",
+        "A seguito di specifica trattativa individuale, il Venditore che violi gli obblighi sotto "
+        "indicati corrisponderà all'AI una penale pari al 100% della provvigione totale pattuita "
+        "(art. 3), calcolata sul prezzo dell'affare, nei casi seguenti:",
     )
     add_bullets(
         doc,
         [
-            "impedimento a far visionare l'immobile a possibili acquirenti, anche nei termini di cui "
-            "all'art. 8, comma «Visite e accesso»;",
-            "mancata conclusione dell'affare per errate o omessi indicazioni relative allo stato "
-            "dell'immobile (gravami, irregolarità urbanistiche, vincoli non dichiarati, ipoteche o "
-            "pignoramenti non comunicati ai sensi dell'art. 8);",
-            "vendita diretta dell'immobile o comunque senza l'ausilio dell'AI, in violazione "
-            "dell'esclusiva;",
-            "rifiuto al rogito o mancato perfezionamento dell'affare imputabile a uno o più "
-            "comproprietari nei casi di cui all'art. 3, comma 3.4 — fermo restando il diritto di "
-            "ogni comproprietario di non firmare ove la proposta sia per prezzo inferiore a quello "
-            "indicato al punto 2 — con obbligo del comproprietario inadempiente di corrispondere "
-            "per intero il compenso di mediazione maturato;",
-            "rifiuto del Venditore di accettare una proposta di acquisto conforme al presente "
-            "incarico e al prezzo richiesto, salvo giustificato motivo documentato.",
+            "impedire le visite all'immobile, anche oltre quanto previsto all'art. 8;",
+            "far mancare la vendita per informazioni errate o incomplete sull'immobile (gravami, "
+            "irregolarità urbanistiche, ipoteche non comunicate);",
+            "vendere l'immobile bypassando l'agenzia, in violazione dell'esclusiva;",
+            "rifiutare di firmare (preliminare o rogito) pur essendoci un acquirente al prezzo del "
+            "mandato, nei casi di cui all'art. 3.4 — con obbligo del solo comproprietario "
+            "inadempiente di pagare la penale pari all'intera provvigione; fermo il diritto di non "
+            "firmare se il prezzo è inferiore al mandato (art. 3.5);",
+            "rifiutare una proposta conforme al mandato e al prezzo richiesto, salvo motivo valido "
+            "documentato.",
         ],
+    )
+    add_body(
+        doc,
+        "La penale di cui al punto d) non grava sui comproprietari che hanno collaborato e firmato: "
+        "ciascuno di questi, in caso di vendita conclusa, paga solo la propria quota di provvigione "
+        "(art. 3.1).",
     )
     add_body(
         doc,
@@ -482,11 +491,11 @@ def build() -> Path:
         doc,
         "A mente del Codice del Consumo (D.lgs. 206/2005), le parti dichiarano che le clausole del "
         "presente contratto sono state illustrate e oggetto di specifica trattativa individuale, in "
-        "particolare quelle relative all'esclusiva, al compenso pro quota (11/11), all'accordo "
-        "commerciale e al rifiuto di firma di cui all'art. 3, al preliminare di cui all'art. 5, "
-        "alle visite del comproprietario residente, alla documentazione catastale, alla consegna "
-        "entro sei mesi, alla comunicazione di gravami e alle penali di cui all'art. 7, la cui "
-        "approvazione è espressa in piena coscienza.",
+        "particolare quelle relative all'esclusiva, alla divisione della provvigione (art. 3.1), "
+        "al rifiuto di firma a prezzo pieno (art. 3.4), all'offerta sotto prezzo (art. 3.5), "
+        "al preliminare, alle visite del residente, alla documentazione, alla consegna entro "
+        "sei mesi e alle penali di cui all'art. 7, la cui approvazione è espressa in piena "
+        "coscienza.",
     )
     add_body(
         doc,
