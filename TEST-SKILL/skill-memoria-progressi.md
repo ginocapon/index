@@ -15,7 +15,7 @@
 | Compliance repo | **100%** (0 ERR, 0 WARN) | 100% | ✅ |
 | Probe URL live | **474 URL, apex OK** | 0 issue | Aggiornato 16/07 post-DNS |
 | GEO / AI / GA4 | **PASS** | PASS | 108 blog in llms, Consent v2 |
-| Feature vs competitor | **5/8** | 6/8 Q3 | Audit giu 2026 — vedi `skill-competitor-roadmap-q3-2026.md` |
+| Feature vs competitor | **8/8 + Confronta** | 6/8 Q3 | +«Confronta immobili» 22/07 · resta alert ricerca — `skill-competitor-roadmap-q3-2026.md` |
 | GSC Prestazioni 28 gg | **271 clic, 4.22K impr, CTR 6,4%, pos. 7,7** | Monitorare | Snapshot 16/07 sera |
 | GSC indicizzazione | **94 / 330** (17/07) | Monitorare | Redirect 90 — check **22/07** |
 | Blog pubblicati | **108** | — | Mandato esclusivo 17/07 |
@@ -135,6 +135,7 @@
 | 22/07/2026 | Sprint 10/10 on-site: box AEO «In sintesi» su 37 blog → **100%** · author-bio + link autore 100% | E-E-A-T + AEO chiusi |
 | 22/07/2026 | Fix 7 cover hero rotte (immagini mancanti) + img gino-capon/linda-righetto | 0 asset locali mancanti |
 | 22/07/2026 | Registrati 8 blog in `_blogSeedArticles` (admin.html) | validate-page --all: 0 err su blog reali |
+| 22/07/2026 | **Feature Q3 «Confronta immobili»** (fino a 3, localStorage, tabella side-by-side) su `immobili.html` | RigCompare, vanilla JS, 0 dipendenze · compliance 100% |
 
 ---
 
