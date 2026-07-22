@@ -385,6 +385,37 @@
     .fav-btn:hover{background:#fff;transform:scale(1.1)}
     .fav-btn svg{width:14px;height:14px;color:var(--grigio)}
     .fav-btn.on svg{color:var(--rosso);fill:var(--rosso)}
+    /* ── CONFRONTA IMMOBILI ── */
+    .cmp-btn{position:absolute;top:2.7rem;right:.6rem;height:30px;padding:0 .6rem;background:rgba(255,255,255,.92);border:none;border-radius:15px;display:flex;align-items:center;gap:.3rem;cursor:pointer;transition:background .2s,transform .15s;z-index:3;backdrop-filter:blur(4px);font-family:'DM Sans',sans-serif;font-size:.64rem;font-weight:600;letter-spacing:.03em;color:var(--blu);text-transform:uppercase}
+    .cmp-btn svg{width:13px;height:13px}
+    .cmp-btn:hover{background:#fff;transform:scale(1.05)}
+    .cmp-btn.on{background:var(--blu);color:#fff}
+    .cmp-bar{position:fixed;left:0;right:0;bottom:0;z-index:480;background:var(--nero);color:#fff;transform:translateY(115%);transition:transform .3s;box-shadow:0 -4px 20px rgba(0,0,0,.25)}
+    .cmp-bar.open{transform:translateY(0)}
+    .cmp-bar-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:1rem;padding:.7rem 1rem}
+    .cmp-thumbs{display:flex;gap:.5rem;flex:1;overflow-x:auto;align-items:center}
+    .cmp-thumb{position:relative;flex:0 0 auto;width:54px;height:42px;border-radius:5px;overflow:hidden;background:var(--blu)}
+    .cmp-thumb img{width:100%;height:100%;object-fit:cover}
+    .cmp-thumb-x{position:absolute;top:0;right:0;width:17px;height:17px;background:rgba(0,0,0,.65);border:none;color:#fff;font-size:12px;line-height:1;cursor:pointer;border-bottom-left-radius:4px;display:flex;align-items:center;justify-content:center}
+    .cmp-bar-txt{font-size:.72rem;color:rgba(255,255,255,.78);white-space:nowrap}
+    .cmp-bar-actions{display:flex;gap:.5rem;align-items:center}
+    .cmp-go{background:var(--oro);color:var(--nero);border:none;padding:.6rem 1.1rem;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer}
+    .cmp-go:disabled{opacity:.45;cursor:not-allowed}
+    .cmp-clear{background:none;border:1px solid rgba(255,255,255,.32);color:#fff;padding:.55rem .8rem;border-radius:4px;font-size:.7rem;cursor:pointer}
+    .cmp-clear:hover{background:rgba(255,255,255,.1)}
+    .cmp-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .cmp-table{border-collapse:collapse;width:100%;font-size:.8rem}
+    .cmp-table th,.cmp-table td{border:1px solid var(--gc);padding:.55rem .65rem;text-align:left;vertical-align:top}
+    .cmp-table th{background:var(--sfondo);color:var(--blu);font-family:'DM Sans',sans-serif;font-weight:600;white-space:nowrap;position:sticky;left:0;z-index:1}
+    .cmp-table td{min-width:150px}
+    .cmp-col-img{width:100%;height:96px;object-fit:cover;border-radius:5px;background:var(--gc);display:block}
+    .cmp-col-title{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--nero);margin:.35rem 0 .15rem;line-height:1.25}
+    .cmp-best{color:var(--verde);font-weight:700}
+    .cmp-remove{background:none;border:none;color:var(--rosso);cursor:pointer;font-size:.68rem;text-decoration:underline;padding:0;margin-top:.3rem}
+    .cmp-see{display:inline-block;margin-top:.4rem;background:var(--blu);color:#fff;padding:.4rem .7rem;border-radius:3px;font-size:.7rem;text-decoration:none}
+    .cmp-toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);background:var(--nero);color:#fff;padding:.6rem 1rem;border-radius:6px;font-size:.78rem;z-index:600;opacity:0;pointer-events:none;transition:opacity .25s}
+    .cmp-toast.show{opacity:1}
+    @media(max-width:600px){.cmp-bar-txt{display:none}.cmp-go{padding:.55rem .8rem;font-size:.7rem}.cmp-btn span{display:none}.cmp-btn{padding:0;width:30px;height:30px;justify-content:center;border-radius:50%}}
 
     /* ── PAGINATION ── */
     .pagination{display:flex;align-items:center;justify-content:center;gap:.35rem;margin-top:2rem;padding-bottom:2rem}
@@ -891,6 +922,32 @@
   </div>
 </div>
 
+<!-- BARRA CONFRONTO IMMOBILI -->
+<div class="cmp-bar" id="cmp-bar" aria-live="polite">
+  <div class="cmp-bar-inner">
+    <div class="cmp-thumbs" id="cmp-thumbs"></div>
+    <span class="cmp-bar-txt" id="cmp-bar-txt"></span>
+    <div class="cmp-bar-actions">
+      <button type="button" class="cmp-clear" onclick="RigCompare.clear()">Svuota</button>
+      <button type="button" class="cmp-go" id="cmp-go" onclick="RigCompare.open()">Confronta</button>
+    </div>
+  </div>
+</div>
+
+<!-- OVERLAY CONFRONTO -->
+<div class="modal-overlay" id="cmp-overlay" onclick="if(event.target===this)RigCompare.close()">
+  <div class="modal" id="cmp-box" style="max-width:900px">
+    <div class="modal-head" style="padding:1.1rem 1.5rem;border-bottom:1px solid var(--gc);display:flex;align-items:center;justify-content:space-between">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;margin:0;color:var(--nero)">Confronta immobili</h2>
+      <button class="modal-close" onclick="RigCompare.close()" aria-label="Chiudi" style="position:static;background:var(--nero)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body" id="cmp-modal-body">
+      <!-- dinamico -->
+    </div>
+  </div>
+</div>
+<div class="cmp-toast" id="cmp-toast" role="status"></div>
+
 </main>
 
 <!-- FOOTER -->
@@ -1109,6 +1166,7 @@
         + (media ? '<div class="card-media">'+media+'</div>' : '')
         + (fotoCount > 0 ? '<div class="card-count">'+fotoCount+' foto</div>' : '')
         + '<button class="fav-btn" onclick="event.preventDefault();event.stopPropagation();toggleFav(this)" title="Salva" aria-label="Salva immobile">'+SVG_HEART+'</button>'
+        + '<button type="button" class="cmp-btn" data-slug="'+cardSlug+'" onclick="event.preventDefault();event.stopPropagation();RigCompare.toggle(this)" aria-label="Aggiungi al confronto" title="Confronta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 8l-4 4 4 4"/><path d="M17 8l4 4-4 4"/><path d="M3 12h18"/></svg><span>Confronta</span></button>'
         + '</div>'
         + '<div class="card-body">'
         + '<div class="card-price">'+prezzoFmt+'</div>'
@@ -1125,6 +1183,7 @@
     }).join('');
     RigPhotoCarousel.initAll(grid);
     filterCards();
+    if (window.RigCompare) { RigCompare.syncButtons(); RigCompare.renderBar(); }
   }
 
   // ── TABS ──
@@ -1247,6 +1306,114 @@
     btn.classList.toggle('on');
     btn.title = btn.classList.contains('on') ? 'Salvato!' : 'Salva';
   }
+
+  // ── CONFRONTA IMMOBILI (localStorage, max 3, side-by-side) ──
+  window.RigCompare = (function(){
+    const KEY = 'rig_compare', MAX = 3;
+    let toastT = null;
+    function get(){ try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch(e){ return []; } }
+    function save(a){ try { localStorage.setItem(KEY, JSON.stringify(a)); } catch(e){} }
+    function itemBySlug(slug){ return immobili.find(function(i){ return generatePropertySlug(i) === slug; }); }
+    function esc(s){ return String(s==null?'':s).replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+    function toast(msg){
+      const t = document.getElementById('cmp-toast'); if(!t) return;
+      t.textContent = msg; t.classList.add('show');
+      clearTimeout(toastT); toastT = setTimeout(function(){ t.classList.remove('show'); }, 2600);
+    }
+    function toggle(btn){
+      const slug = btn.dataset.slug; if(!slug) return;
+      let a = get();
+      if (a.indexOf(slug) > -1) { a = a.filter(function(s){ return s !== slug; }); }
+      else {
+        if (a.length >= MAX) { toast('Puoi confrontare al massimo ' + MAX + ' immobili.'); return; }
+        a.push(slug);
+        if (typeof gtag === 'function') gtag('event','compare_add',{event_category:'immobili',event_label:slug});
+      }
+      save(a); syncButtons(); renderBar();
+    }
+    function remove(slug){
+      save(get().filter(function(s){ return s !== slug; }));
+      syncButtons(); renderBar();
+      const ov = document.getElementById('cmp-overlay');
+      if (ov && ov.classList.contains('open')) { if (get().length >= 2) open(); else close(); }
+    }
+    function clear(){ save([]); syncButtons(); renderBar(); close(); }
+    function syncButtons(){
+      const a = get();
+      document.querySelectorAll('.cmp-btn').forEach(function(b){ b.classList.toggle('on', a.indexOf(b.dataset.slug) > -1); });
+    }
+    function renderBar(){
+      const bar = document.getElementById('cmp-bar'); if(!bar) return;
+      const items = get().map(itemBySlug).filter(Boolean);
+      const thumbs = document.getElementById('cmp-thumbs');
+      const txt = document.getElementById('cmp-bar-txt');
+      const go = document.getElementById('cmp-go');
+      if (!items.length) { bar.classList.remove('open'); return; }
+      bar.classList.add('open');
+      thumbs.innerHTML = items.map(function(i){
+        const src = (i.foto && i.foto[0]) || i.fotoPrincipale || '';
+        const slug = generatePropertySlug(i);
+        return '<div class="cmp-thumb">' + (src ? '<img src="'+esc(src)+'" alt="'+esc(i.titolo)+'" loading="lazy">' : '') +
+          '<button class="cmp-thumb-x" onclick="RigCompare.remove(\''+slug+'\')" aria-label="Rimuovi dal confronto">&times;</button></div>';
+      }).join('');
+      txt.textContent = items.length + ' di ' + MAX + ' selezionati';
+      go.disabled = items.length < 2;
+      go.textContent = 'Confronta' + (items.length >= 2 ? ' (' + items.length + ')' : '');
+    }
+    function open(){
+      const items = get().map(itemBySlug).filter(Boolean);
+      if (items.length < 2) { toast('Seleziona almeno 2 immobili da confrontare.'); return; }
+      if (typeof gtag === 'function') gtag('event','compare_open',{event_category:'immobili',event_label:String(items.length)});
+      const prices = items.map(function(i){ return Number(i.prezzo)||0; }).filter(function(n){ return n>0; });
+      const minPrice = prices.length ? Math.min.apply(null, prices) : null;
+      const eurmq = items.map(function(i){ return (i.mq>0 && i.prezzo>0) ? Math.round(i.prezzo/i.mq) : null; });
+      const minEurMq = Math.min.apply(null, eurmq.filter(function(n){ return n!=null; }).concat([Infinity]));
+      function td(content){ return '<td>' + content + '</td>'; }
+      function opSuffix(i){ return (i.op && i.op.indexOf('affitto')===0) ? '<small style="color:var(--grigio)">/mese</small>' : ''; }
+      function extras(i){
+        const e = [];
+        if (i.garage) e.push('Garage'); if (i.giardino) e.push('Giardino'); if (i.piscina) e.push('Piscina');
+        if (i.mansarda) e.push('Mansarda'); if (i.taverna) e.push('Taverna');
+        return e.length ? e.join(', ') : '&mdash;';
+      }
+      const rows = [
+        { l:'Prezzo', r:function(i){ var p=Number(i.prezzo)||0; var b=(minPrice!=null && p===minPrice); return '<span class="'+(b?'cmp-best':'')+'">&euro; '+p.toLocaleString('it-IT')+' '+opSuffix(i)+'</span>'; } },
+        { l:'Prezzo al m&sup2;', r:function(i,idx){ var v=eurmq[idx]; if(v==null) return '&mdash;'; var b=(v===minEurMq); return '<span class="'+(b?'cmp-best':'')+'">&euro; '+v.toLocaleString('it-IT')+'/m&sup2;</span>'; } },
+        { l:'Superficie', r:function(i){ return (i.mq||'&mdash;')+' m&sup2;'; } },
+        { l:'Camere', r:function(i){ return i.camere||'&mdash;'; } },
+        { l:'Bagni', r:function(i){ return i.bagni||'&mdash;'; } },
+        { l:'Comune', r:function(i){ return esc(i.comune||'Padova'); } },
+        { l:'Tipologia', r:function(i){ return esc(i.tipo||i.tipologia||'&mdash;'); } },
+        { l:'Contratto', r:function(i){ return (i.op && i.op.indexOf('affitto')===0)?'Affitto':(i.op==='asta'?'Asta':'Vendita'); } },
+        { l:'Classe energetica', r:function(i){ if(!i.ce) return '&mdash;'; var c=CE_COLORS[i.ce]||{bg:'#999',tx:'#fff'}; return '<span style="background:'+c.bg+';color:'+c.tx+';padding:.1rem .4rem;border-radius:3px;font-weight:600;font-size:.72rem">'+esc(i.ce)+'</span>'; } },
+        { l:'Anno', r:function(i){ return i.anno||'&mdash;'; } },
+        { l:'Extra', r:function(i){ return extras(i); } }
+      ];
+      let html = '<div class="cmp-table-wrap"><table class="cmp-table"><tbody>';
+      // riga intestazione: foto + titolo + azioni
+      html += '<tr><th>Immobile</th>' + items.map(function(i){
+        const src = (i.foto && i.foto[0]) || i.fotoPrincipale || '';
+        const slug = generatePropertySlug(i);
+        return '<td>' + (src ? '<img class="cmp-col-img" src="'+esc(src)+'" alt="'+esc(i.titolo)+'" loading="lazy">' : '<div class="cmp-col-img"></div>') +
+          '<div class="cmp-col-title">'+esc(i.titolo)+'</div>' +
+          (i.rif ? '<div style="font-size:.7rem;color:var(--grigio)">Rif. '+esc(i.rif)+'</div>' : '') +
+          '<a class="cmp-see" href="immobile?s='+encodeURIComponent(slug)+'">Vedi scheda</a>' +
+          '<button class="cmp-remove" onclick="RigCompare.remove(\''+slug+'\')">Rimuovi</button>' +
+          '</td>';
+      }).join('') + '</tr>';
+      rows.forEach(function(row){
+        html += '<tr><th>'+row.l+'</th>' + items.map(function(i,idx){ return td(row.r(i,idx)); }).join('') + '</tr>';
+      });
+      html += '</tbody></table></div>';
+      html += '<p style="font-size:.72rem;color:var(--grigio);margin-top:.9rem"><span class="cmp-best">In verde</span> il valore migliore (prezzo e prezzo al m&sup2; pi&ugrave; bassi). Mediazione da concordare in sede.</p>';
+      document.getElementById('cmp-modal-body').innerHTML = html;
+      document.getElementById('cmp-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close(){ const ov=document.getElementById('cmp-overlay'); if(ov) ov.classList.remove('open'); document.body.style.overflow=''; }
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+    return { toggle:toggle, remove:remove, clear:clear, open:open, close:close, syncButtons:syncButtons, renderBar:renderBar, get:get };
+  })();
 
   function toggleVtFilter(btn) {
     filterVtOnly = !filterVtOnly;

@@ -159,6 +159,7 @@ bash scripts/mini-seo-check.sh && bash scripts/audit-skill.sh
 | **Alert** | OK | Iscrizione alert su `immobili.html` → `newsletter_subscribers` (`interesse: alert-immobili`) |
 | **Tour** | OK | Filtro «Solo tour 360°» su catalogo + tour su scheda immobile + **homepage `#vtGridHome`**: ultimi 4 immobili **attivi** con tour da Supabase (`loadVisiteVirtualiHome`) |
 | **Live** | OK | CTA «Visita live» su card catalogo + scheda (`visitaLiveGuidata` / WhatsApp) |
+| **Confronta** | OK | «Confronta immobili» fino a 3 su `immobili.html` (`RigCompare`, localStorage `rig_compare`, tabella side-by-side, zero dipendenze) |
 
 Verifica rapida post-modifica: homepage play video, **homepage 4 card tour = solo annunci attivi con scene**, `immobili?vt=1` filtra tour, alert iscrizione, pulsante live su card.
 
