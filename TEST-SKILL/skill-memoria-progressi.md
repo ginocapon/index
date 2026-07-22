@@ -8,20 +8,18 @@
 
 ---
 
-## Stato sintetico (ultimo aggiornamento: 17 luglio 2026, mattina)
+## Stato sintetico (ultimo aggiornamento: 22 luglio 2026)
 
 | KPI | Valore | Target 95% | Note |
 |-----|--------|------------|------|
 | Compliance repo | **100%** (0 ERR, 0 WARN) | 100% | ✅ |
 | Probe URL live | **474 URL, apex OK** | 0 issue | Aggiornato 16/07 post-DNS |
 | GEO / AI / GA4 | **PASS** | PASS | 108 blog in llms, Consent v2 |
-| Link interni cluster Limena | **5 pagine sorgente** | Fatto | `internal-links-limena-2026.json` |
-| GSC Prestazioni 28 gg | **271 clic, 4.22K impr, CTR 6,4%, pos. 7,7** | Monitorare | Snapshot 16/07 sera (screenshot) |
-| GSC brand query | **154 clic** (6 query) | Crescita | vs 43 sett. precedente |
-| affitti limena | **3 clic / 39 impr** | Crescita | Primi clic non-brand Limena |
-| GSC indicizzazione | **7/166** (snapshot 15/07) | Monitorare | Verificare post-DNS ~22/07 |
-| Content health (cron) | **85%** | 95% | 14 avvisi SKIMM = cluster |
-| Score complessivo stimato | **~90%** | **95%** | +A11y fix CTA 16/07 |
+| Feature vs competitor | **5/8** | 6/8 Q3 | Audit giu 2026 — vedi `skill-competitor-roadmap-q3-2026.md` |
+| GSC Prestazioni 28 gg | **271 clic, 4.22K impr, CTR 6,4%, pos. 7,7** | Monitorare | Snapshot 16/07 sera |
+| GSC indicizzazione | **94 / 330** (17/07) | Monitorare | Redirect 90 — check **22/07** |
+| Blog pubblicati | **108** | — | Mandato esclusivo 17/07 |
+| Score complessivo stimato | **~93%** | **95%** | AEO batch + bio autore CHIUSI (22/07); gap residuo: tool alert/confronto/live Q3 (off-code) |
 
 ---
 
@@ -29,12 +27,12 @@
 
 ### Cosa fare — ordine di priorità
 
-0. **Coda editoriale** → `data/editorial-queue.json` + `TEST-SKILL/skill-editorial-queue.md` (agente pubblica prossimo `scheduled` senza chiedere tema)
+0. **Trigger `"SKILL"`** (venerdì) → piano giornata: `skill-competitor-roadmap-q3-2026.md` §8 + `/venerdi`
+0b. **Coda editoriale** → `data/editorial-queue.json` + `skill-editorial-queue.md`
 1. **SOSTENERE** prima di pubblicare nuovo blog → `pages_refresh_priority` in `gsc-keywords-priority.json`
-2. **1 modifica concreta/settimana** nel repo (venerdì) — mai solo teoria
-3. **Compliance 0 ERR** prima di nuovi contenuti massivi
-4. **Query non-brand Limena** → link interni fatti 14/07; ora **misurare** in GSC Prestazioni
-5. **GSC manuale 15 min/venerdì** — Prestazioni 28 gg, sitemap `sitemap.xml` sola, Ispezione URL max 10/giorno
+2. **1 modifica concreta/settimana** nel repo — mai solo teoria
+3. **Roadmap Q3** → max 1 feature engagement/settimana (`data/competitor-roadmap-q3-2026.json`)
+4. **GSC manuale 15 min/venerdì** — Prestazioni, Indicizzazione, solo `sitemap.xml`
 
 ### Cosa NON fare (errori già commessi / tempo perso)
 
@@ -133,20 +131,36 @@
 | 16/07/2026 | Fix WCAG CTA homepage · probe apex 474 URL · GSC JSON da screenshot sera | Compliance 100% |
 | 17/07/2026 | Cron venerdì email OK · GSC 271 clic / brand 154 · blog mandato esclusivo | 108 blog, kw conversione |
 | 17/07/2026 | Coda editoriale automatica: editorial-queue.json + skill-editorial-queue.md | 4 blog schedulati lug-ago |
+| 18/07/2026 | Audit competitor IT + roadmap Q3 in skill-competitor-roadmap-q3-2026.md | Trigger `"SKILL"` venerdì · kit autobiografico push |
+| 22/07/2026 | Sprint 10/10 on-site: box AEO «In sintesi» su 37 blog → **100%** · author-bio + link autore 100% | E-E-A-T + AEO chiusi |
+| 22/07/2026 | Fix 7 cover hero rotte (immagini mancanti) + img gino-capon/linda-righetto | 0 asset locali mancanti |
+| 22/07/2026 | Registrati 8 blog in `_blogSeedArticles` (admin.html) | validate-page --all: 0 err su blog reali |
 
 ---
 
-Dopo fix DNS apex (15/07): **controllare in GSC** se il bucket **«pagina con reindirizzamento»** (era ~74 nel filtro sitemap) è sceso. Aggiornare `data/gsc-indexing-weekly.json` → il PDF del venerdì 18/07 e 25/07 mostrerà il trend a barre.
+## Roadmap Q3 competitor (riferimento rapido)
+
+Vedi **`TEST-SKILL/skill-competitor-roadmap-q3-2026.md`** + `data/competitor-roadmap-q3-2026.json`.
+
+| Priorità | Feature | Stato |
+|----------|---------|-------|
+| 1 | Alert ricerca immobili | ☐ Ago |
+| 2 | Confronta 3 immobili | ☐ Ago |
+| 3 | Costo totale acquisto scheda | ☐ Set |
+| 4 | Indice €/mq OMI trimestrale | ☐ Set |
+| 5 | Retrofit box AEO blog batch | ☐ |
+| 6 | Bio autore batch Gino/Linda | ☐ |
+| ✅ | Visita live immobile | Fatto |
 
 ---
 
 ## Prossimi passi (per l'agente)
 
-1. **Utente GSC:** aggiorna Indicizzazione post-venerdì 17/07 + Convalida 16
-2. **22/07:** verifica calo «reindirizzamento» GSC post-fix apex
-3. **Blog S2:** agenzia immobiliare Limena — **in coda** eq-002 24/07 (`editorial-queue.json`)
-4. **Discovery:** quando scheduled < 3 → web + GSC → nuove proposte in coda
-5. **PSI** su `/` e 1 blog — annotare LCP
+1. **22/07:** verifica calo «reindirizzamento» GSC (target < 70 da 90)
+2. **24/07:** blog eq-002 agenzia Limena se utente «pubblica blog»
+3. **25/07:** utente scrive **`"SKILL"`** → piano venerdì §8 skill-competitor-roadmap
+4. **Discovery:** coda scheduled < 3 → proposte GSC + web
+5. **PSI** homepage — annotare LCP
 
 ---
 
