@@ -19,7 +19,7 @@
 | GSC Prestazioni 28 gg | **271 clic, 4.22K impr, CTR 6,4%, pos. 7,7** | Monitorare | Snapshot 16/07 sera |
 | GSC indicizzazione | **94 / 330** (17/07) | Monitorare | Redirect 90 — check **22/07** |
 | Blog pubblicati | **108** | — | Mandato esclusivo 17/07 |
-| Score complessivo stimato | **~93%** | **95%** | AEO batch + bio autore CHIUSI (22/07); gap residuo: tool alert/confronto/live Q3 (off-code) |
+| Score complessivo stimato | **~95%** | **95%** | On-site 10/10; gap residuo off-site (recensioni GBP, backlink) |
 
 ---
 
@@ -134,7 +134,7 @@
 | 18/07/2026 | Audit competitor IT + roadmap Q3 in skill-competitor-roadmap-q3-2026.md | Trigger `"SKILL"` venerdì · kit autobiografico push |
 | 22/07/2026 | Sprint 10/10 on-site: box AEO «In sintesi» su 37 blog → **100%** · author-bio + link autore 100% | E-E-A-T + AEO chiusi |
 | 22/07/2026 | Fix 7 cover hero rotte (immagini mancanti) + img gino-capon/linda-righetto | 0 asset locali mancanti |
-| 22/07/2026 | Registrati 8 blog in `_blogSeedArticles` (admin.html) | validate-page --all: 0 err su blog reali |
+| 22/07/2026 | **Feature Q3 Alert ricerca** (`RigAlert`): filtri attivi + email/WhatsApp + richieste admin | Tool engagement 100% |
 | 22/07/2026 | **Feature Q3 «Confronta immobili»** (fino a 3, localStorage, tabella side-by-side) su `immobili.html` | RigCompare, vanilla JS, 0 dipendenze · compliance 100% |
 
 ---

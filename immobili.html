@@ -323,11 +323,20 @@
     .alert-immobili-inner{display:flex;flex-direction:column;gap:.7rem}
     .alert-immobili-text strong{display:block;font-family:'Cormorant Garamond',serif;font-size:1.08rem;color:var(--nero);margin-bottom:.15rem}
     .alert-immobili-text span{font-size:.78rem;color:var(--grigio)}
+    .alert-criteria{background:#fff;border:1px dashed var(--gc);border-radius:6px;padding:.55rem .75rem;font-size:.74rem;color:var(--blu);line-height:1.5}
+    .alert-criteria em{font-style:normal;color:var(--grigio)}
     .alert-immobili-form{display:flex;flex-wrap:wrap;gap:.5rem;align-items:stretch}
     .alert-immobili-form input,.alert-immobili-form select{flex:1;min-width:130px;padding:.55rem .7rem;border:1px solid var(--gc);border-radius:4px;font-family:'Montserrat',sans-serif;font-size:.8rem;background:#fff}
-    .alert-immobili-form button{padding:.55rem 1rem;background:var(--blu);color:#fff;border:none;border-radius:4px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
-    .alert-immobili-form button:hover{opacity:.92}
+    .alert-channels{display:flex;flex-wrap:wrap;gap:.65rem;align-items:center;font-size:.76rem;color:var(--grigio)}
+    .alert-channels label{display:flex;align-items:center;gap:.35rem;cursor:pointer}
+    .alert-channels input{width:auto;min-width:auto;flex:none}
+    .alert-immobili-actions{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+    .alert-immobili-form button,.alert-immobili-actions button{padding:.55rem 1rem;background:var(--blu);color:#fff;border:none;border-radius:4px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+    .alert-immobili-form button:hover,.alert-immobili-actions button:hover{opacity:.92}
+    .alert-sync-btn{background:#fff!important;color:var(--blu)!important;border:1px solid var(--blu)!important}
     .alert-immobili-msg{font-size:.78rem;margin:0}
+    .alert-immobili.active{border-color:var(--verde);background:linear-gradient(135deg,#eef8f1 0%,#f7f5f1 100%)}
+    @media(max-width:600px){.alert-channels{width:100%}}
     .atag{display:flex;align-items:center;gap:.3rem;padding:.22rem .55rem;background:var(--nero);color:#fff;border-radius:2px;font-size:.7rem}
     .atag button{background:none;border:none;color:rgba(255,255,255,.6);cursor:pointer;font-size:.8rem;line-height:1;padding:0;display:flex;align-items:center}
     .atag button:hover{color:#fff}
@@ -835,32 +844,22 @@
     <div class="alert-immobili" id="alert-immobili">
       <div class="alert-immobili-inner">
         <div class="alert-immobili-text">
-          <strong>Alert nuovi immobili</strong>
-          <span>Ricevi un'email quando pubblichiamo annunci che corrispondono ai tuoi criteri — gratis, nessun impegno.</span>
+          <strong>Salva ricerca — Alert email e WhatsApp</strong>
+          <span>Ti avvisiamo quando pubblichiamo annunci che corrispondono ai filtri attivi. Gratis, revocabile in qualsiasi momento.</span>
         </div>
+        <div class="alert-criteria" id="alert-criteria"><em>Imposta i filtri sopra e clicca «Usa ricerca attuale» per vedere i criteri salvati.</em></div>
         <div class="alert-immobili-form">
-          <input type="email" id="alert-email" placeholder="La tua email" autocomplete="email" aria-label="Email per alert immobili">
-          <select id="alert-zona" aria-label="Zona per alert immobili">
-            <option value="">Tutta la provincia</option>
-            <option value="padova">Padova</option>
-            <option value="padova centro">Padova Centro</option>
-            <option value="Albignasego">Albignasego</option>
-            <option value="Abano Terme">Abano Terme</option>
-            <option value="Monselice">Monselice</option>
-            <option value="Este">Este</option>
-            <option value="Camposampiero">Camposampiero</option>
-            <option value="Vigonza">Vigonza</option>
-            <option value="Selvazzano Dentro">Selvazzano Dentro</option>
-          </select>
-          <select id="alert-tipo" aria-label="Tipologia per alert immobili">
-            <option value="">Tutte le tipologie</option>
-            <option value="appartamento">Appartamento</option>
-            <option value="villa">Villa</option>
-            <option value="villetta">Villetta</option>
-            <option value="attico">Attico / Mansarda</option>
-            <option value="locale">Locale commerciale</option>
-          </select>
-          <button type="button" onclick="iscriviAlertImmobili()">Attiva alert</button>
+          <input type="email" id="alert-email" placeholder="Email (opzionale)" autocomplete="email" aria-label="Email per alert immobili">
+          <input type="tel" id="alert-tel" placeholder="WhatsApp / telefono (opzionale)" autocomplete="tel" aria-label="Telefono per alert WhatsApp">
+        </div>
+        <div class="alert-channels" role="group" aria-label="Canali di notifica">
+          <label><input type="checkbox" id="alert-canale-email" checked> Email</label>
+          <label><input type="checkbox" id="alert-canale-wa" checked> WhatsApp</label>
+          <label><input type="checkbox" id="alert-gdpr" required> Ho letto l'<a href="privacy" target="_blank" rel="noopener">informativa privacy</a> *</label>
+        </div>
+        <div class="alert-immobili-actions">
+          <button type="button" class="alert-sync-btn" onclick="RigAlert.syncFromFilters()">Usa ricerca attuale</button>
+          <button type="button" onclick="RigAlert.subscribe()">Attiva alert</button>
         </div>
         <p id="alert-msg" class="alert-immobili-msg" hidden></p>
       </div>
@@ -872,6 +871,7 @@
     <!-- FILTRI RAPIDI -->
     <div class="quick-filters" id="quick-filters" role="group" aria-label="Filtri rapidi">
       <button type="button" class="qf-chip" id="qf-vt" onclick="toggleVtFilter(this)">Solo tour 360°</button>
+      <button type="button" class="qf-chip" onclick="RigAlert.syncFromFilters()">Salva alert ricerca</button>
     </div>
 
     <!-- GRID IMMOBILI (caricato dinamicamente da Supabase) -->
@@ -1439,41 +1439,191 @@
     window.open('https://wa.me/393497365930?text=' + encodeURIComponent(testo), '_blank', 'noopener,noreferrer');
   }
 
-  async function iscriviAlertImmobili() {
-    const email = (document.getElementById('alert-email').value || '').trim();
-    const zona = document.getElementById('alert-zona').value || '';
-    const tipo = document.getElementById('alert-tipo').value || '';
-    const msgEl = document.getElementById('alert-msg');
-    if (!email || !email.includes('@')) {
-      msgEl.hidden = false;
-      msgEl.style.color = 'var(--rosso)';
-      msgEl.textContent = 'Inserisci un\'email valida.';
-      return;
+  async function iscriviAlertImmobili() { if (window.RigAlert) RigAlert.subscribe(); }
+
+  // ── ALERT RICERCA (email + WhatsApp, criteri filtri attivi) ──
+  window.RigAlert = (function(){
+    const LS_KEY = 'rig_alert_active';
+    const OP_LABELS = { vendita:'Vendita', affitto:'Affitto', aste:'Aste' };
+    const TIPO_LABELS = { appartamento:'Appartamento', villa:'Villa', villetta:'Villetta', bifamiliare:'Bi-familiare', attico:'Attico/Mansarda', bilocale:'Bilocale', trilocale:'Trilocale', monolocale:'Monolocale', ufficio:'Ufficio', negozio:'Negozio', locale:'Locale commerciale', capannone:'Capannone', terreno:'Terreno', garage:'Garage/Box' };
+
+    function val(id){ var el=document.getElementById(id); return el ? (el.value||'').trim() : ''; }
+    function selText(id){
+      var el=document.getElementById(id); if(!el||!el.value) return '';
+      var o=el.options[el.selectedIndex]; return o ? o.textContent.trim() : el.value;
     }
-    const interesse = 'alert-immobili' + (zona ? '|zona:' + zona : '') + (tipo ? '|tipo:' + tipo : '') + '|op:' + currentOp;
-    try {
-      if (sb) {
-        await sb.from('newsletter_subscribers').upsert([{
-          email: email,
-          fonte: 'immobili-catalogo',
-          interesse: interesse,
-          attivo: true,
-          created_at: new Date().toISOString()
-        }], { onConflict: 'email' });
-      }
-      msgEl.hidden = false;
-      msgEl.style.color = 'var(--verde)';
-      msgEl.textContent = 'Alert attivato! Ti avviseremo ai nuovi annunci.';
-      document.getElementById('alert-email').value = '';
-      if (typeof gtag === 'function') {
-        gtag('event', 'alert_immobili', { event_category: 'immobili', event_label: zona || 'tutta-provincia' });
-      }
-    } catch (e) {
-      msgEl.hidden = false;
-      msgEl.style.color = 'var(--rosso)';
-      msgEl.textContent = 'Errore. Riprova più tardi o contattaci.';
+    function normTel(t){
+      t=(t||'').replace(/\s+/g,'').replace(/^(\+39|0039)/,'');
+      return t.replace(/\D/g,'');
     }
-  }
+
+    function collectCriteria(){
+      return {
+        op: currentOp || 'vendita',
+        zona: val('zona-input'),
+        tipo: val('f-tipo'),
+        prezzoMax: val('f-prezzo'),
+        camereMin: val('f-camere'),
+        mqMin: val('f-mq'),
+        bagniMin: val('f-bagni'),
+        garage: val('f-garage'),
+        giardino: val('f-giardino'),
+        anno: val('f-anno'),
+        stato: val('f-stato'),
+        extra: val('f-extra'),
+        vt: filterVtOnly ? '1' : ''
+      };
+    }
+
+    function criteriaLabels(c){
+      var parts = [OP_LABELS[c.op] || c.op];
+      if (c.zona) parts.push(selText('zona-input') || c.zona);
+      if (c.tipo) parts.push(TIPO_LABELS[c.tipo] || c.tipo);
+      if (c.prezzoMax) parts.push('max ' + selText('f-prezzo'));
+      if (c.camereMin) parts.push(c.camereMin + '+ camere');
+      if (c.mqMin) parts.push(c.mqMin + '+ mq');
+      if (c.bagniMin) parts.push(c.bagniMin + '+ bagni');
+      if (c.garage === '1') parts.push('con garage');
+      if (c.giardino === '1') parts.push('con giardino');
+      if (c.anno === 'new') parts.push('costruito dopo il 2000');
+      if (c.anno === '90s') parts.push('1980–2000');
+      if (c.anno === 'old') parts.push('prima del 1980');
+      if (c.stato) parts.push('stato: ' + c.stato);
+      if (c.extra === 'piscina') parts.push('con piscina');
+      if (c.extra === 'vista') parts.push('vista aperta');
+      if (c.extra === 'mansarda') parts.push('mansarda');
+      if (c.extra === 'taverna') parts.push('taverna');
+      if (c.vt === '1') parts.push('solo tour 360°');
+      if (parts.length === 1 && c.op === 'vendita') parts.push('tutta la provincia');
+      return parts;
+    }
+
+    function criteriaToInteresse(c, canali){
+      var s = 'alert-immobili|op:' + c.op;
+      if (c.zona) s += '|zona:' + c.zona;
+      if (c.tipo) s += '|tipo:' + c.tipo;
+      if (c.prezzoMax) s += '|prezzoMax:' + c.prezzoMax;
+      if (c.camereMin) s += '|camereMin:' + c.camereMin;
+      if (c.mqMin) s += '|mqMin:' + c.mqMin;
+      if (c.bagniMin) s += '|bagniMin:' + c.bagniMin;
+      if (c.garage) s += '|garage:1';
+      if (c.giardino) s += '|giardino:1';
+      if (c.anno) s += '|anno:' + c.anno;
+      if (c.stato) s += '|stato:' + c.stato;
+      if (c.extra) s += '|extra:' + c.extra;
+      if (c.vt) s += '|vt:1';
+      s += '|canale:' + canali.join(',');
+      return s;
+    }
+
+    function renderSummary(c){
+      var el = document.getElementById('alert-criteria'); if (!el) return;
+      var labels = criteriaLabels(c);
+      el.innerHTML = '<strong>Criteri alert:</strong> ' + labels.join(' · ');
+    }
+
+    function syncFromFilters(){
+      var c = collectCriteria();
+      renderSummary(c);
+      try { localStorage.setItem(LS_KEY + '_criteria', JSON.stringify(c)); } catch(e){}
+      var box = document.getElementById('alert-immobili');
+      if (box) box.scrollIntoView({ behavior:'smooth', block:'nearest' });
+    }
+
+    function showMsg(text, ok){
+      var msgEl = document.getElementById('alert-msg');
+      if (!msgEl) return;
+      msgEl.hidden = false;
+      msgEl.style.color = ok ? 'var(--verde)' : 'var(--rosso)';
+      msgEl.textContent = text;
+    }
+
+    async function subscribe(){
+      var email = val('alert-email');
+      var telRaw = val('alert-tel');
+      var tel = normTel(telRaw);
+      var wantEmail = document.getElementById('alert-canale-email') && document.getElementById('alert-canale-email').checked;
+      var wantWa = document.getElementById('alert-canale-wa') && document.getElementById('alert-canale-wa').checked;
+      var gdpr = document.getElementById('alert-gdpr') && document.getElementById('alert-gdpr').checked;
+      if (!gdpr) { showMsg('Accetta l\'informativa privacy per attivare l\'alert.', false); return; }
+      if (!email && !tel) { showMsg('Inserisci almeno email o numero WhatsApp/telefono.', false); return; }
+      if (email && !email.includes('@')) { showMsg('Inserisci un\'email valida.', false); return; }
+      if (tel && tel.length < 9) { showMsg('Inserisci un numero di telefono valido.', false); return; }
+      if (wantEmail && !email) { showMsg('Per le notifiche email inserisci un indirizzo.', false); return; }
+      if (wantWa && !tel) { showMsg('Per WhatsApp inserisci un numero di telefono.', false); return; }
+      if (!wantEmail && !wantWa) { showMsg('Seleziona almeno un canale (Email o WhatsApp).', false); return; }
+
+      var c = collectCriteria();
+      renderSummary(c);
+      var canali = [];
+      if (wantEmail && email) canali.push('email');
+      if (wantWa && tel) canali.push('whatsapp');
+      var interesse = criteriaToInteresse(c, canali);
+      var labels = criteriaLabels(c).join(' · ');
+      var msgAdmin = '[ALERT RICERCA] ' + labels + ' | Canali: ' + canali.join(' + ');
+
+      try {
+        if (sb) {
+          await sb.from('richieste').insert([{
+            nome: email ? email.split('@')[0] : 'Alert WhatsApp',
+            email: email || null,
+            telefono: tel ? ('+39' + tel) : null,
+            messaggio: msgAdmin,
+            provenienza: 'immobili-alert-ricerca',
+            newsletter: wantEmail,
+            letto: false
+          }]);
+          if (email) {
+            await sb.from('newsletter_subscribers').upsert([{
+              email: email,
+              telefono: tel ? ('+39' + tel) : null,
+              tipo_immobile: c.tipo || null,
+              zona: c.zona || null,
+              budget: c.prezzoMax || null,
+              interesse: interesse,
+              fonte: 'immobili-catalogo',
+              provenienza: 'immobili-alert-ricerca',
+              attivo: true,
+              created_at: new Date().toISOString()
+            }], { onConflict: 'email' });
+          }
+        }
+        try {
+          localStorage.setItem(LS_KEY, JSON.stringify({ at: Date.now(), criteria: c, canali: canali, email: email||'', tel: tel||'' }));
+        } catch(e){}
+        var box = document.getElementById('alert-immobili');
+        if (box) box.classList.add('active');
+        showMsg('Alert attivato! Ti avviseremo su ' + canali.join(' e ') + ' quando usciranno annunci compatibili.', true);
+        document.getElementById('alert-email').value = '';
+        document.getElementById('alert-tel').value = '';
+        if (typeof gtag === 'function') {
+          gtag('event', 'alert_immobili', { event_category: 'immobili', event_label: (c.zona || 'provincia') + '|' + canali.join('+') });
+        }
+        if (wantWa && tel) {
+          var waText = 'Ciao Righetto, ho attivato un ALERT immobili con questi criteri:\n• ' + labels + '\n• Canali: ' + canali.join(' + ') + '\n\nConfermo il mio numero per WhatsApp: +39' + tel;
+          setTimeout(function(){
+            window.open('https://wa.me/393497365930?text=' + encodeURIComponent(waText), '_blank', 'noopener,noreferrer');
+          }, 600);
+        }
+      } catch (e) {
+        showMsg('Errore. Riprova più tardi o contattaci al 049.8843484.', false);
+      }
+    }
+
+    function init(){
+      syncFromFilters();
+      try {
+        var saved = JSON.parse(localStorage.getItem(LS_KEY) || 'null');
+        if (saved && saved.at) {
+          var box = document.getElementById('alert-immobili');
+          if (box) box.classList.add('active');
+          showMsg('Hai già un alert attivo su questa ricerca. Puoi aggiornarlo con nuovi criteri.', true);
+        }
+      } catch(e){}
+    }
+
+    return { syncFromFilters: syncFromFilters, subscribe: subscribe, renderSummary: renderSummary, init: init, collectCriteria: collectCriteria };
+  })();
 
   // ── FILTER ──
   /** Allinea tipologia DB (slug) e varianti testuali; Villa vs Villetta vs Bi-familiare. */
@@ -1575,6 +1725,7 @@
 
     document.getElementById('res-count').textContent = visible;
     document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+    if (window.RigAlert) RigAlert.renderSummary(RigAlert.collectCriteria());
   }
 
   // ── SORT ──
@@ -1775,6 +1926,7 @@
   waitSBThen(function() {
     applyUrlParams();
     loadImmobili();
+    if (window.RigAlert) RigAlert.init();
   });
 </script>
 <script src="js/nav-mobile.js?v=3" defer></script>

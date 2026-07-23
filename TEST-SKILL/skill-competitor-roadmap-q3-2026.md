@@ -52,7 +52,7 @@ Fonte: analisi siti competitor + repo Righetto.
 | CWV / mobile | 80% | ✅ fix WCAG CTA 16/07 |
 | Social OG share-immobile | 95% | ✅ |
 | Recensioni GBP vs competitor | 55% | ☐ off-site 127 vs 200+ |
-| Tool engagement (alert, confronto, live) | 70% | ⚠️ Live ✅ · Confronta ✅ (22/07) · alert ☐ |
+| Tool engagement (alert, confronto, live) | **100%** | ✅ Live · Confronta · Alert ricerca (22/07) |
 
 ---
 
@@ -73,7 +73,7 @@ Fonte: analisi siti competitor + repo Righetto.
 |-----|----------|-------|
 | Bio autore completa su tutti i blog + arricchire `/gino-capon`, `/linda-righetto` | Alta | ☐ |
 | ~25 blog batch senza box «In sintesi» AEO | Media | ☐ |
-| Zero alert salvataggio ricerca → meno ritorni | Alta Q3 | ☐ |
+| Zero alert salvataggio ricerca → meno ritorni | Alta Q3 | ✅ 22/07 (`RigAlert` email + WhatsApp + filtri) |
 | Nessun confronto fino a 3 immobili | Alta Q3 | ✅ 22/07 (RigCompare su immobili.html) |
 | Recensioni 127 vs competitor Padova 200+ | Off-site | ☐ |
 | Indice Righetto €/mq trimestrale (OMI) | Media Q3 | ☐ |
@@ -85,7 +85,7 @@ Fonte: analisi siti competitor + repo Righetto.
 
 | # | Feature | Impatto | Sforzo | Target |
 |---|---------|---------|--------|--------|
-| 1 | Alert WhatsApp/email su criteri ricerca | 9/10 | 7/10 | Ago 2026 |
+| 1 | Alert WhatsApp/email su criteri ricerca | 9/10 | 7/10 | ✅ FATTO 22/07 |
 | 2 | Confronta fino a 3 immobili (localStorage) | 8/10 | 6/10 | ✅ FATTO 22/07 |
 | 3 | Calcolo costo totale acquisto in scheda | 7/10 | 6/10 | Set 2026 |
 | 4 | Indice Righetto Padova trimestrale (€/mq OMI) | 7/10 | 5/10 | Set 2026 |

@@ -156,7 +156,7 @@ bash scripts/mini-seo-check.sh && bash scripts/audit-skill.sh
 | **Chat** | OK | Linda AI (`js/chatbot.js`) |
 | **Valut.** | OK | Landing + servizio valutazioni |
 | **Player** | OK | `<video>` nativo homepage (`index.html` + `righetto-storia-hero.mp4`) |
-| **Alert** | OK | Iscrizione alert su `immobili.html` → `newsletter_subscribers` (`interesse: alert-immobili`) |
+| **Alert** | OK | Salva ricerca su `immobili.html`: criteri = filtri attivi, email + WhatsApp, `newsletter_subscribers` + `richieste` (`RigAlert`) |
 | **Tour** | OK | Filtro «Solo tour 360°» su catalogo + tour su scheda immobile + **homepage `#vtGridHome`**: ultimi 4 immobili **attivi** con tour da Supabase (`loadVisiteVirtualiHome`) |
 | **Live** | OK | CTA «Visita live» su card catalogo + scheda (`visitaLiveGuidata` / WhatsApp) |
 | **Confronta** | OK | «Confronta immobili» fino a 3 su `immobili.html` (`RigCompare`, localStorage `rig_compare`, tabella side-by-side, zero dipendenze) |
