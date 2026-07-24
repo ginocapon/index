@@ -291,7 +291,7 @@ let _staticSlugs = new Set();
 async function initBlog() {
   // Articoli statici (pagine HTML dedicate) — mostrati subito, senza attendere Supabase
   const articoliStatici = [
-{
+    {
       "titolo": "Mandato esclusivo Padova 2026: Perché conviene davvero",
       "categoria": "Guida alla vendita",
       "data": "2026-07-17",
@@ -301,6 +301,18 @@ async function initBlog() {
       "tempo": 14,
       "autore": "Gino Capon",
       "contenuto": "Guida al mandato in esclusiva a Padova: vantaggi vs multi-agenzia, clausole contrattuali, piano marketing e perché affidare la vendita a un solo referente.",
+      "evidenza": true
+    },
+    {
+      "titolo": "Agenzia immobiliare a Limena: come scegliere senza errori (2026)",
+      "categoria": "Limena locale",
+      "data": "2026-07-24",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-agenzia-immobiliare-limena-come-scegliere-2026.webp",
+      "url_statico": "blog-agenzia-immobiliare-limena-come-scegliere-2026",
+      "tempo": 14,
+      "autore": "Gino Capon",
+      "contenuto": "Checklist per scegliere un'agenzia immobiliare a Limena: domande in sede, segnali di professionalità, costi da concordare nel mandato e conoscenza del territorio.",
       "evidenza": true
     },
 {

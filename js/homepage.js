@@ -889,6 +889,13 @@ function generateSlug(titolo) {
   // Articoli statici (sempre presenti)
   const articoliStatici = [
     {
+      "titolo": "Agenzia immobiliare a Limena: come scegliere senza errori (2026)",
+      "categoria": "Limena locale",
+      "data": "2026-07-24",
+      "immagine_copertina": "img/blog/blog-agenzia-immobiliare-limena-come-scegliere-2026.webp",
+      "url_statico": "blog-agenzia-immobiliare-limena-come-scegliere-2026"
+    },
+    {
       "titolo": "Mandato esclusivo Padova 2026: Perché conviene davvero",
       "categoria": "Guida alla vendita",
       "data": "2026-07-17",

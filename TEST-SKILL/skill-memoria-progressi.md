@@ -136,6 +136,9 @@
 | 22/07/2026 | Fix 7 cover hero rotte (immagini mancanti) + img gino-capon/linda-righetto | 0 asset locali mancanti |
 | 22/07/2026 | **Feature Q3 Alert ricerca** (`RigAlert`): filtri attivi + email/WhatsApp + richieste admin | Tool engagement 100% |
 | 22/07/2026 | **Feature Q3 «Confronta immobili»** (fino a 3, localStorage, tabella side-by-side) su `immobili.html` | RigCompare, vanilla JS, 0 dipendenze · compliance 100% |
+| 24/07/2026 | Fix cron venerdì: JSON GSC corrotto + validazione workflow + snapshot 24/07 | Commit 73c9332 push main |
+| 24/07/2026 | GSC ispezione 10 URL utente: 9 su Google, **solo servizio-vendita** richiesta indicizzazione | Log in gsc-indexing-weekly.json · batch 31/07 preparato |
+| 24/07/2026 | **Blog eq-002** agenzia Limena pubblicato — hero fantasy WebP nuovo | 2654 parole · form lead · sitemap |
 
 ---
 
@@ -157,11 +160,9 @@ Vedi **`TEST-SKILL/skill-competitor-roadmap-q3-2026.md`** + `data/competitor-roa
 
 ## Prossimi passi (per l'agente)
 
-1. **22/07:** verifica calo «reindirizzamento» GSC (target < 70 da 90)
-2. **24/07:** blog eq-002 agenzia Limena se utente «pubblica blog»
-3. **25/07:** utente scrive **`"SKILL"`** → piano venerdì §8 skill-competitor-roadmap
-4. **Discovery:** coda scheduled < 3 → proposte GSC + web
-5. **PSI** homepage — annotare LCP
+1. **28/07 (lunedì):** follow-up GSC `/servizio-vendita` — richiesta inviata 24/07
+2. **31/07 venerdì:** batch URL in `gsc-indexing-weekly.json` → `next_friday_batch` (include nuovo blog eq-002)
+3. **Blog eq-003** caro affitti under-35 — scheduled 31/07
 
 ---
 

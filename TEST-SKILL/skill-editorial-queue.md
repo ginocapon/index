@@ -31,6 +31,7 @@
 
 | Trigger | Azione agente |
 |---------|----------------|
+| Utente scrive **`"SKILL"`** (virgolette, tip. venerdì) | Piano giornata: `skill-competitor-roadmap-q3-2026.md` §8 + memoria + coda + GSC JSON |
 | Utente dice «pubblica blog» / «prossimo articolo» / venerdì + modifica repo | Esegui sequenza § sopra |
 | Utente manda screenshot GSC sera | Salva in `gsc-keywords-priority.json` + `gsc-captures/` — **non** pubblicare blog quella sera |
 | Cron venerdì 07:00 | Email automatica — **non** pubblica blog (solo audit) |
@@ -62,12 +63,12 @@
 
 ---
 
-## Coda attuale (snapshot 17/07/2026)
+## Coda attuale (snapshot 24/07/2026)
 
 | Settimana | Slug | KW | Stato |
 |-----------|------|-----|-------|
 | 17/07 ✅ | blog-mandato-esclusivo-padova-perche-conviene-2026 | mandato esclusivo padova | published |
-| 24/07 | blog-agenzia-immobiliare-limena-come-scegliere-2026 | agenzia immobiliare limena | scheduled |
+| 24/07 ⏳ | blog-agenzia-immobiliare-limena-come-scegliere-2026 | agenzia immobiliare limena | **scheduled — non ancora pubblicato** |
 | 31/07 | blog-caro-affitti-padova-under-35-guida-2026 | caro affitti padova giovani | scheduled |
 | 07/08 | blog-coliving-padova-limena-giovani-professionisti-2026 | coliving padova limena | scheduled |
 | 14/08 | blog-prima-casa-under-36-consap-padova-2026 | prima casa under 36 consap | scheduled |
