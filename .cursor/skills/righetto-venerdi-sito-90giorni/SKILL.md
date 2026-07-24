@@ -4,11 +4,24 @@ description: >-
   Weekly website and SEO operations for Righetto Immobiliare (righettoimmobiliare.it):
   every-Friday checklist plus a 12-week thematic roadmap. Use when the user mentions
   Friday updates, "cosa fare questa settimana", weekly site tasks, the 90-day plan,
-  or Righetto marketing rhythm. On Fridays or when asked for the weekly plan, read
-  this skill and output concrete next actions for the repo progetti/index.
+  or Righetto marketing rhythm. When the user writes **"SKILL"** (in quotes) on Friday,
+  program the day's improvement work — read skill-competitor-roadmap-q3-2026.md §8.
 ---
 
 # Righetto: venerdì operativo + ciclo 12 settimane
+
+## Trigger `"SKILL"` (BLOCCANTE — venerdì)
+
+Quando l'utente scrive **`"SKILL"`** (virgolette incluse):
+
+1. Leggi `TEST-SKILL/skill-competitor-roadmap-q3-2026.md` **§8**
+2. Leggi `skill-memoria-progressi.md` + `data/editorial-queue.json` + `data/gsc-indexing-weekly.json` + `data/gsc-keywords-priority.json` + `data/competitor-roadmap-q3-2026.json`
+3. Output piano giornata (formato §8 skill-competitor) — **max 3 task repo + 2 task utente GSC/GBP**
+4. Non lista generica — scegli da SOSTENERE · blog coda · gap Q3 · macrociclo 12 sett.
+
+Sinonimi: «SKILL», «piano SKILL», `"SKILL"` il venerdì.
+
+---
 
 ## Contesto sito (per l'agente)
 
@@ -19,11 +32,12 @@ description: >-
 
 ## Quando applicare questa skill
 
-0. Leggi **`TEST-SKILL/skill-memoria-progressi.md`** — §Prossimi passi e piano 8 settimane (non proporre azioni fuori linea).
-0b. Leggi **`data/editorial-queue.json`** — prossimo blog `scheduled` + discovery se coda < 3 item.
-1. **È venerdì** e l'utente apre la chat (anche senza domanda esplicita): proponi in apertura un blocco breve "Venerdì Righetto — questa settimana fare…".
-2. L'utente chiede **cosa fare**, **programma settimanale**, **90 giorni**, **prossimi mesi**, **check sito**.
-3. L'utente tagga **Righetto** o **sito immobiliare** insieme a pianificazione.
+0. **Utente scrive `"SKILL"`** → § Trigger sopra (priorità massima il venerdì)
+0a. Leggi **`TEST-SKILL/skill-memoria-progressi.md`** — §Prossimi passi
+0b. Leggi **`data/editorial-queue.json`** — prossimo blog `scheduled`
+1. **È venerdì** e l'utente apre la chat: proponi "Venerdì Righetto — questa settimana fare…"
+2. Utente chiede **cosa fare**, **programma settimanale**, **90 giorni**, **check sito**
+3. Utente tagga **Righetto** + pianificazione
 
 ## Ancora data del programma
 
@@ -65,16 +79,28 @@ Usa questa lista nell'output per l'utente; adatta alle priorità della settimana
 **Proprietà GSC:** `righettoimmobiliare.it` (dominio, **senza** www) — copre tutto il sito. **Non** serve aggiungere proprietà `www`.  
 **URL canonici:** sempre `https://righettoimmobiliare.it/...` (**senza** `www`, **senza** `.html`).
 
-### Venerdì (~15 min, manuale in GSC)
+**Registro ispezioni:** aggiorna `data/gsc-indexing-weekly.json` → `inspection_log` dopo ogni check utente (data, URL, esito, azione).  
+**Batch prossimo venerdì:** stesso file → `next_friday_batch.urls` — **includere sempre nel output venerdì** per l'utente.
 
-1. **Prestazioni** (7 + 28 gg): note 1 query Limena/non-brand da migliorare (CTR o pos. 11–20).
-2. **Indicizzazione → Pagine:** controllare conteggio 404 e 5xx; se fix deployati la settimana prima → **Convalida correzione** sui report aperti.
-3. **Sitemap:** `sitemap.xml` → stato **Operazione riuscita**; se lastmod cambiato in settimana → **Reinvia**.
-4. **10 pagine chiave** — Ispezione URL (barra in alto) → verificare stato; se **non presente** e nessuna richiesta recente → **Richiedi indicizzazione** (max ~10/giorno):
+### Cosa fare letteralmente in GSC (venerdì ~15 min)
+
+1. Apri [Search Console](https://search.google.com/search-console) → proprietà `righettoimmobiliare.it`
+2. **Prestazioni** (7 + 28 gg): 1 query Limena/non-brand da migliorare → aggiorna `data/gsc-keywords-priority.json`
+3. **Indicizzazione → Pagine:** controlla 404/5xx; se fix deployati → **Convalida correzione**
+4. **Sitemap:** solo `https://righettoimmobiliare.it/sitemap.xml` — stato **Operazione riuscita**; **non** aggiungere URL singole come sitemap
+5. **Ispezione URL** (barra in alto): per ogni URL del batch settimanale:
+   - incolla URL → Invio
+   - se **«URL presente su Google»** → passa al successivo (**non** richiedere di nuovo)
+   - se **«URL non presente su Google»** → **Richiedi indicizzazione** (max ~10/giorno)
+6. Aggiorna `inspection_log` in `gsc-indexing-weekly.json` con gli esiti
+
+**Esito 24/07/2026 (utente):** 9/10 già su Google; **solo** [`/servizio-vendita`](https://righettoimmobiliare.it/servizio-vendita) ha ricevuto richiesta indicizzazione → follow-up **lunedì 28/07** e **venerdì 31/07**.
+
+### Batch 24/07/2026 ✅ (completato)
 
 ```
 https://righettoimmobiliare.it/
-https://righettoimmobiliare.it/servizio-vendita
+https://righettoimmobiliare.it/servizio-vendita          ← RICHIESTA inviata 24/07
 https://righettoimmobiliare.it/agenzia-immobiliare-padova
 https://righettoimmobiliare.it/zona-limena
 https://righettoimmobiliare.it/immobili
@@ -85,20 +111,50 @@ https://righettoimmobiliare.it/blog-scegliere-agenzia-immobiliare-padova-2026
 https://righettoimmobiliare.it/blog
 ```
 
+### Batch prossimo venerdì — **31/07/2026** (promemoria obbligatorio in output)
+
+```
+https://righettoimmobiliare.it/servizio-vendita          ← FOLLOW-UP (richiesta 24/07)
+https://righettoimmobiliare.it/blog-agenzia-immobiliare-limena-come-scegliere-2026   ← appena pubblicato eq-002
+https://righettoimmobiliare.it/servizio-locazioni
+https://righettoimmobiliare.it/servizio-valutazioni
+https://righettoimmobiliare.it/blog-rendimento-affitto-padova
+https://righettoimmobiliare.it/blog-affitto-studenti-padova
+https://righettoimmobiliare.it/blog-contratto-affitto-padova
+https://righettoimmobiliare.it/blog-mandato-esclusivo-padova-perche-conviene-2026
+https://righettoimmobiliare.it/landing-consulenza-immobiliare-gratuita
+https://righettoimmobiliare.it/blog-affitti-limena-2026
+```
+
 5. **Non richiedere** indicizzazione su URL legacy (`/home`, `/agenzia`, `/blog-articolo?s=...`) — reindirizzano alle pagine canoniche sopra.
 
-**Esito atteso per ogni URL ispezionato:** canonical = stesso URL senza www; oppure «Richiesta di indicizzazione inviata il …».
+**Esito atteso:** canonical = stesso URL senza www; oppure «Richiesta di indicizzazione inviata il …».
 
 ### Lunedì (follow-up, ~10 min)
 
 > Dopo batch SEO (redirect, sitemap, richieste manuali) o ogni lunedì se il venerdì non c'è tempo.
 
-- [ ] Rileggere ispezione su **tutte e 10** le URL sopra: «presente su Google» o richiesta in coda.
-- [ ] Report **404 / 5xx**: trend in calo vs settimana precedente.
-- [ ] Se canonical mostra `www` diverso dal sito → segnalare fix canonical in repo (`skill-seo.md` § GSC).
-- [ ] Agente: rieseguire `python scripts/probe_live_urls.py` e confrontare con `data/url-probe-latest.json`.
+- [ ] **Follow-up** URL con richiesta inviata il venerdì prima (es. `/servizio-vendita` dal 24/07)
+- [ ] Rileggere ispezione sul batch corrente: «presente su Google» o richiesta in coda
+- [ ] Report **404 / 5xx**: trend in calo vs settimana precedente
+- [ ] Se canonical mostra `www` diverso dal sito → segnalare fix canonical in repo (`skill-seo.md` § GSC)
+- [ ] Agente: rieseguire `python scripts/probe_live_urls.py` e confrontare con `data/url-probe-latest.json`
 
 Dettaglio tecnico redirect/404: repo `scripts/build_seo_redirects.py`, `404.html`, `js/redirects-404.js` — vedi **`TEST-SKILL/skill-seo.md` § GSC settimanale**.
+
+## Anti-intoppi cron venerdì (agente — BLOCCANTE)
+
+Prima di chiudere ogni task venerdì:
+
+1. **JSON valido:** `python -c "import json; json.load(open('data/gsc-keywords-priority.json')); json.load(open('data/gsc-weekly-history.json'))"` — se errore, **fix prima del commit**
+2. **Workflow:** `.github/workflows/venerdi-contenuti-freschezza.yml` ha step validazione JSON (commitato 24/07)
+3. **Probe:** file `venerdi-*.html` sono locali/gitignore — **non** devono finire in sitemap né essere contati come 404 sito (`probe_live_urls.py` esclude `venerdi-*`)
+4. **Blog:** il cron **07:00 non pubblica** articoli — publish = agente su richiesta utente (`editorial-queue.json`)
+5. **Email cron:** richiede secret `EMAIL_RELAY_KEY` su GitHub; se manca, Issue + commit storico GSC possono comunque procedere
+6. **Output venerdì:** includere sempre `next_friday_batch` da `gsc-indexing-weekly.json` + stato blog `scheduled` in coda
+
+**Se cron fallisce:** controllare Actions → `Venerdì Contenuti & Freschezza` → log step `Valida JSON dati GSC`; rigenerare localmente:
+`python scripts/venerdi-contenuti-freschezza.py` → `venerdi-seo-intelligence.py` → `probe_live_urls.py` → `venerdi-report-email.py` → `venerdi-report-pdf.py`
 
 ## Report email settimanale (automatico)
 
@@ -137,6 +193,12 @@ Framework completo: **`TEST-SKILL/skill-seo.md` §11** · Regola skimm: **`skimm
 ## Venerdì Righetto — Settimana [N]/12 ([date])
 
 **Tema fase:** [dalla tabella]
+
+**GSC — batch URL prossima settimana ([data])**
+- [ ] … (10 URL da next_friday_batch o gsc-indexing-weekly.json)
+
+**Blog coda**
+- [ ] Prossimo scheduled: [slug] — stato [scheduled/published]
 
 **Da fare oggi / nel weekend**
 - [ ] …

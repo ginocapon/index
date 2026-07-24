@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-17",
+  "updated": "2026-07-24",
   "policy": "Max 1 blog AGGIUNGERE/settimana. Prima SOSTENERE da gsc-keywords-priority.json se pages_refresh_priority ha 0 click e >50 impr. Anti-doppioni BLOCCANTE prima di ogni publish.",
   "workflow_skill": "TEST-SKILL/skill-editorial-queue.md",
   "discovery": {
@@ -24,9 +24,10 @@
     },
     {
       "id": "eq-002",
-      "status": "scheduled",
+      "status": "published",
       "priority": 1,
       "target_week": "2026-07-24",
+      "published_date": "2026-07-24",
       "slug": "blog-agenzia-immobiliare-limena-come-scegliere-2026",
       "kw_primaria": "agenzia immobiliare limena",
       "intent": "agenzia-locale",

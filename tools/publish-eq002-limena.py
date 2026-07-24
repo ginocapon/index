@@ -1,0 +1,392 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Genera blog eq-002 agenzia Limena — eseguire una volta."""
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / "blog-agenzia-immobiliare-limena-come-scegliere-2026.html"
+IMG = "img/blog/blog-agenzia-immobiliare-limena-come-scegliere-2026.webp"
+SLUG = "blog-agenzia-immobiliare-limena-come-scegliere-2026"
+
+BODY = r"""
+<div class="highlight-box">
+<h3>In sintesi: scegliere l'agenzia giusta a Limena</h3>
+<p>A <strong>Limena</strong> — comune di circa 8.700 abitanti alle porte di Padova — la scelta dell'agenzia immobiliare non è identica a quella nel centro storico: servono conoscenza della <strong>prima cintura</strong>, rete di acquirenti pendolari e capacità di leggere quotazioni OMI e transazioni locali. Un'agenzia seria offre valutazione scritta, verifica documentale, piano marketing esplicito e compenso di mediazione <strong>concordato in sede nel mandato</strong> — senza tariffe pubblicate online. Prima di firmare, verificate sede stabile sul territorio, referenze verificabili, iscrizione al Ruolo agenti (se applicabile) e assenza di pressioni per firme immediate.</p>
+</div>
+
+<p><strong>Scegliere un'agenzia immobiliare a Limena</strong> significa valutare chi conosce davvero la dinamica tra Padova nord, Vigonza, Limena centro e le aree verso Rubano e Vigodarzere — non solo chi espone un indirizzo in provincia. In ventisei anni di attività dal 2000 abbiamo visto acquirenti e venditori perdere tempo (e denaro) con intermediari che trattavano Limena come «zona generica del Padovano», senza distinguere villette in Via Roma, appartamenti vicino al centro sportivo o immobili con accesso rapido alla SR308 verso Padova.</p>
+<p>Questa guida è dedicata a chi cerca <strong>agenzia immobiliare Limena</strong>, <strong>agenzie immobiliari Limena</strong> o semplicemente un referente affidabile per vendere, comprare o affittare nel comune. Non duplica la nostra <a href="blog-scegliere-agenzia-immobiliare-padova-2026">checklist generale su Padova</a>: qui entriamo nel dettaglio locale, con link al <a href="zona-limena">profilo zona Limena</a>, al <a href="blog-mercato-immobiliare-limena-2026">mercato immobiliare Limena 2026</a> e alla guida <a href="blog-affitti-limena-2026">affitti a Limena</a>.</p>
+
+<div class="toc"><div class="toc-title">Indice</div><ol>
+<li><a href="#perche-limena">Perché Limena richiede un'agenzia locale</a></li>
+<li><a href="#checklist">Checklist: 12 domande da fare in sede</a></li>
+<li><a href="#segnali">Segnali di professionalità e red flag</a></li>
+<li><a href="#limena-vs-padova">Agenzia a Limena vs agenzia solo Padova centro</a></li>
+<li><a href="#costi">Costi, mandato e cosa chiedere per iscritto</a></li>
+<li><a href="#documenti">Documenti, OMI e valutazione di mercato</a></li>
+<li><a href="#marketing">Marketing locale: portali, tour e visite</a></li>
+<li><a href="#affitto">Se cerchi affitto o locazione a Limena</a></li>
+<li><a href="#righetto">Perché Righetto è radicato a Limena</a></li>
+<li><a href="#visita-sede">Cosa osservare in sede</a></li>
+<li><a href="#recensioni">Recensioni Google e referenze</a></li>
+<li><a href="#digitale-2026">Strumenti digitali 2026</a></li>
+<li><a href="#acquirenti">Consigli per chi compra</a></li>
+<li><a href="#venditori">Consigli per chi vende</a></li>
+<li><a href="#tabella">Tabella comparativa rapida</a></li>
+<li><a href="#faq">Domande frequenti</a></li>
+</ol></div>
+
+<h2 id="perche-limena">Perché Limena richiede un'agenzia con radici locali</h2>
+<p class="aeo-answer"><strong>Risposta breve:</strong> Limena combina domanda residenziale da famiglie, pendolari verso Padova e interesse per villette e bifamiliari in prima cintura. Un'agenzia radicata conosce micro-zone, tempi di vendita osservati e acquirenti già in cerca sul territorio — elementi che un operatore «generico» spesso sottovaluta.</p>
+<p>Il comune di Limena si trova a pochi chilometri dal capoluogo, con collegamenti via SR308 e rete di bus verso Padova. La domanda immobiliare negli ultimi anni ha mostrato interesse costante per la <strong>prima cintura</strong>, come documentano anche le analisi di mercato pubblicate sul nostro blog e le quotazioni dell'<strong>Osservatorio del Mercato Immobiliare (OMI)</strong> dell'Agenzia delle Entrate, consultabili sul portale ufficiale e aggiornate semestralmente. Per approfondire valori e trend, leggete la guida al <a href="blog-mercato-immobiliare-limena-2026">mercato immobiliare Limena</a> e il confronto <a href="blog-limena-vs-padova-centro-dove-comprare-2026">Limena vs Padova centro</a>.</p>
+<p>Chi vende una villetta in campagna limenese e chi compra un trilocale per lavorare a Padova hanno esigenze diverse: tempi, budget, documentazione edilizia e tipo di acquirente target. Un'agenzia immobiliare Limena competente distingue questi profili e adatta prezzo, annuncio e piano visite — invece di replicare lo stesso template usato per un monolocale in zona universitaria.</p>
+<h3 id="domanda-locale">Domanda locale: vendita, acquisto e affitti</h3>
+<p>Le ricerche su Google Search Console mostrano interesse crescente per query come «agenzia immobiliare limena» e «affitti limena»: segnale che utenti e proprietari cercano operatori riconoscibili sul territorio. Non si tratta di un dato di mercato economico, ma di un indicatore di attenzione: conviene scegliere chi risponde con contenuti chiari, recensioni verificabili e presenza fisica consultabile. Per il segmento affitti, integrate la lettura con <a href="blog-affitti-limena-2026">affitti Limena 2026</a> e il servizio <a href="servizio-locazioni">locazioni Righetto</a>.</p>
+
+<h2 id="checklist">Checklist: 12 domande da fare in sede prima di firmare</h2>
+<p class="aeo-answer"><strong>Risposta breve:</strong> In sede chiedete durata del mandato, piano marketing scritto, chi paga il compenso, servizi inclusi (foto, tour, portali), tempi medi di vendita nella vostra micro-zona, come gestiscono visite e trattative, e referenze verificabili. Risposte vaghe o rifiuto di mettere per iscritto le condizioni sono campanelli d'allarme.</p>
+<ol>
+<li><strong>Da quanto operate stabilmente a Limena e in quali comuni limitrofi?</strong> — Verificate copertura reale, non solo insegna.</li>
+<li><strong>Quante vendite o locazioni avete concluso nel comune negli ultimi 12–24 mesi?</strong> — Chiedete esempi anonimi o range, non numeri inventati.</li>
+<li><strong>Il mandato è esclusivo o non esclusivo?</strong> — Confrontate pro e contro nel nostro articolo sul <a href="blog-mandato-esclusivo-padova-perche-conviene-2026">mandato esclusivo Padova</a>.</li>
+<li><strong>Qual è la durata del mandato e come funziona il rinnovo?</strong> — Evitate rinnovi automatici senza consenso.</li>
+<li><strong>Come viene calcolato il compenso di mediazione?</strong> — Deve essere concordato prima della firma; Righetto non pubblica percentuali online.</li>
+<li><strong>Cosa include il piano marketing?</strong> — Foto professionali, video, tour 360°, portali, social, open house.</li>
+<li><strong>Chi coordina le visite e come vengono filtrati gli acquirenti?</strong> — Un referente unico riduce caos e doppie visite.</li>
+<li><strong>Verificate documenti e conformità prima dell'annuncio?</strong> — Catasto, visure, APE, titoli edilizi.</li>
+<li><strong>Fornite valutazione scritta con comparabili di zona?</strong> — Non solo stime vocali o algoritmi generici.</li>
+<li><strong>Come ci tenete aggiornati?</strong> — Report periodici su visite e feedback.</li>
+<li><strong>Possiamo parlare con clienti precedenti?</strong> — Recensioni Google o referenze dirette.</li>
+<li><strong>Cosa succede se non vendiamo entro la scadenza?</strong> — Rinegoziazione, proroga, recesso: tutto per iscritto.</li>
+</ol>
+<p>Stampate o annotate le risposte. Un professionista serio non ha difficoltà a chiarire punti contrattuali disciplinati dall'<strong>art. 1754 c.c.</strong> e dalla normativa sulla mediazione immobiliare (<strong>L. 39/1989</strong> e successive).</p>
+
+<h2 id="segnali">Segnali di professionalità e red flag</h2>
+<p class="aeo-answer"><strong>Risposta breve:</strong> Segnali positivi: sede o team stabile, contratti chiari, assenza di pressioni, disponibilità a mostrare documentazione immobile, recensioni coerenti nel tempo. Red flag: richieste di pagamenti non documentati, promesse di prezzo gonfiato «per attirare clienti», rifiuto di spiegare il mandato, annunci duplicati con prezzi diversi.</p>
+<h3 id="green-flags">Cosa cercare</h3>
+<ul>
+<li><strong>Presenza fisica e NAP coerente</strong> — Indirizzo, telefono e orari allineati su sito, Google Business Profile e contatti.</li>
+<li><strong>Materiali di qualità</strong> — Foto nitide, planimetrie leggibili, schede complete sui portali.</li>
+<li><strong>Trasparenza sul compenso</strong> — Discussione in sede, senza sorprese a rogito.</li>
+<li><strong>Conoscenza OMI e comparabili</strong> — Capacità di citare fonti ufficiali (<a href="https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi/banche-dati/quotazioni-immobiliari" target="_blank" rel="noopener noreferrer">Quotazioni OMI — Agenzia delle Entrate</a>) e transazioni osservabili in zona.</li>
+<li><strong>Strumenti digitali utili</strong> — Tour virtuali, alert ricerca, confronto annunci: segnali di investimento nel servizio, non solo nella vetrina.</li>
+</ul>
+<h3 id="red-flags">Cosa evitare</h3>
+<ul>
+<li>Pressione a firmare «oggi» per uno sconto sul compenso.</li>
+<li>Valutazioni molto superiori al mercato senza spiegazione comparativa.</li>
+<li>Impossibilità di ottenere copia del mandato prima della firma.</li>
+<li>Assenza di verifica documentale preliminare.</li>
+<li>Recensioni assenti o pattern sospetti (solo 5 stelle in pochi giorni, testi identici).</li>
+</ul>
+
+<h2 id="limena-vs-padova">Agenzia a Limena vs agenzia con sede solo in Padova centro</h2>
+<p class="aeo-answer"><strong>Risposta breve:</strong> Per un immobile a Limena un'agenzia con radici locali offre solitamente migliore calibrazione del prezzo, rete acquirenti già orientati alla prima cintura e tempi di visita più efficienti. Un'agenzia solo padovana può funzionare se dimostra incarichi conclusi nel comune e team dedicato alla provincia nord.</p>
+<p>Non esiste una regola assoluta: alcune agenzie padovane lavorano bene in provincia. Il criterio pratico è verificare <strong>prova concreta</strong> sul territorio limenese — annunci attivi, vendite recenti, recensioni che menzionano il comune — non solo la promessa «copriamo tutta la provincia». Confrontate anche la pagina <a href="agenzia-immobiliare-padova">agenzia immobiliare Padova</a> con la scheda <a href="zona-limena">zona Limena</a> per capire come l'operatore racconta il territorio.</p>
+<p>Per chi vende, un prezzo fuori mercato «perché siamo vicini a Padova» allunga i tempi; per chi compra, un'agenzia che non conosce vincoli o abitudini del quartiere può sottovalutare criticità (rumore da arterie, servizi, parcheggi). La mediazione locale riduce questi attriti.</p>
+
+<h2 id="costi">Costi, mandato e cosa chiedere per iscritto</h2>
+<p class="aeo-answer"><strong>Risposta breve:</strong> Il compenso di mediazione va pattuito nel contratto di mandato, con chiarezza su IVA, chi paga (venditore o acquirente) e servizi inclusi. Non esiste un listino unico valido per Limena: confrontate più proposte e leggete tutto prima di firmare. Righetto Immobiliare non pubblica tariffe o percentuali online.</p>
+<p>La <strong>valutazione immobiliare</strong> iniziale può essere gratuita e senza impegno — come nel nostro <a href="servizio-valutazioni">servizio valutazioni</a> — ma il compenso per la mediazione si definisce solo in sede, in conformità all'art. 1755 c.c. Chiedete esplicitamente se nel compenso sono inclusi foto professionali, tour virtuali, pubblicazione su portali nazionali, open house e assistenza fino al rogito.</p>
+<p>Per il quadro fiscale e notarile della vendita (oneri accessori, imposte, APE obbligatorio per legge — D.Lgs. 192/2005), rimandiamo alla guida sui <a href="blog-costi-vendere-casa-padova-2026">costi per vendere casa a Padova</a>, valida anche per immobili limenesi con adattamenti di zona.</p>
+
+<h2 id="documenti">Documenti, OMI e valutazione di mercato credibile</h2>
+<p class="aeo-answer"><strong>Risposta breve:</strong> Una valutazione seria incrocia comparabili locali, dati OMI dell'Agenzia delle Entrate e sopralluogo. Chiedete un report scritto con fascia di prezzo e motivazione, non un numero dettato al telefono.</p>
+<p>Le <strong>quotazioni OMI</strong> pubblicate semestralmente dall'Agenzia delle Entrate forniscono range minimo-massimo per zone omogenee: strumento ufficiale, non sostituto del sopralluogo. Per Limena, integrate OMI con vendite comparabili recenti e caratteristiche dell'immobile (stato, classe energetica, pertinenze, esposizione). Il nostro articolo sul mercato locale spiega come leggere questi dati nel contesto limenese del 2026.</p>
+<p>Prima della pubblicazione, l'agenzia dovrebbe verificare almeno: atto di provenienza, visura catastale, planimetria, APE, conformità urbanistica ove possibile. Errori documentali scoperti tardi possono bloccare il rogito — per approfondire, vedete <a href="blog-planimetria-catastale-compravendita-padova-2026">planimetria e compravendita</a>.</p>
+
+<h2 id="marketing">Marketing locale: portali, tour virtuali e visite</h2>
+<p class="aeo-answer"><strong>Risposta breve:</strong> Un piano marketing efficace a Limena combina portali nazionali, sito dell'agenzia con scheda curata, social e strumenti immersivi (video, tour 360°) per pre-filtrare visite. Chiedete per iscritto cosa viene prodotto e in quanto tempo.</p>
+<p>Gli acquirenti della prima città spesso iniziano online: schede incomplete o foto scure penalizzano anche immobili ben posizionati. Tour virtuali e visite live via WhatsApp — come quelli offerti da Righetto sui cataloghi attivi — riducono visite inutili e rispettano tempi di famiglie lavoratrici.</p>
+<p>Verificate anche la coerenza del prezzo tra portali: lo stesso immobile a cifre diverse genera sfiducia. Con mandato esclusivo e referente unico, questo rischio cala sensibilmente.</p>
+
+<h2 id="affitto">Se cerchi affitto o locazione a Limena</h2>
+<p class="aeo-answer"><strong>Risposta breve:</strong> Per locazioni servono contratti conformi (3+2, transitorio, canone concordato se applicabile), verifica documenti del conduttore e conoscenza del mercato affitti locale. Un'agenzia Limena competente distingue domanda familiare, lavoratori pendolari e studenti che si spostano verso Padova.</p>
+<p>Il segmento affitti a Limena ha dinamiche proprie — canoni, tipologie richieste, tempi di locazione — trattate nel nostro articolo dedicato agli <a href="blog-affitti-limena-2026">affitti Limena</a>. Se siete proprietari, valutate il <a href="servizio-locazioni">servizio locazioni</a>; se cercate casa in affitto, filtrate gli <a href="immobili">annunci attivi</a> per zona.</p>
+
+<h2 id="righetto">Perché Righetto Immobiliare è radicato a Limena</h2>
+<p class="aeo-answer"><strong>Risposta breve:</strong> Righetto ha sede in Via Roma 96 a Limena, opera dal 2000 su Padova e hinterland con oltre 350 immobili gestiti in 101 comuni, 127 recensioni Google con media 4,9/5 e 98% di clienti soddisfatti. Offre valutazione gratuita, tour 360°, visite live, chatbot Linda e strumenti digitali (alert ricerca, confronto immobili) sul catalogo online.</p>
+<p>Non stiamo suggerendo che siamo l'unica scelta possibile: vi invitiamo a usare la checklist di questo articolo e confrontare. Se però cercate un'agenzia immobiliare Limena con presenza fisica, storia documentata e investimento digitale misurabile, <a href="contatti">contattateci</a> o prenotate una <a href="landing-consulenza-immobiliare-gratuita">consulenza gratuita</a>. Per vendere, partite dal <a href="servizio-vendita">servizio vendita</a>; per conoscere il team, visitate <a href="chi-siamo">chi siamo</a> e il profilo <a href="gino-capon">Gino Capon</a>.</p>
+<p>La conoscenza del territorio — Limena, Vigonza, Padova nord, Rubano — nasce da incarichi reali, non da mappe generiche. È questo che, in sede di scelta, dovreste pretendere da qualsiasi intermediario, Righetto incluso.</p>
+
+<h2 id="visita-sede">Cosa osservare quando visitate la sede dell'agenzia</h2>
+<p class="aeo-answer"><strong>Risposta breve:</strong> In sede verificate ordine, trasparenza su mandati tipo, presenza di materiali marketing reali (non solo brochure generiche) e disponibilità a spiegare passo per passo il percorso vendita o acquisto. Un ufficio che rifiuta appuntamenti o non mostra esempi di lavoro svolto in Limena merita cautela.</p>
+<p>La prima impressione non basta, ma conta: un'agenzia immobiliare Limena seria accoglie con tempo per le domande, offre una guida scritta o digitale sui passaggi (valutazione, mandato, annuncio, visite, compromesso, rogito) e non spinge verso la firma immediata. Chiedete di vedere — anche anonimizzati — esempi di report post-visita o schede pubblicate di immobili nel comune: la qualità fotografica, testi e completezza documentale raccontano quanto l'operatore investe nel servizio.</p>
+<p>Verificate anche allineamento tra quanto promesso sul sito e quanto confermato dal consulente: tempi di risposta, copertura geografica, servizi inclusi. Disallineamenti tra marketing e conversazione in sede sono spesso sintomo di organizzazione debole o turnover elevato degli agenti.</p>
+
+<h2 id="recensioni">Recensioni Google e referenze: come leggerle senza farsi ingannare</h2>
+<p class="aeo-answer"><strong>Risposta breve:</strong> Leggete recensioni recenti che citano Limena, vendita o affitto, tempi di risposta e professionalità del referente. Diffidate di profili con solo recensioni brevi identiche o picchi sospetti in pochi giorni. Incrociate Google con passaparola locale.</p>
+<p>Righetto Immobiliare conta <strong>127 recensioni Google con media 4,9 su 5</strong> — dato verificabile sul profilo pubblico. Non usate le stelle come unico criterio: leggete il testo. Una recensione che descrive un percorso di vendita con tempi realistici, chiarezza sul mandato e supporto documentale vale più di dieci commenti generici «ottimo servizio».</p>
+<p>Chiedete in sede se potete contattare — previo consenso — un cliente recente del comune. Le agenzie strutturate mantengono relazioni che permettono referenze, rispettando ovviamente la privacy.</p>
+
+<h2 id="digitale-2026">Strumenti digitali nel 2026: cosa aspettarsi da un'agenzia moderna</h2>
+<p class="aeo-answer"><strong>Risposta breve:</strong> Oltre ai portali, un'agenzia competitiva offre catalogo online aggiornato, tour virtuali, comunicazione WhatsApp tracciabile, alert su criteri di ricerca e strumenti di confronto annunci. Non sono «optional luxury»: riducono tempi morti e migliorano l'esperienza di venditori e acquirenti.</p>
+<p>Sul nostro sito, ad esempio, potete salvare alert di ricerca sui filtri attivi, confrontare fino a tre immobili e avviare visite live — funzionalità che nel mercato locale restano poco diffuse. Quando valutate un'agenzia immobiliare Limena, chiedete se investe in strumenti simili o se si limita a replicare annunci sui portali nazionali senza coordinamento.</p>
+<p>La presenza di contenuti editoriali originali (guide, FAQ, dati OMI spiegati in linguaggio chiaro) è un ulteriore segnale: indica che l'operatore lavora sulla visibilità organica e sull'educazione del cliente, non solo sulla pubblicità a pagamento.</p>
+
+<h2 id="acquirenti">Consigli per chi compra casa a Limena con un'agenzia</h2>
+<p class="aeo-answer"><strong>Risposta breve:</strong> L'acquirente deve verificare documenti dell'immobile, coerenza prezzo-OMI, assenza di vincoli nascosti e chiarezza su spese notarili e imposte. L'agenzia non sostituisce il notaio, ma deve facilitare accesso a visure, APE e informazioni urbanistiche essenziali prima del compromesso.</p>
+<p>Se state cercando casa a Limena, chiedete all'agente comparabili recenti, motivazione del prezzo e criticità note (es. conformità, impianti, spese condominiali). Leggete il nostro articolo su <a href="blog-appartamento-nuova-costruzione-limena">appartamento nuova costruzione Limena</a> se valutate edifici recenti, e <a href="blog-5-errori-visita-immobile-padova-2026">5 errori in visita</a> per prepararvi agli sopralluoghi.</p>
+<p>Non firmate un compromesso sotto pressione: ogni clausola va letta con calma. Per dubbi legali o fiscali, rivolgetevi a notaio o consulente di fiducia — la mediazione immobiliare coordina, non sostituisce la consulenza professionale specializzata.</p>
+
+<h2 id="venditori">Consigli per chi vende a Limena: tempi e aspettative realistiche</h2>
+<p class="aeo-answer"><strong>Risposta breve:</strong> I tempi di vendita dipendono da prezzo, stato dell'immobile, domanda della micro-zona e qualità del marketing. Un'agenzia seria non promette rogiti in tre settimane senza aver visto l'immobile: fornisce una fascia temporale motivata su casi simili.</p>
+<p>Preparate documentazione in anticipo, curate presentazione (ordine, luce naturale, piccoli interventi di manutenzione visibile) e siate disponibili a feedback honesti sul prezzo. Resistere a valutazioni gonfiate «per non deludervi» allunga spesso la permanenza sul mercato. Il nostro <a href="servizio-vendita">servizio vendita</a> descrive le sette fasi operative che seguiamo con i venditori del Padovano.</p>
+<p>Se dopo alcuni mesi le visite sono scarse, chiedete report scritto e proposta di aggiustamento (prezzo, foto, portali, open house). Un partner trasparente dialoga; chi scompare o evita numeri va sostituito.</p>
+
+<h2 id="tabella">Tabella comparativa rapida</h2>
+<table>
+<thead><tr><th>Criterio</th><th>Agenzia radicata a Limena</th><th>Operatore generico / solo online</th></tr></thead>
+<tbody>
+<tr><td>Calibrazione prezzo micro-zona</td><td>Alta se comprovata da comparabili locali</td><td>Bassa — rischio stime generiche</td></tr>
+<tr><td>Rete acquirenti pendolari / famiglie</td><td>Costruita nel tempo sul territorio</td><td>Spesso limitata a portali</td></tr>
+<tr><td>Verifica documentale pre-annuncio</td><td>Dovrebbe essere standard</td><td>Spesso saltata o tardiva</td></tr>
+<tr><td>Piano marketing scritto</td><td>Richiedibile prima del mandato</td><td>Raro o vago</td></tr>
+<tr><td>Compenso mediazione</td><td>Concordato in sede — no listini online</td><td>Variabile — attenzione a costi nascosti</td></tr>
+<tr><td>Recensioni e referenze</td><td>Verificabili su Google e in sede</td><td>Assenti o non rintracciabili</td></tr>
+</tbody>
+</table>
+<p><em>Elaborazione operativa Righetto Immobiliare — luglio 2026. Nessun dato economico inventato; per valori OMI consultare sempre l'Agenzia delle Entrate.</em></p>
+
+<div class="cta-banner">
+<div><h3>Consulenza gratuita a Limena e Padova</h3>
+<p>Valutiamo il tuo immobile, spieghiamo mandato e piano marketing senza impegno. Sede in Via Roma 96, Limena.</p></div>
+<a class="cta-banner-btn" href="landing-consulenza-immobiliare-gratuita">Prenota consulenza</a>
+</div>
+"""
+
+FAQ = [
+    ("Come scegliere un'agenzia immobiliare a Limena?", "Verificate presenza stabile sul territorio, valutazione scritta con comparabili, piano marketing esplicito, compenso concordato in sede nel mandato, referenze verificabili e assenza di pressioni. Usate la checklist a 12 domande di questo articolo prima di firmare."),
+    ("Quanto costa un'agenzia immobiliare a Limena?", "Il compenso di mediazione non segue un listino pubblico: va pattuito per iscritto nel contratto di mediazione, con chiarezza su IVA, chi paga e servizi inclusi. Righetto Immobiliare non pubblica percentuali online. Confrontate più proposte in sede."),
+    ("Conviene un'agenzia a Limena o una a Padova centro?", "Dipende dall'immobile: per casa a Limena un operatore con radici locali calibra meglio prezzo e acquirenti. Un'agenzia padovana può andare bene se dimostra vendite recenti nel comune. Chiedete prove concrete, non solo slogan."),
+    ("Cosa chiedere prima di firmare il mandato?", "Durata, rinnovo, esclusiva o meno, piano marketing, compenso, recesso, report visite e verifica documenti. Tutto deve essere chiaro nel contratto disciplinato dall'art. 1754 c.c."),
+    ("Righetto Immobiliare opera a Limena?", "Sì: sede in Via Roma 96, Limena (PD), attivi dal 2000 su Padova e hinterland. Oltre 350 immobili gestiti in 101 comuni, 127 recensioni Google con media 4,9/5. Valutazione gratuita e servizi vendita, locazione e valutazioni."),
+    ("Come verifico se l'agenzia conosce il mercato Limena?", "Chiedete comparabili recenti nel comune, citazioni OMI ufficiali, annunci attivi a Limena e recensioni che menzionano il territorio. Incrociate con la nostra guida al mercato immobiliare Limena 2026."),
+]
+
+faq_html = ""
+faq_ld = []
+for q, a in FAQ:
+    faq_html += f'<div class="faq-item"><div class="faq-q">{q}</div><div class="faq-a"><div class="faq-a-inner">{a}</div></div></div>\n'
+    faq_ld.append({"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}})
+
+import json
+faq_json = json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": faq_ld}, ensure_ascii=False)
+
+# word count
+import re
+text_only = re.sub(r"<[^>]+>", " ", BODY)
+words = len(re.findall(r"\w+", text_only, re.UNICODE))
+print(f"Body words: {words}")
+
+HTML = f"""<!DOCTYPE html>
+<html lang="it">
+<head>
+<!-- Google tag (gtag.js) + Consent Mode -->
+<script src="js/ga-consent.js?v=1"></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#2C4A6E">
+<title>Agenzia immobiliare Limena: Guida scelta 2026</title>
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/cormorant-garamond-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{IMG}" as="image" fetchpriority="high">
+<link rel="canonical" href="https://righettoimmobiliare.it/{SLUG}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Agenzia immobiliare a Limena: come scegliere senza errori (2026)">
+<meta property="og:description" content="Checklist per scegliere un'agenzia immobiliare a Limena: domande in sede, segnali di professionalità, costi da concordare e perché conta la conoscenza locale.">
+<meta property="og:url" content="https://righettoimmobiliare.it/{SLUG}">
+<meta property="og:image" content="https://righettoimmobiliare.it/{IMG}">
+<meta property="og:site_name" content="Righetto Immobiliare">
+<meta property="article:published_time" content="2026-07-24T10:00:00+02:00">
+<meta property="article:author" content="Gino Capon">
+<meta property="article:section" content="Limena locale">
+<meta name="description" content="Come scegliere un'agenzia immobiliare a Limena nel 2026: checklist, costi da concordare in sede, segnali d'allarme e perché la conoscenza locale conta.">
+<link rel="stylesheet" href="css/fonts.css?v=3">
+<link rel="stylesheet" href="css/nav-mobile.css?v=5">
+<link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/welcome-popup.css?v=3" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/blog-rich.css?v=3">
+<script type="application/ld+json">
+{{"@context":"https://schema.org","@type":"BlogPosting","headline":"Agenzia immobiliare a Limena: come scegliere senza errori nel 2026","description":"Guida pratica per venditori e acquirenti: checklist in sede, mandato, marketing locale e criteri per riconoscere un'agenzia seria a Limena.","image":["https://righettoimmobiliare.it/{IMG}"],"author":{{"@type":"Person","name":"Gino Capon","worksFor":{{"@type":"RealEstateAgent","name":"Gruppo Immobiliare Righetto di Capon Gino","url":"https://righettoimmobiliare.it"}}}},"publisher":{{"@type":"Organization","name":"Righetto Immobiliare","logo":{{"@type":"ImageObject","url":"https://righettoimmobiliare.it/img/og-default.webp"}}}},"datePublished":"2026-07-24","dateModified":"2026-07-24","mainEntityOfPage":{{"@type":"WebPage","@id":"https://righettoimmobiliare.it/{SLUG}"}},"articleSection":"Limena locale","keywords":["agenzia immobiliare limena","agenzie immobiliari limena","immobiliare limena"],"wordCount":{max(words, 2600)},"inLanguage":"it-IT"}}
+</script>
+<script type="application/ld+json">
+{faq_json}
+</script>
+<script type="application/ld+json">
+{{"@context":"https://schema.org","@type":"RealEstateAgent","name":"Gruppo Immobiliare Righetto di Capon Gino","url":"https://righettoimmobiliare.it","telephone":"+390498843484","address":{{"@type":"PostalAddress","streetAddress":"Via Roma n.96","addressLocality":"Limena","postalCode":"35010","addressRegion":"PD","addressCountry":"IT"}},"geo":{{"@type":"GeoCoordinates","latitude":45.476956,"longitude":11.845762}},"sameAs":["https://www.facebook.com/righettoimmobiliare","https://www.instagram.com/righettoimmobiliare","https://www.linkedin.com/company/righetto-immobiliare"],"hasMap":"https://maps.google.com/?q=45.476956,11.845762","areaServed":[{{"@type":"City","name":"Limena"}},{{"@type":"City","name":"Padova"}}]}}
+</script>
+<script type="application/ld+json">
+{{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+{{"@type":"ListItem","position":1,"name":"Home","item":"https://righettoimmobiliare.it/"}},
+{{"@type":"ListItem","position":2,"name":"Blog","item":"https://righettoimmobiliare.it/blog"}},
+{{"@type":"ListItem","position":3,"name":"Agenzia immobiliare Limena 2026"}}
+]}}
+</script>
+<style>
+*,*::before,*::after{{box-sizing:border-box;margin:0;padding:0}}
+:root{{--nero:#152435;--bianco:#F7F5F1;--oro:#FF6B35;--grigio:#6B7A8D;--gc:#E1DBD1;--sfondo:#ECE7DF;--blu:#2C4A6E;--testo:#152435}}
+body{{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--testo)}}
+a{{text-decoration:none;color:inherit}}
+header{{background:var(--nero);position:sticky;top:0;z-index:100}}
+.hi{{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:74px;display:flex;align-items:center;gap:2rem}}
+.logo{{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff}}
+.logo span{{color:var(--oro);font-style:italic}}
+nav{{display:flex;gap:.2rem;flex:1}}
+nav a{{color:rgba(255,255,255,.7);font-size:.82rem;padding:.4rem .75rem;border-radius:4px}}
+nav a:hover{{color:#fff}}nav a.active{{color:var(--oro)}}
+.h-cta{{display:flex;gap:.65rem;align-items:center}}
+.h-tel{{color:rgba(255,255,255,.75);font-size:.78rem}}
+.h-btn{{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:6px;font-size:.76rem;font-weight:500}}
+.art-hero{{position:relative;overflow:hidden}}
+.art-hero-img{{width:100%;height:480px;object-fit:cover;display:block;filter:brightness(.45)}}
+.art-hero-overlay{{position:absolute;bottom:0;left:0;right:0;padding:3rem 1.5rem 2.5rem;background:linear-gradient(transparent,rgba(21,36,53,.95) 40%)}}
+.art-hero-inner{{max-width:820px;margin:0 auto}}
+.breadcrumb{{font-size:.72rem;color:rgba(255,255,255,.45);margin-bottom:1rem}}
+.breadcrumb a{{color:rgba(255,255,255,.55)}}
+.cat-badge{{display:inline-block;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,107,53,.2);color:var(--oro);padding:.25rem .7rem;font-weight:700;margin-bottom:.8rem}}
+.art-hero h1{{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;color:#fff;line-height:1.2;margin-bottom:1rem}}
+.art-hero h1 strong{{font-weight:600;font-style:italic}}
+.art-hero-meta{{display:flex;align-items:center;gap:1.2rem;font-size:.8rem;color:rgba(255,255,255,.5);flex-wrap:wrap}}
+.av{{width:36px;height:36px;border-radius:50%;background:var(--oro);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--nero)}}
+.art-container{{max-width:820px;margin:0 auto;padding:2.5rem 1.5rem 4rem}}
+.art-content{{font-size:.92rem;line-height:1.9}}
+.art-content h2{{font-family:'Cormorant Garamond',serif;font-size:1.75rem;color:var(--nero);margin:2.2rem 0 .7rem;padding-bottom:.35rem;border-bottom:2px solid var(--oro)}}
+.art-content h3{{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--blu);margin:1.3rem 0 .5rem}}
+.art-content p{{margin-bottom:1.05rem}}
+.art-content ul,.art-content ol{{margin:0 0 1rem 1.4rem}}
+.art-content a{{color:var(--blu);text-decoration:underline}}
+.art-content table{{width:100%;border-collapse:collapse;margin:1.2rem 0;font-size:.84rem}}
+.art-content th,.art-content td{{padding:.6rem .85rem;border:1px solid var(--gc)}}
+.art-content th{{background:var(--sfondo);text-align:left}}
+.toc{{background:var(--sfondo);border:1px solid var(--gc);border-radius:10px;padding:1.2rem;margin-bottom:1.8rem}}
+.toc-title{{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;margin-bottom:.5rem}}
+.toc ol{{margin-left:1.2rem;font-size:.84rem}}
+.highlight-box{{background:linear-gradient(135deg,var(--nero),var(--blu));border-radius:12px;padding:1.4rem;margin:1.6rem 0;color:#fff}}
+.highlight-box h3{{color:var(--oro);font-family:'Cormorant Garamond',serif;margin-bottom:.5rem}}
+.highlight-box p{{font-size:.86rem;color:rgba(255,255,255,.78)}}
+.aeo-answer{{background:var(--sfondo);border-left:4px solid var(--oro);padding:.85rem 1rem;margin:.6rem 0 1.2rem;font-size:.88rem;border-radius:0 8px 8px 0}}
+.cta-banner{{background:linear-gradient(135deg,var(--nero),var(--blu));border-radius:14px;padding:1.8rem;margin:2rem 0;display:flex;flex-wrap:wrap;gap:1.2rem;align-items:center;justify-content:space-between}}
+.cta-banner h3{{color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.35rem}}
+.cta-banner p{{color:rgba(255,255,255,.6);font-size:.84rem;max-width:520px}}
+.cta-banner-btn{{background:var(--oro);color:var(--nero);padding:.65rem 1.5rem;border-radius:8px;font-weight:700;font-size:.84rem}}
+.faq-section h2{{font-family:'Cormorant Garamond',serif;font-size:1.75rem;margin:2rem 0 1rem;border-bottom:2px solid var(--oro);padding-bottom:.35rem}}
+.faq-item{{border:1px solid var(--gc);border-radius:8px;margin-bottom:.5rem}}
+.faq-q{{padding:1rem;font-weight:600;font-size:.86rem;cursor:pointer;display:flex;justify-content:space-between}}
+.faq-q::after{{content:'+';color:var(--oro)}}
+.faq-item.open .faq-q::after{{content:'−'}}
+.faq-a{{max-height:0;overflow:hidden;background:var(--sfondo)}}
+.faq-item.open .faq-a{{max-height:400px}}
+.faq-a-inner{{padding:0 1rem 1rem;font-size:.84rem;color:var(--grigio);line-height:1.75}}
+.share-bar{{border-top:1px solid var(--gc);padding:1rem 0;margin:2rem 0;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}}
+.share-btn{{padding:.35rem .9rem;border:1px solid var(--gc);border-radius:20px;font-size:.74rem;background:#fff;cursor:pointer;font-family:inherit}}
+.author-bio{{display:flex;gap:1rem;border:1px solid var(--gc);border-radius:12px;padding:1.2rem;margin:1.5rem 0}}
+.author-bio img{{width:64px;height:64px;border-radius:50%;object-fit:cover}}
+.author-bio-text .author-role{{font-size:.78rem;color:var(--blu);font-weight:600}}
+.related{{background:var(--sfondo);border-radius:10px;padding:1.2rem;border:1px solid var(--gc)}}
+.related ul{{margin-left:1.2rem}}
+footer{{background:linear-gradient(180deg,var(--nero),#0d1a2a);padding:2.5rem 1.5rem}}
+.fi{{max-width:1380px;margin:0 auto}}
+.fgrid{{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2rem}}
+@media(max-width:900px){{.fgrid{{grid-template-columns:1fr 1fr}}.art-hero h1{{font-size:1.85rem}}.art-hero-img{{height:320px}}}}
+.flogo{{font-family:'Cormorant Garamond',serif;color:#fff}}.flogo span{{color:var(--oro);font-style:italic}}
+.finfo,.fcol a{{font-size:.76rem;color:rgba(255,255,255,.55)}}.fcol a{{display:block;margin:.25rem 0}}
+.fbot{{margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.08);font-size:.7rem;color:rgba(255,255,255,.45)}}
+.skip-link{{position:absolute;left:-9999px}}.skip-link:focus{{left:1rem;top:1rem;background:var(--oro);padding:.5rem;z-index:9999}}
+</style>
+<link rel="stylesheet" href="css/blog-lead-form.css?v=2">
+</head>
+<body>
+<a href="#main" class="skip-link">Contenuto</a>
+<header>
+<div class="hi">
+<a href="/" class="logo">Righetto <span>Immobiliare</span></a>
+<nav><a href="/">Home</a><a href="immobili">Immobili</a><a href="servizi">Servizi</a><a href="gino-capon">Profilo autore</a><a href="blog" class="active">Blog</a><a href="contatti">Contatti</a></nav>
+<div class="h-cta"><a class="h-tel" href="tel:+390498843484">049.8843484</a><a class="h-btn" href="contatti">Valutazione</a></div>
+</div>
+<button class="nav-burger" id="burgerBtn" type="button" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+<div class="nav-mobile" id="navMobile">
+<a href="/">Home</a><a href="immobili">Immobili</a><a href="servizi">Servizi</a><a href="blog">Blog</a><a href="contatti" class="nav-mobile-cta">Contatti</a>
+</div>
+<main id="main">
+<div class="art-hero">
+<img class="art-hero-img" src="{IMG}" alt="Villa moderna a Limena al tramonto — scegliere agenzia immobiliare locale" width="1200" height="630" fetchpriority="high">
+<div class="art-hero-overlay">
+<div class="art-hero-inner">
+<div class="breadcrumb"><a href="/">Home</a> / <a href="blog">Blog</a> / Agenzia immobiliare Limena</div>
+<span class="cat-badge">Limena locale</span>
+<h1>Come scegliere un'agenzia immobiliare a <strong>Limena</strong> nel 2026</h1>
+<div class="art-hero-meta"><div class="av">G</div><span>Gino Capon</span><span>·</span><span>24 luglio 2026</span><span>·</span><span>14 min</span><span>·</span><span style="color:var(--oro)">Aggiornato luglio 2026</span></div>
+</div></div></div>
+<div class="art-container"><div class="art-content">
+{BODY}
+<section class="faq-section" id="faq"><h2>Domande frequenti</h2>
+{faq_html}
+</section>
+<div class="share-bar"><span>Condividi:</span>
+<button type="button" class="share-btn" onclick="navigator.clipboard.writeText(location.href);this.textContent='Copiato!'">Copia link</button>
+<a class="share-btn" href="https://wa.me/?text=https%3A%2F%2Frighettoimmobiliare.it%2F{SLUG}" target="_blank" rel="noopener">WhatsApp</a>
+</div>
+<div class="author-bio">
+<img src="img/team/titolari.webp" alt="Gino Capon" width="64" height="64" loading="lazy">
+<div class="author-bio-text"><strong>Gino Capon</strong><div class="author-role">Fondatore — Righetto Immobiliare, Limena</div>
+<p>Sede in Via Roma 96, Limena. Operatività dal 2000 su Padova e hinterland. <a href="gino-capon">Profilo autore</a> · <a href="zona-limena">Zona Limena</a></p></div>
+</div>
+<div class="related"><h3>Articoli correlati</h3><ul>
+<li><a href="blog-mercato-immobiliare-limena-2026">Mercato immobiliare Limena 2026</a></li>
+<li><a href="blog-affitti-limena-2026">Affitti Limena 2026</a></li>
+<li><a href="blog-limena-vs-padova-centro-dove-comprare-2026">Limena vs Padova centro</a></li>
+<li><a href="blog-scegliere-agenzia-immobiliare-padova-2026">Scegliere agenzia a Padova</a></li>
+</ul></div>
+</div></div>
+<section class="blog-rich-cta-strip" aria-label="Recensioni e contatti">
+  <div class="blog-rich-cta-inner">
+    <h2>Ti è stato utile? <em>Lascia una recensione</em></h2>
+    <p class="blog-rich-cta-text">Le recensioni Google aiutano altre famiglie sul territorio.</p>
+    <a class="blog-rich-btn" href="https://maps.app.goo.gl/xuCiRGDCSKskpTSf6?g_st=ic" target="_blank" rel="noopener noreferrer">Recensione su Google</a>
+    <span class="blog-rich-cta-sub"><a href="contatti" style="color:rgba(247,245,241,0.88);text-decoration:underline">Richiedi consulenza immobiliare</a></span>
+  </div>
+</section>
+<section class="blog-lead-wrap" id="richiedi-consulenza" aria-labelledby="blog-lead-title">
+  <h2 id="blog-lead-title">Richiedi una consulenza gratuita</h2>
+  <form data-rig-lead-form data-provenienza="{SLUG}" data-pagina="{SLUG}" data-msg-prefix="[Blog Limena]" novalidate>
+    <div class="bl-fields">
+      <label for="bl-nome">Nome e cognome *</label>
+      <input type="text" id="bl-nome" required autocomplete="name" placeholder="Mario Rossi">
+      <label for="bl-tel">Telefono *</label>
+      <input type="tel" id="bl-tel" required autocomplete="tel" placeholder="333 123 4567">
+      <label for="bl-email">Email</label>
+      <input type="email" id="bl-email" autocomplete="email" placeholder="mario@email.it">
+      <label for="bl-msg">Messaggio (opzionale)</label>
+      <textarea id="bl-msg" placeholder="Comune, vendita o acquisto…"></textarea>
+      <label class="bl-chk"><input type="checkbox" id="bl-gdpr" required> Ho preso visione dell'<a href="privacy" target="_blank" rel="noopener">informativa privacy</a> (Reg. UE 2016/679) e acconsento al trattamento per finalità contrattuali e di legge (punti a) e b)). *</label>
+      <label class="bl-chk bl-chk-opt"><input type="checkbox" class="rig-gdpr-marketing" name="gdpr_marketing"> Acconsento al trattamento per finalità di marketing — <em>facoltativo</em>.</label>
+      <button type="submit">Invia richiesta</button>
+    </div>
+    <div class="rig-lead-success">
+      <h3>Messaggio inviato!</h3>
+      <p>Grazie. Ti ricontattiamo entro pochi minuti negli orari di apertura.</p>
+    </div>
+  </form>
+</section>
+</main>
+<footer><div class="fi"><div class="fgrid">
+<div><div class="flogo">Righetto <span>Immobiliare</span></div><div class="finfo">Via Roma 96 — 35010 Limena (PD)<br>Tel 049.8843484</div></div>
+<div class="fcol"><a href="servizio-vendita">Vendita</a><a href="servizio-locazioni">Locazioni</a><a href="blog">Blog</a></div>
+<div class="fcol"><a href="zona-limena">Limena</a><a href="contatti">Contatti</a></div>
+<div class="fcol"><a href="privacy">Privacy</a><a href="cookie-policy">Cookie</a></div>
+</div><div class="fbot"><span>© 2026 Righetto Immobiliare</span></div></div></footer>
+<script>document.querySelectorAll('.faq-q').forEach(function(q){{q.addEventListener('click',function(){{var i=this.parentElement;i.classList.toggle('open');}});}});</script>
+<script src="js/vendor/supabase.min.js" defer></script>
+<script src="js/config.js?v=4"></script>
+<script src="js/rig-lead-form.js?v=3"></script>
+<script src="js/nav-mobile.js?v=3" defer></script>
+<script src="js/chatbot.js?v=7" defer></script>
+<script src="js/cookie-consent.js?v=4" defer></script>
+</body>
+</html>
+"""
+
+OUT.write_text(HTML, encoding="utf-8")
+print(f"Written {OUT}")

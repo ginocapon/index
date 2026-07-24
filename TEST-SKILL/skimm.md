@@ -1,6 +1,6 @@
 # SKIMM — Blog Keyword & Intent Map (Righetto)
 
-> **Generato:** 2026-07-17 · Script: `python scripts/build_skimm.py`
+> **Generato:** 2026-07-24 · Script: `python scripts/build_skimm.py`
 > **Uso:** prima di ogni nuovo articolo — anti-doppioni semantici + keyword per «bucare» Google senza cannibalizzare.
 > **Companion:** `check_doppioni_sito.py` (tecnico) + `skill-content.md` §2.0–2.2 + `SKILL-2.0.md` §8.1a.
 
@@ -97,7 +97,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 
 ## 2. Stato verifica automatica
 
-**15 avvisi** al generazione 2026-07-17:
+**15 avvisi** al generazione 2026-07-24:
 
 - Intent simile `breakdown-costi`: blog-costi-proprieta-acquisto-possesso-vendita-padova-2026, blog-costi-costruzione-istat-padova-2026
 - Intent simile `territorio-limena`: blog-limena-vicino-padova-comprare-2026, blog-affitti-limena-2026, blog-rubano-limena-affitto-lavoratori-2026, blog-mercato-immobiliare-limena-2026…
@@ -115,7 +115,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 - Coppia da non fondere (Tribloc vs Case Green generico): blog-residenze-green-padova-tribloc-2026 ↔ blog-domanda-case-green-certificazione-padova-2026
 - Coppia da non fondere (Evento BCE vs guida mutui): blog-bce-tassi-mutui-giugno-2026-padova ↔ blog-mutui-casa-padova-2026
 
-**Articoli catalogati:** 108
+**Articoli catalogati:** 109
 
 ---
 
@@ -255,10 +255,11 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-domanda-case-green-certificazione-padova-2026` | `domanda-case-green-certificazione-ape` | Domanda acquirenti su APE/green — non progetto Tribloc |
 | `blog-residenze-green-padova-tribloc-2026` | `tribloc-gozzi-nzeb-riuso-uffici` | Progetto urbano Tribloc/Gozzi — non generico green building |
 
-### Territorio e zone (6)
+### Territorio e zone (7)
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
+| `blog-agenzia-immobiliare-limena-come-scegliere-2026` | `agenzia-immobiliare-limena-come-scegliere` | Focus Limena/cintura — non generico Padova centro |
 | `blog-appartamento-nuova-costruzione-limena` | `appartamento-nuova-costruzione-limena` | Focus Limena/cintura — non generico Padova centro |
 | `blog-direttiva-case-green-limena-padova` | `direttiva-case-green-limena` | Focus Limena/cintura — non generico Padova centro |
 | `blog-quartieri-padova-2026` | `quartieri-padova-prezzi-omi` | Mappa quartieri prezzi OMI — pillar territorio città |
