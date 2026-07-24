@@ -275,6 +275,11 @@
     "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-loft-aziende-cucina-condivisa-padova-vicenza-2026"
   },
   {
+    "path": "/blog-articolo?s=blog-mandato-esclusivo-padova-perche-conviene-2026",
+    "status": 200,
+    "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-mandato-esclusivo-padova-perche-conviene-2026"
+  },
+  {
     "path": "/blog-articolo?s=blog-nuove-costruzioni-mercato-veneto-2026-padova",
     "status": 200,
     "final": "https://righettoimmobiliare.it/blog-articolo?s=blog-nuove-costruzioni-mercato-veneto-2026-padova"
@@ -770,6 +775,16 @@
     "final": "https://righettoimmobiliare.it/blog-loft-aziende-cucina-condivisa-padova-vicenza-2026.html"
   },
   {
+    "path": "/blog-mandato-esclusivo-padova-perche-conviene-2026",
+    "status": 200,
+    "final": "https://righettoimmobiliare.it/blog-mandato-esclusivo-padova-perche-conviene-2026"
+  },
+  {
+    "path": "/blog-mandato-esclusivo-padova-perche-conviene-2026.html",
+    "status": 200,
+    "final": "https://righettoimmobiliare.it/blog-mandato-esclusivo-padova-perche-conviene-2026.html"
+  },
+  {
     "path": "/blog-mercato-immobiliare-limena-2026",
     "status": 200,
     "final": "https://righettoimmobiliare.it/blog-mercato-immobiliare-limena-2026"
@@ -881,8 +896,8 @@
   },
   {
     "path": "/blog-mutuo-prima-casa-padova",
-    "status": 503,
-    "final": "https://www.righettoimmobiliare.it/blog-mutuo-prima-casa-padova"
+    "status": 200,
+    "final": "https://righettoimmobiliare.it/blog-mutuo-prima-casa-padova"
   },
   {
     "path": "/blog-mutuo-prima-casa-padova.html",

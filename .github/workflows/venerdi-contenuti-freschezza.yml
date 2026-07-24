@@ -35,6 +35,10 @@ jobs:
       - name: Dipendenze report PDF
         run: pip install -r scripts/requirements-venerdi.txt
 
+      - name: Valida JSON dati GSC (blocca cron se corrotto)
+        run: |
+          python -c "import json; json.load(open('data/gsc-keywords-priority.json')); json.load(open('data/gsc-weekly-history.json'))"
+
       - name: Esegui audit contenuti + SKIMM
         id: audit
         run: |
