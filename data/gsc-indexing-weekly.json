@@ -1,17 +1,40 @@
 {
-  "updated": "2026-07-15",
-  "source": "GSC manuale — aggiornare ogni venerdì (Indicizzazione → Pagine)",
-  "note": "Dopo fix DNS apex 15/07: le «reindirizzamento» dovrebbero scendere in 1-2 settimane",
+  "updated": "2026-07-17",
+  "source": "GSC manuale — aggiornare ogni venerdì (Indicizzazione → Pagine + Sitemap)",
+  "note": "Sitemap principale OK (166 URL). Rimuovere da GSC le 9 URL singole inviate per errore come sitemap (tipo Sconosciuto, 1 errore). Dopo fix DNS apex 15/07: le «reindirizzamento» dovrebbero scendere in 1-2 settimane",
   "sitemap_urls": 166,
-  "indexed": 7,
-  "not_indexed": 142,
+  "sitemap_main": {
+    "url": "https://righettoimmobiliare.it/sitemap.xml",
+    "status": "Riuscita",
+    "last_read": "2026-07-13",
+    "discovered_pages": 166
+  },
+  "sitemap_erronee_da_rimuovere": [
+    "https://www.righettoimmobiliare.it/zona-limena",
+    "https://www.righettoimmobiliare.it/agenzia-immobiliare-padova",
+    "https://righettoimmobiliare.it/blog",
+    "https://righettoimmobiliare.it/immobili",
+    "https://righettoimmobiliare.it/blog-mercato-immobiliare-limena-2026",
+    "https://righettoimmobiliare.it/blog-appartamento-nuova-costruzione-limena",
+    "https://righettoimmobiliare.it/blog-scegliere-agenzia-immobiliare-padova-2026",
+    "https://righettoimmobiliare.it/blog-limena-vs-padova-centro-dove-comprare-2026"
+  ],
+  "indexed": 94,
+  "not_indexed": 330,
   "by_reason": {
-    "redirect": 74,
-    "discovered_not_indexed": 52,
-    "crawled_not_indexed": 16
+    "redirect": 90,
+    "crawled_not_indexed": 89,
+    "not_found_404": 86,
+    "discovered_not_indexed": 54,
+    "noindex": 3,
+    "alternate_canonical": 3,
+    "redirect_error": 2,
+    "server_5xx": 2,
+    "duplicate_no_canonical": 1
   },
   "manual_checks": {
     "sitemap_ok": true,
+    "sitemap_cleanup_pending": true,
     "convalida_16_crawled": false,
     "prestazioni_affitti_limena": true
   }

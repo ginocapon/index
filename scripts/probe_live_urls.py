@@ -30,7 +30,7 @@ def collect_candidates() -> list[str]:
     paths = {"/", "/immobili", "/blog", "/servizi", "/sitemap.xml", "/api/send-mail.php", "/scraping.html"}
     for p in ROOT.glob("*.html"):
         name = p.stem
-        if name in ("404",):
+        if name in ("404",) or name.startswith("venerdi-"):
             continue
         paths.add(f"/{name}")
         paths.add(f"/{name}.html")

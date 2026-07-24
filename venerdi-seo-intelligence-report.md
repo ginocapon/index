@@ -1,5 +1,5 @@
 # SEO/GEO Intelligence — Report venerdì
-**Data:** 2026-07-09
+**Data:** 2026-07-24
 
 > Framework PAGE SCORE e decisioni: `TEST-SKILL/skill-seo.md` §11
 
@@ -7,10 +7,10 @@
 
 ## 1. Sintesi esecutiva
 
-- **Pagine analizzate:** 130
+- **Pagine analizzate:** 128
 - **Da sostenere (refresh/GEO):** 12
-- **Keyword gap (nuovi articoli):** 5
-- **Probe tecnico issue:** 0
+- **Keyword gap (nuovi articoli):** 6
+- **Probe tecnico issue:** 3
 
 ### Decisione settimana (regola)
 
@@ -27,18 +27,18 @@
 
 | Pagina | Score | Imp | Click | Decisione | Motivo |
 |---|---:|---:|---:|---|---|
-| `/blog-affitto-studenti-padova` | 77 | 271 | 8 | **SOSTENERE** | CTR basso su contenuto già corposo |
+| `/blog-affitto-studenti-padova` | 80 | 271 | 8 | **SOSTENERE** | CTR basso su contenuto già corposo |
 | `/blog-rendimento-affitto-padova` | 93 | 139 | 0 | **SOSTENERE** | 139 imp, 0 click — ottimizzare title/meta/snippet |
 | `/agenzia-immobiliare-padova` | 75 | 68 | 0 | **SOSTENERE** | 68 imp, 0 click — ottimizzare title/meta/snippet |
-| `/blog-affitto-breve-padova-2026` | 82 | 10 | 0 | **SOSTENERE** | CTR basso su contenuto già corposo |
-| `/blog-affitti-canoni-fimaa-q1-2024-padova` | 20 | 0 | 0 | **SOSTENERE** | contenuto thin (11 parole) |
-| `/blog-bonus-edilizi-2024-incentivi-casa-padova` | 20 | 0 | 0 | **SOSTENERE** | contenuto thin (11 parole) |
-| `/blog-piano-casa-decreto-salva-casa-padova` | 20 | 0 | 0 | **SOSTENERE** | contenuto thin (11 parole) |
-| `/blog-vigonza-rubano-comprare-casa-cintura-2024` | 20 | 0 | 0 | **SOSTENERE** | contenuto thin (11 parole) |
-| `/blog-articolo` | 40 | 0 | 0 | **SOSTENERE** | contenuto thin (146 parole) |
-| `/blog-scuole-istruzione-padova` | 40 | 0 | 0 | **SOSTENERE** | contenuto thin (403 parole) |
-| `/blog-servizi-infrastrutture-padova` | 40 | 0 | 0 | **SOSTENERE** | contenuto thin (398 parole) |
-| `/blog-trasporti-mobilita-padova` | 40 | 0 | 0 | **SOSTENERE** | contenuto thin (401 parole) |
+| `/blog-affitto-breve-padova-2026` | 85 | 10 | 0 | **SOSTENERE** | CTR basso su contenuto già corposo |
+| `/blog-articolo` | 40 | 0 | 0 | **SOSTENERE** | contenuto thin (147 parole) |
+| `/blog-scuole-istruzione-padova` | 43 | 0 | 0 | **SOSTENERE** | contenuto thin (443 parole) |
+| `/blog-servizi-infrastrutture-padova` | 43 | 0 | 0 | **SOSTENERE** | contenuto thin (430 parole) |
+| `/blog-trasporti-mobilita-padova` | 43 | 0 | 0 | **SOSTENERE** | contenuto thin (433 parole) |
+| `/blog-previsioni-immobiliari-scenari-geopolitica-2026` | 52 | 0 | 0 | **SOSTENERE** | contenuto thin (652 parole) |
+| `/blog-mercato-italiano-tensioni-medio-oriente-2026` | 53 | 0 | 0 | **SOSTENERE** | contenuto thin (781 parole) |
+| `/blog-prospettive-mercato-residenziale-italia-2026` | 55 | 0 | 0 | **SOSTENERE** | contenuto thin (625 parole) |
+| `/blog-limena-vicino-padova-comprare-2026` | 57 | 0 | 0 | **SOSTENERE** | contenuto thin (807 parole) |
 
 ---
 
@@ -50,26 +50,27 @@
 
 ## 4. AGGIUNGERE — keyword gap (max 1/settimana)
 
-1. **omi padova affitti spiegati** → `blog-omi-padova-quotazioni-affitti-2026` — Query corta omi padova — titolo articolo OMI aggiornato luglio 2026
-2. **affitti limena** → `blog-affitti-limena` — GSC: 12 imp, 0 click
-3. **agenzia immobiliare limena** → `blog-agenzia-immobiliare-limena` — GSC: 13 imp, 0 click
-4. **omi padova** → `blog-omi-padova` — GSC: 14 imp, 0 click
-5. **immobiliare** → `blog-immobiliare` — GSC: 28 imp, 0 click
+1. **omi padova affitti spiegati** → `blog-quotazioni-locazioni-omi-istat-padova-2026` — Query corta omi padova — pillar esistente aggiornato luglio 2026 (box AEO + FAQ)
+2. **affitti limena** → `blog-affitti-limena` — GSC: 39 imp, 3 click
+3. **agenzia immobiliare limena** → `blog-agenzia-immobiliare-limena` — GSC: 58 imp, 5 click
+4. **agenzie immobiliari limena** → `blog-agenzie-immobiliari-limena` — GSC: 33 imp, 3 click
+5. **omi padova** → `blog-omi-padova` — GSC: 14 imp, 0 click
+6. **immobiliare** → `blog-immobiliare` — GSC: 28 imp, 0 click
 
 ---
 
 ## 5. Query GSC crescita (0 click)
 
+- `agenzia immobiliare limena` — 58 imp, 5 click
+- `affitti limena` — 39 imp, 3 click
+- `agenzie immobiliari limena` — 33 imp, 3 click
 - `immobiliare` — 28 imp, 0 click
 - `omi padova` — 14 imp, 0 click
-- `agenzia immobiliare limena` — 13 imp, 0 click
-- `affitti limena` — 12 imp, 0 click
 - `affitto limena` — 5 imp, 0 click
 - `appartamento limena` — 5 imp, 0 click
 - `immobiliare limena` — 5 imp, 0 click
 - `affitti a limena` — 4 imp, 0 click
 - `appartamento in affitto limena` — 4 imp, 0 click
-- `canone concordato padova` — 3 imp, 1 click
 
 ---
 

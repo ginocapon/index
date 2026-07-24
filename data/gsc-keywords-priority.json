@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-16",
+  "updated": "2026-07-24",
   "source": "GSC screenshot utente — sera 16/07/2026 (Prestazioni 28 gg, Web)",
   "capture_ref": "data/gsc-captures/2026-07-16-prestazioni-28gg.png",
   "note": "Dati estratti da screenshot GSC 16/07/2026 sera — periodo 17/06–13/07/2026. Baseline storica 16 mesi: data/gsc-baseline-16m.json",
@@ -65,6 +65,8 @@
       "kw": "mandato esclusivo padova",
       "date": "2026-07-17"
     },
+    {
+      "slug": "blog-affitti-limena-2026",
       "kw": "affitti limena",
       "date": "2026-07-09"
     },
