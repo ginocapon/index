@@ -71,62 +71,47 @@
         "nota": "Pertinenza / garage-box"
       }
     ],
-    "terreni": [
-      {
-        "comune": "Campodarsego (PD)",
-        "foglio": "15",
-        "particella": "144",
-        "categoria": "Seminativo",
-        "classe": "02",
-        "superficie": "280 m²",
-        "rendite": "R.D. € 2,24 · R.A. € 1,45"
-      }
-    ],
-    "nota_terreno": "Sul lato destro dell'immobile (fronte strada) è annesso un lotto di <b>280 m²</b> censito a <b>Campodarsego</b> (Fg. 15, Part. 144), ove insistono la baracca in lamiera e area scoperta. La baracca risulta <b>catastalmente registrata nel Comune di Campodarsego</b>: occorrerà verificare titoli edilizi, eventuale condono/sanatoria (se i comproprietari lo vorranno) oppure demolizione; i costi andranno ripartiti tra i titolari secondo le rispettive quote.",
     "rendita_totale": "€ 674,24 (fabbricati sub. 6 + 7)",
     "titolarita": "Proprietà in comune — quote come da tabella intestatari"
   },
   "caratteristiche": [
     "Porzione di bifamiliare orizzontale — epoca anni '70",
     "Superficie catastale fabbricato: 140 m² (A/2) + pertinenza C/6 20 m² — superficie commerciale stimata in sopralluogo 156 m²",
-    "Giardino frontale e scoperto laterale (aree esterne in regime condiviso, senza parti esclusive oltre alle unità censite)",
-    "Lato destro fronte strada: lotto terreno annesso 280 m² (Campodarsego, Fg. 15 Part. 144) con baracca in lamiera catastata a Campodarsego",
+    "Giardino frontale in regime condiviso (senza parti esclusive oltre alle unità censite)",
     "Garage/box sub. 7 (20 m²) — pertinenza C/6 al piano terra",
     "Posizione fronte strada con intenso passaggio veicolare"
   ],
-  "stato_manutentivo": "Condizioni manutentive molto precarie — ristrutturazione pressoché integrale (impianti, servizi, cucina, pavimentazioni, soffitti, serramenti, finiture, marciapiedi esterni). Baracca in lamiera in stato da definire urbanisticamente.",
+  "stato_manutentivo": "Condizioni manutentive molto precarie — ristrutturazione pressoché integrale (impianti, servizi, cucina, pavimentazioni, soffitti, serramenti, finiture, marciapiedi esterni).",
   "obblighi_vendita": [
     "Prima della compravendita dovrà essere incaricato un <b>tecnico abilitato</b> per la redazione dell'<b>APE (Attestato di Prestazione Energetica)</b>, documento <b>obbligatorio per legge</b> (D.Lgs. 192/2005) per la vendita di immobili — da considerare tra gli oneri a carico del venditore."
   ],
   "criticita_urbanistiche": [
     "Piano terra: assenza di bagno autorizzato — verifica titoli edilizi vs stato di fatto",
     "Probabile necessità di pratiche di sanatoria se difformità regolarizzabili",
-    "Baracca in lamiera su terreno Campodarsego (280 m²): catastalmente a Campodarsego — da condonare/sanare se i comproprietari intendono mantenerla, altrimenti demolizione; costi da quantificare e ripartire in comune tra i titolari",
-    "Verifica urbanistica e catastale del garage/box sub. 7 e del terreno Fg. 15 Part. 144",
-    "Coordinamento tra Comune di Curtarolo (fabbricato) e Comune di Campodarsego (terreno/baracca)"
+    "Verifica urbanistica e catastale del garage/box sub. 7"
   ],
   "attivita_prioritarie": [
     "Incaricare tecnico certificatore per redazione <b>APE</b> (obbligatorio per la vendita)",
-    "Accesso agli atti presso Comune di Curtarolo (fabbricato) e Campodarsego (terreno/baracca)",
+    "Accesso agli atti presso Comune di Curtarolo",
     "Acquisizione documentazione urbanistica e catastale completa",
     "Verifica conformità stato di fatto e titolarità quote",
-    "Quantificazione costi condono/sanatoria o demolizione baracca — ripartizione tra comproprietari",
     "Quantificazione opere di ripristino edilizio e sanatorie sul fabbricato"
   ],
   "target_acquirente": "Prevalentemente acquirenti stranieri (non italiani) interessati a case su più livelli in bifamiliare orizzontale da ristrutturare; marginalmente investitori specializzati in riqualificazione.",
+  "allegato_visura_titolo": "Allegato B — Visura catastale fabbricati",
   "allegati": {
-    "planimetria_catastale": "c:\\Users\\Utente\\Downloads\\0428_001.pdf",
+    "planimetria_catastale": "documenti/perizia_ragazzo_allegati/planimetria_sub6_solo_fabbricato.jpg",
     "visura_immagini": [
       "documenti/perizia_ragazzo_allegati/visura_riepilogo.png",
       "documenti/perizia_ragazzo_allegati/visura_intestatari.png"
     ],
     "visura_labels": [
-      "Visura — riepilogo fabbricati e terreno",
-      "Visura — intestatari e quote"
+      "Visura catastale — fabbricati (sub. 6 e 7)",
+      "Visura catastale — intestatari e quote"
     ],
     "vista_aerea": "documenti/perizia_ragazzo_allegati/vista_3d_presentazione.png",
     "usa_vista_aerea_in_copertina": true,
     "vista_aerea_in_allegati": false
   },
-  "note_planimetria_storica": "Planimetria catastale storica (14/09/1988, geometra Bragagnolo) — Curtarolo, Via Umberto I, Fg. 15 Mappale 144 Sub. 6 (N.C.T. Fg. 15 Map. 206). Intestazione storica Righetto Dino / Righetto Otorino; titolarità attuale da visura: Bonetto Maria e famiglia Ragazzo."
+  "note_planimetria_storica": "Planimetria catastale storica fabbricato (14/09/1988, geometra Bragagnolo) — Curtarolo, Via Umberto I, sub. 6 (A/2) e sub. 7 (C/6). Titolarità attuale da visura: Bonetto Maria e famiglia Ragazzo."
 }
