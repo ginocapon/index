@@ -341,6 +341,12 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
     for c in cfg.get("criticita_urbanistiche", []):
         story.append(Paragraph(f"• {c}", bullet))
     story.append(Spacer(1, 2 * mm))
+    story.append(Paragraph("<b>Obblighi per la vendita</b>", h2))
+    obblighi = cfg.get("obblighi_vendita", [])
+    if obblighi:
+        for ob in obblighi:
+            story.append(Paragraph(f"• {ob}", bullet))
+    story.append(Spacer(1, 2 * mm))
     story.append(Paragraph("<b>Attività prioritarie prima della commercializzazione:</b>", body))
     for a in cfg.get("attivita_prioritarie", []):
         story.append(Paragraph(f"• {a}", bullet))
