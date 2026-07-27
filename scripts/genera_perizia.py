@@ -423,7 +423,7 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
             comp = stack_vertical(imgs, ["Planimetria catastale storica (N.C.E.U.)"])
             cp = tmp / "comp_planimetria.jpg"
             comp.save(cp, "JPEG", quality=92)
-            story.append(Paragraph("Allegato A — Planimetria catastale", h2))
+            story.append(Paragraph("Allegato A — Planimetria catastale fabbricato", h2))
             story.append(fit_rl_image(cp, max_w, max_h))
             story.append(PageBreak())
 
@@ -443,7 +443,10 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
         comp = stack_vertical(attachments["visura_immagini"], labels)
         cp = tmp / "comp_visura.jpg"
         comp.save(cp, "JPEG", quality=92)
-        story.append(Paragraph("Allegato B — Estratto visura catastale (immobile e terreno)", h2))
+        story.append(Paragraph(
+            cfg.get("allegato_visura_titolo", "Allegato B — Visura catastale fabbricati"),
+            h2,
+        ))
         story.append(fit_rl_image(cp, max_w, max_h))
         story.append(PageBreak())
 
@@ -475,11 +478,14 @@ def prepare_attachments(cfg: dict, tmp: Path) -> dict[str, Path | list[Path]]:
     allegati = cfg.get("allegati", {})
     out: dict = {}
 
-    plan_pdf = Path(allegati.get("planimetria_catastale", ""))
-    if plan_pdf.is_file():
-        pages = pdf_page_to_jpg(plan_pdf, tmp, "plan", dpi=2.2)
-        if pages:
-            out["planimetria"] = pages[0]
+    plan_path = Path(allegati.get("planimetria_catastale", ""))
+    if plan_path.is_file():
+        if plan_path.suffix.lower() == ".pdf":
+            pages = pdf_page_to_jpg(plan_path, tmp, "plan", dpi=2.2)
+            if pages:
+                out["planimetria"] = pages[0]
+        else:
+            out["planimetria"] = image_to_jpg(plan_path, tmp, "plan.jpg")
 
     scheda = Path(allegati.get("scheda_catastale", ""))
     if scheda.is_file():
