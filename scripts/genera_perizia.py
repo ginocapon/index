@@ -186,6 +186,34 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
     doc = SimpleDocTemplate(str(out_pdf), pagesize=A4, leftMargin=18 * mm, rightMargin=18 * mm, topMargin=18 * mm, bottomMargin=22 * mm)
     story: list = []
 
+    # Pagina presentazione — vista 3D / satellite (opzionale)
+    if attachments.get("presentazione") and attachments["presentazione"].is_file():
+        if LOGO_PATH.is_file():
+            story.append(RLImage(str(LOGO_PATH), width=32 * mm, height=32 * mm))
+            story.append(Spacer(1, 4 * mm))
+        story.append(Paragraph("RELAZIONE DI STIMA IMMOBILIARE", title))
+        story.append(Paragraph(cfg.get("tipologia", ""), subtitle))
+        story.append(Paragraph(f'<b>{cfg.get("ubicazione", "")}</b>', ParagraphStyle("loc", alignment=TA_CENTER, fontSize=11, textColor=BLU, spaceAfter=6)))
+        story.append(Spacer(1, 2 * mm))
+        story.append(fit_rl_image(attachments["presentazione"], 174 * mm, 155 * mm))
+        story.append(Spacer(1, 4 * mm))
+        prev = Table(
+            [[Paragraph(
+                f'<font size="9" color="#ffffff">Prezzo indicativo di commercializzazione</font><br/>'
+                f'<font size="20" color="#FF6B35"><b>{fmt_euro(valore)}</b></font><br/>'
+                f'<font size="8" color="#cccccc">Incidenza € {euro_mq:,.0f}/m² su {sup:.0f} m² commerciali</font>'.replace(",", "."),
+                ParagraphStyle("pv", alignment=TA_CENTER, leading=13),
+            )]],
+            colWidths=[174 * mm],
+        )
+        prev.setStyle(TableStyle([("BACKGROUND", (0, 0), (-1, -1), NERO), ("BOX", (0, 0), (-1, -1), 1, ORO), ("TOPPADDING", (0, 0), (-1, -1), 8), ("BOTTOMPADDING", (0, 0), (-1, -1), 8)]))
+        story += [prev, Spacer(1, 3 * mm)]
+        story.append(Paragraph(
+            f'<i>Documento riservato — {data_perizia.strftime("%d/%m/%Y")} — Righetto Immobiliare</i>',
+            ParagraphStyle("pc", alignment=TA_CENTER, fontSize=8, textColor=GRIGIO),
+        ))
+        story.append(PageBreak())
+
     logo = RLImage(str(LOGO_PATH), width=26 * mm, height=26 * mm) if LOGO_PATH.is_file() else Paragraph("", body)
     hdr = Table(
         [[
@@ -321,21 +349,12 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
 
     # Sezione 5 Commerciale
     story.append(Paragraph("5. Considerazioni commerciali e target di mercato", h2))
-    story.append(Paragraph(
-        "L'immobile <b>non</b> è rivolto al segmento «pronta abitazione». Il profilo di acquirente "
-        "più probabile include investitori, imprese edili, privati intenzionati a ristrutturazione "
-        "completa e, marginalmente, acquirenti esteri interessati a metrature ampie da riqualificare.",
-        body,
-    ))
-    story.append(Paragraph(f"<b>Target indicativo:</b> {cfg.get('target_acquirente', '—')}", body))
-    story.append(Paragraph(
-        "Le quotazioni medie richieste nel Comune di Curtarolo si attestano indicativamente intorno "
-        "a <b>1.440 €/m²</b> su immobili mediamente commerciabili (fonte: comparables di mercato e "
-        "osservazione annunci area — non dato OMI puntuale). Per il presente immobile occorre applicare "
-        "riduzioni significative per: epoca anni '70, fronte strada, ristrutturazione integrale, "
-        "possibili difformità, garage in lamiera, incertezza documentale.",
-        body,
-    ))
+    for para in cfg.get("considerazioni_commerciali", []):
+        story.append(Paragraph(para, body))
+    if cfg.get("target_acquirente"):
+        story.append(Paragraph(f"<b>Target indicativo:</b> {cfg['target_acquirente']}", body))
+    if cfg.get("nota_mercato"):
+        story.append(Paragraph(cfg["nota_mercato"], body))
 
     # Sezione 6 Valutazione
     story.append(Paragraph("6. Valutazione economica", h2))
@@ -366,14 +385,13 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
             story.append(Paragraph(f"<b>{label}:</b> {cfg[key]}", body))
 
     story.append(Spacer(1, 4 * mm))
-    story.append(Paragraph(
-        "Il prezzo di partenza indicato in <b>€ 145.000</b> rappresenta il "
-        "<b>tetto massimo prudente</b> per l'avvio della commercializzazione, tenuto conto che si "
-        "tratta di porzione in regime condiviso (non parti esclusive) e delle criticità sopra descritte. "
-        "La stima dovrà essere confermata o ridimensionata dopo l'accesso agli atti e la quantificazione "
-        "dei costi di ripristino e sanatoria.",
-        body,
-    ))
+    nota_fin = cfg.get("nota_valore_finale") or (
+        f"Il prezzo di partenza indicato in <b>{fmt_euro(valore)}</b> rappresenta il "
+        f"<b>tetto massimo prudente</b> per l'avvio della commercializzazione, tenuto conto delle "
+        f"criticità descritte. La stima dovrà essere confermata dopo l'accesso agli atti e la "
+        f"quantificazione dei costi di ripristino e sanatoria."
+    )
+    story.append(Paragraph(nota_fin, body))
 
     # Contatti
     story.append(Spacer(1, 5 * mm))
@@ -423,7 +441,7 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
         story.append(fit_rl_image(cp, max_w, max_h))
         story.append(PageBreak())
 
-    if attachments.get("vista_aerea") and attachments["vista_aerea"].is_file():
+    if attachments.get("vista_aerea") and attachments["vista_aerea"].is_file() and cfg.get("allegati", {}).get("vista_aerea_in_allegati", False):
         story.append(Paragraph("Allegato C — Vista aerea dell'area (satellite)", h2))
         story.append(Paragraph("Inquadramento dell'immobile e del contesto edificato — Cavino di Curtarolo.", small))
         story.append(Spacer(1, 3 * mm))
@@ -469,7 +487,10 @@ def prepare_attachments(cfg: dict, tmp: Path) -> dict[str, Path | list[Path]]:
 
     aerial = Path(allegati.get("vista_aerea", ""))
     if aerial.is_file():
-        out["vista_aerea"] = image_to_jpg(aerial, tmp, "vista_aerea.jpg")
+        jpg = image_to_jpg(aerial, tmp, "vista_aerea.jpg")
+        out["vista_aerea"] = jpg
+        if allegati.get("presentazione") or allegati.get("usa_vista_aerea_in_copertina", True):
+            out["presentazione"] = jpg
 
     return out
 
