@@ -7,9 +7,7 @@
   "ubicazione": "Cavino di Curtarolo (PD) — Via Umberto I",
   "superficie_commerciale": 156,
   "valore_principale": 147000,
-  "valore_label": "Prezzo massimo indicativo di commercializzazione (partenza)",
-  "valore_secondario": "€ 95.000 – € 120.000 (forchetta prudenziale di mercato, subordinata alle verifiche urbanistiche)",
-  "valore_conservativo": "€ 80.000 – € 90.000 (scenario conservativo se emergessero difformità non sanabili o costi elevati di regolarizzazione)",
+  "valore_label": "Prezzo tecnico di partenza commercializzazione",
   "euro_mq_nota": "Incidenza unitaria stimata: € 942/m² su 156 m² commerciali (calcolo agenzia — non confronto con medie di zona)",
   "considerazioni_commerciali": [
     "L'immobile <b>non</b> è rivolto al segmento «pronta abitazione» né al compratore italiano medio che cerca casa ristrutturata e immediatamente fruibile.",
@@ -17,7 +15,7 @@
     "Il posizionamento commerciale dovrà valorizzare volume, distribuzione su piani e potenziale post-ristrutturazione, senza riferimenti a prezzi al m² «medi» di comune che non descrivono immobili con le stesse criticità."
   ],
   "nota_mercato": "Il prezzo al metro quadro indicato (€ 942/m²) deriva esclusivamente dalla stima Righetto sul presente immobile e <b>non</b> va confrontato con quotazioni medie di zona su annunci standard, che risulterebbero fuorvianti.",
-  "nota_valore_finale": "Il prezzo di partenza indicato in <b>€ 147.000</b> rappresenta il tetto massimo prudente per l'avvio della commercializzazione, tenuto conto della porzione in regime condiviso, delle criticità urbanistiche e del target prevalentemente estero. Conferma o riduzione dopo accesso agli atti e quantificazione costi di ripristino/sanatoria.",
+  "nota_valore_finale": "Il <b>€ 147.000</b> indicato costituisce il <b>prezzo tecnico massimo di partenza</b> per l'avvio della commercializzazione — non un valore minimo garantito. È il tetto prudente entro cui ci si muove in fase di mandato, tenuto conto di porzione in regime condiviso, criticità urbanistiche e target prevalentemente estero.<br/><br/>Come avviene di norma sul mercato, il prezzo effettivo di chiusura potrà essere <b>ribassato dal mercato</b> rispetto alla richiesta iniziale; in casi analoghi una riduzione dell'<b>ordine del 10% o superiore</b> non è infrequente, in funzione di trattativa, tempi e percezione dell'acquirente. <b>Per prassi operativa Righetto si parte comunque da € 147.000</b> come prezzo tecnico iniziale, salvo diversa indicazione dei comproprietari dopo accesso agli atti.<br/><br/>Non si indicano forchette basse in chiusura: un prezzo di richiesta troppo basso penalizzerebbe la trattativa; la corretta impostazione è partire dal valore tecnico massimo e lasciare al mercato il naturale aggiustamento.",
   "proprietari": [
     {
       "nome": "Bonetto Maria",
@@ -97,6 +95,9 @@
     "Posizione fronte strada con intenso passaggio veicolare"
   ],
   "stato_manutentivo": "Condizioni manutentive molto precarie — ristrutturazione pressoché integrale (impianti, servizi, cucina, pavimentazioni, soffitti, serramenti, finiture, marciapiedi esterni). Baracca in lamiera in stato da definire urbanisticamente.",
+  "obblighi_vendita": [
+    "Prima della compravendita dovrà essere incaricato un <b>tecnico abilitato</b> per la redazione dell'<b>APE (Attestato di Prestazione Energetica)</b>, documento <b>obbligatorio per legge</b> (D.Lgs. 192/2005) per la vendita di immobili — da considerare tra gli oneri a carico del venditore."
+  ],
   "criticita_urbanistiche": [
     "Piano terra: assenza di bagno autorizzato — verifica titoli edilizi vs stato di fatto",
     "Probabile necessità di pratiche di sanatoria se difformità regolarizzabili",
@@ -105,6 +106,7 @@
     "Coordinamento tra Comune di Curtarolo (fabbricato) e Comune di Campodarsego (terreno/baracca)"
   ],
   "attivita_prioritarie": [
+    "Incaricare tecnico certificatore per redazione <b>APE</b> (obbligatorio per la vendita)",
     "Accesso agli atti presso Comune di Curtarolo (fabbricato) e Campodarsego (terreno/baracca)",
     "Acquisizione documentazione urbanistica e catastale completa",
     "Verifica conformità stato di fatto e titolarità quote",

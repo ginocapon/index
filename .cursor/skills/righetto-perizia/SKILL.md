@@ -51,8 +51,9 @@ Formato tel in PDF/footer: `049.8843484` oppure `049.8843484` (equivalenti).
 
 - **Mai** citare prezzi al m² «medi di comune» o di zona (es. 1.440 €/m²) — fuorvianti su immobili con criticità; **solo** €/m² calcolato da `valore_principale ÷ superficie_commerciale`.
 - **Target clientela:** per porzioni bifamiliari orizzontali multi-livello da ristrutturare → prevalentemente **acquirenti stranieri**, non imprese edili italiane generiche.
-- **Valore partenza:** decisione agenzia (`valore_principale`); forchette prudenziali solo come scenario secondario in testo, non in box principale.
-- Campi JSON: `considerazioni_commerciali[]`, `nota_mercato`, `target_acquirente`, `nota_valore_finale`.
+- **Valore partenza:** decisione agenzia (`valore_principale`) = **prezzo tecnico massimo di partenza**; in chiusura **non** indicare forchette basse (€ 80–120k ecc.) — spiegare che il mercato può ribassare almeno ~10% e che Righetto parte dal prezzo tecnico indicato.
+- **APE:** se mancante, inserire in `obblighi_vendita[]` e in `attivita_prioritarie[]` l'incarico a tecnico certificatore (obbligatorio per vendita, D.Lgs. 192/2005).
+- Campi JSON: `considerazioni_commerciali[]`, `nota_mercato`, `target_acquirente`, `nota_valore_finale`, `obblighi_vendita[]`.
 
 ## Script
 
@@ -90,13 +91,14 @@ Copiare e adattare un file `scripts/perizia_config_<cognome>.json`:
 | `catasto` | sì | `unita[]` sub/cat/consistenza/rendita |
 | `caratteristiche` | no | Elenco bullet |
 | `criticita_urbanistiche` | no | Elenco |
+| `obblighi_vendita` | no | Es. APE obbligatoria — incarico tecnico |
 | `attivita_prioritarie` | no | Elenco |
 | `allegati.planimetria_catastale` | no | Path PDF planimetria |
 | `allegati.scheda_catastale` | no | Path PDF visura |
 | `allegati.vista_aerea` | no | Path JPG/PNG vista 3D — **pagina 1 presentazione** |
 | `allegati.vista_aerea_in_allegati` | no | `false` se già in copertina (default) |
-| `valore_secondario` | no | Forchetta prudenziale testo |
-| `valore_conservativo` | no | Scenario peggiore |
+| `valore_secondario` | no | Opzionale — di solito omesso (no forchette basse in chiusura) |
+| `valore_conservativo` | no | Opzionale — scenario peggiore, solo se esplicitamente richiesto |
 
 Esempi config: `perizia_config_turato.json`, `perizia_config_ragazzo_curtarolo.json`
 
