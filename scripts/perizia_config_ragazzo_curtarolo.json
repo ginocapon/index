@@ -1,0 +1,55 @@
+{
+  "output_nome": "Perizia_Ragazzo_Ottorino_Porzione_Bifamiliare_Curtarolo.pdf",
+  "data": "2026-07-27",
+  "proprietario": "Ragazzo Ottorino (erede / successione)",
+  "proprietario_dettaglio": "Nato a Curtarolo (PD) il 21/04/1944 — C.F. RGZTRN44D21D226U — dato da visura catastale del 27/07/2026",
+  "tipologia": "Porzione di bifamiliare orizzontale",
+  "ubicazione": "Cavino di Curtarolo (PD) — Via Umberto I",
+  "superficie_commerciale": 156,
+  "valore_principale": 145000,
+  "valore_label": "Prezzo massimo indicativo di commercializzazione (partenza)",
+  "valore_secondario": "€ 95.000 – € 120.000 (forchetta prudenziale di mercato, subordinata alle verifiche urbanistiche)",
+  "valore_conservativo": "€ 80.000 – € 90.000 (scenario conservativo se emergessero difformità non sanabili o costi elevati di regolarizzazione)",
+  "euro_mq_nota": "Incidenza indicativa su 156 mq: circa € 929/mq (partenza) — da confrontare con quotazioni medie Curtarolo ~1.440 €/mq su immobili commerciabili, con riduzione per stato e criticità",
+  "catasto": {
+    "comune": "Curtarolo (D226)",
+    "via": "Via Umberto I",
+    "sezione": "15",
+    "foglio": "206",
+    "particella_nceu": "144 (planimetria storica sub. 6 — doc. 1988)",
+    "unita": [
+      {"sub": "8", "categoria": "A/3", "classe": "1", "consistenza": "2,5 vani", "piano": "T", "rendita": "€ 154,94"},
+      {"sub": "9", "categoria": "C/6", "classe": "1", "consistenza": "11 m²", "piano": "T", "rendita": "€ 19,32", "nota": "Pertinenza / box-garage"},
+      {"sub": "10", "categoria": "A/2", "classe": "1", "consistenza": "5,5 vani", "piano": "1", "rendita": "€ 468,68"}
+    ],
+    "rendita_totale": "€ 642,94",
+    "titolarita": "Proprietà 1/1 — Ragazzo Ottorino (visura 27/07/2026)"
+  },
+  "caratteristiche": [
+    "Porzione di bifamiliare orizzontale — epoca anni '70",
+    "Superficie commerciale stimata 156 m²",
+    "Giardino frontale e scoperto laterale (area esterna condivisa, senza parti esclusive censite)",
+    "Garage in lamiera (da verificare urbanisticamente — probabile demolizione)",
+    "Posizione fronte strada con intenso passaggio veicolare"
+  ],
+  "stato_manutentivo": "Condizioni manutentive molto precarie — ristrutturazione pressoché integrale (impianti, servizi, cucina, pavimenti, soffitti, serramenti, finiture, marciapiedi esterni)",
+  "criticita_urbanistiche": [
+    "Piano terra: assenza di bagno autorizzato — verifica titoli edilizi vs stato di fatto",
+    "Probabile necessità di pratiche di sanatoria se difformità regolarizzabili",
+    "Garage in lamiera: verifica urbanistica e catastale; si prevede demolizione salvo diversa risultanza accesso agli atti"
+  ],
+  "attivita_prioritarie": [
+    "Accesso agli atti presso Comune di Curtarolo",
+    "Acquisizione documentazione urbanistica e catastale completa",
+    "Verifica conformità stato di fatto",
+    "Quantificazione opere di ripristino e sanatorie",
+    "Stima costi demolizione garage e regolarizzazione"
+  ],
+  "target_acquirente": "Investitori, imprese di ristrutturazione, privati per riqualificazione totale, eventuale domanda estera su metrature ampie da ristrutturare",
+  "allegati": {
+    "planimetria_catastale": "c:\\Users\\Utente\\Downloads\\0428_001.pdf",
+    "scheda_catastale": "c:\\Users\\Utente\\Downloads\\scheda_catastale_6a6711257e5949.71062780.pdf",
+    "vista_aerea": "C:\\Users\\Utente\\.cursor\\projects\\c-Users-Utente-progetti-index\\assets\\c__Users_Utente_AppData_Roaming_Cursor_User_workspaceStorage_02d993d5cc19e4bea5396422fd725780_images_Immagine_2026-07-27_101815-dc578d6b-247b-40c6-baac-8ca10fe3c483.png"
+  },
+  "note_planimetria_storica": "Planimetria catastale storica (14/09/1988, geometra Bragagnolo) — Foglio 15, Mappale 144, Sub. 6 — ditta storica Righetto Dino / Righetto Otorino (1/2 ciascuno). Da incrociare con visura attuale sub. 8-9-10."
+}
