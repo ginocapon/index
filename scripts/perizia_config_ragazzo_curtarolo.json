@@ -6,11 +6,18 @@
   "tipologia": "Porzione di bifamiliare orizzontale",
   "ubicazione": "Cavino di Curtarolo (PD) — Via Umberto I",
   "superficie_commerciale": 156,
-  "valore_principale": 145000,
+  "valore_principale": 147000,
   "valore_label": "Prezzo massimo indicativo di commercializzazione (partenza)",
   "valore_secondario": "€ 95.000 – € 120.000 (forchetta prudenziale di mercato, subordinata alle verifiche urbanistiche)",
   "valore_conservativo": "€ 80.000 – € 90.000 (scenario conservativo se emergessero difformità non sanabili o costi elevati di regolarizzazione)",
-  "euro_mq_nota": "Incidenza indicativa su 156 mq: circa € 929/mq (partenza) — da confrontare con quotazioni medie Curtarolo ~1.440 €/m² su immobili commerciabili, con riduzione per stato e criticità",
+  "euro_mq_nota": "Incidenza unitaria stimata: € 942/m² su 156 m² commerciali (calcolo agenzia — non confronto con medie di zona)",
+  "considerazioni_commerciali": [
+    "L'immobile <b>non</b> è rivolto al segmento «pronta abitazione» né al compratore italiano medio che cerca casa ristrutturata e immediatamente fruibile.",
+    "Per tipologia (porzione su più livelli in bifamiliare orizzontale) e stato manutentivo, la clientela più coerente — nell'esperienza di mercato locale — è quella di <b>acquirenti stranieri</b> interessati a metrature ampie da riqualificare, più che imprese edili o investitori italiani.",
+    "Il posizionamento commerciale dovrà valorizzare volume, distribuzione su piani e potenziale post-ristrutturazione, senza riferimenti a prezzi al m² «medi» di comune che non descrivono immobili con le stesse criticità."
+  ],
+  "nota_mercato": "Il prezzo al metro quadro indicato (€ 942/m²) deriva esclusivamente dalla stima Righetto sul presente immobile e <b>non</b> va confrontato con quotazioni medie di zona su annunci standard, che risulterebbero fuorvianti.",
+  "nota_valore_finale": "Il prezzo di partenza indicato in <b>€ 147.000</b> rappresenta il tetto massimo prudente per l'avvio della commercializzazione, tenuto conto della porzione in regime condiviso, delle criticità urbanistiche e del target prevalentemente estero. Conferma o riduzione dopo accesso agli atti e quantificazione costi di ripristino/sanatoria.",
   "proprietari": [
     {
       "nome": "Bonetto Maria",
@@ -104,7 +111,7 @@
     "Quantificazione costi condono/sanatoria o demolizione baracca — ripartizione tra comproprietari",
     "Quantificazione opere di ripristino edilizio e sanatorie sul fabbricato"
   ],
-  "target_acquirente": "Investitori, imprese di ristrutturazione, privati per riqualificazione totale, eventuale domanda estera su metrature ampie da ristrutturare",
+  "target_acquirente": "Prevalentemente acquirenti stranieri (non italiani) interessati a case su più livelli in bifamiliare orizzontale da ristrutturare; marginalmente investitori specializzati in riqualificazione.",
   "allegati": {
     "planimetria_catastale": "c:\\Users\\Utente\\Downloads\\0428_001.pdf",
     "visura_immagini": [
@@ -115,7 +122,9 @@
       "Visura — riepilogo fabbricati e terreno",
       "Visura — intestatari e quote"
     ],
-    "vista_aerea": "C:\\Users\\Utente\\.cursor\\projects\\c-Users-Utente-progetti-index\\assets\\c__Users_Utente_AppData_Roaming_Cursor_User_workspaceStorage_02d993d5cc19e4bea5396422fd725780_images_Immagine_2026-07-27_101815-dc578d6b-247b-40c6-baac-8ca10fe3c483.png"
+    "vista_aerea": "documenti/perizia_ragazzo_allegati/vista_3d_presentazione.png",
+    "usa_vista_aerea_in_copertina": true,
+    "vista_aerea_in_allegati": false
   },
   "note_planimetria_storica": "Planimetria catastale storica (14/09/1988, geometra Bragagnolo) — Curtarolo, Via Umberto I, Fg. 15 Mappale 144 Sub. 6 (N.C.T. Fg. 15 Map. 206). Intestazione storica Righetto Dino / Righetto Otorino; titolarità attuale da visura: Bonetto Maria e famiglia Ragazzo."
 }

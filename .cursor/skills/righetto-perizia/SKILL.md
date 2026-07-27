@@ -36,14 +36,23 @@ Formato tel in PDF/footer: `049.8843484` oppure `049.8843484` (equivalenti).
 - Colori: `#152435` nero · `#2C4A6E` blu · `#FF6B35` oro · `#ECE7DF` sfondo
 - Cornice blu + barra oro in alto + footer nero su ogni pagina
 
-## Struttura PDF (4–6 pagine)
+## Struttura PDF (5–7 pagine)
 
-1. **Relazione** — logo, data, riepilogo, sezioni 1–4 (oggetto, catasto, stato, urbanistico)
-2. **Valutazione** — considerazioni commerciali, box valore €, forchette, contatti agenzia
-3. **Allegato A** — planimetria catastale (PDF)
-4. **Allegato B** — visura / scheda catastale
-5. **Allegato C** — vista aerea (opzionale)
-6. **Note legali** — disclaimer in calce ultima pagina
+1. **Presentazione** — vista 3D / satellite a piena pagina, tipologia, ubicazione, anteprima prezzo (obbligatoria se `vista_aerea` in config)
+2. **Relazione** — logo, data, riepilogo, sezioni 1–4 (oggetto, catasto, stato, urbanistico)
+3. **Valutazione** — considerazioni commerciali, box valore €, forchette, contatti agenzia
+4. **Allegato A** — planimetria catastale (PDF)
+5. **Allegato B** — visura / estratto catastale (PDF o screenshot)
+6. **Note legali** — disclaimer in calce
+
+**Non** ripetere la vista aerea in allegato finale se già usata in copertina (`vista_aerea_in_allegati: false`).
+
+## Regole valutazione commerciale (BLOCCANTE)
+
+- **Mai** citare prezzi al m² «medi di comune» o di zona (es. 1.440 €/m²) — fuorvianti su immobili con criticità; **solo** €/m² calcolato da `valore_principale ÷ superficie_commerciale`.
+- **Target clientela:** per porzioni bifamiliari orizzontali multi-livello da ristrutturare → prevalentemente **acquirenti stranieri**, non imprese edili italiane generiche.
+- **Valore partenza:** decisione agenzia (`valore_principale`); forchette prudenziali solo come scenario secondario in testo, non in box principale.
+- Campi JSON: `considerazioni_commerciali[]`, `nota_mercato`, `target_acquirente`, `nota_valore_finale`.
 
 ## Script
 
@@ -73,15 +82,21 @@ Copiare e adattare un file `scripts/perizia_config_<cognome>.json`:
 | `ubicazione` | sì | Indirizzo completo |
 | `superficie_commerciale` | sì | mq |
 | `valore_principale` | sì | € partenza / stima |
-| `valore_secondario` | no | Forchetta prudenziale testo |
-| `valore_conservativo` | no | Scenario peggiore |
+| `euro_mq_nota` | no | Solo incidenza calcolata agenzia — no medie zona |
+| `considerazioni_commerciali` | no | Array paragrafi HTML sezione 5 |
+| `nota_mercato` | no | Chiarimento €/m² (no confronto zone) |
+| `nota_valore_finale` | no | Testo sotto box valore |
+| `target_acquirente` | no | Clientela (preferire stranieri su orizzontali da ristrutturare) |
 | `catasto` | sì | `unita[]` sub/cat/consistenza/rendita |
 | `caratteristiche` | no | Elenco bullet |
 | `criticita_urbanistiche` | no | Elenco |
 | `attivita_prioritarie` | no | Elenco |
 | `allegati.planimetria_catastale` | no | Path PDF planimetria |
 | `allegati.scheda_catastale` | no | Path PDF visura |
-| `allegati.vista_aerea` | no | Path JPG/PNG satellite |
+| `allegati.vista_aerea` | no | Path JPG/PNG vista 3D — **pagina 1 presentazione** |
+| `allegati.vista_aerea_in_allegati` | no | `false` se già in copertina (default) |
+| `valore_secondario` | no | Forchetta prudenziale testo |
+| `valore_conservativo` | no | Scenario peggiore |
 
 Esempi config: `perizia_config_turato.json`, `perizia_config_ragazzo_curtarolo.json`
 
