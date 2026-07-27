@@ -1,8 +1,8 @@
 {
   "output_nome": "Perizia_Ragazzo_Ottorino_Porzione_Bifamiliare_Curtarolo.pdf",
   "data": "2026-07-27",
-  "proprietario": "Ragazzo Ottorino (erede / successione)",
-  "proprietario_dettaglio": "Nato a Curtarolo (PD) il 21/04/1944 — C.F. RGZTRN44D21D226U — dato da visura catastale del 27/07/2026",
+  "proprietario": "Bonetto Maria, Ragazzo Gabriele, Ragazzo Isabella, Ragazzo Loris (proprietà in comune)",
+  "proprietario_dettaglio": "Quote: Bonetto Maria 1/3 — Ragazzo Gabriele, Isabella e Loris 2/9 ciascuno. Bonetto Maria: diritto di abitazione 1/1. Dati da visura catastale aggiornata (luglio 2026).",
   "tipologia": "Porzione di bifamiliare orizzontale",
   "ubicazione": "Cavino di Curtarolo (PD) — Via Umberto I",
   "superficie_commerciale": 156,
@@ -10,46 +10,112 @@
   "valore_label": "Prezzo massimo indicativo di commercializzazione (partenza)",
   "valore_secondario": "€ 95.000 – € 120.000 (forchetta prudenziale di mercato, subordinata alle verifiche urbanistiche)",
   "valore_conservativo": "€ 80.000 – € 90.000 (scenario conservativo se emergessero difformità non sanabili o costi elevati di regolarizzazione)",
-  "euro_mq_nota": "Incidenza indicativa su 156 mq: circa € 929/mq (partenza) — da confrontare con quotazioni medie Curtarolo ~1.440 €/mq su immobili commerciabili, con riduzione per stato e criticità",
+  "euro_mq_nota": "Incidenza indicativa su 156 mq: circa € 929/mq (partenza) — da confrontare con quotazioni medie Curtarolo ~1.440 €/m² su immobili commerciabili, con riduzione per stato e criticità",
+  "proprietari": [
+    {
+      "nome": "Bonetto Maria",
+      "cf": "BNTMRA40D66B524F",
+      "nascita": "Campodarsego (PD) 26/04/1940",
+      "diritti": "Proprietà 1/3 · Abitazione 1/1",
+      "quota": "1/3"
+    },
+    {
+      "nome": "Ragazzo Gabriele",
+      "cf": "RGZGRL80H14B563F",
+      "nascita": "Camposampiero (PD) 14/06/1980",
+      "diritti": "Proprietà",
+      "quota": "2/9"
+    },
+    {
+      "nome": "Ragazzo Isabella",
+      "cf": "RGZSLL73L50G224S",
+      "nascita": "Padova (PD) 10/07/1973",
+      "diritti": "Proprietà",
+      "quota": "2/9"
+    },
+    {
+      "nome": "Ragazzo Loris",
+      "cf": "RGZLRS66D04D226G",
+      "nascita": "Curtarolo (PD) 04/04/1966",
+      "diritti": "Proprietà",
+      "quota": "2/9"
+    }
+  ],
   "catasto": {
-    "comune": "Curtarolo (D226)",
+    "comune": "Curtarolo (PD) — Ufficio catastale Padova",
     "via": "Via Umberto I",
     "sezione": "15",
     "foglio": "206",
-    "particella_nceu": "144 (planimetria storica sub. 6 — doc. 1988)",
+    "particella_nceu": "Planimetria storica sub. 6 (doc. 1988) — allineata a visura attuale",
     "unita": [
-      {"sub": "8", "categoria": "A/3", "classe": "1", "consistenza": "2,5 vani", "piano": "T", "rendita": "€ 154,94"},
-      {"sub": "9", "categoria": "C/6", "classe": "1", "consistenza": "11 m²", "piano": "T", "rendita": "€ 19,32", "nota": "Pertinenza / box-garage"},
-      {"sub": "10", "categoria": "A/2", "classe": "1", "consistenza": "5,5 vani", "piano": "1", "rendita": "€ 468,68"}
+      {
+        "sub": "6",
+        "categoria": "A/2",
+        "classe": "01",
+        "consistenza": "7,5 vani — 140 m²",
+        "piano": "T-1-2",
+        "rendita": "€ 639,12"
+      },
+      {
+        "sub": "7",
+        "categoria": "C/6",
+        "classe": "01",
+        "consistenza": "20 m²",
+        "piano": "T",
+        "rendita": "€ 35,12",
+        "nota": "Pertinenza / garage-box"
+      }
     ],
-    "rendita_totale": "€ 642,94",
-    "titolarita": "Proprietà 1/1 — Ragazzo Ottorino (visura 27/07/2026)"
+    "terreni": [
+      {
+        "comune": "Campodarsego (PD)",
+        "foglio": "15",
+        "particella": "144",
+        "categoria": "Seminativo",
+        "classe": "02",
+        "superficie": "280 m²",
+        "rendite": "R.D. € 2,24 · R.A. € 1,45"
+      }
+    ],
+    "nota_terreno": "Sul lato destro dell'immobile (fronte strada) è annesso un lotto di <b>280 m²</b> censito a <b>Campodarsego</b> (Fg. 15, Part. 144), ove insistono la baracca in lamiera e area scoperta. La baracca risulta <b>catastalmente registrata nel Comune di Campodarsego</b>: occorrerà verificare titoli edilizi, eventuale condono/sanatoria (se i comproprietari lo vorranno) oppure demolizione; i costi andranno ripartiti tra i titolari secondo le rispettive quote.",
+    "rendita_totale": "€ 674,24 (fabbricati sub. 6 + 7)",
+    "titolarita": "Proprietà in comune — quote come da tabella intestatari"
   },
   "caratteristiche": [
     "Porzione di bifamiliare orizzontale — epoca anni '70",
-    "Superficie commerciale stimata 156 m²",
-    "Giardino frontale e scoperto laterale (area esterna condivisa, senza parti esclusive censite)",
-    "Garage in lamiera (da verificare urbanisticamente — probabile demolizione)",
+    "Superficie catastale fabbricato: 140 m² (A/2) + pertinenza C/6 20 m² — superficie commerciale stimata in sopralluogo 156 m²",
+    "Giardino frontale e scoperto laterale (aree esterne in regime condiviso, senza parti esclusive oltre alle unità censite)",
+    "Lato destro fronte strada: lotto terreno annesso 280 m² (Campodarsego, Fg. 15 Part. 144) con baracca in lamiera catastata a Campodarsego",
+    "Garage/box sub. 7 (20 m²) — pertinenza C/6 al piano terra",
     "Posizione fronte strada con intenso passaggio veicolare"
   ],
-  "stato_manutentivo": "Condizioni manutentive molto precarie — ristrutturazione pressoché integrale (impianti, servizi, cucina, pavimenti, soffitti, serramenti, finiture, marciapiedi esterni)",
+  "stato_manutentivo": "Condizioni manutentive molto precarie — ristrutturazione pressoché integrale (impianti, servizi, cucina, pavimentazioni, soffitti, serramenti, finiture, marciapiedi esterni). Baracca in lamiera in stato da definire urbanisticamente.",
   "criticita_urbanistiche": [
     "Piano terra: assenza di bagno autorizzato — verifica titoli edilizi vs stato di fatto",
     "Probabile necessità di pratiche di sanatoria se difformità regolarizzabili",
-    "Garage in lamiera: verifica urbanistica e catastale; si prevede demolizione salvo diversa risultanza accesso agli atti"
+    "Baracca in lamiera su terreno Campodarsego (280 m²): catastalmente a Campodarsego — da condonare/sanare se i comproprietari intendono mantenerla, altrimenti demolizione; costi da quantificare e ripartire in comune tra i titolari",
+    "Verifica urbanistica e catastale del garage/box sub. 7 e del terreno Fg. 15 Part. 144",
+    "Coordinamento tra Comune di Curtarolo (fabbricato) e Comune di Campodarsego (terreno/baracca)"
   ],
   "attivita_prioritarie": [
-    "Accesso agli atti presso Comune di Curtarolo",
+    "Accesso agli atti presso Comune di Curtarolo (fabbricato) e Campodarsego (terreno/baracca)",
     "Acquisizione documentazione urbanistica e catastale completa",
-    "Verifica conformità stato di fatto",
-    "Quantificazione opere di ripristino e sanatorie",
-    "Stima costi demolizione garage e regolarizzazione"
+    "Verifica conformità stato di fatto e titolarità quote",
+    "Quantificazione costi condono/sanatoria o demolizione baracca — ripartizione tra comproprietari",
+    "Quantificazione opere di ripristino edilizio e sanatorie sul fabbricato"
   ],
   "target_acquirente": "Investitori, imprese di ristrutturazione, privati per riqualificazione totale, eventuale domanda estera su metrature ampie da ristrutturare",
   "allegati": {
     "planimetria_catastale": "c:\\Users\\Utente\\Downloads\\0428_001.pdf",
-    "scheda_catastale": "c:\\Users\\Utente\\Downloads\\scheda_catastale_6a6711257e5949.71062780.pdf",
+    "visura_immagini": [
+      "documenti/perizia_ragazzo_allegati/visura_riepilogo.png",
+      "documenti/perizia_ragazzo_allegati/visura_intestatari.png"
+    ],
+    "visura_labels": [
+      "Visura — riepilogo fabbricati e terreno",
+      "Visura — intestatari e quote"
+    ],
     "vista_aerea": "C:\\Users\\Utente\\.cursor\\projects\\c-Users-Utente-progetti-index\\assets\\c__Users_Utente_AppData_Roaming_Cursor_User_workspaceStorage_02d993d5cc19e4bea5396422fd725780_images_Immagine_2026-07-27_101815-dc578d6b-247b-40c6-baac-8ca10fe3c483.png"
   },
-  "note_planimetria_storica": "Planimetria catastale storica (14/09/1988, geometra Bragagnolo) — Foglio 15, Mappale 144, Sub. 6 — ditta storica Righetto Dino / Righetto Otorino (1/2 ciascuno). Da incrociare con visura attuale sub. 8-9-10."
+  "note_planimetria_storica": "Planimetria catastale storica (14/09/1988, geometra Bragagnolo) — Curtarolo, Via Umberto I, Fg. 15 Mappale 144 Sub. 6 (N.C.T. Fg. 15 Map. 206). Intestazione storica Righetto Dino / Righetto Otorino; titolarità attuale da visura: Bonetto Maria e famiglia Ragazzo."
 }
