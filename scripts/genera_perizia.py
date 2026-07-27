@@ -260,6 +260,47 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
     ]))
     story += [tc, Spacer(1, 3 * mm)]
 
+    # Terreni (opzionale)
+    terreni = cat.get("terreni", [])
+    if terreni:
+        story.append(Paragraph("<b>Terreni annessi (visura):</b>", body))
+        tr = [["Comune", "Fg", "Part.", "Cat.", "Cl.", "Sup.", "Rendite"]]
+        for t in terreni:
+            tr.append([
+                t.get("comune", "—"), t.get("foglio", "—"), t.get("particella", "—"),
+                t.get("categoria", "—"), t.get("classe", "—"), t.get("superficie", "—"),
+                t.get("rendite", "—"),
+            ])
+        tt = Table(tr, colWidths=[28 * mm, 10 * mm, 12 * mm, 22 * mm, 10 * mm, 18 * mm, 74 * mm])
+        tt.setStyle(TableStyle([
+            ("BACKGROUND", (0, 0), (-1, 0), BLU), ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"), ("FONTSIZE", (0, 0), (-1, -1), 7.5),
+            ("BOX", (0, 0), (-1, -1), 0.5, BLU), ("INNERGRID", (0, 0), (-1, -1), 0.25, colors.HexColor("#E1DBD1")),
+            ("LEFTPADDING", (0, 0), (-1, -1), 4), ("TOPPADDING", (0, 0), (-1, -1), 3), ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
+        ]))
+        story += [tt, Spacer(1, 3 * mm)]
+        if cat.get("nota_terreno"):
+            story.append(Paragraph(cat["nota_terreno"], body))
+
+    # Intestatari
+    intestatari = cfg.get("proprietari", [])
+    if intestatari:
+        story.append(Paragraph("<b>Intestatari e quote di proprietà (visura):</b>", body))
+        pr = [["Nominativo", "C.F.", "Nascita", "Diritti", "Quota"]]
+        for p in intestatari:
+            pr.append([
+                p.get("nome", "—"), p.get("cf", "—"), p.get("nascita", "—"),
+                p.get("diritti", "Proprietà"), p.get("quota", "—"),
+            ])
+        pt = Table(pr, colWidths=[38 * mm, 38 * mm, 38 * mm, 28 * mm, 32 * mm])
+        pt.setStyle(TableStyle([
+            ("BACKGROUND", (0, 0), (-1, 0), BLU), ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"), ("FONTSIZE", (0, 0), (-1, -1), 7.5),
+            ("BOX", (0, 0), (-1, -1), 0.5, BLU), ("INNERGRID", (0, 0), (-1, -1), 0.25, colors.HexColor("#E1DBD1")),
+            ("LEFTPADDING", (0, 0), (-1, -1), 4), ("TOPPADDING", (0, 0), (-1, -1), 3), ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
+        ]))
+        story += [pt, Spacer(1, 3 * mm)]
+
     # Sezione 3 Caratteristiche
     story.append(Paragraph("3. Caratteristiche generali e stato manutentivo", h2))
     for c in cfg.get("caratteristiche", []):
@@ -371,6 +412,17 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
         story.append(fit_rl_image(cp, max_w, max_h))
         story.append(PageBreak())
 
+    if attachments.get("visura_immagini"):
+        labels = attachments.get("visura_labels") or [
+            f"Estratto visura — {i + 1}" for i in range(len(attachments["visura_immagini"]))
+        ]
+        comp = stack_vertical(attachments["visura_immagini"], labels)
+        cp = tmp / "comp_visura.jpg"
+        comp.save(cp, "JPEG", quality=92)
+        story.append(Paragraph("Allegato B — Estratto visura catastale (immobile e terreno)", h2))
+        story.append(fit_rl_image(cp, max_w, max_h))
+        story.append(PageBreak())
+
     if attachments.get("vista_aerea") and attachments["vista_aerea"].is_file():
         story.append(Paragraph("Allegato C — Vista aerea dell'area (satellite)", h2))
         story.append(Paragraph("Inquadramento dell'immobile e del contesto edificato — Cavino di Curtarolo.", small))
@@ -408,6 +460,12 @@ def prepare_attachments(cfg: dict, tmp: Path) -> dict[str, Path | list[Path]]:
     scheda = Path(allegati.get("scheda_catastale", ""))
     if scheda.is_file():
         out["catasto_pages"] = pdf_page_to_jpg(scheda, tmp, "catasto", dpi=2.0)
+
+    visura_imgs = allegati.get("visura_immagini") or []
+    paths = [Path(p) for p in visura_imgs if Path(p).is_file()]
+    if paths:
+        out["visura_immagini"] = [image_to_jpg(p, tmp, f"visura_{i+1}.jpg") for i, p in enumerate(paths)]
+        out["visura_labels"] = allegati.get("visura_labels")
 
     aerial = Path(allegati.get("vista_aerea", ""))
     if aerial.is_file():
