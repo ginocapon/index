@@ -26,6 +26,19 @@
 - Fonti istituzionali in articolo: **OMI ADE**, **ISTAT**, **FIMAA** (link interni + portali ufficiali)
 - Script: `scripts/build_blog_affitti_limena_2026.py` + `register_affitti_limena_2026.py`
 
+### Sotto-cluster "Limena GSC agosto 2026" (batch keyword export utente)
+Filone editoriale da **GSC Dettagli ricerche** (05/08/2026): top volume `immobiliare` 301, `agenzia immobiliare limena` 166, `immobiliare righetto` 71, `immobiliare limena` 67, `appartamento limena` 63 + long-tail vendita/affitto/tipologia.
+- `blog-appartamento-limena-guida-acquisto-2026.html` — kw **appartamento limena** (acquisto, OMI, visita)
+- `blog-case-vendita-limena-leggere-annunci-2026.html` — kw **casa vendita limena** (lettura annunci, red flag)
+- `blog-appartamento-affitto-limena-contratto-2026.html` — kw **appartamento affitto limena** (contratto, caparra — distinto da affitti generici)
+- `blog-bilocale-trilocale-limena-scelta-2026.html` — kw **bilocale limena vendita** (scelta tipologia famiglie/pendolari)
+- `blog-gruppo-immobiliare-righetto-limena-2026.html` — kw **immobiliare righetto** / brand (E-E-A-T sede Via Roma 96)
+- Mesh obbligatorio: `zona-limena`, `blog-mercato-immobiliare-limena-2026`, `blog-agenzia-immobiliare-limena-come-scegliere-2026`, `blog-affitti-limena-2026`
+- **Anti-doppioni:** non fondere con mercato generale, scelta agenzia o affitti canoni già pubblicati
+- Script batch: `scripts/build_blog_limena_gsc_ago2026.py` + `register_limena_gsc_ago2026.py` + `limena_gsc_ago2026_registry.json`
+- Dati GSC: `data/gsc-keywords-priority.json` → `queries_limena_top_volume`
+- Hero: WebP 1200×630 dedicati in `img/blog/blog-*-limena-*.webp` (mai riuso copertine esistenti)
+
 ### Cluster "Affitto Padova" ✅ COMPLETO
 - blog-affitto-studenti-padova.html, servizio-locazioni.html
 - blog-contratto-affitto-padova.html, blog-rendimento-affitto-padova.html
