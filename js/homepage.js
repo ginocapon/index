@@ -788,6 +788,11 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'appartamento limena: guida acquisto 2026': { img: 'img/blog/blog-appartamento-limena-guida-acquisto-2026.webp', url: 'blog-appartamento-limena-guida-acquisto-2026' },
+    'case vendita limena: leggere annunci 2026': { img: 'img/blog/blog-case-vendita-limena-leggere-annunci-2026.webp', url: 'blog-case-vendita-limena-leggere-annunci-2026' },
+    'appartamento affitto limena: contratto 2026': { img: 'img/blog/blog-appartamento-affitto-limena-contratto-2026.webp', url: 'blog-appartamento-affitto-limena-contratto-2026' },
+    'bilocale trilocale limena: scelta 2026': { img: 'img/blog/blog-bilocale-trilocale-limena-scelta-2026.webp', url: 'blog-bilocale-trilocale-limena-scelta-2026' },
+    'gruppo immobiliare righetto limena 2026': { img: 'img/blog/blog-gruppo-immobiliare-righetto-limena-2026.webp', url: 'blog-gruppo-immobiliare-righetto-limena-2026' },
     'domanda residenziale supera offerta q1 2026: padova': { img: 'img/blog/blog-domanda-residenziale-supera-offerta-2026-padova.webp', url: 'blog-domanda-residenziale-supera-offerta-2026-padova' },
     'ricerche online tipologie casa 2026: padova': { img: 'img/blog/blog-ricerche-online-tipologie-casa-2026-padova.webp', url: 'blog-ricerche-online-tipologie-casa-2026-padova' },
     'italy rental market +1% january 2026 — padua guide': { img: 'img/blog/blog-italy-rental-market-january-2026.webp', url: 'blog-italy-rental-market-positive-start-january-2026' },
@@ -902,6 +907,41 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    {
+      "titolo": "Appartamento Limena: Guida acquisto 2026",
+      "categoria": "Limena locale",
+      "data": "2026-08-05",
+      "immagine_copertina": "img/blog/blog-appartamento-limena-guida-acquisto-2026.webp",
+      "url_statico": "blog-appartamento-limena-guida-acquisto-2026"
+    },
+    {
+      "titolo": "Case vendita Limena: Leggere annunci 2026",
+      "categoria": "Limena locale",
+      "data": "2026-08-05",
+      "immagine_copertina": "img/blog/blog-case-vendita-limena-leggere-annunci-2026.webp",
+      "url_statico": "blog-case-vendita-limena-leggere-annunci-2026"
+    },
+    {
+      "titolo": "Appartamento affitto Limena: Contratto 2026",
+      "categoria": "Limena locale",
+      "data": "2026-08-05",
+      "immagine_copertina": "img/blog/blog-appartamento-affitto-limena-contratto-2026.webp",
+      "url_statico": "blog-appartamento-affitto-limena-contratto-2026"
+    },
+    {
+      "titolo": "Bilocale trilocale Limena: Scelta 2026",
+      "categoria": "Limena locale",
+      "data": "2026-08-05",
+      "immagine_copertina": "img/blog/blog-bilocale-trilocale-limena-scelta-2026.webp",
+      "url_statico": "blog-bilocale-trilocale-limena-scelta-2026"
+    },
+    {
+      "titolo": "Gruppo Immobiliare Righetto Limena 2026",
+      "categoria": "Limena locale",
+      "data": "2026-08-05",
+      "immagine_copertina": "img/blog/blog-gruppo-immobiliare-righetto-limena-2026.webp",
+      "url_statico": "blog-gruppo-immobiliare-righetto-limena-2026"
+    },
     {
       "titolo": "Domanda residenziale supera offerta Q1 2026: Padova",
       "categoria": "Mercato immobiliare",

@@ -100,6 +100,72 @@
         "https://notaionline.it/guida/mutuo-prima-casa-under-36-agevolazioni/"
       ],
       "hero_concept": "Coppia under-30, aesthetic fintech clean"
+    },
+    {
+      "id": "eq-limena-gsc-001",
+      "status": "published",
+      "priority": 0,
+      "target_week": "2026-08-05",
+      "published_date": "2026-08-05",
+      "slug": "blog-appartamento-limena-guida-acquisto-2026",
+      "kw_primaria": "appartamento limena",
+      "intent": "comprare-locale",
+      "title": "Appartamento Limena: guida acquisto 2026",
+      "cluster": "limena-gsc-local",
+      "gsc_signal": "63 impr — top 5 Limena",
+      "different_from": "blog-mercato-immobiliare-limena-2026"
+    },
+    {
+      "id": "eq-limena-gsc-002",
+      "status": "published",
+      "priority": 0,
+      "target_week": "2026-08-05",
+      "published_date": "2026-08-05",
+      "slug": "blog-case-vendita-limena-leggere-annunci-2026",
+      "kw_primaria": "casa vendita limena",
+      "intent": "vendita-locale",
+      "title": "Case in vendita Limena: leggere gli annunci 2026",
+      "cluster": "limena-gsc-local",
+      "gsc_signal": "casa in vendita a limena 16 impr"
+    },
+    {
+      "id": "eq-limena-gsc-003",
+      "status": "published",
+      "priority": 0,
+      "target_week": "2026-08-05",
+      "published_date": "2026-08-05",
+      "slug": "blog-appartamento-affitto-limena-contratto-2026",
+      "kw_primaria": "appartamento affitto limena",
+      "intent": "affitto-locale",
+      "title": "Appartamento in affitto Limena: contratto e caparra 2026",
+      "cluster": "limena-gsc-local",
+      "different_from": "blog-affitti-limena-2026"
+    },
+    {
+      "id": "eq-limena-gsc-004",
+      "status": "published",
+      "priority": 0,
+      "target_week": "2026-08-05",
+      "published_date": "2026-08-05",
+      "slug": "blog-bilocale-trilocale-limena-scelta-2026",
+      "kw_primaria": "bilocale trilocale limena",
+      "intent": "comprare-tipologia",
+      "title": "Bilocale e trilocale Limena: quale scegliere 2026",
+      "cluster": "limena-gsc-local"
+    },
+    {
+      "id": "eq-limena-gsc-005",
+      "status": "published",
+      "priority": 0,
+      "target_week": "2026-08-05",
+      "published_date": "2026-08-05",
+      "slug": "blog-gruppo-immobiliare-righetto-limena-2026",
+      "kw_primaria": "immobiliare righetto",
+      "intent": "brand-locale",
+      "title": "Gruppo Immobiliare Righetto a Limena: servizi e territorio",
+      "cluster": "limena-gsc-local",
+      "gsc_signal": "immobiliare righetto 71 impr",
+      "different_from": "blog-righetto-storia-territorio-acquisizioni-2026"
     }
   ]
 }

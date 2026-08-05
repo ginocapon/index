@@ -1,9 +1,9 @@
 {
-  "generated": "2026-07-28",
-  "count": 116,
+  "generated": "2026-08-05",
+  "count": 121,
   "risks": [
+    "Intent simile `territorio-limena`: blog-appartamento-limena-guida-acquisto-2026, blog-limena-vicino-padova-comprare-2026, blog-affitti-limena-2026, blog-appartamento-affitto-limena-contratto-2026…",
     "Intent simile `breakdown-costi`: blog-costi-proprieta-acquisto-possesso-vendita-padova-2026, blog-costi-costruzione-istat-padova-2026",
-    "Intent simile `territorio-limena`: blog-limena-vicino-padova-comprare-2026, blog-affitti-limena-2026, blog-rubano-limena-affitto-lavoratori-2026, blog-mercato-immobiliare-limena-2026…",
     "Intent simile `fisco-normativa`: blog-quattro-imposte-rogitio-prima-casa-padova-2026, blog-bonus-mobili-2026-massimizzare-ristrutturazioni, blog-imposte-registro-catasto-compravendita-padova-2026, blog-tasse-vendita-casa",
     "Intent simile `affitti-cluster`: blog-affitto-transitorio-padova-durata-2026, blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026, blog-squilibrio-domanda-offerta-affitti-padova",
     "Intent simile `altri-/-trasversali`: blog-domanda-residenziale-supera-offerta-2026-padova, blog-italy-rental-market-positive-start-january-2026, blog-loft-aziende-cucina-condivisa-padova-vicenza-2026, blog-mandato-esclusivo-padova-perche-conviene-2026…",
@@ -40,6 +40,17 @@
       "angolo": "APE in fase acquisto — non direttiva Case Green",
       "intent": "green-ape-acquisto",
       "h1": "APE e acquisto di casa nel Padovano: verifiche nel 2026"
+    },
+    {
+      "slug": "blog-appartamento-limena-guida-acquisto-2026",
+      "file": "blog-appartamento-limena-guida-acquisto-2026.html",
+      "title": "Appartamento Limena: Guida acquisto 2026",
+      "categoria": "",
+      "cluster": "Acquisto e prima casa",
+      "kw_primaria": "appartamento-limena-guida-acquisto",
+      "angolo": "Focus Limena/cintura — non generico Padova centro",
+      "intent": "territorio-limena",
+      "h1": "Appartamento Limena: guida acquisto 2026"
     },
     {
       "slug": "blog-caparra-confirmatoria-padova",
@@ -238,6 +249,17 @@
       "angolo": "Cluster affitti — verificare matrice §4 prima di pubblicare",
       "intent": "affitti-cluster",
       "h1": "Affitto transitorio Padova 2026: durata, requisiti e guida completa"
+    },
+    {
+      "slug": "blog-appartamento-affitto-limena-contratto-2026",
+      "file": "blog-appartamento-affitto-limena-contratto-2026.html",
+      "title": "Appartamento affitto Limena: Contratto 2026",
+      "categoria": "",
+      "cluster": "Affitti e locazioni",
+      "kw_primaria": "appartamento-affitto-limena-contratto",
+      "angolo": "Focus Limena/cintura — non generico Padova centro",
+      "intent": "territorio-limena",
+      "h1": "Appartamento affitto Limena: contratto 2026"
     },
     {
       "slug": "blog-checklist-affitto-studenti-padova-2026",
@@ -1043,6 +1065,17 @@
       "h1": "Appartamento nuova costruzione a Limena: 101 mq con giardino privato di 310 mq in classe A4"
     },
     {
+      "slug": "blog-bilocale-trilocale-limena-scelta-2026",
+      "file": "blog-bilocale-trilocale-limena-scelta-2026.html",
+      "title": "Bilocale trilocale Limena: Scelta 2026",
+      "categoria": "",
+      "cluster": "Territorio e zone",
+      "kw_primaria": "bilocale-trilocale-limena-scelta",
+      "angolo": "Focus Limena/cintura — non generico Padova centro",
+      "intent": "territorio-limena",
+      "h1": "Bilocale o trilocale Limena: guida scelta 2026"
+    },
+    {
       "slug": "blog-direttiva-case-green-limena-padova",
       "file": "blog-direttiva-case-green-limena-padova.html",
       "title": "Direttiva Case Green: Cosa Cambia a Padova e Limena",
@@ -1052,6 +1085,17 @@
       "angolo": "Focus Limena/cintura — non generico Padova centro",
       "intent": "territorio-limena",
       "h1": "Direttiva Case Green UE 2024: Cosa Cambia per le Case a Limena e Padova"
+    },
+    {
+      "slug": "blog-gruppo-immobiliare-righetto-limena-2026",
+      "file": "blog-gruppo-immobiliare-righetto-limena-2026.html",
+      "title": "Gruppo Immobiliare Righetto Limena 2026",
+      "categoria": "",
+      "cluster": "Territorio e zone",
+      "kw_primaria": "gruppo-immobiliare-righetto-limena",
+      "angolo": "Focus Limena/cintura — non generico Padova centro",
+      "intent": "territorio-limena",
+      "h1": "Gruppo Immobiliare Righetto a Limena nel 2026"
     },
     {
       "slug": "blog-quartieri-padova-2026",
@@ -1107,6 +1151,17 @@
       "angolo": "Vendibilità futura classe energetica — non Tribloc né domanda",
       "intent": "vendita-green-futuro",
       "h1": "Casa vendibile tra 5 anni: classe energetica, Case Green e posizione nel mercato padovano"
+    },
+    {
+      "slug": "blog-case-vendita-limena-leggere-annunci-2026",
+      "file": "blog-case-vendita-limena-leggere-annunci-2026.html",
+      "title": "Case vendita Limena: Leggere annunci 2026",
+      "categoria": "",
+      "cluster": "Vendita",
+      "kw_primaria": "case-vendita-limena-leggere-annunci",
+      "angolo": "Focus Limena/cintura — non generico Padova centro",
+      "intent": "territorio-limena",
+      "h1": "Case vendita Limena: leggere annunci 2026"
     },
     {
       "slug": "blog-case-vendita-padova",
