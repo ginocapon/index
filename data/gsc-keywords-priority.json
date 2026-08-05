@@ -1,8 +1,8 @@
 {
-  "updated": "2026-07-24",
-  "source": "GSC screenshot utente — sera 16/07/2026 (Prestazioni 28 gg, Web)",
-  "capture_ref": "data/gsc-captures/2026-07-16-prestazioni-28gg.png",
-  "note": "Dati estratti da screenshot GSC 16/07/2026 sera — periodo 17/06–13/07/2026. Baseline storica 16 mesi: data/gsc-baseline-16m.json",
+  "updated": "2026-08-05",
+  "source": "GSC export utente — Dettagli ricerche Limena/Padova (ago 2026)",
+  "capture_ref": "data/gsc-captures/2026-08-05-limena-keywords-export.png",
+  "note": "Graduatoria keyword Limena da GSC utente 05/08/2026. Top volume: immobiliare 301, agenzia immobiliare limena 166, immobiliare righetto 71, immobiliare limena 67, appartamento limena 63. Batch blog Limena GSC ago2026 chiude gap acquisto/vendita/affitto/bilocale/brand.",
   "baseline_16m_ref": "data/gsc-baseline-16m.json",
   "summary_28d": {
     "period_start": "2026-06-17",
@@ -19,6 +19,20 @@
     {"q": "immobiliare righetto", "clicks": 23, "impressions": 59},
     {"q": "righetto immobiliare limena", "clicks": 8, "impressions": 13},
     {"q": "agenzia righetto limena", "clicks": 5, "impressions": 19}
+  ],
+  "queries_limena_top_volume": [
+    {"q": "immobiliare", "impressions": 301, "intent": "generico-broad", "action": "pillar-home-brand"},
+    {"q": "agenzia immobiliare limena", "impressions": 166, "intent": "agenzia-locale", "slug": "blog-agenzia-immobiliare-limena-come-scegliere-2026", "status": "published"},
+    {"q": "immobiliare righetto", "impressions": 71, "intent": "brand-locale", "slug": "blog-gruppo-immobiliare-righetto-limena-2026", "status": "published"},
+    {"q": "immobiliare limena", "impressions": 67, "intent": "generico-locale", "slug": "blog-mercato-immobiliare-limena-2026", "status": "published"},
+    {"q": "appartamento limena", "impressions": 63, "intent": "comprare", "slug": "blog-appartamento-limena-guida-acquisto-2026", "status": "published"},
+    {"q": "righetto", "impressions": 40, "intent": "brand", "slug": "blog-gruppo-immobiliare-righetto-limena-2026", "status": "published"},
+    {"q": "agenzie immobiliari limena", "impressions": 34, "intent": "agenzia-locale", "slug": "blog-agenzia-immobiliare-limena-come-scegliere-2026", "status": "published"},
+    {"q": "casa in vendita a limena", "impressions": 16, "intent": "vendita-locale", "slug": "blog-case-vendita-limena-leggere-annunci-2026", "status": "published"},
+    {"q": "affitti a limena", "impressions": 15, "intent": "affitto-locale", "slug": "blog-affitti-limena-2026", "status": "published"},
+    {"q": "appartamento in affitto limena", "impressions": 15, "intent": "affitto-locale", "slug": "blog-appartamento-affitto-limena-contratto-2026", "status": "published"},
+    {"q": "bilocale limena vendita", "impressions": 15, "intent": "comprare-tipologia", "slug": "blog-bilocale-trilocale-limena-scelta-2026", "status": "published"},
+    {"q": "gruppo immobiliare righetto recensioni", "impressions": 15, "intent": "brand-eeat", "slug": "blog-gruppo-immobiliare-righetto-limena-2026", "status": "published"}
   ],
   "queries_growth": [
     {"q": "affitti limena", "clicks": 3, "impressions": 39, "intent": "affitto-locale"},
@@ -60,6 +74,31 @@
     {"url": "/blog-quotazioni-locazioni-omi-istat-padova-2026", "action": "pillar-aeo", "date": "2026-07-13"}
   ],
   "published_this_week": [
+    {
+      "slug": "blog-appartamento-limena-guida-acquisto-2026",
+      "kw": "appartamento limena",
+      "date": "2026-08-05"
+    },
+    {
+      "slug": "blog-case-vendita-limena-leggere-annunci-2026",
+      "kw": "casa vendita limena",
+      "date": "2026-08-05"
+    },
+    {
+      "slug": "blog-appartamento-affitto-limena-contratto-2026",
+      "kw": "appartamento affitto limena",
+      "date": "2026-08-05"
+    },
+    {
+      "slug": "blog-bilocale-trilocale-limena-scelta-2026",
+      "kw": "bilocale trilocale limena",
+      "date": "2026-08-05"
+    },
+    {
+      "slug": "blog-gruppo-immobiliare-righetto-limena-2026",
+      "kw": "immobiliare righetto",
+      "date": "2026-08-05"
+    },
     {
       "slug": "blog-agenzia-immobiliare-limena-come-scegliere-2026",
       "kw": "agenzia immobiliare limena",

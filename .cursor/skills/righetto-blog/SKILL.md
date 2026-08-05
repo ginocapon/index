@@ -13,7 +13,8 @@ description: >-
 
 1. **`data/editorial-queue.json`** — prossimo `scheduled` da pubblicare
 2. **`TEST-SKILL/skill-editorial-queue.md`** — sequenza automatica completa
-3. Se coda `scheduled` < 3 → **discovery web + GSC** → aggiungi `proposed` (non serve permesso utente)
+3. **`data/gsc-keywords-priority.json`** → `queries_limena_top_volume` per batch Limena locale
+4. Se coda `scheduled` < 3 → **discovery web + GSC** → aggiungi `proposed` (non serve permesso utente)
 
 **Trigger autonomi:** «pubblica blog», «prossimo articolo», venerdì + modifica repo, `/blog` senza tema specifico → prendi prossimo item coda.
 
