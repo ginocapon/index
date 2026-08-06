@@ -52,10 +52,10 @@
     if (/admin\.html$/i.test((location.pathname || ''))) return;
     var css = document.createElement('link');
     css.rel = 'stylesheet';
-    css.href = 'css/site-ai-disclosure.css?v=2';
+    css.href = 'css/site-ai-disclosure.css?v=3';
     document.head.appendChild(css);
     var s = document.createElement('script');
-    s.src = 'js/site-ai-disclosure.js?v=2';
+    s.src = 'js/site-ai-disclosure.js?v=3';
     s.defer = true;
     document.head.appendChild(s);
   })();

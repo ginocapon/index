@@ -81,8 +81,8 @@ Il **Regolamento (UE) 2024/1689** (AI Act) impone trasparenza quando si interagi
 Usare `window.RigAiDisclosure.TEXT` — chiavi:
 
 - `footer` — barra sito
-- `photoCaption` — didascalia sotto ogni foto (versione piena)
-- `photoCaptionCompact` — card catalogo immobili
+- `photoCaptionListing` — foto annunci (correzioni grafiche/esposizione)
+- `photoCaptionBlog` — hero e figure blog (immagini editoriali/IA)
 - `chatHeader` — sottotitolo header Linda
 - `chatWelcome` — welcome card / landing chat
 - `chatFirst` — primo messaggio post-avvio chat
