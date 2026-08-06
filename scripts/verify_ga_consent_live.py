@@ -37,7 +37,7 @@ def main() -> int:
     ok: list[str] = []
 
     # 1) ga-consent.js live
-    code, js = fetch(f"{SITE}/js/ga-consent.js?v=2")
+    code, js = fetch(f"{SITE}/js/ga-consent.js?v=3")
     if code != 200:
         issues.append(f"ga-consent.js HTTP {code}")
     else:
