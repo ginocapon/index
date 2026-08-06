@@ -14,6 +14,10 @@ DATE_IT = "28 luglio 2026"
 DATE_ISO = "2026-07-28"
 TIME_TS = "2026-07-28T09:00:00+02:00"
 MIN_BODY_WORDS = 2500
+CAP_BLOG_AI = (
+    "Immagine editoriale elaborata digitalmente (anche con intelligenza artificiale): "
+    "illustrazione a scopo informativo, non documento fotografico dell'immobile o della scena descritta."
+)
 
 OMI_URL = (
     "https://www.agenziaentrate.gov.it/portale/schede/fabbricatiterreni/"
@@ -116,8 +120,12 @@ def wc(html: str) -> int:
     return len(re.sub(r"\s+", " ", text).strip().split())
 
 
-def blog_fig(src: str, alt: str, cap: str) -> str:
-    return f"""<figure class="blog-fig"><img src="{src}" alt="{alt}" width="820" height="460" loading="lazy"><figcaption>{cap}</figcaption></figure>"""
+def blog_fig(src: str, alt: str, cap: str | None = None) -> str:
+    caption = cap if cap is not None else CAP_BLOG_AI
+    return (
+        f'<figure class="blog-fig"><img src="{src}" alt="{alt}" width="820" height="460" loading="lazy">'
+        f'<figcaption class="rig-photo-caption">{caption}</figcaption></figure>'
+    )
 
 
 def aeo_box(title: str, text: str) -> str:
@@ -288,7 +296,7 @@ def build_html(cfg: dict, content: str, words: int) -> str:
     return f"""<!DOCTYPE html>
 <html lang="{lang}">
 <head>
-<script src="js/ga-consent.js?v=3"></script>
+<script src="js/ga-consent.js?v=4"></script>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#2C4A6E">
 <title>{cfg["title"]}</title>
@@ -874,8 +882,8 @@ def body_housing_market_en() -> str:
 """
 
 
-def expand_body(body_fn: Callable[[], str], sections: list[str]) -> str:
-    """Append themed sections to reach MIN_BODY_WORDS without duplicate loops."""
+def expand_body(body_fn: Callable[[], str], sections: list[str], extra_pool: list[str] | None = None) -> str:
+    """Append themed sections to reach MIN_BODY_WORDS — mai ripetere lo stesso paragrafo."""
     base = body_fn()
     combined = base
     idx = 0
@@ -884,7 +892,7 @@ def expand_body(body_fn: Callable[[], str], sections: list[str]) -> str:
         idx += 1
     if wc(combined) < MIN_BODY_WORDS:
         combined += f"<p>{CLAIM_FOOT}</p>"
-    if wc(combined) < MIN_BODY_WORDS:
+    if wc(combined) < MIN_BODY_WORDS and "Contatti Righetto" not in combined:
         combined += (
             "<h2>Contatti Righetto Immobiliare</h2>"
             "<p>Consulenza in sede Limena (Via Roma 96) su vendita, acquisto e locazione nel Padovano. "
@@ -898,18 +906,20 @@ def expand_body(body_fn: Callable[[], str], sections: list[str]) -> str:
             f'<a href="{OMI_URL}">OMI ADE</a>, '
             f'<a href="{ADE_OSSERVATORIO}">Osservatorio ADE</a>, '
             f'<a href="{ISTAT_URL}">ISTAT</a>. '
-            "Righetto Immobiliare — Limena (PD), dal 2000. "
-            "Articolo aggiornato 28 luglio 2026: verificare sempre comunicati ADE e semestre OMI "
-            "prima di fissare prezzi di vendita o canoni di locazione nel Padovano. "
-            "Consulenza gratuita su appuntamento — mediazione concordata in sede nel mandato.</p>"
+            "Righetto Immobiliare — Limena (PD), dal 2000.</p>"
         )
-    while wc(combined) < MIN_BODY_WORDS:
-        combined += (
-            "<p>Righetto Immobiliare: supporto operativo su Padova e 101 comuni, "
-            "350+ immobili gestiti, 98% soddisfazione clienti verificata.</p>"
-        )
+    pool = extra_pool if extra_pool is not None else EXPANSION_IT_DOMANDA
+    eidx = 0
+    while wc(combined) < MIN_BODY_WORDS and eidx < len(pool):
+        sentence = pool[eidx]
+        if sentence not in combined:
+            combined += f"<h3>Contesto di mercato {eidx + 1}</h3><p>{sentence}</p>"
+        eidx += 1
     if wc(combined) < MIN_BODY_WORDS:
-        raise ValueError(f"Pool espansione insufficiente ({wc(combined)} parole, servono {MIN_BODY_WORDS})")
+        raise ValueError(
+            f"Pool espansione insufficiente ({wc(combined)} parole, servono {MIN_BODY_WORDS}). "
+            "Aggiungere contenuto unico — vietato ripetere paragrafi identici."
+        )
     return combined
 
 
