@@ -225,7 +225,7 @@ def body_case_vendita_annunci() -> str:
 </tbody>
 </table>
 
-{blog_fig("img/blog/blog-case-vendita-limena-leggere-annunci-2026.webp", "Case in vendita Limena — leggere annunci 2026", "Scheda annuncio: verificare coerenza tra foto, testo e documenti.")}
+{blog_fig("img/blog/blog-case-vendita-limena-leggere-annunci-2026.webp", "Case in vendita Limena — leggere annunci 2026")}
 
 <h2 id="foto">Foto e planimetria: cosa guardare</h2>
 <p>Foto professionali non nascondono difetti se la visita è completa. Controllate angoli soffitto, davanzali, pavimenti e vista da finestre. Planimetria catastale sovrapposta allo stato di fatto: cucine spostate, verande chiuse abusive, box non censiti sono rischi rogito.</p>
@@ -402,7 +402,7 @@ ARTICLES: list[dict] = [
         "bread_crumb": "Appartamento Limena acquisto",
         "h1": "<strong>Appartamento Limena</strong>: guida acquisto 2026",
         "hero_alt": "Appartamento in vendita Limena guida acquisto 2026",
-        "body_fn": lambda: expand_body(body_appartamento_acquisto, EXPANSION_LIMENA),
+        "body_fn": lambda: expand_body(body_appartamento_acquisto, EXPANSION_LIMENA, _batch.EXPANSION_IT_DOMANDA),
         "faqs": [
             ("Come acquistare appartamento a Limena nel 2026?", "Definire budget e mutuo, consultare OMI ADE per zona e tipologia, visitare con checklist documentale, confrontare comparabili e presentare proposta scritta."),
             ("Dove trovo i prezzi ufficiali Limena?", "Sul portale OMI dell'Agenzia delle Entrate, semestre corrente, selezionando comune Limena e tipologia abitativa vendita."),
@@ -442,7 +442,7 @@ ARTICLES: list[dict] = [
         "bread_crumb": "Case vendita annunci",
         "h1": "<strong>Case vendita Limena</strong>: leggere annunci 2026",
         "hero_alt": "Case in vendita Limena leggere annunci 2026",
-        "body_fn": lambda: expand_body(body_case_vendita_annunci, EXPANSION_LIMENA),
+        "body_fn": lambda: expand_body(body_case_vendita_annunci, EXPANSION_LIMENA, _batch.EXPANSION_IT_DOMANDA),
         "faqs": [
             ("Come leggere un annuncio vendita Limena?", "Verificare tipologia, metratura, piano, APE, planimetria, prezzo vs OMI e coerenza foto-descrizione."),
             ("Quali red flag negli annunci?", "Prezzo anomalo, assenza documenti, bonifici anticipati, foto incomplete, rifiuto visite tecniche."),
@@ -482,7 +482,7 @@ ARTICLES: list[dict] = [
         "bread_crumb": "Affitto contratto Limena",
         "h1": "<strong>Appartamento affitto Limena</strong>: contratto 2026",
         "hero_alt": "Contratto affitto appartamento Limena 2026",
-        "body_fn": lambda: expand_body(body_affitto_contratto, EXPANSION_LIMENA),
+        "body_fn": lambda: expand_body(body_affitto_contratto, EXPANSION_LIMENA, _batch.EXPANSION_IT_DOMANDA),
         "faqs": [
             ("Che contratto per affitto Limena?", "4+4 canone libero è lo standard; canone concordato, 3+2 e transitorio per casi specifici con requisiti di legge."),
             ("Quanto deposito cauzionale?", "Fino a tre mensilità per uso abitativo; restituzione a fine locazione se immobile in ordine."),
@@ -522,7 +522,7 @@ ARTICLES: list[dict] = [
         "bread_crumb": "Bilocale trilocale Limena",
         "h1": "<strong>Bilocale o trilocale Limena</strong>: guida scelta 2026",
         "hero_alt": "Bilocale vs trilocale Limena confronto 2026",
-        "body_fn": lambda: expand_body(body_bilocale_trilocale, EXPANSION_LIMENA),
+        "body_fn": lambda: expand_body(body_bilocale_trilocale, EXPANSION_LIMENA, _batch.EXPANSION_IT_DOMANDA),
         "faqs": [
             ("Meglio bilocale o trilocale Limena?", "Bilocale per coppie/pendolari; trilocale per famiglie con figli o bisogno studio separato. Dipende da budget OMI e abitudini."),
             ("Famiglia con un figlio: basta bilocale?", "Possibile fino a 3–4 anni; poi camera separata migliora qualità vita. Valutare orizzonte 5–7 anni."),
@@ -562,7 +562,7 @@ ARTICLES: list[dict] = [
         "bread_crumb": "Gruppo Righetto Limena",
         "h1": "<strong>Gruppo Immobiliare Righetto</strong> a Limena nel 2026",
         "hero_alt": "Gruppo Immobiliare Righetto Limena Via Roma 96",
-        "body_fn": lambda: expand_body(body_gruppo_righetto, EXPANSION_LIMENA),
+        "body_fn": lambda: expand_body(body_gruppo_righetto, EXPANSION_LIMENA, _batch.EXPANSION_IT_DOMANDA),
         "faqs": [
             ("Dove si trova Righetto a Limena?", "Via Roma 96, 35010 Limena (PD) — sede operativa verificabile su mappe e recensioni."),
             ("Da quando opera Righetto?", "Dal 2000 su Padova e provincia, 101 comuni coperti."),

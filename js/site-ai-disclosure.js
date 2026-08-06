@@ -15,13 +15,20 @@
       'possono essere state ottimizzate o parzialmente modificate con strumenti digitali, inclusa ' +
       'intelligenza artificiale. Stime e testi hanno valore informativo. ' +
       '<a href="' + PRIVACY_ANCHOR + '">Dettagli</a>',
-    photoCaption:
-      'Immagine di riferimento reale; possibile ottimizzazione digitale (anche con intelligenza artificiale), ' +
-      'senza alterare le caratteristiche dichiarate. ' +
+    photoCaptionListing:
+      'Foto dell\'annuncio riferita all\'immobile reale. Possiamo correggere graficamente luminosità, contrasto, esposizione e nitidezza, anche con strumenti digitali o IA, ' +
+      'senza alterare tipologia, metrature e stato dichiarati in scheda. ' +
       '<a href="' + PRIVACY_HREF + '">Informativa</a>',
-    photoCaptionCompact:
-      'Foto reale, eventualmente ottimizzata digitalmente (anche IA). ' +
+    photoCaptionListingCompact:
+      'Foto reale; possibili correzioni grafiche (esposizione, luminosità, anche IA). ' +
       '<a href="' + PRIVACY_HREF + '">Info</a>',
+    photoCaptionBlog:
+      'Immagine editoriale <strong>elaborata digitalmente</strong> (anche con intelligenza artificiale): illustrazione a scopo informativo, ' +
+      'non documento fotografico dell\'immobile o della scena descritta nel testo. ' +
+      '<a href="' + PRIVACY_HREF + '">Informativa</a>',
+    photoCaptionGeneral:
+      'Immagine a scopo informativo; eventuale elaborazione digitale (anche IA) come da ' +
+      '<a href="' + PRIVACY_HREF + '">informativa trasparenza</a>.',
     chatHeader: 'Assistente digitale automatizzato',
     chatWelcome:
       'Sono un <strong>assistente digitale automatizzato</strong> (sistema a regole, senza IA generativa). ' +
@@ -106,16 +113,42 @@
     return true;
   }
 
-  function captionHtml(compact) {
-    return compact ? TEXT.photoCaptionCompact : TEXT.photoCaption;
+  function classifyImage(img) {
+    var src = (img.getAttribute('src') || '').toLowerCase();
+    if (src.indexOf('/img/blog/') !== -1 || src.indexOf('img/blog/') !== -1) return 'blog';
+    if (src.indexOf('/img/immobili/') !== -1 || src.indexOf('img/immobili/') !== -1) return 'listing';
+    if (img.closest('.art-hero, .blog-fig, .art-figure, article .article-content')) return 'blog';
+    if (img.closest('.card-img, .gallery-wrap, .gallery-main, .rig-carousel, .immobile')) return 'listing';
+    return 'general';
   }
 
-  function makeCaption(compact) {
+  function captionHtmlFor(img, compact) {
+    var kind = classifyImage(img);
+    if (kind === 'blog') return TEXT.photoCaptionBlog;
+    if (kind === 'listing') return compact ? TEXT.photoCaptionListingCompact : TEXT.photoCaptionListing;
+    return TEXT.photoCaptionGeneral;
+  }
+
+  function makeCaption(img, compact) {
     var cap = document.createElement('figcaption');
     cap.className = 'rig-photo-caption' + (compact ? ' rig-photo-caption--compact' : '');
     cap.setAttribute('role', 'note');
     cap.setAttribute('aria-label', 'Informativa trasparenza immagine');
-    cap.innerHTML = captionHtml(compact);
+    cap.innerHTML = captionHtmlFor(img, compact);
+    return cap;
+  }
+
+  function upsertFigureCaption(figure, img, compact) {
+    var existing = figure.querySelector('figcaption');
+    var html = captionHtmlFor(img, compact);
+    if (existing) {
+      existing.className = 'rig-photo-caption' + (compact ? ' rig-photo-caption--compact' : '');
+      existing.setAttribute('role', 'note');
+      existing.innerHTML = html;
+      return existing;
+    }
+    var cap = makeCaption(img, compact);
+    figure.appendChild(cap);
     return cap;
   }
 
@@ -137,7 +170,8 @@
       return;
     }
     carousel.dataset.rigCarouselCaption = 'done';
-    carousel.appendChild(makeCaption(false));
+    var sampleImg = carousel.querySelector('img');
+    carousel.appendChild(makeCaption(sampleImg || carousel, false));
     carousel.querySelectorAll('img').forEach(function (img) {
       markDone(img);
     });
@@ -159,9 +193,7 @@
 
     var figure = img.closest('figure');
     if (figure) {
-      if (!figure.querySelector('.rig-photo-caption')) {
-        figure.appendChild(makeCaption(false));
-      }
+      upsertFigureCaption(figure, img, false);
       markDone(img);
       return;
     }
@@ -169,7 +201,7 @@
     var cardImg = img.closest('.card-img');
     if (cardImg) {
       if (!hasCaptionNear(cardImg)) {
-        cardImg.parentNode.insertBefore(makeCaption(true), cardImg.nextSibling);
+        cardImg.parentNode.insertBefore(makeCaption(img, true), cardImg.nextSibling);
       }
       markDone(img);
       return;
@@ -177,8 +209,10 @@
 
     var blogFig = img.closest('.blog-fig, .art-figure');
     if (blogFig) {
-      if (!blogFig.querySelector('.rig-photo-caption')) {
-        blogFig.appendChild(makeCaption(false));
+      if (blogFig.tagName === 'FIGURE') {
+        upsertFigureCaption(blogFig, img, false);
+      } else if (!blogFig.querySelector('.rig-photo-caption')) {
+        blogFig.appendChild(makeCaption(img, false));
       }
       markDone(img);
       return;
@@ -187,7 +221,7 @@
     var hero = img.closest('.art-hero');
     if (hero) {
       if (!hasCaptionNear(hero)) {
-        hero.parentNode.insertBefore(makeCaption(false), hero.nextSibling);
+        hero.parentNode.insertBefore(makeCaption(img, false), hero.nextSibling);
       }
       markDone(img);
       return;
@@ -196,7 +230,7 @@
     var host = img.closest('.gallery-carousel-host, .gallery-main, .gallery-wrap');
     if (host) {
       if (!hasCaptionNear(host)) {
-        host.parentNode.insertBefore(makeCaption(false), host.nextSibling);
+        host.parentNode.insertBefore(makeCaption(img, false), host.nextSibling);
       }
       markDone(img);
       return;
@@ -208,8 +242,18 @@
       markDone(img);
       return;
     }
-    parent.insertBefore(makeCaption(false), img.nextSibling);
+    parent.insertBefore(makeCaption(img, false), img.nextSibling);
     markDone(img);
+  }
+
+  function refreshExistingCaptions() {
+    document.querySelectorAll('.rig-photo-caption, figure.blog-fig figcaption').forEach(function (cap) {
+      var figure = cap.closest('figure, .blog-fig');
+      var img = figure && figure.querySelector('img');
+      if (!img) return;
+      cap.className = 'rig-photo-caption';
+      cap.innerHTML = captionHtmlFor(img, false);
+    });
   }
 
   function injectPhotoCaptions() {
@@ -239,8 +283,12 @@
   function init() {
     injectFooterBar();
     injectPhotoCaptions();
+    refreshExistingCaptions();
     observeDynamicPhotos();
-    global.addEventListener('load', injectPhotoCaptions);
+    global.addEventListener('load', function () {
+      injectPhotoCaptions();
+      refreshExistingCaptions();
+    });
   }
 
   if (document.readyState === 'loading') {
