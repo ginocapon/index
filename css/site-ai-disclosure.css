@@ -52,6 +52,56 @@ footer .rig-ai-act-bar strong {
   color: #2c4a6e;
   font-weight: 600;
 }
+/* Didascalia sotto ogni foto — AI Act UE */
+.rig-photo-caption {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.42rem 0.65rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem;
+  line-height: 1.5;
+  font-style: italic;
+  color: #6b7a8d;
+  background: #f4f1ec;
+  border-top: 1px solid #e6dfd6;
+  border-bottom: 1px solid #e6dfd6;
+  text-align: left;
+}
+.rig-photo-caption a {
+  color: #2c4a6e;
+  font-weight: 600;
+  font-style: normal;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.rig-photo-caption--compact {
+  font-size: 0.58rem;
+  padding: 0.3rem 0.5rem;
+  line-height: 1.45;
+}
+.rig-carousel > .rig-photo-caption {
+  position: relative;
+  z-index: 2;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+}
+.art-hero + .rig-photo-caption {
+  max-width: 100%;
+  margin: 0;
+  padding: 0.45rem 1.25rem;
+  background: #ece7df;
+  border-top: none;
+}
+.blog-fig .rig-photo-caption,
+figure .rig-photo-caption {
+  border-radius: 0 0 8px 8px;
+  border-top: none;
+}
+.card .rig-photo-caption--compact {
+  border-left: 1px solid #e6dfd6;
+  border-right: 1px solid #e6dfd6;
+}
 .chat-ai-disclosure {
   font-size: 0.62rem;
   line-height: 1.45;
@@ -108,5 +158,12 @@ footer .rig-ai-act-bar strong {
     font-size: 0.64rem;
     padding: 0.55rem 0.85rem;
     text-align: left;
+  }
+  .rig-photo-caption {
+    font-size: 0.58rem;
+    padding: 0.35rem 0.55rem;
+  }
+  .rig-photo-caption--compact {
+    font-size: 0.54rem;
   }
 }
