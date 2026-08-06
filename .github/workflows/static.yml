@@ -14,7 +14,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -58,6 +58,33 @@ jobs:
       - name: Build SEO redirects (404 + stub 301)
         run: python3 scripts/build_seo_redirects.py
 
+      - name: Prepara artifact Pages (solo file pubblici)
+        run: |
+          mkdir -p _pages_site
+          rsync -a \
+            --exclude '.git' \
+            --exclude '.github' \
+            --exclude '.cursor' \
+            --exclude '.claude' \
+            --exclude 'TEST-SKILL' \
+            --exclude 'righetto_social' \
+            --exclude 'scripts' \
+            --exclude 'documenti' \
+            --exclude 'tools' \
+            --exclude 'sql' \
+            --exclude 'supabase' \
+            --exclude 'docs' \
+            --exclude '_pages_site' \
+            --exclude 'CLAUDE.md' \
+            --exclude 'SKILL-2.0.md' \
+            --exclude 'skimm.md' \
+            --exclude '*.py' \
+            --exclude 'node_modules' \
+            ./ _pages_site/
+          echo "Dimensione artifact:"
+          du -sh _pages_site
+          find _pages_site -type f | wc -l
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -71,11 +98,12 @@ jobs:
         id: upload
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '_pages_site'
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
