@@ -13,6 +13,7 @@ description: >-
 
 1. `TEST-SKILL/skill-essentials.md` (mobile-first)
 2. `TEST-SKILL/skill-design.md` (variabili, spacing, CTA, form)
+3. **`TEST-SKILL/skill-ai-act-compliance.md`** — barra disclosure mobile: testo leggibile, no overflow
 3. Leggi il file HTML/CSS **specifico** prima di modificare
 
 ## Diagnosi rapida

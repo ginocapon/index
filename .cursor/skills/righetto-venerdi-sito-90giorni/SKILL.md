@@ -16,8 +16,9 @@ Quando l'utente scrive **`"SKILL"`** (virgolette incluse):
 
 1. Leggi `TEST-SKILL/skill-competitor-roadmap-q3-2026.md` **§8**
 2. Leggi `skill-memoria-progressi.md` + `data/editorial-queue.json` + `data/gsc-indexing-weekly.json` + `data/gsc-keywords-priority.json` + `data/competitor-roadmap-q3-2026.json`
-3. Output piano giornata (formato §8 skill-competitor) — **max 3 task repo + 2 task utente GSC/GBP**
-4. Non lista generica — scegli da SOSTENERE · blog coda · gap Q3 · macrociclo 12 sett.
+3. Verifica **`skill-ai-act-compliance.md`** — barra sito e disclosure chat attive su pagine pubbliche
+4. Output piano giornata (formato §8 skill-competitor) — **max 3 task repo + 2 task utente GSC/GBP**
+5. Non lista generica — scegli da SOSTENERE · blog coda · gap Q3 · macrociclo 12 sett.
 
 Sinonimi: «SKILL», «piano SKILL», `"SKILL"` il venerdì.
 

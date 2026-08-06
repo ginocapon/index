@@ -167,6 +167,8 @@ Prima del commit: `node scripts/validate-page.js --file blog-….html`. Title/H1
 
 **Regola pratica:** se l’immagine non potrebbe essere scattata con una macchina fotografica in Padova/provincia o in agenzia → **non usarla**. I **grafici dati** restano **SVG/HTML colorati** (Immobiliare.it Insights, OMI, FIMAA…) — non sostituiscono le foto.
 
+**Trasparenza AI Act (Reg. UE 2024/1689):** copertine o grafiche editoriali elaborate digitalmente → didascalia onesta sotto hero/figure + barra sito (`skill-ai-act-compliance.md`).
+
 #### D) Proporzioni 19:9 — hero e figure corpo (luglio 2026)
 
 | Elemento | Markup obbligatorio | CSS |
