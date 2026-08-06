@@ -13,7 +13,8 @@ description: >-
 
 1. Leggi `TEST-SKILL/skill-essentials.md`
 2. Leggi `TEST-SKILL/skill-massimo-punteggio.md` (gate Google)
-3. Consulta `TEST-SKILL/context-map.json` per il task specifico → carica i moduli indicati
+3. Leggi **`TEST-SKILL/skill-ai-act-compliance.md`** (trasparenza AI Act UE — priorità permanente)
+4. Consulta `TEST-SKILL/context-map.json` per il task specifico → carica i moduli indicati
 
 ## Regole non negoziabili
 
@@ -30,6 +31,7 @@ description: >-
 - [ ] File letto prima di modificare
 - [ ] Title ≤60 (max 70), meta ≤160 — `node scripts/validate-page.js --file pagina.html`
 - [ ] `sitemap.xml` se nuova/rimossa URL
+- [ ] **AI Act UE:** disclosure sito/chat/foto se pagina o media toccati — `skill-ai-act-compliance.md`
 - [ ] **Commit:** a fine task se ci sono modifiche (messaggio in italiano, no `.env`/segreti)
 - [ ] **Push:** solo se l'utente lo chiede esplicitamente («push», «pushia», «metti online»). Senza richiesta → commit locale o solo file modificati, **no push**
 

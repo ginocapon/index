@@ -12,7 +12,8 @@ description: >-
 
 1. `TEST-SKILL/skill-essentials.md`
 2. `TEST-SKILL/skill-security.md` (checklist completa §3)
-3. `TEST-SKILL/skill-context.md` (architettura Supabase)
+3. **`TEST-SKILL/skill-ai-act-compliance.md`** — disclosure assistente non sostituisce consulenza; no dati sensibili in chat log
+4. `TEST-SKILL/skill-context.md` (architettura Supabase)
 
 ## Cadenza obbligatoria
 

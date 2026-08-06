@@ -107,6 +107,7 @@ bash scripts/mini-seo-check.sh && bash scripts/audit-skill.sh
 - [ ] `llms.txt` + `ai.json` aggiornati con nuovi URL pillar
 - [ ] Frasi dichiarative auto-contenute (estraibili da AI)
 - [ ] §4.4b SKILL-2.0: per Google Search, SEO standard (no farm citazioni)
+- [ ] **AI Act UE (PRIORITÀ PERMANENTE):** barra `site-ai-disclosure`, disclosure Linda/chat, note foto — `skill-ai-act-compliance.md`
 
 ### 2.8 Accessibilità (WCAG AA)
 - [ ] Contrasto CTA ≥ 4,5:1 — **mai** `#FF6B35` con testo bianco

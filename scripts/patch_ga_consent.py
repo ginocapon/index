@@ -6,7 +6,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-REPLACEMENT = '<!-- Google tag (gtag.js) + Consent Mode -->\n<script src="js/ga-consent.js?v=1"></script>'
+REPLACEMENT = '<!-- Google tag (gtag.js) + Consent Mode -->\n<script src="js/ga-consent.js?v=2"></script>'
 BLOCK = re.compile(
     r"<!-- Google tag \(gtag\.js\)(?:\s*\+\s*Consent Mode)? -->\s*"
     r"<script async src=\"https://www\.googletagmanager\.com/gtag/js\?id=G-PHEL8KXLBX\"></script>\s*"

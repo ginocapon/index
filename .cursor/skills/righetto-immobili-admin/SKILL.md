@@ -12,7 +12,8 @@ description: >-
 
 1. `TEST-SKILL/skill-essentials.md` (§14 foto annunci, §15 visite virtuali)
 2. `TEST-SKILL/skill-media-migration.md` (BLOCCANTE)
-3. `TEST-SKILL/skill-context.md` (architettura Supabase/admin)
+3. **`TEST-SKILL/skill-ai-act-compliance.md`** — foto annunci: reali; ottimizzazione ammessa; nota trasparenza su catalogo/scheda
+4. `TEST-SKILL/skill-context.md` (architettura Supabase/admin)
 
 ## Sync foto annunci (flusso normale)
 
