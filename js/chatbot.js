@@ -1,6 +1,6 @@
 /**
  * RIGHETTO IMMOBILIARE — Chatbot Universale
- * Versione 2.1 — Luglio 2026
+ * Versione 2.2 — Agosto 2026 (trasparenza AI Act UE)
  * Include: stima prezzi, ricerca immobili, form contatto, FAQ
  * Dati prezzi: FIMAA Padova, Immobiliare.it, Idealista 2025-2026
  */
@@ -2222,12 +2222,12 @@ function initChatbotUI() {
   </style>
 
   <div id="rig-chat-widget">
-    <div id="rig-chat-box" role="dialog" aria-label="Chat assistente">
+    <div id="rig-chat-box" role="dialog" aria-label="Assistente digitale automatizzato Linda — Righetto Immobiliare">
       <div class="chat-header">
-        <div class="chat-header-avatar"><img src="${SARA_AVATAR}" alt="Linda"></div>
+        <div class="chat-header-avatar"><img src="${SARA_AVATAR}" alt="Linda — assistente digitale"></div>
         <div class="chat-header-info">
           <h4>Linda — Righetto Immobiliare</h4>
-          <span>Online — rispondiamo subito</span>
+          <span class="chat-ai-disclosure">Assistente digitale automatizzato (sistema a regole)</span>
         </div>
         <button type="button" class="chat-close" onclick="rigChat.toggle()" aria-label="Chiudi chat">✕</button>
       </div>
@@ -2250,7 +2250,7 @@ function initChatbotUI() {
         </button>
       </div>
     </div>
-    <button id="rig-chat-btn" type="button" onclick="rigChat.toggle()" aria-label="Chatta con Linda">
+    <button id="rig-chat-btn" type="button" onclick="rigChat.toggle()" aria-label="Apri assistente digitale Linda (automatizzato)">
       <img id="rig-chat-btn-avatar" src="${SARA_AVATAR}" alt="Linda">
       <svg id="rig-chat-icon-close" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" style="display:none">
         <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
@@ -2293,10 +2293,14 @@ function initChatbotUI() {
       var msgs = document.getElementById('rig-chat-msgs');
       var welcome = document.createElement('div');
       welcome.className = 'chat-welcome-card';
-      welcome.innerHTML = '<img src="' + SARA_AVATAR + '" alt="Linda" class="chat-welcome-photo">' +
+      var discWelcome = (window.RigAiDisclosure && window.RigAiDisclosure.TEXT && window.RigAiDisclosure.TEXT.chatWelcome) ||
+        'Sono un <strong>assistente digitale automatizzato</strong> (sistema a regole, senza IA generativa). ' +
+        'Le risposte e le stime hanno valore <strong>orientativo</strong>. <a href="/privacy#trasparenza-digitale">Informativa</a>';
+      welcome.innerHTML = '<img src="' + SARA_AVATAR + '" alt="Linda — assistente digitale" class="chat-welcome-photo">' +
         '<div class="chat-welcome-name">Linda</div>' +
-        '<div class="chat-welcome-role">Assistente Righetto Immobiliare</div>' +
+        '<div class="chat-welcome-role">Assistente digitale Righetto Immobiliare</div>' +
         '<p class="chat-welcome-text">Ciao! Sono qui per aiutarti.<br>Usa la chat per scoprire i nostri servizi, stimare il valore del tuo immobile o cercare casa.</p>' +
+        '<div class="chat-welcome-disclosure" role="note">' + discWelcome + '</div>' +
         '<button class="chat-welcome-btn" onclick="rigChat.startChat()">Inizia a chattare</button>';
       msgs.appendChild(welcome);
       // Nascondi quick buttons e input fino al click
@@ -2311,8 +2315,16 @@ function initChatbotUI() {
       // Mostra input e quick buttons
       document.querySelector('.chat-input-row').style.display = 'flex';
       document.getElementById('rig-quick-btns').style.display = 'flex';
-      // Messaggio iniziale
+      // Messaggio iniziale + nota trasparenza AI Act
       this.addMsg('bot', 'Come posso aiutarti? Scegli un\'opzione o scrivi liberamente.');
+      var discFirst = (window.RigAiDisclosure && window.RigAiDisclosure.TEXT && window.RigAiDisclosure.TEXT.chatFirst) ||
+        'Ricorda: sono un assistente automatizzato. Per decisioni vincolanti contatta un agente al 049.8843484. ' +
+        '<a href="/privacy#trasparenza-digitale">Trasparenza AI Act</a>.';
+      var discEl = document.createElement('p');
+      discEl.className = 'chat-msg-disclosure';
+      discEl.setAttribute('role', 'note');
+      discEl.innerHTML = discFirst;
+      document.getElementById('rig-chat-msgs').appendChild(discEl);
       document.getElementById('rig-chat-input').focus();
     },
 

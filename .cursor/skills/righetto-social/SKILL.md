@@ -13,7 +13,8 @@ description: >-
 
 1. `TEST-SKILL/skill-essentials.md` (claim, no tariffe online)
 2. `TEST-SKILL/skill-social-automation.md` (BLOCCANTE)
-3. Sintesi: `TEST-SKILL/SKILL-2.0.md` §10.4
+3. **`TEST-SKILL/skill-ai-act-compliance.md`** — foto/grafiche elaborate digitalmente: menzionare in copy se non foto reale annuncio
+4. Sintesi: `TEST-SKILL/SKILL-2.0.md` §10.4
 
 ## Copy BLOCCANTE (immobili e blog sito)
 

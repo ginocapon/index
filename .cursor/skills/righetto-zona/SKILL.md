@@ -13,7 +13,8 @@ description: >-
 
 1. `TEST-SKILL/skill-essentials.md` + `TEST-SKILL/skill-massimo-punteggio.md`
 2. `TEST-SKILL/skill-content.md` §3 (standard zone page)
-3. `TEST-SKILL/skill-seo.md` (GEO, schema, title zona)
+3. **`TEST-SKILL/skill-ai-act-compliance.md`** (barra footer sito su ogni pagina zona)
+4. `TEST-SKILL/skill-seo.md` (GEO, schema, title zona)
 
 ## Modelli
 

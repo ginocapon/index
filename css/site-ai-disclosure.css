@@ -1,0 +1,112 @@
+/* Trasparenza AI Act (UE) — barra informativa sito Righetto */
+.rig-ai-act-bar {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0.65rem 1.25rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.68rem;
+  line-height: 1.55;
+  color: rgba(21, 36, 53, 0.88);
+  background: linear-gradient(180deg, #ece7df 0%, #e4ddd3 100%);
+  border-top: 1px solid #d5cdc2;
+  border-bottom: 1px solid #d5cdc2;
+  text-align: center;
+}
+.rig-ai-act-bar a {
+  color: #2c4a6e;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.rig-ai-act-bar a:hover {
+  color: #152435;
+}
+.rig-ai-act-bar strong {
+  font-weight: 700;
+  color: #152435;
+}
+footer .rig-ai-act-bar {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: none;
+  background: rgba(0, 0, 0, 0.22);
+  color: rgba(255, 255, 255, 0.72);
+}
+footer .rig-ai-act-bar a {
+  color: #ff8f5e;
+}
+footer .rig-ai-act-bar strong {
+  color: rgba(255, 255, 255, 0.92);
+}
+.rig-media-ai-note {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  line-height: 1.55;
+  color: #6b7a8d;
+  margin: 0;
+  padding: 0.55rem 1.25rem 0.75rem;
+  background: #f7f5f1;
+  border-bottom: 1px solid #e1dbd1;
+}
+.rig-media-ai-note a {
+  color: #2c4a6e;
+  font-weight: 600;
+}
+.chat-ai-disclosure {
+  font-size: 0.62rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 0.15rem;
+  display: block;
+}
+.chat-ai-disclosure a {
+  color: #ff8f5e;
+  text-decoration: underline;
+}
+.chat-welcome-disclosure {
+  font-size: 0.68rem;
+  line-height: 1.5;
+  color: #6b7a8d;
+  margin: 0.5rem 0 0.85rem;
+  padding: 0.55rem 0.65rem;
+  background: #f0ece6;
+  border-radius: 8px;
+  border-left: 3px solid #2c4a6e;
+  text-align: left;
+}
+.chat-welcome-disclosure a {
+  color: #2c4a6e;
+  font-weight: 600;
+}
+.chat-msg-disclosure {
+  font-size: 0.7rem;
+  line-height: 1.5;
+  color: #6b7a8d;
+  margin: 0.35rem 0 0.75rem 2.6rem;
+  max-width: 92%;
+}
+.chat-msg-disclosure a {
+  color: #2c4a6e;
+}
+.cf-ai-disclosure {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.68rem;
+  line-height: 1.5;
+  color: #6b7a8d;
+  margin: 0 0 0.75rem;
+  padding: 0.55rem 0.75rem;
+  background: #f0ece6;
+  border-radius: 8px;
+  border-left: 3px solid #2c4a6e;
+}
+.cf-ai-disclosure a {
+  color: #2c4a6e;
+  font-weight: 600;
+}
+@media (max-width: 640px) {
+  .rig-ai-act-bar {
+    font-size: 0.64rem;
+    padding: 0.55rem 0.85rem;
+    text-align: left;
+  }
+}
