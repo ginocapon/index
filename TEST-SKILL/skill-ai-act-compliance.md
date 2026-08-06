@@ -26,7 +26,7 @@ Il **Regolamento (UE) 2024/1689** (AI Act) impone trasparenza quando si interagi
 | Asset | Ruolo |
 |-------|--------|
 | `css/site-ai-disclosure.css` | Stili barra footer, note foto, disclosure chat |
-| `js/site-ai-disclosure.js` | Barra footer su tutte le pagine pubbliche; note catalogo/immobile; testi condivisi `RigAiDisclosure.TEXT` |
+| `js/site-ai-disclosure.js` | Barra footer su tutte le pagine pubbliche; **didascalia sotto ogni foto**; testi condivisi `RigAiDisclosure.TEXT` |
 | `js/ga-consent.js` | Carica CSS+JS disclosure su pagine con analytics (copertura sito) |
 | `privacy.html#trasparenza-digitale` | Informativa legale completa (§15) |
 | `privacy.html#assistente-digitale` | Anchor assistente Linda |
@@ -57,10 +57,11 @@ Il **Regolamento (UE) 2024/1689** (AI Act) impone trasparenza quando si interagi
 
 ### 3.4 Foto e media
 
-- [ ] **Catalogo** (`immobili.html`): nota `#rig-catalog-ai-note` (JS)
-- [ ] **Scheda immobile** (`immobile.html`): nota `#rig-immobile-ai-note` sotto galleria (JS)
-- [ ] **Blog hero** illustrativa: didascalia onesta se non foto reale del territorio (§8.2.5 SKILL-2.0)
-- [ ] **Social/reel**: copy coerente con §15.2 privacy (vedi `skill-social-automation.md`)
+- [ ] **Ogni foto** pubblica riceve didascalia `.rig-photo-caption` (automatica via `site-ai-disclosure.js`)
+- [ ] Testo standard: `TEXT.photoCaption` / `TEXT.photoCaptionCompact` — non inventare varianti per pagina
+- [ ] **Catalogo** e **scheda immobile**: carousel = una didascalia; card annuncio = versione compatta
+- [ ] **Blog hero/figure**: didascalia sotto hero o dentro `figure`
+- [ ] Esclusi: logo, avatar chat, icone, miniature confronto
 
 ### 3.5 Contenuti editoriali
 
@@ -80,8 +81,8 @@ Il **Regolamento (UE) 2024/1689** (AI Act) impone trasparenza quando si interagi
 Usare `window.RigAiDisclosure.TEXT` — chiavi:
 
 - `footer` — barra sito
-- `photo` — scheda annuncio
-- `catalog` — catalogo immobili
+- `photoCaption` — didascalia sotto ogni foto (versione piena)
+- `photoCaptionCompact` — card catalogo immobili
 - `chatHeader` — sottotitolo header Linda
 - `chatWelcome` — welcome card / landing chat
 - `chatFirst` — primo messaggio post-avvio chat

@@ -288,7 +288,7 @@ def build_html(cfg: dict, content: str, words: int) -> str:
     return f"""<!DOCTYPE html>
 <html lang="{lang}">
 <head>
-<script src="js/ga-consent.js?v=2"></script>
+<script src="js/ga-consent.js?v=3"></script>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#2C4A6E">
 <title>{cfg["title"]}</title>
