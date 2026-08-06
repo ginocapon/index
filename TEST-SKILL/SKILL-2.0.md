@@ -1094,6 +1094,27 @@ Checklist completa venerdì: **`skill-massimo-punteggio.md` §4** (automazioni, 
 
 **Copertura target:** **102/102** slug blog con keyword dedicata (audit: `scripts/audit_chatbot_faq.py`); voce «articoli blog» come fallback generico.
 
+### 8.1f Trasparenza AI Act UE — contenuti digitali (PRIORITÀ PERMANENTE)
+
+> **File operativo:** `TEST-SKILL/skill-ai-act-compliance.md` — **obbligatorio** su ogni pagina, blog, landing, foto, chatbot e social.
+
+**Implementazione sito:**
+
+1. Barra informativa sito: `js/site-ai-disclosure.js` (caricata via `js/ga-consent.js` sulle pagine pubbliche)
+2. Assistente **Linda**: etichetta «assistente digitale automatizzato» — non «online in tempo reale» come persona
+3. Foto annunci: nota trasparenza su catalogo e scheda immobile
+4. Informativa legale: `privacy.html` §15 (`#trasparenza-digitale`, `#assistente-digitale`)
+
+**Checklist agente (BLOCCANTE a fine task):**
+
+- [ ] Nuova/modificata pagina HTML pubblica → disclosure footer presente (ga-consent + site-ai-disclosure)
+- [ ] Modifica chatbot → bump `chatbot.js?v=N` ovunque
+- [ ] Modifica landing chat → bump `chat-flow.js?v=N`
+- [ ] Nuovo contenuto con immagini → nota o didascalia se elaborazione digitale/IA
+- [ ] Aggiornare §15 privacy se cambia natura assistente o policy foto
+
+**Non presentare** stime chat o percorsi automatizzati come perizie o consulenza vincolante.
+
 ### 8.2.5 AEO / ricerca assistita — AI Overviews, AI Mode e agent (OBBLIGATORIO su pillar macro 2026+)
 
 > **Perchee' esiste:** una parte crescente delle ricerche informative passa da **sintesi generate** (Google AI Overviews, AI Mode, assistenti). Le pagine che vogliono essere estratte con fedelta' devono somigliare a **risposte strutturate**, non a testo vago.

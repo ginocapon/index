@@ -91,6 +91,17 @@ window.ChatFlow = function(containerId, steps, config) {
   this.chatArea.className = 'cf-chat';
   this.container.appendChild(this.chatArea);
 
+  // Trasparenza AI Act UE — assistente conversazionale landing
+  var discHtml = (window.RigAiDisclosure && window.RigAiDisclosure.TEXT && window.RigAiDisclosure.TEXT.chatWelcome) ||
+    'Percorso guidato con <strong>assistente digitale automatizzato</strong> (sistema a regole). ' +
+    'Le stime hanno valore orientativo. <a href="/privacy#trasparenza-digitale">Informativa</a>';
+  var disc = document.createElement('div');
+  disc.className = 'cf-ai-disclosure';
+  disc.setAttribute('role', 'note');
+  disc.setAttribute('aria-label', 'Informativa assistente digitale automatizzato');
+  disc.innerHTML = discHtml;
+  this.container.insertBefore(disc, this.chatArea);
+
   this.updateProgress();
   this.playStep();
 };

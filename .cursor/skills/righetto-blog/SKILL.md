@@ -23,17 +23,19 @@ description: >-
 1. `TEST-SKILL/skill-essentials.md` + `TEST-SKILL/skill-massimo-punteggio.md`
 2. `TEST-SKILL/skill-memoria-progressi.md` + **`TEST-SKILL/skill-editorial-queue.md`**
 3. `TEST-SKILL/skill-content.md` (template, cluster, standard articoli)
-4. `data/gsc-keywords-priority.json` — SOSTENERE prima di AGGIUNGERE se priorità GSC
-5. `TEST-SKILL/skimm.md` — keyword primaria univoca
-6. **Anti-doppioni:** `python scripts/check_doppioni_sito.py` + `python scripts/build_skimm.py`
-7. Se doppione → marca coda `cancelled`, discovery nuovo tema, STOP publish
+4. **`TEST-SKILL/skill-ai-act-compliance.md`** (trasparenza foto/assistente — priorità permanente)
+5. `data/gsc-keywords-priority.json` — SOSTENERE prima di AGGIUNGERE se priorità GSC
+6. `TEST-SKILL/skimm.md` — keyword primaria univoca
+7. **Anti-doppioni:** `python scripts/check_doppioni_sito.py` + `python scripts/build_skimm.py`
+8. Se doppione → marca coda `cancelled`, discovery nuovo tema, STOP publish
 
 ## Checklist articolo
 
 - [ ] `kw_primaria` univoca in skimm §3
 - [ ] 2500+ parole corpo utile, 10–15 H2/H3, tono professionale
 - [ ] Ogni dato numerico con fonte verificata e link
-- [ ] Copertina hero WebP 1200×630 leggera (§8.1c SKILL-2.0)
+- [ ] Copertina hero WebP 1200×630 leggera (§8.1c SKILL-2.0); didascalia se illustrazione/elaborazione digitale
+- [ ] **AI Act:** barra footer sito (ga-consent) + nota trasparenza se hero non è foto reale del territorio
 - [ ] Title ≤60, meta ≤160, H1 diverso da title
 - [ ] JSON-LD: `BlogPosting` + `FAQPage` se FAQ visibile
 - [ ] Link interni verso pillar/zone/servizi del cluster
