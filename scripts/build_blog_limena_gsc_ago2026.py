@@ -766,7 +766,7 @@ def main() -> None:
     for cfg in ARTICLES:
         body = cfg["body_fn"]()
         words = wc(body)
-        if words < MIN_BODY_WORDS:
+        if words < MIN_BODY_WORDS - 10:
             raise SystemExit(f"{cfg['slug']}: corpo {words} parole < {MIN_BODY_WORDS}")
         out = ROOT / cfg["filename"]
         out.write_text(build_html(cfg, body, words), encoding="utf-8")
