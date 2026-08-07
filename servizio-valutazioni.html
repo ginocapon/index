@@ -128,14 +128,14 @@
     .fb-tel svg{width:14px;height:14px;color:var(--oro)}
     .fb-tel strong{color:var(--nero)}
     /* TESTIMONIANZE */
-    .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
-    @media(max-width:900px){.reviews-grid{grid-template-columns:1fr 1fr}}
-    @media(max-width:560px){.reviews-grid{grid-template-columns:1fr}}
-    .review{background:#fff;border:1px solid var(--gc);border-radius:3px;padding:1.3rem}
+    .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
+    @media(max-width:900px){.testimonials-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:560px){.testimonials-grid{grid-template-columns:1fr}}
+    .testimonial{background:#fff;border:1px solid var(--gc);border-radius:3px;padding:1.3rem}
     .stars{color:var(--oro);font-size:1rem;margin-bottom:.6rem}
-    .review-text{font-size:.83rem;color:var(--grigio);line-height:1.75;font-style:italic;margin-bottom:.8rem}
-    .review-auth{font-size:.72rem;font-weight:500;display:flex;align-items:center;gap:.45rem}
-    .review-av{width:28px;height:28px;border-radius:50%;background:var(--oro);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--nero)}
+    .testimonial-text{font-size:.83rem;color:var(--grigio);line-height:1.75;font-style:italic;margin-bottom:.8rem}
+    .testimonial-auth{font-size:.72rem;font-weight:500;display:flex;align-items:center;gap:.45rem}
+    .testimonial-av{width:28px;height:28px;border-radius:50%;background:var(--oro);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--nero)}
     /* HERO IMG */
     .hero-img{border-radius:4px;overflow:hidden}
     .hero-img img{width:100%;height:auto;display:block;border-radius:4px}
@@ -164,21 +164,12 @@
   "serviceType": "Valutazioni e Perizie Immobiliari",
   "name": "Valutazioni e Perizie Immobiliari — Righetto Immobiliare",
   "url": "https://righettoimmobiliare.it/servizio-valutazioni",
-      "dateModified": "2026-03-18",
+      "dateModified": "2026-08-07",
   "provider": {
     "@type": "RealEstateAgent",
+    "@id": "https://righettoimmobiliare.it/#righetto-agent",
     "name": "Righetto Immobiliare",
-    "url": "https://righettoimmobiliare.it",
-    "telephone": "+39-049-884-3484",
-    "address": {"@type": "PostalAddress", "streetAddress": "Via Roma n.96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
-    "geo": {"@type": "GeoCoordinates", "latitude": 45.476956, "longitude": 11.845762},
-    "sameAs": [
-      "https://www.facebook.com/righettoimmobiliare",
-      "https://www.instagram.com/righettoimmobiliare",
-      "https://www.linkedin.com/company/righetto-immobiliare"
-    ],
-    "hasMap": "https://maps.google.com/?q=45.476956,11.845762",
-    "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "127", "bestRating": "5", "worstRating": "1"}
+    "url": "https://righettoimmobiliare.it"
   },
   "areaServed": {"@type": "AdministrativeArea", "name": "Provincia di Padova"},
   "description": "Valutazioni immobiliari gratuite e perizie accreditate ABI a Padova e provincia. Database 15.000+ comparabili, stime per successioni, divisioni ereditarie, aste e passaggi generazionali.",
@@ -187,6 +178,31 @@
     "price": "0",
     "priceCurrency": "EUR",
     "description": "Valutazione gratuita di mercato"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "@id": "https://righettoimmobiliare.it/#righetto-agent",
+  "name": "Righetto Immobiliare",
+  "url": "https://righettoimmobiliare.it",
+  "telephone": "+39-049-884-3484",
+  "address": {"@type": "PostalAddress", "streetAddress": "Via Roma n.96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
+  "geo": {"@type": "GeoCoordinates", "latitude": 45.476956, "longitude": 11.845762},
+  "sameAs": [
+    "https://www.facebook.com/righettoimmobiliare",
+    "https://www.instagram.com/righettoimmobiliare",
+    "https://www.linkedin.com/company/righetto-immobiliare"
+  ],
+  "hasMap": "https://maps.google.com/?q=45.476956,11.845762",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "127",
+    "bestRating": "5",
+    "worstRating": "1"
   }
 }
 </script>
@@ -395,25 +411,25 @@
 </section>
 
 <!-- TESTIMONIANZE -->
-<section class="sec">
+<section class="sec" data-nosnippet>
   <div class="sec-inner sr">
     <div class="sec-tag">Cosa dicono i clienti</div>
     <h2 class="sec-t">Chi ha richiesto le nostre <strong>valutazioni e perizie</strong></h2>
-    <div class="reviews-grid sr-stagger">
-      <div class="review">
+    <div class="testimonials-grid sr-stagger">
+      <div class="testimonial">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <div class="review-text">"Avevo bisogno di una perizia ABI per il mutuo e Righetto Immobiliare mi ha consegnato il documento in 48 ore. La banca l'ha accettata senza riserve. Valutazione precisa e professionale, con un report dettagliato che spiegava ogni dato utilizzato."</div>
-        <div class="review-auth"><div class="review-av">G</div>Giovanni R. — Perizia ABI Appartamento Padova Centro</div>
+        <div class="testimonial-text">"Avevo bisogno di una perizia ABI per il mutuo e Righetto Immobiliare mi ha consegnato il documento in 48 ore. La banca l'ha accettata senza riserve. Valutazione precisa e professionale, con un report dettagliato che spiegava ogni dato utilizzato."</div>
+        <div class="testimonial-auth"><div class="testimonial-av">G</div>Giovanni R. — Perizia ABI Appartamento Padova Centro</div>
       </div>
-      <div class="review">
+      <div class="testimonial">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <div class="review-text">"Dopo la scomparsa di mio padre, dovevamo dividere gli immobili tra 4 fratelli. La perizia giurata di Righetto ha messo d'accordo tutti: trasparente, documentata, basata su dati reali. Ci hanno assistito anche nella fase di divisione."</div>
-        <div class="review-auth"><div class="review-av">S</div>Stefania M. — Perizia Divisione Ereditaria Limena</div>
+        <div class="testimonial-text">"Dopo la scomparsa di mio padre, dovevamo dividere gli immobili tra 4 fratelli. La perizia giurata di Righetto ha messo d'accordo tutti: trasparente, documentata, basata su dati reali. Ci hanno assistito anche nella fase di divisione."</div>
+        <div class="testimonial-auth"><div class="testimonial-av">S</div>Stefania M. — Perizia Divisione Ereditaria Limena</div>
       </div>
-      <div class="review">
+      <div class="testimonial">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <div class="review-text">"Volevo capire se conveniva vendere o affittare il mio bilocale. L'analisi di redditivita mi ha dato numeri chiari: yield netto, break-even, proiezioni a 5 anni. Ho deciso di affittare e sto ottenendo esattamente il rendimento previsto."</div>
-        <div class="review-auth"><div class="review-av">A</div>Andrea P. — Analisi Redditivita Bilocale Arcella</div>
+        <div class="testimonial-text">"Volevo capire se conveniva vendere o affittare il mio bilocale. L'analisi di redditivita mi ha dato numeri chiari: yield netto, break-even, proiezioni a 5 anni. Ho deciso di affittare e sto ottenendo esattamente il rendimento previsto."</div>
+        <div class="testimonial-auth"><div class="testimonial-av">A</div>Andrea P. — Analisi Redditivita Bilocale Arcella</div>
       </div>
     </div>
   </div>
