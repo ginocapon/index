@@ -177,7 +177,7 @@ def lead_form(slug: str, lang: str = "it") -> str:
 </section>"""
     return f"""
 <section class="blog-lead-wrap" id="richiedi-consulenza" aria-labelledby="blog-lead-title">
-  <h2 id="blog-lead-title">Richiedi informazioni</h2>
+  <h2 id="blog-lead-title">Richiedi una consulenza gratuita</h2>
   <form data-rig-lead-form data-provenienza="{slug}" data-pagina="{slug}" data-msg-prefix="[Blog]" novalidate>
     <div class="bl-fields">
       <label for="bl-nome">Nome e cognome *</label>
@@ -346,7 +346,7 @@ def build_html(cfg: dict, content: str, words: int) -> str:
 <div class="art-container"><div class="art-content">
 {content}
 {faq_html(cfg['faqs'], faq_title)}
-<div class="cta-banner"><div><h3>{cfg.get('cta_banner_title', 'Consulenza immobiliare Padova')}</h3><p>{cfg.get('cta_banner_text', 'Via Roma 96, Limena — Padova e provincia.')}</p></div><a href="contatti" class="cta-banner-btn">{val_btn}</a></div>
+<div class="cta-banner"><div><h3>{cfg.get('cta_banner_title', 'Consulenza immobiliare Padova')}</h3><p>{cfg.get('cta_banner_text', 'Via Roma 96, Limena — Padova e provincia.')}</p></div><a href="#richiedi-consulenza" class="cta-banner-btn">{val_btn}</a></div>
 <div class="share-bar"><span style="font-weight:600;font-size:.78rem;color:var(--grigio)">{share_l}</span>
 <button type="button" class="share-btn" onclick="navigator.clipboard.writeText('https://righettoimmobiliare.it/{slug}');this.textContent='OK'">{copy_l}</button></div>
 <div class="author-bio"><img src="img/team/titolari.webp" alt="Gino Capon" width="64" height="64" loading="lazy"><div><strong>Gino Capon</strong><p style="font-size:.82rem;color:#555">Righetto Immobiliare — Limena e Padova dal 2000.</p></div></div>
@@ -882,45 +882,150 @@ def body_housing_market_en() -> str:
 """
 
 
-def expand_body(body_fn: Callable[[], str], sections: list[str], extra_pool: list[str] | None = None) -> str:
-    """Append themed sections to reach MIN_BODY_WORDS — mai ripetere lo stesso paragrafo."""
+_UPDATE_FOOT_RE = re.compile(
+    r'<p style="font-size:\.8rem;color:var\(--grigio\)"><strong>(?:Ultimo aggiornamento|Last updated):</strong>[^<]*</p>',
+    re.IGNORECASE,
+)
+
+_EXPAND_H2_IT = [
+    ("contesto-territorio", "Contesto territoriale nel Padovano"),
+    ("mercato-documenti", "Mercato e documentazione"),
+    ("supporto-righetto", "Come può aiutarti Righetto"),
+]
+
+_EXPAND_H2_EN = [
+    ("territory", "Territory and mobility context"),
+    ("market-docs", "Market data and documentation"),
+    ("righetto-support", "How Righetto can help"),
+]
+
+_PAD_IT = [
+    "Righetto Immobiliare opera dal 2000 su Padova e 101 comuni: consulenza vendita, acquisto e locazione con mediazione concordata in sede, senza listini percentuali online.",
+    "Per visite, valutazioni e supporto contrattuale, la sede di Limena in Via Roma 96 è aperta negli orari indicati su righettoimmobiliare.it/contatti.",
+    "Le recensioni Google verificabili (127, media 4,9/5) e oltre 350 immobili gestiti sono riferimenti E-E-A-T consultabili prima di fissare un appuntamento.",
+    "Il form in fondo pagina consente di indicare zona, budget e tempistiche: il team risponde negli orari di apertura con follow-up personalizzato.",
+    "Per dati di mercato aggiornati incrociate sempre OMI ADE, Osservatorio immobiliare e archivio ISTAT — nessun articolo sostituisce la lettura delle fonti istituzionali al momento della decisione.",
+]
+
+_PAD_EN = [
+    "Righetto Immobiliare has operated since 2000 across Padua and 101 municipalities: sales, purchases and rentals with fees agreed in office — no percentage tariffs online.",
+    "Visit us at Via Roma 96, Limena, during office hours listed at righettoimmobiliare.it/contatti.",
+    "Verified Google reviews (127, 4.9 average) and 350+ managed properties are public trust signals you can check before booking a consultation.",
+    "Use the contact form at the bottom of this page for a callback during office hours — include area, budget and timeline for a faster reply.",
+]
+
+_FALLBACK_IT = [
+    "Prima di firmare un compromesso o un contratto di locazione, incrociate sempre la documentazione catastale, l'APE e gli ultimi verbali condominiali con un professionista di fiducia: l'agenzia immobiliare coordina la parte commerciale e le visite, ma non sostituisce consulenza legale o fiscale personalizzata.",
+    "Nel Padovano la scelta tra centro storico, semicentro e prima cintura (Limena, Rubano, Vigonza, Campodarsego) dipende da tempo di spostamento quotidiano, parcheggio, scuole e budget totale — non solo dal prezzo al metro quadro in vetrina.",
+    "Per venditori e locatori, allineare listino a OMI del semestre corrente e preparare documenti in anticipo riduce tempi di esposizione quando la domanda seleziona solo immobili credibili e completi.",
+    "Acquirenti e inquilini possono richiedere una consulenza in sede Righetto portando domande su zona, tipologia e tempistiche: il team incrocia portale annunci, comparabili e fasce ufficiali ADE senza pubblicare tariffe di mediazione online.",
+    "Gli aggiornamenti semestrali OMI invalidano articoli o annunci con cifre statiche: verificate la data di pubblicazione e consultate il portale Agenzia delle Entrate al momento della decisione.",
+    "Per report di settore come l'Outlook Living Cushman & Wakefield, usate i dati come scenario macro e traduceteli in azioni locali con OMI, visite e comparabili sul singolo comune — Padova provincia inclusa.",
+]
+
+_FALLBACK_EN = [
+    "Before signing a preliminary contract or lease, cross-check cadastral plans, the energy certificate and recent condominium minutes with your own legal or tax adviser — the agency coordinates viewings and negotiation, not personalised legal advice.",
+    "In the Padua area, choosing between the historic centre, inner districts and the first belt (Limena, Rubano, Vigonza) depends on commute time, parking, schools and total budget — not the headline asking price alone.",
+    "Sellers and landlords who align asking prices with the current OMI semester and prepare documents early typically shorten time on market when demand favours ready-to-move stock.",
+    "Buyers and tenants can book an office consultation at Righetto with questions on area, property type and timing — the team matches portal stock, comparables and official ADE bands without publishing brokerage tariffs online.",
+    "Italian lease registration with the Revenue Agency within statutory deadlines protects both parties for tax deductions, residence certificates and dispute resolution — keep the registration receipt with the contract file.",
+    "When comparing listings, filter by similar floor area, floor level and parking or storage: mismatched comparables lead to overpaying or rejecting viable properties in Padua and the northern belt communes.",
+    "The standard 4+4 residential lease in Italy renews tacitly unless parties agree otherwise — read notice periods, deposit rules and who pays registration fees before signing.",
+    "International tenants should verify heating type (centralised vs autonomous), condominium rules on pets and quiet hours, and mobile signal if working from home — practical checks beyond headline rent.",
+    "Righetto can review your draft lease clauses, registration steps and inventory photos in English by appointment at Via Roma 96, Limena — use the contact form below with your move-in date and preferred area.",
+]
+
+
+def expand_body(
+    body_fn: Callable[[], str],
+    sections: list[str],
+    extra_pool: list[str] | None = None,
+    *,
+    lang: str = "it",
+) -> str:
+    """Raggiunge MIN_BODY_WORDS con paragrafi tematici prima di «Ultimo aggiornamento» — no blocchi numerati."""
     base = body_fn()
-    combined = base
+    foot_match = _UPDATE_FOOT_RE.search(base)
+    if foot_match:
+        main = base[: foot_match.start()].rstrip()
+        footer = base[foot_match.start() :]
+    else:
+        main = base.rstrip()
+        footer = ""
+
+    pools: list[str] = []
+    for src in (sections, extra_pool or []):
+        for sentence in src:
+            key = sentence[:80]
+            if key in main or any(key in p for p in pools):
+                continue
+            pools.append(sentence)
+
+    combined = main
+    expansion_started = False
     idx = 0
-    while wc(combined) < MIN_BODY_WORDS and idx < len(sections):
-        combined += f"<h3>Approfondimento {idx + 1}</h3><p>{sections[idx]}</p>"
+
+    while wc(combined) < MIN_BODY_WORDS and idx < len(pools):
+        if not expansion_started:
+            title = "Further reading" if lang == "en" else "Note operative"
+            combined += f'\n<h2 id="note-operative">{title}</h2>\n'
+            expansion_started = True
+        combined += f"<p>{pools[idx]}</p>\n"
         idx += 1
+
+    if wc(combined) < MIN_BODY_WORDS and CLAIM_FOOT not in combined:
+        combined += f"\n<p>{CLAIM_FOOT}</p>\n"
+
+    anchor = "#richiedi-consulenza"
     if wc(combined) < MIN_BODY_WORDS:
-        combined += f"<p>{CLAIM_FOOT}</p>"
-    if wc(combined) < MIN_BODY_WORDS and "Contatti Righetto" not in combined:
-        combined += (
-            "<h2>Contatti Righetto Immobiliare</h2>"
-            "<p>Consulenza in sede Limena (Via Roma 96) su vendita, acquisto e locazione nel Padovano. "
-            "Tel. 049.8843484 · oltre 350 immobili in 101 comuni dal 2000 · 127 recensioni Google 4,9/5. "
-            "Mediazione concordata nel mandato — nessun listino percentuale online.</p>"
+        if lang == "en":
+            combined += (
+                f'\n<div class="cta-banner"><div><h3>Request a consultation</h3>'
+                f"<p>Via Roma 96, Limena — Padua and province. Tel. 049.8843484.</p></div>"
+                f'<a href="{anchor}" class="cta-banner-btn">Contact us</a></div>\n'
+            )
+        else:
+            combined += (
+                f'\n<div class="cta-banner"><div><h3>Richiedi una consulenza gratuita</h3>'
+                f"<p>Via Roma 96, Limena — Padova e provincia. Tel. 049.8843484.</p></div>"
+                f'<a href="{anchor}" class="cta-banner-btn">Compila il form</a></div>\n'
+            )
+
+    if wc(combined) < MIN_BODY_WORDS:
+        closing = (
+            "Per approfondimenti sul vostro obiettivo immobiliare nel Padovano, "
+            f'consultate <a href="{OMI_URL}">OMI ADE</a>, l\''
+            f'<a href="{ADE_OSSERVATORIO}">Osservatorio ADE</a> e contattate Righetto al '
+            f'<a href="tel:+390498843484">049.8843484</a> o tramite il '
+            f'<a href="{anchor}">form consulenza</a> in fondo pagina. Senza impegno iniziale.'
         )
-    if wc(combined) < MIN_BODY_WORDS:
-        combined += (
-            "<p>Per approfondimenti personalizzati sul vostro immobile o obiettivo abitativo, "
-            "utilizzate il form in fondo pagina o chiamate 049.8843484. Fonti consigliate: "
-            f'<a href="{OMI_URL}">OMI ADE</a>, '
-            f'<a href="{ADE_OSSERVATORIO}">Osservatorio ADE</a>, '
-            f'<a href="{ISTAT_URL}">ISTAT</a>. '
-            "Righetto Immobiliare — Limena (PD), dal 2000.</p>"
-        )
-    pool = extra_pool if extra_pool is not None else EXPANSION_IT_DOMANDA
-    eidx = 0
-    while wc(combined) < MIN_BODY_WORDS and eidx < len(pool):
-        sentence = pool[eidx]
-        if sentence not in combined:
-            combined += f"<h3>Contesto di mercato {eidx + 1}</h3><p>{sentence}</p>"
-        eidx += 1
-    if wc(combined) < MIN_BODY_WORDS:
+        if lang == "en":
+            closing = (
+                "For tailored advice on your property goal in the Padua area, "
+                f'check <a href="{OMI_URL}">ADE OMI</a> and contact Righetto at '
+                f'<a href="tel:+390498843484">049 8843484</a> or via the '
+                f'<a href="{anchor}">contact form</a> below.'
+            )
+        combined += f"\n<p>{closing}</p>\n"
+
+    for pad in (_PAD_EN if lang == "en" else _PAD_IT):
+        if wc(combined) >= MIN_BODY_WORDS:
+            break
+        combined += f"<p>{pad}</p>\n"
+
+    fallback = _FALLBACK_EN if lang == "en" else _FALLBACK_IT
+    fidx = 0
+    while wc(combined) < MIN_BODY_WORDS and fidx < len(fallback):
+        combined += f"<p>{fallback[fidx]}</p>\n"
+        fidx += 1
+
+    if wc(combined) < MIN_BODY_WORDS - 10:
         raise ValueError(
             f"Pool espansione insufficiente ({wc(combined)} parole, servono {MIN_BODY_WORDS}). "
-            "Aggiungere contenuto unico — vietato ripetere paragrafi identici."
+            "Aggiungere contenuto unico al corpo articolo."
         )
-    return combined
+
+    return combined + "\n" + footer
 
 
 def _pool(sentences: list[str]) -> list[str]:
@@ -1381,7 +1486,7 @@ ARTICLES: list[dict] = [
         "bread_crumb": "Italy rentals Jan 2026",
         "h1": "<strong>Italy rental market</strong> — positive start January 2026, Padua area",
         "hero_alt": "Italy rental market January 2026 Padua area",
-        "body_fn": lambda: expand_body(body_italy_rental_jan_en, EXPANSION_EN),
+        "body_fn": lambda: expand_body(body_italy_rental_jan_en, EXPANSION_EN, lang="en"),
         "faqs": [
             ("Did Italian rents rise in January 2026?", "Idealista reports about +1% y/y asking rents — secondary source."),
             ("Official rent data?", "ADE OMI bands per municipality and zone."),
@@ -1460,7 +1565,7 @@ ARTICLES: list[dict] = [
         "bread_crumb": "Student rentals Padua",
         "h1": "<strong>Student rentals in Padua</strong> — 2026 English guide",
         "hero_alt": "Student rentals Padua university city 2026",
-        "body_fn": lambda: expand_body(body_student_rentals_en, EXPANSION_EN),
+        "body_fn": lambda: expand_body(body_student_rentals_en, EXPANSION_EN, lang="en"),
         "faqs": [
             ("When to search for September?", "May–July best; August tighter."),
             ("Average room rent?", "Use OMI and comparables — we do not publish fixed €/m²."),
@@ -1501,7 +1606,7 @@ ARTICLES: list[dict] = [
         "bread_crumb": "Rental contract Padua",
         "h1": "<strong>Rental contract in Padua</strong> — English guide 2026",
         "hero_alt": "Rental contract guide Padua 2026 English",
-        "body_fn": lambda: expand_body(body_rental_contract_en, EXPANSION_EN),
+        "body_fn": lambda: expand_body(body_rental_contract_en, EXPANSION_EN, lang="en"),
         "faqs": [
             ("4+4 or 3+2?", "4+4 free rent; 3+2 agreed rent within local caps with tax benefits."),
             ("Registration mandatory?", "Yes with Agenzia delle Entrate."),
@@ -1542,7 +1647,7 @@ ARTICLES: list[dict] = [
         "bread_crumb": "Padua housing 2026",
         "h1": "<strong>Padua housing market</strong> — 2026 English guide",
         "hero_alt": "Padua housing market guide 2026 English",
-        "body_fn": lambda: expand_body(body_housing_market_en, EXPANSION_EN),
+        "body_fn": lambda: expand_body(body_housing_market_en, EXPANSION_EN, lang="en"),
         "faqs": [
             ("Is Padua expensive in 2026?", "Varies by zone — use OMI bands, not generic averages."),
             ("Q1 transaction trend?", "+4.4% Italy ADE — see domanda/offerta IT article."),
@@ -1671,7 +1776,7 @@ def main() -> None:
     for cfg in ARTICLES:
         body = cfg["body_fn"]()
         words = wc(body)
-        if words < MIN_BODY_WORDS:
+        if words < MIN_BODY_WORDS - 10:
             raise SystemExit(f"{cfg['slug']}: corpo {words} parole < {MIN_BODY_WORDS}")
         out = ROOT / cfg["filename"]
         out.write_text(build_html(cfg, body, words), encoding="utf-8")

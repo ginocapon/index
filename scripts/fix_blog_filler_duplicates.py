@@ -13,6 +13,15 @@ FILLER = (
     "350+ immobili gestiti, 98% soddisfazione clienti verificata.</p>"
 )
 
+APPROFONDIMENTO_RE = re.compile(
+    r"<h3>Approfondimento \d+</h3><p>[^<]*</p>",
+    re.IGNORECASE,
+)
+CONTESTO_RE = re.compile(
+    r"<h3>Contesto di mercato \d+</h3><p>[^<]*</p>",
+    re.IGNORECASE,
+)
+
 BAD_CAP = "Scheda annuncio: verificare coerenza tra foto, testo e documenti."
 GOOD_CAP = (
     "Immagine editoriale elaborata digitalmente (anche con intelligenza artificiale): "
@@ -23,6 +32,8 @@ GOOD_CAP = (
 def clean_html(text: str) -> tuple[str, int]:
     removed = text.count(FILLER)
     text = text.replace(FILLER, "")
+    text = APPROFONDIMENTO_RE.sub("", text)
+    text = CONTESTO_RE.sub("", text)
     text = text.replace(BAD_CAP, GOOD_CAP)
     # normalizza figcaption blog
     text = re.sub(
