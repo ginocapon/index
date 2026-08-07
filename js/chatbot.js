@@ -178,7 +178,7 @@ const MULT_TIPOLOGIA = {
 // FAQ E RISPOSTE PREDEFINITE
 // ══════════════════════════════════════════════
 /**
- * Step 3 — Copertura blog <-> FAQ (lug 2026): 86+ slug con keyword dedicata.
+ * Step 4 — Copertura blog <-> FAQ (ago 2026): 105+ slug, ultimi 30 articoli integrati.
  * Audit gap: python scripts/audit_chatbot_faq.py — target 102/102 slug skimm.
  */
 /** Se presente faq.blog (slug senza .html), append link approfondimento blog. */
@@ -1402,6 +1402,154 @@ const FAQ_DATA = [
   {
     k: ['efficientamento', 'classe energetica migliorare', 'ape post lavori'],
     r: '🏠 **Pratiche di efficientamento energetico:**\n\n• APE post-riqualificazione\n• Classi D1-D4\n• Coordinamento con tecnici certificati\n\nMigliora la classe energetica e aumenta il valore del tuo immobile.'
+  },
+
+  // ═══════════════════════════════════════════════
+  // BLOG RECENTI — ultimi 30 articoli (ago 2026)
+  // ═══════════════════════════════════════════════
+
+  // ── LIMENA ACQUISTO / VENDITA (batch GSC ago 2026) ──
+  {
+    k: ['acquistare appartamento limena', 'guida acquisto limena', 'comprare casa limena 2026', 'come comprare limena'],
+    r: '🏡 **Acquistare a Limena nel 2026**\n\nPercorso consigliato:\n1. **Budget e mutuo** — capacità di spesa realistica\n2. **OMI ADE** — fasce ufficiali per comune e tipologia\n3. **Visite con checklist** — planimetria, APE, condominio\n4. **Comparabili** — annunci simili negli ultimi mesi\n5. **Proposta scritta** — con condizioni chiare\n\nLimena è a circa 8 km da Padova: ottima per famiglie e pendolari.\n\nVuoi una **valutazione gratuita** o cercare annunci in zona?',
+    blog: 'blog-appartamento-limena-guida-acquisto-2026',
+    blogTitle: 'Appartamento Limena: guida acquisto 2026'
+  },
+  {
+    k: ['zone omi b1 r1', 'cosa sono zone omi', 'omi limena zone', 'fascia omi limena'],
+    r: '📊 **Zone OMI (B1, R1…)**\n\nSono **fasce statistiche** dell\'Agenzia delle Entrate per comparare prezzi: non sono un giudizio assoluto sulla qualità del quartiere.\n\n• **B1** — aree centrali o molto servite\n• **R1** — residenziale standard\n\nPer Limena consulta il portale OMI con comune e semestre corrente, poi confronta con annunci reali.\n\nPosso stimare un immobile se mi indichi metratura e tipologia.',
+    blog: 'blog-appartamento-limena-guida-acquisto-2026',
+    blogTitle: 'Zone OMI e acquisto a Limena'
+  },
+  {
+    k: ['leggere annuncio vendita', 'annuncio vendita limena', 'red flag annuncio', 'annuncio sospetto', 'come leggere annuncio'],
+    r: '🔍 **Leggere un annuncio di vendita**\n\nControlla sempre:\n• Tipologia, mq, piano, stato\n• **APE** e planimetria catastale\n• Coerenza **foto ↔ descrizione**\n• Prezzo vs **fascia OMI** del comune\n\n**Red flag:** prezzo anomalo, assenza documenti, bonifici anticipati, rifiuto visite, foto incomplete.\n\nAgenzia o privato: entrambi validi, ma la **due diligence** resta all\'acquirente. Possiamo accompagnarti nelle visite.',
+    blog: 'blog-case-vendita-limena-leggere-annunci-2026',
+    blogTitle: 'Case in vendita Limena: leggere gli annunci'
+  },
+  {
+    k: ['bilocale o trilocale limena', 'bilocale trilocale limena', 'meglio bilocale trilocale', 'famiglia bilocale limena'],
+    r: '🏠 **Bilocale o trilocale a Limena?**\n\n• **Bilocale** — coppie, pendolari, budget più contenuto\n• **Trilocale** — famiglie con figli o bisogno di studio separato\n\nCon un figlio piccolo il bilocale può bastare fino a 3–4 anni; per orizzonte 5–7 anni il trilocale migliora la qualità di vita.\n\nPrezzi ufficiali: portale **OMI ADE**, stesso semestre, tipologia abitativa.\n\nDimmi metratura e budget e ti oriento sui comparabili.',
+    blog: 'blog-bilocale-trilocale-limena-scelta-2026',
+    blogTitle: 'Bilocale o trilocale a Limena'
+  },
+  {
+    k: ['gruppo immobiliare righetto', 'righetto limena sede', 'agenzia limena via roma', 'chi è righetto limena'],
+    r: '🏢 **Righetto Immobiliare a Limena**\n\n• **Sede:** Via Roma 96, 35010 Limena (PD)\n• **Dal 2000** su Padova e provincia — **101 comuni**\n• **127 recensioni** Google, media **4,9/5**\n• **350+** immobili gestiti nel tempo\n\nIl compenso di mediazione **non è pubblicato online**: si concorda in sede nel mandato, con chiarezza su servizi inclusi.\n\nVuoi fissare un appuntamento **senza impegno**?',
+    blog: 'blog-gruppo-immobiliare-righetto-limena-2026',
+    blogTitle: 'Gruppo Immobiliare Righetto Limena'
+  },
+  {
+    k: ['scegliere agenzia limena', 'agenzia immobiliare limena', 'quale agenzia limena', 'agenzia limena o padova'],
+    r: '🤝 **Scegliere un\'agenzia a Limena**\n\nVerifica:\n• Presenza **stabile** sul territorio\n• **Valutazione scritta** con comparabili\n• Piano **marketing** esplicito (foto, portali, visite)\n• **Compenso** chiaro nel mandato (in sede, non online)\n• Referenze **verificabili** — niente pressioni\n\nLimena o Padova centro? Per immobili a Limena conta chi vende **nel comune** con prove recenti. Chiedi report visite e verifica documenti prima di firmare (art. 1754 c.c.).\n\n📞 **049.8843484** — incontro gratuito in Via Roma 96.',
+    blog: 'blog-agenzia-immobiliare-limena-come-scegliere-2026',
+    blogTitle: 'Agenzia immobiliare Limena: come scegliere'
+  },
+
+  // ── LIMENA / PADOVA AFFITTO ──
+  {
+    k: ['affitto limena 2026', 'affittare limena', 'canoni limena', 'quanto affitto limena'],
+    r: '🔑 **Affitti a Limena 2026**\n\nNon pubblichiamo €/mq inventati: le **fasce ufficiali** sono sul portale **OMI dell\'Agenzia delle Entrate** (comune Limena, finalità locazione).\n\nIl canone effettivo dipende da mq, stato, piano, arredamento e domanda locale.\n\n**Limena vs Padova centro:** spesso metrature più generose, collegamenti rapidi (~8 km), domanda stabile da famiglie e lavoratori.\n\nCerchi casa in affitto o vuoi **affittare** il tuo immobile?',
+    blog: 'blog-affitti-limena-2026',
+    blogTitle: 'Affitti Limena 2026: guida completa'
+  },
+  {
+    k: ['contratto affitto limena', 'affitto limena contratto', 'deposito cauzionale limena', 'registrazione affitto limena'],
+    r: '📄 **Contratto di affitto a Limena**\n\n• **4+4 canone libero** — standard per uso abitativo\n• **3+2 concordato** — canone calmierato, agevolazioni fiscali\n• **Transitorio** — 1–18 mesi, solo con motivazione documentata\n\n**Deposito cauzionale:** fino a **3 mensilità** (restituzione a fine locazione se immobile in ordine).\n\n**Registrazione:** obbligatoria entro **30 giorni** all\'Agenzia delle Entrate — serve per detrazioni e certificazioni.\n\nVuoi affittare o cercare casa? Ti guidiamo su contratto e registrazione.',
+    blog: 'blog-appartamento-affitto-limena-contratto-2026',
+    blogTitle: 'Appartamento in affitto Limena: contratto'
+  },
+  {
+    k: ['affitto transitorio padova', 'contratto transitorio', 'durata transitorio', 'motivazione transitorio', 'affitto breve transitorio'],
+    r: '⏳ **Affitto transitorio a Padova**\n\n• **Durata:** minimo 1 mese, massimo **18 mesi** (date precise in contratto)\n• **Non si rinnova tacitamente** come il 4+4\n• **Motivazioni documentate:** trasferimento lavoro, tirocinio, master, lavori in casa, separazione, cure mediche\n\n**Registrazione:** entro 30 giorni all\'Agenzia delle Entrate (imposta di registro 2% del canone annuo lordo).\n\n**Transitorio vs 3+2 concordato:** il concordato vincola il canone ma dura di più; il transitorio è per soggiorni brevi con motivazione comprovata.\n\nDescrivi la tua situazione e ti indichiamo la formula più adatta.',
+    blog: 'blog-affitto-transitorio-padova-durata-2026',
+    blogTitle: 'Affitto transitorio Padova: durata e requisiti'
+  },
+  {
+    k: ['affitto rubano lavoratori', 'rubano o limena affitto', 'cintura padova affitto lavoro', 'affitto lavoratori rubano limena'],
+    r: '🚗 **Affitto Rubano o Limena per lavoratori**\n\n• **Rubano** (~7 km da Padova) — vicina ad aree produttive Vigodarzere–Cadoneghe\n• **Limena** (~8 km) — servizi consolidati, domanda famiglie e pendolari\n\nLa scelta dipende da **dove lavori** e come ti sposti — non da slogan generici.\n\nCanoni ufficiali: portale **OMI ADE** per Rubano o Limena. Il segmento **lavoratori** è diverso da quello **studentesco** (cicli e zone diverse).\n\n**Corporate housing** (loft aziendali, cucina condivisa) ≠ affitto residenziale 4+4: servono esigenze HR temporanee.\n\nIndica zona lavoro e ti oriento.',
+    blog: 'blog-rubano-limena-affitto-lavoratori-2026',
+    blogTitle: 'Affitto Rubano e Limena per lavoratori'
+  },
+
+  // ── MANDATO / VENDITA ──
+  {
+    k: ['mandato esclusivo', 'esclusiva vendita', 'mandato in esclusiva', 'perché esclusiva', 'vendere in esclusiva'],
+    r: '📝 **Mandato esclusivo di vendita**\n\nContratto di mediazione (art. **1754 c.c.**) con **un solo intermediario** per un periodo definito. L\'agente investe di più in marketing e coordina le visite senza concorrenza tra agenzie.\n\n• **Durata tipica a Padova:** 3–6 mesi\n• **Rinnovo automatico:** da evitare senza consenso scritto\n• **Recesso anticipato:** solo se previsto nel contratto\n• **Compenso:** sempre concordato **in sede** — non pubblichiamo percentuali online\n\nVuoi capire se conviene per il tuo immobile? **Valutazione gratuita** in Via Roma 96.',
+    blog: 'blog-mandato-esclusivo-padova-perche-conviene-2026',
+    blogTitle: 'Mandato esclusivo Padova: perché conviene'
+  },
+  {
+    k: ['durata mandato vendita', 'quanto dura mandato', 'revocare mandato', 'recesso mandato esclusivo'],
+    r: '⏱️ **Durata e recesso del mandato**\n\nIn provincia di Padova il mandato dura in media **3–6 mesi** — tempo sufficiente per marketing, visite e trattativa.\n\nPrima di firmare chiedi:\n• Durata e condizioni di **rinnovo**\n• **Recesso anticipato** e penali eventuali\n• Piano marketing e **report visite**\n• Compenso, IVA e chi paga\n\nTutto deve essere chiaro nel contratto di mediazione. Per un confronto senza impegno: **049.8843484**.',
+    blog: 'blog-mandato-esclusivo-padova-perche-conviene-2026',
+    blogTitle: 'Durata mandato esclusivo'
+  },
+
+  // ── MERCATO / DOMANDA-OFFERTA 2026 ──
+  {
+    k: ['domanda supera offerta', 'domanda offerta 2026', 'squilibrio mercato padova', 'transazioni q1 2026', 'mercato residenziale 2026'],
+    r: '📈 **Domanda vs offerta (Q1 2026)**\n\nDati **Osservatorio ADE** (fonte istituzionale):\n• Transazioni abitative **+4,4%** nel Q1 2026\n• Nuovo edificato **+14,6%** ma non basta ovunque\n• Prezzi medi nazionali indicativi: ~**2.200 €/mq** vendita, ~**175 €/mq annui** locazione (+4,3% aggregato)\n\nA Padova conta la **microzona**: stock selezionato e tempi di vendita variano per quartiere.\n\nVuoi una lettura sul **tuo comune** o una stima del tuo immobile?',
+    blog: 'blog-domanda-residenziale-supera-offerta-2026-padova',
+    blogTitle: 'Domanda residenziale supera offerta Q1 2026'
+  },
+  {
+    k: ['ricerche online tipologie', 'bilocale più cercato', 'trilocale vendita ricerche', 'tipologia più richiesta affitto'],
+    r: '🔎 **Cosa cercano online nel 2026**\n\nDalle analisi comportamentali sui portali (fonte secondaria Immobiliare.it Insights):\n• In **affitto** domina il **bilocale**\n• In **vendita** il **trilocale** (formato famiglia)\n• Il **monolocale** funziona in zone universitarie se prezzo e APE sono competitivi\n\n**Per chi vende o affitta:** allinea annuncio, foto e prezzo a **OMI** e comparabili reali — non solo al desiderio.\n\nHai un immobile da mettere sul mercato? Valutazione gratuita in sede.',
+    blog: 'blog-ricerche-online-tipologie-casa-2026-padova',
+    blogTitle: 'Ricerche online 2026: tipologie più cercate'
+  },
+  {
+    k: ['outlook living', 'btr italia', 'build to rent', 'pbsa padova', 'student housing padova'],
+    r: '🏗️ **Outlook Living e nuovi modelli**\n\nIl report **Cushman & Wakefield** descrive trend sul residenziale in Italia:\n• **BTR** (build-to-rent) — immobili progettati per locazione gestita\n• **PBSA** — student housing dedicato (ESU, privati, mercato libero)\n\n**Padova ha dinamiche proprie:** non extrapolare l\'hype delle grandi metro su provincia e prima cintura.\n\nPer investire o affittare serve analisi **locale** con OMI e comparabili — non slogan nazionali.',
+    blog: 'blog-outlook-living-italia-2026-padova',
+    blogTitle: 'Outlook Living Italia 2026 e Padova'
+  },
+  {
+    k: ['canoni affitto gennaio 2026', 'affitti in aumento italia', 'mercato affitti 2026', 'idealista affitti gennaio'],
+    r: '📊 **Mercato affitti inizio 2026**\n\nFonti secondarie (es. Idealista) segnalano circa **+1%** y/y sui canoni richiesti a gennaio 2026 a livello nazionale.\n\nPer decisioni serie usa sempre le **fasce OMI ADE** per comune e semestre — sono il riferimento ufficiale.\n\nA Padova la zona conta: università/tram vs prima cintura (Limena, Rubano) per famiglie e lavoratori.\n\nCerchi affitto o vuoi mettere a reddito un immobile?',
+    blog: 'blog-italy-rental-market-positive-start-january-2026',
+    blogTitle: 'Mercato affitti Italia gennaio 2026'
+  },
+  {
+    k: ['housing market padova', 'padova expensive', 'comprare o affittare padova', 'guida mercato padova english'],
+    r: '🏙️ **Mercato abitativo Padova 2026**\n\nI prezzi **variano molto per zona** — evita medie generiche e usa **fasce OMI**.\n\n• Famiglie: spesso **Arcella**, **Sacro Cuore**, prima cintura (**Limena**, **Rubano**)\n• Trend Q1: vedi articolo domanda/offerta ADE (+4,4% transazioni)\n• Chi si trasferisce: molti **affittano 1–2 anni** prima di comprare\n\nDimmi comune e tipologia: posso stimare o mostrarti annunci.',
+    blog: 'blog-padova-housing-market-guide-2026',
+    blogTitle: 'Padova housing market guide 2026'
+  },
+
+  // ── STUDENTI / AFFITTO TECNICO ──
+  {
+    k: ['relazione tecnico commerciale affitto', 'affitto studenti analisi', 'camere studenti padova', 'quante camere studenti'],
+    r: '📋 **Relazione tecnico-commerciale (affitto studenti)**\n\nDocumento che incrocia:\n• Analisi di **mercato** e canoni zona universitaria\n• Stato **tecnico** dell\'immobile\n• Configurazione **camere** e servizi\n• Tipologia **contrattuale** e fiscalità\n\nIn un appartamento tipo 110–130 m² in prima cintura, **5 studenti** bilancia spesso redditività e gestione (6 solo se impianti e regolamento condominiale lo consentono).\n\nConfronta **costo totale** per lo studente: canone + utenze + condominio + internet — non solo il canone in annuncio.',
+    blog: 'blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026',
+    blogTitle: 'Relazione tecnico-commerciale affitto studenti'
+  },
+  {
+    k: ['cedolare 21 studenti', '4+4 o concordato studenti', 'canone concordato studenti', 'affitto studenti fiscalità'],
+    r: '💶 **4+4 cedolare 21% vs concordato studenti**\n\n• **4+4 + cedolare 21%** — flessibilità sul canone negli anni\n• **Concordato** — cedolare **10%**, riduzione IMU, ma canone **vincolato** all\'accordo territoriale\n\nLa scelta dipende da durata prevista, canone di mercato e gestione. Per studentato privato vs locazione tradizionale confronta il **costo complessivo** per inquilino.\n\nVuoi mettere a reddito un appartamento universitario? Parliamone in sede.',
+    blog: 'blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026',
+    blogTitle: 'Fiscalità affitto studenti Padova'
+  },
+  {
+    k: ['affitto studenti padova quando cercare', 'stanza universitaria settembre', 'quando cercare casa studenti', 'student rentals padova'],
+    r: '🎓 **Affitto per studenti a Padova**\n\n• **Miglior periodo:** maggio–luglio per settembre; ad agosto si stringe\n• Canoni: consulta **OMI** e comparabili — non pubblichiamo €/mq fissi\n• **ESU** per studenti eleggibili; molti usano il mercato libero\n• Contratti: 4+4, concordato o formule per studenti (6–36 mesi)\n\nHai già zona preferita (università, tram, prima cintura)? Posso cercare annunci o spiegarti i contratti.',
+    blog: 'blog-student-rentals-padova-guide-2026',
+    blogTitle: 'Student rentals Padova 2026'
+  },
+  {
+    k: ['contratto affitto 4+4 guida', 'rental contract padova', 'registrazione contratto affitto', 'deposito affitto tre mensilità'],
+    r: '📄 **Contratto di locazione: guida rapida**\n\n• **4+4 libero** — canone concordato liberamente tra le parti\n• **3+2 concordato** — canone nei limiti locali, vantaggi fiscali\n• **Registrazione** — obbligatoria entro 30 giorni (Agenzia delle Entrate)\n• **Deposito** — tipicamente fino a **3 mensilità** per uso abitativo\n• **Transitorio** — solo per permanenze temporanee documentate\n\nPer Limena e Padova provincia applichiamo le stesse regole nazionali con attenzione al contesto locale.\n\nAffitti o cerchi casa? Scrivi *"contattami"*.',
+    blog: 'blog-rental-contract-padova-guide-2026',
+    blogTitle: 'Rental contract Padova 2026'
+  },
+
+  // ── CORPORATE / LOFT AZIENDALI ──
+  {
+    k: ['loft aziendale', 'cucina condivisa hr', 'corporate housing padova', 'foresteria aziendale', 'alloggio lavoratori padova vicenza'],
+    r: '🏢 **Loft aziendali e cucina condivisa**\n\nModello per trasferte **settimane/mesi** lungo la cintura **Padova–Vicenza** (SS, cantieri, stabilimenti):\n\n• **Loft** — autonomia in camera + cucina e soggiorno comuni\n• **Hotel** — pernottamento breve con servizi in struttura\n\nHR spesso preferisce cucina condivisa: il rimborso giornaliero deve coprire **tre pasti** — cucinare in sede costa meno di hotel + ristoranti.\n\nPilota consigliato: circa **10 unità** per testare domanda prima di scalare.\n\nCerchi soluzione residenziale classica o corporate? Ti oriento.',
+    blog: 'blog-loft-aziende-cucina-condivisa-padova-vicenza-2026',
+    blogTitle: 'Loft aziende Padova-Vicenza'
   }
 ];
 
@@ -2233,11 +2381,12 @@ function initChatbotUI() {
       </div>
       <div class="chat-msgs" id="rig-chat-msgs"></div>
       <div class="chat-quick-btns" id="rig-quick-btns">
-        <button class="chat-qbtn" onclick="rigChat.send('💰 Stima immobile')">💰 Stima immobile</button>
-        <button class="chat-qbtn" onclick="rigChat.send('🔍 Cerca immobili')">🔍 Cerca immobili</button>
+        <button class="chat-qbtn" onclick="rigChat.send('💰 Stima immobile')">💰 Stima</button>
+        <button class="chat-qbtn" onclick="rigChat.send('🔍 Cerca immobili')">🔍 Cerca casa</button>
+        <button class="chat-qbtn" onclick="rigChat.send('🏡 Acquistare o affittare a Limena')">🏡 Limena</button>
+        <button class="chat-qbtn" onclick="rigChat.send('📄 Che contratto di affitto mi conviene?')">📄 Affitto</button>
+        <button class="chat-qbtn" onclick="rigChat.send('📝 Mandato esclusivo: conviene?')">📝 Vendita</button>
         <button class="chat-qbtn" onclick="rigChat.send('📞 Voglio essere contattato')">📞 Contattami</button>
-        <button class="chat-qbtn" onclick="rigChat.send('🕐 Orari e contatti')">🕐 Orari</button>
-        <button class="chat-qbtn" onclick="rigChat.send('💡 Quanto costa vendere?')">💡 Costi vendita</button>
       </div>
       <div class="chat-input-row">
         <textarea id="rig-chat-input" placeholder="Scrivi un messaggio..." rows="1"
