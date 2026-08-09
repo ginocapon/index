@@ -12,8 +12,8 @@
 <link rel="preload" href="fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="img/team/titolari-estate-abbigliamento-2026.webp?v=3" as="image" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
-<link rel="preload" href="img/team/titolari-estate-abbigliamento-2026-mobile.webp?v=3" as="image" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+<link rel="preload" href="img/team/titolari-estate-abbigliamento-2026.webp?v=4" as="image" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
+<link rel="preload" href="img/team/titolari-estate-abbigliamento-2026-mobile.webp?v=4" as="image" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
 <meta name="google-site-verification" content="AbK7L5qoV9UFcfjQmtpC5OmD1ZsHx_55NNGYjxlOSxw">
 <meta name="theme-color" content="#2C4A6E">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -526,9 +526,17 @@ button{font-family:inherit;cursor:pointer}
   .hero-inner{grid-template-columns:1fr;padding:0 20px;padding-top:calc(var(--nav-h) + 44px);padding-bottom:88px}
   .hero-right{display:none}
   #hero{min-height:620px}
+  #hero-bg picture{
+    display:flex;align-items:center;justify-content:center;
+    width:100%;height:100%;
+  }
   #hero-bg img,
   #hero-bg picture img{
-    object-position:center 20%;
+    width:80%;
+    height:80%;
+    max-width:none;
+    object-fit:cover;
+    object-position:center 22%;
     transform:none;
     animation:none;
   }
@@ -943,8 +951,8 @@ button svg, a.btn-p svg, a.btn-g svg {
   <!-- Hero estate: desktop entrambi | mobile solo Linda (crop destro). Ripristino: titolari.webp -->
   <div id="hero-bg">
     <picture>
-      <source media="(max-width: 768px)" srcset="img/team/titolari-estate-abbigliamento-2026-mobile.webp?v=3" type="image/webp" width="750" height="1000">
-      <img src="img/team/titolari-estate-abbigliamento-2026.webp?v=3" alt="Gino Capon e Linda Righetto — Righetto Immobiliare" width="1200" height="630" fetchpriority="high">
+      <source media="(max-width: 768px)" srcset="img/team/titolari-estate-abbigliamento-2026-mobile.webp?v=4" type="image/webp" width="750" height="1000">
+      <img src="img/team/titolari-estate-abbigliamento-2026.webp?v=4" alt="Gino Capon e Linda Righetto — Righetto Immobiliare" width="1200" height="630" fetchpriority="high">
     </picture>
   </div>
   <div class="hero-veil"></div>
