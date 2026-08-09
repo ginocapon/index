@@ -12,7 +12,8 @@
 <link rel="preload" href="fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="img/team/titolari.webp" as="image" type="image/webp" fetchpriority="high">
+<link rel="preload" href="img/team/titolari-estate-abbigliamento-2026.webp" as="image" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
+<link rel="preload" href="img/team/titolari-estate-abbigliamento-2026-mobile.webp" as="image" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
 <meta name="google-site-verification" content="AbK7L5qoV9UFcfjQmtpC5OmD1ZsHx_55NNGYjxlOSxw">
 <meta name="theme-color" content="#2C4A6E">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -22,13 +23,13 @@
 <meta property="og:url" content="https://righettoimmobiliare.it/">
 <meta property="og:site_name" content="Righetto Immobiliare">
 <meta property="og:locale" content="it_IT">
-<meta property="og:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
+<meta property="og:image" content="https://righettoimmobiliare.it/img/team/titolari-estate-abbigliamento-2026.webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Vendere e Comprare Casa a Padova | Righetto Immobiliare">
 <meta name="twitter:description" content="Assistenza completa per vendere e comprare casa a Padova e provincia. Dalla valutazione gratuita al rogito, un unico referente per tutti i 101 comuni.">
-<meta name="twitter:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
+<meta name="twitter:image" content="https://righettoimmobiliare.it/img/team/titolari-estate-abbigliamento-2026.webp">
 <link rel="canonical" href="https://righettoimmobiliare.it/">
 <link rel="stylesheet" href="css/fonts.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/nav-mobile.css?v=5" media="print" onload="this.media='all'">
@@ -343,6 +344,9 @@ button{font-family:inherit;cursor:pointer}
   position: absolute; inset: 0; z-index: 0;
   overflow: hidden;
 }
+#hero-bg picture {
+  display: block; width: 100%; height: 100%;
+}
 #hero-bg img {
   width: 100%; height: 100%;
   object-fit: cover; object-position: center 20%;
@@ -518,7 +522,8 @@ button{font-family:inherit;cursor:pointer}
   #evidenza,#servizi,#perche,#mutuo-hp,#stima,#blog,#faq-hp,#form-contatto,footer{padding-left:20px;padding-right:20px}
   .hero-inner{grid-template-columns:1fr;padding:0 20px;padding-top:calc(var(--nav-h) + 44px);padding-bottom:88px}
   .hero-right{display:none}
-  #hero-bg img{object-position:center 20%}
+  #hero-bg img,
+  #hero-bg picture img{object-position:center 18%}
   /* Titolo hero mobile: un gradino più grande (righe + “Ci pensiamo noi.”) */
   .hero-h1{font-size:clamp(2.05rem,8.4vw,3rem);line-height:1.22}
   .hero-h1 .ghost{margin-top:0.22em;line-height:1.36;font-size:1.07em;-webkit-text-stroke:1.3px rgba(255,255,255,0.52)}
@@ -927,7 +932,13 @@ button svg, a.btn-p svg, a.btn-g svg {
 
 <!-- HERO -->
 <section id="hero">
-  <div id="hero-bg"><img src="img/team/titolari.webp" alt="Righetto Immobiliare Padova" width="1200" height="630" fetchpriority="high"></div>
+  <!-- Hero estate: desktop 16:9 + mobile portrait (entrambi i volti). Ripristino: titolari.webp -->
+  <div id="hero-bg">
+    <picture>
+      <source media="(max-width: 768px)" srcset="img/team/titolari-estate-abbigliamento-2026-mobile.webp" type="image/webp" width="900" height="1350">
+      <img src="img/team/titolari-estate-abbigliamento-2026.webp" alt="Gino Capon e Linda Righetto — Righetto Immobiliare" width="1200" height="630" fetchpriority="high">
+    </picture>
+  </div>
   <div class="hero-veil"></div>
   <div class="hero-grain"></div>
   <div class="hero-inner">
