@@ -60,3 +60,16 @@ python scripts/web-keyword-discovery.py
 ## Hero originali HD (blog)
 
 Vedi `TEST-SKILL/skill-content.md` §2.1 E — generare da zero, `verify_blog_hero_assets.py`, formula `geo-aeo-formula.py` (target **9/10** GEO/AEO)
+
+## Linda FAQ discovery (bi-quindicinale)
+
+```bash
+python scripts/linda-faq-biweekly-discovery.py
+python scripts/linda-faq-biweekly-discovery.py --force   # bypass gate 14 giorni
+```
+
+- Venerdì 07:00 CEST (`venerdi-contenuti-freschezza.yml`) · gate **14 giorni** tra run
+- ≥20 proposte Q&A da blog (FAQ schema + heading) e catalogo immobili
+- Archivio: `data/linda-faq-archive.jsonl` — **non** auto-merge in `chatbot.js` (YELLOW)
+- Dettaglio: `SKILL-2.0.md` §8.1e
+

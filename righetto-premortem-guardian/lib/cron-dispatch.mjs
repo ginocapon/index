@@ -23,6 +23,7 @@ const JOB_SCOPES = {
   daily_premortem: ["all"],
   weekly_strategy: ["business", "seo", "content", "competition", "web_keywords"],
   web_keyword_discovery: ["content", "seo", "business", "web_keywords"],
+  linda_faq_discovery: ["ai_quality", "content"],
   weekly_red_team: ["strategy", "assumptions", "business", "security"],
   monthly_full_premortem: ["all"],
   quarterly_future_scenarios: ["strategy", "business", "technology"],
