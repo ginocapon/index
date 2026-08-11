@@ -1,6 +1,6 @@
 /**
  * RIGHETTO IMMOBILIARE — Chatbot Universale
- * Versione 2.3 — Agosto 2026 (Linda Agent + trasparenza AI Act UE)
+ * Versione 2.4 — Agosto 2026 (Linda Agent + intent log anonimo Phase 2)
  * Include: stima prezzi, ricerca immobili, form contatto, FAQ
  * Dati prezzi: FIMAA Padova, Immobiliare.it, Idealista 2025-2026
  */
@@ -2029,7 +2029,109 @@ class RighettoChat {
     this.isOpen = false;
     this.supabase = null;
     this.lindaCtx = window.LindaAgent ? new LindaAgent.ConversationContext() : null;
+    this._lastIntent = null;
     this.initSupabase();
+  }
+
+  setLastIntent(meta) {
+    this._lastIntent = meta;
+  }
+
+  _sessionBucket() {
+    try {
+      var k = 'linda_sess_bucket';
+      var b = sessionStorage.getItem(k);
+      if (!b) {
+        b = 's' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
+        sessionStorage.setItem(k, b);
+      }
+      return b;
+    } catch (e) { return 'unknown'; }
+  }
+
+  async _hashMsg(text) {
+    var norm = text.toLowerCase().trim().replace(/\s+/g, ' ');
+    try {
+      if (window.crypto && crypto.subtle) {
+        var enc = new TextEncoder().encode(norm);
+        var buf = await crypto.subtle.digest('SHA-256', enc);
+        return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+      }
+    } catch (e) { /* fallback */ }
+    var h = 5381;
+    for (var i = 0; i < norm.length; i++) h = ((h << 5) + h) + norm.charCodeAt(i);
+    return 'djb2_' + (h >>> 0).toString(16);
+  }
+
+  budgetBand(max) {
+    if (!max) return null;
+    if (max <= 150000) return '0-150k';
+    if (max <= 250000) return '150-250k';
+    if (max <= 350000) return '250-350k';
+    if (max <= 500000) return '350-500k';
+    return '500k+';
+  }
+
+  classifyIntentFromMsg(msg) {
+    var low = msg.toLowerCase().trim();
+    if (/^(ciao|salve|buongiorno|buonasera|hey|hi|hello)/.test(low)) {
+      return { intent_type: 'saluto', topic_label: 'saluto' };
+    }
+    if (/contatt|chiamat|appuntam|richiama|voglio essere contattato/.test(low)) {
+      return { intent_type: 'contatto', topic_label: 'contatto' };
+    }
+    if (/stim|valut/.test(low) && !/cerco|immobil/.test(low)) {
+      return { intent_type: 'stima', topic_label: 'stima' };
+    }
+    if (window.LindaAgent) {
+      var ai = LindaAgent.parseSearchIntent(msg);
+      if (ai.isPropertySearch && (ai.location || ai.budget_max || ai.rooms || ai.property_type || ai.operation)) {
+        return {
+          intent_type: 'search',
+          topic_label: ai.location || ai.property_type || 'property_search',
+          operation: ai.operation,
+          location: ai.location,
+          budget_band: this.budgetBand(ai.budget_max),
+          rooms_min: ai.rooms,
+          property_type: ai.property_type,
+          hard: ai.hard || {},
+          soft: ai.soft || {}
+        };
+      }
+    }
+    for (var j = 0; j < FAQ_DATA.length; j++) {
+      if (this.fuzzyMatchKeyword(low, FAQ_DATA[j].k)) {
+        return { intent_type: 'faq', topic_label: FAQ_DATA[j].k[0] };
+      }
+    }
+    if (/cerca|trov|immobi|annunci|vedete|avete|casa|appartam|villa/.test(low)) {
+      return { intent_type: 'ricerca_guidata', topic_label: 'ricerca_immobili' };
+    }
+    return { intent_type: 'default', topic_label: 'unmatched' };
+  }
+
+  async logLindaIntent(userMsg) {
+    if (!this.supabase) return;
+    var meta = this._lastIntent || this.classifyIntentFromMsg(userMsg);
+    if (!meta) return;
+    try {
+      var hash = await this._hashMsg(userMsg);
+      await this.supabase.from('linda_chat_intents').insert([{
+        intent_type: meta.intent_type,
+        topic_label: meta.topic_label || null,
+        operation: meta.operation || null,
+        location: meta.location || null,
+        budget_band: meta.budget_band || null,
+        rooms_min: meta.rooms_min || null,
+        property_type: meta.property_type || null,
+        hard_constraints: meta.hard || {},
+        soft_preferences: meta.soft || {},
+        msg_hash: hash,
+        msg_length: userMsg.trim().length,
+        pagina: location.pathname,
+        session_bucket: this._sessionBucket()
+      }]);
+    } catch (e) { /* silent — privacy-safe */ }
   }
 
   async initSupabase() {
@@ -2226,6 +2328,7 @@ class RighettoChat {
 
   // ────── ELABORA MESSAGGIO ──────
   async process(userMsg) {
+    this._lastIntent = null;
     const msg = userMsg.trim();
     const low = msg.toLowerCase();
 
@@ -2233,6 +2336,7 @@ class RighettoChat {
     if (this.state === 'stima_comune') {
       this.stimaData.comune = msg;
       this.state = 'stima_tipo';
+      this.setLastIntent({ intent_type: 'stima', topic_label: 'stima_guidata' });
       return '🏠 **Tipologia?**\nEs: appartamento, villa, bifamiliare, attico, capannone, terreno edificabile, terreno agricolo...';
     }
 
@@ -2260,6 +2364,7 @@ class RighettoChat {
     if (this.state === 'contatto_nome') {
       this.contattoPending.nome = msg;
       this.state = 'contatto_email';
+      this.setLastIntent({ intent_type: 'lead', topic_label: 'contatto_form' });
       return '📧 **Email:**';
     }
     if (this.state === 'contatto_email') {
@@ -2289,6 +2394,7 @@ class RighettoChat {
       } else {
         return '🤔 Non ho capito... Cerchi un immobile in **vendita** o in **affitto**? Oppure scrivi **tutti** per vedere entrambi.';
       }
+      this.setLastIntent({ intent_type: 'ricerca_guidata', topic_label: 'ricerca_tipo_op', operation: this.ricercaData.tipo_op });
       this.state = 'ricerca_zona';
       const tipoLabel = this.ricercaData.tipo_op === 'affitto' ? 'in affitto' : this.ricercaData.tipo_op === 'vendita' ? 'in vendita' : '';
       return `📍 Perfetto, cerchi ${tipoLabel}!\n\n**In quale zona o comune?**\n*(Es: Padova, Limena, Abano Terme, Cittadella... oppure scrivi "tutti" per vedere tutto il catalogo)*`;
@@ -2357,6 +2463,7 @@ class RighettoChat {
     if (/vendere.*padova|vendo.*padova|voglio vendere.*padova|acquisizion.*padova/.test(low)) {
       this.state = 'venditore_padova_zona';
       this.stimaData = { comune: 'Padova' };
+      this.setLastIntent({ intent_type: 'stima', topic_label: 'venditore_padova', location: 'padova' });
       return 'Perfetto, ti aiuto subito con il percorso dedicato ai proprietari di Padova.\n\nIn quale **zona/quartiere** si trova l\'immobile? (Es: Arcella, Guizza, Centro Storico, Forcellini)';
     }
 
@@ -2375,6 +2482,7 @@ class RighettoChat {
     if (/stim|valut|vale|valore|prezzo|quanto.*cost|calcol/.test(low) && !/cerco|cerchi|immobil/.test(low)) {
       this.state = 'stima_comune';
       this.stimaData = {};
+      this.setLastIntent({ intent_type: 'stima', topic_label: 'stima_avvio' });
       return '🏠 **Stima Valore Immobile** — Provincia di Padova\n\nIn quale **comune** si trova l\'immobile?\n*(Es: Padova, Abano Terme, Cittadella, Monselice...)*';
     }
 
@@ -2383,12 +2491,24 @@ class RighettoChat {
       var agentIntent = LindaAgent.parseSearchIntent(msg);
       if (this.lindaCtx) this.lindaCtx.merge(agentIntent);
       if (agentIntent.isPropertySearch && (agentIntent.location || agentIntent.budget_max || agentIntent.rooms || agentIntent.property_type || agentIntent.operation)) {
+        this.setLastIntent({
+          intent_type: 'search',
+          topic_label: agentIntent.location || agentIntent.property_type || 'property_search',
+          operation: agentIntent.operation,
+          location: agentIntent.location,
+          budget_band: this.budgetBand(agentIntent.budget_max),
+          rooms_min: agentIntent.rooms,
+          property_type: agentIntent.property_type,
+          hard: agentIntent.hard || {},
+          soft: agentIntent.soft || {}
+        });
         return await this.cercaImmobiliAgent(agentIntent);
       }
       if (LindaAgent.detectLeadIntent(msg) && this.lindaCtx && this.lindaCtx.searchCount > 0) {
         this.state = 'contatto_nome';
         var note = 'Ricerca Linda: ' + JSON.stringify(this.lindaCtx.hard || {});
         this.contattoPending = { provenienza: 'chatbot', note: note };
+        this.setLastIntent({ intent_type: 'lead', topic_label: 'search_to_lead' });
         return '👋 Perfetto, trasformo la ricerca in una richiesta diretta a Righetto.\n\n**Come ti chiami?** (Nome e Cognome)';
       }
     }
@@ -2397,7 +2517,16 @@ class RighettoChat {
     if (/contatt|chiamat|appuntam|richiama|incontr|form/.test(low) || (/visita|veder/.test(low) && !/immobil|casa|appartam/.test(low))) {
       this.state = 'contatto_nome';
       this.contattoPending = { provenienza: 'chatbot' };
+      this.setLastIntent({ intent_type: 'contatto', topic_label: 'contatto' });
       return '👋 Ottimo! Ti ricontatteremo al più presto.\n\n**Come ti chiami?** (Nome e Cognome)';
+    }
+
+    // FAQ prima della ricerca generica (evita shadowing "casa" su mutuo/prima casa ecc.)
+    for (const faq of FAQ_DATA) {
+      if (this.fuzzyMatchKeyword(low, faq.k)) {
+        this.setLastIntent({ intent_type: 'faq', topic_label: faq.k[0] });
+        return righettoFaqReply(faq);
+      }
     }
 
     // Ricerca immobili — avvia flusso conversazionale
@@ -2405,6 +2534,7 @@ class RighettoChat {
       // Se l'utente dice già vendita o affitto, saltiamo la prima domanda
       if (/affitt|locaz/.test(low)) {
         this.ricercaData = { tipo_op: 'affitto' };
+        this.setLastIntent({ intent_type: 'ricerca_guidata', topic_label: 'ricerca_affitto', operation: 'affitto' });
         // Se dice anche la zona, cerca subito
         const zonaMatch = low.match(/(?:a|in|zona|comune)\s+([a-zàèéìòù\s]+?)(?:\s*$|\s+(?:in|da|per))/i);
         if (zonaMatch) {
@@ -2415,6 +2545,7 @@ class RighettoChat {
       }
       if (/acquist|compr|vendita/.test(low)) {
         this.ricercaData = { tipo_op: 'vendita' };
+        this.setLastIntent({ intent_type: 'ricerca_guidata', topic_label: 'ricerca_vendita', operation: 'vendita' });
         const zonaMatch = low.match(/(?:a|in|zona|comune)\s+([a-zàèéìòù\s]+?)(?:\s*$|\s+(?:in|da|per))/i);
         if (zonaMatch) {
           return this.cercaImmobiliCatalogo('vendita', zonaMatch[1].trim());
@@ -2425,22 +2556,18 @@ class RighettoChat {
       // Non ha specificato → chiediamo
       this.ricercaData = {};
       this.state = 'ricerca_tipo_op';
+      this.setLastIntent({ intent_type: 'ricerca_guidata', topic_label: 'ricerca_avvio' });
       return '🏠 **Cerchi un immobile!** Ottimo, ti aiuto subito.\n\nStai cercando in **vendita** (acquisto) o in **affitto** (locazione)?';
-    }
-
-    // FAQ (con fuzzy matching per errori di battitura)
-    for (const faq of FAQ_DATA) {
-      if (this.fuzzyMatchKeyword(low, faq.k)) {
-        return righettoFaqReply(faq);
-      }
     }
 
     // Saluto
     if (/^(ciao|salve|buongiorno|buonasera|hey|hi|hello)/.test(low)) {
+      this.setLastIntent({ intent_type: 'saluto', topic_label: 'saluto' });
       return '👋 Ciao! Sono **Linda**, l\'assistente di **Righetto Immobiliare**.\n\nPosso aiutarti con:\n• 💰 **Stima valore** del tuo immobile\n• 🔍 **Ricerca immobili** in vendita/affitto\n• 🏦 **Consulenza mutuo** gratuita — [simulatore rata](landing-mutuo.html)\n• 📋 **Vendita**, **acquisto**, **affitto**, visite e documenti\n• 📞 **Contatto** con un agente in sede\n\nScrivi in libertà — ti rispondo subito.';
     }
 
     // Default
+    this.setLastIntent({ intent_type: 'default', topic_label: 'unmatched' });
     return '💬 Capito — forse non ho colto il punto esatto.\n\nProva così, in una riga:\n• *"Stima appartamento 80 mq a Padova"*\n• *"Cerca bilocale in affitto Arcella"*\n• *"Errori da evitare in visita"*\n• *"Documenti per il rogito"*\n• *"Voglio essere contattato"*\n\nOppure scrivi **orari** · **mutuo** · **commissione** — sono qui per te.';
   }
 
@@ -3090,6 +3217,7 @@ function initChatbotUI() {
       const resp = await this.engine.process(text);
       this.hideTyping();
       this.addMsg('bot', resp);
+      try { await this.engine.logLindaIntent(text); } catch (e) { /* silent */ }
     },
 
     sendInput() {

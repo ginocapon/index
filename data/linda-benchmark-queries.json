@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "description": "Query benchmark Linda — route attesa per live benchmark",
+  "queries": [
+    { "q": "orari agenzia", "expect": "faq", "topic": "orari" },
+    { "q": "commissione mediazione", "expect": "faq", "topic": "commissione" },
+    { "q": "mutuo prima casa", "expect": "faq", "topic": "mutuo_prima_casa" },
+    { "q": "LF0230", "expect": "faq", "topic": "immobile_codice" },
+    { "q": "cerco appartamento limena affitto", "expect": "search", "topic": "search_affitto_limena" },
+    { "q": "casa padova massimo 350000 tre camere", "expect": "search", "topic": "search_vendita_padova_budget" },
+    { "q": "cerco villa con giardino vigonza", "expect": "search", "topic": "search_villa_vigonza" },
+    { "q": "stima appartamento 80mq padova", "expect": "stima", "topic": "stima" },
+    { "q": "voglio essere contattato", "expect": "contatto", "topic": "contatto" },
+    { "q": "ciao", "expect": "saluto", "topic": "saluto" },
+    { "q": "documenti per il rogito", "expect": "faq", "topic": "rogito" },
+    { "q": "affitto studenti padova", "expect": "faq", "topic": "affitto_studenti" }
+  ]
+}

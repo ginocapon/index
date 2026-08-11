@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Question intelligence Linda — aggregato da FAQ archive, GSC, editorial queue (privacy-safe)."""
+"""Question intelligence Linda — FAQ archive, GSC, intent log anonimi Supabase."""
 from __future__ import annotations
 
 import json
-from collections import Counter, defaultdict
+from collections import Counter
 from datetime import datetime
 from pathlib import Path
 
@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parent.parent
 ARCHIVE = ROOT / "data/linda-faq-archive.jsonl"
 GSC = ROOT / "data/gsc-keywords-priority.json"
 QUEUE = ROOT / "data/editorial-queue.json"
+INTENTS = ROOT / "data/linda-intents-snapshot-latest.json"
 OUT = ROOT / "data/linda-question-intelligence-latest.json"
 REPORT = ROOT / "linda-question-intelligence-report.md"
 
@@ -48,6 +49,15 @@ def classify_intent(q: str) -> str:
     return "altri-trasversali"
 
 
+def load_intents_snapshot() -> dict:
+    if not INTENTS.exists():
+        return {}
+    try:
+        return json.loads(INTENTS.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {}
+
+
 def main() -> int:
     archive = load_jsonl(ARCHIVE)
     questions = [a.get("question", "") for a in archive if a.get("question")]
@@ -67,6 +77,13 @@ def main() -> int:
         gsc_kw = [k.get("query", k) if isinstance(k, dict) else k for k in gsc["keywords"][:25]]
     elif isinstance(gsc.get("queries_limena_top_volume"), list):
         gsc_kw = gsc["queries_limena_top_volume"][:15]
+
+    intents_snap = load_intents_snapshot()
+    chat_topics = intents_snap.get("top_topic_labels", [])
+    chat_location = intents_snap.get("location_demand", {})
+    chat_operation = intents_snap.get("operation_demand", {})
+    chat_budget = intents_snap.get("budget_bands", {})
+    chat_total = intents_snap.get("total_events", 0)
 
     content_ops = []
     location_demand = Counter()
@@ -92,8 +109,32 @@ def main() -> int:
             "lead_opportunity": "visita" in q or "contatt" in q,
         })
 
-    # dedupe content ops
+    # Merge real chat location/operation demand
+    for loc, cnt in chat_location.items():
+        location_demand[loc] += cnt
+    for op, cnt in chat_operation.items():
+        if op:
+            feature_demand[f"op_{op}"] += cnt
+    budget_signals += sum(chat_budget.values())
+
+    # Chat topics as emerging if not in archive
+    archive_q_lower = {q.lower() for q in questions}
+    for t in chat_topics[:15]:
+        label = t.get("label", "")
+        if label and label not in archive_q_lower and label not in ("saluto", "unmatched", "contatto"):
+            emerging.insert(0, {
+                "question": f"[chat] topic: {label}",
+                "source": "linda_chat_intents",
+                "count": t.get("count"),
+            })
+
     content_ops = content_ops[:40]
+
+    note_parts = ["Aggregato da FAQ archive"]
+    if chat_total:
+        note_parts.append(f"intent log {chat_total} eventi (14d)")
+    else:
+        note_parts.append("intent log non disponibile (tabella o SUPABASE_KEY)")
 
     out = {
         "generated_at": datetime.now().isoformat(timespec="seconds"),
@@ -105,13 +146,22 @@ def main() -> int:
         "feature_demand": dict(feature_demand.most_common(10)),
         "budget_demand_signals": budget_signals,
         "gsc_priority_sample": gsc_kw[:15],
+        "chat_intents": {
+            "available": intents_snap.get("available", False),
+            "total_events_14d": chat_total,
+            "top_topic_labels": chat_topics[:15],
+            "location_demand": chat_location,
+            "operation_demand": chat_operation,
+            "budget_bands": chat_budget,
+            "unique_msg_hashes": intents_snap.get("unique_msg_hashes"),
+        },
         "content_opportunities": content_ops[:25],
         "seo_opportunities": [
             {"kw": k, "action": "pillar/refresh o nuovo angolo SKIMM"} for k in gsc_kw[:10]
         ],
         "lead_opportunities": [c for c in content_ops if c.get("lead_opportunity")][:10],
         "policy": "yellow",
-        "note": "Aggregato da FAQ archive — no transcript chat raw (privacy).",
+        "note": " — ".join(note_parts),
     }
 
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -120,15 +170,19 @@ def main() -> int:
         "# Linda Question Intelligence",
         f"\nGenerato: {out['generated_at']}\n",
         f"- Archive entries: {len(archive)}",
+        f"- Chat intents (14d): {chat_total}",
         f"- TOP questions: {len(out['top_questions'])}",
         f"- Location demand: {out['location_demand']}",
         f"- Feature demand: {out['feature_demand']}",
-        "\n## Content opportunities (sample)\n",
+        "\n## Chat top topics\n",
     ]
+    for t in chat_topics[:8]:
+        lines.append(f"- {t.get('label')}: {t.get('count')}")
+    lines.append("\n## Content opportunities (sample)\n")
     for c in content_ops[:10]:
         lines.append(f"- {c['question'][:80]} → {c['intent']}")
     REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print(f"OK: question intelligence ({len(archive)} archive rows)")
+    print(f"OK: question intelligence ({len(archive)} archive, {chat_total} chat intents)")
     return 0
 
 

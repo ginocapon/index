@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T11:56:55",
+  "generated_at": "2026-08-11T12:07:36",
   "top_questions": [
     {
       "question": "Quali sono i requisiti per ottenere le agevolazioni prima casa nel 2026?",
@@ -286,6 +286,15 @@
       "status": "published"
     }
   ],
+  "chat_intents": {
+    "available": false,
+    "total_events_14d": 0,
+    "top_topic_labels": [],
+    "location_demand": {},
+    "operation_demand": {},
+    "budget_bands": {},
+    "unique_msg_hashes": 0
+  },
   "content_opportunities": [
     {
       "question": "Quali sono i requisiti per ottenere le agevolazioni prima casa nel 2026?",
@@ -566,5 +575,5 @@
   ],
   "lead_opportunities": [],
   "policy": "yellow",
-  "note": "Aggregato da FAQ archive — no transcript chat raw (privacy)."
+  "note": "Aggregato da FAQ archive — intent log non disponibile (tabella o SUPABASE_KEY)"
 }

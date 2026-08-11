@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-08-11T12:07:31",
+  "source_file": "data/linda-knowledge-temporal.json",
+  "approved_count": 4,
+  "proposal_count": 0,
+  "overdue_review": [],
+  "validation_issues": [],
+  "proposal_validation_issues": [],
+  "freshness_score": 100,
+  "policy": "yellow_proposals_green_report",
+  "approved_entries": [
+    {
+      "id": "mutui-tasso-contesto-2026",
+      "topic": "Tassi mutuo e accesso al credito",
+      "source": "Banca d'Italia",
+      "last_verified": "2026-08-11",
+      "review_date": "2026-09-15",
+      "confidence": "high"
+    },
+    {
+      "id": "omi-quotazioni-padova",
+      "topic": "Quotazioni OMI Padova provincia",
+      "source": "Agenzia delle Entrate — OMI",
+      "last_verified": "2026-08-11",
+      "review_date": "2026-10-01",
+      "confidence": "high"
+    },
+    {
+      "id": "mediazione-compenso-sede",
+      "topic": "Compenso di mediazione",
+      "source": "Righetto Immobiliare — policy istituzionale",
+      "last_verified": "2026-08-11",
+      "review_date": "2027-01-01",
+      "confidence": "high"
+    },
+    {
+      "id": "istat-prezzi-abitazioni-q1-2026",
+      "topic": "Prezzi abitazioni ISTAT",
+      "source": "ISTAT",
+      "last_verified": "2026-08-11",
+      "review_date": "2026-09-30",
+      "confidence": "medium"
+    }
+  ]
+}

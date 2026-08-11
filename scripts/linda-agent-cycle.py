@@ -22,7 +22,10 @@ REPORT = ROOT / "linda-agent-cycle-report.md"
 
 SCRIPTS = [
     ("faq_discovery", "scripts/linda-faq-biweekly-discovery.py", ["--force"]),
+    ("intents_snapshot", "scripts/linda-intents-snapshot.py", []),
     ("question_intelligence", "scripts/linda-question-intelligence.py", []),
+    ("live_benchmark", "scripts/linda-live-benchmark.py", []),
+    ("temporal_knowledge", "scripts/linda-temporal-knowledge.py", []),
     ("quality_benchmark", "scripts/linda-quality-benchmark.py", []),
     ("property_index", "scripts/linda-property-index.py", []),
 ]
