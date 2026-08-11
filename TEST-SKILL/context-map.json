@@ -145,6 +145,13 @@
       "data": ["data/editorial-queue.json", "data/gsc-keywords-priority.json", "data/web-keyword-discovery-latest.json"],
       "token_stimati": "~900",
       "note": "python scripts/web-keyword-discovery.py — titoli web istituzionali + GSC statico, 5 proposte anti-doppioni, GEO actions. Venerdì automatico."
+    },
+    "linda_faq_discovery": {
+      "skills": ["skill-essentials.md", "skill-content.md", "skill-ai-act-compliance.md"],
+      "cursor_skills": ["righetto-guardian"],
+      "data": ["data/linda-faq-proposals-latest.json", "data/linda-faq-archive.jsonl", "data/og-immobili.json", "TEST-SKILL/skimm.json"],
+      "token_stimati": "~800",
+      "note": "python scripts/linda-faq-biweekly-discovery.py — ogni 15 gg (gate 14) venerdì 07:00 CEST, ≥20 Q&A proposte da blog+immobili, archivio cumulativo, merge manuale FAQ_DATA (YELLOW)."
     }
   },
 

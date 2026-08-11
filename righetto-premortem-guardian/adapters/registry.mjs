@@ -168,6 +168,35 @@ async function securityAdapter(ctx) {
   return out;
 }
 
+async function lindaFaqAdapter(ctx) {
+  const out = { observations: [], verified_facts: [], missing_integrations: [] };
+
+  if (!ctx.ingestOnly && ctx.jobs?.some((j) => j.includes("linda_faq"))) {
+    const run = runCommand("python3", ["scripts/linda-faq-biweekly-discovery.py"]);
+    if (!run.ok) {
+      out.observations.push(obs("linda-faq-fail", "ai_quality", "linda-faq-biweekly-discovery fallito o sotto target", "warning", { stderr: run.stderr.slice(0, 300) }));
+    }
+  }
+
+  const disc = ingestJson("data/linda-faq-proposals-latest.json", Infinity);
+  if (disc.available && disc.data) {
+    if (disc.data.skipped) {
+      out.verified_facts.push({ fact: "linda_faq_discovery", value: "skipped", reason: disc.data.reason });
+    } else {
+      out.verified_facts.push({ fact: "linda_faq_proposals", value: disc.data.proposals_count ?? (disc.data.proposals || []).length });
+      out.verified_facts.push({ fact: "linda_faq_archive_total", value: disc.data.archive_total });
+      const count = disc.data.proposals_count ?? (disc.data.proposals || []).length;
+      if (count < 20) {
+        out.observations.push(obs("linda-faq-low", "ai_quality", `Solo ${count} proposte FAQ Linda (target 20)`, "warning"));
+      }
+    }
+  } else {
+    out.missing_integrations.push("linda-faq-discovery — eseguire scripts/linda-faq-biweekly-discovery.py");
+  }
+
+  return out;
+}
+
 async function aiQualityAdapter(ctx) {
   const out = { observations: [], verified_facts: [], missing_integrations: [] };
 
@@ -366,6 +395,11 @@ export async function runAdapters(scopes, ctx) {
   if (ctx.jobs?.includes("web_keyword_discovery")) {
     const r = await webKeywordsAdapter({ ...ctx, ingestOnly: false });
     results.push({ scope: "web_keyword_discovery", ...r });
+  }
+
+  if (ctx.jobs?.includes("linda_faq_discovery")) {
+    const r = await lindaFaqAdapter({ ...ctx, ingestOnly: false });
+    results.push({ scope: "linda_faq_discovery", ...r });
   }
 
   return results;
