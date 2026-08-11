@@ -1,0 +1,47 @@
+version: 1
+
+levels:
+  green:
+    description: "Azione reversibile e a basso rischio"
+    allowed: true
+    approval: none
+
+  yellow:
+    description: "Modifica che richiede revisione"
+    allowed: true
+    approval: human_before_publish
+
+  red:
+    description: "Azione sensibile o ad alto impatto"
+    allowed: false
+    approval: explicit_human
+
+  black:
+    description: "Azione proibita"
+    allowed: false
+    approval: impossible
+
+examples:
+  green:
+    - retry_failed_job
+    - refresh_cache
+    - generate_report
+    - create_alert
+
+  yellow:
+    - create_pull_request
+    - modify_content
+    - modify_prompt
+    - change_seo_metadata
+    - change_threshold
+
+  red:
+    - production_database_write
+    - privacy_policy_change
+    - DNS_change
+    - credential_change
+
+  black:
+    - delete_backups
+    - export_secrets
+    - disable_security_controls
