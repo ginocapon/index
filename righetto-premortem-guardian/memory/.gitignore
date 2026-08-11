@@ -1,0 +1,4 @@
+reports/*
+!reports/.gitkeep
+events.jsonl
+state.json

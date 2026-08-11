@@ -29,10 +29,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Esegui audit
+      - name: Esegui audit (via Guardian dispatcher)
         id: audit
+        env:
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
           cd "$GITHUB_WORKSPACE"
+          node righetto-premortem-guardian/scripts/guardian.mjs run --jobs=weekly_audit
           bash scripts/audit-skill.sh audit-report.md
           echo "success=true" >> "$GITHUB_OUTPUT"
 

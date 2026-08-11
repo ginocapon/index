@@ -25,9 +25,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Esegui security-check.sh
+      - name: Esegui security-check (via Guardian dispatcher)
         id: sec
+        env:
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
+          node righetto-premortem-guardian/scripts/guardian.mjs run --jobs=security_check
           bash scripts/security-check.sh security-report.md
         continue-on-error: true
 

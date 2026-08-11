@@ -31,10 +31,13 @@ jobs:
       - name: Rendi script eseguibile
         run: chmod +x scripts/mini-seo-check.sh
 
-      - name: Esegui Mini SEO Check
+      - name: Esegui Mini SEO Check (via Guardian dispatcher)
         id: seocheck
+        env:
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
           cd "$GITHUB_WORKSPACE"
+          node righetto-premortem-guardian/scripts/guardian.mjs run --jobs=site_integrity
           bash scripts/mini-seo-check.sh mini-seo-report.md
           echo "success=true" >> "$GITHUB_OUTPUT"
 
