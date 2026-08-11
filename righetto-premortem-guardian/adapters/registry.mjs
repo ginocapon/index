@@ -255,6 +255,32 @@ async function performanceAdapter(ctx) {
   return out;
 }
 
+async function webKeywordsAdapter(ctx) {
+  const out = { observations: [], verified_facts: [], missing_integrations: [] };
+
+  if (!ctx.ingestOnly && ctx.jobs?.some((j) => j.includes("web_keyword") || j === "weekly_strategy")) {
+    const run = runCommand("python3", ["scripts/web-keyword-discovery.py"]);
+    if (!run.ok) {
+      out.observations.push(obs("web-kw-fail", "content", "web-keyword-discovery fallito", "warning", { stderr: run.stderr.slice(0, 300) }));
+    }
+  }
+
+  const disc = ingestJson("data/web-keyword-discovery-latest.json", Infinity);
+  if (disc.available && disc.data) {
+    out.verified_facts.push({ fact: "web_discovery_proposals", value: (disc.data.proposals || []).length });
+    out.verified_facts.push({ fact: "queue_added", value: (disc.data.queue_added || []).length });
+  } else {
+    out.missing_integrations.push("web-keyword-discovery — eseguire scripts/web-keyword-discovery.py");
+  }
+
+  const geo = ingestJson("data/geo-keyword-actions-latest.json", Infinity);
+  if (geo.available && geo.data?.actions?.length) {
+    out.verified_facts.push({ fact: "geo_keyword_actions", value: geo.data.actions.length });
+  }
+
+  return out;
+}
+
 async function businessAdapter(ctx) {
   const out = { observations: [], verified_facts: [], missing_integrations: [] };
 
@@ -298,6 +324,7 @@ const ADAPTERS = {
   structured_data: seoAdapter,
   links: seoAdapter,
   content: contentAdapter,
+  web_keywords: webKeywordsAdapter,
   security: securityAdapter,
   ai_quality: aiQualityAdapter,
   analytics: analyticsAdapter,
@@ -334,6 +361,11 @@ export async function runAdapters(scopes, ctx) {
   if (ctx.jobs?.includes("weekly_audit") || ctx.jobs?.includes("monthly_full_premortem")) {
     const r = await weeklyAuditAdapter(ctx);
     results.push({ scope: "weekly_audit", ...r });
+  }
+
+  if (ctx.jobs?.includes("web_keyword_discovery")) {
+    const r = await webKeywordsAdapter({ ...ctx, ingestOnly: false });
+    results.push({ scope: "web_keyword_discovery", ...r });
   }
 
   return results;

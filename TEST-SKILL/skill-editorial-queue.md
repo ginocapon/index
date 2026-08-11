@@ -42,12 +42,16 @@
 
 ## Discovery nuovi temi (ogni settimana o coda bassa)
 
-1. **GSC** `queries_growth` con impr > 10 e clic = 0 → candidato
-2. **SKIMM** §4 avvisi cluster → nuovo angolo, non duplicare slug esistente
-3. **Web search** (IT, 2026): `affitti padova`, `mutuo giovani`, `mercato immobiliare veneto` + fonte istituzionale
-4. **Anti-doppioni:** grep slug + `check_doppioni_sito.py` + intent diverso da articolo esistente
-5. Aggiungi in `editorial-queue.json` con `status: "proposed"`, `research_refs`, `different_from`
-6. **Max 1 publish/settimana** — proposte possono accumularsi
+1. **Web keyword discovery (settimanale — venerdì)**  
+   `python scripts/web-keyword-discovery.py`  
+   Legge titoli/termini da fonti istituzionali (ISTAT, FIMAA/Confcommercio, Unione Immobiliare, stampa locale) + gap da `gsc-keywords-priority.json` **senza GSC API**.  
+   Output: 5 proposte anti-doppioni → `editorial-queue.json` (`proposed`) + `data/geo-keyword-actions-latest.json` (SOSTENERE/AGGIUNGERE GEO).
+2. **GSC** `queries_growth` con impr > 10 e clic = 0 → candidato
+3. **SKIMM** §4 avvisi cluster → nuovo angolo, non duplicare slug esistente
+4. **Web search** (IT, 2026): temi da report discovery + fonte istituzionale
+5. **Anti-doppioni:** grep slug + `check_doppioni_sito.py` + `build_skimm.py --check`
+6. Aggiungi in `editorial-queue.json` con `status: "proposed"`, `research_refs`, `different_from`
+7. **Max 1 publish/settimana** — proposte possono accumularsi
 
 ---
 
@@ -81,7 +85,7 @@ Dettaglio completo: `data/editorial-queue.json`
 
 | Ora CEST | Workflow | Pubblica blog? |
 |----------|----------|----------------|
-| 07:00 | `venerdi-contenuti-freschezza.yml` | ❌ audit + email PDF |
+| 07:00 | `venerdi-contenuti-freschezza.yml` | ❌ audit + email PDF + **web-keyword-discovery** (5 proposte) |
 | 07:00 | `audit-settimanale.yml` | ❌ Issue audit |
 | 07:00 | `mini-seo-check.yml` | ❌ Issue SEO |
 | ~07:30 | `venerdi-righetto-piano.yml` | ❌ Issue macrociclo |

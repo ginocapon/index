@@ -1,0 +1,323 @@
+{
+  "date": "2026-08-11",
+  "sources_fetched": [
+    {
+      "id": "istat_ipab",
+      "url": "https://www.istat.it/comunicato-stampa/prezzi-delle-abitazioni-dati-provvisori-i-trimestre-2026/",
+      "status": 200,
+      "bytes": 115753
+    },
+    {
+      "id": "confcommercio_fimaa",
+      "url": "https://www.confcommercio.it/-/mercato-immobiliare",
+      "status": 403,
+      "bytes": 0
+    },
+    {
+      "id": "unione_veneto",
+      "url": "https://www.unioneimmobiliare.org/eventi/focus-veneto-2026/",
+      "status": 200,
+      "bytes": 49731
+    },
+    {
+      "id": "mattino_padova",
+      "url": "https://www.mattinopadova.it/cronaca/case-prezzi-giu-padova-tiene-provincia-ez8ieha6",
+      "status": 200,
+      "bytes": 243094
+    }
+  ],
+  "web_term_signals": [
+    [
+      "padova",
+      10
+    ],
+    [
+      "provincia",
+      9
+    ],
+    [
+      "veneto",
+      8
+    ],
+    [
+      "caparra affitto",
+      1
+    ],
+    [
+      "cintura",
+      1
+    ]
+  ],
+  "gsc_gaps_sample": [
+    {
+      "q": "omi padova",
+      "clicks": 0,
+      "impressions": 14,
+      "intent": "dato-ufficiale"
+    },
+    {
+      "q": "affitto limena",
+      "clicks": 0,
+      "impressions": 5,
+      "intent": "affitto-locale"
+    },
+    {
+      "q": "affitti a limena",
+      "clicks": 0,
+      "impressions": 4,
+      "intent": "affitto-locale"
+    },
+    {
+      "q": "appartamento in affitto limena",
+      "clicks": 0,
+      "impressions": 4,
+      "intent": "affitto-locale"
+    },
+    {
+      "q": "appartamento limena",
+      "clicks": 0,
+      "impressions": 5,
+      "intent": "comprare-affitto"
+    },
+    {
+      "q": "immobiliare limena",
+      "clicks": 0,
+      "impressions": 5,
+      "intent": "generico-locale"
+    },
+    {
+      "q": "immobiliare",
+      "clicks": 0,
+      "impressions": 28,
+      "intent": "generico-broad"
+    },
+    {
+      "q": "gergo immobiliare padova",
+      "clicks": 0,
+      "impressions": 3,
+      "intent": "educational"
+    },
+    {
+      "q": "immobiliare",
+      "impressions": 301,
+      "intent": "generico-broad"
+    }
+  ],
+  "proposals": [
+    {
+      "kw_primaria": "costi ristrutturazione usato frenano acquisto",
+      "slug": "blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026",
+      "title": "Usato da riqualificare: perché i costi di ristrutturazione frenano l'acquisto nel 2026",
+      "intent": "acquisto-budget-operativo",
+      "cluster": "acquisto-operativo",
+      "web_signal": "FIMAA Q1 2026: 33% operatori — costi elevati ristrutturazione frenano usato",
+      "different_from": "blog-bonus-edilizi-2026-incentivi-casa-padova",
+      "research_refs": [
+        "https://www.confcommercio.it/-/mercato-immobiliare",
+        "https://www.simplybiz.eu/fimaa-immobiliare-previsioni-2026-sentiment-1-quadrimestre/"
+      ],
+      "geo_actions": [
+        "aeo_box_costi_ristrutturazione",
+        "faq_budget_acquirente"
+      ],
+      "gsc_align": null,
+      "validation": "OK",
+      "queue_status": "proposed",
+      "queue_id": "eq-web-001"
+    },
+    {
+      "kw_primaria": "mutuo tasso 3.42 accesso credito 2026",
+      "slug": "blog-mutuo-tasso-342-accesso-credito-padova-2026",
+      "title": "Mutuo al 3,42%: finestra di accesso al credito per chi compra nel Padovano",
+      "intent": "mutuo-timing",
+      "cluster": "mutui-cluster",
+      "web_signal": "Confcommercio/ABI: mutui acquisto abitazioni ~3,42% feb 2026",
+      "different_from": "blog-mutui-casa-padova-2026",
+      "research_refs": [
+        "https://www.confcommercio.it/-/mercato-immobiliare"
+      ],
+      "geo_actions": [
+        "refresh_meta_mutui_casa",
+        "faq_tasso_fisso_timing"
+      ],
+      "gsc_align": null,
+      "validation": "OK",
+      "queue_status": "proposed",
+      "queue_id": "eq-web-002"
+    },
+    {
+      "kw_primaria": "affitti nuovo veneto 10 percento",
+      "slug": "blog-affitti-nuovo-vs-usato-veneto-2026",
+      "title": "Affitti nel Veneto: nuovo +10,3% e divario con l'usato — cosa cambia per chi cerca casa",
+      "intent": "affitto-nuovo-usato",
+      "cluster": "affitti-cluster",
+      "web_signal": "Focus Veneto 2026 / Immobiliare.it: nuovo locazione +10,3% Q1",
+      "different_from": "blog-affitti-padova-canoni-2026",
+      "research_refs": [
+        "https://www.unioneimmobiliare.org/eventi/focus-veneto-2026/"
+      ],
+      "geo_actions": [
+        "faq_nuovo_vs_usato_affitto",
+        "link_zona_limena"
+      ],
+      "gsc_align": "affitti limena",
+      "validation": "OK",
+      "queue_status": "proposed",
+      "queue_id": "eq-web-003"
+    },
+    {
+      "kw_primaria": "ipab istat 5.2 prezzi abitazioni",
+      "slug": "blog-ipab-istat-q1-2026-padova-interpretazione",
+      "title": "Prezzi case +5,2% (ISTAT Q1 2026): cosa significa davvero se compri a Padova",
+      "intent": "dato-interpretazione",
+      "cluster": "analisi-scenari",
+      "web_signal": "ISTAT IPAB Q1 2026 +5,2% annuo; compravendite ADE +4,4%",
+      "different_from": "blog-mercato-immobiliare-padova-2026",
+      "research_refs": [
+        "https://www.istat.it/comunicato-stampa/prezzi-delle-abitazioni-dati-provvisori-i-trimestre-2026/"
+      ],
+      "geo_actions": [
+        "aeo_dato_istat",
+        "schema_dataset_citation"
+      ],
+      "gsc_align": null,
+      "validation": "OK",
+      "queue_status": "proposed",
+      "queue_id": "eq-web-004"
+    },
+    {
+      "kw_primaria": "gergo immobiliare padova",
+      "slug": "blog-gergo-immobiliare-padova-guida-2026",
+      "title": "Gergo immobiliare: 25 termini che sentirai in agenzia a Padova (con esempi chiari)",
+      "intent": "educational-aeo",
+      "cluster": "vita-agenzia-brand",
+      "web_signal": "GSC: gergo immobiliare padova 3 impr 0 clic — gap AEO",
+      "different_from": "blog-5-domande-appuntamento-agenzia-padova-2026",
+      "research_refs": [
+        "https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi/banche-dati/quotazioni-immobiliari"
+      ],
+      "geo_actions": [
+        "faq_gergo_visura_caparra",
+        "llms_glossary_snippet"
+      ],
+      "gsc_align": "gergo immobiliare padova",
+      "validation": "OK",
+      "queue_status": "proposed",
+      "queue_id": "eq-web-005"
+    }
+  ],
+  "queue_added": [
+    "eq-web-001",
+    "eq-web-002",
+    "eq-web-003",
+    "eq-web-004",
+    "eq-web-005"
+  ],
+  "geo_seo_actions": [
+    {
+      "action": "SOSTENERE",
+      "url": "/blog-rendimento-affitto-padova",
+      "reason": "139 impr, 0 clic",
+      "geo": [
+        "aeo_answer_box",
+        "faq_visible",
+        "dateModified"
+      ],
+      "priority": "high"
+    },
+    {
+      "action": "SOSTENERE",
+      "url": "/agenzia-immobiliare-padova",
+      "reason": "68 impr, 0 clic",
+      "geo": [
+        "aeo_answer_box",
+        "faq_visible",
+        "dateModified"
+      ],
+      "priority": "high"
+    },
+    {
+      "action": "SOSTENERE",
+      "url": "/zona-limena",
+      "reason": "3 impr, 0 clic",
+      "geo": [
+        "aeo_answer_box",
+        "faq_visible",
+        "dateModified"
+      ],
+      "priority": "medium"
+    },
+    {
+      "action": "SOSTENERE",
+      "url": "/blog-affitto-breve-padova-2026",
+      "reason": "10 impr, 0 clic",
+      "geo": [
+        "aeo_answer_box",
+        "faq_visible",
+        "dateModified"
+      ],
+      "priority": "medium"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026",
+      "geo": "aeo_box_costi_ristrutturazione",
+      "kw": "costi ristrutturazione usato frenano acquisto"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026",
+      "geo": "faq_budget_acquirente",
+      "kw": "costi ristrutturazione usato frenano acquisto"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-mutuo-tasso-342-accesso-credito-padova-2026",
+      "geo": "refresh_meta_mutui_casa",
+      "kw": "mutuo tasso 3.42 accesso credito 2026"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-mutuo-tasso-342-accesso-credito-padova-2026",
+      "geo": "faq_tasso_fisso_timing",
+      "kw": "mutuo tasso 3.42 accesso credito 2026"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-affitti-nuovo-vs-usato-veneto-2026",
+      "geo": "faq_nuovo_vs_usato_affitto",
+      "kw": "affitti nuovo veneto 10 percento"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-affitti-nuovo-vs-usato-veneto-2026",
+      "geo": "link_zona_limena",
+      "kw": "affitti nuovo veneto 10 percento"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-ipab-istat-q1-2026-padova-interpretazione",
+      "geo": "aeo_dato_istat",
+      "kw": "ipab istat 5.2 prezzi abitazioni"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-ipab-istat-q1-2026-padova-interpretazione",
+      "geo": "schema_dataset_citation",
+      "kw": "ipab istat 5.2 prezzi abitazioni"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-gergo-immobiliare-padova-guida-2026",
+      "geo": "faq_gergo_visura_caparra",
+      "kw": "gergo immobiliare padova"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-gergo-immobiliare-padova-guida-2026",
+      "geo": "llms_glossary_snippet",
+      "kw": "gergo immobiliare padova"
+    }
+  ],
+  "method": "web_titles_institutional + gsc-keywords-priority.json (no API)"
+}

@@ -45,3 +45,14 @@ Report: `righetto-premortem-guardian/reports/guardian-latest.{json,md}`
 - No loop automatici · No soglie alterate per silenziare alert
 
 Dettaglio architettura: `righetto-premortem-guardian/INTEGRATION.md`
+
+## Discovery keyword web (settimanale)
+
+```bash
+python scripts/web-keyword-discovery.py
+```
+
+- Fonti: ISTAT, FIMAA/Confcommercio, Unione Immobiliare Veneto, GSC statico
+- 5 articoli `proposed` in `editorial-queue.json` (anti-doppioni SKIMM)
+- GEO/SEO: `data/geo-keyword-actions-latest.json`
+- Cron: venerdì `venerdi-contenuti-freschezza.yml` + Guardian `web_keyword_discovery`
