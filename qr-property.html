@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scheda immobile — Righetto Immobiliare</title>
+<meta name="robots" content="noindex, follow">
+<meta name="description" content="Accesso rapido alla scheda immobile Righetto Immobiliare (QR catalogo).">
+<link rel="canonical" href="https://righettoimmobiliare.it/qr-property">
+<script src="js/ga-consent.js?v=3" defer></script>
+</head>
+<body>
+<p>Reindirizzamento alla scheda immobile…</p>
+<script>
+(function () {
+  var p = new URLSearchParams(location.search);
+  var codice = (p.get('c') || p.get('codice') || '').trim();
+  var slug = (p.get('s') || p.get('slug') || '').trim();
+  var dest = '/immobili';
+  if (slug) {
+    dest = '/immobile?s=' + encodeURIComponent(slug);
+  } else if (codice) {
+    dest = '/immobili?codice=' + encodeURIComponent(codice);
+  }
+  try {
+    var n = parseInt(localStorage.getItem('rig_qr_property_count') || '0', 10) + 1;
+    localStorage.setItem('rig_qr_property_count', String(n));
+  } catch (e) { /* ignore */ }
+  location.replace(dest);
+})();
+</script>
+</body>
+</html>

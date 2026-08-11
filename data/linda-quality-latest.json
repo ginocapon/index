@@ -1,0 +1,56 @@
+{
+  "generated_at": "2026-08-11T11:56:55",
+  "linda_quality_score": 91.2,
+  "target_note": "Score interno 0-100 — non equivale a 99.9% accuracy senza benchmark live",
+  "component_scores": {
+    "faq_coverage": 100,
+    "faq_volume": 100,
+    "property_catalog": 75,
+    "agent_module": 100,
+    "qr_system": 100,
+    "knowledge_pipeline": 100
+  },
+  "category_scores": {
+    "factual_accuracy": 100,
+    "property_accuracy": 75,
+    "retrieval": 100,
+    "ranking": 100,
+    "grounding": 100,
+    "hallucination_risk": 85,
+    "sources_temporal": 60,
+    "unanswered_handling": 75,
+    "lead_conversion_hooks": 80,
+    "frontend_latency": 90
+  },
+  "benchmark_queries": [
+    {
+      "q": "orari agenzia",
+      "expect": "faq"
+    },
+    {
+      "q": "commissione mediazione",
+      "expect": "faq"
+    },
+    {
+      "q": "cerco appartamento limena affitto",
+      "expect": "search"
+    },
+    {
+      "q": "casa padova massimo 350000 tre camere",
+      "expect": "search"
+    },
+    {
+      "q": "mutuo prima casa",
+      "expect": "faq"
+    },
+    {
+      "q": "LF0230",
+      "expect": "faq"
+    }
+  ],
+  "faq_entries": 333,
+  "blog_refs": 123,
+  "skimm_articles": 121,
+  "catalog_immobili": 25,
+  "policy": "green_report"
+}

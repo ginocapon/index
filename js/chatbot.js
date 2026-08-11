@@ -1,6 +1,6 @@
 /**
  * RIGHETTO IMMOBILIARE — Chatbot Universale
- * Versione 2.2 — Agosto 2026 (trasparenza AI Act UE)
+ * Versione 2.3 — Agosto 2026 (Linda Agent + trasparenza AI Act UE)
  * Include: stima prezzi, ricerca immobili, form contatto, FAQ
  * Dati prezzi: FIMAA Padova, Immobiliare.it, Idealista 2025-2026
  */
@@ -2028,6 +2028,7 @@ class RighettoChat {
     this.ricercaData = {};
     this.isOpen = false;
     this.supabase = null;
+    this.lindaCtx = window.LindaAgent ? new LindaAgent.ConversationContext() : null;
     this.initSupabase();
   }
 
@@ -2371,14 +2372,29 @@ class RighettoChat {
     }
 
     // Stima guidata
-    if (/stim|valut|vale|valore|prezzo|quanto.*cost|calcol/.test(low)) {
+    if (/stim|valut|vale|valore|prezzo|quanto.*cost|calcol/.test(low) && !/cerco|cerchi|immobil/.test(low)) {
       this.state = 'stima_comune';
       this.stimaData = {};
       return '🏠 **Stima Valore Immobile** — Provincia di Padova\n\nIn quale **comune** si trova l\'immobile?\n*(Es: Padova, Abano Terme, Cittadella, Monselice...)*';
     }
 
-    // Contatto
-    if (/contatt|chiamat|appuntam|richiama|visita|veder|incontr|form/.test(low)) {
+    // ── LINDA AGENT: ricerca conversazionale (hard/soft + ranking) ──
+    if (window.LindaAgent) {
+      var agentIntent = LindaAgent.parseSearchIntent(msg);
+      if (this.lindaCtx) this.lindaCtx.merge(agentIntent);
+      if (agentIntent.isPropertySearch && (agentIntent.location || agentIntent.budget_max || agentIntent.rooms || agentIntent.property_type || agentIntent.operation)) {
+        return await this.cercaImmobiliAgent(agentIntent);
+      }
+      if (LindaAgent.detectLeadIntent(msg) && this.lindaCtx && this.lindaCtx.searchCount > 0) {
+        this.state = 'contatto_nome';
+        var note = 'Ricerca Linda: ' + JSON.stringify(this.lindaCtx.hard || {});
+        this.contattoPending = { provenienza: 'chatbot', note: note };
+        return '👋 Perfetto, trasformo la ricerca in una richiesta diretta a Righetto.\n\n**Come ti chiami?** (Nome e Cognome)';
+      }
+    }
+
+    // Contatto (esclude "visita" se è ricerca immobili in contesto agent)
+    if (/contatt|chiamat|appuntam|richiama|incontr|form/.test(low) || (/visita|veder/.test(low) && !/immobil|casa|appartam/.test(low))) {
       this.state = 'contatto_nome';
       this.contattoPending = { provenienza: 'chatbot' };
       return '👋 Ottimo! Ti ricontatteremo al più presto.\n\n**Come ti chiami?** (Nome e Cognome)';
@@ -2486,6 +2502,78 @@ class RighettoChat {
     }
 
     return msg;
+  }
+
+  // ────── RICERCA AGENT (ranking spiegabile) ──────
+  async cercaImmobiliAgent(intent) {
+    if (!window.LindaAgent || !this.supabase) {
+      return this.cercaImmobiliCatalogo(intent.operation, intent.location);
+    }
+
+    try {
+      const { data, error } = await this.supabase.from('immobili').select('*')
+        .eq('attivo', true).eq('venduto', false)
+        .order('created_at', { ascending: false })
+        .limit(60);
+
+      if (error || !data || !data.length) {
+        return this.fallbackRicerca(intent.operation);
+      }
+
+      const ranked = LindaAgent.rankProperties(data, intent, { fuzzyMatchComune: (z) => this.fuzzyMatchComune(z) });
+      if (this.lindaCtx) this.lindaCtx.positiveInteraction = true;
+
+      const tipoLabel = intent.operation === 'affitto' ? 'in affitto' : intent.operation === 'vendita' ? 'in vendita' : '';
+      const zonaLabel = intent.location ? ` a **${intent.location}**` : '';
+      const budgetLabel = intent.budget_max ? ` (budget max ~${this.formatPrice(intent.budget_max)})` : '';
+
+      if (!ranked.length) {
+        let alt = await this.cercaImmobiliCatalogo(intent.operation, intent.location);
+        return `🔍 Non ho un match perfetto${zonaLabel}${budgetLabel} nel catalogo attuale.\n\n**Alternative nella stessa area o criteri simili:**\n\n` + alt +
+          '\n\n---\n💬 Se vuoi, posso **trasformare questa ricerca in una richiesta diretta** a Righetto — scrivi *contattami*.';
+      }
+
+      const perfect = ranked.filter((r) => r.score >= 75).slice(0, 4);
+      const near = ranked.filter((r) => r.score >= 55 && r.score < 75).slice(0, 3);
+      const alt = ranked.filter((r) => r.score < 55).slice(0, 2);
+
+      let msg = `🏠 **Ricerca immobili${tipoLabel ? ' ' + tipoLabel : ''}${zonaLabel}**${budgetLabel}\n\n`;
+      if (intent.hard.budget_max) msg += `✓ Budget massimo considerato: **${this.formatPrice(intent.hard.budget_max)}**\n`;
+      if (intent.hard.rooms_min) msg += `✓ Camere/locali richiesti: **${intent.hard.rooms_min}+**\n`;
+      if (intent.soft.garage) msg += `○ Preferenza: garage/box\n`;
+      if (intent.soft.giardino) msg += `○ Preferenza: giardino\n`;
+      msg += '\n';
+
+      const renderBlock = (title, items) => {
+        if (!items.length) return '';
+        let block = `**${title}**\n\n`;
+        for (const row of items) {
+          const imm = row.imm;
+          const prezzo = imm.prezzo ? this.formatPrice(imm.prezzo) : 'Su richiesta';
+          const sup = imm.superficie ? `${imm.superficie} m²` : '';
+          const slug = generatePropertySlug(imm);
+          const why = row.reasons.slice(0, 3).join(' · ');
+          block += `🔹 **${imm.titolo || imm.tipologia}** — ${prezzo}`;
+          if (sup) block += ` — ${sup}`;
+          if (imm.codice) block += ` — Rif. ${imm.codice}`;
+          block += `\n   ✓ ${why || 'compatibile con la ricerca'}\n`;
+          block += `   👉 [Scheda](immobile.html?s=${encodeURIComponent(slug)})\n\n`;
+        }
+        return block;
+      };
+
+      msg += renderBlock('Match più pertinenti', perfect);
+      msg += renderBlock('Quasi-match (valuta alternative)', near);
+      msg += renderBlock('Altre opzioni nel catalogo', alt);
+
+      msg += '---\n💬 Vuoi **prenotare una visita** o ricevere altre proposte? Scrivi *contattami* o indica il **codice** immobile.\n';
+      if (window.LindaAgent && LindaAgent.shouldOfferReview(this.lindaCtx)) {
+        msg += '\n⭐ Se ti è stata utile la ricerca, puoi lasciare una recensione su [Google](qr-review) (nessun incentivo in cambio).';
+      }
+      return msg;
+    } catch (e) {
+      return this.cercaImmobiliCatalogo(intent.operation, intent.location);
+    }
   }
 
   // ────── RICERCA IMMOBILI DAL CATALOGO ──────

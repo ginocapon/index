@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "google_review_url": "https://maps.app.goo.gl/xuCiRGDCSKskpTSf6?g_st=ic",
+  "qr_review_path": "/qr-review",
+  "qr_property_path": "/qr-property",
+  "agent_module": "js/linda-agent.js",
+  "chatbot_module": "js/chatbot.js",
+  "policy": {
+    "faq_merge": "yellow",
+    "content_publish": "yellow",
+    "knowledge_auto_write": "yellow"
+  },
+  "cycle_days": 14,
+  "quality_score_target": 75
+}

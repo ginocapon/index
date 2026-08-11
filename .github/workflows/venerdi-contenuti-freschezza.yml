@@ -44,7 +44,7 @@ jobs:
         run: |
           cd "$GITHUB_WORKSPACE"
           python scripts/web-keyword-discovery.py
-          python scripts/linda-faq-biweekly-discovery.py
+          python scripts/linda-agent-cycle.py
           python scripts/geo-aeo-formula.py
           python scripts/venerdi-contenuti-freschezza.py
           python scripts/venerdi-seo-intelligence.py

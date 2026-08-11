@@ -24,6 +24,7 @@ const JOB_SCOPES = {
   weekly_strategy: ["business", "seo", "content", "competition", "web_keywords"],
   web_keyword_discovery: ["content", "seo", "business", "web_keywords"],
   linda_faq_discovery: ["ai_quality", "content"],
+  linda_agent_cycle: ["ai_quality", "content", "business"],
   weekly_red_team: ["strategy", "assumptions", "business", "security"],
   monthly_full_premortem: ["all"],
   quarterly_future_scenarios: ["strategy", "business", "technology"],

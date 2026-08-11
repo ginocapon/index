@@ -152,6 +152,13 @@
       "data": ["data/linda-faq-proposals-latest.json", "data/linda-faq-archive.jsonl", "data/og-immobili.json", "TEST-SKILL/skimm.json"],
       "token_stimati": "~800",
       "note": "python scripts/linda-faq-biweekly-discovery.py — ogni 15 gg (gate 14) venerdì 07:00 CEST, ≥20 Q&A proposte da blog+immobili, archivio cumulativo, merge manuale FAQ_DATA (YELLOW)."
+    },
+    "linda_real_estate_agent": {
+      "skills": ["skill-essentials.md", "skill-linda-agent.md", "skill-ai-act-compliance.md", "skill-forms-leads.md"],
+      "cursor_skills": ["righetto-guardian"],
+      "data": ["data/linda-config.json", "data/linda-quality-latest.json", "data/linda-question-intelligence-latest.json", "js/linda-agent.js", "js/chatbot.js"],
+      "token_stimati": "~1.200",
+      "note": "Linda Agent: js/linda-agent.js + chatbot.js ranking immobili reali, ciclo scripts/linda-agent-cycle.py, Guardian job linda_agent_cycle, QR qr-review/qr-property."
     }
   },
 

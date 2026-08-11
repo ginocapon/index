@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "last_run_at": "2026-08-11T11:56:55",
+  "last_reason": "force",
+  "results": {
+    "faq_discovery": true,
+    "question_intelligence": true,
+    "quality_benchmark": true,
+    "property_index": true
+  }
+}
