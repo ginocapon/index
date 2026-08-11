@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "updated_at": "2026-08-11",
+  "policy_note": "Solo entries status=approved in FAQ/risposte Linda. Proposals richiedono review YELLOW.",
+  "entries": [
+    {
+      "id": "mutui-tasso-contesto-2026",
+      "topic": "Tassi mutuo e accesso al credito",
+      "summary": "I tassi sui mutui dipendono dal contesto BCE e del merito creditizio; per decisioni vincolanti serve verifica in banca.",
+      "source": "Banca d'Italia",
+      "source_url": "https://www.bancaditalia.it/statistiche/tematiche/famiglie-imprese/famiglie/index.html",
+      "published_at": "2026-06-01",
+      "last_verified": "2026-08-11",
+      "review_date": "2026-09-15",
+      "confidence": "high",
+      "status": "approved",
+      "linda_faq_keywords": ["mutui banca d'italia", "tassi mutui"]
+    },
+    {
+      "id": "omi-quotazioni-padova",
+      "topic": "Quotazioni OMI Padova provincia",
+      "summary": "Per orientarsi su prezzi e canoni conviene usare le quotazioni OMI dell'Agenzia delle Entrate, incrociate con monitor ISTAT sulle locazioni.",
+      "source": "Agenzia delle Entrate — OMI",
+      "source_url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricati/omi/banche-dati/quotazioni-immobiliari",
+      "published_at": "2026-01-01",
+      "last_verified": "2026-08-11",
+      "review_date": "2026-10-01",
+      "confidence": "high",
+      "status": "approved",
+      "linda_faq_keywords": ["omi", "quotazioni omi"]
+    },
+    {
+      "id": "mediazione-compenso-sede",
+      "topic": "Compenso di mediazione",
+      "summary": "L'importo e le condizioni economiche non sono pubblicati online: vengono concordati in sede al momento del mandato.",
+      "source": "Righetto Immobiliare — policy istituzionale",
+      "source_url": "https://righettoimmobiliare.it/servizio-vendita",
+      "published_at": "2026-01-01",
+      "last_verified": "2026-08-11",
+      "review_date": "2027-01-01",
+      "confidence": "high",
+      "status": "approved",
+      "linda_faq_keywords": ["commissione", "provvigione", "mediazione"]
+    },
+    {
+      "id": "istat-prezzi-abitazioni-q1-2026",
+      "topic": "Prezzi abitazioni ISTAT",
+      "summary": "ISTAT pubblica indici trimestrali sulle abitazioni; interpretazione locale richiede contesto Padova/hinterland, non previsione personale.",
+      "source": "ISTAT",
+      "source_url": "https://www.istat.it/",
+      "published_at": "2026-06-15",
+      "last_verified": "2026-08-11",
+      "review_date": "2026-09-30",
+      "confidence": "medium",
+      "status": "approved",
+      "linda_faq_keywords": ["istat", "prezzi case"]
+    }
+  ],
+  "proposals": []
+}

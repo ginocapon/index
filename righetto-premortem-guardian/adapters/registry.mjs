@@ -207,6 +207,46 @@ async function lindaAgentAdapter(ctx) {
     out.verified_facts.push({ fact: "linda_property_index", value: propIdx.data.count });
   }
 
+  const intents = ingestJson("data/linda-intents-snapshot-latest.json", Infinity);
+  if (intents.available && intents.data) {
+    out.verified_facts.push({
+      fact: "linda_chat_intents_14d",
+      value: intents.data.total_events ?? 0,
+      available: intents.data.available,
+    });
+    if (intents.data.available && intents.data.total_events > 0) {
+      const top = (intents.data.top_topic_labels || []).slice(0, 3).map((t) => t.label).join(", ");
+      if (top) out.verified_facts.push({ fact: "linda_top_chat_topics", value: top });
+    }
+  }
+
+  const liveBench = ingestJson("data/linda-live-benchmark-latest.json", Infinity);
+  if (liveBench.available && liveBench.data) {
+    out.verified_facts.push({ fact: "linda_live_benchmark_pct", value: liveBench.data.pass_rate_pct });
+    if (liveBench.data.pass_rate_pct < 70) {
+      out.observations.push(
+        obs("linda-live-benchmark-low", "ai_quality", `Live benchmark Linda ${liveBench.data.pass_rate_pct}% < 70%`, "warning"),
+      );
+    }
+  }
+
+  const temporal = ingestJson("data/linda-knowledge-temporal-latest.json", Infinity);
+  if (temporal.available && temporal.data) {
+    out.verified_facts.push({
+      fact: "linda_temporal_freshness",
+      value: temporal.data.freshness_score,
+      approved: temporal.data.approved_count,
+    });
+    const overdue = temporal.data.overdue_review || [];
+    if (overdue.length > 0) {
+      out.observations.push(
+        obs("linda-temporal-overdue", "ai_quality", `${overdue.length} entry knowledge temporale da rivedere`, "info", {
+          ids: overdue.slice(0, 5).map((o) => o.id),
+        }),
+      );
+    }
+  }
+
   return out;
 }
 

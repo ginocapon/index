@@ -1,11 +1,15 @@
 # Linda Question Intelligence
 
-Generato: 2026-08-11T11:56:55
+Generato: 2026-08-11T12:07:36
 
 - Archive entries: 112
+- Chat intents (14d): 0
 - TOP questions: 20
 - Location demand: {'padova': 9, 'limena': 3, 'arcella': 1, 'guizza': 1, 'vigonza': 1}
 - Feature demand: {'mutuo': 3, 'affitto': 2}
+
+## Chat top topics
+
 
 ## Content opportunities (sample)
 

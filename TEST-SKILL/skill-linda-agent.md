@@ -97,3 +97,29 @@ Job cron-matrix: `linda_agent_cycle` (venerdì 05:00 UTC, gate 14 gg nel cycle s
 Sequenza: CONTEXT → OBSERVE (ingest `data/linda-*`) → VERIFY → ACT (solo GREEN) → LEARN (archive FAQ).
 
 Dettaglio: `righetto-premortem-guardian/INTEGRATION.md` + `LINDA-AGENT-INTEGRATION.md`.
+
+## 13. Phase 2 — Intent log, live benchmark, knowledge temporale
+
+### Intent log anonimo (Supabase)
+
+- Tabella: `sql/linda-chat-intents.sql` → eseguire in Supabase SQL Editor
+- Frontend: `logLindaIntent()` in `js/chatbot.js` — **no testo messaggio**, solo `msg_hash` + metadati
+- Snapshot: `scripts/linda-intents-snapshot.py` → `data/linda-intents-snapshot-latest.json` (richiede `SUPABASE_KEY` service_role in CI)
+
+### Live benchmark
+
+- Query: `data/linda-benchmark-queries.json`
+- Script: `scripts/linda-live-benchmark.py` → `data/linda-live-benchmark-latest.json`
+- Integrato in quality score (`live_benchmark` weight 15%)
+
+### Knowledge temporale strutturato
+
+- Fonte approvata: `data/linda-knowledge-temporal.json` (`source`, `last_verified`, `review_date`, `status`)
+- Solo `status=approved` in FAQ/risposte; `proposals` = YELLOW (no auto-publish)
+- Validazione: `scripts/linda-temporal-knowledge.py` → `data/linda-knowledge-temporal-latest.json`
+
+### Ciclo aggiornato
+
+Sub-script in `linda-agent-cycle.py`: discovery → intents_snapshot → question_intelligence → live_benchmark → temporal_knowledge → quality_benchmark → property_index.
+
+Bump `chatbot.js?v=N` dopo modifiche intent logging.
