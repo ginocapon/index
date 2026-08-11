@@ -15,7 +15,9 @@ description: >-
 2. **`TEST-SKILL/skill-editorial-queue.md`** — sequenza automatica completa
 3. **`data/gsc-keywords-priority.json`** → `queries_limena_top_volume` per batch Limena locale
 4. **Discovery web settimanale:** `python scripts/web-keyword-discovery.py` → 5 proposte + brief hero
-5. Se `scheduled` < 3 → discovery aggiunge `proposed` «pubblica blog», «prossimo articolo», venerdì + modifica repo, `/blog` senza tema specifico → prendi prossimo item coda.
+5. Se `scheduled` < 3 → discovery aggiunge `proposed`
+
+**Trigger autonomi:** «pubblica blog», «prossimo articolo», venerdì + modifica repo, `/blog` senza tema specifico → prendi prossimo item coda.
 
 ## Prima di iniziare (BLOCCANTE)
 
