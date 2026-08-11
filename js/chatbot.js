@@ -1550,7 +1550,467 @@ const FAQ_DATA = [
     r: '🏢 **Loft aziendali e cucina condivisa**\n\nModello per trasferte **settimane/mesi** lungo la cintura **Padova–Vicenza** (SS, cantieri, stabilimenti):\n\n• **Loft** — autonomia in camera + cucina e soggiorno comuni\n• **Hotel** — pernottamento breve con servizi in struttura\n\nHR spesso preferisce cucina condivisa: il rimborso giornaliero deve coprire **tre pasti** — cucinare in sede costa meno di hotel + ristoranti.\n\nPilota consigliato: circa **10 unità** per testare domanda prima di scalare.\n\nCerchi soluzione residenziale classica o corporate? Ti oriento.',
     blog: 'blog-loft-aziende-cucina-condivisa-padova-vicenza-2026',
     blogTitle: 'Loft aziende Padova-Vicenza'
-  }
+  },
+
+  // ── DISCOVERY BI-QUINDICINALE 2026-08-11 (linda-faq-biweekly-discovery) ──
+  {
+    k: ['agevolazioni-prima-casa-2026', 'quali sono requisiti per ottenere', 'agevolazioni-prima-casa'],
+    r: '💡 Per ottenere le agevolazioni prima casa nel 2026 bisogna: trasferire la residenza nel Comune dell\'immobile entro 18 mesi dal rogito, non possedere altri immobili acquistati con le stesse agevolazioni su tutto il territorio nazionale, non possedere altri immobili nello stesso Comune (anche senza agevolazioni). L\'immobile non deve rientrare nelle categorie catastali A1 (abitazioni signorili), A8 (ville) e A9 (castelli e palazzi storici).\n\n📖 Approfondimento: *Agevolazioni Prima Casa 2026: Bonus e Requisiti* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-agevolazioni-prima-casa-2026',
+    blogTitle: 'Agevolazioni Prima Casa 2026: Bonus e Requisiti'
+  },
+  {
+    k: ['ape-prestazione-energetica-acquisto', 'l\'ape puo\' essere vecchio?', 'ape-prestazione-energetica-acquisto-pado'],
+    r: '💡 Si: ha decadenza legale, va controllata la validita\'.\n\n📖 Approfondimento: *APE e prestazione energetica nell\'acquisto di casa nel Padovano…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-ape-prestazione-energetica-acquisto-padova-2026',
+    blogTitle: 'APE e prestazione energetica nell\'acquisto di casa nel Padovano…'
+  },
+  {
+    k: ['appartamento-limena-guida-acquisto', 'come acquistare appartamento a limena nel 2026?', 'acquistare', 'appartamento', 'limena'],
+    r: '💡 Definire budget e mutuo, consultare OMI ADE per zona e tipologia, visitare con checklist documentale, confrontare comparabili e presentare proposta scritta.\n\n📖 Approfondimento: *Appartamento Limena: Guida acquisto 2026* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-appartamento-limena-guida-acquisto-2026',
+    blogTitle: 'Appartamento Limena: Guida acquisto 2026'
+  },
+  {
+    k: ['caparra-confirmatoria-compravendita', 'cos\'e\'', 'caparra', 'confirmatoria', 'compravendita', 'cos\'e\' caparra confirmatoria compravendita immobiliare'],
+    r: '💡 La caparra confirmatoria e\' una somma di denaro che il compratore versa al venditore al momento della firma del contratto preliminare (compromesso) come garanzia dell\'impegno reciproco. E\' disciplinata dall\'Art. 1385 del Codice Civile. Se la compravendita va a buon fine, la caparra viene detratta dal prezzo di acquisto. Se una parte e\' inadempiente, l\'altra puo\' recedere trattenendo la caparra (se inadempiente e\' il compratore) o richiedendo il doppio della caparra versata (se inadempiente e\' il venditore).\n\n📖 Approfondimento: *Caparra Confirmatoria: Guida Completa Compravendita Padova* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-caparra-confirmatoria-padova',
+    blogTitle: 'Caparra Confirmatoria: Guida Completa Compravendita Padova'
+  },
+  {
+    k: ['checklist-verifiche-prima-compromesso', 'cosa deve dare il venditore?', 'deve', 'dare', 'venditore', 'checklist-verifiche-prima-compromesso-pa'],
+    r: '💡 APE, planimetria, visura, certificazioni impianti, certificazione condominio.\n\n📖 Approfondimento: *Checklist verifiche prima del compromesso a Padova 2026…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-checklist-verifiche-prima-compromesso-padova-2026',
+    blogTitle: 'Checklist verifiche prima del compromesso a Padova 2026…'
+  },
+  {
+    k: ['conviene comprare o affittare casa a padova nel 2026?', 'comprare-affittare-confronto-padova', 'conviene', 'comprare', 'affittare', 'casa'],
+    r: '💡 Su un orizzonte di 10-20 anni, comprare casa a Padova conviene nella maggior parte dei casi. Con un mutuo a tasso fisso la rata resta costante mentre l\'affitto cresce con l\'inflazione. Dopo 20 anni di affitto si spendono circa 250.000 euro senza acquisire patrimonio; con l\'acquisto si spendono circa 210.000 euro e si possiede un immobile del valore di 190.000 euro o piu\'. L\'affitto conviene solo per permanenze inferiori ai 5-7 anni.\n\n📖 Approfondimento: *Comprare o Affittare Casa nel Padovano? Analisi Dati Reali su 20 Anni* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-comprare-affittare-padova',
+    blogTitle: 'Comprare o Affittare Casa nel Padovano? Analisi Dati Reali su 20 Anni'
+  },
+  {
+    k: ['costi-proprieta-acquisto-possesso-vendita', 'plusvalenza sempre al 26%?', 'plusvalenza', 'sempre', 'plusvalenza sempre', 'costi-proprieta-acquisto-possesso-vendit'],
+    r: '💡 Regime ordinario persone fisiche: 26% su redditi diversi — verificare esclusioni con commercialista.\n\n📖 Approfondimento: *Costi proprietà immobiliare Padova 2026: acquisto, possesso…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-costi-proprieta-acquisto-possesso-vendita-padova-2026',
+    blogTitle: 'Costi proprietà immobiliare Padova 2026: acquisto, possesso…'
+  },
+  {
+    k: ['dieci-errori-acquisto-casa-padova', 'qual è l\'errore più costoso?', 'qual', 'l\'errore', 'più', 'costoso'],
+    r: '💡 Spesso compromesso senza clausola sospensiva mutuo o ignorare difformità urbanistiche.\n\n📖 Approfondimento: *Dieci errori da evitare nell\'acquisto casa a Padova 2026* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-dieci-errori-acquisto-casa-padova-2026',
+    blogTitle: 'Dieci errori da evitare nell\'acquisto casa a Padova 2026'
+  },
+  {
+    k: ['planimetria-catastale-verifica-rogito', 'chi paga il tecnico?', 'chi', 'paga', 'tecnico', 'chi paga tecnico'],
+    r: '💡 Si concorda tra le parti in base alla convenienza economica e ai tempi.\n\n📖 Approfondimento: *Planimetria catastale e compravendita nel Padovano: controlli…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-planimetria-catastale-compravendita-padova-2026',
+    blogTitle: 'Planimetria catastale e compravendita nel Padovano: controlli…'
+  },
+  {
+    k: ['quattro-imposte-rogitio-prima-casa', 'da privato o da costruttore cambia tutto?', 'privato', 'costruttore', 'cambia', 'tutto'],
+    r: '💡 Sì: da privato registro; da impresa con IVA aliquota sostitutiva.\n\n📖 Approfondimento: *Le quattro imposte al rogito prima casa a Padova 2026: IVA…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-quattro-imposte-rogitio-prima-casa-padova-2026',
+    blogTitle: 'Le quattro imposte al rogito prima casa a Padova 2026: IVA…'
+  },
+  {
+    k: ['vigonza-rubano-comprare-casa-cintura', 'serve il geometra prima dell\'offerta?', 'geometra', 'prima', 'dell\'offerta'],
+    r: '💡 Consigliato se ci sono dubbi urbanistici o difformita\' tra planimetrie e stato dei luoghi.\n\n📖 Approfondimento: *Vigonza e Rubano: guida all\'acquisto nella cintura del capoluogo…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-vigonza-rubano-comprare-casa-cintura-2026',
+    blogTitle: 'Vigonza e Rubano: guida all\'acquisto nella cintura del capoluogo…'
+  },
+  {
+    k: ['fimaa-q1-2026-canoni-veneto', 'quanti operatori vedono domanda in crescita?', 'quanti', 'operatori', 'vedono', 'domanda'],
+    r: '💡 Il 64% nel Sentiment Q1 2026 FIMAA.\n\n📖 Approfondimento: *Affitti Q1 2026: canoni FIMAA e studenti Padova* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-affitti-canoni-fimaa-q1-2026-padova',
+    blogTitle: 'Affitti Q1 2026: canoni FIMAA e studenti Padova'
+  },
+  {
+    k: ['affitto-breve-padova-rendimenti-regole', 'quanto rende un affitto breve a padova nel 2026?', 'quanto', 'rende', 'affitto', 'breve'],
+    r: '💡 Un affitto breve a Padova nel 2026 rende in media tra il 6% e il 10% lordo annuo, a seconda della zona e della gestione. Il centro storico e Prato della Valle raggiungono rendimenti lordi dell\'8-10%, con una tariffa media di 90-130 euro a notte per un bilocale e un\'occupancy media del 70-75%. Al netto di cedolare secca (26%), commissioni piattaforma (15-20%), pulizie e manutenzione, il rendimento netto si attesta tra il 4% e il 6,5%.\n\n📖 Approfondimento: *Affitto Breve a Padova 2026: Rendimenti, Regole e Opportunit&agrave;* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-affitto-breve-padova-2026',
+    blogTitle: 'Affitto Breve a Padova 2026: Rendimenti, Regole e Opportunit&agrave;'
+  },
+  {
+    k: ['affitto-transitorio-durata', 'può', 'applicare', 'cedolare', 'secca', 'può applicare cedolare secca sull\'affitto'],
+    r: '💡 Sì, se il locatore opta per il regime cedolare secca e rispetta i requisiti previsti (immobile in zone omogenee A o B, un solo immobile locato, ecc.). Il transitorio non esclude la cedolare, ma va verificato con il commercialista il corretto inquadramento rispetto ad altri contratti attivi.\n\n📖 Approfondimento: *Affitto Transitorio Padova 2026: Durata, Requisiti e Guida Completa* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-affitto-transitorio-padova-durata-2026',
+    blogTitle: 'Affitto Transitorio Padova 2026: Durata, Requisiti e Guida Completa'
+  },
+  {
+    k: ['appartamento-affitto-limena-contratto', 'registrazione obbligatoria?', 'registrazione', 'obbligatoria', 'registrazione obbligatoria'],
+    r: '💡 Sì, entro 30 giorni all\'Agenzia delle Entrate; ricevuta necessaria per detrazioni e certificazioni.\n\n💰 Compenso mediazione: L\'importo e le condizioni economiche **non sono pubblicati online**: vengono concordate **in sede** al momento del mandato.\n\n📖 Approfondimento: *Appartamento affitto Limena: Contratto 2026* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-appartamento-affitto-limena-contratto-2026',
+    blogTitle: 'Appartamento affitto Limena: Contratto 2026'
+  },
+  {
+    k: ['edilcassa-fondo-garanzia-locazione-lavoratori', 'cos\'è il fondo 250.000 euro edilcassa veneto?', 'cos\'è', 'fondo', '250', '000'],
+    r: '💡 Pool garanzia nel contratto regionale edilizia 2025/2026 per imprese/lavoratori iscritti.\n\n📖 Approfondimento: *Housing lavoratori Veneto 2026: Edilcassa fondo 250.000€* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-housing-lavoratori-veneto-edilcassa-2026',
+    blogTitle: 'Housing lavoratori Veneto 2026: Edilcassa fondo 250.000€'
+  },
+  {
+    k: ['housing-market-guide', 'is padua expensive in 2026?', 'padua', 'expensive', '2026', 'padua expensive 2026'],
+    r: '💡 Varies by zone — use OMI bands, not generic averages.\n\n📖 Approfondimento: *Padua housing market guide 2026 | Prices & zones EN* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-padova-housing-market-guide-2026',
+    blogTitle: 'Padua housing market guide 2026 | Prices & zones EN'
+  },
+  {
+    k: ['posti-letto-esu-camplus-pnrr-veneto', 'quante città venete ampliano i posti letto?', 'quante', 'città', 'venete', 'ampliano'],
+    r: '💡 Padova, Vicenza e Venezia sono i poli principali con ESU, privati e PNRR.\n\n📖 Approfondimento: *Studentati Veneto 2026: nuovi posti letto Padova Vicenza Venezia |…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-studentati-veneto-2026-posti-letto',
+    blogTitle: 'Studentati Veneto 2026: nuovi posti letto Padova Vicenza Venezia |…'
+  },
+  {
+    k: ['casa-querini-calmierati-vicenza', 'righetto opera a vicenza?', 'righetto', 'opera', 'vicenza', 'righetto opera vicenza'],
+    r: '💡 Sì, tra i 101 comuni serviti — locazioni e valutazioni.\n\n📖 Approfondimento: *Vicenza residenze universitarie calmierate 2026: PNRR e Casa…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-vicenza-residenze-universitarie-calmierate-2026',
+    blogTitle: 'Vicenza residenze universitarie calmierate 2026: PNRR e Casa…'
+  },
+  {
+    k: ['domande-appuntamento-agenzia-pretese', 'devo chiedere subito delle difformità edilizie?', 'devo', 'chiedere', 'subito', 'delle'],
+    r: '💡 Sì, se sospetti tamponamenti, verande chiuse o bagno spostato. Chiedi cosa è titolato, cosa è difforme e se esiste percorso di sanatoria (CILA, SCIA, sanatoria).\n\n📖 Approfondimento: *5 domande in agenzia immobiliare Padova* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-5-domande-appuntamento-agenzia-padova-2026',
+    blogTitle: '5 domande in agenzia immobiliare Padova'
+  },
+  {
+    k: ['errori-visita-immobile-etichetta', 'mandare', 'parente', 'amico', 'posso mandare parente amico vedere', '5-errori-visita-immobile-padova'],
+    r: '💡 No, salvo casi concordati esplicitamente. Il diretto interessato deve vedere personalmente: mandare terzi è la peggiore perdita di tempo per te (non capisci l\'immobile) e per l\'agente (appuntamento non produttivo).\n\n📖 Approfondimento: *5 errori in visita immobile Padova* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-5-errori-visita-immobile-padova-2026',
+    blogTitle: '5 errori in visita immobile Padova'
+  },
+  {
+    k: ['gestione-spese-casa-possesso-padova', 'questo articolo sostituisce un commercialista?', 'questo', 'articolo', 'sostituisce', 'commercialista'],
+    r: '💡 No: per IMU e detrazioni servono pareri professionali aggiornati.\n\n📖 Approfondimento: *Gestione spese casa dopo l\'acquisto a Padova 2026: energia, IMU…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-gestione-spese-casa-risparmio-padova-2026',
+    blogTitle: 'Gestione spese casa dopo l\'acquisto a Padova 2026: energia, IMU…'
+  },
+  {
+    k: ['italy-rental-market-positive-start', 'did italian rents rise in january 2026?', 'did', 'italian', 'rents', 'rise'],
+    r: '💡 Idealista reports about +1% y/y asking rents — secondary source.\n\n📖 Approfondimento: *Italy rental market +1% January 2026 | Padua area guide* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-italy-rental-market-positive-start-january-2026',
+    blogTitle: 'Italy rental market +1% January 2026 | Padua area guide'
+  },
+  {
+    k: ['loft-aziende-cucina-condivisa-vicenza', 'che differenza c\'è tra loft aziendale e hotel?', 'differenza', 'c\'è', 'tra', 'loft'],
+    r: '💡 Il loft adiacente offre autonomia con cucina condivisa e soggiorno comune per soggiorni di settimane o mesi. L\'hotel resta orientato al pernottamento breve con servizi in struttura.\n\n📖 Approfondimento: *Loft aziende Padova-Vicenza: cucina condivisa HR 2026* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-loft-aziende-cucina-condivisa-padova-vicenza-2026',
+    blogTitle: 'Loft aziende Padova-Vicenza: cucina condivisa HR 2026'
+  },
+  {
+    k: ['rental-contract-guide', '4+4 or 3+2?', 'rental-contract-padova-guide'],
+    r: '💡 4+4 free rent; 3+2 agreed rent within local caps with tax benefits.\n\n📖 Approfondimento: *Rental contract Padua 2026: 4+4, 3+2 guide EN* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-rental-contract-padova-guide-2026',
+    blogTitle: 'Rental contract Padua 2026: 4+4, 3+2 guide EN'
+  },
+  {
+    k: ['student-rentals-guide', 'when to search for september?', 'search', 'for', 'september', 'student-rentals-padova-guide'],
+    r: '💡 May–July best; August tighter.\n\n📖 Approfondimento: *Student rentals Padua 2026: zones, contracts, tips* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-student-rentals-padova-guide-2026',
+    blogTitle: 'Student rentals Padua 2026: zones, contracts, tips'
+  },
+  {
+    k: ['condono-edilizio-manovra-2026', 'balconi e tettoie rientrano?', 'balconi', 'tettoie', 'rientrano', 'balconi tettoie rientrano'],
+    r: '💡 Nelle ricostruzioni stampa compaiono portici, tettoie, balconi e ristrutturazioni senza aumento volumetria — verificare testo finale se approvato.\n\n📖 Approfondimento: *Condono edilizio 2026: proposte in Manovra | Guida Padova* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-condono-edilizio-proposte-2026',
+    blogTitle: 'Condono edilizio 2026: proposte in Manovra | Guida Padova'
+  },
+  {
+    k: ['mercato-piazzola-sul-brenta', 'il comune e\' piccolo: la banca finanzia?', 'comune', 'piccolo', 'banca', 'finanzia'],
+    r: '💡 Dipende da merito creditizio, LTV e perizia. Comparabili recenti e coerenti supportano la pratica.\n\n📖 Approfondimento: *Mercato immobiliare a Piazzola sul Brenta nel 2026: come leggere…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-mercato-immobiliare-piazzola-sul-brenta-2026',
+    blogTitle: 'Mercato immobiliare a Piazzola sul Brenta nel 2026: come leggere…'
+  },
+  {
+    k: ['nuove-costruzioni-veneto-plus-14', 'classe energetica tipica?', 'classe', 'energetica', 'tipica', 'classe energetica tipica'],
+    r: '💡 Spesso A/B su nuovo — verificare APE di ogni progetto.\n\n📖 Approfondimento: *Nuove costruzioni Veneto 2026: +14,6% e cintura PD* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-nuove-costruzioni-mercato-veneto-2026-padova',
+    blogTitle: 'Nuove costruzioni Veneto 2026: +14,6% e cintura PD'
+  },
+  {
+    k: ['previsioni-immobiliari-scenari-geopolitica', 'l\'immagine', 'copertina', 'legata', 'conflitto', 'l\'immagine copertina legata conflitto attuale'],
+    r: '💡 È un\'immagine stilizzata in bianco e nero che evoca incertezza storica, non una mappa operativa o una notizia.\n\n📖 Approfondimento: *Previsioni immobiliari e scenari di conflitto: come usarle senza…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-previsioni-immobiliari-scenari-geopolitica-2026',
+    blogTitle: 'Previsioni immobiliari e scenari di conflitto: come usarle senza…'
+  },
+  {
+    k: ['prospettive-mercato-residenziale', 'report', 'nazionali', 'sostituiscono', 'l\'omi', 'report nazionali sostituiscono l\'omi sul'],
+    r: '💡 No: forniscono contesto aggregato. Per quotazioni ufficiali per zona usare l\'Osservatorio del Mercato Immobiliare e confronti sul campo.\n\n📖 Approfondimento: *Prospettive mercato residenziale Italia: come leggere le ricerche…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-prospettive-mercato-residenziale-italia-2026',
+    blogTitle: 'Prospettive mercato residenziale Italia: come leggere le ricerche…'
+  },
+  {
+    k: ['barometro-mutui-crif-padova', '161.059 euro è il prezzo medio casa?', '161', '059', 'euro', 'prezzo'],
+    r: '💡 No: è l\'importo medio richiesto a mutuo, non il prezzo di vendita.\n\n📖 Approfondimento: *Barometro mutui CRIF Q1 2026: domanda -12,4%, importo medio…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-barometro-mutui-crif-padova-2026',
+    blogTitle: 'Barometro mutui CRIF Q1 2026: domanda -12,4%, importo medio…'
+  },
+  {
+    k: ['mutui-casa-padova-guida-pillar', 'esistono agevolazioni mutuo under 36 nel 2026?', 'esistono', 'agevolazioni', 'mutuo', 'under'],
+    r: '💡 Nel 2026 il Fondo Garanzia Prima Casa Consap e\' stato prorogato: offre garanzia statale all\'80% per under 36 con ISEE fino a 40.000 euro, permettendo di ottenere mutui fino al 100% del valore dell\'immobile. Le agevolazioni fiscali under 36 (esenzione imposta di registro, ipotecaria e catastale) sono state ridimensionate, ma restano vantaggi significativi per i giovani acquirenti a Padova.\n\n📖 Approfondimento: *Mutui Casa nel Padovano 2026: Tassi Aggiornati e Migliori Offerte* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-mutui-casa-padova-2026',
+    blogTitle: 'Mutui Casa nel Padovano 2026: Tassi Aggiornati e Migliori Offerte'
+  },
+  {
+    k: ['mutui-tasso-fisso-bancaitalia', 'perche\' molte famiglie scelgono il tasso fisso?', 'perche\'', 'molte', 'famiglie', 'scelgono'],
+    r: '💡 Il tasso fisso offre rate prevedibili per tutta la durata del piano, utile quando i mercati finanziari sono volatili. La Banca centrale europea influenza i tassi di riferimento; chi preferisce certezza spesso opta per il fisso dopo aver confrontato spread e durata con il proprio intermediario.\n\n📖 Approfondimento: *Mutui a tasso fisso nel Padovano: dati Banca d\'Italia e…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-mutui-tasso-fisso-bancaitalia-padova-2026',
+    blogTitle: 'Mutui a tasso fisso nel Padovano: dati Banca d\'Italia e…'
+  },
+  {
+    k: ['mutuo-fisso-variabile', 'meglio il tasso fisso o variabile nel 2026?', 'meglio', 'tasso', 'fisso', 'variabile'],
+    r: '💡 Nel 2026 il tasso fisso e\' la scelta prevalente e generalmente consigliata. La differenza tra fisso (2,75%-3,30%) e variabile (2,30%-2,80%) e\' di soli 0,5 punti percentuali, storicamente molto ridotta. Il 90% dei richiedenti in Italia sceglie il fisso. Il variabile conviene solo per mutui di breve durata (10-15 anni) o se si prevede di estinguere anticipatamente il finanziamento.\n\n📖 Approfondimento: *Mutuo Tasso Fisso o Variabile nel 2026? Guida alla Scelta nel Padovano* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-mutuo-fisso-variabile-padova-2026',
+    blogTitle: 'Mutuo Tasso Fisso o Variabile nel 2026? Guida alla Scelta nel Padovano'
+  },
+  {
+    k: ['permuta-immobiliare-padova-operativa', 'la permuta evita le imposte?', 'permuta', 'evita', 'imposte', 'permuta evita imposte'],
+    r: '💡 No: vanno calcolate in base ai casi con il notaio.\n\n📖 Approfondimento: *Permuta immobiliare nel Padovano: come funziona e quali cautele…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-permuta-immobiliare-padova-2026',
+    blogTitle: 'Permuta immobiliare nel Padovano: come funziona e quali cautele…'
+  },
+  {
+    k: ['tribloc-gozzi-nzeb-riuso-uffici', 'impatta sui canoni liberi?', 'impatta', 'sui', 'canoni', 'liberi'],
+    r: '💡 Aumenta offerta strutturata; centro resta premium.\n\n📖 Approfondimento: *Residenze green Padova Tribloc 2026: 180 camere NZEB* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-residenze-green-padova-tribloc-2026',
+    blogTitle: 'Residenze green Padova Tribloc 2026: 180 camere NZEB'
+  },
+  {
+    k: ['appartamento-nuova-costruzione-limena', 'e\' possibile personalizzare le finiture?', 'possibile', 'personalizzare', 'finiture', 'possibile personalizzare finiture'],
+    r: '💡 Si, essendo in fase di costruzione gli acquirenti possono personalizzare finiture, materiali e dettagli interni.\n\n📖 Approfondimento: *Appartamento Nuova Costruzione Limena: 101 mq Classe A4* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-appartamento-nuova-costruzione-limena',
+    blogTitle: 'Appartamento Nuova Costruzione Limena: 101 mq Classe A4'
+  },
+  {
+    k: ['la direttiva case green obbliga a ristrutturare casa?', 'direttiva-case-green-limena', 'direttiva', 'case', 'green', 'obbliga'],
+    r: '💡 Non esiste un obbligo diretto di ristrutturare la propria abitazione privata, ma gli standard minimi (MEPS) potrebbero rendere difficile vendere o affittare immobili in classi energetiche basse. Ogni Stato membro definirà le modalità applicative entro il 2026.\n\n📖 Approfondimento: *Direttiva Case Green: Cosa Cambia a Padova e Limena* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-direttiva-case-green-limena-padova',
+    blogTitle: 'Direttiva Case Green: Cosa Cambia a Padova e Limena'
+  },
+  {
+    k: ['gruppo-immobiliare-righetto-limena', 'pubblicate commissioni online?', 'pubblicate', 'commissioni', 'online', 'pubblicate commissioni online'],
+    r: '💡 No — compenso di mediazione concordato in sede nel mandato.\n\n💰 Compenso mediazione: L\'importo e le condizioni economiche **non sono pubblicati online**: vengono concordate **in sede** al momento del mandato.\n\n📖 Approfondimento: *Gruppo Immobiliare Righetto Limena 2026* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-gruppo-immobiliare-righetto-limena-2026',
+    blogTitle: 'Gruppo Immobiliare Righetto Limena 2026'
+  },
+  {
+    k: ['documenti-compravendita-rogito', 'il preliminare va registrato?', 'preliminare', 'registrato', 'preliminare registrato', 'documenti-compravendita-rogito-padova'],
+    r: '💡 Sì, va registrato all\'Agenzia delle Entrate con imposta di registro e bollo secondo le regole applicabili.\n\n💰 Compenso mediazione: L\'importo e le condizioni economiche **non sono pubblicati online**: vengono concordate **in sede** al momento del mandato.\n\n📖 Approfondimento: *Documenti necessari per la compravendita di un immobile: guida…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-documenti-compravendita-rogito-padova-2026',
+    blogTitle: 'Documenti necessari per la compravendita di un immobile: guida…'
+  },
+  {
+    k: ['l\'home staging funziona davvero per vendere prima?', 'home-staging-vendita-padova', 'l\'home', 'staging', 'funziona', 'davvero'],
+    r: '💡 Si\'. I dati di settore confermano che un immobile preparato con Home Staging si vende dal 20% al 50% piu\' velocemente e riceve offerte piu\' alte. Nella nostra esperienza a Padova e provincia, gli immobili presentati professionalmente riducono i tempi di vendita da una media di 6-8 mesi a 2-3 mesi e subiscono meno ribassi in trattativa.\n\n📖 Approfondimento: *Home Staging Padova: Vendere Casa Prima e Meglio* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-home-staging-padova',
+    blogTitle: 'Home Staging Padova: Vendere Casa Prima e Meglio'
+  },
+  {
+    k: ['stock-vendita-italia-q1-minus-5', 'meno annunci vuol dire prezzi più alti?', 'meno', 'annunci', 'vuol', 'dire'],
+    r: '💡 Non automaticamente: prezzi dipendono da domanda, qualità energetica e tassi mutuo; stock ridotto può accentuare competizione su immobili pronti.\n\n📖 Approfondimento: *Stock case in vendita Italia: -5% nel Q1 2026 | Guida Padova* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-offerta-stock-vendita-italia-2026',
+    blogTitle: 'Stock case in vendita Italia: -5% nel Q1 2026 | Guida Padova'
+  },
+  {
+    k: ['agenzia-immobiliare-servizi-top-padova', 'rispondete di notte?', 'rispondete', 'notte', 'rispondete notte', 'agenzia-immobiliare-top-servizi-padova'],
+    r: '💡 Fuori orario l\'orientamento passa dalla chat e dai moduli; in orario telefono e WhatsApp aziendale.\n\n📖 Approfondimento: *Cosa distingue un\'agenzia locale di alto livello: risposte…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-agenzia-immobiliare-top-servizi-padova-2026',
+    blogTitle: 'Cosa distingue un\'agenzia locale di alto livello: risposte…'
+  },
+  {
+    k: ['lf0230', 'rif lf0230', 'informazioni sull\'immobile rif. lf0230', 'informazioni', 'sull\'immobile', 'rif'],
+    r: '🏠 **AFFITTO LIMENA 2 CAMERE ARREDATO**\n\nAppartamento · 100 m² · 3 locali · € 650 · Rif. LF0230 · Righetto Immobiliare Padova\n\nPuoi vedere foto, planimetria e virtual tour nella scheda del catalogo. Per visita o dettagli aggiuntivi contattaci con il codice **LF0230**.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+  },
+  {
+    k: ['come prenotare visita per lf0001', 'visita lf0001', 'prenota lf0001', 'visita immobile', 'lf0001'],
+    r: '💡 Per visitare l\'immobile **LF0001** (AFFITTO LIMENA MINI ARREDATO) chiama **049.8843484**, usa il form contatti o chiedi qui in chat indicando il codice.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+  },
+  {
+    k: ['comprare-casa-padova-guida-pillar', 'mercato', 'immobiliare', 'capoluogo', 'euganeo', 'mercato immobiliare capoluogo euganeo 2026'],
+    r: '💡 Per «Il mercato immobiliare nel capoluogo euganeo nel 2026: conviene investire?» abbiamo trattato l\'argomento nell\'articolo *Comprare Casa nel Padovano nel 2026: Guida Definitiva Passo dopo Passo* con focus su Padova e provincia.\n\n📖 Approfondimento: *Comprare Casa nel Padovano nel 2026: Guida Definitiva Passo dopo Passo* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-comprare-casa-padova-guida-2026',
+    blogTitle: 'Comprare Casa nel Padovano nel 2026: Guida Definitiva Passo dopo Passo'
+  },
+  {
+    k: ['limena-vicino-comprare', 'spostamenti verso il centro di padova?', 'spostamenti', 'verso', 'centro', 'padova'],
+    r: '💡 Per «Spostamenti verso il centro di Padova?» abbiamo trattato l\'argomento nell\'articolo *Limena e dintorni di Padova: perché comprare vicino al capoluogo…* con focus su Padova e provincia.\n\n📖 Approfondimento: *Limena e dintorni di Padova: perché comprare vicino al capoluogo…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-limena-vicino-padova-comprare-2026',
+    blogTitle: 'Limena e dintorni di Padova: perché comprare vicino al capoluogo…'
+  },
+  {
+    k: ['limena-centro-confronto-acquisto', 'confronto', 'prezzi', 'quotazioni', 'metro', 'confronto prezzi quotazioni metro quadro'],
+    r: '💡 Per «Confronto prezzi: quotazioni al metro quadro e costo reale?» abbiamo trattato l\'argomento nell\'articolo *Limena o Centro Padova? Dove Comprare Casa nel 2026: Confronto Dati* con focus su Padova e provincia.\n\n📖 Approfondimento: *Limena o Centro Padova? Dove Comprare Casa nel 2026: Confronto Dati* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-limena-vs-padova-centro-dove-comprare-2026',
+    blogTitle: 'Limena o Centro Padova? Dove Comprare Casa nel 2026: Confronto Dati'
+  },
+  {
+    k: ['affitti-limena', 'perché', 'non', 'pubblichiamo', 'omi', 'perché non pubblichiamo omi per'],
+    r: '💡 Per «Perché non pubblichiamo €/mq OMI per Limena in questo articolo?» abbiamo trattato l\'argomento nell\'articolo *Affitti Limena 2026: Canoni, Quartieri e Guida Completa* con focus su Padova e provincia.\n\n📖 Approfondimento: *Affitti Limena 2026: Canoni, Quartieri e Guida Completa* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-affitti-limena-2026',
+    blogTitle: 'Affitti Limena 2026: Canoni, Quartieri e Guida Completa'
+  },
+  {
+    k: ['affitti-padova-canoni-trend-2026', 'locazioni', 'temporanee', 'padovano', 'airbnb', 'locazioni temporanee padovano airbnb turismo'],
+    r: '💡 Per «Locazioni temporanee nel Padovano: Airbnb, turismo e rendimenti?» abbiamo trattato l\'argomento nell\'articolo *Affitti Padova 2026: Canoni in Crescita del +8%, Zone e Previsioni* con focus su Padova e provincia.\n\n📖 Approfondimento: *Affitti Padova 2026: Canoni in Crescita del +8%, Zone e Previsioni* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-affitti-padova-canoni-2026',
+    blogTitle: 'Affitti Padova 2026: Canoni in Crescita del +8%, Zone e Previsioni'
+  },
+  {
+    k: ['guida-affitto-studenti-padova', 'tipologie contrattuali: quale scegliere?', 'tipologie', 'contrattuali', 'quale', 'scegliere'],
+    r: '💡 Per «Tipologie contrattuali: quale scegliere?» abbiamo trattato l\'argomento nell\'articolo *Affitto Studenti Padova 2026: Zone, Prezzi e Guida Completa* con focus su Padova e provincia.\n\n📖 Approfondimento: *Affitto Studenti Padova 2026: Zone, Prezzi e Guida Completa* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-affitto-studenti-padova',
+    blogTitle: 'Affitto Studenti Padova 2026: Zone, Prezzi e Guida Completa'
+  },
+  {
+    k: ['checklist-contratto-studenti-padova', 'contratto: tipologia e obblighi?', 'contratto', 'tipologia', 'obblighi', 'contratto tipologia obblighi'],
+    r: '💡 Per «Contratto: tipologia e obblighi?» abbiamo trattato l\'argomento nell\'articolo *Checklist affitto per studenti a Padova 2026: contratto, cauzione…* con focus su Padova e provincia.\n\n📖 Approfondimento: *Checklist affitto per studenti a Padova 2026: contratto, cauzione…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-checklist-affitto-studenti-padova-2026',
+    blogTitle: 'Checklist affitto per studenti a Padova 2026: contratto, cauzione…'
+  },
+  {
+    k: ['contratto-affitto-tipologie-padova', 'vantaggi fiscali del canone concordato?', 'vantaggi', 'fiscali', 'canone', 'concordato'],
+    r: '💡 Per «Vantaggi fiscali del canone concordato?» abbiamo trattato l\'argomento nell\'articolo *Contratto Affitto Padova 2026: Guida Canone Concordato* con focus su Padova e provincia.\n\n📖 Approfondimento: *Contratto Affitto Padova 2026: Guida Canone Concordato* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-contratto-affitto-padova',
+    blogTitle: 'Contratto Affitto Padova 2026: Guida Canone Concordato'
+  },
+  {
+    k: ['emergenza-abitativa-padova-dati', 'numeri', 'crisi', 'degli', 'alloggi', 'numeri crisi degli alloggi italia'],
+    r: '💡 Per «I numeri della crisi degli alloggi in Italia e nel Padovano?» abbiamo trattato l\'argomento nell\'articolo *Emergenza Casa Padova 2026: Dati, Cause e Possibili Soluzioni* con focus su Padova e provincia.\n\n📖 Approfondimento: *Emergenza Casa Padova 2026: Dati, Cause e Possibili Soluzioni* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-emergenza-abitativa-padova-2026',
+    blogTitle: 'Emergenza Casa Padova 2026: Dati, Cause e Possibili Soluzioni'
+  },
+  {
+    k: ['quotazioni-locazioni-omi-istat-padova', 'ti e\' stato utile? lascia una recensione', 'stato', 'utile', 'lascia', 'una'],
+    r: '💡 Per «Ti e\' stato utile? Lascia una recensione» abbiamo trattato l\'argomento nell\'articolo *OMI Padova 2026: Quotazioni Affitti e Prezzi — Guida Ufficiale* con focus su Padova e provincia.\n\n📖 Approfondimento: *OMI Padova 2026: Quotazioni Affitti e Prezzi — Guida Ufficiale* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-quotazioni-locazioni-omi-istat-padova-2026',
+    blogTitle: 'OMI Padova 2026: Quotazioni Affitti e Prezzi — Guida Ufficiale'
+  },
+  {
+    k: ['il segmento studenti: la resa economica piu\' alta?', 'rendimento-locativo-quartieri-padova', 'segmento', 'studenti', 'resa', 'economica'],
+    r: '💡 Per «Il segmento studenti: la resa economica piu\' alta?» abbiamo trattato l\'argomento nell\'articolo *Rendimento Affitto Padova e Limena 2026: Calcolo Quartieri* con focus su Padova e provincia.\n\n📖 Approfondimento: *Rendimento Affitto Padova e Limena 2026: Calcolo Quartieri* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-rendimento-affitto-padova',
+    blogTitle: 'Rendimento Affitto Padova e Limena 2026: Calcolo Quartieri'
+  },
+  {
+    k: ['rubano-limena-affitto-lavoratori', 'arredato', 'semi', 'vuoto', 'arredato semi arredato vuoto cosa'],
+    r: '💡 Per «Arredato, semi-arredato o vuoto: cosa preferisce il mercato lavoratori?» abbiamo trattato l\'argomento nell\'articolo *Affitto Rubano e Limena per Lavoratori 2026: Guida Cintura Padova* con focus su Padova e provincia.\n\n📖 Approfondimento: *Affitto Rubano e Limena per Lavoratori 2026: Guida Cintura Padova* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-rubano-limena-affitto-lavoratori-2026',
+    blogTitle: 'Affitto Rubano e Limena per Lavoratori 2026: Guida Cintura Padova'
+  },
+  {
+    k: ['squilibrio-domanda-offerta-affitti', 'causa', 'crollo', 'permessi', 'edilizi', 'causa crollo permessi edilizi mdash'],
+    r: '💡 Per «Causa 1: il crollo dei permessi edilizi &mdash; -70% in vent\'anni?» abbiamo trattato l\'argomento nell\'articolo *Affitti Padova: Perch&eacute; la Domanda Supera l\'Offerta nel 2026* con focus su Padova e provincia.\n\n📖 Approfondimento: *Affitti Padova: Perch&eacute; la Domanda Supera l\'Offerta nel 2026* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-squilibrio-domanda-offerta-affitti-padova',
+    blogTitle: 'Affitti Padova: Perch&eacute; la Domanda Supera l\'Offerta nel 2026'
+  },
+  {
+    k: ['focus: puntare sul mattone con gli affitti a studenti?', 'investire-immobiliare-padova-rendimenti', 'focus', 'puntare', 'sul', 'mattone'],
+    r: '💡 Per «Focus: puntare sul mattone con gli affitti a studenti?» abbiamo trattato l\'argomento nell\'articolo *Investire in Immobili nel Padovano 2026: Guida Rendimenti* con focus su Padova e provincia.\n\n📖 Approfondimento: *Investire in Immobili nel Padovano 2026: Guida Rendimenti* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-investire-immobiliare-padova',
+    blogTitle: 'Investire in Immobili nel Padovano 2026: Guida Rendimenti'
+  },
+  {
+    k: ['novità urbanistiche e avvisi dal comune di limena?', 'mercato-immobiliare-limena', 'novità', 'urbanistiche', 'avvisi', 'dal'],
+    r: '💡 Per «Novità urbanistiche e avvisi dal Comune di Limena?» abbiamo trattato l\'argomento nell\'articolo *Mercato Immobiliare Limena 2026: Guida OMI, Territorio e Valori* con focus su Padova e provincia.\n\n📖 Approfondimento: *Mercato Immobiliare Limena 2026: Guida OMI, Territorio e Valori* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-mercato-immobiliare-limena-2026',
+    blogTitle: 'Mercato Immobiliare Limena 2026: Guida OMI, Territorio e Valori'
+  },
+  {
+    k: ['mercato-centro-storico-padova', 'ztl, vincoli e costi nascosti dell\'area storica?', 'ztl', 'vincoli', 'costi', 'nascosti'],
+    r: '💡 Per «ZTL, vincoli e costi nascosti dell\'area storica?» abbiamo trattato l\'argomento nell\'articolo *Immobili Centro Storico Padova 2026: Prezzi, Rendimenti e Analisi* con focus su Padova e provincia.\n\n📖 Approfondimento: *Immobili Centro Storico Padova 2026: Prezzi, Rendimenti e Analisi* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-mercato-immobiliare-padova-centro-2026',
+    blogTitle: 'Immobili Centro Storico Padova 2026: Prezzi, Rendimenti e Analisi'
+  },
+  {
+    k: ['mercato-sacrocuore-omi', 'quartiere', 'sacro', 'cuore', 'identità', 'quartiere sacro cuore identità riferimenti'],
+    r: '💡 Per «Quartiere Sacro Cuore: identità e riferimenti sul territorio?» abbiamo trattato l\'argomento nell\'articolo *Mercato Immobiliare Sacro Cuore Padova 2026: Guida OMI Zona D6* con focus su Padova e provincia.\n\n📖 Approfondimento: *Mercato Immobiliare Sacro Cuore Padova 2026: Guida OMI Zona D6* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-mercato-sacrocuore-padova-omi-2026',
+    blogTitle: 'Mercato Immobiliare Sacro Cuore Padova 2026: Guida OMI Zona D6'
+  },
+  {
+    k: ['prezzi-case-zona', 'semicentro', 'arcella', 'sacra', 'famiglia', 'semicentro arcella sacra famiglia guizza'],
+    r: '💡 Per «Semicentro: Arcella, Sacra Famiglia, Guizza &mdash; dove il mercato cresce di piu\'?» abbiamo trattato l\'argomento nell\'articolo *Prezzi Case Padova 2026 Zona per Zona: Mappa Completa e Previsioni* con focus su Padova e provincia.\n\n📖 Approfondimento: *Prezzi Case Padova 2026 Zona per Zona: Mappa Completa e Previsioni* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-prezzi-case-padova-zona-2026',
+    blogTitle: 'Prezzi Case Padova 2026 Zona per Zona: Mappa Completa e Previsioni'
+  },
+  {
+    k: ['sondaggio-bancaditalia', 'sconto medio 7,3%: trattativa o debolezza?', 'sconto', 'medio', 'trattativa', 'debolezza'],
+    r: '💡 Per «Sconto medio 7,3%: trattativa o debolezza?» abbiamo trattato l\'argomento nell\'articolo *Sondaggio abitativo Banca d\'Italia Q1 2026: LTV 77,2% e mutuo al…* con focus su Padova e provincia.\n\n📖 Approfondimento: *Sondaggio abitativo Banca d\'Italia Q1 2026: LTV 77,2% e mutuo al…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-sondaggio-bancaditalia-q1-2026-padova',
+    blogTitle: 'Sondaggio abitativo Banca d\'Italia Q1 2026: LTV 77,2% e mutuo al…'
+  },
+  {
+    k: ['mutuo-documenti-tempi-prima-casa', 'tabella sintesi?', 'tabella', 'sintesi', 'tabella sintesi', 'mutuo-documenti-tempi-prima-casa-padova'],
+    r: '💡 Per «Tabella sintesi?» abbiamo trattato l\'argomento nell\'articolo *Mutuo prima casa a Padova: documenti, tempi e sequenza dal…* con focus su Padova e provincia.\n\n📖 Approfondimento: *Mutuo prima casa a Padova: documenti, tempi e sequenza dal…* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-mutuo-documenti-tempi-prima-casa-padova-2026',
+    blogTitle: 'Mutuo prima casa a Padova: documenti, tempi e sequenza dal…'
+  },
+  {
+    k: ['calcolo del risparmio: esempi concreti per il padovano?', 'surroga-mutuo-padova-operativa', 'calcolo', 'risparmio', 'esempi', 'concreti'],
+    r: '💡 Per «Calcolo del risparmio: esempi concreti per il Padovano?» abbiamo trattato l\'argomento nell\'articolo *Surroga Mutuo 2026: Quando Conviene e Come Risparmiare a Padova* con focus su Padova e provincia.\n\n📖 Approfondimento: *Surroga Mutuo 2026: Quando Conviene e Come Risparmiare a Padova* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-surroga-mutuo-padova-2026',
+    blogTitle: 'Surroga Mutuo 2026: Quando Conviene e Come Risparmiare a Padova'
+  },
+  {
+    k: ['scegliere-agenzia-immobiliare-padova', 'segnali utili e campanelli d\'allarme?', 'segnali', 'utili', 'campanelli', 'd\'allarme'],
+    r: '💡 Per «Segnali utili e campanelli d\'allarme?» abbiamo trattato l\'argomento nell\'articolo *Scegliere agenzia locale a Padova: Guida e Checklist 2026* con focus su Padova e provincia.\n\n💰 Compenso mediazione: L\'importo e le condizioni economiche **non sono pubblicati online**: vengono concordate **in sede** al momento del mandato.\n\n📖 Approfondimento: *Scegliere agenzia locale a Padova: Guida e Checklist 2026* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-scegliere-agenzia-immobiliare-padova-2026',
+    blogTitle: 'Scegliere agenzia locale a Padova: Guida e Checklist 2026'
+  },
+  {
+    k: ['successione-immobile-ereditato-padova', 'voltura catastale e trascrizione?', 'voltura', 'catastale', 'trascrizione', 'voltura catastale trascrizione'],
+    r: '💡 Per «Voltura catastale e trascrizione?» abbiamo trattato l\'argomento nell\'articolo *Casa Ereditata Padova: Successione e Vendita* con focus su Padova e provincia.\n\n📖 Approfondimento: *Casa Ereditata Padova: Successione e Vendita* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-successione-immobiliare-padova',
+    blogTitle: 'Casa Ereditata Padova: Successione e Vendita'
+  },
+  {
+    k: ['quartieri-padova-prezzi-omi', 'forcellini', 'ndash', 'terranegra', 'tranquillita\'', 'forcellini ndash terranegra tranquillita\' vicinanza'],
+    r: '💡 Per «Forcellini &ndash; Terranegra: tranquillita\' e vicinanza al Policlinico?» abbiamo trattato l\'argomento nell\'articolo *Guida ai Quartieri del Padovano: Dove Comprare Casa nel 2026* con focus su Padova e provincia.\n\n📖 Approfondimento: *Guida ai Quartieri del Padovano: Dove Comprare Casa nel 2026* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-quartieri-padova-2026',
+    blogTitle: 'Guida ai Quartieri del Padovano: Dove Comprare Casa nel 2026'
+  },
+  {
+    k: ['costi-vendere-casa-padova', 'ape e certificazioni obbligatorie?', 'ape', 'certificazioni', 'obbligatorie', 'ape certificazioni obbligatorie'],
+    r: '💡 Per «APE e certificazioni obbligatorie?» abbiamo trattato l\'argomento nell\'articolo *Vendere Casa Padova 2026: Costi, Tasse e Tempi Reali* con focus su Padova e provincia.\n\n📖 Approfondimento: *Vendere Casa Padova 2026: Costi, Tasse e Tempi Reali* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-costi-vendere-casa-padova-2026',
+    blogTitle: 'Vendere Casa Padova 2026: Costi, Tasse e Tempi Reali'
+  },
+  {
+    k: ['documenti-vendita-casa', 'errori comuni da evitare?', 'errori', 'comuni', 'evitare', 'errori comuni evitare'],
+    r: '💡 Per «Errori comuni da evitare?» abbiamo trattato l\'argomento nell\'articolo *Documenti Vendita Casa 2026: Lista Completa* con focus su Padova e provincia.\n\n📖 Approfondimento: *Documenti Vendita Casa 2026: Lista Completa* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-documenti-vendita-casa',
+    blogTitle: 'Documenti Vendita Casa 2026: Lista Completa'
+  },
+  {
+    k: ['imposte-registro-catasto-compravendita', 'stai comprando o vendendo?', 'stai', 'comprando', 'vendendo', 'stai comprando vendendo'],
+    r: '💡 Per «Stai comprando o vendendo?» abbiamo trattato l\'argomento nell\'articolo *Imposte registro e ipotecarie in compravendita: guida Padova 2026* con focus su Padova e provincia.\n\n📖 Approfondimento: *Imposte registro e ipotecarie in compravendita: guida Padova 2026* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-imposte-registro-catasto-compravendita-padova-2026',
+    blogTitle: 'Imposte registro e ipotecarie in compravendita: guida Padova 2026'
+  },
+  {
+    k: ['tasse-vendita-casa', 'tributi', 'dovuti', 'registro', 'ipotecaria', 'tributi dovuti registro ipotecaria catastale'],
+    r: '💡 Per «Tributi dovuti: registro, ipotecaria e catastale per il venditore?» abbiamo trattato l\'argomento nell\'articolo *Tasse Vendita Casa 2026: Plusvalenza e Imposte* con focus su Padova e provincia.\n\n📖 Approfondimento: *Tasse Vendita Casa 2026: Plusvalenza e Imposte* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-tasse-vendita-casa',
+    blogTitle: 'Tasse Vendita Casa 2026: Plusvalenza e Imposte'
+  },
+  {
+    k: ['vendita-immobiliare-strategie-padova', 'perche', 'pricing', 'con', 'dati', 'perche pricing con dati omi'],
+    r: '💡 Per «Perche il pricing con dati OMI e la base della vendita (strategia 1)?» abbiamo trattato l\'argomento nell\'articolo *Vendere Casa a Padova 2026: 7 Strategie per il Prezzo Top* con focus su Padova e provincia.\n\n📖 Approfondimento: *Vendere Casa a Padova 2026: 7 Strategie per il Prezzo Top* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-vendita-immobiliare-padova-strategie-2026',
+    blogTitle: 'Vendere Casa a Padova 2026: 7 Strategie per il Prezzo Top'
+  },
+  {
+    k: ['marcello-mestre', 'capannoni', 'industriali', 'polo', 'turistico', 'capannoni industriali polo turistico trasformazione'],
+    r: '💡 Per «Da capannoni industriali a polo turistico: la trasformazione?» abbiamo trattato l\'argomento nell\'articolo *Ca\' Marcello Mestre: Hub Turistico da 70 Milioni* con focus su Padova e provincia.\n\n📖 Approfondimento: *Ca\' Marcello Mestre: Hub Turistico da 70 Milioni* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-ca-marcello-mestre',
+    blogTitle: 'Ca\' Marcello Mestre: Hub Turistico da 70 Milioni'
+  },
+  {
+    k: ['l\'incertezza dei mutui: il secondo grande ostacolo?', 'impegno-quotidiano-agenzia-immobiliare', 'l\'incertezza', 'mutui', 'secondo', 'grande'],
+    r: '💡 Per «L\'incertezza dei mutui: il secondo grande ostacolo?» abbiamo trattato l\'argomento nell\'articolo *Impegno Quotidiano di un\'Agenzia: Burocrazia e Mutui* con focus su Padova e provincia.\n\n💰 Compenso mediazione: L\'importo e le condizioni economiche **non sono pubblicati online**: vengono concordate **in sede** al momento del mandato.\n\n📖 Approfondimento: *Impegno Quotidiano di un\'Agenzia: Burocrazia e Mutui* sul nostro blog.\n\n📞 Per un orientamento personalizzato: **049.8843484** o passa in Via Roma 96, Limena.',
+    blog: 'blog-impegno-quotidiano-agenzia-immobiliare',
+    blogTitle: 'Impegno Quotidiano di un\'Agenzia: Burocrazia e Mutui'
+  },
 ];
 
 // Espone FAQ_DATA per la pagina FAQ statica

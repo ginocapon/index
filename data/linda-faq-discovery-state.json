@@ -81,5 +81,8 @@
     "caa6cfd92dc38ead"
   ],
   "total_archived": 77,
-  "last_run_reason": "force"
+  "last_run_reason": "force",
+  "last_merge_at": "2026-08-11T11:45:00",
+  "last_merge_count": 77,
+  "chatbot_version_bump": "v=10"
 }

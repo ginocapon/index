@@ -382,7 +382,7 @@ footer{{background:linear-gradient(180deg,var(--nero),#0d1a2a);padding:2.5rem 1.
 <script src="js/config.js?v=4"></script>
 <script src="js/rig-lead-form.js?v=3"></script>
 <script src="js/nav-mobile.js?v=3" defer></script>
-<script src="js/chatbot.js?v=9" defer></script>
+<script src="js/chatbot.js?v=10" defer></script>
 <script src="js/cookie-consent.js?v=4" defer></script>
 </body>
 </html>
