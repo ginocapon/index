@@ -192,7 +192,10 @@
       "web_signal": "FIMAA Q1 2026: 33% operatori — costi elevati ristrutturazione frenano usato",
       "gsc_align": null,
       "discovery_source": "web-keyword-discovery",
-      "discovered_at": "2026-08-11"
+      "discovered_at": "2026-08-11",
+      "hero_concept": "Interno usato padovano pre-ristrutturazione vs dettaglio materiali/quote — luce laterale, 19:9, fotografia realistica, angolo inedito nel catalogo img/blog/",
+      "hero_asset": "img/blog/blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026.webp",
+      "hero_policy": "GENERATE_FROM_SCRATCH_HD_19x9"
     },
     {
       "id": "eq-web-002",
@@ -211,7 +214,10 @@
       "web_signal": "Confcommercio/ABI: mutui acquisto abitazioni ~3,42% feb 2026",
       "gsc_align": null,
       "discovery_source": "web-keyword-discovery",
-      "discovered_at": "2026-08-11"
+      "discovered_at": "2026-08-11",
+      "hero_concept": "Coppia under-35 in agenzia con simulazione mutuo su tablet — estetica clean fintech, skyline Padova soft, 19:9 HD, file nuovo non riusato",
+      "hero_asset": "img/blog/blog-mutuo-tasso-342-accesso-credito-padova-2026.webp",
+      "hero_policy": "GENERATE_FROM_SCRATCH_HD_19x9"
     },
     {
       "id": "eq-web-003",
@@ -230,7 +236,10 @@
       "web_signal": "Focus Veneto 2026 / Immobiliare.it: nuovo locazione +10,3% Q1",
       "gsc_align": "affitti limena",
       "discovery_source": "web-keyword-discovery",
-      "discovered_at": "2026-08-11"
+      "discovered_at": "2026-08-11",
+      "hero_concept": "Confronto visivo edificio nuovo vetro vs palazzo usato Veneto — split composizione 19:9, fotografia architettonica realistica",
+      "hero_asset": "img/blog/blog-affitti-nuovo-vs-usato-veneto-2026.webp",
+      "hero_policy": "GENERATE_FROM_SCRATCH_HD_19x9"
     },
     {
       "id": "eq-web-004",
@@ -249,7 +258,10 @@
       "web_signal": "ISTAT IPAB Q1 2026 +5,2% annuo; compravendite ADE +4,4%",
       "gsc_align": null,
       "discovery_source": "web-keyword-discovery",
-      "discovered_at": "2026-08-11"
+      "discovered_at": "2026-08-11",
+      "hero_concept": "Grafico tendenza prezzi astratto su tavolo con mappa Padova — foto documentale 19:9, non riuso hero mercato generico",
+      "hero_asset": "img/blog/blog-ipab-istat-q1-2026-padova-interpretazione.webp",
+      "hero_policy": "GENERATE_FROM_SCRATCH_HD_19x9"
     },
     {
       "id": "eq-web-005",
@@ -268,7 +280,10 @@
       "web_signal": "GSC: gergo immobiliare padova 3 impr 0 clic — gap AEO",
       "gsc_align": "gergo immobiliare padova",
       "discovery_source": "web-keyword-discovery",
-      "discovered_at": "2026-08-11"
+      "discovered_at": "2026-08-11",
+      "hero_concept": "Dettaglio mani su contratto con evidenziatore su termini (visura, caparra) — contesto agenzia Limena, 19:9 HD originale",
+      "hero_asset": "img/blog/blog-gergo-immobiliare-padova-guida-2026.webp",
+      "hero_policy": "GENERATE_FROM_SCRATCH_HD_19x9"
     }
   ],
   "last_web_discovery": "2026-08-11"

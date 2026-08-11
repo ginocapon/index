@@ -245,7 +245,14 @@
       "schedule": "Venerdì 05:00 UTC (con contenuti-freschezza)",
       "script": "scripts/web-keyword-discovery.py",
       "output": "5 proposte in editorial-queue.json + web-keyword-discovery-report.md + geo-keyword-actions-latest.json",
-      "note": "Bypass GSC API: fonti web istituzionali + gsc-keywords-priority.json statico. Anti-doppioni SKIMM obbligatorio."
+      "note": "python scripts/web-keyword-discovery.py — titoli web istituzionali + gsc-keywords-priority.json statico. Anti-doppioni SKIMM obbligatorio."
+    },
+    "geo_aeo_formula": {
+      "workflow": ".github/workflows/venerdi-contenuti-freschezza.yml",
+      "script": "scripts/geo-aeo-formula.py",
+      "verify": "scripts/verify_blog_hero_assets.py",
+      "output": "geo-aeo-formula-report.md + data/geo-aeo-formula-latest.json",
+      "target_score": "9/10 GEO/AEO con hero originali HD 19:9 da zero"
     }
   }
 }

@@ -52,8 +52,9 @@ CURATED_PROPOSALS = [
             "https://www.confcommercio.it/-/mercato-immobiliare",
             "https://www.simplybiz.eu/fimaa-immobiliare-previsioni-2026-sentiment-1-quadrimestre/",
         ],
-        "geo_actions": ["aeo_box_costi_ristrutturazione", "faq_budget_acquirente"],
-        "gsc_align": None,
+        "geo_actions": ["aeo_box_costi_ristrutturazione", "faq_budget_acquirente", "hero_original_hd_19x9"],
+        "hero_brief": "Interno usato padovano pre-ristrutturazione vs dettaglio materiali/quote — luce laterale, 19:9, fotografia realistica, angolo inedito nel catalogo img/blog/",
+        "hero_asset": "img/blog/blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026.webp",
     },
     {
         "kw_primaria": "mutuo tasso 3.42 accesso credito 2026",
@@ -66,8 +67,9 @@ CURATED_PROPOSALS = [
         "research_refs": [
             "https://www.confcommercio.it/-/mercato-immobiliare",
         ],
-        "geo_actions": ["refresh_meta_mutui_casa", "faq_tasso_fisso_timing"],
-        "gsc_align": None,
+        "geo_actions": ["refresh_meta_mutui_casa", "faq_tasso_fisso_timing", "hero_original_hd_19x9"],
+        "hero_brief": "Coppia under-35 in agenzia con simulazione mutuo su tablet — estetica clean fintech, skyline Padova soft, 19:9 HD, file nuovo non riusato",
+        "hero_asset": "img/blog/blog-mutuo-tasso-342-accesso-credito-padova-2026.webp",
     },
     {
         "kw_primaria": "affitti nuovo veneto 10 percento",
@@ -80,8 +82,9 @@ CURATED_PROPOSALS = [
         "research_refs": [
             "https://www.unioneimmobiliare.org/eventi/focus-veneto-2026/",
         ],
-        "geo_actions": ["faq_nuovo_vs_usato_affitto", "link_zona_limena"],
-        "gsc_align": "affitti limena",
+        "geo_actions": ["faq_nuovo_vs_usato_affitto", "link_zona_limena", "hero_original_hd_19x9"],
+        "hero_brief": "Confronto visivo edificio nuovo vetro vs palazzo usato Veneto — split composizione 19:9, fotografia architettonica realistica",
+        "hero_asset": "img/blog/blog-affitti-nuovo-vs-usato-veneto-2026.webp",
     },
     {
         "kw_primaria": "ipab istat 5.2 prezzi abitazioni",
@@ -94,8 +97,9 @@ CURATED_PROPOSALS = [
         "research_refs": [
             "https://www.istat.it/comunicato-stampa/prezzi-delle-abitazioni-dati-provvisori-i-trimestre-2026/",
         ],
-        "geo_actions": ["aeo_dato_istat", "schema_dataset_citation"],
-        "gsc_align": None,
+        "geo_actions": ["aeo_dato_istat", "schema_dataset_citation", "hero_original_hd_19x9"],
+        "hero_brief": "Grafico tendenza prezzi astratto su tavolo con mappa Padova — foto documentale 19:9, non riuso hero mercato generico",
+        "hero_asset": "img/blog/blog-ipab-istat-q1-2026-padova-interpretazione.webp",
     },
     {
         "kw_primaria": "gergo immobiliare padova",
@@ -108,8 +112,9 @@ CURATED_PROPOSALS = [
         "research_refs": [
             "https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi/banche-dati/quotazioni-immobiliari",
         ],
-        "geo_actions": ["faq_gergo_visura_caparra", "llms_glossary_snippet"],
-        "gsc_align": "gergo immobiliare padova",
+        "geo_actions": ["faq_gergo_visura_caparra", "llms_glossary_snippet", "hero_original_hd_19x9"],
+        "hero_brief": "Dettaglio mani su contratto con evidenziatore su termini (visura, caparra) — contesto agenzia Limena, 19:9 HD originale",
+        "hero_asset": "img/blog/blog-gergo-immobiliare-padova-guida-2026.webp",
     },
 ]
 
@@ -230,6 +235,16 @@ def build_geo_actions(gsc: dict, proposals: list[dict]) -> list[dict]:
     for p in proposals:
         for ga in p.get("geo_actions", []):
             actions.append({"action": "AGGIUNGERE", "target": p["slug"], "geo": ga, "kw": p["kw_primaria"]})
+        actions.append(
+            {
+                "action": "AGGIUNGERE",
+                "target": p["slug"],
+                "geo": "hero_original_hd_verify",
+                "kw": p["kw_primaria"],
+                "hero_asset": p.get("hero_asset"),
+                "hero_brief": p.get("hero_brief"),
+            }
+        )
     return actions
 
 
@@ -273,6 +288,9 @@ def merge_queue(proposals: list[dict], max_add: int = 5) -> list[dict]:
             "gsc_align": prop.get("gsc_align"),
             "discovery_source": "web-keyword-discovery",
             "discovered_at": date.today().isoformat(),
+            "hero_concept": prop.get("hero_brief") or prop.get("hero_concept"),
+            "hero_asset": prop.get("hero_asset") or f"img/blog/{prop['slug']}.webp",
+            "hero_policy": "GENERATE_FROM_SCRATCH_HD_19x9",
         }
         queue.setdefault("items", []).append(item)
         added.append(item)

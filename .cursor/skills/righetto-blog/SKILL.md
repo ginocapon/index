@@ -14,11 +14,8 @@ description: >-
 1. **`data/editorial-queue.json`** — prossimo `scheduled` da pubblicare
 2. **`TEST-SKILL/skill-editorial-queue.md`** — sequenza automatica completa
 3. **`data/gsc-keywords-priority.json`** → `queries_limena_top_volume` per batch Limena locale
-4. **`data/gsc-keywords-priority.json`** → `queries_limena_top_volume` per batch Limena locale
-5. **Discovery web settimanale:** `python scripts/web-keyword-discovery.py` (fonti istituzionali + GSC statico, no API) → 5 proposte in coda
-6. Se coda `scheduled` < 3 → discovery + aggiungi `proposed`
-
-**Trigger autonomi:** «pubblica blog», «prossimo articolo», venerdì + modifica repo, `/blog` senza tema specifico → prendi prossimo item coda.
+4. **Discovery web settimanale:** `python scripts/web-keyword-discovery.py` → 5 proposte + brief hero
+5. Se `scheduled` < 3 → discovery aggiunge `proposed` «pubblica blog», «prossimo articolo», venerdì + modifica repo, `/blog` senza tema specifico → prendi prossimo item coda.
 
 ## Prima di iniziare (BLOCCANTE)
 
@@ -36,8 +33,9 @@ description: >-
 - [ ] `kw_primaria` univoca in skimm §3
 - [ ] 2500+ parole corpo utile, 10–15 H2/H3, tono professionale
 - [ ] Ogni dato numerico con fonte verificata e link
-- [ ] Copertina hero WebP 1200×630 leggera (§8.1c SKILL-2.0); didascalia se illustrazione/elaborazione digitale
-- [ ] **AI Act:** barra footer sito (ga-consent) + nota trasparenza se hero non è foto reale del territorio
+- [ ] Copertina hero **originale HD** generata da zero (§2.1 E) — `verify_blog_hero_assets.py` OK
+- [ ] **Hero/figure:** generati da zero 1900×900 WebP — `verify_blog_hero_assets.py` + `geo-aeo-formula.py`
+- [ ] **AI Act:** didascalia hero/figure se elaborazione digitale — `skill-ai-act-compliance.md`
 - [ ] Title ≤60, meta ≤160, H1 diverso da title
 - [ ] JSON-LD: `BlogPosting` + `FAQPage` se FAQ visibile
 - [ ] Link interni verso pillar/zone/servizi del cluster
