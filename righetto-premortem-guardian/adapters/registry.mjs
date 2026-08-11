@@ -168,14 +168,27 @@ async function securityAdapter(ctx) {
   return out;
 }
 
-async function lindaFaqAdapter(ctx) {
+async function lindaAgentAdapter(ctx) {
   const out = { observations: [], verified_facts: [], missing_integrations: [] };
 
-  if (!ctx.ingestOnly && ctx.jobs?.some((j) => j.includes("linda_faq"))) {
-    const run = runCommand("python3", ["scripts/linda-faq-biweekly-discovery.py"]);
+  if (!ctx.ingestOnly && ctx.jobs?.some((j) => j.includes("linda"))) {
+    const run = runCommand("python3", ["scripts/linda-agent-cycle.py"]);
     if (!run.ok) {
-      out.observations.push(obs("linda-faq-fail", "ai_quality", "linda-faq-biweekly-discovery fallito o sotto target", "warning", { stderr: run.stderr.slice(0, 300) }));
+      out.observations.push(obs("linda-cycle-fail", "ai_quality", "linda-agent-cycle fallito", "warning", { stderr: run.stderr.slice(0, 300) }));
     }
+  }
+
+  const qual = ingestJson("data/linda-quality-latest.json", Infinity);
+  if (qual.available && qual.data) {
+    out.verified_facts.push({ fact: "linda_quality_score", value: qual.data.linda_quality_score });
+    if (qual.data.linda_quality_score < 60) {
+      out.observations.push(obs("linda-quality-low", "ai_quality", `Linda quality score ${qual.data.linda_quality_score}/100`, "warning"));
+    }
+  }
+
+  const qi = ingestJson("data/linda-question-intelligence-latest.json", Infinity);
+  if (qi.available && qi.data) {
+    out.verified_facts.push({ fact: "linda_content_opportunities", value: (qi.data.content_opportunities || []).length });
   }
 
   const disc = ingestJson("data/linda-faq-proposals-latest.json", Infinity);
@@ -184,17 +197,21 @@ async function lindaFaqAdapter(ctx) {
       out.verified_facts.push({ fact: "linda_faq_discovery", value: "skipped", reason: disc.data.reason });
     } else {
       out.verified_facts.push({ fact: "linda_faq_proposals", value: disc.data.proposals_count ?? (disc.data.proposals || []).length });
-      out.verified_facts.push({ fact: "linda_faq_archive_total", value: disc.data.archive_total });
-      const count = disc.data.proposals_count ?? (disc.data.proposals || []).length;
-      if (count < 20) {
-        out.observations.push(obs("linda-faq-low", "ai_quality", `Solo ${count} proposte FAQ Linda (target 20)`, "warning"));
-      }
     }
   } else {
-    out.missing_integrations.push("linda-faq-discovery — eseguire scripts/linda-faq-biweekly-discovery.py");
+    out.missing_integrations.push("linda-agent-cycle — eseguire scripts/linda-agent-cycle.py");
+  }
+
+  const propIdx = ingestJson("data/linda-property-index-latest.json", Infinity);
+  if (propIdx.available && propIdx.data) {
+    out.verified_facts.push({ fact: "linda_property_index", value: propIdx.data.count });
   }
 
   return out;
+}
+
+async function lindaFaqAdapter(ctx) {
+  return lindaAgentAdapter(ctx);
 }
 
 async function aiQualityAdapter(ctx) {
@@ -397,9 +414,9 @@ export async function runAdapters(scopes, ctx) {
     results.push({ scope: "web_keyword_discovery", ...r });
   }
 
-  if (ctx.jobs?.includes("linda_faq_discovery")) {
-    const r = await lindaFaqAdapter({ ...ctx, ingestOnly: false });
-    results.push({ scope: "linda_faq_discovery", ...r });
+  if (ctx.jobs?.includes("linda_faq_discovery") || ctx.jobs?.includes("linda_agent_cycle")) {
+    const r = await lindaAgentAdapter({ ...ctx, ingestOnly: false });
+    results.push({ scope: "linda_agent_cycle", ...r });
   }
 
   return results;

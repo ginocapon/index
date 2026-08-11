@@ -39,6 +39,11 @@ jobs:
     at: "05:00"
     scope: [ai_quality, content]
 
+  linda_agent_cycle:
+    on: "friday"
+    at: "05:00"
+    scope: [ai_quality, content, business]
+
   daily_premortem:
     at: "18:00"
     scope: [all]
