@@ -23,10 +23,14 @@ Dettaglio: **`TEST-SKILL/skill-content.md`**, **`TEST-SKILL/skimm.md`**, **`SKIL
 - Disclaimer mediazione **una volta** per pagina
 - Script batch: `MAX_TEMPLATE_PARAGRAPHS` + diversità paragrafi (vedi `build_*_blog*.py`)
 
-## Copertina e corpo — foto **realistiche**
-- WebP **1200×630**, target **<120 KiB** — **fotografia reale**, tema Padova/Veneto/immobiliare
-- **Vietato:** illustrazioni 3D, AI fantasy, avatar, stock con scritte decorative; **no** hero generico `foto-servizi` se non tematico
-- Corpo: **≥3** `<figure>` foto + **≥2** SVG colorati con fonte (`skill-content.md` §2.1)
+## Copertina e corpo — foto **originali HD da zero**
+- Hero **1900×900** WebP 19:9, target **<150 KiB** — **generata/creata da zero** per l’articolo
+- **Vietato:** copiare hero da altri `blog-*` · `foto-servizi` · `og-default` · stesso file hash duplicato
+- **Obbligo:** fotografia realistica Padova/Veneto, tema articolo, alta definizione, performante (lazy ok solo corpo)
+- Brief da `editorial-queue.json` → `hero_concept` / `hero_brief` — massimo impegno qualità
+- Verifica: `python scripts/verify_blog_hero_assets.py --slug blog-{slug}`
+- GEO: `python scripts/geo-aeo-formula.py` dopo asset — target copertura **9/10**
+- Corpo: **≥3** `<figure>` foto nuove + **≥2** SVG colorati (`skill-content.md` §2.1 E)
 - Allinea: `og:image`, schema `BlogPosting.image`, hero `src`, registry 4 punti
 
 ## Elenco blog (solo articoli — **non** portale immobili)

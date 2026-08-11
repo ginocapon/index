@@ -56,3 +56,7 @@ python scripts/web-keyword-discovery.py
 - 5 articoli `proposed` in `editorial-queue.json` (anti-doppioni SKIMM)
 - GEO/SEO: `data/geo-keyword-actions-latest.json`
 - Cron: venerdì `venerdi-contenuti-freschezza.yml` + Guardian `web_keyword_discovery`
+
+## Hero originali HD (blog)
+
+Vedi `TEST-SKILL/skill-content.md` §2.1 E — generare da zero, `verify_blog_hero_assets.py`, formula `geo-aeo-formula.py` (target **9/10** GEO/AEO)

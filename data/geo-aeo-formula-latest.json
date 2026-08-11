@@ -1,0 +1,515 @@
+{
+  "date": "2026-08-11",
+  "hero_formula": {
+    "rule": "Ogni articolo nuovo: 1 hero + 3 figure — generati da zero, non riusati",
+    "spec": {
+      "format": "WebP",
+      "hero_size": "1900×900 (19:9) — export min 1200×630 per OG",
+      "max_hero_kb": 150,
+      "body_figures_min": 3,
+      "unique": "hash diverso da tutti img/blog/*.webp — verify_blog_hero_assets.py",
+      "subject": "Fotografia realistica Padova/Veneto/immobiliare — tema articolo",
+      "forbidden": [
+        "riuso hero altro articolo",
+        "foto-servizi",
+        "og-default",
+        "CDN esterni",
+        "illustrazione 3D fantasy"
+      ],
+      "ai_act": "Didascalia se elaborazione digitale — skill-ai-act-compliance.md",
+      "alignment": [
+        "art-hero-img src",
+        "og:image",
+        "BlogPosting.image",
+        "admin immagine_copertina",
+        "homepage staticMap"
+      ]
+    },
+    "agent_steps": [
+      "1. Brief visivo univoco (soggetto, luce, angolo) — diverso da catalogo img/blog/",
+      "2. Generare/creare da zero hero 1900×900 WebP + 3 figure corpo coerenti",
+      "3. python scripts/verify_blog_hero_assets.py --slug blog-{slug}",
+      "4. AEO: rig-box-sintesi + FAQ visible + H2 domanda",
+      "5. node scripts/validate-page.js --file blog-{slug}.html"
+    ]
+  },
+  "geo_aeo_score": {
+    "score_10": 9.5,
+    "breakdown": {
+      "sostenere_pages": 2.5,
+      "aggiungere_aeo_faq": 2.5,
+      "hero_original_hd": 3.0,
+      "schema_alignment": 0.85,
+      "llms_snippet": 0.7
+    },
+    "coverage_label": "9/10"
+  },
+  "checklist": [
+    {
+      "type": "SOSTENERE",
+      "target": "/blog-rendimento-affitto-padova",
+      "priority": "high",
+      "geo": [
+        "aeo_answer_box",
+        "faq_visible",
+        "dateModified"
+      ],
+      "hero_refresh": "Se hero generico → nuovo WebP tematico 19:9",
+      "verify": "node scripts/validate-page.js"
+    },
+    {
+      "type": "SOSTENERE",
+      "target": "/agenzia-immobiliare-padova",
+      "priority": "high",
+      "geo": [
+        "aeo_answer_box",
+        "faq_visible",
+        "dateModified"
+      ],
+      "hero_refresh": "Se hero generico → nuovo WebP tematico 19:9",
+      "verify": "node scripts/validate-page.js"
+    },
+    {
+      "type": "SOSTENERE",
+      "target": "/zona-limena",
+      "priority": "medium",
+      "geo": [
+        "aeo_answer_box",
+        "faq_visible",
+        "dateModified"
+      ],
+      "hero_refresh": "Se hero generico → nuovo WebP tematico 19:9",
+      "verify": "node scripts/validate-page.js"
+    },
+    {
+      "type": "SOSTENERE",
+      "target": "/blog-affitto-breve-padova-2026",
+      "priority": "medium",
+      "geo": [
+        "aeo_answer_box",
+        "faq_visible",
+        "dateModified"
+      ],
+      "hero_refresh": "Se hero generico → nuovo WebP tematico 19:9",
+      "verify": "node scripts/validate-page.js"
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026",
+      "kw": "costi ristrutturazione usato frenano acquisto",
+      "geo": "aeo_box_costi_ristrutturazione",
+      "hero": {
+        "path": "img/blog/blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026",
+      "kw": "costi ristrutturazione usato frenano acquisto",
+      "geo": "faq_budget_acquirente",
+      "hero": {
+        "path": "img/blog/blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026",
+      "kw": "costi ristrutturazione usato frenano acquisto",
+      "geo": "hero_original_hd_19x9",
+      "hero": {
+        "path": "img/blog/blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026",
+      "kw": "costi ristrutturazione usato frenano acquisto",
+      "geo": "hero_original_hd_verify",
+      "hero": {
+        "path": "img/blog/blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-mutuo-tasso-342-accesso-credito-padova-2026",
+      "kw": "mutuo tasso 3.42 accesso credito 2026",
+      "geo": "refresh_meta_mutui_casa",
+      "hero": {
+        "path": "img/blog/blog-mutuo-tasso-342-accesso-credito-padova-2026.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-mutuo-tasso-342-accesso-credito-padova-2026"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-mutuo-tasso-342-accesso-credito-padova-2026",
+      "kw": "mutuo tasso 3.42 accesso credito 2026",
+      "geo": "faq_tasso_fisso_timing",
+      "hero": {
+        "path": "img/blog/blog-mutuo-tasso-342-accesso-credito-padova-2026.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-mutuo-tasso-342-accesso-credito-padova-2026"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-mutuo-tasso-342-accesso-credito-padova-2026",
+      "kw": "mutuo tasso 3.42 accesso credito 2026",
+      "geo": "hero_original_hd_19x9",
+      "hero": {
+        "path": "img/blog/blog-mutuo-tasso-342-accesso-credito-padova-2026.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-mutuo-tasso-342-accesso-credito-padova-2026"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-mutuo-tasso-342-accesso-credito-padova-2026",
+      "kw": "mutuo tasso 3.42 accesso credito 2026",
+      "geo": "hero_original_hd_verify",
+      "hero": {
+        "path": "img/blog/blog-mutuo-tasso-342-accesso-credito-padova-2026.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-mutuo-tasso-342-accesso-credito-padova-2026"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-affitti-nuovo-vs-usato-veneto-2026",
+      "kw": "affitti nuovo veneto 10 percento",
+      "geo": "faq_nuovo_vs_usato_affitto",
+      "hero": {
+        "path": "img/blog/blog-affitti-nuovo-vs-usato-veneto-2026.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-affitti-nuovo-vs-usato-veneto-2026"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-affitti-nuovo-vs-usato-veneto-2026",
+      "kw": "affitti nuovo veneto 10 percento",
+      "geo": "link_zona_limena",
+      "hero": {
+        "path": "img/blog/blog-affitti-nuovo-vs-usato-veneto-2026.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-affitti-nuovo-vs-usato-veneto-2026"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-affitti-nuovo-vs-usato-veneto-2026",
+      "kw": "affitti nuovo veneto 10 percento",
+      "geo": "hero_original_hd_19x9",
+      "hero": {
+        "path": "img/blog/blog-affitti-nuovo-vs-usato-veneto-2026.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-affitti-nuovo-vs-usato-veneto-2026"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-affitti-nuovo-vs-usato-veneto-2026",
+      "kw": "affitti nuovo veneto 10 percento",
+      "geo": "hero_original_hd_verify",
+      "hero": {
+        "path": "img/blog/blog-affitti-nuovo-vs-usato-veneto-2026.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-affitti-nuovo-vs-usato-veneto-2026"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-ipab-istat-q1-2026-padova-interpretazione",
+      "kw": "ipab istat 5.2 prezzi abitazioni",
+      "geo": "aeo_dato_istat",
+      "hero": {
+        "path": "img/blog/blog-ipab-istat-q1-2026-padova-interpretazione.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-ipab-istat-q1-2026-padova-interpretazione"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-ipab-istat-q1-2026-padova-interpretazione",
+      "kw": "ipab istat 5.2 prezzi abitazioni",
+      "geo": "schema_dataset_citation",
+      "hero": {
+        "path": "img/blog/blog-ipab-istat-q1-2026-padova-interpretazione.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-ipab-istat-q1-2026-padova-interpretazione"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-ipab-istat-q1-2026-padova-interpretazione",
+      "kw": "ipab istat 5.2 prezzi abitazioni",
+      "geo": "hero_original_hd_19x9",
+      "hero": {
+        "path": "img/blog/blog-ipab-istat-q1-2026-padova-interpretazione.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-ipab-istat-q1-2026-padova-interpretazione"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-ipab-istat-q1-2026-padova-interpretazione",
+      "kw": "ipab istat 5.2 prezzi abitazioni",
+      "geo": "hero_original_hd_verify",
+      "hero": {
+        "path": "img/blog/blog-ipab-istat-q1-2026-padova-interpretazione.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-ipab-istat-q1-2026-padova-interpretazione"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-gergo-immobiliare-padova-guida-2026",
+      "kw": "gergo immobiliare padova",
+      "geo": "faq_gergo_visura_caparra",
+      "hero": {
+        "path": "img/blog/blog-gergo-immobiliare-padova-guida-2026.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-gergo-immobiliare-padova-guida-2026"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-gergo-immobiliare-padova-guida-2026",
+      "kw": "gergo immobiliare padova",
+      "geo": "llms_glossary_snippet",
+      "hero": {
+        "path": "img/blog/blog-gergo-immobiliare-padova-guida-2026.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-gergo-immobiliare-padova-guida-2026"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-gergo-immobiliare-padova-guida-2026",
+      "kw": "gergo immobiliare padova",
+      "geo": "hero_original_hd_19x9",
+      "hero": {
+        "path": "img/blog/blog-gergo-immobiliare-padova-guida-2026.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-gergo-immobiliare-padova-guida-2026"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "AGGIUNGERE",
+      "target": "blog-gergo-immobiliare-padova-guida-2026",
+      "kw": "gergo immobiliare padova",
+      "geo": "hero_original_hd_verify",
+      "hero": {
+        "path": "img/blog/blog-gergo-immobiliare-padova-guida-2026.webp",
+        "generate_from_scratch": true,
+        "verify": "python scripts/verify_blog_hero_assets.py --slug blog-gergo-immobiliare-padova-guida-2026"
+      },
+      "aeo": [
+        "rig-box-sintesi",
+        "faq_visible",
+        "h2_question_suffix"
+      ]
+    },
+    {
+      "type": "PROPOSED_ARTICLE",
+      "slug": "blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026",
+      "kw": "costi ristrutturazione usato frenano acquisto",
+      "title": "Usato da riqualificare: perché i costi di ristrutturazione frenano l'acquisto nel 2026",
+      "hero_brief": "Interno usato padovano pre-ristrutturazione vs dettaglio materiali/quote — luce laterale, 19:9, fotografia realistica, angolo inedito nel catalogo img/blog/",
+      "hero_path": "img/blog/blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026.webp",
+      "geo_stack": [
+        "aeo_box_costi_ristrutturazione",
+        "faq_budget_acquirente",
+        "hero_original_hd_19x9"
+      ]
+    },
+    {
+      "type": "PROPOSED_ARTICLE",
+      "slug": "blog-mutuo-tasso-342-accesso-credito-padova-2026",
+      "kw": "mutuo tasso 3.42 accesso credito 2026",
+      "title": "Mutuo al 3,42%: finestra di accesso al credito per chi compra nel Padovano",
+      "hero_brief": "Coppia under-35 in agenzia con simulazione mutuo su tablet — estetica clean fintech, skyline Padova soft, 19:9 HD, file nuovo non riusato",
+      "hero_path": "img/blog/blog-mutuo-tasso-342-accesso-credito-padova-2026.webp",
+      "geo_stack": [
+        "refresh_meta_mutui_casa",
+        "faq_tasso_fisso_timing",
+        "hero_original_hd_19x9"
+      ]
+    },
+    {
+      "type": "PROPOSED_ARTICLE",
+      "slug": "blog-affitti-nuovo-vs-usato-veneto-2026",
+      "kw": "affitti nuovo veneto 10 percento",
+      "title": "Affitti nel Veneto: nuovo +10,3% e divario con l'usato — cosa cambia per chi cerca casa",
+      "hero_brief": "Confronto visivo edificio nuovo vetro vs palazzo usato Veneto — split composizione 19:9, fotografia architettonica realistica",
+      "hero_path": "img/blog/blog-affitti-nuovo-vs-usato-veneto-2026.webp",
+      "geo_stack": [
+        "faq_nuovo_vs_usato_affitto",
+        "link_zona_limena",
+        "hero_original_hd_19x9"
+      ]
+    },
+    {
+      "type": "PROPOSED_ARTICLE",
+      "slug": "blog-ipab-istat-q1-2026-padova-interpretazione",
+      "kw": "ipab istat 5.2 prezzi abitazioni",
+      "title": "Prezzi case +5,2% (ISTAT Q1 2026): cosa significa davvero se compri a Padova",
+      "hero_brief": "Grafico tendenza prezzi astratto su tavolo con mappa Padova — foto documentale 19:9, non riuso hero mercato generico",
+      "hero_path": "img/blog/blog-ipab-istat-q1-2026-padova-interpretazione.webp",
+      "geo_stack": [
+        "aeo_dato_istat",
+        "schema_dataset_citation",
+        "hero_original_hd_19x9"
+      ]
+    },
+    {
+      "type": "PROPOSED_ARTICLE",
+      "slug": "blog-gergo-immobiliare-padova-guida-2026",
+      "kw": "gergo immobiliare padova",
+      "title": "Gergo immobiliare: 25 termini che sentirai in agenzia a Padova (con esempi chiari)",
+      "hero_brief": "Dettaglio mani su contratto con evidenziatore su termini (visura, caparra) — contesto agenzia Limena, 19:9 HD originale",
+      "hero_path": "img/blog/blog-gergo-immobiliare-padova-guida-2026.webp",
+      "geo_stack": [
+        "faq_gergo_visura_caparra",
+        "llms_glossary_snippet",
+        "hero_original_hd_19x9"
+      ]
+    },
+    {
+      "type": "GSC_REFRESH",
+      "url": "/blog-rendimento-affitto-padova",
+      "impressions": 139,
+      "clicks": 0,
+      "action": "sostenere-meta"
+    },
+    {
+      "type": "GSC_REFRESH",
+      "url": "/agenzia-immobiliare-padova",
+      "impressions": 68,
+      "clicks": 0,
+      "action": "sostenere-meta"
+    },
+    {
+      "type": "GSC_REFRESH",
+      "url": "/zona-limena",
+      "impressions": 3,
+      "clicks": 0,
+      "action": "sostenere-affitti-title"
+    },
+    {
+      "type": "GSC_REFRESH",
+      "url": "/blog-affitto-breve-padova-2026",
+      "impressions": 10,
+      "clicks": 0,
+      "action": "sostenere-snippet"
+    }
+  ],
+  "verify_commands": [
+    "python scripts/geo-aeo-formula.py",
+    "python scripts/verify_blog_hero_assets.py --all",
+    "python scripts/web-keyword-discovery.py"
+  ]
+}
