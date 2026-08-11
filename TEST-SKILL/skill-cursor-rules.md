@@ -53,6 +53,7 @@ Le **Cursor Skills** (`.cursor/skills/`) **non duplicano** `TEST-SKILL/`: dicono
 | `righetto-social` | `/social` | bozze Meta/IG/GBP, copy post/reel | social-automation |
 | `righetto-security` | `/sicurezza` | audit sicurezza 2×/sett, RLS, admin | security + context |
 | `righetto-zona` | `/zona` | scheda zona, quartiere, SEO locale | content + seo |
+| `righetto-guardian` | `/guardian` | premortem, health check, anomalie, dispatcher | essentials + righetto-premortem-guardian/skill |
 
 Percorsi: `.cursor/skills/<nome>/SKILL.md` · `.cursor/commands/<nome>.md`
 

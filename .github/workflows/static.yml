@@ -111,3 +111,15 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  post_deploy_guardian:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Post-deploy Guardian (availability ingest)
+        run: |
+          sleep 30
+          python3 scripts/probe_live_urls.py
+          node righetto-premortem-guardian/scripts/guardian.mjs run --jobs=heartbeat --ingest-only
+        continue-on-error: true

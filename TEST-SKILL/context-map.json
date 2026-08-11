@@ -16,7 +16,8 @@
     "righetto-seo": { "command": "/seo", "path": ".cursor/skills/righetto-seo/SKILL.md" },
     "righetto-social": { "command": "/social", "path": ".cursor/skills/righetto-social/SKILL.md" },
     "righetto-security": { "command": "/sicurezza", "path": ".cursor/skills/righetto-security/SKILL.md" },
-    "righetto-zona": { "command": "/zona", "path": ".cursor/skills/righetto-zona/SKILL.md" }
+    "righetto-zona": { "command": "/zona", "path": ".cursor/skills/righetto-zona/SKILL.md" },
+    "righetto-guardian": { "command": "/guardian", "path": ".cursor/skills/righetto-guardian/SKILL.md" }
   },
 
   "cursor_rules": {
@@ -131,6 +132,12 @@
       "cursor_rules": ["righetto-vanilla-ui.mdc"],
       "token_stimati": "~1.400",
       "note": "PRIORITÀ PERMANENTE: Reg. UE 2024/1689 — barra sito, Linda, foto annunci, privacy §15. Obbligatorio su OGNI task che tocca HTML, JS chat, media o contenuti."
+    },
+    "guardian_premortem": {
+      "skills": ["skill-essentials.md"],
+      "cursor_skills": ["righetto-guardian"],
+      "token_stimati": "~600",
+      "note": "Entry point: node righetto-premortem-guardian/scripts/guardian.mjs run — sequenza master-sequence.md, policy autonomy.yaml. NON duplicare audit script: Guardian orchestra probe/SEO/security/lead."
     }
   },
 
@@ -218,6 +225,13 @@
       "skill": "TEST-SKILL/skill-media-migration.md",
       "output": "Scarica foto da Supabase → img/immobili/ WebP, aggiorna DB/manifest/share-immobile, commit+push main, purge bucket foto-immobili",
       "note_utente": "Dopo upload admin: attendere max ~6h — nessun comando manuale richiesto"
+    },
+    "guardian_dispatcher": {
+      "workflow": ".github/workflows/guardian-dispatcher.yml",
+      "schedule": "Ogni ora + venerdì 06:00 UTC + workflow_dispatch",
+      "script": "righetto-premortem-guardian/scripts/guardian.mjs run",
+      "output": "righetto-premortem-guardian/reports/guardian-latest.{json,md} + Issue label guardian se warning/critical",
+      "note": "UN SOLO entry point — cron-matrix interna, dedupe state.json. Audit/SEO/security chiamano Guardian prima degli script legacy."
     }
   }
 }
