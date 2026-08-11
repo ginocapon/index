@@ -138,6 +138,13 @@
       "cursor_skills": ["righetto-guardian"],
       "token_stimati": "~600",
       "note": "Entry point: node righetto-premortem-guardian/scripts/guardian.mjs run — sequenza master-sequence.md, policy autonomy.yaml. NON duplicare audit script: Guardian orchestra probe/SEO/security/lead."
+    },
+    "web_keyword_discovery": {
+      "skills": ["skill-essentials.md", "skill-editorial-queue.md", "skill-content.md"],
+      "cursor_skills": ["righetto-blog", "righetto-guardian"],
+      "data": ["data/editorial-queue.json", "data/gsc-keywords-priority.json", "data/web-keyword-discovery-latest.json"],
+      "token_stimati": "~900",
+      "note": "python scripts/web-keyword-discovery.py — titoli web istituzionali + GSC statico, 5 proposte anti-doppioni, GEO actions. Venerdì automatico."
     }
   },
 
@@ -232,6 +239,13 @@
       "script": "righetto-premortem-guardian/scripts/guardian.mjs run",
       "output": "righetto-premortem-guardian/reports/guardian-latest.{json,md} + Issue label guardian se warning/critical",
       "note": "UN SOLO entry point — cron-matrix interna, dedupe state.json. Audit/SEO/security chiamano Guardian prima degli script legacy."
+    },
+    "web_keyword_discovery": {
+      "workflow": ".github/workflows/venerdi-contenuti-freschezza.yml",
+      "schedule": "Venerdì 05:00 UTC (con contenuti-freschezza)",
+      "script": "scripts/web-keyword-discovery.py",
+      "output": "5 proposte in editorial-queue.json + web-keyword-discovery-report.md + geo-keyword-actions-latest.json",
+      "note": "Bypass GSC API: fonti web istituzionali + gsc-keywords-priority.json statico. Anti-doppioni SKIMM obbligatorio."
     }
   }
 }

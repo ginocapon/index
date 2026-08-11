@@ -29,6 +29,11 @@ jobs:
     every: 1d
     scope: [content, seo]
 
+  web_keyword_discovery:
+    on: "friday"
+    at: "05:00"
+    scope: [web_keywords, content, seo, business]
+
   daily_premortem:
     at: "18:00"
     scope: [all]
@@ -36,12 +41,12 @@ jobs:
   weekly_strategy:
     on: "monday"
     at: "08:00"
-    scope: [business, seo, content, competition]
+    scope: [business, seo, content, competition, web_keywords]
 
   weekly_red_team:
     on: "friday"
     at: "17:00"
-    scope: [strategy, assumptions, business]
+    scope: [strategy, assumptions, business, security]
 
   monthly_full_premortem:
     day: 1

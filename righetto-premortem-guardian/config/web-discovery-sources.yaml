@@ -1,0 +1,74 @@
+# Fonti web per discovery keyword settimanale — solo domini istituzionali/editoriali verificabili
+# Il parser estrae titoli e termini ricorrenti; non inventa dati.
+
+version: 1
+
+fetch:
+  timeout_sec: 18
+  user_agent: "RighettoWebKeywordDiscovery/1.0"
+
+sources:
+  - id: istat_ipab
+    url: "https://www.istat.it/comunicato-stampa/prezzi-delle-abitazioni-dati-provvisori-i-trimestre-2026/"
+    tier: institutional
+    tags: [prezzi, compravendite, dati]
+
+  - id: confcommercio_fimaa
+    url: "https://www.confcommercio.it/-/mercato-immobiliare"
+    tier: institutional
+    tags: [fimaa, mutui, locazioni]
+
+  - id: unione_veneto
+    url: "https://www.unioneimmobiliare.org/eventi/focus-veneto-2026/"
+    tier: industry
+    tags: [veneto, affitti, prezzi]
+
+  - id: mattino_padova
+    url: "https://www.mattinopadova.it/cronaca/case-prezzi-giu-padova-tiene-provincia-ez8ieha6"
+    tier: local_press
+    tags: [padova, provincia, fiaip]
+
+# Termini seme per scoring (Padova / Veneto / intent acquirenti)
+intent_seeds:
+  acquirente:
+    - prima casa
+    - mutuo
+    - rogito
+    - caparra
+    - compromesso
+    - ape
+    - visura
+  venditore:
+    - mandato
+    - valutazione
+    - home staging
+    - documenti vendita
+  affitto:
+    - canone
+    - contratto
+    - transitorio
+    - concordato
+    - caparra affitto
+    - studenti
+  locale:
+    - padova
+    - limena
+    - veneto
+    - provincia
+    - cintura
+    - albignasego
+    - cadoneghe
+    - vigonza
+  trend_web:
+    - riqualificazione
+    - ristrutturazione
+    - efficienza energetica
+    - accesso al credito
+    - tasso mutuo
+    - usato
+    - nuova costruzione
+    - locazione breve
+    - investimento
+    - seconda casa
+
+proposals_per_run: 5
