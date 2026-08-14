@@ -1,0 +1,86 @@
+# ============================================================
+# GUARDIAN DISPATCHER — Righetto Premortem Guardian
+# UN SOLO entry point: node righetto-premortem-guardian/scripts/guardian.mjs run
+# Il dispatcher sceglie i job dalla cron-matrix (memory/state.json).
+# ============================================================
+
+name: "Guardian Dispatcher"
+
+on:
+  schedule:
+    # Ogni ora — dispatcher interno decide job (heartbeat, sentinel, ecc.)
+    - cron: "0 * * * *"
+    # Venerdì 06:00 UTC — allineato audit/SEO/security esistenti
+    - cron: "0 6 * * 5"
+  workflow_dispatch:
+    inputs:
+      jobs:
+        description: "Job forzati (virgola) o vuoto = auto dispatch"
+        required: false
+        default: ""
+      ingest_only:
+        description: "Solo ingest data/* senza rieseguire script"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  guardian:
+    name: "Premortem Guardian run"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run Guardian dispatcher
+        id: guardian
+        env:
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: |
+          ARGS="run"
+          if [ -n "${{ github.event.inputs.jobs }}" ]; then
+            ARGS="$ARGS --jobs=${{ github.event.inputs.jobs }}"
+          fi
+          if [ "${{ github.event.inputs.ingest_only }}" = "true" ]; then
+            ARGS="$ARGS --ingest-only"
+          fi
+          node righetto-premortem-guardian/scripts/guardian.mjs $ARGS
+        continue-on-error: true
+
+      - name: Doctor check
+        run: node righetto-premortem-guardian/scripts/guardian.mjs doctor
+
+      - name: Upload Guardian report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: guardian-report
+          path: |
+            righetto-premortem-guardian/reports/guardian-latest.json
+            righetto-premortem-guardian/reports/guardian-latest.md
+
+      - name: Issue Guardian (critical/warning)
+        if: always() && steps.guardian.outcome != 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = 'righetto-premortem-guardian/reports/guardian-latest.md';
+            const body = fs.existsSync(path)
+              ? fs.readFileSync(path, 'utf8')
+              : 'Guardian report non generato';
+            const title = `🛡️ Guardian — ${new Date().toISOString().slice(0, 10)} — review richiesto`;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body: body + '\n\n---\n_Dispatcher: guardian-dispatcher.yml_',
+              labels: ['guardian']
+            });

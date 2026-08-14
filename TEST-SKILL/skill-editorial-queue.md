@@ -17,7 +17,7 @@
 4. python scripts/check_doppioni_sito.py  → se KO, STOP
 5. Se SOSTENERE urgente (0 click, >100 impr, no refresh 14 gg) → refresh, NON nuovo blog
 6. Altrimenti: prendi item scheduled con priority minima e target_week ≤ oggi+7
-7. Web search: 3–5 articoli hype sul tema → rielabora (MAI copiare)
+7. **Genera hero/figure da zero** (§2.1 E skill-content) → `verify_blog_hero_assets.py` + `geo-aeo-formula.py`
 8. Scrivi blog (skill-content + righetto-blog SKILL)
 9. Registra: blog.html, homepage.js, admin, sitemap, llms, ai.json
 10. validate-page.js + build_skimm.py + google-compliance-check.py
@@ -42,12 +42,23 @@
 
 ## Discovery nuovi temi (ogni settimana o coda bassa)
 
-1. **GSC** `queries_growth` con impr > 10 e clic = 0 → candidato
-2. **SKIMM** §4 avvisi cluster → nuovo angolo, non duplicare slug esistente
-3. **Web search** (IT, 2026): `affitti padova`, `mutuo giovani`, `mercato immobiliare veneto` + fonte istituzionale
-4. **Anti-doppioni:** grep slug + `check_doppioni_sito.py` + intent diverso da articolo esistente
-5. Aggiungi in `editorial-queue.json` con `status: "proposed"`, `research_refs`, `different_from`
-6. **Max 1 publish/settimana** — proposte possono accumularsi
+1. **Web keyword discovery (settimanale — venerdì)**  
+   `python scripts/web-keyword-discovery.py`  
+   Legge titoli/termini da fonti istituzionali (ISTAT, FIMAA/Confcommercio, Unione Immobiliare, stampa locale) + gap da `gsc-keywords-priority.json` **senza GSC API**.  
+   Output: 5 proposte anti-doppioni → `editorial-queue.json` (`proposed`) + `data/geo-keyword-actions-latest.json` (SOSTENERE/AGGIUNGERE GEO).
+2. **GSC** `queries_growth` con impr > 10 e clic = 0 → candidato
+3. **SKIMM** §4 avvisi cluster → nuovo angolo, non duplicare slug esistente
+4. **Web search** (IT, 2026): temi da report discovery + fonte istituzionale
+5. **Anti-doppioni:** grep slug + `check_doppioni_sito.py` + `build_skimm.py --check`
+6. Aggiungi in `editorial-queue.json` con `status: "proposed"`, `research_refs`, `different_from`, **`hero_concept`**, **`hero_asset`**, `hero_policy: GENERATE_FROM_SCRATCH_HD_19x9`
+7. **Max 1 publish/settimana** — proposte possono accumularsi
+
+### Hero immagini (BLOCCANTE — skill-content §2.1 E)
+
+- **Generare da zero** 1 hero + ≥3 figure — **non copiare** da altri articoli né `foto-servizi`
+- **HD 19:9** WebP 1900×900, hero <150 KiB, tema articolo, hash unico in `img/blog/`
+- Verifica: `python scripts/verify_blog_hero_assets.py --slug blog-{slug}`
+- Formula GEO: `python scripts/geo-aeo-formula.py` (target copertura **9/10**)
 
 ---
 
@@ -81,7 +92,7 @@ Dettaglio completo: `data/editorial-queue.json`
 
 | Ora CEST | Workflow | Pubblica blog? |
 |----------|----------|----------------|
-| 07:00 | `venerdi-contenuti-freschezza.yml` | ❌ audit + email PDF |
+| 07:00 | `venerdi-contenuti-freschezza.yml` | ❌ audit + email PDF + **web-keyword-discovery** (5 proposte) |
 | 07:00 | `audit-settimanale.yml` | ❌ Issue audit |
 | 07:00 | `mini-seo-check.yml` | ❌ Issue SEO |
 | ~07:30 | `venerdi-righetto-piano.yml` | ❌ Issue macrociclo |

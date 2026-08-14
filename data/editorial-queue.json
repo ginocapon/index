@@ -1,10 +1,14 @@
 {
-  "updated": "2026-07-24",
+  "updated": "2026-08-11",
   "policy": "Max 1 blog AGGIUNGERE/settimana. Prima SOSTENERE da gsc-keywords-priority.json se pages_refresh_priority ha 0 click e >50 impr. Anti-doppioni BLOCCANTE prima di ogni publish.",
   "workflow_skill": "TEST-SKILL/skill-editorial-queue.md",
   "discovery": {
     "when": "Ogni venerdì post-cron O quando scheduled < 3",
-    "sources": ["GSC gsc-keywords-priority.json", "SKIMM gap", "web search fonti istituzionali"],
+    "sources": [
+      "GSC gsc-keywords-priority.json",
+      "SKIMM gap",
+      "web search fonti istituzionali"
+    ],
     "output": "Aggiungi item status=proposed in coda + aggiorna skill-memoria-progressi §Log"
   },
   "items": [
@@ -35,7 +39,10 @@
       "cluster": "limena-local",
       "gsc_signal": "5 clic / 58 impr (16/07)",
       "different_from": "blog-scegliere-agenzia-immobiliare-padova-2026",
-      "research_refs": ["GSC queries_growth", "zona-limena"],
+      "research_refs": [
+        "GSC queries_growth",
+        "zona-limena"
+      ],
       "hero_concept": "Villa moderna Limena, tramonto, coppia con tablet — minimal luxury",
       "hype_sources_read": []
     },
@@ -166,6 +173,118 @@
       "cluster": "limena-gsc-local",
       "gsc_signal": "immobiliare righetto 71 impr",
       "different_from": "blog-righetto-storia-territorio-acquisizioni-2026"
+    },
+    {
+      "id": "eq-web-001",
+      "status": "proposed",
+      "priority": 10,
+      "target_week": "2026-08-18",
+      "slug": "blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026",
+      "kw_primaria": "costi ristrutturazione usato frenano acquisto",
+      "intent": "acquisto-budget-operativo",
+      "title": "Usato da riqualificare: perché i costi di ristrutturazione frenano l'acquisto nel 2026",
+      "cluster": "acquisto-operativo",
+      "different_from": "blog-bonus-edilizi-2026-incentivi-casa-padova",
+      "research_refs": [
+        "https://www.confcommercio.it/-/mercato-immobiliare",
+        "https://www.simplybiz.eu/fimaa-immobiliare-previsioni-2026-sentiment-1-quadrimestre/"
+      ],
+      "web_signal": "FIMAA Q1 2026: 33% operatori — costi elevati ristrutturazione frenano usato",
+      "gsc_align": null,
+      "discovery_source": "web-keyword-discovery",
+      "discovered_at": "2026-08-11",
+      "hero_concept": "Interno usato padovano pre-ristrutturazione vs dettaglio materiali/quote — luce laterale, 19:9, fotografia realistica, angolo inedito nel catalogo img/blog/",
+      "hero_asset": "img/blog/blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026.webp",
+      "hero_policy": "GENERATE_FROM_SCRATCH_HD_19x9"
+    },
+    {
+      "id": "eq-web-002",
+      "status": "proposed",
+      "priority": 11,
+      "target_week": "2026-08-25",
+      "slug": "blog-mutuo-tasso-342-accesso-credito-padova-2026",
+      "kw_primaria": "mutuo tasso 3.42 accesso credito 2026",
+      "intent": "mutuo-timing",
+      "title": "Mutuo al 3,42%: finestra di accesso al credito per chi compra nel Padovano",
+      "cluster": "mutui-cluster",
+      "different_from": "blog-mutui-casa-padova-2026",
+      "research_refs": [
+        "https://www.confcommercio.it/-/mercato-immobiliare"
+      ],
+      "web_signal": "Confcommercio/ABI: mutui acquisto abitazioni ~3,42% feb 2026",
+      "gsc_align": null,
+      "discovery_source": "web-keyword-discovery",
+      "discovered_at": "2026-08-11",
+      "hero_concept": "Coppia under-35 in agenzia con simulazione mutuo su tablet — estetica clean fintech, skyline Padova soft, 19:9 HD, file nuovo non riusato",
+      "hero_asset": "img/blog/blog-mutuo-tasso-342-accesso-credito-padova-2026.webp",
+      "hero_policy": "GENERATE_FROM_SCRATCH_HD_19x9"
+    },
+    {
+      "id": "eq-web-003",
+      "status": "proposed",
+      "priority": 12,
+      "target_week": "2026-09-01",
+      "slug": "blog-affitti-nuovo-vs-usato-veneto-2026",
+      "kw_primaria": "affitti nuovo veneto 10 percento",
+      "intent": "affitto-nuovo-usato",
+      "title": "Affitti nel Veneto: nuovo +10,3% e divario con l'usato — cosa cambia per chi cerca casa",
+      "cluster": "affitti-cluster",
+      "different_from": "blog-affitti-padova-canoni-2026",
+      "research_refs": [
+        "https://www.unioneimmobiliare.org/eventi/focus-veneto-2026/"
+      ],
+      "web_signal": "Focus Veneto 2026 / Immobiliare.it: nuovo locazione +10,3% Q1",
+      "gsc_align": "affitti limena",
+      "discovery_source": "web-keyword-discovery",
+      "discovered_at": "2026-08-11",
+      "hero_concept": "Confronto visivo edificio nuovo vetro vs palazzo usato Veneto — split composizione 19:9, fotografia architettonica realistica",
+      "hero_asset": "img/blog/blog-affitti-nuovo-vs-usato-veneto-2026.webp",
+      "hero_policy": "GENERATE_FROM_SCRATCH_HD_19x9"
+    },
+    {
+      "id": "eq-web-004",
+      "status": "proposed",
+      "priority": 13,
+      "target_week": "2026-09-08",
+      "slug": "blog-ipab-istat-q1-2026-padova-interpretazione",
+      "kw_primaria": "ipab istat 5.2 prezzi abitazioni",
+      "intent": "dato-interpretazione",
+      "title": "Prezzi case +5,2% (ISTAT Q1 2026): cosa significa davvero se compri a Padova",
+      "cluster": "analisi-scenari",
+      "different_from": "blog-mercato-immobiliare-padova-2026",
+      "research_refs": [
+        "https://www.istat.it/comunicato-stampa/prezzi-delle-abitazioni-dati-provvisori-i-trimestre-2026/"
+      ],
+      "web_signal": "ISTAT IPAB Q1 2026 +5,2% annuo; compravendite ADE +4,4%",
+      "gsc_align": null,
+      "discovery_source": "web-keyword-discovery",
+      "discovered_at": "2026-08-11",
+      "hero_concept": "Grafico tendenza prezzi astratto su tavolo con mappa Padova — foto documentale 19:9, non riuso hero mercato generico",
+      "hero_asset": "img/blog/blog-ipab-istat-q1-2026-padova-interpretazione.webp",
+      "hero_policy": "GENERATE_FROM_SCRATCH_HD_19x9"
+    },
+    {
+      "id": "eq-web-005",
+      "status": "proposed",
+      "priority": 14,
+      "target_week": "2026-09-15",
+      "slug": "blog-gergo-immobiliare-padova-guida-2026",
+      "kw_primaria": "gergo immobiliare padova",
+      "intent": "educational-aeo",
+      "title": "Gergo immobiliare: 25 termini che sentirai in agenzia a Padova (con esempi chiari)",
+      "cluster": "vita-agenzia-brand",
+      "different_from": "blog-5-domande-appuntamento-agenzia-padova-2026",
+      "research_refs": [
+        "https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi/banche-dati/quotazioni-immobiliari"
+      ],
+      "web_signal": "GSC: gergo immobiliare padova 3 impr 0 clic — gap AEO",
+      "gsc_align": "gergo immobiliare padova",
+      "discovery_source": "web-keyword-discovery",
+      "discovered_at": "2026-08-11",
+      "hero_concept": "Dettaglio mani su contratto con evidenziatore su termini (visura, caparra) — contesto agenzia Limena, 19:9 HD originale",
+      "hero_asset": "img/blog/blog-gergo-immobiliare-padova-guida-2026.webp",
+      "hero_policy": "GENERATE_FROM_SCRATCH_HD_19x9"
     }
-  ]
+  ],
+  "last_web_discovery": "2026-08-11"
 }

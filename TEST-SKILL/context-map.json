@@ -16,7 +16,8 @@
     "righetto-seo": { "command": "/seo", "path": ".cursor/skills/righetto-seo/SKILL.md" },
     "righetto-social": { "command": "/social", "path": ".cursor/skills/righetto-social/SKILL.md" },
     "righetto-security": { "command": "/sicurezza", "path": ".cursor/skills/righetto-security/SKILL.md" },
-    "righetto-zona": { "command": "/zona", "path": ".cursor/skills/righetto-zona/SKILL.md" }
+    "righetto-zona": { "command": "/zona", "path": ".cursor/skills/righetto-zona/SKILL.md" },
+    "righetto-guardian": { "command": "/guardian", "path": ".cursor/skills/righetto-guardian/SKILL.md" }
   },
 
   "cursor_rules": {
@@ -131,6 +132,33 @@
       "cursor_rules": ["righetto-vanilla-ui.mdc"],
       "token_stimati": "~1.400",
       "note": "PRIORITÀ PERMANENTE: Reg. UE 2024/1689 — barra sito, Linda, foto annunci, privacy §15. Obbligatorio su OGNI task che tocca HTML, JS chat, media o contenuti."
+    },
+    "guardian_premortem": {
+      "skills": ["skill-essentials.md"],
+      "cursor_skills": ["righetto-guardian"],
+      "token_stimati": "~600",
+      "note": "Entry point: node righetto-premortem-guardian/scripts/guardian.mjs run — sequenza master-sequence.md, policy autonomy.yaml. NON duplicare audit script: Guardian orchestra probe/SEO/security/lead."
+    },
+    "web_keyword_discovery": {
+      "skills": ["skill-essentials.md", "skill-editorial-queue.md", "skill-content.md"],
+      "cursor_skills": ["righetto-blog", "righetto-guardian"],
+      "data": ["data/editorial-queue.json", "data/gsc-keywords-priority.json", "data/web-keyword-discovery-latest.json"],
+      "token_stimati": "~900",
+      "note": "python scripts/web-keyword-discovery.py — titoli web istituzionali + GSC statico, 5 proposte anti-doppioni, GEO actions. Venerdì automatico."
+    },
+    "linda_faq_discovery": {
+      "skills": ["skill-essentials.md", "skill-content.md", "skill-ai-act-compliance.md"],
+      "cursor_skills": ["righetto-guardian"],
+      "data": ["data/linda-faq-proposals-latest.json", "data/linda-faq-archive.jsonl", "data/og-immobili.json", "TEST-SKILL/skimm.json"],
+      "token_stimati": "~800",
+      "note": "python scripts/linda-faq-biweekly-discovery.py — ogni 15 gg (gate 14) venerdì 07:00 CEST, ≥20 Q&A proposte da blog+immobili, archivio cumulativo, merge manuale FAQ_DATA (YELLOW)."
+    },
+    "linda_real_estate_agent": {
+      "skills": ["skill-essentials.md", "skill-linda-agent.md", "skill-ai-act-compliance.md", "skill-forms-leads.md"],
+      "cursor_skills": ["righetto-guardian"],
+      "data": ["data/linda-config.json", "data/linda-quality-latest.json", "data/linda-question-intelligence-latest.json", "js/linda-agent.js", "js/chatbot.js"],
+      "token_stimati": "~1.200",
+      "note": "Linda Agent: js/linda-agent.js + chatbot.js ranking immobili reali, ciclo scripts/linda-agent-cycle.py, Guardian job linda_agent_cycle, QR qr-review/qr-property."
     }
   },
 
@@ -218,6 +246,27 @@
       "skill": "TEST-SKILL/skill-media-migration.md",
       "output": "Scarica foto da Supabase → img/immobili/ WebP, aggiorna DB/manifest/share-immobile, commit+push main, purge bucket foto-immobili",
       "note_utente": "Dopo upload admin: attendere max ~6h — nessun comando manuale richiesto"
+    },
+    "guardian_dispatcher": {
+      "workflow": ".github/workflows/guardian-dispatcher.yml",
+      "schedule": "Ogni ora + venerdì 06:00 UTC + workflow_dispatch",
+      "script": "righetto-premortem-guardian/scripts/guardian.mjs run",
+      "output": "righetto-premortem-guardian/reports/guardian-latest.{json,md} + Issue label guardian se warning/critical",
+      "note": "UN SOLO entry point — cron-matrix interna, dedupe state.json. Audit/SEO/security chiamano Guardian prima degli script legacy."
+    },
+    "web_keyword_discovery": {
+      "workflow": ".github/workflows/venerdi-contenuti-freschezza.yml",
+      "schedule": "Venerdì 05:00 UTC (con contenuti-freschezza)",
+      "script": "scripts/web-keyword-discovery.py",
+      "output": "5 proposte in editorial-queue.json + web-keyword-discovery-report.md + geo-keyword-actions-latest.json",
+      "note": "python scripts/web-keyword-discovery.py — titoli web istituzionali + gsc-keywords-priority.json statico. Anti-doppioni SKIMM obbligatorio."
+    },
+    "geo_aeo_formula": {
+      "workflow": ".github/workflows/venerdi-contenuti-freschezza.yml",
+      "script": "scripts/geo-aeo-formula.py",
+      "verify": "scripts/verify_blog_hero_assets.py",
+      "output": "geo-aeo-formula-report.md + data/geo-aeo-formula-latest.json",
+      "target_score": "9/10 GEO/AEO con hero originali HD 19:9 da zero"
     }
   }
 }

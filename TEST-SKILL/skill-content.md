@@ -87,9 +87,21 @@ python scripts/google-compliance-check.py          # target 0 ERR / 0 WARN
 python scripts/patch_righetto_sol_blog.py          # se manca righetto-sol
 python scripts/patch_compliance_warns.py           # title/meta/geo/stuffing
 python scripts/audit_chatbot_faq.py                # gap blog ↔ FAQ Linda (dopo batch)
+python scripts/linda-faq-biweekly-discovery.py   # bi-quindicinale ≥20 Q&A proposte (gate 14 gg)
 ```
 
 Checklist operativa unificata: **`skill-massimo-punteggio.md` §4**. Manutenzione chatbot: **`SKILL-2.0.md` §8.1e**.
+
+**Linda FAQ discovery (ogni 15 giorni, venerdì 07:00 CEST):**
+
+| Output | Path |
+|---|---|
+| Proposte ultimo ciclo | `data/linda-faq-proposals-latest.json` |
+| Archivio cumulativo | `data/linda-faq-archive.jsonl` |
+| Stato gate 14 gg | `data/linda-faq-discovery-state.json` |
+| Report | `linda-faq-biweekly-report.md` |
+
+Target: **≥20** nuove Q&A per ciclo da blog + immobili. Merge manuale in `js/chatbot.js` (policy YELLOW).
 
 **Obiettivo competitivo:** superare portali competitor con **volume** (99+ guide), **corposità** (2500+ parole pillar), **freschezza** (aggiornamento settimanale visibile), **E-E-A-T** (sezione Righetto, autori Linda/Gino). Regole complete: **`skimm.md` §1.7–1.9** e **`SKILL-2.0.md` §8.1d**.
 
@@ -181,6 +193,30 @@ Prima del commit: `node scripts/validate-page.js --file blog-….html`. Title/H1
 - **Vietato:** `style="width:100%"` su `<img>` senza wrapper `aspect-ratio`; altezze fisse tipo `height:480px` / `height:300px` sull’hero.
 - **OG/social:** allineare `og:image` alla stessa foto hero (crop 19:9 accettabile anche se alcuni social preferiscono ~1.91:1).
 
+#### E) Hero e figure — **generazione da zero** (BLOCCANTE — agosto 2026)
+
+> Ogni articolo blog deve avere immagini **nuove, originali, performanti HD**, **inerenti all’argomento**, **non copiate** da altri articoli né da `img/foto-servizi/`.
+
+| Obbligo | Dettaglio |
+|---|---|
+| **Da zero** | 1 hero + ≥3 figure corpo — **creati per quell’articolo**, non riuso path/WebP già in `img/blog/` |
+| **HD performante** | Hero export **1900×900** WebP 19:9 (min 1200×630); target hero **<150 KiB**; figure corpo stessa qualità |
+| **Tema** | Soggetto **coerente** con kw/titolo (Padova, Veneto, immobiliare, intent acquirente/venditore) |
+| **Unicità** | Hash file **diverso** da tutti gli altri `.webp` in `img/blog/` — verifica automatica |
+| **Allineamento** | `art-hero-img`, `og:image`, `BlogPosting.image`, `admin` `immagine_copertina`, `homepage.js` staticMap |
+| **Verifica** | `python scripts/verify_blog_hero_assets.py --slug blog-{slug}` prima di publish |
+| **GEO/AEO** | Dopo hero: `python scripts/geo-aeo-formula.py` — formula score + checklist |
+
+**Workflow agente (massimo impegno):**
+1. Leggi `hero_brief` / `hero_concept` da `editorial-queue.json` o discovery report
+2. Definisci brief visivo **univoco** (soggetto, luce, angolo) — grep `img/blog/` per non ripetere scene
+3. **Genera/crea** hero 1900×900 WebP + 3 figure 19:9 — fotografia realistica, no stock, no fantasy 3D
+4. Salva in `img/blog/{slug}.webp` (+ figure `img/blog/{slug}-fig-{n}.webp`)
+5. Esegui verify script — se FAIL, **rigenera** (non pubblicare con hero duplicato/generico)
+6. AI Act: didascalia sotto hero/figure se elaborazione digitale (`skill-ai-act-compliance.md`)
+
+**Vietato:** copiare hero di altro articolo · `foto-servizi` · `og-default` · stesso file con nome diverso · CDN esterni.
+
 **Per articolo (minimo):**
 1. **1 copertina hero** fotografica tematica
 2. **≥ 3 figure nel corpo** (`<figure class="blog-fig">` + `blog-fig__frame`) distribuite tra le sezioni H2
@@ -199,10 +235,12 @@ Dopo generazione o patch, l’agente **esegue sempre** (non delegare all’utent
 
 1. `python scripts/check_doppioni_sito.py`
 2. `node scripts/validate-page.js blog-{slug}.html` (o elenco file toccati)
-3. Grep: slug in `blog.html`, **`admin.html` (`_blogSeedArticles`)**, `js/homepage.js`, `sitemap.xml`
-4. Controllo manuale campione: hero + 3 figure = path sotto `img/` esistenti; **proporzione 19:9** (`art-hero__frame`, `blog-fig__frame`); zero URL esterna immagine; zero illustrazione AI/3D
-5. Verifica elenco blog: nuovi articoli visibili in cima per data (no featured che li esclude)
-6. Solo dopo pass 1+2: commit/push se previsto da task
+3. `python scripts/verify_blog_hero_assets.py --slug blog-{slug}` — hero **nuovo** HD 19:9, no duplicati
+4. Grep: slug in `blog.html`, **`admin.html` (`_blogSeedArticles`)**, `js/homepage.js`, `sitemap.xml`
+5. Controllo manuale campione: hero + 3 figure = path sotto `img/` esistenti; **proporzione 19:9** (`art-hero__frame`, `blog-fig__frame`); zero URL esterna immagine; zero illustrazione AI/3D
+6. `python scripts/geo-aeo-formula.py` — checklist GEO/AEO aggiornata
+7. Verifica elenco blog: nuovi articoli visibili in cima per data (no featured che li esclude)
+8. Solo dopo pass 1–7: commit/push se previsto da task
 
 **Registrazione admin (obbligatoria):** ogni nuovo `blog-*.html` deve comparire in `admin.html` → `const _blogSeedArticles` con `data_pubblicazione`, `url_statico`, `immagine_copertina`, `emoji`, `contenuto` (snippet HTML). Dopo batch multipli: `python scripts/sync_admin_blog_seed.py` (allinea da `blog.html` articoliStatici). `validate-page.js` segnala errore se manca nel seed admin.
 

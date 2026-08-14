@@ -1,0 +1,127 @@
+{
+  "generated_at": "2026-08-11T12:08:57",
+  "linda_quality_score": 97.5,
+  "target_note": "Score interno 0-100 — include live benchmark route classification",
+  "component_scores": {
+    "faq_coverage": 100,
+    "faq_volume": 100,
+    "property_catalog": 75,
+    "agent_module": 100,
+    "qr_system": 100,
+    "knowledge_pipeline": 100,
+    "live_benchmark": 100,
+    "intent_logging": 100,
+    "temporal_knowledge": 100
+  },
+  "category_scores": {
+    "factual_accuracy": 100,
+    "property_accuracy": 75,
+    "retrieval": 100,
+    "ranking": 100,
+    "grounding": 100,
+    "hallucination_risk": 85,
+    "sources_temporal": 100,
+    "unanswered_handling": 75,
+    "lead_conversion_hooks": 80,
+    "frontend_latency": 90,
+    "live_route_accuracy": 100
+  },
+  "live_benchmark": {
+    "generated_at": "2026-08-11T12:08:57",
+    "pass_rate_pct": 100.0,
+    "passed": 12,
+    "total": 12,
+    "results": [
+      {
+        "q": "orari agenzia",
+        "expect": "faq",
+        "actual": "faq",
+        "pass": true,
+        "topic": "orari"
+      },
+      {
+        "q": "commissione mediazione",
+        "expect": "faq",
+        "actual": "faq",
+        "pass": true,
+        "topic": "commissione"
+      },
+      {
+        "q": "mutuo prima casa",
+        "expect": "faq",
+        "actual": "faq",
+        "pass": true,
+        "topic": "mutuo_prima_casa"
+      },
+      {
+        "q": "LF0230",
+        "expect": "faq",
+        "actual": "faq",
+        "pass": true,
+        "topic": "immobile_codice"
+      },
+      {
+        "q": "cerco appartamento limena affitto",
+        "expect": "search",
+        "actual": "search",
+        "pass": true,
+        "topic": "search_affitto_limena"
+      },
+      {
+        "q": "casa padova massimo 350000 tre camere",
+        "expect": "search",
+        "actual": "search",
+        "pass": true,
+        "topic": "search_vendita_padova_budget"
+      },
+      {
+        "q": "cerco villa con giardino vigonza",
+        "expect": "search",
+        "actual": "search",
+        "pass": true,
+        "topic": "search_villa_vigonza"
+      },
+      {
+        "q": "stima appartamento 80mq padova",
+        "expect": "stima",
+        "actual": "stima",
+        "pass": true,
+        "topic": "stima"
+      },
+      {
+        "q": "voglio essere contattato",
+        "expect": "contatto",
+        "actual": "contatto",
+        "pass": true,
+        "topic": "contatto"
+      },
+      {
+        "q": "ciao",
+        "expect": "saluto",
+        "actual": "saluto",
+        "pass": true,
+        "topic": "saluto"
+      },
+      {
+        "q": "documenti per il rogito",
+        "expect": "faq",
+        "actual": "faq",
+        "pass": true,
+        "topic": "rogito"
+      },
+      {
+        "q": "affitto studenti padova",
+        "expect": "faq",
+        "actual": "faq",
+        "pass": true,
+        "topic": "affitto_studenti"
+      }
+    ],
+    "policy": "green_report"
+  },
+  "faq_entries": 333,
+  "blog_refs": 123,
+  "skimm_articles": 121,
+  "catalog_immobili": 25,
+  "policy": "green_report"
+}

@@ -1094,6 +1094,17 @@ Checklist completa venerdì: **`skill-massimo-punteggio.md` §4** (automazioni, 
 
 **Copertura target:** **102/102** slug blog con keyword dedicata (audit: `scripts/audit_chatbot_faq.py`); voce «articoli blog» come fallback generico.
 
+**Discovery bi-quindicinale automatica (ogni 15 giorni, venerdì 07:00 CEST):**
+
+> Script: `python scripts/linda-faq-biweekly-discovery.py` — gate **14 giorni** tra run (stesso venerdì del cron contenuti).
+
+1. Analizza **nuovi/aggiornati** articoli blog (FAQ schema JSON-LD, H2/H3 domanda) e **immobili** catalogo (`data/og-immobili.json`, `img/immobili/{CODICE}/`)
+2. Genera **≥20** nuove domande/risposte proposte in formato `FAQ_DATA` (`k`, `r`, `blog`/`blogTitle`, `immobile_slug`/`immobile_codice`)
+3. Archivia cumulativo: `data/linda-faq-archive.jsonl` + snapshot `data/linda-faq-proposals-latest.json` + report `linda-faq-biweekly-report.md`
+4. **Policy YELLOW:** il cron **non** modifica `js/chatbot.js` — revisione umana/agente, poi merge in `FAQ_DATA`, audit, bump `chatbot.js?v=N`
+5. Guardian job: `linda_faq_discovery` (cron-matrix) · workflow: `venerdi-contenuti-freschezza.yml`
+6. Forzare run fuori ciclo: `python scripts/linda-faq-biweekly-discovery.py --force`
+
 ### 8.1f Trasparenza AI Act UE — contenuti digitali (PRIORITÀ PERMANENTE)
 
 > **File operativo:** `TEST-SKILL/skill-ai-act-compliance.md` — **obbligatorio** su ogni pagina, blog, landing, foto, chatbot e social.

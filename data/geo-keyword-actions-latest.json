@@ -1,0 +1,179 @@
+{
+  "date": "2026-08-11",
+  "actions": [
+    {
+      "action": "SOSTENERE",
+      "url": "/blog-rendimento-affitto-padova",
+      "reason": "139 impr, 0 clic",
+      "geo": [
+        "aeo_answer_box",
+        "faq_visible",
+        "dateModified"
+      ],
+      "priority": "high"
+    },
+    {
+      "action": "SOSTENERE",
+      "url": "/agenzia-immobiliare-padova",
+      "reason": "68 impr, 0 clic",
+      "geo": [
+        "aeo_answer_box",
+        "faq_visible",
+        "dateModified"
+      ],
+      "priority": "high"
+    },
+    {
+      "action": "SOSTENERE",
+      "url": "/zona-limena",
+      "reason": "3 impr, 0 clic",
+      "geo": [
+        "aeo_answer_box",
+        "faq_visible",
+        "dateModified"
+      ],
+      "priority": "medium"
+    },
+    {
+      "action": "SOSTENERE",
+      "url": "/blog-affitto-breve-padova-2026",
+      "reason": "10 impr, 0 clic",
+      "geo": [
+        "aeo_answer_box",
+        "faq_visible",
+        "dateModified"
+      ],
+      "priority": "medium"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026",
+      "geo": "aeo_box_costi_ristrutturazione",
+      "kw": "costi ristrutturazione usato frenano acquisto"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026",
+      "geo": "faq_budget_acquirente",
+      "kw": "costi ristrutturazione usato frenano acquisto"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026",
+      "geo": "hero_original_hd_19x9",
+      "kw": "costi ristrutturazione usato frenano acquisto"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026",
+      "geo": "hero_original_hd_verify",
+      "kw": "costi ristrutturazione usato frenano acquisto",
+      "hero_asset": "img/blog/blog-costi-ristrutturazione-usato-frenano-acquisto-padova-2026.webp",
+      "hero_brief": "Interno usato padovano pre-ristrutturazione vs dettaglio materiali/quote \u2014 luce laterale, 19:9, fotografia realistica, angolo inedito nel catalogo img/blog/"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-mutuo-tasso-342-accesso-credito-padova-2026",
+      "geo": "refresh_meta_mutui_casa",
+      "kw": "mutuo tasso 3.42 accesso credito 2026"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-mutuo-tasso-342-accesso-credito-padova-2026",
+      "geo": "faq_tasso_fisso_timing",
+      "kw": "mutuo tasso 3.42 accesso credito 2026"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-mutuo-tasso-342-accesso-credito-padova-2026",
+      "geo": "hero_original_hd_19x9",
+      "kw": "mutuo tasso 3.42 accesso credito 2026"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-mutuo-tasso-342-accesso-credito-padova-2026",
+      "geo": "hero_original_hd_verify",
+      "kw": "mutuo tasso 3.42 accesso credito 2026",
+      "hero_asset": "img/blog/blog-mutuo-tasso-342-accesso-credito-padova-2026.webp",
+      "hero_brief": "Coppia under-35 in agenzia con simulazione mutuo su tablet \u2014 estetica clean fintech, skyline Padova soft, 19:9 HD, file nuovo non riusato"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-affitti-nuovo-vs-usato-veneto-2026",
+      "geo": "faq_nuovo_vs_usato_affitto",
+      "kw": "affitti nuovo veneto 10 percento"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-affitti-nuovo-vs-usato-veneto-2026",
+      "geo": "link_zona_limena",
+      "kw": "affitti nuovo veneto 10 percento"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-affitti-nuovo-vs-usato-veneto-2026",
+      "geo": "hero_original_hd_19x9",
+      "kw": "affitti nuovo veneto 10 percento"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-affitti-nuovo-vs-usato-veneto-2026",
+      "geo": "hero_original_hd_verify",
+      "kw": "affitti nuovo veneto 10 percento",
+      "hero_asset": "img/blog/blog-affitti-nuovo-vs-usato-veneto-2026.webp",
+      "hero_brief": "Confronto visivo edificio nuovo vetro vs palazzo usato Veneto \u2014 split composizione 19:9, fotografia architettonica realistica"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-ipab-istat-q1-2026-padova-interpretazione",
+      "geo": "aeo_dato_istat",
+      "kw": "ipab istat 5.2 prezzi abitazioni"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-ipab-istat-q1-2026-padova-interpretazione",
+      "geo": "schema_dataset_citation",
+      "kw": "ipab istat 5.2 prezzi abitazioni"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-ipab-istat-q1-2026-padova-interpretazione",
+      "geo": "hero_original_hd_19x9",
+      "kw": "ipab istat 5.2 prezzi abitazioni"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-ipab-istat-q1-2026-padova-interpretazione",
+      "geo": "hero_original_hd_verify",
+      "kw": "ipab istat 5.2 prezzi abitazioni",
+      "hero_asset": "img/blog/blog-ipab-istat-q1-2026-padova-interpretazione.webp",
+      "hero_brief": "Grafico tendenza prezzi astratto su tavolo con mappa Padova \u2014 foto documentale 19:9, non riuso hero mercato generico"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-gergo-immobiliare-padova-guida-2026",
+      "geo": "faq_gergo_visura_caparra",
+      "kw": "gergo immobiliare padova"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-gergo-immobiliare-padova-guida-2026",
+      "geo": "llms_glossary_snippet",
+      "kw": "gergo immobiliare padova"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-gergo-immobiliare-padova-guida-2026",
+      "geo": "hero_original_hd_19x9",
+      "kw": "gergo immobiliare padova"
+    },
+    {
+      "action": "AGGIUNGERE",
+      "target": "blog-gergo-immobiliare-padova-guida-2026",
+      "geo": "hero_original_hd_verify",
+      "kw": "gergo immobiliare padova",
+      "hero_asset": "img/blog/blog-gergo-immobiliare-padova-guida-2026.webp",
+      "hero_brief": "Dettaglio mani su contratto con evidenziatore su termini (visura, caparra) \u2014 contesto agenzia Limena, 19:9 HD originale"
+    }
+  ]
+}

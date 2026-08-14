@@ -1,0 +1,75 @@
+---
+name: righetto-guardian
+description: >-
+  Premortem Guardian Righetto — un solo entry point per monitoraggio, premortem,
+  failure modes e remediation con policy GREEN/YELLOW/RED/BLACK. Usa quando
+  l'utente chiede Guardian, premortem, health check sito, anomalie, dispatcher cron.
+---
+
+# Guardian — indice operativo (token-light)
+
+**Entry point:** `node righetto-premortem-guardian/scripts/guardian.mjs run`
+
+**Sequenza obbligatoria:** `righetto-premortem-guardian/sequences/master-sequence.md`
+
+## Prima di agire
+
+1. Leggi `TEST-SKILL/skill-essentials.md` (claim, stack, no dati inventati)
+2. Leggi `righetto-premortem-guardian/AGENT.md` (contratto agente)
+3. Policy autonomia: `righetto-premortem-guardian/policy/autonomy.yaml`
+
+## Comandi
+
+| Comando | Uso |
+|---------|-----|
+| `run` | Dispatcher auto (cron-matrix + state) |
+| `run --jobs=site_integrity,security_check` | Job forzati |
+| `run --ingest-only` | Solo ingest `data/*` |
+| `doctor` | Verifica pacchetto |
+| `sequence` | Stampa sequenza canonica |
+
+## Adapter esistenti (no paralleli)
+
+Guardian **riusa** script repo: `probe_live_urls.py`, `mini-seo-check.sh`, `security-check.sh`, `audit-skill.sh`, `audit_chatbot_faq.py`, `verify_ga_consent_live.py`, `guardian-leads-snapshot.py`, `verify_media_migration.py`.
+
+Report: `righetto-premortem-guardian/reports/guardian-latest.{json,md}`
+
+## Integrazioni NON disponibili (non inventare)
+
+- GA4 Data API live · GSC API · Social heartbeat Windows · Backup Supabase auto · Lighthouse/CWV
+
+## Regole
+
+- GREEN = solo report/alert · YELLOW = proponi, no publish · RED/BLACK = stop
+- Ogni failure mode → segnale + test + verifica
+- No loop automatici · No soglie alterate per silenziare alert
+
+Dettaglio architettura: `righetto-premortem-guardian/INTEGRATION.md`
+
+## Discovery keyword web (settimanale)
+
+```bash
+python scripts/web-keyword-discovery.py
+```
+
+- Fonti: ISTAT, FIMAA/Confcommercio, Unione Immobiliare Veneto, GSC statico
+- 5 articoli `proposed` in `editorial-queue.json` (anti-doppioni SKIMM)
+- GEO/SEO: `data/geo-keyword-actions-latest.json`
+- Cron: venerdì `venerdi-contenuti-freschezza.yml` + Guardian `web_keyword_discovery`
+
+## Hero originali HD (blog)
+
+Vedi `TEST-SKILL/skill-content.md` §2.1 E — generare da zero, `verify_blog_hero_assets.py`, formula `geo-aeo-formula.py` (target **9/10** GEO/AEO)
+
+## Linda FAQ discovery (bi-quindicinale)
+
+```bash
+python scripts/linda-faq-biweekly-discovery.py
+python scripts/linda-faq-biweekly-discovery.py --force   # bypass gate 14 giorni
+```
+
+- Venerdì 07:00 CEST (`venerdi-contenuti-freschezza.yml`) · gate **14 giorni** tra run
+- ≥20 proposte Q&A da blog (FAQ schema + heading) e catalogo immobili
+- Archivio: `data/linda-faq-archive.jsonl` — **non** auto-merge in `chatbot.js` (YELLOW)
+- Dettaglio: `SKILL-2.0.md` §8.1e
+

@@ -1,0 +1,579 @@
+{
+  "generated_at": "2026-08-11T12:07:36",
+  "top_questions": [
+    {
+      "question": "Quali sono i requisiti per ottenere le agevolazioni prima casa nel 2026?",
+      "count": 1
+    },
+    {
+      "question": "L'APE puo' essere vecchio?",
+      "count": 1
+    },
+    {
+      "question": "Come acquistare appartamento a Limena nel 2026?",
+      "count": 1
+    },
+    {
+      "question": "Cos'e' la caparra confirmatoria nella compravendita immobiliare?",
+      "count": 1
+    },
+    {
+      "question": "Cosa deve dare il venditore?",
+      "count": 1
+    },
+    {
+      "question": "Conviene comprare o affittare casa a Padova nel 2026?",
+      "count": 1
+    },
+    {
+      "question": "Il mercato immobiliare nel capoluogo euganeo nel 2026: conviene investire?",
+      "count": 1
+    },
+    {
+      "question": "Plusvalenza sempre al 26%?",
+      "count": 1
+    },
+    {
+      "question": "Qual è l'errore più costoso?",
+      "count": 1
+    },
+    {
+      "question": "Spostamenti verso il centro di Padova?",
+      "count": 1
+    },
+    {
+      "question": "Confronto prezzi: quotazioni al metro quadro e costo reale?",
+      "count": 1
+    },
+    {
+      "question": "Chi paga il tecnico?",
+      "count": 1
+    },
+    {
+      "question": "Da privato o da costruttore cambia tutto?",
+      "count": 1
+    },
+    {
+      "question": "Serve il geometra prima dell'offerta?",
+      "count": 1
+    },
+    {
+      "question": "Quanti operatori vedono domanda in crescita?",
+      "count": 1
+    },
+    {
+      "question": "Perché non pubblichiamo €/mq OMI per Limena in questo articolo?",
+      "count": 1
+    },
+    {
+      "question": "Locazioni temporanee nel Padovano: Airbnb, turismo e rendimenti?",
+      "count": 1
+    },
+    {
+      "question": "Quanto rende un affitto breve a Padova nel 2026?",
+      "count": 1
+    },
+    {
+      "question": "Tipologie contrattuali: quale scegliere?",
+      "count": 1
+    },
+    {
+      "question": "Si può applicare la cedolare secca sull'affitto transitorio?",
+      "count": 1
+    }
+  ],
+  "emerging_questions": [
+    {
+      "question": "Come prenotare visita per LF0230",
+      "source": "immobile_catalog",
+      "blog": null
+    },
+    {
+      "question": "La burocrazia: il muro invisibile tra voi e la vostra casa?",
+      "source": "blog_heading",
+      "blog": "blog-impegno-quotidiano-agenzia-immobiliare"
+    },
+    {
+      "question": "Cos'e' il progetto Ca' Marcello a Mestre?",
+      "source": "blog_faq_schema",
+      "blog": "blog-ca-marcello-mestre"
+    },
+    {
+      "question": "L'home staging funziona davvero per vendere casa a Padova?",
+      "source": "blog_faq_schema",
+      "blog": "blog-vendita-immobiliare-padova-strategie-2026"
+    },
+    {
+      "question": "Le spese di ristrutturazione riducono la plusvalenza immobiliare?",
+      "source": "blog_faq_schema",
+      "blog": "blog-tasse-vendita-casa"
+    },
+    {
+      "question": "Se servono sanatorie? Il conto sale",
+      "source": "blog_heading",
+      "blog": "blog-costi-vendere-casa-padova-2026"
+    },
+    {
+      "question": "Lo scoperto esclusivo: 310 mq di verde privato?",
+      "source": "blog_heading",
+      "blog": "blog-appartamento-nuova-costruzione-limena"
+    },
+    {
+      "question": "Serve lo stesso notaio?",
+      "source": "blog_faq_schema",
+      "blog": "blog-permuta-immobiliare-padova-2026"
+    },
+    {
+      "question": "Meglio tasso fisso o variabile per il mutuo prima casa nel 2026?",
+      "source": "blog_faq_schema",
+      "blog": "blog-mutuo-prima-casa-padova"
+    },
+    {
+      "question": "La guerra determina da sola il prezzo della mia casa?",
+      "source": "blog_faq_schema",
+      "blog": "blog-geopolitica-ucraina-prezzi-mutui-italia-veneto-2026"
+    },
+    {
+      "question": "Il calo CRIF ferma le compravendite?",
+      "source": "blog_faq_schema",
+      "blog": "blog-barometro-mutui-crif-padova-2026"
+    },
+    {
+      "question": "Le previsioni al 2028 sono garantite?",
+      "source": "blog_faq_schema",
+      "blog": "blog-previsioni-immobiliari-scenari-geopolitica-2026"
+    },
+    {
+      "question": "Lo scenario nazionale: 800.000 transazioni e fatturato record di 170 miliardi?",
+      "source": "blog_heading",
+      "blog": "blog-compravendite-padova-record-2026"
+    },
+    {
+      "question": "Le tensioni internazionali cambiano subito i prezzi nel Padovano?",
+      "source": "blog_faq_schema",
+      "blog": "blog-patrimonio-casa-resilienza-mercati-globali-2026"
+    },
+    {
+      "question": "Collegamento con articolo dazi Padova?",
+      "source": "blog_faq_schema",
+      "blog": "blog-eurocamera-accordo-dazi-usa-2026"
+    },
+    {
+      "question": "Investitore: cambia qualcosa?",
+      "source": "blog_heading",
+      "blog": "blog-piano-casa-decreto-66-2026-padova"
+    },
+    {
+      "question": "Cos'è BTR?",
+      "source": "blog_faq_schema",
+      "blog": "blog-outlook-living-italia-2026-padova"
+    },
+    {
+      "question": "Vicenza, zona universitaria e lavoratori: chi chiede il loft?",
+      "source": "blog_heading",
+      "blog": "blog-loft-aziende-cucina-condivisa-padova-vicenza-2026"
+    },
+    {
+      "question": "Official rent data?",
+      "source": "blog_faq_schema",
+      "blog": "blog-italy-rental-market-positive-start-january-2026"
+    },
+    {
+      "question": "Quante transazioni nel Q1 2026?",
+      "source": "blog_faq_schema",
+      "blog": "blog-domanda-residenziale-supera-offerta-2026-padova"
+    }
+  ],
+  "unanswered_questions": [],
+  "property_demand": {
+    "mutuo": 3,
+    "affitto": 2
+  },
+  "location_demand": {
+    "padova": 9,
+    "limena": 3,
+    "arcella": 1,
+    "guizza": 1,
+    "vigonza": 1
+  },
+  "feature_demand": {
+    "mutuo": 3,
+    "affitto": 2
+  },
+  "budget_demand_signals": 1,
+  "gsc_priority_sample": [
+    {
+      "q": "immobiliare",
+      "impressions": 301,
+      "intent": "generico-broad",
+      "action": "pillar-home-brand"
+    },
+    {
+      "q": "agenzia immobiliare limena",
+      "impressions": 166,
+      "intent": "agenzia-locale",
+      "slug": "blog-agenzia-immobiliare-limena-come-scegliere-2026",
+      "status": "published"
+    },
+    {
+      "q": "immobiliare righetto",
+      "impressions": 71,
+      "intent": "brand-locale",
+      "slug": "blog-gruppo-immobiliare-righetto-limena-2026",
+      "status": "published"
+    },
+    {
+      "q": "immobiliare limena",
+      "impressions": 67,
+      "intent": "generico-locale",
+      "slug": "blog-mercato-immobiliare-limena-2026",
+      "status": "published"
+    },
+    {
+      "q": "appartamento limena",
+      "impressions": 63,
+      "intent": "comprare",
+      "slug": "blog-appartamento-limena-guida-acquisto-2026",
+      "status": "published"
+    },
+    {
+      "q": "righetto",
+      "impressions": 40,
+      "intent": "brand",
+      "slug": "blog-gruppo-immobiliare-righetto-limena-2026",
+      "status": "published"
+    },
+    {
+      "q": "agenzie immobiliari limena",
+      "impressions": 34,
+      "intent": "agenzia-locale",
+      "slug": "blog-agenzia-immobiliare-limena-come-scegliere-2026",
+      "status": "published"
+    },
+    {
+      "q": "casa in vendita a limena",
+      "impressions": 16,
+      "intent": "vendita-locale",
+      "slug": "blog-case-vendita-limena-leggere-annunci-2026",
+      "status": "published"
+    },
+    {
+      "q": "affitti a limena",
+      "impressions": 15,
+      "intent": "affitto-locale",
+      "slug": "blog-affitti-limena-2026",
+      "status": "published"
+    },
+    {
+      "q": "appartamento in affitto limena",
+      "impressions": 15,
+      "intent": "affitto-locale",
+      "slug": "blog-appartamento-affitto-limena-contratto-2026",
+      "status": "published"
+    },
+    {
+      "q": "bilocale limena vendita",
+      "impressions": 15,
+      "intent": "comprare-tipologia",
+      "slug": "blog-bilocale-trilocale-limena-scelta-2026",
+      "status": "published"
+    },
+    {
+      "q": "gruppo immobiliare righetto recensioni",
+      "impressions": 15,
+      "intent": "brand-eeat",
+      "slug": "blog-gruppo-immobiliare-righetto-limena-2026",
+      "status": "published"
+    }
+  ],
+  "chat_intents": {
+    "available": false,
+    "total_events_14d": 0,
+    "top_topic_labels": [],
+    "location_demand": {},
+    "operation_demand": {},
+    "budget_bands": {},
+    "unique_msg_hashes": 0
+  },
+  "content_opportunities": [
+    {
+      "question": "Quali sono i requisiti per ottenere le agevolazioni prima casa nel 2026?",
+      "intent": "fisco-prima-casa",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento fisco-prima-casa",
+      "seo_opportunity": "blog-agevolazioni-prima-casa-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "L'APE puo' essere vecchio?",
+      "intent": "green-ape-acquisto",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento green-ape-acquisto",
+      "seo_opportunity": "blog-ape-prestazione-energetica-acquisto-padova-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Come acquistare appartamento a Limena nel 2026?",
+      "intent": "territorio-limena",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento territorio-limena",
+      "seo_opportunity": "blog-appartamento-limena-guida-acquisto-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Cos'e' la caparra confirmatoria nella compravendita immobiliare?",
+      "intent": "vendere-cluster",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento vendere-cluster",
+      "seo_opportunity": "blog-caparra-confirmatoria-padova",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Cosa deve dare il venditore?",
+      "intent": "altri-trasversali",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento altri-trasversali",
+      "seo_opportunity": "blog-checklist-verifiche-prima-compromesso-padova-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Conviene comprare o affittare casa a Padova nel 2026?",
+      "intent": "altri-trasversali",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento altri-trasversali",
+      "seo_opportunity": "blog-comprare-affittare-padova",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Il mercato immobiliare nel capoluogo euganeo nel 2026: conviene investire?",
+      "intent": "altri-trasversali",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento altri-trasversali",
+      "seo_opportunity": "blog-comprare-casa-padova-guida-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Plusvalenza sempre al 26%?",
+      "intent": "altri-trasversali",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento altri-trasversali",
+      "seo_opportunity": "blog-costi-proprieta-acquisto-possesso-vendita-padova-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Qual è l'errore più costoso?",
+      "intent": "altri-trasversali",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento altri-trasversali",
+      "seo_opportunity": "blog-dieci-errori-acquisto-casa-padova-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Spostamenti verso il centro di Padova?",
+      "intent": "altri-trasversali",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento altri-trasversali",
+      "seo_opportunity": "blog-limena-vicino-padova-comprare-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Confronto prezzi: quotazioni al metro quadro e costo reale?",
+      "intent": "altri-trasversali",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento altri-trasversali",
+      "seo_opportunity": "blog-limena-vs-padova-centro-dove-comprare-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Chi paga il tecnico?",
+      "intent": "altri-trasversali",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento altri-trasversali",
+      "seo_opportunity": "blog-planimetria-catastale-compravendita-padova-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Da privato o da costruttore cambia tutto?",
+      "intent": "altri-trasversali",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento altri-trasversali",
+      "seo_opportunity": "blog-quattro-imposte-rogitio-prima-casa-padova-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Serve il geometra prima dell'offerta?",
+      "intent": "altri-trasversali",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento altri-trasversali",
+      "seo_opportunity": "blog-vigonza-rubano-comprare-casa-cintura-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Quanti operatori vedono domanda in crescita?",
+      "intent": "altri-trasversali",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento altri-trasversali",
+      "seo_opportunity": "blog-affitti-canoni-fimaa-q1-2026-padova",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Perché non pubblichiamo €/mq OMI per Limena in questo articolo?",
+      "intent": "territorio-limena",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento territorio-limena",
+      "seo_opportunity": "blog-affitti-limena-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Locazioni temporanee nel Padovano: Airbnb, turismo e rendimenti?",
+      "intent": "altri-trasversali",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento altri-trasversali",
+      "seo_opportunity": "blog-affitti-padova-canoni-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Quanto rende un affitto breve a Padova nel 2026?",
+      "intent": "affitti-cluster",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento affitti-cluster",
+      "seo_opportunity": "blog-affitto-breve-padova-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Tipologie contrattuali: quale scegliere?",
+      "intent": "altri-trasversali",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento altri-trasversali",
+      "seo_opportunity": "blog-affitto-studenti-padova",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Si può applicare la cedolare secca sull'affitto transitorio?",
+      "intent": "affitti-cluster",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento affitti-cluster",
+      "seo_opportunity": "blog-affitto-transitorio-padova-durata-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Registrazione obbligatoria?",
+      "intent": "altri-trasversali",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento altri-trasversali",
+      "seo_opportunity": "blog-appartamento-affitto-limena-contratto-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Contratto: tipologia e obblighi?",
+      "intent": "altri-trasversali",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento altri-trasversali",
+      "seo_opportunity": "blog-checklist-affitto-studenti-padova-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Vantaggi fiscali del canone concordato?",
+      "intent": "altri-trasversali",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento altri-trasversali",
+      "seo_opportunity": "blog-contratto-affitto-padova",
+      "lead_opportunity": false
+    },
+    {
+      "question": "I numeri della crisi degli alloggi in Italia e nel Padovano?",
+      "intent": "altri-trasversali",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento altri-trasversali",
+      "seo_opportunity": "blog-emergenza-abitativa-padova-2026",
+      "lead_opportunity": false
+    },
+    {
+      "question": "Cos'è il fondo 250.000 euro Edilcassa Veneto?",
+      "intent": "altri-trasversali",
+      "content_opportunity": "FAQ Linda + articolo/aggiornamento altri-trasversali",
+      "seo_opportunity": "blog-housing-lavoratori-veneto-edilcassa-2026",
+      "lead_opportunity": false
+    }
+  ],
+  "seo_opportunities": [
+    {
+      "kw": {
+        "q": "immobiliare",
+        "impressions": 301,
+        "intent": "generico-broad",
+        "action": "pillar-home-brand"
+      },
+      "action": "pillar/refresh o nuovo angolo SKIMM"
+    },
+    {
+      "kw": {
+        "q": "agenzia immobiliare limena",
+        "impressions": 166,
+        "intent": "agenzia-locale",
+        "slug": "blog-agenzia-immobiliare-limena-come-scegliere-2026",
+        "status": "published"
+      },
+      "action": "pillar/refresh o nuovo angolo SKIMM"
+    },
+    {
+      "kw": {
+        "q": "immobiliare righetto",
+        "impressions": 71,
+        "intent": "brand-locale",
+        "slug": "blog-gruppo-immobiliare-righetto-limena-2026",
+        "status": "published"
+      },
+      "action": "pillar/refresh o nuovo angolo SKIMM"
+    },
+    {
+      "kw": {
+        "q": "immobiliare limena",
+        "impressions": 67,
+        "intent": "generico-locale",
+        "slug": "blog-mercato-immobiliare-limena-2026",
+        "status": "published"
+      },
+      "action": "pillar/refresh o nuovo angolo SKIMM"
+    },
+    {
+      "kw": {
+        "q": "appartamento limena",
+        "impressions": 63,
+        "intent": "comprare",
+        "slug": "blog-appartamento-limena-guida-acquisto-2026",
+        "status": "published"
+      },
+      "action": "pillar/refresh o nuovo angolo SKIMM"
+    },
+    {
+      "kw": {
+        "q": "righetto",
+        "impressions": 40,
+        "intent": "brand",
+        "slug": "blog-gruppo-immobiliare-righetto-limena-2026",
+        "status": "published"
+      },
+      "action": "pillar/refresh o nuovo angolo SKIMM"
+    },
+    {
+      "kw": {
+        "q": "agenzie immobiliari limena",
+        "impressions": 34,
+        "intent": "agenzia-locale",
+        "slug": "blog-agenzia-immobiliare-limena-come-scegliere-2026",
+        "status": "published"
+      },
+      "action": "pillar/refresh o nuovo angolo SKIMM"
+    },
+    {
+      "kw": {
+        "q": "casa in vendita a limena",
+        "impressions": 16,
+        "intent": "vendita-locale",
+        "slug": "blog-case-vendita-limena-leggere-annunci-2026",
+        "status": "published"
+      },
+      "action": "pillar/refresh o nuovo angolo SKIMM"
+    },
+    {
+      "kw": {
+        "q": "affitti a limena",
+        "impressions": 15,
+        "intent": "affitto-locale",
+        "slug": "blog-affitti-limena-2026",
+        "status": "published"
+      },
+      "action": "pillar/refresh o nuovo angolo SKIMM"
+    },
+    {
+      "kw": {
+        "q": "appartamento in affitto limena",
+        "impressions": 15,
+        "intent": "affitto-locale",
+        "slug": "blog-appartamento-affitto-limena-contratto-2026",
+        "status": "published"
+      },
+      "action": "pillar/refresh o nuovo angolo SKIMM"
+    }
+  ],
+  "lead_opportunities": [],
+  "policy": "yellow",
+  "note": "Aggregato da FAQ archive — intent log non disponibile (tabella o SUPABASE_KEY)"
+}
