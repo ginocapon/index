@@ -53,6 +53,7 @@
 | **Settimana macrociclo** | Tema 12 settimane (ancora 31/03/2026) | `righetto-venerdi-sito-90giorni` |
 | **Mar + Ven 08:00** | Security check | `security-check-bisettimanale.yml` |
 | **Ogni 6 h** | Sync foto immobili | `sync-media-github.yml` (+ `SUPABASE_KEY`) |
+| **1° e 16° mese** | Email promemoria Guardian + Learning Bridge | `guardian-learning-bridge-biweekly.yml` — in Cursor: **GUARDIAN** |
 | **Mensile** | Audit completo `audit_completo` in context-map | Questo file + compliance |
 
 ### Macrociclo 12 settimane — posizione 14/07/2026
