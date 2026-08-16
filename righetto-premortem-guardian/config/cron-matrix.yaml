@@ -71,6 +71,9 @@ jobs:
     every: 15d
     command: node ./righetto-premortem-guardian/scripts/guardian.mjs learning biweekly
     scope: [ai_quality, analytics, content]
+    email_reminder: scripts/guardian-biweekly-reminder-email.py
+    workflow: .github/workflows/guardian-learning-bridge-biweekly.yml
+    user_command_cursor: "GUARDIAN | LEARNING BRIDGE"
 
   learning_bridge_monthly:
     day: 1
