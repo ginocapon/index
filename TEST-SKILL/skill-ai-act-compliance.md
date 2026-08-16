@@ -26,7 +26,8 @@ Il **Regolamento (UE) 2024/1689** (AI Act) impone trasparenza quando si interagi
 | Asset | Ruolo |
 |-------|--------|
 | `css/site-ai-disclosure.css` | Stili barra footer, note foto, disclosure chat |
-| `js/site-ai-disclosure.js` | Barra footer su tutte le pagine pubbliche; **didascalia sotto ogni foto**; testi condivisi `RigAiDisclosure.TEXT` |
+| `js/site-ai-disclosure.js` | Modifica testi, watermark **FOTO AI**, didascalie o logica injection |
+| `data/ai-generated-images.json` | Elenco immagini editoriali IA (`img/blog/`) |
 | `js/ga-consent.js` | Carica CSS+JS disclosure su pagine con analytics (copertura sito) |
 | `privacy.html#trasparenza-digitale` | Informativa legale completa (§15) |
 | `privacy.html#assistente-digitale` | Anchor assistente Linda |
@@ -58,10 +59,13 @@ Il **Regolamento (UE) 2024/1689** (AI Act) impone trasparenza quando si interagi
 ### 3.4 Foto e media
 
 - [ ] **Ogni foto** pubblica riceve didascalia `.rig-photo-caption` (automatica via `site-ai-disclosure.js`)
+- [ ] **Immagini generate con IA** (blog editoriali, grafiche sintetiche): marchio visivo **«FOTO AI»** in basso a sinistra via `site-ai-disclosure.js` + registro `data/ai-generated-images.json`
+- [ ] **Foto annunci** (`img/immobili/`): reali — solo didascalia ottimizzazione, **senza** marchio FOTO AI salvo `data-ai-generated="true"`
 - [ ] Testo standard: `TEXT.photoCaption` / `TEXT.photoCaptionCompact` — non inventare varianti per pagina
 - [ ] **Catalogo** e **scheda immobile**: carousel = una didascalia; card annuncio = versione compatta
-- [ ] **Blog hero/figure**: didascalia sotto hero o dentro `figure`
+- [ ] **Blog hero/figure**: didascalia sotto hero o dentro `figure` + marchio FOTO AI se path in `img/blog/` o manifest
 - [ ] Esclusi: logo, avatar chat, icone, miniature confronto
+- [ ] Dopo nuove hero blog: `node scripts/build-ai-image-manifest.mjs`
 
 ### 3.5 Contenuti editoriali
 
@@ -82,7 +86,7 @@ Usare `window.RigAiDisclosure.TEXT` — chiavi:
 
 - `footer` — barra sito
 - `photoCaptionListing` — foto annunci (correzioni grafiche/esposizione)
-- `photoCaptionBlog` — hero e figure blog (immagini editoriali/IA)
+- `photoCaptionBlog` — hero e figure blog (immagini editoriali/IA) + riferimento marchio **FOTO AI**
 - `chatHeader` — sottotitolo header Linda
 - `chatWelcome` — welcome card / landing chat
 - `chatFirst` — primo messaggio post-avvio chat
@@ -123,4 +127,4 @@ Link informativa: **`privacy#trasparenza-digitale`**
 
 ---
 
-*Aggiornato: 6 agosto 2026 — priorità permanente su tutti i task agente.*
+*Aggiornato: 16 agosto 2026 — marchio FOTO AI su immagini generate con IA.*
