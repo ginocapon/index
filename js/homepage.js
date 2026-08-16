@@ -922,6 +922,13 @@ function generateSlug(titolo) {
   // Articoli statici (sempre presenti)
   const articoliStatici = [
     {
+      "titolo": "Sopralluoghi Drone Padova 2026: documentazione aerea professionale",
+      "categoria": "Servizi",
+      "data": "2026-08-16",
+      "immagine_copertina": "img/blog/blog-sopralluoghi-drone-padova-2026.webp",
+      "url_statico": "blog-sopralluoghi-drone-padova-2026"
+    },
+    {
       "titolo": "Domanda residenziale supera offerta Q1 2026: Padova",
       "categoria": "Mercato immobiliare",
       "data": "2026-07-28",
