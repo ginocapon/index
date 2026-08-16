@@ -1,0 +1,6 @@
+data/learning-bridge/*.json
+!data/learning-bridge/.gitkeep
+righetto-premortem-guardian/memory/*.jsonl
+!righetto-premortem-guardian/memory/.gitkeep
+righetto-premortem-guardian/reports/*
+!righetto-premortem-guardian/reports/.gitkeep
