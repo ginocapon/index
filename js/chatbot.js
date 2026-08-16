@@ -2602,6 +2602,15 @@ function initChatbotUI() {
   // Valutazione opzionale: si puo' richiamare showRating() da altro flusso senza tenere aperta la finestra.
 }
 
+// ── LINDA Learning Bridge (modulo opzionale — disattiva con window.LINDA_LEARNING_BRIDGE = false) ──
+(function loadLindaLearningBridge() {
+  if (window.LINDA_LEARNING_BRIDGE === false) return;
+  var s = document.createElement('script');
+  s.src = 'js/linda-learning-bridge.js?v=1';
+  s.async = true;
+  document.head.appendChild(s);
+})();
+
 // ── Auto-inizializzazione ──
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initChatbotUI);
