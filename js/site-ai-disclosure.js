@@ -13,7 +13,8 @@
       '<strong>Trasparenza digitale (AI Act UE):</strong> l\'assistente <strong>Linda</strong> è un sistema ' +
       'automatizzato a regole — non sostituisce un agente. Alcune <strong>foto e grafiche</strong> del sito ' +
       'possono essere state ottimizzate o parzialmente modificate con strumenti digitali, inclusa ' +
-      'intelligenza artificiale. Stime e testi hanno valore informativo. ' +
+      'intelligenza artificiale. Le immagini <strong>generate con IA</strong> sono marchiate <strong>FOTO AI</strong>. ' +
+      'Stime e testi hanno valore informativo. ' +
       '<a href="' + PRIVACY_ANCHOR + '">Dettagli</a>',
     photoCaptionListing:
       'Foto dell\'annuncio riferita all\'immobile reale. Possiamo correggere graficamente luminosità, contrasto, esposizione e nitidezza, anche con strumenti digitali o IA, ' +
@@ -24,7 +25,7 @@
       '<a href="' + PRIVACY_HREF + '">Info</a>',
     photoCaptionBlog:
       'Immagine editoriale <strong>elaborata digitalmente</strong> (anche con intelligenza artificiale): illustrazione a scopo informativo, ' +
-      'non documento fotografico dell\'immobile o della scena descritta nel testo. ' +
+      'non documento fotografico dell\'immobile o della scena descritta nel testo. Le immagini generate con IA sono contrassegnate con il marchio <strong>FOTO AI</strong> in basso a sinistra. ' +
       '<a href="' + PRIVACY_HREF + '">Informativa</a>',
     photoCaptionGeneral:
       'Immagine a scopo informativo; eventuale elaborazione digitale (anche IA) come da ' +
@@ -44,9 +45,124 @@
     '.cf-avatar, .rig-carousel-nav, .cmp-thumb, .gt, .gallery-thumbs, .rig-photo-caption, ' +
     '.rig-ai-act-bar, .cookie-banner, .skip-link, .nav-burger, .rig-lightbox, #rig-lightbox';
 
+  var AI_MANIFEST = {
+    pathPrefixes: ['img/blog/'],
+    excludePaths: [],
+    explicitPaths: [],
+    files: []
+  };
+
+  var WATERMARK_LABEL = 'FOTO AI';
+
   function isAdminPage() {
     var p = (global.location && global.location.pathname) || '';
     return /admin\.html$/i.test(p) || p.indexOf('/admin') !== -1;
+  }
+
+  function normalizeSrc(src) {
+    if (!src) return '';
+    var s = src.split('?')[0].split('#')[0].toLowerCase();
+    if (s.indexOf('//') === 0) return s;
+    if (s.indexOf('http') === 0) {
+      try {
+        s = new URL(s).pathname.toLowerCase();
+      } catch (e) { /* keep */ }
+    }
+    return s.replace(/^\//, '');
+  }
+
+  function loadAiManifest() {
+    return fetch('/data/ai-generated-images.json', { cache: 'no-store' })
+      .then(function (r) {
+        if (!r.ok) return;
+        return r.json();
+      })
+      .then(function (data) {
+        if (!data) return;
+        if (data.pathPrefixes) AI_MANIFEST.pathPrefixes = data.pathPrefixes;
+        if (data.excludePaths) AI_MANIFEST.excludePaths = data.excludePaths;
+        if (data.explicitPaths) AI_MANIFEST.explicitPaths = data.explicitPaths;
+        if (data.files) AI_MANIFEST.files = data.files;
+      })
+      .catch(function () { /* manifest opzionale offline */ });
+  }
+
+  function isAiGeneratedImage(img) {
+    if (!img) return false;
+    if (img.dataset.aiGenerated === 'false' || img.getAttribute('data-ai-generated') === 'false') {
+      return false;
+    }
+    if (img.dataset.aiGenerated === 'true' || img.getAttribute('data-ai-generated') === 'true') {
+      return true;
+    }
+    var src = normalizeSrc(img.getAttribute('src') || img.currentSrc || '');
+    if (!src) return false;
+    for (var i = 0; i < AI_MANIFEST.excludePaths.length; i++) {
+      if (src.indexOf(AI_MANIFEST.excludePaths[i].toLowerCase()) !== -1) return false;
+    }
+    for (var j = 0; j < AI_MANIFEST.explicitPaths.length; j++) {
+      if (src.indexOf(AI_MANIFEST.explicitPaths[j].toLowerCase()) !== -1) return true;
+    }
+    for (var k = 0; k < AI_MANIFEST.files.length; k++) {
+      if (src === AI_MANIFEST.files[k].toLowerCase() || src.endsWith('/' + AI_MANIFEST.files[k].toLowerCase())) {
+        return true;
+      }
+    }
+    for (var p = 0; p < AI_MANIFEST.pathPrefixes.length; p++) {
+      var pref = AI_MANIFEST.pathPrefixes[p].toLowerCase();
+      if (src.indexOf(pref) !== -1 || src.indexOf('/' + pref) !== -1) return true;
+    }
+    return false;
+  }
+
+  function watermarkHostFor(img) {
+    return (
+      img.closest('.art-hero__frame, .blog-fig__frame, .rig-ai-photo-wrap, .card-img, figure.blog-fig, .art-hero') ||
+      img.parentElement
+    );
+  }
+
+  function applyAiWatermark(img) {
+    if (!img || img.dataset.rigAiWatermark === 'done') return;
+    if (!isAiGeneratedImage(img)) return;
+
+    var host = watermarkHostFor(img);
+    if (!host) return;
+    if (host.querySelector('.rig-ai-photo-watermark')) {
+      img.dataset.rigAiWatermark = 'done';
+      return;
+    }
+
+    if (!host.classList.contains('rig-ai-photo-wrap') &&
+        !host.classList.contains('art-hero__frame') &&
+        !host.classList.contains('blog-fig__frame') &&
+        !host.classList.contains('card-img') &&
+        host.tagName !== 'FIGURE') {
+      host.classList.add('rig-ai-photo-wrap');
+    }
+
+    var wm = document.createElement('span');
+    wm.className = 'rig-ai-photo-watermark';
+    wm.setAttribute('aria-hidden', 'true');
+    wm.textContent = WATERMARK_LABEL;
+    host.appendChild(wm);
+    img.dataset.rigAiWatermark = 'done';
+    img.setAttribute('data-ai-generated', 'true');
+  }
+
+  function applyAllAiWatermarks() {
+    if (isAdminPage()) return;
+    var images = document.querySelectorAll('img');
+    for (var i = 0; i < images.length; i++) {
+      var img = images[i];
+      if (img.dataset.rigAiWatermark === 'done') continue;
+      if (img.closest(SKIP_ANCESTORS)) continue;
+      var src = (img.getAttribute('src') || '').toLowerCase();
+      if (!src || src.indexOf('data:') === 0) continue;
+      var rect = img.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0 && rect.width < 40 && rect.height < 40) continue;
+      applyAiWatermark(img);
+    }
   }
 
   function debounce(fn, ms) {
@@ -260,9 +376,11 @@
     if (isAdminPage()) return;
     var images = document.querySelectorAll('img:not([data-rig-photo-caption])');
     for (var i = 0; i < images.length; i++) {
+      applyAiWatermark(images[i]);
       insertCaptionForImg(images[i]);
     }
     document.querySelectorAll('.rig-carousel:not([data-rig-carousel-caption])').forEach(captionCarousel);
+    applyAllAiWatermarks();
   }
 
   var scheduleCaptions = debounce(injectPhotoCaptions, 280);
@@ -282,12 +400,16 @@
 
   function init() {
     injectFooterBar();
-    injectPhotoCaptions();
-    refreshExistingCaptions();
+    loadAiManifest().finally(function () {
+      injectPhotoCaptions();
+      refreshExistingCaptions();
+      applyAllAiWatermarks();
+    });
     observeDynamicPhotos();
     global.addEventListener('load', function () {
       injectPhotoCaptions();
       refreshExistingCaptions();
+      applyAllAiWatermarks();
     });
   }
 
@@ -300,7 +422,11 @@
   global.RigAiDisclosure = {
     TEXT: TEXT,
     PRIVACY_ANCHOR: PRIVACY_ANCHOR,
+    WATERMARK_LABEL: WATERMARK_LABEL,
     injectFooterBar: injectFooterBar,
-    injectPhotoCaptions: injectPhotoCaptions
+    injectPhotoCaptions: injectPhotoCaptions,
+    isAiGeneratedImage: isAiGeneratedImage,
+    applyAiWatermark: applyAiWatermark,
+    applyAllAiWatermarks: applyAllAiWatermarks
   };
 })(typeof window !== 'undefined' ? window : global);

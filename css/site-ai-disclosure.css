@@ -102,6 +102,45 @@ figure .rig-photo-caption {
   border-left: 1px solid #e6dfd6;
   border-right: 1px solid #e6dfd6;
 }
+/* Marchio FOTO AI — immagini generate con intelligenza artificiale (AI Act UE) */
+.rig-ai-photo-wrap,
+.art-hero__frame,
+.blog-fig__frame,
+figure.blog-fig,
+.art-hero {
+  position: relative;
+}
+.rig-ai-photo-watermark {
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+  z-index: 4;
+  padding: 2px 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.95);
+  background: rgba(21, 36, 53, 0.72);
+  border-radius: 3px;
+  pointer-events: none;
+  user-select: none;
+}
+.art-hero__frame .rig-ai-photo-watermark,
+.blog-fig__frame .rig-ai-photo-watermark {
+  left: 8px;
+  bottom: 8px;
+}
+@media (max-width: 640px) {
+  .rig-ai-photo-watermark {
+    font-size: 0.46rem;
+    padding: 2px 4px;
+    left: 4px;
+    bottom: 4px;
+  }
+}
 .chat-ai-disclosure {
   font-size: 0.62rem;
   line-height: 1.45;
