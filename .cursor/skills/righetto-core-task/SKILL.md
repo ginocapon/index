@@ -32,6 +32,7 @@ description: >-
 - [ ] Title ≤60 (max 70), meta ≤160 — `node scripts/validate-page.js --file pagina.html`
 - [ ] `sitemap.xml` se nuova/rimossa URL
 - [ ] **AI Act UE:** disclosure sito/chat/foto se pagina o media toccati — `skill-ai-act-compliance.md`
+- [ ] **FOTO AI:** immagini generate con IA → marchio visibile «FOTO AI» (HTML + `site-ai-disclosure.js`) — vedi `skill-ai-act-compliance.md` §3.4
 - [ ] **Commit:** a fine task se ci sono modifiche (messaggio in italiano, no `.env`/segreti)
 - [ ] **Push:** solo se l'utente lo chiede esplicitamente («push», «pushia», «metti online»). Senza richiesta → commit locale o solo file modificati, **no push**
 
