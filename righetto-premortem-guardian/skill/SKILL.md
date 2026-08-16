@@ -63,6 +63,28 @@ Le categorie predefinite sono:
 - business conversion;
 - reputation.
 
+## Promemoria ogni 15 giorni (automatico, senza API a pagamento)
+
+**Cron GitHub:** `.github/workflows/guardian-learning-bridge-biweekly.yml`  
+**Schedule:** 1° e 16° di ogni mese, ore 09:00 CEST (07:00 UTC).
+
+Cosa succede in automatico:
+1. `guardian.mjs learning biweekly` + `guardian.mjs run`
+2. Email a **info@righettoimmobiliare.it** con promemoria operativo (stesso relay del venerdì: `send-mail.php` + secret `EMAIL_RELAY_KEY`)
+3. Issue GitHub con label `guardian-learning` (backup se l'email fallisce)
+
+**Comando utente in Cursor (quando riceve l'email o vuole fare il giro):**
+
+Scrivi **`GUARDIAN`** oppure **`LEARNING BRIDGE`**.
+
+L'agente deve:
+1. Leggere `data/learning-bridge/*.json` e `righetto-premortem-guardian/reports/`
+2. Riassumere insight, zero-result, domande senza risposta, KPI
+3. Proporre azioni concrete (FAQ Linda, articolo blog, SEO) — **senza** modificare ranking live senza approvazione
+4. Suggerire sul PC: `node righetto-premortem-guardian/scripts/guardian.mjs learning biweekly`
+
+Script email: `scripts/guardian-biweekly-reminder-email.py`
+
 ## Obiettivo
 
 Non massimizzare l'automazione.

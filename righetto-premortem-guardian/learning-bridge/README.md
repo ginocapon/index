@@ -28,6 +28,14 @@ node righetto-premortem-guardian/scripts/guardian.mjs learning monthly
 node righetto-premortem-guardian/scripts/guardian.mjs learning full
 ```
 
+## Promemoria ogni 15 giorni
+
+- **Email automatica** a info@ (1° e 16° del mese) — workflow `guardian-learning-bridge-biweekly.yml`
+- **Issue GitHub** di backup con label `guardian-learning`
+- **In Cursor:** scrivi `GUARDIAN` o `LEARNING BRIDGE` per analisi guidata sui report
+
+Nessuna API a pagamento: stesso relay email del report venerdì (`EMAIL_RELAY_KEY`).
+
 ## Disattivazione
 
 ```html
