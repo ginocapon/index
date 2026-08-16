@@ -56,6 +56,7 @@ Lezioni già registrate (luglio 2026): hero landing iPhone, tour 360° slug/codi
 | Pagina zona / quartiere | `righetto-zona` | `/zona` |
 | Social / copy post | `righetto-social` | `/social` |
 | Audit sicurezza | `righetto-security` | `/sicurezza` |
+| Guardian + Learning Bridge (ogni 15 gg) | `righetto-premortem-guardian/skill/SKILL.md` | scrivi **GUARDIAN** o **LEARNING BRIDGE** |
 | Piano venerdì / 90 giorni | `righetto-venerdi-sito-90giorni` | `/venerdi` |
 | Perizia PDF | `righetto-perizia` | `/perizia` |
 
