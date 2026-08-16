@@ -39,6 +39,7 @@ description: >-
 - [ ] Nuova URL → `sitemap.xml` + `admin.html` (`_landingSeedPages`)
 - [ ] **Landing chat** (`landing-chat-*`): disclosure `cf-ai-disclosure` via `chat-flow.js`; bump `?v=N`
 - [ ] **AI Act:** pagina con `ga-consent.js` → barra trasparenza sito automatica
+- [ ] **FOTO AI (se hero/grafiche IA):** `data-ai-generated="true"` + `<span class="rig-ai-photo-watermark">FOTO AI</span>` in `.rig-ai-photo-wrap`; path in `img/blog/` + `build-ai-image-manifest.mjs`
 
 ## Schema (landing commerciali)
 

@@ -59,7 +59,8 @@ Il **Regolamento (UE) 2024/1689** (AI Act) impone trasparenza quando si interagi
 ### 3.4 Foto e media
 
 - [ ] **Ogni foto** pubblica riceve didascalia `.rig-photo-caption` (automatica via `site-ai-disclosure.js`)
-- [ ] **Immagini generate con IA** (blog editoriali, grafiche sintetiche): marchio visivo **«FOTO AI»** in basso a sinistra via `site-ai-disclosure.js` + registro `data/ai-generated-images.json`
+- [ ] **Immagini generate con IA** (blog editoriali, grafiche sintetiche, hero landing): marchio visivo **«FOTO AI»** in basso a sinistra — **obbligatorio in HTML** (`<span class="rig-ai-photo-watermark" aria-hidden="true">FOTO AI</span>` dentro `.rig-ai-photo-wrap` / `figure.blog-fig` / `.art-hero__frame`) **e** via `site-ai-disclosure.js` + registro `data/ai-generated-images.json`
+- [ ] Attributo `data-ai-generated="true"` su ogni `<img>` IA; alt text che indichi «illustrazione editoriale» / «immagine generata con IA» se non è foto reale
 - [ ] **Foto annunci** (`img/immobili/`): reali — solo didascalia ottimizzazione, **senza** marchio FOTO AI salvo `data-ai-generated="true"`
 - [ ] Testo standard: `TEXT.photoCaption` / `TEXT.photoCaptionCompact` — non inventare varianti per pagina
 - [ ] **Catalogo** e **scheda immobile**: carousel = una didascalia; card annuncio = versione compatta
