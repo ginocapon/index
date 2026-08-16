@@ -46,8 +46,14 @@
     '.rig-ai-act-bar, .cookie-banner, .skip-link, .nav-burger, .rig-lightbox, #rig-lightbox';
 
   var AI_MANIFEST = {
-    pathPrefixes: ['img/blog/'],
-    excludePaths: [],
+    pathPrefixes: [
+      'img/blog/',
+      'img/foto-servizi/',
+      'img/guida-loft-aziende/',
+      'img/demo/',
+      'img/social/'
+    ],
+    excludePaths: ['img/immobili/', 'img/team/', 'img/brand/', 'img/og-'],
     explicitPaths: [],
     files: []
   };
