@@ -1,7 +1,7 @@
 {
   "version": 1,
   "updated": "2026-08-16",
-  "policy": "Immagini sotto pathPrefixes sono editoriali generate/elaborate con IA (blog, landing grafiche). Escluse foto annunci reali in img/immobili/. Aggiornare con: node scripts/build-ai-image-manifest.mjs",
+  "policy": "Immagini in img/blog/ e explicitPaths ricevono marchio FOTO AI. Foto annunci reali in img/immobili/ escluse. Dopo nuove hero: node scripts/build-ai-image-manifest.mjs",
   "pathPrefixes": [
     "img/blog/"
   ],
@@ -96,8 +96,9 @@
     "img/blog/limena-oratorio-beata-vergine-rosario.jpg",
     "img/blog/mutui-green-padova-2026.webp",
     "img/blog/padova-arcella-gesu-buon-pastore.jpg",
+    "img/blog/servizio-drone-sopralluoghi-padova.webp",
     "img/blog/trend-ricerca-casa-padova-2026.webp",
     "img/blog/ufficio-righetto-immobiliare.webp"
   ],
-  "fileCount": 90
+  "fileCount": 91
 }

@@ -35,6 +35,7 @@ description: >-
 - [ ] 2500+ parole corpo utile, 10–15 H2/H3, tono professionale
 - [ ] Ogni dato numerico con fonte verificata e link
 - [ ] Copertina hero WebP 1200×630 leggera (§8.1c SKILL-2.0); didascalia se illustrazione/elaborazione digitale
+- [ ] **FOTO AI (BLOCCANTE):** ogni immagine generata con IA → path `img/blog/` o `explicitPaths` in `data/ai-generated-images.json` + `data-ai-generated="true"` + marchio HTML `<span class="rig-ai-photo-watermark">FOTO AI</span>` nel wrapper `.rig-ai-photo-wrap` / `figure.blog-fig` + `node scripts/build-ai-image-manifest.mjs` dopo upload
 - [ ] **AI Act:** barra footer sito (ga-consent) + nota trasparenza se hero non è foto reale del territorio
 - [ ] Title ≤60, meta ≤160, H1 diverso da title
 - [ ] JSON-LD: `BlogPosting` + `FAQPage` se FAQ visibile
