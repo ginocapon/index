@@ -251,25 +251,29 @@
     return TEXT.photoCaptionGeneral;
   }
 
-  function makeCaption(img, compact) {
-    var cap = document.createElement('figcaption');
+  function makeCaption(img, compact, useFigcaption) {
+    var cap = document.createElement(useFigcaption ? 'figcaption' : 'p');
     cap.className = 'rig-photo-caption' + (compact ? ' rig-photo-caption--compact' : '');
-    cap.setAttribute('role', 'note');
-    cap.setAttribute('aria-label', 'Informativa trasparenza immagine');
     cap.innerHTML = captionHtmlFor(img, compact);
     return cap;
   }
 
   function upsertFigureCaption(figure, img, compact) {
-    var existing = figure.querySelector('figcaption');
+    var existing = figure.querySelector('figcaption, .rig-photo-caption');
     var html = captionHtmlFor(img, compact);
     if (existing) {
       existing.className = 'rig-photo-caption' + (compact ? ' rig-photo-caption--compact' : '');
-      existing.setAttribute('role', 'note');
+      if (existing.tagName !== 'FIGCAPTION') {
+        var figCap = document.createElement('figcaption');
+        figCap.className = existing.className;
+        figCap.innerHTML = html;
+        existing.replaceWith(figCap);
+        return figCap;
+      }
       existing.innerHTML = html;
       return existing;
     }
-    var cap = makeCaption(img, compact);
+    var cap = makeCaption(img, compact, true);
     figure.appendChild(cap);
     return cap;
   }
@@ -293,7 +297,7 @@
     }
     carousel.dataset.rigCarouselCaption = 'done';
     var sampleImg = carousel.querySelector('img');
-    carousel.appendChild(makeCaption(sampleImg || carousel, false));
+    carousel.appendChild(makeCaption(sampleImg || carousel, false, false));
     carousel.querySelectorAll('img').forEach(function (img) {
       markDone(img);
     });
@@ -323,7 +327,7 @@
     var cardImg = img.closest('.card-img');
     if (cardImg) {
       if (!hasCaptionNear(cardImg)) {
-        cardImg.parentNode.insertBefore(makeCaption(img, true), cardImg.nextSibling);
+        cardImg.parentNode.insertBefore(makeCaption(img, true, false), cardImg.nextSibling);
       }
       markDone(img);
       return;
@@ -334,7 +338,7 @@
       if (blogFig.tagName === 'FIGURE') {
         upsertFigureCaption(blogFig, img, false);
       } else if (!blogFig.querySelector('.rig-photo-caption')) {
-        blogFig.appendChild(makeCaption(img, false));
+        blogFig.appendChild(makeCaption(img, false, false));
       }
       markDone(img);
       return;
@@ -343,7 +347,7 @@
     var hero = img.closest('.art-hero');
     if (hero) {
       if (!hasCaptionNear(hero)) {
-        hero.parentNode.insertBefore(makeCaption(img, false), hero.nextSibling);
+        hero.parentNode.insertBefore(makeCaption(img, false, false), hero.nextSibling);
       }
       markDone(img);
       return;
@@ -352,7 +356,7 @@
     var host = img.closest('.gallery-carousel-host, .gallery-main, .gallery-wrap');
     if (host) {
       if (!hasCaptionNear(host)) {
-        host.parentNode.insertBefore(makeCaption(img, false), host.nextSibling);
+        host.parentNode.insertBefore(makeCaption(img, false, false), host.nextSibling);
       }
       markDone(img);
       return;
@@ -360,11 +364,19 @@
 
     var parent = img.parentElement;
     if (!parent) return;
+    if (parent.tagName === 'PICTURE') {
+      var hostEl = parent.parentElement;
+      if (hostEl && !hasCaptionNear(parent)) {
+        hostEl.insertBefore(makeCaption(img, false, false), parent.nextSibling);
+      }
+      markDone(img);
+      return;
+    }
     if (parent.querySelector(':scope > .rig-photo-caption')) {
       markDone(img);
       return;
     }
-    parent.insertBefore(makeCaption(img, false), img.nextSibling);
+    parent.insertBefore(makeCaption(img, false, parent.tagName === 'FIGURE'), img.nextSibling);
     markDone(img);
   }
 
