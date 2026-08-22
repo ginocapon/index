@@ -301,7 +301,15 @@ Reel: `media_direct_url` deve essere `.mp4` HTTPS pubblico su **`https://righett
 
 ## 8. Notizie RSS (≥2/settimana)
 
-Fonti: **Sole 24 Ore**, **Agenzia delle Entrate**, **Milano Finanza** (fallback Google News RSS).
+Fonti: **ANSA Economia**, **ANSA Veneto**, **Sole 24 Ore**, **Agenzia delle Entrate**, **Milano Finanza** (fallback Google News RSS).
+
+| Fonte | URL RSS |
+|---|---|
+| ANSA Economia | `https://www.ansa.it/sito/notizie/economia/economia_rss.xml` |
+| ANSA Veneto | `https://www.ansa.it/veneto/notizie/veneto_rss.xml` |
+| Sole 24 Ore Economia | `https://www.ilsole24ore.com/rss/economia.xml` |
+| Agenzia delle Entrate | `https://www.agenziaentrate.gov.it/wps/content/Nsilib/NPI/IT/Comunicati/rss` |
+| Milano Finanza | Google News RSS `site:milanofinanza.it` + keyword immobili/casa/mutuo |
 
 Regole obbligatorie:
 - **Zero copiatura** del corpo articolo.
