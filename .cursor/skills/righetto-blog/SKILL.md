@@ -34,9 +34,11 @@ description: >-
 - [ ] `kw_primaria` univoca in skimm §3
 - [ ] 2500+ parole corpo utile, 10–15 H2/H3, tono professionale
 - [ ] Ogni dato numerico con fonte verificata e link
-- [ ] Copertina hero WebP 1200×630 leggera (§8.1c SKILL-2.0); didascalia se illustrazione/elaborazione digitale
-- [ ] **FOTO AI (BLOCCANTE):** immagini IA in `img/blog/`, `img/foto-servizi/`, `img/demo/`, `img/guida-loft-aziende/` → marchio automatico JS + `node scripts/audit-foto-ai.mjs` OK prima del commit
-- [ ] **AI Act:** barra footer sito (ga-consent) + nota trasparenza se hero non è foto reale del territorio
+- [ ] Copertina hero WebP 19:9 generata **ex novo con IA** (§8.1c SKILL-2.0 + §2.1 skill-content); marchio **FOTO AI** obbligatorio
+- [ ] **Min 2 tabelle HTML** + **min 2 grafici SVG** con fonte verificata (§2.1e skill-content — BLOCCANTE)
+- [ ] **Min 3 immagini IA** nel corpo + 1 hero — tutte con `rig-ai-photo-wrap` + `data-ai-generated="true"`
+- [ ] **FOTO AI (BLOCCANTE):** `node scripts/build-ai-image-manifest.mjs` + `node scripts/audit-foto-ai.mjs` OK prima del commit
+- [ ] **AI Act:** barra footer sito (ga-consent) + didascalia trasparenza su ogni immagine
 - [ ] Title ≤60, meta ≤160, H1 diverso da title
 - [ ] JSON-LD: `BlogPosting` + `FAQPage` se FAQ visibile
 - [ ] Link interni verso pillar/zone/servizi del cluster

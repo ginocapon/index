@@ -1,6 +1,6 @@
 {
-  "generated": "2026-08-05",
-  "count": 121,
+  "generated": "2026-08-22",
+  "count": 125,
   "risks": [
     "Intent simile `territorio-limena`: blog-appartamento-limena-guida-acquisto-2026, blog-limena-vicino-padova-comprare-2026, blog-affitti-limena-2026, blog-appartamento-affitto-limena-contratto-2026…",
     "Intent simile `breakdown-costi`: blog-costi-proprieta-acquisto-possesso-vendita-padova-2026, blog-costi-costruzione-istat-padova-2026",
@@ -152,6 +152,17 @@
       "h1": "Planimetria catastale e compravendita nel Padovano (2026)"
     },
     {
+      "slug": "blog-prima-casa-under-36-consap-padova-2026",
+      "file": "blog-prima-casa-under-36-consap-padova-2026.html",
+      "title": "Prima casa under 36 Padova 2026: CONSAP",
+      "categoria": "",
+      "cluster": "Acquisto e prima casa",
+      "kw_primaria": "prima-casa-under-consap",
+      "angolo": "Angolo prima-casa-under-36-consap — intent dedicato, verificare matrice §4",
+      "intent": "acquisto-e-prima-casa",
+      "h1": "Prima casa under 36 Padova 2026: CONSAP"
+    },
+    {
       "slug": "blog-quattro-imposte-rogitio-prima-casa-padova-2026",
       "file": "blog-quattro-imposte-rogitio-prima-casa-padova-2026.html",
       "title": "Le quattro imposte al rogito prima casa a Padova 2026: IVA…",
@@ -260,6 +271,17 @@
       "angolo": "Focus Limena/cintura — non generico Padova centro",
       "intent": "territorio-limena",
       "h1": "Appartamento affitto Limena: contratto 2026"
+    },
+    {
+      "slug": "blog-caro-affitti-padova-under-35-guida-2026",
+      "file": "blog-caro-affitti-padova-under-35-guida-2026.html",
+      "title": "Caro affitti Padova 2026: guida under 35",
+      "categoria": "",
+      "cluster": "Affitti e locazioni",
+      "kw_primaria": "caro-affitti-under-guida",
+      "angolo": "Guida pillar evergreen — non evento datato",
+      "intent": "guida-pillar",
+      "h1": "Caro affitti Padova 2026: guida under 35"
     },
     {
       "slug": "blog-checklist-affitto-studenti-padova-2026",
@@ -517,7 +539,7 @@
     {
       "slug": "blog-ricerche-online-tipologie-casa-2026-padova",
       "file": "blog-ricerche-online-tipologie-casa-2026-padova.html",
-      "title": "Ricerche online 2026: bilocale e trilocale Padova",
+      "title": "Ricerche online 2026: bilocale affitti, trilocale vendite Padova",
       "categoria": "",
       "cluster": "Altri / trasversali",
       "kw_primaria": "ricerche-online-tipologie-casa",
@@ -535,6 +557,17 @@
       "angolo": "Verità dal campo / tono provocatorio — non guida tecnica staging o solo documenti",
       "intent": "vendita-mindset-venditore",
       "h1": "«So tutto io» — ma di vendite ne ha fatta forse una, e la casa parla da sola"
+    },
+    {
+      "slug": "blog-sopralluoghi-drone-padova-2026",
+      "file": "blog-sopralluoghi-drone-padova-2026.html",
+      "title": "Sopralluoghi Drone Padova 2026",
+      "categoria": "",
+      "cluster": "Altri / trasversali",
+      "kw_primaria": "sopralluoghi-drone",
+      "angolo": "Angolo sopralluoghi-drone — intent dedicato, verificare matrice §4",
+      "intent": "altri-/-trasversali",
+      "h1": "Una nuova prospettiva dall'alto per documentare edifici, coperture e grandi strutture"
     },
     {
       "slug": "blog-student-rentals-padova-guide-2026",
@@ -1074,6 +1107,17 @@
       "angolo": "Focus Limena/cintura — non generico Padova centro",
       "intent": "territorio-limena",
       "h1": "Bilocale o trilocale Limena: guida scelta 2026"
+    },
+    {
+      "slug": "blog-coliving-padova-limena-giovani-professionisti-2026",
+      "file": "blog-coliving-padova-limena-giovani-professionisti-2026.html",
+      "title": "Coliving Padova Limena 2026: guida giovani",
+      "categoria": "",
+      "cluster": "Territorio e zone",
+      "kw_primaria": "coliving-limena-giovani-professionisti",
+      "angolo": "Focus Limena/cintura — non generico Padova centro",
+      "intent": "territorio-limena",
+      "h1": "Coliving Padova Limena 2026: guida professionisti"
     },
     {
       "slug": "blog-direttiva-case-green-limena-padova",
