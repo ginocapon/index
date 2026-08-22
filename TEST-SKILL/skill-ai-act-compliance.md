@@ -16,7 +16,7 @@ Il **Regolamento (UE) 2024/1689** (AI Act) impone trasparenza quando si interagi
 | **Linda** (`js/chatbot.js`) | Assistente **automatizzato a regole** — non LLM generativo | Sì: etichetta chiara, non presentarlo come persona umana in tempo reale |
 | **Landing chat** (`js/chat-flow.js`) | Percorso guidato automatizzato | Sì: box informativo in apertura |
 | **Foto annunci** | Immagini reali, possibile ottimizzazione digitale | Sì: nota su scheda e catalogo |
-| **Hero blog / grafiche** | Possono essere elaborate digitalmente (anche IA) | Sì: barra sito + privacy §15.2 |
+| **Hero blog / figure corpo** | **Generate ex novo con IA** (obbligatorio da ago 2026) | Sì: marchio **FOTO AI** + `data-ai-generated="true"` + barra sito + privacy §15.2 |
 | **Testi editoriali** | Scritti/redatti da persone; stime orientative in chat | Barra sito + link privacy |
 
 ---
@@ -59,11 +59,12 @@ Il **Regolamento (UE) 2024/1689** (AI Act) impone trasparenza quando si interagi
 ### 3.4 Foto e media
 
 - [ ] **Ogni foto** pubblica riceve didascalia `.rig-photo-caption` (automatica via `site-ai-disclosure.js`)
-- [ ] **Immagini generate con IA** (blog, foto-servizi, demo loft, guida loft, social): marchio **«FOTO AI»** via `site-ai-disclosure.js` su `pathPrefixes` in `data/ai-generated-images.json`:
-  - `img/blog/`, `img/foto-servizi/`, `img/guida-loft-aziende/`, `img/demo/`, `img/social/`
+- [ ] **Blog (BLOCCANTE):** tutte le immagini editoriali (`img/blog/`) sono **generate ex novo con IA** — marchio **«FOTO AI»** obbligatorio via:
+  - HTML statico: `.rig-ai-photo-wrap` + `data-ai-generated="true"` su hero e figure
+  - JS automatico: `site-ai-disclosure.js` su `pathPrefixes` in `data/ai-generated-images.json`
+  - Dopo ogni batch: `node scripts/build-ai-image-manifest.mjs` + `node scripts/audit-foto-ai.mjs` — exit 0
+- [ ] **Altre immagini IA** (`img/foto-servizi/`, `img/guida-loft-aziende/`, `img/demo/`, `img/social/`): stesso marchio via manifest
   - **Esclusi** (foto reali): `img/immobili/`, `img/team/`, `img/brand/`, `img/og-`
-  - Dopo modifiche: `node scripts/build-ai-image-manifest.mjs` + `node scripts/audit-foto-ai.mjs`
-  - Su hero ad alto traffico: anche marchio HTML statico in `.rig-ai-photo-wrap`
 - [ ] **Foto annunci** (`img/immobili/`): reali — solo didascalia ottimizzazione, **senza** marchio FOTO AI salvo `data-ai-generated="true"`
 - [ ] Testo standard: `TEXT.photoCaption` / `TEXT.photoCaptionCompact` — non inventare varianti per pagina
 - [ ] **Catalogo** e **scheda immobile**: carousel = una didascalia; card annuncio = versione compatta
@@ -115,6 +116,7 @@ Link informativa: **`privacy#trasparenza-digitale`**
 
 - ❌ Presentare Linda come operatore umano in tempo reale
 - ❌ Omettere la barra/footer disclosure su pagine pubbliche nuove
+- ❌ Pubblicare articoli blog con foto reali o senza marchio **FOTO AI** su immagini IA
 - ❌ Usare foto IA per annunci immobiliari senza dichiararlo (policy: foto reali; ottimizzazione ammessa con nota)
 - ❌ Inventare conformità legali non verificate — rimandare a §15 privacy per il dettaglio
 - ❌ CDN esterni per script disclosure

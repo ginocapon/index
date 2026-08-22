@@ -45,9 +45,16 @@
 1. **GSC** `queries_growth` con impr > 10 e clic = 0 → candidato
 2. **SKIMM** §4 avvisi cluster → nuovo angolo, non duplicare slug esistente
 3. **Web search** (IT, 2026): `affitti padova`, `mutuo giovani`, `mercato immobiliare veneto` + fonte istituzionale
-4. **Anti-doppioni:** grep slug + `check_doppioni_sito.py` + intent diverso da articolo esistente
-5. Aggiungi in `editorial-queue.json` con `status: "proposed"`, `research_refs`, `different_from`
-6. **Max 1 publish/settimana** — proposte possono accumularsi
+4. **RSS discovery** (trend settimanale — non copiare testi):
+   - **ANSA Economia:** `https://www.ansa.it/sito/notizie/economia/economia_rss.xml`
+   - **ANSA Veneto:** `https://www.ansa.it/veneto/notizie/veneto_rss.xml`
+   - **Sole 24 Ore Economia:** `https://www.ilsole24ore.com/rss/economia.xml`
+   - **Milano Finanza** (Google News RSS): `site:milanofinanza.it` + keyword immobili/casa/mutuo
+   - **Agenzia delle Entrate:** comunicati RSS ufficiali
+   - Usare titoli come **spunto angolo editoriale** — rielaborare con fonti istituzionali, mai copiare corpo articolo
+5. **Anti-doppioni:** grep slug + `check_doppioni_sito.py` + intent diverso da articolo esistente
+6. Aggiungi in `editorial-queue.json` con `status: "proposed"`, `research_refs`, `different_from`
+7. **Max 1 publish/settimana** — proposte possono accumularsi
 
 ---
 

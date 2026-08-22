@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-16",
+  "updated": "2026-08-22",
   "policy": "Marchio FOTO AI automatico (site-ai-disclosure.js) su pathPrefixes. Esclusi img/immobili/, img/team/, img/brand/, img/og-. Dopo nuove hero blog: node scripts/build-ai-image-manifest.mjs; audit: node scripts/audit-foto-ai.mjs",
   "pathPrefixes": [
     "img/blog/",
@@ -30,10 +30,16 @@
     "img/blog/blog-bilocale-trilocale-limena-scelta-2026.webp",
     "img/blog/blog-bonus-edilizi-2026-incentivi-casa-padova.webp",
     "img/blog/blog-bonus-mobili-ristrutturazioni-2026.webp",
+    "img/blog/blog-caro-affitti-padova-under-35-coppia.webp",
+    "img/blog/blog-caro-affitti-padova-under-35-hero.webp",
+    "img/blog/blog-caro-affitti-padova-under-35-skyline.webp",
     "img/blog/blog-casa-vendibile-5-anni-case-green-padova-2026.webp",
     "img/blog/blog-case-piu-vendute-padova-2026.webp",
     "img/blog/blog-case-vendita-limena-leggere-annunci-2026.webp",
     "img/blog/blog-checklist-verifiche-prima-compromesso-padova-2026.webp",
+    "img/blog/blog-coliving-padova-limena-cowork.webp",
+    "img/blog/blog-coliving-padova-limena-hero.webp",
+    "img/blog/blog-coliving-padova-limena-limena.webp",
     "img/blog/blog-compravendite-italia-q1-agenzia-entrate-2026.webp",
     "img/blog/blog-condono-edilizio-proposte-2026.webp",
     "img/blog/blog-costi-costruzione-istat-padova-2026.webp",
@@ -72,6 +78,9 @@
     "img/blog/blog-planimetria-catasto-padova-2026.webp",
     "img/blog/blog-previsioni-immobiliari-scenari-geopolitica-2026.png",
     "img/blog/blog-prezzi-padova-provincia-2026.webp",
+    "img/blog/blog-prima-casa-under-36-consap-coppia.webp",
+    "img/blog/blog-prima-casa-under-36-consap-hero.webp",
+    "img/blog/blog-prima-casa-under-36-consap-mutuo.webp",
     "img/blog/blog-prospettive-mercato-residenziale-italia-2026.png",
     "img/blog/blog-quattro-imposte-rogitio-prima-casa-padova-2026.webp",
     "img/blog/blog-rental-contract-padova-guide-2026.webp",
@@ -109,5 +118,5 @@
     "img/blog/trend-ricerca-casa-padova-2026.webp",
     "img/blog/ufficio-righetto-immobiliare.webp"
   ],
-  "fileCount": 91
+  "fileCount": 100
 }

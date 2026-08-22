@@ -147,27 +147,29 @@ Prima del commit: `node scripts/validate-page.js --file blog-….html`. Title/H1
 - [ ] **Form lead in pagina** (se presente): seguire **`skill-forms-leads.md`** — invio diretto con `sendNotifica` + `richieste`, `provenienza: blog-{slug}`; non usare solo link a Contatti come sostituto dell’invio
 - [ ] Share bar (WhatsApp, Email, Copia link)
 - [ ] Articoli correlati (min 2)
-- [ ] Almeno 1 tabella comparativa con fonte
-- [ ] **Min 3 immagini fotografiche realistiche** nel corpo (vedi §2.1) + **almeno 2 grafici SVG colorati** a tema (tabelle + chart inline)
-- [ ] Copertina hero **fotografica realistica** dedicata (non stock generica con scritte decorative)
+- [ ] **Min 2 tabelle HTML** con fonte verificata nel corpo (oltre a eventuali KPI strip)
+- [ ] **Min 2 grafici SVG colorati** a tema con `figcaption` + fonte (BLOCCANTE — vedi §2.1e)
+- [ ] **Min 3 immagini editoriali generate ex novo con IA** nel corpo + 1 hero (vedi §2.1) — marchio **FOTO AI** obbligatorio
+- [ ] Copertina hero **dedicata** generata con IA, proporzione 19:9, marchio AI Act
 
 ### 2.1 Blog — immagini, elenco e auto-verifica (OBBLIGATORIO — tutti gli articoli)
 
 > Applica a **ogni** `blog-*.html` nuovo o rivisto, al seed admin e alla sezione blog in homepage. **Non** riguarda il portale immobili (vendita/affitto) né `in_evidenza` sulle schede immobile.
 
-#### A) Foto **realistiche** — vietate immagini immaginarie
+#### A) Foto **generate ex novo con IA** — obbligatorio (da agosto 2026)
 
-| Consentito | Vietato |
+| Obbligatorio | Vietato |
 |---|---|
-| Fotografie reali o photo-realistiche: appartamenti, stanze, facciate, tram/città Padova-Veneto, studenti/lavoratori in contesto **credibile** (non cartone) | Illustrazioni 3D, avatar, personaggi generati da AI, scene fantasy, volti «plastic» o stile videogioco |
-| Asset in `img/blog/` dedicati per articolo (WebP **1900×900** hero 19:9, corpo stessa proporzione) | Copertine generiche `img/foto-servizi/*` con **testo sovrapposto** o messaggio marketing che non spiega l’articolo |
-| Foto scattate/fornite dal cliente o già in repo con soggetto **coerente** al titolo | Unsplash/CDN esterni (già vietati in §8.1c) |
-| Didascalia breve sotto ogni `<figure>` (contesto, non claim inventati) | Watermark, slogan stock, date finte, percentuali stampate sull’immagine |
+| **Tutte** le immagini editoriali blog (hero + corpo) generate **ex novo** con strumenti IA — soggetto coerente con Padova/Veneto/immobiliare | Fotografie reali da `img/immobili/`, stock, Unsplash/CDN esterni (§8.1c) |
+| Asset dedicati in `img/blog/` per articolo (WebP **1900×900** hero 19:9, corpo stessa proporzione) | Copertine generiche `img/foto-servizi/*` o riuso hero di altri articoli |
+| Markup `rig-ai-photo-wrap` + `data-ai-generated="true"` + watermark **FOTO AI** (hero statico + JS manifest) | Omettere marchio, `data-ai-generated` o didascalia trasparenza |
+| Didascalia breve sotto ogni `<figure>` (contesto + nota «immagine generata con IA») | Claim inventati, percentuali stampate sull'immagine, slogan marketing |
 | **Proporzione 19:9** con `aspect-ratio` + `object-fit: cover` — **vietato** `width:100%` senza contenitore (no stiramento) | Altezza fissa hero (es. `height:480px`) che schiaccia o allunga le foto |
+| Dopo deploy: `node scripts/build-ai-image-manifest.mjs` + `node scripts/audit-foto-ai.mjs` OK | Pubblicare senza audit-foto-ai superato |
 
-**Regola pratica:** se l’immagine non potrebbe essere scattata con una macchina fotografica in Padova/provincia o in agenzia → **non usarla**. I **grafici dati** restano **SVG/HTML colorati** (Immobiliare.it Insights, OMI, FIMAA…) — non sostituiscono le foto.
+**Regola pratica:** ogni articolo = **1 hero IA** + **≥3 figure IA** nel corpo. I **grafici dati** (SVG/HTML) e le **tabelle** sono obbligatori **oltre** alle foto — vedi §2.1e. **Vietato** il loop `expand_body` con paragrafi identici per wordCount.
 
-**Trasparenza AI Act (Reg. UE 2024/1689):** copertine o grafiche editoriali elaborate digitalmente → didascalia esplicita (anche IA) + barra sito (`skill-ai-act-compliance.md`). **Vietato** il loop `expand_body` con paragrafi identici per wordCount.
+**Trasparenza AI Act (Reg. UE 2024/1689):** obbligatoria su ogni immagine blog (`skill-ai-act-compliance.md` §3.4) + barra sito footer.
 
 #### D) Proporzioni 19:9 — hero e figure corpo (luglio 2026)
 
@@ -182,9 +184,20 @@ Prima del commit: `node scripts/validate-page.js --file blog-….html`. Title/H1
 - **OG/social:** allineare `og:image` alla stessa foto hero (crop 19:9 accettabile anche se alcuni social preferiscono ~1.91:1).
 
 **Per articolo (minimo):**
-1. **1 copertina hero** fotografica tematica
-2. **≥ 3 figure nel corpo** (`<figure class="blog-fig">` + `blog-fig__frame`) distribuite tra le sezioni H2
-3. **≥ 2 chart-wrap SVG** multicolore con legenda e `figcaption` + fonte
+1. **1 copertina hero** generata con IA, tematica, marchio **FOTO AI**
+2. **≥ 3 figure nel corpo** (`<figure class="blog-fig">` + `blog-fig__frame` + `rig-ai-photo-wrap`) distribuite tra le sezioni H2
+3. **≥ 2 tabelle HTML** con fonte verificata (§2.1e)
+4. **≥ 2 chart-wrap SVG** multicolore con legenda e `figcaption` + fonte (§2.1e)
+
+#### E) Grafici e tabelle dati (BLOCCANTE — ogni articolo)
+
+| Elemento | Minimo | Requisiti |
+|---|---|---|
+| **Tabelle HTML** | ≥2 | Dati da fonte verificata (OMI, FIMAA, ISTAT, Immobiliare.it Insights…); intestazione `<th>`; fonte in nota sotto tabella |
+| **Grafici SVG** | ≥2 | `class="chart-wrap"`, colori brand, legenda/etichette, `figcaption` + fonte |
+| **KPI strip** | opzionale | Non conta verso il minimo tabelle |
+
+**Vietato** pubblicare articolo mercato/guida senza almeno **2 tabelle + 2 SVG**. I grafici **non** sostituiscono le foto IA del corpo.
 
 #### B) Elenco blog e homepage — **solo ordine per data**
 
@@ -200,9 +213,10 @@ Dopo generazione o patch, l’agente **esegue sempre** (non delegare all’utent
 1. `python scripts/check_doppioni_sito.py`
 2. `node scripts/validate-page.js blog-{slug}.html` (o elenco file toccati)
 3. Grep: slug in `blog.html`, **`admin.html` (`_blogSeedArticles`)**, `js/homepage.js`, `sitemap.xml`
-4. Controllo manuale campione: hero + 3 figure = path sotto `img/` esistenti; **proporzione 19:9** (`art-hero__frame`, `blog-fig__frame`); zero URL esterna immagine; zero illustrazione AI/3D
-5. Verifica elenco blog: nuovi articoli visibili in cima per data (no featured che li esclude)
-6. Solo dopo pass 1+2: commit/push se previsto da task
+4. Controllo manuale campione: hero + 3 figure = path sotto `img/blog/` esistenti; **proporzione 19:9** (`art-hero__frame`, `blog-fig__frame`); zero URL esterna immagine; **marchio FOTO AI** + `data-ai-generated="true"` su ogni foto; ≥2 tabelle + ≥2 SVG presenti
+5. `node scripts/build-ai-image-manifest.mjs` + `node scripts/audit-foto-ai.mjs` — exit 0
+6. Verifica elenco blog: nuovi articoli visibili in cima per data (no featured che li esclude)
+7. Solo dopo pass 1–5: commit/push se previsto da task
 
 **Registrazione admin (obbligatoria):** ogni nuovo `blog-*.html` deve comparire in `admin.html` → `const _blogSeedArticles` con `data_pubblicazione`, `url_statico`, `immagine_copertina`, `emoji`, `contenuto` (snippet HTML). Dopo batch multipli: `python scripts/sync_admin_blog_seed.py` (allinea da `blog.html` articoliStatici). `validate-page.js` segnala errore se manca nel seed admin.
 
