@@ -1,10 +1,14 @@
 {
-  "updated": "2026-07-24",
+  "updated": "2026-08-22",
   "policy": "Max 1 blog AGGIUNGERE/settimana. Prima SOSTENERE da gsc-keywords-priority.json se pages_refresh_priority ha 0 click e >50 impr. Anti-doppioni BLOCCANTE prima di ogni publish.",
   "workflow_skill": "TEST-SKILL/skill-editorial-queue.md",
   "discovery": {
     "when": "Ogni venerdì post-cron O quando scheduled < 3",
-    "sources": ["GSC gsc-keywords-priority.json", "SKIMM gap", "web search fonti istituzionali"],
+    "sources": [
+      "GSC gsc-keywords-priority.json",
+      "SKIMM gap",
+      "web search fonti istituzionali"
+    ],
     "output": "Aggiungi item status=proposed in coda + aggiorna skill-memoria-progressi §Log"
   },
   "items": [
@@ -35,13 +39,16 @@
       "cluster": "limena-local",
       "gsc_signal": "5 clic / 58 impr (16/07)",
       "different_from": "blog-scegliere-agenzia-immobiliare-padova-2026",
-      "research_refs": ["GSC queries_growth", "zona-limena"],
+      "research_refs": [
+        "GSC queries_growth",
+        "zona-limena"
+      ],
       "hero_concept": "Villa moderna Limena, tramonto, coppia con tablet — minimal luxury",
       "hype_sources_read": []
     },
     {
       "id": "eq-003",
-      "status": "scheduled",
+      "status": "published",
       "priority": 2,
       "target_week": "2026-07-31",
       "slug": "blog-caro-affitti-padova-under-35-guida-2026",
@@ -60,11 +67,12 @@
         "https://www.corrieredelleconomia.it/2026/06/09/affitti-fuori-controllo-in-veneto-padova-e-venezia-guidano-i-rincari/",
         "https://www.ilgazzettino.it/nordest/padova/affitti_prezzi_stanze_studenti_aumenti-9522717.html"
       ],
-      "hero_concept": "Skyline Padova neon overlay, under-35 — cyber-minimal"
+      "hero_concept": "Skyline Padova neon overlay, under-35 — cyber-minimal",
+      "published_date": "2026-08-22"
     },
     {
       "id": "eq-004",
-      "status": "scheduled",
+      "status": "published",
       "priority": 3,
       "target_week": "2026-08-07",
       "slug": "blog-coliving-padova-limena-giovani-professionisti-2026",
@@ -78,11 +86,12 @@
         "https://distrettocasainvestimenti.com/co-living-in-italia/"
       ],
       "hero_concept": "Open space vetro-acciaio, coworking — futuristic hospitality",
-      "caution": "Non promettere servizi coliving Righetto — guida + locazioni tradizionali"
+      "caution": "Non promettere servizi coliving Righetto — guida + locazioni tradizionali",
+      "published_date": "2026-08-22"
     },
     {
       "id": "eq-005",
-      "status": "scheduled",
+      "status": "published",
       "priority": 4,
       "target_week": "2026-08-14",
       "slug": "blog-prima-casa-under-36-consap-padova-2026",
@@ -99,7 +108,8 @@
         "https://www.money.it/mutuo-giovani-under-36-garanzia-statale-requisiti-e-come-funziona",
         "https://notaionline.it/guida/mutuo-prima-casa-under-36-agevolazioni/"
       ],
-      "hero_concept": "Coppia under-30, aesthetic fintech clean"
+      "hero_concept": "Coppia under-30, aesthetic fintech clean",
+      "published_date": "2026-08-22"
     },
     {
       "id": "eq-limena-gsc-001",
