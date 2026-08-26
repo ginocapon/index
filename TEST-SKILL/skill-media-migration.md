@@ -16,10 +16,12 @@
 | **Messaggio utente** | «Le foto saranno sul sito entro ~6 ore» — toast già in `admin.html`. |
 | **PC spento** | **Nessun impatto** sul sync automatico (Actions + Pages sono cloud). Serve il PC **solo** per sync locale urgente o upload in admin. |
 | **Manuale** | Solo se l'utente chiede urgenza **e il PC è acceso**: `python scripts/sync_media_automation.py` + commit/push. |
-| **URL foto pubbliche** | `img/immobili/{CODICE}/…` su GitHub Pages — **non** Supabase Storage per annunci live. |
+| **URL foto pubbliche** | `img/immobili/{CODICE}/…` su GitHub Pages — **non** Supabase Storage per annunci attivi. |
+| **Formato BLOCCANTE** | Foto annunci **solo WebP** in `img/immobili/{CODICE}/`. Conversione automatica in `migrate_supabase_media.py` (Pillow q=82, max 1600px). Se restano JPG/PNG: `python scripts/convert_immobili_to_webp.py`. |
+| **Verifica obbligatoria** | Dopo upload/sync o task media: `python scripts/verify_media_migration.py` → **0** foto Supabase in DB, **0** file non-WebP, file su disco = path DB. |
 | **Reel** | `REEL_LOCAL=1` → `img/video/reels/` — **non** bucket `foto-immobili`. |
 | **Secret CI** | `SUPABASE_KEY` (service_role) in GitHub Actions — mai in commit. |
-| **Vietato** | Suggerire purge/sync manuale come flusso normale; ripristinare URL `supabase.co/storage` su annunci attivi. |
+| **Vietato** | Suggerire purge/sync manuale come flusso normale; ripristinare URL `supabase.co/storage` su annunci attivi; lasciare JPG/PNG in `img/immobili/`. |
 
 ---
 
@@ -126,13 +128,24 @@ GitHub Pages serve `img/` senza costi egress Supabase. Repo può crescere: prefe
 
 ---
 
-## Checklist post-migrazione
+## Checklist post-migrazione (BLOCCANTE)
 
+- [ ] `python scripts/verify_media_migration.py` → **ESITO: OK**
+- [ ] `immobili.foto[]` attivi: path `img/immobili/{CODICE}/…webp` — **zero** URL `supabase.co/storage`
+- [ ] Cartella `img/immobili/` su repo: **solo `.webp`** (no JPG/PNG residui)
 - [ ] `data/media-manifest.json` aggiornato
-- [ ] `immobili.foto[]` in DB con path `img/immobili/…`
-- [ ] `share-immobile-*.html` rigenerati (`sync_og_immobili.py`)
+- [ ] `share-immobile-*.html` rigenerati (incluso in `--sync-og`)
+- [ ] Commit + push `img/`, `data/media-manifest.json`, share pages
 - [ ] Dashboard Supabase: egress in calo nel ciclo successivo
 - [ ] `REEL_LOCAL=1` in `righetto_social/.env`
+
+**Script verifica/conversione:**
+
+| Script | Quando |
+|--------|--------|
+| `scripts/verify_media_migration.py` | Dopo ogni sync o task foto — gate obbligatorio |
+| `scripts/convert_immobili_to_webp.py` | Se verify segnala file non-WebP in `img/immobili/` |
+| `scripts/sync_media_automation.py` | Urgenza post-upload (scarica + WebP + aggiorna DB) |
 
 ---
 

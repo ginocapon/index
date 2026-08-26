@@ -17,6 +17,13 @@ Dettaglio: **`TEST-SKILL/skill-context.md`** · media foto: **`TEST-SKILL/skill-
 
 **Agente:** non chiedere all'utente comandi sync/purge — toast admin: «entro ~6 h». Manuale solo su richiesta urgente.
 
+## WebP + verifica sync (BLOCCANTE — agosto 2026)
+
+1. Foto annunci in repo: **solo `.webp`** in `img/immobili/{CODICE}/` (convertite da `migrate_supabase_media.py` o `convert_immobili_to_webp.py`)
+2. DB `immobili.foto[]` attivi: path `img/immobili/…` — **zero** URL `supabase.co/storage`
+3. Dopo ogni task media: `python scripts/verify_media_migration.py` → ESITO OK prima di chiudere
+4. Sync urgente: `sync_media_automation.py` → verify → commit `img/`, manifest, share pages
+
 ## Principi (ispirati a best practice auth/RLS)
 - Client pubblico: **mai** esporre dati sensibili via policy permissive
 - Admin: preferire RPC (`rig-admin-rpc-immobili.sql`) se header admin non arriva a PostgREST

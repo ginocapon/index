@@ -21,10 +21,25 @@ description: >-
 - GitHub Actions `.github/workflows/sync-media-github.yml` ogni **6 ore**
 - Messaggio utente: «Le foto saranno sul sito entro ~6 ore»
 - URL pubbliche: `img/immobili/{CODICE}/` su GitHub Pages — **non** Supabase Storage live
+- **Formato BLOCCANTE:** solo **WebP** in `img/immobili/` (conversione automatica al sync)
+
+**Verifica obbligatoria** (dopo upload, sync urgente o task media):
+```bash
+python scripts/verify_media_migration.py
+```
+Gate: 0 foto Supabase in DB attivi · 0 file non-WebP · file locali presenti.
 
 **Solo se urgenza esplicita:**
 ```bash
 python scripts/sync_media_automation.py
+python scripts/verify_media_migration.py
+git add img/ data/media-manifest.json share-immobile-*.html
+```
+
+**Se verify segnala JPG/PNG residui:**
+```bash
+python scripts/convert_immobili_to_webp.py
+python scripts/verify_media_migration.py
 ```
 
 ## Annunci disattivati — procedura completa (luglio 2026)
@@ -54,7 +69,9 @@ Quando un immobile è **venduto, ritirato o non più in portafoglio**, servono *
 
 ## Checklist verifica
 
+- [ ] `python scripts/verify_media_migration.py` → ESITO OK
 - [ ] Foto servite da `righettoimmobiliare.it/img/immobili/` (non `supabase.co/storage`)
+- [ ] Solo file **`.webp`** in `img/immobili/{CODICE}/`
 - [ ] `data/media-manifest.json` coerente se rewrite client
 - [ ] Reel: `REEL_LOCAL=1` → `img/video/reels/` (non bucket `foto-immobili`)
 - [ ] Secret `SUPABASE_KEY` solo in GitHub Actions — mai in commit
@@ -64,7 +81,9 @@ Quando un immobile è **venduto, ritirato o non più in portafoglio**, servono *
 
 | Script | Quando |
 |--------|--------|
+| `scripts/verify_media_migration.py` | **Gate obbligatorio** post-sync / venerdì |
 | `scripts/sync_media_automation.py` | Urgenza post-upload |
+| `scripts/convert_immobili_to_webp.py` | Conversione JPG/PNG residui |
 | `scripts/migrate_supabase_media.py` | Migrazione batch |
 | `scripts/purge_supabase*.py` | Pulizia bucket (con cautela) |
 
