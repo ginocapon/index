@@ -13,6 +13,8 @@ description: >-
 - «Facciamo perizia», «perizia per…», «relazione di stima», «valutazione immobile»
 - PDF con planimetrie/prospetti allegati per un proprietario
 
+**AI Act:** la perizia PDF è documento ufficiale redatto dall'agenzia — distinta dalle **stime orientative** dell'assistente digitale Linda (`skill-ai-act-compliance.md`).
+
 ## Anteprima layout
 
 Apri nel browser: `documenti/anteprima-perizia-righetto.html`

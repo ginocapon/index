@@ -1,0 +1,136 @@
+# SKILL — Trasparenza AI Act UE (Reg. 2024/1689)
+
+> **PRIORITÀ PERMANENTE** — vale per **ogni** pagina, contenuto, foto, assistente digitale e nuova pubblicazione sul sito Righetto Immobiliare.
+> Caricare **sempre** insieme a `skill-essentials.md` e `skill-massimo-punteggio.md`.
+
+---
+
+## 1. Perché esiste
+
+Il **Regolamento (UE) 2024/1689** (AI Act) impone trasparenza quando si interagisce con sistemi di IA o quando contenuti sintetici/manipolati possono indurre in errore l'utente (art. 50 e obblighi correlati).
+
+**Sul sito Righetto:**
+
+| Elemento | Natura reale | Obbligo trasparenza |
+|----------|--------------|---------------------|
+| **Linda** (`js/chatbot.js`) | Assistente **automatizzato a regole** — non LLM generativo | Sì: etichetta chiara, non presentarlo come persona umana in tempo reale |
+| **Landing chat** (`js/chat-flow.js`) | Percorso guidato automatizzato | Sì: box informativo in apertura |
+| **Foto annunci** | Immagini reali, possibile ottimizzazione digitale | Sì: nota su scheda e catalogo |
+| **Hero blog / figure corpo** | **Generate ex novo con IA** (obbligatorio da ago 2026) | Sì: marchio **FOTO AI** + `data-ai-generated="true"` + barra sito + privacy §15.2 |
+| **Testi editoriali** | Scritti/redatti da persone; stime orientative in chat | Barra sito + link privacy |
+
+---
+
+## 2. Implementazione tecnica (non duplicare)
+
+| Asset | Ruolo |
+|-------|--------|
+| `css/site-ai-disclosure.css` | Stili barra footer, note foto, disclosure chat |
+| `js/site-ai-disclosure.js` | Modifica testi, watermark **FOTO AI**, didascalie o logica injection |
+| `data/ai-generated-images.json` | Elenco immagini editoriali IA (`img/blog/`) |
+| `js/ga-consent.js` | Carica CSS+JS disclosure su pagine con analytics (copertura sito) |
+| `privacy.html#trasparenza-digitale` | Informativa legale completa (§15) |
+| `privacy.html#assistente-digitale` | Anchor assistente Linda |
+
+**Non** creare disclaimer diversi per pagina: usare i testi centralizzati in `site-ai-disclosure.js` o aggiornarli lì.
+
+---
+
+## 3. Checklist BLOCCANTE — ogni modifica al sito
+
+### 3.1 Pagine HTML (nuove o modificate)
+
+- [ ] La pagina include `ga-consent.js` (o equivalente che carica `site-ai-disclosure`) — **no admin**
+- [ ] Footer: barra `#rig-ai-act-bar` visibile (iniettata da JS se `ga-consent` presente)
+- [ ] Title/meta invariati rispetto a §1.2 `skill-essentials.md`
+
+### 3.2 Chatbot Linda
+
+- [ ] Header: «Assistente digitale automatizzato (sistema a regole)» — **mai** solo «Online — rispondiamo subito»
+- [ ] Welcome card: box `chat-welcome-disclosure`
+- [ ] Primo messaggio dopo «Inizia a chattare»: nota `chat-msg-disclosure`
+- [ ] Dopo modifica: bump `chatbot.js?v=N` su **tutte** le pagine che lo caricano
+
+### 3.3 Landing conversazionali (`landing-chat-*.html`)
+
+- [ ] `chat-flow.js` mostra `cf-ai-disclosure` in apertura
+- [ ] Bump `chat-flow.js?v=N` se modificato
+
+### 3.4 Foto e media
+
+- [ ] **Ogni foto** pubblica riceve didascalia `.rig-photo-caption` (automatica via `site-ai-disclosure.js`)
+- [ ] **Blog (BLOCCANTE):** tutte le immagini editoriali (`img/blog/`) sono **generate ex novo con IA** — marchio **«FOTO AI»** obbligatorio via:
+  - HTML statico: `.rig-ai-photo-wrap` + `data-ai-generated="true"` su hero e figure
+  - JS automatico: `site-ai-disclosure.js` su `pathPrefixes` in `data/ai-generated-images.json`
+  - Dopo ogni batch: `node scripts/build-ai-image-manifest.mjs` + `node scripts/audit-foto-ai.mjs` — exit 0
+- [ ] **Altre immagini IA** (`img/foto-servizi/`, `img/guida-loft-aziende/`, `img/demo/`, `img/social/`): stesso marchio via manifest
+  - **Esclusi** (foto reali): `img/immobili/`, `img/team/`, `img/brand/`, `img/og-`
+- [ ] **Foto annunci** (`img/immobili/`): reali — solo didascalia ottimizzazione, **senza** marchio FOTO AI salvo `data-ai-generated="true"`
+- [ ] Testo standard: `TEXT.photoCaption` / `TEXT.photoCaptionCompact` — non inventare varianti per pagina
+- [ ] **Catalogo** e **scheda immobile**: carousel = una didascalia; card annuncio = versione compatta
+- [ ] **Blog hero/figure**: didascalia sotto hero o dentro `figure` + marchio FOTO AI se path in `img/blog/` o manifest
+- [ ] Esclusi: logo, avatar chat, icone, miniature confronto
+- [ ] Dopo nuove hero blog: `node scripts/build-ai-image-manifest.mjs`
+
+### 3.5 Contenuti editoriali
+
+- [ ] Articoli blog: nessun claim inventato; dati solo con fonte (regola d'oro)
+- [ ] Box AEO «Cosa non è» dove previsto da §8.2.5
+- [ ] Non presentare stime chat come perizie ufficiali
+
+### 3.6 Privacy e cookie
+
+- [ ] Modifiche assistente/media → aggiornare `privacy.html` §15 e data aggiornamento hero
+- [ ] Cookie policy: «assistente digitale automatizzato», non «AI» generica senza contesto
+
+---
+
+## 4. Testi standard (italiano)
+
+Usare `window.RigAiDisclosure.TEXT` — chiavi:
+
+- `footer` — barra sito
+- `photoCaptionListing` — foto annunci (correzioni grafiche/esposizione)
+- `photoCaptionBlog` — hero e figure blog (immagini editoriali/IA) + riferimento marchio **FOTO AI**
+- `chatHeader` — sottotitolo header Linda
+- `chatWelcome` — welcome card / landing chat
+- `chatFirst` — primo messaggio post-avvio chat
+
+Link informativa: **`privacy#trasparenza-digitale`**
+
+---
+
+## 5. Versioning cache
+
+| File | Bump `?v=` quando |
+|------|-------------------|
+| `site-ai-disclosure.css` | Modifica stili |
+| `site-ai-disclosure.js` | Modifica testi o logica injection |
+| `ga-consent.js` | Modifica loader disclosure |
+| `chatbot.js` | Qualsiasi modifica Linda |
+| `chat-flow.js` | Qualsiasi modifica landing chat |
+
+---
+
+## 6. Cosa NON fare
+
+- ❌ Presentare Linda come operatore umano in tempo reale
+- ❌ Omettere la barra/footer disclosure su pagine pubbliche nuove
+- ❌ Pubblicare articoli blog con foto reali o senza marchio **FOTO AI** su immagini IA
+- ❌ Usare foto IA per annunci immobiliari senza dichiararlo (policy: foto reali; ottimizzazione ammessa con nota)
+- ❌ Inventare conformità legali non verificate — rimandare a §15 privacy per il dettaglio
+- ❌ CDN esterni per script disclosure
+
+---
+
+## 7. Collegamenti
+
+- `TEST-SKILL/SKILL-2.0.md` §**8.1f**
+- `TEST-SKILL/skill-content.md` — hero blog
+- `TEST-SKILL/skill-forms-leads.md` — form in landing chat
+- `TEST-SKILL/skill-social-automation.md` — post e reel
+- `TEST-SKILL/context-map.json` → task `ai_act_compliance`
+
+---
+
+*Aggiornato: 16 agosto 2026 — marchio FOTO AI su immagini generate con IA.*

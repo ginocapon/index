@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <!-- Google tag (gtag.js) + Consent Mode -->
-<script src="js/ga-consent.js?v=1"></script>
+<script src="js/ga-consent.js?v=4"></script>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#2C4A6E">
   <title>Contratti Locazione Padova | Righetto Immobiliare</title>
@@ -126,14 +126,14 @@
     .fb-tel svg{width:14px;height:14px;color:var(--oro)}
     .fb-tel strong{color:var(--nero)}
     /* TESTIMONIANZE */
-    .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
-    @media(max-width:900px){.reviews-grid{grid-template-columns:1fr 1fr}}
-    @media(max-width:560px){.reviews-grid{grid-template-columns:1fr}}
-    .review{background:#fff;border:1px solid var(--gc);border-radius:3px;padding:1.3rem}
+    .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
+    @media(max-width:900px){.testimonials-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:560px){.testimonials-grid{grid-template-columns:1fr}}
+    .testimonial{background:#fff;border:1px solid var(--gc);border-radius:3px;padding:1.3rem}
     .stars{color:var(--oro);font-size:1rem;margin-bottom:.6rem}
-    .review-text{font-size:.83rem;color:var(--grigio);line-height:1.75;font-style:italic;margin-bottom:.8rem}
-    .review-auth{font-size:.72rem;font-weight:500;display:flex;align-items:center;gap:.45rem}
-    .review-av{width:28px;height:28px;border-radius:50%;background:var(--oro);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--nero)}
+    .testimonial-text{font-size:.83rem;color:var(--grigio);line-height:1.75;font-style:italic;margin-bottom:.8rem}
+    .testimonial-auth{font-size:.72rem;font-weight:500;display:flex;align-items:center;gap:.45rem}
+    .testimonial-av{width:28px;height:28px;border-radius:50%;background:var(--oro);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--nero)}
     /* FOOTER */
     footer{background:var(--nero);padding:3rem 1.5rem 1.5rem}
     .fi{max-width:1380px;margin:0 auto}
@@ -154,25 +154,41 @@
   "serviceType": "Contratti di Locazione",
   "name": "Servizio Contratti di Locazione — Righetto Immobiliare",
   "url": "https://righettoimmobiliare.it/servizio-locazioni",
-      "dateModified": "2026-03-18",
+      "dateModified": "2026-08-07",
   "provider": {
     "@type": "RealEstateAgent",
+    "@id": "https://righettoimmobiliare.it/#righetto-agent",
     "name": "Righetto Immobiliare",
-    "url": "https://righettoimmobiliare.it",
-    "telephone": "+39-049-884-3484",
-    "address": {"@type": "PostalAddress", "streetAddress": "Via Roma n.96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
-    "geo": {"@type": "GeoCoordinates", "latitude": 45.476956, "longitude": 11.845762},
-    "sameAs": [
-      "https://www.facebook.com/righettoimmobiliare",
-      "https://www.instagram.com/righettoimmobiliare",
-      "https://www.linkedin.com/company/righetto-immobiliare"
-    ],
-    "hasMap": "https://maps.google.com/?q=45.476956,11.845762",
-    "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "127", "bestRating": "5", "worstRating": "1"}
+    "url": "https://righettoimmobiliare.it"
   },
   "areaServed": {"@type": "AdministrativeArea", "name": "Provincia di Padova"},
   "description": "Gestione completa contratti di locazione a Padova: qualifica inquilini, contratti su misura 4+4, 3+2, transitori, Airbnb, registrazione telematica, assistenza morosità e polizze affitto sicuro.",
   "image": "https://righettoimmobiliare.it/img/foto-servizi/locazioni-padova-og.webp"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "@id": "https://righettoimmobiliare.it/#righetto-agent",
+  "name": "Righetto Immobiliare",
+  "url": "https://righettoimmobiliare.it",
+  "telephone": "+39-049-884-3484",
+  "address": {"@type": "PostalAddress", "streetAddress": "Via Roma n.96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
+  "geo": {"@type": "GeoCoordinates", "latitude": 45.476956, "longitude": 11.845762},
+  "sameAs": [
+    "https://www.facebook.com/righettoimmobiliare",
+    "https://www.instagram.com/righettoimmobiliare",
+    "https://www.linkedin.com/company/righetto-immobiliare"
+  ],
+  "hasMap": "https://maps.google.com/?q=45.476956,11.845762",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "127",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
 }
 </script>
 <script type="application/ld+json">
@@ -403,25 +419,25 @@
 </section>
 
 <!-- TESTIMONIANZE -->
-<section class="sec">
+<section class="sec" data-nosnippet>
   <div class="sec-inner sr">
     <div class="sec-tag">Cosa dicono i clienti</div>
     <h2 class="sec-t">Chi ha gia <strong>affittato con noi</strong></h2>
-    <div class="reviews-grid sr-stagger">
-      <div class="review">
+    <div class="testimonials-grid sr-stagger">
+      <div class="testimonial">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <div class="review-text">"Ho tre appartamenti a Padova e da quando li gestisce Righetto Immobiliare non ho piu avuto un giorno di sfitto. Inquilini selezionati con cura, contratti impeccabili e rivalutazioni sempre puntuali. Li consiglio a tutti i proprietari."</div>
-        <div class="review-auth"><div class="review-av">G</div>Giovanni R. — 3 appartamenti Padova centro</div>
+        <div class="testimonial-text">"Ho tre appartamenti a Padova e da quando li gestisce Righetto Immobiliare non ho piu avuto un giorno di sfitto. Inquilini selezionati con cura, contratti impeccabili e rivalutazioni sempre puntuali. Li consiglio a tutti i proprietari."</div>
+        <div class="testimonial-auth"><div class="testimonial-av">G</div>Giovanni R. — 3 appartamenti Padova centro</div>
       </div>
-      <div class="review">
+      <div class="testimonial">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <div class="review-text">"Avevo paura di affittare il mio bilocale a Limena dopo una brutta esperienza con un inquilino moroso. Righetto mi ha trovato una coppia referenziata in 2 settimane e ha stipulato un contratto blindato. Finalmente affitto sereno."</div>
-        <div class="review-auth"><div class="review-av">S</div>Silvia M. — Bilocale Limena</div>
+        <div class="testimonial-text">"Avevo paura di affittare il mio bilocale a Limena dopo una brutta esperienza con un inquilino moroso. Righetto mi ha trovato una coppia referenziata in 2 settimane e ha stipulato un contratto blindato. Finalmente affitto sereno."</div>
+        <div class="testimonial-auth"><div class="testimonial-av">S</div>Silvia M. — Bilocale Limena</div>
       </div>
-      <div class="review">
+      <div class="testimonial">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <div class="review-text">"Gestiscono il mio appartamento su Airbnb a Padova da oltre un anno: check-in, pulizie, prezzi dinamici, comunicazioni alla Questura. Il rendimento e raddoppiato rispetto a quando facevo tutto da solo. Professionisti veri."</div>
-        <div class="review-auth"><div class="review-av">A</div>Andrea P. — Airbnb Padova centro storico</div>
+        <div class="testimonial-text">"Gestiscono il mio appartamento su Airbnb a Padova da oltre un anno: check-in, pulizie, prezzi dinamici, comunicazioni alla Questura. Il rendimento e raddoppiato rispetto a quando facevo tutto da solo. Professionisti veri."</div>
+        <div class="testimonial-auth"><div class="testimonial-av">A</div>Andrea P. — Airbnb Padova centro storico</div>
       </div>
     </div>
   </div>
@@ -497,7 +513,7 @@
 <script src="js/nav-mobile.js?v=3" defer></script>
 <script src="js/config.js?v=4"></script>
 <script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */
-(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=7';document.body.appendChild(s);}
+(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=9';document.body.appendChild(s);}
 setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
 })();</script>
 <script src="js/lead-conversion.js?v=4" defer></script>

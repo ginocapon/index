@@ -1,0 +1,36 @@
+version: 1
+name: Righetto Premortem Guardian
+mode: autonomous_with_guardrails
+
+sequence:
+  - context
+  - observe
+  - verify
+  - assumptions
+  - premortem
+  - failure_modes
+  - prioritize
+  - act
+  - verify_again
+  - learn
+  - next_check
+
+outputs:
+  human_report: reports/guardian-latest.md
+  machine_report: reports/guardian-latest.json
+  event_log: memory/events.jsonl
+
+categories:
+  - availability
+  - leads
+  - database
+  - api
+  - seo
+  - content
+  - performance
+  - ai_quality
+  - analytics
+  - security
+  - cost
+  - business
+  - reputation

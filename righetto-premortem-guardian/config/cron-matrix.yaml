@@ -1,0 +1,82 @@
+version: 1
+
+# Tutti i job possono passare dal medesimo dispatcher.
+# Il cron esterno può quindi richiamare sempre:
+# node ./righetto-premortem-guardian/scripts/guardian.mjs run
+
+jobs:
+  heartbeat:
+    every: 5m
+    scope: [availability, api, workers]
+
+  transaction_sentinel:
+    every: 15m
+    scope: [leads, forms, conversion]
+
+  anomaly_engine:
+    every: 1h
+    scope: [analytics, seo, business, performance]
+
+  ai_quality:
+    every: 4h
+    scope: [ai_quality]
+
+  site_integrity:
+    every: 4h
+    scope: [seo, performance, structured_data, links]
+
+  content_freshness:
+    every: 1d
+    scope: [content, seo]
+
+  daily_premortem:
+    at: "18:00"
+    scope: [all]
+
+  weekly_strategy:
+    on: "monday"
+    at: "08:00"
+    scope: [business, seo, content, competition]
+
+  weekly_red_team:
+    on: "friday"
+    at: "17:00"
+    scope: [strategy, assumptions, business]
+
+  monthly_full_premortem:
+    day: 1
+    at: "08:00"
+    scope: [all]
+
+  quarterly_future_scenarios:
+    months: [1, 4, 7, 10]
+    day: 1
+    at: "08:00"
+    scope: [strategy, business, technology]
+
+  # LINDA Learning Bridge — stesso dispatcher Guardian (no cron duplicati)
+  # Real-time: raccolta eventi lato client (js/linda-learning-bridge.js)
+  learning_bridge_daily:
+    every: 1d
+    command: node ./righetto-premortem-guardian/scripts/guardian.mjs learning daily
+    scope: [ai_quality, analytics]
+
+  learning_bridge_weekly:
+    on: sunday
+    at: "06:00"
+    command: node ./righetto-premortem-guardian/scripts/guardian.mjs learning weekly
+    scope: [ai_quality, analytics, business]
+
+  learning_bridge_biweekly:
+    every: 15d
+    command: node ./righetto-premortem-guardian/scripts/guardian.mjs learning biweekly
+    scope: [ai_quality, analytics, content]
+    email_reminder: scripts/guardian-biweekly-reminder-email.py
+    workflow: .github/workflows/guardian-learning-bridge-biweekly.yml
+    user_command_cursor: "GUARDIAN | LEARNING BRIDGE"
+
+  learning_bridge_monthly:
+    day: 1
+    at: "09:00"
+    command: node ./righetto-premortem-guardian/scripts/guardian.mjs learning full
+    scope: [all]

@@ -1,7 +1,7 @@
 """
 Genera bozze social: 3 invii/settimana per sezione (immobile, blog, landing, agenzia),
 ogni slot = contenuto diverso in rotazione su tutto il catalogo sito; a fine giro ricomincia.
-+ 2 notizie/settimana da RSS (Sole 24 Ore, Agenzia Entrate, Milano Finanza) con testo
++ 2 notizie/settimana da RSS (ANSA, Sole 24 Ore, Agenzia Entrate, Milano Finanza) con testo
 originale (no copiatura) e titoli SEO Padova/immobiliare.
 
 Spintax + minimo 10 hashtag. Lun/mer/ven — no sab/dom.
@@ -40,6 +40,8 @@ POSTS_PER_SECTION = 3
 SECTIONS = ("immobile", "blog", "landing", "agenzia")
 
 RSS_FEEDS = [
+    ("ANSA Economia", "https://www.ansa.it/sito/notizie/economia/economia_rss.xml"),
+    ("ANSA Veneto", "https://www.ansa.it/veneto/notizie/veneto_rss.xml"),
     ("Sole 24 Ore", "https://www.ilsole24ore.com/rss/economia.xml"),
     (
         "Agenzia delle Entrate",

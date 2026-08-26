@@ -13,7 +13,8 @@ description: >-
 1. `TEST-SKILL/skill-essentials.md` + `TEST-SKILL/skill-massimo-punteggio.md`
 2. `TEST-SKILL/skill-forms-leads.md` (invio lead BLOCCANTE)
 3. `TEST-SKILL/skill-design.md` (UI, CTA, form)
-4. `TEST-SKILL/skill-context.md` (architettura se nuova URL)
+4. **`TEST-SKILL/skill-ai-act-compliance.md`** (trasparenza assistente/form — priorità permanente)
+5. `TEST-SKILL/skill-context.md` (architettura se nuova URL)
 
 ## Modelli di riferimento
 
@@ -36,6 +37,9 @@ description: >-
 - [ ] Bump `?v=N` su CSS/JS modificati
 - [ ] Nessun listino mediazione online
 - [ ] Nuova URL → `sitemap.xml` + `admin.html` (`_landingSeedPages`)
+- [ ] **Landing chat** (`landing-chat-*`): disclosure `cf-ai-disclosure` via `chat-flow.js`; bump `?v=N`
+- [ ] **AI Act:** pagina con `ga-consent.js` → barra trasparenza sito automatica
+- [ ] **FOTO AI (se hero/grafiche IA):** `data-ai-generated="true"` + `<span class="rig-ai-photo-watermark">FOTO AI</span>` in `.rig-ai-photo-wrap`; path in `img/blog/` + `build-ai-image-manifest.mjs`
 
 ## Schema (landing commerciali)
 
