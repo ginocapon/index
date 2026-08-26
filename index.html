@@ -12,7 +12,8 @@
 <link rel="preload" href="fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="img/team/titolari.webp" as="image" type="image/webp" fetchpriority="high">
+<link rel="preload" href="img/team/titolari-estate-abbigliamento-2026.webp?v=5" as="image" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
+<link rel="preload" href="img/team/titolari-estate-abbigliamento-2026-mobile.webp?v=5" as="image" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
 <meta name="google-site-verification" content="AbK7L5qoV9UFcfjQmtpC5OmD1ZsHx_55NNGYjxlOSxw">
 <meta name="theme-color" content="#2C4A6E">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -22,13 +23,13 @@
 <meta property="og:url" content="https://righettoimmobiliare.it/">
 <meta property="og:site_name" content="Righetto Immobiliare">
 <meta property="og:locale" content="it_IT">
-<meta property="og:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
+<meta property="og:image" content="https://righettoimmobiliare.it/img/team/titolari-estate-abbigliamento-2026.webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Vendere e Comprare Casa a Padova | Righetto Immobiliare">
 <meta name="twitter:description" content="Assistenza completa per vendere e comprare casa a Padova e provincia. Dalla valutazione gratuita al rogito, un unico referente per tutti i 101 comuni.">
-<meta name="twitter:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
+<meta name="twitter:image" content="https://righettoimmobiliare.it/img/team/titolari-estate-abbigliamento-2026.webp">
 <link rel="canonical" href="https://righettoimmobiliare.it/">
 <link rel="stylesheet" href="css/fonts.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/nav-mobile.css?v=5" media="print" onload="this.media='all'">
@@ -343,15 +344,21 @@ button{font-family:inherit;cursor:pointer}
   position: absolute; inset: 0; z-index: 0;
   overflow: hidden;
 }
+#hero-bg picture {
+  display: block; width: 100%; height: 100%;
+}
 #hero-bg img {
   width: 100%; height: 100%;
-  object-fit: cover; object-position: center 20%;
-  transform: scale(1.05);
+  object-fit: cover; object-position: center 22%;
+  transform: scale(1.04);
   animation: slowZoom 18s ease-in-out infinite alternate;
 }
 @keyframes slowZoom {
-  from { transform: scale(1.05); }
-  to   { transform: scale(1.10); }
+  from { transform: scale(1.04); }
+  to   { transform: scale(1.08); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #hero-bg img { animation: none; transform: none; }
 }
 
 .hero-veil {
@@ -515,10 +522,54 @@ button{font-family:inherit;cursor:pointer}
   .nav-mobile{top:var(--nav-h)}
 }
 @media(max-width:768px){
-  #evidenza,#servizi,#perche,#mutuo-hp,#stima,#blog,#faq-hp,#form-contatto,footer{padding-left:20px;padding-right:20px}
-  .hero-inner{grid-template-columns:1fr;padding:0 20px;padding-top:calc(var(--nav-h) + 44px);padding-bottom:88px}
+  html,body{overflow-x:hidden;max-width:100%}
+  #evidenza,#servizi,#perche,#mutuo-hp,#stima,#drone-hp,#blog,#faq-hp,#form-contatto,footer{padding-left:20px;padding-right:20px}
+  #hero{
+    min-height:620px;
+    width:100%;
+    max-width:100%;
+    overflow:hidden;
+  }
+  #hero-bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    overflow:hidden;
+  }
+  #hero-bg picture{
+    position:absolute;
+    inset:0;
+    display:block;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+  }
+  #hero-bg picture img{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:100%;
+    height:100%;
+    max-width:none;
+    margin:0;
+    object-fit:cover;
+    object-position:center 20%;
+    transform:translate(-50%,-50%) scale(1.15);
+    animation:none;
+  }
+  .hero-inner{
+    grid-template-columns:1fr;
+    width:100%;
+    max-width:100%;
+    margin-left:auto;
+    margin-right:auto;
+    padding:0 20px;
+    padding-top:calc(var(--nav-h) + 44px);
+    padding-bottom:88px;
+    box-sizing:border-box;
+    text-align:center;
+  }
   .hero-right{display:none}
-  #hero-bg img{object-position:center 20%}
   /* Titolo hero mobile: un gradino più grande (righe + “Ci pensiamo noi.”) */
   .hero-h1{font-size:clamp(2.05rem,8.4vw,3rem);line-height:1.22}
   .hero-h1 .ghost{margin-top:0.22em;line-height:1.36;font-size:1.07em;-webkit-text-stroke:1.3px rgba(255,255,255,0.52)}
@@ -927,7 +978,13 @@ button svg, a.btn-p svg, a.btn-g svg {
 
 <!-- HERO -->
 <section id="hero">
-  <div id="hero-bg"><img src="img/team/titolari.webp" alt="Righetto Immobiliare Padova" width="1200" height="630" fetchpriority="high"></div>
+  <!-- Hero estate: desktop entrambi | mobile solo Linda (crop destro). Ripristino: titolari.webp -->
+  <div id="hero-bg">
+    <picture>
+      <source media="(max-width: 768px)" srcset="img/team/titolari-estate-abbigliamento-2026-mobile.webp?v=5" type="image/webp" width="750" height="1000">
+      <img src="img/team/titolari-estate-abbigliamento-2026.webp?v=5" alt="Gino Capon e Linda Righetto — Righetto Immobiliare" width="1200" height="630" fetchpriority="high">
+    </picture>
+  </div>
   <div class="hero-veil"></div>
   <div class="hero-grain"></div>
   <div class="hero-inner">
@@ -1233,7 +1290,7 @@ button svg, a.btn-p svg, a.btn-g svg {
       <a href="vendere-casa-padova-errori" class="srv-card rv d1"><div class="srv-ico">🏷️</div><div class="srv-t">Vendita Immobili</div><div class="srv-d">Vendiamo la tua casa al giusto prezzo. Scopri i 7 errori da evitare e come li risolviamo noi.</div><div style="margin-top:12px;font-size:0.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blu3)">Scopri di più →</div></a>
       <a href="vendere-casa-padova-errori#stima" class="srv-card rv d2"><div class="srv-ico">💰</div><div class="srv-t">Perizia Professionale</div><div class="srv-d">Quanto vale la tua casa? Calcolalo gratis in 30 secondi con dati reali FIMAA 2026.</div><div style="margin-top:12px;font-size:0.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blu3)">Calcola ora →</div></a>
       <a href="landing-mutuo" class="srv-card rv d3"><div class="srv-ico">🏦</div><div class="srv-t">Consulenza Mutuo Gratuita</div><div class="srv-d">Confronto tassi da 10+ banche, simulatore rata e assistenza completa. Zero costi, zero impegno.</div><div style="margin-top:12px;font-size:0.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blu3)">Simula la rata →</div></a>
-      <a href="servizi" class="srv-card rv d4"><div class="srv-ico">🔑</div><div class="srv-t">Tutti i Servizi</div><div class="srv-d">Affitto, aste, virtual tour 360°, commerciale. Scopri tutto quello che possiamo fare per te.</div><div style="margin-top:12px;font-size:0.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blu3)">Vedi tutti →</div></a>
+      <a href="servizio-drone-sopralluoghi" class="srv-card rv d4"><div class="srv-ico">🚁</div><div class="srv-t">Sopralluoghi Drone 4K</div><div class="srv-d">Tetti, facciate, capannoni e cantieri: documentazione aerea professionale prima di salire o investire.</div><div style="margin-top:12px;font-size:0.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blu3)">Richiedi sopralluogo →</div></a>
     </div>
   </div>
 </section>
@@ -1406,6 +1463,27 @@ button svg, a.btn-p svg, a.btn-g svg {
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- DRONE SOPRALLUOGHI — accanto a perizie/valutazione -->
+<section id="drone-hp" style="padding:72px 28px;background:linear-gradient(135deg,#0a1628 0%,#152435 55%,#1a2d4a 100%);position:relative;overflow:hidden">
+  <div style="position:absolute;top:-80px;left:-40px;width:360px;height:360px;background:radial-gradient(circle,rgba(201,168,76,0.14) 0%,transparent 70%);border-radius:50%;pointer-events:none"></div>
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;position:relative;z-index:1" class="stima-layout">
+    <div class="rv sr">
+      <div style="display:inline-flex;align-items:center;gap:8px;font-size:0.62rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--oro);margin-bottom:12px">Nuovo servizio · Padova e provincia</div>
+      <h2 class="sec-h2 w" style="margin-bottom:16px">Prima di salire,<br><em style="color:var(--oro);font-style:italic">guarda dall'alto</em></h2>
+      <p class="sec-p" style="color:rgba(255,255,255,0.78);margin-bottom:24px">Sopralluoghi, ispezioni visive e riprese aeree in 4K per tetti, facciate, condomini, capannoni e cantieri. Non vendiamo un drone: ti offriamo documentazione professionale dove l'accesso da terra è difficile. Ogni intervento viene valutato in base a zona e regole applicabili — contattaci per tempi e perimetro del servizio.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="servizio-drone-sopralluoghi#richiedi" class="btn-g" style="display:inline-flex;font-size:0.82rem;padding:16px 28px">Richiedi un sopralluogo</a>
+        <a href="blog-sopralluoghi-drone-padova-2026" style="display:inline-flex;align-items:center;padding:16px 24px;border:1px solid rgba(255,255,255,0.25);border-radius:8px;color:#fff;font-size:0.78rem;font-weight:600;letter-spacing:0.5px">Leggi la guida completa</a>
+      </div>
+      <p style="margin-top:14px;font-size:0.68rem;color:rgba(255,255,255,0.45);line-height:1.6">Documentazione visiva — non sostituisce, quando necessaria, la valutazione di un tecnico qualificato. Nessun listino online: preventivo personalizzato.</p>
+    </div>
+    <div class="rv sr d2" style="border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);box-shadow:0 24px 60px rgba(0,0,0,0.35);position:relative">
+      <img src="img/blog/servizio-drone-sopralluoghi-padova.webp" alt="Illustrazione editoriale — sopralluogo drone (immagine generata con IA)" width="640" height="400" loading="lazy" style="width:100%;height:auto;display:block" data-ai-generated="true">
+      <span class="rig-ai-photo-watermark" aria-hidden="true">FOTO AI</span>
     </div>
   </div>
 </section>
@@ -1611,7 +1689,7 @@ button svg, a.btn-p svg, a.btn-g svg {
       </div>
     </div>
     <div class="f-col"><h3 class="f-col-title">Navigazione</h3><ul><li><a href="/">Home</a></li><li><a href="chi-siamo">Chi Siamo</a></li><li><a href="immobili">Immobili</a></li><li><a href="servizi">Servizi</a></li><li><a href="agenzia-immobiliare-padova">Agenzia Padova</a></li><li><a href="blog">Blog</a></li><li><a href="faq">FAQ</a></li></ul><h3 class="f-col-title" style="margin-top:1.2rem">Quartieri</h3><ul><li><a href="zona-limena">Limena</a></li><li><a href="zona-centro-storico-padova">Centro Storico</a></li><li><a href="zona-arcella-padova">Arcella</a></li><li><a href="zona-prato-della-valle-padova">Prato della Valle</a></li><li><a href="zona-universitaria-padova">Zona Universitaria</a></li><li><a href="zona-sacra-famiglia-padova">Sacra Famiglia</a></li><li><a href="zona-forcellini-padova">Forcellini</a></li><li><a href="zona-guizza-padova">Guizza</a></li><li><a href="zona-voltabarozzo-padova">Voltabarozzo</a></li></ul></div>
-    <div class="f-col"><h3 class="f-col-title">Servizi</h3><ul><li><a href="servizi#vendita">Vendita</a></li><li><a href="valutazione-vendita-riservata-padova">Valutazione riservata</a></li><li><a href="segnalazione-immobili-professionisti-padova">Segnalazione professionisti</a></li><li><a href="servizi#affitto">Affitto</a></li><li><a href="servizi#valutazione">Valutazione</a></li><li><a href="servizi#virtual-tour">Virtual Tour 360°</a></li><li><a href="servizi#aste">Aste Giudiziarie</a></li><li><a href="landing-mutuo">Consulenza Mutuo</a></li></ul></div>
+    <div class="f-col"><h3 class="f-col-title">Servizi</h3><ul><li><a href="servizi#vendita">Vendita</a></li><li><a href="valutazione-vendita-riservata-padova">Valutazione riservata</a></li><li><a href="segnalazione-immobili-professionisti-padova">Segnalazione professionisti</a></li><li><a href="servizi#affitto">Affitto</a></li><li><a href="servizi#valutazione">Valutazione</a></li><li><a href="servizio-drone-sopralluoghi">Sopralluoghi Drone 4K</a></li><li><a href="servizi#virtual-tour">Virtual Tour 360°</a></li><li><a href="servizi#aste">Aste Giudiziarie</a></li><li><a href="landing-mutuo">Consulenza Mutuo</a></li></ul></div>
     <div class="f-col"><h3 class="f-col-title">Contatti</h3><ul><li><a href="tel:+390498843484">📞 049.8843484</a></li><li><a href="mailto:info@righettoimmobiliare.it">📧 info@righettoimmobiliare.it</a></li><li><a href="contatti">📍 Via Roma n.96, Limena (PD)</a></li><li><a href="contatti">🕐 Lun–Ven: 9–19</a></li><li><a href="contatti">🕐 Sab: 9:00–12:30</a></li></ul></div>
   </div>
   <div style="border-top:1px solid rgba(255,255,255,.06);padding-top:.8rem;margin-bottom:.8rem;display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.72rem;color:rgba(255,255,255,.4)"><span>Partner:</span><a href="https://www.serviziimmobiliaripadova.it" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,.5);transition:color .2s">Servizi Immobiliari Padova</a><a href="https://www.raasautomazioni.it" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,.5);transition:color .2s">RAAS Automazioni</a></div>
@@ -1627,12 +1705,12 @@ button svg, a.btn-p svg, a.btn-g svg {
 <script src="js/config.js?v=4"></script>
 <script src="js/rig-lead-form.js?v=3"></script>
 <script>/* Chatbot lazy: carica solo su interazione utente o dopo 8s */
-(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=7';document.body.appendChild(s);}
+(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=9';document.body.appendChild(s);}
 setTimeout(l,8000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
 })();</script>
 <script src="js/media-url.js?v=1"></script>
 <script src="js/prop-photo-carousel.js?v=2" defer></script>
-<script src="js/homepage.js?v=23" defer></script>
+<script src="js/homepage.js?v=24" defer></script>
 <script>
 function recPlayVideo(el) {
   if (!el || el.querySelector('iframe')) return;
@@ -1745,7 +1823,7 @@ document.addEventListener('keydown', function(e) {
 (function(){
   function loadGA(){
     var s=document.createElement('script');
-    s.src='js/ga-consent.js?v=1';
+    s.src='js/ga-consent.js?v=7';
     document.head.appendChild(s);
   }
   if('requestIdleCallback' in window){

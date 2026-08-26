@@ -53,6 +53,7 @@
 | **Settimana macrociclo** | Tema 12 settimane (ancora 31/03/2026) | `righetto-venerdi-sito-90giorni` |
 | **Mar + Ven 08:00** | Security check | `security-check-bisettimanale.yml` |
 | **Ogni 6 h** | Sync foto immobili | `sync-media-github.yml` (+ `SUPABASE_KEY`) |
+| **1° e 16° mese** | Email promemoria Guardian + Learning Bridge | `guardian-learning-bridge-biweekly.yml` — in Cursor: **GUARDIAN** |
 | **Mensile** | Audit completo `audit_completo` in context-map | Questo file + compliance |
 
 ### Macrociclo 12 settimane — posizione 14/07/2026
@@ -139,6 +140,7 @@
 | 24/07/2026 | Fix cron venerdì: JSON GSC corrotto + validazione workflow + snapshot 24/07 | Commit 73c9332 push main |
 | 24/07/2026 | GSC ispezione 10 URL utente: 9 su Google, **solo servizio-vendita** richiesta indicizzazione | Log in gsc-indexing-weekly.json · batch 31/07 preparato |
 | 24/07/2026 | **Blog eq-002** agenzia Limena pubblicato — hero fantasy WebP nuovo | 2654 parole · form lead · sitemap |
+| 05/08/2026 | **Batch GSC Limena** — 5 blog da export keyword utente (appartamento, case vendita, affitto contratto, bilocale/trilocale, brand Righetto) | 2500+ parole ciascuno · hero WebP nuovi · validate-page OK |
 
 ---
 

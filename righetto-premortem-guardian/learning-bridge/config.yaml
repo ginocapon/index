@@ -1,0 +1,38 @@
+version: 1
+name: LINDA Learning Bridge
+enabled: true
+
+# Modulo opzionale: se false, LINDA resta identica (zero effetto sul ranking live).
+apply_ranking_changes: false
+auto_approve_ranking: false
+
+privacy:
+  store_pii: false
+  hash_session: true
+
+thresholds:
+  min_observations: 30
+  min_confidence: 0.55
+  rollback_regression_pct: 0.08
+
+storage:
+  events_table: linda_learning_events
+  aggregates_table: linda_learning_aggregates
+  insights_table: linda_ranking_insights
+  ranking_versions_table: linda_ranking_versions
+  local_reports_dir: data/learning-bridge
+
+schedules:
+  daily_quality: 1d
+  weekly_aggregate: 7d
+  biweekly_analysis: 15d
+  monthly_evaluation: 30d
+
+kpi:
+  - property_ctr
+  - property_detail_views
+  - visit_requests
+  - leads
+  - conversion_rate
+  - zero_result_rate
+  - time_to_conversion

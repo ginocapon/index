@@ -788,6 +788,28 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'caro affitti padova under 35 guida 2026': { img: 'img/blog/blog-caro-affitti-padova-under-35-hero.webp', url: 'blog-caro-affitti-padova-under-35-guida-2026' },
+    'coliving padova limena giovani professionisti 2026': { img: 'img/blog/blog-coliving-padova-limena-hero.webp', url: 'blog-coliving-padova-limena-giovani-professionisti-2026' },
+    'prima casa under 36 consap padova 2026': { img: 'img/blog/blog-prima-casa-under-36-consap-hero.webp', url: 'blog-prima-casa-under-36-consap-padova-2026' },
+    'domanda residenziale supera offerta q1 2026: padova': { img: 'img/blog/blog-domanda-residenziale-supera-offerta-2026-padova.webp', url: 'blog-domanda-residenziale-supera-offerta-2026-padova' },
+    'ricerche online tipologie casa 2026: padova': { img: 'img/blog/blog-ricerche-online-tipologie-casa-2026-padova.webp', url: 'blog-ricerche-online-tipologie-casa-2026-padova' },
+    'italy rental market +1% january 2026 — padua guide': { img: 'img/blog/blog-italy-rental-market-january-2026.webp', url: 'blog-italy-rental-market-positive-start-january-2026' },
+    'outlook living italia 2026: btr, pbsa e padova': { img: 'img/blog/blog-outlook-living-italia-2026-padova.webp', url: 'blog-outlook-living-italia-2026-padova' },
+    'student rentals padua 2026 — english guide': { img: 'img/blog/blog-student-rentals-padova-guide-2026.webp', url: 'blog-student-rentals-padova-guide-2026' },
+    'rental contract padua 2026 — english guide': { img: 'img/blog/blog-rental-contract-padova-guide-2026.webp', url: 'blog-rental-contract-padova-guide-2026' },
+    'padua housing market guide 2026 — english': { img: 'img/blog/blog-padova-housing-market-guide-2026.webp', url: 'blog-padova-housing-market-guide-2026' },
+    'domanda residenziale supera offerta q1 2026: padova': { img: 'img/blog/blog-domanda-residenziale-supera-offerta-2026-padova.webp', url: 'blog-domanda-residenziale-supera-offerta-2026-padova' },
+    'ricerche online tipologie casa 2026: padova': { img: 'img/blog/blog-ricerche-online-tipologie-casa-2026-padova.webp', url: 'blog-ricerche-online-tipologie-casa-2026-padova' },
+    'italy rental market +1% january 2026 — padua guide': { img: 'img/blog/blog-italy-rental-market-january-2026.webp', url: 'blog-italy-rental-market-positive-start-january-2026' },
+    'outlook living italia 2026: btr, pbsa e padova': { img: 'img/blog/blog-outlook-living-italia-2026-padova.webp', url: 'blog-outlook-living-italia-2026-padova' },
+    'student rentals padua 2026 — english guide': { img: 'img/blog/blog-student-rentals-padova-guide-2026.webp', url: 'blog-student-rentals-padova-guide-2026' },
+    'rental contract padua 2026 — english guide': { img: 'img/blog/blog-rental-contract-padova-guide-2026.webp', url: 'blog-rental-contract-padova-guide-2026' },
+    'padua housing market guide 2026 — english': { img: 'img/blog/blog-padova-housing-market-guide-2026.webp', url: 'blog-padova-housing-market-guide-2026' },
+    'appartamento limena: guida acquisto 2026': { img: 'img/blog/blog-appartamento-limena-guida-acquisto-2026.webp', url: 'blog-appartamento-limena-guida-acquisto-2026' },
+    'case vendita limena: leggere annunci 2026': { img: 'img/blog/blog-case-vendita-limena-leggere-annunci-2026.webp', url: 'blog-case-vendita-limena-leggere-annunci-2026' },
+    'appartamento affitto limena: contratto 2026': { img: 'img/blog/blog-appartamento-affitto-limena-contratto-2026.webp', url: 'blog-appartamento-affitto-limena-contratto-2026' },
+    'bilocale trilocale limena: scelta 2026': { img: 'img/blog/blog-bilocale-trilocale-limena-scelta-2026.webp', url: 'blog-bilocale-trilocale-limena-scelta-2026' },
+    'gruppo immobiliare righetto limena 2026': { img: 'img/blog/blog-gruppo-immobiliare-righetto-limena-2026.webp', url: 'blog-gruppo-immobiliare-righetto-limena-2026' },
     'domanda residenziale supera offerta q1 2026: padova': { img: 'img/blog/blog-domanda-residenziale-supera-offerta-2026-padova.webp', url: 'blog-domanda-residenziale-supera-offerta-2026-padova' },
     'ricerche online tipologie casa 2026: padova': { img: 'img/blog/blog-ricerche-online-tipologie-casa-2026-padova.webp', url: 'blog-ricerche-online-tipologie-casa-2026-padova' },
     'italy rental market +1% january 2026 — padua guide': { img: 'img/blog/blog-italy-rental-market-january-2026.webp', url: 'blog-italy-rental-market-positive-start-january-2026' },
@@ -902,6 +924,167 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    {
+      "titolo": "Caro affitti Padova under 35: Guida 2026",
+      "categoria": "Affitti Padova",
+      "data": "2026-08-22",
+      "immagine_copertina": "img/blog/blog-caro-affitti-padova-under-35-hero.webp",
+      "url_statico": "blog-caro-affitti-padova-under-35-guida-2026"
+    },
+    {
+      "titolo": "Coliving Padova Limena: Guida 2026",
+      "categoria": "Trend abitativo",
+      "data": "2026-08-22",
+      "immagine_copertina": "img/blog/blog-coliving-padova-limena-hero.webp",
+      "url_statico": "blog-coliving-padova-limena-giovani-professionisti-2026"
+    },
+    {
+      "titolo": "Prima casa under 36 Padova: CONSAP 2026",
+      "categoria": "Mutuo e acquisto",
+      "data": "2026-08-22",
+      "immagine_copertina": "img/blog/blog-prima-casa-under-36-consap-hero.webp",
+      "url_statico": "blog-prima-casa-under-36-consap-padova-2026"
+    },
+    {
+      "titolo": "Sopralluoghi Drone Padova 2026: documentazione aerea professionale",
+      "categoria": "Servizi",
+      "data": "2026-08-16",
+      "immagine_copertina": "img/blog/blog-sopralluoghi-drone-padova-2026.webp",
+      "url_statico": "blog-sopralluoghi-drone-padova-2026"
+    },
+    {
+      "titolo": "Domanda residenziale supera offerta Q1 2026: Padova",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-07-28",
+      "immagine_copertina": "img/blog/blog-domanda-residenziale-supera-offerta-2026-padova.webp",
+      "url_statico": "blog-domanda-residenziale-supera-offerta-2026-padova"
+    },
+    {
+      "titolo": "Ricerche online tipologie casa 2026: Padova",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-07-28",
+      "immagine_copertina": "img/blog/blog-ricerche-online-tipologie-casa-2026-padova.webp",
+      "url_statico": "blog-ricerche-online-tipologie-casa-2026-padova"
+    },
+    {
+      "titolo": "Italy rental market +1% January 2026 — Padua guide",
+      "categoria": "Affitti",
+      "data": "2026-07-28",
+      "immagine_copertina": "img/blog/blog-italy-rental-market-january-2026.webp",
+      "url_statico": "blog-italy-rental-market-positive-start-january-2026"
+    },
+    {
+      "titolo": "Outlook Living Italia 2026: BTR, PBSA e Padova",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-07-28",
+      "immagine_copertina": "img/blog/blog-outlook-living-italia-2026-padova.webp",
+      "url_statico": "blog-outlook-living-italia-2026-padova"
+    },
+    {
+      "titolo": "Student rentals Padua 2026 — English guide",
+      "categoria": "Affitti",
+      "data": "2026-07-28",
+      "immagine_copertina": "img/blog/blog-student-rentals-padova-guide-2026.webp",
+      "url_statico": "blog-student-rentals-padova-guide-2026"
+    },
+    {
+      "titolo": "Rental contract Padua 2026 — English guide",
+      "categoria": "Affitti",
+      "data": "2026-07-28",
+      "immagine_copertina": "img/blog/blog-rental-contract-padova-guide-2026.webp",
+      "url_statico": "blog-rental-contract-padova-guide-2026"
+    },
+    {
+      "titolo": "Padua housing market guide 2026 — English",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-07-28",
+      "immagine_copertina": "img/blog/blog-padova-housing-market-guide-2026.webp",
+      "url_statico": "blog-padova-housing-market-guide-2026"
+    },
+    {
+      "titolo": "Domanda residenziale supera offerta Q1 2026: Padova",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-07-28",
+      "immagine_copertina": "img/blog/blog-domanda-residenziale-supera-offerta-2026-padova.webp",
+      "url_statico": "blog-domanda-residenziale-supera-offerta-2026-padova"
+    },
+    {
+      "titolo": "Ricerche online tipologie casa 2026: Padova",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-07-28",
+      "immagine_copertina": "img/blog/blog-ricerche-online-tipologie-casa-2026-padova.webp",
+      "url_statico": "blog-ricerche-online-tipologie-casa-2026-padova"
+    },
+    {
+      "titolo": "Italy rental market +1% January 2026 — Padua guide",
+      "categoria": "Affitti",
+      "data": "2026-07-28",
+      "immagine_copertina": "img/blog/blog-italy-rental-market-january-2026.webp",
+      "url_statico": "blog-italy-rental-market-positive-start-january-2026"
+    },
+    {
+      "titolo": "Outlook Living Italia 2026: BTR, PBSA e Padova",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-07-28",
+      "immagine_copertina": "img/blog/blog-outlook-living-italia-2026-padova.webp",
+      "url_statico": "blog-outlook-living-italia-2026-padova"
+    },
+    {
+      "titolo": "Student rentals Padua 2026 — English guide",
+      "categoria": "Affitti",
+      "data": "2026-07-28",
+      "immagine_copertina": "img/blog/blog-student-rentals-padova-guide-2026.webp",
+      "url_statico": "blog-student-rentals-padova-guide-2026"
+    },
+    {
+      "titolo": "Rental contract Padua 2026 — English guide",
+      "categoria": "Affitti",
+      "data": "2026-07-28",
+      "immagine_copertina": "img/blog/blog-rental-contract-padova-guide-2026.webp",
+      "url_statico": "blog-rental-contract-padova-guide-2026"
+    },
+    {
+      "titolo": "Padua housing market guide 2026 — English",
+      "categoria": "Mercato immobiliare",
+      "data": "2026-07-28",
+      "immagine_copertina": "img/blog/blog-padova-housing-market-guide-2026.webp",
+      "url_statico": "blog-padova-housing-market-guide-2026"
+    },
+    {
+      "titolo": "Appartamento Limena: Guida acquisto 2026",
+      "categoria": "Limena locale",
+      "data": "2026-08-05",
+      "immagine_copertina": "img/blog/blog-appartamento-limena-guida-acquisto-2026.webp",
+      "url_statico": "blog-appartamento-limena-guida-acquisto-2026"
+    },
+    {
+      "titolo": "Case vendita Limena: Leggere annunci 2026",
+      "categoria": "Limena locale",
+      "data": "2026-08-05",
+      "immagine_copertina": "img/blog/blog-case-vendita-limena-leggere-annunci-2026.webp",
+      "url_statico": "blog-case-vendita-limena-leggere-annunci-2026"
+    },
+    {
+      "titolo": "Appartamento affitto Limena: Contratto 2026",
+      "categoria": "Limena locale",
+      "data": "2026-08-05",
+      "immagine_copertina": "img/blog/blog-appartamento-affitto-limena-contratto-2026.webp",
+      "url_statico": "blog-appartamento-affitto-limena-contratto-2026"
+    },
+    {
+      "titolo": "Bilocale trilocale Limena: Scelta 2026",
+      "categoria": "Limena locale",
+      "data": "2026-08-05",
+      "immagine_copertina": "img/blog/blog-bilocale-trilocale-limena-scelta-2026.webp",
+      "url_statico": "blog-bilocale-trilocale-limena-scelta-2026"
+    },
+    {
+      "titolo": "Gruppo Immobiliare Righetto Limena 2026",
+      "categoria": "Limena locale",
+      "data": "2026-08-05",
+      "immagine_copertina": "img/blog/blog-gruppo-immobiliare-righetto-limena-2026.webp",
+      "url_statico": "blog-gruppo-immobiliare-righetto-limena-2026"
+    },
     {
       "titolo": "Domanda residenziale supera offerta Q1 2026: Padova",
       "categoria": "Mercato immobiliare",

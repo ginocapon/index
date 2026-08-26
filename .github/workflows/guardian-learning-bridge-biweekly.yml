@@ -1,0 +1,106 @@
+# ============================================================
+# GUARDIAN + LINDA LEARNING BRIDGE — promemoria ogni ~15 giorni
+# 1° e 16° del mese alle 07:00 UTC (09:00 CEST) — email info@
+# Stesso relay del venerdì (send-mail.php) — zero API a pagamento
+# ============================================================
+
+name: "Guardian Learning Bridge — promemoria 15 giorni"
+
+on:
+  schedule:
+    # 1° e 16° di ogni mese — circa ogni 15 giorni
+    - cron: "0 7 1,16 * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  guardian-biweekly:
+    name: "Learning biweekly + email promemoria"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Analisi Learning Bridge (biweekly)
+        continue-on-error: true
+        run: |
+          node righetto-premortem-guardian/scripts/guardian.mjs learning biweekly || true
+          node righetto-premortem-guardian/scripts/guardian.mjs run || true
+
+      - name: Genera email promemoria
+        run: python scripts/guardian-biweekly-reminder-email.py
+
+      - name: Crea Issue GitHub (backup gratuito)
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const today = new Date().toLocaleDateString('it-IT', {
+              weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+            });
+            let body = '## Promemoria Guardian + Learning Bridge (ogni ~15 giorni)\n\n';
+            body += '### Sul PC\n';
+            body += '```powershell\n';
+            body += 'cd C:\\Users\\Utente\\GitHub\\index\n';
+            body += 'git pull\n';
+            body += 'node .\\righetto-premortem-guardian\\scripts\\guardian.mjs learning biweekly\n';
+            body += '```\n\n';
+            body += '### In Cursor\n';
+            body += 'Scrivi **GUARDIAN** o **LEARNING BRIDGE** per analisi guidata sui report in `data/learning-bridge/`.\n\n';
+            body += '### Ciclo\n';
+            body += 'OSSERVA → ANALISI → INSIGHT → PROPOSTA → TEST → MISURA → APPLICA (solo se OK) → ROLLBACK\n';
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🔔 Guardian Learning — promemoria ${today}`,
+              body,
+              labels: ['guardian-learning', 'promemoria-15g']
+            });
+
+      - name: Invia email a info@righettoimmobiliare.it
+        if: always()
+        env:
+          EMAIL_RELAY_KEY: ${{ secrets.EMAIL_RELAY_KEY }}
+        run: |
+          if [ -z "$EMAIL_RELAY_KEY" ]; then
+            echo "⚠️ Secret EMAIL_RELAY_KEY non configurato — email non inviata (Issue GitHub creata)"
+            exit 0
+          fi
+          if [ ! -f guardian-biweekly-email.html ] || [ ! -f guardian-biweekly-subject.txt ]; then
+            echo "⚠️ File email mancanti"
+            exit 0
+          fi
+          SUBJECT=$(cat guardian-biweekly-subject.txt)
+          EMAIL_BODY=$(cat guardian-biweekly-email.html)
+          PAYLOAD=$(jq -n \
+            --arg action "send_single" \
+            --arg to_email "info@righettoimmobiliare.it" \
+            --arg subject "$SUBJECT" \
+            --arg html_body "$EMAIL_BODY" \
+            '{action: $action, to_email: $to_email, subject: $subject, html_body: $html_body}')
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
+            "https://api.righettoimmobiliare.it/send-mail.php" \
+            -H "Content-Type: application/json" \
+            -H "X-API-Key: $EMAIL_RELAY_KEY" \
+            -d "$PAYLOAD")
+          if [ "$HTTP_CODE" = "200" ]; then
+            echo "✅ Promemoria Guardian inviato a info@righettoimmobiliare.it"
+          else
+            echo "⚠️ Email non inviata (HTTP $HTTP_CODE) — controlla Issue GitHub"
+          fi

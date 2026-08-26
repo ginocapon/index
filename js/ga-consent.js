@@ -46,4 +46,17 @@
   gtag('config', GA_ID, { anonymize_ip: true });
 
   applyFromPrefs(readStored());
+
+  /* Trasparenza AI Act UE — barra sito (tutte le pagine pubbliche con ga-consent) */
+  (function loadAiDisclosure() {
+    if (/admin\.html$/i.test((location.pathname || ''))) return;
+    var css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = 'css/site-ai-disclosure.css?v=6';
+    document.head.appendChild(css);
+    var s = document.createElement('script');
+    s.src = 'js/site-ai-disclosure.js?v=7';
+    s.defer = true;
+    document.head.appendChild(s);
+  })();
 })();

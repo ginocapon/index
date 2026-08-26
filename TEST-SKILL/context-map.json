@@ -2,7 +2,7 @@
   "_note": "Routing guide: quale skill caricare per ogni tipo di task. skill-essentials.md va SEMPRE caricata.",
   "_version": "1.5 — Luglio 2026 (Cursor Skills complete: seo, social, security, zona)",
 
-  "always_load": "TEST-SKILL/skill-essentials.md,TEST-SKILL/skill-massimo-punteggio.md,TEST-SKILL/skill-memoria-progressi.md",
+  "always_load": "TEST-SKILL/skill-essentials.md,TEST-SKILL/skill-massimo-punteggio.md,TEST-SKILL/skill-memoria-progressi.md,TEST-SKILL/skill-ai-act-compliance.md",
 
   "cursor_skills": {
     "_doc": "TEST-SKILL/skill-cursor-rules.md §2b — indici operativi in .cursor/skills/",
@@ -125,6 +125,12 @@
       "cursor_rules": ["righetto-supabase-admin.mdc"],
       "token_stimati": "~1.500",
       "note": "img/immobili, media-manifest, purge foto-immobili, js/media-url.js — vedi skill-media-migration.md § Per agenti IA"
+    },
+    "ai_act_compliance": {
+      "skills": ["skill-essentials.md", "skill-ai-act-compliance.md", "skill-design.md"],
+      "cursor_rules": ["righetto-vanilla-ui.mdc"],
+      "token_stimati": "~1.400",
+      "note": "PRIORITÀ PERMANENTE: Reg. UE 2024/1689 — barra sito, Linda, foto annunci, privacy §15. Obbligatorio su OGNI task che tocca HTML, JS chat, media o contenuti."
     }
   },
 
