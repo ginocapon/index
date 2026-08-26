@@ -95,7 +95,22 @@ def main() -> int:
         raw = json.loads(manifest_path.read_text(encoding="utf-8"))
         manifest_count = len([k for k in raw if not str(k).startswith("_")])
 
-    img_count = len(list((ROOT / "img" / "immobili").rglob("*.webp")))
+    img_dir = ROOT / "img" / "immobili"
+    img_webp = list(img_dir.rglob("*.webp")) if img_dir.is_dir() else []
+    non_webp: list[Path] = []
+    if img_dir.is_dir():
+        for p in img_dir.rglob("*"):
+            if not p.is_file():
+                continue
+            ext = p.suffix.lower()
+            if ext in (".webp",):
+                continue
+            if ext in (".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tif", ".tiff", ".heic"):
+                non_webp.append(p)
+                print(f"ERR formato non WebP: {p.relative_to(ROOT).as_posix()}")
+                err += 1
+
+    img_count = len(img_webp)
     reel_count = len(list((ROOT / "img" / "video" / "reels").glob("*.mp4")))
 
     print(f"\n--- Riepilogo ---")
@@ -103,6 +118,7 @@ def main() -> int:
     print(f"Foto DB locali (img/immobili): {local_paths}")
     print(f"Foto ancora Supabase in DB: {supabase_left}")
     print(f"File WebP su disco: {img_count}")
+    print(f"File non-WebP in img/immobili: {len(non_webp)}")
     print(f"File verificati esistenti: {ok_files}")
     print(f"Share pages OG -> img/immobili: {share_local}/{len(share_files)}")
     print(f"Share pages OG ancora Supabase: {share_supabase}")
