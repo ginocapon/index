@@ -6,7 +6,8 @@
 **Ordine lettura sessione (non saltare):**
 1. Questo file (`skill-massimo-punteggio.md`)
 2. `skill-essentials.md`
-3. `TEST-SKILL/skimm.md` (se blog/contenuti)
+3. **`skill-efficienza-sito.md`** (gate operativo: media WebP, GA4 unico, diff minimo)
+4. `TEST-SKILL/skimm.md` (se blog/contenuti)
 4. Modulo task da `context-map.json` (seo → `skill-seo.md`, UI → `skill-design.md`, …)
 5. File HTML/CSS da modificare
 

@@ -1,0 +1,78 @@
+{
+  "updated": "2026-07-18",
+  "source": "Audit competitor Immobiliare IT giu 2026 + GSC lug 2026",
+  "audit_date": "2026-06",
+  "righetto_feature_score": "5/8",
+  "skill_compliance_pct": 100,
+  "blog_count": 108,
+  "gsc_snapshot_2026-07-17": {
+    "indexed": 94,
+    "not_indexed": 330,
+    "redirect": 90,
+    "crawled_not_indexed": 89,
+    "not_found_404": 86,
+    "clicks_28d": 271,
+    "impressions_28d": 4220,
+    "ctr_pct": 6.4,
+    "avg_position": 7.7
+  },
+  "competitor_matrix": {
+    "tecnocasa": { "alert": true, "tour": true, "live": true, "valutazione": true, "zone": true, "blog": false, "chat": false, "confronto": false, "total": 5 },
+    "idealista_pro": { "alert": true, "tour": true, "live": false, "valutazione": false, "zone": false, "blog": false, "chat": false, "confronto": true, "total": 3 },
+    "engel_volkers_it": { "alert": false, "tour": true, "live": true, "valutazione": true, "zone": true, "blog": true, "chat": false, "confronto": false, "total": 5 },
+    "gabetti": { "alert": true, "tour": false, "live": false, "valutazione": true, "zone": true, "blog": false, "chat": false, "confronto": false, "total": 3 },
+    "remax_it": { "alert": false, "tour": true, "live": false, "valutazione": true, "zone": false, "blog": true, "chat": false, "confronto": false, "total": 3 },
+    "righetto": { "alert": false, "tour": true, "live": true, "valutazione": true, "zone": true, "blog": true, "chat": true, "confronto": false, "total": 5 }
+  },
+  "audit_scores_giu_2026": {
+    "seo_tecnico": 92,
+    "geo_llms": 95,
+    "schema_jsonld": 88,
+    "blog_fonti": 90,
+    "box_aeo": 72,
+    "eeat_autore": 35,
+    "author_bio_tutti_blog": 78,
+    "cwv_mobile": 80,
+    "social_og_immobili": 95,
+    "recensioni_gbp": 55,
+    "tool_engagement": 40
+  },
+  "strengths": [
+    "blog_fonti_istituzionali",
+    "chatbot_linda_valutazione_tour360",
+    "llms_ai_json",
+    "share_immobile_social",
+    "zone_landing_lead",
+    "visita_live_immobile_html"
+  ],
+  "gaps_open": [
+    { "id": "gap-author-bio-batch", "title": "Bio autore su tutti i blog + arricchire gino-capon/linda-righetto", "priority": "high", "status": "open" },
+    { "id": "gap-aeo-in-sintesi", "title": "Retrofit box In sintesi ~25 blog batch", "priority": "medium", "status": "open" },
+    { "id": "gap-alert-ricerca", "title": "Alert WhatsApp/email criteri ricerca", "priority": "high", "status": "open", "target": "2026-08" },
+    { "id": "gap-confronta-3", "title": "Confronta fino a 3 immobili localStorage", "priority": "high", "status": "open", "target": "2026-08" },
+    { "id": "gap-recensioni-gbp", "title": "Recensioni 127 vs 200+ competitor", "priority": "off-site", "status": "open" },
+    { "id": "gap-indice-omi", "title": "Indice Righetto €/mq trimestrale OMI", "priority": "medium", "status": "open", "target": "2026-09" },
+    { "id": "gap-costo-totale", "title": "Calcolo costo totale acquisto in scheda", "priority": "medium", "status": "open", "target": "2026-09" }
+  ],
+  "roadmap_q3_ordered": [
+    "gap-alert-ricerca",
+    "gap-confronta-3",
+    "gap-costo-totale",
+    "gap-indice-omi",
+    "gap-aeo-in-sintesi",
+    "gap-author-bio-batch",
+    "gsc-generative-ai-monitor"
+  ],
+  "trigger_skill_venerdi": {
+    "keyword": "\"SKILL\"",
+    "meaning": "Programma lavoro del giorno per migliorare sito — venerdì",
+    "skill_file": "TEST-SKILL/skill-competitor-roadmap-q3-2026.md",
+    "cursor_skill": ".cursor/skills/righetto-venerdi-sito-90giorni/SKILL.md",
+    "also_read": [
+      "TEST-SKILL/skill-memoria-progressi.md",
+      "data/editorial-queue.json",
+      "data/gsc-indexing-weekly.json",
+      "data/gsc-keywords-priority.json"
+    ]
+  }
+}

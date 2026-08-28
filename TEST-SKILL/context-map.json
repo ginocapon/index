@@ -1,8 +1,8 @@
 {
   "_note": "Routing guide: quale skill caricare per ogni tipo di task. skill-essentials.md va SEMPRE caricata.",
-  "_version": "1.5 — Luglio 2026 (Cursor Skills complete: seo, social, security, zona)",
+  "_version": "1.6 — Luglio 2026 (trigger \"SKILL\" venerdì + competitor roadmap Q3)",
 
-  "always_load": "TEST-SKILL/skill-essentials.md,TEST-SKILL/skill-massimo-punteggio.md,TEST-SKILL/skill-memoria-progressi.md,TEST-SKILL/skill-ai-act-compliance.md",
+  "always_load": "TEST-SKILL/skill-essentials.md,TEST-SKILL/skill-massimo-punteggio.md,TEST-SKILL/skill-efficienza-sito.md,TEST-SKILL/skill-memoria-progressi.md,TEST-SKILL/skill-ai-act-compliance.md",
 
   "cursor_skills": {
     "_doc": "TEST-SKILL/skill-cursor-rules.md §2b — indici operativi in .cursor/skills/",
@@ -64,10 +64,15 @@
       "note": "Serve struttura zona + SEO locale + schema. Title zona ≤60 char (max 70) — §1.2 skill-essentials"
     },
     "audit_seo": {
-      "skills": ["skill-essentials.md", "skill-massimo-punteggio.md", "skill-memoria-progressi.md", "skill-seo.md"],
+      "skills": ["skill-essentials.md", "skill-massimo-punteggio.md", "skill-efficienza-sito.md", "skill-memoria-progressi.md", "skill-seo.md"],
       "cursor_rules": ["righetto-seo-geo.mdc"],
       "token_stimati": "~2.200",
-      "note": "Serve stato SERP + requisiti Google + KPI"
+      "note": "Serve stato SERP + requisiti Google + KPI + gate efficienza §3"
+    },
+    "efficienza_sito": {
+      "skills": ["skill-essentials.md", "skill-massimo-punteggio.md", "skill-efficienza-sito.md", "skill-media-migration.md", "skill-seo.md"],
+      "token_stimati": "~1.800",
+      "note": "Regola Musk adattata: verify media/GA4, patch batch compliance, filler blog, diff minimo"
     },
     "fix_css_design": {
       "skills": ["skill-essentials.md", "skill-design.md"],
@@ -90,6 +95,25 @@
       "cursor_rules": ["righetto-blog-publish.mdc"],
       "token_stimati": "~2.400",
       "note": "Report settimanale SKIMM + pillar + keyword libere — §8.1d SKILL-2.0, skimm.md §1.7–1.9"
+    },
+    "trigger_skill_venerdi": {
+      "trigger": "\"SKILL\"",
+      "skills": [
+        "skill-essentials.md",
+        "skill-memoria-progressi.md",
+        "skill-competitor-roadmap-q3-2026.md",
+        "skill-seo.md",
+        "skill-editorial-queue.md"
+      ],
+      "cursor_skills": ["righetto-venerdi-sito-90giorni"],
+      "data": [
+        "data/editorial-queue.json",
+        "data/gsc-indexing-weekly.json",
+        "data/gsc-keywords-priority.json",
+        "data/competitor-roadmap-q3-2026.json"
+      ],
+      "token_stimati": "~2.600",
+      "note": "Utente scrive \"SKILL\" (virgolette) il venerdì → piano lavoro giornata §8 skill-competitor-roadmap-q3-2026.md"
     },
     "audit_completo": {
       "skills": ["skill-essentials.md", "skill-seo.md", "skill-content.md", "skill-design.md", "skill-context.md"],

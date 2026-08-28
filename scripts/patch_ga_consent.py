@@ -21,7 +21,7 @@ COMPACT = re.compile(
 
 
 def patch_file(path: Path) -> bool:
-    if path.name == "index.html":
+    if path.resolve() == (ROOT / "index.html").resolve():
         return False
     text = path.read_text(encoding="utf-8")
     new = BLOCK.sub(REPLACEMENT, text)
