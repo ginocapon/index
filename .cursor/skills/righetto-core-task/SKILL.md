@@ -13,8 +13,9 @@ description: >-
 
 1. Leggi `TEST-SKILL/skill-essentials.md`
 2. Leggi `TEST-SKILL/skill-massimo-punteggio.md` (gate Google)
-3. Leggi **`TEST-SKILL/skill-ai-act-compliance.md`** (trasparenza AI Act UE — priorità permanente)
-4. Consulta `TEST-SKILL/context-map.json` per il task specifico → carica i moduli indicati
+3. Leggi **`TEST-SKILL/skill-efficienza-sito.md`** (buonsenso operativo + gate media/GA4)
+4. Leggi **`TEST-SKILL/skill-ai-act-compliance.md`** (trasparenza AI Act UE — priorità permanente)
+5. Consulta `TEST-SKILL/context-map.json` per il task specifico → carica i moduli indicati
 
 ## Regole non negoziabili
 
@@ -33,6 +34,7 @@ description: >-
 - [ ] `sitemap.xml` se nuova/rimossa URL
 - [ ] **AI Act UE:** disclosure sito/chat/foto se pagina o media toccati — `skill-ai-act-compliance.md`
 - [ ] **FOTO AI:** `node scripts/audit-foto-ai.mjs` se tocchi immagini o manifest — vedi `skill-ai-act-compliance.md` §3.4
+- [ ] **Efficienza:** se task media/SEO → `verify_media_migration.py` + `verify_ga_consent_live.py` (`skill-efficienza-sito.md`)
 - [ ] **Commit:** a fine task se ci sono modifiche (messaggio in italiano, no `.env`/segreti)
 - [ ] **Push:** solo se l'utente lo chiede esplicitamente («push», «pushia», «metti online»). Senza richiesta → commit locale o solo file modificati, **no push**
 
@@ -59,6 +61,7 @@ Lezioni già registrate (luglio 2026): hero landing iPhone, tour 360° slug/codi
 | Audit sicurezza | `righetto-security` | `/sicurezza` |
 | Guardian + Learning Bridge (ogni 15 gg) | `righetto-premortem-guardian/skill/SKILL.md` | scrivi **GUARDIAN** o **LEARNING BRIDGE** |
 | Piano venerdì / 90 giorni | `righetto-venerdi-sito-90giorni` | `/venerdi` |
+| Utente scrive **`"SKILL"`** (venerdì) | `righetto-venerdi-sito-90giorni` | piano §8 `skill-competitor-roadmap-q3-2026.md` |
 | Perizia PDF | `righetto-perizia` | `/perizia` |
 
 Mappa completa: `TEST-SKILL/skill-cursor-rules.md` §2b

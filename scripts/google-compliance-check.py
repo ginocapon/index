@@ -36,6 +36,7 @@ SKIP_HTML = {
     "scraping.html",
     "immobile.html",
     "landing-demo-loft-adiacenti-padova-vicenza.html",
+    "venerdi-email-report.html",
 }
 
 

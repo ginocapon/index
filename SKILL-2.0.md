@@ -8,6 +8,10 @@ Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutt
 
 **Regole Cursor scoped:** [`TEST-SKILL/skill-cursor-rules.md`](TEST-SKILL/skill-cursor-rules.md) — 7 file `.mdc` in `.cursor/rules/` (pattern awesome-cursorrules).
 
+**Changelog rapido (28 agosto 2026):** **`skill-efficienza-sito.md`** — regole Musk adattate (buonsenso, zero sprechi, gate media/GA4); in `always_load` + checklist venerdì.
+
+**Changelog rapido (18 luglio 2026):** audit competitor IT + roadmap Q3 — **`TEST-SKILL/skill-competitor-roadmap-q3-2026.md`** + `data/competitor-roadmap-q3-2026.json`; trigger venerdì **`"SKILL"`** (virgolette) → piano lavoro giornata §8.
+
 **Changelog rapido (17 luglio 2026 — b):** coda editoriale automatica — `data/editorial-queue.json` + **`TEST-SKILL/skill-editorial-queue.md`** (4 blog schedulati, discovery settimanale); routing in `context-map.json` + `/blog` + `/venerdi`.
 
 **Changelog rapido (10 luglio 2026 — d):** sistema Skills Cursor — lezioni consolidate (hero mobile, tour 360°, annunci disattivati, push su richiesta); mappa `.cursor/skills/README.md`; checklist venerdì §8 admin.

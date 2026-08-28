@@ -1,13 +1,14 @@
 {
-  "updated": "2026-07-24",
-  "source": "GSC manuale — aggiornare ogni venerdì (Indicizzazione → Pagine + Sitemap)",
-  "note": "Sitemap principale OK (167 URL). Rimuovere da GSC le 9 URL singole inviate per errore come sitemap (tipo Sconosciuto, 1 errore). Dopo fix DNS apex 15/07: le «reindirizzamento» dovrebbero scendere in 1-2 settimane",
-  "sitemap_urls": 167,
+  "updated": "2026-08-03",
+  "source": "GSC manuale + tool backlink (screenshot 03/08/2026) — aggiornare ogni venerdì",
+  "note": "Sitemap principale OK (~175 URL). Rimuovere da GSC le 9 URL singole inviate per errore come sitemap. Canonical sempre senza doppio slash (es. /servizio-vendita non //servizio-vendita). Follow-up indicizzazione servizio-vendita: 3–7 gg dopo richiesta.",
+  "sitemap_urls": 175,
   "sitemap_main": {
     "url": "https://righettoimmobiliare.it/sitemap.xml",
     "status": "Riuscita",
     "last_read": "2026-07-13",
-    "discovered_pages": 166
+    "discovered_pages": 166,
+    "note": "Rileggere sitemap in GSC post-batch blog 28/07 (+7 URL)"
   },
   "sitemap_erronee_da_rimuovere": [
     "https://www.righettoimmobiliare.it/zona-limena",
@@ -21,6 +22,7 @@
   ],
   "indexed": 94,
   "not_indexed": 330,
+  "indexed_snapshot_date": "2026-07-24",
   "by_reason": {
     "redirect": 90,
     "crawled_not_indexed": 89,
@@ -32,6 +34,15 @@
     "server_5xx": 2,
     "duplicate_no_canonical": 1
   },
+  "seo_tool_snapshot": {
+    "date": "2026-08-03",
+    "domain_strength": 2.08,
+    "inlink_rank": 20,
+    "backlinks_total": 362,
+    "linking_domains": 51,
+    "dofollow_pct": 57.7,
+    "note": "Crescita link da ott 2025; casa.it/affitto.it ok ma spesso puntano a vecchi .aspx (404 GSC). Google/Bing «not checked» = limite tool free."
+  },
   "manual_checks": {
     "sitemap_ok": true,
     "sitemap_cleanup_pending": true,
@@ -39,6 +50,20 @@
     "prestazioni_affitti_limena": true
   },
   "inspection_log": [
+    {
+      "date": "2026-08-03",
+      "checked_by": "utente GSC",
+      "batch": "servizio-vendita-followup-2",
+      "results": [
+        {
+          "url": "https://righettoimmobiliare.it/servizio-vendita",
+          "status": "richiesta_indicizzazione_inviata",
+          "action": "follow-up 07-10/08 — usare URL canonica senza doppio slash",
+          "note": "Utente ha ispezionato con //servizio-vendita; canonical in sitemap è singola slash"
+        }
+      ],
+      "note": "Seconda richiesta indicizzazione (prima 24/07). Verificare stato entro 7 gg."
+    },
     {
       "date": "2026-07-24",
       "checked_by": "utente GSC",
@@ -55,24 +80,90 @@
         {"url": "https://righettoimmobiliare.it/blog-scegliere-agenzia-immobiliare-padova-2026", "status": "su_google", "action": "nessuna"},
         {"url": "https://righettoimmobiliare.it/blog", "status": "su_google", "action": "nessuna"}
       ],
-      "note": "Solo servizio-vendita ha richiesto indicizzazione. Follow-up lunedì 28/07 e venerdì 31/07."
+      "note": "Solo servizio-vendita non su Google al 24/07."
     }
   ],
+  "check_queue": {
+    "updated": "2026-08-03",
+    "instructions": "GSC → Ispezione URL → se «Non su Google» → Richiedi indicizzazione. Max ~10-12 URL/settimana. URL canonica senza www e senza .html.",
+    "tier_a_followup": {
+      "label": "Follow-up obbligatorio (richiesta già inviata)",
+      "urls": [
+        {
+          "url": "https://righettoimmobiliare.it/servizio-vendita",
+          "priority": "massima",
+          "last_action": "richiesta_indicizzazione 03/08/2026",
+          "next_check": "2026-08-10",
+          "status": "pending_followup"
+        }
+      ]
+    },
+    "tier_b_servizi_conversione": {
+      "label": "Servizi e landing — ispezionare e richiedere se assenti",
+      "urls": [
+        {"url": "https://righettoimmobiliare.it/servizio-locazioni", "status": "da_ispezionare", "note": "money page affitti"},
+        {"url": "https://righettoimmobiliare.it/servizio-valutazioni", "status": "da_ispezionare", "note": "lead valutazione"},
+        {"url": "https://righettoimmobiliare.it/servizio-preliminari", "status": "da_ispezionare"},
+        {"url": "https://righettoimmobiliare.it/servizio-gestione", "status": "da_ispezionare"},
+        {"url": "https://righettoimmobiliare.it/servizio-virtual-tour", "status": "da_ispezionare"},
+        {"url": "https://righettoimmobiliare.it/landing-consulenza-immobiliare-gratuita", "status": "da_ispezionare", "note": "priority 0.9 sitemap"}
+      ]
+    },
+    "tier_c_blog_nuovi_lug28": {
+      "label": "Blog pubblicati 28/07 — richiedi indicizzazione se non su Google",
+      "urls": [
+        {"url": "https://righettoimmobiliare.it/blog-domanda-residenziale-supera-offerta-2026-padova", "status": "da_ispezionare"},
+        {"url": "https://righettoimmobiliare.it/blog-ricerche-online-tipologie-casa-2026-padova", "status": "da_ispezionare"},
+        {"url": "https://righettoimmobiliare.it/blog-outlook-living-italia-2026-padova", "status": "da_ispezionare"},
+        {"url": "https://righettoimmobiliare.it/blog-italy-rental-market-positive-start-january-2026", "status": "da_ispezionare", "note": "EN — hreflang"},
+        {"url": "https://righettoimmobiliare.it/blog-student-rentals-padova-guide-2026", "status": "da_ispezionare", "note": "EN"},
+        {"url": "https://righettoimmobiliare.it/blog-rental-contract-padova-guide-2026", "status": "da_ispezionare", "note": "EN"},
+        {"url": "https://righettoimmobiliare.it/blog-padova-housing-market-guide-2026", "status": "da_ispezionare", "note": "EN"}
+      ]
+    },
+    "tier_d_blog_money_affitti": {
+      "label": "Blog affitti / Limena — GSC query in crescita",
+      "urls": [
+        {"url": "https://righettoimmobiliare.it/blog-agenzia-immobiliare-limena-come-scegliere-2026", "status": "da_ispezionare", "note": "pubblicato 24/07"},
+        {"url": "https://righettoimmobiliare.it/blog-affitti-limena-2026", "status": "da_ispezionare"},
+        {"url": "https://righettoimmobiliare.it/blog-rendimento-affitto-padova", "status": "da_ispezionare", "note": "139 impr 0 click — sostenere"},
+        {"url": "https://righettoimmobiliare.it/blog-affitto-studenti-padova", "status": "da_ispezionare", "note": "8 click GSC"},
+        {"url": "https://righettoimmobiliare.it/blog-contratto-affitto-padova", "status": "da_ispezionare", "note": "6 click GSC"},
+        {"url": "https://righettoimmobiliare.it/blog-mandato-esclusivo-padova-perche-conviene-2026", "status": "da_ispezionare"},
+        {"url": "https://righettoimmobiliare.it/blog-affitto-transitorio-padova-durata-2026", "status": "da_ispezionare"}
+      ]
+    },
+    "tier_e_pillar_gia_ok": {
+      "label": "Pillar già su Google al 24/07 — solo spot-check mensile",
+      "urls": [
+        {"url": "https://righettoimmobiliare.it/", "status": "su_google_24_07"},
+        {"url": "https://righettoimmobiliare.it/immobili", "status": "su_google_24_07"},
+        {"url": "https://righettoimmobiliare.it/agenzia-immobiliare-padova", "status": "su_google_24_07", "note": "68 impr 0 click — meta refresh"},
+        {"url": "https://righettoimmobiliare.it/zona-limena", "status": "su_google_24_07"},
+        {"url": "https://righettoimmobiliare.it/blog", "status": "su_google_24_07"},
+        {"url": "https://righettoimmobiliare.it/blog-mercato-immobiliare-limena-2026", "status": "su_google_24_07"},
+        {"url": "https://righettoimmobiliare.it/blog-limena-vs-padova-centro-dove-comprare-2026", "status": "su_google_24_07"}
+      ]
+    }
+  },
   "next_friday_batch": {
-    "date": "2026-07-31",
-    "label": "follow-up-vendita + affitti-money + blog-nuovo",
+    "date": "2026-08-08",
+    "label": "batch-08-08-vendita-followup + blog-lug28 + servizi",
+    "max_urls_per_session": 12,
     "urls": [
       "https://righettoimmobiliare.it/servizio-vendita",
-      "https://righettoimmobiliare.it/blog-agenzia-immobiliare-limena-come-scegliere-2026",
       "https://righettoimmobiliare.it/servizio-locazioni",
       "https://righettoimmobiliare.it/servizio-valutazioni",
-      "https://righettoimmobiliare.it/blog-rendimento-affitto-padova",
-      "https://righettoimmobiliare.it/blog-affitto-studenti-padova",
-      "https://righettoimmobiliare.it/blog-contratto-affitto-padova",
-      "https://righettoimmobiliare.it/blog-mandato-esclusivo-padova-perche-conviene-2026",
       "https://righettoimmobiliare.it/landing-consulenza-immobiliare-gratuita",
-      "https://righettoimmobiliare.it/blog-affitti-limena-2026"
+      "https://righettoimmobiliare.it/blog-agenzia-immobiliare-limena-come-scegliere-2026",
+      "https://righettoimmobiliare.it/blog-domanda-residenziale-supera-offerta-2026-padova",
+      "https://righettoimmobiliare.it/blog-ricerche-online-tipologie-casa-2026-padova",
+      "https://righettoimmobiliare.it/blog-outlook-living-italia-2026-padova",
+      "https://righettoimmobiliare.it/blog-rendimento-affitto-padova",
+      "https://righettoimmobiliare.it/blog-affitti-limena-2026",
+      "https://righettoimmobiliare.it/blog-student-rentals-padova-guide-2026",
+      "https://righettoimmobiliare.it/blog-padova-housing-market-guide-2026"
     ],
-    "instructions": "1) servizio-vendita = follow-up obbligatorio (richiesta 24/07). 2) blog agenzia Limena = richiedi indicizzazione appena pubblicato. 3) Gli altri: ispeziona; richiedi solo se «non su Google»."
+    "instructions": "1) servizio-vendita: solo verifica stato (richiesta 03/08). 2) Blog lug28 + agenzia Limena: richiedi se «non su Google». 3) Servizi/landing: ispeziona. 4) EN blog: stessa regola. 5) URL sempre https://righettoimmobiliare.it/slug senza doppio slash."
   }
 }

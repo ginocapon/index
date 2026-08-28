@@ -1,6 +1,6 @@
 {
-  "updated": "2026-07-09",
-  "note": "URL da verificare ogni venerdì (probe live + promemoria GSC Ispezione URL). Non inviare come sitemap.",
+  "updated": "2026-08-03",
+  "note": "URL da verificare ogni venerdì (GSC Ispezione URL). Non inviare come sitemap singola. Canonical senza www, senza .html, senza doppio slash.",
   "pillar": [
     "https://righettoimmobiliare.it/",
     "https://righettoimmobiliare.it/immobili",
@@ -9,12 +9,20 @@
     "https://righettoimmobiliare.it/zona-limena",
     "https://righettoimmobiliare.it/blog"
   ],
+  "servizi_conversione": [
+    "https://righettoimmobiliare.it/servizio-locazioni",
+    "https://righettoimmobiliare.it/servizio-valutazioni",
+    "https://righettoimmobiliare.it/servizio-preliminari",
+    "https://righettoimmobiliare.it/servizio-gestione",
+    "https://righettoimmobiliare.it/servizio-virtual-tour",
+    "https://righettoimmobiliare.it/landing-consulenza-immobiliare-gratuita"
+  ],
   "limena_cluster": [
     "https://righettoimmobiliare.it/blog-affitti-limena-2026",
     "https://righettoimmobiliare.it/blog-mercato-immobiliare-limena-2026",
     "https://righettoimmobiliare.it/blog-limena-vs-padova-centro-dove-comprare-2026",
     "https://righettoimmobiliare.it/blog-appartamento-nuova-costruzione-limena",
-    "https://righettoimmobiliare.it/blog-scegliere-agenzia-immobiliare-padova-2026"
+    "https://righettoimmobiliare.it/blog-agenzia-immobiliare-limena-come-scegliere-2026"
   ],
   "affitti_cluster": [
     "https://righettoimmobiliare.it/blog-affitto-transitorio-padova-durata-2026",
@@ -22,5 +30,19 @@
     "https://righettoimmobiliare.it/blog-rendimento-affitto-padova",
     "https://righettoimmobiliare.it/blog-contratto-affitto-padova",
     "https://righettoimmobiliare.it/blog-affitto-studenti-padova"
-  ]
+  ],
+  "blog_batch_lug28_2026": [
+    "https://righettoimmobiliare.it/blog-domanda-residenziale-supera-offerta-2026-padova",
+    "https://righettoimmobiliare.it/blog-ricerche-online-tipologie-casa-2026-padova",
+    "https://righettoimmobiliare.it/blog-outlook-living-italia-2026-padova",
+    "https://righettoimmobiliare.it/blog-italy-rental-market-positive-start-january-2026",
+    "https://righettoimmobiliare.it/blog-student-rentals-padova-guide-2026",
+    "https://righettoimmobiliare.it/blog-rental-contract-padova-guide-2026",
+    "https://righettoimmobiliare.it/blog-padova-housing-market-guide-2026"
+  ],
+  "followup_indexing": {
+    "url": "https://righettoimmobiliare.it/servizio-vendita",
+    "requests": ["2026-07-24", "2026-08-03"],
+    "next_check": "2026-08-10"
+  }
 }

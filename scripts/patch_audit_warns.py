@@ -29,7 +29,7 @@ def vendor_prefix(path: Path) -> str:
 
 
 def fix_ga4(raw: str) -> str:
-    if re.search(r"G-PHEL8KXLBX|googletagmanager", raw, re.I):
+    if re.search(r"G-PHEL8KXLBX|googletagmanager|ga-consent\.js", raw, re.I):
         return raw
     if "<head>" in raw:
         return raw.replace("<head>", "<head>\n" + GA4, 1)

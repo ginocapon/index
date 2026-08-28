@@ -66,6 +66,7 @@ Allineato a `context-map.json`:
 
 | Task | Cursor Skill | Skill da caricare | Rule Cursor (hint) |
 |------|--------------|-------------------|-------------------|
+| **Utente scrive `"SKILL"`** (venerdì) | `righetto-venerdi-sito-90giorni` | essentials + memoria + **skill-competitor-roadmap-q3-2026** + seo + editorial-queue | `righetto-core` |
 | Nuovo articolo blog | `righetto-blog` | essentials + content + forms (se CTA) | `righetto-blog-publish` |
 | Nuova landing | `righetto-landing` | essentials + forms + design + context | `righetto-forms-leads` + `righetto-vanilla-ui` |
 | Fix CSS / mobile | `righetto-fix-mobile` | essentials + design | `righetto-vanilla-ui` |
