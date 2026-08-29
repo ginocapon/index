@@ -67,6 +67,7 @@ Sinonimi: «SKILL», «piano SKILL», `"SKILL"` il venerdì.
 Usa questa lista nell'output per l'utente; adatta alle priorità della settimana del macrociclo.
 
 0. **Gate efficienza (15 min):** `TEST-SKILL/skill-efficienza-sito.md` §4 — `verify_media_migration.py` + `verify_ga_consent_live.py` + `google-compliance-check.py` (target 100%).
+0b. **Post venerdì in coda/pubblicati:** verifica **`skill-editoriale-visivo.md`** §1 + §7 (marchio IA, `audit_blog_visuals.py` su nuovi articoli).
 1. **Dati**: Search Console (ultimi 7/28 gg) — 1 opportunità e 1 anomalia. **Vedi § Search Console sotto** (checklist completa 10 URL + sitemap + 404/5xx).
 2. **Pubblicato**: 1 modifica concreta nel repo — **se settimana macrociclo 3 (Blog):** pubblica prossimo item da `data/editorial-queue.json` (`scheduled`) seguendo `TEST-SKILL/skill-editorial-queue.md`; altrimenti SOSTENERE o fix tecnico.
 3. **Local**: Google Business Profile — 1 post o foto o risposta a recensione (azione manuale utente). **Se attivo cron `righetto_social/`:** verificare post notizie RSS (mar/gio) e mirror Meta→GBP in `.env`.

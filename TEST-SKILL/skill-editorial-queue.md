@@ -1,29 +1,37 @@
 # Coda editoriale blog — Righetto Immobiliare
 
-> **Scopo:** l'agente **non chiede ogni volta** «che articolo scriviamo?». Legge la coda, pubblica il prossimo `scheduled`, rifornisce proposte con ricerca web + GSC.
+> **Scopo:** redazione digitale — ricerca strategica ( **`skill-editoriale-visivo.md` §8–17** ) + publish del prossimo `scheduled`.
 >
-> **File dati:** `data/editorial-queue.json` (macchina) · questo file (processo umano/agente)
+> **File dati:** `data/editorial-queue.json` · questo file (processo)
 >
-> **Aggiornare:** dopo ogni publish, dopo discovery venerdì, dopo input screenshot GSC utente.
+> **Aggiornare:** dopo ogni publish, discovery venerdì, input GSC utente.
 
 ---
 
 ## Sequenza automatica (agente — BLOCCANTE)
 
 ```
-1. Leggi skill-memoria-progressi.md §Stato + §Prossimi passi
-2. Leggi data/editorial-queue.json
-3. Leggi data/gsc-keywords-priority.json → pages_refresh_priority (SOSTENERE prima?)
-4. python scripts/check_doppioni_sito.py  → se KO, STOP
-5. Se SOSTENERE urgente (0 click, >100 impr, no refresh 14 gg) → refresh, NON nuovo blog
-6. Altrimenti: prendi item scheduled con priority minima e target_week ≤ oggi+7
-7. Web search: 3–5 articoli hype sul tema → rielabora (MAI copiare)
-8. Scrivi blog (skill-content + righetto-blog SKILL)
-9. Registra: blog.html, homepage.js, admin, sitemap, llms, ai.json
-10. validate-page.js + build_skimm.py + google-compliance-check.py
-11. Aggiorna editorial-queue (status=published) + gsc-keywords published_this_week + skill-memoria §Log
-12. Commit se utente chiede commit/push (default: commit a fine task blog se richiesto esplicitamente)
+1. Leggi skill-memoria-progressi.md + skill-editoriale-visivo.md (comando permanente completo)
+2. Leggi data/editorial-queue.json + data/gsc-keywords-priority.json
+3. python scripts/check_doppioni_sito.py → se KO, STOP
+4. Se SOSTENERE urgente (0 click, >100 impr) → refresh, NON nuovo blog
+5. Prendi item scheduled (priority min, target_week ≤ oggi+7)
+6. FASE RICERCA §15 skill-editoriale-visivo:
+   - Scansione 3 aree (mercato / politica impatto / normativa)
+   - Verifica fonti primarie (GU, ADE, ISTAT, OMI…)
+   - GSC + Google Trends (geo IT/Veneto/Padova)
+   - Top 5 contenuti web → gap_analysis + value_add
+   - Compila campi coda (Appendice B)
+7. python scripts/audit_editorial_research.py --id {eq-XXX} → OK
+8. Scrivi blog (skill-content + righetto-blog) — MAI copiare testi concorrenti
+9. python scripts/audit_blog_visuals.py --file blog-{slug}.html
+10. Registra: blog.html, homepage.js, admin, sitemap, llms
+11. validate-page.js + build_skimm.py + audit-foto-ai.mjs
+12. Aggiorna editorial-queue (published) + gsc-keywords + skill-memoria §Log
 ```
+
+**Gate pre-scrittura:** `audit_editorial_research.py`  
+**Gate pre-chiusura:** `audit_blog_visuals.py` + §17 skill-editoriale-visivo
 
 ---
 
@@ -42,19 +50,24 @@
 
 ## Discovery nuovi temi (ogni settimana o coda bassa)
 
-1. **GSC** `queries_growth` con impr > 10 e clic = 0 → candidato
-2. **SKIMM** §4 avvisi cluster → nuovo angolo, non duplicare slug esistente
-3. **Web search** (IT, 2026): `affitti padova`, `mutuo giovani`, `mercato immobiliare veneto` + fonte istituzionale
-4. **RSS discovery** (trend settimanale — non copiare testi):
+Seguire **§15–16 skill-editoriale-visivo.md** (7 fasi + ripartizione ~50% trend/evergreen).
+
+1. **GSC** `queries_growth` / `pages_refresh_priority` → candidati + SOSTENERE
+2. **Google Trends** — IT, Veneto, Padova; keyword immobiliare correlate
+3. **SKIMM** §4 gap cluster → angolo nuovo, intent diverso
+4. **Tre aree monitoraggio** (§9): mercato Veneto/Padova · politica con impatto reale · normativa (verifica GU/ADE)
+5. **RSS / fonti** (spunto angolo — mai copiare corpo):
    - **ANSA Economia:** `https://www.ansa.it/sito/notizie/economia/economia_rss.xml`
    - **ANSA Veneto:** `https://www.ansa.it/veneto/notizie/veneto_rss.xml`
    - **Sole 24 Ore Economia:** `https://www.ilsole24ore.com/rss/economia.xml`
    - **Milano Finanza** (Google News RSS): `site:milanofinanza.it` + keyword immobili/casa/mutuo
    - **Agenzia delle Entrate:** comunicati RSS ufficiali
-   - Usare titoli come **spunto angolo editoriale** — rielaborare con fonti istituzionali, mai copiare corpo articolo
-5. **Anti-doppioni:** grep slug + `check_doppioni_sito.py` + intent diverso da articolo esistente
-6. Aggiungi in `editorial-queue.json` con `status: "proposed"`, `research_refs`, `different_from`
-7. **Max 1 publish/settimana** — proposte possono accumularsi
+   - **Gazzetta Ufficiale:** https://www.gazzettaufficiale.it/
+   - Usare titoli come **spunto** — rielaborare con fonti primarie
+6. **Top 5 contenuti web** sul tema → `hype_sources_read` + `gap_analysis` + `value_add`
+7. **Anti-doppioni:** grep slug + `check_doppioni_sito.py`
+8. Aggiungi in `editorial-queue.json`: `status: proposed`, campi Appendice B
+9. **Max 1 publish/settimana** — proposte possono accumularsi
 
 ---
 

@@ -1,8 +1,10 @@
 # Blog Righetto
 
-Leggi e applica `.cursor/skills/righetto-blog/SKILL.md`.
+Leggi e applica `.cursor/skills/righetto-blog/SKILL.md` + **`TEST-SKILL/skill-editoriale-visivo.md`** (comando permanente: ricerca strategica + immagini/grafiche).
 
-**Prima di scrivere:** `python scripts/check_doppioni_sito.py` + `TEST-SKILL/skimm.md`.
+**Prima di scrivere:** ricerca 7 fasi (§15) + `audit_editorial_research.py --id eq-XXX` + `check_doppioni_sito.py`.
+
+**Prima di chiudere:** `audit_blog_visuals.py` + `audit-foto-ai.mjs` + `validate-page.js`.
 
 Se l'utente non ha specificato il tema, proponi 2–3 angoli con fonte istituzionale (OMI, FIMAA, ISTAT, ADE) e attendi scelta.
 

@@ -28,7 +28,7 @@ Le **Cursor Skills** (`.cursor/skills/`) **non duplicano** `TEST-SKILL/`: dicono
 |-------------|---------------|--------------|----------------------|
 | `righetto-core.mdc` | **true** | Ogni sessione | `skill-essentials.md`, `context-map.json` |
 | `righetto-vanilla-ui.mdc` | false | `*.html`, `css/**`, `js/**` | `skill-design.md` |
-| `righetto-blog-publish.mdc` | false | `blog-*.html`, `scripts/**` | `skill-content.md`, §8.1a/8.1c |
+| `righetto-blog-publish.mdc` | false | `blog-*.html`, `scripts/**` | **`skill-editoriale-visivo.md`**, `skill-content.md`, §8.1a/8.1c |
 | `righetto-forms-leads.mdc` | false | `landing-*`, form, `rig-lead-form.js` | `skill-forms-leads.md` |
 | `righetto-social-automation.mdc` | false | `righetto_social/**` | `skill-social-automation.md` |
 | `righetto-seo-geo.mdc` | false | `zona-*`, `sitemap.xml`, `llms.txt` | `skill-seo.md` |
@@ -43,7 +43,7 @@ Le **Cursor Skills** (`.cursor/skills/`) **non duplicano** `TEST-SKILL/`: dicono
 | Skill progetto | Command `/` | Trigger utente | Moduli `TEST-SKILL/` |
 |----------------|-------------|----------------|----------------------|
 | `righetto-core-task` | `/sito` | task generico sul sito | essentials + massimo-punteggio |
-| `righetto-blog` | `/blog` | nuovo articolo, blog su… | content + skimm + forms (se CTA) |
+| `righetto-blog` | `/blog` | nuovo articolo, blog su… | **editoriale-visivo** + content + skimm + forms (se CTA) |
 | `righetto-landing` | `/landing` | landing, form lead, conversione | forms-leads + design + context |
 | `righetto-fix-mobile` | `/mobile` | iPhone, mobile, responsive rotto | design |
 | `righetto-immobili-admin` | `/immobili` | foto admin, tour 360°, sync | media-migration + context |
@@ -67,7 +67,7 @@ Allineato a `context-map.json`:
 | Task | Cursor Skill | Skill da caricare | Rule Cursor (hint) |
 |------|--------------|-------------------|-------------------|
 | **Utente scrive `"SKILL"`** (venerdì) | `righetto-venerdi-sito-90giorni` | essentials + memoria + **skill-competitor-roadmap-q3-2026** + seo + editorial-queue | `righetto-core` |
-| Nuovo articolo blog | `righetto-blog` | essentials + content + forms (se CTA) | `righetto-blog-publish` |
+| Nuovo articolo blog | `righetto-blog` | essentials + **editoriale-visivo** + content + forms (se CTA) | `righetto-blog-publish` |
 | Nuova landing | `righetto-landing` | essentials + forms + design + context | `righetto-forms-leads` + `righetto-vanilla-ui` |
 | Fix CSS / mobile | `righetto-fix-mobile` | essentials + design | `righetto-vanilla-ui` |
 | Audit SEO / meta / schema | `righetto-seo` | essentials + seo + massimo-punteggio | `righetto-seo-geo` |

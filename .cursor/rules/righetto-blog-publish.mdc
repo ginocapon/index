@@ -1,12 +1,19 @@
 ---
-description: Righetto — pubblicazione blog, anti-doppioni, asset e registrazione 4 punti
+description: Righetto — pubblicazione blog, anti-doppioni, asset visivi e registrazione 4 punti
 globs: "blog-*.html,blog.html,scripts/**/*.py,scripts/check_doppioni_sito.py,img/blog/**"
 alwaysApply: false
 ---
 
 # Blog — qualità e pubblicazione
 
-Dettaglio: **`TEST-SKILL/skill-content.md`**, **`TEST-SKILL/skimm.md`**, **`SKILL-2.0.md` §8.1a, §8.1, §8.1c, §8.3**.
+Dettaglio: **`TEST-SKILL/skill-editoriale-visivo.md`** (comando permanente prioritario), **`TEST-SKILL/skill-content.md`**, **`TEST-SKILL/skimm.md`**, **`SKILL-2.0.md` §8.1a, §8.1, §8.1c, §8.3**.
+
+## Comando editoriale permanente (PRIORITÀ)
+- **Ricerca §8–17:** niente articoli casuali — 7 fasi (scansione, fonti, GSC/Trends, top 5 web, punteggio, selezione); ~50% trend / ~50% evergreen; valore aggiunto Padova/Veneto
+- **Visivo §1–7:** ≥3 immagini IA pertinenti + 1 hero + ≥2 SVG + ≥2 tabelle
+- **Venerdì:** audit AI Act extra
+- Gate: `audit_editorial_research.py --id eq-XXX` (pre-scrittura) + `audit_blog_visuals.py` (pre-chiusura)
+- Precedenza su selezione argomento e composizione visiva; non deroga AI Act, efficienza anti-filler, fonti verificate
 
 ## BLOCCANTE — prima di scrivere (§8.1a)
 1. Leggi **`TEST-SKILL/skimm.md`** §3–§4 (keyword primaria + coppie a non fondere)
@@ -35,7 +42,7 @@ Dettaglio: **`TEST-SKILL/skill-content.md`**, **`TEST-SKILL/skimm.md`**, **`SKIL
 - `blog.html` + homepage blog: **solo ordine data**, niente sezione «In evidenza» che toglie card dalla griglia
 
 ## Secondo passaggio obbligatorio (agente)
-Prima di chiudere: `check_doppioni_sito.py` → **`validate-page.js`** (title ≤70, meta ≤160 — §1.2 essentials) → grep 4 registri → verifica immagini IA marchiate sotto `img/blog/` + ≥2 tabelle + ≥2 SVG → `audit-foto-ai.mjs` OK → ordine data OK. Se fallisce, fix e ripeti.
+Prima di chiudere: `check_doppioni_sito.py` → **`audit_editorial_research.py`** (se nuovo) → scrittura → **`audit_blog_visuals.py`** → **`validate-page.js`** → grep 4 registri → `audit-foto-ai.mjs` OK. Se fallisce, fix e ripeti.
 
 ## Registrazione obbligatoria (tutti e 4)
 - `admin.html` → `_blogSeedArticles` con `data_pubblicazione: 'YYYY-MM-DD'`

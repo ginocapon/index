@@ -56,6 +56,7 @@ bash scripts/mini-seo-check.sh                    # meta, schema, GEO
 ### 3.3 Contenuti
 - Anti-doppioni **prima** di scrivere (`check_doppioni_sito.py`)
 - Blog: 2500+ parole **utili**, no filler ripetuto (`fix_blog_filler_duplicates.py`)
+- **Visuale blog (PRIORITÀ):** `skill-editoriale-visivo.md` — ≥3 foto pertinenti + ≥2 grafiche (`audit_blog_visuals.py`)
 - Box «In sintesi» / `righetto-sol` dove manca
 - Dati numerici solo con fonte (OMI, ISTAT, ADE, FIMAA)
 - Compenso mediazione: mai online
