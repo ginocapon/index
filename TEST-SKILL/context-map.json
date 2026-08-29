@@ -49,9 +49,9 @@
       "skills": ["skill-essentials.md", "skill-editoriale-visivo.md", "skill-editorial-queue.md", "skill-content.md", "skill-ai-act-compliance.md", "skill-forms-leads.md", "skill-memoria-progressi.md"],
       "cursor_rules": ["righetto-blog-publish.mdc"],
       "cursor_skills": ["righetto-blog"],
-      "data": ["data/editorial-queue.json", "data/gsc-keywords-priority.json"],
+      "data": ["data/editorial-queue.json", "data/gsc-keywords-priority.json", "data/editorial-memory.json", "data/editorial-visual-memory.json"],
       "token_stimati": "~2.200",
-      "note": "Comando permanente skill-editoriale-visivo.md (ricerca §8-17 + visivo §1-7 + §16-TER + §18 pubblicabilità). Gate: audit_editorial_research.py + audit_editorial_continuity.py + audit_blog_visuals.py + audit_blog_publishability.py. §8.1a anti-doppioni."
+      "note": "Comando permanente skill-editoriale-visivo.md (ricerca §8-17 + visivo §1-7 + §16-TER + §16-QUATER/QUINQUIES + §18). Gate: audit_editorial_research + audit_editorial_continuity + audit_editorial_visual_variety + audit_blog_visuals + audit_blog_publishability. §8.1a anti-doppioni."
     },
     "form_lead_invio_email": {
       "skills": ["skill-essentials.md", "skill-forms-leads.md", "skill-context.md"],

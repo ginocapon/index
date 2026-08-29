@@ -1,6 +1,6 @@
 {
   "updated": "2026-08-29",
-  "policy": "Max 1 blog AGGIUNGERE/settimana. Comando editoriale: skill-editoriale-visivo.md (§8-17 ricerca + §1-7 visivo + §16-TER continuità + §18 pubblicabilità). Gate: audit_editorial_research + audit_editorial_continuity + audit_blog_visuals + audit_blog_publishability. Memoria: editorial-memory.json.",
+  "policy": "Max 1 blog AGGIUNGERE/settimana. Comando editoriale: skill-editoriale-visivo.md (§8-17 ricerca + §1-7 visivo + §16-TER continuità + §16-QUATER/QUINQUIES varietà visiva/FAQ/proprietari + §18 pubblicabilità). Gate: audit_editorial_research + audit_editorial_continuity + audit_blog_visuals + audit_editorial_visual_variety + audit_blog_publishability. Memorie: editorial-memory.json + editorial-visual-memory.json.",
   "workflow_skill": "TEST-SKILL/skill-editorial-queue.md",
   "editorial_command": "TEST-SKILL/skill-editoriale-visivo.md",
   "discovery": {
@@ -353,7 +353,12 @@
         "https://www.istat.it/it/archivio/prezzi+immobili"
       ],
       "gap_analysis": "Gestione spese casa copre possesso; manca guida condominio in fase acquisto con art. 1117-1139.",
-      "value_add": "Checklist documenti condominiali, millesimi, delibere straordinarie e integrazione budget mutuo Padova/Limena."
+      "value_add": "Checklist documenti condominiali, millesimi, delibere straordinarie e integrazione budget mutuo Padova/Limena.",
+      "structure_type": "GUIDA",
+      "geo_focus": "Padova e provincia di Padova",
+      "owner_relevance": false,
+      "faq_candidates": "Cosa chiedere all'amministratore prima del compromesso? Chi paga spese straordinarie in corso? Come leggere il bilancio condominiale?",
+      "chart_types": "checklist, ripartizione spese"
     },
     {
       "id": "eq-ago29-002",
@@ -382,7 +387,12 @@
         "https://www.istat.it/it/archivio/prezzi+immobili"
       ],
       "gap_analysis": "Caparra e percorso vendita esistono; gap su proposta scritta, termini e negoziazione competitiva Padova.",
-      "value_add": "Elementi proposta, condizione mutuo, mercato competitivo e collegamento caparra-compromesso senza percentuali inventate."
+      "value_add": "Elementi proposta, condizione mutuo, mercato competitivo e collegamento caparra-compromesso senza percentuali inventate.",
+      "structure_type": "CONFRONTO",
+      "geo_focus": "Padova",
+      "owner_relevance": true,
+      "faq_candidates": "Cosa deve contenere una proposta d'acquisto? Caparra confirmatoria o penitenziale? Quanto tempo ha il venditore per rispondere?",
+      "chart_types": "timeline negoziazione, confronto caparra"
     }
   ]
 }

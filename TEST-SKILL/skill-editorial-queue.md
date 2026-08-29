@@ -21,24 +21,31 @@
    - Verifica fonti primarie (GU, ADE, ISTAT, OMI…)
    - GSC + Google Trends (geo IT/Veneto/Padova)
    - Top 5 contenuti web → gap_analysis + value_add
-   - Compila campi coda (Appendice B + §16-TER: substantive_area, main_question, reader_novelty)
+   - Compila campi coda (Appendice B + §16-TER + §16-QUATER/QUINQUIES: substantive_area, structure_type, geo_focus, owner_relevance, faq_candidates)
 6b. CONTINUITÀ §16-TER:
    - python scripts/build_editorial_memory.py
    - Confronta proposta con data/editorial-memory.json (saturazione tematica)
    - Se area già ≥2 negli ultimi 8 → serve update_reason o altro argomento
+6c. VARIETÀ VISIVA §16-QUATER:
+   - python scripts/build_editorial_visual_memory.py
+   - Scegli structure_type non saturato negli ultimi 8
+   - Pianifica immagini dedicate al slug + grafiche layout diversi
 7. python scripts/audit_editorial_research.py --id {eq-XXX} → OK
 7b. python scripts/audit_editorial_continuity.py --id {eq-XXX} → OK
+7c. python scripts/audit_editorial_visual_variety.py --id {eq-XXX} → OK (campi coda + bozza se esiste)
 8. Scrivi blog (skill-content + righetto-blog) — MAI copiare testi concorrenti
 9. python scripts/audit_blog_visuals.py --file blog-{slug}.html
-10. Registra: blog.html, homepage.js, admin, sitemap, llms
-11. validate-page.js + build_skimm.py + audit-foto-ai.mjs
-11b. audit_blog_publishability.py --file blog-{slug}.html → OK (§18)
-12. Aggiorna editorial-queue (published) + gsc-keywords + skill-memoria §Log
+10. python scripts/audit_editorial_visual_variety.py --file blog-{slug}.html → OK
+11. Registra: blog.html, homepage.js, admin, sitemap, llms
+12. validate-page.js + build_skimm.py + audit-foto-ai.mjs
+12b. audit_blog_publishability.py --file blog-{slug}.html → OK (§18)
+13. Aggiorna editorial-queue (published) + gsc-keywords + skill-memoria §Log
+14. build_editorial_memory.py + build_editorial_visual_memory.py
 ```
 
-**Gate pre-scrittura:** `audit_editorial_research.py` + `audit_editorial_continuity.py` (§16-TER)
-**Gate pre-chiusura:** `audit_blog_visuals.py` + `audit_blog_publishability.py` (§18) + §17 skill-editoriale-visivo
-**Dopo publish:** `build_editorial_memory.py` (aggiorna memoria sostanziale)
+**Gate pre-scrittura:** `audit_editorial_research.py` + `audit_editorial_continuity.py` (§16-TER) + `audit_editorial_visual_variety.py --id` (campi §16-QUATER)
+**Gate pre-chiusura:** `audit_blog_visuals.py` + `audit_editorial_visual_variety.py` + `audit_blog_publishability.py` (§18) + §17 skill-editoriale-visivo
+**Dopo publish:** `build_editorial_memory.py` + `build_editorial_visual_memory.py` · valutare FAQ (`audit_chatbot_faq.py`)
 
 ---
 
@@ -73,8 +80,9 @@ Seguire **§15–16 skill-editoriale-visivo.md** (7 fasi + ripartizione ~50% tre
    - Usare titoli come **spunto** — rielaborare con fonti primarie
 6. **Top 5 contenuti web** sul tema → `hype_sources_read` + `gap_analysis` + `value_add`
 7. **Anti-doppioni:** grep slug + `check_doppioni_sito.py`
-8. Aggiungi in `editorial-queue.json`: `status: proposed`, campi Appendice B
+8. Aggiungi in `editorial-queue.json`: `status: proposed`, campi Appendice B + §16-QUATER/QUINQUIES
 9. **Max 1 publish/settimana** — proposte possono accumularsi
+10. **Ciclo proprietari (§16-QUINQUIES):** verifica ultimi publish — se nessuno con `owner_relevance: true` nel ciclo, priorità a tema vendita/affitto/gestione/reddito/valutazione
 
 ---
 
