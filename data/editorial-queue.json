@@ -424,7 +424,7 @@
     },
     {
       "id": "eq-acq-002",
-      "status": "proposed",
+      "status": "published",
       "priority": 2,
       "target_week": "2026-09-12",
       "slug": "blog-vendere-o-affittare-padova-2026",
@@ -440,14 +440,18 @@
       "concrete_value": "Confronto scenari, fiscalità, tempi, rendimento — senza percentuali inventate",
       "acquisition_contribution": "direct",
       "traffic_type": "strategic",
-      "substantive_area": "PROPRIETARIO_DECISIONE",
+      "substantive_area": "INVESTIMENTO",
       "main_question": "Conviene vendere o affittare casa a Padova nel 2026?",
       "reader_novelty": "Angolo decisionale owner assente nel batch recente acquirente",
       "structure_type": "CONFRONTO",
       "geo_focus": "Padova e Veneto",
       "owner_relevance": true,
       "editorial_type": "evergreen",
-      "monitoring_area": "mercato"
+      "monitoring_area": "mercato",
+      "published_date": "2026-08-29",
+      "different_from": "blog-rendimento-affitto-padova",
+      "gap_analysis": "Rendimento affitto e comprare-vs-affittare esistono; gap decisione proprietario vendere vs locare.",
+      "value_add": "Confronto CONFRONTO owner: liquidità, fiscalità, tempi, scenari Padova senza yield inventati."
     }
   ]
 }

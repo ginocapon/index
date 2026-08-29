@@ -119,7 +119,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 - Coppia da non fondere (Tribloc vs Case Green generico): blog-residenze-green-padova-tribloc-2026 ↔ blog-domanda-case-green-certificazione-padova-2026
 - Coppia da non fondere (Evento BCE vs guida mutui): blog-bce-tassi-mutui-giugno-2026-padova ↔ blog-mutui-casa-padova-2026
 
-**Articoli catalogati:** 133
+**Articoli catalogati:** 134
 
 ---
 
@@ -294,7 +294,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-servizi-infrastrutture-padova` | `servizi-infrastrutture` | Territorio Padova — internal link a pagina zona |
 | `blog-trasporti-mobilita-padova` | `trasporti-mobilita` | Territorio Padova — internal link a pagina zona |
 
-### Vendita (13)
+### Vendita (14)
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
@@ -310,6 +310,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-percorso-vendita-immobile-padova-2026` | `percorso-vendita-immobile` | Strategia operativa vendita/acquisto — pillar intent |
 | `blog-tasse-vendita-casa` | `tasse-vendita-casa` | Fisco/normativa — non dati mercato |
 | `blog-tempi-vendita-casa-padova` | `tempi-vendita-casa-padova-medi` | Tempi medi vendita reali Padova — non costi vendita |
+| `blog-vendere-o-affittare-padova-2026` | `vendere-affittare` | Angolo vendere-o-affittare — intent dedicato, verificare matrice §4 |
 | `blog-vendita-immobiliare-padova-strategie-2026` | `vendita-immobiliare-strategie-padova` | Strategie vendita 2026 — pillar venditori |
 
 ### Vita d'agenzia (6)
