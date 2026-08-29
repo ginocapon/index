@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vendere e Comprare Casa a Padova | Righetto Immobiliare</title>
-<meta name="description" content="Vuoi vendere o comprare casa a Padova? Assistenza completa dalla valutazione al rogito in tutti i 101 comuni della provincia.">
+<title>Immobiliare Padova: Vendi, Affitta o Cerca Casa | Righetto</title>
+<meta name="description" content="Hai un immobile a Padova? Valutazione gratuita, vendita e affitto. Cerchi casa? Annunci in 101 comuni. Righetto Immobiliare dal 2000, Limena.">
 <link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="https://qwkwkemuabfwvwuqrxlu.supabase.co" crossorigin>
 <link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co">
 <link rel="dns-prefetch" href="https://www.youtube.com">
@@ -18,8 +18,8 @@
 <meta name="theme-color" content="#2C4A6E">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Vendere e Comprare Casa a Padova | Righetto Immobiliare">
-<meta property="og:description" content="Assistenza completa per vendere e comprare casa a Padova e provincia. Dalla valutazione gratuita al rogito, un unico referente per tutti i 101 comuni.">
+<meta property="og:title" content="Hai un immobile a Padova? Valutazione e servizi proprietari | Righetto">
+<meta property="og:description" content="Valuta, vendi o affitta con persone reali a Limena. Cerca anche annunci vendita e affitto in tutta la provincia di Padova.">
 <meta property="og:url" content="https://righettoimmobiliare.it/">
 <meta property="og:site_name" content="Righetto Immobiliare">
 <meta property="og:locale" content="it_IT">
@@ -350,13 +350,31 @@ button{font-family:inherit;cursor:pointer}
 #hero-bg img {
   width: 100%; height: 100%;
   object-fit: cover; object-position: center 22%;
-  transform: scale(1.04);
+  transform: scale(1.02);
+  filter: brightness(1.06) saturate(1.04);
   animation: slowZoom 18s ease-in-out infinite alternate;
 }
 @keyframes slowZoom {
-  from { transform: scale(1.04); }
-  to   { transform: scale(1.08); }
+  from { transform: scale(1.02); }
+  to   { transform: scale(1.06); }
 }
+.hp-dual-path{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  max-width:1200px;margin:0 auto;
+  border-bottom:1px solid rgba(255,255,255,0.12);
+}
+.hp-dual-path__item{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;padding:18px 16px;text-align:center;
+  background:rgba(255,255,255,0.04);
+  border-right:1px solid rgba(255,255,255,0.08);
+  transition:background 0.2s;
+}
+.hp-dual-path__item:last-child{border-right:none}
+.hp-dual-path__item:hover,.hp-dual-path__item:focus{background:rgba(255,107,53,0.12)}
+.hp-dual-path__label{font-size:0.78rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#fff}
+.hp-dual-path__sub{font-size:0.72rem;color:rgba(255,255,255,0.65)}
+@media(max-width:640px){.hp-dual-path{grid-template-columns:1fr}.hp-dual-path__item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.08)}.hp-dual-path__item:last-child{border-bottom:none}}
 @media (prefers-reduced-motion: reduce) {
   #hero-bg img { animation: none; transform: none; }
 }
@@ -366,10 +384,10 @@ button{font-family:inherit;cursor:pointer}
   background:
     linear-gradient(
       to bottom,
-      rgba(15,26,42,0.45) 0%,
-      rgba(15,26,42,0.30) 30%,
-      rgba(15,26,42,0.32) 60%,
-      rgba(15,26,42,0.75) 100%
+      rgba(15,26,42,0.28) 0%,
+      rgba(15,26,42,0.14) 35%,
+      rgba(15,26,42,0.20) 62%,
+      rgba(15,26,42,0.52) 100%
     );
 }
 
@@ -989,27 +1007,28 @@ button svg, a.btn-p svg, a.btn-g svg {
   <div class="hero-grain"></div>
   <div class="hero-inner">
     <div class="hero-left">
+      <p class="hero-eyebrow">Proprietari e acquirenti · Padova e provincia</p>
       <h1 class="hero-h1">
-        <span class="hero-line">Vendere e comprare</span>
-        <span class="hero-line">casa a <em>Padova?</em></span>
-        <span class="ghost">Ci pensiamo noi.</span>
+        <span class="hero-line">Hai un immobile</span>
+        <span class="hero-line">a <em>Padova</em> o in provincia?</span>
+        <span class="ghost">Persone reali al tuo fianco.</span>
       </h1>
       <div class="hero-trust-pills">
         <span>Dal 2000</span>
         <span>101 comuni</span>
-        <span>99+ guide blog</span>
+        <span>127 recensioni 4,9/5</span>
       </div>
-      <p class="hero-meta-line">Ultimo aggiornamento contenuti: luglio 2026 — guide settimanali sul mercato</p>
-      <p class="hero-p">Vuoi vendere al prezzo giusto senza stress? Stai cercando la casa ideale senza perdere tempo? Ti seguiamo dalla valutazione al rogito in tutti i 101 comuni del territorio: perizia gratuita, strategia di vendita, ricerca immobile, trattativa e pratiche notarili. Un unico referente per ogni esigenza. Sede a <a href="zona-limena" style="color:var(--oro);font-weight:600;text-decoration:underline">Limena</a> — guida <a href="blog-affitti-limena-2026" style="color:var(--oro);font-weight:600;text-decoration:underline">affitti Limena 2026</a>.</p>
-      <div class="hero-promo"><span class="hero-promo-dot" aria-hidden="true"></span> Luglio 2026: valutazione gratuita + report di mercato in regalo</div>
+      <p class="hero-meta-line">Aggiornamento contenuti: agosto 2026 — guide e servizi per proprietari e chi cerca casa</p>
+      <p class="hero-p">Ti aiutiamo a <strong>valutarlo</strong>, <strong>venderlo</strong>, <strong>affittarlo</strong>, <strong>gestirlo</strong> o <strong>metterlo a reddito</strong> — sopralluogo gratuito e consulenza in sede a <a href="zona-limena" style="color:var(--oro);font-weight:600;text-decoration:underline">Limena</a>. Cerchi casa? Usa la ricerca qui sotto tra vendita e affitto in tutti i 101 comuni.</p>
+      <div class="hero-promo"><span class="hero-promo-dot" aria-hidden="true"></span> Valutazione gratuita con report scritto — senza impegno</div>
       <div class="hero-btns">
         <a class="btn-g hero-cta-primary" href="landing-valutazione">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/></svg>
-          Quanto vale la tua casa?
+          Valuta il tuo immobile
         </a>
         <a class="btn-g hero-cta-secondary" href="proprietario-immobile">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          Hai un immobile? Scopri cosa conviene
+          Servizi per proprietari
         </a>
       </div>
     </div>
@@ -1026,6 +1045,16 @@ button svg, a.btn-p svg, a.btn-g svg {
 <!-- RICERCA -->
 <div id="ricerca">
   <div class="ricerca-wrap">
+    <nav class="hp-dual-path" aria-label="Scegli il tuo percorso">
+      <a href="#proprietario-hp" class="hp-dual-path__item">
+        <span class="hp-dual-path__label">Possiedi un immobile?</span>
+        <span class="hp-dual-path__sub">Valutazione, vendita, affitto, gestione</span>
+      </a>
+      <a href="#ricerca-filtri" class="hp-dual-path__item" id="ricerca-filtri">
+        <span class="hp-dual-path__label">Cerchi un immobile?</span>
+        <span class="hp-dual-path__sub">Cerca annunci vendita e affitto</span>
+      </a>
+    </nav>
     <div class="r-tabs">
       <button class="r-tab active" onclick="setRTab(this,'vendita')">🏷️ Vendita</button>
       <button class="r-tab" onclick="setRTab(this,'affitto')">🔑 Affitto</button>
@@ -1210,14 +1239,16 @@ button svg, a.btn-p svg, a.btn-g svg {
   <div style="max-width:1100px;margin:0 auto">
     <div class="rv sr" style="text-align:center;margin-bottom:40px">
       <div class="eyebrow" style="justify-content:center">Per chi possiede un immobile</div>
-      <h2 class="sec-h2">Hai un immobile?<br><em style="font-style:italic;color:var(--blu3)">Decidi con informazioni utili</em></h2>
-      <p class="sec-p" style="margin:12px auto 0;text-align:center;max-width:620px">Vendere, affittare, valutare o gestire: non serve aver già scelto. Parti da valore, rischi e opzioni concrete a Padova e in provincia.</p>
+      <h2 class="sec-h2">Hai un immobile?<br><em style="font-style:italic;color:var(--blu3)">Ti aiutiamo a decidere cosa farne</em></h2>
+      <p class="sec-p" style="margin:12px auto 0;text-align:center;max-width:620px">Vendere, affittare, valutare, mettere a reddito o affidare la gestione: parti da valore, rischi e opzioni concrete a Padova e in provincia.</p>
     </div>
     <div class="srv-grid sr-stagger" style="margin-top:0">
       <a href="landing-valutazione" class="srv-card rv d1"><div class="srv-ico">💰</div><div class="srv-t">Quanto vale?</div><div class="srv-d">Valutazione gratuita su comparabili locali — base per ogni decisione.</div><div style="margin-top:12px;font-size:0.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blu3)">Valutazione →</div></a>
       <a href="servizio-vendita" class="srv-card rv d2"><div class="srv-ico">🏷️</div><div class="srv-t">Voglio vendere</div><div class="srv-d">Prezzo, preparazione, documenti e trattativa con un referente unico.</div><div style="margin-top:12px;font-size:0.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blu3)">Servizio vendita →</div></a>
       <a href="servizio-locazioni" class="srv-card rv d3"><div class="srv-ico">🔑</div><div class="srv-t">Voglio affittare</div><div class="srv-d">Inquilino selezionato, contratto regolare, canone concordato e gestione.</div><div style="margin-top:12px;font-size:0.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blu3)">Servizio locazioni →</div></a>
-      <a href="proprietario-immobile" class="srv-card rv d4"><div class="srv-ico">🧭</div><div class="srv-t">Non so ancora</div><div class="srv-d">Percorso guidato: vendita, affitto, reddito, gestione o consulenza gratuita.</div><div style="margin-top:12px;font-size:0.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blu3)">Hub proprietari →</div></a>
+      <a href="blog-rendimento-affitto-padova" class="srv-card rv d4"><div class="srv-ico">📈</div><div class="srv-t">Metterlo a reddito</div><div class="srv-d">Confronto resa locativa e scenario investimento nel Padovano.</div><div style="margin-top:12px;font-size:0.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blu3)">Rendimento affitto →</div></a>
+      <a href="servizio-gestione" class="srv-card rv d5"><div class="srv-ico">🛠️</div><div class="srv-t">Affidare la gestione</div><div class="srv-d">Gestione locativa, contratti e rapporto con inquilini per conto tuo.</div><div style="margin-top:12px;font-size:0.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blu3)">Servizio gestione →</div></a>
+      <a href="proprietario-immobile" class="srv-card rv d6"><div class="srv-ico">🧭</div><div class="srv-t">Non so ancora</div><div class="srv-d">Hub guidato: vendita, affitto, reddito, gestione o consulenza gratuita.</div><div style="margin-top:12px;font-size:0.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blu3)">Hub proprietari →</div></a>
     </div>
     <p style="text-align:center;margin-top:28px;font-size:0.78rem;color:var(--grigio)">Guide: <a href="blog-costi-vendere-casa-padova-2026" style="color:var(--blu);font-weight:600">costi vendita</a> · <a href="vendere-casa-padova-errori" style="color:var(--blu);font-weight:600">7 errori da evitare</a> · <a href="blog-rendimento-affitto-padova" style="color:var(--blu);font-weight:600">rendimento affitto</a></p>
   </div>

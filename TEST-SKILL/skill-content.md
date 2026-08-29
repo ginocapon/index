@@ -171,6 +171,17 @@ Prima del commit: `node scripts/validate-page.js --file blog-….html`. Title/H1
 
 **Regola pratica:** ogni articolo = **1 hero IA** + **≥3 figure IA** nel corpo. I **grafici dati** (SVG/HTML) e le **tabelle** sono obbligatori **oltre** alle foto — vedi §2.1e. **Vietato** il loop `expand_body` con paragrafi identici per wordCount.
 
+#### F) Lunghezza articoli — qualità prima del conteggio (Prompt Chirurgo, ago 2026)
+
+| Riferimento | Regola |
+|---|---|
+| **Target** | ~2.500 parole utili · fascia **±20%** (2.000–3.000) — **non obbligo meccanico** |
+| **Pubblicabile sotto soglia** | Sì, se completo, verificato, utile e non espandibile senza filler (es. 1.200–2.300 parole) |
+| **Priorità** | Veridicità → utilità → originalità → completezza → SEO → **lunghezza per ultima** |
+| **Vietato** | Paragrafi prefix ripetuti · H2 «domande» duplicati prima FAQ · pad/fallback `expand_body` · sezioni solo per word count |
+
+Dettaglio completo: **`skill-prompt-chirurgo-homepage-editoriale.md`**. Gate: `audit_blog_publishability.py` (no filler visibile).
+
 **Trasparenza AI Act (Reg. UE 2024/1689):** obbligatoria su ogni immagine blog (`skill-ai-act-compliance.md` §3.4) + barra sito footer.
 
 #### D) Proporzioni 19:9 — hero e figure corpo (luglio 2026)
