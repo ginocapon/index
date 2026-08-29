@@ -788,6 +788,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'vendere o affittare padova 2026': { img: 'img/blog/blog-vendere-o-affittare-padova-2026-hero.webp', url: 'blog-vendere-o-affittare-padova-2026' },
     'valutazione immobile padova guida 2026': { img: 'img/blog/blog-valutazione-casa-padova-guida-2026-hero.webp', url: 'blog-valutazione-casa-padova-guida-2026' },
     'spese condominiali acquisto padova 2026': { img: 'img/blog/blog-spese-condominiali-acquisto-padova-2026-hero.webp', url: 'blog-spese-condominiali-acquisto-padova-2026' },
     'proposta acquisto negoziazione padova 2026': { img: 'img/blog/blog-proposta-acquisto-negoziazione-padova-2026-hero.webp', url: 'blog-proposta-acquisto-negoziazione-padova-2026' },
@@ -932,6 +933,13 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    {
+      "titolo": "Vendere o affittare a Padova 2026: come decidere",
+      "categoria": "Guida proprietari",
+      "data": "2026-08-29",
+      "immagine_copertina": "img/blog/blog-vendere-o-affittare-padova-2026-hero.webp",
+      "url_statico": "blog-vendere-o-affittare-padova-2026"
+    },
     {
       "titolo": "Valutazione immobile Padova 2026: quanto vale casa",
       "categoria": "Guida alla vendita",

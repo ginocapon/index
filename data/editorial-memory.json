@@ -20,10 +20,11 @@
     "ALTRO"
   ],
   "saturation_current": {
-    "NORMATIVA_FISCALE": 3
+    "NORMATIVA_FISCALE": 2
   },
   "saturation_counts_last_8": {
-    "NORMATIVA_FISCALE": 3,
+    "NORMATIVA_FISCALE": 2,
+    "INVESTIMENTO": 1,
     "VENDITA_VALUTAZIONE": 1,
     "ACQUISTO_PRIMO_CASA": 1,
     "VENDITA_PROCESSO": 1,
@@ -31,6 +32,18 @@
     "MUTUI_TASSI": 1
   },
   "recent_articles": [
+    {
+      "slug": "blog-vendere-o-affittare-padova-2026",
+      "title": "Vendere o affittare a Padova 2026: come decidere",
+      "published_date": "2026-08-29",
+      "substantive_area": "INVESTIMENTO",
+      "secondary_areas": [
+        "VALORE_MERCATO"
+      ],
+      "main_question": "Conviene vendere o affittare casa a Padova nel 2026?",
+      "geo": "Padova/Veneto",
+      "editorial_type": "evergreen"
+    },
     {
       "slug": "blog-valutazione-casa-padova-guida-2026",
       "title": "Valutazione immobile Padova 2026: quanto vale casa",
@@ -251,18 +264,6 @@
         "AFFITTI_CANONI"
       ],
       "main_question": "Quanto vale / come si muove il mercato?",
-      "geo": "Padova/Veneto",
-      "editorial_type": ""
-    },
-    {
-      "slug": "blog-italy-rental-market-positive-start-january-2026",
-      "title": "Italy rental market +1% January 2026 — Padua guide",
-      "published_date": "2026-07-28",
-      "substantive_area": "AFFITTI_CANONI",
-      "secondary_areas": [
-        "LOCALE_LIMENA"
-      ],
-      "main_question": "Quanto costa affittare e come funzionano i canoni?",
       "geo": "Padova/Veneto",
       "editorial_type": ""
     }

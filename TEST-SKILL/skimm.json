@@ -1,6 +1,6 @@
 {
   "generated": "2026-08-29",
-  "count": 133,
+  "count": 134,
   "risks": [
     "Intent simile `territorio-limena`: blog-appartamento-limena-guida-acquisto-2026, blog-limena-vicino-padova-comprare-2026, blog-affitti-limena-2026, blog-appartamento-affitto-limena-contratto-2026…",
     "Intent simile `breakdown-costi`: blog-costi-proprieta-acquisto-possesso-vendita-padova-2026, blog-costi-costruzione-istat-padova-2026",
@@ -1408,6 +1408,17 @@
       "angolo": "Tempi medi vendita reali Padova — non costi vendita",
       "intent": "vendita-tempi",
       "h1": "Tempi Vendita Casa a Padova nel 2026: Quanto Ci Vuole Davvero?"
+    },
+    {
+      "slug": "blog-vendere-o-affittare-padova-2026",
+      "file": "blog-vendere-o-affittare-padova-2026.html",
+      "title": "Vendere o affittare Padova 2026: come decidere",
+      "categoria": "",
+      "cluster": "Vendita",
+      "kw_primaria": "vendere-affittare",
+      "angolo": "Angolo vendere-o-affittare — intent dedicato, verificare matrice §4",
+      "intent": "vendita",
+      "h1": "Vendere o affittare a Padova: guida 2026"
     },
     {
       "slug": "blog-vendita-immobiliare-padova-strategie-2026",
