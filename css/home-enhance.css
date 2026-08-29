@@ -1,44 +1,16 @@
 /* Homepage polish — vanilla, mobile-first; solo opacity/transform per micro-motion */
 
-/* —— Hero: gerarchia CTA e promo —— */
-.hero-trust-pills {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px 14px;
-  margin-bottom: 18px;
-}
-.hero-trust-pills span {
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.88);
-  padding: 6px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(15, 26, 42, 0.35);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
-}
-.hero-meta-line {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: rgba(255, 255, 255, 0.72);
-  margin: 0 auto 10px;
-  max-width: 560px;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
-}
+/* —— Hero: gerarchia CTA e promo (tema chiaro) —— */
 .hero-promo {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255, 107, 53, 0.18);
-  border: 1px solid rgba(255, 107, 53, 0.35);
+  background: rgba(255, 107, 53, 0.1);
+  border: 1px solid rgba(255, 107, 53, 0.28);
   border-radius: 999px;
   padding: 8px 18px;
   font-size: 0.72rem;
-  color: var(--oro3);
+  color: #c44a12;
   font-weight: 700;
   margin-bottom: 22px;
   max-width: 100%;
@@ -67,14 +39,14 @@
 
 .hero-cta-secondary.btn-g {
   background: transparent !important;
-  border: 2px solid rgba(255, 255, 255, 0.55) !important;
-  color: #fff !important;
+  border: 2px solid var(--blu) !important;
+  color: var(--blu) !important;
   box-shadow: none !important;
 }
 .hero-cta-secondary.btn-g:hover {
-  background: rgba(255, 255, 255, 0.12) !important;
-  border-color: rgba(255, 255, 255, 0.85) !important;
-  color: #fff !important;
+  background: rgba(44, 74, 110, 0.06) !important;
+  border-color: var(--blu2) !important;
+  color: var(--blu) !important;
   transform: translateY(-2px) !important;
 }
 
@@ -98,20 +70,22 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0;
-    padding-top: 28px;
-    margin-top: 40px;
+    padding: 18px 12px;
   }
   .h-stat {
     max-width: none;
-    padding: 16px 14px;
-    border-right: 1px solid rgba(255, 255, 255, 0.12);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 14px 10px;
+    border-right: 1px solid rgba(44, 74, 110, 0.1);
+    border-bottom: 1px solid rgba(44, 74, 110, 0.1);
   }
   .h-stat:nth-child(2n) {
     border-right: none;
   }
   .h-stat:nth-child(n + 3) {
     border-bottom: none;
+  }
+  .h-stat-n {
+    font-size: 2.1rem;
   }
 }
 
@@ -165,34 +139,17 @@
   border-bottom-color: rgba(255, 107, 53, 0.42);
 }
 
-/* —— Mobile: hero non più alto del viewport, tab ricerca comode, pill più leggibili —— */
+/* —— Mobile: hero dedicata, tab ricerca comode —— */
 @media (max-width: 768px) {
-  /* Pill sotto il titolo: non salire sotto il menu hamburger */
-  .hero-trust-pills {
-    margin-top: 4px;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Altezza fluida: evita compressione verticale del titolo (parole sovrapposte) */
   main#main-content #hero {
     height: auto;
-    align-items: flex-start;
-    padding-bottom: 24px;
-    min-height: 620px;
-    min-height: min(100vh, 900px);
-    min-height: min(100dvh, 900px);
-  }
-  @supports (height: 100svh) {
-    main#main-content #hero {
-      min-height: min(100svh, 900px);
-    }
+    min-height: 0;
+    padding-bottom: 0;
   }
 
-  .hero-trust-pills span {
-    font-size: 0.68rem;
-    letter-spacing: 1.8px;
-    padding: 8px 16px;
+  .hero-promo {
+    justify-content: flex-start;
+    text-align: left;
   }
 
   #ricerca .r-tab {
@@ -202,9 +159,17 @@
     display: inline-flex;
     align-items: center;
   }
+}
 
-  .hero-promo {
-    justify-content: center;
-    text-align: center;
+@media (min-width: 769px) and (max-width: 1100px) {
+  .hero-shell {
+    grid-template-columns: 1fr 1fr;
+    min-height: min(680px, calc(100dvh - var(--nav-h) - 64px));
+  }
+  .hero-content {
+    padding: 40px 28px 40px 32px;
+  }
+  .hero-h1 {
+    font-size: clamp(2rem, 4vw, 3.2rem);
   }
 }
