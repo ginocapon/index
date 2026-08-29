@@ -2,7 +2,7 @@
   "_note": "Routing guide: quale skill caricare per ogni tipo di task. skill-essentials.md va SEMPRE caricata.",
   "_version": "1.6 — Luglio 2026 (trigger \"SKILL\" venerdì + competitor roadmap Q3)",
 
-  "always_load": "TEST-SKILL/skill-essentials.md,TEST-SKILL/skill-massimo-punteggio.md,TEST-SKILL/skill-efficienza-sito.md,TEST-SKILL/skill-memoria-progressi.md,TEST-SKILL/skill-ai-act-compliance.md",
+  "always_load": "TEST-SKILL/skill-essentials.md,TEST-SKILL/skill-massimo-punteggio.md,TEST-SKILL/skill-efficienza-sito.md,TEST-SKILL/skill-memoria-progressi.md,TEST-SKILL/skill-ai-act-compliance.md,TEST-SKILL/skill-acquisizione-proprietari.md",
 
   "cursor_skills": {
     "_doc": "TEST-SKILL/skill-cursor-rules.md §2b — indici operativi in .cursor/skills/",
@@ -16,7 +16,8 @@
     "righetto-seo": { "command": "/seo", "path": ".cursor/skills/righetto-seo/SKILL.md" },
     "righetto-social": { "command": "/social", "path": ".cursor/skills/righetto-social/SKILL.md" },
     "righetto-security": { "command": "/sicurezza", "path": ".cursor/skills/righetto-security/SKILL.md" },
-    "righetto-zona": { "command": "/zona", "path": ".cursor/skills/righetto-zona/SKILL.md" }
+    "righetto-zona": { "command": "/zona", "path": ".cursor/skills/righetto-zona/SKILL.md" },
+    "righetto-acquisizione-proprietari": { "command": "/proprietari", "path": ".cursor/skills/righetto-acquisizione-proprietari/SKILL.md" }
   },
 
   "cursor_rules": {
@@ -46,12 +47,12 @@
       "note": "Linee guida TEST-SKILL/skill-gestione-loft-aziende.md · pagina servizio-loft-aziende-media-durata · asset solo img/guida-loft-aziende/"
     },
     "nuovo_articolo_blog": {
-      "skills": ["skill-essentials.md", "skill-editoriale-visivo.md", "skill-editorial-queue.md", "skill-content.md", "skill-ai-act-compliance.md", "skill-forms-leads.md", "skill-memoria-progressi.md"],
+      "skills": ["skill-essentials.md", "skill-acquisizione-proprietari.md", "skill-editoriale-visivo.md", "skill-editorial-queue.md", "skill-content.md", "skill-ai-act-compliance.md", "skill-forms-leads.md", "skill-memoria-progressi.md"],
       "cursor_rules": ["righetto-blog-publish.mdc"],
       "cursor_skills": ["righetto-blog"],
-      "data": ["data/editorial-queue.json", "data/gsc-keywords-priority.json", "data/editorial-memory.json", "data/editorial-visual-memory.json"],
+      "data": ["data/editorial-queue.json", "data/gsc-keywords-priority.json", "data/editorial-memory.json", "data/editorial-visual-memory.json", "data/editorial-acquisition-balance.json"],
       "token_stimati": "~2.200",
-      "note": "Comando permanente skill-editoriale-visivo.md (ricerca §8-17 + visivo §1-7 + §16-TER + §16-QUATER/QUINQUIES + §18). Gate: audit_editorial_research + audit_editorial_continuity + audit_editorial_visual_variety + audit_blog_visuals + audit_blog_publishability. §8.1a anti-doppioni."
+      "note": "PRIORITÀ acquisizione proprietari (skill-acquisizione-proprietari.md). Gate: audit_editorial_acquisition + audit_editorial_research + audit_editorial_continuity + audit_editorial_visual_variety + audit_blog_visuals + audit_blog_publishability."
     },
     "form_lead_invio_email": {
       "skills": ["skill-essentials.md", "skill-forms-leads.md", "skill-context.md"],
