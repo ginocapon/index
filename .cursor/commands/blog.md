@@ -2,7 +2,7 @@
 
 Leggi e applica `.cursor/skills/righetto-blog/SKILL.md` + **`TEST-SKILL/skill-editoriale-visivo.md`** (comando permanente: ricerca strategica + immagini/grafiche).
 
-**Prima di scrivere:** ricerca 7 fasi (§15) + `audit_editorial_research.py --id eq-XXX` + `check_doppioni_sito.py`.
+**Prima di scrivere:** ricerca 7 fasi (§15) + continuità §16-TER (`build_editorial_memory.py` + `audit_editorial_continuity.py --id eq-XXX`) + `audit_editorial_research.py --id eq-XXX` + `check_doppioni_sito.py`.
 
 **Prima di chiudere:** `audit_blog_visuals.py` + `audit-foto-ai.mjs` + `validate-page.js`.
 

@@ -12,7 +12,8 @@ Dettaglio: **`TEST-SKILL/skill-editoriale-visivo.md`** (comando permanente prior
 - **Ricerca §8–17:** niente articoli casuali — 7 fasi (scansione, fonti, GSC/Trends, top 5 web, punteggio, selezione); ~50% trend / ~50% evergreen; valore aggiunto Padova/Veneto
 - **Visivo §1–7:** ≥3 immagini IA pertinenti + 1 hero + ≥2 SVG + ≥2 tabelle
 - **Venerdì:** audit AI Act extra
-- Gate: `audit_editorial_research.py --id eq-XXX` (pre-scrittura) + `audit_blog_visuals.py` (pre-chiusura)
+- **Continuità §16-TER:** memoria sostanziale `data/editorial-memory.json`; evitare saturazione tematica; `update_reason` se rientro su area recente
+- Gate: `build_editorial_memory.py` + `audit_editorial_research.py --id eq-XXX` + `audit_editorial_continuity.py --id eq-XXX` (pre-scrittura) + `audit_blog_visuals.py` (pre-chiusura)
 - Precedenza su selezione argomento e composizione visiva; non deroga AI Act, efficienza anti-filler, fonti verificate
 
 ## BLOCCANTE — prima di scrivere (§8.1a)
@@ -42,7 +43,7 @@ Dettaglio: **`TEST-SKILL/skill-editoriale-visivo.md`** (comando permanente prior
 - `blog.html` + homepage blog: **solo ordine data**, niente sezione «In evidenza» che toglie card dalla griglia
 
 ## Secondo passaggio obbligatorio (agente)
-Prima di chiudere: `check_doppioni_sito.py` → **`audit_editorial_research.py`** (se nuovo) → scrittura → **`audit_blog_visuals.py`** → **`validate-page.js`** → grep 4 registri → `audit-foto-ai.mjs` OK. Se fallisce, fix e ripeti.
+Prima di chiudere: `check_doppioni_sito.py` → **`build_editorial_memory.py`** → **`audit_editorial_research.py`** + **`audit_editorial_continuity.py`** (se nuovo) → scrittura → **`audit_blog_visuals.py`** → **`validate-page.js`** → grep 4 registri → `audit-foto-ai.mjs` OK. Se fallisce, fix e ripeti.
 
 ## Registrazione obbligatoria (tutti e 4)
 - `admin.html` → `_blogSeedArticles` con `data_pubblicazione: 'YYYY-MM-DD'`
@@ -55,6 +56,7 @@ Prima di chiudere: `check_doppioni_sito.py` → **`audit_editorial_research.py`*
 - Timestamp "Ultimo aggiornamento" visibile
 - Aggiorna `llms.txt` se pillar o dati mercato
 - `python scripts/build_skimm.py` + commit `skimm.md`/`skimm.json`
+- `python scripts/build_editorial_memory.py` (memoria §16-TER)
 - Form/CTA lead → **`skill-forms-leads.md`**
 
 ## Cron venerdì (automatico)

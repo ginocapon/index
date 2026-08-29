@@ -21,8 +21,13 @@
    - Verifica fonti primarie (GU, ADE, ISTAT, OMI…)
    - GSC + Google Trends (geo IT/Veneto/Padova)
    - Top 5 contenuti web → gap_analysis + value_add
-   - Compila campi coda (Appendice B)
+   - Compila campi coda (Appendice B + §16-TER: substantive_area, main_question, reader_novelty)
+6b. CONTINUITÀ §16-TER:
+   - python scripts/build_editorial_memory.py
+   - Confronta proposta con data/editorial-memory.json (saturazione tematica)
+   - Se area già ≥2 negli ultimi 8 → serve update_reason o altro argomento
 7. python scripts/audit_editorial_research.py --id {eq-XXX} → OK
+7b. python scripts/audit_editorial_continuity.py --id {eq-XXX} → OK
 8. Scrivi blog (skill-content + righetto-blog) — MAI copiare testi concorrenti
 9. python scripts/audit_blog_visuals.py --file blog-{slug}.html
 10. Registra: blog.html, homepage.js, admin, sitemap, llms
@@ -30,8 +35,9 @@
 12. Aggiorna editorial-queue (published) + gsc-keywords + skill-memoria §Log
 ```
 
-**Gate pre-scrittura:** `audit_editorial_research.py`  
+**Gate pre-scrittura:** `audit_editorial_research.py` + `audit_editorial_continuity.py` (§16-TER)
 **Gate pre-chiusura:** `audit_blog_visuals.py` + §17 skill-editoriale-visivo
+**Dopo publish:** `build_editorial_memory.py` (aggiorna memoria sostanziale)
 
 ---
 

@@ -1,0 +1,274 @@
+{
+  "updated": "2026-08-29",
+  "skill_ref": "TEST-SKILL/skill-editoriale-visivo.md §16-TER",
+  "window_size": 20,
+  "saturation_window": 8,
+  "saturation_threshold": 2,
+  "areas_taxonomy": [
+    "VALORE_MERCATO",
+    "AFFITTI_CANONI",
+    "MUTUI_TASSI",
+    "NORMATIVA_FISCALE",
+    "ACQUISTO_PRIMO_CASA",
+    "VENDITA_PROCESSO",
+    "AGENZIA_SERVIZI",
+    "LOCALE_LIMENA",
+    "GUIDA_LEXICO",
+    "TREND_ABITATIVO",
+    "COMPRAVENDITE_DATI",
+    "INVESTIMENTO",
+    "ALTRO"
+  ],
+  "saturation_current": {
+    "NORMATIVA_FISCALE": 3
+  },
+  "saturation_counts_last_8": {
+    "NORMATIVA_FISCALE": 3,
+    "GUIDA_LEXICO": 1,
+    "MUTUI_TASSI": 1,
+    "AFFITTI_CANONI": 1,
+    "TREND_ABITATIVO": 1,
+    "ACQUISTO_PRIMO_CASA": 1
+  },
+  "recent_articles": [
+    {
+      "slug": "blog-canone-concordato-padova-guida-2026",
+      "title": "Canone concordato Padova: Guida 2026",
+      "published_date": "2026-08-29",
+      "substantive_area": "NORMATIVA_FISCALE",
+      "secondary_areas": [
+        "NORMATIVA_FISCALE"
+      ],
+      "main_question": "Come funziona il canone concordato a Padova nel 2026 e quali vantaggi fiscali?",
+      "geo": "Padova/Veneto",
+      "editorial_type": "trend"
+    },
+    {
+      "slug": "blog-gergo-immobiliare-padova-spiegato-2026",
+      "title": "Gergo immobiliare Padova: Glossario 2026",
+      "published_date": "2026-08-29",
+      "substantive_area": "GUIDA_LEXICO",
+      "secondary_areas": [
+        "MUTUI_TASSI",
+        "AFFITTI_CANONI"
+      ],
+      "main_question": "Cosa significano i termini immobiliari più usati in visita e in contratto?",
+      "geo": "Padova/Veneto",
+      "editorial_type": "evergreen"
+    },
+    {
+      "slug": "blog-tassi-euribor-mutui-padova-agosto-2026",
+      "title": "Euribor mutui Padova: Agosto 2026",
+      "published_date": "2026-08-29",
+      "substantive_area": "MUTUI_TASSI",
+      "secondary_areas": [],
+      "main_question": "Come si muovono Euribor e spread mutui a Padova ad agosto 2026?",
+      "geo": "Padova/Veneto",
+      "editorial_type": "trend"
+    },
+    {
+      "slug": "blog-registro-contratti-affitto-padova-2026",
+      "title": "Registro contratti affitto Padova 2026",
+      "published_date": "2026-08-29",
+      "substantive_area": "NORMATIVA_FISCALE",
+      "secondary_areas": [
+        "NORMATIVA_FISCALE"
+      ],
+      "main_question": "Quali obblighi ADE per registrare un contratto di affitto a Padova?",
+      "geo": "Padova/Veneto",
+      "editorial_type": "evergreen"
+    },
+    {
+      "slug": "blog-visura-catastale-acquisto-casa-padova-2026",
+      "title": "Visura catastale acquisto Padova 2026",
+      "published_date": "2026-08-29",
+      "substantive_area": "NORMATIVA_FISCALE",
+      "secondary_areas": [
+        "MUTUI_TASSI",
+        "NORMATIVA_FISCALE"
+      ],
+      "main_question": "Come leggere la visura catastale prima di acquistare casa a Padova?",
+      "geo": "Padova/Veneto",
+      "editorial_type": "evergreen"
+    },
+    {
+      "slug": "blog-caro-affitti-padova-under-35-guida-2026",
+      "title": "Caro affitti Padova under 35: Guida 2026",
+      "published_date": "2026-08-22",
+      "substantive_area": "AFFITTI_CANONI",
+      "secondary_areas": [
+        "ACQUISTO_PRIMO_CASA",
+        "LOCALE_LIMENA"
+      ],
+      "main_question": "Quanto costa affittare e come funzionano i canoni?",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    },
+    {
+      "slug": "blog-coliving-padova-limena-giovani-professionisti-2026",
+      "title": "Coliving Padova Limena: Guida 2026",
+      "published_date": "2026-08-22",
+      "substantive_area": "TREND_ABITATIVO",
+      "secondary_areas": [
+        "AFFITTI_CANONI",
+        "LOCALE_LIMENA"
+      ],
+      "main_question": "Quali modelli abitativi emergenti?",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    },
+    {
+      "slug": "blog-prima-casa-under-36-consap-padova-2026",
+      "title": "Prima casa under 36 Padova: CONSAP 2026",
+      "published_date": "2026-08-22",
+      "substantive_area": "ACQUISTO_PRIMO_CASA",
+      "secondary_areas": [
+        "MUTUI_TASSI"
+      ],
+      "main_question": "Come acquistare prima casa con agevolazioni?",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    },
+    {
+      "slug": "blog-sopralluoghi-drone-padova-2026",
+      "title": "Sopralluoghi Drone Padova 2026: documentazione aerea professionale",
+      "published_date": "2026-08-16",
+      "substantive_area": "AGENZIA_SERVIZI",
+      "secondary_areas": [],
+      "main_question": "Come scegliere agenzia e servizi?",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    },
+    {
+      "slug": "blog-appartamento-limena-guida-acquisto-2026",
+      "title": "Appartamento Limena: Guida acquisto 2026",
+      "published_date": "2026-08-05",
+      "substantive_area": "MUTUI_TASSI",
+      "secondary_areas": [
+        "ACQUISTO_PRIMO_CASA",
+        "LOCALE_LIMENA"
+      ],
+      "main_question": "Quali tassi e condizioni di mutuo?",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    },
+    {
+      "slug": "blog-case-vendita-limena-leggere-annunci-2026",
+      "title": "Case vendita Limena: Leggere annunci 2026",
+      "published_date": "2026-08-05",
+      "substantive_area": "LOCALE_LIMENA",
+      "secondary_areas": [],
+      "main_question": "Cosa sapere su Limena/cintura?",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    },
+    {
+      "slug": "blog-appartamento-affitto-limena-contratto-2026",
+      "title": "Appartamento affitto Limena: Contratto 2026",
+      "published_date": "2026-08-05",
+      "substantive_area": "AFFITTI_CANONI",
+      "secondary_areas": [
+        "LOCALE_LIMENA"
+      ],
+      "main_question": "Quanto costa affittare e come funzionano i canoni?",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    },
+    {
+      "slug": "blog-bilocale-trilocale-limena-scelta-2026",
+      "title": "Bilocale trilocale Limena: Scelta 2026",
+      "published_date": "2026-08-05",
+      "substantive_area": "LOCALE_LIMENA",
+      "secondary_areas": [],
+      "main_question": "Cosa sapere su Limena/cintura?",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    },
+    {
+      "slug": "blog-gruppo-immobiliare-righetto-limena-2026",
+      "title": "Gruppo Immobiliare Righetto Limena 2026",
+      "published_date": "2026-08-05",
+      "substantive_area": "AFFITTI_CANONI",
+      "secondary_areas": [
+        "AGENZIA_SERVIZI",
+        "LOCALE_LIMENA"
+      ],
+      "main_question": "Quanto costa affittare e come funzionano i canoni?",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    },
+    {
+      "slug": "blog-domanda-residenziale-supera-offerta-2026-padova",
+      "title": "Domanda residenziale supera offerta Q1 2026: Padova",
+      "published_date": "2026-07-28",
+      "substantive_area": "VALORE_MERCATO",
+      "secondary_areas": [
+        "LOCALE_LIMENA"
+      ],
+      "main_question": "Quanto vale / come si muove il mercato?",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    },
+    {
+      "slug": "blog-ricerche-online-tipologie-casa-2026-padova",
+      "title": "Ricerche online tipologie casa 2026: Padova",
+      "published_date": "2026-07-28",
+      "substantive_area": "VALORE_MERCATO",
+      "secondary_areas": [
+        "AFFITTI_CANONI"
+      ],
+      "main_question": "Quanto vale / come si muove il mercato?",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    },
+    {
+      "slug": "blog-italy-rental-market-positive-start-january-2026",
+      "title": "Italy rental market +1% January 2026 — Padua guide",
+      "published_date": "2026-07-28",
+      "substantive_area": "AFFITTI_CANONI",
+      "secondary_areas": [
+        "LOCALE_LIMENA"
+      ],
+      "main_question": "Quanto costa affittare e come funzionano i canoni?",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    },
+    {
+      "slug": "blog-outlook-living-italia-2026-padova",
+      "title": "Outlook Living Italia 2026: BTR, PBSA e Padova",
+      "published_date": "2026-07-28",
+      "substantive_area": "VALORE_MERCATO",
+      "secondary_areas": [],
+      "main_question": "Quanto vale / come si muove il mercato?",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    },
+    {
+      "slug": "blog-student-rentals-padova-guide-2026",
+      "title": "Student rentals Padua 2026 — English guide",
+      "published_date": "2026-07-28",
+      "substantive_area": "AFFITTI_CANONI",
+      "secondary_areas": [
+        "TREND_ABITATIVO"
+      ],
+      "main_question": "Quanto costa affittare e come funzionano i canoni?",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    },
+    {
+      "slug": "blog-rental-contract-padova-guide-2026",
+      "title": "Rental contract Padua 2026 — English guide",
+      "published_date": "2026-07-28",
+      "substantive_area": "AFFITTI_CANONI",
+      "secondary_areas": [],
+      "main_question": "Quanto costa affittare e come funzionano i canoni?",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    }
+  ],
+  "approval_questions": [
+    "Aggiunge nuovo argomento/informazione/conseguenza rispetto ai recenti?",
+    "Un lettore abituale lo percepirebbe come contenuto nuovo?",
+    "Se area gia trattata: cosa e cambiato dall'ultima volta (dato/norma/contesto)?"
+  ]
+}

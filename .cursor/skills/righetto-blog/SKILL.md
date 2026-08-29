@@ -29,15 +29,19 @@ description: >-
 5. `data/gsc-keywords-priority.json`
 6. `skimm.md` + `python scripts/check_doppioni_sito.py` + `build_skimm.py`
 7. Se doppione → `cancelled` in coda, discovery, STOP
+8. **§16-TER:** `python scripts/build_editorial_memory.py` — rileggi memoria sostanziale recente
 
-## Checklist PRE-SCRITTURA (ricerca §15)
+## Checklist PRE-SCRITTURA (ricerca §15 + continuità §16-TER)
 
 - [ ] Scansione 3 aree: mercato Padova/Veneto · politica con impatto · normativa verificata
 - [ ] Fonti primarie (GU/ADE/ISTAT/OMI) + seconda fonte indipendente
 - [ ] GSC + Google Trends analizzati se disponibili
 - [ ] Top 5 contenuti web → `gap_analysis` + `value_add` in coda
 - [ ] `editorial_type`: `trend` (~50%) o `evergreen` (~50%)
+- [ ] Domande §16-TER: valore nuovo? lettore abituale lo percepisce nuovo?
+- [ ] `substantive_area`, `main_question`, `reader_novelty` in coda; `update_reason` se area saturata
 - [ ] `python scripts/audit_editorial_research.py --id eq-XXX` → OK
+- [ ] `python scripts/audit_editorial_continuity.py --id eq-XXX` → OK
 
 ## Checklist articolo (visivo §7 + contenuto)
 
@@ -57,3 +61,4 @@ description: >-
 ## Dopo publish
 
 - Coda → `published` · `gsc-keywords` · `skill-memoria` §Log
+- `python scripts/build_editorial_memory.py` (memoria §16-TER)
