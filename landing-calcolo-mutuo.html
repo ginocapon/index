@@ -117,7 +117,7 @@ img{max-width:100%;height:auto;display:block}
 
 .calc-card{background:#fff;border-radius:20px;box-shadow:0 15px 60px rgba(0,0,0,.08);overflow:hidden}
 .cc-top{display:flex;align-items:center;gap:.8rem;padding:1.2rem 1.5rem;background:linear-gradient(135deg,var(--green),var(--green2));color:#fff}
-.cc-top img{width:52px;height:52px;border-radius:50%;border:3px solid rgba(255,255,255,.3);object-fit:cover}
+.cc-avatar{width:52px;height:52px;border-radius:50%;border:3px solid rgba(255,255,255,.3);background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:1.35rem;flex-shrink:0}
 .cc-top-info h3{font-size:1rem;font-weight:700}
 .cc-top-info p{font-size:.68rem;opacity:.7}
 .cc-body{padding:1.5rem}
@@ -278,7 +278,7 @@ img{max-width:100%;height:auto;display:block}
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg-wrap"><img src="https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp" alt="Chiavi casa nuova mutuo Padova" width="1600" height="900"></div>
+  <div class="hero-bg-wrap"><img src="img/foto-servizi/gestione-preliminari-padova.webp" alt="Chiavi casa nuova con mutuo Padova" width="1600" height="900" fetchpriority="high"></div>
   <div class="hero-overlay"></div>
   <div class="hero-particles"><div class="particle p1"></div><div class="particle p2"></div><div class="particle p3"></div><div class="particle p4"></div></div>
 
@@ -335,7 +335,7 @@ img{max-width:100%;height:auto;display:block}
 
     <div class="calc-card">
       <div class="cc-top">
-        <img src="img/team/real-state-linda-righetto.webp" alt="Linda Righetto" width="52" height="52">
+        <div class="cc-avatar" aria-hidden="true">🏦</div>
         <div class="cc-top-info">
           <h3>Calcolatore rata mutuo</h3>
           <p>Risultato istantaneo — zero registrazione</p>
