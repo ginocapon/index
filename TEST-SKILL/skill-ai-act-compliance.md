@@ -126,6 +126,7 @@ Link informativa: **`privacy#trasparenza-digitale`**
 ## 7. Collegamenti
 
 - `TEST-SKILL/SKILL-2.0.md` §**8.1f**
+- **`TEST-SKILL/skill-editoriale-visivo.md`** — comando permanente visivo blog (venerdì + ≥3 foto + ≥2 grafiche)
 - `TEST-SKILL/skill-content.md` — hero blog
 - `TEST-SKILL/skill-forms-leads.md` — form in landing chat
 - `TEST-SKILL/skill-social-automation.md` — post e reel

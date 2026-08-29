@@ -1,13 +1,17 @@
 {
-  "updated": "2026-08-22",
-  "policy": "Max 1 blog AGGIUNGERE/settimana. Prima SOSTENERE da gsc-keywords-priority.json se pages_refresh_priority ha 0 click e >50 impr. Anti-doppioni BLOCCANTE prima di ogni publish.",
+  "updated": "2026-08-29",
+  "policy": "Max 1 blog AGGIUNGERE/settimana. Comando editoriale permanente: TEST-SKILL/skill-editoriale-visivo.md (ricerca §8-17 + visivo §1-7). Gate: audit_editorial_research.py + audit_blog_visuals.py. Anti-doppioni BLOCCANTE.",
   "workflow_skill": "TEST-SKILL/skill-editorial-queue.md",
+  "editorial_command": "TEST-SKILL/skill-editoriale-visivo.md",
   "discovery": {
     "when": "Ogni venerdì post-cron O quando scheduled < 3",
     "sources": [
       "GSC gsc-keywords-priority.json",
+      "Google Trends IT/Veneto/Padova",
+      "Gazzetta Ufficiale / ADE / ISTAT / OMI / FIMAA",
       "SKIMM gap",
-      "web search fonti istituzionali"
+      "RSS ANSA / Sole24Ore / Milano Finanza",
+      "Top 5 contenuti web per cluster"
     ],
     "output": "Aggiungi item status=proposed in coda + aggiorna skill-memoria-progressi §Log"
   },

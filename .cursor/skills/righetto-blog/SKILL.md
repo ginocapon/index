@@ -2,7 +2,8 @@
 name: righetto-blog
 description: >-
   Crea o aggiorna articoli blog Righetto Immobiliare (Padova, Limena, hinterland):
-  anti-doppioni SKIMM, 2500+ parole, fonti istituzionali, schema FAQ, form lead se CTA.
+  ricerca strategica, anti-doppioni SKIMM, 2500+ parole, fonti istituzionali,
+  immagini/grafiche pertinenti, schema FAQ, form lead se CTA.
   Usa quando l'utente chiede nuovo articolo, blog su un tema, aggiornamento post,
   keyword long-tail, o contenuto editoriale immobiliare.
 ---
@@ -11,62 +12,48 @@ description: >-
 
 ## Coda editoriale (leggi PRIMA — non chiedere all'utente)
 
-1. **`data/editorial-queue.json`** — prossimo `scheduled` da pubblicare
-2. **`TEST-SKILL/skill-editorial-queue.md`** — sequenza automatica completa
-3. **`data/gsc-keywords-priority.json`** → `queries_limena_top_volume` per batch Limena locale
-4. Se coda `scheduled` < 3 → **discovery web + GSC** → aggiungi `proposed` (non serve permesso utente)
+1. **`TEST-SKILL/skill-editoriale-visivo.md`** — comando permanente (ricerca §8–17 + visivo §1–7)
+2. **`data/editorial-queue.json`** — prossimo `scheduled`
+3. **`TEST-SKILL/skill-editorial-queue.md`** — sequenza 12 passi + discovery
+4. **`data/gsc-keywords-priority.json`** — SOSTENERE prima di AGGIUNGERE
+5. Se coda `scheduled` < 3 → discovery (§15–16 skill-editoriale-visivo)
 
-**Trigger autonomi:** «pubblica blog», «prossimo articolo», venerdì + modifica repo, `/blog` senza tema specifico → prendi prossimo item coda.
+**Trigger autonomi:** «pubblica blog», «prossimo articolo», venerdì, `/blog` senza tema → coda + ricerca.
 
 ## Prima di iniziare (BLOCCANTE)
 
-1. `TEST-SKILL/skill-essentials.md` + `TEST-SKILL/skill-massimo-punteggio.md`
-2. `TEST-SKILL/skill-memoria-progressi.md` + **`TEST-SKILL/skill-editorial-queue.md`**
-3. `TEST-SKILL/skill-content.md` (template, cluster, standard articoli)
-4. **`TEST-SKILL/skill-ai-act-compliance.md`** (trasparenza foto/assistente — priorità permanente)
-5. `data/gsc-keywords-priority.json` — SOSTENERE prima di AGGIUNGERE se priorità GSC
-6. `TEST-SKILL/skimm.md` — keyword primaria univoca
-7. **Anti-doppioni:** `python scripts/check_doppioni_sito.py` + `python scripts/build_skimm.py`
-8. Se doppione → marca coda `cancelled`, discovery nuovo tema, STOP publish
+1. `skill-essentials.md` + `skill-massimo-punteggio.md` + `skill-efficienza-sito.md`
+2. **`skill-editoriale-visivo.md`** — ricerca e visivo (PRIORITÀ editoriale)
+3. `skill-memoria-progressi.md` + `skill-editorial-queue.md`
+4. `skill-content.md` + `skill-ai-act-compliance.md`
+5. `data/gsc-keywords-priority.json`
+6. `skimm.md` + `python scripts/check_doppioni_sito.py` + `build_skimm.py`
+7. Se doppione → `cancelled` in coda, discovery, STOP
 
-## Checklist articolo
+## Checklist PRE-SCRITTURA (ricerca §15)
 
-- [ ] `kw_primaria` univoca in skimm §3
-- [ ] 2500+ parole corpo utile, 10–15 H2/H3, tono professionale
-- [ ] Ogni dato numerico con fonte verificata e link
-- [ ] Copertina hero WebP 19:9 generata **ex novo con IA** (§8.1c SKILL-2.0 + §2.1 skill-content); marchio **FOTO AI** obbligatorio
-- [ ] **Min 2 tabelle HTML** + **min 2 grafici SVG** con fonte verificata (§2.1e skill-content — BLOCCANTE)
-- [ ] **Min 3 immagini IA** nel corpo + 1 hero — tutte con `rig-ai-photo-wrap` + `data-ai-generated="true"`
-- [ ] **FOTO AI (BLOCCANTE):** `node scripts/build-ai-image-manifest.mjs` + `node scripts/audit-foto-ai.mjs` OK prima del commit
-- [ ] **AI Act:** barra footer sito (ga-consent) + didascalia trasparenza su ogni immagine
-- [ ] Title ≤60, meta ≤160, H1 diverso da title
-- [ ] JSON-LD: `BlogPosting` + `FAQPage` se FAQ visibile
-- [ ] Link interni verso pillar/zone/servizi del cluster
-- [ ] Se form/CTA lead → `TEST-SKILL/skill-forms-leads.md` + `rig-lead-form.js`
+- [ ] Scansione 3 aree: mercato Padova/Veneto · politica con impatto · normativa verificata
+- [ ] Fonti primarie (GU/ADE/ISTAT/OMI) + seconda fonte indipendente
+- [ ] GSC + Google Trends analizzati se disponibili
+- [ ] Top 5 contenuti web → `gap_analysis` + `value_add` in coda
+- [ ] `editorial_type`: `trend` (~50%) o `evergreen` (~50%)
+- [ ] `python scripts/audit_editorial_research.py --id eq-XXX` → OK
+
+## Checklist articolo (visivo §7 + contenuto)
+
+- [ ] `audit_blog_visuals.py --file blog-{slug}.html` → OK
+- [ ] ≥3 foto IA pertinenti al paragrafo + 1 hero + ≥2 SVG + ≥2 tabelle
+- [ ] `kw_primaria` univoca · 2500+ parole · fonti verificate
+- [ ] Distinzione fatto / dichiarazione / analisi / previsione nel testo
+- [ ] Valore aggiunto Padova/Veneto — non copia concorrenti
+- [ ] FOTO AI: `build-ai-image-manifest.mjs` + `audit-foto-ai.mjs` OK
+- [ ] Title ≤60, meta ≤160, JSON-LD, link interni, form se CTA
 
 ## Registrazione pagina
 
-- `blog-{slug}.html`
-- `blog.html` (`articoliStatici`) + `js/homepage.js`
-- `admin.html` (`_blogSeedArticles` con `data_pubblicazione`)
-- `sitemap.xml`
-- `node scripts/validate-page.js --file blog-{slug}.html`
-
-## Modelli
-
-- Articolo recente dello stesso cluster in `blog-*.html`
-- Template completo: `TEST-SKILL/SKILL-2.0.md` §3 e §8.1a/8.1c
-
-## Rule Cursor
-
-`.cursor/rules/righetto-blog-publish.mdc` si attiva su `blog-*.html`
-
-## Output atteso
-
-HTML pubblicato, catalogo aggiornato, `editorial-queue.json` item → `published`, skill-memoria §Log, validate-page OK, commit se richiesto
+- `blog-{slug}.html` · `blog.html` · `homepage.js` · `admin.html` · `sitemap.xml`
+- `validate-page.js --file blog-{slug}.html`
 
 ## Dopo publish
 
-- Aggiorna `data/editorial-queue.json` (status, published_date)
-- Aggiorna `data/gsc-keywords-priority.json` → `published_this_week`
-- Riga in `TEST-SKILL/skill-memoria-progressi.md` §Log cronologico
+- Coda → `published` · `gsc-keywords` · `skill-memoria` §Log

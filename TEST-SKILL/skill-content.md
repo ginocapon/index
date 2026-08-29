@@ -154,6 +154,8 @@ Prima del commit: `node scripts/validate-page.js --file blog-….html`. Title/H1
 
 ### 2.1 Blog — immagini, elenco e auto-verifica (OBBLIGATORIO — tutti gli articoli)
 
+> **Comando editoriale permanente:** **`TEST-SKILL/skill-editoriale-visivo.md`** — prevale su altre skill per numero/pertinenza immagini, grafiche e composizione visiva (salvo AI Act, efficienza anti-filler, vincoli tecnici).
+
 > Applica a **ogni** `blog-*.html` nuovo o rivisto, al seed admin e alla sezione blog in homepage. **Non** riguarda il portale immobili (vendita/affitto) né `in_evidenza` sulle schede immobile.
 
 #### A) Foto **generate ex novo con IA** — obbligatorio (da agosto 2026)
@@ -213,10 +215,11 @@ Dopo generazione o patch, l’agente **esegue sempre** (non delegare all’utent
 1. `python scripts/check_doppioni_sito.py`
 2. `node scripts/validate-page.js blog-{slug}.html` (o elenco file toccati)
 3. Grep: slug in `blog.html`, **`admin.html` (`_blogSeedArticles`)**, `js/homepage.js`, `sitemap.xml`
-4. Controllo manuale campione: hero + 3 figure = path sotto `img/blog/` esistenti; **proporzione 19:9** (`art-hero__frame`, `blog-fig__frame`); zero URL esterna immagine; **marchio FOTO AI** + `data-ai-generated="true"` su ogni foto; ≥2 tabelle + ≥2 SVG presenti
-5. `node scripts/build-ai-image-manifest.mjs` + `node scripts/audit-foto-ai.mjs` — exit 0
-6. Verifica elenco blog: nuovi articoli visibili in cima per data (no featured che li esclude)
-7. Solo dopo pass 1–5: commit/push se previsto da task
+4. Controllo manuale campione: hero + 3 figure **pertinenti al testo** = path sotto `img/blog/`; **proporzione 19:9**; marchio FOTO AI; ≥2 tabelle + ≥2 SVG informativi
+5. `python scripts/audit_blog_visuals.py --file blog-{slug}.html` → exit 0
+6. `node scripts/build-ai-image-manifest.mjs` + `node scripts/audit-foto-ai.mjs` — exit 0
+7. Verifica elenco blog: nuovi articoli visibili in cima per data (no featured che li esclude)
+8. Solo dopo pass 1–7: commit/push se previsto da task
 
 **Registrazione admin (obbligatoria):** ogni nuovo `blog-*.html` deve comparire in `admin.html` → `const _blogSeedArticles` con `data_pubblicazione`, `url_statico`, `immagine_copertina`, `emoji`, `contenuto` (snippet HTML). Dopo batch multipli: `python scripts/sync_admin_blog_seed.py` (allinea da `blog.html` articoliStatici). `validate-page.js` segnala errore se manca nel seed admin.
 
