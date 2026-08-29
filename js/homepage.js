@@ -788,6 +788,11 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'canone concordato padova guida 2026': { img: 'img/blog/blog-canone-concordato-padova-guida-2026-hero.webp', url: 'blog-canone-concordato-padova-guida-2026' },
+    'gergo immobiliare padova spiegato 2026': { img: 'img/blog/blog-gergo-immobiliare-padova-spiegato-2026-hero.webp', url: 'blog-gergo-immobiliare-padova-spiegato-2026' },
+    'tassi euribor mutui padova agosto 2026': { img: 'img/blog/blog-tassi-euribor-mutui-padova-agosto-2026-hero.webp', url: 'blog-tassi-euribor-mutui-padova-agosto-2026' },
+    'registro contratti affitto padova 2026': { img: 'img/blog/blog-registro-contratti-affitto-padova-2026-hero.webp', url: 'blog-registro-contratti-affitto-padova-2026' },
+    'visura catastale acquisto casa padova 2026': { img: 'img/blog/blog-visura-catastale-acquisto-casa-padova-2026-hero.webp', url: 'blog-visura-catastale-acquisto-casa-padova-2026' },
     'caro affitti padova under 35 guida 2026': { img: 'img/blog/blog-caro-affitti-padova-under-35-hero.webp', url: 'blog-caro-affitti-padova-under-35-guida-2026' },
     'coliving padova limena giovani professionisti 2026': { img: 'img/blog/blog-coliving-padova-limena-hero.webp', url: 'blog-coliving-padova-limena-giovani-professionisti-2026' },
     'prima casa under 36 consap padova 2026': { img: 'img/blog/blog-prima-casa-under-36-consap-hero.webp', url: 'blog-prima-casa-under-36-consap-padova-2026' },
@@ -924,6 +929,41 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    {
+      "titolo": "Canone concordato Padova: Guida 2026",
+      "categoria": "Locazioni Padova",
+      "data": "2026-08-29",
+      "immagine_copertina": "img/blog/blog-canone-concordato-padova-guida-2026-hero.webp",
+      "url_statico": "blog-canone-concordato-padova-guida-2026"
+    },
+    {
+      "titolo": "Gergo immobiliare Padova: Glossario 2026",
+      "categoria": "Guide immobiliari",
+      "data": "2026-08-29",
+      "immagine_copertina": "img/blog/blog-gergo-immobiliare-padova-spiegato-2026-hero.webp",
+      "url_statico": "blog-gergo-immobiliare-padova-spiegato-2026"
+    },
+    {
+      "titolo": "Euribor mutui Padova: Agosto 2026",
+      "categoria": "Mutuo e finanziamenti",
+      "data": "2026-08-29",
+      "immagine_copertina": "img/blog/blog-tassi-euribor-mutui-padova-agosto-2026-hero.webp",
+      "url_statico": "blog-tassi-euribor-mutui-padova-agosto-2026"
+    },
+    {
+      "titolo": "Registro contratti affitto Padova 2026",
+      "categoria": "Locazioni Padova",
+      "data": "2026-08-29",
+      "immagine_copertina": "img/blog/blog-registro-contratti-affitto-padova-2026-hero.webp",
+      "url_statico": "blog-registro-contratti-affitto-padova-2026"
+    },
+    {
+      "titolo": "Visura catastale acquisto Padova 2026",
+      "categoria": "Acquisto casa",
+      "data": "2026-08-29",
+      "immagine_copertina": "img/blog/blog-visura-catastale-acquisto-casa-padova-2026-hero.webp",
+      "url_statico": "blog-visura-catastale-acquisto-casa-padova-2026"
+    },
     {
       "titolo": "Caro affitti Padova under 35: Guida 2026",
       "categoria": "Affitti Padova",

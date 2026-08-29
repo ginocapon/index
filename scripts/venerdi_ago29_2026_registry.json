@@ -1,0 +1,207 @@
+{
+  "generated": "2026-08-29",
+  "date_display": "29 agosto 2026",
+  "files": [
+    {
+      "filename": "blog-canone-concordato-padova-guida-2026.html",
+      "slug": "blog-canone-concordato-padova-guida-2026",
+      "wordCount_body": 2536
+    },
+    {
+      "filename": "blog-gergo-immobiliare-padova-spiegato-2026.html",
+      "slug": "blog-gergo-immobiliare-padova-spiegato-2026",
+      "wordCount_body": 2501
+    },
+    {
+      "filename": "blog-tassi-euribor-mutui-padova-agosto-2026.html",
+      "slug": "blog-tassi-euribor-mutui-padova-agosto-2026",
+      "wordCount_body": 2531
+    },
+    {
+      "filename": "blog-registro-contratti-affitto-padova-2026.html",
+      "slug": "blog-registro-contratti-affitto-padova-2026",
+      "wordCount_body": 2540
+    },
+    {
+      "filename": "blog-visura-catastale-acquisto-casa-padova-2026.html",
+      "slug": "blog-visura-catastale-acquisto-casa-padova-2026",
+      "wordCount_body": 2539
+    }
+  ],
+  "blog_html_articoliStatici": [
+    {
+      "titolo": "Canone concordato Padova: Guida 2026",
+      "categoria": "Locazioni Padova",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-canone-concordato-padova-guida-2026-hero.webp",
+      "url_statico": "blog-canone-concordato-padova-guida-2026",
+      "tempo": 14,
+      "autore": "Gino Capon",
+      "contenuto": "Canone concordato Padova 2026: fasce, cedolare 10%, percorso ADE.",
+      "evidenza": false
+    },
+    {
+      "titolo": "Gergo immobiliare Padova: Glossario 2026",
+      "categoria": "Guide immobiliari",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-gergo-immobiliare-padova-spiegato-2026-hero.webp",
+      "url_statico": "blog-gergo-immobiliare-padova-spiegato-2026",
+      "tempo": 12,
+      "autore": "Gino Capon",
+      "contenuto": "Gergo immobiliare Padova: glossario catastale, contrattuale e mutuo.",
+      "evidenza": false
+    },
+    {
+      "titolo": "Euribor mutui Padova: Agosto 2026",
+      "categoria": "Mutuo e finanziamenti",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-tassi-euribor-mutui-padova-agosto-2026-hero.webp",
+      "url_statico": "blog-tassi-euribor-mutui-padova-agosto-2026",
+      "tempo": 13,
+      "autore": "Gino Capon",
+      "contenuto": "Tassi Euribor mutui Padova agosto 2026: fisso vs variabile, fonti BCE.",
+      "evidenza": false
+    },
+    {
+      "titolo": "Registro contratti affitto Padova 2026",
+      "categoria": "Locazioni Padova",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-registro-contratti-affitto-padova-2026-hero.webp",
+      "url_statico": "blog-registro-contratti-affitto-padova-2026",
+      "tempo": 12,
+      "autore": "Gino Capon",
+      "contenuto": "Registro contratti affitto Padova: ADE, 30 giorni, imposte e detrazioni.",
+      "evidenza": false
+    },
+    {
+      "titolo": "Visura catastale acquisto Padova 2026",
+      "categoria": "Acquisto casa",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-visura-catastale-acquisto-casa-padova-2026-hero.webp",
+      "url_statico": "blog-visura-catastale-acquisto-casa-padova-2026",
+      "tempo": 13,
+      "autore": "Gino Capon",
+      "contenuto": "Visura catastale acquisto casa Padova: campi, planimetria, mutuo.",
+      "evidenza": false
+    }
+  ],
+  "admin_blogSeedArticles": [
+    {
+      "titolo": "Canone concordato Padova: Guida 2026",
+      "categoria": "Locazioni Padova",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-canone-concordato-padova-guida-2026-hero.webp",
+      "url_statico": "blog-canone-concordato-padova-guida-2026",
+      "tempo": 14,
+      "autore": "Gino Capon",
+      "contenuto": "<p>Guida canone concordato Padova: accordo territoriale, fiscalità e registrazione.</p>",
+      "evidenza": false,
+      "emoji": "📋",
+      "data_pubblicazione": "2026-08-29"
+    },
+    {
+      "titolo": "Gergo immobiliare Padova: Glossario 2026",
+      "categoria": "Guide immobiliari",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-gergo-immobiliare-padova-spiegato-2026-hero.webp",
+      "url_statico": "blog-gergo-immobiliare-padova-spiegato-2026",
+      "tempo": 12,
+      "autore": "Gino Capon",
+      "contenuto": "<p>Glossario gergo immobiliare Padova per acquirenti, venditori e inquilini.</p>",
+      "evidenza": false,
+      "emoji": "📖",
+      "data_pubblicazione": "2026-08-29"
+    },
+    {
+      "titolo": "Euribor mutui Padova: Agosto 2026",
+      "categoria": "Mutuo e finanziamenti",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-tassi-euribor-mutui-padova-agosto-2026-hero.webp",
+      "url_statico": "blog-tassi-euribor-mutui-padova-agosto-2026",
+      "tempo": 13,
+      "autore": "Gino Capon",
+      "contenuto": "<p>Guida Euribor e mutui Padova agosto 2026 — nessun tasso promesso online.</p>",
+      "evidenza": false,
+      "emoji": "📊",
+      "data_pubblicazione": "2026-08-29"
+    },
+    {
+      "titolo": "Registro contratti affitto Padova 2026",
+      "categoria": "Locazioni Padova",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-registro-contratti-affitto-padova-2026-hero.webp",
+      "url_statico": "blog-registro-contratti-affitto-padova-2026",
+      "tempo": 12,
+      "autore": "Gino Capon",
+      "contenuto": "<p>Guida registro contratti locazione Padova — obblighi ADE 2026.</p>",
+      "evidenza": false,
+      "emoji": "📝",
+      "data_pubblicazione": "2026-08-29"
+    },
+    {
+      "titolo": "Visura catastale acquisto Padova 2026",
+      "categoria": "Acquisto casa",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-visura-catastale-acquisto-casa-padova-2026-hero.webp",
+      "url_statico": "blog-visura-catastale-acquisto-casa-padova-2026",
+      "tempo": 13,
+      "autore": "Gino Capon",
+      "contenuto": "<p>Guida visura catastale per acquisto immobile a Padova e provincia.</p>",
+      "evidenza": false,
+      "emoji": "🏛️",
+      "data_pubblicazione": "2026-08-29"
+    }
+  ],
+  "homepage_js_articoliStatici": [
+    {
+      "titolo": "Canone concordato Padova: Guida 2026",
+      "categoria": "Locazioni Padova",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-canone-concordato-padova-guida-2026-hero.webp",
+      "url_statico": "blog-canone-concordato-padova-guida-2026"
+    },
+    {
+      "titolo": "Gergo immobiliare Padova: Glossario 2026",
+      "categoria": "Guide immobiliari",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-gergo-immobiliare-padova-spiegato-2026-hero.webp",
+      "url_statico": "blog-gergo-immobiliare-padova-spiegato-2026"
+    },
+    {
+      "titolo": "Euribor mutui Padova: Agosto 2026",
+      "categoria": "Mutuo e finanziamenti",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-tassi-euribor-mutui-padova-agosto-2026-hero.webp",
+      "url_statico": "blog-tassi-euribor-mutui-padova-agosto-2026"
+    },
+    {
+      "titolo": "Registro contratti affitto Padova 2026",
+      "categoria": "Locazioni Padova",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-registro-contratti-affitto-padova-2026-hero.webp",
+      "url_statico": "blog-registro-contratti-affitto-padova-2026"
+    },
+    {
+      "titolo": "Visura catastale acquisto Padova 2026",
+      "categoria": "Acquisto casa",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-visura-catastale-acquisto-casa-padova-2026-hero.webp",
+      "url_statico": "blog-visura-catastale-acquisto-casa-padova-2026"
+    }
+  ]
+}
