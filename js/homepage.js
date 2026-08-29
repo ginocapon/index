@@ -666,7 +666,7 @@ setTimeout(loadVisiteVirtualiHome, 600);
       + '    <p class="ri-incarico-lead">Se stai approfondendo le nostre guide, &egrave; il momento giusto per un confronto professionale senza impegno.</p>'
       + '    <p class="ri-incarico-body">Un unico referente segue l&rsquo;immobile dall&rsquo;analisi di mercato alla strategia di valorizzazione e alla trattativa. Onorari e modalit&agrave; di incarico chiari fin dal primo incontro in agenzia.</p>'
       + '    <div class="ri-incarico-actions">'
-      + '      <a href="contatti" class="ri-incarico-btn ri-incarico-btn--pri" id="ri-incarico-cta">Richiedi consulenza per la vendita</a>'
+      + '      <a href="landing-valutazione" class="ri-incarico-btn ri-incarico-btn--pri" id="ri-incarico-cta">Richiedi valutazione gratuita</a>'
       + '      <button type="button" class="ri-incarico-btn ri-incarico-btn--sec ri-incarico-foc" id="ri-incarico-secondary"></button>'
       + '    </div>'
       + '    <p class="ri-incarico-foot">Puoi chiudere in qualsiasi momento (anche con Esc). Questo messaggio non comparir&agrave; di nuovo in questa sessione.</p>'

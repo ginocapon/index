@@ -43,9 +43,11 @@
 14. build_editorial_memory.py + build_editorial_visual_memory.py
 ```
 
-**Gate pre-scrittura:** `audit_editorial_research.py` + `audit_editorial_continuity.py` (§16-TER) + `audit_editorial_visual_variety.py --id` (campi §16-QUATER)
+**Gate pre-scrittura:** `audit_editorial_acquisition.py` + `audit_editorial_research.py` + `audit_editorial_continuity.py` (§16-TER) + `audit_editorial_visual_variety.py --id` (campi §16-QUATER)
 **Gate pre-chiusura:** `audit_blog_visuals.py` + `audit_editorial_visual_variety.py` + `audit_blog_publishability.py` (§18) + §17 skill-editoriale-visivo
-**Dopo publish:** `build_editorial_memory.py` + `build_editorial_visual_memory.py` · valutare FAQ (`audit_chatbot_faq.py`)
+**Dopo publish:** `build_editorial_memory.py` + `build_editorial_visual_memory.py` · aggiorna `editorial-acquisition-balance.json` · valutare FAQ (`audit_chatbot_faq.py`)
+
+**Equilibrio 4 aree (skill-acquisizione-proprietari.md):** Area 1 owner costante · Area 4 acquirente mantenuta ma non monopolizzare · min 1 `acquisition_priority: true` / 2 settimane.
 
 ---
 

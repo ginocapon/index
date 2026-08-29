@@ -25,6 +25,11 @@ REQUIRED_SCHEDULED = (
     "geo_focus",
     "owner_relevance",
     "faq_candidates",
+    "primary_audience",
+    "acquisition_contribution",
+    "traffic_type",
+    "owner_problem",
+    "concrete_value",
 )
 
 
@@ -95,6 +100,30 @@ def audit_item(item: dict) -> list[str]:
     faq = str(item.get("faq_candidates", "")).strip()
     if len(faq) < 15:
         issues.append(f"{iid}: faq_candidates troppo breve (§16-QUINQUIES)")
+
+    pa = str(item.get("primary_audience", "")).strip()
+    valid_pa = {
+        "proprietario_vendita", "proprietario_locazione", "proprietario_gestione",
+        "proprietario_misto", "acquirente", "inquilino", "investitore", "misto",
+    }
+    if pa not in valid_pa:
+        issues.append(f"{iid}: primary_audience mancante (skill-acquisizione-proprietari)")
+
+    ac = str(item.get("acquisition_contribution", "")).strip()
+    if ac not in ("direct", "indirect", "none"):
+        issues.append(f"{iid}: acquisition_contribution mancante (direct/indirect/none)")
+
+    tt = str(item.get("traffic_type", "")).strip()
+    if tt not in ("strategic", "generic"):
+        issues.append(f"{iid}: traffic_type mancante (strategic/generic)")
+
+    op = str(item.get("owner_problem", "")).strip()
+    if len(op) < 12:
+        issues.append(f"{iid}: owner_problem troppo breve")
+
+    cv = str(item.get("concrete_value", "")).strip()
+    if len(cv) < 15:
+        issues.append(f"{iid}: concrete_value troppo breve")
 
     return issues
 
