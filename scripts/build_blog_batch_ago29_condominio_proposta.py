@@ -3,6 +3,8 @@
 Esegui da repo root: python scripts/build_blog_batch_ago29_condominio_proposta.py
 
 Mapping immagini (ensure_images — copy da img/blog esistenti):
+  ⚠ Bootstrap batch only — §16-QUATER richiede immagini IA ex novo per slug;
+  l'audit hash (`build_editorial_visual_memory.py`) segnala riuso. Non usare copy in nuovi articoli.
   blog-spese-condominiali-acquisto-padova-2026
     hero ← blog-checklist-verifiche-prima-compromesso-padova-2026.webp
     body ← blog-dieci-errori-acquisto-casa-padova-2026.webp,

@@ -13,7 +13,9 @@ Dettaglio: **`TEST-SKILL/skill-editoriale-visivo.md`** (comando permanente prior
 - **Visivo §1–7:** ≥3 immagini IA pertinenti + 1 hero + ≥2 SVG + ≥2 tabelle
 - **Venerdì:** audit AI Act extra
 - **Pubblicabilità §18:** zero residui AI visibili (Further reading, Note operative, Approfondimento N, placeholder)
-- Gate: `build_editorial_memory.py` + `audit_editorial_research.py --id eq-XXX` + `audit_editorial_continuity.py --id eq-XXX` (pre-scrittura) + `audit_blog_visuals.py` + `audit_blog_publishability.py` (pre-chiusura)
+- **Varietà visiva §16-QUATER:** struttura diversa per argomento; immagini/grafiche originali; no riuso cross-articolo
+- **FAQ e proprietari §16-QUINQUIES:** geo Padova→Veneto; ciclo owner; FAQ reali post-publish
+- Gate: `build_editorial_memory.py` + `build_editorial_visual_memory.py` + `audit_editorial_research.py --id eq-XXX` + `audit_editorial_continuity.py --id eq-XXX` (pre-scrittura) + `audit_blog_visuals.py` + `audit_editorial_visual_variety.py` + `audit_blog_publishability.py` (pre-chiusura)
 - Precedenza su selezione argomento e composizione visiva; non deroga AI Act, efficienza anti-filler, fonti verificate
 
 ## BLOCCANTE — prima di scrivere (§8.1a)
@@ -43,7 +45,7 @@ Dettaglio: **`TEST-SKILL/skill-editoriale-visivo.md`** (comando permanente prior
 - `blog.html` + homepage blog: **solo ordine data**, niente sezione «In evidenza» che toglie card dalla griglia
 
 ## Secondo passaggio obbligatorio (agente)
-Prima di chiudere: `check_doppioni_sito.py` → **`build_editorial_memory.py`** → **`audit_editorial_research.py`** + **`audit_editorial_continuity.py`** (se nuovo) → scrittura → **`audit_blog_visuals.py`** → **`audit_blog_publishability.py`** → **`validate-page.js`** → grep 4 registri → `audit-foto-ai.mjs` OK. Se fallisce, fix e ripeti.
+Prima di chiudere: `check_doppioni_sito.py` → **`build_editorial_memory.py`** + **`build_editorial_visual_memory.py`** → **`audit_editorial_research.py`** + **`audit_editorial_continuity.py`** (se nuovo) → scrittura → **`audit_blog_visuals.py`** → **`audit_editorial_visual_variety.py`** → **`audit_blog_publishability.py`** → **`validate-page.js`** → grep 4 registri → `audit-foto-ai.mjs` OK. Se fallisce, fix e ripeti.
 
 ## Registrazione obbligatoria (tutti e 4)
 - `admin.html` → `_blogSeedArticles` con `data_pubblicazione: 'YYYY-MM-DD'`
@@ -57,6 +59,7 @@ Prima di chiudere: `check_doppioni_sito.py` → **`build_editorial_memory.py`** 
 - Aggiorna `llms.txt` se pillar o dati mercato
 - `python scripts/build_skimm.py` + commit `skimm.md`/`skimm.json`
 - `python scripts/build_editorial_memory.py` (memoria §16-TER)
+- `python scripts/build_editorial_visual_memory.py` (memoria §16-QUATER)
 - Form/CTA lead → **`skill-forms-leads.md`**
 
 ## Cron venerdì (automatico)

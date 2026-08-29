@@ -21,6 +21,10 @@ REQUIRED_SCHEDULED = (
     "substantive_area",
     "main_question",
     "reader_novelty",
+    "structure_type",
+    "geo_focus",
+    "owner_relevance",
+    "faq_candidates",
 )
 
 
@@ -72,6 +76,25 @@ def audit_item(item: dict) -> list[str]:
     rn = str(item.get("reader_novelty", "")).strip()
     if len(rn) < 20:
         issues.append(f"{iid}: reader_novelty troppo breve (§16-TER)")
+
+    st = str(item.get("structure_type", "")).strip()
+    valid_st = {
+        "ANALITICA", "GUIDA", "NOTIZIA_IMPATTO", "DOMANDA_RISPOSTA",
+        "CONFRONTO", "TERRITORIALE", "MISTO",
+    }
+    if st not in valid_st:
+        issues.append(f"{iid}: structure_type invalido o mancante (§16-QUATER)")
+
+    geo = str(item.get("geo_focus", "")).strip()
+    if len(geo) < 3:
+        issues.append(f"{iid}: geo_focus mancante (§16-QUINQUIES — Padova/provincia/Veneto)")
+
+    if item.get("owner_relevance") is None:
+        issues.append(f"{iid}: owner_relevance mancante (true/false — §16-QUINQUIES)")
+
+    faq = str(item.get("faq_candidates", "")).strip()
+    if len(faq) < 15:
+        issues.append(f"{iid}: faq_candidates troppo breve (§16-QUINQUIES)")
 
     return issues
 

@@ -313,6 +313,20 @@ Prima di approvare pubblicazione:
 - [ ] `python scripts/audit_blog_publishability.py --file blog-{slug}.html` → OK
 - [ ] Rilettura visitatore: solo contenuto editoriale naturale
 
+**Varietà visiva (§16-QUATER — BLOCCANTE)**
+
+- [ ] `structure_type` scelto per argomento (non sempre GUIDA+FAQ identica)
+- [ ] Immagini WebP **dedicate** al slug (`img/blog/blog-{slug}-*.webp`) — no riuso cross-articolo
+- [ ] ≥2 SVG con layout/aria-label **diversi** dagli ultimi articoli
+- [ ] `python scripts/build_editorial_visual_memory.py` + `audit_editorial_visual_variety.py --file blog-{slug}.html` → OK
+
+**FAQ e proprietari (§16-QUINQUIES)**
+
+- [ ] FAQ schema: domande reali, risposta immediata + condizioni + fonte
+- [ ] `faq_candidates` in coda; verificare FAQ sito (`scripts/audit_chatbot_faq.py` se aggiornamento globale)
+- [ ] `geo_focus`: Padova → provincia → Veneto (priorità locale)
+- [ ] Ciclo editoriale: almeno 1 articolo `owner_relevance: true` (vendita/affitto/gestione/reddito)
+
 ---
 
 ## Obiettivo editoriale finale
@@ -524,6 +538,98 @@ I generatori `build_blog_*.py` **non devono** inserire H2 «Note operative» / �
 
 ---
 
+# PARTE E — VARIETÀ STRUTTURA E ESPERIENZA VISIVA (§16-QUATER)
+
+> **Principio:** linea editoriale riconoscibile, ma **struttura e impaginazione variabili** — non un unico modello ripetuto.
+
+## Tipologie strutturali (scegliere la più adatta)
+
+| Codice | Organizzazione |
+|--------|----------------|
+| `ANALITICA` | Scenario → dati → analisi → conseguenze → prospettive |
+| `GUIDA` | Problema → cosa sapere → passaggi → errori → conclusione |
+| `NOTIZIA_IMPATTO` | Cosa è successo → cosa cambia → chi coinvolto → impatto Padova/Veneto |
+| `DOMANDA_RISPOSTA` | Domanda → risposta immediata → spiegazione → esempi |
+| `CONFRONTO` | Prima → dopo → cosa cambia → pro/contro → conseguenze proprietario |
+| `TERRITORIALE` | Italia → Veneto → Padova → conseguenze locali → opportunità |
+| `MISTO` | Solo se giustificato — evitare default automatico |
+
+**Vietato** usare sempre la stessa sequenza: intro → elenco → grafico → FAQ → CTA.
+
+## Divieto ripetizione visiva
+
+Negli ultimi **8 articoli** verificare: sequenza H2, posizione immagini/grafiche, stesso layout SVG.
+
+Se `structure_type` compare **≥2 volte** negli ultimi 8 → il nuovo articolo deve usare **altra tipologia**.
+
+## Immagini — originalità e no riuso
+
+- Ogni foto **pertinente al paragrafo** (non stock generico «casa/città»)
+- Path dedicato: `img/blog/blog-{slug}-hero.webp`, `blog-{slug}-sezione-N.webp`
+- **Vietato** riutilizzare la stessa WebP (o hash identico) in articoli diversi
+- I batch `ensure_images()` che **copiano** file esistenti sono solo bootstrap temporaneo — l'audit segnala riuso; preferire **generazione IA ex novo** per ogni articolo
+
+## Grafiche — originalità per articolo
+
+Mantenere colori brand (`#2C4A6E`, `#FF6B35`, …) ma variare:
+
+- timeline · confronto prima/dopo · diagramma decisionale · ripartizione · mappa concettuale · tabella visiva
+
+**Vietato** ripetere stesso `aria-label` / stesso layout SVG negli ultimi articoli.
+
+## Gate pre-publish §16-QUATER
+
+```
+python scripts/build_editorial_visual_memory.py
+python scripts/audit_editorial_visual_variety.py --file blog-{slug}.html
+```
+
+Memoria: `data/editorial-visual-memory.json`
+
+---
+
+# PARTE F — FAQ, GEO E PROPRIETARI (§16-QUINQUIES)
+
+## FAQ dopo publish/aggiornamento
+
+- Verificare se l'articolo introduce **nuove domande reali** → valutare FAQ schema + `faq.html` / chatbot (`scripts/audit_chatbot_faq.py`)
+- Risposta FAQ: (1) risposta immediata (2) motivo (3) eccezioni (4) approfondimento se serve
+- **No FAQ artificiali** solo per schema
+
+## Priorità geografica
+
+**Padova → provincia di Padova → Veneto → Italia**
+
+Non sacrificare rilevanza locale per keyword nazionali generiche.
+
+Campo coda: `geo_focus`
+
+## Focus proprietari (ciclo editoriale)
+
+Almeno **1 articolo per ciclo** con `owner_relevance: true` su:
+
+vendita · valutazione/perizia · preparazione vendita · affitto · gestione locazione · reddito · errori proprietari
+
+Alternare angoli — non solo «come vendere casa».
+
+## Percorso commerciale
+
+**Informazione utile → fiducia → autorevolezza → interesse servizio**
+
+Mai trasformare ogni articolo in pubblicità; CTA coerente (`landing-valutazione`, `servizio-vendita`, `servizio-locazioni`).
+
+## Controllo finale integrato (§16-QUATER + QUINQUIES)
+
+| Area | Verifica |
+|------|----------|
+| Contenuto | §16-TER + §18 + fonti |
+| Varietà | `structure_type` + no clone H2 |
+| Visivo | immagini/grafiche originali |
+| FAQ | domande reali, aggiornamento |
+| Strategia | Padova/Veneto + utilità proprietario se pertinente |
+
+---
+
 ## Appendice A — Markup visivo
 
 ```html
@@ -562,6 +668,19 @@ I generatori `build_blog_*.py` **non devono** inserire H2 «Note operative» / �
 | `main_question` | sì | Domanda principale che l'articolo risponde |
 | `reader_novelty` | sì | Perché un lettore abituale lo leggerebbe ora |
 | `update_reason` | se area saturata | Cosa è cambiato (dato/norma/contesto) — obbligatorio se ≥2 articoli stessa area negli ultimi 8 |
+| `structure_type` | sì | Tipologia §16-QUATER: ANALITICA, GUIDA, NOTIZIA_IMPATTO, … |
+| `geo_focus` | sì | Padova / provincia / Veneto / Italia (priorità locale) |
+| `owner_relevance` | sì | `true` se utile a proprietario vendita/affitto/gestione/reddito |
+| `faq_candidates` | sì | 2–3 domande reali che l'articolo risponde (per FAQ schema e chatbot) |
+| `chart_types` | consigliato | Es. timeline, confronto, decisionale — per varietà grafiche |
+
+---
+
+## Appendice D — Strutture e memoria visiva
+
+Vedi **PARTE E §16-QUATER** e `data/editorial-visual-memory.json`.
+
+Dopo ogni publish: `python scripts/build_editorial_visual_memory.py`.
 
 ---
 
@@ -577,10 +696,10 @@ Dopo ogni publish: `python scripts/build_editorial_memory.py`.
 
 - `TEST-SKILL/skill-editorial-queue.md`
 - `TEST-SKILL/skill-content.md` §2.1, §2.1e
-- `data/editorial-queue.json` · `data/editorial-memory.json` · `data/gsc-keywords-priority.json`
-- `scripts/audit_blog_visuals.py` · `scripts/audit_editorial_research.py` · `scripts/audit_editorial_continuity.py` · `scripts/build_editorial_memory.py` · `scripts/audit_blog_publishability.py` · `scripts/bonify_blog_publishability.py`
+- `data/editorial-queue.json` · `data/editorial-memory.json` · `data/editorial-visual-memory.json` · `data/gsc-keywords-priority.json`
+- `scripts/audit_blog_visuals.py` · `scripts/audit_editorial_research.py` · `scripts/audit_editorial_continuity.py` · `scripts/build_editorial_memory.py` · `scripts/audit_blog_publishability.py` · `scripts/bonify_blog_publishability.py` · `scripts/build_editorial_visual_memory.py` · `scripts/audit_editorial_visual_variety.py`
 - `.cursor/rules/righetto-blog-publish.mdc`
 
 ---
 
-*Aggiornato: 29 agosto 2026 — comando editoriale fisso (visivo + ricerca + §16-TER + §18 pubblicabilità).*
+*Aggiornato: 29 agosto 2026 — comando editoriale (visivo + ricerca + §16-TER + §16-QUATER/QUINQUIES + §18).*

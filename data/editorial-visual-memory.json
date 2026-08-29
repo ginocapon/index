@@ -1,0 +1,363 @@
+{
+  "updated": "2026-08-29",
+  "skill_ref": "TEST-SKILL/skill-editoriale-visivo.md §16-QUATER",
+  "window_size": 15,
+  "structure_types": [
+    "ANALITICA",
+    "GUIDA",
+    "NOTIZIA_IMPATTO",
+    "DOMANDA_RISPOSTA",
+    "CONFRONTO",
+    "TERRITORIALE",
+    "MISTO"
+  ],
+  "structure_saturation_last_8": {
+    "DOMANDA_RISPOSTA": 8
+  },
+  "image_hash_reuse_detected": {},
+  "recent_articles": [
+    {
+      "slug": "blog-documenti-compravendita-rogito-padova-2026",
+      "structure_type": "DOMANDA_RISPOSTA",
+      "h2_sequence": [
+        "perche-organizzare-prima",
+        "identita-stato-civile",
+        "stato-civile-matrimonio",
+        "provenienza-successione",
+        "titolo-edilizio",
+        "agibilita",
+        "conformita-urbanistica",
+        "ape",
+        "condominio",
+        "preliminare",
+        "caparre",
+        "provvigioni"
+      ],
+      "h2_count": 27,
+      "images": [
+        "img/blog/blog-documenti-compravendita-rogito-padova-2026.webp"
+      ],
+      "image_hashes": {
+        "img/blog/blog-documenti-compravendita-rogito-padova-2026.webp": "5e18ae0675ebf20e83efdde50ec50061"
+      },
+      "chart_labels": [
+        "Documenti necessari per la compravendita di un immobile: guida…"
+      ],
+      "chart_count": 0,
+      "table_count": 1,
+      "list_count": 7,
+      "has_faq_block": true
+    },
+    {
+      "slug": "blog-prezzi-padova-provincia-fiaip-2026",
+      "structure_type": "DOMANDA_RISPOSTA",
+      "h2_sequence": [
+        "blog-lead-title"
+      ],
+      "h2_count": 17,
+      "images": [
+        "img/blog/blog-prezzi-padova-provincia-2026.webp"
+      ],
+      "image_hashes": {
+        "img/blog/blog-prezzi-padova-provincia-2026.webp": "3ff5dfb132d86b7c6bd66ce261c7a410"
+      },
+      "chart_labels": [
+        "Prezzi case Padova 2026: -4% in città, provincia traina | FIAIP"
+      ],
+      "chart_count": 0,
+      "table_count": 1,
+      "list_count": 4,
+      "has_faq_block": true
+    },
+    {
+      "slug": "blog-offerta-stock-vendita-italia-2026",
+      "structure_type": "DOMANDA_RISPOSTA",
+      "h2_sequence": [
+        "blog-lead-title"
+      ],
+      "h2_count": 15,
+      "images": [
+        "img/blog/blog-offerta-stock-vendita-italia-2026.webp"
+      ],
+      "image_hashes": {
+        "img/blog/blog-offerta-stock-vendita-italia-2026.webp": "ffa27db89e293010e0f4bb536cc0d5ae"
+      },
+      "chart_labels": [
+        "Stock case in vendita Italia: -5% nel Q1 2026 | Guida Padova"
+      ],
+      "chart_count": 0,
+      "table_count": 1,
+      "list_count": 6,
+      "has_faq_block": true
+    },
+    {
+      "slug": "blog-condono-edilizio-proposte-2026",
+      "structure_type": "DOMANDA_RISPOSTA",
+      "h2_sequence": [
+        "blog-lead-title"
+      ],
+      "h2_count": 16,
+      "images": [
+        "img/blog/blog-condono-edilizio-proposte-2026.webp"
+      ],
+      "image_hashes": {
+        "img/blog/blog-condono-edilizio-proposte-2026.webp": "79991396c0c2430622696885473fe8b9"
+      },
+      "chart_labels": [
+        "Condono edilizio 2026: proposte in Manovra | Guida Padova"
+      ],
+      "chart_count": 0,
+      "table_count": 1,
+      "list_count": 5,
+      "has_faq_block": true
+    },
+    {
+      "slug": "blog-trend-investimenti-immobiliari-summit-2026",
+      "structure_type": "DOMANDA_RISPOSTA",
+      "h2_sequence": [
+        "blog-lead-title"
+      ],
+      "h2_count": 18,
+      "images": [
+        "img/blog/blog-trend-investimenti-immobiliari-2026.webp"
+      ],
+      "image_hashes": {
+        "img/blog/blog-trend-investimenti-immobiliari-2026.webp": "81afdf174a069a2e23a9bcdf8aa73641"
+      },
+      "chart_labels": [
+        "Investimenti immobiliari 2026: trend da Real Estate Summit | Padova"
+      ],
+      "chart_count": 0,
+      "table_count": 2,
+      "list_count": 3,
+      "has_faq_block": true
+    },
+    {
+      "slug": "blog-patrimonio-casa-resilienza-mercati-globali-2026",
+      "structure_type": "DOMANDA_RISPOSTA",
+      "h2_sequence": [
+        "blog-lead-title"
+      ],
+      "h2_count": 12,
+      "images": [],
+      "image_hashes": {},
+      "chart_labels": [
+        "Patrimonio casa e resilienza urbana: lezioni dal contesto globale…"
+      ],
+      "chart_count": 0,
+      "table_count": 0,
+      "list_count": 4,
+      "has_faq_block": true
+    },
+    {
+      "slug": "blog-mutui-selettivi-banche-padova-2026",
+      "structure_type": "DOMANDA_RISPOSTA",
+      "h2_sequence": [
+        "blog-lead-title"
+      ],
+      "h2_count": 9,
+      "images": [],
+      "image_hashes": {},
+      "chart_labels": [
+        "Mutui più selettivi: come le banche valutano reddito e garanzie…"
+      ],
+      "chart_count": 0,
+      "table_count": 0,
+      "list_count": 4,
+      "has_faq_block": true
+    },
+    {
+      "slug": "blog-mercato-italiano-tensioni-medio-oriente-2026",
+      "structure_type": "DOMANDA_RISPOSTA",
+      "h2_sequence": [
+        "blog-lead-title"
+      ],
+      "h2_count": 9,
+      "images": [],
+      "image_hashes": {},
+      "chart_labels": [
+        "Tensioni in Medio Oriente e mercato immobiliare italiano: canali…"
+      ],
+      "chart_count": 0,
+      "table_count": 0,
+      "list_count": 3,
+      "has_faq_block": true
+    },
+    {
+      "slug": "blog-prospettive-mercato-residenziale-italia-2026",
+      "structure_type": "DOMANDA_RISPOSTA",
+      "h2_sequence": [
+        "blog-lead-title"
+      ],
+      "h2_count": 8,
+      "images": [],
+      "image_hashes": {},
+      "chart_labels": [
+        "Prospettive mercato residenziale Italia: come leggere le ricerche…"
+      ],
+      "chart_count": 0,
+      "table_count": 0,
+      "list_count": 4,
+      "has_faq_block": true
+    },
+    {
+      "slug": "blog-previsioni-immobiliari-scenari-geopolitica-2026",
+      "structure_type": "DOMANDA_RISPOSTA",
+      "h2_sequence": [
+        "blog-lead-title"
+      ],
+      "h2_count": 8,
+      "images": [],
+      "image_hashes": {},
+      "chart_labels": [
+        "Previsioni immobiliari e scenari di conflitto: come usarle senza…"
+      ],
+      "chart_count": 0,
+      "table_count": 0,
+      "list_count": 4,
+      "has_faq_block": true
+    },
+    {
+      "slug": "blog-domanda-case-green-certificazione-padova-2026",
+      "structure_type": "DOMANDA_RISPOSTA",
+      "h2_sequence": [
+        "ape-omi",
+        "acquirente",
+        "segmenti",
+        "venditore",
+        "percorso-banca",
+        "territorio",
+        "tab-fonti",
+        "blog-lead-title"
+      ],
+      "h2_count": 11,
+      "images": [
+        "img/blog/blog-domanda-case-green-padova-2026.webp"
+      ],
+      "image_hashes": {
+        "img/blog/blog-domanda-case-green-padova-2026.webp": "38743869de0345d894acf228b351419f"
+      },
+      "chart_labels": [
+        "Domanda di case green ad alta efficienza nel Padovano: strategie…"
+      ],
+      "chart_count": 0,
+      "table_count": 1,
+      "list_count": 3,
+      "has_faq_block": true
+    },
+    {
+      "slug": "blog-tassi-mutui-minimi-approfittarne-padova-2026",
+      "structure_type": "DOMANDA_RISPOSTA",
+      "h2_sequence": [
+        "eurirs",
+        "doc",
+        "lettura-tassi",
+        "variabile-fisso",
+        "tempi",
+        "tab-fonti",
+        "blog-lead-title"
+      ],
+      "h2_count": 10,
+      "images": [
+        "img/blog/blog-tassi-mutui-minimi-padova-2026.webp"
+      ],
+      "image_hashes": {
+        "img/blog/blog-tassi-mutui-minimi-padova-2026.webp": "43f21e35b74cb805b1a783858dae1b05"
+      },
+      "chart_labels": [
+        "Tassi mutui ai livelli più bassi della fase: come orientarsi nel…"
+      ],
+      "chart_count": 0,
+      "table_count": 1,
+      "list_count": 2,
+      "has_faq_block": true
+    },
+    {
+      "slug": "blog-bonus-mobili-2026-massimizzare-ristrutturazioni",
+      "structure_type": "DOMANDA_RISPOSTA",
+      "h2_sequence": [
+        "legame",
+        "ecobonus",
+        "tracciabilita",
+        "timing",
+        "commercialista",
+        "tab-fonti",
+        "blog-lead-title"
+      ],
+      "h2_count": 10,
+      "images": [
+        "img/blog/blog-bonus-mobili-ristrutturazioni-2026.webp"
+      ],
+      "image_hashes": {
+        "img/blog/blog-bonus-mobili-ristrutturazioni-2026.webp": "07fa79f89b0a732d685b7c4efada4ad9"
+      },
+      "chart_labels": [
+        "Bonus mobili e grandi elettrodomestici 2026: massimizzare la…"
+      ],
+      "chart_count": 0,
+      "table_count": 1,
+      "list_count": 2,
+      "has_faq_block": true
+    },
+    {
+      "slug": "blog-geopolitica-ucraina-prezzi-mutui-italia-veneto-2026",
+      "structure_type": "DOMANDA_RISPOSTA",
+      "h2_sequence": [
+        "canali",
+        "veneto",
+        "trasmissione",
+        "prudenza",
+        "locazione",
+        "tab-fonti",
+        "blog-lead-title"
+      ],
+      "h2_count": 10,
+      "images": [
+        "img/blog/blog-geopolitica-mercato-immobiliare-italia-2026.webp"
+      ],
+      "image_hashes": {
+        "img/blog/blog-geopolitica-mercato-immobiliare-italia-2026.webp": "0a68776101c4c51376a309d2ea33ba41"
+      },
+      "chart_labels": [
+        "Geopolitica, energia e mutui: effetti possibili su case nel…"
+      ],
+      "chart_count": 0,
+      "table_count": 1,
+      "list_count": 2,
+      "has_faq_block": true
+    },
+    {
+      "slug": "blog-agenzia-immobiliare-top-servizi-padova-2026",
+      "structure_type": "DOMANDA_RISPOSTA",
+      "h2_sequence": [
+        "std",
+        "ai",
+        "metriche",
+        "comunicazione",
+        "documentazione",
+        "tab-fonti",
+        "blog-lead-title"
+      ],
+      "h2_count": 10,
+      "images": [
+        "img/blog/blog-agenzia-top-servizi-padova-2026.webp"
+      ],
+      "image_hashes": {
+        "img/blog/blog-agenzia-top-servizi-padova-2026.webp": "17302ba6452e783ed701e84743169196"
+      },
+      "chart_labels": [
+        "Cosa distingue un'agenzia locale di alto livello: risposte…"
+      ],
+      "chart_count": 0,
+      "table_count": 1,
+      "list_count": 2,
+      "has_faq_block": true
+    }
+  ],
+  "approval_visual": [
+    "Struttura diversa dagli ultimi se stessa tipologia ≥2 volte?",
+    "Immagini path unici e hash non già usati in altri articoli recenti?",
+    "Grafiche con layout/aria-label diversi dagli ultimi?",
+    "Sequenza H2 non clone del batch precedente?"
+  ]
+}
