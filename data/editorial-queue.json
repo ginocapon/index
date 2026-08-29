@@ -396,7 +396,7 @@
     },
     {
       "id": "eq-acq-001",
-      "status": "proposed",
+      "status": "published",
       "priority": 1,
       "target_week": "2026-09-05",
       "slug": "blog-valutazione-casa-padova-guida-2026",
@@ -419,7 +419,8 @@
       "geo_focus": "Padova e provincia",
       "owner_relevance": true,
       "editorial_type": "evergreen",
-      "monitoring_area": "mercato"
+      "monitoring_area": "mercato",
+      "published_date": "2026-08-29"
     },
     {
       "id": "eq-acq-002",

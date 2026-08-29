@@ -788,6 +788,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'valutazione immobile padova guida 2026': { img: 'img/blog/blog-valutazione-casa-padova-guida-2026-hero.webp', url: 'blog-valutazione-casa-padova-guida-2026' },
     'spese condominiali acquisto padova 2026': { img: 'img/blog/blog-spese-condominiali-acquisto-padova-2026-hero.webp', url: 'blog-spese-condominiali-acquisto-padova-2026' },
     'proposta acquisto negoziazione padova 2026': { img: 'img/blog/blog-proposta-acquisto-negoziazione-padova-2026-hero.webp', url: 'blog-proposta-acquisto-negoziazione-padova-2026' },
     'canone concordato padova guida 2026': { img: 'img/blog/blog-canone-concordato-padova-guida-2026-hero.webp', url: 'blog-canone-concordato-padova-guida-2026' },
@@ -931,6 +932,13 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    {
+      "titolo": "Valutazione immobile Padova 2026: quanto vale casa",
+      "categoria": "Guida alla vendita",
+      "data": "2026-08-29",
+      "immagine_copertina": "img/blog/blog-valutazione-casa-padova-guida-2026-hero.webp",
+      "url_statico": "blog-valutazione-casa-padova-guida-2026"
+    },
     {
       "titolo": "Spese condominiali acquisto Padova 2026",
       "categoria": "Acquisto casa",
