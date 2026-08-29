@@ -180,6 +180,136 @@
       "cluster": "limena-gsc-local",
       "gsc_signal": "immobiliare righetto 71 impr",
       "different_from": "blog-righetto-storia-territorio-acquisizioni-2026"
+    },
+    {
+      "id": "eq-venerdi-001",
+      "status": "published",
+      "priority": 0,
+      "target_week": "2026-08-29",
+      "published_date": "2026-08-29",
+      "slug": "blog-canone-concordato-padova-guida-2026",
+      "kw_primaria": "canone concordato padova",
+      "intent": "locazione-normativa",
+      "title": "Canone concordato Padova 2026: fasce, fiscalità e percorso pratico",
+      "cluster": "locazioni-normativa",
+      "editorial_type": "trend",
+      "monitoring_area": "normativa",
+      "different_from": "blog-contratto-affitto-padova",
+      "research_refs": [
+        "https://www.mef.gov.it/focus/Accordi-territoriali-per-la-locazione",
+        "https://www.agenziaentrate.gov.it/portale/schede/contratti-di-locazione/registro-contratti-di-locazione"
+      ],
+      "hype_sources_read": [
+        "https://www.gazzettaufficiale.it",
+        "https://www.agenziaentrate.gov.it/portale/schede/fabbricatiterreni/osservatorio-del-mercato-immobiliare",
+        "https://www.fimaaveneto.it"
+      ],
+      "gap_analysis": "Contratto affitto generico esiste; manca guida 2026 su fasce concordato Padova e cedolare 10% aggiornata.",
+      "value_add": "Percorso operativo Padova/Limena con distinzione fatto/dichiarazione/analisi e link servizio locazioni."
+    },
+    {
+      "id": "eq-venerdi-002",
+      "status": "published",
+      "priority": 1,
+      "target_week": "2026-08-29",
+      "published_date": "2026-08-29",
+      "slug": "blog-gergo-immobiliare-padova-spiegato-2026",
+      "kw_primaria": "gergo immobiliare padova",
+      "intent": "informazione-evergreen",
+      "title": "Gergo immobiliare Padova spiegato: glossario pratico 2026",
+      "cluster": "guide-base",
+      "editorial_type": "evergreen",
+      "monitoring_area": "mercato",
+      "different_from": "blog-5-domande-appuntamento-agenzia-padova-2026",
+      "research_refs": [
+        "https://www.agenziaentrate.gov.it/portale/schede/fabbricatiterreni/visure-catastali-e-planimetrie",
+        "https://notaionline.it/guida/visura-catastale-cosa-serve/"
+      ],
+      "hype_sources_read": [
+        "https://www.bancaditalia.it/pubblicazioni/indagine-fam-imprese/index.html",
+        "https://www.agenziaentrate.gov.it/portale/schede/fabbricatiterreni/omi/banche-dati/quotazioni-immobiliari",
+        "https://www.istat.it/it/archivio/prezzi+immobili"
+      ],
+      "gap_analysis": "Domande in visita ripetute su visura, rogito, TAEG — nessun glossario unico padovano evergreen.",
+      "value_add": "Glossario tre famiglie termini con angolo Padova/Veneto e cross-link mutuo-acquisto."
+    },
+    {
+      "id": "eq-venerdi-003",
+      "status": "published",
+      "priority": 2,
+      "target_week": "2026-08-29",
+      "published_date": "2026-08-29",
+      "slug": "blog-tassi-euribor-mutui-padova-agosto-2026",
+      "kw_primaria": "tassi mutuo padova euribor",
+      "intent": "finanziamento",
+      "title": "Tassi Euribor e mutui a Padova: guida agosto 2026",
+      "cluster": "mutuo-finanza",
+      "editorial_type": "trend",
+      "monitoring_area": "mercato",
+      "different_from": "blog-tassi-mutui-minimi-approfittarne-padova-2026",
+      "research_refs": [
+        "https://www.bancaditalia.it/pubblicazioni/indagine-fam-imprese/index.html",
+        "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html"
+      ],
+      "hype_sources_read": [
+        "https://www.crif.com/it/barometro-mutui/",
+        "https://www.gazzettaufficiale.it",
+        "https://www.agenziaentrate.gov.it/portale/schede/fabbricatiterreni/osservatorio-del-mercato-immobiliare"
+      ],
+      "gap_analysis": "Articolo tassi minimi copre fase BCE; gap su Euribor variabile e spread agosto 2026 Padova.",
+      "value_add": "Spiegazione Euribor+spread senza tassi inventati, confronto fisso/variabile e link servizio mutuo."
+    },
+    {
+      "id": "eq-venerdi-004",
+      "status": "published",
+      "priority": 3,
+      "target_week": "2026-08-29",
+      "published_date": "2026-08-29",
+      "slug": "blog-registro-contratti-affitto-padova-2026",
+      "kw_primaria": "registro contratti affitto padova",
+      "intent": "locazione-normativa",
+      "title": "Registro contratti affitto Padova: obblighi ADE 2026",
+      "cluster": "locazioni-normativa",
+      "editorial_type": "evergreen",
+      "monitoring_area": "normativa",
+      "different_from": "blog-appartamento-affitto-limena-contratto-2026",
+      "research_refs": [
+        "https://www.agenziaentrate.gov.it/portale/schede/contratti-di-locazione/registro-contratti-di-locazione",
+        "https://www.gazzettaufficiale.it"
+      ],
+      "hype_sources_read": [
+        "https://www.agenziaentrate.gov.it/portale/schede/fabbricatiterreni/osservatorio-del-mercato-immobiliare",
+        "https://www.mef.gov.it/focus/Accordi-territoriali-per-la-locazione",
+        "https://www.fimaaveneto.it"
+      ],
+      "gap_analysis": "Limena contratto tratta caparra; manca pillar registro ADE 30 giorni dedicato Padova.",
+      "value_add": "Flusso registrazione, imposte e detrazioni con tipologie contratto e pratica Limena."
+    },
+    {
+      "id": "eq-venerdi-005",
+      "status": "published",
+      "priority": 4,
+      "target_week": "2026-08-29",
+      "published_date": "2026-08-29",
+      "slug": "blog-visura-catastale-acquisto-casa-padova-2026",
+      "kw_primaria": "visura catastale acquisto casa padova",
+      "intent": "acquisto-documenti",
+      "title": "Visura catastale nell'acquisto casa a Padova: guida 2026",
+      "cluster": "acquisto-documenti",
+      "editorial_type": "evergreen",
+      "monitoring_area": "normativa",
+      "different_from": "blog-checklist-verifiche-prima-compromesso-padova-2026",
+      "research_refs": [
+        "https://www.agenziaentrate.gov.it/portale/schede/fabbricatiterreni/visure-catastali-e-planimetrie",
+        "https://notaionline.it/guida/visura-catastale-cosa-serve/"
+      ],
+      "hype_sources_read": [
+        "https://www.agenziaentrate.gov.it/portale/schede/fabbricatiterreni/omi/banche-dati/quotazioni-immobiliari",
+        "https://www.istat.it/it/archivio/prezzi+immobili",
+        "https://www.bancaditalia.it/pubblicazioni/indagine-fam-imprese/index.html"
+      ],
+      "gap_analysis": "Checklist compromesso cita visura; serve guida dedicata campi visura e planimetria Padova.",
+      "value_add": "Lettura visura per acquirente padovano, checklist pre-caparra e collegamento mutuo-perizia."
     }
   ]
 }
