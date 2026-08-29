@@ -1,0 +1,90 @@
+{
+  "generated": "2026-08-29",
+  "date_display": "29 agosto 2026",
+  "files": [
+    {
+      "filename": "blog-spese-condominiali-acquisto-padova-2026.html",
+      "slug": "blog-spese-condominiali-acquisto-padova-2026",
+      "wordCount_body": 2520
+    },
+    {
+      "filename": "blog-proposta-acquisto-negoziazione-padova-2026.html",
+      "slug": "blog-proposta-acquisto-negoziazione-padova-2026",
+      "wordCount_body": 2526
+    }
+  ],
+  "blog_html_articoliStatici": [
+    {
+      "titolo": "Spese condominiali acquisto Padova 2026",
+      "categoria": "Acquisto casa",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-spese-condominiali-acquisto-padova-2026-hero.webp",
+      "url_statico": "blog-spese-condominiali-acquisto-padova-2026",
+      "tempo": 14,
+      "autore": "Gino Capon",
+      "contenuto": "Spese condominiali acquisto Padova: millesimi, delibere, saldo venditore.",
+      "evidenza": false
+    },
+    {
+      "titolo": "Proposta acquisto Padova: Negoziazione 2026",
+      "categoria": "Acquisto casa",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-proposta-acquisto-negoziazione-padova-2026-hero.webp",
+      "url_statico": "blog-proposta-acquisto-negoziazione-padova-2026",
+      "tempo": 13,
+      "autore": "Gino Capon",
+      "contenuto": "Proposta d'acquisto Padova: negoziazione, mutuo, caparra confirmatoria.",
+      "evidenza": false
+    }
+  ],
+  "admin_blogSeedArticles": [
+    {
+      "titolo": "Spese condominiali acquisto Padova 2026",
+      "categoria": "Acquisto casa",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-spese-condominiali-acquisto-padova-2026-hero.webp",
+      "url_statico": "blog-spese-condominiali-acquisto-padova-2026",
+      "tempo": 14,
+      "autore": "Gino Capon",
+      "contenuto": "<p>Guida spese condominiali in fase acquisto — due diligence Codice Civile Padova.</p>",
+      "evidenza": false,
+      "emoji": "🏢",
+      "data_pubblicazione": "2026-08-29"
+    },
+    {
+      "titolo": "Proposta acquisto Padova: Negoziazione 2026",
+      "categoria": "Acquisto casa",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-proposta-acquisto-negoziazione-padova-2026-hero.webp",
+      "url_statico": "blog-proposta-acquisto-negoziazione-padova-2026",
+      "tempo": 13,
+      "autore": "Gino Capon",
+      "contenuto": "<p>Guida proposta d'acquisto e negoziazione immobiliare Padova 2026.</p>",
+      "evidenza": false,
+      "emoji": "📝",
+      "data_pubblicazione": "2026-08-29"
+    }
+  ],
+  "homepage_js_articoliStatici": [
+    {
+      "titolo": "Spese condominiali acquisto Padova 2026",
+      "categoria": "Acquisto casa",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-spese-condominiali-acquisto-padova-2026-hero.webp",
+      "url_statico": "blog-spese-condominiali-acquisto-padova-2026"
+    },
+    {
+      "titolo": "Proposta acquisto Padova: Negoziazione 2026",
+      "categoria": "Acquisto casa",
+      "data": "2026-08-29",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-proposta-acquisto-negoziazione-padova-2026-hero.webp",
+      "url_statico": "blog-proposta-acquisto-negoziazione-padova-2026"
+    }
+  ]
+}

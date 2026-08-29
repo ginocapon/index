@@ -1,6 +1,6 @@
 {
   "updated": "2026-08-29",
-  "policy": "Max 1 blog AGGIUNGERE/settimana. Comando editoriale permanente: TEST-SKILL/skill-editoriale-visivo.md (ricerca §8-17 + visivo §1-7 + §16-TER continuità sostanziale). Gate: audit_editorial_research.py + audit_editorial_continuity.py + audit_blog_visuals.py. Memoria: data/editorial-memory.json. Anti-doppioni BLOCCANTE.",
+  "policy": "Max 1 blog AGGIUNGERE/settimana. Comando editoriale: skill-editoriale-visivo.md (§8-17 ricerca + §1-7 visivo + §16-TER continuità + §18 pubblicabilità). Gate: audit_editorial_research + audit_editorial_continuity + audit_blog_visuals + audit_blog_publishability. Memoria: editorial-memory.json.",
   "workflow_skill": "TEST-SKILL/skill-editorial-queue.md",
   "editorial_command": "TEST-SKILL/skill-editoriale-visivo.md",
   "discovery": {
@@ -325,6 +325,64 @@
       "substantive_area": "NORMATIVA_FISCALE",
       "main_question": "Come leggere la visura catastale prima di acquistare casa a Padova?",
       "reader_novelty": "Guida dedicata ai campi visura e planimetria, oltre alla checklist compromesso generica."
+    },
+    {
+      "id": "eq-ago29-001",
+      "status": "published",
+      "priority": 5,
+      "target_week": "2026-08-29",
+      "published_date": "2026-08-29",
+      "slug": "blog-spese-condominiali-acquisto-padova-2026",
+      "kw_primaria": "spese condominiali acquisto casa padova",
+      "intent": "acquisto-due-diligence",
+      "title": "Spese condominiali nell'acquisto casa a Padova: guida due diligence 2026",
+      "cluster": "acquisto-primo-casa",
+      "substantive_area": "ACQUISTO_PRIMO_CASA",
+      "main_question": "Quali spese condominiali verificare prima di comprare casa a Padova?",
+      "reader_novelty": "Pillar dedicato alla due diligence condominio in acquisto — distinto dalla gestione spese post-rogito.",
+      "editorial_type": "evergreen",
+      "monitoring_area": "normativa",
+      "different_from": "blog-gestione-spese-casa-padova-2026",
+      "research_refs": [
+        "https://www.normattiva.it/dynamic/resolve/19420619",
+        "https://www.agenziaentrate.gov.it/portale/schede/fabbricatiterreni/omi/banche-dati/quotazioni-immobiliari"
+      ],
+      "hype_sources_read": [
+        "https://www.gazzettaufficiale.it",
+        "https://www.agenziaentrate.gov.it/portale/schede/fabbricatiterreni/osservatorio-del-mercato-immobiliare",
+        "https://www.istat.it/it/archivio/prezzi+immobili"
+      ],
+      "gap_analysis": "Gestione spese casa copre possesso; manca guida condominio in fase acquisto con art. 1117-1139.",
+      "value_add": "Checklist documenti condominiali, millesimi, delibere straordinarie e integrazione budget mutuo Padova/Limena."
+    },
+    {
+      "id": "eq-ago29-002",
+      "status": "published",
+      "priority": 6,
+      "target_week": "2026-08-29",
+      "published_date": "2026-08-29",
+      "slug": "blog-proposta-acquisto-negoziazione-padova-2026",
+      "kw_primaria": "proposta acquisto casa padova",
+      "intent": "acquisto-negoziazione",
+      "title": "Proposta d'acquisto a Padova: negoziazione e caparra 2026",
+      "cluster": "vendita-processo",
+      "substantive_area": "VENDITA_PROCESSO",
+      "main_question": "Come presentare una proposta d'acquisto efficace a Padova nel 2026?",
+      "reader_novelty": "Percorso negoziazione completo acquirente — oltre al singolo istituto caparra confirmatoria.",
+      "editorial_type": "evergreen",
+      "monitoring_area": "mercato",
+      "different_from": "blog-caparra-confirmatoria-padova",
+      "research_refs": [
+        "https://www.normattiva.it/dynamic/resolve/19420619",
+        "https://www.agenziaentrate.gov.it/portale/schede/fabbricatiterreni/omi/banche-dati/quotazioni-immobiliari"
+      ],
+      "hype_sources_read": [
+        "https://www.bancaditalia.it/pubblicazioni/indagine-fam-imprese/index.html",
+        "https://www.agenziaentrate.gov.it/portale/schede/fabbricatiterreni/osservatorio-del-mercato-immobiliare",
+        "https://www.istat.it/it/archivio/prezzi+immobili"
+      ],
+      "gap_analysis": "Caparra e percorso vendita esistono; gap su proposta scritta, termini e negoziazione competitiva Padova.",
+      "value_add": "Elementi proposta, condizione mutuo, mercato competitivo e collegamento caparra-compromesso senza percentuali inventate."
     }
   ]
 }

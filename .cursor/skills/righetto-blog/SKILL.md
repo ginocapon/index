@@ -42,6 +42,8 @@ description: >-
 - [ ] `substantive_area`, `main_question`, `reader_novelty` in coda; `update_reason` se area saturata
 - [ ] `python scripts/audit_editorial_research.py --id eq-XXX` → OK
 - [ ] `python scripts/audit_editorial_continuity.py --id eq-XXX` → OK
+- [ ] Nessun residuo template: no «Further reading», «Note operative», «Approfondimento N»
+- [ ] `python scripts/audit_blog_publishability.py --file blog-{slug}.html` → OK
 
 ## Checklist articolo (visivo §7 + contenuto)
 
