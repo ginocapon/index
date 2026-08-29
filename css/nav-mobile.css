@@ -127,19 +127,37 @@ header .nav-login-btn:hover{color:var(--blu,#2C4A6E)!important;border-color:var(
   .hi .h-cta,
   .hi > .h-btn,
   .hi > .nav-login-btn,
-  .hi > .gestionale-link {
+  .hi > .gestionale-link,
+  body:not(.homepage) header .hi nav,
+  body:not(.homepage) header nav,
+  body:not(.homepage) header .hnav,
+  body:not(.homepage) header .h-cta,
+  body:not(.homepage) header .hi .h-cta,
+  body:not(.homepage) header .h-btn,
+  body:not(.homepage) header .hi > .h-btn {
     display: none !important;
   }
   .header-inner .hnav,
   .header-inner .h-cta {
     display: none !important;
   }
-  .nav-burger {
+  .nav-burger,
+  body:not(.homepage) header .nav-burger {
     display: flex !important;
   }
   .hi,
-  .header-inner {
+  .header-inner,
+  body:not(.homepage) header .hi,
+  body:not(.homepage) header .header-inner {
     height: 64px !important;
+    justify-content: space-between !important;
+  }
+  body:not(.homepage) header .logo,
+  body:not(.homepage) header .hlogo {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .nav-mobile {
     top: 64px;
@@ -194,6 +212,12 @@ body:not(.homepage) header .hlogo span {
   font-weight: 700 !important;
 }
 
+body:not(.homepage) header .nav-burger span {
+  background: var(--testo, #152435) !important;
+}
+
+/* Link nav e CTA header — solo desktop (sotto 1024px = solo logo + hamburger) */
+@media (min-width: 1025px) {
 body:not(.homepage) header nav,
 body:not(.homepage) header .hnav {
   display: flex !important;
@@ -289,7 +313,4 @@ body:not(.homepage) header .h-btn:active {
     0 3px 0 #b8431a,
     0 5px 14px rgba(0, 0, 0, 0.22) !important;
 }
-
-body:not(.homepage) header .nav-burger span {
-  background: var(--testo, #152435) !important;
 }
