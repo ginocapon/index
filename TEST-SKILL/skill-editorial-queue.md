@@ -32,11 +32,12 @@
 9. python scripts/audit_blog_visuals.py --file blog-{slug}.html
 10. Registra: blog.html, homepage.js, admin, sitemap, llms
 11. validate-page.js + build_skimm.py + audit-foto-ai.mjs
+11b. audit_blog_publishability.py --file blog-{slug}.html → OK (§18)
 12. Aggiorna editorial-queue (published) + gsc-keywords + skill-memoria §Log
 ```
 
 **Gate pre-scrittura:** `audit_editorial_research.py` + `audit_editorial_continuity.py` (§16-TER)
-**Gate pre-chiusura:** `audit_blog_visuals.py` + §17 skill-editoriale-visivo
+**Gate pre-chiusura:** `audit_blog_visuals.py` + `audit_blog_publishability.py` (§18) + §17 skill-editoriale-visivo
 **Dopo publish:** `build_editorial_memory.py` (aggiorna memoria sostanziale)
 
 ---

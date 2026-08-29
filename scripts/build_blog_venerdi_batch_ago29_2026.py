@@ -427,16 +427,23 @@ def svg_visura_percorso() -> str:
 
 
 def _exp(prefix: str, n: int, templates: list[str]) -> list[str]:
-    """Genera pool espansione con prefisso tematico + template variati."""
+    """Genera pool espansione tematico — §18: no «approfondimento N» filler."""
     base = [t.format(p=prefix) for t in templates]
+    if len(base) >= n:
+        return base[:n]
+    # Ripeti template con angoli diversi, mai numerazione «approfondimento N»
     extra: list[str] = []
-    idx = 1
+    variants = [
+        "{p}: incrociare OMI semestrale ADE con comparabili di zona e stato manutentivo dell'unità.",
+        "{p}: distinguere sempre fatto normativo, dichiarazione dell'annuncio e analisi di mercato locale.",
+        "{p}: per Limena e cintura padovana verificare microzone OMI diverse dal centro storico.",
+        "{p}: conservare ricevute registrazione ADE e documenti fiscali per detrazioni e contenziosi.",
+        "{p}: prima della caparra chiedere visura, planimetria conforme e APE aggiornato.",
+    ]
+    vi = 0
     while len(base) + len(extra) < n:
-        extra.append(
-            f"{prefix}: approfondimento {idx} — incrociare fonti ADE, OMI o ISTAT; "
-            f"distinguere fatto normativo, dichiarazione annuncio e analisi mercato Padova/Veneto."
-        )
-        idx += 1
+        extra.append(variants[vi % len(variants)].format(p=prefix))
+        vi += 1
     return base + extra
 
 

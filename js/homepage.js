@@ -788,6 +788,8 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'spese condominiali acquisto padova 2026': { img: 'img/blog/blog-spese-condominiali-acquisto-padova-2026-hero.webp', url: 'blog-spese-condominiali-acquisto-padova-2026' },
+    'proposta acquisto negoziazione padova 2026': { img: 'img/blog/blog-proposta-acquisto-negoziazione-padova-2026-hero.webp', url: 'blog-proposta-acquisto-negoziazione-padova-2026' },
     'canone concordato padova guida 2026': { img: 'img/blog/blog-canone-concordato-padova-guida-2026-hero.webp', url: 'blog-canone-concordato-padova-guida-2026' },
     'gergo immobiliare padova spiegato 2026': { img: 'img/blog/blog-gergo-immobiliare-padova-spiegato-2026-hero.webp', url: 'blog-gergo-immobiliare-padova-spiegato-2026' },
     'tassi euribor mutui padova agosto 2026': { img: 'img/blog/blog-tassi-euribor-mutui-padova-agosto-2026-hero.webp', url: 'blog-tassi-euribor-mutui-padova-agosto-2026' },
@@ -929,6 +931,20 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    {
+      "titolo": "Spese condominiali acquisto Padova 2026",
+      "categoria": "Acquisto casa",
+      "data": "2026-08-29",
+      "immagine_copertina": "img/blog/blog-spese-condominiali-acquisto-padova-2026-hero.webp",
+      "url_statico": "blog-spese-condominiali-acquisto-padova-2026"
+    },
+    {
+      "titolo": "Proposta acquisto Padova: Negoziazione 2026",
+      "categoria": "Acquisto casa",
+      "data": "2026-08-29",
+      "immagine_copertina": "img/blog/blog-proposta-acquisto-negoziazione-padova-2026-hero.webp",
+      "url_statico": "blog-proposta-acquisto-negoziazione-padova-2026"
+    },
     {
       "titolo": "Canone concordato Padova: Guida 2026",
       "categoria": "Locazioni Padova",

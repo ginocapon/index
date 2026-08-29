@@ -307,6 +307,12 @@ Prima di approvare pubblicazione:
 - [ ] `validate-page.js` · anti-doppioni · 2500+ parole utili
 - [ ] Nessun conflitto con `skill-efficienza-sito.md`
 
+**Pubblicabilità (§18 — BLOCCANTE)**
+
+- [ ] Nessun «Further reading», «Note operative», «Approfondimento N», placeholder, prompt visibile
+- [ ] `python scripts/audit_blog_publishability.py --file blog-{slug}.html` → OK
+- [ ] Rilettura visitatore: solo contenuto editoriale naturale
+
 ---
 
 ## Obiettivo editoriale finale
@@ -466,6 +472,58 @@ In assenza di nuova ragione concreta → **altro argomento** dalla rotazione.
 
 ---
 
+# PARTE D — PUBBLICABILITÀ E BONIFICA RESIDUI AI (§18)
+
+> **Regola assoluta:** nessuna istruzione interna, prompt, nota di lavorazione o blocco template deve essere visibile al lettore.
+
+## Contenuto pubblico vs interno
+
+| Pubblicabile | Vietato nel HTML visibile |
+|--------------|---------------------------|
+| Testo, titoli, immagini, grafiche, fonti | Prompt, istruzioni AI, TODO |
+| FAQ, CTA, link interni utili | Note operative interne |
+| Approfondimenti con titolo e funzione chiara | «Further reading» automatico |
+| Conclusioni editoriali | «Approfondimento 1, 2, 3…» filler |
+| | Placeholder `[DATO]`, `[ZONA]`, `[FONTE]` |
+| | Checklist workflow, commenti di sistema |
+
+## Espressioni vietate (se generate automaticamente)
+
+`Further reading` · `Note operative` · `Note interne` · `Istruzioni` · `Prompt` · `TODO` · `Da verificare` · `Da completare` · `Approfondimento N` · `Related content` · `Read more` · riferimenti al workflow AI.
+
+**Eccezione:** «Note operative» solo se il contenuto è una **guida pratica intenzionale** per il lettore (non residuo template).
+
+## Controllo di pubblicabilità (pre-publish)
+
+```
+python scripts/bonify_blog_publishability.py --all
+python scripts/audit_blog_publishability.py --file blog-{slug}.html
+```
+
+Checklist visitatore:
+
+- [ ] Ogni H2/H3 ha funzione editoriale comprensibile
+- [ ] Nessuna sezione vuota o numerazione automatica
+- [ ] Nessun paragrafo ripetuto per gonfiare wordCount
+- [ ] Nessun testo che riveli prompt, template o processo AI
+- [ ] Preferire articolo più corto e pulito vs filler automatico
+
+**Domanda finale:** *«Un visitatore capirebbe tutto senza conoscere il processo interno?»*
+
+## Bonifica retroattiva archivio
+
+```
+python scripts/audit_blog_publishability.py --all --report
+```
+
+Per ogni file FAIL: articolo per articolo — conservare solo contenuto editoriale intenzionale; eliminare residui; verificare struttura; rieseguire audit.
+
+## Script batch
+
+I generatori `build_blog_*.py` **non devono** inserire H2 «Note operative» / «Further reading» né paragrafi «approfondimento N» identici. Espansione wordCount: paragrafi tematici integrati nelle sezioni H2 esistenti.
+
+---
+
 ## Appendice A — Markup visivo
 
 ```html
@@ -520,9 +578,9 @@ Dopo ogni publish: `python scripts/build_editorial_memory.py`.
 - `TEST-SKILL/skill-editorial-queue.md`
 - `TEST-SKILL/skill-content.md` §2.1, §2.1e
 - `data/editorial-queue.json` · `data/editorial-memory.json` · `data/gsc-keywords-priority.json`
-- `scripts/audit_blog_visuals.py` · `scripts/audit_editorial_research.py` · `scripts/audit_editorial_continuity.py` · `scripts/build_editorial_memory.py`
+- `scripts/audit_blog_visuals.py` · `scripts/audit_editorial_research.py` · `scripts/audit_editorial_continuity.py` · `scripts/build_editorial_memory.py` · `scripts/audit_blog_publishability.py` · `scripts/bonify_blog_publishability.py`
 - `.cursor/rules/righetto-blog-publish.mdc`
 
 ---
 
-*Aggiornato: 29 agosto 2026 — comando editoriale fisso completo (visivo + ricerca strategica + §16-TER continuità sostanziale).*
+*Aggiornato: 29 agosto 2026 — comando editoriale fisso (visivo + ricerca + §16-TER + §18 pubblicabilità).*

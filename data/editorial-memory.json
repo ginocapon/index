@@ -24,13 +24,36 @@
   },
   "saturation_counts_last_8": {
     "NORMATIVA_FISCALE": 3,
+    "ACQUISTO_PRIMO_CASA": 1,
+    "VENDITA_PROCESSO": 1,
     "GUIDA_LEXICO": 1,
     "MUTUI_TASSI": 1,
-    "AFFITTI_CANONI": 1,
-    "TREND_ABITATIVO": 1,
-    "ACQUISTO_PRIMO_CASA": 1
+    "AFFITTI_CANONI": 1
   },
   "recent_articles": [
+    {
+      "slug": "blog-spese-condominiali-acquisto-padova-2026",
+      "title": "Spese condominiali acquisto Padova 2026",
+      "published_date": "2026-08-29",
+      "substantive_area": "ACQUISTO_PRIMO_CASA",
+      "secondary_areas": [],
+      "main_question": "Quali spese condominiali verificare prima di comprare casa a Padova?",
+      "geo": "Padova/Veneto",
+      "editorial_type": "evergreen"
+    },
+    {
+      "slug": "blog-proposta-acquisto-negoziazione-padova-2026",
+      "title": "Proposta acquisto Padova: Negoziazione 2026",
+      "published_date": "2026-08-29",
+      "substantive_area": "VENDITA_PROCESSO",
+      "secondary_areas": [
+        "MUTUI_TASSI",
+        "NORMATIVA_FISCALE"
+      ],
+      "main_question": "Come presentare una proposta d'acquisto efficace a Padova nel 2026?",
+      "geo": "Padova/Veneto",
+      "editorial_type": "evergreen"
+    },
     {
       "slug": "blog-canone-concordato-padova-guida-2026",
       "title": "Canone concordato Padova: Guida 2026",
@@ -240,28 +263,6 @@
       "substantive_area": "VALORE_MERCATO",
       "secondary_areas": [],
       "main_question": "Quanto vale / come si muove il mercato?",
-      "geo": "Padova/Veneto",
-      "editorial_type": ""
-    },
-    {
-      "slug": "blog-student-rentals-padova-guide-2026",
-      "title": "Student rentals Padua 2026 — English guide",
-      "published_date": "2026-07-28",
-      "substantive_area": "AFFITTI_CANONI",
-      "secondary_areas": [
-        "TREND_ABITATIVO"
-      ],
-      "main_question": "Quanto costa affittare e come funzionano i canoni?",
-      "geo": "Padova/Veneto",
-      "editorial_type": ""
-    },
-    {
-      "slug": "blog-rental-contract-padova-guide-2026",
-      "title": "Rental contract Padua 2026 — English guide",
-      "published_date": "2026-07-28",
-      "substantive_area": "AFFITTI_CANONI",
-      "secondary_areas": [],
-      "main_question": "Quanto costa affittare e come funzionano i canoni?",
       "geo": "Padova/Veneto",
       "editorial_type": ""
     }

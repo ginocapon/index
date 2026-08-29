@@ -962,14 +962,10 @@ def expand_body(
             pools.append(sentence)
 
     combined = main
-    expansion_started = False
     idx = 0
 
     while wc(combined) < MIN_BODY_WORDS and idx < len(pools):
-        if not expansion_started:
-            title = "Further reading" if lang == "en" else "Note operative"
-            combined += f'\n<h2 id="note-operative">{title}</h2>\n'
-            expansion_started = True
+        # §18: niente H2 «Note operative» / «Further reading» — paragrafi integrati nel corpo
         combined += f"<p>{pools[idx]}</p>\n"
         idx += 1
 
