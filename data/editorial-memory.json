@@ -24,13 +24,23 @@
   },
   "saturation_counts_last_8": {
     "NORMATIVA_FISCALE": 3,
+    "VENDITA_VALUTAZIONE": 1,
     "ACQUISTO_PRIMO_CASA": 1,
     "VENDITA_PROCESSO": 1,
     "GUIDA_LEXICO": 1,
-    "MUTUI_TASSI": 1,
-    "AFFITTI_CANONI": 1
+    "MUTUI_TASSI": 1
   },
   "recent_articles": [
+    {
+      "slug": "blog-valutazione-casa-padova-guida-2026",
+      "title": "Valutazione immobile Padova 2026: quanto vale casa",
+      "published_date": "2026-08-29",
+      "substantive_area": "VENDITA_VALUTAZIONE",
+      "secondary_areas": [],
+      "main_question": "Come si calcola il valore di un immobile a Padova nel 2026?",
+      "geo": "Padova/Veneto",
+      "editorial_type": "evergreen"
+    },
     {
       "slug": "blog-spese-condominiali-acquisto-padova-2026",
       "title": "Spese condominiali acquisto Padova 2026",
@@ -253,16 +263,6 @@
         "LOCALE_LIMENA"
       ],
       "main_question": "Quanto costa affittare e come funzionano i canoni?",
-      "geo": "Padova/Veneto",
-      "editorial_type": ""
-    },
-    {
-      "slug": "blog-outlook-living-italia-2026-padova",
-      "title": "Outlook Living Italia 2026: BTR, PBSA e Padova",
-      "published_date": "2026-07-28",
-      "substantive_area": "VALORE_MERCATO",
-      "secondary_areas": [],
-      "main_question": "Quanto vale / come si muove il mercato?",
       "geo": "Padova/Veneto",
       "editorial_type": ""
     }
