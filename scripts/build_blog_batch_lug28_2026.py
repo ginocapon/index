@@ -938,90 +938,13 @@ _FALLBACK_EN = [
 
 def expand_body(
     body_fn: Callable[[], str],
-    sections: list[str],
+    sections: list[str] | None = None,
     extra_pool: list[str] | None = None,
     *,
     lang: str = "it",
 ) -> str:
-    """Raggiunge MIN_BODY_WORDS con paragrafi tematici prima di «Ultimo aggiornamento» — no blocchi numerati."""
-    base = body_fn()
-    foot_match = _UPDATE_FOOT_RE.search(base)
-    if foot_match:
-        main = base[: foot_match.start()].rstrip()
-        footer = base[foot_match.start() :]
-    else:
-        main = base.rstrip()
-        footer = ""
-
-    pools: list[str] = []
-    for src in (sections, extra_pool or []):
-        for sentence in src:
-            key = sentence[:80]
-            if key in main or any(key in p for p in pools):
-                continue
-            pools.append(sentence)
-
-    combined = main
-    idx = 0
-
-    while wc(combined) < MIN_BODY_WORDS and idx < len(pools):
-        # §18: niente H2 «Note operative» / «Further reading» — paragrafi integrati nel corpo
-        combined += f"<p>{pools[idx]}</p>\n"
-        idx += 1
-
-    if wc(combined) < MIN_BODY_WORDS and CLAIM_FOOT not in combined:
-        combined += f"\n<p>{CLAIM_FOOT}</p>\n"
-
-    anchor = "#richiedi-consulenza"
-    if wc(combined) < MIN_BODY_WORDS:
-        if lang == "en":
-            combined += (
-                f'\n<div class="cta-banner"><div><h3>Request a consultation</h3>'
-                f"<p>Via Roma 96, Limena — Padua and province. Tel. 049.8843484.</p></div>"
-                f'<a href="{anchor}" class="cta-banner-btn">Contact us</a></div>\n'
-            )
-        else:
-            combined += (
-                f'\n<div class="cta-banner"><div><h3>Richiedi una consulenza gratuita</h3>'
-                f"<p>Via Roma 96, Limena — Padova e provincia. Tel. 049.8843484.</p></div>"
-                f'<a href="{anchor}" class="cta-banner-btn">Compila il form</a></div>\n'
-            )
-
-    if wc(combined) < MIN_BODY_WORDS:
-        closing = (
-            "Per approfondimenti sul vostro obiettivo immobiliare nel Padovano, "
-            f'consultate <a href="{OMI_URL}">OMI ADE</a>, l\''
-            f'<a href="{ADE_OSSERVATORIO}">Osservatorio ADE</a> e contattate Righetto al '
-            f'<a href="tel:+390498843484">049.8843484</a> o tramite il '
-            f'<a href="{anchor}">form consulenza</a> in fondo pagina. Senza impegno iniziale.'
-        )
-        if lang == "en":
-            closing = (
-                "For tailored advice on your property goal in the Padua area, "
-                f'check <a href="{OMI_URL}">ADE OMI</a> and contact Righetto at '
-                f'<a href="tel:+390498843484">049 8843484</a> or via the '
-                f'<a href="{anchor}">contact form</a> below.'
-            )
-        combined += f"\n<p>{closing}</p>\n"
-
-    for pad in (_PAD_EN if lang == "en" else _PAD_IT):
-        if wc(combined) >= MIN_BODY_WORDS:
-            break
-        combined += f"<p>{pad}</p>\n"
-
-    fallback = _FALLBACK_EN if lang == "en" else _FALLBACK_IT
-    fidx = 0
-    while wc(combined) < MIN_BODY_WORDS and fidx < len(fallback):
-        combined += f"<p>{fallback[fidx]}</p>\n"
-        fidx += 1
-
-    if wc(combined) < MIN_BODY_WORDS - 10:
-        raise ValueError(
-            f"Pool espansione insufficiente ({wc(combined)} parole, servono {MIN_BODY_WORDS}). "
-            "Aggiungere contenuto unico al corpo articolo."
-        )
-
-    return combined + "\n" + footer
+    """Restituisce solo il corpo reale — niente filler prefix/pad/fallback (§8.1c, §18)."""
+    return body_fn()
 
 
 def _pool(sentences: list[str]) -> list[str]:
