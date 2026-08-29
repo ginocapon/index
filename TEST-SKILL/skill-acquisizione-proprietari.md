@@ -95,6 +95,8 @@ Pattern: **risposta utile → competenza → comprensione problema → approfond
 
 ## Homepage e pagine principali
 
+> **Prompt Chirurgo (ago 2026):** `skill-prompt-chirurgo-homepage-editoriale.md` — hero owner-first, doppio percorso, anti-filler blog.
+
 - **Dual audience:** ricerca immobili **+** percorso «Hai un immobile?»
 - CTA owner hero → **`landing-valutazione`** (non solo contenuto educativo)
 - Hub → **`proprietario-immobile`**

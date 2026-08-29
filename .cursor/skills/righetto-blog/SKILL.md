@@ -55,7 +55,7 @@ description: >-
 - [ ] `audit_blog_visuals.py --file blog-{slug}.html` → OK
 - [ ] `audit_editorial_visual_variety.py --file blog-{slug}.html` → OK (§16-QUATER)
 - [ ] ≥3 foto IA pertinenti al paragrafo + 1 hero + ≥2 SVG + ≥2 tabelle
-- [ ] `kw_primaria` univoca · 2500+ parole · fonti verificate
+- [ ] **Lunghezza:** target ~2500 parole (±20%) — **qualità prima del conteggio**; vietato `expand_body` filler (`skill-prompt-chirurgo-homepage-editoriale.md`)
 - [ ] Distinzione fatto / dichiarazione / analisi / previsione nel testo
 - [ ] Valore aggiunto Padova/Veneto — non copia concorrenti
 - [ ] FOTO AI: `build-ai-image-manifest.mjs` + `audit-foto-ai.mjs` OK
