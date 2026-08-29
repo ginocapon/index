@@ -51,7 +51,7 @@
       "cursor_skills": ["righetto-blog"],
       "data": ["data/editorial-queue.json", "data/gsc-keywords-priority.json"],
       "token_stimati": "~2.200",
-      "note": "Comando permanente skill-editoriale-visivo.md (ricerca §8-17 + visivo §1-7). Coda editorial-queue.json. Gate: audit_editorial_research.py + audit_blog_visuals.py. §8.1a anti-doppioni. SOSTENERE GSC prima di AGGIUNGERE."
+      "note": "Comando permanente skill-editoriale-visivo.md (ricerca §8-17 + visivo §1-7 + §16-TER continuità). Coda editorial-queue.json + editorial-memory.json. Gate: audit_editorial_research.py + audit_editorial_continuity.py + audit_blog_visuals.py. §8.1a anti-doppioni. SOSTENERE GSC prima di AGGIUNGERE."
     },
     "form_lead_invio_email": {
       "skills": ["skill-essentials.md", "skill-forms-leads.md", "skill-context.md"],

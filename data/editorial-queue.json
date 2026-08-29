@@ -1,6 +1,6 @@
 {
   "updated": "2026-08-29",
-  "policy": "Max 1 blog AGGIUNGERE/settimana. Comando editoriale permanente: TEST-SKILL/skill-editoriale-visivo.md (ricerca §8-17 + visivo §1-7). Gate: audit_editorial_research.py + audit_blog_visuals.py. Anti-doppioni BLOCCANTE.",
+  "policy": "Max 1 blog AGGIUNGERE/settimana. Comando editoriale permanente: TEST-SKILL/skill-editoriale-visivo.md (ricerca §8-17 + visivo §1-7 + §16-TER continuità sostanziale). Gate: audit_editorial_research.py + audit_editorial_continuity.py + audit_blog_visuals.py. Memoria: data/editorial-memory.json. Anti-doppioni BLOCCANTE.",
   "workflow_skill": "TEST-SKILL/skill-editorial-queue.md",
   "editorial_command": "TEST-SKILL/skill-editoriale-visivo.md",
   "discovery": {
@@ -205,7 +205,10 @@
         "https://www.fimaaveneto.it"
       ],
       "gap_analysis": "Contratto affitto generico esiste; manca guida 2026 su fasce concordato Padova e cedolare 10% aggiornata.",
-      "value_add": "Percorso operativo Padova/Limena con distinzione fatto/dichiarazione/analisi e link servizio locazioni."
+      "value_add": "Percorso operativo Padova/Limena con distinzione fatto/dichiarazione/analisi e link servizio locazioni.",
+      "substantive_area": "NORMATIVA_FISCALE",
+      "main_question": "Come funziona il canone concordato a Padova nel 2026 e quali vantaggi fiscali?",
+      "reader_novelty": "Guida operativa dedicata alle fasce concordato Padova 2026, non coperta dal contratto affitto generico."
     },
     {
       "id": "eq-venerdi-002",
@@ -231,7 +234,10 @@
         "https://www.istat.it/it/archivio/prezzi+immobili"
       ],
       "gap_analysis": "Domande in visita ripetute su visura, rogito, TAEG — nessun glossario unico padovano evergreen.",
-      "value_add": "Glossario tre famiglie termini con angolo Padova/Veneto e cross-link mutuo-acquisto."
+      "value_add": "Glossario tre famiglie termini con angolo Padova/Veneto e cross-link mutuo-acquisto.",
+      "substantive_area": "GUIDA_LEXICO",
+      "main_question": "Cosa significano i termini immobiliari più usati in visita e in contratto?",
+      "reader_novelty": "Glossario unico padovano evergreen: catastale, contrattuale e mutuo in un solo articolo."
     },
     {
       "id": "eq-venerdi-003",
@@ -257,7 +263,10 @@
         "https://www.agenziaentrate.gov.it/portale/schede/fabbricatiterreni/osservatorio-del-mercato-immobiliare"
       ],
       "gap_analysis": "Articolo tassi minimi copre fase BCE; gap su Euribor variabile e spread agosto 2026 Padova.",
-      "value_add": "Spiegazione Euribor+spread senza tassi inventati, confronto fisso/variabile e link servizio mutuo."
+      "value_add": "Spiegazione Euribor+spread senza tassi inventati, confronto fisso/variabile e link servizio mutuo.",
+      "substantive_area": "MUTUI_TASSI",
+      "main_question": "Come si muovono Euribor e spread mutui a Padova ad agosto 2026?",
+      "reader_novelty": "Aggiornamento agosto 2026 su Euribor variabile e spread, oltre all'articolo sui tassi minimi BCE."
     },
     {
       "id": "eq-venerdi-004",
@@ -283,7 +292,10 @@
         "https://www.fimaaveneto.it"
       ],
       "gap_analysis": "Limena contratto tratta caparra; manca pillar registro ADE 30 giorni dedicato Padova.",
-      "value_add": "Flusso registrazione, imposte e detrazioni con tipologie contratto e pratica Limena."
+      "value_add": "Flusso registrazione, imposte e detrazioni con tipologie contratto e pratica Limena.",
+      "substantive_area": "NORMATIVA_FISCALE",
+      "main_question": "Quali obblighi ADE per registrare un contratto di affitto a Padova?",
+      "reader_novelty": "Pillar dedicato al registro contratti ADE (30 giorni), distinto dalla guida contratto Limena."
     },
     {
       "id": "eq-venerdi-005",
@@ -309,7 +321,10 @@
         "https://www.bancaditalia.it/pubblicazioni/indagine-fam-imprese/index.html"
       ],
       "gap_analysis": "Checklist compromesso cita visura; serve guida dedicata campi visura e planimetria Padova.",
-      "value_add": "Lettura visura per acquirente padovano, checklist pre-caparra e collegamento mutuo-perizia."
+      "value_add": "Lettura visura per acquirente padovano, checklist pre-caparra e collegamento mutuo-perizia.",
+      "substantive_area": "NORMATIVA_FISCALE",
+      "main_question": "Come leggere la visura catastale prima di acquistare casa a Padova?",
+      "reader_novelty": "Guida dedicata ai campi visura e planimetria, oltre alla checklist compromesso generica."
     }
   ]
 }

@@ -296,6 +296,7 @@ Prima di approvare pubblicazione:
 - [ ] Top 5 web analizzati; nessuna copia sostanziale
 - [ ] `value_add` documentato; impatto Padova/Veneto se pertinente
 - [ ] `python scripts/audit_editorial_research.py --id {id}` → OK
+- [ ] `python scripts/build_editorial_memory.py` + `audit_editorial_continuity.py --id {id}` → OK (§16-TER)
 
 **Visivo (§7)**
 
@@ -315,6 +316,153 @@ Redazione specializzata basata su **ricerca → verifica → strategia → scrit
 Ogni settimana:
 
 **COSA ACCADE → COSA CAMBIA → COSA CERCANO → COSA PUBBLICANO LE FONTI → COSA SIGNIFICA PER L'IMMOBILIARE → COSA SIGNIFICA PER PADOVA/VENETO → POI si scrive.**
+
+---
+
+# PARTE C — CONTINUITÀ E DIVERSIFICAZIONE SOSTANZIALE (§16-TER)
+
+> **Principio vincolante:** non basta titolo o keyword diversi. Valutare la **materia sostanziale** affrontata.
+
+## Domande editoriali obbligatorie (prima di approvare)
+
+1. **Questo articolo aggiunge realmente** un nuovo argomento, informazione, conseguenza o valore editoriale rispetto ai recenti?
+2. **Un lettore abituale** lo percepirebbe come contenuto nuovo o come altra versione dello stesso tema?
+3. Se si rientra su un tema già trattato: **cosa è cambiato** dall'ultima volta (dato, norma, condizione economica, effetto concreto)?
+
+Se la risposta è «ripetizione sostanziale» → **preferire altro argomento** dalla rotazione editoriale.
+
+---
+
+## Analisi del contenuto sostanziale
+
+Durante la rilettura degli articoli recenti **non** confrontare solo titoli, keyword, categorie o tag.
+
+Per ogni articolo recente individuare:
+
+| Elemento | Esempio |
+|----------|---------|
+| Tema principale | Canoni affitti, mutui, valutazione mercato… |
+| Domanda affrontata | «Quanto costa affittare a Padova nel 2026?» |
+| Problema analizzato | Registrazione contratto entro 30 giorni |
+| Informazione fornita | Fasce canone concordato aggiornate |
+| Settore | Locazione, acquisto, vendita, finanza |
+| Conseguenza pratica | Impatto fiscale cedolare 10% |
+| Punto di vista | Guida operativa acquirente padovano |
+
+**Due articoli sono editorialmente troppo simili** se affrontano sostanzialmente la stessa questione, anche con titoli diversi.
+
+### Esempio — ripetizione sostanziale
+
+Articoli formalmente distinti ma sulla stessa area **VALORE E ANDAMENTO MERCATO PADOVA**:
+
+- andamento prezzi case Padova
+- quanto vale oggi una casa a Padova
+- previsione valori immobiliari Padova
+- conviene vendere casa a Padova nel 2026?
+
+Pubblicati troppo vicini **senza nuova informazione concreta** → saturazione tematica.
+
+---
+
+## Memoria editoriale
+
+**File:** `data/editorial-memory.json`  
+**Generazione:** `python scripts/build_editorial_memory.py` (dopo ogni publish o discovery)
+
+Per ogni articolo recente la memoria registra almeno:
+
+- `substantive_area` (tassonomia § sotto)
+- `secondary_areas`
+- `main_question`
+- `geo` (Padova, Limena, Veneto…)
+- `published_date`
+
+**Tassonomia aree sostanziali** (non esaustiva):
+
+| Codice | Area |
+|--------|------|
+| `VALORE_MERCATO` | Prezzi, quotazioni, OMI, andamento, domanda/offerta |
+| `AFFITTI_CANONI` | Affitti, canoni, locazione, caro-affitti |
+| `MUTUI_TASSI` | Mutui, Euribor, BCE, spread, credito |
+| `NORMATIVA_FISCALE` | Registro, visura, catasto, canone concordato, tasse |
+| `ACQUISTO_PRIMO_CASA` | Prima casa, under-36, agevolazioni, documenti acquisto |
+| `VENDITA_PROCESSO` | Vendere casa, mandato, staging, tempi vendita |
+| `AGENZIA_SERVIZI` | Scegliere agenzia, servizi, drone |
+| `LOCALE_LIMENA` | Limena, cintura padovana |
+| `GUIDA_LEXICO` | Gergo, glossario, lessico |
+| `TREND_ABITATIVO` | Coliving, studenti, loft, transitorio |
+| `COMPRAVENDITE_DATI` | Statistiche transazioni, dati ADE/ISTAT |
+| `INVESTIMENTO` | Rendimento, investimenti immobiliari, patrimonio |
+
+---
+
+## Controllo saturazione tematica
+
+Se negli **ultimi 8 articoli** la stessa `substantive_area` compare **≥2 volte**, l'area è **saturata**.
+
+In saturazione:
+
+- **Privilegiare** altre aree della rotazione editoriale
+- **Eccezione:** nuovo fatto concreto documentato in `update_reason`
+
+Report: `python scripts/audit_editorial_continuity.py --report`
+
+---
+
+## Eccezione — nuovi fatti e aggiornamenti
+
+Tornare su un tema già trattato **quando esiste novità reale**:
+
+- nuovi dati ufficiali (OMI trimestrale, FIMAA, ISTAT, ADE)
+- nuove norme, decreti, circolari
+- variazioni significative prezzi/canoni/tassi
+- eventi economici o politici che modificano il contesto
+
+Il nuovo articolo deve spiegare **COSA È CAMBIATO DALL'ULTIMA VOLTA** — non una ripetizione aggiornata superficialmente.
+
+Risposta obbligatoria nel testo e in coda: **«Perché leggerlo adesso?»**
+
+---
+
+## Distinzione continuità vs ripetizione
+
+| Continuità | Ripetizione |
+|------------|-------------|
+| Seguire nel tempo argomenti importanti | Parlare dello stesso tema senza novità |
+| Riprendere quando cambia il contesto | Cambiare solo titolo o angolazione leggera |
+| Ciclo: analisi → monitoraggio → aggiornamento | Più articoli consecutivi sulla stessa materia |
+
+**Regola:** se l'argomento è importante, va seguito — ma **solo con nuova ragione editoriale concreta**.
+
+---
+
+## Dati periodici
+
+Articoli basati su rilevazioni periodiche (trimestrale, mensile, annuale) **non** sono automaticamente doppioni.
+
+Verificare se il nuovo dato è **significativo** e spiegare **cosa è cambiato rispetto alla precedente rilevazione**.
+
+---
+
+## Gate pre-scrittura §16-TER
+
+Prima della generazione definitiva:
+
+```
+python scripts/build_editorial_memory.py
+python scripts/audit_editorial_continuity.py --id eq-XXX
+```
+
+Checklist approvazione:
+
+- [ ] Materia già trattata di recente? (memoria + saturazione)
+- [ ] Nonostante titolo diverso, parla sostanzialmente della stessa cosa?
+- [ ] Aggiunge informazione concreta nuova?
+- [ ] Esiste nuovo fatto/dato/norma che giustifica il ritorno?
+- [ ] Lettore abituale lo percepirebbe come nuovo?
+- [ ] Contribuisce a varietà **e** continuità editoriale?
+
+In assenza di nuova ragione concreta → **altro argomento** dalla rotazione.
 
 ---
 
@@ -352,6 +500,18 @@ Ogni settimana:
 | `monitoring_area` | sì | `mercato` \| `politica` \| `normativa` \| combinazione |
 | `gsc_signal` | se disponibile | Query/impression da GSC |
 | `different_from` | se tema simile | Slug articolo esistente da non duplicare |
+| `substantive_area` | sì | Codice area sostanziale (Appendice C §16-TER) |
+| `main_question` | sì | Domanda principale che l'articolo risponde |
+| `reader_novelty` | sì | Perché un lettore abituale lo leggerebbe ora |
+| `update_reason` | se area saturata | Cosa è cambiato (dato/norma/contesto) — obbligatorio se ≥2 articoli stessa area negli ultimi 8 |
+
+---
+
+## Appendice C — Aree sostanziali e saturazione
+
+Vedi **PARTE C §16-TER** e `data/editorial-memory.json`.
+
+Dopo ogni publish: `python scripts/build_editorial_memory.py`.
 
 ---
 
@@ -359,10 +519,10 @@ Ogni settimana:
 
 - `TEST-SKILL/skill-editorial-queue.md`
 - `TEST-SKILL/skill-content.md` §2.1, §2.1e
-- `data/editorial-queue.json` · `data/gsc-keywords-priority.json`
-- `scripts/audit_blog_visuals.py` · `scripts/audit_editorial_research.py`
+- `data/editorial-queue.json` · `data/editorial-memory.json` · `data/gsc-keywords-priority.json`
+- `scripts/audit_blog_visuals.py` · `scripts/audit_editorial_research.py` · `scripts/audit_editorial_continuity.py` · `scripts/build_editorial_memory.py`
 - `.cursor/rules/righetto-blog-publish.mdc`
 
 ---
 
-*Aggiornato: 29 agosto 2026 — comando editoriale fisso completo (visivo + ricerca strategica).*
+*Aggiornato: 29 agosto 2026 — comando editoriale fisso completo (visivo + ricerca strategica + §16-TER continuità sostanziale).*

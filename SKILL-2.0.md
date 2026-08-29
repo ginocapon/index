@@ -8,6 +8,8 @@ Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutt
 
 **Regole Cursor scoped:** [`TEST-SKILL/skill-cursor-rules.md`](TEST-SKILL/skill-cursor-rules.md) — 7 file `.mdc` in `.cursor/rules/` (pattern awesome-cursorrules).
 
+**Changelog rapido (29 agosto 2026 — b):** **`skill-editoriale-visivo.md` §16-TER** — continuità e diversificazione sostanziale; memoria `data/editorial-memory.json`; gate `audit_editorial_continuity.py` + `build_editorial_memory.py`.
+
 **Changelog rapido (29 agosto 2026):** **`skill-editoriale-visivo.md`** — comando editoriale fisso completo: ricerca strategica §8–17 (redazione digitale, GSC/Trends, top 5 web, 50/50 trend/evergreen) + visivo §1–7; gate `audit_editorial_research.py` + `audit_blog_visuals.py`.
 
 **Changelog rapido (28 agosto 2026):** **`skill-efficienza-sito.md`** — regole Musk adattate (buonsenso, zero sprechi, gate media/GA4); in `always_load` + checklist venerdì.

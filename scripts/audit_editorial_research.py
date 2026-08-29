@@ -18,6 +18,9 @@ REQUIRED_SCHEDULED = (
     "value_add",
     "editorial_type",
     "monitoring_area",
+    "substantive_area",
+    "main_question",
+    "reader_novelty",
 )
 
 
@@ -57,6 +60,18 @@ def audit_item(item: dict) -> list[str]:
     gap = str(item.get("gap_analysis", "")).strip()
     if len(gap) < 15:
         issues.append(f"{iid}: gap_analysis troppo breve")
+
+    sa = str(item.get("substantive_area", "")).strip()
+    if not sa:
+        issues.append(f"{iid}: substantive_area mancante (§16-TER)")
+
+    mq = str(item.get("main_question", "")).strip()
+    if len(mq) < 15:
+        issues.append(f"{iid}: main_question troppo breve (§16-TER)")
+
+    rn = str(item.get("reader_novelty", "")).strip()
+    if len(rn) < 20:
+        issues.append(f"{iid}: reader_novelty troppo breve (§16-TER)")
 
     return issues
 
