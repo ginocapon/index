@@ -12,8 +12,7 @@
 <link rel="preload" href="fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="img/team/titolari-estate-abbigliamento-2026.webp?v=5" as="image" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
-<link rel="preload" href="img/team/titolari-estate-abbigliamento-2026-mobile.webp?v=5" as="image" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+<link rel="preload" href="img/team/titolari-estate-abbigliamento-2026.webp?v=6" as="image" type="image/webp" fetchpriority="high">
 <meta name="google-site-verification" content="AbK7L5qoV9UFcfjQmtpC5OmD1ZsHx_55NNGYjxlOSxw">
 <meta name="theme-color" content="#2C4A6E">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -36,7 +35,7 @@
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/below-fold.css?v=16" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/prop-photo-carousel.css?v=2">
-<link rel="stylesheet" href="css/home-enhance.css?v=9" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/home-enhance.css?v=10" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/modal-incarico-home.css?v=2" media="all">
 <style>
 /* Critical font-face inline — elimina round-trip a fonts.css per above-fold */
@@ -302,6 +301,17 @@ button{font-family:inherit;cursor:pointer}
   background:white;border-radius:2px;transition:all 0.3s;
 }
 #navbar.scrolled .nav-burger span{background:var(--testo)}
+#navbar.nav-hero-light{
+  background:rgba(253,250,243,0.98);
+  border-bottom-color:rgba(44,74,110,0.14);
+  box-shadow:0 1px 0 rgba(255,255,255,0.9) inset,0 4px 20px rgba(21,36,53,0.08);
+}
+#navbar.nav-hero-light .nav-logo-name{color:var(--blu)}
+#navbar.nav-hero-light .nav-logo-tag{color:var(--blu3)}
+#navbar.nav-hero-light .nav-links a{color:var(--testo2)}
+#navbar.nav-hero-light .nav-links a:hover,
+#navbar.nav-hero-light .nav-links a.active{color:var(--blu)}
+#navbar.nav-hero-light .nav-burger span{background:var(--testo)}
 .nav-burger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
 .nav-burger.open span:nth-child(2){opacity:0}
 .nav-burger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
@@ -335,29 +345,157 @@ button{font-family:inherit;cursor:pointer}
 
 #hero {
   position: relative;
-  height: 100vh; min-height: 700px;
-  /* flex-start: il centraggio verticale spingeva il titolo sotto la navbar fissa */
-  display: flex; align-items: flex-start; justify-content: center;
+  background: linear-gradient(135deg, #faf8f5 0%, #ffffff 52%, #f3f5f8 100%);
+  padding-top: var(--nav-h);
   overflow: hidden;
 }
-#hero-bg {
-  position: absolute; inset: 0; z-index: 0;
+.hero-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: min(720px, calc(100dvh - var(--nav-h) - 72px));
+  align-items: stretch;
+}
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  padding: 52px clamp(24px, 4.5vw, 56px) 48px clamp(28px, 5vw, 72px);
+  animation: fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.15s both;
+}
+.hero-photo {
+  position: relative;
   overflow: hidden;
+  min-height: 380px;
+  background: linear-gradient(160deg, #eef1f5 0%, #e8ecf1 100%);
 }
-#hero-bg picture {
-  display: block; width: 100%; height: 100%;
+.hero-photo picture {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
-#hero-bg img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center 22%;
-  transform: scale(1.02);
-  filter: brightness(1.06) saturate(1.04);
-  animation: slowZoom 18s ease-in-out infinite alternate;
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 24%;
+  filter: brightness(1.1) contrast(1.05) saturate(1.03);
 }
-@keyframes slowZoom {
-  from { transform: scale(1.02); }
-  to   { transform: scale(1.06); }
+.hero-photo-fade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    #faf8f5 0%,
+    rgba(250, 248, 245, 0.55) 8%,
+    rgba(250, 248, 245, 0.12) 18%,
+    transparent 32%
+  );
 }
+@keyframes fadeUp { from{opacity:0;transform:translateY(36px)} to{opacity:1;transform:translateY(0)} }
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.62rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--oro);
+  margin-bottom: 20px;
+  justify-content: flex-start;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1.5px;
+  background: var(--oro);
+}
+.hero-h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4.8vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.18;
+  color: var(--blu);
+  margin-bottom: 14px;
+  letter-spacing: -0.3px;
+}
+.hero-h1 em { font-style: italic; color: var(--oro); }
+.hero-h1 .hero-line { display: block; }
+.hero-h1 .hero-line + .hero-line { margin-top: 0.04em; }
+.hero-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+  font-weight: 600;
+  font-style: italic;
+  color: var(--blu2);
+  line-height: 1.35;
+  margin: 0 0 18px;
+}
+.hero-p {
+  font-size: 1.02rem;
+  color: var(--testo2);
+  line-height: 1.75;
+  max-width: 520px;
+  margin: 0 0 24px;
+  font-weight: 400;
+}
+.hero-btns {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 540px;
+}
+
+.hero-stats-row {
+  display: flex;
+  gap: 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(44, 74, 110, 0.1);
+  background: rgba(255, 255, 255, 0.72);
+  padding: 22px clamp(20px, 4vw, 56px);
+  width: 100%;
+  justify-content: center;
+  animation: fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.35s both;
+}
+.h-stat {
+  flex: 1;
+  max-width: 200px;
+  padding: 0 22px;
+  border-right: 1px solid rgba(44, 74, 110, 0.12);
+  text-align: center;
+}
+.h-stat:last-child { border-right: none; }
+.h-stat-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--oro);
+  line-height: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2px;
+}
+.h-stat-n sup { font-size: 1rem; margin-top: 5px; }
+.h-stat-l {
+  font-size: 0.62rem;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--grigio);
+  font-weight: 600;
+  margin-top: 6px;
+}
+
 .hp-dual-path{
   display:grid;grid-template-columns:1fr 1fr;gap:0;
   max-width:1200px;margin:0 auto;
@@ -376,118 +514,8 @@ button{font-family:inherit;cursor:pointer}
 .hp-dual-path__sub{font-size:0.72rem;color:rgba(255,255,255,0.65)}
 @media(max-width:640px){.hp-dual-path{grid-template-columns:1fr}.hp-dual-path__item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.08)}.hp-dual-path__item:last-child{border-bottom:none}}
 @media (prefers-reduced-motion: reduce) {
-  #hero-bg img { animation: none; transform: none; }
+  .hero-content, .hero-stats-row { animation: none; }
 }
-
-.hero-veil {
-  position: absolute; inset: 0; z-index: 1;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(15,26,42,0.28) 0%,
-      rgba(15,26,42,0.14) 35%,
-      rgba(15,26,42,0.20) 62%,
-      rgba(15,26,42,0.52) 100%
-    );
-}
-
-.hero-grain {
-  position: absolute; inset: 0; z-index: 2; opacity: 0.025; pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-.hero-inner {
-  position: relative; z-index: 3;
-  width: 100%; max-width: 860px;
-  margin: 0 auto; padding: 0 44px;
-  padding-top: calc(var(--nav-h) + 64px);
-  padding-bottom: 48px;
-  display: flex; flex-direction: column;
-  align-items: center; text-align: center;
-}
-.hero-left { animation: fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.2s both; width: 100%; }
-@keyframes fadeUp { from{opacity:0;transform:translateY(36px)} to{opacity:1;transform:translateY(0)} }
-.hero-eyebrow {
-  display: inline-flex; align-items: center; gap: 14px;
-  font-size: 0.65rem; letter-spacing: 5px; text-transform: uppercase;
-  font-weight: 700; color: var(--oro); margin-bottom: 22px;
-  justify-content: center;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
-}
-.hero-eyebrow::before, .hero-eyebrow::after {
-  content: ''; display: block; width: 36px; height: 1.5px; background: var(--oro);
-}
-.hero-h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.35rem, 6.2vw, 5.5rem);
-  font-weight: 700; line-height: 1.22; color: white;
-  margin-bottom: 22px;
-  text-shadow: 0 2px 24px rgba(8,16,30,0.55), 0 1px 3px rgba(8,16,30,0.4);
-  letter-spacing: -0.5px;
-}
-.hero-h1 em { font-style: italic; color: var(--oro); }
-/* Righe titolo come blocchi: niente sovrapposizione tra “Vendere…” e “casa a…” */
-.hero-h1 .hero-line { display: block; }
-.hero-h1 .hero-line + .hero-line { margin-top: 0.06em; }
-.hero-h1 .ghost {
-  display: block;
-  margin-top: 0.28em;
-  -webkit-text-stroke: 1.5px rgba(255,255,255,0.55);
-  color: transparent;
-  line-height: 1.35;
-  padding-bottom: 0.06em;
-}
-.hero-p {
-  font-size: 1.05rem; color: rgba(255,255,255,0.88);
-  line-height: 1.85; max-width: 560px; margin: 0 auto 40px;
-  text-shadow: 0 1px 10px rgba(8,16,30,0.65);
-  font-weight: 400;
-}
-.hero-btns {
-  display: flex; gap: 14px; flex-wrap: wrap;
-  justify-content: center;
-}
-
-.hero-stats-row {
-  display: flex; gap: 0;
-  margin-top: 56px;
-  border-top: 1px solid rgba(255,255,255,0.18);
-  padding-top: 32px;
-  width: 100%; justify-content: center;
-  animation: fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.45s both;
-}
-.h-stat {
-  flex: 1; max-width: 180px;
-  padding: 0 22px;
-  border-right: 1px solid rgba(255,255,255,0.15);
-  text-align: center;
-}
-.h-stat:last-child { border-right: none; }
-.h-stat-n {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.8rem; font-weight: 700; color: var(--oro);
-  line-height: 1; display: flex; align-items: flex-start;
-  justify-content: center; gap: 2px;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
-}
-.h-stat-n sup { font-size: 1.1rem; margin-top: 6px; }
-.h-stat-l {
-  font-size: 0.62rem; letter-spacing: 1.5px; text-transform: uppercase;
-  color: rgba(255,255,255,0.70); font-weight: 600; margin-top: 7px;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
-}
-
-.hero-scroll {
-  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
-  z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px;
-  color: rgba(255,255,255,0.72); font-size: 0.58rem; letter-spacing: 2.5px; text-transform: uppercase;
-  animation: fadeUp 1s ease 1.2s both;
-}
-.scroll-line { width: 1px; height: 52px; background: rgba(255,255,255,0.2); position: relative; overflow: hidden; }
-.scroll-line::after {
-  content: ''; position: absolute; top: 0; width: 100%; height: 100%; background: var(--oro);
-  animation: drop 2s ease 1.6s infinite;
-}
-@keyframes drop { 0%{transform:translateY(-100%)} 100%{transform:translateY(100%)} }
 
 .eyebrow{
   font-size:0.62rem;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;
@@ -543,55 +571,37 @@ button{font-family:inherit;cursor:pointer}
   html,body{overflow-x:hidden;max-width:100%}
   #evidenza,#proprietario-hp,#servizi,#perche,#mutuo-hp,#stima,#drone-hp,#blog,#faq-hp,#form-contatto,footer{padding-left:20px;padding-right:20px}
   #hero{
-    min-height:620px;
     width:100%;
     max-width:100%;
     overflow:hidden;
+    background:#faf8f5;
   }
-  #hero-bg{
-    position:absolute;
-    inset:0;
-    width:100%;
-    overflow:hidden;
-  }
-  #hero-bg picture{
-    position:absolute;
-    inset:0;
-    display:block;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-  }
-  #hero-bg picture img{
-    position:absolute;
-    left:50%;
-    top:50%;
-    width:100%;
-    height:100%;
-    max-width:none;
-    margin:0;
-    object-fit:cover;
-    object-position:center 20%;
-    transform:translate(-50%,-50%) scale(1.15);
-    animation:none;
-  }
-  .hero-inner{
+  .hero-shell{
     grid-template-columns:1fr;
-    width:100%;
-    max-width:100%;
-    margin-left:auto;
-    margin-right:auto;
-    padding:0 20px;
-    padding-top:calc(var(--nav-h) + 44px);
-    padding-bottom:88px;
-    box-sizing:border-box;
-    text-align:center;
+    min-height:auto;
+    max-height:none;
   }
-  .hero-right{display:none}
-  /* Titolo hero mobile: un gradino più grande (righe + “Ci pensiamo noi.”) */
-  .hero-h1{font-size:clamp(2.05rem,8.4vw,3rem);line-height:1.22}
-  .hero-h1 .ghost{margin-top:0.22em;line-height:1.36;font-size:1.07em;-webkit-text-stroke:1.3px rgba(255,255,255,0.52)}
-
+  .hero-photo{
+    order:-1;
+    min-height:0;
+    aspect-ratio:16/11;
+    max-height:min(52vw, 360px);
+  }
+  .hero-photo img{
+    object-position:center 18%;
+  }
+  .hero-photo-fade{
+    background:linear-gradient(to bottom, transparent 55%, #faf8f5 100%);
+  }
+  .hero-content{
+    padding:24px 20px 28px;
+    text-align:left;
+    align-items:flex-start;
+  }
+  .hero-h1{font-size:clamp(2rem,8vw,2.75rem);line-height:1.2}
+  .hero-subtitle{font-size:clamp(1.2rem,4.5vw,1.55rem)}
+  .hero-eyebrow{font-size:0.58rem;letter-spacing:3px}
+  .hero-eyebrow::before,.hero-eyebrow::after{width:20px}
   
   .btn-p,.btn-g,.btn-calc,.btn-send,.btn-srch,.btn-src{
     padding:15px 22px;font-size:0.78rem;width:100%;justify-content:center;
@@ -621,8 +631,8 @@ button{font-family:inherit;cursor:pointer}
   footer{padding:48px 20px 28px}
 }
 @media(max-width:480px){
-  .hero-h1{font-size:clamp(1.92rem,7.6vw,2.6rem);line-height:1.24}
-  .hero-h1 .ghost{margin-top:0.2em;line-height:1.38;font-size:1.08em;-webkit-text-stroke:1.15px rgba(255,255,255,0.5)}
+  .hero-h1{font-size:clamp(1.85rem,7.4vw,2.45rem);line-height:1.22}
+  .hero-photo{max-height:min(58vw, 320px)}
   .h-stat-grid{grid-template-columns:1fr 1fr}
 }
 
@@ -965,7 +975,7 @@ button svg, a.btn-p svg, a.btn-g svg {
 <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
 <!-- NAVBAR -->
-<nav id="navbar">
+<nav id="navbar" class="nav-hero-light">
   <div class="nav-logo">
     <span class="nav-logo-name">Righetto Immobiliare</span>
     <span class="nav-logo-tag">Padova e Provincia</span>
@@ -996,30 +1006,15 @@ button svg, a.btn-p svg, a.btn-g svg {
 
 <!-- HERO -->
 <section id="hero">
-  <!-- Hero estate: desktop entrambi | mobile solo Linda (crop destro). Ripristino: titolari.webp -->
-  <div id="hero-bg">
-    <picture>
-      <source media="(max-width: 768px)" srcset="img/team/titolari-estate-abbigliamento-2026-mobile.webp?v=5" type="image/webp" width="750" height="1000">
-      <img src="img/team/titolari-estate-abbigliamento-2026.webp?v=5" alt="Gino Capon e Linda Righetto — Righetto Immobiliare" width="1200" height="630" fetchpriority="high">
-    </picture>
-  </div>
-  <div class="hero-veil"></div>
-  <div class="hero-grain"></div>
-  <div class="hero-inner">
-    <div class="hero-left">
+  <div class="hero-shell">
+    <div class="hero-content">
       <p class="hero-eyebrow">Proprietari e acquirenti · Padova e provincia</p>
       <h1 class="hero-h1">
         <span class="hero-line">Hai un immobile</span>
         <span class="hero-line">a <em>Padova</em> o in provincia?</span>
-        <span class="ghost">Persone reali al tuo fianco.</span>
       </h1>
-      <div class="hero-trust-pills">
-        <span>Dal 2000</span>
-        <span>101 comuni</span>
-        <span>127 recensioni 4,9/5</span>
-      </div>
-      <p class="hero-meta-line">Aggiornamento contenuti: agosto 2026 — guide e servizi per proprietari e chi cerca casa</p>
-      <p class="hero-p">Ti aiutiamo a <strong>valutarlo</strong>, <strong>venderlo</strong>, <strong>affittarlo</strong>, <strong>gestirlo</strong> o <strong>metterlo a reddito</strong> — sopralluogo gratuito e consulenza in sede a <a href="zona-limena" style="color:var(--oro);font-weight:600;text-decoration:underline">Limena</a>. Cerchi casa? Usa la ricerca qui sotto tra vendita e affitto in tutti i 101 comuni.</p>
+      <p class="hero-subtitle">Persone reali al tuo fianco.</p>
+      <p class="hero-p">Ti aiutiamo a <strong>valutarlo</strong>, <strong>venderlo</strong>, <strong>affittarlo</strong>, <strong>gestirlo</strong> o <strong>metterlo a reddito</strong>.<br>Con competenza, trasparenza e conoscenza del territorio.</p>
       <div class="hero-promo"><span class="hero-promo-dot" aria-hidden="true"></span> Valutazione gratuita con report scritto — senza impegno</div>
       <div class="hero-btns">
         <a class="btn-g hero-cta-primary" href="landing-valutazione">
@@ -1028,18 +1023,23 @@ button svg, a.btn-p svg, a.btn-g svg {
         </a>
         <a class="btn-g hero-cta-secondary" href="proprietario-immobile">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;min-width:18px;max-width:18px;flex-shrink:0;display:block" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          Servizi per proprietari
+          Scopri come possiamo aiutarti
         </a>
       </div>
     </div>
-    <div class="hero-stats-row">
-      <div class="h-stat"><div class="h-stat-n"><span class="cu" data-t="350">0</span><sup>+</sup></div><div class="h-stat-l">Immobili trattati</div></div>
-      <div class="h-stat"><div class="h-stat-n"><span class="cu" data-t="101">0</span></div><div class="h-stat-l">Comuni serviti</div></div>
-      <div class="h-stat"><div class="h-stat-n"><span class="cu" data-t="127">0</span></div><div class="h-stat-l">Recensioni Google 4.9/5</div></div>
-      <div class="h-stat"><div class="h-stat-n"><span class="cu" data-t="98">0</span><sup>%</sup></div><div class="h-stat-l">Clienti soddisfatti</div></div>
+    <div class="hero-photo">
+      <picture>
+        <img src="img/team/titolari-estate-abbigliamento-2026.webp?v=6" alt="Gino Capon e Linda Righetto — consulenza immobiliare Righetto, Padova" width="1200" height="630" fetchpriority="high">
+      </picture>
+      <div class="hero-photo-fade" aria-hidden="true"></div>
     </div>
   </div>
-  <div class="hero-scroll"><span>Scopri</span><div class="scroll-line"></div></div>
+  <div class="hero-stats-row">
+    <div class="h-stat"><div class="h-stat-n"><span class="cu" data-t="350">0</span><sup>+</sup></div><div class="h-stat-l">Immobili trattati</div></div>
+    <div class="h-stat"><div class="h-stat-n"><span class="cu" data-t="101">0</span></div><div class="h-stat-l">Comuni serviti</div></div>
+    <div class="h-stat"><div class="h-stat-n"><span class="cu" data-t="127">0</span></div><div class="h-stat-l">Recensioni Google 4.9/5</div></div>
+    <div class="h-stat"><div class="h-stat-n"><span class="cu" data-t="98">0</span><sup>%</sup></div><div class="h-stat-l">Clienti soddisfatti</div></div>
+  </div>
 </section>
 
 <!-- RICERCA -->
