@@ -14,7 +14,7 @@ header{position:relative}
 }
 .nav-burger span{
   display:block;width:22px;height:2px;
-  background:white;border-radius:2px;transition:all .3s;
+  background:var(--testo,#152435);border-radius:2px;transition:all .3s;
 }
 .nav-burger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
 .nav-burger.open span:nth-child(2){opacity:0}
@@ -53,40 +53,36 @@ header{position:relative}
 .gestionale-link{
   font-family:'Montserrat',sans-serif;
   font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  color:rgba(255,255,255,.85);
+  color:var(--testo2,#2C4A6E);
   text-decoration:none;
   padding:8px 16px;display:inline-flex;align-items:center;gap:6px;
   transition:all .2s;border-radius:6px;
-  border:1px solid rgba(255,255,255,.25);
+  border:1px solid rgba(44,74,110,.18);
 }
-.gestionale-link:hover{color:white;border-color:rgba(255,255,255,.5)}
-.gestionale-link svg{width:14px;height:14px}
+.gestionale-link:hover{color:var(--blu,#2C4A6E);border-color:var(--blu,#2C4A6E)}
 
-/* When navbar is scrolled (index.html) */
-.scrolled .gestionale-link{color:var(--testo2,#4A5568);border-color:rgba(44,74,110,.2)}
+.scrolled .gestionale-link{color:var(--testo2,#2C4A6E);border-color:rgba(44,74,110,.18)}
 .scrolled .gestionale-link:hover{color:var(--blu,#2C4A6E);border-color:var(--blu,#2C4A6E)}
 
-/* Header pages (non-index) */
-header .gestionale-link{color:white;border-color:rgba(255,255,255,.25)}
-header .gestionale-link:hover{color:var(--oro,#FF6B35);border-color:var(--oro,#FF6B35)}
+header .gestionale-link{color:var(--testo2,#2C4A6E);border-color:rgba(44,74,110,.18)}
+header .gestionale-link:hover{color:var(--blu,#2C4A6E);border-color:var(--blu,#2C4A6E)}
+.gestionale-link svg{width:14px;height:14px}
 
 /* ═══ PULSANTE LOGIN (quando non loggato) ═══ */
 .nav-login-btn{
   font-family:'Montserrat',sans-serif;
   font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  color:rgba(255,255,255,.85)!important;
+  color:var(--testo2,#2C4A6E)!important;
   padding:8px 16px;border-radius:6px;
-  border:1px solid rgba(255,255,255,.25);
+  border:1px solid rgba(44,74,110,.18);
   transition:all .2s;cursor:pointer;text-decoration:none;
   display:inline-flex;align-items:center;gap:6px;
 }
-.nav-login-btn:hover{color:white!important;border-color:rgba(255,255,255,.5)}
-/* index.html scrolled */
-.scrolled .nav-login-btn{color:var(--testo2,#4A5568)!important;border-color:rgba(44,74,110,.2)}
+.nav-login-btn:hover{color:var(--blu,#2C4A6E)!important;border-color:var(--blu,#2C4A6E)}
+.scrolled .nav-login-btn{color:var(--testo2,#2C4A6E)!important;border-color:rgba(44,74,110,.18)}
 .scrolled .nav-login-btn:hover{color:var(--blu,#2C4A6E)!important;border-color:var(--blu,#2C4A6E)}
-/* header pages */
-header .nav-login-btn{color:white!important;border-color:rgba(255,255,255,.25)}
-header .nav-login-btn:hover{color:var(--oro,#FF6B35)!important;border-color:var(--oro,#FF6B35)}
+header .nav-login-btn{color:var(--testo2,#2C4A6E)!important;border-color:rgba(44,74,110,.18)}
+header .nav-login-btn:hover{color:var(--blu,#2C4A6E)!important;border-color:var(--blu,#2C4A6E)}
 /* Mobile login link */
 .nav-mobile-login{
   margin-top:16px!important;
@@ -161,32 +157,64 @@ header .nav-login-btn:hover{color:var(--oro,#FF6B35)!important;border-color:var(
 }
 
 /* ═══════════════════════════════════════════════════════════
-   FASCIA HEADER come index (solo pagine con <header>, non .homepage)
-   Sovrascrive i blocchi <style> inline con !important mirato
+   FASCIA HEADER come homepage (pagine con <header>, non .homepage)
+   Sfondo chiaro, logo blu, link con underline arancione
    ═══════════════════════════════════════════════════════════ */
 body:not(.homepage) header:first-of-type {
-  background: rgba(10, 15, 28, 0.52) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+  background: rgba(253, 250, 243, 0.98) !important;
+  border-bottom: 1px solid rgba(44, 74, 110, 0.14) !important;
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.08) inset,
-    0 8px 28px rgba(0, 0, 0, 0.22) !important;
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 4px 20px rgba(21, 36, 53, 0.08) !important;
+}
+
+body:not(.homepage) header .hi,
+body:not(.homepage) header .header-inner {
+  height: 72px !important;
+  max-width: 1400px !important;
+  padding: 0 clamp(20px, 4vw, 44px) !important;
+  gap: 1.5rem !important;
 }
 
 body:not(.homepage) header .logo,
 body:not(.homepage) header .hlogo {
-  color: #fff !important;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  color: var(--blu, #2c4a6e) !important;
+  letter-spacing: 0.3px !important;
+  line-height: 1.15 !important;
+  white-space: nowrap !important;
+}
+
+body:not(.homepage) header .logo span,
+body:not(.homepage) header .hlogo span {
+  color: var(--blu, #2c4a6e) !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+}
+
+body:not(.homepage) header nav,
+body:not(.homepage) header .hnav {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  flex: 1 !important;
 }
 
 body:not(.homepage) header nav > a,
 body:not(.homepage) header .hnav > a {
+  font-family: 'Montserrat', sans-serif !important;
   font-size: 0.83rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.11em !important;
   text-transform: uppercase !important;
-  color: rgba(255, 255, 255, 0.88) !important;
+  color: var(--testo2, #2c4a6e) !important;
   position: relative;
-  padding-bottom: 4px !important;
+  padding: 0.35rem 0.5rem 0.45rem !important;
   text-decoration: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
 }
 
 body:not(.homepage) header nav > a::after,
@@ -205,7 +233,7 @@ body:not(.homepage) header nav > a:hover,
 body:not(.homepage) header .hnav > a:hover,
 body:not(.homepage) header nav > a.active,
 body:not(.homepage) header .hnav > a.active {
-  color: #fff !important;
+  color: var(--blu, #2c4a6e) !important;
 }
 
 body:not(.homepage) header nav > a:hover::after,
@@ -215,21 +243,20 @@ body:not(.homepage) header .hnav > a.active::after {
   width: 100%;
 }
 
-body:not(.homepage) header nav > a.active,
-body:not(.homepage) header .hnav > a.active {
-  color: var(--oro, #ff6b35) !important;
+body:not(.homepage) header .h-cta {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.65rem !important;
 }
 
 body:not(.homepage) header .h-tel {
-  color: rgba(255, 255, 255, 0.82) !important;
-  font-size: 0.78rem !important;
-  font-weight: 600 !important;
+  display: none !important;
 }
 
 body:not(.homepage) header .h-btn {
   background: linear-gradient(180deg, #ff9a6e 0%, #ff6b35 42%, #e85f2e 100%) !important;
   color: var(--nero, #0a0f1c) !important;
-  padding: 11px 22px !important;
+  padding: 11px 24px !important;
   border-radius: 8px !important;
   font-weight: 800 !important;
   font-size: 0.76rem !important;
@@ -242,6 +269,7 @@ body:not(.homepage) header .h-btn {
     0 4px 0 #b8431a,
     0 10px 22px rgba(0, 0, 0, 0.28) !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
+  white-space: nowrap !important;
 }
 
 body:not(.homepage) header .h-btn:hover {
@@ -260,4 +288,8 @@ body:not(.homepage) header .h-btn:active {
     0 1px 0 rgba(255, 255, 255, 0.35) inset,
     0 3px 0 #b8431a,
     0 5px 14px rgba(0, 0, 0, 0.22) !important;
+}
+
+body:not(.homepage) header .nav-burger span {
+  background: var(--testo, #152435) !important;
 }

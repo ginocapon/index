@@ -12,7 +12,8 @@
 <link rel="preload" href="fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="img/team/titolari-estate-abbigliamento-2026.webp?v=6" as="image" type="image/webp" fetchpriority="high">
+<link rel="preload" href="img/team/titolari-home-2026.webp?v=8" as="image" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
+<link rel="preload" href="img/team/titolari-home-2026-mobile.webp?v=8" as="image" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
 <meta name="google-site-verification" content="AbK7L5qoV9UFcfjQmtpC5OmD1ZsHx_55NNGYjxlOSxw">
 <meta name="theme-color" content="#2C4A6E">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -22,20 +23,20 @@
 <meta property="og:url" content="https://righettoimmobiliare.it/">
 <meta property="og:site_name" content="Righetto Immobiliare">
 <meta property="og:locale" content="it_IT">
-<meta property="og:image" content="https://righettoimmobiliare.it/img/team/titolari-estate-abbigliamento-2026.webp">
+<meta property="og:image" content="https://righettoimmobiliare.it/img/team/titolari-home-2026.webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Vendere e Comprare Casa a Padova | Righetto Immobiliare">
 <meta name="twitter:description" content="Assistenza completa per vendere e comprare casa a Padova e provincia. Dalla valutazione gratuita al rogito, un unico referente per tutti i 101 comuni.">
-<meta name="twitter:image" content="https://righettoimmobiliare.it/img/team/titolari-estate-abbigliamento-2026.webp">
+<meta name="twitter:image" content="https://righettoimmobiliare.it/img/team/titolari-home-2026.webp">
 <link rel="canonical" href="https://righettoimmobiliare.it/">
 <link rel="stylesheet" href="css/fonts.css?v=3" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="css/nav-mobile.css?v=5" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/nav-mobile.css?v=6" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/below-fold.css?v=16" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/prop-photo-carousel.css?v=2">
-<link rel="stylesheet" href="css/home-enhance.css?v=10" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/home-enhance.css?v=12" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/modal-incarico-home.css?v=2" media="all">
 <style>
 /* Critical font-face inline — elimina round-trip a fonts.css per above-fold */
@@ -381,8 +382,8 @@ button{font-family:inherit;cursor:pointer}
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 62% 24%;
-  filter: brightness(1.1) contrast(1.05) saturate(1.03);
+  object-position: center 42%;
+  filter: brightness(1.06) contrast(1.04) saturate(1.02);
 }
 .hero-photo-fade {
   position: absolute;
@@ -391,9 +392,9 @@ button{font-family:inherit;cursor:pointer}
   background: linear-gradient(
     to right,
     #faf8f5 0%,
-    rgba(250, 248, 245, 0.55) 8%,
-    rgba(250, 248, 245, 0.12) 18%,
-    transparent 32%
+    rgba(250, 248, 245, 0.28) 7%,
+    rgba(250, 248, 245, 0.06) 14%,
+    transparent 24%
   );
 }
 @keyframes fadeUp { from{opacity:0;transform:translateY(36px)} to{opacity:1;transform:translateY(0)} }
@@ -584,14 +585,15 @@ button{font-family:inherit;cursor:pointer}
   .hero-photo{
     order:-1;
     min-height:0;
-    aspect-ratio:16/11;
-    max-height:min(52vw, 360px);
+    aspect-ratio:16/10;
+    max-height:min(56vw, 380px);
   }
   .hero-photo img{
-    object-position:center 18%;
+    object-fit:cover;
+    object-position:center center;
   }
   .hero-photo-fade{
-    background:linear-gradient(to bottom, transparent 55%, #faf8f5 100%);
+    background:linear-gradient(to bottom, transparent 68%, rgba(250,248,245,0.55) 88%, #faf8f5 100%);
   }
   .hero-content{
     padding:24px 20px 28px;
@@ -632,7 +634,7 @@ button{font-family:inherit;cursor:pointer}
 }
 @media(max-width:480px){
   .hero-h1{font-size:clamp(1.85rem,7.4vw,2.45rem);line-height:1.22}
-  .hero-photo{max-height:min(58vw, 320px)}
+  .hero-photo{max-height:min(60vw, 340px)}
   .h-stat-grid{grid-template-columns:1fr 1fr}
 }
 
@@ -1029,7 +1031,8 @@ button svg, a.btn-p svg, a.btn-g svg {
     </div>
     <div class="hero-photo">
       <picture>
-        <img src="img/team/titolari-estate-abbigliamento-2026.webp?v=6" alt="Gino Capon e Linda Righetto — consulenza immobiliare Righetto, Padova" width="1200" height="630" fetchpriority="high">
+        <source media="(max-width: 768px)" srcset="img/team/titolari-home-2026-mobile.webp?v=8" type="image/webp" width="960" height="600">
+        <img src="img/team/titolari-home-2026.webp?v=8" alt="Gino Capon e Linda Righetto — consulenza immobiliare Righetto, Padova" width="1024" height="1024" fetchpriority="high">
       </picture>
       <div class="hero-photo-fade" aria-hidden="true"></div>
     </div>
@@ -1872,7 +1875,7 @@ document.addEventListener('keydown', function(e) {
 (function(){
   function loadGA(){
     var s=document.createElement('script');
-    s.src='js/ga-consent.js?v=7';
+    s.src='js/ga-consent.js?v=8';
     document.head.appendChild(s);
   }
   if('requestIdleCallback' in window){
