@@ -117,6 +117,45 @@ def stack_vertical(paths: list[Path], labels: list[str] | None = None, gap: int 
     return out
 
 
+def compose_side_by_side(
+    paths: list[Path],
+    labels: list[str],
+    out_path: Path,
+    panel_h: int = 300,
+    gap: int = 10,
+) -> Path:
+    """Due screenshot affiancati con didascalie — impaginazione compatta."""
+    from PIL import ImageDraw
+
+    margin = 10
+    label_h = 28
+    panels: list[Image.Image] = []
+    for p in paths:
+        with Image.open(p) as im:
+            im = im.convert("RGB")
+            nw = int(im.width * panel_h / im.height)
+            panels.append(im.resize((nw, panel_h), Image.Resampling.LANCZOS))
+
+    inner_w = sum(p.width for p in panels) + gap * max(0, len(panels) - 1)
+    total_w = inner_w + margin * 2
+    total_h = panel_h + label_h + margin * 2
+    out = Image.new("RGB", (total_w, total_h), (236, 231, 223))
+    draw = ImageDraw.Draw(out)
+    x = margin
+    for i, panel in enumerate(panels):
+        cap = labels[i] if i < len(labels) else ""
+        if cap:
+            draw.rectangle((x, margin, x + panel.width, margin + label_h - 2), fill=(44, 74, 110))
+            draw.text((x + 4, margin + 6), cap[:72], fill=(255, 255, 255))
+        y = margin + label_h
+        draw.rectangle((x - 1, y - 1, x + panel.width + 1, y + panel.height + 1), outline=(44, 74, 110))
+        out.paste(panel, (x, y))
+        x += panel.width + gap
+    out.save(out_path, "JPEG", quality=90)
+    for p in panels:
+        p.close()
+    return out_path
+
 def fit_rl_image(path: Path, max_w: float, max_h: float) -> RLImage:
     with Image.open(path) as im:
         w, h = im.size
@@ -611,15 +650,20 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
         if imgs_comm:
             story.append(Spacer(1, 4 * mm))
             labels = comm.get("immagini_didascalie") or []
-            for i, img_path in enumerate(imgs_comm):
-                if Path(img_path).is_file():
-                    cap = labels[i] if i < len(labels) else ""
-                    if cap:
-                        story.append(Paragraph(f"<b>{cap}</b>", body))
-                    if i > 0:
-                        story.append(PageBreak())
-                    story.append(fit_rl_image(Path(img_path), 170 * mm, 72 * mm))
-                    story.append(Spacer(1, 3 * mm))
+            short_labels = [
+                (labels[i][:55] + "…") if len(labels[i]) > 55 else labels[i]
+                for i in range(min(len(labels), len(imgs_comm)))
+            ]
+            valid = [Path(p) for p in imgs_comm if Path(p).is_file()]
+            if len(valid) >= 2:
+                comp_path = tmp / "comm_side_by_side.jpg"
+                compose_side_by_side(valid[:2], short_labels[:2] or ["Portali", "Agenda"], comp_path)
+                story.append(fit_rl_image(comp_path, 174 * mm, 78 * mm))
+            elif len(valid) == 1:
+                if labels:
+                    story.append(Paragraph(f"<b>{labels[0]}</b>", body))
+                story.append(fit_rl_image(valid[0], 174 * mm, 72 * mm))
+            story.append(Spacer(1, 3 * mm))
         sec_num += 1
 
     # Contatti
@@ -678,25 +722,6 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
         story.append(Paragraph("Inquadramento dell'immobile e del contesto edificato — Cavino di Curtarolo.", small))
         story.append(Spacer(1, 3 * mm))
         story.append(fit_rl_image(attachments["vista_aerea"], max_w, max_h * 0.85))
-
-    story.append(Spacer(1, 6 * mm))
-    nota_legale_num = 7
-    if loc.get("enabled"):
-        nota_legale_num += 1
-    if comm.get("enabled"):
-        nota_legale_num += 1
-    story.append(KeepTogether([
-        Paragraph(f"{nota_legale_num}. Note legali e limiti", h2),
-        Paragraph(
-            "La presente stima ha carattere <b>indicativo</b> e <b>non sostituisce</b> una perizia "
-            "tecnico-giuridica redatta da perito abilitato, né certifica conformità urbanistico-catastale. "
-            "I valori indicati sono subordinati all'esito delle verifiche comunali, alla regolarità "
-            "documentale e alle condizioni di mercato al momento della proposta. "
-            "Righetto Immobiliare — Gruppo Immobiliare Righetto di Capon Gino — P.IVA 05182390285.",
-            small,
-        ),
-        Paragraph(cfg.get("note_planimetria_storica", ""), small),
-    ]))
 
     doc.build(story, canvasmaker=RighettoCanvas)
     return out_pdf
