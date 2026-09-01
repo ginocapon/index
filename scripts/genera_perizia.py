@@ -197,11 +197,20 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
         story.append(Spacer(1, 2 * mm))
         story.append(fit_rl_image(attachments["presentazione"], 174 * mm, 155 * mm))
         story.append(Spacer(1, 4 * mm))
+        loc = cfg.get("locazione") or {}
+        loc_hint = ""
+        if loc.get("enabled") and loc.get("scenarios"):
+            best = max(loc["scenarios"], key=lambda s: s.get("mensile", 0))
+            loc_hint = (
+                f'<br/><font size="8" color="#cccccc">Locazione indicativa fino a '
+                f'{fmt_euro(best.get("mensile", 0))}/mese — vedi sezione dedicata</font>'
+            )
         prev = Table(
             [[Paragraph(
-                f'<font size="9" color="#ffffff">Prezzo indicativo di commercializzazione</font><br/>'
+                f'<font size="9" color="#ffffff">Valore indicativo di vendita</font><br/>'
                 f'<font size="20" color="#FF6B35"><b>{fmt_euro(valore)}</b></font><br/>'
-                f'<font size="8" color="#cccccc">Incidenza € {euro_mq:,.0f}/m² su {sup:.0f} m² commerciali</font>'.replace(",", "."),
+                f'<font size="8" color="#cccccc">Incidenza € {euro_mq:,.0f}/m² su {sup:.0f} m² commerciali</font>'
+                f'{loc_hint}'.replace(",", "."),
                 ParagraphStyle("pv", alignment=TA_CENTER, leading=13),
             )]],
             colWidths=[174 * mm],
@@ -233,7 +242,12 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
     story += [hdr, Spacer(1, 6 * mm)]
 
     story.append(Paragraph("RELAZIONE DI STIMA IMMOBILIARE", title))
-    story.append(Paragraph("Documento riservato — valutazione di mercato a scopo informativo e negoziale", subtitle))
+    sottotitolo_doc = "Documento riservato — vendita e locazione — valutazione a scopo informativo e negoziale"
+    if not (cfg.get("locazione") or {}).get("enabled"):
+        sottotitolo_doc = "Documento riservato — valutazione di mercato a scopo informativo e negoziale"
+    story.append(Paragraph(sottotitolo_doc, subtitle))
+    if cfg.get("destinatario"):
+        story.append(Paragraph(f'<i>A: {cfg["destinatario"]}</i>', ParagraphStyle("dest", alignment=TA_CENTER, fontSize=9, textColor=GRIGIO, spaceAfter=6)))
 
     riep = [
         ["Committente / titolarità", cfg["proprietario"]],
@@ -256,20 +270,19 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
 
     # Sezione 1
     story.append(Paragraph("1. Oggetto della perizia", h2))
-    story.append(Paragraph(
+    oggetto = cfg.get("oggetto_perizia") or (
         f"La presente relazione illustra la stima del valore di mercato dell'immobile "
         f"<b>{cfg['tipologia']}</b>, sito in <b>{cfg['ubicazione']}</b>, di competenza "
         f"<b>{cfg['proprietario']}</b>. La valutazione è stata redatta da "
         f"<b>Righetto Immobiliare</b> in data <b>{data_perizia.strftime('%d/%m/%Y')}</b> "
-        f"a seguito di sopralluogo e consultazione della documentazione catastale disponibile. "
-        f"Si tratta di una <b>porzione di bifamiliare orizzontale</b> con servizi e spazi esterni "
-        f"in regime di condominio / condivisione, <b>senza parti esclusive</b> censite oltre alle unità descritte.",
-        body,
-    ))
+        f"a seguito di sopralluogo e consultazione della documentazione catastale disponibile."
+    )
+    story.append(Paragraph(oggetto, body))
 
     # Sezione 2 Catasto
-    story.append(Paragraph("2. Dati catastali (visura 27/07/2026)", h2))
     cat = cfg["catasto"]
+    data_visura = cat.get("data_visura", data_perizia.strftime("%d/%m/%Y"))
+    story.append(Paragraph(f"2. Dati catastali (visura {data_visura})", h2))
     story.append(Paragraph(
         f"Comune <b>{cat['comune']}</b> — {cat['via']} — Sez. {cat['sezione']}, Foglio {cat['foglio']}. "
         f"Planimetria storica: {cat.get('particella_nceu', '—')}. "
@@ -329,15 +342,24 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
         ]))
         story += [pt, Spacer(1, 3 * mm)]
 
-    # Sezione 3 Caratteristiche
-    story.append(Paragraph("3. Caratteristiche generali e stato manutentivo", h2))
+    # Sezione 3 Descrizione immobile (unica, coerente vendita/locazione)
+    story.append(Paragraph("3. Descrizione dell'immobile", h2))
+    if cfg.get("descrizione_fabbricato"):
+        story.append(Paragraph("<b>Fabbricato e contesto</b>", body))
+        story.append(Paragraph(cfg["descrizione_fabbricato"], body))
+    if cfg.get("descrizione_unita"):
+        story.append(Paragraph("<b>Unità immobiliare oggetto di stima</b>", body))
+        story.append(Paragraph(cfg["descrizione_unita"], body))
+
+    # Sezione 4 Caratteristiche
+    story.append(Paragraph("4. Caratteristiche generali e stato manutentivo", h2))
     for c in cfg.get("caratteristiche", []):
         story.append(Paragraph(f"• {c}", bullet))
     story.append(Spacer(1, 2 * mm))
     story.append(Paragraph(f"<b>Stato manutentivo:</b> {cfg.get('stato_manutentivo', '—')}", body))
 
-    # Sezione 4 Urbanistico
-    story.append(Paragraph("4. Verifiche urbanistiche e criticità emerse", h2))
+    # Sezione 5 Urbanistico
+    story.append(Paragraph("5. Verifiche urbanistiche e criticità emerse", h2))
     for c in cfg.get("criticita_urbanistiche", []):
         story.append(Paragraph(f"• {c}", bullet))
     story.append(Spacer(1, 2 * mm))
@@ -353,21 +375,12 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
 
     story.append(PageBreak())
 
-    # Sezione 5 Commerciale
-    story.append(Paragraph("5. Considerazioni commerciali e target di mercato", h2))
-    for para in cfg.get("considerazioni_commerciali", []):
-        story.append(Paragraph(para, body))
-    if cfg.get("target_acquirente"):
-        story.append(Paragraph(f"<b>Target indicativo:</b> {cfg['target_acquirente']}", body))
-    if cfg.get("nota_mercato"):
-        story.append(Paragraph(cfg["nota_mercato"], body))
-
-    # Sezione 6 Valutazione
-    story.append(Paragraph("6. Valutazione economica", h2))
+    # Sezione 6 Valutazione vendita
+    story.append(Paragraph("6. Valutazione economica — vendita", h2))
     story.append(Paragraph(
-        f"Sulla base della superficie commerciale di <b>{sup:.0f} m²</b>, dello stato di fatto e "
-        f"del confronto con immobili comparabili in Cavino / Curtarolo, si indicano le seguenti "
-        f"forchette — tutte <b>subordinate</b> all'esito dell'accesso agli atti comunali.",
+        f"Sulla base della superficie commerciale di <b>{sup:.0f} m²</b>, dello stato di fatto, "
+        f"delle caratteristiche descritte e del confronto con immobili comparabili in "
+        f"<b>{cfg.get('ubicazione', 'zona di riferimento')}</b>, si indica il seguente valore indicativo.",
         body,
     ))
 
@@ -398,6 +411,121 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
         f"quantificazione dei costi di ripristino e sanatoria."
     )
     story.append(Paragraph(nota_fin, body))
+
+    for para in cfg.get("considerazioni_commerciali", []):
+        story.append(Paragraph(para, body))
+    if cfg.get("target_acquirente"):
+        story.append(Paragraph(f"<b>Target indicativo:</b> {cfg['target_acquirente']}", body))
+    if cfg.get("nota_mercato"):
+        story.append(Paragraph(cfg["nota_mercato"], body))
+
+    # Sezione 7 Locazione (opzionale)
+    loc = cfg.get("locazione") or {}
+    if loc.get("enabled"):
+        story.append(PageBreak())
+        story.append(Paragraph("7. Valutazione locazione — scenari indicativi", h2))
+        if loc.get("intro"):
+            story.append(Paragraph(loc["intro"], body))
+        if loc.get("gestione_nota"):
+            story.append(Paragraph(loc["gestione_nota"], body))
+        rows = [["Soluzione", "Canone/mese", "Lordo annuo", "Netto annuo*", "Note"]]
+        for sc in loc.get("scenarios", []):
+            lordo = sc.get("annuo_lordo")
+            if lordo is None and sc.get("mensile"):
+                lordo = sc["mensile"] * 12
+            netto = sc.get("annuo_netto", "—")
+            if isinstance(netto, (int, float)):
+                netto = fmt_euro(netto)
+            rows.append([
+                sc.get("nome", "—"),
+                fmt_euro(sc.get("mensile", 0)) if sc.get("mensile") else "—",
+                fmt_euro(lordo) if isinstance(lordo, (int, float)) else str(lordo or "—"),
+                str(netto),
+                sc.get("note", sc.get("tassazione", "—")),
+            ])
+        lt = Table(rows, colWidths=[52 * mm, 24 * mm, 26 * mm, 26 * mm, 46 * mm])
+        lt.setStyle(TableStyle([
+            ("BACKGROUND", (0, 0), (-1, 0), BLU), ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"), ("FONTSIZE", (0, 0), (-1, -1), 7.5),
+            ("BOX", (0, 0), (-1, -1), 0.5, BLU), ("INNERGRID", (0, 0), (-1, -1), 0.25, colors.HexColor("#E1DBD1")),
+            ("VALIGN", (0, 0), (-1, -1), "TOP"),
+            ("LEFTPADDING", (0, 0), (-1, -1), 4), ("TOPPADDING", (0, 0), (-1, -1), 3), ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
+        ]))
+        story += [Spacer(1, 3 * mm), lt, Spacer(1, 2 * mm)]
+        story.append(Paragraph("* Netto indicativo dopo tassazione ipotizzata; da detrarre IMU secondo regime applicabile.", small))
+        if loc.get("conclusioni"):
+            story.append(Paragraph(loc["conclusioni"], body))
+
+    # Sezione commercializzazione / portali (opzionale)
+    comm = cfg.get("commercializzazione") or {}
+    sec_num = 8
+    if comm.get("enabled"):
+        story.append(PageBreak())
+        titolo_comm = comm.get("titolo") or f"{sec_num}. Commercializzazione, portali e reportistica"
+        story.append(Paragraph(titolo_comm, h2))
+        for para in comm.get("paragrafi", []):
+            story.append(Paragraph(para, body))
+        for punto in comm.get("punti", []):
+            story.append(Paragraph(f"• {punto}", bullet))
+        if comm.get("nota_whatsapp"):
+            story.append(Paragraph(comm["nota_whatsapp"], body))
+        if comm.get("nota_chatbot"):
+            story.append(Paragraph(comm["nota_chatbot"], body))
+
+        # Mockup chatbot Sara (visual)
+        if comm.get("mostra_mockup_chatbot", True):
+            chat = Table(
+                [[
+                    Paragraph(
+                        '<font color="#2C4A6E"><b>Assistente Sara — righettoimmobiliare.it</b></font><br/>'
+                        '<font size="8" color="#6B7A8D">Online · risponde anche fuori orario d\'ufficio</font>',
+                        ParagraphStyle("chh", fontSize=8.5, leading=11),
+                    ),
+                ], [
+                    Paragraph(
+                        '<font size="8.5" color="#333">Buongiorno! Sono Sara, l\'assistente Righetto. '
+                        'Posso aiutarla con informazioni su questo appartamento, fissare una visita '
+                        'o richiedere una valutazione gratuita.</font>',
+                        ParagraphStyle("cb", fontSize=8.5, leading=12, backColor=SFONDO, leftIndent=4, rightIndent=4),
+                    ),
+                ], [
+                    Paragraph(
+                        '<font size="8.5" color="#fff"><i>Vorrei sapere se l\'immobile è ancora disponibile '
+                        'e fissare una visita.</i></font>',
+                        ParagraphStyle("cu", fontSize=8.5, leading=12, alignment=TA_LEFT),
+                    ),
+                ]],
+                colWidths=[120 * mm],
+            )
+            chat.setStyle(TableStyle([
+                ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#E8F5E9")),
+                ("BOX", (0, 0), (-1, -1), 0.5, BLU),
+                ("BACKGROUND", (0, 1), (-1, 1), SFONDO),
+                ("BACKGROUND", (0, 2), (-1, 2), BLU),
+                ("TOPPADDING", (0, 0), (-1, -1), 6),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
+                ("LEFTPADDING", (0, 0), (-1, -1), 8),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 8),
+            ]))
+            story += [Spacer(1, 3 * mm), chat, Spacer(1, 2 * mm)]
+            story.append(Paragraph(
+                "<i>Esempio di interazione con l'assistente conversazionale del sito — "
+                "orientamento visitatori e raccolta richieste anche di sera e nei weekend.</i>",
+                small,
+            ))
+
+        imgs_comm = attachments.get("commercializzazione_immagini") or []
+        if imgs_comm:
+            story.append(Spacer(1, 4 * mm))
+            labels = comm.get("immagini_didascalie") or []
+            for i, img_path in enumerate(imgs_comm):
+                if Path(img_path).is_file():
+                    cap = labels[i] if i < len(labels) else ""
+                    if cap:
+                        story.append(Paragraph(f"<b>{cap}</b>", body))
+                    story.append(fit_rl_image(Path(img_path), 174 * mm, 95 * mm))
+                    story.append(Spacer(1, 3 * mm))
+        sec_num += 1
 
     # Contatti
     story.append(Spacer(1, 5 * mm))
@@ -457,8 +585,13 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
         story.append(fit_rl_image(attachments["vista_aerea"], max_w, max_h * 0.85))
 
     story.append(Spacer(1, 6 * mm))
+    nota_legale_num = 7
+    if loc.get("enabled"):
+        nota_legale_num += 1
+    if comm.get("enabled"):
+        nota_legale_num += 1
     story.append(KeepTogether([
-        Paragraph("7. Note legali e limiti", h2),
+        Paragraph(f"{nota_legale_num}. Note legali e limiti", h2),
         Paragraph(
             "La presente stima ha carattere <b>indicativo</b> e <b>non sostituisce</b> una perizia "
             "tecnico-giuridica redatta da perito abilitato, né certifica conformità urbanistico-catastale. "
@@ -474,11 +607,20 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
     return out_pdf
 
 
+def asset_path(p: str) -> Path:
+    path = Path(p)
+    if p and not path.is_file():
+        alt = ROOT / p
+        if alt.is_file():
+            return alt
+    return path
+
+
 def prepare_attachments(cfg: dict, tmp: Path) -> dict[str, Path | list[Path]]:
     allegati = cfg.get("allegati", {})
     out: dict = {}
 
-    plan_path = Path(allegati.get("planimetria_catastale", ""))
+    plan_path = asset_path(allegati.get("planimetria_catastale", ""))
     if plan_path.is_file():
         if plan_path.suffix.lower() == ".pdf":
             pages = pdf_page_to_jpg(plan_path, tmp, "plan", dpi=2.2)
@@ -487,22 +629,38 @@ def prepare_attachments(cfg: dict, tmp: Path) -> dict[str, Path | list[Path]]:
         else:
             out["planimetria"] = image_to_jpg(plan_path, tmp, "plan.jpg")
 
-    scheda = Path(allegati.get("scheda_catastale", ""))
+    scheda = asset_path(allegati.get("scheda_catastale", ""))
     if scheda.is_file():
         out["catasto_pages"] = pdf_page_to_jpg(scheda, tmp, "catasto", dpi=2.0)
 
+    scheda_g = asset_path(allegati.get("scheda_catastale_garage", ""))
+    if scheda_g.is_file():
+        extra = pdf_page_to_jpg(scheda_g, tmp, "catasto_garage", dpi=2.0)
+        if out.get("catasto_pages"):
+            out["catasto_pages"].extend(extra)
+        else:
+            out["catasto_pages"] = extra
+
     visura_imgs = allegati.get("visura_immagini") or []
-    paths = [Path(p) for p in visura_imgs if Path(p).is_file()]
+    paths = [asset_path(p) for p in visura_imgs if asset_path(p).is_file()]
     if paths:
         out["visura_immagini"] = [image_to_jpg(p, tmp, f"visura_{i+1}.jpg") for i, p in enumerate(paths)]
         out["visura_labels"] = allegati.get("visura_labels")
 
-    aerial = Path(allegati.get("vista_aerea", ""))
+    aerial = asset_path(allegati.get("vista_aerea", ""))
     if aerial.is_file():
         jpg = image_to_jpg(aerial, tmp, "vista_aerea.jpg")
         out["vista_aerea"] = jpg
         if allegati.get("presentazione") or allegati.get("usa_vista_aerea_in_copertina", True):
             out["presentazione"] = jpg
+
+    comm_imgs: list[Path] = []
+    for key in ("immagine_portali", "immagine_report_visite"):
+        src = asset_path(allegati.get(key, ""))
+        if src.is_file():
+            comm_imgs.append(image_to_jpg(src, tmp, f"comm_{key}.jpg"))
+    if comm_imgs:
+        out["commercializzazione_immagini"] = comm_imgs
 
     return out
 
@@ -516,6 +674,10 @@ def main() -> int:
     tmp = ROOT / "scripts" / "_tmp_perizia" / cfg_path.stem
     attachments = prepare_attachments(cfg, tmp)
     out = build_pdf(cfg, attachments, tmp)
+    archive = ROOT / "documenti" / "perizie" / out.name
+    archive.parent.mkdir(parents=True, exist_ok=True)
+    archive.write_bytes(out.read_bytes())
+    print(f"Archivio admin: {archive}")
     print(f"OK: {out} ({out.stat().st_size // 1024} KB)")
     dl = Path.home() / "Downloads" / out.name
     try:
