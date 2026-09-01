@@ -419,10 +419,11 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
 
     # Sezione 2 Catasto
     cat = cfg["catasto"]
+    indirizzo_cat = cfg.get("indirizzo_immobile") or cat.get("via", "")
     data_visura = cat.get("data_visura", data_perizia.strftime("%d/%m/%Y"))
     story.append(Paragraph(f"2. Dati catastali (visura {data_visura})", h2))
     story.append(Paragraph(
-        f"Comune <b>{cat['comune']}</b> — {cat['via']} — Sez. {cat['sezione']}, Foglio {cat['foglio']}. "
+        f"Comune <b>{cat['comune']}</b> — {indirizzo_cat} — Sez. {cat['sezione']}, Foglio {cat['foglio']}. "
         f"Planimetria storica: {cat.get('particella_nceu', '—')}. "
         f"{cat.get('titolarita', '')}. Rendita catastale complessiva indicativa: <b>{cat.get('rendita_totale', '—')}</b>.",
         body,

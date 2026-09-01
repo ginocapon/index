@@ -2,10 +2,10 @@
   "updated": "2026-09-01",
   "perizie": [
     {
-      "id": "baraldo-viotti-19b-2026",
+      "id": "baraldo-viotti-19bis-2026",
       "data": "2026-09-01",
       "proprietario": "Baraldo Franca, Baraldo Diana, Baraldo Massimo, Griggio Adele",
-      "indirizzo": "Via Giovanni Battista Viotti 19/Bis — Padova (PD), piano 2",
+      "indirizzo": "Padova (PD), Via Giovanni Battista Viotti n. 19/Bis — piano 2",
       "pdf": "data/perizie/Perizia_Baraldo_Via_Viotti_19Bis_Padova.pdf",
       "config": "scripts/perizia_config_baraldo_viotti_19b.json",
       "tipologia": "Appartamento + garage — zona Arcella",
