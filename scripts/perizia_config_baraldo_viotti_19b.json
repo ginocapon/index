@@ -1,0 +1,107 @@
+{
+  "output_nome": "Perizia_Baraldo_Via_Viotti_19B_Padova.pdf",
+  "data": "2026-09-01",
+  "proprietario": "Baraldo Franca, Baraldo Diana, Baraldo Massimo, Griggio Adele",
+  "proprietario_dettaglio": "Proprietà in comune: Baraldo Franca, Baraldo Diana e Baraldo Massimo 1/9 ciascuno; Griggio Adele 6/9. Dati da visura catastale aggiornata al 01/09/2026.",
+  "destinatario": "Signora Franca Baraldo e famiglia",
+  "tipologia": "Appartamento in palazzina residenziale — zona Arcella",
+  "ubicazione": "Padova (PD), Via Giovanni Battista Viotti n. 19/B — piano 2",
+  "superficie_commerciale": 100,
+  "valore_principale": 163000,
+  "valore_label": "Valore di mercato indicativo (vendita)",
+  "euro_mq_nota": "Incidenza indicativa € 1.630/m² su circa 100 m² commerciali (calcolo agenzia — non confronto con medie di zona)",
+  "oggetto_perizia": "La presente relazione unificata illustra la stima del valore di mercato in vendita e le possibili soluzioni di locazione dell'immobile oggetto di valutazione, redatta da Righetto Immobiliare a seguito di sopralluogo e consultazione della documentazione catastale disponibile.",
+  "descrizione_fabbricato": "L'unità è inserita in una palazzina residenziale riconducibile, per epoca costruttiva e caratteristiche architettoniche, agli anni Sessanta/Settanta. Il fabbricato si presenta complessivamente in discreto stato di manutenzione ed è sviluppato interamente fuori terra. Lo stabile è dotato di ascensore; dalle dimensioni apparenti del vano e della cabina, quest'ultima risulta di dimensioni contenute e non sembra consentire un agevole accesso a una carrozzina, circostanza da verificare mediante rilievo e confronto con la normativa applicabile.",
+  "descrizione_unita": "L'appartamento è posto al secondo piano ed è caratterizzato da una distribuzione interna tipica dell'epoca di costruzione, con ambienti di dimensioni generose e funzionali. La superficie complessiva indicativa è quantificata in circa 100 m² e comprende: ingresso, ampia cucina abitabile, grande soggiorno, una camera matrimoniale, una camera doppia, un bagno finestrato e un ripostiglio. Le finiture interne risultano coerenti con il periodo di realizzazione dell'immobile, con pavimentazioni e caratteristiche complessive riconducibili prevalentemente agli anni Settanta. L'ampiezza dei locali costituisce un elemento positivo sotto il profilo della fruibilità e della vivibilità. Completa la proprietà un garage di buone dimensioni posto al piano terra (sub. 34, cat. C/6, 19 m²). L'accesso carrabile alla pertinenza risulta tuttavia non particolarmente agevole, in quanto per l'ingresso e/o l'uscita possono rendersi necessarie alcune manovre.",
+  "caratteristiche": [
+    "Zona Arcella — Padova, buona accessibilità ai servizi e al tessuto urbano",
+    "Palazzina anni '60/'70 con ascensore",
+    "Distribuzione tipica: ingresso, cucina abitabile, soggiorno ampio, due camere, bagno, ripostiglio",
+    "Garage pertinenziale al piano terra (19 m² catastali)",
+    "Finiture originali anni Settanta — immobile funzionale ma non ristrutturato di recente"
+  ],
+  "stato_manutentivo": "Discreto stato generale coerente con l'epoca costruttiva; finiture interne originali. Non emergono urgenti criticità strutturali dal sopralluogo, salvo verifiche documentali e impiantistiche da approfondire.",
+  "considerazioni_commerciali": [
+    "Tenuto conto dell'ubicazione nel quartiere Arcella, della superficie indicativa di circa 100 m², della presenza dell'ascensore, della buona ampiezza e funzionalità degli ambienti, nonché della presenza di un ampio garage, il bene presenta caratteristiche complessivamente apprezzabili.",
+    "Incidono in senso moderatamente limitativo l'epoca e la tipologia delle finiture, riconducibili agli anni Sessanta/Settanta, le dimensioni contenute dell'ascensore e la minore comodità dell'accesso al garage.",
+    "In ottica locazione, la zona Arcella e la vicinanza al polo universitario rendono l'immobile interessante sia per famiglie (canone concordato) sia per locazione a studenti, con scenari di rendimento diversi in funzione della configurazione scelta."
+  ],
+  "nota_mercato": "I valori indicati hanno carattere indicativo e dovranno essere eventualmente integrati mediante controllo della documentazione urbanistica, verifica della consistenza effettiva delle superfici e analisi comparativa aggiornata alla data della stima.",
+  "nota_valore_finale": "Il valore di <b>€ 163.000</b> indicato costituisce il valore indicativo complessivo dell'appartamento e delle relative pertinenze (incluso garage), subordinato a sopralluogo tecnico approfondito e verifica documentale. La presente valutazione non sostituisce una perizia tecnico-giuridica redatta da perito abilitato.",
+  "target_acquirente": "Famiglie e acquirenti che cercano metrature ampie in zona Arcella; marginalmente investitori per locazione a studenti o famiglie.",
+  "criticita_urbanistiche": [
+    "Verifica conformità urbanistico-catastale e documentazione edilizia",
+    "Verifica accessibilità ascensore rispetto a normativa vigente",
+    "Accesso garage: valutare manovre necessarie in fase di utilizzo"
+  ],
+  "obblighi_vendita": [
+    "Redazione o aggiornamento <b>APE (Attestato di Prestazione Energetica)</b> prima della compravendita, ove obbligatorio per legge (D.Lgs. 192/2005)."
+  ],
+  "attivita_prioritarie": [
+    "Acquisizione documentazione catastale e urbanistica completa",
+    "Eventuale aggiornamento planimetria catastale se difformità",
+    "Definizione strategia: vendita, locazione famiglia o locazione studenti"
+  ],
+  "proprietari": [
+    {"nome": "Baraldo Diana", "cf": "BRLDNI71T70G224K", "nascita": "Padova (PD) 30/12/1971", "diritti": "Proprietà", "quota": "1/9"},
+    {"nome": "Baraldo Franca", "cf": "BRLFNC51R41L103O", "nascita": "Teramo (TE) 01/10/1951", "diritti": "Proprietà", "quota": "1/9"},
+    {"nome": "Baraldo Massimo", "cf": "BRLMSM59A17G337B", "nascita": "Parma (PR) 17/01/1959", "diritti": "Proprietà", "quota": "1/9"},
+    {"nome": "Griggio Adele", "cf": "GRGDLA31C65F962T", "nascita": "Noventa Padovana (PD) 25/03/1931", "diritti": "Proprietà", "quota": "6/9"}
+  ],
+  "catasto": {
+    "comune": "Padova (PD)",
+    "via": "Via Giovanni Battista Viotti n. 19B",
+    "sezione": "—",
+    "foglio": "54",
+    "particella_nceu": "Particella 46",
+    "titolarita": "Proprietà in comune — quote come da visura",
+    "rendita_totale": "€ 929,16 (sub. 8 A/2 € 866,36 + sub. 34 C/6 € 62,80)",
+    "data_visura": "01/09/2026",
+    "unita": [
+      {"sub": "8", "categoria": "A/2", "classe": "03", "consistenza": "5,5 vani", "piano": "2", "rendita": "€ 866,36"},
+      {"sub": "34", "categoria": "C/6", "classe": "05", "consistenza": "19 m²", "piano": "T", "rendita": "€ 62,80", "nota": "Garage pertinenziale"}
+    ]
+  },
+  "locazione": {
+    "enabled": true,
+    "intro": "Oltre alla stima di vendita, si illustrano le principali soluzioni di locazione valutate a seguito del sopralluogo, da confrontare con i comproprietari in funzione del rendimento atteso e del livello di gestione desiderato.",
+    "gestione_nota": "Qualora i proprietari decidessero di affidare all'Agenzia la gestione completa della locazione (famiglia o studenti), il compenso indicativo è pari a una mensilità di affitto all'anno. In tal caso l'Agenzia segue la gestione ordinaria del rapporto di locazione; ai proprietari resta l'onere di verificare mensilmente l'accredito del canone.",
+    "scenarios": [
+      {"nome": "Famiglia — canone concordato € 830/mese", "mensile": 830, "annuo_lordo": 9960, "annuo_netto": 8964, "tassazione": "10% indicativa", "imu": "25% IMU annua", "note": "Soluzione più semplice: un solo contratto, gestione ridotta."},
+      {"nome": "Famiglia — canone concordato € 880/mese", "mensile": 880, "annuo_lordo": 10560, "annuo_netto": 9504, "tassazione": "10% indicativa", "imu": "25% IMU annua", "note": "Variante con canone leggermente superiore."},
+      {"nome": "Studenti — immobile attuale", "mensile": 1060, "annuo_lordo": 12720, "annuo_netto": 10048.80, "tassazione": "Cedolare secca 21%", "imu": "100% IMU annua", "note": "1 camera singola € 500 + camera doppia 2 posti € 280 ciascuno. Maggiore gestione."},
+      {"nome": "Studenti — con terza camera (piccolo investimento)", "mensile": 1560, "annuo_lordo": 18720, "annuo_netto": 14788.80, "tassazione": "Cedolare secca 21%", "imu": "100% IMU annua", "note": "Eliminazione salotto e terza camera: massimo rendimento, richiede investimento iniziale."}
+    ],
+    "conclusioni": "La locazione a famiglia rappresenta la soluzione più semplice; la locazione a studenti consente rendimenti superiori ma con maggiore impegno gestionale. Gli importi sono indicativi e subordinati a verifica fiscale e IMU effettiva."
+  },
+  "commercializzazione": {
+    "enabled": true,
+    "titolo": "8. Commercializzazione, portali e reportistica al proprietario",
+    "paragrafi": [
+      "In caso di incarico di vendita o locazione, Righetto Immobiliare adotta una <b>strategia multicanale</b>: l'annuncio viene pubblicato sui principali portali immobiliari nazionali, con particolare presenza su <b>Idealista</b>, <b>Immobiliare.it</b> e <b>Casa.it</b> — tra i canali più performanti per il mercato padovano e la zona Arcella.",
+      "La diffusione avviene tramite <b>piattaforma gestionale dedicata</b> (channel manager professionale) che sincronizza testi, prezzo, foto e disponibilità su decine di portali partner con un'unica operazione, evitando incongruenze tra i canali."
+    ],
+    "punti": [
+      "<b>Idealista, Immobiliare.it, Casa.it</b> — presenza prioritariamente sui portali con maggiore traffico qualificato in zona",
+      "<b>Sito istituzionale righettoimmobiliare.it</b> — ogni immobile è visibile anche sul nostro sito, con schede complete e contatto diretto",
+      "<b>Assistente Sara (chatbot)</b> — orientamento visitatori, risposte a domande ricorrenti e raccolta richieste anche fuori orario d'ufficio",
+      "<b>Agenda centralizzata</b> — ogni richiesta di visita viene registrata e gestita dal team con appuntamenti tracciati per codice immobile"
+    ],
+    "nota_whatsapp": "<b>Report settimanali via WhatsApp:</b> ogni settimana inviamo al committente un aggiornamento con le <b>visualizzazioni dell'annuncio</b>, i contatti ricevuti e gli <b>appuntamenti fissati</b>, così da seguire l'andamento della commercializzazione in modo trasparente. Nell'allegato grafico i nominativi dei clienti sono stati oscurati a tutela della privacy.",
+    "nota_chatbot": "Il sito <b>righettoimmobiliare.it</b> integra l'assistente conversazionale <b>Sara</b>: non sostituisce l'agente umano, ma aiuta i visitatori a orientarsi, a richiedere informazioni sull'immobile e a lasciare un recapito per essere richiamati negli orari d'ufficio.",
+    "mostra_mockup_chatbot": true,
+    "immagini_didascalie": [
+      "Piattaforma gestionale — sincronizzazione annuncio su Idealista, Immobiliare.it, Casa.it e decine di portali partner",
+      "Agenda appuntamenti e report visite — tracciamento richieste per codice immobile (dati clienti oscurati)"
+    ]
+  },
+  "allegati": {
+    "vista_aerea": "documenti/perizia_viotti_allegati/vista_aerea.png",
+    "usa_vista_aerea_in_copertina": true,
+    "vista_aerea_in_allegati": false,
+    "scheda_catastale": "documenti/perizia_viotti_allegati/scheda_sub8_appartamento.pdf",
+    "scheda_catastale_garage": "documenti/perizia_viotti_allegati/scheda_sub34_garage.pdf",
+    "immagine_portali": "documenti/perizia_viotti_allegati/piattaforma_portali.png",
+    "immagine_report_visite": "documenti/perizia_viotti_allegati/report_visite_agenda.png"
+  }
+}
