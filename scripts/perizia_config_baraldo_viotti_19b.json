@@ -1,11 +1,11 @@
 {
-  "output_nome": "Perizia_Baraldo_Via_Viotti_19B_Padova.pdf",
+  "output_nome": "Perizia_Baraldo_Via_Viotti_19Bis_Padova.pdf",
   "data": "2026-09-01",
   "proprietario": "Baraldo Franca, Baraldo Diana, Baraldo Massimo, Griggio Adele",
   "proprietario_dettaglio": "Proprietà in comune: Baraldo Franca, Baraldo Diana e Baraldo Massimo 1/9 ciascuno; Griggio Adele 6/9. Dati da visura catastale aggiornata al 01/09/2026.",
   "destinatario": "Signora Franca Baraldo e famiglia",
   "tipologia": "Appartamento in palazzina residenziale — zona Arcella",
-  "ubicazione": "Padova (PD), Via Giovanni Battista Viotti n. 19/B — piano 2",
+  "ubicazione": "Padova (PD), Via Giovanni Battista Viotti n. 19/Bis — piano 2",
   "superficie_commerciale": 100,
   "valore_principale": 163000,
   "valore_label": "Valore di mercato indicativo (vendita)",
@@ -50,7 +50,7 @@
   ],
   "catasto": {
     "comune": "Padova (PD)",
-    "via": "Via Giovanni Battista Viotti n. 19B",
+    "via": "Via Giovanni Battista Viotti n. 19/Bis",
     "sezione": "—",
     "foglio": "54",
     "particella_nceu": "Particella 46",
