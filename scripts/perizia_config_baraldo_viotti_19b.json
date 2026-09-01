@@ -67,10 +67,10 @@
     "intro": "Oltre alla stima di vendita, si illustrano le principali soluzioni di locazione valutate a seguito del sopralluogo, da confrontare con i comproprietari in funzione del rendimento atteso e del livello di gestione desiderato.",
     "gestione_nota": "Qualora i proprietari decidessero di affidare all'Agenzia la gestione completa della locazione (famiglia o studenti), il compenso indicativo è pari a una mensilità di affitto all'anno. In tal caso l'Agenzia segue la gestione ordinaria del rapporto di locazione; ai proprietari resta l'onere di verificare mensilmente l'accredito del canone.",
     "scenarios": [
-      {"nome": "Famiglia — canone concordato € 830/mese", "mensile": 830, "annuo_lordo": 9960, "annuo_netto": 8964, "tassazione": "10% indicativa", "imu": "25% IMU annua", "note": "Soluzione più semplice: un solo contratto, gestione ridotta."},
-      {"nome": "Famiglia — canone concordato € 880/mese", "mensile": 880, "annuo_lordo": 10560, "annuo_netto": 9504, "tassazione": "10% indicativa", "imu": "25% IMU annua", "note": "Variante con canone leggermente superiore."},
+      {"nome": "Famiglia — canone concordato (base)", "mensile": 830, "annuo_lordo": 9960, "annuo_netto": 8964, "tassazione": "10% indicativa", "imu": "25% IMU annua", "note": "Soluzione più semplice: un solo contratto, gestione ridotta."},
+      {"nome": "Famiglia — canone concordato (variante)", "mensile": 880, "annuo_lordo": 10560, "annuo_netto": 9504, "tassazione": "10% indicativa", "imu": "25% IMU annua", "note": "Variante con canone leggermente superiore."},
       {"nome": "Studenti — immobile attuale", "mensile": 1060, "annuo_lordo": 12720, "annuo_netto": 10048.80, "tassazione": "Cedolare secca 21%", "imu": "100% IMU annua", "note": "1 camera singola € 500 + camera doppia 2 posti € 280 ciascuno. Maggiore gestione."},
-      {"nome": "Studenti — con terza camera (piccolo investimento)", "mensile": 1560, "annuo_lordo": 18720, "annuo_netto": 14788.80, "tassazione": "Cedolare secca 21%", "imu": "100% IMU annua", "note": "Eliminazione salotto e terza camera: massimo rendimento, richiede investimento iniziale."}
+      {"nome": "Studenti — terza camera", "mensile": 1560, "annuo_lordo": 18720, "annuo_netto": 14788.80, "tassazione": "Cedolare secca 21%", "imu": "100% IMU annua", "note": "Eliminazione salotto e terza camera: massimo rendimento, richiede investimento iniziale."}
     ],
     "conclusioni": "La locazione a famiglia rappresenta la soluzione più semplice; la locazione a studenti consente rendimenti superiori ma con maggiore impegno gestionale. Gli importi sono indicativi e subordinati a verifica fiscale e IMU effettiva."
   },
