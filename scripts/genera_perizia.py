@@ -674,10 +674,13 @@ def main() -> int:
     tmp = ROOT / "scripts" / "_tmp_perizia" / cfg_path.stem
     attachments = prepare_attachments(cfg, tmp)
     out = build_pdf(cfg, attachments, tmp)
-    archive = ROOT / "documenti" / "perizie" / out.name
+    archive = ROOT / "data" / "perizie" / out.name
     archive.parent.mkdir(parents=True, exist_ok=True)
     archive.write_bytes(out.read_bytes())
     print(f"Archivio admin: {archive}")
+    legacy = ROOT / "documenti" / "perizie" / out.name
+    legacy.parent.mkdir(parents=True, exist_ok=True)
+    legacy.write_bytes(out.read_bytes())
     print(f"OK: {out} ({out.stat().st_size // 1024} KB)")
     dl = Path.home() / "Downloads" / out.name
     try:

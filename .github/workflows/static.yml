@@ -84,6 +84,12 @@ jobs:
           echo "Dimensione artifact:"
           du -sh _pages_site
           find _pages_site -type f | wc -l
+          if [ -d documenti/perizie ]; then
+            mkdir -p _pages_site/documenti/perizie
+            cp -a documenti/perizie/. _pages_site/documenti/perizie/
+            echo "Perizie PDF incluse nel deploy:"
+            ls -la _pages_site/documenti/perizie/
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
