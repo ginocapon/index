@@ -4838,7 +4838,7 @@ META_IG_USER_ID=...</pre>
             <h3>Nessuna perizia</h3>
             <p>Le perizie generate vengono elencate qui con data, proprietario e indirizzo.</p>
           </div>
-          <p style="font-size:0.72rem;color:var(--caffe2);padding:12px 16px;margin:0">Area riservata admin — i PDF restano in <code>documenti/perizie/</code>. Per nuove perizie: aggiornare config JSON + <code>data/perizie-index.json</code>.</p>
+          <p style="font-size:0.72rem;color:var(--caffe2);padding:12px 16px;margin:0">Area riservata admin — i PDF restano in <code>data/perizie/</code> (online) e copia in <code>documenti/perizie/</code> (repo). Per nuove perizie: config JSON + <code>data/perizie-index.json</code>.</p>
         </div>
       </div>
 
@@ -5262,7 +5262,7 @@ function check2FAStatus() {
 
 function handleHashNavigation() {
   const hash = window.location.hash.replace('#', '');
-  const validSections = ['immobili', 'nuovo', 'richieste', 'posta', 'blog', 'clienti', 'social', 'impostazioni'];
+  const validSections = ['immobili', 'nuovo', 'documentigenerali', 'perizie', 'richieste', 'posta', 'blog', 'clienti', 'social', 'landing', 'newsletter', 'agenda', 'emailmarketing', 'analytics', 'trend', 'audit', 'impostazioni'];
   if (hash && validSections.includes(hash)) {
     setTimeout(() => showSection(hash), 300);
   }
@@ -16421,6 +16421,6 @@ async function initAuditSection() {
 }
 </script>
 <script src="js/admin-documenti-generali.js?v=6"></script>
-<script src="js/admin-perizie.js?v=1"></script>
+<script src="js/admin-perizie.js?v=2"></script>
 </body>
 </html>
