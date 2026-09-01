@@ -167,6 +167,117 @@ def fmt_euro(n: int | float) -> str:
     return f"€ {int(n):,.0f}".replace(",", ".")
 
 
+def _esc_html(text: str) -> str:
+    return (
+        str(text or "—")
+        .replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+    )
+
+
+def make_price_box(
+    valore: int,
+    title_lines: list[str],
+    note: str = "",
+    extra: str = "",
+) -> Table:
+    """Box prezzo a righe separate — evita sovrapposizione testo/importo."""
+    ps_title = ParagraphStyle(
+        "pht", fontName="Helvetica-Bold", fontSize=8.5, leading=11,
+        alignment=TA_CENTER, textColor=colors.white,
+    )
+    ps_price = ParagraphStyle(
+        "php", fontName="Helvetica-Bold", fontSize=22, leading=28,
+        alignment=TA_CENTER, textColor=ORO,
+    )
+    ps_note = ParagraphStyle(
+        "phn", fontName="Helvetica", fontSize=7.5, leading=10,
+        alignment=TA_CENTER, textColor=colors.HexColor("#cccccc"),
+    )
+    data: list[list] = [[Paragraph(line, ps_title)] for line in title_lines]
+    data.append([Paragraph(f"<b>{fmt_euro(valore)}</b>", ps_price)])
+    if note:
+        data.append([Paragraph(_esc_html(note), ps_note)])
+    if extra:
+        data.append([Paragraph(extra, ps_note)])
+    box = Table(data, colWidths=[174 * mm])
+    box.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, -1), NERO),
+        ("BOX", (0, 0), (-1, -1), 1.5, ORO),
+        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("TOPPADDING", (0, 0), (-1, -1), 8),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
+        ("LEFTPADDING", (0, 0), (-1, -1), 12),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 12),
+    ]))
+    return box
+
+
+def make_kv_table(pairs: list[tuple[str, str]]) -> Table:
+    """Tabella chiave-valore con a capo automatico nelle celle."""
+    lbl = ParagraphStyle(
+        "kl", fontName="Helvetica-Bold", fontSize=8, leading=10.5, textColor=colors.white,
+    )
+    val = ParagraphStyle(
+        "kv", fontName="Helvetica", fontSize=8.5, leading=11.5, textColor=NERO,
+    )
+    rows = [[Paragraph(_esc_html(k), lbl), Paragraph(_esc_html(v), val)] for k, v in pairs]
+    t = Table(rows, colWidths=[58 * mm, 116 * mm])
+    t.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (0, -1), BLU), ("TEXTCOLOR", (0, 0), (0, -1), colors.white),
+        ("BACKGROUND", (1, 0), (1, -1), SFONDO),
+        ("BOX", (0, 0), (-1, -1), 0.5, BLU),
+        ("INNERGRID", (0, 0), (-1, -1), 0.25, colors.HexColor("#E1DBD1")),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 7),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 7),
+        ("TOPPADDING", (0, 0), (-1, -1), 5),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
+    ]))
+    return t
+
+
+def make_data_table(
+    header: list[str],
+    body_rows: list[list[str]],
+    col_widths: list[float],
+    *,
+    header_size: float = 7.5,
+    body_size: float = 7.5,
+) -> Table:
+    """Tabella dati con Paragraph per a capo in ogni cella."""
+    th = ParagraphStyle(
+        "th", fontName="Helvetica-Bold", fontSize=header_size, leading=9.5,
+        textColor=colors.white,
+    )
+    td = ParagraphStyle(
+        "td", fontName="Helvetica", fontSize=body_size, leading=10,
+        textColor=NERO,
+    )
+    td_c = ParagraphStyle("tdc", parent=td, alignment=TA_CENTER)
+    rows: list[list] = [[Paragraph(_esc_html(c), th) for c in header]]
+    for row in body_rows:
+        cells = []
+        for i, cell in enumerate(row):
+            st = td_c if i > 0 and i < len(row) - 1 else td
+            cells.append(Paragraph(_esc_html(cell), st))
+        rows.append(cells)
+    t = Table(rows, colWidths=col_widths, repeatRows=1)
+    t.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 0), BLU),
+        ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+        ("BOX", (0, 0), (-1, -1), 0.5, BLU),
+        ("INNERGRID", (0, 0), (-1, -1), 0.25, colors.HexColor("#E1DBD1")),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 5),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 5),
+        ("TOPPADDING", (0, 0), (-1, -1), 4),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
+    ]))
+    return t
+
 def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
     data_perizia = parse_date(cfg["data"])
     out_name = cfg.get("output_nome", "Perizia_Righetto.pdf")
@@ -198,24 +309,18 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
         story.append(fit_rl_image(attachments["presentazione"], 174 * mm, 155 * mm))
         story.append(Spacer(1, 4 * mm))
         loc = cfg.get("locazione") or {}
-        loc_hint = ""
+        loc_extra = ""
         if loc.get("enabled") and loc.get("scenarios"):
             best = max(loc["scenarios"], key=lambda s: s.get("mensile", 0))
-            loc_hint = (
-                f'<br/><font size="8" color="#cccccc">Locazione indicativa fino a '
-                f'{fmt_euro(best.get("mensile", 0))}/mese — vedi sezione dedicata</font>'
+            loc_extra = (
+                f"Locazione indicativa fino a {fmt_euro(best.get('mensile', 0))}/mese — vedi sezione dedicata"
             )
-        prev = Table(
-            [[Paragraph(
-                f'<font size="9" color="#ffffff">Valore indicativo di vendita</font><br/>'
-                f'<font size="20" color="#FF6B35"><b>{fmt_euro(valore)}</b></font><br/>'
-                f'<font size="8" color="#cccccc">Incidenza € {euro_mq:,.0f}/m² su {sup:.0f} m² commerciali</font>'
-                f'{loc_hint}'.replace(",", "."),
-                ParagraphStyle("pv", alignment=TA_CENTER, leading=13),
-            )]],
-            colWidths=[174 * mm],
+        prev = make_price_box(
+            valore,
+            ["Valore indicativo di vendita"],
+            f"Incidenza € {euro_mq:,.0f}/m² su {sup:.0f} m² commerciali".replace(",", "."),
+            loc_extra,
         )
-        prev.setStyle(TableStyle([("BACKGROUND", (0, 0), (-1, -1), NERO), ("BOX", (0, 0), (-1, -1), 1, ORO), ("TOPPADDING", (0, 0), (-1, -1), 8), ("BOTTOMPADDING", (0, 0), (-1, -1), 8)]))
         story += [prev, Spacer(1, 3 * mm)]
         story.append(Paragraph(
             f'<i>Documento riservato — {data_perizia.strftime("%d/%m/%Y")} — Righetto Immobiliare</i>',
@@ -250,23 +355,17 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
         story.append(Paragraph(f'<i>A: {cfg["destinatario"]}</i>', ParagraphStyle("dest", alignment=TA_CENTER, fontSize=9, textColor=GRIGIO, spaceAfter=6)))
 
     riep = [
-        ["Committente / titolarità", cfg["proprietario"]],
-        ["Dettaglio anagrafico", cfg.get("proprietario_dettaglio", "—")],
-        ["Tipologia", cfg["tipologia"]],
-        ["Ubicazione", cfg["ubicazione"]],
-        ["Superficie commerciale", f"{sup:,.0f} m²".replace(",", ".")],
-        [cfg.get("valore_label", "Valore stimato"), fmt_euro(valore)],
-        ["Incidenza indicativa", f"€ {euro_mq:,.0f}/m²".replace(",", ".")],
+        ("Committente / titolarità", cfg["proprietario"]),
+        ("Dettaglio anagrafico", cfg.get("proprietario_dettaglio", "—")),
+        ("Tipologia", cfg["tipologia"]),
+        ("Ubicazione", cfg["ubicazione"]),
+        ("Superficie commerciale", f"{sup:,.0f} m²".replace(",", ".")),
+        ("Valore vendita indicativo", fmt_euro(valore)),
+        ("Incidenza indicativa", f"€ {euro_mq:,.0f}/m²".replace(",", ".")),
     ]
-    t = Table(riep, colWidths=[52 * mm, 122 * mm])
-    t.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (0, -1), BLU), ("TEXTCOLOR", (0, 0), (0, -1), colors.white),
-        ("FONTNAME", (0, 0), (0, -1), "Helvetica-Bold"), ("FONTSIZE", (0, 0), (-1, -1), 9),
-        ("BACKGROUND", (1, 0), (1, -1), SFONDO), ("BOX", (0, 0), (-1, -1), 0.5, BLU),
-        ("INNERGRID", (0, 0), (-1, -1), 0.25, colors.HexColor("#E1DBD1")),
-        ("LEFTPADDING", (0, 0), (-1, -1), 7), ("TOPPADDING", (0, 0), (-1, -1), 4), ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
-    ]))
-    story += [t, Spacer(1, 5 * mm)]
+    if cfg.get("euro_mq_nota"):
+        riep.append(("Nota incidenza", cfg["euro_mq_nota"]))
+    story += [make_kv_table(riep), Spacer(1, 5 * mm)]
 
     # Sezione 1
     story.append(Paragraph("1. Oggetto della perizia", h2))
@@ -289,16 +388,18 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
         f"{cat.get('titolarita', '')}. Rendita catastale complessiva indicativa: <b>{cat.get('rendita_totale', '—')}</b>.",
         body,
     ))
-    rows = [["Sub.", "Cat.", "Cl.", "Consistenza", "Piano", "Rendita"]]
+    cat_rows = []
     for u in cat["unita"]:
-        rows.append([u["sub"], u["categoria"], u.get("classe", "—"), u["consistenza"], u["piano"], u["rendita"]])
-    tc = Table(rows, colWidths=[14 * mm, 18 * mm, 12 * mm, 38 * mm, 18 * mm, 74 * mm])
-    tc.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, 0), BLU), ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"), ("FONTSIZE", (0, 0), (-1, -1), 8),
-        ("BOX", (0, 0), (-1, -1), 0.5, BLU), ("INNERGRID", (0, 0), (-1, -1), 0.25, colors.HexColor("#E1DBD1")),
-        ("LEFTPADDING", (0, 0), (-1, -1), 5), ("TOPPADDING", (0, 0), (-1, -1), 3), ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
-    ]))
+        cat_rows.append([
+            u["sub"], u["categoria"], u.get("classe", "—"),
+            u["consistenza"], u["piano"], u["rendita"],
+        ])
+    tc = make_data_table(
+        ["Sub.", "Cat.", "Cl.", "Consistenza", "Piano", "Rendita"],
+        cat_rows,
+        [14 * mm, 18 * mm, 12 * mm, 38 * mm, 18 * mm, 74 * mm],
+        body_size=8,
+    )
     story += [tc, Spacer(1, 3 * mm)]
 
     # Terreni (opzionale)
@@ -327,19 +428,18 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
     intestatari = cfg.get("proprietari", [])
     if intestatari:
         story.append(Paragraph("<b>Intestatari e quote di proprietà (visura):</b>", body))
-        pr = [["Nominativo", "C.F.", "Nascita", "Diritti", "Quota"]]
+        pr_rows = []
         for p in intestatari:
-            pr.append([
+            pr_rows.append([
                 p.get("nome", "—"), p.get("cf", "—"), p.get("nascita", "—"),
                 p.get("diritti", "Proprietà"), p.get("quota", "—"),
             ])
-        pt = Table(pr, colWidths=[38 * mm, 38 * mm, 38 * mm, 28 * mm, 32 * mm])
-        pt.setStyle(TableStyle([
-            ("BACKGROUND", (0, 0), (-1, 0), BLU), ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"), ("FONTSIZE", (0, 0), (-1, -1), 7.5),
-            ("BOX", (0, 0), (-1, -1), 0.5, BLU), ("INNERGRID", (0, 0), (-1, -1), 0.25, colors.HexColor("#E1DBD1")),
-            ("LEFTPADDING", (0, 0), (-1, -1), 4), ("TOPPADDING", (0, 0), (-1, -1), 3), ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
-        ]))
+        pt = make_data_table(
+            ["Nominativo", "C.F.", "Nascita", "Diritti", "Quota"],
+            pr_rows,
+            [36 * mm, 36 * mm, 40 * mm, 26 * mm, 26 * mm],
+            body_size=7.2,
+        )
         story += [pt, Spacer(1, 3 * mm)]
 
     # Sezione 3 Descrizione immobile (unica, coerente vendita/locazione)
@@ -384,16 +484,11 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
         body,
     ))
 
-    val_box = Table(
-        [[Paragraph(
-            f'<font size="9" color="#ffffff">PREZZO MASSIMO INDICATIVO DI PARTENZA COMMERCIALIZZAZIONE</font><br/>'
-            f'<font size="24" color="#FF6B35"><b>{fmt_euro(valore)}</b></font><br/>'
-            f'<font size="8" color="#cccccc">{cfg.get("euro_mq_nota", "")}</font>',
-            ParagraphStyle("v", alignment=TA_CENTER, leading=14),
-        )]],
-        colWidths=[174 * mm],
+    val_box = make_price_box(
+        valore,
+        ["PREZZO INDICATIVO DI PARTENZA", "COMMERCIALIZZAZIONE"],
+        cfg.get("euro_mq_nota", ""),
     )
-    val_box.setStyle(TableStyle([("BACKGROUND", (0, 0), (-1, -1), NERO), ("BOX", (0, 0), (-1, -1), 1.5, ORO), ("TOPPADDING", (0, 0), (-1, -1), 10), ("BOTTOMPADDING", (0, 0), (-1, -1), 10)]))
     story += [Spacer(1, 2 * mm), val_box, Spacer(1, 4 * mm)]
 
     for label, key in [
@@ -428,7 +523,7 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
             story.append(Paragraph(loc["intro"], body))
         if loc.get("gestione_nota"):
             story.append(Paragraph(loc["gestione_nota"], body))
-        rows = [["Soluzione", "Canone/mese", "Lordo annuo", "Netto annuo*", "Note"]]
+        body_rows = []
         for sc in loc.get("scenarios", []):
             lordo = sc.get("annuo_lordo")
             if lordo is None and sc.get("mensile"):
@@ -436,21 +531,19 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
             netto = sc.get("annuo_netto", "—")
             if isinstance(netto, (int, float)):
                 netto = fmt_euro(netto)
-            rows.append([
+            body_rows.append([
                 sc.get("nome", "—"),
                 fmt_euro(sc.get("mensile", 0)) if sc.get("mensile") else "—",
                 fmt_euro(lordo) if isinstance(lordo, (int, float)) else str(lordo or "—"),
                 str(netto),
                 sc.get("note", sc.get("tassazione", "—")),
             ])
-        lt = Table(rows, colWidths=[52 * mm, 24 * mm, 26 * mm, 26 * mm, 46 * mm])
-        lt.setStyle(TableStyle([
-            ("BACKGROUND", (0, 0), (-1, 0), BLU), ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"), ("FONTSIZE", (0, 0), (-1, -1), 7.5),
-            ("BOX", (0, 0), (-1, -1), 0.5, BLU), ("INNERGRID", (0, 0), (-1, -1), 0.25, colors.HexColor("#E1DBD1")),
-            ("VALIGN", (0, 0), (-1, -1), "TOP"),
-            ("LEFTPADDING", (0, 0), (-1, -1), 4), ("TOPPADDING", (0, 0), (-1, -1), 3), ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
-        ]))
+        lt = make_data_table(
+            ["Soluzione", "Canone/mese", "Lordo annuo", "Netto annuo*", "Note"],
+            body_rows,
+            [50 * mm, 22 * mm, 24 * mm, 24 * mm, 54 * mm],
+            body_size=7.2,
+        )
         story += [Spacer(1, 3 * mm), lt, Spacer(1, 2 * mm)]
         story.append(Paragraph("* Netto indicativo dopo tassazione ipotizzata; da detrarre IMU secondo regime applicabile.", small))
         if loc.get("conclusioni"):
@@ -523,7 +616,9 @@ def build_pdf(cfg: dict, attachments: dict[str, Path], tmp: Path) -> Path:
                     cap = labels[i] if i < len(labels) else ""
                     if cap:
                         story.append(Paragraph(f"<b>{cap}</b>", body))
-                    story.append(fit_rl_image(Path(img_path), 174 * mm, 95 * mm))
+                    if i > 0:
+                        story.append(PageBreak())
+                    story.append(fit_rl_image(Path(img_path), 170 * mm, 72 * mm))
                     story.append(Spacer(1, 3 * mm))
         sec_num += 1
 
