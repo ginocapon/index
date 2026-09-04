@@ -39,7 +39,6 @@ CANONE = 800
 REG = 50
 ASS = 50
 N_IMMOBILI = 15
-N_CONTRATTI_ANNO = 6  # ipotesi portafoglio: 1 contratto ogni 2 mesi
 
 
 def _esc(text: str) -> str:
@@ -243,7 +242,6 @@ def nota_per_contratto() -> Paragraph:
 
 def build_story(data_doc: date) -> list:
     c = CANONE
-    n = N_CONTRATTI_ANNO
     n_imm = N_IMMOBILI
 
     mens_ivata = ivato(c)
@@ -251,41 +249,35 @@ def build_story(data_doc: date) -> list:
     ass_ivata = ivato(ASS)
     canone_annuo = c * 12
 
-    # ── Righetto: gestione annua fissa + oneri a contratto ──
+    # ── Righetto: gestione annua fissa + registrazione a contratto (esempio: 1 concordato) ──
     righetto_gestione_annua = mens_ivata
-    righetto_reg_anno = n * reg_ivata
-    righetto_ass_anno = n * ass_ivata
-    righetto_tot_trans_anno = righetto_gestione_annua + righetto_reg_anno + righetto_ass_anno
-    righetto_tot_loc_anno = righetto_gestione_annua + righetto_reg_anno  # locazione senza ass
+    righetto_reg_un_contratto = reg_ivata
+    righetto_ass_un_contratto = ass_ivata
+    righetto_tot_concordato_es = righetto_gestione_annua + righetto_reg_un_contratto
+    righetto_tot_trans_es = righetto_gestione_annua + righetto_reg_un_contratto + righetto_ass_un_contratto
 
-    # ── Mercato (fonti: Instahome, Rentila, RealAdvisor) ──
-    mercato_mens_ivata = ivato(c)           # spesso ad ogni nuovo contratto
-    mercato_reg_ivata = ivato(100)          # € 80–150 + IVA a contratto
-    mercato_ass_ivata = ivato(200)          # € 150–200 + IVA a contratto transitorio
+    # ── Mercato (fonti: Instahome, Rentila, RealAdvisor) — stesso esempio 1 contratto ──
+    mercato_mens_ivata = ivato(c)
+    mercato_reg_ivata = ivato(100)
+    mercato_ass_ivata = ivato(200)
     mercato_gest_8_ivata = ivato(canone_annuo * 0.08)
     mercato_gest_12_ivata = ivato(canone_annuo * 0.12)
     mercato_pct_15_ivata = ivato(canone_annuo * 0.15)
 
-    # Costi a contratto × n contratti/anno
-    mercato_per_contratto_trans = mercato_mens_ivata + mercato_reg_ivata + mercato_ass_ivata
-    mercato_per_contratto_loc = mercato_mens_ivata + mercato_reg_ivata
-    mercato_oneri_contratti_trans = n * mercato_per_contratto_trans
-    mercato_oneri_contratti_loc = n * mercato_per_contratto_loc
-    mercato_reg_ass_anno = n * (mercato_reg_ivata + mercato_ass_ivata)
+    mercato_oneri_1_concordato = mercato_mens_ivata + mercato_reg_ivata
+    mercato_oneri_1_trans = mercato_mens_ivata + mercato_reg_ivata + mercato_ass_ivata
 
-    # Scenario annuo mercato — transitorio, n contratti
-    mercato_a = mercato_oneri_contratti_trans  # solo oneri a ogni contratto (stipula+reg+ass)
-    mercato_b = mercato_gest_8_ivata + mercato_oneri_contratti_trans
-    mercato_c = mercato_gest_12_ivata + mercato_oneri_contratti_trans
-    mercato_d = mercato_pct_15_ivata + mercato_reg_ass_anno  # 15% annuo + reg/ass a contratto
+    mercato_a = mercato_oneri_1_trans
+    mercato_b = mercato_gest_8_ivata + mercato_oneri_1_trans
+    mercato_c = mercato_gest_12_ivata + mercato_oneri_1_trans
+    mercato_d = mercato_pct_15_ivata + mercato_reg_ivata + mercato_ass_ivata
 
-    risparmio_vs_a = mercato_a - righetto_tot_trans_anno
-    risparmio_vs_b = mercato_b - righetto_tot_trans_anno
-    risparmio_vs_c = mercato_c - righetto_tot_trans_anno
-    risparmio_vs_d = mercato_d - righetto_tot_trans_anno
+    risparmio_vs_a = mercato_a - righetto_tot_trans_es
+    risparmio_vs_b = mercato_b - righetto_tot_concordato_es
+    risparmio_vs_c = mercato_c - righetto_tot_concordato_es
+    risparmio_vs_d = mercato_d - righetto_tot_concordato_es
 
-    # Portafoglio 15 immobili (ipotesi n contratti/anno ciascuno, transitorio)
-    righetto_portfolio = n_imm * righetto_tot_trans_anno
+    righetto_portfolio = n_imm * righetto_tot_concordato_es
     mercato_portfolio_b = n_imm * mercato_b
     risparmio_portfolio_b = mercato_portfolio_b - righetto_portfolio
 
@@ -313,10 +305,10 @@ def build_story(data_doc: date) -> list:
             ["Destinatario", "Sig. Canton Romeo"],
             ["Agenzia", AZIENDA],
             ["Data", data_doc.strftime("%d/%m/%Y")],
-            ["Portafoglio", f"{n_imm} immobili — locazione 1–18 mesi (transitorio)"],
+            ["Portafoglio", f"{n_imm} immobili — locazione"],
             ["Mandato", "Contratto annuale — rinnovo tacito — disdetta 30 gg"],
-            ["Ipotesi rotazione", f"{n} contratti/anno per immobile (1 ogni 2 mesi)"],
-            ["Gestione", "1 mensilità annua / immobile — oneri reg./ass. a contratto"],
+            ["Esempio tariffario", "1 immobile — registrazione canone concordato"],
+            ["Gestione", "1 mensilità annua / immobile — reg./ass. a ogni contratto"],
         ],
         [48 * mm, 126 * mm],
     ))
@@ -338,9 +330,8 @@ def build_story(data_doc: date) -> list:
     story.append(box_gestione_inclusa([
         "Il compenso di <b>gestione è annuo per immobile</b> (1 mensilità all'anno): referente unico, rapporto con l'inquilino, "
         "scadenze, piccole urgenze, coordinamento tecnici — <b>senza percentuali aggiuntive</b> sul canone.",
-        "<b>Registrazione</b> (€ 50 + IVA) e <b>asseverazione</b> transitorio (€ 50 + IVA) si pagano "
-        "<b>a ogni contratto stilato</b>, non come voce annua fissa. Con rotazione alta (es. 1 contratto ogni 2 mesi = "
-        f"<b>{n} contratti/anno</b>) vanno conteggiati separatamente.",
+        "<b>Registrazione</b> (€ 50 + IVA) si paga <b>a ogni contratto stilato</b> — nell'esempio tariffario "
+        "sotto: <b>1 registrazione canone concordato</b>. L'<b>asseverazione</b> (€ 50 + IVA) solo su contratti transitorio, sempre a contratto.",
         "Riparazioni e pulizie restano a carico del proprietario — con avviso WhatsApp prima di ogni intervento.",
     ]))
     story.append(Spacer(1, 3 * mm))
@@ -360,10 +351,10 @@ def build_story(data_doc: date) -> list:
     story.append(nota_per_contratto())
     story.append(Spacer(1, 2 * mm))
     story.append(Paragraph(
-        "<b>Come leggere gli importi:</b> la <b>gestione</b> è un costo <b>annuo fisso</b> (1 mensilità) — "
-        "non aumenta se si stipulano più contratti nello stesso anno. "
-        f"<b>Registrazione e asseverazione</b> sono <b>a contratto</b>: con {n} contratti/anno si moltiplicano. "
-        "Stessa logica per il confronto mercato.",
+        "<b>Come leggere gli importi:</b> la <b>gestione</b> è un costo <b>annuo fisso</b> (1 mensilità). "
+        "<b>Registrazione e asseverazione</b> sono <b>a ogni contratto</b> — l'esempio mostra "
+        "<b>1 immobile con 1 registrazione concordato</b>. Se si stipulano più contratti nell'anno, "
+        "registrazione (e asseverazione se transitorio) si moltiplicano; la gestione annua no.",
         body,
     ))
     story.append(Spacer(1, 2 * mm))
@@ -378,19 +369,19 @@ def build_story(data_doc: date) -> list:
     story.append(band("LA NOSTRA OFFERTA RIGHETTO — gestione annua + oneri a contratto", colors.HexColor("#1B6B4A")))
     story.append(Spacer(1, 3 * mm))
     story.append(Paragraph(
-        f"Canone tipo <b>€ {c}/mese</b>. Ipotesi <b>{n} contratti transitorio/anno</b> per immobile (1 ogni 2 mesi). "
-        "Tutti gli importi + IVA 22%.",
+        f"<b>Esempio — 1 immobile, canone € {c}/mese, 1 registrazione concordato.</b> "
+        "Gestione annua fissa + oneri a contratto. Tutti gli importi + IVA 22%.",
         body,
     ))
     story.append(Spacer(1, 2 * mm))
     story.append(tbl_righetto_prezzi(
-        ["Voce Righetto", "Base", "Ivato (22%)"],
+        ["Voce Righetto — esempio 1 immobile", "Base", "Ivato (22%)"],
         [
             ["Gestione annua (1 anno / immobile)", fmt_euro(c), fmt_euro(righetto_gestione_annua)],
-            [f"Registrazione (×{n} contratti/anno)", fmt_euro(n * REG), fmt_euro(righetto_reg_anno)],
-            [f"Asseverazione transitorio (×{n} contratti/anno)", fmt_euro(n * ASS), fmt_euro(righetto_ass_anno)],
-            [f"TOTALE anno — transitorio ({n} contratti)", fmt_euro(c + n * REG + n * ASS), fmt_euro(righetto_tot_trans_anno)],
-            [f"TOTALE anno — locazione ({n} contratti, no ass.)", fmt_euro(c + n * REG), fmt_euro(righetto_tot_loc_anno)],
+            ["Registrazione concordato (1 contratto)", fmt_euro(REG), fmt_euro(righetto_reg_un_contratto)],
+            ["TOTALE esempio — canone concordato", fmt_euro(c + REG), fmt_euro(righetto_tot_concordato_es)],
+            ["+ Asseverazione transitorio (se applicabile, a contratto)", fmt_euro(ASS), fmt_euro(righetto_ass_un_contratto)],
+            ["TOTALE esempio — transitorio (1 contratto)", fmt_euro(c + REG + ASS), fmt_euro(righetto_tot_trans_es)],
         ],
         [68 * mm, 53 * mm, 53 * mm],
     ))
@@ -398,7 +389,7 @@ def build_story(data_doc: date) -> list:
     story.append(nota_per_contratto())
 
     story.append(Spacer(1, 6 * mm))
-    story.append(band(f"COSA CHIEDE IL MERCATO — stesso scenario ({n} contratti/anno)"))
+    story.append(band("COSA CHIEDE IL MERCATO — stesso esempio (1 contratto)"))
     story.append(Spacer(1, 3 * mm))
     story.append(Paragraph(
         "Zona Piazzola sul Brenta, Camposampiero, Padova. Fonti: Instahome, Rentila, RealAdvisor. "
@@ -414,7 +405,8 @@ def build_story(data_doc: date) -> list:
             ["1 mensilità canone (stipula)", "A ogni contratto", fmt_euro(mercato_mens_ivata)],
             ["Registrazione pratica", "A ogni contratto", fmt_euro(mercato_reg_ivata)],
             ["Asseverazione transitorio", "A ogni contratto transitorio", fmt_euro(mercato_ass_ivata)],
-            [f"Subtotale oneri ×{n} contratti/anno", "Annuo", fmt_euro(mercato_oneri_contratti_trans)],
+            ["Subtotale oneri — 1 contratto concordato", "A contratto", fmt_euro(mercato_oneri_1_concordato)],
+            ["Subtotale oneri — 1 contratto transitorio", "A contratto", fmt_euro(mercato_oneri_1_trans)],
             ["Gestione annua 8% canone", "Annuo / immobile", fmt_euro(mercato_gest_8_ivata)],
             ["Gestione annua 12% canone", "Annuo / immobile", fmt_euro(mercato_gest_12_ivata)],
             ["Oppure 15% canone annuo", "Annuo / immobile", fmt_euro(mercato_pct_15_ivata)],
@@ -425,27 +417,27 @@ def build_story(data_doc: date) -> list:
     story.append(nota_per_contratto())
     story.append(Spacer(1, 2 * mm))
     story.append(tbl(
-        [f"Scenario mercato — {n} contratti/anno / immobile", "Totale ivato annuo"],
+        ["Scenario mercato — esempio 1 contratto / immobile", "Totale ivato"],
         [
-            [f"A — Oneri a contratto (×{n}, no gest. %)", fmt_euro(mercato_a)],
-            ["B — Oneri a contratto + gestione 8% annua", fmt_euro(mercato_b)],
-            ["C — Oneri a contratto + gestione 12% annua", fmt_euro(mercato_c)],
-            ["D — 15% annuo + reg./ass. a contratto", fmt_euro(mercato_d)],
+            ["A — Oneri transitorio (1 contratto, no gest. %)", fmt_euro(mercato_a)],
+            ["B — Oneri transitorio + gestione 8% annua", fmt_euro(mercato_b)],
+            ["C — Oneri transitorio + gestione 12% annua", fmt_euro(mercato_c)],
+            ["D — 15% annuo + reg./ass. (1 contratto)", fmt_euro(mercato_d)],
         ],
         [90 * mm, 84 * mm],
     ))
     story.append(nota_per_contratto())
 
     story.append(Spacer(1, 6 * mm))
-    story.append(band(f"RIGHETTO VS MERCATO — {n} contratti/anno · risparmio in rosso", colors.HexColor("#2C4A6E")))
+    story.append(band("RIGHETTO VS MERCATO — esempio 1 immobile · risparmio in rosso", colors.HexColor("#2C4A6E")))
     story.append(Spacer(1, 3 * mm))
     story.append(tbl_confronto_risparmio(
         [
-            [f"A — Solo oneri ×{n} contr.", fmt_euro(righetto_tot_trans_anno), fmt_euro(mercato_a), fmt_euro(risparmio_vs_a)],
-            ["B — Oneri + gest. 8%", fmt_euro(righetto_tot_trans_anno), fmt_euro(mercato_b), fmt_euro(risparmio_vs_b)],
-            ["C — Oneri + gest. 12%", fmt_euro(righetto_tot_trans_anno), fmt_euro(mercato_c), fmt_euro(risparmio_vs_c)],
-            ["D — 15% + reg./ass.", fmt_euro(righetto_tot_trans_anno), fmt_euro(mercato_d), fmt_euro(risparmio_vs_d)],
-            [f"{n_imm} immobili × scen. B", fmt_euro(righetto_portfolio), fmt_euro(mercato_portfolio_b), fmt_euro(risparmio_portfolio_b)],
+            ["A — Solo oneri transitorio", fmt_euro(righetto_tot_trans_es), fmt_euro(mercato_a), fmt_euro(risparmio_vs_a)],
+            ["B — Oneri + gest. 8%", fmt_euro(righetto_tot_concordato_es), fmt_euro(mercato_b), fmt_euro(risparmio_vs_b)],
+            ["C — Oneri + gest. 12%", fmt_euro(righetto_tot_concordato_es), fmt_euro(mercato_c), fmt_euro(risparmio_vs_c)],
+            ["D — 15% + reg./ass.", fmt_euro(righetto_tot_concordato_es), fmt_euro(mercato_d), fmt_euro(risparmio_vs_d)],
+            [f"{n_imm} immobili × es. concordato", fmt_euro(righetto_portfolio), fmt_euro(mercato_portfolio_b), fmt_euro(risparmio_portfolio_b)],
         ],
         [40 * mm, 42 * mm, 42 * mm, 50 * mm],
     ))
@@ -453,27 +445,26 @@ def build_story(data_doc: date) -> list:
     story.append(nota_per_contratto())
     story.append(Spacer(1, 3 * mm))
     story.append(Paragraph(
-        "Colonna <b>Righetto</b>: gestione annua (1 mensilità) + reg./ass. moltiplicati per "
-        f"<b>{n} contratti/anno</b>. Il mercato spesso addebita la mensilità "
-        "<b>a ogni contratto</b> oltre alla gestione % — da qui il risparmio in rosso.",
+        "Colonna <b>Righetto</b>: gestione annua (1 mensilità) + <b>1 registrazione</b> nell'esempio concordato. "
+        "Il mercato spesso addebita la mensilità <b>a ogni contratto</b> oltre alla gestione % — "
+        "da qui il risparmio in rosso.",
         body,
     ))
 
     # ── PAG. 4: ESEMPIO PRATICO ──
     story.append(PageBreak())
-    story.append(Paragraph(f"Esempio pratico — 1 appartamento € {c}/mese · {n} contratti transitorio/anno", h2))
+    story.append(Paragraph(f"Esempio pratico — 1 appartamento € {c}/mese · canone concordato", h2))
 
-    story.append(Paragraph(f"<b>Costi annui — ipotesi {n} contratti (1 ogni 2 mesi)</b>", ParagraphStyle("h3", parent=body, fontName="Helvetica-Bold", textColor=BLU)))
+    story.append(Paragraph("<b>1 immobile — 1 registrazione concordato nell'anno</b>", ParagraphStyle("h3", parent=body, fontName="Helvetica-Bold", textColor=BLU)))
     story.append(tbl(
         ["Voce", "Calcolo", "Importo ivato"],
         [
-            ["Canone incassato (12 mesi)", "€ 800 × 12", fmt_euro(c * 12)],
+            ["Canone incassato (12 mesi)", f"€ {c} × 12", fmt_euro(c * 12)],
             ["Gestione Righetto (annua)", "1 mensilità / anno", fmt_euro(righetto_gestione_annua)],
-            [f"Registrazione (×{n} contratti)", f"€ {REG} + IVA × {n}", fmt_euro(righetto_reg_anno)],
-            [f"Asseverazione (×{n} contratti)", f"€ {ASS} + IVA × {n}", fmt_euro(righetto_ass_anno)],
-            ["TOTALE compenso Righetto", f"Gestione + {n}× reg. + {n}× ass.", fmt_euro(righetto_tot_trans_anno)],
+            ["Registrazione concordato", f"€ {REG} + IVA × 1 contratto", fmt_euro(righetto_reg_un_contratto)],
+            ["TOTALE compenso Righetto", "Gestione + 1 registrazione", fmt_euro(righetto_tot_concordato_es)],
             ["Riparazioni", "—", "A carico proprietario"],
-            ["Netto indicativo proprietario", "Canoni − compenso Righetto", fmt_euro(c * 12 - righetto_tot_trans_anno)],
+            ["Netto indicativo proprietario", "Canoni − compenso Righetto", fmt_euro(c * 12 - righetto_tot_concordato_es)],
         ],
         [52 * mm, 58 * mm, 64 * mm],
         size=8.5,
@@ -482,14 +473,13 @@ def build_story(data_doc: date) -> list:
     story.append(nota_per_contratto())
 
     story.append(Spacer(1, 5 * mm))
-    story.append(Paragraph(f"<b>Portafoglio {n_imm} immobili</b> — {n} contratti/anno ciascuno (transitorio)", ParagraphStyle("h3c", parent=body, fontName="Helvetica-Bold", textColor=BLU)))
+    story.append(Paragraph(f"<b>Portafoglio {n_imm} immobili</b> — esempio 1 registrazione concordato / immobile", ParagraphStyle("h3c", parent=body, fontName="Helvetica-Bold", textColor=BLU)))
     th_p = ParagraphStyle("th2", fontName="Helvetica-Bold", fontSize=9.5, leading=11, textColor=colors.white)
     t_port = Table([
-        [Paragraph(_esc("Voce annua"), th_p), Paragraph(_esc("Importo"), th_p)],
+        [Paragraph(_esc("Voce"), th_p), Paragraph(_esc("Importo"), th_p)],
         [p_td(f"Canoni incassati ({n_imm} × € {c} × 12)"), p_td(fmt_euro(n_imm * c * 12))],
         [p_td(f"Gestione annua × {n_imm} immobili"), p_td(fmt_euro(n_imm * righetto_gestione_annua))],
-        [p_td(f"Registrazione × {n_imm} × {n} contratti"), p_td(fmt_euro(n_imm * righetto_reg_anno))],
-        [p_td(f"Asseverazione × {n_imm} × {n} contratti"), p_td(fmt_euro(n_imm * righetto_ass_anno))],
+        [p_td(f"Registrazione concordato × {n_imm} (1 contratto ciascuno)"), p_td(fmt_euro(n_imm * righetto_reg_un_contratto))],
         [p_td(f"TOTALE compensi Righetto ({n_imm} immobili)"), p_td(fmt_euro(righetto_portfolio), bold=True, color=NERO)],
         [p_td("Risparmio vs mercato (scen. B)"), p_td(fmt_euro(risparmio_portfolio_b), bold=True, color=ROSSO)],
         [p_td("Referente unico + WhatsApp"), p_td("Incluso nella gestione annua")],
@@ -497,7 +487,7 @@ def build_story(data_doc: date) -> list:
     t_port.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), BLU),
         ("BACKGROUND", (0, 1), (-1, -1), SFONDO),
-        ("BACKGROUND", (0, 6), (-1, 6), RIGHE_RISPARMIO),
+        ("BACKGROUND", (0, 5), (-1, 5), RIGHE_RISPARMIO),
         ("BOX", (0, 0), (-1, -1), 1, BLU),
         ("INNERGRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#D4CEC4")),
         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
@@ -511,8 +501,8 @@ def build_story(data_doc: date) -> list:
 
     story.append(Spacer(1, 6 * mm))
     story.append(Paragraph(
-        "Gestione Righetto: <b>annua per immobile</b>. Registrazione e asseverazione: <b>a contratto</b>. "
-        f"Ipotesi <b>{n} contratti/anno</b> per immobile — adattabile se la rotazione è diversa. "
+        "Gestione Righetto: <b>annua per immobile</b>. Registrazione: <b>a ogni contratto</b> "
+        "(esempio: 1 concordato per immobile). Asseverazione solo transitorio, a contratto. "
         "Canone € 800/mese indicativo Piazzola–Camposampiero–Padova. Fonti: Instahome, Rentila, RealAdvisor. "
         "Tutti gli importi + IVA 22% dove applicabile.",
         sm,
