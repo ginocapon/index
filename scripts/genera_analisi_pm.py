@@ -143,13 +143,17 @@ def build_story(data_doc: date) -> list:
     ass_ivata = ivato(ASS)
     nostra_trans = mens_ivata + reg_ivata + ass_ivata
     nostra_std = mens_ivata + reg_ivata
-    proroga_ivata = ivato(c * 0.25)
 
-    # Ipotesi mercato (fonti: Instahome, prassi agenzie — 1 mens. + % annua; ass. ~150 €)
+    # Mercato — ipotesi su canone € 800 (Instahome: 1 mens. + ass. transitorio ~€ 150–180)
     mercato_mens_ivata = ivato(c)
-    mercato_pct_ivata = ivato(c * 12 * 0.15)  # 15% canone annuo
-    mercato_ass = "€ 150 – 180"
-    mercato_trans_tot = "~€ 1.130 – 1.160"  # 976 + 150-180 indicativo
+    mercato_ass_ivata_min = ivato(150)
+    mercato_ass_ivata_max = ivato(180)
+    mercato_trans_min = mercato_mens_ivata + mercato_ass_ivata_min
+    mercato_trans_max = mercato_mens_ivata + mercato_ass_ivata_max
+    mercato_trans_medio = mercato_mens_ivata + ivato(165)
+    risparmio_trans_min = mercato_trans_min - nostra_trans
+    risparmio_trans_max = mercato_trans_max - nostra_trans
+    risparmio_trans_medio = mercato_trans_medio - nostra_trans
 
     h1 = ParagraphStyle("H1", fontName="Helvetica-Bold", fontSize=15, textColor=BLU, alignment=TA_CENTER, spaceAfter=4)
     h2 = ParagraphStyle("H2", fontName="Helvetica-Bold", fontSize=11.5, textColor=BLU, spaceBefore=8, spaceAfter=5)
@@ -193,12 +197,10 @@ def build_story(data_doc: date) -> list:
     ))
     story.append(Spacer(1, 3 * mm))
     story.append(tbl(
-        ["Situazione", "Cosa paga il proprietario"],
+        ["Voce", "Cosa paga il proprietario"],
         [
-            ["Stipula contratto (qualsiasi durata 1–18 mesi)", "1 mensilità canone + € 50 registrazione + IVA"],
-            ["Stipula contratto transitorio", "Sopra + € 50 asseverazione + IVA"],
-            ["Nuovo inquilino", "€ 0 — paga il conduttore (1 mensilità)"],
-            ["Proroga stesso inquilino", "¼ mensilità + IVA"],
+            ["Contratto locazione", "1 mensilità + € 50 registrazione + IVA"],
+            ["Contratto transitorio", "1 mensilità + € 50 registrazione + € 50 asseverazione + IVA"],
             ["Pulizie fine locazione", "A carico proprietario — le coordiniamo noi"],
             ["Riparazioni / manutenzioni", "A carico proprietario — avviso WhatsApp + preventivo"],
         ],
@@ -211,98 +213,104 @@ def build_story(data_doc: date) -> list:
         body,
     ))
 
-    # ── PAG. 3: MERCATO VS NOI ──
-    story.append(Spacer(1, 6 * mm))
-    story.append(band("CONFRONTO 1 — Cosa chiedono di solito le altre agenzie"))
+    # ── PAG. 3: MERCATO VS NOI + RISPARMIO ──
+    story.append(PageBreak())
+    story.append(band("IPOTESI MERCATO — 1 appartamento € 800/mese"))
     story.append(Spacer(1, 3 * mm))
     story.append(Paragraph(
-        f"Esempio appartamento <b>{fmt_euro(c)}/mese</b>, contratto 1–18 mesi, zona Padova nord "
-        "(Piazzola, Camposampiero). Prassi di mercato (Instahome e agenzie locali):",
+        "Zona Piazzola sul Brenta, Camposampiero, Padova. Prassi tipica delle agenzie (1 mensilità + oneri transitorio).",
         body,
     ))
     story.append(Spacer(1, 2 * mm))
     story.append(tbl(
-        ["Voce", "Mercato tipico", "Note"],
+        ["Voce", "Importo ivato (22%)"],
         [
-            ["Trova inquilino — proprietario", f"1 mensilità ({fmt_euro(mercato_mens_ivata)} ivata)", "Spesso anche conduttore paga 1 mens."],
-            ["Gestione continuativa", f"10–15% annuo ({fmt_euro(mercato_pct_ivata)} ivata su € 9.600)", "Non sempre separata"],
-            ["Registrazione contratto", "Inclusa o a parte", "Adempimento obbligatorio"],
-            ["Asseverazione transitorio", mercato_ass, "Obbligatoria se transitorio agevolato"],
-            ["Proroga / rinnovo", "Spesso nuova mensilità", "Variabile per agenzia"],
+            ["1 mensilità canone", fmt_euro(mercato_mens_ivata)],
+            ["Asseverazione transitorio", f"{fmt_euro(mercato_ass_ivata_min)} – {fmt_euro(mercato_ass_ivata_max)}"],
+            ["Totale transitorio (indicativo)", f"{fmt_euro(mercato_trans_min)} – {fmt_euro(mercato_trans_max)}"],
         ],
-        [44 * mm, 58 * mm, 72 * mm],
-        size=8.8,
+        [90 * mm, 84 * mm],
     ))
 
     story.append(Spacer(1, 6 * mm))
-    story.append(band("CONFRONTO 2 — La nostra offerta Righetto (più chiara e competitiva)", colors.HexColor("#1B6B4A")))
+    story.append(band("IPOTESI RIGHETTO — stesso appartamento", colors.HexColor("#1B6B4A")))
     story.append(Spacer(1, 3 * mm))
     story.append(tbl(
-        ["Voce", "Righetto — imponibile", "Righetto — ivato (22%)"],
+        ["Voce", "Imponibile", "Ivato (22%)"],
         [
-            ["1 mensilità gestione/stipula", fmt_euro(c), fmt_euro(mens_ivata)],
+            ["1 mensilità canone", fmt_euro(c), fmt_euro(mens_ivata)],
             ["Registrazione", fmt_euro(REG), fmt_euro(reg_ivata)],
-            ["Asseverazione (solo transitorio)", fmt_euro(ASS), fmt_euro(ass_ivata)],
+            ["Asseverazione (transitorio)", fmt_euro(ASS), fmt_euro(ass_ivata)],
             ["Totale transitorio", fmt_euro(c + REG + ASS), fmt_euro(nostra_trans)],
-            ["Totale contratto ordinario", fmt_euro(c + REG), fmt_euro(nostra_std)],
-            ["Nuovo inquilino — proprietario", "€ 0", "€ 0"],
-            ["Proroga stesso inquilino", fmt_euro(c * 0.25), fmt_euro(proroga_ivata)],
+            ["Totale contratto locazione", fmt_euro(c + REG), fmt_euro(nostra_std)],
         ],
         [58 * mm, 58 * mm, 58 * mm],
-        highlight_last=False,
-    ))
-    story.append(Spacer(1, 3 * mm))
-    story.append(tbl(
-        ["", "Mercato transitorio", "Righetto transitorio", "Vantaggio"],
-        [
-            ["Costo proprietario indicativo", mercato_trans_tot, fmt_euro(nostra_trans), "Accessori più bassi"],
-            ["Nuovo inquilino", "Spesso doppia commissione", "€ 0 proprietario", "Risparmio netto"],
-            ["Comunicazione riparazioni", "Variabile", "WhatsApp + preventivo", "Trasparenza"],
-        ],
-        [40 * mm, 44 * mm, 44 * mm, 46 * mm],
-        size=8.8,
-        highlight_last=False,
     ))
 
-    # ── PAG. 4: ESEMPI NUMERICI ──
+    story.append(Spacer(1, 6 * mm))
+    story.append(band("QUANTO RISPARMI CON RIGHETTO", colors.HexColor("#2C4A6E")))
+    story.append(Spacer(1, 3 * mm))
+    story.append(tbl(
+        ["Confronto", "Mercato", "Righetto", "Risparmio"],
+        [
+            [
+                "Transitorio (1 stipula)",
+                fmt_euro(mercato_trans_medio),
+                fmt_euro(nostra_trans),
+                fmt_euro(risparmio_trans_medio),
+            ],
+            [
+                "Transitorio (range mercato)",
+                f"{fmt_euro(mercato_trans_min)} – {fmt_euro(mercato_trans_max)}",
+                fmt_euro(nostra_trans),
+                f"{fmt_euro(risparmio_trans_min)} – {fmt_euro(risparmio_trans_max)}",
+            ],
+            [
+                "15 immobili — 8 stipule/anno",
+                fmt_euro(8 * mercato_trans_medio),
+                fmt_euro(8 * nostra_trans),
+                fmt_euro(8 * risparmio_trans_medio),
+            ],
+        ],
+        [42 * mm, 44 * mm, 44 * mm, 44 * mm],
+        size=9,
+        highlight_last=True,
+    ))
+    story.append(Spacer(1, 3 * mm))
+    story.append(Paragraph(
+        "Il risparmio principale è sull'<b>asseverazione</b> (€ 50 + IVA invece di € 150–180 di mercato) "
+        "e su una tariffa unica trasparente, senza costi nascosti.",
+        body,
+    ))
+
+    # ── PAG. 4: ESEMPIO PRATICO ──
     story.append(PageBreak())
     story.append(Paragraph("Esempio pratico — 1 appartamento € 800/mese", h2))
 
-    story.append(Paragraph("<b>A) Contratto transitorio 12 mesi</b>", ParagraphStyle("h3", parent=body, fontName="Helvetica-Bold", textColor=BLU)))
-    story.append(tbl(
-        ["", "Proprietario", "Conduttore"],
-        [
-            ["Canone incassato (12 mesi)", fmt_euro(c * 12), "—"],
-            ["Compenso agenzia (stipula)", fmt_euro(nostra_trans), fmt_euro(mens_ivata)],
-            ["Riparazioni", "A carico proprietario", "—"],
-            ["Netto indicativo proprietario", fmt_euro(c * 12 - nostra_trans), "—"],
-        ],
-        [68 * mm, 53 * mm, 53 * mm],
-    ))
-
-    story.append(Spacer(1, 5 * mm))
-    story.append(Paragraph("<b>B) Proroga stesso inquilino (senza nuove visite)</b>", ParagraphStyle("h3b", parent=body, fontName="Helvetica-Bold", textColor=BLU)))
+    story.append(Paragraph("<b>Contratto transitorio 12 mesi</b>", ParagraphStyle("h3", parent=body, fontName="Helvetica-Bold", textColor=BLU)))
     story.append(tbl(
         ["", "Importo"],
         [
-            ["Compenso agenzia (¼ mensilità + IVA)", fmt_euro(proroga_ivata)],
-            ["Nuove visite / annuncio", "Non necessario"],
+            ["Canone incassato (12 mesi)", fmt_euro(c * 12)],
+            ["Compenso agenzia Righetto (ivato)", fmt_euro(nostra_trans)],
+            ["Riparazioni", "A carico proprietario (avviso WhatsApp)"],
+            ["Netto indicativo proprietario", fmt_euro(c * 12 - nostra_trans)],
         ],
         [110 * mm, 64 * mm],
     ))
 
     story.append(Spacer(1, 5 * mm))
-    story.append(Paragraph("<b>C) Portafoglio 15 immobili</b> (ipotesi: 8 nuove stipule transitorio/anno)", ParagraphStyle("h3c", parent=body, fontName="Helvetica-Bold", textColor=BLU)))
+    story.append(Paragraph("<b>Portafoglio 15 immobili</b> (8 stipule transitorio/anno)", ParagraphStyle("h3c", parent=body, fontName="Helvetica-Bold", textColor=BLU)))
     story.append(tbl(
         ["", "Totale indicativo"],
         [
             ["Canoni annui incassati (15 × € 800 × 12)", fmt_euro(15 * c * 12)],
-            ["Compensi agenzia da proprietario (8 stipule × " + fmt_euro(nostra_trans) + ")", fmt_euro(8 * nostra_trans)],
-            ["Compensi da conduttori (8 × " + fmt_euro(mens_ivata) + ")", fmt_euro(8 * mens_ivata)],
-            ["Referente unico + WhatsApp per tutto", "Incluso nel mandato"],
+            ["Compensi agenzia da proprietario (8 × " + fmt_euro(nostra_trans) + ")", fmt_euro(8 * nostra_trans)],
+            ["Risparmio vs mercato (8 stipule)", fmt_euro(8 * risparmio_trans_medio)],
+            ["Referente unico + WhatsApp", "Incluso nel mandato annuale"],
         ],
         [110 * mm, 64 * mm],
-        highlight_last=True,
+        highlight_last=False,
     ))
 
     story.append(Spacer(1, 6 * mm))
