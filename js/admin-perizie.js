@@ -62,8 +62,10 @@
     if (empty) empty.style.display = 'none';
 
     el.innerHTML = rows.map(function (r) {
-      var pdf = esc(r.pdf || '');
-      var nomeFile = (r.pdf || '').split('/').pop() || 'perizia.pdf';
+      var pdfBase = r.pdf || '';
+      var pdfVer = r.pdf_version ? String(r.pdf_version) : '';
+      var pdf = esc(pdfBase + (pdfVer ? ('?v=' + encodeURIComponent(pdfVer)) : ''));
+      var nomeFile = pdfBase.split('/').pop() || 'perizia.pdf';
       return (
         '<tr>' +
           '<td><strong>' + esc(fmtData(r.data)) + '</strong></td>' +
@@ -84,7 +86,7 @@
     var el = document.getElementById('perizieTableBody');
     if (el) el.innerHTML = '<tr><td colspan="6" style="padding:24px;text-align:center;color:var(--caffe2)">Caricamento archivio…</td></tr>';
 
-    fetch('data/perizie-index.json?v=9')
+    fetch('data/perizie-index.json?v=10')
       .then(function (res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
         return res.json();
