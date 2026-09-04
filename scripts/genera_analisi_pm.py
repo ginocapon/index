@@ -228,27 +228,45 @@ def build_story(data_doc: date) -> list:
         body,
     ))
 
-    # ── PAG. 3: MERCATO VS NOI + RISPARMIO ──
+    # ── PAG. 3: RIGHETTO PRIMA, POI MERCATO + RISPARMIO ──
     story.append(PageBreak())
-    story.append(band("IPOTESI MERCATO — 1 appartamento € 800/mese"))
+    story.append(band("LA NOSTRA OFFERTA RIGHETTO — 1 appartamento € 800/mese", colors.HexColor("#1B6B4A")))
     story.append(Spacer(1, 3 * mm))
     story.append(Paragraph(
-        "Zona Piazzola sul Brenta, Camposampiero, Padova. "
-        "Le agenzie applicano spesso <b>più voci</b>: mensilità o 10–15% annuo, più registrazione, "
-        "asseverazione (transitorio) e talvolta <b>gestione continuativa</b> 8–12% sul canone annuo "
-        "(fonti: Instahome, Rentila, RealAdvisor).",
+        "Tariffa unica per ogni stipula, <b>senza percentuali annue</b> sul canone. Tutti gli importi + IVA 22%.",
+        body,
+    ))
+    story.append(Spacer(1, 2 * mm))
+    story.append(tbl(
+        ["Voce Righetto", "Imponibile", "Ivato (22%)"],
+        [
+            ["1 mensilità canone", fmt_euro(c), fmt_euro(mens_ivata)],
+            ["Registrazione", fmt_euro(REG), fmt_euro(reg_ivata)],
+            ["Asseverazione (transitorio)", fmt_euro(ASS), fmt_euro(ass_ivata)],
+            ["Totale transitorio", fmt_euro(c + REG + ASS), fmt_euro(nostra_trans)],
+            ["Totale contratto locazione", fmt_euro(c + REG), fmt_euro(nostra_std)],
+        ],
+        [58 * mm, 58 * mm, 58 * mm],
+    ))
+
+    story.append(Spacer(1, 6 * mm))
+    story.append(band("COSA CHIEDE IL MERCATO — stesso appartamento"))
+    story.append(Spacer(1, 3 * mm))
+    story.append(Paragraph(
+        "Zona Piazzola sul Brenta, Camposampiero, Padova. Verifica su fonti di settore (Instahome, Rentila, "
+        "RealAdvisor): le agenzie applicano spesso <b>più voci sommate</b> — non solo la mensilità.",
         body,
     ))
     story.append(Spacer(1, 2 * mm))
     story.append(tbl(
         ["Voce mercato", "Importo ivato (22%)", "Note"],
         [
-            ["1 mensilità canone (proprietario)", fmt_euro(mercato_mens_ivata), "Prassi diffusa"],
-            ["Oppure 15% canone annuo", fmt_euro(mercato_pct_15_ivata), "Modello alternativo"],
-            ["Pratiche registrazione", fmt_euro(mercato_reg_ivata), "Spesso € 80–150 + IVA"],
-            ["Asseverazione transitorio", fmt_euro(mercato_ass_ivata), "Indic. € 150–200 + IVA"],
-            ["Gestione annua 8%", fmt_euro(mercato_gest_8_ivata), "Solo gestione continuativa"],
-            ["Gestione annua 12%", fmt_euro(mercato_gest_12_ivata), "Gestione più strutturata"],
+            ["1 mensilità canone (proprietario)", fmt_euro(mercato_mens_ivata), "Quasi sempre"],
+            ["Oppure 15% canone annuo", fmt_euro(mercato_pct_15_ivata), "Alternativa frequente"],
+            ["Pratiche registrazione", fmt_euro(mercato_reg_ivata), "€ 80–150 + IVA"],
+            ["Asseverazione transitorio", f"{fmt_euro(ivato(180))} – {fmt_euro(ivato(250))}", "€ 180–250 + IVA"],
+            ["Gestione annua 8%", fmt_euro(mercato_gest_8_ivata), "Aggiuntiva, ogni anno"],
+            ["Gestione annua 12%", fmt_euro(mercato_gest_12_ivata), "Gestione strutturata"],
         ],
         [52 * mm, 44 * mm, 78 * mm],
         size=8.5,
@@ -266,54 +284,39 @@ def build_story(data_doc: date) -> list:
     ))
 
     story.append(Spacer(1, 6 * mm))
-    story.append(band("IPOTESI RIGHETTO — stesso appartamento", colors.HexColor("#1B6B4A")))
+    story.append(band("RIGHETTO VS MERCATO — quanto risparmi", colors.HexColor("#2C4A6E")))
     story.append(Spacer(1, 3 * mm))
     story.append(tbl(
-        ["Voce", "Imponibile", "Ivato (22%)"],
-        [
-            ["1 mensilità canone", fmt_euro(c), fmt_euro(mens_ivata)],
-            ["Registrazione", fmt_euro(REG), fmt_euro(reg_ivata)],
-            ["Asseverazione (transitorio)", fmt_euro(ASS), fmt_euro(ass_ivata)],
-            ["Totale transitorio", fmt_euro(c + REG + ASS), fmt_euro(nostra_trans)],
-            ["Totale contratto locazione", fmt_euro(c + REG), fmt_euro(nostra_std)],
-        ],
-        [58 * mm, 58 * mm, 58 * mm],
-    ))
-
-    story.append(Spacer(1, 6 * mm))
-    story.append(band("QUANTO RISPARMI CON RIGHETTO", colors.HexColor("#2C4A6E")))
-    story.append(Spacer(1, 3 * mm))
-    story.append(tbl(
-        ["Confronto", "Mercato", "Righetto", "Risparmio"],
+        ["Scenario", "Righetto", "Mercato", "Risparmio"],
         [
             [
                 "A — Solo stipula",
-                fmt_euro(mercato_solo_stipula),
                 fmt_euro(nostra_trans),
+                fmt_euro(mercato_solo_stipula),
                 fmt_euro(risparmio_vs_solo),
             ],
             [
                 "B — Stipula + gest. 8%",
-                fmt_euro(mercato_completo_min),
                 fmt_euro(nostra_trans),
+                fmt_euro(mercato_completo_min),
                 fmt_euro(risparmio_vs_completo_min),
             ],
             [
                 "C — Stipula + gest. 12%",
-                fmt_euro(mercato_completo_max),
                 fmt_euro(nostra_trans),
+                fmt_euro(mercato_completo_max),
                 fmt_euro(risparmio_vs_completo_max),
             ],
             [
                 "D — 15% annuo + oneri",
-                fmt_euro(mercato_pct15_tot),
                 fmt_euro(nostra_trans),
+                fmt_euro(mercato_pct15_tot),
                 fmt_euro(risparmio_vs_pct15),
             ],
             [
                 "15 immobili — 8 stipule (scen. B)",
-                fmt_euro(8 * mercato_completo_min),
                 fmt_euro(8 * nostra_trans),
+                fmt_euro(8 * mercato_completo_min),
                 fmt_euro(8 * risparmio_vs_completo_min),
             ],
         ],
