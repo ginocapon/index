@@ -91,7 +91,10 @@ BLU = colors.HexColor("#2C4A6E")
 SFONDO = colors.HexColor("#ECE7DF")
 GRIGIO = colors.HexColor("#6B7A8D")
 VERDE = colors.HexColor("#1B6B4A")
+NERO = colors.HexColor("#152435")
 RIGHE_VERDE = colors.HexColor("#E8F5EE")
+RIGHE_RISPARMIO = colors.HexColor("#FDE8E8")
+ROSSO = colors.HexColor("#C0392B")
 
 
 def fit_image(path: Path, max_w: float, max_h: float) -> RLImage:
@@ -105,12 +108,20 @@ def fit_image(path: Path, max_w: float, max_h: float) -> RLImage:
     return RLImage(str(path), width=iw, height=ih)
 
 
+def p_td(text: str, *, bold: bool = False, color=NERO, size: float = 9.5) -> Paragraph:
+    st = ParagraphStyle(
+        "ptd", fontName="Helvetica-Bold" if bold else "Helvetica",
+        fontSize=size, leading=12, textColor=color,
+    )
+    content = f"<b>{_esc(text)}</b>" if bold else _esc(text)
+    return Paragraph(content, st)
+
+
 def tbl(header: list[str], rows: list[list[str]], widths: list[float], size: float = 9.5, highlight_last: bool = False) -> Table:
     th = ParagraphStyle("th", fontName="Helvetica-Bold", fontSize=size, leading=11, textColor=colors.white)
-    td = ParagraphStyle("td", fontName="Helvetica", fontSize=size, leading=12, textColor=colors.HexColor("#152435"))
     data: list[list] = [[Paragraph(_esc(c), th) for c in header]]
     for row in rows:
-        data.append([Paragraph(_esc(c), td) for c in row])
+        data.append([p_td(c, size=size) for c in row])
     t = Table(data, colWidths=widths, repeatRows=1)
     style = [
         ("BACKGROUND", (0, 0), (-1, 0), BLU),
@@ -124,9 +135,83 @@ def tbl(header: list[str], rows: list[list[str]], widths: list[float], size: flo
     ]
     if highlight_last and len(rows) > 0:
         style.append(("BACKGROUND", (0, len(rows)), (-1, len(rows)), RIGHE_VERDE))
-        style.append(("FONTNAME", (0, len(rows)), (-1, len(rows)), "Helvetica-Bold"))
     t.setStyle(TableStyle(style))
     return t
+
+
+def tbl_righetto_prezzi(header: list[str], rows: list[list[str]], widths: list[float], size: float = 9.5) -> Table:
+    """Tabella offerta Righetto — importi in grassetto nero."""
+    th = ParagraphStyle("th", fontName="Helvetica-Bold", fontSize=size, leading=11, textColor=colors.white)
+    data: list[list] = [[Paragraph(_esc(c), th) for c in header]]
+    for i, row in enumerate(rows):
+        cells = []
+        for j, cell in enumerate(row):
+            bold = j >= 1 or i >= len(rows) - 2  # imponibile, ivato e totali in grassetto nero
+            cells.append(p_td(cell, bold=bold, color=NERO, size=size))
+        data.append(cells)
+    t = Table(data, colWidths=widths, repeatRows=1)
+    t.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 0), VERDE),
+        ("BACKGROUND", (0, 1), (-1, -3), SFONDO),
+        ("BACKGROUND", (0, -2), (-1, -1), colors.HexColor("#F5F0E8")),
+        ("BOX", (0, 0), (-1, -1), 1.5, VERDE),
+        ("INNERGRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#D4CEC4")),
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 7),
+        ("TOPPADDING", (0, 0), (-1, -1), 6),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
+    ]))
+    return t
+
+
+def tbl_confronto_risparmio(rows: list[list[str]], widths: list[float], size: float = 8.5) -> Table:
+    """Confronto: Righetto grassetto nero, Risparmio in rosso."""
+    th = ParagraphStyle("th", fontName="Helvetica-Bold", fontSize=size, leading=11, textColor=colors.white)
+    header = ["Scenario", "Righetto (gestione inclusa)", "Mercato", "Risparmio"]
+    data: list[list] = [[Paragraph(_esc(c), th) for c in header]]
+    for i, row in enumerate(rows):
+        data.append([
+            p_td(row[0], size=size),
+            p_td(row[1], bold=True, color=NERO, size=size),
+            p_td(row[2], size=size),
+            p_td(row[3], bold=True, color=ROSSO, size=size + 0.5),
+        ])
+    t = Table(data, colWidths=widths, repeatRows=1)
+    n = len(rows)
+    style = [
+        ("BACKGROUND", (0, 0), (-1, 0), BLU),
+        ("BACKGROUND", (0, 1), (-1, -1), SFONDO),
+        ("BACKGROUND", (1, 1), (1, -1), colors.HexColor("#F5F5F5")),
+        ("BACKGROUND", (3, 1), (3, -1), RIGHE_RISPARMIO),
+        ("BOX", (0, 0), (-1, -1), 1.5, BLU),
+        ("INNERGRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#D4CEC4")),
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 6),
+        ("TOPPADDING", (0, 0), (-1, -1), 6),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
+    ]
+    if n > 0:
+        style.append(("BACKGROUND", (0, n), (-1, n), RIGHE_RISPARMIO))
+        style.append(("BACKGROUND", (3, n), (3, n), colors.HexColor("#F5C6C6")))
+    t.setStyle(TableStyle(style))
+    return t
+
+
+def box_gestione_inclusa(lines: list[str]) -> Table:
+    ps_t = ParagraphStyle("gi_t", fontName="Helvetica-Bold", fontSize=10, textColor=NERO, leading=12)
+    ps_b = ParagraphStyle("gi_b", fontName="Helvetica", fontSize=9.5, textColor=NERO, leading=13)
+    data: list[list] = [[Paragraph("<b>GESTIONE COMPLETA INCLUSA NEL PREZZO</b>", ps_t)]]
+    for line in lines:
+        data.append([Paragraph(line, ps_b)])
+    box = Table(data, colWidths=[174 * mm])
+    box.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, -1), colors.HexColor("#FFF8E7")),
+        ("BOX", (0, 0), (-1, -1), 2, colors.HexColor("#FF6B35")),
+        ("LEFTPADDING", (0, 0), (-1, -1), 12),
+        ("TOPPADDING", (0, 0), (-1, -1), 8),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
+    ]))
+    return box
 
 
 def band(text: str, bg=VERDE) -> Table:
@@ -211,11 +296,18 @@ def build_story(data_doc: date) -> list:
         body,
     ))
     story.append(Spacer(1, 3 * mm))
+    story.append(box_gestione_inclusa([
+        "La nostra tariffa è <b>comprensiva della gestione completa</b> dell'immobile per tutta la durata del contratto: "
+        "referente unico, rapporto con l'inquilino, contratto, registrazione, scadenze, piccole urgenze, "
+        "coordinamento tecnici. <b>Non si aggiungono percentuali annue</b> sul canone come spesso fa il mercato.",
+        "Riparazioni e pulizie restano a carico del proprietario — con avviso WhatsApp prima di ogni intervento.",
+    ]))
+    story.append(Spacer(1, 3 * mm))
     story.append(tbl(
-        ["Voce", "Cosa paga il proprietario"],
+        ["Voce", "Cosa paga il proprietario (gestione inclusa)"],
         [
-            ["Contratto locazione", "1 mensilità + € 50 registrazione + IVA"],
-            ["Contratto transitorio", "1 mensilità + € 50 registrazione + € 50 asseverazione + IVA"],
+            ["Contratto locazione", "1 mensilità + € 50 registrazione + IVA — tutto incluso"],
+            ["Contratto transitorio", "1 mensilità + € 50 registrazione + € 50 asseverazione + IVA — tutto incluso"],
             ["Pulizie fine locazione", "A carico proprietario — le coordiniamo noi"],
             ["Riparazioni / manutenzioni", "A carico proprietario — avviso WhatsApp + preventivo"],
         ],
@@ -230,21 +322,22 @@ def build_story(data_doc: date) -> list:
 
     # ── PAG. 3: RIGHETTO PRIMA, POI MERCATO + RISPARMIO ──
     story.append(PageBreak())
-    story.append(band("LA NOSTRA OFFERTA RIGHETTO — 1 appartamento € 800/mese", colors.HexColor("#1B6B4A")))
+    story.append(band("LA NOSTRA OFFERTA RIGHETTO — gestione completa inclusa", colors.HexColor("#1B6B4A")))
     story.append(Spacer(1, 3 * mm))
     story.append(Paragraph(
-        "Tariffa unica per ogni stipula, <b>senza percentuali annue</b> sul canone. Tutti gli importi + IVA 22%.",
+        "Canone tipo <b>€ 800/mese</b>. Un solo importo per stipula — <b>gestione dell'immobile inclusa</b>, "
+        "senza percentuali annue aggiuntive. Tutti gli importi + IVA 22%.",
         body,
     ))
     story.append(Spacer(1, 2 * mm))
-    story.append(tbl(
-        ["Voce Righetto", "Imponibile", "Ivato (22%)"],
+    story.append(tbl_righetto_prezzi(
+        ["Voce Righetto (gestione inclusa)", "Imponibile", "Ivato (22%)"],
         [
-            ["1 mensilità canone", fmt_euro(c), fmt_euro(mens_ivata)],
+            ["1 mensilità — gestione + stipula", fmt_euro(c), fmt_euro(mens_ivata)],
             ["Registrazione", fmt_euro(REG), fmt_euro(reg_ivata)],
             ["Asseverazione (transitorio)", fmt_euro(ASS), fmt_euro(ass_ivata)],
-            ["Totale transitorio", fmt_euro(c + REG + ASS), fmt_euro(nostra_trans)],
-            ["Totale contratto locazione", fmt_euro(c + REG), fmt_euro(nostra_std)],
+            ["TOTALE transitorio", fmt_euro(c + REG + ASS), fmt_euro(nostra_trans)],
+            ["TOTALE contratto locazione", fmt_euro(c + REG), fmt_euro(nostra_std)],
         ],
         [58 * mm, 58 * mm, 58 * mm],
     ))
@@ -284,51 +377,23 @@ def build_story(data_doc: date) -> list:
     ))
 
     story.append(Spacer(1, 6 * mm))
-    story.append(band("RIGHETTO VS MERCATO — quanto risparmi", colors.HexColor("#2C4A6E")))
+    story.append(band("RIGHETTO VS MERCATO — risparmio evidenziato in rosso", colors.HexColor("#2C4A6E")))
     story.append(Spacer(1, 3 * mm))
-    story.append(tbl(
-        ["Scenario", "Righetto", "Mercato", "Risparmio"],
+    story.append(tbl_confronto_risparmio(
         [
-            [
-                "A — Solo stipula",
-                fmt_euro(nostra_trans),
-                fmt_euro(mercato_solo_stipula),
-                fmt_euro(risparmio_vs_solo),
-            ],
-            [
-                "B — Stipula + gest. 8%",
-                fmt_euro(nostra_trans),
-                fmt_euro(mercato_completo_min),
-                fmt_euro(risparmio_vs_completo_min),
-            ],
-            [
-                "C — Stipula + gest. 12%",
-                fmt_euro(nostra_trans),
-                fmt_euro(mercato_completo_max),
-                fmt_euro(risparmio_vs_completo_max),
-            ],
-            [
-                "D — 15% annuo + oneri",
-                fmt_euro(nostra_trans),
-                fmt_euro(mercato_pct15_tot),
-                fmt_euro(risparmio_vs_pct15),
-            ],
-            [
-                "15 immobili — 8 stipule (scen. B)",
-                fmt_euro(8 * nostra_trans),
-                fmt_euro(8 * mercato_completo_min),
-                fmt_euro(8 * risparmio_vs_completo_min),
-            ],
+            ["A — Solo stipula", fmt_euro(nostra_trans), fmt_euro(mercato_solo_stipula), fmt_euro(risparmio_vs_solo)],
+            ["B — Stipula + gest. 8%", fmt_euro(nostra_trans), fmt_euro(mercato_completo_min), fmt_euro(risparmio_vs_completo_min)],
+            ["C — Stipula + gest. 12%", fmt_euro(nostra_trans), fmt_euro(mercato_completo_max), fmt_euro(risparmio_vs_completo_max)],
+            ["D — 15% annuo + oneri", fmt_euro(nostra_trans), fmt_euro(mercato_pct15_tot), fmt_euro(risparmio_vs_pct15)],
+            ["15 immobili — 8 stipule (B)", fmt_euro(8 * nostra_trans), fmt_euro(8 * mercato_completo_min), fmt_euro(8 * risparmio_vs_completo_min)],
         ],
         [40 * mm, 42 * mm, 42 * mm, 50 * mm],
-        size=8.5,
-        highlight_last=True,
     ))
     story.append(Spacer(1, 3 * mm))
     story.append(Paragraph(
-        "Il risparmio più significativo si vede quando il mercato applica anche la <b>gestione annua</b> "
-        "(8–15% del canone): in quel caso Righetto resta su <b>1 mensilità + € 50 + € 50 + IVA</b> "
-        "per stipula, senza percentuali ricorrenti sul canone.",
+        "Colonna <b>Righetto</b>: importi in grassetto nero — <b>gestione completa già inclusa</b>. "
+        "Colonna <b>Risparmio</b> in rosso: quanto resta in tasca rispetto al mercato "
+        "(che spesso aggiunge 8–15% annui oltre alla mensilità).",
         body,
     ))
 
@@ -341,7 +406,7 @@ def build_story(data_doc: date) -> list:
         ["", "Importo"],
         [
             ["Canone incassato (12 mesi)", fmt_euro(c * 12)],
-            ["Compenso agenzia Righetto (ivato)", fmt_euro(nostra_trans)],
+            ["Compenso Righetto (gestione inclusa, ivato)", fmt_euro(nostra_trans)],
             ["Riparazioni", "A carico proprietario (avviso WhatsApp)"],
             ["Netto indicativo proprietario", fmt_euro(c * 12 - nostra_trans)],
         ],
@@ -350,17 +415,26 @@ def build_story(data_doc: date) -> list:
 
     story.append(Spacer(1, 5 * mm))
     story.append(Paragraph("<b>Portafoglio 15 immobili</b> (8 stipule transitorio/anno)", ParagraphStyle("h3c", parent=body, fontName="Helvetica-Bold", textColor=BLU)))
-    story.append(tbl(
-        ["", "Totale indicativo"],
-        [
-            ["Canoni annui incassati (15 × € 800 × 12)", fmt_euro(15 * c * 12)],
-            ["Compensi agenzia da proprietario (8 × " + fmt_euro(nostra_trans) + ")", fmt_euro(8 * nostra_trans)],
-            ["Risparmio vs mercato (scen. B, 8 stipule)", fmt_euro(8 * risparmio_vs_completo_min)],
-            ["Referente unico + WhatsApp", "Incluso nel mandato annuale"],
-        ],
-        [110 * mm, 64 * mm],
-        highlight_last=False,
-    ))
+    th_p = ParagraphStyle("th2", fontName="Helvetica-Bold", fontSize=9.5, leading=11, textColor=colors.white)
+    t_port = Table([
+        [Paragraph(_esc("Voce"), th_p), Paragraph(_esc("Importo"), th_p)],
+        [p_td("Canoni annui incassati (15 × € 800 × 12)"), p_td(fmt_euro(15 * c * 12))],
+        [p_td("Compensi Righetto — gestione inclusa (8 stipule)"), p_td(fmt_euro(8 * nostra_trans), bold=True, color=NERO)],
+        [p_td("Risparmio vs mercato (scen. B)"), p_td(fmt_euro(8 * risparmio_vs_completo_min), bold=True, color=ROSSO)],
+        [p_td("Referente unico + WhatsApp"), p_td("Incluso nel mandato annuale")],
+    ], colWidths=[110 * mm, 64 * mm])
+    t_port.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 0), BLU),
+        ("BACKGROUND", (0, 1), (-1, -1), SFONDO),
+        ("BACKGROUND", (0, 3), (-1, 3), RIGHE_RISPARMIO),
+        ("BOX", (0, 0), (-1, -1), 1, BLU),
+        ("INNERGRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#D4CEC4")),
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 7),
+        ("TOPPADDING", (0, 0), (-1, -1), 6),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
+    ]))
+    story.append(t_port)
 
     story.append(Spacer(1, 6 * mm))
     story.append(Paragraph(
