@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Report semplice Property Management — Piazzola sul Brenta / Camposampiero (PD).
+Report schematico gestione 15 immobili — Piazzola, Camposampiero, Padova.
 
 Uso:
   python scripts/genera_analisi_pm.py
-
-Output: data/perizie/ + documenti/perizie/
 """
 from __future__ import annotations
 
@@ -14,10 +12,11 @@ import sys
 from datetime import date
 from pathlib import Path
 
+from PIL import Image
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY
 from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import mm
 from reportlab.platypus import (
     Image as RLImage,
@@ -32,6 +31,7 @@ from reportlab.pdfgen import canvas
 
 ROOT = Path(__file__).resolve().parent.parent
 LOGO_PATH = ROOT / "img" / "brand" / "logo-righetto-ri.png"
+COPERTINA = ROOT / "documenti" / "perizie" / "assets" / "villa_contarini_piazzola_copertina.jpg"
 
 NERO = colors.HexColor("#152435")
 BLU = colors.HexColor("#2C4A6E")
@@ -40,8 +40,7 @@ SFONDO = colors.HexColor("#ECE7DF")
 GRIGIO = colors.HexColor("#6B7A8D")
 VERDE = colors.HexColor("#1B6B4A")
 
-# Ipotesi concrete zona Piazzola / Camposampiero (canone mensile tipo)
-CANONE_TIPO = 800
+CANONE_ESEMPIO = 800  # ipotesi bilocale/trilocale zona
 
 
 def _esc(text: str) -> str:
@@ -52,7 +51,7 @@ def fmt_euro(n: float | int) -> str:
     return f"€ {int(round(n)):,}".replace(",", ".")
 
 
-class AnalisiCanvas(canvas.Canvas):
+class ReportCanvas(canvas.Canvas):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._saved: list[dict] = []
@@ -83,289 +82,194 @@ class AnalisiCanvas(canvas.Canvas):
         self.rect(10 * mm, 12 * mm, w - 20 * mm, 8 * mm, stroke=0, fill=1)
         self.setFillColor(colors.white)
         self.setFont("Helvetica", 7)
-        self.drawString(14 * mm, 15.5 * mm, "Bertinato Gino — Righetto Immobiliare — Limena (PD) — 049.8843484")
-        self.drawRightString(w - 14 * mm, 15.5 * mm, f"Report PM — Pag. {n}/{total}")
+        self.drawString(14 * mm, 15.5 * mm, "Bertinato Gino — Righetto Immobiliare — 049.8843484")
+        self.drawRightString(w - 14 * mm, 15.5 * mm, f"Gestione locazioni — Pag. {n}/{total}")
 
 
-def make_kv(pairs: list[tuple[str, str]]) -> Table:
-    lbl = ParagraphStyle("kl", fontName="Helvetica-Bold", fontSize=9, leading=11, textColor=colors.white)
-    val = ParagraphStyle("kv", fontName="Helvetica", fontSize=9.5, leading=12, textColor=NERO)
-    rows = [[Paragraph(_esc(k), lbl), Paragraph(_esc(v), val)] for k, v in pairs]
-    t = Table(rows, colWidths=[55 * mm, 119 * mm])
-    t.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (0, -1), BLU),
-        ("BACKGROUND", (1, 0), (1, -1), SFONDO),
-        ("BOX", (0, 0), (-1, -1), 0.5, BLU),
-        ("INNERGRID", (0, 0), (-1, -1), 0.25, colors.HexColor("#E1DBD1")),
-        ("VALIGN", (0, 0), (-1, -1), "TOP"),
-        ("LEFTPADDING", (0, 0), (-1, -1), 8),
-        ("TOPPADDING", (0, 0), (-1, -1), 6),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
-    ]))
-    return t
+def fit_image(path: Path, max_w: float, max_h: float) -> RLImage:
+    with Image.open(path) as im:
+        w, h = im.size
+    ratio = h / w
+    iw, ih = max_w, max_w * ratio
+    if ih > max_h:
+        ih = max_h
+        iw = ih / ratio
+    return RLImage(str(path), width=iw, height=ih)
 
 
-def make_table(header: list[str], body: list[list[str]], widths: list[float], size: float = 9) -> Table:
-    th = ParagraphStyle("th", fontName="Helvetica-Bold", fontSize=size, leading=11, textColor=colors.white)
-    td = ParagraphStyle("td", fontName="Helvetica", fontSize=size, leading=12, textColor=NERO)
-    rows: list[list] = [[Paragraph(_esc(c), th) for c in header]]
-    for row in body:
-        rows.append([Paragraph(_esc(c), td) for c in row])
-    t = Table(rows, colWidths=widths, repeatRows=1)
+def tbl(header: list[str], rows: list[list[str]], widths: list[float], size: float = 10) -> Table:
+    th = ParagraphStyle("th", fontName="Helvetica-Bold", fontSize=size, leading=12, textColor=colors.white)
+    td = ParagraphStyle("td", fontName="Helvetica", fontSize=size, leading=13, textColor=NERO)
+    data: list[list] = [[Paragraph(_esc(c), th) for c in header]]
+    for row in rows:
+        data.append([Paragraph(_esc(c), td) for c in row])
+    t = Table(data, colWidths=widths, repeatRows=1)
     t.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), BLU),
-        ("BOX", (0, 0), (-1, -1), 0.5, BLU),
-        ("INNERGRID", (0, 0), (-1, -1), 0.25, colors.HexColor("#E1DBD1")),
-        ("VALIGN", (0, 0), (-1, -1), "TOP"),
-        ("LEFTPADDING", (0, 0), (-1, -1), 6),
-        ("TOPPADDING", (0, 0), (-1, -1), 5),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
+        ("BACKGROUND", (0, 1), (-1, -1), SFONDO),
+        ("BOX", (0, 0), (-1, -1), 1, BLU),
+        ("INNERGRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#D4CEC4")),
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 8),
+        ("TOPPADDING", (0, 0), (-1, -1), 7),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 7),
     ]))
     return t
 
 
-def green_box(title: str, lines: list[str]) -> Table:
-    ps_t = ParagraphStyle("gt", fontName="Helvetica-Bold", fontSize=10, textColor=colors.white, leading=12)
-    ps_b = ParagraphStyle("gb", fontName="Helvetica", fontSize=9.5, textColor=colors.white, leading=13)
-    data: list[list] = [[Paragraph(title, ps_t)]]
-    for line in lines:
-        data.append([Paragraph(line, ps_b)])
-    box = Table(data, colWidths=[174 * mm])
-    box.setStyle(TableStyle([
+def titolo_box(testo: str) -> Table:
+    ps = ParagraphStyle("tb", fontName="Helvetica-Bold", fontSize=11, textColor=colors.white, alignment=TA_CENTER)
+    t = Table([[Paragraph(testo, ps)]], colWidths=[174 * mm])
+    t.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, -1), VERDE),
-        ("BOX", (0, 0), (-1, -1), 1.5, ORO),
-        ("LEFTPADDING", (0, 0), (-1, -1), 12),
         ("TOPPADDING", (0, 0), (-1, -1), 8),
         ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
     ]))
-    return box
-
-
-def flow_step(num: str, text: str, note: str = "") -> Table:
-    ps_n = ParagraphStyle("sn", fontName="Helvetica-Bold", fontSize=11, textColor=ORO, alignment=TA_CENTER)
-    ps_t = ParagraphStyle("st", fontName="Helvetica-Bold", fontSize=9, textColor=colors.white, leading=11)
-    ps_n2 = ParagraphStyle("sn2", fontName="Helvetica", fontSize=8, textColor=SFONDO, leading=10)
-    left = Paragraph(num, ps_n)
-    right_rows = [[Paragraph(text, ps_t)]]
-    if note:
-        right_rows.append([Paragraph(note, ps_n2)])
-    right = Table(right_rows, colWidths=[148 * mm])
-    right.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, -1), BLU),
-        ("LEFTPADDING", (0, 0), (-1, -1), 8),
-        ("TOPPADDING", (0, 0), (-1, -1), 5),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
-    ]))
-    t = Table([[left, right]], colWidths=[18 * mm, 156 * mm])
-    t.setStyle(TableStyle([
-        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
-        ("BOX", (0, 0), (-1, -1), 0.5, ORO),
-    ]))
     return t
 
 
-def flow_down() -> Paragraph:
-    return Paragraph(
-        "▼",
-        ParagraphStyle("fd", fontName="Helvetica-Bold", fontSize=12, textColor=ORO, alignment=TA_CENTER, spaceBefore=1, spaceAfter=1),
-    )
-
-
 def build_story(data_doc: date) -> list:
-    c = CANONE_TIPO
-    avvio = round(c * 0.85)       # Portfolio 15
-    gestione = round(c * 0.45)    # annua
-    gestione_breve = round(c * 0.45 * 1.35)
-
-    h1 = ParagraphStyle("H1", fontName="Helvetica-Bold", fontSize=16, textColor=BLU, alignment=TA_CENTER, spaceAfter=4)
-    h2 = ParagraphStyle("H2", fontName="Helvetica-Bold", fontSize=12, textColor=BLU, spaceBefore=10, spaceAfter=5)
-    body = ParagraphStyle("B", fontName="Helvetica", fontSize=10, leading=14, textColor=NERO, alignment=TA_JUSTIFY, spaceAfter=5)
-    small = ParagraphStyle("Sm", fontName="Helvetica", fontSize=8, textColor=GRIGIO, spaceAfter=3)
+    c = CANONE_ESEMPIO
+    h1 = ParagraphStyle("H1", fontName="Helvetica-Bold", fontSize=15, textColor=BLU, alignment=TA_CENTER, spaceAfter=3)
+    h2 = ParagraphStyle("H2", fontName="Helvetica-Bold", fontSize=12, textColor=BLU, spaceBefore=10, spaceAfter=6)
+    body = ParagraphStyle("B", fontName="Helvetica", fontSize=10, leading=14, textColor=NERO, alignment=TA_JUSTIFY, spaceAfter=4)
+    small = ParagraphStyle("Sm", fontName="Helvetica", fontSize=8, textColor=GRIGIO, alignment=TA_CENTER)
 
     story: list = []
 
-    # ── PAG. 1 — COPERTINA + IN SINTESI ──
+    # ── COPERTINA CON FOTO ──
     if LOGO_PATH.is_file():
-        story.append(RLImage(str(LOGO_PATH), width=32 * mm, height=32 * mm))
-        story.append(Spacer(1, 5 * mm))
-    story.append(Paragraph("GESTIONE LOCAZIONI — PROPOSTA SEMPLICE", h1))
-    story.append(Paragraph("Piazzola sul Brenta · Camposampiero · hinterland Padova", ParagraphStyle(
-        "sub", fontName="Helvetica", fontSize=10, textColor=GRIGIO, alignment=TA_CENTER, spaceAfter=8,
+        story.append(RLImage(str(LOGO_PATH), width=28 * mm, height=28 * mm))
+        story.append(Spacer(1, 3 * mm))
+    story.append(Paragraph("PROPOSTA GESTIONE LOCAZIONI", h1))
+    story.append(Paragraph("15 immobili — Piazzola sul Brenta · Camposampiero · Padova", ParagraphStyle(
+        "s", fontSize=10, textColor=GRIGIO, alignment=TA_CENTER, spaceAfter=6,
     )))
-    story.append(make_kv([
-        ("Destinatario", "Sig. Canton Romeo"),
-        ("Agenzia", "Gruppo Immobiliare Bertinato Gino / Righetto Immobiliare"),
-        ("Data", data_doc.strftime("%d/%m/%Y")),
-        ("Portafoglio", "Circa 15 immobili in locazione"),
-        ("Zona", "Piazzola sul Brenta, Camposampiero e comuni limitrofi"),
-        ("Obiettivo cliente", "Zero gestione diretta — un solo referente per tutto"),
-    ]))
+    if COPERTINA.is_file():
+        story.append(fit_image(COPERTINA, 174 * mm, 95 * mm))
+        story.append(Spacer(1, 2 * mm))
+        story.append(Paragraph(
+            "Villa Contarini — Piazzola sul Brenta (PD) · foto Wikimedia Commons, CC BY 2.5",
+            small,
+        ))
+    story.append(Spacer(1, 4 * mm))
+    story.append(tbl(
+        ["", ""],
+        [
+            ["Destinatario", "Sig. Canton Romeo"],
+            ["Data", data_doc.strftime("%d/%m/%Y")],
+            ["Agenzia", "Gruppo Immobiliare Bertinato Gino"],
+            ["Portafoglio", "15 immobili ipotetici in locazione"],
+            ["Zone", "Piazzola sul Brenta, Camposampiero, Padova"],
+        ],
+        [50 * mm, 124 * mm],
+    ))
+
+    # ── CONTRATTI 12-18 MESI ──
+    story.append(PageBreak())
+    story.append(titolo_box("CONTRATTI DA 12 A 18 MESI"))
+    story.append(Spacer(1, 5 * mm))
+    story.append(Paragraph(
+        "Gestione completa: ci occupiamo noi di tutto. Piccole problematiche, idraulico, elettricista — "
+        "chiamiamo noi, coordiniamo noi. La proprietaria non deve fare nulla.",
+        body,
+    ))
+    story.append(Spacer(1, 3 * mm))
+    story.append(tbl(
+        ["Periodo", "Compenso proprietario", "Cosa include"],
+        [
+            ["Primo anno", "1 mensilità del canone", "Avvio + gestione + piccole urgenze + tecnici"],
+            ["Anni successivi", "½ mensilità del canone", "Gestione ordinaria continuativa"],
+            ["Nuovo inquilino", "€ 0", "Paga il conduttore (1 mensilità — prassi di mercato)"],
+        ],
+        [38 * mm, 52 * mm, 84 * mm],
+    ))
+
+    # ── AFFITTI SOTTO 3 MESI ──
+    story.append(Spacer(1, 8 * mm))
+    story.append(titolo_box("AFFITTI SOTTO I 3 MESI"))
+    story.append(Spacer(1, 5 * mm))
+    story.append(Paragraph(
+        "I contratti molto brevi si ripetono più volte l'anno: più consegne, più verifiche, più lavoro. "
+        "In mercato si applica di solito una <b>maggiorazione</b> sulla gestione (non una seconda commissione al proprietario).",
+        body,
+    ))
+    story.append(Spacer(1, 3 * mm))
+    story.append(tbl(
+        ["Voce", "Cosa applichiamo", "Come funziona di solito"],
+        [
+            ["Primo anno", "1 mensilità", "Come contratto lungo — avvio immobile"],
+            ["Gestione annua", "½ mensilità + 30%", "Maggiorazione per alto turnover"],
+            ["Nuovo inquilino", "€ 0 proprietario", "Paga il conduttore (1 mensilità)"],
+            ["Proroga stesso inquilino", "¼ mensilità", "Solo rinnovo, senza nuove visite"],
+            ["Pulizie fine locazione", "A carico proprietario", "Le coordiniamo noi"],
+        ],
+        [42 * mm, 48 * mm, 84 * mm],
+        size=9.5,
+    ))
+
+    # ── ESEMPIO 1 APPARTAMENTO ──
+    story.append(PageBreak())
+    story.append(Paragraph("Esempio — 1 appartamento", h2))
+    story.append(Paragraph(
+        f"Canone ipotetico <b>{fmt_euro(c)}/mese</b> (bilocale/trilocale zona Piazzola–Camposampiero–Padova).",
+        body,
+    ))
+    story.append(Spacer(1, 4 * mm))
+
+    story.append(Paragraph("<b>Contratto 12 mesi</b>", ParagraphStyle("h3", parent=body, fontName="Helvetica-Bold", textColor=BLU)))
+    story.append(tbl(
+        ["", "Importo"],
+        [
+            ["Canone incassato dal proprietario (12 mesi)", fmt_euro(c * 12)],
+            ["Compenso agenzia — anno 1 (1 mens.)", fmt_euro(c)],
+            ["Compenso agenzia — anni dopo (½ mens.)", fmt_euro(c // 2)],
+            ["Nuovo inquilino — costo proprietario", "€ 0"],
+            ["Netto proprietario anno 1", fmt_euro(c * 12 - c)],
+            ["Netto proprietario anni dopo", fmt_euro(c * 12 - c // 2)],
+        ],
+        [110 * mm, 64 * mm],
+    ))
     story.append(Spacer(1, 6 * mm))
-    story.append(green_box("In 30 secondi — cosa proponiamo", [
-        "1. <b>Avvio</b> (una volta per immobile): <b>0,85 mensilità</b> del canone",
-        "2. <b>Gestione annua</b>: <b>0,45 mensilità/anno</b> — ci occupiamo noi di tutto il resto",
-        "3. <b>Nuovo inquilino</b>: la proprietaria <b>non paga</b> — paga il conduttore (1 mensilità)",
-        "4. Contratti <b>brevi</b> (sotto 3 mesi): gestione <b>+35%</b> perché si ripete più spesso",
-    ]))
-    story.append(Spacer(1, 4 * mm))
-    story.append(Paragraph(
-        f"Ipotesi di lavoro: canone mensile tipo <b>{fmt_euro(c)}</b> per un bilocale/ trilocale "
-        "in zona Piazzola–Camposampiero (valutazione puntuale immobile per immobile).",
-        body,
-    ))
 
-    # ── PAG. 2 — TARIFFA + CHI PAGA COSA ──
-    story.append(PageBreak())
-    story.append(Paragraph("1. Listino Portfolio 15 immobili", h2))
-    story.append(make_table(
-        ["Cosa", "Quanto", "Chi paga"],
-        [
-            ["Avvio gestione (una tantum)", "0,85 mensilità", "Proprietaria"],
-            ["Gestione ordinaria (ogni anno)", "0,45 mensilità", "Proprietaria"],
-            ["Trova nuovo inquilino", "1 mensilità", "Conduttore — non la proprietaria"],
-            ["Proroga stesso inquilino", "0,25 mensilità", "Proprietaria"],
-            ["Contratto sotto 3 mesi", "+35% sulla gestione", "Proprietaria"],
-        ],
-        [58 * mm, 48 * mm, 68 * mm],
-    ))
-    story.append(Spacer(1, 5 * mm))
-    story.append(Paragraph("2. Cosa facciamo noi (incluso nel prezzo)", h2))
-    story.append(make_table(
-        ["Servizio", "Dettaglio"],
-        [
-            ["Annuncio e visite", "Foto, portali, selezione inquilini"],
-            ["Contratto", "Predisposizione, registrazione, scadenze"],
-            ["Referente unico", "Nessun contatto diretto proprietario–inquilino"],
-            ["Manutenzioni piccole", "Coordinamento fino a € 200"],
-            ["Cambio inquilino", "Verifica immobile, consegna chiavi, nuovo annuncio"],
-            ["Report", "Aggiornamento trimestrale alla proprietaria"],
-        ],
-        [52 * mm, 122 * mm],
-    ))
-    story.append(Spacer(1, 4 * mm))
-    story.append(Paragraph("3. Cosa resta a carico della proprietaria (extra)", h2))
-    for item in [
-        "Lavori importanti (idraulico, elettrico, ristrutturazione)",
-        "Pulizie fine locazione (le coordiniamo noi, le paga lei)",
-        "IMU, bollo, registro, spese condominiali",
-        "Contenzioso o sfratto",
-    ]:
-        story.append(Paragraph(f"• {item}", ParagraphStyle("bu", parent=body, leftIndent=8, spaceAfter=2)))
-
-    # ── PAG. 3 — DUE ESEMPI CONCRETI ──
-    story.append(PageBreak())
-    story.append(Paragraph(f"4. Due esempi concreti — canone {fmt_euro(c)}/mese", h2))
-
-    story.append(Paragraph("<b>Esempio A — Contratto 12 mesi</b> (1 inquilino all'anno)", ParagraphStyle(
-        "h3", parent=body, fontName="Helvetica-Bold", textColor=BLU, spaceBefore=4,
-    )))
-    story.append(make_table(
-        ["Voce", "Importo", "Note"],
-        [
-            ["Avvio (anno 1)", fmt_euro(avvio), "Una volta sola"],
-            ["Gestione annua", fmt_euro(gestione), "Ogni anno"],
-            ["Nuovo inquilino", "€ 0 proprietaria", f"Conduttore paga {fmt_euro(c)}"],
-            ["Totale proprietaria anno 1", fmt_euro(avvio + gestione), "Poi solo gestione"],
-            ["Totale proprietaria anni dopo", fmt_euro(gestione), "Circa € 38/mese"],
-        ],
-        [52 * mm, 40 * mm, 82 * mm],
-    ))
-    story.append(Spacer(1, 5 * mm))
-
-    story.append(Paragraph("<b>Esempio B — Contratto 2 mesi</b> (più cambi inquilino)", ParagraphStyle(
-        "h3", parent=body, fontName="Helvetica-Bold", textColor=BLU, spaceBefore=4,
-    )))
-    story.append(make_table(
-        ["Voce", "Importo", "Note"],
-        [
-            ["Avvio (anno 1)", fmt_euro(avvio), "Una volta sola"],
-            ["Gestione annua (+35%)", fmt_euro(gestione_breve), "Più lavoro per noi"],
-            ["Nuovi inquilini (×5/anno)", "€ 0 proprietaria", f"5 × {fmt_euro(c)} dai conduttori"],
-            ["Pulizie extra stimate", "€ 400–600/anno", "A carico proprietaria"],
-            ["Totale proprietaria/anno", fmt_euro(avvio + gestione_breve), "Anno 1; poi ~" + fmt_euro(gestione_breve)],
-        ],
-        [52 * mm, 40 * mm, 82 * mm],
-    ))
-    story.append(Spacer(1, 4 * mm))
-    story.append(Paragraph(
-        "<b>Differenza chiave:</b> nei contratti brevi la proprietaria paga un po' di più in gestione (+35%) "
-        "e qualche pulizia in più, ma <b>non paga mai</b> la commissione per trovare l'inquilino.",
-        body,
-    ))
-
-    # ── PAG. 4 — ORGANIGRAMMA SEMPLICE ──
-    story.append(PageBreak())
-    story.append(Paragraph("5. Come funziona — passo per passo", h2))
-
-    story.append(Paragraph("<b>Caso standard (contratto 6–18 mesi)</b>", ParagraphStyle(
+    gest_breve = round(c * 0.5 * 1.30)
+    story.append(Paragraph("<b>Contratto 2 mesi</b> (es. 5 inquilini l'anno)", ParagraphStyle(
         "h3b", parent=body, fontName="Helvetica-Bold", textColor=BLU,
     )))
-    for num, text, note in [
-        ("1", "Presa in carico immobile", f"Proprietaria: {fmt_euro(avvio)}"),
-        ("2", "Annuncio + visite + scelta inquilino", f"Conduttore: {fmt_euro(c)}"),
-        ("3", "Contratto e registrazione", "Incluso"),
-        ("4", "Gestione per tutta la durata", f"{fmt_euro(gestione)}/anno — noi referenti"),
-        ("5", "Fine contratto: verifica + consegna", "Incluso"),
-        ("6", "Nuovo inquilino se serve", f"Di nuovo conduttore: {fmt_euro(c)}"),
-    ]:
-        story.append(flow_step(num, text, note))
-        if num != "6":
-            story.append(flow_down())
-
-    story.append(Spacer(1, 6 * mm))
-    story.append(Paragraph("<b>Caso breve (contratto sotto 3 mesi)</b>", ParagraphStyle(
-        "h3c", parent=body, fontName="Helvetica-Bold", textColor=BLU,
-    )))
-    story.append(Paragraph(
-        "Stessi passi, ma <b>più veloce</b> e si ripete 4–5 volte l'anno. "
-        f"Gestione maggiorata: {fmt_euro(gestione_breve)}/anno invece di {fmt_euro(gestione)}.",
-        body,
-    ))
-    for num, text, note in [
-        ("1", "Inquilino entra (contratto 1–3 mesi)", "Veloce"),
-        ("2", "Gestione + scadenza", f"+35% gestione"),
-        ("3", "Check-out + verifica immobile", "Incluso"),
-        ("4", "Pulizie + nuovo annuncio", "Extra proprietaria ~€ 100"),
-        ("5", "Nuovo inquilino", f"Conduttore: {fmt_euro(c)} — loop"),
-    ]:
-        story.append(flow_step(num, text, note))
-        if num != "5":
-            story.append(flow_down())
-
-    # ── PAG. 5 — PORTAFOGLIO 15 + CHIUSURA ──
-    story.append(PageBreak())
-    story.append(Paragraph("6. Portafoglio 15 immobili — numeri totali", h2))
-    story.append(make_table(
-        ["Scenario", "Canone medio", "Ricavo agenzia/anno", "Note"],
+    story.append(tbl(
+        ["", "Importo"],
         [
-            ["Tranquillo (poche rotazioni)", fmt_euro(c), fmt_euro(15 * gestione + 4 * c), "~4 nuovi inquilini"],
-            ["Medio (mix contratti)", fmt_euro(c), fmt_euro(15 * gestione + 8 * c), "~8 nuovi inquilini"],
-            ["Attivo (molti brevi)", fmt_euro(c), fmt_euro(15 * gestione_breve + 12 * c), "Contratti corti"],
+            ["Canone incassato (5 locazioni × 2 mesi)", fmt_euro(c * 2 * 5)],
+            ["Compenso agenzia — anno 1 (1 mens.)", fmt_euro(c)],
+            ["Compenso agenzia — gestione (+30%)", fmt_euro(gest_breve)],
+            ["Nuovo inquilino — costo proprietario", "€ 0 (paga conduttore)"],
+            ["Pulizie stimate (5 uscite)", "€ 400 – 600"],
+            ["Netto proprietario indicativo anno 1", fmt_euro(c * 10 - c - gest_breve - 500)],
         ],
-        [42 * mm, 32 * mm, 42 * mm, 58 * mm],
-        size=8.5,
+        [110 * mm, 64 * mm],
     ))
-    story.append(Spacer(1, 4 * mm))
-    story.append(Paragraph(
-        f"<b>Primo anno (avvio 15 immobili):</b> 15 × {fmt_euro(avvio)} = <b>{fmt_euro(15 * avvio)}</b> una tantum, "
-        "poi solo gestione annua.",
-        body,
+
+    # ── PORTAFOGLIO 15 ──
+    story.append(Spacer(1, 8 * mm))
+    story.append(Paragraph("Portafoglio 15 immobili — totali indicativi", h2))
+    story.append(tbl(
+        ["", "Contratto 12–18 mesi", "Contratto sotto 3 mesi"],
+        [
+            ["Compenso agenzia anno 1 (15 immobili)", fmt_euro(15 * c), fmt_euro(15 * c)],
+            ["Compenso agenzia anni dopo / gestione", fmt_euro(15 * (c // 2)), fmt_euro(15 * gest_breve)],
+            ["Canone totale incassato (15 immobili)", fmt_euro(15 * c * 12), fmt_euro(15 * c * 10)],
+            ["Referente unico per tutto", "Sì", "Sì"],
+        ],
+        [54 * mm, 60 * mm, 60 * mm],
+        size=9.5,
     ))
     story.append(Spacer(1, 6 * mm))
-    story.append(green_box("Proposta da presentare alla cliente", [
-        "<b>Pacchetto «Zero pensieri» — 15 immobili Piazzola / Camposampiero</b>",
-        f"Canone tipo zona: {fmt_euro(c)}/mese · Avvio {fmt_euro(avvio)} · Gestione {fmt_euro(gestione)}/anno",
-        "Nuovo inquilino: € 0 per lei — referente unico Bertinato Gino",
-        "Contratti brevi: +35% gestione · Tutto il resto lo facciamo noi",
-    ]))
-    story.append(Spacer(1, 8 * mm))
     story.append(Paragraph(
-        "Documento interno — Gruppo Immobiliare Bertinato Gino · Righetto Immobiliare · "
-        f"{data_doc.strftime('%d/%m/%Y')}",
+        "Canoni e compensi calcolati su ipotesi {canone}/mese — da adattare immobile per immobile.".format(canone=fmt_euro(c)),
         ParagraphStyle("foot", alignment=TA_CENTER, fontSize=8, textColor=GRIGIO),
     ))
     story.append(Paragraph(
-        "Canoni indicativi per Piazzola sul Brenta e Camposampiero — da confermare immobile per immobile.",
+        f"Bertinato Gino · Righetto Immobiliare · {data_doc.strftime('%d/%m/%Y')}",
         small,
     ))
 
@@ -376,9 +280,9 @@ def build_pdf(out_path: Path, data_doc: date) -> Path:
     doc = SimpleDocTemplate(
         str(out_path), pagesize=A4,
         leftMargin=18 * mm, rightMargin=18 * mm,
-        topMargin=18 * mm, bottomMargin=22 * mm,
+        topMargin=16 * mm, bottomMargin=22 * mm,
     )
-    doc.build(build_story(data_doc), canvasmaker=AnalisiCanvas)
+    doc.build(build_story(data_doc), canvasmaker=ReportCanvas)
     return out_path
 
 
@@ -392,7 +296,7 @@ def main() -> int:
     archive.parent.mkdir(parents=True, exist_ok=True)
     archive.write_bytes(out_pdf.read_bytes())
     print(f"OK: {out_pdf} ({out_pdf.stat().st_size // 1024} KB)")
-    print(f"Archivio admin: {archive}")
+    print(f"Archivio: {archive}")
     return 0
 
 
