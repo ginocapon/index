@@ -147,23 +147,23 @@
     }
   },
   "next_friday_batch": {
-    "date": "2026-08-08",
-    "label": "batch-08-08-vendita-followup + blog-lug28 + servizi",
+    "date": "2026-09-04",
+    "label": "batch-09-04-venerdi-editoriale + batch-29-08 follow-up",
     "max_urls_per_session": 12,
     "urls": [
       "https://righettoimmobiliare.it/servizio-vendita",
-      "https://righettoimmobiliare.it/servizio-locazioni",
-      "https://righettoimmobiliare.it/servizio-valutazioni",
-      "https://righettoimmobiliare.it/landing-consulenza-immobiliare-gratuita",
-      "https://righettoimmobiliare.it/blog-agenzia-immobiliare-limena-come-scegliere-2026",
-      "https://righettoimmobiliare.it/blog-domanda-residenziale-supera-offerta-2026-padova",
-      "https://righettoimmobiliare.it/blog-ricerche-online-tipologie-casa-2026-padova",
-      "https://righettoimmobiliare.it/blog-outlook-living-italia-2026-padova",
+      "https://righettoimmobiliare.it/servizio-gestione",
+      "https://righettoimmobiliare.it/blog-affittare-casa-padova-proprietario-2026",
       "https://righettoimmobiliare.it/blog-rendimento-affitto-padova",
-      "https://righettoimmobiliare.it/blog-affitti-limena-2026",
-      "https://righettoimmobiliare.it/blog-student-rentals-padova-guide-2026",
-      "https://righettoimmobiliare.it/blog-padova-housing-market-guide-2026"
+      "https://righettoimmobiliare.it/blog-valutazione-casa-padova-guida-2026",
+      "https://righettoimmobiliare.it/blog-vendere-o-affittare-padova-2026",
+      "https://righettoimmobiliare.it/proprietario-immobile",
+      "https://righettoimmobiliare.it/servizio-locazioni",
+      "https://righettoimmobiliare.it/landing-consulenza-immobiliare-gratuita",
+      "https://righettoimmobiliare.it/blog-canone-concordato-padova-guida-2026",
+      "https://righettoimmobiliare.it/blog-registro-contratti-affitto-padova-2026",
+      "https://righettoimmobiliare.it/servizio-valutazioni"
     ],
-    "instructions": "1) servizio-vendita: solo verifica stato (richiesta 03/08). 2) Blog lug28 + agenzia Limena: richiedi se «non su Google». 3) Servizi/landing: ispeziona. 4) EN blog: stessa regola. 5) URL sempre https://righettoimmobiliare.it/slug senza doppio slash."
+    "instructions": "1) servizio-vendita: follow-up indicizzazione. 2) Nuovo blog 04/09 affittare casa proprietario: richiedi se non su Google. 3) rendimento affitto: SOSTENERE 04/09 — verifica CTR. 4) Servizi owner/gestione: ispeziona."
   }
 }

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-29",
+  "updated": "2026-09-04",
   "skill_ref": "TEST-SKILL/skill-acquisizione-proprietari.md",
   "target_ratio": {
     "area_1_owner_acquisition": 0.35,
@@ -9,21 +9,16 @@
   },
   "cycle_rule": "Minimo 1 articolo acquisition_priority true ogni 2 settimane",
   "last_8_classification": {
-    "area_1_owner": 1,
+    "area_1_owner": 2,
     "area_2_mercato_owner": 2,
-    "area_3_normativa": 3,
+    "area_3_normativa": 2,
     "area_4_acquirente": 2
   },
-  "imbalance_alert": "Ultimi 8 articoli: solo 1/8 acquisition_priority — batch 29/08 orientato acquirente",
+  "imbalance_alert": null,
   "owner_pillar_gaps": [
-    "valutazione casa padova 2026 pillar",
     "vendere casa padova guida owner",
-    "affittare casa padova proprietario",
     "vendere casa limena owner",
-    "gestione locazione delegata padova",
-    "conviene vendere o affittare padova"
+    "gestione locazione delegata padova"
   ],
-  "gsc_owner_refresh": [
-    "/blog-rendimento-affitto-padova"
-  ]
+  "gsc_owner_refresh": []
 }

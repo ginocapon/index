@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-29",
+  "updated": "2026-09-04",
   "skill_ref": "TEST-SKILL/skill-editoriale-visivo.md §16-TER",
   "window_size": 20,
   "saturation_window": 8,
@@ -19,19 +19,30 @@
     "INVESTIMENTO",
     "ALTRO"
   ],
-  "saturation_current": {
-    "NORMATIVA_FISCALE": 2
-  },
+  "saturation_current": {},
   "saturation_counts_last_8": {
-    "NORMATIVA_FISCALE": 2,
+    "AFFITTI_CANONI": 1,
     "INVESTIMENTO": 1,
     "VENDITA_VALUTAZIONE": 1,
     "ACQUISTO_PRIMO_CASA": 1,
     "VENDITA_PROCESSO": 1,
+    "NORMATIVA_FISCALE": 1,
     "GUIDA_LEXICO": 1,
     "MUTUI_TASSI": 1
   },
   "recent_articles": [
+    {
+      "slug": "blog-affittare-casa-padova-proprietario-2026",
+      "title": "Affittare casa a Padova 2026: guida proprietario",
+      "published_date": "2026-09-04",
+      "substantive_area": "AFFITTI_CANONI",
+      "secondary_areas": [
+        "VALORE_MERCATO"
+      ],
+      "main_question": "Come affittare casa a Padova nel 2026 da proprietario?",
+      "geo": "Padova/Veneto",
+      "editorial_type": "evergreen"
+    },
     {
       "slug": "blog-vendere-o-affittare-padova-2026",
       "title": "Vendere o affittare a Padova 2026: come decidere",
@@ -250,18 +261,6 @@
       "substantive_area": "VALORE_MERCATO",
       "secondary_areas": [
         "LOCALE_LIMENA"
-      ],
-      "main_question": "Quanto vale / come si muove il mercato?",
-      "geo": "Padova/Veneto",
-      "editorial_type": ""
-    },
-    {
-      "slug": "blog-ricerche-online-tipologie-casa-2026-padova",
-      "title": "Ricerche online tipologie casa 2026: Padova",
-      "published_date": "2026-07-28",
-      "substantive_area": "VALORE_MERCATO",
-      "secondary_areas": [
-        "AFFITTI_CANONI"
       ],
       "main_question": "Quanto vale / come si muove il mercato?",
       "geo": "Padova/Veneto",
