@@ -144,16 +144,31 @@ def build_story(data_doc: date) -> list:
     nostra_trans = mens_ivata + reg_ivata + ass_ivata
     nostra_std = mens_ivata + reg_ivata
 
-    # Mercato — ipotesi su canone € 800 (Instahome: 1 mens. + ass. transitorio ~€ 150–180)
+    canone_annuo = c * 12
+
+    # Mercato — fonti: Instahome (10–15% annuo), Rentila (7–8% gestione annua), RealAdvisor (1 mens.)
+    # Asseverazione transitorio: indicativamente € 150–200 imponibile (+ IVA) presso agenzie/CA
     mercato_mens_ivata = ivato(c)
-    mercato_ass_ivata_min = ivato(150)
-    mercato_ass_ivata_max = ivato(180)
-    mercato_trans_min = mercato_mens_ivata + mercato_ass_ivata_min
-    mercato_trans_max = mercato_mens_ivata + mercato_ass_ivata_max
-    mercato_trans_medio = mercato_mens_ivata + ivato(165)
-    risparmio_trans_min = mercato_trans_min - nostra_trans
-    risparmio_trans_max = mercato_trans_max - nostra_trans
-    risparmio_trans_medio = mercato_trans_medio - nostra_trans
+    mercato_reg_ivata = ivato(100)          # pratiche registrazione (mercato spesso € 80–150)
+    mercato_ass_ivata = ivato(200)          # asseverazione (€ 150–200 imponibile di mercato)
+    mercato_gest_8_ivata = ivato(canone_annuo * 0.08)   # gestione continuativa ~8% (Rentila)
+    mercato_gest_12_ivata = ivato(canone_annuo * 0.12)  # fascia media-alta
+    mercato_pct_15_ivata = ivato(canone_annuo * 0.15)   # modello percentuale (Instahome)
+
+    # Scenario A: solo stipula transitorio (minimo mercato)
+    mercato_solo_stipula = mercato_mens_ivata + mercato_reg_ivata + mercato_ass_ivata
+
+    # Scenario B: stipula + gestione annua 8–12% (gestione completa tipica)
+    mercato_completo_min = mercato_mens_ivata + mercato_reg_ivata + mercato_ass_ivata + mercato_gest_8_ivata
+    mercato_completo_max = mercato_mens_ivata + mercato_reg_ivata + mercato_ass_ivata + mercato_gest_12_ivata
+
+    # Scenario C: 15% canone annuo + oneri (alternativa molto diffusa)
+    mercato_pct15_tot = mercato_pct_15_ivata + mercato_reg_ivata + mercato_ass_ivata
+
+    risparmio_vs_solo = mercato_solo_stipula - nostra_trans
+    risparmio_vs_completo_min = mercato_completo_min - nostra_trans
+    risparmio_vs_completo_max = mercato_completo_max - nostra_trans
+    risparmio_vs_pct15 = mercato_pct15_tot - nostra_trans
 
     h1 = ParagraphStyle("H1", fontName="Helvetica-Bold", fontSize=15, textColor=BLU, alignment=TA_CENTER, spaceAfter=4)
     h2 = ParagraphStyle("H2", fontName="Helvetica-Bold", fontSize=11.5, textColor=BLU, spaceBefore=8, spaceAfter=5)
@@ -218,16 +233,34 @@ def build_story(data_doc: date) -> list:
     story.append(band("IPOTESI MERCATO — 1 appartamento € 800/mese"))
     story.append(Spacer(1, 3 * mm))
     story.append(Paragraph(
-        "Zona Piazzola sul Brenta, Camposampiero, Padova. Prassi tipica delle agenzie (1 mensilità + oneri transitorio).",
+        "Zona Piazzola sul Brenta, Camposampiero, Padova. "
+        "Le agenzie applicano spesso <b>più voci</b>: mensilità o 10–15% annuo, più registrazione, "
+        "asseverazione (transitorio) e talvolta <b>gestione continuativa</b> 8–12% sul canone annuo "
+        "(fonti: Instahome, Rentila, RealAdvisor).",
         body,
     ))
     story.append(Spacer(1, 2 * mm))
     story.append(tbl(
-        ["Voce", "Importo ivato (22%)"],
+        ["Voce mercato", "Importo ivato (22%)", "Note"],
         [
-            ["1 mensilità canone", fmt_euro(mercato_mens_ivata)],
-            ["Asseverazione transitorio", f"{fmt_euro(mercato_ass_ivata_min)} – {fmt_euro(mercato_ass_ivata_max)}"],
-            ["Totale transitorio (indicativo)", f"{fmt_euro(mercato_trans_min)} – {fmt_euro(mercato_trans_max)}"],
+            ["1 mensilità canone (proprietario)", fmt_euro(mercato_mens_ivata), "Prassi diffusa"],
+            ["Oppure 15% canone annuo", fmt_euro(mercato_pct_15_ivata), "Modello alternativo"],
+            ["Pratiche registrazione", fmt_euro(mercato_reg_ivata), "Spesso € 80–150 + IVA"],
+            ["Asseverazione transitorio", fmt_euro(mercato_ass_ivata), "Indic. € 150–200 + IVA"],
+            ["Gestione annua 8%", fmt_euro(mercato_gest_8_ivata), "Solo gestione continuativa"],
+            ["Gestione annua 12%", fmt_euro(mercato_gest_12_ivata), "Gestione più strutturata"],
+        ],
+        [52 * mm, 44 * mm, 78 * mm],
+        size=8.5,
+    ))
+    story.append(Spacer(1, 3 * mm))
+    story.append(tbl(
+        ["Scenario mercato (1 anno)", "Totale ivato proprietario"],
+        [
+            ["A — Solo stipula transitorio", fmt_euro(mercato_solo_stipula)],
+            ["B — Stipula + gestione 8% annua", fmt_euro(mercato_completo_min)],
+            ["C — Stipula + gestione 12% annua", fmt_euro(mercato_completo_max)],
+            ["D — 15% canone annuo + oneri", fmt_euro(mercato_pct15_tot)],
         ],
         [90 * mm, 84 * mm],
     ))
@@ -254,32 +287,45 @@ def build_story(data_doc: date) -> list:
         ["Confronto", "Mercato", "Righetto", "Risparmio"],
         [
             [
-                "Transitorio (1 stipula)",
-                fmt_euro(mercato_trans_medio),
+                "A — Solo stipula",
+                fmt_euro(mercato_solo_stipula),
                 fmt_euro(nostra_trans),
-                fmt_euro(risparmio_trans_medio),
+                fmt_euro(risparmio_vs_solo),
             ],
             [
-                "Transitorio (range mercato)",
-                f"{fmt_euro(mercato_trans_min)} – {fmt_euro(mercato_trans_max)}",
+                "B — Stipula + gest. 8%",
+                fmt_euro(mercato_completo_min),
                 fmt_euro(nostra_trans),
-                f"{fmt_euro(risparmio_trans_min)} – {fmt_euro(risparmio_trans_max)}",
+                fmt_euro(risparmio_vs_completo_min),
             ],
             [
-                "15 immobili — 8 stipule/anno",
-                fmt_euro(8 * mercato_trans_medio),
+                "C — Stipula + gest. 12%",
+                fmt_euro(mercato_completo_max),
+                fmt_euro(nostra_trans),
+                fmt_euro(risparmio_vs_completo_max),
+            ],
+            [
+                "D — 15% annuo + oneri",
+                fmt_euro(mercato_pct15_tot),
+                fmt_euro(nostra_trans),
+                fmt_euro(risparmio_vs_pct15),
+            ],
+            [
+                "15 immobili — 8 stipule (scen. B)",
+                fmt_euro(8 * mercato_completo_min),
                 fmt_euro(8 * nostra_trans),
-                fmt_euro(8 * risparmio_trans_medio),
+                fmt_euro(8 * risparmio_vs_completo_min),
             ],
         ],
-        [42 * mm, 44 * mm, 44 * mm, 44 * mm],
-        size=9,
+        [40 * mm, 42 * mm, 42 * mm, 50 * mm],
+        size=8.5,
         highlight_last=True,
     ))
     story.append(Spacer(1, 3 * mm))
     story.append(Paragraph(
-        "Il risparmio principale è sull'<b>asseverazione</b> (€ 50 + IVA invece di € 150–180 di mercato) "
-        "e su una tariffa unica trasparente, senza costi nascosti.",
+        "Il risparmio più significativo si vede quando il mercato applica anche la <b>gestione annua</b> "
+        "(8–15% del canone): in quel caso Righetto resta su <b>1 mensilità + € 50 + € 50 + IVA</b> "
+        "per stipula, senza percentuali ricorrenti sul canone.",
         body,
     ))
 
@@ -306,7 +352,7 @@ def build_story(data_doc: date) -> list:
         [
             ["Canoni annui incassati (15 × € 800 × 12)", fmt_euro(15 * c * 12)],
             ["Compensi agenzia da proprietario (8 × " + fmt_euro(nostra_trans) + ")", fmt_euro(8 * nostra_trans)],
-            ["Risparmio vs mercato (8 stipule)", fmt_euro(8 * risparmio_trans_medio)],
+            ["Risparmio vs mercato (scen. B, 8 stipule)", fmt_euro(8 * risparmio_vs_completo_min)],
             ["Referente unico + WhatsApp", "Incluso nel mandato annuale"],
         ],
         [110 * mm, 64 * mm],
@@ -317,7 +363,8 @@ def build_story(data_doc: date) -> list:
     story.append(Paragraph(
         "Tutti i compensi agenzia indicati sono <b>+ IVA 22%</b> dove applicabile. "
         "Canone € 800/mese è ipotesi per Piazzola–Camposampiero–Padova — da confermare per ogni unità. "
-        "Fonte prassi mercato: Instahome (costi agenzia affitto), normativa contratto transitorio.",
+        "Fonti: Instahome (10–15% annuo), Rentila (7–8% gestione annua), RealAdvisor (provvigioni affitto). "
+        "Scenari indicativi — ogni agenzia applica condizioni diverse.",
         sm,
     ))
     story.append(Spacer(1, 4 * mm))
