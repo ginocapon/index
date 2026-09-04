@@ -373,19 +373,16 @@ def build_story(data_doc: date) -> list:
     story.append(band("LA NOSTRA OFFERTA RIGHETTO — gestione annua + oneri a contratto", colors.HexColor("#1B6B4A")))
     story.append(Spacer(1, 3 * mm))
     story.append(Paragraph(
-        f"<b>Esempio — 1 immobile, canone € {c}/mese, 1 solo contratto transitorio.</b> "
-        "Nessuna moltiplicazione per 6 contratti: gestione = 1 mensilità annua; reg. e ass. = una tantum a contratto. "
-        "Tutti gli importi + IVA 22%.",
+        "<b>Esempio di un contratto.</b> Tutti gli importi + IVA 22%.",
         body,
     ))
     story.append(Spacer(1, 2 * mm))
     story.append(tbl_righetto_prezzi(
-        ["Voce Righetto — 1 immobile, 1 contratto", "Base", "Ivato (22%)"],
+        ["Voce Righetto", "Base", "Ivato (22%)"],
         [
             ["Gestione (1 mensilità canone / anno)", fmt_euro(c), fmt_euro(righetto_gestione_annua)],
             ["Registrazione — 1 contratto", fmt_euro(REG), fmt_euro(righetto_reg_contratto)],
             ["Asseverazione transitorio — 1 contratto", fmt_euro(ASS), fmt_euro(righetto_ass_contratto)],
-            ["TOTALE esempio (1 contratto, non ×6)", fmt_euro(c + REG + ASS), fmt_euro(righetto_tot_esempio)],
         ],
         [68 * mm, 53 * mm, 53 * mm],
     ))
