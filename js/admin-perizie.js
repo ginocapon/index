@@ -84,7 +84,7 @@
     var el = document.getElementById('perizieTableBody');
     if (el) el.innerHTML = '<tr><td colspan="6" style="padding:24px;text-align:center;color:var(--caffe2)">Caricamento archivio…</td></tr>';
 
-    fetch('data/perizie-index.json?v=5')
+    fetch('data/perizie-index.json?v=6')
       .then(function (res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
         return res.json();
