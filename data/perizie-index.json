@@ -1,6 +1,17 @@
 {
-  "updated": "2026-09-01",
+  "updated": "2026-09-04",
   "perizie": [
+    {
+      "id": "canton-romeo-pm-portafoglio15-2026",
+      "data": "2026-09-04",
+      "proprietario": "Sig. Canton Romeo",
+      "indirizzo": "Uso interno — Portafoglio ~15 immobili in locazione",
+      "pdf": "data/perizie/Analisi_PM_Portafoglio15_Canton_Romeo.pdf",
+      "config": "scripts/genera_analisi_pm.py",
+      "tipologia": "Analisi commerciale Property Management",
+      "valore_vendita": null,
+      "note": "Offerta Full PM — transitori, turnover, listino Portfolio 15"
+    },
     {
       "id": "baraldo-viotti-19bis-2026",
       "data": "2026-09-01",
