@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Genera PDF analisi commerciale Property Management — Righetto / Bertinato Gino.
+Report semplice Property Management — Piazzola sul Brenta / Camposampiero (PD).
 
 Uso:
   python scripts/genera_analisi_pm.py
@@ -15,7 +15,7 @@ from datetime import date
 from pathlib import Path
 
 from reportlab.lib import colors
-from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY, TA_LEFT
+from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import mm
@@ -40,14 +40,12 @@ SFONDO = colors.HexColor("#ECE7DF")
 GRIGIO = colors.HexColor("#6B7A8D")
 VERDE = colors.HexColor("#1B6B4A")
 
+# Ipotesi concrete zona Piazzola / Camposampiero (canone mensile tipo)
+CANONE_TIPO = 800
+
 
 def _esc(text: str) -> str:
-    return (
-        str(text or "—")
-        .replace("&", "&amp;")
-        .replace("<", "&lt;")
-        .replace(">", "&gt;")
-    )
+    return str(text or "—").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
 def fmt_euro(n: float | int) -> str:
@@ -55,10 +53,9 @@ def fmt_euro(n: float | int) -> str:
 
 
 class AnalisiCanvas(canvas.Canvas):
-    def __init__(self, *args, doc_title: str = "Analisi commerciale riservata", **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._saved: list[dict] = []
-        self._doc_title = doc_title
 
     def showPage(self):
         self._saved.append(dict(self.__dict__))
@@ -86,35 +83,31 @@ class AnalisiCanvas(canvas.Canvas):
         self.rect(10 * mm, 12 * mm, w - 20 * mm, 8 * mm, stroke=0, fill=1)
         self.setFillColor(colors.white)
         self.setFont("Helvetica", 7)
-        self.drawString(
-            14 * mm, 15.5 * mm,
-            "Gruppo Immobiliare Bertinato Gino — Righetto Immobiliare — Via Roma 96, Limena (PD) — 049.8843484",
-        )
-        self.drawRightString(w - 14 * mm, 15.5 * mm, f"{self._doc_title} — Pag. {n}/{total}")
+        self.drawString(14 * mm, 15.5 * mm, "Bertinato Gino — Righetto Immobiliare — Limena (PD) — 049.8843484")
+        self.drawRightString(w - 14 * mm, 15.5 * mm, f"Report PM — Pag. {n}/{total}")
 
 
 def make_kv(pairs: list[tuple[str, str]]) -> Table:
-    lbl = ParagraphStyle("kl", fontName="Helvetica-Bold", fontSize=8, leading=10.5, textColor=colors.white)
-    val = ParagraphStyle("kv", fontName="Helvetica", fontSize=8.5, leading=11.5, textColor=NERO)
+    lbl = ParagraphStyle("kl", fontName="Helvetica-Bold", fontSize=9, leading=11, textColor=colors.white)
+    val = ParagraphStyle("kv", fontName="Helvetica", fontSize=9.5, leading=12, textColor=NERO)
     rows = [[Paragraph(_esc(k), lbl), Paragraph(_esc(v), val)] for k, v in pairs]
-    t = Table(rows, colWidths=[52 * mm, 122 * mm])
+    t = Table(rows, colWidths=[55 * mm, 119 * mm])
     t.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (0, -1), BLU),
         ("BACKGROUND", (1, 0), (1, -1), SFONDO),
         ("BOX", (0, 0), (-1, -1), 0.5, BLU),
         ("INNERGRID", (0, 0), (-1, -1), 0.25, colors.HexColor("#E1DBD1")),
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
-        ("LEFTPADDING", (0, 0), (-1, -1), 7),
-        ("RIGHTPADDING", (0, 0), (-1, -1), 7),
-        ("TOPPADDING", (0, 0), (-1, -1), 5),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
+        ("LEFTPADDING", (0, 0), (-1, -1), 8),
+        ("TOPPADDING", (0, 0), (-1, -1), 6),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
     ]))
     return t
 
 
-def make_table(header: list[str], body: list[list[str]], widths: list[float], body_size: float = 7.5) -> Table:
-    th = ParagraphStyle("th", fontName="Helvetica-Bold", fontSize=body_size, leading=9.5, textColor=colors.white)
-    td = ParagraphStyle("td", fontName="Helvetica", fontSize=body_size, leading=10, textColor=NERO)
+def make_table(header: list[str], body: list[list[str]], widths: list[float], size: float = 9) -> Table:
+    th = ParagraphStyle("th", fontName="Helvetica-Bold", fontSize=size, leading=11, textColor=colors.white)
+    td = ParagraphStyle("td", fontName="Helvetica", fontSize=size, leading=12, textColor=NERO)
     rows: list[list] = [[Paragraph(_esc(c), th) for c in header]]
     for row in body:
         rows.append([Paragraph(_esc(c), td) for c in row])
@@ -124,544 +117,256 @@ def make_table(header: list[str], body: list[list[str]], widths: list[float], bo
         ("BOX", (0, 0), (-1, -1), 0.5, BLU),
         ("INNERGRID", (0, 0), (-1, -1), 0.25, colors.HexColor("#E1DBD1")),
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
-        ("LEFTPADDING", (0, 0), (-1, -1), 4),
-        ("RIGHTPADDING", (0, 0), (-1, -1), 4),
-        ("TOPPADDING", (0, 0), (-1, -1), 4),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
+        ("LEFTPADDING", (0, 0), (-1, -1), 6),
+        ("TOPPADDING", (0, 0), (-1, -1), 5),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
     ]))
     return t
 
 
-def highlight_box(title: str, lines: list[str], styles: dict) -> Table:
-    ps_t = ParagraphStyle("hb_t", fontName="Helvetica-Bold", fontSize=9, textColor=colors.white, leading=11)
-    ps_b = ParagraphStyle("hb_b", fontName="Helvetica", fontSize=8.5, textColor=colors.white, leading=11.5)
+def green_box(title: str, lines: list[str]) -> Table:
+    ps_t = ParagraphStyle("gt", fontName="Helvetica-Bold", fontSize=10, textColor=colors.white, leading=12)
+    ps_b = ParagraphStyle("gb", fontName="Helvetica", fontSize=9.5, textColor=colors.white, leading=13)
     data: list[list] = [[Paragraph(title, ps_t)]]
     for line in lines:
         data.append([Paragraph(line, ps_b)])
     box = Table(data, colWidths=[174 * mm])
     box.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, -1), VERDE),
-        ("BOX", (0, 0), (-1, -1), 1, ORO),
-        ("LEFTPADDING", (0, 0), (-1, -1), 10),
-        ("RIGHTPADDING", (0, 0), (-1, -1), 10),
-        ("TOPPADDING", (0, 0), (-1, -1), 7),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 7),
+        ("BOX", (0, 0), (-1, -1), 1.5, ORO),
+        ("LEFTPADDING", (0, 0), (-1, -1), 12),
+        ("TOPPADDING", (0, 0), (-1, -1), 8),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
     ]))
     return box
 
 
-def flow_node(title: str, detail: str, timing: str, cost: str, bg: colors.Color = BLU) -> Table:
-    """Blocco organigramma con titolo, dettaglio, tempistica e costo."""
-    ps_t = ParagraphStyle("fn_t", fontName="Helvetica-Bold", fontSize=8.5, textColor=colors.white, leading=10.5, alignment=TA_CENTER)
-    ps_d = ParagraphStyle("fn_d", fontName="Helvetica", fontSize=7.5, textColor=colors.white, leading=10, alignment=TA_CENTER)
-    ps_m = ParagraphStyle("fn_m", fontName="Helvetica-Bold", fontSize=7, textColor=ORO, leading=9, alignment=TA_CENTER)
-    data = [
-        [Paragraph(f"<b>{_esc(title)}</b>", ps_t)],
-        [Paragraph(_esc(detail), ps_d)],
-    ]
-    if timing or cost:
-        meta = " · ".join(x for x in [timing, cost] if x)
-        data.append([Paragraph(_esc(meta), ps_m)])
-    t = Table(data, colWidths=[174 * mm])
-    t.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, -1), bg),
-        ("BOX", (0, 0), (-1, -1), 1, ORO),
+def flow_step(num: str, text: str, note: str = "") -> Table:
+    ps_n = ParagraphStyle("sn", fontName="Helvetica-Bold", fontSize=11, textColor=ORO, alignment=TA_CENTER)
+    ps_t = ParagraphStyle("st", fontName="Helvetica-Bold", fontSize=9, textColor=colors.white, leading=11)
+    ps_n2 = ParagraphStyle("sn2", fontName="Helvetica", fontSize=8, textColor=SFONDO, leading=10)
+    left = Paragraph(num, ps_n)
+    right_rows = [[Paragraph(text, ps_t)]]
+    if note:
+        right_rows.append([Paragraph(note, ps_n2)])
+    right = Table(right_rows, colWidths=[148 * mm])
+    right.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, -1), BLU),
+        ("LEFTPADDING", (0, 0), (-1, -1), 8),
         ("TOPPADDING", (0, 0), (-1, -1), 5),
         ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
-        ("LEFTPADDING", (0, 0), (-1, -1), 8),
-        ("RIGHTPADDING", (0, 0), (-1, -1), 8),
     ]))
-    return t
-
-
-def flow_arrow(label: str = "") -> Table:
-    ps = ParagraphStyle("fa", fontName="Helvetica-Bold", fontSize=11, textColor=ORO, alignment=TA_CENTER, leading=12)
-    ps_l = ParagraphStyle("fal", fontName="Helvetica-Oblique", fontSize=7, textColor=GRIGIO, alignment=TA_CENTER, leading=9)
-    rows: list[list] = [[Paragraph("▼", ps)]]
-    if label:
-        rows.append([Paragraph(_esc(label), ps_l)])
-    t = Table(rows, colWidths=[174 * mm])
+    t = Table([[left, right]], colWidths=[18 * mm, 156 * mm])
     t.setStyle(TableStyle([
-        ("TOPPADDING", (0, 0), (-1, -1), 0),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
-        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("BOX", (0, 0), (-1, -1), 0.5, ORO),
     ]))
     return t
 
 
-def build_esempi_e_organigrammi(h2, h3, body, bullet, small) -> list:
-    """Sezione 13 — esempi a blocchi e organigrammi visivi (in fondo al documento)."""
-    CANONE = 900
-    avvio = round(CANONE * 0.85)
-    gest_base = round(CANONE * 0.45)
-    gest_breve = round(CANONE * 0.45 * 1.35)
-    provv = CANONE
-
-    story: list = []
-    story.append(PageBreak())
-    story.append(Paragraph("13. Esempi pratici e organigrammi operativi", h2))
-    story.append(Paragraph(
-        "Di seguito due scenari sullo <b>stesso canone mensile tipo (€ 900)</b>: contratto lungo (12–18 mesi) "
-        "e contratto molto breve (≤ 3 mesi). Ogni blocco mostra tempistiche, processi, verifiche, consegne e costi.",
-        body,
-    ))
-
-    # ── 13.1 Esempio numerico a blocchi ──
-    story.append(Paragraph("13.1 Confronto economico — 1 immobile, canone € 900/mese", h3))
-    story.append(make_table(
-        ["Voce economica", "Contratto 12 mesi", "Contratto ≤ 3 mesi"],
-        [
-            ["Canone mensile", "€ 900", "€ 900"],
-            ["Avvio gestione (0,85 mens.) — proprietaria", fmt_euro(avvio), fmt_euro(avvio)],
-            ["Gestione annua — proprietaria", f"{fmt_euro(gest_base)} (base 0%)", f"{fmt_euro(gest_breve)} (+35%)"],
-            ["Nuova locazione — proprietaria", "€ 0", "€ 0"],
-            ["Nuova locazione — conduttore", fmt_euro(provv), fmt_euro(provv)],
-            ["Turnover stimato / anno", "1 locazione", "4–6 locazioni"],
-            ["Provvigioni conduttori / anno", fmt_euro(provv), fmt_euro(provv * 5)],
-            ["Ricavo agenzia / anno / immobile*", fmt_euro(gest_base + provv), fmt_euro(gest_breve + provv * 5)],
-            ["Vacanza media tra inquilini", "15–20 giorni", "10–15 giorni (più cicli)"],
-            ["Costi extra tipici proprietaria**", "€ 150–300/anno", "€ 600–1.200/anno"],
-        ],
-        [52 * mm, 61 * mm, 61 * mm],
-        body_size=7.2,
-    ))
-    story.append(Paragraph(
-        "* Ricavo agenzia = gestione proprietaria + provvigioni conduttori (separate). "
-        "** Pulizie, piccole riparazioni, eventuale vacanza — a carico proprietaria, coordinati da agenzia.",
-        small,
-    ))
-    story.append(Spacer(1, 3 * mm))
-
-    story.append(make_table(
-        ["Chi paga cosa — sintesi", "12–18 mesi", "≤ 3 mesi"],
-        [
-            ["Marketing e visite", "Conduttore (1×)", "Conduttore (4–6×)"],
-            ["Burocrazia contratto", "Incluso gestione", "Incluso gestione (+35%)"],
-            ["Rapporto inquilino", "Agenzia — incluso", "Agenzia — incluso, più frequente"],
-            ["Verifica a check-out", "Incluso", "Incluso — più volte/anno"],
-            ["Pulizie finali", "Proprietaria (extra)", "Proprietaria (extra, ×4–6)"],
-            ["Manutenzione > € 200", "Proprietaria (extra)", "Proprietaria (extra)"],
-        ],
-        [52 * mm, 61 * mm, 61 * mm],
-        body_size=7.2,
-    ))
-
-    # ── 13.2 Organigramma contratto lungo ──
-    story.append(PageBreak())
-    story.append(Paragraph("13.2 Organigramma — contratto transitorio 12–18 mesi", h3))
-    story.append(Paragraph(
-        "<b>Flusso operativo standard</b> — turnover basso, ciclo completo ogni 12–18 mesi per immobile.",
-        body,
-    ))
-    long_steps = [
-        ("① AVVIO GESTIONE", "Presa in carico immobile, documenti, mandato Portfolio", "Giorni 1–7", f"Proprietaria: {fmt_euro(avvio)}"),
-        ("② SOPRALLUOGO + ANALISI", "Stato immobile, canone consigliato, strategia locazione", "Giorno 2–5", "Incluso avvio"),
-        ("③ FOTO + ANNUNCIO", "Shooting, pubblicazione portali, gestione richieste", "Giorni 3–10", "Incluso gestione"),
-        ("④ SELEZIONE CONDUTTORE", "Screening, visite, proposta al proprietario", "Settimane 2–4", f"Conduttore: {fmt_euro(provv)}"),
-        ("⑤ CONTRATTO + REGISTRAZIONE", "Transitorio 12–18 mesi, asseverazione, Agenzia Entrate", "Giorni 1–7", "Incluso gestione"),
-        ("⑥ GESTIONE ORDINARIA", "Referente unico, scadenze, manutenzioni ≤ €200, report", "Mesi 1–18", f"{fmt_euro(gest_base)}/anno proprietaria"),
-        ("⑦ SCADENZA CONTRATTO", "Preavviso, coordinamento uscita inquilino", "Mese 11–18", "Incluso gestione"),
-        ("⑧ RICONSEGNA + VERIFICA", "Verbale stato, foto, eventuali danni/deposito", "Giorni 1–3", "Incluso gestione"),
-        ("⑨ PREPARAZIONE RILOCAZIONE", "Pulizie, piccoli interventi, nuovo annuncio", "Giorni 7–14", "Extra proprietaria €150–300"),
-        ("⑩ NUOVO CICLO", "Ritorno al punto ④ — nuova locazione", "Settimana 3–5", f"Conduttore: {fmt_euro(provv)}"),
-    ]
-    for i, (title, detail, timing, cost) in enumerate(long_steps):
-        bg = VERDE if i == 0 else (colors.HexColor("#3D5A80") if i in (3, 9) else BLU)
-        story.append(flow_node(title, detail, timing, cost, bg))
-        if i < len(long_steps) - 1:
-            arrow_lbl = ""
-            if i == 5:
-                arrow_lbl = "Durata contratto: 12–18 mesi — gestione continuativa"
-            elif i == 8:
-                arrow_lbl = "Eventuale vacanza: 15–20 giorni (canone perso a carico proprietaria)"
-            story.append(flow_arrow(arrow_lbl))
-    story.append(Spacer(1, 4 * mm))
-    story.append(Paragraph(
-        f"<b>Totale ricavo agenzia anno tipo (1 turnover):</b> {fmt_euro(gest_base)} gestione + "
-        f"{fmt_euro(provv)} intermediazione = <b>{fmt_euro(gest_base + provv)}</b> per immobile.",
-        body,
-    ))
-
-    # ── 13.3 Organigramma contratto breve ──
-    story.append(PageBreak())
-    story.append(Paragraph("13.3 Organigramma — contratto ≤ 3 mesi (alto turnover)", h3))
-    story.append(Paragraph(
-        "<b>Flusso accelerato</b> — ciclo ripetuto 4–6 volte/anno. Maggiorazione gestione +35%. "
-        "Più verifiche, consegne e costi operativi per la proprietaria.",
-        body,
-    ))
-    short_steps = [
-        ("① AVVIO (una tantum)", "Setup immobile nel portafoglio Portfolio 15", "Giorni 1–7", f"Proprietaria: {fmt_euro(avvio)}"),
-        ("② LOCazione RAPIDA", "Annuncio urgente, visite compatte, contratto breve", "Giorni 5–12", f"Conduttore: {fmt_euro(provv)}"),
-        ("③ CONTRATTO ≤ 3 MESI", "Transitorio breve, registrazione express", "Giorni 1–3", "Incluso gestione +35%"),
-        ("④ GESTIONE BREVE", "Comunicazioni, piccole urgenze, scadenza ravvicinata", "Mesi 1–3", f"{fmt_euro(gest_breve)}/anno prorata"),
-        ("⑤ CHECK-OUT + VERIFICA", "Consegna chiavi, verbale, foto comparative", "Giorno 1–2", "Incluso — ripetuto ×4–6"),
-        ("⑥ PULIZIE + PREPARAZIONE", "Coordinamento pulizie, controllo impianti", "Giorni 2–5", "Extra proprietaria €80–150/ciclo"),
-        ("⑦ VACANZA / RILOCAZIONE", "Nuovo annuncio, nuove visite, nuovo conduttore", "Giorni 7–15", f"Conduttore: {fmt_euro(provv)}"),
-        ("⑧ CICLO RIPETUTO", "Ritorno al punto ② — fino a 5 volte/anno", "Continuo", "Maggiorazione gestione attiva"),
-    ]
-    for i, (title, detail, timing, cost) in enumerate(short_steps):
-        bg = colors.HexColor("#8B4513") if i in (4, 5) else (VERDE if i == 0 else colors.HexColor("#5C4033"))
-        if i in (1, 6):
-            bg = colors.HexColor("#3D5A80")
-        story.append(flow_node(title, detail, timing, cost, bg))
-        if i < len(short_steps) - 1:
-            lbl = ""
-            if i == 2:
-                lbl = "⚠ Durata breve → maggiorazione gestione +35%"
-            elif i == 5:
-                lbl = "⚠ Costo maggiore: pulizie e vacanza più frequenti"
-            elif i == 6:
-                lbl = "↻ Loop: 4–6 cicli/anno vs 1 ciclo/anno (contratto lungo)"
-            story.append(flow_arrow(lbl))
-    story.append(Spacer(1, 4 * mm))
-
-    story.append(make_table(
-        ["Confronto operativo", "12–18 mesi", "≤ 3 mesi"],
-        [
-            ["Cicli completi / anno", "1", "4–6"],
-            ["Verifiche immobile / anno", "1–2", "4–8"],
-            ["Consegne (check-out) / anno", "1", "4–6"],
-            ["Tempo agenzia stimato / anno", "~8–12 ore", "~25–40 ore"],
-            ["Ricavo agenzia / anno", fmt_euro(gest_base + provv), fmt_euro(gest_breve + provv * 5)],
-            ["Costo extra proprietaria", "Basso", "Medio-alto"],
-        ],
-        [52 * mm, 61 * mm, 61 * mm],
-        body_size=7.2,
-    ))
-    story.append(Spacer(1, 4 * mm))
-    story.append(Paragraph(
-        f"<b>Esempio annuo ≤ 3 mesi (5 turnover, canone €900):</b> gestione {fmt_euro(gest_breve)} + "
-        f"5× intermediazione {fmt_euro(provv * 5)} = <b>{fmt_euro(gest_breve + provv * 5)}</b> ricavo agenzia. "
-        f"La proprietaria non paga commissioni di nuova locazione; paga solo gestione maggiorata e costi "
-        f"operativi (pulizie, vacanza) più frequenti.",
-        body,
-    ))
-    story.append(Spacer(1, 3 * mm))
-    story.append(Paragraph(
-        "<b>Legenda organigrammi:</b> blocchi blu = processo standard · blocchi verdi = avvio/ricavo · "
-        "blocchi marrone = verifica/consegna · frecce ▼ = sequenza temporale · tempi indicativi su immobile "
-        "già pronto (no ristrutturazione).",
-        small,
-    ))
-    return story
+def flow_down() -> Paragraph:
+    return Paragraph(
+        "▼",
+        ParagraphStyle("fd", fontName="Helvetica-Bold", fontSize=12, textColor=ORO, alignment=TA_CENTER, spaceBefore=1, spaceAfter=1),
+    )
 
 
-def build_story(data_perizia: date) -> list:
-    styles = getSampleStyleSheet()
-    title = ParagraphStyle("T", fontName="Helvetica-Bold", fontSize=17, textColor=BLU, alignment=TA_CENTER, spaceAfter=4)
-    subtitle = ParagraphStyle("S", fontName="Helvetica", fontSize=9, textColor=GRIGIO, alignment=TA_CENTER, spaceAfter=6)
-    h2 = ParagraphStyle("H2", fontName="Helvetica-Bold", fontSize=11, textColor=BLU, spaceBefore=8, spaceAfter=4)
-    h3 = ParagraphStyle("H3", fontName="Helvetica-Bold", fontSize=9.5, textColor=BLU, spaceBefore=5, spaceAfter=3)
-    body = ParagraphStyle("B", fontName="Helvetica", fontSize=9, leading=13, textColor=NERO, alignment=TA_JUSTIFY, spaceAfter=4)
-    bullet = ParagraphStyle("Bu", parent=body, leftIndent=10, spaceAfter=2)
-    small = ParagraphStyle("Sm", parent=body, fontSize=7.5, textColor=GRIGIO, spaceAfter=2)
-    st: dict = {"title": title, "h2": h2, "body": body}
+def build_story(data_doc: date) -> list:
+    c = CANONE_TIPO
+    avvio = round(c * 0.85)       # Portfolio 15
+    gestione = round(c * 0.45)    # annua
+    gestione_breve = round(c * 0.45 * 1.35)
+
+    h1 = ParagraphStyle("H1", fontName="Helvetica-Bold", fontSize=16, textColor=BLU, alignment=TA_CENTER, spaceAfter=4)
+    h2 = ParagraphStyle("H2", fontName="Helvetica-Bold", fontSize=12, textColor=BLU, spaceBefore=10, spaceAfter=5)
+    body = ParagraphStyle("B", fontName="Helvetica", fontSize=10, leading=14, textColor=NERO, alignment=TA_JUSTIFY, spaceAfter=5)
+    small = ParagraphStyle("Sm", fontName="Helvetica", fontSize=8, textColor=GRIGIO, spaceAfter=3)
 
     story: list = []
 
-    # ── COPERTINA ──
+    # ── PAG. 1 — COPERTINA + IN SINTESI ──
     if LOGO_PATH.is_file():
-        story.append(RLImage(str(LOGO_PATH), width=36 * mm, height=36 * mm))
-        story.append(Spacer(1, 6 * mm))
-    story.append(Paragraph("ANALISI DI MERCATO E DEFINIZIONE OFFERTA", title))
-    story.append(Paragraph("Property Management — Portafoglio ~15 immobili in locazione", subtitle))
-    story.append(Spacer(1, 4 * mm))
+        story.append(RLImage(str(LOGO_PATH), width=32 * mm, height=32 * mm))
+        story.append(Spacer(1, 5 * mm))
+    story.append(Paragraph("GESTIONE LOCAZIONI — PROPOSTA SEMPLICE", h1))
+    story.append(Paragraph("Piazzola sul Brenta · Camposampiero · hinterland Padova", ParagraphStyle(
+        "sub", fontName="Helvetica", fontSize=10, textColor=GRIGIO, alignment=TA_CENTER, spaceAfter=8,
+    )))
     story.append(make_kv([
         ("Destinatario", "Sig. Canton Romeo"),
-        ("Committente interno", "Gruppo Immobiliare Bertinato Gino"),
-        ("Redatto da", "Righetto Immobiliare — Ufficio consulenza"),
-        ("Data documento", data_perizia.strftime("%d/%m/%Y")),
-        ("Oggetto", "Definizione offerta commerciale Full Property Management"),
-        ("Contesto", "Portafoglio ~15 unità — locazioni transitorie / brevi"),
-        ("Classificazione", "Documento riservato — uso interno e commerciale"),
+        ("Agenzia", "Gruppo Immobiliare Bertinato Gino / Righetto Immobiliare"),
+        ("Data", data_doc.strftime("%d/%m/%Y")),
+        ("Portafoglio", "Circa 15 immobili in locazione"),
+        ("Zona", "Piazzola sul Brenta, Camposampiero e comuni limitrofi"),
+        ("Obiettivo cliente", "Zero gestione diretta — un solo referente per tutto"),
     ]))
     story.append(Spacer(1, 6 * mm))
-    story.append(highlight_box("Executive Summary", [
-        "<b>Verdetto:</b> la formula 1 mensilità (avvio) + ½ mensilità/anno (gestione) è <b>competitiva e consigliabile</b>, "
-        "a condizione che la provvigione di intermediazione (≈1 mensilità dal nuovo conduttore) resti separata e non si "
-        "addebiti doppio alla proprietaria per ogni turnover.",
-        "<b>Modello consigliato:</b> compenso gestione proprietaria + maggiorazioni per alto turnover + listino Portfolio 15 unità.",
-        "<b>Ricavo annuo stimato</b> (15 immobili, canone medio €900, turnover medio): <b>€ 19.000 – € 22.000</b> "
-        "(gestione + intermediazione).",
-    ], st))
+    story.append(green_box("In 30 secondi — cosa proponiamo", [
+        "1. <b>Avvio</b> (una volta per immobile): <b>0,85 mensilità</b> del canone",
+        "2. <b>Gestione annua</b>: <b>0,45 mensilità/anno</b> — ci occupiamo noi di tutto il resto",
+        "3. <b>Nuovo inquilino</b>: la proprietaria <b>non paga</b> — paga il conduttore (1 mensilità)",
+        "4. Contratti <b>brevi</b> (sotto 3 mesi): gestione <b>+35%</b> perché si ripete più spesso",
+    ]))
     story.append(Spacer(1, 4 * mm))
     story.append(Paragraph(
-        "<i>Fonti di mercato: Rentila, CSI Immobili, MN Agenzia, Worthington, Instahome, Invim/Gabetti, FreedHome, "
-        "Rentger/Idealista — tariffe dove non pubblicate indicate come «su preventivo».</i>",
-        small,
+        f"Ipotesi di lavoro: canone mensile tipo <b>{fmt_euro(c)}</b> per un bilocale/ trilocale "
+        "in zona Piazzola–Camposampiero (valutazione puntuale immobile per immobile).",
+        body,
     ))
+
+    # ── PAG. 2 — TARIFFA + CHI PAGA COSA ──
     story.append(PageBreak())
-
-    # ── 1. CONTESTO ──
-    story.append(Paragraph("1. Contesto e obiettivo", h2))
-    story.append(Paragraph(
-        "Gruppo Immobiliare Bertinato Gino valuta un'offerta di <b>gestione completa</b> per una proprietaria "
-        "con circa <b>15 immobili</b> da mettere in locazione, prevalentemente con contratti <b>transitori</b> "
-        "(1–18 mesi). La cliente richiede delega totale: niente rapporti con inquilini, niente burocrazia, "
-        "referente unico operativo.",
-        body,
-    ))
-    story.append(Paragraph(
-        "<b>Elemento distintivo del modello Bertinato:</b> alla nuova locazione l'agenzia percepisce mediamente "
-        "<b>1 mensilità di provvigione dal nuovo conduttore</b>. Il compenso chiesto alla proprietaria deve "
-        "remunerare solo il <b>property management</b>, non duplicare la mediazione.",
-        body,
-    ))
-
-    # ── 2. MERCATO ──
-    story.append(Paragraph("2. Mercato italiano — sintesi", h2))
-    story.append(Paragraph(
-        "In Italia non esiste una tariffa legale obbligatoria (art. 1755 c.c.). Il mercato distingue "
-        "<b>mandato d'affitto</b> (solo collocamento) da <b>mandato di gestione</b> (amministrazione continuativa).",
-        body,
-    ))
+    story.append(Paragraph("1. Listino Portfolio 15 immobili", h2))
     story.append(make_table(
-        ["Voce", "Prassi di mercato", "Fonte"],
+        ["Cosa", "Quanto", "Chi paga"],
         [
-            ["Solo ricerca inquilino", "1 mensilità + IVA oppure 10–15% canone annuo", "Rentila, CSI, MN"],
-            ["Gestione ordinaria annua", "~7–8% canone annuo", "Rentila"],
-            ["Gestione full service", "4–10% annuo (per servizi inclusi)", "Worthington, Instahome"],
-            ["Affitti brevi turistici", "15–30% ricavi (non comparabile)", "Propert.it, Hostmate"],
+            ["Avvio gestione (una tantum)", "0,85 mensilità", "Proprietaria"],
+            ["Gestione ordinaria (ogni anno)", "0,45 mensilità", "Proprietaria"],
+            ["Trova nuovo inquilino", "1 mensilità", "Conduttore — non la proprietaria"],
+            ["Proroga stesso inquilino", "0,25 mensilità", "Proprietaria"],
+            ["Contratto sotto 3 mesi", "+35% sulla gestione", "Proprietaria"],
         ],
-        [42 * mm, 88 * mm, 44 * mm],
-        body_size=7.2,
+        [58 * mm, 48 * mm, 68 * mm],
     ))
-    story.append(Spacer(1, 3 * mm))
-    story.append(Paragraph(
-        "<b>Nota:</b> Gabetti/Invim, Gruppocasa, Recasa non pubblicano listini online — condizioni su preventivo.",
-        small,
-    ))
-
-    # ── 3. BENCHMARK ──
-    story.append(Paragraph("3. Benchmark operatori", h2))
+    story.append(Spacer(1, 5 * mm))
+    story.append(Paragraph("2. Cosa facciamo noi (incluso nel prezzo)", h2))
     story.append(make_table(
-        ["Operatore", "Servizio", "Tariffa", "Note"],
+        ["Servizio", "Dettaglio"],
         [
-            ["Rentila (guida)", "Affitto + gestione", "1 mens. / 7–8% annuo", "Separazione netta"],
-            ["CSI Immobili", "Mediazione locazione", "10–15% annuo o 1–2 mens.", "Transitorio incluso"],
-            ["MN Agenzia", "Mediazione", "~15% annuo + IVA", "Blog agenzia"],
-            ["Worthington", "Mediazione + PM", "10–15% / 4–8% gestione", "Zona Milano"],
-            ["Instahome", "Pacchetti PM", "4–10% annuo", "Più servizi = % più alta"],
-            ["Invim/Gabetti", "Gestione lungo", "Quota annuale (N/D)", "No provvigione dichiarata"],
-            ["FreedHome", "PropTech", "Gratis al locatore*", "*Inquilino paga copertura"],
+            ["Annuncio e visite", "Foto, portali, selezione inquilini"],
+            ["Contratto", "Predisposizione, registrazione, scadenze"],
+            ["Referente unico", "Nessun contatto diretto proprietario–inquilino"],
+            ["Manutenzioni piccole", "Coordinamento fino a € 200"],
+            ["Cambio inquilino", "Verifica immobile, consegna chiavi, nuovo annuncio"],
+            ["Report", "Aggiornamento trimestrale alla proprietaria"],
         ],
-        [32 * mm, 38 * mm, 42 * mm, 62 * mm],
-        body_size=6.8,
+        [52 * mm, 122 * mm],
     ))
-
-    story.append(PageBreak())
-
-    # ── 4. DUE FLUSSI DI RICAVO ──
-    story.append(Paragraph("4. Ricavo A (proprietaria) vs Ricavo B (conduttore)", h2))
-    story.append(Paragraph(
-        "<b>Risposta netta:</b> con 1 mensilità dal nuovo conduttore, <b>NON è necessario</b> addebitare "
-        "alla proprietaria un'ulteriore mensilità per ogni nuova locazione. La provvigione del conduttore "
-        "remunera marketing, visite, screening, contratto e registrazione.",
-        body,
-    ))
-    story.append(make_table(
-        ["Attività", "Remunerata da", "Motivo"],
-        [
-            ["Nuova locazione / turnover", "Conduttore (~1 mens.)", "Standard mercato mediazione"],
-            ["Avvio gestione immobile", "Proprietaria (1 mens. anno 1)", "Setup, documenti, strategia"],
-            ["Gestione ordinaria annua", "Proprietaria (½ mens./anno)", "Rapporto inquilino, scadenze, report"],
-            ["Proroga transitorio", "Proprietaria (0,2–0,3 mens.)", "Lavoro ridotto vs nuova locazione"],
-            ["Straordinari / sfratto", "Proprietaria (extra)", "Non inclusi nel canone base"],
-        ],
-        [48 * mm, 52 * mm, 74 * mm],
-        body_size=7.2,
-    ))
-
-    # ── 5. TURNOVER ──
-    story.append(Paragraph("5. Turnover e maggiorazioni", h2))
-    story.append(Paragraph(
-        "Con contratti brevi aumentano sopralluoghi, check-out, preparazione immobile e coordinamento "
-        "manutenzioni — ma <b>non</b> la ricerca inquilino (già remunerata dal conduttore). "
-        "Le maggiorazioni vanno applicate sul <b>compenso di gestione</b>, non sulla mediazione.",
-        body,
-    ))
-    story.append(make_table(
-        ["Fascia durata", "Turnover", "Maggiorazione gestione", "Valutazione ipotesi interna"],
-        [
-            ["12–18 mesi", "Basso", "Tariffa base (0%)", "Corretta"],
-            ["6–12 mesi", "Medio", "+10%", "Ipotesi 10%: corretta"],
-            ["3–6 mesi", "Alto", "+20%", "Ipotesi 20%: corretta"],
-            ["1–3 mesi", "Molto alto", "+35%", "Meglio 35% che 30–40% a scaglioni"],
-        ],
-        [28 * mm, 28 * mm, 42 * mm, 76 * mm],
-        body_size=7.2,
-    ))
-    story.append(Spacer(1, 3 * mm))
-    story.append(Paragraph(
-        "<b>Contratti &lt; 3 mesi:</b> consigliata categoria separata con maggiorazione <b>+35%</b> sulla "
-        "gestione annua (Ipotesi C/D ibrida), oppure canone fisso aggiuntivo €120–180/trimestre se preferite "
-        "semplicità commerciale.",
-        body,
-    ))
-
-    # ── 6. CONFRONTO MODELLI ──
-    story.append(Paragraph("6. Confronto modelli tariffari", h2))
-    story.append(make_table(
-        ["Modello", "Pro", "Contro", "Giudizio"],
-        [
-            ["1: 1m + ½m (vostra)", "Semplice, competitivo", "Rischio sottovalutazione se full service", "✓ Consigliato*"],
-            ["2: % annua 4–8%", "Allineato mercato", "Meno intuitivo", "Alternativa valida"],
-            ["3: Fisso €/mese", "Prevedibile", "Disallineato da canoni diversi", "Solo portafogli omogenei"],
-            ["4: Ibrido + turnover", "Più equo", "Più articolato", "✓ Migliore tecnicamente"],
-            ["5: Solo % alta unica", "Facile da vendere", "Caro per cliente fedele", "Sconsigliato"],
-        ],
-        [32 * mm, 38 * mm, 38 * mm, 66 * mm],
-        body_size=6.8,
-    ))
-    story.append(Paragraph("* Con provvigione conduttore separata e maggiorazioni turnover.", small))
-
-    story.append(PageBreak())
-
-    # ── 7. FULL PM ──
-    story.append(Paragraph("7. Full Property Management — perimetro servizi", h2))
-    story.append(Paragraph("7.1 Inclusi nel compenso di gestione", h3))
+    story.append(Spacer(1, 4 * mm))
+    story.append(Paragraph("3. Cosa resta a carico della proprietaria (extra)", h2))
     for item in [
-        "Sopralluogo, analisi immobile, proposta canone, check documenti base",
-        "Strategia locazione, annuncio, pubblicazione portali, gestione richieste",
-        "Selezione conduttori, organizzazione visite (costo mediazione a carico conduttore)",
-        "Contratto, registrazione, scadenzario, proroghe concordate, cessazione",
-        "Punto di contatto inquilino, comunicazioni ordinarie, coordinamento manutenzioni ≤ €200",
-        "Controllo periodico, verifica stato al cambio inquilino, report trimestrale proprietaria",
+        "Lavori importanti (idraulico, elettrico, ristrutturazione)",
+        "Pulizie fine locazione (le coordiniamo noi, le paga lei)",
+        "IMU, bollo, registro, spese condominiali",
+        "Contenzioso o sfratto",
     ]:
-        story.append(Paragraph(f"• {item}", bullet))
-    story.append(Paragraph("7.2 Esclusi — fatturati a parte", h3))
-    for item in [
-        "Lavori straordinari e ristrutturazioni",
-        "Contenzioso, sfratto, recupero crediti, assistenza legale",
-        "Assicurazione morosità / rent guarantee",
-        "Home staging premium, fotografia professionale avanzata",
-        "Impuesto di registro, bollo, IMU, spese condominiali (sempre a carico proprietaria)",
-    ]:
-        story.append(Paragraph(f"• {item}", bullet))
+        story.append(Paragraph(f"• {item}", ParagraphStyle("bu", parent=body, leftIndent=8, spaceAfter=2)))
 
-    # ── 8. SCENARI ECONOMICI ──
-    story.append(Paragraph("8. Scenari economici — 15 immobili", h2))
-    story.append(Paragraph(
-        "Calcolo ricavo totale = <b>Gestione proprietaria</b> + <b>Provvigioni conduttori</b> (turnover). "
-        "Anno tipo con canone medio €900, turnover 50% (≈8 nuove locazioni/anno).",
-        body,
-    ))
-    story.append(make_table(
-        ["Canone medio", "Gestione annua (15×½ mens.)", "Turnover 50% intermediazione", "Totale annuo agenzia"],
-        [
-            ["€ 700", fmt_euro(15 * 350), fmt_euro(8 * 700), fmt_euro(15 * 350 + 8 * 700)],
-            ["€ 900", fmt_euro(15 * 450), fmt_euro(8 * 900), fmt_euro(15 * 450 + 8 * 900)],
-            ["€ 1.100", fmt_euro(15 * 550), fmt_euro(8 * 1100), fmt_euro(15 * 550 + 8 * 1100)],
-            ["€ 1.300", fmt_euro(15 * 650), fmt_euro(8 * 1300), fmt_euro(15 * 650 + 8 * 1300)],
-        ],
-        [28 * mm, 52 * mm, 52 * mm, 42 * mm],
-        body_size=7.5,
-    ))
-    story.append(Spacer(1, 3 * mm))
-    story.append(Paragraph(
-        "<b>Anno 1 (avvio portafoglio):</b> aggiungere 15 × 1 mensilità canone medio = "
-        f"<b>{fmt_euro(15 * 900)}</b> una tantum (canone €900). Equivalente mensile anno 2+: "
-        f"<b>{fmt_euro((15 * 450 + 8 * 900) / 12)}/mese</b>.",
-        body,
-    ))
-    story.append(make_table(
-        ["Turnover annuo", "Nuove locazioni (su 15)", "Extra intermediazione (€900)", "Impatto vs 0% turnover"],
-        [
-            ["0%", "0", "€ 0", "Solo gestione € 6.750"],
-            ["25%", "≈ 4", fmt_euro(4 * 900), "+ € 3.600"],
-            ["50%", "≈ 8", fmt_euro(8 * 900), "+ € 7.200"],
-            ["75%", "≈ 11", fmt_euro(11 * 900), "+ € 9.900"],
-            ["100%", "15", fmt_euro(15 * 900), "+ € 13.500"],
-        ],
-        [28 * mm, 38 * mm, 42 * mm, 66 * mm],
-        body_size=7.2,
-    ))
-
+    # ── PAG. 3 — DUE ESEMPI CONCRETI ──
     story.append(PageBreak())
+    story.append(Paragraph(f"4. Due esempi concreti — canone {fmt_euro(c)}/mese", h2))
 
-    # ── 9. VALUTAZIONE IPOTESI ──
-    story.append(Paragraph("9. Valutazione formula «1 mens. + ½ mens.»", h2))
+    story.append(Paragraph("<b>Esempio A — Contratto 12 mesi</b> (1 inquilino all'anno)", ParagraphStyle(
+        "h3", parent=body, fontName="Helvetica-Bold", textColor=BLU, spaceBefore=4,
+    )))
     story.append(make_table(
-        ["Criterio", "Giudizio", "Commento"],
+        ["Voce", "Importo", "Note"],
         [
-            ["Competitività", "Alta", "Sotto molti operatori full service (7–8% annuo)"],
-            ["Sostenibilità agenzia", "Buona*", "*Se provvigione conduttore copre turnover"],
-            ["Rischio agenzia", "Medio-basso", "Turnover alto senza maggiorazioni gestione"],
-            ["Convenienza cliente", "Alta", "Niente doppia commissione su nuove locazioni"],
-            ["Facilità vendita", "Alta", "Due numeri chiari: avvio + gestione annua"],
+            ["Avvio (anno 1)", fmt_euro(avvio), "Una volta sola"],
+            ["Gestione annua", fmt_euro(gestione), "Ogni anno"],
+            ["Nuovo inquilino", "€ 0 proprietaria", f"Conduttore paga {fmt_euro(c)}"],
+            ["Totale proprietaria anno 1", fmt_euro(avvio + gestione), "Poi solo gestione"],
+            ["Totale proprietaria anni dopo", fmt_euro(gestione), "Circa € 38/mese"],
         ],
-        [38 * mm, 28 * mm, 108 * mm],
-        body_size=7.5,
+        [52 * mm, 40 * mm, 82 * mm],
+    ))
+    story.append(Spacer(1, 5 * mm))
+
+    story.append(Paragraph("<b>Esempio B — Contratto 2 mesi</b> (più cambi inquilino)", ParagraphStyle(
+        "h3", parent=body, fontName="Helvetica-Bold", textColor=BLU, spaceBefore=4,
+    )))
+    story.append(make_table(
+        ["Voce", "Importo", "Note"],
+        [
+            ["Avvio (anno 1)", fmt_euro(avvio), "Una volta sola"],
+            ["Gestione annua (+35%)", fmt_euro(gestione_breve), "Più lavoro per noi"],
+            ["Nuovi inquilini (×5/anno)", "€ 0 proprietaria", f"5 × {fmt_euro(c)} dai conduttori"],
+            ["Pulizie extra stimate", "€ 400–600/anno", "A carico proprietaria"],
+            ["Totale proprietaria/anno", fmt_euro(avvio + gestione_breve), "Anno 1; poi ~" + fmt_euro(gestione_breve)],
+        ],
+        [52 * mm, 40 * mm, 82 * mm],
     ))
     story.append(Spacer(1, 4 * mm))
     story.append(Paragraph(
-        "<b>LA CONSIGLIERESTI?</b> <b>SÌ</b>, con tre integrazioni: (1) maggiorazioni turnover sulla "
-        "gestione; (2) listino Portfolio 15 unità; (3) proroga transitorio a tariffa dedicata (0,25 mens.).",
+        "<b>Differenza chiave:</b> nei contratti brevi la proprietaria paga un po' di più in gestione (+35%) "
+        "e qualche pulizia in più, ma <b>non paga mai</b> la commissione per trovare l'inquilino.",
         body,
     ))
 
-    # ── 10. TARIFFA PORTFOLIO ──
-    story.append(Paragraph("10. Tariffa Portfolio — 15 immobili", h2))
-    story.append(make_table(
-        ["Scaglione", "Avvio gestione", "Gestione annua", "Nuova locazione proprietaria"],
-        [
-            ["1–3 immobili (listino)", "1,0 mensilità", "0,50 mens./anno", "Non richiesta (conduttore)"],
-            ["4–10 immobili", "0,90 mensilità", "0,45 mens./anno", "Non richiesta"],
-            ["10–15 immobili (Portfolio)", "0,85 mensilità", "0,45 mens./anno", "Non richiesta"],
-        ],
-        [42 * mm, 38 * mm, 42 * mm, 52 * mm],
-        body_size=7.5,
-    ))
-    story.append(Spacer(1, 3 * mm))
+    # ── PAG. 4 — ORGANIGRAMMA SEMPLICE ──
+    story.append(PageBreak())
+    story.append(Paragraph("5. Come funziona — passo per passo", h2))
+
+    story.append(Paragraph("<b>Caso standard (contratto 6–18 mesi)</b>", ParagraphStyle(
+        "h3b", parent=body, fontName="Helvetica-Bold", textColor=BLU,
+    )))
+    for num, text, note in [
+        ("1", "Presa in carico immobile", f"Proprietaria: {fmt_euro(avvio)}"),
+        ("2", "Annuncio + visite + scelta inquilino", f"Conduttore: {fmt_euro(c)}"),
+        ("3", "Contratto e registrazione", "Incluso"),
+        ("4", "Gestione per tutta la durata", f"{fmt_euro(gestione)}/anno — noi referenti"),
+        ("5", "Fine contratto: verifica + consegna", "Incluso"),
+        ("6", "Nuovo inquilino se serve", f"Di nuovo conduttore: {fmt_euro(c)}"),
+    ]:
+        story.append(flow_step(num, text, note))
+        if num != "6":
+            story.append(flow_down())
+
+    story.append(Spacer(1, 6 * mm))
+    story.append(Paragraph("<b>Caso breve (contratto sotto 3 mesi)</b>", ParagraphStyle(
+        "h3c", parent=body, fontName="Helvetica-Bold", textColor=BLU,
+    )))
     story.append(Paragraph(
-        "<b>Presentazione commerciale consigliata:</b> «Listino standard X — per il Suo portafoglio di 15 unità "
-        "applichiamo condizione Portfolio dedicata». Percepito come valore aggiunto, non come sconto disperato.",
+        "Stessi passi, ma <b>più veloce</b> e si ripete 4–5 volte l'anno. "
+        f"Gestione maggiorata: {fmt_euro(gestione_breve)}/anno invece di {fmt_euro(gestione)}.",
         body,
     ))
+    for num, text, note in [
+        ("1", "Inquilino entra (contratto 1–3 mesi)", "Veloce"),
+        ("2", "Gestione + scadenza", f"+35% gestione"),
+        ("3", "Check-out + verifica immobile", "Incluso"),
+        ("4", "Pulizie + nuovo annuncio", "Extra proprietaria ~€ 100"),
+        ("5", "Nuovo inquilino", f"Conduttore: {fmt_euro(c)} — loop"),
+    ]:
+        story.append(flow_step(num, text, note))
+        if num != "5":
+            story.append(flow_down())
 
-    # ── 11. PROPOSTA FINALE ──
-    story.append(Paragraph("11. Proposta commerciale operativa", h2))
-    story.append(highlight_box("Offerta consigliata a presentare alla proprietaria", [
-        "<b>Pacchetto Portfolio 15 — «Gestione Zero Pensieri»</b>",
-        "• <b>Avvio</b> (una tantum per immobile): <b>0,85 mensilità</b> del canone",
-        "• <b>Gestione annua</b>: <b>0,45 mensilità/anno</b> (≈ 5,4% canone annuo)",
-        "• <b>Nuova locazione</b>: <b>€ 0 per la proprietaria</b> — provvigione standard a carico del conduttore",
-        "• <b>Maggiorazioni gestione</b>: +10% (6–12 mesi), +20% (3–6 mesi), +35% (&lt; 3 mesi)",
-        "• <b>Proroga transitorio</b> (stesso inquilino): <b>0,25 mensilità</b>",
-        "• <b>Referente unico</b> + report trimestrale + manutenzioni ordinarie fino a €200 incluse",
-    ], st))
+    # ── PAG. 5 — PORTAFOGLIO 15 + CHIUSURA ──
+    story.append(PageBreak())
+    story.append(Paragraph("6. Portafoglio 15 immobili — numeri totali", h2))
+    story.append(make_table(
+        ["Scenario", "Canone medio", "Ricavo agenzia/anno", "Note"],
+        [
+            ["Tranquillo (poche rotazioni)", fmt_euro(c), fmt_euro(15 * gestione + 4 * c), "~4 nuovi inquilini"],
+            ["Medio (mix contratti)", fmt_euro(c), fmt_euro(15 * gestione + 8 * c), "~8 nuovi inquilini"],
+            ["Attivo (molti brevi)", fmt_euro(c), fmt_euro(15 * gestione_breve + 12 * c), "Contratti corti"],
+        ],
+        [42 * mm, 32 * mm, 42 * mm, 58 * mm],
+        size=8.5,
+    ))
     story.append(Spacer(1, 4 * mm))
     story.append(Paragraph(
-        f"<b>Ricavo potenziale annuo (canone medio €900, turnover 50%, Portfolio):</b><br/>"
-        f"Gestione: 15 × €405 = {fmt_euro(15 * 405)} · Intermediazione: 8 × €900 = {fmt_euro(7200)} · "
-        f"<b>Totale ≈ {fmt_euro(15 * 405 + 7200)}/anno</b> "
-        f"(+ avvio una tantum {fmt_euro(15 * 765)} al primo anno).",
+        f"<b>Primo anno (avvio 15 immobili):</b> 15 × {fmt_euro(avvio)} = <b>{fmt_euro(15 * avvio)}</b> una tantum, "
+        "poi solo gestione annua.",
         body,
     ))
-
-    # ── 12. CONCLUSIONI ──
-    story.append(Paragraph("12. Conclusioni e raccomandazione", h2))
-    story.append(Paragraph(
-        "Se fossi consulente di Gruppo Immobiliare Bertinato Gino, presenterei alla proprietaria il "
-        "<b>Pacchetto Portfolio 15</b> sopra descritto: professionale, conveniente (niente doppie commissioni), "
-        "e remunerativo grazie al mix gestione + provvigioni conduttori sui turnover transitori.",
-        body,
-    ))
-    story.append(Paragraph(
-        "La vostra ipotesi di partenza <b>non è sbagliata</b>: va solo <b>completata</b> con maggiorazioni "
-        "turnover, sconto portfolio e chiara separazione tra mediazione (conduttore) e property management (proprietaria).",
-        body,
-    ))
-
-    # ── 13. ESEMPI E ORGANIGRAMMI (in fondo) ──
-    story.extend(build_esempi_e_organigrammi(h2, h3, body, bullet, small))
-
+    story.append(Spacer(1, 6 * mm))
+    story.append(green_box("Proposta da presentare alla cliente", [
+        "<b>Pacchetto «Zero pensieri» — 15 immobili Piazzola / Camposampiero</b>",
+        f"Canone tipo zona: {fmt_euro(c)}/mese · Avvio {fmt_euro(avvio)} · Gestione {fmt_euro(gestione)}/anno",
+        "Nuovo inquilino: € 0 per lei — referente unico Bertinato Gino",
+        "Contratti brevi: +35% gestione · Tutto il resto lo facciamo noi",
+    ]))
     story.append(Spacer(1, 8 * mm))
-    story.append(Paragraph("Documento redatto per uso interno — Gruppo Immobiliare Bertinato Gino", small))
     story.append(Paragraph(
-        f"Righetto Immobiliare · {data_perizia.strftime('%d/%m/%Y')} · info@righettoimmobiliare.it",
-        ParagraphStyle("sig", alignment=TA_CENTER, fontSize=8, textColor=GRIGIO),
+        "Documento interno — Gruppo Immobiliare Bertinato Gino · Righetto Immobiliare · "
+        f"{data_doc.strftime('%d/%m/%Y')}",
+        ParagraphStyle("foot", alignment=TA_CENTER, fontSize=8, textColor=GRIGIO),
+    ))
+    story.append(Paragraph(
+        "Canoni indicativi per Piazzola sul Brenta e Camposampiero — da confermare immobile per immobile.",
+        small,
     ))
 
     return story
@@ -669,18 +374,11 @@ def build_story(data_perizia: date) -> list:
 
 def build_pdf(out_path: Path, data_doc: date) -> Path:
     doc = SimpleDocTemplate(
-        str(out_path),
-        pagesize=A4,
-        leftMargin=18 * mm,
-        rightMargin=18 * mm,
-        topMargin=18 * mm,
-        bottomMargin=22 * mm,
+        str(out_path), pagesize=A4,
+        leftMargin=18 * mm, rightMargin=18 * mm,
+        topMargin=18 * mm, bottomMargin=22 * mm,
     )
-
-    def canvas_maker(*args, **kwargs):
-        return AnalisiCanvas(*args, doc_title="Analisi PM riservata", **kwargs)
-
-    doc.build(build_story(data_doc), canvasmaker=canvas_maker)
+    doc.build(build_story(data_doc), canvasmaker=AnalisiCanvas)
     return out_path
 
 
