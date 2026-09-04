@@ -150,6 +150,203 @@ def highlight_box(title: str, lines: list[str], styles: dict) -> Table:
     return box
 
 
+def flow_node(title: str, detail: str, timing: str, cost: str, bg: colors.Color = BLU) -> Table:
+    """Blocco organigramma con titolo, dettaglio, tempistica e costo."""
+    ps_t = ParagraphStyle("fn_t", fontName="Helvetica-Bold", fontSize=8.5, textColor=colors.white, leading=10.5, alignment=TA_CENTER)
+    ps_d = ParagraphStyle("fn_d", fontName="Helvetica", fontSize=7.5, textColor=colors.white, leading=10, alignment=TA_CENTER)
+    ps_m = ParagraphStyle("fn_m", fontName="Helvetica-Bold", fontSize=7, textColor=ORO, leading=9, alignment=TA_CENTER)
+    data = [
+        [Paragraph(f"<b>{_esc(title)}</b>", ps_t)],
+        [Paragraph(_esc(detail), ps_d)],
+    ]
+    if timing or cost:
+        meta = " · ".join(x for x in [timing, cost] if x)
+        data.append([Paragraph(_esc(meta), ps_m)])
+    t = Table(data, colWidths=[174 * mm])
+    t.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, -1), bg),
+        ("BOX", (0, 0), (-1, -1), 1, ORO),
+        ("TOPPADDING", (0, 0), (-1, -1), 5),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
+        ("LEFTPADDING", (0, 0), (-1, -1), 8),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 8),
+    ]))
+    return t
+
+
+def flow_arrow(label: str = "") -> Table:
+    ps = ParagraphStyle("fa", fontName="Helvetica-Bold", fontSize=11, textColor=ORO, alignment=TA_CENTER, leading=12)
+    ps_l = ParagraphStyle("fal", fontName="Helvetica-Oblique", fontSize=7, textColor=GRIGIO, alignment=TA_CENTER, leading=9)
+    rows: list[list] = [[Paragraph("▼", ps)]]
+    if label:
+        rows.append([Paragraph(_esc(label), ps_l)])
+    t = Table(rows, colWidths=[174 * mm])
+    t.setStyle(TableStyle([
+        ("TOPPADDING", (0, 0), (-1, -1), 0),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
+        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+    ]))
+    return t
+
+
+def build_esempi_e_organigrammi(h2, h3, body, bullet, small) -> list:
+    """Sezione 13 — esempi a blocchi e organigrammi visivi (in fondo al documento)."""
+    CANONE = 900
+    avvio = round(CANONE * 0.85)
+    gest_base = round(CANONE * 0.45)
+    gest_breve = round(CANONE * 0.45 * 1.35)
+    provv = CANONE
+
+    story: list = []
+    story.append(PageBreak())
+    story.append(Paragraph("13. Esempi pratici e organigrammi operativi", h2))
+    story.append(Paragraph(
+        "Di seguito due scenari sullo <b>stesso canone mensile tipo (€ 900)</b>: contratto lungo (12–18 mesi) "
+        "e contratto molto breve (≤ 3 mesi). Ogni blocco mostra tempistiche, processi, verifiche, consegne e costi.",
+        body,
+    ))
+
+    # ── 13.1 Esempio numerico a blocchi ──
+    story.append(Paragraph("13.1 Confronto economico — 1 immobile, canone € 900/mese", h3))
+    story.append(make_table(
+        ["Voce economica", "Contratto 12 mesi", "Contratto ≤ 3 mesi"],
+        [
+            ["Canone mensile", "€ 900", "€ 900"],
+            ["Avvio gestione (0,85 mens.) — proprietaria", fmt_euro(avvio), fmt_euro(avvio)],
+            ["Gestione annua — proprietaria", f"{fmt_euro(gest_base)} (base 0%)", f"{fmt_euro(gest_breve)} (+35%)"],
+            ["Nuova locazione — proprietaria", "€ 0", "€ 0"],
+            ["Nuova locazione — conduttore", fmt_euro(provv), fmt_euro(provv)],
+            ["Turnover stimato / anno", "1 locazione", "4–6 locazioni"],
+            ["Provvigioni conduttori / anno", fmt_euro(provv), fmt_euro(provv * 5)],
+            ["Ricavo agenzia / anno / immobile*", fmt_euro(gest_base + provv), fmt_euro(gest_breve + provv * 5)],
+            ["Vacanza media tra inquilini", "15–20 giorni", "10–15 giorni (più cicli)"],
+            ["Costi extra tipici proprietaria**", "€ 150–300/anno", "€ 600–1.200/anno"],
+        ],
+        [52 * mm, 61 * mm, 61 * mm],
+        body_size=7.2,
+    ))
+    story.append(Paragraph(
+        "* Ricavo agenzia = gestione proprietaria + provvigioni conduttori (separate). "
+        "** Pulizie, piccole riparazioni, eventuale vacanza — a carico proprietaria, coordinati da agenzia.",
+        small,
+    ))
+    story.append(Spacer(1, 3 * mm))
+
+    story.append(make_table(
+        ["Chi paga cosa — sintesi", "12–18 mesi", "≤ 3 mesi"],
+        [
+            ["Marketing e visite", "Conduttore (1×)", "Conduttore (4–6×)"],
+            ["Burocrazia contratto", "Incluso gestione", "Incluso gestione (+35%)"],
+            ["Rapporto inquilino", "Agenzia — incluso", "Agenzia — incluso, più frequente"],
+            ["Verifica a check-out", "Incluso", "Incluso — più volte/anno"],
+            ["Pulizie finali", "Proprietaria (extra)", "Proprietaria (extra, ×4–6)"],
+            ["Manutenzione > € 200", "Proprietaria (extra)", "Proprietaria (extra)"],
+        ],
+        [52 * mm, 61 * mm, 61 * mm],
+        body_size=7.2,
+    ))
+
+    # ── 13.2 Organigramma contratto lungo ──
+    story.append(PageBreak())
+    story.append(Paragraph("13.2 Organigramma — contratto transitorio 12–18 mesi", h3))
+    story.append(Paragraph(
+        "<b>Flusso operativo standard</b> — turnover basso, ciclo completo ogni 12–18 mesi per immobile.",
+        body,
+    ))
+    long_steps = [
+        ("① AVVIO GESTIONE", "Presa in carico immobile, documenti, mandato Portfolio", "Giorni 1–7", f"Proprietaria: {fmt_euro(avvio)}"),
+        ("② SOPRALLUOGO + ANALISI", "Stato immobile, canone consigliato, strategia locazione", "Giorno 2–5", "Incluso avvio"),
+        ("③ FOTO + ANNUNCIO", "Shooting, pubblicazione portali, gestione richieste", "Giorni 3–10", "Incluso gestione"),
+        ("④ SELEZIONE CONDUTTORE", "Screening, visite, proposta al proprietario", "Settimane 2–4", f"Conduttore: {fmt_euro(provv)}"),
+        ("⑤ CONTRATTO + REGISTRAZIONE", "Transitorio 12–18 mesi, asseverazione, Agenzia Entrate", "Giorni 1–7", "Incluso gestione"),
+        ("⑥ GESTIONE ORDINARIA", "Referente unico, scadenze, manutenzioni ≤ €200, report", "Mesi 1–18", f"{fmt_euro(gest_base)}/anno proprietaria"),
+        ("⑦ SCADENZA CONTRATTO", "Preavviso, coordinamento uscita inquilino", "Mese 11–18", "Incluso gestione"),
+        ("⑧ RICONSEGNA + VERIFICA", "Verbale stato, foto, eventuali danni/deposito", "Giorni 1–3", "Incluso gestione"),
+        ("⑨ PREPARAZIONE RILOCAZIONE", "Pulizie, piccoli interventi, nuovo annuncio", "Giorni 7–14", "Extra proprietaria €150–300"),
+        ("⑩ NUOVO CICLO", "Ritorno al punto ④ — nuova locazione", "Settimana 3–5", f"Conduttore: {fmt_euro(provv)}"),
+    ]
+    for i, (title, detail, timing, cost) in enumerate(long_steps):
+        bg = VERDE if i == 0 else (colors.HexColor("#3D5A80") if i in (3, 9) else BLU)
+        story.append(flow_node(title, detail, timing, cost, bg))
+        if i < len(long_steps) - 1:
+            arrow_lbl = ""
+            if i == 5:
+                arrow_lbl = "Durata contratto: 12–18 mesi — gestione continuativa"
+            elif i == 8:
+                arrow_lbl = "Eventuale vacanza: 15–20 giorni (canone perso a carico proprietaria)"
+            story.append(flow_arrow(arrow_lbl))
+    story.append(Spacer(1, 4 * mm))
+    story.append(Paragraph(
+        f"<b>Totale ricavo agenzia anno tipo (1 turnover):</b> {fmt_euro(gest_base)} gestione + "
+        f"{fmt_euro(provv)} intermediazione = <b>{fmt_euro(gest_base + provv)}</b> per immobile.",
+        body,
+    ))
+
+    # ── 13.3 Organigramma contratto breve ──
+    story.append(PageBreak())
+    story.append(Paragraph("13.3 Organigramma — contratto ≤ 3 mesi (alto turnover)", h3))
+    story.append(Paragraph(
+        "<b>Flusso accelerato</b> — ciclo ripetuto 4–6 volte/anno. Maggiorazione gestione +35%. "
+        "Più verifiche, consegne e costi operativi per la proprietaria.",
+        body,
+    ))
+    short_steps = [
+        ("① AVVIO (una tantum)", "Setup immobile nel portafoglio Portfolio 15", "Giorni 1–7", f"Proprietaria: {fmt_euro(avvio)}"),
+        ("② LOCazione RAPIDA", "Annuncio urgente, visite compatte, contratto breve", "Giorni 5–12", f"Conduttore: {fmt_euro(provv)}"),
+        ("③ CONTRATTO ≤ 3 MESI", "Transitorio breve, registrazione express", "Giorni 1–3", "Incluso gestione +35%"),
+        ("④ GESTIONE BREVE", "Comunicazioni, piccole urgenze, scadenza ravvicinata", "Mesi 1–3", f"{fmt_euro(gest_breve)}/anno prorata"),
+        ("⑤ CHECK-OUT + VERIFICA", "Consegna chiavi, verbale, foto comparative", "Giorno 1–2", "Incluso — ripetuto ×4–6"),
+        ("⑥ PULIZIE + PREPARAZIONE", "Coordinamento pulizie, controllo impianti", "Giorni 2–5", "Extra proprietaria €80–150/ciclo"),
+        ("⑦ VACANZA / RILOCAZIONE", "Nuovo annuncio, nuove visite, nuovo conduttore", "Giorni 7–15", f"Conduttore: {fmt_euro(provv)}"),
+        ("⑧ CICLO RIPETUTO", "Ritorno al punto ② — fino a 5 volte/anno", "Continuo", "Maggiorazione gestione attiva"),
+    ]
+    for i, (title, detail, timing, cost) in enumerate(short_steps):
+        bg = colors.HexColor("#8B4513") if i in (4, 5) else (VERDE if i == 0 else colors.HexColor("#5C4033"))
+        if i in (1, 6):
+            bg = colors.HexColor("#3D5A80")
+        story.append(flow_node(title, detail, timing, cost, bg))
+        if i < len(short_steps) - 1:
+            lbl = ""
+            if i == 2:
+                lbl = "⚠ Durata breve → maggiorazione gestione +35%"
+            elif i == 5:
+                lbl = "⚠ Costo maggiore: pulizie e vacanza più frequenti"
+            elif i == 6:
+                lbl = "↻ Loop: 4–6 cicli/anno vs 1 ciclo/anno (contratto lungo)"
+            story.append(flow_arrow(lbl))
+    story.append(Spacer(1, 4 * mm))
+
+    story.append(make_table(
+        ["Confronto operativo", "12–18 mesi", "≤ 3 mesi"],
+        [
+            ["Cicli completi / anno", "1", "4–6"],
+            ["Verifiche immobile / anno", "1–2", "4–8"],
+            ["Consegne (check-out) / anno", "1", "4–6"],
+            ["Tempo agenzia stimato / anno", "~8–12 ore", "~25–40 ore"],
+            ["Ricavo agenzia / anno", fmt_euro(gest_base + provv), fmt_euro(gest_breve + provv * 5)],
+            ["Costo extra proprietaria", "Basso", "Medio-alto"],
+        ],
+        [52 * mm, 61 * mm, 61 * mm],
+        body_size=7.2,
+    ))
+    story.append(Spacer(1, 4 * mm))
+    story.append(Paragraph(
+        f"<b>Esempio annuo ≤ 3 mesi (5 turnover, canone €900):</b> gestione {fmt_euro(gest_breve)} + "
+        f"5× intermediazione {fmt_euro(provv * 5)} = <b>{fmt_euro(gest_breve + provv * 5)}</b> ricavo agenzia. "
+        f"La proprietaria non paga commissioni di nuova locazione; paga solo gestione maggiorata e costi "
+        f"operativi (pulizie, vacanza) più frequenti.",
+        body,
+    ))
+    story.append(Spacer(1, 3 * mm))
+    story.append(Paragraph(
+        "<b>Legenda organigrammi:</b> blocchi blu = processo standard · blocchi verdi = avvio/ricavo · "
+        "blocchi marrone = verifica/consegna · frecce ▼ = sequenza temporale · tempi indicativi su immobile "
+        "già pronto (no ristrutturazione).",
+        small,
+    ))
+    return story
+
+
 def build_story(data_perizia: date) -> list:
     styles = getSampleStyleSheet()
     title = ParagraphStyle("T", fontName="Helvetica-Bold", fontSize=17, textColor=BLU, alignment=TA_CENTER, spaceAfter=4)
@@ -456,6 +653,10 @@ def build_story(data_perizia: date) -> list:
         "turnover, sconto portfolio e chiara separazione tra mediazione (conduttore) e property management (proprietaria).",
         body,
     ))
+
+    # ── 13. ESEMPI E ORGANIGRAMMI (in fondo) ──
+    story.extend(build_esempi_e_organigrammi(h2, h3, body, bullet, small))
+
     story.append(Spacer(1, 8 * mm))
     story.append(Paragraph("Documento redatto per uso interno — Gruppo Immobiliare Bertinato Gino", small))
     story.append(Paragraph(
