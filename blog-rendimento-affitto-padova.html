@@ -207,10 +207,9 @@
     /* HERO ARTICOLO */
     .art-hero{position:relative;overflow:hidden}
     .art-hero-img{width:100%;height:480px;object-fit:cover;display:block;filter:brightness(.4)}
-    .art-hero--promo .art-hero__frame{position:relative;width:100%;aspect-ratio:21/9;max-height:340px;overflow:hidden;background:var(--nero)}
-    .art-hero--promo .art-hero-img{width:100%;height:100%;filter:none;object-fit:cover;object-position:center 28%}
-    .art-hero--promo .art-hero-overlay{background:linear-gradient(transparent 20%,rgba(21,36,53,.94) 72%);padding:1.5rem 1.5rem 1.25rem}
-    .art-hero-overlay{position:absolute;bottom:0;left:0;right:0;padding:3rem 1.5rem 2.5rem;background:linear-gradient(transparent,rgba(21,36,53,.95) 40%)}
+    .art-hero__frame{position:relative;width:100%;aspect-ratio:19/9;max-height:480px;overflow:hidden}
+    .art-hero__frame .art-hero-img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.42)}
+    .art-hero-overlay{position:absolute;bottom:0;left:0;right:0;padding:3rem 1.5rem 2.5rem;background:linear-gradient(transparent,rgba(21,36,53,.95) 40%);z-index:1}
     .art-hero-inner{max-width:820px;margin:0 auto}
     .breadcrumb{font-size:.72rem;color:rgba(255,255,255,.45);margin-bottom:1rem}
     .breadcrumb a{color:rgba(255,255,255,.55);transition:color .2s}
@@ -313,12 +312,8 @@
 
     @media(max-width:768px){
       .art-hero h1{font-size:1.9rem}
-      .art-hero:not(.art-hero--promo) .art-hero-img{height:320px}
-      .art-hero--promo .art-hero__frame{aspect-ratio:2/1;max-height:200px}
-      .art-hero--promo .art-hero-img{object-position:left 35%}
-      .art-hero--promo .art-hero-overlay{padding:.85rem 1rem .75rem}
-      .art-hero--promo .art-hero h1{font-size:1.35rem;line-height:1.2;margin-bottom:.45rem}
-      .art-hero--promo .breadcrumb,.art-hero--promo .art-hero-meta{display:none}
+      .art-hero__frame{aspect-ratio:16/9;max-height:280px}
+      .art-hero h1{font-size:1.65rem}
       .cta-banner{padding:1.5rem;flex-direction:column;text-align:center}
     }
     .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
@@ -357,12 +352,10 @@
 
 <main id="main-content">
 <!-- HERO -->
-<div class="art-hero art-hero--promo">
-  <div class="art-hero__frame">
-    <picture>
-      <source media="(max-width:768px)" srcset="img/blog/blog-rendimento-affitto-padova-hero-mobile.webp" width="800" height="640">
-      <img class="art-hero-img" src="img/blog/blog-rendimento-affitto-padova-hero.webp" alt="Quanto rende affittare a Padova 2026 — analisi quartieri, canoni e rendimenti Righetto Immobiliare" width="1600" height="750" fetchpriority="high">
-    </picture>
+<div class="art-hero">
+  <div class="art-hero__frame rig-ai-photo-wrap">
+    <img class="art-hero-img" src="img/blog/blog-rendimento-affitto-padova-hero.webp" alt="Rendimento affitto Padova 2026 — vista Prato della Valle e analisi quartieri" width="1900" height="900" fetchpriority="high" data-ai-generated="true">
+    <span class="rig-ai-photo-watermark" aria-hidden="true">FOTO AI</span>
   </div>
   <div class="art-hero-overlay">
     <div class="art-hero-inner">
