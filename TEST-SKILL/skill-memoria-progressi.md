@@ -141,6 +141,7 @@
 | 24/07/2026 | GSC ispezione 10 URL utente: 9 su Google, **solo servizio-vendita** richiesta indicizzazione | Log in gsc-indexing-weekly.json · batch 31/07 preparato |
 | 24/07/2026 | **Blog eq-002** agenzia Limena pubblicato — hero fantasy WebP nuovo | 2654 parole · form lead · sitemap |
 | 05/08/2026 | **Batch GSC Limena** — 5 blog da export keyword utente (appartamento, case vendita, affitto contratto, bilocale/trilocale, brand Righetto) | 2500+ parole ciascuno · hero WebP nuovi · validate-page OK |
+| 11/09/2026 | **Blog eq-sep11-001** vendere casa Limena proprietario — venerdì sett. 12 review trimestrale | Pillar owner vendita locale · gsc-indexing batch 18/09 |
 
 ---
 

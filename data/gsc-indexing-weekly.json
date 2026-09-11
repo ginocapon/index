@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-03",
+  "updated": "2026-09-11",
   "source": "GSC manuale + tool backlink (screenshot 03/08/2026) — aggiornare ogni venerdì",
   "note": "Sitemap principale OK (~175 URL). Rimuovere da GSC le 9 URL singole inviate per errore come sitemap. Canonical sempre senza doppio slash (es. /servizio-vendita non //servizio-vendita). Follow-up indicizzazione servizio-vendita: 3–7 gg dopo richiesta.",
   "sitemap_urls": 175,
@@ -147,23 +147,23 @@
     }
   },
   "next_friday_batch": {
-    "date": "2026-09-04",
-    "label": "batch-09-04-venerdi-editoriale + batch-29-08 follow-up",
+    "date": "2026-09-18",
+    "label": "batch-09-11-venerdi-limena-vendita + follow-up servizi",
     "max_urls_per_session": 12,
     "urls": [
+      "https://righettoimmobiliare.it/blog-vendere-casa-limena-proprietario-2026",
       "https://righettoimmobiliare.it/servizio-vendita",
-      "https://righettoimmobiliare.it/servizio-gestione",
       "https://righettoimmobiliare.it/blog-affittare-casa-padova-proprietario-2026",
       "https://righettoimmobiliare.it/blog-rendimento-affitto-padova",
-      "https://righettoimmobiliare.it/blog-valutazione-casa-padova-guida-2026",
-      "https://righettoimmobiliare.it/blog-vendere-o-affittare-padova-2026",
+      "https://righettoimmobiliare.it/zona-limena",
       "https://righettoimmobiliare.it/proprietario-immobile",
+      "https://righettoimmobiliare.it/landing-valutazione",
+      "https://righettoimmobiliare.it/servizio-gestione",
       "https://righettoimmobiliare.it/servizio-locazioni",
+      "https://righettoimmobiliare.it/blog-gestione-locazione-delegata-padova-2026",
       "https://righettoimmobiliare.it/landing-consulenza-immobiliare-gratuita",
-      "https://righettoimmobiliare.it/blog-canone-concordato-padova-guida-2026",
-      "https://righettoimmobiliare.it/blog-registro-contratti-affitto-padova-2026",
       "https://righettoimmobiliare.it/servizio-valutazioni"
     ],
-    "instructions": "1) servizio-vendita: follow-up indicizzazione. 2) Nuovo blog 04/09 affittare casa proprietario: richiedi se non su Google. 3) rendimento affitto: SOSTENERE 04/09 — verifica CTR. 4) Servizi owner/gestione: ispeziona."
+    "instructions": "1) Nuovo blog 11/09 vendere casa Limena: richiedi indicizzazione se assente. 2) servizio-vendita: follow-up. 3) zona-limena + proprietario-immobile: spot-check. 4) Prossimo blog coda 18/09 gestione locazione — preparare."
   }
 }

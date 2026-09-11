@@ -788,6 +788,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'vendere casa limena proprietario 2026': { img: 'img/blog/blog-vendere-casa-limena-proprietario-2026-hero.webp', url: 'blog-vendere-casa-limena-proprietario-2026' },
     'affittare casa padova proprietario 2026': { img: 'img/blog/blog-affittare-casa-padova-proprietario-2026-hero.webp', url: 'blog-affittare-casa-padova-proprietario-2026' },
     'vendere o affittare padova 2026': { img: 'img/blog/blog-vendere-o-affittare-padova-2026-hero.webp', url: 'blog-vendere-o-affittare-padova-2026' },
     'valutazione immobile padova guida 2026': { img: 'img/blog/blog-valutazione-casa-padova-guida-2026-hero.webp', url: 'blog-valutazione-casa-padova-guida-2026' },
@@ -934,6 +935,13 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    {
+      "titolo": "Vendere casa a Limena nel 2026: percorso per il proprietario",
+      "categoria": "Guida proprietari",
+      "data": "2026-09-11",
+      "immagine_copertina": "img/blog/blog-vendere-casa-limena-proprietario-2026-hero.webp",
+      "url_statico": "blog-vendere-casa-limena-proprietario-2026"
+    },
     {
       "titolo": "Affittare casa a Padova 2026: guida proprietario",
       "categoria": "Guida proprietari",
