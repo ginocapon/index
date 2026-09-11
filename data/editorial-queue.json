@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-04",
+  "updated": "2026-09-11",
   "policy": "Max 1 blog AGGIUNGERE/settimana. PRIORITÀ STRATEGICA: acquisizione proprietari (skill-acquisizione-proprietari.md). Comando editoriale: skill-editoriale-visivo.md + equilibrio 4 aree owner/acquirente. Gate: audit_editorial_acquisition + audit_editorial_research + audit_editorial_continuity + audit_blog_visuals + audit_editorial_visual_variety + audit_blog_publishability. Memorie: editorial-acquisition-balance.json + editorial-memory.json + editorial-visual-memory.json.",
   "workflow_skill": "TEST-SKILL/skill-editorial-queue.md",
   "editorial_command": "TEST-SKILL/skill-editoriale-visivo.md",
@@ -488,7 +488,7 @@
     },
     {
       "id": "eq-sep11-001",
-      "status": "scheduled",
+      "status": "published",
       "priority": 2,
       "target_week": "2026-09-11",
       "slug": "blog-vendere-casa-limena-proprietario-2026",
@@ -500,7 +500,8 @@
       "owner_relevance": true,
       "editorial_type": "evergreen",
       "substantive_area": "VENDITA_PROCESSO",
-      "geo_focus": "Limena e cintura padovana"
+      "geo_focus": "Limena e cintura padovana",
+      "published_date": "2026-09-11"
     },
     {
       "id": "eq-sep18-001",

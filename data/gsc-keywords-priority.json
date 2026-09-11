@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-04",
+  "updated": "2026-09-11",
   "source": "GSC export utente — Dettagli ricerche Limena/Padova (ago 2026)",
   "capture_ref": "data/gsc-captures/2026-08-05-limena-keywords-export.png",
   "note": "Graduatoria keyword Limena da GSC utente 05/08/2026. Top volume: immobiliare 301, agenzia immobiliare limena 166, immobiliare righetto 71, immobiliare limena 67, appartamento limena 63. Batch blog Limena GSC ago2026 chiude gap acquisto/vendita/affitto/bilocale/brand.",
@@ -75,10 +75,14 @@
   ],
   "published_this_week": [
     {
+      "slug": "blog-vendere-casa-limena-proprietario-2026",
+      "kw": "vendere casa limena proprietario",
+      "date": "2026-09-11"
+    },
+    {
       "slug": "blog-affittare-casa-padova-proprietario-2026",
       "kw": "affittare casa padova proprietario",
       "date": "2026-09-04"
-    },
     },
     {
       "slug": "blog-case-vendita-limena-leggere-annunci-2026",
