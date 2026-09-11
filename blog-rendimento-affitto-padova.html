@@ -14,7 +14,7 @@
   <meta property="og:title" content="Quanto rende affittare a Padova 2026: calcolo quartieri">
   <meta property="og:description" content="Quanto rende affittare casa a Padova e Limena nel 2026? Calcolo rendimento lordo e netto per quartiere e zona universitaria. Guida proprietari Righetto.">
   <meta property="og:url" content="https://righettoimmobiliare.it/blog-rendimento-affitto-padova">
-  <meta property="og:image" content="https://righettoimmobiliare.it/img/blog/blog-rendimento-affitto-padova-hero.webp">
+  <meta property="og:image" content="https://righettoimmobiliare.it/img/blog/blog-rendimento-affitto-padova-og.webp">
   <meta property="og:site_name" content="Righetto Immobiliare">
   <meta property="og:locale" content="it_IT">
   <meta property="og:image:width" content="1200">
@@ -29,7 +29,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Quanto rende affittare a Padova 2026: calcolo quartieri">
   <meta name="twitter:description" content="Quanto rende affittare casa a Padova e Limena nel 2026? Calcolo rendimento lordo e netto per quartiere — guida proprietari Righetto.">
-  <meta name="twitter:image" content="https://righettoimmobiliare.it/img/blog/blog-rendimento-affitto-padova-hero.webp">
+  <meta name="twitter:image" content="https://righettoimmobiliare.it/img/blog/blog-rendimento-affitto-padova-og.webp">
   <meta name="description" content="Quanto rende affittare casa a Padova e Limena nel 2026? Calcolo rendimento lordo e netto per quartiere e cintura. Guida proprietari Righetto.">
   <link rel="stylesheet" href="css/fonts.css?v=3">
   <link rel="stylesheet" href="css/nav-mobile.css?v=7">
@@ -45,7 +45,7 @@
     "headline": "Rendimento Affitto Padova e Limena 2026: Calcolo del Rendimento Locativo per Quartiere",
     "description": "Quanto rende un affitto a Padova e Limena nel 2026? Calcolo del rendimento locativo lordo e netto per quartiere e cintura. Analisi per investitori immobiliari.",
     "image": [
-      "https://righettoimmobiliare.it/img/blog/blog-rendimento-affitto-padova-hero.webp"
+      "https://righettoimmobiliare.it/img/blog/blog-rendimento-affitto-padova-og.webp"
     ],
     "author": {
       "@type": "Person",
@@ -207,8 +207,9 @@
     /* HERO ARTICOLO */
     .art-hero{position:relative;overflow:hidden}
     .art-hero-img{width:100%;height:480px;object-fit:cover;display:block;filter:brightness(.4)}
-    .art-hero--promo .art-hero-img{height:auto;max-height:630px;filter:none;object-fit:cover}
-    .art-hero--promo .art-hero-overlay{background:linear-gradient(transparent 55%,rgba(21,36,53,.88))}
+    .art-hero--promo .art-hero__frame{position:relative;width:100%;aspect-ratio:1600/750;max-height:520px;overflow:hidden;background:var(--nero)}
+    .art-hero--promo .art-hero-img{width:100%;height:100%;filter:none;object-fit:cover;object-position:center top}
+    .art-hero--promo .art-hero-overlay{background:linear-gradient(transparent 35%,rgba(21,36,53,.92) 78%);padding:2rem 1.5rem 1.75rem}
     .art-hero-overlay{position:absolute;bottom:0;left:0;right:0;padding:3rem 1.5rem 2.5rem;background:linear-gradient(transparent,rgba(21,36,53,.95) 40%)}
     .art-hero-inner{max-width:820px;margin:0 auto}
     .breadcrumb{font-size:.72rem;color:rgba(255,255,255,.45);margin-bottom:1rem}
@@ -312,7 +313,11 @@
 
     @media(max-width:768px){
       .art-hero h1{font-size:1.9rem}
-      .art-hero-img{height:320px}
+      .art-hero:not(.art-hero--promo) .art-hero-img{height:320px}
+      .art-hero--promo .art-hero__frame{aspect-ratio:5/4;max-height:360px}
+      .art-hero--promo .art-hero-img{object-position:left center}
+      .art-hero--promo .art-hero-overlay{padding:1.25rem 1rem 1.1rem}
+      .art-hero--promo .art-hero h1{font-size:1.55rem;line-height:1.25}
       .cta-banner{padding:1.5rem;flex-direction:column;text-align:center}
     }
     .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
@@ -352,7 +357,12 @@
 <main id="main-content">
 <!-- HERO -->
 <div class="art-hero art-hero--promo">
-  <img class="art-hero-img" src="img/blog/blog-rendimento-affitto-padova-hero.webp" alt="Quanto rende affittare a Padova 2026 — analisi quartieri, canoni e rendimenti Righetto Immobiliare" width="1200" height="630" fetchpriority="high">
+  <div class="art-hero__frame">
+    <picture>
+      <source media="(max-width:768px)" srcset="img/blog/blog-rendimento-affitto-padova-hero-mobile.webp" width="800" height="640">
+      <img class="art-hero-img" src="img/blog/blog-rendimento-affitto-padova-hero.webp" alt="Quanto rende affittare a Padova 2026 — analisi quartieri, canoni e rendimenti Righetto Immobiliare" width="1600" height="750" fetchpriority="high">
+    </picture>
+  </div>
   <div class="art-hero-overlay">
     <div class="art-hero-inner">
       <div class="breadcrumb"><a href="/">Home</a> / <a href="blog">Blog</a> / Rendimento Affitto Padova 2026</div>
