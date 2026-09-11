@@ -5570,6 +5570,7 @@ function renderTable(data) {
       <td>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn btn-action btn-secondary" onclick="editImmobile('${i.id}')" title="Modifica">✏️</button>
+          <button class="btn btn-action" onclick="duplicateImmobile('${i.id}')" title="Duplica annuncio (nuovo codice, stesse foto e testi)" style="background:#f3e5f5;color:#6a1b9a">📋</button>
           <button class="btn btn-action" onclick="showMatchingClienti('${i.id}')" title="Trova clienti compatibili" style="background:#e3f2fd;color:#1565c0">🤝</button>
           <button class="btn btn-action" onclick="printPropertyPdf('${i.id}')" title="Stampa PDF" style="background:#fff3e0;color:#e65100">📄</button>
           <button class="btn btn-action" onclick="quickPublishSocial('${i.id}')" title="Pubblica sui Social" style="background:#e8f5e9;color:#1877F2">📢</button>
@@ -6066,6 +6067,138 @@ async function deleteImmobile(id, titolo) {
   if (error) { toast('Errore: ' + error.message, 'error'); return; }
   toast('Immobile eliminato', 'success');
   await loadImmobili();
+}
+
+/** Codice univoco per duplicato: suffisso (-AFF, -V, -2…) o progressivo per prefisso tipologia. */
+async function generateUniqueCodiceForDuplicate(sourceImm) {
+  const srcCode = (sourceImm.codice || '').trim();
+  const tip = sourceImm.tipologia || '';
+  const pfx = PREFISSI[tip] || (srcCode.match(/^([A-Za-z]+)/)?.[1]?.toUpperCase()) || 'RIG';
+
+  async function codiceLibero(candidate) {
+    if (!candidate) return false;
+    const { data } = await sb.from('immobili').select('id').eq('codice', candidate).limit(1);
+    return !(data && data.length);
+  }
+
+  if (srcCode) {
+    const suffixes = ['-AFF', '-V', '-2', '-B', '-C', '-D'];
+    for (const suf of suffixes) {
+      const candidate = srcCode + suf;
+      if (await codiceLibero(candidate)) return candidate;
+    }
+  }
+
+  const { data } = await sb.from('immobili').select('codice').ilike('codice', pfx + '%');
+  let max = 0;
+  const escPfx = pfx.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp('^' + escPfx + '(\\d+)$', 'i');
+  (data || []).forEach(row => {
+    const m = (row.codice || '').trim().match(re);
+    if (m) max = Math.max(max, parseInt(m[1], 10));
+  });
+  let candidate = pfx + String(max + 1).padStart(4, '0');
+  let guard = 0;
+  while (!(await codiceLibero(candidate)) && guard < 50) {
+    max++;
+    candidate = pfx + String(max + 1).padStart(4, '0');
+    guard++;
+  }
+  return candidate;
+}
+
+async function uniqueSlugForImmobile(baseSlug, codice) {
+  let slug = (baseSlug || 'immobile').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  const codePart = (codice || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  if (codePart) slug = slug + '-' + codePart;
+  let candidate = slug;
+  let n = 2;
+  while (true) {
+    const { data } = await sb.from('immobili').select('id').eq('slug', candidate).limit(1);
+    if (!data || !data.length) return candidate;
+    candidate = slug + '-' + n;
+    n++;
+    if (n > 100) return slug + '-' + Date.now();
+  }
+}
+
+async function _insertImmobilePayload(payload) {
+  let currentPayload = { ...payload };
+  let error = null;
+  let inserted = null;
+  let attempts = 0;
+  while (attempts < 30) {
+    const res = await sb.from('immobili').insert(currentPayload).select('id,codice,titolo').single();
+    error = res.error;
+    inserted = res.data;
+    if (!error) break;
+    const match = error.message.match(/Could not find the '([^']+)' column/);
+    if (match) {
+      delete currentPayload[match[1]];
+      attempts++;
+    } else if (error.message.includes('immobili_codice_key') || (error.message.includes('duplicate key') && error.message.includes('codice'))) {
+      break;
+    } else if (error.message.includes('slug') && error.message.includes('duplicate')) {
+      currentPayload.slug = currentPayload.slug + '-' + Date.now();
+      attempts++;
+    } else {
+      break;
+    }
+  }
+  return { data: inserted, error };
+}
+
+/** Duplica immobile: stesso contenuto (foto, descrizione, planimetrie…), codice e slug nuovi. */
+async function duplicateImmobile(id) {
+  const imm = allImmobili.find(x => String(x.id) === String(id));
+  if (!imm) { toast('Immobile non trovato', 'error'); return; }
+  const label = (imm.codice ? imm.codice + ' — ' : '') + (imm.titolo || 'Immobile');
+  if (!confirm(`Duplicare "${label}"?\n\nVerrà creato un nuovo annuncio con codice diverso, copiando foto, descrizione, planimetrie e tour virtuali.\n\nUtile per uffici gemelli o stesso immobile in vendita e affitto.`)) return;
+
+  const { data: full, error: fetchErr } = await sb.from('immobili').select('*').eq('id', id).single();
+  if (fetchErr || !full) {
+    toast('Errore lettura immobile: ' + (fetchErr?.message || 'sconosciuto'), 'error');
+    return;
+  }
+
+  const newCodice = await generateUniqueCodiceForDuplicate(full);
+  const baseSlug = full.slug || (full.titolo || 'immobile').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  const newSlug = await uniqueSlugForImmobile(baseSlug, newCodice);
+  const stamp = new Date().toISOString().slice(0, 10);
+  const noteExtra = `[Duplicato da ${full.codice || id} il ${stamp}]`;
+
+  const payload = { ...full };
+  delete payload.id;
+  delete payload.created_at;
+  delete payload.updated_at;
+
+  payload.codice = newCodice;
+  payload.slug = newSlug;
+  payload.venduto = false;
+  payload.affittato = false;
+  payload.id_idealista = null;
+  payload.in_evidenza = false;
+  payload.attivo = true;
+  payload.note_interne = [full.note_interne, noteExtra].filter(Boolean).join('\n');
+
+  ['foto', 'foto_urls', 'planimetrie', 'documenti', 'virtual_tour_scenes', 'unita_catastali', 'catasto_pdf'].forEach(k => {
+    if (payload[k] != null) payload[k] = JSON.parse(JSON.stringify(payload[k]));
+  });
+  if (Array.isArray(payload.foto) && payload.foto.length) {
+    payload.foto_principale = payload.foto[0];
+  }
+
+  const { data: created, error } = await _insertImmobilePayload(payload);
+  if (error) {
+    toast('Errore duplicazione: ' + error.message, 'error');
+    return;
+  }
+
+  toast(`Duplicato creato: codice ${newCodice}`, 'success');
+  await loadImmobili();
+  if (created && created.id) {
+    editImmobile(created.id);
+  }
 }
 
 /** Toggle attivo/evidenza: RPC (affidabile) poi UPDATE con header admin. */
