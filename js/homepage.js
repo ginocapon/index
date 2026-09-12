@@ -788,6 +788,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'zona imma limena: pochi immobili, domanda alta 2027': { img: 'img/blog/blog-appartamento-limena-guida-acquisto-2026.webp', url: 'blog-prova-mercato-limena-zona-imma-2027' },
     'vendere casa limena proprietario 2026': { img: 'img/blog/blog-vendere-casa-limena-proprietario-2026-hero.webp', url: 'blog-vendere-casa-limena-proprietario-2026' },
     'affittare casa padova proprietario 2026': { img: 'img/blog/blog-affittare-casa-padova-proprietario-2026-hero.webp', url: 'blog-affittare-casa-padova-proprietario-2026' },
     'vendere o affittare padova 2026': { img: 'img/blog/blog-vendere-o-affittare-padova-2026-hero.webp', url: 'blog-vendere-o-affittare-padova-2026' },
@@ -935,6 +936,13 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    {
+      "titolo": "Zona Imma Limena: pochi immobili, domanda alta 2027",
+      "categoria": "Limena locale",
+      "data": "2026-09-12",
+      "immagine_copertina": "img/blog/blog-appartamento-limena-guida-acquisto-2026.webp",
+      "url_statico": "blog-prova-mercato-limena-zona-imma-2027"
+    },
     {
       "titolo": "Vendere casa a Limena nel 2026: percorso per il proprietario",
       "categoria": "Guida proprietari",
