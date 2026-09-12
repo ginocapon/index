@@ -163,7 +163,39 @@ body.b3d-page{
 }
 @media(max-width:768px){
   .b3d-header{padding:.5rem 1rem}
-  .b3d-section{padding-top:4.5rem}
+  /* Mobile: blocchi testo più ravvicinati (−50% spazio verticale) */
+  .b3d-section{
+    min-height:50vh;
+    padding:2.5rem 1.15rem 1.5rem;
+  }
+  .b3d-kicker{margin-bottom:.38rem}
+  .b3d-section h2{
+    font-size:clamp(1.65rem,7vw,2.4rem);
+    margin-bottom:.5rem;
+    line-height:1.08;
+  }
+  .b3d-section p{
+    font-size:.88rem;
+    line-height:1.55;
+  }
+  .b3d-stat-row{gap:.35rem;margin-top:.68rem}
+  .b3d-stat{padding:.45rem .7rem;min-width:100px}
+  .b3d-stat strong{font-size:1.25rem}
+  .b3d-scroll-hint{bottom:1rem;padding:.45rem 1rem;font-size:.68rem}
+  .b3d-article{padding:1.5rem 1.15rem 2rem}
+  .b3d-article h1{font-size:1.65rem;margin-bottom:.38rem}
+  .b3d-article .lead{margin-bottom:.75rem;line-height:1.65}
+  .b3d-article h2{margin:1.1rem 0 .38rem;padding-bottom:.2rem}
+  .b3d-article h3{margin:.7rem 0 .25rem}
+  .b3d-article p{margin-bottom:.5rem;line-height:1.65}
+  .b3d-article ul,.b3d-article ol{margin-bottom:.5rem;line-height:1.6}
+  .b3d-callout{padding:.6rem .75rem;margin:.75rem 0}
+  .b3d-chart{margin:.75rem 0}
+  .b3d-faq{margin-bottom:.28rem}
+  .b3d-faq summary{padding:.5rem .75rem}
+  .b3d-faq p{padding:0 .75rem .5rem}
+  .b3d-ai-note{margin:.5rem 0;padding:.45rem .6rem}
+  .author-bio{margin:1rem 0!important;padding:.75rem!important}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
