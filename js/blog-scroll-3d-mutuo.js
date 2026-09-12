@@ -1,6 +1,6 @@
 /**
- * Scroll 3D showcase — mutuo under 36
- * Casa moderna premium · rotazione 1:1 immediata con lo scroll
+ * Mutuo under 36 — showcase fotorealistico
+ * Sfondo foto reale · villa moderna 3D PBR · rotazione istantanea allo scroll
  */
 (function () {
   'use strict';
@@ -20,232 +20,194 @@
   }
 
   var scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x121110);
-  scene.fog = new THREE.FogExp2(0x121110, 0.028);
 
-  var camera = new THREE.PerspectiveCamera(48, window.innerWidth / window.innerHeight, 0.1, 120);
-  var camDist = isMobile ? 10.5 : 8.6;
-  camera.position.set(0, 1.55, camDist);
-  camera.lookAt(0, 1.25, 0);
+  var camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 120);
+  var camDist = isMobile ? 11 : 9;
+  camera.position.set(0, 1.65, camDist);
+  camera.lookAt(0, 1.45, 0);
 
   var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, reducedMotion ? 1 : 2.25));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, reducedMotion ? 1 : 2.5));
   renderer.shadowMap.enabled = !reducedMotion;
   if (renderer.shadowMap.enabled) renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   if (THREE.ACESFilmicToneMapping) {
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.08;
+    renderer.toneMappingExposure = 1.05;
   }
   wrap.appendChild(renderer.domElement);
 
-  scene.add(new THREE.AmbientLight(0xfff8f0, 0.42));
+  var texLoader = new THREE.TextureLoader();
+  var interiorTex = null;
+  var windowGlows = [];
 
-  var keyLight = new THREE.DirectionalLight(0xfff5eb, 2.2);
-  keyLight.position.set(5, 12, 7);
+  texLoader.load('img/3d/mutuo-showcase-env.webp', function (envTex) {
+    envTex.colorSpace = THREE.SRGBColorSpace;
+    scene.background = envTex;
+    if (loadingEl) loadingEl.classList.add('hidden');
+  }, undefined, function () {
+    scene.background = new THREE.Color(0x1a1816);
+    if (loadingEl) loadingEl.classList.add('hidden');
+  });
+
+  texLoader.load('img/3d/mutuo-house-interior-ref.webp', function (t) {
+    t.colorSpace = THREE.SRGBColorSpace;
+    interiorTex = t;
+    windowGlows.forEach(function (g) {
+      g.material.map = t;
+      g.material.needsUpdate = true;
+    });
+  });
+
+  scene.add(new THREE.AmbientLight(0xfff8f2, 0.45));
+
+  var sun = new THREE.DirectionalLight(0xfff4ea, 1.85);
+  sun.position.set(6, 14, 8);
   if (renderer.shadowMap.enabled) {
-    keyLight.castShadow = true;
-    keyLight.shadow.mapSize.set(2048, 2048);
-    keyLight.shadow.bias = -0.00015;
+    sun.castShadow = true;
+    sun.shadow.mapSize.set(2048, 2048);
+    sun.shadow.camera.near = 1;
+    sun.shadow.camera.far = 40;
+    sun.shadow.camera.left = -8;
+    sun.shadow.camera.right = 8;
+    sun.shadow.camera.top = 8;
+    sun.shadow.camera.bottom = -8;
   }
-  scene.add(keyLight);
+  scene.add(sun);
 
-  var fillLight = new THREE.DirectionalLight(0xc8d4e8, 0.55);
-  fillLight.position.set(-6, 4, 5);
-  scene.add(fillLight);
+  var fill = new THREE.DirectionalLight(0xd8e8ff, 0.45);
+  fill.position.set(-7, 5, 4);
+  scene.add(fill);
 
-  var rimLight = new THREE.DirectionalLight(0xd4af6a, 1.35);
-  rimLight.position.set(0, 5, -9);
-  scene.add(rimLight);
+  var rim = new THREE.DirectionalLight(0xffe8c8, 0.9);
+  rim.position.set(0, 4, -10);
+  scene.add(rim);
 
-  var spotGold = new THREE.PointLight(0xd4af6a, 1.1, 28);
-  spotGold.position.set(2.5, 5, 3);
-  scene.add(spotGold);
-
-  var spotCool = new THREE.PointLight(0x8eb4ff, 0.75, 24);
-  spotCool.position.set(-3, 3, 2);
-  scene.add(spotCool);
-
-  var accentBlue = new THREE.PointLight(0x5a9fd4, 0.5, 20);
-  accentBlue.position.set(-3.5, 2.5, 1);
-  scene.add(accentBlue);
-
-  var accentOrange = new THREE.PointLight(0xff7a45, 0.45, 20);
-  accentOrange.position.set(3.5, 2.5, 1);
-  scene.add(accentOrange);
-
-  function stdMat(color, metal, rough, emissive, emInt) {
-    var opts = {
+  function phys(color, rough, metal, emissive, emInt) {
+    var m = new THREE.MeshPhysicalMaterial({
       color: color,
-      metalness: metal != null ? metal : 0.35,
-      roughness: rough != null ? rough : 0.28
-    };
+      roughness: rough != null ? rough : 0.35,
+      metalness: metal != null ? metal : 0.08,
+      envMapIntensity: 0.55
+    });
     if (emissive) {
-      opts.emissive = new THREE.Color(emissive);
-      opts.emissiveIntensity = emInt != null ? emInt : 0.15;
+      m.emissive = new THREE.Color(emissive);
+      m.emissiveIntensity = emInt != null ? emInt : 0.2;
     }
-    return new THREE.MeshStandardMaterial(opts);
+    return m;
   }
 
   function glassMat() {
-    return stdMat(0x1a2838, 0.92, 0.06, 0x6a9fd4, 0.22);
+    return new THREE.MeshPhysicalMaterial({
+      color: 0xdce8f5,
+      metalness: 0,
+      roughness: 0.04,
+      transmission: 0.88,
+      thickness: 0.35,
+      transparent: true,
+      envMapIntensity: 0.9,
+      clearcoat: 1,
+      clearcoatRoughness: 0.08
+    });
   }
 
-  /* ── Ambiente showroom elitario ── */
-  var env = new THREE.Group();
-
-  var floorMain = new THREE.Mesh(
-    new THREE.CircleGeometry(9, 96),
-    stdMat(0x1c1a18, 0.55, 0.18)
+  /* Piano ombre sotto la villa */
+  var ground = new THREE.Mesh(
+    new THREE.CircleGeometry(5.5, 64),
+    phys(0x1a1816, 0.85, 0.05)
   );
-  floorMain.rotation.x = -Math.PI / 2;
-  floorMain.receiveShadow = true;
-  env.add(floorMain);
+  ground.rotation.x = -Math.PI / 2;
+  ground.position.y = 0.001;
+  ground.receiveShadow = true;
+  scene.add(ground);
 
-  for (var ri = 1; ri <= 4; ri++) {
-    var ringFloor = new THREE.Mesh(
-      new THREE.RingGeometry(ri * 1.35, ri * 1.35 + 0.018, 96),
-      stdMat(0xd4af6a, 0.75, 0.22, 0xd4af6a, 0.08)
-    );
-    ringFloor.rotation.x = -Math.PI / 2;
-    ringFloor.position.y = 0.004;
-    env.add(ringFloor);
-  }
-
-  var backdrop = new THREE.Mesh(
-    new THREE.CylinderGeometry(11, 11, 8, 64, 1, true, 0, Math.PI),
-    stdMat(0x181614, 0.12, 0.88)
-  );
-  backdrop.position.set(0, 4, -5.5);
-  env.add(backdrop);
-
-  var ledStrip = new THREE.Mesh(
-    new THREE.TorusGeometry(7.2, 0.012, 8, 128),
-    stdMat(0xd4af6a, 0.2, 0.4, 0xffd98a, 0.85)
-  );
-  ledStrip.rotation.x = Math.PI / 2;
-  ledStrip.position.y = 0.02;
-  env.add(ledStrip);
-
-  [[-5.5, -3], [5.5, -3], [-5.5, 3], [5.5, 3]].forEach(function (pos) {
-    var pillar = new THREE.Mesh(
-      new THREE.BoxGeometry(0.14, 5.5, 0.14),
-      stdMat(0x2a2826, 0.65, 0.22)
-    );
-    pillar.position.set(pos[0], 2.75, pos[1]);
-    pillar.castShadow = true;
-    env.add(pillar);
-  });
-
-  scene.add(env);
-
-  /* ── Pedestal marmo lucido ── */
-  var pedestal = new THREE.Group();
-  var pedBase = new THREE.Mesh(
-    new THREE.CylinderGeometry(2.45, 2.65, 0.22, 64),
-    stdMat(0x2e2c2a, 0.62, 0.14)
-  );
-  pedBase.position.y = 0.11;
-  pedBase.receiveShadow = true;
-  pedBase.castShadow = true;
-  pedestal.add(pedBase);
-
-  var pedTop = new THREE.Mesh(
-    new THREE.CylinderGeometry(1.95, 2.05, 0.1, 64),
-    stdMat(0xf0ece6, 0.48, 0.12)
-  );
-  pedTop.position.y = 0.27;
-  pedestal.add(pedTop);
-
-  var pedRing = new THREE.Mesh(
-    new THREE.TorusGeometry(2.05, 0.022, 12, 96),
-    stdMat(0xd4af6a, 0.88, 0.15, 0xffe0a0, 0.35)
-  );
-  pedRing.rotation.x = Math.PI / 2;
-  pedRing.position.y = 0.33;
-  pedestal.add(pedRing);
-  scene.add(pedestal);
-
-  /* ── Villa moderna HD (flat roof, vetrate, cantilever) ── */
   var house = new THREE.Group();
-  house.position.set(0, 0.33, 0);
-  house.rotation.z = -0.08;
+  house.position.set(0, 0, 0);
 
-  var baseSlab = new THREE.Mesh(
-    new THREE.BoxGeometry(3.4, 0.14, 2.6),
-    stdMat(0xe8e4de, 0.15, 0.55)
-  );
-  baseSlab.position.y = 0.07;
-  baseSlab.castShadow = true;
-  house.add(baseSlab);
+  /* Podio in pietra chiara */
+  var podium = new THREE.Mesh(new THREE.BoxGeometry(3.8, 0.28, 2.9), phys(0xc8c0b8, 0.55, 0.05));
+  podium.position.y = 0.14;
+  podium.castShadow = true;
+  podium.receiveShadow = true;
+  house.add(podium);
 
-  var mainVol = new THREE.Mesh(
-    new THREE.BoxGeometry(2.85, 1.55, 2.15),
-    stdMat(0xf7f5f1, 0.08, 0.38)
-  );
-  mainVol.position.set(0, 0.92, 0);
-  mainVol.castShadow = true;
-  mainVol.receiveShadow = true;
-  house.add(mainVol);
+  /* Corpo principale — stucco moderno beige (come edificio foto hero) */
+  var main = new THREE.Mesh(new THREE.BoxGeometry(3.2, 2.05, 2.35), phys(0xe8e0d4, 0.42, 0.04));
+  main.position.y = 1.34;
+  main.castShadow = true;
+  main.receiveShadow = true;
+  house.add(main);
 
-  var upperVol = new THREE.Mesh(
-    new THREE.BoxGeometry(2.35, 1.05, 1.85),
-    stdMat(0xffffff, 0.06, 0.32)
-  );
-  upperVol.position.set(0.28, 2.22, -0.08);
-  upperVol.castShadow = true;
-  house.add(upperVol);
+  /* Piano superiore cantilever */
+  var upper = new THREE.Mesh(new THREE.BoxGeometry(2.55, 1.15, 2.05), phys(0xf2ece4, 0.38, 0.04));
+  upper.position.set(0.22, 2.88, -0.05);
+  upper.castShadow = true;
+  house.add(upper);
 
-  var roofSlab = new THREE.Mesh(
-    new THREE.BoxGeometry(3.15, 0.1, 2.45),
-    stdMat(0x3a3836, 0.35, 0.42)
-  );
-  roofSlab.position.set(0.12, 2.82, -0.05);
+  /* Attico / parapetto */
+  var roofSlab = new THREE.Mesh(new THREE.BoxGeometry(3.35, 0.12, 2.55), phys(0x4a4846, 0.32, 0.25));
+  roofSlab.position.set(0.1, 3.52, -0.05);
   roofSlab.castShadow = true;
   house.add(roofSlab);
 
-  var woodAccent = new THREE.Mesh(
-    new THREE.BoxGeometry(0.35, 2.2, 2.18),
-    stdMat(0x6b4f3a, 0.05, 0.72)
-  );
-  woodAccent.position.set(-1.38, 1.15, 0);
-  house.add(woodAccent);
+  /* Vetrate panoramiche */
+  function addWindow(w, h, x, y, z) {
+    var g = new THREE.Mesh(new THREE.PlaneGeometry(w, h), glassMat());
+    g.position.set(x, y, z);
+    house.add(g);
+    var glow = new THREE.Mesh(
+      new THREE.PlaneGeometry(w * 0.92, h * 0.92),
+      new THREE.MeshBasicMaterial({
+        map: interiorTex || null,
+        color: interiorTex ? 0xffffff : 0xfff0dc,
+        transparent: true,
+        opacity: interiorTex ? 0.62 : 0.35
+      })
+    );
+    glow.position.set(x, y, z - 0.04);
+    house.add(glow);
+    windowGlows.push(glow);
+  }
 
-  var gMat = glassMat();
-  [[0, 0.85, 1.09, 2.1, 1.35], [0.55, 2.15, 0.94, 1.05, 0.95], [-0.55, 2.15, 0.94, 1.05, 0.95]].forEach(function (g) {
-    var glass = new THREE.Mesh(new THREE.BoxGeometry(g[3], g[4], 0.06), gMat);
-    glass.position.set(g[0], g[1], g[2]);
-    house.add(glass);
+  addWindow(1.35, 1.05, 0, 1.45, 1.19);
+  addWindow(0.85, 0.95, -0.95, 1.35, 1.19);
+  addWindow(0.85, 0.95, 0.95, 1.35, 1.19);
+  addWindow(1.05, 0.75, 0.35, 2.85, 1.04);
+  addWindow(0.75, 0.75, -0.55, 2.85, 1.04);
+
+  /* Balconi con ringhiere vetro */
+  function addBalcony(y, z, w) {
+    var slab = new THREE.Mesh(new THREE.BoxGeometry(w, 0.07, 0.75), phys(0xd8d4ce, 0.45, 0.1));
+    slab.position.set(0.15, y, z);
+    slab.castShadow = true;
+    house.add(slab);
+    var rail = new THREE.Mesh(new THREE.BoxGeometry(w, 0.55, 0.03), glassMat());
+    rail.position.set(0.15, y + 0.3, z + 0.38);
+    house.add(rail);
+  }
+  addBalcony(2.05, 1.22, 1.5);
+  addBalcony(3.05, 0.98, 1.35);
+
+  /* Telaio scuro finestre */
+  [[0, 1.45], [-0.95, 1.35], [0.95, 1.35]].forEach(function (p) {
+    var frame = new THREE.Mesh(new THREE.BoxGeometry(0.06, 1.1, 0.06), phys(0x3d3028, 0.5, 0.15));
+    frame.position.set(p[0], p[1], 1.2);
+    house.add(frame);
   });
 
-  var door = new THREE.Mesh(
-    new THREE.BoxGeometry(0.62, 1.35, 0.08),
-    stdMat(0x1a1816, 0.55, 0.35)
-  );
-  door.position.set(0.95, 0.72, 1.1);
-  house.add(door);
+  /* Portoncino ingresso */
+  var entry = new THREE.Mesh(new THREE.BoxGeometry(0.72, 1.45, 0.1), phys(0x2a2420, 0.45, 0.2));
+  entry.position.set(-0.55, 0.95, 1.2);
+  house.add(entry);
 
-  var pool = new THREE.Mesh(
-    new THREE.BoxGeometry(1.4, 0.05, 0.85),
-    stdMat(0x2a6a8a, 0.65, 0.08, 0x4a9fd4, 0.35)
-  );
-  pool.position.set(-0.85, 0.16, 0.55);
-  house.add(pool);
+  var canopy = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.05, 0.55), phys(0x3d3028, 0.35, 0.3));
+  canopy.position.set(-0.55, 1.72, 1.35);
+  house.add(canopy);
 
-  var terrace = new THREE.Mesh(
-    new THREE.BoxGeometry(1.1, 0.06, 0.7),
-    stdMat(0xd8d4ce, 0.2, 0.45)
-  );
-  terrace.position.set(1.05, 1.58, 0.35);
-  house.add(terrace);
-
-  var railL = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.35, 0.7), stdMat(0xd4af6a, 0.82, 0.18));
-  railL.position.set(0.58, 1.78, 0.35);
-  house.add(railL);
-
-  var railR = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.35, 0.7), stdMat(0xd4af6a, 0.82, 0.18));
-  railR.position.set(1.52, 1.78, 0.35);
-  house.add(railR);
+  /* Accento legno / brise-soleil */
+  var brise = new THREE.Mesh(new THREE.BoxGeometry(0.12, 1.8, 2.1), phys(0x6b5344, 0.62, 0.05));
+  brise.position.set(-1.62, 1.35, 0);
+  house.add(brise);
 
   scene.add(house);
 
@@ -260,56 +222,45 @@
     return Math.min(1, Math.max(0, window.scrollY / scrollMax()));
   }
 
-  function onScroll() {
-    var p = scrollProgress();
-    if (progressEl) progressEl.style.width = (p * 100) + '%';
-    if (hintEl && p > 0.01) hintEl.classList.add('hidden');
-
-    /* Rotazione immediata — nessun lerp, nessun ease */
+  function applyScroll(p) {
     house.rotation.y = p * Math.PI * 2 * ROTATION_TURNS;
+    house.position.x = isMobile ? p * 1.15 : p * 0.22;
+    if (progressEl) progressEl.style.width = (p * 100) + '%';
+    if (hintEl && p > 0.008) hintEl.classList.add('hidden');
+    if (maskEl) maskEl.style.opacity = '0';
+  }
 
-    var slideX = isMobile ? p * 1.2 : p * 0.28;
-    house.position.x = slideX;
-
-    if (maskEl) {
-      maskEl.style.opacity = String(Math.max(0, 1 - p * 8));
-    }
-
-    accentBlue.intensity = 0.35 + (p > 0.32 && p < 0.52 ? 0.65 : 0.08);
-    accentOrange.intensity = 0.3 + (p > 0.52 && p < 0.72 ? 0.7 : 0.06);
-    spotGold.intensity = 0.85 + (p > 0.75 ? 0.55 : 0.15);
+  function onScroll() {
+    applyScroll(scrollProgress());
   }
 
   var animId;
   function animate() {
     animId = requestAnimationFrame(animate);
-    var p = scrollProgress();
-    house.rotation.y = p * Math.PI * 2 * ROTATION_TURNS;
-    house.position.x = isMobile ? p * 1.2 : p * 0.28;
-    rimLight.intensity = 1.1 + Math.sin(p * Math.PI * 2) * 0.2;
+    applyScroll(scrollProgress());
     renderer.render(scene, camera);
   }
 
   function onResize() {
     isMobile = window.matchMedia('(max-width: 768px)').matches;
-    camDist = isMobile ? 10.5 : 8.6;
+    camDist = isMobile ? 11 : 9;
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-    camera.position.set(0, 1.55, camDist);
-    camera.lookAt(0, 1.25, 0);
+    camera.position.set(0, 1.65, camDist);
+    camera.lookAt(0, 1.45, 0);
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, reducedMotion ? 1 : 2.25));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, reducedMotion ? 1 : 2.5));
   }
 
-  if (maskEl) {
-    maskEl.style.clipPath = 'circle(150% at 50% 50%)';
-    maskEl.style.opacity = '0';
-  }
+  if (maskEl) maskEl.style.opacity = '0';
+
+  wrap.style.backgroundImage = "url('img/3d/mutuo-showcase-env.webp')";
+  wrap.style.backgroundSize = 'cover';
+  wrap.style.backgroundPosition = 'center';
 
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onResize);
 
-  if (loadingEl) loadingEl.classList.add('hidden');
   onScroll();
   onResize();
   animate();
