@@ -2145,13 +2145,16 @@ async function initBlog() {
   // oppure aggiungi articoli statici non presenti in Supabase
   const staticByTitle = {};
   articoliStatici.forEach(s => { staticByTitle[s.titolo.toLowerCase()] = s; });
-  allArticles.forEach(a => {
+  allArticles.forEach((a, idx) => {
     const s = staticByTitle[(a.titolo || '').toLowerCase()];
     if (s) {
-      if (s.immagine_copertina) a.immagine_copertina = s.immagine_copertina;
-      if (!a.url_statico) a.url_statico = s.url_statico;
-      if (!a.tempo) a.tempo = s.tempo;
-      if (!a.categoria) a.categoria = s.categoria;
+      allArticles[idx] = Object.assign({}, a, {
+        immagine_copertina: s.immagine_copertina || a.immagine_copertina,
+        url_statico: s.url_statico || a.url_statico,
+        tempo: s.tempo || a.tempo,
+        categoria: s.categoria || a.categoria,
+        data: s.data || a.data || a.data_pubblicazione
+      });
     }
   });
   const titoliEsistenti = new Set(allArticles.map(a => (a.titolo || '').toLowerCase()));
