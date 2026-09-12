@@ -197,6 +197,53 @@ body.b3d-page{
   .b3d-ai-note{margin:.5rem 0;padding:.45rem .6rem}
   .author-bio{margin:1rem 0!important;padding:.75rem!important}
 }
+/* Showcase mutuo — casa centrale che ruota (stile product scroll) */
+.b3d-page.b3d-showcase .b3d-showcase-mask{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:#0d1117;
+  clip-path:circle(0% at 50% 50%);
+  transition:opacity .2s linear;
+}
+.b3d-page.b3d-showcase #b3d-canvas-wrap{z-index:2}
+.b3d-page.b3d-showcase .b3d-scroll-layer{z-index:3}
+.b3d-page.b3d-showcase .b3d-section{
+  justify-content:flex-start;
+  text-align:left;
+}
+.b3d-page.b3d-showcase .b3d-section__inner{
+  max-width:min(380px,88vw);
+  margin-top:clamp(4.5rem,18vh,7rem);
+  background:rgba(13,17,23,.55);
+  border:1px solid rgba(201,168,76,.22);
+  border-radius:14px;
+  padding:1.15rem 1.25rem;
+  backdrop-filter:blur(6px);
+}
+.b3d-page.b3d-showcase .b3d-section:nth-child(even){
+  justify-content:flex-end;
+  text-align:right;
+}
+.b3d-page.b3d-showcase .b3d-section:nth-child(even) .b3d-section__inner{
+  margin-left:auto;
+  margin-right:clamp(0.5rem,4vw,2rem);
+}
+.b3d-page.b3d-showcase .b3d-section:nth-child(odd) .b3d-section__inner{
+  margin-left:clamp(0.5rem,4vw,2rem);
+  margin-right:auto;
+}
+@media(max-width:768px){
+  .b3d-page.b3d-showcase .b3d-section{
+    justify-content:flex-end;
+    text-align:left;
+    padding-bottom:2rem;
+  }
+  .b3d-page.b3d-showcase .b3d-section__inner{
+    max-width:78vw;
+    margin-left:0!important;
+    margin-right:0!important;
+    margin-bottom:1rem;
+  }
+}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .b3d-scroll-hint svg{animation:none}
