@@ -1,27 +1,11 @@
-/* Mutuo under 36 — showcase 3D (standalone, non Limena) */
+/* Mutuo under 36 — showcase 3D (paesaggio 3D, centro libero) */
 .mutuo-showcase{
   --mutuo-gold:#d4af6a;
   --mutuo-gold2:#e8c96a;
-  --mutuo-dark:#121110;
-  --mutuo-glass:rgba(12,11,10,.78);
-}
-
-.mutuo-showcase .mutuo-photo-bg{
-  position:fixed;inset:0;z-index:0;overflow:hidden;
-  pointer-events:none;
-}
-.mutuo-showcase .mutuo-photo-bg img{
-  width:100%;height:100%;object-fit:cover;object-position:center 35%;
-  transform:scale(1.04);
-  filter:saturate(1.05) contrast(1.04);
-}
-.mutuo-showcase .mutuo-photo-bg::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(8,7,6,.25) 0%,rgba(8,7,6,.08) 40%,rgba(8,7,6,.45) 100%);
 }
 
 .mutuo-showcase #mutuo-canvas-wrap{
-  position:fixed;inset:0;z-index:1;pointer-events:none;
+  position:fixed;inset:0;z-index:0;pointer-events:none;
 }
 .mutuo-showcase #mutuo-canvas-wrap canvas{
   display:block;width:100%;height:100%;
@@ -33,47 +17,55 @@
 .mutuo-showcase .b3d-loading{z-index:6;color:var(--mutuo-gold2)}
 .mutuo-showcase .b3d-scroll-hint{
   z-index:6;
-  border-color:rgba(212,175,106,.5);
-  background:rgba(12,11,10,.82);
+  border-color:rgba(212,175,106,.45);
+  background:rgba(13,17,23,.88);
 }
 
+/* Sezioni scroll: spazio vuoto al centro, didascalia compatta in basso */
 .mutuo-showcase .b3d-section{
-  justify-content:flex-start;
-  text-align:left;
   min-height:100vh;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding:0 1rem 2.75rem;
+  text-align:center;
+  pointer-events:none;
 }
 .mutuo-showcase .b3d-section__inner{
-  max-width:min(400px,90vw);
-  margin-top:clamp(4.5rem,16vh,6.5rem);
-  background:var(--mutuo-glass);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:18px;
-  padding:1.2rem 1.3rem;
-  backdrop-filter:blur(16px) saturate(1.15);
-  box-shadow:0 20px 50px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.07);
+  max-width:min(340px,88vw);
+  margin:0;
+  padding:.55rem 1rem .65rem;
+  background:rgba(13,17,23,.72);
+  border:1px solid rgba(212,175,106,.22);
+  border-radius:999px;
+  backdrop-filter:blur(10px);
+  box-shadow:0 8px 28px rgba(0,0,0,.35);
 }
-.mutuo-showcase .b3d-kicker{color:var(--mutuo-gold)}
+.mutuo-showcase .b3d-kicker{
+  margin-bottom:.2rem;
+  font-size:.58rem;
+}
+.mutuo-showcase .b3d-section h2{
+  font-size:clamp(1.05rem,3.2vw,1.35rem);
+  margin-bottom:0;
+  line-height:1.25;
+  text-shadow:none;
+}
 .mutuo-showcase .b3d-section h2 em{color:var(--mutuo-gold2)}
-.mutuo-showcase .b3d-section:nth-child(even){
-  justify-content:flex-end;text-align:right;
-}
-.mutuo-showcase .b3d-section:nth-child(even) .b3d-section__inner{
-  margin-left:auto;margin-right:clamp(.5rem,4vw,2rem);
-}
-.mutuo-showcase .b3d-section:nth-child(odd) .b3d-section__inner{
-  margin-left:clamp(.5rem,4vw,2rem);margin-right:auto;
-}
+.mutuo-showcase .b3d-section p{display:none}
 
 @media(max-width:768px){
   .mutuo-showcase .b3d-section{
-    min-height:50vh;
-    justify-content:flex-end;
-    text-align:left;
-    padding:2.5rem 1rem 1.5rem;
+    min-height:55vh;
+    padding:0 .75rem 1.75rem;
   }
   .mutuo-showcase .b3d-section__inner{
-    max-width:82vw;margin:0 0 1rem!important;
-    padding:.95rem 1rem;
+    max-width:92vw;
+    padding:.5rem .85rem .6rem;
   }
-  .mutuo-showcase .mutuo-photo-bg img{object-position:center 30%}
+  .mutuo-showcase .b3d-section h2{font-size:1rem}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .mutuo-showcase .b3d-scroll-hint{display:none}
 }
