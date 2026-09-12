@@ -1,0 +1,79 @@
+/* Mutuo under 36 — showcase 3D (standalone, non Limena) */
+.mutuo-showcase{
+  --mutuo-gold:#d4af6a;
+  --mutuo-gold2:#e8c96a;
+  --mutuo-dark:#121110;
+  --mutuo-glass:rgba(12,11,10,.78);
+}
+
+.mutuo-showcase .mutuo-photo-bg{
+  position:fixed;inset:0;z-index:0;overflow:hidden;
+  pointer-events:none;
+}
+.mutuo-showcase .mutuo-photo-bg img{
+  width:100%;height:100%;object-fit:cover;object-position:center 35%;
+  transform:scale(1.04);
+  filter:saturate(1.05) contrast(1.04);
+}
+.mutuo-showcase .mutuo-photo-bg::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(8,7,6,.25) 0%,rgba(8,7,6,.08) 40%,rgba(8,7,6,.45) 100%);
+}
+
+.mutuo-showcase #mutuo-canvas-wrap{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+}
+.mutuo-showcase #mutuo-canvas-wrap canvas{
+  display:block;width:100%;height:100%;
+}
+
+.mutuo-showcase .b3d-scroll-layer{z-index:2}
+.mutuo-showcase .b3d-header{z-index:4}
+.mutuo-showcase .b3d-progress{z-index:5}
+.mutuo-showcase .b3d-loading{z-index:6;color:var(--mutuo-gold2)}
+.mutuo-showcase .b3d-scroll-hint{
+  z-index:6;
+  border-color:rgba(212,175,106,.5);
+  background:rgba(12,11,10,.82);
+}
+
+.mutuo-showcase .b3d-section{
+  justify-content:flex-start;
+  text-align:left;
+  min-height:100vh;
+}
+.mutuo-showcase .b3d-section__inner{
+  max-width:min(400px,90vw);
+  margin-top:clamp(4.5rem,16vh,6.5rem);
+  background:var(--mutuo-glass);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:18px;
+  padding:1.2rem 1.3rem;
+  backdrop-filter:blur(16px) saturate(1.15);
+  box-shadow:0 20px 50px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.07);
+}
+.mutuo-showcase .b3d-kicker{color:var(--mutuo-gold)}
+.mutuo-showcase .b3d-section h2 em{color:var(--mutuo-gold2)}
+.mutuo-showcase .b3d-section:nth-child(even){
+  justify-content:flex-end;text-align:right;
+}
+.mutuo-showcase .b3d-section:nth-child(even) .b3d-section__inner{
+  margin-left:auto;margin-right:clamp(.5rem,4vw,2rem);
+}
+.mutuo-showcase .b3d-section:nth-child(odd) .b3d-section__inner{
+  margin-left:clamp(.5rem,4vw,2rem);margin-right:auto;
+}
+
+@media(max-width:768px){
+  .mutuo-showcase .b3d-section{
+    min-height:50vh;
+    justify-content:flex-end;
+    text-align:left;
+    padding:2.5rem 1rem 1.5rem;
+  }
+  .mutuo-showcase .b3d-section__inner{
+    max-width:82vw;margin:0 0 1rem!important;
+    padding:.95rem 1rem;
+  }
+  .mutuo-showcase .mutuo-photo-bg img{object-position:center 30%}
+}
