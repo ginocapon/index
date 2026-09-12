@@ -788,6 +788,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'mutuo under 36: tassi in aumento, fisso o variabile 2027': { img: 'img/blog/blog-prima-casa-under-36-consap-hero.webp', url: 'blog-mutuo-under-36-tassi-fisso-variabile-2027' },
     'zona imma limena: pochi immobili, domanda alta 2027': { img: 'img/blog/blog-appartamento-limena-guida-acquisto-2026.webp', url: 'blog-zona-imma-limena-domanda-offerta-2027' },
     'vendere casa limena proprietario 2026': { img: 'img/blog/blog-vendere-casa-limena-proprietario-2026-hero.webp', url: 'blog-vendere-casa-limena-proprietario-2026' },
     'affittare casa padova proprietario 2026': { img: 'img/blog/blog-affittare-casa-padova-proprietario-2026-hero.webp', url: 'blog-affittare-casa-padova-proprietario-2026' },
@@ -936,6 +937,13 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    {
+      "titolo": "Mutuo under 36: tassi in aumento, fisso o variabile 2027",
+      "categoria": "Mutuo e finanziamenti",
+      "data": "2026-09-12",
+      "immagine_copertina": "img/blog/blog-prima-casa-under-36-consap-hero.webp",
+      "url_statico": "blog-mutuo-under-36-tassi-fisso-variabile-2027"
+    },
     {
       "titolo": "Zona Imma Limena: pochi immobili, domanda alta 2027",
       "categoria": "Limena locale",
