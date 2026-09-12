@@ -23,15 +23,8 @@ body.b3d-page{
   border-radius:0 0 8px 8px;font-size:.82rem;font-weight:700;z-index:9999;
 }
 .skip-link:focus{top:0}
-.demo-bar{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  background:linear-gradient(90deg,#3d3428,#5c4d3a);
-  color:#fff;text-align:center;padding:.45rem 1rem;
-  font-size:.68rem;font-weight:600;letter-spacing:.04em;
-}
-.demo-bar strong{color:#ffd89b}
 .b3d-header{
-  position:fixed;top:28px;left:0;right:0;z-index:150;
+  position:fixed;top:0;left:0;right:0;z-index:150;
   padding:.65rem 1.25rem;
   display:flex;align-items:center;justify-content:space-between;
   background:linear-gradient(180deg,rgba(13,26,42,.92),transparent);
@@ -74,7 +67,7 @@ body.b3d-page{
 .b3d-scroll-hint svg{width:14px;height:14px;fill:var(--oro2);animation:b3d-bounce 1.6s ease infinite}
 @keyframes b3d-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
 .b3d-progress{
-  position:fixed;top:28px;left:0;height:3px;z-index:160;
+  position:fixed;top:0;left:0;height:3px;z-index:160;
   background:linear-gradient(90deg,var(--oro),var(--accent));
   width:0%;transition:width .08s linear;
 }
@@ -169,7 +162,7 @@ body.b3d-page{
   border-radius:8px;padding:.65rem .85rem;margin:1rem 0;
 }
 @media(max-width:768px){
-  .b3d-header{top:26px;padding:.5rem 1rem}
+  .b3d-header{padding:.5rem 1rem}
   .b3d-section{padding-top:4.5rem}
 }
 @media(prefers-reduced-motion:reduce){
