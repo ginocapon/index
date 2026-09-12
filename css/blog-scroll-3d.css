@@ -199,15 +199,14 @@ body.b3d-page{
 }
 /* Showcase mutuo — villa moderna premium, rotazione immediata */
 .b3d-page.b3d-showcase{
-  background:#121110;
+  background:#1a1816;
 }
-.b3d-page.b3d-showcase .b3d-showcase-mask{
-  position:fixed;inset:0;z-index:1;pointer-events:none;
-  background:#121110;
-  clip-path:circle(150% at 50% 50%);
-  opacity:0;
+.b3d-page.b3d-showcase #b3d-canvas-wrap{
+  z-index:2;
+  background-size:cover;
+  background-position:center;
 }
-.b3d-page.b3d-showcase #b3d-canvas-wrap{z-index:2}
+.b3d-page.b3d-showcase .b3d-showcase-mask{display:none}
 .b3d-page.b3d-showcase .b3d-scroll-layer{z-index:3}
 .b3d-page.b3d-showcase .b3d-section{
   justify-content:flex-start;
@@ -216,12 +215,12 @@ body.b3d-page{
 .b3d-page.b3d-showcase .b3d-section__inner{
   max-width:min(380px,88vw);
   margin-top:clamp(4.5rem,18vh,7rem);
-  background:linear-gradient(145deg,rgba(24,22,20,.78),rgba(12,11,10,.62));
-  border:1px solid rgba(212,175,106,.32);
+  background:linear-gradient(145deg,rgba(18,16,14,.82),rgba(8,7,6,.72));
+  border:1px solid rgba(255,255,255,.14);
   border-radius:16px;
   padding:1.15rem 1.25rem;
-  backdrop-filter:blur(12px);
-  box-shadow:0 12px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter:blur(14px) saturate(1.1);
+  box-shadow:0 16px 48px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08);
 }
 .b3d-page.b3d-showcase .b3d-kicker{color:#d4af6a}
 .b3d-page.b3d-showcase .b3d-section h2 em{color:#e8c96a}
