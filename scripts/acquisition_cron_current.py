@@ -14,9 +14,12 @@ CRON_JSON = ROOT / "data" / "acquisition-roadmap-cron.json"
 def main() -> int:
     data = json.loads(CRON_JSON.read_text(encoding="utf-8"))
     anchor = date.fromisoformat(data["anchor_start"])
+    hold_until = data.get("do_not_execute_before")
+    hold_date = date.fromisoformat(hold_until) if hold_until else anchor
     today = date.today()
     days = (today - anchor).days
     week_num = max(1, min(data["cycle_weeks"], days // 7 + 1 if days >= 0 else 1))
+    execution_allowed = today >= hold_date
 
     weeks = data.get("weeks", [])
     by_week = {w["week"]: w for w in weeks}
@@ -36,11 +39,15 @@ def main() -> int:
     out = {
         "today": today.isoformat(),
         "anchor_start": data["anchor_start"],
+        "execution_allowed": execution_allowed,
+        "hold_until": hold_date.isoformat(),
         "calendar_week": week_num,
         "cycle_weeks": data["cycle_weeks"],
         "current_task": task,
         "skill_ref": data.get("skill_ref"),
     }
+    if not execution_allowed:
+        out["message"] = "Preview only — esecuzione task acquisizione dal " + hold_date.isoformat()
     print(json.dumps(out, ensure_ascii=False, indent=2))
     return 0
 

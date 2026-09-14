@@ -2,6 +2,8 @@
   "updated": "2026-09-14",
   "anchor_start": "2026-09-19",
   "anchor_note": "Primo venerdì del ciclo acquisizione proprietari (post integrazione skill 14/09/2026). Settimana N = floor((oggi - anchor) / 7) + 1, clamp 1-12. Se settimana N già completata, avanzare alla prima pending.",
+  "do_not_execute_before": "2026-09-19",
+  "hold_note": "Utente 14/09/2026: aspettare il 19/09 — prima di anchor solo preview/piano, NO commit task acquisizione.",
   "cycle_weeks": 12,
   "skill_ref": "TEST-SKILL/skill-acquisizione-cron-venerdi.md",
   "strategy_ref": "TEST-SKILL/skill-acquisizione-proprietari.md",
