@@ -129,11 +129,12 @@ Fonte: analisi siti competitor + repo Righetto.
 ### Sequenza obbligatoria risposta
 
 1. Leggi **questo file** + `skill-memoria-progressi.md` + `data/editorial-queue.json` + `data/gsc-indexing-weekly.json` + `data/gsc-keywords-priority.json`
-2. Leggi `.cursor/skills/righetto-venerdi-sito-90giorni/SKILL.md`
-3. Output **formato fisso** (§ sotto) con **max 3 task repo** + **2 task utente GSC/GBP**
-4. Scegli da: SOSTENERE GSC · blog coda · gap roadmap §6 · fix indicizzazione · macrociclo 12 sett.
-5. **Un solo focus** se poco tempo
-6. Aggiorna `skill-memoria-progressi.md` §Log se si completa un task
+2. Leggi **`skill-acquisizione-cron-venerdi.md`** + **`data/acquisition-roadmap-cron.json`** — **repo task #1 = acquisizione sett. N/12 (automatico)**
+3. Leggi `.cursor/skills/righetto-venerdi-sito-90giorni/SKILL.md`
+4. Output **formato fisso** (§ sotto) con **repo #1 acquisizione** + **max 2 altri task repo** + **2 task utente GSC/GBP**
+5. Scegli task #2–3 da: SOSTENERE GSC · blog coda · gap roadmap §6 · fix indicizzazione · macrociclo 12 sett. SEO
+6. **Un solo focus** se poco tempo → task acquisizione cron
+7. Aggiorna `skill-memoria-progressi.md` §Log + `acquisition-roadmap-cron.json` se si completa task acquisizione
 
 ### Formato risposta obbligatorio
 
@@ -142,13 +143,15 @@ Fonte: analisi siti competitor + repo Righetto.
 
 **Stato rapido:** [indicizzate/non indicizzate GSC] · [clic 28gg] · [prossimo blog coda]
 
+**Acquisizione cron sett. [N]/12:** [title] — [pending/done oggi]
+
 ### Tu oggi (~15 min GSC + GBP)
 - [ ] …
 - [ ] …
 
 ### Repo oggi (agente — priorità 1→3)
-1. **[SOSTENERE | AGGIUNGERE | Q3-tool | FIX]** — …
-2. …
+1. **[ACQUISIZIONE cron sett. N]** — … (automatico da acquisition-roadmap-cron.json)
+2. **[SOSTENERE | AGGIUNGERE | Q3-tool | FIX]** — …
 3. …
 
 ### Un solo focus se hai poco tempo

@@ -27,7 +27,8 @@
 
 ### Cosa fare — ordine di priorità
 
-0. **Trigger `"SKILL"`** (venerdì) → piano giornata: `skill-competitor-roadmap-q3-2026.md` §8 + `/venerdi`
+0. **Trigger `"SKILL"`** (venerdì) → piano giornata: `skill-competitor-roadmap-q3-2026.md` §8 + `/venerdi` + **cron acquisizione** (`skill-acquisizione-cron-venerdi.md` · repo #1 automatico)
+0a. **Cron acquisizione sett. N/12** → `data/acquisition-roadmap-cron.json` · helper: `python scripts/acquisition_cron_current.py`
 0b. **Coda editoriale** → `data/editorial-queue.json` + `skill-editorial-queue.md`
 1. **SOSTENERE** prima di pubblicare nuovo blog → `pages_refresh_priority` in `gsc-keywords-priority.json`
 2. **1 modifica concreta/settimana** nel repo — mai solo teoria
@@ -142,6 +143,7 @@
 | 24/07/2026 | **Blog eq-002** agenzia Limena pubblicato — hero fantasy WebP nuovo | 2654 parole · form lead · sitemap |
 | 05/08/2026 | **Batch GSC Limena** — 5 blog da export keyword utente (appartamento, case vendita, affitto contratto, bilocale/trilocale, brand Righetto) | 2500+ parole ciascuno · hero WebP nuovi · validate-page OK |
 | 11/09/2026 | **Blog eq-sep11-001** vendere casa Limena proprietario — venerdì sett. 12 review trimestrale | Pillar owner vendita locale · gsc-indexing batch 18/09 |
+| 14/09/2026 | **Cron acquisizione venerdì** — skill-acquisizione-cron-venerdi.md + acquisition-roadmap-cron.json (12 sett.) | Ogni `"SKILL"` esegue repo #1 acquisizione · anchor 19/09 · script acquisition_cron_current.py |
 
 ---
 
