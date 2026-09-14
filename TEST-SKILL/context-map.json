@@ -156,6 +156,19 @@
       "cursor_rules": ["righetto-vanilla-ui.mdc"],
       "token_stimati": "~1.400",
       "note": "PRIORITÀ PERMANENTE: Reg. UE 2024/1689 — barra sito, Linda, foto annunci, privacy §15. Obbligatorio su OGNI task che tocca HTML, JS chat, media o contenuti."
+    },
+    "acquisizione_proprietari_sito": {
+      "skills": ["skill-essentials.md", "skill-acquisizione-proprietari.md", "skill-forms-leads.md", "skill-design.md"],
+      "cursor_skills": ["righetto-acquisizione-proprietari"],
+      "data": ["data/editorial-acquisition-balance.json", "data/lead-scoring-rules.json", "data/acquisition-kpi-template.json", "data/editorial-queue.json"],
+      "token_stimati": "~2.400",
+      "note": "Funnel owner, percorsi A-L, hub/landing/servizi — anti-duplicati. Playbook script/follow-up: skill-acquisizione-playbook-commerciale.md"
+    },
+    "acquisizione_playbook_commerciale": {
+      "skills": ["skill-essentials.md", "skill-acquisizione-playbook-commerciale.md", "skill-acquisizione-proprietari.md"],
+      "data": ["data/lead-scoring-rules.json", "data/acquisition-kpi-template.json"],
+      "token_stimati": "~1.600",
+      "note": "Script telefono/WhatsApp, follow-up 0-90gg, canali fuori sito, obiezioni — mai percentuali mediazione online"
     }
   },
 
