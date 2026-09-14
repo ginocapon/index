@@ -1,6 +1,8 @@
 {
   "updated": "2026-09-04",
   "skill_ref": "TEST-SKILL/skill-acquisizione-proprietari.md",
+  "playbook_ref": "TEST-SKILL/skill-acquisizione-playbook-commerciale.md",
+  "owner_paths_ref": "skill-acquisizione-proprietari.md § Percorsi A-L",
   "target_ratio": {
     "area_1_owner_acquisition": 0.35,
     "area_2_mercato_locale_owner": 0.20,
