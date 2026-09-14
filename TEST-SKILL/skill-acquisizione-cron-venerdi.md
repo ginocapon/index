@@ -23,7 +23,9 @@ Ogni **venerdì**, quando l'utente dà l'ordine abituale (`"SKILL"`, `/venerdi`,
 | «piano venerdì» / «cosa fare questa settimana» (venerdì) | Idem |
 | «venerdì Righetto» | Idem |
 
-**Fuori venerdì:** se l'utente chiede esplicitamente «continua cron acquisizione» → eseguire prima settimana `pending`.
+**Prima del 2026-09-19:** **non eseguire** task repo acquisizione — solo mostrare preview sett. 1 e attendere anchor (richiesta utente 14/09/2026).
+
+**Fuori venerdì (dal 19/09):** se l'utente chiede esplicitamente «continua cron acquisizione» → eseguire prima settimana `pending`.
 
 ---
 
