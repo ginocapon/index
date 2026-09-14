@@ -11,7 +11,8 @@ description: >-
 # Acquisizione proprietari — Righetto
 
 **Leggi sempre:** `TEST-SKILL/skill-acquisizione-proprietari.md` (fonte completa).  
-**Script / follow-up / canali:** `TEST-SKILL/skill-acquisizione-playbook-commerciale.md`.
+**Script / follow-up / canali:** `TEST-SKILL/skill-acquisizione-playbook-commerciale.md`.  
+**Cron venerdì (1 task/sett. automatico):** `TEST-SKILL/skill-acquisizione-cron-venerdi.md` + `data/acquisition-roadmap-cron.json`.
 
 ## Obiettivo funnel
 
@@ -75,6 +76,10 @@ Dettaglio completo in skill § Percorsi A–L.
 - [ ] Hero CTA → `landing-valutazione`
 - [ ] Hub → `proprietario-immobile`
 - [ ] Sticky → `landing-valutazione`
+
+## Cron venerdì
+
+Con `"SKILL"` o `/venerdi`: **esegui task sett. N/12** da `acquisition-roadmap-cron.json` (repo #1), poi SOSTENERE/blog.
 
 ## Audit
 
