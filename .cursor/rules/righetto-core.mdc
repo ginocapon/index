@@ -19,6 +19,7 @@ Se non hai fonte verificabile (OMI, FIMAA, ISTAT, Banca d'Italia, ADE…), **non
 ## Strategia acquisizione proprietari (PRIORITÀ ASSOLUTA — ago 2026)
 **Obiettivo crescita:** acquisire nuovi immobili e proprietari (vendita, affitto, gestione, valutazione).  
 **Skill:** `TEST-SKILL/skill-acquisizione-proprietari.md` · hub `proprietario-immobile.html` · prevale su SEO/blog generico se in conflitto.  
+**Cron venerdì:** `"SKILL"` / `/venerdi` → 1 task/sett. automatico · `skill-acquisizione-cron-venerdi.md` · `data/acquisition-roadmap-cron.json` (anchor 2026-09-19).  
 **Mantenere:** annunci, ricerca immobili, acquirenti, inquilini — non penalizzare.
 
 ## Stack (non cambiare)

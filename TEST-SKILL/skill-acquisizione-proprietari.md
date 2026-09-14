@@ -327,9 +327,29 @@ Trasformare asset esistenti in argomenti commerciali (in sede, non percentuali o
 
 ---
 
+## Cron venerdì — esecuzione automatica (12 settimane)
+
+> **Dettaglio completo:** `skill-acquisizione-cron-venerdi.md` · **Stato:** `data/acquisition-roadmap-cron.json`
+
+Ogni **venerdì**, con ordine `"SKILL"` / `/venerdi` / «piano venerdì», l'agente implementa **1 task** del ciclo (repo #1) senza ridiscutere la scaletta.
+
+| Sett. | Task automatico |
+|------:|-----------------|
+| 1 | `landing-valutazione` → sopralluogo |
+| 2 | Hub card F, H, J |
+| 3 | CTA blog batch 1 (5 articoli GSC) |
+| 4 | Lead scoring + KPI |
+| 5–12 | Articoli gap, mesh, servizi, consulenza, FAQ, review |
+
+**Anchor ciclo:** 2026-09-19 (primo venerdì). Dopo completamento: aggiornare JSON + `skill-memoria-progressi.md`.
+
+---
+
 ## Piano operativo — priorità
 
 ### 🔥 DA FARE SUBITO (sito + processo)
+
+*(Settimane 1–4 coperte dal cron venerdì — esecuzione automatica.)*
 
 1. Verificare funnel post-Linda su `landing-valutazione` (step educazione + CTA sopralluogo).
 2. Interlink hub `proprietario-immobile` ↔ percorsi A–L (card mancanti: F, H, J se assenti).
@@ -404,6 +424,7 @@ Memoria: **`data/editorial-acquisition-balance.json`** · audit: **`scripts/audi
 
 ## Collegamenti
 
+- **Cron venerdì automatico:** **`skill-acquisizione-cron-venerdi.md`** · `data/acquisition-roadmap-cron.json`
 - Playbook commerciale: **`skill-acquisizione-playbook-commerciale.md`**
 - Form lead: **`skill-forms-leads.md`**
 - Audit strategico: `documenti/Audit-Strategico-Acquisizione-Incarichi-Righetto-2026-08-29.pdf`

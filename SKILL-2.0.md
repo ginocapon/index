@@ -8,6 +8,8 @@ Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutt
 
 **Regole Cursor scoped:** [`TEST-SKILL/skill-cursor-rules.md`](TEST-SKILL/skill-cursor-rules.md) — 7 file `.mdc` in `.cursor/rules/` (pattern awesome-cursorrules).
 
+**Changelog rapido (14 settembre 2026 — b):** **`skill-acquisizione-cron-venerdi.md`** + **`data/acquisition-roadmap-cron.json`** — ciclo 12 settimane: ogni venerdì con `"SKILL"`/`/venerdi` l'agente esegue 1 task acquisizione automatico (repo #1); anchor 2026-09-19 · script `acquisition_cron_current.py`.
+
 **Changelog rapido (14 settembre 2026):** **`skill-acquisizione-proprietari.md`** — integrazione funnel completo, percorsi A–L, calcolatore→sopralluogo, lead scoring, KPI, anti-duplicati; nuovo **`skill-acquisizione-playbook-commerciale.md`** (script/follow-up/canali); `data/lead-scoring-rules.json`, `data/acquisition-kpi-template.json`.
 
 **Changelog rapido (29 agosto 2026 — f):** **`skill-prompt-chirurgo-homepage-editoriale.md`** — hero owner-first, doppio percorso homepage, regola lunghezza blog (qualità > word count, vietato expand_body filler).

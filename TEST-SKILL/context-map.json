@@ -103,18 +103,22 @@
         "skill-essentials.md",
         "skill-memoria-progressi.md",
         "skill-competitor-roadmap-q3-2026.md",
+        "skill-acquisizione-cron-venerdi.md",
+        "skill-acquisizione-proprietari.md",
         "skill-seo.md",
         "skill-editorial-queue.md"
       ],
-      "cursor_skills": ["righetto-venerdi-sito-90giorni"],
+      "cursor_skills": ["righetto-venerdi-sito-90giorni", "righetto-acquisizione-proprietari"],
       "data": [
+        "data/acquisition-roadmap-cron.json",
         "data/editorial-queue.json",
         "data/gsc-indexing-weekly.json",
         "data/gsc-keywords-priority.json",
-        "data/competitor-roadmap-q3-2026.json"
+        "data/competitor-roadmap-q3-2026.json",
+        "data/acquisition-kpi-template.json"
       ],
-      "token_stimati": "~2.600",
-      "note": "Utente scrive \"SKILL\" (virgolette) il venerdì → piano lavoro giornata §8 skill-competitor-roadmap-q3-2026.md"
+      "token_stimati": "~3.000",
+      "note": "Venerdì: repo #1 = task cron acquisizione (acquisition-roadmap-cron.json sett. N/12) + piano §8 competitor + GSC/blog"
     },
     "audit_completo": {
       "skills": ["skill-essentials.md", "skill-seo.md", "skill-content.md", "skill-design.md", "skill-context.md"],
