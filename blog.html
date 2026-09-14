@@ -292,27 +292,27 @@ async function initBlog() {
   // Articoli statici (pagine HTML dedicate) — mostrati subito, senza attendere Supabase
   const articoliStatici = [
     {
-      "titolo": "Mutuo under 36: tassi in aumento, fisso o variabile 2027",
-      "categoria": "Mutuo e finanziamenti",
-      "data": "2026-09-12",
-      "stato": "pubblicato",
-      "immagine_copertina": "img/blog/blog-prima-casa-under-36-consap-hero.webp",
-      "url_statico": "blog-mutuo-under-36-tassi-fisso-variabile-2027",
-      "tempo": 15,
-      "autore": "Gino Capon",
-      "contenuto": "Guida integrata under 36: CONSAP, contesto tassi BCE, scelta fisso vs variabile nel Padovano. Articolo con scroll 3D.",
-      "evidenza": true
-    },
-    {
       "titolo": "Zona Imma Limena: pochi immobili, domanda alta 2027",
       "categoria": "Limena locale",
       "data": "2026-09-12",
       "stato": "pubblicato",
-      "immagine_copertina": "img/blog/blog-appartamento-limena-guida-acquisto-2026.webp",
+      "immagine_copertina": "img/blog/blog-zona-imma-limena-domanda-offerta-2027-hero.webp",
       "url_statico": "blog-zona-imma-limena-domanda-offerta-2027",
       "tempo": 14,
       "autore": "Gino Capon",
-      "contenuto": "Zona Imma Limena: squilibrio domanda-offerta, pochi annunci sostenibili, outlook 2027. Articolo con scroll 3D.",
+      "contenuto": "Zona Imma Limena: squilibrio domanda-offerta, pochi annunci sostenibili, outlook 2027.",
+      "evidenza": true
+    },
+    {
+      "titolo": "Mutuo under 36: tassi in aumento, fisso o variabile 2027",
+      "categoria": "Mutuo e finanziamenti",
+      "data": "2026-09-12",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-mutuo-under-36-tassi-fisso-variabile-2027-hero.webp",
+      "url_statico": "blog-mutuo-under-36-tassi-fisso-variabile-2027",
+      "tempo": 15,
+      "autore": "Gino Capon",
+      "contenuto": "Guida integrata under 36: CONSAP, contesto tassi BCE, scelta fisso vs variabile nel Padovano.",
       "evidenza": true
     },
     {
@@ -476,7 +476,7 @@ async function initBlog() {
       "categoria": "Mutuo e acquisto",
       "data": "2026-08-22",
       "stato": "pubblicato",
-      "immagine_copertina": "img/blog/blog-prima-casa-under-36-consap-hero.webp",
+      "immagine_copertina": "img/blog/blog-mutuo-under-36-tassi-fisso-variabile-2027-hero.webp",
       "url_statico": "blog-prima-casa-under-36-consap-padova-2026",
       "tempo": 13,
       "autore": "Gino Capon",
@@ -500,7 +500,7 @@ async function initBlog() {
       "categoria": "Limena locale",
       "data": "2026-08-05",
       "stato": "pubblicato",
-      "immagine_copertina": "img/blog/blog-appartamento-limena-guida-acquisto-2026.webp",
+      "immagine_copertina": "img/blog/blog-zona-imma-limena-domanda-offerta-2027-hero.webp",
       "url_statico": "blog-appartamento-limena-guida-acquisto-2026",
       "tempo": 14,
       "autore": "Gino Capon",
@@ -2157,16 +2157,13 @@ async function initBlog() {
   // oppure aggiungi articoli statici non presenti in Supabase
   const staticByTitle = {};
   articoliStatici.forEach(s => { staticByTitle[s.titolo.toLowerCase()] = s; });
-  allArticles.forEach((a, idx) => {
+  allArticles.forEach(a => {
     const s = staticByTitle[(a.titolo || '').toLowerCase()];
     if (s) {
-      allArticles[idx] = Object.assign({}, a, {
-        immagine_copertina: s.immagine_copertina || a.immagine_copertina,
-        url_statico: s.url_statico || a.url_statico,
-        tempo: s.tempo || a.tempo,
-        categoria: s.categoria || a.categoria,
-        data: s.data || a.data || a.data_pubblicazione
-      });
+      if (s.immagine_copertina) a.immagine_copertina = s.immagine_copertina;
+      if (!a.url_statico) a.url_statico = s.url_statico;
+      if (!a.tempo) a.tempo = s.tempo;
+      if (!a.categoria) a.categoria = s.categoria;
     }
   });
   const titoliEsistenti = new Set(allArticles.map(a => (a.titolo || '').toLowerCase()));
