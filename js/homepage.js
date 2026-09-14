@@ -788,6 +788,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'case prefabbricate: futuro secondo musk? guida 2026': { img: 'img/blog/blog-case-prefabbricate-futuro-elon-musk-2026-hero.webp', url: 'blog-case-prefabbricate-futuro-elon-musk-2026' },
     'zona imma limena: pochi immobili, domanda alta 2027': { img: 'img/blog/blog-zona-imma-limena-domanda-offerta-2027-hero.webp', url: 'blog-zona-imma-limena-domanda-offerta-2027' },
     'mutuo under 36: tassi in aumento, fisso o variabile 2027': { img: 'img/blog/blog-mutuo-under-36-tassi-fisso-variabile-2027-hero.webp', url: 'blog-mutuo-under-36-tassi-fisso-variabile-2027' },
     'vendere casa limena proprietario 2026': { img: 'img/blog/blog-vendere-casa-limena-proprietario-2026-hero.webp', url: 'blog-vendere-casa-limena-proprietario-2026' },
@@ -937,6 +938,13 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    {
+      "titolo": "Case prefabbricate: futuro secondo Musk? Guida 2026",
+      "categoria": "Mercato e tendenze",
+      "data": "2026-09-14",
+      "immagine_copertina": "img/blog/blog-case-prefabbricate-futuro-elon-musk-2026-hero.webp",
+      "url_statico": "blog-case-prefabbricate-futuro-elon-musk-2026"
+    },
     {
       "titolo": "Zona Imma Limena: pochi immobili, domanda alta 2027",
       "categoria": "Limena locale",
