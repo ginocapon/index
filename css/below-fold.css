@@ -452,7 +452,7 @@
   .srv-grid{grid-template-columns:repeat(2,1fr);gap:20px}
 }
 .srv-card{
-  background:color-mix(in srgb,var(--sfondo) 85%,var(--testo) 15%);border-radius:12px;padding:26px 22px;
+  background:color-mix(in srgb,var(--bianco) 84%,var(--sfondo) 16%);border-radius:12px;padding:26px 22px;
   border:1px solid rgba(44,74,110,0.1);transition:all 0.28s;
   cursor:pointer;display:block;position:relative;overflow:hidden;
 }
