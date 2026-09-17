@@ -355,16 +355,16 @@ button{font-family:inherit;cursor:pointer}
   grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
   max-width: 1400px;
   margin: 0 auto;
-  min-height: min(720px, calc(100dvh - var(--nav-h) - 72px));
+  min-height: min(560px, calc(100dvh - var(--nav-h) - 120px));
   align-items: stretch;
 }
 .hero-content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   text-align: left;
-  padding: 52px clamp(24px, 4.5vw, 56px) 48px clamp(28px, 5vw, 72px);
+  padding: 28px clamp(24px, 4.5vw, 56px) 40px clamp(28px, 5vw, 72px);
   animation: fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.15s both;
 }
 .hero-photo {

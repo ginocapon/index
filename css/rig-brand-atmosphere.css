@@ -72,8 +72,8 @@ body.rig-sugar-paper::after {
   transform: rotate(8deg);
 }
 
-/* Contenuto sopra watermark e sotto grain leggero */
-body.rig-sugar-paper > :not(.rig-brand-watermark) {
+/* Solo main sopra watermark — NON toccare #navbar (fixed) né skip-link */
+body.rig-sugar-paper > main {
   position: relative;
   z-index: 2;
 }
