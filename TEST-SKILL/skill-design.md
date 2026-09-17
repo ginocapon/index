@@ -53,6 +53,7 @@
 - **CSS:** `css/rig-brand-atmosphere.css` · **JS:** `js/rig-brand-atmosphere.js`
 - Caricati da `js/ga-consent.js` su tutte le pagine pubbliche (no admin)
 - `body.rig-sugar-paper` — grain + monogramma **RI** (Righetto Immobiliare) in watermark fisso
+- **Non** applicare `position:relative` a `#navbar` (resta `fixed`) — solo `main` sopra il watermark
 - Stesso linguaggio di Solar Time (`sugar-paper` + tre istanze ruotate)
 
 ---
