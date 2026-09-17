@@ -59,4 +59,17 @@
     s.defer = true;
     document.head.appendChild(s);
   })();
+
+  /* Sfondo granuloso + monogramma RI (brand watermark) */
+  (function loadBrandAtmosphere() {
+    if (/admin\.html$/i.test((location.pathname || ''))) return;
+    var css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = 'css/rig-brand-atmosphere.css?v=1';
+    document.head.appendChild(css);
+    var s = document.createElement('script');
+    s.src = 'js/rig-brand-atmosphere.js?v=1';
+    s.defer = true;
+    document.head.appendChild(s);
+  })();
 })();
