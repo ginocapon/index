@@ -100,6 +100,194 @@ body.rig-sugar-paper > .skip-link {
   z-index: 10000;
 }
 
+/* ── Superfici in rilievo (site-wide): bloccano il watermark RI ──
+   isolation + z-index 4 su tutti i moduli/card/panel/box del sito. */
+body.rig-sugar-paper :where(
+  main, article, .art-content, .wrap, .wrapper, .container, .content
+) :is(
+  .srv-card,
+  .blog-card,
+  .pc,
+  .ev-card,
+  .stima-panel,
+  .stima-stat,
+  .stima-card,
+  .stima-result,
+  .stima-calc,
+  .scl,
+  .faq-item,
+  .faq-a,
+  .fc-form,
+  .fc-badge,
+  .rec-video-card,
+  .rec-item,
+  .t-stat-box,
+  .vt-card-link,
+  .vt-modal-panel,
+  .hero-stats-row,
+  .perche-item,
+  .ps-big,
+  .kpi-strip,
+  .kpi-strip > div,
+  .toc,
+  .aeo-box,
+  .righetto-sol,
+  .chart-wrap,
+  .iso-hero,
+  .fig-3d-open,
+  .blog-fig,
+  .blog-fig__frame,
+  .related,
+  .author-bio,
+  .author-aside,
+  .share-btn,
+  .cta-banner,
+  .blog-rich-stat,
+  .blog-rich-toc,
+  .blog-rich-callout,
+  .blog-rich-table-wrap,
+  .blog-rich-related-card,
+  .blog-rich-sources,
+  .blog-rich-badge,
+  .blog-lead-wrap,
+  .acq-card,
+  .stat-card,
+  .highlight-box,
+  .tipo-card,
+  .photo-card,
+  .price-card,
+  .date-box,
+  .val-box,
+  .attach-card,
+  .form-box,
+  .sara-card,
+  .countdown-box,
+  .digit-block,
+  .urgency-strip,
+  .card,
+  .contact-item,
+  .blog-fig,
+  .pd,
+  .pinfo,
+  .imm-card,
+  .zona-card,
+  .zona-pro,
+  .zona-contro,
+  .step-v,
+  .serv-block,
+  .landing-card,
+  [class*="-card"]:not([class*="carousel"]):not([class*="card-play"]):not([class*="card-link"]):not([class*="card-img"]),
+  [class*="-box"]:not([class*="checkbox"]):not([class*="textbox"]),
+  [class*="-panel"]:not([class*="modal-panel"]),
+  [class*="-banner"]:not([class*="cta-mobile"]),
+  [class*="-strip"]:not([class*="marquee"]):not([class*="dual-path"]),
+  [class*="highlight-"],
+  [class*="stat-box"],
+  [class*="stat-card"],
+  table
+) {
+  position: relative;
+  z-index: 4;
+  isolation: isolate;
+}
+
+/* Sfondi chiari ~30% meno permeabili al watermark (mix verso bianco) */
+body.rig-sugar-paper :is(
+  .srv-card,
+  .blog-card,
+  .pc,
+  .ev-card,
+  .stima-panel,
+  .stima-stat,
+  .stima-card,
+  .scl,
+  .faq-item,
+  .kpi-strip > div,
+  .toc,
+  .related,
+  .author-bio,
+  .author-aside,
+  .blog-rich-stat,
+  .blog-rich-toc,
+  .blog-rich-related-card,
+  .blog-rich-sources,
+  .blog-lead-wrap,
+  .acq-card,
+  .stat-card,
+  .highlight-box,
+  .tipo-card,
+  .photo-card,
+  .form-box,
+  .sara-card,
+  .chart-wrap,
+  .iso-hero,
+  .fig-3d-open,
+  .blog-fig__frame,
+  .blog-fig,
+  .share-btn,
+  .imm-card,
+  .zona-card,
+  .zona-pro,
+  .zona-contro,
+  .landing-card,
+  .serv-block,
+  .step-v,
+  .ev-card,
+  .rec-item,
+  .t-stat-box,
+  .perche-item,
+  .ps-big,
+  .fc-form,
+  .fc-badge,
+  .stima-result,
+  .stima-calc,
+  .card,
+  .contact-item,
+  .pd,
+  .pinfo,
+  .price-card,
+  .date-box,
+  .val-box,
+  .attach-card
+) {
+  background-color: color-mix(in srgb, var(--bianco, #F7F5F1) 84%, var(--sfondo, #ECE7DF) 16%);
+}
+
+body.rig-sugar-paper .aeo-box {
+  background: color-mix(in srgb, var(--bianco, #F7F5F1) 86%, var(--blu, #2C4A6E) 14%) !important;
+}
+
+body.rig-sugar-paper .righetto-sol,
+body.rig-sugar-paper .blog-rich-callout {
+  background: color-mix(in srgb, var(--bianco, #F7F5F1) 86%, var(--oro, #FF6B35) 14%) !important;
+}
+
+body.rig-sugar-paper .faq-a {
+  background: color-mix(in srgb, var(--bianco, #F7F5F1) 84%, var(--sfondo, #ECE7DF) 16%) !important;
+}
+
+body.rig-sugar-paper .hero-stats-row {
+  background: rgba(255, 255, 255, 0.88) !important;
+}
+
+/* Gradienti scuri / CTA: solo isolation, niente override sfondo */
+body.rig-sugar-paper :is(
+  .cta-banner,
+  .blog-rich-cta-strip,
+  #perche,
+  #testimonial,
+  #mutuo-hp,
+  footer,
+  .rec-video-card,
+  .vt-modal-panel,
+  .urgency-strip,
+  .countdown-box,
+  .digit-block
+) {
+  background-color: unset;
+  background: unset;
+}
+
 @media (prefers-reduced-motion: reduce) {
   body.rig-sugar-paper::before,
   body.rig-sugar-paper::after {
