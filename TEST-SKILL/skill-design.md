@@ -55,6 +55,7 @@
 - `body.rig-sugar-paper` — grain + monogramma **RI** (Righetto Immobiliare) in watermark fisso
 - Stesso linguaggio di Solar Time (`sugar-paper` + tre istanze ruotate)
 - **Vietato** `body > * { position: relative }` per lo stacking: stacca `position:fixed` da `.nav-mobile` / overlay e crea un buco vuoto sopra l'hero. Alzare solo `main`, `footer`, `article`.
+- Watermark RI: `.rig-brand-watermark` a **z-index 3** + `mix-blend-mode: multiply` (sopra main z-index 2, sotto grain z-index 20–21). Menu/header a z-index ≥100.
 
 ---
 
