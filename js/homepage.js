@@ -788,8 +788,8 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
-    'mutuo under 36: tassi in aumento, fisso o variabile 2027': { img: 'img/blog/blog-prima-casa-under-36-consap-hero.webp', url: 'blog-mutuo-under-36-tassi-fisso-variabile-2027' },
-    'zona imma limena: pochi immobili, domanda alta 2027': { img: 'img/blog/blog-appartamento-limena-guida-acquisto-2026.webp', url: 'blog-zona-imma-limena-domanda-offerta-2027' },
+    'zona imma limena: pochi immobili, domanda alta 2027': { img: 'img/blog/blog-zona-imma-limena-domanda-offerta-2027-hero.webp', url: 'blog-zona-imma-limena-domanda-offerta-2027' },
+    'mutuo under 36: tassi in aumento, fisso o variabile 2027': { img: 'img/blog/blog-mutuo-under-36-tassi-fisso-variabile-2027-hero.webp', url: 'blog-mutuo-under-36-tassi-fisso-variabile-2027' },
     'vendere casa limena proprietario 2026': { img: 'img/blog/blog-vendere-casa-limena-proprietario-2026-hero.webp', url: 'blog-vendere-casa-limena-proprietario-2026' },
     'affittare casa padova proprietario 2026': { img: 'img/blog/blog-affittare-casa-padova-proprietario-2026-hero.webp', url: 'blog-affittare-casa-padova-proprietario-2026' },
     'vendere o affittare padova 2026': { img: 'img/blog/blog-vendere-o-affittare-padova-2026-hero.webp', url: 'blog-vendere-o-affittare-padova-2026' },
@@ -938,18 +938,18 @@ function generateSlug(titolo) {
   // Articoli statici (sempre presenti)
   const articoliStatici = [
     {
-      "titolo": "Mutuo under 36: tassi in aumento, fisso o variabile 2027",
-      "categoria": "Mutuo e finanziamenti",
-      "data": "2026-09-12",
-      "immagine_copertina": "img/blog/blog-prima-casa-under-36-consap-hero.webp",
-      "url_statico": "blog-mutuo-under-36-tassi-fisso-variabile-2027"
-    },
-    {
       "titolo": "Zona Imma Limena: pochi immobili, domanda alta 2027",
       "categoria": "Limena locale",
       "data": "2026-09-12",
-      "immagine_copertina": "img/blog/blog-appartamento-limena-guida-acquisto-2026.webp",
+      "immagine_copertina": "img/blog/blog-zona-imma-limena-domanda-offerta-2027-hero.webp",
       "url_statico": "blog-zona-imma-limena-domanda-offerta-2027"
+    },
+    {
+      "titolo": "Mutuo under 36: tassi in aumento, fisso o variabile 2027",
+      "categoria": "Mutuo e finanziamenti",
+      "data": "2026-09-12",
+      "immagine_copertina": "img/blog/blog-mutuo-under-36-tassi-fisso-variabile-2027-hero.webp",
+      "url_statico": "blog-mutuo-under-36-tassi-fisso-variabile-2027"
     },
     {
       "titolo": "Vendere casa a Limena nel 2026: percorso per il proprietario",
@@ -1046,7 +1046,7 @@ function generateSlug(titolo) {
       "titolo": "Prima casa under 36 Padova: CONSAP 2026",
       "categoria": "Mutuo e acquisto",
       "data": "2026-08-22",
-      "immagine_copertina": "img/blog/blog-prima-casa-under-36-consap-hero.webp",
+      "immagine_copertina": "img/blog/blog-mutuo-under-36-tassi-fisso-variabile-2027-hero.webp",
       "url_statico": "blog-prima-casa-under-36-consap-padova-2026"
     },
     {
@@ -1158,7 +1158,7 @@ function generateSlug(titolo) {
       "titolo": "Appartamento Limena: Guida acquisto 2026",
       "categoria": "Limena locale",
       "data": "2026-08-05",
-      "immagine_copertina": "img/blog/blog-appartamento-limena-guida-acquisto-2026.webp",
+      "immagine_copertina": "img/blog/blog-zona-imma-limena-domanda-offerta-2027-hero.webp",
       "url_statico": "blog-appartamento-limena-guida-acquisto-2026"
     },
     {
