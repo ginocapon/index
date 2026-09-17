@@ -29,20 +29,22 @@ body.rig-sugar-paper::after {
   background-size: 280px 280px;
 }
 
-/* Monogramma RI — tre istanze come watermark di fondo */
+/* Monogramma RI — tre istanze come watermark di fondo.
+   z-index sopra main/footer (2) con blend: visibile su sfondi chiari senza coprire il testo. */
 .rig-brand-watermark {
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: 3;
   overflow: hidden;
   pointer-events: none;
+  mix-blend-mode: multiply;
 }
 
 .rig-brand-watermark-item {
   position: absolute;
   width: min(82vw, 760px);
   color: var(--blu, #2C4A6E);
-  opacity: 0.14;
+  opacity: 0.16;
 }
 
 .rig-brand-watermark-item svg {
@@ -60,7 +62,7 @@ body.rig-sugar-paper::after {
   top: 38%;
   right: -22%;
   width: min(70vw, 620px);
-  opacity: 0.11;
+  opacity: 0.13;
   transform: rotate(-12deg);
 }
 
@@ -68,7 +70,7 @@ body.rig-sugar-paper::after {
   bottom: -10%;
   left: 6%;
   width: min(58vw, 520px);
-  opacity: 0.09;
+  opacity: 0.11;
   transform: rotate(8deg);
 }
 
@@ -83,13 +85,19 @@ body.rig-sugar-paper > article {
   z-index: 2;
 }
 
-/* Overlay: restano fuori dal flusso (menu hamburger, skip-link) */
+/* Overlay UI sopra watermark (menu, header pagine interne) */
+body.rig-sugar-paper > .nav-mobile,
+body.rig-sugar-paper > #navbar,
+body.rig-sugar-paper > header {
+  z-index: 100;
+}
 body.rig-sugar-paper > .nav-mobile,
 body.rig-sugar-paper > #navbar {
   position: fixed;
 }
 body.rig-sugar-paper > .skip-link {
   position: absolute;
+  z-index: 10000;
 }
 
 @media (prefers-reduced-motion: reduce) {
