@@ -1,0 +1,36 @@
+{
+  "updated": null,
+  "week_start": null,
+  "week_end": null,
+  "skill_ref": "TEST-SKILL/skill-acquisizione-proprietari.md",
+  "note": "Compilare ogni venerdì insieme al report GSC. Fonti: GA4, Supabase richieste, registro agenzia.",
+  "funnel": {
+    "sessions_owner_pages": null,
+    "sessions_landing_valutazione": null,
+    "sessions_proprietario_hub": null,
+    "sessions_servizio_vendita": null
+  },
+  "leads": {
+    "richieste_landing_valutazione": null,
+    "richieste_servizio_vendita": null,
+    "richieste_landing_consulenza": null,
+    "richieste_owner_total": null,
+    "lead_score_hot_count": null,
+    "lead_score_warm_count": null
+  },
+  "commercial": {
+    "phone_calls_outbound": null,
+    "whatsapp_conversations": null,
+    "appointments_survey": null,
+    "valuations_completed": null,
+    "mandates_signed": null,
+    "mandates_exclusive": null
+  },
+  "conversion_rates": {
+    "lead_to_survey_pct": null,
+    "survey_to_mandate_pct": null,
+    "lead_to_mandate_pct": null
+  },
+  "bottleneck_notes": "",
+  "actions_next_week": []
+}

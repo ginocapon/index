@@ -1,59 +1,86 @@
 ---
 name: righetto-acquisizione-proprietari
 description: >-
-  Strategia acquisizione proprietari e incarichi immobiliari Righetto: hub
-  proprietario-immobile, equilibrio editoriale, CTA funnel, homepage owner-first.
-  Priorità assoluta su SEO/blog generico. Usa per modifiche sito, homepage,
-  servizi, coda editoriale owner, landing valutazione/vendita/locazione.
+  Strategia acquisizione proprietari e incarichi immobiliari Righetto: funnel
+  completo, percorsi A-L, hub proprietario-immobile, calcolatore→sopralluogo,
+  lead scoring, KPI, equilibrio editoriale, CTA funnel. Priorità assoluta su
+  SEO/blog generico. Usa per modifiche sito, homepage, servizi, coda editoriale
+  owner, landing valutazione/vendita/locazione.
 ---
 
 # Acquisizione proprietari — Righetto
 
-**Leggi sempre:** `TEST-SKILL/skill-acquisizione-proprietari.md` (fonte completa).
+**Leggi sempre:** `TEST-SKILL/skill-acquisizione-proprietari.md` (fonte completa).  
+**Script / follow-up / canali:** `TEST-SKILL/skill-acquisizione-playbook-commerciale.md`.  
+**Cron venerdì (1 task/sett. automatico):** `TEST-SKILL/skill-acquisizione-cron-venerdi.md` + `data/acquisition-roadmap-cron.json`.
 
-## Obiettivo
+## Obiettivo funnel
 
-Aumentare **proprietari che contattano e affidano** immobili (vendita, affitto, gestione, valutazione).
+Visitatore → proprietario → contatto → conversazione → sopralluogo → valutazione → incarico (poss. esclusiva).
 
-**Non penalizzare:** annunci, ricerca casa, acquirenti, inquilini.
+**Mai** percentuali mediazione online — sempre da concordare in sede.
 
 ## Prima di ogni modifica sito
 
-1. Quale **proprietario** aiuta?
-2. Quale **passo** del percorso (hub → valutazione → servizio → form)?
-3. **Prova** che aumenta probabilità di contatto/incarico?
+1. Quale **percorso A–L**?
+2. Quale **passo funnel**?
+3. **Asset esistente** da estendere (no duplicati)?
+4. **Prova** che aumenta sopralluogo/incarico?
 
 Se non rispondi → modifica secondaria.
 
-## Asset funnel (ordine preferito)
+## Asset funnel (non duplicare)
 
-1. `proprietario-immobile.html` — hub decisionale
-2. `landing-valutazione.html` — conversione valore
+1. `proprietario-immobile.html` — hub + percorsi A–L
+2. `landing-valutazione.html` — stima Linda → educazione → sopralluogo
 3. `servizio-vendita.html` / `servizio-locazioni.html` — form dedicati
-4. `landing-consulenza-immobiliare-gratuita.html` — indecisi
-5. `servizio-gestione.html` — delega locazione
+4. `landing-consulenza-immobiliare-gratuita.html` — indecisi B, C, G, L
+5. `servizio-gestione.html` — I, K
 
-**Evitare** come unica destinazione owner: `contatti` generico, `vendere-casa-padova-errori` (resta educazione, non form primario).
+**Evitare** come unica destinazione owner: `contatti` generico.
+
+## Percorsi A–L (sintesi)
+
+| ID | Situazione | Landing / asset |
+|----|------------|-----------------|
+| A | Quanto vale? | `landing-valutazione` |
+| B | Penso di vendere | `servizio-vendita`, `landing-consulenza` |
+| C | Non so quando | `landing-consulenza` |
+| D | Vendere o affittare? | `blog-rendimento-affitto-padova`, hub |
+| E | Da privato | `vendere-casa-padova-errori` → consulenza |
+| F | Già in vendita, non vendo | `landing-consulenza`, `servizio-vendita` |
+| G | Altra valutazione | `landing-valutazione` |
+| H | Eredità | `blog-successione-immobiliare-padova` |
+| I | Immobile vuoto | `servizio-locazioni`, `servizio-gestione` |
+| J | Ristrutturare | blog ristrutturazione (gap coda) |
+| K | Più immobili | `landing-consulenza`, `servizio-gestione` |
+| L | Non so ancora | `proprietario-immobile`, `landing-consulenza` |
+
+Dettaglio completo in skill § Percorsi A–L.
 
 ## Blog — equilibrio
 
-- **Area 1 owner:** almeno 1 ogni 2 settimane (`acquisition_priority: true`)
-- Campi coda: `primary_audience`, `acquisition_contribution`, `traffic_type`
+- Area 1 owner: min 1 ogni 2 settimane (`acquisition_priority: true`)
+- Campi: `owner_path`, `acquisition_contribution`, `funnel_step`
 - Gate: `python scripts/audit_editorial_acquisition.py --id eq-XXX`
 - CTA Class A: `landing-valutazione` + servizio pertinente
+
+## Lead scoring e KPI
+
+- Regole: `data/lead-scoring-rules.json`
+- KPI settimanali: `data/acquisition-kpi-template.json`
 
 ## Homepage (checklist)
 
 - [ ] Sezione «Hai un immobile?» visibile
 - [ ] Hero CTA → `landing-valutazione`
-- [ ] Servizi → servizio-vendita / valutazione / locazioni
+- [ ] Hub → `proprietario-immobile`
 - [ ] Sticky → `landing-valutazione`
 
-## Dati
+## Cron venerdì
 
-- `data/editorial-acquisition-balance.json`
-- `data/editorial-queue.json` — policy acquisizione
+Con `"SKILL"` o `/venerdi`: **esegui task sett. N/12** da `acquisition-roadmap-cron.json` (repo #1), poi SOSTENERE/blog.
 
-## Audit periodico
+## Audit
 
 `python scripts/audit_editorial_acquisition.py --report`

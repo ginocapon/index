@@ -1,0 +1,22 @@
+{
+  "updated": "2026-09-14",
+  "skill_ref": "TEST-SKILL/skill-acquisizione-proprietari.md",
+  "note": "Punteggio 0-100 per priorità contatto. Annotare in admin su richieste (es. prefisso [score:72] in messaggio) fino a colonna dedicata Supabase.",
+  "thresholds": {
+    "hot": { "min": 70, "action": "Contatto entro 24h, priorità sopralluogo" },
+    "warm": { "min": 40, "max": 69, "action": "Contatto 48h + contenuto utile per percorso A-L" },
+    "cold": { "max": 39, "action": "Nurturing playbook, no pressione" }
+  },
+  "signals": [
+    { "id": "decided_sell", "label": "Ha già deciso di vendere", "points": 30 },
+    { "id": "requested_valuation", "label": "Ha richiesto valutazione / sopralluogo", "points": 20 },
+    { "id": "timeline_6m", "label": "Tempistica indicata entro 6 mesi", "points": 15 },
+    { "id": "phone_provided", "label": "Ha fornito telefono", "points": 10 },
+    { "id": "survey_accepted", "label": "Ha accettato appuntamento sopralluogo", "points": 25 },
+    { "id": "comparing_agencies", "label": "Confronta altre agenzie (percorso G)", "points": 10 },
+    { "id": "curiosity_only", "label": "Solo curiosità / orizzonte >12 mesi", "points": 5 },
+    { "id": "no_rush", "label": "Dice non ho fretta", "points": -10 },
+    { "id": "email_only", "label": "Solo email, rifiuta telefono", "points": -5 },
+    { "id": "generic_no_property", "label": "Richiesta generica senza immobile", "points": -15 }
+  ]
+}
