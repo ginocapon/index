@@ -389,6 +389,90 @@ body.rig-sugar-paper:is(
   color: rgba(255, 255, 255, 0.78) !important;
 }
 
+/* ══════════════════════════════════════════════════════════════
+   PROFONDITÀ 3D + ARMONIA CROMATICA — pagine principali
+   Scala di elevazione condivisa: i blocchi "galleggiano" sopra
+   le fasce chiare/sabbia e sopra il watermark RI. Bordi e ombre
+   coerenti su Home, Chi Siamo, Immobili, Servizi, Blog, FAQ.
+   ══════════════════════════════════════════════════════════════ */
+body.rig-sugar-paper:is(
+  .homepage,
+  .page-hero-chi-siamo,
+  .page-hero-immobili,
+  .page-hero-servizi,
+  .page-hero-blog,
+  .page-hero-faq
+) {
+  --rig-edge: rgba(44, 74, 110, 0.12);
+  --rig-elev-1:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    0 1px 2px rgba(21, 36, 53, 0.05),
+    0 10px 26px rgba(21, 36, 53, 0.10);
+  --rig-elev-2:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 6px 14px rgba(21, 36, 53, 0.10),
+    0 22px 48px rgba(21, 36, 53, 0.18);
+}
+
+/* Card su superfici chiare: rilievo uniforme + transizione morbida. */
+body.rig-sugar-paper.homepage :is(.srv-card, .blog-card, .mutuo-card, .faq-item, .stima-stat, .proprietario-card, .ev-card),
+body.rig-sugar-paper.page-hero-chi-siamo :is(.tcard, .vcard),
+body.rig-sugar-paper.page-hero-servizi :is(.scard, .step, .wi),
+body.rig-sugar-paper.page-hero-blog :is(.art-big, .art-sm, .acard, .sb),
+body.rig-sugar-paper.page-hero-faq :is(.faq-item, .sb-box),
+body.rig-sugar-paper.page-hero-immobili :is(.card, .alert-immobili) {
+  border: 1px solid var(--rig-edge) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--rig-elev-1) !important;
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.24s ease, border-color 0.24s ease !important;
+}
+
+/* Hover: sollevamento marcato + accento brand sul bordo. */
+body.rig-sugar-paper.homepage :is(.srv-card, .blog-card, .mutuo-card, .faq-item, .proprietario-card, .ev-card):hover,
+body.rig-sugar-paper.page-hero-chi-siamo :is(.tcard, .vcard):hover,
+body.rig-sugar-paper.page-hero-servizi :is(.scard, .step, .wi):hover,
+body.rig-sugar-paper.page-hero-blog :is(.art-big, .art-sm, .acard):hover,
+body.rig-sugar-paper.page-hero-faq .sb-box:hover,
+body.rig-sugar-paper.page-hero-immobili .card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: var(--rig-elev-2) !important;
+  border-color: rgba(255, 107, 53, 0.42) !important;
+}
+
+/* FAQ item aperto: resta in evidenza anche senza hover. */
+body.rig-sugar-paper.page-hero-faq .faq-item.open {
+  box-shadow: var(--rig-elev-2) !important;
+  border-color: rgba(255, 107, 53, 0.42) !important;
+}
+
+/* Fasce chiare: micro-alternanza tonale per staccare i blocchi.
+   avorio (paper) ↔ sabbia (sand), così le card bianche risaltano. */
+body.rig-sugar-paper.page-hero-chi-siamo :is(.team, .cta-s),
+body.rig-sugar-paper.page-hero-servizi :is(#main-content > .section:not([style]), .why) {
+  background: linear-gradient(180deg, #f8f6f2 0%, #f3f0ea 100%) !important;
+}
+body.rig-sugar-paper.page-hero-chi-siamo :is(.timeline, .values),
+body.rig-sugar-paper.page-hero-servizi .process {
+  background: linear-gradient(180deg, #ece7df 0%, #e5dfd4 100%) !important;
+}
+
+/* Titoli di sezione: accento blu coerente per guidare la lettura. */
+body.rig-sugar-paper:is(
+  .page-hero-chi-siamo,
+  .page-hero-servizi,
+  .page-hero-blog,
+  .page-hero-faq
+) :is(.sec-t, .sec-title, .fg-title) {
+  color: #152435 !important;
+}
+
+/* Immagini/testate delle card: bordo interno morbido per il 3D. */
+body.rig-sugar-paper.page-hero-servizi .scard-img,
+body.rig-sugar-paper.page-hero-blog :is(.art-img, .acard-img) {
+  box-shadow: inset 0 -1px 0 var(--rig-edge);
+}
+
 /* Sezioni scure homepage: ripristina sfondi (mai unset) */
 /* Fasce scure homepage — sfondo opaco (effetto pag. 2, no watermark) */
 body.rig-sugar-paper #perche {

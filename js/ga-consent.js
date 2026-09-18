@@ -65,7 +65,7 @@
     if (/admin\.html$/i.test((location.pathname || ''))) return;
     var css = document.createElement('link');
     css.rel = 'stylesheet';
-    css.href = 'css/rig-brand-atmosphere.css?v=13';
+    css.href = 'css/rig-brand-atmosphere.css?v=14';
     document.head.appendChild(css);
     var s = document.createElement('script');
     s.src = 'js/rig-brand-atmosphere.js?v=2';
