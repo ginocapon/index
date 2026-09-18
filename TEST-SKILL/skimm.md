@@ -1,6 +1,6 @@
 # SKIMM — Blog Keyword & Intent Map (Righetto)
 
-> **Generato:** 2026-09-04 · Script: `python scripts/build_skimm.py`
+> **Generato:** 2026-09-18 · Script: `python scripts/build_skimm.py`
 > **Uso:** prima di ogni nuovo articolo — anti-doppioni semantici + keyword per «bucare» Google senza cannibalizzare.
 > **Companion:** `check_doppioni_sito.py` (tecnico) + `skill-content.md` §2.0–2.2 + `SKILL-2.0.md` §8.1a.
 
@@ -97,19 +97,19 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 
 ## 2. Stato verifica automatica
 
-**19 avvisi** al generazione 2026-09-04:
+**19 avvisi** al generazione 2026-09-18:
 
 - Intent simile `territorio-limena`: blog-appartamento-limena-guida-acquisto-2026, blog-limena-vicino-padova-comprare-2026, blog-affitti-limena-2026, blog-appartamento-affitto-limena-contratto-2026…
 - Intent simile `breakdown-costi`: blog-costi-proprieta-acquisto-possesso-vendita-padova-2026, blog-costi-costruzione-istat-padova-2026
 - Intent simile `acquisto-e-prima-casa`: blog-prima-casa-under-36-consap-padova-2026, blog-proposta-acquisto-negoziazione-padova-2026, blog-visura-catastale-acquisto-casa-padova-2026
 - Intent simile `fisco-normativa`: blog-quattro-imposte-rogitio-prima-casa-padova-2026, blog-bonus-mobili-2026-massimizzare-ristrutturazioni, blog-imposte-registro-catasto-compravendita-padova-2026, blog-tasse-vendita-casa
 - Intent simile `dato-omi`: blog-spese-condominiali-acquisto-padova-2026, blog-mercato-sacrocuore-padova-omi-2026
-- Intent simile `affitti-cluster`: blog-affitto-transitorio-padova-durata-2026, blog-registro-contratti-affitto-padova-2026, blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026, blog-squilibrio-domanda-offerta-affitti-padova
+- Intent simile `affitti-cluster`: blog-affitto-transitorio-padova-durata-2026, blog-gestione-locazione-delegata-padova-2026, blog-registro-contratti-affitto-padova-2026, blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026…
 - Intent simile `guida-pillar`: blog-caro-affitti-padova-under-35-guida-2026, blog-canone-concordato-padova-guida-2026, blog-valutazione-casa-padova-guida-2026
-- Intent simile `altri-/-trasversali`: blog-affittare-casa-padova-proprietario-2026, blog-domanda-residenziale-supera-offerta-2026-padova, blog-gergo-immobiliare-padova-spiegato-2026, blog-italy-rental-market-positive-start-january-2026…
+- Intent simile `altri-/-trasversali`: blog-affittare-casa-padova-proprietario-2026, blog-case-prefabbricate-futuro-elon-musk-2026, blog-domanda-residenziale-supera-offerta-2026-padova, blog-gergo-immobiliare-padova-spiegato-2026…
 - Intent simile `analisi-scenari`: blog-bolla-immobiliare-padova-2026, blog-previsioni-immobiliari-scenari-geopolitica-2026, blog-prospettive-mercato-residenziale-italia-2026
 - Intent simile `territorio-padova`: blog-prezzi-case-padova-zona-2026, blog-scuole-istruzione-padova, blog-servizi-infrastrutture-padova, blog-trasporti-mobilita-padova
-- Intent simile `mutui-cluster`: blog-mutui-selettivi-banche-padova-2026, blog-mutuo-fisso-variabile-padova-2026, blog-mutuo-prima-casa-padova, blog-tassi-euribor-mutui-padova-agosto-2026…
+- Intent simile `mutui-cluster`: blog-mutui-selettivi-banche-padova-2026, blog-mutuo-fisso-variabile-padova-2026, blog-mutuo-prima-casa-padova, blog-mutuo-under-36-tassi-fisso-variabile-2027…
 - Intent simile `documenti-operativi`: blog-mutuo-documenti-tempi-prima-casa-padova-2026, blog-documenti-compravendita-rogito-padova-2026, blog-documenti-vendita-casa
 - Intent simile `vita-agenzia-brand`: blog-ca-marcello-mestre, blog-impegno-quotidiano-agenzia-immobiliare
 - Token slug sovrausato `mutui` (8 articoli) — variare radice nei prossimi batch
@@ -119,7 +119,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 - Coppia da non fondere (Tribloc vs Case Green generico): blog-residenze-green-padova-tribloc-2026 ↔ blog-domanda-case-green-certificazione-padova-2026
 - Coppia da non fondere (Evento BCE vs guida mutui): blog-bce-tassi-mutui-giugno-2026-padova ↔ blog-mutui-casa-padova-2026
 
-**Articoli catalogati:** 135
+**Articoli catalogati:** 140
 
 ---
 
@@ -149,7 +149,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-vigonza-rubano-comprare-casa-cintura-2026` | `vigonza-rubano-comprare-casa-cintura` | Focus Vigonza/Rubano — geografia cintura |
 | `blog-visura-catastale-acquisto-casa-padova-2026` | `visura-catastale-acquisto-casa` | Angolo visura-catastale-acquisto-casa — intent dedicato, verificare matrice §4 |
 
-### Affitti e locazioni (23)
+### Affitti e locazioni (24)
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
@@ -164,6 +164,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-checklist-affitto-studenti-padova-2026` | `checklist-contratto-studenti-padova` | Checklist operativa caparra/contratto — non mercato |
 | `blog-contratto-affitto-padova` | `contratto-affitto-tipologie-padova` | 4+4, 3+2, transitorio, cedolare — normativa |
 | `blog-emergenza-abitativa-padova-2026` | `emergenza-abitativa-padova-dati` | Gap domanda/offerta abitativa — non canoni singoli |
+| `blog-gestione-locazione-delegata-padova-2026` | `gestione-locazione-delegata` | Cluster affitti — verificare matrice §4 prima di pubblicare |
 | `blog-housing-lavoratori-veneto-edilcassa-2026` | `edilcassa-fondo-garanzia-locazione-lavoratori` | Fondo 250k€ garanzie affitto operai — non studenti né canoni |
 | `blog-padova-housing-market-guide-2026` | `housing-market-guide` | Angolo padova-housing-market-guide — intent dedicato, verificare matrice §4 |
 | `blog-quotazioni-locazioni-omi-istat-padova-2026` | `quotazioni-locazioni-omi-istat-padova` | Monitor OMI/ISTAT locazioni — non FIMAA né Insights |
@@ -177,7 +178,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-studentati-veneto-2026-posti-letto` | `posti-letto-esu-camplus-pnrr-veneto` | Canali offerta regionale (ESU/privati/PNRR) — non singolo canone stanza |
 | `blog-vicenza-residenze-universitarie-calmierate-2026` | `casa-querini-calmierati-vicenza` | Vicenza PNRR Saudino — non Padova né Tribloc |
 
-### Altri / trasversali (17)
+### Altri / trasversali (18)
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
@@ -185,6 +186,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-5-errori-visita-immobile-padova-2026` | `errori-visita-immobile-etichetta` | Etichetta visita / tono ironico acquirente — non checklist rogito né errori acquisto generici |
 | `blog-affittare-casa-padova-proprietario-2026` | `affittare-casa-proprietario` | Angolo affittare-casa-proprietario — intent dedicato, verificare matrice §4 |
 | `blog-canone-concordato-padova-guida-2026` | `canone-concordato-guida` | Guida pillar evergreen — non evento datato |
+| `blog-case-prefabbricate-futuro-elon-musk-2026` | `case-prefabbricate-futuro-elon-musk` | Angolo case-prefabbricate-futuro-elon-musk — intent dedicato, verificare matrice §4 |
 | `blog-domanda-residenziale-supera-offerta-2026-padova` | `domanda-residenziale-supera-offerta` | Angolo domanda-residenziale-supera-offerta — intent dedicato, verificare matrice §4 |
 | `blog-gergo-immobiliare-padova-spiegato-2026` | `gergo-immobiliare-spiegato` | Angolo gergo-immobiliare-spiegato — intent dedicato, verificare matrice §4 |
 | `blog-gestione-spese-casa-risparmio-padova-2026` | `gestione-spese-casa-possesso-padova` | Spese possesso post-acquisto (energia, IMU) — non costi rogito |
@@ -247,7 +249,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-prospettive-mercato-residenziale-italia-2026` | `prospettive-mercato-residenziale` | Analisi scenari/proiezioni — citare fonte, no predizioni inventate |
 | `blog-sondaggio-bancaditalia-q1-2026-padova` | `sondaggio-bancaditalia` | Dato trimestrale verificato — aggiornare al prossimo Q |
 
-### Mutui e credito (13)
+### Mutui e credito (14)
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
@@ -261,6 +263,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-mutuo-documenti-tempi-prima-casa-padova-2026` | `mutuo-documenti-tempi-prima-casa` | Documenti operativi rogito/pratica — non strategia |
 | `blog-mutuo-fisso-variabile-padova-2026` | `mutuo-fisso-variabile` | Cluster mutui — distinguere da pillar e eventi BCE |
 | `blog-mutuo-prima-casa-padova` | `mutuo-prima-casa` | Cluster mutui — distinguere da pillar e eventi BCE |
+| `blog-mutuo-under-36-tassi-fisso-variabile-2027` | `mutuo-under-tassi-fisso-variabile` | Cluster mutui — distinguere da pillar e eventi BCE |
 | `blog-surroga-mutuo-padova-2026` | `surroga-mutuo-padova-operativa` | Surroga operativa costi/tempi — non tassi BCE |
 | `blog-tassi-euribor-mutui-padova-agosto-2026` | `tassi-euribor-mutui-agosto` | Cluster mutui — distinguere da pillar e eventi BCE |
 | `blog-tassi-mutui-minimi-approfittarne-padova-2026` | `tassi-mutui-minimi-approfittarne` | Cluster mutui — distinguere da pillar e eventi BCE |
@@ -280,7 +283,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-domanda-case-green-certificazione-padova-2026` | `domanda-case-green-certificazione-ape` | Domanda acquirenti su APE/green — non progetto Tribloc |
 | `blog-residenze-green-padova-tribloc-2026` | `tribloc-gozzi-nzeb-riuso-uffici` | Progetto urbano Tribloc/Gozzi — non generico green building |
 
-### Territorio e zone (10)
+### Territorio e zone (11)
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
@@ -294,8 +297,9 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-scuole-istruzione-padova` | `scuole-istruzione` | Territorio Padova — internal link a pagina zona |
 | `blog-servizi-infrastrutture-padova` | `servizi-infrastrutture` | Territorio Padova — internal link a pagina zona |
 | `blog-trasporti-mobilita-padova` | `trasporti-mobilita` | Territorio Padova — internal link a pagina zona |
+| `blog-zona-imma-limena-domanda-offerta-2027` | `zona-imma-limena-domanda-offerta` | Focus Limena/cintura — non generico Padova centro |
 
-### Vendita (14)
+### Vendita (15)
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
@@ -311,6 +315,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-percorso-vendita-immobile-padova-2026` | `percorso-vendita-immobile` | Strategia operativa vendita/acquisto — pillar intent |
 | `blog-tasse-vendita-casa` | `tasse-vendita-casa` | Fisco/normativa — non dati mercato |
 | `blog-tempi-vendita-casa-padova` | `tempi-vendita-casa-padova-medi` | Tempi medi vendita reali Padova — non costi vendita |
+| `blog-vendere-casa-limena-proprietario-2026` | `vendere-casa-limena-proprietario` | Focus Limena/cintura — non generico Padova centro |
 | `blog-vendere-o-affittare-padova-2026` | `vendere-affittare` | Angolo vendere-o-affittare — intent dedicato, verificare matrice §4 |
 | `blog-vendita-immobiliare-padova-strategie-2026` | `vendita-immobiliare-strategie-padova` | Strategie vendita 2026 — pillar venditori |
 
