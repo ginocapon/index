@@ -263,14 +263,27 @@ body.rig-sugar-paper .hero-stats-row {
 }
 
 /* Sezioni scure homepage: ripristina sfondi (mai unset) */
-/* Sezioni homepage: tema luminoso (below-fold.css) */
-body.rig-sugar-paper #perche,
-body.rig-sugar-paper #testimonial,
-body.rig-sugar-paper #mutuo-hp,
-body.rig-sugar-paper #drone-hp,
-body.rig-sugar-paper #territorio {
+/* Fasce scure homepage — sfondo opaco (effetto pag. 2, no watermark) */
+body.rig-sugar-paper #perche {
+  background: linear-gradient(105deg, #0a1628 0%, #152435 42%, #1e3348 100%) !important;
   isolation: isolate;
   z-index: 4;
+}
+body.rig-sugar-paper #testimonial,
+body.rig-sugar-paper #mutuo-hp,
+body.rig-sugar-paper #drone-hp {
+  background: linear-gradient(105deg, #0a1628 0%, #152435 40%, #1e3348 72%, #2d4258 100%) !important;
+  isolation: isolate;
+  z-index: 4;
+}
+body.rig-sugar-paper #territorio { isolation: isolate; z-index: 4; }
+body.rig-sugar-paper #perche .ps-big,
+body.rig-sugar-paper #territorio .t-stat-box,
+body.rig-sugar-paper #testimonial .rec-item,
+body.rig-sugar-paper #testimonial .rec-video-card,
+body.rig-sugar-paper #testimonial .rec-marquee-wrap {
+  background: rgba(255, 255, 255, 0.11) !important;
+  border-color: rgba(255, 255, 255, 0.22) !important;
 }
 
 body.rig-sugar-paper :is(
