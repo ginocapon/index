@@ -121,12 +121,9 @@ body.rig-sugar-paper :where(
   .fc-badge,
   .rec-video-card,
   .rec-item,
-  .t-stat-box,
   .vt-card-link,
   .vt-modal-panel,
   .hero-stats-row,
-  .perche-item,
-  .ps-big,
   .kpi-strip,
   .kpi-strip > div,
   .toc,
@@ -191,17 +188,10 @@ body.rig-sugar-paper :where(
   isolation: isolate;
 }
 
-/* Sfondi chiari ~30% meno permeabili al watermark (mix verso bianco) */
+/* Sfondi chiari ~30% meno permeabili al watermark (mix verso bianco).
+   Esclusi moduli homepage (below-fold.css) e sezioni scure. */
 body.rig-sugar-paper :is(
-  .srv-card,
-  .blog-card,
-  .pc,
-  .ev-card,
-  .stima-panel,
-  .stima-stat,
-  .stima-card,
   .scl,
-  .faq-item,
   .kpi-strip > div,
   .toc,
   .related,
@@ -232,13 +222,6 @@ body.rig-sugar-paper :is(
   .landing-card,
   .serv-block,
   .step-v,
-  .ev-card,
-  .rec-item,
-  .t-stat-box,
-  .perche-item,
-  .ps-big,
-  .fc-form,
-  .fc-badge,
   .stima-result,
   .stima-calc,
   .card,
@@ -267,16 +250,53 @@ body.rig-sugar-paper .faq-a {
 }
 
 body.rig-sugar-paper .hero-stats-row {
-  background: rgba(255, 255, 255, 0.88) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  box-shadow: 0 -4px 24px rgba(21, 36, 53, 0.06);
 }
 
-/* Gradienti scuri / CTA: solo isolation, niente override sfondo */
+/* Sezioni scure homepage: ripristina sfondi (mai unset) */
+body.rig-sugar-paper #perche {
+  background: var(--testo, #152435) !important;
+  isolation: isolate;
+}
+
+body.rig-sugar-paper #testimonial {
+  background: var(--testo, #152435) !important;
+  isolation: isolate;
+}
+
+body.rig-sugar-paper #mutuo-hp {
+  background: linear-gradient(135deg, #0a1628 0%, #1a2d4a 50%, #0d2137 100%) !important;
+  isolation: isolate;
+}
+
+body.rig-sugar-paper #drone-hp {
+  background: linear-gradient(135deg, #0a1628 0%, #152435 55%, #1a2d4a 100%) !important;
+  isolation: isolate;
+}
+
+body.rig-sugar-paper #perche .perche-item {
+  background: transparent !important;
+}
+
+body.rig-sugar-paper #perche .ps-big {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 107, 53, 0.25) !important;
+}
+
+body.rig-sugar-paper #territorio .t-stat-box {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+body.rig-sugar-paper #testimonial .rec-item {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
 body.rig-sugar-paper :is(
   .cta-banner,
   .blog-rich-cta-strip,
-  #perche,
-  #testimonial,
-  #mutuo-hp,
   footer,
   .rec-video-card,
   .vt-modal-panel,
