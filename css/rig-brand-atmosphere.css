@@ -79,10 +79,17 @@ body.rig-sugar-paper::after {
    menu mobile, cookie, chat e skip-link. Il pannello .nav-mobile
    (translateX 100%) torna nel flusso e lascia un buco vuoto sopra l'hero. */
 body.rig-sugar-paper > main,
-body.rig-sugar-paper > footer,
 body.rig-sugar-paper > article {
   position: relative;
   z-index: 2;
+}
+
+/* Footer sopra watermark RI (z-index 3) — sfondo scuro pieno */
+body.rig-sugar-paper > footer {
+  position: relative;
+  z-index: 5;
+  isolation: isolate;
+  background: var(--testo, #152435) !important;
 }
 
 /* Overlay UI sopra watermark (menu, header pagine interne) */
@@ -117,6 +124,7 @@ body.rig-sugar-paper :where(
   .scl,
   .faq-item,
   .faq-a,
+  .fc-inner,
   .fc-form,
   .fc-badge,
   .rec-video-card,
@@ -233,7 +241,7 @@ body.rig-sugar-paper :is(
   .val-box,
   .attach-card
 ) {
-  background-color: color-mix(in srgb, var(--bianco, #F7F5F1) 84%, var(--sfondo, #ECE7DF) 16%);
+  background-color: color-mix(in srgb, var(--bianco, #F7F5F1) 97%, var(--sfondo, #ECE7DF) 3%);
 }
 
 body.rig-sugar-paper .aeo-box {
@@ -246,12 +254,12 @@ body.rig-sugar-paper .blog-rich-callout {
 }
 
 body.rig-sugar-paper .faq-a {
-  background: color-mix(in srgb, var(--bianco, #F7F5F1) 84%, var(--sfondo, #ECE7DF) 16%) !important;
+  background: color-mix(in srgb, var(--bianco, #F7F5F1) 97%, var(--sfondo, #ECE7DF) 3%) !important;
 }
 
 body.rig-sugar-paper .hero-stats-row {
-  background: rgba(255, 255, 255, 0.96) !important;
-  box-shadow: 0 -4px 24px rgba(21, 36, 53, 0.06);
+  background: #fff !important;
+  box-shadow: 0 -6px 28px rgba(21, 36, 53, 0.10);
 }
 
 /* Sezioni scure homepage: ripristina sfondi (mai unset) */
@@ -297,7 +305,6 @@ body.rig-sugar-paper #testimonial .rec-item {
 body.rig-sugar-paper :is(
   .cta-banner,
   .blog-rich-cta-strip,
-  footer,
   .rec-video-card,
   .vt-modal-panel,
   .urgency-strip,
