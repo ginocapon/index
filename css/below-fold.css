@@ -393,9 +393,9 @@
 .ev-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:50px;flex-wrap:wrap;gap:18px}
 .props-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
 .pc{
-  background:var(--bianco);border-radius:12px;overflow:hidden;
-  border:1px solid rgba(44,74,110,0.08);
-  box-shadow:0 2px 16px rgba(21,36,53,0.05);
+  background:#fff !important;border-radius:12px;overflow:hidden;
+  border:1px solid rgba(44,74,110,0.14);
+  box-shadow:0 6px 28px rgba(21,36,53,0.10);
   transition:transform 0.32s cubic-bezier(0.22,1,0.36,1),box-shadow 0.32s,border-color 0.2s;
   cursor:pointer;display:flex;flex-direction:column;height:100%;
 }
@@ -452,9 +452,10 @@
   .srv-grid{grid-template-columns:repeat(2,1fr);gap:20px}
 }
 .srv-card{
-  background:color-mix(in srgb,var(--bianco) 84%,var(--sfondo) 16%);border-radius:12px;padding:26px 22px;
-  border:1px solid rgba(44,74,110,0.1);transition:all 0.28s;
+  background:#fff;border-radius:12px;padding:26px 22px;
+  border:1px solid rgba(44,74,110,0.12);transition:all 0.28s;
   cursor:pointer;display:block;position:relative;overflow:hidden;
+  box-shadow:0 4px 22px rgba(21,36,53,0.08);
 }
 .srv-card::after{
   content:'';position:absolute;bottom:0;left:0;
@@ -628,7 +629,7 @@
 .blog-inner{max-width:1200px;margin:0 auto}
 .blog-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:46px;flex-wrap:wrap;gap:16px}
 .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.blog-card{background:var(--sfondo);border-radius:12px;overflow:hidden;border:1px solid rgba(44,74,110,0.07);transition:transform 0.3s,box-shadow 0.3s;cursor:pointer}
+.blog-card{background:#fff;border-radius:12px;overflow:hidden;border:1px solid rgba(44,74,110,0.12);box-shadow:0 4px 22px rgba(21,36,53,0.08);transition:transform 0.3s,box-shadow 0.3s;cursor:pointer}
 .blog-card:hover{transform:translateY(-5px);box-shadow:0 16px 44px rgba(21,36,53,0.1)}
 .blog-cover{height:165px;background:linear-gradient(135deg,var(--blu) 0%,var(--blu3) 100%);display:flex;align-items:center;justify-content:center;font-size:3rem}
 .blog-body{padding:22px}
@@ -1012,7 +1013,7 @@ footer{background:var(--testo);color:rgba(255,255,255,0.6);padding:64px 44px 28p
   font-size: 0.65rem; font-weight: 700; letter-spacing: 1px;
   text-transform: uppercase; color: var(--oro);
 }
-.fc-form { padding: 56px 48px; }
+.fc-form { padding: 56px 48px; background: #fff; }
 .fc-ey {
   font-size: 0.62rem; letter-spacing: 3.5px; text-transform: uppercase;
   color: var(--oro); font-weight: 700; margin-bottom: 10px;
@@ -1070,8 +1071,9 @@ footer{background:var(--testo);color:rgba(255,255,255,0.6);padding:64px 44px 28p
 .faq-head { text-align: center; margin-bottom: 52px; }
 .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .faq-item {
-  background: var(--bianco); border-radius: 12px;
-  border: 1px solid rgba(44,74,110,0.09);
+  background: #fff; border-radius: 12px;
+  border: 1px solid rgba(44,74,110,0.12);
+  box-shadow: 0 3px 18px rgba(21,36,53,0.07);
   overflow: hidden; transition: box-shadow 0.25s;
 }
 .faq-item:hover { box-shadow: 0 8px 28px rgba(21,36,53,0.09); }
@@ -1101,6 +1103,77 @@ footer{background:var(--testo);color:rgba(255,255,255,0.6);padding:64px 44px 28p
   .faq-grid { grid-template-columns: 1fr; }
 }
 .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
+
+/* ══ HOME — tonalità riquadri vs sfondo RI (contrasto + rilievo) ══ */
+#proprietario-hp,
+#evidenza,
+#servizi,
+#stima,
+#blog,
+#faq-hp,
+#form-contatto,
+#video-intro {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Servizi: 4 tonalità */
+#servizi .srv-grid .srv-card:nth-child(1) { background: #fff !important; }
+#servizi .srv-grid .srv-card:nth-child(2) { background: #eef3f8 !important; border-color: rgba(44, 74, 110, 0.16); }
+#servizi .srv-grid .srv-card:nth-child(3) { background: #fbf6ef !important; }
+#servizi .srv-grid .srv-card:nth-child(4) { background: #f3f0ea !important; }
+
+/* Proprietario: 6 tonalità alternate */
+#proprietario-hp .srv-grid .srv-card:nth-child(1),
+#proprietario-hp .srv-grid .srv-card:nth-child(5) { background: #fff !important; }
+#proprietario-hp .srv-grid .srv-card:nth-child(2),
+#proprietario-hp .srv-grid .srv-card:nth-child(4) { background: #eef3f8 !important; border-color: rgba(44, 74, 110, 0.16); }
+#proprietario-hp .srv-grid .srv-card:nth-child(3) { background: #fbf6ef !important; }
+#proprietario-hp .srv-grid .srv-card:nth-child(6) { background: #f5f1ea !important; }
+
+.srv-card:hover {
+  background: #fff !important;
+  box-shadow: 0 14px 44px rgba(21, 36, 53, 0.12);
+}
+
+/* Blog: tre tonalità */
+.blog-grid .blog-card:nth-child(3n+1) { background: #fff !important; }
+.blog-grid .blog-card:nth-child(3n+2) { background: #eef3f8 !important; border-color: rgba(44, 74, 110, 0.14); }
+.blog-grid .blog-card:nth-child(3n)   { background: #fbf6ef !important; border-color: rgba(44, 74, 110, 0.13); }
+.blog-card .blog-body { background: inherit; }
+
+/* FAQ alternate */
+#faq-hp .faq-grid .faq-item:nth-child(even) { background: #f5f8fa; }
+
+/* Form contatto */
+#form-contatto { background: #fff !important; }
+.fc-inner {
+  box-shadow: 0 10px 48px rgba(21, 36, 53, 0.10);
+  border: 1px solid rgba(44, 74, 110, 0.08);
+}
+.fc-group input,
+.fc-group select,
+.fc-group textarea {
+  background: #f5f8fa !important;
+  border-color: rgba(44, 74, 110, 0.18) !important;
+}
+.fc-group input:focus,
+.fc-group select:focus,
+.fc-group textarea:focus {
+  background: #fff !important;
+}
+
+/* Stima */
+.stima-panel,
+.stima-card {
+  background: #fff !important;
+  box-shadow: 0 8px 36px rgba(21, 36, 53, 0.09) !important;
+}
+.stima-stat { background: #eef3f8 !important; }
+
+/* Perché: testo bianco su blu scuro */
+#perche { background: var(--testo) !important; }
+#perche .ps-big:hover { background: rgba(255, 255, 255, 0.12) !important; }
 
 /* ═══ STICKY MOBILE CTA BAR ═══ */
 .sticky-cta-mobile{
