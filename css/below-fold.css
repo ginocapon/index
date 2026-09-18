@@ -190,14 +190,14 @@
   align-items: stretch;
 }
 .rec-video-card {
-  background: #fff;
-  border: 1px solid rgba(44,74,110,0.12);
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255,255,255,0.20);
   border-radius: 16px;
   overflow: hidden;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 8px 32px rgba(21,36,53,0.10);
+  transition: border-color 0.3s ease, background 0.3s ease;
+  isolation: isolate;
 }
-.rec-video-card:hover { border-color: rgba(255,107,53,0.35); box-shadow: 0 12px 40px rgba(21,36,53,0.14); }
+.rec-video-card:hover { border-color: rgba(255,107,53,0.45); background: rgba(255,255,255,0.13); }
 .rec-video-play {
   position: relative;
   aspect-ratio: 16/9;
@@ -233,7 +233,7 @@
 .rec-stars { color: #FFD23F; font-size: 0.8rem; margin-bottom: 6px; letter-spacing: 2px; }
 .rec-quote {
   font-size: 0.82rem;
-  color: color-mix(in srgb, var(--grigio) 40%, var(--testo) 60%);
+  color: rgba(255,255,255,0.82);
   line-height: 1.6;
   font-style: italic;
   margin: 0 0 10px;
@@ -241,16 +241,16 @@
 .rec-author {
   font-size: 0.72rem;
   font-weight: 700;
-  color: var(--testo);
+  color: #fff;
 }
-.rec-author span { color: var(--grigio); font-weight: 400; }
+.rec-author span { color: rgba(255,255,255,0.65); font-weight: 400; }
 .rec-marquee-wrap {
   position: relative;
   overflow: hidden;
   border-radius: 16px;
-  border: 1px solid rgba(44,74,110,0.12);
-  background: #fff;
-  box-shadow: 0 8px 32px rgba(21,36,53,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.06);
+  isolation: isolate;
   min-height: 0;
   height: 100%;
   mask-image: linear-gradient(180deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
@@ -265,10 +265,11 @@
 }
 .rec-item {
   flex-shrink: 0;
-  background: #f5f8fa;
-  border: 1px solid rgba(44,74,110,0.10);
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   border-radius: 12px;
   padding: 16px 18px;
+  isolation: isolate;
 }
 @keyframes rec-scroll {
   0% { transform: translateY(0); }
@@ -474,8 +475,11 @@
 }
 .srv-t{font-weight:700;font-size:0.95rem;color:var(--testo);margin-bottom:8px}
 .srv-d{font-size:0.8rem;font-weight:500;color:color-mix(in srgb,var(--grigio) 88%,var(--testo) 12%);line-height:1.65}
-/* PERCHÉ NOI — tema luminoso */
-#perche{background:#f2f0eb;padding:90px 44px;position:relative;overflow:hidden;isolation:isolate}
+/* PERCHÉ NOI — fascia scura (ref. mock pagina 2) */
+#perche{
+  background:linear-gradient(105deg,#0a1628 0%,#152435 42%,#1e3348 100%);
+  padding:90px 44px;position:relative;overflow:hidden;isolation:isolate;z-index:4;
+}
 .perche-bg{
   position:absolute;right:0;top:0;bottom:0;width:55%;pointer-events:none;opacity:0.05;
   background-image:
@@ -487,23 +491,23 @@
 .perche-list{display:flex;flex-direction:column}
 .perche-item{
   display:grid;grid-template-columns:48px 1fr;gap:20px;
-  padding:24px 0;border-bottom:1px solid rgba(44,74,110,0.12);align-items:flex-start;
+  padding:24px 0;border-bottom:1px solid rgba(255,107,53,0.14);align-items:flex-start;
 }
-.perche-item:first-of-type{border-top:1px solid rgba(44,74,110,0.12)}
-.pn-n{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--oro);opacity:0.85;line-height:1;font-style:italic}
-.pn-h{font-size:0.9rem;font-weight:700;color:var(--testo);margin-bottom:6px}
-.pn-p{font-size:0.78rem;color:color-mix(in srgb,var(--grigio) 55%,var(--testo) 45%);line-height:1.75}
+.perche-item:first-of-type{border-top:1px solid rgba(255,107,53,0.14)}
+.pn-n{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--oro);opacity:0.55;line-height:1;font-style:italic}
+.pn-h{font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:6px}
+.pn-p{font-size:0.78rem;color:rgba(255,255,255,0.78);line-height:1.75}
 .perche-stats{display:flex;flex-direction:column;gap:16px}
 .ps-big{
-  background:#fff;border:1px solid rgba(44,74,110,0.12);
-  border-radius:12px;padding:26px 30px;transition:box-shadow 0.2s,transform 0.2s;
-  box-shadow:0 8px 32px rgba(21,36,53,0.10);
+  background:rgba(255,255,255,0.11);border:1px solid rgba(255,255,255,0.22);
+  border-left:3px solid var(--oro);border-radius:12px;padding:26px 30px;
+  transition:background 0.2s,transform 0.2s;isolation:isolate;
 }
-.ps-big:hover{box-shadow:0 12px 40px rgba(21,36,53,0.14);transform:translateY(-2px)}
+.ps-big:hover{background:rgba(255,255,255,0.16);transform:translateY(-2px)}
 .ps-n{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:700;color:var(--oro);line-height:1}
 .ps-n sup{font-size:1.5rem;vertical-align:super;margin-left:2px}
-.ps-l{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--blu3);font-weight:700;margin-top:8px}
-.ps-d{font-size:0.8rem;color:var(--grigio);margin-top:6px;line-height:1.6}
+.ps-l{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.78);font-weight:700;margin-top:8px}
+.ps-d{font-size:0.8rem;color:rgba(255,255,255,0.72);margin-top:6px;line-height:1.6}
 /* STIMA */
 #stima{background:var(--sfondo);padding:72px 44px}
 .stima-inner{max-width:1140px;margin:0 auto}
@@ -796,7 +800,7 @@ footer{
   position: absolute; inset: 0; z-index: 0;
   background-size: cover;
   background-position: center 40%;
-  filter: grayscale(40%) contrast(0.95) brightness(1.05) saturate(0.85);
+  filter: grayscale(85%) contrast(0.92) brightness(0.62);
   transform: scale(1.03);
   animation: slowZoom 22s ease-in-out infinite alternate;
 }
@@ -805,15 +809,16 @@ footer{
   position: absolute; inset: 0; z-index: 1;
   background:
     linear-gradient(to right,
-      rgba(242,240,235,0.94) 0%,
-      rgba(242,240,235,0.78) 42%,
-      rgba(242,240,235,0.35) 100%
+      rgba(10,22,40,0.94) 0%,
+      rgba(21,36,53,0.82) 42%,
+      rgba(36,54,82,0.52) 72%,
+      rgba(58,77,98,0.28) 100%
     ),
     linear-gradient(to bottom,
-      rgba(242,240,235,0.55) 0%,
-      transparent 28%,
-      transparent 72%,
-      rgba(232,227,218,0.65) 100%
+      rgba(10,22,40,0.45) 0%,
+      transparent 30%,
+      transparent 70%,
+      rgba(10,22,40,0.55) 100%
     );
 }
 .territorio-inner {
@@ -835,12 +840,13 @@ footer{
 .territorio-h2 {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2.2rem, 4vw, 3.6rem);
-  font-weight: 700; line-height: 1.1; color: var(--testo);
+  font-weight: 700; line-height: 1.1; color: #fff;
   margin-bottom: 22px;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.35);
 }
 .territorio-h2 span { color: var(--oro); font-style: italic; }
 .territorio-p {
-  font-size: 0.95rem; color: color-mix(in srgb, var(--grigio) 45%, var(--testo) 55%);
+  font-size: 0.95rem; color: rgba(255,255,255,0.82);
   line-height: 1.85; margin-bottom: 32px;
   max-width: 500px;
 }
@@ -848,19 +854,18 @@ footer{
   display: flex; flex-wrap: wrap; gap: 10px;
 }
 .t-chip {
-  background: #fff;
-  border: 1px solid rgba(44,74,110,0.14);
-  color: var(--testo2);
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: rgba(255,255,255,0.88);
   padding: 8px 16px; border-radius: 20px;
   font-size: 0.72rem; font-weight: 600;
-  box-shadow: 0 2px 10px rgba(21,36,53,0.06);
   transition: all 0.2s;
   cursor: default;
 }
 .t-chip:hover {
-  background: var(--oro-bg);
+  background: rgba(255,107,53,0.18);
   border-color: var(--oro);
-  color: var(--blu);
+  color: #fff;
 }
 .territorio-right {
   /* Lato destro — statistiche o citazione */
@@ -868,23 +873,23 @@ footer{
   align-items: flex-end;
 }
 .t-stat-box {
-  background: #fff;
-  border: 1px solid rgba(44,74,110,0.12);
+  background: rgba(255,255,255,0.11);
+  border: 1px solid rgba(255,255,255,0.22);
   border-left: 3px solid var(--oro);
   border-radius: 10px; padding: 20px 26px;
-  box-shadow: 0 8px 28px rgba(21,36,53,0.10);
   max-width: 280px; width: 100%;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition: background 0.2s, transform 0.2s;
+  isolation: isolate;
 }
-.t-stat-box:hover { box-shadow: 0 12px 36px rgba(21,36,53,0.14); transform: translateY(-2px); }
+.t-stat-box:hover { background: rgba(255,255,255,0.16); transform: translateY(-2px); }
 .t-stat-n {
   font-family: 'Cormorant Garamond', serif;
   font-size: 2.8rem; font-weight: 700; color: var(--oro);
   line-height: 1; display: flex; align-items: flex-start; gap: 2px;
 }
 .t-stat-n sup { font-size: 1.1rem; margin-top: 6px; }
-.t-stat-l { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--blu3); font-weight: 700; margin-top: 7px; }
-.t-stat-d { font-size: 0.78rem; color: var(--grigio); margin-top: 6px; line-height: 1.6; }
+.t-stat-l { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.78); font-weight: 700; margin-top: 7px; }
+.t-stat-d { font-size: 0.78rem; color: rgba(255,255,255,0.72); margin-top: 6px; line-height: 1.6; }
 .btn-territorio {
   display: inline-flex; align-items: center; gap: 9px;
   padding: 14px 28px; background: var(--oro); color: var(--testo);
@@ -1230,66 +1235,53 @@ footer{
 }
 .stima-stat { background: #eef3f8 !important; }
 
-/* Perché / testimonial / mutuo / drone — tema luminoso */
-#perche { background: #f2f0eb !important; }
-#perche .sec-h2.w { color: var(--testo) !important; }
-#perche .sec-p { color: color-mix(in srgb, var(--grigio) 50%, var(--testo) 50%) !important; }
-#perche .ps-big { background: #fff !important; }
-
-#testimonial {
-  background: #ebe6dd !important;
-  padding: 80px 28px !important;
-  isolation: isolate;
-}
-#testimonial .sec-h2.w { color: var(--testo) !important; }
-#testimonial .sec-p { color: color-mix(in srgb, var(--grigio) 50%, var(--testo) 50%) !important; }
-#testimonial .vt-intro { color: var(--grigio) !important; }
-
-#mutuo-hp {
-  background: linear-gradient(180deg, #eef3f8 0%, #f2f0eb 100%) !important;
-  isolation: isolate;
-}
-#mutuo-hp .sec-h2.w { color: var(--testo) !important; }
-#mutuo-hp .sec-p,
-#mutuo-hp p[style*="color:rgba(255,255,255"] {
-  color: color-mix(in srgb, var(--grigio) 50%, var(--testo) 50%) !important;
-}
-#mutuo-hp .mutuo-grid > div {
-  background: #fff !important;
-  border: 1px solid rgba(44, 74, 110, 0.12) !important;
-  box-shadow: 0 8px 32px rgba(21, 36, 53, 0.10) !important;
-}
-#mutuo-hp .mutuo-grid > div:hover {
-  transform: translateY(-4px) !important;
-  box-shadow: 0 14px 40px rgba(21, 36, 53, 0.14) !important;
-}
-.mutuo-card-t { color: var(--testo); }
-.mutuo-card-d { color: var(--grigio); }
-#mutuo-hp .mutuo-grid > div > div:nth-child(2),
-#mutuo-hp .mutuo-card-t { color: var(--testo) !important; }
-#mutuo-hp .mutuo-grid > div > div:nth-child(3),
-#mutuo-hp .mutuo-card-d { color: var(--grigio) !important; }
-
-#testimonial { padding: 80px 28px; }
-
+/* Fasce scure — effetto mock pagina 2 (navy + vetro + arancio) */
+#testimonial,
+#mutuo-hp,
 #drone-hp {
-  background: #f2f0eb !important;
+  background: linear-gradient(105deg, #0a1628 0%, #152435 40%, #1e3348 72%, #2d4258 100%) !important;
+  isolation: isolate;
+  z-index: 4;
+  position: relative;
+}
+#testimonial { padding: 80px 28px !important; }
+#perche .sec-h2,
+#testimonial .sec-h2,
+#mutuo-hp .sec-h2,
+#drone-hp .sec-h2 { color: #fff !important; }
+#perche .sec-p,
+#testimonial .sec-p,
+#mutuo-hp .sec-p,
+#drone-hp .sec-p { color: rgba(255,255,255,0.80) !important; }
+#testimonial .vt-intro { color: rgba(255,255,255,0.72) !important; }
+#perche .ps-big,
+#territorio .t-stat-box {
+  background: rgba(255,255,255,0.11) !important;
+  border-color: rgba(255,255,255,0.22) !important;
+}
+#mutuo-hp .mutuo-card {
+  background: rgba(255,255,255,0.11) !important;
+  border: 1px solid rgba(255,255,255,0.22) !important;
   isolation: isolate;
 }
-#drone-hp .sec-h2.w { color: var(--testo) !important; }
-#drone-hp .sec-p { color: color-mix(in srgb, var(--grigio) 45%, var(--testo) 55%) !important; }
-#drone-hp p[style*="color:rgba(255,255,255"] { color: var(--grigio) !important; }
-#drone-hp a[style*="border:1px solid rgba(255,255,255"] {
-  border-color: rgba(44, 74, 110, 0.22) !important;
-  color: var(--testo) !important;
-  background: #fff !important;
+#mutuo-hp .mutuo-card:hover {
+  background: rgba(255,255,255,0.16) !important;
+  transform: translateY(-4px);
+}
+.mutuo-card-t { color: #fff !important; }
+.mutuo-card-d { color: rgba(255,255,255,0.75) !important; }
+#mutuo-hp p[style*="letter-spacing"] { color: rgba(255,255,255,0.65) !important; }
+#drone-hp p[style*="font-size:0.68rem"] { color: rgba(255,255,255,0.62) !important; }
+#drone-hp .btn-outline-light {
+  border-color: rgba(255,255,255,0.28) !important;
+  color: #fff !important;
+  background: rgba(255,255,255,0.08) !important;
 }
 #drone-hp .rv.sr.d2 {
-  border-color: rgba(44, 74, 110, 0.12) !important;
-  box-shadow: 0 12px 40px rgba(21, 36, 53, 0.12) !important;
+  border-color: rgba(255,255,255,0.18) !important;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.28) !important;
 }
-
-#territorio { isolation: isolate; z-index: 4; }
+#territorio { isolation: isolate; z-index: 4; position: relative; }
 
 /* Footer — leggibilità massima (sopra watermark RI) */
 body.rig-sugar-paper > footer,
