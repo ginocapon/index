@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="css/fonts.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/nav-mobile.css?v=7" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="css/below-fold.css?v=22" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/below-fold.css?v=23" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/prop-photo-carousel.css?v=2">
 <link rel="stylesheet" href="css/home-enhance.css?v=12" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/modal-incarico-home.css?v=2" media="all">
@@ -1424,17 +1424,6 @@ button svg, a.btn-p svg, a.btn-g svg {
         </div>
       </div>
     </div>
-    <!-- Visite virtuali — ultimi immobili con tour (caricamento automatico da Supabase) -->
-    <div class="rv sr vt-section">
-      <div style="text-align:center;margin-bottom:28px">
-        <div style="display:inline-flex;align-items:center;gap:8px;font-size:0.62rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--oro)">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-          Visite virtuali 360°
-        </div>
-        <p class="vt-intro">Gli ultimi immobili inseriti con tour fotografato da noi: scorri le stanze come in visita, prima ancora di uscire di casa.</p>
-      </div>
-      <div id="vtGridHome" class="vt-grid sr-stagger" aria-live="polite"></div>
-    </div>
     <div class="rv sr" style="text-align:center;margin-top:36px">
       <a href="https://maps.app.goo.gl/xuCiRGDCSKskpTSf6?g_st=ic" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;font-size:0.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--oro);border-bottom:1px solid rgba(255,107,53,0.3);padding-bottom:4px;transition:all 0.2s">Leggi tutte le 127 recensioni su Google <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></a>
     </div>
@@ -1875,7 +1864,7 @@ document.addEventListener('keydown', function(e) {
 (function(){
   function loadGA(){
     var s=document.createElement('script');
-    s.src='js/ga-consent.js?v=17';
+    s.src='js/ga-consent.js?v=18';
     document.head.appendChild(s);
   }
   if('requestIdleCallback' in window){

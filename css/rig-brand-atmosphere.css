@@ -278,12 +278,27 @@ body.rig-sugar-paper #drone-hp {
 }
 body.rig-sugar-paper #territorio { isolation: isolate; z-index: 4; }
 body.rig-sugar-paper #perche .ps-big,
-body.rig-sugar-paper #territorio .t-stat-box,
-body.rig-sugar-paper #testimonial .rec-item,
-body.rig-sugar-paper #testimonial .rec-video-card,
-body.rig-sugar-paper #testimonial .rec-marquee-wrap {
+body.rig-sugar-paper #territorio .t-stat-box {
   background: rgba(255, 255, 255, 0.11) !important;
   border-color: rgba(255, 255, 255, 0.22) !important;
+}
+body.rig-sugar-paper #testimonial .rec-block {
+  background:
+    radial-gradient(ellipse 90% 75% at 28% 42%, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.06) 52%, transparent 100%),
+    linear-gradient(155deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.05) 100%) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+body.rig-sugar-paper #testimonial .rec-video-card {
+  background: rgba(255, 255, 255, 0.22) !important;
+  border-color: rgba(255, 255, 255, 0.34) !important;
+}
+body.rig-sugar-paper #testimonial .rec-marquee-wrap {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.26) !important;
+}
+body.rig-sugar-paper #testimonial .rec-item {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.28) !important;
 }
 
 body.rig-sugar-paper :is(
