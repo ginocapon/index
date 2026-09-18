@@ -263,43 +263,14 @@ body.rig-sugar-paper .hero-stats-row {
 }
 
 /* Sezioni scure homepage: ripristina sfondi (mai unset) */
-body.rig-sugar-paper #perche {
-  background: var(--testo, #152435) !important;
+/* Sezioni homepage: tema luminoso (below-fold.css) */
+body.rig-sugar-paper #perche,
+body.rig-sugar-paper #testimonial,
+body.rig-sugar-paper #mutuo-hp,
+body.rig-sugar-paper #drone-hp,
+body.rig-sugar-paper #territorio {
   isolation: isolate;
-}
-
-body.rig-sugar-paper #testimonial {
-  background: var(--testo, #152435) !important;
-  isolation: isolate;
-}
-
-body.rig-sugar-paper #mutuo-hp {
-  background: linear-gradient(135deg, #0a1628 0%, #1a2d4a 50%, #0d2137 100%) !important;
-  isolation: isolate;
-}
-
-body.rig-sugar-paper #drone-hp {
-  background: linear-gradient(135deg, #0a1628 0%, #152435 55%, #1a2d4a 100%) !important;
-  isolation: isolate;
-}
-
-body.rig-sugar-paper #perche .perche-item {
-  background: transparent !important;
-}
-
-body.rig-sugar-paper #perche .ps-big {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border-color: rgba(255, 107, 53, 0.25) !important;
-}
-
-body.rig-sugar-paper #territorio .t-stat-box {
-  background: rgba(255, 255, 255, 0.1) !important;
-  border-color: rgba(255, 255, 255, 0.18) !important;
-}
-
-body.rig-sugar-paper #testimonial .rec-item {
-  background: rgba(255, 255, 255, 0.06) !important;
-  border-color: rgba(255, 255, 255, 0.12) !important;
+  z-index: 4;
 }
 
 body.rig-sugar-paper :is(
