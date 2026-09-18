@@ -262,6 +262,133 @@ body.rig-sugar-paper .hero-stats-row {
   box-shadow: 0 -6px 28px rgba(21, 36, 53, 0.10);
 }
 
+/* Pagine principali: testo sempre sopra il watermark, che resta visibile nei vuoti. */
+body.rig-sugar-paper:is(
+  .homepage,
+  .page-hero-chi-siamo,
+  .page-hero-immobili,
+  .page-hero-servizi,
+  .page-hero-blog,
+  .page-hero-faq
+) {
+  --grigio: #536579;
+}
+
+body.rig-sugar-paper:is(
+  .page-hero-chi-siamo,
+  .page-hero-immobili,
+  .page-hero-servizi,
+  .page-hero-blog,
+  .page-hero-faq
+) > main {
+  z-index: auto;
+}
+
+body.rig-sugar-paper:is(
+  .page-hero-chi-siamo,
+  .page-hero-immobili,
+  .page-hero-servizi,
+  .page-hero-blog,
+  .page-hero-faq
+) #main-content > :is(
+  section,
+  .hero,
+  .hero-search,
+  .cats,
+  .map-toggle-bar,
+  .map-panel,
+  .page,
+  .cta-banner-search
+) {
+  position: relative;
+  z-index: 4;
+  isolation: isolate;
+}
+
+/* Superfici chiare quasi opache: il monogramma non attraversa più i testi. */
+body.rig-sugar-paper.page-hero-chi-siamo :is(.team, .cta-s),
+body.rig-sugar-paper.page-hero-servizi #main-content > .section:not([style]),
+body.rig-sugar-paper.page-hero-servizi .why,
+body.rig-sugar-paper.page-hero-immobili #main-content > .page,
+body.rig-sugar-paper.page-hero-blog #main-content > .page,
+body.rig-sugar-paper.page-hero-faq #main-content > .page {
+  background: rgba(247, 245, 241, 0.98) !important;
+}
+
+body.rig-sugar-paper.page-hero-chi-siamo :is(.timeline, .values),
+body.rig-sugar-paper.page-hero-servizi :is(.process, #main-content > .section[style]),
+body.rig-sugar-paper.page-hero-blog #main-content > .cats,
+body.rig-sugar-paper.page-hero-faq #main-content > .cats {
+  background: rgba(236, 231, 223, 0.98) !important;
+}
+
+body.rig-sugar-paper:is(
+  .page-hero-chi-siamo,
+  .page-hero-servizi,
+  .page-hero-blog,
+  .page-hero-faq
+) :is(
+  .tcard,
+  .vcard,
+  .scard,
+  .step,
+  .wi,
+  .art-big,
+  .art-sm,
+  .acard,
+  .faq-item,
+  .sb,
+  .sb-box
+) {
+  background-color: #fff !important;
+  border-color: rgba(44, 74, 110, 0.18) !important;
+}
+
+body.rig-sugar-paper.page-hero-immobili :is(
+  .filters-active-bar,
+  .alert-immobili,
+  .card
+) {
+  background-color: #fff !important;
+  border-color: rgba(44, 74, 110, 0.18) !important;
+}
+
+/* Testi secondari su fondi scuri: opacità minima leggibile. */
+body.rig-sugar-paper:is(
+  .page-hero-chi-siamo,
+  .page-hero-servizi,
+  .page-hero-blog,
+  .page-hero-faq
+) .hero :is(p, .last-update),
+body.rig-sugar-paper.page-hero-servizi :is(.hs-lbl, .why-author, .cta-inner p),
+body.rig-sugar-paper.page-hero-chi-siamo :is(.nbox-lbl, .hero-inner > div:last-child, .hero-inner > div:last-child > div),
+body.rig-sugar-paper.page-hero-blog :is(.search-wrap label, .search-wrap svg),
+body.rig-sugar-paper.page-hero-faq .cta-box p {
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+
+body.rig-sugar-paper.page-hero-blog .search-wrap input::placeholder {
+  color: rgba(255, 255, 255, 0.72) !important;
+}
+
+@media (max-width: 900px) {
+  body.rig-sugar-paper.page-hero-faq .hero {
+    background-image:
+      linear-gradient(135deg, rgba(10, 15, 28, 0.97) 0%, rgba(21, 36, 53, 0.94) 52%, rgba(44, 74, 110, 0.90) 100%),
+      url("../img/foto-servizi/gestione-preliminari-padova.webp") !important;
+  }
+}
+
+body.rig-sugar-paper:is(
+  .page-hero-chi-siamo,
+  .page-hero-immobili,
+  .page-hero-servizi,
+  .page-hero-blog,
+  .page-hero-faq
+) footer :is(.finfo, .fh, .fcol a, .fbot, .footer-info, .footer-col a, .footer-bottom) {
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+
 /* Sezioni scure homepage: ripristina sfondi (mai unset) */
 /* Fasce scure homepage — sfondo opaco (effetto pag. 2, no watermark) */
 body.rig-sugar-paper #perche {
