@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-11",
+  "updated": "2026-09-18",
   "policy": "Max 1 blog AGGIUNGERE/settimana. PRIORITÀ STRATEGICA: acquisizione proprietari (skill-acquisizione-proprietari.md). Comando editoriale: skill-editoriale-visivo.md + equilibrio 4 aree owner/acquirente. Gate: audit_editorial_acquisition + audit_editorial_research + audit_editorial_continuity + audit_blog_visuals + audit_editorial_visual_variety + audit_blog_publishability. Memorie: editorial-acquisition-balance.json + editorial-memory.json + editorial-visual-memory.json.",
   "workflow_skill": "TEST-SKILL/skill-editorial-queue.md",
   "editorial_command": "TEST-SKILL/skill-editoriale-visivo.md",
@@ -505,19 +505,35 @@
     },
     {
       "id": "eq-sep18-001",
-      "status": "scheduled",
+      "status": "published",
       "priority": 3,
       "target_week": "2026-09-18",
+      "published_date": "2026-09-18",
       "slug": "blog-gestione-locazione-delegata-padova-2026",
       "kw_primaria": "gestione locazione delegata padova",
       "intent": "conversione-proprietari-gestione",
       "title": "Gestione locazione delegata Padova: cosa include e quando conviene",
       "cluster": "gestione-locazione",
       "acquisition_priority": true,
+      "primary_audience": "proprietario_gestione",
+      "owner_problem": "Voglio affittare ma non ho tempo per inquilini, manutenzione e morosità — cosa include la delega?",
+      "search_intent": "Servizio gestione locazione Padova — scope, costi in sede, quando conviene",
+      "concrete_value": "Elenco servizi, confronto diretta/delegata, mandato, morosità, rendicontazione, CTA servizio-gestione",
+      "acquisition_contribution": "direct",
+      "traffic_type": "strategic",
+      "substantive_area": "AGENZIA_SERVIZI",
+      "main_question": "Cosa include la gestione locazione delegata a Padova e quando conviene al proprietario?",
+      "reader_novelty": "Pillar dedicato al servizio gestione — oltre al capitolo gestione nella guida affitto proprietario",
+      "structure_type": "CONFRONTO",
+      "geo_focus": "Padova e provincia",
       "owner_relevance": true,
       "editorial_type": "evergreen",
-      "substantive_area": "AGENZIA_SERVIZI",
-      "geo_focus": "Padova e provincia"
+      "different_from": "blog-affittare-casa-padova-proprietario-2026,servizio-gestione,blog-rendimento-affitto-padova",
+      "faq_candidates": "Cosa include la gestione delegata? Differenza locazione e gestione? Quanto costa (in sede)? Quando conviene delegare? Subentro su contratto esistente? Come gestite morosità e manutenzione?",
+      "research_refs": [
+        "https://www.agenziaentrate.gov.it/portale/schede/contratti-di-locazione/registro-contratti-di-locazione",
+        "https://www.agenziaentrate.gov.it/portale/schede/fabbricatiterreni/omi/banche-dati/quotazioni-immobiliari"
+      ]
     },
     {
       "id": "eq-sep25-001",

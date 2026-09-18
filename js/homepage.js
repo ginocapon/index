@@ -788,6 +788,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'gestione locazione delegata padova 2026': { img: 'img/blog/blog-gestione-locazione-delegata-padova-2026-hero.webp', url: 'blog-gestione-locazione-delegata-padova-2026' },
     'case prefabbricate: futuro secondo musk? guida 2026': { img: 'img/blog/blog-case-prefabbricate-futuro-elon-musk-2026-hero.webp', url: 'blog-case-prefabbricate-futuro-elon-musk-2026' },
     'zona imma limena: pochi immobili, domanda alta 2027': { img: 'img/blog/blog-zona-imma-limena-domanda-offerta-2027-hero.webp', url: 'blog-zona-imma-limena-domanda-offerta-2027' },
     'mutuo under 36: tassi in aumento, fisso o variabile 2027': { img: 'img/blog/blog-mutuo-under-36-tassi-fisso-variabile-2027-hero.webp', url: 'blog-mutuo-under-36-tassi-fisso-variabile-2027' },
@@ -938,6 +939,13 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    {
+      "titolo": "Gestione locazione delegata Padova: cosa include e quando conviene",
+      "categoria": "Guida proprietari",
+      "data": "2026-09-18",
+      "immagine_copertina": "img/blog/blog-gestione-locazione-delegata-padova-2026-hero.webp",
+      "url_statico": "blog-gestione-locazione-delegata-padova-2026"
+    },
     {
       "titolo": "Case prefabbricate: futuro secondo Musk? Guida 2026",
       "categoria": "Mercato e tendenze",

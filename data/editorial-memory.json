@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-04",
+  "updated": "2026-09-18",
   "skill_ref": "TEST-SKILL/skill-editoriale-visivo.md §16-TER",
   "window_size": 20,
   "saturation_window": 8,
@@ -21,16 +21,71 @@
   ],
   "saturation_current": {},
   "saturation_counts_last_8": {
+    "AGENZIA_SERVIZI": 1,
+    "ALTRO": 1,
+    "LOCALE_LIMENA": 1,
+    "MUTUI_TASSI": 1,
+    "VENDITA_PROCESSO": 1,
     "AFFITTI_CANONI": 1,
     "INVESTIMENTO": 1,
-    "VENDITA_VALUTAZIONE": 1,
-    "ACQUISTO_PRIMO_CASA": 1,
-    "VENDITA_PROCESSO": 1,
-    "NORMATIVA_FISCALE": 1,
-    "GUIDA_LEXICO": 1,
-    "MUTUI_TASSI": 1
+    "VENDITA_VALUTAZIONE": 1
   },
   "recent_articles": [
+    {
+      "slug": "blog-gestione-locazione-delegata-padova-2026",
+      "title": "Gestione locazione delegata Padova: cosa include e quando conviene",
+      "published_date": "2026-09-18",
+      "substantive_area": "AGENZIA_SERVIZI",
+      "secondary_areas": [],
+      "main_question": "Quanto costa affittare e come funzionano i canoni?",
+      "geo": "Padova/Veneto",
+      "editorial_type": "evergreen"
+    },
+    {
+      "slug": "blog-case-prefabbricate-futuro-elon-musk-2026",
+      "title": "Case prefabbricate: futuro secondo Musk? Guida 2026",
+      "published_date": "2026-09-14",
+      "substantive_area": "ALTRO",
+      "secondary_areas": [],
+      "main_question": "Case prefabbricate: futuro secondo Musk? Guida 2026",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    },
+    {
+      "slug": "blog-zona-imma-limena-domanda-offerta-2027",
+      "title": "Zona Imma Limena: pochi immobili, domanda alta 2027",
+      "published_date": "2026-09-12",
+      "substantive_area": "LOCALE_LIMENA",
+      "secondary_areas": [],
+      "main_question": "Cosa sapere su Limena/cintura?",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    },
+    {
+      "slug": "blog-mutuo-under-36-tassi-fisso-variabile-2027",
+      "title": "Mutuo under 36: tassi in aumento, fisso o variabile 2027",
+      "published_date": "2026-09-12",
+      "substantive_area": "MUTUI_TASSI",
+      "secondary_areas": [
+        "ACQUISTO_PRIMO_CASA"
+      ],
+      "main_question": "Quali tassi e condizioni di mutuo?",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    },
+    {
+      "slug": "blog-vendere-casa-limena-proprietario-2026",
+      "title": "Vendere casa a Limena nel 2026: percorso per il proprietario",
+      "published_date": "2026-09-11",
+      "substantive_area": "VENDITA_PROCESSO",
+      "secondary_areas": [
+        "VALORE_MERCATO",
+        "NORMATIVA_FISCALE"
+      ],
+      "main_question": "Come vendere casa e quali passi?",
+      "geo": "Padova/Veneto",
+      "editorial_type": "evergreen"
+    },
     {
       "slug": "blog-affittare-casa-padova-proprietario-2026",
       "title": "Affittare casa a Padova 2026: guida proprietario",
@@ -206,63 +261,6 @@
         "LOCALE_LIMENA"
       ],
       "main_question": "Quali tassi e condizioni di mutuo?",
-      "geo": "Padova/Veneto",
-      "editorial_type": ""
-    },
-    {
-      "slug": "blog-case-vendita-limena-leggere-annunci-2026",
-      "title": "Case vendita Limena: Leggere annunci 2026",
-      "published_date": "2026-08-05",
-      "substantive_area": "LOCALE_LIMENA",
-      "secondary_areas": [],
-      "main_question": "Cosa sapere su Limena/cintura?",
-      "geo": "Padova/Veneto",
-      "editorial_type": ""
-    },
-    {
-      "slug": "blog-appartamento-affitto-limena-contratto-2026",
-      "title": "Appartamento affitto Limena: Contratto 2026",
-      "published_date": "2026-08-05",
-      "substantive_area": "AFFITTI_CANONI",
-      "secondary_areas": [
-        "LOCALE_LIMENA"
-      ],
-      "main_question": "Quanto costa affittare e come funzionano i canoni?",
-      "geo": "Padova/Veneto",
-      "editorial_type": ""
-    },
-    {
-      "slug": "blog-bilocale-trilocale-limena-scelta-2026",
-      "title": "Bilocale trilocale Limena: Scelta 2026",
-      "published_date": "2026-08-05",
-      "substantive_area": "LOCALE_LIMENA",
-      "secondary_areas": [],
-      "main_question": "Cosa sapere su Limena/cintura?",
-      "geo": "Padova/Veneto",
-      "editorial_type": ""
-    },
-    {
-      "slug": "blog-gruppo-immobiliare-righetto-limena-2026",
-      "title": "Gruppo Immobiliare Righetto Limena 2026",
-      "published_date": "2026-08-05",
-      "substantive_area": "AFFITTI_CANONI",
-      "secondary_areas": [
-        "AGENZIA_SERVIZI",
-        "LOCALE_LIMENA"
-      ],
-      "main_question": "Quanto costa affittare e come funzionano i canoni?",
-      "geo": "Padova/Veneto",
-      "editorial_type": ""
-    },
-    {
-      "slug": "blog-domanda-residenziale-supera-offerta-2026-padova",
-      "title": "Domanda residenziale supera offerta Q1 2026: Padova",
-      "published_date": "2026-07-28",
-      "substantive_area": "VALORE_MERCATO",
-      "secondary_areas": [
-        "LOCALE_LIMENA"
-      ],
-      "main_question": "Quanto vale / come si muove il mercato?",
       "geo": "Padova/Veneto",
       "editorial_type": ""
     }

@@ -1,18 +1,18 @@
 {
-  "generated": "2026-09-04",
-  "count": 135,
+  "generated": "2026-09-18",
+  "count": 140,
   "risks": [
     "Intent simile `territorio-limena`: blog-appartamento-limena-guida-acquisto-2026, blog-limena-vicino-padova-comprare-2026, blog-affitti-limena-2026, blog-appartamento-affitto-limena-contratto-2026…",
     "Intent simile `breakdown-costi`: blog-costi-proprieta-acquisto-possesso-vendita-padova-2026, blog-costi-costruzione-istat-padova-2026",
     "Intent simile `acquisto-e-prima-casa`: blog-prima-casa-under-36-consap-padova-2026, blog-proposta-acquisto-negoziazione-padova-2026, blog-visura-catastale-acquisto-casa-padova-2026",
     "Intent simile `fisco-normativa`: blog-quattro-imposte-rogitio-prima-casa-padova-2026, blog-bonus-mobili-2026-massimizzare-ristrutturazioni, blog-imposte-registro-catasto-compravendita-padova-2026, blog-tasse-vendita-casa",
     "Intent simile `dato-omi`: blog-spese-condominiali-acquisto-padova-2026, blog-mercato-sacrocuore-padova-omi-2026",
-    "Intent simile `affitti-cluster`: blog-affitto-transitorio-padova-durata-2026, blog-registro-contratti-affitto-padova-2026, blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026, blog-squilibrio-domanda-offerta-affitti-padova",
+    "Intent simile `affitti-cluster`: blog-affitto-transitorio-padova-durata-2026, blog-gestione-locazione-delegata-padova-2026, blog-registro-contratti-affitto-padova-2026, blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026…",
     "Intent simile `guida-pillar`: blog-caro-affitti-padova-under-35-guida-2026, blog-canone-concordato-padova-guida-2026, blog-valutazione-casa-padova-guida-2026",
-    "Intent simile `altri-/-trasversali`: blog-affittare-casa-padova-proprietario-2026, blog-domanda-residenziale-supera-offerta-2026-padova, blog-gergo-immobiliare-padova-spiegato-2026, blog-italy-rental-market-positive-start-january-2026…",
+    "Intent simile `altri-/-trasversali`: blog-affittare-casa-padova-proprietario-2026, blog-case-prefabbricate-futuro-elon-musk-2026, blog-domanda-residenziale-supera-offerta-2026-padova, blog-gergo-immobiliare-padova-spiegato-2026…",
     "Intent simile `analisi-scenari`: blog-bolla-immobiliare-padova-2026, blog-previsioni-immobiliari-scenari-geopolitica-2026, blog-prospettive-mercato-residenziale-italia-2026",
     "Intent simile `territorio-padova`: blog-prezzi-case-padova-zona-2026, blog-scuole-istruzione-padova, blog-servizi-infrastrutture-padova, blog-trasporti-mobilita-padova",
-    "Intent simile `mutui-cluster`: blog-mutui-selettivi-banche-padova-2026, blog-mutuo-fisso-variabile-padova-2026, blog-mutuo-prima-casa-padova, blog-tassi-euribor-mutui-padova-agosto-2026…",
+    "Intent simile `mutui-cluster`: blog-mutui-selettivi-banche-padova-2026, blog-mutuo-fisso-variabile-padova-2026, blog-mutuo-prima-casa-padova, blog-mutuo-under-36-tassi-fisso-variabile-2027…",
     "Intent simile `documenti-operativi`: blog-mutuo-documenti-tempi-prima-casa-padova-2026, blog-documenti-compravendita-rogito-padova-2026, blog-documenti-vendita-casa",
     "Intent simile `vita-agenzia-brand`: blog-ca-marcello-mestre, blog-impegno-quotidiano-agenzia-immobiliare",
     "Token slug sovrausato `mutui` (8 articoli) — variare radice nei prossimi batch",
@@ -354,6 +354,17 @@
       "h1": "Emergenza Casa Padova 2026: Dati, Cause e Possibili Soluzioni"
     },
     {
+      "slug": "blog-gestione-locazione-delegata-padova-2026",
+      "file": "blog-gestione-locazione-delegata-padova-2026.html",
+      "title": "Gestione locazione delegata Padova 2026",
+      "categoria": "",
+      "cluster": "Affitti e locazioni",
+      "kw_primaria": "gestione-locazione-delegata",
+      "angolo": "Cluster affitti — verificare matrice §4 prima di pubblicare",
+      "intent": "affitti-cluster",
+      "h1": "Gestione locazione delegata a Padova"
+    },
+    {
       "slug": "blog-housing-lavoratori-veneto-edilcassa-2026",
       "file": "blog-housing-lavoratori-veneto-edilcassa-2026.html",
       "title": "Housing lavoratori Veneto 2026: Edilcassa fondo 250.000€",
@@ -528,6 +539,17 @@
       "angolo": "Guida pillar evergreen — non evento datato",
       "intent": "guida-pillar",
       "h1": "Canone concordato Padova 2026: guida pratica"
+    },
+    {
+      "slug": "blog-case-prefabbricate-futuro-elon-musk-2026",
+      "file": "blog-case-prefabbricate-futuro-elon-musk-2026.html",
+      "title": "Case prefabbricate: futuro secondo Musk? Guida 2026",
+      "categoria": "",
+      "cluster": "Altri / trasversali",
+      "kw_primaria": "case-prefabbricate-futuro-elon-musk",
+      "angolo": "Angolo case-prefabbricate-futuro-elon-musk — intent dedicato, verificare matrice §4",
+      "intent": "altri-/-trasversali",
+      "h1": "Case prefabbricate: il futuro secondo Musk?"
     },
     {
       "slug": "blog-domanda-residenziale-supera-offerta-2026-padova",
@@ -1091,6 +1113,17 @@
       "h1": "Guida al Mutuo Prima Casa a Padova nel 2026: Tassi, Requisiti e Agevolazioni"
     },
     {
+      "slug": "blog-mutuo-under-36-tassi-fisso-variabile-2027",
+      "file": "blog-mutuo-under-36-tassi-fisso-variabile-2027.html",
+      "title": "Mutuo under 36: tassi in aumento, fisso o variabile 2027",
+      "categoria": "",
+      "cluster": "Mutui e credito",
+      "kw_primaria": "mutuo-under-tassi-fisso-variabile",
+      "angolo": "Cluster mutui — distinguere da pillar e eventi BCE",
+      "intent": "mutui-cluster",
+      "h1": "Mutuo under 36 nel 2027: tassi, fisso o variabile"
+    },
+    {
       "slug": "blog-surroga-mutuo-padova-2026",
       "file": "blog-surroga-mutuo-padova-2026.html",
       "title": "Surroga Mutuo 2026: Quando Conviene e Come Risparmiare a Padova",
@@ -1289,6 +1322,17 @@
       "h1": "Guida Trasporti Padova"
     },
     {
+      "slug": "blog-zona-imma-limena-domanda-offerta-2027",
+      "file": "blog-zona-imma-limena-domanda-offerta-2027.html",
+      "title": "Zona Imma Limena: pochi immobili, domanda alta 2027",
+      "categoria": "",
+      "cluster": "Territorio e zone",
+      "kw_primaria": "zona-imma-limena-domanda-offerta",
+      "angolo": "Focus Limena/cintura — non generico Padova centro",
+      "intent": "territorio-limena",
+      "h1": "Zona Imma Limena: pochi immobili, domanda alta"
+    },
+    {
       "slug": "blog-casa-vendibile-5-anni-case-green-padova-2026",
       "file": "blog-casa-vendibile-5-anni-case-green-padova-2026.html",
       "title": "Casa vendibile tra 5 anni a Padova: APE e posizione",
@@ -1419,6 +1463,17 @@
       "angolo": "Tempi medi vendita reali Padova — non costi vendita",
       "intent": "vendita-tempi",
       "h1": "Tempi Vendita Casa a Padova nel 2026: Quanto Ci Vuole Davvero?"
+    },
+    {
+      "slug": "blog-vendere-casa-limena-proprietario-2026",
+      "file": "blog-vendere-casa-limena-proprietario-2026.html",
+      "title": "Vendere casa Limena 2026: guida proprietario",
+      "categoria": "",
+      "cluster": "Vendita",
+      "kw_primaria": "vendere-casa-limena-proprietario",
+      "angolo": "Focus Limena/cintura — non generico Padova centro",
+      "intent": "territorio-limena",
+      "h1": "Vendere casa a Limena: guida 2026"
     },
     {
       "slug": "blog-vendere-o-affittare-padova-2026",
