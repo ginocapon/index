@@ -2,21 +2,27 @@
 (function () {
   'use strict';
 
-  if (document.documentElement.dataset.rigBrandAtmosphere === '1') return;
-  if (/admin\.html$/i.test(location.pathname || '')) return;
+  function initBrandAtmosphere() {
+    if (document.documentElement.dataset.rigBrandAtmosphere === '1') return;
+    if (/admin\.html$/i.test(location.pathname || '')) return;
+    if (!document.body) {
+      document.addEventListener('DOMContentLoaded', initBrandAtmosphere, { once: true });
+      return;
+    }
 
-  document.documentElement.dataset.rigBrandAtmosphere = '1';
-  document.body.classList.add('rig-sugar-paper');
+    document.documentElement.dataset.rigBrandAtmosphere = '1';
+    document.body.classList.add('rig-sugar-paper');
 
-  if (!document.querySelector('.rig-brand-watermark')) {
-    var wrap = document.createElement('div');
-    wrap.className = 'rig-brand-watermark';
-    wrap.setAttribute('aria-hidden', 'true');
-    wrap.innerHTML =
-      '<div class="rig-brand-watermark-item rig-brand-watermark-a">' + monogramSvg() + '</div>' +
-      '<div class="rig-brand-watermark-item rig-brand-watermark-b">' + monogramSvg() + '</div>' +
-      '<div class="rig-brand-watermark-item rig-brand-watermark-c">' + monogramSvg() + '</div>';
-    document.body.insertBefore(wrap, document.body.firstChild);
+    if (!document.querySelector('.rig-brand-watermark')) {
+      var wrap = document.createElement('div');
+      wrap.className = 'rig-brand-watermark';
+      wrap.setAttribute('aria-hidden', 'true');
+      wrap.innerHTML =
+        '<div class="rig-brand-watermark-item rig-brand-watermark-a">' + monogramSvg() + '</div>' +
+        '<div class="rig-brand-watermark-item rig-brand-watermark-b">' + monogramSvg() + '</div>' +
+        '<div class="rig-brand-watermark-item rig-brand-watermark-c">' + monogramSvg() + '</div>';
+      document.body.insertBefore(wrap, document.body.firstChild);
+    }
   }
 
   function monogramSvg() {
@@ -31,4 +37,6 @@
       '</svg>'
     );
   }
+
+  initBrandAtmosphere();
 })();

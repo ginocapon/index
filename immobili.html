@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <!-- Google tag (gtag.js) + Consent Mode -->
-<script src="js/ga-consent.js?v=12"></script>  <meta charset="UTF-8">
+<script src="js/ga-consent.js?v=21"></script>  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#2C4A6E">
   <title>Immobili in vendita e affitto — Righetto Immobiliare Padova</title>
@@ -23,7 +23,7 @@
 <meta name="twitter:title" content="Immobili in Vendita e Affitto — Padova e Provincia">
 <meta name="twitter:description" content="Ville, appartamenti, uffici in vendita e affitto a Padova. Filtri avanzati, virtual tour 360°.">
 <meta name="twitter:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
-<meta name="description" content="Scopri gli immobili di Righetto Immobiliare: ville, appartamenti, uffici in vendita e affitto a Padova e provincia. Filtri avanzati, virtual tour 360° e video.">
+<meta name="description" content="Scopri ville, appartamenti e uffici in vendita o affitto a Padova e provincia. Filtri avanzati, fotografie, video e virtual tour 360°.">
     <link rel="stylesheet" href="css/fonts.css?v=3">
   <link rel="stylesheet" href="css/nav-mobile.css?v=7">
   <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
@@ -554,7 +554,7 @@
 ]}
 </script>
 </head>
-<body>
+<body class="page-hero-immobili">
 <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
 <!-- HEADER -->
@@ -1350,7 +1350,7 @@
       thumbs.innerHTML = items.map(function(i){
         const src = (i.foto && i.foto[0]) || i.fotoPrincipale || '';
         const slug = generatePropertySlug(i);
-        return '<div class="cmp-thumb">' + (src ? '<img src="'+esc(src)+'" alt="'+esc(i.titolo)+'" loading="lazy">' : '') +
+        return '<div class="cmp-thumb">' + (src ? '<img src="'+esc(src)+'" alt="'+esc(i.titolo)+'" width="54" height="42" loading="lazy">' : '') +
           '<button class="cmp-thumb-x" onclick="RigCompare.remove(\''+slug+'\')" aria-label="Rimuovi dal confronto">&times;</button></div>';
       }).join('');
       txt.textContent = items.length + ' di ' + MAX + ' selezionati';
@@ -1391,7 +1391,7 @@
       html += '<tr><th>Immobile</th>' + items.map(function(i){
         const src = (i.foto && i.foto[0]) || i.fotoPrincipale || '';
         const slug = generatePropertySlug(i);
-        return '<td>' + (src ? '<img class="cmp-col-img" src="'+esc(src)+'" alt="'+esc(i.titolo)+'" loading="lazy">' : '<div class="cmp-col-img"></div>') +
+        return '<td>' + (src ? '<img class="cmp-col-img" src="'+esc(src)+'" alt="'+esc(i.titolo)+'" width="240" height="96" loading="lazy">' : '<div class="cmp-col-img"></div>') +
           '<div class="cmp-col-title">'+esc(i.titolo)+'</div>' +
           (i.rif ? '<div style="font-size:.7rem;color:var(--grigio)">Rif. '+esc(i.rif)+'</div>' : '') +
           '<a class="cmp-see" href="immobile?s='+encodeURIComponent(slug)+'">Vedi scheda</a>' +
