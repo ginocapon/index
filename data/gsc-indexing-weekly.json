@@ -1,8 +1,8 @@
 {
-  "updated": "2026-09-11",
-  "source": "GSC manuale + tool backlink (screenshot 03/08/2026) — aggiornare ogni venerdì",
-  "note": "Sitemap principale OK (~175 URL). Rimuovere da GSC le 9 URL singole inviate per errore come sitemap. Canonical sempre senza doppio slash (es. /servizio-vendita non //servizio-vendita). Follow-up indicizzazione servizio-vendita: 3–7 gg dopo richiesta.",
-  "sitemap_urls": 175,
+  "updated": "2026-09-18",
+  "source": "GSC manuale + probe live post-deploy — aggiornare ogni venerdì",
+  "note": "Sitemap OK (203 URL). Deploy 18/09: blog-gestione-locazione-delegata-padova-2026 live 200 — richiedere indicizzazione GSC. Probe 569 URL: 0 issue. Canonical senza www, senza doppio slash.",
+  "sitemap_urls": 203,
   "sitemap_main": {
     "url": "https://righettoimmobiliare.it/sitemap.xml",
     "status": "Riuscita",
@@ -50,6 +50,26 @@
     "prestazioni_affitti_limena": true
   },
   "inspection_log": [
+    {
+      "date": "2026-09-18",
+      "checked_by": "agente post-deploy",
+      "batch": "batch-09-18-gestione-locazione-owner",
+      "results": [
+        {"url": "https://righettoimmobiliare.it/blog-gestione-locazione-delegata-padova-2026", "status": "live_200", "action": "richiedi_indicizzazione_gsc", "note": "Nuovo pillar eq-sep18-001 — probe HEAD 200"},
+        {"url": "https://righettoimmobiliare.it/blog-vendere-casa-limena-proprietario-2026", "status": "live_200", "action": "spot_check"},
+        {"url": "https://righettoimmobiliare.it/blog-affittare-casa-padova-proprietario-2026", "status": "live_200", "action": "spot_check"},
+        {"url": "https://righettoimmobiliare.it/servizio-gestione", "status": "live_200", "action": "spot_check"},
+        {"url": "https://righettoimmobiliare.it/servizio-locazioni", "status": "live_200", "action": "spot_check"},
+        {"url": "https://righettoimmobiliare.it/proprietario-immobile", "status": "live_200", "action": "spot_check"},
+        {"url": "https://righettoimmobiliare.it/landing-valutazione", "status": "live_200", "action": "spot_check"},
+        {"url": "https://righettoimmobiliare.it/servizio-vendita", "status": "live_200", "action": "follow_up_indicizzazione_gsc"},
+        {"url": "https://righettoimmobiliare.it/blog-rendimento-affitto-padova", "status": "live_200", "action": "sostenere_meta"},
+        {"url": "https://righettoimmobiliare.it/zona-limena", "status": "live_200", "action": "spot_check"},
+        {"url": "https://righettoimmobiliare.it/landing-consulenza-immobiliare-gratuita", "status": "live_200", "action": "spot_check"},
+        {"url": "https://righettoimmobiliare.it/servizio-valutazioni", "status": "live_200", "action": "spot_check"}
+      ],
+      "note": "Probe batch 12 URL + url-probe-latest.json (569 URL, 0 issue). GSC: Ispezione URL → Richiedi indicizzazione per blog gestione locazione."
+    },
     {
       "date": "2026-08-03",
       "checked_by": "utente GSC",
@@ -147,23 +167,23 @@
     }
   },
   "next_friday_batch": {
-    "date": "2026-09-18",
-    "label": "batch-09-11-venerdi-limena-vendita + follow-up servizi",
+    "date": "2026-09-25",
+    "label": "batch-09-25-affitti-studenti-owner + follow-up gestione",
     "max_urls_per_session": 12,
     "urls": [
-      "https://righettoimmobiliare.it/blog-vendere-casa-limena-proprietario-2026",
-      "https://righettoimmobiliare.it/servizio-vendita",
-      "https://righettoimmobiliare.it/blog-affittare-casa-padova-proprietario-2026",
-      "https://righettoimmobiliare.it/blog-rendimento-affitto-padova",
-      "https://righettoimmobiliare.it/zona-limena",
-      "https://righettoimmobiliare.it/proprietario-immobile",
-      "https://righettoimmobiliare.it/landing-valutazione",
+      "https://righettoimmobiliare.it/blog-gestione-locazione-delegata-padova-2026",
+      "https://righettoimmobiliare.it/blog-affitti-studenti-settembre-padova-proprietario-2026",
+      "https://righettoimmobiliare.it/blog-affitto-studenti-padova",
       "https://righettoimmobiliare.it/servizio-gestione",
       "https://righettoimmobiliare.it/servizio-locazioni",
-      "https://righettoimmobiliare.it/blog-gestione-locazione-delegata-padova-2026",
-      "https://righettoimmobiliare.it/landing-consulenza-immobiliare-gratuita",
-      "https://righettoimmobiliare.it/servizio-valutazioni"
+      "https://righettoimmobiliare.it/proprietario-immobile",
+      "https://righettoimmobiliare.it/blog-affittare-casa-padova-proprietario-2026",
+      "https://righettoimmobiliare.it/blog-rendimento-affitto-padova",
+      "https://righettoimmobiliare.it/servizio-vendita",
+      "https://righettoimmobiliare.it/agenzia-immobiliare-padova",
+      "https://righettoimmobiliare.it/landing-valutazione",
+      "https://righettoimmobiliare.it/zona-universitaria-padova"
     ],
-    "instructions": "1) Nuovo blog 11/09 vendere casa Limena: richiedi indicizzazione se assente. 2) servizio-vendita: follow-up. 3) zona-limena + proprietario-immobile: spot-check. 4) Prossimo blog coda 18/09 gestione locazione — preparare."
+    "instructions": "1) Follow-up indicizzazione blog gestione locazione 18/09. 2) Pubblicare eq-sep25-001 affitti studenti settembre se pronto. 3) servizio-vendita follow-up. 4) blog-rendimento + agenzia-padova SOSTENERE meta."
   }
 }

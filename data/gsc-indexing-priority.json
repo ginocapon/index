@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-03",
+  "updated": "2026-09-18",
   "note": "URL da verificare ogni venerdì (GSC Ispezione URL). Non inviare come sitemap singola. Canonical senza www, senza .html, senza doppio slash.",
   "pillar": [
     "https://righettoimmobiliare.it/",
@@ -25,11 +25,21 @@
     "https://righettoimmobiliare.it/blog-agenzia-immobiliare-limena-come-scegliere-2026"
   ],
   "affitti_cluster": [
+    "https://righettoimmobiliare.it/blog-gestione-locazione-delegata-padova-2026",
+    "https://righettoimmobiliare.it/blog-affittare-casa-padova-proprietario-2026",
     "https://righettoimmobiliare.it/blog-affitto-transitorio-padova-durata-2026",
     "https://righettoimmobiliare.it/blog-rubano-limena-affitto-lavoratori-2026",
     "https://righettoimmobiliare.it/blog-rendimento-affitto-padova",
     "https://righettoimmobiliare.it/blog-contratto-affitto-padova",
     "https://righettoimmobiliare.it/blog-affitto-studenti-padova"
+  ],
+  "owner_acquisition_cluster": [
+    "https://righettoimmobiliare.it/blog-gestione-locazione-delegata-padova-2026",
+    "https://righettoimmobiliare.it/blog-vendere-casa-limena-proprietario-2026",
+    "https://righettoimmobiliare.it/blog-affittare-casa-padova-proprietario-2026",
+    "https://righettoimmobiliare.it/proprietario-immobile",
+    "https://righettoimmobiliare.it/landing-valutazione",
+    "https://righettoimmobiliare.it/servizio-gestione"
   ],
   "blog_batch_lug28_2026": [
     "https://righettoimmobiliare.it/blog-domanda-residenziale-supera-offerta-2026-padova",
