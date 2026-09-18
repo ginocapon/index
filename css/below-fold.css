@@ -1156,7 +1156,14 @@ footer{
 }
 .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
 
-/* ══ HOME — tonalità riquadri vs sfondo RI (contrasto + rilievo) ══ */
+/* ══ HOME — ritmo cromatico progressivo sopra lo sfondo RI fisso ══ */
+#main-content {
+  --home-paper: #f7f5f1;
+  --home-sand: #e8e2d8;
+  --home-card: #fff;
+  --home-border: rgba(44, 74, 110, 0.14);
+}
+
 #proprietario-hp,
 #evidenza,
 #servizi,
@@ -1170,30 +1177,31 @@ footer{
   z-index: 4;
 }
 
-#evidenza { background: #dad4ca !important; }
-#proprietario-hp { background: #e0dad0 !important; }
-#faq-hp { background: #dad4ca !important; }
-#stima { background: #e8e3da !important; }
-#servizi { background: #f2f0eb !important; }
-#blog { background: #f2f0eb !important; }
-#video-intro { background: #f2f0eb !important; }
+/* Sequenza: sabbia → avorio → sabbia → avorio; poi alternanza chiaro/scuro. */
+#proprietario-hp,
+#evidenza,
+#stima,
+#faq-hp { background: var(--home-sand) !important; }
 
-/* Servizi: 4 tonalità */
-#servizi .srv-grid .srv-card:nth-child(1) { background: #fff !important; }
-#servizi .srv-grid .srv-card:nth-child(2) { background: #eef3f8 !important; border-color: rgba(44, 74, 110, 0.16); }
-#servizi .srv-grid .srv-card:nth-child(3) { background: #fbf6ef !important; }
-#servizi .srv-grid .srv-card:nth-child(4) { background: #f3f0ea !important; }
+#video-intro,
+#servizi,
+#mutuo-hp,
+#blog,
+#chi-siamo-hp,
+#chi-siamo-hp .cs-testo,
+#form-contatto { background: var(--home-paper) !important; }
 
-/* Proprietario: 6 tonalità alternate */
-#proprietario-hp .srv-grid .srv-card:nth-child(1),
-#proprietario-hp .srv-grid .srv-card:nth-child(5) { background: #fff !important; }
-#proprietario-hp .srv-grid .srv-card:nth-child(2),
-#proprietario-hp .srv-grid .srv-card:nth-child(4) { background: #eef3f8 !important; border-color: rgba(44, 74, 110, 0.16); }
-#proprietario-hp .srv-grid .srv-card:nth-child(3) { background: #fbf6ef !important; }
-#proprietario-hp .srv-grid .srv-card:nth-child(6) { background: #f5f1ea !important; }
+/* Le card restano tutte bianche: la profondità viene da bordo e ombra, non da colori casuali. */
+#servizi .srv-card,
+#proprietario-hp .srv-card,
+.blog-grid .blog-card,
+#faq-hp .faq-item {
+  background: var(--home-card) !important;
+  border-color: var(--home-border) !important;
+}
 
 .srv-card:hover {
-  background: #fff !important;
+  background: var(--home-card) !important;
   box-shadow: 0 16px 48px rgba(21, 36, 53, 0.16);
   border-color: rgba(255, 107, 53, 0.35);
 }
@@ -1203,24 +1211,14 @@ footer{
 }
 
 #faq-hp .faq-item {
-  background: #fff !important;
   box-shadow: 0 6px 28px rgba(21, 36, 53, 0.10) !important;
-  border-color: rgba(44, 74, 110, 0.14) !important;
 }
+.blog-card .blog-body { background: var(--home-card); }
 
-/* Blog: tre tonalità */
-.blog-grid .blog-card:nth-child(3n+1) { background: #fff !important; }
-.blog-grid .blog-card:nth-child(3n+2) { background: #eef3f8 !important; border-color: rgba(44, 74, 110, 0.14); }
-.blog-grid .blog-card:nth-child(3n)   { background: #fbf6ef !important; border-color: rgba(44, 74, 110, 0.13); }
-.blog-card .blog-body { background: inherit; }
-
-/* FAQ alternate */
-#faq-hp .faq-grid .faq-item:nth-child(even) { background: #f0f4f8 !important; }
-
-/* Form contatto — blocco elevato su fascia contrastante */
+/* Form contatto — chiusura chiara prima del footer scuro */
 #form-contatto {
-  background: #d0d8e2 !important;
   padding: 72px 28px !important;
+  border-top: 1px solid rgba(44, 74, 110, 0.10);
 }
 .fc-inner {
   box-shadow: 0 18px 60px rgba(21, 36, 53, 0.18) !important;
@@ -1250,25 +1248,25 @@ footer{
   background: #fff !important;
   box-shadow: 0 8px 36px rgba(21, 36, 53, 0.09) !important;
 }
-.stima-stat { background: #eef3f8 !important; }
+.stima-stat { background: #eee9e1 !important; }
 
 /* Fasce scure — effetto mock pagina 2 (navy + vetro + arancio) */
 #testimonial,
-#mutuo-hp,
 #drone-hp {
   background: linear-gradient(105deg, #0a1628 0%, #152435 40%, #1e3348 72%, #2d4258 100%) !important;
   isolation: isolate;
   z-index: 4;
   position: relative;
 }
-#testimonial { padding: 80px 28px !important; }
+#testimonial {
+  padding: 80px 28px !important;
+  background: linear-gradient(105deg, #172c40 0%, #203a52 48%, #2d4b63 100%) !important;
+}
 #perche .sec-h2,
 #testimonial .sec-h2,
-#mutuo-hp .sec-h2,
 #drone-hp .sec-h2 { color: #fff !important; }
 #perche .sec-p,
 #testimonial .sec-p,
-#mutuo-hp .sec-p,
 #drone-hp .sec-p { color: rgba(255,255,255,0.80) !important; }
 #perche .ps-big,
 #territorio .t-stat-box {
@@ -1276,17 +1274,21 @@ footer{
   border-color: rgba(255,255,255,0.22) !important;
 }
 #mutuo-hp .mutuo-card {
-  background: rgba(255,255,255,0.11) !important;
-  border: 1px solid rgba(255,255,255,0.22) !important;
+  background: var(--home-card) !important;
+  border: 1px solid var(--home-border) !important;
   isolation: isolate;
+  box-shadow: 0 8px 30px rgba(21, 36, 53, 0.10);
 }
 #mutuo-hp .mutuo-card:hover {
-  background: rgba(255,255,255,0.16) !important;
+  background: var(--home-card) !important;
   transform: translateY(-4px);
+  box-shadow: 0 14px 42px rgba(21, 36, 53, 0.14);
 }
-.mutuo-card-t { color: #fff !important; }
-.mutuo-card-d { color: rgba(255,255,255,0.75) !important; }
-#mutuo-hp p[style*="letter-spacing"] { color: rgba(255,255,255,0.65) !important; }
+#mutuo-hp .sec-h2 { color: var(--testo) !important; }
+#mutuo-hp .sec-p { color: color-mix(in srgb, var(--grigio) 72%, var(--testo) 28%) !important; }
+.mutuo-card-t { color: var(--testo) !important; }
+.mutuo-card-d { color: color-mix(in srgb, var(--grigio) 82%, var(--testo) 18%) !important; }
+#mutuo-hp p[style*="letter-spacing"] { color: var(--grigio) !important; }
 #drone-hp p[style*="font-size:0.68rem"] { color: rgba(255,255,255,0.62) !important; }
 #drone-hp .btn-outline-light {
   border-color: rgba(255,255,255,0.28) !important;

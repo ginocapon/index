@@ -269,10 +269,18 @@ body.rig-sugar-paper #perche {
   isolation: isolate;
   z-index: 4;
 }
-body.rig-sugar-paper #testimonial,
-body.rig-sugar-paper #mutuo-hp,
 body.rig-sugar-paper #drone-hp {
   background: linear-gradient(105deg, #0a1628 0%, #152435 40%, #1e3348 72%, #2d4258 100%) !important;
+  isolation: isolate;
+  z-index: 4;
+}
+body.rig-sugar-paper #testimonial {
+  background: linear-gradient(105deg, #172c40 0%, #203a52 48%, #2d4b63 100%) !important;
+  isolation: isolate;
+  z-index: 4;
+}
+body.rig-sugar-paper #mutuo-hp {
+  background: #f7f5f1 !important;
   isolation: isolate;
   z-index: 4;
 }
