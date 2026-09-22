@@ -13,7 +13,7 @@ description: >-
 **Leggi sempre:** `TEST-SKILL/skill-acquisizione-proprietari.md` (fonte completa).  
 **Alleato + advisor + territorio 10 km:** `TEST-SKILL/skill-real-estate-advisor.md` · `/advisor`  
 **Script / follow-up / canali:** `TEST-SKILL/skill-acquisizione-playbook-commerciale.md`.  
-**Cron venerdì (1 task/sett. automatico):** `TEST-SKILL/skill-acquisizione-cron-venerdi.md` + `data/acquisition-roadmap-cron.json`.
+**Cron venerdì (3 slot):** `skill-acquisizione-cron-venerdi.md` + `data/venerdi-friday-pipeline.json` + `skill-acquisizione-contenuti-acquisizione.md`.
 
 ## Concetto fondamentale
 

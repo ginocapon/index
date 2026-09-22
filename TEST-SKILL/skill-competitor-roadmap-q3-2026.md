@@ -129,7 +129,7 @@ Fonte: analisi siti competitor + repo Righetto.
 ### Sequenza obbligatoria risposta
 
 1. Leggi **questo file** + `skill-memoria-progressi.md` + `data/editorial-queue.json` + `data/gsc-indexing-weekly.json` + `data/gsc-keywords-priority.json`
-2. Leggi **`skill-acquisizione-cron-venerdi.md`** + **`data/acquisition-roadmap-cron.json`** — **repo task #1 = acquisizione sett. N/12 (automatico)**
+2. Leggi **`skill-acquisizione-cron-venerdi.md`** + **`data/venerdi-friday-pipeline.json`** — **slot #1 acquisizione · #2 blog owner · #3 social proprietari (sett. N/12)**
 3. Leggi `.cursor/skills/righetto-venerdi-sito-90giorni/SKILL.md`
 4. Output **formato fisso** (§ sotto) con **repo #1 acquisizione** + **max 2 altri task repo** + **2 task utente GSC/GBP**
 5. Scegli task #2–3 da: SOSTENERE GSC · blog coda · gap roadmap §6 · fix indicizzazione · macrociclo 12 sett. SEO

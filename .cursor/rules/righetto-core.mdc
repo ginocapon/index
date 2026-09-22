@@ -23,7 +23,7 @@ Se non hai fonte verificabile (OMI, FIMAA, ISTAT, Banca d'Italia, ADE…), **non
 **Messaggio madre:** chi vende trova in Righetto **un alleato** (accompagnamento, dati, trasparenza — non portale anonimo).  
 **Obiettivo crescita:** acquisire nuovi immobili e proprietari (vendita, affitto, gestione, valutazione).  
 **Skill:** `skill-acquisizione-proprietari.md` + `skill-real-estate-advisor.md` · hub `proprietario-immobile.html` · `/proprietari` `/advisor` · prevale su SEO/blog generico se in conflitto.  
-**Cron venerdì:** `"SKILL"` / `/venerdi` → 1 task/sett. automatico · `skill-acquisizione-cron-venerdi.md` · `data/acquisition-roadmap-cron.json` (anchor 2026-09-19).  
+**Cron venerdì:** `"SKILL"` / `/venerdi` → pipeline 3 slot · `skill-acquisizione-cron-venerdi.md` · `data/venerdi-friday-pipeline.json` (acquisizione + blog owner + social).  
 **Mantenere:** annunci, ricerca immobili, acquirenti, inquilini — non penalizzare.
 
 ## Stack (non cambiare)
