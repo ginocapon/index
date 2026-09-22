@@ -1,0 +1,294 @@
+{
+  "updated": "2026-09-22",
+  "messaggio_madre": "Chi vende trova in Righetto un alleato",
+  "skill_refs": [
+    "TEST-SKILL/skill-acquisizione-cron-venerdi.md",
+    "TEST-SKILL/skill-acquisizione-proprietari.md",
+    "TEST-SKILL/skill-real-estate-advisor.md",
+    "TEST-SKILL/skill-editoriale-visivo.md",
+    "TEST-SKILL/skill-acquisizione-contenuti-acquisizione.md",
+    "TEST-SKILL/skill-social-automation.md"
+  ],
+  "data_refs": {
+    "acquisition_roadmap": "data/acquisition-roadmap-cron.json",
+    "territory": "data/advisor-territorio-limena-10km.json",
+    "editorial_queue": "data/editorial-queue.json",
+    "acquisition_balance": "data/editorial-acquisition-balance.json"
+  },
+  "friday_repo_priority": [
+    {
+      "slot": 1,
+      "id": "acquisizione_cron",
+      "source": "data/acquisition-roadmap-cron.json",
+      "max_per_friday": 1,
+      "mandatory": true
+    },
+    {
+      "slot": 2,
+      "id": "blog_owner",
+      "when": "week_has_blog_spec OR macrociclo_seo_week_3",
+      "max_per_friday": 1,
+      "mandatory_if_scheduled": true
+    },
+    {
+      "slot": 3,
+      "id": "social_proprietari",
+      "when": "always",
+      "max_per_friday": 1,
+      "mandatory": false,
+      "note": "Bozza/manuale: template proprietari_acquisizione in righetto_social/templates/social_sezioni.json"
+    }
+  ],
+  "blog_publish_defaults": {
+    "messaggio_alleato": true,
+    "primary_audience": "proprietario_vendita",
+    "acquisition_priority": true,
+    "acquisition_contribution": "direct",
+    "territory_priority": "Limena + 10 km + quartieri Padova nord-est (advisor-territorio-limena-10km.json)",
+    "word_count_min": 2500,
+    "visual": {
+      "hero_ia_19_9": true,
+      "min_figure_ia": 3,
+      "min_tables_html": 2,
+      "min_svg_charts": 2,
+      "foto_ai_marchio": true,
+      "skill": "skill-content.md §2.1 + skill-editoriale-visivo.md §3"
+    },
+    "cta_class_a": ["landing-valutazione", "servizio-vendita", "landing-consulenza-immobiliare-gratuita"],
+    "gates": [
+      "python3 scripts/check_doppioni_sito.py",
+      "python3 scripts/audit_editorial_acquisition.py",
+      "python3 scripts/audit_blog_visuals.py",
+      "node scripts/build-ai-image-manifest.mjs",
+      "node scripts/audit-foto-ai.mjs",
+      "node scripts/validate-page.js --file blog-{slug}.html"
+    ],
+    "queue_fields_required": [
+      "owner_path",
+      "acquisition_priority",
+      "acquisition_contribution",
+      "funnel_step",
+      "primary_audience"
+    ]
+  },
+  "social_proprietari_defaults": {
+    "framework": "TARGET → PROBLEMA → PROMESSA → PROVA → CTA → link",
+    "messaggio_alleato": "Tono alleato, mai pressione incarico; no percentuali online",
+    "media": {
+      "prefer": ["foto team img/team/", "copertina blog owner", "foto servizio vendita", "carosello 3-5 slide testo su sfondo brand"],
+      "reel": "genera_reel_portale_acquisizioni.py o 1 foto + testo 9:16",
+      "vietato": "stock CDN, claim inventati, prezzi/tempi senza fonte"
+    },
+    "cta_links": [
+      "https://righettoimmobiliare.it/landing-valutazione",
+      "https://righettoimmobiliare.it/servizio-vendita",
+      "https://righettoimmobiliare.it/proprietario-immobile"
+    ],
+    "hashtags_base": [
+      "#padova",
+      "#righettoimmobiliare",
+      "#venderecasa",
+      "#valutazioneimmobile",
+      "#limena",
+      "#consulenzaimmobiliare",
+      "#proprietari",
+      "#mercatoimmobiliare",
+      "#agenziaimmobiliare",
+      "#immobilipadova"
+    ]
+  },
+  "weeks_aligned_acquisition": [
+    {
+      "acq_week": 1,
+      "blog_friday": null,
+      "social_proprietari": {
+        "target": "Proprietario che chiede «quanto vale?»",
+        "problema": "Stima online generica non basta per decidere",
+        "promessa": "Valutazione gratuita con sopralluogo e comparabili locali",
+        "prova": "Dal 2000 · Limena · 127 recensioni 4.9/5",
+        "cta": "landing-valutazione",
+        "media_hint": "Screenshot calcolatore o foto team in agenzia"
+      }
+    },
+    {
+      "acq_week": 2,
+      "blog_friday": null,
+      "social_proprietari": {
+        "target": "Proprietario indeciso (percorso L)",
+        "problema": "Non sa se vendere, affittare o aspettare",
+        "promessa": "Hub guidato senza impegno",
+        "prova": "6 percorsi su proprietario-immobile",
+        "cta": "proprietario-immobile",
+        "media_hint": "Carosello 4 card «vendere / affittare / reddito / gestione»"
+      }
+    },
+    {
+      "acq_week": 3,
+      "blog_friday": {
+        "mode": "refresh_cta_only",
+        "note": "Nessun nuovo blog: solo CTA Class A su 5 URL (acq-w03). Se coda ha scheduled owner urgente GSC → pubblicare con defaults blog_publish"
+      },
+      "social_proprietari": {
+        "target": "Chi legge blog mercato",
+        "problema": "Informazione senza passo successivo",
+        "promessa": "Approfondimento + valutazione",
+        "prova": "Link articolo blog owner del giorno in rotazione",
+        "cta": "landing-valutazione",
+        "media_hint": "Copertina blog 1:1 o 4:5 IG"
+      }
+    },
+    {
+      "acq_week": 4,
+      "blog_friday": null,
+      "social_proprietari": {
+        "target": "Lead già arrivati",
+        "problema": "Risposta lenta = opportunità persa",
+        "promessa": "Risposta in giornata lavorativa",
+        "prova": "049.8843484 · WhatsApp",
+        "cta": "contatti",
+        "media_hint": "Foto ufficio Via Roma 96 Limena"
+      }
+    },
+    {
+      "acq_week": 5,
+      "blog_friday": {
+        "mode": "publish",
+        "owner_path": "F",
+        "angolo": "Casa in vendita da mesi: cosa cambiare oltre il prezzo (alleato, non colpevolizzare)",
+        "kw_seed": ["casa non si vende padova", "strategia vendita immobile invenduto"],
+        "territory": ["Padova", "Limena", "Vigonza"],
+        "pillar_links": ["landing-consulenza-immobiliare-gratuita", "servizio-vendita", "blog-percorso-vendita-immobile-padova-2026"],
+        "sezione_righetto": "Cosa può fare Righetto — revisione strategia e seconda valutazione"
+      },
+      "social_proprietari": {
+        "target": "Percorso F — già in vendita",
+        "problema": "Annuncio fermo, poche visite",
+        "promessa": "Analisi strategia gratuita",
+        "prova": "Estratto 1 tip da nuovo blog o blog-percorso-vendita",
+        "cta": "landing-consulenza-immobiliare-gratuita",
+        "media_hint": "Prima slide problema / seconda slide 3 leve (prezzo, foto, visibilità)"
+      }
+    },
+    {
+      "acq_week": 6,
+      "blog_friday": {
+        "mode": "publish_or_expand",
+        "owner_path": "J",
+        "angolo": "Vendere prima o dopo ristrutturazione: criteri per il proprietario padovano",
+        "kw_seed": ["vendere dopo ristrutturazione padova", "valorizzare casa prima vendita"],
+        "prefer_existing": "blog-bonus-mobili-2026-massimizzare-ristrutturazioni.html",
+        "cta": "landing-valutazione"
+      },
+      "social_proprietari": {
+        "target": "Percorso J",
+        "problema": "Dubbio investire in lavori",
+        "promessa": "Valutazione prima/dopo con scenario",
+        "prova": "Dato solo se da fonte in articolo",
+        "cta": "landing-valutazione",
+        "media_hint": "IA 19:9 cantiere/ristrutturazione sobria (FOTO AI)"
+      }
+    },
+    {
+      "acq_week": 7,
+      "blog_friday": {
+        "mode": "queue_owner_area_2",
+        "note": "Se nessun expand: articolo Area 2 mercato locale per proprietario (OMI/FIMAA) zona Limena o Vigonza",
+        "territory_focus": "comuni_entro_raggio da advisor JSON"
+      },
+      "social_proprietari": {
+        "target": "Proprietario Limena/hinterland",
+        "problema": "Non conosce il mercato locale",
+        "promessa": "Agenzia radicata a Limena dal 2000",
+        "prova": "zona-limena o zona-vigonza",
+        "cta": "servizio-vendita",
+        "media_hint": "Mappa stilizzata o foto quartiere (IA marchiata)"
+      }
+    },
+    {
+      "acq_week": 8,
+      "blog_friday": null,
+      "social_proprietari": {
+        "target": "Venditore che cerca agenzia",
+        "problema": "Paura di intermediari distanti",
+        "promessa": "Alleato dalla valutazione al rogito",
+        "prova": "servizio-vendita aggiornato",
+        "cta": "servizio-vendita#richiedi",
+        "media_hint": "Reel 15s: 3 bullet testo su servizio vendita"
+      }
+    },
+    {
+      "acq_week": 9,
+      "blog_friday": {
+        "mode": "refresh_cta_batch2",
+        "note": "CTA su 5 blog elenco acq-w09; opz. 1 nuovo owner se coda scheduled e balance Area 1 < 35%"
+      },
+      "social_proprietari": {
+        "target": "Eredità / costi vendita (H, B)",
+        "problema": "Burocrazia e tasse",
+        "promessa": "Consulenza chiara",
+        "prova": "Link blog successione o costi vendita",
+        "cta": "landing-consulenza-immobiliare-gratuita",
+        "media_hint": "Carosello checklist 3 documenti (no numeri inventati)"
+      }
+    },
+    {
+      "acq_week": 10,
+      "blog_friday": {
+        "mode": "publish",
+        "owner_path": "B,C,L",
+        "angolo": "Sto pensando di vendere ma non so quando: pianificare con dati 2026",
+        "kw_seed": ["vendere casa quando conviene padova", "tempistiche vendita padova"],
+        "cta": "landing-consulenza-immobiliare-gratuita"
+      },
+      "social_proprietari": {
+        "target": "Indecisi timing",
+        "problema": "Urgenza artificiale altrove",
+        "promessa": "Consulenza orientativa senza impegno",
+        "prova": "landing-consulenza",
+        "cta": "landing-consulenza-immobiliare-gratuita",
+        "media_hint": "Foto consulenza / team"
+      }
+    },
+    {
+      "acq_week": 11,
+      "blog_friday": {
+        "mode": "faq_expansion",
+        "note": "Ampliare FAQ schema su 1 blog owner top GSC; no nuovo slug se doppione"
+      },
+      "social_proprietari": {
+        "target": "Utenti Linda / chat",
+        "problema": "Domande ripetute valutazione",
+        "promessa": "Assistente digitale + umani in agenzia",
+        "prova": "Disclosure AI Act in caption",
+        "cta": "landing-chat-valutazione",
+        "media_hint": "Screenshot chat blur o icona assistente"
+      }
+    },
+    {
+      "acq_week": 12,
+      "blog_friday": {
+        "mode": "from_queue_or_gap",
+        "note": "Scegliere da editorial-queue proposed/scheduled con acquisition_priority; aggiornare editorial-acquisition-balance.json"
+      },
+      "social_proprietari": {
+        "target": "Recap trimestre",
+        "problema": "Troppa informazione sparsa",
+        "promessa": "Un alleato, un referente",
+        "prova": "350+ immobili · 98% soddisfazione (claim consentiti)",
+        "cta": "proprietario-immobile",
+        "media_hint": "Collage 4 copertine blog owner del trimestre"
+      }
+    }
+  ],
+  "macrociclo_seo_blog_fallback": {
+    "when": "acq_week blog_friday null AND macrociclo_week == 3",
+    "action": "Pubblica prossimo scheduled da editorial-queue.json applicando blog_publish_defaults",
+    "must_be_owner_if_balance_alert": true
+  },
+  "legacy_external_repo": {
+    "name": "ginocapon/-ISTRUZIONI-PER-PUBBLICAZIONE",
+    "use_only": ["struttura caption social", "idea spintax varianti", "checklist meta lunghezze"],
+    "do_not_use": ["dialetto veneto forzato", "percentuali/dati placeholder", "tono aggressivo vendita", "claim non in skill-essentials"],
+    "righetto_replacement": "TEST-SKILL/skill-acquisizione-contenuti-acquisizione.md"
+  }
+}
