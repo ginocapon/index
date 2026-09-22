@@ -19,6 +19,7 @@ description: >-
 
 ## Regole non negoziabili
 
+- **Venditori:** messaggio madre — **chi vende trova in Righetto un alleato** (`skill-acquisizione-proprietari.md` + `skill-real-estate-advisor.md`)
 - Vanilla HTML/CSS/JS — zero CDN esterni
 - URL interne **senza** `.html`
 - Mobile-first + WCAG AA (CTA: **mai** `#FF6B35` con testo bianco)
@@ -51,6 +52,7 @@ Lezioni già registrate (luglio 2026): hero landing iPhone, tour 360° slug/codi
 
 | Task | Skill progetto | Command |
 |------|----------------|---------|
+| Acquisizione / alleato venditori | `righetto-acquisizione-proprietari` / `righetto-advisor` | `/proprietari` `/advisor` |
 | Nuovo articolo blog | `righetto-blog` | `/blog` |
 | Landing / form lead | `righetto-landing` | `/landing` |
 | Fix mobile / iPhone | `righetto-fix-mobile` | `/mobile` |

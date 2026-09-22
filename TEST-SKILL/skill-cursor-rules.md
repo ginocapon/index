@@ -53,6 +53,8 @@ Le **Cursor Skills** (`.cursor/skills/`) **non duplicano** `TEST-SKILL/`: dicono
 | `righetto-social` | `/social` | bozze Meta/IG/GBP, copy post/reel | social-automation |
 | `righetto-security` | `/sicurezza` | audit sicurezza 2×/sett, RLS, admin | security + context |
 | `righetto-zona` | `/zona` | scheda zona, quartiere, SEO locale | content + seo |
+| `righetto-acquisizione-proprietari` | `/proprietari` | funnel owner A–L, homepage, asset acquisizione | acquisizione-proprietari |
+| `righetto-advisor` | `/advisor` | alleato venditori, GEO 10 km Limena, master advisor | acquisizione-proprietari + real-estate-advisor |
 
 Percorsi: `.cursor/skills/<nome>/SKILL.md` · `.cursor/commands/<nome>.md`
 

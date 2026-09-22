@@ -5,12 +5,24 @@
 > **Aggiornato:** 14 settembre 2026 · Audit: `documenti/Audit-Strategico-Acquisizione-Incarichi-Righetto-2026-08-29.pdf`
 >
 > **Playbook commerciale** (script, follow-up, canali fuori sito): `skill-acquisizione-playbook-commerciale.md` — **non** duplicare qui.
+>
+> **Mentalità advisor + territorio 10 km Limena:** `TEST-SKILL/skill-real-estate-advisor.md` · `data/advisor-territorio-limena-10km.json` · Cursor `/advisor`
+
+---
+
+## Concetto fondamentale — **UN ALLEATO** (FONDAMENTALE)
+
+**Tutto il sito parte da qui:** chi vende (o sta per vendere) deve percepire Righetto come **un alleato**, non come un portale o un venditore di incarichi.
+
+- Copy, CTA, blog owner, servizi, chat e GEO/AEO devono comunicare **fiducia, competenza locale e accompagnamento**.
+- Il funnel (sotto) è lo strumento; l’**alleato** è il messaggio madre.
+- Dettaglio operativo tono, GEO e master prompt: **`skill-real-estate-advisor.md`** § «UN ALLEATO».
 
 ---
 
 ## Obiettivo principale (non negoziabile)
 
-**Acquisire nuovi immobili e nuovi proprietari** — vendita, valutazione, locazione, gestione, reddito, consulenza patrimoniale.
+**Acquisire nuovi immobili e nuovi proprietari** — vendita, valutazione, locazione, gestione, reddito, consulenza patrimoniale — presentando Righetto come **alleato** del proprietario in ogni passo.
 
 Funzioni da **mantenere** (non penalizzare): annunci, ricerca immobili, acquirenti, inquilini, visibilità portfolio.
 
@@ -39,13 +51,14 @@ VISITATORE
 
 Prima di ogni modifica significativa:
 
+0. **Il venditore si sente alleato** da questo testo/UI? (FONDAMENTALE)
 1. **Cosa** è stato modificato?
 2. **Quale problema** strategico corregge?
 3. **Quale proprietario** viene aiutato (percorso A–L)?
 4. **Quale passo** del funnel avanza?
 5. **Come** può portare a contatto, sopralluogo o incarico?
 
-Se non si risponde → modifica **secondaria**.
+Se non si risponde a (0) e (5) → modifica **secondaria** o da rivedere.
 
 **In caso di parità:** privilegiare ciò che intercetta proprietari, dimostra competenza, costruisce fiducia, favorisce contatto.
 
