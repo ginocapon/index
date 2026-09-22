@@ -1,6 +1,18 @@
 {
   "_note": "Routing guide: quale skill caricare per ogni tipo di task. skill-essentials.md va SEMPRE caricata.",
-  "_version": "1.6 — Luglio 2026 (trigger \"SKILL\" venerdì + competitor roadmap Q3)",
+  "_version": "1.7 — Settembre 2026 (alleato venditori + Real Estate Advisor Limena 10 km)",
+
+  "strategic_priority": {
+    "messaggio_madre": "Chi vende trova in Righetto un alleato",
+    "primary_audience": "proprietari_venditori",
+    "hub": "Limena PD",
+    "territory_data": "data/advisor-territorio-limena-10km.json",
+    "skills": [
+      "TEST-SKILL/skill-acquisizione-proprietari.md",
+      "TEST-SKILL/skill-real-estate-advisor.md"
+    ],
+    "cursor_skills": ["righetto-acquisizione-proprietari", "righetto-advisor"]
+  },
 
   "always_load": "TEST-SKILL/skill-essentials.md,TEST-SKILL/skill-massimo-punteggio.md,TEST-SKILL/skill-efficienza-sito.md,TEST-SKILL/skill-memoria-progressi.md,TEST-SKILL/skill-ai-act-compliance.md,TEST-SKILL/skill-acquisizione-proprietari.md",
 
@@ -17,7 +29,8 @@
     "righetto-social": { "command": "/social", "path": ".cursor/skills/righetto-social/SKILL.md" },
     "righetto-security": { "command": "/sicurezza", "path": ".cursor/skills/righetto-security/SKILL.md" },
     "righetto-zona": { "command": "/zona", "path": ".cursor/skills/righetto-zona/SKILL.md" },
-    "righetto-acquisizione-proprietari": { "command": "/proprietari", "path": ".cursor/skills/righetto-acquisizione-proprietari/SKILL.md" }
+    "righetto-acquisizione-proprietari": { "command": "/proprietari", "path": ".cursor/skills/righetto-acquisizione-proprietari/SKILL.md" },
+    "righetto-advisor": { "command": "/advisor", "path": ".cursor/skills/righetto-advisor/SKILL.md" }
   },
 
   "cursor_rules": {
@@ -34,8 +47,15 @@
   },
 
   "tasks": {
+    "acquisizione_venditori_advisor": {
+      "skills": ["skill-essentials.md", "skill-massimo-punteggio.md", "skill-acquisizione-proprietari.md", "skill-real-estate-advisor.md", "skill-seo.md", "skill-forms-leads.md", "skill-content.md"],
+      "cursor_skills": ["righetto-acquisizione-proprietari", "righetto-advisor"],
+      "data": ["data/advisor-territorio-limena-10km.json", "data/gsc-keywords-priority.json"],
+      "token_stimati": "~3.500",
+      "note": "Messaggio madre: alleato del venditore. Funnel A–L + master advisor, Limena 10 km, GEO/AEO. Mai tariffe online."
+    },
     "nuova_landing_page": {
-      "skills": ["skill-essentials.md", "skill-forms-leads.md", "skill-context.md", "skill-design.md"],
+      "skills": ["skill-essentials.md", "skill-real-estate-advisor.md", "skill-forms-leads.md", "skill-context.md", "skill-design.md"],
       "cursor_rules": ["righetto-vanilla-ui.mdc", "righetto-forms-leads.mdc"],
       "token_stimati": "~1.800",
       "note": "Serve architettura + componenti UI + form invio diretto (sendNotifica + richieste). Title/meta §1.2 + validate-page.js"
@@ -60,9 +80,10 @@
       "note": "Fix o nuovo form: POST send-email, provenienza, GDPR, no redirect GET a contatti"
     },
     "nuova_zona_page": {
-      "skills": ["skill-essentials.md", "skill-content.md", "skill-seo.md"],
-      "token_stimati": "~2.500",
-      "note": "Serve struttura zona + SEO locale + schema. Title zona ≤60 char (max 70) — §1.2 skill-essentials"
+      "skills": ["skill-essentials.md", "skill-acquisizione-proprietari.md", "skill-real-estate-advisor.md", "skill-content.md", "skill-seo.md"],
+      "data": ["data/advisor-territorio-limena-10km.json"],
+      "token_stimati": "~2.800",
+      "note": "Zona + SEO locale; se in raggio 10 km Limena: angolo «alleato nella vendita» e CTA valutazione. Title ≤60 (max 70) — §1.2"
     },
     "audit_seo": {
       "skills": ["skill-essentials.md", "skill-massimo-punteggio.md", "skill-efficienza-sito.md", "skill-memoria-progressi.md", "skill-seo.md"],

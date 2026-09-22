@@ -1,0 +1,60 @@
+{
+  "_note": "Territorio prioritario acquisizione venditori — hub sede Righetto. Usare con TEST-SKILL/skill-real-estate-advisor.md. Non inventare comuni: aggiornare solo dopo verifica mappa/catasto.",
+  "messaggio_madre": {
+    "concetto": "Chi vende trova in Righetto un alleato",
+    "tono": "professionale, trasparente, locale, mai aggressivo",
+    "evitare": "portale anonimo, pressione incarico, percentuali online, promesse prezzo/tempi senza fonte"
+  },
+  "hub": {
+    "nome": "Limena",
+    "provincia": "PD",
+    "indirizzo_sede": "Via Roma 96, 35010 Limena (PD)",
+    "coordinate": { "lat": 45.476956, "lng": 11.845762 }
+  },
+  "raggio_km": 10,
+  "comuni_entro_raggio": [
+    { "nome": "Limena", "slug_zona": "zona-limena", "priorita": "massima" },
+    { "nome": "Vigonza", "slug_zona": "zona-vigonza", "priorita": "alta" },
+    { "nome": "Campodarsego", "slug_zona": null, "priorita": "alta", "nota": "pagina zona da creare se GSC lo richiede" },
+    { "nome": "Veggiano", "slug_zona": null, "priorita": "media" },
+    { "nome": "Saonara", "slug_zona": null, "priorita": "media" },
+    { "nome": "Noventa Padovana", "slug_zona": null, "priorita": "alta" },
+    { "nome": "Cadoneghe", "slug_zona": null, "priorita": "media" },
+    { "nome": "Trebaseleghe", "slug_zona": null, "priorita": "media" },
+    { "nome": "Piazzola sul Brenta", "slug_zona": null, "priorita": "media" },
+    { "nome": "Rubano", "slug_zona": "zona-rubano", "priorita": "media", "nota": "confine ~10–11 km — includere in copy locale" }
+  ],
+  "quartieri_padova_lambiscono_area_limena": [
+    { "nome": "Arcella", "slug_zona": "zona-arcella-padova" },
+    { "nome": "Sacra Famiglia", "slug_zona": "zona-sacra-famiglia-padova" },
+    { "nome": "Forcellini", "slug_zona": "zona-forcellini-padova" },
+    { "nome": "Voltabarozzo", "slug_zona": "zona-voltabarozzo-padova" },
+    { "nome": "Stanga", "slug_zona": null, "nota": "citare in testi GEO; pagina zona opzionale" },
+    { "nome": "Chiesanuova", "slug_zona": null, "nota": "nord-est Padova — citare in FAQ AEO" }
+  ],
+  "pillar_vendita_sito": [
+    "servizio-vendita",
+    "landing-vendere-casa-padova",
+    "landing-valutazione",
+    "landing-consulenza-immobiliare-gratuita",
+    "valutazione-vendita-riservata-padova",
+    "landing-chat-valutazione"
+  ],
+  "intent_ai_ricerca_venditori": [
+    "agenzia immobiliare per vendere casa {comune}",
+    "valutazione immobile gratuita {comune}",
+    "mandato vendita esclusiva padova nord",
+    "quanto vale la mia casa {zona}",
+    "agenzia immobiliare limena vendita",
+    "vendere casa padova provincia nord est",
+    "stima casa online padova hinterland"
+  ],
+  "cta_provenienza_lead": [
+    "blog-{slug}",
+    "landing-vendere-casa-padova",
+    "landing-valutazione",
+    "servizio-vendita",
+    "chat-valutazione",
+    "zona-{slug}"
+  ]
+}
