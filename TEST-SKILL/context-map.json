@@ -125,6 +125,8 @@
         "skill-memoria-progressi.md",
         "skill-competitor-roadmap-q3-2026.md",
         "skill-acquisizione-cron-venerdi.md",
+        "skill-acquisizione-contenuti-acquisizione.md",
+        "skill-real-estate-advisor.md",
         "skill-acquisizione-proprietari.md",
         "skill-seo.md",
         "skill-editorial-queue.md"
@@ -132,6 +134,7 @@
       "cursor_skills": ["righetto-venerdi-sito-90giorni", "righetto-acquisizione-proprietari"],
       "data": [
         "data/acquisition-roadmap-cron.json",
+        "data/venerdi-friday-pipeline.json",
         "data/editorial-queue.json",
         "data/gsc-indexing-weekly.json",
         "data/gsc-keywords-priority.json",
@@ -139,7 +142,7 @@
         "data/acquisition-kpi-template.json"
       ],
       "token_stimati": "~3.000",
-      "note": "Venerdì: repo #1 = task cron acquisizione (acquisition-roadmap-cron.json sett. N/12) + piano §8 competitor + GSC/blog"
+      "note": "Venerdì: slot #1 acquisizione · #2 blog owner (venerdi-friday-pipeline.json) · #3 social proprietari · poi SOSTENERE/GSC — skill-acquisizione-contenuti-acquisizione.md"
     },
     "audit_completo": {
       "skills": ["skill-essentials.md", "skill-seo.md", "skill-content.md", "skill-design.md", "skill-context.md"],
@@ -188,6 +191,13 @@
       "data": ["data/editorial-acquisition-balance.json", "data/lead-scoring-rules.json", "data/acquisition-kpi-template.json", "data/editorial-queue.json"],
       "token_stimati": "~2.400",
       "note": "Funnel owner, percorsi A-L, hub/landing/servizi — anti-duplicati. Playbook script/follow-up: skill-acquisizione-playbook-commerciale.md"
+    },
+    "venerdi_blog_social_acquisizione": {
+      "skills": ["skill-essentials.md", "skill-acquisizione-cron-venerdi.md", "skill-acquisizione-contenuti-acquisizione.md", "skill-real-estate-advisor.md", "skill-editoriale-visivo.md", "skill-social-automation.md"],
+      "data": ["data/venerdi-friday-pipeline.json", "data/acquisition-roadmap-cron.json", "data/editorial-queue.json"],
+      "cursor_skills": ["righetto-venerdi-sito-90giorni", "righetto-acquisizione-proprietari", "righetto-blog"],
+      "token_stimati": "~3.800",
+      "note": "Venerdì slot #2 blog owner + #3 post social con foto/carosello; non usare prompt SEO legacy GitHub senza filtri skill-acquisizione-contenuti-acquisizione.md §1"
     },
     "acquisizione_playbook_commerciale": {
       "skills": ["skill-essentials.md", "skill-acquisizione-playbook-commerciale.md", "skill-acquisizione-proprietari.md"],
