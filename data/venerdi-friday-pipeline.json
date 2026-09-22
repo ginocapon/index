@@ -285,6 +285,33 @@
     "action": "Pubblica prossimo scheduled da editorial-queue.json applicando blog_publish_defaults",
     "must_be_owner_if_balance_alert": true
   },
+  "catalog": {
+    "blog_esistenti_solo_cta_batch1": [
+      "blog-rendimento-affitto-padova",
+      "blog-valutazione-casa-padova-guida-2026",
+      "blog-vendere-casa-limena-proprietario-2026",
+      "blog-affittare-casa-padova-proprietario-2026",
+      "blog-mandato-esclusivo-padova-perche-conviene-2026"
+    ],
+    "blog_esistenti_solo_cta_batch2": [
+      "blog-successione-immobiliare-padova",
+      "blog-costi-vendere-casa-padova-2026",
+      "blog-percorso-vendita-immobile-padova-2026",
+      "blog-so-tutto-io-venditore-presuntuoso-padova-2026",
+      "blog-agenzia-immobiliare-limena-come-scegliere-2026"
+    ],
+    "blog_da_realizzare_per_settimana_acq": {
+      "5": "nuovo_slug percorso_F casa_invenduta",
+      "6": "ampliare blog-bonus-mobili-2026-massimizzare-ristrutturazioni",
+      "7": "nuovo mercato_locale Limena_Vigonza owner",
+      "10": "nuovo timing_vendita B_C_L",
+      "12": "da editorial-queue scheduled o gap Area1"
+    },
+    "blog_settimane_senza_nuovo": [1, 2, 4, 8],
+    "social_venerdi_tipo": "nuova_caption_proprietari_acquisizione",
+    "social_cron_tipo": "rotazione_catalogo_sito_immobili_blog_landing",
+    "human_doc": "TEST-SKILL/venerdi-riepilogo-blog-social.md"
+  },
   "legacy_external_repo": {
     "name": "ginocapon/-ISTRUZIONI-PER-PUBBLICAZIONE",
     "use_only": ["struttura caption social", "idea spintax varianti", "checklist meta lunghezze"],
