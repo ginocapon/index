@@ -11,8 +11,13 @@ description: >-
 # Acquisizione proprietari — Righetto
 
 **Leggi sempre:** `TEST-SKILL/skill-acquisizione-proprietari.md` (fonte completa).  
+**Alleato + advisor + territorio 10 km:** `TEST-SKILL/skill-real-estate-advisor.md` · `/advisor`  
 **Script / follow-up / canali:** `TEST-SKILL/skill-acquisizione-playbook-commerciale.md`.  
 **Cron venerdì (1 task/sett. automatico):** `TEST-SKILL/skill-acquisizione-cron-venerdi.md` + `data/acquisition-roadmap-cron.json`.
+
+## Concetto fondamentale
+
+**Chi vende trova in noi un alleato** — ogni modifica sito deve rafforzare fiducia e accompagnamento, non la «caccia all’incarico».
 
 ## Obiettivo funnel
 
@@ -22,6 +27,7 @@ Visitatore → proprietario → contatto → conversazione → sopralluogo → v
 
 ## Prima di ogni modifica sito
 
+0. Il venditore si sente **alleato**?
 1. Quale **percorso A–L**?
 2. Quale **passo funnel**?
 3. **Asset esistente** da estendere (no duplicati)?
