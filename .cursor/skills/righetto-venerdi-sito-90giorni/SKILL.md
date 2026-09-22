@@ -15,11 +15,12 @@ description: >-
 Quando l'utente scrive **`"SKILL"`** (virgolette incluse):
 
 1. Leggi `TEST-SKILL/skill-competitor-roadmap-q3-2026.md` **§8**
-2. Leggi **`TEST-SKILL/skill-acquisizione-cron-venerdi.md`** + **`data/acquisition-roadmap-cron.json`** — **esegui task acquisizione settimana corrente (repo #1 automatico)**
-3. Leggi `skill-memoria-progressi.md` + `data/editorial-queue.json` + `data/gsc-indexing-weekly.json` + `data/gsc-keywords-priority.json` + `data/competitor-roadmap-q3-2026.json`
-4. Verifica **`skill-ai-act-compliance.md`** — barra sito e disclosure chat attive su pagine pubbliche
-5. Output piano giornata (formato §8 skill-competitor + § Output combinato acquisizione) — **repo #1 = cron acquisizione**, poi max 2 task repo (SOSTENERE · blog · fix) + 2 task utente GSC/GBP
-6. Non lista generica — acquisizione sett. N/12 **prima**, poi SOSTENERE · blog coda · gap Q3 · macrociclo SEO 12 sett.
+2. Leggi **`TEST-SKILL/skill-acquisizione-cron-venerdi.md`** + **`data/venerdi-friday-pipeline.json`** + **`data/acquisition-roadmap-cron.json`** — **repo #1 acquisizione · #2 blog owner (spec sett. N) · #3 social proprietari**
+3. Leggi **`TEST-SKILL/skill-acquisizione-contenuti-acquisizione.md`** per articoli e post con foto/carosello
+4. Leggi `skill-memoria-progressi.md` + `data/editorial-queue.json` + `data/gsc-indexing-weekly.json` + `data/gsc-keywords-priority.json` + `data/competitor-roadmap-q3-2026.json`
+5. Verifica **`skill-ai-act-compliance.md`** — barra sito e disclosure chat attive su pagine pubbliche
+6. Output piano giornata (formato §8 skill-competitor + § Output combinato acquisizione) — **slot #1→#3 pipeline**, poi max 1 task SOSTENERE/fix se tempo
+7. Non lista generica — acquisizione sett. N/12 **prima**, blog owner con spec pipeline, bozza social, poi SOSTENERE · GSC
 
 Sinonimi: «SKILL», «piano SKILL», `"SKILL"` il venerdì.
 
@@ -35,7 +36,7 @@ Sinonimi: «SKILL», «piano SKILL», `"SKILL"` il venerdì.
 ## Quando applicare questa skill
 
 0. **Utente scrive `"SKILL"`** → § Trigger sopra (priorità massima il venerdì)
-0a. **Cron acquisizione:** `skill-acquisizione-cron-venerdi.md` + `data/acquisition-roadmap-cron.json` — 1 task/settimana automatico
+0a. **Cron venerdì unificato:** `skill-acquisizione-cron-venerdi.md` + `data/venerdi-friday-pipeline.json` — acquisizione + blog owner + social proprietari
 0b. Leggi **`TEST-SKILL/skill-memoria-progressi.md`** — §Prossimi passi
 0c. Leggi **`data/editorial-queue.json`** — prossimo blog `scheduled`
 1. **È venerdì** e l'utente apre la chat: proponi "Venerdì Righetto — questa settimana fare…"

@@ -81,6 +81,34 @@
       { "giorno_offset": 4, "ora": "18:30", "tipo": "facebook_post" }
     ]
   },
+  "proprietari_acquisizione": {
+    "_doc": "Post venerdì slot #3 — skill-acquisizione-contenuti-acquisizione.md · venerdi-friday-pipeline.json",
+    "titoli_spintax": [
+      "{Chi vende|Se hai un immobile}: {titolo_hook}",
+      "{Alleato nella vendita|Consulenza senza impegno}: {titolo_hook}"
+    ],
+    "corpo_spintax": [
+      "{TARGET|Per chi sta valutando la vendita}: {problema}\n\n{PROMESSA|In Righetto}: {promessa} — {tono_alleato|un referente al tuo fianco}, senza pressione sull'incarico.\n\n{PROVA|Dal 2000 a Limena}: {prova}\n\n{CTA|Prossimo passo}: {link}\nTel. 049.8843484"
+    ],
+    "hashtags": [
+      "#padova",
+      "#righettoimmobiliare",
+      "#venderecasa",
+      "#valutazioneimmobile",
+      "#limena",
+      "#proprietari",
+      "#consulenzaimmobiliare",
+      "#mercatoimmobiliare",
+      "#agenziaimmobiliare",
+      "#immobilipadova",
+      "#venditacasa",
+      "#alleatovendita"
+    ],
+    "canali_settimana": [
+      { "giorno_offset": 4, "ora": "12:00", "tipo": "instagram_feed" },
+      { "giorno_offset": 4, "ora": "18:00", "tipo": "facebook_post" }
+    ]
+  },
   "agenzia": {
     "titoli_spintax": [
       "{Righetto Immobiliare|La tua agenzia a Padova}: {titolo}",
