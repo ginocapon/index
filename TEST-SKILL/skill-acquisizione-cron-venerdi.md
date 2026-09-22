@@ -158,6 +158,12 @@ Dettaglio machine-readable: **`data/venerdi-friday-pipeline.json`**.
 
 ---
 
+## Riepilogo utente (blog nuovi vs esistenti vs social)
+
+Vedi **`TEST-SKILL/venerdi-riepilogo-blog-social.md`** — tabelle batch CTA, articoli da scrivere, post venerdì vs cron social.
+
+---
+
 ## Collegamenti
 
 - `.cursor/skills/righetto-venerdi-sito-90giorni/SKILL.md`

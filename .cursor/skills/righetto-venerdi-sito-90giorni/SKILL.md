@@ -24,6 +24,8 @@ Quando l'utente scrive **`"SKILL"`** (virgolette incluse):
 
 Sinonimi: «SKILL», «piano SKILL», `"SKILL"` il venerdì.
 
+**Riepilogo chiaro blog/social:** `TEST-SKILL/venerdi-riepilogo-blog-social.md` (nuovi vs già online vs post proprietari).
+
 ---
 
 ## Contesto sito (per l'agente)
