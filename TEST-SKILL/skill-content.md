@@ -4,9 +4,23 @@
 
 ---
 
+## 0. PRIORITÀ STRATEGICA — venditori e **alleato** (2026)
+
+**Fondamentale:** chi vende deve trovare in Righetto **un alleato** — accompagnamento chiaro dalla valutazione al rogito, tono professionale e mai aggressivo.
+
+Il sito è orientato in primis a **proprietari che vogliono vendere** nell’area **Limena + 10 km** e quartieri di Padova che lambiscono il nord-est padovano.
+
+- **Funnel sito:** `TEST-SKILL/skill-acquisizione-proprietari.md` (percorsi A–L, asset, KPI)
+- **Advisor + GEO:** `TEST-SKILL/skill-real-estate-advisor.md` + `data/advisor-territorio-limena-10km.json`
+- **Cursor:** `/proprietari` · `/advisor`
+- **Blog/zone/landing:** angolo **venditore alleato** (valutazione, mandato, tempi, pricing con fonti); CTA verso pillar vendita (§1)
+- **Acquirenti/affitti:** cluster validi ma non devono **sostituire** il messaggio «alleato nella vendita» su servizi e landing owner
+
+---
+
 ## 1. CLUSTER CONTENUTI (Stato Marzo 2026)
 
-### Cluster "Vendere Casa Padova" ✅ COMPLETO
+### Cluster "Vendere Casa Padova" ✅ COMPLETO — **PILLAR ACQUISIZIONE**
 - servizio-vendita.html, blog-costi-vendere-casa-padova-2026.html
 - landing-vendere-casa-padova.html, blog-documenti-vendita-casa.html
 - blog-tasse-vendita-casa.html, blog-tempi-vendita-casa-padova.html
