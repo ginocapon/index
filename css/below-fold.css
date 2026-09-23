@@ -304,6 +304,54 @@
   .rec-marquee-track { animation: none; }
 }
 .vt-section { margin-top: 44px; }
+#visite-virtuali-hp {
+  padding: 72px 28px 80px;
+  position: relative;
+  isolation: isolate;
+  z-index: 4;
+}
+.vt-hp-inner { max-width: 1100px; margin: 0 auto; }
+.vt-hp-head { text-align: center; margin-bottom: 36px; }
+.vt-hp-eyebrow { color: var(--oro); justify-content: center; }
+.vt-hp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+}
+.vt-hp-link {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+  padding-bottom: 3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.vt-hp-link:hover,
+.vt-hp-link:focus-visible {
+  color: var(--oro);
+  border-color: rgba(255, 107, 53, 0.55);
+}
+.vt-hp-link--primary { color: var(--oro); border-color: rgba(255, 107, 53, 0.45); }
+.vt-hp-empty {
+  text-align: center;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 520px;
+  margin: 8px auto 0;
+}
+@media (max-width: 768px) {
+  #visite-virtuali-hp { padding: 60px 20px 64px; }
+  .vt-hp-actions { flex-direction: column; align-items: stretch; text-align: center; }
+}
 .vt-img-ph {
   width: 100%;
   height: 100%;
@@ -1252,6 +1300,7 @@ footer{
 
 /* Fasce scure — effetto mock pagina 2 (navy + vetro + arancio) */
 #testimonial,
+#visite-virtuali-hp,
 #drone-hp {
   background: linear-gradient(105deg, #0a1628 0%, #152435 40%, #1e3348 72%, #2d4258 100%) !important;
   isolation: isolate;
@@ -1262,11 +1311,16 @@ footer{
   padding: 80px 28px !important;
   background: linear-gradient(105deg, #172c40 0%, #203a52 48%, #2d4b63 100%) !important;
 }
+#visite-virtuali-hp {
+  background: linear-gradient(105deg, #152435 0%, #1a3044 45%, #243d54 100%) !important;
+}
 #perche .sec-h2,
 #testimonial .sec-h2,
+#visite-virtuali-hp .sec-h2,
 #drone-hp .sec-h2 { color: #fff !important; }
 #perche .sec-p,
 #testimonial .sec-p,
+#visite-virtuali-hp .sec-p,
 #drone-hp .sec-p { color: rgba(255,255,255,0.80) !important; }
 #perche .ps-big,
 #territorio .t-stat-box {

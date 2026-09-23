@@ -389,6 +389,7 @@ function toursFromSupabaseActive(data, catalog) {
 
 async function loadVisiteVirtualiHome() {
   const grid = document.getElementById('vtGridHome');
+  const emptyMsg = document.getElementById('vtGridHomeEmpty');
   if (!grid) return;
   try {
     var catalogPromise = fetchVtCatalog();
@@ -420,9 +421,18 @@ async function loadVisiteVirtualiHome() {
       }
     }
 
-    if (!tours.length) return;
+    if (!tours.length) {
+      grid.setAttribute('aria-busy', 'false');
+      if (emptyMsg) emptyMsg.hidden = false;
+      return;
+    }
+    if (emptyMsg) emptyMsg.hidden = true;
+    grid.setAttribute('aria-busy', 'false');
     renderVisiteVirtualiHome(tours.slice(0, VT_PREVIEW), catalog);
-  } catch (e) {}
+  } catch (e) {
+    grid.setAttribute('aria-busy', 'false');
+    if (emptyMsg) emptyMsg.hidden = false;
+  }
 }
 
 function mergeTourWithCatalog(tour, catalog) {
