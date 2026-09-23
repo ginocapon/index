@@ -490,6 +490,11 @@ body.rig-sugar-paper #testimonial {
   isolation: isolate;
   z-index: 4;
 }
+body.rig-sugar-paper #visite-virtuali-hp {
+  background: linear-gradient(105deg, #152435 0%, #1a3044 45%, #243d54 100%) !important;
+  isolation: isolate;
+  z-index: 4;
+}
 body.rig-sugar-paper #mutuo-hp {
   background: #f7f5f1 !important;
   isolation: isolate;
