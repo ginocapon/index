@@ -119,10 +119,10 @@ body {
   z-index: 45;
   pointer-events: none;
   top: 88px;
-  left: calc(var(--sidebar-w) + 32px);
-  right: 32px;
+  left: calc(var(--sidebar-w) + 16px);
+  right: 16px;
   bottom: 24px;
-  background: url('img/admin/watermark-atmosphere.jpg?v=2') right bottom / min(380px, 32vw) auto no-repeat;
+  background: url('img/admin/watermark-atmosphere.jpg?v=3') center center / min(760px, 64vw) auto no-repeat;
   opacity: 0.14;
   mix-blend-mode: multiply;
 }
@@ -130,11 +130,12 @@ body {
 #appWrapper .topbar { z-index: 50; }
 @media (max-width: 768px) {
   #appWrapper::after {
-    left: 16px;
-    right: 16px;
+    left: 8px;
+    right: 8px;
     top: 72px;
-    background-size: min(280px, 70vw) auto;
-    opacity: 0.12;
+    background-position: center center;
+    background-size: min(560px, 92vw) auto;
+    opacity: 0.14;
   }
 }
 @media print {
