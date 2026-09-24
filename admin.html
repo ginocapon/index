@@ -519,11 +519,12 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 .form-row-prezzo-contratto__prezzo {
   max-width: 100%;
 }
+.form-row-prezzo-contratto--solo-prezzo,
 .form-row-prezzo-contratto:has(#contrattoAffittoResWrap[hidden]) {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
 }
-.form-row-prezzo-contratto:has(#contrattoAffittoResWrap[hidden]) .form-row-prezzo-contratto__prezzo {
-  grid-column: 1;
+#contrattoAffittoResWrap[hidden] {
+  display: none !important;
 }
 
 /* Tipo contratto affitto residenziale — solo admin (chip / flex) */
@@ -2333,7 +2334,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                     <option value="asta_giudiziaria">⚖️ Asta Giudiziaria</option>
                   </select>
                 </div>
-                <div class="form-row-prezzo-contratto">
+                <div class="form-row-prezzo-contratto form-row-prezzo-contratto--solo-prezzo">
                   <div class="form-group form-row-prezzo-contratto__prezzo">
                     <label>Prezzo (€) *</label>
                     <input type="number" id="f_prezzo" placeholder="es. 180000" required>
@@ -5742,12 +5743,16 @@ var CONTRATTO_AFFITTO_RES_LABELS = {
 function toggleContrattoAffittoRes() {
   var sel = document.getElementById('f_tipo_operazione');
   var wrap = document.getElementById('contrattoAffittoResWrap');
+  var row = wrap && wrap.closest('.form-row-prezzo-contratto');
   if (!wrap || !sel) return;
   var show = sel.value === 'affitto_residenziale';
-  wrap.hidden = !show;
-  if (!show) {
+  if (show) {
+    wrap.removeAttribute('hidden');
+  } else {
+    wrap.setAttribute('hidden', '');
     wrap.querySelectorAll('input[name="contratto_affitto_res"]').forEach(function(r) { r.checked = false; });
   }
+  if (row) row.classList.toggle('form-row-prezzo-contratto--solo-prezzo', !show);
 }
 
 function getContrattoAffittoResValue() {
@@ -7417,6 +7422,7 @@ function doImport() {
 currentFotos=[];
 renderFotos();
   document.getElementById('f_attivo').checked=true;
+  toggleContrattoAffittoRes();
   closeImportModal();
   toast('✅ Dati importati! Aggiungi le tue foto.','success');
   window.scrollTo(0,200);
@@ -13424,6 +13430,7 @@ showSection = function(name) {
     }
     // Popola le 3 tendine contenuto (blog, immobili, landing)
     emPopulateContentPickers();
+    toggleContrattoAffittoRes();
   });
 
   // ═══ TAB SWITCHING (Visuale / Codice) ═══
