@@ -508,6 +508,74 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 }
 .form-group textarea { resize: vertical; min-height: 80px; }
 
+/* Tipo contratto affitto residenziale — solo admin (chip / flex) */
+.contratto-affitto-res {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--caffe3);
+}
+.contratto-affitto-res__label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--caffe2);
+  margin-bottom: 8px;
+}
+.contratto-affitto-res__chips {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 6px;
+  width: 100%;
+}
+.contratto-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  min-width: 0;
+  gap: 4px;
+  padding: 8px 6px;
+  border-radius: 999px;
+  border: 1.5px solid var(--caffe3);
+  background: #faf8f5;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--nero);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  user-select: none;
+}
+@media (max-width: 768px) {
+  .contratto-affitto-res__chips { flex-wrap: wrap; }
+  .contratto-chip { flex: 1 1 calc(33.333% - 6px); min-width: 92px; font-size: 0.65rem; }
+}
+.contratto-chip input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.contratto-chip:has(input:checked) {
+  border-color: var(--oro);
+  background: #fff4ed;
+  box-shadow: 0 0 0 1px rgba(255, 107, 53, 0.25);
+  color: #8a3b12;
+}
+.contratto-affitto-res small {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.68rem;
+  color: var(--caffe2);
+  line-height: 1.45;
+}
+
 .section-divider {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.1rem;
@@ -2218,16 +2286,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <input type="text" id="f_titolo" placeholder="es. Appartamento luminoso centro" required>
                 </div>
                 <div class="form-group">
-                  <label>Tipo Operazione *</label>
-                  <select id="f_tipo_operazione" required>
-                    <option value="">Seleziona...</option>
-                    <option value="vendita">🏷️ In Vendita</option>
-                    <option value="affitto_residenziale">🏠 Affitto Residenziale</option>
-                    <option value="affitto_commerciale">🏢 Affitto Commerciale</option>
-                    <option value="asta_giudiziaria">⚖️ Asta Giudiziaria</option>
-                  </select>
-                </div>
-                <div class="form-group">
                   <label>Tipologia</label>
                   <select id="f_tipologia" onchange="suggerisciCodice()">
                     <option value="appartamento">Appartamento</option>
@@ -2245,6 +2303,25 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                     <option value="terreno">Terreno / Rurale</option>
                     <option value="garage">Garage / Box</option>
                   </select>
+                </div>
+                <div class="form-group">
+                  <label>Tipo Operazione *</label>
+                  <select id="f_tipo_operazione" required onchange="toggleContrattoAffittoRes()">
+                    <option value="">Seleziona...</option>
+                    <option value="vendita">🏷️ In Vendita</option>
+                    <option value="affitto_residenziale">🏠 Affitto Residenziale</option>
+                    <option value="affitto_commerciale">🏢 Affitto Commerciale</option>
+                    <option value="asta_giudiziaria">⚖️ Asta Giudiziaria</option>
+                  </select>
+                  <div id="contrattoAffittoResWrap" class="contratto-affitto-res" hidden>
+                    <span class="contratto-affitto-res__label">Tipo contratto locazione</span>
+                    <div class="contratto-affitto-res__chips" role="radiogroup" aria-label="Tipo contratto affitto residenziale">
+                      <label class="contratto-chip"><input type="radio" name="contratto_affitto_res" value="affitto_ordinario"> Affitto ordinario</label>
+                      <label class="contratto-chip"><input type="radio" name="contratto_affitto_res" value="cedolare_secca"> Cedolare secca</label>
+                      <label class="contratto-chip"><input type="radio" name="contratto_affitto_res" value="concordato"> Concordato</label>
+                    </div>
+                    <small>Solo per te in admin e in stampa PDF — non compare nei filtri del sito.</small>
+                  </div>
                 </div>
                 <div class="form-group">
                   <label>Prezzo (€) *</label>
@@ -5548,6 +5625,9 @@ function renderTable(data) {
       : i.tipo_operazione === 'affitto_commerciale' ? `<span class="badge badge-arancio">Affitto Comm.</span>`
       : i.tipo_operazione === 'asta_giudiziaria' ? `<span class="badge badge-grigio">Asta</span>`
       : `<span class="badge badge-grigio">${escHtml(i.tipo_operazione || '—')}</span>`;
+    const contrBadge = (i.tipo_operazione === 'affitto_residenziale' || i.tipo_operazione === 'affitto') && i.contratto_affitto_res
+      ? ` <span class="badge badge-grigio" title="${escHtml(CONTRATTO_AFFITTO_RES_LABELS[i.contratto_affitto_res] || i.contratto_affitto_res)}">${escHtml(contrattoAffittoResShortLabel(i.contratto_affitto_res))}</span>`
+      : '';
 
     const evidenza = i.in_evidenza ? '⭐' : '';
     const prezzo = i.prezzo ? '€ ' + Number(i.prezzo).toLocaleString('it-IT') : '—';
@@ -5560,7 +5640,7 @@ function renderTable(data) {
         <div style="font-weight:600;font-size:0.85rem">${evidenza} ${i.titolo || '—'}</div>
         <div style="color:var(--caffe2);font-size:0.75rem">${i.codice || ''} · ${i.comune || 'Padova'}</div>
       </td>
-      <td>${tipo}</td>
+      <td>${tipo}${contrBadge}</td>
       <td style="font-weight:600">${prezzo}</td>
       <td>${mq}</td>
       <td>${i.locali || '—'}</td>
@@ -5632,6 +5712,43 @@ function filterTable() {
 // ══════════════════════════════════════
 // FORM / SAVE
 // ══════════════════════════════════════
+var CONTRATTO_AFFITTO_RES_LABELS = {
+  affitto_ordinario: 'Affitto ordinario',
+  cedolare_secca: 'Cedolare secca',
+  concordato: 'Concordato'
+};
+
+function toggleContrattoAffittoRes() {
+  var sel = document.getElementById('f_tipo_operazione');
+  var wrap = document.getElementById('contrattoAffittoResWrap');
+  if (!wrap || !sel) return;
+  var show = sel.value === 'affitto_residenziale';
+  wrap.hidden = !show;
+  if (!show) {
+    wrap.querySelectorAll('input[name="contratto_affitto_res"]').forEach(function(r) { r.checked = false; });
+  }
+}
+
+function getContrattoAffittoResValue() {
+  var sel = document.getElementById('f_tipo_operazione');
+  if (!sel || sel.value !== 'affitto_residenziale') return null;
+  var r = document.querySelector('input[name="contratto_affitto_res"]:checked');
+  return r ? r.value : null;
+}
+
+function setContrattoAffittoResValue(val) {
+  document.querySelectorAll('input[name="contratto_affitto_res"]').forEach(function(r) {
+    r.checked = (val && r.value === val);
+  });
+  toggleContrattoAffittoRes();
+}
+
+function contrattoAffittoResShortLabel(val) {
+  if (!val) return '';
+  var map = { affitto_ordinario: 'Ord.', cedolare_secca: 'Ced.', concordato: 'Conc.' };
+  return map[val] || val;
+}
+
 function resetForm() {
   document.getElementById('immobileForm').reset();
   document.getElementById('editId').value = '';
@@ -5642,6 +5759,7 @@ function resetForm() {
   document.getElementById('f_proprietario_id').value = '';
   currentFotos = []; currentPlanimetrie = []; currentDocumenti = []; currentVtScenes = [];
   renderFotos(); renderPlanimetrie(); renderDocumenti(); renderVtScenes();
+  toggleContrattoAffittoRes();
   showSection('nuovo');
 }
 
@@ -5775,7 +5893,7 @@ function editImmobile(id) {
   const fields = ['codice','titolo','tipo_operazione','tipologia','prezzo',
     'proprietario_id','proprietario_nome','proprietario_tel','proprietario_email',
     'comune','indirizzo','indirizzo_mappa','superficie','locali','bagni','piano',
-    'piano_numero','tipo_contratto',
+    'piano_numero','tipo_contratto','contratto_affitto_res',
     'anno_costruzione','stato','classe_energetica','youtube_id','virtual_tour',
     'id_idealista','descrizione','note_interne',
     'camere','bagni_totali','terrazzi_num','ripostigli','garage_num','garage_doppio',
@@ -5787,6 +5905,7 @@ function editImmobile(id) {
     const el = document.getElementById('f_' + f);
     if (el) el.value = imm[f] !== null && imm[f] !== undefined ? imm[f] : '';
   });
+  setContrattoAffittoResValue(imm.contratto_affitto_res || '');
 
   const bools = ['garage','giardino','terrazzo','cantina','ascensore','piscina','arredato',
     'attivo','in_evidenza','venduto','affittato',
@@ -5861,6 +5980,7 @@ async function saveImmobile(e) {
     titolo,
     slug,
     tipo_operazione: document.getElementById('f_tipo_operazione').value,
+    contratto_affitto_res: getContrattoAffittoResValue(),
     tipologia: document.getElementById('f_tipologia').value,
     prezzo: parseFloat(document.getElementById('f_prezzo').value) || null,
     proprietario_id: document.getElementById('f_proprietario_id').value || null,
@@ -6045,6 +6165,7 @@ async function saveImmobile(e) {
     document.getElementById('f_proprietario_id').value = '';
     currentFotos = []; currentPlanimetrie = []; currentDocumenti = []; currentVtScenes = []; currentUnitaCatastali = []; currentCatastoPdf = [];
     renderFotos(); renderPlanimetrie(); renderDocumenti(); renderVtScenes(); renderUnitaCatastali(); renderCatastoPdf();
+    toggleContrattoAffittoRes();
     await loadImmobili();
     showSectionById('immobili');
 
@@ -8313,9 +8434,27 @@ function printPropertyPdf(id) {
   const prezzo = i.prezzo ? '\u20AC ' + Number(i.prezzo).toLocaleString('it-IT') : 'Prezzo su richiesta';
   const prezzoMq = (i.prezzo && i.superficie) ? '\u20AC ' + Math.round(i.prezzo / i.superficie).toLocaleString('it-IT') + '/mq' : '';
   const tipo = (i.tipo_operazione || '').toUpperCase();
+  const isAffittoRes = i.tipo_operazione === 'affitto_residenziale' || i.tipo_operazione === 'affitto';
+  var contrattoPdfHtml = '';
+  if (isAffittoRes) {
+    var contrOpts = [
+      ['affitto_ordinario', 'Affitto ordinario'],
+      ['cedolare_secca', 'Cedolare secca'],
+      ['concordato', 'Concordato']
+    ];
+    var selContr = i.contratto_affitto_res || '';
+    contrattoPdfHtml = '<div class="contratto-pdf"><div class="contratto-pdf-label">Tipo contratto locazione</div><div class="contratto-pdf-chips">' +
+      contrOpts.map(function(pair) {
+        var on = pair[0] === selContr;
+        return '<span class="contratto-pdf-chip' + (on ? ' is-on' : '') + '">' + (on ? '\u2713 ' : '') + escHtml(pair[1]) + '</span>';
+      }).join('') + '</div></div>';
+  }
 
   // Build features table
   const features = [];
+  if (i.contratto_affitto_res && isAffittoRes) {
+    features.push(['Contratto locazione', CONTRATTO_AFFITTO_RES_LABELS[i.contratto_affitto_res] || i.contratto_affitto_res]);
+  }
   if (i.tipologia || i.categoria) features.push(['Tipologia', i.tipologia || i.categoria]);
   if (i.superficie) features.push(['Superficie', i.superficie + ' mq']);
   if (i.locali) features.push(['Locali', i.locali]);
@@ -8464,6 +8603,11 @@ function printPropertyPdf(id) {
   .logo small { display: block; font-size: 8px; font-weight: 400; color: #B0C8E0; letter-spacing: 2px; text-transform: uppercase; margin-top: 1px; }
   .badge-tipo { background: #CEE08F; color: #3A5578; padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px; }
   .rif { text-align: right; font-size: 9px; color: #B0C8E0; margin-top: 3px; }
+  .contratto-pdf { margin: 0 20px 10px; padding: 10px 12px; background: #f4f7ef; border: 1px solid #d8e4c8; border-radius: 8px; page-break-inside: avoid; }
+  .contratto-pdf-label { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #5a7288; margin-bottom: 8px; }
+  .contratto-pdf-chips { display: flex; flex-direction: row; flex-wrap: nowrap; gap: 8px; }
+  .contratto-pdf-chip { flex: 1 1 0; text-align: center; font-size: 10px; font-weight: 600; color: #5a7288; padding: 6px 8px; border-radius: 999px; border: 1px solid #c5d4b8; background: #fff; }
+  .contratto-pdf-chip.is-on { background: #3A5578; color: #fff; border-color: #3A5578; font-weight: 700; }
   .photos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 8px 14px; background: #f5f3ee; }
   .photos img { width: 100%; height: 140px; object-fit: cover; border-radius: 6px; }
   .no-photo { grid-column: 1/-1; height: 140px; border-radius: 6px; background: #ddd; display: flex; align-items: center; justify-content: center; color: #999; }
@@ -8523,6 +8667,7 @@ function printPropertyPdf(id) {
   <span class="price">${prezzo}</span>
   ${prezzoMq ? '<span class="pmq">(' + prezzoMq + ')</span>' : ''}
 </div>
+${contrattoPdfHtml}
 ${specsHtml}
 ${i.descrizione ? '<div class="section"><h2>Descrizione</h2><div class="desc">' + escHtml(i.descrizione).replace(/\\n/g, '<br>') + '</div></div>' : ''}
 <div class="section" style="margin-top:10px"><h2>Caratteristiche</h2></div>
