@@ -123,8 +123,8 @@ body {
   right: 16px;
   bottom: 0;
   overflow: hidden;
-  /* Larghezza ~2×+ rispetto a prima; altezza ~+35% sull’area fissa sotto topbar */
-  background: url('img/admin/watermark-atmosphere-nobg.png?v=2') center bottom / min(680px, 48vw) auto no-repeat;
+  /* Viso in alto: ancoraggio top (con bottom restano visibili solo le gambe) */
+  background: url('img/admin/watermark-atmosphere-nobg.png?v=3') center top / min(400px, 32vw) auto no-repeat;
   opacity: 0.14;
 }
 #appWrapper .main { position: relative; z-index: 1; }
@@ -133,10 +133,10 @@ body {
   #appWrapper::after {
     left: 8px;
     right: 8px;
-    top: 140px;
+    top: 64px;
     bottom: 0;
     background-position: center bottom;
-    background-size: auto min(88vh, 720px);
+    background-size: min(360px, 82vw) auto;
     opacity: 0.14;
   }
 }
