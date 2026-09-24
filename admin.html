@@ -118,12 +118,13 @@ body {
   position: fixed;
   z-index: 45;
   pointer-events: none;
-  top: 200px;
+  top: 72px;
   left: calc(var(--sidebar-w) + 16px);
   right: 16px;
   bottom: 0;
   overflow: hidden;
-  background: url('img/admin/watermark-atmosphere-nobg.png?v=1') center bottom / auto min(96vh, 980px) no-repeat;
+  /* Larghezza ~2×+ rispetto a prima; altezza ~+35% sull’area fissa sotto topbar */
+  background: url('img/admin/watermark-atmosphere-nobg.png?v=2') center bottom / min(680px, 48vw) auto no-repeat;
   opacity: 0.14;
 }
 #appWrapper .main { position: relative; z-index: 1; }
