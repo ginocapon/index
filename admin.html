@@ -112,27 +112,29 @@ body {
   position: relative;
   isolation: isolate;
 }
-/* Sfondo admin — watermark quasi invisibile (area contenuto) */
+/* Sfondo admin — watermark leggero sopra i pannelli (non sotto, altrimenti non si vede) */
 #appWrapper::after {
   content: '';
   position: fixed;
-  z-index: 0;
+  z-index: 45;
   pointer-events: none;
-  left: calc(var(--sidebar-w) + 24px);
-  right: 24px;
-  bottom: 16px;
-  height: min(340px, 42vh);
-  background: url('img/admin/watermark-atmosphere.jpg') right bottom / contain no-repeat;
-  opacity: 0.055;
-  filter: grayscale(15%) contrast(0.92);
+  top: 88px;
+  left: calc(var(--sidebar-w) + 32px);
+  right: 32px;
+  bottom: 24px;
+  background: url('img/admin/watermark-atmosphere.jpg?v=2') right bottom / min(380px, 32vw) auto no-repeat;
+  opacity: 0.14;
+  mix-blend-mode: multiply;
 }
 #appWrapper .main { position: relative; z-index: 1; }
+#appWrapper .topbar { z-index: 50; }
 @media (max-width: 768px) {
   #appWrapper::after {
-    left: 12px;
-    right: 12px;
-    height: min(260px, 32vh);
-    opacity: 0.045;
+    left: 16px;
+    right: 16px;
+    top: 72px;
+    background-size: min(280px, 70vw) auto;
+    opacity: 0.12;
   }
 }
 @media print {
