@@ -36,9 +36,9 @@ jobs:
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
           if [ -z "$SUPABASE_KEY" ]; then
-            echo "::warning::SUPABASE_KEY assente in GitHub Secrets — sync saltato."
+            echo "::error::SUPABASE_KEY assente in GitHub Secrets — sync non eseguito."
             echo "Aggiungi il secret: repo Settings → Secrets and variables → Actions → SUPABASE_KEY (chiave service_role Supabase)."
-            exit 0
+            exit 1
           fi
           python scripts/sync_media_automation.py
           python scripts/verify_media_migration.py

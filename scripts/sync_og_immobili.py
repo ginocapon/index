@@ -37,12 +37,44 @@ def load_supabase_key() -> str:
     key = os.environ.get("SUPABASE_KEY", "").strip()
     if key:
         return key
-    env_path = ROOT / ".env"
-    if env_path.is_file():
+    for env_path in (ROOT / ".env", ROOT / "righetto_social" / ".env"):
+        if not env_path.is_file():
+            continue
         for line in env_path.read_text(encoding="utf-8").splitlines():
             if line.startswith("SUPABASE_KEY="):
-                return line.split("=", 1)[1].strip()
-    raise SystemExit("SUPABASE_KEY mancante (.env o variabile d'ambiente)")
+                return line.split("=", 1)[1].strip().strip('"').strip("'")
+    raise SystemExit("SUPABASE_KEY mancante (.env root o righetto_social/.env)")
+
+
+def load_media_manifest() -> dict[str, str]:
+    path = DATA_DIR / "media-manifest.json"
+    if not path.is_file():
+        return {}
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(raw, dict):
+        return {}
+    return {k: v for k, v in raw.items() if not str(k).startswith("_") and isinstance(v, str)}
+
+
+def resolve_photo_url(u: str, manifest: dict[str, str]) -> str:
+    u = (u or "").strip()
+    if not u:
+        return ""
+    if u.startswith("img/"):
+        return f"{SITE}/{u}"
+    if u.startswith(SITE + "/img/"):
+        return u
+    if u.startswith("http://") or u.startswith("https://"):
+        if "supabase.co/storage" in u:
+            mapped = manifest.get(u)
+            if not mapped:
+                key = u.split("/storage/v1/object/public/")[1] if "/storage/v1/object/public/" in u else ""
+                if key:
+                    mapped = manifest.get(key) or manifest.get(f"foto-immobili/{key.split('/', 1)[-1]}")
+            if mapped:
+                return f"{SITE}/{mapped.lstrip('/')}"
+        return u
+    return ""
 
 
 def fetch_immobili(key: str) -> list[dict]:
@@ -63,24 +95,14 @@ def cap(s: str) -> str:
     return s[:1].upper() + s[1:] if s else ""
 
 
-def first_photo(row: dict) -> str:
-    def to_public(u: str) -> str:
-        u = (u or "").strip()
-        if not u:
-            return ""
-        if u.startswith("img/"):
-            return f"{SITE}/{u}"
-        if u.startswith("http://") or u.startswith("https://"):
-            return u
-        return ""
-
+def first_photo(row: dict, manifest: dict[str, str]) -> str:
     foto = row.get("foto") or []
     if isinstance(foto, list) and foto:
-        hit = to_public(str(foto[0]))
+        hit = resolve_photo_url(str(foto[0]), manifest)
         if hit:
             return hit
     fp = row.get("foto_principale") or ""
-    hit = to_public(str(fp))
+    hit = resolve_photo_url(str(fp), manifest)
     if hit:
         return hit
     return f"{SITE}/img/team/titolari.webp"
@@ -154,6 +176,7 @@ def build_share_html(entry: dict) -> str:
 
 def main() -> int:
     key = load_supabase_key()
+    manifest = load_media_manifest()
     rows = fetch_immobili(key)
     print(f"Immobili attivi: {len(rows)}")
 
@@ -176,7 +199,7 @@ def main() -> int:
             "seo_slug": seo,
             "title": seo_title(row),
             "description": seo_description(row),
-            "image": first_photo(row),
+            "image": first_photo(row, manifest),
             "share_url": share_immobile_url(seo),
             "app_url": immobile_app_url(seo),
             "share_file": share_immobile_path(seo),
