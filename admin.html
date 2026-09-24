@@ -123,9 +123,8 @@ body {
   right: 16px;
   bottom: 0;
   overflow: hidden;
-  background: url('img/admin/watermark-atmosphere.jpg?v=5') center top / min(1520px, 88vw) auto no-repeat;
+  background: url('img/admin/watermark-atmosphere-nobg.png?v=1') center bottom / auto min(96vh, 980px) no-repeat;
   opacity: 0.14;
-  mix-blend-mode: multiply;
 }
 #appWrapper .main { position: relative; z-index: 1; }
 #appWrapper .topbar { z-index: 50; }
@@ -133,9 +132,10 @@ body {
   #appWrapper::after {
     left: 8px;
     right: 8px;
-    top: 72px;
-    background-position: center center;
-    background-size: min(1120px, 96vw) auto;
+    top: 140px;
+    bottom: 0;
+    background-position: center bottom;
+    background-size: auto min(88vh, 720px);
     opacity: 0.14;
   }
 }
