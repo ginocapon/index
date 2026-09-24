@@ -106,7 +106,38 @@ body {
 }
 
 /* ══════════ LAYOUT ══════════ */
-#appWrapper { display: flex; min-height: 100vh; }
+#appWrapper {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+  isolation: isolate;
+}
+/* Sfondo admin — watermark quasi invisibile (area contenuto) */
+#appWrapper::after {
+  content: '';
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  left: calc(var(--sidebar-w) + 24px);
+  right: 24px;
+  bottom: 16px;
+  height: min(340px, 42vh);
+  background: url('img/admin/watermark-atmosphere.jpg') right bottom / contain no-repeat;
+  opacity: 0.055;
+  filter: grayscale(15%) contrast(0.92);
+}
+#appWrapper .main { position: relative; z-index: 1; }
+@media (max-width: 768px) {
+  #appWrapper::after {
+    left: 12px;
+    right: 12px;
+    height: min(260px, 32vh);
+    opacity: 0.045;
+  }
+}
+@media print {
+  #appWrapper::after { display: none; }
+}
 
 /* SIDEBAR */
 .sidebar {
