@@ -45,20 +45,43 @@ def load_key() -> str:
     key = os.environ.get("SUPABASE_KEY", "").strip()
     if key:
         return key
-    env = ROOT / ".env"
-    if env.is_file():
-        for line in env.read_text(encoding="utf-8").splitlines():
+    for env_path in (ROOT / ".env", ROOT / "righetto_social" / ".env"):
+        if not env_path.is_file():
+            continue
+        for line in env_path.read_text(encoding="utf-8").splitlines():
             if line.startswith("SUPABASE_KEY="):
                 return line.split("=", 1)[1].strip().strip('"').strip("'")
-    raise SystemExit("SUPABASE_KEY mancante in .env")
+    raise SystemExit("SUPABASE_KEY mancante (.env root o righetto_social/.env)")
+
+
+def load_rig_admin_secret() -> str:
+    sec = os.environ.get("RIG_ADMIN_RLS_SECRET", "").strip()
+    if sec:
+        return sec
+    admin_html = ROOT / "admin.html"
+    if admin_html.is_file():
+        m = re.search(
+            r"const RIG_ADMIN_RLS_SECRET = '([^']+)'",
+            admin_html.read_text(encoding="utf-8"),
+        )
+        if m:
+            return m.group(1)
+    return ""
+
+
+def sb_request_headers(key: str, *, json_body: bool = False) -> dict[str, str]:
+    headers = {"apikey": key, "Authorization": f"Bearer {key}"}
+    if json_body:
+        headers["Content-Type"] = "application/json"
+    admin = load_rig_admin_secret()
+    if admin:
+        headers["x-righetto-admin"] = admin
+    return headers
 
 
 def sb_get(path: str, key: str) -> list | dict:
     url = f"{SUPABASE_URL}{path}"
-    req = urllib.request.Request(
-        url,
-        headers={"apikey": key, "Authorization": f"Bearer {key}"},
-    )
+    req = urllib.request.Request(url, headers=sb_request_headers(key))
     with urllib.request.urlopen(req, timeout=120) as r:
         return json.loads(r.read().decode("utf-8"))
 
@@ -71,14 +94,16 @@ def sb_patch_immobile(row_id: str, payload: dict, key: str) -> None:
         data=data,
         method="PATCH",
         headers={
-            "apikey": key,
-            "Authorization": f"Bearer {key}",
-            "Content-Type": "application/json",
-            "Prefer": "return=minimal",
+            **sb_request_headers(key, json_body=True),
+            "Prefer": "return=representation",
         },
     )
-    with urllib.request.urlopen(req, timeout=60):
-        pass
+    with urllib.request.urlopen(req, timeout=60) as r:
+        updated = json.loads(r.read().decode("utf-8"))
+    if not updated:
+        raise RuntimeError(
+            f"PATCH immobili id={row_id}: 0 righe aggiornate (RLS o chiave errata)"
+        )
 
 
 def storage_public_url(bucket: str, path: str) -> str:

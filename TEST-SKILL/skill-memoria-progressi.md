@@ -112,7 +112,7 @@
 | www → apex redirect | ✅ 15/07/2026 — DNS Serverplan + GitHub Pages |
 | Email venerdì + PDF GSC/GA4 | ✅ 15/07/2026 — `venerdi-report-pdf.py` + allegato MIME |
 | `send-mail.php` allegati | ⚠️ ricaricare su cPanel dopo deploy repo |
-| `SUPABASE_KEY` GitHub Actions | ⚠️ verificare secret |
+| `SUPABASE_KEY` GitHub Actions | ❌ **assente** (24/09/2026) — sync ogni 6 h saltato; aggiungere service_role in repo Secrets |
 | Blog publish automatico (agente) | ✅ coda `data/editorial-queue.json` |
 | Backlink / DA | Gap off-site |
 

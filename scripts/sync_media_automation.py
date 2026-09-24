@@ -25,12 +25,13 @@ def load_key() -> str:
     key = os.environ.get("SUPABASE_KEY", "").strip()
     if key:
         return key
-    env = ROOT / ".env"
-    if env.is_file():
-        for line in env.read_text(encoding="utf-8").splitlines():
+    for env_path in (ROOT / ".env", ROOT / "righetto_social" / ".env"):
+        if not env_path.is_file():
+            continue
+        for line in env_path.read_text(encoding="utf-8").splitlines():
             if line.startswith("SUPABASE_KEY="):
                 return line.split("=", 1)[1].strip().strip('"').strip("'")
-    raise SystemExit("SUPABASE_KEY mancante")
+    raise SystemExit("SUPABASE_KEY mancante (.env root o righetto_social/.env)")
 
 
 def sb_get(path: str, key: str) -> list:
