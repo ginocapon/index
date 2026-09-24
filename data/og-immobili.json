@@ -1,6 +1,17 @@
 {
   "generated": "2026-09-24",
   "bySlug": {
+    "appartamento-affitto-residenziale-padova-lf0034": {
+      "codice": "LF0034",
+      "titolo": "Affitto Alticchiero arredato",
+      "seo_slug": "appartamento-affitto-residenziale-padova-lf0034",
+      "title": "Appartamento in affitto a Padova — Righetto Immobiliare Padova",
+      "description": "Appartamento · 106 m² · 3 locali · € 800 · Rif. LF0034 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF0034/001-1790242568717-8c8e0cee-229a-4de3-b798-37c57d03b295.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-padova-lf0034",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-padova-lf0034",
+      "share_file": "share-immobile-appartamento-affitto-residenziale-padova-lf0034.html"
+    },
     "ufficio-vendita-limena-uff2247-v": {
       "codice": "UFF2247-V",
       "titolo": "Ufficio in Centro Storico a Limena al primo piano",
@@ -245,6 +256,17 @@
     }
   },
   "byLegacySlug": {
+    "affitto-alticchiero-arredato": {
+      "codice": "LF0034",
+      "titolo": "Affitto Alticchiero arredato",
+      "seo_slug": "appartamento-affitto-residenziale-padova-lf0034",
+      "title": "Appartamento in affitto a Padova — Righetto Immobiliare Padova",
+      "description": "Appartamento · 106 m² · 3 locali · € 800 · Rif. LF0034 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF0034/001-1790242568717-8c8e0cee-229a-4de3-b798-37c57d03b295.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-padova-lf0034",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-padova-lf0034",
+      "share_file": "share-immobile-appartamento-affitto-residenziale-padova-lf0034.html"
+    },
     "ufficio-in-centro-storico-a-limena-al-primo-piano": {
       "codice": "UFF2247",
       "titolo": "Ufficio in Centro Storico a Limena al primo piano",
@@ -467,6 +489,17 @@
     }
   },
   "byCodice": {
+    "LF0034": {
+      "codice": "LF0034",
+      "titolo": "Affitto Alticchiero arredato",
+      "seo_slug": "appartamento-affitto-residenziale-padova-lf0034",
+      "title": "Appartamento in affitto a Padova — Righetto Immobiliare Padova",
+      "description": "Appartamento · 106 m² · 3 locali · € 800 · Rif. LF0034 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF0034/001-1790242568717-8c8e0cee-229a-4de3-b798-37c57d03b295.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-padova-lf0034",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-padova-lf0034",
+      "share_file": "share-immobile-appartamento-affitto-residenziale-padova-lf0034.html"
+    },
     "UFF2247-V": {
       "codice": "UFF2247-V",
       "titolo": "Ufficio in Centro Storico a Limena al primo piano",
