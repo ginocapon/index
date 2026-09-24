@@ -508,11 +508,29 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 }
 .form-group textarea { resize: vertical; min-height: 80px; }
 
+/* Prezzo + tipo contratto affitto — stessa riga (2 colonne) */
+.form-row-prezzo-contratto {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.form-row-prezzo-contratto__prezzo {
+  max-width: 100%;
+}
+.form-row-prezzo-contratto:has(#contrattoAffittoResWrap[hidden]) {
+  grid-template-columns: 1fr 1fr;
+}
+.form-row-prezzo-contratto:has(#contrattoAffittoResWrap[hidden]) .form-row-prezzo-contratto__prezzo {
+  grid-column: 1;
+}
+
 /* Tipo contratto affitto residenziale — solo admin (chip / flex) */
 .contratto-affitto-res {
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px dashed var(--caffe3);
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
 }
 .contratto-affitto-res__label {
   display: block;
@@ -552,6 +570,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
   user-select: none;
 }
 @media (max-width: 768px) {
+  .form-row-prezzo-contratto { grid-template-columns: 1fr; }
   .contratto-affitto-res__chips { flex-wrap: wrap; }
   .contratto-chip { flex: 1 1 calc(33.333% - 6px); min-width: 92px; font-size: 0.65rem; }
 }
@@ -2313,7 +2332,13 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                     <option value="affitto_commerciale">🏢 Affitto Commerciale</option>
                     <option value="asta_giudiziaria">⚖️ Asta Giudiziaria</option>
                   </select>
-                  <div id="contrattoAffittoResWrap" class="contratto-affitto-res" hidden>
+                </div>
+                <div class="form-row-prezzo-contratto">
+                  <div class="form-group form-row-prezzo-contratto__prezzo">
+                    <label>Prezzo (€) *</label>
+                    <input type="number" id="f_prezzo" placeholder="es. 180000" required>
+                  </div>
+                  <div id="contrattoAffittoResWrap" class="form-group contratto-affitto-res" hidden>
                     <span class="contratto-affitto-res__label">Tipo contratto locazione</span>
                     <div class="contratto-affitto-res__chips" role="radiogroup" aria-label="Tipo contratto affitto residenziale">
                       <label class="contratto-chip"><input type="radio" name="contratto_affitto_res" value="affitto_ordinario"> Affitto ordinario</label>
@@ -2322,10 +2347,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                     </div>
                     <small>Solo per te in admin e in stampa PDF — non compare nei filtri del sito.</small>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label>Prezzo (€) *</label>
-                  <input type="number" id="f_prezzo" placeholder="es. 180000" required>
                 </div>
 
                 <div class="form-group form-full">
