@@ -2,7 +2,7 @@
 ## Prompt Operativo Master Unificato
 
 > **Versione:** 2.0 — 15 Marzo 2026 (patch contenuti **3 Aprile 2026**)
-> **Gate obbligatorio agente:** **`TEST-SKILL/skill-massimo-punteggio.md`** — leggere prima di ogni modifica.
+> **Gate obbligatorio agente:** **`TEST-SKILL/skill-massimo-punteggio.md`** — leggere prima di ogni modifica. **Premortem** (prima commit/push pubblico): **`TEST-SKILL/skill-premortem-righetto.md`** — trigger `Premortem` / `/premortem`.
 > **Changelog 10 luglio 2026:** title/meta gate su ogni contenuto — `skill-essentials.md` §**1.2** + `validate-page.js` (title ≤60 target / ≤70 max, meta ≤160).
 > **Changelog 9 luglio 2026:** media annunci — foto/reel su GitHub Pages; sync automatico `sync-media-github.yml` ogni 6 h; **`skill-media-migration.md`**.
 > **Changelog 3 luglio 2026 — e):** checklist venerdì unificata — `skill-massimo-punteggio.md` §4.

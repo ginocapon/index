@@ -13,6 +13,7 @@ description: >-
 
 1. Leggi `TEST-SKILL/skill-essentials.md`
 2. Leggi `TEST-SKILL/skill-massimo-punteggio.md` (gate Google)
+2b. Leggi **`TEST-SKILL/skill-premortem-righetto.md`** — prima di ogni commit/push pubblico (o su `/premortem`)
 3. Leggi **`TEST-SKILL/skill-efficienza-sito.md`** (buonsenso operativo + gate media/GA4)
 4. Leggi **`TEST-SKILL/skill-ai-act-compliance.md`** (trasparenza AI Act UE — priorità permanente)
 5. Consulta `TEST-SKILL/context-map.json` per il task specifico → carica i moduli indicati
@@ -30,6 +31,7 @@ description: >-
 
 ## Checklist fine task
 
+- [ ] **Premortem** eseguito se commit/push (§`skill-premortem-righetto.md` §3–4)
 - [ ] File letto prima di modificare
 - [ ] Title ≤60 (max 70), meta ≤160 — `node scripts/validate-page.js --file pagina.html`
 - [ ] `sitemap.xml` se nuova/rimossa URL
