@@ -9,7 +9,7 @@
 <link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="canonical" href="https://righettoimmobiliare.it/servizio-gestione">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Gestione Immobili e Patrimonio — Righetto Immobiliare Padova">
+<meta property="og:title" content="Gestione Immobili Padova | Righetto Immobiliare">
 <meta property="og:description" content="Gestione completa del tuo patrimonio immobiliare a Padova: inquilini, manutenzione, fiscalità, rendicontazione. Tu incassi, noi risolviamo ogni problema.">
 <meta property="og:url" content="https://righettoimmobiliare.it/servizio-gestione">
 <meta property="og:site_name" content="Righetto Immobiliare">
@@ -18,7 +18,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Gestione Immobili e Patrimonio — Righetto Immobiliare Padova">
+<meta name="twitter:title" content="Gestione Immobili Padova | Righetto Immobiliare">
 <meta name="twitter:description" content="Gestione completa del tuo patrimonio immobiliare a Padova: inquilini, manutenzione, fiscalità, rendicontazione. Tu incassi, noi risolviamo ogni problema.">
 <meta name="twitter:image" content="https://righettoimmobiliare.it/img/foto-servizi/gestioni-immobili-padova.webp">
 <meta name="description" content="Gestione immobili a Padova: inquilini, manutenzione, fiscalità e rendicontazione trasparente. 200+ immobili gestiti. Righetto Immobiliare.">
@@ -152,47 +152,50 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "serviceType": "Gestione Immobili e Patrimonio Immobiliare",
-  "name": "Servizio Gestione Immobili — Righetto Immobiliare",
-  "url": "https://righettoimmobiliare.it/servizio-gestione",
-      "dateModified": "2026-03-18",
-  "provider": {
-    "@type": "RealEstateAgent",
-    "name": "Righetto Immobiliare",
-    "url": "https://righettoimmobiliare.it",
-    "telephone": "+39-049-884-3484",
-    "address": {"@type": "PostalAddress", "streetAddress": "Via Roma n.96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
-    "geo": {"@type": "GeoCoordinates", "latitude": 45.476956, "longitude": 11.845762},
-    "sameAs": [
-      "https://www.facebook.com/righettoimmobiliare",
-      "https://www.instagram.com/righettoimmobiliare",
-      "https://www.linkedin.com/company/righetto-immobiliare"
-    ],
-    "hasMap": "https://maps.google.com/?q=45.476956,11.845762",
-    "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "127", "bestRating": "5", "worstRating": "1"}
-  },
-  "areaServed": {"@type": "AdministrativeArea", "name": "Provincia di Padova"},
-  "description": "Gestione completa del patrimonio immobiliare a Padova: selezione inquilini, manutenzione, fiscalità, rendicontazione trasparente. Oltre 200 immobili gestiti con un approccio concreto e orientato ai risultati."
-}
-</script>
-<script type="application/ld+json">
-{
-    "dateModified": "2026-07-03","@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
-  {"@type":"ListItem","position":1,"name":"Home","item":"https://righettoimmobiliare.it/"},
-  {"@type":"ListItem","position":2,"name":"Servizi","item":"https://righettoimmobiliare.it/servizi"},
-  {"@type":"ListItem","position":3,"name":"Gestione Immobili","item":"https://righettoimmobiliare.it/servizio-gestione"}
-]}
-</script>
-<script type="application/ld+json">
-{
-    "dateModified": "2026-07-03","@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-  {"@type":"Question","name":"Quanto costa la gestione immobiliare a Padova?","acceptedAnswer":{"@type":"Answer","text":"Il costo della gestione immobiliare a Padova con Righetto Immobiliare varia in base al numero di unita' e ai servizi richiesti. In media si tratta del 5-8% del canone annuo per la gestione base (inquilini, manutenzione, fiscalita'). Il servizio completo include anche la ricerca inquilino e la registrazione contratti."}},
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://righettoimmobiliare.it/servizio-gestione#webpage",
+      "url": "https://righettoimmobiliare.it/servizio-gestione",
+      "name": "Gestione Immobili Padova | Righetto Immobiliare",
+      "dateModified": "2026-09-25",
+      "inLanguage": "it-IT",
+      "about": {"@id": "https://righettoimmobiliare.it/servizio-gestione#service"},
+      "publisher": {"@id": "https://righettoimmobiliare.it/#agenzia"}
+    },
+    {
+      "@type": "Service",
+      "@id": "https://righettoimmobiliare.it/servizio-gestione#service",
+      "serviceType": "Gestione Immobili e Patrimonio Immobiliare",
+      "name": "Servizio Gestione Immobili — Righetto Immobiliare",
+      "url": "https://righettoimmobiliare.it/servizio-gestione",
+      "dateModified": "2026-09-25",
+      "provider": {"@id": "https://righettoimmobiliare.it/#agenzia"},
+      "areaServed": {"@type": "AdministrativeArea", "name": "Provincia di Padova"},
+      "description": "Gestione completa del patrimonio immobiliare a Padova: selezione inquilini, manutenzione, fiscalità, rendicontazione trasparente. Oltre 200 immobili gestiti con un approccio concreto e orientato ai risultati."
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://righettoimmobiliare.it/servizio-gestione#breadcrumb",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://righettoimmobiliare.it/"},
+        {"@type": "ListItem", "position": 2, "name": "Servizi", "item": "https://righettoimmobiliare.it/servizi"},
+        {"@type": "ListItem", "position": 3, "name": "Gestione Immobili", "item": "https://righettoimmobiliare.it/servizio-gestione"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://righettoimmobiliare.it/servizio-gestione#faq",
+      "mainEntity": [
+  {"@type":"Question","name":"Quanto costa la gestione immobiliare a Padova?","acceptedAnswer":{"@type":"Answer","text":"Il compenso per la gestione immobiliare con Righetto Immobiliare varia in base al numero di unità e ai servizi richiesti (locazione iniziale, incassi, manutenzione, rendicontazione). Si concorda in sede nel mandato: non pubblichiamo listini o percentuali online. Contattaci per una proposta personalizzata al 049.8843484."}},
   {"@type":"Question","name":"Cosa include il servizio di gestione immobili?","acceptedAnswer":{"@type":"Answer","text":"Il servizio include: selezione e qualifica inquilini, redazione e registrazione contratti, gestione rapporti con inquilini, coordinamento manutenzione ordinaria e straordinaria, rivalutazione ISTAT annuale, rendicontazione trasparente, assistenza fiscale e gestione morosita'."}},
   {"@type":"Question","name":"Come gestite la manutenzione degli immobili a Padova?","acceptedAnswer":{"@type":"Answer","text":"Disponiamo di una rete di artigiani e professionisti verificati a Padova per ogni tipo di intervento: idraulici, elettricisti, imbianchini, fabbri, imprese edili. Coordiniamo gli interventi, supervisioniamo i lavori e otteniamo preventivi competitivi. Il proprietario approva ogni spesa prima dell'esecuzione."}},
   {"@type":"Question","name":"Quanti immobili gestite a Padova?","acceptedAnswer":{"@type":"Answer","text":"Righetto Immobiliare gestisce oltre 200 unita' immobiliari tra Padova citta' e provincia. La conoscenza approfondita del territorio padovano ci permette di gestire ogni tipologia: appartamenti, ville, uffici, negozi. Ogni immobile ha un referente dedicato per garantire attenzione personalizzata."}},
   {"@type":"Question","name":"Come funziona la rendicontazione della gestione immobiliare?","acceptedAnswer":{"@type":"Answer","text":"Ogni proprietario riceve un report mensile con: incassi canoni, spese sostenute, stato manutenzioni, scadenze contrattuali. La rendicontazione e' trasparente e accessibile. A fine anno forniamo un riepilogo fiscale completo per la dichiarazione dei redditi."}}
-]}
+      ]
+    }
+  ]
+}
 </script>
 </head>
 <body>
@@ -368,8 +371,8 @@
   </div>
 </section>
 
-<!-- TESTIMONIANZE -->
-<section class="sec">
+<!-- TESTIMONIANZE (testo marketing — non markup Review; data-nosnippet evita estratti tipo recensione) -->
+<section class="sec" data-nosnippet>
   <div class="sec-inner sr">
     <div class="sec-tag">Cosa dicono i clienti</div>
     <h2 class="sec-t">Chi ci ha affidato <strong>la gestione</strong></h2>
@@ -452,7 +455,7 @@
       <div><div class="flogo">Righetto <span>Immobiliare</span></div><div class="finfo">Via Roma n.96 — 35010 Limena (PD)<br>Tel: 049.8843484 · Cell: 349 736 5930<br>info@righettoimmobiliare.it</div></div>
       <div class="fcol"><div class="fh">Servizi</div><a href="servizio-vendita">Vendita Immobili</a><a href="servizio-locazioni">Locazioni</a><a href="servizio-preliminari">Preliminari</a><a href="servizio-gestione">Gestione Immobili</a><a href="servizio-valutazioni">Valutazioni</a><a href="servizio-utenze">Utenze</a></div>
       <div class="fcol"><div class="fh">Immobili</div><a href="immobili?op=vendita">In vendita</a><a href="immobili?op=affitto">In affitto</a><div class="fh" style="margin-top:.8rem">Quartieri</div><a href="zona-centro-storico-padova">Centro Storico</a><a href="zona-arcella-padova">Arcella</a><a href="zona-universitaria-padova">Zona Universitaria</a><a href="zona-prato-della-valle-padova">Prato della Valle</a><a href="zona-sacra-famiglia-padova">Sacra Famiglia</a><a href="zona-forcellini-padova">Forcellini</a><a href="zona-guizza-padova">Guizza</a><a href="zona-voltabarozzo-padova">Voltabarozzo</a></div>
-      <div class="fcol"><div class="fh">Info</div><a href="chi-siamo">Chi siamo</a><a href="faq">FAQ</a><a href="contatti">Contatti</a><a href="privacy">Privacy</a><a href="cookie-policy">Cookie Policy</a><a href="#" data-cookie-prefs>Preferenze Cookie</a></div>
+      <div class="fcol"><div class="fh">Info</div><a href="chi-siamo">Chi siamo</a><a href="faq">FAQ</a><a href="contatti">Contatti</a><a href="privacy">Privacy</a><span aria-hidden="true"> · </span><a href="cookie-policy">Cookie Policy</a><span aria-hidden="true"> · </span><a href="#" data-cookie-prefs>Preferenze Cookie</a></div>
     </div>
     <div class="fbot"><span>&copy; 2026 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
   </div>
@@ -461,7 +464,6 @@
 <script src="js/config.js?v=4"></script>
 <script src="js/rig-lead-form.js?v=3"></script>
 <script src="js/nav-mobile.js?v=3" defer></script>
-<script src="js/config.js?v=4"></script>
 <script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */
 (function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=9';document.body.appendChild(s);}
 setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
