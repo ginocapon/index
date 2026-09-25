@@ -167,6 +167,16 @@ img{max-width:100%;height:auto;display:block}
 .val-wa-qr{margin-top:1rem;text-align:center}
 .val-wa-qr canvas{margin:0 auto;border-radius:8px}
 .val-wa-qr p{font-size:.7rem;color:var(--gray);margin-top:.3rem}
+.val-edu-box{text-align:left;background:#fff;border:2px solid rgba(108,99,255,.2);border-radius:14px;padding:1.1rem 1.2rem;margin:1.2rem 0;color:var(--dark);box-shadow:0 4px 24px rgba(108,99,255,.08)}
+.val-edu-box h3{font-size:.92rem;font-weight:700;margin-bottom:.5rem;color:var(--purple-deep)}
+.val-edu-box p,.val-edu-box li{font-size:.78rem;color:var(--gray);line-height:1.65}
+.val-edu-box ul{margin:.4rem 0 .6rem 1.1rem}
+.val-edu-box li{margin-bottom:.35rem}
+.val-sopralluogo-cta{display:flex;flex-direction:column;align-items:center;gap:.55rem;margin:1rem 0 .5rem}
+.val-sopralluogo-cta .val-cta-primary{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff;padding:.85rem 1.6rem;border-radius:12px;font-size:.88rem;font-weight:700;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;transition:transform .2s,box-shadow .2s;text-align:center;max-width:100%}
+.val-sopralluogo-cta .val-cta-primary:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(108,99,255,.35)}
+.val-sopralluogo-cta .val-cta-secondary{font-size:.72rem;color:var(--gray);font-weight:500}
+.val-sopralluogo-cta .val-cta-secondary a{color:var(--purple);font-weight:700;text-decoration:underline}
 @keyframes wink{0%,80%,100%{transform:scale(1)}90%{transform:scale(1.05) rotate(-2deg)}}
 
 /* COME FUNZIONA */
@@ -390,13 +400,27 @@ img{max-width:100%;height:auto;display:block}
         <div class="val-result" id="valResult">
           <div class="val-linda-wrap">
             <img src="img/team/foto-linda-righetto-viola.webp" alt="Linda Righetto — Righetto Immobiliare" class="val-linda-img" width="180" height="220">
-            <div class="val-linda-bubble">Ricordati di contattarci! 😉</div>
+            <div class="val-linda-bubble">Ottimo punto di partenza — il passo successivo e il sopralluogo</div>
           </div>
           <div class="val-stima-box">
             <div class="val-stima-label">Stima indicativa del tuo immobile</div>
             <div class="val-stima-value" id="valMed"></div>
             <div class="val-stima-range" id="valRange"></div>
             <div class="val-stima-mq" id="valMq"></div>
+          </div>
+          <div class="val-edu-box" id="valEduBox" aria-labelledby="valEduTitle">
+            <h3 id="valEduTitle">Perche serve un sopralluogo dopo la stima online</h3>
+            <p>Il range qui sopra usa comparabili di zona e i dati che hai inserito: utile per orientarti, ma <strong>non sostituisce una visita in loco</strong>.</p>
+            <ul>
+              <li>Stato effettivo, finiture e impianti incidono sul prezzo reale di mercato.</li>
+              <li>Luce, esposizione, rumore e contesto del palazzo si valutano solo dal vivo.</li>
+              <li>Planimetria, conformita urbanistica e vincoli possono cambiare la strategia di vendita.</li>
+            </ul>
+            <p>In agenzia ti accompagniamo con calma: nessun impegno, nessuna percentuale pubblicata online — tutto da concordare in sede nel mandato.</p>
+          </div>
+          <div class="val-sopralluogo-cta">
+            <a class="val-cta-primary" href="servizio-valutazioni#richiedi">Prenota sopralluogo gratuito</a>
+            <p class="val-cta-secondary">Preferisci parlare subito? <a href="tel:+390498843484">049.8843484</a> · <a href="https://wa.me/393497365930?text=Ho%20fatto%20la%20stima%20online%20su%20righettoimmobiliare.it%20—%20vorrei%20fissare%20un%20sopralluogo%20gratuito." target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
           </div>
           <button class="val-pdf-btn" id="valPdfBtn" style="display:none" onclick="scaricaPDF()">📄 Scarica scheda PDF</button>
           <div class="val-pdf-notice" id="valPdfNotice" style="display:none">

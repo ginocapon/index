@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-18",
+  "updated": "2026-09-25",
   "source": "GSC manuale + probe live post-deploy — aggiornare ogni venerdì",
   "note": "Sitemap OK (203 URL). Deploy 18/09: blog-gestione-locazione-delegata-padova-2026 live 200 — richiedere indicizzazione GSC. Probe 569 URL: 0 issue. Canonical senza www, senza doppio slash.",
   "sitemap_urls": 203,
@@ -167,8 +167,8 @@
     }
   },
   "next_friday_batch": {
-    "date": "2026-09-25",
-    "label": "batch-09-25-affitti-studenti-owner + follow-up gestione",
+    "date": "2026-10-02",
+    "label": "batch-10-02-blog-studenti-settembre + follow-up gestione",
     "max_urls_per_session": 12,
     "urls": [
       "https://righettoimmobiliare.it/blog-gestione-locazione-delegata-padova-2026",
@@ -184,6 +184,6 @@
       "https://righettoimmobiliare.it/landing-valutazione",
       "https://righettoimmobiliare.it/zona-universitaria-padova"
     ],
-    "instructions": "1) Follow-up indicizzazione blog gestione locazione 18/09. 2) Pubblicare eq-sep25-001 affitti studenti settembre se pronto. 3) servizio-vendita follow-up. 4) blog-rendimento + agenzia-padova SOSTENERE meta."
+    "instructions": "1) Dopo publish eq-sep25-001: richiedi indicizzazione blog-affitti-studenti-settembre-padova-proprietario-2026. 2) Follow-up blog gestione locazione. 3) servizio-vendita follow-up. 4) blog-rendimento SOSTENERE meta."
   }
 }

@@ -537,7 +537,9 @@
     },
     {
       "id": "eq-sep25-001",
-      "status": "scheduled",
+      "status": "published",
+      "published_date": "2026-09-25",
+      "url": "blog-affitti-studenti-settembre-padova-proprietario-2026",
       "priority": 4,
       "target_week": "2026-09-25",
       "slug": "blog-affitti-studenti-settembre-padova-proprietario-2026",

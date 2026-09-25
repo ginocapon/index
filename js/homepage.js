@@ -950,6 +950,13 @@ function generateSlug(titolo) {
   // Articoli statici (sempre presenti)
   const articoliStatici = [
     {
+      "titolo": "Affitti studenti Padova settembre 2026: cosa cambia per chi affitta",
+      "categoria": "Guida proprietari",
+      "data": "2026-09-25",
+      "immagine_copertina": "img/blog/blog-affitti-studenti-settembre-padova-proprietario-2026-hero.webp",
+      "url_statico": "blog-affitti-studenti-settembre-padova-proprietario-2026"
+    },
+    {
       "titolo": "Gestione locazione delegata Padova: cosa include e quando conviene",
       "categoria": "Guida proprietari",
       "data": "2026-09-18",
