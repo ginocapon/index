@@ -13,7 +13,7 @@ description: >-
 
 1. Leggi `TEST-SKILL/skill-essentials.md`
 2. Leggi `TEST-SKILL/skill-massimo-punteggio.md` (gate Google)
-2b. Leggi **`TEST-SKILL/skill-premortem-righetto.md`** — prima di ogni commit/push pubblico (o su `/premortem`)
+2b. **`TEST-SKILL/skill-premortem-righetto.md`** — premortem su tutte le superfici §4.2 pertinenti al diff (o `/premortem`)
 3. Leggi **`TEST-SKILL/skill-efficienza-sito.md`** (buonsenso operativo + gate media/GA4)
 4. Leggi **`TEST-SKILL/skill-ai-act-compliance.md`** (trasparenza AI Act UE — priorità permanente)
 5. Consulta `TEST-SKILL/context-map.json` per il task specifico → carica i moduli indicati

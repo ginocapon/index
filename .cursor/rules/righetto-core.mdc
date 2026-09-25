@@ -29,8 +29,8 @@ Se non hai fonte verificabile (OMI, FIMAA, ISTAT, Banca d'Italia, ADE…), **non
 ## Stack (non cambiare)
 HTML/CSS/JS **vanilla** · GitHub Pages · Supabase · **zero CDN esterni** · URL interne **senza** `.html`.
 
-## Premortem (sempre — prima di commit/push pubblico)
-Leggi **`TEST-SKILL/skill-premortem-righetto.md`**. Simula: *«il deploy è già fallito in GSC»* → correggi prima del push. Trigger: **`Premortem`**, **`/premortem`**, *premortem questo*.
+## Premortem (sempre — tutto il sito, ogni sfaccettatura nel diff)
+Leggi **`TEST-SKILL/skill-premortem-righetto.md`**: matrice §4.2 (homepage→share→legal), controlli misurabili, **no chiacchere** (solo path/URL/comandi). Default fino a prompt più efficace. Trigger: **`Premortem`**, **`/premortem`**.
 
 ## Prima di ogni modifica
 0. Leggi **`TEST-SKILL/skill-massimo-punteggio.md`** (gate Google 10/10 — non divagare).

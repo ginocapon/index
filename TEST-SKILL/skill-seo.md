@@ -387,15 +387,11 @@ Asset: `404.html`, `js/redirects-404.js`, `data/redirects-301.json`, `data/url-p
 
 ---
 
-## 12. Premortem GSC / rich result (sempre con skill dedicata)
+## 12. Premortem (tutto il sito — performance + SEO)
 
-**File:** `TEST-SKILL/skill-premortem-righetto.md` — caricato in `context-map.json` → `always_load`.
+**File:** `TEST-SKILL/skill-premortem-righetto.md` (`always_load`).
 
-Prima di chiudere fix schema, batch `servizio-*`, blog owner o push venerdì:
+Ambito: **ogni** pagina/sfaccettatura nel diff (§4.2 matrice), non solo schema. SEO: §4.3 G1–G6 + policy §5. Output con comandi repo — **regola anti-chiacchere** § intro.
 
-1. Chiediti (o chiedi in chat **`Premortem`** / **`/premortem`**): *recensioni snippet, FAQ, indicizzazione — perché fallirebbe tra 8 settimane?*
-2. Verifica policy §5 premortem: no `Review` on-site; no `aggregateRating` annidato in `Service.provider`.
-3. Post-deploy: Ispezione URL GSC + voce in `gsc-indexing-weekly.json` — deploy da solo **non** chiude l’issue.
-
-Prompt completo utente: §2 in `skill-premortem-righetto.md`.
+Prompt utente: §2 · agente: §3 · formato: §7.
 

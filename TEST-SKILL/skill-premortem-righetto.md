@@ -1,8 +1,9 @@
 # Premortem Righetto — gate decisionale (sempre attivo)
 
-> **Scopo:** evitare fix SEO/GSC/blog «ottimisti» che falliscono dopo il deploy.  
-> **Ispirazione:** tecnica premortem (Klein/Kahneman) — *«il piano è già fallito, spiega perché»* invece di *«è un buon piano?»*.  
-> **Stack:** Cursor + agente Righetto — stesso prompt usabile in chat.
+> **Scopo:** migliorare **performance reali** del sito (velocità, indicizzazione, lead, compliance) — non produzere testo motivazionale.  
+> **Ambito:** **tutte** le superfici pubbliche e ogni sfaccettatura toccata dal diff, finché non sostituiamo questo gate con un prompt più efficace.  
+> **Ispirazione:** premortem (Klein/Kahneman) — *«il deploy è già fallito tra 8 settimane: perché?»*  
+> **Regola anti-chiacchere:** ogni riga dell’output deve citare **file, URL o comando repo**; vietati consigli generici («controlla SEO», «fai attenzione al mobile»).
 
 ---
 
@@ -10,68 +11,112 @@
 
 Esegui il premortem **prima di commit/push** se tocchi almeno uno di:
 
-- Pagine **servizio** / **landing** / **blog** / **zona** (HTML pubblico)
-- **JSON-LD** (schema, FAQ, rating, recensioni)
-- **sitemap.xml**, **GSC** (`gsc-indexing-weekly.json`), batch indicizzazione
-- **Venerdì** slot blog owner o fix acquisizione con impatto SERP
-- Utente scrive **`Premortem`**, **`/premortem`**, *«premortem questo»*, *«premortem il piano»*
+- Qualsiasi **HTML/CSS/JS** servito al visitatore (homepage, hub, servizi, landing, blog, zone, immobili, scheda, share, legal, FAQ, funnel owner, visita virtuale, 404, redirect)
+- **`homepage.js`**, **`immobili.js`**, **chatbot**, **form lead**, **schema** JSON-LD, **sitemap**, **robots**, **llms.txt** / **ai.json**
+- **Admin** solo se impatta il pubblico (sync foto, slug, tour, watermark annunci)
+- **Dati** GSC/GA4/editorial/acquisition in `data/*.json` se cambiano URL o priorità indicizzazione
+- **Venerdì** publish blog / acquisizione / social che punta a URL live
+- Utente: **`Premortem`**, **`/premortem`**, *«premortem questo»*, *«premortem il piano»*
 
-**Eccezione:** typo CSS isolato, copy interno admin senza schema — premortem opzionale.
+**Eccezione (premortem leggero):** typo copy in `admin.html` o template email interni **senza** effetto su pagine pubbliche — solo `validate-page` se hai toccato HTML pubblico per errore.
+
+**Default fino a nuovo prompt:** se il task modifica il sito e non rientra nell’eccezione → premortem **completo sulla matrice §4.2** (solo righe pertinenti al diff).
 
 ---
 
-## 2. Prompt utente (copia-incolla in Cursor)
+## 2. Prompt utente (copia-incolla in Cursor — valido su tutto il sito)
 
 ```text
-Premortem Righetto — assume che tra 8 settimane questo lavoro sia già fallito (GSC, indicizzazione o reputazione tecnica).
+Premortem Righetto — assume che tra 8 settimane questo lavoro abbia peggiorato o non migliorato il sito (GSC, CWV, lead, trust, indicizzazione).
 
-Contesto repo: TEST-SKILL/skill-premortem-righetto.md, skill-memoria-progressi.md, file modificati in questo task.
+Contesto: TEST-SKILL/skill-premortem-righetto.md §4.2, skill-memoria-progressi.md, file nel diff.
 
-Per ogni rischio concreto (non consigli generici):
-1) catena eventi passo-passo fino al fallimento;
-2) assunzione nascosta che stavamo dando per scontata;
-3) segnale precocce (GSC, probe, validate-page, Rich Results).
+Superfici possibili: homepage · servizi · landing owner · blog · zone · immobili/immobile/share · contatti/faq/chi-siamo · legal · JS globali · media annunci.
 
-Poi in sintesi:
-- fallimento più probabile;
+Sfaccettature: performance (WebP, ?v=, LCP) · SEO title/meta/canonical/sitemap · schema/GSC · form+Supabase · WCAG/mobile · claim/fonti · acquisizione proprietari · AI Act · sicurezza form/admin.
+
+Per ogni rischio CONCRETO (max 5):
+1) catena eventi fino al fallimento misurabile (es. CTR↓, URL non indicizzata, form morto, LCP↑);
+2) assunzione nascosta;
+3) segnale precocce: comando script repo, GSC, probe, validate-page.
+
+Sintesi obbligatoria:
+- fallimento più probabile (con URL o file);
 - fallimento più pericoloso;
-- assunzione nascosta più costosa;
-- piano rivisto (diff minimo);
-- checklist pre-push (solo voci non ancora OK).
+- assunzione più costosa;
+- piano rivisto (diff minimo, riferimento skill-efficienza-sito.md);
+- checklist pre-push: SOLO voci §4 ancora [ ].
 
-Non dire solo «valida tutto»: indica file/URL/comandi specifici del repo.
+Vietato: paragrafi senza path/comando. Se tutto OK: dirlo in 3 righe + comandi eseguiti.
 ```
 
 ---
 
-## 3. Prompt agente (BLOCCANTE — eseguire in silenzio se non chiesto esplicitamente)
+## 3. Prompt agente (BLOCCANTE — prima di commit/push)
 
-Dopo aver preparato le modifiche e **prima** di proporre commit/push:
+1. Leggere `skill-memoria-progressi.md` §Prossimi passi + `data/gsc-indexing-weekly.json` se SEO.
+2. Classificare il diff: quali **righe §4.2** della matrice si applicano (non elencare quelle irrilevanti).
+3. Simulare: *deploy live, metriche peggiori o flat tra 6–8 settimane* — una narrativa per **sfaccettatura** toccata.
+4. Eseguire controlli **minimi** (solo ciò che il diff richiede + regressione nota):
 
-1. Leggere `skill-memoria-progressi.md` §Prossimi passi + errori GSC recenti.
-2. Simulare: *deploy fatto, GSC ancora giallo/rosso tra 6–8 settimane*.
-3. Controllare almeno:
-   - `grep -r aggregateRating servizio-*.html` → provider solo `@id` `#agenzia`, no rating annidato su Service
-   - `grep -r '"@type": "Review"' *.html` → no recensioni self-serving (eccetto doc)
-   - FAQ JSON-LD vs testo visibile → no €/mq/% senza fonte OMI/ADE/FIMAA
-   - URL toccate in `sitemap.xml` + `validate-page.js`
-4. Output **obbligatorio** all’utente (5–15 righe): rischio #1, fix già incluso o azione aggiuntiva, checklist restante.
-5. Se premortem rivela gap **non** nel diff corrente → segnalarlo; non chiudere con «push e vediamo».
+| Sempre se HTML pubblico nel diff | Comando |
+|----------------------------------|---------|
+| Title/meta | `node scripts/validate-page.js --file <pagina>` |
+| Repo compliance | `python scripts/google-compliance-check.py` (se >1 pagina o schema) |
+| Schema recensioni | `rg 'aggregateRating' servizio-*.html` · `rg '"@type": "Review"' --glob '*.html'` |
+| URL nuove/modificate | `sitemap.xml` + opz. `python scripts/probe_live_urls.py` |
+| Blog | `python scripts/check_doppioni_sito.py` (se nuovo articolo) |
+| Foto annunci / img | `python scripts/verify_media_migration.py` (se `img/immobili/` o admin media) |
+| Form/CTA | confronto con `contatti.html` / `skill-forms-leads.md` |
+| JS globale | bump `?v=N` su CSS/JS linkati dalle pagine toccate |
+
+5. Output utente **§7** (max 15 righe utili). Se gap fuori diff → 1 riga «debito noto» + non spacciare push come chiusura GSC.
+6. **Performance:** se aggiungi immagini/script → citare peso WebP e above-the-fold (`skill-efficienza-sito.md` §3.1).
 
 ---
 
-## 4. Checklist pre-push (SEO/GSC)
+## 4. Checklist pre-push
+
+### 4.1 Universale (ogni pagina pubblica nel diff)
+
+| # | Controllo | Dove / comando |
+|---|-----------|----------------|
+| U1 | Canonical apex, no `.html` negli href interni | pagina + `mini-seo-check.sh` |
+| U2 | Title ≤60 (max 70), meta ≤160 | `validate-page.js` |
+| U3 | CSS/JS `?v=N` incrementato | file toccati |
+| U4 | Mobile-first: niente overflow/CTA illeggibili | ispezione + `skill-design.md` |
+| U5 | CTA WCAG AA — no `#FF6B35` + testo bianco | CSS toccato |
+| U6 | Claim: 350+/101/98%/127·4,9/dal 2000; mediazione **in sede** | copy |
+| U7 | Sitemap `lastmod` se URL nuova/rimossa | `sitemap.xml` |
+
+### 4.2 Matrice superficie × sfaccettatura
+
+Applica **solo** le righe il cui tipo compare nel diff.
+
+| Superficie | Pattern file / URL | Performance | SEO/GSC | Schema | Lead | Contenuto | Altro |
+|------------|-------------------|-------------|---------|--------|------|-----------|-------|
+| Homepage | `index.html`, `homepage.js` | hero WebP, no lazy LCP | 1 H1, pillar link | `#agenzia` rating OK, no Review array | CTA owner/acquirente | messaggio alleato venditori | GA4 `G-PHEL8KXLBX` |
+| Hub | `servizi.html`, `blog.html`, `immobili.html` | card img leggere | index interni | Breadcrumb | — | — | — |
+| Servizio | `servizio-*.html` | idem | FAQ keyword naturale | `@graph`, provider `@id` #agenzia | form se presente | no % commissione | batch pattern gestione/locazioni |
+| Landing owner | `landing-*.html`, `proprietario-*.html`, `valutazione-*.html` | form above fold | intent acquisizione | FAQ allineate | `SERVIZI_CONFIG` + Supabase | funnel A–L | `skill-acquisizione-proprietari.md` |
+| Blog | `blog-*.html` | hero ≤150KiB WebP | anti-doppioni | FAQPage + Article | form CTA | 2500+ utili, fonti, no filler | `audit_blog_visuals.py` se nuovo |
+| Zona | `zona-*.html` | map/img lazy sotto fold | OMI/geo reale | LocalBusiness/FAQ | link valutazione | no dati inventati | `skill-zona` |
+| Annunci | `immobile.html`, `immobili.html`, `share-immobile-*.html` | foto WebP GitHub | slug coerente | Product/Offer sobrio | richiesta visita | prezzo coerente admin | sync 6h |
+| Visita / tool | `visita-virtuale.html`, confronta, alert | JS vanilla, no CDN | indicizzazione se public | — | — | — | `data/visite-virtuali.json` |
+| Istituzionale | `contatti`, `faq`, `chi-siamo`, autori | font preload | E-E-A-T link autore | FAQ chatbot sync | form modello contatti | — | `js/chatbot.js` se FAQ |
+| Legal / trust | privacy, cookie, termini | leggero | index/noindex corretto | — | — | AI Act bar se sito | `skill-ai-act-compliance.md` |
+| Global | `css/`, `js/` condivisi | no blur anim, no will-change permanente | — | — | — | — | diff minimo |
+
+### 4.3 SEO/GSC (se schema o servizi/blog/zone)
 
 | # | Controllo | Comando / dove |
 |---|-----------|----------------|
-| 1 | Schema servizi coerente | `provider`: `{"@id":"https://righettoimmobiliare.it/#agenzia"}` — no `aggregateRating` nel figlio |
-| 2 | No Review markup on-site | `rg '"@type": "Review"' --glob '*.html'` |
-| 3 | Testimonial con stelle | sezione con `data-nosnippet` se citazioni marketing |
-| 4 | FAQ allineate | JSON-LD = corpo pagina; mediazione **in sede** |
-| 5 | Pagina validata | `node scripts/validate-page.js --file …` |
-| 6 | Probe se URL nuove | `python scripts/probe_live_urls.py` |
-| 7 | GSC post-deploy | Ispezione URL live → Richiedi indicizzazione → log in `gsc-indexing-weekly.json` |
-| 8 | Memoria | 1 riga log in `skill-memoria-progressi.md` se sprint GSC/blog |
+| G1 | Provider Service senza rating annidato | `rg aggregateRating servizio-*.html` |
+| G2 | No Review markup self-serving | `rg '"@type": "Review"' --glob '*.html'` |
+| G3 | Testimonial visibili | `data-nosnippet` se citazioni |
+| G4 | FAQ JSON-LD = corpo | no €/mq/% senza fonte |
+| G5 | Post-deploy GSC | Ispezione live → indicizzazione → `gsc-indexing-weekly.json` |
+| G6 | Memoria sprint | riga in `skill-memoria-progressi.md` |
 
 ---
 
@@ -79,34 +124,41 @@ Dopo aver preparato le modifiche e **prima** di proporre commit/push:
 
 | Consentito | Vietato |
 |------------|---------|
-| `aggregateRating` su **homepage** `#agenzia` allineato a recensioni Google reali (127 · 4,9) | Array `"review": [...]` con testimonial inventati |
-| Testimonial **visibili** senza schema Review | `aggregateRating` dentro `provider` di ogni `Service` |
-| Link a scheda Google Maps / recensioni | Stelle in schema + 3 box citazione senza `data-nosnippet` (rischio parsing) |
+| `aggregateRating` su **homepage** `#agenzia` (127 · 4,9 verificato) | Array `"review": [...]` inventati |
+| Testimonial **visibili** senza schema Review | `aggregateRating` in `Service.provider` |
+| Link scheda Google Maps | Stelle in schema + citazioni senza `data-nosnippet` |
 
-**Batch pendente noto:** allineare tutti `servizio-*.html` al pattern `@graph` di `servizio-gestione` / `servizio-locazioni`.
+**Debito noto:** allineare tutti `servizio-*.html` al `@graph` di `servizio-gestione` / `servizio-locazioni`.
 
 ---
 
-## 6. Integrazione skill
+## 6. Integrazione skill (razionale, non duplicata)
 
 | File | Ruolo |
 |------|--------|
-| `context-map.json` → `always_load` | Caricato ogni sessione agente |
-| `skill-massimo-punteggio.md` §Premortem | Gate prima commit pubblico |
-| `skill-seo.md` §Premortem | Rich result, GSC, batch servizi |
-| `skill-acquisizione-cron-venerdi.md` | Premortem obbligatorio slot #2 blog se publish |
-| `.cursor/skills/righetto-premortem/SKILL.md` | Slash `/premortem` |
-| `righetto-core.mdc` | Trigger parole chiave |
+| `context-map.json` → `always_load` | Gate ogni sessione |
+| `skill-massimo-punteggio.md` §0 | Ordine lettura + premortem pre-commit |
+| `skill-efficienza-sito.md` §2–3 | Comandi performance/lead — premortem **non** riscrive, **invoca** |
+| `skill-seo.md` §12 | Punto ingresso SEO |
+| `skill-forms-leads.md` | Solo se form nel diff |
+| `skill-acquisizione-cron-venerdi.md` | Publish venerdì |
+| `.cursor/skills/righetto-premortem/SKILL.md` | `/premortem` |
+| `righetto-core.mdc` | Trigger + ambito sito intero |
+
+**Sostituzione futura:** quando avremo un prompt/comando più efficace, deprecare §2 mantenendo §4.2 come checklist secca.
 
 ---
 
-## 7. Output atteso (formato breve)
+## 7. Output atteso (formato breve — obbligatorio)
 
 ```markdown
-### Premortem — [data] · [task]
-- **Più probabile:** …
+### Premortem · [task] · superfici: […]
+- **Più probabile:** … (`path` o URL)
 - **Più pericoloso:** …
 - **Assunzione nascosta:** …
-- **Nel diff:** già coperto / manca: …
-- **Pre-push:** [ ] … [ ] …
+- **Comandi:** `…` → esito
+- **Nel diff:** coperto / manca: …
+- **Pre-push:** [ ] U… [ ] G… (solo aperti)
 ```
+
+Se nessun rischio dopo controlli: *«OK push — eseguiti: …»* (elenco comandi).

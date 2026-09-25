@@ -1,25 +1,25 @@
 ---
 name: righetto-premortem
 description: >-
-  Gate premortem Righetto: prima di commit/push su pagine pubbliche, blog, schema
-  o GSC — simula il fallimento futuro e correggi. Trigger Premortem, /premortem,
-  premortem questo. Sempre attivo via skill-premortem-righetto.md in always_load.
+  Gate premortem su tutte le pagine e sfaccettature del sito (perf, SEO, schema,
+  lead, mobile, owner funnel) prima di commit/push — output con file/comandi, no
+  chiacchere. Trigger Premortem, /premortem. always_load skill-premortem-righetto.md.
 ---
 
 # Premortem Righetto
 
 ## Quando usare
 
-- Prima di **commit/push** su HTML pubblico, JSON-LD, sitemap, fix GSC
-- Venerdì **blog publish** o batch servizi
-- Utente: **`Premortem`**, **`/premortem`**, *«premortem il piano»*, *«premortem questo»*
+- **Ogni** commit/push che tocca il sito pubblico (§1 skill) — non solo blog/GSC
+- Classifica diff → applica solo righe pertinenti di **§4.2 matrice**
+- **`Premortem`**, **`/premortem`**, *premortem questo*
 
 ## Procedura (BLOCCANTE)
 
-1. Leggi **`TEST-SKILL/skill-premortem-righetto.md`** per intero
-2. Leggi **`TEST-SKILL/skill-memoria-progressi.md`** §Prossimi passi
-3. Esegui §3 prompt agente + §4 checklist
-4. Rispondi con formato §7 (breve) — poi commit solo se gap critici coperti o esplicitati all’utente
+1. **`TEST-SKILL/skill-premortem-righetto.md`** (§3 agente + §4.1–4.2)
+2. **`skill-memoria-progressi.md`** §Prossimi passi · **`skill-efficienza-sito.md`** §2 se performance/media/form
+3. Esegui comandi del diff (§3 tabella) — citare esito in §7
+4. Output §7 max 15 righe; gap critici espliciti prima del push
 
 ## Prompt utente (copia da skill §2)
 
