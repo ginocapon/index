@@ -14,9 +14,9 @@
 
 ### 0. Premortem (gate pre-commit — BLOCCANTE)
 
-Prima di **commit o push** che toccano HTML pubblico, schema, sitemap o GSC → esegui **`TEST-SKILL/skill-premortem-righetto.md`** §3 (agente) e §4 (checklist).  
-Trigger utente: `Premortem`, `/premortem`, *«premortem questo»*.  
-Output minimo: rischio più probabile + cosa manca nel diff + tick checklist non OK.
+Prima di **commit o push** su **qualsiasi** superficie pubblica (§1 premortem) → **`TEST-SKILL/skill-premortem-righetto.md`** §3 + matrice §4.2 (solo righe pertinenti al diff).  
+Trigger: `Premortem`, `/premortem`.  
+Output: §7 premortem — **file/URL/comando obbligatori**; niente consigli generici.
 
 ---
 
