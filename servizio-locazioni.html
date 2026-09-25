@@ -149,65 +149,51 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "serviceType": "Contratti di Locazione",
-  "name": "Servizio Contratti di Locazione — Righetto Immobiliare",
-  "url": "https://righettoimmobiliare.it/servizio-locazioni",
-      "dateModified": "2026-08-07",
-  "provider": {
-    "@type": "RealEstateAgent",
-    "@id": "https://righettoimmobiliare.it/#righetto-agent",
-    "name": "Righetto Immobiliare",
-    "url": "https://righettoimmobiliare.it"
-  },
-  "areaServed": {"@type": "AdministrativeArea", "name": "Provincia di Padova"},
-  "description": "Gestione completa contratti di locazione a Padova: qualifica inquilini, contratti su misura 4+4, 3+2, transitori, Airbnb, registrazione telematica, assistenza morosità e polizze affitto sicuro.",
-  "image": "https://righettoimmobiliare.it/img/foto-servizi/locazioni-padova-og.webp"
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://righettoimmobiliare.it/servizio-locazioni#webpage",
+      "url": "https://righettoimmobiliare.it/servizio-locazioni",
+      "name": "Contratti di Locazione Padova | Righetto Immobiliare",
+      "dateModified": "2026-09-25",
+      "inLanguage": "it-IT",
+      "about": {"@id": "https://righettoimmobiliare.it/servizio-locazioni#service"},
+      "publisher": {"@id": "https://righettoimmobiliare.it/#agenzia"}
+    },
+    {
+      "@type": "Service",
+      "@id": "https://righettoimmobiliare.it/servizio-locazioni#service",
+      "serviceType": "Contratti di Locazione",
+      "name": "Servizio Contratti di Locazione — Righetto Immobiliare",
+      "url": "https://righettoimmobiliare.it/servizio-locazioni",
+      "dateModified": "2026-09-25",
+      "provider": {"@id": "https://righettoimmobiliare.it/#agenzia"},
+      "areaServed": {"@type": "AdministrativeArea", "name": "Provincia di Padova"},
+      "description": "Gestione completa contratti di locazione a Padova: qualifica inquilini, contratti su misura 4+4, 3+2, transitori, registrazione telematica ADE, assistenza morosità.",
+      "image": "https://righettoimmobiliare.it/img/foto-servizi/locazioni-padova-og.webp"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://righettoimmobiliare.it/servizio-locazioni#breadcrumb",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://righettoimmobiliare.it/"},
+        {"@type": "ListItem", "position": 2, "name": "Servizi", "item": "https://righettoimmobiliare.it/servizi"},
+        {"@type": "ListItem", "position": 3, "name": "Locazioni", "item": "https://righettoimmobiliare.it/servizio-locazioni"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://righettoimmobiliare.it/servizio-locazioni#faq",
+      "mainEntity": [
+  {"@type":"Question","name":"Quanto costa affittare un appartamento a Padova nel 2026?","acceptedAnswer":{"@type":"Answer","text":"I canoni di locazione a Padova variano per zona omogenea, tipologia e stato dell'immobile. Per una stima attendibile usiamo le quotazioni OMI locazioni dell'Agenzia delle Entrate e i comparabili di mercato: Righetto offre valutazione locativa gratuita senza impegno."}},
+  {"@type":"Question","name":"Che differenza c'e' tra contratto 4+4 e 3+2 a Padova?","acceptedAnswer":{"@type":"Answer","text":"Il contratto 4+4 ha canone libero e durata di 4 anni rinnovabili. Il contratto 3+2 a canone concordato prevede un canone calmierato secondo gli accordi territoriali, con agevolazioni fiscali per locatore e conduttore (tra cui cedolare secca sul canone concordato, secondo normativa vigente)."}},
+  {"@type":"Question","name":"Come scegliere un inquilino affidabile a Padova?","acceptedAnswer":{"@type":"Answer","text":"Righetto Immobiliare effettua screening documentale: reddito, referenze, coerenza con il contratto scelto. Dal 2000 operiamo sul territorio padovano con processi strutturati per ridurre il rischio di morosità."}},
+  {"@type":"Question","name":"Quanto rende affittare casa a Padova nel 2026?","acceptedAnswer":{"@type":"Answer","text":"Il rendimento locativo dipende da prezzo di acquisto, canone, spese e fiscalità: va calcolato caso per caso con comparabili e OMI. In consulenza orientiamo il proprietario su contratto e canone senza promettere percentuali generiche."}},
+  {"@type":"Question","name":"Righetto Immobiliare gestisce anche affitti brevi a Padova?","acceptedAnswer":{"@type":"Answer","text":"Valutiamo caso per caso locazioni brevi nel rispetto di regolamento comunale, condominio e adempimenti (Alloggiati Web, CIN ove richiesto). Contattaci per verificare fattibilità e servizi inclusi nel mandato."}}
+      ]
+    }
+  ]
 }
-</script>
-<script type="application/ld+json">
-{
-    "dateModified": "2026-07-03",
-  "@context": "https://schema.org",
-  "@type": "RealEstateAgent",
-  "@id": "https://righettoimmobiliare.it/#righetto-agent",
-  "name": "Righetto Immobiliare",
-  "url": "https://righettoimmobiliare.it",
-  "telephone": "+39-049-884-3484",
-  "address": {"@type": "PostalAddress", "streetAddress": "Via Roma n.96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
-  "geo": {"@type": "GeoCoordinates", "latitude": 45.476956, "longitude": 11.845762},
-  "sameAs": [
-    "https://www.facebook.com/righettoimmobiliare",
-    "https://www.instagram.com/righettoimmobiliare",
-    "https://www.linkedin.com/company/righetto-immobiliare"
-  ],
-  "hasMap": "https://maps.google.com/?q=45.476956,11.845762",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "127",
-    "bestRating": "5",
-    "worstRating": "1"
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-    "dateModified": "2026-07-03","@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
-  {"@type":"ListItem","position":1,"name":"Home","item":"https://righettoimmobiliare.it/"},
-  {"@type":"ListItem","position":2,"name":"Servizi","item":"https://righettoimmobiliare.it/servizi"},
-  {"@type":"ListItem","position":3,"name":"Locazioni","item":"https://righettoimmobiliare.it/servizio-locazioni"}
-]}
-</script>
-<script type="application/ld+json">
-{
-    "dateModified": "2026-07-03","@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-  {"@type":"Question","name":"Quanto costa affittare un appartamento a Padova nel 2026?","acceptedAnswer":{"@type":"Answer","text":"I canoni di locazione a Padova nel 2026 variano in base alla zona e alla tipologia contrattuale. Un bilocale in centro costa 600-900 euro/mese, in Arcella 400-600 euro, in zona universitaria 500-800 euro. I contratti a canone concordato (3+2) offrono vantaggi fiscali sia al proprietario che all'inquilino."}},
-  {"@type":"Question","name":"Che differenza c'e' tra contratto 4+4 e 3+2 a Padova?","acceptedAnswer":{"@type":"Answer","text":"Il contratto 4+4 ha canone libero e durata di 4 anni rinnovabili. Il contratto 3+2 a canone concordato prevede un canone calmierato secondo le tabelle comunali di Padova, ma offre vantaggi fiscali: cedolare secca al 10% (invece del 21%), riduzione IMU e imposta di registro ridotta."}},
-  {"@type":"Question","name":"Come scegliere un inquilino affidabile a Padova?","acceptedAnswer":{"@type":"Answer","text":"Righetto Immobiliare effettua uno screening rigoroso: verifica buste paga, contratto di lavoro, referenze da precedenti proprietari e scoring di solvibilita'. In 25 anni di gestione locazioni a Padova abbiamo sviluppato un processo che riduce al minimo il rischio di morosita'."}},
-  {"@type":"Question","name":"Quanto rende affittare casa a Padova nel 2026?","acceptedAnswer":{"@type":"Answer","text":"Il rendimento locativo medio a Padova nel 2026 e' del 4-6% annuo lordo. Le zone con rendimenti piu' alti sono Arcella (6-8%) e zona universitaria (5-7%), grazie alla forte domanda di studenti e lavoratori. Con il contratto giusto e inquilini selezionati, l'affitto a Padova resta un investimento solido."}},
-  {"@type":"Question","name":"Righetto Immobiliare gestisce anche affitti brevi e Airbnb a Padova?","acceptedAnswer":{"@type":"Answer","text":"Si', offriamo gestione completa di affitti brevi e Airbnb a Padova: pricing dinamico, check-in e check-out, coordinamento pulizie, comunicazioni obbligatorie alla Questura e portale Alloggiati. Il rendimento con affitti brevi puo' essere fino al doppio rispetto alla locazione tradizionale."}}
-]}
 </script>
 </head>
 <body>
@@ -502,7 +488,7 @@
       <div><div class="flogo">Righetto <span>Immobiliare</span></div><div class="finfo">Via Roma n.96 — 35010 Limena (PD)<br>Tel: 049.8843484 · Cell: 349 736 5930<br>info@righettoimmobiliare.it</div></div>
       <div class="fcol"><div class="fh">Servizi</div><a href="servizi">Tutti i servizi</a><a href="servizio-vendita">Vendita</a><a href="servizio-locazioni">Locazioni</a><a href="servizio-preliminari">Preliminari</a><a href="servizio-gestione">Gestione</a><a href="servizio-valutazioni">Valutazioni</a><a href="servizio-utenze">Utenze</a></div>
       <div class="fcol"><div class="fh">Immobili</div><a href="immobili?op=vendita">In vendita</a><a href="immobili?op=affitto">In affitto</a><div class="fh" style="margin-top:.8rem">Quartieri</div><a href="zona-centro-storico-padova">Centro Storico</a><a href="zona-arcella-padova">Arcella</a><a href="zona-universitaria-padova">Zona Universitaria</a><a href="zona-prato-della-valle-padova">Prato della Valle</a><a href="zona-sacra-famiglia-padova">Sacra Famiglia</a><a href="zona-forcellini-padova">Forcellini</a><a href="zona-guizza-padova">Guizza</a><a href="zona-voltabarozzo-padova">Voltabarozzo</a></div>
-      <div class="fcol"><div class="fh">Info</div><a href="chi-siamo">Chi siamo</a><a href="faq">FAQ</a><a href="contatti">Contatti</a><a href="privacy">Privacy</a><a href="cookie-policy">Cookie Policy</a><a href="#" data-cookie-prefs>Preferenze Cookie</a></div>
+      <div class="fcol"><div class="fh">Info</div><a href="chi-siamo">Chi siamo</a><a href="faq">FAQ</a><a href="contatti">Contatti</a><a href="privacy">Privacy</a><span aria-hidden="true"> · </span><a href="cookie-policy">Cookie Policy</a><span aria-hidden="true"> · </span><a href="#" data-cookie-prefs>Preferenze Cookie</a></div>
     </div>
     <div class="fbot"><span>&copy; 2026 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
   </div>
