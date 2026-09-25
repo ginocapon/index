@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-22",
+  "updated": "2026-09-25",
   "friday_pipeline_ref": "data/venerdi-friday-pipeline.json",
   "contenuti_acquisizione_skill": "TEST-SKILL/skill-acquisizione-contenuti-acquisizione.md",
   "anchor_start": "2026-09-19",
@@ -29,9 +29,9 @@
       "owner_paths": ["A", "G"],
       "files": ["landing-valutazione.html", "js/valutazione-pdf.js"],
       "validate": ["node scripts/validate-page.js --file landing-valutazione.html"],
-      "status": "pending",
-      "completed_date": null,
-      "notes": ""
+      "status": "done",
+      "completed_date": "2026-09-25",
+      "notes": "Box educazione + CTA servizio-valutazioni#richiedi e WhatsApp post-stima (cron venerdì sett. 1)."
     },
     {
       "week": 2,

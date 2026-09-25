@@ -112,7 +112,7 @@
 | www → apex redirect | ✅ 15/07/2026 — DNS Serverplan + GitHub Pages |
 | Email venerdì + PDF GSC/GA4 | ✅ 15/07/2026 — `venerdi-report-pdf.py` + allegato MIME |
 | `send-mail.php` allegati | ⚠️ ricaricare su cPanel dopo deploy repo |
-| `SUPABASE_KEY` GitHub Actions | ❌ **assente** (24/09/2026) — sync ogni 6 h saltato; aggiungere service_role in repo Secrets |
+| `SUPABASE_KEY` GitHub Actions | ✅ configurato (24/09/2026) — sync ogni 6 h attivo |
 | Blog publish automatico (agente) | ✅ coda `data/editorial-queue.json` |
 | Backlink / DA | Gap off-site |
 
@@ -144,6 +144,7 @@
 | 05/08/2026 | **Batch GSC Limena** — 5 blog da export keyword utente (appartamento, case vendita, affitto contratto, bilocale/trilocale, brand Righetto) | 2500+ parole ciascuno · hero WebP nuovi · validate-page OK |
 | 11/09/2026 | **Blog eq-sep11-001** vendere casa Limena proprietario — venerdì sett. 12 review trimestrale | Pillar owner vendita locale · gsc-indexing batch 18/09 |
 | 14/09/2026 | **Cron acquisizione venerdì** — skill-acquisizione-cron-venerdi.md + acquisition-roadmap-cron.json (12 sett.) | Ogni `"SKILL"` esegue repo #1 acquisizione · anchor 19/09 · script acquisition_cron_current.py |
+| 25/09/2026 | **Cron venerdì sett. acq 1/12** — acq-w01 landing-valutazione + eq-sep25-001 blog affitti studenti settembre owner + social | Push main · GSC batch blog nuovo |
 
 ---
 
