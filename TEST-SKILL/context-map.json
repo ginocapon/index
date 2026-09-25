@@ -14,7 +14,7 @@
     "cursor_skills": ["righetto-acquisizione-proprietari", "righetto-advisor"]
   },
 
-  "always_load": "TEST-SKILL/skill-essentials.md,TEST-SKILL/skill-massimo-punteggio.md,TEST-SKILL/skill-efficienza-sito.md,TEST-SKILL/skill-memoria-progressi.md,TEST-SKILL/skill-ai-act-compliance.md,TEST-SKILL/skill-acquisizione-proprietari.md",
+  "always_load": "TEST-SKILL/skill-essentials.md,TEST-SKILL/skill-massimo-punteggio.md,TEST-SKILL/skill-premortem-righetto.md,TEST-SKILL/skill-efficienza-sito.md,TEST-SKILL/skill-memoria-progressi.md,TEST-SKILL/skill-ai-act-compliance.md,TEST-SKILL/skill-acquisizione-proprietari.md",
 
   "cursor_skills": {
     "_doc": "TEST-SKILL/skill-cursor-rules.md §2b — indici operativi in .cursor/skills/",
@@ -30,7 +30,8 @@
     "righetto-security": { "command": "/sicurezza", "path": ".cursor/skills/righetto-security/SKILL.md" },
     "righetto-zona": { "command": "/zona", "path": ".cursor/skills/righetto-zona/SKILL.md" },
     "righetto-acquisizione-proprietari": { "command": "/proprietari", "path": ".cursor/skills/righetto-acquisizione-proprietari/SKILL.md" },
-    "righetto-advisor": { "command": "/advisor", "path": ".cursor/skills/righetto-advisor/SKILL.md" }
+    "righetto-advisor": { "command": "/advisor", "path": ".cursor/skills/righetto-advisor/SKILL.md" },
+    "righetto-premortem": { "command": "/premortem", "path": ".cursor/skills/righetto-premortem/SKILL.md" }
   },
 
   "cursor_rules": {

@@ -6,10 +6,17 @@
 **Ordine lettura sessione (non saltare):**
 1. Questo file (`skill-massimo-punteggio.md`)
 2. `skill-essentials.md`
-3. **`skill-efficienza-sito.md`** (gate operativo: media WebP, GA4 unico, diff minimo)
-4. `TEST-SKILL/skimm.md` (se blog/contenuti)
-4. Modulo task da `context-map.json` (seo → `skill-seo.md`, UI → `skill-design.md`, …)
-5. File HTML/CSS da modificare
+3. **`skill-premortem-righetto.md`** (gate prima commit/push su pagine pubbliche — §3 sotto)
+4. **`skill-efficienza-sito.md`** (gate operativo: media WebP, GA4 unico, diff minimo)
+5. `TEST-SKILL/skimm.md` (se blog/contenuti)
+6. Modulo task da `context-map.json` (seo → `skill-seo.md`, UI → `skill-design.md`, …)
+7. File HTML/CSS da modificare
+
+### 0. Premortem (gate pre-commit — BLOCCANTE)
+
+Prima di **commit o push** che toccano HTML pubblico, schema, sitemap o GSC → esegui **`TEST-SKILL/skill-premortem-righetto.md`** §3 (agente) e §4 (checklist).  
+Trigger utente: `Premortem`, `/premortem`, *«premortem questo»*.  
+Output minimo: rischio più probabile + cosa manca nel diff + tick checklist non OK.
 
 ---
 
@@ -239,6 +246,7 @@ Backlink / Domain Authority — PR esterno, non codice. Non blocca il deploy.
 
 ## 5. Collegamenti
 
+- Premortem (sempre): `skill-premortem-righetto.md`
 - Dettaglio SEO: `skill-seo.md`
 - Contenuti blog: `skill-content.md` + `skimm.md`
 - Design/spacing: `SKILL-2.0.md` §13

@@ -385,3 +385,17 @@ Asset: `404.html`, `js/redirects-404.js`, `data/redirects-301.json`, `data/url-p
 7. **Università → affitto** bridge da query medicina/università verso `affitto-studenti`.
 8. **Tour 360 / visita live** in evidenza su card Limena (contenuto non duplicabile dai portali).
 
+---
+
+## 12. Premortem GSC / rich result (sempre con skill dedicata)
+
+**File:** `TEST-SKILL/skill-premortem-righetto.md` — caricato in `context-map.json` → `always_load`.
+
+Prima di chiudere fix schema, batch `servizio-*`, blog owner o push venerdì:
+
+1. Chiediti (o chiedi in chat **`Premortem`** / **`/premortem`**): *recensioni snippet, FAQ, indicizzazione — perché fallirebbe tra 8 settimane?*
+2. Verifica policy §5 premortem: no `Review` on-site; no `aggregateRating` annidato in `Service.provider`.
+3. Post-deploy: Ispezione URL GSC + voce in `gsc-indexing-weekly.json` — deploy da solo **non** chiude l’issue.
+
+Prompt completo utente: §2 in `skill-premortem-righetto.md`.
+

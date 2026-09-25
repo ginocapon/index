@@ -55,6 +55,7 @@ Le **Cursor Skills** (`.cursor/skills/`) **non duplicano** `TEST-SKILL/`: dicono
 | `righetto-zona` | `/zona` | scheda zona, quartiere, SEO locale | content + seo |
 | `righetto-acquisizione-proprietari` | `/proprietari` | funnel owner A–L, homepage, asset acquisizione | acquisizione-proprietari |
 | `righetto-advisor` | `/advisor` | alleato venditori, GEO 10 km Limena, master advisor | acquisizione-proprietari + real-estate-advisor |
+| **`righetto-premortem`** | **`/premortem`** | premortem, prima del push, GSC/schema fallito | **`skill-premortem-righetto.md`** (sempre in `always_load`) |
 
 Percorsi: `.cursor/skills/<nome>/SKILL.md` · `.cursor/commands/<nome>.md`
 

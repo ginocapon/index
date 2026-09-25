@@ -12,10 +12,11 @@ description: >-
 ## Prima di iniziare
 
 1. **`TEST-SKILL/skill-memoria-progressi.md`** — stato, piano 95%, prossimi passi (non ripartire da zero)
-2. `TEST-SKILL/skill-essentials.md` + `TEST-SKILL/skill-massimo-punteggio.md` + **`TEST-SKILL/skill-efficienza-sito.md`**
-3. **`TEST-SKILL/skill-ai-act-compliance.md`** (barra sito, meta trasparenza)
-4. `TEST-SKILL/skill-seo.md` (framework completo)
-5. Per refresh contenuti: anche `TEST-SKILL/skill-content.md`
+2. **`TEST-SKILL/skill-premortem-righetto.md`** — prima di commit/push su schema/GSC/servizi/blog
+3. `TEST-SKILL/skill-essentials.md` + `TEST-SKILL/skill-massimo-punteggio.md` + **`TEST-SKILL/skill-efficienza-sito.md`**
+4. **`TEST-SKILL/skill-ai-act-compliance.md`** (barra sito, meta trasparenza)
+5. `TEST-SKILL/skill-seo.md` (framework completo, §12 premortem GSC)
+6. Per refresh contenuti: anche `TEST-SKILL/skill-content.md`
 
 ## Audit automatico (target 100%)
 

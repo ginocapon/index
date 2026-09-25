@@ -145,6 +145,7 @@
 | 11/09/2026 | **Blog eq-sep11-001** vendere casa Limena proprietario — venerdì sett. 12 review trimestrale | Pillar owner vendita locale · gsc-indexing batch 18/09 |
 | 14/09/2026 | **Cron acquisizione venerdì** — skill-acquisizione-cron-venerdi.md + acquisition-roadmap-cron.json (12 sett.) | Ogni `"SKILL"` esegue repo #1 acquisizione · anchor 19/09 · script acquisition_cron_current.py |
 | 25/09/2026 | **Cron venerdì sett. acq 1/12** — acq-w01 landing-valutazione + eq-sep25-001 blog affitti studenti settembre owner + social | Push main · GSC batch blog nuovo |
+| 25/09/2026 | **Premortem gate** — `skill-premortem-righetto.md` in `always_load` · `/premortem` · righetto-core + massimo-punteggio §0 | Post-deploy GSC gestione/locazioni · batch schema altri `servizio-*` pendente |
 
 ---
 
@@ -166,9 +167,10 @@ Vedi **`TEST-SKILL/skill-competitor-roadmap-q3-2026.md`** + `data/competitor-roa
 
 ## Prossimi passi (per l'agente)
 
-1. **28/07 (lunedì):** follow-up GSC `/servizio-vendita` — richiesta inviata 24/07
-2. **31/07 venerdì:** batch URL in `gsc-indexing-weekly.json` → `next_friday_batch` (include nuovo blog eq-002)
-3. **Blog eq-003** caro affitti under-35 — scheduled 31/07
+1. **GSC post-deploy (25/09):** Ispezione URL live + Richiedi indicizzazione su `/servizio-gestione`, `/servizio-locazioni`, blog eq-sep25-001 — log in `gsc-indexing-weekly.json` (premortem §4)
+2. **Batch schema servizi:** allineare `@graph` gestione/locazioni su vendita, valutazioni, utenze, preliminari, virtual-tour, drone, loft — `grep aggregateRating servizio-*.html`
+3. **Follow-up GSC** `/servizio-vendita` se ancora fuori batch
+4. **Premortem obbligatorio** prima di ogni commit/push pubblico — `Premortem` / `/premortem` · `skill-premortem-righetto.md`
 
 ---
 
@@ -178,7 +180,7 @@ Vedi **`TEST-SKILL/skill-competitor-roadmap-q3-2026.md`** + `data/competitor-roa
 1. Leggi §Stato sintetico + §Prossimi passi
 2. Se utente chiede «cosa fare» → rispondi da §Prossimi passi, NON lista generica
 3. Dopo ogni task → aggiorna Log + piano
-4. Carica: skill-massimo-punteggio.md, gsc-keywords-priority.json
+4. Carica: skill-massimo-punteggio.md, skill-premortem-righetto.md, gsc-keywords-priority.json
 ```
 
 **Routing context-map:** `audit_seo`, `ottimizzazione_contenuto`, `venerdi_contenuti_skimm` → includere questo file.
