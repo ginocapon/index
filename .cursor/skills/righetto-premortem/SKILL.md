@@ -19,7 +19,7 @@ description: >-
 1. **`TEST-SKILL/skill-premortem-righetto.md`** (§3 agente + §4.1–4.2)
 2. **`skill-memoria-progressi.md`** §Prossimi passi · **`skill-efficienza-sito.md`** §2 se performance/media/form
 3. Esegui comandi del diff (§3 tabella) — citare esito in §7
-4. Output §7 max 15 righe; gap critici espliciti prima del push
+4. Output §7.1–7.2 (frame hindsight §3.1 — no «piano ok»); gap critici espliciti prima del push
 
 ## Prompt utente (copia da skill §2)
 
