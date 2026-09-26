@@ -2,8 +2,25 @@
 
 > **Scopo:** migliorare **performance reali** del sito (velocità, indicizzazione, lead, compliance) — non produzere testo motivazionale.  
 > **Ambito:** **tutte** le superfici pubbliche e ogni sfaccettatura toccata dal diff, finché non sostituiamo questo gate con un prompt più efficace.  
-> **Ispirazione:** premortem (Klein/Kahneman) — *«il deploy è già fallito tra 8 settimane: perché?»*  
-> **Regola anti-chiacchere:** ogni riga dell’output deve citare **file, URL o comando repo**; vietati consigli generici («controlla SEO», «fai attenzione al mobile»).
+> **Ispirazione:** premortem Klein (HBR) · *prospettiva hindsight* Wharton/Cornell — *«è già fallito, spiega perché»* batte *«cosa potrebbe andare storto?»* (risposte più specifiche e sincere). Kahneman: tecnica decisionale ad alto valore.  
+> **Regola anti-chiacchere:** ogni riga dell’output deve citare **file, URL o comando repo**; vietati consigli generici.  
+> **Regola anti-ottimismo AI:** **vietato** chiedere all’agente *«è un buon piano?»* / *«valida la mia idea»* — frame obbligatorio: **`Premortem`** / *«rompi questo piano così lo ricostruisco più forte»*.
+
+---
+
+## 0. Confronto metodo (slide / letteratura ↔ Righetto)
+
+| Idea esterna | Già in skill | Ottimizzazione Righetto |
+|--------------|--------------|-------------------------|
+| Premortem ≠ postmortem (prima del deploy) | §1, §3 simulazione 6–8 sett. | Invariato — core corretto |
+| Retrospettiva prospettiva («già fallito») | §2 prompt utente | §3.1 frame agente esplicito |
+| Per ogni fallimento: catena + assunzione + segnali | §2 punti 1–3 | §7 espanso per punto (max 5) |
+| Sintesi: probabile / pericoloso / assunzione / piano rivisto / checklist | §2, §7 | §7.1 blocco strategico obbligatorio |
+| Assunzione nascosta = spesso la parte più costosa | citata in §7 | **Evidenziare in output** (1 frase dedicata) |
+| AI tende al sì → cambiare frame | parziale | § anti-ottimismo sopra + §3.2 |
+| Skill file + trigger «Premortem questo» | `/premortem`, always_load | Trigger anche *«Premortem questo»* = §2 verbatim |
+
+**Cosa NON copiamo dal marketing TikTok:** «viaggia 6 mesi nel futuro», promesse Claude-specific — restiamo su **repo Righetto** e comandi verificabili.
 
 ---
 
@@ -27,7 +44,9 @@ Esegui il premortem **prima di commit/push** se tocchi almeno uno di:
 ## 2. Prompt utente (copia-incolla in Cursor — valido su tutto il sito)
 
 ```text
-Premortem Righetto — assume che tra 8 settimane questo lavoro abbia peggiorato o non migliorato il sito (GSC, CWV, lead, trust, indicizzazione).
+Premortem questo — Righetto.
+
+Non chiedere se il piano è buono: assume che tra 8 settimane sia GIÀ fallito (GSC, CWV, lead, trust, indicizzazione) e spiega perché con dettagli del repo, non consigli generici.
 
 Contesto: TEST-SKILL/skill-premortem-righetto.md §4.2, skill-memoria-progressi.md, file nel diff.
 
@@ -54,9 +73,22 @@ Vietato: paragrafi senza path/comando. Se tutto OK: dirlo in 3 righe + comandi e
 
 ## 3. Prompt agente (BLOCCANTE — prima di commit/push)
 
+### 3.1 Frame (prospettiva hindsight — non negoziabile)
+
+- Partire da: *«Il deploy è fatto. Tra 8 settimane GSC/lead/CWV sono peggiori o flat. Il team crede che il fix fosse sufficiente.»*
+- **Non** elencare rischi generici da manuale; costruire **catene causali** ancorate a file/URL del diff.
+- **Assunzione nascosta:** dedicare almeno una frase alla cosa «ovvia» su cui il piano poggia in silenzio (es. «basta push per chiudere GSC», «il form è uguale a contatti», «nessuno indicizza quella URL»).
+
+### 3.2 Anti-ottimismo (comportamento agente)
+
+- Se l’utente chiede validazione («va bene così?», «posso pushare?») → rispondere con **premortem §7**, non con «sì, sembra ok».
+- Vietato chiudere con incoraggiamento senza almeno un rischio concreto **o** elenco comandi eseguiti con esito OK.
+
+### 3.3 Passi operativi
+
 1. Leggere `skill-memoria-progressi.md` §Prossimi passi + `data/gsc-indexing-weekly.json` se SEO.
 2. Classificare il diff: quali **righe §4.2** della matrice si applicano (non elencare quelle irrilevanti).
-3. Simulare: *deploy live, metriche peggiori o flat tra 6–8 settimane* — una narrativa per **sfaccettatura** toccata.
+3. Narrativa di fallimento per ogni **sfaccettatura** toccata (max 5 punti).
 4. Eseguire controlli **minimi** (solo ciò che il diff richiede + regressione nota):
 
 | Sempre se HTML pubblico nel diff | Comando |
@@ -151,14 +183,27 @@ Applica **solo** le righe il cui tipo compare nel diff.
 
 ## 7. Output atteso (formato breve — obbligatorio)
 
+### 7.1 Per ogni punto di fallimento (max 5)
+
 ```markdown
-### Premortem · [task] · superfici: […]
-- **Più probabile:** … (`path` o URL)
-- **Più pericoloso:** …
+#### Fallimento N — [titolo breve]
+- **Catena:** passo 1 → 2 → … → esito misurabile (GSC / form / LCP / lead)
 - **Assunzione nascosta:** …
-- **Comandi:** `…` → esito
-- **Nel diff:** coperto / manca: …
-- **Pre-push:** [ ] U… [ ] G… (solo aperti)
+- **Segnale precoce:** GSC · probe · validate-page · Rich Results · GA4 — quale e quando
+- **Anchor repo:** `path` o URL
 ```
 
-Se nessun rischio dopo controlli: *«OK push — eseguiti: …»* (elenco comandi).
+### 7.2 Sintesi strategica (sempre, anche se un solo rischio)
+
+```markdown
+### Premortem · [task] · superfici: […]
+- **Più probabile:** …
+- **Più pericoloso:** …
+- **Assunzione più costosa (Klein):** … — spesso era «ovvia» e non scritta nel piano
+- **Piano rivisto (diff minimo):** …
+- **Comandi eseguiti:** `…` → esito
+- **Nel diff:** coperto / manca: …
+- **Checklist pre-lancio:** [ ] U… [ ] G… (solo voci ancora aperte)
+```
+
+Se nessun rischio dopo controlli: *«OK push — premortem negativo utile — eseguiti: …»* (comandi elencati). Max ~20 righe totali utili; zero paragrafi motivazionali.
