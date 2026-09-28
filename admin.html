@@ -2411,7 +2411,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <div class="form-group">
                   <label>Nome proprietario (testo libero)</label>
                   <input type="text" id="f_proprietario_nome" placeholder="Es. Mario Rossi o Immobiliare Rossi Srl">
-                  <small style="color:var(--caffe2);font-size:0.68rem">Se non presente tra i clienti, scrivi qui il nome</small>
+                  <small style="color:var(--caffe2);font-size:0.68rem">Se non presente tra i clienti, scrivi qui il nome — al salvataggio viene creato/agganciato in <strong>Clienti</strong> (email o telefono evitano duplicati)</small>
                 </div>
                 <div class="form-group">
                   <label>Tel. proprietario</label>
@@ -3419,8 +3419,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <option value="newsletter">Newsletter</option>
                 <option value="richiesta">Richieste</option>
                 <option value="manuale">Manuali</option>
+                <option value="proprietario_immobile">Proprietari immobile</option>
               </select>
               <input class="table-search" type="text" placeholder="🔍 Cerca nome, azienda, P.IVA, tel, email, indirizzo..." id="searchClienti" oninput="filterClientiTable()" style="min-width:300px">
+              <button class="btn btn-secondary btn-sm" onclick="syncAllProprietariFromImmobili(true)" title="Importa/collega tutti i proprietari già inseriti negli immobili">↻ Da immobili</button>
               <button class="btn btn-secondary btn-sm" onclick="openCsvImportModal()">Importa CSV</button>
               <button class="btn btn-primary btn-sm" onclick="openClienteModal()">+ Nuovo Cliente</button>
             </div>
@@ -3567,6 +3569,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <option value="richiesta">Richiesta dal sito</option>
                   <option value="telefono">Telefonata</option>
                   <option value="passaparola">Passaparola</option>
+                  <option value="proprietario_immobile">Proprietario (scheda immobile)</option>
                 </select>
               </div>
               <div class="form-group">
@@ -5625,6 +5628,158 @@ document.addEventListener('click', function(e) {
 function populateProprietarioDropdown() {}
 function onProprietarioSelect() {}
 
+// ══════════════════════════════════════
+// PROPRIETARIO IMMOBILE → RUBRICA CLIENTI
+// ══════════════════════════════════════
+
+function normEmailCliente(v) {
+  return (v || '').trim().toLowerCase();
+}
+
+function normTelCliente(v) {
+  const d = (v || '').replace(/\D/g, '');
+  if (d.length >= 9) return d.slice(-10);
+  return d || '';
+}
+
+async function findClienteForProprietario({ nome, telefono, email }) {
+  const em = normEmailCliente(email);
+  if (em) {
+    const { data } = await sb.from('clienti').select('id,nome,telefono,email').ilike('email', em).limit(1);
+    if (data && data[0]) return data[0];
+  }
+  const tel = normTelCliente(telefono);
+  if (tel.length >= 9) {
+    const { data } = await sb.from('clienti').select('id,nome,telefono,email').ilike('telefono', '%' + tel).limit(8);
+    if (data && data.length) {
+      const hit = data.find(c => normTelCliente(c.telefono) === tel);
+      if (hit) return hit;
+    }
+  }
+  const n = (nome || '').trim();
+  if (n.length >= 4) {
+    const { data } = await sb.from('clienti').select('id,nome,telefono,email').ilike('nome', n).limit(3);
+    if (data && data.length === 1) return data[0];
+  }
+  return null;
+}
+
+async function mergeClienteContactFields(clienteId, { nome, telefono, email }) {
+  const { data: row } = await sb.from('clienti').select('nome,telefono,email').eq('id', clienteId).maybeSingle();
+  if (!row) return;
+  const patch = {};
+  if (!(row.nome || '').trim() && (nome || '').trim()) patch.nome = nome.trim();
+  if (!(row.telefono || '').trim() && (telefono || '').trim()) patch.telefono = telefono.trim();
+  if (!(row.email || '').trim() && (email || '').trim()) patch.email = email.trim();
+  if (Object.keys(patch).length) {
+    await sb.from('clienti').update(patch).eq('id', clienteId);
+  }
+}
+
+/** Crea o trova cliente; ritorna { id, created } o null se nessun dato */
+async function ensureClienteFromProprietarioImmobile({ existingClienteId, nome, telefono, email, tipoOperazione }) {
+  const n = (nome || '').trim();
+  const t = (telefono || '').trim();
+  const e = (email || '').trim();
+  if (!n && !t && !e) return null;
+
+  if (existingClienteId) {
+    await mergeClienteContactFields(existingClienteId, { nome: n, telefono: t, email: e });
+    return { id: existingClienteId, created: false };
+  }
+
+  const found = await findClienteForProprietario({ nome: n, telefono: t, email: e });
+  if (found) {
+    await mergeClienteContactFields(found.id, { nome: n, telefono: t, email: e });
+    return { id: found.id, created: false };
+  }
+
+  const insertRow = {
+    nome: n || e || 'Proprietario',
+    email: e || null,
+    telefono: t || null,
+    fonte: 'proprietario_immobile',
+    tipo_operazione_cercata: tipoOperazione || null,
+    note: 'Creato automaticamente da scheda immobile',
+    interesse: 'Proprietario / incarico',
+    tipo_cliente: 'privato'
+  };
+  const { data: ins, error } = await sb.from('clienti').insert([insertRow]).select('id').maybeSingle();
+  if (error) {
+    const dup = error.message && (error.message.includes('duplicate') || error.message.includes('unique'));
+    if (dup) {
+      const again = await findClienteForProprietario({ nome: n, telefono: t, email: e });
+      if (again) return { id: again.id, created: false };
+    }
+    console.warn('ensureClienteFromProprietarioImmobile:', error);
+    return null;
+  }
+  return ins && ins.id ? { id: ins.id, created: true } : null;
+}
+
+async function syncAllProprietariFromImmobili(interactive) {
+  if (interactive && !confirm('Importare/collegare tutti i proprietari presenti negli immobili alla rubrica Clienti?\n\nI duplicati vengono evitati per email o telefono.')) return;
+
+  toast('Sincronizzazione proprietari → clienti...', 'info');
+  const { data: rows, error } = await sb.from('immobili').select('id,proprietario_id,proprietario_nome,proprietario_tel,proprietario_email,tipo_operazione');
+  if (error) {
+    toast('Errore lettura immobili: ' + error.message, 'error');
+    return;
+  }
+
+  let created = 0;
+  let linked = 0;
+  let immobiliAgg = 0;
+  let skipped = 0;
+
+  for (const im of (rows || [])) {
+    const nome = im.proprietario_nome;
+    const telefono = im.proprietario_tel;
+    const email = im.proprietario_email;
+    if (!(nome || '').trim() && !(telefono || '').trim() && !(email || '').trim()) {
+      skipped++;
+      continue;
+    }
+    const res = await ensureClienteFromProprietarioImmobile({
+      existingClienteId: im.proprietario_id || null,
+      nome,
+      telefono,
+      email,
+      tipoOperazione: im.tipo_operazione
+    });
+    if (!res || !res.id) {
+      skipped++;
+      continue;
+    }
+    if (res.created) created++;
+    if (!im.proprietario_id) linked++;
+    if (im.proprietario_id !== res.id) {
+      const { error: uerr } = await sb.from('immobili').update({ proprietario_id: res.id }).eq('id', im.id);
+      if (!uerr) immobiliAgg++;
+    }
+  }
+
+  toast('Sync: ' + created + ' clienti nuovi, ' + linked + ' collegati, ' + immobiliAgg + ' immobili aggiornati (' + skipped + ' senza dati)', 'success');
+  await loadClienti();
+  if (typeof loadImmobili === 'function') await loadImmobili();
+}
+
+async function maybePromptProprietariClientiSync() {
+  try {
+    if (localStorage.getItem('righetto_sync_prop_clienti_v1') === 'done') return;
+    if (localStorage.getItem('righetto_sync_prop_clienti_v1') === 'skip') return;
+    const ok = confirm('Vuoi importare una tantum i proprietari già inseriti negli immobili nella rubrica Clienti?\n\nPotrai ripetere da Clienti → «Da immobili».');
+    if (!ok) {
+      localStorage.setItem('righetto_sync_prop_clienti_v1', 'skip');
+      return;
+    }
+    await syncAllProprietariFromImmobili(false);
+    localStorage.setItem('righetto_sync_prop_clienti_v1', 'done');
+  } catch (e) {
+    console.warn('maybePromptProprietariClientiSync', e);
+  }
+}
+
 async function loadImmobili() {
   const wrap = document.getElementById('immobiliTableWrap');
   wrap.innerHTML = '<div class="loading"><div class="spinner"></div> Caricamento...</div>';
@@ -6037,6 +6192,26 @@ async function saveImmobile(e) {
   }
   codiceInput.style.borderColor = '';
 
+  const propNome = document.getElementById('f_proprietario_nome').value.trim();
+  const propTel = document.getElementById('f_proprietario_tel').value.trim();
+  const propEmail = document.getElementById('f_proprietario_email').value.trim();
+  let propClienteId = document.getElementById('f_proprietario_id').value || null;
+  try {
+    const synced = await ensureClienteFromProprietarioImmobile({
+      existingClienteId: propClienteId,
+      nome: propNome,
+      telefono: propTel,
+      email: propEmail,
+      tipoOperazione: document.getElementById('f_tipo_operazione').value
+    });
+    if (synced && synced.id) {
+      propClienteId = synced.id;
+      document.getElementById('f_proprietario_id').value = synced.id;
+    }
+  } catch (syncErr) {
+    console.warn('Sync proprietario → clienti:', syncErr);
+  }
+
   const payload = {
     codice: codiceForDb,
     titolo,
@@ -6045,10 +6220,10 @@ async function saveImmobile(e) {
     contratto_affitto_res: getContrattoAffittoResValue(),
     tipologia: document.getElementById('f_tipologia').value,
     prezzo: parseFloat(document.getElementById('f_prezzo').value) || null,
-    proprietario_id: document.getElementById('f_proprietario_id').value || null,
-    proprietario_nome: document.getElementById('f_proprietario_nome').value.trim() || null,
-    proprietario_tel: document.getElementById('f_proprietario_tel').value.trim() || null,
-    proprietario_email: document.getElementById('f_proprietario_email').value.trim() || null,
+    proprietario_id: propClienteId || null,
+    proprietario_nome: propNome || null,
+    proprietario_tel: propTel || null,
+    proprietario_email: propEmail || null,
     comune: document.getElementById('f_comune').value || 'Padova',
     indirizzo: document.getElementById('f_indirizzo').value || null,
     indirizzo_mappa: document.getElementById('f_indirizzo_mappa').value || null,
@@ -8031,6 +8206,7 @@ async function loadClienti() {
     allClienti = data || [];
     renderClientiTable();
     updateClientiStats();
+    maybePromptProprietariClientiSync();
   } catch(err) {
     console.error('Error loading clienti:', err);
     // If table doesn't exist, show empty state with hint
@@ -8061,7 +8237,8 @@ function renderClientiTable() {
     richiesta: 'badge-oro',
     manuale: 'badge-grigio',
     telefono: 'badge-verde',
-    passaparola: 'badge-verde'
+    passaparola: 'badge-verde',
+    proprietario_immobile: 'badge-oro'
   };
 
   tbody.innerHTML = allClienti.map(c => {
