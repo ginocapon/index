@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-25",
+  "updated": "2026-09-28",
   "source": "GSC manuale + probe live post-deploy — aggiornare ogni venerdì",
-  "note": "Sitemap OK (203 URL). Deploy 18/09: blog-gestione-locazione-delegata-padova-2026 live 200 — richiedere indicizzazione GSC. Probe 569 URL: 0 issue. Canonical senza www, senza doppio slash.",
+  "note": "28/09 utente: 10 richieste indicizzazione forzate GSC (batch sett. post-deploy gestione/locazioni/studenti). Follow-up stato URL tra 7-14 gg. Sitemap OK. Probe storico 569 URL 0 issue.",
   "sitemap_urls": 203,
   "sitemap_main": {
     "url": "https://righettoimmobiliare.it/sitemap.xml",
@@ -50,6 +50,24 @@
     "prestazioni_affitti_limena": true
   },
   "inspection_log": [
+    {
+      "date": "2026-09-28",
+      "checked_by": "utente GSC",
+      "batch": "batch-09-28-indicizzazione-forzata-10-url",
+      "results": [
+        {"url": "https://righettoimmobiliare.it/blog-gestione-locazione-delegata-padova-2026", "status": "richiesta_indicizzazione_inviata", "action": "follow_up_7gg"},
+        {"url": "https://righettoimmobiliare.it/blog-affitti-studenti-settembre-padova-proprietario-2026", "status": "richiesta_indicizzazione_inviata", "action": "follow_up_7gg", "note": "eq-sep25-001"},
+        {"url": "https://righettoimmobiliare.it/blog-affitto-studenti-padova", "status": "richiesta_indicizzazione_inviata", "action": "follow_up_7gg"},
+        {"url": "https://righettoimmobiliare.it/servizio-gestione", "status": "richiesta_indicizzazione_inviata", "action": "follow_up_7gg", "note": "post-fix schema GSC"},
+        {"url": "https://righettoimmobiliare.it/servizio-locazioni", "status": "richiesta_indicizzazione_inviata", "action": "follow_up_7gg", "note": "post-fix schema GSC"},
+        {"url": "https://righettoimmobiliare.it/proprietario-immobile", "status": "richiesta_indicizzazione_inviata", "action": "follow_up_7gg"},
+        {"url": "https://righettoimmobiliare.it/blog-affittare-casa-padova-proprietario-2026", "status": "richiesta_indicizzazione_inviata", "action": "follow_up_7gg"},
+        {"url": "https://righettoimmobiliare.it/blog-rendimento-affitto-padova", "status": "richiesta_indicizzazione_inviata", "action": "follow_up_7gg", "note": "SOSTENERE meta"},
+        {"url": "https://righettoimmobiliare.it/servizio-vendita", "status": "richiesta_indicizzazione_inviata", "action": "follow_up_7gg", "note": "terza richiesta cumulativa — verificare su Google"},
+        {"url": "https://righettoimmobiliare.it/landing-valutazione", "status": "richiesta_indicizzazione_inviata", "action": "follow_up_7gg", "note": "post acq-w01 funnel"}
+      ],
+      "note": "Utente 28/09: completate le 10 indicizzazioni forzate previste per il batch post-venerdì 25/09. Se URL diverse, correggere results."
+    },
     {
       "date": "2026-09-18",
       "checked_by": "agente post-deploy",
@@ -104,7 +122,7 @@
     }
   ],
   "check_queue": {
-    "updated": "2026-08-03",
+    "updated": "2026-09-28",
     "instructions": "GSC → Ispezione URL → se «Non su Google» → Richiedi indicizzazione. Max ~10-12 URL/settimana. URL canonica senza www e senza .html.",
     "tier_a_followup": {
       "label": "Follow-up obbligatorio (richiesta già inviata)",
@@ -112,8 +130,8 @@
         {
           "url": "https://righettoimmobiliare.it/servizio-vendita",
           "priority": "massima",
-          "last_action": "richiesta_indicizzazione 03/08/2026",
-          "next_check": "2026-08-10",
+          "last_action": "richiesta_indicizzazione 28/09/2026 (batch 10 URL)",
+          "next_check": "2026-10-05",
           "status": "pending_followup"
         }
       ]
@@ -167,23 +185,17 @@
     }
   },
   "next_friday_batch": {
-    "date": "2026-10-02",
-    "label": "batch-10-02-blog-studenti-settembre + follow-up gestione",
-    "max_urls_per_session": 12,
+    "date": "2026-10-03",
+    "label": "batch-10-03-follow-up-28-09 + tier B servizi",
+    "max_urls_per_session": 10,
     "urls": [
-      "https://righettoimmobiliare.it/blog-gestione-locazione-delegata-padova-2026",
-      "https://righettoimmobiliare.it/blog-affitti-studenti-settembre-padova-proprietario-2026",
-      "https://righettoimmobiliare.it/blog-affitto-studenti-padova",
-      "https://righettoimmobiliare.it/servizio-gestione",
-      "https://righettoimmobiliare.it/servizio-locazioni",
-      "https://righettoimmobiliare.it/proprietario-immobile",
-      "https://righettoimmobiliare.it/blog-affittare-casa-padova-proprietario-2026",
-      "https://righettoimmobiliare.it/blog-rendimento-affitto-padova",
-      "https://righettoimmobiliare.it/servizio-vendita",
       "https://righettoimmobiliare.it/agenzia-immobiliare-padova",
-      "https://righettoimmobiliare.it/landing-valutazione",
-      "https://righettoimmobiliare.it/zona-universitaria-padova"
+      "https://righettoimmobiliare.it/zona-universitaria-padova",
+      "https://righettoimmobiliare.it/servizio-valutazioni",
+      "https://righettoimmobiliare.it/servizio-preliminari",
+      "https://righettoimmobiliare.it/servizio-virtual-tour",
+      "https://righettoimmobiliare.it/landing-consulenza-immobiliare-gratuita"
     ],
-    "instructions": "1) Dopo publish eq-sep25-001: richiedi indicizzazione blog-affitti-studenti-settembre-padova-proprietario-2026. 2) Follow-up blog gestione locazione. 3) servizio-vendita follow-up. 4) blog-rendimento SOSTENERE meta."
+    "instructions": "28/09: batch 10 URL inviato da utente — venerdì 03/10: 1) Ispezione follow-up sulle 10 (su Google sì/no). 2) Se quota GSC, tier B servizi sopra. 3) Aggiornare indexed/not_indexed da report Indicizzazione GSC se disponibile."
   }
 }

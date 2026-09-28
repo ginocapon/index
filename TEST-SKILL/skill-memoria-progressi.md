@@ -146,6 +146,7 @@
 | 14/09/2026 | **Cron acquisizione venerdì** — skill-acquisizione-cron-venerdi.md + acquisition-roadmap-cron.json (12 sett.) | Ogni `"SKILL"` esegue repo #1 acquisizione · anchor 19/09 · script acquisition_cron_current.py |
 | 25/09/2026 | **Cron venerdì sett. acq 1/12** — acq-w01 landing-valutazione + eq-sep25-001 blog affitti studenti settembre owner + social | Push main · GSC batch blog nuovo |
 | 25/09/2026 | **Premortem gate** — `skill-premortem-righetto.md` in `always_load` · `/premortem` · righetto-core + massimo-punteggio §0 | Post-deploy GSC gestione/locazioni · batch schema altri `servizio-*` pendente |
+| 28/09/2026 | **GSC** — utente: 10 richieste indicizzazione forzate (batch post-deploy) | Log `gsc-indexing-weekly.json` · follow-up 05/10 servizio-vendita + verifica 10 URL |
 
 ---
 
@@ -167,10 +168,10 @@ Vedi **`TEST-SKILL/skill-competitor-roadmap-q3-2026.md`** + `data/competitor-roa
 
 ## Prossimi passi (per l'agente)
 
-1. **GSC post-deploy (25/09):** Ispezione URL live + Richiedi indicizzazione su `/servizio-gestione`, `/servizio-locazioni`, blog eq-sep25-001 — log in `gsc-indexing-weekly.json` (premortem §4)
-2. **Batch schema servizi:** allineare `@graph` gestione/locazioni su vendita, valutazioni, utenze, preliminari, virtual-tour, drone, loft — `grep aggregateRating servizio-*.html`
-3. **Follow-up GSC** `/servizio-vendita` se ancora fuori batch
-4. **Premortem obbligatorio** prima di ogni commit/push pubblico — `Premortem` / `/premortem` · `skill-premortem-righetto.md`
+1. **GSC follow-up (~05/10):** verificare in Ispezione URL le **10 URL** inviate 28/09 (su Google sì/no) — aggiornare `gsc-indexing-weekly.json`
+2. **Batch schema servizi:** allineare `@graph` su vendita, valutazioni, utenze, preliminari, virtual-tour, drone, loft — `grep aggregateRating servizio-*.html`
+3. **Venerdì 03/10:** `next_friday_batch` in JSON (servizi tier B + agenzia/zona universitaria se quota GSC)
+4. **Premortem** prima di ogni commit/push pubblico — `/premortem`
 
 ---
 
