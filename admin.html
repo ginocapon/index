@@ -3565,6 +3565,19 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           <div class="modal-body">
             <input type="hidden" id="clienteEditId">
             <div class="form-grid">
+              <div class="form-group form-full" style="grid-column:1/-1;margin-bottom:4px;padding:16px 18px;background:linear-gradient(135deg,#e8f0fe 0%,#dbeafe 100%);border:2px solid var(--blu,#2C4A6E);border-radius:12px">
+                <label style="font-weight:700;color:var(--blu,#2C4A6E);font-size:0.92rem;margin-bottom:12px;display:block">Chi è in rubrica?</label>
+                <div style="display:flex;gap:14px;flex-wrap:wrap">
+                  <label class="cliente-ruolo-opt" style="flex:1;min-width:200px;display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:#fff;border:2px solid #c5d4e8;border-radius:10px;cursor:pointer">
+                    <input type="radio" name="clienteRuoloRubrica" id="clienteRuoloCerca" value="cerca" checked onchange="toggleClienteRuoloRubrica()" style="margin-top:4px;width:18px;height:18px">
+                    <span><strong style="color:var(--blu)">Cliente</strong><br><span style="font-size:0.78rem;color:#555">Cerca casa o affitto — compili tipo operazione e tipologia</span></span>
+                  </label>
+                  <label class="cliente-ruolo-opt" style="flex:1;min-width:200px;display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:#fff;border:2px solid #c5d4e8;border-radius:10px;cursor:pointer">
+                    <input type="radio" name="clienteRuoloRubrica" id="clienteRuoloProprietario" value="proprietario" onchange="toggleClienteRuoloRubrica()" style="margin-top:4px;width:18px;height:18px">
+                    <span><strong style="color:var(--blu)">Proprietario</strong><br><span style="font-size:0.78rem;color:#555">Vende o affitta — niente preferenze di ricerca</span></span>
+                  </label>
+                </div>
+              </div>
               <div class="form-group">
                 <label>Nome e Cognome</label>
                 <input type="text" id="clienteNome" placeholder="Es. Mario Rossi">
@@ -3588,7 +3601,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <option value="proprietario_immobile">Proprietario (scheda immobile)</option>
                 </select>
               </div>
-              <div class="form-group">
+              <div id="clienteCampiRicercaTipo" style="display:contents">
+              <div class="form-group" id="clienteGruppoTipoOp">
                 <label>Tipo Operazione</label>
                 <select id="clienteTipoOp">
                   <option value="">Qualsiasi</option>
@@ -3597,7 +3611,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <option value="affitto_commerciale">Affitto Commerciale</option>
                 </select>
               </div>
-              <div class="form-group">
+              <div class="form-group" id="clienteGruppoTipologia">
                 <label>Tipologia</label>
                 <select id="clienteTipologia">
                   <option value="">Qualsiasi</option>
@@ -3617,6 +3631,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <option value="terreno">Terreno / Rurale</option>
                   <option value="garage">Garage / Box</option>
                 </select>
+              </div>
               </div>
               <div class="form-group">
                 <label>Zona / Comune</label>
@@ -5693,6 +5708,7 @@ function openClienteModalFromImmobile() {
   openClienteModal();
   const fonteEl = document.getElementById('clienteFonte');
   if (fonteEl) fonteEl.value = 'proprietario_immobile';
+  setClienteRuoloRubricaUI('proprietario');
 }
 
 // Chiudi risultati quando clicchi fuori
@@ -5782,6 +5798,7 @@ async function ensureClienteFromProprietarioImmobile({ existingClienteId, nome, 
     tipo_operazione_cercata: tipoOperazione || null,
     note: 'Creato automaticamente da scheda immobile',
     interesse: 'Proprietario / incarico',
+    ruolo_rubrica: 'proprietario',
     tipo_cliente: 'privato'
   };
   const { data: ins, error } = await sb.from('clienti').insert([insertRow]).select('id').maybeSingle();
@@ -8460,6 +8477,41 @@ function removeClienteDoc(idx) {
   renderClienteDocumenti();
 }
 
+function getClienteRuoloRubricaFromRecord(c) {
+  if (!c) return 'cerca';
+  if (c.ruolo_rubrica === 'proprietario') return 'proprietario';
+  if (c.fonte === 'proprietario_immobile') return 'proprietario';
+  if ((c.interesse || '').trim() === 'Proprietario / incarico') return 'proprietario';
+  return 'cerca';
+}
+
+function setClienteRuoloRubricaUI(ruolo) {
+  const r = ruolo === 'proprietario' ? 'proprietario' : 'cerca';
+  const elC = document.getElementById('clienteRuoloCerca');
+  const elP = document.getElementById('clienteRuoloProprietario');
+  if (elC) elC.checked = r === 'cerca';
+  if (elP) elP.checked = r === 'proprietario';
+  toggleClienteRuoloRubrica();
+}
+
+function toggleClienteRuoloRubrica() {
+  const isProp = document.getElementById('clienteRuoloProprietario') && document.getElementById('clienteRuoloProprietario').checked;
+  const g1 = document.getElementById('clienteGruppoTipoOp');
+  const g2 = document.getElementById('clienteGruppoTipologia');
+  if (g1) g1.style.display = isProp ? 'none' : '';
+  if (g2) g2.style.display = isProp ? 'none' : '';
+  document.querySelectorAll('.cliente-ruolo-opt').forEach(el => {
+    el.style.borderColor = '#c5d4e8';
+    el.style.boxShadow = 'none';
+  });
+  const checked = document.querySelector('input[name="clienteRuoloRubrica"]:checked');
+  if (checked && checked.closest('.cliente-ruolo-opt')) {
+    const box = checked.closest('.cliente-ruolo-opt');
+    box.style.borderColor = 'var(--blu,#2C4A6E)';
+    box.style.boxShadow = '0 0 0 2px rgba(44,74,110,0.25)';
+  }
+}
+
 function openClienteModal(id) {
   document.getElementById('clienteEditId').value = '';
   document.getElementById('clienteModalTitle').textContent = 'Nuovo Cliente';
@@ -8487,6 +8539,7 @@ function openClienteModal(id) {
   currentClienteDocumenti = [];
   renderClienteDocumenti();
   toggleCampiAzienda();
+  setClienteRuoloRubricaUI('cerca');
   document.getElementById('btnDeleteCliente').style.display = 'none';
   document.getElementById('clienteModal').classList.add('open');
 }
@@ -8520,6 +8573,7 @@ function editCliente(id) {
   currentClienteDocumenti = Array.isArray(c.documenti_cliente) ? [...c.documenti_cliente] : [];
   renderClienteDocumenti();
   toggleCampiAzienda();
+  setClienteRuoloRubricaUI(getClienteRuoloRubricaFromRecord(c));
   document.getElementById('btnDeleteCliente').style.display = 'inline-flex';
   document.getElementById('clienteModal').classList.add('open');
 }
@@ -8530,19 +8584,24 @@ function closeClienteModal() {
 
 async function saveCliente() {
   const id = document.getElementById('clienteEditId').value;
+  const ruoloRubrica = document.getElementById('clienteRuoloProprietario').checked ? 'proprietario' : 'cerca';
+  const isProprietario = ruoloRubrica === 'proprietario';
   const data = {
     nome: document.getElementById('clienteNome').value.trim(),
     email: document.getElementById('clienteEmail').value.trim(),
     telefono: document.getElementById('clienteTelefono').value.trim(),
     fonte: document.getElementById('clienteFonte').value,
-    tipo_operazione_cercata: document.getElementById('clienteTipoOp').value || null,
-    tipologia_cercata: document.getElementById('clienteTipologia').value || null,
+    ruolo_rubrica: ruoloRubrica,
+    tipo_operazione_cercata: isProprietario ? null : (document.getElementById('clienteTipoOp').value || null),
+    tipologia_cercata: isProprietario ? null : (document.getElementById('clienteTipologia').value || null),
     zona_cercata: document.getElementById('clienteZona').value.trim() || null,
     budget_min: parseFloat(document.getElementById('clienteBudgetMin').value) || null,
     budget_max: parseFloat(document.getElementById('clienteBudgetMax').value) || null,
     camere_min: parseInt(document.getElementById('clienteCamereMin').value) || null,
     superficie_min: parseInt(document.getElementById('clienteSupMin').value) || null,
-    interesse: document.getElementById('clienteInteresse').value.trim(),
+    interesse: isProprietario
+      ? (document.getElementById('clienteInteresse').value.trim() || 'Proprietario / incarico')
+      : document.getElementById('clienteInteresse').value.trim(),
     note: document.getElementById('clienteNote').value.trim(),
     // Nuovi campi azienda/documenti
     tipo_cliente: document.getElementById('clienteTipoCliente').value || 'privato',
@@ -8562,16 +8621,19 @@ async function saveCliente() {
 
   try {
     let savedId = id || null;
-    if (id) {
-      const { error } = await sb.from('clienti').update(data).eq('id', id);
-      if (error) throw error;
-      toast('Cliente aggiornato!', 'success');
-    } else {
-      const { data: ins, error } = await sb.from('clienti').insert([data]).select('id').maybeSingle();
-      if (error) throw error;
-      savedId = ins && ins.id ? ins.id : null;
-      toast('Cliente aggiunto!', 'success');
+    let payload = { ...data };
+    const trySave = async (pl) => {
+      if (id) return sb.from('clienti').update(pl).eq('id', id);
+      return sb.from('clienti').insert([pl]).select('id').maybeSingle();
+    };
+    let res = await trySave(payload);
+    if (res.error && /ruolo_rubrica/.test(res.error.message || '')) {
+      delete payload.ruolo_rubrica;
+      res = await trySave(payload);
     }
+    if (res.error) throw res.error;
+    if (!id && res.data) savedId = res.data.id || null;
+    toast(id ? 'Cliente aggiornato!' : 'Cliente aggiunto!', 'success');
     closeClienteModal();
     await loadClienti();
     try {
