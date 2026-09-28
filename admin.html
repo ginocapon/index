@@ -290,6 +290,26 @@ nav { flex: 1; padding: 16px 0; }
 }
 .btn-primary { background: var(--oro); color: var(--testo); }
 .btn-primary:hover { background: var(--oro2); transform: translateY(-1px); }
+.btn-proprietario-nuovo {
+  background: var(--verde);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  min-height: 48px;
+  align-self: stretch;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 3px 10px rgba(39, 174, 96, 0.35);
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-proprietario-nuovo:hover { background: #219a52; transform: translateY(-1px); }
 .btn-secondary { background: var(--caffe3); color: var(--testo); }
 .btn-secondary:hover { background: var(--caffe2); color: white; }
 .btn-danger { background: #fde8e8; color: var(--rosso); }
@@ -2400,16 +2420,21 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
                 <div class="form-group form-full">
                   <label>Proprietario (cerca in Clienti)</label>
-                  <div style="position:relative">
-                    <input type="text" id="f_proprietario_search" placeholder="Nome, cognome, email o telefono…" oninput="searchProprietario(this.value)" onfocus="searchProprietario(this.value)" autocomplete="off" style="padding-right:36px">
-                    <span style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none" id="proprietarioSearchIcon">🔍</span>
-                    <input type="hidden" id="f_proprietario_id">
-                    <input type="hidden" id="f_proprietario_nome">
-                    <input type="hidden" id="f_proprietario_tel">
-                    <input type="hidden" id="f_proprietario_email">
-                    <div id="proprietarioResults" style="display:none;position:absolute;top:100%;left:0;right:0;max-height:250px;overflow-y:auto;background:white;border:1.5px solid var(--caffe3);border-top:none;border-radius:0 0 8px 8px;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,0.15)"></div>
+                  <div style="display:flex;gap:12px;align-items:stretch;flex-wrap:wrap">
+                    <div style="position:relative;flex:1;min-width:240px">
+                      <input type="text" id="f_proprietario_search" placeholder="Nome, cognome, email o telefono…" oninput="searchProprietario(this.value)" onfocus="searchProprietario(this.value)" autocomplete="off" style="padding-right:36px;width:100%;min-height:48px;font-size:0.92rem">
+                      <span style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none" id="proprietarioSearchIcon">🔍</span>
+                      <input type="hidden" id="f_proprietario_id">
+                      <input type="hidden" id="f_proprietario_nome">
+                      <input type="hidden" id="f_proprietario_tel">
+                      <input type="hidden" id="f_proprietario_email">
+                      <div id="proprietarioResults" style="display:none;position:absolute;top:100%;left:0;right:0;max-height:250px;overflow-y:auto;background:white;border:1.5px solid var(--caffe3);border-top:none;border-radius:0 0 8px 8px;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,0.15)"></div>
+                    </div>
+                    <button type="button" class="btn-proprietario-nuovo" onclick="openClienteModalFromImmobile()" title="Registra un nuovo cliente senza uscire da questo immobile">
+                      <span style="font-size:1.15rem;line-height:1">+</span> Nuovo cliente
+                    </button>
                   </div>
-                  <small style="color:var(--caffe2);font-size:0.68rem;display:block;margin-top:6px">Digita almeno 2 caratteri. Non in rubrica? <a href="#" onclick="openClienteModalFromImmobile();return false" style="color:#667eea;font-weight:600">+ Nuovo cliente</a> in Clienti, poi cercalo qui.</small>
+                  <small style="color:var(--caffe2);font-size:0.75rem;display:block;margin-top:8px">Cerca tra i clienti (min. 2 caratteri). <strong>Non in rubrica?</strong> Clicca il pulsante verde: si apre la scheda cliente qui sopra; al salvataggio resti su questo immobile con il proprietario già selezionato.</small>
                   <div id="proprietarioCard" style="display:none;margin-top:12px;padding:14px 16px;background:#f8f4ee;border:1.5px solid var(--caffe3);border-radius:10px;font-size:0.84rem"></div>
                 </div>
 
@@ -5665,8 +5690,9 @@ function clearProprietarioSelection() {
 
 function openClienteModalFromImmobile() {
   try { sessionStorage.setItem('righetto_return_after_cliente', 'nuovo'); } catch (e) {}
-  showSection('clienti');
   openClienteModal();
+  const fonteEl = document.getElementById('clienteFonte');
+  if (fonteEl) fonteEl.value = 'proprietario_immobile';
 }
 
 // Chiudi risultati quando clicchi fuori
@@ -8551,7 +8577,6 @@ async function saveCliente() {
     try {
       if (sessionStorage.getItem('righetto_return_after_cliente') === 'nuovo') {
         sessionStorage.removeItem('righetto_return_after_cliente');
-        showSection('nuovo');
         const match = allClienti.find(c => savedId && String(c.id) === String(savedId))
           || allClienti.find(c => (data.email && c.email === data.email) || (data.nome && c.nome === data.nome));
         if (match) selectProprietario(match.id);
