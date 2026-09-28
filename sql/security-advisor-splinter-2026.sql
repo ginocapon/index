@@ -127,19 +127,25 @@ END $$;
 -- NOTA: URL public/getPublicUrl non funzionano più per questi bucket → in admin servono signed URL (follow-up codice).
 -- foto-immobili: bucket staging/legacy URL; warning listing può restare finché il bucket è public (vedi sql/README.md).
 
+-- (NO ALTER TABLE storage.objects — errore 42501 must be owner; RLS già attivo)
 UPDATE storage.buckets
 SET public = false
 WHERE id IN ('documenti', 'planimetrie');
 
-ALTER TABLE storage.objects ENABLE ROW LEVEL SECURITY;
-
--- Rimuovi policy generiche spesso create da template Supabase (idempotente)
+DROP POLICY IF EXISTS "Allow public read documenti" ON storage.objects;
+DROP POLICY IF EXISTS "Allow public upload documenti" ON storage.objects;
+DROP POLICY IF EXISTS "Public read documenti" ON storage.objects;
+DROP POLICY IF EXISTS "Upload documenti" ON storage.objects;
+DROP POLICY IF EXISTS "Delete documenti" ON storage.objects;
+DROP POLICY IF EXISTS "Public read planimetrie" ON storage.objects;
+DROP POLICY IF EXISTS "Upload planimetrie" ON storage.objects;
+DROP POLICY IF EXISTS "Delete planimetrie" ON storage.objects;
+DROP POLICY IF EXISTS "Public read foto" ON storage.objects;
+DROP POLICY IF EXISTS "Upload foto" ON storage.objects;
+DROP POLICY IF EXISTS "Delete foto" ON storage.objects;
 DROP POLICY IF EXISTS "Public Access" ON storage.objects;
 DROP POLICY IF EXISTS "Allow public read access" ON storage.objects;
 DROP POLICY IF EXISTS "Public read access" ON storage.objects;
-DROP POLICY IF EXISTS "Give anon users access to SELECT" ON storage.objects;
-DROP POLICY IF EXISTS "anon read documenti" ON storage.objects;
-DROP POLICY IF EXISTS "anon read planimetrie" ON storage.objects;
 
 DROP POLICY IF EXISTS "rig_storage_documenti_admin" ON storage.objects;
 CREATE POLICY "rig_storage_documenti_admin"

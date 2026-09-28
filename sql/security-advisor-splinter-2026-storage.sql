@@ -1,19 +1,33 @@
--- Parte 4 — Storage (solo Supabase SQL Editor come ruolo postgres)
--- La CLI `supabase db query --linked` può fallire con: must be owner of table objects
+-- Parte 4 — Storage (Supabase SQL Editor)
+-- NON usare: ALTER TABLE storage.objects … → errore 42501 must be owner of table objects
+-- RLS su storage.objects è già attivo di default su Supabase.
 
+-- Bucket riservati: non pubblici (se fallisce, imposta manualmente Storage → bucket → Public OFF)
 UPDATE storage.buckets
 SET public = false
 WHERE id IN ('documenti', 'planimetrie');
 
-ALTER TABLE storage.objects ENABLE ROW LEVEL SECURITY;
+-- ─── Rimuovi policy vecchie (nomi reali progetto righetto) ───
+DROP POLICY IF EXISTS "Allow public read documenti" ON storage.objects;
+DROP POLICY IF EXISTS "Allow public upload documenti" ON storage.objects;
+DROP POLICY IF EXISTS "Public read documenti" ON storage.objects;
+DROP POLICY IF EXISTS "Upload documenti" ON storage.objects;
+DROP POLICY IF EXISTS "Delete documenti" ON storage.objects;
 
+DROP POLICY IF EXISTS "Public read planimetrie" ON storage.objects;
+DROP POLICY IF EXISTS "Upload planimetrie" ON storage.objects;
+DROP POLICY IF EXISTS "Delete planimetrie" ON storage.objects;
+
+DROP POLICY IF EXISTS "Public read foto" ON storage.objects;
+DROP POLICY IF EXISTS "Upload foto" ON storage.objects;
+DROP POLICY IF EXISTS "Delete foto" ON storage.objects;
+
+-- Template generici (idempotente)
 DROP POLICY IF EXISTS "Public Access" ON storage.objects;
 DROP POLICY IF EXISTS "Allow public read access" ON storage.objects;
 DROP POLICY IF EXISTS "Public read access" ON storage.objects;
-DROP POLICY IF EXISTS "Give anon users access to SELECT" ON storage.objects;
-DROP POLICY IF EXISTS "anon read documenti" ON storage.objects;
-DROP POLICY IF EXISTS "anon read planimetrie" ON storage.objects;
 
+-- ─── Policy Righetto ───
 DROP POLICY IF EXISTS "rig_storage_documenti_admin" ON storage.objects;
 CREATE POLICY "rig_storage_documenti_admin"
   ON storage.objects FOR ALL TO anon
