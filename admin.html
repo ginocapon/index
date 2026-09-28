@@ -112,37 +112,8 @@ body {
   position: relative;
   isolation: isolate;
 }
-/* Sfondo admin — watermark leggero sopra i pannelli (non sotto, altrimenti non si vede) */
-#appWrapper::after {
-  content: '';
-  position: fixed;
-  z-index: 45;
-  pointer-events: none;
-  top: 72px;
-  left: calc(var(--sidebar-w) + 16px);
-  right: 16px;
-  bottom: 0;
-  overflow: hidden;
-  /* Viso in alto: ancoraggio top (con bottom restano visibili solo le gambe) */
-  background: url('img/admin/watermark-atmosphere-nobg.png?v=3') center top / min(400px, 32vw) auto no-repeat;
-  opacity: 0.14;
-}
 #appWrapper .main { position: relative; z-index: 1; }
 #appWrapper .topbar { z-index: 50; }
-@media (max-width: 768px) {
-  #appWrapper::after {
-    left: 8px;
-    right: 8px;
-    top: 64px;
-    bottom: 0;
-    background-position: center top;
-    background-size: min(280px, 72vw) auto;
-    opacity: 0.14;
-  }
-}
-@media print {
-  #appWrapper::after { display: none; }
-}
 
 /* SIDEBAR */
 .sidebar {
