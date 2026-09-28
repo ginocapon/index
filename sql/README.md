@@ -11,7 +11,9 @@ Non esiste (al momento) pipeline CI che applichi automaticamente le migration al
 1. `rls-security-hardening-safe.sql` — base RLS + tabelle agenda/cache se mancano  
 2. `rig-admin-rpc-immobili.sql` — RPC admin immobili (opzionale)  
 3. `clienti-ruolo-rubrica.sql` — colonna rubrica Cliente/Proprietario  
-4. **`security-advisor-splinter-2026.sql`** — fix Security Advisor (search_path, RLS, storage riservati)
+4. **`security-advisor-splinter-2026-public.sql`** — CLI o SQL Editor (search_path + RLS)  
+5. **`security-advisor-splinter-2026-storage.sql`** — **solo SQL Editor** (policy bucket)  
+   (oppure file unico `security-advisor-splinter-2026.sql` intero nel SQL Editor)
 
 ## Security Advisor (2026)
 

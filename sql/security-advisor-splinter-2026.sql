@@ -2,8 +2,10 @@
 -- RIGHETTO — Security Advisor / Splinter (2026)
 -- Repository: sql/security-advisor-splinter-2026.sql
 --
--- DOVE ESEGUIRE: Supabase Dashboard → SQL Editor → incolla tutto → Run
--- (Non c’è migrazione automatica da GitHub: il repo versiona lo script, tu lo applichi al progetto.)
+-- DOVE ESEGUIRE:
+--   • Parti 1–3: `supabase db query -f sql/security-advisor-splinter-2026-public.sql --linked`
+--   • Parte 4 storage: SQL Editor → sql/security-advisor-splinter-2026-storage.sql (owner storage.objects)
+--   • Oppure incolla tutto qui nel SQL Editor (consigliato per storage).
 --
 -- DOPO: Advisors → Security → Rerun linter
 -- TEST: python tools/check_rls_exposure.py  (form sito: invio contatti + newsletter)
