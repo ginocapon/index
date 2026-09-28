@@ -107,7 +107,7 @@ python tools/check_live_admin_secret.py   # opzionale: allineamento segreto admi
 
 1. ~~**Password admin fuori dal repo**~~ — fatto: verificare secret `ADMIN_PASSWORD` in GitHub Actions.
 2. ~~**Edge `sendTestEmail`**~~ — fatto: deploy Edge + secret Supabase `RIG_ADMIN_RLS_SECRET` = valore in `admin.html`.
-3. **RLS live** — rieseguire `sql/rls-security-hardening.sql` se mail Supabase segnala «publicly accessible».
+3. **RLS live** — rieseguire `sql/rls-security-hardening.sql` se mail Supabase segnala «publicly accessible»; per avvisi **Security Advisor** (search_path, RLS `true`, bucket listing) → `sql/security-advisor-splinter-2026.sql` + `sql/README.md`.
 4. **Deploy Edge `send-email`** dopo modifica sicurezza: `supabase secrets set RIG_ADMIN_RLS_SECRET=<stesso valore di admin.html>` poi `supabase functions deploy send-email`.
 5. **GitHub** — secret `ADMIN_PASSWORD` obbligatorio (workflow `static.yml` inietta in `admin.html`).
 4. **CSP header** — valutare Content-Security-Policy su GitHub Pages (via meta o proxy futuro).
