@@ -2113,6 +2113,49 @@ tr:hover td { background: rgba(206,224,143,0.06); }
   .agenda-header { flex-direction: column; text-align: center; }
   .agenda-week-label { font-size: 1rem; min-width: unset; }
   .kw-stats-grid { grid-template-columns: 1fr; }
+
+  /* Inserimento immobile */
+  #sec-nuovo .modal-header { flex-wrap: wrap; gap: 12px; padding: 16px; }
+  #sec-nuovo .modal-header h2 { font-size: 1.15rem; flex: 1 1 100%; margin: 0; }
+  #sec-nuovo .modal-header-actions { width: 100%; display: flex; gap: 8px; flex-wrap: wrap; }
+  #sec-nuovo .modal-header-actions .btn { flex: 1 1 calc(50% - 4px); min-height: 44px; justify-content: center; }
+  #sec-nuovo .modal-body { padding: 16px; }
+  #immobileForm .form-group input,
+  #immobileForm .form-group select,
+  #immobileForm .form-group textarea { font-size: 16px; min-height: 44px; }
+  #immobileForm .form-group textarea { min-height: 120px; }
+  #immobileForm .proprietario-search-row { flex-direction: column; align-items: stretch; }
+  #immobileForm .proprietario-search-field { min-width: 0; width: 100%; flex: none; }
+  #immobileForm .btn-proprietario-nuovo { width: 100%; min-height: 48px; }
+  #immobileForm .mappa-indirizzo-row { flex-direction: column; align-items: stretch; }
+  #immobileForm .mappa-indirizzo-row #btnGeneraVia { width: 100%; min-height: 44px; padding: 12px 14px; }
+  #immobileForm .url-input-row { flex-direction: column; align-items: stretch; }
+  #immobileForm .url-input-row .btn { width: 100%; min-height: 44px; justify-content: center; }
+  #immobileForm .immobile-form-actions { flex-direction: column-reverse; }
+  #immobileForm .immobile-form-actions .btn { width: 100%; min-height: 48px; justify-content: center; }
+  #immobileForm .checks-grid .check-item { flex: 1 1 100%; min-height: 44px; align-items: center; }
+
+  /* Rubrica clienti + modal cliente */
+  #sec-clienti .table-head { flex-direction: column; align-items: stretch; padding: 16px; }
+  #sec-clienti .table-head-toolbar { width: 100%; display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
+  #sec-clienti .table-search { width: 100%; min-width: 0 !important; font-size: 16px; min-height: 44px; box-sizing: border-box; }
+  #sec-clienti .table-head-toolbar .btn { width: 100%; min-height: 44px; justify-content: center; }
+  #sec-clienti .table-head-toolbar select { width: 100%; min-height: 44px; font-size: 16px; }
+  #sec-clienti .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  #clienteModal.modal-overlay { padding: 0; align-items: flex-end; }
+  #clienteModal .modal { max-width: 100%; margin: 0; border-radius: 16px 16px 0 0; max-height: 94vh; display: flex; flex-direction: column; }
+  #clienteModal .modal-header { padding: 16px; flex-shrink: 0; }
+  #clienteModal .modal-header h2 { font-size: 1.15rem; }
+  #clienteModal .modal-close { width: 44px; height: 44px; }
+  #clienteModal .modal-body { padding: 16px; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  #clienteModal .modal-footer { flex-wrap: wrap; justify-content: stretch; padding: 12px 16px; flex-shrink: 0; background: #fff; border-top: 1px solid var(--sfondo); }
+  #clienteModal .modal-footer .btn { flex: 1 1 calc(50% - 6px); min-height: 48px; justify-content: center; }
+  #clienteModal #clienteCampiRicerca.form-grid { grid-template-columns: 1fr; }
+  #clienteModal .cliente-ruolo-row { flex-direction: column; }
+  #clienteModal .cliente-ruolo-opt { min-width: 0 !important; width: 100%; min-height: 52px; }
+  #clienteModal .form-group input,
+  #clienteModal .form-group select,
+  #clienteModal .form-group textarea { font-size: 16px; min-height: 44px; }
 }
 </style>
 </head>
@@ -2336,7 +2379,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <div class="table-wrap">
           <div class="modal-header" style="border-radius:0">
             <h2 id="formTitle">Nuovo Immobile</h2>
-            <div style="display:flex;gap:8px;align-items:center">
+            <div class="modal-header-actions" style="display:flex;gap:8px;align-items:center">
               <button class="btn btn-primary btn-sm" onclick="openImportModal()" style="background:var(--oro);color:var(--testo)">
                 📥 Importa da Idealista
               </button>
@@ -2420,8 +2463,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
                 <div class="form-group form-full">
                   <label>Proprietario (cerca in Clienti)</label>
-                  <div style="display:flex;gap:12px;align-items:stretch;flex-wrap:wrap">
-                    <div style="position:relative;flex:1;min-width:240px">
+                  <div class="proprietario-search-row" style="display:flex;gap:12px;align-items:stretch;flex-wrap:wrap">
+                    <div class="proprietario-search-field" style="position:relative;flex:1;min-width:240px">
                       <input type="text" id="f_proprietario_search" placeholder="Nome, cognome, email o telefono…" oninput="searchProprietario(this.value)" onfocus="searchProprietario(this.value)" autocomplete="off" style="padding-right:36px;width:100%;min-height:48px;font-size:0.92rem">
                       <span style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none" id="proprietarioSearchIcon">🔍</span>
                       <input type="hidden" id="f_proprietario_id">
@@ -2451,7 +2494,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 </div>
                 <div class="form-group form-full">
                   <label>Indirizzo per Mappa <span style="background:#27ae60;color:white;font-size:0.65rem;padding:2px 6px;border-radius:4px;margin-left:4px">📍 PUBBLICO</span></label>
-                  <div style="display:flex;gap:8px;align-items:center">
+                  <div class="mappa-indirizzo-row" style="display:flex;gap:8px;align-items:center">
                     <input type="text" id="f_indirizzo_mappa" placeholder="es. Via Roma, Padova — indirizzo approssimativo per la mappa pubblica" style="flex:1">
                     <button type="button" id="btnGeneraVia" onclick="generaViaCasuale()" style="white-space:nowrap;padding:8px 14px;background:#27ae60;color:#fff;border:none;border-radius:6px;font-size:0.75rem;font-weight:600;cursor:pointer;font-family:Montserrat,sans-serif">🎲 Genera via</button>
                   </div>
@@ -2931,7 +2974,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
               </div><!-- /form-grid -->
 
-              <div style="display:flex;gap:12px;margin-top:24px;justify-content:flex-end;">
+              <div class="immobile-form-actions" style="display:flex;gap:12px;margin-top:24px;justify-content:flex-end;">
                 <button type="button" class="btn btn-secondary" onclick="resetForm()">Annulla</button>
                 <button type="submit" class="btn btn-primary" id="btnSalva">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
@@ -3429,7 +3472,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <div class="table-wrap">
           <div class="table-head">
             <div style="font-weight:600;font-size:0.9rem;">Rubrica Clienti</div>
-            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+            <div class="table-head-toolbar" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
               <select id="filtroFonteCliente" onchange="loadClienti()" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.8rem;">
                 <option value="">Tutte le fonti</option>
                 <option value="newsletter">Newsletter</option>
@@ -3565,16 +3608,15 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           <div class="modal-body">
             <input type="hidden" id="clienteEditId">
             <div class="form-grid">
-              <div class="form-group form-full" style="grid-column:1/-1;margin-bottom:4px;padding:16px 18px;background:linear-gradient(135deg,#e8f0fe 0%,#dbeafe 100%);border:2px solid var(--blu,#2C4A6E);border-radius:12px">
-                <label style="font-weight:700;color:var(--blu,#2C4A6E);font-size:0.92rem;margin-bottom:12px;display:block">Chi è in rubrica?</label>
-                <div style="display:flex;gap:14px;flex-wrap:wrap">
-                  <label class="cliente-ruolo-opt" style="flex:1;min-width:200px;display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:#fff;border:2px solid #c5d4e8;border-radius:10px;cursor:pointer">
-                    <input type="radio" name="clienteRuoloRubrica" id="clienteRuoloCerca" value="cerca" checked onchange="toggleClienteRuoloRubrica()" style="margin-top:4px;width:18px;height:18px">
-                    <span><strong style="color:var(--blu)">Cliente</strong><br><span style="font-size:0.78rem;color:#555">Cerca casa o affitto — compili tipo operazione e tipologia</span></span>
+              <div class="form-group form-full" style="grid-column:1/-1;margin-bottom:4px;padding:14px 16px;background:linear-gradient(135deg,#e8f0fe 0%,#dbeafe 100%);border:2px solid var(--blu,#2C4A6E);border-radius:12px">
+                <div class="cliente-ruolo-row" style="display:flex;gap:14px;flex-wrap:wrap">
+                  <label class="cliente-ruolo-opt" style="flex:1;min-width:140px;display:flex;align-items:center;justify-content:center;gap:12px;padding:18px 16px;background:#fff;border:2px solid #c5d4e8;border-radius:10px;cursor:pointer">
+                    <input type="radio" name="clienteRuoloRubrica" id="clienteRuoloCerca" value="cerca" checked onchange="toggleClienteRuoloRubrica()" style="width:22px;height:22px;flex-shrink:0">
+                    <span style="font-size:1.2rem;font-weight:800;letter-spacing:0.08em;color:var(--blu,#2C4A6E);text-transform:uppercase">Cliente</span>
                   </label>
-                  <label class="cliente-ruolo-opt" style="flex:1;min-width:200px;display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:#fff;border:2px solid #c5d4e8;border-radius:10px;cursor:pointer">
-                    <input type="radio" name="clienteRuoloRubrica" id="clienteRuoloProprietario" value="proprietario" onchange="toggleClienteRuoloRubrica()" style="margin-top:4px;width:18px;height:18px">
-                    <span><strong style="color:var(--blu)">Proprietario</strong><br><span style="font-size:0.78rem;color:#555">Vende o affitta — niente preferenze di ricerca</span></span>
+                  <label class="cliente-ruolo-opt" style="flex:1;min-width:140px;display:flex;align-items:center;justify-content:center;gap:12px;padding:18px 16px;background:#fff;border:2px solid #c5d4e8;border-radius:10px;cursor:pointer">
+                    <input type="radio" name="clienteRuoloRubrica" id="clienteRuoloProprietario" value="proprietario" onchange="toggleClienteRuoloRubrica()" style="width:22px;height:22px;flex-shrink:0">
+                    <span style="font-size:1.2rem;font-weight:800;letter-spacing:0.08em;color:var(--blu,#2C4A6E);text-transform:uppercase">Proprietario</span>
                   </label>
                 </div>
               </div>
@@ -3601,8 +3643,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <option value="proprietario_immobile">Proprietario (scheda immobile)</option>
                 </select>
               </div>
-              <div id="clienteCampiRicercaTipo" style="display:contents">
-              <div class="form-group" id="clienteGruppoTipoOp">
+              <div id="clienteCampiRicerca" class="form-grid" style="grid-column:1/-1">
+              <div class="form-group">
                 <label>Tipo Operazione</label>
                 <select id="clienteTipoOp">
                   <option value="">Qualsiasi</option>
@@ -3611,7 +3653,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <option value="affitto_commerciale">Affitto Commerciale</option>
                 </select>
               </div>
-              <div class="form-group" id="clienteGruppoTipologia">
+              <div class="form-group">
                 <label>Tipologia</label>
                 <select id="clienteTipologia">
                   <option value="">Qualsiasi</option>
@@ -3631,7 +3673,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <option value="terreno">Terreno / Rurale</option>
                   <option value="garage">Garage / Box</option>
                 </select>
-              </div>
               </div>
               <div class="form-group">
                 <label>Zona / Comune</label>
@@ -3653,12 +3694,13 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 <label>Superficie Min (mq)</label>
                 <input type="number" id="clienteSupMin" placeholder="50" min="0">
               </div>
-              <div class="form-group form-full">
+              <div class="form-group form-full" style="grid-column:1/-1">
                 <label>Interesse / Ricerca (testo libero)</label>
                 <input type="text" id="clienteInteresse" placeholder="Es. Cerca appartamento 3 camere zona centro Padova">
               </div>
+              </div>
 
-              <div class="section-divider" style="margin-top:12px;font-size:0.78rem;font-weight:600;color:var(--caffe2);border-bottom:1px solid var(--caffe3);padding-bottom:6px;">Dati Personali / Azienda (opzionale)</div>
+              <div class="section-divider" style="margin-top:12px;font-size:0.78rem;font-weight:600;color:var(--caffe2);border-bottom:1px solid var(--caffe3);padding-bottom:6px;grid-column:1/-1">Dati Personali / Azienda (opzionale)</div>
 
               <div class="form-group">
                 <label>Tipo Cliente</label>
@@ -8496,10 +8538,8 @@ function setClienteRuoloRubricaUI(ruolo) {
 
 function toggleClienteRuoloRubrica() {
   const isProp = document.getElementById('clienteRuoloProprietario') && document.getElementById('clienteRuoloProprietario').checked;
-  const g1 = document.getElementById('clienteGruppoTipoOp');
-  const g2 = document.getElementById('clienteGruppoTipologia');
-  if (g1) g1.style.display = isProp ? 'none' : '';
-  if (g2) g2.style.display = isProp ? 'none' : '';
+  const ricerca = document.getElementById('clienteCampiRicerca');
+  if (ricerca) ricerca.style.display = isProp ? 'none' : '';
   document.querySelectorAll('.cliente-ruolo-opt').forEach(el => {
     el.style.borderColor = '#c5d4e8';
     el.style.boxShadow = 'none';
@@ -8594,14 +8634,12 @@ async function saveCliente() {
     ruolo_rubrica: ruoloRubrica,
     tipo_operazione_cercata: isProprietario ? null : (document.getElementById('clienteTipoOp').value || null),
     tipologia_cercata: isProprietario ? null : (document.getElementById('clienteTipologia').value || null),
-    zona_cercata: document.getElementById('clienteZona').value.trim() || null,
-    budget_min: parseFloat(document.getElementById('clienteBudgetMin').value) || null,
-    budget_max: parseFloat(document.getElementById('clienteBudgetMax').value) || null,
-    camere_min: parseInt(document.getElementById('clienteCamereMin').value) || null,
-    superficie_min: parseInt(document.getElementById('clienteSupMin').value) || null,
-    interesse: isProprietario
-      ? (document.getElementById('clienteInteresse').value.trim() || 'Proprietario / incarico')
-      : document.getElementById('clienteInteresse').value.trim(),
+    zona_cercata: isProprietario ? null : (document.getElementById('clienteZona').value.trim() || null),
+    budget_min: isProprietario ? null : (parseFloat(document.getElementById('clienteBudgetMin').value) || null),
+    budget_max: isProprietario ? null : (parseFloat(document.getElementById('clienteBudgetMax').value) || null),
+    camere_min: isProprietario ? null : (parseInt(document.getElementById('clienteCamereMin').value) || null),
+    superficie_min: isProprietario ? null : (parseInt(document.getElementById('clienteSupMin').value) || null),
+    interesse: isProprietario ? 'Proprietario / incarico' : document.getElementById('clienteInteresse').value.trim(),
     note: document.getElementById('clienteNote').value.trim(),
     // Nuovi campi azienda/documenti
     tipo_cliente: document.getElementById('clienteTipoCliente').value || 'privato',
