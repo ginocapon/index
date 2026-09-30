@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Mappa URL Supabase → path locale img/",
-    "updated": "2026-09-29T13:13:03.998217+00:00",
-    "count": 1954
+    "updated": "2026-09-30T12:53:37.387576+00:00",
+    "count": 1957
   },
   "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1779963017206-casa-singola-altichiero-4-.jpg": "img/immobili/LP0286/001-1779963017206-casa-singola-altichiero-4.webp",
   "1779963017206-casa-singola-altichiero-4-.jpg": "img/immobili/LP0286/001-1779963017206-casa-singola-altichiero-4.webp",
@@ -1957,5 +1957,8 @@
   "foto-immobili/1790242590904-3e470eb8-d0ac-4c7c-a54a-644cb03be327.png": "img/immobili/LF0034/006-1790242590904-3e470eb8-d0ac-4c7c-a54a-644cb03be327.webp",
   "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1790242592038-3d59d463-b8d3-4301-902b-8dbce84bd113.png": "img/immobili/LF0034/007-1790242592038-3d59d463-b8d3-4301-902b-8dbce84bd113.webp",
   "1790242592038-3d59d463-b8d3-4301-902b-8dbce84bd113.png": "img/immobili/LF0034/007-1790242592038-3d59d463-b8d3-4301-902b-8dbce84bd113.webp",
-  "foto-immobili/1790242592038-3d59d463-b8d3-4301-902b-8dbce84bd113.png": "img/immobili/LF0034/007-1790242592038-3d59d463-b8d3-4301-902b-8dbce84bd113.webp"
+  "foto-immobili/1790242592038-3d59d463-b8d3-4301-902b-8dbce84bd113.png": "img/immobili/LF0034/007-1790242592038-3d59d463-b8d3-4301-902b-8dbce84bd113.webp",
+  "https://qwkwkemuabfwvwuqrxlu.supabase.co/storage/v1/object/public/foto-immobili/1790753971994-affitto-altichiero-cucina.png": "img/immobili/LF0034/008-1790753971994-affitto-altichiero-cucina.webp",
+  "1790753971994-affitto-altichiero-cucina.png": "img/immobili/LF0034/008-1790753971994-affitto-altichiero-cucina.webp",
+  "foto-immobili/1790753971994-affitto-altichiero-cucina.png": "img/immobili/LF0034/008-1790753971994-affitto-altichiero-cucina.webp"
 }
