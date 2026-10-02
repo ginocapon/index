@@ -106,7 +106,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 - Intent simile `dato-omi`: blog-spese-condominiali-acquisto-padova-2026, blog-mercato-sacrocuore-padova-omi-2026
 - Intent simile `affitti-cluster`: blog-affitti-studenti-settembre-padova-proprietario-2026, blog-affitto-transitorio-padova-durata-2026, blog-gestione-locazione-delegata-padova-2026, blog-registro-contratti-affitto-padova-2026…
 - Intent simile `guida-pillar`: blog-caro-affitti-padova-under-35-guida-2026, blog-canone-concordato-padova-guida-2026, blog-valutazione-casa-padova-guida-2026
-- Intent simile `altri-/-trasversali`: blog-affittare-casa-padova-proprietario-2026, blog-case-prefabbricate-futuro-elon-musk-2026, blog-confcommercio-ascom-servizi-soci-padova-2026, blog-domanda-residenziale-supera-offerta-2026-padova…
+- Intent simile `altri-/-trasversali`: blog-affittare-casa-padova-proprietario-2026, blog-case-prefabbricate-futuro-elon-musk-2026, blog-domanda-residenziale-supera-offerta-2026-padova, blog-finanza-agevolata-formazione-studenti-padova-2026…
 - Intent simile `analisi-scenari`: blog-bolla-immobiliare-padova-2026, blog-previsioni-immobiliari-scenari-geopolitica-2026, blog-prospettive-mercato-residenziale-italia-2026
 - Intent simile `territorio-padova`: blog-prezzi-case-padova-zona-2026, blog-scuole-istruzione-padova, blog-servizi-infrastrutture-padova, blog-trasporti-mobilita-padova
 - Intent simile `mutui-cluster`: blog-mutui-selettivi-banche-padova-2026, blog-mutuo-fisso-variabile-padova-2026, blog-mutuo-prima-casa-padova, blog-mutuo-under-36-tassi-fisso-variabile-2027…
@@ -188,8 +188,8 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-affittare-casa-padova-proprietario-2026` | `affittare-casa-proprietario` | Angolo affittare-casa-proprietario — intent dedicato, verificare matrice §4 |
 | `blog-canone-concordato-padova-guida-2026` | `canone-concordato-guida` | Guida pillar evergreen — non evento datato |
 | `blog-case-prefabbricate-futuro-elon-musk-2026` | `case-prefabbricate-futuro-elon-musk` | Angolo case-prefabbricate-futuro-elon-musk — intent dedicato, verificare matrice §4 |
-| `blog-confcommercio-ascom-servizi-soci-padova-2026` | `confcommercio-ascom-servizi-soci` | Angolo confcommercio-ascom-servizi-soci — intent dedicato, verificare matrice §4 |
 | `blog-domanda-residenziale-supera-offerta-2026-padova` | `domanda-residenziale-supera-offerta` | Angolo domanda-residenziale-supera-offerta — intent dedicato, verificare matrice §4 |
+| `blog-finanza-agevolata-formazione-studenti-padova-2026` | `finanza-agevolata-formazione-studenti` | Angolo finanza-agevolata-formazione-studenti — intent dedicato, verificare matrice §4 |
 | `blog-gergo-immobiliare-padova-spiegato-2026` | `gergo-immobiliare-spiegato` | Angolo gergo-immobiliare-spiegato — intent dedicato, verificare matrice §4 |
 | `blog-gestione-spese-casa-risparmio-padova-2026` | `gestione-spese-casa-possesso-padova` | Spese possesso post-acquisto (energia, IMU) — non costi rogito |
 | `blog-italy-rental-market-positive-start-january-2026` | `italy-rental-market-positive-start` | Angolo italy-rental-market-positive-start-january — intent dedicato, verificare matrice §4 |

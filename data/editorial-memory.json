@@ -20,25 +20,24 @@
     "ALTRO"
   ],
   "saturation_current": {
-    "ALTRO": 2,
-    "AFFITTI_CANONI": 2
+    "AFFITTI_CANONI": 3
   },
   "saturation_counts_last_8": {
-    "ALTRO": 2,
-    "AFFITTI_CANONI": 2,
+    "AFFITTI_CANONI": 3,
     "AGENZIA_SERVIZI": 1,
+    "ALTRO": 1,
     "LOCALE_LIMENA": 1,
     "MUTUI_TASSI": 1,
     "VENDITA_PROCESSO": 1
   },
   "recent_articles": [
     {
-      "slug": "blog-confcommercio-ascom-servizi-soci-padova-2026",
-      "title": "Confcommercio Padova: servizi soci e convenzioni 2026",
+      "slug": "blog-finanza-agevolata-formazione-studenti-padova-2026",
+      "title": "Finanziamenti e formazione per studenti a Padova 2026",
       "published_date": "2026-10-02",
-      "substantive_area": "ALTRO",
+      "substantive_area": "AFFITTI_CANONI",
       "secondary_areas": [],
-      "main_question": "Confcommercio Padova: servizi soci e convenzioni 2026",
+      "main_question": "Quanto costa affittare e come funzionano i canoni?",
       "geo": "Padova/Veneto",
       "editorial_type": ""
     },
