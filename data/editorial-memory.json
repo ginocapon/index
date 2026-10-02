@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-18",
+  "updated": "2026-10-02",
   "skill_ref": "TEST-SKILL/skill-editoriale-visivo.md §16-TER",
   "window_size": 20,
   "saturation_window": 8,
@@ -19,25 +19,46 @@
     "INVESTIMENTO",
     "ALTRO"
   ],
-  "saturation_current": {},
+  "saturation_current": {
+    "ALTRO": 2,
+    "AFFITTI_CANONI": 2
+  },
   "saturation_counts_last_8": {
+    "ALTRO": 2,
+    "AFFITTI_CANONI": 2,
     "AGENZIA_SERVIZI": 1,
-    "ALTRO": 1,
     "LOCALE_LIMENA": 1,
     "MUTUI_TASSI": 1,
-    "VENDITA_PROCESSO": 1,
-    "AFFITTI_CANONI": 1,
-    "INVESTIMENTO": 1,
-    "VENDITA_VALUTAZIONE": 1
+    "VENDITA_PROCESSO": 1
   },
   "recent_articles": [
+    {
+      "slug": "blog-confcommercio-ascom-servizi-soci-padova-2026",
+      "title": "Confcommercio Padova: servizi soci e convenzioni 2026",
+      "published_date": "2026-10-02",
+      "substantive_area": "ALTRO",
+      "secondary_areas": [],
+      "main_question": "Confcommercio Padova: servizi soci e convenzioni 2026",
+      "geo": "Padova/Veneto",
+      "editorial_type": ""
+    },
+    {
+      "slug": "blog-affitti-studenti-settembre-padova-proprietario-2026",
+      "title": "Affitti studenti Padova settembre 2026: cosa cambia per chi affitta",
+      "published_date": "2026-09-25",
+      "substantive_area": "AFFITTI_CANONI",
+      "secondary_areas": [],
+      "main_question": "Quanto costa affittare e come funzionano i canoni?",
+      "geo": "Padova/Veneto",
+      "editorial_type": "trend"
+    },
     {
       "slug": "blog-gestione-locazione-delegata-padova-2026",
       "title": "Gestione locazione delegata Padova: cosa include e quando conviene",
       "published_date": "2026-09-18",
       "substantive_area": "AGENZIA_SERVIZI",
       "secondary_areas": [],
-      "main_question": "Quanto costa affittare e come funzionano i canoni?",
+      "main_question": "Cosa include la gestione locazione delegata a Padova e quando conviene al proprietario?",
       "geo": "Padova/Veneto",
       "editorial_type": "evergreen"
     },
@@ -238,29 +259,6 @@
         "MUTUI_TASSI"
       ],
       "main_question": "Come acquistare prima casa con agevolazioni?",
-      "geo": "Padova/Veneto",
-      "editorial_type": ""
-    },
-    {
-      "slug": "blog-sopralluoghi-drone-padova-2026",
-      "title": "Sopralluoghi Drone Padova 2026: documentazione aerea professionale",
-      "published_date": "2026-08-16",
-      "substantive_area": "AGENZIA_SERVIZI",
-      "secondary_areas": [],
-      "main_question": "Come scegliere agenzia e servizi?",
-      "geo": "Padova/Veneto",
-      "editorial_type": ""
-    },
-    {
-      "slug": "blog-appartamento-limena-guida-acquisto-2026",
-      "title": "Appartamento Limena: Guida acquisto 2026",
-      "published_date": "2026-08-05",
-      "substantive_area": "MUTUI_TASSI",
-      "secondary_areas": [
-        "ACQUISTO_PRIMO_CASA",
-        "LOCALE_LIMENA"
-      ],
-      "main_question": "Quali tassi e condizioni di mutuo?",
       "geo": "Padova/Veneto",
       "editorial_type": ""
     }

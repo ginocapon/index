@@ -798,6 +798,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'confcommercio ascom servizi soci padova 2026': { img: 'img/blog/blog-confcommercio-ascom-servizi-soci-padova-2026-hero.webp', url: 'blog-confcommercio-ascom-servizi-soci-padova-2026' },
     'gestione locazione delegata padova 2026': { img: 'img/blog/blog-gestione-locazione-delegata-padova-2026-hero.webp', url: 'blog-gestione-locazione-delegata-padova-2026' },
     'case prefabbricate: futuro secondo musk? guida 2026': { img: 'img/blog/blog-case-prefabbricate-futuro-elon-musk-2026-hero.webp', url: 'blog-case-prefabbricate-futuro-elon-musk-2026' },
     'zona imma limena: pochi immobili, domanda alta 2027': { img: 'img/blog/blog-zona-imma-limena-domanda-offerta-2027-hero.webp', url: 'blog-zona-imma-limena-domanda-offerta-2027' },
@@ -949,6 +950,13 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    {
+      "titolo": "Confcommercio Padova: servizi soci e convenzioni 2026",
+      "categoria": "Imprese",
+      "data": "2026-10-02",
+      "immagine_copertina": "img/blog/blog-confcommercio-ascom-servizi-soci-padova-2026-hero.webp",
+      "url_statico": "blog-confcommercio-ascom-servizi-soci-padova-2026"
+    },
     {
       "titolo": "Affitti studenti Padova settembre 2026: cosa cambia per chi affitta",
       "categoria": "Guida proprietari",

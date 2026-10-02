@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-25",
+  "updated": "2026-10-02",
   "policy": "Marchio FOTO AI automatico (site-ai-disclosure.js) su pathPrefixes. Esclusi img/immobili/, img/team/, img/brand/, img/og-. Dopo nuove hero blog: node scripts/build-ai-image-manifest.mjs; audit: node scripts/audit-foto-ai.mjs",
   "pathPrefixes": [
     "img/blog/",
@@ -58,6 +58,10 @@
     "img/blog/blog-coliving-padova-limena-limena.webp",
     "img/blog/blog-compravendite-italia-q1-agenzia-entrate-2026.webp",
     "img/blog/blog-condono-edilizio-proposte-2026.webp",
+    "img/blog/blog-confcommercio-ascom-servizi-soci-padova-2026-finanza-agevolata.webp",
+    "img/blog/blog-confcommercio-ascom-servizi-soci-padova-2026-hero.webp",
+    "img/blog/blog-confcommercio-ascom-servizi-soci-padova-2026-locazioni-commerciali.webp",
+    "img/blog/blog-confcommercio-ascom-servizi-soci-padova-2026-network-imprese.webp",
     "img/blog/blog-costi-costruzione-istat-padova-2026.webp",
     "img/blog/blog-costi-proprieta-acquisto-possesso-vendita-padova-2026.webp",
     "img/blog/blog-dazi-usa-ue-mercato-padova-2026.webp",
@@ -184,5 +188,5 @@
     "img/blog/trend-ricerca-casa-padova-2026.webp",
     "img/blog/ufficio-righetto-immobiliare.webp"
   ],
-  "fileCount": 166
+  "fileCount": 170
 }
