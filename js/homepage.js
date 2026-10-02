@@ -798,6 +798,9 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'bonus mobili barriere architettoniche 2026 padova': { img: 'img/blog/blog-bonus-mobili-barriere-architettoniche-2026-padova-hero.webp', url: 'blog-bonus-mobili-barriere-architettoniche-2026-padova' },
+    'legge bilancio 198 bonus edilizi 2026 padova': { img: 'img/blog/blog-legge-bilancio-198-2026-bonus-edilizi-padova-hero.webp', url: 'blog-legge-bilancio-198-2026-bonus-edilizi-padova' },
+    'bonus casa 2027 detrazioni padova': { img: 'img/blog/blog-bonus-casa-2027-detrazioni-padova-hero.webp', url: 'blog-bonus-casa-2027-detrazioni-padova' },
     'finanziamenti formazione studenti padova 2026': { img: 'img/blog/blog-finanza-agevolata-formazione-studenti-padova-2026-hero.webp', url: 'blog-finanza-agevolata-formazione-studenti-padova-2026' },
     'gestione locazione delegata padova 2026': { img: 'img/blog/blog-gestione-locazione-delegata-padova-2026-hero.webp', url: 'blog-gestione-locazione-delegata-padova-2026' },
     'case prefabbricate: futuro secondo musk? guida 2026': { img: 'img/blog/blog-case-prefabbricate-futuro-elon-musk-2026-hero.webp', url: 'blog-case-prefabbricate-futuro-elon-musk-2026' },
@@ -950,6 +953,27 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    {
+      "titolo": "Bonus mobili 2026 e stop barriere architettoniche — Padova",
+      "categoria": "Fisco e ristrutturazioni",
+      "data": "2026-10-02",
+      "immagine_copertina": "img/blog/blog-bonus-mobili-barriere-architettoniche-2026-padova-hero.webp",
+      "url_statico": "blog-bonus-mobili-barriere-architettoniche-2026-padova"
+    },
+    {
+      "titolo": "Legge 198/2025: bonus edilizi ed ecobonus 2026 a Padova",
+      "categoria": "Fisco e ristrutturazioni",
+      "data": "2026-10-02",
+      "immagine_copertina": "img/blog/blog-legge-bilancio-198-2026-bonus-edilizi-padova-hero.webp",
+      "url_statico": "blog-legge-bilancio-198-2026-bonus-edilizi-padova"
+    },
+    {
+      "titolo": "Bonus casa 2027: calendario detrazioni e Padova",
+      "categoria": "Fisco e ristrutturazioni",
+      "data": "2026-10-02",
+      "immagine_copertina": "img/blog/blog-bonus-casa-2027-detrazioni-padova-hero.webp",
+      "url_statico": "blog-bonus-casa-2027-detrazioni-padova"
+    },
     {
       "titolo": "Finanziamenti e formazione per studenti a Padova 2026",
       "categoria": "Studenti",

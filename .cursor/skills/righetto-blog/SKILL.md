@@ -58,6 +58,7 @@ description: >-
 - [ ] **Lunghezza:** target ~2500 parole (±20%) — **qualità prima del conteggio**; vietato `expand_body` filler (`skill-prompt-chirurgo-homepage-editoriale.md`)
 - [ ] Distinzione fatto / dichiarazione / analisi / previsione nel testo
 - [ ] Valore aggiunto Padova/Veneto — non copia concorrenti
+- [ ] **Anti-plagio (obbligatorio):** URL o PDF di terzi (blog fiscali, edilizia, news) sono solo **spunto tema** — **vietato** copiare di sana pianta titoli, paragrafi, tabelle o FAQ; rielaborare testo **originale** Righetto con fonti **primarie** (GU, ADE, MEF, ISTAT, OMI). Inserire nota editoriale se il tema deriva da cronaca di settore.
 - [ ] FOTO AI: `build-ai-image-manifest.mjs` + `audit-foto-ai.mjs` OK
 - [ ] FAQ schema da `faq_candidates` — risposta immediata + condizioni (§16-QUINQUIES)
 - [ ] `audit_blog_publishability.py --file blog-{slug}.html` → OK (§18)

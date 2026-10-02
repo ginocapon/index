@@ -26,6 +26,12 @@ Dettaglio: **`TEST-SKILL/skill-editoriale-visivo.md`** (comando permanente prior
 5. Proposta nuova: `python scripts/build_skimm.py --check "slug" "kw-primaria" "cluster"`
 6. Se doppione o tema troppo simile → **STOP** → ricerca web su fonte istituzionale → altro argomento
 
+## Anti-plagio e fonti esterne
+- Link, RSS o PDF di **siti terzi** (es. blog fiscali/edilizia): usare solo come **ispirazione argomento** — **MAI** copiare di sana pianta testo, titoli, FAQ o tabelle
+- Rielaborazione **100% originale** Righetto; dati normativi solo da **GU / ADE / MEF / ISTAT / OMI** (e seconda fonte istituzionale se serve)
+- Vietato parafrasare troppo fedele («copia camuffata»): struttura, angolo Padova/Veneto e valore immobiliare devono essere distintivi
+- Vedi anche `SKILL-2.0.md` §3.4 anti-plagio e `skill-editoriale-visivo.md` § vietato copiare testi concorrenti
+
 ## Corpo articolo
 - 2500+ parole **utili** (no loop di paragrafi identici per gonfiare `wordCount`)
 - 10–15 H2/H3 · ~35% transition words

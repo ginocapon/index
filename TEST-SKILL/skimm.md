@@ -102,7 +102,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 - Intent simile `territorio-limena`: blog-appartamento-limena-guida-acquisto-2026, blog-limena-vicino-padova-comprare-2026, blog-affitti-limena-2026, blog-appartamento-affitto-limena-contratto-2026…
 - Intent simile `breakdown-costi`: blog-costi-proprieta-acquisto-possesso-vendita-padova-2026, blog-costi-costruzione-istat-padova-2026
 - Intent simile `acquisto-e-prima-casa`: blog-prima-casa-under-36-consap-padova-2026, blog-proposta-acquisto-negoziazione-padova-2026, blog-visura-catastale-acquisto-casa-padova-2026
-- Intent simile `fisco-normativa`: blog-quattro-imposte-rogitio-prima-casa-padova-2026, blog-bonus-mobili-2026-massimizzare-ristrutturazioni, blog-imposte-registro-catasto-compravendita-padova-2026, blog-tasse-vendita-casa
+- Intent simile `fisco-normativa`: blog-quattro-imposte-rogitio-prima-casa-padova-2026, blog-bonus-casa-2027-detrazioni-padova, blog-bonus-mobili-2026-massimizzare-ristrutturazioni, blog-bonus-mobili-barriere-architettoniche-2026-padova…
 - Intent simile `dato-omi`: blog-spese-condominiali-acquisto-padova-2026, blog-mercato-sacrocuore-padova-omi-2026
 - Intent simile `affitti-cluster`: blog-affitti-studenti-settembre-padova-proprietario-2026, blog-affitto-transitorio-padova-durata-2026, blog-gestione-locazione-delegata-padova-2026, blog-registro-contratti-affitto-padova-2026…
 - Intent simile `guida-pillar`: blog-caro-affitti-padova-under-35-guida-2026, blog-canone-concordato-padova-guida-2026, blog-valutazione-casa-padova-guida-2026
@@ -119,7 +119,7 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 - Coppia da non fondere (Tribloc vs Case Green generico): blog-residenze-green-padova-tribloc-2026 ↔ blog-domanda-case-green-certificazione-padova-2026
 - Coppia da non fondere (Evento BCE vs guida mutui): blog-bce-tassi-mutui-giugno-2026-padova ↔ blog-mutui-casa-padova-2026
 
-**Articoli catalogati:** 142
+**Articoli catalogati:** 145
 
 ---
 
@@ -203,13 +203,16 @@ Verificate ogni **venerdì** da `scripts/venerdi-contenuti-freschezza.py`:
 | `blog-student-rentals-padova-guide-2026` | `student-rentals-guide` | Angolo student-rentals-guide — intent dedicato, verificare matrice §4 |
 | `blog-valutazione-casa-padova-guida-2026` | `valutazione-casa-guida` | Guida pillar evergreen — non evento datato |
 
-### Fisco e normativa (4)
+### Fisco e normativa (7)
 
 | Slug | KW primaria | Angolo editoriale |
 |---|---|---|
+| `blog-bonus-casa-2027-detrazioni-padova` | `bonus-casa-2027-detrazioni` | Fisco/normativa — non dati mercato |
 | `blog-bonus-edilizi-2026-incentivi-casa-padova` | `bonus-edilizi-2026-incentivi` | Incentivi fiscali edilizia 2026 — non decreto urbanistica |
 | `blog-bonus-mobili-2026-massimizzare-ristrutturazioni` | `bonus-mobili-massimizzare-ristrutturazioni` | Fisco/normativa — non dati mercato |
+| `blog-bonus-mobili-barriere-architettoniche-2026-padova` | `bonus-mobili-barriere-architettoniche` | Fisco/normativa — non dati mercato |
 | `blog-condono-edilizio-proposte-2026` | `condono-edilizio-manovra-2026` | Proposte normative condono — non bonus edilizi |
+| `blog-legge-bilancio-198-2026-bonus-edilizi-padova` | `legge-bilancio-198-bonus-edilizi` | Fisco/normativa — non dati mercato |
 | `blog-piano-casa-decreto-66-2026-padova` | `piano-casa-decreto-66-padova` | Normativa Decreto 66 edilizia — non bonus fiscali |
 
 ### Investimenti (2)

@@ -75,6 +75,16 @@ Script batch: `scripts/build_blog_housing_veneto_lug2026.py` + `register_housing
 
 > Dettaglio completo: **`TEST-SKILL/SKILL-2.0.md` §8.1a**. Regola sintetica per ogni nuovo articolo.
 
+### 2.0b Anti-plagio — rielaborazione obbligatoria (BLOCCANTE)
+
+Quando l’utente o la coda citano **articoli, blog o portali di terzi** (fiscali, edilizia, news):
+
+1. **Vietato** copiare di sana pianta titoli, lead, paragrafi, FAQ, tabelle o elenchi — anche con lieve parafrasi.
+2. Usare la fonte esterna **solo come spunto di tema**; scrivere testo **originale** Righetto (angolo Padova/Veneto, proprietari/acquirenti, percorso alleato venditori dove pertinente).
+3. **Dati normativi e numerici** solo da fonti **verificabili**: Gazzetta Ufficiale, Agenzia delle Entrate, MEF, ISTAT, OMI, FIMAA — mai da blog concorrenti.
+4. Inserire, se utile, una **nota editoriale** che chiarisce: analisi autonoma, verifica su GU/ADE.
+5. Allineamento: `SKILL-2.0.md` §3.4 (scraping/admin), `skill-editoriale-visivo.md` (no copia testi concorrenti), rule `righetto-blog-publish.mdc`.
+
 1. **Non iniziare a scrivere** finche' non hai verificato che titolo, slug e angolo editoriale **non esistono gia'** sul sito.
 2. Leggi **`TEST-SKILL/skimm.md`** (catalogo keyword/intent) e verifica `kw_primaria` univoca in §3.
 3. Esegui `python scripts/check_doppioni_sito.py` e `python scripts/build_skimm.py` (aggiorna catalogo se batch nuovo).
