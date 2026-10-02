@@ -9,7 +9,7 @@
     "Intent simile `dato-omi`: blog-spese-condominiali-acquisto-padova-2026, blog-mercato-sacrocuore-padova-omi-2026",
     "Intent simile `affitti-cluster`: blog-affitti-studenti-settembre-padova-proprietario-2026, blog-affitto-transitorio-padova-durata-2026, blog-gestione-locazione-delegata-padova-2026, blog-registro-contratti-affitto-padova-2026…",
     "Intent simile `guida-pillar`: blog-caro-affitti-padova-under-35-guida-2026, blog-canone-concordato-padova-guida-2026, blog-valutazione-casa-padova-guida-2026",
-    "Intent simile `altri-/-trasversali`: blog-affittare-casa-padova-proprietario-2026, blog-case-prefabbricate-futuro-elon-musk-2026, blog-confcommercio-ascom-servizi-soci-padova-2026, blog-domanda-residenziale-supera-offerta-2026-padova…",
+    "Intent simile `altri-/-trasversali`: blog-affittare-casa-padova-proprietario-2026, blog-case-prefabbricate-futuro-elon-musk-2026, blog-domanda-residenziale-supera-offerta-2026-padova, blog-finanza-agevolata-formazione-studenti-padova-2026…",
     "Intent simile `analisi-scenari`: blog-bolla-immobiliare-padova-2026, blog-previsioni-immobiliari-scenari-geopolitica-2026, blog-prospettive-mercato-residenziale-italia-2026",
     "Intent simile `territorio-padova`: blog-prezzi-case-padova-zona-2026, blog-scuole-istruzione-padova, blog-servizi-infrastrutture-padova, blog-trasporti-mobilita-padova",
     "Intent simile `mutui-cluster`: blog-mutui-selettivi-banche-padova-2026, blog-mutuo-fisso-variabile-padova-2026, blog-mutuo-prima-casa-padova, blog-mutuo-under-36-tassi-fisso-variabile-2027…",
@@ -563,17 +563,6 @@
       "h1": "Case prefabbricate: il futuro secondo Musk?"
     },
     {
-      "slug": "blog-confcommercio-ascom-servizi-soci-padova-2026",
-      "file": "blog-confcommercio-ascom-servizi-soci-padova-2026.html",
-      "title": "Confcommercio Padova: servizi soci e convenzioni 2026",
-      "categoria": "",
-      "cluster": "Altri / trasversali",
-      "kw_primaria": "confcommercio-ascom-servizi-soci",
-      "angolo": "Angolo confcommercio-ascom-servizi-soci — intent dedicato, verificare matrice §4",
-      "intent": "altri-/-trasversali",
-      "h1": "Confcommercio Padova: servizi soci, convenzioni e immobili impresa"
-    },
-    {
       "slug": "blog-domanda-residenziale-supera-offerta-2026-padova",
       "file": "blog-domanda-residenziale-supera-offerta-2026-padova.html",
       "title": "Domanda residenziale supera offerta Q1 2026: Padova",
@@ -583,6 +572,17 @@
       "angolo": "Angolo domanda-residenziale-supera-offerta — intent dedicato, verificare matrice §4",
       "intent": "altri-/-trasversali",
       "h1": "Domanda residenziale supera l'offerta — Q1 2026, dati ADE e Padova"
+    },
+    {
+      "slug": "blog-finanza-agevolata-formazione-studenti-padova-2026",
+      "file": "blog-finanza-agevolata-formazione-studenti-padova-2026.html",
+      "title": "Finanziamenti studenti Padova 2026: ESU e formazione",
+      "categoria": "",
+      "cluster": "Altri / trasversali",
+      "kw_primaria": "finanza-agevolata-formazione-studenti",
+      "angolo": "Angolo finanza-agevolata-formazione-studenti — intent dedicato, verificare matrice §4",
+      "intent": "altri-/-trasversali",
+      "h1": "Finanziamenti e formazione per studenti a Padova — cosa è pubblico e cosa no"
     },
     {
       "slug": "blog-gergo-immobiliare-padova-spiegato-2026",
