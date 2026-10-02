@@ -44,17 +44,18 @@ REGIONE_VENETO = "https://www.regione.veneto.it"
 MIUR_UNIVERSITA = "https://www.mur.gov.it/it/temi/universita"
 
 IMAGE_SOURCES: dict[str, tuple[str, str] | list[tuple[str, str]]] = {
+    # Sorgenti dedicate — niente riuso hero/zona del blog affitti studenti settembre 2026
     "hero": (
-        "img/blog/blog-affitti-studenti-settembre-padova-proprietario-2026-hero.webp",
+        "img/blog/blog-coliving-padova-limena-hero.webp",
         HERO,
     ),
     "body": [
         (
-            "img/blog/blog-affitti-studenti-settembre-padova-proprietario-2026-zona.webp",
+            "img/blog/blog-caro-affitti-padova-under-35-hero.webp",
             f"img/blog/{SLUG}-campus-zona.webp",
         ),
         (
-            "img/blog/blog-student-rentals-padova-guide-2026.webp",
+            "img/blog/blog-coliving-padova-limena-cowork.webp",
             f"img/blog/{SLUG}-housing.webp",
         ),
         (
