@@ -1,0 +1,69 @@
+/* ═══════════════════════════════════════════════════════════════
+   rig-blog-article.css — scala tipografica e contrasti per ARTICOLI BLOG
+   Regola: TEST-SKILL/skill-design.md §14. Audit: scripts/audit-blog-design.js
+   Da linkare DOPO blog-rich.css / blog-lead-form.css (vince sullo <style> inline
+   senza !important). Token allineati a css/rig-type-scale.css (pagine principali).
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --grigio:#556578;                 /* 5,48:1 su bianco · 4,85:1 su sfondo (prima #6B7A8D = 4,0:1 ✗) */
+  --rig-a-h1:clamp(1.9rem,3.6vw,2.8rem);
+  --rig-a-h2:clamp(1.55rem,2.6vw,2rem);
+  --rig-a-body:1rem;
+}
+
+/* ── Hero articolo ── */
+.art-hero h1{
+  font-size:var(--rig-a-h1);
+  font-weight:700;                  /* 300 su foto = poco leggibile */
+  line-height:1.15;
+  letter-spacing:-.2px;
+  text-wrap:balance;
+}
+.art-hero h1 strong{font-weight:600;font-style:italic}
+.cat-badge{font-size:.7rem;letter-spacing:.12em}
+.art-meta,.art-meta span{font-size:.8rem}
+
+/* ── Corpo ── */
+.art-content p,
+.art-content li{font-size:var(--rig-a-body);line-height:1.85}
+.art-content h2{font-size:var(--rig-a-h2);font-weight:700;line-height:1.2;text-wrap:balance}
+.art-content h2 strong{font-weight:600;font-style:italic}
+.art-content h3{font-size:1.2rem;font-weight:700;line-height:1.3}
+
+/* ── Riquadro soluzione Righetto: sfondo pesca chiaro → titolo NON arancione (2,3:1 ✗) ── */
+.art-content .righetto-sol h2,
+.righetto-sol h2{color:var(--blu)}   /* stessa specificità di blog-rich.css (.art-content .righetto-sol h2) */
+
+/* Se il box finisce dentro un .stat-card (tag non chiuso) eredita color:#fff → bianco su pesca (1,1:1) */
+.righetto-sol,
+.righetto-sol li,
+.righetto-sol-quesito,
+.righetto-sol-foot{color:var(--nero)}
+
+/* Bottoni CTA arancioni: .art-content a (blu) vinceva sul testo scuro → 3,0–4,0:1; nero su arancio = 5,55:1 */
+.art-content .cta-banner-btn,
+.art-content a.cta-banner-btn,
+.art-content .cta-deep,
+.art-content a.cta-deep{color:var(--nero);text-decoration:none}
+
+/* Etichette sotto numeri su card scure (stat-card): .5 di alpha = illeggibile */
+.stat-label{font-size:.72rem;color:rgba(255,255,255,.78)}
+.stat-card .stat-label{color:rgba(255,255,255,.78)}
+
+/* ── Testi secondari (mai sotto .7rem) ── */
+.kpi-strip span{font-size:.72rem}
+.blog-fig figcaption{font-size:.78rem}
+.faq-a-inner{font-size:.92rem}
+.blog-rich-badge,.blog-rich-stat-src{font-size:.7rem}
+footer .fh{font-size:.72rem}
+
+/* ── Form lead: 16px = niente zoom automatico iOS (sorgente: blog-lead-form.css v=3) ── */
+.art-content input:not([type=checkbox]):not([type=radio]):not([type=hidden]),
+.art-content select,
+.art-content textarea{font-size:16px}
+
+/* ── Mobile: nessun overflow ── */
+@media(max-width:768px){
+  .art-content{overflow-wrap:anywhere}
+  .art-content table{display:block;overflow-x:auto}
+}

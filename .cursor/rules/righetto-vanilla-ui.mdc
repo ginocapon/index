@@ -32,3 +32,9 @@ Dettaglio: **`TEST-SKILL/skill-design.md`** + regole in **`skill-essentials.md`*
 - Verifica responsive 768px e 480px
 - Se nuova/modificata pagina HTML: **§1.2 `skill-essentials.md`** + `node scripts/validate-page.js --file …`
 - Se nuova pagina: checklist `skill-essentials.md` §2
+
+## Articoli blog (ott 2026) — vedi `TEST-SKILL/skill-design.md` §14
+- Ogni `blog-*.html` linka `css/rig-blog-article.css?v=N` **dopo** `blog-rich.css` e `blog-lead-form.css` — niente H1/H2/grigi ridefiniti inline
+- Soglie: H1 ≥ 40px (mobile 28) peso ≥ 600 · paragrafi ≥ 1rem · testi secondari ≥ 0.7rem · campi form 16px · contrasto ≥ 4.5:1 · `--grigio:#556578` (mai `#6B7A8D`)
+- Componenti **scuri** (`.cta-banner`, `.blog-rich-cta-strip`, `.stat-card`, `.highlight-box`) **mai** in regole che schiariscono/azzerano lo sfondo (`rig-brand-atmosphere.css`)
+- Audit: `scripts/audit-blog-design.js` · applica: `python scripts/apply-blog-article-css.py --all`

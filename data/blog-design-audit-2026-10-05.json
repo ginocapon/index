@@ -1,0 +1,84 @@
+{
+  "generated": "2026-10-05",
+  "rule": "TEST-SKILL/skill-design.md §14",
+  "tool": "scripts/audit-blog-design.js (rigAuditBatch, opts.inject=true simula css/rig-blog-article.css?v=2 + blog-lead-form.css?v=3)",
+  "scope": "147 articoli blog-*.html, viewport 1440 e 390",
+  "result_with_shared_css": { "total": 147, "clean": 97, "with_residual_issues": 50 },
+  "already_fixed_globally": [
+    "css/rig-blog-article.css (nuovo): H1/H2/paragrafi, --grigio #556578, righetto-sol h2, bottoni CTA, stat-label, badge",
+    "css/blog-lead-form.css v=3: label .72rem, campi 1rem, checkbox opzionale .72rem",
+    "css/site-ai-disclosure.css v=8 (via js/ga-consent.js): rig-photo-caption .72rem #556578, barra AI Act >= .7rem",
+    "css/rig-brand-atmosphere.css v=17: .cta-banner, .blog-rich-cta-strip, .stat-card, .highlight-box non vengono piu schiariti/azzerati (testo bianco invisibile)"
+  ],
+  "NOT_YET_APPLIED": "Il link a css/rig-blog-article.css e' presente solo in 3 articoli. Eseguire: python scripts/apply-blog-article-css.py --all (bump anche blog-lead-form.css a v=3)",
+  "residual_by_issue": {
+    "data aggiornamento non visibile": [
+      "5-domande-appuntamento-agenzia-padova-2026", "5-errori-visita-immobile-padova-2026", "articolo",
+      "imposte-registro-catasto-compravendita-padova-2026", "italy-rental-market-positive-start-january-2026",
+      "mercato-italiano-tensioni-medio-oriente-2026", "mutui-selettivi-banche-padova-2026",
+      "padova-housing-market-guide-2026", "patrimonio-casa-resilienza-mercati-globali-2026",
+      "previsioni-immobiliari-scenari-geopolitica-2026", "prospettive-mercato-residenziale-italia-2026",
+      "rental-contract-padova-guide-2026", "so-tutto-io-venditore-presuntuoso-padova-2026",
+      "student-rentals-padova-guide-2026"
+    ],
+    "salto titoli (es. H2 -> H4)": [
+      "agenzia-immobiliare-limena-come-scegliere-2026", "ape-prestazione-energetica-acquisto-padova-2026",
+      "mandato-esclusivo-padova-perche-conviene-2026", "mercato-immobiliare-piazzola-sul-brenta-2026",
+      "mutui-tasso-fisso-bancaitalia-padova-2026", "permuta-immobiliare-padova-2026",
+      "planimetria-catastale-compravendita-padova-2026", "righetto-bilancio-2025-soluzioni-affitto-2026",
+      "vigonza-rubano-comprare-casa-cintura-2026"
+    ],
+    "overflow orizzontale a 390px (elementi oltre il viewport)": [
+      "case-prefabbricate-futuro-elon-musk-2026", "checklist-affitto-studenti-padova-2026",
+      "limena-vicino-padova-comprare-2026", "mandato-esclusivo-padova-perche-conviene-2026",
+      "mutuo-documenti-tempi-prima-casa-padova-2026", "scegliere-agenzia-immobiliare-padova-2026",
+      "sopralluoghi-drone-padova-2026", "righetto-storia-territorio-acquisizioni-2026 (solo elementi oltre viewport)"
+    ],
+    "paragrafo < 0.95rem (font-size locale piu specifico del CSS condiviso)": [
+      "direttiva-case-green-limena-padova", "housing-lavoratori-veneto-edilcassa-2026",
+      "loft-aziende-cucina-condivisa-padova-vicenza-2026", "residenze-green-padova-tribloc-2026",
+      "stanza-universitaria-padova-canoni-2026", "studentati-veneto-2026-posti-letto",
+      "vicenza-residenze-universitarie-calmierate-2026"
+    ],
+    "testi < 0.7rem (classi: blog-rich-stat-src, timeline-dot, seg-chip, lead-kicker)": [
+      "5-domande-appuntamento-agenzia-padova-2026", "direttiva-case-green-limena-padova",
+      "mercato-immobiliare-piazzola-sul-brenta-2026", "righetto-bilancio-2025-soluzioni-affitto-2026",
+      "righetto-storia-territorio-acquisizioni-2026", "ultime-acquisizioni-commerciali-padova-giugno-2026",
+      "ultime-acquisizioni-residenziali-padova-giugno-2026"
+    ],
+    "H1 piccolo o template diverso (senza .art-hero)": [
+      "articolo (H1 assente, dateModified assente: pagina template/dinamica - verificare se va pubblicata)",
+      "scuole-istruzione-padova", "servizi-infrastrutture-padova", "trasporti-mobilita-padova",
+      "direttiva-case-green-limena-padova (anche: senza art-hero)", "prova-mercato-limena-zona-imma-2027 (senza art-hero)"
+    ],
+    "pagina non caricata nel test": ["prova-mercato-limena-zona-imma-2027 (verificare file e link rotti)"]
+  },
+  "residual_contrast_by_page": {
+    "1.15:1 H2 (testo chiaro su fondo chiaro)": [
+      "affittare-casa-padova-proprietario-2026", "mercato-immobiliare-piazzola-sul-brenta-2026",
+      "scegliere-agenzia-immobiliare-padova-2026", "valutazione-casa-padova-guida-2026",
+      "vigonza-rubano-comprare-casa-cintura-2026", "comprare-casa-padova-guida-2026 (H2 1.73)"
+    ],
+    "1.73:1 H3/A (testo chiaro su fondo chiaro)": [
+      "affitto-studenti-padova", "checklist-affitto-studenti-padova-2026", "comprare-affittare-padova",
+      "limena-vicino-padova-comprare-2026", "mutuo-documenti-tempi-prima-casa-padova-2026"
+    ],
+    "1.23:1 TH (intestazione tabella bianca su fondo chiaro)": [
+      "mercato-immobiliare-padova-2026", "mutui-tasso-fisso-bancaitalia-padova-2026"
+    ],
+    "1.00:1 acq-cta / stat-label (box scuro reso chiaro o inverso)": [
+      "righetto-storia-territorio-acquisizioni-2026", "ultime-acquisizioni-commerciali-padova-giugno-2026",
+      "ultime-acquisizioni-residenziali-padova-giugno-2026", "direttiva-case-green-limena-padova"
+    ],
+    "2.46-4.32:1 topbar / STRONG / DIV": ["scuole-istruzione-padova", "servizi-infrastrutture-padova", "trasporti-mobilita-padova"],
+    "4.29:1 SPAN": ["agenzia-immobiliare-limena-come-scegliere-2026", "mandato-esclusivo-padova-perche-conviene-2026", "scegliere-agenzia-immobiliare-padova-2026"],
+    "2.60:1 star (stelle recensione gialle su chiaro: decorative, aggiungere testo/aria-label o scurire)": ["relazione-tecnico-commerciale-affitto-studenti-padova-2026"],
+    "3.2-3.3:1 blog-rich-btn / skip-link (verificare: possibile misura a meta transizione)": ["comprare-casa-padova-guida-2026", "loft-aziende-cucina-condivisa-padova-vicenza-2026"]
+  },
+  "out_of_scope_found": [
+    "google-compliance-check.py: servizio-gestione e servizio-locazioni (schema RealEstateAgent / GeoCoordinates mancanti)",
+    "blog-affitti-studenti-settembre-padova-proprietario-2026: GeoCoordinates mancanti",
+    "Articolo blog-legge-bilancio-198-2026-...: decine di paragrafi-elenco ripetitivi (rischio 'riempimento', SKILL-2.0 §8.1c)",
+    "Pagine con 5 file 'senza art-hero' (direttiva-case-green, prova-mercato-limena, scuole-istruzione, servizi-infrastrutture, trasporti-mobilita): template diverso, valutare migrazione"
+  ]
+}
