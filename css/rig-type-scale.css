@@ -1,0 +1,237 @@
+/* ═══════════════════════════════════════════════════════════════
+   RIG TYPE SCALE — scala tipografica + ruoli colore pagine principali
+   Pagine: servizi · chi-siamo · contatti · blog · immobili
+   Carica DOPO lo <style> inline della pagina (stesso specificity → vince l'ordine).
+   Riferimento: skill-design.md §2 (H1/H2 peso 700, clamp) e home (index.html).
+   Ottobre 2026 — nessun nuovo font, nessun !important eccetto allineamento header.
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Grigio secondario: #6B7A8D dava 4,02:1 su carta e 3,56:1 su beige (< AA 4,5).
+     #556578 → 5,5:1 su --bianco, 4,9:1 su --sfondo. */
+  --grigio: #556578;
+
+  --rig-h1: clamp(2.2rem, 4vw, 3.4rem);
+  --rig-h2: clamp(2rem, 3.5vw, 3rem);
+  --rig-body: 1rem;        /* testo corrente / sottotitoli */
+  --rig-body-sm: .92rem;   /* descrizioni card */
+  --rig-small: .8rem;      /* meta, caption, link piccoli */
+  --rig-label: .72rem;     /* etichette uppercase — mai sotto */
+}
+
+/* ── Allineamento header ↔ contenuto (logo = bordo sinistro dei contenuti) ── */
+body:not(.homepage) header .hi,
+body:not(.homepage) header .header-inner {
+  max-width: 1428px !important;
+  padding: 0 1.5rem !important;
+}
+
+/* Contenitori con padding interno (.page / .main): senza questo il contenuto parte a 56px, il logo a 32px */
+.page,
+.main { max-width: 1428px; }
+
+/* ── H1 hero ── */
+.hero h1 {
+  text-wrap: balance; /* evita la parola singola sull'ultima riga (miglioramento progressivo) */
+  font-size: var(--rig-h1);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -.2px;
+}
+.hero h1 strong { font-weight: 600; font-style: italic; }
+/* .45 su blu scuro = ~3,8:1; .78 = contrasto AA (già usato da page-hero-bg su servizi/blog/chi-siamo) */
+.hero p { font-size: var(--rig-body); color: rgba(255, 255, 255, .78); }
+.hero .last-update {
+  font-size: var(--rig-small);
+  color: rgba(255, 255, 255, .78);
+  margin: .5rem 0 .8rem;
+}
+
+/* ── Etichette sopra i titoli (modello home: riga arancione + testo) ── */
+.hero-tag,
+.htag,
+.sec-tag {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  font-size: var(--rig-label);
+  font-weight: 600;
+  letter-spacing: .2em;
+}
+.hero-tag::before,
+.htag::before,
+.sec-tag::before {
+  content: '';
+  flex: none;
+  width: 28px;
+  height: 2px;
+  background: var(--oro);
+}
+/* Su fondo chiaro l'arancione come testo = 2,6:1 → blu (6,0:1). Sui fondi scuri resta arancione (5,5:1). */
+.sec-tag { color: var(--blu2); }
+.cta-s .sec-tag,
+.cta-inner .sec-tag { justify-content: center; }
+
+/* ── H2 sezione ── */
+.sec-title,
+.sec-t,
+.cta-inner h2,
+.cta-s h2 {
+  font-size: var(--rig-h2);
+  font-weight: 700;
+  line-height: 1.15;
+}
+.sec-title strong,
+.sec-t strong,
+.cta-inner h2 strong,
+.cta-s h2 strong { font-weight: 600; font-style: italic; }
+.cta-s h2 strong { color: var(--blu2); } /* era arancione su fondo chiaro */
+
+/* ── Footer condiviso (servizi · chi-siamo · contatti · blog) ── */
+.fh { font-size: var(--rig-label); color: rgba(255, 255, 255, .75); }
+.fcol a { font-size: .85rem; }
+.finfo { font-size: .82rem; }
+.fbot { font-size: .76rem; }
+
+/* ═══ SERVIZI ═══ */
+.sec-sub { font-size: var(--rig-body); }
+.scard-desc { font-size: .95rem; }
+.scard-list li { font-size: .9rem; }
+.scard-tag { font-size: var(--rig-label); }
+.scard-link { font-size: var(--rig-small); }
+.step-desc { font-size: .9rem; }
+.wi-title { font-size: .95rem; }
+.wi-desc { font-size: .88rem; }
+.why-author { font-size: var(--rig-small); color: rgba(255, 255, 255, .7); }
+.hs-lbl { font-size: .76rem; color: rgba(255, 255, 255, .7); }
+.cta-inner p { font-size: var(--rig-body); }
+
+/* ═══ CHI SIAMO ═══ */
+.tl-inner { max-width: 1380px; }       /* titolo sezione allineato alle altre sezioni */
+.tl-items { max-width: 860px; }        /* la timeline resta a misura di lettura */
+.tl-year { font-size: var(--rig-small); color: var(--blu2); } /* era arancione su fondo chiaro (2,3:1) */
+.tl-desc { font-size: .95rem; }
+.tcard { grid-template-columns: 140px minmax(0, 1fr); } /* 1fr = min-content: l'email spingeva la card oltre lo schermo */
+.tcard-body { min-width: 0; }
+.tcc { overflow-wrap: anywhere; }
+.tcard-role { font-size: .76rem; color: var(--blu2); }
+.tcard-bio { font-size: .9rem; }
+.tcc { font-size: .86rem; }
+.vcard-desc { font-size: .9rem; }
+.nbox-lbl { font-size: var(--rig-small); color: rgba(255, 255, 255, .7); }
+.cta-s p { font-size: var(--rig-body); }
+
+/* ═══ CONTATTI ═══ */
+.fbox-head h2 { font-size: 1.6rem; }
+.fbox-head p { font-size: .88rem; }
+.field label { font-size: var(--rig-label); }
+/* 16px: evita lo zoom automatico di Safari iOS sul focus */
+.field input,
+.field select,
+.field textarea { font-size: 1rem; }
+.fchk { font-size: .85rem; }
+.ci-lbl { font-size: var(--rig-label); }
+.ci-val { font-size: .95rem; }
+.or { font-size: .9rem; }
+.or .ap { color: #187040; } /* verde "aperto": #1E8449 dava 3,8:1 su beige → 5,0:1 */
+.map-overlay { font-size: var(--rig-small); }
+
+/* ═══ BLOG ═══ */
+.search-wrap label { font-size: var(--rig-label); color: rgba(255, 255, 255, .7); }
+.search-wrap input { font-size: 1rem; }
+.search-wrap input::placeholder { color: rgba(255, 255, 255, .6); }
+.cat-btn { font-size: .82rem; }
+.art-cat,
+.acard-cat { font-size: .68rem; }
+.acard-cat { color: var(--nero); } /* grigio su beige = 4,3:1 */
+.art-date { font-size: .76rem; }
+.art-excerpt { font-size: .9rem; }
+.art-meta { font-size: .76rem; }
+.art-read,
+.acard-meta span { font-size: .76rem; color: var(--blu2); } /* era arancione su fondo chiaro (2,6:1) */
+.acard-title { font-size: 1.2rem; }
+.acard-excerpt { font-size: .88rem; }
+.acard-meta { font-size: .76rem; }
+.ri-title { font-size: .86rem; }
+.ri-date { font-size: .74rem; }
+.tag { font-size: .78rem; }
+.nl-form input { font-size: 1rem; }
+.nl-btn { font-size: var(--rig-small); }
+.list-label {
+  font-size: var(--rig-label);
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--grigio);
+  margin-bottom: .7rem;
+}
+
+/* ═══ FAQ ═══ */
+body.page-hero-faq .htag { justify-content: center; } /* hero centrato: riga + testo al centro */
+.faq-search input { font-size: 1rem; }
+.fg-title { font-size: 1.5rem; }
+.faq-q-text { font-size: .95rem; }
+.faq-a-inner { font-size: .92rem; }
+.sb-link { font-size: .86rem; }
+.cta-box p { font-size: .84rem; color: rgba(255, 255, 255, .78); } /* era .45 su blu scuro: ~3,8:1 */
+.cta-box a { font-size: var(--rig-small); }
+.cta-box a.wa { color: var(--nero); } /* bianco su verde WhatsApp = 2,0:1 → nero 7,9:1 */
+
+/* ═══ IMMOBILI ═══ */
+.hero-title {
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1.15;
+}
+.hero-title strong { font-weight: 600; font-style: italic; }
+.hero-last-up {
+  font-size: var(--rig-small);
+  font-weight: 500;
+  color: rgba(255, 255, 255, .78);
+  text-shadow: none;
+}
+/* Etichette dei filtri sulle caselle arancioni: erano 9px a opacità .72 (3,7:1) → nero pieno 5,5:1 */
+.sb-field label,
+.af-field label { font-size: .7rem; color: var(--nero); }
+.fab-label,
+.ms-lbl,
+.cf-ref { font-size: var(--rig-label); }
+.cs { font-size: .82rem; }
+.cf-agent { font-size: .76rem; }
+.card-location { font-size: .82rem; }
+.card-price small { font-size: .78rem; }
+.alert-immobili-text span { font-size: .84rem; }
+.alert-channels { font-size: .82rem; }
+.modal-loc { font-size: .88rem; }
+.modal-desc { font-size: .9rem; }
+
+@media (max-width: 900px) {
+  /* le colonne 1fr hanno min-width:auto → le 3 statistiche forzavano 439px dentro 375px (testo tagliato) */
+  .hero-inner { grid-template-columns: minmax(0, 1fr); }
+  .hero-inner > * { min-width: 0; }
+  .hero-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+  .hero h1 { line-height: 1.15; }
+  .sec-t { margin-bottom: 2rem; }
+  .hero-stats { gap: .5rem; }
+  .hs { padding: 1rem .4rem; }
+  .hs-val { font-size: 2rem; }
+  .hs-lbl { font-size: var(--rig-label); letter-spacing: .04em; }
+}
+
+/* Filtri e campi immobili: 16px su mobile (sotto, Safari iOS zooma sul focus) */
+@media (max-width: 768px) {
+  .sb-field select,
+  .sb-field input,
+  .af-field select,
+  .af-field input,
+  .alert-immobili-form input,
+  .results-controls select { font-size: 16px; }
+}
+@media (max-width: 520px) {
+  .tcard { grid-template-columns: 96px minmax(0, 1fr); }
+  .tcard-body { padding: 1rem; }
+}
