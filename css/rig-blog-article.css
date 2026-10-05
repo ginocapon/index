@@ -11,8 +11,9 @@
   --rig-a-body:1rem;
 }
 
-/* ── Hero articolo ── */
-.art-hero h1{
+/* ── Hero articolo (template standard + legacy .hero-article) ── */
+.art-hero h1,
+.hero-article h1{
   font-size:var(--rig-a-h1);
   font-weight:700;                  /* 300 su foto = poco leggibile */
   line-height:1.15;
@@ -62,8 +63,25 @@ footer .fh{font-size:.72rem}
 .art-content select,
 .art-content textarea{font-size:16px}
 
+/* Box scuri: ripristino se uno stile locale o un tag non chiuso ha tolto lo sfondo */
+.cta-banner{background:linear-gradient(135deg,var(--nero,#152435),var(--blu,#2C4A6E))}
+.cta-banner h3,.cta-banner p{color:rgba(247,245,241,.92)}
+.highlight-box{background:linear-gradient(135deg,var(--nero,#152435),var(--blu,#2C4A6E));color:rgba(247,245,241,.92)}
+.highlight-box h3{color:var(--oro2,#FF8F5E)}
+.highlight-box p,.highlight-box li,.highlight-box strong{color:rgba(247,245,241,.88)}
+.stat-card{background:var(--nero,#152435);color:#fff}
+.stat-card .stat-num{color:var(--oro2,#FF8F5E)}
+.art-content thead th,.art-content th{background:var(--blu,#2C4A6E);color:var(--bianco,#F7F5F1)}
+.acq-card .acq-cta{background:var(--blu,#2C4A6E);color:#fff}
+.seg-chip,.lead-kicker,.timeline-dot{font-size:.7rem}
+.blog-rich-toc h3{font-family:'Montserrat',sans-serif;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--blu)}
+.related h3{font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:700;color:var(--blu)}
+.art-content .star{color:#c45a00}
+
 /* ── Mobile: nessun overflow ── */
 @media(max-width:768px){
   .art-content{overflow-wrap:anywhere}
-  .art-content table{display:block;overflow-x:auto}
+  .art-content table{display:block;max-width:100%;overflow-x:auto}
+  .art-content pre,.art-content svg,.stats-grid,.kpi-strip{max-width:100%}
+  .art-content img{max-width:100%;height:auto}
 }

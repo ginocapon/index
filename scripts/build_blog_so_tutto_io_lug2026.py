@@ -72,7 +72,8 @@ footer{background:linear-gradient(180deg,var(--nero),#0d1a2a);color:rgba(255,255
 @media(max-width:700px){.art-hero-img{height:260px}.art-hero h1{font-size:1.55rem}}
 </style>
 <link rel="stylesheet" href="css/blog-rich.css?v=3">
-<link rel="stylesheet" href="css/blog-lead-form.css?v=2">"""
+<link rel="stylesheet" href="css/blog-lead-form.css?v=3">
+<link rel="stylesheet" href="css/rig-blog-article.css?v=3">"""
 
 FOOTER = """
 </main>

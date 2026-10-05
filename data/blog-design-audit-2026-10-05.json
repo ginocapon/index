@@ -3,14 +3,25 @@
   "rule": "TEST-SKILL/skill-design.md §14",
   "tool": "scripts/audit-blog-design.js (rigAuditBatch, opts.inject=true simula css/rig-blog-article.css?v=2 + blog-lead-form.css?v=3)",
   "scope": "147 articoli blog-*.html, viewport 1440 e 390",
-  "result_with_shared_css": { "total": 147, "clean": 97, "with_residual_issues": 50 },
+  "result_after_apply_v4": {
+    "total": 147,
+    "clean_desktop_1440_sample": "123/147 (audit browser con cache-bust; ott 2026)",
+    "exceptions_documented": [
+      "blog-articolo.html — shell JS Supabase (H1/date in runtime)",
+      "blog-prova-mercato-limena-zona-imma-2027.html — redirect 301 verso blog-zona-imma-limena-domanda-offerta-2027",
+      "blog-scuole-istruzione-padova.html, blog-servizi-infrastrutture-padova.html, blog-trasporti-mobilita-padova.html — guide interattive (.cf-container), audit ridotto",
+      "blog-direttiva-case-green-limena-padova.html — template legacy .hero-article, audit legacy (overflow + data)"
+    ],
+    "remaining_manual_spot_check": "8 pagine con overflow mobile o contrasti marginali: vedi audit browser scripts/audit-blog-design.js (rigAuditBatch, no inject)"
+  },
+  "result_with_shared_css_simulated_oct5_am": { "total": 147, "clean": 97, "with_residual_issues": 50 },
   "already_fixed_globally": [
     "css/rig-blog-article.css (nuovo): H1/H2/paragrafi, --grigio #556578, righetto-sol h2, bottoni CTA, stat-label, badge",
     "css/blog-lead-form.css v=3: label .72rem, campi 1rem, checkbox opzionale .72rem",
     "css/site-ai-disclosure.css v=8 (via js/ga-consent.js): rig-photo-caption .72rem #556578, barra AI Act >= .7rem",
     "css/rig-brand-atmosphere.css v=17: .cta-banner, .blog-rich-cta-strip, .stat-card, .highlight-box non vengono piu schiariti/azzerati (testo bianco invisibile)"
   ],
-  "NOT_YET_APPLIED": "Il link a css/rig-blog-article.css e' presente solo in 3 articoli. Eseguire: python scripts/apply-blog-article-css.py --all (bump anche blog-lead-form.css a v=3)",
+  "NOT_YET_APPLIED": "Completato 5 ott 2026: python scripts/apply-blog-article-css.py --all (rig-blog-article.css v=4, blog-lead-form v=3, ga-consent v=13 su 146 articoli)",
   "residual_by_issue": {
     "data aggiornamento non visibile": [
       "5-domande-appuntamento-agenzia-padova-2026", "5-errori-visita-immobile-padova-2026", "articolo",
