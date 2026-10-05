@@ -338,7 +338,8 @@ def main():
 <script type="application/ld+json">{{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{{"@type":"ListItem","position":1,"name":"Home","item":"https://righettoimmobiliare.it/"}},{{"@type":"ListItem","position":2,"name":"Blog","item":"https://righettoimmobiliare.it/blog"}},{{"@type":"ListItem","position":3,"name":"Loft aziendali Padova-Vicenza"}}]}}</script>
 <link rel="stylesheet" href="css/fonts.css?v=3"><link rel="stylesheet" href="css/nav-mobile.css?v=5">
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="css/blog-rich.css?v=2"><link rel="stylesheet" href="css/blog-lead-form.css?v=2">
+<link rel="stylesheet" href="css/blog-rich.css?v=2"><link rel="stylesheet" href="css/blog-lead-form.css?v=3">
+<link rel="stylesheet" href="css/rig-blog-article.css?v=3">
 <script type="application/ld+json">{{"@context":"https://schema.org","@type":"RealEstateAgent","name":"Gruppo Immobiliare Righetto di Capon Gino","url":"https://righettoimmobiliare.it","telephone":"+390498843484","address":{{"@type":"PostalAddress","streetAddress":"Via Roma n.96","addressLocality":"Limena","postalCode":"35010","addressRegion":"PD","addressCountry":"IT"}},"geo":{{"@type":"GeoCoordinates","latitude":45.476956,"longitude":11.845762}},"sameAs":["https://www.facebook.com/righettoimmobiliare","https://www.instagram.com/righettoimmobiliare","https://www.linkedin.com/company/righetto-immobiliare"],"hasMap":"https://maps.google.com/?q=45.476956,11.845762","areaServed":[{{"@type":"City","name":"Padova"}},{{"@type":"City","name":"Vicenza"}},{{"@type":"City","name":"Limena"}}],"foundingDate":"2000","priceRange":"$$"}}</script>
 <style>
 *,*::before,*::after{{box-sizing:border-box;margin:0;padding:0}}

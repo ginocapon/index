@@ -272,7 +272,8 @@ def main() -> None:
 <link rel="stylesheet" href="css/welcome-popup.css?v=3" media="print" onload="this.media='all'">
 {STYLE}
 <link rel="stylesheet" href="css/blog-rich.css?v=4">
-<link rel="stylesheet" href="css/blog-lead-form.css?v=2">
+<link rel="stylesheet" href="css/blog-lead-form.css?v=3">
+<link rel="stylesheet" href="css/rig-blog-article.css?v=3">
 .chart-wrap{{background:var(--sfondo);border:1px solid var(--gc);border-radius:12px;padding:1.2rem;margin:1.4rem 0}}
 .chart-wrap figcaption{{font-size:.72rem;color:var(--grigio);margin-top:.6rem;text-align:center}}
 </head>

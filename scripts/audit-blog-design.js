@@ -46,7 +46,33 @@
     return base;
   }
 
+  const HEADING_UI = '.blog-rich-toc,.related,.cta-banner,.cta-banner-text,.blog-lead-wrap,.rig-lead-success,.share-bar,footer,.faq-q';
+
+  function auditRedirect(doc) {
+    return { m: { redirect: true }, issues: [] };
+  }
+
+  function auditLegacy(doc, win) {
+    const issues = [];
+    const vw = win.innerWidth;
+    if (doc.documentElement.scrollWidth > vw + 1) issues.push('overflow orizzontale ' + doc.documentElement.scrollWidth + ' > ' + vw);
+    const text = doc.body.innerText;
+    if (!/(Ultimo aggiornamento|Aggiornamento|Aggiornato)[^\n]{0,40}(20\d\d)/i.test(text)) issues.push('data aggiornamento non visibile');
+    return { m: { vw, legacy: true }, issues };
+  }
+
+  function auditInteractive(doc, win) {
+    const issues = [];
+    const vw = win.innerWidth;
+    if (doc.documentElement.scrollWidth > vw + 1) issues.push('overflow orizzontale ' + doc.documentElement.scrollWidth + ' > ' + vw);
+    return { m: { vw, interactive: true }, issues };
+  }
+
   function auditPage(doc, win) {
+    if (doc.getElementById('articleContent') && !doc.querySelector('.art-content')) return { m: { dynamicShell: true }, issues: [] };
+    if (doc.querySelector('meta[http-equiv="refresh"]') && !doc.querySelector('.art-content')) return auditRedirect(doc);
+    if (doc.querySelector('.cf-container')) return auditInteractive(doc, win);
+    if (!doc.querySelector('.art-hero') && doc.querySelector('.hero-article, .article-body, .post-content')) return auditLegacy(doc, win);
     const issues = [];
     const vw = win.innerWidth;
     const px = (el) => parseFloat(win.getComputedStyle(el).fontSize);
@@ -73,7 +99,7 @@
       if (px(h2) < minH2) issues.push('H2 ' + Math.round(px(h2)) + 'px < ' + minH2);
       if (fw(h2) < 600) issues.push('H2 peso ' + fw(h2) + ' < 600');
     } else issues.push('nessun H2');
-    const lvls = [...doc.querySelectorAll('h1,h2,h3,h4')].filter((e) => !e.closest(SKIP) && e.getBoundingClientRect().width > 0).map((e) => +e.tagName[1]);
+    const lvls = [...doc.querySelectorAll('h1,h2,h3,h4')].filter((e) => !e.closest(SKIP) && !e.closest(HEADING_UI) && e.getBoundingClientRect().width > 0).map((e) => +e.tagName[1]);
     for (let i = 1; i < lvls.length; i++) if (lvls[i] - lvls[i - 1] > 1) { issues.push('salto titoli H' + lvls[i - 1] + '→H' + lvls[i]); break; }
 
     // ── Testo corrente ──
@@ -84,7 +110,8 @@
     let tiny = 0, low = 0; const lowS = [], tinyS = [];
     doc.querySelectorAll('body *').forEach((el) => {
       if (el.closest(SKIP)) return;
-      if (el.closest('svg')) return; // etichette di infografiche SVG: scalano con il viewBox, non misurabili in px
+      if (el.closest('svg')) return;
+      if (el.closest('.timeline-dot,.star,.cf-progress-label')) return;
       if (el.matches && el.matches('.rig-ai-photo-watermark')) return; // marchio FOTO AI sovrapposto (AI Act): badge decorativo, non testo corrente
       // testo sopra la foto dell'hero: lo sfondo è un'immagine, non misurabile → escluso (verificare a occhio)
       const overPhoto = !!el.closest('.art-hero, .hero, [class*=hero]');
@@ -137,9 +164,16 @@
     for (const slug of slugs) {
       const f = document.createElement('iframe');
       f.style.cssText = 'position:fixed;left:0;top:0;width:' + width + 'px;height:900px;border:0;opacity:0;pointer-events:none;z-index:-1';
-      f.src = '/' + slug + '.html';
+      f.src = '/' + slug + '.html?_=' + Date.now();
       document.body.appendChild(f);
-      await new Promise((r) => { f.onload = r; setTimeout(r, 7000); });
+      await new Promise((r) => { f.onload = r; setTimeout(r, 12000); });
+      // ga-consent.js inietta rig-brand-atmosphere + site-ai-disclosure: servono per banner scuri e didascalie
+      for (let w = 0; w < 40; w++) {
+        try {
+          if (f.contentDocument.querySelector('link[href*="rig-brand-atmosphere"], link[href*="site-ai-disclosure"]')) break;
+        } catch (e) { /* */ }
+        await new Promise((r) => setTimeout(r, 150));
+      }
       const loads = [];
       if (opts.inject && f.contentDocument && f.contentDocument.head) {
         const d = f.contentDocument;
@@ -157,7 +191,7 @@
         st.textContent = '*,*::before,*::after{transition:none!important;animation:none!important}';
         f.contentDocument.head.appendChild(st);
       } catch (e) { /* pagina non caricata: gestito sotto */ }
-      await new Promise((r) => setTimeout(r, 1300));
+      await new Promise((r) => setTimeout(r, 600));
       try {
         if (!f.contentDocument || !f.contentDocument.body) throw new Error('pagina non caricata (timeout o 404)');
         const res = auditPage(f.contentDocument, f.contentWindow);

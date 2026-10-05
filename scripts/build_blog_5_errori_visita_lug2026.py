@@ -61,7 +61,8 @@ footer{background:var(--nero);color:rgba(255,255,255,.65);padding:2rem 1.5rem;fo
 @media(max-width:700px){.art-hero-img{height:260px}.art-hero h1{font-size:1.5rem}}
 </style>
 <link rel="stylesheet" href="css/blog-rich.css?v=3">
-<link rel="stylesheet" href="css/blog-lead-form.css?v=2">"""
+<link rel="stylesheet" href="css/blog-lead-form.css?v=3">
+<link rel="stylesheet" href="css/rig-blog-article.css?v=3">"""
 
 FOOTER = """
 </main>

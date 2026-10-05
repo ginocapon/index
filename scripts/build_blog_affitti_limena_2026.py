@@ -133,7 +133,8 @@ STYLE_BLOCK = r"""<style>
     .skip-link{position:absolute;top:-100%;background:var(--oro);color:var(--nero);padding:.5rem 1rem;z-index:9999}.skip-link:focus{top:0}
   </style>
   <link rel="stylesheet" href="css/blog-rich.css?v=4">
-  <link rel="stylesheet" href="css/blog-lead-form.css?v=2">"""
+  <link rel="stylesheet" href="css/blog-lead-form.css?v=3">
+<link rel="stylesheet" href="css/rig-blog-article.css?v=3">"""
 
 
 def wc(html: str) -> int:
