@@ -211,8 +211,6 @@ body.rig-sugar-paper :is(
   .blog-rich-sources,
   .blog-lead-wrap,
   .acq-card,
-  .stat-card,
-  .highlight-box,
   .tipo-card,
   .photo-card,
   .form-box,
@@ -525,9 +523,9 @@ body.rig-sugar-paper #testimonial .rec-item {
   border-color: rgba(255, 255, 255, 0.28) !important;
 }
 
+/* NB: .cta-banner e .blog-rich-cta-strip NON vanno qui — sono fasce SCURE con testo chiaro:
+   azzerare lo sfondo le rendeva illeggibili (bianco su carta, 1,05:1). Ott 2026. */
 body.rig-sugar-paper :is(
-  .cta-banner,
-  .blog-rich-cta-strip,
   .rec-video-card,
   .vt-modal-panel,
   .urgency-strip,

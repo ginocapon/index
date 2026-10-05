@@ -292,3 +292,41 @@ AddOutputFilterByType DEFLATE text/html text/css application/javascript image/sv
 - [ ] JS con `defer` (non `async` se dipendenze tra script) — **eccezione:** pagine con form lead inline → `config.js` + Supabase senza defer (skill-forms-leads)
 - [ ] Nessun `loading="lazy"` above-the-fold
 - [ ] Security headers: `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`
+
+---
+
+## 14. ARTICOLI BLOG — SCALA TIPOGRAFICA E CONTRASTI (ottobre 2026)
+
+**Fonte unica:** `css/rig-blog-article.css` (linkato in **ogni** `blog-*.html`, DOPO `blog-rich.css` e `blog-lead-form.css`, con `?v=N`). Allinea gli articoli ai token delle pagine principali (`css/rig-type-scale.css`). **Non** ridefinire H1/H2/colori grigi nello `<style>` inline del singolo articolo.
+**Misura:** `scripts/audit-blog-design.js` (browser, nessuna dipendenza) · **Applica:** `python scripts/apply-blog-article-css.py --all`.
+
+### 14.1 Soglie misurabili (desktop 1440 e mobile 390)
+| Elemento | Regola |
+|---|---|
+| H1 articolo | ≥ 40px desktop · ≥ 28px mobile · peso **≥ 600** (mai 300 su foto) · `clamp(1.9rem,3.6vw,2.8rem)` |
+| H2 di sezione (serif) | ≥ 28px desktop · ≥ 24px mobile · peso ≥ 600 · `clamp(1.55rem,2.6vw,2rem)` |
+| Gerarchia titoli | un solo H1 · nessun salto (H2→H4 vietato) |
+| Paragrafi e liste | **≥ 1rem** (minimo assoluto 0.95rem) · line-height ≥ 1.8 |
+| Testi secondari (label, didascalie, badge, fonti) | **≥ 0.7rem (11.2px)** — mai 0.5–0.68rem. Eccezione: marchio sovrapposto «FOTO AI» (AI Act) |
+| Campi form (`input/select/textarea`) | **16px** (sotto, iOS Safari zooma) |
+| Contrasto testo | ≥ **4.5:1** (≥ 3:1 solo se ≥ 24px o ≥ 18.66px bold) |
+| `--grigio` | **`#556578`** (5,48:1 su bianco · 4,85:1 su sfondo). Vietato `#6B7A8D` (≈4,0:1 ✗) |
+| Arancio `#FF6B35` | **solo** come sfondo con testo `#152435` (5,55:1) o come filetto/icona. Mai come colore di testo su fondo chiaro (2,3:1 ✗) né testo bianco su arancio (2,9:1 ✗) |
+| Testo con alpha | `rgba(255,255,255,.5)` ecc. vietato sotto `.75` su fondi scuri |
+| Overflow | nessuno scroll orizzontale a 390px (griglie: `minmax(0,1fr)` + `min-width:0`) |
+| Link interni | senza `.html` (eccezione ammessa: `admin.html` iniettato da `nav-mobile.js`) |
+| Data | «Aggiornamento: …» visibile **e** `dateModified` nel JSON-LD, coerenti |
+
+### 14.2 Componenti SCURI con testo chiaro (fonte di bug ricorrenti)
+`.cta-banner`, `.blog-rich-cta-strip`, `.stat-card`, `.highlight-box` hanno sfondo `--nero/--blu` e testo bianco.
+- **Vietato** inserirli in regole che azzerano o schiariscono lo sfondo (`unset`, `color-mix(...bianco...)`) — vedi `css/rig-brand-atmosphere.css`: lì devono comparire **solo** componenti con fondo chiaro.
+- Ogni `<div>` deve essere **chiuso**: un `.stat-card` aperto fa ereditare `color:#fff` ai riquadri successivi (testo bianco su fondo pesca, 1,1:1). Il CSS condiviso ha una protezione (`.righetto-sol{color:var(--nero)}`) ma l'HTML va corretto.
+- Dopo ogni modifica a un CSS globale: controllare **un articolo con banner CTA e uno con `.stat-card`** a occhio (screenshot), non solo con il validatore.
+
+### 14.3 Checklist prima del commit di un articolo nuovo o modificato
+1. `<link rel="stylesheet" href="css/rig-blog-article.css?v=N">` presente, dopo `blog-lead-form.css`.
+2. Nessun `font-size` < `.7rem`, nessun `color:#6B7A8D`, nessun `h1{font-weight:300}` nello `<style>` inline.
+3. Audit: aprire la pagina via `python -m http.server 8765` e lanciare `rigAuditBatch(['blog-xxx'],1440)` e `…,390)` → **0 issues** (istruzioni in testa a `scripts/audit-blog-design.js`).
+4. Gli script `scripts/build_blog_*.py` devono emettere il link al punto 1 (template `HEAD`/`CSS`): in caso contrario l'articolo nasce non conforme.
+
+**Stato 5 ott 2026:** con il CSS condiviso 97/147 articoli sono a 0 issues; i residui (≈50) sono casi per-pagina elencati in `data/blog-design-audit-2026-10-05.json`; prompt di esecuzione per un'altra AI: `TEST-SKILL/prompt-fix-blog-design-2026-10.md`.

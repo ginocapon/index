@@ -71,3 +71,7 @@ Prima di chiudere: `check_doppioni_sito.py` → **`build_editorial_memory.py`** 
 ## Cron venerdì (automatico)
 - `venerdi-contenuti-freschezza.yml` — 07:00 CEST — email `info@righettoimmobiliare.it`
 - Leggi Issue label `contenuti-freschezza` per azioni settimana
+
+## Design articolo (ott 2026) — obbligatorio
+- Template/build script: head con `blog-rich.css` → `blog-lead-form.css` → **`css/rig-blog-article.css?v=N`** (altrimenti l'articolo nasce con H1 a peso 300, grigio 4,0:1, testi < 0.7rem)
+- Soglie e checklist: `TEST-SKILL/skill-design.md` §14 · audit: `scripts/audit-blog-design.js` (0 issues a 1440 e 390 prima del commit)
