@@ -1,6 +1,17 @@
 {
-  "generated": "2026-09-30",
+  "generated": "2026-10-05",
   "bySlug": {
+    "capannone-affitto-commerciale-villafranca-padovana-cap1628": {
+      "codice": "CAP1628",
+      "titolo": "CAPANNONE a Villafranca di 180mq con 30mq di Uffici.",
+      "seo_slug": "capannone-affitto-commerciale-villafranca-padovana-cap1628",
+      "title": "Capannone in affitto a VILLAFRANCA PADOVANA — Righetto Immobiliare Padova",
+      "description": "Capannone · 180 m² · 3 locali · € 1.100 · Rif. CAP1628 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/CAP1628/001-1791196267384-001-capannone-villafranca-righetto-immobiliare.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-capannone-affitto-commerciale-villafranca-padovana-cap1628",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=capannone-affitto-commerciale-villafranca-padovana-cap1628",
+      "share_file": "share-immobile-capannone-affitto-commerciale-villafranca-padovana-cap1628.html"
+    },
     "appartamento-affitto-residenziale-padova-lf0034": {
       "codice": "LF0034",
       "titolo": "Affitto Alticchiero arredato",
@@ -256,6 +267,17 @@
     }
   },
   "byLegacySlug": {
+    "capannone-a-villafranca-di-180mq-con-30mq-di-uffici": {
+      "codice": "CAP1628",
+      "titolo": "CAPANNONE a Villafranca di 180mq con 30mq di Uffici.",
+      "seo_slug": "capannone-affitto-commerciale-villafranca-padovana-cap1628",
+      "title": "Capannone in affitto a VILLAFRANCA PADOVANA — Righetto Immobiliare Padova",
+      "description": "Capannone · 180 m² · 3 locali · € 1.100 · Rif. CAP1628 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/CAP1628/001-1791196267384-001-capannone-villafranca-righetto-immobiliare.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-capannone-affitto-commerciale-villafranca-padovana-cap1628",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=capannone-affitto-commerciale-villafranca-padovana-cap1628",
+      "share_file": "share-immobile-capannone-affitto-commerciale-villafranca-padovana-cap1628.html"
+    },
     "affitto-alticchiero-arredato": {
       "codice": "LF0034",
       "titolo": "Affitto Alticchiero arredato",
@@ -489,6 +511,17 @@
     }
   },
   "byCodice": {
+    "CAP1628": {
+      "codice": "CAP1628",
+      "titolo": "CAPANNONE a Villafranca di 180mq con 30mq di Uffici.",
+      "seo_slug": "capannone-affitto-commerciale-villafranca-padovana-cap1628",
+      "title": "Capannone in affitto a VILLAFRANCA PADOVANA — Righetto Immobiliare Padova",
+      "description": "Capannone · 180 m² · 3 locali · € 1.100 · Rif. CAP1628 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/CAP1628/001-1791196267384-001-capannone-villafranca-righetto-immobiliare.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-capannone-affitto-commerciale-villafranca-padovana-cap1628",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=capannone-affitto-commerciale-villafranca-padovana-cap1628",
+      "share_file": "share-immobile-capannone-affitto-commerciale-villafranca-padovana-cap1628.html"
+    },
     "LF0034": {
       "codice": "LF0034",
       "titolo": "Affitto Alticchiero arredato",
