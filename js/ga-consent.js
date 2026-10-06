@@ -55,7 +55,7 @@
     css.href = 'css/site-ai-disclosure.css?v=8';
     document.head.appendChild(css);
     var s = document.createElement('script');
-    s.src = 'js/site-ai-disclosure.js?v=7';
+    s.src = 'js/site-ai-disclosure.js?v=8';
     s.defer = true;
     document.head.appendChild(s);
   })();

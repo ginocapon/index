@@ -317,6 +317,12 @@
       return;
     }
 
+    /* Foto team nei commenti fumetto: no didascalia (rompe la griglia a 2 colonne) */
+    if (img.closest('.rig-comic-note')) {
+      img.dataset.rigPhotoCaption = 'skip';
+      return;
+    }
+
     var figure = img.closest('figure');
     if (figure) {
       upsertFigureCaption(figure, img, false);
