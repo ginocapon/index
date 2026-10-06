@@ -329,11 +329,14 @@ AddOutputFilterByType DEFLATE text/html text/css application/javascript image/sv
 3. Audit: aprire la pagina via `python -m http.server 8765` e lanciare `rigAuditBatch(['blog-xxx'],1440)` e `…,390)` → **0 issues** (istruzioni in testa a `scripts/audit-blog-design.js`).
 4. Gli script `scripts/build_blog_*.py` devono emettere il link al punto 1 (template `HEAD`/`CSS`): in caso contrario l'articolo nasce non conforme.
 
-### 14.4 Grafici editoriali (`figure.chart-wrap`)
-- Stile condiviso in **`rig-blog-article.css`**: min-height SVG **220–320px**, didascalia ≥ **0.78rem**.
-- SVG inline: titolo **≥ 16px**, testo box **≥ 13px**, rettangoli **allungati** (non etichette microscopiche).
-- Flussi e confronti: frecce **`#FF6B35`** con **`marker-end`**, `stroke-width` **≥ 3.5**; confronti a 2 box → freccia «vs» tra i blocchi.
-- Batch esistenti: `python scripts/rebuild_blog_chart_svg.py` (rigenera layout, testo **15–16px grassetto centrato** nei box; non scalare SVG a caso). Alias: `upgrade_blog_chart_svg.py`.
-- KPI e statistiche: **`.kpi-strip`**, **`.stats-grid`**, **`.stat-card`**, **`.hero-stats-row`**, **`.aeo-box`** — tipografia e padding solo in **`rig-blog-article.css`** (no micro-font inline).
+### 14.4 Grafici editoriali (`figure.chart-wrap`) — BLOCCANTE
+- Stile condiviso in **`rig-blog-article.css`**: min-height SVG **240–360px**, didascalia **#152435** peso 600.
+- **Testo dentro il box:** ogni etichetta deve restare **nel rettangolo** (`clipPath` + wrap `tspan`); vietato spillover su frecce o box adiacenti.
+- **Contrasto:** su box scuri (`#2C4A6E`, `#3A5F8C`) testo **#FFFFFF**; su arancio/chiaro **#152435**; note sotto lo schema su sfondo pesca **#152435** (mai bianco su arancio, mai grigio chiaro `#6B7A8D` su pesca).
+- **Tipografia box:** **≥ 14px**, **font-weight 700**, `text-anchor="middle"`, max 2 righe con troncamento «…» se necessario.
+- **Frecce:** linea `#E85A20`, `stroke-linecap="round"`, `marker-end` triangolo; spazio tra box **≥ 28px** (non sovrapporre testo).
+- **Contenuto:** frasi lunghe (fonte OMI, «Fascia min-max…», disclaimer) vanno **sotto** i box, non dentro una fase del flusso.
+- Rigenerazione batch: `python scripts/rebuild_blog_chart_svg.py` (non scalare SVG legacy). Alias: `upgrade_blog_chart_svg.py`.
+- KPI: **`.kpi-strip`**, **`.stats-grid`**, **`.stat-card`** — solo **`rig-blog-article.css`**.
 
 **Stato 5 ott 2026:** con il CSS condiviso 97/147 articoli sono a 0 issues; i residui (≈50) sono casi per-pagina elencati in `data/blog-design-audit-2026-10-05.json`; prompt di esecuzione per un'altra AI: `TEST-SKILL/prompt-fix-blog-design-2026-10.md`.

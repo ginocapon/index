@@ -100,11 +100,16 @@ footer .fh{font-size:.72rem}
   font-family:'Montserrat',sans-serif;
 }
 .art-content .chart-wrap figcaption{
-  font-size:clamp(.78rem,2.2vw,.88rem);
-  color:var(--grigio);
+  font-size:clamp(.82rem,2.2vw,.9rem);
+  color:var(--nero,#152435);
+  font-weight:600;
   margin-top:.85rem;
   text-align:center;
   line-height:1.45;
+}
+.art-content .chart-wrap svg .rig-chart-note,
+.art-content .chart-wrap svg text[fill="#152435"]{
+  paint-order:stroke fill;
 }
 .art-content .chart-wrap svg text{
   font-family:'Montserrat',sans-serif;

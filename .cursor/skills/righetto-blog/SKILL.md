@@ -55,6 +55,7 @@ description: >-
 - [ ] `audit_blog_visuals.py --file blog-{slug}.html` → OK
 - [ ] `audit_editorial_visual_variety.py --file blog-{slug}.html` → OK (§16-QUATER)
 - [ ] ≥3 foto IA pertinenti al paragrafo + 1 hero + ≥2 SVG + ≥2 tabelle
+- [ ] **SVG `chart-wrap`:** testo dentro box (clip), contrasto §14.4 `skill-design.md`; post-batch `python scripts/rebuild_blog_chart_svg.py`
 - [ ] **Lunghezza:** target ~2500 parole (±20%) — **qualità prima del conteggio**; vietato `expand_body`, `_pad()`, liste `EXP*`, «Scenario bonus (N)» (`skill-content.md` **§2.0d**)
 - [ ] **Anti-filler:** nessun muro di `<p>` consecutivi; ENEA/fisco in **una** sezione + checklist `ul` o FAQ — non 50+ righe duplicate
 - [ ] Distinzione fatto / dichiarazione / analisi / previsione nel testo
