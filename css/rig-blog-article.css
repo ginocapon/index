@@ -190,6 +190,116 @@ footer .fh{font-size:.72rem}
   font-size:clamp(1.25rem,2.8vw,1.45rem);
 }
 
+/* ── Vignette fumetto (stile striscia — bordi spessi, nuvolette) ── */
+.art-content .comic-vignette{
+  background:#F7F5F1;
+  border:3px solid var(--nero,#152435);
+  border-radius:4px;
+  padding:clamp(.65rem,2vw,1rem);
+  margin:1.75rem 0 .85rem;
+  box-shadow:4px 4px 0 rgba(21,36,53,.12);
+}
+.art-content .comic-vignette svg{
+  display:block;
+  width:100%;
+  min-height:clamp(200px,44vw,280px);
+  height:auto;
+}
+.art-content .comic-vignette--photo{
+  padding:0;
+  overflow:hidden;
+  background:#152435;
+}
+.art-content .comic-vignette__frame{
+  position:relative;
+  aspect-ratio:19/9;
+  overflow:hidden;
+}
+.art-content .comic-vignette__frame img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.art-content .comic-bubble{
+  position:absolute;
+  max-width:min(42%,280px);
+  background:#fff;
+  border:3px solid var(--nero,#152435);
+  border-radius:18px;
+  padding:.55rem .75rem;
+  font-size:clamp(.72rem,2.1vw,.85rem);
+  font-weight:700;
+  line-height:1.35;
+  color:var(--nero,#152435);
+  box-shadow:3px 3px 0 rgba(21,36,53,.15);
+  z-index:2;
+}
+.art-content .comic-bubble::after{
+  content:'';
+  position:absolute;
+  width:14px;
+  height:14px;
+  background:#fff;
+  border-right:3px solid var(--nero,#152435);
+  border-bottom:3px solid var(--nero,#152435);
+  transform:rotate(45deg);
+}
+.art-content .comic-bubble--tl{top:8%;left:4%}
+.art-content .comic-bubble--tl::after{bottom:-9px;left:24px}
+.art-content .comic-bubble--tr{top:10%;right:4%}
+.art-content .comic-bubble--tr::after{bottom:-9px;right:28px}
+.art-content .comic-bubble--bl{bottom:12%;left:5%}
+.art-content .comic-bubble--bl::after{top:-9px;left:28px;transform:rotate(225deg)}
+.art-content .comic-bubble--br{bottom:14%;right:5%}
+.art-content .comic-bubble--br::after{top:-9px;right:24px;transform:rotate(225deg)}
+.art-content .comic-vignette--photo figcaption{
+  background:var(--sfondo,#ECE7DF);
+  margin:0;
+  padding:.85rem 1rem;
+  border-top:3px solid var(--nero,#152435);
+}
+.art-content .comic-vignette figcaption{
+  font-size:clamp(.78rem,2.1vw,.88rem);
+  font-weight:700;
+  color:var(--nero,#152435);
+  text-align:center;
+  margin-top:.65rem;
+  letter-spacing:.02em;
+}
+.art-content .rig-comic-note{
+  display:grid;
+  grid-template-columns:minmax(72px,96px) 1fr;
+  gap:clamp(.75rem,2.5vw,1.1rem);
+  align-items:start;
+  background:var(--sfondo,#ECE7DF);
+  border:1px solid var(--gc,#E1DBD1);
+  border-left:4px solid var(--blu,#2C4A6E);
+  border-radius:12px;
+  padding:clamp(.85rem,2.5vw,1.15rem);
+  margin:0 0 2rem;
+}
+.art-content .rig-comic-note img{
+  width:100%;
+  border-radius:10px;
+  object-fit:cover;
+  aspect-ratio:1;
+  border:2px solid var(--gc,#E1DBD1);
+}
+.art-content .rig-comic-note strong{
+  display:block;
+  font-size:clamp(.78rem,2vw,.85rem);
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:var(--blu,#2C4A6E);
+  margin-bottom:.35rem;
+}
+.art-content .rig-comic-note p{
+  font-size:clamp(.88rem,2.2vw,.95rem);
+  line-height:1.65;
+  margin:0;
+}
+
 /* ── Mobile: nessun overflow ── */
 @media(max-width:768px){
   .art-content{overflow-wrap:anywhere}

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-02",
+  "updated": "2026-10-06",
   "policy": "Marchio FOTO AI automatico (site-ai-disclosure.js) su pathPrefixes. Esclusi img/immobili/, img/team/, img/brand/, img/og-. Dopo nuove hero blog: node scripts/build-ai-image-manifest.mjs; audit: node scripts/audit-foto-ai.mjs",
   "pathPrefixes": [
     "img/blog/",
@@ -116,6 +116,11 @@
     "img/blog/blog-outlook-living-italia-2026-padova.webp",
     "img/blog/blog-padova-housing-market-guide-2026.webp",
     "img/blog/blog-patrimonio-casa-resilienza-mercati-globali-2026.png",
+    "img/blog/blog-percorso-acquisto-casa-padova-fumetto-2026-hero.webp",
+    "img/blog/blog-percorso-acquisto-casa-padova-fumetto-fase1-portali.webp",
+    "img/blog/blog-percorso-acquisto-casa-padova-fumetto-fase2-agenzia.webp",
+    "img/blog/blog-percorso-acquisto-casa-padova-fumetto-fase3-proposta.webp",
+    "img/blog/blog-percorso-acquisto-casa-padova-fumetto-fase4-rogito.webp",
     "img/blog/blog-permuta-immobiliare-padova-2026.webp",
     "img/blog/blog-piano-casa-decreto-66-2026-padova.webp",
     "img/blog/blog-piazzola-brenta-mercato-2026.webp",
@@ -200,5 +205,5 @@
     "img/blog/trend-ricerca-casa-padova-2026.webp",
     "img/blog/ufficio-righetto-immobiliare.webp"
   ],
-  "fileCount": 182
+  "fileCount": 187
 }

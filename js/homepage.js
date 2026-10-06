@@ -949,10 +949,18 @@ function generateSlug(titolo) {
     'tassi mutui ai livelli più bassi della fase: come orientarsi nel padovano con fonti banca d\'italia': { img: 'img/blog/blog-tassi-mutui-minimi-padova-2026.webp', url: 'blog-tassi-mutui-minimi-approfittarne-padova-2026' },
     'bonus mobili e grandi elettrodomestici 2026: massimizzare la detrazione con ristrutturazioni edilizie': { img: 'img/blog/blog-bonus-mobili-ristrutturazioni-2026.webp', url: 'blog-bonus-mobili-2026-massimizzare-ristrutturazioni' },
     'geopolitica, energia e mutui: effetti possibili su case nel nord-est e lettura prudenziale 2026': { img: 'img/blog/blog-geopolitica-mercato-immobiliare-italia-2026.webp', url: 'blog-geopolitica-ucraina-prezzi-mutui-italia-veneto-2026' },
-    'cosa distingue un\'agenzia immobiliare di alto livello: risposte rapide, processi chiari e tool digitali': { img: 'img/blog/blog-agenzia-top-servizi-padova-2026.webp', url: 'blog-agenzia-immobiliare-top-servizi-padova-2026' }
+    'cosa distingue un\'agenzia immobiliare di alto livello: risposte rapide, processi chiari e tool digitali': { img: 'img/blog/blog-agenzia-top-servizi-padova-2026.webp', url: 'blog-agenzia-immobiliare-top-servizi-padova-2026' },
+    'percorso acquisto casa: storia a fumetti in 4 fasi': { img: 'img/blog/blog-percorso-acquisto-casa-padova-fumetto-2026-hero.webp', url: 'blog-percorso-acquisto-casa-padova-fumetto-2026' }
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    {
+      "titolo": "Percorso acquisto casa: storia a fumetti in 4 fasi",
+      "categoria": "Acquisto casa",
+      "data": "2026-10-06",
+      "immagine_copertina": "img/blog/blog-percorso-acquisto-casa-padova-fumetto-2026-hero.webp",
+      "url_statico": "blog-percorso-acquisto-casa-padova-fumetto-2026"
+    },
     {
       "titolo": "Bonus mobili 2026 e stop barriere architettoniche — Padova",
       "categoria": "Fisco e ristrutturazioni",
