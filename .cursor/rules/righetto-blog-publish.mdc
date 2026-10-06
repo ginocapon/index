@@ -76,3 +76,4 @@ Prima di chiudere: `check_doppioni_sito.py` → **`build_editorial_memory.py`** 
 ## Design articolo (ott 2026) — obbligatorio
 - Template/build script: head con `blog-rich.css` → `blog-lead-form.css` → **`css/rig-blog-article.css?v=N`** (altrimenti l'articolo nasce con H1 a peso 300, grigio 4,0:1, testi < 0.7rem)
 - Soglie e checklist: `TEST-SKILL/skill-design.md` §14 · audit: `scripts/audit-blog-design.js` (0 issues a 1440 e 390 prima del commit)
+- **`figure.chart-wrap` / SVG:** testo **sempre dentro** i box (clip + wrap); contrasto box scuro→bianco, arancio/chiaro→#152435; note lunghe **sotto** lo schema; dopo batch o fix → `python scripts/rebuild_blog_chart_svg.py` · dettaglio §14.4 `skill-design.md`
