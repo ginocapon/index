@@ -85,6 +85,17 @@ Quando l’utente o la coda citano **articoli, blog o portali di terzi** (fiscal
 4. Inserire, se utile, una **nota editoriale** che chiarisce: analisi autonoma, verifica su GU/ADE.
 5. Allineamento: `SKILL-2.0.md` §3.4 (scraping/admin), `skill-editoriale-visivo.md` (no copia testi concorrenti), rule `righetto-blog-publish.mdc`.
 
+### 2.0d Anti-filler batch — niente «muro di paragrafi» (BLOCCANTE)
+
+**Causa tipica (ott 2026):** script `build_blog_bonus_fisco_batch_oct2026.py` appendeva liste `EXP*` / `_pad()` come decine di `<p>` consecutivi (es. dopo «ENEA, comunicazioni e decadenze») solo per raggiungere `wordCount` — **vietato**.
+
+1. **Vietato** in HTML pubblicato: sequenze di **≥8** `<p>` consecutivi senza `h2`/`h3`/`ul`/`ol`/`table`/`figure` interposti; prefissi tipo **«Scenario bonus 2027 (N)»**; funzioni `_pad()`, `expand_body()` o liste `EXP*` incollate a fine corpo.
+2. **2500 parole** = sezioni editoriali (H2/H3, tabelle, FAQ, checklist in elenco), **non** ripetizione di micro-frasi già coperte sopra.
+3. **`wordCount` schema** = parole del corpo **utile** (onesto se sotto 2500 finché non si amplia con contenuto reale).
+4. **Script batch:** gate minimo corpo ~900 parole **senza filler**; rigenerare con `python scripts/strip_blog_fisco_filler_oct2026.py` se residui.
+5. **Pre-commit / chiusura:** `python scripts/audit_blog_publishability.py --file blog-….html` deve passare (include pattern filler §2.0d).
+6. Riferimento fix: commit ott 2026 su trio fisco (`blog-bonus-casa-2027…`, `blog-legge-bilancio-198…`, `blog-bonus-mobili-barriere…`).
+
 1. **Non iniziare a scrivere** finche' non hai verificato che titolo, slug e angolo editoriale **non esistono gia'** sul sito.
 2. Leggi **`TEST-SKILL/skimm.md`** (catalogo keyword/intent) e verifica `kw_primaria` univoca in §3.
 3. Esegui `python scripts/check_doppioni_sito.py` e `python scripts/build_skimm.py` (aggiorna catalogo se batch nuovo).

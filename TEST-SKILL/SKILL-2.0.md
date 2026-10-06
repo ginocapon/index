@@ -961,6 +961,8 @@ Aggiornamento sostanziale di articolo **esistente** (nuova edizione anno, dati O
   (fonte, leva, azione) e non solo in transizione iniziale; preferire **prosa unica** (H2, liste, tabelle, callout).
 - Ogni nuovo **script di generazione batch** (`scripts/*.py`) deve includere un **controllo automatico** che fallisce
   (o avvisa in CI) se più di **2** paragrafi `<p>` del corpo hanno **testo normalizzato identico**.
+- **Vietato** appendere liste `EXP*` / `_pad()` o prefissi «Scenario bonus (N)» — dettaglio operativo
+  **`skill-content.md` §2.0d** e `scripts/audit_blog_publishability.py`.
 
 **2) `wordCount` nello schema BlogPosting / Article**
 

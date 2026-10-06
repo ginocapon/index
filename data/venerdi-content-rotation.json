@@ -1,0 +1,133 @@
+{
+  "updated": "2026-10-05",
+  "skill_ref": "TEST-SKILL/skill-acquisizione-cron-venerdi.md § Botte e cerchio",
+  "hub_data_ref": "data/gsc-top-target-pages-2026-10-05.json",
+  "gsc_performance_ref": "data/gsc-keywords-priority.json",
+  "seo_intelligence_ref": "venerdi-seo-intelligence-report.md",
+  "messaggio_madre": "Chi vende trova in Righetto un alleato",
+  "botte_cerchio": {
+    "concept": "Un colpo alla botte (acquisizione proprietari / conversione) · un colpo al cerchio (affitti, zone, mutuo, studenti, normativa) — stesso sito, pubblico ampio, priorità owner nel cron.",
+    "slot_1_acquisizione": "Sempre task acquisition-roadmap-cron.json (non alternare).",
+    "slot_2_blog": "Alternanza settimanale BOTTE vs CERCHIO (parità acquisizione vs interesse). Settimana dispari del calendario acquisizione (1,3,5…) = preferenza BOTTE se entrambi possibili; pari = CERCHIO. Override: voce gsc_sostenere con imp≥20 e 0 click → CERCHIO refresh quella settimana.",
+    "slot_3_social": "Sempre proprietari (pipeline social_proprietari); nel caption linkare 1 hub CERCHIO del momento (es. blog affitti) + CTA owner.",
+    "mesh_links_weekly": "Min 3 link interni verso URL underlinked da hub_data (proprietario-immobile, agenzia, vendere-casa-errori) partendo da /, /blog o /servizi."
+  },
+  "botte_actions": [
+    "Nuovo o expand blog Area 1–2 owner (vendita, valutazione, Limena, mandato, invenduta)",
+    "CTA Class A su blog owner da catalog pipeline",
+    "Link da blog affitti/rendimento → landing-valutazione / servizio-vendita / proprietario-immobile",
+    "Refresh meta/H1 su agenzia-immobiliare-padova o vendere-casa-padova-errori"
+  ],
+  "cerchio_actions": [
+    "SOSTENERE blog cluster affitti (studenti, rendimento, contratto, canoni)",
+    "1 internal link da hub zona → blog affitti o immobili filtrati",
+    "Refresh timestamp su winner GSC non-owner",
+    "Gap OMI/affitti se SKIMM libero (max 1 AGGIUNGERE/settimana)"
+  ],
+  "disposition_by_acq_week": [
+    {
+      "acq_week": 1,
+      "rotation": "botte",
+      "slot_2": "done — landing-valutazione funnel",
+      "mesh_from_hubs": ["/", "/servizi"],
+      "mesh_to": ["/landing-valutazione", "/servizio-vendita"]
+    },
+    {
+      "acq_week": 2,
+      "rotation": "cerchio",
+      "slot_2": "—",
+      "slot_1_focus": "Hub percorsi F,H,J → link zone-limena + blog affitti",
+      "mesh_to": ["/proprietario-immobile", "/zona-limena", "/blog-affitto-studenti-padova"]
+    },
+    {
+      "acq_week": 3,
+      "rotation": "botte",
+      "slot_2": "refresh_cta_only — batch1 priorità hub+GSC",
+      "cta_batch_order": [
+        "blog-rendimento-affitto-padova",
+        "blog-affitto-studenti-padova",
+        "blog-vendere-casa-limena-proprietario-2026",
+        "blog-affittare-casa-padova-proprietario-2026",
+        "blog-mandato-esclusivo-padova-perche-conviene-2026"
+      ],
+      "mesh_to": ["/agenzia-immobiliare-padova", "/proprietario-immobile"]
+    },
+    {
+      "acq_week": 4,
+      "rotation": "cerchio",
+      "slot_2": "—",
+      "slot_1_focus": "KPI lead; opz. 2 link blog→zona-universitaria→immobili affitto"
+    },
+    {
+      "acq_week": 5,
+      "rotation": "botte",
+      "slot_2": "publish — percorso F casa invenduta",
+      "mesh_from": ["/blog", "/servizio-vendita"],
+      "mesh_to": ["/proprietario-immobile", "/landing-consulenza-immobiliare-gratuita"]
+    },
+    {
+      "acq_week": 6,
+      "rotation": "cerchio",
+      "slot_2": "publish_or_expand J ristrutturazione — poi link da blog-rendimento-affitto-padova",
+      "sostenere_if_time": "blog-affitti-padova-canoni-2026"
+    },
+    {
+      "acq_week": 7,
+      "rotation": "botte",
+      "slot_2": "queue_owner_area_2 — mercato Limena/Vigonza",
+      "mesh_from": ["/zona-limena", "/zona-vigonza-padova"],
+      "mesh_to": ["/servizio-vendita", "/landing-valutazione"]
+    },
+    {
+      "acq_week": 8,
+      "rotation": "cerchio",
+      "slot_2": "—",
+      "slot_1_focus": "servizio-vendita copy alleato; link faq + blog-contratto-affitto-padova da /servizi"
+    },
+    {
+      "acq_week": 9,
+      "rotation": "botte",
+      "slot_2": "refresh_cta batch2 + sostenere agenzia-immobiliare-padova meta",
+      "cta_batch_order": [
+        "blog-percorso-vendita-immobile-padova-2026",
+        "blog-costi-vendere-casa-padova-2026",
+        "blog-successione-immobiliare-padova",
+        "blog-agenzia-immobiliare-limena-come-scegliere-2026",
+        "blog-so-tutto-io-venditore-presuntuoso-padova-2026"
+      ]
+    },
+    {
+      "acq_week": 10,
+      "rotation": "cerchio",
+      "slot_2": "publish timing vendita — incrocio con blog-affitto-transitorio / studenti se no doppione",
+      "sostenere": "blog-affitto-studenti-padova"
+    },
+    {
+      "acq_week": 11,
+      "rotation": "botte",
+      "slot_2": "faq_expand top GSC owner — prefer blog-rendimento o vendere-casa-limena",
+      "mesh_to": ["/vendere-casa-padova-errori"]
+    },
+    {
+      "acq_week": 12,
+      "rotation": "cerchio",
+      "slot_2": "from_queue — solo se gap Area 3–4; altrimenti refresh blog-proposta-acquisto o mutuo cluster",
+      "review": "editorial-acquisition-balance.json + gsc-top-target-pages (re-export trimestrale)"
+    }
+  ],
+  "article_templates_when_new": {
+    "botte": {
+      "audience": "proprietario_vendita|proprietario_affitto",
+      "cta": ["landing-valutazione", "servizio-vendita", "proprietario-immobile"],
+      "internal_links_min": 3,
+      "link_from_hubs": ["/blog", "/servizi", "/zona-limena"]
+    },
+    "cerchio": {
+      "audience": "acquirente|inquilino|studente",
+      "cta": ["immobili", "servizio-locazioni", "landing-mutuo"],
+      "bridge_to_owner": "Box «Proprietario?» → landing-valutazione in fondo articolo",
+      "internal_links_min": 2,
+      "link_from_hubs": ["/zona-universitaria-padova", "/faq", "/blog-affitto-studenti-padova"]
+    }
+  }
+}

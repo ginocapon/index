@@ -107,6 +107,36 @@ Dettaglio machine-readable: **`data/venerdi-friday-pipeline.json`**.
 
 ---
 
+## Botte e cerchio (integrato 05/10/2026)
+
+**Concetto:** acquisizione proprietari resta **priorità assoluta** (slot #1 + social #3), ma il sito vive anche di **affitti, zone, studenti, mutuo, normativa** — un venerdì “botte” (owner), il successivo “cerchio” (interesse ampio), senza abbandonare l’alleato venditori.
+
+| File | Ruolo |
+|------|--------|
+| **`data/venerdi-content-rotation.json`** | Calendario BOTTE/CERCHIO per settimana acquisizione 1–12, mesh link, template articolo |
+| **`data/gsc-top-target-pages-2026-10-05.json`** | Hub per **link interni in entrata** (export GSC 05/10/2026 — *non* pageview GA4) |
+
+**Fase 0 aggiuntiva (2 min):** leggi `disposition_by_acq_week[N]` in `venerdi-content-rotation.json` + top 5 hub da `gsc-top-target-pages`.
+
+**Slot #2 — regola:**
+
+- Settimana acquisizione **dispari** (1,3,5…): preferenza **BOTTE** (publish owner, CTA batch, expand Area 1–2).
+- Settimana **pari** (2,4,6…): preferenza **CERCHIO** (SOSTENERE cluster affitti, zone universitaria/Limena, refresh meta winner non-owner).
+- **Override:** URL in `gsc_sostenere` con imp≥20 e 0 click (report venerdì §4) → quella settimana il refresh **CERCHIO** ha precedenza sul publish botte, salvo `scheduled` owner scaduto in coda.
+
+**Mesh settimanale (sempre, anche settimana senza blog):** ≥3 link interni verso URL **underlinked** owner (`/proprietario-immobile`, `/agenzia-immobiliare-padova`, `/vendere-casa-padova-errori`) da hub `/`, `/blog`, `/servizi`.
+
+**Articolo nuovo — come scegliere angolo:**
+
+| Rotazione | Pubblico | CTA | Ponte |
+|-----------|----------|-----|--------|
+| BOTTE | Proprietario vendita/affitto | landing-valutazione, servizio-vendita | — |
+| CERCHIO | Acquirente / inquilino / studente | immobili, servizio-locazioni | Box fondo «Proprietario?» → valutazione |
+
+Aggiornare export hub: nuovo file `data/gsc-top-target-pages-YYYY-MM-DD.json` ogni trimestre o post-redesign navigazione.
+
+---
+
 ## Output combinato venerdì (formato obbligatorio)
 
 ```markdown
@@ -119,10 +149,12 @@ Dettaglio machine-readable: **`data/venerdi-friday-pipeline.json`**.
 - **Percorsi A–L:** …
 - **Commit:** …
 
-### Slot #2 — Blog owner
-- **Azione:** [publish | refresh CTA | skip | da coda eq-XXX]
+### Slot #2 — Blog (botte | cerchio)
+- **Rotazione:** BOTTE | CERCHIO (da `venerdi-content-rotation.json` sett. N)
+- **Azione:** [publish | refresh CTA | SOSTENERE | skip | da coda eq-XXX]
 - **Specifiche:** owner_path · angolo · territorio · gate audit OK?
 - **Slug:** …
+- **Mesh link:** … → proprietario-immobile / agenzia / …
 
 ### Slot #3 — Social proprietari
 - **TARGET / PROBLEMA / CTA:** …
