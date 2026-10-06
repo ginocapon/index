@@ -12,7 +12,14 @@
       "blog-scuole-istruzione-padova.html, blog-servizi-infrastrutture-padova.html, blog-trasporti-mobilita-padova.html — guide interattive (.cf-container), audit ridotto",
       "blog-direttiva-case-green-limena-padova.html — template legacy .hero-article, audit legacy (overflow + data)"
     ],
-    "remaining_manual_spot_check": "8 pagine con overflow mobile o contrasti marginali: vedi audit browser scripts/audit-blog-design.js (rigAuditBatch, no inject)"
+    "remaining_manual_spot_check": "Ridotto 6 ott 2026: rig-blog v=5 overflow mobile, inline cleanup, audit eccezioni redirect/shell/legacy/interattive. Rilanciare rigAuditBatch post-deploy per elenco aggiornato."
+  },
+  "completed_2026_10_06": [
+    "Compliance 100% (RealEstateAgent gestione/locazioni, GeoCoordinates affitti-studenti-settembre)",
+    "Sitemap: rimossi duplicati zona-imma e mutuo-under-36",
+    "Date visibili pagine principali ripristinate a Marzo 2026 + dateModified schema precedenti",
+    "147 articoli rig-blog-article.css v=5, cleanup inline --grigio/font",
+    "Pipeline venerdi aggiornata; post-deploy-visual-check-2026-10-06.md"
   },
   "result_with_shared_css_simulated_oct5_am": { "total": 147, "clean": 97, "with_residual_issues": 50 },
   "already_fixed_globally": [

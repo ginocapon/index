@@ -1,5 +1,9 @@
 {
-  "updated": "2026-09-22",
+  "updated": "2026-10-06",
+  "completed_2026_10_06": [
+    "Blog design §14: rig-blog-article.css v=5 su 147 articoli, audit script, compliance servizio-gestione/locazioni + GeoCoordinates affitti-studenti-settembre",
+    "Prossimo slot #2 owner: articolo da data/gsc-top-target-pages-2026-10-05.json (pagina con impressioni e CTR basso)"
+  ],
   "messaggio_madre": "Chi vende trova in Righetto un alleato",
   "skill_refs": [
     "TEST-SKILL/skill-acquisizione-cron-venerdi.md",
@@ -13,8 +17,11 @@
     "acquisition_roadmap": "data/acquisition-roadmap-cron.json",
     "territory": "data/advisor-territorio-limena-10km.json",
     "editorial_queue": "data/editorial-queue.json",
-    "acquisition_balance": "data/editorial-acquisition-balance.json"
+    "acquisition_balance": "data/editorial-acquisition-balance.json",
+    "content_rotation_botte_cerchio": "data/venerdi-content-rotation.json",
+    "gsc_top_target_pages": "data/gsc-top-target-pages-2026-10-05.json"
   },
+  "botte_cerchio_summary": "Slot #1 sempre acquisizione. Slot #2 blog alterna BOTTE (owner) / CERCHIO (affitti·zone·mutuo) — dettaglio in venerdi-content-rotation.json. Hub link interni: export GSC top target pages.",
   "friday_repo_priority": [
     {
       "slot": 1,
@@ -288,7 +295,7 @@
   "catalog": {
     "blog_esistenti_solo_cta_batch1": [
       "blog-rendimento-affitto-padova",
-      "blog-valutazione-casa-padova-guida-2026",
+      "blog-affitto-studenti-padova",
       "blog-vendere-casa-limena-proprietario-2026",
       "blog-affittare-casa-padova-proprietario-2026",
       "blog-mandato-esclusivo-padova-perche-conviene-2026"
