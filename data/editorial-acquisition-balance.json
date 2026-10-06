@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-04",
+  "updated": "2026-10-05",
   "skill_ref": "TEST-SKILL/skill-acquisizione-proprietari.md",
   "playbook_ref": "TEST-SKILL/skill-acquisizione-playbook-commerciale.md",
   "owner_paths_ref": "skill-acquisizione-proprietari.md § Percorsi A-L",
@@ -22,5 +22,21 @@
     "vendere casa limena owner",
     "gestione locazione delegata padova"
   ],
-  "gsc_owner_refresh": []
+  "gsc_owner_refresh": [
+    "blog-rendimento-affitto-padova",
+    "agenzia-immobiliare-padova",
+    "vendere-casa-padova-errori"
+  ],
+  "gsc_cerchio_sostenere": [
+    "blog-affitto-studenti-padova",
+    "blog-contratto-affitto-padova",
+    "blog-affitti-padova-canoni-2026"
+  ],
+  "hub_underlinked_owner": [
+    "proprietario-immobile",
+    "agenzia-immobiliare-padova",
+    "vendere-casa-padova-errori"
+  ],
+  "rotation_ref": "data/venerdi-content-rotation.json",
+  "hub_export_ref": "data/gsc-top-target-pages-2026-10-05.json"
 }

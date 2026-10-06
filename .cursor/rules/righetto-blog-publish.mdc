@@ -37,7 +37,8 @@ Dettaglio: **`TEST-SKILL/skill-editoriale-visivo.md`** (comando permanente prior
 - 10–15 H2/H3 · ~35% transition words
 - Ogni dato numerico con **fonte** verificata
 - Disclaimer mediazione **una volta** per pagina
-- Script batch: `MAX_TEMPLATE_PARAGRAPHS` + diversità paragrafi (vedi `build_*_blog*.py`)
+- **§2.0d anti-filler (BLOCCANTE):** vietato `_pad()`, liste `EXP*`, «Scenario bonus 2027 (N)», ≥8 `<p>` di fila senza struttura — vedi `skill-content.md` §2.0d e `scripts/audit_blog_publishability.py`
+- Script batch: **no** padding word-count; minimo ~900 parole **utili**; ampliare con H2/tabelle/FAQ, non micro-paragrafi (`build_blog_bonus_fisco_batch_oct2026.py` modello negativo)
 
 ## Copertina e corpo — foto **generate con IA** (obbligatorio)
 - WebP **1900×900** (19:9), target **<500 KiB** — **generate ex novo con IA**, tema Padova/Veneto/immobiliare

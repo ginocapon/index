@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-18",
+  "updated": "2026-10-05",
   "policy": "Max 1 blog AGGIUNGERE/settimana. PRIORITÀ STRATEGICA: acquisizione proprietari (skill-acquisizione-proprietari.md). Comando editoriale: skill-editoriale-visivo.md + equilibrio 4 aree owner/acquirente. Gate: audit_editorial_acquisition + audit_editorial_research + audit_editorial_continuity + audit_blog_visuals + audit_editorial_visual_variety + audit_blog_publishability. Memorie: editorial-acquisition-balance.json + editorial-memory.json + editorial-visual-memory.json.",
   "workflow_skill": "TEST-SKILL/skill-editorial-queue.md",
   "editorial_command": "TEST-SKILL/skill-editoriale-visivo.md",
@@ -7,6 +7,8 @@
     "when": "Ogni venerdì post-cron O quando scheduled < 3",
     "sources": [
       "GSC gsc-keywords-priority.json",
+      "GSC top target pages (link interni) gsc-top-target-pages-*.json",
+      "data/venerdi-content-rotation.json (botte/cerchio sett. N)",
       "Google Trends IT/Veneto/Padova",
       "Gazzetta Ufficiale / ADE / ISTAT / OMI / FIMAA",
       "SKIMM gap",

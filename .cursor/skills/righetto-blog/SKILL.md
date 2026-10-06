@@ -55,7 +55,8 @@ description: >-
 - [ ] `audit_blog_visuals.py --file blog-{slug}.html` → OK
 - [ ] `audit_editorial_visual_variety.py --file blog-{slug}.html` → OK (§16-QUATER)
 - [ ] ≥3 foto IA pertinenti al paragrafo + 1 hero + ≥2 SVG + ≥2 tabelle
-- [ ] **Lunghezza:** target ~2500 parole (±20%) — **qualità prima del conteggio**; vietato `expand_body` filler (`skill-prompt-chirurgo-homepage-editoriale.md`)
+- [ ] **Lunghezza:** target ~2500 parole (±20%) — **qualità prima del conteggio**; vietato `expand_body`, `_pad()`, liste `EXP*`, «Scenario bonus (N)» (`skill-content.md` **§2.0d**)
+- [ ] **Anti-filler:** nessun muro di `<p>` consecutivi; ENEA/fisco in **una** sezione + checklist `ul` o FAQ — non 50+ righe duplicate
 - [ ] Distinzione fatto / dichiarazione / analisi / previsione nel testo
 - [ ] Valore aggiunto Padova/Veneto — non copia concorrenti
 - [ ] **Anti-plagio (obbligatorio):** URL o PDF di terzi (blog fiscali, edilizia, news) sono solo **spunto tema** — **vietato** copiare di sana pianta titoli, paragrafi, tabelle o FAQ; rielaborare testo **originale** Righetto con fonti **primarie** (GU, ADE, MEF, ISTAT, OMI). Inserire nota editoriale se il tema deriva da cronaca di settore.

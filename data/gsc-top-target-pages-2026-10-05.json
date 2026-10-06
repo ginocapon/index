@@ -1,0 +1,40 @@
+{
+  "updated": "2026-10-05",
+  "source_file": "righettoimmobiliare.it-Top target pages-2026-10-05.xlsx",
+  "metric": "internal_links_inbound",
+  "metric_note": "Numero di link interni in entrata (export GSC / audit struttura). Non sono pageview GA4. Indica quali URL sono hub nel grafo del sito.",
+  "pages": [
+    { "path": "/", "internal_links": 180, "tier": "hub", "audience": "mixed" },
+    { "path": "/blog", "internal_links": 157, "tier": "hub", "audience": "mixed" },
+    { "path": "/immobili", "internal_links": 148, "tier": "hub", "audience": "acquirente" },
+    { "path": "/servizi", "internal_links": 124, "tier": "hub", "audience": "mixed" },
+    { "path": "/faq", "internal_links": 87, "tier": "hub", "audience": "mixed" },
+    { "path": "/zona-centro-storico-padova", "internal_links": 75, "tier": "zona", "audience": "acquirente" },
+    { "path": "/zona-universitaria-padova", "internal_links": 74, "tier": "zona", "audience": "acquirente" },
+    { "path": "/zona-prato-della-valle-padova", "internal_links": 69, "tier": "zona", "audience": "acquirente" },
+    { "path": "/zona-sacra-famiglia-padova", "internal_links": 68, "tier": "zona", "audience": "acquirente" },
+    { "path": "/zona-forcellini-padova", "internal_links": 66, "tier": "zona", "audience": "acquirente" },
+    { "path": "/zona-voltabarozzo-padova", "internal_links": 62, "tier": "zona", "audience": "acquirente" },
+    { "path": "/zona-limena", "internal_links": 61, "tier": "zona", "audience": "mixed" },
+    { "path": "/servizio-vendita", "internal_links": 60, "tier": "conversion", "audience": "owner" },
+    { "path": "/landing-valutazione", "internal_links": 56, "tier": "conversion", "audience": "owner" },
+    { "path": "/blog-affitto-studenti-padova", "internal_links": 24, "tier": "blog_cluster", "audience": "acquirente", "gsc_sostenere": true },
+    { "path": "/servizio-utenze", "internal_links": 24, "tier": "servizio", "audience": "mixed" },
+    { "path": "/blog-contratto-affitto-padova", "internal_links": 20, "tier": "blog_cluster", "audience": "acquirente" },
+    { "path": "/blog-affitti-padova-canoni-2026", "internal_links": 18, "tier": "blog_cluster", "audience": "acquirente" },
+    { "path": "/blog-rendimento-affitto-padova", "internal_links": 18, "tier": "blog_cluster", "audience": "owner_affitto", "gsc_sostenere": true },
+    { "path": "/landing-mutuo", "internal_links": 11, "tier": "conversion", "audience": "acquirente" },
+    { "path": "/proprietario-immobile", "internal_links": 9, "tier": "conversion", "audience": "owner", "underlinked": true },
+    { "path": "/agenzia-immobiliare-padova", "internal_links": 8, "tier": "pillar", "audience": "mixed", "gsc_sostenere": true, "underlinked": true },
+    { "path": "/vendere-casa-padova-errori", "internal_links": 8, "tier": "conversion", "audience": "owner", "underlinked": true }
+  ],
+  "insights": {
+    "structure": "Traffico/navigazione passa da homepage → blog → immobili → servizi/faq → zone. Cluster affitti (studenti, contratto, canoni, rendimento) è il secondo motore editoriale dopo le zone.",
+    "acquisition_gap": "Hub acquisizione sotto-linkati vs peso strategico: /proprietario-immobile (9), /agenzia-immobiliare-padova (8), /vendere-casa-padova-errori (8). Rafforzare link da /, /blog, /servizi, blog affitti owner.",
+    "gsc_sostenere_overlap": [
+      "/blog-affitto-studenti-padova",
+      "/blog-rendimento-affitto-padova",
+      "/agenzia-immobiliare-padova"
+    ]
+  }
+}

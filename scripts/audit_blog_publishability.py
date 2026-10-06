@@ -26,6 +26,8 @@ FORBIDDEN_PATTERNS = [
     (re.compile(r"<h[23][^>]*>\s*Note interne\s*</h[23]>", re.I), "H2/H3 Note interne"),
     (re.compile(r"\bTODO\b|\[DATO\]|\[ZONA\]|\[FONTE\]", re.I), "placeholder/TODO"),
     (re.compile(r"\bApprofondimento\s+\d+\b", re.I), "Approfondimento numerato"),
+    (re.compile(r"Scenario bonus 2027\s*\(\d+\)", re.I), "Scenario bonus numerato (filler batch)"),
+    (re.compile(r"\b_pad\s*\(", re.I), "riferimento _pad() in HTML"),
     (re.compile(r"id=[\"']note-operative[\"']", re.I), "id=note-operative (sezione template)"),
     (re.compile(r"\b(prompt|system:\s|<!--\s*AI)", re.I), "istruzione AI/prompt"),
 ]
@@ -69,6 +71,27 @@ def audit_html(path: Path) -> list[str]:
     for pat, label in FORBIDDEN_PATTERNS:
         if pat.search(visible):
             issues.append(label)
+
+    # ≥8 <p> consecutivi senza blocco strutturato (filler EXP/_pad — skill-content §2.0d)
+    streak = 0
+    for chunk in re.split(
+        r"(<h[23][^>]*>|<ul[^>]*>|<ol[^>]*>|<table[^>]*>|<figure[^>]*>|</(?:ul|ol|table|figure)>)",
+        visible,
+        flags=re.I,
+    ):
+        if re.match(r"<p[\s>]", chunk, re.I):
+            streak += len(re.findall(r"<p[\s>]", chunk, re.I))
+        elif chunk.strip() and not chunk.strip().startswith("<p"):
+            if streak >= 8:
+                issues.append(
+                    f"sequenza filler: {streak} paragrafi <p> consecutivi senza H2/lista/tabella"
+                )
+                break
+            streak = 0
+    if streak >= 8 and "sequenza filler" not in " ".join(issues):
+        issues.append(
+            f"sequenza filler: {streak} paragrafi <p> consecutivi senza H2/lista/tabella"
+        )
 
     # Paragrafi identici ripetuti ≥3 volte (filler template)
     paras = re.findall(r"<p[^>]*>([\s\S]*?)</p>", visible, re.I)

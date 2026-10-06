@@ -51,7 +51,7 @@
       "phase": "hot",
       "id": "acq-w03-cta-blog-batch1",
       "title": "CTA owner batch 1 — top GSC (5 articoli)",
-      "objective": "Box CTA Class A (landing-valutazione / servizio pertinente) su: blog-rendimento-affitto-padova, blog-valutazione-casa-padova-guida-2026, blog-vendere-casa-limena-proprietario-2026, blog-affittare-casa-padova-proprietario-2026, blog-mandato-esclusivo-padova-perche-conviene-2026",
+      "objective": "Box CTA Class A (landing-valutazione / servizio pertinente) su batch1 pipeline (hub GSC 05/10): blog-rendimento-affitto-padova, blog-affitto-studenti-padova, blog-vendere-casa-limena-proprietario-2026, blog-affittare-casa-padova-proprietario-2026, blog-mandato-esclusivo-padova-perche-conviene-2026. Mesh: +2 link verso /proprietario-immobile e /agenzia-immobiliare-padova da /blog o /servizi.",
       "owner_paths": ["A", "B", "D", "F"],
       "files": [],
       "validate": ["python scripts/audit_editorial_acquisition.py --report"],
