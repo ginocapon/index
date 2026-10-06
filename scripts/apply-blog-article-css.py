@@ -15,7 +15,7 @@ import os
 import re
 import sys
 
-VERSION = 4
+VERSION = 5
 LEAD_V = 3  # blog-lead-form.css?v=3 (ott 2026: label .72rem, campi 1rem)
 LEAD_RE = re.compile(r'(blog-lead-form\.css\?v=)(\d+)')
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

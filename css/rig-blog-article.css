@@ -84,4 +84,7 @@ footer .fh{font-size:.72rem}
   .art-content table{display:block;max-width:100%;overflow-x:auto}
   .art-content pre,.art-content svg,.stats-grid,.kpi-strip{max-width:100%}
   .art-content img{max-width:100%;height:auto}
+  .art-content iframe,.art-content embed,.art-content video{max-width:100%}
+  .hero-stats-row,.stats-grid,.kpi-strip{min-width:0}
+  .tbl-wrap,.blog-rich-table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
 }
