@@ -1,9 +1,20 @@
 {
   "generated": "2026-10-06",
   "bySlug": {
+    "appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353": {
+      "codice": "LF0353",
+      "titolo": "Appartamento Indipendente a Piazzola sul Brenta con Giardino Privato",
+      "seo_slug": "appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
+      "title": "Appartamento in affitto a Piazzola sul Brenta — Righetto Immobiliare Padova",
+      "description": "Appartamento · 80 m² · 4 locali · € 800 · Rif. LF0353 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF0353/001-1791275827608-interno-luminoso-con-pavimento-decorato-e-scal.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
+      "share_file": "share-immobile-appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353.html"
+    },
     "appartamento-affitto-residenziale-padova-lf0242": {
       "codice": "LF0242",
-      "titolo": "AFFITTASI APPARTAMENTO A LIMENA BICAMERE ARREDATO AL PIANO TERRA CON GIARDINO",
+      "titolo": "AFFITTASI APPARTAMENTO A LIMENA BICAMERE ARREDATO AL PIANO TERRA CON GIARDINO CONDOMINIALE",
       "seo_slug": "appartamento-affitto-residenziale-padova-lf0242",
       "title": "Appartamento in affitto a Padova — Righetto Immobiliare Padova",
       "description": "Appartamento · 80 m² · 3 locali · € 800 · Rif. LF0242 · Righetto Immobiliare Padova",
@@ -47,7 +58,7 @@
     },
     "villa-affitto-residenziale-cadoneghe-lf0306": {
       "codice": "LF0306",
-      "titolo": "CADONEGHE CASA SINGOLA AFFITTO",
+      "titolo": "Casa singola anni '80 con ampio giardino in affitto a Cadoneghe",
       "seo_slug": "villa-affitto-residenziale-cadoneghe-lf0306",
       "title": "Villa in affitto a CADONEGHE — Righetto Immobiliare Padova",
       "description": "Villa · 160 m² · 3 locali · € 900 · Rif. LF0306 · Righetto Immobiliare Padova",
@@ -56,34 +67,12 @@
       "app_url": "https://righettoimmobiliare.it/immobile?s=villa-affitto-residenziale-cadoneghe-lf0306",
       "share_file": "share-immobile-villa-affitto-residenziale-cadoneghe-lf0306.html"
     },
-    "appartamento-affitto-residenziale-padova-la0324": {
-      "codice": "LA0324",
-      "titolo": "AFFITTO CODIVERNO 2 CAMERE ARREDATO",
-      "seo_slug": "appartamento-affitto-residenziale-padova-la0324",
-      "title": "Appartamento in affitto a Padova — Righetto Immobiliare Padova",
-      "description": "Appartamento · 70 m² · 2 locali · € 750 · Rif. LA0324 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/immobili/LA0324/001-1790088225186-affitto-2-c-codiverno-6.webp",
-      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-padova-la0324",
-      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-padova-la0324",
-      "share_file": "share-immobile-appartamento-affitto-residenziale-padova-la0324.html"
-    },
-    "bifamiliare-affitto-residenziale-padova-lf0174": {
-      "codice": "LF0174",
-      "titolo": "MONTA' AFFITTO NON ARREDATO",
-      "seo_slug": "bifamiliare-affitto-residenziale-padova-lf0174",
-      "title": "Bifamiliare in affitto a Padova — Righetto Immobiliare Padova",
-      "description": "Bifamiliare · 80 m² · 2 locali · € 850 · Rif. LF0174 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/immobili/LF0174/001-1788509259543-affitto-monta-trifamiliare-6.webp",
-      "share_url": "https://righettoimmobiliare.it/share-immobile-bifamiliare-affitto-residenziale-padova-lf0174",
-      "app_url": "https://righettoimmobiliare.it/immobile?s=bifamiliare-affitto-residenziale-padova-lf0174",
-      "share_file": "share-immobile-bifamiliare-affitto-residenziale-padova-lf0174.html"
-    },
     "bifamiliare-vendita-villafranca-padovana-lo0287": {
       "codice": "LO0287",
       "titolo": "Bifamiliare al grezzo avanzato con ampio scoperto a Villafranca Padovana ( ZONA PONTEROTTO )",
       "seo_slug": "bifamiliare-vendita-villafranca-padovana-lo0287",
       "title": "Bifamiliare in vendita a VILLAFRANCA PADOVANA — Righetto Immobiliare Padova",
-      "description": "Bifamiliare · 195 m² · 4 locali · € 250.000 · Rif. LO0287 · Righetto Immobiliare Padova",
+      "description": "Bifamiliare · 195 m² · 6 locali · € 250.000 · Rif. LO0287 · Righetto Immobiliare Padova",
       "image": "https://righettoimmobiliare.it/img/immobili/LO0287/001-1787650992944-000-bifamiliare-al-grezzo-ponterotto-81.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-bifamiliare-vendita-villafranca-padovana-lo0287",
       "app_url": "https://righettoimmobiliare.it/immobile?s=bifamiliare-vendita-villafranca-padovana-lo0287",
@@ -210,17 +199,6 @@
       "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-affitto-commerciale-limena-uff2195a",
       "share_file": "share-immobile-ufficio-affitto-commerciale-limena-uff2195a.html"
     },
-    "monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05": {
-      "codice": "STUD1 05",
-      "titolo": "Camera in affitto a Chiesanuova",
-      "seo_slug": "monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
-      "title": "Monolocale in affitto a Chiesanuova - Brusegana — Righetto Immobiliare Padova",
-      "description": "Monolocale · 1 locali · € 630 · Rif. STUD1 05 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/immobili/STUD105/001-1772464533600-012-foto-camera-singola-rubano-studentato-4.webp",
-      "share_url": "https://righettoimmobiliare.it/share-immobile-monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
-      "app_url": "https://righettoimmobiliare.it/immobile?s=monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
-      "share_file": "share-immobile-monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05.html"
-    },
     "terreno-vendita-villafranca-padovana-t0021": {
       "codice": "T0021",
       "titolo": "Terreno in vendita a Villafranca Padovana",
@@ -278,9 +256,20 @@
     }
   },
   "byLegacySlug": {
-    "affittasi-appartamento-a-limena-bicamere-arredato-al-piano-terra-con-giardino": {
+    "appartamento-indipendente-a-piazzola-sul-brenta-con-giardino-privato": {
+      "codice": "LF0353",
+      "titolo": "Appartamento Indipendente a Piazzola sul Brenta con Giardino Privato",
+      "seo_slug": "appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
+      "title": "Appartamento in affitto a Piazzola sul Brenta — Righetto Immobiliare Padova",
+      "description": "Appartamento · 80 m² · 4 locali · € 800 · Rif. LF0353 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF0353/001-1791275827608-interno-luminoso-con-pavimento-decorato-e-scal.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
+      "share_file": "share-immobile-appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353.html"
+    },
+    "affittasi-appartamento-a-limena-bicamere-arredato-al-piano-terra-con-giardino-condominiale": {
       "codice": "LF0242",
-      "titolo": "AFFITTASI APPARTAMENTO A LIMENA BICAMERE ARREDATO AL PIANO TERRA CON GIARDINO",
+      "titolo": "AFFITTASI APPARTAMENTO A LIMENA BICAMERE ARREDATO AL PIANO TERRA CON GIARDINO CONDOMINIALE",
       "seo_slug": "appartamento-affitto-residenziale-padova-lf0242",
       "title": "Appartamento in affitto a Padova — Righetto Immobiliare Padova",
       "description": "Appartamento · 80 m² · 3 locali · € 800 · Rif. LF0242 · Righetto Immobiliare Padova",
@@ -322,9 +311,9 @@
       "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-affitto-commerciale-limena-uff2247",
       "share_file": "share-immobile-ufficio-affitto-commerciale-limena-uff2247.html"
     },
-    "cadoneghe-casa-singola-affitto": {
+    "casa-singola-anni-80-con-ampio-giardino-in-affitto-a-cadoneghe": {
       "codice": "LF0306",
-      "titolo": "CADONEGHE CASA SINGOLA AFFITTO",
+      "titolo": "Casa singola anni '80 con ampio giardino in affitto a Cadoneghe",
       "seo_slug": "villa-affitto-residenziale-cadoneghe-lf0306",
       "title": "Villa in affitto a CADONEGHE — Righetto Immobiliare Padova",
       "description": "Villa · 160 m² · 3 locali · € 900 · Rif. LF0306 · Righetto Immobiliare Padova",
@@ -333,34 +322,12 @@
       "app_url": "https://righettoimmobiliare.it/immobile?s=villa-affitto-residenziale-cadoneghe-lf0306",
       "share_file": "share-immobile-villa-affitto-residenziale-cadoneghe-lf0306.html"
     },
-    "affitto-codiverno-2-camere-arredato": {
-      "codice": "LA0324",
-      "titolo": "AFFITTO CODIVERNO 2 CAMERE ARREDATO",
-      "seo_slug": "appartamento-affitto-residenziale-padova-la0324",
-      "title": "Appartamento in affitto a Padova — Righetto Immobiliare Padova",
-      "description": "Appartamento · 70 m² · 2 locali · € 750 · Rif. LA0324 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/immobili/LA0324/001-1790088225186-affitto-2-c-codiverno-6.webp",
-      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-padova-la0324",
-      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-padova-la0324",
-      "share_file": "share-immobile-appartamento-affitto-residenziale-padova-la0324.html"
-    },
-    "monta-affitto-non-arredato": {
-      "codice": "LF0174",
-      "titolo": "MONTA' AFFITTO NON ARREDATO",
-      "seo_slug": "bifamiliare-affitto-residenziale-padova-lf0174",
-      "title": "Bifamiliare in affitto a Padova — Righetto Immobiliare Padova",
-      "description": "Bifamiliare · 80 m² · 2 locali · € 850 · Rif. LF0174 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/immobili/LF0174/001-1788509259543-affitto-monta-trifamiliare-6.webp",
-      "share_url": "https://righettoimmobiliare.it/share-immobile-bifamiliare-affitto-residenziale-padova-lf0174",
-      "app_url": "https://righettoimmobiliare.it/immobile?s=bifamiliare-affitto-residenziale-padova-lf0174",
-      "share_file": "share-immobile-bifamiliare-affitto-residenziale-padova-lf0174.html"
-    },
     "bifamiliare-al-grezzo-avanzato-con-ampio-scoperto-a-villafranca-padovana-zona-ponterotto": {
       "codice": "LO0287",
       "titolo": "Bifamiliare al grezzo avanzato con ampio scoperto a Villafranca Padovana ( ZONA PONTEROTTO )",
       "seo_slug": "bifamiliare-vendita-villafranca-padovana-lo0287",
       "title": "Bifamiliare in vendita a VILLAFRANCA PADOVANA — Righetto Immobiliare Padova",
-      "description": "Bifamiliare · 195 m² · 4 locali · € 250.000 · Rif. LO0287 · Righetto Immobiliare Padova",
+      "description": "Bifamiliare · 195 m² · 6 locali · € 250.000 · Rif. LO0287 · Righetto Immobiliare Padova",
       "image": "https://righettoimmobiliare.it/img/immobili/LO0287/001-1787650992944-000-bifamiliare-al-grezzo-ponterotto-81.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-bifamiliare-vendita-villafranca-padovana-lo0287",
       "app_url": "https://righettoimmobiliare.it/immobile?s=bifamiliare-vendita-villafranca-padovana-lo0287",
@@ -465,17 +432,6 @@
       "app_url": "https://righettoimmobiliare.it/immobile?s=negozio-affitto-commerciale-limena-neg2173a",
       "share_file": "share-immobile-negozio-affitto-commerciale-limena-neg2173a.html"
     },
-    "camera-in-affitto-a-chiesanuova": {
-      "codice": "STUD1 05",
-      "titolo": "Camera in affitto a Chiesanuova",
-      "seo_slug": "monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
-      "title": "Monolocale in affitto a Chiesanuova - Brusegana — Righetto Immobiliare Padova",
-      "description": "Monolocale · 1 locali · € 630 · Rif. STUD1 05 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/immobili/STUD105/001-1772464533600-012-foto-camera-singola-rubano-studentato-4.webp",
-      "share_url": "https://righettoimmobiliare.it/share-immobile-monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
-      "app_url": "https://righettoimmobiliare.it/immobile?s=monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
-      "share_file": "share-immobile-monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05.html"
-    },
     "terreno-in-vendita-a-villafranca-padovana": {
       "codice": "T0021",
       "titolo": "Terreno in vendita a Villafranca Padovana",
@@ -533,9 +489,20 @@
     }
   },
   "byCodice": {
+    "LF0353": {
+      "codice": "LF0353",
+      "titolo": "Appartamento Indipendente a Piazzola sul Brenta con Giardino Privato",
+      "seo_slug": "appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
+      "title": "Appartamento in affitto a Piazzola sul Brenta — Righetto Immobiliare Padova",
+      "description": "Appartamento · 80 m² · 4 locali · € 800 · Rif. LF0353 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF0353/001-1791275827608-interno-luminoso-con-pavimento-decorato-e-scal.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
+      "share_file": "share-immobile-appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353.html"
+    },
     "LF0242": {
       "codice": "LF0242",
-      "titolo": "AFFITTASI APPARTAMENTO A LIMENA BICAMERE ARREDATO AL PIANO TERRA CON GIARDINO",
+      "titolo": "AFFITTASI APPARTAMENTO A LIMENA BICAMERE ARREDATO AL PIANO TERRA CON GIARDINO CONDOMINIALE",
       "seo_slug": "appartamento-affitto-residenziale-padova-lf0242",
       "title": "Appartamento in affitto a Padova — Righetto Immobiliare Padova",
       "description": "Appartamento · 80 m² · 3 locali · € 800 · Rif. LF0242 · Righetto Immobiliare Padova",
@@ -579,7 +546,7 @@
     },
     "LF0306": {
       "codice": "LF0306",
-      "titolo": "CADONEGHE CASA SINGOLA AFFITTO",
+      "titolo": "Casa singola anni '80 con ampio giardino in affitto a Cadoneghe",
       "seo_slug": "villa-affitto-residenziale-cadoneghe-lf0306",
       "title": "Villa in affitto a CADONEGHE — Righetto Immobiliare Padova",
       "description": "Villa · 160 m² · 3 locali · € 900 · Rif. LF0306 · Righetto Immobiliare Padova",
@@ -588,34 +555,12 @@
       "app_url": "https://righettoimmobiliare.it/immobile?s=villa-affitto-residenziale-cadoneghe-lf0306",
       "share_file": "share-immobile-villa-affitto-residenziale-cadoneghe-lf0306.html"
     },
-    "LA0324": {
-      "codice": "LA0324",
-      "titolo": "AFFITTO CODIVERNO 2 CAMERE ARREDATO",
-      "seo_slug": "appartamento-affitto-residenziale-padova-la0324",
-      "title": "Appartamento in affitto a Padova — Righetto Immobiliare Padova",
-      "description": "Appartamento · 70 m² · 2 locali · € 750 · Rif. LA0324 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/immobili/LA0324/001-1790088225186-affitto-2-c-codiverno-6.webp",
-      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-padova-la0324",
-      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-padova-la0324",
-      "share_file": "share-immobile-appartamento-affitto-residenziale-padova-la0324.html"
-    },
-    "LF0174": {
-      "codice": "LF0174",
-      "titolo": "MONTA' AFFITTO NON ARREDATO",
-      "seo_slug": "bifamiliare-affitto-residenziale-padova-lf0174",
-      "title": "Bifamiliare in affitto a Padova — Righetto Immobiliare Padova",
-      "description": "Bifamiliare · 80 m² · 2 locali · € 850 · Rif. LF0174 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/immobili/LF0174/001-1788509259543-affitto-monta-trifamiliare-6.webp",
-      "share_url": "https://righettoimmobiliare.it/share-immobile-bifamiliare-affitto-residenziale-padova-lf0174",
-      "app_url": "https://righettoimmobiliare.it/immobile?s=bifamiliare-affitto-residenziale-padova-lf0174",
-      "share_file": "share-immobile-bifamiliare-affitto-residenziale-padova-lf0174.html"
-    },
     "LO0287": {
       "codice": "LO0287",
       "titolo": "Bifamiliare al grezzo avanzato con ampio scoperto a Villafranca Padovana ( ZONA PONTEROTTO )",
       "seo_slug": "bifamiliare-vendita-villafranca-padovana-lo0287",
       "title": "Bifamiliare in vendita a VILLAFRANCA PADOVANA — Righetto Immobiliare Padova",
-      "description": "Bifamiliare · 195 m² · 4 locali · € 250.000 · Rif. LO0287 · Righetto Immobiliare Padova",
+      "description": "Bifamiliare · 195 m² · 6 locali · € 250.000 · Rif. LO0287 · Righetto Immobiliare Padova",
       "image": "https://righettoimmobiliare.it/img/immobili/LO0287/001-1787650992944-000-bifamiliare-al-grezzo-ponterotto-81.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-bifamiliare-vendita-villafranca-padovana-lo0287",
       "app_url": "https://righettoimmobiliare.it/immobile?s=bifamiliare-vendita-villafranca-padovana-lo0287",
@@ -730,17 +675,6 @@
       "share_url": "https://righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2195a",
       "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-affitto-commerciale-limena-uff2195a",
       "share_file": "share-immobile-ufficio-affitto-commerciale-limena-uff2195a.html"
-    },
-    "STUD1 05": {
-      "codice": "STUD1 05",
-      "titolo": "Camera in affitto a Chiesanuova",
-      "seo_slug": "monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
-      "title": "Monolocale in affitto a Chiesanuova - Brusegana — Righetto Immobiliare Padova",
-      "description": "Monolocale · 1 locali · € 630 · Rif. STUD1 05 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/immobili/STUD105/001-1772464533600-012-foto-camera-singola-rubano-studentato-4.webp",
-      "share_url": "https://righettoimmobiliare.it/share-immobile-monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
-      "app_url": "https://righettoimmobiliare.it/immobile?s=monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05",
-      "share_file": "share-immobile-monolocale-affitto-residenziale-chiesanuova-brusegana-stud1-05.html"
     },
     "T0021": {
       "codice": "T0021",
