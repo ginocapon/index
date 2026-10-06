@@ -92,9 +92,12 @@ footer .fh{font-size:.72rem}
 .art-content .chart-wrap svg{
   display:block;
   width:100%;
-  min-height:clamp(220px,42vw,320px);
+  min-height:clamp(240px,48vw,360px);
   height:auto;
   max-width:100%;
+}
+.art-content .chart-wrap svg.rig-chart-rebuilt text{
+  font-family:'Montserrat',sans-serif;
 }
 .art-content .chart-wrap figcaption{
   font-size:clamp(.78rem,2.2vw,.88rem);

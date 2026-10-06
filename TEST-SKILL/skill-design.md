@@ -333,7 +333,7 @@ AddOutputFilterByType DEFLATE text/html text/css application/javascript image/sv
 - Stile condiviso in **`rig-blog-article.css`**: min-height SVG **220–320px**, didascalia ≥ **0.78rem**.
 - SVG inline: titolo **≥ 16px**, testo box **≥ 13px**, rettangoli **allungati** (non etichette microscopiche).
 - Flussi e confronti: frecce **`#FF6B35`** con **`marker-end`**, `stroke-width` **≥ 3.5**; confronti a 2 box → freccia «vs» tra i blocchi.
-- Batch esistenti: `python scripts/upgrade_blog_chart_svg.py` (ridistribuisce i `rect`, centra i `text`, frecce mancanti; nuovi grafici: stesse soglie in `scripts/build_blog_*.py`).
+- Batch esistenti: `python scripts/rebuild_blog_chart_svg.py` (rigenera layout, testo **15–16px grassetto centrato** nei box; non scalare SVG a caso). Alias: `upgrade_blog_chart_svg.py`.
 - KPI e statistiche: **`.kpi-strip`**, **`.stats-grid`**, **`.stat-card`**, **`.hero-stats-row`**, **`.aeo-box`** — tipografia e padding solo in **`rig-blog-article.css`** (no micro-font inline).
 
 **Stato 5 ott 2026:** con il CSS condiviso 97/147 articoli sono a 0 issues; i residui (≈50) sono casi per-pagina elencati in `data/blog-design-audit-2026-10-05.json`; prompt di esecuzione per un'altra AI: `TEST-SKILL/prompt-fix-blog-design-2026-10.md`.
