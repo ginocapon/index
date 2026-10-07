@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-06",
+  "updated": "2026-10-07",
   "policy": "Marchio FOTO AI automatico (site-ai-disclosure.js) su pathPrefixes. Esclusi img/immobili/, img/team/, img/brand/, img/og-. Dopo nuove hero blog: node scripts/build-ai-image-manifest.mjs; audit: node scripts/audit-foto-ai.mjs",
   "pathPrefixes": [
     "img/blog/",
@@ -136,6 +136,11 @@
     "img/blog/blog-proposta-acquisto-negoziazione-padova-visita.webp",
     "img/blog/blog-prospettive-mercato-residenziale-italia-2026.png",
     "img/blog/blog-quattro-imposte-rogitio-prima-casa-padova-2026.webp",
+    "img/blog/blog-registrazione-locazione-fumetto-proprietari-padova-2026-hero.webp",
+    "img/blog/blog-registrazione-locazione-fumetto-proprietari-padova-2026-scena1-coda-agenzia-entrate.webp",
+    "img/blog/blog-registrazione-locazione-fumetto-proprietari-padova-2026-scena2-sportello-rli.webp",
+    "img/blog/blog-registrazione-locazione-fumetto-proprietari-padova-2026-scena3-righetto-consulenza.webp",
+    "img/blog/blog-registrazione-locazione-fumetto-proprietari-padova-2026-scena4-dopo-dodici-mesi.webp",
     "img/blog/blog-registro-contratti-affitto-padova-2026-hero.webp",
     "img/blog/blog-registro-contratti-affitto-padova-ade.webp",
     "img/blog/blog-registro-contratti-affitto-padova-canoni.webp",
@@ -205,5 +210,5 @@
     "img/blog/trend-ricerca-casa-padova-2026.webp",
     "img/blog/ufficio-righetto-immobiliare.webp"
   ],
-  "fileCount": 187
+  "fileCount": 192
 }
