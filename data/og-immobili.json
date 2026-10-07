@@ -1,13 +1,24 @@
 {
-  "generated": "2026-10-06",
+  "generated": "2026-10-07",
   "bySlug": {
+    "appartamento-affitto-residenziale-villafranca-padovana-lf0270": {
+      "codice": "LF0270",
+      "titolo": "VILLAFRANCA PAD.NA AFFITTO 3 C ARREDATO",
+      "seo_slug": "appartamento-affitto-residenziale-villafranca-padovana-lf0270",
+      "title": "Appartamento in affitto a VILLAFRANCA PADOVANA — Righetto Immobiliare Padova",
+      "description": "Appartamento · 100 m² · 3 locali · € 800 · Rif. LF0270 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/team/titolari.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-villafranca-padovana-lf0270",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-villafranca-padovana-lf0270",
+      "share_file": "share-immobile-appartamento-affitto-residenziale-villafranca-padovana-lf0270.html"
+    },
     "appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353": {
       "codice": "LF0353",
       "titolo": "Appartamento Indipendente a Piazzola sul Brenta con Giardino Privato",
       "seo_slug": "appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
       "title": "Appartamento in affitto a Piazzola sul Brenta — Righetto Immobiliare Padova",
       "description": "Appartamento · 80 m² · 4 locali · € 800 · Rif. LF0353 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/immobili/LF0353/001-1791275827608-interno-luminoso-con-pavimento-decorato-e-scal.webp",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF0353/001-1791381077947-affitto-piazzola-2c-arredato-5.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
       "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
       "share_file": "share-immobile-appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353.html"
@@ -55,17 +66,6 @@
       "share_url": "https://righettoimmobiliare.it/share-immobile-ufficio-vendita-limena-uff2247-v",
       "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-vendita-limena-uff2247-v",
       "share_file": "share-immobile-ufficio-vendita-limena-uff2247-v.html"
-    },
-    "villa-affitto-residenziale-cadoneghe-lf0306": {
-      "codice": "LF0306",
-      "titolo": "Casa singola anni '80 con ampio giardino in affitto a Cadoneghe",
-      "seo_slug": "villa-affitto-residenziale-cadoneghe-lf0306",
-      "title": "Villa in affitto a CADONEGHE — Righetto Immobiliare Padova",
-      "description": "Villa · 160 m² · 3 locali · € 900 · Rif. LF0306 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/team/titolari.webp",
-      "share_url": "https://righettoimmobiliare.it/share-immobile-villa-affitto-residenziale-cadoneghe-lf0306",
-      "app_url": "https://righettoimmobiliare.it/immobile?s=villa-affitto-residenziale-cadoneghe-lf0306",
-      "share_file": "share-immobile-villa-affitto-residenziale-cadoneghe-lf0306.html"
     },
     "bifamiliare-vendita-villafranca-padovana-lo0287": {
       "codice": "LO0287",
@@ -256,13 +256,24 @@
     }
   },
   "byLegacySlug": {
+    "villafranca-pad-na-affitto-3-c-arredato": {
+      "codice": "LF0270",
+      "titolo": "VILLAFRANCA PAD.NA AFFITTO 3 C ARREDATO",
+      "seo_slug": "appartamento-affitto-residenziale-villafranca-padovana-lf0270",
+      "title": "Appartamento in affitto a VILLAFRANCA PADOVANA — Righetto Immobiliare Padova",
+      "description": "Appartamento · 100 m² · 3 locali · € 800 · Rif. LF0270 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/team/titolari.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-villafranca-padovana-lf0270",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-villafranca-padovana-lf0270",
+      "share_file": "share-immobile-appartamento-affitto-residenziale-villafranca-padovana-lf0270.html"
+    },
     "appartamento-indipendente-a-piazzola-sul-brenta-con-giardino-privato": {
       "codice": "LF0353",
       "titolo": "Appartamento Indipendente a Piazzola sul Brenta con Giardino Privato",
       "seo_slug": "appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
       "title": "Appartamento in affitto a Piazzola sul Brenta — Righetto Immobiliare Padova",
       "description": "Appartamento · 80 m² · 4 locali · € 800 · Rif. LF0353 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/immobili/LF0353/001-1791275827608-interno-luminoso-con-pavimento-decorato-e-scal.webp",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF0353/001-1791381077947-affitto-piazzola-2c-arredato-5.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
       "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
       "share_file": "share-immobile-appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353.html"
@@ -310,17 +321,6 @@
       "share_url": "https://righettoimmobiliare.it/share-immobile-ufficio-affitto-commerciale-limena-uff2247",
       "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-affitto-commerciale-limena-uff2247",
       "share_file": "share-immobile-ufficio-affitto-commerciale-limena-uff2247.html"
-    },
-    "casa-singola-anni-80-con-ampio-giardino-in-affitto-a-cadoneghe": {
-      "codice": "LF0306",
-      "titolo": "Casa singola anni '80 con ampio giardino in affitto a Cadoneghe",
-      "seo_slug": "villa-affitto-residenziale-cadoneghe-lf0306",
-      "title": "Villa in affitto a CADONEGHE — Righetto Immobiliare Padova",
-      "description": "Villa · 160 m² · 3 locali · € 900 · Rif. LF0306 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/team/titolari.webp",
-      "share_url": "https://righettoimmobiliare.it/share-immobile-villa-affitto-residenziale-cadoneghe-lf0306",
-      "app_url": "https://righettoimmobiliare.it/immobile?s=villa-affitto-residenziale-cadoneghe-lf0306",
-      "share_file": "share-immobile-villa-affitto-residenziale-cadoneghe-lf0306.html"
     },
     "bifamiliare-al-grezzo-avanzato-con-ampio-scoperto-a-villafranca-padovana-zona-ponterotto": {
       "codice": "LO0287",
@@ -489,13 +489,24 @@
     }
   },
   "byCodice": {
+    "LF0270": {
+      "codice": "LF0270",
+      "titolo": "VILLAFRANCA PAD.NA AFFITTO 3 C ARREDATO",
+      "seo_slug": "appartamento-affitto-residenziale-villafranca-padovana-lf0270",
+      "title": "Appartamento in affitto a VILLAFRANCA PADOVANA — Righetto Immobiliare Padova",
+      "description": "Appartamento · 100 m² · 3 locali · € 800 · Rif. LF0270 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/team/titolari.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-villafranca-padovana-lf0270",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-villafranca-padovana-lf0270",
+      "share_file": "share-immobile-appartamento-affitto-residenziale-villafranca-padovana-lf0270.html"
+    },
     "LF0353": {
       "codice": "LF0353",
       "titolo": "Appartamento Indipendente a Piazzola sul Brenta con Giardino Privato",
       "seo_slug": "appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
       "title": "Appartamento in affitto a Piazzola sul Brenta — Righetto Immobiliare Padova",
       "description": "Appartamento · 80 m² · 4 locali · € 800 · Rif. LF0353 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/immobili/LF0353/001-1791275827608-interno-luminoso-con-pavimento-decorato-e-scal.webp",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF0353/001-1791381077947-affitto-piazzola-2c-arredato-5.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
       "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
       "share_file": "share-immobile-appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353.html"
@@ -543,17 +554,6 @@
       "share_url": "https://righettoimmobiliare.it/share-immobile-ufficio-vendita-limena-uff2247-v",
       "app_url": "https://righettoimmobiliare.it/immobile?s=ufficio-vendita-limena-uff2247-v",
       "share_file": "share-immobile-ufficio-vendita-limena-uff2247-v.html"
-    },
-    "LF0306": {
-      "codice": "LF0306",
-      "titolo": "Casa singola anni '80 con ampio giardino in affitto a Cadoneghe",
-      "seo_slug": "villa-affitto-residenziale-cadoneghe-lf0306",
-      "title": "Villa in affitto a CADONEGHE — Righetto Immobiliare Padova",
-      "description": "Villa · 160 m² · 3 locali · € 900 · Rif. LF0306 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/team/titolari.webp",
-      "share_url": "https://righettoimmobiliare.it/share-immobile-villa-affitto-residenziale-cadoneghe-lf0306",
-      "app_url": "https://righettoimmobiliare.it/immobile?s=villa-affitto-residenziale-cadoneghe-lf0306",
-      "share_file": "share-immobile-villa-affitto-residenziale-cadoneghe-lf0306.html"
     },
     "LO0287": {
       "codice": "LO0287",
