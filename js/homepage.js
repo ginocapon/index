@@ -951,10 +951,18 @@ function generateSlug(titolo) {
     'geopolitica, energia e mutui: effetti possibili su case nel nord-est e lettura prudenziale 2026': { img: 'img/blog/blog-geopolitica-mercato-immobiliare-italia-2026.webp', url: 'blog-geopolitica-ucraina-prezzi-mutui-italia-veneto-2026' },
     'cosa distingue un\'agenzia immobiliare di alto livello: risposte rapide, processi chiari e tool digitali': { img: 'img/blog/blog-agenzia-top-servizi-padova-2026.webp', url: 'blog-agenzia-immobiliare-top-servizi-padova-2026' },
     'comprare casa padova: storia a fumetti in 4 episodi': { img: 'img/blog/blog-percorso-acquisto-casa-padova-fumetto-2026-hero.webp', url: 'blog-percorso-acquisto-casa-padova-fumetto-2026' },
+    'registrazione locazione: storia a fumetto proprietari': { img: 'img/blog/blog-registrazione-locazione-fumetto-proprietari-padova-2026-hero.webp', url: 'blog-registrazione-locazione-fumetto-proprietari-padova-2026' },
     'percorso acquisto casa: storia a fumetti in 4 fasi': { img: 'img/blog/blog-percorso-acquisto-casa-padova-fumetto-2026-hero.webp', url: 'blog-percorso-acquisto-casa-padova-fumetto-2026' }
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    {
+      "titolo": "Registrazione locazione: storia a fumetto proprietari",
+      "categoria": "Gestione locazioni",
+      "data": "2026-10-07",
+      "immagine_copertina": "img/blog/blog-registrazione-locazione-fumetto-proprietari-padova-2026-hero.webp",
+      "url_statico": "blog-registrazione-locazione-fumetto-proprietari-padova-2026"
+    },
     {
       "titolo": "Comprare casa Padova: storia a fumetti in 4 episodi",
       "categoria": "Acquisto casa",
