@@ -24,3 +24,5 @@ scripts/_tmp_perizia/
 
 test-results/
 playwright-report/
+restyling-report/
+tests/visual/baseline/

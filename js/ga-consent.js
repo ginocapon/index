@@ -72,4 +72,13 @@
     s.defer = true;
     document.head.appendChild(s);
   })();
+
+  /* Rifinitura UX trasversale (additiva: non tocca monogramma RI / grana) */
+  (function loadUxPolish() {
+    if (/admin\.html$/i.test((location.pathname || ''))) return;
+    var css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = 'css/rig-ux-polish.css?v=4';
+    document.head.appendChild(css);
+  })();
 })();
