@@ -157,6 +157,32 @@ test.describe('Linda — dati live di un annuncio', () => {
   });
 });
 
+test.describe('Linda — regole storiche: le domande informative non scatenano i flussi sbagliati', () => {
+  const NO_FLUSSO = /Cerchi un immobile|Stima Valore Immobile|Come ti chiami|In quale zona o comune cerchi/;
+  for (const q of ['Come posso vendere casa?', 'Posso vendere una casa ereditata?', 'Cosa devo controllare durante una visita?',
+    'Che cos’è la conformità catastale?', 'Il prezzo richiesto è il valore reale?', 'Posso comprare una casa occupata da un inquilino?']) {
+    test(`informativa: «${q}» non avvia ricerca/stima/contatto`, async ({ page }) => {
+      await avvia(page, {});
+      await chiedi(page, q);
+      expect(await ultima(page).innerText()).not.toMatch(NO_FLUSSO);
+    });
+  }
+  test('intenti espliciti funzionano ancora: ricerca, stima, contatto', async ({ page }) => {
+    await avvia(page, {});
+    await chiedi(page, 'cerco un bilocale in affitto');
+    await expect(ultima(page)).toContainText('In quale zona o comune cerchi in affitto');
+    await page.evaluate(() => { window.rigChat.engine.state = 'idle'; });
+    await chiedi(page, 'Quanto vale il mio appartamento?');
+    await expect(ultima(page)).toContainText('Stima Valore Immobile');
+    await page.evaluate(() => { window.rigChat.engine.state = 'idle'; });
+    await chiedi(page, 'Voglio essere contattato');
+    await expect(ultima(page)).toContainText('Come ti chiami');
+    await page.evaluate(() => { window.rigChat.engine.state = 'idle'; });
+    await chiedi(page, 'Posso fissare un appuntamento?');
+    await expect(ultima(page)).toContainText('Come ti chiami');
+  });
+});
+
 test.describe('Linda — layout mobile/desktop', () => {
   test('Nessun overflow orizzontale e pulsanti feedback ≥ 44px', async ({ page }) => {
     await avvia(page, { rpcSearch: [VOCE] });

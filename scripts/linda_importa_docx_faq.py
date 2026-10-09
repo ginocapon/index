@@ -52,6 +52,41 @@ def fonte_per(q, a, cat):
     return None
 
 
+# Sinonimi d'uso comune. NON includere termini giuridicamente distinti (es. caparra/acconto, disdetta/recesso).
+SINONIMI = [
+    ("casa", "appartamento", "immobile", "abitazione"), ("comprare", "acquistare"), ("affittare", "locare", "dare in affitto"),
+    ("affitto", "locazione"), ("inquilino", "conduttore"), ("proprietario", "locatore"), ("mutuo", "finanziamento"),
+    ("rogito", "atto notarile"), ("APE", "attestato di prestazione energetica", "certificato energetico"),
+    ("provvigione", "commissione", "compenso"), ("canone", "affitto mensile"), ("preliminare", "compromesso"),
+    ("proposta", "offerta"), ("catasto", "catastale"), ("agenzia", "agenzia immobiliare"),
+]
+APERTURE = re.compile(r"^(come (posso|si|faccio a|funziona|funzionano)|che cos['’]è|cos['’]è|cosa (significa|sono|succede se|devo|posso)|qual è|quali sono|quali|quanto (costa|devo|può)|posso|devo|è possibile|è obbligatorio|è meglio|chi|quando|dove|perché|cosa)\s+", re.I)
+
+
+def varianti_per(q):
+    """Varianti deterministiche (nessun LLM): forma a parole chiave + sostituzioni di sinonimi. Da rivedere nel pannello."""
+    base = q.strip().rstrip("?").strip()
+    out = []
+    kw = re.sub(r"^(il|lo|la|l['’]|i|gli|le|un|uno|una|un['’])\s*", "", APERTURE.sub("", base).strip(), flags=re.I)
+    if 8 <= len(kw) < len(base): out.append(kw)
+    for grp in SINONIMI:
+        for w in grp:
+            m = re.search(r"\b" + re.escape(w) + r"\b", base, re.I)
+            if not m: continue
+            # con articolo/possessivo davanti il genere potrebbe non concordare: nessuna sostituzione
+            if re.search(r"(il|lo|la|l['’]|i|gli|le|un|uno|una|mio|mia|miei|mie|del|della|dello|dei|delle|al|alla|nel|nella|sul|sulla)\s+$", base[:m.start()], re.I): break
+            for alt in grp:
+                if alt.lower() != w.lower():
+                    out.append(base[:m.start()] + alt + base[m.end():])
+            break
+    seen, res = {q.lower().rstrip("?")}, []
+    for v in out:
+        k = v.lower().rstrip("?").strip()
+        if k not in seen and len(v) <= 140:
+            seen.add(k); res.append(v.rstrip("?").strip() + "?" if v is not kw else v)
+    return res[:4]
+
+
 def leggi(docx):
     x = zipfile.ZipFile(docx).read("word/document.xml").decode("utf8")
     x = re.sub(r"<w:br[^>]*/>", "\n", x)
@@ -110,7 +145,7 @@ def main(docx):
 
     # --- CSV importabile ---
     RE_NUM = re.compile(r"\d+[.,]?\d*\s*(%|€|euro|giorni|mesi|anni)")
-    sc = Counter(); senza_fonte_con_numeri = []
+    sc = Counter(); senza_fonte_con_numeri = []; nvar = 0
     with open(DATA / "linda-kb-seed-300.csv", "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f, delimiter=";", quoting=csv.QUOTE_MINIMAL)
         w.writerow(["domanda", "varianti", "risposta", "categoria", "fonte_titolo", "fonte_url", "scade_il"])
@@ -121,8 +156,10 @@ def main(docx):
             ft, fu = FONTI[k] if k else ("", "")
             if RE_NUM.search(it["q"] + it["a"]) and not k: senza_fonte_con_numeri.append(it["n"])
             sc[c] += 1
-            w.writerow([it["q"], "", it["a"], c, ft, fu, ""])
+            v = varianti_per(it["q"]); nvar += len(v)
+            w.writerow([it["q"], "|".join(v), it["a"], c, ft, fu, ""])
     print(f"FAQ importate: {len(items)} | fonti di Parte 2: {len(fonti)}")
+    print(f"Varianti generate: {nvar} (media {nvar / len(items):.1f} per voce)")
     print("Per categoria KB:", dict(sc))
     print("Numeri senza fonte:", senza_fonte_con_numeri or "nessuno")
 
