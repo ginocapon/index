@@ -1,5 +1,10 @@
 {
-  "updated": "2026-10-06",
+  "updated": "2026-10-09",
+  "completed_2026_10_09": [
+    "acq-w03 CTA batch1 + mesh blog.html/servizi.html",
+    "Nord Star 12m: strategy-nord-star-12m-acquisizione.json + skill-strategia-nord-star-12m-acquisizione.md",
+    "Social bozza venerdi-2026-10-09-proprietari.md"
+  ],
   "completed_2026_10_06": [
     "Blog design §14: rig-blog-article.css v=5 su 147 articoli, audit script, compliance servizio-gestione/locazioni + GeoCoordinates affitti-studenti-settembre",
     "Prossimo slot #2 owner: articolo da data/gsc-top-target-pages-2026-10-05.json (pagina con impressioni e CTR basso)"
@@ -11,7 +16,8 @@
     "TEST-SKILL/skill-real-estate-advisor.md",
     "TEST-SKILL/skill-editoriale-visivo.md",
     "TEST-SKILL/skill-acquisizione-contenuti-acquisizione.md",
-    "TEST-SKILL/skill-social-automation.md"
+    "TEST-SKILL/skill-social-automation.md",
+    "TEST-SKILL/skill-strategia-nord-star-12m-acquisizione.md"
   ],
   "data_refs": {
     "acquisition_roadmap": "data/acquisition-roadmap-cron.json",

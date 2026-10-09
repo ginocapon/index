@@ -189,7 +189,8 @@
     "acquisizione_proprietari_sito": {
       "skills": ["skill-essentials.md", "skill-acquisizione-proprietari.md", "skill-forms-leads.md", "skill-design.md"],
       "cursor_skills": ["righetto-acquisizione-proprietari"],
-      "data": ["data/editorial-acquisition-balance.json", "data/lead-scoring-rules.json", "data/acquisition-kpi-template.json", "data/editorial-queue.json"],
+      "data": ["data/editorial-acquisition-balance.json", "data/lead-scoring-rules.json", "data/lead-automation-config.json", "data/pipeline-acquisizioni-fascia-alta.json", "data/strategy-nord-star-12m-acquisizione.json", "data/acquisition-kpi-template.json", "data/editorial-queue.json"],
+      "skills_extra": ["skill-lead-automation-righetto.md", "skill-strategia-nord-star-12m-acquisizione.md"],
       "token_stimati": "~2.400",
       "note": "Funnel owner, percorsi A-L, hub/landing/servizi — anti-duplicati. Playbook script/follow-up: skill-acquisizione-playbook-commerciale.md"
     },

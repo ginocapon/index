@@ -798,6 +798,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'casa non si vende padova strategia 2026': { img: 'img/blog/blog-casa-non-si-vende-padova-strategia-2026-hero.webp', url: 'blog-casa-non-si-vende-padova-strategia-2026' },
     'bonus mobili barriere architettoniche 2026 padova': { img: 'img/blog/blog-bonus-mobili-barriere-architettoniche-2026-padova-hero.webp', url: 'blog-bonus-mobili-barriere-architettoniche-2026-padova' },
     'legge bilancio 198 bonus edilizi 2026 padova': { img: 'img/blog/blog-legge-bilancio-198-2026-bonus-edilizi-padova-hero.webp', url: 'blog-legge-bilancio-198-2026-bonus-edilizi-padova' },
     'bonus casa 2027 detrazioni padova': { img: 'img/blog/blog-bonus-casa-2027-detrazioni-padova-hero.webp', url: 'blog-bonus-casa-2027-detrazioni-padova' },
@@ -956,6 +957,13 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    {
+      "titolo": "Casa non si vende a Padova: strategia oltre il prezzo (2026)",
+      "categoria": "Guida proprietari",
+      "data": "2026-10-09",
+      "immagine_copertina": "img/blog/blog-casa-non-si-vende-padova-strategia-2026-hero.webp",
+      "url_statico": "blog-casa-non-si-vende-padova-strategia-2026"
+    },
     {
       "titolo": "Registrazione locazione: storia a fumetto proprietari",
       "categoria": "Gestione locazioni",

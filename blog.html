@@ -258,7 +258,15 @@
     <div style="background:linear-gradient(135deg,#152435 0%,#2C4A6E 100%);border-radius:10px;padding:1.3rem;text-align:center">
       <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#fff;margin-bottom:.4rem">Valuta il tuo immobile</div>
       <p style="font-size:.84rem;color:rgba(255,255,255,.78);line-height:1.65;margin-bottom:.85rem">Scopri quanto vale la tua casa nel mercato attuale di Padova. Gratis e senza impegno.</p>
-      <a href="contatti" style="display:block;background:var(--oro);color:var(--nero);padding:.58rem;border-radius:8px;font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase">Valutazione gratuita</a>
+      <a href="landing-valutazione" style="display:block;background:var(--oro);color:var(--nero);padding:.58rem;border-radius:8px;font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase">Valutazione gratuita</a>
+    </div>
+    <div class="sb" style="margin-top:0">
+      <div class="sb-h">Proprietari</div>
+      <div class="sb-b" style="font-size:.79rem;line-height:1.65">
+        <p style="margin-bottom:.6rem;color:var(--grigio)">Vendita, affitto, valutazione: percorsi guidati senza impegno di incarico.</p>
+        <a href="proprietario-immobile" style="display:block;font-weight:600;color:var(--blu);margin-bottom:.35rem">Hub proprietario immobile →</a>
+        <a href="agenzia-immobiliare-padova" style="display:block;font-weight:600;color:var(--blu)">Agenzia immobiliare Padova →</a>
+      </div>
     </div>
   </div>
 </div>
@@ -291,6 +299,18 @@ let _staticSlugs = new Set();
 async function initBlog() {
   // Articoli statici (pagine HTML dedicate) — mostrati subito, senza attendere Supabase
   const articoliStatici = [
+    {
+      "titolo": "Casa non si vende a Padova: strategia oltre il prezzo (2026)",
+      "categoria": "Guida proprietari",
+      "data": "2026-10-09",
+      "stato": "pubblicato",
+      "immagine_copertina": "img/blog/blog-casa-non-si-vende-padova-strategia-2026-hero.webp",
+      "url_statico": "blog-casa-non-si-vende-padova-strategia-2026",
+      "tempo": 14,
+      "autore": "Gino Capon",
+      "contenuto": "Percorso F: diagnostica invenduto, piano 90gg, CTA consulenza e valutazione.",
+      "evidenza": true
+    },
     {
       "titolo": "Registrazione locazione: storia a fumetto proprietari",
       "categoria": "Gestione locazioni",

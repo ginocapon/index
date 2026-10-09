@@ -15,7 +15,7 @@ description: >-
 Quando l'utente scrive **`"SKILL"`** (virgolette incluse):
 
 1. Leggi `TEST-SKILL/skill-competitor-roadmap-q3-2026.md` **§8**
-2. Leggi **`TEST-SKILL/skill-acquisizione-cron-venerdi.md`** (§ **Botte e cerchio**) + **`data/venerdi-friday-pipeline.json`** + **`data/venerdi-content-rotation.json`** + **`data/gsc-top-target-pages-2026-10-05.json`** + **`data/acquisition-roadmap-cron.json`** — **#1 acquisizione · #2 blog BOTTE/CERCHIO · #3 social proprietari**
+2. Leggi **`TEST-SKILL/skill-acquisizione-cron-venerdi.md`** (§ **Botte e cerchio**) + **`data/venerdi-friday-pipeline.json`** + **`data/venerdi-content-rotation.json`** + **`data/gsc-top-target-pages-2026-10-05.json`** + **`data/acquisition-roadmap-cron.json`** + **`data/strategy-nord-star-12m-acquisizione.json`** — **#1 acquisizione · #2 blog BOTTE/CERCHIO · #3 social proprietari**
 3. Leggi **`TEST-SKILL/skill-acquisizione-contenuti-acquisizione.md`** per articoli e post con foto/carosello
 4. Leggi `skill-memoria-progressi.md` + `data/editorial-queue.json` + `data/gsc-indexing-weekly.json` + `data/gsc-keywords-priority.json` + `data/competitor-roadmap-q3-2026.json`
 5. Verifica **`skill-ai-act-compliance.md`** — barra sito e disclosure chat attive su pagine pubbliche

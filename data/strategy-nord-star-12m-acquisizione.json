@@ -1,0 +1,88 @@
+{
+  "updated": "2026-10-09",
+  "anchor_start": "2026-10-09",
+  "horizon_end": "2027-10-09",
+  "tolerance_pct_max": 1,
+  "skill_ref": "TEST-SKILL/skill-strategia-nord-star-12m-acquisizione.md",
+  "messaggio_madre": "Chi vende trova in Righetto un alleato",
+  "north_star": {
+    "label": "Margine netto agenzia cumulato 12 mesi (EUR)",
+    "target_eur": 1000000,
+    "note": "Obiettivo dichiarato dal titolare — NON è claim pubblico sul sito. Compilare baseline reale in admin/registro; nessuna percentuale mediazione online."
+  },
+  "acquisizione_fascia_alta": {
+    "ref": "data/pipeline-acquisizioni-fascia-alta.json",
+    "mandates_per_month_min": 4,
+    "min_prezzo_immobile_eur": 300000,
+    "focus": ["Centro Storico Padova", "ville e residenziale di pregio", "investitori e patrimonio"],
+    "stock_catalog_ge_300k_count": 6,
+    "stock_catalog_snapshot": "2026-10-06 og-immobili.json"
+  },
+  "reorganization_pillars": [
+    {
+      "id": "P1",
+      "name": "Acquisizione owner (A–L)",
+      "owner": "Cron venerdì slot #1 + playbook commerciale",
+      "data": ["data/acquisition-roadmap-cron.json", "data/venerdi-friday-pipeline.json"]
+    },
+    {
+      "id": "P2",
+      "name": "Contenuto botte/cerchio",
+      "owner": "Slot #2 venerdì + editorial-queue",
+      "data": ["data/venerdi-content-rotation.json", "data/editorial-acquisition-balance.json"]
+    },
+    {
+      "id": "P3",
+      "name": "Conversione funnel",
+      "owner": "Landing Class A + lead scoring",
+      "data": ["data/lead-scoring-rules.json", "landing-valutazione.html", "servizio-vendita.html"]
+    },
+    {
+      "id": "P4",
+      "name": "Esecuzione commerciale",
+      "owner": "Giorno 0 lead + KPI settimanali",
+      "data": ["data/acquisition-kpi-template.json", "TEST-SKILL/skill-acquisizione-playbook-commerciale.md"]
+    }
+  ],
+  "formula": {
+    "description": "Margine_12m ≈ Mandati_chiusi × Margine_medio_per_mandato + Locazioni/gestioni ricorrenti",
+    "mandates_needed_if_margin_eur": null,
+    "inputs_required": [
+      "baseline_mandates_last_12m",
+      "baseline_net_margin_eur_last_12m",
+      "avg_net_margin_per_mandate_eur",
+      "avg_net_margin_per_rental_mandate_eur"
+    ],
+    "weekly_cascade": [
+      "richieste_owner_total",
+      "lead_score_hot_count",
+      "appointments_survey",
+      "mandates_signed"
+    ]
+  },
+  "milestones": [
+    { "month": 1, "focus": "CTA batch + hub F/H/J + KPI baseline", "acq_weeks": "1-4" },
+    { "month": 2, "focus": "Blog percorso F invenduta + mesh GSC", "acq_weeks": "5-6" },
+    { "month": 3, "focus": "Territorio Limena + servizio-vendita conversion", "acq_weeks": "7-8" },
+    { "month": 4, "focus": "CTA batch 2 + consulenza indecisi", "acq_weeks": "9-10" },
+    { "month": 5, "focus": "FAQ Linda + review KPI trimestre 1", "acq_weeks": "11-12" },
+    { "month": 6, "focus": "Ripetizione ciclo acquisizione + ads locali (post sett.8 playbook)", "acq_weeks": "1-6" },
+    { "month": 12, "focus": "Review nord star vs margine reale registro agenzia", "acq_weeks": "12" }
+  ],
+  "prospetti_12m": {
+    "updated": "2026-10-09",
+    "scenario_base": "Crescita organica: cron venerdì + GSC + social proprietari — dipende da baseline non ancora compilata in acquisition-kpi-template.json",
+    "scenario_upside": "Baseline lead→mandato migliorata del 20% con risposta giorno 0 e percorsi F/B attivi",
+    "scenario_risk": "Sett. 2 acq (hub F,H,J) ancora pending — recupero entro 2 venerdì",
+    "actions_this_week": [
+      "acq-w03 CTA Class A batch1 (5 blog)",
+      "Compilare acquisition-kpi-template.json con numeri sett. 40/2026",
+      "GSC batch da gsc-indexing-weekly.json"
+    ]
+  },
+  "gates_weekly": [
+    "python scripts/audit_editorial_acquisition.py --report",
+    "node scripts/validate-page.js --file landing-valutazione.html",
+    "KPI delta vs target settimanale entro tolerance_pct_max"
+  ]
+}

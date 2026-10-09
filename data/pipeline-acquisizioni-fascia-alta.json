@@ -1,0 +1,100 @@
+{
+  "updated": "2026-10-09",
+  "source_catalog": "data/og-immobili.json",
+  "strategy_ref": "data/strategy-nord-star-12m-acquisizione.json",
+  "skill_ref": "TEST-SKILL/skill-strategia-nord-star-12m-acquisizione.md",
+  "targets": {
+    "mandates_signed_per_month_min": 4,
+    "min_asking_price_eur": 300000,
+    "north_star_margin_eur_12m": 1000000,
+    "tolerance_kpi_pct": 1
+  },
+  "focus_segments": [
+    {
+      "id": "centro_storico",
+      "label": "Centro Storico Padova — appartamenti di pregio",
+      "zones": ["zona-centro-storico-padova", "zona-prato-della-valle-padova"],
+      "blog": ["blog-appartamento-padova-centro-storico-2026"],
+      "note": "Acquisizione via valutazione comparabile OMI + rete notai/geometri"
+    },
+    {
+      "id": "ville_pregio",
+      "label": "Ville e villetté ≥300k",
+      "zones": ["zona-limena", "Colli Euganei", "prima cintura"],
+      "note": "Tour 360°, drone, vendita riservata prima dei portali"
+    },
+    {
+      "id": "investitori",
+      "label": "Investitori / patrimonio / second home",
+      "landing": ["valutazione-vendita-riservata-padova", "servizio-vendita", "landing-consulenza-immobiliare-gratuita"],
+      "disclaimer": "Non consulenza finanziaria — solo mediazione e dati mercato verificabili"
+    }
+  ],
+  "catalog_vendita_ge_300k": [
+    {
+      "codice": "CAP1687",
+      "slug": "capannone-vendita-limena-cap1687",
+      "price_eur": 730000,
+      "tipo": "Capannone",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=capannone-vendita-limena-cap1687",
+      "use": "Esempio stock attivo per pitch investitori industriali — verificare attivo in admin"
+    },
+    {
+      "codice": "LA0307",
+      "slug": "villa-vendita-curtarolo-la0307",
+      "price_eur": 375000,
+      "tipo": "Villa",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=villa-vendita-curtarolo-la0307",
+      "use": "Villa ampia — modello marketing premium"
+    },
+    {
+      "codice": "LP0286",
+      "slug": "villetta-vendita-padova-lp0286",
+      "price_eur": 365000,
+      "tipo": "Villetta",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=villetta-vendita-padova-lp0286",
+      "use": "Padova — fascia alta residenziale"
+    },
+    {
+      "codice": "CAP1609a",
+      "slug": "capannone-vendita-rubano-cap1609a",
+      "price_eur": 360000,
+      "tipo": "Capannone",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=capannone-vendita-rubano-cap1609a",
+      "use": "Investitori commerciali"
+    },
+    {
+      "codice": "LA0312",
+      "slug": "residenziale-vendita-limena-la0312",
+      "price_eur": 335000,
+      "tipo": "Residenziale",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=residenziale-vendita-limena-la0312",
+      "use": "Limena — acquirente famiglia/investimento"
+    },
+    {
+      "codice": "LP0280",
+      "slug": "villa-vendita-limena-lp0280",
+      "price_eur": 320000,
+      "tipo": "Villa",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=villa-vendita-limena-lp0280",
+      "use": "Villa 350 mq — case study acquisizione ville"
+    }
+  ],
+  "off_market_pipeline": {
+    "note": "Compilare settimanalmente — lead non ancora in catalogo",
+    "columns": ["data", "zona", "tipologia", "fascia_prezzo_eur", "proprietario_percorso", "investitore_interessato", "stato", "prossimo_passo"],
+    "rows": []
+  },
+  "weekly_rhythm": [
+    "1 sopralluogo fascia alta (centro o villa) anche da segnalazione professionisti",
+    "1 contatto investitore in portafoglio con 2 annunci ≥300k",
+    "Aggiornare off_market_pipeline.rows",
+    "Verificare KPI mandates_signed vs target 4/mese"
+  ],
+  "channels": [
+    "segnalazione-immobili-professionisti-padova",
+    "valutazione-vendita-riservata-padova",
+    "FIMAA / notai / geometri (playbook commerciale)",
+    "Social reel su villa o centro storico (no prezzo inventato)"
+  ]
+}

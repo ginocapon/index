@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-14",
+  "updated": "2026-10-09",
   "skill_ref": "TEST-SKILL/skill-acquisizione-proprietari.md",
   "note": "Punteggio 0-100 per priorità contatto. Annotare in admin su richieste (es. prefisso [score:72] in messaggio) fino a colonna dedicata Supabase.",
   "thresholds": {
@@ -17,6 +17,9 @@
     { "id": "curiosity_only", "label": "Solo curiosità / orizzonte >12 mesi", "points": 5 },
     { "id": "no_rush", "label": "Dice non ho fretta", "points": -10 },
     { "id": "email_only", "label": "Solo email, rifiuta telefono", "points": -5 },
-    { "id": "generic_no_property", "label": "Richiesta generica senza immobile", "points": -15 }
+    { "id": "generic_no_property", "label": "Richiesta generica senza immobile", "points": -15 },
+    { "id": "price_band_300k_plus", "label": "Immobile indicato ≥300.000 € o villa/centro storico", "points": 20 },
+    { "id": "investor_buyer", "label": "Investitore / seconda casa / patrimonio", "points": 15 },
+    { "id": "off_market_request", "label": "Chiede vendita riservata o off-market", "points": 15 }
   ]
 }

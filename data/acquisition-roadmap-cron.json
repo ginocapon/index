@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-25",
+  "updated": "2026-10-09",
   "friday_pipeline_ref": "data/venerdi-friday-pipeline.json",
   "contenuti_acquisizione_skill": "TEST-SKILL/skill-acquisizione-contenuti-acquisizione.md",
   "anchor_start": "2026-09-19",
@@ -42,9 +42,9 @@
       "owner_paths": ["F", "H", "J"],
       "files": ["proprietario-immobile.html"],
       "validate": ["node scripts/validate-page.js --file proprietario-immobile.html"],
-      "status": "pending",
-      "completed_date": null,
-      "notes": ""
+      "status": "done",
+      "completed_date": "2026-10-09",
+      "notes": "3 card F/H/J + FAQ eredità + mesh guide 2026-10-09"
     },
     {
       "week": 3,
@@ -53,11 +53,11 @@
       "title": "CTA owner batch 1 — top GSC (5 articoli)",
       "objective": "Box CTA Class A (landing-valutazione / servizio pertinente) su batch1 pipeline (hub GSC 05/10): blog-rendimento-affitto-padova, blog-affitto-studenti-padova, blog-vendere-casa-limena-proprietario-2026, blog-affittare-casa-padova-proprietario-2026, blog-mandato-esclusivo-padova-perche-conviene-2026. Mesh: +2 link verso /proprietario-immobile e /agenzia-immobiliare-padova da /blog o /servizi.",
       "owner_paths": ["A", "B", "D", "F"],
-      "files": [],
+      "files": ["blog-rendimento-affitto-padova.html", "blog-affitto-studenti-padova.html", "blog-vendere-casa-limena-proprietario-2026.html", "blog-affittare-casa-padova-proprietario-2026.html", "blog-mandato-esclusivo-padova-perche-conviene-2026.html", "blog.html", "servizi.html"],
       "validate": ["python scripts/audit_editorial_acquisition.py --report"],
-      "status": "pending",
-      "completed_date": null,
-      "notes": ""
+      "status": "done",
+      "completed_date": "2026-10-09",
+      "notes": "CTA Class A + mesh blog/servizi. Nord star: data/strategy-nord-star-12m-acquisizione.json"
     },
     {
       "week": 4,
@@ -79,11 +79,11 @@
       "title": "Articolo owner percorso F — casa invenduta",
       "objective": "Pubblicare 1 articolo Area 1: strategia oltre il prezzo (anti-doppioni check_doppioni_sito.py). CTA landing-consulenza + servizio-vendita",
       "owner_paths": ["F"],
-      "files": ["blog-*.html", "blog.html", "sitemap.xml"],
-      "validate": ["python scripts/check_doppioni_sito.py", "python scripts/audit_editorial_acquisition.py"],
-      "status": "pending",
-      "completed_date": null,
-      "notes": "Solo se gap confermato — altrimenti refresh blog esistente owner"
+      "files": ["blog-casa-non-si-vende-padova-strategia-2026.html", "blog.html", "sitemap.xml", "js/homepage.js", "admin.html"],
+      "validate": ["python scripts/check_doppioni_sito.py", "node scripts/validate-page.js --file blog-casa-non-si-vende-padova-strategia-2026.html"],
+      "status": "done",
+      "completed_date": "2026-10-09",
+      "notes": "Pubblicato eq-oct09-001 — build_blog_casa_non_si_vende_padova_oct09.py"
     },
     {
       "week": 6,
