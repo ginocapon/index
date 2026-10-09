@@ -45,6 +45,8 @@ Il macrociclo SEO 12 sett. (`righetto-venerdi-sito-90giorni`) resta attivo: se s
 3. `data/editorial-queue.json` + `data/editorial-acquisition-balance.json`
 4. `data/advisor-territorio-limena-10km.json` se blog/social locali
 5. `TEST-SKILL/skill-memoria-progressi.md` §Prossimi passi
+6. `data/strategy-nord-star-12m-acquisizione.json` + **`TEST-SKILL/skill-strategia-nord-star-12m-acquisizione.md`** (prospetti 12m, tolleranza KPI ±1%)
+7. **`TEST-SKILL/skill-lead-automation-righetto.md`** + `data/lead-automation-config.json` — webhook `score-lead-righetto` attivo, conteggio lead HOT/settimana
 
 ### Slot #1 — Acquisizione cron (BLOCCANTE)
 

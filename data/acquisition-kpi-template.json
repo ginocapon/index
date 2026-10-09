@@ -1,8 +1,10 @@
 {
-  "updated": null,
-  "week_start": null,
-  "week_end": null,
+  "updated": "2026-10-09",
+  "week_start": "2026-10-06",
+  "week_end": "2026-10-12",
   "skill_ref": "TEST-SKILL/skill-acquisizione-proprietari.md",
+  "strategy_nord_star_ref": "data/strategy-nord-star-12m-acquisizione.json",
+  "tolerance_pct_max": 1,
   "note": "Compilare ogni venerdì insieme al report GSC. Fonti: GA4, Supabase richieste, registro agenzia.",
   "funnel": {
     "sessions_owner_pages": null,

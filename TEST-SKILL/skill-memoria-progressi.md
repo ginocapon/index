@@ -185,3 +185,11 @@ Vedi **`TEST-SKILL/skill-competitor-roadmap-q3-2026.md`** + `data/competitor-roa
 ```
 
 **Routing context-map:** `audit_seo`, `ottimizzazione_contenuto`, `venerdi_contenuti_skimm` → includere questo file.
+
+---
+
+## Log
+
+| Data | Evento |
+|------|--------|
+| 2026-10-09 | **Venerdì acq sett. 3/12:** acq-w03 CTA Class A batch1 (5 blog) + mesh blog/servizi; skill Nord Star 12m + `strategy-nord-star-12m-acquisizione.json`; bozza social `venerdi-2026-10-09-proprietari.md`. **Lead automation Livello A:** `sql/righetto-lead-automation-extension.sql`, Edge `score-lead-righetto`, `skill-lead-automation-righetto.md`. **Blog settimana:** `blog-casa-non-si-vende-padova-strategia-2026` (eq-oct09-001, percorso F) — acq-w05 done. **acq-w02** hub F/H/J su proprietario-immobile.html done. **Pending:** deploy Supabase SQL+function+webhook. |

@@ -13,7 +13,8 @@ description: >-
 **Leggi sempre:** `TEST-SKILL/skill-acquisizione-proprietari.md` (fonte completa).  
 **Alleato + advisor + territorio 10 km:** `TEST-SKILL/skill-real-estate-advisor.md` · `/advisor`  
 **Script / follow-up / canali:** `TEST-SKILL/skill-acquisizione-playbook-commerciale.md`.  
-**Cron venerdì (3 slot):** `skill-acquisizione-cron-venerdi.md` + `data/venerdi-friday-pipeline.json` + `skill-acquisizione-contenuti-acquisizione.md`.
+**Cron venerdì (3 slot):** `skill-acquisizione-cron-venerdi.md` + `data/venerdi-friday-pipeline.json` + `skill-acquisizione-contenuti-acquisizione.md`.  
+**Nord Star 12 mesi (±1% KPI):** `TEST-SKILL/skill-strategia-nord-star-12m-acquisizione.md` + `data/strategy-nord-star-12m-acquisizione.json` — obiettivo margine interno, mai claim sul sito.
 
 ## Concetto fondamentale
 
@@ -74,7 +75,10 @@ Dettaglio completo in skill § Percorsi A–L.
 ## Lead scoring e KPI
 
 - Regole: `data/lead-scoring-rules.json`
-- KPI settimanali: `data/acquisition-kpi-template.json`
+- **Automation (2026-10):** `TEST-SKILL/skill-lead-automation-righetto.md` · `data/lead-automation-config.json` · SQL `sql/righetto-lead-automation-extension.sql` · Edge `score-lead-righetto` — Livello A sync, Livello B n8n async
+- **Fascia alta:** `data/pipeline-acquisizioni-fascia-alta.json` (≥300k, centro/ville, target 4 mandati/mese)
+- KPI settimanali: `data/acquisition-kpi-template.json` (tolleranza ±1% vs Nord Star)
+- **Nord Star:** compilare baseline margine/mandati in `strategy-nord-star-12m-acquisizione.json` → derivare mandati/mese; aggiornare `prospetti_12m` ogni venerdì
 
 ## Homepage (checklist)
 

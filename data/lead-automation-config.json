@@ -1,0 +1,33 @@
+{
+  "updated": "2026-10-09",
+  "skill_ref": "TEST-SKILL/skill-lead-automation-righetto.md",
+  "sql_ref": "sql/righetto-lead-automation-extension.sql",
+  "edge_function": "score-lead-righetto",
+  "n8n_base_repo": "https://github.com/karl22puday-eng/real-estate-lead-automation",
+  "architecture": "Livello A: Edge Function + Postgres (deterministico). Livello B: n8n async RAG+LLM.",
+  "thresholds": {
+    "hot_min": 70,
+    "warm_min": 40,
+    "tolerance_kpi_pct": 1
+  },
+  "signals_deterministic": [
+    { "id": "phone_provided", "points": 10, "match": "telefono presente" },
+    { "id": "valuation_page", "points": 20, "provenienza_contains": ["landing-valutazione", "servizio-valutazioni"] },
+    { "id": "sell_intent", "points": 25, "messaggio_regex": "(?i)vend|incarico|mandato|valut" },
+    { "id": "timeline_urgent", "points": 15, "messaggio_regex": "(?i)urgent|subito|asap|3 mesi|tre mesi" },
+    { "id": "high_band_300k", "points": 20, "messaggio_regex": "(?i)300\\.?000|350\\.?000|400\\.?000|500\\.?000|ville|centro storico|pregio" },
+    { "id": "invenduta_path_f", "points": 15, "messaggio_regex": "(?i)non si vende|invendut|mesi|annuncio fermo" },
+    { "id": "curiosity_only", "points": -10, "messaggio_regex": "(?i)solo curios|tra qualche anno|non so" }
+  ],
+  "owner_path_hints": {
+    "F": "(?i)non si vende|invendut|già in vendita|annuncio fermo",
+    "A": "(?i)quanto vale|valutazione|stima",
+    "B": "(?i)pens.*vendere|voglio vendere",
+    "L": "(?i)non so se|indecis"
+  },
+  "notify": {
+    "telegram_env": "TELEGRAM_BOT_TOKEN",
+    "telegram_chat_env": "TELEGRAM_CHAT_ID",
+    "email_via": "send-email edge function / SERVIZI_CONFIG relay"
+  }
+}

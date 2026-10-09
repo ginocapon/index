@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-05",
+  "updated": "2026-10-09",
   "policy": "Max 1 blog AGGIUNGERE/settimana. PRIORITÀ STRATEGICA: acquisizione proprietari (skill-acquisizione-proprietari.md). Comando editoriale: skill-editoriale-visivo.md + equilibrio 4 aree owner/acquirente. Gate: audit_editorial_acquisition + audit_editorial_research + audit_editorial_continuity + audit_blog_visuals + audit_editorial_visual_variety + audit_blog_publishability. Memorie: editorial-acquisition-balance.json + editorial-memory.json + editorial-visual-memory.json.",
   "workflow_skill": "TEST-SKILL/skill-editorial-queue.md",
   "editorial_command": "TEST-SKILL/skill-editoriale-visivo.md",
@@ -553,6 +553,19 @@
       "editorial_type": "trend",
       "substantive_area": "AFFITTI_CANONI",
       "geo_focus": "Padova zona universitaria"
+    },
+    {
+      "id": "eq-oct09-001",
+      "status": "published",
+      "published_date": "2026-10-09",
+      "target_week": "2026-10-09",
+      "slug": "blog-casa-non-si-vende-padova-strategia-2026",
+      "kw_primaria": "casa non si vende padova",
+      "intent": "percorso-f-invenduto",
+      "title": "Casa non si vende a Padova: strategia oltre il prezzo (2026)",
+      "owner_path": "F",
+      "acquisition_priority": true,
+      "acquisition_contribution": "direct"
     }
   ]
 }
