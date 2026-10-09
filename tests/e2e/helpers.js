@@ -26,6 +26,13 @@ async function mockBackends(page, opts = {}) {
       }
       if (u.pathname.startsWith('/rest/v1/richieste') && req.method() === 'POST') {
         calls.insert.push(json());
+        if (opts.provenienzaAmmesse) {
+          const body = json();
+          const row = Array.isArray(body) ? body[0] : body;
+          if (!opts.provenienzaAmmesse.includes(row && row.provenienza)) {
+            return route.fulfill({ status: 400, headers: { ...CORS, 'content-type': 'application/json' }, body: '{"code":"23514","message":"new row for relation \\"richieste\\" violates check constraint \\"richieste_provenienza_check\\""}' });
+          }
+        }
         if (opts.insertFail) return route.fulfill({ status: 401, headers: { ...CORS, 'content-type': 'application/json' }, body: '{"code":"42501","message":"new row violates row-level security policy"}' });
         return route.fulfill({ status: 201, headers: CORS, body: '' });
       }

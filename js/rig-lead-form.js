@@ -174,17 +174,23 @@
     try {
       var sb = global.supabase && global.supabase.createClient(SB_URL, SB_ANON);
       if (sb) {
-        var ins = await sb.from('richieste').insert([
-          {
-            nome: nomeCompleto,
-            email: email || null,
-            telefono: tel,
-            messaggio: messaggioDb || null,
-            provenienza: provenienza,
-            newsletter: marketingOk,
-            letto: false
-          }
-        ]);
+        var row = {
+          nome: nomeCompleto,
+          email: email || null,
+          telefono: tel,
+          messaggio: messaggioDb || null,
+          provenienza: provenienza,
+          newsletter: marketingOk,
+          letto: false
+        };
+        var ins = await sb.from('richieste').insert([row]);
+        // Vincolo DB richieste_provenienza_check (23514): fonte non ammessa -> ripiego su 'form',
+        // la fonte originale resta nel messaggio. Nessun lead perso nel CRM.
+        if (ins && ins.error && ins.error.code === '23514' && row.provenienza !== 'form') {
+          row.messaggio = '[fonte: ' + provenienza + '] ' + (row.messaggio || '');
+          row.provenienza = 'form';
+          ins = await sb.from('richieste').insert([row]);
+        }
         // supabase-js non lancia eccezioni sugli errori HTTP/RLS: va letto `error`.
         supaOk = !(ins && ins.error);
         if (!supaOk) {
