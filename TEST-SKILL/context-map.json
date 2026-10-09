@@ -186,6 +186,13 @@
       "token_stimati": "~1.400",
       "note": "PRIORITÀ PERMANENTE: Reg. UE 2024/1689 — barra sito, Linda, foto annunci, privacy §15. Obbligatorio su OGNI task che tocca HTML, JS chat, media o contenuti."
     },
+    "linda_collega_virtuale": {
+      "skills": ["skill-essentials.md", "skill-linda-collega-virtuale.md", "skill-security.md", "skill-ai-act-compliance.md", "skill-forms-leads.md"],
+      "cursor_skills": ["righetto-linda"],
+      "data": ["data/linda-faq-audit.json", "data/linda-kb-seed-faq.csv", "data/linda-domande-ipotetiche.csv", "data/linda-lacune-annunci.csv"],
+      "token_stimati": "~2.200",
+      "note": "Chatbot Linda + KB approvata + admin-kb. Ramo linda/kb-v1; SQL in sql/linda-kb-v1.sql da applicare solo dopo approvazione."
+    },
     "acquisizione_proprietari_sito": {
       "skills": ["skill-essentials.md", "skill-acquisizione-proprietari.md", "skill-forms-leads.md", "skill-design.md"],
       "cursor_skills": ["righetto-acquisizione-proprietari"],

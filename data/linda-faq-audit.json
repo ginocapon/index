@@ -1,0 +1,990 @@
+{
+  "totale_voci": 256,
+  "con_dati_numerici": 72,
+  "senza_fonte": 59,
+  "voci": [
+    {
+      "indice": 3,
+      "parole_chiave": [
+        "valutazione",
+        "valutare",
+        "stima",
+        "vale"
+      ],
+      "numeri_trovati": [
+        "2025",
+        "2026",
+        "80mq"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 6,
+      "parole_chiave": [
+        "tempo vendita",
+        "quanto tempo",
+        "tempistica vendita",
+        "velocità"
+      ],
+      "numeri_trovati": [
+        "75 giorni",
+        "90 giorni",
+        "120 giorni"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 7,
+      "parole_chiave": [
+        "proposta",
+        "offerta",
+        "proposta acquisto"
+      ],
+      "numeri_trovati": [
+        "10%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 8,
+      "parole_chiave": [
+        "compromesso",
+        "preliminare",
+        "contratto preliminare"
+      ],
+      "numeri_trovati": [
+        "20%",
+        "20 giorni"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 9,
+      "parole_chiave": [
+        "rogito",
+        "atto",
+        "notaio",
+        "notarile"
+      ],
+      "numeri_trovati": [
+        "2%",
+        "4%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 10,
+      "parole_chiave": [
+        "prima casa",
+        "agevolazioni",
+        "under 36",
+        "giovani"
+      ],
+      "numeri_trovati": [
+        "18 mesi",
+        "2%",
+        "9%",
+        "€4"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 11,
+      "parole_chiave": [
+        "caparra",
+        "deposito",
+        "anticipo",
+        "acconto"
+      ],
+      "numeri_trovati": [
+        "20%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 12,
+      "parole_chiave": [
+        "spese acquisto",
+        "costi acquisto",
+        "imposte acquisto"
+      ],
+      "numeri_trovati": [
+        "2%",
+        "€5",
+        "4%",
+        "10%",
+        "€2",
+        "€4"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 79,
+      "parole_chiave": [
+        "bonus mobili",
+        "detrazione mobili ristrutturazione",
+        "elettrodomestici bonus 2026"
+      ],
+      "numeri_trovati": [
+        "2026"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 82,
+      "parole_chiave": [
+        "agenzia top servizi",
+        "migliore agenzia padova",
+        "servizi agenzia immobiliare"
+      ],
+      "numeri_trovati": [
+        "2000"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 83,
+      "parole_chiave": [
+        "storia righetto",
+        "chi è righetto",
+        "righetto dal 2000",
+        "acquisizioni righetto"
+      ],
+      "numeri_trovati": [
+        "2000"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 84,
+      "parole_chiave": [
+        "bonus edilizi",
+        "ecobonus 2026",
+        "detrazioni ristrutturazione",
+        "incentivi edilizia"
+      ],
+      "numeri_trovati": [
+        "2026"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 89,
+      "parole_chiave": [
+        "piano casa decreto",
+        "dl 66 piano casa",
+        "decreto 66 abitare"
+      ],
+      "numeri_trovati": [
+        "2026"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 104,
+      "parole_chiave": [
+        "prospettive mercato residenziale",
+        "ricerche mercato casa italia",
+        "outlook immobiliare"
+      ],
+      "numeri_trovati": [
+        "2026"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 106,
+      "parole_chiave": [
+        "investimenti immobiliari summit",
+        "real estate summit 2026",
+        "trend investimento immobiliare"
+      ],
+      "numeri_trovati": [
+        "2026"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 109,
+      "parole_chiave": [
+        "blog righetto",
+        "articoli blog",
+        "leggere articolo",
+        "approfondimento blog"
+      ],
+      "numeri_trovati": [
+        "2026"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 111,
+      "parole_chiave": [
+        "tasso",
+        "fisso",
+        "variabile",
+        "spread"
+      ],
+      "numeri_trovati": [
+        "3,5%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 112,
+      "parole_chiave": [
+        "requisiti mutuo",
+        "ottenere mutuo",
+        "quanto posso chiedere",
+        "rata massima"
+      ],
+      "numeri_trovati": [
+        "35%",
+        "2 anni",
+        "20%",
+        "80%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 114,
+      "parole_chiave": [
+        "rata mutuo",
+        "calcolo rata",
+        "quanto costa rata",
+        "simulazione rata"
+      ],
+      "numeri_trovati": [
+        "35%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 115,
+      "parole_chiave": [
+        "quanto mutuo",
+        "importo mutuo",
+        "quanto posso mutuare",
+        "massimo finanziabile"
+      ],
+      "numeri_trovati": [
+        "80%",
+        "20%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 116,
+      "parole_chiave": [
+        "mutuo 100 percento",
+        "mutuo senza anticipo",
+        "mutuo cento per cento"
+      ],
+      "numeri_trovati": [
+        "100%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 120,
+      "parole_chiave": [
+        "partita iva mutuo",
+        "autonomo mutuo",
+        "libero professionista mutuo"
+      ],
+      "numeri_trovati": [
+        "2 anni"
+      ],
+      "ha_fonte_citata": true
+    },
+    {
+      "indice": 125,
+      "parole_chiave": [
+        "contratto affitto",
+        "tipo contratto",
+        "4+4",
+        "3+2"
+      ],
+      "numeri_trovati": [
+        "4 anni",
+        "18 mesi",
+        "36 mesi",
+        "21%",
+        "10%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 126,
+      "parole_chiave": [
+        "sfratto",
+        "morosità",
+        "inquilino moroso",
+        "non paga"
+      ],
+      "numeri_trovati": [
+        "90 giorni",
+        "12 mesi"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 128,
+      "parole_chiave": [
+        "imu",
+        "tasi",
+        "tassa casa",
+        "imposta casa"
+      ],
+      "numeri_trovati": [
+        "0,86%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 129,
+      "parole_chiave": [
+        "plusvalenza",
+        "tassa vendita",
+        "guadagno vendita"
+      ],
+      "numeri_trovati": [
+        "5 anni",
+        "26%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 130,
+      "parole_chiave": [
+        "spese detraibili",
+        "detrazioni",
+        "detrazione fiscale",
+        "730"
+      ],
+      "numeri_trovati": [
+        "19%",
+        "€4",
+        "50%",
+        "€9",
+        "65%",
+        "€5"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 132,
+      "parole_chiave": [
+        "classe energetica",
+        "energetica",
+        "attestato energetico",
+        "consumo"
+      ],
+      "numeri_trovati": [
+        "10 anni",
+        "€1",
+        "€3"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 134,
+      "parole_chiave": [
+        "ristrutturazione",
+        "ristrutturare",
+        "lavori",
+        "bonus ristrutturazione"
+      ],
+      "numeri_trovati": [
+        "2025",
+        "2026",
+        "50%",
+        "36%",
+        "€9"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 135,
+      "parole_chiave": [
+        "ecobonus",
+        "risparmio energetico",
+        "cappotto",
+        "caldaia"
+      ],
+      "numeri_trovati": [
+        "65%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 136,
+      "parole_chiave": [
+        "arredamento",
+        "elettrodomestici classe a",
+        "detrazione arredamento"
+      ],
+      "numeri_trovati": [
+        "2025",
+        "2026",
+        "50%",
+        "€5"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 139,
+      "parole_chiave": [
+        "investimento",
+        "investire",
+        "rendimento",
+        "rendita"
+      ],
+      "numeri_trovati": [
+        "5%",
+        "7%",
+        "8%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 140,
+      "parole_chiave": [
+        "affitto breve",
+        "airbnb",
+        "turistico",
+        "b&b"
+      ],
+      "numeri_trovati": [
+        "30 giorni",
+        "21%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 141,
+      "parole_chiave": [
+        "asta",
+        "aste",
+        "giudiziaria",
+        "tribunale"
+      ],
+      "numeri_trovati": [
+        "40%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 142,
+      "parole_chiave": [
+        "terreno",
+        "agricolo",
+        "edificabile",
+        "lotto"
+      ],
+      "numeri_trovati": [
+        "€2"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 143,
+      "parole_chiave": [
+        "virtual tour",
+        "360",
+        "tour virtuale",
+        "visita virtuale"
+      ],
+      "numeri_trovati": [
+        "40%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 144,
+      "parole_chiave": [
+        "conformità",
+        "abuso",
+        "abusivismo",
+        "sanatoria"
+      ],
+      "numeri_trovati": [
+        "€1",
+        "€3"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 145,
+      "parole_chiave": [
+        "successione",
+        "eredità",
+        "eredi",
+        "defunto"
+      ],
+      "numeri_trovati": [
+        "12 mesi",
+        "4%",
+        "€1",
+        "6%",
+        "8%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 146,
+      "parole_chiave": [
+        "donazione",
+        "donare",
+        "regalare casa"
+      ],
+      "numeri_trovati": [
+        "20 anni"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 147,
+      "parole_chiave": [
+        "perizia",
+        "perito",
+        "perizia bancaria"
+      ],
+      "numeri_trovati": [
+        "€2",
+        "€4"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 148,
+      "parole_chiave": [
+        "casa nuova",
+        "costruttore",
+        "cantiere",
+        "nuova costruzione"
+      ],
+      "numeri_trovati": [
+        "4%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 149,
+      "parole_chiave": [
+        "nuda proprietà",
+        "usufrutto",
+        "diritto abitazione"
+      ],
+      "numeri_trovati": [
+        "50%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 150,
+      "parole_chiave": [
+        "garage",
+        "box",
+        "posto auto",
+        "parcheggio"
+      ],
+      "numeri_trovati": [
+        "€2",
+        "€4",
+        "€3",
+        "€6",
+        "€1",
+        "€8"
+      ],
+      "ha_fonte_citata": true
+    },
+    {
+      "indice": 152,
+      "parole_chiave": [
+        "mercato",
+        "andamento",
+        "prezzi",
+        "trend"
+      ],
+      "numeri_trovati": [
+        "2025",
+        "2026",
+        "3%",
+        "3.200 €",
+        "3.500 €"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 155,
+      "parole_chiave": [
+        "vendere veloce",
+        "tempi vendita agenzia",
+        "vendita rapida padova",
+        "45 giorni vendita"
+      ],
+      "numeri_trovati": [
+        "60 giorni",
+        "98%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 156,
+      "parole_chiave": [
+        "foto professionali",
+        "drone",
+        "video 4k",
+        "virtual tour"
+      ],
+      "numeri_trovati": [
+        "40%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 165,
+      "parole_chiave": [
+        "home staging",
+        "staging",
+        "allestimento"
+      ],
+      "numeri_trovati": [
+        "20%",
+        "5%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 175,
+      "parole_chiave": [
+        "tipo contratto locazione",
+        "contratto 4+4",
+        "contratto 3+2",
+        "transitorio"
+      ],
+      "numeri_trovati": [
+        "18 mesi"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 182,
+      "parole_chiave": [
+        "tempo trovare inquilino",
+        "quanto tempo affittare"
+      ],
+      "numeri_trovati": [
+        "18 giorni"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 202,
+      "parole_chiave": [
+        "redditività portafoglio",
+        "rendimento immobili",
+        "analisi rendita"
+      ],
+      "numeri_trovati": [
+        "24 mesi"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 204,
+      "parole_chiave": [
+        "manutenzione predittiva",
+        "check stagionale",
+        "prevenzione guasti"
+      ],
+      "numeri_trovati": [
+        "30%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 210,
+      "parole_chiave": [
+        "tempo perizia",
+        "quanto tempo valutazione",
+        "tempi report"
+      ],
+      "numeri_trovati": [
+        "5 giorni",
+        "10 giorni"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 213,
+      "parole_chiave": [
+        "database comparabili",
+        "comparabili mercato",
+        "transazioni recenti"
+      ],
+      "numeri_trovati": [
+        "24 mesi"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 218,
+      "parole_chiave": [
+        "trend quartiere",
+        "microzona",
+        "proiezioni prezzi"
+      ],
+      "numeri_trovati": [
+        "24 mesi"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 219,
+      "parole_chiave": [
+        "mutuo 100",
+        "valutazione mutuo giovani",
+        "mutuo prima casa"
+      ],
+      "numeri_trovati": [
+        "100%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 226,
+      "parole_chiave": [
+        "fotovoltaico",
+        "bonus 110",
+        "gse",
+        "pannelli solari utenze"
+      ],
+      "numeri_trovati": [
+        "110%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 229,
+      "parole_chiave": [
+        "audit consumi",
+        "analisi bollette",
+        "risparmio bolletta"
+      ],
+      "numeri_trovati": [
+        "24 mesi"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 234,
+      "parole_chiave": [
+        "acquistare appartamento limena",
+        "guida acquisto limena",
+        "comprare casa limena 2026",
+        "come comprare limena"
+      ],
+      "numeri_trovati": [
+        "2026"
+      ],
+      "ha_fonte_citata": true
+    },
+    {
+      "indice": 237,
+      "parole_chiave": [
+        "bilocale o trilocale limena",
+        "bilocale trilocale limena",
+        "meglio bilocale trilocale",
+        "famiglia bilocale limena"
+      ],
+      "numeri_trovati": [
+        "4 anni",
+        "7 anni"
+      ],
+      "ha_fonte_citata": true
+    },
+    {
+      "indice": 238,
+      "parole_chiave": [
+        "gruppo immobiliare righetto",
+        "righetto limena sede",
+        "agenzia limena via roma",
+        "chi è righetto limena"
+      ],
+      "numeri_trovati": [
+        "2000"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 240,
+      "parole_chiave": [
+        "affitto limena 2026",
+        "affittare limena",
+        "canoni limena",
+        "quanto affitto limena"
+      ],
+      "numeri_trovati": [
+        "2026"
+      ],
+      "ha_fonte_citata": true
+    },
+    {
+      "indice": 241,
+      "parole_chiave": [
+        "contratto affitto limena",
+        "affitto limena contratto",
+        "deposito cauzionale limena",
+        "registrazione affitto limena"
+      ],
+      "numeri_trovati": [
+        "18 mesi",
+        "30 giorni"
+      ],
+      "ha_fonte_citata": true
+    },
+    {
+      "indice": 242,
+      "parole_chiave": [
+        "affitto transitorio padova",
+        "contratto transitorio",
+        "durata transitorio",
+        "motivazione transitorio"
+      ],
+      "numeri_trovati": [
+        "18 mesi",
+        "30 giorni",
+        "2%"
+      ],
+      "ha_fonte_citata": true
+    },
+    {
+      "indice": 244,
+      "parole_chiave": [
+        "mandato esclusivo",
+        "esclusiva vendita",
+        "mandato in esclusiva",
+        "perché esclusiva"
+      ],
+      "numeri_trovati": [
+        "6 mesi"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 245,
+      "parole_chiave": [
+        "durata mandato vendita",
+        "quanto dura mandato",
+        "revocare mandato",
+        "recesso mandato esclusivo"
+      ],
+      "numeri_trovati": [
+        "6 mesi"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 246,
+      "parole_chiave": [
+        "domanda supera offerta",
+        "domanda offerta 2026",
+        "squilibrio mercato padova",
+        "transazioni q1 2026"
+      ],
+      "numeri_trovati": [
+        "2026",
+        "4,4%",
+        "14,6%",
+        "2.200 €",
+        "175 €",
+        "4,3%"
+      ],
+      "ha_fonte_citata": true
+    },
+    {
+      "indice": 247,
+      "parole_chiave": [
+        "ricerche online tipologie",
+        "bilocale più cercato",
+        "trilocale vendita ricerche",
+        "tipologia più richiesta affitto"
+      ],
+      "numeri_trovati": [
+        "2026"
+      ],
+      "ha_fonte_citata": true
+    },
+    {
+      "indice": 249,
+      "parole_chiave": [
+        "canoni affitto gennaio 2026",
+        "affitti in aumento italia",
+        "mercato affitti 2026",
+        "idealista affitti gennaio"
+      ],
+      "numeri_trovati": [
+        "2026",
+        "1%"
+      ],
+      "ha_fonte_citata": true
+    },
+    {
+      "indice": 250,
+      "parole_chiave": [
+        "housing market padova",
+        "padova expensive",
+        "comprare o affittare padova",
+        "guida mercato padova english"
+      ],
+      "numeri_trovati": [
+        "2026",
+        "4,4%",
+        "2 anni"
+      ],
+      "ha_fonte_citata": true
+    },
+    {
+      "indice": 252,
+      "parole_chiave": [
+        "cedolare 21 studenti",
+        "4+4 o concordato studenti",
+        "canone concordato studenti",
+        "affitto studenti fiscalità"
+      ],
+      "numeri_trovati": [
+        "21%",
+        "10%"
+      ],
+      "ha_fonte_citata": false
+    },
+    {
+      "indice": 253,
+      "parole_chiave": [
+        "affitto studenti padova quando cercare",
+        "stanza universitaria settembre",
+        "quando cercare casa studenti",
+        "student rentals padova"
+      ],
+      "numeri_trovati": [
+        "36 mesi"
+      ],
+      "ha_fonte_citata": true
+    },
+    {
+      "indice": 254,
+      "parole_chiave": [
+        "contratto affitto 4+4 guida",
+        "rental contract padova",
+        "registrazione contratto affitto",
+        "deposito affitto tre mensilità"
+      ],
+      "numeri_trovati": [
+        "30 giorni"
+      ],
+      "ha_fonte_citata": true
+    }
+  ]
+}
