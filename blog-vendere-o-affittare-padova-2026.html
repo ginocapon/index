@@ -111,6 +111,7 @@ footer{background:linear-gradient(180deg,var(--nero),#0d1a2a);padding:2.5rem 1.5
 .vs-col h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin:0 0 .6rem;color:var(--blu)}
 @media(max-width:640px){.vs-grid{grid-template-columns:1fr}}
 
+<style id="rig-motion">@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}::view-transition-old(root){animation:rig-vt-out .4s cubic-bezier(.32,.72,0,1) both}::view-transition-new(root){animation:rig-vt-in .55s cubic-bezier(.32,.72,0,1) both}html{scroll-behavior:smooth}.sr,.sr-left,.sr-right,.rv{transition-duration:.95s;transition-timing-function:cubic-bezier(.32,.72,0,1)}}@keyframes rig-vt-out{to{opacity:0;transform:scale(.985)}}@keyframes rig-vt-in{from{opacity:0;transform:scale(1.015)}}</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Vai al contenuto</a>
