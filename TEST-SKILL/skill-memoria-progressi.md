@@ -168,6 +168,11 @@ Vedi **`TEST-SKILL/skill-competitor-roadmap-q3-2026.md`** + `data/competitor-roa
 
 ## Prossimi passi (per l'agente)
 
+0. **RINVIATI A SETTIMANA PROSSIMA (decisione utente 09/10/2026) — da riproporre lunedì/venerdì 16/10:**
+   - **Sicurezza admin (CRITICA):** `RIG_ADMIN_RLS_SECRET` e password admin nel sorgente pubblico di `admin.html`; API anon con header admin legge `clienti` (1.136), `richieste`, `newsletter_subscribers`; `immobili` espone `proprietario_*` e `note_interne`. Piano: Supabase Auth per admin + RLS per ruolo + vista pubblica annunci + rotazione segreti.
+   - **Attivazione collega virtuale:** su progetto Supabase di PROVA eseguire `sql/linda-kb-v1.sql` → creare utente in Authentication → `insert into kb_admins` → importare `data/linda-kb-seed-faq.csv` (da verificare; 59 FAQ con numeri senza fonte) → calibrare soglia 0.45 con «Prova Linda» → poi produzione. Codice sul ramo `linda/kb-v1` (commit 3b40167), NON pubblicato.
+   - **Informativa privacy:** testo da approvare per il registro anonimo delle domande (90 giorni, email/telefoni rimossi).
+   - **Restyling:** pubblicato solo lo step 1; restano landing-valutazione con palette viola fuori brand e claim «15.000+ comparabili» non consentito; widget Linda che copre la foto home desktop.
 1. **GSC follow-up (~05/10):** verificare in Ispezione URL le **10 URL** inviate 28/09 (su Google sì/no) — aggiornare `gsc-indexing-weekly.json`
 2. **Batch schema servizi:** allineare `@graph` su vendita, valutazioni, utenze, preliminari, virtual-tour, drone, loft — `grep aggregateRating servizio-*.html`
 3. **Venerdì 03/10:** `next_friday_batch` in JSON (servizi tier B + agenzia/zona universitaria se quota GSC)
