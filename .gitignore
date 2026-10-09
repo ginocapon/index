@@ -21,3 +21,6 @@ data/venerdi-report-latest.pdf
 scripts/_tmp_perizia/
 # Evita commit accidentale di una copia annidata del repo
 /progetti/
+
+test-results/
+playwright-report/
