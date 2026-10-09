@@ -316,7 +316,7 @@
 </footer>
 <script src="js/vendor/supabase.min.js" defer></script>
 <script src="js/config.js?v=4"></script>
-<script src="js/rig-lead-form.js?v=3"></script>
+<script src="js/rig-lead-form.js?v=4"></script>
 <script src="js/nav-mobile.js?v=3" defer></script>
 <script src="js/config.js?v=4"></script>
 <script>
@@ -410,7 +410,7 @@ async function sendForm(){
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc'
     );
     if (sb) {
-      await sb.from('richieste').insert([{
+      const _ins = await sb.from('richieste').insert([{
         nome: nomeCompleto,
         email: email,
         telefono: tel,
@@ -419,7 +419,8 @@ async function sendForm(){
         newsletter: news,
         letto: false
       }]);
-      supaOk = true;
+      supaOk = !_ins.error;
+      if (_ins.error) console.warn('richieste insert fallita:', _ins.error.message);
 
       // Se ha accettato la newsletter, salva anche in newsletter_subscribers
       if (news && email) {

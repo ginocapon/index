@@ -231,7 +231,7 @@ async function sendConsulenzaForm(e) {
   try {
     var sb = window.supabase && supabase.createClient(SB_URL, SB_ANON);
     if (sb) {
-      await sb.from('richieste').insert([{
+      const _ins = await sb.from('richieste').insert([{
         nome: nomeCompleto,
         email: email,
         telefono: tel,
@@ -240,7 +240,8 @@ async function sendConsulenzaForm(e) {
         newsletter: !!marketing,
         letto: false
       }]);
-      supaOk = true;
+      supaOk = !_ins.error;
+      if (_ins.error) console.warn('richieste insert fallita:', _ins.error.message);
     }
   } catch (err) { supaOk = false; }
 
