@@ -96,6 +96,8 @@
     .inc-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;margin-bottom:.4rem}
     .inc-desc{font-size:.8rem;color:var(--grigio);line-height:1.7}
     /* CONFRONTO */
+    .val-split{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+    @media(max-width:900px){.val-split{grid-template-columns:minmax(0,1fr);gap:2rem}}
     .comparison{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2rem}
     @media(max-width:700px){.comparison{grid-template-columns:1fr}}
     .comp-col{border-radius:3px;overflow:hidden;border:1px solid var(--gc)}
@@ -302,7 +304,7 @@
     <div class="sec-tag">Come funziona</div>
     <h2 class="sec-t">Il nostro processo di <strong>valutazione in 6 fasi</strong></h2>
     <p class="sec-sub">Un metodo rigoroso perfezionato in oltre 25 anni di attivita sul mercato padovano.</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start">
+    <div class="val-split">
       <div class="steps-vendita">
         <div class="step-v">
           <div class="step-v-left"><div class="step-n-circle">1</div></div>

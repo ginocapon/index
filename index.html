@@ -602,8 +602,12 @@ button{font-family:inherit;cursor:pointer}
   }
   .hero-h1{font-size:clamp(2rem,8vw,2.75rem);line-height:1.2}
   .hero-subtitle{font-size:clamp(1.2rem,4.5vw,1.55rem)}
-  .hero-eyebrow{font-size:0.58rem;letter-spacing:3px}
-  .hero-eyebrow::before,.hero-eyebrow::after{width:20px}
+  .hero-eyebrow{display:block;font-size:0.62rem;letter-spacing:2px;line-height:1.6;margin-bottom:12px}
+  .hero-eyebrow::before,.hero-eyebrow::after{display:none}
+  /* CTA subito dopo il sottotitolo (prima schermata); il testo di dettaglio segue sotto */
+  .hero-content{display:flex;flex-direction:column}
+  .hero-btns{order:1;margin-top:6px;margin-bottom:18px;width:100%}
+  .hero-p,.hero-promo{order:2}
   
   .btn-p,.btn-g,.btn-calc,.btn-send,.btn-srch,.btn-src{
     padding:15px 22px;font-size:0.78rem;width:100%;justify-content:center;
