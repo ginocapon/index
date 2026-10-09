@@ -1965,7 +1965,7 @@ class RighettoChat {
     }
 
     // Default
-    return '💬 Capito — forse non ho colto il punto esatto.\n\nProva così, in una riga:\n• *"Stima appartamento 80 mq a Padova"*\n• *"Cerca bilocale in affitto Arcella"*\n• *"Errori da evitare in visita"*\n• *"Documenti per il rogito"*\n• *"Voglio essere contattato"*\n\nOppure scrivi **orari** · **mutuo** · **commissione** — sono qui per te.';
+    return '💬 Per non darle un\'informazione inesatta, preferisco far verificare questo punto da un nostro consulente.\n\n📞 Chiami il **049.8843484** oppure scriva *"Voglio essere contattato"*: la richiamiamo noi.\n\nSe preferisce riprovare, in una riga:\n• *"Stima appartamento 80 mq a Padova"*\n• *"Cerca bilocale in affitto Arcella"*\n• *"Errori da evitare in visita"*\n• *"Documenti per il rogito"*\n• *"Voglio essere contattato"*\n\nOppure scrivi **orari** · **mutuo** · **commissione** — sono qui per te.';
   }
 
   // ────── PARSING INLINE ──────
@@ -2606,7 +2606,7 @@ function initChatbotUI() {
 (function loadLindaLearningBridge() {
   if (window.LINDA_LEARNING_BRIDGE === false) return;
   var s = document.createElement('script');
-  s.src = 'js/linda-learning-bridge.js?v=1';
+  s.src = 'js/linda-learning-bridge.js?v=2';
   s.async = true;
   document.head.appendChild(s);
 })();
@@ -2615,7 +2615,7 @@ function initChatbotUI() {
 (function loadLindaKb() {
   if (window.LINDA_KB === false) return;
   var s = document.createElement('script');
-  s.src = 'js/linda-kb.js?v=1';
+  s.src = 'js/linda-kb.js?v=2';
   s.async = true;
   document.head.appendChild(s);
 })();

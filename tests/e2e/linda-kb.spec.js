@@ -90,7 +90,8 @@ test.describe('Linda KB — risposte da conoscenza approvata', () => {
     await avvia(page, { rpcSearch: [{ ...VOCE, score: 0.2 }] });
     await chiedi(page, 'xqzv blorf grumpf');
     await expect(ultima(page)).not.toContainText('Servono atto di provenienza');
-    await expect(ultima(page)).toContainText('non ho colto');               // risposta onesta di default
+    await expect(ultima(page)).toContainText('far verificare questo punto da un nostro consulente'); // frase decisa dal titolare
+    await expect(ultima(page)).toContainText('049.8843484');
   });
 
   test('Privacy: email e telefono vengono rimossi PRIMA del log', async ({ page }) => {

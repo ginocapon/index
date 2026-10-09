@@ -81,6 +81,25 @@ test.describe('admin-kb', () => {
     expect(calls.insert[0][0].varianti).toEqual(['contratto 4+4', 'durata affitto']);
   });
 
+  test('import del file reale data/linda-kb-seed-300.csv: 300 voci valide, tutte "da_verificare"', async ({ page }) => {
+    const calls = await avvia(page);
+    await accedi(page);
+    await expect(page.locator('#app')).toBeVisible();
+    await page.click('.tabs button[data-t=csv]');
+    await page.setInputFiles('#csvFile', require('path').resolve(__dirname, '..', '..', 'data', 'linda-kb-seed-300.csv'));
+    await expect(page.locator('#csvMsg')).toContainText('300 da importare · 0 duplicate saltate · 0 non valide');
+    await page.click('#csvGo');
+    await expect.poll(() => calls.insert.length).toBe(1);
+    expect(calls.insert[0]).toHaveLength(300);
+    expect(calls.insert[0].every((r) => r.stato === 'da_verificare' && r.origine === 'csv')).toBe(true);
+    // nessuna istruzione interna deve finire nel testo pubblico
+    expect(calls.insert[0].some((r) => /Controllare mensilmente|far revisionare le risposte/.test(r.risposta))).toBe(false);
+    // ogni voce con numeri/percentuali ha una fonte
+    const conNumeri = calls.insert[0].filter((r) => /\d+\s*(%|giorni|mesi|anni)/.test(r.risposta + r.domanda));
+    expect(conNumeri.length).toBeGreaterThan(0);
+    expect(conNumeri.every((r) => r.fonti.length > 0)).toBe(true);
+  });
+
   test('regola: risposta con percentuale di mediazione viene bloccata', async ({ page }) => {
     const calls = await avvia(page);
     await accedi(page);

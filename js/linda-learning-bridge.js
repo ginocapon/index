@@ -97,7 +97,7 @@
     engine.process = async function (userMsg) {
       var resp = await origProcess(userMsg);
       var low = (userMsg || '').toLowerCase();
-      var isDefault = resp.indexOf('Capito — forse non ho colto') >= 0;
+      var isDefault = resp.indexOf('Capito — forse non ho colto') >= 0 || resp.indexOf('far verificare questo punto da un nostro consulente') >= 0;
       if (isDefault) {
         enqueue('question_unanswered', { user_message_hash: hashMsg(userMsg) });
       }
