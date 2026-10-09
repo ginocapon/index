@@ -38,10 +38,25 @@
 
   window.rigGaConsentUpdate = applyFromPrefs;
 
-  var s = document.createElement('script');
-  s.async = true;
-  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-  document.head.appendChild(s);
+  /* gtag.js (~175 KB) dopo il load: i comandi restano in coda in dataLayer, LCP e TBT non lo aspettano */
+  var gaLoaded = false;
+  function loadGtag() {
+    if (gaLoaded) return;
+    gaLoaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+  }
+  function scheduleGtag() {
+    if (window.requestIdleCallback) window.requestIdleCallback(loadGtag, { timeout: 3000 });
+    else setTimeout(loadGtag, 1500);
+  }
+  if (document.readyState === 'complete') scheduleGtag();
+  else window.addEventListener('load', scheduleGtag);
+  ['pointerdown', 'keydown', 'scroll'].forEach(function (ev) {
+    window.addEventListener(ev, loadGtag, { once: true, passive: true });
+  });
   gtag('js', new Date());
   gtag('config', GA_ID, { anonymize_ip: true });
 
@@ -55,7 +70,7 @@
     css.href = 'css/site-ai-disclosure.css?v=8';
     document.head.appendChild(css);
     var s = document.createElement('script');
-    s.src = 'js/site-ai-disclosure.js?v=8';
+    s.src = 'js/site-ai-disclosure.js?v=9';
     s.defer = true;
     document.head.appendChild(s);
   })();

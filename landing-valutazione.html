@@ -2,16 +2,16 @@
 <html lang="it">
 <head>
 <!-- Google tag (gtag.js) + Consent Mode -->
-<script src="js/ga-consent.js?v=12"></script><meta charset="UTF-8">
+<script src="js/ga-consent.js?v=23"></script><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#6C63FF">
 <title>Valutazione Casa Padova Gratuita | Righetto</title>
-<meta name="description" content="Scopri gratis il valore reale della tua casa a Padova e provincia. Valutazione professionale in 24h, 15.000+ comparabili, 25 anni di esperienza. Zero impegno.">
+<meta name="description" content="Scopri gratis il valore reale della tua casa a Padova e provincia. Valutazione professionale in 24h con dati OMI e comparabili di zona, dal 2000 sul territorio. Zero impegno.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://righettoimmobiliare.it/landing-valutazione">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Quanto Vale la Tua Casa? — Valutazione Gratuita in 24h">
-<meta property="og:description" content="Scopri il valore reale del tuo immobile in provincia di Padova. Perizia professionale con 15.000+ comparabili.">
+<meta property="og:description" content="Scopri il valore reale del tuo immobile in provincia di Padova. Valutazione professionale con dati OMI e comparabili di zona.">
 <meta property="og:url" content="https://righettoimmobiliare.it/landing-valutazione">
 <meta property="og:site_name" content="Righetto Immobiliare">
 <meta property="og:locale" content="it_IT">
@@ -250,7 +250,7 @@ img{max-width:100%;height:auto;display:block}
     {
       "@type": "Service",
       "name": "Valutazione Immobiliare Gratuita a Padova",
-      "description": "Valutazione professionale gratuita del tuo immobile a Padova e provincia. Sopralluogo, analisi con 15.000+ dati, report dettagliato in 24 ore.",
+      "description": "Valutazione professionale gratuita del tuo immobile a Padova e provincia. Sopralluogo, analisi con dati OMI e comparabili di zona, report dettagliato in 24 ore.",
       "provider": {"@id": "https://righettoimmobiliare.it/#organization"},
       "serviceType": "Valutazione immobiliare",
       "areaServed": "Padova e Provincia",
@@ -301,7 +301,7 @@ img{max-width:100%;height:auto;display:block}
       <ul class="hero-checks">
         <li><span class="chk chk-1">✓</span> Gratuita e senza impegno</li>
         <li><span class="chk chk-2">✓</span> Report dettagliato in 24 ore</li>
-        <li><span class="chk chk-3">✓</span> 15.000+ comparabili nel database</li>
+        <li><span class="chk chk-3">✓</span> Comparabili di zona e quotazioni OMI</li>
         <li><span class="chk chk-4">✓</span> Sopralluogo con agente esperto</li>
       </ul>
       <a href="#form" class="hero-cta">📊 Scopri il valore della tua casa</a>
@@ -312,13 +312,13 @@ img{max-width:100%;height:auto;display:block}
 <!-- MARQUEE -->
 <div class="marquee">
   <div class="marquee-track">
-    <span class="marquee-item"><strong>15.000+</strong> comparabili</span>
+    <span class="marquee-item"><strong>OMI</strong> + comparabili di zona</span>
     <span class="marquee-item"><strong>24h</strong> per il report</span>
     <span class="marquee-item"><strong>100%</strong> gratuita</span>
     <span class="marquee-item"><strong>25 anni</strong> nell'area padovana</span>
     <span class="marquee-item"><strong>101</strong> comuni coperti</span>
     <span class="marquee-item"><strong>4.9/5</strong> su Google</span>
-    <span class="marquee-item"><strong>15.000+</strong> comparabili</span>
+    <span class="marquee-item"><strong>OMI</strong> + comparabili di zona</span>
     <span class="marquee-item"><strong>24h</strong> per il report</span>
     <span class="marquee-item"><strong>100%</strong> senza impegno</span>
     <span class="marquee-item"><strong>25 anni</strong> nel Padovano</span>
@@ -486,7 +486,7 @@ img{max-width:100%;height:auto;display:block}
     <div class="g-grid">
       <div class="g-card">
         <div class="g-icon">🎯</div>
-        <div><h4>Dati reali, non algoritmi</h4><p>15.000+ transazioni reali in provincia. Non stime approssimative.</p></div>
+        <div><h4>Dati reali, non algoritmi</h4><p>Quotazioni OMI dell'Agenzia delle Entrate e compravendite comparabili della zona, verificate in sopralluogo.</p></div>
       </div>
       <div class="g-card">
         <div class="g-icon">👁</div>
@@ -535,15 +535,32 @@ img{max-width:100%;height:auto;display:block}
 
 <script src="js/vendor/supabase.min.js" defer></script>
 <script src="js/config.js?v=4"></script>
-<script src="js/vendor/jspdf.umd.min.js" defer></script>
-<script src="js/vendor/qrcode.min.js"></script>
-<script src="js/valutazione-pdf.js?v=3"></script>
+<script src="js/valutazione-pdf.js?v=3" defer></script>
 <script>
+var _pdfDeps = null;
+function caricaLibPDF() {
+  if (_pdfDeps) return _pdfDeps;
+  function load(src) {
+    return new Promise(function(ok, ko) {
+      var s = document.createElement('script');
+      s.src = src; s.onload = ok; s.onerror = ko;
+      document.head.appendChild(s);
+    });
+  }
+  _pdfDeps = Promise.all([load('js/vendor/jspdf.umd.min.js'), load('js/vendor/qrcode.min.js')])
+    .catch(function(err) { _pdfDeps = null; throw err; });
+  return _pdfDeps;
+}
 function scaricaPDF() {
   var dati = window._valDati;
   if (!dati) return;
   var notice = document.getElementById('valPdfNotice');
   var btn = document.getElementById('valPdfBtn');
+  notice.innerHTML = '<div class="pdf-spinner"></div><span>Stiamo preparando la tua scheda PDF...</span>';
+  notice.style.display = 'flex';
+  caricaLibPDF().then(function() { generaPDFPronto(dati, notice, btn); }, function() { generaPDFPronto(dati, notice, btn); });
+}
+function generaPDFPronto(dati, notice, btn) {
   if (typeof generaValutazionePDF === 'function' && window.jspdf) {
     notice.innerHTML = '<div class="pdf-spinner"></div><span>Stiamo preparando la tua scheda PDF...</span>';
     notice.style.display = 'flex';
@@ -568,6 +585,7 @@ function goStep(n){
   document.getElementById('panel'+n).classList.add('active');
   for(let i=1;i<=3;i++){const s=document.getElementById('st'+i);s.classList.remove('active','done');if(i<n)s.classList.add('done');else if(i===n)s.classList.add('active');}
   currentStep=n;
+  if(n===3)caricaLibPDF().catch(function(){});
 }
 async function sendLead(e){
   e.preventDefault();
@@ -641,7 +659,7 @@ function mostraRisultatoValutazione(dati) {
 }
 </script>
 <script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */
-(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=12';document.body.appendChild(s);}
+(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=13';document.body.appendChild(s);}
 setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
 })();</script>
 <script src="js/lead-conversion.js?v=4" defer></script>
