@@ -45,12 +45,16 @@
     return (vp && vp.offsetWidth) || state.root.offsetWidth || 0;
   }
 
-  function buildHtml(urls, alt) {
+  /* Slide oltre la prima: data-src, scaricate solo quando l'utente sfoglia (le griglie annunci pesavano 5+ MB). */
+  function buildHtml(urls, alt, opts) {
     var list = (urls || []).filter(Boolean);
     if (!list.length) return '';
+    var eager = !!(opts && opts.eager);
     var slides = list.map(function (url, i) {
+      var srcAttr = i === 0 ? 'src="' + esc(url) + '"' : 'data-src="' + esc(url) + '"';
+      var load = i === 0 && eager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
       return '<div class="rig-carousel-slide" role="group" aria-roledescription="slide" aria-label="' + (i + 1) + ' di ' + list.length + '">'
-        + '<img src="' + esc(url) + '" alt="' + esc(alt) + ' — foto ' + (i + 1) + '" width="900" height="600" loading="' + (i === 0 ? 'eager' : 'lazy') + '" decoding="async">'
+        + '<img ' + srcAttr + ' alt="' + esc(alt) + ' — foto ' + (i + 1) + '" width="900" height="600" ' + load + ' decoding="async">'
         + '</div>';
     }).join('');
     var nav = '';
@@ -79,9 +83,19 @@
     if (typeof state.onChange === 'function') state.onChange(state.index);
   }
 
+  function ensureLoaded(state, idx) {
+    var slide = state.track.children[(idx + state.total) % state.total];
+    var img = slide && slide.querySelector('img[data-src]');
+    if (!img) return;
+    img.setAttribute('src', img.getAttribute('data-src'));
+    img.removeAttribute('data-src');
+  }
+
   function go(state, delta) {
     if (state.total < 2) return;
     state.index = (state.index + delta + state.total) % state.total;
+    ensureLoaded(state, state.index);
+    ensureLoaded(state, state.index + 1);
     updateUI(state);
   }
 
@@ -108,7 +122,7 @@
     opts = opts || {};
     var urls = (opts.urls || []).filter(Boolean);
     if (!urls.length) return null;
-    container.innerHTML = buildHtml(urls, opts.alt || 'Immobile');
+    container.innerHTML = buildHtml(urls, opts.alt || 'Immobile', { eager: opts.eager !== false });
     return init(container.querySelector('[data-rig-carousel]'), opts);
   }
 
@@ -132,9 +146,15 @@
       pointerId: null
     };
     setState(el, state);
+    ensureLoaded(state, state.index);
     updateUI(state);
 
     if (total < 2) return state;
+
+    function prefetchNext() { ensureLoaded(state, state.index + 1); }
+    el.addEventListener('pointerenter', prefetchNext, { once: true });
+    el.addEventListener('pointerdown', prefetchNext, { once: true });
+    el.addEventListener('focusin', prefetchNext, { once: true });
 
     bindNav(el.querySelector('.rig-carousel-prev'), state, -1);
     bindNav(el.querySelector('.rig-carousel-next'), state, 1);

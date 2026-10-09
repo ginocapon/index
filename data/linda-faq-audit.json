@@ -1,7 +1,7 @@
 {
   "totale_voci": 256,
   "con_dati_numerici": 72,
-  "senza_fonte": 59,
+  "senza_fonte": 58,
   "voci": [
     {
       "indice": 3,
@@ -725,9 +725,9 @@
         "transazioni recenti"
       ],
       "numeri_trovati": [
-        "24 mesi"
+        "2000"
       ],
-      "ha_fonte_citata": false
+      "ha_fonte_citata": true
     },
     {
       "indice": 218,

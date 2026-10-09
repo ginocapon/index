@@ -1317,7 +1317,7 @@ const FAQ_DATA = [
   },
   {
     k: ['database comparabili', 'comparabili mercato', 'transazioni recenti'],
-    r: '📊 **Database di 15.000+ transazioni** nella provincia di Padova degli ultimi 24 mesi. Dati reali, non stime algoritmiche. È ciò che rende le nostre valutazioni accurate e affidabili.'
+    r: '📊 Per i comparabili incrociamo le **quotazioni OMI dell\'Agenzia delle Entrate**, le compravendite simili della zona e lo storico delle trattative seguite dall\'agenzia dal 2000. Il sopralluogo conferma o corregge il dato.'
   },
   {
     k: ['valutazione rurale', 'immobile rurale', 'terreno agricolo valutazione'],

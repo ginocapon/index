@@ -23,6 +23,10 @@
     photoCaptionListingCompact:
       'Foto reale; possibili correzioni grafiche (esposizione, luminosità, anche IA). ' +
       '<a href="' + PRIVACY_HREF + '">Info</a>',
+    photoCaptionListingAi:
+      '<strong>Immagine illustrativa generata con IA</strong>: non è una fotografia dell\'immobile. ' +
+      'Per lo stato reale chieda le foto o una visita. ' +
+      '<a href="' + PRIVACY_HREF + '">Informativa</a>',
     photoCaptionBlog:
       'Immagine editoriale <strong>elaborata digitalmente</strong> (anche con intelligenza artificiale): illustrazione a scopo informativo, ' +
       'non documento fotografico dell\'immobile o della scena descritta nel testo. Le immagini generate con IA sono contrassegnate con il marchio <strong>FOTO AI</strong> in basso a sinistra. ' +
@@ -57,6 +61,9 @@
     explicitPaths: [],
     files: []
   };
+
+  /* Nomi file degli export dei generatori IA: valgono anche dentro i percorsi esclusi (es. img/immobili/). */
+  var AI_FILENAME_RE = /(chatgpt-image|dall-?e|midjourney|gemini-generated|ai-generated)/i;
 
   var WATERMARK_LABEL = 'FOTO AI';
 
@@ -101,8 +108,9 @@
     if (img.dataset.aiGenerated === 'true' || img.getAttribute('data-ai-generated') === 'true') {
       return true;
     }
-    var src = normalizeSrc(img.getAttribute('src') || img.currentSrc || '');
+    var src = normalizeSrc(img.getAttribute('src') || img.getAttribute('data-src') || img.currentSrc || '');
     if (!src) return false;
+    if (AI_FILENAME_RE.test(src.split('/').pop())) return true;
     for (var i = 0; i < AI_MANIFEST.excludePaths.length; i++) {
       if (src.indexOf(AI_MANIFEST.excludePaths[i].toLowerCase()) !== -1) return false;
     }
@@ -123,6 +131,7 @@
 
   function watermarkHostFor(img) {
     return (
+      img.closest('.rig-carousel-slide') ||
       img.closest('.art-hero__frame, .blog-fig__frame, .rig-ai-photo-wrap, .card-img, figure.blog-fig, .art-hero') ||
       img.parentElement
     );
@@ -163,7 +172,7 @@
       var img = images[i];
       if (img.dataset.rigAiWatermark === 'done') continue;
       if (img.closest(SKIP_ANCESTORS)) continue;
-      var src = (img.getAttribute('src') || '').toLowerCase();
+      var src = (img.getAttribute('src') || img.getAttribute('data-src') || '').toLowerCase();
       if (!src || src.indexOf('data:') === 0) continue;
       var rect = img.getBoundingClientRect();
       if (rect.width > 0 && rect.height > 0 && rect.width < 40 && rect.height < 40) continue;
@@ -247,7 +256,10 @@
   function captionHtmlFor(img, compact) {
     var kind = classifyImage(img);
     if (kind === 'blog') return TEXT.photoCaptionBlog;
-    if (kind === 'listing') return compact ? TEXT.photoCaptionListingCompact : TEXT.photoCaptionListing;
+    if (kind === 'listing') {
+      if (img.tagName === 'IMG' && isAiGeneratedImage(img)) return TEXT.photoCaptionListingAi;
+      return compact ? TEXT.photoCaptionListingCompact : TEXT.photoCaptionListing;
+    }
     return TEXT.photoCaptionGeneral;
   }
 
@@ -296,7 +308,8 @@
       return;
     }
     carousel.dataset.rigCarouselCaption = 'done';
-    var sampleImg = carousel.querySelector('img');
+    var imgs = Array.prototype.slice.call(carousel.querySelectorAll('img'));
+    var sampleImg = imgs.filter(isAiGeneratedImage)[0] || imgs[0];
     carousel.appendChild(makeCaption(sampleImg || carousel, false, false));
     carousel.querySelectorAll('img').forEach(function (img) {
       markDone(img);

@@ -872,7 +872,7 @@ function generateSlug(titolo) {
     'nuove costruzioni veneto 2026: +14,6% ade e cintura padovana': { img: 'img/blog/blog-nuove-costruzioni-mercato-veneto-2026-padova.webp', url: 'blog-nuove-costruzioni-mercato-veneto-2026-padova' },
     'piano casa decreto 66/2026: 100mila alloggi e impatto padova': { img: 'img/blog/blog-piano-casa-decreto-66-2026-padova.webp', url: 'blog-piano-casa-decreto-66-2026-padova' },
     'bce giugno 2026: +25 bp, euribor e mutui a padova': { img: 'img/blog/blog-bce-tassi-mutui-giugno-2026-padova.webp', url: 'blog-bce-tassi-mutui-giugno-2026-padova' },
-    'righetto immobiliare dal 2000: storia, zone e ultime acquisizioni': { img: 'img/team/righetto-noi-ci-siamo-video-poster.png', url: 'blog-righetto-storia-territorio-acquisizioni-2026' },
+    'righetto immobiliare dal 2000: storia, zone e ultime acquisizioni': { img: 'img/team/righetto-noi-ci-siamo-video-poster.webp', url: 'blog-righetto-storia-territorio-acquisizioni-2026' },
     'gestione spese casa dopo l\'acquisto a padova 2026: energia, imu, dispensa': { img: 'img/blog/blog-gestione-spese-casa-padova-2026.webp', url: 'blog-gestione-spese-casa-risparmio-padova-2026' },
     'come scegliere l\'immobile giusto a padova 2026: zona, luce, condominio': { img: 'img/blog/blog-scegliere-immobile-giusto-padova-2026.webp', url: 'blog-scegliere-immobile-giusto-padova-2026' },
     'quattro imposte al rogito prima casa padova 2026: iva, registro, ipotecaria, catastale': { img: 'img/blog/blog-quattro-imposte-rogitio-prima-casa-padova-2026.webp', url: 'blog-quattro-imposte-rogitio-prima-casa-padova-2026' },
@@ -1525,7 +1525,7 @@ function generateSlug(titolo) {
       "immagine_copertina": "img/blog/blog-bce-tassi-mutui-giugno-2026-padova.webp",
       "url_statico": "blog-bce-tassi-mutui-giugno-2026-padova"
     },
-    { titolo: "Righetto Immobiliare dal 2000: storia, zone e ultime acquisizioni", categoria: "Vita d'Agenzia", data: '2026-06-04', stato: 'pubblicato', immagine_copertina: 'img/team/righetto-noi-ci-siamo-video-poster.png', url_statico: 'blog-righetto-storia-territorio-acquisizioni-2026' },
+    { titolo: "Righetto Immobiliare dal 2000: storia, zone e ultime acquisizioni", categoria: "Vita d'Agenzia", data: '2026-06-04', stato: 'pubblicato', immagine_copertina: 'img/team/righetto-noi-ci-siamo-video-poster.webp', url_statico: 'blog-righetto-storia-territorio-acquisizioni-2026' },
     { titolo: "Gestione spese casa dopo l'acquisto a Padova 2026: energia, IMU, dispensa", categoria: "Guida acquirenti", data: '2026-06-03', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-gestione-spese-casa-padova-2026.webp', url_statico: 'blog-gestione-spese-casa-risparmio-padova-2026' },
     { titolo: "Come scegliere l'immobile giusto a Padova 2026: zona, luce, condominio", categoria: "Guida acquirenti", data: '2026-06-03', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-scegliere-immobile-giusto-padova-2026.webp', url_statico: 'blog-scegliere-immobile-giusto-padova-2026' },
     { titolo: "Quattro imposte al rogito prima casa Padova 2026: IVA, registro, ipotecaria, catastale", categoria: "Fisco", data: '2026-06-03', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-quattro-imposte-rogitio-prima-casa-padova-2026.webp', url_statico: 'blog-quattro-imposte-rogitio-prima-casa-padova-2026' },
@@ -1667,7 +1667,9 @@ function generateSlug(titolo) {
     const slug = generateSlug(a.titolo);
     const href = a.url_statico || ('blog-articolo?s=' + encodeURIComponent(slug));
     return '<div class="blog-card rv d'+(i+1)+'" data-card-href="'+escAttr(href)+'" role="link" tabindex="0">'
-      + '<div class="blog-cover"'+(img?' style="background:url('+img+') center/cover;font-size:0"':'')+'>'+(img?'':a.emoji||'📝')+'</div>'
+      + '<div class="blog-cover"'+(img?' style="font-size:0;overflow:hidden"':'')+'>'
+      + (img ? '<img src="'+escAttr(img)+'" alt="" width="400" height="165" loading="lazy" decoding="async" data-rig-photo-caption="skip" style="width:100%;height:100%;object-fit:cover;display:block">' : (a.emoji||'📝'))
+      + '</div>'
       + '<div class="blog-body"><div class="blog-cat">'+((a.categoria||'Blog').replace(/</g,'&lt;'))+'</div>'
       + '<h3 class="blog-title">'+((a.titolo||'').replace(/</g,'&lt;'))+'</h3>'
       + '<div class="blog-date">'+fmtMese(a.data)+'</div></div></div>';
