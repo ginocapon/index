@@ -1910,28 +1910,35 @@ class RighettoChat {
       return await this.completaStima();
     }
 
+    // Domanda INFORMATIVA («Come posso vendere casa?», «Posso vendere una casa ereditata?»):
+    // non deve far partire i flussi di ricerca/stima solo perché contiene «casa», «immobile» o «prezzo».
+    // Parte il flusso solo con un'intenzione esplicita (cerco, mostrami, stima, quanto vale la mia...).
+    const intentoEsplicito = /\b(cerco|cerca|cercare|cercando|trovare|trovami|mostra|mostrami|fammi vedere|vorrei vedere|avete|vedete|disponibil)\b|\b(stima|stimare|stimami|valutazione gratuita|quanto vale|quanto potrebbe valere)\b/.test(low);
+    const domandaInfo = (/\?\s*$/.test(msg) || /^(come|cosa|che cos|cos['’]è|qual|quali|quanto tempo|quanti|posso|devo|si può|è |chi |quando|dove|perch|conviene|serve|differenza)/.test(low)) && !intentoEsplicito;
+
     // Stima guidata
-    if (/stim|valut|vale|valore|prezzo|quanto.*cost|calcol/.test(low)) {
+    if (!domandaInfo && /stim|valut|vale|valore|prezzo|quanto.*cost|calcol/.test(low)) {
       this.state = 'stima_comune';
       this.stimaData = {};
       return '🏠 **Stima Valore Immobile** — Provincia di Padova\n\nIn quale **comune** si trova l\'immobile?\n*(Es: Padova, Abano Terme, Cittadella, Monselice...)*';
     }
 
     // Contatto
-    if (/contatt|chiamat|appuntam|richiama|visita|veder|incontr|form/.test(low)) {
+    if ((!domandaInfo || /contattat|richiam|appuntament|essere chiamat|farmi chiamare/.test(low)) && /contatt|chiamat|appuntam|richiama|visita|veder|incontr|form/.test(low)) {
       this.state = 'contatto_nome';
       this.contattoPending = { provenienza: 'chatbot' };
       return '👋 Ottimo! Ti ricontatteremo al più presto.\n\n**Come ti chiami?** (Nome e Cognome)';
     }
 
     // Ricerca immobili — avvia flusso conversazionale
-    if (/cerca|trov|immobi|annunci|vedete|avete|list|casa|appartam|villa|bilocale|monolocale|trilocale|attico/.test(low)) {
+    if (!domandaInfo && /cerca|trov|immobi|annunci|vedete|avete|list|casa|appartam|villa|bilocale|monolocale|trilocale|attico/.test(low)) {
       // Se l'utente dice già vendita o affitto, saltiamo la prima domanda
       if (/affitt|locaz/.test(low)) {
         this.ricercaData = { tipo_op: 'affitto' };
         // Se dice anche la zona, cerca subito
         const zonaMatch = low.match(/(?:a|in|zona|comune)\s+([a-zàèéìòù\s]+?)(?:\s*$|\s+(?:in|da|per))/i);
-        if (zonaMatch) {
+        // «in affitto» non è una zona (prima cercava un comune chiamato "affitto")
+        if (zonaMatch && !/^(affitto|locazione|vendita|acquisto)$/.test(zonaMatch[1].trim())) {
           return this.cercaImmobiliCatalogo('affitto', zonaMatch[1].trim());
         }
         this.state = 'ricerca_zona';
@@ -1940,7 +1947,7 @@ class RighettoChat {
       if (/acquist|compr|vendita/.test(low)) {
         this.ricercaData = { tipo_op: 'vendita' };
         const zonaMatch = low.match(/(?:a|in|zona|comune)\s+([a-zàèéìòù\s]+?)(?:\s*$|\s+(?:in|da|per))/i);
-        if (zonaMatch) {
+        if (zonaMatch && !/^(affitto|locazione|vendita|acquisto)$/.test(zonaMatch[1].trim())) {
           return this.cercaImmobiliCatalogo('vendita', zonaMatch[1].trim());
         }
         this.state = 'ricerca_zona';
