@@ -2611,6 +2611,15 @@ function initChatbotUI() {
   document.head.appendChild(s);
 })();
 
+// ── LINDA KB (collega virtuale: risposte da base di conoscenza approvata — disattiva con window.LINDA_KB = false) ──
+(function loadLindaKb() {
+  if (window.LINDA_KB === false) return;
+  var s = document.createElement('script');
+  s.src = 'js/linda-kb.js?v=1';
+  s.async = true;
+  document.head.appendChild(s);
+})();
+
 // ── Auto-inizializzazione ──
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initChatbotUI);

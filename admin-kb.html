@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Linda — Base di conoscenza | Righetto Immobiliare</title>
+<style>
+:root{--ink:#1d2433;--mut:#5b6475;--line:#d9dde5;--bg:#f5f6f9;--card:#fff;--brand:#1a3d6d;--ok:#1b6b3a;--warn:#8a5a00;--bad:#a12626}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:var(--brand);color:#fff;padding:14px 20px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+header h1{font-size:1.1rem;margin:0}
+main{max-width:1100px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px}
+label{display:block;font-weight:600;margin:10px 0 4px}
+input,select,textarea,button{font:inherit;color:inherit}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:#fff;min-height:44px}
+textarea{min-height:110px;resize:vertical}
+button{min-height:44px;padding:8px 16px;border-radius:8px;border:1px solid var(--brand);background:#fff;color:var(--brand);cursor:pointer;font-weight:600}
+button.primary{background:var(--brand);color:#fff}
+button.danger{border-color:var(--bad);color:var(--bad)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #8fb4ff;outline-offset:2px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:end}.row>*{flex:1 1 180px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tabs button[aria-selected="true"]{background:var(--brand);color:#fff}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top;font-size:.92rem}
+.badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.78rem;font-weight:700;border:1px solid}
+.b-bozza{color:var(--mut)}.b-da_verificare{color:var(--warn)}.b-approvata{color:var(--ok)}.b-scaduta{color:var(--bad)}
+.hint{color:var(--mut);font-size:.88rem}.err{color:var(--bad);font-weight:600}.okmsg{color:var(--ok);font-weight:600}
+dialog{border:0;border-radius:14px;padding:0;max-width:760px;width:calc(100% - 24px)}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+dialog form{padding:18px}
+.prev{background:#eef3fb;border:1px dashed var(--brand);border-radius:10px;padding:12px;white-space:pre-wrap}
+[hidden]{display:none!important}
+@media(max-width:640px){th:nth-child(n+4),td:nth-child(n+4){display:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Linda — Base di conoscenza</h1>
+  <div><span id="utente" class="hint" style="color:#cfd8ea"></span> <button id="esci" hidden>Esci</button></div>
+</header>
+<main>
+
+<section id="login" class="card" hidden>
+  <h2>Accesso amministratore</h2>
+  <p class="hint">Accesso con account Supabase abilitato (tabella <code>kb_admins</code>). Non usa la password di <code>admin.html</code>.</p>
+  <form id="loginForm" autocomplete="on">
+    <label for="em">Email</label><input id="em" type="email" autocomplete="username" required>
+    <label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" required>
+    <p id="loginErr" class="err" role="alert"></p>
+    <button class="primary" type="submit">Accedi</button>
+  </form>
+</section>
+
+<section id="app" hidden>
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-t="voci">Voci</button>
+    <button role="tab" aria-selected="false" data-t="lacune">Domande senza risposta</button>
+    <button role="tab" aria-selected="false" data-t="csv">Importa / Esporta</button>
+    <button role="tab" aria-selected="false" data-t="prova">Prova Linda</button>
+  </div>
+
+  <div id="t-voci" class="card">
+    <div class="row">
+      <div><label for="fStato">Stato</label>
+        <select id="fStato"><option value="">Tutti</option><option value="da_verificare">Da verificare</option><option value="bozza">Bozza</option><option value="approvata">Approvata</option><option value="scaduta">Scaduta</option></select></div>
+      <div><label for="fCerca">Cerca</label><input id="fCerca" type="search" placeholder="testo nella domanda"></div>
+      <div><button class="primary" id="nuova">+ Nuova voce</button></div>
+    </div>
+    <p id="vociMsg" class="hint" role="status"></p>
+    <div style="overflow-x:auto"><table><thead><tr><th>Domanda</th><th>Stato</th><th>Categoria</th><th>Scade</th><th>Aggiornata</th></tr></thead><tbody id="vociBody"></tbody></table></div>
+  </div>
+
+  <div id="t-lacune" class="card" hidden>
+    <h2>Domande reali senza risposta</h2>
+    <p class="hint">Raggruppate per frequenza. Testi ripuliti da email/telefoni; conservati 90 giorni.</p>
+    <p id="lacMsg" class="hint" role="status"></p>
+    <div style="overflow-x:auto"><table><thead><tr><th>Domanda (esempio)</th><th>Volte</th><th>Ultima</th><th></th></tr></thead><tbody id="lacBody"></tbody></table></div>
+  </div>
+
+  <div id="t-csv" class="card" hidden>
+    <h2>Importa da CSV</h2>
+    <p class="hint">Separatore <b>;</b> — colonne: <code>domanda;varianti;risposta;categoria;fonte_titolo;fonte_url;scade_il</code>. Le varianti separate da <b>|</b>. Le voci importate arrivano come <b>Da verificare</b>: nessuna va online senza approvazione.</p>
+    <label for="csvFile">File CSV</label><input id="csvFile" type="file" accept=".csv,text/csv">
+    <p id="csvMsg" class="hint" role="status"></p>
+    <button id="csvGo" class="primary" hidden>Importa</button>
+    <hr>
+    <h2>Esporta</h2>
+    <button id="csvExp">Scarica voci approvate (CSV)</button>
+  </div>
+
+  <div id="t-prova" class="card" hidden>
+    <h2>Prova come risponderebbe Linda</h2>
+    <p class="hint">Usa solo le voci <b>approvate e non scadute</b>, con la stessa soglia del sito.</p>
+    <label for="provaQ">Domanda</label><input id="provaQ" type="text">
+    <p><button id="provaGo" class="primary">Prova</button></p>
+    <div id="provaOut" class="prev" hidden></div>
+  </div>
+</section>
+</main>
+
+<dialog id="dlg">
+  <form id="vForm" method="dialog">
+    <h2 id="dlgTit">Voce</h2>
+    <input type="hidden" id="vId">
+    <label for="vDom">Domanda tipo</label><input id="vDom" required minlength="5" maxlength="300">
+    <label for="vVar">Varianti della domanda (una per riga)</label><textarea id="vVar" placeholder="Come si chiede in altri modi?"></textarea>
+    <label for="vRis">Risposta (testo che leggerà il cliente)</label><textarea id="vRis" required minlength="10" maxlength="2500"></textarea>
+    <div class="row">
+      <div><label for="vCat">Categoria</label><select id="vCat"></select></div>
+      <div><label for="vScad">Scade il (facoltativo)</label><input id="vScad" type="date"></div>
+    </div>
+    <label for="vCond">Condizioni / limiti (es. «da verificare in sede»)</label><input id="vCond" maxlength="300">
+    <div class="row">
+      <div><label for="vFt">Fonte — titolo</label><input id="vFt" maxlength="120"></div>
+      <div><label for="vFu">Fonte — URL https</label><input id="vFu" type="url" placeholder="https://"></div>
+    </div>
+    <p class="hint">Regola: niente tariffe o percentuali di mediazione; ogni dato numerico richiede una fonte verificabile.</p>
+    <div id="vPrev" class="prev" hidden></div>
+    <p id="vErr" class="err" role="alert"></p>
+    <div class="row">
+      <button type="button" id="bPrev">Anteprima</button>
+      <button type="button" id="bBozza">Salva bozza</button>
+      <button type="button" id="bVerifica">Invia in verifica</button>
+      <button type="button" id="bApprova" class="primary">Approva e pubblica</button>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <button type="button" id="bScade">Segna scaduta</button>
+      <button type="button" id="bStoria">Cronologia</button>
+      <button type="button" id="bDel" class="danger">Elimina</button>
+      <button type="button" id="bChiudi">Chiudi</button>
+    </div>
+    <div id="vStoria" hidden></div>
+  </form>
+</dialog>
+
+<script src="js/vendor/supabase.min.js"></script>
+<script src="js/linda-kb.js?v=1"></script>
+<script src="js/admin-kb.js?v=1"></script>
+</body>
+</html>
