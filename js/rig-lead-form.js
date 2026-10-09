@@ -170,10 +170,11 @@
     }
 
     var supaOk = false;
+    var dbErr = '';
     try {
       var sb = global.supabase && global.supabase.createClient(SB_URL, SB_ANON);
       if (sb) {
-        await sb.from('richieste').insert([
+        var ins = await sb.from('richieste').insert([
           {
             nome: nomeCompleto,
             email: email || null,
@@ -184,10 +185,29 @@
             letto: false
           }
         ]);
-        supaOk = true;
+        // supabase-js non lancia eccezioni sugli errori HTTP/RLS: va letto `error`.
+        supaOk = !(ins && ins.error);
+        if (!supaOk) {
+          dbErr = (ins.error && (ins.error.message || ins.error.code)) || 'errore sconosciuto';
+          if (global.console) console.warn('richieste insert fallita:', dbErr);
+        }
+      } else {
+        dbErr = 'client Supabase non disponibile';
       }
     } catch (e) {
       supaOk = false;
+      dbErr = (e && e.message) || 'eccezione';
+    }
+
+    // Email arrivata ma contatto NON nel CRM: avvisa l'operatore (nessun lead perso, recuperabile dall'email).
+    if (emailOk && !supaOk) {
+      try {
+        await SERVIZI_CONFIG.sendNotifica({
+          subject: '[ATTENZIONE] Lead NON salvato nel CRM: ' + nomeCompleto,
+          html_body: '<b>Il contatto qui sotto e\' arrivato solo via email: reinseriscilo in richieste.</b><br><b>Errore DB:</b> ' + dbErr + '<br><br>' + bodyParts.join('<br>'),
+          reply_to: email || undefined
+        });
+      } catch (e2) {}
     }
 
     if (btn) {
@@ -230,4 +250,4 @@
   }
 
   global.rigSubmitLead = submitLead;
-})();
+})(window);

@@ -803,12 +803,13 @@ async function sendMutuoLead(e) {
   try {
     var sb = window.supabase && supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');
     if (sb) {
-      await sb.from('richieste').insert([{
+      const _ins = await sb.from('richieste').insert([{
         nome: nomeCompleto, email: email, telefono: tel,
         messaggio: messaggio, provenienza: 'landing-mutuo',
         newsletter: !!marketing, letto: false
       }]);
-      supaOk = true;
+      supaOk = !_ins.error;
+      if (_ins.error) console.warn('richieste insert fallita:', _ins.error.message);
     }
   } catch(e) {}
 

@@ -365,8 +365,9 @@ async function sendDemoForm(e) {
     var lib = window.rigSupabaseLib && window.rigSupabaseLib();
     if (lib) {
       var sb = lib.createClient(SB_URL, SB_ANON);
-      await sb.from('richieste').insert([{ nome: nomeRaw, email: email, telefono: tel, messaggio: messaggioDb, provenienza: PROV, newsletter: !!marketing, letto: false }]);
-      supaOk = true;
+      const _ins = await sb.from('richieste').insert([{ nome: nomeRaw, email: email, telefono: tel, messaggio: messaggioDb, provenienza: PROV, newsletter: !!marketing, letto: false }]);
+      supaOk = !_ins.error;
+      if (_ins.error) console.warn('richieste insert fallita:', _ins.error.message);
     }
   } catch (err) { supaOk = false; }
 

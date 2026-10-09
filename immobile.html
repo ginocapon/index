@@ -1374,21 +1374,27 @@ async function sendForm() {
 
   // Save to Supabase richieste
   const msg = document.getElementById('f-msg').value || '';
-  await sb.from('richieste').insert({
-    nome,
-    telefono: tel,
-    email: '',
-    messaggio: msg,
-    tipo_immobile: immobile?.titolo || '',
-    provenienza: 'form',
-    newsletter: marketing,
-    letto: false,
-    codice_immobile: immobile?.codice || '',
-    immobile_id: immobile?.id || null,
-  });
+  let supaOk = false;
+  let emailOk = false;
+  try {
+    const _ins = await sb.from('richieste').insert({
+      nome,
+      telefono: tel,
+      email: '',
+      messaggio: msg,
+      tipo_immobile: immobile?.titolo || '',
+      provenienza: 'form',
+      newsletter: marketing,
+      letto: false,
+      codice_immobile: immobile?.codice || '',
+      immobile_id: immobile?.id || null,
+    });
+    supaOk = !_ins.error;
+    if (_ins.error) console.warn('richieste insert fallita:', _ins.error.message);
+  } catch (e) { supaOk = false; }
   // Notifica email
   try {
-    await fetch(SUPABASE_URL + '/functions/v1/send-email', {
+    const _r = await fetch(SUPABASE_URL + '/functions/v1/send-email', {
       method: 'POST',
       headers: {'Content-Type':'application/json','Authorization':'Bearer '+SUPABASE_KEY},
       body: JSON.stringify({
@@ -1400,8 +1406,16 @@ async function sendForm() {
         html_body: '<b>Nome:</b> ' + nome + '<br><b>Telefono:</b> ' + tel + '<br><b>Immobile:</b> ' + (immobile?.titolo||'-') + ' (' + (immobile?.codice||'-') + ')' + (msg ? '<br><b>Messaggio:</b> ' + msg : '')
       })
     });
-  } catch(e) {}
+    emailOk = _r.ok;
+  } catch(e) { emailOk = false; }
 
+  if (!supaOk && !emailOk) {
+    // Nessun canale ha registrato il contatto: NON mostrare successo.
+    btn.disabled = false;
+    btn.textContent = 'Riprova a inviare';
+    showToast('Invio non riuscito. Chiama il 049.8843484 o scrivi su WhatsApp.');
+    return;
+  }
   btn.textContent = '✓ Richiesta inviata!';
   btn.style.background = '#27ae60';
   showToast('Richiesta inviata! Ti contatteremo presto. 🎉');
