@@ -76,6 +76,20 @@ Regola: prima di introdurre qualsiasi voce C > 0, presentare stima per 1.000 con
 → 4. **Implementa in test** (ramo, mock, mai produzione) → 5. **Verifica con Playwright**
 → 6. **Mostra risultati e chiedi approvazione** (con anteprima estetica) → 7. **Misura l'impatto** dopo la pubblicazione.
 
+## 9. Documento del titolare «Chatbot_Righetto_Prompt_300_FAQ» (9 ott 2026)
+
+Importato con `python scripts/linda_importa_docx_faq.py "<percorso docx>"` → `data/linda-kb-seed-300.csv` (300 FAQ, tutte *da verificare*),
+`data/linda-prompt-regole.md` (15 regole anti-errore + gestione richiesta), `data/linda-fonti-gerarchia.json` (10 fonti in ordine),
+`data/linda-linee-guida-redazione.md` (istruzioni interne, ex FAQ n.294: **mai** nel testo pubblico).
+
+Come le regole del documento sono applicate (Linda non ha un LLM, quindi non c'è un "prompt" da inserire):
+- **Non inventare / non so → consulente:** frase fissa «Per non darle un'informazione inesatta, preferisco far verificare questo punto da un nostro consulente.» + telefono + invito a lasciare il contatto.
+- **Immobili:** solo dati live della scheda, campo mancante dichiarato (regole 10 e 300).
+- **Fonti:** ogni voce con numeri/percentuali/scadenze ha una fonte istituzionale (a livello di ente; **da sostituire con il link alla pagina/articolo preciso** in revisione: il documento stesso richiede URL, data di verifica, responsabile, prossima revisione).
+- **Passo successivo:** ogni risposta KB chiude con invito a sentire un consulente, senza pressione.
+- **Revisione professionale** (imposte, contratti, sfratti, caparre, preliminari, conformità) **prima** di approvare le voci: nessuna approvazione di massa.
+- **Stesso tono del titolare:** risposta breve → precisazione → passo pratico → fonte.
+
 ## 8. Rischi aperti noti (9 ott 2026) — vedi anche `skill-security.md`
 
 - **CRITICO** `RIG_ADMIN_RLS_SECRET` è nel sorgente pubblico di `admin.html`: con l'header `x-righetto-admin` l'API anon legge `clienti`, `richieste`, `newsletter_subscribers` e tutti gli immobili. Richiede migrazione a Supabase Auth + RLS per ruolo e **rotazione del segreto**.

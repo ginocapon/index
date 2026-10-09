@@ -21,7 +21,7 @@
   var SOGLIA = 0.45;             // punteggio minimo per rispondere dalla KB
   var TIMEOUT_MS = 4000;
   var TEL = '049.8843484';
-  var DEFAULT_MARK = 'Capito — forse non ho colto';
+  var DEFAULT_MARK = 'far verificare questo punto da un nostro consulente';
   var SESSION = 'k' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 
   // Colonne PUBBLICHE ammesse. Non aggiungere mai proprietario_*, note_interne, prezzo_reale.
@@ -78,6 +78,8 @@
     });
     if (links.length) out += '\n\n**Fonti:** ' + links.join(' · ');
     if (r.aggiornata_il) out += '\n\n*Informazione aggiornata al ' + dataIt(r.aggiornata_il) + '.*';
+    // passo successivo concreto, senza pressione commerciale (regola 12 del documento del titolare)
+    out += '\n\nPer il suo caso specifico può sentire un nostro consulente: **' + TEL + '**, oppure scriva *"Voglio essere contattato"*.';
     return out;
   }
 

@@ -1,0 +1,55 @@
+{
+  "ordine": "dal più autorevole al meno",
+  "fonti": [
+    {
+      "fonte": "Normattiva / Gazzetta Ufficiale",
+      "uso": "Testo delle leggi e aggiornamenti normativi.",
+      "url": "https://www.normattiva.it/"
+    },
+    {
+      "fonte": "Agenzia delle Entrate",
+      "uso": "Registrazione contratti, RLI, cedolare secca, imposte, agevolazioni e quotazioni OMI.",
+      "url": "https://www.agenziaentrate.gov.it/"
+    },
+    {
+      "fonte": "Osservatorio del Mercato Immobiliare (OMI)",
+      "uso": "Quotazioni per zona e semestre; indicatori orientativi, non stime puntuali.",
+      "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi"
+    },
+    {
+      "fonte": "Consiglio Nazionale del Notariato",
+      "uso": "Acquisto, preliminare, rogito, mutui, donazioni e successioni.",
+      "url": "https://www.notariato.it/"
+    },
+    {
+      "fonte": "ISTAT",
+      "uso": "Indicatori statistici, prezzi e inflazione.",
+      "url": "https://www.istat.it/"
+    },
+    {
+      "fonte": "Banca d’Italia",
+      "uso": "Credito, mutui e rapporti sul mercato immobiliare.",
+      "url": "https://www.bancaditalia.it/"
+    },
+    {
+      "fonte": "FIMAA",
+      "uso": "Prassi professionali e approfondimenti sulla mediazione immobiliare.",
+      "url": "https://www.fimaa.it/"
+    },
+    {
+      "fonte": "Idealista News",
+      "uso": "Trend di mercato, domande frequenti e analisi; verificare sempre metodologia e data.",
+      "url": "https://www.idealista.it/news/"
+    },
+    {
+      "fonte": "Immobiliare.it News",
+      "uso": "Approfondimenti su compravendite, affitti e mercato; verificare con fonti primarie.",
+      "url": "https://www.immobiliare.it/news/"
+    },
+    {
+      "fonte": "Il Sole 24 Ore / Milano Finanza",
+      "uso": "Approfondimenti economici e fiscali; non sostituiscono la norma ufficiale.",
+      "url": "https://www.ilsole24ore.com/"
+    }
+  ]
+}
