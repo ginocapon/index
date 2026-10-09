@@ -123,7 +123,9 @@
 
     /* LAYOUT */
     .page-inner{max-width:1380px;margin:0 auto;padding:1.6rem 1.5rem;display:grid;grid-template-columns:1fr 340px;gap:1.6rem;align-items:start}
-    @media(max-width:1100px){.page-inner{grid-template-columns:1fr}}
+    @media(max-width:1100px){.page-inner{grid-template-columns:minmax(0,1fr)}}
+    .page-inner>*{min-width:0}
+    @media(max-width:600px){.pdf-download-banner{flex-wrap:wrap}.pdf-banner-btn{width:100%;justify-content:center;min-height:44px}}
 
     /* SECTION NAV */
     .section-nav{display:flex;gap:0;background:#fff;border:1px solid var(--gc);border-radius:3px;overflow-x:auto;margin-bottom:1.1rem;position:sticky;top:62px;z-index:40}

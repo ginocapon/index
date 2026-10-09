@@ -67,6 +67,34 @@ nav a:hover{color:#fff}
 .cta-band p{color:rgba(255,255,255,.75);font-size:.88rem;margin-bottom:1rem}
 footer{background:var(--nero);color:rgba(255,255,255,.55);padding:1.5rem;text-align:center;font-size:.7rem}
 footer a{color:var(--oro2)}
+header a,.btn,.card,.h-btn{text-decoration:none}
+.h-cta{display:flex;gap:.65rem;align-items:center;margin-left:auto}
+.h-tel{color:rgba(255,255,255,.8);font-size:.78rem;text-decoration:none}
+.rich{display:grid;grid-template-columns:1fr;gap:1.5rem;align-items:start}
+.rich-team img{display:block;width:100%;height:auto;border-radius:14px;box-shadow:0 8px 28px rgba(21,36,53,.12)}
+.rich-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin-top:.9rem}
+.rich-stats div{background:#fff;border:1px solid var(--sfondo);border-radius:12px;padding:.7rem .8rem}
+.rich-stats strong{display:block;font-family:'Cormorant Garamond',serif;font-size:1.6rem;line-height:1;color:var(--blu)}
+.rich-stats span{font-size:.7rem;color:var(--grigio)}
+.rich-form{background:#fff;border:1px solid var(--sfondo);border-radius:14px;padding:1.25rem 1.2rem;box-shadow:0 8px 28px rgba(21,36,53,.06)}
+.rich-form h2{font-size:1.5rem;margin-bottom:.4rem}
+.rich-form .lead{margin-bottom:1rem;font-size:.82rem}
+.rich-form .field{margin-bottom:.7rem}
+.rich-form label{display:block;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--grigio);margin-bottom:.2rem;font-weight:700}
+.rich-form input:not([type=checkbox]),.rich-form select{width:100%;min-height:46px;border:1px solid #c9ced6;border-radius:8px;padding:.55rem .75rem;font-family:inherit;font-size:16px;background:#fff;color:var(--testo)}
+.rich-form input:focus,.rich-form select:focus{outline:2px solid var(--blu);outline-offset:1px;border-color:var(--blu)}
+.rich-form .fchk{display:flex;align-items:flex-start;gap:.5rem;font-size:.72rem;color:var(--grigio);margin:.5rem 0}
+.rich-form .fchk input{margin-top:.15rem;flex-shrink:0}
+.rich-form .fchk a{color:var(--blu);text-decoration:underline}
+.rich-form .fsub{width:100%;min-height:48px;background:var(--nero);color:#fff;border:0;border-radius:10px;font-family:inherit;font-weight:700;font-size:.84rem;cursor:pointer;margin-top:.4rem}
+.rich-form .fsub:hover{background:var(--oro);color:var(--nero)}
+.rich-form .rig-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.rich-form .rig-lead-success{display:none;text-align:center;padding:1rem;background:#e8f5e9;border-radius:10px;color:#1b5e20;margin-top:.5rem;font-size:.85rem}
+.rich-form .rig-lead-success h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:.3rem}
+.rich-form form.is-sent .field,.rich-form form.is-sent .fchk,.rich-form form.is-sent .fsub{display:none}
+.rich-form .fine{font-size:.72rem;color:var(--grigio);margin-top:.7rem;text-align:center}
+.rich-form .fine a{color:var(--blu)}
+@media(min-width:900px){.rich{grid-template-columns:1fr 1.05fr;gap:2rem}}
 @media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
 </style>
@@ -82,9 +110,19 @@ footer a{color:var(--oro2)}
       <a href="blog">Blog</a>
       <a href="contatti">Contatti</a>
     </nav>
-    <a href="landing-valutazione" class="h-btn">Valutazione gratis</a>
+    <div class="h-cta"><a class="h-tel" href="tel:+390498843484">049.8843484</a><a href="#richiedi" class="h-btn">Valutazione gratis</a></div>
   </div>
+  <button class="nav-burger" id="burgerBtn" aria-label="Menu" aria-controls="navMobile"><span></span><span></span><span></span></button>
 </header>
+<div class="nav-mobile" id="navMobile">
+  <a href="/">Home</a>
+  <a href="immobili">Immobili</a>
+  <a href="servizi">Servizi</a>
+  <a href="chi-siamo">Chi siamo</a>
+  <a href="blog">Blog</a>
+  <a href="faq">FAQ</a>
+  <a href="#richiedi" class="nav-mobile-cta">Richiedi valutazione gratuita</a>
+</div>
 
 <main id="main">
 <section class="hero" aria-labelledby="hero-h1">
@@ -175,6 +213,35 @@ footer a{color:var(--oro2)}
   <p style="font-size:.78rem;color:var(--grigio)">Guide utili: <a href="blog-casa-non-si-vende-padova-strategia-2026" style="color:var(--blu);font-weight:600">casa non si vende</a> · <a href="blog-successione-immobiliare-padova" style="color:var(--blu);font-weight:600">successione</a> · <a href="blog-costi-vendere-casa-padova-2026" style="color:var(--blu);font-weight:600">costi vendita</a> · <a href="blog-mandato-esclusivo-padova-perche-conviene-2026" style="color:var(--blu);font-weight:600">mandato esclusivo</a></p>
 </section>
 
+<section class="wrap rich" id="richiedi" aria-labelledby="rich-h2">
+  <div class="rich-team">
+    <img src="img/team/titolari.webp" width="800" height="533" loading="lazy" alt="Gino Capon e Linda Righetto, consulenti Righetto Immobiliare a Limena (Padova)">
+    <div class="rich-stats">
+      <div><strong>350+</strong><span>immobili trattati</span></div>
+      <div><strong>101</strong><span>comuni serviti</span></div>
+      <div><strong>4.9/5</strong><span>127 recensioni Google</span></div>
+      <div><strong>98%</strong><span>clienti soddisfatti</span></div>
+    </div>
+  </div>
+  <div class="rich-form">
+    <h2 id="rich-h2">Parliamo del tuo immobile</h2>
+    <p class="lead">Lasciaci nome e telefono: un referente ti richiama per capire se possiamo esserti utili. Nessun obbligo di incarico.</p>
+    <form data-rig-lead-form data-provenienza="hub-proprietari" data-extra-labels='{"#f-obiettivo":"Obiettivo","#f-comune":"Comune"}' novalidate>
+      <div class="field"><label for="f-nome">Nome e cognome *</label><input type="text" id="f-nome" autocomplete="name" placeholder="Mario Rossi"></div>
+      <div class="field"><label for="f-tel">Telefono *</label><input type="tel" id="f-tel" autocomplete="tel" inputmode="tel" placeholder="333 123 4567"></div>
+      <div class="field"><label for="f-obiettivo">Cosa vuoi fare?</label>
+        <select id="f-obiettivo"><option>Vendere</option><option>Affittare</option><option>Capire quanto vale</option><option>Non so ancora</option></select>
+      </div>
+      <div class="field"><label for="f-comune">Comune dell'immobile</label><input type="text" id="f-comune" autocomplete="address-level2" placeholder="Es. Padova, Limena, Vigonza"></div>
+      <div class="fchk"><input type="checkbox" id="f-gdpr"><label for="f-gdpr">Ho preso visione dell'<a href="privacy" target="_blank" rel="noopener">informativa privacy</a> (Reg. UE 2016/679) e acconsento al trattamento per finalità contrattuali e di legge (punti a) e b)). *</label></div>
+      <div class="fchk"><input type="checkbox" id="f-gdpr-marketing" class="rig-gdpr-marketing" name="gdpr_marketing"><label for="f-gdpr-marketing">Acconsento al trattamento per finalità di marketing e comunicazioni commerciali (punti c), d) ed e) dell'informativa — <em>facoltativo</em>, revocabile in qualsiasi momento.</label></div>
+      <button class="fsub" type="submit">Richiedi valutazione gratuita</button>
+      <div class="rig-lead-success"><h3>Messaggio inviato!</h3><p>Grazie. Ti ricontattiamo entro pochi minuti durante gli orari di apertura.</p></div>
+    </form>
+    <p class="fine">Preferisci parlare subito? <a href="tel:+390498843484">049.8843484</a> · <a href="https://wa.me/393497365930" rel="noopener" target="_blank">WhatsApp</a></p>
+  </div>
+</section>
+
 <section class="wrap faq" id="faq">
   <h2>Domande frequenti dei proprietari</h2>
   <div class="faq-item"><div class="faq-q" tabindex="0" role="button">Conviene vendere o affittare nel 2026?</div><div class="faq-a">Dipende da tempi, fiscalità, mutuo e rendimento atteso. Una valutazione e un confronto sul mercato locale (Padova/provincia) aiutano a decidere con numeri, non sensazioni.</div></div>
@@ -202,6 +269,9 @@ document.querySelectorAll('.faq-q').forEach(function(q){
   q.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();q.parentElement.classList.toggle('open');}});
 });
 </script>
+<script src="js/vendor/supabase.min.js" defer></script>
+<script src="js/config.js?v=4"></script>
+<script src="js/rig-lead-form.js?v=5"></script>
 <script src="js/nav-mobile.js?v=3" defer></script>
 <script src="js/site-ai-disclosure.js?v=3" defer></script>
 </body>

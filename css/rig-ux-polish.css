@@ -1,0 +1,67 @@
+/* Righetto â€” rifinitura UX trasversale (additiva).
+   NON tocca: .rig-brand-*, .rig-sugar-paper (monogramma RI + grana) nÃ© colori/font di marca.
+   Obiettivi: niente zoom iOS sui campi, target touch >= 44px, cookie banner compatto,
+   focus visibile, tipografia piu' ordinata, rispetto di prefers-reduced-motion. */
+
+/* Tipografia: titoli bilanciati, paragrafi senza vedove (enhancement progressivo) */
+h1, h2, h3 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+
+/* Focus tastiera ben visibile (WCAG 2.4.7) senza alterare il layout */
+:focus-visible { outline: 2px solid #2C4A6E; outline-offset: 2px; }
+header :focus-visible, footer :focus-visible, .nav-mobile :focus-visible,
+#hero :focus-visible, .hero :focus-visible, .cta-band :focus-visible,
+#rig-cookie-banner :focus-visible { outline-color: #FF8F5E; }
+
+@media (max-width: 768px) {
+  /* Campi >= 16px: Safari iOS non zooma piu' in pagina al tocco */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="hidden"]),
+  select, textarea { font-size: 16px !important; }
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="hidden"]):not([data-rig-hp]),
+  select { min-height: 44px; }
+
+  /* Target touch: pulsanti e CTA nei moduli e negli hero */
+  form button, form [type="submit"], .btn, .btn-p, .btn-g, .hero-btns a, .h-btn,
+  .fsub, .v-submit, .btn-send, .nav-mobile a { min-height: 44px; }
+  .nav-burger { min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
+
+  /* Checkbox consensi: area di tocco piu' ampia senza cambiare il layout */
+  .fchk input[type="checkbox"], form input[type="checkbox"] { width: 20px; height: 20px; }
+
+  /* Cookie banner compatto: libera lo schermo e lascia visibili le CTA */
+  #rig-cookie-banner .rig-cb-inner { padding: 10px 14px; gap: 8px; }
+  #rig-cookie-banner .rig-cb-text { min-width: 0; font-size: .74rem; line-height: 1.4; }
+  #rig-cookie-banner .rig-cb-btns { gap: 8px; }
+  #rig-cookie-banner .rig-cb-btn { flex: 1 1 0; min-height: 44px; padding: 8px 12px; }
+}
+
+/* Griglie "1fr" che si allargano al contenuto (causa di scorrimento orizzontale su smartphone) */
+.comparison > *, .page-inner > *, .page-grid > *, [style*="grid-template-columns"] > * { min-width: 0; }
+@media (max-width: 1100px) { .page-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 700px) {
+  .comparison { grid-template-columns: minmax(0, 1fr) !important; }
+  .comp-row { min-width: 0; overflow-wrap: anywhere; }
+}
+
+/* Griglie a 2 colonne definite con stile inline e gap ampio (colonne di testo): su schermi stretti si impilano */
+@media (max-width: 800px) {
+  div[style*="grid-template-columns:1fr 1fr"][style*="gap:2.5rem"],
+  div[style*="grid-template-columns:1fr 1fr"][style*="gap:3rem"],
+  div[style*="grid-template-columns:1fr 1fr"][style*="gap:4rem"],
+  div[style*="grid-template-columns: 1fr 1fr"][style*="gap:3rem"],
+  div[style*="grid-template-columns: 1fr 1fr"][style*="gap: 3rem"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 1.75rem !important;
+  }
+}
+
+/* Movimento ridotto: rispetto della preferenza di sistema */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
