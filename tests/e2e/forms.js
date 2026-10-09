@@ -14,6 +14,16 @@ const FORMS = [
     ok: 'form[data-rig-lead-form].is-sent',
   },
   {
+    nome: 'hub-proprietari', url: '/proprietario-immobile', provenienza: 'hub-proprietari',
+    fill: async (p) => {
+      await p.fill('#f-nome', `${TEST_LEAD.nome} ${TEST_LEAD.cognome}`);
+      await p.fill('#f-tel', TEST_LEAD.tel);
+      await p.check('#f-gdpr');
+    },
+    submit: '#richiedi button[type=submit]',
+    ok: '#richiedi form.is-sent',
+  },
+  {
     nome: 'homepage', url: '/', provenienza: 'homepage',
     fill: async (p) => {
       await p.fill('#cf-nome', TEST_LEAD.nome);
