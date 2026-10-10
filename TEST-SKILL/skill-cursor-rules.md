@@ -50,6 +50,7 @@ Le **Cursor Skills** (`.cursor/skills/`) **non duplicano** `TEST-SKILL/`: dicono
 | `righetto-venerdi-sito-90giorni` | `/venerdi` | piano settimanale, venerdì, 90 giorni | essentials + seo + content |
 | `righetto-perizia` | `/perizia` | perizia PDF, stima immobile | — (script `genera_perizia_*.py`) |
 | `righetto-seo` | `/seo` | audit SEO, meta, schema, GSC, PAGE SCORE | seo + massimo-punteggio |
+| `righetto-seo-auto` | `/seo-auto` | ciclo SEO settimanale GSC → max 10 pagine, approvazioni, rollback, report | seo-auto-weekly + seo + acquisizione |
 | `righetto-social` | `/social` | bozze Meta/IG/GBP, copy post/reel | social-automation |
 | `righetto-security` | `/sicurezza` | audit sicurezza 2×/sett, RLS, admin | security + context |
 | `righetto-zona` | `/zona` | scheda zona, quartiere, SEO locale | content + seo |

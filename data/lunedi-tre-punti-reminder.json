@@ -21,8 +21,8 @@
     },
     {
       "id": 2,
-      "title": "Refresh SOSTENERE (1 pagina, no blog nuovo)",
-      "body": "Da data/gsc-keywords-priority.json: refresh pagina con impressioni deboli (servizio-vendita, landing-valutazione, proprietario-immobile o blog owner in SERP). Title/meta, box In sintesi, link hub proprietario — messaggio alleato venditori."
+      "title": "Refresh SOSTENERE — ora automatico (seo_auto)",
+      "body": "Lo fa l'agente: scripts/seo_auto/seo_auto.py (venerdì 08:00). Tu: (a) creare il secret GitHub GSC_SERVICE_ACCOUNT_JSON (TEST-SKILL/skill-seo-auto-weekly.md §9) oppure caricare l'export Pagine GSC in data/seo-auto/inbox/; (b) approvare in chat le proposte in data/seo-auto/selection-latest.json (oggi: /landing-vendita in attesa dei dati query; claim «15%» su /vendere-casa-padova-errori da verificare)."
     },
     {
       "id": 3,

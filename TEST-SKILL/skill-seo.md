@@ -240,7 +240,8 @@ Pagine pillar da refreshare ogni settimana (verificate dal cron): `/`, `/blog`, 
 
 > **Proprietà:** `righettoimmobiliare.it` (tipo **Dominio**) — include www e non-www. Non serve una seconda proprietà con `www`.  
 > **URL da usare in ispezione e canonical:** `https://righettoimmobiliare.it/...` (senza `www`, senza `.html`).  
-> **Skill operativa venerdì:** `.cursor/skills/righetto-venerdi-sito-90giorni/SKILL.md` § Search Console.
+> **Skill operativa venerdì:** `.cursor/skills/righetto-venerdi-sito-90giorni/SKILL.md` § Search Console.  
+> **Ciclo automatico (dal 16/10/2026):** `TEST-SKILL/skill-seo-auto-weekly.md` — `scripts/seo_auto/seo_auto.py` sceglie max 10 pagine dai dati GSC, applica solo interventi approvati con backup/rollback, registra e valuta (`/seo-auto`).
 
 ### 10.1 Dieci pagine chiave (indicizzazione manuale / verifica)
 
