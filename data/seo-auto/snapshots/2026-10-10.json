@@ -1,0 +1,95 @@
+{
+  "source": "repo_json_stale",
+  "stale": true,
+  "data_end_date": "2026-07-13",
+  "period": {
+    "current": [
+      "2026-06-17",
+      "2026-07-13"
+    ],
+    "previous": null
+  },
+  "site": {
+    "current": {
+      "clicks": 271.0,
+      "impressions": 4220.0,
+      "ctr": 0.0642,
+      "position": 7.7
+    },
+    "previous": null
+  },
+  "pages": {
+    "/": {
+      "current": {
+        "clicks": 63.0,
+        "impressions": 525.0,
+        "ctr": 0.12,
+        "position": null
+      }
+    },
+    "/blog-affitto-studenti-padova": {
+      "current": {
+        "clicks": 8.0,
+        "impressions": 271.0,
+        "ctr": 0.0295,
+        "position": null
+      }
+    },
+    "/blog-contratto-affitto-padova": {
+      "current": {
+        "clicks": 6.0,
+        "impressions": 150.0,
+        "ctr": 0.04,
+        "position": null
+      }
+    },
+    "/blog-rendimento-affitto-padova": {
+      "current": {
+        "clicks": 0.0,
+        "impressions": 139.0,
+        "ctr": 0.0,
+        "position": null
+      }
+    },
+    "/agenzia-immobiliare-padova": {
+      "current": {
+        "clicks": 0.0,
+        "impressions": 68.0,
+        "ctr": 0.0,
+        "position": null
+      }
+    },
+    "/zona-limena": {
+      "current": {
+        "clicks": 0.0,
+        "impressions": 3.0,
+        "ctr": 0.0,
+        "position": null
+      }
+    },
+    "/blog-affitto-breve-padova-2026": {
+      "current": {
+        "clicks": 0.0,
+        "impressions": 10.0,
+        "ctr": 0.0,
+        "position": null
+      }
+    }
+  },
+  "daily": [],
+  "index_status": {},
+  "limitations": [
+    "Dati pagina fermi al 2026-07-13: nessun accesso API né export CSV recente.",
+    "Solo 7 URL con metriche: impossibile un ranking affidabile su tutto il sito.",
+    "Senza periodo precedente non si misurano cali né effetti degli interventi."
+  ],
+  "ga4": {
+    "status": "non_configurato",
+    "note": "GA4 Data API: aggiungere service account come Visualizzatore sulla proprietà."
+  },
+  "snapshot_date": "2026-10-10",
+  "ingest_errors": [
+    "Secret GSC_SERVICE_ACCOUNT_JSON assente",
+    "Nessun CSV in data/seo-auto/inbox/"
+  ]
+}

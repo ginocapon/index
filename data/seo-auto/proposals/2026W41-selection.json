@@ -1,0 +1,117 @@
+{
+  "cycle": "2026W41",
+  "date": "2026-10-10",
+  "data_source": "repo_json_stale",
+  "stale": true,
+  "limitations": [
+    "Dati pagina fermi al 2026-07-13: nessun accesso API né export CSV recente.",
+    "Solo 7 URL con metriche: impossibile un ranking affidabile su tutto il sito.",
+    "Senza periodo precedente non si misurano cali né effetti degli interventi."
+  ],
+  "candidates_total": 37,
+  "selected": [
+    {
+      "url": "/landing-vendita",
+      "file": "landing-vendita.html",
+      "tier": "owner_conversione",
+      "score": 21.6,
+      "score_parts": {
+        "underlinked": 13.5,
+        "tier_mult": 1.6
+      },
+      "reasons": [
+        "solo 1 pagine interne linkano questa URL (soglia 10)"
+      ],
+      "gsc": null,
+      "cooldown": false,
+      "last_modified": "2026-10-09",
+      "inbound": 1,
+      "title": "Vendi Casa a Padova — Righetto Immobiliare",
+      "meta": "Vuoi vendere casa nel Padovano? Valutazione gratuita in 24h, promozione professionale, team Righetto dal 2000. Commissioni nel mandato.",
+      "issues": [],
+      "intervention_id": "SEO-2026W41-landing-vendita"
+    }
+  ],
+  "excluded_cooldown": [
+    {
+      "url": "/blog-rendimento-affitto-padova",
+      "score": 9.1,
+      "reasons": [
+        "139 impressioni e 0 clic (posizione non disponibile)",
+        "dato GSC non aggiornato: peso dimezzato",
+        "cooldown: ultimo refresh 2026-09-04 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/agenzia-immobiliare-padova",
+      "score": 4.4,
+      "reasons": [
+        "68 impressioni e 0 clic (posizione non disponibile)",
+        "dato GSC non aggiornato: peso dimezzato",
+        "cooldown: ultimo refresh 2026-07-13 senza 28 gg di dati GSC successivi"
+      ]
+    }
+  ],
+  "below_threshold": [
+    {
+      "url": "/blog-planimetria-catastale-compravendita-padova-2026",
+      "score": 6.5
+    },
+    {
+      "url": "/blog-documenti-compravendita-rogito-padova-2026",
+      "score": 6.5
+    },
+    {
+      "url": "/blog-costi-proprieta-acquisto-possesso-vendita-padova-2026",
+      "score": 6.5
+    },
+    {
+      "url": "/blog-mutui-tasso-fisso-bancaitalia-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-mercato-immobiliare-piazzola-sul-brenta-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-permuta-immobiliare-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-righetto-storia-territorio-acquisizioni-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-gestione-spese-casa-risparmio-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-scegliere-immobile-giusto-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-quattro-imposte-rogitio-prima-casa-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-checklist-verifiche-prima-compromesso-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-sondaggio-bancaditalia-q1-2026-padova",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-costi-costruzione-istat-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-barometro-mutui-crif-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-dazi-usa-ue-mercato-padova-2026",
+      "score": 5.0
+    }
+  ]
+}

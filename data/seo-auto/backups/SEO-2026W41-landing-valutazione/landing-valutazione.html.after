@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<!-- Google tag (gtag.js) + Consent Mode -->
+<script src="js/ga-consent.js?v=23"></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#6C63FF">
+<title>Valutazione Casa Padova Gratuita | Righetto</title>
+<meta name="description" content="Quanto vale la tua casa a Padova? Valutazione gratuita in 24h con dati OMI e comparabili di zona. Righetto Immobiliare, dal 2000 al tuo fianco.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://righettoimmobiliare.it/landing-valutazione">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Quanto Vale la Tua Casa? — Valutazione Gratuita in 24h">
+<meta property="og:description" content="Quanto vale la tua casa a Padova? Valutazione gratuita in 24h con dati OMI e comparabili di zona. Righetto Immobiliare, dal 2000 al tuo fianco.">
+<meta property="og:url" content="https://righettoimmobiliare.it/landing-valutazione">
+<meta property="og:site_name" content="Righetto Immobiliare">
+<meta property="og:locale" content="it_IT">
+<meta property="og:image" content="https://righettoimmobiliare.it/img/foto-servizi/valutazioni-e-perizie-padova.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quanto Vale la Tua Casa? — Valutazione Gratuita in 24h">
+<meta name="twitter:description" content="Quanto vale la tua casa a Padova? Valutazione gratuita in 24h con dati OMI e comparabili di zona. Righetto Immobiliare, dal 2000 al tuo fianco.">
+<meta name="twitter:image" content="https://righettoimmobiliare.it/img/foto-servizi/valutazioni-e-perizie-padova.webp">
+<link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/foto-servizi/valutazioni-e-perizie-padova.webp" as="image" fetchpriority="high">
+<link rel="stylesheet" href="css/fonts.css?v=3">
+  <link rel="stylesheet" href="css/blog-rich.css?v=3">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --purple:#6C63FF;--purple2:#8B83FF;--purple-deep:#2D1B69;
+  --fire:#FF6B35;--fire2:#FF8F5E;--sun:#FFD23F;--mint:#00E5A0;
+  --deep:#0F0A2A;--white:#FFFFFF;--offwhite:#FAFAFA;--light:#F0F0F7;
+  --gray:#6B7280;--dark:#111827;--radius:16px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;background:var(--offwhite);color:var(--dark);line-height:1.7;overflow-x:hidden;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;height:auto;display:block}
+.skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--purple);color:#fff;padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
+
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.2);opacity:.6}}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(108,99,255,.3)}50%{box-shadow:0 0 50px rgba(108,99,255,.6)}}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+@keyframes borderGlow{0%,100%{border-color:var(--purple)}50%{border-color:var(--fire)}}
+
+/* TOPBAR */
+.topbar{background:linear-gradient(90deg,var(--purple),var(--fire),var(--purple));background-size:200% 200%;animation:gradShift 4s ease infinite;padding:.6rem 1rem;text-align:center;font-size:.78rem;color:#fff;font-weight:600}
+
+/* HERO — SARA PROTAGONISTA */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;background:var(--deep);overflow:hidden}
+.hero-bg-wrap{position:absolute;inset:0;z-index:0}
+.hero-bg-wrap img{width:100%;height:100%;object-fit:cover;opacity:.12}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(15,10,42,.95) 0%,rgba(45,27,105,.85) 40%,rgba(108,99,255,.5) 80%,rgba(255,107,53,.3) 100%);z-index:1}
+.hero-particles{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.particle{position:absolute;border-radius:50%;opacity:.15;animation:float var(--dur) ease-in-out infinite var(--delay)}
+.p1{width:300px;height:300px;background:var(--purple);top:-80px;right:-60px;--dur:7s;--delay:0s}
+.p2{width:200px;height:200px;background:var(--fire);bottom:-50px;left:-40px;--dur:9s;--delay:1s}
+.p3{width:150px;height:150px;background:var(--sun);top:30%;left:15%;--dur:11s;--delay:2s}
+.p4{width:100px;height:100px;background:var(--mint);top:60%;right:20%;--dur:8s;--delay:3s}
+
+.hero-inner{position:relative;z-index:3;max-width:1200px;margin:0 auto;padding:5rem 1.5rem;display:grid;grid-template-columns:380px 1fr;gap:4rem;align-items:center;animation:fadeUp .8s ease-out}
+@media(max-width:960px){.hero{min-height:auto}.hero-inner{grid-template-columns:1fr;text-align:center;padding:3rem 1.5rem 2.5rem;gap:2rem}.hero-right{order:1}.sara-wrap{order:2}}
+
+/* SARA — Foto grande con effetto glow */
+.sara-wrap{position:relative;display:flex;flex-direction:column;align-items:center}
+.sara-ring{position:relative;width:280px;height:280px;margin:0 auto}
+.sara-ring::before{content:'';position:absolute;inset:-6px;border-radius:50%;border:3px solid var(--purple);animation:borderGlow 3s ease-in-out infinite,spin 20s linear infinite;opacity:.5}
+.sara-ring::after{content:'';position:absolute;inset:-15px;border-radius:50%;border:2px dashed rgba(255,107,53,.2);animation:spin 30s linear infinite reverse}
+.sara-img{width:280px;height:280px;border-radius:50%;object-fit:cover;object-position:center 45%;border:4px solid var(--purple);box-shadow:0 0 60px rgba(108,99,255,.4);animation:glow 4s ease-in-out infinite}
+.sara-status{position:absolute;bottom:20px;right:20px;background:var(--mint);width:24px;height:24px;border-radius:50%;border:3px solid var(--deep);animation:pulse 2s infinite}
+.sara-label{margin-top:1rem;display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.08);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);border-radius:50px;padding:.35rem 1rem;font-size:.72rem;color:#fff;font-weight:500}
+.sara-label .online{width:8px;height:8px;background:var(--mint);border-radius:50%;animation:pulse 1.5s infinite}
+.sara-subtitle{font-size:.68rem;color:rgba(255,255,255,.4);margin-top:.3rem}
+
+/* Hero right */
+.hero-right{color:#fff}
+.hero-tag{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--purple2);font-weight:700;margin-bottom:.6rem}
+.hero-right h1{font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:300;line-height:1.1;margin-bottom:1rem}
+@media(max-width:600px){.hero-right h1{font-size:2.3rem}}
+.hero-right h1 em{font-style:italic;font-weight:700;background:linear-gradient(135deg,var(--purple2),var(--fire));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-right .sub{font-size:.9rem;color:rgba(255,255,255,.6);line-height:1.85;margin-bottom:1.5rem;max-width:520px}
+@media(max-width:960px){.hero-right .sub{margin:0 auto 1.5rem}}
+.hero-checks{list-style:none;margin-bottom:2rem}
+@media(max-width:960px){.hero-checks{display:inline-block;text-align:left}}
+.hero-checks li{padding:.35rem 0;font-size:.85rem;color:rgba(255,255,255,.85);display:flex;align-items:center;gap:.6rem}
+.hero-checks li .chk{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#fff;flex-shrink:0}
+.chk-1{background:linear-gradient(135deg,var(--purple),var(--purple2))}
+.chk-2{background:linear-gradient(135deg,var(--fire),var(--fire2))}
+.chk-3{background:linear-gradient(135deg,var(--mint),#00D4AA)}
+.chk-4{background:linear-gradient(135deg,var(--sun),#FFC107)}
+.hero-cta{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff;padding:.85rem 2rem;border-radius:14px;font-size:.92rem;font-weight:700;transition:all .3s;font-family:'Montserrat',sans-serif;animation:glow 3s infinite}
+.hero-cta:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 16px 50px rgba(108,99,255,.5)}
+
+/* MARQUEE */
+.marquee{background:var(--dark);padding:.7rem 0;overflow:hidden;white-space:nowrap}
+.marquee-track{display:inline-flex;animation:marquee 25s linear infinite}
+.marquee-item{display:inline-flex;align-items:center;gap:.4rem;padding:0 2rem;font-size:.78rem;color:rgba(255,255,255,.6);font-weight:500}
+.marquee-item strong{color:var(--purple2);font-weight:700}
+
+/* FORM SECTION */
+.form-section{padding:5rem 1.5rem;background:var(--light);position:relative;overflow:hidden}
+.form-section::before{content:'';position:absolute;top:-200px;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(108,99,255,.06),transparent 70%);pointer-events:none}
+.form-inner{max-width:700px;margin:0 auto;animation:fadeUp .6s ease-out}
+.sec-tag{font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--purple);font-weight:700;text-align:center;margin-bottom:.4rem}
+.sec-h2{font-family:'Cormorant Garamond',serif;font-size:2.3rem;font-weight:700;text-align:center;margin-bottom:.4rem;line-height:1.15}
+.sec-h2 em{font-style:italic;background:linear-gradient(135deg,var(--purple),var(--fire));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sec-sub{text-align:center;font-size:.85rem;color:var(--gray);margin-bottom:2rem}
+
+.form-card{background:#fff;border-radius:20px;box-shadow:0 15px 60px rgba(0,0,0,.08);overflow:hidden}
+.fc-top{display:flex;align-items:center;gap:.8rem;padding:1.2rem 1.5rem;background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff}
+.fc-avatar{width:52px;height:52px;border-radius:50%;border:3px solid rgba(255,255,255,.3);background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:1.35rem;flex-shrink:0}
+.fc-top-info h3{font-size:1rem;font-weight:700}
+.fc-top-info p{font-size:.68rem;opacity:.7}
+.fc-body{padding:1.5rem}
+
+/* Multi-step */
+.fc-steps{display:flex;gap:.5rem;margin-bottom:1.2rem;justify-content:center}
+.fc-step{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;border:2px solid #E5E7EB;color:var(--gray);transition:all .3s}
+.fc-step.active{background:var(--purple);color:#fff;border-color:var(--purple);box-shadow:0 4px 15px rgba(108,99,255,.3)}
+.fc-step.done{background:var(--mint);color:#fff;border-color:var(--mint)}
+.fc-panel{display:none}.fc-panel.active{display:block;animation:scaleIn .3s ease-out}
+.fc-field{margin-bottom:.7rem}
+.fc-field label{display:block;font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gray);margin-bottom:.2rem;font-weight:600}
+.fc-field input,.fc-field select{width:100%;border:2px solid #E5E7EB;border-radius:10px;padding:.55rem .75rem;font-family:'Montserrat',sans-serif;font-size:.85rem;background:#fff;color:var(--dark);transition:all .25s}
+.fc-field input:focus,.fc-field select:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 3px rgba(108,99,255,.12)}
+.fc-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+@media(max-width:480px){.fc-row{grid-template-columns:1fr}}
+.fc-chk{display:flex;align-items:flex-start;gap:.4rem;font-size:.68rem;color:var(--gray);margin-bottom:1rem}
+.fc-chk input{accent-color:var(--purple);flex-shrink:0;margin-top:.15rem;width:15px;height:15px}
+.fc-nav{display:flex;gap:.5rem;justify-content:flex-end;margin-top:.5rem}
+.fc-btn{padding:.55rem 1.2rem;border-radius:10px;font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;border:none}
+.fc-back{background:#fff;border:2px solid #E5E7EB;color:var(--gray)}.fc-back:hover{border-color:var(--purple)}
+.fc-next{background:var(--purple);color:#fff}.fc-next:hover{background:var(--purple2);transform:translateY(-2px)}
+.fc-submit{background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff;width:100%;padding:.8rem;font-size:.88rem;text-transform:uppercase;letter-spacing:.04em;border:none;border-radius:12px;font-family:'Montserrat',sans-serif;font-weight:700;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.fc-submit::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:left .5s}
+.fc-submit:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(108,99,255,.4)}.fc-submit:hover::before{left:100%}
+.fc-note{text-align:center;font-size:.66rem;color:var(--gray);margin-top:.7rem}
+.fc-success{display:none;text-align:center;padding:2rem 1rem}
+.fc-success h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--mint);margin-bottom:.4rem}
+.fc-success p{font-size:.82rem;color:var(--gray)}
+
+/* RISULTATO VALUTAZIONE */
+.val-result{display:none;margin-top:1.5rem;animation:fadeUp .6s ease-out}
+.val-linda-wrap{text-align:center;margin-bottom:1.5rem;animation:scaleIn .5s ease-out}
+.val-linda-img{width:180px;height:220px;object-fit:cover;object-position:center top;border-radius:20px;border:4px solid var(--purple);box-shadow:0 8px 40px rgba(108,99,255,.3);margin:0 auto;display:block}
+.val-linda-bubble{display:inline-block;background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff;padding:.6rem 1.4rem;border-radius:20px 20px 20px 4px;font-size:1rem;font-weight:700;margin-top:.8rem;animation:float 3s ease-in-out infinite;position:relative}
+.val-linda-bubble::after{content:'';position:absolute;bottom:-8px;left:20px;width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:10px solid var(--purple)}
+.val-stima-box{background:linear-gradient(135deg,var(--purple-deep),#1a0f40);border-radius:var(--radius);padding:1.5rem;margin:1rem 0;color:#fff;text-align:center}
+.val-stima-label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--purple2);margin-bottom:.3rem}
+.val-stima-value{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;color:var(--sun);line-height:1.1}
+.val-stima-range{font-size:.82rem;color:rgba(255,255,255,.5);margin-top:.3rem}
+.val-stima-mq{font-size:.78rem;color:var(--mint);margin-top:.2rem}
+.val-pdf-notice{display:flex;align-items:center;gap:.5rem;justify-content:center;font-size:.78rem;color:var(--gray);margin-top:1rem;padding:.6rem 1rem;background:var(--light);border-radius:10px}
+.val-pdf-notice .pdf-spinner{width:18px;height:18px;border:2px solid #E5E7EB;border-top:2px solid var(--purple);border-radius:50%;animation:spin 1s linear infinite}
+.val-pdf-done{color:var(--mint);font-weight:600}
+.val-pdf-btn{display:inline-block;margin-top:.8rem;padding:.7rem 1.6rem;background:var(--purple);color:#fff;border:none;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;transition:background .2s}
+.val-pdf-btn:hover{background:var(--purple2)}
+.val-wa-qr{margin-top:1rem;text-align:center}
+.val-wa-qr canvas{margin:0 auto;border-radius:8px}
+.val-wa-qr p{font-size:.7rem;color:var(--gray);margin-top:.3rem}
+.val-edu-box{text-align:left;background:#fff;border:2px solid rgba(108,99,255,.2);border-radius:14px;padding:1.1rem 1.2rem;margin:1.2rem 0;color:var(--dark);box-shadow:0 4px 24px rgba(108,99,255,.08)}
+.val-edu-box h3{font-size:.92rem;font-weight:700;margin-bottom:.5rem;color:var(--purple-deep)}
+.val-edu-box p,.val-edu-box li{font-size:.78rem;color:var(--gray);line-height:1.65}
+.val-edu-box ul{margin:.4rem 0 .6rem 1.1rem}
+.val-edu-box li{margin-bottom:.35rem}
+.val-sopralluogo-cta{display:flex;flex-direction:column;align-items:center;gap:.55rem;margin:1rem 0 .5rem}
+.val-sopralluogo-cta .val-cta-primary{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff;padding:.85rem 1.6rem;border-radius:12px;font-size:.88rem;font-weight:700;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;transition:transform .2s,box-shadow .2s;text-align:center;max-width:100%}
+.val-sopralluogo-cta .val-cta-primary:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(108,99,255,.35)}
+.val-sopralluogo-cta .val-cta-secondary{font-size:.72rem;color:var(--gray);font-weight:500}
+.val-sopralluogo-cta .val-cta-secondary a{color:var(--purple);font-weight:700;text-decoration:underline}
+@keyframes wink{0%,80%,100%{transform:scale(1)}90%{transform:scale(1.05) rotate(-2deg)}}
+
+/* COME FUNZIONA */
+.come{padding:5rem 1.5rem;background:#fff}
+.come-inner{max-width:1100px;margin:0 auto}
+.steps-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
+@media(max-width:700px){.steps-row{grid-template-columns:1fr}}
+.stp{position:relative;text-align:center;background:var(--light);border-radius:var(--radius);padding:0 0 2rem;overflow:hidden;transition:all .3s}
+.stp:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,.08);background:#fff}
+.stp-img{aspect-ratio:16/10;overflow:hidden;margin-bottom:1rem}
+.stp-img img{width:100%;height:100%;object-fit:cover;display:block}
+.stp-body{padding:0 1.5rem}
+.stp-icon{font-size:2rem;margin-bottom:.5rem;display:block}
+.stp h3{font-size:.95rem;font-weight:700;margin-bottom:.35rem}
+.stp p{font-size:.8rem;color:var(--gray);line-height:1.75}
+.stp-badge{position:absolute;top:12px;right:12px;background:linear-gradient(135deg,var(--purple),var(--fire));color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;box-shadow:0 4px 12px rgba(108,99,255,.3);z-index:1}
+
+/* GARANZIE */
+.garanzie{padding:5rem 1.5rem;background:linear-gradient(135deg,var(--deep),var(--purple-deep))}
+.garanzie-inner{max-width:1000px;margin:0 auto}
+.garanzie .sec-tag,.garanzie .sec-h2,.garanzie .sec-sub{color:#fff}.garanzie .sec-sub{color:rgba(255,255,255,.5)}
+.garanzie .sec-h2 em{background:linear-gradient(135deg,var(--sun),var(--fire));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.g-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2rem}
+@media(max-width:600px){.g-grid{grid-template-columns:1fr}}
+.g-card{display:flex;gap:.8rem;align-items:flex-start;background:rgba(255,255,255,.05);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:1.3rem;transition:all .3s}
+.g-card:hover{background:rgba(255,255,255,.1);transform:translateY(-3px)}
+.g-icon{font-size:1.8rem;flex-shrink:0}
+.g-card h4{font-size:.85rem;font-weight:700;color:#fff;margin-bottom:.15rem}
+.g-card p{font-size:.78rem;color:rgba(255,255,255,.55);line-height:1.7}
+
+/* CTA FINALE */
+.cta-final{padding:5rem 1.5rem;background:#fff;text-align:center;position:relative;overflow:hidden}
+.cta-final::before{content:'';position:absolute;top:50%;left:50%;width:700px;height:700px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(108,99,255,.05),transparent 70%);pointer-events:none}
+.cta-final h2{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;margin-bottom:.5rem}
+.cta-final h2 em{background:linear-gradient(135deg,var(--purple),var(--fire));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cta-final p{font-size:.88rem;color:var(--gray);margin-bottom:1.8rem;max-width:500px;margin-left:auto;margin-right:auto}
+.cta-btn{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff;padding:.85rem 2.5rem;border-radius:14px;font-size:.92rem;font-weight:700;transition:all .3s;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;animation:glow 3s infinite}
+.cta-btn:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 16px 48px rgba(108,99,255,.4)}
+.cta-channels{display:flex;justify-content:center;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap}
+.cta-ch{font-size:.78rem;color:var(--gray);font-weight:500}.cta-ch a{color:var(--purple);font-weight:700}
+
+.footer-mini{background:var(--dark);padding:1.5rem;text-align:center;font-size:.7rem;color:rgba(255,255,255,.45)}
+.footer-mini a{color:rgba(255,255,255,.5);margin:0 .5rem}.footer-mini a:hover{color:var(--purple)}
+</style>
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "RealEstateAgent",
+      "@id": "https://righettoimmobiliare.it/#organization",
+      "name": "Righetto Immobiliare",
+      "url": "https://righettoimmobiliare.it",
+      "dateModified": "2026-03-18",
+      "telephone": "+39-049-884-3484",
+      "email": "info@righettoimmobiliare.it",
+      "foundingDate": "2000",
+      "areaServed": {"@type": "AdministrativeArea", "name": "Provincia di Padova"},
+      "address": {"@type": "PostalAddress", "streetAddress": "Via Roma n.96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
+      "geo": {"@type": "GeoCoordinates", "latitude": 45.476956, "longitude": 11.845762},
+      "sameAs": [
+        "https://www.facebook.com/righettoimmobiliare",
+        "https://www.instagram.com/righettoimmobiliare",
+        "https://www.linkedin.com/company/righetto-immobiliare"
+      ],
+      "hasMap": "https://maps.google.com/?q=45.476956,11.845762",
+      "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "127", "bestRating": "5"}
+    },
+    {
+      "@type": "Service",
+      "name": "Valutazione Immobiliare Gratuita a Padova",
+      "description": "Valutazione professionale gratuita del tuo immobile a Padova e provincia. Sopralluogo, analisi con dati OMI e comparabili di zona, report dettagliato in 24 ore.",
+      "provider": {"@id": "https://righettoimmobiliare.it/#organization"},
+      "serviceType": "Valutazione immobiliare",
+      "areaServed": "Padova e Provincia",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR", "description": "Valutazione gratuita e senza impegno"}
+    },
+    {
+      "@type": "WebPage",
+      "name": "Quanto Vale la Tua Casa a Padova?",
+      "url": "https://righettoimmobiliare.it/landing-valutazione",
+      "speakable": {"@type": "SpeakableSpecification", "cssSelector": [".hero-right h1", ".hero-right .sub", ".sec-h2"]}
+    },
+    {"@type": "BreadcrumbList", "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://righettoimmobiliare.it/"},
+      {"@type": "ListItem", "position": 2, "name": "Valutazione Gratuita", "item": "https://righettoimmobiliare.it/landing-valutazione"}
+    ]}
+  ]
+}
+</script>
+<style id="rig-motion">@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}::view-transition-old(root){animation:rig-vt-out .4s cubic-bezier(.32,.72,0,1) both}::view-transition-new(root){animation:rig-vt-in .55s cubic-bezier(.32,.72,0,1) both}html{scroll-behavior:smooth}.sr,.sr-left,.sr-right,.rv{transition-duration:.95s;transition-timing-function:cubic-bezier(.32,.72,0,1)}}@keyframes rig-vt-out{to{opacity:0;transform:scale(.985)}}@keyframes rig-vt-in{from{opacity:0;transform:scale(1.015)}}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
+
+<div class="topbar">🎯 Sai quanto vale davvero la tua casa? Scoprilo in 24h — <a href="#form" style="text-decoration:underline">Gratis e senza impegno</a></div>
+
+<main id="main-content">
+
+<!-- ══ HERO con SARA ══ -->
+<section class="hero">
+  <div class="hero-bg-wrap"><img src="img/foto-servizi/valutazioni-e-perizie-padova.webp" alt="Perizia e valutazione immobiliare professionale a Padova" width="1600" height="900" fetchpriority="high"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-particles"><div class="particle p1"></div><div class="particle p2"></div><div class="particle p3"></div><div class="particle p4"></div></div>
+
+  <div class="hero-inner">
+    <div class="sara-wrap">
+      <div class="sara-ring">
+        <img src="img/team/real-state-linda-righetto.webp" alt="Linda — Assistente Virtuale Righetto Immobiliare" class="sara-img" width="280" height="280">
+        <div class="sara-status"></div>
+      </div>
+      <div class="sara-label"><span class="online"></span> Linda — Online ora</div>
+      <div class="sara-subtitle">La tua assistente immobiliare 24/7</div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-tag">Stima immobiliare senza impegno</div>
+      <h1>Quanto vale<br><em>davvero</em> la tua casa?</h1>
+            <p class="last-update" style="font-size:0.85rem;color:rgba(255,255,255,.45);margin-top:0.5rem;">Ultimo aggiornamento: Marzo 2026</p>
+      <p class="sub">Basta stime online approssimative. Ricevi una valutazione professionale basata su dati reali del mercato padovano, da chi vende case qui da 25 anni.</p>
+      <ul class="hero-checks">
+        <li><span class="chk chk-1">✓</span> Gratuita e senza impegno</li>
+        <li><span class="chk chk-2">✓</span> Report dettagliato in 24 ore</li>
+        <li><span class="chk chk-3">✓</span> Comparabili di zona e quotazioni OMI</li>
+        <li><span class="chk chk-4">✓</span> Sopralluogo con agente esperto</li>
+      </ul>
+      <a href="#form" class="hero-cta">📊 Scopri il valore della tua casa</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="marquee-item"><strong>OMI</strong> + comparabili di zona</span>
+    <span class="marquee-item"><strong>24h</strong> per il report</span>
+    <span class="marquee-item"><strong>100%</strong> gratuita</span>
+    <span class="marquee-item"><strong>25 anni</strong> nell'area padovana</span>
+    <span class="marquee-item"><strong>101</strong> comuni coperti</span>
+    <span class="marquee-item"><strong>4.9/5</strong> su Google</span>
+    <span class="marquee-item"><strong>OMI</strong> + comparabili di zona</span>
+    <span class="marquee-item"><strong>24h</strong> per il report</span>
+    <span class="marquee-item"><strong>100%</strong> senza impegno</span>
+    <span class="marquee-item"><strong>25 anni</strong> nel Padovano</span>
+    <span class="marquee-item"><strong>101</strong> comuni coperti</span>
+    <span class="marquee-item"><strong>4.9/5</strong> su Google</span>
+  </div>
+</div>
+
+<!-- ══ FORM multi-step ══ -->
+<section class="form-section" id="form">
+  <div class="form-inner">
+    <div class="sec-tag">Inizia da qui</div>
+    <h2 class="sec-h2">Compila e ricevi la valutazione <em>in 24h</em></h2>
+    <p class="sec-sub">3 step veloci. Meno di 2 minuti del tuo tempo.</p>
+
+    <div class="form-card">
+      <div class="fc-top">
+        <div class="fc-avatar" aria-hidden="true">📊</div>
+        <div class="fc-top-info">
+          <h3>Linda ti guida passo dopo passo</h3>
+          <p>Compila i dati e riceverai il report in 24h</p>
+        </div>
+      </div>
+      <div class="fc-body">
+        <div class="fc-steps">
+          <div class="fc-step active" id="st1">1</div>
+          <div class="fc-step" id="st2">2</div>
+          <div class="fc-step" id="st3">3</div>
+        </div>
+        <form id="leadForm" onsubmit="sendLead(event)" novalidate>
+          <div class="fc-panel active" id="panel1">
+            <div class="fc-field"><label for="v-comune">Comune / Zona *</label><input type="text" id="v-comune" placeholder="Es. centro storico, Albignasego..." required></div>
+            <div class="fc-row">
+              <div class="fc-field"><label for="v-tipo">Tipo immobile *</label>
+                <select id="v-tipo" required><option value="">Seleziona...</option><option>Appartamento</option><option>Villa / Villetta</option><option>Casa indipendente</option><option>Bifamiliare</option><option>Rustico / Casale</option><option>Terreno</option><option>Commerciale / Ufficio</option></select>
+              </div>
+              <div class="fc-field"><label for="v-mq">Superficie (mq)</label><input type="number" id="v-mq" placeholder="Es. 100"></div>
+            </div>
+            <div class="fc-row">
+              <div class="fc-field"><label for="v-vani">Vani</label>
+                <select id="v-vani"><option value="">Seleziona...</option><option>Monolocale</option><option>Bilocale</option><option>Trilocale</option><option>Quadrilocale</option><option>5+</option></select>
+              </div>
+              <div class="fc-field"><label for="v-stato">Stato</label>
+                <select id="v-stato"><option value="">Seleziona...</option><option>Nuovo / Ristrutturato</option><option>Buone condizioni</option><option>Da ristrutturare</option></select>
+              </div>
+            </div>
+            <div class="fc-nav"><button type="button" class="fc-btn fc-next" onclick="goStep(2)">Avanti →</button></div>
+          </div>
+          <div class="fc-panel" id="panel2">
+            <div class="fc-row">
+              <div class="fc-field"><label for="v-piano">Piano</label><select id="v-piano"><option value="">Seleziona...</option><option>Terra</option><option>1</option><option>2</option><option>3+</option><option>Attico</option></select></div>
+              <div class="fc-field"><label for="v-garage">Garage</label><select id="v-garage"><option value="">Seleziona...</option><option>Si</option><option>Posto auto</option><option>No</option></select></div>
+            </div>
+            <div class="fc-field"><label for="v-motivo">Perche vuoi la valutazione?</label>
+              <select id="v-motivo"><option value="">Seleziona...</option><option>Sto pensando di vendere</option><option>Curiosita</option><option>Successione / Divisione</option><option>Perizia banca</option><option>Altro</option></select>
+            </div>
+            <div class="fc-nav"><button type="button" class="fc-btn fc-back" onclick="goStep(1)">← Indietro</button><button type="button" class="fc-btn fc-next" onclick="goStep(3)">Avanti →</button></div>
+          </div>
+          <div class="fc-panel" id="panel3">
+            <div class="fc-row">
+              <div class="fc-field"><label for="v-nome">Nome *</label><input type="text" id="v-nome" placeholder="Mario" required></div>
+              <div class="fc-field"><label for="v-cognome">Cognome</label><input type="text" id="v-cognome" placeholder="Rossi"></div>
+            </div>
+            <div class="fc-row">
+              <div class="fc-field"><label for="v-tel">Telefono *</label><input type="tel" id="v-tel" placeholder="333 123 4567" required></div>
+              <div class="fc-field"><label for="v-email">Email</label><input type="email" id="v-email" placeholder="mario@email.it"></div>
+            </div>
+            <div class="fc-chk"><input type="checkbox" id="v-gdpr" required><label for="v-gdpr">Ho preso visione dell'<a href="privacy" target="_blank" rel="noopener">informativa privacy</a> (Reg. UE 2016/679) e acconsento al trattamento per finalità contrattuali e di legge (punti a) e b)). *</label></div>
+            <div class="fc-chk"><input type="checkbox" id="v-news" checked class="rig-gdpr-marketing" name="gdpr_marketing">Acconsento al trattamento per finalità di marketing, soddisfazione clienti e comunicazioni commerciali (punti c), d) ed e) dell'informativa — <em>facoltativo</em>, revocabile in qualsiasi momento.</div>
+            <button type="submit" class="fc-submit">📊 Richiedi la tua stima senza impegno</button>
+          </div>
+        </form>
+        <p class="fc-note">Zero costi, zero impegno. Report in 24h.</p>
+        <div class="fc-success" id="leadSuccess">
+          <h3>Richiesta inviata! 🎉</h3>
+          <p>Ti contatteremo entro 24 ore.<br><a href="tel:+390498843484" style="color:var(--purple);font-weight:700">049.8843484</a></p>
+        </div>
+        <!-- Risultato valutazione con Linda -->
+        <div class="val-result" id="valResult">
+          <div class="val-linda-wrap">
+            <img src="img/team/foto-linda-righetto-viola.webp" alt="Linda Righetto — Righetto Immobiliare" class="val-linda-img" width="180" height="220">
+            <div class="val-linda-bubble">Ottimo punto di partenza — il passo successivo e il sopralluogo</div>
+          </div>
+          <div class="val-stima-box">
+            <div class="val-stima-label">Stima indicativa del tuo immobile</div>
+            <div class="val-stima-value" id="valMed"></div>
+            <div class="val-stima-range" id="valRange"></div>
+            <div class="val-stima-mq" id="valMq"></div>
+          </div>
+          <div class="val-edu-box" id="valEduBox" aria-labelledby="valEduTitle">
+            <h3 id="valEduTitle">Perche serve un sopralluogo dopo la stima online</h3>
+            <p>Il range qui sopra usa comparabili di zona e i dati che hai inserito: utile per orientarti, ma <strong>non sostituisce una visita in loco</strong>.</p>
+            <ul>
+              <li>Stato effettivo, finiture e impianti incidono sul prezzo reale di mercato.</li>
+              <li>Luce, esposizione, rumore e contesto del palazzo si valutano solo dal vivo.</li>
+              <li>Planimetria, conformita urbanistica e vincoli possono cambiare la strategia di vendita.</li>
+            </ul>
+            <p>In agenzia ti accompagniamo con calma: nessun impegno, nessuna percentuale pubblicata online — tutto da concordare in sede nel mandato.</p>
+          </div>
+          <div class="val-sopralluogo-cta">
+            <a class="val-cta-primary" href="servizio-valutazioni#richiedi">Prenota sopralluogo gratuito</a>
+            <p class="val-cta-secondary">Preferisci parlare subito? <a href="tel:+390498843484">049.8843484</a> · <a href="https://wa.me/393497365930?text=Ho%20fatto%20la%20stima%20online%20su%20righettoimmobiliare.it%20—%20vorrei%20fissare%20un%20sopralluogo%20gratuito." target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+          </div>
+          <button class="val-pdf-btn" id="valPdfBtn" style="display:none" onclick="scaricaPDF()">📄 Scarica scheda PDF</button>
+          <div class="val-pdf-notice" id="valPdfNotice" style="display:none">
+            <div class="pdf-spinner"></div>
+            <span>Stiamo preparando la tua scheda PDF...</span>
+          </div>
+          <div class="val-wa-qr" id="valQr"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COME FUNZIONA ══ -->
+<section class="come">
+  <div class="come-inner">
+    <div class="sec-tag">3 passaggi</div>
+    <h2 class="sec-h2">Come funziona la <em>valutazione</em></h2>
+    <div class="steps-row">
+      <div class="stp">
+        <div class="stp-badge">1</div>
+        <div class="stp-img">
+          <img src="img/blog/blog-valutazione-casa-padova-guida-2026-comparabili.webp" alt="Analisi comparabili immobiliari nel database Righetto Padova" width="400" height="250" loading="lazy">
+        </div>
+        <div class="stp-body">
+          <div class="stp-icon">📝</div>
+          <h3>Compila il form</h3>
+          <p>Zona, tipologia, metratura. Meno di 2 minuti — i dati alimentano subito l'analisi comparativa.</p>
+        </div>
+      </div>
+      <div class="stp">
+        <div class="stp-badge">2</div>
+        <div class="stp-img">
+          <img src="img/blog/blog-valutazione-casa-padova-guida-2026-sopralluogo.webp" alt="Agente Righetto durante sopralluogo immobiliare in provincia di Padova" width="400" height="250" loading="lazy">
+        </div>
+        <div class="stp-body">
+          <div class="stp-icon">🏠</div>
+          <h3>Sopralluogo gratuito</h3>
+          <p>Un agente visita l'immobile e verifica stato, luce, esposizione e contesto reale sul territorio.</p>
+        </div>
+      </div>
+      <div class="stp">
+        <div class="stp-badge">3</div>
+        <div class="stp-img">
+          <img src="img/blog/blog-valutazione-casa-padova-guida-2026-omi.webp" alt="Report valutazione con dati OMI e range di prezzo mercato Padova" width="400" height="250" loading="lazy">
+        </div>
+        <div class="stp-body">
+          <div class="stp-icon">📊</div>
+          <h3>Ricevi il report</h3>
+          <p>In 24h: valore di mercato, range prezzo, analisi zona e consigli concreti per la vendita.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GARANZIE ══ -->
+<section class="garanzie">
+  <div class="garanzie-inner">
+    <div class="sec-tag">Perche noi</div>
+    <h2 class="sec-h2">Non e un <em>numero a caso</em></h2>
+    <p class="sec-sub">Ecco cosa ci distingue dai calcolatori online.</p>
+    <div class="g-grid">
+      <div class="g-card">
+        <div class="g-icon">🎯</div>
+        <div><h4>Dati reali, non algoritmi</h4><p>Quotazioni OMI dell'Agenzia delle Entrate e compravendite comparabili della zona, verificate in sopralluogo.</p></div>
+      </div>
+      <div class="g-card">
+        <div class="g-icon">👁</div>
+        <div><h4>Sopralluogo fisico</h4><p>Un agente vede l'immobile dal vivo: stato, luce, esposizione, contesto reale.</p></div>
+      </div>
+      <div class="g-card">
+        <div class="g-icon">📈</div>
+        <div><h4>25 anni di esperienza</h4><p>Ogni quartiere, ogni strada, ogni dinamica di prezzo. Dal 2000 nel territorio padovano.</p></div>
+      </div>
+      <div class="g-card">
+        <div class="g-icon">🤝</div>
+        <div><h4>Zero impegno</h4><p>Completamente gratuita. Decidi tu, con calma. Nessun vincolo.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA FINALE ══ -->
+<section class="cta-final">
+  <h2>Non lasciare <em>soldi sul tavolo</em></h2>
+  <p>Un immobile mal valutato puo farti perdere migliaia di euro. Scopri il valore reale, gratis.</p>
+  <a href="#form" class="cta-btn">📊 Scopri il valore della tua casa</a>
+  <div class="cta-channels">
+    <div class="cta-ch">📞 <a href="tel:+390498843484">049.8843484</a></div>
+    <div class="cta-ch">💬 <a href="https://wa.me/393497365930" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
+  </div>
+</section>
+
+
+
+<section class="blog-rich-cta-strip" aria-label="Recensioni e contatti">
+  <div class="blog-rich-cta-inner">
+    <h2>Ti e' stato utile? <em>Lascia una recensione</em></h2>
+    <p class="blog-rich-cta-text">Le recensioni Google aiutano altre famiglie sul territorio.</p>
+    <a class="blog-rich-btn" href="https://maps.app.goo.gl/xuCiRGDCSKskpTSf6?g_st=ic" target="_blank" rel="noopener noreferrer">Recensione su Google</a>
+    <span class="blog-rich-cta-sub"><a href="contatti" style="color:rgba(247,245,241,0.88);text-decoration:underline">Richiedi consulenza immobiliare</a></span>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer-mini">
+  <div>&copy; 2026 Gruppo Immobiliare Righetto di Capon Gino — P.IVA 05182390285</div>
+  <div style="margin-top:.4rem"><a href="/">Sito</a><a href="privacy">Privacy</a><a href="cookie-policy">Cookie</a><a href="contatti">Contatti</a></div>
+</footer>
+
+<script src="js/vendor/supabase.min.js" defer></script>
+<script src="js/config.js?v=4"></script>
+<script src="js/valutazione-pdf.js?v=3" defer></script>
+<script>
+var _pdfDeps = null;
+function caricaLibPDF() {
+  if (_pdfDeps) return _pdfDeps;
+  function load(src) {
+    return new Promise(function(ok, ko) {
+      var s = document.createElement('script');
+      s.src = src; s.onload = ok; s.onerror = ko;
+      document.head.appendChild(s);
+    });
+  }
+  _pdfDeps = Promise.all([load('js/vendor/jspdf.umd.min.js'), load('js/vendor/qrcode.min.js')])
+    .catch(function(err) { _pdfDeps = null; throw err; });
+  return _pdfDeps;
+}
+function scaricaPDF() {
+  var dati = window._valDati;
+  if (!dati) return;
+  var notice = document.getElementById('valPdfNotice');
+  var btn = document.getElementById('valPdfBtn');
+  notice.innerHTML = '<div class="pdf-spinner"></div><span>Stiamo preparando la tua scheda PDF...</span>';
+  notice.style.display = 'flex';
+  caricaLibPDF().then(function() { generaPDFPronto(dati, notice, btn); }, function() { generaPDFPronto(dati, notice, btn); });
+}
+function generaPDFPronto(dati, notice, btn) {
+  if (typeof generaValutazionePDF === 'function' && window.jspdf) {
+    notice.innerHTML = '<div class="pdf-spinner"></div><span>Stiamo preparando la tua scheda PDF...</span>';
+    notice.style.display = 'flex';
+    generaValutazionePDF(dati).then(function() {
+      notice.innerHTML = '<span class="val-pdf-done">La tua scheda PDF e\' stata scaricata!</span>';
+      btn.style.display = 'inline-block';
+    }).catch(function(err) {
+      console.error('Errore PDF:', err);
+      notice.innerHTML = '<span class="val-pdf-done">Errore nel download. Clicca il pulsante per riprovare.</span>';
+      btn.style.display = 'inline-block';
+    });
+  } else {
+    console.error('jsPDF non caricato:', typeof generaValutazionePDF, !!window.jspdf);
+    notice.innerHTML = '<span class="val-pdf-done">Errore caricamento. Clicca il pulsante per riprovare.</span>';
+    btn.style.display = 'inline-block';
+  }
+}
+let currentStep=1;
+function goStep(n){
+  if(n===2&&(!document.getElementById('v-comune').value.trim()||!document.getElementById('v-tipo').value)){alert('Inserisci comune e tipo immobile');return;}
+  document.getElementById('panel'+currentStep).classList.remove('active');
+  document.getElementById('panel'+n).classList.add('active');
+  for(let i=1;i<=3;i++){const s=document.getElementById('st'+i);s.classList.remove('active','done');if(i<n)s.classList.add('done');else if(i===n)s.classList.add('active');}
+  currentStep=n;
+  if(n===3)caricaLibPDF().catch(function(){});
+}
+async function sendLead(e){
+  e.preventDefault();
+  const nome=document.getElementById('v-nome').value.trim(),cognome=document.getElementById('v-cognome').value.trim(),tel=document.getElementById('v-tel').value.trim(),email=document.getElementById('v-email').value.trim(),gdpr=document.getElementById('v-gdpr').checked,news=document.getElementById('v-news').checked;
+  if(!nome||!tel){alert('Inserisci nome e telefono');return;}
+  if(!gdpr){alert('Accetta la privacy policy');return;}
+  const btn=document.querySelector('.fc-submit');btn.disabled=true;btn.textContent='Invio in corso...';
+  const nomeCompleto=nome+(cognome?' '+cognome:'');
+  const tipoImm=document.getElementById('v-tipo').value;
+  const zonaImm=document.getElementById('v-comune').value.trim();
+  const dettagli=[tipoImm?'Tipo: '+tipoImm:'',zonaImm?'Zona: '+zonaImm:'',document.getElementById('v-mq').value?document.getElementById('v-mq').value+' mq':'',document.getElementById('v-vani').value||'',document.getElementById('v-stato').value?'Stato: '+document.getElementById('v-stato').value:'',document.getElementById('v-piano').value?'Piano: '+document.getElementById('v-piano').value:'',document.getElementById('v-garage').value?'Garage: '+document.getElementById('v-garage').value:'',document.getElementById('v-motivo').value?'Motivo: '+document.getElementById('v-motivo').value:''].filter(Boolean).join(' | ');
+  let emailOk=false;
+  try{if(typeof SERVIZI_CONFIG!=='undefined'){emailOk=await SERVIZI_CONFIG.sendNotifica({subject:'Nuovo contatto dal sito: '+nomeCompleto,html_body:'<b>Nome:</b> '+nomeCompleto+'<br><b>Email:</b> '+(email||'-')+'<br><b>Telefono:</b> '+tel+'<br><b>Dettagli:</b> '+dettagli+'<br><b>Newsletter:</b> '+(news?'Sì':'No'),reply_to:email||undefined});}}catch(e){}
+  let supaOk=false;
+  try{const sb=window.supabase&&supabase.createClient('https://qwkwkemuabfwvwuqrxlu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc');if(sb){const _ins=await sb.from('richieste').insert([{nome:nomeCompleto,email,telefono:tel,messaggio:'[LANDING VALUTAZIONE] '+dettagli,provenienza:'landing-valutazione',newsletter:news,letto:false}]);supaOk=!_ins.error;if(_ins.error)console.warn('richieste insert fallita:',_ins.error.message);if(news&&email){await sb.from('newsletter_subscribers').upsert([{email,nome:nomeCompleto,telefono:tel,tipo_immobile:tipoImm||null,zona:zonaImm||null,interesse:'valutazione',provenienza:'landing-valutazione',fonte:'landing-valutazione',attivo:true,created_at:new Date().toISOString()}],{onConflict:'email'}).catch(()=>{});}}}catch(e){}
+  btn.disabled=false;btn.textContent='📊 RICHIEDI LA TUA STIMA SENZA IMPEGNO';
+  if(emailOk||supaOk){
+    document.getElementById('leadForm').style.display='none';
+    document.querySelector('.fc-note').style.display='none';
+    document.querySelector('.fc-steps').style.display='none';
+    // Calcola stima e mostra risultato con Linda
+    mostraRisultatoValutazione({
+      comune: zonaImm,
+      tipo: tipoImm,
+      mq: parseFloat(document.getElementById('v-mq').value) || 0,
+      stato: document.getElementById('v-stato').value,
+      vani: document.getElementById('v-vani').value,
+      piano: document.getElementById('v-piano').value,
+      garage: document.getElementById('v-garage').value,
+      nome: nomeCompleto
+    });
+  }
+  else{alert('Errore. Chiamaci al 049.8843484 o scrivici su WhatsApp.');}
+}
+function mostraRisultatoValutazione(dati) {
+  const mq = dati.mq;
+  if (!mq || mq < 5) {
+    // Senza mq mostra solo il successo classico
+    document.getElementById('leadSuccess').style.display='block';
+    return;
+  }
+  const stima = calcolaValutazione(dati.comune, dati.tipo, mq, dati.stato);
+  dati.stima = stima;
+  const fmt = n => new Intl.NumberFormat('it-IT',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n);
+  document.getElementById('valMed').textContent = fmt(stima.med);
+  document.getElementById('valRange').textContent = 'Range: ' + fmt(stima.min) + ' — ' + fmt(stima.max);
+  document.getElementById('valMq').textContent = fmt(stima.euroMq) + ' / mq';
+  // Mostra il pannello con Linda
+  const valResult = document.getElementById('valResult');
+  valResult.style.display = 'block';
+  valResult.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // QR Code WhatsApp
+  try {
+    const qrDiv = document.getElementById('valQr');
+    const waUrl = 'https://wa.me/393497365930?text=' + encodeURIComponent('Ciao! Ho appena fatto una valutazione online del mio immobile a ' + (dati.comune || 'Padova') + '. Vorrei saperne di piu\'!');
+    if (typeof QRCode !== 'undefined') {
+      new QRCode(qrDiv, { text: waUrl, width: 120, height: 120, correctLevel: QRCode.CorrectLevel.M });
+      qrDiv.innerHTML += '<p>Inquadra per scriverci su WhatsApp</p>';
+    }
+  } catch(e) {}
+  // Salva dati per il pulsante manuale e mostra subito il pulsante
+  window._valDati = dati;
+  document.getElementById('valPdfBtn').style.display = 'inline-block';
+  // Auto-PDF dopo 3 secondi — solo desktop (no mobile/tablet)
+  var isDesktop = window.innerWidth > 1024 && !('ontouchstart' in window);
+  if (isDesktop) {
+    setTimeout(function() {
+      scaricaPDF();
+    }, 3000);
+  }
+}
+</script>
+<script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */
+(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=13';document.body.appendChild(s);}
+setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
+})();</script>
+<script src="js/lead-conversion.js?v=4" defer></script>
+<script src="js/cookie-consent.js?v=4" defer></script>
+</body>
+</html>
