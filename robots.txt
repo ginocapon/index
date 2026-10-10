@@ -5,9 +5,8 @@ Disallow: /admin
 Disallow: /api/
 Disallow: /scraping.html
 Disallow: /bookmarklet-helper.html
-Disallow: /js/
+Disallow: /js/admin-
 Disallow: /data/seo-auto/
-Allow: /js/chatbot.js
 
 # AI Bots — benvenuti, leggete llms.txt
 User-agent: GPTBot
