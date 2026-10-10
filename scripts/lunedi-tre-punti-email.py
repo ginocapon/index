@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Email lunedì — richiamo «3 task» per Gino (stile report test / venerdì).
+Email richiamo «3 task» per Gino (stile report test / venerdì).
 Output: lunedi-email-report.html, lunedi-email-subject.txt
-Cron: .github/workflows/lunedi-tre-punti-agente.yml (lunedì 07:00 CEST)
+Cron: .github/workflows/martedi-tre-punti-agente.yml (martedì 07:00 CEST)
 """
 from __future__ import annotations
 
@@ -22,6 +22,7 @@ def main() -> None:
     payload = json.loads(DATA.read_text(encoding="utf-8"))
     today = date.today().strftime("%d/%m/%Y")
     scheduled = payload.get("scheduled_for", "—")
+    weekday = payload.get("scheduled_weekday", "martedì")
     prefix = payload.get("email_subject_prefix", "[TEST] Piano agente")
 
     tasks_html = []
@@ -37,8 +38,8 @@ def main() -> None:
 <head><meta charset="utf-8"><title>Piano lunedì — 3 task</title></head>
 <body style="font-family:Montserrat,Arial,sans-serif;font-size:15px;line-height:1.55;color:#152435;max-width:640px;margin:0 auto;padding:20px">
   <p style="font-size:12px;color:#6b7a8d">Righetto Immobiliare · Richiamo agente Cloud · <strong>TEST</strong> (come report venerdì)</p>
-  <h1 style="font-size:1.35rem;color:#2c4a6e">Lunedì — i 3 task da gestire</h1>
-  <p><strong>Oggi:</strong> {escape(today)} · <strong>Piano per:</strong> {escape(scheduled)} (lunedì)</p>
+  <h1 style="font-size:1.35rem;color:#2c4a6e">{escape(weekday.capitalize())} — i 3 task da gestire</h1>
+  <p><strong>Oggi:</strong> {escape(today)} · <strong>Piano per:</strong> {escape(scheduled)} ({escape(weekday)})</p>
   <p>Quando chiedi in chat «cosa dobbiamo fare» o «i tre punti», l'agente usa la stessa lista.</p>
 
   <h2 style="font-size:1.1rem;color:#2c4a6e">Priorità (ordine consigliato)</h2>
@@ -51,7 +52,7 @@ def main() -> None:
 
   <p style="font-size:13px;color:#6b7a8d;margin-top:2em">
     Fonte repo: <code>data/lunedi-tre-punti-reminder.json</code> ·
-    Workflow: <code>lunedi-tre-punti-agente.yml</code>
+    Workflow: <code>martedi-tre-punti-agente.yml</code>
   </p>
 </body>
 </html>"""
