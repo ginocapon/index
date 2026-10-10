@@ -1,0 +1,528 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+<!-- Google tag (gtag.js) + Consent Mode -->
+<script src="js/ga-consent.js?v=23"></script>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#2C4A6E">
+  <title>Servizi immobiliari Padova e Limena: vendita, affitto, stime</title>
+  <meta name="robots" content="index, follow, max-image-preview:large"><link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co"><link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="canonical" href="https://righettoimmobiliare.it/servizi">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Servizi immobiliari Padova e Limena: vendita, affitto, stime">
+<meta property="og:description" content="Vendere, affittare o far gestire un immobile a Padova e provincia: valutazione gratuita, locazioni, preliminari e gestione. Righetto, alleato dal 2000.">
+<meta property="og:url" content="https://righettoimmobiliare.it/servizi">
+<meta property="og:site_name" content="Righetto Immobiliare">
+<meta property="og:locale" content="it_IT">
+<meta property="og:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Servizi immobiliari Padova e Limena: vendita, affitto, stime">
+<meta name="twitter:description" content="Vendere, affittare o far gestire un immobile a Padova e provincia: valutazione gratuita, locazioni, preliminari e gestione. Righetto, alleato dal 2000.">
+<meta name="twitter:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
+<meta name="description" content="Vendere, affittare o far gestire un immobile a Padova e provincia: valutazione gratuita, locazioni, preliminari e gestione. Righetto, alleato dal 2000.">
+  <link rel="stylesheet" href="css/fonts.css?v=3">
+  <link rel="stylesheet" href="css/nav-mobile.css?v=7">
+  <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/welcome-popup.css?v=3" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/page-hero-bg.css?v=1" media="all">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--nero:#152435;--bianco:#F7F5F1;--oro:#FF6B35;--grigio:#6B7A8D;--gc:#E1DBD1;--verde:#1E8449;--rosso:#C0392B;--sfondo:#ECE7DF;--blu:#2C4A6E;--blu2:#3A5F8C;--blu3:#4E789A;--azzurro:#8AB4CE;--oro2:#FF8F5E;--oro-bg:rgba(255,107,53,0.10);--testo:#152435;--carta:#F2EDE7}
+    body{font-family:'Montserrat',sans-serif;background:var(--bianco);color:var(--testo)}
+    a{text-decoration:none;color:inherit}
+    /* HEADER */
+    header{background:var(--nero);position:sticky;top:0;z-index:100}
+    .hi{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:74px;display:flex;align-items:center;gap:2rem}
+    .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff}
+    .logo span{color:var(--oro);font-style:italic}
+    nav{display:flex;gap:.2rem;flex:1}
+    nav a{color:rgba(255,255,255,.7);font-size:.82rem;padding:.4rem .75rem;border-radius:4px;transition:color .2s}
+    nav a:hover,nav a.active{color:#fff}
+    nav a.active{color:var(--oro)}
+    .h-cta{display:flex;align-items:center;gap:.65rem}
+    .h-tel{color:rgba(255,255,255,.75);font-size:.78rem;display:flex;align-items:center;gap:.3rem}
+    .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:6px;font-size:.76rem;font-weight:500;letter-spacing:.04em;transition:all .2s}
+.h-btn:hover{background:var(--oro2);transform:translateY(-1px)}
+    /* HERO */
+    .hero{background:linear-gradient(135deg,var(--nero) 0%,var(--blu) 100%);padding:5rem 1.5rem 4rem;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:500px;height:500px;background:radial-gradient(circle,rgba(255,107,53,.10) 0%,transparent 70%);pointer-events:none}
+    .hero-inner{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+    @media(max-width:900px){.hero-inner{grid-template-columns:1fr}}
+    .hero-tag{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.85rem}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:300;color:#fff;line-height:1.15;margin-bottom:1.1rem}
+    .hero h1 strong{font-weight:600;font-style:italic}
+    .hero p{font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.85;margin-bottom:1.6rem}
+    .hero-btns{display:flex;gap:.65rem;flex-wrap:wrap}
+    .btn-gold{background:var(--oro);color:var(--nero);padding:.65rem 1.4rem;border-radius:8px;font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
+    .btn-gold:hover{background:var(--oro2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,107,53,.25)}
+    .btn-outline{border:1px solid rgba(255,255,255,.25);color:#fff;padding:.65rem 1.4rem;border-radius:8px;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:border-color .2s,color .2s}
+    .btn-outline:hover{border-color:var(--oro);color:var(--oro)}
+    .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .hs{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:1.4rem 1rem;text-align:center;backdrop-filter:blur(8px);transition:transform .2s,border-color .2s}
+.hs:hover{transform:translateY(-2px);border-color:rgba(255,107,53,.3)}
+    .hs-val{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;color:var(--oro)}
+    .hs-lbl{font-size:.72rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-top:.25rem}
+    /* SERVIZI GRID */
+    .section{padding:5rem 1.5rem}
+    .section-inner{max-width:1380px;margin:0 auto}
+    .sec-tag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.5rem}
+    .sec-title{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;margin-bottom:.7rem}
+    .sec-title strong{font-weight:600}
+    .sec-sub{font-size:.88rem;color:var(--grigio);line-height:1.75;max-width:580px;margin-bottom:3rem}
+    .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem}
+    @media(max-width:900px){.services-grid{grid-template-columns:1fr}}
+    .scard{border:1px solid var(--gc);border-radius:10px;overflow:hidden;transition:transform .25s,box-shadow .25s;background:#fff}
+    .scard:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.09)}
+    .scard-img{height:200px;background:var(--sfondo);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+    .scard-img-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+    .scard-num{position:absolute;top:1rem;left:1.2rem;font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:600;color:rgba(0,0,0,.05);line-height:1}
+    .scard-icon{font-size:3.5rem;position:relative;z-index:1}
+    .scard-tag{position:absolute;top:1rem;right:1rem;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;background:var(--nero);color:#fff;padding:.2rem .55rem;border-radius:1px}
+    .scard-body{padding:1.5rem}
+    .scard-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;margin-bottom:.5rem}
+    .scard-desc{font-size:.85rem;color:var(--grigio);line-height:1.8;margin-bottom:1.1rem}
+    .scard-list{list-style:none;margin-bottom:1.2rem}
+    .scard-list li{display:flex;align-items:flex-start;gap:.45rem;font-size:.82rem;color:var(--grigio);padding:.28rem 0;border-bottom:1px solid var(--gc)}
+    .scard-list li:last-child{border-bottom:none}
+    .scard-list li::before{content:'→';color:var(--oro);flex-shrink:0;margin-top:.05rem}
+    .scard-link{display:inline-flex;align-items:center;gap:.35rem;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--nero);border-bottom:1px solid var(--oro);padding-bottom:.12rem;transition:color .2s}
+    .scard-link:hover{color:var(--oro)}
+    /* PROCESSO */
+    .process{background:var(--sfondo);padding:5rem 1.5rem}
+    .process-inner{max-width:1380px;margin:0 auto}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:3rem}
+    @media(max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:500px){.steps{grid-template-columns:1fr}}
+    .step{background:#fff;border:1px solid var(--gc);border-radius:10px;padding:1.6rem 1.2rem;position:relative;transition:transform .2s,box-shadow .2s}
+.step:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(21,36,53,.1)}
+    .step-n{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:600;color:var(--oro);opacity:.25;line-height:1;margin-bottom:.6rem}
+    .step-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;margin-bottom:.45rem}
+    .step-desc{font-size:.82rem;color:var(--grigio);line-height:1.7}
+    /* PERCHÉ NOI */
+    .why{padding:5rem 1.5rem;background:#fff}
+    .why-inner{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+    @media(max-width:900px){.why-inner{grid-template-columns:1fr}}
+    .why-visual{background:var(--nero);border-radius:10px;padding:2.5rem;aspect-ratio:4/3;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+    .why-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(255,107,53,.15) 0%,transparent 60%)}
+    .why-big{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:600;color:rgba(255,255,255,.06);position:absolute;top:1rem;right:1.2rem;line-height:1}
+    .why-quote{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;font-style:italic;color:#fff;line-height:1.5;position:relative;z-index:1}
+    .why-quote strong{font-weight:600;color:var(--oro);font-style:normal}
+    .why-author{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.75rem;position:relative;z-index:1}
+    .why-items{display:flex;flex-direction:column;gap:.75rem}
+    .wi{display:flex;align-items:flex-start;gap:1rem;padding:1rem;border:1px solid var(--gc);border-radius:10px;transition:border-color .2s}
+    .wi:hover{border-color:var(--oro)}
+    .wi-icon{width:40px;height:40px;background:var(--sfondo);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem}
+    .wi-title{font-weight:500;font-size:.88rem;margin-bottom:.22rem}
+    .wi-desc{font-size:.78rem;color:var(--grigio);line-height:1.6}
+    /* CTA FINALE */
+    .cta-section{background:linear-gradient(135deg,var(--nero) 0%,var(--blu) 100%);padding:5rem 1.5rem;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(255,107,53,.06) 0%,transparent 70%);pointer-events:none}
+    .cta-inner{max-width:780px;margin:0 auto;text-align:center}
+    .cta-inner h2{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:#fff;margin-bottom:.85rem}
+    .cta-inner h2 strong{font-weight:600;font-style:italic;color:var(--oro)}
+    .cta-inner p{font-size:.9rem;color:rgba(255,255,255,.5);margin-bottom:2rem;line-height:1.8}
+    .cta-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+    /* FOOTER */
+    footer{background:linear-gradient(180deg,var(--nero) 0%,#0d1a2a 100%);padding:3rem 1.5rem 1.5rem}
+    .fi{max-width:1380px;margin:0 auto}
+    .fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2rem}
+    @media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
+    .flogo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;margin-bottom:.6rem}
+    .flogo span{color:var(--oro);font-style:italic}
+    .finfo{font-size:.76rem;color:rgba(255,255,255,.6);line-height:1.9}
+    .fh{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.7rem;font-weight:500}
+    .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.6);margin-bottom:.3rem;transition:color .2s}
+    .fcol a:hover{color:var(--oro)}
+    .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.55);flex-wrap:wrap;gap:.4rem}
+    .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
+  </style>
+  <link rel="stylesheet" href="css/rig-type-scale.css?v=7">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Real Estate Services",
+  "name": "Servizi Immobiliari Righetto",
+  "url": "https://righettoimmobiliare.it/servizi",
+      "dateModified": "2026-05-12",
+  "provider": {
+    "@type": "RealEstateAgent",
+    "name": "Righetto Immobiliare",
+    "url": "https://righettoimmobiliare.it",
+    "telephone": "+39-049-884-3484",
+    "address": {"@type": "PostalAddress", "streetAddress": "Via Roma n.96", "addressLocality": "Limena", "postalCode": "35010", "addressRegion": "PD", "addressCountry": "IT"},
+    "geo": {"@type": "GeoCoordinates", "latitude": 45.476956, "longitude": 11.845762},
+    "sameAs": [
+      "https://www.facebook.com/righettoimmobiliare",
+      "https://www.instagram.com/righettoimmobiliare",
+      "https://www.linkedin.com/company/righetto-immobiliare"
+    ],
+    "hasMap": "https://maps.google.com/?q=45.476956,11.845762",
+    "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "127", "bestRating": "5"}
+  },
+  "areaServed": {"@type": "AdministrativeArea", "name": "Provincia di Padova"},
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servizi immobiliari",
+    "itemListElement": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Vendita Immobili"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Locazioni e Affitti"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Contratti Preliminari"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Valutazione Gratuita Immobile"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Valutazione e vendita riservata", "url": "https://righettoimmobiliare.it/valutazione-vendita-riservata-padova"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Segnalazione immobili per professionisti", "url": "https://righettoimmobiliare.it/segnalazione-immobili-professionisti-padova"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Virtual Tour 360"}}
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+    "dateModified": "2026-07-03","@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"Home","item":"https://righettoimmobiliare.it/"},
+  {"@type":"ListItem","position":2,"name":"Servizi","item":"https://righettoimmobiliare.it/servizi"}
+]}
+</script>
+<style id="rig-motion">@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}::view-transition-old(root){animation:rig-vt-out .4s cubic-bezier(.32,.72,0,1) both}::view-transition-new(root){animation:rig-vt-in .55s cubic-bezier(.32,.72,0,1) both}html{scroll-behavior:smooth}.sr,.sr-left,.sr-right,.rv{transition-duration:.95s;transition-timing-function:cubic-bezier(.32,.72,0,1)}}@keyframes rig-vt-out{to{opacity:0;transform:scale(.985)}}@keyframes rig-vt-in{from{opacity:0;transform:scale(1.015)}}</style>
+</head>
+<body class="page-hero-servizi">
+<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
+<header>
+  <div class="hi">
+    <a href="/" class="logo">Righetto <span>Immobiliare</span></a>
+    <nav>
+      <a href="/">Home</a><a href="chi-siamo">Chi Siamo</a><a href="immobili">Immobili</a><a href="servizi" class="active">Servizi</a><a href="blog">Blog</a><a href="faq">FAQ</a>
+    </nav>
+    <div class="h-cta">
+      <a class="h-btn" href="contatti">Parla con noi</a>
+    </div>
+  </div>
+  <button class="nav-burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+<div class="nav-mobile" id="navMobile">
+  <a href="/">Home</a>
+  <a href="chi-siamo">Chi Siamo</a>
+  <a href="immobili">Immobili</a>
+  <a href="servizi">Servizi</a>
+  <a href="blog">Blog</a>
+  <a href="faq">FAQ</a>
+  <a href="contatti" class="nav-mobile-cta">Parla con noi</a>
+</div>
+
+<main id="main-content">
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Padova e provincia</div>
+      <h1>Servizi Immobiliari a Padova<br><strong>Completi e Professionali</strong></h1>
+            <p class="last-update">Ultimo aggiornamento: Marzo 2026</p>
+      <p>Dalla valutazione iniziale alla firma finale, ti accompagniamo in ogni fase con consulenza professionale, gestione documentale e assistenza dedicata. Un unico referente per vendita, locazione e compravendita.</p>
+      <div class="hero-btns">
+        <a href="landing-consulenza-immobiliare-gratuita" class="btn-gold">Consulenza gratuita</a>
+        <a href="https://wa.me/393497365930" class="btn-outline" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-val">25+</div><div class="hs-lbl">anni di esperienza</div></div>
+      <div class="hs"><div class="hs-val">500+</div><div class="hs-lbl">immobili compravenduti</div></div>
+      <div class="hs"><div class="hs-val">98%</div><div class="hs-lbl">clienti soddisfatti</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIZI -->
+<section class="section">
+  <div class="section-inner">
+    <div class="sr">
+      <div class="sec-tag">I nostri servizi</div>
+      <h2 class="sec-title">Soluzioni complete per <strong>ogni esigenza</strong></h2>
+      <p class="sec-sub">Non gestiamo pratiche in serie: costruiamo percorsi personalizzati basati sulle tue reali necessità, con metodo, responsabilità e attenzione ai dettagli.</p>
+      <div class="serv-landing-strip" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:2rem;max-width:960px">
+        <a href="proprietario-immobile" style="display:block;padding:1rem 1.15rem;border-radius:10px;border:2px solid var(--oro);background:var(--carta);font-size:.82rem;color:var(--testo);transition:border-color .2s,box-shadow .2s">
+          <strong style="display:block;color:var(--blu);font-size:.85rem;margin-bottom:.35rem">Possiedi un immobile?</strong>
+          Percorso vendita, affitto, valutazione o gestione · <span style="color:var(--blu2);font-weight:600">Hub proprietari →</span>
+        </a>
+        <a href="landing-valutazione" style="display:block;padding:1rem 1.15rem;border-radius:10px;border:1px solid var(--gc);background:var(--carta);font-size:.82rem;color:var(--testo);transition:border-color .2s,box-shadow .2s">
+          <strong style="display:block;color:var(--blu);font-size:.85rem;margin-bottom:.35rem">Valutazione gratuita</strong>
+          Quanto vale il tuo immobile a Padova? · <span style="color:var(--blu2);font-weight:600">Richiedi stima →</span>
+        </a>
+        <a href="agenzia-immobiliare-padova" style="display:block;padding:1rem 1.15rem;border-radius:10px;border:1px solid var(--gc);background:var(--carta);font-size:.82rem;color:var(--testo);transition:border-color .2s,box-shadow .2s">
+          <strong style="display:block;color:var(--blu);font-size:.85rem;margin-bottom:.35rem">Agenzia a Padova</strong>
+          Perché scegliere un alleato locale · <span style="color:var(--blu2);font-weight:600">Scopri →</span>
+        </a>
+        <a href="segnalazione-immobili-professionisti-padova" style="display:block;padding:1rem 1.15rem;border-radius:10px;border:1px solid var(--gc);background:var(--carta);font-size:.82rem;color:var(--testo);transition:border-color .2s,box-shadow .2s">
+          <strong style="display:block;color:var(--blu);font-size:.85rem;margin-bottom:.35rem">Segnalazione professionisti</strong>
+          Geometri, notai, avvocati, commercialisti · <span style="color:var(--blu2);font-weight:600">Apri la pagina →</span>
+        </a>
+      </div>
+      <style>@media(max-width:900px){.serv-landing-strip{grid-template-columns:1fr!important}}</style>
+    </div>
+    <div class="services-grid sr-stagger">
+
+      <div class="scard">
+        <div class="scard-img" style="background:linear-gradient(135deg,#f0ece6,#e8e4de)">
+          <div class="scard-num">01</div>
+          <div class="scard-icon">🏠</div>
+          <span class="scard-tag">Servizio principale</span>
+        </div>
+        <div class="scard-body">
+          <div class="scard-title">Vendita Immobili a Padova</div>
+          <p class="scard-desc">Accompagniamo i proprietari dalla valutazione reale alla conclusione della vendita, con una strategia costruita su dati di mercato e obiettivi chiari. Massimizziamo il valore del tuo immobile e riduciamo i tempi di vendita.</p>
+          <ul class="scard-list">
+            <li>Valutazione gratuita basata su comparabili reali</li>
+            <li>Strategia di promozione e posizionamento multicanale</li>
+            <li>Foto professionali, virtual tour 360° e video</li>
+            <li>Selezione e qualifica degli acquirenti</li>
+            <li>Gestione visite e trattativa</li>
+            <li>Assistenza completa fino al rogito notarile</li>
+          </ul>
+          <a href="servizio-vendita" class="scard-link">Scopri il servizio →</a>
+        </div>
+      </div>
+
+      <div class="scard">
+        <div class="scard-img" style="background:linear-gradient(135deg,#e8f0ee,#d4e4e0)">
+          <div class="scard-num">02</div>
+          <div class="scard-icon">📋</div>
+          <span class="scard-tag">Locazioni</span>
+        </div>
+        <div class="scard-body">
+          <div class="scard-title">Contratti di Locazione</div>
+          <p class="scard-desc">Gestiamo contratti di locazione con attenzione normativa e chiarezza per tutte le parti coinvolte. Dalla ricerca dell'inquilino alla redazione del contratto, coordinando anche gli aspetti fiscali e amministrativi.</p>
+          <ul class="scard-list">
+            <li>Valutazione del canone di mercato</li>
+            <li>Ricerca e selezione dell'inquilino</li>
+            <li>Redazione contratti personalizzati (4+4, 3+2, transitorio)</li>
+            <li>Registrazione contratto all'Agenzia delle Entrate</li>
+            <li>Gestione rinnovi, disdette e aggiornamenti ISTAT</li>
+            <li>Supporto continuo ai proprietari</li>
+          </ul>
+          <a href="servizio-locazioni" class="scard-link">Scopri il servizio →</a>
+        </div>
+      </div>
+
+      <div class="scard">
+        <div class="scard-img" style="background:linear-gradient(135deg,#f0eee8,#e4dfd4)">
+          <div class="scard-num">03</div>
+          <div class="scard-icon">✍️</div>
+          <span class="scard-tag">Compravendita</span>
+        </div>
+        <div class="scard-body">
+          <div class="scard-title">Gestione Preliminari</div>
+          <p class="scard-desc">Verifichiamo documentazione, clausole e conformità urbanistiche e catastali per garantire un passaggio sicuro fino al rogito notarile. Proteggiamo gli interessi di acquirente e venditore in ogni fase della trattativa.</p>
+          <ul class="scard-list">
+            <li>Verifica dati catastali e conformità urbanistica</li>
+            <li>Analisi visure ipotecarie e gravami</li>
+            <li>Redazione e revisione del compromesso</li>
+            <li>Supporto su clausole, condizioni e caparra</li>
+            <li>Registrazione del preliminare</li>
+            <li>Coordinamento con notaio per il rogito</li>
+          </ul>
+          <a href="servizio-preliminari" class="scard-link">Scopri il servizio →</a>
+        </div>
+      </div>
+
+      <div class="scard">
+        <div class="scard-img" style="background:linear-gradient(135deg,#eef0e8,#e0e8d4)">
+          <div class="scard-num">04</div>
+          <div class="scard-icon">🏡</div>
+          <span class="scard-tag">Gestione patrimonio</span>
+        </div>
+        <div class="scard-body">
+          <div class="scard-title">Gestione Immobili</div>
+          <p class="scard-desc">Affidiamo la gestione completa del tuo patrimonio immobiliare a professionisti del settore. Ci occupiamo di tutto, dalla manutenzione ordinaria alla gestione degli inquilini, così puoi stare sereno.</p>
+          <ul class="scard-list">
+            <li>Gestione rapporti con gli inquilini</li>
+            <li>Supervisione pagamenti e morosità</li>
+            <li>Coordinamento interventi di manutenzione</li>
+            <li>Rendicontazione periodica al proprietario</li>
+            <li>Gestione scadenze fiscali e documenti</li>
+            <li>Consulenza per ottimizzazione fiscale del patrimonio</li>
+          </ul>
+          <a href="servizio-gestione" class="scard-link">Scopri il servizio →</a>
+        </div>
+      </div>
+
+      <div class="scard">
+        <div class="scard-img" style="background:linear-gradient(135deg,#e8eef0,#d4dfe8)">
+          <div class="scard-num">05</div>
+          <div class="scard-icon">📊</div>
+          <span class="scard-tag">Valutazione</span>
+        </div>
+        <div class="scard-body">
+          <div class="scard-title">Valutazioni e Perizie</div>
+          <p class="scard-desc">Forniamo valutazioni immobiliari professionali per privati, aziende e istituti di credito. Utilizziamo metodologie certificate e una profonda conoscenza del mercato locale di Padova e provincia.</p>
+          <ul class="scard-list">
+            <li>Valutazione di mercato gratuita per vendita</li>
+            <li>Perizie per mutuo e istituti bancari</li>
+            <li>Valutazioni per divisioni ereditarie</li>
+            <li>Stime per aste giudiziarie</li>
+            <li>Analisi investimento immobiliare</li>
+            <li>Report scritto dettagliato con comparabili</li>
+          </ul>
+          <a href="servizio-valutazioni" class="scard-link">Scopri il servizio →</a>
+        </div>
+      </div>
+
+      <div class="scard">
+        <div class="scard-img" style="background:linear-gradient(135deg,#e4e8f0,#d0d8e8)">
+          <div class="scard-num">06</div>
+          <div class="scard-icon">🚁</div>
+          <span class="scard-tag">Documentazione aerea</span>
+        </div>
+        <div class="scard-body">
+          <div class="scard-title">Sopralluoghi Drone 4K</div>
+          <p class="scard-desc">Ispezioni visive e riprese aeree professionali per immobili, coperture, facciate, capannoni industriali e cantieri. Documentazione ad alta risoluzione dove l'accesso da terra è complesso.</p>
+          <ul class="scard-list">
+            <li>Sopralluoghi immobiliari e condomini</li>
+            <li>Ispezioni visive di tetti e facciate</li>
+            <li>Capannoni e strutture industriali</li>
+            <li>Monitoraggio avanzamento cantieri</li>
+            <li>Riprese 4K per marketing immobiliare</li>
+            <li>Valutazione preliminare zona e conformità</li>
+          </ul>
+          <a href="servizio-drone-sopralluoghi" class="scard-link">Scopri il servizio →</a>
+        </div>
+      </div>
+
+      <div class="scard">
+        <div class="scard-img" style="background:linear-gradient(135deg,#f0eae8,#e8d8d4)">
+          <div class="scard-num">07</div>
+          <div class="scard-icon">💡</div>
+          <span class="scard-tag">Servizi accessori</span>
+        </div>
+        <div class="scard-body">
+          <div class="scard-title">Attivazione Utenze e Servizi</div>
+          <p class="scard-desc">Gestiamo volture e attivazioni luce e gas per rendere ogni nuovo inizio semplice e senza stress. Anche dopo la firma o la consegna dell'immobile, siamo al tuo fianco per semplificare la burocrazia.</p>
+          <ul class="scard-list">
+            <li>Voltura e attivazione fornitura gas</li>
+            <li>Voltura e attivazione fornitura elettrica</li>
+            <li>Cambio intestatario contratti</li>
+            <li>Supporto per scelta fornitore (mercato libero)</li>
+            <li>Gestione pratiche con enti erogatori</li>
+            <li>Consulenza tariffe e risparmio energetico</li>
+          </ul>
+          <a href="servizio-utenze" class="scard-link">Scopri il servizio →</a>
+        </div>
+      </div>
+
+      <div class="scard">
+        <div class="scard-img" style="background:linear-gradient(135deg,#e8ebe4,#d8dfd0)">
+          <div class="scard-num">08</div>
+          <div class="scard-icon">🏗️</div>
+          <span class="scard-tag">Media durata · B2B</span>
+        </div>
+        <div class="scard-body">
+          <div class="scard-title">Loft e alloggi per aziende</div>
+          <p class="scard-desc">Strutture loft adiacenti per tecnici, operai e team in soggiorno da settimane a mesi: bagno privato, cucina condivisa, convenzioni HR. Soluzione concreta quando l'hotel non basta al budget di trasferta.</p>
+          <ul class="scard-list">
+            <li>Tipologie stanza, blocco e mini appartamento</li>
+            <li>Cucina e soggiorno condivisi</li>
+            <li>Convenzioni e fatturazione aziendale</li>
+            <li>Marketing, landing e gestione richieste</li>
+            <li>Pilota misurabile su nucleo iniziale</li>
+          </ul>
+          <a href="servizio-loft-aziende-media-durata" class="scard-link">Scopri il servizio →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section class="process">
+  <div class="process-inner">
+    <div class="sr">
+      <div class="sec-tag">Come lavoriamo</div>
+      <h2 class="sec-title">Un metodo strutturato per <strong>risultati concreti</strong></h2>
+      <p class="sec-sub">Trasparenza in ogni fase, comunicazione diretta e un unico referente per tutto il percorso.</p>
+    </div>
+    <div class="steps sr-stagger">
+      <div class="step"><div class="step-n">01</div><div class="step-title">Ascolto</div><div class="step-desc">Analizziamo la tua situazione, ascoltiamo le tue necessità e definiamo insieme gli obiettivi reali e i tempi.</div></div>
+      <div class="step"><div class="step-n">02</div><div class="step-title">Strategia</div><div class="step-desc">Elaboriamo un piano personalizzato basato su dati di mercato locali aggiornati e sulla tua specifica situazione.</div></div>
+      <div class="step"><div class="step-n">03</div><div class="step-title">Esecuzione</div><div class="step-desc">Gestiamo ogni aspetto operativo — documenti, visite, trattative, contratti — con precisione e tempestività.</div></div>
+      <div class="step"><div class="step-n">04</div><div class="step-title">Risultato</div><div class="step-desc">Ti accompagniamo fino al completamento con assistenza continua anche dopo la firma. Il rapporto non finisce con il rogito.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PERCHÉ NOI -->
+<section class="why">
+  <div class="why-inner">
+    <div class="why-visual">
+      <div class="why-big">30</div>
+      <div class="why-quote">"Non gestiamo pratiche in serie: costruiamo percorsi personalizzati basati sulle tue <strong>reali necessità</strong>."</div>
+      <div class="why-author">— Capon Gino, Titolare Righetto Immobiliare</div>
+    </div>
+    <div>
+      <div class="sr">
+        <div class="sec-tag" style="margin-bottom:.5rem">Perché sceglierci</div>
+        <h2 class="sec-title" style="margin-bottom:.7rem">Un unico referente per <strong>tutto il percorso</strong></h2>
+        <p style="font-size:.88rem;color:var(--grigio);line-height:1.8;margin-bottom:1.5rem">Coordinare aspetti tecnici, fiscali e operativi richiede metodo. Con il nostro studio hai un interlocutore dedicato che ti accompagna dall'analisi iniziale fino alla decisione finale.</p>
+      </div>
+      <div class="why-items sr-stagger">
+        <div class="wi"><div class="wi-icon">🎯</div><div><div class="wi-title">Nessun rimbalzo tra uffici</div><div class="wi-desc">Un solo referente conosce la tua situazione e ti segue dall'inizio alla fine, senza dispersioni.</div></div></div>
+        <div class="wi"><div class="wi-icon">📞</div><div><div class="wi-title">Comunicazione diretta e rapida</div><div class="wi-desc">Rispondiamo sempre, anche su WhatsApp. Aggiornamenti costanti sullo stato della pratica.</div></div></div>
+        <div class="wi"><div class="wi-icon">🏆</div><div><div class="wi-title">25+ anni sul mercato padovano</div><div class="wi-desc">Conosciamo ogni quartiere, ogni dinamica. Dati reali, non stime generiche.</div></div></div>
+        <div class="wi"><div class="wi-icon">📋</div><div><div class="wi-title">Gestione documentale completa</div><div class="wi-desc">Ci occupiamo noi di tutta la burocrazia: visure, APE, conformità, contratti, registrazioni.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--sfondo);padding:4rem 1.5rem">
+  <div style="max-width:1380px;margin:0 auto">
+    <div class="sec-tag">Blog e guide</div>
+    <h2 class="sec-title" style="margin-bottom:1rem">Oltre <strong>99 articoli</strong> sul mercato padovano</h2>
+    <p style="font-size:.9rem;color:var(--grigio);line-height:1.8;margin-bottom:1.5rem;max-width:620px">Guide su vendita, acquisto, affitti e mutui — aggiornate ogni settimana con dati verificati. Il vantaggio Righetto rispetto ai portali.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:.75rem">
+      <a href="blog-comprare-casa-padova-guida-2026" style="padding:.55rem 1rem;background:#fff;border:1px solid var(--gc);border-radius:20px;font-size:.8rem;font-weight:500">Comprare casa Padova</a>
+      <a href="blog-mercato-immobiliare-padova-2026" style="padding:.55rem 1rem;background:#fff;border:1px solid var(--gc);border-radius:20px;font-size:.8rem;font-weight:500">Mercato 2026</a>
+      <a href="blog" style="padding:.55rem 1rem;background:var(--nero);color:#fff;border-radius:20px;font-size:.8rem;font-weight:500">Tutti gli articoli →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="sec-tag" style="color:var(--oro);margin-bottom:.6rem">Parliamo del tuo immobile</div>
+    <h2>Raccontaci il tuo <strong>obiettivo</strong></h2>
+    <p>Vendita, acquisto, affitto o gestione: ti forniamo indicazioni concrete su tempi, documenti e prossimi passi. Prima consulenza sempre gratuita e senza impegno.</p>
+    <div class="cta-btns">
+      <a href="contatti" class="btn-gold">Richiedi consulenza gratuita</a>
+      <a href="https://wa.me/393497365930?text=Salve,%20vorrei%20una%20consulenza%20sui%20servizi%20immobiliari" class="btn-outline" target="_blank" rel="noopener noreferrer">Scrivici su WhatsApp</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="fi">
+    <div class="fgrid">
+      <div><div class="flogo">Righetto <span>Immobiliare</span></div><div class="finfo">Gruppo Immobiliare Righetto di Capon Gino<br>Via Roma n.96 — 35010 Limena (PD)<br>Tel: 049.8843484 · Cell: 349 736 5930<br>info@righettoimmobiliare.it</div></div>
+      <div class="fcol"><div class="fh">Servizi</div><a href="proprietario-immobile">Percorso proprietari</a><a href="landing-valutazione">Valutazione gratuita</a><a href="servizio-vendita">Vendita immobili</a><a href="valutazione-vendita-riservata-padova">Valutazione riservata</a><a href="segnalazione-immobili-professionisti-padova">Segnalazione professionisti</a><a href="servizio-locazioni">Locazioni</a><a href="servizio-preliminari">Preliminari</a><a href="servizio-gestione">Gestione immobili</a><a href="servizio-valutazioni">Valutazioni</a><a href="servizio-drone-sopralluoghi">Sopralluoghi Drone</a><a href="servizio-utenze">Utenze</a></div>
+      <div class="fcol"><div class="fh">Immobili</div><a href="immobili?op=vendita">In vendita</a><a href="immobili?op=affitto">In affitto</a><a href="immobili?tipo=villa">Ville</a><a href="immobili?tipo=appartamento">Appartamenti</a><div class="fh" style="margin-top:.8rem">Quartieri</div><a href="zona-centro-storico-padova">Centro Storico</a><a href="zona-arcella-padova">Arcella</a><a href="zona-universitaria-padova">Zona Universitaria</a><a href="zona-prato-della-valle-padova">Prato della Valle</a><a href="zona-sacra-famiglia-padova">Sacra Famiglia</a><a href="zona-forcellini-padova">Forcellini</a><a href="zona-guizza-padova">Guizza</a><a href="zona-voltabarozzo-padova">Voltabarozzo</a></div>
+      <div class="fcol"><div class="fh">Info</div><a href="chi-siamo">Chi siamo</a><a href="blog">Blog</a><a href="faq">FAQ</a><a href="contatti">Contatti</a><a href="privacy">Privacy Policy</a><a href="cookie-policy">Cookie Policy</a><a href="#" data-cookie-prefs>Preferenze Cookie</a></div>
+    </div>
+    <div class="fbot"><span>© 2026 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
+  </div>
+</footer>
+<script src="js/vendor/supabase.min.js" defer></script>
+<script src="js/nav-mobile.js?v=3" defer></script>
+<script src="js/config.js?v=3"></script>
+<script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */
+(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=13';document.body.appendChild(s);}
+setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
+})();</script>
+<script src="js/lead-conversion.js?v=4" defer></script>
+<script src="js/cookie-consent.js?v=4" defer></script>
+<script src="js/scroll-reveal.js?v=3" defer></script>
+<script src="js/welcome-popup.js?v=3" defer></script>
+</body>
+</html>

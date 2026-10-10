@@ -1,0 +1,23 @@
+--- a/blog-affitto-studenti-padova.html
++++ b/blog-affitto-studenti-padova.html
+@@ -13,7 +13,7 @@
+   <link rel="canonical" href="https://righettoimmobiliare.it/blog-affitto-studenti-padova">
+   <meta property="og:type" content="article">
+   <meta property="og:title" content="Affitto Studenti Padova 2026: Zone, Prezzi e Guida Completa">
+-  <meta property="og:description" content="Guida completa all'affitto per studenti nel Padovano nel 2026: zone migliori, prezzi stanze singole e doppie, tipologie contrattuali e consigli pratici.…">
++  <meta property="og:description" content="Affitto per studenti a Padova 2026: zone vicine alle sedi universitarie, prezzi indicativi di stanze singole e doppie, contratti e consigli pratici.">
+   <meta property="og:url" content="https://righettoimmobiliare.it/blog-affitto-studenti-padova">
+   <meta property="og:image" content="https://righettoimmobiliare.it/img/foto-servizi/contratti-di-locazione-padova.webp">
+   <meta property="og:site_name" content="Righetto Immobiliare">
+@@ -28,9 +28,9 @@
+   <meta property="article:tag" content="zona universitaria padova affitto">
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:title" content="Affitto Studenti Padova 2026: Zone, Prezzi e Guida Completa">
+-  <meta name="twitter:description" content="Guida completa all'affitto per studenti in provincia nel 2026: zone migliori, prezzi stanze singole e doppie, tipologie contrattuali e consigli pratici.…">
++  <meta name="twitter:description" content="Affitto per studenti a Padova 2026: zone vicine alle sedi universitarie, prezzi indicativi di stanze singole e doppie, contratti e consigli pratici.">
+   <meta name="twitter:image" content="https://righettoimmobiliare.it/img/foto-servizi/contratti-di-locazione-padova.webp">
+-  <meta name="description" content="Affitto studenti nel territorio 2026: zone migliori, prezzi medi stanze singole e doppie, tipologie contrattuali e consigli. Guida Righetto Immobiliare.">
++  <meta name="description" content="Affitto per studenti a Padova 2026: zone vicine alle sedi universitarie, prezzi indicativi di stanze singole e doppie, contratti e consigli pratici.">
+   <link rel="stylesheet" href="css/fonts.css?v=3">
+   <link rel="stylesheet" href="css/nav-mobile.css?v=7">
+   <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">

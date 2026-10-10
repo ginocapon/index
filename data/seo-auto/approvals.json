@@ -280,5 +280,138 @@
     "summary": "Non spingere 6 articoli di attualità non indicizzati",
     "rationale": "dazi USA-UE, sondaggio Banca d'Italia Q1, summit investimenti, tassi mutui minimi, acquisizioni commerciali giugno, bilancio 2025: basso valore per i venditori. Proposta: lasciarli, non chiederne l'indicizzazione; valutare noindex se restano esclusi a 90 gg.",
     "ops": []
+  },
+  "SEO-2026W41-blog-contratto-affitto-padova": {
+    "approved": true,
+    "approved_by": "delega venerdì 10/10/2026 (Gino: «io carico i dati e tu esegui») — export Prestazioni 3 mesi al 06/10",
+    "approved_on": "2026-10-10",
+    "url": "/blog-contratto-affitto-padova",
+    "file": "blog-contratto-affitto-padova.html",
+    "summary": "Title/meta orientati alla scelta del contratto (non più «Guida Canone Concordato») + paragrafo che rimanda alla guida dedicata e al servizio locazioni",
+    "rationale": "92 gg: 3.546 impr., CTR 2,0%, pos. 7,2 (+ ancore #concordato 217 impr. a 0 clic). Si sovrappone a /blog-canone-concordato-padova-guida-2026 (709 impr., CTR 3,1%) su «canone concordato padova» (pos. 8,4): differenziazione dell'intento + link interno, nessun canonical.",
+    "ops": [
+      {
+        "op": "set_title",
+        "value": "Contratto d'affitto Padova 2026: 4+4, 3+2 e concordato"
+      },
+      {
+        "op": "set_meta",
+        "value": "Quale contratto d'affitto scegliere a Padova nel 2026: 4+4, 3+2, transitorio o concordato, cedolare secca, obblighi e disdetta. Guida per proprietari."
+      },
+      {
+        "op": "insert_after",
+        "find": "rilasciata da almeno una delle organizzazioni sindacali firmatarie dell'accordo territoriale. Questa attestazione certifica che il canone pattuito rientra nelle fasce previste per quella specifica zona e tipologia di immobile.</p>",
+        "html": "\n\n    <p><strong>Calcolo passo passo:</strong> le fasce dell'accordo territoriale, la cedolare secca al 10% e la registrazione sono spiegate nella guida dedicata al <a href=\"blog-canone-concordato-padova-guida-2026\">canone concordato a Padova</a>. Se preferite affidare contratto, attestazione e gestione dell'inquilino, Righetto vi affianca come alleato del proprietario con il <a href=\"servizio-locazioni\">servizio locazioni</a>.</p>"
+      }
+    ],
+    "verify_present": [
+      "href=\"blog-canone-concordato-padova-guida-2026\""
+    ]
+  },
+  "SEO-2026W41-blog-affitto-studenti-padova": {
+    "approved": true,
+    "approved_by": "delega venerdì 10/10/2026 (Gino: «io carico i dati e tu esegui») — export Prestazioni 3 mesi al 06/10",
+    "approved_on": "2026-10-10",
+    "url": "/blog-affitto-studenti-padova",
+    "file": "blog-affitto-studenti-padova.html",
+    "summary": "Meta riscritta (era «nel territorio», refuso da sostituzione automatica)",
+    "rationale": "92 gg: 3.304 impr., CTR 2,2%, pos. 6,9; title stabile da marzo, si tocca solo la meta.",
+    "ops": [
+      {
+        "op": "set_meta",
+        "value": "Affitto per studenti a Padova 2026: zone vicine alle sedi universitarie, prezzi indicativi di stanze singole e doppie, contratti e consigli pratici."
+      }
+    ]
+  },
+  "SEO-2026W41-agenzia-immobiliare-padova": {
+    "approved": true,
+    "approved_by": "delega venerdì 10/10/2026 (Gino: «io carico i dati e tu esegui») — export Prestazioni 3 mesi al 06/10",
+    "approved_on": "2026-10-10",
+    "url": "/agenzia-immobiliare-padova",
+    "file": "agenzia-immobiliare-padova.html",
+    "summary": "Title con «Padova» in testa + meta con messaggio alleato venditori",
+    "rationale": "92 gg: 936 impr., CTR 1,0%, pos. 7,3: lo slug e l'intento sono «agenzia immobiliare padova»; Limena resta nel title e nella meta (query Limena forti sull'home).",
+    "ops": [
+      {
+        "op": "set_title",
+        "value": "Agenzia Immobiliare Padova e Limena | Righetto dal 2000"
+      },
+      {
+        "op": "set_meta",
+        "value": "Agenzia immobiliare a Padova e Limena dal 2000, in Via Roma 96. Chi vende trova un alleato: valutazione gratuita, vendita e affitti. 4.9/5, 127 recensioni."
+      }
+    ]
+  },
+  "SEO-2026W41-blog-righetto-storia-territorio-acquisizioni-2026": {
+    "approved": true,
+    "approved_by": "delega venerdì 10/10/2026 (Gino: «io carico i dati e tu esegui») — export Prestazioni 3 mesi al 06/10",
+    "approved_on": "2026-10-10",
+    "url": "/blog-righetto-storia-territorio-acquisizioni-2026",
+    "file": "blog-righetto-storia-territorio-acquisizioni-2026.html",
+    "summary": "Title senza «…» troncato",
+    "rationale": "377 impr., CTR 0,3% a pos. 3,7: title troncato in SERP.",
+    "ops": [
+      {
+        "op": "set_title",
+        "value": "Righetto Immobiliare dal 2000: storia, zone e acquisizioni"
+      }
+    ]
+  },
+  "SEO-2026W41-blog-documenti-compravendita-rogito-padova-2026": {
+    "approved": true,
+    "approved_by": "delega venerdì 10/10/2026 (Gino: «io carico i dati e tu esegui») — export Prestazioni 3 mesi al 06/10",
+    "approved_on": "2026-10-10",
+    "url": "/blog-documenti-compravendita-rogito-padova-2026",
+    "file": "blog-documenti-compravendita-rogito-padova-2026.html",
+    "summary": "Title e meta senza «…» troncati",
+    "rationale": "110 impr. a pos. 14,3, 0 clic: title e meta troncati con «…».",
+    "ops": [
+      {
+        "op": "set_title",
+        "value": "Documenti per la compravendita di casa: guida 2026"
+      },
+      {
+        "op": "set_meta",
+        "value": "Documenti per vendere o comprare casa: identità, provenienza, titoli edilizi, APE, condominio, preliminare e caparre. Checklist 2026 per Padova e dintorni."
+      }
+    ]
+  },
+  "SEO-2026W41-blog-prezzi-case-padova-zona-2026": {
+    "approved": true,
+    "approved_by": "delega venerdì 10/10/2026 (Gino: «io carico i dati e tu esegui») — export Prestazioni 3 mesi al 06/10",
+    "approved_on": "2026-10-10",
+    "url": "/blog-prezzi-case-padova-zona-2026",
+    "file": "blog-prezzi-case-padova-zona-2026.html",
+    "summary": "Title ≤60 senza «Previsioni» + meta con aggancio valutazione per proprietari",
+    "rationale": "492+19 impr., CTR 0,4%, pos. 6,0: title di 67 car. tagliato in SERP; chi cerca i prezzi per zona è spesso un proprietario → CTA stima.",
+    "ops": [
+      {
+        "op": "set_title",
+        "value": "Prezzi case Padova 2026 per zona: €/mq OMI e tabella"
+      },
+      {
+        "op": "set_meta",
+        "value": "Quanto costano le case a Padova nel 2026 zona per zona: valori €/mq OMI per centro, Arcella, Limena e Vigonza. Quanto vale la tua? Stima gratuita."
+      }
+    ]
+  },
+  "SEO-2026W41-servizi": {
+    "approved": true,
+    "approved_by": "delega venerdì 10/10/2026 (Gino: «io carico i dati e tu esegui») — export Prestazioni 3 mesi al 06/10",
+    "approved_on": "2026-10-10",
+    "url": "/servizi",
+    "file": "servizi.html",
+    "summary": "Title/meta orientati a chi vende o affitta",
+    "rationale": "129 impr. a pos. 4,9 e 0 clic: title generico.",
+    "ops": [
+      {
+        "op": "set_title",
+        "value": "Servizi immobiliari Padova e Limena: vendita, affitto, stime"
+      },
+      {
+        "op": "set_meta",
+        "value": "Vendere, affittare o far gestire un immobile a Padova e provincia: valutazione gratuita, locazioni, preliminari e gestione. Righetto, alleato dal 2000."
+      }
+    ]
   }
 }

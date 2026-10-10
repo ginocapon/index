@@ -1,0 +1,702 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+<!-- Google tag (gtag.js) + Consent Mode -->
+<script src="js/ga-consent.js?v=23"></script>
+
+<!-- Google tag (gtag.js) + Consent Mode -->
+<script src="js/ga-consent.js?v=23"></script>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#2C4A6E">
+  <title>Agenzia Immobiliare Padova e Limena | Righetto dal 2000</title>
+  <meta name="robots" content="index, follow, max-image-preview:large"><link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co"><link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="canonical" href="https://righettoimmobiliare.it/agenzia-immobiliare-padova">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Agenzia Immobiliare Padova e Limena | Righetto dal 2000">
+<meta property="og:description" content="Agenzia immobiliare a Padova e Limena dal 2000, in Via Roma 96. Chi vende trova un alleato: valutazione gratuita, vendita e affitti. 4.9/5, 127 recensioni.">
+<meta property="og:url" content="https://righettoimmobiliare.it/agenzia-immobiliare-padova">
+<meta property="og:site_name" content="Righetto Immobiliare">
+<meta property="og:locale" content="it_IT">
+<meta property="og:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agenzia Immobiliare Padova e Limena | Righetto dal 2000">
+<meta name="twitter:description" content="Agenzia immobiliare a Padova e Limena dal 2000, in Via Roma 96. Chi vende trova un alleato: valutazione gratuita, vendita e affitti. 4.9/5, 127 recensioni.">
+<meta name="twitter:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
+<meta name="description" content="Agenzia immobiliare a Padova e Limena dal 2000, in Via Roma 96. Chi vende trova un alleato: valutazione gratuita, vendita e affitti. 4.9/5, 127 recensioni.">
+  <link rel="stylesheet" href="css/fonts.css?v=3">
+  <link rel="stylesheet" href="css/nav-mobile.css?v=7">
+  <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/welcome-popup.css?v=3" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/blog-rich.css?v=2">
+
+<!-- JSON-LD RealEstateAgent -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["RealEstateAgent", "LocalBusiness"],
+  "@id": "https://righettoimmobiliare.it/#agenzia",
+  "name": "Righetto Immobiliare",
+  "alternateName": "Gruppo Immobiliare Righetto di Capon Gino",
+  "description": "Agenzia immobiliare a Padova con conoscenza approfondita del territorio. Vendita, affitto e gestione immobili in tutti i 101 comuni della provincia di Padova. Specializzati in residenziale, commerciale, terreni agricoli, Colli Euganei e Basso Padovano.",
+  "url": "https://righettoimmobiliare.it",
+      "dateModified": "2026-04-03",
+  "telephone": "+39-049-884-3484",
+  "email": "info@righettoimmobiliare.it",
+  "foundingDate": "2000",
+  "logo": "https://righettoimmobiliare.it/img/og-default.webp",
+  "image": "https://righettoimmobiliare.it/img/team/titolari.webp",
+  "priceRange": "€€",
+  "currenciesAccepted": "EUR",
+  "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Provincia di Padova",
+    "containsPlace": [
+      {"@type": "City", "name": "Padova"},
+      {"@type": "City", "name": "Limena"},
+      {"@type": "City", "name": "Vigonza"},
+      {"@type": "City", "name": "Campodarsego"},
+      {"@type": "City", "name": "Selvazzano Dentro"},
+      {"@type": "City", "name": "Abano Terme"},
+      {"@type": "City", "name": "Rubano"},
+      {"@type": "City", "name": "Cittadella"},
+      {"@type": "City", "name": "Monselice"},
+      {"@type": "City", "name": "Este"},
+      {"@type": "City", "name": "Camposampiero"},
+      {"@type": "City", "name": "Piove di Sacco"}
+    ]
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Via Roma n.96",
+    "addressLocality": "Limena",
+    "addressRegion": "PD",
+    "postalCode": "35010",
+    "addressCountry": "IT"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 45.476956,
+    "longitude": 11.845762
+  },
+  "hasMap": "https://maps.google.com/?q=45.476956,11.845762",
+  "openingHoursSpecification": [
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "13:00"},
+      {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "15:00", "closes": "19:00"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "12:30"}
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servizi Immobiliari Padova",
+    "itemListElement": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Vendita Immobili Padova"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Acquisto Immobili Padova"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Affitto Immobili Padova"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Valutazione Gratuita Immobile Padova"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Virtual Tour 360 Immobili"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Gestione Immobili Padova"}}
+    ]
+  },
+  "sameAs": [
+    "https://www.facebook.com/righettoimmobiliare",
+    "https://www.instagram.com/righettoimmobiliare",
+    "https://www.linkedin.com/company/righetto-immobiliare"
+  ],
+  "employee": [
+    {"@type": "Person", "@id": "https://righettoimmobiliare.it/#gino-capon"},
+    {"@type": "Person", "@id": "https://righettoimmobiliare.it/#linda-righetto"}
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "127",
+    "bestRating": "5"
+  }
+}
+</script>
+
+<!-- JSON-LD FAQPage -->
+<script type="application/ld+json">
+{
+    "dateModified": "2026-07-03","@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+  {"@type":"Question","name":"Qual è la migliore agenzia immobiliare a Padova?","acceptedAnswer":{"@type":"Answer","text":"Righetto Immobiliare è un'agenzia immobiliare a Padova con valutazione media di 4,9 stelle e conoscenza approfondita del territorio. Copriamo tutti i 101 comuni della provincia di Padova con servizi completi: vendita, acquisto, affitto, valutazione gratuita, virtual tour 360° e assistenza fino al rogito."}},
+  {"@type":"Question","name":"Quanto costa un'agenzia immobiliare a Padova?","acceptedAnswer":{"@type":"Answer","text":"Il compenso di mediazione dipende dall'incarico e si definisce in sede nel mandato, prima di avviare l'attività. Con Righetto Immobiliare la valutazione è gratuita e non si pagano costi anticipati per valorizzazione e promozione: l'impegno economico viene concordato in modo chiaro con il cliente."}},
+  {"@type":"Question","name":"Come scegliere un'agenzia immobiliare a Padova?","acceptedAnswer":{"@type":"Answer","text":"Per scegliere un'agenzia immobiliare a Padova verifica: iscrizione al REA della Camera di Commercio, assicurazione professionale, recensioni Google verificate, anni di esperienza sul territorio, servizi inclusi (foto professionali, virtual tour, portali), chiarezza sul mandato e sulle condizioni economiche in sede e disponibilità di un unico referente dedicato."}},
+  {"@type":"Question","name":"Righetto Immobiliare opera solo a Limena o anche a Padova centro?","acceptedAnswer":{"@type":"Answer","text":"Righetto Immobiliare ha sede a Limena (Via Roma 96) ma opera in tutti i 101 comuni della provincia di Padova, incluso Padova centro e tutti i quartieri: Centro Storico, Arcella, Prato della Valle, Sacra Famiglia, Guizza, Forcellini, Voltabarozzo e Zona Universitaria."}},
+  {"@type":"Question","name":"Quali servizi offre Righetto Immobiliare a Padova?","acceptedAnswer":{"@type":"Answer","text":"Offriamo: valutazione gratuita dell'immobile, fotografie professionali, video walkthrough, virtual tour 360°, pubblicazione su tutti i portali (Immobiliare.it, Idealista, Casa.it), gestione visite e trattativa, assistenza contratto preliminare e rogito, supporto mutuo acquirente, gestione locazioni e utenze."}},
+  {"@type":"Question","name":"Quanto tempo ci vuole per vendere casa a Padova con un'agenzia?","acceptedAnswer":{"@type":"Answer","text":"Con Righetto Immobiliare i tempi medi di vendita a Padova sono di 4,2 mesi dalla valutazione al rogito. La media di mercato a Padova è di 5-7 mesi. I fattori determinanti sono: prezzo corretto, qualità della presentazione e rete di acquirenti pre-qualificati."}},
+  {"@type":"Question","name":"Quanto vale la mia casa a Padova?","acceptedAnswer":{"@type":"Answer","text":"Il valore di un immobile a Padova dipende da zona, metratura, stato, piano, esposizione e pertinenze. I prezzi medi 2026 vanno da 1.400 €/mq in periferia a 3.200 €/mq in Centro Storico (dati OMI). Righetto Immobiliare offre una valutazione gratuita basata su compravendite reali, non stime algoritmiche."}},
+  {"@type":"Question","name":"Quali documenti servono per vendere casa a Padova?","acceptedAnswer":{"@type":"Answer","text":"Per vendere casa a Padova servono: atto di proprietà, visura catastale aggiornata, APE (Attestato di Prestazione Energetica), planimetria catastale, certificato di conformità urbanistica, certificato di agibilità e documento d'identità del proprietario. Righetto Immobiliare verifica tutta la documentazione gratuitamente."}},
+  {"@type":"Question","name":"Conviene vendere casa a Padova nel 2026?","acceptedAnswer":{"@type":"Answer","text":"Sì, il 2026 è un momento favorevole per vendere casa a Padova. I prezzi sono in crescita media del +3,1% rispetto al 2025 (fonte OMI). La domanda resta sostenuta soprattutto nelle zone centrali e universitarie. I tassi dei mutui in calo favoriscono gli acquirenti, aumentando il bacino di potenziali compratori."}},
+  {"@type":"Question","name":"Righetto Immobiliare offre supporto per il mutuo?","acceptedAnswer":{"@type":"Answer","text":"Sì, collaboriamo con istituti di credito per guidarti nella scelta del finanziamento ipotecario: confronto tassi (fisso, variabile, misto), calcolo del rapporto LTV (loan-to-value), gestione della perizia bancaria e pratiche di ipoteca."}},
+  {"@type":"Question","name":"Come funziona l'affitto con Righetto Immobiliare?","acceptedAnswer":{"@type":"Answer","text":"Gestiamo l'intero processo di locazione: dalla selezione dell'inquilino alla redazione del contratto, dalla raccolta del deposito cauzionale alla registrazione presso l'Agenzia delle Entrate. Consigliamo sulla scelta tra regime ordinario e cedolare secca in base alla situazione fiscale del proprietario."}}
+]}
+</script>
+
+<!-- JSON-LD BreadcrumbList -->
+<script type="application/ld+json">
+{
+    "dateModified": "2026-07-03","@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"Home","item":"https://righettoimmobiliare.it/"},
+  {"@type":"ListItem","position":2,"name":"Agenzia Immobiliare Padova","item":"https://righettoimmobiliare.it/agenzia-immobiliare-padova"}
+]}
+</script>
+
+<!-- JSON-LD Person — Team E-E-A-T -->
+<script type="application/ld+json">
+{
+    "dateModified": "2026-07-03","@context":"https://schema.org","@graph":[
+  {
+    "@type":"Person",
+    "@id":"https://righettoimmobiliare.it/#gino-capon",
+    "name":"Gino Capon",
+    "givenName":"Gino",
+    "familyName":"Capon",
+    "jobTitle":"Agente Immobiliare Titolare",
+    "description":"Fondatore di Righetto Immobiliare nel 2000. Oltre 25 anni di esperienza nel comparto residenziale e commerciale della provincia di Padova. Specializzato in compravendita, valutazione e gestione del patrimonio immobiliare.",
+    "image":"https://righettoimmobiliare.it/img/team/ginocapon.webp",
+    "url":"https://righettoimmobiliare.it/chi-siamo",
+    "worksFor":{"@type":"RealEstateAgent","@id":"https://righettoimmobiliare.it/#agenzia"},
+    "knowsAbout":["mercato immobiliare Padova","compravendita immobiliare","valutazione immobiliare","gestione patrimonio immobiliare","affitto residenziale"]
+  },
+  {
+    "@type":"Person",
+    "@id":"https://righettoimmobiliare.it/#linda-righetto",
+    "name":"Linda Righetto",
+    "givenName":"Linda",
+    "familyName":"Righetto",
+    "jobTitle":"Consulente Immobiliare",
+    "description":"Consulente immobiliare specializzata nel mercato residenziale padovano, nella gestione delle locazioni e nell'assistenza agli acquirenti nelle pratiche burocratiche e contrattuali.",
+    "image":"https://righettoimmobiliare.it/img/team/linda-righetto.webp",
+    "url":"https://righettoimmobiliare.it/chi-siamo",
+    "worksFor":{"@type":"RealEstateAgent","@id":"https://righettoimmobiliare.it/#agenzia"},
+    "knowsAbout":["locazioni immobiliari Padova","contratti affitto","cedolare secca","assistenza acquirenti","gestione immobili"]
+  }
+]}
+</script>
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--nero:#0a0a0a;--bianco:#f5f2ed;--oro:#c9a84c;--grigio:#6b6560;--gc:#e8e4de;--verde:#4a5c4e;--sfondo:#f0ece6}
+    body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--nero)}
+    a{text-decoration:none;color:inherit}
+    header{background:var(--nero);position:sticky;top:0;z-index:100}
+    .hi{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:62px;display:flex;align-items:center;gap:2rem}
+    .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff}.logo span{color:var(--oro);font-style:italic}
+    nav{display:flex;gap:.2rem;flex:1}
+    nav a{color:rgba(255,255,255,.7);font-size:.82rem;padding:.4rem .75rem;border-radius:2px;transition:color .2s}
+    nav a:hover{color:#fff} nav a.active{color:var(--oro)}
+    .h-cta{display:flex;gap:.65rem;align-items:center}
+    .h-tel{color:rgba(255,255,255,.75);font-size:.78rem}
+    .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:2px;font-size:.76rem;font-weight:500}
+    .bc{background:var(--nero);border-top:1px solid rgba(255,255,255,.06);padding:.5rem 1.5rem}
+    .bc-inner{max-width:1380px;margin:0 auto;display:flex;align-items:center;gap:.4rem;font-size:.7rem;color:rgba(255,255,255,.3)}
+    .bc-inner a{color:rgba(255,255,255,.3);transition:color .2s}.bc-inner a:hover{color:var(--oro)}
+    .bc-inner svg{width:9px;height:9px;flex-shrink:0}
+    .hero{background:var(--nero);padding:5rem 1.5rem 4rem;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.12) 0%,transparent 70%)}
+    .hero-inner{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    @media(max-width:900px){.hero-inner{grid-template-columns:1fr}}
+    .htag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.7rem}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:#fff;line-height:1.15;margin-bottom:1rem}
+    .hero h1 strong{font-weight:600;font-style:italic}
+    .hero p{font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.9;margin-bottom:1.5rem}
+    .hero-btns{display:flex;gap:.65rem;flex-wrap:wrap}
+    .btn-gold{background:var(--oro);color:var(--nero);padding:.65rem 1.4rem;border-radius:2px;font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
+    .btn-gold:hover{background:#d4b86a}
+    .btn-outline{border:1px solid rgba(255,255,255,.2);color:#fff;padding:.65rem 1.4rem;border-radius:2px;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:all .2s}
+    .btn-outline:hover{border-color:var(--oro);color:var(--oro)}
+    .hero-stats{display:flex;flex-direction:column;gap:.6rem}
+    .hstat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:1.2rem 1.4rem;display:flex;align-items:center;gap:1rem}
+    .hstat-val{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;color:var(--oro);flex-shrink:0;min-width:80px}
+    .hstat-lbl{font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.5}
+    .sec{padding:5rem 1.5rem}
+    .sec.bg{background:var(--sfondo)}
+    .sec-inner{max-width:1380px;margin:0 auto}
+    .sec-tag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.5rem}
+    .sec-t{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;margin-bottom:.75rem}
+    .sec-t strong{font-weight:600}
+    .sec-sub{font-size:.88rem;color:var(--grigio);line-height:1.8;max-width:600px;margin-bottom:2.5rem}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+    @media(max-width:900px){.grid3{grid-template-columns:1fr}}
+    .card{background:#fff;border:1px solid var(--gc);border-radius:3px;padding:2rem;transition:box-shadow .2s}
+    .card:hover{box-shadow:0 8px 32px rgba(0,0,0,.06)}
+    .card-icon{font-size:2rem;margin-bottom:1rem}
+    .card-title{font-weight:600;font-size:1rem;margin-bottom:.5rem}
+    .card-desc{font-size:.85rem;color:var(--grigio);line-height:1.7}
+    .zone-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+    @media(max-width:900px){.zone-grid{grid-template-columns:repeat(2,1fr)}}
+    .zone-card{background:#fff;border:1px solid var(--gc);border-radius:3px;padding:1.2rem;text-align:center;transition:all .2s}
+    .zone-card:hover{border-color:var(--oro);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.06)}
+    .zone-name{font-weight:600;font-size:.9rem;margin-bottom:.3rem}
+    .zone-price{font-size:.75rem;color:var(--grigio)}
+    footer{background:var(--nero);padding:4rem 1.5rem 2rem}
+    .fi{max-width:1380px;margin:0 auto}
+    .fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2rem}
+    @media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr;gap:1.5rem}}
+    .flogo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff;margin-bottom:.6rem}.flogo span{color:var(--oro);font-style:italic}
+    .finfo{font-size:.76rem;color:rgba(255,255,255,.6);line-height:1.9}
+    .fh{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.7rem}
+    .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.6);margin-bottom:.3rem;transition:color .2s}.fcol a:hover{color:var(--oro)}
+    .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.55);flex-wrap:wrap;gap:.4rem}
+    .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
+  </style>
+<style id="rig-motion">@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}::view-transition-old(root){animation:rig-vt-out .4s cubic-bezier(.32,.72,0,1) both}::view-transition-new(root){animation:rig-vt-in .55s cubic-bezier(.32,.72,0,1) both}html{scroll-behavior:smooth}.sr,.sr-left,.sr-right,.rv{transition-duration:.95s;transition-timing-function:cubic-bezier(.32,.72,0,1)}}@keyframes rig-vt-out{to{opacity:0;transform:scale(.985)}}@keyframes rig-vt-in{from{opacity:0;transform:scale(1.015)}}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
+<header>
+  <div class="hi">
+    <a href="/" class="logo">Righetto <span>Immobiliare</span></a>
+    <nav><a href="/">Home</a><a href="immobili">Immobili</a><a href="servizi">Servizi</a><a href="chi-siamo">Chi siamo</a><a href="blog">Blog</a><a href="contatti">Contatti</a><a href="faq">FAQ</a></nav>
+    <div class="h-cta"><a class="h-tel" href="tel:+390498843484">049.8843484</a><a class="h-btn" href="contatti">Valutazione gratuita</a></div>
+  </div>
+  <button class="nav-burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+<div class="nav-mobile" id="navMobile">
+  <a href="/">Home</a>
+  <a href="chi-siamo">Chi Siamo</a>
+  <a href="immobili">Immobili</a>
+  <a href="servizi">Servizi</a>
+  <a href="blog">Blog</a>
+  <a href="faq">FAQ</a>
+  <a href="contatti" class="nav-mobile-cta">Parla con noi</a>
+</div>
+<div class="bc"><div class="bc-inner"><a href="/">Home</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg><span>Agenzia Immobiliare Padova</span></div></div>
+
+<main id="main-content">
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="htag">Il tuo consulente immobiliare — 101 comuni serviti</div>
+      <h1><strong>Agenzia immobiliare Limena e Padova</strong> — sede in Via Roma 96</h1>
+      <p>Vuoi vendere casa a Padova senza svendere? Il nostro studio vende in media in 4,2 mesi — contro i 5-7 della media di mercato — con 4,9 stelle su Google. Serviamo tutti i 101 comuni del territorio: dalla valutazione gratuita al rogito, con un unico referente dedicato che risolve ogni problema per te.</p>
+      <div class="hero-btns">
+        <a href="contatti" class="btn-gold">Stima senza impegno</a>
+        <a href="immobili" class="btn-outline">Vedi immobili</a>
+      </div>
+      <p class="last-update" style="font-size:0.85rem;color:#6b7280;margin-top:0.5rem;">Ultimo aggiornamento: Marzo 2026</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-val">4,2</div><div class="hstat-lbl">mesi: tempo medio di vendita nel Padovano. La media di mercato è 5-7 mesi.</div></div>
+      <div class="hstat"><div class="hstat-val">101</div><div class="hstat-lbl">comuni dell'hinterland serviti. Da Cittadella a Monselice, da Este a Piove di Sacco.</div></div>
+      <div class="hstat"><div class="hstat-val">4,9</div><div class="hstat-lbl">stelle di valutazione media dai nostri clienti. Trasparenza, risultati concreti e zero pensieri.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:2.5rem;padding-bottom:2.5rem;background:var(--sfondo)">
+  <div class="sec-inner">
+    <span class="blog-rich-badge">Aggiornato: luglio 2026</span>
+    <nav class="blog-rich-toc" aria-label="Indice contenuti pagina">
+      <h2>Percorso rapido</h2>
+      <ol>
+        <li><a href="#servizi">Servizi dello studio</a></li>
+        <li><a href="#vendita">Metodo di vendita</a></li>
+        <li><a href="#mercato">Numeri di mercato</a></li>
+        <li><a href="#quartieri">Quartieri e zone</a></li>
+        <li><a href="#perche">Perché Righetto</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#guide">Guide</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ol>
+    </nav>
+    <div class="blog-rich-callout">
+      <strong>Commissioni e mandato</strong>
+      <p>I compensi di mediazione vendita e locazione si concordano in sede nel mandato (prassi: vendita 3% + IVA per parte con minimo 2.500 euro per lotto; locazione una mensilità del canone + IVA). I tempi medi di vendita citati si riferiscono al campione interno gestito dallo studio; ogni immobile richiede comparabili e verifiche proprie.</p>
+      <p style="margin-top:.75rem;font-size:.88rem">Per affitti e case in <a href="zona-limena" style="color:var(--blu);text-decoration:underline">Limena</a> e prima cintura: <a href="blog-affitti-limena-2026" style="color:var(--blu);text-decoration:underline">guida affitti Limena 2026</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIZI -->
+<section class="sec" id="servizi">
+  <div class="sec-inner sr">
+    <div class="sec-tag">I nostri servizi</div>
+    <h2 class="sec-t">I servizi del nostro <strong>studio immobiliare</strong></h2>
+    <p class="sec-sub">Un servizio completo per ogni esigenza legata alla casa: vendita, acquisto, affitto e gestione patrimoniale.</p>
+    <div class="grid3 sr-stagger">
+      <a href="servizio-vendita" class="card">
+        <div class="card-icon">🏠</div>
+        <div class="card-title">Vendita immobili</div>
+        <div class="card-desc">Stima professionale del valore, foto professionali, virtual tour 360°, pubblicazione multicanale e assistenza completa fino al rogito. Tempo medio di vendita: 4,2 mesi.</div>
+      </a>
+      <a href="servizio-locazioni" class="card">
+        <div class="card-icon">🔑</div>
+        <div class="card-title">Locazioni e affitti</div>
+        <div class="card-desc">Ricerca inquilini qualificati, redazione del contratto di locazione, raccolta del deposito cauzionale, registrazione e consulenza su cedolare secca. Gestione completa del rapporto locativo per proprietari e investitori.</div>
+      </a>
+      <a href="servizio-valutazioni" class="card">
+        <div class="card-icon">📊</div>
+        <div class="card-title">Valutazioni immobiliari</div>
+        <div class="card-desc">Analisi comparativa di mercato basata su compravendite reali. Report scritto con fascia di prezzo, non stime online approssimative.</div>
+      </a>
+      <a href="servizio-preliminari" class="card">
+        <div class="card-icon">✍️</div>
+        <div class="card-title">Contratti preliminari</div>
+        <div class="card-desc">Redazione e assistenza per compromessi sicuri, con verifica documentale completa e coordinamento notarile.</div>
+      </a>
+      <a href="servizio-gestione" class="card">
+        <div class="card-icon">🏢</div>
+        <div class="card-title">Gestione immobili</div>
+        <div class="card-desc">Amministrazione completa del patrimonio immobiliare: manutenzione, rapporti con inquilini, adempimenti fiscali e burocratici.</div>
+      </a>
+      <a href="servizio-utenze" class="card">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">Gestione utenze</div>
+        <div class="card-desc">Volture, subentri, chiusure e attivazioni di luce, gas, acqua e internet. Zero burocrazia per te.</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- VENDITA IMMOBILIARE PADOVA -->
+<section class="sec bg" id="vendita">
+  <div class="sec-inner sr">
+    <div class="sec-tag">Vendita immobili</div>
+    <h2 class="sec-t">Come <strong>vendere il tuo immobile</strong> al miglior prezzo</h2>
+    <p class="sec-sub">Mettere in vendita un immobile nel capoluogo euganeo nel 2026 richiede strategia, dati aggiornati e professionisti che conoscano il territorio. Ecco il nostro metodo in 5 fasi.</p>
+    <div class="grid3 sr-stagger">
+      <div class="card">
+        <div class="card-icon">1</div>
+        <div class="card-title">Analisi di mercato gratuita</div>
+        <div class="card-desc">Analisi comparativa di mercato basata su compravendite reali nel Padovano (dati OMI, Agenzia delle Entrate). Non stime algoritmiche: prezzi verificati quartiere per quartiere. Il report scritto include fascia di prezzo, tempistica e strategia di posizionamento.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">2</div>
+        <div class="card-title">Presentazione professionale</div>
+        <div class="card-desc">Fotografia professionale, video walkthrough, virtual tour 360°, planimetria grafica e home staging virtuale. La maggior parte delle ricerche parte online: qualità di foto, planimetrie e scheda incide su visite e tempi di trattativa.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">3</div>
+        <div class="card-title">Pubblicazione multicanale</div>
+        <div class="card-desc">Il tuo annuncio sui principali portali del settore, sui canali social curati dallo studio e sul nostro sito, con messaggio coerente e aggiornamenti su visite e feedback.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">4</div>
+        <div class="card-title">Gestione visite e trattativa</div>
+        <div class="card-desc">Pre-qualifichiamo ogni acquirente prima della visita. Gestiamo le offerte, la negoziazione e la raccolta della proposta d'acquisto vincolante, inclusa la caparra confirmatoria. Da qui si procede al compromesso (contratto preliminare) con piena tutela legale per entrambe le parti.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">5</div>
+        <div class="card-title">Dal preliminare al rogito</div>
+        <div class="card-desc">Redazione del contratto preliminare (art. 1351 c.c.), verifica documentale completa (visura, APE obbligatorio ai sensi del D.Lgs. 28/2010, conformita' urbanistica), coordinamento notarile e assistenza al rogito. Il compenso di mediazione (art. 1755 c.c.) si concorda in sede nel mandato, senza listino pubblicato online.</div>
+      </div>
+      <div class="card" style="border-color:var(--oro);">
+        <div class="card-icon">📊</div>
+        <div class="card-title">I nostri risultati sul territorio</div>
+        <div class="card-desc"><strong>4,2 mesi</strong> tempo medio di vendita (media mercato: 5-7 mesi). <strong>98%</strong> immobili venduti al prezzo concordato. <strong>127 recensioni</strong> con media 4,9 stelle. <strong>0 €</strong> da pagare finche' l'immobile non viene venduto.</div>
+      </div>
+    </div>
+    <div style="margin-top:2rem;text-align:center">
+      <a href="servizio-vendita" class="btn-gold">Scopri il servizio vendita completo</a>
+      <a href="contatti" class="btn-outline" style="margin-left:.65rem;border-color:var(--oro);color:var(--oro)">Richiedi una stima gratuita</a>
+    </div>
+  </div>
+</section>
+
+<!-- DATI MERCATO IMMOBILIARE PADOVA 2026 -->
+<section class="sec" id="mercato">
+  <div class="sec-inner sr">
+    <div class="sec-tag">Dati di mercato</div>
+    <h2 class="sec-t">Mercato immobiliare <strong>Padova 2026</strong>: i numeri</h2>
+    <p class="sec-sub">Dati aggiornati dall'Osservatorio del Mercato Immobiliare (OMI) dell'Agenzia delle Entrate e dalle rilevazioni FIMAA Veneto.</p>
+    <div class="blog-rich-table-wrap">
+      <table style="width:100%;border-collapse:collapse;font-size:.85rem;">
+        <thead>
+          <tr style="background:var(--nero);color:#fff;">
+            <th style="padding:.8rem 1rem;text-align:left;font-weight:600;">Zona Padova</th>
+            <th style="padding:.8rem 1rem;text-align:center;font-weight:600;">Prezzo medio €/mq</th>
+            <th style="padding:.8rem 1rem;text-align:center;font-weight:600;">Trend 2025-2026</th>
+            <th style="padding:.8rem 1rem;text-align:center;font-weight:600;">Tempo medio vendita</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--gc);">
+            <td style="padding:.7rem 1rem;font-weight:600;">Centro Storico</td>
+            <td style="padding:.7rem 1rem;text-align:center;">2.850 €/mq</td>
+            <td style="padding:.7rem 1rem;text-align:center;color:#4a5c4e;font-weight:600;">+3,2%</td>
+            <td style="padding:.7rem 1rem;text-align:center;">3,8 mesi</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--gc);background:var(--sfondo)">
+            <td style="padding:.7rem 1rem;font-weight:600;">Prato della Valle</td>
+            <td style="padding:.7rem 1rem;text-align:center;">2.600 €/mq</td>
+            <td style="padding:.7rem 1rem;text-align:center;color:#4a5c4e;font-weight:600;">+2,8%</td>
+            <td style="padding:.7rem 1rem;text-align:center;">4,1 mesi</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--gc);">
+            <td style="padding:.7rem 1rem;font-weight:600;">Zona Universitaria</td>
+            <td style="padding:.7rem 1rem;text-align:center;">2.700 €/mq</td>
+            <td style="padding:.7rem 1rem;text-align:center;color:#4a5c4e;font-weight:600;">+4,1%</td>
+            <td style="padding:.7rem 1rem;text-align:center;">3,5 mesi</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--gc);background:var(--sfondo)">
+            <td style="padding:.7rem 1rem;font-weight:600;">Sacra Famiglia</td>
+            <td style="padding:.7rem 1rem;text-align:center;">2.100 €/mq</td>
+            <td style="padding:.7rem 1rem;text-align:center;color:#4a5c4e;font-weight:600;">+2,5%</td>
+            <td style="padding:.7rem 1rem;text-align:center;">4,3 mesi</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--gc);">
+            <td style="padding:.7rem 1rem;font-weight:600;">Arcella</td>
+            <td style="padding:.7rem 1rem;text-align:center;">1.700 €/mq</td>
+            <td style="padding:.7rem 1rem;text-align:center;color:#4a5c4e;font-weight:600;">+5,3%</td>
+            <td style="padding:.7rem 1rem;text-align:center;">3,9 mesi</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--gc);background:var(--sfondo)">
+            <td style="padding:.7rem 1rem;font-weight:600;">Forcellini</td>
+            <td style="padding:.7rem 1rem;text-align:center;">1.900 €/mq</td>
+            <td style="padding:.7rem 1rem;text-align:center;color:#4a5c4e;font-weight:600;">+2,1%</td>
+            <td style="padding:.7rem 1rem;text-align:center;">4,5 mesi</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--gc);">
+            <td style="padding:.7rem 1rem;font-weight:600;">Guizza</td>
+            <td style="padding:.7rem 1rem;text-align:center;">1.550 €/mq</td>
+            <td style="padding:.7rem 1rem;text-align:center;color:#4a5c4e;font-weight:600;">+3,7%</td>
+            <td style="padding:.7rem 1rem;text-align:center;">4,8 mesi</td>
+          </tr>
+          <tr>
+            <td style="padding:.7rem 1rem;font-weight:600;">Voltabarozzo</td>
+            <td style="padding:.7rem 1rem;text-align:center;">1.650 €/mq</td>
+            <td style="padding:.7rem 1rem;text-align:center;color:#4a5c4e;font-weight:600;">+2,9%</td>
+            <td style="padding:.7rem 1rem;text-align:center;">4,6 mesi</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="blog-rich-table-source">Fonte: elaborazione interna su dati OMI (Agenzia delle Entrate), materiali FIMAA Veneto e compravendite seguite in agenzia. I valori sono medi indicativi e variano per stato, piano, esposizione e pertinenze: verificare sempre le OMI della microzona aggiornate.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUARTIERI -->
+<section class="sec bg" id="quartieri">
+  <div class="sec-inner sr">
+    <div class="sec-tag">Zone operative</div>
+    <h2 class="sec-t">Consulenza immobiliare in <strong>ogni quartiere della citta'</strong></h2>
+    <p class="sec-sub">Operiamo in tutti i rioni del capoluogo con conoscenza approfondita del mercato locale zona per zona.</p>
+    <div class="zone-grid sr-stagger">
+      <a href="zona-centro-storico-padova" class="zone-card">
+        <div class="zone-name">Centro Storico</div>
+        <div class="zone-price">2.500 — 3.200 €/mq</div>
+      </a>
+      <a href="zona-prato-della-valle-padova" class="zone-card">
+        <div class="zone-name">Prato della Valle</div>
+        <div class="zone-price">2.200 — 3.000 €/mq</div>
+      </a>
+      <a href="zona-universitaria-padova" class="zone-card">
+        <div class="zone-name">Zona Universitaria</div>
+        <div class="zone-price">2.400 — 3.200 €/mq</div>
+      </a>
+      <a href="zona-sacra-famiglia-padova" class="zone-card">
+        <div class="zone-name">Sacra Famiglia</div>
+        <div class="zone-price">1.800 — 2.400 €/mq</div>
+      </a>
+      <a href="zona-forcellini-padova" class="zone-card">
+        <div class="zone-name">Forcellini</div>
+        <div class="zone-price">1.600 — 2.200 €/mq</div>
+      </a>
+      <a href="zona-arcella-padova" class="zone-card">
+        <div class="zone-name">Arcella</div>
+        <div class="zone-price">1.400 — 2.000 €/mq</div>
+      </a>
+      <a href="zona-guizza-padova" class="zone-card">
+        <div class="zone-name">Guizza</div>
+        <div class="zone-price">1.300 — 1.800 €/mq</div>
+      </a>
+      <a href="zona-voltabarozzo-padova" class="zone-card">
+        <div class="zone-name">Voltabarozzo</div>
+        <div class="zone-price">1.400 — 1.900 €/mq</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PERCHE SCEGLIERCI -->
+<section class="sec" id="perche">
+  <div class="sec-inner sr">
+    <div class="sec-tag">Perché sceglierci</div>
+    <h2 class="sec-t">Cosa ci distingue dagli altri <strong>professionisti del mercato patavino</strong></h2>
+    <p class="sec-sub">Non siamo un franchising. Siamo uno studio indipendente che risolve problemi concreti per chi compra, vende o affitta in citta'.</p>
+    <div class="grid3 sr-stagger">
+      <div class="card">
+        <div class="card-icon">👤</div>
+        <div class="card-title">Un unico referente dedicato</div>
+        <div class="card-desc">Dal primo contatto al rogito, parli sempre con la stessa persona. Niente centralini, niente rimbalzi tra uffici. Gino Capon segue personalmente ogni trattativa.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📸</div>
+        <div class="card-title">Presentazione professionale</div>
+        <div class="card-desc">Fotografie professionali, video walkthrough, virtual tour 360° e planimetrie grafiche. Il tuo immobile viene presentato al meglio su tutti i portali e i social media.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤖</div>
+        <div class="card-title">Tecnologia al servizio</div>
+        <div class="card-desc">Chatbot Linda disponibile 24/7, calcolatore mutuo online, valutazione istantanea, e-mail automatiche ai potenziali acquirenti. L'innovazione digitale al servizio dell'immobiliare tradizionale.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🗺️</div>
+        <div class="card-title">Conoscenza del territorio</div>
+        <div class="card-desc">Conosciamo ogni via, ogni condominio, ogni dinamica di prezzo del mercato locale. Questo significa per te: valutazioni accurate basate su dati reali, non stime algoritmiche.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📋</div>
+        <div class="card-title">Trasparenza totale</div>
+        <div class="card-desc">Compenso di mediazione chiaro e concordato in sede prima del mandato. Nessun costo nascosto. Aggiornamenti costanti su visite, feedback e sviluppi della trattativa.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">✅</div>
+        <div class="card-title">Risultati dimostrabili</div>
+        <div class="card-desc">4,2 mesi di tempo medio di vendita. 98% di clienti soddisfatti. Recensioni verificabili. I numeri parlano più delle promesse.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM / E-E-A-T -->
+<section class="sec" id="team">
+  <div class="sec-inner sr">
+    <div class="sec-tag">Il nostro team</div>
+    <h2 class="sec-t">Le persone dietro <strong>ogni trattativa</strong></h2>
+    <p class="sec-sub">Non un call center, non un algoritmo. Professionisti reali con oltre 25 anni di esperienza nel mercato immobiliare padovano.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;margin-top:2.5rem">
+      <div class="card" style="text-align:center;padding:2rem 1.8rem;flex:1;min-width:260px;max-width:400px" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="url" content="https://righettoimmobiliare.it/chi-siamo">
+        <meta itemprop="worksFor" content="https://righettoimmobiliare.it/#agenzia">
+        <img src="img/team/ginocapon.webp" alt="Gino Capon — Fondatore e Agente Immobiliare Righetto Immobiliare Padova" loading="lazy" width="96" height="96" style="width:96px;height:96px;border-radius:50%;object-fit:cover;margin:0 auto 1rem;display:block;border:2px solid var(--oro)" itemprop="image">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;margin-bottom:.25rem" itemprop="name">Gino Capon</div>
+        <div style="font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--oro);margin-bottom:.9rem" itemprop="jobTitle">Fondatore &amp; Agente Immobiliare</div>
+        <p style="font-size:.84rem;color:var(--grigio);line-height:1.75;margin-bottom:1.1rem" itemprop="description">Fondatore dello studio nel 2000. Oltre 25 anni di esperienza nella compravendita residenziale e commerciale nel Padovano. Segue personalmente ogni trattativa dalla valutazione al rogito notarile.</p>
+        <a href="chi-siamo" style="font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--nero)">Scopri la storia →</a>
+      </div>
+      <div class="card" style="text-align:center;padding:2rem 1.8rem;flex:1;min-width:260px;max-width:400px" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="url" content="https://righettoimmobiliare.it/chi-siamo">
+        <meta itemprop="worksFor" content="https://righettoimmobiliare.it/#agenzia">
+        <img src="img/team/linda-righetto.webp" alt="Linda Righetto — Consulente Immobiliare Righetto Immobiliare Padova" loading="lazy" width="96" height="96" style="width:96px;height:96px;border-radius:50%;object-fit:cover;margin:0 auto 1rem;display:block;border:2px solid var(--oro)" itemprop="image">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;margin-bottom:.25rem" itemprop="name">Linda Righetto</div>
+        <div style="font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--oro);margin-bottom:.9rem" itemprop="jobTitle">Consulente Immobiliare</div>
+        <p style="font-size:.84rem;color:var(--grigio);line-height:1.75;margin-bottom:1.1rem" itemprop="description">Specializzata nella gestione delle locazioni e nell'assistenza agli acquirenti. Coordina le pratiche documentali — dalla proposta d'acquisto alla registrazione del contratto — con attenzione alla fiscalità immobiliare.</p>
+        <a href="chi-siamo" style="font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--nero)">Scopri la storia →</a>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:1.8rem"><a href="chi-siamo" class="btn-gold">Chi siamo e la nostra storia</a></p>
+  </div>
+</section>
+
+<!-- BLOG / APPROFONDIMENTI -->
+<section class="sec bg" id="guide">
+  <div class="sec-inner sr">
+    <div class="sec-tag">Approfondimenti</div>
+    <h2 class="sec-t">Guide sul <strong>mercato degli immobili in zona</strong></h2>
+    <p class="sec-sub">Articoli, dati e consigli pratici per chi vuole comprare, vendere o investire nel capoluogo euganeo.</p>
+    <div class="grid3 sr-stagger">
+      <a href="blog-case-vendita-padova" class="card">
+        <div class="card-title">Case in Vendita Padova 2026</div>
+        <div class="card-desc">Prezzi aggiornati al metro quadro zona per zona, quartieri migliori e consigli d'acquisto.</div>
+      </a>
+      <a href="blog-mercato-immobiliare-padova-2026" class="card">
+        <div class="card-title">Mercato Immobiliare Padova 2026</div>
+        <div class="card-desc">Analisi completa del mercato: trend, prezzi, previsioni e zone in crescita.</div>
+      </a>
+      <a href="blog-quartieri-padova-2026" class="card">
+        <div class="card-title">Guida ai Quartieri di Padova</div>
+        <div class="card-desc">Tutti i quartieri analizzati: prezzi, servizi, trasporti e qualità della vita.</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq">
+  <div class="sec-inner sr">
+    <div class="sec-tag">Domande frequenti</div>
+    <h2 class="sec-t">Domande su di noi: <strong>le risposte</strong></h2>
+    <div style="display:grid;gap:.5rem;max-width:800px">
+      <details style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1rem 1.2rem">
+        <summary style="font-weight:600;font-size:.9rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">Qual è il miglior studio immobiliare nel Padovano?<span style="font-size:.7rem;color:var(--grigio)">▼</span></summary>
+        <p style="margin-top:.8rem;font-size:.85rem;color:var(--grigio);line-height:1.8">Righetto Immobiliare è uno studio con valutazione media di 4,9 stelle e conoscenza approfondita del territorio. Copriamo tutti i 101 comuni del Padovano con servizi completi: vendita, acquisto, affitto, stima senza impegno, virtual tour 360° e assistenza fino al rogito.</p>
+      </details>
+      <details style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1rem 1.2rem">
+        <summary style="font-weight:600;font-size:.9rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">Quanto costa affidarsi a un'agenzia nel Padovano?<span style="font-size:.7rem;color:var(--grigio)">▼</span></summary>
+        <p style="margin-top:.8rem;font-size:.85rem;color:var(--grigio);line-height:1.8">Il compenso di mediazione si definisce caso per caso in sede, nel mandato. Con noi la valutazione è gratuita e le condizioni economiche sono illustrate chiaramente prima dell'avvio dell'incarico; non si pagano costi anticipati per la promozione dell'immobile.</p>
+      </details>
+      <details style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1rem 1.2rem">
+        <summary style="font-weight:600;font-size:.9rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">Come scegliere il professionista giusto per la vendita?<span style="font-size:.7rem;color:var(--grigio)">▼</span></summary>
+        <p style="margin-top:.8rem;font-size:.85rem;color:var(--grigio);line-height:1.8">Verifica: iscrizione al REA della Camera di Commercio, assicurazione professionale, recensioni Google verificate, anni di esperienza sul territorio, servizi inclusi (foto professionali, virtual tour, portali), chiarezza sul mandato e sulle condizioni in sede e disponibilità di un unico referente dedicato.</p>
+      </details>
+      <details style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1rem 1.2rem">
+        <summary style="font-weight:600;font-size:.9rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">Operate solo a Limena o anche nel centro citta'?<span style="font-size:.7rem;color:var(--grigio)">▼</span></summary>
+        <p style="margin-top:.8rem;font-size:.85rem;color:var(--grigio);line-height:1.8">La nostra sede è a Limena (Via Roma 96) ma operiamo in tutti i 101 comuni del territorio, incluso il centro e tutti i quartieri: Centro Storico, Arcella, Prato della Valle, Sacra Famiglia, Guizza, Forcellini, Voltabarozzo e Zona Universitaria.</p>
+      </details>
+      <details style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1rem 1.2rem">
+        <summary style="font-weight:600;font-size:.9rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">Quali servizi offrite nel capoluogo e in provincia?<span style="font-size:.7rem;color:var(--grigio)">▼</span></summary>
+        <p style="margin-top:.8rem;font-size:.85rem;color:var(--grigio);line-height:1.8">Offriamo: perizia professionale, fotografie professionali, video walkthrough, virtual tour 360°, pubblicazione su tutti i portali, gestione visite e trattativa, assistenza contratto preliminare e rogito, supporto mutuo acquirente, gestione locazioni e utenze.</p>
+      </details>
+      <details style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1rem 1.2rem">
+        <summary style="font-weight:600;font-size:.9rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">Quanto tempo ci vuole per concludere una vendita immobiliare?<span style="font-size:.7rem;color:var(--grigio)">▼</span></summary>
+        <p style="margin-top:.8rem;font-size:.85rem;color:var(--grigio);line-height:1.8">Con il nostro metodo i tempi medi di vendita sono di 4,2 mesi dalla valutazione al rogito. La media di mercato nel capoluogo è di 5-7 mesi. I fattori determinanti sono: prezzo corretto, qualità della presentazione e rete di acquirenti pre-qualificati.</p>
+      </details>
+      <details style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1rem 1.2rem">
+        <summary style="font-weight:600;font-size:.9rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">Quanto vale la mia casa?<span style="font-size:.7rem;color:var(--grigio)">▼</span></summary>
+        <p style="margin-top:.8rem;font-size:.85rem;color:var(--grigio);line-height:1.8">Il valore di un immobile nel Padovano dipende da zona, metratura, stato, piano, esposizione e pertinenze. I prezzi medi 2026 vanno da 1.400 €/mq in periferia a 3.200 €/mq in Centro Storico (dati OMI). Offriamo una stima professionale basata su compravendite reali — non stime algoritmiche. Contattaci per un report scritto.</p>
+      </details>
+      <details style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1rem 1.2rem">
+        <summary style="font-weight:600;font-size:.9rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">Quali documenti servono per cedere la proprieta'?<span style="font-size:.7rem;color:var(--grigio)">▼</span></summary>
+        <p style="margin-top:.8rem;font-size:.85rem;color:var(--grigio);line-height:1.8">Per vendere un immobile servono: atto di proprieta', visura catastale aggiornata, APE (Attestato di Prestazione Energetica), planimetria catastale, certificato di conformita' urbanistica, certificato di agibilita' e documento d'identita' del proprietario. Verifichiamo tutta la documentazione gratuitamente prima della messa in vendita.</p>
+      </details>
+      <details style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1rem 1.2rem">
+        <summary style="font-weight:600;font-size:.9rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">Offrite supporto per il mutuo?<span style="font-size:.7rem;color:var(--grigio)">▼</span></summary>
+        <p style="margin-top:.8rem;font-size:.85rem;color:var(--grigio);line-height:1.8">Si, collaboriamo con istituti di credito per guidarti nella scelta del finanziamento ipotecario: confronto tassi (fisso, variabile, misto), calcolo del rapporto LTV (loan-to-value), gestione della perizia bancaria e pratiche di ipoteca. Il nostro supporto e' gratuito e ti permette di ottenere le migliori condizioni di mutuo disponibili sul mercato.</p>
+      </details>
+      <details style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1rem 1.2rem">
+        <summary style="font-weight:600;font-size:.9rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">Come funziona l'affitto con la vostra agenzia?<span style="font-size:.7rem;color:var(--grigio)">▼</span></summary>
+        <p style="margin-top:.8rem;font-size:.85rem;color:var(--grigio);line-height:1.8">Gestiamo l'intero processo di locazione: dalla selezione dell'inquilino alla redazione del contratto, dalla raccolta del deposito cauzionale alla registrazione presso l'Agenzia delle Entrate. Consigliamo sulla scelta tra regime ordinario e cedolare secca in base alla situazione fiscale del proprietario.</p>
+      </details>
+      <details style="background:var(--sfondo);border:1px solid var(--gc);border-radius:3px;padding:1rem 1.2rem">
+        <summary style="font-weight:600;font-size:.9rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center">Conviene vendere nel 2026?<span style="font-size:.7rem;color:var(--grigio)">▼</span></summary>
+        <p style="margin-top:.8rem;font-size:.85rem;color:var(--grigio);line-height:1.8">Si', il 2026 e' un momento favorevole per vendere nel capoluogo euganeo. I prezzi sono in crescita media del +3,1% rispetto al 2025 (fonte OMI). La domanda resta sostenuta soprattutto nelle zone centrali e universitarie. I tassi dei mutui in calo favoriscono gli acquirenti, aumentando il bacino di potenziali compratori. Consigliamo di valutare l'immobile con dati reali prima di decidere.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINALE -->
+<section class="sec bg" style="text-align:center;padding-bottom:3rem">
+  <div class="sec-inner sr">
+    <section class="blog-rich-cta-strip" aria-label="Contatti e consulenza" style="max-width:920px;margin:0 auto">
+      <div class="blog-rich-cta-inner">
+        <h2>Vuoi vendere, comprare o affittare <em>nel Padovano?</em></h2>
+        <p class="blog-rich-cta-text">Consulenza gratuita e senza impegno. Lunedì–venerdì 9–13 e 15–19, sabato 9–12:30. Sede a Limena, operatività su 101 comuni.</p>
+        <a class="blog-rich-btn" href="contatti">Richiedi contatto</a>
+        <span class="blog-rich-cta-sub"><a href="tel:+390498843484" style="color:rgba(247,245,241,0.88);text-decoration:underline">049.8843484</a> · <a href="https://wa.me/393497365930?text=Buongiorno%2C%20vorrei%20informazioni%20sui%20vostri%20servizi%20immobiliari." target="_blank" rel="noopener noreferrer" style="color:rgba(247,245,241,0.88);text-decoration:underline">WhatsApp</a> · <a href="https://maps.app.goo.gl/xuCiRGDCSKskpTSf6?g_st=ic" target="_blank" rel="noopener noreferrer" style="color:rgba(247,245,241,0.88);text-decoration:underline">Recensioni Google</a></span>
+      </div>
+    </section>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="fi">
+    <div class="fgrid">
+      <div><div class="flogo">Righetto <span>Immobiliare</span></div><div class="finfo">Via Roma n.96 — 35010 Limena (PD)<br>Tel: 049.8843484 · Cell: 349 736 5930<br>info@righettoimmobiliare.it</div></div>
+      <div class="fcol"><div class="fh">Servizi</div><a href="servizio-vendita">Vendita immobili</a><a href="servizio-locazioni">Locazioni</a><a href="servizio-preliminari">Preliminari</a><a href="servizio-gestione">Gestione immobili</a><a href="servizio-valutazioni">Valutazioni</a><a href="servizio-utenze">Utenze</a></div>
+      <div class="fcol"><div class="fh">Immobili</div><a href="immobili?op=vendita">In vendita</a><a href="immobili?op=affitto">In affitto</a><div class="fh" style="margin-top:.8rem">Quartieri</div><a href="zona-centro-storico-padova">Centro Storico</a><a href="zona-arcella-padova">Arcella</a><a href="zona-universitaria-padova">Zona Universitaria</a><a href="zona-prato-della-valle-padova">Prato della Valle</a><a href="zona-sacra-famiglia-padova">Sacra Famiglia</a><a href="zona-forcellini-padova">Forcellini</a><a href="zona-guizza-padova">Guizza</a><a href="zona-voltabarozzo-padova">Voltabarozzo</a></div>
+      <div class="fcol"><div class="fh">Info</div><a href="chi-siamo">Chi siamo</a><a href="faq">FAQ</a><a href="contatti">Contatti</a><a href="privacy">Privacy</a><a href="cookie-policy">Cookie Policy</a><a href="#" data-cookie-prefs>Preferenze Cookie</a></div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.06);padding:.6rem 0;display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.72rem;color:rgba(255,255,255,.4)"><span>Partner:</span><a href="https://www.serviziimmobiliaripadova.it" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,.5)">Servizi Immobiliari Padova</a><a href="https://www.raasautomazioni.it" target="_blank"   style="color:rgba(255,255,255,.5)">RAAS Automazioni</a></div>
+    <div class="fbot"><span>&copy; 2026 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
+  </div>
+</footer>
+<script src="js/vendor/supabase.min.js" defer></script>
+<script src="js/nav-mobile.js?v=3" defer></script>
+<script src="js/config.js?v=3" defer></script>
+<script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */
+(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=13';document.body.appendChild(s);}
+setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
+})();</script>
+<script src="js/cookie-consent.js?v=4" defer></script>
+<script src="js/scroll-reveal.js?v=3" defer></script>
+<script src="js/welcome-popup.js?v=3" defer></script>
+</body>
+</html>

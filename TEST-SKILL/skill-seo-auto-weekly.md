@@ -70,6 +70,7 @@ Output: `data/seo-auto/snapshots/AAAA-MM-GG.json`, `audit-latest.json`, `selecti
    - **Prestazioni:** zip con «Confronta» ultimi 28 gg vs 28 gg precedenti, che contiene Pagine, Query e Date.
    - **Copertura → Valide:** lo zip.
    - Opzionale: Copertura → Non indicizzate.
+   - Se arriva un export «Ultimi 3 mesi» senza confronto va bene lo stesso: il motore ricava il 28 vs 28 del sito da `Grafico.csv`, riporta le metriche di pagina a 28 gg e blocca le pagine il cui title è cambiato durante il periodo misurato (data da git).
 2. `python3 scripts/seo_auto/seo_auto.py weekly`. Leggi `selection-latest.json` e il report.
 3. Per ogni pagina selezionata scegli la leva più piccola che risolve il problema misurato:
    - CTR basso → title e meta;
@@ -113,3 +114,4 @@ Regola d'oro sulle fonti · claim consentiti (350+, 101 comuni, 98%, 127 recensi
 |---|---|---|---|---|
 | 2026W41 (10/10, manuale) | repo_json_stale | 7 | 9 interventi (4 sitemap, 2 title/meta, 3 link) | `/landing-vendita` in attesa dei dati query; claim «15%» su `/vendere-casa-padova-errori` (H1, corpo, FAQ) da verificare |
 | 2026W41 bis (10/10, export Copertura) | repo_json_stale + copertura 04/10 | 10 | 3 interventi link (zona-limena → 4 zone cintura; 2 link → blog-tempi-vendita) | 183/205 sitemap indicizzate (89%), trend 106→196; batch 28/09 tutto indicizzato. Non indicizzate: chi-siamo, contatti (ispezione URL manuale), 4 zone cintura, tempi-vendita; 6 articoli di attualità da non spingere; bonus-mobili aprile possibile doppione |
+| 2026W41 ter (10/10, export Prestazioni 3 mesi) | gsc_csv (pagine 92 gg, sito 28 vs 28 da Grafico) | 10 | 7 interventi (6 title/meta, 1 refresh testo + link su contratto-affitto) | Sito 28 gg: 404 clic vs 329 (+23%), 7.875 impr. vs 6.737. Non-brand debole su vendita («vendere casa padova» pos. 42,6). servizio-vendita e rendimento-affitto esclusi: title cambiato da <28 gg nel periodo misurato. Cannibalizzazione contratto-affitto ↔ canone-concordato: differenziati. Tabella €/mq canoni da verificare |
