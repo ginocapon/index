@@ -74,6 +74,8 @@ jobs:
             --exclude 'sql' \
             --exclude 'supabase' \
             --exclude 'docs' \
+            --exclude 'templates' \
+            --exclude 'lunedi-email-report.html' \
             --exclude '_pages_site' \
             --exclude 'CLAUDE.md' \
             --exclude 'SKILL-2.0.md' \

@@ -207,7 +207,7 @@
     if (footer) {
       var bottom = footer.querySelector('.footer-bottom, .fbot');
       if (bottom) {
-        footer.insertBefore(bar, bottom);
+        bottom.parentNode.insertBefore(bar, bottom);
       } else {
         footer.appendChild(bar);
       }

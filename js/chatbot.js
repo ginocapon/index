@@ -192,6 +192,7 @@ function righettoFaqReply(faq) {
 }
 
 const FAQ_DATA = [
+  {k: ['under 36'], r: "Le esenzioni fiscali prima casa under 36 non si applicano ai nuovi rogiti del 2026: riguardano gli atti dal 26 maggio 2021 al 31 dicembre 2023 e, nella proroga, i preliminari sottoscritti e registrati entro il 31 dicembre 2023 con rogito entro il 31 dicembre 2024. Il Fondo di Garanzia Consap e' una misura distinta: i giovani sotto i 36 anni rientrano nelle categorie ammesse; la garanzia ordinaria e' il 50% della quota capitale e puo' essere elevata, alle condizioni previste, per mutui oltre l'80% del prezzo comprensivo degli oneri accessori. La disciplina della garanzia elevata e' prorogata al 31 dicembre 2027. L'importo del mutuo non puo' superare 250.000 euro e la banca decide l'erogazione. Non e' un'esenzione dalle imposte ne' un diritto automatico al mutuo al 100%.\n\nFonti (verificate il 10 ottobre 2026): [Agenzia delle Entrate](https://www.agenziaentrate.gov.it/portale/le-agevolazioni-prima-casa-under-36), [Consap](https://www.consap.it/fondo-prima-casa/)."},
   // ── INFO AGENZIA ──
   {
     k: ['orari', 'apertura', 'chiuso', 'aperto', 'quando'],
@@ -228,7 +229,7 @@ const FAQ_DATA = [
   },
   {
     k: ['compromesso', 'preliminare', 'contratto preliminare'],
-    r: '📋 **Contratto preliminare (compromesso)**\n\nIl preliminare di vendita è un contratto che obbliga le parti al rogito definitivo. Prevede:\n• Caparra confirmatoria (10-20% del prezzo)\n• Termine per il rogito\n• Clausole sospensive (es. mutuo)\n• Registrazione obbligatoria entro 20 giorni\n\nNoi prepariamo e registriamo il preliminare per voi.'
+    r: '📋 **Contratto preliminare (compromesso)**\n\nIl preliminare di vendita è un contratto che obbliga le parti al rogito definitivo. Prevede:\n• Caparra confirmatoria (10-20% del prezzo)\n• Termine per il rogito\n• Clausole sospensive (es. mutuo)\n• Registrazione obbligatoria entro 30 giorni\n\nNoi prepariamo e registriamo il preliminare per voi.'
   },
   {
     k: ['rogito', 'atto', 'notaio', 'notarile'],
@@ -236,8 +237,8 @@ const FAQ_DATA = [
   },
   // ── ACQUISTO ──
   {
-    k: ['prima casa', 'agevolazioni', 'under 36', 'giovani'],
-    r: '🏡 **Agevolazioni prima casa**\n\n**Requisiti:**\n• Non possedere altri immobili nello stesso comune\n• Residenza nel comune entro 18 mesi\n• Non aver già usufruito del bonus\n\n**Vantaggi:**\n• Imposta di registro al 2% (anziché 9%)\n• Per under 36: esenzione totale imposte e credito IVA\n• Detrazioni interessi mutuo fino a €4.000/anno',
+    k: ['prima casa', 'agevolazioni', 'giovani'],
+    r: '🏡 **Agevolazioni prima casa**\n\n**Requisiti:**\n• Non possedere altri immobili nello stesso comune\n• Residenza nel comune entro 18 mesi\n• Non aver già usufruito del bonus\n\n**Vantaggi:**\n• Imposta di registro al 2% (anziché 9%)\n• Under 36: per i nuovi rogiti 2026 niente esenzione fiscale specifica; la garanzia Consap e\' una misura distinta, soggetta a requisiti e alla banca\n• Detrazioni interessi mutuo fino a €4.000/anno',
     blog: 'blog-agevolazioni-prima-casa-2026',
     blogTitle: 'Agevolazioni prima casa 2026'
   },
@@ -2651,6 +2652,6 @@ function autoOpenChatbot() {
   }
 }
 // Apri automaticamente appena il widget e' pronto
-autoOpenChatbot();
+// Chat opens only on visitor request; avoid covering content on first load.
 
 })();
