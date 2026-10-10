@@ -49,9 +49,6 @@ GEO_SNIPPET = """
 
 FRESHNESS_HTML = '<span class="blog-rich-badge">Ultimo aggiornamento: luglio 2026</span>\n'
 
-ALTS_A = ["nel Padovano", "in provincia", "nel territorio", "in città", "nell'hinterland", "nel comune"]
-ALTS_DI = ["del Padovano", "della provincia", "del territorio", "locale", "padovano"]
-ALTS_RIG = ["lo studio", "il team", "la nostra struttura", "Righetto", "il gruppo"]
 
 SKIP = {
     "admin.html", "blog-articolo.html", "404.html", "bookmarklet-helper.html",
@@ -94,7 +91,10 @@ def shorten_text(text: str, max_len: int) -> str:
     cut = text[: max_len - 1].rsplit(" ", 1)[0]
     if len(cut) < max_len * 0.5:
         cut = text[: max_len - 1]
-    return cut.rstrip(" ,;:-") + "…"
+    return cut.rstrip(" ,;:-")
+
+
+MANUAL: list[str] = []
 
 
 def page_url(path: Path) -> str:
@@ -150,8 +150,7 @@ def inject_before_head_close(raw: str, snippet: str) -> str:
 def fix_title_meta(raw: str, path: Path) -> str:
     m = re.search(r"<title[^>]*>([^<]+)</title>", raw, re.I)
     if m and len(m.group(1)) > 70:
-        new_t = shorten_text(m.group(1), 70)
-        raw = raw[: m.start(1)] + new_t + raw[m.end(1) :]
+        MANUAL.append(f"{path.name}: title {len(m.group(1))} car. — riscrivere a mano (≤60)")
 
     if not re.search(r'<meta name="description"', raw, re.I):
         desc = "Righetto Immobiliare — agenzia a Limena (PD), dal 2000. Vendita, affitto e valutazioni su Padova e provincia."
@@ -173,13 +172,12 @@ def fix_title_meta(raw: str, path: Path) -> str:
     ):
         for m in re.finditer(pat, raw, re.I):
             if len(m.group(2)) > 70:
-                new_t = shorten_text(m.group(2), 68)
-                raw = raw[: m.start(2)] + new_t + raw[m.end(2) :]
+                MANUAL.append(f"{path.name}: og/twitter title {len(m.group(2))} car. — riscrivere a mano")
+                break
 
     m = re.search(r'<meta name="description" content="([^"]*)"', raw, re.I)
     if m and len(m.group(1)) > 160:
-        new_d = shorten_text(m.group(1), 158)
-        raw = raw[: m.start(1)] + new_d + raw[m.end(1) :]
+        MANUAL.append(f"{path.name}: meta {len(m.group(1))} car. — riscrivere a mano (≤155)")
 
     if not re.search(r'rel="canonical"', raw, re.I) and path.name != "index.html":
         canon = page_url(path)
@@ -238,55 +236,11 @@ def fix_freshness(raw: str, name: str) -> str:
     return raw
 
 
-def replace_limited(html: str, pattern: str, alts: list[str], n: int) -> str:
-    if n <= 0:
-        return html
-    idx = 0
-
-    def sub_fn(m: re.Match) -> str:
-        nonlocal idx
-        if idx >= n:
-            return m.group(0)
-        alt = alts[idx % len(alts)]
-        idx += 1
-        return alt
-
-    return re.sub(pattern, sub_fn, html, flags=re.I)
-
-
 def fix_stuffing(raw: str) -> str:
-    m = re.search(r"(</head>)(.*?)(</body>)", raw, re.S | re.I)
-    if m:
-        prefix, body, suffix = raw[: m.start(2)], m.group(2), raw[m.end(2) :]
-    else:
-        prefix, body, suffix = "", raw, ""
-
-    for _ in range(40):
-        full = prefix + body + suffix
-        n = padova_count(full)
-        if n <= 10:
-            break
-        body = replace_limited(body, r"\ba\s+Padova\b", ALTS_A, min(12, n - 10))
-        body = replace_limited(body, r"\bdi\s+Padova\b", ALTS_DI, min(12, n - 10))
-
-    for _ in range(12):
-        full = prefix + body + suffix
-        if agenzia_count(full) <= 5:
-            break
-        body = replace_limited(
-            body,
-            r"\bagenzia immobiliare\b",
-            ["agenzia locale", "studio immobiliare", "intermediario", "team Righetto", "struttura specializzata"],
-            6,
-        )
-
-    for _ in range(20):
-        full = prefix + body + suffix
-        if righetto_count(full) <= 4:
-            break
-        body = replace_limited(body, r"\bRighetto Immobiliare\b", ALTS_RIG, min(10, righetto_count(full) - 4))
-
-    return prefix + body + suffix
+    """Disattivata: la sostituzione meccanica con sinonimi ha prodotto frasi alterate
+    («nel capoluogo euganeo», «di lo studio»…) in 76 articoli. Lo stuffing va
+    corretto riscrivendo il paragrafo a mano; vietato reintrodurre liste di sinonimi."""
+    return raw
 
 
 def patch_file(path: Path) -> list[str]:
@@ -311,10 +265,8 @@ def patch_file(path: Path) -> list[str]:
             fixes.append("freshness")
             raw = n
 
-    n = fix_stuffing(raw)
-    if n != raw:
-        fixes.append("stuffing")
-        raw = n
+    if padova_count(raw) > 10 or agenzia_count(raw) > 5 or righetto_count(raw) > 4:
+        MANUAL.append(f"{name}: densità keyword alta — riscrivere i paragrafi a mano, niente sinonimi automatici")
 
     if raw != orig:
         path.write_text(raw, encoding="utf-8", newline="\n")
@@ -340,6 +292,10 @@ def main() -> int:
             print(f"  {p.relative_to(ROOT)}: {', '.join(fixes)}")
             total += 1
     print(f"\nFile aggiornati: {total}")
+    if MANUAL:
+        print(f"\nDa correggere a mano ({len(MANUAL)}):")
+        for line in MANUAL:
+            print(f"  {line}")
     return 0
 
 
