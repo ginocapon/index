@@ -1,0 +1,37 @@
+{
+  "updated": "2026-10-10",
+  "scheduled_for": "2026-10-13",
+  "scheduled_weekday": "lunedì",
+  "trigger_phrases": [
+    "cosa dobbiamo fare",
+    "tre punti",
+    "tre famosi punti",
+    "piano lunedì",
+    "cosa fare lunedì"
+  ],
+  "email_to": "info@righettoimmobiliare.it",
+  "email_subject_prefix": "[TEST] Piano agente — 3 task lunedì",
+  "context": "Richiesta utente 10/10/2026: lunedì (o martedì) richiamo memoria + email stile test con sintesi operativa.",
+  "tasks": [
+    {
+      "id": 1,
+      "title": "GSC indicizzazione (~15 min)",
+      "body": "Aggiornare data/gsc-indexing-weekly.json (Prestazioni + Indicizzazione). Scegliere UN fix repo: redirect/404/canonical (es. doppi da check_doppioni_sito.py). Deploy su main."
+    },
+    {
+      "id": 2,
+      "title": "Refresh SOSTENERE (1 pagina, no blog nuovo)",
+      "body": "Da data/gsc-keywords-priority.json: refresh pagina con impressioni deboli (servizio-vendita, landing-valutazione, proprietario-immobile o blog owner in SERP). Title/meta, box In sintesi, link hub proprietario — messaggio alleato venditori."
+    },
+    {
+      "id": 3,
+      "title": "Misura funnel proprietario (~30 min)",
+      "body": "Supabase tabella richieste: conteggio 30 gg per provenienza (blog bonus, proprietario-immobile, landing valutazione). Una riga in TEST-SKILL/skill-memoria-progressi.md §Log."
+    }
+  ],
+  "parallel_non_blocking": [
+    "Rc IMM",
+    "spostamento password / segreti"
+  ],
+  "agent_instruction": "Se l'utente chiede cosa fare lunedì o i tre punti, leggi questo file + invia/rigenera email con scripts/lunedi-tre-punti-email.py. Workflow: .github/workflows/lunedi-tre-punti-agente.yml"
+}
