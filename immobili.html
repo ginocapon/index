@@ -1840,7 +1840,9 @@
   // ── APPLICA PARAMETRI URL (dalla ricerca homepage) ──
   function applyUrlParams() {
     const params = new URLSearchParams(window.location.search);
-    const tab = params.get('tab');
+    // 'op' e' il parametro storico usato da menu/footer: accettato come alias di 'tab'
+    let tab = params.get('tab') || params.get('op');
+    if (tab === 'asta') tab = 'aste';
     const tipo = params.get('tipo');
     const zona = params.get('zona');
     const prezzoMax = params.get('prezzo_max');

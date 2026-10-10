@@ -300,6 +300,7 @@
 </footer>
 
 <script src="js/vendor/supabase.min.js" defer></script>
+<script src="js/supabase-bridge.js" defer></script>
 <script>
 // ══════════════════════════════
 // BLOG ENGINE — carica articoli da Supabase
@@ -2275,7 +2276,8 @@ async function initBlog() {
   renderBlog();
   finishBlogReveal();
   try {
-    sbBlog = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    var sbLib = (window.rigSupabaseLib && window.rigSupabaseLib()) || window.supabase;
+    sbBlog = sbLib.createClient(SUPABASE_URL, SUPABASE_KEY);
     const { data, error } = await Promise.race([
       sbBlog.from('blog').select('*').eq('stato', 'pubblicato').order('data', { ascending: false }),
       new Promise(function(_, reject) { setTimeout(function() { reject(new Error('timeout blog')); }, 8000); })
@@ -2465,15 +2467,15 @@ async function iscriviNewsletter() {
   const msgEl = document.getElementById('nlMsg');
   if (!email || !email.includes('@')) { msgEl.style.display = 'block'; msgEl.style.color = '#e74c3c'; msgEl.textContent = 'Inserisci un\'email valida'; return; }
   try {
-    if (sbBlog) {
-      await sbBlog.from('newsletter_subscribers').upsert([{
-        email: email,
-        fonte: 'blog-sidebar',
-        interesse: 'generico',
-        attivo: true,
-        created_at: new Date().toISOString()
-      }], { onConflict: 'email' });
-    }
+    if (!sbBlog) { throw new Error('servizio non disponibile'); }
+    const nlRes = await sbBlog.from('newsletter_subscribers').upsert([{
+      email: email,
+      fonte: 'blog-sidebar',
+      interesse: 'generico',
+      attivo: true,
+      created_at: new Date().toISOString()
+    }], { onConflict: 'email' });
+    if (nlRes && nlRes.error) { throw nlRes.error; }
     msgEl.style.display = 'block'; msgEl.style.color = 'var(--oro)'; msgEl.textContent = 'Iscrizione completata!';
     document.getElementById('nlEmail').value = '';
   } catch(e) {
@@ -2481,8 +2483,8 @@ async function iscriviNewsletter() {
   }
 }
 
-// Init
-initBlog();
+// Init: attende il parsing, cosi gli script defer (libreria Supabase) sono gia eseguiti
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initBlog); } else { initBlog(); }
 </script>
 <script src="js/nav-mobile.js?v=3" defer></script>
 <script src="js/config.js?v=3"></script>
