@@ -269,6 +269,55 @@ def ingest_csv() -> dict | None:
             "limitations": ["Export manuale: niente query per pagina né dati giornalieri, niente brand/non-brand."]}
 
 
+COVERAGE_OUT = SEO / "coverage-latest.json"
+
+
+def ingest_coverage() -> dict | None:
+    """Export GSC UI: Indicizzazione → Pagine → «Visualizza dati sulle pagine indicizzate» → Esporta (zip o Tabella.csv)."""
+    import io
+    import zipfile
+    cands = sorted([f for f in INBOX.glob("*") if f.suffix.lower() in (".zip", ".csv")
+                    and re.search(r"coverage|copertura|valid|indicizz|tabella", f.name, re.I)],
+                   key=lambda f: f.stat().st_mtime, reverse=True)
+    if not cands:
+        return None
+    src = cands[0]
+    files: dict[str, str] = {}
+    if src.suffix.lower() == ".zip":
+        with zipfile.ZipFile(src) as z:
+            for n in z.namelist():
+                if n.lower().endswith(".csv"):
+                    files[Path(n).name.lower()] = z.read(n).decode("utf-8-sig", errors="ignore")
+    else:
+        files["tabella.csv"] = src.read_text(encoding="utf-8-sig", errors="ignore")
+    table = next((v for k, v in files.items() if "tabella" in k or "table" in k), None)
+    if not table:
+        return None
+    last_crawl: dict[str, str] = {}
+    variants = {"www": 0, "html": 0}
+    for r in csv.reader(io.StringIO(table)):
+        if not r or not r[0].startswith("http"):
+            continue
+        variants["www"] += "://www." in r[0]
+        variants["html"] += r[0].split("?")[0].endswith(".html")
+        p = path_from_url(r[0])
+        crawl = r[1] if len(r) > 1 else ""
+        if crawl >= last_crawl.get(p, ""):
+            last_crawl[p] = crawl
+    trend = []
+    chart = next((v for k, v in files.items() if "grafico" in k or "chart" in k), None)
+    if chart:
+        for r in csv.reader(io.StringIO(chart)):
+            if len(r) > 1 and re.match(r"\d{4}-\d{2}-\d{2}$", r[0]):
+                trend.append({"date": r[0], "indexed": int(_num(r[1]))})
+    mm = re.search(r"(\d{4}-\d{2}-\d{2})", src.name)
+    out = {"source_file": src.name, "export_date": mm.group(1) if mm else date.fromtimestamp(src.stat().st_mtime).isoformat(),
+           "data_end_date": trend[-1]["date"] if trend else None,
+           "indexed_paths": len(last_crawl), "variants_in_export": variants, "trend": trend, "last_crawl": dict(sorted(last_crawl.items()))}
+    save_json(COVERAGE_OUT, out)
+    return out
+
+
 def ingest_repo_fallback() -> dict:
     kp = load_json(ROOT / "data" / "gsc-keywords-priority.json", {}) or {}
     s = kp.get("summary_28d", {})
@@ -301,8 +350,15 @@ def cmd_ingest() -> dict:
     if snap is None:
         snap = ingest_csv()
         if snap is None:
-            errors.append("Nessun CSV in data/seo-auto/inbox/")
+            errors.append("Nessun export Prestazioni → Pagine (CSV) in data/seo-auto/inbox/")
             snap = ingest_repo_fallback()
+    cov = ingest_coverage()
+    if cov:
+        snap["coverage"] = {k: cov[k] for k in ("source_file", "export_date", "data_end_date", "indexed_paths", "variants_in_export")}
+        snap["coverage"]["trend_first"] = cov["trend"][0] if cov["trend"] else None
+        snap["coverage"]["trend_last"] = cov["trend"][-1] if cov["trend"] else None
+    else:
+        errors.append("Nessun export Copertura/Valide in data/seo-auto/inbox/ (stato indicizzazione non aggiornato)")
     ga4_id = os.environ.get("GA4_PROPERTY_ID", "").strip()
     snap["ga4"] = {"status": "non_configurato" if not ga4_id else "configurato_non_implementato",
                    "note": "GA4 Data API: aggiungere service account come Visualizzatore sulla proprietà."}
@@ -359,7 +415,35 @@ def classify(p: str) -> str:
     return "contenuto"
 
 
+def git_first_added(f: Path) -> str | None:
+    try:
+        r = subprocess.run(["git", "log", "--diff-filter=A", "--format=%cs", "--", str(f.relative_to(ROOT))],
+                           cwd=ROOT, capture_output=True, text=True, timeout=20)
+        lines = r.stdout.split()
+        return lines[-1] if lines else None
+    except Exception:
+        return None
+
+
+def indexed_set() -> tuple[set | None, dict]:
+    """URL indicizzate secondo URL Inspection (API) o export Copertura recente; None se nessun dato affidabile."""
+    conf = cfg()
+    snaps = sorted(SNAP_DIR.glob("*.json"))
+    ix = (load_json(snaps[-1]) or {}).get("index_status") if snaps else None
+    if ix:
+        return {p for p, v in ix.items() if (v or {}).get("verdict") == "PASS"}, {"source": "url_inspection", "checked": set(ix)}
+    cov = load_json(COVERAGE_OUT)
+    if cov and cov.get("data_end_date"):
+        age = (date.today() - date.fromisoformat(cov["data_end_date"])).days
+        if age <= int(conf.get("coverage_max_age_days", 21)):
+            return set(cov["last_crawl"]), {"source": "export_copertura", "data_end_date": cov["data_end_date"], "checked": None}
+    return None, {}
+
+
 def cmd_audit() -> dict:
+    conf_a = cfg()
+    indexed, ix_meta = indexed_set()
+    grace = int(conf_a.get("indexing_grace_days", 28))
     locs = [path_from_url(u) for u in re.findall(r"<loc>([^<]+)</loc>", (ROOT / "sitemap.xml").read_text(encoding="utf-8"))]
     all_html = [f for f in ROOT.glob("*.html") if not f.name.startswith(("admin", "google"))]
     facts = {}
@@ -408,6 +492,12 @@ def cmd_audit() -> dict:
             issues.append("sitemap_noindex")
         if p in cfg().get("template_paths", []):
             issues.append("sitemap_template_senza_contenuto")
+        if indexed is not None and p not in indexed and (ix_meta.get("checked") is None or p in ix_meta["checked"]):
+            born = git_first_added(f)
+            if born and (date.today() - date.fromisoformat(born)).days >= grace:
+                issues.append("non_indicizzata")
+            else:
+                notes.append(f"non_indicizzata_recente_{born}")
         pages[p] = {**{k: v for k, v in fx.items() if k != "links_out"},
                     "tier": classify(p), "inbound": len(inbound.get(p, ())),
                     "last_modified": git_last_modified(f), "issues": issues, "notes": notes}
@@ -419,7 +509,9 @@ def cmd_audit() -> dict:
         if len(ps) > 1:
             for p in ps:
                 pages[p]["issues"].append("title_duplicato")
-    out = {"date": date.today().isoformat(), "pages_in_sitemap": len(locs), "pages": pages}
+    out = {"date": date.today().isoformat(), "pages_in_sitemap": len(locs), "pages": pages,
+           "indexing_source": ix_meta.get("source"), "indexing_data_end": ix_meta.get("data_end_date"),
+           "sitemap_indexed": sum(1 for p in locs if indexed is not None and p in indexed) if indexed is not None else None}
     save_json(AUDIT_OUT, out)
     n_iss = sum(1 for v in pages.values() if v.get("issues"))
     print(f"audit: {len(locs)} URL sitemap, {n_iss} con almeno un problema on-page")
@@ -487,7 +579,11 @@ def score_page(p: str, a: dict, g: dict | None, stale: bool, conf: dict) -> tupl
                 parts[k] = round(parts[k] * .5, 1)
             reasons.append("dato GSC non aggiornato: peso dimezzato")
     sitemap_iss = [i for i in a.get("issues", []) if i.startswith("sitemap_")]
-    tech = [i for i in a.get("issues", []) if not i.startswith(("meta_corta", "sitemap_"))]
+    tech = [i for i in a.get("issues", []) if not i.startswith(("meta_corta", "sitemap_", "non_indicizzata"))]
+    if "non_indicizzata" in a.get("issues", []):
+        tw = conf.get("indexing_tier_weight", {}).get(a.get("tier", "contenuto"), 1.0)
+        parts["indicizzazione"] = round(10 * tw * w.get("indexing", 1.0), 1)
+        reasons.append("in sitemap da oltre 28 gg ma assente dalle pagine indicizzate Google: rafforzare link interni + richiesta indicizzazione")
     if sitemap_iss:
         parts["sitemap"] = round(12 * w.get("sitemap", 1.0), 1)
         reasons.append("sitemap incoerente: " + ", ".join(sitemap_iss) + " (Google riceve segnali contraddittori)")
@@ -514,7 +610,7 @@ def cmd_select() -> dict:
         score, reasons, parts = score_page(p, a, g, snap.get("stale", True), conf)
         if score <= 0:
             continue
-        only_technical = set(parts) <= {"sitemap", "tecnico", "tier_mult"}
+        only_technical = set(parts) <= {"sitemap", "tecnico", "indicizzazione", "underlinked", "tier_mult"}
         cd = cooldown_active(p, snap, conf) and not only_technical
         if cd:
             reasons.append(f"cooldown: ultimo refresh {last_content_refresh(p)} senza 28 gg di dati GSC successivi")
@@ -806,6 +902,13 @@ def _svg_line(points: list[tuple[str, float, bool]], annotations: list[tuple[str
             f'<figcaption>Punti grigi = dato non aggiornato/manuale · linee arancioni = interventi pubblicati</figcaption></figure>')
 
 
+def _coverage_series() -> list:
+    cov = load_json(COVERAGE_OUT) or {}
+    tr = cov.get("trend", [])
+    weekly = [t for i, t in enumerate(tr) if i % 7 == 0 or i == len(tr) - 1]
+    return [(t["date"], t["indexed"], False) for t in weekly]
+
+
 def _series() -> tuple[list, list, list]:
     clicks, impr = [], []
     seen = set()
@@ -856,6 +959,7 @@ th{{background:#eef2f6}}.warn{{background:#fff4e5;border-left:4px solid #C65A1E;
 </head><body><h1>SEO automatico — ciclo {sel.get('cycle', '—')}</h1>
 <p>Aggiornato: {now_iso()} · Fonte dati: <strong>{snap['source']}</strong></p>{warn}
 <h2>Andamento sito (28 gg per snapshot)</h2>{_svg_line(clicks, ann, 'Clic organici')}{_svg_line(impr, ann, 'Impressioni')}
+<h2>Pagine indicizzate (export Copertura GSC)</h2>{_svg_line(_coverage_series(), ann, 'Pagine indicizzate')}
 <h2>Pagine selezionate</h2><table><thead><tr><th>ID</th><th>URL</th><th>Punteggio</th><th>Motivi</th></tr></thead><tbody>
 {''.join(f"<tr><td>{c['intervention_id']}</td><td>{c['url']}</td><td>{c['score']}</td><td>{htmllib.escape('; '.join(c['reasons']))}</td></tr>" for c in sel.get('selected', []))}
 </tbody></table><h2>Registro interventi</h2>{_interventions_table()}
@@ -894,8 +998,16 @@ def cmd_report(evals: list[dict] | None = None) -> None:
     if ix:
         ok = sum(1 for v in ix.values() if (v or {}).get("verdict") == "PASS")
         lines.append(f"- URL Inspection: {ok}/{len(ix)} URL della sitemap indicizzate nel campione.")
+    elif snap.get("coverage"):
+        c = snap["coverage"]
+        tf, tl = c.get("trend_first") or {}, c.get("trend_last") or {}
+        lines.append(f"- Indicizzazione (export Copertura {c['export_date']}): {tl.get('indexed')} pagine indicizzate al {tl.get('date')} "
+                     f"(erano {tf.get('indexed')} al {tf.get('date')}); in sitemap indicizzate {audit.get('sitemap_indexed')}/{audit.get('pages_in_sitemap')}.")
+        v = c.get("variants_in_export", {})
+        if v.get("www") or v.get("html"):
+            lines.append(f"- Varianti nell'export: {v.get('www')} www, {v.get('html')} .html — redirect 301/canonical corretti, Google le consolida da solo.")
     else:
-        lines.append("- Indicizzazione: nessun dato URL Inspection in questo ciclo.")
+        lines.append("- Indicizzazione: nessun dato (né URL Inspection né export Copertura).")
     lines += ["", f"## C. Pagine selezionate: {len(sel.get('selected', []))} (su {sel.get('candidates_total')} candidate)", ""]
     for c in sel.get("selected", []):
         g = (c.get("gsc") or {}).get("current")
