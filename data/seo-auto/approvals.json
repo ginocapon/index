@@ -413,5 +413,713 @@
         "value": "Vendere, affittare o far gestire un immobile a Padova e provincia: valutazione gratuita, locazioni, preliminari e gestione. Righetto, alleato dal 2000."
       }
     ]
+  },
+  "SEO-2026W41-blog10-blog-affitto-breve-padova-2026": {
+    "approved": true,
+    "approved_by": "delega 10/10/2026 (Gino: «risistemi i primi 10 articoli peggiori»)",
+    "approved_on": "2026-10-10",
+    "url": "/blog-affitto-breve-padova-2026",
+    "file": "blog-affitto-breve-padova-2026.html",
+    "summary": "Batch blog 1/10: 12 frasi alterate corrette, title, dateModified",
+    "rationale": "impressioni senza clic; 13 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+    "ops": [
+      {
+        "op": "replace",
+        "find": "term rental nel capoluogo euganeo. Tutti i da",
+        "html": "term rental in città. Tutti i da"
+      },
+      {
+        "op": "replace",
+        "find": " temporanee nel capoluogo euganeo nel 2026 va",
+        "html": " temporanee in città nel 2026 va"
+      },
+      {
+        "op": "replace",
+        "find": "eve termine nel capoluogo euganeo deve conosc",
+        "html": "eve termine in città deve conosc"
+      },
+      {
+        "op": "replace",
+        "find": "rty manager nel capoluogo euganeo?</h2>\n\n    ",
+        "html": "rty manager in città?</h2>\n\n    "
+      },
+      {
+        "op": "replace",
+        "find": "tro storico nel capoluogo euganeo con tariffa",
+        "html": "tro storico in città con tariffa"
+      },
+      {
+        "op": "replace",
+        "find": "nel capoluogo euganeo",
+        "html": "in città"
+      },
+      {
+        "op": "replace",
+        "find": "Il capoluogo euganeo",
+        "html": "Padova"
+      },
+      {
+        "op": "replace",
+        "find": "il capoluogo euganeo",
+        "html": "Padova"
+      },
+      {
+        "op": "replace",
+        "find": "Nel territorio patavino",
+        "html": "Nel Padovano"
+      },
+      {
+        "op": "replace",
+        "find": "nel territorio patavino",
+        "html": "nel Padovano"
+      },
+      {
+        "op": "replace",
+        "find": "il territorio patavino",
+        "html": "il Padovano"
+      },
+      {
+        "op": "replace",
+        "find": "elaborazioni il team",
+        "html": "elaborazioni Righetto Immobiliare"
+      },
+      {
+        "op": "set_title",
+        "value": "Affitto breve a Padova 2026: rendimenti, regole e tasse"
+      },
+      {
+        "op": "regex_all",
+        "pattern": "(\"dateModified\"\\s*:\\s*\")\\d{4}-\\d{2}-\\d{2}",
+        "repl": "\\g<1>2026-10-10",
+        "min_count": 1
+      }
+    ],
+    "batch": "blog-1"
+  },
+  "SEO-2026W41-blog10-blog-affitti-padova-canoni-2026": {
+    "approved": true,
+    "approved_by": "delega 10/10/2026 (Gino: «risistemi i primi 10 articoli peggiori»)",
+    "approved_on": "2026-10-10",
+    "url": "/blog-affitti-padova-canoni-2026",
+    "file": "blog-affitti-padova-canoni-2026.html",
+    "summary": "Batch blog 1/10: 11 frasi alterate corrette, title, meta, dateModified",
+    "rationale": "~1 clic/28 gg sotto il benchmark (pos. 6.1, 49 impr./28 gg); 12 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+    "ops": [
+      {
+        "op": "replace",
+        "find": "i locazione nel capoluogo euganeo nel primo t",
+        "html": "i locazione in città nel primo t"
+      },
+      {
+        "op": "replace",
+        "find": "studentesca nel capoluogo euganeo</h3>\n      ",
+        "html": "studentesca in città</h3>\n      "
+      },
+      {
+        "op": "replace",
+        "find": " concordato nel capoluogo euganeo, l'IMU e' r",
+        "html": " concordato in città, l'IMU e' r"
+      },
+      {
+        "op": "replace",
+        "find": "canoni medi nel capoluogo euganeo variano in ",
+        "html": "canoni medi in città variano in "
+      },
+      {
+        "op": "replace",
+        "find": " a studenti nel capoluogo euganeo nel 2026?</",
+        "html": " a studenti in città nel 2026?</"
+      },
+      {
+        "op": "replace",
+        "find": "nel capoluogo euganeo",
+        "html": "in città"
+      },
+      {
+        "op": "replace",
+        "find": "il capoluogo euganeo",
+        "html": "Padova"
+      },
+      {
+        "op": "replace",
+        "find": "gli affitti nel territorio patavino: dalla sele",
+        "html": "gli affitti nel Padovano: dalla sele"
+      },
+      {
+        "op": "replace",
+        "find": "A, nel 2026 nel territorio patavino sono attivi",
+        "html": "A, nel 2026 nel Padovano sono attivi"
+      },
+      {
+        "op": "replace",
+        "find": "nel territorio patavino",
+        "html": "nel Padovano"
+      },
+      {
+        "op": "replace",
+        "find": "elaborazioni il team",
+        "html": "elaborazioni Righetto Immobiliare"
+      },
+      {
+        "op": "set_title",
+        "value": "Affitti a Padova 2026: canoni +8%, zone e domanda"
+      },
+      {
+        "op": "set_meta",
+        "value": "Affitti a Padova nel 2026: canoni +8% su elaborazioni di dati OMI e FIMAA, prezzi per zona e domanda studenti. Guida per proprietari e inquilini."
+      },
+      {
+        "op": "regex_all",
+        "pattern": "(\"dateModified\"\\s*:\\s*\")\\d{4}-\\d{2}-\\d{2}",
+        "repl": "\\g<1>2026-10-10",
+        "min_count": 1
+      }
+    ],
+    "batch": "blog-1"
+  },
+  "SEO-2026W41-blog10-blog-mercato-immobiliare-padova-2026": {
+    "approved": true,
+    "approved_by": "delega 10/10/2026 (Gino: «risistemi i primi 10 articoli peggiori»)",
+    "approved_on": "2026-10-10",
+    "url": "/blog-mercato-immobiliare-padova-2026",
+    "file": "blog-mercato-immobiliare-padova-2026.html",
+    "summary": "Batch blog 1/10: 8 frasi alterate corrette, title, meta, dateModified",
+    "rationale": "impressioni senza clic; 8 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+    "ops": [
+      {
+        "op": "replace",
+        "find": "omanda: chi compra casa nel capoluogo euganeo nel 2026?</a></li>\n    ",
+        "html": "omanda: chi compra casa a Padova nel 2026?</a></li>\n    "
+      },
+      {
+        "op": "replace",
+        "find": " delle case nel capoluogo euganeo nel primo t",
+        "html": " delle case a Padova nel primo t"
+      },
+      {
+        "op": "replace",
+        "find": "compra casa nel capoluogo euganeo nel 2026?</",
+        "html": "compra casa in città nel 2026?</"
+      },
+      {
+        "op": "replace",
+        "find": "te crescita nel capoluogo euganeo</strong>, s",
+        "html": "te crescita in città</strong>, s"
+      },
+      {
+        "op": "replace",
+        "find": "nel capoluogo euganeo",
+        "html": "in città"
+      },
+      {
+        "op": "replace",
+        "find": "di immobili nel territorio patavino nel 2026 pr",
+        "html": "di immobili nel Padovano nel 2026 pr"
+      },
+      {
+        "op": "replace",
+        "find": "immobiliare nel territorio patavino\" loading=\"l",
+        "html": "immobiliare nel Padovano\" loading=\"l"
+      },
+      {
+        "op": "replace",
+        "find": "nel territorio patavino",
+        "html": "nel Padovano"
+      },
+      {
+        "op": "set_title",
+        "value": "Mercato immobiliare Padova 2026: prezzi e tendenze"
+      },
+      {
+        "op": "set_meta",
+        "value": "Mercato immobiliare a Padova nel 2026: prezzi al mq per zona su dati OMI e andamento delle compravendite. Quanto vale casa tua? Stima gratuita."
+      },
+      {
+        "op": "regex_all",
+        "pattern": "(\"dateModified\"\\s*:\\s*\")\\d{4}-\\d{2}-\\d{2}",
+        "repl": "\\g<1>2026-10-10",
+        "min_count": 1
+      }
+    ],
+    "batch": "blog-1"
+  },
+  "SEO-2026W41-blog10-blog-vendita-immobiliare-padova-strategie-2026": {
+    "approved": true,
+    "approved_by": "delega 10/10/2026 (Gino: «risistemi i primi 10 articoli peggiori»)",
+    "approved_on": "2026-10-10",
+    "url": "/blog-vendita-immobiliare-padova-strategie-2026",
+    "file": "blog-vendita-immobiliare-padova-strategie-2026.html",
+    "summary": "Batch blog 1/10: 13 frasi alterate corrette, dateModified",
+    "rationale": "14 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+    "ops": [
+      {
+        "op": "replace",
+        "find": "ioni reali. Nel capoluogo euganeo, nel primo ",
+        "html": "ioni reali. In città, nel primo "
+      },
+      {
+        "op": "replace",
+        "find": "mpravendita nel capoluogo euganeo al miglior ",
+        "html": "mpravendita in città al miglior "
+      },
+      {
+        "op": "replace",
+        "find": "Nel capoluogo euganeo",
+        "html": "In città"
+      },
+      {
+        "op": "replace",
+        "find": "entuale che nel capoluogo euganeo sale al <st",
+        "html": "entuale che in città sale al <st"
+      },
+      {
+        "op": "replace",
+        "find": " di vendita nel capoluogo euganeo si attestan",
+        "html": " di vendita in città si attestan"
+      },
+      {
+        "op": "replace",
+        "find": "nel capoluogo euganeo",
+        "html": "in città"
+      },
+      {
+        "op": "replace",
+        "find": "mpravendite nel territorio patavino, analizziam",
+        "html": "mpravendite nel Padovano, analizziam"
+      },
+      {
+        "op": "replace",
+        "find": "mpravendita nel territorio patavino nel 2026. U",
+        "html": "mpravendita nel Padovano nel 2026. U"
+      },
+      {
+        "op": "replace",
+        "find": "di successo nel territorio patavino</figcaption",
+        "html": "di successo nel Padovano</figcaption"
+      },
+      {
+        "op": "replace",
+        "find": "Nel territorio patavino",
+        "html": "Nel Padovano"
+      },
+      {
+        "op": "replace",
+        "find": "nel territorio patavino",
+        "html": "nel Padovano"
+      },
+      {
+        "op": "replace",
+        "find": "di <strong>lo studio</strong>",
+        "html": "di <strong>Righetto Immobiliare</strong>"
+      },
+      {
+        "op": "replace",
+        "find": "elaborazioni il team",
+        "html": "elaborazioni Righetto Immobiliare"
+      },
+      {
+        "op": "regex_all",
+        "pattern": "(\"dateModified\"\\s*:\\s*\")\\d{4}-\\d{2}-\\d{2}",
+        "repl": "\\g<1>2026-10-10",
+        "min_count": 1
+      }
+    ],
+    "batch": "blog-1"
+  },
+  "SEO-2026W41-blog10-blog-mutuo-prima-casa-padova": {
+    "approved": true,
+    "approved_by": "delega 10/10/2026 (Gino: «risistemi i primi 10 articoli peggiori»)",
+    "approved_on": "2026-10-10",
+    "url": "/blog-mutuo-prima-casa-padova",
+    "file": "blog-mutuo-prima-casa-padova.html",
+    "summary": "Batch blog 1/10: 8 frasi alterate corrette, title, dateModified",
+    "rationale": "in sitemap da oltre 28 gg ma non indicizzata; 8 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+    "ops": [
+      {
+        "op": "replace",
+        "find": "he operanti nel capoluogo euganeo.</p>\n\n    <",
+        "html": "he operanti in città.</p>\n\n    <"
+      },
+      {
+        "op": "replace",
+        "find": "aga al mese nel capoluogo euganeo?</h2>\n\n    ",
+        "html": "aga al mese in città?</h2>\n\n    "
+      },
+      {
+        "op": "replace",
+        "find": " abitazione nel capoluogo euganeo si attestan",
+        "html": " abitazione in città si attestan"
+      },
+      {
+        "op": "replace",
+        "find": "nel capoluogo euganeo",
+        "html": "in città"
+      },
+      {
+        "op": "replace",
+        "find": " acquistano nel territorio patavino, nel 2026 c",
+        "html": " acquistano nel Padovano, nel 2026 c"
+      },
+      {
+        "op": "replace",
+        "find": "te presenza nel territorio patavino</h3>\n    <u",
+        "html": "te presenza nel Padovano</h3>\n    <u"
+      },
+      {
+        "op": "replace",
+        "find": "to migliore nel territorio patavino?</h2>\n\n    ",
+        "html": "to migliore nel Padovano?</h2>\n\n    "
+      },
+      {
+        "op": "replace",
+        "find": "nel territorio patavino",
+        "html": "nel Padovano"
+      },
+      {
+        "op": "set_title",
+        "value": "Mutuo prima casa Padova 2026: requisiti, tassi e under 36"
+      },
+      {
+        "op": "regex_all",
+        "pattern": "(\"dateModified\"\\s*:\\s*\")\\d{4}-\\d{2}-\\d{2}",
+        "repl": "\\g<1>2026-10-10",
+        "min_count": 1
+      }
+    ],
+    "batch": "blog-1"
+  },
+  "SEO-2026W41-blog10-blog-vigonza-rubano-comprare-casa-cintura-2026": {
+    "approved": true,
+    "approved_by": "delega 10/10/2026 (Gino: «risistemi i primi 10 articoli peggiori»)",
+    "approved_on": "2026-10-10",
+    "url": "/blog-vigonza-rubano-comprare-casa-cintura-2026",
+    "file": "blog-vigonza-rubano-comprare-casa-cintura-2026.html",
+    "summary": "Batch blog 1/10: 4 frasi alterate corrette, title, dateModified",
+    "rationale": "in sitemap da oltre 28 gg ma non indicizzata; 4 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»); on-page: title_troncato",
+    "ops": [
+      {
+        "op": "replace",
+        "find": "lla cintura del capoluogo euganeo (2026)\",\n  ",
+        "html": "lla cintura di Padova (2026)\",\n  "
+      },
+      {
+        "op": "replace",
+        "find": "ong>cintura del capoluogo euganeo</strong> at",
+        "html": "ong>cintura di Padova</strong> at"
+      },
+      {
+        "op": "replace",
+        "find": " nord-ovest del capoluogo euganeo e' un siste",
+        "html": " nord-ovest di Padova e' un siste"
+      },
+      {
+        "op": "replace",
+        "find": "del capoluogo euganeo",
+        "html": "di Padova"
+      },
+      {
+        "op": "set_title",
+        "value": "Vigonza e Rubano: comprare casa nella cintura di Padova"
+      },
+      {
+        "op": "regex_all",
+        "pattern": "(\"dateModified\"\\s*:\\s*\")\\d{4}-\\d{2}-\\d{2}",
+        "repl": "\\g<1>2026-10-10",
+        "min_count": 1
+      }
+    ],
+    "batch": "blog-1"
+  },
+  "SEO-2026W41-blog10-blog-sondaggio-bancaditalia-q1-2026-padova": {
+    "approved": true,
+    "approved_by": "delega 10/10/2026 (Gino: «risistemi i primi 10 articoli peggiori»)",
+    "approved_on": "2026-10-10",
+    "url": "/blog-sondaggio-bancaditalia-q1-2026-padova",
+    "file": "blog-sondaggio-bancaditalia-q1-2026-padova.html",
+    "summary": "Batch blog 1/10: 5 frasi alterate corrette, title, dateModified",
+    "rationale": "in sitemap da oltre 28 gg ma non indicizzata; 5 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»); on-page: title_troncato",
+    "ops": [
+      {
+        "op": "replace",
+        "find": "Nel territorio patavino",
+        "html": "Nel Padovano"
+      },
+      {
+        "op": "replace",
+        "find": "nel territorio patavino",
+        "html": "nel Padovano"
+      },
+      {
+        "op": "replace",
+        "find": "icazione al territorio patavino.\">\n<meta pr",
+        "html": "icazione al territorio padovano.\">\n<meta pr"
+      },
+      {
+        "op": "replace",
+        "find": "icazione al territorio patavino.\">\n<script ",
+        "html": "icazione al territorio padovano.\">\n<script "
+      },
+      {
+        "op": "replace",
+        "find": "territorio patavino",
+        "html": "territorio padovano"
+      },
+      {
+        "op": "set_title",
+        "value": "Sondaggio Banca d'Italia Q1 2026: LTV 77,2% e mutui"
+      },
+      {
+        "op": "regex_all",
+        "pattern": "(\"dateModified\"\\s*:\\s*\")\\d{4}-\\d{2}-\\d{2}",
+        "repl": "\\g<1>2026-10-10",
+        "min_count": 1
+      }
+    ],
+    "batch": "blog-1"
+  },
+  "SEO-2026W41-blog10-blog-case-vendita-padova": {
+    "approved": true,
+    "approved_by": "delega 10/10/2026 (Gino: «risistemi i primi 10 articoli peggiori»)",
+    "approved_on": "2026-10-10",
+    "url": "/blog-case-vendita-padova",
+    "file": "blog-case-vendita-padova.html",
+    "summary": "Batch blog 1/10: 10 frasi alterate corrette, meta, dateModified",
+    "rationale": "11 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+    "ops": [
+      {
+        "op": "replace",
+        "find": "un immobile nel capoluogo euganeo e provincia",
+        "html": "un immobile in città e provincia"
+      },
+      {
+        "op": "replace",
+        "find": "un immobile nel capoluogo euganeo dipendono d",
+        "html": "un immobile in città dipendono d"
+      },
+      {
+        "op": "replace",
+        "find": "nel capoluogo euganeo",
+        "html": "in città"
+      },
+      {
+        "op": "replace",
+        "find": "del capoluogo euganeo",
+        "html": "della città"
+      },
+      {
+        "op": "replace",
+        "find": "ll'acquisto nel territorio patavino nel 2026 va",
+        "html": "ll'acquisto nel Padovano nel 2026 va"
+      },
+      {
+        "op": "replace",
+        "find": "immobiliare nel territorio patavino\" loading=\"l",
+        "html": "immobiliare nel Padovano\" loading=\"l"
+      },
+      {
+        "op": "replace",
+        "find": "nel territorio patavino",
+        "html": "nel Padovano"
+      },
+      {
+        "op": "replace",
+        "find": "ita'-prezzo del territorio patavino. A <strong>",
+        "html": "ita'-prezzo del Padovano. A <strong>"
+      },
+      {
+        "op": "replace",
+        "find": "del territorio patavino",
+        "html": "del Padovano"
+      },
+      {
+        "op": "replace",
+        "find": "elaborazioni il team",
+        "html": "elaborazioni Righetto Immobiliare"
+      },
+      {
+        "op": "set_meta",
+        "value": "Case in vendita a Padova e provincia nel 2026: prezzi al mq zona per zona, quartieri e consigli per chi compra. E se vendi, valutazione gratuita."
+      },
+      {
+        "op": "regex_all",
+        "pattern": "(\"dateModified\"\\s*:\\s*\")\\d{4}-\\d{2}-\\d{2}",
+        "repl": "\\g<1>2026-10-10",
+        "min_count": 1
+      }
+    ],
+    "batch": "blog-1"
+  },
+  "SEO-2026W41-blog10-blog-mutui-casa-padova-2026": {
+    "approved": true,
+    "approved_by": "delega 10/10/2026 (Gino: «risistemi i primi 10 articoli peggiori»)",
+    "approved_on": "2026-10-10",
+    "url": "/blog-mutui-casa-padova-2026",
+    "file": "blog-mutui-casa-padova-2026.html",
+    "summary": "Batch blog 1/10: 14 frasi alterate corrette, title, meta, dateModified",
+    "rationale": "14 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+    "ops": [
+      {
+        "op": "replace",
+        "find": ": trilocale nel capoluogo euganeo</a></li>\n  ",
+        "html": ": trilocale in città</a></li>\n  "
+      },
+      {
+        "op": "replace",
+        "find": "ti</strong> nel capoluogo euganeo opta per co",
+        "html": "ti</strong> in città opta per co"
+      },
+      {
+        "op": "replace",
+        "find": "i ipotecari nel capoluogo euganeo a marzo 202",
+        "html": "i ipotecari in città a marzo 202"
+      },
+      {
+        "op": "replace",
+        "find": "n trilocale nel capoluogo euganeo?</h2>\n\n    ",
+        "html": "n trilocale in città?</h2>\n\n    "
+      },
+      {
+        "op": "replace",
+        "find": "Nel capoluogo euganeo",
+        "html": "In città"
+      },
+      {
+        "op": "replace",
+        "find": "nel capoluogo euganeo",
+        "html": "in città"
+      },
+      {
+        "op": "replace",
+        "find": "he operanti nel territorio patavino</strong>, l",
+        "html": "he operanti nel Padovano</strong>, l"
+      },
+      {
+        "op": "replace",
+        "find": "ti operanti nel territorio patavino.</p>\n\n    <",
+        "html": "ti operanti nel Padovano.</p>\n\n    <"
+      },
+      {
+        "op": "replace",
+        "find": "tecari 2026 nel territorio patavino. Il Fondo d",
+        "html": "tecari 2026 nel Padovano. Il Fondo d"
+      },
+      {
+        "op": "replace",
+        "find": "nel territorio patavino",
+        "html": "nel Padovano"
+      },
+      {
+        "op": "replace",
+        "find": "del territorio patavino",
+        "html": "del Padovano"
+      },
+      {
+        "op": "replace",
+        "find": "elaborazioni il team",
+        "html": "elaborazioni Righetto Immobiliare"
+      },
+      {
+        "op": "replace",
+        "find": "in provincia 2026",
+        "html": "a Padova nel 2026"
+      },
+      {
+        "op": "replace",
+        "find": "interne la nostra struttura",
+        "html": "interne Righetto Immobiliare"
+      },
+      {
+        "op": "set_title",
+        "value": "Mutui casa Padova 2026: tassi, offerte e simulazione rata"
+      },
+      {
+        "op": "set_meta",
+        "value": "Mutui casa a Padova nel 2026: come confrontare tasso fisso e variabile, offerte delle banche, simulazione della rata e documenti. Guida Righetto."
+      },
+      {
+        "op": "regex_all",
+        "pattern": "(\"dateModified\"\\s*:\\s*\")\\d{4}-\\d{2}-\\d{2}",
+        "repl": "\\g<1>2026-10-10",
+        "min_count": 1
+      }
+    ],
+    "batch": "blog-1"
+  },
+  "SEO-2026W41-blog10-blog-investire-immobiliare-padova": {
+    "approved": true,
+    "approved_by": "delega 10/10/2026 (Gino: «risistemi i primi 10 articoli peggiori»)",
+    "approved_on": "2026-10-10",
+    "url": "/blog-investire-immobiliare-padova",
+    "file": "blog-investire-immobiliare-padova.html",
+    "summary": "Batch blog 1/10: 11 frasi alterate corrette, meta, dateModified",
+    "rationale": "9 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+    "ops": [
+      {
+        "op": "replace",
+        "find": "mento netto nel capoluogo euganeo resta signi",
+        "html": "mento netto in città resta signi"
+      },
+      {
+        "op": "replace",
+        "find": "di per zona nel capoluogo euganeo nel 2026?</",
+        "html": "di per zona in città nel 2026?</"
+      },
+      {
+        "op": "replace",
+        "find": "nel capoluogo euganeo",
+        "html": "in città"
+      },
+      {
+        "op": "replace",
+        "find": "il capoluogo euganeo",
+        "html": "Padova"
+      },
+      {
+        "op": "replace",
+        "find": "tudenteschi nel territorio patavino supera cost",
+        "html": "tudenteschi nel Padovano supera cost"
+      },
+      {
+        "op": "replace",
+        "find": "nel territorio patavino",
+        "html": "nel Padovano"
+      },
+      {
+        "op": "replace",
+        "find": "Comune del Padovano",
+        "html": "Comune di Padova"
+      },
+      {
+        "op": "replace",
+        "find": "in provincia 2026",
+        "html": "a Padova nel 2026"
+      },
+      {
+        "op": "replace",
+        "find": "nel territorio 2026",
+        "html": "a Padova nel 2026"
+      },
+      {
+        "op": "replace",
+        "find": "sul mattone nel comune nel 2026: rendimenti",
+        "html": "sul mattone a Padova nel 2026: rendimenti"
+      },
+      {
+        "op": "replace",
+        "find": "nel comune nel 2026",
+        "html": "a Padova nel 2026"
+      },
+      {
+        "op": "set_meta",
+        "value": "Investire in immobili a Padova nel 2026: rendimenti per zona, rischi e opportunità tra residenziale e commerciale. Guida per investitori."
+      },
+      {
+        "op": "regex_all",
+        "pattern": "(\"dateModified\"\\s*:\\s*\")\\d{4}-\\d{2}-\\d{2}",
+        "repl": "\\g<1>2026-10-10",
+        "min_count": 1
+      }
+    ],
+    "batch": "blog-1"
   }
 }

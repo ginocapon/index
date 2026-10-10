@@ -1,0 +1,168 @@
+--- a/blog-affitto-breve-padova-2026.html
++++ b/blog-affitto-breve-padova-2026.html
+@@ -7,13 +7,13 @@
+ <!-- Google tag (gtag.js) + Consent Mode -->
+ <script src="js/ga-consent.js?v=23"></script>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+   <meta name="theme-color" content="#2C4A6E">
+-  <title>Affitto Breve a Padova 2026: Rendimenti, Regole e Opportunit&agrave;</title>
++  <title>Affitto breve a Padova 2026: rendimenti, regole e tasse</title>
+   <meta name="robots" content="index, follow, max-image-preview:large">  <link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co">  <link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+   <link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
+   <link rel="preload" href="img/foto-servizi/gestioni-immobili-padova.webp" as="image" fetchpriority="high">
+   <link rel="canonical" href="https://righettoimmobiliare.it/blog-affitto-breve-padova-2026">
+   <meta property="og:type" content="article">
+-  <meta property="og:title" content="Affitto Breve a Padova 2026: Rendimenti, Regole e Opportunita'">
++  <meta property="og:title" content="Affitto breve a Padova 2026: rendimenti, regole e tasse">
+   <meta property="og:description" content="Affitto breve a Padova nel 2026: rendimenti fino al 10% lordo, nuove regole cedolare secca e opportunità. Guida Righetto Immobiliare.">
+   <meta property="og:url" content="https://righettoimmobiliare.it/blog-affitto-breve-padova-2026">
+   <meta property="og:image" content="https://righettoimmobiliare.it/img/foto-servizi/gestioni-immobili-padova.webp">
+@@ -29,7 +29,7 @@
+   <meta property="article:tag" content="rendimento affitto turistico">
+   <meta property="article:tag" content="cedolare secca 2026">
+   <meta name="twitter:card" content="summary_large_image">
+-  <meta name="twitter:title" content="Affitto Breve a Padova 2026: Rendimenti, Regole e Opportunita'">
++  <meta name="twitter:title" content="Affitto breve a Padova 2026: rendimenti, regole e tasse">
+   <meta name="twitter:description" content="Affitto breve a Padova nel 2026: rendimenti fino al 10% lordo, nuove regole cedolare secca e opportunità. Guida Righetto Immobiliare.">
+   <meta name="twitter:image" content="https://righettoimmobiliare.it/img/foto-servizi/gestioni-immobili-padova.webp">
+   <meta name="description" content="Affitto breve a Padova 2026: rendimenti fino al 10% lordo, cedolare secca, regole e opportunità nel Padovano. Guida operativa Righetto Immobiliare Limena.">
+@@ -70,7 +70,7 @@
+       }
+     },
+     "datePublished": "2026-03-14",
+-    "dateModified": "2026-03-14",
++    "dateModified": "2026-10-10",
+     "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "https://righettoimmobiliare.it/blog-affitto-breve-padova-2026"
+@@ -85,7 +85,7 @@
+   <!-- JSON-LD FAQPage -->
+   <script type="application/ld+json">
+   {
+-    "dateModified": "2026-07-03",
++    "dateModified": "2026-10-10",
+     "@context": "https://schema.org",
+     "@type": "FAQPage",
+     "mainEntity": [
+@@ -144,7 +144,7 @@
+   <!-- JSON-LD BreadcrumbList -->
+   <script type="application/ld+json">
+   {
+-    "dateModified": "2026-07-03",
++    "dateModified": "2026-10-10",
+     "@context": "https://schema.org",
+     "@type": "BreadcrumbList",
+     "itemListElement": [
+@@ -158,7 +158,7 @@
+   <!-- JSON-LD RealEstateAgent -->
+   <script type="application/ld+json">
+   {
+-    "dateModified": "2026-07-03",
++    "dateModified": "2026-10-10",
+     "@context": "https://schema.org",
+     "@type": "RealEstateAgent",
+     "name": "Gruppo Immobiliare Righetto di Capon Gino",
+@@ -388,7 +388,7 @@
+     <!-- INTRODUZIONE -->
+     <p><strong>L'affitto breve a Padova nel 2026 rappresenta un'opportunita' concreta per i proprietari immobiliari, con rendimenti lordi che raggiungono il 10% nelle zone centrali.</strong> La citta' sta vivendo una crescita significativa dei flussi turistici &mdash; +15% rispetto al 2024 &mdash; trainata dal patrimonio UNESCO, dalla Basilica di Sant'Antonio e dall'attrattivita' dell'universita'. Ma le nuove regole fiscali e normative cambiano i conti: cedolare secca al 26% per la seconda casa, CIN obbligatorio e maggiori controlli.</p>
+ 
+-    <p>In questa guida analizziamo i <strong>rendimenti reali per zona</strong>, il confronto tra locazione temporanea e contratto lungo, le regole aggiornate al 2026, i costi di gestione e le opportunita' concrete per chi vuole investire nello short-term rental nel capoluogo euganeo. Tutti i dati sono basati sulle nostre analisi di mercato e sulle rilevazioni di AirDNA, Immobiliare.it Insights e FIMAA Veneto.</p>
++    <p>In questa guida analizziamo i <strong>rendimenti reali per zona</strong>, il confronto tra locazione temporanea e contratto lungo, le regole aggiornate al 2026, i costi di gestione e le opportunita' concrete per chi vuole investire nello short-term rental in città. Tutti i dati sono basati sulle nostre analisi di mercato e sulle rilevazioni di AirDNA, Immobiliare.it Insights e FIMAA Veneto.</p>
+ 
+     <!-- SOMMARIO CLICCABILE -->
+     <div class="toc">
+@@ -436,7 +436,7 @@
+     <!-- H2 #1 — MERCATO -->
+     <h2 id="mercato">Il mercato delle locazioni temporanee nel Padovano nel 2026: numeri e tendenze?</h2>
+ 
+-    <p>Il capoluogo euganeo conta circa 1.800 annunci attivi su piattaforme di locazione turistica nel primo trimestre 2026, il 22% in piu' rispetto al 2024. La citta' si sta affermando come destinazione di rilievo nel Veneto, complementare a Venezia e Verona, con un'offerta culturale e gastronomica che attira un numero crescente di visitatori nazionali e internazionali.</p>
++    <p>Padova conta circa 1.800 annunci attivi su piattaforme di locazione turistica nel primo trimestre 2026, il 22% in piu' rispetto al 2024. La citta' si sta affermando come destinazione di rilievo nel Veneto, complementare a Venezia e Verona, con un'offerta culturale e gastronomica che attira un numero crescente di visitatori nazionali e internazionali.</p>
+ 
+     <p>I <strong>numeri chiave del mercato short-term rental padovano</strong> nel 2026 sono:</p>
+ 
+@@ -453,7 +453,7 @@
+     <!-- H2 #2 — RENDIMENTI -->
+     <h2 id="rendimenti">Rendimenti per zona: dove conviene la locazione temporanea nel Padovano?</h2>
+ 
+-    <p>I rendimenti delle locazioni temporanee nel capoluogo euganeo nel 2026 variano significativamente in base alla posizione dell'immobile. Le zone centrali e turistiche offrono rendimenti lordi tra l'8% e il 10%, mentre le aree periferiche non giustificano l'investimento in short-term rental.</p>
++    <p>I rendimenti delle locazioni temporanee in città nel 2026 variano significativamente in base alla posizione dell'immobile. Le zone centrali e turistiche offrono rendimenti lordi tra l'8% e il 10%, mentre le aree periferiche non giustificano l'investimento in short-term rental.</p>
+ 
+     <table>
+       <thead>
+@@ -468,7 +468,7 @@
+       </tbody>
+     </table>
+ 
+-    <p><em>Fonte: elaborazioni il team su dati AirDNA, Immobiliare.it Insights e analisi interne, I trimestre 2026. Il rendimento netto tiene conto di cedolare secca 26%, commissioni piattaforma, pulizie, utenze e manutenzione.</em></p>
++    <p><em>Fonte: elaborazioni Righetto Immobiliare su dati AirDNA, Immobiliare.it Insights e analisi interne, I trimestre 2026. Il rendimento netto tiene conto di cedolare secca 26%, commissioni piattaforma, pulizie, utenze e manutenzione.</em></p>
+ 
+     <figure>
+       <picture>
+@@ -524,7 +524,7 @@
+     <!-- H2 #4 — REGOLE -->
+     <h2 id="regole">Regole 2026: cedolare secca, CIN e adempimenti obbligatori?</h2>
+ 
+-    <p>Le normative sulle locazioni temporanee in Italia nel 2026 sono state significativamente aggiornate rispetto agli anni precedenti. Ogni proprietario che intende affittare a breve termine nel capoluogo euganeo deve conoscere e rispettare i seguenti adempimenti.</p>
++    <p>Le normative sulle locazioni temporanee in Italia nel 2026 sono state significativamente aggiornate rispetto agli anni precedenti. Ogni proprietario che intende affittare a breve termine in città deve conoscere e rispettare i seguenti adempimenti.</p>
+ 
+     <h3>Cedolare secca: 21% o 26%?</h3>
+     <ul>
+@@ -551,7 +551,7 @@
+     </ul>
+ 
+     <!-- H2 #5 — PIATTAFORME -->
+-    <h2 id="piattaforme">Piattaforme e gestione: Airbnb, Booking e property manager nel capoluogo euganeo?</h2>
++    <h2 id="piattaforme">Piattaforme e gestione: Airbnb, Booking e property manager in città?</h2>
+ 
+     <p>La scelta della piattaforma e del modello di gestione influenza in modo significativo i rendimenti della locazione turistica in citta'. Ogni piattaforma ha commissioni e caratteristiche diverse.</p>
+ 
+@@ -567,7 +567,7 @@
+     </table>
+ 
+     <h3>Gestione diretta vs property manager</h3>
+-    <p>Nel territorio patavino operano diversi property manager professionisti che offrono la gestione completa della locazione temporanea. Il costo del servizio si attesta tra il <strong>20% e il 25% del fatturato lordo</strong>, ma include:</p>
++    <p>Nel Padovano operano diversi property manager professionisti che offrono la gestione completa della locazione temporanea. Il costo del servizio si attesta tra il <strong>20% e il 25% del fatturato lordo</strong>, ma include:</p>
+     <ul>
+       <li>Creazione e ottimizzazione annunci su tutte le piattaforme</li>
+       <li>Gestione prenotazioni, comunicazione ospiti e pricing dinamico</li>
+@@ -579,7 +579,7 @@
+     <!-- H2 #6 — STAGIONALITA' -->
+     <h2 id="stagionalita">Stagionalita' del turismo in citta': quando si guadagna di piu'?</h2>
+ 
+-    <p>La stagionalita' e' un fattore determinante per i rendimenti dell'ospitalita' a breve termine nel Padovano. A differenza delle citta' balneari, il capoluogo euganeo beneficia di un turismo distribuito su piu' mesi grazie alle sue attrazioni culturali e religiose.</p>
++    <p>La stagionalita' e' un fattore determinante per i rendimenti dell'ospitalita' a breve termine nel Padovano. A differenza delle citta' balneari, Padova beneficia di un turismo distribuito su piu' mesi grazie alle sue attrazioni culturali e religiose.</p>
+ 
+     <ul>
+       <li><strong>Alta stagione (aprile-giugno, settembre-ottobre):</strong> occupancy 80-90%. Turismo culturale (Cappella Scrovegni, Orto Botanico), lauree universitarie, fiere. Tariffe massime: +20-30% rispetto alla media</li>
+@@ -587,12 +587,12 @@
+       <li><strong>Bassa stagione (gennaio-febbraio, agosto, dicembre):</strong> occupancy 35-50%. Possibilita' di compensare con affitti medi (1-3 mesi) a lavoratori temporanei o studenti Erasmus</li>
+     </ul>
+ 
+-    <p>Il turismo religioso verso la <strong>Basilica di Sant'Antonio</strong> garantisce un flusso costante tutto l'anno, con picchi il 13 giugno (festa del Santo) e durante la Quaresima. Questo rende il territorio patavino piu' resiliente rispetto ad altre destinazioni turistiche soggette a forte stagionalita'.</p>
++    <p>Il turismo religioso verso la <strong>Basilica di Sant'Antonio</strong> garantisce un flusso costante tutto l'anno, con picchi il 13 giugno (festa del Santo) e durante la Quaresima. Questo rende il Padovano piu' resiliente rispetto ad altre destinazioni turistiche soggette a forte stagionalita'.</p>
+ 
+     <!-- H2 #7 — COSTI -->
+     <h2 id="costi">Costi di gestione: il conto economico reale di una locazione turistica?</h2>
+ 
+-    <p>I costi di gestione rappresentano la variabile piu' sottovalutata da chi si avvicina alla formula short-term per la prima volta. Per un bilocale in centro storico nel capoluogo euganeo con tariffa media di 100 &euro;/notte e occupancy del 72% (circa 263 notti/anno), il conto economico reale e':</p>
++    <p>I costi di gestione rappresentano la variabile piu' sottovalutata da chi si avvicina alla formula short-term per la prima volta. Per un bilocale in centro storico in città con tariffa media di 100 &euro;/notte e occupancy del 72% (circa 263 notti/anno), il conto economico reale e':</p>
+ 
+     <table>
+       <thead>
+@@ -650,7 +650,7 @@
+ 
+     <div class="faq-item">
+       <div class="faq-q">Quanto rende un affitto breve a Padova nel 2026?</div>
+-      <div class="faq-a"><div class="faq-a-inner">Una locazione temporanea nel capoluogo euganeo nel 2026 rende in media tra il 6% e il 10% lordo annuo, a seconda della zona e della gestione. Il centro storico e Prato della Valle raggiungono rendimenti lordi dell'8-10%, con una tariffa media di 90-130 &euro; a notte e un'occupancy media del 70-75%. Al netto di tasse, commissioni e costi operativi, il rendimento netto si attesta tra il 4% e il 6,5%.</div></div>
++      <div class="faq-a"><div class="faq-a-inner">Una locazione temporanea in città nel 2026 rende in media tra il 6% e il 10% lordo annuo, a seconda della zona e della gestione. Il centro storico e Prato della Valle raggiungono rendimenti lordi dell'8-10%, con una tariffa media di 90-130 &euro; a notte e un'occupancy media del 70-75%. Al netto di tasse, commissioni e costi operativi, il rendimento netto si attesta tra il 4% e il 6,5%.</div></div>
+     </div>
+ 
+     <div class="faq-item">
+@@ -683,7 +683,7 @@
+   <div class="cta-banner">
+     <div class="cta-banner-text">
+       <h3>Vuoi mettere a reddito il tuo immobile con la locazione turistica?</h3>
+-      <p>Analizziamo gratuitamente il potenziale del tuo immobile nel territorio patavino: rendimento atteso, confronto breve vs lungo, adempimenti normativi. Con oltre 25 anni di esperienza nel mercato padovano, ti guidiamo nella scelta migliore.</p>
++      <p>Analizziamo gratuitamente il potenziale del tuo immobile nel Padovano: rendimento atteso, confronto breve vs lungo, adempimenti normativi. Con oltre 25 anni di esperienza nel mercato padovano, ti guidiamo nella scelta migliore.</p>
+     </div>
+     <a href="contatti" class="cta-banner-btn">Richiedi consulenza gratuita &rarr;</a>
+   </div>

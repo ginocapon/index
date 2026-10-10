@@ -1,0 +1,141 @@
+--- a/blog-mercato-immobiliare-padova-2026.html
++++ b/blog-mercato-immobiliare-padova-2026.html
+@@ -4,13 +4,13 @@
+ <!-- Google tag (gtag.js) + Consent Mode -->
+ <script src="js/ga-consent.js?v=23"></script>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+   <meta name="theme-color" content="#2C4A6E">
+-  <title>Mercato Immobiliare Padova 2026: Prezzi, Tendenze e Previsioni</title>
++  <title>Mercato immobiliare Padova 2026: prezzi e tendenze</title>
+   <meta name="robots" content="index, follow, max-image-preview:large">  <link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co">  <link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+   <link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
+   <link rel="canonical" href="https://righettoimmobiliare.it/blog-mercato-immobiliare-padova-2026">
+   <meta property="og:type" content="article">
+-  <meta property="og:title" content="Mercato Immobiliare Padova 2026: Prezzi, Tendenze e Previsioni">
+-  <meta property="og:description" content="Mercato immobiliare Padova 2026: prezzi al mq per zona, trend compravendite e previsioni. Analisi con dati OMI aggiornati per quartiere.">
++  <meta property="og:title" content="Mercato immobiliare Padova 2026: prezzi e tendenze">
++  <meta property="og:description" content="Mercato immobiliare a Padova nel 2026: prezzi al mq per zona su dati OMI e andamento delle compravendite. Quanto vale casa tua? Stima gratuita.">
+   <meta property="og:url" content="https://righettoimmobiliare.it/blog-mercato-immobiliare-padova-2026">
+   <meta property="og:image" content="https://righettoimmobiliare.it/img/foto-servizi/valutazioni-e-perizie-padova.webp">
+   <meta property="og:site_name" content="Righetto Immobiliare">
+@@ -24,10 +24,10 @@
+   <meta property="article:tag" content="prezzi case padova">
+   <meta property="article:tag" content="andamento immobiliare padova">
+   <meta name="twitter:card" content="summary_large_image">
+-  <meta name="twitter:title" content="Mercato Immobiliare Padova 2026: Prezzi, Tendenze e Previsioni">
+-  <meta name="twitter:description" content="Analisi completa del mercato immobiliare del Padovano nel 2026: prezzi aggiornati, tendenze, mutui, affitti e previsioni per il secondo semestre. Guida di…">
++  <meta name="twitter:title" content="Mercato immobiliare Padova 2026: prezzi e tendenze">
++  <meta name="twitter:description" content="Mercato immobiliare a Padova nel 2026: prezzi al mq per zona su dati OMI e andamento delle compravendite. Quanto vale casa tua? Stima gratuita.">
+   <meta name="twitter:image" content="https://righettoimmobiliare.it/img/foto-servizi/valutazioni-e-perizie-padova.webp">
+-  <meta name="description" content="Panorama immobiliare Padova 2026: prezzi al mq per zona, trend compravendite e previsioni. Analisi con dati OMI aggiornati per quartiere.">
++  <meta name="description" content="Mercato immobiliare a Padova nel 2026: prezzi al mq per zona su dati OMI e andamento delle compravendite. Quanto vale casa tua? Stima gratuita.">
+   <link rel="stylesheet" href="css/fonts.css?v=3">
+   <link rel="stylesheet" href="css/nav-mobile.css?v=7">
+   <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
+@@ -66,7 +66,7 @@
+       }
+     },
+     "datePublished": "2026-03-02",
+-    "dateModified": "2026-04-03",
++    "dateModified": "2026-10-10",
+     "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "https://righettoimmobiliare.it/blog-mercato-immobiliare-padova-2026"
+@@ -81,7 +81,7 @@
+   <!-- JSON-LD FAQPage -->
+   <script type="application/ld+json">
+   {
+-    "dateModified": "2026-07-03",
++    "dateModified": "2026-10-10",
+     "@context": "https://schema.org",
+     "@type": "FAQPage",
+     "mainEntity": [
+@@ -124,7 +124,7 @@
+   <!-- JSON-LD BreadcrumbList -->
+   <script type="application/ld+json">
+   {
+-    "dateModified": "2026-07-03",
++    "dateModified": "2026-10-10",
+     "@context": "https://schema.org",
+     "@type": "BreadcrumbList",
+     "itemListElement": [
+@@ -138,7 +138,7 @@
+   <!-- JSON-LD RealEstateAgent -->
+   <script type="application/ld+json">
+   {
+-    "dateModified": "2026-07-03",
++    "dateModified": "2026-10-10",
+     "@context": "https://schema.org",
+     "@type": "RealEstateAgent",
+     "name": "Gruppo Immobiliare Righetto di Capon Gino",
+@@ -387,7 +387,7 @@
+       <div class="toc-title">Indice dei contenuti</div>
+       <ol>
+         <li><a href="#prezzi">Quanto sono cresciuti i prezzi delle case nel Padovano nel 2026 (+3-5% sul 2025)?</a></li>
+-        <li><a href="#domanda">Domanda: chi compra casa nel capoluogo euganeo nel 2026?</a></li>
++        <li><a href="#domanda">Domanda: chi compra casa a Padova nel 2026?</a></li>
+         <li><a href="#offerta">Offerta: cosa si trova sul mercato padovano?</a></li>
+         <li><a href="#mutui">Come stanno mutui e tassi per chi compra casa in provincia nel 2026?</a></li>
+         <li><a href="#affitti">Perché gli affitti nel Padovano crescono circa l'8% anno su anno?</a></li>
+@@ -427,7 +427,7 @@
+     <!-- H2 #1 — PREZZI -->
+     <h2 id="prezzi">Quanto sono cresciuti i prezzi delle case in città nel 2026 (+3-5% sul 2025)?</h2>
+ 
+-    <p>I prezzi delle case nel capoluogo euganeo nel primo trimestre 2026 hanno registrato un incremento medio del <strong>3-5% rispetto allo stesso periodo del 2025</strong>. L'aumento e' stato piu' marcato nel centro storico e nelle zone in riqualificazione, piu' contenuto nella prima cintura urbana.</p>
++    <p>I prezzi delle case a Padova nel primo trimestre 2026 hanno registrato un incremento medio del <strong>3-5% rispetto allo stesso periodo del 2025</strong>. L'aumento e' stato piu' marcato nel centro storico e nelle zone in riqualificazione, piu' contenuto nella prima cintura urbana.</p>
+ 
+     <p>Il <strong>centro storico</strong> resta la zona a piu' alto valore, con prezzi che raggiungono i <strong>3.800 &euro;/mq</strong> per immobili di pregio. La prima cintura &mdash; <strong>Limena, Vigonza, Selvazzano</strong> &mdash; registra una crescita costante grazie alla domanda di famiglie che cercano spazio e verde a prezzi accessibili.</p>
+ 
+@@ -450,7 +450,7 @@
+     </figure>
+ 
+     <!-- H2 #2 — DOMANDA -->
+-    <h2 id="domanda">Domanda: chi compra casa nel capoluogo euganeo nel 2026?</h2>
++    <h2 id="domanda">Domanda: chi compra casa in città nel 2026?</h2>
+ 
+     <p>La domanda di immobili nel Padovano nel 2026 e' <strong>diversificata e sostenuta</strong>. Tre profili di acquirenti dominano il panorama delle compravendite.</p>
+ 
+@@ -475,7 +475,7 @@
+     <!-- H2 #3 — OFFERTA -->
+     <h2 id="offerta">Offerta: cosa si trova sul mercato padovano?</h2>
+ 
+-    <p>L'offerta di immobili nel territorio patavino nel 2026 presenta un quadro <strong>disomogeneo</strong>: scarsa in centro, buona in provincia.</p>
++    <p>L'offerta di immobili nel Padovano nel 2026 presenta un quadro <strong>disomogeneo</strong>: scarsa in centro, buona in provincia.</p>
+ 
+     <h3>Centro citta': offerta scarsa, alta competizione</h3>
+     <p>Nel centro storico l'offerta e' <strong>strutturalmente limitata</strong>: gli immobili si vendono rapidamente (45-60 giorni) e spesso prima della pubblicazione sui portali. Chi vuole acquistare in centro deve essere pronto a decidere in fretta e avere la pre-delibera del mutuo gia' in mano.</p>
+@@ -497,7 +497,7 @@
+       </picture>
+       <picture>
+         <source srcset="img/foto-servizi/gestione-preliminari-padova.webp" type="image/webp">
+-        <img src="img/foto-servizi/gestione-preliminari-padova.webp" alt="Preliminare di compravendita immobiliare nel territorio patavino" loading="lazy" width="1536" height="1024">
++        <img src="img/foto-servizi/gestione-preliminari-padova.webp" alt="Preliminare di compravendita immobiliare nel Padovano" loading="lazy" width="1536" height="1024">
+       </picture>
+     </div>
+ 
+@@ -534,7 +534,7 @@
+     <p>Con oltre <strong>60.000 studenti iscritti</strong> all'Universita' locale e un'offerta di alloggi strutturalmente insufficiente, i canoni delle stanze studentesche continuano a salire. Una stanza singola in zona universitaria si affitta a <strong>400-500 &euro;/mese</strong>, con liste d'attesa gia' da maggio per l'anno accademico successivo.</p>
+ 
+     <h3>Short-term rental in crescita</h3>
+-    <p>Gli affitti brevi (Airbnb, Booking) sono in <strong>forte crescita nel capoluogo euganeo</strong>, soprattutto nel centro storico e nella zona di Prato della Valle. La citta' attira un numero crescente di turisti grazie alla Cappella degli Scrovegni (patrimonio UNESCO), alla Basilica di Sant'Antonio e all'offerta enogastronomica. I rendimenti da short-term possono superare il <strong>10% lordo annuo</strong> nelle migliori posizioni.</p>
++    <p>Gli affitti brevi (Airbnb, Booking) sono in <strong>forte crescita in città</strong>, soprattutto nel centro storico e nella zona di Prato della Valle. La citta' attira un numero crescente di turisti grazie alla Cappella degli Scrovegni (patrimonio UNESCO), alla Basilica di Sant'Antonio e all'offerta enogastronomica. I rendimenti da short-term possono superare il <strong>10% lordo annuo</strong> nelle migliori posizioni.</p>
+ 
+     <table>
+       <thead>
+@@ -565,7 +565,7 @@
+       <h3>Il nostro consiglio per il 2026</h3>
+       <p>Per chi vuole <strong>comprare</strong>: e' un buon momento. I tassi sono accessibili, i prezzi sono ancora ragionevoli rispetto alle grandi citta' del Nord, e il mercato padovano e' solido e liquido.</p>
+       <p>Per chi vuole <strong>vendere</strong>: il mercato e' favorevole. La domanda e' alta e i tempi di vendita brevi, a patto di posizionare l'immobile al giusto prezzo di mercato. Una valutazione professionale e' il primo passo.</p>
+-      <p>Per chi vuole <strong>investire</strong>: la locazione studentesca nel capoluogo euganeo resta uno degli investimenti piu' redditizi del Veneto, con rendimenti lordi che vanno verificati su contratti e spese reali; la domanda e' sostenuta dal polo universitario cittadino.</p>
++      <p>Per chi vuole <strong>investire</strong>: la locazione studentesca in città resta uno degli investimenti piu' redditizi del Veneto, con rendimenti lordi che vanno verificati su contratti e spese reali; la domanda e' sostenuta dal polo universitario cittadino.</p>
+     </div>
+ 
+     <!-- TABELLA PREZZI MEDI -->
+@@ -635,7 +635,7 @@
+ 
+     <div class="faq-item">
+       <div class="faq-q">Quali sono le previsioni per il settore delle compravendite nel secondo semestre 2026?</div>
+-      <div class="faq-a"><div class="faq-a-inner">Le previsioni per il secondo semestre 2026 nel territorio patavino indicano una crescita moderata dei prezzi (+2-3%), sostenuta dalla domanda costante e dall'offerta limitata in centro. I quartieri in riqualificazione come l'Arcella e la zona stazione offrono il maggiore potenziale di rivalutazione. I tassi dei mutui dovrebbero restare stabili o calare leggermente, favorendo ulteriormente le compravendite. Il mercato degli affitti continuera' a crescere (+3-5%).</div></div>
++      <div class="faq-a"><div class="faq-a-inner">Le previsioni per il secondo semestre 2026 nel Padovano indicano una crescita moderata dei prezzi (+2-3%), sostenuta dalla domanda costante e dall'offerta limitata in centro. I quartieri in riqualificazione come l'Arcella e la zona stazione offrono il maggiore potenziale di rivalutazione. I tassi dei mutui dovrebbero restare stabili o calare leggermente, favorendo ulteriormente le compravendite. Il mercato degli affitti continuera' a crescere (+3-5%).</div></div>
+     </div>
+   </div>
+ 

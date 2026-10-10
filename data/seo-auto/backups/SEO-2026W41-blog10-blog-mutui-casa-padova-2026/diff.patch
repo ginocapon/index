@@ -1,0 +1,175 @@
+--- a/blog-mutui-casa-padova-2026.html
++++ b/blog-mutui-casa-padova-2026.html
+@@ -4,14 +4,14 @@
+ <!-- Google tag (gtag.js) + Consent Mode -->
+ <script src="js/ga-consent.js?v=23"></script>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+   <meta name="theme-color" content="#2C4A6E">
+-  <title>Mutui Casa nel Padovano 2026: Tassi Aggiornati e Migliori Offerte</title>
++  <title>Mutui casa Padova 2026: tassi, offerte e simulazione rata</title>
+   <meta name="robots" content="index, follow, max-image-preview:large">  <link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co">  <link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+   <link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
+   <link rel="preload" href="img/foto-servizi/gestione-preliminari-padova.webp" as="image" fetchpriority="high">
+   <link rel="canonical" href="https://righettoimmobiliare.it/blog-mutui-casa-padova-2026">
+   <meta property="og:type" content="article">
+-  <meta property="og:title" content="Mutui Casa in provincia 2026: Tassi Aggiornati e Migliori Offerte">
+-  <meta property="og:description" content="Finanziamenti ipotecari nel Padovano 2026: tassi fissi dal 2,75%, variabili dal 2,30%. Confronto offerte e simulazione rata. Guida Righetto Immobiliare.">
++  <meta property="og:title" content="Mutui casa Padova 2026: tassi, offerte e simulazione rata">
++  <meta property="og:description" content="Mutui casa a Padova nel 2026: come confrontare tasso fisso e variabile, offerte delle banche, simulazione della rata e documenti. Guida Righetto.">
+   <meta property="og:url" content="https://righettoimmobiliare.it/blog-mutui-casa-padova-2026">
+   <meta property="og:image" content="https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp">
+   <meta property="og:site_name" content="Righetto Immobiliare">
+@@ -26,10 +26,10 @@
+   <meta property="article:tag" content="migliori mutui padova">
+   <meta property="article:tag" content="tasso fisso variabile">
+   <meta name="twitter:card" content="summary_large_image">
+-  <meta name="twitter:title" content="Mutui Casa a Padova 2026: Tassi Aggiornati e Migliori Offerte">
+-  <meta name="twitter:description" content="Finanziamenti ipotecari nel Padovano 2026: tassi fissi dal 2,75%, variabili dal 2,30%. Confronto offerte e simulazione rata. Guida Righetto Immobiliare.">
++  <meta name="twitter:title" content="Mutui casa Padova 2026: tassi, offerte e simulazione rata">
++  <meta name="twitter:description" content="Mutui casa a Padova nel 2026: come confrontare tasso fisso e variabile, offerte delle banche, simulazione della rata e documenti. Guida Righetto.">
+   <meta name="twitter:image" content="https://righettoimmobiliare.it/img/foto-servizi/gestione-preliminari-padova.webp">
+-  <meta name="description" content="Finanziamenti ipotecari nel Padovano 2026: tassi fissi dal 2,75%, variabili dal 2,30%. Confronto offerte e simulazione rata. Guida Righetto Immobiliare.">
++  <meta name="description" content="Mutui casa a Padova nel 2026: come confrontare tasso fisso e variabile, offerte delle banche, simulazione della rata e documenti. Guida Righetto.">
+   <link rel="stylesheet" href="css/fonts.css?v=3">
+   <link rel="stylesheet" href="css/nav-mobile.css?v=7">
+   <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
+@@ -67,7 +67,7 @@
+       }
+     },
+     "datePublished": "2026-03-14",
+-    "dateModified": "2026-03-14",
++    "dateModified": "2026-10-10",
+     "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "https://righettoimmobiliare.it/blog-mutui-casa-padova-2026"
+@@ -82,7 +82,7 @@
+   <!-- JSON-LD FAQPage -->
+   <script type="application/ld+json">
+   {
+-    "dateModified": "2026-07-03",
++    "dateModified": "2026-10-10",
+     "@context": "https://schema.org",
+     "@type": "FAQPage",
+     "mainEntity": [
+@@ -141,7 +141,7 @@
+   <!-- JSON-LD BreadcrumbList -->
+   <script type="application/ld+json">
+   {
+-    "dateModified": "2026-07-03",
++    "dateModified": "2026-10-10",
+     "@context": "https://schema.org",
+     "@type": "BreadcrumbList",
+     "itemListElement": [
+@@ -155,7 +155,7 @@
+   <!-- JSON-LD RealEstateAgent -->
+   <script type="application/ld+json">
+   {
+-    "dateModified": "2026-07-03",
++    "dateModified": "2026-10-10",
+     "@context": "https://schema.org",
+     "@type": "RealEstateAgent",
+     "name": "Gruppo Immobiliare Righetto di Capon Gino",
+@@ -391,7 +391,7 @@
+     <!-- INTRODUZIONE -->
+     <p><strong>I mutui casa nel Padovano nel 2026 hanno raggiunto condizioni tra le piu' favorevoli degli ultimi tre anni.</strong> I tassi fissi partono dal 2,75% e i variabili dal 2,30%, valori nettamente inferiori ai picchi del 2023-2024 quando si superava il 4,5%. Le domande di mutuo in Italia sono cresciute del +17,1% nel primo trimestre 2026 secondo i dati Experian-Cerved, e il mercato padovano riflette pienamente questa tendenza con un aumento delle compravendite assistite da finanziamento.</p>
+ 
+-    <p>In questa guida, aggiornata a marzo 2026, analizziamo nel dettaglio i <strong>tassi attuali, le migliori offerte delle banche operanti nel territorio patavino</strong>, la simulazione della rata per un trilocale tipo, i documenti necessari, le agevolazioni disponibili e i consigli pratici per ottenere le migliori condizioni. I dati provengono da Banca d'Italia, ABI, MutuiSupermarket e dalle condizioni effettive degli istituti di credito con cui collaboriamo quotidianamente.</p>
++    <p>In questa guida, aggiornata a marzo 2026, analizziamo nel dettaglio i <strong>tassi attuali, le migliori offerte delle banche operanti nel Padovano</strong>, la simulazione della rata per un trilocale tipo, i documenti necessari, le agevolazioni disponibili e i consigli pratici per ottenere le migliori condizioni. I dati provengono da Banca d'Italia, ABI, MutuiSupermarket e dalle condizioni effettive degli istituti di credito con cui collaboriamo quotidianamente.</p>
+ 
+     <!-- SOMMARIO CLICCABILE -->
+     <div class="toc">
+@@ -400,7 +400,7 @@
+         <li><a href="#panoramica">Panoramica mutui 2026: cosa e' cambiato</a></li>
+         <li><a href="#tassi">Tassi mutuo nel Padovano: fisso, variabile e misto</a></li>
+         <li><a href="#migliori-offerte">Migliori offerte di credito per l'acquisto &mdash; marzo 2026</a></li>
+-        <li><a href="#simulazione">Simulazione rata: trilocale nel capoluogo euganeo</a></li>
++        <li><a href="#simulazione">Simulazione rata: trilocale in città</a></li>
+         <li><a href="#documenti">Documenti necessari per il finanziamento</a></li>
+         <li><a href="#agevolazioni">Agevolazioni under 36 e Fondo Consap</a></li>
+         <li><a href="#consigli">Consigli per ottenere le condizioni migliori</a></li>
+@@ -438,7 +438,7 @@
+     <!-- H2 #1 — PANORAMICA -->
+     <h2 id="panoramica">Panoramica mutui 2026: cosa e' cambiato rispetto al 2024-2025?</h2>
+ 
+-    <p>Il mercato dei finanziamenti ipotecari nel Padovano nel 2026 e' radicalmente migliorato rispetto al biennio 2023-2024. I tassi di interesse sono scesi di oltre 1,5 punti percentuali grazie alle politiche monetarie della BCE, che ha ridotto il tasso di riferimento in piu' tranche dal picco del 4,50% al 2,50% attuale. Questo ha avuto un impatto diretto sull'accessibilita' del credito per le famiglie del territorio patavino.</p>
++    <p>Il mercato dei finanziamenti ipotecari nel Padovano nel 2026 e' radicalmente migliorato rispetto al biennio 2023-2024. I tassi di interesse sono scesi di oltre 1,5 punti percentuali grazie alle politiche monetarie della BCE, che ha ridotto il tasso di riferimento in piu' tranche dal picco del 4,50% al 2,50% attuale. Questo ha avuto un impatto diretto sull'accessibilita' del credito per le famiglie del Padovano.</p>
+ 
+     <p>I numeri parlano chiaro. Secondo i dati ABI di febbraio 2026, il <strong>tasso medio sui nuovi prestiti immobiliari in Italia e' sceso al 3,10%</strong>, il livello piu' basso da giugno 2023. Le domande di finanziamento ipotecario hanno registrato un balzo del <strong>+17,1% nel primo trimestre 2026</strong> (fonte: Experian-Cerved), segno che le famiglie stanno tornando a investire nell'acquisto della prima abitazione.</p>
+ 
+@@ -452,12 +452,12 @@
+ 
+     <blockquote>Nel 2023 rifiutavamo di consigliare l'acquisto a clienti con budget risicato: i tassi sopra il 4,5% rendevano le rate insostenibili. Oggi nel Padovano la situazione e' capovolta &mdash; la rata del finanziamento ipotecario e' spesso inferiore all'affitto di un immobile equivalente. &mdash; <strong>Gino Capon</strong>, lo studio</blockquote>
+ 
+-    <p>Un aspetto fondamentale del 2026 e' la <strong>convergenza tra rata costante e interesse variabile</strong>. La differenza e' di appena 0,5 punti percentuali, un valore storicamente molto basso che rende la formula a tasso bloccato la scelta prevalente: il <strong>90% dei richiedenti</strong> nel capoluogo euganeo opta per condizioni fisse per tutta la durata, preferendo la certezza della rata a un risparmio marginale.</p>
++    <p>Un aspetto fondamentale del 2026 e' la <strong>convergenza tra rata costante e interesse variabile</strong>. La differenza e' di appena 0,5 punti percentuali, un valore storicamente molto basso che rende la formula a tasso bloccato la scelta prevalente: il <strong>90% dei richiedenti</strong> in città opta per condizioni fisse per tutta la durata, preferendo la certezza della rata a un risparmio marginale.</p>
+ 
+     <!-- H2 #2 — TASSI -->
+     <h2 id="tassi">Tassi mutuo nel Padovano 2026: fisso, variabile e misto a confronto?</h2>
+ 
+-    <p>I tassi dei finanziamenti ipotecari nel capoluogo euganeo a marzo 2026 si collocano ai livelli piu' bassi dal 2022. La rata costante parte dal 2,75% per i profili migliori, mentre il variabile scende fino al 2,30%. Ecco il quadro completo aggiornato ai dati di marzo 2026, elaborato su rilevazioni MutuiSupermarket e condizioni effettive degli istituti operanti nel territorio patavino.</p>
++    <p>I tassi dei finanziamenti ipotecari in città a marzo 2026 si collocano ai livelli piu' bassi dal 2022. La rata costante parte dal 2,75% per i profili migliori, mentre il variabile scende fino al 2,30%. Ecco il quadro completo aggiornato ai dati di marzo 2026, elaborato su rilevazioni MutuiSupermarket e condizioni effettive degli istituti operanti nel Padovano.</p>
+ 
+     <h3>Interesse invariabile: dal 2,75% al 3,30%</h3>
+     <p>La formula a tasso bloccato e' calcolata sommando lo <strong>spread della banca</strong> (0,50%-1,00%) all'<strong>IRS</strong> di riferimento per la durata scelta. Con l'IRS a 20 anni al 3,20%-3,25%, le migliori condizioni fisse partono dal 2,75% per finanziamenti a 20 anni con LTV sotto il 60%, fino al 3,30% per durate a 30 anni con LTV all'80%. La rata costante garantisce la certezza dell'importo per tutta la durata del piano di ammortamento.</p>
+@@ -497,7 +497,7 @@
+       </tbody>
+     </table>
+ 
+-    <p><em>Fonte: elaborazioni il team su dati MutuiSupermarket e MutuiOnline, rilevazione marzo 2026. Condizioni per profilo standard: eta' 35-45 anni, reddito netto &ge; 2.500 &euro;/mese, nessun altro finanziamento in corso. I tassi possono variare in base al profilo del richiedente e alla valutazione dell'immobile.</em></p>
++    <p><em>Fonte: elaborazioni Righetto Immobiliare su dati MutuiSupermarket e MutuiOnline, rilevazione marzo 2026. Condizioni per profilo standard: eta' 35-45 anni, reddito netto &ge; 2.500 &euro;/mese, nessun altro finanziamento in corso. I tassi possono variare in base al profilo del richiedente e alla valutazione dell'immobile.</em></p>
+ 
+     <div class="highlight-box">
+       <h3>Attenzione al TAEG, non solo al TAN</h3>
+@@ -520,7 +520,7 @@
+     </div>
+ 
+     <!-- H2 #4 — SIMULAZIONE -->
+-    <h2 id="simulazione">Simulazione rata: quanto costa un trilocale nel capoluogo euganeo?</h2>
++    <h2 id="simulazione">Simulazione rata: quanto costa un trilocale in città?</h2>
+ 
+     <p>La simulazione della rata del finanziamento ipotecario e' il primo passo per capire se l'acquisto e' sostenibile. Prendiamo come riferimento un trilocale di 90 mq in semicentro, del valore di 190.000 euro &mdash; il taglio piu' richiesto dalle famiglie padovane. Ecco il confronto delle rate per diverse combinazioni di LTV, tasso e durata.</p>
+ 
+@@ -539,7 +539,7 @@
+ 
+     <p><em>Fonte: simulazione su dati MutuiSupermarket, marzo 2026. Valori indicativi, soggetti a variazione in base al profilo del richiedente.</em></p>
+ 
+-    <p>Il dato chiave emerge dal confronto con il mercato degli affitti: un <strong>trilocale equivalente in affitto nel semicentro costa 750-900 &euro;/mese</strong> (fonte: rilevazioni interne la nostra struttura). Con una rata di 740 &euro;/mese per il piano di ammortamento, l'acquisto risulta competitivo &mdash; con il vantaggio di costruire patrimonio anziche' pagare un canone a fondo perduto.</p>
++    <p>Il dato chiave emerge dal confronto con il mercato degli affitti: un <strong>trilocale equivalente in affitto nel semicentro costa 750-900 &euro;/mese</strong> (fonte: rilevazioni interne Righetto Immobiliare). Con una rata di 740 &euro;/mese per il piano di ammortamento, l'acquisto risulta competitivo &mdash; con il vantaggio di costruire patrimonio anziche' pagare un canone a fondo perduto.</p>
+ 
+     <div class="highlight-box">
+       <h3>Il rapporto rata/reddito: la regola del 30%</h3>
+@@ -595,7 +595,7 @@
+     <!-- H2 #6 — AGEVOLAZIONI -->
+     <h2 id="agevolazioni">Agevolazioni mutuo under 36 e Fondo Garanzia Consap nel 2026?</h2>
+ 
+-    <p>Le agevolazioni per i giovani acquirenti rappresentano un elemento importante del mercato dei finanziamenti ipotecari 2026 nel territorio patavino. Il Fondo di Garanzia Prima Casa gestito da Consap e' stato prorogato nella Legge di Bilancio 2026, confermando il supporto ai giovani under 36 e alle categorie prioritarie per l'accesso al credito.</p>
++    <p>Le agevolazioni per i giovani acquirenti rappresentano un elemento importante del mercato dei finanziamenti ipotecari 2026 nel Padovano. Il Fondo di Garanzia Prima Casa gestito da Consap e' stato prorogato nella Legge di Bilancio 2026, confermando il supporto ai giovani under 36 e alle categorie prioritarie per l'accesso al credito.</p>
+ 
+     <h3>Fondo Garanzia Prima Casa Consap</h3>
+     <p>Il Fondo offre una <strong>garanzia statale fino all'80%</strong> della quota capitale del mutuo per le categorie prioritarie:</p>
+@@ -605,7 +605,7 @@
+       <li>Famiglie monogenitoriali con figli minori</li>
+       <li>Conduttori di alloggi IACP</li>
+     </ul>
+-    <p>La garanzia Consap permette di ottenere finanziamenti fino al <strong>100% del valore dell'immobile</strong> (LTV 100%), superando il limite standard dell'80%. Nel capoluogo euganeo questo apre possibilita' concrete per i giovani che non dispongono di risparmi sufficienti per l'anticipo del 20%.</p>
++    <p>La garanzia Consap permette di ottenere finanziamenti fino al <strong>100% del valore dell'immobile</strong> (LTV 100%), superando il limite standard dell'80%. In città questo apre possibilita' concrete per i giovani che non dispongono di risparmi sufficienti per l'anticipo del 20%.</p>
+ 
+     <h3>Agevolazioni fiscali prima casa</h3>
+     <p>Chi acquista la prima abitazione in citta' nel 2026 beneficia delle seguenti agevolazioni fiscali, indipendentemente dall'eta':</p>
+@@ -628,7 +628,7 @@
+       <li><strong>Scegli la rata costante se hai un budget preciso.</strong> Con la differenza tra interesse invariabile e variabile a soli 0,5 punti, la formula a tasso bloccato offre certezza a un costo marginale aggiuntivo. Il variabile conviene solo per durate brevi (10-15 anni)</li>
+       <li><strong>Mantieni il rapporto rata/reddito sotto il 30%.</strong> Le banche preferiscono rapporti prudenti. Se la rata supera il 35% del reddito netto, il rischio di rifiuto aumenta significativamente</li>
+       <li><strong>Estingui altri finanziamenti prima della richiesta.</strong> Prestiti auto, cessioni del quinto e carte revolving riducono la capacita' di indebitamento. Estinguerli prima della richiesta di mutuo migliora il profilo creditizio</li>
+-      <li><strong>Affidati a un'agenzia che collabora con piu' istituti.</strong> In Righetto collaboriamo con diversi istituti di credito nel territorio patavino, aiutando i clienti a individuare la soluzione piu' adatta al loro profilo</li>
++      <li><strong>Affidati a un'agenzia che collabora con piu' istituti.</strong> In Righetto collaboriamo con diversi istituti di credito nel Padovano, aiutando i clienti a individuare la soluzione piu' adatta al loro profilo</li>
+     </ol>
+ 
+   </div><!-- /art-content -->
+@@ -643,7 +643,7 @@
+     </div>
+ 
+     <div class="faq-item">
+-      <div class="faq-q">Quanto costa la rata del mutuo per un trilocale nel capoluogo euganeo?</div>
++      <div class="faq-q">Quanto costa la rata del mutuo per un trilocale in città?</div>
+       <div class="faq-a"><div class="faq-a-inner">Per un trilocale in citta' del valore di 190.000 &euro;, con finanziamento all'80% LTV (152.000 &euro;), rata costante al 3,30% e durata 25 anni, la rata mensile e' di circa 740 &euro;. Con interesse variabile al 2,80% la rata scende a circa 700 &euro;, ma e' soggetta a oscillazioni. Il confronto con l'affitto (750-900 &euro;/mese per un trilocale equivalente) rende l'acquisto competitivo.</div></div>
+     </div>
+ 

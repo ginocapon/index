@@ -49,7 +49,7 @@
       "jsonld": 2,
       "tier": "pillar",
       "inbound": 148,
-      "last_modified": "2026-10-09",
+      "last_modified": "2026-10-10",
       "issues": [],
       "notes": []
     },
@@ -301,12 +301,12 @@
     },
     "/blog-case-vendita-padova": {
       "title": "Case in Vendita Padova 2026: Prezzi, Zone e Guida Esperta",
-      "meta": "Case in vendita nel Padovano e provincia 2026: prezzi aggiornati al mq zona per zona, quartieri migliori e consigli d'acquisto. Righetto Immobiliare.",
+      "meta": "Case in vendita a Padova e provincia nel 2026: prezzi al mq zona per zona, quartieri e consigli per chi compra. E se vendi, valutazione gratuita.",
       "canonical": "https://righettoimmobiliare.it/blog-case-vendita-padova",
       "noindex": false,
       "h1": 1,
       "h2": 11,
-      "words": 2642,
+      "words": 2634,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
@@ -317,13 +317,13 @@
       "notes": []
     },
     "/blog-mutuo-prima-casa-padova": {
-      "title": "Mutuo Prima Casa Padova 2026: Guida Completa, Tassi e Requisiti",
+      "title": "Mutuo prima casa Padova 2026: requisiti, tassi e under 36",
       "meta": "Mutuo prima casa a Padova: tassi aggiornati 2026, requisiti, documenti necessari, agevolazioni under 36 e consigli. Guida Righetto Immobiliare.",
       "canonical": "https://righettoimmobiliare.it/blog-mutuo-prima-casa-padova",
       "noindex": false,
       "h1": 1,
       "h2": 12,
-      "words": 2742,
+      "words": 2734,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
@@ -333,9 +333,7 @@
       "issues": [
         "non_indicizzata"
       ],
-      "notes": [
-        "title_61_70_63"
-      ]
+      "notes": []
     },
     "/blog-comprare-affittare-padova": {
       "title": "Comprare o Affittare Casa nel Padovano? Analisi Dati Reali su 20 Anni",
@@ -783,7 +781,7 @@
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
-      "tier": "contenuto",
+      "tier": "owner_contenuto",
       "inbound": 4,
       "last_modified": "2026-10-09",
       "issues": [],
@@ -1144,18 +1142,18 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 24,
-      "last_modified": "2026-10-09",
+      "last_modified": "2026-10-10",
       "issues": [],
       "notes": []
     },
     "/blog-mercato-immobiliare-padova-2026": {
-      "title": "Mercato Immobiliare Padova 2026: Prezzi, Tendenze e Previsioni",
-      "meta": "Panorama immobiliare Padova 2026: prezzi al mq per zona, trend compravendite e previsioni. Analisi con dati OMI aggiornati per quartiere.",
+      "title": "Mercato immobiliare Padova 2026: prezzi e tendenze",
+      "meta": "Mercato immobiliare a Padova nel 2026: prezzi al mq per zona su dati OMI e andamento delle compravendite. Quanto vale casa tua? Stima gratuita.",
       "canonical": "https://righettoimmobiliare.it/blog-mercato-immobiliare-padova-2026",
       "noindex": false,
       "h1": 1,
       "h2": 11,
-      "words": 2408,
+      "words": 2400,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
@@ -1163,9 +1161,7 @@
       "inbound": 38,
       "last_modified": "2026-10-09",
       "issues": [],
-      "notes": [
-        "title_61_70_62"
-      ]
+      "notes": []
     },
     "/blog-comprare-casa-padova-guida-2026": {
       "title": "Comprare Casa nel Padovano nel 2026: Guida Definitiva Passo dopo Passo",
@@ -1265,20 +1261,20 @@
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
-      "tier": "contenuto",
+      "tier": "owner_contenuto",
       "inbound": 22,
-      "last_modified": "2026-10-09",
+      "last_modified": "2026-10-10",
       "issues": [],
       "notes": []
     },
     "/blog-investire-immobiliare-padova": {
       "title": "Investire in Immobili nel Padovano 2026: Guida Rendimenti",
-      "meta": "Puntare sul mattone nel comune nel 2026: rendimenti per zona, rischi, opportunita' residenziale e commerciale. Guida completa per investitori.",
+      "meta": "Investire in immobili a Padova nel 2026: rendimenti per zona, rischi e opportunità tra residenziale e commerciale. Guida per investitori.",
       "canonical": "https://righettoimmobiliare.it/blog-investire-immobiliare-padova",
       "noindex": false,
       "h1": 1,
       "h2": 11,
-      "words": 2877,
+      "words": 2870,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
@@ -1884,7 +1880,7 @@
       "noindex": false,
       "h1": 1,
       "h2": 13,
-      "words": 2776,
+      "words": 2765,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
@@ -1924,47 +1920,43 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 8,
-      "last_modified": "2026-10-09",
+      "last_modified": "2026-10-10",
       "issues": [],
       "notes": []
     },
     "/blog-affitti-padova-canoni-2026": {
-      "title": "Affitti Padova 2026: Canoni in Crescita del +8%, Zone e Previsioni",
-      "meta": "Affitti nel Padovano 2026: canoni in crescita del +8%. Prezzi per zona, domanda studenti e previsioni. Analisi di Righetto Immobiliare.",
+      "title": "Affitti a Padova 2026: canoni +8%, zone e domanda",
+      "meta": "Affitti a Padova nel 2026: canoni +8% su elaborazioni di dati OMI e FIMAA, prezzi per zona e domanda studenti. Guida per proprietari e inquilini.",
       "canonical": "https://righettoimmobiliare.it/blog-affitti-padova-canoni-2026",
       "noindex": false,
       "h1": 1,
       "h2": 12,
-      "words": 2645,
+      "words": 2632,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
-      "tier": "contenuto",
+      "tier": "owner_contenuto",
       "inbound": 18,
       "last_modified": "2026-10-09",
       "issues": [],
-      "notes": [
-        "title_61_70_66"
-      ]
+      "notes": []
     },
     "/blog-affitto-breve-padova-2026": {
-      "title": "Affitto Breve a Padova 2026: Rendimenti, Regole e Opportunità",
+      "title": "Affitto breve a Padova 2026: rendimenti, regole e tasse",
       "meta": "Affitto breve a Padova 2026: rendimenti fino al 10% lordo, cedolare secca, regole e opportunità nel Padovano. Guida operativa Righetto Immobiliare Limena.",
       "canonical": "https://righettoimmobiliare.it/blog-affitto-breve-padova-2026",
       "noindex": false,
       "h1": 1,
       "h2": 12,
-      "words": 2669,
+      "words": 2656,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
-      "tier": "contenuto",
+      "tier": "owner_contenuto",
       "inbound": 2,
       "last_modified": "2026-10-09",
       "issues": [],
-      "notes": [
-        "title_61_70_61"
-      ]
+      "notes": []
     },
     "/blog-squilibrio-domanda-offerta-affitti-padova": {
       "title": "Affitti Padova: Perché la Domanda Supera l'Offerta nel 2026",
@@ -2039,13 +2031,13 @@
       ]
     },
     "/blog-mutui-casa-padova-2026": {
-      "title": "Mutui Casa nel Padovano 2026: Tassi Aggiornati e Migliori Offerte",
-      "meta": "Finanziamenti ipotecari nel Padovano 2026: tassi fissi dal 2,75%, variabili dal 2,30%. Confronto offerte e simulazione rata. Guida Righetto Immobiliare.",
+      "title": "Mutui casa Padova 2026: tassi, offerte e simulazione rata",
+      "meta": "Mutui casa a Padova nel 2026: come confrontare tasso fisso e variabile, offerte delle banche, simulazione della rata e documenti. Guida Righetto.",
       "canonical": "https://righettoimmobiliare.it/blog-mutui-casa-padova-2026",
       "noindex": false,
       "h1": 1,
       "h2": 11,
-      "words": 2909,
+      "words": 2896,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
@@ -2053,9 +2045,7 @@
       "inbound": 8,
       "last_modified": "2026-10-09",
       "issues": [],
-      "notes": [
-        "title_61_70_65"
-      ]
+      "notes": []
     },
     "/blog-surroga-mutuo-padova-2026": {
       "title": "Surroga Mutuo 2026: Quando Conviene e Come Risparmiare a Padova",
@@ -2214,7 +2204,7 @@
       "jsonld": 4,
       "tier": "pillar",
       "inbound": 17,
-      "last_modified": "2026-10-09",
+      "last_modified": "2026-10-10",
       "issues": [],
       "notes": []
     },
@@ -2658,13 +2648,13 @@
       ]
     },
     "/blog-vigonza-rubano-comprare-casa-cintura-2026": {
-      "title": "Vigonza e Rubano: guida all'acquisto nella cintura del capoluogo…",
+      "title": "Vigonza e Rubano: comprare casa nella cintura di Padova",
       "meta": "Servizi, mobilita', confronto con il centro di Padova e uso dei dati OMI per Vigonza e Rubano: una guida pratica per famiglie e pendolari.",
       "canonical": "https://righettoimmobiliare.it/blog-vigonza-rubano-comprare-casa-cintura-2026",
       "noindex": false,
       "h1": 1,
       "h2": 15,
-      "words": 1431,
+      "words": 1428,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 5,
@@ -2672,12 +2662,9 @@
       "inbound": 1,
       "last_modified": "2026-10-09",
       "issues": [
-        "title_troncato",
         "non_indicizzata"
       ],
-      "notes": [
-        "title_61_70_65"
-      ]
+      "notes": []
     },
     "/blog-planimetria-catastale-compravendita-padova-2026": {
       "title": "Planimetria catastale e compravendita nel Padovano: controlli…",
@@ -2755,7 +2742,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 12,
-      "last_modified": "2026-10-09",
+      "last_modified": "2026-10-10",
       "issues": [],
       "notes": []
     },
@@ -2772,7 +2759,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 6,
-      "last_modified": "2026-10-09",
+      "last_modified": "2026-10-10",
       "issues": [],
       "notes": []
     },
@@ -2894,13 +2881,13 @@
       "notes": []
     },
     "/blog-sondaggio-bancaditalia-q1-2026-padova": {
-      "title": "Sondaggio abitativo Banca d'Italia Q1 2026: LTV 77,2% e mutuo al…",
-      "meta": "Comunicato Banca d'Italia maggio 2026: LTV 77,2%, 64,5% acquisti con mutuo, 5,2 mesi vendita, 7,3% sconto. Applicazione al territorio patavino.",
+      "title": "Sondaggio Banca d'Italia Q1 2026: LTV 77,2% e mutui",
+      "meta": "Comunicato Banca d'Italia maggio 2026: LTV 77,2%, 64,5% acquisti con mutuo, 5,2 mesi vendita, 7,3% sconto. Applicazione al territorio padovano.",
       "canonical": "https://righettoimmobiliare.it/blog-sondaggio-bancaditalia-q1-2026-padova",
       "noindex": false,
       "h1": 1,
       "h2": 16,
-      "words": 2825,
+      "words": 2821,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
@@ -2908,12 +2895,9 @@
       "inbound": 2,
       "last_modified": "2026-10-09",
       "issues": [
-        "title_troncato",
         "non_indicizzata"
       ],
-      "notes": [
-        "title_61_70_65"
-      ]
+      "notes": []
     },
     "/blog-costi-costruzione-istat-padova-2026": {
       "title": "Costi costruzione ISTAT marzo 2026: +0,8% mensile, indice 117,2 |…",
