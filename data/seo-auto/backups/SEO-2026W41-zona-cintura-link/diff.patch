@@ -1,0 +1,10 @@
+--- a/zona-limena.html
++++ b/zona-limena.html
+@@ -316,6 +316,7 @@
+     <h2 class="sec-t">Come collegarsi <strong>da Limena</strong> in città e al Veneto?</h2>
+     <div class="sec-text">
+       <p>Il comune gode di una posizione comoda per chi si muove verso il capoluogo e il resto del Veneto. La Strada Regionale 308 collega direttamente il centro del paese nell'hinterland in circa 15 minuti di auto, senza necessita' di tangenziale. La tangenziale nord e' raggiungibile in 5 minuti, cosi' come il casello autostradale del territorio Ovest (A4).</p>
++      <p>Chi confronta Limena con gli altri comuni della cintura trova le schede dedicate, con prezzi, tipologie e collegamenti comune per comune: <a href="zona-vigonza">Vigonza</a>, <a href="zona-rubano">Rubano</a>, <a href="zona-selvazzano">Selvazzano Dentro</a> e <a href="zona-ponte-san-nicolo">Ponte San Nicolò</a>.</p>
+       <p>Il servizio di autobus APS/Busitalia collega il territorio alla stazione ferroviaria con corse frequenti nelle ore di punta. La pista ciclabile lungo la SR308 permette di raggiungere il centro citta' in bicicletta in circa 25 minuti, un'alternativa apprezzata dai pendolari nelle belle giornate. Per chi viaggia in treno, la stazione ferroviaria e' a soli 8 km, con collegamenti ad alta velocita' verso Milano, Bologna, Venezia e Roma.</p>
+     </div>
+   </div>

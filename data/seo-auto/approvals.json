@@ -178,5 +178,107 @@
     "summary": "Decidere ruolo di /landing-vendita rispetto a /servizio-vendita (1 solo link interno)",
     "rationale": "Rischio cannibalizzazione «vendere casa Padova»: senza dati query GSC per pagina non si sceglie se rafforzare (link) o consolidare (canonical/redirect). Serve export Pagine+Query.",
     "ops": []
+  },
+  "SEO-2026W41-zona-cintura-link": {
+    "approved": true,
+    "approved_by": "Gino — chat 10/10/2026 «solo per oggi rendilo operativo ed eseguilo» + export Copertura caricato",
+    "approved_on": "2026-10-10",
+    "url": "/zona-vigonza",
+    "file": "zona-limena.html",
+    "targets": [
+      "/zona-vigonza",
+      "/zona-rubano",
+      "/zona-selvazzano",
+      "/zona-ponte-san-nicolo"
+    ],
+    "summary": "Link da /zona-limena (hub, indicizzata) verso 4 schede comuni della cintura non indicizzate",
+    "rationale": "Export Copertura 10/10: Vigonza, Rubano, Selvazzano, Ponte San Nicolò in sitemap da mesi ma non indicizzate; /zona-limena linkava solo quartieri di Padova. Similarità testuale con le zone indicizzate ≤9%: non è un problema di duplicati.",
+    "ops": [
+      {
+        "op": "insert_after",
+        "find": "e in 5 minuti, cosi' come il casello autostradale del territorio Ovest (A4).</p>",
+        "html": "\n      <p>Chi confronta Limena con gli altri comuni della cintura trova le schede dedicate, con prezzi, tipologie e collegamenti comune per comune: <a href=\"zona-vigonza\">Vigonza</a>, <a href=\"zona-rubano\">Rubano</a>, <a href=\"zona-selvazzano\">Selvazzano Dentro</a> e <a href=\"zona-ponte-san-nicolo\">Ponte San Nicolò</a>.</p>"
+      }
+    ],
+    "verify_present": [
+      "href=\"zona-vigonza\"",
+      "href=\"zona-rubano\"",
+      "href=\"zona-selvazzano\"",
+      "href=\"zona-ponte-san-nicolo\""
+    ]
+  },
+  "SEO-2026W41-blog-tempi-vendita-casa-padova-link1": {
+    "approved": true,
+    "approved_by": "Gino — chat 10/10/2026 «solo per oggi rendilo operativo ed eseguilo» + export Copertura caricato",
+    "approved_on": "2026-10-10",
+    "url": "/blog-tempi-vendita-casa-padova",
+    "file": "blog-costi-vendere-casa-padova-2026.html",
+    "summary": "Link contestuale da /blog-costi-vendere-casa-padova-2026 verso /blog-tempi-vendita-casa-padova",
+    "rationale": "Guida owner in sitemap da marzo, non indicizzata (export Copertura 10/10), solo 5 link interni.",
+    "ops": [
+      {
+        "op": "insert_after",
+        "find": " vendita nel periodo sbagliato allunga i tempi e riduce il potere negoziale.</p>",
+        "html": "\n    <p>Quanto incide davvero il periodo e cosa allunga i tempi oltre la stagione lo spieghiamo nella guida <a href=\"blog-tempi-vendita-casa-padova\">tempi di vendita di una casa a Padova</a>.</p>"
+      }
+    ],
+    "verify_present": [
+      "href=\"blog-tempi-vendita-casa-padova\""
+    ]
+  },
+  "SEO-2026W41-blog-tempi-vendita-casa-padova-link2": {
+    "approved": true,
+    "approved_by": "Gino — chat 10/10/2026 «solo per oggi rendilo operativo ed eseguilo» + export Copertura caricato",
+    "approved_on": "2026-10-10",
+    "url": "/blog-tempi-vendita-casa-padova",
+    "file": "blog-documenti-vendita-casa.html",
+    "summary": "Link contestuale da /blog-documenti-vendita-casa verso /blog-tempi-vendita-casa-padova",
+    "rationale": "Guida owner in sitemap da marzo, non indicizzata (export Copertura 10/10), solo 5 link interni.",
+    "ops": [
+      {
+        "op": "insert_after",
+        "find": "sono allungarsi. Non dare per scontato che tutto si risolva in pochi giorni.</p>",
+        "html": "\n    <p>Per capire come queste attese si sommano al resto del percorso, dalla valutazione al rogito, vedi <a href=\"blog-tempi-vendita-casa-padova\">quanto ci vuole a vendere casa a Padova</a>.</p>"
+      }
+    ],
+    "verify_present": [
+      "href=\"blog-tempi-vendita-casa-padova\""
+    ]
+  },
+  "SEO-2026W41-chi-siamo": {
+    "approved": false,
+    "status": "proposta",
+    "url": "/chi-siamo",
+    "file": "chi-siamo.html",
+    "summary": "Ispezione URL + richiesta indicizzazione (manuale, Gino)",
+    "rationale": "Pillar con 63 link interni, robots index e canonical corretti, ma assente dalle indicizzate: la causa la dà solo l'ispezione URL (es. canonical scelto da Google, soft 404).",
+    "ops": []
+  },
+  "SEO-2026W41-contatti": {
+    "approved": false,
+    "status": "proposta",
+    "url": "/contatti",
+    "file": "contatti.html",
+    "summary": "Ispezione URL + richiesta indicizzazione (manuale, Gino)",
+    "rationale": "204 link interni, robots/canonical corretti, assente dalle indicizzate: serve ispezione URL.",
+    "ops": []
+  },
+  "SEO-2026W41-blog-bonus-mobili-2026-massimizzare-ristrutturazioni": {
+    "approved": false,
+    "status": "proposta",
+    "url": "/blog-bonus-mobili-2026-massimizzare-ristrutturazioni",
+    "file": "blog-bonus-mobili-2026-massimizzare-ristrutturazioni.html",
+    "summary": "Valutare consolidamento con /blog-bonus-mobili-barriere-architettoniche-2026-padova",
+    "rationale": "Articolo di aprile non indicizzato e stesso tema del nuovo articolo bonus mobili (indicizzato): rischio doppione. Decisione umana: canonical verso il nuovo o aggiornamento con angolo diverso.",
+    "ops": []
+  },
+  "SEO-2026W41-blog-news-non-indicizzati": {
+    "approved": false,
+    "status": "proposta",
+    "url": "/blog-news-non-indicizzati",
+    "file": "blog-news-non-indicizzati.html",
+    "summary": "Non spingere 6 articoli di attualità non indicizzati",
+    "rationale": "dazi USA-UE, sondaggio Banca d'Italia Q1, summit investimenti, tassi mutui minimi, acquisizioni commerciali giugno, bilancio 2025: basso valore per i venditori. Proposta: lasciarli, non chiederne l'indicizzazione; valutare noindex se restano esclusi a 90 gg.",
+    "ops": []
   }
 }

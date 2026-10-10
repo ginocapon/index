@@ -83,7 +83,7 @@
       "jsonld": 1,
       "tier": "owner_conversione",
       "inbound": 11,
-      "last_modified": "2026-10-09",
+      "last_modified": "2026-10-10",
       "issues": [],
       "notes": []
     },
@@ -220,7 +220,9 @@
       "tier": "pillar",
       "inbound": 63,
       "last_modified": "2026-10-09",
-      "issues": [],
+      "issues": [
+        "non_indicizzata"
+      ],
       "notes": []
     },
     "/gino-capon": {
@@ -272,10 +274,12 @@
       "faq_schema": false,
       "forms": 1,
       "jsonld": 2,
-      "tier": "contenuto",
+      "tier": "pillar",
       "inbound": 204,
       "last_modified": "2026-10-09",
-      "issues": [],
+      "issues": [
+        "non_indicizzata"
+      ],
       "notes": []
     },
     "/blog": {
@@ -326,7 +330,9 @@
       "tier": "acquirente",
       "inbound": 29,
       "last_modified": "2026-10-09",
-      "issues": [],
+      "issues": [
+        "non_indicizzata"
+      ],
       "notes": [
         "title_61_70_63"
       ]
@@ -408,7 +414,7 @@
       "noindex": false,
       "h1": 1,
       "h2": 7,
-      "words": 1460,
+      "words": 1492,
       "faq_schema": true,
       "forms": 0,
       "jsonld": 4,
@@ -575,7 +581,9 @@
       "inbound": 1,
       "last_modified": "2026-10-09",
       "issues": [],
-      "notes": []
+      "notes": [
+        "non_indicizzata_recente_2026-10-09"
+      ]
     },
     "/blog-affitti-studenti-settembre-padova-proprietario-2026": {
       "title": "Affitti studenti Padova settembre 2026",
@@ -1185,13 +1193,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 13,
-      "words": 2969,
+      "words": 2995,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 24,
-      "last_modified": "2026-10-09",
+      "last_modified": "2026-10-10",
       "issues": [],
       "notes": []
     },
@@ -1219,13 +1227,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 11,
-      "words": 3082,
+      "words": 3107,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 25,
-      "last_modified": "2026-10-09",
+      "last_modified": "2026-10-10",
       "issues": [],
       "notes": []
     },
@@ -1343,9 +1351,11 @@
       "forms": 0,
       "jsonld": 4,
       "tier": "zona",
-      "inbound": 15,
+      "inbound": 16,
       "last_modified": "2026-10-09",
-      "issues": [],
+      "issues": [
+        "non_indicizzata"
+      ],
       "notes": []
     },
     "/zona-abano-terme": {
@@ -1379,9 +1389,11 @@
       "forms": 0,
       "jsonld": 4,
       "tier": "zona",
-      "inbound": 11,
+      "inbound": 12,
       "last_modified": "2026-10-09",
-      "issues": [],
+      "issues": [
+        "non_indicizzata"
+      ],
       "notes": [
         "title_61_70_68"
       ]
@@ -1398,9 +1410,11 @@
       "forms": 1,
       "jsonld": 4,
       "tier": "owner_contenuto",
-      "inbound": 5,
+      "inbound": 7,
       "last_modified": "2026-10-09",
-      "issues": [],
+      "issues": [
+        "non_indicizzata"
+      ],
       "notes": []
     },
     "/articolo-riqualificazione": {
@@ -1488,7 +1502,7 @@
       "jsonld": 1,
       "tier": "owner_conversione",
       "inbound": 60,
-      "last_modified": "2026-10-09",
+      "last_modified": "2026-10-10",
       "issues": [],
       "notes": []
     },
@@ -1824,7 +1838,9 @@
       "tier": "contenuto",
       "inbound": 7,
       "last_modified": "2026-10-09",
-      "issues": [],
+      "issues": [
+        "non_indicizzata"
+      ],
       "notes": []
     },
     "/blog-mandato-esclusivo-padova-perche-conviene-2026": {
@@ -1874,7 +1890,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 8,
-      "last_modified": "2026-10-09",
+      "last_modified": "2026-10-10",
       "issues": [],
       "notes": []
     },
@@ -2093,9 +2109,11 @@
       "forms": 0,
       "jsonld": 4,
       "tier": "zona",
-      "inbound": 11,
+      "inbound": 12,
       "last_modified": "2026-10-09",
-      "issues": [],
+      "issues": [
+        "non_indicizzata"
+      ],
       "notes": []
     },
     "/zona-ponte-san-nicolo": {
@@ -2110,9 +2128,11 @@
       "forms": 0,
       "jsonld": 4,
       "tier": "zona",
-      "inbound": 4,
+      "inbound": 5,
       "last_modified": "2026-10-09",
-      "issues": [],
+      "issues": [
+        "non_indicizzata"
+      ],
       "notes": []
     },
     "/servizio-virtual-tour": {
@@ -2250,7 +2270,9 @@
       "tier": "acquirente",
       "inbound": 1,
       "last_modified": "2026-10-09",
-      "issues": [],
+      "issues": [
+        "non_indicizzata"
+      ],
       "notes": []
     },
     "/blog-affitto-transitorio-padova-durata-2026": {
@@ -2457,7 +2479,9 @@
       "tier": "contenuto",
       "inbound": 1,
       "last_modified": "2026-10-09",
-      "issues": [],
+      "issues": [
+        "non_indicizzata"
+      ],
       "notes": [
         "title_61_70_67"
       ]
@@ -2572,7 +2596,9 @@
       "inbound": 0,
       "last_modified": "2026-10-09",
       "issues": [],
-      "notes": []
+      "notes": [
+        "non_indicizzata_recente_2026-10-06"
+      ]
     },
     "/blog-registrazione-locazione-fumetto-proprietari-padova-2026": {
       "title": "Registrazione locazione Padova: storia a fumetto",
@@ -2589,7 +2615,9 @@
       "inbound": 0,
       "last_modified": "2026-10-09",
       "issues": [],
-      "notes": []
+      "notes": [
+        "non_indicizzata_recente_2026-10-07"
+      ]
     },
     "/blog-immobiliare-geopolitica-energia-tassi-2026": {
       "title": "Geopolitica, energia e tassi: effetti sul mercato immobiliare 2026",
@@ -2646,7 +2674,8 @@
       "inbound": 1,
       "last_modified": "2026-10-09",
       "issues": [
-        "title_troncato"
+        "title_troncato",
+        "non_indicizzata"
       ],
       "notes": [
         "title_61_70_65"
@@ -2812,7 +2841,8 @@
       "inbound": 2,
       "last_modified": "2026-10-09",
       "issues": [
-        "title_troncato"
+        "title_troncato",
+        "non_indicizzata"
       ],
       "notes": []
     },
@@ -2888,7 +2918,8 @@
       "inbound": 2,
       "last_modified": "2026-10-09",
       "issues": [
-        "title_troncato"
+        "title_troncato",
+        "non_indicizzata"
       ],
       "notes": [
         "title_61_70_65"
@@ -2949,7 +2980,8 @@
       "inbound": 1,
       "last_modified": "2026-10-09",
       "issues": [
-        "title_troncato"
+        "title_troncato",
+        "non_indicizzata"
       ],
       "notes": [
         "title_61_70_66"
@@ -3043,7 +3075,9 @@
       "tier": "contenuto",
       "inbound": 1,
       "last_modified": "2026-10-09",
-      "issues": [],
+      "issues": [
+        "non_indicizzata"
+      ],
       "notes": [
         "title_61_70_67"
       ]
@@ -3189,7 +3223,8 @@
       "inbound": 1,
       "last_modified": "2026-10-09",
       "issues": [
-        "title_troncato"
+        "title_troncato",
+        "non_indicizzata"
       ],
       "notes": [
         "title_61_70_65"
@@ -3210,7 +3245,8 @@
       "inbound": 5,
       "last_modified": "2026-10-09",
       "issues": [
-        "title_troncato"
+        "title_troncato",
+        "non_indicizzata"
       ],
       "notes": [
         "title_61_70_61"
@@ -3410,7 +3446,9 @@
       "tier": "contenuto",
       "inbound": 1,
       "last_modified": "2026-10-09",
-      "issues": [],
+      "issues": [
+        "non_indicizzata"
+      ],
       "notes": []
     },
     "/blog-bonus-edilizi-2026-incentivi-casa-padova": {
@@ -3709,5 +3747,8 @@
       "issues": [],
       "notes": []
     }
-  }
+  },
+  "indexing_source": "export_copertura",
+  "indexing_data_end": "2026-10-04",
+  "sitemap_indexed": 183
 }

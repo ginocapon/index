@@ -32,7 +32,8 @@ Versione rivista e resa operativa del «PROMPT MASTER — Sistema SEO automatico
 1. **API Search Console** (`GSC_SERVICE_ACCOUNT_JSON`) — `searchAnalytics.query` per page, page+query e date; periodo corrente e precedente di 28 gg; URL Inspection.
 2. **CSV manuale** in `data/seo-auto/inbox/` — export «Pagine» dalla UI GSC con il confronto attivo (colonne clic, impressioni e posizione; la seconda colonna è il periodo precedente).
 3. **Fallback repo** (`data/gsc-keywords-priority.json`) — marcato `stale: true` con le limitazioni scritte nello snapshot.
-4. **GA4** — `non_configurato` finché non esiste il secret `GA4_PROPERTY_ID` (Data API non ancora implementata: va dichiarato, non simulato).
+4. **Export Copertura → Valide** (indipendente dalle fonti 1–3) — GSC → Indicizzazione → Pagine → «Visualizza dati sulle pagine indicizzate» → Esporta → zip in `data/seo-auto/inbox/` (nome con `Coverage`/`Valid`). Il motore legge `Tabella.csv` (URL + ultima scansione) e `Grafico.csv` (trend), salva `coverage-latest.json` e marca `non_indicizzata` le URL in sitemap da ≥28 gg (`indexing_grace_days`) assenti dall'elenco. Valido per 21 gg (`coverage_max_age_days`); con l'API attiva prevale l'URL Inspection. Le varianti www/.html nell'export sono residui (www → 301, .html → canonical): non generano interventi.
+5. **GA4** — `non_configurato` finché non esiste il secret `GA4_PROPERTY_ID` (Data API non ancora implementata: va dichiarato, non simulato).
 
 ## 3. Ciclo settimanale (comando unico)
 
@@ -46,7 +47,7 @@ Output: `data/seo-auto/snapshots/AAAA-MM-GG.json`, `audit-latest.json`, `selecti
 
 ## 4. Punteggio di selezione (trasparente, nel JSON di ogni pagina)
 
-`ctr_gap` (CTR < 70% del benchmark per posizione — **stima**) · `zero_click` · `striking` (posizione 4–15, ≥30 impressioni) · `decline` (clic −max(5, 20%)) · `sitemap` (noindex, canonical altrove, template) · `technical` (title/meta/H1/canonical) · `underlinked` (<10 link interni verso pagine owner/pillar) → × moltiplicatore di tier. Peso GSC dimezzato se i dati sono `stale`. Esclusioni salvate (`excluded_cooldown`, `below_threshold`).
+`ctr_gap` (CTR < 70% del benchmark per posizione — **stima**) · `zero_click` · `striking` (posizione 4–15, ≥30 impressioni) · `decline` (clic −max(5, 20%)) · `sitemap` (noindex, canonical altrove, template) · `indicizzazione` (10 × peso tier: owner/pillar 2, owner_contenuto/zona 1.6, acquirente 0.8, contenuto 0.5 — un articolo di attualità non indicizzato non deve superare una pagina owner) · `technical` (title/meta/H1/canonical) · `underlinked` (<10 link interni verso pagine owner/pillar) → × moltiplicatore di tier. Peso GSC dimezzato se i dati sono `stale`. Esclusioni salvate (`excluded_cooldown`, `below_threshold`).
 
 **ID intervento:** `SEO-{AAAAWss}-{slug}` (stabile nel ciclo; suffisso `-linkN` per i link in entrata).
 
@@ -88,3 +89,4 @@ Regola d'oro sulle fonti · claim consentiti (350+, 101 comuni, 98%, 127 recensi
 | Ciclo | Fonte | Selezionate | Pubblicate | Note |
 |---|---|---|---|---|
 | 2026W41 (10/10, manuale) | repo_json_stale | 7 | 9 interventi (4 sitemap, 2 title/meta, 3 link) | `/landing-vendita` in attesa dei dati query; claim «15%» su `/vendere-casa-padova-errori` (H1, corpo, FAQ) da verificare |
+| 2026W41 bis (10/10, export Copertura) | repo_json_stale + copertura 04/10 | 10 | 3 interventi link (zona-limena → 4 zone cintura; 2 link → blog-tempi-vendita) | 183/205 sitemap indicizzate (89%), trend 106→196; batch 28/09 tutto indicizzato. Non indicizzate: chi-siamo, contatti (ispezione URL manuale), 4 zone cintura, tempi-vendita; 6 articoli di attualità da non spingere; bonus-mobili aprile possibile doppione |
