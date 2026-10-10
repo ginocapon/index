@@ -59,8 +59,31 @@ Output: `data/seo-auto/snapshots/AAAA-MM-GG.json`, `audit-latest.json`, `selecti
 
 ## 6. Approvazione
 
-- **Fase attuale: `approval_mode: "manuale"`.** L'agente propone; Gino approva in chat; l'agente scrive `approvals.json` con `approved_by` e `approved_on`.
-- **Passaggio all'automatico** solo per op tecniche (sitemap, meta >160, title troncato) dopo **4 cicli consecutivi senza rollback** e con l'API GSC attiva → `auto_publish_allowed_ops` in config. Title e contenuti restano manuali.
+- **Fase attuale (dal 10/10/2026): `approval_mode: "delegato_venerdi"`.** Delega di Gino in chat: *«da venerdì prossimo io carico i dati e tu esegui gli aggiornamenti e i testi degli articoli che ritieni necessari per aumentare le performance»*. Quando Gino carica gli export il venerdì, l'agente **esegue senza chiedere un ulteriore ok** e scrive `approvals.json` con `approved_by: "delega venerdì 10/10/2026"`.
+- **Coperto dalla delega:** title e meta · link interni contestuali · pulizia della sitemap · **refresh dei testi** delle pagine selezionate: nuove sezioni H2/H3 sull'intento delle query reali, FAQ, box «In sintesi», aggiornamento dei dati **con fonte istituzionale linkata**, rimozione o riformulazione dei claim senza fonte, CTA owner coerenti con il messaggio madre.
+- **Fuori dalla delega (serve l'ok esplicito in chat):** cambi di URL, redirect, canonical tra pagine, noindex, eliminazione o accorpamento di pagine, modifiche a form e lead, nuovi articoli (seguono `/blog` con il controllo anti-doppioni), tariffe o mediazione, qualsiasi cosa su DNS e server.
+- **Limiti fissi anche con la delega:** max 10 pagine per ciclo · cooldown di 28 gg per pagina · ogni numero con fonte verificabile (regola d'oro) · anti-plagio (`skill-content.md` §2.0b) · niente paragrafi riempitivi (§8.1c) · `validate-page.js` + `audit_blog_publishability.py` sugli articoli toccati · backup e ID per ogni intervento · report finale con elenco ID e comando di rollback.
+
+### 6.1 Procedura venerdì (quando Gino carica i dati in chat)
+
+1. Copia gli export in `data/seo-auto/inbox/`:
+   - **Prestazioni:** zip con «Confronta» ultimi 28 gg vs 28 gg precedenti, che contiene Pagine, Query e Date.
+   - **Copertura → Valide:** lo zip.
+   - Opzionale: Copertura → Non indicizzate.
+2. `python3 scripts/seo_auto/seo_auto.py weekly`. Leggi `selection-latest.json` e il report.
+3. Per ogni pagina selezionata scegli la leva più piccola che risolve il problema misurato:
+   - CTR basso → title e meta;
+   - posizione 4–15 → contenuto sull'intento delle query;
+   - non indicizzata → link interni e richiesta di indicizzazione;
+   - calo → controllo di query e concorrenza, poi refresh.
+4. Scrivi le op in `approvals.json` → `apply` → validazioni → commit e push su main → deploy → `verify`.
+5. In chat rispondi con:
+   - cosa è cambiato (pagina, prima e dopo, motivo legato al dato);
+   - ID e comando di rollback;
+   - le URL da far ispezionare a Gino (max 10);
+   - le decisioni fuori delega.
+
+- **Passaggio al pubblicato da cron senza chat** (solo op tecniche) dopo **4 cicli consecutivi senza rollback** e con l'API GSC attiva → `auto_publish_allowed_ops` in config.
 
 ## 7. Valutazione (dopo ≥28 gg di dati reali post-pubblicazione)
 

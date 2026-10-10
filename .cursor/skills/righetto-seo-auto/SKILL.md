@@ -23,10 +23,13 @@ python3 scripts/seo_auto/seo_auto.py rollback --id SEO-AAAAWss-slug
 
 ## Flusso con l'utente
 
-1. Leggi `data/seo-auto/selection-latest.json` e l'ultimo `reports/*.md`.
-2. Proponi gli interventi (op atomiche, testo esatto, motivazione, rischio).
-3. Solo dopo l'«ok» esplicito scrivi `data/seo-auto/approvals.json` (`approved_by`, `approved_on`), poi `apply` e infine commit.
-4. Dopo il deploy: `verify`. Non dichiarare un miglioramento senza almeno 28 giorni di dati API reali.
+**Delega venerdì attiva (dal 10/10/2026):** quando Gino carica i dati GSC, esegui senza chiedere un altro ok (procedura in §6.1 della skill completa).
+
+1. Export in `data/seo-auto/inbox/` → `weekly` → leggi `selection-latest.json` e il report.
+2. Per ogni pagina scegli la leva minima legata al dato: title e meta, link, refresh del testo con fonti.
+3. Scrivi `approvals.json` (`approved_by: "delega venerdì 10/10/2026"`) → `apply` → validazioni → commit e push → `verify`.
+4. Fuori dalla delega (chiedi prima): URL, redirect, canonical, noindex, eliminazioni, form, nuovi articoli, tariffe.
+5. Non dichiarare un miglioramento senza almeno 28 giorni di dati reali.
 
 ## Vincoli
 

@@ -8,7 +8,7 @@
   "min_impressions_ctr": 100,
   "cooldown_days": 28,
   "underlinked_threshold": 10,
-  "approval_mode": "manuale",
+  "approval_mode": "delegato_venerdi",
   "template_paths": [
     "/immobile"
   ],
