@@ -214,6 +214,7 @@ img{max-width:100%;height:auto;display:block}
 
 .footer-mini{background:var(--dark);padding:1.5rem;text-align:center;font-size:.7rem;color:rgba(255,255,255,.45)}
 .footer-mini a{color:rgba(255,255,255,.5);margin:0 .5rem}.footer-mini a:hover{color:var(--green)}
+@media(max-width:600px){.fiscal-source{overflow-wrap:anywhere}section{min-width:0;box-sizing:border-box}}
 </style>
 
 <!-- JSON-LD -->
@@ -255,7 +256,7 @@ img{max-width:100%;height:auto;display:block}
         {"@type": "Question", "name": "Quanto costa la consulenza mutuo?", "acceptedAnswer": {"@type": "Answer", "text": "La consulenza mutuo con Righetto Immobiliare è completamente gratuita e senza impegno. Confrontiamo le offerte di oltre 10 banche partner per trovarti le condizioni migliori."}},
         {"@type": "Question", "name": "Qual è la rata di un mutuo da 150.000€?", "acceptedAnswer": {"@type": "Answer", "text": "Per un mutuo di 150.000€ a 25 anni con tasso fisso al 2,8%, la rata mensile è di circa 695€. Il calcolo varia in base al tasso e alla durata. Usa il nostro simulatore per un calcolo personalizzato."}},
         {"@type": "Question", "name": "Quali sono i requisiti per ottenere un mutuo?", "acceptedAnswer": {"@type": "Answer", "text": "Servono: reddito stabile con rata massima del 30-35% del netto mensile, nessuna segnalazione CRIF, anticipo minimo del 20%. Contratto indeterminato o 2+ anni di Partita IVA."}},
-        {"@type": "Question", "name": "Cosa serve per il mutuo prima casa under 36?", "acceptedAnswer": {"@type": "Answer", "text": "Gli under 36 con ISEE fino a 40.000€ possono accedere al Fondo Garanzia Prima Casa per ottenere mutui fino al 100% del valore, con esenzione imposte di registro, ipotecaria e catastale."}},
+        {"@type": "Question", "name": "Cosa serve per il mutuo prima casa under 36?", "acceptedAnswer": {"@type": "Answer", "text": "Per un nuovo rogito nel 2026 non spetta l'esenzione fiscale under 36. Il Fondo Consap e' distinto dalle imposte: offre una garanzia pubblica, subordinata a requisiti, ISEE e valutazione della banca. Non garantisce automaticamente un mutuo al 100%."}},
         {"@type": "Question", "name": "Meglio tasso fisso o variabile nel 2026?", "acceptedAnswer": {"@type": "Answer", "text": "Nel 2026 il tasso fisso si attesta intorno al 2,5-3,5%, il variabile parte dall'Euribor + spread (1,8-2,5%). Il fisso offre certezza, il variabile può convenire se i tassi BCE scendono. I nostri consulenti analizzano il tuo caso specifico."}},
         {"@type": "Question", "name": "Cos'è la surroga del mutuo?", "acceptedAnswer": {"@type": "Answer", "text": "La surroga (Legge Bersani) permette di trasferire il mutuo a un'altra banca con condizioni migliori senza costi per il mutuatario. Non servono nuove spese notarili né di perizia."}}
       ]
@@ -295,7 +296,7 @@ img{max-width:100%;height:auto;display:block}
     <div class="hero-right">
       <div class="hero-tag">Consulenza mutuo gratuita</div>
       <h1>Il mutuo giusto<br>al <em>tasso migliore</em></h1>
-            <p class="last-update" style="font-size:0.85rem;color:#6b7280;margin-top:0.5rem;">Ultimo aggiornamento: Marzo 2026</p>
+            <p class="last-update" style="font-size:0.85rem;color:#6b7280;margin-top:0.5rem;">Ultimo aggiornamento: Ottobre 2026</p>
       <p class="sub">Basta girare da una banca all'altra. Confrontiamo per te le offerte di oltre 10 istituti e ti troviamo il finanziamento perfetto per la tua situazione. Gratis.</p>
       <ul class="hero-checks">
         <li><span class="chk chk-1">✓</span> Confronto tassi da 10+ banche partner</li>
@@ -421,7 +422,7 @@ img{max-width:100%;height:auto;display:block}
     <h2 class="sec-h2">Fisso, variabile o misto: <em>quale scegliere?</em></h2>
     <p class="sec-sub">Ecco un confronto reale dei tassi di mercato. Noi ti troviamo il migliore.</p>
 
-    <table class="tassi-table">
+    <div class="seo-table-scroll" style="max-width:100%;overflow-x:auto"><table class="tassi-table">
       <thead>
         <tr><th>Tipo</th><th>Tasso</th><th>Rata (€160.000, 25 anni)</th><th>Pro</th><th>Contro</th></tr>
       </thead>
@@ -455,7 +456,7 @@ img{max-width:100%;height:auto;display:block}
           <td>Spread piu alto del variabile puro</td>
         </tr>
       </tbody>
-    </table>
+    </table></div>
     <p class="tassi-note">Tassi indicativi marzo 2026. Il tasso effettivo dipende dal profilo del richiedente, LTV e durata. Fonte: principali istituti bancari italiani.</p>
   </div>
 </section>
@@ -481,7 +482,7 @@ img{max-width:100%;height:auto;display:block}
       <div class="guide-card">
         <div class="guide-card-icon">🏠</div>
         <h3>Agevolazioni prima casa</h3>
-        <p>Imposta di registro al 2% (anziche 9%), imposte ipotecaria e catastale fisse a €50. Per gli under 36 con ISEE fino a €40.000: esenzione totale imposte + accesso al Fondo Garanzia per mutui fino al 100% del valore.</p>
+        <p>Le agevolazioni ordinarie prima casa restano soggette ai requisiti di legge. Per un nuovo rogito nel 2026 non spetta l&#x27;esenzione fiscale under 36. Il Fondo Consap e&#x27; distinto dalle imposte: offre una garanzia pubblica, subordinata a requisiti, ISEE e valutazione della banca. Non garantisce automaticamente un mutuo al 100%.</p>
       </div>
       <div class="guide-card">
         <div class="guide-card-icon">💰</div>
@@ -522,7 +523,7 @@ img{max-width:100%;height:auto;display:block}
     <div class="faq-list" id="faqList">
       <div class="faq-item">
         <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Quanto anticipo serve per comprare casa?</div>
-        <div class="faq-a"><p>Generalmente le banche finanziano fino all'80% del valore di perizia, quindi serve un anticipo minimo del 20%. Per un immobile da €200.000, servono almeno €40.000 di anticipo. Gli under 36 con ISEE fino a €40.000 possono accedere al Fondo Garanzia Prima Casa per mutui fino al 100%.</p></div>
+        <div class="faq-a"><p>Generalmente le banche finanziano fino all'80% del valore di perizia, quindi serve un anticipo minimo del 20%. Per un immobile da €200.000, servono almeno €40.000 di anticipo. Gli under 36 con ISEE fino a €40.000 possono accedere al Fondo Garanzia Prima Casa per valutare finanziamenti oltre l'80%, senza garanzia automatica di erogazione al 100%.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Posso ottenere un mutuo con Partita IVA?</div>
@@ -681,6 +682,7 @@ img{max-width:100%;height:auto;display:block}
   </div>
 </section>
 
+<section style="max-width:900px;margin:2rem auto;padding:1rem"><h2>Under 36: imposte e garanzia Consap</h2><p>Le esenzioni fiscali prima casa under 36 non si applicano ai nuovi rogiti del 2026: riguardano gli atti dal 26 maggio 2021 al 31 dicembre 2023 e, nella proroga, i preliminari sottoscritti e registrati entro il 31 dicembre 2023 con rogito entro il 31 dicembre 2024. Il Fondo di Garanzia Consap e&#x27; una misura distinta: i giovani sotto i 36 anni rientrano nelle categorie ammesse; la garanzia ordinaria e&#x27; il 50% della quota capitale e puo&#x27; essere elevata, alle condizioni previste, per mutui oltre l&#x27;80% del prezzo comprensivo degli oneri accessori. La disciplina della garanzia elevata e&#x27; prorogata al 31 dicembre 2027. L&#x27;importo del mutuo non puo&#x27; superare 250.000 euro e la banca decide l&#x27;erogazione. Non e&#x27; un&#x27;esenzione dalle imposte ne&#x27; un diritto automatico al mutuo al 100%.</p><p class="fiscal-source">Verifica fonti: 10 ottobre 2026. <a href="https://www.agenziaentrate.gov.it/portale/le-agevolazioni-prima-casa-under-36" target="_blank" rel="noopener noreferrer">Agenzia delle Entrate: esenzioni under 36</a>; <a href="https://www.consap.it/fondo-prima-casa/" target="_blank" rel="noopener noreferrer">Consap: Fondo Prima Casa e requisiti aggiornati</a>. Prima di impegnarti, verifica il tuo caso con banca e notaio.</p></section>
 </main>
 
 <footer class="footer-mini">
@@ -828,7 +830,7 @@ async function sendMutuoLead(e) {
 }
 </script>
 <script>/* Chatbot lazy */
-(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=13';document.body.appendChild(s);}
+(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=14';document.body.appendChild(s);}
 setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
 })();</script>
 <!-- STICKY MOBILE CTA -->

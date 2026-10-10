@@ -108,7 +108,7 @@
     .gb-vt{background:var(--blu);color:#fff}
     .gb-yt{background:#c00;color:#fff}
     .gi-price{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:600;color:#fff;line-height:1;text-shadow:0 2px 12px rgba(0,0,0,.4)}
-    .gi-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;font-style:italic;color:rgba(255,255,255,.8);margin-top:.15rem}
+    .gi-title{margin-bottom:0;line-height:1.25;font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;font-style:italic;color:rgba(255,255,255,.8);margin-top:.15rem}
     .gallery-controls{position:absolute;bottom:1.5rem;right:1.8rem;z-index:2;display:flex;gap:.4rem}
     .gc-btn{display:flex;align-items:center;gap:.35rem;padding:.42rem .85rem;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.2);border-radius:2px;color:#fff;font-family:'Montserrat',sans-serif;font-size:.74rem;cursor:pointer;transition:background .2s;backdrop-filter:blur(8px)}
     .gc-btn:hover{background:rgba(206,224,143,.4);border-color:var(--oro)}
@@ -334,7 +334,8 @@
     .footer-links a:hover{color:var(--oro)}
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
-  </style>
+  @media(max-width:600px){.gallery-controls{top:1rem;bottom:auto;right:1rem}.gi-title{font-size:1.08rem}.gallery-info{right:1rem}}
+</style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList",
       "dateModified": "2026-03-18","itemListElement":[
@@ -417,7 +418,7 @@
     <div class="gallery-info">
       <div class="gi-badge-row" id="heroBadges"></div>
       <div class="gi-price" id="heroPrice">—</div>
-      <div class="gi-title" id="heroTitle">—</div>
+      <h1 class="gi-title" id="heroTitle">Immobile</h1>
     </div>
     <div class="gallery-controls">
       <button class="gc-btn" onclick="event.stopPropagation();openLightbox(0)">
@@ -865,11 +866,8 @@ function showError() {
   document.getElementById('errorPage').style.display = 'block';
   var robots = document.querySelector('meta[name="robots"]');
   if (robots) robots.setAttribute('content', 'noindex, follow');
-  setTimeout(function () {
-    if (document.getElementById('errorPage').style.display === 'block') {
-      location.replace('/immobili');
-    }
-  }, 4000);
+  if (!robots) { robots = document.createElement('meta'); robots.name = 'robots'; robots.content = 'noindex, follow'; document.head.appendChild(robots); }
+  document.title = 'Immobile non disponibile | Righetto';
 }
 
 function hideLoading() {
@@ -907,10 +905,11 @@ function render(d) {
   // Meta SEO — ricco di dettagli come Idealista
   const tipologia = cap(d.tipologia || d.categoria || 'Immobile');
   const operazione = d.tipo_operazione === 'vendita' ? 'in vendita' : (d.tipo_operazione || '').startsWith('affitto') ? 'in affitto' : '';
-  const comuneLabel = d.comune || 'Padova';
+  const comuneLabel = d.comune || '';
   const mqLabel = d.superficie ? d.superficie + ' m²' : '';
   const localiLabel = (d.locali || d.camere) ? (d.locali || d.camere) + ' locali' : '';
-  const seoTitle = [tipologia, operazione, 'a ' + comuneLabel].filter(Boolean).join(' ') + ' — Righetto Immobiliare Padova';
+  const titleRef = d.codice || String(d.id || '').slice(0, 8);
+  const seoTitle = [tipologia, operazione, comuneLabel, titleRef].filter(Boolean).join(' ') + ' | Righetto';
   const seoDesc = [tipologia, 'di', mqLabel, localiLabel ? '· ' + localiLabel : '', operazione, 'a', comuneLabel, d.codice ? '· Rif. ' + d.codice : '', '— Righetto Immobiliare'].filter(Boolean).join(' ');
   document.title = seoTitle;
   var _metaDesc = document.querySelector('meta[name="description"]');
@@ -933,7 +932,7 @@ function render(d) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'RealEstateListing',
-    name: seoTitle.replace(' — Righetto Immobiliare Padova', ''),
+    name: [tipologia, operazione, comuneLabel, titleRef].filter(Boolean).join(' '),
     description: seoDesc,
     url: canonical.href,
     datePosted: d.created_at || new Date().toISOString(),

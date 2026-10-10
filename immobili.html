@@ -884,7 +884,7 @@
     <!-- NESSUN RISULTATO -->
     <div id="no-results" class="no-results" style="display:none;">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <h3>Nessun immobile trovato</h3>
+      <h2>Nessun immobile trovato</h2>
       <p>Prova ad allargare i criteri di ricerca o <button onclick="resetFilters()" style="background:none;border:none;color:var(--oro);cursor:pointer;font-size:.85rem;font-family:'DM Sans',sans-serif;">azzera i filtri</button></p>
     </div>
 
@@ -978,9 +978,9 @@
     <div class="footer-col">
       <h4>Servizi</h4>
       <a href="servizi">Valutazioni gratuite</a>
-      <a href="servizi#perizie">Perizie immobiliari</a>
-      <a href="servizi#locazioni">Contratti di locazione</a>
-      <a href="servizi#gestione">Gestione immobili</a>
+      <a href="servizio-valutazioni">Perizie immobiliari</a>
+      <a href="servizio-locazioni">Contratti di locazione</a>
+      <a href="servizio-gestione">Gestione immobili</a>
     </div>
     <div class="footer-col">
       <h4>Info</h4>
@@ -1158,7 +1158,7 @@
       const ceColor = CE_COLORS[i.ce] || {bg:'#999',tx:'#fff'};
       const ceHtml = i.ce ? '<span class="cf-ce" style="background:'+ceColor.bg+';color:'+ceColor.tx+'">'+i.ce+'</span>' : '';
       const cardSlug = generatePropertySlug(i);
-      return '<a class="card" href="immobile?s='+encodeURIComponent(cardSlug)+'" data-slug="'+cardSlug+'" data-tipo="'+i.tipo+'" data-prezzo="'+i.prezzo+'" data-mq="'+i.mq+'" data-camere="'+i.camere+'" data-bagni="'+i.bagni+'" data-comune="'+(i.comune||'').toLowerCase()+'" data-vt="'+(i.vt?'1':'')+'" data-yt="'+(i.yt?'1':'')+'" data-giardino="'+(i.giardino?'1':'')+'" data-garage="'+(i.garage?'1':'')+'" data-op="'+i.op+'" data-anno="'+i.anno+'" data-stato="'+(i.stato||'').toLowerCase()+'" data-piscina="'+(i.piscina?'1':'')+'" data-mansarda="'+(i.mansarda?'1':'')+'" data-taverna="'+(i.taverna?'1':'')+'" data-vista="'+(i.vistaAperta?'1':'')+'" onclick="openCard(event,this)">'
+      return '<a class="card" href="immobile?s='+encodeURIComponent(cardSlug)+'" data-slug="'+cardSlug+'" data-tipo="'+i.tipo+'" data-prezzo="'+i.prezzo+'" data-mq="'+i.mq+'" data-camere="'+i.camere+'" data-bagni="'+i.bagni+'" data-comune="'+(i.comune||'').toLowerCase()+'" data-vt="'+(i.vt?'1':'')+'" data-yt="'+(i.yt?'1':'')+'" data-giardino="'+(i.giardino?'1':'')+'" data-garage="'+(i.garage?'1':'')+'" data-evidenza="'+(i.evidenza?'1':'0')+'" data-op="'+i.op+'" data-anno="'+i.anno+'" data-stato="'+(i.stato||'').toLowerCase()+'" data-piscina="'+(i.piscina?'1':'')+'" data-mansarda="'+(i.mansarda?'1':'')+'" data-taverna="'+(i.taverna?'1':'')+'" data-vista="'+(i.vistaAperta?'1':'')+'" onclick="openCard(event,this)">'
         + '<div class="card-img">'
         + imgHtml
         + '<div class="card-badges">'+badges+'</div>'
@@ -1680,8 +1680,12 @@
       const cStato = (c.dataset.stato || '').toLowerCase();
 
       let show = true;
+      const featuredOnly = new URLSearchParams(location.search).get('ev') === '1';
+      if (featuredOnly && c.dataset.evidenza !== '1') show = false;
       // Operazione (tab)
-      if (currentOp === 'aste') {
+      if (featuredOnly && !new URLSearchParams(location.search).has('op') && !new URLSearchParams(location.search).has('tab')) {
+        // Featured catalogue includes both sales and rentals unless an operation was specified.
+      } else if (currentOp === 'aste') {
         if (cOp !== 'asta' && cOp !== 'aste') show = false;
       } else if (currentOp === 'affitto') {
         if (!cOp.startsWith('affitto')) show = false;
@@ -1933,7 +1937,7 @@
 <script src="js/nav-mobile.js?v=3" defer></script>
 <script src="js/config.js?v=3" defer></script>
 <script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */
-(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=13';document.body.appendChild(s);}
+(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=14';document.body.appendChild(s);}
 setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
 })();</script>
 <script src="js/cookie-consent.js?v=4" defer></script>
