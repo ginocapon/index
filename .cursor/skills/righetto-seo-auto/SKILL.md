@@ -28,11 +28,13 @@ python3 scripts/seo_auto/seo_auto.py rollback --id SEO-AAAAWss-slug
 1. Export in `data/seo-auto/inbox/` → `weekly` → leggi `selection-latest.json` e il report.
 2. Per ogni pagina scegli la leva minima legata al dato: title e meta, link, refresh del testo con fonti.
 3. Scrivi `approvals.json` (`approved_by: "delega venerdì 10/10/2026"`) → `apply` → validazioni → commit e push → `verify`.
+3b. **Regola fissa blog (ogni venerdì):** i 10 articoli peggiori di `blog-refresh-queue.json` → `next_batch` (esclusi quelli sistemati negli ultimi 90 gg) → `fix_text_artifacts.py` + title/meta a mano + fonti → `apply` → `blog-batch-done`. Dettaglio §6.2.
 4. Fuori dalla delega (chiedi prima): URL, redirect, canonical, noindex, eliminazioni, form, nuovi articoli, tariffe.
 5. Non dichiarare un miglioramento senza almeno 28 giorni di dati reali.
 
 ## Vincoli
 
 - Nessun dato simulato: se `stale: true`, dirlo nel report e nell'oggetto dell'email.
-- Niente riscritture del corpo, niente claim senza fonte, niente redirect o canonical tra pagine owner senza dati di query.
+- Mai sinonimi automatici per abbassare la densità delle keyword (causa delle frasi «capoluogo euganeo», «di lo studio»): si riscrive a mano.
+- Niente riscritture del corpo oltre al refresh mirato, niente claim senza fonte, niente redirect o canonical tra pagine owner senza dati di query.
 - Pagine owner prima di tutto (north star: ≥4 mandati al mese ≥300k).

@@ -84,6 +84,23 @@ Output: `data/seo-auto/snapshots/AAAA-MM-GG.json`, `audit-latest.json`, `selecti
    - le URL da far ispezionare a Gino (max 10);
    - le decisioni fuori delega.
 
+### 6.2 Blog: i 10 articoli peggiori a rotazione (REGOLA FISSA ogni venerdì — dal 10/10/2026)
+
+Richiesta di Gino: *«risistemi i primi 10 articoli peggiori e venerdì prossimo i successivi — regola fissa»*. Vale in aggiunta alle max 10 pagine di §6.1 ed è coperta dalla delega.
+
+1. `weekly` calcola già la classifica (`blog-rank`) → `data/seo-auto/blog-refresh-queue.json`, campo `next_batch` (10 articoli).
+   - Punteggio: clic mancati rispetto al benchmark di posizione (tetto 60) + 0 clic con impressioni (5) + non indicizzato da ≥28 gg (15 × peso tier) + frasi alterate (×1.2 se l'articolo ha impressioni, ×0.8 se no) + 3 per ogni problema on-page; tutto × moltiplicatore del tier (owner prima).
+   - Esclusi: articoli in cooldown (title cambiato da <28 gg), già sistemati negli ultimi 90 gg (`blog_refresh_repeat_days`), in `blog_refresh_hold`. Se un escluso è tra i peggiori, entra al primo venerdì utile.
+2. Per ognuno dei 10:
+   - `python3 scripts/seo_auto/fix_text_artifacts.py <file> --preview` → correggi le frasi alterate (op `replace` con ancora univoca, generate da `build_ops`); rileggi le correzioni nel contesto;
+   - title ≤60 e meta ≤155 riscritti a mano sull'intento delle query reali (mai troncati, mai «…»);
+   - dati senza fonte: aggiungi la fonte istituzionale o togli il numero (regola d'oro); niente paragrafi riempitivi;
+   - `dateModified` alla data del venerdì solo se il testo è davvero cambiato.
+3. Op in `approvals.json` con ID `SEO-AAAAWss-blog10-<slug>` e `batch: "blog-N"` → `apply` → `validate-page.js` + `audit_blog_publishability.py` → `blog-batch-done` → commit e push → `verify`.
+4. In chat: elenco dei 10 con motivo e ID di rollback, più l'anteprima dei 10 del venerdì dopo.
+
+**Divieto permanente (causa del testo alterato in 76 articoli):** mai sostituire in automatico «Padova», «agenzia immobiliare» o «Righetto Immobiliare» con sinonimi a rotazione («capoluogo euganeo», «territorio patavino», «lo studio», «il team»…) per abbassare la densità delle keyword. `scripts/patch_compliance_warns.py` ora segnala soltanto lo stuffing e i title/meta troppo lunghi: si correggono riscrivendo la frase a mano.
+
 - **Passaggio al pubblicato da cron senza chat** (solo op tecniche) dopo **4 cicli consecutivi senza rollback** e con l'API GSC attiva → `auto_publish_allowed_ops` in config.
 
 ## 7. Valutazione (dopo ≥28 gg di dati reali post-pubblicazione)
@@ -115,3 +132,4 @@ Regola d'oro sulle fonti · claim consentiti (350+, 101 comuni, 98%, 127 recensi
 | 2026W41 (10/10, manuale) | repo_json_stale | 7 | 9 interventi (4 sitemap, 2 title/meta, 3 link) | `/landing-vendita` in attesa dei dati query; claim «15%» su `/vendere-casa-padova-errori` (H1, corpo, FAQ) da verificare |
 | 2026W41 bis (10/10, export Copertura) | repo_json_stale + copertura 04/10 | 10 | 3 interventi link (zona-limena → 4 zone cintura; 2 link → blog-tempi-vendita) | 183/205 sitemap indicizzate (89%), trend 106→196; batch 28/09 tutto indicizzato. Non indicizzate: chi-siamo, contatti (ispezione URL manuale), 4 zone cintura, tempi-vendita; 6 articoli di attualità da non spingere; bonus-mobili aprile possibile doppione |
 | 2026W41 ter (10/10, export Prestazioni 3 mesi) | gsc_csv (pagine 92 gg, sito 28 vs 28 da Grafico) | 10 | 7 interventi (6 title/meta, 1 refresh testo + link su contratto-affitto) | Sito 28 gg: 404 clic vs 329 (+23%), 7.875 impr. vs 6.737. Non-brand debole su vendita («vendere casa padova» pos. 42,6). servizio-vendita e rendimento-affitto esclusi: title cambiato da <28 gg nel periodo misurato. Cannibalizzazione contratto-affitto ↔ canone-concordato: differenziati. Tabella €/mq canoni da verificare |
+| 2026W41 blog-1 (10/10, regola §6.2) | gsc_csv + copertura | 10 articoli peggiori | 10 refresh (frasi alterate corrette, title/meta su 8, dateModified) | Articoli: affitto-breve, affitti-canoni, mercato-2026, vendita-strategie, mutuo-prima-casa, vigonza-rubano, sondaggio-bancaditalia, case-vendita, mutui-casa, investire. Causa trovata e bloccata: `fix_stuffing` in `patch_compliance_warns.py`. Batch blog-2 il 16/10 (ricalcolato con i nuovi dati) |
