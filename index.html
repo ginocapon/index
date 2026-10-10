@@ -710,6 +710,26 @@ button svg, a.btn-p svg, a.btn-g svg {
   text-shadow: none !important;
 }
 
+
+/* Perf 2026-10-10: salta il rendering delle sezioni sotto la piega finche' non si avvicinano (riduce Style&Layout iniziale, LCP render delay, TBT). Le misure intrinseche sono stime mobile; "auto" le corregge dopo il primo render. */
+#ricerca,#proprietario-hp,#video-intro,#evidenza,#visite-virtuali-hp,#servizi,#perche,#testimonial,#mutuo-hp,#stima,#drone-hp,#blog,#territorio,#chi-siamo-hp,#faq-hp,#form-contatto,footer{content-visibility:auto}
+#ricerca{contain-intrinsic-size:auto 750px}
+#proprietario-hp{contain-intrinsic-size:auto 1940px}
+#video-intro{contain-intrinsic-size:auto 740px}
+#evidenza{contain-intrinsic-size:auto 400px}
+#visite-virtuali-hp{contain-intrinsic-size:auto 1910px}
+#servizi{contain-intrinsic-size:auto 1390px}
+#perche{contain-intrinsic-size:auto 1580px}
+#testimonial{contain-intrinsic-size:auto 1200px}
+#mutuo-hp{contain-intrinsic-size:auto 1280px}
+#stima{contain-intrinsic-size:auto 720px}
+#drone-hp{contain-intrinsic-size:auto 1200px}
+#blog{contain-intrinsic-size:auto 2360px}
+#territorio{contain-intrinsic-size:auto 1360px}
+#chi-siamo-hp{contain-intrinsic-size:auto 910px}
+#faq-hp{contain-intrinsic-size:auto 530px}
+#form-contatto{contain-intrinsic-size:auto 1420px}
+footer{contain-intrinsic-size:auto 1670px}
 </style>
 
 <script type="application/ld+json">
@@ -1023,7 +1043,7 @@ button svg, a.btn-p svg, a.btn-g svg {
     <div class="hero-photo">
       <picture>
         <source media="(max-width: 768px)" srcset="img/team/titolari-home-2026-mobile.webp?v=8" type="image/webp" width="960" height="600">
-        <img src="img/team/titolari-home-2026.webp?v=8" alt="Gino Capon e Linda Righetto — consulenza immobiliare Righetto, Padova" width="1024" height="1024" fetchpriority="high">
+        <img src="img/team/titolari-home-2026.webp?v=8" alt="Gino Capon e Linda Righetto — consulenza immobiliare Righetto, Padova" width="1024" height="1024" fetchpriority="high" decoding="async">
       </picture>
       <div class="hero-photo-fade" aria-hidden="true"></div>
     </div>
@@ -1750,16 +1770,16 @@ button svg, a.btn-p svg, a.btn-g svg {
   </div>
 </footer>
 
-<script src="js/vendor/supabase.min.js"></script>
-<script src="js/supabase-bridge.js?v=1"></script>
-<script src="js/media-url.js?v=1"></script>
-<script src="js/config.js?v=4"></script>
-<script src="js/rig-lead-form.js?v=5"></script>
+<script src="js/vendor/supabase.min.js" defer></script>
+<script src="js/supabase-bridge.js?v=1" defer></script>
+<script src="js/media-url.js?v=1" defer></script>
+<script src="js/config.js?v=4" defer></script>
+<script src="js/rig-lead-form.js?v=5" defer></script>
 <script>/* Chatbot lazy: carica solo su interazione utente o dopo 8s */
 (function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=14';document.body.appendChild(s);}
 setTimeout(l,8000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
 })();</script>
-<script src="js/media-url.js?v=1"></script>
+
 <script src="js/prop-photo-carousel.js?v=3" defer></script>
 <script src="js/homepage.js?v=29" defer></script>
 <script>
