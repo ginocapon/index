@@ -1,0 +1,43 @@
+# Lunedì 07:00 CEST — email TEST con i 3 task agente (richiamo memoria)
+name: "Lunedì — 3 task agente (email TEST)"
+
+on:
+  schedule:
+    - cron: "0 5 * * 1"
+  workflow_dispatch:
+
+jobs:
+  lunedi-tre-punti:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Genera email HTML
+        run: python3 scripts/lunedi-tre-punti-email.py
+
+      - name: Invia a info@righettoimmobiliare.it (relay come venerdì)
+        env:
+          EMAIL_RELAY_KEY: ${{ secrets.EMAIL_RELAY_KEY }}
+        run: |
+          if [ -z "$EMAIL_RELAY_KEY" ]; then
+            echo "⚠️ EMAIL_RELAY_KEY assente — email non inviata"
+            exit 0
+          fi
+          SUBJECT=$(cat lunedi-email-subject.txt)
+          EMAIL_BODY=$(cat lunedi-email-report.html)
+          PAYLOAD=$(jq -n \
+            --arg action "send_single" \
+            --arg to_email "info@righettoimmobiliare.it" \
+            --arg subject "$SUBJECT" \
+            --arg html_body "$EMAIL_BODY" \
+            '{action: $action, to_email: $to_email, subject: $subject, html_body: $html_body}')
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
+            "https://api.righettoimmobiliare.it/send-mail.php" \
+            -H "Content-Type: application/json" \
+            -H "X-API-Key: $EMAIL_RELAY_KEY" \
+            -d "$PAYLOAD")
+          if [ "$HTTP_CODE" = "200" ]; then
+            echo "✅ Email lunedì 3 task inviata"
+          else
+            echo "⚠️ Email non inviata (HTTP $HTTP_CODE)"
+          fi
