@@ -37,13 +37,13 @@
       "notes": []
     },
     "/servizi": {
-      "title": "Servizi Immobiliari a Padova — Righetto Immobiliare",
-      "meta": "Vendita immobili, locazioni, gestione preliminari, valutazioni gratuite e attivazione utenze a Padova e provincia. Righetto Immobiliare, dal 2000.",
+      "title": "Servizi immobiliari Padova e Limena: vendita, affitto, stime",
+      "meta": "Vendere, affittare o far gestire un immobile a Padova e provincia: valutazione gratuita, locazioni, preliminari e gestione. Righetto, alleato dal 2000.",
       "canonical": "https://righettoimmobiliare.it/servizi",
       "noindex": false,
       "h1": 1,
       "h2": 5,
-      "words": 993,
+      "words": 994,
       "faq_schema": false,
       "forms": 0,
       "jsonld": 2,
@@ -784,7 +784,7 @@
       "forms": 1,
       "jsonld": 4,
       "tier": "contenuto",
-      "inbound": 3,
+      "inbound": 4,
       "last_modified": "2026-10-09",
       "issues": [],
       "notes": []
@@ -1133,7 +1133,7 @@
     },
     "/blog-affitto-studenti-padova": {
       "title": "Affitto Studenti Padova 2026: Zone, Prezzi e Guida Completa",
-      "meta": "Affitto studenti nel territorio 2026: zone migliori, prezzi medi stanze singole e doppie, tipologie contrattuali e consigli. Guida Righetto Immobiliare.",
+      "meta": "Affitto per studenti a Padova 2026: zone vicine alle sedi universitarie, prezzi indicativi di stanze singole e doppie, contratti e consigli pratici.",
       "canonical": "https://righettoimmobiliare.it/blog-affitto-studenti-padova",
       "noindex": false,
       "h1": 1,
@@ -1255,13 +1255,13 @@
       "notes": []
     },
     "/blog-contratto-affitto-padova": {
-      "title": "Contratto Affitto Padova 2026: Guida Canone Concordato",
-      "meta": "Contratto affitto Padova 2026: canone concordato, cedolare secca, 4+4 e 3+2. Guida completa per proprietari e inquilini con vantaggi fiscali.",
+      "title": "Contratto d'affitto Padova 2026: 4+4, 3+2 e concordato",
+      "meta": "Quale contratto d'affitto scegliere a Padova nel 2026: 4+4, 3+2, transitorio o concordato, cedolare secca, obblighi e disdetta. Guida per proprietari.",
       "canonical": "https://righettoimmobiliare.it/blog-contratto-affitto-padova",
       "noindex": false,
       "h1": 1,
       "h2": 11,
-      "words": 2966,
+      "words": 3013,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
@@ -1912,13 +1912,13 @@
       "notes": []
     },
     "/blog-prezzi-case-padova-zona-2026": {
-      "title": "Prezzi Case Padova 2026 Zona per Zona: Mappa Completa e Previsioni",
-      "meta": "Prezzi case Padova 2026: valori al mq aggiornati per centro, Arcella, Limena e Vigonza. Dati OMI, tabella comparativa e previsioni semestre.",
+      "title": "Prezzi case Padova 2026 per zona: €/mq OMI e tabella",
+      "meta": "Quanto costano le case a Padova nel 2026 zona per zona: valori €/mq OMI per centro, Arcella, Limena e Vigonza. Quanto vale la tua? Stima gratuita.",
       "canonical": "https://righettoimmobiliare.it/blog-prezzi-case-padova-zona-2026",
       "noindex": false,
       "h1": 1,
       "h2": 13,
-      "words": 3174,
+      "words": 3173,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
@@ -1926,9 +1926,7 @@
       "inbound": 8,
       "last_modified": "2026-10-09",
       "issues": [],
-      "notes": [
-        "title_61_70_66"
-      ]
+      "notes": []
     },
     "/blog-affitti-padova-canoni-2026": {
       "title": "Affitti Padova 2026: Canoni in Crescita del +8%, Zone e Previsioni",
@@ -2204,8 +2202,8 @@
       "notes": []
     },
     "/agenzia-immobiliare-padova": {
-      "title": "Agenzia Immobiliare Limena e Padova | Righetto dal 2000",
-      "meta": "Agenzia immobiliare Padova e Limena dal 2000 — Via Roma 96. Vendita, acquisto e affitti in 101 comuni. 4.9/5, 127 recensioni, 350+ immobili.",
+      "title": "Agenzia Immobiliare Padova e Limena | Righetto dal 2000",
+      "meta": "Agenzia immobiliare a Padova e Limena dal 2000, in Via Roma 96. Chi vende trova un alleato: valutazione gratuita, vendita e affitti. 4.9/5, 127 recensioni.",
       "canonical": "https://righettoimmobiliare.it/agenzia-immobiliare-padova",
       "noindex": false,
       "h1": 1,
@@ -2745,46 +2743,38 @@
       ]
     },
     "/blog-documenti-compravendita-rogito-padova-2026": {
-      "title": "Documenti necessari per la compravendita di un immobile: guida…",
-      "meta": "Documenti per compravendita immobiliare: identità, provenienza, titoli edilizi, APE, condominio, preliminare e caparre. Guida per venditori e acquirenti nel…",
+      "title": "Documenti per la compravendita di casa: guida 2026",
+      "meta": "Documenti per vendere o comprare casa: identità, provenienza, titoli edilizi, APE, condominio, preliminare e caparre. Checklist 2026 per Padova e dintorni.",
       "canonical": "https://righettoimmobiliare.it/blog-documenti-compravendita-rogito-padova-2026",
       "noindex": false,
       "h1": 1,
       "h2": 27,
-      "words": 2851,
+      "words": 2850,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 12,
       "last_modified": "2026-10-09",
-      "issues": [
-        "title_troncato"
-      ],
-      "notes": [
-        "title_61_70_63"
-      ]
+      "issues": [],
+      "notes": []
     },
     "/blog-righetto-storia-territorio-acquisizioni-2026": {
-      "title": "Righetto Immobiliare dal 2000: storia, zone e ultime acquisizioni…",
+      "title": "Righetto Immobiliare dal 2000: storia, zone e acquisizioni",
       "meta": "Storia Righetto Immobiliare dal 2000, zone Padova e provincia, numeri verificati e sintesi delle ultime 5 acquisizioni dal portale con foto anteprima.",
       "canonical": "https://righettoimmobiliare.it/blog-righetto-storia-territorio-acquisizioni-2026",
       "noindex": false,
       "h1": 1,
       "h2": 9,
-      "words": 1947,
+      "words": 1946,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 6,
       "last_modified": "2026-10-09",
-      "issues": [
-        "title_troncato"
-      ],
-      "notes": [
-        "title_61_70_66"
-      ]
+      "issues": [],
+      "notes": []
     },
     "/blog-gestione-spese-casa-risparmio-padova-2026": {
       "title": "Gestione spese casa dopo l'acquisto a Padova 2026: energia, IMU…",

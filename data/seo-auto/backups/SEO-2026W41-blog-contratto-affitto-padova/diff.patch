@@ -1,0 +1,43 @@
+--- a/blog-contratto-affitto-padova.html
++++ b/blog-contratto-affitto-padova.html
+@@ -4,14 +4,14 @@
+ <!-- Google tag (gtag.js) + Consent Mode -->
+ <script src="js/ga-consent.js?v=23"></script>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+   <meta name="theme-color" content="#2C4A6E">
+-  <title>Contratto Affitto Padova 2026: Guida Canone Concordato</title>
++  <title>Contratto d'affitto Padova 2026: 4+4, 3+2 e concordato</title>
+   <meta name="robots" content="index, follow, max-image-preview:large">  <link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co">  <link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+   <link rel="preload" href="fonts/cormorant-garamond-600.woff2" as="font" type="font/woff2" crossorigin>
+   <link rel="preload" href="img/blog/comprare-affittare-padova.webp" as="image">
+   <link rel="canonical" href="https://righettoimmobiliare.it/blog-contratto-affitto-padova">
+   <meta property="og:type" content="article">
+-  <meta property="og:title" content="Contratto Affitto Padova 2026: Guida Canone Concordato">
+-  <meta property="og:description" content="Contratto affitto Padova 2026: canone concordato, cedolare secca, 4+4 e 3+2. Guida completa per proprietari e inquilini con vantaggi fiscali.">
++  <meta property="og:title" content="Contratto d&#x27;affitto Padova 2026: 4+4, 3+2 e concordato">
++  <meta property="og:description" content="Quale contratto d&#x27;affitto scegliere a Padova nel 2026: 4+4, 3+2, transitorio o concordato, cedolare secca, obblighi e disdetta. Guida per proprietari.">
+   <meta property="og:url" content="https://righettoimmobiliare.it/blog-contratto-affitto-padova">
+   <meta property="og:image" content="https://righettoimmobiliare.it/img/blog/comprare-affittare-padova.webp">
+   <meta property="og:site_name" content="Righetto Immobiliare">
+@@ -26,10 +26,10 @@
+   <meta property="article:tag" content="affitto Padova 2026">
+   <meta property="article:tag" content="cedolare secca Padova">
+   <meta name="twitter:card" content="summary_large_image">
+-  <meta name="twitter:title" content="Contratto Affitto Padova 2026: Canone Concordato e Guida Completa">
+-  <meta name="twitter:description" content="Guida completa al contratto di affitto nel Padovano 2026: canone concordato, tipologie, vantaggi fiscali e obblighi. Tutto quello che devi sapere per affittare…">
++  <meta name="twitter:title" content="Contratto d&#x27;affitto Padova 2026: 4+4, 3+2 e concordato">
++  <meta name="twitter:description" content="Quale contratto d&#x27;affitto scegliere a Padova nel 2026: 4+4, 3+2, transitorio o concordato, cedolare secca, obblighi e disdetta. Guida per proprietari.">
+   <meta name="twitter:image" content="https://righettoimmobiliare.it/img/blog/comprare-affittare-padova.webp">
+-  <meta name="description" content="Contratto affitto Padova 2026: canone concordato, cedolare secca, 4+4 e 3+2. Guida completa per proprietari e inquilini con vantaggi fiscali.">
++  <meta name="description" content="Quale contratto d&#x27;affitto scegliere a Padova nel 2026: 4+4, 3+2, transitorio o concordato, cedolare secca, obblighi e disdetta. Guida per proprietari.">
+   <link rel="stylesheet" href="css/fonts.css?v=3">
+   <link rel="stylesheet" href="css/nav-mobile.css?v=7">
+   <link rel="stylesheet" href="css/scroll-reveal.css?v=3">
+@@ -490,6 +490,8 @@
+     <h3>L'attestazione di conformita'</h3>
+     <p>Per accedere ai benefici fiscali del canone concordato, e' necessario ottenere l'<strong>attestazione di conformita'</strong> del canone rilasciata da almeno una delle organizzazioni sindacali firmatarie dell'accordo territoriale. Questa attestazione certifica che il canone pattuito rientra nelle fasce previste per quella specifica zona e tipologia di immobile.</p>
+ 
++    <p><strong>Calcolo passo passo:</strong> le fasce dell'accordo territoriale, la cedolare secca al 10% e la registrazione sono spiegate nella guida dedicata al <a href="blog-canone-concordato-padova-guida-2026">canone concordato a Padova</a>. Se preferite affidare contratto, attestazione e gestione dell'inquilino, Righetto vi affianca come alleato del proprietario con il <a href="servizio-locazioni">servizio locazioni</a>.</p>
++
+     <p>Per la gestione completa delle pratiche di locazione, inclusa la registrazione del contratto e le comunicazioni obbligatorie, ci avvaliamo della collaborazione con <a href="https://www.serviziimmobiliaripadova.it" target="_blank" rel="noopener noreferrer">Servizi Immobiliari Padova</a>.</p>
+ 
+     <h2 id="vantaggi-fiscali">Vantaggi fiscali del canone concordato?</h2>

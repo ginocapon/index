@@ -73,7 +73,8 @@
     ]
   },
   "claims_to_verify": [
-    "/vendere-casa-padova-errori: «fino al 15% del valore» (H1), «Il 15% delle vendite tra privati salta» (corpo + HowTo), «FIMAA: 10-15% in meno» (FAQ) — nessuna fonte linkata: trovare la fonte o riformulare (decisione umana)."
+    "/vendere-casa-padova-errori: «fino al 15% del valore» (H1), «Il 15% delle vendite tra privati salta» (corpo + HowTo), «FIMAA: 10-15% in meno» (FAQ) — nessuna fonte linkata: trovare la fonte o riformulare (decisione umana).",
+    "/blog-contratto-affitto-padova: tabella canoni concordati €/mq per zona (sezione #concordato) con fonte «elaborazione su accordo territoriale Comune del Padovano» — nome probabilmente da sostituzione automatica, valori da riscontrare sull'accordo territoriale di Padova vigente prima di toccarli."
   ],
   "schedule": "venerdì 08:00 Europe/Rome — .github/workflows/seo-auto-settimanale.yml",
   "indexing_tier_weight": {
