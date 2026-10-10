@@ -59,7 +59,11 @@
       "affittare-casa",
       "successione",
       "perizia",
-      "non-si-vende"
+      "non-si-vende",
+      "contratto-affitto",
+      "affitti-padova-canoni",
+      "affitto-breve",
+      "canone-concordato"
     ],
     "zona": [
       "^/zona-"
@@ -86,5 +90,9 @@
     "contenuto": 0.5
   },
   "indexing_grace_days": 28,
-  "coverage_max_age_days": 21
+  "coverage_max_age_days": 21,
+  "blog_refresh_hold": [
+    "/blog-bonus-mobili-2026-massimizzare-ristrutturazioni"
+  ],
+  "blog_refresh_repeat_days": 90
 }

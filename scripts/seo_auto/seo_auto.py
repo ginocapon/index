@@ -768,6 +768,11 @@ def _apply_ops(t: str, ops: list[dict]) -> str:
                 raise ValueError(f"ancora non univoca ({t.count(find)}x): {find[:60]}")
             rep = {"replace": op.get("html", ""), "insert_before": op["html"] + find, "insert_after": find + op["html"]}[kind]
             t = t.replace(find, rep, 1)
+        elif kind == "regex_all":
+            new, n = re.subn(op["pattern"], op["repl"], t)
+            if n < int(op.get("min_count", 1)):
+                raise ValueError(f"regex_all: {n} occorrenze per {op['pattern'][:40]}")
+            t = new
         else:
             raise ValueError(f"op sconosciuta {kind}")
     return t
@@ -1145,6 +1150,10 @@ def cmd_report(evals: list[dict] | None = None) -> None:
     lines += [f"- {c['intervention_id']}: proposta da redigere ({'; '.join(c['reasons'])})" for c in pending_sel]
     if not pending and not pending_sel:
         lines.append("- Nessuna.")
+    bq = load_json(SEO / "blog-refresh-queue.json", {}) or {}
+    if bq.get("next_batch"):
+        lines += ["", f"### Prossimo batch blog «10 peggiori» (batch {len(bq.get('batches', [])) + 1}, regola §6.2)", ""]
+        lines += [f"- {r['url']} — punteggio {r['score']}: {'; '.join(r['reasons'])}" for r in bq["next_batch"]]
     issues = [(p, v["issues"]) for p, v in audit.get("pages", {}).items() if v.get("issues")]
     lines += ["", "## G. Limiti, rischi e problemi tecnici", ""]
     lines += [f"- Claim da verificare: {x}" for x in (load_json(CONFIG, {}) or {}).get("claims_to_verify", [])]
@@ -1170,18 +1179,118 @@ def cmd_weekly() -> None:
     cmd_verify()
     evals = cmd_evaluate()
     cmd_select()
+    cmd_blog_rank()
     cmd_dashboard()
     cmd_report(evals)
 
 
+# ---------------------------------------------------------------- BLOG: 10 PEGGIORI A ROTAZIONE
+
+BLOG_QUEUE = SEO / "blog-refresh-queue.json"
+
+TEXT_ARTIFACTS = [
+    r"capoluogo euganeo", r"territorio patavino", r"\bdi (?:<strong>)?lo studio\b", r"\bil team su dati\b",
+    r"elaborazion\w* il team\b", r"Comune del Padovano", r"\b(?:nel territorio|in provincia|nell'hinterland) 20\d\d\b",
+    r"principali zone locale", r"Zona padovano", r"interne la nostra struttura", r"nel comune nel 20\d\d",
+]
+
+
+def text_artifacts(f: Path) -> int:
+    t = f.read_text(encoding="utf-8", errors="ignore")
+    return sum(len(re.findall(p_, t)) for p_ in TEXT_ARTIFACTS)
+
+
+def cmd_blog_rank(batch_size: int = 10) -> dict:
+    """Classifica trasparente degli articoli peggiori; il prossimo batch esclude quelli già sistemati (90 gg) e in cooldown."""
+    conf = cfg()
+    snap = latest_snapshot()
+    audit = load_json(AUDIT_OUT) or cmd_audit()
+    q = load_json(BLOG_QUEUE, {}) or {}
+    done_recent = {a["url"] for b in q.get("batches", []) for a in b["articles"]
+                   if (date.today() - date.fromisoformat(b["date"])).days < int(conf.get("blog_refresh_repeat_days", 90))}
+    span = snap.get("page_metrics_span_days") or 28
+    k = 28 / span if span > 35 else 1
+    rows = []
+    for p, a in audit["pages"].items():
+        if not p.startswith("/blog-") or a.get("missing_file"):
+            continue
+        f = file_for_path(p)
+        g = (snap["pages"].get(p) or {}).get("current")
+        parts, why = {}, []
+        if g:
+            imp, clk = g["impressions"] * k, g["clicks"] * k
+            exp = expected_ctr(g.get("position"))
+            if exp and imp >= 20:
+                missed = max(0.0, exp * imp - clk)
+                if missed >= 1:
+                    parts["clic_mancati"] = round(min(missed, 60), 1)
+                    why.append(f"~{missed:.0f} clic/28 gg sotto il benchmark (pos. {g['position']:.1f}, {imp:.0f} impr./28 gg)")
+            if imp >= 20 and clk < .5:
+                parts["zero_clic"] = 5
+                why.append("impressioni senza clic")
+        if "non_indicizzata" in a.get("issues", []):
+            parts["non_indicizzata"] = round(15 * conf.get("indexing_tier_weight", {}).get(a.get("tier", "contenuto"), 1.0) / 1.6, 1)
+            why.append("in sitemap da oltre 28 gg ma non indicizzata")
+        art = text_artifacts(f)
+        if art:
+            seen = bool(g and g["impressions"] * k >= 20)
+            parts["testo_alterato"] = round(min(art, 20) * (1.2 if seen else .8), 1)
+            why.append(f"{art} frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)")
+        tech = [i for i in a.get("issues", []) if not i.startswith(("meta_corta", "non_indicizzata"))]
+        if tech:
+            parts["on_page"] = 3 * len(tech)
+            why.append("on-page: " + ", ".join(tech))
+        mult = conf.get("tier_multiplier", {}).get(a.get("tier", "contenuto"), 1.0)
+        score = round(sum(parts.values()) * mult, 1)
+        if score <= 0:
+            continue
+        cd = cooldown_active(p, {**snap, "stale": False}, conf)
+        rows.append({"url": p, "file": f.name, "tier": a.get("tier"), "score": score, "parts": parts, "reasons": why,
+                     "gsc_28gg": {"clicks": round(g["clicks"] * k, 1), "impressions": round(g["impressions"] * k), "position": g.get("position")} if g else None,
+                     "artifacts": art, "cooldown": cd, "already_refreshed": p in done_recent})
+    rows.sort(key=lambda r: -r["score"])
+    hold = set(conf.get("blog_refresh_hold", []))
+    for r in rows:
+        r["hold"] = r["url"] in hold
+    nxt = [r for r in rows if not r["cooldown"] and not r["already_refreshed"] and not r["hold"]][:batch_size]
+    q.update({"rule": "Ogni venerdì: sistemare i 10 articoli peggiori non ancora sistemati negli ultimi 90 gg (skill-seo-auto-weekly.md §6.2).",
+              "ranking_date": date.today().isoformat(), "data_source": snap["source"], "ranking": rows[:60], "next_batch": nxt})
+    q.setdefault("batches", [])
+    save_json(BLOG_QUEUE, q)
+    print(f"blog-rank: {len(rows)} articoli con problemi · prossimo batch: {len(nxt)}")
+    for r in nxt:
+        print(f"  {r['score']:>5} {r['url']} — {'; '.join(r['reasons'])[:140]}")
+    return q
+
+
+def cmd_blog_batch_done(note: str | None = None) -> None:
+    """Registra come sistemato il next_batch corrente (dopo apply + verify)."""
+    q = load_json(BLOG_QUEUE, {}) or {}
+    nxt = q.get("next_batch") or []
+    if not nxt:
+        sys.exit("Nessun batch da chiudere: lanciare prima blog-rank")
+    published = {e["url"] for e in read_registry() if e.get("type") == "published"
+                 and e["ts"][:10] >= (date.today() - timedelta(days=7)).isoformat()}
+    arts = [{"url": r["url"], "score_before": r["score"], "parts_before": r["parts"], "gsc_28gg_before": r["gsc_28gg"],
+             "published": r["url"] in published} for r in nxt]
+    q.setdefault("batches", []).append({"batch": len(q["batches"]) + 1, "date": date.today().isoformat(), "articles": arts, "note": note})
+    q["next_batch"] = []
+    save_json(BLOG_QUEUE, q)
+    log_event({"type": "blog_batch_done", "batch": len(q["batches"]), "urls": [a["url"] for a in arts]})
+    print(f"Batch {len(q['batches'])} registrato: {sum(a['published'] for a in arts)}/{len(arts)} pubblicati")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["weekly", "ingest", "audit", "select", "evaluate", "apply", "verify", "rollback", "dashboard", "report"])
+    ap.add_argument("cmd", choices=["weekly", "ingest", "audit", "select", "evaluate", "apply", "verify", "rollback", "dashboard", "report",
+                                       "blog-rank", "blog-batch-done"])
     ap.add_argument("--id")
+    ap.add_argument("--note")
     a = ap.parse_args()
     {"weekly": cmd_weekly, "ingest": cmd_ingest, "audit": cmd_audit, "select": cmd_select, "evaluate": cmd_evaluate,
      "apply": lambda: cmd_apply(a.id), "verify": cmd_verify, "rollback": lambda: cmd_rollback(a.id),
-     "dashboard": cmd_dashboard, "report": lambda: cmd_report(None)}[a.cmd]()
+     "dashboard": cmd_dashboard, "report": lambda: cmd_report(None),
+     "blog-rank": cmd_blog_rank, "blog-batch-done": lambda: cmd_blog_batch_done(a.note)}[a.cmd]()
 
 
 if __name__ == "__main__":
