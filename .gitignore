@@ -26,3 +26,6 @@ test-results/
 playwright-report/
 restyling-report/
 tests/visual/baseline/
+seo-auto-email.html
+seo-auto-subject.txt
+data/seo-auto/.tmp.html
