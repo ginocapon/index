@@ -236,37 +236,83 @@ def _num(v: str) -> float:
         return 0.0
 
 
-def ingest_csv() -> dict | None:
-    """Export GSC UI: Prestazioni → (Confronta 28 gg) → Esporta → CSV «Pagine». File in data/seo-auto/inbox/."""
-    files = sorted(INBOX.glob("*.csv"), key=lambda f: f.stat().st_mtime, reverse=True)
-    page_file = next((f for f in files if re.search(r"pagin|page", f.name, re.I)), None)
-    if not page_file:
-        return None
-    with page_file.open(encoding="utf-8-sig") as fh:
-        rows = list(csv.reader(fh))
+def _metric_cols(head: list[str]) -> dict[str, list[int]]:
+    head = [h.lower() for h in head]
+    return {k: [i for i, h in enumerate(head) if re.search(pat, h)] for k, pat in
+            {"clicks": r"clic", "impr": r"impression", "pos": r"posizion|position"}.items()}
+
+
+def _rows_metrics(rows: list[list[str]]) -> list[tuple[str, dict, dict | None]]:
+    """Righe export GSC: (chiave, periodo corrente, periodo precedente se export con confronto)."""
     if len(rows) < 2:
-        return None
-    head = [h.lower() for h in rows[0]]
-    idx = {k: [i for i, h in enumerate(head) if re.search(pat, h)] for k, pat in
-           {"clicks": r"clic", "impr": r"impression", "pos": r"posizion|position"}.items()}
-    pages = {}
+        return []
+    idx = _metric_cols(rows[0])
+    out = []
     for r in rows[1:]:
-        if not r or not r[0].startswith("http"):
+        if not r or not r[0].strip():
             continue
-        p = path_from_url(r[0])
-        get = lambda k, n: _num(r[idx[k][n]]) if len(idx[k]) > n else None
-        entry = {"current": m(get("clicks", 0), get("impr", 0), get("pos", 0))}
-        if len(idx["clicks"]) > 1:
-            entry["previous"] = m(get("clicks", 1), get("impr", 1), get("pos", 1))
-        pages[p] = entry
-    mtime = date.fromtimestamp(page_file.stat().st_mtime).isoformat()
-    tot = lambda k: m(sum(v[k]["clicks"] for v in pages.values() if k in v),
-                      sum(v[k]["impressions"] for v in pages.values() if k in v))
-    return {"source": "gsc_csv", "stale": False, "source_file": page_file.name, "data_end_date": mtime,
-            "period": {"current": None, "previous": None}, "site": {"current": tot("current"),
-            "previous": tot("previous") if any("previous" in v for v in pages.values()) else None},
-            "pages": pages, "daily": [], "index_status": {},
-            "limitations": ["Export manuale: niente query per pagina né dati giornalieri, niente brand/non-brand."]}
+        get = lambda k, n: _num(r[idx[k][n]]) if len(idx[k]) > n and idx[k][n] < len(r) else None
+        cur = m(get("clicks", 0) or 0, get("impr", 0) or 0, get("pos", 0))
+        prev = m(get("clicks", 1) or 0, get("impr", 1) or 0, get("pos", 1)) if len(idx["clicks"]) > 1 else None
+        out.append((r[0].strip(), cur, prev))
+    return out
+
+
+def ingest_csv() -> dict | None:
+    """Export GSC UI Prestazioni (28 gg, meglio con «Confronta» 28 gg precedenti): zip completo o CSV «Pagine» in inbox/."""
+    import io
+    import zipfile
+    files = sorted([f for f in INBOX.glob("*") if f.suffix.lower() in (".zip", ".csv")
+                    and not re.search(r"coverage|copertura|valid|indicizz|tabella", f.name, re.I)],
+                   key=lambda f: f.stat().st_mtime, reverse=True)
+    tables: dict[str, list[list[str]]] = {}
+    src = None
+    for f in files:
+        if f.suffix.lower() == ".zip":
+            with zipfile.ZipFile(f) as z:
+                for n in z.namelist():
+                    if n.lower().endswith(".csv"):
+                        tables[Path(n).stem.lower()] = list(csv.reader(io.StringIO(z.read(n).decode("utf-8-sig", errors="ignore"))))
+        elif re.search(r"pagin|page", f.name, re.I):
+            tables["pagine"] = list(csv.reader(f.open(encoding="utf-8-sig")))
+        if any(k.startswith(("pagin", "page")) for k in tables):
+            src = f
+            break
+        tables = {}
+    if not src:
+        return None
+    pick = lambda *names: next((v for k, v in tables.items() if k.startswith(names)), [])
+    pages = {}
+    for key, cur, prev in _rows_metrics(pick("pagin", "page")):
+        if key.startswith("http"):
+            pages[path_from_url(key)] = {"current": cur, **({"previous": prev} if prev else {})}
+    daily = [{"date": k, **cur} for k, cur, _ in _rows_metrics(pick("date", "dat")) if re.match(r"\d{4}-\d{2}-\d{2}$", k)]
+    daily.sort(key=lambda d: d["date"])
+    queries = _rows_metrics(pick("query", "quer"))
+    agg = lambda xs: m(sum(x["clicks"] for x in xs), sum(x["impressions"] for x in xs),
+                       (sum((x["position"] or 0) * x["impressions"] for x in xs) / sum(x["impressions"] for x in xs))
+                       if sum(x["impressions"] for x in xs) else None)
+    has_prev = any("previous" in v for v in pages.values())
+    site = {"current": agg([v["current"] for v in pages.values()]),
+            "previous": agg([v["previous"] for v in pages.values() if "previous" in v]) if has_prev else None}
+    brand = {}
+    if queries:
+        for label, pos in (("current", 1), ("previous", 2)):
+            rows = [(q, x[pos - 1]) for q, *x in queries]
+            rows = [(q, v) for q, v in rows if v]
+            if rows:
+                brand[label] = {"brand": agg([v for q, v in rows if BRAND_RE.search(q)]),
+                                "nonbrand": agg([v for q, v in rows if not BRAND_RE.search(q)])}
+    end = daily[-1]["date"] if daily else date.fromtimestamp(src.stat().st_mtime).isoformat()
+    lim = ["Export manuale: query non collegate alle pagine (brand/non-brand solo a livello sito).",
+           "GSC limita l'export a 1000 righe per tabella; query rare anonimizzate."]
+    if not has_prev:
+        lim.append("Export senza «Confronta»: nessun periodo precedente, niente cali né valutazioni.")
+    return {"source": "gsc_csv", "stale": False, "source_file": src.name, "data_end_date": end,
+            "period": {"current": [daily[0]["date"], end] if daily else None, "previous": None},
+            "site": site, "brand_split": brand, "pages": pages, "daily": daily, "index_status": {},
+            "top_queries_site": [{"q": q, **cur} for q, cur, _ in sorted(queries, key=lambda x: -x[1]["impressions"])[:30]],
+            "limitations": lim}
 
 
 COVERAGE_OUT = SEO / "coverage-latest.json"
@@ -990,7 +1036,14 @@ def cmd_report(evals: list[dict] | None = None) -> None:
     else:
         lines.append("- Periodo precedente: non disponibile → nessun confronto possibile.")
     nb = [v["nonbrand_current"] for v in snap.get("pages", {}).values() if v.get("nonbrand_current")]
-    if nb:
+    bs = snap.get("brand_split") or {}
+    if bs.get("current"):
+        for lbl in ("current", "previous"):
+            if bs.get(lbl):
+                b_, n_ = bs[lbl]["brand"], bs[lbl]["nonbrand"]
+                lines.append(f"- {'28 gg' if lbl == 'current' else '28 gg precedenti'} — brand: {b_['clicks']:.0f} clic / {b_['impressions']:.0f} impr. · "
+                             f"non-brand: {n_['clicks']:.0f} clic / {n_['impressions']:.0f} impr. (CTR {n_['ctr']:.1%})")
+    elif nb:
         lines.append(f"- Non-brand (somma query per pagina): {sum(x['clicks'] for x in nb):.0f} clic · {sum(x['impressions'] for x in nb):.0f} impr.")
     else:
         lines.append("- Brand/non-brand: non separabile senza API.")
