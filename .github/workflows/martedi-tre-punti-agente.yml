@@ -1,13 +1,13 @@
-# Lunedì 07:00 CEST — email TEST con i 3 task agente (richiamo memoria)
-name: "Lunedì — 3 task agente (email TEST)"
+# Martedì 07:00 CEST — email TEST con i 3 task agente (richiamo memoria)
+name: "Martedì — 3 task agente (email TEST)"
 
 on:
   schedule:
-    - cron: "0 5 * * 1"
+    - cron: "0 5 * * 2"
   workflow_dispatch:
 
 jobs:
-  lunedi-tre-punti:
+  martedi-tre-punti:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -37,7 +37,7 @@ jobs:
             -H "X-API-Key: $EMAIL_RELAY_KEY" \
             -d "$PAYLOAD")
           if [ "$HTTP_CODE" = "200" ]; then
-            echo "✅ Email lunedì 3 task inviata"
+            echo "✅ Email martedì 3 task inviata"
           else
             echo "⚠️ Email non inviata (HTTP $HTTP_CODE)"
           fi

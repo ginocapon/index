@@ -1,17 +1,18 @@
 {
   "updated": "2026-10-10",
   "scheduled_for": "2026-10-13",
-  "scheduled_weekday": "lunedì",
+  "scheduled_weekday": "martedì",
   "trigger_phrases": [
     "cosa dobbiamo fare",
     "tre punti",
     "tre famosi punti",
-    "piano lunedì",
-    "cosa fare lunedì"
+    "piano martedì",
+    "cosa fare martedì",
+    "piano lunedì"
   ],
   "email_to": "info@righettoimmobiliare.it",
-  "email_subject_prefix": "[TEST] Piano agente — 3 task lunedì",
-  "context": "Richiesta utente 10/10/2026: lunedì (o martedì) richiamo memoria + email stile test con sintesi operativa.",
+  "email_subject_prefix": "[TEST] Piano agente — 3 task martedì",
+  "context": "Richiesta utente 10/10/2026: lunedì agenda piena → promemoria spostato a martedì 13/10 + email TEST.",
   "tasks": [
     {
       "id": 1,
@@ -33,5 +34,5 @@
     "Rc IMM",
     "spostamento password / segreti"
   ],
-  "agent_instruction": "Se l'utente chiede cosa fare lunedì o i tre punti, leggi questo file + invia/rigenera email con scripts/lunedi-tre-punti-email.py. Workflow: .github/workflows/lunedi-tre-punti-agente.yml"
+  "agent_instruction": "Se l'utente chiede cosa fare o i tre punti, leggi questo file + email con scripts/lunedi-tre-punti-email.py. Workflow martedì 07:00 CEST: .github/workflows/martedi-tre-punti-agente.yml"
 }

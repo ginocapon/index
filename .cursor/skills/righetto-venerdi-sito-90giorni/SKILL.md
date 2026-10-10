@@ -82,12 +82,13 @@ Usa questa lista nell'output per l'utente; adatta alle priorità della settimana
 7. **Homepage visite virtuali:** aprire `/` → sezione «Visite virtuali 360°» deve mostrare **solo** immobili **attivi** con tour (max 4, più recenti in admin). Se un annuncio è disattivato non deve comparire. Nuovo acquisito con tour: entry in `data/visite-virtuali.json` + scene in admin.
 8. **Admin — annunci disattivati:** venduti/ritirati → `attivo=false` in admin + `"homepage": false` in `visite-virtuali.json` (es. LA0319). **LP0286, LA0317, UFF2247** restano attivi e nel tour se in vendita.
 
-## Lunedì — «3 task agente» (richiamo memoria + email TEST)
+## Martedì — «3 task agente» (richiamo memoria + email TEST)
 
-- **Dati:** `data/lunedi-tre-punti-reminder.json`
-- **Trigger chat:** «cosa dobbiamo fare», «tre punti», «piano lunedì»
-- **Email:** lunedì 07:00 CEST → `info@righettoimmobiliare.it` (subject `[TEST] Piano agente — 3 task lunedì`) — workflow `lunedi-tre-punti-agente.yml`
+- **Dati:** `data/lunedi-tre-punti-reminder.json` (`scheduled_weekday`: martedì)
+- **Trigger chat:** «cosa dobbiamo fare», «tre punti», «piano martedì»
+- **Email:** **martedì 07:00 CEST** → `info@righettoimmobiliare.it` (subject `[TEST] Piano agente — 3 task martedì`) — workflow `martedi-tre-punti-agente.yml`
 - **Manuale:** `python3 scripts/lunedi-tre-punti-email.py` + dispatch workflow su GitHub
+- **Nota:** lunedì agenda piena (10/10/2026) — nessun cron lunedì
 
 ## Search Console — verifica ogni venerdì (+ follow-up lunedì)
 
