@@ -1,0 +1,1662 @@
+{
+  "rule": "Ogni venerdì: sistemare i 10 articoli peggiori non ancora sistemati negli ultimi 90 gg (skill-seo-auto-weekly.md §6.2).",
+  "ranking_date": "2026-10-10",
+  "data_source": "gsc_csv",
+  "ranking": [
+    {
+      "url": "/blog-rendimento-affitto-padova",
+      "file": "blog-rendimento-affitto-padova.html",
+      "tier": "owner_contenuto",
+      "score": 36.5,
+      "parts": {
+        "clic_mancati": 20.9,
+        "testo_alterato": 7.2
+      },
+      "reasons": [
+        "~21 clic/28 gg sotto il benchmark (pos. 6.4, 591 impr./28 gg)",
+        "6 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 2.7,
+        "impressions": 591,
+        "position": 6.44
+      },
+      "artifacts": 6,
+      "cooldown": true,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-contratto-affitto-padova",
+      "file": "blog-contratto-affitto-padova.html",
+      "tier": "owner_contenuto",
+      "score": 35.6,
+      "parts": {
+        "clic_mancati": 16.6,
+        "testo_alterato": 10.8
+      },
+      "reasons": [
+        "~17 clic/28 gg sotto il benchmark (pos. 7.3, 1275 impr./28 gg)",
+        "9 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 21.6,
+        "impressions": 1275,
+        "position": 7.27
+      },
+      "artifacts": 9,
+      "cooldown": true,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-tempi-vendita-casa-padova",
+      "file": "blog-tempi-vendita-casa-padova.html",
+      "tier": "owner_contenuto",
+      "score": 26.8,
+      "parts": {
+        "non_indicizzata": 15.0,
+        "testo_alterato": 5.6
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma non indicizzata",
+        "7 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": null,
+      "artifacts": 7,
+      "cooldown": true,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-affitto-studenti-padova",
+      "file": "blog-affitto-studenti-padova.html",
+      "tier": "acquirente",
+      "score": 18.4,
+      "parts": {
+        "clic_mancati": 13.2,
+        "testo_alterato": 7.2
+      },
+      "reasons": [
+        "~13 clic/28 gg sotto il benchmark (pos. 7.0, 1190 impr./28 gg)",
+        "6 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 22.5,
+        "impressions": 1190,
+        "position": 6.95
+      },
+      "artifacts": 6,
+      "cooldown": true,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-righetto-storia-territorio-acquisizioni-2026",
+      "file": "blog-righetto-storia-territorio-acquisizioni-2026.html",
+      "tier": "contenuto",
+      "score": 12.7,
+      "parts": {
+        "clic_mancati": 7.7,
+        "zero_clic": 5
+      },
+      "reasons": [
+        "~8 clic/28 gg sotto il benchmark (pos. 3.7, 115 impr./28 gg)",
+        "impressioni senza clic"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.3,
+        "impressions": 115,
+        "position": 3.69
+      },
+      "artifacts": 0,
+      "cooldown": true,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-prezzi-case-padova-zona-2026",
+      "file": "blog-prezzi-case-padova-zona-2026.html",
+      "tier": "contenuto",
+      "score": 11.6,
+      "parts": {
+        "clic_mancati": 5.6,
+        "testo_alterato": 6.0
+      },
+      "reasons": [
+        "~6 clic/28 gg sotto il benchmark (pos. 6.0, 156 impr./28 gg)",
+        "5 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.6,
+        "impressions": 156,
+        "position": 6.03
+      },
+      "artifacts": 5,
+      "cooldown": true,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-planimetria-catastale-compravendita-padova-2026",
+      "file": "blog-planimetria-catastale-compravendita-padova-2026.html",
+      "tier": "owner_contenuto",
+      "score": 10.1,
+      "parts": {
+        "testo_alterato": 4.8,
+        "on_page": 3
+      },
+      "reasons": [
+        "6 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": null,
+      "artifacts": 6,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-tassi-mutui-minimi-approfittarne-padova-2026",
+      "file": "blog-tassi-mutui-minimi-approfittarne-padova-2026.html",
+      "tier": "contenuto",
+      "score": 10.1,
+      "parts": {
+        "non_indicizzata": 4.7,
+        "testo_alterato": 2.4,
+        "on_page": 3
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma non indicizzata",
+        "3 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": null,
+      "artifacts": 3,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-comprare-affittare-padova",
+      "file": "blog-comprare-affittare-padova.html",
+      "tier": "acquirente",
+      "score": 9.9,
+      "parts": {
+        "zero_clic": 5,
+        "testo_alterato": 6.0
+      },
+      "reasons": [
+        "impressioni senza clic",
+        "5 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.3,
+        "impressions": 21,
+        "position": 7.71
+      },
+      "artifacts": 5,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-squilibrio-domanda-offerta-affitti-padova",
+      "file": "blog-squilibrio-domanda-offerta-affitti-padova.html",
+      "tier": "contenuto",
+      "score": 9.6,
+      "parts": {
+        "testo_alterato": 9.6
+      },
+      "reasons": [
+        "12 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 1,
+        "position": 2.5
+      },
+      "artifacts": 12,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-compravendite-padova-record-2026",
+      "file": "blog-compravendite-padova-record-2026.html",
+      "tier": "owner_contenuto",
+      "score": 9.4,
+      "parts": {
+        "testo_alterato": 7.2
+      },
+      "reasons": [
+        "9 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.3,
+        "impressions": 13,
+        "position": 6.68
+      },
+      "artifacts": 9,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-dazi-usa-ue-mercato-padova-2026",
+      "file": "blog-dazi-usa-ue-mercato-padova-2026.html",
+      "tier": "contenuto",
+      "score": 9.3,
+      "parts": {
+        "non_indicizzata": 4.7,
+        "testo_alterato": 1.6,
+        "on_page": 3
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma non indicizzata",
+        "2 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 1,
+        "position": 5.5
+      },
+      "artifacts": 2,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-stanza-universitaria-padova-canoni-2026",
+      "file": "blog-stanza-universitaria-padova-canoni-2026.html",
+      "tier": "contenuto",
+      "score": 9.2,
+      "parts": {
+        "zero_clic": 5,
+        "testo_alterato": 1.2,
+        "on_page": 3
+      },
+      "reasons": [
+        "impressioni senza clic",
+        "1 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 23,
+        "position": 6.46
+      },
+      "artifacts": 1,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-limena-vs-padova-centro-dove-comprare-2026",
+      "file": "blog-limena-vs-padova-centro-dove-comprare-2026.html",
+      "tier": "acquirente",
+      "score": 8.8,
+      "parts": {
+        "zero_clic": 5,
+        "testo_alterato": 4.8
+      },
+      "reasons": [
+        "impressioni senza clic",
+        "4 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 22,
+        "position": 6.92
+      },
+      "artifacts": 4,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-quattro-imposte-rogitio-prima-casa-padova-2026",
+      "file": "blog-quattro-imposte-rogitio-prima-casa-padova-2026.html",
+      "tier": "contenuto",
+      "score": 8.5,
+      "parts": {
+        "non_indicizzata": 4.7,
+        "testo_alterato": 0.8,
+        "on_page": 3
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma non indicizzata",
+        "1 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": null,
+      "artifacts": 1,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-documenti-compravendita-rogito-padova-2026",
+      "file": "blog-documenti-compravendita-rogito-padova-2026.html",
+      "tier": "owner_contenuto",
+      "score": 8.1,
+      "parts": {
+        "zero_clic": 5,
+        "testo_alterato": 1.2
+      },
+      "reasons": [
+        "impressioni senza clic",
+        "1 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 33,
+        "position": 14.35
+      },
+      "artifacts": 1,
+      "cooldown": true,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-emergenza-abitativa-padova-2026",
+      "file": "blog-emergenza-abitativa-padova-2026.html",
+      "tier": "contenuto",
+      "score": 8.0,
+      "parts": {
+        "testo_alterato": 8.0
+      },
+      "reasons": [
+        "10 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.3,
+        "impressions": 17,
+        "position": 7.59
+      },
+      "artifacts": 10,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-comprare-casa-padova-guida-2026",
+      "file": "blog-comprare-casa-padova-guida-2026.html",
+      "tier": "acquirente",
+      "score": 7.9,
+      "parts": {
+        "testo_alterato": 8.8
+      },
+      "reasons": [
+        "11 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 11,
+        "position": 8.33
+      },
+      "artifacts": 11,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-bonus-mobili-2026-massimizzare-ristrutturazioni",
+      "file": "blog-bonus-mobili-2026-massimizzare-ristrutturazioni.html",
+      "tier": "contenuto",
+      "score": 7.7,
+      "parts": {
+        "non_indicizzata": 4.7,
+        "on_page": 3
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma non indicizzata",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": null,
+      "artifacts": 0,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": true
+    },
+    {
+      "url": "/blog-mercato-immobiliare-piazzola-sul-brenta-2026",
+      "file": "blog-mercato-immobiliare-piazzola-sul-brenta-2026.html",
+      "tier": "contenuto",
+      "score": 7.0,
+      "parts": {
+        "testo_alterato": 4.0,
+        "on_page": 3
+      },
+      "reasons": [
+        "5 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 1,
+        "position": 6.75
+      },
+      "artifacts": 5,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-barometro-mutui-crif-padova-2026",
+      "file": "blog-barometro-mutui-crif-padova-2026.html",
+      "tier": "contenuto",
+      "score": 7.0,
+      "parts": {
+        "testo_alterato": 4.0,
+        "on_page": 3
+      },
+      "reasons": [
+        "5 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 1,
+        "position": 9.0
+      },
+      "artifacts": 5,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-mutuo-prima-casa-padova",
+      "file": "blog-mutuo-prima-casa-padova.html",
+      "tier": "acquirente",
+      "score": 6.8,
+      "parts": {
+        "non_indicizzata": 7.5
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma non indicizzata"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.3,
+        "impressions": 19,
+        "position": 8.05
+      },
+      "artifacts": 0,
+      "cooldown": true,
+      "already_refreshed": true,
+      "hold": false
+    },
+    {
+      "url": "/blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026",
+      "file": "blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026.html",
+      "tier": "acquirente",
+      "score": 6.8,
+      "parts": {
+        "non_indicizzata": 7.5
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma non indicizzata"
+      ],
+      "gsc_28gg": null,
+      "artifacts": 0,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-vigonza-rubano-comprare-casa-cintura-2026",
+      "file": "blog-vigonza-rubano-comprare-casa-cintura-2026.html",
+      "tier": "acquirente",
+      "score": 6.8,
+      "parts": {
+        "non_indicizzata": 7.5
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma non indicizzata"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 1,
+        "position": 9.5
+      },
+      "artifacts": 0,
+      "cooldown": true,
+      "already_refreshed": true,
+      "hold": false
+    },
+    {
+      "url": "/blog-documenti-vendita-casa",
+      "file": "blog-documenti-vendita-casa.html",
+      "tier": "owner_contenuto",
+      "score": 6.5,
+      "parts": {
+        "zero_clic": 5
+      },
+      "reasons": [
+        "impressioni senza clic"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.3,
+        "impressions": 33,
+        "position": 13.85
+      },
+      "artifacts": 0,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-affitto-breve-padova-2026",
+      "file": "blog-affitto-breve-padova-2026.html",
+      "tier": "owner_contenuto",
+      "score": 6.5,
+      "parts": {
+        "zero_clic": 5
+      },
+      "reasons": [
+        "impressioni senza clic"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.3,
+        "impressions": 20,
+        "position": 6.15
+      },
+      "artifacts": 0,
+      "cooldown": true,
+      "already_refreshed": true,
+      "hold": false
+    },
+    {
+      "url": "/blog-mercato-immobiliare-limena-2026",
+      "file": "blog-mercato-immobiliare-limena-2026.html",
+      "tier": "contenuto",
+      "score": 6.5,
+      "parts": {
+        "clic_mancati": 1.5,
+        "zero_clic": 5
+      },
+      "reasons": [
+        "~1 clic/28 gg sotto il benchmark (pos. 6.4, 37 impr./28 gg)",
+        "impressioni senza clic"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 37,
+        "position": 6.43
+      },
+      "artifacts": 0,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-direttiva-case-green-limena-padova",
+      "file": "blog-direttiva-case-green-limena-padova.html",
+      "tier": "contenuto",
+      "score": 6.3,
+      "parts": {
+        "non_indicizzata": 4.7,
+        "testo_alterato": 1.6
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma non indicizzata",
+        "2 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": null,
+      "artifacts": 2,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-trend-investimenti-immobiliari-summit-2026",
+      "file": "blog-trend-investimenti-immobiliari-summit-2026.html",
+      "tier": "contenuto",
+      "score": 6.3,
+      "parts": {
+        "non_indicizzata": 4.7,
+        "testo_alterato": 1.6
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma non indicizzata",
+        "2 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": null,
+      "artifacts": 2,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-student-rentals-padova-guide-2026",
+      "file": "blog-student-rentals-padova-guide-2026.html",
+      "tier": "contenuto",
+      "score": 6.2,
+      "parts": {
+        "clic_mancati": 1.2,
+        "zero_clic": 5
+      },
+      "reasons": [
+        "~1 clic/28 gg sotto il benchmark (pos. 8.9, 60 impr./28 gg)",
+        "impressioni senza clic"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 60,
+        "position": 8.93
+      },
+      "artifacts": 0,
+      "cooldown": true,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-costi-vendere-casa-padova-2026",
+      "file": "blog-costi-vendere-casa-padova-2026.html",
+      "tier": "owner_contenuto",
+      "score": 6.2,
+      "parts": {
+        "testo_alterato": 4.8
+      },
+      "reasons": [
+        "6 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 2,
+        "position": 7.14
+      },
+      "artifacts": 6,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-bonus-edilizi-2026-incentivi-casa-padova",
+      "file": "blog-bonus-edilizi-2026-incentivi-casa-padova.html",
+      "tier": "contenuto",
+      "score": 6.2,
+      "parts": {
+        "zero_clic": 5,
+        "testo_alterato": 1.2
+      },
+      "reasons": [
+        "impressioni senza clic",
+        "1 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 34,
+        "position": 8.28
+      },
+      "artifacts": 1,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-costi-proprieta-acquisto-possesso-vendita-padova-2026",
+      "file": "blog-costi-proprieta-acquisto-possesso-vendita-padova-2026.html",
+      "tier": "owner_contenuto",
+      "score": 6.0,
+      "parts": {
+        "testo_alterato": 1.6,
+        "on_page": 3
+      },
+      "reasons": [
+        "2 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 3,
+        "position": 4.78
+      },
+      "artifacts": 2,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-ca-marcello-mestre",
+      "file": "blog-ca-marcello-mestre.html",
+      "tier": "contenuto",
+      "score": 5.6,
+      "parts": {
+        "testo_alterato": 5.6
+      },
+      "reasons": [
+        "7 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 10,
+        "position": 5.97
+      },
+      "artifacts": 7,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-bolla-immobiliare-padova-2026",
+      "file": "blog-bolla-immobiliare-padova-2026.html",
+      "tier": "contenuto",
+      "score": 5.6,
+      "parts": {
+        "testo_alterato": 5.6
+      },
+      "reasons": [
+        "7 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 0,
+        "position": 9.0
+      },
+      "artifacts": 7,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-righetto-bilancio-2025-soluzioni-affitto-2026",
+      "file": "blog-righetto-bilancio-2025-soluzioni-affitto-2026.html",
+      "tier": "contenuto",
+      "score": 5.5,
+      "parts": {
+        "non_indicizzata": 4.7,
+        "testo_alterato": 0.8
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma non indicizzata",
+        "1 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": null,
+      "artifacts": 1,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-mutui-tasso-fisso-bancaitalia-padova-2026",
+      "file": "blog-mutui-tasso-fisso-bancaitalia-padova-2026.html",
+      "tier": "contenuto",
+      "score": 5.4,
+      "parts": {
+        "testo_alterato": 2.4,
+        "on_page": 3
+      },
+      "reasons": [
+        "3 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 1,
+        "position": 6.5
+      },
+      "artifacts": 3,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-italy-rental-market-positive-start-january-2026",
+      "file": "blog-italy-rental-market-positive-start-january-2026.html",
+      "tier": "contenuto",
+      "score": 5.0,
+      "parts": {
+        "zero_clic": 5
+      },
+      "reasons": [
+        "impressioni senza clic"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 23,
+        "position": 8.36
+      },
+      "artifacts": 0,
+      "cooldown": true,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-rental-contract-padova-guide-2026",
+      "file": "blog-rental-contract-padova-guide-2026.html",
+      "tier": "contenuto",
+      "score": 5.0,
+      "parts": {
+        "zero_clic": 5
+      },
+      "reasons": [
+        "impressioni senza clic"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 26,
+        "position": 7.86
+      },
+      "artifacts": 0,
+      "cooldown": true,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-padova-housing-market-guide-2026",
+      "file": "blog-padova-housing-market-guide-2026.html",
+      "tier": "contenuto",
+      "score": 5.0,
+      "parts": {
+        "zero_clic": 5
+      },
+      "reasons": [
+        "impressioni senza clic"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 29,
+        "position": 8.77
+      },
+      "artifacts": 0,
+      "cooldown": true,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-mercato-immobiliare-padova-2026",
+      "file": "blog-mercato-immobiliare-padova-2026.html",
+      "tier": "contenuto",
+      "score": 5.0,
+      "parts": {
+        "zero_clic": 5
+      },
+      "reasons": [
+        "impressioni senza clic"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.3,
+        "impressions": 25,
+        "position": 5.74
+      },
+      "artifacts": 0,
+      "cooldown": true,
+      "already_refreshed": true,
+      "hold": false
+    },
+    {
+      "url": "/blog-quartieri-padova-2026",
+      "file": "blog-quartieri-padova-2026.html",
+      "tier": "contenuto",
+      "score": 4.8,
+      "parts": {
+        "testo_alterato": 4.8
+      },
+      "reasons": [
+        "6 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 0,
+        "position": 1.0
+      },
+      "artifacts": 6,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-crisi-immobiliare-padova-2026",
+      "file": "blog-crisi-immobiliare-padova-2026.html",
+      "tier": "contenuto",
+      "score": 4.8,
+      "parts": {
+        "testo_alterato": 4.8
+      },
+      "reasons": [
+        "6 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.6,
+        "impressions": 14,
+        "position": 4.73
+      },
+      "artifacts": 6,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-caparra-confirmatoria-padova",
+      "file": "blog-caparra-confirmatoria-padova.html",
+      "tier": "contenuto",
+      "score": 4.8,
+      "parts": {
+        "testo_alterato": 4.8
+      },
+      "reasons": [
+        "6 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 0,
+        "position": 2.0
+      },
+      "artifacts": 6,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-sondaggio-bancaditalia-q1-2026-padova",
+      "file": "blog-sondaggio-bancaditalia-q1-2026-padova.html",
+      "tier": "contenuto",
+      "score": 4.7,
+      "parts": {
+        "non_indicizzata": 4.7
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma non indicizzata"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 1,
+        "position": 5.0
+      },
+      "artifacts": 0,
+      "cooldown": true,
+      "already_refreshed": true,
+      "hold": false
+    },
+    {
+      "url": "/blog-ultime-acquisizioni-commerciali-padova-giugno-2026",
+      "file": "blog-ultime-acquisizioni-commerciali-padova-giugno-2026.html",
+      "tier": "contenuto",
+      "score": 4.7,
+      "parts": {
+        "non_indicizzata": 4.7
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma non indicizzata"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 0,
+        "position": 5.0
+      },
+      "artifacts": 0,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-scegliere-immobile-giusto-padova-2026",
+      "file": "blog-scegliere-immobile-giusto-padova-2026.html",
+      "tier": "contenuto",
+      "score": 4.6,
+      "parts": {
+        "testo_alterato": 1.6,
+        "on_page": 3
+      },
+      "reasons": [
+        "2 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 0,
+        "position": 3.0
+      },
+      "artifacts": 2,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-mutui-selettivi-banche-padova-2026",
+      "file": "blog-mutui-selettivi-banche-padova-2026.html",
+      "tier": "contenuto",
+      "score": 4.6,
+      "parts": {
+        "testo_alterato": 1.6,
+        "on_page": 3
+      },
+      "reasons": [
+        "2 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": null,
+      "artifacts": 2,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-prospettive-mercato-residenziale-italia-2026",
+      "file": "blog-prospettive-mercato-residenziale-italia-2026.html",
+      "tier": "contenuto",
+      "score": 4.6,
+      "parts": {
+        "testo_alterato": 1.6,
+        "on_page": 3
+      },
+      "reasons": [
+        "2 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": null,
+      "artifacts": 2,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-domanda-case-green-certificazione-padova-2026",
+      "file": "blog-domanda-case-green-certificazione-padova-2026.html",
+      "tier": "contenuto",
+      "score": 4.6,
+      "parts": {
+        "testo_alterato": 1.6,
+        "on_page": 3
+      },
+      "reasons": [
+        "2 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": null,
+      "artifacts": 2,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-mercato-immobiliare-padova-centro-2026",
+      "file": "blog-mercato-immobiliare-padova-centro-2026.html",
+      "tier": "contenuto",
+      "score": 4.0,
+      "parts": {
+        "testo_alterato": 4.0
+      },
+      "reasons": [
+        "5 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": null,
+      "artifacts": 5,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-permuta-immobiliare-padova-2026",
+      "file": "blog-permuta-immobiliare-padova-2026.html",
+      "tier": "contenuto",
+      "score": 3.8,
+      "parts": {
+        "testo_alterato": 0.8,
+        "on_page": 3
+      },
+      "reasons": [
+        "1 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 7,
+        "position": 12.35
+      },
+      "artifacts": 1,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-gestione-spese-casa-risparmio-padova-2026",
+      "file": "blog-gestione-spese-casa-risparmio-padova-2026.html",
+      "tier": "contenuto",
+      "score": 3.8,
+      "parts": {
+        "testo_alterato": 0.8,
+        "on_page": 3
+      },
+      "reasons": [
+        "1 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 1,
+        "position": 6.0
+      },
+      "artifacts": 1,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-checklist-verifiche-prima-compromesso-padova-2026",
+      "file": "blog-checklist-verifiche-prima-compromesso-padova-2026.html",
+      "tier": "contenuto",
+      "score": 3.8,
+      "parts": {
+        "testo_alterato": 0.8,
+        "on_page": 3
+      },
+      "reasons": [
+        "1 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 1,
+        "position": 14.33
+      },
+      "artifacts": 1,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-costi-costruzione-istat-padova-2026",
+      "file": "blog-costi-costruzione-istat-padova-2026.html",
+      "tier": "contenuto",
+      "score": 3.8,
+      "parts": {
+        "testo_alterato": 0.8,
+        "on_page": 3
+      },
+      "reasons": [
+        "1 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 6,
+        "position": 6.6
+      },
+      "artifacts": 1,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-eurocamera-accordo-dazi-usa-2026",
+      "file": "blog-eurocamera-accordo-dazi-usa-2026.html",
+      "tier": "contenuto",
+      "score": 3.8,
+      "parts": {
+        "testo_alterato": 0.8,
+        "on_page": 3
+      },
+      "reasons": [
+        "1 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": null,
+      "artifacts": 1,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-patrimonio-casa-resilienza-mercati-globali-2026",
+      "file": "blog-patrimonio-casa-resilienza-mercati-globali-2026.html",
+      "tier": "contenuto",
+      "score": 3.8,
+      "parts": {
+        "testo_alterato": 0.8,
+        "on_page": 3
+      },
+      "reasons": [
+        "1 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 0,
+        "position": 10.0
+      },
+      "artifacts": 1,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-mercato-italiano-tensioni-medio-oriente-2026",
+      "file": "blog-mercato-italiano-tensioni-medio-oriente-2026.html",
+      "tier": "contenuto",
+      "score": 3.8,
+      "parts": {
+        "testo_alterato": 0.8,
+        "on_page": 3
+      },
+      "reasons": [
+        "1 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 0,
+        "position": 1.0
+      },
+      "artifacts": 1,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-mutuo-fisso-variabile-padova-2026",
+      "file": "blog-mutuo-fisso-variabile-padova-2026.html",
+      "tier": "acquirente",
+      "score": 3.6,
+      "parts": {
+        "testo_alterato": 4.0
+      },
+      "reasons": [
+        "5 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 0,
+        "position": 2.0
+      },
+      "artifacts": 5,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-ape-prestazione-energetica-acquisto-padova-2026",
+      "file": "blog-ape-prestazione-energetica-acquisto-padova-2026.html",
+      "tier": "acquirente",
+      "score": 3.4,
+      "parts": {
+        "testo_alterato": 0.8,
+        "on_page": 3
+      },
+      "reasons": [
+        "1 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.3,
+        "impressions": 3,
+        "position": 10.09
+      },
+      "artifacts": 1,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    }
+  ],
+  "next_batch": [
+    {
+      "url": "/blog-planimetria-catastale-compravendita-padova-2026",
+      "file": "blog-planimetria-catastale-compravendita-padova-2026.html",
+      "tier": "owner_contenuto",
+      "score": 10.1,
+      "parts": {
+        "testo_alterato": 4.8,
+        "on_page": 3
+      },
+      "reasons": [
+        "6 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": null,
+      "artifacts": 6,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-tassi-mutui-minimi-approfittarne-padova-2026",
+      "file": "blog-tassi-mutui-minimi-approfittarne-padova-2026.html",
+      "tier": "contenuto",
+      "score": 10.1,
+      "parts": {
+        "non_indicizzata": 4.7,
+        "testo_alterato": 2.4,
+        "on_page": 3
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma non indicizzata",
+        "3 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": null,
+      "artifacts": 3,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-comprare-affittare-padova",
+      "file": "blog-comprare-affittare-padova.html",
+      "tier": "acquirente",
+      "score": 9.9,
+      "parts": {
+        "zero_clic": 5,
+        "testo_alterato": 6.0
+      },
+      "reasons": [
+        "impressioni senza clic",
+        "5 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.3,
+        "impressions": 21,
+        "position": 7.71
+      },
+      "artifacts": 5,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-squilibrio-domanda-offerta-affitti-padova",
+      "file": "blog-squilibrio-domanda-offerta-affitti-padova.html",
+      "tier": "contenuto",
+      "score": 9.6,
+      "parts": {
+        "testo_alterato": 9.6
+      },
+      "reasons": [
+        "12 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 1,
+        "position": 2.5
+      },
+      "artifacts": 12,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-compravendite-padova-record-2026",
+      "file": "blog-compravendite-padova-record-2026.html",
+      "tier": "owner_contenuto",
+      "score": 9.4,
+      "parts": {
+        "testo_alterato": 7.2
+      },
+      "reasons": [
+        "9 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.3,
+        "impressions": 13,
+        "position": 6.68
+      },
+      "artifacts": 9,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-dazi-usa-ue-mercato-padova-2026",
+      "file": "blog-dazi-usa-ue-mercato-padova-2026.html",
+      "tier": "contenuto",
+      "score": 9.3,
+      "parts": {
+        "non_indicizzata": 4.7,
+        "testo_alterato": 1.6,
+        "on_page": 3
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma non indicizzata",
+        "2 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 1,
+        "position": 5.5
+      },
+      "artifacts": 2,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-stanza-universitaria-padova-canoni-2026",
+      "file": "blog-stanza-universitaria-padova-canoni-2026.html",
+      "tier": "contenuto",
+      "score": 9.2,
+      "parts": {
+        "zero_clic": 5,
+        "testo_alterato": 1.2,
+        "on_page": 3
+      },
+      "reasons": [
+        "impressioni senza clic",
+        "1 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 23,
+        "position": 6.46
+      },
+      "artifacts": 1,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-limena-vs-padova-centro-dove-comprare-2026",
+      "file": "blog-limena-vs-padova-centro-dove-comprare-2026.html",
+      "tier": "acquirente",
+      "score": 8.8,
+      "parts": {
+        "zero_clic": 5,
+        "testo_alterato": 4.8
+      },
+      "reasons": [
+        "impressioni senza clic",
+        "4 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.0,
+        "impressions": 22,
+        "position": 6.92
+      },
+      "artifacts": 4,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-quattro-imposte-rogitio-prima-casa-padova-2026",
+      "file": "blog-quattro-imposte-rogitio-prima-casa-padova-2026.html",
+      "tier": "contenuto",
+      "score": 8.5,
+      "parts": {
+        "non_indicizzata": 4.7,
+        "testo_alterato": 0.8,
+        "on_page": 3
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma non indicizzata",
+        "1 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)",
+        "on-page: title_troncato"
+      ],
+      "gsc_28gg": null,
+      "artifacts": 1,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    },
+    {
+      "url": "/blog-emergenza-abitativa-padova-2026",
+      "file": "blog-emergenza-abitativa-padova-2026.html",
+      "tier": "contenuto",
+      "score": 8.0,
+      "parts": {
+        "testo_alterato": 8.0
+      },
+      "reasons": [
+        "10 frasi alterate da sostituzioni automatiche (es. «capoluogo euganeo»)"
+      ],
+      "gsc_28gg": {
+        "clicks": 0.3,
+        "impressions": 17,
+        "position": 7.59
+      },
+      "artifacts": 10,
+      "cooldown": false,
+      "already_refreshed": false,
+      "hold": false
+    }
+  ],
+  "batches": [
+    {
+      "batch": 1,
+      "date": "2026-10-10",
+      "articles": [
+        {
+          "url": "/blog-affitto-breve-padova-2026",
+          "score_before": 26.8,
+          "parts_before": {
+            "zero_clic": 5,
+            "testo_alterato": 15.6
+          },
+          "gsc_28gg_before": {
+            "clicks": 0.3,
+            "impressions": 20,
+            "position": 6.15
+          },
+          "published": true
+        },
+        {
+          "url": "/blog-affitti-padova-canoni-2026",
+          "score_before": 20.0,
+          "parts_before": {
+            "clic_mancati": 1.0,
+            "testo_alterato": 14.4
+          },
+          "gsc_28gg_before": {
+            "clicks": 0.9,
+            "impressions": 49,
+            "position": 6.11
+          },
+          "published": true
+        },
+        {
+          "url": "/blog-mercato-immobiliare-padova-2026",
+          "score_before": 14.6,
+          "parts_before": {
+            "zero_clic": 5,
+            "testo_alterato": 9.6
+          },
+          "gsc_28gg_before": {
+            "clicks": 0.3,
+            "impressions": 25,
+            "position": 5.74
+          },
+          "published": true
+        },
+        {
+          "url": "/blog-vendita-immobiliare-padova-strategie-2026",
+          "score_before": 14.6,
+          "parts_before": {
+            "testo_alterato": 11.2
+          },
+          "gsc_28gg_before": {
+            "clicks": 0.0,
+            "impressions": 5,
+            "position": 4.56
+          },
+          "published": true
+        },
+        {
+          "url": "/blog-mutuo-prima-casa-padova",
+          "score_before": 12.5,
+          "parts_before": {
+            "non_indicizzata": 7.5,
+            "testo_alterato": 6.4
+          },
+          "gsc_28gg_before": {
+            "clicks": 0.3,
+            "impressions": 19,
+            "position": 8.05
+          },
+          "published": true
+        },
+        {
+          "url": "/blog-vigonza-rubano-comprare-casa-cintura-2026",
+          "score_before": 12.3,
+          "parts_before": {
+            "non_indicizzata": 7.5,
+            "testo_alterato": 3.2,
+            "on_page": 3
+          },
+          "gsc_28gg_before": {
+            "clicks": 0.0,
+            "impressions": 1,
+            "position": 9.5
+          },
+          "published": true
+        },
+        {
+          "url": "/blog-sondaggio-bancaditalia-q1-2026-padova",
+          "score_before": 11.7,
+          "parts_before": {
+            "non_indicizzata": 4.7,
+            "testo_alterato": 4.0,
+            "on_page": 3
+          },
+          "gsc_28gg_before": {
+            "clicks": 0.0,
+            "impressions": 1,
+            "position": 5.0
+          },
+          "published": true
+        },
+        {
+          "url": "/blog-case-vendita-padova",
+          "score_before": 11.4,
+          "parts_before": {
+            "testo_alterato": 8.8
+          },
+          "gsc_28gg_before": {
+            "clicks": 0.0,
+            "impressions": 9,
+            "position": 6.63
+          },
+          "published": true
+        },
+        {
+          "url": "/blog-mutui-casa-padova-2026",
+          "score_before": 11.2,
+          "parts_before": {
+            "testo_alterato": 11.2
+          },
+          "gsc_28gg_before": {
+            "clicks": 0.0,
+            "impressions": 9,
+            "position": 6.72
+          },
+          "published": true
+        },
+        {
+          "url": "/blog-investire-immobiliare-padova",
+          "score_before": 10.8,
+          "parts_before": {
+            "testo_alterato": 10.8
+          },
+          "gsc_28gg_before": {
+            "clicks": 3.0,
+            "impressions": 98,
+            "position": 6.31
+          },
+          "published": true
+        }
+      ],
+      "note": "Batch 1 (10/10/2026): frasi alterate corrette, title/meta su 8, dateModified"
+    }
+  ]
+}

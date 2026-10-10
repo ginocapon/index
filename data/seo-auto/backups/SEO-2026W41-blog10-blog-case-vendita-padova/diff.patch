@@ -1,0 +1,138 @@
+--- a/blog-case-vendita-padova.html
++++ b/blog-case-vendita-padova.html
+@@ -10,7 +10,7 @@
+   <link rel="canonical" href="https://righettoimmobiliare.it/blog-case-vendita-padova">
+   <meta property="og:type" content="article">
+   <meta property="og:title" content="Case in Vendita Padova 2026: Prezzi, Zone e Guida Esperta">
+-  <meta property="og:description" content="Immobili sul mercato nel Padovano e provincia nel 2026: prezzi aggiornati al mq zona per zona, quartieri migliori e consigli d'acquisto. Guida di Righetto…">
++  <meta property="og:description" content="Case in vendita a Padova e provincia nel 2026: prezzi al mq zona per zona, quartieri e consigli per chi compra. E se vendi, valutazione gratuita.">
+   <meta property="og:url" content="https://righettoimmobiliare.it/blog-case-vendita-padova">
+   <meta property="og:image" content="https://righettoimmobiliare.it/img/foto-servizi/vendita-immobili-padova.webp">
+   <meta property="og:site_name" content="Righetto Immobiliare">
+@@ -25,9 +25,9 @@
+   <meta property="article:tag" content="prezzi case Padova">
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:title" content="Case in Vendita Padova 2026: Prezzi, Zone e Guida Esperta">
+-  <meta name="twitter:description" content="Immobili sul mercato nel Padovano e provincia nel 2026: prezzi aggiornati al mq zona per zona, quartieri migliori e consigli d'acquisto. Guida di Righetto…">
++  <meta name="twitter:description" content="Case in vendita a Padova e provincia nel 2026: prezzi al mq zona per zona, quartieri e consigli per chi compra. E se vendi, valutazione gratuita.">
+   <meta name="twitter:image" content="https://righettoimmobiliare.it/img/foto-servizi/vendita-immobili-padova.webp">
+-  <meta name="description" content="Case in vendita nel Padovano e provincia 2026: prezzi aggiornati al mq zona per zona, quartieri migliori e consigli d'acquisto. Righetto Immobiliare.">
++  <meta name="description" content="Case in vendita a Padova e provincia nel 2026: prezzi al mq zona per zona, quartieri e consigli per chi compra. E se vendi, valutazione gratuita.">
+   <link rel="stylesheet" href="css/fonts.css?v=3">
+   <link rel="stylesheet" href="css/nav-mobile.css?v=7">
+   <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
+@@ -66,7 +66,7 @@
+       }
+     },
+     "datePublished": "2026-03-01",
+-    "dateModified": "2026-03-01",
++    "dateModified": "2026-10-10",
+     "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "https://righettoimmobiliare.it/blog-case-vendita-padova"
+@@ -81,7 +81,7 @@
+   <!-- JSON-LD FAQPage -->
+   <script type="application/ld+json">
+   {
+-    "dateModified": "2026-07-03",
++    "dateModified": "2026-10-10",
+     "@context": "https://schema.org",
+     "@type": "FAQPage",
+     "mainEntity": [
+@@ -148,7 +148,7 @@
+   <!-- JSON-LD BreadcrumbList -->
+   <script type="application/ld+json">
+   {
+-    "dateModified": "2026-07-03",
++    "dateModified": "2026-10-10",
+     "@context": "https://schema.org",
+     "@type": "BreadcrumbList",
+     "itemListElement": [
+@@ -162,7 +162,7 @@
+   <!-- JSON-LD RealEstateAgent -->
+   <script type="application/ld+json">
+   {
+-    "dateModified": "2026-07-03",
++    "dateModified": "2026-10-10",
+     "@context": "https://schema.org",
+     "@type": "RealEstateAgent",
+     "name": "Gruppo Immobiliare Righetto di Capon Gino",
+@@ -406,7 +406,7 @@
+     <!-- INTRODUZIONE SNIPPET-READY: risposta diretta nelle prime 40-60 parole -->
+     <p><strong>Le case in vendita nel Padovano nel 2026</strong> hanno un prezzo medio compreso tra <strong>1.800 e 2.600 &euro;/mq</strong> in citta' e tra <strong>1.200 e 1.900 &euro;/mq</strong> in provincia. Il mercato immobiliare padovano e' in crescita costante: i valori sono saliti del 3-5% rispetto al 2025, con tempi di vendita medi di 3-4 mesi per immobili al giusto prezzo.</p>
+ 
+-    <p>In questa guida, basata sul <strong>nostro approccio orientato ai risultati</strong> nel territorio padovano, analizziamo prezzi aggiornati zona per zona, i quartieri piu' richiesti, le tipologie disponibili e i consigli pratici per chi vuole acquistare un immobile nel capoluogo euganeo e provincia nel 2026.</p>
++    <p>In questa guida, basata sul <strong>nostro approccio orientato ai risultati</strong> nel territorio padovano, analizziamo prezzi aggiornati zona per zona, i quartieri piu' richiesti, le tipologie disponibili e i consigli pratici per chi vuole acquistare un immobile in città e provincia nel 2026.</p>
+ 
+     <!-- SOMMARIO CLICCABILE (SXO) -->
+     <div class="toc">
+@@ -474,7 +474,7 @@
+     <!-- H2 #2 — PREZZI -->
+     <h2 id="prezzi-zona">Quanto costa un immobile nel Padovano? Prezzi al mq aggiornati al 2026</h2>
+ 
+-    <p>I prezzi delle proprieta' disponibili all'acquisto nel territorio patavino nel 2026 variano significativamente in base alla zona, allo stato dell'immobile e alla classe energetica. La tabella seguente riporta i <strong>valori medi al metro quadro</strong> per le principali aree, basati sui dati OMI dell'Agenzia delle Entrate e sulle transazioni effettive da noi gestite.</p>
++    <p>I prezzi delle proprieta' disponibili all'acquisto nel Padovano nel 2026 variano significativamente in base alla zona, allo stato dell'immobile e alla classe energetica. La tabella seguente riporta i <strong>valori medi al metro quadro</strong> per le principali aree, basati sui dati OMI dell'Agenzia delle Entrate e sulle transazioni effettive da noi gestite.</p>
+ 
+     <table>
+       <thead>
+@@ -495,14 +495,14 @@
+       </tbody>
+     </table>
+ 
+-    <p><em>Fonte: elaborazioni il team su dati OMI Agenzia delle Entrate, aggiornamento I semestre 2026. I valori si riferiscono a immobili in stato normale/buono. Immobili da ristrutturare: -20/30%. Nuove costruzioni classe A: +15/25%.</em></p>
++    <p><em>Fonte: elaborazioni Righetto Immobiliare su dati OMI Agenzia delle Entrate, aggiornamento I semestre 2026. I valori si riferiscono a immobili in stato normale/buono. Immobili da ristrutturare: -20/30%. Nuove costruzioni classe A: +15/25%.</em></p>
+ 
+     <!-- H2 #3 — ZONE MIGLIORI -->
+     <h2 id="zone-migliori">Dove trovare la proprieta' ideale? Le zone migliori del Padovano</h2>
+ 
+-    <p>Le zone migliori per acquistare un immobile nel capoluogo euganeo dipendono dalle esigenze dell'acquirente: <strong>budget, stile di vita, vicinanza al lavoro e prospettive di rivalutazione</strong>. Ecco le aree che nel 2026 offrono il miglior equilibrio tra qualita' della vita e valore dell'investimento.</p>
+-
+-    <h3>Centro storico: il cuore del capoluogo euganeo</h3>
++    <p>Le zone migliori per acquistare un immobile in città dipendono dalle esigenze dell'acquirente: <strong>budget, stile di vita, vicinanza al lavoro e prospettive di rivalutazione</strong>. Ecco le aree che nel 2026 offrono il miglior equilibrio tra qualita' della vita e valore dell'investimento.</p>
++
++    <h3>Centro storico: il cuore della città</h3>
+     <p>Il centro storico &mdash; da <strong>Piazza delle Erbe</strong> a <strong>Prato della Valle</strong>, passando per il Portello e le Riviere &mdash; resta la zona a maggiore domanda. Le proprieta' qui si rivalutano costantemente grazie alla posizione unica, alla vicinanza all'universita' e alla qualita' architettonica. Ideale per <strong>investimento a reddito</strong> (locazione studentesca) e per chi cerca il fascino della citta' storica.</p>
+ 
+     <h3>Arcella &ndash; San Carlo: il quartiere in trasformazione</h3>
+@@ -512,7 +512,7 @@
+     <p>Quartiere residenziale tranquillo, con <strong>scuole, parchi e servizi a portata di mano</strong>. Le villette e gli appartamenti con giardino sono i piu' richiesti. Ottimo rapporto qualita'-prezzo per famiglie con bambini che cercano spazio senza allontanarsi troppo dal nucleo urbano.</p>
+ 
+     <h3>Prima cintura: Limena, Vigonza, Selvazzano</h3>
+-    <p>I comuni della <strong>prima cintura urbana</strong> offrono il miglior rapporto qualita'-prezzo del territorio patavino. A <strong>Limena</strong>, dove ha sede la nostra agenzia, un appartamento di 90 mq in buone condizioni si trova a <strong>135.000-170.000 &euro;</strong>. A <strong>Vigonza</strong> e <strong>Selvazzano Dentro</strong> i prezzi sono simili, con il vantaggio di collegamenti rapidi verso il capoluogo (10-15 minuti in auto, bus frequenti).</p>
++    <p>I comuni della <strong>prima cintura urbana</strong> offrono il miglior rapporto qualita'-prezzo del Padovano. A <strong>Limena</strong>, dove ha sede la nostra agenzia, un appartamento di 90 mq in buone condizioni si trova a <strong>135.000-170.000 &euro;</strong>. A <strong>Vigonza</strong> e <strong>Selvazzano Dentro</strong> i prezzi sono simili, con il vantaggio di collegamenti rapidi verso il capoluogo (10-15 minuti in auto, bus frequenti).</p>
+ 
+     <!-- GALLERY — immagini servizi -->
+     <div class="gallery">
+@@ -569,7 +569,7 @@
+     <figure>
+       <picture>
+         <source srcset="img/foto-servizi/gestione-preliminari-padova.webp" type="image/webp">
+-        <img src="img/foto-servizi/gestione-preliminari-padova.webp" alt="Gestione preliminare di compravendita immobiliare nel territorio patavino" loading="lazy" width="1536" height="1024">
++        <img src="img/foto-servizi/gestione-preliminari-padova.webp" alt="Gestione preliminare di compravendita immobiliare nel Padovano" loading="lazy" width="1536" height="1024">
+       </picture>
+       <figcaption>La firma del preliminare di compravendita: un passaggio fondamentale che seguiamo con cura per ogni cliente</figcaption>
+     </figure>
+@@ -635,12 +635,12 @@
+ 
+     <div class="faq-item">
+       <div class="faq-q">Quali sono le zone migliori per acquistare un immobile nel Padovano?</div>
+-      <div class="faq-a"><div class="faq-a-inner">Le zone migliori per investire nel mattone nel 2026 sono: il centro storico (investimento sicuro, alta domanda locativa), Arcella-San Carlo (prezzi accessibili con servizi completi e potenziale di rivalutazione), Forcellini-Terranegra (zona residenziale ideale per famiglie), e la prima cintura (Limena, Vigonza, Selvazzano) per il miglior rapporto qualita'-prezzo del territorio patavino.</div></div>
++      <div class="faq-a"><div class="faq-a-inner">Le zone migliori per investire nel mattone nel 2026 sono: il centro storico (investimento sicuro, alta domanda locativa), Arcella-San Carlo (prezzi accessibili con servizi completi e potenziale di rivalutazione), Forcellini-Terranegra (zona residenziale ideale per famiglie), e la prima cintura (Limena, Vigonza, Selvazzano) per il miglior rapporto qualita'-prezzo del Padovano.</div></div>
+     </div>
+ 
+     <div class="faq-item">
+       <div class="faq-q">Conviene acquistare un immobile nel territorio nel 2026?</div>
+-      <div class="faq-a"><div class="faq-a-inner">Si', investire nel mattone nel capoluogo euganeo nel 2026 e' una scelta solida. I prezzi sono cresciuti del 3-5% rispetto al 2025, la domanda resta alta grazie all'universita' (60.000 studenti) e al tessuto economico forte. I tassi dei mutui si sono stabilizzati sotto il 3,5%, rendendo l'acquisto piu' accessibile rispetto al 2023-2024. Il tempo medio di compravendita di 3-4 mesi conferma un mercato sano e dinamico.</div></div>
++      <div class="faq-a"><div class="faq-a-inner">Si', investire nel mattone in città nel 2026 e' una scelta solida. I prezzi sono cresciuti del 3-5% rispetto al 2025, la domanda resta alta grazie all'universita' (60.000 studenti) e al tessuto economico forte. I tassi dei mutui si sono stabilizzati sotto il 3,5%, rendendo l'acquisto piu' accessibile rispetto al 2023-2024. Il tempo medio di compravendita di 3-4 mesi conferma un mercato sano e dinamico.</div></div>
+     </div>
+ 
+     <div class="faq-item">
+@@ -649,7 +649,7 @@
+     </div>
+ 
+     <div class="faq-item">
+-      <div class="faq-q">Quanto tempo ci vuole per vendere un immobile nel territorio patavino?</div>
++      <div class="faq-q">Quanto tempo ci vuole per vendere un immobile nel Padovano?</div>
+       <div class="faq-a"><div class="faq-a-inner">Nel 2026 il tempo medio di vendita di un'abitazione nel Padovano e' di 3-4 mesi per proprieta' al giusto prezzo di mercato. Nel centro storico e nei quartieri piu' richiesti i tempi possono scendere a 45-60 giorni. In provincia la media sale a 4-6 mesi. Immobili sovraprezzati o con problematiche urbanistiche possono restare invenduti oltre 12 mesi. La corretta valutazione iniziale e' il fattore piu' importante per concludere la compravendita in tempi brevi.</div></div>
+     </div>
+ 

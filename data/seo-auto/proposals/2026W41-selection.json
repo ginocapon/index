@@ -305,20 +305,20 @@
       ]
     },
     {
+      "url": "/blog-contratto-affitto-padova",
+      "score": 83.7,
+      "reasons": [
+        "CTR 1.7% vs atteso ~3% a pos. 7.3 (benchmark stima) su 4188 impr.: ~54 clic mancati",
+        "posizione media 7.3: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-10 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
       "url": "/servizio-vendita",
       "score": 80.8,
       "reasons": [
         "CTR 0.6% vs atteso ~10% a pos. 3.2 (benchmark stima) su 535 impr.: ~51 clic mancati",
         "cooldown: ultimo refresh 2026-09-22 senza 28 gg di dati GSC successivi"
-      ]
-    },
-    {
-      "url": "/blog-contratto-affitto-padova",
-      "score": 64.4,
-      "reasons": [
-        "CTR 1.7% vs atteso ~3% a pos. 7.3 (benchmark stima) su 4188 impr.: ~54 clic mancati",
-        "posizione media 7.3: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-10 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -366,6 +366,15 @@
       ]
     },
     {
+      "url": "/blog-affitti-padova-canoni-2026",
+      "score": 17.4,
+      "reasons": [
+        "CTR 1.9% vs atteso ~4% a pos. 6.1 (benchmark stima) su 160 impr.: ~3 clic mancati",
+        "posizione media 6.1: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-10 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
       "url": "/proprietario-immobile",
       "score": 16.0,
       "reasons": [
@@ -400,6 +409,14 @@
       ]
     },
     {
+      "url": "/blog-case-vendita-padova",
+      "score": 13.0,
+      "reasons": [
+        "posizione media 6.6: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-10 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
       "url": "/blog-affitti-studenti-settembre-padova-proprietario-2026",
       "score": 13.0,
       "reasons": [
@@ -409,10 +426,18 @@
     },
     {
       "url": "/blog-canone-concordato-padova-guida-2026",
-      "score": 10.0,
+      "score": 13.0,
       "reasons": [
         "posizione media 7.4: margine verso top 3",
         "cooldown: ultimo refresh 2026-08-29 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/blog-affitto-breve-padova-2026",
+      "score": 13.0,
+      "reasons": [
+        "posizione media 6.2: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-10 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -438,35 +463,15 @@
         "posizione media 8.4: margine verso top 3",
         "cooldown: ultimo refresh 2026-07-28 senza 28 gg di dati GSC successivi"
       ]
-    },
-    {
-      "url": "/blog-outlook-living-italia-2026-padova",
-      "score": 10.0,
-      "reasons": [
-        "posizione media 8.9: margine verso top 3",
-        "cooldown: ultimo refresh 2026-07-28 senza 28 gg di dati GSC successivi"
-      ]
-    },
-    {
-      "url": "/blog-rental-contract-padova-guide-2026",
-      "score": 10.0,
-      "reasons": [
-        "posizione media 7.9: margine verso top 3",
-        "cooldown: ultimo refresh 2026-07-28 senza 28 gg di dati GSC successivi"
-      ]
-    },
-    {
-      "url": "/blog-padova-housing-market-guide-2026",
-      "score": 10.0,
-      "reasons": [
-        "posizione media 8.8: margine verso top 3",
-        "cooldown: ultimo refresh 2026-07-28 senza 28 gg di dati GSC successivi"
-      ]
     }
   ],
   "below_threshold": [
     {
       "url": "/blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026",
+      "score": 7.2
+    },
+    {
+      "url": "/blog-vigonza-rubano-comprare-casa-cintura-2026",
       "score": 7.2
     },
     {
@@ -510,19 +515,15 @@
       "score": 5.0
     },
     {
+      "url": "/blog-sondaggio-bancaditalia-q1-2026-padova",
+      "score": 5.0
+    },
+    {
       "url": "/blog-costi-costruzione-istat-padova-2026",
       "score": 5.0
     },
     {
       "url": "/blog-barometro-mutui-crif-padova-2026",
-      "score": 5.0
-    },
-    {
-      "url": "/blog-eurocamera-accordo-dazi-usa-2026",
-      "score": 5.0
-    },
-    {
-      "url": "/blog-trend-investimenti-immobiliari-summit-2026",
       "score": 5.0
     }
   ]
