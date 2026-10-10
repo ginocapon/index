@@ -32,7 +32,7 @@ node scripts/simulate_ga4_consent.cjs
 
 Report snapshot: `data/geo-ai-audit-latest.json`, `data/ga-consent-verify-latest.json`
 
-Patch batch se WARN: `patch_compliance_warns.py`, `patch_audit_warns.py`, `patch_cdn_local.py`
+Patch batch se WARN: `patch_compliance_warns.py`, `patch_audit_warns.py`, `patch_cdn_local.py` — `patch_compliance_warns.py` **non** corregge più title/meta/stuffing: li elenca e vanno riscritti a mano (mai sinonimi a rotazione, mai «…»)
 
 ## Gate on-page (ogni pagina toccata)
 

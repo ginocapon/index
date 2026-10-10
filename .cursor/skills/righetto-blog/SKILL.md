@@ -60,6 +60,7 @@ description: >-
 - [ ] **Anti-filler:** nessun muro di `<p>` consecutivi; ENEA/fisco in **una** sezione + checklist `ul` o FAQ — non 50+ righe duplicate
 - [ ] Distinzione fatto / dichiarazione / analisi / previsione nel testo
 - [ ] Valore aggiunto Padova/Veneto — non copia concorrenti
+- [ ] **Niente sinonimi automatici:** vietato sostituire in massa «Padova», «agenzia immobiliare», «Righetto Immobiliare» con «capoluogo euganeo», «territorio patavino», «lo studio», «il team» per la densità keyword; prima di pubblicare `python3 scripts/seo_auto/fix_text_artifacts.py <file> --preview` deve restituire 0 correzioni. Refresh a rotazione dei 10 peggiori: `skill-seo-auto-weekly.md` §6.2
 - [ ] **Anti-plagio (obbligatorio):** URL o PDF di terzi (blog fiscali, edilizia, news) sono solo **spunto tema** — **vietato** copiare di sana pianta titoli, paragrafi, tabelle o FAQ; rielaborare testo **originale** Righetto con fonti **primarie** (GU, ADE, MEF, ISTAT, OMI). Inserire nota editoriale se il tema deriva da cronaca di settore.
 - [ ] FOTO AI: `build-ai-image-manifest.mjs` + `audit-foto-ai.mjs` OK
 - [ ] FAQ schema da `faq_candidates` — risposta immediata + condizioni (§16-QUINQUIES)
