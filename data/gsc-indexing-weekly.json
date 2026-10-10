@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-28",
+  "updated": "2026-10-10",
   "source": "GSC manuale + probe live post-deploy — aggiornare ogni venerdì",
-  "note": "28/09 utente: 10 richieste indicizzazione forzate GSC (batch sett. post-deploy gestione/locazioni/studenti). Follow-up stato URL tra 7-14 gg. Sitemap OK. Probe storico 569 URL 0 issue.",
+  "note": "10/10 export Copertura→Valide (dati al 04/10): 196 righe indicizzate, 183/205 URL della sitemap (89%); trend 106 (24/07) → 196 (04/10); batch 28/09: 10/10 indicizzate. not_indexed e by_reason restano del 24/07 (l'export Valide non li aggiorna). Motore: data/seo-auto/coverage-latest.json. — 28/09 utente: 10 richieste indicizzazione forzate GSC (batch sett. post-deploy gestione/locazioni/studenti). Follow-up stato URL tra 7-14 gg. Sitemap OK. Probe storico 569 URL 0 issue.",
   "sitemap_urls": 203,
   "sitemap_main": {
     "url": "https://righettoimmobiliare.it/sitemap.xml",
@@ -20,9 +20,10 @@
     "https://righettoimmobiliare.it/blog-scegliere-agenzia-immobiliare-padova-2026",
     "https://righettoimmobiliare.it/blog-limena-vs-padova-centro-dove-comprare-2026"
   ],
-  "indexed": 94,
+  "indexed": 196,
+  "indexed_sitemap": "183/205",
   "not_indexed": 330,
-  "indexed_snapshot_date": "2026-07-24",
+  "indexed_snapshot_date": "2026-10-04",
   "by_reason": {
     "redirect": 90,
     "crawled_not_indexed": 89,
@@ -50,6 +51,12 @@
     "prestazioni_affitti_limena": true
   },
   "inspection_log": [
+    {
+      "date": "2026-10-10",
+      "checked_by": "export Copertura → Valide (dati al 04/10)",
+      "batch": "esito-batch-09-28",
+      "results": [{"url": "batch 28/09 (10 URL) + servizio-vendita", "status": "tutte_indicizzate", "action": "nessuna"}]
+    },
     {
       "date": "2026-09-28",
       "checked_by": "utente GSC",
@@ -185,17 +192,21 @@
     }
   },
   "next_friday_batch": {
-    "date": "2026-10-03",
-    "label": "batch-10-03-follow-up-28-09 + tier B servizi",
+    "date": "2026-10-16",
+    "label": "batch-10-16 non indicizzate in sitemap (pillar, owner, zone cintura)",
     "max_urls_per_session": 10,
     "urls": [
-      "https://righettoimmobiliare.it/agenzia-immobiliare-padova",
-      "https://righettoimmobiliare.it/zona-universitaria-padova",
-      "https://righettoimmobiliare.it/servizio-valutazioni",
-      "https://righettoimmobiliare.it/servizio-preliminari",
-      "https://righettoimmobiliare.it/servizio-virtual-tour",
-      "https://righettoimmobiliare.it/landing-consulenza-immobiliare-gratuita"
+      "https://righettoimmobiliare.it/chi-siamo",
+      "https://righettoimmobiliare.it/contatti",
+      "https://righettoimmobiliare.it/blog-tempi-vendita-casa-padova",
+      "https://righettoimmobiliare.it/zona-vigonza",
+      "https://righettoimmobiliare.it/zona-rubano",
+      "https://righettoimmobiliare.it/zona-selvazzano",
+      "https://righettoimmobiliare.it/zona-ponte-san-nicolo",
+      "https://righettoimmobiliare.it/blog-casa-non-si-vende-padova-strategia-2026",
+      "https://righettoimmobiliare.it/blog-registrazione-locazione-fumetto-proprietari-padova-2026",
+      "https://righettoimmobiliare.it/blog-mutuo-prima-casa-padova"
     ],
-    "instructions": "28/09: batch 10 URL inviato da utente — venerdì 03/10: 1) Ispezione follow-up sulle 10 (su Google sì/no). 2) Se quota GSC, tier B servizi sopra. 3) Aggiornare indexed/not_indexed da report Indicizzazione GSC se disponibile."
+    "instructions": "Ispezione URL → annotare il motivo (es. «Scansionata ma non indicizzata», canonical scelto da Google) → Richiedi indicizzazione. Per chi-siamo e contatti riportare il motivo in chat. Batch 03/10 (servizi tier B) risulta già indicizzato nell'export 10/10."
   }
 }

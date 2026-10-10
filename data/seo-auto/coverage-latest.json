@@ -1,0 +1,490 @@
+{
+  "source_file": "righettoimmobiliare.it-Coverage-Valid-2026-10-10.zip",
+  "export_date": "2026-10-10",
+  "data_end_date": "2026-10-04",
+  "indexed_paths": 184,
+  "variants_in_export": {
+    "www": 20,
+    "html": 3
+  },
+  "trend": [
+    {
+      "date": "2026-07-24",
+      "indexed": 106
+    },
+    {
+      "date": "2026-07-25",
+      "indexed": 117
+    },
+    {
+      "date": "2026-07-26",
+      "indexed": 117
+    },
+    {
+      "date": "2026-07-27",
+      "indexed": 117
+    },
+    {
+      "date": "2026-07-28",
+      "indexed": 117
+    },
+    {
+      "date": "2026-07-29",
+      "indexed": 117
+    },
+    {
+      "date": "2026-07-30",
+      "indexed": 117
+    },
+    {
+      "date": "2026-07-31",
+      "indexed": 117
+    },
+    {
+      "date": "2026-08-01",
+      "indexed": 117
+    },
+    {
+      "date": "2026-08-02",
+      "indexed": 117
+    },
+    {
+      "date": "2026-08-03",
+      "indexed": 117
+    },
+    {
+      "date": "2026-08-04",
+      "indexed": 117
+    },
+    {
+      "date": "2026-08-05",
+      "indexed": 117
+    },
+    {
+      "date": "2026-08-06",
+      "indexed": 120
+    },
+    {
+      "date": "2026-08-07",
+      "indexed": 120
+    },
+    {
+      "date": "2026-08-08",
+      "indexed": 120
+    },
+    {
+      "date": "2026-08-09",
+      "indexed": 120
+    },
+    {
+      "date": "2026-08-10",
+      "indexed": 120
+    },
+    {
+      "date": "2026-08-11",
+      "indexed": 121
+    },
+    {
+      "date": "2026-08-12",
+      "indexed": 121
+    },
+    {
+      "date": "2026-08-13",
+      "indexed": 121
+    },
+    {
+      "date": "2026-08-14",
+      "indexed": 121
+    },
+    {
+      "date": "2026-08-15",
+      "indexed": 130
+    },
+    {
+      "date": "2026-08-16",
+      "indexed": 130
+    },
+    {
+      "date": "2026-08-17",
+      "indexed": 130
+    },
+    {
+      "date": "2026-08-18",
+      "indexed": 135
+    },
+    {
+      "date": "2026-08-19",
+      "indexed": 135
+    },
+    {
+      "date": "2026-08-20",
+      "indexed": 135
+    },
+    {
+      "date": "2026-08-21",
+      "indexed": 135
+    },
+    {
+      "date": "2026-08-22",
+      "indexed": 137
+    },
+    {
+      "date": "2026-08-23",
+      "indexed": 137
+    },
+    {
+      "date": "2026-08-24",
+      "indexed": 137
+    },
+    {
+      "date": "2026-08-25",
+      "indexed": 137
+    },
+    {
+      "date": "2026-08-26",
+      "indexed": 137
+    },
+    {
+      "date": "2026-08-27",
+      "indexed": 137
+    },
+    {
+      "date": "2026-08-28",
+      "indexed": 137
+    },
+    {
+      "date": "2026-08-29",
+      "indexed": 141
+    },
+    {
+      "date": "2026-08-30",
+      "indexed": 141
+    },
+    {
+      "date": "2026-08-31",
+      "indexed": 141
+    },
+    {
+      "date": "2026-09-01",
+      "indexed": 141
+    },
+    {
+      "date": "2026-09-02",
+      "indexed": 141
+    },
+    {
+      "date": "2026-09-03",
+      "indexed": 141
+    },
+    {
+      "date": "2026-09-04",
+      "indexed": 141
+    },
+    {
+      "date": "2026-09-05",
+      "indexed": 145
+    },
+    {
+      "date": "2026-09-06",
+      "indexed": 145
+    },
+    {
+      "date": "2026-09-07",
+      "indexed": 145
+    },
+    {
+      "date": "2026-09-08",
+      "indexed": 145
+    },
+    {
+      "date": "2026-09-09",
+      "indexed": 145
+    },
+    {
+      "date": "2026-09-10",
+      "indexed": 145
+    },
+    {
+      "date": "2026-09-11",
+      "indexed": 145
+    },
+    {
+      "date": "2026-09-12",
+      "indexed": 145
+    },
+    {
+      "date": "2026-09-13",
+      "indexed": 145
+    },
+    {
+      "date": "2026-09-14",
+      "indexed": 145
+    },
+    {
+      "date": "2026-09-15",
+      "indexed": 161
+    },
+    {
+      "date": "2026-09-16",
+      "indexed": 161
+    },
+    {
+      "date": "2026-09-17",
+      "indexed": 161
+    },
+    {
+      "date": "2026-09-18",
+      "indexed": 161
+    },
+    {
+      "date": "2026-09-19",
+      "indexed": 162
+    },
+    {
+      "date": "2026-09-20",
+      "indexed": 162
+    },
+    {
+      "date": "2026-09-21",
+      "indexed": 162
+    },
+    {
+      "date": "2026-09-22",
+      "indexed": 196
+    },
+    {
+      "date": "2026-09-23",
+      "indexed": 196
+    },
+    {
+      "date": "2026-09-24",
+      "indexed": 196
+    },
+    {
+      "date": "2026-09-25",
+      "indexed": 196
+    },
+    {
+      "date": "2026-09-26",
+      "indexed": 196
+    },
+    {
+      "date": "2026-09-27",
+      "indexed": 196
+    },
+    {
+      "date": "2026-09-28",
+      "indexed": 196
+    },
+    {
+      "date": "2026-09-29",
+      "indexed": 196
+    },
+    {
+      "date": "2026-09-30",
+      "indexed": 196
+    },
+    {
+      "date": "2026-10-01",
+      "indexed": 196
+    },
+    {
+      "date": "2026-10-02",
+      "indexed": 196
+    },
+    {
+      "date": "2026-10-03",
+      "indexed": 196
+    },
+    {
+      "date": "2026-10-04",
+      "indexed": 196
+    }
+  ],
+  "last_crawl": {
+    "/": "2026-10-03",
+    "/agenzia-immobiliare-padova": "2026-10-04",
+    "/articolo-riqualificazione": "2026-08-20",
+    "/blog": "2026-08-30",
+    "/blog-5-domande-appuntamento-agenzia-padova-2026": "2026-08-27",
+    "/blog-5-errori-visita-immobile-padova-2026": "2026-08-16",
+    "/blog-affittare-casa-padova-proprietario-2026": "2026-09-13",
+    "/blog-affitti-canoni-fimaa-q1-2026-padova": "2026-09-05",
+    "/blog-affitti-limena-2026": "2026-07-30",
+    "/blog-affitti-padova-canoni-2026": "2026-09-25",
+    "/blog-affitti-studenti-settembre-padova-proprietario-2026": "2026-09-25",
+    "/blog-affitto-breve-padova-2026": "2026-09-27",
+    "/blog-affitto-studenti-padova": "2026-10-05",
+    "/blog-affitto-transitorio-padova-durata-2026": "2026-09-28",
+    "/blog-agenzia-immobiliare-limena-come-scegliere-2026": "2026-09-28",
+    "/blog-agenzia-immobiliare-top-servizi-padova-2026": "2026-08-16",
+    "/blog-agevolazioni-prima-casa-2026": "2026-09-11",
+    "/blog-ape-prestazione-energetica-acquisto-padova-2026": "2026-08-27",
+    "/blog-appartamento-affitto-limena-contratto-2026": "2026-08-07",
+    "/blog-appartamento-limena-guida-acquisto-2026": "2026-08-07",
+    "/blog-appartamento-nuova-costruzione-limena": "2026-07-29",
+    "/blog-barometro-mutui-crif-padova-2026": "2026-07-17",
+    "/blog-bce-tassi-mutui-giugno-2026-padova": "2026-08-16",
+    "/blog-bilocale-trilocale-limena-scelta-2026": "2026-08-07",
+    "/blog-bolla-immobiliare-padova-2026": "2026-09-23",
+    "/blog-bonus-casa-2027-detrazioni-padova": "2026-10-02",
+    "/blog-bonus-edilizi-2026-incentivi-casa-padova": "2026-09-04",
+    "/blog-bonus-mobili-barriere-architettoniche-2026-padova": "2026-10-02",
+    "/blog-ca-marcello-mestre": "2026-08-16",
+    "/blog-canone-concordato-padova-guida-2026": "2026-08-30",
+    "/blog-caparra-confirmatoria-padova": "2026-09-05",
+    "/blog-caro-affitti-padova-under-35-guida-2026": "2026-08-23",
+    "/blog-casa-vendibile-5-anni-case-green-padova-2026": "2026-08-27",
+    "/blog-case-piu-vendute-tipologie-padova-2026": "2026-07-31",
+    "/blog-case-prefabbricate-futuro-elon-musk-2026": "2026-09-20",
+    "/blog-case-vendita-limena-leggere-annunci-2026": "2026-08-07",
+    "/blog-case-vendita-padova": "2026-09-28",
+    "/blog-checklist-affitto-studenti-padova-2026": "2026-09-04",
+    "/blog-checklist-verifiche-prima-compromesso-padova-2026": "2026-07-18",
+    "/blog-coliving-padova-limena-giovani-professionisti-2026": "2026-08-23",
+    "/blog-comprare-affittare-padova": "2026-09-16",
+    "/blog-comprare-casa-padova-guida-2026": "2026-09-15",
+    "/blog-compravendite-italia-q1-agenzia-entrate-2026-padova": "2026-07-31",
+    "/blog-compravendite-padova-record-2026": "2026-08-19",
+    "/blog-compravendite-veneto-cintura-padova-2026": "2026-07-19",
+    "/blog-condono-edilizio-proposte-2026": "2026-09-19",
+    "/blog-contratto-affitto-padova": "2026-09-11",
+    "/blog-costi-costruzione-istat-padova-2026": "2026-08-16",
+    "/blog-costi-proprieta-acquisto-possesso-vendita-padova-2026": "2026-08-16",
+    "/blog-costi-vendere-casa-padova-2026": "2026-10-05",
+    "/blog-crisi-immobiliare-padova-2026": "2026-09-15",
+    "/blog-dieci-errori-acquisto-casa-padova-2026": "2026-08-16",
+    "/blog-documenti-compravendita-rogito-padova-2026": "2026-08-16",
+    "/blog-documenti-vendita-casa": "2026-09-13",
+    "/blog-domanda-case-green-certificazione-padova-2026": "2026-08-16",
+    "/blog-domanda-residenziale-supera-offerta-2026-padova": "2026-07-31",
+    "/blog-emergenza-abitativa-padova-2026": "2026-09-16",
+    "/blog-eurocamera-accordo-dazi-usa-2026": "2026-07-19",
+    "/blog-finanza-agevolata-formazione-studenti-padova-2026": "2026-10-02",
+    "/blog-geopolitica-ucraina-prezzi-mutui-italia-veneto-2026": "2026-08-16",
+    "/blog-gergo-immobiliare-padova-spiegato-2026": "2026-08-30",
+    "/blog-gestione-locazione-delegata-padova-2026": "2026-09-20",
+    "/blog-gestione-spese-casa-risparmio-padova-2026": "2026-09-28",
+    "/blog-gruppo-immobiliare-righetto-limena-2026": "2026-08-07",
+    "/blog-home-staging-padova": "2026-09-04",
+    "/blog-housing-lavoratori-veneto-edilcassa-2026": "2026-09-28",
+    "/blog-immobiliare-geopolitica-energia-tassi-2026": "2026-07-02",
+    "/blog-impegno-quotidiano-agenzia-immobiliare": "2026-06-11",
+    "/blog-imposte-registro-catasto-compravendita-padova-2026": "2026-07-01",
+    "/blog-investire-immobiliare-padova": "2026-09-14",
+    "/blog-italy-rental-market-positive-start-january-2026": "2026-07-31",
+    "/blog-legge-bilancio-198-2026-bonus-edilizi-padova": "2026-10-02",
+    "/blog-limena-vicino-padova-comprare-2026": "2026-08-27",
+    "/blog-limena-vs-padova-centro-dove-comprare-2026": "2026-09-28",
+    "/blog-loft-aziende-cucina-condivisa-padova-vicenza-2026": "2026-08-28",
+    "/blog-mandato-esclusivo-padova-perche-conviene-2026": "2026-08-29",
+    "/blog-mercato-immobiliare-limena-2026": "2026-07-17",
+    "/blog-mercato-immobiliare-padova-2026": "2026-09-28",
+    "/blog-mercato-immobiliare-padova-centro-2026": "2026-09-17",
+    "/blog-mercato-immobiliare-piazzola-sul-brenta-2026": "2026-07-19",
+    "/blog-mercato-italiano-tensioni-medio-oriente-2026": "2026-08-30",
+    "/blog-mercato-sacrocuore-padova-omi-2026": "2026-09-27",
+    "/blog-mutui-casa-padova-2026": "2026-09-05",
+    "/blog-mutui-selettivi-banche-padova-2026": "2026-09-28",
+    "/blog-mutui-tasso-fisso-bancaitalia-padova-2026": "2026-09-29",
+    "/blog-mutuo-documenti-tempi-prima-casa-padova-2026": "2026-10-03",
+    "/blog-mutuo-fisso-variabile-padova-2026": "2026-09-11",
+    "/blog-mutuo-under-36-tassi-fisso-variabile-2027": "2026-09-28",
+    "/blog-nuove-costruzioni-mercato-veneto-2026-padova": "2026-09-28",
+    "/blog-offerta-stock-vendita-italia-2026": "2026-09-28",
+    "/blog-outlook-living-italia-2026-padova": "2026-08-19",
+    "/blog-padova-housing-market-guide-2026": "2026-07-31",
+    "/blog-patrimonio-casa-resilienza-mercati-globali-2026": "2026-07-29",
+    "/blog-percorso-vendita-immobile-padova-2026": "2026-06-14",
+    "/blog-permuta-immobiliare-padova-2026": "2026-07-31",
+    "/blog-piano-casa-decreto-66-2026-padova": "2026-07-24",
+    "/blog-planimetria-catastale-compravendita-padova-2026": "2026-09-28",
+    "/blog-previsioni-immobiliari-scenari-geopolitica-2026": "2026-08-30",
+    "/blog-prezzi-case-padova-zona-2026": "2026-09-06",
+    "/blog-prezzi-padova-provincia-fiaip-2026": "2026-09-28",
+    "/blog-prima-casa-under-36-consap-padova-2026": "2026-08-30",
+    "/blog-proposta-acquisto-negoziazione-padova-2026": "2026-09-28",
+    "/blog-prospettive-mercato-residenziale-italia-2026": "2026-09-28",
+    "/blog-quartieri-padova-2026": "2026-10-05",
+    "/blog-quotazioni-locazioni-omi-istat-padova-2026": "2026-10-03",
+    "/blog-registro-contratti-affitto-padova-2026": "2026-08-29",
+    "/blog-rendimento-affitto-padova": "2026-08-09",
+    "/blog-rental-contract-padova-guide-2026": "2026-08-07",
+    "/blog-residenze-green-padova-tribloc-2026": "2026-09-26",
+    "/blog-ricerche-online-tipologie-casa-2026-padova": "2026-07-31",
+    "/blog-righetto-storia-territorio-acquisizioni-2026": "2026-09-20",
+    "/blog-rubano-limena-affitto-lavoratori-2026": "2026-08-30",
+    "/blog-scegliere-agenzia-immobiliare-padova-2026": "2026-07-17",
+    "/blog-scegliere-immobile-giusto-padova-2026": "2026-07-17",
+    "/blog-scuole-istruzione-padova": "2026-06-20",
+    "/blog-servizi-infrastrutture-padova": "2026-08-19",
+    "/blog-so-tutto-io-venditore-presuntuoso-padova-2026": "2026-08-27",
+    "/blog-sopralluoghi-drone-padova-2026": "2026-09-23",
+    "/blog-spese-condominiali-acquisto-padova-2026": "2026-08-30",
+    "/blog-squilibrio-domanda-offerta-affitti-padova": "2026-09-04",
+    "/blog-stanza-universitaria-padova-canoni-2026": "2026-09-23",
+    "/blog-student-rentals-padova-guide-2026": "2026-07-30",
+    "/blog-studentati-veneto-2026-posti-letto": "2026-09-28",
+    "/blog-successione-immobiliare-padova": "2026-07-19",
+    "/blog-surroga-mutuo-padova-2026": "2026-09-27",
+    "/blog-tasse-vendita-casa": "2026-10-04",
+    "/blog-tassi-euribor-mutui-padova-agosto-2026": "2026-08-30",
+    "/blog-trasporti-mobilita-padova": "2026-08-27",
+    "/blog-ultime-acquisizioni-residenziali-padova-giugno-2026": "2026-08-20",
+    "/blog-valutazione-casa-padova-guida-2026": "2026-08-30",
+    "/blog-vendere-casa-limena-proprietario-2026": "2026-09-12",
+    "/blog-vendere-o-affittare-padova-2026": "2026-09-11",
+    "/blog-vendita-immobiliare-padova-strategie-2026": "2026-09-15",
+    "/blog-vicenza-residenze-universitarie-calmierate-2026": "2026-08-27",
+    "/blog-visura-catastale-acquisto-casa-padova-2026": "2026-08-30",
+    "/blog-zona-imma-limena-domanda-offerta-2027": "2026-09-20",
+    "/faq": "2026-09-05",
+    "/gino-capon": "2026-07-25",
+    "/immobile": "2026-09-22",
+    "/immobili": "2026-09-23",
+    "/landing-agente": "2026-09-04",
+    "/landing-calcolo-mutuo": "2026-09-15",
+    "/landing-chat-calcolo-mutuo": "2026-07-27",
+    "/landing-chat-insoddisfatti": "2026-10-04",
+    "/landing-chat-offerta-gas": "2026-07-17",
+    "/landing-chat-offerta-luce": "2026-07-21",
+    "/landing-chat-valutazione": "2026-06-06",
+    "/landing-chat-vendita": "2026-08-19",
+    "/landing-consulenza-immobiliare-gratuita": "2026-08-07",
+    "/landing-costi-locazione-inquilino": "2026-08-03",
+    "/landing-mutuo": "2026-09-24",
+    "/landing-valutazione": "2026-09-25",
+    "/landing-vendere-casa-padova": "2026-08-19",
+    "/landing-vendita": "2026-09-28",
+    "/landing/email-offerta-luce": "2026-08-27",
+    "/landing/offerta-enel-gas": "2026-09-04",
+    "/landing/offerta-enel-luce": "2026-07-17",
+    "/landing/offerta-luce": "2026-09-16",
+    "/landing/reel-offerta-gas": "2026-08-29",
+    "/linda-righetto": "2026-09-11",
+    "/proprietario-immobile": "2026-09-28",
+    "/segnalazione-immobili-professionisti-padova": "2026-09-30",
+    "/servizi": "2026-09-22",
+    "/servizio-drone-sopralluoghi": "2026-09-27",
+    "/servizio-gestione": "2026-08-03",
+    "/servizio-locazioni": "2026-08-03",
+    "/servizio-loft-aziende-media-durata": "2026-09-30",
+    "/servizio-preliminari": "2026-08-03",
+    "/servizio-utenze": "2026-09-30",
+    "/servizio-valutazioni": "2026-07-31",
+    "/servizio-vendita": "2026-09-17",
+    "/servizio-virtual-tour": "2026-09-16",
+    "/valutazione-vendita-riservata-padova": "2026-09-30",
+    "/vendere-casa-padova-errori": "2026-09-30",
+    "/zona-abano-terme": "2026-09-15",
+    "/zona-arcella-padova": "2026-09-17",
+    "/zona-centro-storico-padova": "2026-09-30",
+    "/zona-forcellini-padova": "2026-09-30",
+    "/zona-guizza-padova": "2026-07-01",
+    "/zona-limena": "2026-09-15",
+    "/zona-prato-della-valle-padova": "2026-09-30",
+    "/zona-sacra-famiglia-padova": "2026-09-30",
+    "/zona-universitaria-padova": "2026-09-25",
+    "/zona-voltabarozzo-padova": "2026-09-04"
+  }
+}

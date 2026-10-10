@@ -1,0 +1,401 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+<!-- Google tag (gtag.js) + Consent Mode -->
+<script src="js/ga-consent.js?v=23"></script>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#2C4A6E">
+  <title>Affitti e Case a Limena (PD) | Agenzia Righetto</title>
+  <meta name="robots" content="index, follow, max-image-preview:large"><link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co"><link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="canonical" href="https://righettoimmobiliare.it/zona-limena">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Affitti e Case a Limena (PD) | Agenzia Righetto">
+<meta property="og:description" content="Affitti Limena e case in vendita nel Padovano. Agenzia Righetto Via Roma 96 — appartamenti, ville, uffici. Locazioni e vendite dal 2000.">
+<meta property="og:url" content="https://righettoimmobiliare.it/zona-limena">
+<meta property="og:site_name" content="Righetto Immobiliare">
+<meta property="og:locale" content="it_IT">
+<meta property="og:image" content="https://righettoimmobiliare.it/img/og-default.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Case in Vendita e Affitto a Limena | Righetto Immobiliare">
+<meta name="twitter:description" content="Affitti e vendita a Limena: appartamenti, ville e uffici. Righetto Immobiliare — Via Roma 96, sede dal 2000 nel Padovano.">
+<meta name="twitter:image" content="https://righettoimmobiliare.it/img/og-default.webp">
+<meta name="description" content="Affitti Limena e case in vendita nel Padovano: appartamenti, ville e uffici. Agenzia Righetto Via Roma 96 — locazioni e vendite dal 2000, 350+ immobili.">
+  <link rel="stylesheet" href="css/fonts.css?v=3">
+  <link rel="stylesheet" href="css/nav-mobile.css?v=7">
+  <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/welcome-popup.css?v=3" media="print" onload="this.media='all'">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--nero:#0a0a0a;--bianco:#f5f2ed;--oro:#c9a84c;--grigio:#6b6560;--gc:#e8e4de;--verde:#4a5c4e;--sfondo:#f0ece6}
+    body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--nero)}
+    a{text-decoration:none;color:inherit}
+    header{background:var(--nero);position:sticky;top:0;z-index:100}
+    .hi{max-width:1380px;margin:0 auto;padding:0 1.5rem;height:62px;display:flex;align-items:center;gap:2rem}
+    .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff}.logo span{color:var(--oro);font-style:italic}
+    nav{display:flex;gap:.2rem;flex:1}
+    nav a{color:rgba(255,255,255,.7);font-size:.82rem;padding:.4rem .75rem;border-radius:2px;transition:color .2s}
+    nav a:hover{color:#fff} nav a.active{color:var(--oro)}
+    .h-cta{display:flex;gap:.65rem;align-items:center}
+    .h-tel{color:rgba(255,255,255,.75);font-size:.78rem}
+    .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:2px;font-size:.76rem;font-weight:500}
+    /* BREADCRUMB */
+    .bc{background:var(--nero);border-top:1px solid rgba(255,255,255,.06);padding:.5rem 1.5rem}
+    .bc-inner{max-width:1380px;margin:0 auto;display:flex;align-items:center;gap:.4rem;font-size:.7rem;color:rgba(255,255,255,.3)}
+    .bc-inner a{color:rgba(255,255,255,.3);transition:color .2s}.bc-inner a:hover{color:var(--oro)}
+    .bc-inner svg{width:9px;height:9px;flex-shrink:0}
+    /* HERO */
+    .hero{position:relative;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;z-index:0}
+    .hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.3)}
+    .hero-inner{position:relative;z-index:1;max-width:1380px;margin:0 auto;padding:5rem 1.5rem 4rem}
+    .htag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.7rem}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:#fff;line-height:1.15;margin-bottom:1rem}
+    .hero h1 strong{font-weight:600;font-style:italic}
+    .hero p{font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.9;margin-bottom:1.5rem;max-width:720px}
+    .hero-btns{display:flex;gap:.65rem;flex-wrap:wrap}
+    .btn-gold{background:var(--oro);color:var(--nero);padding:.65rem 1.4rem;border-radius:2px;font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
+    .btn-gold:hover{background:#d4b86a}
+    .btn-outline{border:1px solid rgba(255,255,255,.2);color:#fff;padding:.65rem 1.4rem;border-radius:2px;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:all .2s}
+    .btn-outline:hover{border-color:var(--oro);color:var(--oro)}
+    /* SEZIONI */
+    .sec{padding:5rem 1.5rem}
+    .sec.bg{background:var(--sfondo)}
+    .sec-inner{max-width:1380px;margin:0 auto}
+    .sec-tag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);margin-bottom:.5rem}
+    .sec-t{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;margin-bottom:.75rem}
+    .sec-t strong{font-weight:600}
+    .sec-sub{font-size:.88rem;color:var(--grigio);line-height:1.8;max-width:600px;margin-bottom:2.5rem}
+    .sec-text{font-size:.88rem;color:var(--grigio);line-height:1.85;max-width:800px}
+    .sec-text p{margin-bottom:1.2rem}
+    /* PREZZI CARD */
+    .prezzi-card{background:#fff;border:2px solid var(--oro);border-radius:3px;padding:2rem;max-width:480px;margin-top:2rem}
+    .prezzi-card .pc-tag{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--oro);margin-bottom:.4rem}
+    .prezzi-card .pc-range{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;color:var(--nero);margin-bottom:.5rem}
+    .prezzi-card .pc-note{font-size:.8rem;color:var(--grigio);line-height:1.7}
+    /* CTA SECTION */
+    .cta-zone{background:var(--nero);padding:4rem 1.5rem;text-align:center}
+    .cta-zone-inner{max-width:700px;margin:0 auto}
+    .cta-zone h2{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:#fff;margin-bottom:.6rem}
+    .cta-zone h2 strong{font-weight:600;font-style:italic}
+    .cta-zone p{font-size:.88rem;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:1.8rem}
+    .cta-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+    /* TIPOLOGIE GRID */
+    .tipo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1.5rem}
+    @media(max-width:600px){.tipo-grid{grid-template-columns:1fr}}
+    .tipo-card{background:#fff;border:1px solid var(--gc);border-radius:3px;padding:1.3rem}
+    .tipo-card h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;margin-bottom:.4rem}
+    .tipo-card p{font-size:.82rem;color:var(--grigio);line-height:1.7}
+    /* SEDE CARD */
+    .sede-card{background:#fff;border:2px solid var(--oro);border-radius:3px;padding:2rem;max-width:520px;margin-top:2rem}
+    .sede-card h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;margin-bottom:.6rem}
+    .sede-card p{font-size:.84rem;color:var(--grigio);line-height:1.8;margin-bottom:.4rem}
+    .sede-card a{color:var(--oro);font-weight:500}
+    /* FOOTER */
+    footer{background:var(--nero);padding:3rem 1.5rem 1.5rem}
+    .fi{max-width:1380px;margin:0 auto}
+    .fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2rem}
+    @media(max-width:900px){.fgrid{grid-template-columns:1fr 1fr}}
+    .flogo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;margin-bottom:.6rem}.flogo span{color:var(--oro);font-style:italic}
+    .finfo{font-size:.76rem;color:rgba(255,255,255,.6);line-height:1.9}
+    .fh{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.7rem}
+    .fcol a{display:block;font-size:.78rem;color:rgba(255,255,255,.6);margin-bottom:.3rem;transition:color .2s}.fcol a:hover{color:var(--oro)}
+    .fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.55);flex-wrap:wrap;gap:.4rem}
+    .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
+  
+    /* TABELLA OMI */
+    .omi-table-wrap{margin-top:1.5rem;max-width:580px}
+    .omi-table-title{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--oro);margin-bottom:.6rem}
+    .omi-table{width:100%;border-collapse:collapse;font-size:.82rem}
+    .omi-table th{text-align:left;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grigio);padding:.5rem .6rem;border-bottom:2px solid var(--gc)}
+    .omi-table td{padding:.55rem .6rem;border-bottom:1px solid var(--gc);color:var(--nero)}
+    .omi-table td:last-child{text-align:right;font-weight:600;color:var(--oro);font-family:'Cormorant Garamond',serif;font-size:1rem}
+    .omi-table tr:hover td{background:rgba(201,168,76,.04)}
+    .omi-fonte{font-size:.65rem;color:var(--grigio);margin-top:.6rem;font-style:italic}
+    /* PRO E CONTRO */
+    .zona-pro-contro .pc-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
+    @media(max-width:768px){.zona-pro-contro .pc-grid{grid-template-columns:1fr}}
+  
+    .zona-faq-visibile .zona-faq-lead{font-size:.86rem;line-height:1.75;color:var(--grigio);max-width:720px;margin-bottom:1.4rem}
+    .zona-faq-list{max-width:800px}
+    .zona-faq-item{border:1px solid var(--gc);border-radius:6px;margin-bottom:.55rem;background:#fff}
+    .zona-faq-item summary{cursor:pointer;padding:.95rem 1.1rem;font-weight:600;font-size:.86rem;list-style:none}
+    .zona-faq-item summary::-webkit-details-marker{display:none}
+    .zona-faq-a{padding:0 1.1rem 1rem;font-size:.84rem;line-height:1.75;color:var(--grigio)}
+
+  
+    .sec-inner > .sec-text > p:first-of-type{font-size:.9rem;line-height:1.82;color:var(--nero);font-weight:500;max-width:800px}
+
+  </style>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList",
+      "dateModified": "2026-03-18","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"Home","item":"https://righettoimmobiliare.it/"},
+  {"@type":"ListItem","position":2,"name":"Quartieri","item":"https://righettoimmobiliare.it/quartieri"},
+  {"@type":"ListItem","position":3,"name":"Limena","item":"https://righettoimmobiliare.it/zona-limena"}
+]}
+</script>
+<script type="application/ld+json">
+{
+    "dateModified": "2026-07-03",
+  "@context": "https://schema.org",
+  "@type": "Place",
+  "name": "Limena, Padova",
+  "description": "Comune residenziale a nord-ovest di Padova, sede di Righetto Immobiliare. Ambiente tranquillo e familiare, ottimi servizi, collegamenti rapidi con Padova centro. Prezzi 1.600-2.400 euro/mq.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Limena",
+    "addressRegion": "Veneto",
+    "postalCode": "35010",
+    "addressCountry": "IT"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "45.3887",
+    "longitude": "11.8478"
+  },
+  "sameAs": [
+    "https://www.instagram.com/righettoimmobiliare/",
+    "https://www.facebook.com/righettoimmobiliare/",
+    "https://www.linkedin.com/company/righettoimmobiliare/"
+  ],
+  "hasMap": "https://maps.google.com/?q=45.3887,11.8478",
+  "containedInPlace": {
+    "@type": "AdministrativeArea",
+    "name": "Provincia di Padova"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+    "dateModified": "2026-07-03","@context":"https://schema.org","@type":"RealEstateAgent","name":"Righetto Immobiliare","url":"https://righettoimmobiliare.it","telephone":"+39-049-884-3484","address":{"@type":"PostalAddress","streetAddress":"Via Roma n.96","addressLocality":"Limena","postalCode":"35010","addressRegion":"PD","addressCountry":"IT"},"geo":{"@type":"GeoCoordinates","latitude":45.476956,"longitude":11.845762},"hasMap":"https://maps.google.com/?q=45.476956,11.845762","areaServed":[{"@type":"City","name":"Padova"},{"@type":"Place","name":"Limena, Padova"}],"foundingDate":"2000","priceRange":"$$","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"127","bestRating":"5"}}
+</script>
+<script type="application/ld+json">
+{
+    "dateModified": "2026-07-03","@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+  {"@type":"Question","name":"Quanto costa una casa a Limena nel 2026?","acceptedAnswer":{"@type":"Answer","text":"A Limena i prezzi medi nel 2026 variano tra 1.600 e 2.400 euro al metro quadro. Le ville singole e bifamiliari raggiungono i 2.800 euro/mq per le nuove costruzioni. Il mercato e' stabile con una leggera crescita, favorito dalla vicinanza a Padova e dalla qualita' della vita."}},
+  {"@type":"Question","name":"Limena e' un buon posto dove vivere vicino a Padova?","acceptedAnswer":{"@type":"Answer","text":"Si', Limena e' uno dei comuni piu' apprezzati della cintura padovana. Offre tranquillita' residenziale, scuole di ogni ordine e grado, supermercati, farmacie e parchi. A soli 8 km dal centro di Padova, si raggiunge in 15 minuti in auto o con bus urbani frequenti."}},
+  {"@type":"Question","name":"Righetto Immobiliare ha sede a Limena?","acceptedAnswer":{"@type":"Answer","text":"Si', la sede di Righetto Immobiliare si trova in Via Roma 96 a Limena (PD). Operiamo dal 2000 su tutto il territorio di Padova e provincia, con una conoscenza approfondita del mercato locale di Limena, Villafranca Padovana, Vigodarzere e comuni limitrofi."}},
+  {"@type":"Question","name":"Che tipo di immobili si trovano a Limena?","acceptedAnswer":{"@type":"Answer","text":"A Limena si trovano prevalentemente ville singole, bifamiliari, villette a schiera e appartamenti in piccoli contesti residenziali. Il patrimonio edilizio e' mediamente recente, con molte costruzioni dagli anni '80 in poi. Le nuove costruzioni offrono classe energetica A e giardini privati."}},
+  {"@type":"Question","name":"Perché Limena è considerata una delle migliori zone dell'hinterland padovano?","acceptedAnswer":{"@type":"Answer","text":"Limena combina qualita' della vita elevata e vicinanza al capoluogo: dista solo 7 km dal centro di Padova, raggiungibile in 10 minuti via SR308. Il comune offre scuole di ogni grado, impianti sportivi, piste ciclabili lungo il Brenta e un centro con negozi e servizi. I prezzi medi di 1.500-2.100 euro/mq (dati OMI 2025) sono inferiori del 30% rispetto a Padova citta', con il vantaggio di abitazioni piu' spaziose e con verde privato."}}
+]}
+</script>
+<style id="rig-motion">@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}::view-transition-old(root){animation:rig-vt-out .4s cubic-bezier(.32,.72,0,1) both}::view-transition-new(root){animation:rig-vt-in .55s cubic-bezier(.32,.72,0,1) both}html{scroll-behavior:smooth}.sr,.sr-left,.sr-right,.rv{transition-duration:.95s;transition-timing-function:cubic-bezier(.32,.72,0,1)}}@keyframes rig-vt-out{to{opacity:0;transform:scale(.985)}}@keyframes rig-vt-in{from{opacity:0;transform:scale(1.015)}}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
+<header>
+  <div class="hi">
+    <a href="/" class="logo">Righetto <span>Immobiliare</span></a>
+    <nav><a href="/">Home</a><a href="immobili">Immobili</a><a href="servizi">Servizi</a><a href="chi-siamo">Chi siamo</a><a href="blog">Blog</a><a href="contatti">Contatti</a><a href="faq">FAQ</a></nav>
+    <div class="h-cta"><a class="h-tel" href="tel:+390498843484">049.8843484</a><a class="h-btn" href="contatti">Contattaci</a></div>
+  </div>
+  <button class="nav-burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+<div class="nav-mobile" id="navMobile">
+  <a href="/">Home</a>
+  <a href="chi-siamo">Chi Siamo</a>
+  <a href="immobili">Immobili</a>
+  <a href="servizi">Servizi</a>
+  <a href="blog">Blog</a>
+  <a href="faq">FAQ</a>
+  <a href="contatti" class="nav-mobile-cta">Parla con noi</a>
+</div>
+<div class="bc"><div class="bc-inner"><a href="/">Home</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg><a href="quartieri">Quartieri</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg><span>Limena</span></div></div>
+
+<main id="main-content">
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"><picture><source srcset="img/foto-servizi/gestioni-immobili-padova.webp" type="image/webp"><img src="img/foto-servizi/gestioni-immobili-padova.webp" alt="Immobili Limena Padova" width="1200" height="480" loading="eager"></picture></div>
+  <div class="hero-inner">
+    <div class="htag">Comune di Limena — Sede lo studio</div>
+    <h1>Limena: vendita e affitto alle porte di <strong>Padova</strong></h1>
+    <p>Limena e' il comune a nord-ovest del Padovano dove ha sede Righetto Immobiliare in Via Roma 96. A 8 km dal centro trovi tranquillita', servizi completi e un mercato stabile per <strong>comprare o affittare casa</strong> — appartamenti, ville e uffici. Guide: <a href="blog-affitti-limena-2026">affitti Limena 2026</a>, <a href="blog-mercato-immobiliare-limena-2026">mercato Limena</a>, <a href="blog-limena-vs-padova-centro-dove-comprare-2026">Limena vs Padova centro</a>.</p>
+    <p class="last-update" style="font-size:0.85rem;color:#6b7280;margin-top:0.5rem;">Ultimo aggiornamento: 9 luglio 2026</p>
+    <div class="hero-btns">
+      <a href="immobili" class="btn-gold">Case in vendita</a>
+      <a href="immobili?op=affitto" class="btn-outline">Affitti a Limena</a>
+      <a href="contatti" class="btn-outline">Consulenza gratuita</a>
+    </div>
+  </div>
+</section>
+
+<!-- VIVERE A LIMENA -->
+<section class="sec">
+  <div class="sec-inner sr">
+    <div class="sec-tag">Vivere qui</div>
+    <h2 class="sec-t">Perche <strong>Limena</strong> e scelta per la qualita di vita vicino nel Padovano?</h2>
+    <div class="sec-text">
+      <p>Il comune conta circa 8.000 abitanti ed e' situato lungo la Strada Regionale 308, a nord-ovest del capoluogo. La sua posizione strategica — a meta' strada tra il centro della provincia e i Colli Euganei — lo rende una delle scelte preferite da famiglie e professionisti che cercano un ambiente tranquillo senza rinunciare alla comodita' dei servizi urbani.</p>
+      <p>Il paese offre tutto il necessario per la vita quotidiana: scuole dall'infanzia alle medie, supermercati, farmacie, studi medici, banche, ufficio postale, impianti sportivi e il Parco lungo il Brenta per passeggiate e attivita' all'aperto. La chiesa parrocchiale e la piazza centrale rappresentano il cuore della comunita', con eventi e mercati settimanali che mantengono viva la socialita' del paese.</p>
+      <p>Chi sceglie questo comune cerca esattamente questo: la dimensione umana di un paese dove ci si conosce, le distanze sono brevi e la qualita' della vita e' elevata. A differenza dei quartieri periferici del capoluogo, il territorio conserva un'identita' propria, con una comunita' coesa e un tessuto commerciale locale vivace. Il comune e' suddiviso nelle frazioni di Limena centro, Taggì di Sotto e Taggì di Sopra.</p>
+      <h3>Cenni Storici</h3>
+      <p>Il territorio vanta origini antiche, con tracce di insediamenti romani lungo la via Postumia. Il toponimo deriva dal latino 'limen' (confine), a indicare la posizione strategica tra Padova e il territorio a nord.</p>
+    </div>
+    <div class="sede-card">
+      <h3>Il nostro ufficio e' qui</h3>
+      <p>il team ha sede in <strong>Via Roma 96, Limena (PD)</strong>.</p>
+      <p>Operiamo dal 2000 e conosciamo ogni angolo del territorio e dei comuni limitrofi: Villafranca Padovana, Vigodarzere, Campodarsego, Cadoneghe.</p>
+      <p><a href="contatti">Vieni a trovarci in ufficio</a> — Tel: <a href="tel:+390498843484">049.8843484</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- MERCATO IMMOBILIARE -->
+<section class="sec bg">
+  <div class="sec-inner sr">
+    <div class="sec-tag">Mercato immobiliare</div>
+    <h2 class="sec-t">Come sono <strong>prezzi e opportunita</strong> sul mercato di Limena?</h2>
+    <div class="sec-text">
+      <p>Il mercato immobiliare locale e' caratterizzato da una domanda costante e da prezzi stabili con una leggera tendenza al rialzo. La vicinanza in provincia, unita alla tranquillita' residenziale, attrae famiglie che desiderano piu' spazio e verde rispetto alla citta', senza allontanarsi troppo dal posto di lavoro.</p>
+      <p>Rispetto ai quartieri residenziali come Sacra Famiglia o Forcellini, qui si trovano metrature piu' generose a prezzi comparabili o inferiori. Una villa bifamiliare con giardino che nel territorio costerebbe oltre 350.000 euro, nel comune si trova a partire da 280.000 euro. Per gli appartamenti in contesti recenti, i prezzi sono allineati alla media della prima cintura, con il vantaggio di spazi condominiali piu' ampi e meno trafficati.</p>
+      <p>Dal punto di vista dell'investimento, il territorio e' interessante per la locazione a famiglie e professionisti: la stabilita' degli inquilini e' superiore alla media urbana, con contratti di lunga durata e bassa rotazione. La domanda di villette a schiera e bifamiliari e' particolarmente forte tra giovani coppie con figli.</p>
+      <p>Il trend demografico evidenzia una crescita costante di nuovi residenti, attratti dalla qualita' dei servizi e dalla vicinanza al capoluogo.</p>
+      <h3>Confronto con Zone Limitrofe</h3>
+      <p>Rispetto a Villafranca Padovana e Vigodarzere, il territorio offre prezzi al metro quadro leggermente superiori ma compensati da una maggiore dotazione di servizi e infrastrutture. Cadoneghe, piu' vicina alla zona industriale, presenta valori medi inferiori del 10-15% ma un contesto residenziale meno omogeneo.</p>
+    </div>
+    
+    <div class="prezzi-card">
+      <div class="pc-tag">Prezzi al mq — Limena</div>
+      <div class="pc-range">1.600 — 2.400 &euro;/mq</div>
+      <div class="pc-note">Valori medi per immobili in buone condizioni. Le ville singole di nuova costruzione con classe energetica A possono raggiungere i 2.800 &euro;/mq. Ottimo rapporto qualita-prezzo per famiglie che cercano spazio e verde a due passi dalla citta'.</div>
+    </div>
+  
+    <div class="omi-table-wrap">
+      <div class="omi-table-title">Prezzi medi per tipologia — Limena (2026)</div>
+      <table class="omi-table">
+        <thead><tr><th>Tipologia</th><th>&euro;/mq</th></tr></thead>
+        <tbody>
+          <tr><td>Appartamento</td><td>1700 &euro;</td></tr>
+          <tr><td>Villa singola</td><td>2040 &euro;</td></tr>
+          <tr><td>Villa bifamiliare</td><td>1870 &euro;</td></tr>
+          <tr><td>Capannone / Commerciale</td><td>560 &euro;</td></tr>
+          <tr><td>Terreno edificabile</td><td>280 &euro;</td></tr>
+        </tbody>
+      </table>
+      <div class="omi-fonte">Fonte: OMI Agenzia Entrate, FIMAA Padova 2026. Valori indicativi per immobili in buone condizioni.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPOLOGIE -->
+<section class="sec">
+  <div class="sec-inner sr">
+    <div class="sec-tag">Tipologie immobiliari</div>
+    <h2 class="sec-t">Quali <strong>immobili</strong> si trovano piu spesso a Limena?</h2>
+    <div class="sec-text">
+      <p>Il patrimonio edilizio del comune e' prevalentemente residenziale, con una forte presenza di case indipendenti e contesti a bassa densita'. A differenza dei quartieri urbani del capoluogo, qui dominano le soluzioni con giardino privato.</p>
+    </div>
+    <div class="tipo-grid">
+      <div class="tipo-card">
+        <h3>Ville singole e bifamiliari</h3>
+        <p>La tipologia piu' ricercata in zona: ville con giardino privato, spesso su due livelli con autorimessa. Superfici dai 150 ai 300 mq. Le costruzioni recenti offrono classe energetica elevata e riscaldamento a pavimento.</p>
+      </div>
+      <div class="tipo-card">
+        <h3>Villette a schiera</h3>
+        <p>Soluzione ideale per giovani famiglie: prezzo piu' accessibile rispetto alla villa singola, con giardino privato e ingresso indipendente. Superfici tra 100 e 160 mq, spesso con garage doppio.</p>
+      </div>
+      <div class="tipo-card">
+        <h3>Appartamenti in piccoli contesti</h3>
+        <p>Condomini di 4-8 unita' con posti auto e aree verdi condominiali. Bilocali e trilocali tra 60 e 95 mq, adatti a coppie, single e investitori. Costi di gestione contenuti rispetto alla citta'.</p>
+      </div>
+      <div class="tipo-card">
+        <h3>Rustici e casali ristrutturati</h3>
+        <p>La campagna circostante offre rustici e casali con fascino storico, ristrutturati o da ristrutturare. Lotti generosi da 500 a 2.000 mq, ideali per chi desidera privacy e contatto con la natura.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRASPORTI -->
+<section class="sec bg">
+  <div class="sec-inner sr">
+    <div class="sec-tag">Trasporti e collegamenti</div>
+    <h2 class="sec-t">Come collegarsi <strong>da Limena</strong> in città e al Veneto?</h2>
+    <div class="sec-text">
+      <p>Il comune gode di una posizione comoda per chi si muove verso il capoluogo e il resto del Veneto. La Strada Regionale 308 collega direttamente il centro del paese nell'hinterland in circa 15 minuti di auto, senza necessita' di tangenziale. La tangenziale nord e' raggiungibile in 5 minuti, cosi' come il casello autostradale del territorio Ovest (A4).</p>
+      <p>Il servizio di autobus APS/Busitalia collega il territorio alla stazione ferroviaria con corse frequenti nelle ore di punta. La pista ciclabile lungo la SR308 permette di raggiungere il centro citta' in bicicletta in circa 25 minuti, un'alternativa apprezzata dai pendolari nelle belle giornate. Per chi viaggia in treno, la stazione ferroviaria e' a soli 8 km, con collegamenti ad alta velocita' verso Milano, Bologna, Venezia e Roma.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRO E CONTRO -->
+<section class="sec zona-pro-contro sr">
+  <div class="sec-inner">
+    <div class="sec-tag">Valutazione oggettiva</div>
+    <h2 class="sec-t">Quali sono i <strong>pro e i contro</strong> di vivere a Limena?</h2>
+    <div class="pc-grid">
+      <div>
+        <h3 style="color:var(--verde);margin-bottom:12px;">&#10003; Punti di Forza</h3>
+        <ul style="list-style:none;padding:0;">
+          <li style="padding:8px 0;border-bottom:1px solid rgba(44,74,110,0.08);">&#10003; Vicinanza nel comune (15 minuti in auto)</li>
+          <li style="padding:8px 0;border-bottom:1px solid rgba(44,74,110,0.08);">&#10003; Tranquillita' residenziale e ambiente familiare</li>
+          <li style="padding:8px 0;border-bottom:1px solid rgba(44,74,110,0.08);">&#10003; Prezzi accessibili (1.600-2.400 &euro;/mq)</li>
+          <li style="padding:8px 0;">&#10003; Servizi completi: scuole, negozi, farmacie</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color:#c0392b;margin-bottom:12px;">&#10007; Aspetti da Considerare</h3>
+        <ul style="list-style:none;padding:0;">
+          <li style="padding:8px 0;border-bottom:1px solid rgba(44,74,110,0.08);">&#10007; Pochi locali serali e vita notturna limitata</li>
+          <li style="padding:8px 0;border-bottom:1px solid rgba(44,74,110,0.08);">&#10007; Dipendenza dall'auto per spostamenti quotidiani</li>
+          <li style="padding:8px 0;border-bottom:1px solid rgba(44,74,110,0.08);">&#10007; Offerta limitata di nuove costruzioni</li>
+          <li style="padding:8px 0;">&#10007; Alcune zone periferiche risultano isolate</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ visibile (AEO) — allineata a JSON-LD FAQPage -->
+<section class="sec zona-faq-visibile" id="faq-zona" aria-labelledby="faq-zona-h">
+  <div class="sec-inner">
+    <h2 class="sec-t" id="faq-zona-h">Domande frequenti su <strong>Limena</strong></h2>
+    <p class="zona-faq-lead">Risposte sintetiche sul quartiere e sul mercato: utili per chi cerca casa nel Padovano e per i motori di ricerca.</p>
+    <div class="zona-faq-list">
+      <details class="zona-faq-item"><summary>Quanto costa una casa a Limena nel 2026?</summary><div class="zona-faq-a">A Limena i prezzi medi nel 2026 variano tra 1.600 e 2.400 euro al metro quadro. Le ville singole e bifamiliari raggiungono i 2.800 euro/mq per le nuove costruzioni. Il mercato e' stabile con una leggera crescita, favorito dalla vicinanza in provincia e dalla qualita' della vita.</div></details>
+      <details class="zona-faq-item"><summary>Limena e' un buon posto dove vivere vicino nel Padovano?</summary><div class="zona-faq-a">Si', Limena e' uno dei comuni piu' apprezzati della cintura padovana. Offre tranquillita' residenziale, scuole di ogni ordine e grado, supermercati, farmacie e parchi. A soli 8 km dal centro locale, si raggiunge in 15 minuti in auto o con bus urbani frequenti.</div></details>
+      <details class="zona-faq-item"><summary>la nostra struttura ha sede a Limena?</summary><div class="zona-faq-a">Si', la sede di Righetto Immobiliare si trova in Via Roma 96 a Limena (PD). Operiamo dal 2000 su tutto il territorio padovano e provincia, con una conoscenza approfondita del mercato locale di Limena, Villafranca Padovana, Vigodarzere e comuni limitrofi.</div></details>
+      <details class="zona-faq-item"><summary>Che tipo di immobili si trovano a Limena?</summary><div class="zona-faq-a">A Limena si trovano prevalentemente ville singole, bifamiliari, villette a schiera e appartamenti in piccoli contesti residenziali. Il patrimonio edilizio e' mediamente recente, con molte costruzioni dagli anni '80 in poi. Le nuove costruzioni offrono classe energetica A e giardini privati.</div></details>
+      <details class="zona-faq-item"><summary>Perché Limena è considerata una delle migliori zone dell'hinterland padovano?</summary><div class="zona-faq-a">Limena combina qualita' della vita elevata e vicinanza al capoluogo: dista solo 7 km dal centro del Padovano, raggiungibile in 10 minuti via SR308. Il comune offre scuole di ogni grado, impianti sportivi, piste ciclabili lungo il Brenta e un centro con negozi e servizi. I prezzi medi di 1.500-2.100 euro/mq (dati OMI 2025) sono inferiori del 30% rispetto in provincia citta', con il vantaggio di abitazioni piu' spaziose e con verde privato.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-zone">
+  <div class="cta-zone-inner">
+    <h2>Cerchi casa <strong>a Limena?</strong></h2>
+    <p>Siamo l'agenzia di riferimento sul territorio, con sede in Via Roma 96. Conosciamo il territorio dal 2000 e possiamo aiutarti a trovare la casa perfetta o a vendere il tuo immobile al miglior prezzo. Vieni a trovarci.</p>
+    <div class="cta-btns">
+      <a href="immobili" class="btn-gold">Vedi immobili disponibili</a>
+      <a href="contatti" class="btn-outline">Contattaci per una consulenza</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="fi">
+    <div class="fgrid">
+      <div><div class="flogo">Righetto <span>Immobiliare</span></div><div class="finfo">Via Roma n.96 — 35010 Limena (PD)<br>Tel: 049.8843484 · Cell: 349 736 5930<br>info@righettoimmobiliare.it</div></div>
+      <div class="fcol"><div class="fh">Servizi</div><a href="servizio-vendita">Vendita immobili</a><a href="servizio-locazioni">Locazioni</a><a href="servizio-preliminari">Preliminari</a><a href="servizio-gestione">Gestione immobili</a><a href="servizio-valutazioni">Valutazioni</a><a href="servizio-utenze">Utenze</a></div>
+      <div class="fcol"><div class="fh">Immobili</div><a href="immobili?op=vendita">In vendita</a><a href="immobili?op=affitto">In affitto</a><div class="fh" style="margin-top:.8rem">Quartieri</div><a href="zona-centro-storico-padova">Centro Storico</a><a href="zona-arcella-padova">Arcella</a><a href="zona-universitaria-padova">Zona Universitaria</a><a href="zona-prato-della-valle-padova">Prato della Valle</a><a href="zona-sacra-famiglia-padova">Sacra Famiglia</a><a href="zona-forcellini-padova">Forcellini</a><a href="zona-guizza-padova">Guizza</a><a href="zona-voltabarozzo-padova">Voltabarozzo</a><a href="zona-limena">Limena</a></div>
+      <div class="fcol"><div class="fh">Info</div><a href="chi-siamo">Chi siamo</a><a href="faq">FAQ</a><a href="contatti">Contatti</a><a href="privacy">Privacy</a><a href="cookie-policy">Cookie Policy</a><a href="#" data-cookie-prefs>Preferenze Cookie</a></div>
+    </div>
+    <div class="fbot"><span>&copy; 2026 Gruppo Immobiliare Righetto di Capon Gino</span><span>P.IVA 05182390285</span></div>
+  </div>
+</footer>
+<script src="js/vendor/supabase.min.js" defer></script>
+<script src="js/nav-mobile.js?v=3" defer></script>
+<script src="js/config.js?v=3" defer></script>
+<script>(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=13';document.body.appendChild(s);}
+setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
+})();</script>
+<script src="js/cookie-consent.js?v=4" defer></script>
+<script src="js/scroll-reveal.js?v=3" defer></script>
+<script src="js/welcome-popup.js?v=3" defer></script>
+</body>
+</html>

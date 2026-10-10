@@ -8,8 +8,54 @@
     "Solo 7 URL con metriche: impossibile un ranking affidabile su tutto il sito.",
     "Senza periodo precedente non si misurano cali né effetti degli interventi."
   ],
-  "candidates_total": 37,
+  "candidates_total": 50,
   "selected": [
+    {
+      "url": "/chi-siamo",
+      "file": "chi-siamo.html",
+      "tier": "pillar",
+      "score": 26.0,
+      "score_parts": {
+        "indicizzazione": 20.0,
+        "tier_mult": 1.3
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma assente dalle pagine indicizzate Google: rafforzare link interni + richiesta indicizzazione"
+      ],
+      "gsc": null,
+      "cooldown": false,
+      "last_modified": "2026-10-09",
+      "inbound": 63,
+      "title": "Chi Siamo — Righetto Immobiliare Padova",
+      "meta": "Righetto Immobiliare: conoscenza del territorio padovano. Aiutiamo famiglie e investitori a comprare, vendere e affittare casa a Padova.",
+      "issues": [
+        "non_indicizzata"
+      ],
+      "intervention_id": "SEO-2026W41-chi-siamo"
+    },
+    {
+      "url": "/contatti",
+      "file": "contatti.html",
+      "tier": "pillar",
+      "score": 26.0,
+      "score_parts": {
+        "indicizzazione": 20.0,
+        "tier_mult": 1.3
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma assente dalle pagine indicizzate Google: rafforzare link interni + richiesta indicizzazione"
+      ],
+      "gsc": null,
+      "cooldown": false,
+      "last_modified": "2026-10-09",
+      "inbound": 204,
+      "title": "Contatti — Righetto Immobiliare Padova",
+      "meta": "Contatta Righetto Immobiliare: Via Roma n.96, Limena (PD). Tel 049.8843484 · Cell 349 736 5930. Richiedi valutazione gratuita o prenota una visita.",
+      "issues": [
+        "non_indicizzata"
+      ],
+      "intervention_id": "SEO-2026W41-contatti"
+    },
     {
       "url": "/landing-vendita",
       "file": "landing-vendita.html",
@@ -30,6 +76,173 @@
       "meta": "Vuoi vendere casa nel Padovano? Valutazione gratuita in 24h, promozione professionale, team Righetto dal 2000. Commissioni nel mandato.",
       "issues": [],
       "intervention_id": "SEO-2026W41-landing-vendita"
+    },
+    {
+      "url": "/blog-tempi-vendita-casa-padova",
+      "file": "blog-tempi-vendita-casa-padova.html",
+      "tier": "owner_contenuto",
+      "score": 20.8,
+      "score_parts": {
+        "indicizzazione": 16.0,
+        "tier_mult": 1.3
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma assente dalle pagine indicizzate Google: rafforzare link interni + richiesta indicizzazione"
+      ],
+      "gsc": null,
+      "cooldown": false,
+      "last_modified": "2026-10-09",
+      "inbound": 7,
+      "title": "Tempi Vendita Casa Padova 2026: Quanto Ci Vuole Davvero?",
+      "meta": "Tempi di vendita casa a Padova 2026: 45-90 giorni al giusto prezzo. Le 4 fasi, tempistiche per quartiere e 5 strategie per vendere prima.",
+      "issues": [
+        "non_indicizzata"
+      ],
+      "intervention_id": "SEO-2026W41-blog-tempi-vendita-casa-padova"
+    },
+    {
+      "url": "/zona-vigonza",
+      "file": "zona-vigonza.html",
+      "tier": "zona",
+      "score": 17.6,
+      "score_parts": {
+        "indicizzazione": 16.0,
+        "tier_mult": 1.1
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma assente dalle pagine indicizzate Google: rafforzare link interni + richiesta indicizzazione"
+      ],
+      "gsc": null,
+      "cooldown": false,
+      "last_modified": "2026-10-09",
+      "inbound": 16,
+      "title": "Case in Vendita e Affitto a Vigonza | Righetto Immobiliare",
+      "meta": "Affitti e case in vendita a Vigonza. Agenzia Righetto Immobiliare — vendita e locazione dal 2000.",
+      "issues": [
+        "non_indicizzata"
+      ],
+      "intervention_id": "SEO-2026W41-zona-vigonza"
+    },
+    {
+      "url": "/zona-selvazzano",
+      "file": "zona-selvazzano.html",
+      "tier": "zona",
+      "score": 17.6,
+      "score_parts": {
+        "indicizzazione": 16.0,
+        "tier_mult": 1.1
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma assente dalle pagine indicizzate Google: rafforzare link interni + richiesta indicizzazione"
+      ],
+      "gsc": null,
+      "cooldown": false,
+      "last_modified": "2026-10-09",
+      "inbound": 12,
+      "title": "Case in Vendita e Affitto a Selvazzano Dentro | Righetto Immobiliare",
+      "meta": "Affitti e case in vendita a Selvazzano Dentro (PD). Ville, bifamiliari e attici da 1.600 a 2.500 euro/mq. Zona collinare tra Padova e Colli Euganei. Dal 2000.",
+      "issues": [
+        "non_indicizzata"
+      ],
+      "intervention_id": "SEO-2026W41-zona-selvazzano"
+    },
+    {
+      "url": "/zona-rubano",
+      "file": "zona-rubano.html",
+      "tier": "zona",
+      "score": 17.6,
+      "score_parts": {
+        "indicizzazione": 16.0,
+        "tier_mult": 1.1
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma assente dalle pagine indicizzate Google: rafforzare link interni + richiesta indicizzazione"
+      ],
+      "gsc": null,
+      "cooldown": false,
+      "last_modified": "2026-10-09",
+      "inbound": 12,
+      "title": "Case in Vendita e Affitto a Rubano | Righetto Immobiliare",
+      "meta": "Affitti e case in vendita a Rubano (PD): ville, appartamenti e bifamiliari da 1.700 a 2.500 euro/mq. Agenzia Righetto Immobiliare — dal 2000.",
+      "issues": [
+        "non_indicizzata"
+      ],
+      "intervention_id": "SEO-2026W41-zona-rubano"
+    },
+    {
+      "url": "/zona-ponte-san-nicolo",
+      "file": "zona-ponte-san-nicolo.html",
+      "tier": "zona",
+      "score": 17.6,
+      "score_parts": {
+        "indicizzazione": 16.0,
+        "tier_mult": 1.1
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma assente dalle pagine indicizzate Google: rafforzare link interni + richiesta indicizzazione"
+      ],
+      "gsc": null,
+      "cooldown": false,
+      "last_modified": "2026-10-09",
+      "inbound": 5,
+      "title": "Affitti e Case a Ponte San Nicolo' (PD) | Righetto",
+      "meta": "Affitti e case in vendita a Ponte San Nicolo' (PD). Ville, appartamenti e bifamiliari da 1.500 a 2.200 euro/mq. Righetto Immobiliare — dal 2000.",
+      "issues": [
+        "non_indicizzata"
+      ],
+      "intervention_id": "SEO-2026W41-zona-ponte-san-nicolo"
+    },
+    {
+      "url": "/blog-vigonza-rubano-comprare-casa-cintura-2026",
+      "file": "blog-vigonza-rubano-comprare-casa-cintura-2026.html",
+      "tier": "acquirente",
+      "score": 11.7,
+      "score_parts": {
+        "indicizzazione": 8.0,
+        "tecnico": 5.0,
+        "tier_mult": 0.9
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma assente dalle pagine indicizzate Google: rafforzare link interni + richiesta indicizzazione",
+        "on-page: title_troncato"
+      ],
+      "gsc": null,
+      "cooldown": false,
+      "last_modified": "2026-10-09",
+      "inbound": 1,
+      "title": "Vigonza e Rubano: guida all'acquisto nella cintura del capoluogo…",
+      "meta": "Servizi, mobilita', confronto con il centro di Padova e uso dei dati OMI per Vigonza e Rubano: una guida pratica per famiglie e pendolari.",
+      "issues": [
+        "title_troncato",
+        "non_indicizzata"
+      ],
+      "intervention_id": "SEO-2026W41-blog-vigonza-rubano-comprare-casa-cintura-2026"
+    },
+    {
+      "url": "/blog-quattro-imposte-rogitio-prima-casa-padova-2026",
+      "file": "blog-quattro-imposte-rogitio-prima-casa-padova-2026.html",
+      "tier": "contenuto",
+      "score": 10.0,
+      "score_parts": {
+        "indicizzazione": 5.0,
+        "tecnico": 5.0,
+        "tier_mult": 1.0
+      },
+      "reasons": [
+        "in sitemap da oltre 28 gg ma assente dalle pagine indicizzate Google: rafforzare link interni + richiesta indicizzazione",
+        "on-page: title_troncato"
+      ],
+      "gsc": null,
+      "cooldown": false,
+      "last_modified": "2026-10-09",
+      "inbound": 2,
+      "title": "Le quattro imposte al rogito prima casa a Padova 2026: IVA…",
+      "meta": "Focus calcolo al notaio: le quattro imposte su acquisto prima casa (IVA o registro, ipotecaria, catastale). DPR 131/1986, ISEE under 36 e soglia 40.000 € —…",
+      "issues": [
+        "title_troncato",
+        "non_indicizzata"
+      ],
+      "intervention_id": "SEO-2026W41-blog-quattro-imposte-rogitio-prima-casa-padova-2026"
     }
   ],
   "excluded_cooldown": [
@@ -54,6 +267,14 @@
   ],
   "below_threshold": [
     {
+      "url": "/blog-mutuo-prima-casa-padova",
+      "score": 7.2
+    },
+    {
+      "url": "/blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026",
+      "score": 7.2
+    },
+    {
       "url": "/blog-planimetria-catastale-compravendita-padova-2026",
       "score": 6.5
     },
@@ -64,6 +285,14 @@
     {
       "url": "/blog-costi-proprieta-acquisto-possesso-vendita-padova-2026",
       "score": 6.5
+    },
+    {
+      "url": "/blog-direttiva-case-green-limena-padova",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-righetto-bilancio-2025-soluzioni-affitto-2026",
+      "score": 5.0
     },
     {
       "url": "/blog-mutui-tasso-fisso-bancaitalia-padova-2026",
@@ -90,27 +319,11 @@
       "score": 5.0
     },
     {
-      "url": "/blog-quattro-imposte-rogitio-prima-casa-padova-2026",
-      "score": 5.0
-    },
-    {
       "url": "/blog-checklist-verifiche-prima-compromesso-padova-2026",
       "score": 5.0
     },
     {
-      "url": "/blog-sondaggio-bancaditalia-q1-2026-padova",
-      "score": 5.0
-    },
-    {
       "url": "/blog-costi-costruzione-istat-padova-2026",
-      "score": 5.0
-    },
-    {
-      "url": "/blog-barometro-mutui-crif-padova-2026",
-      "score": 5.0
-    },
-    {
-      "url": "/blog-dazi-usa-ue-mercato-padova-2026",
       "score": 5.0
     }
   ]
