@@ -1,0 +1,78 @@
+# Venerdì 08:00 Europe/Rome (06:00 UTC in ora legale; da fine ottobre gira alle 07:00 ora solare)
+# Ciclo SEO automatico: ingest GSC → audit → verify → evaluate → select → apply (solo approvati) → report email
+# Skill: TEST-SKILL/skill-seo-auto-weekly.md · motore: scripts/seo_auto/seo_auto.py
+name: "Venerdì — SEO automatico (GSC → 10 pagine)"
+
+on:
+  schedule:
+    - cron: "0 6 * * 5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: seo-auto
+  cancel-in-progress: false
+
+jobs:
+  seo-auto:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Dipendenze API Google (solo se il secret esiste)
+        env:
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$GSC_SERVICE_ACCOUNT_JSON" ]; then pip install --quiet google-auth requests; fi
+
+      - name: Applica interventi approvati in approvals.json
+        run: python3 scripts/seo_auto/seo_auto.py apply
+
+      - name: Ciclo settimanale
+        env:
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+        run: python3 scripts/seo_auto/seo_auto.py weekly
+
+      - name: Commit registro, snapshot, dashboard, report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/seo-auto sitemap.xml *.html 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "Nessuna modifica"
+          else
+            git commit -m "chore(seo-auto): ciclo settimanale $(date -u +%Y-%m-%d)"
+            git pull --rebase origin main && git push origin HEAD:main
+          fi
+
+      - name: Email report a info@righettoimmobiliare.it
+        env:
+          EMAIL_RELAY_KEY: ${{ secrets.EMAIL_RELAY_KEY }}
+        run: |
+          if [ -z "$EMAIL_RELAY_KEY" ]; then
+            echo "⚠️ EMAIL_RELAY_KEY assente — email non inviata"
+            exit 0
+          fi
+          PAYLOAD=$(jq -n \
+            --arg action "send_single" \
+            --arg to_email "info@righettoimmobiliare.it" \
+            --arg subject "$(cat seo-auto-subject.txt)" \
+            --arg html_body "$(cat seo-auto-email.html)" \
+            '{action: $action, to_email: $to_email, subject: $subject, html_body: $html_body}')
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
+            "https://api.righettoimmobiliare.it/send-mail.php" \
+            -H "Content-Type: application/json" \
+            -H "X-API-Key: $EMAIL_RELAY_KEY" \
+            -d "$PAYLOAD")
+          echo "Email SEO auto: HTTP $HTTP_CODE"

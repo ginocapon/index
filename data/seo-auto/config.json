@@ -1,0 +1,78 @@
+{
+  "updated": "2026-10-10",
+  "gsc_site": "sc-domain:righettoimmobiliare.it",
+  "gsc_lag_days": 3,
+  "url_inspection_max": 60,
+  "max_pages": 10,
+  "min_score": 8,
+  "min_impressions_ctr": 100,
+  "cooldown_days": 28,
+  "underlinked_threshold": 10,
+  "approval_mode": "manuale",
+  "template_paths": [
+    "/immobile"
+  ],
+  "auto_publish_allowed_ops": [],
+  "weights": {
+    "ctr_gap": 1.0,
+    "zero_click": 1.0,
+    "striking_distance": 1.0,
+    "decline": 1.2,
+    "technical": 1.0,
+    "sitemap": 1.0,
+    "internal_links": 1.0
+  },
+  "tier_multiplier": {
+    "owner_conversione": 1.6,
+    "pillar": 1.3,
+    "owner_contenuto": 1.3,
+    "zona": 1.1,
+    "contenuto": 1.0,
+    "acquirente": 0.9
+  },
+  "business_tiers": {
+    "owner_conversione": [
+      "^/servizio-vendita$",
+      "^/landing-valutazione$",
+      "^/proprietario-immobile$",
+      "^/servizio-valutazioni$",
+      "^/vendere-casa-padova-errori$",
+      "^/landing-vendita$",
+      "^/servizio-gestione$",
+      "^/servizio-locazioni$",
+      "^/landing-consulenza-immobiliare-gratuita$"
+    ],
+    "pillar": [
+      "^/$",
+      "^/agenzia-immobiliare-padova$",
+      "^/servizi$",
+      "^/chi-siamo$"
+    ],
+    "owner_contenuto": [
+      "vend",
+      "valutazion",
+      "proprietari",
+      "mandato",
+      "rendimento-affitto",
+      "gestione-locazione",
+      "affittare-casa",
+      "successione",
+      "perizia",
+      "non-si-vende"
+    ],
+    "zona": [
+      "^/zona-"
+    ],
+    "acquirente": [
+      "comprare",
+      "mutuo",
+      "studenti",
+      "acquisto",
+      "^/immobili$"
+    ]
+  },
+  "claims_to_verify": [
+    "/vendere-casa-padova-errori: «fino al 15% del valore» (H1), «Il 15% delle vendite tra privati salta» (corpo + HowTo), «FIMAA: 10-15% in meno» (FAQ) — nessuna fonte linkata: trovare la fonte o riformulare (decisione umana)."
+  ],
+  "schedule": "venerdì 08:00 Europe/Rome — .github/workflows/seo-auto-settimanale.yml"
+}

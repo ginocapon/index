@@ -6,6 +6,7 @@ Disallow: /api/
 Disallow: /scraping.html
 Disallow: /bookmarklet-helper.html
 Disallow: /js/
+Disallow: /data/seo-auto/
 Allow: /js/chatbot.js
 
 # AI Bots — benvenuti, leggete llms.txt
