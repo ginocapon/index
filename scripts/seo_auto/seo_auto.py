@@ -282,19 +282,39 @@ def ingest_csv() -> dict | None:
     if not src:
         return None
     pick = lambda *names: next((v for k, v in tables.items() if k.startswith(names)), [])
-    pages = {}
-    for key, cur, prev in _rows_metrics(pick("pagin", "page")):
-        if key.startswith("http"):
-            pages[path_from_url(key)] = {"current": cur, **({"previous": prev} if prev else {})}
-    daily = [{"date": k, **cur} for k, cur, _ in _rows_metrics(pick("date", "dat")) if re.match(r"\d{4}-\d{2}-\d{2}$", k)]
-    daily.sort(key=lambda d: d["date"])
-    queries = _rows_metrics(pick("query", "quer"))
     agg = lambda xs: m(sum(x["clicks"] for x in xs), sum(x["impressions"] for x in xs),
                        (sum((x["position"] or 0) * x["impressions"] for x in xs) / sum(x["impressions"] for x in xs))
                        if sum(x["impressions"] for x in xs) else None)
+    raw: dict[str, dict[str, list]] = {}
+    for key, cur, prev in _rows_metrics(pick("pagin", "page")):
+        if key.startswith("http"):
+            e = raw.setdefault(path_from_url(key), {"current": [], "previous": []})
+            e["current"].append(cur)
+            if prev:
+                e["previous"].append(prev)
+    pages = {p: {"current": agg(v["current"]), **({"previous": agg(v["previous"])} if v["previous"] else {})}
+             for p, v in raw.items()}
+    daily = [{"date": k, **cur} for k, cur, _ in _rows_metrics(pick("date", "dat", "grafico", "chart"))
+             if re.match(r"\d{4}-\d{2}-\d{2}$", k)]
+    daily.sort(key=lambda d: d["date"])
+    queries = _rows_metrics(pick("query", "quer"))
+    filtri = {r[0].strip().lower(): r[1].strip() for r in pick("filtri", "filters") if len(r) > 1}
     has_prev = any("previous" in v for v in pages.values())
-    site = {"current": agg([v["current"] for v in pages.values()]),
-            "previous": agg([v["previous"] for v in pages.values() if "previous" in v]) if has_prev else None}
+    span_days = (date.fromisoformat(daily[-1]["date"]) - date.fromisoformat(daily[0]["date"])).days + 1 if daily else None
+    if has_prev:
+        site = {"current": agg([v["current"] for v in pages.values()]),
+                "previous": agg([v["previous"] for v in pages.values() if "previous" in v])}
+        period = {"current": None, "previous": None}
+    elif daily and span_days >= 56:
+        end_d = date.fromisoformat(daily[-1]["date"])
+        cs, ps = (end_d - timedelta(days=27)).isoformat(), (end_d - timedelta(days=55)).isoformat()
+        pe = (end_d - timedelta(days=28)).isoformat()
+        site = {"current": agg([d for d in daily if d["date"] >= cs]),
+                "previous": agg([d for d in daily if ps <= d["date"] <= pe])}
+        period = {"current": [cs, end_d.isoformat()], "previous": [ps, pe]}
+    else:
+        site = {"current": agg([v["current"] for v in pages.values()]), "previous": None}
+        period = {"current": [daily[0]["date"], daily[-1]["date"]] if daily else None, "previous": None}
     brand = {}
     if queries:
         for label, pos in (("current", 1), ("previous", 2)):
@@ -307,9 +327,11 @@ def ingest_csv() -> dict | None:
     lim = ["Export manuale: query non collegate alle pagine (brand/non-brand solo a livello sito).",
            "GSC limita l'export a 1000 righe per tabella; query rare anonimizzate."]
     if not has_prev:
-        lim.append("Export senza «Confronta»: nessun periodo precedente, niente cali né valutazioni.")
+        lim.append(f"Export senza «Confronta» (filtro data: {filtri.get('data', 'n/d')}): metriche per pagina aggregate su "
+                   f"{span_days or '?'} gg, niente cali per pagina; il confronto 28 vs 28 gg è solo a livello sito (da Grafico).")
     return {"source": "gsc_csv", "stale": False, "source_file": src.name, "data_end_date": end,
-            "period": {"current": [daily[0]["date"], end] if daily else None, "previous": None},
+            "page_metrics_span_days": None if has_prev else span_days, "filters": filtri,
+            "period": period,
             "site": site, "brand_split": brand, "pages": pages, "daily": daily, "index_status": {},
             "top_queries_site": [{"q": q, **cur} for q, cur, _ in sorted(queries, key=lambda x: -x[1]["impressions"])[:30]],
             "limitations": lim}
@@ -577,8 +599,29 @@ def expected_ctr(pos: float | None) -> float | None:
     return .01 if pos <= 20 else .003
 
 
+_TITLE_CHANGE: dict[str, str | None] = {}
+
+
+def git_title_changed(p: str) -> str | None:
+    """Data dell'ultimo commit che ha cambiato il <title> attuale (CTR misurabile solo dopo questa data)."""
+    if p not in _TITLE_CHANGE:
+        f = file_for_path(p)
+        d = None
+        if f:
+            mm = re.search(r"<title[^>]*>.*?</title>", f.read_text(encoding="utf-8", errors="ignore"), re.S | re.I)
+            if mm:
+                r = subprocess.run(["git", "log", "-1", "--format=%cs", "-S", mm.group(0), "--", f.name],
+                                   cwd=ROOT, capture_output=True, text=True)
+                d = r.stdout.strip() or None
+        _TITLE_CHANGE[p] = d
+    return _TITLE_CHANGE[p]
+
+
 def last_content_refresh(p: str) -> str | None:
     dates = [e["ts"][:10] for e in read_registry() if e.get("url") == p and e.get("type") == "published"]
+    tc = git_title_changed(p)
+    if tc:
+        dates.append(tc)
     kp = load_json(ROOT / "data" / "gsc-keywords-priority.json", {}) or {}
     dates += [r["date"] for r in kp.get("refreshed_this_week", []) if path_from_url(r["url"]) == p and r.get("date")]
     return max(dates) if dates else None
@@ -592,7 +635,13 @@ def cooldown_active(p: str, snap: dict, conf: dict) -> bool:
     if (date.today() - date.fromisoformat(ref)).days < int(conf.get("cooldown_days", 28)):
         return True
     end = snap.get("data_end_date")
-    return bool(snap.get("stale")) or not end or end < (date.fromisoformat(ref) + timedelta(days=28)).isoformat()
+    if bool(snap.get("stale")) or not end or end < (date.fromisoformat(ref) + timedelta(days=28)).isoformat():
+        return True
+    span = snap.get("page_metrics_span_days")
+    if span and span > 35:
+        window_start = date.fromisoformat(end) - timedelta(days=span - 1)
+        return date.fromisoformat(ref) > window_start + timedelta(days=7)
+    return False
 
 
 def score_page(p: str, a: dict, g: dict | None, stale: bool, conf: dict) -> tuple[float, list[str], dict]:
@@ -626,6 +675,9 @@ def score_page(p: str, a: dict, g: dict | None, stale: bool, conf: dict) -> tupl
             reasons.append("dato GSC non aggiornato: peso dimezzato")
     sitemap_iss = [i for i in a.get("issues", []) if i.startswith("sitemap_")]
     tech = [i for i in a.get("issues", []) if not i.startswith(("meta_corta", "sitemap_", "non_indicizzata"))]
+    if "non_indicizzata" in a.get("issues", []) and g and (g.get("current") or {}).get("impressions", 0) >= 10:
+        a = {**a, "issues": [i for i in a["issues"] if i != "non_indicizzata"]}
+        reasons.append(f"copertura contraddittoria: assente dall'export Valide ma {int(g['current']['impressions'])} impressioni GSC — verificare con ispezione URL")
     if "non_indicizzata" in a.get("issues", []):
         tw = conf.get("indexing_tier_weight", {}).get(a.get("tier", "contenuto"), 1.0)
         parts["indicizzazione"] = round(10 * tw * w.get("indexing", 1.0), 1)
@@ -901,8 +953,14 @@ def cmd_evaluate() -> list[dict]:
             verdict, detail = "dati_insufficienti", "Servono snapshot API reali prima e ≥28 gg dopo la pubblicazione."
             final = False
         else:
-            b = before["pages"].get(e["url"], {}).get("current")
-            a = after["pages"].get(e["url"], {}).get("current")
+            def norm(snap_, pm):
+                span = snap_.get("page_metrics_span_days")
+                if not pm or not span or span <= 35:
+                    return pm
+                k = 28 / span
+                return {**pm, "clicks": pm["clicks"] * k, "impressions": pm["impressions"] * k}
+            b = norm(before, before["pages"].get(e["url"], {}).get("current"))
+            a = norm(after, after["pages"].get(e["url"], {}).get("current"))
             sb, sa = before["site"]["current"], after["site"]["current"]
             if not b or not a or max(b["impressions"], a["impressions"]) < 100:
                 verdict, detail, final = "dati_insufficienti", "Meno di 100 impressioni nelle finestre confrontate.", True
@@ -1041,7 +1099,9 @@ def cmd_report(evals: list[dict] | None = None) -> None:
         for lbl in ("current", "previous"):
             if bs.get(lbl):
                 b_, n_ = bs[lbl]["brand"], bs[lbl]["nonbrand"]
-                lines.append(f"- {'28 gg' if lbl == 'current' else '28 gg precedenti'} — brand: {b_['clicks']:.0f} clic / {b_['impressions']:.0f} impr. · "
+                span = snap.get("page_metrics_span_days")
+                lab = (f"{span} gg" if span else "28 gg") if lbl == "current" else "28 gg precedenti"
+                lines.append(f"- {lab} — brand: {b_['clicks']:.0f} clic / {b_['impressions']:.0f} impr. · "
                              f"non-brand: {n_['clicks']:.0f} clic / {n_['impressions']:.0f} impr. (CTR {n_['ctr']:.1%})")
     elif nb:
         lines.append(f"- Non-brand (somma query per pagina): {sum(x['clicks'] for x in nb):.0f} clic · {sum(x['impressions'] for x in nb):.0f} impr.")
