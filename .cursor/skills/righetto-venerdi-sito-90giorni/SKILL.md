@@ -73,7 +73,7 @@ Usa questa lista nell'output per l'utente; adatta alle priorità della settimana
 
 0. **Gate efficienza (15 min):** `TEST-SKILL/skill-efficienza-sito.md` §4 — `verify_media_migration.py` + `verify_ga_consent_live.py` + `google-compliance-check.py` (target 100%).
 0b. **Post venerdì in coda/pubblicati:** verifica **`skill-editoriale-visivo.md`** §1 + §7 (marchio IA, `audit_blog_visuals.py` su nuovi articoli).
-0c. **SEO automatico (cron 08:00):** leggi `data/seo-auto/reports/<oggi>.md` + `selection-latest.json`; proponi gli interventi e, dopo l'ok, scrivi `approvals.json` → `seo_auto.py apply` → `verify` — `TEST-SKILL/skill-seo-auto-weekly.md`.
+0c. **SEO automatico — DELEGA attiva dal 10/10/2026:** quando Gino carica in chat gli export GSC (Prestazioni con confronto + Copertura Valide), l'agente li mette in `data/seo-auto/inbox/`, lancia `seo_auto.py weekly` ed **esegue senza ulteriore ok** gli aggiornamenti e i refresh dei testi delle pagine selezionate (max 10), poi `apply` → commit e push → `verify`. Procedura e limiti: `TEST-SKILL/skill-seo-auto-weekly.md` §6–6.1.
 1. **Dati**: Search Console (ultimi 7/28 gg) — 1 opportunità e 1 anomalia. **Vedi § Search Console sotto** (checklist completa 10 URL + sitemap + 404/5xx).
 2. **Pubblicato**: 1 modifica concreta nel repo — **se settimana macrociclo 3 (Blog):** pubblica prossimo item da `data/editorial-queue.json` (`scheduled`) seguendo `TEST-SKILL/skill-editorial-queue.md`; altrimenti SOSTENERE o fix tecnico.
 3. **Local**: Google Business Profile — 1 post o foto o risposta a recensione (azione manuale utente). **Se attivo cron `righetto_social/`:** verificare post notizie RSS (mar/gio) e mirror Meta→GBP in `.env`.
