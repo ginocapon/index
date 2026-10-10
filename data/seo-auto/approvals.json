@@ -1,0 +1,182 @@
+{
+  "SEO-2026W41-immobile": {
+    "approved": true,
+    "approved_by": "Gino — chat 10/10/2026 «solo per oggi rendilo operativo ed eseguilo»",
+    "approved_on": "2026-10-10",
+    "url": "/immobile",
+    "file": "sitemap.xml",
+    "summary": "Rimozione /immobile da sitemap.xml",
+    "rationale": "Template scheda annuncio (contenuto via query string): l'URL nuda non ha contenuto proprio; in sitemap con priority 0.9/daily spreca crawl budget.",
+    "risk": "basso — nessuna pagina rimossa, cambia solo la sitemap",
+    "ops": [
+      {
+        "op": "replace",
+        "find": "\n  <url><loc>https://righettoimmobiliare.it/immobile</loc><lastmod>2026-03-08</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>",
+        "html": ""
+      }
+    ],
+    "verify_absent": [
+      "<loc>https://righettoimmobiliare.it/immobile</loc>"
+    ]
+  },
+  "SEO-2026W41-privacy": {
+    "approved": true,
+    "approved_by": "Gino — chat 10/10/2026 «solo per oggi rendilo operativo ed eseguilo»",
+    "approved_on": "2026-10-10",
+    "url": "/privacy",
+    "file": "sitemap.xml",
+    "summary": "Rimozione /privacy da sitemap.xml",
+    "rationale": "Pagina noindex presente in sitemap: segnale contraddittorio per Google (report «Inviata ma esclusa da noindex»).",
+    "risk": "basso — nessuna pagina rimossa, cambia solo la sitemap",
+    "ops": [
+      {
+        "op": "replace",
+        "find": "\n  <url><loc>https://righettoimmobiliare.it/privacy</loc><lastmod>2026-06-23</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>",
+        "html": ""
+      }
+    ],
+    "verify_absent": [
+      "<loc>https://righettoimmobiliare.it/privacy</loc>"
+    ]
+  },
+  "SEO-2026W41-privacy-policy": {
+    "approved": true,
+    "approved_by": "Gino — chat 10/10/2026 «solo per oggi rendilo operativo ed eseguilo»",
+    "approved_on": "2026-10-10",
+    "url": "/privacy-policy",
+    "file": "sitemap.xml",
+    "summary": "Rimozione /privacy-policy da sitemap.xml",
+    "rationale": "Canonical verso /privacy: in sitemap vanno solo URL canoniche.",
+    "risk": "basso — nessuna pagina rimossa, cambia solo la sitemap",
+    "ops": [
+      {
+        "op": "replace",
+        "find": "\n  <url><loc>https://righettoimmobiliare.it/privacy-policy</loc><lastmod>2026-06-23</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>",
+        "html": ""
+      }
+    ],
+    "verify_absent": [
+      "<loc>https://righettoimmobiliare.it/privacy-policy</loc>"
+    ]
+  },
+  "SEO-2026W41-cookie-policy": {
+    "approved": true,
+    "approved_by": "Gino — chat 10/10/2026 «solo per oggi rendilo operativo ed eseguilo»",
+    "approved_on": "2026-10-10",
+    "url": "/cookie-policy",
+    "file": "sitemap.xml",
+    "summary": "Rimozione /cookie-policy da sitemap.xml",
+    "rationale": "Pagina noindex presente in sitemap.",
+    "risk": "basso — nessuna pagina rimossa, cambia solo la sitemap",
+    "ops": [
+      {
+        "op": "replace",
+        "find": "\n  <url><loc>https://righettoimmobiliare.it/cookie-policy</loc><lastmod>2026-02-01</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>",
+        "html": ""
+      }
+    ],
+    "verify_absent": [
+      "<loc>https://righettoimmobiliare.it/cookie-policy</loc>"
+    ]
+  },
+  "SEO-2026W41-landing-valutazione": {
+    "approved": true,
+    "approved_by": "Gino — chat 10/10/2026 «solo per oggi rendilo operativo ed eseguilo»",
+    "approved_on": "2026-10-10",
+    "url": "/landing-valutazione",
+    "file": "landing-valutazione.html",
+    "summary": "Meta description da 174 a 143 caratteri (non troncata in SERP)",
+    "rationale": "Meta oltre 160 caratteri viene troncata; apertura a domanda allineata all'intento «quanto vale casa mia».",
+    "ops": [
+      {
+        "op": "set_meta",
+        "value": "Quanto vale la tua casa a Padova? Valutazione gratuita in 24h con dati OMI e comparabili di zona. Righetto Immobiliare, dal 2000 al tuo fianco."
+      }
+    ]
+  },
+  "SEO-2026W41-vendere-casa-padova-errori": {
+    "approved": true,
+    "approved_by": "Gino — chat 10/10/2026 «solo per oggi rendilo operativo ed eseguilo»",
+    "approved_on": "2026-10-10",
+    "url": "/vendere-casa-padova-errori",
+    "file": "vendere-casa-padova-errori.html",
+    "summary": "Title senza «…» troncato (53 car.) e meta senza claim «fino al 15%» non documentato (150 car.); og/twitter allineati",
+    "rationale": "Title troncato e og:title «nel territorio» incoerente; la percentuale in meta non ha fonte verificabile (regola d'oro). Claim 15% in H1/corpo/FAQ segnalati per revisione umana, non modificati oggi.",
+    "ops": [
+      {
+        "op": "set_title",
+        "value": "Vendere Casa a Padova: 7 Errori da Evitare | Righetto"
+      },
+      {
+        "op": "set_meta",
+        "value": "Vendi casa a Padova o in provincia? I 7 errori più comuni che allungano i tempi e abbassano il prezzo, e come evitarli. Stima gratuita nei 101 comuni."
+      }
+    ]
+  },
+  "SEO-2026W41-vendere-casa-padova-errori-link1": {
+    "approved": true,
+    "approved_by": "Gino — chat 10/10/2026 «solo per oggi rendilo operativo ed eseguilo»",
+    "approved_on": "2026-10-10",
+    "url": "/vendere-casa-padova-errori",
+    "file": "blog-costi-vendere-casa-padova-2026.html",
+    "summary": "Link contestuale da /blog-costi-vendere-casa-padova-2026 verso /vendere-casa-padova-errori",
+    "rationale": "Pagina owner con soli 8 link interni in entrata (soglia 10): link da guide owner tematicamente vicine.",
+    "ops": [
+      {
+        "op": "insert_after",
+        "find": "i consigli per massimizzare il vostro ricavato netto.</p>",
+        "html": "\n    <p>Prima ancora dei costi, conviene evitare le scelte che fanno perdere tempo e margine: li abbiamo raccolti nella guida <a href=\"vendere-casa-padova-errori\">7 errori da evitare quando si vende casa a Padova</a>.</p>"
+      }
+    ],
+    "verify_present": [
+      "href=\"vendere-casa-padova-errori\""
+    ]
+  },
+  "SEO-2026W41-vendere-casa-padova-errori-link2": {
+    "approved": true,
+    "approved_by": "Gino — chat 10/10/2026 «solo per oggi rendilo operativo ed eseguilo»",
+    "approved_on": "2026-10-10",
+    "url": "/vendere-casa-padova-errori",
+    "file": "blog-documenti-vendita-casa.html",
+    "summary": "Link contestuale da /blog-documenti-vendita-casa verso /vendere-casa-padova-errori",
+    "rationale": "Pagina owner con soli 8 link interni in entrata (soglia 10): link da guide owner tematicamente vicine.",
+    "ops": [
+      {
+        "op": "insert_after",
+        "find": "i della raccolta e della verifica documentale per garantire una vendita senza intoppi.</p>",
+        "html": "\n    <p>La documentazione incompleta è uno degli errori che più spesso rallentano una vendita: trovi gli altri, con le contromisure, in <a href=\"vendere-casa-padova-errori\">7 errori da evitare quando vendi casa</a>.</p>"
+      }
+    ],
+    "verify_present": [
+      "href=\"vendere-casa-padova-errori\""
+    ]
+  },
+  "SEO-2026W41-vendere-casa-padova-errori-link3": {
+    "approved": true,
+    "approved_by": "Gino — chat 10/10/2026 «solo per oggi rendilo operativo ed eseguilo»",
+    "approved_on": "2026-10-10",
+    "url": "/vendere-casa-padova-errori",
+    "file": "blog-vendita-immobiliare-padova-strategie-2026.html",
+    "summary": "Link contestuale da /blog-vendita-immobiliare-padova-strategie-2026 verso /vendere-casa-padova-errori",
+    "rationale": "Pagina owner con soli 8 link interni in entrata (soglia 10): link da guide owner tematicamente vicine.",
+    "ops": [
+      {
+        "op": "insert_after",
+        "find": "iu' brevi possibili. Ogni strategia e' supportata da dati concreti del mercato locale.</p>",
+        "html": "\n    <p>Le strategie funzionano meglio se si eliminano prima gli sbagli più frequenti: per un controllo rapido vedi <a href=\"vendere-casa-padova-errori\">i 7 errori che costano tempo e prezzo a chi vende casa a Padova</a>.</p>"
+      }
+    ],
+    "verify_present": [
+      "href=\"vendere-casa-padova-errori\""
+    ]
+  },
+  "SEO-2026W41-landing-vendita": {
+    "approved": false,
+    "status": "proposta_in_attesa_dati",
+    "url": "/landing-vendita",
+    "file": "landing-vendita.html",
+    "summary": "Decidere ruolo di /landing-vendita rispetto a /servizio-vendita (1 solo link interno)",
+    "rationale": "Rischio cannibalizzazione «vendere casa Padova»: senza dati query GSC per pagina non si sceglie se rafforzare (link) o consolidare (canonical/redirect). Serve export Pagine+Query.",
+    "ops": []
+  }
+}

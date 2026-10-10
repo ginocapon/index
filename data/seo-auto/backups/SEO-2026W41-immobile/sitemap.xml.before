@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://righettoimmobiliare.it/</loc><lastmod>2026-03-07</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://righettoimmobiliare.it/immobili</loc><lastmod>2026-03-04</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
+  <url><loc>https://righettoimmobiliare.it/immobile</loc><lastmod>2026-03-08</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
   <url><loc>https://righettoimmobiliare.it/servizi</loc><lastmod>2026-02-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://righettoimmobiliare.it/proprietario-immobile</loc><lastmod>2026-08-29</lastmod><changefreq>monthly</changefreq><priority>0.95</priority></url>
   <url><loc>https://righettoimmobiliare.it/vendere-casa-padova-errori</loc><lastmod>2026-03-06</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
@@ -150,6 +151,9 @@
   <url><loc>https://righettoimmobiliare.it/blog-mercato-immobiliare-padova-centro-2026</loc><lastmod>2026-03-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://righettoimmobiliare.it/blog-limena-vs-padova-centro-dove-comprare-2026</loc><lastmod>2026-03-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://righettoimmobiliare.it/faq</loc><lastmod>2026-02-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://righettoimmobiliare.it/privacy</loc><lastmod>2026-06-23</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://righettoimmobiliare.it/privacy-policy</loc><lastmod>2026-06-23</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://righettoimmobiliare.it/cookie-policy</loc><lastmod>2026-02-01</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <!-- Articoli blog — 31 marzo 2026 (crescita SEO) -->
   <url><loc>https://righettoimmobiliare.it/blog-scegliere-agenzia-immobiliare-padova-2026</loc><lastmod>2026-03-31</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://righettoimmobiliare.it/blog-limena-vicino-padova-comprare-2026</loc><lastmod>2026-03-31</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
