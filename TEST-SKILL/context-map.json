@@ -19,6 +19,7 @@
   "cursor_skills": {
     "_doc": "TEST-SKILL/skill-cursor-rules.md §2b — indici operativi in .cursor/skills/",
     "righetto-core-task": { "command": "/sito", "path": ".cursor/skills/righetto-core-task/SKILL.md" },
+    "righetto-seo-auto": { "command": "/seo-auto", "path": ".cursor/skills/righetto-seo-auto/SKILL.md" },
     "righetto-blog": { "command": "/blog", "path": ".cursor/skills/righetto-blog/SKILL.md" },
     "righetto-landing": { "command": "/landing", "path": ".cursor/skills/righetto-landing/SKILL.md" },
     "righetto-fix-mobile": { "command": "/mobile", "path": ".cursor/skills/righetto-fix-mobile/SKILL.md" },
@@ -48,6 +49,12 @@
   },
 
   "tasks": {
+    "seo_auto_settimanale": {
+      "skills": ["skill-essentials.md", "skill-massimo-punteggio.md", "skill-seo-auto-weekly.md", "skill-seo.md", "skill-acquisizione-proprietari.md", "skill-premortem-righetto.md"],
+      "cursor_skills": ["righetto-seo-auto", "righetto-seo"],
+      "data": ["data/seo-auto/config.json", "data/seo-auto/selection-latest.json", "data/seo-auto/approvals.json", "data/seo-auto/registry.jsonl"],
+      "note": "Ciclo GSC → max 10 pagine → op approvate con backup/rollback → verify → evaluate. Mai dati simulati; pagine owner prima. Venerdì 08:00."
+    },
     "acquisizione_venditori_advisor": {
       "skills": ["skill-essentials.md", "skill-massimo-punteggio.md", "skill-acquisizione-proprietari.md", "skill-real-estate-advisor.md", "skill-seo.md", "skill-forms-leads.md", "skill-content.md"],
       "cursor_skills": ["righetto-acquisizione-proprietari", "righetto-advisor"],
@@ -237,6 +244,13 @@
   },
 
   "automazioni_attive": {
+    "seo_auto_settimanale": {
+      "workflow": ".github/workflows/seo-auto-settimanale.yml",
+      "schedule": "Ogni venerdì 08:00 Europe/Rome (dal 16/10/2026)",
+      "script": "scripts/seo_auto/seo_auto.py apply + weekly",
+      "output": "data/seo-auto/ (registro, snapshot, dashboard, report) + email info@ «[SEO AUTO]»",
+      "secrets": ["GSC_SERVICE_ACCOUNT_JSON (da creare)", "GA4_PROPERTY_ID (opzionale)", "EMAIL_RELAY_KEY"]
+    },
     "audit_settimanale": {
       "workflow": ".github/workflows/audit-settimanale.yml",
       "schedule": "Ogni venerdì 07:00 CET",

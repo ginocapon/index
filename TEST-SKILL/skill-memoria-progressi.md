@@ -147,6 +147,7 @@
 | 25/09/2026 | **Cron venerdì sett. acq 1/12** — acq-w01 landing-valutazione + eq-sep25-001 blog affitti studenti settembre owner + social | Push main · GSC batch blog nuovo |
 | 25/09/2026 | **Premortem gate** — `skill-premortem-righetto.md` in `always_load` · `/premortem` · righetto-core + massimo-punteggio §0 | Post-deploy GSC gestione/locazioni · batch schema altri `servizio-*` pendente |
 | 28/09/2026 | **GSC** — utente: 10 richieste indicizzazione forzate (batch post-deploy) | Log `gsc-indexing-weekly.json` · follow-up 05/10 servizio-vendita + verifica 10 URL |
+| 10/10/2026 | **SEO automatico** — `scripts/seo_auto/seo_auto.py` + `skill-seo-auto-weekly.md` + cron venerdì 08:00. Ciclo 2026W41: 9 interventi (4 URL fuori sitemap, 2 title/meta, 3 link verso vendere-casa-padova-errori) | Secret `GSC_SERVICE_ACCOUNT_JSON` da creare · claim «15%» da verificare · /landing-vendita in attesa dei dati query |
 
 ---
 
