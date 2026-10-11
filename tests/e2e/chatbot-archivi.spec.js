@@ -15,6 +15,12 @@ const LO0287 = {
   superficie: 195, locali: 6, bagni: 1, attivo: true, venduto: false, affittato: false, updated_at: '2026-10-06T00:00:00Z',
 };
 
+const UFF2247 = {
+  codice: 'UFF2247', titolo: 'Ufficio a Padova', slug: 'ufficio-affitto-padova-uff2247',
+  tipo_operazione: 'affitto', tipologia: 'ufficio', comune: 'Padova', prezzo: 900,
+  superficie: 70, locali: 3, bagni: 1, attivo: true, venduto: false, affittato: false, updated_at: '2026-10-06T00:00:00Z',
+};
+
 const LF0242 = {
   codice: 'LF0242', titolo: 'AFFITTASI APPARTAMENTO A LIMENA', slug: 'appartamento-affitto-residenziale-padova-lf0242',
   tipo_operazione: 'affitto', tipologia: 'appartamento', comune: 'Padova', prezzo: 800,
@@ -56,72 +62,123 @@ async function avvia(page, cfg = {}) {
 const chiedi = (page, testo) => page.evaluate((t) => window.rigChat.send(t), testo);
 const ultima = (page) => page.locator('#rig-chat-msgs .chat-msg.bot .chat-bubble').last();
 
-test.describe('Chatbot archivi — 10 domande reali', () => {
+test.describe('Chatbot archivi - correttezza delle risposte', () => {
   test('1 AP-01: apertura chat chiede argomento', async ({ page }) => {
     await avvia(page, {});
     await expect(ultima(page)).toContainText('Di cosa vorresti parlare');
   });
 
-  test('2 Archivio A: documenti vendita + fonte', async ({ page }) => {
+  test('2 Archivio A: risposta originale + fonte con link', async ({ page }) => {
     await avvia(page, {});
-    await chiedi(page, 'Quali documenti servono per vendere casa?');
-    await expect(ultima(page)).toContainText('provenienza');
+    await chiedi(page, 'Come si leggono le quotazioni OMI?');
+    await expect(ultima(page)).toContainText('Si selezionano semestre, Provincia, Comune, zona OMI');
     await expect(ultima(page)).toContainText('Fonte:');
-    await expect(ultima(page)).toContainText('Notariato');
+    await expect(ultima(page).locator('a[href^="https://"]').first()).toBeVisible();
   });
 
-  test('3 LO0287 bagni: incongruenza, niente certezza assoluta', async ({ page }) => {
+  test('3 Tutte le 100 FAQ di A: risposta identica all\'originale e sempre con fonte', async ({ page }) => {
+    await avvia(page, {});
+    const A = JSON.parse(fs.readFileSync(path.join(DATA, 'archivio-a-100-faq.json'), 'utf8')).faq;
+    const out = await page.evaluate(async (faq) => {
+      const bad = [];
+      for (const f of faq) {
+        const r = await window.RighettoChatArchivi.tryArchiviFaq(window.rigChat.engine, f.domanda);
+        if (!r || r.indexOf(f.risposta) !== 0 || r.indexOf('**Fonte:** [') < 0) bad.push(f.id);
+      }
+      return bad;
+    }, A);
+    expect(out).toEqual([]);
+  });
+
+  test('4 Mutuo prima casa: nessuna risposta fuori tema, nessun form nome', async ({ page }) => {
+    await avvia(page, {});
+    await chiedi(page, 'Come funziona il mutuo prima casa?');
+    const t = await ultima(page).innerText();
+    expect(t).not.toMatch(/Come ti chiami/);
+    expect(t).not.toMatch(/dimostrare i pagamenti|senza mutuo/i);
+  });
+
+  test('5 LO0287 bagni: discordanza segnalata, niente certezza', async ({ page }) => {
     await avvia(page, { immobili: [LO0287] });
     await chiedi(page, 'Quanti bagni ha LO0287?');
     await expect(ultima(page)).toContainText('discordant');
-    await expect(ultima(page)).toContainText('Nota di verifica');
+    await expect(ultima(page)).toContainText('bagni=2, bagni_totali=1');
   });
 
-  test('4 Affitto Limena 800€: promemoria + una domanda superficie', async ({ page }) => {
+  test('6 UFF2247 canone: nota 900 contro 800 + IVA', async ({ page }) => {
+    await avvia(page, { immobili: [UFF2247] });
+    await chiedi(page, 'Quanto costa UFF2247?');
+    await expect(ultima(page)).toContainText('900');
+    await expect(ultima(page)).toContainText('800 più IVA');
+  });
+
+  test('7 UFF2247-V: nota propria, distinta da UFF2247', async ({ page }) => {
+    await avvia(page, { immobili: [{ ...UFF2247, codice: 'UFF2247-V', tipo_operazione: 'vendita', prezzo: 180000 }] });
+    await chiedi(page, 'Quanto costa UFF2247-V?');
+    await expect(ultima(page)).toContainText('180.000');
+    await expect(ultima(page)).toContainText('Vendita 180.000 nel campo contro testo di locazione');
+  });
+
+  test('8 Affitto Limena 800: usa i requisiti, una sola domanda (superficie)', async ({ page }) => {
     await avvia(page, { immobili: [LF0242] });
     await chiedi(page, 'Cerco un appartamento in affitto a Limena fino a 800 euro.');
-    await expect(ultima(page)).toContainText('modulo');
-    await expect(ultima(page)).toContainText('superficie');
-    await expect(ultima(page)).not.toContainText('Come ti chiami');
+    const t = await ultima(page).innerText();
+    expect(t).toContain('Quale superficie');
+    expect(t).not.toMatch(/Come ti chiami/);
+    expect(t).not.toMatch(/acquistare oppure|acquisto o locazione/);
+    expect((t.match(/\?/g) || []).length).toBe(1);
   });
 
-  test('5 Uffici senza telefono: AP-08 + domanda operazione', async ({ page }) => {
+  test('9 Budget 250000 euro letto come 250.000', async ({ page }) => {
+    await avvia(page, { immobili: [] });
+    await chiedi(page, 'Cerco una casa in vendita a Padova fino a 250000 euro');
+    const t = await ultima(page).innerText();
+    expect(t).toContain('250.000');
+    expect(t).not.toMatch(/25\.000(?!0)/);
+  });
+
+  test('10 Uffici senza telefono: AP-08 + domanda operazione', async ({ page }) => {
     await avvia(page, {});
     await chiedi(page, 'Vorrei solo sapere quali uffici avete, senza dare il telefono.');
     await expect(ultima(page)).toContainText('continuiamo qui');
     await expect(ultima(page)).toContainText('acquistare oppure');
   });
 
-  test('6 LF0242 prezzo live da scheda', async ({ page }) => {
-    await avvia(page, { immobili: [LF0242] });
-    await chiedi(page, 'Quanto costa LF0242?');
-    await expect(ultima(page)).toContainText('800');
-    await expect(ultima(page)).toContainText('Limena');
+  test('11 AP-05: argomento tecnico generico chiede il dubbio', async ({ page }) => {
+    await avvia(page, {});
+    await chiedi(page, 'Ho una questione tecnica');
+    await expect(ultima(page)).toContainText('Qual è il dubbio');
   });
 
-  test('7 Mutuo / Archivio A: non avvia form contatto', async ({ page }) => {
+  test('12 AP-07: invito novità a fine chat, una volta sola, senza promesse di alert', async ({ page }) => {
     await avvia(page, {});
-    await chiedi(page, 'Come funziona il mutuo prima casa?');
-    const t = await ultima(page).innerText();
-    expect(t).not.toMatch(/Come ti chiami/);
-  });
-
-  test('8 Fallback + invito catalogo (AP-07)', async ({ page }) => {
-    await avvia(page, {});
-    await chiedi(page, 'xqzv blorf grumpf nonsense 12345');
+    await chiedi(page, 'xqzv blorf grumpf nonsense');
     await expect(ultima(page)).toContainText('consultare il catalogo');
-    await expect(ultima(page)).toContainText('Catalogo immobili');
+    const t = await ultima(page).innerText();
+    expect(t).not.toMatch(/ti avviser|notifica|anteprima/i);
+    await chiedi(page, 'xqzv altro nonsense blorf');
+    expect(await ultima(page).innerText()).not.toContain('consultare il catalogo');
   });
 
-  test('9 Query catalogo include affittato=false', async ({ page }) => {
+  test('13 Domanda disponibilità: mai istantanee archivio B, sempre catalogo live', async ({ page }) => {
+    const calls = await avvia(page, { immobili: [] });
+    await chiedi(page, 'Avete immobili in vendita a Limena?');
+    const t = await ultima(page).innerText();
+    expect(t).not.toMatch(/snapshot|11\/10\/2026/i);
+    expect(decodeURIComponent(calls.immobiliUrls.join(' '))).toMatch(/attivo=eq\.true/);
+  });
+
+  test('14 Query catalogo: attivo, non venduto, non affittato', async ({ page }) => {
     const calls = await avvia(page, { immobili: [] });
     await chiedi(page, 'cerco bilocale in affitto padova');
     await page.waitForTimeout(2500);
     const q = decodeURIComponent(calls.immobiliUrls.join(' '));
+    expect(q).toMatch(/attivo=eq\.true/);
+    expect(q).toMatch(/venduto=eq\.false/);
     expect(q).toMatch(/affittato=eq\.false/);
   });
 
-  test('10 Immobile venduto: non disponibile', async ({ page }) => {
+  test('15 Immobile venduto: non disponibile', async ({ page }) => {
     await avvia(page, { immobili: [{ ...LO0287, venduto: true }] });
     await chiedi(page, 'LO0287 prezzo');
     await expect(ultima(page)).toContainText('non risulta più disponibile');
