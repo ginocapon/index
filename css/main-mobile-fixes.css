@@ -1,0 +1,33 @@
+/* Ritocchi mobile delle sole pagine principali. Carta, watermark, colori e desktop invariati. */
+@media (max-width: 640px) {
+ body.homepage .hero-stats-row { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); padding:18px 12px; }
+ body.homepage .h-stat { min-width:0; max-width:none; padding:14px 10px; border-bottom:1px solid rgba(44,74,110,.1); }
+ body.homepage .h-stat:nth-child(2n) { border-right:0; }
+ body.homepage .h-stat:nth-child(n+3) { border-bottom:0; }
+ body.homepage .h-stat-l { overflow-wrap:anywhere; }
+ .page-hero-servizi .hs-lbl { overflow-wrap:anywhere; }
+}
+@media (max-width:768px) {
+ .page-hero-immobili .search-box { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+ .page-hero-immobili .sb-field { min-width:0; padding:.5rem .65rem; }
+ .page-hero-immobili .sb-field.sb-zona { min-width:0; grid-column:1/-1; }
+ .page-hero-immobili .sb-field select { min-height:44px; }
+ .page-hero-immobili .sb-search-btn { grid-column:1/-1; min-height:48px; }
+ body.rig-main-cookie-visible { padding-bottom:var(--rig-cookie-space,110px); }
+ html { scroll-padding-bottom:var(--rig-cookie-space,0px); }
+ input,select,textarea,button { scroll-margin-bottom:var(--rig-cookie-space,0px); }
+}
+
+@media (max-width:600px) {
+ #rig-cookie-banner .rig-cb-inner { padding:6px 14px; gap:4px; }
+ #rig-cookie-banner .rig-cb-text { line-height:1.4; }
+}
+@media (max-width:600px) {
+ .page-hero-servizi .hs { padding:1rem .2rem; }
+ .page-hero-servizi .hs-lbl { font-size:.7rem; letter-spacing:0; overflow-wrap:normal; }
+}
+@media (max-width:600px) {
+ body.homepage #rig-cookie-banner .rig-cb-inner { padding:6px 14px; gap:4px; }
+ body.homepage #rig-cookie-banner .rig-cb-text { font-size:.74rem; line-height:1.4; }
+ body.homepage #rig-cookie-banner .rig-cb-btn { min-height:44px; }
+}

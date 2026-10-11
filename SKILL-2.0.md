@@ -83,3 +83,5 @@ Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutt
 **Changelog rapido (20 maggio 2026):** form lead — `TEST-SKILL/skill-forms-leads.md` (landing/blog: invio diretto `sendNotifica`, no doppio passaggio Contatti).
 
 **Changelog rapido (3 aprile 2026):** migrazione CTA `blog-rich` documentata in testata e sez. 8.1b / 9.2 di `TEST-SKILL/SKILL-2.0.md`; script in `scripts/migrate_legacy_red_google_cta.py` e correlati.
+
+**Nuovi articoli, leggerezza senza riassetto:** [`TEST-SKILL/skill-blog-leggero.md`](TEST-SKILL/skill-blog-leggero.md). Vale solo da ora in avanti; carta e RI intoccabili, archivio escluso.

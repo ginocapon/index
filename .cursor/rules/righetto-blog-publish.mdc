@@ -41,7 +41,7 @@ Dettaglio: **`TEST-SKILL/skill-editoriale-visivo.md`** (comando permanente prior
 - Script batch: **no** padding word-count; minimo ~900 parole **utili**; ampliare con H2/tabelle/FAQ, non micro-paragrafi (`build_blog_bonus_fisco_batch_oct2026.py` modello negativo)
 
 ## Copertina e corpo — foto **generate con IA** (obbligatorio)
-- WebP **1900×900** (19:9), target **<500 KiB** — **generate ex novo con IA**, tema Padova/Veneto/immobiliare
+- WebP **1900×900** (19:9), target **≤150 KiB** (mobile ≤80 KiB; card dedicate ≤100 KiB, vedi `skill-blog-leggero.md`) — **generate ex novo con IA**, tema Padova/Veneto/immobiliare
 - **Obbligatorio:** `rig-ai-photo-wrap` + `data-ai-generated="true"` + marchio **FOTO AI** su hero e ogni figure
 - **Vietato:** foto reali da `img/immobili/`, stock, CDN esterni, riuso hero di altri articoli
 - Corpo: **≥3** `<figure>` IA + **≥2** tabelle HTML + **≥2** SVG colorati con fonte (`skill-content.md` §2.1, §2.1e)
@@ -77,3 +77,6 @@ Prima di chiudere: `check_doppioni_sito.py` → **`build_editorial_memory.py`** 
 - Template/build script: head con `blog-rich.css` → `blog-lead-form.css` → **`css/rig-blog-article.css?v=N`** (altrimenti l'articolo nasce con H1 a peso 300, grigio 4,0:1, testi < 0.7rem)
 - Soglie e checklist: `TEST-SKILL/skill-design.md` §14 · audit: `scripts/audit-blog-design.js` (0 issues a 1440 e 390 prima del commit)
 - **`figure.chart-wrap` / SVG:** testo **sempre dentro** i box (clip + wrap); contrasto box scuro→bianco, arancio/chiaro→#152435; note lunghe **sotto** lo schema; dopo batch o fix → `python scripts/rebuild_blog_chart_svg.py` · dettaglio §14.4 `skill-design.md`
+
+## Articoli futuri: leggerezza senza cambio di identità
+Leggere **`TEST-SKILL/skill-blog-leggero.md`**. Carta e R/RI intoccabili. Soglie immagini, font condivisi, alt, prove mobile e date oneste. Non avviare correzioni retroattive dell'archivio; nessun push senza ok specifico di Gino.

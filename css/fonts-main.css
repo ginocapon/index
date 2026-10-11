@@ -1,0 +1,273 @@
+/* Stessi caratteri, pesi e simboli per italiano/latino. Altre scritture: fallback originale. */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+ unicode-range: U+0250-1FFF, U+2C00-10FFFF;
+  src: url('../fonts/cormorant-garamond-300.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+ unicode-range: U+0020-024F, U+2000-2BFF;
+  src: url('../fonts/main-latin/cormorant-garamond-300.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+ unicode-range: U+0250-1FFF, U+2C00-10FFFF;
+  src: url('../fonts/cormorant-garamond-300i.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+ unicode-range: U+0020-024F, U+2000-2BFF;
+  src: url('../fonts/main-latin/cormorant-garamond-300i.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+ unicode-range: U+0250-1FFF, U+2C00-10FFFF;
+  src: url('../fonts/cormorant-garamond-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+ unicode-range: U+0020-024F, U+2000-2BFF;
+  src: url('../fonts/main-latin/cormorant-garamond-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+ unicode-range: U+0250-1FFF, U+2C00-10FFFF;
+  src: url('../fonts/cormorant-garamond-400i.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+ unicode-range: U+0020-024F, U+2000-2BFF;
+  src: url('../fonts/main-latin/cormorant-garamond-400i.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+ unicode-range: U+0250-1FFF, U+2C00-10FFFF;
+  src: url('../fonts/cormorant-garamond-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+ unicode-range: U+0020-024F, U+2000-2BFF;
+  src: url('../fonts/main-latin/cormorant-garamond-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+ unicode-range: U+0250-1FFF, U+2C00-10FFFF;
+  src: url('../fonts/cormorant-garamond-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+ unicode-range: U+0020-024F, U+2000-2BFF;
+  src: url('../fonts/main-latin/cormorant-garamond-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+ unicode-range: U+0250-1FFF, U+2C00-10FFFF;
+  src: url('../fonts/cormorant-garamond-600i.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+ unicode-range: U+0020-024F, U+2000-2BFF;
+  src: url('../fonts/main-latin/cormorant-garamond-600i.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+ unicode-range: U+0250-1FFF, U+2C00-10FFFF;
+  src: url('../fonts/cormorant-garamond-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+ unicode-range: U+0020-024F, U+2000-2BFF;
+  src: url('../fonts/main-latin/cormorant-garamond-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+ unicode-range: U+0250-1FFF, U+2C00-10FFFF;
+  src: url('../fonts/montserrat-300.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+ unicode-range: U+0020-024F, U+2000-2BFF;
+  src: url('../fonts/main-latin/montserrat-300.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+ unicode-range: U+0250-1FFF, U+2C00-10FFFF;
+  src: url('../fonts/montserrat-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+ unicode-range: U+0020-024F, U+2000-2BFF;
+  src: url('../fonts/main-latin/montserrat-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+ unicode-range: U+0250-1FFF, U+2C00-10FFFF;
+  src: url('../fonts/montserrat-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+ unicode-range: U+0020-024F, U+2000-2BFF;
+  src: url('../fonts/main-latin/montserrat-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+ unicode-range: U+0250-1FFF, U+2C00-10FFFF;
+  src: url('../fonts/montserrat-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+ unicode-range: U+0020-024F, U+2000-2BFF;
+  src: url('../fonts/main-latin/montserrat-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+ unicode-range: U+0250-1FFF, U+2C00-10FFFF;
+  src: url('../fonts/montserrat-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+ unicode-range: U+0020-024F, U+2000-2BFF;
+  src: url('../fonts/main-latin/montserrat-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+ unicode-range: U+0250-1FFF, U+2C00-10FFFF;
+  src: url('../fonts/montserrat-800.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+ unicode-range: U+0020-024F, U+2000-2BFF;
+  src: url('../fonts/main-latin/montserrat-800.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+ unicode-range: U+0250-1FFF, U+2C00-10FFFF;
+  src: url('../fonts/dm-sans-300.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+ unicode-range: U+0020-024F, U+2000-2BFF;
+  src: url('../fonts/main-latin/dm-sans-300.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+ unicode-range: U+0250-1FFF, U+2C00-10FFFF;
+  src: url('../fonts/dm-sans-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+ unicode-range: U+0020-024F, U+2000-2BFF;
+  src: url('../fonts/main-latin/dm-sans-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+ unicode-range: U+0250-1FFF, U+2C00-10FFFF;
+  src: url('../fonts/dm-sans-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+ unicode-range: U+0020-024F, U+2000-2BFF;
+  src: url('../fonts/main-latin/dm-sans-500.woff2') format('woff2');
+}

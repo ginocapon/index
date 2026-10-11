@@ -5,8 +5,8 @@
 <script src="js/ga-consent.js?v=23"></script>  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#2C4A6E">
   <title>Blog Immobiliare Padova — Righetto Immobiliare</title>
-  <meta name="robots" content="index, follow, max-image-preview:large"><link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co"><link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
+  <meta name="robots" content="index, follow, max-image-preview:large"><link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co"><link rel="preload" href="fonts/main-latin/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/main-latin/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="canonical" href="https://righettoimmobiliare.it/blog">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Blog Immobiliare — Righetto Immobiliare Padova">
@@ -22,7 +22,7 @@
 <meta name="twitter:description" content="Guide, consigli e analisi sul mercato immobiliare di Padova e provincia.">
 <meta name="twitter:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
 <meta name="description" content="Guide e analisi sul mercato immobiliare di Padova e provincia: vendita, affitti, mutui e bonus con dati OMI, FIMAA e ISTAT. Righetto Immobiliare, dal 2000.">
-  <link rel="stylesheet" href="css/fonts.css?v=3">
+  <link rel="stylesheet" href="css/fonts-main.css?v=1">
   <link rel="stylesheet" href="css/nav-mobile.css?v=7">
   <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/welcome-popup.css?v=3" media="print" onload="this.media='all'">
@@ -175,6 +175,7 @@
 ]}
 </script>
 <style id="rig-motion">@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}::view-transition-old(root){animation:rig-vt-out .4s cubic-bezier(.32,.72,0,1) both}::view-transition-new(root){animation:rig-vt-in .55s cubic-bezier(.32,.72,0,1) both}html{scroll-behavior:smooth}.sr,.sr-left,.sr-right,.rv{transition-duration:.95s;transition-timing-function:cubic-bezier(.32,.72,0,1)}}@keyframes rig-vt-out{to{opacity:0;transform:scale(.985)}}@keyframes rig-vt-in{from{opacity:0;transform:scale(1.015)}}</style>
+<link rel="stylesheet" href="css/main-mobile-fixes.css?v=1">
 </head>
 <body class="page-hero-blog">
 <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
@@ -2348,6 +2349,9 @@ function excerpt(html, maxWords) {
 }
 
 // Estrae la prima immagine dal contenuto: cerca tag img, poi URL nel JSON-LD "image", poi URL immagine diretta
+const MAIN_CARD_PREVIEWS = {"img/blog/blog-casa-non-si-vende-padova-strategia-2026-hero.webp": "img/card-previews/card-93e6897dd589.webp", "img/blog/blog-registrazione-locazione-fumetto-proprietari-padova-2026-hero.webp": "img/card-previews/card-1604d9333d2c.webp", "img/blog/blog-percorso-acquisto-casa-padova-fumetto-2026-hero.webp": "img/card-previews/card-ef6f0595dd14.webp", "img/foto-servizi/vendita-immobili-padova.webp": "img/card-previews/card-7d26bf3a1881.webp", "img/immobili/LO0287/001-1787650992944-000-bifamiliare-al-grezzo-ponterotto-81.webp": "img/card-previews/card-359bdb76c220.webp", "img/immobili/LP0285-V/001-1783334008482-whatsapp-image-2026-07-06-at-12-22-31-4.webp": "img/card-previews/card-96a857c22246.webp", "img/immobili/CAP1609a/001-1775130731703-chatgpt-image-2-apr-2026-13-52-01.webp": "img/card-previews/card-33c83e4388d4.webp", "img/immobili/LA0307/001-1772206804826-003-img-3022-wmk-0.webp": "img/card-previews/card-c533532a77ad.webp"};
+function mainCardPreview(src) { return MAIN_CARD_PREVIEWS[String(src || "").replace("https://righettoimmobiliare.it/", "").replace(/^\//, "").split("?")[0]] || src; }
+
 function extractFirstImage(html) {
   if (!html) return '';
   // 1. Cerca tag img con attributo src
@@ -2413,7 +2417,7 @@ function renderBlog() {
     gridEl.innerHTML = '<div class="blog-empty"><div style="font-size:3rem;margin-bottom:1rem">📝</div><h3>Nessun articolo trovato</h3><p>Prova un\'altra categoria o modifica la ricerca.</p></div>';
   } else {
     gridEl.innerHTML = filtered.map(a => {
-      const cardImg = a.immagine_copertina || extractFirstImage(a.contenuto);
+      const cardImg = mainCardPreview(a.immagine_copertina || extractFirstImage(a.contenuto));
       return `
       <a class="acard" href="${artUrl(a)}">
         <div class="acard-img">${cardImg ? '<img src="'+cardImg+'" alt="'+esc(a.titolo)+'" width="400" height="160" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.outerHTML=\'<div class=acard-img-ph>'+(a.emoji||'&#128221;')+'</div>\'">' : '<div class="acard-img-ph">'+(a.emoji || '&#128221;')+'</div>'}</div>
@@ -2435,7 +2439,7 @@ function renderBlog() {
   const recent = all.slice(0, 6);
   document.getElementById('recentSidebar').innerHTML = recent.length
     ? recent.map(a => {
-        const riImg = a.immagine_copertina || extractFirstImage(a.contenuto);
+        const riImg = mainCardPreview(a.immagine_copertina || extractFirstImage(a.contenuto));
         return `
         <a href="${artUrl(a)}" style="text-decoration:none;color:inherit">
           <div class="recent-item"><div class="ri-img">${riImg ? '<img src="'+riImg+'" alt="'+esc(a.titolo)+'" width="52" height="40" style="width:100%;height:100%;object-fit:cover;border-radius:2px" loading="lazy">' : (a.emoji || '&#128221;')}</div><div><div class="ri-title">${esc(a.titolo)}</div><div class="ri-date">${fmtDateShort(a.data)}</div></div></div>
@@ -2483,7 +2487,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
 (function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=17';document.body.appendChild(s);}
 setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
 })();</script>
-<script src="js/cookie-consent.js?v=4" defer></script>
+<script src="js/cookie-consent-main.js?v=1" defer></script>
 <script src="js/scroll-reveal.js?v=5" defer></script>
 <script src="js/welcome-popup.js?v=3" defer></script>
 </body>
