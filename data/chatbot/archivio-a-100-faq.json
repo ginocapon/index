@@ -1,0 +1,1309 @@
+{
+  "schema_version": "1.0",
+  "titolo": "Archivio A — normative e mercato (100 FAQ)",
+  "data_verifica": "2026-10-11",
+  "fonte_seed": "data/linda-kb-seed-300.csv",
+  "voci": [
+    {
+      "id": "A-001",
+      "k": [
+        "Come posso vendere casa?",
+        "vendere casa",
+        "Come posso vendere appartamento?",
+        "Come posso vendere immobile?",
+        "Come posso vendere abitazione?"
+      ],
+      "domanda": "Come posso vendere casa?",
+      "r": "Il primo passo è raccogliere informazioni sull’immobile e fissare una valutazione preliminare. Per definire prezzo e strategia servono zona, caratteristiche, stato e documentazione.",
+      "categoria": "vendita",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-002",
+      "k": [
+        "Quanto vale il mio appartamento?"
+      ],
+      "domanda": "Quanto vale il mio appartamento?",
+      "r": "Il valore dipende da zona, superficie, piano, stato, pertinenze, efficienza energetica e compravendite comparabili. Le quotazioni online sono orientative; è utile una valutazione specifica.",
+      "categoria": "vendita",
+      "fonte": {
+        "titolo": "Osservatorio del Mercato Immobiliare (Agenzia delle Entrate)",
+        "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi"
+      }
+    },
+    {
+      "id": "A-003",
+      "k": [
+        "Quanto tempo ci vuole per vendere?"
+      ],
+      "domanda": "Quanto tempo ci vuole per vendere?",
+      "r": "Dipende da prezzo, domanda locale, caratteristiche e documenti. Non è possibile garantire una tempistica; possiamo stimare uno scenario dopo aver esaminato il caso.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-004",
+      "k": [
+        "Quali documenti servono per vendere?",
+        "documenti servono per vendere"
+      ],
+      "domanda": "Quali documenti servono per vendere?",
+      "r": "In genere occorrono titolo di provenienza, dati catastali, planimetria, informazioni urbanistiche, APE e documenti condominiali pertinenti. La lista precisa va verificata con tecnico e notaio.",
+      "categoria": "vendita",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-005",
+      "k": [
+        "Devo avere l’APE per vendere?",
+        "avere l’APE per vendere",
+        "Devo avere l’attestato di prestazione energetica per vendere?",
+        "Devo avere l’certificato energetico per vendere?"
+      ],
+      "domanda": "Devo avere l’APE per vendere?",
+      "r": "La disciplina energetica prevede obblighi informativi e documentali, con regole specifiche in base alla fase e al caso. Verifica la validità dell’APE con un tecnico abilitato.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-006",
+      "k": [
+        "Posso vendere una casa con mutuo?",
+        "vendere una casa con mutuo",
+        "Posso vendere una casa con finanziamento?"
+      ],
+      "domanda": "Posso vendere una casa con mutuo?",
+      "r": "In molti casi sì, ma il mutuo residuo e le modalità di estinzione devono essere coordinati con banca e notaio prima del rogito.",
+      "categoria": "vendita",
+      "fonte": {
+        "titolo": "Banca d'Italia",
+        "url": "https://www.bancaditalia.it/"
+      }
+    },
+    {
+      "id": "A-007",
+      "k": [
+        "Posso vendere una casa ereditata?",
+        "vendere una casa ereditata"
+      ],
+      "domanda": "Posso vendere una casa ereditata?",
+      "r": "Può essere possibile, ma occorre verificare successione, titolarità, eventuali altri eredi e formalità necessarie con notaio o professionista.",
+      "categoria": "vendita",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-008",
+      "k": [
+        "È meglio vendere da privato o con agenzia?",
+        "vendere da privato o con agenzia",
+        "È meglio vendere da privato o con agenzia immobiliare?"
+      ],
+      "domanda": "È meglio vendere da privato o con agenzia?",
+      "r": "Dipende da tempo, competenze, gestione delle visite, negoziazione e documenti. Confronta servizi, costi, incarico e strategia prima di decidere.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-009",
+      "k": [
+        "Che cos’è un incarico in esclusiva?",
+        "incarico in esclusiva"
+      ],
+      "domanda": "Che cos’è un incarico in esclusiva?",
+      "r": "È un accordo che attribuisce all’agenzia l’incarico secondo le condizioni e la durata scritte. Leggi attentamente esclusiva, recesso, rinnovo e provvigione.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-010",
+      "k": [
+        "Posso revocare un incarico di vendita?",
+        "revocare un incarico di vendita"
+      ],
+      "domanda": "Posso revocare un incarico di vendita?",
+      "r": "Dipende dal testo sottoscritto e dalle norme applicabili. Verifica durata, recesso, penali e comunicazioni richieste prima di procedere.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-011",
+      "k": [
+        "Come si stabilisce il prezzo iniziale?",
+        "stabilisce il prezzo iniziale"
+      ],
+      "domanda": "Come si stabilisce il prezzo iniziale?",
+      "r": "Si confrontano immobili simili, vendite recenti quando disponibili, caratteristiche, domanda e condizioni del bene. Un prezzo troppo alto può ridurre le richieste.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-012",
+      "k": [
+        "Il prezzo richiesto è il valore reale?",
+        "prezzo richiesto è il valore reale"
+      ],
+      "domanda": "Il prezzo richiesto è il valore reale?",
+      "r": "Non necessariamente: il prezzo pubblicizzato è una richiesta, mentre il prezzo effettivo può differire. Vanno distinti prezzi richiesti, prezzi di vendita e stime.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-013",
+      "k": [
+        "Devo accettare la prima offerta?",
+        "accettare la prima offerta",
+        "Devo accettare la prima proposta?"
+      ],
+      "domanda": "Devo accettare la prima offerta?",
+      "r": "Non necessariamente. Valuta importo, solidità dell’acquirente, tempi, condizioni sospensive, caparra e data del rogito prima di rispondere.",
+      "categoria": "vendita",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-014",
+      "k": [
+        "Posso vendere una casa affittata?",
+        "vendere una casa affittata"
+      ],
+      "domanda": "Posso vendere una casa affittata?",
+      "r": "In generale può essere possibile, ma il contratto di locazione e gli eventuali diritti di prelazione vanno esaminati caso per caso.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-015",
+      "k": [
+        "L’inquilino ha diritto di prelazione?",
+        "inquilino ha diritto di prelazione",
+        "L’conduttore ha diritto di prelazione?"
+      ],
+      "domanda": "L’inquilino ha diritto di prelazione?",
+      "r": "Non sempre. Dipende dalla fattispecie, dal tipo di locazione e dalle condizioni previste dalla legge; serve una verifica specifica prima di vendere.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-016",
+      "k": [
+        "Chi paga l’APE?",
+        "paga l’APE",
+        "Chi paga l’attestato di prestazione energetica?",
+        "Chi paga l’certificato energetico?"
+      ],
+      "domanda": "Chi paga l’APE?",
+      "r": "Va concordato e verificato nel caso concreto; il proprietario deve comunque assicurarsi che gli obblighi energetici applicabili siano rispettati.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-017",
+      "k": [
+        "Come preparo casa alle visite?",
+        "Come preparo appartamento alle visite?",
+        "Come preparo immobile alle visite?",
+        "Come preparo abitazione alle visite?"
+      ],
+      "domanda": "Come preparo casa alle visite?",
+      "r": "Ordina gli ambienti, valorizza luce e spazi, prepara informazioni veritiere e risolvi piccoli problemi evidenti. Evita di nascondere difetti rilevanti.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-018",
+      "k": [
+        "Devo dichiarare i difetti dell’immobile?",
+        "dichiarare i difetti dell’immobile",
+        "Devo dichiarare i difetti dell’casa?",
+        "Devo dichiarare i difetti dell’appartamento?",
+        "Devo dichiarare i difetti dell’abitazione?"
+      ],
+      "domanda": "Devo dichiarare i difetti dell’immobile?",
+      "r": "Non occultare informazioni rilevanti. Obblighi e conseguenze dipendono dal difetto e dal contratto; per casi delicati consulta un professionista.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-019",
+      "k": [
+        "Posso vendere se la planimetria non corrisponde?",
+        "vendere se la planimetria non corrisponde"
+      ],
+      "domanda": "Posso vendere se la planimetria non corrisponde?",
+      "r": "La difformità va fatta verificare da un tecnico prima della vendita. Non si deve presumere che sia irrilevante o sanabile.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-020",
+      "k": [
+        "Quanto costa vendere casa?",
+        "vendere casa",
+        "Quanto costa vendere appartamento?",
+        "Quanto costa vendere immobile?",
+        "Quanto costa vendere abitazione?"
+      ],
+      "domanda": "Quanto costa vendere casa?",
+      "r": "I costi possono includere provvigione, documentazione tecnica, APE, eventuali adempimenti fiscali e spese per cancellazioni o regolarizzazioni. Il quadro dipende dal caso.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-021",
+      "k": [
+        "Quando si paga la provvigione?",
+        "si paga la provvigione"
+      ],
+      "domanda": "Quando si paga la provvigione?",
+      "r": "Il diritto alla provvigione dipende dall’attività di mediazione e dalle condizioni applicabili; controlla l’incarico e gli accordi scritti con l’agenzia.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-022",
+      "k": [
+        "L’agenzia può chiedere la provvigione a entrambe le parti?",
+        "agenzia può chiedere la provvigione a entrambe le parti",
+        "L’agenzia immobiliare può chiedere la provvigione a entrambe le parti?"
+      ],
+      "domanda": "L’agenzia può chiedere la provvigione a entrambe le parti?",
+      "r": "Il mediatore può avere diritto alla provvigione da entrambe le parti se ne ricorrono i presupposti. Importi e condizioni vanno chiariti per iscritto.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-023",
+      "k": [
+        "Come si sceglie un’agenzia?",
+        "sceglie un’agenzia",
+        "Come si sceglie un’agenzia immobiliare?"
+      ],
+      "domanda": "Come si sceglie un’agenzia?",
+      "r": "Valuta abilitazione, conoscenza della zona, metodo di valutazione, qualità dell’annuncio, report, gestione documentale e trasparenza sui costi.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-024",
+      "k": [
+        "Che cos’è una valutazione comparativa?",
+        "a valutazione comparativa"
+      ],
+      "domanda": "Che cos’è una valutazione comparativa?",
+      "r": "È una stima basata sul confronto con immobili simili e sulle caratteristiche del bene. Non equivale automaticamente a una perizia asseverata.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-025",
+      "k": [
+        "Le quotazioni OMI dicono il prezzo esatto?",
+        "quotazioni OMI dicono il prezzo esatto"
+      ],
+      "domanda": "Le quotazioni OMI dicono il prezzo esatto?",
+      "r": "No. Le quotazioni OMI forniscono intervalli orientativi per zone e tipologie; non sostituiscono la valutazione del singolo immobile.",
+      "categoria": "vendita",
+      "fonte": {
+        "titolo": "Osservatorio del Mercato Immobiliare (Agenzia delle Entrate)",
+        "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi"
+      }
+    },
+    {
+      "id": "A-026",
+      "k": [
+        "Posso vendere una casa con abuso edilizio?",
+        "vendere una casa con abuso edilizio"
+      ],
+      "domanda": "Posso vendere una casa con abuso edilizio?",
+      "r": "Occorre una verifica tecnica e giuridica preventiva. Non è possibile stabilire dalla sola descrizione se la difformità sia regolarizzabile.",
+      "categoria": "vendita",
+      "fonte": null
+    },
+    {
+      "id": "A-027",
+      "k": [
+        "Posso vendere se ci sono spese condominiali arretrate?",
+        "vendere se ci sono spese condominiali arretrate"
+      ],
+      "domanda": "Posso vendere se ci sono spese condominiali arretrate?",
+      "r": "La situazione va documentata e gestita con amministratore e notaio. Occorre chiarire importi, delibere e ripartizione delle spese.",
+      "categoria": "vendita",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-028",
+      "k": [
+        "Come gestire più offerte?"
+      ],
+      "domanda": "Come gestire più offerte?",
+      "r": "Confronta prezzo, condizioni, tempi, caparra e affidabilità, mantenendo comunicazioni chiare e coerenti con gli impegni già assunti.",
+      "categoria": "vendita",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-029",
+      "k": [
+        "Cosa succede dopo aver trovato un acquirente?",
+        "succede dopo aver trovato un acquirente"
+      ],
+      "domanda": "Cosa succede dopo aver trovato un acquirente?",
+      "r": "Si verificano documenti e condizioni, si definiscono proposta e pagamenti, si coordina il preliminare se previsto e infine il rogito con il notaio.",
+      "categoria": "vendita",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-030",
+      "k": [
+        "Come si compra casa?",
+        "compra casa",
+        "Come si compra appartamento?",
+        "Come si compra immobile?",
+        "Come si compra abitazione?"
+      ],
+      "domanda": "Come si compra casa?",
+      "r": "Il percorso tipico comprende budget, ricerca, visite, verifiche documentali, proposta, eventuale preliminare e rogito. Il notaio e i tecnici aiutano a verificare gli aspetti di competenza.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-031",
+      "k": [
+        "Cosa devo controllare durante una visita?",
+        "controllare durante una visita"
+      ],
+      "domanda": "Cosa devo controllare durante una visita?",
+      "r": "Stato manutentivo, umidità, impianti, esposizione, rumore, spese condominiali, lavori deliberati, pertinenze e coerenza tra annuncio e realtà.",
+      "categoria": "acquisto",
+      "fonte": null
+    },
+    {
+      "id": "A-032",
+      "k": [
+        "Quali documenti chiedere prima di comprare?",
+        "documenti chiedere prima di comprare"
+      ],
+      "domanda": "Quali documenti chiedere prima di comprare?",
+      "r": "Chiedi informazioni su provenienza, dati catastali, situazione urbanistica, APE, condominio, vincoli e formalità. Le verifiche vanno coordinate con notaio e tecnico.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-033",
+      "k": [
+        "Come capisco se posso permettermi una casa?"
+      ],
+      "domanda": "Come capisco se posso permettermi una casa?",
+      "r": "Considera prezzo, imposte, notaio, eventuale agenzia, lavori, spese condominiali e rata sostenibile. La banca valuta separatamente il merito creditizio.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-034",
+      "k": [
+        "Posso fare una proposta subordinata al mutuo?",
+        "fare una proposta subordinata al mutuo"
+      ],
+      "domanda": "Posso fare una proposta subordinata al mutuo?",
+      "r": "È possibile valutare una condizione sospensiva ben formulata. La clausola deve indicare in modo chiaro condizioni e termini; falla esaminare prima della firma.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Banca d'Italia",
+        "url": "https://www.bancaditalia.it/"
+      }
+    },
+    {
+      "id": "A-035",
+      "k": [
+        "Che differenza c’è tra proposta e preliminare?",
+        "Che differenza c’è tra proposta e compromesso?",
+        "Che differenza c’è tra offerta e preliminare?"
+      ],
+      "domanda": "Che differenza c’è tra proposta e preliminare?",
+      "r": "La proposta è l’offerta dell’acquirente; se accettata e completa degli elementi necessari può produrre effetti vincolanti. Il preliminare disciplina l’obbligo di concludere la vendita.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-036",
+      "k": [
+        "È obbligatorio fare il preliminare?",
+        "fare il preliminare"
+      ],
+      "domanda": "È obbligatorio fare il preliminare?",
+      "r": "Non sempre è necessario un documento separato: dipende dal percorso contrattuale. È importante capire gli effetti della proposta accettata e far verificare i testi.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-037",
+      "k": [
+        "Quanto devo versare come caparra?",
+        "versare come caparra"
+      ],
+      "domanda": "Quanto devo versare come caparra?",
+      "r": "Non esiste un importo unico valido per ogni operazione. La somma va negoziata e indicata chiaramente nel documento, considerando prezzo e rischi.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-038",
+      "k": [
+        "Che differenza c’è tra caparra e acconto?"
+      ],
+      "domanda": "Che differenza c’è tra caparra e acconto?",
+      "r": "Hanno funzioni giuridiche differenti. La qualificazione dipende da quanto pattuito e scritto; non usare i termini come sinonimi senza verificarne gli effetti.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-039",
+      "k": [
+        "Cosa succede se il venditore si ritira?",
+        "venditore si ritira"
+      ],
+      "domanda": "Cosa succede se il venditore si ritira?",
+      "r": "Le conseguenze dipendono dal contratto, dalla natura delle somme versate e dall’inadempimento. Fai esaminare gli atti da un legale prima di agire.",
+      "categoria": "acquisto",
+      "fonte": null
+    },
+    {
+      "id": "A-040",
+      "k": [
+        "Cosa succede se mi ritiro dall’acquisto?",
+        "mi ritiro dall’acquisto"
+      ],
+      "domanda": "Cosa succede se mi ritiro dall’acquisto?",
+      "r": "Potrebbero esserci conseguenze economiche e contrattuali. Occorre verificare proposta, preliminare, caparra, clausole e motivi del recesso.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-041",
+      "k": [
+        "Che cosa significa rogito?",
+        "Che cosa significa atto notarile?"
+      ],
+      "domanda": "Che cosa significa rogito?",
+      "r": "È l’atto notarile con cui normalmente si perfeziona il trasferimento della proprietà, secondo le condizioni concordate e le verifiche richieste.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-042",
+      "k": [
+        "Chi sceglie il notaio?",
+        "sceglie il notaio"
+      ],
+      "domanda": "Chi sceglie il notaio?",
+      "r": "La scelta è normalmente dell’acquirente, salvo accordi o situazioni particolari; è opportuno coinvolgerlo con anticipo per le verifiche.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-043",
+      "k": [
+        "Posso comprare casa senza mutuo?",
+        "comprare casa senza mutuo",
+        "Posso comprare appartamento senza mutuo?",
+        "Posso comprare immobile senza mutuo?",
+        "Posso comprare abitazione senza mutuo?"
+      ],
+      "domanda": "Posso comprare casa senza mutuo?",
+      "r": "Sì, se disponi delle risorse necessarie e puoi dimostrare i pagamenti richiesti. Restano da considerare imposte, spese e verifiche documentali.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Banca d'Italia",
+        "url": "https://www.bancaditalia.it/"
+      }
+    },
+    {
+      "id": "A-044",
+      "k": [
+        "La banca finanzia sempre l’80%?",
+        "banca finanzia sempre l’80%"
+      ],
+      "domanda": "La banca finanzia sempre l’80%?",
+      "r": "No. La percentuale finanziabile dipende dalla banca, dal profilo del richiedente, dalla valutazione dell’immobile e dal prodotto di credito.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Banca d'Italia",
+        "url": "https://www.bancaditalia.it/"
+      }
+    },
+    {
+      "id": "A-045",
+      "k": [
+        "Posso comprare casa se sono lavoratore autonomo?",
+        "comprare casa se sono lavoratore autonomo",
+        "Posso comprare appartamento se sono lavoratore autonomo?",
+        "Posso comprare immobile se sono lavoratore autonomo?",
+        "Posso comprare abitazione se sono lavoratore autonomo?"
+      ],
+      "domanda": "Posso comprare casa se sono lavoratore autonomo?",
+      "r": "È possibile, ma la banca valuterà redditi documentati, stabilità, debiti e altri elementi. Solo l’istituto può confermare l’esito della pratica.",
+      "categoria": "acquisto",
+      "fonte": null
+    },
+    {
+      "id": "A-046",
+      "k": [
+        "Cosa significa immobile libero al rogito?",
+        "mmobile libero al rogito",
+        "Cosa significa casa libero al rogito?",
+        "Cosa significa appartamento libero al rogito?",
+        "Cosa significa abitazione libero al rogito?"
+      ],
+      "domanda": "Cosa significa immobile libero al rogito?",
+      "r": "Significa che al trasferimento l’immobile deve essere consegnato libero secondo quanto concordato. Verifica occupanti, beni presenti e clausole di consegna.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-047",
+      "k": [
+        "Posso acquistare una casa occupata da un inquilino?",
+        "acquistare una casa occupata da un inquilino",
+        "Posso comprare una casa occupata da un inquilino?"
+      ],
+      "domanda": "Posso acquistare una casa occupata da un inquilino?",
+      "r": "Può essere possibile, ma il contratto può proseguire e limitare l’immediata disponibilità. Esamina durata, registrazione e diritti delle parti.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Agenzia delle Entrate",
+        "url": "https://www.agenziaentrate.gov.it/"
+      }
+    },
+    {
+      "id": "A-048",
+      "k": [
+        "Come verifico che il venditore sia proprietario?",
+        "Come verifico che il venditore sia locatore?"
+      ],
+      "domanda": "Come verifico che il venditore sia proprietario?",
+      "r": "Il notaio svolge le verifiche di titolarità e formalità. Non affidarti soltanto a una visura o a dichiarazioni verbali.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-049",
+      "k": [
+        "Che cos’è la conformità catastale?",
+        "conformità catastale",
+        "Che cos’è la conformità catasto?"
+      ],
+      "domanda": "Che cos’è la conformità catastale?",
+      "r": "È la corrispondenza richiesta tra dati e planimetria catastale e lo stato reale, secondo le regole applicabili. Va verificata con un tecnico.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-050",
+      "k": [
+        "Catasto e urbanistica sono la stessa cosa?",
+        "catastale e urbanistica sono la stessa cosa?"
+      ],
+      "domanda": "Catasto e urbanistica sono la stessa cosa?",
+      "r": "No. La conformità catastale e quella urbanistico-edilizia sono verifiche distinte; una non prova automaticamente l’altra.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-051",
+      "k": [
+        "Che cos’è la classe energetica?",
+        "classe energetica"
+      ],
+      "domanda": "Che cos’è la classe energetica?",
+      "r": "È una classificazione della prestazione energetica dell’immobile secondo l’APE. Incide sulle informazioni da fornire, ma non determina da sola il prezzo.",
+      "categoria": "acquisto",
+      "fonte": null
+    },
+    {
+      "id": "A-052",
+      "k": [
+        "Conviene comprare una casa da ristrutturare?",
+        "Conviene acquistare una casa da ristrutturare?"
+      ],
+      "domanda": "Conviene comprare una casa da ristrutturare?",
+      "r": "Dipende da prezzo, costi realistici dei lavori, tempi, permessi, imprevisti e valore atteso. È prudente fare un sopralluogo tecnico e un preventivo.",
+      "categoria": "acquisto",
+      "fonte": null
+    },
+    {
+      "id": "A-053",
+      "k": [
+        "Come valuto le spese condominiali?"
+      ],
+      "domanda": "Come valuto le spese condominiali?",
+      "r": "Chiedi consuntivi, preventivi, verbali assembleari e lavori deliberati. Le spese ordinarie e straordinarie possono incidere sul costo complessivo.",
+      "categoria": "acquisto",
+      "fonte": null
+    },
+    {
+      "id": "A-054",
+      "k": [
+        "Posso comprare una quota di immobile?",
+        "comprare una quota di immobile",
+        "Posso acquistare una quota di immobile?"
+      ],
+      "domanda": "Posso comprare una quota di immobile?",
+      "r": "Sì, ma acquisto, gestione e futura vendita della comunione hanno implicazioni specifiche. È opportuno ricevere assistenza notarile o legale.",
+      "categoria": "acquisto",
+      "fonte": null
+    },
+    {
+      "id": "A-055",
+      "k": [
+        "Che cosa sono le servitù?"
+      ],
+      "domanda": "Che cosa sono le servitù?",
+      "r": "Sono diritti o pesi che possono gravare su un immobile a favore di un altro fondo o soggetto, secondo il titolo e la legge. Vanno verificate nei documenti.",
+      "categoria": "acquisto",
+      "fonte": null
+    },
+    {
+      "id": "A-056",
+      "k": [
+        "Cosa controllare in un immobile in condominio?",
+        "controllare in un immobile in condominio"
+      ],
+      "domanda": "Cosa controllare in un immobile in condominio?",
+      "r": "Regolamento, spese, verbali, lavori, contenziosi, impianti comuni, eventuali morosità e limitazioni d’uso.",
+      "categoria": "acquisto",
+      "fonte": null
+    },
+    {
+      "id": "A-057",
+      "k": [
+        "Come faccio un’offerta sensata?",
+        "Come faccio un’proposta sensata?"
+      ],
+      "domanda": "Come faccio un’offerta sensata?",
+      "r": "Considera comparabili, condizioni dell’immobile, lavori, tempi, concorrenza e budget. L’offerta deve indicare chiaramente prezzo, scadenza e condizioni.",
+      "categoria": "acquisto",
+      "fonte": null
+    },
+    {
+      "id": "A-058",
+      "k": [
+        "Quali costi ci sono oltre al prezzo?",
+        "costi ci sono oltre al prezzo"
+      ],
+      "domanda": "Quali costi ci sono oltre al prezzo?",
+      "r": "Possono esserci imposte, notaio, provvigione, mutuo, perizia, assicurazioni, trasloco e lavori. Importi e agevolazioni vanno verificati per il caso concreto.",
+      "categoria": "acquisto",
+      "fonte": {
+        "titolo": "Agenzia delle Entrate",
+        "url": "https://www.agenziaentrate.gov.it/"
+      }
+    },
+    {
+      "id": "A-059",
+      "k": [
+        "Cos’è il compromesso?",
+        "compromesso"
+      ],
+      "domanda": "Cos’è il compromesso?",
+      "r": "È il nome comune del contratto preliminare, con cui le parti si obbligano a concludere la vendita futura secondo condizioni concordate.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-060",
+      "k": [
+        "Il preliminare trasferisce la proprietà?",
+        "preliminare trasferisce la proprietà"
+      ],
+      "domanda": "Il preliminare trasferisce la proprietà?",
+      "r": "Di norma no: crea l’obbligo di concludere il contratto definitivo. Il trasferimento si realizza normalmente con il rogito, salvo strutture giuridiche particolari.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-061",
+      "k": [
+        "La proposta accettata è vincolante?",
+        "proposta accettata è vincolante"
+      ],
+      "domanda": "La proposta accettata è vincolante?",
+      "r": "Può diventarlo se contiene gli elementi necessari e l’accettazione viene comunicata secondo le condizioni previste. Il testo va letto integralmente.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-062",
+      "k": [
+        "Quando si registra il preliminare?",
+        "si registra il preliminare"
+      ],
+      "domanda": "Quando si registra il preliminare?",
+      "r": "Il preliminare è soggetto a registrazione secondo termini e regole fiscali vigenti. Le imposte dipendono anche dalle somme e dalle pattuizioni.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Agenzia delle Entrate",
+        "url": "https://www.agenziaentrate.gov.it/"
+      }
+    },
+    {
+      "id": "A-063",
+      "k": [
+        "È utile trascrivere il preliminare?"
+      ],
+      "domanda": "È utile trascrivere il preliminare?",
+      "r": "In alcune operazioni la trascrizione notarile può offrire tutela rispetto a eventi successivi. Valuta costi e utilità con il notaio.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-064",
+      "k": [
+        "Qual è la differenza tra caparra confirmatoria e penitenziale?",
+        "differenza tra caparra confirmatoria e penitenziale"
+      ],
+      "domanda": "Qual è la differenza tra caparra confirmatoria e penitenziale?",
+      "r": "Hanno funzioni diverse: la confirmatoria tutela rispetto all’inadempimento; la penitenziale è collegata al diritto di recesso pattuito. Il testo è decisivo.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-065",
+      "k": [
+        "La caparra viene restituita al rogito?",
+        "caparra viene restituita al rogito"
+      ],
+      "domanda": "La caparra viene restituita al rogito?",
+      "r": "Di norma viene imputata al prezzo secondo gli accordi, se qualificata come caparra e così previsto. Verifica le clausole e i pagamenti.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-066",
+      "k": [
+        "Cosa succede se il mutuo viene rifiutato?",
+        "mutuo viene rifiutato"
+      ],
+      "domanda": "Cosa succede se il mutuo viene rifiutato?",
+      "r": "Dipende dalla presenza e dalla formulazione di una condizione sospensiva e dal rispetto dei termini. Senza una clausola efficace possono sorgere conseguenze economiche.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Banca d'Italia",
+        "url": "https://www.bancaditalia.it/"
+      }
+    },
+    {
+      "id": "A-067",
+      "k": [
+        "Come si scrive una clausola sospensiva per il mutuo?",
+        "scrive una clausola sospensiva per il mutuo"
+      ],
+      "domanda": "Come si scrive una clausola sospensiva per il mutuo?",
+      "r": "Deve definire con chiarezza evento, importo o caratteristiche del finanziamento, scadenza e prova dell’esito. È opportuno farla redigere o verificare da un professionista.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Banca d'Italia",
+        "url": "https://www.bancaditalia.it/"
+      }
+    },
+    {
+      "id": "A-068",
+      "k": [
+        "Posso cambiare idea dopo la proposta?",
+        "cambiare idea dopo la proposta"
+      ],
+      "domanda": "Posso cambiare idea dopo la proposta?",
+      "r": "Dipende da quando e come è stata comunicata l’accettazione e dal contenuto della proposta. Prima di ritirarsi, fai verificare gli effetti del documento.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-069",
+      "k": [
+        "Il preliminare deve essere notarile?",
+        "preliminare deve essere notarile"
+      ],
+      "domanda": "Il preliminare deve essere notarile?",
+      "r": "Può essere redatto in diverse forme, ma forma, registrazione e trascrizione hanno effetti differenti. Per tutele specifiche consulta il notaio.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Agenzia delle Entrate",
+        "url": "https://www.agenziaentrate.gov.it/"
+      }
+    },
+    {
+      "id": "A-070",
+      "k": [
+        "Quali dati inserire nel preliminare?",
+        "dati inserire nel preliminare"
+      ],
+      "domanda": "Quali dati inserire nel preliminare?",
+      "r": "Identità delle parti, descrizione dell’immobile, prezzo, pagamenti, scadenze, consegna e condizioni essenziali; il professionista verifica gli ulteriori elementi richiesti.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-071",
+      "k": [
+        "Cosa succede se il venditore non si presenta al rogito?",
+        "venditore non si presenta al rogito"
+      ],
+      "domanda": "Cosa succede se il venditore non si presenta al rogito?",
+      "r": "Le conseguenze dipendono dagli impegni assunti e dall’eventuale inadempimento. Documenta le comunicazioni e chiedi assistenza legale.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-072",
+      "k": [
+        "Posso chiedere l’esecuzione forzata del preliminare?",
+        "chiedere l’esecuzione forzata del preliminare"
+      ],
+      "domanda": "Posso chiedere l’esecuzione forzata del preliminare?",
+      "r": "In determinate condizioni la legge prevede strumenti giudiziari per ottenere gli effetti del contratto definitivo. È una questione da valutare con un avvocato.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-073",
+      "k": [
+        "Il preliminare va registrato anche se c’è un’agenzia?",
+        "preliminare va registrato anche se c’è un’agenzia",
+        "Il preliminare va registrato anche se c’è un’agenzia immobiliare?"
+      ],
+      "domanda": "Il preliminare va registrato anche se c’è un’agenzia?",
+      "r": "L’obbligo dipende dal tipo di atto e dalla normativa fiscale; la presenza dell’agenzia non elimina automaticamente gli adempimenti.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Agenzia delle Entrate",
+        "url": "https://www.agenziaentrate.gov.it/"
+      }
+    },
+    {
+      "id": "A-074",
+      "k": [
+        "Che imposte si pagano sul preliminare?"
+      ],
+      "domanda": "Che imposte si pagano sul preliminare?",
+      "r": "Dipendono dalla disciplina vigente e dalle somme indicate, come caparra e acconti. Verifica le aliquote aggiornate con Agenzia delle Entrate o notaio.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-075",
+      "k": [
+        "Che differenza c’è tra acconto prezzo e caparra?"
+      ],
+      "domanda": "Che differenza c’è tra acconto prezzo e caparra?",
+      "r": "L’acconto è un pagamento anticipato del prezzo; la caparra ha una funzione specifica prevista dal codice civile. La dicitura deve essere coerente con l’intenzione delle parti.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-076",
+      "k": [
+        "Posso inserire mobili nel preliminare?",
+        "nserire mobili nel preliminare"
+      ],
+      "domanda": "Posso inserire mobili nel preliminare?",
+      "r": "Sì, si possono descrivere gli arredi inclusi e le condizioni concordate, distinguendoli dall’immobile e indicando eventuali valori o inventari.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-077",
+      "k": [
+        "Come si tutela il compratore da ipoteche?",
+        "tutela il compratore da ipoteche"
+      ],
+      "domanda": "Come si tutela il compratore da ipoteche?",
+      "r": "Il notaio effettua verifiche sulle formalità e coordina eventuali cancellazioni o estinzioni. Non basarti soltanto su dichiarazioni del venditore.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-078",
+      "k": [
+        "Il venditore può ricevere una caparra in contanti?",
+        "venditore può ricevere una caparra in contanti"
+      ],
+      "domanda": "Il venditore può ricevere una caparra in contanti?",
+      "r": "I pagamenti devono rispettare le regole vigenti sulla tracciabilità e sui limiti all’uso del contante. Verifica gli importi e utilizza strumenti documentabili.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-079",
+      "k": [
+        "Chi conserva la caparra?",
+        "conserva la caparra"
+      ],
+      "domanda": "Chi conserva la caparra?",
+      "r": "Dipende da quanto pattuito e da come viene versata. Il documento deve chiarire destinatario, modalità e condizioni di restituzione o imputazione.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-080",
+      "k": [
+        "Si può prorogare il preliminare?"
+      ],
+      "domanda": "Si può prorogare il preliminare?",
+      "r": "Le parti possono concordare una modifica scritta, verificando scadenze, registrazione e altri adempimenti. Non presumere che una proroga verbale sia sufficiente.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Agenzia delle Entrate",
+        "url": "https://www.agenziaentrate.gov.it/"
+      }
+    },
+    {
+      "id": "A-081",
+      "k": [
+        "Che cosa significa condizione sospensiva?"
+      ],
+      "domanda": "Che cosa significa condizione sospensiva?",
+      "r": "È una clausola che subordina l’efficacia o alcuni effetti del contratto a un evento futuro e incerto definito nel testo.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-082",
+      "k": [
+        "Che cosa significa condizione risolutiva?"
+      ],
+      "domanda": "Che cosa significa condizione risolutiva?",
+      "r": "È una clausola che prevede la cessazione degli effetti al verificarsi dell’evento stabilito, secondo la formulazione e la legge applicabile.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-083",
+      "k": [
+        "La provvigione matura con la proposta?",
+        "provvigione matura con la proposta"
+      ],
+      "domanda": "La provvigione matura con la proposta?",
+      "r": "Dipende dal momento in cui si conclude l’affare ai fini della mediazione e dalle condizioni concrete. Fai verificare proposta, accettazione e accordi.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-084",
+      "k": [
+        "Posso inserire una data di rogito flessibile?",
+        "nserire una data di rogito flessibile"
+      ],
+      "domanda": "Posso inserire una data di rogito flessibile?",
+      "r": "È possibile concordare termini e condizioni, ma vanno definiti in modo non ambiguo, indicando eventuali proroghe e conseguenze del ritardo.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-085",
+      "k": [
+        "Cosa fare se emergono difformità dopo il preliminare?",
+        "fare se emergono difformità dopo il preliminare"
+      ],
+      "domanda": "Cosa fare se emergono difformità dopo il preliminare?",
+      "r": "Documenta la difformità e sospendi decisioni improvvisate. Notaio, tecnico e legale devono valutare gravità, rimedi e obblighi contrattuali.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-086",
+      "k": [
+        "Come tutelare somme versate prima del rogito?"
+      ],
+      "domanda": "Come tutelare somme versate prima del rogito?",
+      "r": "Usa pagamenti tracciabili, ricevute e clausole precise. In operazioni complesse valuta con il notaio strumenti di deposito e garanzia.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-087",
+      "k": [
+        "Il preliminare può essere ceduto?",
+        "preliminare può essere ceduto"
+      ],
+      "domanda": "Il preliminare può essere ceduto?",
+      "r": "La possibilità dipende dal contratto, dalla struttura dell’operazione e dalle norme applicabili. Serve esaminare le clausole e gli eventuali consensi.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-088",
+      "k": [
+        "Cosa portare dal notaio per il rogito?",
+        "portare dal notaio per il rogito"
+      ],
+      "domanda": "Cosa portare dal notaio per il rogito?",
+      "r": "Documenti d’identità, codice fiscale, titoli e dati richiesti dal notaio, documentazione del pagamento e del mutuo se presente. La lista definitiva va chiesta allo studio.",
+      "categoria": "procedure",
+      "fonte": {
+        "titolo": "Banca d'Italia",
+        "url": "https://www.bancaditalia.it/"
+      }
+    },
+    {
+      "id": "A-089",
+      "k": [
+        "Come viene calcolato il valore al metro quadro?"
+      ],
+      "domanda": "Come viene calcolato il valore al metro quadro?",
+      "r": "Si confrontano valori di immobili comparabili e si considerano superficie commerciale, stato, piano, esposizione, pertinenze e caratteristiche locali.",
+      "categoria": "territorio",
+      "fonte": null
+    },
+    {
+      "id": "A-090",
+      "k": [
+        "Cos’è la superficie commerciale?",
+        "superficie commerciale"
+      ],
+      "domanda": "Cos’è la superficie commerciale?",
+      "r": "È una superficie convenzionale che può includere, con pesi diversi, muri, balconi, terrazze e pertinenze. I criteri possono variare: chiarire sempre il metodo usato.",
+      "categoria": "territorio",
+      "fonte": null
+    },
+    {
+      "id": "A-091",
+      "k": [
+        "Un piano alto vale di più?",
+        "piano alto vale di più"
+      ],
+      "domanda": "Un piano alto vale di più?",
+      "r": "Può incidere positivamente o negativamente secondo ascensore, vista, luce, rumore e mercato locale. Non esiste una maggiorazione universale.",
+      "categoria": "territorio",
+      "fonte": null
+    },
+    {
+      "id": "A-092",
+      "k": [
+        "Quanto incide il garage?"
+      ],
+      "domanda": "Quanto incide il garage?",
+      "r": "Il valore dipende da disponibilità di parcheggio, dimensioni, accessibilità, zona e domanda. Va valutato separatamente o come pertinenza secondo il caso.",
+      "categoria": "territorio",
+      "fonte": null
+    },
+    {
+      "id": "A-093",
+      "k": [
+        "Il terrazzo aumenta il valore?",
+        "terrazzo aumenta il valore"
+      ],
+      "domanda": "Il terrazzo aumenta il valore?",
+      "r": "Spesso è un elemento apprezzato, ma l’incidenza dipende da dimensione, fruibilità, privacy, esposizione e mercato della zona.",
+      "categoria": "territorio",
+      "fonte": null
+    },
+    {
+      "id": "A-094",
+      "k": [
+        "Come influisce la classe energetica?"
+      ],
+      "domanda": "Come influisce la classe energetica?",
+      "r": "Può incidere su costi di gestione, comfort e appetibilità, ma l’effetto sul prezzo dipende dal mercato e dalle caratteristiche complessive.",
+      "categoria": "territorio",
+      "fonte": null
+    },
+    {
+      "id": "A-095",
+      "k": [
+        "Le case ristrutturate valgono sempre di più?",
+        "case ristrutturate valgono sempre di più"
+      ],
+      "domanda": "Le case ristrutturate valgono sempre di più?",
+      "r": "Non necessariamente. Qualità dei lavori, conformità, gusto, costi sostenuti e domanda locale determinano l’effetto sul valore.",
+      "categoria": "territorio",
+      "fonte": {
+        "titolo": "Consiglio Nazionale del Notariato",
+        "url": "https://www.notariato.it/"
+      }
+    },
+    {
+      "id": "A-096",
+      "k": [
+        "Come valutare una casa da ristrutturare?"
+      ],
+      "domanda": "Come valutare una casa da ristrutturare?",
+      "r": "Stima il valore nello stato attuale e sottrai costi realistici, tempi, rischi e imprevisti, confrontando con immobili simili già ristrutturati.",
+      "categoria": "territorio",
+      "fonte": null
+    },
+    {
+      "id": "A-097",
+      "k": [
+        "Posso usare i prezzi degli annunci come comparabili?",
+        "usare i prezzi degli annunci come comparabili"
+      ],
+      "domanda": "Posso usare i prezzi degli annunci come comparabili?",
+      "r": "Sono utili come indicazione dei prezzi richiesti, ma non dimostrano i prezzi effettivi di compravendita. Confronta immobili davvero simili.",
+      "categoria": "territorio",
+      "fonte": null
+    },
+    {
+      "id": "A-098",
+      "k": [
+        "Cosa sono le quotazioni OMI?",
+        "quotazioni OMI"
+      ],
+      "domanda": "Cosa sono le quotazioni OMI?",
+      "r": "Sono intervalli di valori immobiliari per zone omogenee e tipologie, pubblicati dall’Agenzia delle Entrate. Non costituiscono una perizia del singolo bene.",
+      "categoria": "territorio",
+      "fonte": {
+        "titolo": "Osservatorio del Mercato Immobiliare (Agenzia delle Entrate)",
+        "url": "https://www.agenziaentrate.gov.it/portale/web/guest/schede/fabbricatiterreni/omi"
+      }
+    },
+    {
+      "id": "A-099",
+      "k": [
+        "Ogni quanto aggiornare la valutazione?"
+      ],
+      "domanda": "Ogni quanto aggiornare la valutazione?",
+      "r": "Quando cambiano mercato, condizioni dell’immobile o strategia di vendita. Se il bene resta invenduto, rivedi dati e feedback delle visite.",
+      "categoria": "territorio",
+      "fonte": null
+    },
+    {
+      "id": "A-100",
+      "k": [
+        "Come capire se il prezzo è troppo alto?"
+      ],
+      "domanda": "Come capire se il prezzo è troppo alto?",
+      "r": "Valuta il numero e la qualità dei contatti, le visite, le offerte e il confronto con immobili concorrenti. I segnali vanno interpretati insieme.",
+      "categoria": "territorio",
+      "fonte": null
+    }
+  ]
+}

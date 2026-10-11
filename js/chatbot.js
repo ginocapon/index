@@ -1567,6 +1567,7 @@ class RighettoChat {
     this.stimaData = {};
     this.contattoPending = null;
     this.ricercaData = {};
+    this.chatSession = null;
     this.isOpen = false;
     this.supabase = null;
     this.initSupabase();
@@ -1718,7 +1719,7 @@ class RighettoChat {
     const mqMax = Math.round(mqTarget * 1.20);
     try {
       let q = this.supabase.from('immobili').select('*')
-        .eq('attivo', true).eq('venduto', false)
+        .eq('attivo', true).eq('venduto', false).eq('affittato', false)
         .gte('superficie', mqMin).lte('superficie', mqMax)
         .limit(3);
       if (tipo && !tipo.includes('terreno') && !tipo.includes('capannone')) {
@@ -2037,7 +2038,8 @@ class RighettoChat {
   }
 
   // ────── RICERCA IMMOBILI DAL CATALOGO ──────
-  async cercaImmobiliCatalogo(tipoOp, zona) {
+  async cercaImmobiliCatalogo(tipoOp, zona, opts) {
+    opts = opts || {};
     if (!this.supabase) {
       // Fallback senza Supabase
       const tipo = tipoOp || 'vendita';
@@ -2046,7 +2048,7 @@ class RighettoChat {
 
     try {
       let q = this.supabase.from('immobili').select('*')
-        .eq('attivo', true).eq('venduto', false);
+        .eq('attivo', true).eq('venduto', false).eq('affittato', false);
 
       if (tipoOp) {
         q = q.ilike('tipo_operazione', '%' + tipoOp + '%');
@@ -2059,17 +2061,32 @@ class RighettoChat {
         q = q.ilike('comune', '%' + zonaNorm + '%');
       }
 
-      q = q.order('created_at', { ascending: false }).limit(8);
+      q = q.order('created_at', { ascending: false }).limit(24);
       const { data, error } = await q;
 
       if (error || !data) {
         return this.fallbackRicerca(tipoOp);
       }
 
+      let filtered = data;
+      if (opts.tipologia) {
+        const t = this.normalizeKey(opts.tipologia);
+        filtered = filtered.filter(imm => this.normalizeKey(imm.tipologia || imm.categoria || '').includes(t));
+      }
+      if (opts.maxPrezzo) {
+        filtered = filtered.filter(imm => imm.prezzo && Number(imm.prezzo) <= Number(opts.maxPrezzo));
+      }
+      if (opts.mq) {
+        const mqMin = Math.round(opts.mq * 0.85);
+        const mqMax = Math.round(opts.mq * 1.15);
+        filtered = filtered.filter(imm => imm.superficie && imm.superficie >= mqMin && imm.superficie <= mqMax);
+      }
+      filtered = filtered.slice(0, 8);
+
       const tipoLabel = tipoOp === 'affitto' ? 'in affitto' : tipoOp === 'vendita' ? 'in vendita' : 'disponibili';
       const zonaLabel = zona ? ` a **${zona}**` : '';
 
-      if (data.length === 0) {
+      if (filtered.length === 0) {
         let msg = `😔 Mi dispiace, al momento non ho immobili ${tipoLabel}${zonaLabel} nel nostro catalogo.\n\n`;
         msg += `Ma non ti preoccupare! Posso:\n`;
         msg += `• 🔍 Cercare in un'altra zona — dimmi quale!\n`;
@@ -2080,7 +2097,7 @@ class RighettoChat {
 
       let msg = `🏠 **Ecco gli immobili ${tipoLabel}${zonaLabel}:**\n\n`;
 
-      for (const imm of data) {
+      for (const imm of filtered) {
         const prezzo = imm.prezzo ? this.formatPrice(imm.prezzo) : 'Prezzo su richiesta';
         const sup = imm.superficie ? `${imm.superficie} mq` : '';
         const loc = imm.comune || '';
@@ -2094,7 +2111,7 @@ class RighettoChat {
         msg += `   👉 [Vedi scheda](immobile.html?s=${encodeURIComponent(immSlug)})\n\n`;
       }
 
-      if (data.length >= 8) {
+      if (data.length > filtered.length) {
         const tipo = tipoOp || 'vendita';
         msg += `---\n📋 Ce ne sono altri! [Vedi tutti gli immobili](immobili.html?tipo=${tipo})\n\n`;
       }
@@ -2619,11 +2636,20 @@ function initChatbotUI() {
   document.head.appendChild(s);
 })();
 
+// ── Archivi FAQ A/B + flusso apertura (disattiva con window.RIGHETTO_CHAT_ARCHIVI = false) ──
+(function loadChatbotArchivi() {
+  if (window.RIGHETTO_CHAT_ARCHIVI === false) return;
+  var s = document.createElement('script');
+  s.src = 'js/chatbot-archivi.js?v=3';
+  s.async = true;
+  document.head.appendChild(s);
+})();
+
 // ── LINDA KB (collega virtuale: risposte da base di conoscenza approvata — disattiva con window.LINDA_KB = false) ──
 (function loadLindaKb() {
   if (window.LINDA_KB === false) return;
   var s = document.createElement('script');
-  s.src = 'js/linda-kb.js?v=2';
+  s.src = 'js/linda-kb.js?v=4';
   s.async = true;
   document.head.appendChild(s);
 })();

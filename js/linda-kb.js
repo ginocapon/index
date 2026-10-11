@@ -120,14 +120,29 @@
   function mancante(label) {
     return 'Per **' + label + '** la scheda online non riporta un\'informazione verificata: te la confermiamo volentieri in agenzia, **' + TEL + '**.';
   }
+  function incongruenzeTesto(codice, campo) {
+    if (window.RighettoChatArchivi && typeof window.RighettoChatArchivi.testoIncongruenze === 'function') {
+      return window.RighettoChatArchivi.testoIncongruenze(codice, campo);
+    }
+    return '';
+  }
+
   function rispostaCampo(r, f) {
     var aff = /affitt/.test(r.tipo_operazione || '');
     var ok = function (v) { return v !== null && v !== undefined && v !== '' && v !== 0 && v !== '0'; };
+    var cod = (r.codice || '').toUpperCase();
+    var inc = incongruenzeTesto(cod, f);
+    if (inc && f === 'bagni') {
+      return 'I dati dell\'annuncio risultano **discordanti** sul numero di bagni. Non posso confermare un valore definitivo senza verifica dell\'agenzia.' + inc;
+    }
+    if (inc && f === 'prezzo') {
+      return 'Per il prezzo uso solo la scheda live; se ci sono note di verifica sull\'annuncio te le segnalo dopo il controllo disponibilità.';
+    }
     switch (f) {
       case 'prezzo': return ok(r.prezzo) ? 'Il prezzo in scheda è **€ ' + euro(r.prezzo) + (aff ? ' al mese' : '') + '**.' : mancante('il prezzo');
       case 'superficie': return ok(r.superficie) ? 'La superficie indicata è di **' + euro(r.superficie) + ' mq**.' : mancante('la superficie');
       case 'locali': return ok(r.locali) ? 'Locali indicati: **' + r.locali + '**.' : mancante('i locali');
-      case 'bagni': return ok(r.bagni) ? 'Bagni indicati: **' + r.bagni + '**.' : mancante('i bagni');
+      case 'bagni': return ok(r.bagni) ? 'Bagni indicati in scheda: **' + r.bagni + '** (da confermare se non ci sono note di verifica).' : mancante('i bagni');
       case 'piano': return ok(r.piano) ? 'Piano: **' + esc(r.piano) + '**' + (r.ascensore === true ? ', con ascensore.' : '.') : mancante('il piano');
       case 'classe_energetica': return ok(r.classe_energetica) ? 'Classe energetica: **' + esc(r.classe_energetica) + '**' + (ok(r.ipe_kwh) ? ' (' + r.ipe_kwh + ' kWh/m²anno)' : '') + '.' : mancante('la classe energetica');
       case 'spese_condominio': return ok(r.spese_condominio) ? 'Spese condominiali indicate: **€ ' + euro(r.spese_condominio) + '**.' : mancante('le spese condominiali');
@@ -168,6 +183,8 @@
         (r.superficie ? '\nSuperficie: ' + euro(r.superficie) + ' mq' : '') +
         (r.locali ? ' · Locali: ' + r.locali : '') + (r.bagni ? ' · Bagni: ' + r.bagni : '');
     }
+    var incAll = incongruenzeTesto(codice, null);
+    if (incAll && testo.indexOf('Nota di verifica') < 0) testo += incAll;
     testo += '\n\n' + link + '\n*Dati dalla scheda online, aggiornata al ' + dataIt(r.updated_at) + '. Le informazioni hanno valore orientativo: per conferme chiama **' + TEL + '**.*';
     return testo;
   }
@@ -235,7 +252,24 @@
         return formatKb(row);
       }
 
-      // 3) regole storiche; registra l'esito per il rapporto lacune
+      // 3) Archivi FAQ A/B (statici, con fonte)
+      if (window.RighettoChatArchivi && typeof window.RighettoChatArchivi.tryArchiviFaq === 'function') {
+        try {
+          var arch = await window.RighettoChatArchivi.tryArchiviFaq(engine, domanda);
+          if (arch) {
+            if (typeof window.RighettoChatArchivi.enrichResponse === 'function') {
+              arch = await window.RighettoChatArchivi.enrichResponse(engine, engine.chatSession || {}, domanda, arch);
+            } else if (typeof window.RighettoChatArchivi.promemoriaContatti === 'function' && engine.chatSession) {
+              arch += window.RighettoChatArchivi.promemoriaContatti(engine.chatSession);
+            }
+            var qidArch = await registra(engine, domanda, true, null, 0.85);
+            pendingFeedback = { id: qidArch };
+            return arch;
+          }
+        } catch (eArch) { /* continua */ }
+      }
+
+      // 4) regole storiche; registra l'esito per il rapporto lacune
       var resp = await orig(userMsg);
       var trovata = String(resp).indexOf(DEFAULT_MARK) < 0;
       registra(engine, domanda, trovata, null, null);

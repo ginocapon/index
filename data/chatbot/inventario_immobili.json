@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "titolo": "Inventario immobili — incongruenze e note di verifica (chat)",
+  "data_verifica": "2026-10-11",
+  "origine": "Integrazione chatbot: flusso_apertura_chat + confronto titolo/slug/comune in data/og-immobili.json",
+  "nota": "Non usare questo file per prezzi o disponibilità: solo segnalazione incongruenze. Dati live da Supabase.",
+  "incongruenze": [
+    {
+      "codice": "LF0242",
+      "campi": [
+        "comune",
+        "ubicazione"
+      ],
+      "descrizione": "Il titolo pubblico dell'annuncio indica Limena, mentre slug SEO e metadati share riportano Padova: prima di escludere o proporre l'immobile in una ricerca per comune, verificare l'ubicazione con l'agenzia.",
+      "evidenze": [
+        "Titolo: «AFFITTASI APPARTAMENTO A LIMENA…» (og-immobili.json)",
+        "Slug/share: appartamento-affitto-residenziale-padova-lf0242"
+      ]
+    },
+    {
+      "codice": "LO0287",
+      "campi": [
+        "bagni"
+      ],
+      "descrizione": "I dati dell'annuncio risultano discordanti sul numero di bagni. Non confermare un valore definitivo in chat: indicare che serve verifica agenziale.",
+      "evidenze": [
+        "Esempio operativo in flusso_apertura_chat (2026-10-11)"
+      ]
+    }
+  ]
+}
