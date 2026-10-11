@@ -86,7 +86,7 @@ Dettaglio tecnico: **`skill-content.md`** §2.1e.
 
 - Proporzione **19:9** uniforme (hero + figure corpo)
 - Palette brand nei SVG (blu `#1a365d`, accenti coerenti)
-- WebP hero ≤500 KiB dove possibile (`skill-efficienza-sito.md` §3.1)
+- WebP hero ≤150 KiB; mobile ≤80 KiB; anteprime dedicate ≤100 KiB (`skill-blog-leggero.md`, solo articoli nuovi) (`skill-efficienza-sito.md` §3.1)
 - Equilibrio foto + chart/tabelle; leggibilità mobile WCAG AA
 
 ---
@@ -703,3 +703,6 @@ Dopo ogni publish: `python scripts/build_editorial_memory.py`.
 ---
 
 *Aggiornato: 29 agosto 2026 — comando editoriale (visivo + ricerca + §16-TER + §16-QUATER/QUINQUIES + §18).*
+
+## Peso e leggibilità degli articoli nuovi
+Caricare anche **`skill-blog-leggero.md`**: stessa identità, carta e RI intoccabili, copie piccole per gli elenchi, font e controlli mobile. Solo per i prossimi articoli, non per la bonifica dell'archivio.

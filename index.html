@@ -8,10 +8,10 @@
 <link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="https://qwkwkemuabfwvwuqrxlu.supabase.co" crossorigin>
 <link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co">
 <link rel="dns-prefetch" href="https://www.youtube.com">
-<link rel="dns-prefetch" href="https://img.youtube.com"><link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="dns-prefetch" href="https://img.youtube.com"><link rel="preload" href="fonts/main-latin/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/main-latin/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/main-latin/montserrat-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/main-latin/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="img/team/titolari-home-2026.webp?v=8" as="image" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
 <link rel="preload" href="img/team/titolari-home-2026-mobile.webp?v=8" as="image" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
 <meta name="google-site-verification" content="AbK7L5qoV9UFcfjQmtpC5OmD1ZsHx_55NNGYjxlOSxw">
@@ -31,7 +31,7 @@
 <meta name="twitter:description" content="Assistenza completa per vendere e comprare casa a Padova e provincia. Dalla valutazione gratuita al rogito, un unico referente per tutti i 101 comuni.">
 <meta name="twitter:image" content="https://righettoimmobiliare.it/img/team/titolari-home-2026.webp">
 <link rel="canonical" href="https://righettoimmobiliare.it/">
-<link rel="stylesheet" href="css/fonts.css?v=3" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/fonts-main.css?v=1" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/nav-mobile.css?v=7" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/below-fold.css?v=25" media="print" onload="this.media='all'">
@@ -40,10 +40,10 @@
 <link rel="stylesheet" href="css/modal-incarico-home.css?v=2" media="all">
 <style>
 /* Critical font-face inline — elimina round-trip a fonts.css per above-fold */
-@font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/montserrat-400.woff2') format('woff2')}
-@font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/montserrat-700.woff2') format('woff2')}
-@font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:swap;src:url('fonts/montserrat-800.woff2') format('woff2')}
-@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/cormorant-garamond-700.woff2') format('woff2')}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/main-latin/montserrat-400.woff2') format('woff2')}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/main-latin/montserrat-700.woff2') format('woff2')}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:swap;src:url('fonts/main-latin/montserrat-800.woff2') format('woff2')}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/main-latin/cormorant-garamond-700.woff2') format('woff2')}
 .skip-link{position:absolute;top:-40px;left:0;background:var(--blu);color:#fff;padding:8px 16px;z-index:10000;font-size:0.9rem;transition:top 0.2s}.skip-link:focus{top:0}
 :root {
   --blu:      #2C4A6E;
@@ -983,6 +983,7 @@ footer{contain-intrinsic-size:auto 1670px}
 </script>
 
 <style id="rig-motion">@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}::view-transition-old(root){animation:rig-vt-out .4s cubic-bezier(.32,.72,0,1) both}::view-transition-new(root){animation:rig-vt-in .55s cubic-bezier(.32,.72,0,1) both}html{scroll-behavior:smooth}.sr,.sr-left,.sr-right,.rv{transition-duration:.95s;transition-timing-function:cubic-bezier(.32,.72,0,1)}}@keyframes rig-vt-out{to{opacity:0;transform:scale(.985)}}@keyframes rig-vt-in{from{opacity:0;transform:scale(1.015)}}</style>
+<link rel="stylesheet" href="css/main-mobile-fixes.css?v=1">
 </head>
 <body class="homepage">
 <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
@@ -1860,7 +1861,7 @@ document.addEventListener('keydown', function(e) {
 </script>
 <script src="js/nav-mobile.js?v=3" defer></script>
 <script src="js/lead-conversion.js?v=4" defer></script>
-<script src="js/cookie-consent.js?v=4" defer></script>
+<script src="js/cookie-consent-main.js?v=1" defer></script>
 <!-- Modal visita virtuale -->
 <div class="vt-modal" id="vtModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Visita virtuale immobile">
   <div class="vt-modal-backdrop" onclick="closeVisitaTour()"></div>

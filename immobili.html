@@ -7,8 +7,8 @@
   <meta name="theme-color" content="#2C4A6E">
   <title>Immobili in vendita e affitto — Righetto Immobiliare Padova</title>
   <meta name="robots" content="index, follow, max-image-preview:large"><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-<link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co"><link rel="preload" href="fonts/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="dns-prefetch" href="https://qwkwkemuabfwvwuqrxlu.supabase.co"><link rel="preload" href="fonts/main-latin/montserrat-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/main-latin/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="canonical" href="https://righettoimmobiliare.it/immobili">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Immobili in Vendita e Affitto — Padova e Provincia">
@@ -24,7 +24,7 @@
 <meta name="twitter:description" content="Ville, appartamenti, uffici in vendita e affitto a Padova. Filtri avanzati, virtual tour 360°.">
 <meta name="twitter:image" content="https://righettoimmobiliare.it/img/team/titolari.webp">
 <meta name="description" content="Scopri ville, appartamenti e uffici in vendita o affitto a Padova e provincia. Filtri avanzati, fotografie, video e virtual tour 360°.">
-    <link rel="stylesheet" href="css/fonts.css?v=3">
+    <link rel="stylesheet" href="css/fonts-main.css?v=1">
   <link rel="stylesheet" href="css/nav-mobile.css?v=7">
   <link rel="stylesheet" href="css/scroll-reveal.css?v=3" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="css/welcome-popup.css?v=3" media="print" onload="this.media='all'">
@@ -555,6 +555,7 @@
 ]}
 </script>
 <style id="rig-motion">@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}::view-transition-old(root){animation:rig-vt-out .4s cubic-bezier(.32,.72,0,1) both}::view-transition-new(root){animation:rig-vt-in .55s cubic-bezier(.32,.72,0,1) both}html{scroll-behavior:smooth}.sr,.sr-left,.sr-right,.rv{transition-duration:.95s;transition-timing-function:cubic-bezier(.32,.72,0,1)}}@keyframes rig-vt-out{to{opacity:0;transform:scale(.985)}}@keyframes rig-vt-in{from{opacity:0;transform:scale(1.015)}}</style>
+<link rel="stylesheet" href="css/main-mobile-fixes.css?v=1">
 </head>
 <body class="page-hero-immobili">
 <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
@@ -1030,6 +1031,9 @@
   let immobili = [];
   let currentView = 'grid';
   let currentOp = 'vendita';
+const MAIN_CARD_PREVIEWS = {"img/blog/blog-casa-non-si-vende-padova-strategia-2026-hero.webp": "img/card-previews/card-93e6897dd589.webp", "img/blog/blog-registrazione-locazione-fumetto-proprietari-padova-2026-hero.webp": "img/card-previews/card-1604d9333d2c.webp", "img/blog/blog-percorso-acquisto-casa-padova-fumetto-2026-hero.webp": "img/card-previews/card-ef6f0595dd14.webp", "img/foto-servizi/vendita-immobili-padova.webp": "img/card-previews/card-7d26bf3a1881.webp", "img/immobili/LO0287/001-1787650992944-000-bifamiliare-al-grezzo-ponterotto-81.webp": "img/card-previews/card-359bdb76c220.webp", "img/immobili/LP0285-V/001-1783334008482-whatsapp-image-2026-07-06-at-12-22-31-4.webp": "img/card-previews/card-96a857c22246.webp", "img/immobili/CAP1609a/001-1775130731703-chatgpt-image-2-apr-2026-13-52-01.webp": "img/card-previews/card-33c83e4388d4.webp", "img/immobili/LA0307/001-1772206804826-003-img-3022-wmk-0.webp": "img/card-previews/card-c533532a77ad.webp"};
+function mainCardPreview(src) { return MAIN_CARD_PREVIEWS[String(src || "").replace("https://righettoimmobiliare.it/", "").replace(/^\//, "").split("?")[0]] || src; }
+
   let filterVtOnly = false;
 
   // ── RISOLVI URL IMMAGINI (js/media-url.js) ──
@@ -1137,7 +1141,7 @@
     grid.innerHTML = immobili.map(i => {
       const fotoCount = i.foto.length;
       const imgHtml = fotoCount > 0
-        ? RigPhotoCarousel.buildHtml(i.foto, i.titolo)
+        ? RigPhotoCarousel.buildHtml(i.foto.map(mainCardPreview), i.titolo)
         : '<div class="card-img-ph">'+SVG_PLACEHOLDER+'</div>';
       const opLabel = i.op.startsWith('affitto') ? 'Affitto' : i.op === 'asta' ? 'Asta' : 'Vendita';
       const opClass = i.op.startsWith('affitto') ? 'cb-affitto' : i.op === 'asta' ? 'cb-aste' : 'cb-vendita';
@@ -1940,7 +1944,7 @@
 (function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=17';document.body.appendChild(s);}
 setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
 })();</script>
-<script src="js/cookie-consent.js?v=4" defer></script>
+<script src="js/cookie-consent-main.js?v=1" defer></script>
 <script src="js/scroll-reveal.js?v=3" defer></script>
 <script src="js/welcome-popup.js?v=3" defer></script>
 </body>
