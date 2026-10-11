@@ -1,5 +1,5 @@
 /**
- * Archivi FAQ A/B, flusso apertura chat, inventario incongruenze (v1)
+ * Archivi FAQ A/B/C, flusso apertura chat, inventario incongruenze (v1)
  * Caricato da js/chatbot.js — disattiva: window.RIGHETTO_CHAT_ARCHIVI = false
  */
 (function () {
@@ -7,7 +7,7 @@
   if (window.RIGHETTO_CHAT_ARCHIVI === false) return;
 
   var BASE = 'data/chatbot/';
-  var store = { a: [], b: [], flusso: null, inventario: {}, anomalie: {}, ready: null };
+  var store = { a: [], b: [], c: [], flusso: null, inventario: {}, anomalie: {}, ready: null };
   var RE_CODICE = /\b([A-Za-z]{1,4}\d{3,5}(?:-[A-Za-z]|[a-z])?)(?![A-Za-z0-9])/;
   var RE_LIVE = /\b(prezzo|costa|disponib|disponibile|annuncio|catalogo|avete|vedete|cerco|affitt|vendit|compr|canone)\b/i;
 
@@ -64,6 +64,9 @@
         snapshot: /snapshot|nel catalogo consultato/i.test(f.risposta || ''),
         codice: RE_CODICE.test(f.domanda || ''),
         prossima: f.prossima_domanda || null,
+        verifica: f.data_verifica || null,
+        limiti: f.limiti_interpretativi || null,
+        controllo: f.controllo_umano || null,
       };
     });
   }
@@ -75,9 +78,11 @@
       loadJson(BASE + 'archivio-b-100-faq.json'),
       loadJson(BASE + 'flusso-apertura-chat.json'),
       loadJson(BASE + 'inventario_immobili.json'),
+      loadJson(BASE + 'archivio-c-200-faq.json').catch(function () { return { faq: [] }; }),
     ]).then(function (all) {
       store.a = normalizzaFaq(all[0] && all[0].faq);
       store.b = normalizzaFaq(all[1] && all[1].faq);
+      store.c = normalizzaFaq(all[4] && all[4].faq);
       store.flusso = all[2] || {};
       store.inventario = all[3] || {};
       store.anomalie = {};
@@ -90,6 +95,7 @@
     }).catch(function () {
       store.a = [];
       store.b = [];
+      store.c = [];
       store.flusso = {};
       store.inventario = {};
       store.anomalie = {};
@@ -137,6 +143,14 @@
 
   function formatArchivioA(faq) {
     return faq.r + formatFonti(faq.fonti);
+  }
+
+  function formatArchivioC(faq) {
+    var out = faq.r + formatFonti(faq.fonti);
+    if (faq.verifica) out += '\n\n*Consultazione fonti: ' + faq.verifica + ', non garanzia di aggiornamento normativo completo.*';
+    if (faq.limiti) out += '\n\n' + faq.limiti;
+    if (faq.controllo) out += '\n\n' + faq.controllo;
+    return out;
   }
 
   function formatArchivioB(faq) {
@@ -503,9 +517,17 @@
     // Domande di disponibilita'/catalogo: solo il giro stretto; le parafrasi rilassate
     // rischierebbero di rispondere con una FAQ di metodo a chi chiede gli annunci (percorso live).
     var RE_DISPONIBILITA = /\b(avete|vedete|ci sono|in vendita|in affitto|in locazione|disponibil\w*|catalogo)\b/i;
-    var fa = searchArchivio(store.a, low, 60);
-    if (!fa && !RE_DISPONIBILITA.test(low)) fa = searchArchivio(store.a, low, 60, true);
-    if (fa) return formatArchivioA(fa);
+    // Panoramica generica: tre risposte originali C, senza promesse di agevolazioni.
+    if (/^(come funziona|spiegami|spiega|cos e|che cos e) (il |un )?mutuo( per (la |una )| )?(prima casa)?$/.test(norm(low).trim().replace(/\s+/g, ' '))) {
+      var ids = ['C005', 'C010', 'C002'];
+      var parti = ids.map(function (id) { return store.c.find(function (f) { return f.id === id; }); }).filter(Boolean);
+      if (parti.length === ids.length) return 'Per orientarti sul mutuo, anche per la prima casa:\n\n' + parti.map(function (f) { return '**' + f.domanda + '**\n' + formatArchivioC(f); }).join('\n\n');
+    }
+    // Confronto A/C: un sottotema esatto C precede una somiglianza rilassata A.
+    var tecniche = store.a.concat(store.c);
+    var fa = searchArchivio(tecniche, low, 60);
+    if (!fa && !RE_DISPONIBILITA.test(low)) fa = searchArchivio(tecniche, low, 60, true);
+    if (fa) return /^C/.test(fa.id) ? formatArchivioC(fa) : formatArchivioA(fa);
     // Archivio B: tutte le voci richiedono rilettura del catalogo live. Si usano solo le risposte
     // non legate a una scheda e che non sono istantanee di disponibilità (quelle vanno al catalogo live).
     if (!isLiveCatalogQuery(low)) {
@@ -526,6 +548,6 @@
     promemoriaContatti: promemoriaContatti,
     enrichResponse: enrichResponse,
     messaggioAP01: messaggioAP01,
-    version: 2,
+    version: 3,
   };
 })();

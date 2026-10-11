@@ -30,7 +30,7 @@ const LF0242 = {
 async function avvia(page, cfg = {}) {
   const calls = { immobiliUrls: [] };
   await mockBackends(page);
-  for (const f of ['archivio-a-100-faq.json', 'archivio-b-100-faq.json', 'flusso-apertura-chat.json', 'inventario_immobili.json']) {
+  for (const f of ['archivio-a-100-faq.json', 'archivio-b-100-faq.json', 'archivio-c-200-faq.json', 'flusso-apertura-chat.json', 'inventario_immobili.json']) {
     const body = fs.readFileSync(path.join(DATA, f), 'utf8');
     await page.route('**/' + f, (route) => route.fulfill({ status: 200, headers: J, body }));
   }
@@ -94,6 +94,9 @@ test.describe('Chatbot archivi - correttezza delle risposte', () => {
     await avvia(page, {});
     await chiedi(page, 'Come funziona il mutuo prima casa?');
     const t = await ultima(page).innerText();
+    expect(t).toContain('TAEG');
+    expect(t).toContain('perizia');
+    expect(t).toContain('Fonte:');
     expect(t).not.toMatch(/Come ti chiami/);
     expect(t).not.toMatch(/dimostrare i pagamenti|senza mutuo/i);
   });
@@ -184,3 +187,29 @@ test.describe('Chatbot archivi - correttezza delle risposte', () => {
     await expect(ultima(page)).toContainText('non risulta più disponibile');
   });
 });
+
+ test('C: 200 risposte originali corrette, con fonti e limiti', async ({ page }) => {
+  await avvia(page);
+  const C = JSON.parse(fs.readFileSync(path.join(DATA, 'archivio-c-200-faq.json'), 'utf8')).faq;
+  const bad = await page.evaluate(async (faq) => {
+    const out = [];
+    for (const f of faq) {
+      const r = await window.RighettoChatArchivi.tryArchiviFaq(window.rigChat.engine, f.domanda);
+      if (!r || !r.startsWith(f.risposta) || !r.includes(f.fonti[0].url) || !r.includes(f.limiti_interpretativi)) out.push({ id: f.id, domanda: f.domanda, risposta: r });
+    }
+    return out;
+  }, C);
+  expect(bad).toEqual([]);
+ });
+ test('C: campione di tutti i temi nel percorso completo e link visibili', async ({ page }, testInfo) => {
+  await avvia(page);
+  const C = JSON.parse(fs.readFileSync(path.join(DATA, 'archivio-c-200-faq.json'), 'utf8')).faq;
+  const seen = new Set();
+  for (const f of C.filter(f => { if(seen.has(f.categoria)) return false; seen.add(f.categoria); return true; })) {
+    await page.evaluate(() => { window.rigChat.engine.state = 'idle'; window.rigChat.engine.chatSession = null; });
+    await chiedi(page, f.domanda);
+    await expect(ultima(page)).toContainText(f.risposta);
+    await expect(ultima(page).locator('a[href="' + f.fonti[0].url + '"]').first()).toBeVisible();
+  }
+  await page.screenshot({path: '/downloads/chatbot-c-' + testInfo.project.name + '.png', fullPage: false});
+ });
