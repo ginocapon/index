@@ -21,11 +21,17 @@ if (args[0] === '--copy') {
 }
 const read = (n) => JSON.parse(fs.readFileSync(path.join(out, n), 'utf8'));
 const a = read(NAMES[0]), b = read(NAMES[1]), inv = read(NAMES[2]), fl = read(NAMES[3]);
+const c = read('archivio-c-200-faq.json');
 const errs = [];
+if (!Array.isArray(c.faq) || c.faq.length !== 200) errs.push('archivio C: attese 200 FAQ');
+(c.faq || []).forEach((f, i) => {
+ if (f.id !== 'C' + String(i + 1).padStart(3, '0')) errs.push('ID C fuori sequenza: ' + f.id);
+ if (!(f.fonti || []).some(x => /^https:\/\//.test(x.url || ''))) errs.push('C senza fonte: ' + f.id);
+});
 if (!Array.isArray(a.faq) || a.faq.length !== 100) errs.push('archivio A: attese 100 FAQ, trovate ' + (a.faq || []).length);
 if (!Array.isArray(b.faq) || b.faq.length !== 100) errs.push('archivio B: attese 100 FAQ, trovate ' + (b.faq || []).length);
 if (!Array.isArray(inv.immobili) || inv.immobili.length !== 23) errs.push('inventario: attesi 23 immobili, trovati ' + (inv.immobili || []).length);
 if (!Array.isArray(fl.passaggi) || fl.passaggi.length !== 8) errs.push('flusso: attesi 8 passaggi AP-01..AP-08');
 a.faq.forEach((f) => { if (!(f.fonti || []).some((x) => /^https:\/\//.test(x.url || ''))) errs.push('A senza fonte url: ' + f.id); });
 if (errs.length) { console.error(errs.join('\n')); process.exit(1); }
-console.log('OK: A=' + a.faq.length + ' B=' + b.faq.length + ' inventario=' + inv.immobili.length + ' passaggi=' + fl.passaggi.length);
+console.log('OK: A=' + a.faq.length + ' B=' + b.faq.length + ' C=' + c.faq.length + ' inventario=' + inv.immobili.length + ' passaggi=' + fl.passaggi.length);
