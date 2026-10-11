@@ -100,7 +100,7 @@
   }
 
   // ---------- risposta live da scheda annuncio ----------
-  var RE_CODICE = /\b([A-Za-z]{1,4}\d{3,5})\b/;
+  var RE_CODICE = /\b([A-Za-z]{1,4}\d{3,5}(?:-[A-Za-z]|[a-z])?)(?![A-Za-z0-9])/;
   var CAMPI = [
     { re: /prezzo|costa|quanto (costa|chiede)|canone|affitto mensile/, f: 'prezzo' },
     { re: /\bmq\b|metri|superficie|grande|quanti metri/, f: 'superficie' },
@@ -135,11 +135,8 @@
     if (inc && f === 'bagni') {
       return 'I dati dell\'annuncio risultano **discordanti** sul numero di bagni. Non posso confermare un valore definitivo senza verifica dell\'agenzia.' + inc;
     }
-    if (inc && f === 'prezzo') {
-      return 'Per il prezzo uso solo la scheda live; se ci sono note di verifica sull\'annuncio te le segnalo dopo il controllo disponibilità.';
-    }
     switch (f) {
-      case 'prezzo': return ok(r.prezzo) ? 'Il prezzo in scheda è **€ ' + euro(r.prezzo) + (aff ? ' al mese' : '') + '**.' : mancante('il prezzo');
+      case 'prezzo': return (ok(r.prezzo) ? 'Il prezzo in scheda è **€ ' + euro(r.prezzo) + (aff ? ' al mese' : '') + '**.' : mancante('il prezzo')) + inc;
       case 'superficie': return ok(r.superficie) ? 'La superficie indicata è di **' + euro(r.superficie) + ' mq**.' : mancante('la superficie');
       case 'locali': return ok(r.locali) ? 'Locali indicati: **' + r.locali + '**.' : mancante('i locali');
       case 'bagni': return ok(r.bagni) ? 'Bagni indicati in scheda: **' + r.bagni + '** (da confermare se non ci sono note di verifica).' : mancante('i bagni');

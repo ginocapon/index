@@ -7,14 +7,49 @@
   if (window.RIGHETTO_CHAT_ARCHIVI === false) return;
 
   var BASE = 'data/chatbot/';
-  var store = { a: [], b: [], flusso: null, inventario: {}, ready: null };
-  var RE_CODICE = /\b([A-Za-z]{1,4}\d{3,5})\b/;
+  var store = { a: [], b: [], flusso: null, inventario: {}, anomalie: {}, ready: null };
+  var RE_CODICE = /\b([A-Za-z]{1,4}\d{3,5}(?:-[A-Za-z]|[a-z])?)(?![A-Za-z0-9])/;
   var RE_LIVE = /\b(prezzo|costa|disponib|disponibile|annuncio|catalogo|avete|vedete|cerco|affitt|vendit|compr|canone)\b/i;
 
   function loadJson(url) {
     return fetch(url, { cache: 'no-cache' }).then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
+    });
+  }
+
+  // ── Normalizzazione dei file ORIGINALI (formato .faq/.risposta/.varianti_domanda/.fonti): i file non si modificano, si adatta il lettore ──
+  var STOP = {};
+  ('il lo la le gli un uno una di da del dello della dei degli delle al allo alla ai agli alle dal dalla nel nella nei con su per tra fra e ed o ma che chi cui non si come cosa quale quali quanto quanti quando dove sono e\u0300 ho ha hanno posso puoi puo devo deve fare fatto essere questo questa questi queste mio mia miei mie vorrei voglio sapere dimmi dirmi mi ti ci vi anche piu molto solo se in a i l d c').split(' ').forEach(function (w) { STOP[w] = 1; });
+
+  function norm(t) {
+    return String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9\s]/g, ' ');
+  }
+  function stem(w) { return w.length > 5 ? w.slice(0, 5) : w; }
+  function tokens(t) {
+    var out = [];
+    norm(t).split(/\s+/).forEach(function (w) {
+      if (w.length < 2 || STOP[w]) return;
+      var st = stem(w);
+      if (out.indexOf(st) < 0) out.push(st);
+    });
+    return out;
+  }
+
+  function normalizzaFaq(list) {
+    return (list || []).map(function (f) {
+      var cand = [f.domanda].concat(f.varianti_domanda || []).filter(Boolean);
+      return {
+        id: f.id,
+        domanda: f.domanda,
+        r: f.risposta,
+        cand: cand.map(tokens),
+        fonti: (f.fonti || []).filter(function (x) { return x && /^https:\/\//i.test(x.url || ''); }),
+        live: !!f.rilettura_live_obbligatoria,
+        snapshot: /snapshot|nel catalogo consultato/i.test(f.risposta || ''),
+        codice: RE_CODICE.test(f.domanda || ''),
+        prossima: f.prossima_domanda || null,
+      };
     });
   }
 
@@ -26,16 +61,23 @@
       loadJson(BASE + 'flusso-apertura-chat.json'),
       loadJson(BASE + 'inventario_immobili.json'),
     ]).then(function (all) {
-      store.a = (all[0] && all[0].voci) || [];
-      store.b = (all[1] && all[1].voci) || [];
+      store.a = normalizzaFaq(all[0] && all[0].faq);
+      store.b = normalizzaFaq(all[1] && all[1].faq);
       store.flusso = all[2] || {};
       store.inventario = all[3] || {};
+      store.anomalie = {};
+      ((store.inventario && store.inventario.immobili) || []).forEach(function (im) {
+        if (im && im.riferimento && im.anomalie && im.anomalie.length) {
+          store.anomalie[String(im.riferimento).toUpperCase()] = im.anomalie;
+        }
+      });
       return store;
     }).catch(function () {
       store.a = [];
       store.b = [];
       store.flusso = {};
       store.inventario = {};
+      store.anomalie = {};
       return store;
     });
     return store.ready;
@@ -67,42 +109,48 @@
     return engine.chatSession;
   }
 
-  function formatFonte(fonte) {
-    if (!fonte || !fonte.url) return '';
-    var u = String(fonte.url).trim();
-    if (!/^https:\/\//i.test(u)) return '';
-    var t = String(fonte.titolo || 'Fonte').replace(/[\[\]()]/g, '').slice(0, 120);
-    return '\n\n**Fonte:** [' + t + '](' + u + ')';
+  function formatFonti(fonti) {
+    if (!fonti || !fonti.length) return '';
+    var righe = [];
+    fonti.slice(0, 3).forEach(function (f) {
+      var t = String(f.fonte || f.titolo || f.ente || 'Fonte').replace(/[\[\]()]/g, '').slice(0, 120);
+      righe.push('[' + t + '](' + String(f.url).trim() + ')');
+    });
+    return '\n\n**Fonte:** ' + righe.join(' · ');
   }
 
   function formatArchivioA(faq) {
-    return faq.r + formatFonte(faq.fonte);
+    return faq.r + formatFonti(faq.fonti);
   }
 
   function formatArchivioB(faq) {
-    return faq.r + (faq.fonte && faq.fonte.url ? formatFonte(faq.fonte) : '');
+    return faq.r + formatFonti(faq.fonti);
   }
 
-  function scoreFaq(low, faq) {
-    if (!faq || !faq.k) return 0;
-    var dom = String(faq.domanda || '').toLowerCase();
-    var corpus = dom + ' ' + faq.k.join(' ').toLowerCase();
-    var stop = /^(che|per|con|del|della|dei|una|sono|quali|come|gli|hai|avete|vorrei|solo|sapere|dove|quando)$/;
-    var words = low.replace(/[?.,!'"]/g, ' ').split(/\s+/).filter(function (w) {
-      return w.length > 2 && !stop.test(w);
-    });
-    if (!words.length) return 0;
-    var hits = 0;
-    words.forEach(function (w) { if (corpus.indexOf(w) >= 0) hits++; });
-    if (hits < 2) return 0;
-    return Math.round((hits / words.length) * 80 + hits * 8);
+  // Punteggio: copertura delle parole della domanda archiviata E della domanda dell'utente (parole radicate, senza stopword).
+  function scoreFaq(qtok, faq) {
+    if (!faq || !faq.cand || !qtok.length) return 0;
+    var best = 0;
+    for (var c = 0; c < faq.cand.length; c++) {
+      var ct = faq.cand[c];
+      if (!ct.length) continue;
+      var hits = 0;
+      qtok.forEach(function (w) { if (ct.indexOf(w) >= 0) hits++; });
+      if (hits < 2 && !(hits === 1 && qtok.length === 1 && ct.length <= 2)) continue;
+      var covQ = hits / qtok.length, covC = hits / ct.length;
+      if (covQ < 0.75 || covC < 0.75) continue;
+      var sc = Math.round((covQ + covC) * 50);
+      if (sc > best) best = sc;
+    }
+    return best;
   }
 
   function searchArchivio(voci, low, minScore) {
-    var best = null, bestS = minScore || 28;
+    var qtok = tokens(low);
+    var best = null, bestS = minScore || 60;
     for (var i = 0; i < voci.length; i++) {
-      var s = scoreFaq(low, voci[i]);
-      if (s >= bestS) { best = voci[i]; bestS = s; }
+      var sc = scoreFaq(qtok, voci[i]);
+      if (sc >= bestS) { best = voci[i]; bestS = sc; }
     }
     return best;
   }
@@ -121,7 +169,7 @@
     if (/\b(vendo|vendere|mandato|incarico)\b/.test(low)) return 'vendere';
     if (/\b(affitto la mia|affittare la m|locare la m|mettere in affitto)\b/.test(low)) return 'affittare_proprieta';
     if (/\b(valutaz|stimare|quanto vale)\b/.test(low)) return 'valutazione';
-    if (/\b(rogito|preliminare|ape\b|catast|visura|conformit|documenti|mutuo|imu\b|cedolare)\b/.test(low)) return 'tecnico';
+    if (/\b(rogito|preliminare|ape\b|catast|visura|conformit|documenti|mutuo|imu\b|cedolare)\b|\btecnic\w*/.test(low)) return 'tecnico';
     if (/\b(uffici|ufficio)\b/.test(low) && !/\b(cerco|affitt|compr)\b/.test(low)) return 'ricerca_immobile';
     return null;
   }
@@ -135,9 +183,9 @@
     if (/trilocale/.test(low)) r.tipologia = 'trilocale';
     if (/villa/.test(low)) r.tipologia = 'villa';
     if (/uffici|ufficio/.test(low)) r.tipologia = 'ufficio';
-    var budget = low.match(/(?:fino a|max|massimo|budget)\s*(\d{2,5})\s*(?:€|euro)?/);
-    if (!budget) budget = low.match(/(\d{3,4})\s*(?:€|euro)/);
-    if (budget) r.budget = parseInt(budget[1], 10);
+    var budget = low.match(/(?:fino a|entro|max|massimo|budget)\s*(?:di\s*)?(\d{1,3}(?:[.\s]\d{3})+|\d{3,7})(?!\d)\s*(?:€|euro)?/);
+    if (!budget) budget = low.match(/(\d{1,3}(?:[.\s]\d{3})+|\d{3,7})(?![\d])\s*(?:€|euro)/);
+    if (budget) r.budget = parseInt(budget[1].replace(/[.\s]/g, ''), 10);
     var comuni = ['limena', 'padova', 'abano', 'vigonza', 'cittadella', 'limena', 'rubano', 'mestrino'];
     for (var i = 0; i < comuni.length; i++) {
       if (low.includes(comuni[i])) { r.zona = comuni[i]; break; }
@@ -168,20 +216,27 @@
   }
 
   function getIncongruenze(codice) {
-    var list = (store.inventario && store.inventario.incongruenze) || [];
-    codice = String(codice || '').toUpperCase();
-    return list.filter(function (x) { return x.codice === codice; });
+    return (store.anomalie && store.anomalie[String(codice || '').toUpperCase()]) || [];
   }
+
+  var CAMPO_RE = {
+    bagni: /bagn/i, prezzo: /prezz|canone|vendita|locazione|\d\s*euro/i, superficie: /\bmq\b|superficie/i,
+    comune: /comune|zona|titolo/i, piano: /piano|livell/i, camere: /camer/i, locali: /locali/i,
+    giardino: /giardin/i, spese_condominio: /spese/i, arredato: /arred/i, consegna: /liber|consegn|occupat|locat/i,
+  };
 
   function testoIncongruenze(codice, campo) {
     var rows = getIncongruenze(codice);
     if (!rows.length) return '';
-    var out = '\n\n⚠️ **Nota di verifica (' + codice + '):**';
-    rows.forEach(function (row) {
-      if (campo && row.campi && row.campi.indexOf(campo) < 0 && row.campi.indexOf(campo.replace(/i$/, 'o')) < 0) return;
-      out += '\n• ' + row.descrizione;
-    });
-    return out.indexOf('•') >= 0 ? out : '';
+    var pick = rows;
+    if (campo && CAMPO_RE[campo]) {
+      var f = rows.filter(function (x) { return CAMPO_RE[campo].test(x); });
+      pick = f;
+    } else if (campo) { pick = []; }
+    if (!pick.length) return '';
+    var out = '\n\n⚠️ **Nota di verifica (' + String(codice).toUpperCase() + '):**';
+    pick.forEach(function (x) { out += '\n• ' + x; });
+    return out;
   }
 
   function attach(engine, rigChat) {
@@ -307,11 +362,21 @@
       if (r.tipologia) recap += ': **' + r.tipologia + '**';
       if (r.tipo_op) recap += ', **' + r.tipo_op + '**';
       if (r.zona) recap += ', **' + r.zona.charAt(0).toUpperCase() + r.zona.slice(1) + '**';
-      if (r.budget) recap += ', canone massimo **€ ' + r.budget + '**';
+      if (r.budget) recap += (r.tipo_op === 'affitto' ? ', canone massimo **€ ' : ', budget massimo **€ ') + String(r.budget).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '**';
       recap += '.\n\n**Quale superficie preferisci?** (mq)';
       return recap;
     }
     return null;
+  }
+
+  // Messaggio che indica solo l'argomento tecnico, senza un quesito preciso (es. "una questione tecnica", "mutuo")
+  function isSoloArgomentoTecnico(low) {
+    var t = tokens(low);
+    return t.length <= 3 && /\b(tecnic|mutuo|catast|visura|rogito|preliminare|conformit|documenti)\w*/.test(low) && !/\?/.test(low);
+  }
+
+  function isChiusura(low) {
+    return /^(grazie|ok grazie|grazie mille|va bene cos[iì]|e tutto|è tutto|basta cos[iì]|niente altro|nient'altro|no grazie|a posto|arrivederci|ciao ciao|ci sentiamo|alla prossima)\b/.test(low.trim());
   }
 
   async function enrichResponse(engine, session, msg, resp) {
@@ -328,7 +393,10 @@
 
     var m = msg.match(RE_CODICE);
     if (m) {
-      var inc = testoIncongruenze(m[1].toUpperCase());
+      var campoQ = null;
+      var QRE = { bagni: /bagn/, prezzo: /prezz|costa|canone|quanto/, superficie: /\bmq\b|metri|superfic/, camere: /camer/, giardino: /giardin/, spese_condominio: /spese/, consegna: /libero|liber|disponibil|consegn/, piano: /\bpiano\b/ };
+      Object.keys(QRE).forEach(function (k) { if (!campoQ && QRE[k].test(low)) campoQ = k; });
+      var inc = testoIncongruenze(m[1].toUpperCase(), campoQ);
       if (inc && resp.indexOf('Nota di verifica') < 0) resp += inc;
       if (/\bbagn/i.test(low) && inc.indexOf('bagn') >= 0) {
         var p6 = passaggio('AP-06');
@@ -342,6 +410,19 @@
     if (session.argomento && !session.promemoriaMostrato && !session.nonRiproporreContatti && !/^ciao|salve|buongiorno/.test(low)) {
       resp += promemoriaContatti(session);
     }
+
+    var soloTecnico = false;
+    if (session.argomento === 'tecnico' && !session.quesito_tecnico && engine.state === 'idle' && isSoloArgomentoTecnico(low)) {
+      var p5 = passaggio('AP-05');
+      if (p5) {
+        session.quesito_tecnico = 'richiesto';
+        soloTecnico = true;
+        resp = /far verificare questo punto da un nostro consulente|Per non darle un'informazione inesatta/.test(resp)
+          ? p5.messaggio : resp + (resp.indexOf('?') < 0 ? '\n\n' + p5.messaggio : '');
+      }
+    }
+
+    if (isChiusura(low) && !session.invitoNovitaMostrato) resp += invitoNovita(session);
 
     var isFallback = /far verificare questo punto da un nostro consulente|Per non darle un'informazione inesatta/.test(resp);
     if (isFallback && !session.invitoNovitaMostrato) resp += invitoNovita(session);
@@ -376,10 +457,13 @@
     if (/\b(appuntament|contatt|richiam|essere chiamat|farmi chiamare|voglio essere contattato|fissare un appuntamento)\b/.test(low)) {
       return null;
     }
-    var fa = searchArchivio(store.a, low, 28);
+    var fa = searchArchivio(store.a, low, 60);
     if (fa) return formatArchivioA(fa);
+    // Archivio B: tutte le voci richiedono rilettura del catalogo live. Si usano solo le risposte
+    // non legate a una scheda e che non sono istantanee di disponibilità (quelle vanno al catalogo live).
     if (!isLiveCatalogQuery(low)) {
-      var fb = searchArchivio(store.b, low, 28);
+      var usabili = store.b.filter(function (x) { return !x.snapshot && !x.codice && !RE_CODICE.test(x.r.split('http')[0]); });
+      var fb = searchArchivio(usabili, low, 60);
       if (fb) return formatArchivioB(fb);
     }
     return null;
