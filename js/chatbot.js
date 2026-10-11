@@ -2640,7 +2640,7 @@ function initChatbotUI() {
 (function loadChatbotArchivi() {
   if (window.RIGHETTO_CHAT_ARCHIVI === false) return;
   var s = document.createElement('script');
-  s.src = 'js/chatbot-archivi.js?v=4';
+  s.src = 'js/chatbot-archivi.js?v=5';
   s.async = true;
   document.head.appendChild(s);
 })();

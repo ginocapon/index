@@ -20,17 +20,32 @@
 
   // ── Normalizzazione dei file ORIGINALI (formato .faq/.risposta/.varianti_domanda/.fonti): i file non si modificano, si adatta il lettore ──
   var STOP = {};
-  ('il lo la le gli un uno una di da del dello della dei degli delle al allo alla ai agli alle dal dalla nel nella nei con su per tra fra e ed o ma che chi cui non si come cosa quale quali quanto quanti quando dove sono e\u0300 ho ha hanno posso puoi puo devo deve fare fatto essere questo questa questi queste mio mia miei mie vorrei voglio sapere dimmi dirmi mi ti ci vi anche piu molto solo se in a i l d c').split(' ').forEach(function (w) { STOP[w] = 1; });
+  ('il lo la le gli un uno una di da del dello della dei degli delle al allo alla ai agli alle dal dalla nel nella nei con su per tra fra e ed o ma che chi cui non si come cosa quale quali quanto quanti quando dove sono e\u0300 ho ha hanno posso puoi puo devo deve fare fatto essere questo questa questi queste mio mia miei mie vorrei voglio sapere dimmi dirmi mi ti ci vi anche piu molto solo se in a i l d c avere spiegami spiega spiegare spiegarmi spieghi spiegate').split(' ').forEach(function (w) { STOP[w] = 1; });
 
   function norm(t) {
     return String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9\s]/g, ' ');
   }
   function stem(w) { return w.length > 5 ? w.slice(0, 5) : w; }
+
+  // Sinonimi/parafrasi frequenti nel dominio (radice di 5 caratteri -> radice canonica).
+  // Applicati sia alla domanda dell'utente sia alle voci archiviate: i file originali non si toccano.
+  var SINONIMI = {
+    stima: 'valut', deter: 'calco', comput: 'calco',
+    acqui: 'compr', ceder: 'vend', cedut: 'vend',
+    locat: 'affit', canon: 'affit',
+    abita: 'casa', appart: 'casa', allog: 'casa',
+    richi: 'otten', inter: 'leggo', consu: 'leggo', legge: 'leggo',
+    neces: 'serv', occur: 'serv', accer: 'verif', contr: 'verif',
+    vale: 'valor', valgo: 'valor'
+  };
+
   function tokens(t) {
     var out = [];
     norm(t).split(/\s+/).forEach(function (w) {
       if (w.length < 2 || STOP[w]) return;
       var st = stem(w);
+      st = SINONIMI[st] || st;
+      if (st === 'spieg') return;
       if (out.indexOf(st) < 0) out.push(st);
     });
     return out;
@@ -99,6 +114,7 @@
       invitoNovitaMostrato: false,
       nonRiproporreContatti: false,
       ap08Mostrato: false,
+      recensioneMostrata: false,
       chatAvviata: false,
       ricerca: { tipo_op: null, zona: null, budget: null, tipologia: null, mq: null },
     };
@@ -128,7 +144,7 @@
   }
 
   // Punteggio: copertura delle parole della domanda archiviata E della domanda dell'utente (parole radicate, senza stopword).
-  function scoreFaq(qtok, faq) {
+  function scoreFaq(qtok, faq, lax) {
     if (!faq || !faq.cand || !qtok.length) return 0;
     var best = 0;
     for (var c = 0; c < faq.cand.length; c++) {
@@ -136,20 +152,33 @@
       if (!ct.length) continue;
       var hits = 0;
       qtok.forEach(function (w) { if (ct.indexOf(w) >= 0) hits++; });
-      if (hits < 2 && !(hits === 1 && qtok.length === 1 && ct.length <= 2)) continue;
+      if (hits < 2 && !(hits === 1 && qtok.length <= 2 && ct.length <= 2)) continue;
       var covQ = hits / qtok.length, covC = hits / ct.length;
-      if (covQ < 0.75 || covC < 0.75) continue;
+      // Regola stretta: copertura >=75% in entrambe le direzioni (sempre attiva).
+      var ok = (covQ >= 0.75 && covC >= 0.75);
+      // Varianti controllate, solo in modalita' rilassata (tryArchiviFaq la usa dopo il giro stretto
+      // e mai per domande di disponibilita'/catalogo, che restano al percorso live):
+      //  a) voce lunga ma sovrapposizione forte (>=3 parole, utente coperto al 75%, voce al 60%)
+      //  b) domanda utente interamente coperta e voce coperta almeno a meta'
+      //  c) voce brevissima (<=2 parole) interamente coperta, utente coperto almeno a meta'
+      if (!ok && lax) {
+        ok = (covQ >= 0.75 && hits >= 3 && covC >= 0.6)
+          || (covQ === 1 && hits >= 2 && covC >= 0.5)
+          || (covQ >= 0.66 && hits >= 2 && covC >= 0.75)
+          || (hits === 1 && ct.length <= 2 && covC === 1 && covQ >= 0.5);
+      }
+      if (!ok) continue;
       var sc = Math.round((covQ + covC) * 50);
       if (sc > best) best = sc;
     }
     return best;
   }
 
-  function searchArchivio(voci, low, minScore) {
+  function searchArchivio(voci, low, minScore, lax) {
     var qtok = tokens(low);
     var best = null, bestS = minScore || 60;
     for (var i = 0; i < voci.length; i++) {
-      var sc = scoreFaq(qtok, voci[i]);
+      var sc = scoreFaq(qtok, voci[i], lax);
       if (sc >= bestS) { best = voci[i]; bestS = sc; }
     }
     return best;
@@ -208,6 +237,14 @@
     if (!p) return '';
     var link = p.link_verificato ? '\n\n👉 [Catalogo immobili](/immobili)' : '';
     return '\n\n---\n' + p.messaggio + link;
+  }
+
+  // Scheda Google dell agenzia (destinazione del link verificata: Gruppo Immobiliare Righetto, Via Roma 96, Limena PD)
+  var LINK_RECENSIONE = 'https://maps.app.goo.gl/Yg451gpKsFf9u3Fd7';
+  function invitoRecensione(session) {
+    if (!session || session.recensioneMostrata) return '';
+    session.recensioneMostrata = true;
+    return '\n\n---\nSe l\'esperienza con questa chat ti \u00e8 stata utile, puoi lasciare una recensione su Google: aiuta altre persone a scegliere con pi\u00f9 sicurezza.\n[Lascia una recensione su Google](' + LINK_RECENSIONE + ')';
   }
 
   function messaggioAP01() {
@@ -407,8 +444,11 @@
       }
     }
 
+    var promemoriaAggiunto = false;
     if (session.argomento && !session.promemoriaMostrato && !session.nonRiproporreContatti && !/^ciao|salve|buongiorno/.test(low)) {
-      resp += promemoriaContatti(session);
+      var _prom = promemoriaContatti(session);
+      promemoriaAggiunto = !!_prom;
+      resp += _prom;
     }
 
     var soloTecnico = false;
@@ -431,6 +471,9 @@
       var p4 = passaggio('AP-04');
       if (p4) resp += '\n\n' + p4.messaggio;
     }
+
+    // Invito alla recensione Google nei momenti di chiusura verso i contatti (una volta a sessione)
+    if (isFallback || isChiusura(low) || promemoriaAggiunto) resp += invitoRecensione(session);
 
     return resp;
   }
@@ -457,7 +500,11 @@
     if (/\b(appuntament|contatt|richiam|essere chiamat|farmi chiamare|voglio essere contattato|fissare un appuntamento)\b/.test(low)) {
       return null;
     }
+    // Domande di disponibilita'/catalogo: solo il giro stretto; le parafrasi rilassate
+    // rischierebbero di rispondere con una FAQ di metodo a chi chiede gli annunci (percorso live).
+    var RE_DISPONIBILITA = /\b(avete|vedete|ci sono|in vendita|in affitto|in locazione|disponibil\w*|catalogo)\b/i;
     var fa = searchArchivio(store.a, low, 60);
+    if (!fa && !RE_DISPONIBILITA.test(low)) fa = searchArchivio(store.a, low, 60, true);
     if (fa) return formatArchivioA(fa);
     // Archivio B: tutte le voci richiedono rilettura del catalogo live. Si usano solo le risposte
     // non legate a una scheda e che non sono istantanee di disponibilità (quelle vanno al catalogo live).
@@ -479,6 +526,6 @@
     promemoriaContatti: promemoriaContatti,
     enrichResponse: enrichResponse,
     messaggioAP01: messaggioAP01,
-    version: 1,
+    version: 2,
   };
 })();
