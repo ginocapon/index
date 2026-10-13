@@ -1738,16 +1738,20 @@ class RighettoChat {
     // Supabase
     if (this.supabase) {
       try {
-        await this.supabase.from('richieste').insert([{
+        // La pagina di partenza resta nel messaggio come "[fonte: chatbot @ /percorso]"
+        let paginaPartenza = '';
+        try { paginaPartenza = (window.location.pathname || '/').replace(/\.html$/, ''); } catch (e) { paginaPartenza = ''; }
+        const msgConFonte = '[fonte: chatbot @ ' + (paginaPartenza || '/') + '] ' + (dati.note || dati.messaggio || '');
+        const insChat = await this.supabase.from('richieste').insert([{
           nome: dati.nome,
           email: dati.email,
           telefono: dati.telefono,
-          messaggio: dati.note || dati.messaggio,
+          messaggio: msgConFonte,
           provenienza: 'chatbot',
           letto: false,
           created_at: new Date().toISOString()
         }]);
-        supaOk = true;
+        supaOk = !(insChat && insChat.error);
       } catch { supaOk = false; }
     }
 
