@@ -984,7 +984,7 @@ async function sendCostiForm(e) {
   try {
     var sb = window.supabase && supabase.createClient(SB_URL, SB_ANON);
     if (sb) {
-      const _ins = await sb.from('richieste').insert([{
+      const _row = {
         nome: nomeCompleto,
         email: email,
         telefono: tel,
@@ -992,7 +992,14 @@ async function sendCostiForm(e) {
         provenienza: 'landing-costi-locazione-inquilino',
         newsletter: !!marketing,
         letto: false
-      }]);
+      };
+      let _ins = await sb.from('richieste').insert([_row]);
+      // Se il database non ammette questa fonte (23514): ripiego su 'form', fonte nel messaggio
+      if (_ins && _ins.error && _ins.error.code === '23514') {
+        _row.messaggio = '[fonte: landing-costi-locazione-inquilino] ' + (_row.messaggio || '');
+        _row.provenienza = 'form';
+        _ins = await sb.from('richieste').insert([_row]);
+      }
       supaOk = !_ins.error;
       if (_ins.error) console.warn('richieste insert fallita:', _ins.error.message);
     }
