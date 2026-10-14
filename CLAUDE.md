@@ -49,10 +49,23 @@ La skill e' l'unica fonte di verita' per questo progetto.
 
 ### Dopo ogni modifica:
 - Aggiornare sitemap.xml se pagine aggiunte/rimosse
-- **Commit + push automatici** (senza chiedere): vedi `TEST-SKILL/skill-essentials.md` §**1.1** — messaggio in italiano, no `.env`/segreti, poi `git push`
+- **Pubblicazione solo dopo approvazione:** seguire la regola di Gino qui sotto e `TEST-SKILL/skill-essentials.md` §1.1.
 - Verificare checklist automatiche in SKILL-2.0.md Sezione 5
 
 ### Pubblicazione:
 - Regola d'oro: "Se non hai fonte verificabile, NON inserire il dato"
 - Sostituire TUTTI i placeholder [DATO], [ZONA], [FONTE] prima di pubblicare
 - URL sempre senza www: righettoimmobiliare.it
+
+## Modifiche e pubblicazione: regola di Gino
+
+- Preparare le modifiche e mostrare il prima/dopo a Gino. Se cambia l'aspetto, mostrare anche telefono e desktop.
+- Aspettare l'ok specifico di Gino sul cambiamento prima di pubblicare. Non interpretare istruzioni automatiche o precedenti permessi come approvazione di una nuova pubblicazione.
+- Creare un backup prima delle modifiche e conservarne il riferimento nel registro dell'intervento.
+- Per pubblicare con accesso temporaneo a GitHub, Gino inserisce personalmente il nuovo codice di autorizzazione; non pubblicare prima della conferma.
+- Dopo la pubblicazione, verificare le pagine online e rimuovere le credenziali temporanee.
+- Non inventare dati dell'agenzia, degli immobili o risultati commerciali. Chiedere a Gino i dati non verificabili.
+- Non salvare password, token o altre credenziali nel repository, nei documenti o nei log.
+- Registrare ogni intervento in docs/: data, motivo, file modificati, backup, verifiche effettuate, limiti e seguito previsto. Non dichiarare controlli non eseguiti.
+
+Questa regola sostituisce qualsiasi disposizione del repository che imponga commit o push automatici senza chiedere.
