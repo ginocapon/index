@@ -1,5 +1,7 @@
 # SKILL-2.0 — Indice repository
 
+**Aggiornamento 14 ottobre 2026:** pubblicazione solo dopo prima/dopo, ok specifico di Gino e backup. Seguire `TEST-SKILL/skill-essentials.md` §1.1. Registro test titoli: `docs/test-titoli-google-2026-10-14.md`.
+
 Il contenuto completo della skill (SEO, GEO, blog, checklist, architettura) si trova in:
 
 **[`TEST-SKILL/SKILL-2.0.md`](TEST-SKILL/SKILL-2.0.md)**
@@ -64,7 +66,7 @@ Apri sempre quel file prima di generare articoli, pagine zona o modifiche strutt
 
 **Changelog rapido (26 giugno 2026):** social — anteprima FB immobili: URL `share-immobile-*` (OG statico) **solo caption**; sito resta `immobile?s=` — **`TEST-SKILL/skill-social-automation.md`** §2b + §10.4.
 
-**Changelog rapido (6 giugno 2026):** commit + push **automatici** a fine task — `TEST-SKILL/skill-essentials.md` §1.1, `CLAUDE.md`, `righetto-core.mdc`.
+**Changelog storico (6 giugno 2026, SUPERATO il 14 ottobre 2026):** commit + push automatici a fine task — `TEST-SKILL/skill-essentials.md` §1.1, `CLAUDE.md`, `righetto-core.mdc`.
 
 **Changelog rapido (3 giugno 2026):** 6 articoli blog guide acquirenti/fisco; Google-Agent §1.1b in `TEST-SKILL/SKILL-2.0.md`; `llms.txt` e `ai.json` aggiornati.
 

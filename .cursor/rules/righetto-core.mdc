@@ -38,7 +38,7 @@ Leggi **`TEST-SKILL/skill-premortem-righetto.md`**: matrice §4.2 (homepage→sh
 2. Mobile-first + WCAG AA (CTA: **mai** `#FF6B35` con testo bianco).
 3. CSS/JS linkati con `?v=N` (incrementa a ogni modifica).
 4. Nuove URL → `sitemap.xml`.
-5. **Commit** a fine task se file modificati; **push** solo se l'utente lo chiede esplicitamente (`skill-essentials.md` §1.1) — no `.env`/segreti in commit.
+5. **Prima/dopo, ok specifico di Gino e backup** prima di pubblicare; per accesso temporaneo GitHub Gino inserisce il codice. Verificare online e rimuovere le credenziali temporanee; nessun segreto nei file. Registro interventi in `docs/`. Seguire `skill-essentials.md` §1.1.
 6. **No** DNS/MX/cPanel senza conferma esplicita.
 
 ## Moduli skill (carica su richiesta o via rule scoped)

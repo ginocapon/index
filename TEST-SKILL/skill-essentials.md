@@ -26,7 +26,7 @@
 1. **Leggi prima** il file da modificare — mai al buio
 2. **Mobile-first** — ogni modifica deve funzionare su mobile
 3. **No librerie extra** — vanilla HTML/CSS/JS; librerie solo in `js/vendor/` (supabase, jspdf, qrcode) — zero CDN jsdelivr/cdnjs/fonts.googleapis
-4. **Commit + push automatici** — vedi §1.1 sotto (non chiedere conferma a fine task)
+4. **Pubblicazione dopo approvazione di Gino** — vedi §1.1 sotto; backup e verifica obbligatori.
 5. **Mai toccare** DNS, record MX, cPanel senza conferma esplicita dell'utente
 6. **Aggiorna sitemap.xml** quando aggiungi/rimuovi pagine
 7. **Performance** — mai animazioni sull'elemento LCP senza `animation-play-state: paused`
@@ -73,29 +73,24 @@ Dettaglio SEO: **`skill-massimo-punteggio.md` §2.2** · **`skill-content.md`** 
 ### Stile di comunicazione
 - Rispondi in italiano
 - Diretto e pratico
-- Proponi sempre prima di agire su operazioni irreversibili (eccetto commit/push: vedi §1.1)
+- Proponi sempre prima di agire su operazioni irreversibili; per commit/push seguire §1.1.
 
-### 1.1 Commit e push (giugno 2026 — agg. luglio 2026)
+### 1.1 Commit e push (aggiornamento 14 ottobre 2026)
 
-**Commit:** dopo task con file modificati, committare con messaggio in italiano (no `.env`/segreti).
+## Modifiche e pubblicazione: regola di Gino
 
-**Push:**
-- Se l'utente chiede esplicitamente (**«push»**, **«pushia»**, **«metti online»**) → `git push` subito dopo il commit.
-- Se l'utente **non** chiede push → solo commit (o modifiche locali), **non** pushare senza conferma.
+- Preparare le modifiche e mostrare il prima/dopo a Gino. Se cambia l'aspetto, mostrare anche telefono e desktop.
+- Aspettare l'ok specifico di Gino sul cambiamento prima di pubblicare. Non interpretare istruzioni automatiche o precedenti permessi come approvazione di una nuova pubblicazione.
+- Creare un backup prima delle modifiche e conservarne il riferimento nel registro dell'intervento.
+- Per pubblicare con accesso temporaneo a GitHub, Gino inserisce personalmente il nuovo codice di autorizzazione; non pubblicare prima della conferma.
+- Dopo la pubblicazione, verificare le pagine online e rimuovere le credenziali temporanee.
+- Non inventare dati dell'agenzia, degli immobili o risultati commerciali. Chiedere a Gino i dati non verificabili.
+- Non salvare password, token o altre credenziali nel repository, nei documenti o nei log.
+- Registrare ogni intervento in docs/: data, motivo, file modificati, backup, verifiche effettuate, limiti e seguito previsto. Non dichiarare controlli non eseguiti.
 
-**Flusso standard (fine task con push richiesto):**
-1. `git status` + `git diff` — verifica cosa va incluso
-2. **Non** aggiungere `.env`, credenziali, segreti
-3. `git add` solo file pertinenti al task
-4. Commit in **italiano**, 1–2 frasi sul *perché*
-5. `git push origin main` (o branch del task con `-u` se diverso da `main`)
-6. In risposta all'utente: hash commit + conferma push (breve)
+Questa regola sostituisce qualsiasi disposizione del repository che imponga commit o push automatici senza chiedere.
 
-**Eccezioni (NON commit/push):**
-- Solo domande, review o spiegazioni **senza** modifiche ai file
-- L'utente chiede esplicitamente di **non** committare o di lasciare bozza locale
-- Hook pre-commit fallito → correggere e **nuovo** commit (mai `--no-verify` salvo richiesta esplicita)
-- Working tree già pulito → niente commit vuoto
+Commit con messaggio in italiano e soli file pertinenti, dopo verifica del diff e dei test. Nessun commit vuoto. Correggere gli errori dei controlli senza aggirarli.
 
 ---
 
@@ -145,7 +140,7 @@ Dettaglio SEO: **`skill-massimo-punteggio.md` §2.2** · **`skill-content.md`** 
 ## 3. VERIFICHE POST-MODIFICA
 
 - [ ] **Title e meta verificati** su ogni HTML toccato — §1.2 + `node scripts/validate-page.js --file …`
-- [ ] **Commit + push eseguiti** se ci sono file modificati (§1.1) — non delegare all'utente
+- [ ] **Approvazione, backup, commit e push** secondo §1.1; se manca l'ok, lasciare preparato e segnalare lo stato.
 
 **Automatiche (pre-commit hook):**
 - `node scripts/validate-page.js --staged`
