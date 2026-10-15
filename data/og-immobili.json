@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-07",
+  "generated": "2026-10-15",
   "bySlug": {
     "appartamento-affitto-residenziale-villafranca-padovana-lf0270": {
       "codice": "LF0270",
@@ -14,11 +14,11 @@
     },
     "appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353": {
       "codice": "LF0353",
-      "titolo": "Appartamento Indipendente a Piazzola sul Brenta con Giardino Privato",
+      "titolo": "Affittasi porzione di casa su due livelli — Piazzola sul Brenta",
       "seo_slug": "appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
       "title": "Appartamento in affitto a Piazzola sul Brenta — Righetto Immobiliare Padova",
-      "description": "Appartamento · 80 m² · 4 locali · € 800 · Rif. LF0353 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/immobili/LF0353/001-1791381077947-affitto-piazzola-2c-arredato-5.webp",
+      "description": "Appartamento · 40 m² · 2 locali · € 495 · Rif. LF0353 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF0353/001-1792074636220-soggiorno-angolo-cottura-piazzola-40mq.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
       "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
       "share_file": "share-immobile-appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353.html"
@@ -267,17 +267,6 @@
       "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-villafranca-padovana-lf0270",
       "share_file": "share-immobile-appartamento-affitto-residenziale-villafranca-padovana-lf0270.html"
     },
-    "appartamento-indipendente-a-piazzola-sul-brenta-con-giardino-privato": {
-      "codice": "LF0353",
-      "titolo": "Appartamento Indipendente a Piazzola sul Brenta con Giardino Privato",
-      "seo_slug": "appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
-      "title": "Appartamento in affitto a Piazzola sul Brenta — Righetto Immobiliare Padova",
-      "description": "Appartamento · 80 m² · 4 locali · € 800 · Rif. LF0353 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/immobili/LF0353/001-1791381077947-affitto-piazzola-2c-arredato-5.webp",
-      "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
-      "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
-      "share_file": "share-immobile-appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353.html"
-    },
     "affittasi-appartamento-a-limena-bicamere-arredato-al-piano-terra-con-giardino-condominiale": {
       "codice": "LF0242",
       "titolo": "AFFITTASI APPARTAMENTO A LIMENA BICAMERE ARREDATO AL PIANO TERRA CON GIARDINO CONDOMINIALE",
@@ -502,11 +491,11 @@
     },
     "LF0353": {
       "codice": "LF0353",
-      "titolo": "Appartamento Indipendente a Piazzola sul Brenta con Giardino Privato",
+      "titolo": "Affittasi porzione di casa su due livelli — Piazzola sul Brenta",
       "seo_slug": "appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
       "title": "Appartamento in affitto a Piazzola sul Brenta — Righetto Immobiliare Padova",
-      "description": "Appartamento · 80 m² · 4 locali · € 800 · Rif. LF0353 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/immobili/LF0353/001-1791381077947-affitto-piazzola-2c-arredato-5.webp",
+      "description": "Appartamento · 40 m² · 2 locali · € 495 · Rif. LF0353 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LF0353/001-1792074636220-soggiorno-angolo-cottura-piazzola-40mq.webp",
       "share_url": "https://righettoimmobiliare.it/share-immobile-appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
       "app_url": "https://righettoimmobiliare.it/immobile?s=appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353",
       "share_file": "share-immobile-appartamento-affitto-residenziale-piazzola-sul-brenta-lf0353.html"
