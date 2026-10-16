@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-10",
+  "updated": "2026-10-16",
   "source": "GSC manuale + probe live post-deploy — aggiornare ogni venerdì",
   "note": "10/10 export Copertura→Valide (dati al 04/10): 196 righe indicizzate, 183/205 URL della sitemap (89%); trend 106 (24/07) → 196 (04/10); batch 28/09: 10/10 indicizzate. not_indexed e by_reason restano del 24/07 (l'export Valide non li aggiorna). Motore: data/seo-auto/coverage-latest.json. — 28/09 utente: 10 richieste indicizzazione forzate GSC (batch sett. post-deploy gestione/locazioni/studenti). Follow-up stato URL tra 7-14 gg. Sitemap OK. Probe storico 569 URL 0 issue.",
   "sitemap_urls": 203,
