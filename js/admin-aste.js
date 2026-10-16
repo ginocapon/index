@@ -5,6 +5,8 @@
 let asteRows = [];
 let asteSort = { key: 'data_asta', dir: 1 };
 let asteView = 'province';
+let asteGeo = null;   // {prov: {checked:bool, open:bool, comuni:{comune:bool}}} null = non inizializzato
+let asteGeoOpen = false;
 let asteLoaded = false;
 
 function asteFmtEur(v) {
@@ -48,12 +50,11 @@ async function asteLoad(force) {
 
 function asteFiltered() {
   const q = (document.getElementById('asteSearch')?.value || '').toLowerCase().trim();
-  const prov = document.getElementById('asteProv')?.value || '';
   const tipo = document.getElementById('asteTipo')?.value || '';
   const pmax = parseFloat(document.getElementById('astePrezzoMax')?.value || '') || null;
   const entro = document.getElementById('asteEntro')?.value || '';
   return asteRows.filter(r => {
-    if (prov && r.provincia !== prov) return false;
+    if (!asteGeoPass(r)) return false;
     if (tipo && (r.tipologia || 'altro') !== tipo) return false;
     if (pmax !== null && !(r.prezzo_base <= pmax)) return false;
     if (entro && r.data_asta && r.data_asta.slice(0, 10) > entro) return false;
@@ -75,6 +76,124 @@ function asteSortBy(key) {
   asteRender();
 }
 
+// -------------------- tendina geo (province + comuni, multi-selezione) --------------------
+function asteGeoInit() {
+  if (asteGeo) return;
+  asteGeo = {};
+  asteRows.forEach(r => {
+    const p = r.provincia || 'Altro';
+    if (!asteGeo[p]) asteGeo[p] = { checked: true, open: false, comuni: {} };
+    if (r.comune) asteGeo[p].comuni[r.comune] = true;
+  });
+}
+
+function asteGeoPass(r) {
+  asteGeoInit();
+  const p = asteGeo[r.provincia || 'Altro'];
+  if (!p) return true;
+  if (!p.checked) return false;
+  if (r.comune && p.comuni[r.comune] === false) return false;
+  return true;
+}
+
+function asteGeoCounts() {
+  const counts = {};
+  asteRows.forEach(r => {
+    const p = r.provincia || 'Altro';
+    counts[p] = counts[p] || { tot: 0, comuni: {} };
+    counts[p].tot++;
+    if (r.comune) counts[p].comuni[r.comune] = (counts[p].comuni[r.comune] || 0) + 1;
+  });
+  return counts;
+}
+
+function asteGeoAllSelected() {
+  asteGeoInit();
+  return Object.values(asteGeo).every(p => p.checked && Object.values(p.comuni).every(Boolean));
+}
+
+function asteGeoLabel() {
+  asteGeoInit();
+  if (asteGeoAllSelected()) return 'Tutte le province';
+  const provOn = Object.keys(asteGeo).filter(p => asteGeo[p].checked);
+  if (!provOn.length) return 'Nessuna provincia';
+  if (provOn.length === 1) {
+    const p = provOn[0];
+    const comOff = Object.keys(asteGeo[p].comuni).filter(c => !asteGeo[p].comuni[c]);
+    return comOff.length ? p + ' (alcuni comuni)' : p;
+  }
+  return provOn.length + ' province';
+}
+
+function asteGeoToggle() {
+  asteGeoOpen = !asteGeoOpen;
+  asteRenderGeoDD();
+}
+
+function asteGeoToggleProvOpen(p) {
+  asteGeoInit();
+  asteGeo[p].open = !asteGeo[p].open;
+  asteRenderGeoDD();
+}
+
+function asteGeoSetProv(p, v) {
+  asteGeoInit();
+  asteGeo[p].checked = v;
+  if (v) Object.keys(asteGeo[p].comuni).forEach(c => asteGeo[p].comuni[c] = true);
+  asteRenderGeoDD();
+  asteRender();
+}
+
+function asteGeoSetComune(p, c, v) {
+  asteGeoInit();
+  asteGeo[p].comuni[c] = v;
+  if (!v) asteGeo[p].checked = true;  // la provincia resta attiva ma con comuni esclusi
+  asteRenderGeoDD();
+  asteRender();
+}
+
+function asteGeoSetAll(v) {
+  asteGeoInit();
+  Object.values(asteGeo).forEach(p => {
+    p.checked = v;
+    Object.keys(p.comuni).forEach(c => p.comuni[c] = v);
+  });
+  asteRenderGeoDD();
+  asteRender();
+}
+
+function asteRenderGeoDD() {
+  const wrap = document.getElementById('asteGeoDD');
+  if (!wrap) return;
+  asteGeoInit();
+  const counts = asteGeoCounts();
+  const cb = (on) => `<span style="display:inline-block;width:16px;height:16px;border:1.5px solid ${on ? 'var(--nero)' : 'var(--caffe3)'};border-radius:4px;background:${on ? 'var(--nero)' : '#fff'};color:#fff;font-size:11px;line-height:16px;text-align:center;flex:none">${on ? '✓' : ''}</span>`;
+  let panel = '';
+  if (asteGeoOpen) {
+    const provRows = asteProvOrder(counts).map(p => {
+      const g = asteGeo[p];
+      const comList = Object.keys(g.comuni).sort().map(c =>
+        `<label style="display:inline-flex;align-items:center;gap:5px;padding:5px 9px;margin:2px;border:1px solid var(--caffe3);border-radius:14px;font-size:.74rem;cursor:pointer;background:${g.comuni[c] ? 'var(--sfondo)' : '#fff'}">
+          <input type="checkbox" ${g.comuni[c] ? 'checked' : ''} onchange="asteGeoSetComune('${asteEsc(p)}','${asteEsc(c)}',this.checked)" style="margin:0">${asteEsc(c)} <span style="color:var(--caffe2)">${counts[p].comuni[c]}</span>
+        </label>`).join('');
+      return `<div style="border-bottom:1px solid var(--caffe3);padding:8px 12px">
+        <div style="display:flex;align-items:center;gap:8px;cursor:pointer" onclick="asteGeoSetProv('${asteEsc(p)}',${!g.checked})">${cb(g.checked)}<strong style="font-size:.84rem">${asteEsc(p)}</strong><span style="color:var(--caffe2);font-size:.76rem">${counts[p].tot} aste</span>
+          <button type="button" onclick="event.stopPropagation();asteGeoToggleProvOpen('${asteEsc(p)}')" style="margin-left:auto;background:none;border:none;color:var(--nero);cursor:pointer;font-size:.8rem">${g.open ? '▴ comuni' : '▾ comuni'}</button></div>
+        ${g.open ? `<div style="padding:6px 0 2px 24px;line-height:1.2">${comList || '<span style="font-size:.75rem;color:var(--caffe2)">nessun comune</span>'}</div>` : ''}
+      </div>`;
+    }).join('');
+    panel = `<div style="position:absolute;top:calc(100% + 6px);left:0;z-index:60;background:#fff;color:var(--testo);border:1px solid var(--caffe3);border-radius:12px;box-shadow:0 12px 40px rgba(30,58,92,.18);width:min(420px,88vw);max-height:60vh;overflow-y:auto">
+      <div style="display:flex;gap:10px;padding:10px 12px;border-bottom:1px solid var(--caffe3);position:sticky;top:0;background:#fff;border-radius:12px 12px 0 0">
+        <button type="button" onclick="asteGeoSetAll(true)" style="background:none;border:none;color:var(--nero);font-size:.76rem;cursor:pointer;text-decoration:underline">Seleziona tutto</button>
+        <button type="button" onclick="asteGeoSetAll(false)" style="background:none;border:none;color:var(--nero);font-size:.76rem;cursor:pointer;text-decoration:underline">Deseleziona tutto</button>
+        <button type="button" onclick="asteGeoToggle()" style="margin-left:auto;background:var(--nero);color:#fff;border:none;border-radius:6px;padding:3px 12px;font-size:.76rem;cursor:pointer">Fatto</button>
+      </div>
+      ${provRows}
+    </div>`;
+  }
+  wrap.innerHTML = `<button type="button" onclick="asteGeoToggle()" style="padding:8px 14px;border-radius:8px;border:1.5px solid var(--caffe3);background:#fff;font-size:.82rem;cursor:pointer;white-space:nowrap">🗺 ${asteEsc(asteGeoLabel())} ▾</button>` + panel;
+}
+
 function asteProvOrder(counts) {
   const prio = ['Padova', 'Vicenza', 'Treviso'];
   const rest = Object.keys(counts).filter(p => !prio.includes(p))
@@ -83,8 +202,12 @@ function asteProvOrder(counts) {
 }
 
 function asteChipProv(p) {
-  const sel = document.getElementById('asteProv');
-  if (sel) sel.value = p;
+  asteGeoInit();
+  if (!p) { asteGeoSetAll(true); return; }
+  Object.keys(asteGeo).forEach(k => {
+    asteGeo[k].checked = (k === p);
+    Object.keys(asteGeo[k].comuni).forEach(c => asteGeo[k].comuni[c] = (k === p));
+  });
   asteRender();
 }
 
@@ -98,7 +221,10 @@ function asteRenderChips() {
   if (!wrap) return;
   const counts = {};
   asteRows.forEach(r => { if (r.provincia) counts[r.provincia] = (counts[r.provincia] || 0) + 1; });
-  const cur = document.getElementById('asteProv')?.value || '';
+  asteGeoInit();
+  const allSel = asteGeoAllSelected();
+  const onlyProv = Object.keys(asteGeo).filter(p => asteGeo[p].checked && Object.values(asteGeo[p].comuni).every(Boolean));
+  const cur = allSel ? '' : (onlyProv.length === 1 && Object.values(asteGeo).filter(p => p.checked).length === 1 ? onlyProv[0] : '?');
   const chip = (label, val, n) => {
     const on = cur === val;
     return `<button type="button" onclick="asteChipProv('${val}')" style="padding:6px 14px;border-radius:20px;border:1.5px solid ${on ? 'var(--nero)' : 'var(--caffe3)'};background:${on ? 'var(--nero)' : '#fff'};color:${on ? '#fff' : 'var(--testo)'};font-size:.78rem;font-weight:${on ? '700' : '500'};cursor:pointer">${asteEsc(label)} <span style="opacity:.75">(${n})</span></button>`;
@@ -153,18 +279,16 @@ function asteRowHtml(r) {
 function asteRender() {
   const rows = asteFiltered();
   const soon = asteRows.filter(r => r.data_asta && (new Date(r.data_asta) - Date.now()) / 864e5 <= 7 && (new Date(r.data_asta) - Date.now()) >= 0).length;
-  const provs = [...new Set(asteRows.map(r => r.provincia).filter(Boolean))].sort();
   const el = id => document.getElementById(id);
   if (el('statAsteTot')) el('statAsteTot').textContent = asteRows.length;
   if (el('statAsteWeek')) el('statAsteWeek').textContent = soon;
   if (el('statAsteDocs')) el('statAsteDocs').textContent = asteRows.filter(r => (r.documenti || []).length > 0).length;
   if (el('statAsteFoto')) el('statAsteFoto').textContent = asteRows.filter(r => r.foto_url).length;
-  const sel = el('asteProv');
-  if (sel && sel.options.length <= 1) provs.forEach(p => { const o = document.createElement('option'); o.value = p; o.textContent = p; sel.appendChild(o); });
   const tipi = [...new Set(asteRows.map(r => r.tipologia || 'altro'))].sort();
   const selT = el('asteTipo');
   if (selT && selT.options.length <= 1) tipi.forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; selT.appendChild(o); });
   asteRenderChips();
+  asteRenderGeoDD();
 
   const body = el('asteTableBody');
   if (!body) return;

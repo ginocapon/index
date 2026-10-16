@@ -5173,7 +5173,7 @@ META_IG_USER_ID=...</pre>
             <div style="font-weight:700;font-size:0.95rem">🔨 Aste immobiliari residenziali — Veneto</div>
             <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
               <input type="search" id="asteSearch" placeholder="Cerca comune, via, tribunale…" oninput="asteRender()" style="padding:8px 12px;border:1px solid rgba(255,255,255,.3);border-radius:8px;font-size:0.82rem;min-width:200px;background:rgba(255,255,255,.95)">
-              <select id="asteProv" onchange="asteRender()" style="padding:8px 10px;border-radius:8px;font-size:0.82rem"><option value="">Tutte le province</option></select>
+              <div id="asteGeoDD" style="position:relative"></div>
               <select id="asteTipo" onchange="asteRender()" style="padding:8px 10px;border-radius:8px;font-size:0.82rem"><option value="">Tutte le tipologie</option></select>
               <input type="number" id="astePrezzoMax" placeholder="Prezzo max €" oninput="asteRender()" style="padding:8px 10px;border-radius:8px;font-size:0.82rem;width:130px">
               <input type="date" id="asteEntro" onchange="asteRender()" title="Asta entro il…" style="padding:8px 10px;border-radius:8px;font-size:0.82rem">
