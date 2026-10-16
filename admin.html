@@ -2063,6 +2063,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
   .email-list-area { height: 300px; }
 }
 @media (max-width: 768px) {
+  #guidaWrap { max-width: calc(100vw - 32px); }
   .sidebar { transform: translateX(-100%); }
   .sidebar.open { transform: translateX(0); }
   .main { margin-left: 0; }
@@ -5168,6 +5169,49 @@ META_IG_USER_ID=...</pre>
           <div class="stat-card" style="border-left-color:var(--caffe2)"><div class="stat-num" id="statAsteFoto">0</div><div class="stat-label">Con foto</div></div>
         </div>
 
+        <div class="table-wrap" style="margin-top:16px" id="guidaWrap">
+          <div class="table-head" style="background:linear-gradient(90deg,var(--nero),var(--nero2));color:#fff;padding:14px 20px;cursor:pointer" onclick="guidaToggle()">
+            <div style="font-weight:700;font-size:0.95rem">📘 Guida: come partecipare a un'asta telematica <span id="guidaToggleIcon" style="float:right;font-weight:400">▾ apri</span></div>
+          </div>
+          <div id="guidaBody" style="display:none;padding:18px 20px;background:var(--bianco)">
+
+            <div style="font-weight:700;font-size:0.88rem;margin-bottom:8px">Le tre modalità d'asta telematica</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-bottom:18px">
+              <div style="border:1px solid var(--caffe3);border-left:4px solid var(--oro);border-radius:10px;padding:12px 14px">
+                <div style="font-weight:700;font-size:0.84rem;margin-bottom:4px">⏳ Asincrona</div>
+                <div style="font-size:0.8rem;color:var(--caffe2)">Nessun appuntamento in diretta. Mandi l'offerta prima della scadenza, poi la gara va avanti online per un periodo (di regola qualche giorno): entri e rilanci quando vuoi. Se qualcuno rilancia negli ultimi minuti, la scadenza si allunga in automatico.</div>
+              </div>
+              <div style="border:1px solid var(--caffe3);border-left:4px solid var(--oro);border-radius:10px;padding:12px 14px">
+                <div style="font-weight:700;font-size:0.84rem;margin-bottom:4px">⚡ Sincrona</div>
+                <div style="font-size:0.8rem;color:var(--caffe2)">Come un'asta in tribunale, ma tutta online: a un giorno e ora precisi tutti sono collegati insieme e rilanciano in diretta. Finisce quando nessuno rilancia più. Devi essere online in quel momento.</div>
+              </div>
+              <div style="border:1px solid var(--caffe3);border-left:4px solid var(--oro);border-radius:10px;padding:12px 14px">
+                <div style="font-weight:700;font-size:0.84rem;margin-bottom:4px">🔀 Sincrona mista</div>
+                <div style="font-size:0.8rem;color:var(--caffe2)">Un mix: chi ha fatto l'offerta cartacea partecipa di persona dal delegato, chi l'ha fatta online resta online. La scelta fatta all'inizio vale fino alla fine dell'asta.</div>
+              </div>
+            </div>
+
+            <div style="font-weight:700;font-size:0.88rem;margin-bottom:8px">I documenti che servono — e perché</div>
+            <div style="font-size:0.82rem;color:var(--caffe2);margin-bottom:18px;line-height:1.55">
+              <div>🪪 <strong>Documento d'identità e codice fiscale</strong>: identificano con certezza chi offre; i dati vanno nell'offerta.</div>
+              <div>📮 <strong>PEC</strong>: ha il valore legale di una raccomandata con ricevuta. È il canale ufficiale per inviare l'offerta e ricevere codici e comunicazioni. Senza PEC non si può partecipare.</div>
+              <div>🖋️ <strong>Firma digitale</strong>: firma l'offerta con lo stesso valore di una firma di persona. Obbligatoria.</div>
+              <div>💶 <strong>Ricevuta del bonifico della cauzione</strong> (con codice CRO/TRN): prova che hai versato la garanzia, di regola il 10% del prezzo offerto. Se i soldi non risultano arrivati in tempo, l'offerta viene scartata.</div>
+              <div>🧾 <strong>Ricevuta del bollo digitale</strong> (file XML da pagoPA): piccola imposta dovuta sull'offerta, va allegata all'invio.</div>
+              <div>👥 <strong>Solo se serve</strong>: procura speciale (se partecipa un'altra persona per te, es. un avvocato) o documenti della società (se offre un'azienda).</div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;border-top:1px solid var(--caffe3);padding-top:14px">
+              <div style="font-weight:700;font-size:0.88rem">Le mie pratiche <span style="font-weight:400;font-size:0.76rem;color:var(--caffe2)">— per ogni asta a cui partecipi, tieni il segno di ogni passo e il suo documento</span></div>
+              <button type="button" class="btn btn-primary btn-sm" style="background:var(--oro);color:var(--nero);border:none" onclick="guidaNuovaPratica()">＋ Nuova pratica</button>
+            </div>
+            <div id="guidaAvvisoSQL" style="display:none;margin-top:10px;font-size:0.78rem;background:#fff8e6;border:1px solid #ecd28a;border-radius:8px;padding:10px 12px;color:#7a5b00">⚠️ Archivio non ancora attivo: per salvare checklist e PDF in modo permanente esegui in Supabase lo SQL che ti è arrivato per email (sql/aste-guida-pratica.sql). Per ora la pagina funziona in prova: i segni restano solo su questo dispositivo e i file non si caricano.</div>
+            <div id="guidaPratiche" style="margin-top:12px"></div>
+
+            <p style="font-size:0.72rem;color:var(--caffe2);margin:14px 0 0">Fonti: D.M. 32/2015 e manuale "Offerta telematica" del Ministero della Giustizia, portali dei gestori accreditati. L'avviso di vendita di ogni asta vince sempre: se dice qualcosa di diverso, vale lui. Il debitore non può partecipare. I file caricati qui sono in uno spazio privato: li vedi solo tu da quest'area.</p>
+          </div>
+        </div>
+
         <div class="table-wrap" style="margin-top:16px">
           <div class="table-head" style="background:linear-gradient(90deg,var(--nero),var(--nero2));color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
             <div style="font-weight:700;font-size:0.95rem">🔨 Aste immobiliari residenziali — Veneto</div>
@@ -5202,6 +5246,8 @@ META_IG_USER_ID=...</pre>
           </div>
           <p style="font-size:0.72rem;color:var(--caffe2);padding:12px 16px;margin:0">Fonte: Portale delle Vendite Pubbliche (Ministero della Giustizia), aggiornato 2 volte al giorno. Documenti (perizie, planimetrie, avvisi) si aprono dal sito ufficiale. Area riservata: non pubblicare questi dati sul sito.</p>
         </div>
+
+
       </div>
 
     </div><!-- /content -->
@@ -5611,6 +5657,7 @@ function showSection(name) {
   if (name === 'perizie' && typeof loadPerizie === 'function') loadPerizie();
   if (name === 'impostazioni') { testConn(); check2FAStatus(); }
   if (name === 'aste' && typeof asteLoad === 'function') asteLoad();
+  if (name === 'aste' && typeof guidaInit === 'function') guidaInit();
 }
 
 // ══════════════════════════════════════
@@ -7478,6 +7525,184 @@ function toast(msg, type = '') {
   c.appendChild(t);
   setTimeout(() => t.remove(), 3500);
 }
+
+
+// ══════════════════════════════════════
+// GUIDA PARTECIPAZIONE ASTE (checklist + documenti privati)
+// ══════════════════════════════════════
+const GUIDA_STEPS = [
+  {k:'avviso', t:'Leggi avviso, ordinanza e perizia', d:'Sono le regole di QUELLA vendita: prezzo base, cauzione, scadenze, portale dove si svolge, modalità (sincrona o asincrona). Li trovi tra i documenti dell\'asta qui sopra o sul Portale delle Vendite Pubbliche. L\'avviso vince su tutto: se dice qualcosa di diverso, vale lui.', up:'Avviso o appunti'},
+  {k:'visita', t:'Vai a vedere l\'immobile', d:'Le case all\'asta si comprano "visto e piaciuto". Chiedi la visita al custode o al professionista delegato: i contatti sono nell\'avviso.', up:''},
+  {k:'pec', t:'Procurati una PEC', d:'Se non ce l\'hai, si attiva online in pochi minuti e costa pochi euro all\'anno. Serve per l\'invio ufficiale dell\'offerta e per ricevere i codici il giorno della vendita.', up:'Conferma attivazione PEC'},
+  {k:'firma', t:'Procurati la firma digitale', d:'Kit o chiavetta, si attiva anche online con riconoscimento video. Serve per firmare l\'offerta con valore legale. Attivala qualche giorno prima della scadenza.', up:'Conferma attivazione firma'},
+  {k:'portale', t:'Registrati al portale del gestore', d:'L\'avviso indica il portale che gestisce la vendita (es. astetelematiche.it). La registrazione è gratuita e serve per entrare nell\'aula virtuale il giorno della vendita.', up:''},
+  {k:'cauzione', t:'Versa la cauzione', d:'Di regola il 10% del prezzo che vuoi offrire, con bonifico sul conto scritto nell\'avviso e con la causale esatta richiesta. Deve risultare accreditata il giorno prima della vendita: falla 2-3 giorni prima o usa il bonifico istantaneo. Conserva la ricevuta con il CRO.', up:'Ricevuta del bonifico'},
+  {k:'offerta', t:'Compila l\'offerta sul modulo del Ministero', d:'Dalla scheda del lotto sul portale del gestore clicca "Invia offerta": si apre il modulo ufficiale del Ministero. Inserisci i tuoi dati (e quelli di eventuali co-intestatari), il prezzo, gli estremi della cauzione (CRO) e gli allegati.', up:''},
+  {k:'firmaofferta', t:'Scarica e firma il file dell\'offerta', d:'Il modulo produce un file offerta_....zip.p7m: NON aprirlo e NON rinominarlo, altrimenti l\'offerta viene scartata. Firmalo con la firma digitale e conserva link e chiave di recupero che ti dà il portale.', up:'Copia dell\'offerta firmata'},
+  {k:'bollo', t:'Paga il bollo digitale', d:'Su pst.giustizia.it entra in pagoPA e scegli "Bollo su documento". Conserva la ricevuta in formato XML: va allegata all\'invio.', up:'Ricevuta del bollo (XML/PDF)'},
+  {k:'pecinvio', t:'Invia tutto via PEC al Ministero', d:'Dalla TUA casella PEC manda a offertapvp.dgsia@giustiziacert.it il file dell\'offerta firmata + la ricevuta del bollo, entro il termine scritto nell\'avviso (di regola le 12:00 del giorno prima della vendita). L\'offerta è depositata quando ti arriva la ricevuta di consegna.', up:'Ricevuta di consegna PEC'},
+  {k:'aula', t:'Il giorno della vendita: entra nell\'aula virtuale', d:'Circa 30 minuti prima dell\'inizio il gestore ti manda via PEC (e SMS) un codice personale. Entra nell\'area riservata del portale del gestore con le tue credenziali e inserisci il codice.', up:''},
+  {k:'gara', t:'Segui la gara e rilancia', d:'Asincrona: la gara resta aperta per un periodo (di regola fino alle 12:00 del secondo giorno dopo l\'apertura; i rilanci negli ultimi minuti allungano la scadenza). Sincrona: tutto in diretta, finché nessuno rilancia più. Importi senza decimali.', up:''},
+  {k:'esito', t:'Esito e saldo', d:'Se ti aggiudichi: versi il saldo nei termini dell\'avviso (la cauzione resta a conto prezzo) e il giudice emette il decreto di trasferimento. Se non ti aggiudichi: la cauzione torna sullo stesso conto da cui era partita.', up:'Decreto / ricevute finali'}
+];
+
+let guidaInited = false, guidaRemote = true, guidaPratiche = [], guidaPassi = {};
+
+function guidaToggle() {
+  const b = document.getElementById('guidaBody');
+  const open = b.style.display !== 'none';
+  b.style.display = open ? 'none' : 'block';
+  document.getElementById('guidaToggleIcon').textContent = open ? '▾ apri' : '▴ chiudi';
+}
+
+async function guidaInit() {
+  if (guidaInited) return; guidaInited = true;
+  try {
+    const { data, error } = await sb.from('aste_guida_pratiche').select('*').order('created_at', { ascending: false });
+    if (error) throw error;
+    guidaPratiche = data || [];
+    if (guidaPratiche.length) {
+      const { data: p, error: e2 } = await sb.from('aste_guida_passi').select('*');
+      if (e2) throw e2;
+      (p || []).forEach(r => { guidaPassi[r.pratica_id + '|' + r.step_key] = r; });
+    }
+  } catch (e) {
+    guidaRemote = false;
+    document.getElementById('guidaAvvisoSQL').style.display = 'block';
+    guidaPratiche = JSON.parse(localStorage.getItem('rig_guida_pratiche') || '[]');
+    guidaPassi = JSON.parse(localStorage.getItem('rig_guida_passi') || '{}');
+  }
+  guidaRender();
+}
+
+function guidaSaveLocal() {
+  if (guidaRemote) return;
+  localStorage.setItem('rig_guida_pratiche', JSON.stringify(guidaPratiche));
+  localStorage.setItem('rig_guida_passi', JSON.stringify(guidaPassi));
+}
+
+async function guidaNuovaPratica() {
+  const titolo = prompt('Nome della pratica (es. "Appartamento Padova, asta del 12/11"):');
+  if (!titolo) return;
+  const modalita = prompt('Modalità (asincrona / sincrona / sincrona mista — è scritta nell\'avviso):', 'asincrona') || '';
+  const row = { titolo, modalita, link_annuncio: '' };
+  if (guidaRemote) {
+    const { data, error } = await sb.from('aste_guida_pratiche').insert(row).select().single();
+    if (error) { toast('Errore salvataggio: ' + error.message, 'error'); return; }
+    guidaPratiche.unshift(data);
+  } else {
+    row.id = 'loc' + Date.now(); guidaPratiche.unshift(row); guidaSaveLocal();
+  }
+  guidaRender();
+}
+
+async function guidaDelPratica(id) {
+  if (!confirm('Eliminare questa pratica con tutti i suoi segni e documenti?')) return;
+  if (guidaRemote) {
+    await sb.from('aste_guida_pratiche').delete().eq('id', id);
+    guidaPratiche = guidaPratiche.filter(p => p.id !== id);
+    Object.keys(guidaPassi).forEach(k => { if (k.startsWith(id + '|')) delete guidaPassi[k]; });
+  } else {
+    guidaPratiche = guidaPratiche.filter(p => p.id !== id);
+    Object.keys(guidaPassi).forEach(k => { if (k.startsWith(id + '|')) delete guidaPassi[k]; });
+    guidaSaveLocal();
+  }
+  guidaRender();
+}
+
+function guidaStepRow(praticaId, s, i) {
+  const r = guidaPassi[praticaId + '|' + s.k] || {};
+  const fatto = !!r.fatto;
+  return `<div style="border:1px solid var(--caffe3);border-radius:10px;margin-bottom:8px;overflow:hidden">
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:${fatto ? '#f2f8ef' : 'var(--bianco)'};cursor:pointer;flex-wrap:wrap" onclick="guidaStepToggle('${praticaId}','${s.k}')">
+      <span style="font-size:1.05rem;cursor:pointer" onclick="event.stopPropagation();guidaToggleFatto('${praticaId}','${s.k}')" title="Segna fatto/non fatto">${fatto ? '✅' : '⬜'}</span>
+      <span style="font-weight:600;font-size:0.84rem;flex:1;min-width:180px;${fatto ? 'text-decoration:line-through;color:var(--caffe2)' : ''}">${i + 1}. ${s.t}</span>
+      <span style="font-size:0.72rem;color:var(--caffe2)">${r.file_nome ? '📎 ' + r.file_nome : ''} <span id="guidaInfo-${praticaId}-${s.k}">ⓘ spiegazione</span></span>
+    </div>
+    <div id="guidaStepD-${praticaId}-${s.k}" style="display:none;padding:10px 14px;border-top:1px solid var(--caffe3);font-size:0.8rem;color:var(--caffe2);line-height:1.5">
+      ${s.d}
+      <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <input type="text" placeholder="Nota tua (facoltativa)" value="${(r.note || '').replace(/"/g, '&quot;')}" onchange="guidaNota('${praticaId}','${s.k}',this.value)" style="flex:1;min-width:160px;padding:6px 10px;border:1px solid var(--caffe3);border-radius:7px;font-size:0.78rem">
+        ${s.up ? `<label class="btn btn-sm" style="background:var(--sfondo);border:1px solid var(--caffe3);cursor:pointer;font-size:0.76rem;padding:6px 10px">📎 ${r.file_nome ? 'Sostituisci file' : 'Carica ' + s.up}<input type="file" accept=".pdf,.xml,.p7m,.zip,.jpg,.jpeg,.png" style="display:none" onchange="guidaUpload('${praticaId}','${s.k}',this.files)"></label>` : ''}
+        ${r.file_path ? `<button type="button" class="btn btn-sm" style="background:var(--sfondo);border:1px solid var(--caffe3);font-size:0.76rem;padding:6px 10px" onclick="guidaApriFile('${praticaId}','${s.k}')">👁 Apri</button>` : ''}
+      </div>
+    </div>
+  </div>`;
+}
+
+function guidaRender() {
+  const wrap = document.getElementById('guidaPratiche');
+  if (!guidaPratiche.length) {
+    wrap.innerHTML = '<div style="font-size:0.8rem;color:var(--caffe2);padding:8px 2px">Nessuna pratica ancora. Clicca "＋ Nuova pratica" quando decidi di partecipare a un\'asta: qui segni ogni passo fatto e alleghi il suo documento.</div>';
+    return;
+  }
+  wrap.innerHTML = guidaPratiche.map(p => {
+    const fatti = GUIDA_STEPS.filter(s => (guidaPassi[p.id + '|' + s.k] || {}).fatto).length;
+    return `<div style="border:1px solid var(--caffe3);border-radius:12px;margin-bottom:14px;overflow:hidden">
+      <div style="background:var(--sfondo);padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;cursor:pointer" onclick="guidaPraticaToggle('${p.id}')">
+        <div style="font-weight:700;font-size:0.86rem">🏠 ${p.titolo} <span style="font-weight:400;font-size:0.74rem;color:var(--caffe2)">${p.modalita ? '· ' + p.modalita : ''} · ${fatti}/${GUIDA_STEPS.length} passi fatti</span></div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span id="guidaPT-${p.id}" style="font-size:0.74rem;color:var(--caffe2)">▾ apri</span>
+          <button type="button" class="btn btn-sm" style="background:none;border:1px solid #c33;color:#c33;font-size:0.72rem;padding:4px 8px" onclick="event.stopPropagation();guidaDelPratica('${p.id}')">Elimina</button>
+        </div>
+      </div>
+      <div id="guidaPB-${p.id}" style="display:none;padding:10px 12px">${GUIDA_STEPS.map((s, i) => guidaStepRow(p.id, s, i)).join('')}</div>
+    </div>`;
+  }).join('');
+}
+
+function guidaPraticaToggle(id) {
+  const b = document.getElementById('guidaPB-' + id);
+  const open = b.style.display !== 'none';
+  b.style.display = open ? 'none' : 'block';
+  document.getElementById('guidaPT-' + id).textContent = open ? '▾ apri' : '▴ chiudi';
+}
+
+function guidaStepToggle(p, k) {
+  const d = document.getElementById('guidaStepD-' + p + '-' + k);
+  d.style.display = d.style.display === 'none' ? 'block' : 'none';
+}
+
+async function guidaSetPasso(p, k, patch) {
+  const cur = guidaPassi[p + '|' + k] || {};
+  const row = Object.assign({}, cur, patch, { updated_at: new Date().toISOString() });
+  if (guidaRemote) {
+    const { error } = await sb.from('aste_guida_passi').upsert({ pratica_id: p, step_key: k, fatto: !!row.fatto, note: row.note || '', file_path: row.file_path || '', file_nome: row.file_nome || '', updated_at: row.updated_at });
+    if (error) { toast('Errore salvataggio: ' + error.message, 'error'); return; }
+  }
+  guidaPassi[p + '|' + k] = row; guidaSaveLocal();
+}
+
+async function guidaToggleFatto(p, k) {
+  const cur = guidaPassi[p + '|' + k] || {};
+  await guidaSetPasso(p, k, { fatto: !cur.fatto });
+  guidaRender();
+}
+
+async function guidaNota(p, k, v) { await guidaSetPasso(p, k, { note: v }); toast('Nota salvata', 'success'); }
+
+async function guidaUpload(p, k, files) {
+  if (!files || !files.length) return;
+  if (!guidaRemote) { toast('Prima esegui lo SQL in Supabase (vedi avviso giallo sopra): per ora i file non si caricano.', 'error'); return; }
+  const f = files[0];
+  const path = p + '/' + k + '/' + Date.now() + '-' + slugify(f.name);
+  const { error } = await sb.storage.from('aste-pratica').upload(path, f);
+  if (error) { toast('Caricamento fallito: ' + error.message, 'error'); return; }
+  const old = (guidaPassi[p + '|' + k] || {}).file_path;
+  await guidaSetPasso(p, k, { file_path: path, file_nome: f.name, fatto: true });
+  if (old && old !== path) await sb.storage.from('aste-pratica').remove([old]);
+  toast('File caricato e passo segnato come fatto', 'success');
+  guidaRender();
+}
+
+async function guidaApriFile(p, k) {
+  const r = guidaPassi[p + '|' + k];
+  if (!r || !r.file_path) return;
+  const { data, error } = await sb.storage.from('aste-pratica').createSignedUrl(r.file_path, 300);
+  if (error) { toast('Non riesco ad aprire il file: ' + error.message, 'error'); return; }
+  window.open(data.signedUrl, '_blank');
+}
+
 
 // ══════════════════════════════════════
 // START
