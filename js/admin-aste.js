@@ -182,7 +182,10 @@ function asteRenderGeoDD() {
         ${g.open ? `<div style="padding:6px 0 2px 24px;line-height:1.2">${comList || '<span style="font-size:.75rem;color:var(--caffe2)">nessun comune</span>'}</div>` : ''}
       </div>`;
     }).join('');
-    panel = `<div style="position:absolute;top:calc(100% + 6px);left:0;z-index:60;background:#fff;color:var(--testo);border:1px solid var(--caffe3);border-radius:12px;box-shadow:0 12px 40px rgba(30,58,92,.18);width:min(420px,88vw);max-height:60vh;overflow-y:auto">
+    const posStyle = window.innerWidth < 700
+      ? 'position:fixed;top:14vh;left:4vw;right:4vw;width:auto'
+      : 'position:absolute;top:calc(100% + 6px);left:0;width:min(420px,88vw)';
+    panel = `<div style="${posStyle};z-index:60;background:#fff;color:var(--testo);border:1px solid var(--caffe3);border-radius:12px;box-shadow:0 12px 40px rgba(30,58,92,.18);max-height:64vh;overflow-y:auto">
       <div style="display:flex;gap:10px;padding:10px 12px;border-bottom:1px solid var(--caffe3);position:sticky;top:0;background:#fff;border-radius:12px 12px 0 0">
         <button type="button" onclick="asteGeoSetAll(true)" style="background:none;border:none;color:var(--nero);font-size:.76rem;cursor:pointer;text-decoration:underline">Seleziona tutto</button>
         <button type="button" onclick="asteGeoSetAll(false)" style="background:none;border:none;color:var(--nero);font-size:.76rem;cursor:pointer;text-decoration:underline">Deseleziona tutto</button>
