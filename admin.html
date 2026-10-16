@@ -5174,6 +5174,7 @@ META_IG_USER_ID=...</pre>
             <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
               <input type="search" id="asteSearch" placeholder="Cerca comune, via, tribunale…" oninput="asteRender()" style="padding:8px 12px;border:1px solid rgba(255,255,255,.3);border-radius:8px;font-size:0.82rem;min-width:200px;background:rgba(255,255,255,.95)">
               <select id="asteProv" onchange="asteRender()" style="padding:8px 10px;border-radius:8px;font-size:0.82rem"><option value="">Tutte le province</option></select>
+              <select id="asteTipo" onchange="asteRender()" style="padding:8px 10px;border-radius:8px;font-size:0.82rem"><option value="">Tutte le tipologie</option></select>
               <input type="number" id="astePrezzoMax" placeholder="Prezzo max €" oninput="asteRender()" style="padding:8px 10px;border-radius:8px;font-size:0.82rem;width:130px">
               <input type="date" id="asteEntro" onchange="asteRender()" title="Asta entro il…" style="padding:8px 10px;border-radius:8px;font-size:0.82rem">
               <button type="button" class="btn btn-primary btn-sm" style="background:var(--oro);color:var(--nero);border:none" onclick="asteLoad(true)">↻ Aggiorna</button>
@@ -5185,6 +5186,7 @@ META_IG_USER_ID=...</pre>
                 <tr style="background:var(--sfondo);text-align:left">
                   <th style="padding:12px 14px">Foto</th>
                   <th style="padding:12px 14px;cursor:pointer" onclick="asteSortBy('comune')">Comune ⇅</th>
+                  <th style="padding:12px 14px;cursor:pointer" onclick="asteSortBy('tipologia')">Tipologia ⇅</th>
                   <th style="padding:12px 14px;cursor:pointer" onclick="asteSortBy('prezzo_base')">Prezzo base ⇅</th>
                   <th style="padding:12px 14px;cursor:pointer" onclick="asteSortBy('data_asta')">Data asta ⇅</th>
                   <th style="padding:12px 14px">Stato</th>
@@ -5193,7 +5195,7 @@ META_IG_USER_ID=...</pre>
                 </tr>
               </thead>
               <tbody id="asteTableBody">
-                <tr><td colspan="7" style="padding:24px;text-align:center;color:var(--caffe2)">Caricamento…</td></tr>
+                <tr><td colspan="8" style="padding:24px;text-align:center;color:var(--caffe2)">Caricamento…</td></tr>
               </tbody>
             </table>
           </div>

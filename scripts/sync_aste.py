@@ -151,6 +151,34 @@ def pvp_detail(vendite_url: str, buckets: str, annuncio_id: int) -> dict:
     }
 
 
+
+
+# ------------------------------------------------------------- tipologia bene
+# La categoria catastale PVP e' troppo generica ("Abitazione di tipo civile"):
+# la tipologia utile si ricava dalla descrizione del lotto. Se nessuna regola
+# combacia -> "altro" (mai inventare).
+TIPOLOGIA_RULES = [
+    ("bifamiliare/villa", r"villetta|villino|\bvilla\b|bifamiliare|trifamiliare|quadrifamiliare|a schiera"),
+    ("rustico/casale", r"rustic|casolare|casale|colonica|fienile"),
+    ("appartamento", r"appartament|\battico\b|mansarda|monolocale|bilocale|trilocale|quadrilocale|\bloft\b"),
+    ("casa", r"\bcasa\b|\bcasetta\b|unifamiliare"),
+    ("box/garage", r"\bbox\b|garage|autorimessa|posto auto|posti auto"),
+    ("ufficio", r"uffici"),
+    ("negozio", r"negozi"),
+    ("capannone", r"capannon"),
+    ("magazzino", r"magazzin"),
+    ("laboratorio", r"laboratori"),
+    ("terreno", r"terren[oi]|edificabil"),
+]
+
+
+def classify_tipologia(desc: str) -> str:
+    t = (desc or "").lower()
+    for label, rx in TIPOLOGIA_RULES:
+        if re.search(rx, t):
+            return label
+    return "altro"
+
 # ------------------------------------------------------- foto da astegiudiziarie
 def agi_foto_index() -> dict:
     """Mappa (tribunale_lower, num_procedura, anno) -> url foto, per il Veneto residenziale."""
@@ -257,7 +285,7 @@ def main():
         seen_ids.add(aid)
         ind = x.get("indirizzo") or {}
         dt = x.get("dataOraVendita")
-        hash_src = json.dumps([x.get("prezzoBaseAsta"), dt, x.get("offertaMinima"),
+        hash_src = json.dumps(["v2", x.get("prezzoBaseAsta"), dt, x.get("offertaMinima"),
                                x.get("descLotto"), x.get("disponibilita")], sort_keys=True)
         h = hashlib.sha1(hash_src.encode()).hexdigest()[:12]
         old = existing.get(aid)
@@ -288,6 +316,7 @@ def main():
             "latitudine": (ind.get("coordinate") or {}).get("latitudine"),
             "longitudine": (ind.get("coordinate") or {}).get("longitudine"),
             "descrizione": (x.get("descLotto") or "")[:4000],
+            "tipologia": classify_tipologia(x.get("descLotto") or ""),
             "tipologia_bene": ", ".join(x.get("categoriaBene") or []),
             "disponibilita": ", ".join(x.get("disponibilita") or []),
             "tribunale": x.get("tribunale") or "",

@@ -29,7 +29,7 @@ function asteDispLabel(d) {
 async function asteLoad(force) {
   if (asteLoaded && !force) { asteRender(); return; }
   const body = document.getElementById('asteTableBody');
-  if (body) body.innerHTML = '<tr><td colspan="7" style="padding:24px;text-align:center;color:var(--caffe2)">Caricamento…</td></tr>';
+  if (body) body.innerHTML = '<tr><td colspan="8" style="padding:24px;text-align:center;color:var(--caffe2)">Caricamento…</td></tr>';
   try {
     const { data, error } = await sb.from('aste_immobili').select('*')
       .eq('attivo', true).order('data_asta', { ascending: true, nullsFirst: false }).limit(1000);
@@ -39,7 +39,7 @@ async function asteLoad(force) {
   } catch (e) {
     console.error('asteLoad', e);
     asteRows = [];
-    if (body) body.innerHTML = '<tr><td colspan="7" style="padding:24px;text-align:center;color:#e74c3c">Errore di lettura. Se è il primo avvio: esegui sql/aste-immobili.sql in Supabase e poi il sync (GitHub Actions → Sync aste Veneto).</td></tr>';
+    if (body) body.innerHTML = '<tr><td colspan="8" style="padding:24px;text-align:center;color:#e74c3c">Errore di lettura. Se è il primo avvio: esegui sql/aste-immobili.sql in Supabase e poi il sync (GitHub Actions → Sync aste Veneto).</td></tr>';
     return;
   }
   asteRender();
@@ -48,14 +48,16 @@ async function asteLoad(force) {
 function asteFiltered() {
   const q = (document.getElementById('asteSearch')?.value || '').toLowerCase().trim();
   const prov = document.getElementById('asteProv')?.value || '';
+  const tipo = document.getElementById('asteTipo')?.value || '';
   const pmax = parseFloat(document.getElementById('astePrezzoMax')?.value || '') || null;
   const entro = document.getElementById('asteEntro')?.value || '';
   return asteRows.filter(r => {
     if (prov && r.provincia !== prov) return false;
+    if (tipo && (r.tipologia || 'altro') !== tipo) return false;
     if (pmax !== null && !(r.prezzo_base <= pmax)) return false;
     if (entro && r.data_asta && r.data_asta.slice(0, 10) > entro) return false;
     if (q) {
-      const hay = [r.comune, r.indirizzo, r.descrizione, r.tribunale, r.procedura, r.tipologia_bene].join(' ').toLowerCase();
+      const hay = [r.comune, r.indirizzo, r.descrizione, r.tribunale, r.procedura, r.tipologia, r.tipologia_bene].join(' ').toLowerCase();
       if (!hay.includes(q)) return false;
     }
     return true;
@@ -83,11 +85,14 @@ function asteRender() {
   if (el('statAsteFoto')) el('statAsteFoto').textContent = asteRows.filter(r => r.foto_url).length;
   const sel = el('asteProv');
   if (sel && sel.options.length <= 1) provs.forEach(p => { const o = document.createElement('option'); o.value = p; o.textContent = p; sel.appendChild(o); });
+  const tipi = [...new Set(asteRows.map(r => r.tipologia || 'altro'))].sort();
+  const selT = el('asteTipo');
+  if (selT && selT.options.length <= 1) tipi.forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; selT.appendChild(o); });
 
   const body = el('asteTableBody');
   if (!body) return;
   if (!rows.length) {
-    body.innerHTML = '<tr><td colspan="7" style="padding:24px;text-align:center;color:var(--caffe2)">Nessuna asta trovata con questi filtri.</td></tr>';
+    body.innerHTML = '<tr><td colspan="8" style="padding:24px;text-align:center;color:var(--caffe2)">Nessuna asta trovata con questi filtri.</td></tr>';
     return;
   }
   body.innerHTML = rows.map(r => {
@@ -98,6 +103,7 @@ function asteRender() {
     return `<tr style="border-bottom:1px solid var(--caffe3);cursor:pointer" onclick="asteToggle('${id}')">
       <td style="padding:10px 12px">${r.foto_url ? `<img src="${asteEsc(r.foto_url)}" alt="" loading="lazy" style="width:64px;height:48px;object-fit:cover;border-radius:6px">` : '🏠'}</td>
       <td style="padding:10px 12px"><strong>${asteEsc(r.comune)}</strong> <span style="color:var(--caffe2)">(${asteEsc(r.provincia)})</span><br><span style="font-size:.76rem;color:var(--caffe2)">${asteEsc(r.indirizzo)}</span></td>
+      <td style="padding:10px 12px;white-space:nowrap">${asteEsc(r.tipologia || 'altro')}</td>
       <td style="padding:10px 12px;white-space:nowrap"><strong>${asteFmtEur(r.prezzo_base)}</strong><br><span style="font-size:.74rem;color:var(--caffe2)">off. min ${asteFmtEur(r.offerta_minima)}</span></td>
       <td style="padding:10px 12px;white-space:nowrap">${asteFmtDt(r.data_asta)}<br><span style="font-size:.74rem;color:var(--caffe2)">offerte entro ${asteFmtDt(r.termine_offerte)}</span></td>
       <td style="padding:10px 12px">${asteDispLabel(r.disponibilita)}</td>
@@ -105,7 +111,7 @@ function asteRender() {
       <td style="padding:10px 12px"><button class="btn btn-secondary btn-sm">▾</button></td>
     </tr>
     <tr id="asteDet-${id}" style="display:none;background:#faf9f7">
-      <td colspan="7" style="padding:16px 20px">
+      <td colspan="8" style="padding:16px 20px">
         <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
           <div>${foto}</div>
           <div style="flex:1;min-width:280px">
