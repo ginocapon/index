@@ -300,6 +300,11 @@ def manual_tasks_html(indexing: dict, ga4: dict) -> str:
         chk(False, "Ispezione URL ×10", "Lista in data/gsc-indexing-priority.json (max ~10/giorno)"),
         chk(ga4_ok, "GA4 ultimi 7 gg", "Compila data/ga4-weekly.json (sessioni, utenti, top pagine)"),
         chk(False, "Google Business Profile", "1 post, foto o risposta recensione"),
+        chk(
+            False,
+            "KPI acquisizione",
+            "Compila data/acquisition-kpi-template.json (lead HOT/WARM, sopralluoghi, mandati)",
+        ),
     ]
     note = indexing.get("note", "") if isinstance(indexing, dict) else ""
     note_html = f"<p style='font-size:13px;color:#c53030'>📌 {escape(note)}</p>" if note else ""

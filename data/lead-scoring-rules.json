@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-09",
+  "updated": "2026-10-16",
   "skill_ref": "TEST-SKILL/skill-acquisizione-proprietari.md",
   "note": "Punteggio 0-100 per priorità contatto. Annotare in admin su richieste (es. prefisso [score:72] in messaggio) fino a colonna dedicata Supabase.",
   "thresholds": {

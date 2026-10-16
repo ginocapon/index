@@ -171,16 +171,18 @@ Vedi **`TEST-SKILL/skill-competitor-roadmap-q3-2026.md`** + `data/competitor-roa
 
 ## Prossimi passi (per l'agente)
 
-0. **RINVIATI A SETTIMANA PROSSIMA (decisione utente 09/10/2026) — da riproporre lunedì/venerdì 16/10:**
+0. **RINVIATI (decisione utente 09/10/2026) — riproporre quando c'è bandwidth:**
    - **Sicurezza admin (CRITICA):** `RIG_ADMIN_RLS_SECRET` e password admin nel sorgente pubblico di `admin.html`; API anon con header admin legge `clienti` (1.136), `richieste`, `newsletter_subscribers`; `immobili` espone `proprietario_*` e `note_interne`. Piano: Supabase Auth per admin + RLS per ruolo + vista pubblica annunci + rotazione segreti.
    - **Attivazione collega virtuale:** su progetto Supabase di PROVA eseguire `sql/linda-kb-v1.sql` → creare utente in Authentication → `insert into kb_admins` → importare `data/linda-kb-seed-faq.csv` (da verificare; 59 FAQ con numeri senza fonte) → calibrare soglia 0.45 con «Prova Linda» → poi produzione. Codice sul ramo `linda/kb-v1` (commit 3b40167), NON pubblicato.
    - **Informativa privacy:** testo da approvare per il registro anonimo delle domande (90 giorni, email/telefoni rimossi).
    - **Restyling:** pubblicato solo lo step 1; resta landing-valutazione con palette viola fuori brand; widget Linda che copre la foto home desktop. Claim «15.000+» rimosso il 09/10 (fase 1 audit, commit locale).
    - **Audit spietato 09/10 — aperti che richiedono l'utente:** (a) documentare le **127 recensioni** (fonti esterne aggregate mostrano 4,9 su 18 sul profilo Google): se non documentabili, allineare testo + `reviewCount` su 31 pagine; (b) **orari** allineati sul sito il 09/10 (scelta delegata dall'utente): Lun–Ven 9–13 / 15–19, Sab 9–12:30 — **resta da correggere il profilo Google** (oggi 9:30–13); (c) foto annunci tipo **render 3D senza "chatgpt" nel nome** (es. LO0287) non vengono marcate: revisione manuale; (d) claim «perizie accreditate ABI» su `servizio-valutazioni` da verificare; (e) la home chiede `immobili?select=*` con chiave anonima (rientra nella sicurezza del 16/10); (f) monitor GSC settimanale congelato da 13 settimane (stessi numeri): da riparare.
-1. **GSC follow-up (~05/10):** verificare in Ispezione URL le **10 URL** inviate 28/09 (su Google sì/no) — aggiornare `gsc-indexing-weekly.json`
-2. **Batch schema servizi:** allineare `@graph` su vendita, valutazioni, utenze, preliminari, virtual-tour, drone, loft — `grep aggregateRating servizio-*.html`
-3. **Venerdì 03/10:** `next_friday_batch` in JSON (servizi tier B + agenzia/zona universitaria se quota GSC)
-4. **Premortem** prima di ogni commit/push pubblico — `/premortem`
+1. **GSC venerdì 16/10:** batch `next_friday_batch` in `gsc-indexing-weekly.json` (10 URL) + aggiornare Prestazioni → `gsc-keywords-priority.json`
+2. **KPI agenzia:** compilare numeri in `data/acquisition-kpi-template.json` (settimana 13–19 ott)
+3. **Prossimo venerdì repo acq:** acq-w06 — ampliare `blog-bonus-mobili-2026-massimizzare-ristrutturazioni.html` (percorso J)
+4. **Deploy lead automation** se non fatto: `sql/righetto-lead-automation-extension.sql` + Edge `score-lead-righetto`
+5. **Batch schema servizi:** allineare `@graph` su vendita, valutazioni, utenze, preliminari, virtual-tour, drone, loft — `grep aggregateRating servizio-*.html`
+6. **Premortem** prima di ogni commit/push pubblico — `/premortem`
 
 ---
 
@@ -201,5 +203,6 @@ Vedi **`TEST-SKILL/skill-competitor-roadmap-q3-2026.md`** + `data/competitor-roa
 
 | Data | Evento |
 |------|--------|
+| 2026-10-16 | **Venerdì acq sett. 4/12:** acq-w04 lead scoring in admin (`js/admin-lead-scoring.js`, badge HOT/WARM/COLD, filtro, salva score + prefisso messaggio); checklist KPI in `venerdi-report-email.py`; CERCHIO mesh `blog-rendimento-affitto-padova`; bozza `venerdi-2026-10-16-proprietari.md`; batch GSC `next_friday_batch` 16/10. **Prossimo cron acq:** acq-w06 ampliamento blog ristrutturazione (w05 già done 09/10). |
 | 2026-10-09 | **Venerdì acq sett. 3/12:** acq-w03 CTA Class A batch1 (5 blog) + mesh blog/servizi; skill Nord Star 12m + `strategy-nord-star-12m-acquisizione.json`; bozza social `venerdi-2026-10-09-proprietari.md`. **Lead automation Livello A:** `sql/righetto-lead-automation-extension.sql`, Edge `score-lead-righetto`, `skill-lead-automation-righetto.md`. **Blog settimana:** `blog-casa-non-si-vende-padova-strategia-2026` (eq-oct09-001, percorso F) — acq-w05 done. **acq-w02** hub F/H/J su proprietario-immobile.html done. **Pending:** deploy Supabase SQL+function+webhook. |
 | 13/10/2026 | funnel 30 gg: 3 richieste (chatbot 2, form 1); provenienza per pagina non tracciata |

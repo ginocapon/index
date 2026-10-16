@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-09",
+  "updated": "2026-10-16",
   "friday_pipeline_ref": "data/venerdi-friday-pipeline.json",
   "contenuti_acquisizione_skill": "TEST-SKILL/skill-acquisizione-contenuti-acquisizione.md",
   "anchor_start": "2026-09-19",
@@ -66,11 +66,11 @@
       "title": "Lead scoring + KPI acquisizione",
       "objective": "Documentare scoring in admin; promemoria KPI in report venerdì; opz. campo note score su richieste (messaggio prefisso [score:NN])",
       "owner_paths": ["ALL"],
-      "files": ["data/lead-scoring-rules.json", "data/acquisition-kpi-template.json", "admin.html"],
+      "files": ["data/lead-scoring-rules.json", "data/acquisition-kpi-template.json", "admin.html", "js/admin-lead-scoring.js"],
       "validate": [],
-      "status": "pending",
-      "completed_date": null,
-      "notes": "KPI manuali agenzia — compilare acquisition-kpi-template.json ogni venerdì"
+      "status": "done",
+      "completed_date": "2026-10-16",
+      "notes": "Admin: badge HOT/WARM/COLD, filtro, guida rules JSON, salva score+prefisso messaggio; email venerdì: checklist KPI template"
     },
     {
       "week": 5,

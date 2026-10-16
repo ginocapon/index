@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="css/fonts-main.css?v=1">
 <script src="js/vendor/supabase.min.js"></script>
 <script src="js/supabase-bridge.js?v=1"></script>
+<script src="js/admin-lead-scoring.js?v=1"></script>
 <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
 <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
 <script async src="https://cdn.jsdelivr.net/npm/otpauth@9/dist/otpauth.umd.min.js"></script>
@@ -715,6 +716,20 @@ tr:hover td { background: rgba(206,224,143,0.06); }
   gap: 16px;
 }
 .richiesta-card.non-letta { border-left-color: var(--oro); }
+.lead-score-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.lead-badge-hot { background: #fde8e8; color: #9b2c2c; }
+.lead-badge-warm { background: #feebc8; color: #9c4221; }
+.lead-badge-cold { background: #e2e8f0; color: #4a5568; }
+.lead-scoring-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 8px; }
+.lead-scoring-table th, .lead-scoring-table td { border-bottom: 1px solid var(--caffe3); padding: 6px 8px; text-align: left; }
+.lead-scoring-guide summary { color: var(--testo); }
 .richiesta-info h4 { font-size: 0.9rem; font-weight: 600; color: var(--nero); }
 .richiesta-info p { font-size: 0.8rem; color: var(--caffe2); margin-top: 2px; }
 .richiesta-meta { font-size: 0.72rem; color: var(--caffe3); margin-top: 6px; }
@@ -2976,7 +2991,14 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               <option value="false">Non lette</option>
               <option value="true">Lette</option>
             </select>
+            <select id="filtroRichiesteTemp" onchange="loadRichieste()" title="Filtra per temperatura lead">
+              <option value="">Tutte le temperature</option>
+              <option value="hot">HOT (≥70)</option>
+              <option value="warm">WARM (40–69)</option>
+              <option value="cold">COLD (&lt;40)</option>
+            </select>
           </div>
+          <div id="richiesteLeadMeta"></div>
           <div id="richiesteList">
             <div class="loading"><div class="spinner"></div> Caricamento richieste...</div>
           </div>
@@ -7250,10 +7272,13 @@ async function loadRichiesteCount() {
 
 async function loadRichieste() {
   const list = document.getElementById('richiesteList');
+  const metaBox = document.getElementById('richiesteLeadMeta');
   list.innerHTML = '<div class="loading"><div class="spinner"></div> Caricamento...</div>';
+  if (metaBox) metaBox.innerHTML = '';
 
   const prov = document.getElementById('filtroRichiesteProvenienza').value;
   const letto = document.getElementById('filtroRichiesteLetto').value;
+  const tempFilter = document.getElementById('filtroRichiesteTemp')?.value || '';
 
   let query = sb.from('richieste').select('*').order('created_at', { ascending: false });
   if (prov) query = query.eq('provenienza', prov);
@@ -7261,6 +7286,11 @@ async function loadRichieste() {
 
   const { data, error } = await query;
   if (error) { list.innerHTML = `<p style="color:var(--rosso)">${error.message}</p>`; return; }
+
+  const rules = window.RighettoLeadScoring ? await RighettoLeadScoring.loadLeadScoringRules() : null;
+  if (metaBox && window.RighettoLeadScoring) {
+    metaBox.innerHTML = RighettoLeadScoring.renderKpiReminder() + RighettoLeadScoring.renderScoringGuide(rules);
+  }
 
   if (!data || !data.length) {
     list.innerHTML = `<div class="empty-state">
@@ -7270,26 +7300,93 @@ async function loadRichieste() {
     return;
   }
 
-  list.innerHTML = data.map(r => {
+  const enriched = data.map(r => {
+    const meta = window.RighettoLeadScoring ? RighettoLeadScoring.effectiveLeadMeta(r) : { score: 0, temperature: 'cold', owner_path: null };
+    return { ...r, _leadMeta: meta };
+  });
+
+  const filtered = tempFilter
+    ? enriched.filter(r => r._leadMeta.temperature === tempFilter)
+    : enriched;
+
+  filtered.sort((a, b) => (b._leadMeta.score || 0) - (a._leadMeta.score || 0));
+
+  const hotN = enriched.filter(r => r._leadMeta.temperature === 'hot').length;
+  const warmN = enriched.filter(r => r._leadMeta.temperature === 'warm').length;
+  if (metaBox && window.RighettoLeadScoring) {
+    const summary = `<p style="font-size:0.85rem;margin:0 0 12px"><strong>Lead in elenco:</strong> ${enriched.length} · HOT ${hotN} · WARM ${warmN} · ordinati per score</p>`;
+    metaBox.innerHTML = summary + metaBox.innerHTML;
+  }
+
+  if (!filtered.length) {
+    list.innerHTML = `<div class="empty-state"><h3>Nessuna richiesta con filtro temperatura</h3></div>`;
+    return;
+  }
+
+  list.innerHTML = filtered.map(r => {
     const data_fmt = new Date(r.created_at).toLocaleString('it-IT');
     const prov_badge = r.provenienza === 'chatbot' ? `<span class="badge badge-blu">🤖 Chatbot</span>`
       : r.provenienza === 'form' ? `<span class="badge badge-verde">📝 Form</span>`
       : `<span class="badge badge-grigio">📧 Email</span>`;
+    const scoreBadge = window.RighettoLeadScoring
+      ? RighettoLeadScoring.temperatureBadgeHtml(r._leadMeta)
+      : '';
+    const safeId = r.id;
 
     return `<div class="richiesta-card ${r.letto ? '' : 'non-letta'}">
       <div class="richiesta-info">
-        <h4>${r.nome || 'Anonimo'} ${r.letto ? '' : '🔵'}</h4>
+        <h4>${r.nome || 'Anonimo'} ${r.letto ? '' : '🔵'} ${scoreBadge}</h4>
         <p>📧 ${r.email || '—'} · 📞 ${r.telefono || '—'}</p>
         ${r.messaggio ? `<p style="margin-top:6px;color:var(--testo)">${r.messaggio}</p>` : ''}
         ${r.tipo_immobile ? `<p>🏠 Cerca: ${r.tipo_immobile} · Budget: ${r.budget || '—'} · Zona: ${r.zona || '—'}</p>` : ''}
-        <div class="richiesta-meta">${prov_badge} · ${data_fmt}</div>
+        <div class="richiesta-meta">${prov_badge} · ${data_fmt}${r.lead_stage ? ` · ${r.lead_stage}` : ''}</div>
       </div>
       <div class="richiesta-actions">
-        ${!r.letto ? `<button class="btn btn-secondary btn-sm" onclick="segnaLetta('${r.id}')">✓ Segna letta</button>` : ''}
-        <button class="btn btn-danger btn-sm" onclick="deleteRichiesta('${r.id}')">🗑️</button>
+        <button class="btn btn-secondary btn-sm" onclick="salvaLeadScoreRichiesta('${safeId}')" title="Salva score e prefisso [score:NN]">⭐ Score</button>
+        ${!r.letto ? `<button class="btn btn-secondary btn-sm" onclick="segnaLetta('${safeId}')">✓ Segna letta</button>` : ''}
+        <button class="btn btn-danger btn-sm" onclick="deleteRichiesta('${safeId}')">🗑️</button>
       </div>
     </div>`;
   }).join('');
+}
+
+async function salvaLeadScoreRichiesta(id) {
+  const { data: rows, error: fetchErr } = await sb.from('richieste').select('*').eq('id', id).limit(1);
+  if (fetchErr || !rows?.length) {
+    toast('Errore lettura richiesta', 'error');
+    return;
+  }
+  const r = rows[0];
+  if (!window.RighettoLeadScoring) {
+    toast('Modulo scoring non caricato', 'error');
+    return;
+  }
+  const meta = RighettoLeadScoring.effectiveLeadMeta(r);
+  const messaggio = RighettoLeadScoring.messaggioWithScorePrefix(r.messaggio, meta.score);
+  const payload = {
+    lead_score: meta.score,
+    lead_temperature: meta.temperature,
+    owner_path: meta.owner_path,
+    messaggio,
+    scored_at: new Date().toISOString(),
+  };
+  const { error } = await sb.from('richieste').update(payload).eq('id', id);
+  if (error) {
+    if (/column|lead_score/i.test(error.message)) {
+      const { error: err2 } = await sb.from('richieste').update({ messaggio }).eq('id', id);
+      if (err2) {
+        toast('Salvataggio fallito: ' + err2.message, 'error');
+        return;
+      }
+      toast(`Nota [score:${meta.score}] salvata (colonne score: eseguire sql/righetto-lead-automation-extension.sql)`);
+    } else {
+      toast('Salvataggio fallito: ' + error.message, 'error');
+      return;
+    }
+  } else {
+    toast(`Lead ${meta.temperature.toUpperCase()} ${meta.score}/100 salvato`);
+  }
+  loadRichieste();
 }
 
 async function segnaLetta(id) {
