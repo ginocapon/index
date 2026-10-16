@@ -1,0 +1,40 @@
+# Sync aste immobiliari residenziali Veneto -> Supabase (tabella aste_immobili)
+# Fonte: Portale Vendite Pubbliche (Ministero) + foto da aggregatore pubblico.
+# Girare 2 volte al giorno; avviabile anche a mano da Actions.
+
+name: Sync aste Veneto (PVP -> Supabase)
+
+on:
+  schedule:
+    # 2 volte al giorno (05:45 e 17:45 UTC)
+    - cron: "45 5,17 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync-aste:
+    name: Aggiorna aste_immobili
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sync PVP -> Supabase
+        env:
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: |
+          if [ -z "$SUPABASE_KEY" ]; then
+            echo "::error::SUPABASE_KEY assente in GitHub Secrets — sync non eseguito."
+            exit 1
+          fi
+          python3 scripts/sync_aste.py
