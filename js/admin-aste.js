@@ -4,6 +4,7 @@
 
 let asteRows = [];
 let asteSort = { key: 'data_asta', dir: 1 };
+let asteView = 'province';
 let asteLoaded = false;
 
 function asteFmtEur(v) {
@@ -74,6 +75,81 @@ function asteSortBy(key) {
   asteRender();
 }
 
+function asteProvOrder(counts) {
+  const prio = ['Padova', 'Vicenza', 'Treviso'];
+  const rest = Object.keys(counts).filter(p => !prio.includes(p))
+    .sort((a, b) => counts[b] - counts[a] || a.localeCompare(b));
+  return prio.filter(p => counts[p]).concat(rest);
+}
+
+function asteChipProv(p) {
+  const sel = document.getElementById('asteProv');
+  if (sel) sel.value = p;
+  asteRender();
+}
+
+function asteSetView(v) {
+  asteView = v;
+  asteRender();
+}
+
+function asteRenderChips() {
+  const wrap = document.getElementById('asteProvChips');
+  if (!wrap) return;
+  const counts = {};
+  asteRows.forEach(r => { if (r.provincia) counts[r.provincia] = (counts[r.provincia] || 0) + 1; });
+  const cur = document.getElementById('asteProv')?.value || '';
+  const chip = (label, val, n) => {
+    const on = cur === val;
+    return `<button type="button" onclick="asteChipProv('${val}')" style="padding:6px 14px;border-radius:20px;border:1.5px solid ${on ? 'var(--nero)' : 'var(--caffe3)'};background:${on ? 'var(--nero)' : '#fff'};color:${on ? '#fff' : 'var(--testo)'};font-size:.78rem;font-weight:${on ? '700' : '500'};cursor:pointer">${asteEsc(label)} <span style="opacity:.75">(${n})</span></button>`;
+  };
+  const chips = [chip('Tutte', '', asteRows.length)]
+    .concat(asteProvOrder(counts).map(p => chip(p, p, counts[p])));
+  const btn = (v, label) => {
+    const on = asteView === v;
+    return `<button type="button" onclick="asteSetView('${v}')" style="padding:6px 12px;border:1.5px solid ${on ? 'var(--nero)' : 'var(--caffe3)'};background:${on ? 'var(--nero)' : '#fff'};color:${on ? '#fff' : 'var(--testo)'};font-size:.76rem;cursor:pointer;${v === 'province' ? 'border-radius:8px 0 0 8px' : 'border-radius:0 8px 8px 0;border-left:none'}">${label}</button>`;
+  };
+  wrap.innerHTML = chips.join('')
+    + `<span style="margin-left:auto;display:inline-flex">${btn('province', '▦ Per provincia')}${btn('flat', '☰ Elenco unico')}</span>`;
+}
+
+function asteRowHtml(r) {
+  const id = r.id;
+  const docs = (r.documenti || []).map(d =>
+    `<a href="${asteEsc(d.url)}" target="_blank" rel="noopener" style="display:inline-block;margin:2px 6px 2px 0;padding:4px 10px;background:var(--sfondo);border:1px solid var(--caffe3);border-radius:6px;font-size:.75rem">📄 ${asteEsc(d.tipo || d.nome)}</a>`).join('');
+  const foto = r.foto_url ? `<img src="${asteEsc(r.foto_url)}" alt="" loading="lazy" style="max-width:220px;border-radius:8px;border:1px solid var(--caffe3)">` : '<span style="color:var(--caffe2);font-size:.78rem">Foto non disponibile</span>';
+  return `<tr style="border-bottom:1px solid var(--caffe3);cursor:pointer" onclick="asteToggle('${id}')">
+    <td style="padding:10px 12px">${r.foto_url ? `<img src="${asteEsc(r.foto_url)}" alt="" loading="lazy" style="width:64px;height:48px;object-fit:cover;border-radius:6px">` : '🏠'}</td>
+    <td style="padding:10px 12px"><strong>${asteEsc(r.comune)}</strong> <span style="color:var(--caffe2)">(${asteEsc(r.provincia)})</span><br><span style="font-size:.76rem;color:var(--caffe2)">${asteEsc(r.indirizzo)}</span></td>
+    <td style="padding:10px 12px;white-space:nowrap">${asteEsc(r.tipologia || 'altro')}</td>
+    <td style="padding:10px 12px;white-space:nowrap"><strong>${asteFmtEur(r.prezzo_base)}</strong><br><span style="font-size:.74rem;color:var(--caffe2)">off. min ${asteFmtEur(r.offerta_minima)}</span></td>
+    <td style="padding:10px 12px;white-space:nowrap">${asteFmtDt(r.data_asta)}<br><span style="font-size:.74rem;color:var(--caffe2)">offerte entro ${asteFmtDt(r.termine_offerte)}</span></td>
+    <td style="padding:10px 12px">${asteDispLabel(r.disponibilita)}</td>
+    <td style="padding:10px 12px;font-size:.78rem">${asteEsc(r.tribunale)}<br><span style="color:var(--caffe2)">proc. ${asteEsc(r.procedura)}</span></td>
+    <td style="padding:10px 12px"><button class="btn btn-secondary btn-sm">▾</button></td>
+  </tr>
+  <tr id="asteDet-${id}" style="display:none;background:#faf9f7">
+    <td colspan="8" style="padding:16px 20px">
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
+        <div>${foto}</div>
+        <div style="flex:1;min-width:280px">
+          <p style="font-size:.85rem;line-height:1.6;margin:0 0 10px">${asteEsc(r.descrizione)}</p>
+          <p style="font-size:.76rem;color:var(--caffe2);margin:0 0 10px">${asteEsc(r.tipologia_bene)} · ${asteEsc(r.modalita_vendita)}</p>
+          <div style="margin-bottom:10px">${docs || '<span style="font-size:.78rem;color:var(--caffe2)">Nessun documento</span>'}</div>
+          <a href="${asteEsc(r.link_dettaglio)}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Apri scheda ufficiale ↗</a>
+          <div style="margin-top:12px">
+            <label style="font-size:.72rem;color:var(--caffe2)">Note private</label>
+            <div style="display:flex;gap:8px;margin-top:4px">
+              <input type="text" id="asteNote-${id}" value="${asteEsc(r.note_admin)}" placeholder="Es. interessante, da visitare…" style="flex:1;padding:7px 10px;border:1px solid var(--caffe3);border-radius:6px;font-size:.82rem">
+              <button class="btn btn-secondary btn-sm" onclick="asteSaveNote('${id}')">Salva</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>`;
+}
+
 function asteRender() {
   const rows = asteFiltered();
   const soon = asteRows.filter(r => r.data_asta && (new Date(r.data_asta) - Date.now()) / 864e5 <= 7 && (new Date(r.data_asta) - Date.now()) >= 0).length;
@@ -88,6 +164,7 @@ function asteRender() {
   const tipi = [...new Set(asteRows.map(r => r.tipologia || 'altro'))].sort();
   const selT = el('asteTipo');
   if (selT && selT.options.length <= 1) tipi.forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; selT.appendChild(o); });
+  asteRenderChips();
 
   const body = el('asteTableBody');
   if (!body) return;
@@ -95,41 +172,15 @@ function asteRender() {
     body.innerHTML = '<tr><td colspan="8" style="padding:24px;text-align:center;color:var(--caffe2)">Nessuna asta trovata con questi filtri.</td></tr>';
     return;
   }
-  body.innerHTML = rows.map(r => {
-    const id = r.id;
-    const docs = (r.documenti || []).map(d =>
-      `<a href="${asteEsc(d.url)}" target="_blank" rel="noopener" style="display:inline-block;margin:2px 6px 2px 0;padding:4px 10px;background:var(--sfondo);border:1px solid var(--caffe3);border-radius:6px;font-size:.75rem">📄 ${asteEsc(d.tipo || d.nome)}</a>`).join('');
-    const foto = r.foto_url ? `<img src="${asteEsc(r.foto_url)}" alt="" loading="lazy" style="max-width:220px;border-radius:8px;border:1px solid var(--caffe3)">` : '<span style="color:var(--caffe2);font-size:.78rem">Foto non disponibile</span>';
-    return `<tr style="border-bottom:1px solid var(--caffe3);cursor:pointer" onclick="asteToggle('${id}')">
-      <td style="padding:10px 12px">${r.foto_url ? `<img src="${asteEsc(r.foto_url)}" alt="" loading="lazy" style="width:64px;height:48px;object-fit:cover;border-radius:6px">` : '🏠'}</td>
-      <td style="padding:10px 12px"><strong>${asteEsc(r.comune)}</strong> <span style="color:var(--caffe2)">(${asteEsc(r.provincia)})</span><br><span style="font-size:.76rem;color:var(--caffe2)">${asteEsc(r.indirizzo)}</span></td>
-      <td style="padding:10px 12px;white-space:nowrap">${asteEsc(r.tipologia || 'altro')}</td>
-      <td style="padding:10px 12px;white-space:nowrap"><strong>${asteFmtEur(r.prezzo_base)}</strong><br><span style="font-size:.74rem;color:var(--caffe2)">off. min ${asteFmtEur(r.offerta_minima)}</span></td>
-      <td style="padding:10px 12px;white-space:nowrap">${asteFmtDt(r.data_asta)}<br><span style="font-size:.74rem;color:var(--caffe2)">offerte entro ${asteFmtDt(r.termine_offerte)}</span></td>
-      <td style="padding:10px 12px">${asteDispLabel(r.disponibilita)}</td>
-      <td style="padding:10px 12px;font-size:.78rem">${asteEsc(r.tribunale)}<br><span style="color:var(--caffe2)">proc. ${asteEsc(r.procedura)}</span></td>
-      <td style="padding:10px 12px"><button class="btn btn-secondary btn-sm">▾</button></td>
-    </tr>
-    <tr id="asteDet-${id}" style="display:none;background:#faf9f7">
-      <td colspan="8" style="padding:16px 20px">
-        <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
-          <div>${foto}</div>
-          <div style="flex:1;min-width:280px">
-            <p style="font-size:.85rem;line-height:1.6;margin:0 0 10px">${asteEsc(r.descrizione)}</p>
-            <p style="font-size:.76rem;color:var(--caffe2);margin:0 0 10px">${asteEsc(r.tipologia_bene)} · ${asteEsc(r.modalita_vendita)}</p>
-            <div style="margin-bottom:10px">${docs || '<span style="font-size:.78rem;color:var(--caffe2)">Nessun documento</span>'}</div>
-            <a href="${asteEsc(r.link_dettaglio)}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Apri scheda ufficiale ↗</a>
-            <div style="margin-top:12px">
-              <label style="font-size:.72rem;color:var(--caffe2)">Note private</label>
-              <div style="display:flex;gap:8px;margin-top:4px">
-                <input type="text" id="asteNote-${id}" value="${asteEsc(r.note_admin)}" placeholder="Es. interessante, da visitare…" style="flex:1;padding:7px 10px;border:1px solid var(--caffe3);border-radius:6px;font-size:.82rem">
-                <button class="btn btn-secondary btn-sm" onclick="asteSaveNote('${id}')">Salva</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </td>
-    </tr>`;
+  if (asteView === 'flat') {
+    body.innerHTML = rows.map(asteRowHtml).join('');
+    return;
+  }
+  const groups = {};
+  rows.forEach(r => { const k = r.provincia || 'Altro'; (groups[k] = groups[k] || []).push(r); });
+  body.innerHTML = asteProvOrder(groups).map(prov => {
+    const head = `<tr><td colspan="8" style="padding:10px 16px;background:linear-gradient(90deg,var(--sfondo),#fff);border-top:2px solid var(--caffe3);font-weight:700;font-size:.85rem;letter-spacing:.3px">📍 ${asteEsc(prov.toUpperCase())} <span style="color:var(--caffe2);font-weight:500">— ${groups[prov].length} aste</span></td></tr>`;
+    return head + groups[prov].map(asteRowHtml).join('');
   }).join('');
 }
 

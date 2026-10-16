@@ -4999,7 +4999,7 @@ META_IG_USER_ID=...</pre>
         <hr class="doc-gen-divider" aria-hidden="true">
 
         <div class="doc-gen-section-archivio table-wrap" style="border:none">
-          <div class="table-head" style="background:linear-gradient(90deg,var(--blu),#4a6f94);color:#fff;padding:14px 20px">
+          <div class="table-head" style="background:linear-gradient(90deg,var(--nero),var(--nero2));color:#fff;padding:14px 20px">
             <div style="font-weight:700;font-size:0.95rem">📁 Archivio documenti e contratti</div>
             <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
               <input type="search" id="docGenSearch" placeholder="Cerca titolo o file…" oninput="docGenFilterList()" style="padding:8px 12px;border:1px solid rgba(255,255,255,.3);border-radius:8px;font-size:0.82rem;min-width:200px;background:rgba(255,255,255,.95)">
@@ -5020,7 +5020,7 @@ META_IG_USER_ID=...</pre>
         </div>
 
         <div class="table-wrap" style="margin-top:16px">
-          <div class="table-head" style="background:linear-gradient(90deg,var(--blu),#4a6f94);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+          <div class="table-head" style="background:linear-gradient(90deg,var(--nero),var(--nero2));color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
             <div style="font-weight:700;font-size:0.95rem">📋 Archivio perizie immobiliari</div>
             <input type="search" id="perizieSearch" placeholder="Cerca per proprietario, indirizzo…" oninput="perizieFilterList()" style="padding:8px 12px;border:1px solid rgba(255,255,255,.3);border-radius:8px;font-size:0.82rem;min-width:220px;background:rgba(255,255,255,.95)">
           </div>
@@ -5169,7 +5169,7 @@ META_IG_USER_ID=...</pre>
         </div>
 
         <div class="table-wrap" style="margin-top:16px">
-          <div class="table-head" style="background:linear-gradient(90deg,var(--blu),#4a6f94);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+          <div class="table-head" style="background:linear-gradient(90deg,var(--nero),var(--nero2));color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
             <div style="font-weight:700;font-size:0.95rem">🔨 Aste immobiliari residenziali — Veneto</div>
             <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
               <input type="search" id="asteSearch" placeholder="Cerca comune, via, tribunale…" oninput="asteRender()" style="padding:8px 12px;border:1px solid rgba(255,255,255,.3);border-radius:8px;font-size:0.82rem;min-width:200px;background:rgba(255,255,255,.95)">
@@ -5180,6 +5180,7 @@ META_IG_USER_ID=...</pre>
               <button type="button" class="btn btn-primary btn-sm" style="background:var(--oro);color:var(--nero);border:none" onclick="asteLoad(true)">↻ Aggiorna</button>
             </div>
           </div>
+          <div id="asteProvChips" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:10px 16px;border-bottom:1px solid var(--caffe3);background:var(--bianco)"></div>
           <div style="overflow-x:auto">
             <table class="data-table" style="width:100%;border-collapse:collapse;font-size:0.84rem">
               <thead>
