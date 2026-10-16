@@ -1,6 +1,6 @@
 {
-  "cycle": "2026W41",
-  "date": "2026-10-10",
+  "cycle": "2026W42",
+  "date": "2026-10-16",
   "data_source": "gsc_csv",
   "stale": false,
   "limitations": [
@@ -8,290 +8,65 @@
     "GSC limita l'export a 1000 righe per tabella; query rare anonimizzate.",
     "Export senza «Confronta» (filtro data: Ultimi 3 mesi): metriche per pagina aggregate su 92 gg, niente cali per pagina; il confronto 28 vs 28 gg è solo a livello sito (da Grafico)."
   ],
-  "candidates_total": 98,
+  "candidates_total": 89,
   "selected": [
     {
-      "url": "/landing-vendita",
-      "file": "landing-vendita.html",
-      "tier": "owner_conversione",
-      "score": 37.6,
-      "score_parts": {
-        "striking": 10.0,
-        "underlinked": 13.5,
-        "tier_mult": 1.6
-      },
-      "reasons": [
-        "posizione media 5.6: margine verso top 3",
-        "solo 1 pagine interne linkano questa URL (soglia 10)"
-      ],
-      "gsc": {
-        "current": {
-          "clicks": 0.0,
-          "impressions": 48.0,
-          "ctr": 0.0,
-          "position": 5.6
-        }
-      },
-      "cooldown": false,
-      "last_modified": "2026-10-09",
-      "inbound": 1,
-      "title": "Vendi Casa a Padova — Righetto Immobiliare",
-      "meta": "Vuoi vendere casa nel Padovano? Valutazione gratuita in 24h, promozione professionale, team Righetto dal 2000. Commissioni nel mandato.",
-      "issues": [],
-      "intervention_id": "SEO-2026W41-landing-vendita"
-    },
-    {
-      "url": "/blog-tempi-vendita-casa-padova",
-      "file": "blog-tempi-vendita-casa-padova.html",
-      "tier": "owner_contenuto",
-      "score": 20.8,
-      "score_parts": {
-        "indicizzazione": 16.0,
-        "tier_mult": 1.3
-      },
-      "reasons": [
-        "in sitemap da oltre 28 gg ma assente dalle pagine indicizzate Google: rafforzare link interni + richiesta indicizzazione"
-      ],
-      "gsc": null,
-      "cooldown": false,
-      "last_modified": "2026-10-09",
-      "inbound": 7,
-      "title": "Tempi Vendita Casa Padova 2026: Quanto Ci Vuole Davvero?",
-      "meta": "Tempi di vendita casa a Padova 2026: 45-90 giorni al giusto prezzo. Le 4 fasi, tempistiche per quartiere e 5 strategie per vendere prima.",
-      "issues": [
-        "non_indicizzata"
-      ],
-      "intervention_id": "SEO-2026W41-blog-tempi-vendita-casa-padova"
-    },
-    {
-      "url": "/zona-selvazzano",
-      "file": "zona-selvazzano.html",
-      "tier": "zona",
-      "score": 17.6,
-      "score_parts": {
-        "indicizzazione": 16.0,
-        "tier_mult": 1.1
-      },
-      "reasons": [
-        "in sitemap da oltre 28 gg ma assente dalle pagine indicizzate Google: rafforzare link interni + richiesta indicizzazione"
-      ],
-      "gsc": null,
-      "cooldown": false,
-      "last_modified": "2026-10-09",
-      "inbound": 12,
-      "title": "Case in Vendita e Affitto a Selvazzano Dentro | Righetto Immobiliare",
-      "meta": "Affitti e case in vendita a Selvazzano Dentro (PD). Ville, bifamiliari e attici da 1.600 a 2.500 euro/mq. Zona collinare tra Padova e Colli Euganei. Dal 2000.",
-      "issues": [
-        "non_indicizzata"
-      ],
-      "intervention_id": "SEO-2026W41-zona-selvazzano"
-    },
-    {
-      "url": "/zona-rubano",
-      "file": "zona-rubano.html",
-      "tier": "zona",
-      "score": 17.6,
-      "score_parts": {
-        "indicizzazione": 16.0,
-        "tier_mult": 1.1
-      },
-      "reasons": [
-        "in sitemap da oltre 28 gg ma assente dalle pagine indicizzate Google: rafforzare link interni + richiesta indicizzazione"
-      ],
-      "gsc": null,
-      "cooldown": false,
-      "last_modified": "2026-10-09",
-      "inbound": 12,
-      "title": "Case in Vendita e Affitto a Rubano | Righetto Immobiliare",
-      "meta": "Affitti e case in vendita a Rubano (PD): ville, appartamenti e bifamiliari da 1.700 a 2.500 euro/mq. Agenzia Righetto Immobiliare — dal 2000.",
-      "issues": [
-        "non_indicizzata"
-      ],
-      "intervention_id": "SEO-2026W41-zona-rubano"
-    },
-    {
-      "url": "/zona-ponte-san-nicolo",
-      "file": "zona-ponte-san-nicolo.html",
-      "tier": "zona",
-      "score": 17.6,
-      "score_parts": {
-        "indicizzazione": 16.0,
-        "tier_mult": 1.1
-      },
-      "reasons": [
-        "in sitemap da oltre 28 gg ma assente dalle pagine indicizzate Google: rafforzare link interni + richiesta indicizzazione"
-      ],
-      "gsc": {
-        "current": {
-          "clicks": 0.0,
-          "impressions": 3.0,
-          "ctr": 0.0,
-          "position": 7.0
-        }
-      },
-      "cooldown": false,
-      "last_modified": "2026-10-09",
-      "inbound": 5,
-      "title": "Affitti e Case a Ponte San Nicolo' (PD) | Righetto",
-      "meta": "Affitti e case in vendita a Ponte San Nicolo' (PD). Ville, appartamenti e bifamiliari da 1.500 a 2.200 euro/mq. Righetto Immobiliare — dal 2000.",
-      "issues": [
-        "non_indicizzata"
-      ],
-      "intervention_id": "SEO-2026W41-zona-ponte-san-nicolo"
-    },
-    {
-      "url": "/blog-stanza-universitaria-padova-canoni-2026",
-      "file": "blog-stanza-universitaria-padova-canoni-2026.html",
+      "url": "/landing/email-offerta-luce",
+      "file": "email-offerta-luce.html",
       "tier": "contenuto",
-      "score": 15.0,
+      "score": 12.0,
       "score_parts": {
-        "striking": 10.0,
-        "tecnico": 5.0,
+        "sitemap": 12.0,
         "tier_mult": 1.0
       },
       "reasons": [
-        "posizione media 6.5: margine verso top 3",
-        "on-page: title_troncato"
+        "sitemap incoerente: sitemap_noindex (Google riceve segnali contraddittori)"
       ],
       "gsc": {
         "current": {
           "clicks": 0.0,
-          "impressions": 76.0,
+          "impressions": 2.0,
           "ctr": 0.0,
-          "position": 6.46
+          "position": 2.5
         }
       },
       "cooldown": false,
-      "last_modified": "2026-10-09",
-      "inbound": 5,
-      "title": "Stanza universitaria Padova 2026: canoni 490€ e +46% vs 2020 |…",
-      "meta": "Canone medio stanza Padova circa 490€ (+46% vs 2020) secondo Immobiliare.it Insights marzo 2026. FIMAA, ESU, tram e periferia. Guida Righetto.",
+      "last_modified": "2026-10-16",
+      "inbound": 0,
+      "title": "Blocca il prezzo della luce",
+      "meta": "Righetto Immobiliare — agenzia a Limena (PD), dal 2000. Vendita, affitto e valutazioni su Padova e provincia.",
       "issues": [
-        "title_troncato"
+        "sitemap_noindex"
       ],
-      "intervention_id": "SEO-2026W41-blog-stanza-universitaria-padova-canoni-2026"
+      "intervention_id": "SEO-2026W42-landing/email-offerta-luce"
     },
     {
-      "url": "/blog-vicenza-residenze-universitarie-calmierate-2026",
-      "file": "blog-vicenza-residenze-universitarie-calmierate-2026.html",
+      "url": "/landing/offerta-enel-gas",
+      "file": "offerta-enel-gas.html",
       "tier": "contenuto",
-      "score": 15.0,
+      "score": 10.0,
       "score_parts": {
         "striking": 10.0,
-        "tecnico": 5.0,
         "tier_mult": 1.0
       },
       "reasons": [
-        "posizione media 7.3: margine verso top 3",
-        "on-page: title_troncato"
+        "posizione media 7.4: margine verso top 3"
       ],
       "gsc": {
         "current": {
           "clicks": 1.0,
-          "impressions": 59.0,
-          "ctr": 0.0169,
-          "position": 7.32
+          "impressions": 44.0,
+          "ctr": 0.0227,
+          "position": 7.43
         }
       },
       "cooldown": false,
-      "last_modified": "2026-10-09",
-      "inbound": 2,
-      "title": "Vicenza residenze universitarie calmierate 2026: PNRR e Casa…",
-      "meta": "Residenze universitarie calmierate a Vicenza 2026: PNRR, convenzione ESU, rigenerazione Casa Querini via progetto Saudino. Analisi Righetto.",
-      "issues": [
-        "title_troncato"
-      ],
-      "intervention_id": "SEO-2026W41-blog-vicenza-residenze-universitarie-calmierate-2026"
-    },
-    {
-      "url": "/blog-mercato-immobiliare-limena-2026",
-      "file": "blog-mercato-immobiliare-limena-2026.html",
-      "tier": "contenuto",
-      "score": 14.9,
-      "score_parts": {
-        "ctr_gap": 4.9,
-        "striking": 10.0,
-        "tier_mult": 1.0
-      },
-      "reasons": [
-        "CTR 0.0% vs atteso ~4% a pos. 6.4 (benchmark stima) su 122 impr.: ~5 clic mancati",
-        "posizione media 6.4: margine verso top 3"
-      ],
-      "gsc": {
-        "current": {
-          "clicks": 0.0,
-          "impressions": 122.0,
-          "ctr": 0.0,
-          "position": 6.43
-        }
-      },
-      "cooldown": false,
-      "last_modified": "2026-10-09",
-      "inbound": 17,
-      "title": "Mercato Immobiliare Limena 2026: Guida OMI, Territorio e Valori",
-      "meta": "Mercato immobiliare Limena 2026: guida alle quotazioni OMI, identità del territorio, novità dal Comune e analisi dei valori con dati di studio Righetto.",
+      "last_modified": "2026-10-16",
+      "inbound": 0,
+      "title": "ENEL Fix Star Gas 0,37 €/SMC — Offerta | Righetto Immobiliare",
+      "meta": "Offerta ENEL Fix Star Gas: 0,37 €/SMC + 12 €/mese. Prezzo bloccato, zero vincoli, zero costi aggiuntivi. Valida fino al 31/03/2026.",
       "issues": [],
-      "intervention_id": "SEO-2026W41-blog-mercato-immobiliare-limena-2026"
-    },
-    {
-      "url": "/blog-condono-edilizio-proposte-2026",
-      "file": "blog-condono-edilizio-proposte-2026.html",
-      "tier": "contenuto",
-      "score": 13.8,
-      "score_parts": {
-        "ctr_gap": 3.8,
-        "striking": 10.0,
-        "tier_mult": 1.0
-      },
-      "reasons": [
-        "CTR 0.9% vs atteso ~2% a pos. 8.6 (benchmark stima) su 338 impr.: ~4 clic mancati",
-        "posizione media 8.6: margine verso top 3"
-      ],
-      "gsc": {
-        "current": {
-          "clicks": 3.0,
-          "impressions": 338.0,
-          "ctr": 0.0089,
-          "position": 8.59
-        }
-      },
-      "cooldown": false,
-      "last_modified": "2026-10-09",
-      "inbound": 1,
-      "title": "Condono edilizio 2026: proposte in Manovra | Guida Padova",
-      "meta": "Ipotesi condono edilizio 2026 (Sky TG24, Sole 24 Ore): cosa prevedono le proposte, cosa NON è ancora legge. Guida per immobili a Padova.",
-      "issues": [],
-      "intervention_id": "SEO-2026W41-blog-condono-edilizio-proposte-2026"
-    },
-    {
-      "url": "/faq",
-      "file": "faq.html",
-      "tier": "contenuto",
-      "score": 13.5,
-      "score_parts": {
-        "ctr_gap": 3.5,
-        "striking": 10.0,
-        "tier_mult": 1.0
-      },
-      "reasons": [
-        "CTR 0.9% vs atteso ~4% a pos. 6.1 (benchmark stima) su 112 impr.: ~3 clic mancati",
-        "posizione media 6.1: margine verso top 3"
-      ],
-      "gsc": {
-        "current": {
-          "clicks": 1.0,
-          "impressions": 112.0,
-          "ctr": 0.0089,
-          "position": 6.13
-        }
-      },
-      "cooldown": false,
-      "last_modified": "2026-10-09",
-      "inbound": 95,
-      "title": "FAQ Immobiliari Padova — Righetto Immobiliare",
-      "meta": "Risposte alle domande più frequenti su compravendita, affitti, valutazioni e contratti a Padova. Righetto Immobiliare.",
-      "issues": [],
-      "intervention_id": "SEO-2026W41-faq"
+      "intervention_id": "SEO-2026W42-landing/offerta-enel-gas"
     }
   ],
   "excluded_cooldown": [
@@ -301,7 +76,7 @@
       "reasons": [
         "CTR 0.5% vs atteso ~4% a pos. 6.4 (benchmark stima) su 1943 impr.: ~69 clic mancati",
         "posizione media 6.4: margine verso top 3",
-        "cooldown: ultimo refresh 2026-09-04 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -310,7 +85,7 @@
       "reasons": [
         "CTR 1.7% vs atteso ~3% a pos. 7.3 (benchmark stima) su 4188 impr.: ~54 clic mancati",
         "posizione media 7.3: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-10 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -318,7 +93,7 @@
       "score": 80.8,
       "reasons": [
         "CTR 0.6% vs atteso ~10% a pos. 3.2 (benchmark stima) su 535 impr.: ~51 clic mancati",
-        "cooldown: ultimo refresh 2026-09-22 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -327,7 +102,17 @@
       "reasons": [
         "CTR 1.9% vs atteso ~3% a pos. 7.0 (benchmark stima) su 3909 impr.: ~43 clic mancati",
         "posizione media 7.0: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-10 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/immobile",
+      "score": 42.6,
+      "reasons": [
+        "CTR 0.0% vs atteso ~5% a pos. 4.8 (benchmark stima) su 412 impr.: ~21 clic mancati",
+        "posizione media 4.8: margine verso top 3",
+        "sitemap incoerente: sitemap_template_senza_contenuto (Google riceve segnali contraddittori)",
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -336,7 +121,16 @@
       "reasons": [
         "CTR 1.0% vs atteso ~3% a pos. 7.3 (benchmark stima) su 936 impr.: ~19 clic mancati",
         "posizione media 7.3: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-10 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/landing-vendita",
+      "score": 37.6,
+      "reasons": [
+        "posizione media 5.6: margine verso top 3",
+        "solo 1 pagine interne linkano questa URL (soglia 10)",
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -345,7 +139,7 @@
       "reasons": [
         "CTR 0.4% vs atteso ~4% a pos. 6.0 (benchmark stima) su 511 impr.: ~18 clic mancati",
         "posizione media 6.0: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-10 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -353,7 +147,7 @@
       "score": 25.4,
       "reasons": [
         "CTR 0.3% vs atteso ~7% a pos. 3.7 (benchmark stima) su 377 impr.: ~25 clic mancati",
-        "cooldown: ultimo refresh 2026-10-10 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -362,7 +156,7 @@
       "reasons": [
         "CTR 0.0% vs atteso ~5% a pos. 4.9 (benchmark stima) su 129 impr.: ~6 clic mancati",
         "posizione media 4.9: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-10 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -371,7 +165,7 @@
       "reasons": [
         "CTR 1.9% vs atteso ~4% a pos. 6.1 (benchmark stima) su 160 impr.: ~3 clic mancati",
         "posizione media 6.1: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-10 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -379,7 +173,34 @@
       "score": 16.0,
       "reasons": [
         "posizione media 5.7: margine verso top 3",
-        "cooldown: ultimo refresh 2026-08-29 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/blog-stanza-universitaria-padova-canoni-2026",
+      "score": 15.0,
+      "reasons": [
+        "posizione media 6.5: margine verso top 3",
+        "on-page: title_troncato",
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/blog-vicenza-residenze-universitarie-calmierate-2026",
+      "score": 15.0,
+      "reasons": [
+        "posizione media 7.3: margine verso top 3",
+        "on-page: title_troncato",
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/blog-mercato-immobiliare-limena-2026",
+      "score": 14.9,
+      "reasons": [
+        "CTR 0.0% vs atteso ~4% a pos. 6.4 (benchmark stima) su 122 impr.: ~5 clic mancati",
+        "posizione media 6.4: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -388,7 +209,7 @@
       "reasons": [
         "CTR 0.0% vs atteso ~1% a pos. 14.3 (benchmark stima) su 110 impr.: ~1 clic mancati",
         "posizione media 14.3: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-10 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -397,83 +218,38 @@
       "reasons": [
         "CTR 0.0% vs atteso ~2% a pos. 8.9 (benchmark stima) su 197 impr.: ~4 clic mancati",
         "posizione media 8.9: margine verso top 3",
-        "cooldown: ultimo refresh 2026-07-28 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
       ]
     },
     {
-      "url": "/",
-      "score": 13.0,
+      "url": "/blog-condono-edilizio-proposte-2026",
+      "score": 13.8,
       "reasons": [
-        "posizione media 6.4: margine verso top 3",
-        "cooldown: ultimo refresh 2026-08-29 senza 28 gg di dati GSC successivi"
+        "CTR 0.9% vs atteso ~2% a pos. 8.6 (benchmark stima) su 338 impr.: ~4 clic mancati",
+        "posizione media 8.6: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
       ]
     },
     {
-      "url": "/blog-case-vendita-padova",
-      "score": 13.0,
+      "url": "/faq",
+      "score": 13.5,
       "reasons": [
-        "posizione media 6.6: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-10 senza 28 gg di dati GSC successivi"
+        "CTR 0.9% vs atteso ~4% a pos. 6.1 (benchmark stima) su 112 impr.: ~3 clic mancati",
+        "posizione media 6.1: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
       ]
     },
     {
-      "url": "/blog-affitti-studenti-settembre-padova-proprietario-2026",
-      "score": 13.0,
+      "url": "/blog-limena-vicino-padova-comprare-2026",
+      "score": 13.5,
       "reasons": [
-        "posizione media 7.9: margine verso top 3",
-        "cooldown: ultimo refresh 2026-09-25 senza 28 gg di dati GSC successivi"
-      ]
-    },
-    {
-      "url": "/blog-canone-concordato-padova-guida-2026",
-      "score": 13.0,
-      "reasons": [
-        "posizione media 7.4: margine verso top 3",
-        "cooldown: ultimo refresh 2026-08-29 senza 28 gg di dati GSC successivi"
-      ]
-    },
-    {
-      "url": "/blog-affitto-breve-padova-2026",
-      "score": 13.0,
-      "reasons": [
-        "posizione media 6.2: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-10 senza 28 gg di dati GSC successivi"
-      ]
-    },
-    {
-      "url": "/blog-registro-contratti-affitto-padova-2026",
-      "score": 10.0,
-      "reasons": [
-        "posizione media 6.7: margine verso top 3",
-        "cooldown: ultimo refresh 2026-08-29 senza 28 gg di dati GSC successivi"
-      ]
-    },
-    {
-      "url": "/blog-coliving-padova-limena-giovani-professionisti-2026",
-      "score": 10.0,
-      "reasons": [
-        "posizione media 4.7: margine verso top 3",
-        "cooldown: ultimo refresh 2026-08-22 senza 28 gg di dati GSC successivi"
-      ]
-    },
-    {
-      "url": "/blog-italy-rental-market-positive-start-january-2026",
-      "score": 10.0,
-      "reasons": [
-        "posizione media 8.4: margine verso top 3",
-        "cooldown: ultimo refresh 2026-07-28 senza 28 gg di dati GSC successivi"
+        "posizione media 4.6: margine verso top 3",
+        "on-page: title_troncato",
+        "cooldown: ultimo refresh 2026-10-16 senza 28 gg di dati GSC successivi"
       ]
     }
   ],
   "below_threshold": [
-    {
-      "url": "/blog-relazione-tecnico-commerciale-affitto-studenti-padova-2026",
-      "score": 7.2
-    },
-    {
-      "url": "/blog-vigonza-rubano-comprare-casa-cintura-2026",
-      "score": 7.2
-    },
     {
       "url": "/blog-planimetria-catastale-compravendita-padova-2026",
       "score": 6.5
@@ -481,14 +257,6 @@
     {
       "url": "/blog-costi-proprieta-acquisto-possesso-vendita-padova-2026",
       "score": 6.5
-    },
-    {
-      "url": "/blog-direttiva-case-green-limena-padova",
-      "score": 5.0
-    },
-    {
-      "url": "/blog-righetto-bilancio-2025-soluzioni-affitto-2026",
-      "score": 5.0
     },
     {
       "url": "/blog-mutui-tasso-fisso-bancaitalia-padova-2026",
@@ -511,11 +279,11 @@
       "score": 5.0
     },
     {
-      "url": "/blog-checklist-verifiche-prima-compromesso-padova-2026",
+      "url": "/blog-quattro-imposte-rogitio-prima-casa-padova-2026",
       "score": 5.0
     },
     {
-      "url": "/blog-sondaggio-bancaditalia-q1-2026-padova",
+      "url": "/blog-checklist-verifiche-prima-compromesso-padova-2026",
       "score": 5.0
     },
     {
@@ -524,6 +292,22 @@
     },
     {
       "url": "/blog-barometro-mutui-crif-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-dazi-usa-ue-mercato-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-eurocamera-accordo-dazi-usa-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-patrimonio-casa-resilienza-mercati-globali-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-mutui-selettivi-banche-padova-2026",
       "score": 5.0
     }
   ]
