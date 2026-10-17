@@ -4697,43 +4697,7 @@ META_IG_USER_ID=...</pre>
                   <div style="margin-bottom:6px">
                     <label style="margin:0">Corpo HTML</label>
                   </div>
-                  <textarea id="emCorpo" rows="16" style="font-family:monospace;font-size:0.85rem;background:#1a1a2e;color:#e0e0e0;border:none;border-radius:8px;padding:12px" placeholder="<html>&#10;<body>&#10;  <h1>Titolo</h1>&#10;  <p>Gentile {{nome}}, ...</p>&#10;<script>
-(function(){
-'use strict';
-var disabled=['posta','social','newsletter','trend','audit'];
-var oldShowSection=window.showSection;
-var home=document.createElement('div');home.id='sec-home';home.className='section rh-home';
-var groups=[
- ['Immobili','green',[['immobili','Immobili','Elenco e ricerca'],['nuovo','Nuovo immobile','Crea una scheda'],['perizie','Perizie','Valutazioni e sopralluoghi'],['documentigenerali','Documenti','Documenti generali']]],
- ['Clienti e contatti','blue',[['clienti','Clienti','Rubrica e incroci'],['richieste','Richieste','Contatti dal sito']]],
- ['Aste','red',[['aste','Aste Veneto','Elenco e guida']]],
- ['Marketing','blue',[['blog','Blog','Articoli del sito'],['emailmarketing','Email marketing','Campagne'],['landing','Landing pages','Pagine campagna']]],
- ['Controllo','blue',[['analytics','Search Console','Rendimento su Google'],['impostazioni','Impostazioni','Configurazione']]]
-];
-var icon='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M12 8v8"/></svg>';
-home.innerHTML='<section class="rh-agenda"><div><h2>Agenda del gestionale</h2><p><span class="rh-chip">In arrivo</span></p></div><p>Qui troverai gli appuntamenti del gestionale. Il collegamento ai dati reali non è ancora attivo.</p><p class="rh-sub">Nessun dato dimostrativo. Le modifiche continueranno a essere fatte nel gestionale.</p></section>';
-groups.forEach(function(g){var title=document.createElement('h2');title.className='rh-group-title '+g[1];title.textContent=g[0];home.appendChild(title);var grid=document.createElement('div');grid.className='rh-grid';g[2].forEach(function(item){var b=document.createElement('button');b.type='button';b.className='rh-tile '+g[1];b.dataset.section=item[0];var existingNav=Array.from(document.querySelectorAll('#sidebar .nav-item')).find(function(n){return (n.getAttribute('onclick')||'').indexOf("'"+item[0]+"'")>=0;});var ownIcon=existingNav&&existingNav.querySelector('svg');b.innerHTML='<span class="rh-icon">'+(ownIcon?ownIcon.outerHTML:icon)+'</span><span>'+item[1]+'</span><span class="rh-sub">'+item[2]+'</span>';b.onclick=function(){window.showSection(item[0]);};grid.appendChild(b);});home.appendChild(grid);});
-document.querySelector('.content').prepend(home);
-var searchConsole=document.createElement('div');searchConsole.id='sec-searchconsole';searchConsole.className='section';searchConsole.innerHTML='<div class="rh-soon"><h2>Google Search Console</h2><span class="rh-chip">In arrivo</span><p style="margin-top:16px">Il collegamento automatico a Google Search Console non è ancora attivo. Qui appariranno clic, impressioni, CTR e posizione media, con filtro per date.</p><div class="rh-metric-list"><div style="--accent:#4285f4">Clic totali<strong>—</strong>Dati non collegati</div><div style="--accent:#673ab7">Impressioni totali<strong>—</strong>Dati non collegati</div><div style="--accent:#00897b">CTR media<strong>—</strong>Dati non collegati</div><div style="--accent:#e8710a">Posizione media<strong>—</strong>Dati non collegati</div></div><p>Nessun grafico o numero inventato. Il collegamento sarà completato dopo il lavoro sulla sicurezza.</p></div>';
-document.querySelector('.content').appendChild(searchConsole);
-var back=document.createElement('button');back.type='button';back.className='admin-home-back';back.textContent='← Home admin';back.onclick=function(){window.showSection('home');};document.querySelector('.topbar').prepend(back);
-var logout=document.createElement('button');logout.type='button';logout.className='admin-home-back';logout.textContent='Esci';logout.onclick=function(){window.doLogout();};document.querySelector('.topbar-actions').appendChild(logout);
-window.showSection=function(name){
- if(disabled.indexOf(name)>=0)name='home';
- if(name==='home'||name==='analytics'||name==='agenda'){
- document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
- document.getElementById(name==='analytics'?'sec-searchconsole':'sec-home').classList.add('active');
- document.getElementById('topbarTitle').textContent=name==='analytics'?'Google Search Console':'Home admin';
- }else{oldShowSection(name);}
- back.style.display=name==='home'?'none':'inline-flex';
- window.scrollTo(0,0);
-};
-// La home non modifica il controllo accessi né richiama servizi esterni.
-window.showSection('home');
-})();
-
-</script>
-</body>&#10;</html>"></textarea>
+                  <textarea id="emCorpo" rows="16" style="font-family:monospace;font-size:0.85rem;background:#1a1a2e;color:#e0e0e0;border:none;border-radius:8px;padding:12px" placeholder="<html>&#10;<body>&#10;  <h1>Titolo</h1>&#10;  <p>Gentile {{nome}}, ...</p>&#10;</body>&#10;</html>"></textarea>
                 </div>
               </div>
             </div>
@@ -17562,5 +17526,41 @@ async function initAuditSection() {
 <script src="js/admin-documenti-generali.js?v=6"></script>
 <script src="js/admin-perizie.js?v=13"></script>
 <script src="js/admin-aste.js?v=1"></script>
+<script>
+(function(){
+'use strict';
+var disabled=['posta','social','newsletter','trend','audit'];
+var oldShowSection=window.showSection;
+var home=document.createElement('div');home.id='sec-home';home.className='section rh-home';
+var groups=[
+ ['Immobili','green',[['immobili','Immobili','Elenco e ricerca'],['nuovo','Nuovo immobile','Crea una scheda'],['perizie','Perizie','Valutazioni e sopralluoghi'],['documentigenerali','Documenti','Documenti generali']]],
+ ['Clienti e contatti','blue',[['clienti','Clienti','Rubrica e incroci'],['richieste','Richieste','Contatti dal sito']]],
+ ['Aste','red',[['aste','Aste Veneto','Elenco e guida']]],
+ ['Marketing','blue',[['blog','Blog','Articoli del sito'],['emailmarketing','Email marketing','Campagne'],['landing','Landing pages','Pagine campagna']]],
+ ['Controllo','blue',[['analytics','Search Console','Rendimento su Google'],['impostazioni','Impostazioni','Configurazione']]]
+];
+var icon='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M12 8v8"/></svg>';
+home.innerHTML='<section class="rh-agenda"><div><h2>Agenda del gestionale</h2><p><span class="rh-chip">In arrivo</span></p></div><p>Qui troverai gli appuntamenti del gestionale. Il collegamento ai dati reali non è ancora attivo.</p><p class="rh-sub">Nessun dato dimostrativo. Le modifiche continueranno a essere fatte nel gestionale.</p></section>';
+groups.forEach(function(g){var title=document.createElement('h2');title.className='rh-group-title '+g[1];title.textContent=g[0];home.appendChild(title);var grid=document.createElement('div');grid.className='rh-grid';g[2].forEach(function(item){var b=document.createElement('button');b.type='button';b.className='rh-tile '+g[1];b.dataset.section=item[0];var existingNav=Array.from(document.querySelectorAll('#sidebar .nav-item')).find(function(n){return (n.getAttribute('onclick')||'').indexOf("'"+item[0]+"'")>=0;});var ownIcon=existingNav&&existingNav.querySelector('svg');b.innerHTML='<span class="rh-icon">'+(ownIcon?ownIcon.outerHTML:icon)+'</span><span>'+item[1]+'</span><span class="rh-sub">'+item[2]+'</span>';b.onclick=function(){window.showSection(item[0]);};grid.appendChild(b);});home.appendChild(grid);});
+document.querySelector('.content').prepend(home);
+var searchConsole=document.createElement('div');searchConsole.id='sec-searchconsole';searchConsole.className='section';searchConsole.innerHTML='<div class="rh-soon"><h2>Google Search Console</h2><span class="rh-chip">In arrivo</span><p style="margin-top:16px">Il collegamento automatico a Google Search Console non è ancora attivo. Qui appariranno clic, impressioni, CTR e posizione media, con filtro per date.</p><div class="rh-metric-list"><div style="--accent:#4285f4">Clic totali<strong>—</strong>Dati non collegati</div><div style="--accent:#673ab7">Impressioni totali<strong>—</strong>Dati non collegati</div><div style="--accent:#00897b">CTR media<strong>—</strong>Dati non collegati</div><div style="--accent:#e8710a">Posizione media<strong>—</strong>Dati non collegati</div></div><p>Nessun grafico o numero inventato. Il collegamento sarà completato dopo il lavoro sulla sicurezza.</p></div>';
+document.querySelector('.content').appendChild(searchConsole);
+var back=document.createElement('button');back.type='button';back.className='admin-home-back';back.textContent='← Home admin';back.onclick=function(){window.showSection('home');};document.querySelector('.topbar').prepend(back);
+var logout=document.createElement('button');logout.type='button';logout.className='admin-home-back';logout.textContent='Esci';logout.onclick=function(){window.doLogout();};document.querySelector('.topbar-actions').appendChild(logout);
+window.showSection=function(name){
+ if(disabled.indexOf(name)>=0)name='home';
+ if(name==='home'||name==='analytics'||name==='agenda'){
+ document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
+ document.getElementById(name==='analytics'?'sec-searchconsole':'sec-home').classList.add('active');
+ document.getElementById('topbarTitle').textContent=name==='analytics'?'Google Search Console':'Home admin';
+ }else{oldShowSection(name);}
+ back.style.display=name==='home'?'none':'inline-flex';
+ window.scrollTo(0,0);
+};
+// La home non modifica il controllo accessi né richiama servizi esterni.
+window.showSection('home');
+})();
+
+</script>
 </body>
 </html>
