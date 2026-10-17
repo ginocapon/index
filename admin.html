@@ -2145,6 +2145,17 @@ tr:hover td { background: rgba(206,224,143,0.06); }
   #clienteModal .form-group textarea { font-size: 16px; min-height: 44px; }
 }
 </style>
+<style id="rh-admin-home-v1">
+/* Nuova home admin. Dati agenda e Search Console non ancora collegati. */
+#sidebar{display:none!important}.main{margin-left:0!important;width:100%}.topbar-burger{display:none!important}
+.admin-home-back{display:inline-flex;align-items:center;padding:9px 14px;border:1px solid #a8c0d6;border-radius:9px;background:#fafaf5;color:#1e3a5c;font-weight:700;cursor:pointer;margin-right:12px}
+.rh-home{max-width:1180px;margin:0 auto}.rh-agenda{padding:24px;border:1px solid #dce3e8;background:#fafaf5;border-radius:16px;min-height:290px;display:flex;flex-direction:column;justify-content:space-between;margin-bottom:25px}
+.rh-agenda h2{font-size:1.5rem;color:#5c7a9e;margin:0}.rh-agenda p{font-size:.92rem;line-height:1.7;max-width:650px}.rh-chip{font-size:.73rem;border-radius:16px;padding:6px 12px;background:#edf2f6;color:#46627f;display:inline-block}.rh-group-title{margin:22px 0 12px;font-size:1rem;color:#0277bd}.rh-group-title.green{color:#2e7d32}.rh-group-title.red{color:#c62828}.rh-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.rh-tile{padding:22px 18px;border:1px solid #dce3e8;border-left:5px solid #29b6f6;border-radius:14px;background:#fafaf5;color:#1e3a5c;text-align:left;min-height:120px;cursor:pointer;font:700 .95rem Montserrat,sans-serif;display:flex;flex-direction:column;gap:12px}.rh-tile:hover{box-shadow:0 5px 18px #1e3a5c15}.rh-tile.green{border-left-color:#43a047}.rh-tile.red{border-left-color:#e53935}.rh-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:9px;background:#e1f0f8;color:#0277bd}.rh-tile.green .rh-icon{background:#e8f5e9;color:#2e7d32}.rh-tile.red .rh-icon{background:#fdecea;color:#c62828}.rh-sub{font-size:.73rem;color:#7a9ab8;font-weight:400;line-height:1.4}.rh-soon{background:#fff;border-radius:16px;border:1px solid #dde3e7;padding:30px;max-width:1000px;margin:auto}.rh-soon h2{margin-bottom:15px;color:#1e3a5c}.rh-soon p{font-size:.9rem;line-height:1.7}.rh-metric-list{display:grid;grid-template-columns:repeat(4,1fr);margin:20px 0;gap:10px}.rh-metric-list div{padding:18px;background:#f4f6f9;border-top:4px solid var(--accent);border-radius:8px;font-size:.8rem}.rh-metric-list strong{display:block;font-size:1.5rem;margin:16px 0 4px;color:#777}
+@media(max-width:760px){.rh-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rh-tile{padding:18px 12px;font-size:.85rem}.rh-agenda{padding:20px;min-height:270px}.rh-metric-list{grid-template-columns:repeat(2,1fr)}.rh-soon{padding:20px}.topbar{flex-wrap:wrap;gap:8px}.topbar-title{font-size:1.1rem}.admin-home-back{padding:8px 10px}}
+
+.rh-icon svg{width:22px;height:22px}.topbar-actions .admin-home-back{margin-right:0;font-size:.78rem}
+
+</style>
 </head>
 <body>
 
@@ -4686,7 +4697,43 @@ META_IG_USER_ID=...</pre>
                   <div style="margin-bottom:6px">
                     <label style="margin:0">Corpo HTML</label>
                   </div>
-                  <textarea id="emCorpo" rows="16" style="font-family:monospace;font-size:0.85rem;background:#1a1a2e;color:#e0e0e0;border:none;border-radius:8px;padding:12px" placeholder="<html>&#10;<body>&#10;  <h1>Titolo</h1>&#10;  <p>Gentile {{nome}}, ...</p>&#10;</body>&#10;</html>"></textarea>
+                  <textarea id="emCorpo" rows="16" style="font-family:monospace;font-size:0.85rem;background:#1a1a2e;color:#e0e0e0;border:none;border-radius:8px;padding:12px" placeholder="<html>&#10;<body>&#10;  <h1>Titolo</h1>&#10;  <p>Gentile {{nome}}, ...</p>&#10;<script>
+(function(){
+'use strict';
+var disabled=['posta','social','newsletter','trend','audit'];
+var oldShowSection=window.showSection;
+var home=document.createElement('div');home.id='sec-home';home.className='section rh-home';
+var groups=[
+ ['Immobili','green',[['immobili','Immobili','Elenco e ricerca'],['nuovo','Nuovo immobile','Crea una scheda'],['perizie','Perizie','Valutazioni e sopralluoghi'],['documentigenerali','Documenti','Documenti generali']]],
+ ['Clienti e contatti','blue',[['clienti','Clienti','Rubrica e incroci'],['richieste','Richieste','Contatti dal sito']]],
+ ['Aste','red',[['aste','Aste Veneto','Elenco e guida']]],
+ ['Marketing','blue',[['blog','Blog','Articoli del sito'],['emailmarketing','Email marketing','Campagne'],['landing','Landing pages','Pagine campagna']]],
+ ['Controllo','blue',[['analytics','Search Console','Rendimento su Google'],['impostazioni','Impostazioni','Configurazione']]]
+];
+var icon='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M12 8v8"/></svg>';
+home.innerHTML='<section class="rh-agenda"><div><h2>Agenda del gestionale</h2><p><span class="rh-chip">In arrivo</span></p></div><p>Qui troverai gli appuntamenti del gestionale. Il collegamento ai dati reali non è ancora attivo.</p><p class="rh-sub">Nessun dato dimostrativo. Le modifiche continueranno a essere fatte nel gestionale.</p></section>';
+groups.forEach(function(g){var title=document.createElement('h2');title.className='rh-group-title '+g[1];title.textContent=g[0];home.appendChild(title);var grid=document.createElement('div');grid.className='rh-grid';g[2].forEach(function(item){var b=document.createElement('button');b.type='button';b.className='rh-tile '+g[1];b.dataset.section=item[0];var existingNav=Array.from(document.querySelectorAll('#sidebar .nav-item')).find(function(n){return (n.getAttribute('onclick')||'').indexOf("'"+item[0]+"'")>=0;});var ownIcon=existingNav&&existingNav.querySelector('svg');b.innerHTML='<span class="rh-icon">'+(ownIcon?ownIcon.outerHTML:icon)+'</span><span>'+item[1]+'</span><span class="rh-sub">'+item[2]+'</span>';b.onclick=function(){window.showSection(item[0]);};grid.appendChild(b);});home.appendChild(grid);});
+document.querySelector('.content').prepend(home);
+var searchConsole=document.createElement('div');searchConsole.id='sec-searchconsole';searchConsole.className='section';searchConsole.innerHTML='<div class="rh-soon"><h2>Google Search Console</h2><span class="rh-chip">In arrivo</span><p style="margin-top:16px">Il collegamento automatico a Google Search Console non è ancora attivo. Qui appariranno clic, impressioni, CTR e posizione media, con filtro per date.</p><div class="rh-metric-list"><div style="--accent:#4285f4">Clic totali<strong>—</strong>Dati non collegati</div><div style="--accent:#673ab7">Impressioni totali<strong>—</strong>Dati non collegati</div><div style="--accent:#00897b">CTR media<strong>—</strong>Dati non collegati</div><div style="--accent:#e8710a">Posizione media<strong>—</strong>Dati non collegati</div></div><p>Nessun grafico o numero inventato. Il collegamento sarà completato dopo il lavoro sulla sicurezza.</p></div>';
+document.querySelector('.content').appendChild(searchConsole);
+var back=document.createElement('button');back.type='button';back.className='admin-home-back';back.textContent='← Home admin';back.onclick=function(){window.showSection('home');};document.querySelector('.topbar').prepend(back);
+var logout=document.createElement('button');logout.type='button';logout.className='admin-home-back';logout.textContent='Esci';logout.onclick=function(){window.doLogout();};document.querySelector('.topbar-actions').appendChild(logout);
+window.showSection=function(name){
+ if(disabled.indexOf(name)>=0)name='home';
+ if(name==='home'||name==='analytics'||name==='agenda'){
+ document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
+ document.getElementById(name==='analytics'?'sec-searchconsole':'sec-home').classList.add('active');
+ document.getElementById('topbarTitle').textContent=name==='analytics'?'Google Search Console':'Home admin';
+ }else{oldShowSection(name);}
+ back.style.display=name==='home'?'none':'inline-flex';
+ window.scrollTo(0,0);
+};
+// La home non modifica il controllo accessi né richiama servizi esterni.
+window.showSection('home');
+})();
+
+</script>
+</body>&#10;</html>"></textarea>
                 </div>
               </div>
             </div>
