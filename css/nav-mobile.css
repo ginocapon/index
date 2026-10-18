@@ -278,7 +278,7 @@ body:not(.homepage) header .h-tel {
 }
 
 body:not(.homepage) header .h-btn {
-  background: linear-gradient(180deg, #4A8B4F 0%, #3F7A44 42%, #356B3A 100%) !important;
+  background: linear-gradient(180deg, #438049 0%, #3F7A44 42%, #356B3A 100%) !important;
   color: #fff !important;
   padding: 11px 24px !important;
   border-radius: 8px !important;
@@ -297,7 +297,7 @@ body:not(.homepage) header .h-btn {
 }
 
 body:not(.homepage) header .h-btn:hover {
-  background: linear-gradient(180deg, #579A5E 0%, #4A8B4F 42%, #3F7A44 100%) !important;
+  background: linear-gradient(180deg, #438049 0%, #3F7A44 42%, #356B3A 100%) !important;
   transform: translateY(-2px) !important;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.5) inset,

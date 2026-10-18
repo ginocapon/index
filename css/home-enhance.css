@@ -31,16 +31,21 @@
 }
 
 .hero-cta-primary.btn-g {
-  background: var(--oro) !important;
-  border-color: var(--oro) !important;
+  background: linear-gradient(180deg,#FF9A6E 0%,#FF6B35 42%,#E85F2E 100%) !important;
+  border-color: #E85F2E !important;
   color: var(--nero) !important;
-  box-shadow: 0 4px 20px rgba(255, 107, 53, 0.28);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.45) inset, 0 -1px 0 rgba(0,0,0,0.12) inset, 0 4px 0 #B8431A, 0 10px 22px rgba(0,0,0,0.28) !important;
 }
 .hero-cta-primary.btn-g:hover {
-  background: var(--oro2) !important;
-  border-color: var(--oro2) !important;
+  background: linear-gradient(180deg,#FF9A6E 0%,#FF6B35 42%,#E85F2E 100%) !important;
+  border-color: #E85F2E !important;
   color: var(--nero) !important;
-  box-shadow: 0 10px 28px rgba(255, 107, 53, 0.4);
+  transform: translateY(-2px) !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 -1px 0 rgba(0,0,0,0.1) inset, 0 5px 0 #9A3815, 0 14px 28px rgba(0,0,0,0.32) !important;
+}
+.hero-cta-primary.btn-g:active {
+  transform: translateY(1px) !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.35) inset, 0 2px 0 #B8431A, 0 5px 14px rgba(0,0,0,0.22) !important;
 }
 
 .hero-cta-secondary.btn-g {
