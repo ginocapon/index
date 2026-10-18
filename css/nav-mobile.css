@@ -314,3 +314,20 @@ body:not(.homepage) header .h-btn:active {
     0 5px 14px rgba(0, 0, 0, 0.22) !important;
 }
 }
+
+/* Telefono: griglie inline a 2-3 colonne in colonna singola (richiesta Gino 18/10/2026); footer: marchio a tutta larghezza + 2 colonne */
+@media (max-width: 600px) {
+  [style*="grid-template-columns:1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1fr"],
+  [style*="grid-template-columns:repeat(2"],
+  [style*="grid-template-columns:repeat(3"] {
+    grid-template-columns: 1fr !important;
+  }
+  .fgrid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1.5rem 1rem !important;
+  }
+  .fgrid > :first-child {
+    grid-column: 1 / -1;
+  }
+}
