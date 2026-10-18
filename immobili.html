@@ -103,6 +103,7 @@
 
     .s-tabs{display:flex;gap:8px;margin-bottom:0;padding:10px 0 0;border-bottom:1px solid rgba(255,255,255,.22);flex-wrap:wrap}
     .s-tab{
+      display:inline-flex;align-items:center;gap:.5rem;
       padding:.65rem 1.1rem;
       border:2px solid rgba(255,255,255,.55);
       border-radius:10px;
@@ -119,6 +120,10 @@
       box-shadow:0 1px 0 rgba(255,255,255,.1) inset;
     }
     .s-tab:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.85);color:#fff}
+    .s-tab::before{content:'';width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .s-tab-vendita::before{background:#8FCB9B}
+    .s-tab-affitto::before{background:#8AB4CE}
+    .s-tab-aste::before{background:#E0A080}
     .s-tab.active{
       background:var(--verde);
       border-color:rgba(255,255,255,.92);
@@ -126,6 +131,8 @@
       text-shadow:none;
       box-shadow:0 0 0 2px var(--blu2),0 4px 14px rgba(0,0,0,.28);
     }
+    .s-tab.active.s-tab-affitto{background:var(--blu)}
+    .s-tab.active.s-tab-aste{background:#A63D16}
 
     .search-box{
       background:transparent;
@@ -148,7 +155,7 @@
       border:2px solid rgba(255,255,255,.95);
       box-shadow:0 0 0 3px var(--blu),0 2px 10px rgba(21,36,53,.15);
       border-radius:10px;
-      background:var(--bianco);
+      background:var(--carta);
       box-sizing:border-box;
     }
     .sb-field.sb-zona{flex:1.15;min-width:200px}
@@ -251,7 +258,7 @@
       border:2px solid rgba(255,255,255,.95);
       box-shadow:0 0 0 3px var(--blu),0 2px 8px rgba(21,36,53,.12);
       border-radius:10px;
-      background:var(--bianco);
+      background:var(--carta);
       box-sizing:border-box;
     }
     .af-field label{
@@ -596,9 +603,9 @@
     <h1 class="hero-title">Trova il tuo <strong>immobile ideale</strong><br>a Padova e provincia</h1>
     <p class="hero-last-up">Ultimo aggiornamento: ottobre 2026</p>
     <div class="s-tabs">
-      <button class="s-tab active" onclick="setTab(this,'vendita')">Acquisto</button>
-      <button class="s-tab" onclick="setTab(this,'affitto')">Affitto</button>
-      <button class="s-tab" onclick="setTab(this,'aste')">Aste</button>
+      <button class="s-tab s-tab-vendita active" onclick="setTab(this,'vendita')">Acquisto</button>
+      <button class="s-tab s-tab-affitto" onclick="setTab(this,'affitto')">Affitto</button>
+      <button class="s-tab s-tab-aste" onclick="setTab(this,'aste')">Aste</button>
     </div>
     <div class="search-box">
       <div class="sb-field sb-zona">
