@@ -33,7 +33,7 @@
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
       --nero:#152435;--bianco:#F7F5F1;--oro:#FF6B35;--oro2:#FF8F5E;
-      --grigio:#6B7A8D;--gc:#E1DBD1;--verde:#1E8449;--rosso:#C0392B;
+      --grigio:#6B7A8D;--gc:#E1DBD1;--verde:#3F7A44;--verde2:#356B3A;--verde-chiaro:#8FCB9B;--rosso:#C0392B;
       --blu:#2C4A6E;--sfondo:#ECE7DF;--card:#F7F5F1;--caffe:#152435;--testo:#152435;
       --blu2:#3A5F8C;--blu3:#4E789A;--azzurro:#8AB4CE;--carta:#F2EDE7;--oro-bg:rgba(255,107,53,0.10);
     }
@@ -48,13 +48,13 @@
     .hnav{display:flex;align-items:center;gap:.2rem;flex:1}
     .hnav a{color:rgba(255,255,255,.7);font-size:.82rem;text-decoration:none;padding:.4rem .8rem;border-radius:4px;transition:color .2s,background .2s;white-space:nowrap}
     .hnav a:hover{color:#fff}
-    .hnav a.active{color:var(--oro)}
+    .hnav a.active{color:var(--verde-chiaro)}
     .h-cta{display:flex;align-items:center;gap:.65rem}
     .h-tel{color:rgba(255,255,255,.75);font-size:.78rem;text-decoration:none;display:flex;align-items:center;gap:.35rem}
     .h-tel:hover{color:#fff}
     .h-tel svg{width:13px;height:13px}
-    .h-btn{background:var(--oro);color:var(--nero);padding:.38rem .85rem;border-radius:6px;font-size:.76rem;font-weight:500;text-decoration:none;letter-spacing:.04em;white-space:nowrap;transition:all .2s}
-.h-btn:hover{background:var(--oro2);transform:translateY(-1px)}
+    .h-btn{background:var(--verde);color:#fff;padding:.38rem .85rem;border-radius:6px;font-size:.76rem;font-weight:500;text-decoration:none;letter-spacing:.04em;white-space:nowrap;transition:all .2s}
+.h-btn:hover{background:var(--verde2);transform:translateY(-1px)}
 
     /* ── HERO SEARCH BAR (sfondo blu; titoli leggibili; box filtri arancio in evidenza) ── */
     .hero-search{
@@ -63,7 +63,7 @@
       position:relative;
       overflow:hidden;
       box-shadow:0 8px 32px rgba(10,15,28,.38);
-      border-top:3px solid var(--oro);
+      border-top:3px solid var(--verde);
     }
     .hero-search::before{
       content:'';
@@ -120,9 +120,9 @@
     }
     .s-tab:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.85);color:#fff}
     .s-tab.active{
-      background:var(--oro);
+      background:var(--verde);
       border-color:rgba(255,255,255,.92);
-      color:var(--nero);
+      color:#fff;
       text-shadow:none;
       box-shadow:0 0 0 2px var(--blu2),0 4px 14px rgba(0,0,0,.28);
     }
@@ -148,12 +148,12 @@
       border:2px solid rgba(255,255,255,.95);
       box-shadow:0 0 0 3px var(--blu),0 2px 10px rgba(21,36,53,.15);
       border-radius:10px;
-      background:var(--oro);
+      background:var(--bianco);
       box-sizing:border-box;
     }
     .sb-field.sb-zona{flex:1.15;min-width:200px}
     .sb-field label{
-      font-size:.58rem;
+      font-size:.66rem;
       letter-spacing:.12em;
       text-transform:uppercase;
       color:rgba(21,36,53,.72);
@@ -251,11 +251,11 @@
       border:2px solid rgba(255,255,255,.95);
       box-shadow:0 0 0 3px var(--blu),0 2px 8px rgba(21,36,53,.12);
       border-radius:10px;
-      background:var(--oro);
+      background:var(--bianco);
       box-sizing:border-box;
     }
     .af-field label{
-      font-size:.56rem;
+      font-size:.64rem;
       letter-spacing:.1em;
       text-transform:uppercase;
       color:rgba(21,36,53,.72);
@@ -296,7 +296,7 @@
     .filters-active-bar{background:var(--bianco);border:1px solid var(--gc);border-radius:8px;padding:.6rem 1rem;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
     .filters-active-bar:empty{display:none}
     .fab-label{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--grigio);font-weight:500}
-    .fab-reset{font-size:.7rem;color:var(--oro);cursor:pointer;background:none;border:none;font-family:'Montserrat',sans-serif;padding:.2rem .5rem;margin-left:auto}
+    .fab-reset{font-size:.7rem;color:var(--verde);cursor:pointer;background:none;border:none;font-family:'Montserrat',sans-serif;padding:.2rem .5rem;margin-left:auto}
     .fab-reset:hover{text-decoration:underline}
 
     /* ── RESULTS AREA ── */
@@ -364,7 +364,7 @@
     .cbadge{font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;padding:.18rem .5rem;border-radius:1px;font-weight:600}
     .cb-vendita{background:var(--nero);color:#fff}
     .cb-affitto{background:var(--verde);color:#fff}
-    .cb-evidenza{background:var(--oro);color:var(--nero)}
+    .cb-evidenza{background:var(--verde);color:#fff}
     .cb-nuovo{background:var(--rosso);color:#fff}
     .card-media{position:absolute;bottom:.5rem;right:.5rem;display:flex;gap:.22rem;z-index:2}
     .cm-icon{width:24px;height:24px;background:rgba(0,0,0,.65);border-radius:2px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
@@ -378,7 +378,7 @@
     .card-price small{font-family:'Montserrat',sans-serif;font-size:.72rem;color:var(--grigio);font-weight:400;margin-left:.2rem}
     .card-title{font-size:.88rem;font-weight:500;margin:.35rem 0 .2rem;line-height:1.35}
     .card-location{display:flex;align-items:center;gap:.28rem;font-size:.76rem;font-weight:500;color:color-mix(in srgb,var(--grigio) 88%,var(--testo) 12%);margin-bottom:.7rem}
-    .card-location svg{width:11px;height:11px;flex-shrink:0;color:var(--oro)}
+    .card-location svg{width:11px;height:11px;flex-shrink:0;color:var(--verde)}
     .card-specs{display:flex;gap:.75rem;flex-wrap:wrap;padding-top:.65rem;border-top:1px solid var(--gc)}
     .cs{display:flex;align-items:center;gap:.28rem;font-size:.75rem;color:var(--grigio)}
     .cs svg{width:13px;height:13px;color:var(--gc);flex-shrink:0}
@@ -407,7 +407,7 @@
     .cmp-thumb-x{position:absolute;top:0;right:0;width:17px;height:17px;background:rgba(0,0,0,.65);border:none;color:#fff;font-size:12px;line-height:1;cursor:pointer;border-bottom-left-radius:4px;display:flex;align-items:center;justify-content:center}
     .cmp-bar-txt{font-size:.72rem;color:rgba(255,255,255,.78);white-space:nowrap}
     .cmp-bar-actions{display:flex;gap:.5rem;align-items:center}
-    .cmp-go{background:var(--oro);color:var(--nero);border:none;padding:.6rem 1.1rem;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer}
+    .cmp-go{background:var(--verde);color:#fff;border:none;padding:.6rem 1.1rem;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer}
     .cmp-go:disabled{opacity:.45;cursor:not-allowed}
     .cmp-clear{background:none;border:1px solid rgba(255,255,255,.32);color:#fff;padding:.55rem .8rem;border-radius:4px;font-size:.7rem;cursor:pointer}
     .cmp-clear:hover{background:rgba(255,255,255,.1)}
@@ -438,7 +438,7 @@
     .map-toggle-inner{max-width:1380px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
     .map-toggle-text{font-size:.78rem;color:rgba(255,255,255,.6)}
     .map-toggle-btn{display:flex;align-items:center;gap:.4rem;padding:.38rem .85rem;border:1px solid rgba(255,255,255,.2);background:transparent;color:#fff;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:.74rem;letter-spacing:.04em;cursor:pointer;transition:border-color .2s,background .2s}
-    .map-toggle-btn:hover{border-color:var(--oro);background:rgba(255,107,53,.1);color:var(--oro)}
+    .map-toggle-btn:hover{border-color:var(--verde);background:rgba(63,122,68,.1);color:var(--verde)}
     .map-toggle-btn svg{width:13px;height:13px}
     .map-panel{background:var(--gc);height:0;overflow:hidden;transition:height .4s ease}
     .map-panel.open{height:420px}
@@ -456,7 +456,7 @@
     .modal-price{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600}
     .modal-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;font-style:italic;margin:.3rem 0 .5rem;color:var(--grigio)}
     .modal-loc{display:flex;align-items:center;gap:.3rem;font-size:.82rem;color:var(--grigio);margin-bottom:1.1rem}
-    .modal-loc svg{width:12px;height:12px;color:var(--oro)}
+    .modal-loc svg{width:12px;height:12px;color:var(--verde)}
     .modal-specs{display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem;margin-bottom:1.1rem}
     .ms-item{background:var(--bianco);border:1px solid var(--gc);border-radius:2px;padding:.6rem .75rem;text-align:center}
     .ms-val{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600}
@@ -475,8 +475,8 @@
     .cta-banner-content{position:relative;z-index:1;padding:1.5rem 2rem;text-align:center;width:100%}
     .cta-banner-content h2{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#fff;margin-bottom:.4rem}
     .cta-banner-content p{font-size:.8rem;color:rgba(255,255,255,.65);margin-bottom:.8rem;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.5}
-    .cta-banner-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--oro);color:var(--nero);padding:.5rem 1.2rem;border-radius:6px;font-size:.76rem;font-weight:600;text-decoration:none;letter-spacing:.04em;transition:all .2s}
-    .cta-banner-btn:hover{background:var(--oro2);transform:translateY(-1px)}
+    .cta-banner-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--verde);color:#fff;padding:.5rem 1.2rem;border-radius:6px;font-size:.76rem;font-weight:600;text-decoration:none;letter-spacing:.04em;transition:all .2s}
+    .cta-banner-btn:hover{background:var(--verde2);transform:translateY(-1px)}
     @media(max-width:768px){.cta-banner-search{padding:0 .75rem 1rem}.cta-banner-content{padding:1.2rem 1rem}.cta-banner-content h2{font-size:1.15rem}}
 
     /* NESSUN RISULTATO */
@@ -493,7 +493,7 @@
     .footer-info{font-size:.77rem;line-height:1.8}
     .footer-col h4{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.7rem;font-weight:500}
     .footer-col a{display:block;font-size:.78rem;color:rgba(255,255,255,.6);text-decoration:none;margin-bottom:.28rem;transition:color .2s}
-    .footer-col a:hover{color:var(--oro)}
+    .footer-col a:hover{color:var(--verde-chiaro)}
     .footer-bottom{max-width:1380px;margin:.9rem auto 0;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;font-size:.7rem;flex-wrap:wrap;gap:.4rem;color:rgba(255,255,255,.55)}
 
     @media(max-width:768px){
@@ -513,7 +513,7 @@
       .card-price{font-size:1.35rem}
       .card-title{font-size:.82rem}
     }
-    .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
+    .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--verde);color:#fff;padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
   </style>
   <link rel="stylesheet" href="css/rig-type-scale.css?v=7">
 
@@ -887,7 +887,7 @@
     <div id="no-results" class="no-results" style="display:none;">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       <h2>Nessun immobile trovato</h2>
-      <p>Prova ad allargare i criteri di ricerca o <button onclick="resetFilters()" style="background:none;border:none;color:var(--oro);cursor:pointer;font-size:.85rem;font-family:'DM Sans',sans-serif;">azzera i filtri</button></p>
+      <p>Prova ad allargare i criteri di ricerca o <button onclick="resetFilters()" style="background:none;border:none;color:var(--verde);cursor:pointer;font-size:.85rem;font-family:'DM Sans',sans-serif;">azzera i filtri</button></p>
     </div>
 
     <!-- PAGINATION -->
@@ -1019,7 +1019,7 @@
   }
   function sbLoadFail() {
     const grid = document.getElementById('imm-grid');
-    if (grid) grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;"><p style="color:var(--rosso);font-size:.85rem">Errore nel caricamento degli immobili. <button type="button" onclick="location.reload()" style="background:none;border:none;color:var(--oro);cursor:pointer;font:inherit;text-decoration:underline">Riprova</button></p></div>';
+    if (grid) grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;"><p style="color:var(--rosso);font-size:.85rem">Errore nel caricamento degli immobili. <button type="button" onclick="location.reload()" style="background:none;border:none;color:var(--verde);cursor:pointer;font:inherit;text-decoration:underline">Riprova</button></p></div>';
   }
   function waitSBThen(fn) {
     window.rigWaitSupabase(function () {
