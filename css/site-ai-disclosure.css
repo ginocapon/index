@@ -206,3 +206,8 @@ figure.blog-fig,
     font-size: 0.7rem;
   }
 }
+
+/* Badge FOTO AI in basso a sinistra (come dice la didascalia): se sotto l'immagine c'e' la didascalia, spazio extra in fondo cosi' il badge non copre "Informativa" */
+:has(> .rig-ai-photo-watermark) > .rig-photo-caption {
+  padding-bottom: 1.7rem;
+}

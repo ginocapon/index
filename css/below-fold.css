@@ -1420,3 +1420,9 @@ footer .rig-ai-act-bar a { color: #ffb088 !important; }
 @media(max-width:768px){
   .sticky-cta-mobile{backdrop-filter:none;-webkit-backdrop-filter:none}
 }
+
+/* Fix mobile sezione droni home: lo stile inline 1fr 1fr vinceva sul media query */
+@media(max-width:900px){
+  #drone-hp{padding:52px 20px !important}
+  #drone-hp .stima-layout{grid-template-columns:1fr !important;gap:24px !important}
+}
