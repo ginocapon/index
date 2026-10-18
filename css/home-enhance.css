@@ -10,7 +10,7 @@
   border-radius: 999px;
   padding: 8px 18px;
   font-size: 0.72rem;
-  color: #c44a12;
+  color: #A63D16;
   font-weight: 700;
   margin-bottom: 22px;
   max-width: 100%;
@@ -31,9 +31,15 @@
 }
 
 .hero-cta-primary.btn-g {
+  background: var(--oro) !important;
+  border-color: var(--oro) !important;
+  color: var(--nero) !important;
   box-shadow: 0 4px 20px rgba(255, 107, 53, 0.28);
 }
 .hero-cta-primary.btn-g:hover {
+  background: var(--oro2) !important;
+  border-color: var(--oro2) !important;
+  color: var(--nero) !important;
   box-shadow: 0 10px 28px rgba(255, 107, 53, 0.4);
 }
 
@@ -94,7 +100,7 @@
   transition: color 0.2s, border-color 0.2s, opacity 0.2s;
 }
 .r-tab:focus-visible {
-  outline: 2px solid var(--oro);
+  outline: 2px solid var(--verde, #3F7A44);
   outline-offset: 2px;
 }
 .r-field:focus-within label {
