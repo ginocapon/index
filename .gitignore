@@ -29,3 +29,7 @@ tests/visual/baseline/
 seo-auto-email.html
 seo-auto-subject.txt
 data/seo-auto/.tmp.html
+
+# Chiave del relay email (creata a mano su cPanel)
+api/relay-secret.php
+relay-secret.php

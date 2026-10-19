@@ -5,8 +5,16 @@
 // Upload su cPanel: api.righettoimmobiliare.it/send-mail.php
 // ═══════════════════════════════════════════════════════════════
 
-// Chiave segreta per autorizzare le richieste (CAMBIA QUESTA!)
-define('API_SECRET', 'RighettoMail2026!SecretKey');
+// Chiave segreta: letta da relay-secret.php (file creato a mano su cPanel, NON nel repo).
+// Contenuto del file: <?php return 'LA_TUA_CHIAVE';
+$secretFile = __DIR__ . '/relay-secret.php';
+$API_SECRET = is_file($secretFile) ? (string) include $secretFile : '';
+if ($API_SECRET === '') {
+    http_response_code(500);
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode(['status' => 'error', 'error' => 'Relay non configurato']);
+    exit;
+}
 
 // CORS — solo domini Righetto (Edge Function server-side non invia Origin)
 $allowed_origins = ['https://righettoimmobiliare.it', 'https://www.righettoimmobiliare.it'];
@@ -51,7 +59,7 @@ if (!$apiKey) {
     }
 }
 
-if ($apiKey !== API_SECRET) {
+if (!hash_equals($API_SECRET, (string) $apiKey)) {
     http_response_code(403);
     echo json_encode(['status' => 'error', 'error' => 'API key non valida']);
     exit;
