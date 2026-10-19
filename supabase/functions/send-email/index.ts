@@ -4,7 +4,8 @@
 // Deploy: supabase functions deploy send-email
 // Secrets necessari su Supabase:
 //   MAIL_RELAY_URL = https://api.righettoimmobiliare.it/send-mail.php
-//   MAIL_RELAY_KEY = RighettoMail2026!SecretKey  (stessa del PHP)
+//   MAIL_RELAY_KEY = (chiave scelta da Gino, stessa di relay-secret.php; solo nei segreti)
+//   ADMIN_UID      = User UID dell'utente admin (Supabase Auth)
 // ═══════════════════════════════════════════════════════════════
 
 import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
@@ -12,17 +13,30 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-righetto-admin",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
   "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
 };
 
 const NOTIFY_EMAIL = (Deno.env.get("NOTIFY_EMAIL") || "info@righettoimmobiliare.it").trim();
 
-function isAdminRequest(req: Request): boolean {
-  const expected = (Deno.env.get("RIG_ADMIN_RLS_SECRET") || "").trim();
-  if (!expected) return false;
-  const got = (req.headers.get("x-righetto-admin") || "").trim();
-  return got === expected;
+// Admin = utente loggato con Supabase Auth il cui id e' uguale al segreto ADMIN_UID.
+// Nessuna chiave condivisa nel codice o nelle intestazioni.
+async function isAdminRequest(req: Request): Promise<boolean> {
+  const adminUid = (Deno.env.get("ADMIN_UID") || "").trim();
+  if (!adminUid) return false;
+  const auth = req.headers.get("authorization") || "";
+  const token = auth.replace(/^Bearer\s+/i, "").trim();
+  if (!token) return false;
+  try {
+    const r = await fetch((Deno.env.get("SUPABASE_URL") ?? "") + "/auth/v1/user", {
+      headers: { Authorization: "Bearer " + token, apikey: Deno.env.get("SUPABASE_ANON_KEY") ?? "" },
+    });
+    if (!r.ok) return false;
+    const u = await r.json();
+    return u && u.id === adminUid;
+  } catch (_) {
+    return false;
+  }
 }
 
 // ═══ INVIO VIA PHP RELAY (tuo cPanel) ═══
@@ -37,7 +51,8 @@ async function sendViaRelay(options: {
   reply_to?: string;
 }) {
   const RELAY_URL = Deno.env.get("MAIL_RELAY_URL") || "https://api.righettoimmobiliare.it/send-mail.php";
-  const RELAY_KEY = Deno.env.get("MAIL_RELAY_KEY") || "RighettoMail2026!SecretKey";
+  const RELAY_KEY = (Deno.env.get("MAIL_RELAY_KEY") || "").trim();
+  if (!RELAY_KEY) throw new Error("MAIL_RELAY_KEY non configurata");
 
   console.log("Relay:", options.action, "→", options.to_email, "da", options.sender_email);
 
@@ -100,6 +115,9 @@ serve(async (req) => {
     const body = await req.json();
     const { action } = body;
 
+    if (action === "send_single" || action === "process_queue") {
+      if (!(await isAdminRequest(req))) return jsonResponse({ error: "Non autorizzato" }, 401);
+    }
     if (action === "send_single") return await sendSingleEmail(supabase, body);
     if (action === "process_queue") return await processQueue(supabase, body);
     if (action === "send_test") return await sendTestEmail(supabase, body, req);
@@ -295,7 +313,7 @@ async function processQueue(supabase: any, body: any) {
 async function sendTestEmail(supabase: any, body: any, req: Request) {
   const { subject, html_body, sender_email, sender_name, reply_to } = body;
   const config = await getEmailConfig(supabase);
-  const admin = isAdminRequest(req);
+  const admin = await isAdminRequest(req);
   const to_email = admin && body.to_email ? body.to_email : NOTIFY_EMAIL;
 
   if (!to_email || !isValidEmail(to_email)) {

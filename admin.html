@@ -2167,7 +2167,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
     <!-- Step 1: Password -->
     <div id="loginStep1">
-      <input type="password" id="loginPass" placeholder="Password admin..." autocomplete="current-password">
+      <input type="email" id="loginEmail" placeholder="Email..." autocomplete="username" style="margin-bottom:10px">
+      <input type="password" id="loginPass" placeholder="Password..." autocomplete="current-password">
       <button class="btn-login" onclick="doLogin()">Accedi</button>
       <div class="login-error" id="loginError">Password non corretta</div>
     </div>
@@ -5273,20 +5274,12 @@ META_IG_USER_ID=...</pre>
 // ══════════════════════════════════════
 const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
-/* Password admin: iniettata in CI da secret GitHub ADMIN_PASSWORD (static.yml). Non committare password in chiaro. */
-const ADMIN_PASSWORD = "__RIGHETTO_ADMIN_PW_JSON__";
-
-const URL_KEY = 'RIG2024';
-
-/* Deve coincidere con public.righetto_admin_secret() in sql/rls-security-hardening.sql */
-const RIG_ADMIN_RLS_SECRET = 'sEwKPRkWMb-vUHFYpuqtrQWkOobWV28TKZaaQeKUpI63WRgnDhyeiV0yrVL6wdSR';
+/* Login admin: Supabase Auth (email + password). Nessuna password o chiave segreta nel codice. */
 
 const _rigSbLib = window.rigSupabaseLib && window.rigSupabaseLib();
 if (!_rigSbLib) throw new Error('Supabase non caricato — ricarica la pagina admin.');
 const sb = _rigSbLib.createClient(SUPABASE_URL, SUPABASE_KEY, {
-  global: {
-    headers: { 'x-righetto-admin': RIG_ADMIN_RLS_SECRET }
-  }
+  auth: { persistSession: true, autoRefreshToken: true }
 });
 window.sb = sb;
 
@@ -5306,85 +5299,44 @@ function isLiveAdminHost() {
   return host === 'righettoimmobiliare.it' || host.endsWith('.github.io');
 }
 
-function warnIfAdminPasswordNotDeployed() {
-  if (ADMIN_PASSWORD !== '__RIGHETTO_ADMIN_PW_JSON__' || !isLiveAdminHost()) return false;
-  const errEl = document.getElementById('loginError');
-  if (!errEl) return true;
-  errEl.textContent = 'Password non pubblicata sul sito: in GitHub vai su Settings → Pages → Source = GitHub Actions, poi riesegui il workflow Deploy static content to Pages (deve essere verde).';
-  errEl.style.display = 'block';
-  return true;
-}
-
-function checkAuth() {
-  const params = new URLSearchParams(window.location.search);
-  const urlKey = params.get('key');
-  const reset2fa = params.get('reset2fa');
-  const session = sessionStorage.getItem('rig_admin');
-
-  // Emergency 2FA reset via URL: ?reset2fa=RIG2024
-  if (reset2fa === URL_KEY) {
-    localStorage.removeItem('rig_2fa_secret');
-    console.log('2FA reset via URL parameter');
-    // Clean URL
-    window.history.replaceState({}, '', window.location.pathname);
-  }
-
-  if (session === 'ok' || session === 'success') {
-    // Already authenticated this session (password + 2FA already verified)
-    grantAccess();
-  } else if (urlKey === URL_KEY) {
-    // URL key: still require 2FA if enabled
-    const totpSecret = localStorage.getItem('rig_2fa_secret');
-    if (totpSecret) {
-      document.getElementById('loginStep1').style.display = 'none';
-      document.getElementById('loginStep2').style.display = 'block';
-      document.getElementById('loginTotp').focus();
-    } else {
-      grantAccess();
-    }
-  } else {
-    warnIfAdminPasswordNotDeployed();
-  }
+async function checkAuth() {
+  try {
+    const { data } = await sb.auth.getSession();
+    if (data && data.session) { grantAccess(); return; }
+  } catch (e) { console.error('getSession', e); }
 }
 
 function grantAccess() {
-  sessionStorage.setItem('rig_admin', 'ok');
   document.getElementById('loginOverlay').style.display = 'none';
   document.getElementById('appWrapper').style.display = 'flex';
   autoPubRestorePrefs();
   init().catch(err => {
     console.error('Errore inizializzazione:', err);
-    document.getElementById('immobiliTableWrap').innerHTML = '<div class="empty-state"><h3>Errore di connessione</h3><p style="margin-top:8px;font-size:0.82rem;color:var(--rosso)">Impossibile caricare i dati. Ricarica la pagina.</p></div>';
+    document.getElementById('immobiliTableWrap').innerHTML = '<div class="empty-state"><h3>Errore di connessione</h3><p style="margin-top:8px;font-size:0.82rem;color:var(--caffe3)">' + (err && err.message ? err.message : err) + '</p></div>';
   });
   handleHashNavigation();
 }
 
-function doLogin() {
+async function doLogin() {
   const errEl = document.getElementById('loginError');
-  if (warnIfAdminPasswordNotDeployed()) return;
-  const pass = document.getElementById('loginPass').value.trim();
-  if (pass !== ADMIN_PASSWORD) {
-    errEl.textContent = 'Password non corretta.';
+  const email = (document.getElementById('loginEmail').value || '').trim();
+  const pass = document.getElementById('loginPass').value;
+  errEl.style.display = 'none';
+  if (!email || !pass) {
+    errEl.textContent = 'Inserisci email e password.';
+    errEl.style.display = 'block';
+    return;
+  }
+  const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
+  if (error || !data || !data.session) {
+    errEl.textContent = 'Email o password non corrette.';
     errEl.style.display = 'block';
     document.getElementById('loginPass').style.borderColor = 'var(--rosso)';
     return;
   }
-  errEl.textContent = 'Password non corretta';
-  errEl.style.display = 'none';
+  document.getElementById('loginPass').value = '';
   document.getElementById('loginPass').style.borderColor = '';
-
-  // Password OK — check if 2FA is enabled
-  const totpSecret = localStorage.getItem('rig_2fa_secret');
-  if (totpSecret) {
-    // 2FA is enabled — show TOTP step
-    document.getElementById('loginStep1').style.display = 'none';
-    document.getElementById('loginStep2').style.display = 'block';
-    document.getElementById('loginTotp').value = '';
-    document.getElementById('loginTotp').focus();
-  } else {
-    // No 2FA configured — grant access directly (2FA can be set up from Settings)
-    grantAccess();
-  }
+  grantAccess();
 }
 
 function verifyTotp() {
@@ -5577,6 +5529,9 @@ function handleHashNavigation() {
   }
 }
 
+document.getElementById('loginEmail').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
 document.getElementById('loginPass').addEventListener('keydown', e => {
   if (e.key === 'Enter') doLogin();
 });
@@ -5587,8 +5542,13 @@ document.getElementById('setupTotpCode').addEventListener('keydown', e => {
   if (e.key === 'Enter') confirmTotpSetup();
 });
 
-function doLogout() {
-  sessionStorage.removeItem('rig_admin');
+async function _adminAccessToken() {
+  const { data } = await sb.auth.getSession();
+  return (data && data.session && data.session.access_token) || SUPABASE_KEY;
+}
+
+async function doLogout() {
+  try { await sb.auth.signOut(); } catch (e) {}
   location.reload();
 }
 
@@ -6825,21 +6785,18 @@ async function duplicateImmobile(id) {
 
 /** Toggle attivo/evidenza: RPC (affidabile) poi UPDATE con header admin. */
 async function _immobilePatchBool(id, patch, okMsg) {
-  const secret = typeof RIG_ADMIN_RLS_SECRET !== 'undefined' ? RIG_ADMIN_RLS_SECRET : '';
-  let data = null;
+    let data = null;
   let error = null;
 
-  if (patch.attivo !== undefined && Object.keys(patch).length === 1 && secret) {
+  if (patch.attivo !== undefined && Object.keys(patch).length === 1) {
     ({ data, error } = await sb.rpc('rig_admin_set_attivo', {
       p_id: id,
-      p_attivo: !!patch.attivo,
-      p_secret: secret
+      p_attivo: !!patch.attivo
     }));
-  } else if (patch.in_evidenza !== undefined && Object.keys(patch).length === 1 && secret) {
+  } else if (patch.in_evidenza !== undefined && Object.keys(patch).length === 1) {
     ({ data, error } = await sb.rpc('rig_admin_set_evidenza', {
       p_id: id,
-      p_in_evidenza: !!patch.in_evidenza,
-      p_secret: secret
+      p_in_evidenza: !!patch.in_evidenza
     }));
   }
 
@@ -6854,9 +6811,9 @@ async function _immobilePatchBool(id, patch, okMsg) {
 
   if (error) {
     const hint = (error.message || '').includes('admin_unauthorized')
-      ? ' Segreto admin non valido: allinea RIG_ADMIN_RLS_SECRET in admin.html con righetto_admin_secret() in Supabase.'
+      ? ' Non sei collegato come admin: esci e rientra con il login.'
       : (error.message || '').includes('Could not find the function')
-        ? ' Esegui sql/rig-admin-rpc-immobili.sql in Supabase, oppure fai deploy di admin.html con header x-righetto-admin.'
+        ? ' Esegui sql/rig-admin-rpc-immobili.sql in Supabase, oppure poi ricarica la pagina admin.'
         : '';
     toast('Errore Supabase: ' + error.message + hint, 'error');
     return false;
@@ -15698,8 +15655,7 @@ showSection = function(name) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + SUPABASE_KEY,
-          'x-righetto-admin': RIG_ADMIN_RLS_SECRET
+          'Authorization': 'Bearer ' + await _adminAccessToken()
         },
         body: JSON.stringify({
           action: 'send_test',
@@ -15825,8 +15781,7 @@ showSection = function(name) {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + SUPABASE_KEY,
-            'x-righetto-admin': RIG_ADMIN_RLS_SECRET
+            'Authorization': 'Bearer ' + await _adminAccessToken()
           },
           body: JSON.stringify({
             action: 'send_single',
