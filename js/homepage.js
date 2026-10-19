@@ -798,6 +798,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'una domanda non costa nulla: perché contattarci può cambiarti la vita': { img: 'img/blog/blog-una-domanda-non-costa-nulla-card.webp', url: 'blog-una-domanda-non-costa-nulla' },
     'casa non si vende padova strategia 2026': { img: 'img/blog/blog-casa-non-si-vende-padova-strategia-2026-hero.webp', url: 'blog-casa-non-si-vende-padova-strategia-2026' },
     'bonus mobili barriere architettoniche 2026 padova': { img: 'img/blog/blog-bonus-mobili-barriere-architettoniche-2026-padova-hero.webp', url: 'blog-bonus-mobili-barriere-architettoniche-2026-padova' },
     'legge bilancio 198 bonus edilizi 2026 padova': { img: 'img/blog/blog-legge-bilancio-198-2026-bonus-edilizi-padova-hero.webp', url: 'blog-legge-bilancio-198-2026-bonus-edilizi-padova' },
@@ -957,6 +958,7 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    { titolo: "Una domanda non costa nulla: perché contattarci può cambiarti la vita", categoria: "Vita d'agenzia", data: '2026-10-19', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-una-domanda-non-costa-nulla-card.webp', url_statico: 'blog-una-domanda-non-costa-nulla' },
     {
       "titolo": "Casa non si vende a Padova: strategia oltre il prezzo (2026)",
       "categoria": "Guida proprietari",

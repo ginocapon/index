@@ -195,6 +195,12 @@ const FAQ_DATA = [
   {k: ['under 36'], r: "Le esenzioni fiscali prima casa under 36 non si applicano ai nuovi rogiti del 2026: riguardano gli atti dal 26 maggio 2021 al 31 dicembre 2023 e, nella proroga, i preliminari sottoscritti e registrati entro il 31 dicembre 2023 con rogito entro il 31 dicembre 2024. Il Fondo di Garanzia Consap e' una misura distinta: i giovani sotto i 36 anni rientrano nelle categorie ammesse; la garanzia ordinaria e' il 50% della quota capitale e puo' essere elevata, alle condizioni previste, per mutui oltre l'80% del prezzo comprensivo degli oneri accessori. La disciplina della garanzia elevata e' prorogata al 31 dicembre 2027. L'importo del mutuo non puo' superare 250.000 euro e la banca decide l'erogazione. Non e' un'esenzione dalle imposte ne' un diritto automatico al mutuo al 100%.\n\nFonti (verificate il 10 ottobre 2026): [Agenzia delle Entrate](https://www.agenziaentrate.gov.it/portale/le-agevolazioni-prima-casa-under-36), [Consap](https://www.consap.it/fondo-prima-casa/)."},
   // ── INFO AGENZIA ──
   {
+    k: ['domanda', 'informazione', 'curiosità', 'chiedere', 'costa chiedere'],
+    r: '💬 **Una domanda non costa nulla**\n\nChiedere un\'informazione è **gratuito e senza impegno**: puoi telefonare, scrivere su WhatsApp o passare in ufficio anche solo per un dubbio. Si parla di incarico solo se un giorno lo decidi tu.\n\n📞 **049.8843484** · WhatsApp **349 736 5930** · Via Roma 96, Limena',
+    blog: 'blog-una-domanda-non-costa-nulla',
+    blogTitle: 'Una domanda non costa nulla'
+  },
+  {
     k: ['orari', 'apertura', 'chiuso', 'aperto', 'quando'],
     r: '🕐 **Orari Righetto Immobiliare**\nLunedì–Venerdì: 9:00–13:00 / 15:00–19:00\nSabato: 9:00–12:30\nDomenica: Chiuso\n\n📞 Tel: 049.8843484 · Cell: 349 736 5930\n📧 info@righettoimmobiliare.it'
   },
