@@ -51,6 +51,16 @@ function asteStimaHtml(r) {
   return '<br><span title="' + asteEsc(tip) + '" style="display:inline-block;margin-top:3px;font-size:.8rem;font-weight:800;color:#b00020;cursor:help">stima vendita \u20AC ' + asteFmtMila(r.prezzo_stimato_min) + '\u2013' + asteFmtMila(r.prezzo_stimato_max) + ' mila</span>';
 }
 
+function asteVotoHtml(r) {
+  if (r.voto === null || r.voto === undefined || r.voto === '') return '';
+  const v = Number(r.voto);
+  if (!v) return '';
+  const col = v >= 7 ? '#1e7d4f' : (v >= 5 ? '#b8860b' : '#c0392b');
+  const bg = v >= 7 ? '#eaf6ea' : (v >= 5 ? '#fff8e1' : '#fdecea');
+  const tip = 'Voto ' + v + '/10' + (r.voto_motivo ? ' \u2014 ' + r.voto_motivo : '') + ' (giudizio interno di prima lettura; il setaccio finale resta tuo)';
+  return ' <span title="' + asteEsc(tip) + '" style="display:inline-block;min-width:20px;text-align:center;font-size:.8rem;font-weight:800;color:' + col + ';background:' + bg + ';border:1.2px solid ' + col + ';border-radius:6px;padding:1px 5px;cursor:help;vertical-align:1px">' + v + '</span>';
+}
+
 function asteDispLabel(d) {
   const t = (d || '').toUpperCase();
   if (t.includes('LIBER')) return '<span style="color:#27ae60;font-weight:600">libero</span>';
@@ -347,7 +357,7 @@ function asteRowHtml(r) {
     </select>${val && valDate ? `<br><span style="font-size:.72rem;color:#3A3000;font-weight:600">valutata il ${valDate}</span>` : ''}`;
   return `<tr style="border-bottom:1px solid var(--caffe3);cursor:pointer;${bg}" onclick="asteToggle('${id}')">
     <td style="padding:10px 12px">${r.foto_url ? `<img src="${asteEsc(r.foto_url)}" alt="" loading="lazy" style="width:64px;height:48px;object-fit:cover;border-radius:6px">` : '🏠'}</td>
-    <td style="padding:10px 12px"><strong>${asteEsc(r.comune)}</strong>${r.scheda_path ? ' <span title="Scheda PDF pronta" style="font-size:.82rem">\uD83D\uDCC4</span>' : ''} <span style="color:var(--caffe2)">(${asteEsc(r.provincia)})</span><br><span style="font-size:.76rem;color:var(--caffe2)">${asteEsc(r.indirizzo)}</span>
+    <td style="padding:10px 12px"><strong>${asteEsc(r.comune)}</strong>${asteVotoHtml(r)}${r.scheda_path ? ' <span title="Scheda PDF pronta" style="font-size:.82rem">\uD83D\uDCC4</span>' : ''} <span style="color:var(--caffe2)">(${asteEsc(r.provincia)})</span><br><span style="font-size:.76rem;color:var(--caffe2)">${asteEsc(r.indirizzo)}</span>
       <div class="aste-m" onclick="event.stopPropagation()"><span class="aste-m-date">${asteFmtDt(r.data_asta)}</span>${valCell}<span class="aste-m-info">${asteEsc(r.tipologia || 'altro')} · ${asteEsc((r.disponibilita || 'n.d.').toLowerCase().includes('liber') ? 'libero' : (r.disponibilita || '').toLowerCase().includes('occup') ? 'occupato' : 'n.d.')}</span></div></td>
     <td class="aste-c-tipo" style="padding:10px 12px;white-space:nowrap">${asteEsc(r.tipologia || 'altro')}</td>
     <td style="padding:10px 12px"><strong style="white-space:nowrap">${asteFmtEur(r.prezzo_base)}</strong><br><span style="font-size:.74rem;color:var(--caffe2);white-space:nowrap">off. min ${asteFmtEur(r.offerta_minima)}</span>${asteStimaHtml(r)}</td>
