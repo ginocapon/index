@@ -45,6 +45,27 @@ function asteDispLabel(d) {
   return '<span style="color:var(--caffe2)">n.d.</span>';
 }
 
+
+// ═══ Scheda PDF riassuntiva (generata da Gianna su richiesta WhatsApp) ═══
+const ASTE_WA_NUMBER = '16508702892';   // WhatsApp di Gianna (Instinct)
+const ASTE_SCHEDE_BUCKET = 'aste-pratica';
+
+function asteWaUrl(r) {
+  const msg = 'Genera scheda asta ' + r.id_pvp + ' - ' + (r.comune || '') + ', ' + (r.indirizzo || '');
+  return 'https://wa.me/' + ASTE_WA_NUMBER + '?text=' + encodeURIComponent(msg);
+}
+
+async function asteApriScheda(id) {
+  const r = asteRows.find(x => x.id === id);
+  if (!r || !r.scheda_path) { toast('Nessuna scheda salvata per questa asta', 'error'); return; }
+  const { data, error } = await sb.storage.from(ASTE_SCHEDE_BUCKET).createSignedUrl(r.scheda_path, 300);
+  if (error || !data || !data.signedUrl) {
+    toast('Scheda non raggiungibile: manca il bucket "' + ASTE_SCHEDE_BUCKET + '" o la colonna scheda_path (sql/aste-scheda-pdf.sql)?', 'error');
+    return;
+  }
+  window.open(data.signedUrl, '_blank', 'noopener');
+}
+
 async function asteLoad(force) {
   if (asteLoaded && !force) { asteRender(); return; }
   const body = document.getElementById('asteTableBody');
@@ -276,7 +297,7 @@ function asteRowHtml(r) {
     </select>${val && valDate ? `<br><span style="font-size:.72rem;color:#3A3000;font-weight:600">valutata il ${valDate}</span>` : ''}`;
   return `<tr style="border-bottom:1px solid var(--caffe3);cursor:pointer;${bg}" onclick="asteToggle('${id}')">
     <td style="padding:10px 12px">${r.foto_url ? `<img src="${asteEsc(r.foto_url)}" alt="" loading="lazy" style="width:64px;height:48px;object-fit:cover;border-radius:6px">` : '🏠'}</td>
-    <td style="padding:10px 12px"><strong>${asteEsc(r.comune)}</strong> <span style="color:var(--caffe2)">(${asteEsc(r.provincia)})</span><br><span style="font-size:.76rem;color:var(--caffe2)">${asteEsc(r.indirizzo)}</span>
+    <td style="padding:10px 12px"><strong>${asteEsc(r.comune)}</strong>${r.scheda_path ? ' <span title="Scheda PDF pronta" style="font-size:.82rem">\uD83D\uDCC4</span>' : ''} <span style="color:var(--caffe2)">(${asteEsc(r.provincia)})</span><br><span style="font-size:.76rem;color:var(--caffe2)">${asteEsc(r.indirizzo)}</span>
       <div class="aste-m" onclick="event.stopPropagation()"><span class="aste-m-date">${asteFmtDt(r.data_asta)}</span>${valCell}<span class="aste-m-info">${asteEsc(r.tipologia || 'altro')} · ${asteEsc((r.disponibilita || 'n.d.').toLowerCase().includes('liber') ? 'libero' : (r.disponibilita || '').toLowerCase().includes('occup') ? 'occupato' : 'n.d.')}</span></div></td>
     <td class="aste-c-tipo" style="padding:10px 12px;white-space:nowrap">${asteEsc(r.tipologia || 'altro')}</td>
     <td style="padding:10px 12px;white-space:nowrap"><strong>${asteFmtEur(r.prezzo_base)}</strong><br><span style="font-size:.74rem;color:var(--caffe2)">off. min ${asteFmtEur(r.offerta_minima)}</span></td>
@@ -294,7 +315,11 @@ function asteRowHtml(r) {
           <p style="font-size:.85rem;line-height:1.6;margin:0 0 10px">${asteEsc(r.descrizione)}</p>
           <p style="font-size:.76rem;color:var(--caffe2);margin:0 0 10px">${asteEsc(r.tipologia_bene)} · ${asteEsc(r.modalita_vendita)}</p>
           <div style="margin-bottom:10px">${docs || '<span style="font-size:.78rem;color:var(--caffe2)">Nessun documento</span>'}</div>
-          <a href="${asteEsc(r.link_dettaglio)}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Apri scheda ufficiale ↗</a>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+            <a href="${asteEsc(r.link_dettaglio)}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Apri scheda ufficiale ↗</a>
+            <a href="${asteWaUrl(r)}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" title="Apre WhatsApp verso Gianna con la richiesta gia' scritta: ti arriva la scheda PDF riassuntiva">${r.scheda_path ? '🔄 Rigenera scheda PDF' : '💬 Genera scheda PDF'}</a>
+            ${r.scheda_path ? `<button type="button" class="btn btn-primary btn-sm" style="background:#2e7d32;color:#fff" onclick="event.stopPropagation();asteApriScheda('${id}')">📄 Apri scheda PDF</button>` : ''}
+          </div>
           <div style="margin-top:12px">
             <label style="font-size:.72rem;color:var(--caffe2)">Note private</label>
             <div style="display:flex;gap:8px;margin-top:4px">
