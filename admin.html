@@ -5243,16 +5243,17 @@ META_IG_USER_ID=...</pre>
                 <tr style="background:var(--sfondo);text-align:left">
                   <th style="padding:12px 14px">Foto</th>
                   <th style="padding:12px 14px;cursor:pointer" onclick="asteSortBy('comune')">Comune ⇅</th>
-                  <th style="padding:12px 14px;cursor:pointer" onclick="asteSortBy('tipologia')">Tipologia ⇅</th>
+                  <th class="aste-c-tipo" style="padding:12px 14px;cursor:pointer" onclick="asteSortBy('tipologia')">Tipologia ⇅</th>
                   <th style="padding:12px 14px;cursor:pointer" onclick="asteSortBy('prezzo_base')">Prezzo base ⇅</th>
-                  <th style="padding:12px 14px;cursor:pointer" onclick="asteSortBy('data_asta')">Data asta ⇅</th>
-                  <th style="padding:12px 14px">Stato</th>
-                  <th style="padding:12px 14px">Tribunale / proc.</th>
+                  <th class="aste-c-data" style="padding:12px 14px;cursor:pointer" onclick="asteSortBy('data_asta')">Data asta ⇅</th>
+                  <th class="aste-c-stato" style="padding:12px 14px">Stato</th>
+                  <th class="aste-c-trib" style="padding:12px 14px">Tribunale / proc.</th>
+                  <th class="aste-c-val" style="padding:12px 14px">Valutazione</th>
                   <th style="padding:12px 14px"></th>
                 </tr>
               </thead>
               <tbody id="asteTableBody">
-                <tr><td colspan="8" style="padding:24px;text-align:center;color:var(--caffe2)">Caricamento…</td></tr>
+                <tr><td colspan="9" style="padding:24px;text-align:center;color:var(--caffe2)">Caricamento…</td></tr>
               </tbody>
             </table>
           </div>
@@ -17481,7 +17482,7 @@ async function initAuditSection() {
 </script>
 <script src="js/admin-documenti-generali.js?v=6"></script>
 <script src="js/admin-perizie.js?v=13"></script>
-<script src="js/admin-aste.js?v=1"></script>
+<script src="js/admin-aste.js?v=2"></script>
 <script>
 (function(){
 'use strict';
@@ -17520,3 +17521,4 @@ window.showSection('home');
 </script>
 </body>
 </html>
+
