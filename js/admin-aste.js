@@ -38,6 +38,19 @@ function asteFmtDt(iso) {
 function asteEsc(s) {
   return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
+
+function asteFmtMila(v) {
+  return Math.round(Number(v) / 1000).toLocaleString('it-IT');
+}
+// Stima di vendita in rosso: compilata da Gianna dopo ogni import, solo provincia di Padova.
+function asteStimaHtml(r) {
+  if (!r.prezzo_stimato_min || !r.prezzo_stimato_max) return '';
+  const fonte = r.prezzo_stimato_fonte || 'Immobiliare.it, prezzi richiesti (non compravendite)';
+  const dt = r.prezzo_stimato_data ? new Date(r.prezzo_stimato_data).toLocaleDateString('it-IT') : '';
+  const tip = 'Stima interna da verificare, non una perizia. Fonte: ' + fonte + (dt ? ' · agg. ' + dt : '');
+  return '<br><span title="' + asteEsc(tip) + '" style="display:inline-block;margin-top:3px;font-size:.8rem;font-weight:800;color:#b00020;cursor:help">stima vendita \u20AC ' + asteFmtMila(r.prezzo_stimato_min) + '\u2013' + asteFmtMila(r.prezzo_stimato_max) + ' mila</span>';
+}
+
 function asteDispLabel(d) {
   const t = (d || '').toUpperCase();
   if (t.includes('LIBER')) return '<span style="color:#27ae60;font-weight:600">libero</span>';
@@ -55,6 +68,19 @@ function asteWaUrl(r) {
   return 'https://wa.me/' + ASTE_WA_NUMBER + '?text=' + encodeURIComponent(msg);
 }
 
+// Nome file scheda secondo la regola di Gino (20/10/2026): numero + via civico + comune
+function asteNomeScheda(r) {
+  const parts = [String(r.id_pvp || r.id)];
+  if (r.indirizzo) parts.push(String(r.indirizzo).replace(/\//g, '-'));
+  if (r.comune) parts.push(r.comune + (r.provincia ? ' (' + r.provincia + ')' : ''));
+  return parts.join(' - ') + '.pdf';
+}
+
+function asteIsIOS() {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+}
+
 async function asteApriScheda(id) {
   const r = asteRows.find(x => x.id === id);
   if (!r || !r.scheda_path) { toast('Nessuna scheda salvata per questa asta', 'error'); return; }
@@ -63,7 +89,31 @@ async function asteApriScheda(id) {
     toast('Scheda non raggiungibile: manca il bucket "' + ASTE_SCHEDE_BUCKET + '" o la colonna scheda_path (sql/aste-scheda-pdf.sql)?', 'error');
     return;
   }
-  window.open(data.signedUrl, '_blank', 'noopener');
+  // iPad/iPhone: anteprima nel visualizzatore PDF nativo di Safari (nuova scheda, niente download).
+  // Perche' si veda e non si scarichi, il file va caricato nel bucket con contentType 'application/pdf'.
+  if (asteIsIOS()) { window.open(data.signedUrl, '_blank', 'noopener'); return; }
+  asteMostraScheda(data.signedUrl, asteNomeScheda(r));
+}
+
+// Anteprima a schermo del PDF (desktop): overlay con il PDF dentro la pagina, senza scaricare.
+function asteMostraScheda(url, nome) {
+  const old = document.getElementById('asteSchedaOverlay');
+  if (old) old.remove();
+  const ov = document.createElement('div');
+  ov.id = 'asteSchedaOverlay';
+  ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:10px';
+  ov.innerHTML =
+    '<div style="background:#fff;width:100%;max-width:1000px;height:94%;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 40px rgba(0,0,0,.35)">' +
+      '<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid #e7dfcc;flex-wrap:wrap">' +
+        '<strong style="flex:1 1 220px;font-size:.88rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">\uD83D\uDCC4 ' + asteEsc(nome) + '</strong>' +
+        '<a href="' + url + '" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Apri in nuova scheda \u2197</a>' +
+        '<a href="' + url + '" download="' + nome.replace(/"/g, '') + '" class="btn btn-secondary btn-sm">\u2B07 Scarica</a>' +
+        '<button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById(\'asteSchedaOverlay\').remove()">Chiudi \u2715</button>' +
+      '</div>' +
+      '<embed src="' + url + '" type="application/pdf" style="flex:1;width:100%;border:0;background:#525659">' +
+    '</div>';
+  ov.addEventListener('click', function (e) { if (e.target === ov) ov.remove(); });
+  document.body.appendChild(ov);
 }
 
 async function asteLoad(force) {
@@ -300,7 +350,7 @@ function asteRowHtml(r) {
     <td style="padding:10px 12px"><strong>${asteEsc(r.comune)}</strong>${r.scheda_path ? ' <span title="Scheda PDF pronta" style="font-size:.82rem">\uD83D\uDCC4</span>' : ''} <span style="color:var(--caffe2)">(${asteEsc(r.provincia)})</span><br><span style="font-size:.76rem;color:var(--caffe2)">${asteEsc(r.indirizzo)}</span>
       <div class="aste-m" onclick="event.stopPropagation()"><span class="aste-m-date">${asteFmtDt(r.data_asta)}</span>${valCell}<span class="aste-m-info">${asteEsc(r.tipologia || 'altro')} · ${asteEsc((r.disponibilita || 'n.d.').toLowerCase().includes('liber') ? 'libero' : (r.disponibilita || '').toLowerCase().includes('occup') ? 'occupato' : 'n.d.')}</span></div></td>
     <td class="aste-c-tipo" style="padding:10px 12px;white-space:nowrap">${asteEsc(r.tipologia || 'altro')}</td>
-    <td style="padding:10px 12px;white-space:nowrap"><strong>${asteFmtEur(r.prezzo_base)}</strong><br><span style="font-size:.74rem;color:var(--caffe2)">off. min ${asteFmtEur(r.offerta_minima)}</span></td>
+    <td style="padding:10px 12px"><strong style="white-space:nowrap">${asteFmtEur(r.prezzo_base)}</strong><br><span style="font-size:.74rem;color:var(--caffe2);white-space:nowrap">off. min ${asteFmtEur(r.offerta_minima)}</span>${asteStimaHtml(r)}</td>
     <td class="aste-c-data" style="padding:10px 12px;white-space:nowrap"><span style="display:inline-block;background:#3A5578;color:#fff;font-size:1.02rem;font-weight:800;padding:5px 10px;border-radius:8px;letter-spacing:.2px">${asteFmtDt(r.data_asta)}</span><br><span style="font-size:.74rem;color:var(--caffe2)">offerte entro ${asteFmtDt(r.termine_offerte)}</span></td>
     <td class="aste-c-stato" style="padding:10px 12px">${asteDispLabel(r.disponibilita)}</td>
     <td class="aste-c-trib" style="padding:10px 12px;font-size:.78rem">${asteEsc(r.tribunale)}<br><span style="color:var(--caffe2)">proc. ${asteEsc(r.procedura)}</span></td>
@@ -363,6 +413,13 @@ function asteRender() {
     const head = `<tr><td colspan="9" style="padding:10px 16px;background:linear-gradient(90deg,var(--sfondo),#fff);border-top:2px solid var(--caffe3);font-weight:700;font-size:.85rem;letter-spacing:.3px">📍 ${asteEsc(prov.toUpperCase())} <span style="color:var(--caffe2);font-weight:500">— ${groups[prov].length} aste</span></td></tr>`;
     return head + groups[prov].map(asteRowHtml).join('');
   }).join('');
+
+  // Link diretto all'anteprima: admin.html#scheda-<id riga> apre la scheda a schermo
+  const m = (location.hash || '').match(/^#scheda-(.+)$/);
+  if (m) {
+    history.replaceState(null, '', location.pathname + location.search);
+    asteApriScheda(m[1]);
+  }
 }
 
 function asteToggle(id) {
