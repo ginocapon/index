@@ -21,3 +21,7 @@
 - Backup: branch `backup/pre-push-20261021-admin-aste`, tag `backup-admin-aste-20261021` (entrambi su origin).
 - Verifica live 10:42: `js/admin-aste.js` e `admin.html` su righettoimmobiliare.it contengono astePinIcon, zoom:1.2, asteMapWrap/asteMapBtn.
 - Device flow GitHub: primo codice 1F41-1466 scaduto per errore procedurale (token perso prima del push); secondo codice 9A8D-46A5 autorizzato da Gino ore 10:40, push immediato, token non salvato su disco.
+
+## Mappa: fix 21/10 ore 11:42 (commit in cima al push)
+- Info non fuorviante quando le Interessanti non hanno coordinate PVP (solo ~meta' delle aste le ha).
+- Spillo anche senza coordinate: geocoding gratuito Nominatim (indirizzo, poi comune come chiesto da Gino), cache in localStorage, tooltip con "posizione approssimata".
