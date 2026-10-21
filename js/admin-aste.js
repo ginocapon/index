@@ -61,6 +61,78 @@ function asteVotoHtml(r) {
   return ' <span title="' + asteEsc(tip) + '" style="display:inline-block;min-width:20px;text-align:center;font-size:.8rem;font-weight:800;color:' + col + ';background:' + bg + ';border:1.2px solid ' + col + ';border-radius:6px;padding:1px 5px;cursor:help;vertical-align:1px">' + v + '</span>';
 }
 
+function asteFotoHtml(r) {
+  const id = r.id;
+  const n = (r.foto_sopralluogo || []).length;
+  return `<div id="asteFotoBox-${id}" style="margin-top:12px;border:1.5px dashed #7a9ab8;border-radius:8px;padding:12px;background:#fbfdff;cursor:pointer"
+    onclick="event.stopPropagation();document.getElementById('asteFotoIn-${id}').click()"
+    ondragover="event.preventDefault();event.stopPropagation();this.style.background='#e8f0fb'"
+    ondragleave="event.preventDefault();event.stopPropagation();this.style.background='#fbfdff'"
+    ondrop="event.preventDefault();event.stopPropagation();this.style.background='#fbfdff';asteFotoFiles('${id}',event.dataTransfer.files)">
+    <div style="font-size:.8rem;font-weight:700;color:#14315c">\uD83D\uDCF7 Foto sopralluogo di Gino${n ? ' (' + n + ')' : ''}</div>
+    <div id="asteFotoTh-${id}" style="margin:6px 0;display:flex;gap:6px;flex-wrap:wrap" onclick="event.stopPropagation()"></div>
+    <div id="asteFotoHint-${id}" style="font-size:.8rem;color:#3A5578;font-weight:600">Trascina qui le foto col mouse, oppure tocca questo riquadro per sceglierle: il caricamento parte da solo.</div>
+    <input type="file" id="asteFotoIn-${id}" accept="image/*" multiple style="display:none" onclick="event.stopPropagation()" onchange="asteFotoFiles('${id}',this.files)">
+    <div style="font-size:.72rem;color:#7a9ab8;margin-top:6px">Archivio privato (le vedi solo tu). Poi tocca "\uD83D\uDD04 Rigenera scheda PDF" qui sopra: Gianna le mette nella scheda in cima, sotto la fascia blu.</div>
+  </div>`;
+}
+
+async function asteFotoRender(id) {
+  const r = asteRows.find(x => x.id === id);
+  const box = document.getElementById('asteFotoTh-' + id);
+  if (!r || !box) return;
+  const paths = r.foto_sopralluogo || [];
+  if (!paths.length) { box.innerHTML = '<span style="font-size:.74rem;color:#7a9ab8">Nessuna foto ancora: scattale al sopralluogo e caricale qui.</span>'; return; }
+  const { data, error } = await sb.storage.from(ASTE_SCHEDE_BUCKET).createSignedUrls(paths, 600);
+  if (error || !data) { box.innerHTML = '<span style="font-size:.74rem;color:#c0392b">Errore lettura foto.</span>'; return; }
+  box.innerHTML = data.map((d, i) => `<span style="position:relative;display:inline-block"><img src="${d.signedUrl}" alt="foto sopralluogo" style="height:64px;border-radius:6px;border:1px solid var(--caffe3)"><button type="button" title="Togli dalla scheda" onclick="event.stopPropagation();asteFotoDel('${id}',${i})" style="position:absolute;top:-6px;right:-6px;background:#c0392b;color:#fff;border:0;border-radius:50%;width:18px;height:18px;font-size:.7rem;line-height:1;cursor:pointer">\u00D7</button></span>`).join('');
+}
+
+async function asteFotoFiles(id, files) {
+  const r = asteRows.find(x => x.id === id);
+  const hint = document.getElementById('asteFotoHint-' + id);
+  if (!r || !files || !files.length) return;
+  const base = 'sopralluogo/' + String(r.id_pvp || r.id) + '/';
+  const cur = (r.foto_sopralluogo || []).slice();
+  if (hint) hint.textContent = 'Caricamento foto in corso\u2026';
+  toast('Caricamento foto\u2026');
+  for (let i = 0; i < files.length; i++) {
+    const f = files[i];
+    const ext = ((f.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg');
+    const path = base + 'foto-' + Date.now() + '-' + i + '.' + ext;
+    const { error } = await sb.storage.from(ASTE_SCHEDE_BUCKET).upload(path, f, { contentType: f.type || 'image/jpeg', upsert: false });
+    if (error) {
+      if (hint) hint.textContent = 'Errore upload: ' + error.message;
+      toast('Errore upload: ' + error.message, 'error');
+      return;
+    }
+    cur.push(path);
+  }
+  const { error } = await sb.from('aste_immobili').update({ foto_sopralluogo: cur, updated_at: new Date().toISOString() }).eq('id', id);
+  if (error) {
+    if (hint) hint.textContent = 'Foto caricate ma elenco non salvato: ' + error.message;
+    toast('Elenco foto non salvato: ' + error.message, 'error');
+    return;
+  }
+  r.foto_sopralluogo = cur;
+  const inp = document.getElementById('asteFotoIn-' + id);
+  if (inp) inp.value = '';
+  if (hint) hint.textContent = 'Trascina qui le foto col mouse, oppure tocca questo riquadro per sceglierle: il caricamento parte da solo.';
+  await asteFotoRender(id);
+  toast('Foto salvate (' + cur.length + '). Ora tocca "Rigenera scheda PDF" per averle nella scheda.');
+}
+
+async function asteFotoDel(id, idx) {
+  const r = asteRows.find(x => x.id === id);
+  if (!r) return;
+  const cur = (r.foto_sopralluogo || []).slice();
+  cur.splice(idx, 1);
+  const { error } = await sb.from('aste_immobili').update({ foto_sopralluogo: cur, updated_at: new Date().toISOString() }).eq('id', id);
+  if (error) { toast('Errore salvataggio: ' + error.message, 'error'); return; }
+  r.foto_sopralluogo = cur;
+  await asteFotoRender(id);
+}
+
 function asteDispLabel(d) {
   const t = (d || '').toUpperCase();
   if (t.includes('LIBER')) return '<span style="color:#27ae60;font-weight:600">libero</span>';
@@ -387,6 +459,7 @@ function asteRowHtml(r) {
               <button class="btn btn-secondary btn-sm" onclick="asteSaveNote('${id}')">Salva</button>
             </div>
           </div>
+          ${asteFotoHtml(r)}
         </div>
       </div>
     </td>
@@ -434,7 +507,10 @@ function asteRender() {
 
 function asteToggle(id) {
   const el = document.getElementById('asteDet-' + id);
-  if (el) el.style.display = el.style.display === 'none' ? '' : 'none';
+  if (el) {
+    el.style.display = el.style.display === 'none' ? '' : 'none';
+    if (el.style.display !== 'none') asteFotoRender(id);
+  }
 }
 
 async function asteSaveNote(id) {
