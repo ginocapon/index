@@ -30,3 +30,7 @@
 - Autorizzazione Gino ore 11:42 ("procedi") + device flow fresco (codice inserito 11:48). Backup: branch backup/pre-push-20261021-mappa-fix + tag backup-admin-mappa-fix-20261021 su origin.
 - Geocoding con via pulita (n./nn./int./scala/"ai civici" rimossi, primo civico): test reale 35/35 aste senza coordinate risolte (28 indirizzo esatto, 7 comune con dicitura dedicata, 0 mancanti).
 - Verifica live 11:49: admin-aste.js aggiornato servito dal sito.
+
+## Push mappa altezza 21/10 ore 11:58 (2e9f0757..ce65cdfa)
+- Riquadro mappa +30% SOLO desktop (546px); telefono invariato 420px via media query max-width 768px. Richiesta Gino 11:53, ok 11:56 con vincolo desktop-only, device flow fresco (codice inserito 11:57:59).
+- Backup: branch backup/pre-push-20261021-mappa-altezza + tag backup-admin-mappa-altezza-20261021 su origin.
