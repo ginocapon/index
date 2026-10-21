@@ -25,3 +25,8 @@
 ## Mappa: fix 21/10 ore 11:42 (commit in cima al push)
 - Info non fuorviante quando le Interessanti non hanno coordinate PVP (solo ~meta' delle aste le ha).
 - Spillo anche senza coordinate: geocoding gratuito Nominatim (indirizzo, poi comune come chiesto da Gino), cache in localStorage, tooltip con "posizione approssimata".
+
+## Push mappa fix completato 21/10 ore 11:48 (c7acd41d..2e9f0757)
+- Autorizzazione Gino ore 11:42 ("procedi") + device flow fresco (codice inserito 11:48). Backup: branch backup/pre-push-20261021-mappa-fix + tag backup-admin-mappa-fix-20261021 su origin.
+- Geocoding con via pulita (n./nn./int./scala/"ai civici" rimossi, primo civico): test reale 35/35 aste senza coordinate risolte (28 indirizzo esatto, 7 comune con dicitura dedicata, 0 mancanti).
+- Verifica live 11:49: admin-aste.js aggiornato servito dal sito.
