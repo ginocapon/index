@@ -441,7 +441,7 @@ function asteRowHtml(r) {
   </tr>
   <tr id="asteDet-${id}" style="display:none;background:${val === 'interessante' ? '#FFF7A8' : '#faf9f7'}">
     <td colspan="9" style="padding:16px 20px">
-      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;zoom:1.2">
         <div>${foto}</div>
         <div style="flex:1;min-width:280px">
           <p style="font-size:.85rem;line-height:1.6;margin:0 0 10px">${asteEsc(r.descrizione)}</p>
@@ -497,6 +497,8 @@ function asteRender() {
     return head + groups[prov].map(asteRowHtml).join('');
   }).join('');
 
+  if (asteMapVisible) asteLeafletEnsure(() => setTimeout(asteMapRender, 50));
+
   // Link diretto all'anteprima: admin.html#scheda-<id riga> apre la scheda a schermo
   const m = (location.hash || '').match(/^#scheda-(.+)$/);
   if (m) {
@@ -535,6 +537,92 @@ async function asteSetValutazione(id, v) {
   if (r) { r.valutazione = v || null; r.valutazione_data = when; }
   toast(v === 'scartato' ? 'Scartata: nascosta dall\'elenco (usa "Mostra scartate" per ritrovarla)' : (v ? 'Salvato: ' + v : 'Valutazione rimossa'), 'success');
   asteRender();
+}
+
+// -------------------- mappa OSM delle aste "Interessante" (tutto il Veneto) --------------------
+let asteMapObj = null;
+let asteMapLayer = null;
+let asteMapVisible = false;
+
+function asteLeafletEnsure(cb) {
+  if (window.L) { cb(); return; }
+  if (!document.getElementById('leafletCss')) {
+    const l = document.createElement('link');
+    l.id = 'leafletCss'; l.rel = 'stylesheet';
+    l.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+    document.head.appendChild(l);
+  }
+  if (document.getElementById('leafletJs')) {
+    const t = setInterval(() => { if (window.L) { clearInterval(t); cb(); } }, 120);
+    return;
+  }
+  const s = document.createElement('script');
+  s.id = 'leafletJs';
+  s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  s.onload = cb;
+  document.head.appendChild(s);
+}
+
+function asteMapToggle() {
+  const wrap = document.getElementById('asteMapWrap');
+  if (!wrap) return;
+  asteMapVisible = !asteMapVisible;
+  wrap.style.display = asteMapVisible ? '' : 'none';
+  const btn = document.getElementById('asteMapBtn');
+  if (btn) btn.style.background = asteMapVisible ? 'var(--oro)' : '';
+  if (asteMapVisible) asteLeafletEnsure(() => setTimeout(asteMapRender, 50));
+}
+
+function astePinIcon() {
+  const svg = '<svg width="26" height="38" viewBox="0 0 26 38" xmlns="http://www.w3.org/2000/svg">'
+    + '<defs><radialGradient id="astePinG" cx="35%" cy="30%" r="75%">'
+    + '<stop offset="0%" stop-color="#ff8a80"/><stop offset="45%" stop-color="#e53935"/><stop offset="100%" stop-color="#8e0000"/>'
+    + '</radialGradient></defs>'
+    + '<ellipse cx="13" cy="35.5" rx="7" ry="2.4" fill="rgba(0,0,0,.28)"/>'
+    + '<path d="M13 1 C6.4 1 1 6.4 1 13 c0 9 12 23 12 23 s12-14 12-23 C25 6.4 19.6 1 13 1 z" fill="url(#astePinG)" stroke="#7f0000" stroke-width="1"/>'
+    + '<circle cx="13" cy="13" r="5" fill="#fff" opacity=".92"/>'
+    + '</svg>';
+  return L.divIcon({ className: 'aste-pin', html: svg, iconSize: [26, 38], iconAnchor: [13, 36], tooltipAnchor: [0, -30] });
+}
+
+function asteMapRender() {
+  const el = document.getElementById('asteMap');
+  if (!el || !window.L) return;
+  if (!asteMapObj) {
+    asteMapObj = L.map(el).setView([45.55, 11.75], 8);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(asteMapObj);
+  }
+  setTimeout(() => asteMapObj.invalidateSize(), 80);
+  if (asteMapLayer) { asteMapObj.removeLayer(asteMapLayer); asteMapLayer = null; }
+  const inter = asteRows.filter(r => r.valutazione === 'interessante');
+  const conCoord = inter.filter(r => r.latitudine && r.longitudine);
+  const senzaCoord = inter.length - conCoord.length;
+  const info = document.getElementById('asteMapInfo');
+  if (info) {
+    info.textContent = conCoord.length
+      ? conCoord.length + ' aste Interessanti sulla mappa' + (senzaCoord ? ' (' + senzaCoord + ' senza coordinate PVP: non mappabili)' : '') + ' — passa sopra un pallino per i dettagli, toccalo per aprire la riga'
+      : 'Nessuna asta segnata come Interessante: usa la tendina "Valutazione" nelle righe sotto.';
+  }
+  if (!conCoord.length) { asteMapObj.setView([45.55, 11.75], 8); return; }
+  const group = L.featureGroup();
+  conCoord.forEach(r => {
+    const mk = L.marker([r.latitudine, r.longitudine], { icon: astePinIcon() });
+    mk.bindTooltip('<strong>' + asteEsc(r.comune) + '</strong> (' + asteEsc(r.provincia) + ')<br>' + asteEsc(r.indirizzo) +
+      '<br>' + asteFmtEur(r.prezzo_base) + ' · asta ' + asteFmtDt(r.data_asta), { direction: 'top', offset: [0, -8] });
+    mk.on('click', () => {
+      const det = document.getElementById('asteDet-' + r.id);
+      const row = det ? det.previousElementSibling : null;
+      if (row) row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (det && det.style.display === 'none') asteToggle(String(r.id));
+    });
+    group.addLayer(mk);
+  });
+  group.addTo(asteMapObj);
+  asteMapLayer = group;
+  asteMapObj.fitBounds(group.getBounds().pad(0.15));
 }
 
 function asteToggleScartate() {

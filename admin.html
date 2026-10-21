@@ -5233,10 +5233,15 @@ META_IG_USER_ID=...</pre>
               <select id="asteTipo" onchange="asteRender()" style="padding:8px 10px;border-radius:8px;font-size:0.82rem"><option value="">Tutte le tipologie</option></select>
               <input type="number" id="astePrezzoMax" placeholder="Prezzo max €" oninput="asteRender()" style="padding:8px 10px;border-radius:8px;font-size:0.82rem;width:130px">
               <input type="date" id="asteEntro" onchange="asteRender()" title="Asta entro il…" style="padding:8px 10px;border-radius:8px;font-size:0.82rem">
+              <button type="button" id="asteMapBtn" class="btn btn-primary btn-sm" style="color:var(--nero);border:none" onclick="asteMapToggle()">🗺 Mappa interessanti</button>
               <button type="button" class="btn btn-primary btn-sm" style="background:var(--oro);color:var(--nero);border:none" onclick="asteLoad(true)">↻ Aggiorna</button>
             </div>
           </div>
           <div id="asteProvChips" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:10px 16px;border-bottom:1px solid var(--caffe3);background:var(--bianco)"></div>
+          <div id="asteMapWrap" style="display:none;border-bottom:1px solid var(--caffe3);background:var(--bianco)">
+            <div id="asteMapInfo" style="padding:8px 16px 0;font-size:.76rem;color:var(--caffe2)"></div>
+            <div id="asteMap" style="height:420px;margin:8px 16px 12px;border-radius:10px;border:1px solid var(--caffe3)"></div>
+          </div>
           <div style="overflow-x:auto">
             <table class="data-table" style="width:100%;border-collapse:collapse;font-size:0.84rem">
               <thead>
