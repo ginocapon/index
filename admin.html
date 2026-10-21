@@ -5254,6 +5254,23 @@ META_IG_USER_ID=...</pre>
             @media (max-width: 768px) { #asteMap { height: 420px; } } /* telefono: tutto come prima, non sticky */
             .asteRowFlash { animation: asteRowFlashA 2.4s ease-out; }
             @keyframes asteRowFlashA { 0% { background-color: #ffd54f; } 100% { background-color: transparent; } }
+            /* testi +30% e piu' marcati su desktop, +15% su telefono (richiesta Gino 21/10 ore 12:12) */
+            .topbar-title { font-size: 1.95rem !important; font-weight: 700 !important; }
+            .topbar .btn { font-size: 0.98rem !important; font-weight: 700 !important; }
+            #sec-aste .table-head > div:first-child { font-size: 1.24rem !important; }
+            #sec-aste .table-head input, #sec-aste .table-head select, #sec-aste .table-head button { font-size: 1.07rem !important; font-weight: 600 !important; }
+            #asteProvChips button { font-size: 1.01rem !important; font-weight: 700 !important; }
+            #asteMapInfo { font-size: 0.99rem !important; color: var(--nero) !important; font-weight: 600 !important; }
+            #sec-aste th { font-size: 0.94rem !important; font-weight: 800 !important; color: var(--nero) !important; letter-spacing: .5px !important; }
+            @media (max-width: 768px) {
+              .topbar-title { font-size: 1.27rem !important; }
+              .topbar .btn { font-size: 0.83rem !important; }
+              #sec-aste .table-head > div:first-child { font-size: 1.09rem !important; }
+              #sec-aste .table-head input, #sec-aste .table-head select, #sec-aste .table-head button { font-size: 0.94rem !important; }
+              #asteProvChips button { font-size: 0.90rem !important; }
+              #asteMapInfo { font-size: 0.87rem !important; }
+              #sec-aste th { font-size: 0.83rem !important; }
+            }
           </style>
           </div>
           <div class="asteTableScroll" style="overflow-x:auto">
