@@ -5246,13 +5246,17 @@ META_IG_USER_ID=...</pre>
             @media (min-width: 769px) {
               #asteMapWrap { position: sticky; top: 64px; z-index: 30; box-shadow: 0 8px 16px rgba(43,33,26,.12); }
             }
+            /* FIX 12:15: lo sticky non funziona se un antenato ha overflow:hidden — la card della tabella aste lo toglie */
+            #sec-aste .table-wrap { overflow: visible; }
+            #sec-aste .table-wrap > .table-head { border-radius: 12px 12px 0 0; }
+            #sec-aste .asteTableScroll { border-radius: 0 0 12px 12px; }
             #asteMap { height: min(546px, 60vh); } /* desktop: +30%, mai oltre il 60% dello schermo */
             @media (max-width: 768px) { #asteMap { height: 420px; } } /* telefono: tutto come prima, non sticky */
             .asteRowFlash { animation: asteRowFlashA 2.4s ease-out; }
             @keyframes asteRowFlashA { 0% { background-color: #ffd54f; } 100% { background-color: transparent; } }
           </style>
           </div>
-          <div style="overflow-x:auto">
+          <div class="asteTableScroll" style="overflow-x:auto">
             <table class="data-table" style="width:100%;border-collapse:collapse;font-size:0.84rem">
               <thead>
                 <tr style="background:var(--sfondo);text-align:left">
