@@ -563,11 +563,24 @@ function asteLeafletEnsure(cb) {
   document.head.appendChild(s);
 }
 
+function asteMapStickyTop() {
+  const wrap = document.getElementById('asteMapWrap');
+  const tb = document.querySelector('.topbar');
+  if (wrap && tb) wrap.style.top = tb.offsetHeight + 'px';
+}
+
 function asteMapToggle() {
   const wrap = document.getElementById('asteMapWrap');
   if (!wrap) return;
   asteMapVisible = !asteMapVisible;
   wrap.style.display = asteMapVisible ? '' : 'none';
+  if (asteMapVisible) {
+    asteMapStickyTop();
+    if (!window._asteMapStickyBound) {
+      window._asteMapStickyBound = true;
+      window.addEventListener('resize', () => { if (asteMapVisible) asteMapStickyTop(); });
+    }
+  }
   const btn = document.getElementById('asteMapBtn');
   if (btn) btn.style.background = asteMapVisible ? 'var(--oro)' : '';
   if (asteMapVisible) asteLeafletEnsure(() => setTimeout(asteMapRender, 50));
@@ -617,7 +630,10 @@ function asteMapRender() {
     mk.on('click', () => {
       const det = document.getElementById('asteDet-' + r.id);
       const row = det ? det.previousElementSibling : null;
-      if (row) row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (row) {
+        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        row.classList.remove('asteRowFlash'); void row.offsetWidth; row.classList.add('asteRowFlash');
+      }
       if (det && det.style.display === 'none') asteToggle(String(r.id));
     });
     group.addLayer(mk);
@@ -677,7 +693,10 @@ async function asteMapGeocodeMissing(rows) {
     mk.on('click', () => {
       const det = document.getElementById('asteDet-' + r.id);
       const row = det ? det.previousElementSibling : null;
-      if (row) row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (row) {
+        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        row.classList.remove('asteRowFlash'); void row.offsetWidth; row.classList.add('asteRowFlash');
+      }
       if (det && det.style.display === 'none') asteToggle(String(r.id));
     });
     if (asteMapLayer) { mk.addTo(asteMapLayer); } else { mk.addTo(asteMapObj); }
