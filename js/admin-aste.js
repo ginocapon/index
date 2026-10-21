@@ -603,10 +603,12 @@ function asteMapRender() {
   const info = document.getElementById('asteMapInfo');
   if (info) {
     info.textContent = conCoord.length
-      ? conCoord.length + ' aste Interessanti sulla mappa' + (senzaCoord ? ' (' + senzaCoord + ' senza coordinate PVP: non mappabili)' : '') + ' — passa sopra un pallino per i dettagli, toccalo per aprire la riga'
-      : 'Nessuna asta segnata come Interessante: usa la tendina "Valutazione" nelle righe sotto.';
+      ? conCoord.length + ' aste Interessanti sulla mappa' + (senzaCoord ? ' (' + senzaCoord + ' senza coordinate: cerco il comune…)' : '') + ' — passa sopra uno spillo per i dettagli, toccalo per aprire la riga'
+      : (inter.length
+          ? inter.length + ' aste Interessanti ma nessuna coordinata disponibile: cerco i comuni…'
+          : 'Nessuna asta segnata come Interessante: usa la tendina "Valutazione" nelle righe sotto.');
   }
-  if (!conCoord.length) { asteMapObj.setView([45.55, 11.75], 8); return; }
+  if (!conCoord.length && !senzaCoord) { asteMapObj.setView([45.55, 11.75], 8); return; }
   const group = L.featureGroup();
   conCoord.forEach(r => {
     const mk = L.marker([r.latitudine, r.longitudine], { icon: astePinIcon() });
@@ -622,7 +624,78 @@ function asteMapRender() {
   });
   group.addTo(asteMapObj);
   asteMapLayer = group;
-  asteMapObj.fitBounds(group.getBounds().pad(0.15));
+  if (conCoord.length) asteMapObj.fitBounds(group.getBounds().pad(0.15));
+
+  // Fallback: righe Interessanti senza coordinate PVP -> geocoding gratuito OSM (Nominatim), con cache locale
+  const mancanti = inter.filter(r => !(r.latitudine && r.longitudine));
+  if (mancanti.length) asteMapGeocodeMissing(mancanti);
+}
+
+function asteViaPulita(via) {
+  let v = (' ' + String(via || '').toLowerCase() + ' ');
+  v = v.replace(/\bnn?\.\s*/g, ' ')
+       .replace(/\bint(?:erno)?\.?\s*\w+\b/g, ' ')
+       .replace(/\bscala\s+\w+\b/g, ' ')
+       .replace(/ai civici[\s\d\-\/]*/g, ' ')
+       .replace(/\s+e\s+\S+/g, ' ')
+       .replace(/(\d+)[\/\-]\S+/g, '$1')
+       .replace(/\s+/g, ' ')
+       .trim();
+  return v;
+}
+
+async function asteMapGeocodeMissing(rows) {
+  let cache = {};
+  try { cache = JSON.parse(localStorage.getItem('asteGeoCache') || '{}'); } catch (e) {}
+  let added = false;
+  for (const r of rows) {
+    const q = [asteViaPulita(r.indirizzo), r.comune, r.provincia, 'Italia'].filter(Boolean).join(', ');
+    let livello = 'da indirizzo';
+    if (!q) continue;
+    let pt = cache[q];
+    if (!pt) {
+      try {
+        let resp = await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + encodeURIComponent(q));
+        let arr = await resp.json();
+        if (!arr || !arr.length) {
+          // indirizzo non trovato: spillo sul comune (richiesta di Gino)
+          const qc = [r.comune, r.provincia, 'Italia'].filter(Boolean).join(', ');
+          await new Promise(res => setTimeout(res, 1100));
+          resp = await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + encodeURIComponent(qc));
+          arr = await resp.json();
+          livello = 'sul comune';
+        }
+        if (arr && arr.length) { pt = [parseFloat(arr[0].lat), parseFloat(arr[0].lon)]; cache[q] = pt; }
+      } catch (e) { /* rete o limite: salto */ }
+      await new Promise(res => setTimeout(res, 1100));
+    }
+    if (!pt) continue;
+    const mk = L.marker(pt, { icon: astePinIcon() });
+    mk.bindTooltip('<strong>' + asteEsc(r.comune) + '</strong> (' + asteEsc(r.provincia) + ')<br>' + asteEsc(r.indirizzo) +
+      '<br>' + asteFmtEur(r.prezzo_base) + ' · asta ' + asteFmtDt(r.data_asta) +
+      '<br><em>posizione approssimata (' + livello + ')</em>', { direction: 'top', offset: [0, -30] });
+    mk.on('click', () => {
+      const det = document.getElementById('asteDet-' + r.id);
+      const row = det ? det.previousElementSibling : null;
+      if (row) row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (det && det.style.display === 'none') asteToggle(String(r.id));
+    });
+    if (asteMapLayer) { mk.addTo(asteMapLayer); } else { mk.addTo(asteMapObj); }
+    added = true;
+  }
+  try { localStorage.setItem('asteGeoCache', JSON.stringify(cache)); } catch (e) {}
+  if (added && asteMapLayer) {
+    try { asteMapObj.fitBounds(asteMapLayer.getBounds().pad(0.15)); } catch (e) {}
+  }
+  const info = document.getElementById('asteMapInfo');
+  if (info && added) {
+    const tot = asteRows.filter(r => r.valutazione === 'interessante').length;
+    const nPins = asteMapLayer ? asteMapLayer.getLayers().length : 0;
+    const manc = tot - nPins;
+    info.textContent = nPins + ' aste Interessanti sulla mappa' +
+      (manc > 0 ? ' (' + manc + ' senza posizione trovata: controlla l\'indirizzo PVP)' : '') +
+      ' — passa sopra uno spillo per i dettagli, toccalo per aprire la riga';
+  }
 }
 
 function asteToggleScartate() {
