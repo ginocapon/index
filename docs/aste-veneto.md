@@ -34,3 +34,7 @@
 ## Push mappa altezza 21/10 ore 11:58 (2e9f0757..ce65cdfa)
 - Riquadro mappa +30% SOLO desktop (546px); telefono invariato 420px via media query max-width 768px. Richiesta Gino 11:53, ok 11:56 con vincolo desktop-only, device flow fresco (codice inserito 11:57:59).
 - Backup: branch backup/pre-push-20261021-mappa-altezza + tag backup-admin-mappa-altezza-20261021 su origin.
+
+## Push mappa sticky 21/10 ore 12:09 (ce65cdfa..fb28ca48)
+- Mappa Interessanti sticky SOLO desktop (min-width 769px, altezza min(546px,60vh)); telefono invariato (420px, non sticky). Click spillo: riga al centro, dettaglio aperto, lampeggio giallo 2,4s su entrambi. Richiesta Gino 12:01, vincolo desktop-only 12:07, ok 12:08, device flow (codice inserito 12:09:43).
+- Backup: branch backup/pre-push-20261021-mappa-sticky + tag backup-admin-mappa-sticky-20261021 su origin.
