@@ -13,3 +13,11 @@
 ## Verifica
 - Dry-run end-to-end dello script ok (16/10): 593 immobili Veneto in scadenza, 323 residenziali.
 - Preview locale della sezione renderizzata e verificata con screenshot (desktop).
+
+## Pacchetto admin 21/10/2026 (commit bb6162a1 + c7acd41d, push ore 10:40)
+- **Foto sopralluogo di Gino** (bb6162a1): box drag&drop/click nel dettaglio asta, upload nel bucket privato aste-pratica/sopralluogo/, anteprime con link firmati, rimozione logica dalla scheda. Richiede i 2 passi SQL di Gino: colonna `foto_sopralluogo` (passo 1) + policy insert `foto_sopralluogo_upload` (passo 2). Finche' non li esegue il box non carica.
+- **Testo +20% pannello espanso** (c7acd41d): `zoom:1.2` solo sul contenuto del dettaglio aperto; tabella invariata.
+- **Mappa OSM aste Interessanti** (c7acd41d): bottone "🗺 Mappa interessanti", Leaflet 1.9.4 + tile OpenStreetMap (gratuite), spilli SVG locali con capocchia rossa stile 3D solo per valutazione "interessante" in tutto il Veneto; tooltip comune/indirizzo/prezzo/data, click apre la riga. Coordinate dai campi `latitudine`/`longitudine` gia' scritti dal sync (nessuno SQL nuovo).
+- Backup: branch `backup/pre-push-20261021-admin-aste`, tag `backup-admin-aste-20261021` (entrambi su origin).
+- Verifica live 10:42: `js/admin-aste.js` e `admin.html` su righettoimmobiliare.it contengono astePinIcon, zoom:1.2, asteMapWrap/asteMapBtn.
+- Device flow GitHub: primo codice 1F41-1466 scaduto per errore procedurale (token perso prima del push); secondo codice 9A8D-46A5 autorizzato da Gino ore 10:40, push immediato, token non salvato su disco.
