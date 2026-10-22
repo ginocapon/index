@@ -25,7 +25,7 @@ function build(){
  head.innerHTML='<button type="button" id="rm-back" aria-label="Indietro">←</button><div id="rm-title">Righetto</div><button type="button" id="rm-prev" aria-label="Argomento precedente">‹</button><button type="button" id="rm-next" aria-label="Argomento successivo">›</button>';
  document.body.appendChild(head);
  menu=document.createElement('div');menu.id='rm-menu';
- menu.innerHTML='<div class="rm-brand"><div class="rm-logo">R</div><div><b>Righetto Immobiliare</b><span>Gestione</span></div></div>'+MENU.map(function(m){return '<button type="button" class="rm-big" data-go="'+m[0]+'">'+icon(m[1])+m[2]+'</button>';}).join('')+'<a class="rm-big rm-alt" href="/">'+icon("web")+'Vai al sito</a><button type="button" class="rm-big rm-alt" data-go="__logout">'+icon("logout")+'Esci</button>';
+ menu.innerHTML='<div class="rm-brand"><div class="rm-logo">R</div><div><b>Righetto Immobiliare</b><span>Gestione</span></div></div>'+MENU.map(function(m){return '<button type="button" class="rm-big" data-go="'+m[0]+'">'+icon(m[1])+m[2]+'</button>';}).join('')+'<div id="rm-session" class="rm-sess"></div><a class="rm-big rm-alt" href="/">'+icon("web")+'Vai al sito</a><button type="button" class="rm-big rm-alt" data-go="__logout">'+icon("logout")+'Esci</button>';
  document.body.appendChild(menu);
  scheda=document.createElement('div');scheda.id='rm-scheda';scheda.hidden=true;document.body.appendChild(scheda);
  menu.addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(!b)return;var g=b.dataset.go;if(g==='__logout'){if(window.doLogout)window.doLogout();return;}go(g);});
@@ -139,8 +139,30 @@ function openCli(id){
  '<div class="rm-bar"><button type="button" data-a="edit">Modifica</button>'+(tel?'<a href="tel:'+esc(tel)+'">Chiama</a>':'')+(tel?'<a href="https://wa.me/'+esc(tel.replace(/^\+/,'').replace(/^00/,'').replace(/^(?!39)/,'39'))+'" target="_blank" rel="noopener">WhatsApp</a>':'')+(c.email?'<a href="mailto:'+esc(c.email)+'">eMail</a>':'')+'</div>';
  showScheda(function(a){if(a==='edit'){closeScheda();if(window.editCliente)window.editCliente(c.id);}});
 }
+/* Accesso su telefono: vale 12 ore da quando si inserisce la password. */
+var SESSION_HOURS=12,STAMP='rig_login_at',logging=false;
+function sessionCheck(){
+ if(logging||!phone()||typeof sb==='undefined'||!sb.auth)return;
+ sb.auth.getSession().then(function(r){
+  if(!r||!r.data||!r.data.session)return;
+  var at=Number(localStorage.getItem(STAMP)||0);
+  if(!at||Date.now()-at>SESSION_HOURS*3600000){
+   localStorage.removeItem(STAMP);
+   Promise.resolve(sb.auth.signOut()).catch(function(){}).then(function(){location.reload();});
+   return;
+  }
+  var h=Math.max(0,Math.ceil((at+SESSION_HOURS*3600000-Date.now())/3600000)),el=document.getElementById('rm-session');
+  if(el)el.textContent='Accesso valido ancora circa '+h+(h===1?' ora':' ore');
+ }).catch(function(){});
+}
+function initSession(){
+ if(typeof window.doLogin==='function'){var od=window.doLogin;window.doLogin=function(){logging=true;return Promise.resolve(od.apply(this,arguments)).then(function(v){if(phone()&&typeof sb!=='undefined')return sb.auth.getSession().then(function(r){if(r&&r.data&&r.data.session)localStorage.setItem(STAMP,String(Date.now()));return v;});return v;}).catch(function(e){throw e;}).finally(function(){logging=false;});};}
+ sessionCheck();setInterval(sessionCheck,60000);
+ document.addEventListener('visibilitychange',function(){if(!document.hidden)sessionCheck();});
+ window.addEventListener('focus',sessionCheck);
+}
 function init(){
- build();
+ build();initSession();
  var oldShow=window.showSection;window.__rmOrig=oldShow;
  window.showSection=function(name){
   if(!phone()){oldShow(name);render();return;}

@@ -45,4 +45,5 @@ body:has(.modal-overlay.open) .ra-m-bar,body:has(.modal-overlay.open) .rm-bar,bo
 .rm-warn{margin:6px 0 12px;padding:10px 12px;background:#fff4d6;border-radius:8px;color:#6b4e00;font-size:15px}
 .rm-link{display:block;width:100%;text-align:left;margin:0 0 10px;padding:12px;border:1px solid #cfdde8;border-radius:10px;background:#fff;font:16px Arial;color:#17324d}.rm-link span{color:#14507f;font-weight:700}
 .rm-acts{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.rm-acts a,.rm-acts button{flex:1 1 40%;padding:13px 8px;border:0;border-radius:8px;background:#1f6fb2;color:#fff;font:700 15px Arial;text-align:center;text-decoration:none}
+.rm-sess{margin:4px 2px 12px;color:#567;font:14px Arial}
 }
