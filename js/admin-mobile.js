@@ -4,7 +4,7 @@
 'use strict';
 var mq=window.matchMedia('(max-width:760px)');
 function phone(){return mq.matches;}
-var cur='menu',data={imm:'',cli:''};
+var cur='menu',remote=null,remoteQ='',tmr=null;
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function money(n){return n?'€ '+Number(n).toLocaleString('it-IT'):'—';}
 function $(s,r){return (r||document).querySelector(s);}
@@ -84,12 +84,13 @@ function openImm(id){
  var ph=photos(i),s=stato(i);
  var dati=field('Codice',i.codice)+field('Tipo',tipoLabel(i.tipo_operazione))+field('Tipologia',i.tipologia)+field('Prezzo',i.prezzo?money(i.prezzo):'')+field('Superficie',i.superficie?i.superficie+' mq':'')+field('Locali',i.locali)+field('Camere',i.camere)+field('Bagni',i.bagni)+field('Piano',i.piano)+field('Comune',i.comune)+field('Indirizzo',i.indirizzo)+field('Classe energetica',i.classe_energetica)+field('Spese condominio',i.spese_condominio)+field('Descrizione',i.descrizione);
  var dot=['ascensore','garage','giardino','terrazzo','cantina','arredato','aria_condizionata','posto_auto'].filter(function(k){return i[k];}).map(function(k){return k.replace(/_/g,' ');});
- var prop=field('Proprietario',i.proprietario_nome&&i.proprietario_nome!=='--'?i.proprietario_nome:'')+field('Telefono',i.proprietario_tel)+field('Email',i.proprietario_email)+field('Note interne',i.note_interne)+field('Chiavi agenzia',i.chiavi_agenzia?'Sì':'');
+ var prop='<div id="rm-own">'+field('Proprietario',i.proprietario_nome&&i.proprietario_nome!=='--'?i.proprietario_nome:'')+field('Telefono',i.proprietario_tel)+field('Email',i.proprietario_email)+'</div>'+field('Note interne',i.note_interne)+field('Chiavi agenzia',i.chiavi_agenzia?'Sì':'');
  scheda.innerHTML='<div class="rm-banner"><b>'+esc(i.codice||'')+' '+esc(i.titolo||'')+'</b><em class="rm-chip '+s[1]+'">'+s[0]+'</em></div><div class="rm-tabs"><button type="button" class="on" data-t="d">Dettagli</button><button type="button" data-t="f">Foto ('+ph.length+')</button><button type="button" data-t="p">Proprietà</button></div>'+
  '<div class="rm-pane" data-p="d">'+(ph[0]?'<img class="rm-hero" src="'+esc(ph[0])+'" alt="">':'')+dati+(dot.length?'<div class="rm-tags">'+dot.map(function(d){return '<span>'+esc(d)+'</span>';}).join('')+'</div>':'')+'</div>'+
  '<div class="rm-pane" data-p="f" hidden>'+(ph.length?ph.map(function(f){return '<img class="rm-hero" loading="lazy" src="'+esc(f)+'" alt="">';}).join(''):'<p class="rm-empty">Nessuna foto.</p>')+'</div>'+
  '<div class="rm-pane" data-p="p" hidden>'+(prop||'<p class="rm-empty">Nessun dato.</p>')+'</div>'+
  '<div class="rm-bar"><button type="button" data-a="edit">Modifica</button>'+(i.proprietario_tel?'<a href="tel:'+esc(String(i.proprietario_tel).replace(/\s+/g,''))+'">Chiama</a>':'')+(i.slug?'<a href="/immobile/'+esc(i.slug)+'" target="_blank" rel="noopener">Sito</a>':'')+'</div>';
+ if(i.proprietario_id&&typeof sb!=='undefined')sb.from('clienti').select('id,nome,telefono,email,ragione_sociale').eq('id',i.proprietario_id).limit(1).then(function(r){var o=r.data&&r.data[0],box=document.getElementById('rm-own');if(!o||!box)return;var ph=phones(o.telefono);box.innerHTML=field('Proprietario',o.nome)+(o.ragione_sociale?field('Azienda',o.ragione_sociale):'')+field('Telefono',o.telefono)+field('Email',o.email)+((ph.length||o.email)?'<div class="rm-acts">'+ph.slice(0,2).map(function(n){return '<a href="tel:'+esc(n)+'">Chiama '+esc(n)+'</a>';}).join('')+(o.email?'<a href="mailto:'+esc(o.email)+'">eMail</a>':'')+'<button type="button" data-own="'+esc(o.id)+'">Scheda cliente</button></div>':'<p class="rm-warn">Il proprietario non ha telefono né email nei dati importati.</p>');}).catch(function(){});
  showScheda(function(a){if(a==='edit'){closeScheda();cur='nuovo';render();window.__rmOrig('nuovo');editImmobile(i.id);}});
 }
 function showScheda(onAct){
@@ -98,23 +99,43 @@ function showScheda(onAct){
 }
 function closeScheda(){if(!scheda)return;scheda.hidden=true;document.body.classList.remove('rm-scheda-open');}
 /* ---------- Clienti ---------- */
-function cardsCli(){
+function listCli(q){
+ if(!q||q.length<2)return allClienti;
+ if(remote&&remoteQ===q)return remote;
+ return allClienti.filter(function(c){return [c.nome,c.ragione_sociale,c.telefono,c.email,c.partita_iva,c.indirizzo_cliente].join(' ').toLowerCase().indexOf(q)>=0;});
+}
+function remoteSearch(q){
+ if(typeof sb==='undefined'||q.length<2||q.replace(/[,()%*]/g,'').length<2)return;
+ var t=q.replace(/[,()%*\\]/g,' ').trim();
+ var f=['nome','email','telefono','ragione_sociale','partita_iva'].map(function(k){return k+'.ilike.%'+t+'%';}).join(',');
+ sb.from('clienti').select('*').or(f).order('nome').limit(150).then(function(r){
+  if(r.error||!r.data)return;remote=r.data;remoteQ=q;cardsCli(true);});
+}
+function cardsCli(fromRemote){
  if(!phone())return;
  var box=ensureBox('sec-clienti','rm-cli','Cerca nome, telefono, email…','Nuovo cliente',function(){if(window.openClienteModal)window.openClienteModal();});
  if(!box||typeof allClienti==='undefined')return;
  var q=$('.rm-search',box).value.trim().toLowerCase();
- var list=allClienti.filter(function(c){if(!q)return true;return [c.nome,c.ragione_sociale,c.telefono,c.email,c.partita_iva,c.indirizzo_cliente].join(' ').toLowerCase().indexOf(q)>=0;});
- $('.rm-count',box).textContent=list.length+' clienti';
+ if(!fromRemote){clearTimeout(tmr);if(q.length>=2)tmr=setTimeout(function(){remoteSearch(q);},350);}
+ var list=listCli(q);
+ var tot=(q.length>=2&&remote&&remoteQ===q)?' trovati su tutto l\'archivio':' (primi '+allClienti.length+' dell\'elenco, scrivi per cercare in tutti)';
+ $('.rm-count',box).textContent=list.length+' clienti'+(q.length>=2?(remote&&remoteQ===q?' trovati su tutto l\'archivio':''):' · scrivi per cercare in tutto l\'archivio');
  $('.rm-cards',box).innerHTML=list.slice(0,150).map(function(c){var cerca=[pretty(c.tipo_operazione_cercata),c.tipologia_cercata,c.zona_cercata].filter(Boolean).join(' · ');
-  return '<button type="button" class="rm-card rm-cc" data-id="'+esc(c.id)+'"><div class="rm-inf"><div class="rm-r1"><b>'+esc(c.nome||'(senza nome)')+'</b><em class="rm-chip n">'+esc(c.ruolo_rubrica||c.fonte||'')+'</em></div><div class="rm-s">'+esc([c.telefono,c.email].filter(Boolean).join(' · '))+'</div>'+(cerca?'<div class="rm-s">'+esc(cerca)+'</div>':'')+'</div></button>';}).join('')+(list.length>150?'<div class="rm-more">Altri '+(list.length-150)+': usa la ricerca.</div>':'');
+  return '<button type="button" class="rm-card rm-cc" data-id="'+esc(c.id)+'"><div class="rm-inf"><div class="rm-r1"><b>'+esc(c.nome||'(senza nome)')+'</b><em class="rm-chip n">'+esc(c.ruolo_rubrica||'')+'</em></div><div class="rm-s">'+esc([c.telefono,c.email].filter(Boolean).join(' · ')||'nessun recapito')+'</div>'+(cerca?'<div class="rm-s">'+esc(cerca)+'</div>':'')+'</div></button>';}).join('')+(list.length>150?'<div class="rm-more">Altri '+(list.length-150)+': affina la ricerca.</div>':'');
 }
+function linked(c){
+ var l=(typeof allImmobili!=='undefined'?allImmobili:[]).filter(function(i){return String(i.proprietario_id)===String(c.id);});
+ if(!l.length)return '<p class="rm-empty">Nessun immobile collegato come proprietario.</p>';
+ return l.map(function(i){return '<button type="button" class="rm-link" data-imm="'+esc(i.id)+'"><b>'+esc(i.codice||'')+'</b> '+esc(i.titolo||'')+'<br><span>'+money(i.prezzo)+(i.superficie?' · '+esc(i.superficie)+' mq':'')+'</span></button>';}).join('');
+}
+function phones(t){return (String(t||'').match(/\+?\d[\d ]{6,}\d/g)||[]).map(function(x){return x.replace(/\s+/g,'');});}
 function openCli(id){
- var c=(typeof allClienti!=='undefined'?allClienti:[]).find(function(x){return String(x.id)===String(id);});if(!c)return;
+ var c=(listCli(($('#rm-cli .rm-search')||{value:''}).value.trim().toLowerCase())||[]).find(function(x){return String(x.id)===String(id);})||allClienti.find(function(x){return String(x.id)===String(id);});if(!c)return;
  var tel=String(c.telefono||'').replace(/\s+/g,'');
  var dati=field('Tipo',c.tipo_cliente)+field('Telefono',c.telefono)+field('Email',c.email)+field('PEC',c.pec)+field('Indirizzo',c.indirizzo_cliente)+field('Ragione sociale',c.ragione_sociale)+field('P.IVA',c.partita_iva)+field('Codice fiscale',c.codice_fiscale)+field('SDI',c.sdi)+field('Fonte',c.fonte);
  var cerca=field('Operazione',c.tipo_operazione_cercata)+field('Tipologia',c.tipologia_cercata)+field('Zona',c.zona_cercata)+field('Budget min',c.budget_min?money(c.budget_min):'')+field('Budget max',c.budget_max?money(c.budget_max):'')+field('Superficie min',c.superficie_min)+field('Camere min',c.camere_min)+field('Interesse',c.interesse);
- scheda.innerHTML='<div class="rm-banner"><b>'+esc(c.nome||'')+'</b><em class="rm-chip n">'+esc(c.ruolo_rubrica||'')+'</em></div><div class="rm-tabs"><button type="button" class="on" data-t="d">Dettagli</button><button type="button" data-t="r">Cerca</button><button type="button" data-t="n">Note</button></div>'+
- '<div class="rm-pane" data-p="d">'+(dati||'<p class="rm-empty">Nessun dato.</p>')+'</div><div class="rm-pane" data-p="r" hidden>'+(cerca||'<p class="rm-empty">Nessuna richiesta.</p>')+'</div><div class="rm-pane" data-p="n" hidden>'+(c.note?'<div class="rm-f"><div>'+esc(c.note)+'</div></div>':'<p class="rm-empty">Nessuna nota.</p>')+'</div>'+
+ scheda.innerHTML='<div class="rm-banner"><b>'+esc(c.nome||'')+'</b><em class="rm-chip n">'+esc(c.ruolo_rubrica||'')+'</em></div><div class="rm-tabs"><button type="button" class="on" data-t="d">Dettagli</button><button type="button" data-t="r">Cerca</button><button type="button" data-t="n">Note</button><button type="button" data-t="i">Immobili</button></div>'+
+ '<div class="rm-pane" data-p="d">'+((c.telefono||c.email)?'':'<p class="rm-warn">Nessun telefono né email nei dati importati.</p>')+(dati||'<p class="rm-empty">Nessun dato.</p>')+'</div><div class="rm-pane" data-p="r" hidden>'+(cerca||'<p class="rm-empty">Nessuna richiesta.</p>')+'</div><div class="rm-pane" data-p="i" hidden>'+linked(c)+'</div><div class="rm-pane" data-p="n" hidden>'+(c.note?'<div class="rm-f"><div>'+esc(c.note)+'</div></div>':'<p class="rm-empty">Nessuna nota.</p>')+'</div>'+
  '<div class="rm-bar"><button type="button" data-a="edit">Modifica</button>'+(tel?'<a href="tel:'+esc(tel)+'">Chiama</a>':'')+(tel?'<a href="https://wa.me/'+esc(tel.replace(/^\+/,'').replace(/^00/,'').replace(/^(?!39)/,'39'))+'" target="_blank" rel="noopener">WhatsApp</a>':'')+(c.email?'<a href="mailto:'+esc(c.email)+'">eMail</a>':'')+'</div>';
  showScheda(function(a){if(a==='edit'){closeScheda();if(window.editCliente)window.editCliente(c.id);}});
 }
@@ -132,6 +153,8 @@ function init(){
  document.addEventListener('click',function(e){
   var c=e.target.closest('#rm-imm .rm-card');if(c){openImm(c.dataset.id);return;}
   c=e.target.closest('#rm-cli .rm-card');if(c){openCli(c.dataset.id);}
+  c=e.target.closest('#rm-scheda [data-imm]');if(c){openImm(c.dataset.imm);return;}
+  c=e.target.closest('#rm-scheda [data-own]');if(c){var oid=c.dataset.own;if(allClienti.find(function(x){return String(x.id)===String(oid);})){openCli(oid);}else if(typeof sb!=='undefined'){sb.from('clienti').select('*').eq('id',oid).limit(1).then(function(r){if(r.data&&r.data[0]){allClienti.push(r.data[0]);openCli(oid);}});}}
  });
  [['immobiliTableWrap',cardsImm],['clientiTable',cardsCli]].forEach(function(p){var el=document.getElementById(p[0]);if(el)new MutationObserver(function(){setTimeout(p[1],30);}).observe(el,{childList:true,subtree:true});});
  mq.addEventListener?mq.addEventListener('change',function(){cur='menu';render();}):0;
