@@ -5841,7 +5841,10 @@ async function openSchedaProprietario(id) {
   if(error || !data) { toast('Scheda cliente non disponibile'+(error?': '+error.message:''),'error'); return; }
   allClienti=allClienti.filter(c=>String(c.id)!==String(id)); allClienti.push(data);
   editCliente(id);
-  document.getElementById('clienteModal').style.zIndex='1200';
+  // La scheda cliente sta dentro una sezione con proprio livello: la porto in cima al body per stare sopra la finestra proprietari.
+  const cm=document.getElementById('clienteModal');
+  if(cm.parentNode!==document.body) document.body.appendChild(cm);
+  cm.style.zIndex='1200';
   // Evita cancellazioni involontarie da questa vista: si modifica la rubrica, non l'immobile.
   document.getElementById('btnDeleteCliente').style.display='none';
 }
