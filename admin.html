@@ -6202,8 +6202,8 @@ function renderTable(data) {
 
   const sortTh = (key, label) => {
     const active = immSortKey === key;
-    const arrow = active ? (immSortDir === 1 ? ' ▲' : ' ▼') : '';
-    return `<th class="th-sort${active ? ' th-sort-active' : ''}" onclick="setImmSort('${key}')" title="Clicca per ordinare">${label}${arrow}</th>`;
+    const arrow = active ? (immSortDir === 1 ? ' ▲' : ' ▼') : ' <span style="opacity:.35">⇅</span>';
+    return `<th class="th-sort${active ? ' th-sort-active' : ''}" onclick="setImmSort('${key}')" style="cursor:pointer;user-select:none;white-space:nowrap" title="Clicca per ordinare">${label}${arrow}</th>`;
   };
   wrap.innerHTML = `<table>
     <thead><tr>
