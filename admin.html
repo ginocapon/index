@@ -5746,6 +5746,134 @@ function normalizeYouTubeIdForDb(raw) {
 
 // LOAD IMMOBILI
 // ══════════════════════════════════════
+// Proprietari multipli: collegamenti privati, rubrica sempre letta dal database.
+let _ownerImmobile = null;
+let _ownerSelected = [];
+let _ownerSearchTimer;
+let _ownerLoading = 0;
+function ownerLegacy(i) {
+  return i.proprietario_id || i.proprietario_nome ? [{id:i.proprietario_id || null,nome:i.proprietario_nome || '',telefono:i.proprietario_tel || '',email:i.proprietario_email || ''}] : [];
+}
+function ownerModalClose() {
+  ++_ownerLoading;
+  document.getElementById('ownerModal')?.remove();
+  _ownerImmobile = null;
+}
+async function openProprietariImmobile(id) {
+  const imm = allImmobili.find(x => String(x.id) === String(id));
+  if (!imm) return;
+  if (document.getElementById('ownerModal')) ownerModalClose();
+  const token = ++_ownerLoading;
+  _ownerImmobile = imm;
+  _ownerSelected = ownerLegacy(imm);
+  const modal = document.createElement('div');
+  modal.id = 'ownerModal';
+  modal.className = 'modal-overlay open';
+  modal.style.zIndex = '1100';
+  modal.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-labelledby="ownerTitle" style="width:min(720px,95vw);max-height:90vh;overflow:auto">
+    <div class="modal-header"><h2 id="ownerTitle">Proprietari ${escHtml(imm.codice || '')}</h2><button type="button" class="btn btn-secondary" onclick="ownerModalClose()" aria-label="Chiudi">✕</button></div>
+    <div class="modal-body" style="padding:20px"><p style="margin-bottom:16px">Apri la scheda per consultare o modificare i dati. Il primo e il proprietario principale.</p>
+    <div id="ownerList"></div><p id="ownerStatus" role="status" style="margin:12px 0">Caricamento...</p>
+    <label for="ownerSearch"><strong>Aggiungi o cambia proprietario</strong></label>
+    <input id="ownerSearch" type="search" placeholder="Cerca nome, telefono o email (almeno 2 caratteri)" oninput="ownerSearchClienti(this.value)" style="width:100%;padding:12px;margin-top:8px">
+    <div id="ownerResults"></div><button type="button" class="btn btn-secondary" style="margin-top:12px" onclick="ownerNewCliente()">+ Nuovo cliente</button>
+    <p style="font-size:.8rem;margin-top:14px">Le modifiche alla scheda cliente si salvano subito con il suo pulsante Salva. Rimuovi toglie solo il collegamento a questo immobile, non cancella il cliente. Le modifiche ai collegamenti si registrano con Salva proprietari.</p></div>
+    <div class="modal-footer" style="padding:16px;display:flex;gap:10px;flex-wrap:wrap"><button type="button" class="btn btn-secondary" onclick="ownerModalClose()">Annulla</button><button type="button" id="ownerSave" class="btn btn-primary" disabled onclick="ownerSaveAll()">Salva proprietari</button></div></div>`;
+  document.body.appendChild(modal);
+  ownerRender();
+  const {data,error} = await sb.from('immobile_proprietari').select('cliente_id,ordine').eq('immobile_id',id).order('ordine');
+  if (token !== _ownerLoading) return;
+  if (error) {
+    document.getElementById('ownerStatus').textContent = 'Collegamenti multipli non ancora attivati. Puoi aprire la scheda cliente; per cambiare il proprietario usa Modifica immobile.';
+    return;
+  }
+  const ids = [...new Set([imm.proprietario_id,...(data || []).map(r=>r.cliente_id)].filter(Boolean).map(String))];
+  if (ids.length) {
+    const res = await sb.from('clienti').select('*').in('id',ids);
+    if (token !== _ownerLoading) return;
+    if (res.error) { document.getElementById('ownerStatus').textContent='Errore lettura clienti: '+res.error.message; return; }
+    _ownerSelected = ids.map(cid=>(res.data || []).find(c=>String(c.id)===cid)).filter(Boolean);
+    if (imm.proprietario_id && !_ownerSelected.some(c=>String(c.id)===String(imm.proprietario_id))) _ownerSelected.unshift(ownerLegacy(imm)[0]);
+  }
+  document.getElementById('ownerStatus').textContent='';
+  document.getElementById('ownerSave').disabled=false;
+  ownerRender();
+}
+function ownerRender() {
+  const list=document.getElementById('ownerList'); if(!list) return;
+  list.innerHTML = _ownerSelected.length ? _ownerSelected.map((c,n)=>`<div style="padding:14px;border:1px solid #d8c8b4;border-radius:10px;margin-bottom:10px;background:#faf7f2">
+    <strong>${escHtml(proprietarioDisplayLabel(c))}</strong> ${n===0?'<span class="badge badge-blu">Principale</span>':''}
+    <div style="margin:8px 0;overflow-wrap:anywhere">${c.telefono?'Telefono: '+escHtml(c.telefono):'Telefono non presente'}<br>${c.email?'Email: '+escHtml(c.email):'Email non presente'}</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">${c.id?`<button type="button" class="btn btn-secondary btn-sm" onclick="ownerOpenCliente(${n})">Apri / modifica scheda cliente</button>`:'<span>Cliente non ancora collegato alla rubrica</span>'}
+    ${n?`<button type="button" class="btn btn-secondary btn-sm" onclick="ownerMakePrimary(${n})">Rendi principale</button>`:''}<button type="button" class="btn btn-secondary btn-sm" onclick="ownerRemove(${n})">Rimuovi</button></div></div>`).join('') : '<p>Nessun proprietario selezionato. Aggiungine almeno uno.</p>';
+}
+function ownerRemove(n) { _ownerSelected.splice(n,1); ownerRender(); }
+function ownerMakePrimary(n) { _ownerSelected.unshift(_ownerSelected.splice(n,1)[0]); ownerRender(); }
+let _ownerResults=[];
+async function ownerSearchClienti(q) {
+  clearTimeout(_ownerSearchTimer);
+  const results=document.getElementById('ownerResults');
+  results.innerHTML='';
+  if(q.trim().length<2) return;
+  _ownerSearchTimer=setTimeout(async()=>{
+    // Solo lettere, numeri, spazi e comuni separatori: niente sintassi PostgREST dall'input.
+    const term=q.trim().replace(/[,().%*]/g,' ').replace(/\s+/g,' ').trim();
+    if(term.length<2) return;
+    const {data,error}=await sb.from('clienti').select('id,nome,ragione_sociale,tipo_cliente,telefono,email').or(`nome.ilike.%${term}%,ragione_sociale.ilike.%${term}%,telefono.ilike.%${term}%,email.ilike.%${term}%`).order('nome').limit(20);
+    if(!document.getElementById('ownerResults') || document.getElementById('ownerSearch').value!==q) return;
+    if(error) { results.textContent='Ricerca non riuscita: '+error.message; return; }
+    _ownerResults=data||[];
+    results.innerHTML=_ownerResults.length?_ownerResults.map((c,n)=>`<button type="button" class="btn btn-secondary" style="display:block;width:100%;text-align:left;margin-top:6px;white-space:normal" onclick="ownerAdd(${n})">+ ${escHtml(proprietarioDisplayLabel(c))}<br><small>${escHtml([c.telefono,c.email].filter(Boolean).join(' - '))}</small></button>`).join(''):'Nessun cliente trovato.';
+  },300);
+}
+function ownerAdd(n) {
+  const c=_ownerResults[n]; if(!c) return;
+  if(_ownerSelected.some(x=>String(x.id)===String(c.id))) { toast('Cliente gia presente','info'); return; }
+  _ownerSelected.push(c); ownerRender();
+  document.getElementById('ownerSearch').value=''; document.getElementById('ownerResults').innerHTML='';
+}
+async function ownerOpenCliente(n) {
+  const c=_ownerSelected[n]; if(!c || !c.id) return;
+  await openSchedaProprietario(c.id);
+}
+async function openSchedaProprietario(id) {
+  const {data,error}=await sb.from('clienti').select('*').eq('id',id).maybeSingle();
+  if(error || !data) { toast('Scheda cliente non disponibile'+(error?': '+error.message:''),'error'); return; }
+  allClienti=allClienti.filter(c=>String(c.id)!==String(id)); allClienti.push(data);
+  editCliente(id);
+  document.getElementById('clienteModal').style.zIndex='1200';
+  // Evita cancellazioni involontarie da questa vista: si modifica la rubrica, non l'immobile.
+  document.getElementById('btnDeleteCliente').style.display='none';
+}
+function ownerNewCliente() {
+  try { sessionStorage.removeItem('righetto_return_after_cliente'); } catch(e) {}
+  openClienteModal(); setClienteRuoloRubricaUI('proprietario');
+  document.getElementById('clienteFonte').value='proprietario_immobile';
+  document.getElementById('clienteModal').style.zIndex='1200';
+}
+async function ownerSaveAll() {
+  if(!_ownerSelected.length || _ownerSelected.some(c=>!c.id)) { toast('Seleziona almeno un proprietario dalla rubrica. Per i vecchi dati cerca e aggiungi il cliente, poi rimuovi il collegamento senza scheda.','error'); return; }
+  const btn=document.getElementById('ownerSave'); btn.disabled=true;
+  const immId=_ownerImmobile.id;
+  try {
+    const {error}=await sb.rpc('rig_salva_proprietari',{p_immobile_id:String(immId),p_clienti:_ownerSelected.map(c=>String(c.id))});
+    if(error) throw error;
+    await loadImmobili();
+    const fresh=allImmobili.find(i=>String(i.id)===String(immId));
+    if(String(document.getElementById('editId').value)===String(immId) && fresh) {
+      ['id','nome','tel','email'].forEach(k=>document.getElementById('f_proprietario_'+k).value=fresh['proprietario_'+k]||'');
+      document.getElementById('f_proprietario_search').value=fresh.proprietario_nome||''; renderProprietarioCard();
+    }
+    ownerModalClose(); toast('Proprietari salvati','success');
+  } catch(e) { toast('Proprietari non salvati: '+(e.message||e),'error'); if(document.getElementById('ownerSave')) btn.disabled=false; }
+}
+function ownerRefreshCliente(saved) {
+  if(!document.getElementById('ownerModal')) return;
+  const n=_ownerSelected.findIndex(c=>String(c.id)===String(saved.id));
+  if(n>=0) _ownerSelected[n]=saved; else _ownerSelected.push(saved);
+  ownerRender();
+}
+
 // Ricerca proprietario con clessidra (autocomplete live)
 let _proprietarioTimeout = null;
 let _proprietarioCache = [];
@@ -5860,7 +5988,10 @@ function renderProprietarioCard() {
         '</div>' +
         (warnLegacy ? '<div style="margin-top:8px;font-size:0.72rem;color:#b45309">Scheda legacy: seleziona il cliente dalla ricerca per collegarlo in rubrica.</div>' : '') +
       '</div>' +
-      '<button type="button" class="btn btn-secondary btn-sm" onclick="clearProprietarioSelection()">Cambia</button>' +
+      '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+      (id ? '<button type="button" class="btn btn-secondary btn-sm" onclick="openSchedaProprietario(\'' + escHtml(id) + '\')">Apri / modifica cliente</button>' : '') +
+      '<button type="button" class="btn btn-secondary btn-sm" onclick="clearProprietarioSelection()">Cambia principale</button>' +
+      (document.getElementById('editId').value ? '<button type="button" class="btn btn-secondary btn-sm" onclick="openProprietariImmobile(document.getElementById(\'editId\').value)">Gestisci tutti i proprietari</button>' : '') + '</div>' +
     '</div>';
 }
 
@@ -6282,7 +6413,7 @@ function renderTable(data) {
       <td style="font-weight:600">${prezzo}</td>
       <td>${mq}</td>
       <td>${i.locali || '—'}</td>
-      <td style="font-size:0.78rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(propNome)}">${escHtml(propNome)}</td>
+      <td style="font-size:0.78rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(propNome)}"><button type="button" class="btn btn-secondary btn-sm" onclick="openProprietariImmobile('${i.id}')" style="white-space:normal;text-align:left" title="Apri dati e gestisci proprietari">${escHtml(propNome === '—' ? '+ Proprietari' : propNome)} ↗</button></td>
       <td>${stato}</td>
       <td>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -9259,13 +9390,23 @@ async function saveCliente() {
     if (!id && res.data) savedId = res.data.id || null;
     toast(id ? 'Cliente aggiornato!' : 'Cliente aggiunto!', 'success');
     closeClienteModal();
+    ownerRefreshCliente({ ...data, id: savedId });
+    if (document.getElementById('ownerModal')) await loadImmobili();
+    const propIdField = document.getElementById('f_proprietario_id');
+    if (savedId && String(propIdField.value) === String(savedId)) {
+      document.getElementById('f_proprietario_nome').value=data.nome || data.ragione_sociale || '';
+      document.getElementById('f_proprietario_tel').value=data.telefono || '';
+      document.getElementById('f_proprietario_email').value=data.email || '';
+      document.getElementById('f_proprietario_search').value=proprietarioDisplayLabel({...data,id:savedId});
+      renderProprietarioCard();
+    }
     await loadClienti();
     try {
       if (sessionStorage.getItem('righetto_return_after_cliente') === 'nuovo') {
         sessionStorage.removeItem('righetto_return_after_cliente');
         const match = allClienti.find(c => savedId && String(c.id) === String(savedId))
           || allClienti.find(c => (data.email && c.email === data.email) || (data.nome && c.nome === data.nome));
-        if (match) selectProprietario(match.id);
+        if (match) { _proprietarioCache = [match]; selectProprietario(match.id); }
         toast('Cliente salvato — selezionato come proprietario.', 'success');
         return;
       }
