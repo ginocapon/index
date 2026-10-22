@@ -1,0 +1,140 @@
+/* Admin su telefono: menu a grandi pulsanti, una sola sezione per volta, frecce per tornare.
+   Solo presentazione (<=760px). Riusa le funzioni esistenti (editImmobile, editCliente, openClienteModal). */
+(function(){
+'use strict';
+var mq=window.matchMedia('(max-width:760px)');
+function phone(){return mq.matches;}
+var cur='menu',data={imm:'',cli:''};
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function money(n){return n?'€ '+Number(n).toLocaleString('it-IT'):'—';}
+function $(s,r){return (r||document).querySelector(s);}
+function photo(i){var f=Array.isArray(i.foto)&&i.foto.length?i.foto[0]:(i.foto_principale||'');return f&&!/^(https?:|\/|data:)/.test(f)?'/'+f:f;}
+function photos(i){var a=Array.isArray(i.foto)?i.foto.slice():[];return a.map(function(f){return /^(https?:|\/|data:)/.test(f)?f:'/'+f;});}
+function tipoLabel(t){return t==='vendita'?'Vendita':String(t||'').indexOf('affitto')===0?'Affitto':t==='asta_giudiziaria'?'Asta':(t||'');}
+function stato(i){return i.venduto?['Venduto','r']:i.affittato?['Affittato','r']:i.attivo?['Attivo','g']:['Non attivo','n'];}
+
+var IC={immobili:'<path d="M3 11l9-8 9 8v10H3z"/><path d="M9 21v-6h6v6"/>',clienti:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>',agenda:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',aste:'<path d="M12 3v18M6 21h12M4 7h16M4 7l-2 7a3 3 0 0 0 6 0zM20 7l-2 7a3 3 0 0 0 6 0z"/>',perizie:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/>',documentigenerali:'<path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5"/>',richieste:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',blog:'<path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/>',emailmarketing:'<path d="M3 11v3l14 5V6zM17 9a3 3 0 0 1 0 6M6 15v4"/>',landing:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 14h6"/>',impostazioni:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',web:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',logout:'<path d="M9 4H4v16h5M16 8l4 4-4 4M20 12H9"/>'};
+function icon(k){return '<svg class="rm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+IC[k]+'</svg>';}
+var MENU=[['immobili','immobili','Immobili'],['clienti','clienti','Clienti'],['agenda','agenda','Agenda'],['aste','aste','Aste'],['perizie','perizie','Perizie'],['documentigenerali','documentigenerali','Documenti'],['richieste','richieste','Richieste'],['blog','blog','Blog'],['emailmarketing','emailmarketing','Email marketing'],['landing','landing','Landing pages'],['impostazioni','impostazioni','Impostazioni']];
+var TITLES={immobili:'Immobili',nuovo:'Immobile',clienti:'Clienti',agenda:'Agenda',aste:'Aste',perizie:'Perizie',documentigenerali:'Documenti',richieste:'Richieste',blog:'Blog',emailmarketing:'Email marketing',landing:'Landing pages',impostazioni:'Impostazioni',analytics:'Search Console'};
+
+var head,menu,scheda;
+function build(){
+ head=document.createElement('div');head.id='rm-head';
+ head.innerHTML='<button type="button" id="rm-back" aria-label="Indietro">←</button><div id="rm-title">Righetto</div><button type="button" id="rm-prev" aria-label="Argomento precedente">‹</button><button type="button" id="rm-next" aria-label="Argomento successivo">›</button>';
+ document.body.appendChild(head);
+ menu=document.createElement('div');menu.id='rm-menu';
+ menu.innerHTML='<div class="rm-brand"><div class="rm-logo">R</div><div><b>Righetto Immobiliare</b><span>Gestione</span></div></div>'+MENU.map(function(m){return '<button type="button" class="rm-big" data-go="'+m[0]+'">'+icon(m[1])+m[2]+'</button>';}).join('')+'<a class="rm-big rm-alt" href="/">'+icon("web")+'Vai al sito</a><button type="button" class="rm-big rm-alt" data-go="__logout">'+icon("logout")+'Esci</button>';
+ document.body.appendChild(menu);
+ scheda=document.createElement('div');scheda.id='rm-scheda';scheda.hidden=true;document.body.appendChild(scheda);
+ menu.addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(!b)return;var g=b.dataset.go;if(g==='__logout'){if(window.doLogout)window.doLogout();return;}go(g);});
+ $('#rm-back').onclick=back;$('#rm-prev').onclick=function(){step(-1);};$('#rm-next').onclick=function(){step(1);};
+}
+function go(name){
+ closeScheda();
+ if(name==='menu'||name==='home'){cur='menu';render();return;}
+ cur=name;render();
+ window.__rmOrig(name==='agenda'?'agenda':name);
+ render();
+ if(name==='immobili')setTimeout(cardsImm,60);
+ if(name==='clienti')setTimeout(cardsCli,400);
+}
+function step(d){var ids=MENU.map(function(m){return m[0];});var k=ids.indexOf(cur==='nuovo'?'immobili':cur);if(k<0)k=0;go(ids[(k+d+ids.length)%ids.length]);}
+function back(){
+ if(!scheda.hidden){closeScheda();return;}
+ if(cur==='nuovo'){go('immobili');return;}
+ go('menu');
+}
+function render(){
+ var on=phone();
+ document.body.classList.toggle('rm-on',on);
+ if(!on){return;}
+ document.body.classList.toggle('rm-menu-open',cur==='menu');
+ document.body.classList.toggle('rm-agenda',cur==='agenda');
+ document.body.classList.toggle('rm-sec-'+'immobili',cur==='immobili');
+ document.body.classList.toggle('rm-sec-clienti',cur==='clienti');
+ $('#rm-title').textContent=cur==='menu'?'Righetto Immobiliare':(TITLES[cur]||cur);
+ $('#rm-back').style.visibility=cur==='menu'?'hidden':'visible';
+ $('#rm-prev').style.visibility=$('#rm-next').style.visibility=cur==='menu'?'hidden':'visible';
+}
+/* ---------- Immobili ---------- */
+function ensureBox(secId,boxId,ph,newLabel,newFn){
+ var sec=document.getElementById(secId);if(!sec)return null;
+ var box=document.getElementById(boxId);
+ if(!box){box=document.createElement('div');box.id=boxId;box.className='rm-box';
+  box.innerHTML='<input type="search" class="rm-search" placeholder="'+ph+'"><div class="rm-count"></div><div class="rm-cards"></div><div class="rm-bar"><button type="button" class="rm-bar1">+ '+newLabel+'</button></div>';
+  sec.insertBefore(box,sec.firstChild);
+  $('.rm-search',box).addEventListener('input',function(){if(boxId==='rm-imm')cardsImm();else cardsCli();});
+  $('.rm-bar1',box).onclick=newFn;}
+ return box;}
+function cardsImm(){
+ if(!phone())return;
+ var box=ensureBox('sec-immobili','rm-imm','Cerca codice, comune, indirizzo…','Nuovo immobile',function(){window.__rmOrig('nuovo');cur='nuovo';render();});
+ if(!box||typeof allImmobili==='undefined')return;
+ var q=$('.rm-search',box).value.trim().toLowerCase();
+ var list=allImmobili.filter(function(i){if(!q)return true;return [i.codice,i.titolo,i.comune,i.indirizzo,i.proprietario_nome,i.prezzo].join(' ').toLowerCase().indexOf(q)>=0;});
+ $('.rm-count',box).textContent=list.length+' immobili';
+ $('.rm-cards',box).innerHTML=list.slice(0,150).map(function(i){var s=stato(i),p=photo(i);
+  return '<button type="button" class="rm-card" data-id="'+esc(i.id)+'"><div class="rm-ph">'+(p?'<img loading="lazy" src="'+esc(p)+'" alt="" onerror="this.remove()">':'<span>📷</span>')+'</div><div class="rm-inf"><div class="rm-r1"><b>'+esc(i.codice||'—')+'</b><em class="rm-chip '+s[1]+'">'+s[0]+'</em></div><div class="rm-t">'+esc(i.titolo||(i.tipologia||'')+' '+(i.comune||''))+'</div><div class="rm-s">'+esc([i.comune,i.indirizzo].filter(Boolean).join(' · '))+'</div><div class="rm-r2"><strong>'+money(i.prezzo)+'</strong><span>'+(i.superficie?esc(i.superficie)+' mq':'')+'</span><span>'+esc(tipoLabel(i.tipo_operazione))+'</span></div></div></button>';}).join('')+(list.length>150?'<div class="rm-more">Altri '+(list.length-150)+': usa la ricerca.</div>':'');
+}
+function field(l,v){return v===null||v===undefined||v===''||v===false?'':'<div class="rm-f"><label>'+l+'</label><div>'+esc(v===true?'Sì':v)+'</div></div>';}
+function openImm(id){
+ var i=(typeof allImmobili!=='undefined'?allImmobili:[]).find(function(x){return String(x.id)===String(id);});if(!i)return;
+ var ph=photos(i),s=stato(i);
+ var dati=field('Codice',i.codice)+field('Tipo',tipoLabel(i.tipo_operazione))+field('Tipologia',i.tipologia)+field('Prezzo',i.prezzo?money(i.prezzo):'')+field('Superficie',i.superficie?i.superficie+' mq':'')+field('Locali',i.locali)+field('Camere',i.camere)+field('Bagni',i.bagni)+field('Piano',i.piano)+field('Comune',i.comune)+field('Indirizzo',i.indirizzo)+field('Classe energetica',i.classe_energetica)+field('Spese condominio',i.spese_condominio)+field('Descrizione',i.descrizione);
+ var dot=['ascensore','garage','giardino','terrazzo','cantina','arredato','aria_condizionata','posto_auto'].filter(function(k){return i[k];}).map(function(k){return k.replace(/_/g,' ');});
+ var prop=field('Proprietario',i.proprietario_nome&&i.proprietario_nome!=='--'?i.proprietario_nome:'')+field('Telefono',i.proprietario_tel)+field('Email',i.proprietario_email)+field('Note interne',i.note_interne)+field('Chiavi agenzia',i.chiavi_agenzia?'Sì':'');
+ scheda.innerHTML='<div class="rm-banner"><b>'+esc(i.codice||'')+' '+esc(i.titolo||'')+'</b><em class="rm-chip '+s[1]+'">'+s[0]+'</em></div><div class="rm-tabs"><button type="button" class="on" data-t="d">Dettagli</button><button type="button" data-t="f">Foto ('+ph.length+')</button><button type="button" data-t="p">Proprietà</button></div>'+
+ '<div class="rm-pane" data-p="d">'+(ph[0]?'<img class="rm-hero" src="'+esc(ph[0])+'" alt="">':'')+dati+(dot.length?'<div class="rm-tags">'+dot.map(function(d){return '<span>'+esc(d)+'</span>';}).join('')+'</div>':'')+'</div>'+
+ '<div class="rm-pane" data-p="f" hidden>'+(ph.length?ph.map(function(f){return '<img class="rm-hero" loading="lazy" src="'+esc(f)+'" alt="">';}).join(''):'<p class="rm-empty">Nessuna foto.</p>')+'</div>'+
+ '<div class="rm-pane" data-p="p" hidden>'+(prop||'<p class="rm-empty">Nessun dato.</p>')+'</div>'+
+ '<div class="rm-bar"><button type="button" data-a="edit">Modifica</button>'+(i.proprietario_tel?'<a href="tel:'+esc(String(i.proprietario_tel).replace(/\s+/g,''))+'">Chiama</a>':'')+(i.slug?'<a href="/immobile/'+esc(i.slug)+'" target="_blank" rel="noopener">Sito</a>':'')+'</div>';
+ showScheda(function(a){if(a==='edit'){closeScheda();cur='nuovo';render();window.__rmOrig('nuovo');editImmobile(i.id);}});
+}
+function showScheda(onAct){
+ scheda.hidden=false;scheda.scrollTop=0;document.body.classList.add('rm-scheda-open');
+ scheda.onclick=function(e){var t=e.target.closest('[data-t]');if(t){scheda.querySelectorAll('[data-t]').forEach(function(x){x.classList.toggle('on',x===t);});scheda.querySelectorAll('[data-p]').forEach(function(p){p.hidden=p.dataset.p!==t.dataset.t;});return;}var a=e.target.closest('[data-a]');if(a)onAct(a.dataset.a);};
+}
+function closeScheda(){if(!scheda)return;scheda.hidden=true;document.body.classList.remove('rm-scheda-open');}
+/* ---------- Clienti ---------- */
+function cardsCli(){
+ if(!phone())return;
+ var box=ensureBox('sec-clienti','rm-cli','Cerca nome, telefono, email…','Nuovo cliente',function(){if(window.openClienteModal)window.openClienteModal();});
+ if(!box||typeof allClienti==='undefined')return;
+ var q=$('.rm-search',box).value.trim().toLowerCase();
+ var list=allClienti.filter(function(c){if(!q)return true;return [c.nome,c.ragione_sociale,c.telefono,c.email,c.partita_iva,c.indirizzo_cliente].join(' ').toLowerCase().indexOf(q)>=0;});
+ $('.rm-count',box).textContent=list.length+' clienti';
+ $('.rm-cards',box).innerHTML=list.slice(0,150).map(function(c){var cerca=[c.tipo_operazione_cercata,c.tipologia_cercata,c.zona_cercata].filter(Boolean).join(' · ');
+  return '<button type="button" class="rm-card rm-cc" data-id="'+esc(c.id)+'"><div class="rm-inf"><div class="rm-r1"><b>'+esc(c.nome||'(senza nome)')+'</b><em class="rm-chip n">'+esc(c.ruolo_rubrica||c.fonte||'')+'</em></div><div class="rm-s">'+esc([c.telefono,c.email].filter(Boolean).join(' · '))+'</div>'+(cerca?'<div class="rm-s">'+esc(cerca)+'</div>':'')+'</div></button>';}).join('')+(list.length>150?'<div class="rm-more">Altri '+(list.length-150)+': usa la ricerca.</div>':'');
+}
+function openCli(id){
+ var c=(typeof allClienti!=='undefined'?allClienti:[]).find(function(x){return String(x.id)===String(id);});if(!c)return;
+ var tel=String(c.telefono||'').replace(/\s+/g,'');
+ var dati=field('Tipo',c.tipo_cliente)+field('Telefono',c.telefono)+field('Email',c.email)+field('PEC',c.pec)+field('Indirizzo',c.indirizzo_cliente)+field('Ragione sociale',c.ragione_sociale)+field('P.IVA',c.partita_iva)+field('Codice fiscale',c.codice_fiscale)+field('SDI',c.sdi)+field('Fonte',c.fonte);
+ var cerca=field('Operazione',c.tipo_operazione_cercata)+field('Tipologia',c.tipologia_cercata)+field('Zona',c.zona_cercata)+field('Budget min',c.budget_min?money(c.budget_min):'')+field('Budget max',c.budget_max?money(c.budget_max):'')+field('Superficie min',c.superficie_min)+field('Camere min',c.camere_min)+field('Interesse',c.interesse);
+ scheda.innerHTML='<div class="rm-banner"><b>'+esc(c.nome||'')+'</b><em class="rm-chip n">'+esc(c.ruolo_rubrica||'')+'</em></div><div class="rm-tabs"><button type="button" class="on" data-t="d">Dettagli</button><button type="button" data-t="r">Cerca</button><button type="button" data-t="n">Note</button></div>'+
+ '<div class="rm-pane" data-p="d">'+(dati||'<p class="rm-empty">Nessun dato.</p>')+'</div><div class="rm-pane" data-p="r" hidden>'+(cerca||'<p class="rm-empty">Nessuna richiesta.</p>')+'</div><div class="rm-pane" data-p="n" hidden>'+(c.note?'<div class="rm-f"><div>'+esc(c.note)+'</div></div>':'<p class="rm-empty">Nessuna nota.</p>')+'</div>'+
+ '<div class="rm-bar"><button type="button" data-a="edit">Modifica</button>'+(tel?'<a href="tel:'+esc(tel)+'">Chiama</a>':'')+(tel?'<a href="https://wa.me/'+esc(tel.replace(/^\+/,'').replace(/^00/,'').replace(/^(?!39)/,'39'))+'" target="_blank" rel="noopener">WhatsApp</a>':'')+(c.email?'<a href="mailto:'+esc(c.email)+'">eMail</a>':'')+'</div>';
+ showScheda(function(a){if(a==='edit'){closeScheda();if(window.editCliente)window.editCliente(c.id);}});
+}
+function init(){
+ build();
+ var oldShow=window.showSection;window.__rmOrig=oldShow;
+ window.showSection=function(name){
+  if(!phone()){oldShow(name);render();return;}
+  if(name==='home'){go('menu');return;}
+  if(name===cur&&name!=='menu'){oldShow(name);render();return;}
+  cur=name;render();oldShow(name);render();
+  if(name==='immobili')setTimeout(cardsImm,60);
+  if(name==='clienti')setTimeout(cardsCli,400);
+ };
+ document.addEventListener('click',function(e){
+  var c=e.target.closest('#rm-imm .rm-card');if(c){openImm(c.dataset.id);return;}
+  c=e.target.closest('#rm-cli .rm-card');if(c){openCli(c.dataset.id);}
+ });
+ [['immobiliTableWrap',cardsImm],['clientiTable',cardsCli]].forEach(function(p){var el=document.getElementById(p[0]);if(el)new MutationObserver(function(){setTimeout(p[1],30);}).observe(el,{childList:true,subtree:true});});
+ mq.addEventListener?mq.addEventListener('change',function(){cur='menu';render();}):0;
+ cur='menu';render();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(init,0);});else setTimeout(init,0);
+})();
