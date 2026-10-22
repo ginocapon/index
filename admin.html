@@ -6065,7 +6065,8 @@ async function openDocsImmobile(codice) {
   m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:12px';
   m.innerHTML = '<div style="background:#fff;border-radius:12px;width:min(980px,100%);height:min(90vh,900px);display:flex;flex-direction:column;overflow:hidden">'
     + '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #eee"><strong>Documenti ' + escHtml(codice) + '</strong>'
-    + '<button class="btn btn-secondary btn-sm" onclick="closeDocsImmobile()">Chiudi</button></div>'
+    + '<div style="display:flex;gap:8px"><button id="docsImmDl" class="btn btn-primary btn-sm" style="background:#2d7a3a;color:#fff;font-weight:700;padding:10px 16px;min-height:44px" onclick="downloadDocImmobile()" disabled>⬇ Scarica</button>'
+    + '<button class="btn btn-secondary btn-sm" style="min-height:44px" onclick="closeDocsImmobile()">Chiudi</button></div></div>'
     + '<div style="display:flex;flex:1;min-height:0;flex-direction:' + (window.innerWidth < 700 ? 'column' : 'row') + '"><div id="docsImmList" style="' + (window.innerWidth < 700 ? 'max-height:30%;border-bottom:1px solid #eee' : 'width:280px;border-right:1px solid #eee') + ';overflow:auto;padding:10px;font-size:.85rem;flex:none">Carico...</div>'
     + '<div style="flex:1;min-width:0;min-height:0"><iframe id="docsImmFrame" style="width:100%;height:100%;border:0" title="Anteprima PDF"></iframe></div></div></div>';
   document.body.appendChild(m);
@@ -6080,6 +6081,12 @@ async function openDocsImmobile(codice) {
     viewDocImmobile(codice, 0);
   } catch (e) { list.textContent = 'Errore di connessione'; }
 }
+function downloadDocImmobile() {
+  const c = window._docsCur; if (!c) return;
+  const a = document.createElement('a');
+  a.href = c.url; a.download = c.name;
+  document.body.appendChild(a); a.click(); a.remove();
+}
 async function viewDocImmobile(codice, n) {
   const f = (window._docsFiles || [])[n]; if (!f) return;
   const fr = document.getElementById('docsImmFrame');
@@ -6090,6 +6097,8 @@ async function viewDocImmobile(codice, n) {
     if (window._docsBlobUrl) URL.revokeObjectURL(window._docsBlobUrl);
     window._docsBlobUrl = URL.createObjectURL(blob);
     fr.src = window._docsBlobUrl;
+    window._docsCur = { url: window._docsBlobUrl, name: f.name.replace(/^\d{1,4}[-_ ]+/, '') };
+    const dl = document.getElementById('docsImmDl'); if (dl) dl.disabled = false;
   } catch (e) { alert('Errore di connessione'); }
 }
 
