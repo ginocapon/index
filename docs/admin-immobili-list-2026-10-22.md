@@ -8,3 +8,4 @@ Richiesta di Gino via WhatsApp (22/10/2026): codice immobile subito visibile, ri
 - Mobile: la tabella immobili scorre orizzontalmente (overflow-x) cosi' il codice resta leggibile e non si schiaccia tutto.
 
 Test: 13 test automatici su ordinamento e ricerca (anche formato prezzo italiano) + screenshot desktop e mobile. Nessun cambio di dati: modifica solo visiva, reversibile con git revert.
+- Fix in giornata: larghezza minima 250px sulla colonna Azioni, cosi' i bottoni restano su 2 righe e le righe della tabella non diventano altissime (visto su desktop 1280px: righe da ~500px a ~180px).
