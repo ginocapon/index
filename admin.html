@@ -6251,19 +6251,14 @@ function filterTable() {
     filtered = filtered.filter(i => i.venduto || i.affittato);
   }
 
-  // Ricerca testo (titolo, codice, comune, indirizzo, proprietario, prezzo)
+  // Ricerca testo multi-parola: ogni parola deve comparire (anche parziale) in uno dei campi, in qualsiasi ordine, senza maiuscole/accenti
   if (q) {
-    const qDigits = q.replace(/\D/g, '');
-    filtered = filtered.filter(i =>
-      (i.titolo || '').toLowerCase().includes(q) ||
-      (i.codice || '').toLowerCase().includes(q) ||
-      (i.comune || '').toLowerCase().includes(q) ||
-      (i.indirizzo || '').toLowerCase().includes(q) ||
-      (i.proprietario_nome || '').toLowerCase().includes(q) ||
-      (i.proprietario_tel || '').toLowerCase().includes(q) ||
-      (i.proprietario_email || '').toLowerCase().includes(q) ||
-      (qDigits.length >= 2 && String(i.prezzo == null ? '' : i.prezzo).includes(qDigits))
-    );
+    const norm = v => String(v == null ? '' : v).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const words = norm(q).split(/[\s,;]+/).filter(Boolean);
+    filtered = filtered.filter(i => {
+      const hay = norm([i.titolo, i.codice, i.codice ? String(i.codice).replace(/\s+/g, '') : '', i.comune, i.indirizzo, i.proprietario_nome, i.proprietario_tel, i.proprietario_email, i.tipologia, i.tipo, i.tipo_operazione, i.categoria, i.contratto, i.prezzo].join(' | '));
+      return words.every(w => hay.includes(w));
+    });
   }
 
   // Ordinamento (valori vuoti sempre in fondo)
