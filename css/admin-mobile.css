@@ -2,11 +2,11 @@
 #rm-head,#rm-menu,#rm-scheda{display:none}
 @media(max-width:760px){
 body.rm-on .sidebar,body.rm-on .topbar,body.rm-on .sidebar-overlay{display:none!important}
-body.rm-on .main,body.rm-on .content{margin-left:0!important;padding:60px 0 84px!important}
-body.rm-on #rm-head{display:flex;position:fixed;top:0;left:0;right:0;height:52px;z-index:9000;background:#cfe6f7;border-bottom:1px solid #9cc3e0;align-items:center;gap:6px;padding:0 6px}
+body.rm-on .main{margin-left:0!important;padding:0!important}body.rm-on .content{margin-left:0!important;padding:56px 0 84px!important}
+body.rm-on #rm-head{display:flex;position:fixed;top:0;left:0;right:0;height:52px;z-index:450;background:#cfe6f7;border-bottom:1px solid #9cc3e0;align-items:center;gap:6px;padding:0 6px}
 #rm-head button{width:46px;height:46px;border:0;background:none;font-size:30px;color:#14507f;line-height:1}
 #rm-title{flex:1;text-align:center;font:700 19px Arial,sans-serif;color:#14507f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-body.rm-on.rm-menu-open #rm-menu{display:block;position:fixed;inset:52px 0 0;z-index:8900;background:#fff;overflow:auto;padding:14px 14px 40px}
+body.rm-on.rm-menu-open #rm-menu{display:block;position:fixed;inset:52px 0 0;z-index:430;background:#fff;overflow:auto;padding:14px 14px 40px}
 body.rm-on.rm-menu-open .content,body.rm-on.rm-menu-open .main{visibility:hidden}
 .rm-brand{display:flex;align-items:center;gap:12px;margin-bottom:14px;color:#14507f;font:16px Arial}.rm-brand span{display:block;font-size:13px;color:#678}
 .rm-logo{width:46px;height:46px;border-radius:12px;background:#1f6fb2;color:#fff;font:700 26px/46px Arial;text-align:center}
@@ -30,15 +30,16 @@ body.rm-on #sec-immobili>.stats-grid,body.rm-on #sec-immobili>.table-wrap,body.r
 .rm-r2{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;font-size:15px;align-items:baseline}.rm-r2 strong{color:#14507f;font-size:18px}
 .rm-chip{font-style:normal;font-size:12px;font-weight:700;padding:3px 8px;border-radius:99px;background:#e1e8ee;color:#345;white-space:nowrap}.rm-chip.g{background:#d6efdc;color:#1d5a2d}.rm-chip.r{background:#f7d9d6;color:#8a2a22}
 .rm-more,.rm-empty{padding:14px;text-align:center;color:#678}
-.rm-bar{position:fixed;left:0;right:0;bottom:0;z-index:8950;display:flex;background:#1f6fb2;border-top:1px solid #14507f}
+.rm-bar{position:fixed;left:0;right:0;bottom:0;z-index:440;display:flex;background:#1f6fb2;border-top:1px solid #14507f}
 .rm-bar button,.rm-bar a{flex:1;padding:17px 4px;border:0;border-right:1px solid #ffffff44;background:none;color:#fff;font:700 17px Arial;text-align:center;text-decoration:none}
 .rm-bar>:last-child{border-right:0}
 body.rm-scheda-open .rm-box .rm-bar{display:none}
 body.rm-scheda-open{overflow:hidden}
-body.rm-on #rm-scheda:not([hidden]){display:block;position:fixed;inset:52px 0 0;z-index:8960;background:#fff;overflow:auto;padding-bottom:72px;font-family:Arial,sans-serif;color:#17324d}
+body.rm-on #rm-scheda:not([hidden]){display:block;position:fixed;inset:52px 0 0;z-index:445;background:#fff;overflow:auto;padding-bottom:72px;font-family:Arial,sans-serif;color:#17324d}
 .rm-banner{display:flex;justify-content:space-between;gap:8px;align-items:center;background:#1f6fb2;color:#fff;padding:14px;font-size:18px}
 .rm-tabs{display:flex;background:#e6f0f8;position:sticky;top:0;z-index:2}.rm-tabs button{flex:1;padding:14px 4px;border:0;border-bottom:4px solid transparent;background:none;font:700 16px Arial;color:#14507f}.rm-tabs .on{border-bottom-color:#1f6fb2;background:#fff}
 .rm-pane{padding:12px 14px}.rm-hero{width:100%;border-radius:10px;margin:0 0 12px;display:block}
 .rm-f{padding:9px 0;border-bottom:1px solid #e3eaf0}.rm-f label{display:block;font-size:13px;color:#678;margin-bottom:2px}.rm-f div{font-size:17px;white-space:pre-wrap;word-break:break-word}
 .rm-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.rm-tags span{background:#e1ecf5;color:#14507f;border-radius:99px;padding:5px 11px;font-size:14px}
+body:has(.modal-overlay.open) .ra-m-bar,body:has(.modal-overlay.open) .rm-bar,body:has(.ra-modal) .ra-m-bar{display:none!important}
 }
