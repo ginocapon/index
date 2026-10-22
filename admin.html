@@ -6042,6 +6042,57 @@ async function maybePromptProprietariClientiSync() {
   }
 }
 
+
+// ═══ DOCUMENTI IMMOBILE (PDF in archivio privato, via funzione docs-immobili, solo admin) ═══
+async function _docsCall(payload) {
+  const { data: sess } = await sb.auth.getSession();
+  const tk = sess && sess.session ? sess.session.access_token : '';
+  return fetch(SUPABASE_URL + '/functions/v1/docs-immobili', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + tk, 'apikey': SUPABASE_KEY },
+    body: JSON.stringify(payload)
+  });
+}
+function closeDocsImmobile() {
+  const m = document.getElementById('docsImmModal'); if (m) m.remove();
+  if (window._docsBlobUrl) { URL.revokeObjectURL(window._docsBlobUrl); window._docsBlobUrl = null; }
+}
+async function openDocsImmobile(codice) {
+  if (!codice) { alert('Questo immobile non ha un codice.'); return; }
+  closeDocsImmobile();
+  const m = document.createElement('div');
+  m.id = 'docsImmModal';
+  m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:12px';
+  m.innerHTML = '<div style="background:#fff;border-radius:12px;width:min(980px,100%);height:min(90vh,900px);display:flex;flex-direction:column;overflow:hidden">'
+    + '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #eee"><strong>Documenti ' + escHtml(codice) + '</strong>'
+    + '<button class="btn btn-secondary btn-sm" onclick="closeDocsImmobile()">Chiudi</button></div>'
+    + '<div style="display:flex;flex:1;min-height:0;flex-direction:' + (window.innerWidth < 700 ? 'column' : 'row') + '"><div id="docsImmList" style="' + (window.innerWidth < 700 ? 'max-height:30%;border-bottom:1px solid #eee' : 'width:280px;border-right:1px solid #eee') + ';overflow:auto;padding:10px;font-size:.85rem;flex:none">Carico...</div>'
+    + '<div style="flex:1;min-width:0;min-height:0"><iframe id="docsImmFrame" style="width:100%;height:100%;border:0" title="Anteprima PDF"></iframe></div></div></div>';
+  document.body.appendChild(m);
+  const list = document.getElementById('docsImmList');
+  try {
+    const r = await _docsCall({ codice });
+    const d = await r.json();
+    if (!r.ok) { list.textContent = d.error || 'Errore'; return; }
+    if (!d.files.length) { list.textContent = 'Nessun documento per questo immobile.'; return; }
+    window._docsFiles = d.files;
+    list.innerHTML = d.files.map((f, n) => '<button class="btn btn-secondary btn-sm" style="display:block;width:100%;text-align:left;margin-bottom:6px;white-space:normal" onclick="viewDocImmobile(\'' + codice.replace(/'/g, '') + '\',' + n + ')">📄 ' + escHtml(f.name) + ' <small>(' + Math.round(f.size / 1024) + ' KB)</small></button>').join('');
+    viewDocImmobile(codice, 0);
+  } catch (e) { list.textContent = 'Errore di connessione'; }
+}
+async function viewDocImmobile(codice, n) {
+  const f = (window._docsFiles || [])[n]; if (!f) return;
+  const fr = document.getElementById('docsImmFrame');
+  try {
+    const r = await _docsCall({ codice, file: f.name });
+    if (!r.ok) { alert('Impossibile aprire il documento'); return; }
+    const blob = await r.blob();
+    if (window._docsBlobUrl) URL.revokeObjectURL(window._docsBlobUrl);
+    window._docsBlobUrl = URL.createObjectURL(blob);
+    fr.src = window._docsBlobUrl;
+  } catch (e) { alert('Errore di connessione'); }
+}
+
 async function loadImmobili() {
   const wrap = document.getElementById('immobiliTableWrap');
   wrap.innerHTML = '<div class="loading"><div class="spinner"></div> Caricamento...</div>';
@@ -6128,6 +6179,7 @@ function renderTable(data) {
           <button class="btn btn-action btn-secondary" onclick="editImmobile('${i.id}')" title="Modifica">✏️</button>
           <button class="btn btn-action" onclick="duplicateImmobile('${i.id}')" title="Duplica annuncio (nuovo codice, stesse foto e testi)" style="background:#f3e5f5;color:#6a1b9a">📋</button>
           <button class="btn btn-action" onclick="showMatchingClienti('${i.id}')" title="Trova clienti compatibili" style="background:#e3f2fd;color:#1565c0">🤝</button>
+          <button class="btn btn-action" onclick="openDocsImmobile('${i.codice || ''}')" title="Documenti (PDF)" style="background:#e8eaf6;color:#283593">📎</button>
           <button class="btn btn-action" onclick="printPropertyPdf('${i.id}')" title="Stampa PDF" style="background:#fff3e0;color:#e65100">📄</button>
           <button class="btn btn-action" onclick="quickPublishSocial('${i.id}')" title="Pubblica sui Social" style="background:#e8f5e9;color:#1877F2">📢</button>
           <button class="btn btn-action btn-danger" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')">🗑️</button>
