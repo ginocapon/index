@@ -18,8 +18,9 @@ return `<details class="at-pr" style="border-left:8px solid ${col};background:${
 const trashN=()=>trash?trash.pratiche.length+trash.tasks.length+trash.files.length:0;
 const fdt=d=>d?new Date(d).toLocaleDateString('it-IT'):'';
 function trashHtml(){if(!trash)return '<div class="at-trash"><h3>Cestino</h3><div class="at-sub">Caricamento...</div></div>';
-const row=(k,id,lab,sub)=>`<div class="at-trrow"><span><b>${esc(lab)}</b> <span class="at-sub">${esc(sub)}</span></span><span><button type="button" class="at-trbtn" data-restore="${k}|${esc(id)}">Ripristina</button> <button type="button" class="at-danger" data-purge="${k}|${esc(id)}">Elimina definitivamente</button></span></div>`;
-const r=[].concat(trash.pratiche.map(x=>row('p',x.id,'Pratica: '+x.titolo,x.nt+' voci, '+x.nf+' file - tolta il '+fdt(x.when))),trash.tasks.map(x=>row('t',x.id,'Voce: '+x.text,'della pratica '+x.pratica+(x.nf?' - '+x.nf+' file':'')+' - tolta il '+fdt(x.when))),trash.files.map(x=>row('f',x.id,'File: '+x.name,'della voce '+x.task+' - tolto il '+fdt(x.when))));
+const pend=w=>w&&new Date(w).getFullYear()>=9000;
+const row=(k,id,lab,sub,w)=>pend(w)?`<div class="at-trrow"><span><b>${esc(lab)}</b> <span class="at-sub">ELIMINAZIONE DA COMPLETARE (interrotta, non ripristinabile)</span></span><span><button type="button" class="at-danger" data-purge="${k}|${esc(id)}">Completa eliminazione</button></span></div>`:`<div class="at-trrow"><span><b>${esc(lab)}</b> <span class="at-sub">${esc(sub)}</span></span><span><button type="button" class="at-trbtn" data-restore="${k}|${esc(id)}">Ripristina</button> <button type="button" class="at-danger" data-purge="${k}|${esc(id)}">Elimina definitivamente</button></span></div>`;
+const r=[].concat(trash.pratiche.map(x=>row('p',x.id,'Pratica: '+x.titolo,x.nt+' voci, '+x.nf+' file - tolta il '+fdt(x.when),x.when)),trash.tasks.map(x=>row('t',x.id,'Voce: '+x.text,'della pratica '+x.pratica+(x.nf?' - '+x.nf+' file':'')+' - tolta il '+fdt(x.when),x.when)),trash.files.map(x=>row('f',x.id,'File: '+x.name,'della voce '+x.task+' - tolto il '+fdt(x.when),x.when)));
 return '<div class="at-trash"><h3>Cestino</h3><div class="at-sub">Le voci tolte restano qui, con i loro file, finche\' non le elimini definitivamente.</div>'+(r.join('')||'<div class="at-empty">Il cestino e\' vuoto.</div>')+'</div>';}
 function draw(){const list=items.filter(p=>p.agente===agent).filter(p=>filter==='tutte'||(filter==='aperte'?p.tasks.some(x=>!x.done):p.tasks.length&&p.tasks.every(x=>x.done)));
 root.innerHTML=`<div class="at"><div class="at-head"><h2>Attivit\u00e0</h2><span><span class="at-tabs"><button type="button" data-ag="Gino" class="${agent==='Gino'?'on':''}">Attivit\u00e0 Gino</button><button type="button" data-ag="Linda" class="${agent==='Linda'?'on':''}">Attivit\u00e0 Linda</button></span> <select data-f><option value="tutte">Tutte le pratiche</option><option value="aperte">Con attivita aperte</option><option value="chiuse">Completate</option></select> <button type="button" class="at-trbtn" data-trash>Cestino${trash&&trashN()?' ('+trashN()+')':''}</button></span></div><form class="at-newp"><input name="titolo" placeholder="Nuova pratica (es. Rossi - Via Roma)" required><button>Crea pratica</button></form><div class="at-banner ${store.mode==='database'?'at-live':''}">${store.mode==='database'?'Salvato nel database privato. Nessuna email parte da qui.':'ANTEPRIMA: pratiche di esempio, nulla viene salvato.'}${msg?' <b>'+esc(msg)+'</b>':''}</div><div class="at-list">${list.map(card).join('')||'<div class="at-empty">Nessuna pratica.</div>'}</div>${showTrash?trashHtml():''}</div>`;
@@ -37,6 +38,7 @@ async loadTrash(){const r={pratiche:[],tasks:[],files:[]};for(const p of data){i
 async restore(k,id){delete find(k,id).o._d;},
 async purge(k,id){const x=find(k,id);if(k==='p')data.splice(data.indexOf(x.o),1);else if(k==='t')x.p.tasks.splice(x.p.tasks.indexOf(x.o),1);else x.t.files.splice(x.t.files.indexOf(x.o),1);},
 async download(){alert('Anteprima: il download funzionera con i file veri.');},async requestDraft(){throw new Error('anteprima: nessuna richiesta salvata');}};};
+const PURG='9999-12-31T00:00:00+00:00',PURGLIM='9000-01-01T00:00:00+00:00';
 const dbStore=sb=>({mode:'database',
 async load(){const r=await sb.from('pratiche').select('id,titolo,agente,colore,creata_il,attivita(id,testo,tipo,scadenza,fatta,fatta_il,eliminata_il,allegati_attivita(id,nome,percorso,stato,eliminata_il))').is('eliminata_il',null).order('creata_il',{ascending:false});if(r.error)throw r.error;
 return (r.data||[]).map(p=>({id:p.id,titolo:p.titolo,cliente:'',agente:p.agente||'Gino',colore:p.colore||'',tasks:(p.attivita||[]).filter(a=>!a.eliminata_il).map(a=>({id:a.id,text:a.testo,kind:a.tipo||'Altro',due:a.scadenza||'',done:!!a.fatta,doneAt:a.fatta_il?new Date(a.fatta_il).toLocaleDateString('it-IT'):'',files:(a.allegati_attivita||[]).filter(f=>!f.eliminata_il).map(f=>({id:f.id,name:f.nome,path:f.percorso}))}))}));},
@@ -59,14 +61,18 @@ const b=await sb.from('attivita').select('id,testo,eliminata_il,pratiche!inner(t
 out.tasks=(b.data||[]).map(t=>({id:t.id,text:t.testo,pratica:t.pratiche.titolo,nf:(t.allegati_attivita||[]).length,when:t.eliminata_il}));
 const c=await sb.from('allegati_attivita').select('id,nome,eliminata_il,attivita!inner(testo,eliminata_il,pratiche!inner(eliminata_il))').not('eliminata_il','is',null).is('attivita.eliminata_il',null).is('attivita.pratiche.eliminata_il',null);if(c.error)throw c.error;
 out.files=(c.data||[]).map(f=>({id:f.id,name:f.nome,task:f.attivita.testo,when:f.eliminata_il}));return out;},
-async restore(k,id){const tb={p:'pratiche',t:'attivita',f:'allegati_attivita'}[k];const r=await sb.from(tb).update({eliminata_il:null}).eq('id',id);if(r.error)throw r.error;},
-async purge(k,id){let paths=[];if(k==='f'){const q=await sb.from('allegati_attivita').select('percorso').eq('id',id);if(q.error)throw q.error;paths=(q.data||[]).map(x=>x.percorso);}
-else if(k==='t'){const q=await sb.from('allegati_attivita').select('percorso').eq('attivita_id',id);if(q.error)throw q.error;paths=(q.data||[]).map(x=>x.percorso);}
-else{const t=await sb.from('attivita').select('id').eq('pratica_id',id);if(t.error)throw t.error;const ids=(t.data||[]).map(x=>x.id);if(ids.length){const q=await sb.from('allegati_attivita').select('percorso').in('attivita_id',ids);if(q.error)throw q.error;paths=(q.data||[]).map(x=>x.percorso);}}
-paths=paths.filter(Boolean);const tb={p:'pratiche',t:'attivita',f:'allegati_attivita'}[k];
-const g=await sb.from(tb).select('id').eq('id',id).not('eliminata_il','is',null);if(g.error)throw g.error;if(!(g.data||[]).length)throw new Error('Non e\' nel Cestino: non eliminato nulla');
-if(paths.length){const u=await sb.storage.from('attivita-pratiche').remove(paths);if(u.error)throw new Error('File non rimossi, la voce e\' ancora nel Cestino con i suoi file: riprova ('+u.error.message+')');}
-const r=await sb.from(tb).delete().eq('id',id).not('eliminata_il','is',null).select('id');if(r.error)throw new Error('File rimossi ma la voce e\' ancora nel Cestino: riprova l\'eliminazione ('+r.error.message+')');},
+async restore(k,id){const tb={p:'pratiche',t:'attivita',f:'allegati_attivita'}[k];const r=await sb.from(tb).update({eliminata_il:null}).eq('id',id).lt('eliminata_il',PURGLIM).select('id');if(r.error)throw r.error;if(!(r.data||[]).length)throw new Error('Non ripristinabile: eliminazione gia\' in corso (completala dal Cestino) o voce gia\' ripristinata');},
+async purge(k,id){const tb={p:'pratiche',t:'attivita',f:'allegati_attivita'}[k];
+const g=await sb.from(tb).update({eliminata_il:PURG}).eq('id',id).not('eliminata_il','is',null).select('id');if(g.error)throw g.error;if(!(g.data||[]).length)throw new Error('Non e\' nel Cestino: non eliminato nulla');
+const stuck=e=>new Error('Eliminazione INTERROTTA, resta nel Cestino come "da completare" e non si puo\' ripristinare: usa "Completa eliminazione" per riprovare ('+(e&&e.message||e)+')');
+let paths=[];try{let tids=[];
+if(k==='p'){const t=await sb.from('attivita').update({eliminata_il:PURG}).eq('pratica_id',id).select('id');if(t.error)throw t.error;tids=(t.data||[]).map(x=>x.id);}
+else if(k==='t')tids=[id];
+if(k!=='f'){if(tids.length){const f=await sb.from('allegati_attivita').update({eliminata_il:PURG}).in('attivita_id',tids).select('percorso');if(f.error)throw f.error;paths=(f.data||[]).map(x=>x.percorso);}}
+else{const q=await sb.from('allegati_attivita').select('percorso').eq('id',id);if(q.error)throw q.error;paths=(q.data||[]).map(x=>x.percorso);}
+paths=paths.filter(Boolean);
+if(paths.length){const u=await sb.storage.from('attivita-pratiche').remove(paths);if(u.error)throw u.error;}
+const r=await sb.from(tb).delete().eq('id',id).eq('eliminata_il',PURG).select('id');if(r.error)throw r.error;}catch(e){throw stuck(e);}},
 async requestDraft(pid,fids,sub,body){const r=await sb.from('richieste_bozza_email').insert({pratica_id:pid,allegati:fids,oggetto:String(sub).slice(0,200),testo:String(body).slice(0,4000)});if(r.error)throw r.error;},
 async download(file){const r=await sb.storage.from('attivita-pratiche').createSignedUrl(file.path,60,{download:file.name});if(r.error)throw r.error;window.open(r.data.signedUrl,'_blank');}});
 async function run(fn){try{msg='';await fn();}catch(e){msg='Non salvato: '+(e&&e.message||e);}draw();}
@@ -79,11 +85,11 @@ root.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)retur
 if(b.dataset.dl){const[a,t,i]=b.dataset.dl.split('|');const f=items.find(x=>x.id===a).tasks.find(x=>x.id===t).files[+i];run(()=>store.download(f));return;}
 const reload=async()=>{items=await store.load(initItems);try{trash=await store.loadTrash();}catch(e){trash=null;}};
 if(b.dataset.trash!==undefined){showTrash=!showTrash;if(showTrash)run(async()=>{trash=await store.loadTrash();});else draw();return;}
-if(b.dataset.restore){const[k,id]=b.dataset.restore.split('|');run(async()=>{await store.restore(k,id);await reload();msg='Ripristinato.';});return;}
+if(b.dataset.restore){const[k,id]=b.dataset.restore.split('|');run(async()=>{try{await store.restore(k,id);msg='Ripristinato.';}finally{await reload();}});return;}
 if(b.dataset.purge){const[k,id]=b.dataset.purge.split('|');const nm={p:'la pratica',t:'la voce',f:'il file'}[k];
 if(!confirm('Eliminare DEFINITIVAMENTE '+nm+' dal cestino? Non si puo\' recuperare.'))return;
 if(!confirm('Seconda conferma: '+nm+' e i file collegati verranno cancellati per sempre. Procedo?'))return;
-run(async()=>{await store.purge(k,id);await reload();msg='Eliminato definitivamente.';});return;}
+run(async()=>{try{await store.purge(k,id);}finally{await reload();}msg='Eliminato definitivamente.';});return;}
 if(b.dataset.delpr){const p=items.find(x=>x.id===b.dataset.delpr),nf=p.tasks.reduce((n,t)=>n+(t.files||[]).length,0);
 if(!confirm('Spostare nel Cestino la pratica "'+p.titolo+'" con '+p.tasks.length+' voci e '+nf+' file? Potrai ripristinarla dal Cestino.'))return;
 run(async()=>{await store.delPratica(p);p.tasks.forEach(t=>{selDel.delete('t|'+t.id);(t.files||[]).forEach(f=>selDel.delete('f|'+f.id));});await reload();msg='Pratica spostata nel Cestino.';});return;}
