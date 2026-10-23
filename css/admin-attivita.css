@@ -42,3 +42,4 @@
 .at-meta{grid-column:1/-1;display:flex;gap:14px;align-items:center;flex-wrap:wrap}.at-meta input[type=color]{width:44px;height:30px;padding:0;border:1px solid #c5d0d6;border-radius:6px;vertical-align:middle}
 .at-head select+select{margin-left:6px}
 .at-tabs{display:inline-flex;gap:6px;margin-right:8px}.at-head .at-tabs button{background:#fff3;color:#fff;border:1px solid #fff8;font-weight:700;padding:8px 14px;cursor:pointer}.at-head .at-tabs button.on{background:#fff;color:#0b4f8a}
+.at-banner.at-live{background:#e3f4e8;border-color:#2a9d8f}
