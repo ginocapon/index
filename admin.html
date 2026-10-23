@@ -7154,7 +7154,7 @@ async function duplicateImmobile(id) {
   const imm = allImmobili.find(x => String(x.id) === String(id));
   if (!imm) { toast('Immobile non trovato', 'error'); return; }
   const label = (imm.codice ? imm.codice + ' — ' : '') + (imm.titolo || 'Immobile');
-  if (!confirm(`Duplicare "${label}"?\n\nVerrà creato un nuovo annuncio con codice diverso, copiando foto, descrizione, planimetrie e tour virtuali.\n\nUtile per uffici gemelli o stesso immobile in vendita e affitto.`)) return;
+  if (!confirm(`Duplicare "${label}"?\n\nVerrà creata una copia in BOZZA (non visibile sul sito) con codice diverso, copiando foto, descrizione e tour virtuali. Documenti e planimetrie private NON vengono copiati. L'originale non cambia.\n\nUtile per uffici gemelli o stesso immobile in vendita e affitto.`)) return;
 
   const { data: full, error: fetchErr } = await sb.from('immobili').select('*').eq('id', id).single();
   if (fetchErr || !full) {
@@ -7179,10 +7179,12 @@ async function duplicateImmobile(id) {
   payload.affittato = false;
   payload.id_idealista = null;
   payload.in_evidenza = false;
-  payload.attivo = true;
+  payload.attivo = false; // la copia nasce in bozza: non visibile sul sito finche non la attivi tu
+  payload.documenti = []; // i documenti privati (planimetrie incluse) non si copiano: restano solo sull'originale
+  payload.planimetrie = [];
   payload.note_interne = [full.note_interne, noteExtra].filter(Boolean).join('\n');
 
-  ['foto', 'foto_urls', 'planimetrie', 'documenti', 'virtual_tour_scenes', 'unita_catastali', 'catasto_pdf'].forEach(k => {
+  ['foto', 'foto_urls', 'virtual_tour_scenes', 'unita_catastali', 'catasto_pdf'].forEach(k => {
     if (payload[k] != null) payload[k] = JSON.parse(JSON.stringify(payload[k]));
   });
   if (Array.isArray(payload.foto) && payload.foto.length) {
@@ -18001,6 +18003,7 @@ window.showSection('home');
 <script src="js/agenda-event-types.js?v=1"></script>
 <script src="js/admin-agenda.js?v=7"></script>
 <script src="js/admin-cliente-scheda.js?v=3"></script>
+<script src="js/admin-immobile-operazioni.js?v=1"></script>
 <script>RighettoAgenda.init(document.getElementById("righetto-operational-agenda"));</script>
 <script src="js/admin-attivita.js?v=5"></script>
 <script>(function(){var el=document.getElementById('righetto-attivita');if(!el)return;var done=false,busy=false;function msg(t){el.innerHTML='<div class="at-banner">'+t+'</div>';}
