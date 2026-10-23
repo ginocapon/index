@@ -29,20 +29,21 @@ async function open(id){
  const cerca=row('Operazione',c.tipo_operazione_cercata)+row('Tipologia',c.tipologia_cercata)+row('Zona',c.zona_cercata)+row('Budget',(c.budget_min||c.budget_max)?('€ '+(c.budget_min||'0')+' - '+(c.budget_max||'qualsiasi')):'')+row('Camere minime',c.camere_min)+row('Superficie minima',c.superficie_min?c.superficie_min+' mq':'');
  box=document.createElement('div');box.className='rcs';box.setAttribute('role','dialog');box.setAttribute('aria-modal','true');
  const budget=(c.budget_min||c.budget_max)?('€ '+(c.budget_min||'0')+' - '+(c.budget_max||'qualsiasi')):'';
- box.innerHTML=`<div class="rcs-d"><div class="rcs-top"><div><h2>${esc(c.nome||c.ragione_sociale||'Cliente')}</h2><div class="rcs-sub">${c.telefono?`<a href="tel:${esc(c.telefono)}">${esc(c.telefono)}</a>`:''}${c.telefono&&c.email?' · ':''}${c.email?`<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>`:''}</div><div class="rcs-sub">Inserito il ${esc(fmtD(c.created_at))}${c.fonte?' · fonte: '+esc(c.fonte):''}</div></div>
+ box.innerHTML=`<div class="rcs-d"><div class="rcs-top"><div><h2>${esc(c.nome||c.ragione_sociale||'Cliente')}${c.storico?' <span style="font-size:13px;background:#eee;padding:2px 8px;border-radius:10px">Storico</span>':''}</h2><div class="rcs-sub">${c.telefono?`<a href="tel:${esc(c.telefono)}">${esc(c.telefono)}</a>`:''}${c.telefono&&c.email?' · ':''}${c.email?`<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>`:''}</div><div class="rcs-sub">Inserito il ${esc(fmtD(c.created_at))}${c.fonte?' · fonte: '+esc(c.fonte):''}</div></div>
  <div class="rcs-ops"><button data-ops aria-haspopup="true">🔧 Operazioni</button><button data-x>Chiudi</button><div class="rcs-menu" hidden></div></div></div>
- <div class="rcs-tabs" role="tablist"><button data-t="scheda" aria-selected="true">Scheda</button><button data-t="cron" aria-selected="false">Appuntamenti</button><button data-t="all" aria-selected="false">Allegati</button></div>
+ <div class="rcs-tabs" role="tablist"><button data-t="scheda" aria-selected="true">Scheda</button><button data-t="cron" aria-selected="false">Appuntamenti</button><button data-t="all" aria-selected="false">Allegati</button><button data-t="crn" aria-selected="false">Cronistoria note</button></div>
  <section data-p="scheda"><h3>Informazioni</h3><div class="rcs-grid">${row('Tipo cliente',c.tipo_cliente)}${row('Ragione sociale',c.ragione_sociale)}${row('Codice fiscale',c.codice_fiscale)}${row('Partita IVA',c.partita_iva)}${row('Indirizzo',c.indirizzo_cliente)}${row('PEC',c.pec)}${row('Codice SDI',c.sdi)}${row('Ruolo in rubrica',c.ruolo_rubrica)}</div>
  ${cerca?`<h3>Cosa cerca</h3><div class="rcs-grid">${cerca}</div>`:''}${(c.interesse||c.note)?`<h3>Note</h3>${c.interesse?`<p>${esc(c.interesse)}</p>`:''}${c.note?`<p>${esc(c.note)}</p>`:''}`:''}</section>
  <section data-p="cron" hidden><p class="rcs-note">Solo appuntamenti dell'agenda collegati a questo cliente. Telefonate, email e SMS del vecchio gestionale non sono importati.</p><div data-cron>Caricamento…</div></section>
- <section data-p="all" hidden></section></div>`;
+ <section data-p="all" hidden></section>
+ <section data-p="crn" hidden><p class="rcs-note">Note interne con data e autore. Non vengono inviate a nessuno. Le telefonate, email e SMS del vecchio gestionale non sono importati.</p><div data-crn>Caricamento…</div><div style="margin-top:10px"><textarea data-crn-t rows="3" style="width:100%;box-sizing:border-box;font:15px Arial;padding:8px;border:1px solid #b9c7d1;border-radius:8px" placeholder="Scrivi una nota (es. richiamato, interessato a visita)"></textarea><button data-crn-add style="margin-top:6px">Aggiungi nota</button></div></section></div>`;
  document.body.appendChild(box);
  const docs=Array.isArray(c.documenti_cliente)?c.documenti_cliente:[];
  box.querySelector('[data-p=all]').innerHTML=docs.length?docs.map(d=>`<div class="rcs-ev"><a href="${esc(d.url)}" target="_blank" rel="noopener">📄 ${esc(d.nome||'documento')}</a> <span class="rcs-note">${esc(d.tipo||'')}</span></div>`).join(''):'<p class="rcs-note">Nessun allegato collegato a questa scheda. I file dei clienti sono nell\'archivio privato GitHub clienti-docs, non collegati qui.</p>';
  const menu=box.querySelector('.rcs-menu');
- menu.innerHTML=`<button data-op="edit">Modifica scheda</button><button data-op="match">Trova immobili compatibili</button><button data-op="ev">Aggiungi evento / nuovo appuntamento</button><button data-op="mail" ${c.email?'':'disabled'}>Contatta via email (apre il tuo programma di posta)</button>`;
+ menu.innerHTML=`<button data-op="edit">Modifica scheda</button><button data-op="match">Trova immobili compatibili</button><button data-op="ev">Aggiungi evento / nuovo appuntamento</button><button data-op="mail" ${c.email?'':'disabled'}>Contatta via email (apre il tuo programma di posta)</button><hr><button data-op="storico">${c.storico?'Riporta tra i clienti attivi':'Metti nello storico'}</button>`;
  const todoBox=document.createElement('details');todoBox.style.cssText='margin-top:18px;border:1px dashed #b9c7d1;border-radius:8px;padding:8px 12px';
- todoBox.innerHTML='<summary style="cursor:pointer;font-weight:700">Da completare (non ancora disponibili qui)</summary><p class="rcs-note">Presenti nel vecchio gestionale, non ancora costruiti in questa scheda: invio informativa privacy, richiesta firma consenso, follow up richiesta, inserisci notizia, crea e mostra fatture, scheda catastale, adeguata verifica, verifica cliente, stampe e modelli, firma documento, metti nello storico, cronistoria completa (telefonate, email, SMS).</p>';
+ todoBox.innerHTML='<summary style="cursor:pointer;font-weight:700">Da completare (non ancora disponibili qui)</summary><p class="rcs-note">Presenti nel vecchio gestionale, non ancora costruiti in questa scheda: invio informativa privacy, richiesta firma consenso, follow up richiesta, inserisci notizia, crea e mostra fatture, scheda catastale, adeguata verifica, verifica cliente, stampe e modelli, firma documento, cronistoria completa importata (telefonate, email, SMS).</p>';
  box.querySelector('.rcs-d').appendChild(todoBox);
  box.addEventListener('click',ev=>{
   if(ev.target===box){close();return;}
@@ -55,8 +56,11 @@ async function open(id){
   else if(op==='match'){close();showMatchingImmobili(c.id);}
   else if(op==='ev'){close();if(typeof showSection==='function')showSection('agenda');if(window.RighettoAgenda&&RighettoAgenda.newEvent)RighettoAgenda.newEvent({client_id:c.id,client:c.nome,phone:c.telefono});}
   else if(op==='mail'){location.href='mailto:'+c.email;}
+  else if(op==='storico'){toggleStorico(c);}
  });
  document.addEventListener('keydown',function k(e){if(e.key==='Escape'){close();document.removeEventListener('keydown',k);}});
+ loadCrn(c.id);
+ box.querySelector('[data-crn-add]').addEventListener('click',async()=>{const ta=box.querySelector('[data-crn-t]');const t=ta.value.trim();if(!t)return;const u=await sb.auth.getUser();const r=await sb.from('cliente_cronistoria').insert([{cliente_id:c.id,tipo:'nota',testo:t,autore:(u.data&&u.data.user&&u.data.user.email)||null}]);if(r.error){alert('Nota non salvata: '+r.error.message);return;}ta.value='';loadCrn(c.id);});
  const ev=await sb.from('agenda_events').select('id,starts_at,type_id,agents,title,notes_internal,property_id,done').eq('client_id',c.id).is('deleted_at',null).order('starts_at',{ascending:false}).limit(100);
  const el=box&&box.querySelector('[data-cron]');if(!el)return;
  if(ev.error){el.textContent='Cronistoria non leggibile: '+ev.error.message;return;}
@@ -65,5 +69,7 @@ async function open(id){
  if(pids.length){const p=await sb.from('immobili').select('id,codice').in('id',pids);(p.data||[]).forEach(x=>pm[x.id]=x.codice);}
  el.innerHTML=ev.data.map(e=>`<div class="rcs-ev"><b>${esc(fmtDT(e.starts_at))}</b> · ${esc((e.agents||[]).join(', '))}${e.property_id&&pm[e.property_id]?' · immobile '+esc(pm[e.property_id]):''}${e.done?' · eseguito':''}<div class="rcs-note">${esc(e.title||e.notes_internal||'')}</div></div>`).join('')+'<p class="rcs-note">La cronistoria completa del vecchio gestionale (telefonate, email, SMS) non è stata importata.</p>';
 }
+async function loadCrn(id){const el=box&&box.querySelector('[data-crn]');if(!el)return;const r=await sb.from('cliente_cronistoria').select('creato_il,tipo,testo,autore').eq('cliente_id',id).order('creato_il',{ascending:false}).limit(200);if(r.error){el.textContent='Cronistoria non leggibile: '+r.error.message;return;}el.innerHTML=r.data.length?r.data.map(x=>`<div class="rcs-ev"><b>${esc(fmtDT(x.creato_il))}</b>${x.autore?' · '+esc(x.autore):''}<div>${esc(x.testo)}</div></div>`).join(''):'<p class="rcs-note">Nessuna nota ancora.</p>';}
+async function toggleStorico(c){const to=!c.storico;if(!confirm(to?'Mettere questo cliente nello storico?\n\nNon viene cancellato: esce dall\'elenco normale e resta in "Mostra storico".':'Riportare questo cliente tra gli attivi?'))return;const r=await sb.from('clienti').update({storico:to,storico_il:to?new Date().toISOString():null}).eq('id',c.id);if(r.error){alert('Operazione non riuscita: '+r.error.message);return;}close();if(typeof loadClienti==='function')loadClienti();open(c.id);}
 window.RighettoCliente={open,close};
 })();

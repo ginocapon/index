@@ -6362,6 +6362,7 @@ async function loadImmobili() {
 
   const tipo = document.getElementById('filtroTipo').value;
   let query = sb.from('immobili').select('*').order('created_at', { ascending: false });
+  query = window.__rCestino ? query.eq('cestino', true) : query.eq('cestino', false);
   if (tipo === 'affitto_residenziale') {
     query = query.in('tipo_operazione', ['affitto_residenziale', 'affitto']);
   } else if (tipo) {
@@ -6446,7 +6447,7 @@ function renderTable(data) {
           <button class="btn btn-action" onclick="openFotoImmobile('${i.id}')" title="Foto (vedi e scarica)" style="background:#e0f2f1;color:#00695c">🖼️</button>
           <button class="btn btn-action" onclick="printPropertyPdf('${i.id}')" title="Stampa PDF" style="background:#fff3e0;color:#e65100">📄</button>
           <button class="btn btn-action" onclick="quickPublishSocial('${i.id}')" title="Pubblica sui Social" style="background:#e8f5e9;color:#1877F2">📢</button>
-          <button class="btn btn-action btn-danger" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')">🗑️</button>
+          ${i.cestino ? `<button class="btn btn-action" onclick="restoreImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')" title="Ripristina dal cestino" style="background:#e8f5e9;color:#27ae60">↩️</button><button class="btn btn-action btn-danger" onclick="purgeImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')" title="Elimina definitivamente">❌</button>` : `<button class="btn btn-action btn-danger" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')" title="Sposta nel cestino">🗑️</button>`}
           <button class="btn btn-action" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="${i.in_evidenza ? 'Rimuovi da evidenza' : 'Metti in evidenza'}" style="background:${i.in_evidenza ? '#e74c3c' : 'var(--sfondo)'};border:${i.in_evidenza ? '2px solid #c0392b' : '1px solid #ddd'};${i.in_evidenza ? 'color:#fff' : ''}">${i.in_evidenza ? '⭐' : '☆'}</button>
           <button class="btn btn-action" onclick="toggleAttivo('${i.id}',${!isAttivo})" title="Toggle attivo" style="background:var(--sfondo)">${isAttivo ? '👁️' : '🚫'}</button>
           <button class="btn btn-action" onclick="previewImmobile('${i.id}')" title="Anteprima rapida" style="background:#e8f5e9;color:#27ae60">🔍</button>
@@ -7063,10 +7064,26 @@ async function saveImmobile(e) {
 // CRUD HELPERS
 // ══════════════════════════════════════
 async function deleteImmobile(id, titolo) {
-  if (!confirm(`Eliminare definitivamente "${titolo}"?\n\nQuesta azione non è reversibile.`)) return;
-  const { error } = await sb.from('immobili').delete().eq('id', id);
+  if (!confirm(`Spostare "${titolo}" nel cestino?\n\nNon sarà più visibile sul sito né nell'elenco. Resta recuperabile da "Mostra cestino" e non viene eliminato.`)) return;
+  const r1 = await sb.rpc('rig_admin_set_attivo', { p_id: id, p_attivo: false });
+  if (r1.error && !(r1.error.message || '').includes('Could not find the function')) { toast('Errore: ' + r1.error.message, 'error'); return; }
+  const { error } = await sb.from('immobili').update({ cestino: true, cestino_il: new Date().toISOString(), attivo: false }).eq('id', id);
   if (error) { toast('Errore: ' + error.message, 'error'); return; }
-  toast('Immobile eliminato', 'success');
+  toast('Immobile spostato nel cestino', 'success');
+  await loadImmobili();
+}
+async function restoreImmobile(id, titolo) {
+  if (!confirm(`Ripristinare "${titolo}" dal cestino?\n\nTorna nell'elenco ma resta NON attivo sul sito: lo riattivi tu dopo il controllo di foto, prezzo e APE.`)) return;
+  const { error } = await sb.from('immobili').update({ cestino: false, cestino_il: null }).eq('id', id);
+  if (error) { toast('Errore: ' + error.message, 'error'); return; }
+  toast('Immobile ripristinato (non attivo sul sito)', 'success');
+  await loadImmobili();
+}
+async function purgeImmobile(id, titolo) {
+  if (!confirm(`Eliminare DEFINITIVAMENTE "${titolo}" dal cestino?\n\nNon si può recuperare.`)) return;
+  const { error } = await sb.from('immobili').delete().eq('id', id).eq('cestino', true);
+  if (error) { toast('Errore: ' + error.message, 'error'); return; }
+  toast('Immobile eliminato definitivamente', 'success');
   await loadImmobili();
 }
 
@@ -9136,6 +9153,7 @@ async function loadClienti() {
     const fonte = document.getElementById('filtroFonteCliente').value;
     let query = sb.from('clienti').select('*', { count: 'exact' }).order('created_at', { ascending: false });
     if (fonte) query = query.eq('fonte', fonte);
+    query = window.__rStorico ? query.eq('storico', true) : query.eq('storico', false);
 
     const { data, error, count } = await query;
     if (error) throw error;
@@ -18004,6 +18022,7 @@ window.showSection('home');
 <script src="js/admin-agenda.js?v=7"></script>
 <script src="js/admin-cliente-scheda.js?v=3"></script>
 <script src="js/admin-immobile-operazioni.js?v=1"></script>
+<script src="js/admin-blocco2.js?v=1"></script>
 <script>RighettoAgenda.init(document.getElementById("righetto-operational-agenda"));</script>
 <script src="js/admin-attivita.js?v=5"></script>
 <script>(function(){var el=document.getElementById('righetto-attivita');if(!el)return;var done=false,busy=false;function msg(t){el.innerHTML='<div class="at-banner">'+t+'</div>';}
