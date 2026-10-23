@@ -12,7 +12,7 @@ function css(){if(document.getElementById('rcs-css'))return;const s=document.cre
 '.rcs-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0;border-bottom:2px solid #00508f;padding-bottom:8px}'+
 '.rcs-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 22px}.rcs-grid div{padding:6px 0;border-bottom:1px solid #eef2f5}.rcs-grid b{display:block;font-size:11px;text-transform:uppercase;color:#607184;letter-spacing:.04em}'+
 '.rcs h3{background:#00508f;color:#fff;margin:18px 0 8px;padding:7px 12px;font-size:14px;border-radius:4px}'+
-'.rcs-ops{position:relative}.rcs-menu{position:absolute;right:0;top:44px;z-index:5;background:#fff;border:1px solid #00508f;min-width:290px;box-shadow:0 8px 24px #0003}'+
+'.rcs-ops{position:relative;display:flex;gap:8px}.rcs-menu{position:absolute;right:0;top:44px;z-index:5;background:#fff;border:1px solid #00508f;min-width:290px;box-shadow:0 8px 24px #0003}'+
 '.rcs-menu button{display:block;width:100%;text-align:left;border:0;border-radius:0;background:#fff;min-height:36px}.rcs-menu button:hover:not(:disabled){background:#eaf2f8}.rcs-menu hr{margin:2px 0;border:0;border-top:1px solid #d9e2e7}.rcs-menu small{color:#8a5a00;font-size:11px;margin-left:6px}'+
 '.rcs-ev{border-left:6px solid #99cc00;background:#f7f9fa;padding:8px 12px;margin:8px 0;border-radius:6px}.rcs-note{color:#566773;font-size:13px}'+
 '@media(max-width:760px){.rcs-grid{grid-template-columns:1fr}.rcs-d{padding:14px}.rcs-menu{position:fixed;left:12px;right:12px;top:auto;bottom:12px;max-height:70vh;overflow:auto}}';
@@ -26,13 +26,14 @@ async function open(id){
  const r=await sb.from('clienti').select('*').eq('id',id).maybeSingle();
  if(r.error||!r.data){alert('Cliente non trovato nel database.');return;}
  const c=r.data;
+ const cerca=row('Operazione',c.tipo_operazione_cercata)+row('Tipologia',c.tipologia_cercata)+row('Zona',c.zona_cercata)+row('Budget',(c.budget_min||c.budget_max)?('€ '+(c.budget_min||'0')+' - '+(c.budget_max||'qualsiasi')):'')+row('Camere minime',c.camere_min)+row('Superficie minima',c.superficie_min?c.superficie_min+' mq':'');
  box=document.createElement('div');box.className='rcs';box.setAttribute('role','dialog');box.setAttribute('aria-modal','true');
  const budget=(c.budget_min||c.budget_max)?('€ '+(c.budget_min||'0')+' - '+(c.budget_max||'qualsiasi')):'';
  box.innerHTML=`<div class="rcs-d"><div class="rcs-top"><div><h2>${esc(c.nome||c.ragione_sociale||'Cliente')}</h2><div class="rcs-sub">${c.telefono?`<a href="tel:${esc(c.telefono)}">${esc(c.telefono)}</a>`:''}${c.telefono&&c.email?' · ':''}${c.email?`<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>`:''}</div><div class="rcs-sub">Inserito il ${esc(fmtD(c.created_at))}${c.fonte?' · fonte: '+esc(c.fonte):''}</div></div>
  <div class="rcs-ops"><button data-ops aria-haspopup="true">🔧 Operazioni</button><button data-x>Chiudi</button><div class="rcs-menu" hidden></div></div></div>
  <div class="rcs-tabs" role="tablist"><button data-t="scheda" aria-selected="true">Scheda</button><button data-t="cron" aria-selected="false">Cronistoria</button><button data-t="all" aria-selected="false">Allegati</button></div>
  <section data-p="scheda"><h3>Informazioni</h3><div class="rcs-grid">${row('Tipo cliente',c.tipo_cliente)}${row('Ragione sociale',c.ragione_sociale)}${row('Codice fiscale',c.codice_fiscale)}${row('Partita IVA',c.partita_iva)}${row('Indirizzo',c.indirizzo_cliente)}${row('PEC',c.pec)}${row('Codice SDI',c.sdi)}${row('Ruolo in rubrica',c.ruolo_rubrica)}</div>
- <h3>Cosa cerca</h3><div class="rcs-grid">${row('Operazione',c.tipo_operazione_cercata)}${row('Tipologia',c.tipologia_cercata)}${row('Zona',c.zona_cercata)}${row('Budget',budget)}${row('Camere minime',c.camere_min)}${row('Superficie minima',c.superficie_min?c.superficie_min+' mq':'')}</div>${(c.interesse||c.note)?`<h3>Note</h3>${c.interesse?`<p>${esc(c.interesse)}</p>`:''}${c.note?`<p>${esc(c.note)}</p>`:''}`:''}</section>
+ ${cerca?`<h3>Cosa cerca</h3><div class="rcs-grid">${cerca}</div>`:''}${(c.interesse||c.note)?`<h3>Note</h3>${c.interesse?`<p>${esc(c.interesse)}</p>`:''}${c.note?`<p>${esc(c.note)}</p>`:''}`:''}</section>
  <section data-p="cron" hidden><p class="rcs-note">Appuntamenti registrati nell'agenda per questo cliente. Solo lettura.</p><div data-cron>Caricamento…</div></section>
  <section data-p="all" hidden></section></div>`;
  document.body.appendChild(box);
