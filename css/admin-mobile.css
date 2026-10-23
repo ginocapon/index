@@ -47,3 +47,7 @@ body:has(.modal-overlay.open) .ra-m-bar,body:has(.modal-overlay.open) .rm-bar,bo
 .rm-acts{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.rm-acts a,.rm-acts button{flex:1 1 40%;padding:13px 8px;border:0;border-radius:8px;background:#1f6fb2;color:#fff;font:700 15px Arial;text-align:center;text-decoration:none}
 .rm-sess{margin:4px 2px 12px;color:#567;font:14px Arial}
 }
+
+body.rm-on.rm-attivita #righetto-operational-agenda{display:none!important}
+body.rm-on.rm-agenda:not(.rm-attivita) #righetto-attivita{display:none!important}
+body.rm-on.rm-agenda .rh-groups{display:none!important}

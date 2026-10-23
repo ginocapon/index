@@ -45,3 +45,9 @@
 .at-banner.at-live{background:#e3f4e8;border-color:#2a9d8f}
 .at-addf input[type=file]{height:auto;min-height:34px;padding:4px;font-size:.8rem}
 .at,.at *{box-sizing:border-box}.at-body>*,.at-task,.at-file{min-width:0}.at-addf{flex-wrap:wrap}.at-addf input{min-width:0;flex:1 1 140px;max-width:100%}.at-head{flex-wrap:wrap}.at-head .at-tabs{flex-wrap:wrap}.at-pr{max-width:100%}.at-body{max-width:100%}.at-file{flex-wrap:wrap}.at-add select,.at-add input{max-width:100%}
+
+.at-pr>summary,.at-pr:not([open])>summary{display:flex!important;justify-content:space-between;align-items:center;gap:10px;padding:8px 14px;min-height:0;grid-template-columns:none!important}
+.at-pr>summary>.at-name{display:block!important;font-weight:700;flex:1;min-width:0}
+.at-pr>summary::after{grid-column:auto!important;grid-row:auto!important;margin-left:auto}
+.at-info{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;font-weight:400;font-size:13px;padding-bottom:6px}
+.at-info .at-bar{display:inline-block!important;width:90px}
