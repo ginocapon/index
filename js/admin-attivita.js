@@ -70,8 +70,11 @@ if(k==='p'){const t=await sb.from('attivita').update({eliminata_il:PURG}).eq('pr
 else if(k==='t')tids=[id];
 if(k!=='f'){if(tids.length){const f=await sb.from('allegati_attivita').update({eliminata_il:PURG}).in('attivita_id',tids).select('percorso');if(f.error)throw f.error;paths=(f.data||[]).map(x=>x.percorso);}}
 else{const q=await sb.from('allegati_attivita').select('percorso').eq('id',id);if(q.error)throw q.error;paths=(q.data||[]).map(x=>x.percorso);}
-paths=paths.filter(Boolean);
-if(paths.length){const u=await sb.storage.from('attivita-pratiche').remove(paths);if(u.error)throw u.error;}
+const B='attivita-pratiche';const lst=async pre=>{let out=[],off=0;for(;;){const r=await sb.storage.from(B).list(pre,{limit:1000,offset:off});if(r.error)throw r.error;const d=r.data||[];out=out.concat(d);if(d.length<1000)break;off+=1000;}return out;};
+if(k==='p'){for(const e of await lst(id)){if(e.id===null){for(const f of await lst(id+'/'+e.name))paths.push(id+'/'+e.name+'/'+f.name);}else paths.push(id+'/'+e.name);}}
+else if(k==='t'){const q=await sb.from('attivita').select('pratica_id').eq('id',id);if(q.error)throw q.error;const pid=q.data&&q.data[0]&&q.data[0].pratica_id;if(pid)for(const f of await lst(pid+'/'+id))paths.push(pid+'/'+id+'/'+f.name);}
+paths=[...new Set(paths.filter(Boolean))];
+if(paths.length){const u=await sb.storage.from(B).remove(paths);if(u.error)throw u.error;}
 const r=await sb.from(tb).delete().eq('id',id).eq('eliminata_il',PURG).select('id');if(r.error)throw r.error;}catch(e){throw stuck(e);}},
 async requestDraft(pid,fids,sub,body){const r=await sb.from('richieste_bozza_email').insert({pratica_id:pid,allegati:fids,oggetto:String(sub).slice(0,200),testo:String(body).slice(0,4000)});if(r.error)throw r.error;},
 async download(file){const r=await sb.storage.from('attivita-pratiche').createSignedUrl(file.path,60,{download:file.name});if(r.error)throw r.error;window.open(r.data.signedUrl,'_blank');}});
