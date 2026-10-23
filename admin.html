@@ -7181,6 +7181,7 @@ async function duplicateImmobile(id) {
   delete payload.id;
   delete payload.created_at;
   delete payload.updated_at;
+  payload.cestino = false; payload.cestino_il = null; // la copia non eredita il cestino
 
   payload.codice = newCodice;
   payload.slug = newSlug;
@@ -7215,6 +7216,7 @@ async function duplicateImmobile(id) {
 
 /** Toggle attivo/evidenza: RPC (affidabile) poi UPDATE con header admin. */
 async function _immobilePatchBool(id, patch, okMsg) {
+  if (patch.attivo === true && typeof allImmobili !== 'undefined') { const _c = (allImmobili||[]).find(x => x.id === id); if (_c && _c.cestino) { toast('Immobile nel cestino: ripristinalo prima, poi riattivalo', 'error'); return; } }
     let data = null;
   let error = null;
 
