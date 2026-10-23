@@ -51,3 +51,4 @@
 .at-pr>summary::after{grid-column:auto!important;grid-row:auto!important;margin-left:auto}
 .at-info{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;font-weight:400;font-size:13px;padding-bottom:6px}
 .at-info .at-bar{display:inline-block!important;width:90px}
+.at-draft button:disabled{opacity:.45;cursor:not-allowed}
