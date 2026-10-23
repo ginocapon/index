@@ -36,3 +36,6 @@
 .at-pr:not([open])>summary>:nth-child(2){grid-column:1;grid-row:1}
 .at-pr:not([open])>summary::after{grid-column:3;grid-row:1}
 .at-list{padding:6px 10px}
+.at-pr:not([open])>summary>:nth-child(4){display:none}
+.at-pr:not([open])>summary{grid-template-columns:1fr 24px}
+.at-pr:not([open])>summary::after{grid-column:2}
