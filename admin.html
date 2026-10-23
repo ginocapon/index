@@ -6447,7 +6447,7 @@ function renderTable(data) {
           <button class="btn btn-action" onclick="openFotoImmobile('${i.id}')" title="Foto (vedi e scarica)" style="background:#e0f2f1;color:#00695c">🖼️</button>
           <button class="btn btn-action" onclick="printPropertyPdf('${i.id}')" title="Stampa PDF" style="background:#fff3e0;color:#e65100">📄</button>
           <button class="btn btn-action" onclick="quickPublishSocial('${i.id}')" title="Pubblica sui Social" style="background:#e8f5e9;color:#1877F2">📢</button>
-          ${i.cestino ? `<button class="btn btn-action" onclick="restoreImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')" title="Ripristina dal cestino" style="background:#e8f5e9;color:#27ae60">↩️</button><button class="btn btn-action btn-danger" onclick="purgeImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')" title="Elimina definitivamente">❌</button>` : `<button class="btn btn-action btn-danger" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')" title="Sposta nel cestino">🗑️</button>`}
+          ${i.cestino ? `<button class="btn btn-action" onclick="restoreImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')" title="Ripristina dal cestino" style="background:#e8f5e9;color:#27ae60">↩️</button>` : `<button class="btn btn-action btn-danger" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')" title="Sposta nel cestino">🗑️</button>`}
           <button class="btn btn-action" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="${i.in_evidenza ? 'Rimuovi da evidenza' : 'Metti in evidenza'}" style="background:${i.in_evidenza ? '#e74c3c' : 'var(--sfondo)'};border:${i.in_evidenza ? '2px solid #c0392b' : '1px solid #ddd'};${i.in_evidenza ? 'color:#fff' : ''}">${i.in_evidenza ? '⭐' : '☆'}</button>
           <button class="btn btn-action" onclick="toggleAttivo('${i.id}',${!isAttivo})" title="Toggle attivo" style="background:var(--sfondo)">${isAttivo ? '👁️' : '🚫'}</button>
           <button class="btn btn-action" onclick="previewImmobile('${i.id}')" title="Anteprima rapida" style="background:#e8f5e9;color:#27ae60">🔍</button>
@@ -7079,14 +7079,6 @@ async function restoreImmobile(id, titolo) {
   toast('Immobile ripristinato (non attivo sul sito)', 'success');
   await loadImmobili();
 }
-async function purgeImmobile(id, titolo) {
-  if (!confirm(`Eliminare DEFINITIVAMENTE "${titolo}" dal cestino?\n\nNon si può recuperare.`)) return;
-  const { error } = await sb.from('immobili').delete().eq('id', id).eq('cestino', true);
-  if (error) { toast('Errore: ' + error.message, 'error'); return; }
-  toast('Immobile eliminato definitivamente', 'success');
-  await loadImmobili();
-}
-
 /** Codice univoco per duplicato: suffisso (-AFF, -V, -2…) o progressivo per prefisso tipologia. */
 async function generateUniqueCodiceForDuplicate(sourceImm) {
   const srcCode = (sourceImm.codice || '').trim();
