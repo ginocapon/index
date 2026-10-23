@@ -63,8 +63,10 @@ async restore(k,id){const tb={p:'pratiche',t:'attivita',f:'allegati_attivita'}[k
 async purge(k,id){let paths=[];if(k==='f'){const q=await sb.from('allegati_attivita').select('percorso').eq('id',id);if(q.error)throw q.error;paths=(q.data||[]).map(x=>x.percorso);}
 else if(k==='t'){const q=await sb.from('allegati_attivita').select('percorso').eq('attivita_id',id);if(q.error)throw q.error;paths=(q.data||[]).map(x=>x.percorso);}
 else{const t=await sb.from('attivita').select('id').eq('pratica_id',id);if(t.error)throw t.error;const ids=(t.data||[]).map(x=>x.id);if(ids.length){const q=await sb.from('allegati_attivita').select('percorso').in('attivita_id',ids);if(q.error)throw q.error;paths=(q.data||[]).map(x=>x.percorso);}}
-paths=paths.filter(Boolean);const tb={p:'pratiche',t:'attivita',f:'allegati_attivita'}[k];const r=await sb.from(tb).delete().eq('id',id).not('eliminata_il','is',null).select('id');if(r.error)throw r.error;if(!(r.data||[]).length)throw new Error('Non e\' nel Cestino: non eliminato nulla');
-if(paths.length){const u=await sb.storage.from('attivita-pratiche').remove(paths);if(u.error)throw new Error('Tolto dal database ma file non rimossi: '+u.error.message);}},
+paths=paths.filter(Boolean);const tb={p:'pratiche',t:'attivita',f:'allegati_attivita'}[k];
+const g=await sb.from(tb).select('id').eq('id',id).not('eliminata_il','is',null);if(g.error)throw g.error;if(!(g.data||[]).length)throw new Error('Non e\' nel Cestino: non eliminato nulla');
+if(paths.length){const u=await sb.storage.from('attivita-pratiche').remove(paths);if(u.error)throw new Error('File non rimossi, la voce e\' ancora nel Cestino con i suoi file: riprova ('+u.error.message+')');}
+const r=await sb.from(tb).delete().eq('id',id).not('eliminata_il','is',null).select('id');if(r.error)throw new Error('File rimossi ma la voce e\' ancora nel Cestino: riprova l\'eliminazione ('+r.error.message+')');},
 async requestDraft(pid,fids,sub,body){const r=await sb.from('richieste_bozza_email').insert({pratica_id:pid,allegati:fids,oggetto:String(sub).slice(0,200),testo:String(body).slice(0,4000)});if(r.error)throw r.error;},
 async download(file){const r=await sb.storage.from('attivita-pratiche').createSignedUrl(file.path,60,{download:file.name});if(r.error)throw r.error;window.open(r.data.signedUrl,'_blank');}});
 async function run(fn){try{msg='';await fn();}catch(e){msg='Non salvato: '+(e&&e.message||e);}draw();}
