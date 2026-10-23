@@ -5,7 +5,7 @@ let sb;
 function initSB() {
   try {
     var lib = window.rigSupabaseLib && window.rigSupabaseLib();
-    if (lib && !sb) sb = lib.createClient(SB_URL, SB_KEY);
+    if (lib && !sb) sb = lib.createClient(SB_URL, SB_KEY, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } });
   } catch (e) { console.error('Supabase init error:', e); }
 }
 

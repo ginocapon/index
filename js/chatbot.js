@@ -1581,7 +1581,7 @@ class RighettoChat {
 
   async initSupabase() {
     if (window.supabase && window.supabase.createClient) {
-      this.supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      this.supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } });
     }
   }
 

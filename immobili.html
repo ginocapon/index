@@ -1028,7 +1028,7 @@
   function initSB() {
     try {
       var lib = window.rigSupabaseLib && window.rigSupabaseLib();
-      if (lib) sb = lib.createClient(SUPABASE_URL, SUPABASE_KEY);
+      if (lib) sb = lib.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } });
     } catch (e) { console.error('Supabase init error:', e); }
     window._sb = sb;
   }
