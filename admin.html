@@ -9104,8 +9104,23 @@ renderFotos();
 // ══════════════════════════════════════
 
 let allClienti = [];
+let _clientiReqId = 0;
+function setClientiNote(msg) {
+  let n = document.getElementById('clientiLimitNote');
+  if (!n) {
+    const t = document.getElementById('clientiTable');
+    if (!t || !t.parentNode) return;
+    n = document.createElement('div');
+    n.id = 'clientiLimitNote';
+    n.style.cssText = 'margin:8px 0;padding:8px 12px;background:#fff8e1;border:1px solid #f0d98a;border-radius:8px;font-size:13px;color:#6b5400';
+    t.parentNode.insertBefore(n, t);
+  }
+  n.textContent = msg || '';
+  n.style.display = msg ? 'block' : 'none';
+}
 
 async function loadClienti() {
+  const myReq = ++_clientiReqId;
   const loading = document.getElementById('clientiLoading');
   const empty = document.getElementById('clientiEmpty');
   const table = document.getElementById('clientiTable');
@@ -9117,15 +9132,18 @@ async function loadClienti() {
 
   try {
     const fonte = document.getElementById('filtroFonteCliente').value;
-    let query = sb.from('clienti').select('*').order('created_at', { ascending: false });
+    let query = sb.from('clienti').select('*', { count: 'exact' }).order('created_at', { ascending: false });
     if (fonte) query = query.eq('fonte', fonte);
 
-    const { data, error } = await query;
+    const { data, error, count } = await query;
     if (error) throw error;
+    if (myReq !== _clientiReqId) return; // risposta vecchia: una ricerca piu recente e in corso
 
     allClienti = data || [];
+    setClientiNote(count && allClienti.length < count ? 'Mostrati i primi ' + allClienti.length + ' clienti su ' + count + '. Per trovare gli altri usa la ricerca: cerca su tutto l\'archivio. I contatori per fonte (con *) contano solo i clienti caricati.' : '');
     renderClientiTable();
     updateClientiStats();
+    refreshClientiTotale();
     maybePromptProprietariClientiSync();
   } catch(err) {
     console.error('Error loading clienti:', err);
@@ -9172,7 +9190,7 @@ function renderClientiTable() {
     const azInfo = c.tipo_cliente === 'azienda' ? [c.ragione_sociale, c.partita_iva ? 'P.IVA: ' + c.partita_iva : ''].filter(Boolean).join('<br>') : '—';
     const docsCount = Array.isArray(c.documenti_cliente) ? c.documenti_cliente.length : 0;
     return `<tr data-nome="${escHtml(c.nome||'')}" data-email="${escHtml(c.email||'')}" data-telefono="${escHtml(c.telefono||'')}" data-ragione="${escHtml(c.ragione_sociale||'')}" data-piva="${escHtml(c.partita_iva||'')}" data-indirizzo="${escHtml(c.indirizzo_cliente||'')}">
-      <td style="font-weight:600">${escHtml(c.nome || '')}${docsCount ? ' <span title="' + docsCount + ' documenti" style="color:var(--oro);font-size:0.7rem">📎' + docsCount + '</span>' : ''}</td>
+      <td style="font-weight:600"><a href="#" onclick="RighettoCliente.open('${c.id}');return false;" title="Apri scheda cliente" style="color:inherit;text-decoration:underline dotted">${escHtml(c.nome || '')}</a>${docsCount ? ' <span title="' + docsCount + ' documenti" style="color:var(--oro);font-size:0.7rem">📎' + docsCount + '</span>' : ''}</td>
       <td><a href="mailto:${escHtml(c.email || '')}" style="color:var(--nero)">${escHtml(c.email || '')}</a></td>
       <td>${escHtml(c.telefono || '—')}</td>
       <td>${tipoCliente}</td>
@@ -9183,6 +9201,7 @@ function renderClientiTable() {
       <td style="white-space:nowrap">${dateStr}</td>
       <td>
         <div style="display:flex;gap:4px;flex-wrap:wrap">
+          <button class="btn-icon" onclick="RighettoCliente.open('${c.id}')" title="Apri scheda">👁️</button>
           <button class="btn-icon" onclick="editCliente('${c.id}')" title="Modifica">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
           </button>
@@ -9199,43 +9218,56 @@ function renderClientiTable() {
   }).join('');
 }
 
+let _clientiTotaleReale = null;
+async function refreshClientiTotale() {
+  try {
+    const { count } = await sb.from('clienti').select('id', { count: 'exact', head: true });
+    if (typeof count === 'number') { _clientiTotaleReale = count; updateClientiStats(); }
+  } catch (e) { /* resta il conteggio delle righe caricate */ }
+}
 function updateClientiStats() {
-  document.getElementById('statClientiTot').textContent = allClienti.length;
-  document.getElementById('statClientiNewsletter').textContent = allClienti.filter(c => c.fonte === 'newsletter').length;
-  document.getElementById('statClientiRichieste').textContent = allClienti.filter(c => c.fonte === 'richiesta').length;
-  document.getElementById('statClientiManuali').textContent = allClienti.filter(c => c.fonte === 'manuale').length;
+  const tot = _clientiTotaleReale != null ? _clientiTotaleReale : allClienti.length;
+  const parziale = _clientiTotaleReale != null && allClienti.length < _clientiTotaleReale;
+  const star = parziale ? '*' : '';
+  const tip = parziale ? 'Conta solo i primi ' + allClienti.length + ' clienti caricati su ' + tot : '';
+  document.getElementById('statClientiTot').textContent = tot;
+  ['statClientiNewsletter','statClientiRichieste','statClientiManuali'].forEach(id => { document.getElementById(id).title = tip; });
+  document.getElementById('statClientiNewsletter').textContent = allClienti.filter(c => c.fonte === 'newsletter').length + star;
+  document.getElementById('statClientiRichieste').textContent = allClienti.filter(c => c.fonte === 'richiesta').length + star;
+  document.getElementById('statClientiManuali').textContent = allClienti.filter(c => c.fonte === 'manuale').length + star;
 
   const badge = document.getElementById('badgeClienti');
-  if (allClienti.length > 0) {
+  if (tot > 0) {
     badge.style.display = 'inline';
-    badge.textContent = allClienti.length;
+    badge.textContent = tot;
   } else {
     badge.style.display = 'none';
   }
 }
 
+let _clientiSearchTimer = null;
 function filterClientiTable() {
-  const q = document.getElementById('searchClienti').value.toLowerCase().trim();
-  if (!q) {
-    // Mostra tutti
+  const q = document.getElementById('searchClienti').value.trim();
+  clearTimeout(_clientiSearchTimer);
+  if (!q) { _clientiReqId++; loadClienti(); return; }
+  if (q.length < 2) return;
+  // Ricerca sul database (non solo sui primi 1000 caricati)
+  _clientiSearchTimer = setTimeout(async () => {
+    const safe = q.replace(/[%,()*]/g, ' ').trim();
+    if (!safe) return;
+    const cols = ['nome','email','telefono','ragione_sociale','partita_iva','codice_fiscale','indirizzo_cliente','note'];
+    const myReq = ++_clientiReqId;
+    let query = sb.from('clienti').select('*').or(cols.map(c => c + '.ilike.%' + safe + '%').join(',')).order('created_at', { ascending: false }).limit(200);
+    const fonte = document.getElementById('filtroFonteCliente').value;
+    if (fonte) query = query.eq('fonte', fonte);
+    const { data, error } = await query;
+    if (myReq !== _clientiReqId || document.getElementById('searchClienti').value.trim() !== q) return;
+    if (error) { toast('Ricerca non riuscita: ' + error.message, 'error'); return; }
+    allClienti = data || [];
     renderClientiTable();
-    return;
-  }
-  const tbody = document.getElementById('clientiBody');
-  const rows = tbody.querySelectorAll('tr');
-  rows.forEach(row => {
-    // Cerca in tutti i data-attributes + testo visibile
-    const searchable = [
-      row.dataset.nome || '',
-      row.dataset.email || '',
-      row.dataset.telefono || '',
-      row.dataset.ragione || '',
-      row.dataset.piva || '',
-      row.dataset.indirizzo || '',
-      row.textContent
-    ].join(' ').toLowerCase();
-    row.style.display = searchable.includes(q) ? '' : 'none';
-  });
+    setClientiNote(allClienti.length === 200 ? 'Mostrati i primi 200 risultati: restringi la ricerca per vedere gli altri.' : '');
+    toast(allClienti.length + ' clienti trovati' + (allClienti.length === 200 ? ' (mostrati i primi 200: restringi la ricerca)' : ''), 'info');
+  }, 400);
 }
 
 let currentClienteDocumenti = [];
@@ -17967,7 +17999,8 @@ window.showSection('home');
 
 </script>
 <script src="js/agenda-event-types.js?v=1"></script>
-<script src="js/admin-agenda.js?v=6"></script>
+<script src="js/admin-agenda.js?v=7"></script>
+<script src="js/admin-cliente-scheda.js?v=3"></script>
 <script>RighettoAgenda.init(document.getElementById("righetto-operational-agenda"));</script>
 <script src="js/admin-attivita.js?v=5"></script>
 <script>(function(){var el=document.getElementById('righetto-attivita');if(!el)return;var done=false,busy=false;function msg(t){el.innerHTML='<div class="at-banner">'+t+'</div>';}
