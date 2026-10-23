@@ -54,3 +54,4 @@
 .at-draft button:disabled{opacity:.45;cursor:not-allowed}
 
 .at-del{font-size:11px;font-weight:600;color:#a11;margin-left:8px;white-space:nowrap}.at-del input{width:auto;margin-right:3px}.at-delbar{margin-top:10px;padding-top:8px;border-top:1px dashed #d8b4b4}.at-danger{background:#fff;color:#a11;border:1px solid #a11;border-radius:6px;padding:7px 10px;font-weight:700;cursor:pointer;margin:2px 4px 2px 0}.at-danger:hover{background:#a11;color:#fff}
+.at-trbtn{background:#fff;color:#0b4f8a;border:1px solid #0b4f8a;border-radius:6px;padding:7px 10px;font-weight:700;cursor:pointer;margin-left:4px}.at-trash{margin:14px 8px;padding:12px;border:2px dashed #a11;border-radius:8px;background:#fff7f7}.at-trash h3{margin:0 0 6px}.at-trrow{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center;padding:8px 0;border-top:1px solid #eed}
