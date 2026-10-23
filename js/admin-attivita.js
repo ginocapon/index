@@ -37,7 +37,7 @@ const r=await sb.from('allegati_attivita').insert({attivita_id:tid,nome:f.name,p
 if(r.error){await sb.storage.from('attivita-pratiche').remove([path]);throw r.error;}return {id:r.data.id,name:f.name,path};},
 async download(file){const r=await sb.storage.from('attivita-pratiche').createSignedUrl(file.path,60,{download:file.name});if(r.error)throw r.error;window.open(r.data.signedUrl,'_blank');}});
 async function run(fn){try{msg='';await fn();}catch(e){msg='Non salvato: '+(e&&e.message||e);}draw();}
-async function init(el,o={}){root=el;store=o.store||memStore();if(o.open)o.open.forEach(x=>open.add(x));
+async function init(el,o={}){if(root===el&&el.__atBound){store=o.store||store;try{items=await store.load(o.items);}catch(e){}draw();return;}root=el;el.__atBound=true;store=o.store||memStore();if(o.open)o.open.forEach(x=>open.add(x));
 try{items=await store.load(o.items);}catch(e){items=[];msg='Non riesco a leggere le pratiche: '+(e&&e.message||e);}
 root.addEventListener('toggle',e=>{const d=e.target.closest&&e.target.closest('details.at-pr');if(d){d.open?open.add(d.dataset.id):open.delete(d.dataset.id);}},true);
 root.addEventListener('change',e=>{const t=e.target;if(t.matches('[data-color]')){const p=items.find(x=>x.id===t.dataset.color);run(async()=>{await store.setColor(p.id,t.value);p.colore=t.value;});return;}if(t.matches('[data-f]')){filter=t.value;draw();return;}
