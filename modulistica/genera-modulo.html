@@ -17,8 +17,9 @@ button{padding:10px 14px;font-size:15px;margin:4px 4px 4px 0}
 <select id="mod"><option value="4020">Contratto di locazione 4+4</option><option value="21007">Proposta di acquisto</option><option value="31341">Incarico di mediazione in esclusiva (venditore)</option></select></label>
 <fieldset id="gest" style="display:none"><legend>Dati dal gestionale (sola lettura)</legend><div class="row"><label>Cerca cliente<input id="qcli" placeholder="nome, telefono o email"></label><label>Codice immobile<input id="qimm" placeholder="es. LP0285-V"></label></div><button type="button" id="bcli">Cerca cliente</button> <button type="button" id="bimm">Carica immobile e proprietari</button><div id="ris"></div></fieldset>
 <div id="ruoli"></div>
+<fieldset id="fdest" style="display:none"><legend>Proposta: destinatario "Egr. Sig."</legend><label>Destinatario (a mano; nel modello originale era vuoto)<input id="dest" placeholder="nome del destinatario"></label></fieldset>
 <fieldset><legend>Immobile</legend><div class="row" id="immobile"></div>
-<div id="unita"></div><button type="button" id="addUnita">+ unità catastale</button></fieldset>
+<div id="avvisoCat" class="avviso" style="display:none"></div><div id="unita"></div><button type="button" id="addUnita">+ unità catastale</button></fieldset>
 <fieldset><legend>Condizioni (a mano)</legend><div class="row" id="termini"></div></fieldset>
 <button type="button" id="scarica">Scarica Word</button>
 <button type="button" id="demo">Carica dati DIMOSTRATIVI</button>
@@ -27,27 +28,38 @@ button{padding:10px 14px;font-size:15px;margin:4px 4px 4px 0}
 <script src="lib/pizzip.min.js"></script><script src="lib/docxtemplater.min.js"></script><script src="modulistica-core.js"></script><script src="modulistica-dati.js"></script>
 <script>
 var SBC=window.sb||(window.parent&&window.parent!==window?window.parent.sb:null);
+
 var NOMI={'4020':'Modello-contratto-locazione-4piu4','21007':'Modello-proposta-di-acquisto','31341':'Modello-incarico-mediazione-esclusiva-venditore'};
 var RUOLI_LBL={locatori:'Locatori',conduttori:'Conduttori',venditori:'Venditori / proprietari',proponenti:'Proponenti (acquirenti)'};
 var PF=[['nome','Nome e cognome'],['codice_fiscale','Codice fiscale'],['nato_a','Nato a'],['nato_il','Nato il'],['residenza','Residenza'],['telefono','Telefono'],['email','Email'],['doc_tipo','Documento'],['doc_numero','N. documento'],['doc_ente','Rilasciato da'],['doc_rilascio','Rilasciato il'],['doc_scadenza','Scadenza']];
 var IF=[['indirizzo','Indirizzo'],['civico','Civico'],['comune','Comune'],['provincia','Provincia'],['tipologia','Tipologia']];
-var UF=[['categoria','Categoria'],['comune_catastale','Comune catastale'],['sezione','Sezione'],['foglio','Foglio'],['mappale','Mappale'],['subalterno','Subalterno'],['classe','Classe'],['rendita','Rendita'],['valore_prima','Valore catastale']];
+var UF=[['categoria','Categoria'],['comune_catastale','Comune catastale (nome)'],['codice_catastale','Codice catastale (es. G224)'],['sezione','Sezione'],['foglio','Foglio'],['mappale','Mappale'],['subalterno','Subalterno'],['classe','Classe'],['rendita','Rendita'],['valore_prima','Valore catastale']];
 var TL={dal:'Dal',al:'Al',canone_annuo:'Canone annuo',rata_mensile:'Rata mensile',banca:'Banca',iban:'IBAN',deposito:'Deposito cauzionale',ape_classe:'APE classe',ape_kwh:'APE kWh',ape_data:'APE data',ape_perito:'APE perito',ape_albo:'APE albo',ape_scadenza:'APE scadenza',importo_mensile:'Importo mensile',canone_mensile:'Canone mensile',spese_mensili:'Spese mensili',prezzo:'Prezzo',caparra:'Caparra',importo_2:'Secondo importo',data_2:'Data secondo importo',saldo:'Saldo',data_rogito:'Data rogito',data_irrevocabile:'Irrevocabile fino a',spese_registrazione:'Spese registrazione a carico di',destinazione:"Destinazione d'uso",prezzo_richiesto:'Prezzo richiesto'};
 var $=function(i){return document.getElementById(i)};
 function campo(cls,k,lbl,val){return '<label>'+lbl+'<input data-k="'+k+'" class="'+cls+'" value="'+(val||'').replace(/"/g,'&quot;')+'"></label>';}
-function personaHtml(r,p){return '<div class="box" data-ruolo="'+r+'"><div class="row">'+PF.map(function(f){return campo('p',f[0],f[1],p&&p[f[0]]);}).join('')+'</div><button type="button" onclick="this.parentNode.remove()">Rimuovi</button></div>';}
+function titoloSel(v){return '<label>Titolo (scelta manuale, non dedotta dal nome)<select data-k="titolo" class="p">'+[['n','Il/La sig. (neutro)'],['m','Il sig.'],['f','La sig.ra']].map(function(o){return '<option value="'+o[0]+'"'+((v||'n')===o[0]?' selected':'')+'>'+o[1]+'</option>';}).join('')+'</select></label>';}
+function personaHtml(r,p){return '<div class="box" data-ruolo="'+r+'"><div class="row">'+titoloSel(p&&p.titolo)+PF.map(function(f){return campo('p',f[0],f[1],p&&p[f[0]]);}).join('')+'</div><button type="button" onclick="this.parentNode.remove()">Rimuovi</button></div>';}
 function unitaHtml(u){return '<div class="box unita"><div class="row">'+UF.map(function(f){return campo('u',f[0],f[1],u&&u[f[0]]);}).join('')+'</div><button type="button" onclick="this.parentNode.remove()">Rimuovi</button></div>';}
 function disegna(dati){
+  $('fdest').style.display=($('mod').value==='21007')?'':'none';
   dati=dati||{}; var m=$('mod').value, ruoli=Modulistica.ROLES[m], r=dati.ruoli||{}, i=dati.immobile||{}, t=dati.termini||{};
   $('ruoli').innerHTML=ruoli.map(function(k){var l=(r[k]&&r[k].length)?r[k]:[{}];return '<fieldset id="r_'+k+'"><legend>'+RUOLI_LBL[k]+'</legend><div class="persone">'+l.map(function(p){return personaHtml(k,p);}).join('')+'</div><button type="button" onclick="aggiungi(\''+k+'\')">+ persona</button></fieldset>';}).join('');
   $('immobile').innerHTML=IF.map(function(f){return campo('i',f[0],f[1],i[f[0]]);}).join('');
   $('unita').innerHTML=(i.unita_catastali||[]).map(unitaHtml).join('');
   $('termini').innerHTML=Object.keys(Modulistica.TDEF[m]).concat(m==='31341'?['prezzo_richiesto']:[]).map(function(k){return campo('t',k,TL[k]||k,t[k]);}).join('');
 }
+function aggiornaAvviso(){
+  var box=$('avvisoCat'); if(!window.ModulistDati){box.style.display='none';return;}
+  var com=(document.querySelector('#immobile [data-k=comune]')||{}).value||'';
+  var msgs=[].map.call($('unita').querySelectorAll('.unita'),function(b,k){var c=b.querySelector('[data-k=codice_catastale]').value;var r=ModulistDati.verificaCodice(com,c);return (k+1)+') '+r.msg;});
+  box.style.display=msgs.length?'':'none'; box.innerHTML='<b>Codice catastale (stato di verifica)</b><br>'+msgs.join('<br>');
+}
+document.addEventListener('input',aggiornaAvviso); document.addEventListener('click',function(){setTimeout(aggiornaAvviso,50);});
 function aggiungi(k){$('r_'+k).querySelector('.persone').insertAdjacentHTML('beforeend',personaHtml(k,{}));}
 function leggi(){
   var m=$('mod').value,d={ruoli:{},immobile:{},termini:{}};
-  Modulistica.ROLES[m].forEach(function(k){d.ruoli[k]=[].map.call($('r_'+k).querySelectorAll('.box'),function(b){var o={};[].forEach.call(b.querySelectorAll('input'),function(x){o[x.dataset.k]=x.value;});return o;});});
+  Modulistica.ROLES[m].forEach(function(k){d.ruoli[k]=[].map.call($('r_'+k).querySelectorAll('.box'),function(b){var o={};[].forEach.call(b.querySelectorAll('input,select'),function(x){o[x.dataset.k]=x.value;});return o;});});
+  d.destinatario=($('dest')||{}).value||'';
   [].forEach.call($('immobile').querySelectorAll('input'),function(x){d.immobile[x.dataset.k]=x.value;});
   d.immobile.unita_catastali=[].map.call($('unita').querySelectorAll('.unita'),function(b){var o={};[].forEach.call(b.querySelectorAll('input'),function(x){o[x.dataset.k]=x.value;});return o;});
   [].forEach.call($('termini').querySelectorAll('input'),function(x){d.termini[x.dataset.k]=x.value;});
@@ -70,7 +82,7 @@ $('mod').onchange=function(){disegna();$('stato').textContent='';};
 $('addUnita').onclick=function(){$('unita').insertAdjacentHTML('beforeend',unitaHtml({}));};
 $('scarica').onclick=scarica; $('demo').onclick=function(){disegna(DEMO);$('stato').textContent='Dati dimostrativi caricati: NON sono dati reali.';};
 
-/* Collegamento in sola lettura: usa window.sb (client autenticato dell'admin). Fuori dall'admin resta nascosto e i campi sono manuali. */
+/* Collegamento in sola lettura: usa SBC (client autenticato dell'admin). Fuori dall'admin resta nascosto e i campi sono manuali. */
 var NOTA_COLONNE=null;
 function ruoloDefault(){return Modulistica.ROLES[$('mod').value][0];}
 function mettiPersona(ruolo,p){
@@ -90,7 +102,7 @@ if(SBC&&window.ModulistDati){
     [].forEach.call($('termini').querySelectorAll('input'),function(x){if(r.termini[x.dataset.k])x.value=r.termini[x.dataset.k];});
     var ruolo=Modulistica.ROLES[$('mod').value].filter(function(k){return k==='venditori'||k==='locatori';})[0];
     if(ruolo) r.proprietari.forEach(function(p){mettiPersona(ruolo,p);});
-    $('stato').textContent='Immobile caricato'+(r.proprietari.length?' con '+r.proprietari.length+' proprietari':'')+(r.nota?' ('+r.nota+')':'')+'. Controlla i campi prima di scaricare.';
+    aggiornaAvviso();$('stato').textContent='Immobile caricato'+(r.proprietari.length?' con '+r.proprietari.length+' proprietari':'')+(r.nota?' ('+r.nota+')':'')+'. Controlla i campi prima di scaricare.';
   }).catch(function(e){$('stato').textContent='Lettura immobile non riuscita: '+e.message;});};
 }
 disegna();
