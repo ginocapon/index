@@ -2197,6 +2197,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
 </style>
 <link rel="stylesheet" href="css/admin-agenda.css?v=4">
+<link rel="stylesheet" href="css/admin-attivita.css?v=1">
 <link rel="stylesheet" href="css/admin-mobile.css?v=3">
 </head>
 <body>
@@ -17917,7 +17918,7 @@ var groups=[
  ['Controllo','blue',[['analytics','Search Console','Rendimento su Google'],['impostazioni','Impostazioni','Configurazione']]]
 ];
 var icon='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M12 8v8"/></svg>';
-home.innerHTML='<section id="righetto-operational-agenda" style="margin-bottom:25px"></section>';
+home.innerHTML='<section id="righetto-operational-agenda" style="margin-bottom:25px"></section><section id="righetto-attivita" style="margin-bottom:25px"></section>';
 var wrap=document.createElement('div');wrap.className='rh-groups';home.appendChild(wrap);groups.forEach(function(g){var box=document.createElement('div');box.className='rh-grp';var title=document.createElement('h2');title.className='rh-group-title '+g[1];title.textContent=g[0];box.appendChild(title);var grid=document.createElement('div');grid.className='rh-grid';g[2].forEach(function(item){var b=document.createElement('button');b.type='button';b.className='rh-tile '+g[1];b.dataset.section=item[0];var existingNav=Array.from(document.querySelectorAll('#sidebar .nav-item')).find(function(n){return (n.getAttribute('onclick')||'').indexOf("'"+item[0]+"'")>=0;});var ownIcon=existingNav&&existingNav.querySelector('svg');b.innerHTML='<span class="rh-icon">'+(ownIcon?ownIcon.outerHTML:icon)+'</span><span>'+item[1]+'</span><span class="rh-sub">'+item[2]+'</span>';b.onclick=function(){window.showSection(item[0]);};grid.appendChild(b);});box.appendChild(grid);wrap.appendChild(box);});
 document.querySelector('.content').prepend(home);
 var searchConsole=document.createElement('div');searchConsole.id='sec-searchconsole';searchConsole.className='section';searchConsole.innerHTML='<div class="rh-soon"><h2>Google Search Console</h2><span class="rh-chip">In arrivo</span><p style="margin-top:16px">Il collegamento automatico a Google Search Console non è ancora attivo. Qui appariranno clic, impressioni, CTR e posizione media, con filtro per date.</p><div class="rh-metric-list"><div style="--accent:#4285f4">Clic totali<strong>—</strong>Dati non collegati</div><div style="--accent:#673ab7">Impressioni totali<strong>—</strong>Dati non collegati</div><div style="--accent:#00897b">CTR media<strong>—</strong>Dati non collegati</div><div style="--accent:#e8710a">Posizione media<strong>—</strong>Dati non collegati</div></div><p>Nessun grafico o numero inventato. Il collegamento sarà completato dopo il lavoro sulla sicurezza.</p></div>';
@@ -17942,6 +17943,10 @@ window.showSection('home');
 <script src="js/agenda-event-types.js?v=1"></script>
 <script src="js/admin-agenda.js?v=5"></script>
 <script>RighettoAgenda.init(document.getElementById("righetto-operational-agenda"));</script>
+<script src="js/admin-attivita.js?v=1"></script>
+<script>(function(){var el=document.getElementById('righetto-attivita');if(!el)return;var done=false;function msg(t){el.innerHTML='<div class="at-banner">'+t+'</div>';}
+async function go(){if(done)return;try{if(typeof sb==='undefined')throw 0;var u=await sb.auth.getUser();if(!u.data.user)throw 0;done=true;RighettoAttivita.init(el,{store:RighettoAttivita.dbStore(sb)});}catch(e){msg('Attivit\u00e0: accedi per vedere le pratiche.');}}
+msg('Attivit\u00e0: caricamento...');go();setInterval(go,3000);})();</script>
 <script src="js/admin-mobile.js?v=3"></script>
 </body>
 </html>
