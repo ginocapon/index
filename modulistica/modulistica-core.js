@@ -1,6 +1,7 @@
 /* Compone i dati e compila i modelli DOCX (docxtemplater, MIT). Nessun accesso a rete o DB. */
 (function(root,factory){ if(typeof module==='object'&&module.exports) module.exports=factory(); else root.Modulistica=factory(); })(this,function(){
   var Z='______________';
+  var TITOLI={m:'Il sig.',f:'La sig.ra',n:'Il/La sig.'}; /* nessun genere dedotto dal nome: default neutro, scelta manuale per persona */
   var ROLES={'4020':['locatori','conduttori'],'21007':['venditori','proponenti'],'31341':['venditori']};
   var PDEF={nato_a:'____________',nato_il:'__/__/____',codice_fiscale:'________________',residenza:'____________________',doc_tipo:'__________',doc_numero:'________',doc_ente:'__________',doc_rilascio:'__/__/____',doc_scadenza:'__/__/____',telefono:'__________',email:'__________'};
   var TDEF={
@@ -10,13 +11,15 @@
   function v(x,d){ return (x===undefined||x===null||String(x).trim()==='')?d:String(x); }
   function persone(list){
     list=(list&&list.length)?list:[{}];
-    return list.map(function(p,k){ var o={nome:v(p.nome,Z),cognome:v(p.cognome,''),first:k===0,last:k===list.length-1};
+    return list.map(function(p,k){ var o={nome:v(p.nome,Z),cognome:v(p.cognome,''),titolo:TITOLI[p.titolo]||TITOLI.n,nato:(p.titolo==='m'?'nato':p.titolo==='f'?'nata':'nato/a'),first:k===0,last:k===list.length-1};
       Object.keys(PDEF).forEach(function(f){o[f]=v(p[f],PDEF[f]);}); return o; });
   }
   function unita(i){ var u=(i.unita_catastali&&i.unita_catastali.length)?i.unita_catastali:[{}]; return u; }
+  var RX_COD=/^[A-Za-z]\d{3}$/;
+  function comuneCat(i,u){ var c=v(u.comune_catastale,''), cod=v(u.codice_catastale,''); if(!cod&&RX_COD.test(c)){cod=c.toUpperCase();c='';} return {nome:v(c,v(i.comune,'___')),cod:cod}; }
   function catTesto(i){
-    return unita(i).map(function(u,k){
-      var s=(k?'; inoltre, unità n. '+(k+1)+', ':'')+'censito al N.C.E.U di categoria '+v(u.categoria,'___')+', comune catastale '+v(u.comune_catastale,'___')+', sezione '+v(u.sezione,'___')+', foglio '+v(u.foglio,'___')+', mappale '+v(u.mappale,'___')+', subalterno '+v(u.subalterno,'___')+', classe '+v(u.classe,'___')+', rendita '+v(u.rendita,'___')+' euro';
+    return unita(i).map(function(u,k){ var cc=comuneCat(i,u);
+      var s=(k?'; inoltre, unità n. '+(k+1)+', ':'')+'censito al N.C.E.U di categoria '+v(u.categoria,'___')+', comune catastale '+cc.nome+(cc.cod?' (codice catastale '+cc.cod+')':'')+', sezione '+v(u.sezione,'___')+', foglio '+v(u.foglio,'___')+', mappale '+v(u.mappale,'___')+', subalterno '+v(u.subalterno,'___')+', classe '+v(u.classe,'___')+', rendita '+v(u.rendita,'___')+' euro';
       if(v(u.valore_prima,'')) s+=', valore catastale '+u.valore_prima+' euro'; return s; }).join('');
   }
   function catIds(i){
@@ -33,6 +36,10 @@
     var nomi=(r.venditori||[]).map(function(p){return v(p.nome,'')+(p.cognome?' '+p.cognome:'');}).filter(Boolean);
     d.proprieta_nomi=nomi.length?nomi.join(', '):'______________________________';
     d.lbl_locatori=(r.locatori&&r.locatori.length>1)?'locatori':'locatore';
+    d.destinatario=v(dati.destinatario,'______________________');
+    function den(l,sing,plur){ if(l&&l.length>1) return 'denominati '+plur; var g=(l&&l[0]&&l[0].titolo)||'n'; return (g==='m'?'denominato ':g==='f'?'denominata ':'denominato/a ')+sing; }
+    d.den_locatori=den(r.locatori,'locatore','locatori'); d.den_conduttori=den(r.conduttori,'conduttore','conduttori');
+    d.accettano_cond=(r.conduttori&&r.conduttori.length>1)?'che accettano':'che accetta';
     d.lbl_conduttori=(r.conduttori&&r.conduttori.length>1)?'conduttori':'conduttore';
     Object.keys(TDEF[mod]).forEach(function(k){ d['t_'+k]=v(t[k],TDEF[mod][k]); });
     if(mod==='31341') d.t_prezzo_richiesto=t.prezzo_richiesto&&String(t.prezzo_richiesto).trim()?'€ '+t.prezzo_richiesto:'()';

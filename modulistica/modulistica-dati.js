@@ -8,9 +8,22 @@
     if(!p.nome&&row.ragione_sociale) p.nome=s(row.ragione_sociale);
     return p; // nato_a, nato_il, doc_*: nessuna colonna verificata, restano manuali
   }
+  /* Codici catastali verificati su documenti reali (non dedotti): solo quelli elencati. Gli altri comuni restano 'non verificato'. */
+  var CODICI_VERIFICATI={padova:{cod:'G224',fonte:'planimetrie in Allegato A del preliminare casa'}};
+  function verificaCodice(comune,codice){
+    var c=s(comune).trim().toLowerCase(), k=s(codice).trim().toUpperCase();
+    if(!k) return {stato:'nessun codice',msg:'Codice catastale non indicato: resta la riga da compilare.'};
+    var v=CODICI_VERIFICATI[c];
+    if(!v) return {stato:'non verificato',msg:'Codice '+k+' per '+(s(comune)||'comune non indicato')+': NON verificato (nessuna fonte nota). Controllare su visura o planimetria.'};
+    if(v.cod===k) return {stato:'verificato',msg:'Codice '+k+' coerente con '+s(comune)+' (fonte: '+v.fonte+').'};
+    return {stato:'incoerente',msg:'ATTENZIONE: '+s(comune)+' risulta '+v.cod+' ('+v.fonte+'), ma il dato letto e\' '+k+'. Non corretto in automatico: verificare l\'origine del dato.'};
+  }
+  function unitaNorm(u){var o={};Object.keys(u||{}).forEach(function(k){o[k]=s(u[k]);});
+    if(/^[A-Za-z]\d{3}$/.test(o.comune_catastale||'')&&!o.codice_catastale){o.codice_catastale=o.comune_catastale.toUpperCase();o.comune_catastale='';}
+    return o;}
   function immobile(row){
     var i={indirizzo:s(row.indirizzo),comune:s(row.comune),tipologia:s(row.tipologia)};
-    i.unita_catastali=Array.isArray(row.unita_catastali)?row.unita_catastali.map(function(u){var o={};Object.keys(u||{}).forEach(function(k){o[k]=s(u[k]);});return o;}):[];
+    i.unita_catastali=Array.isArray(row.unita_catastali)?row.unita_catastali.map(unitaNorm):[];
     return i;
   }
   function termini(row){var t={}; if(row.classe_energetica) t.ape_classe=s(row.classe_energetica); if(row.ipe_kwh!==undefined&&row.ipe_kwh!==null) t.ape_kwh=s(row.ipe_kwh); return t;}
@@ -38,5 +51,5 @@
       });
     });
   }
-  return {persona:persona,immobile:immobile,termini:termini,cercaClienti:cercaClienti,caricaCliente:caricaCliente,caricaImmobile:caricaImmobile};
+  return {verificaCodice:verificaCodice,unitaNorm:unitaNorm,persona:persona,immobile:immobile,termini:termini,cercaClienti:cercaClienti,caricaCliente:caricaCliente,caricaImmobile:caricaImmobile};
 });
