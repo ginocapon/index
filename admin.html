@@ -9154,7 +9154,7 @@ function renderClientiTable() {
     const azInfo = c.tipo_cliente === 'azienda' ? [c.ragione_sociale, c.partita_iva ? 'P.IVA: ' + c.partita_iva : ''].filter(Boolean).join('<br>') : '—';
     const docsCount = Array.isArray(c.documenti_cliente) ? c.documenti_cliente.length : 0;
     return `<tr data-nome="${escHtml(c.nome||'')}" data-email="${escHtml(c.email||'')}" data-telefono="${escHtml(c.telefono||'')}" data-ragione="${escHtml(c.ragione_sociale||'')}" data-piva="${escHtml(c.partita_iva||'')}" data-indirizzo="${escHtml(c.indirizzo_cliente||'')}">
-      <td style="font-weight:600">${escHtml(c.nome || '')}${docsCount ? ' <span title="' + docsCount + ' documenti" style="color:var(--oro);font-size:0.7rem">📎' + docsCount + '</span>' : ''}</td>
+      <td style="font-weight:600"><a href="#" onclick="RighettoCliente.open('${c.id}');return false;" title="Apri scheda cliente" style="color:inherit;text-decoration:underline dotted">${escHtml(c.nome || '')}</a>${docsCount ? ' <span title="' + docsCount + ' documenti" style="color:var(--oro);font-size:0.7rem">📎' + docsCount + '</span>' : ''}</td>
       <td><a href="mailto:${escHtml(c.email || '')}" style="color:var(--nero)">${escHtml(c.email || '')}</a></td>
       <td>${escHtml(c.telefono || '—')}</td>
       <td>${tipoCliente}</td>
@@ -9165,6 +9165,7 @@ function renderClientiTable() {
       <td style="white-space:nowrap">${dateStr}</td>
       <td>
         <div style="display:flex;gap:4px;flex-wrap:wrap">
+          <button class="btn-icon" onclick="RighettoCliente.open('${c.id}')" title="Apri scheda">👁️</button>
           <button class="btn-icon" onclick="editCliente('${c.id}')" title="Modifica">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
           </button>
@@ -17949,7 +17950,8 @@ window.showSection('home');
 
 </script>
 <script src="js/agenda-event-types.js?v=1"></script>
-<script src="js/admin-agenda.js?v=6"></script>
+<script src="js/admin-agenda.js?v=7"></script>
+<script src="js/admin-cliente-scheda.js?v=1"></script>
 <script>RighettoAgenda.init(document.getElementById("righetto-operational-agenda"));</script>
 <script src="js/admin-attivita.js?v=2"></script>
 <script>(function(){var el=document.getElementById('righetto-attivita');if(!el)return;var done=false,busy=false;function msg(t){el.innerHTML='<div class="at-banner">'+t+'</div>';}
