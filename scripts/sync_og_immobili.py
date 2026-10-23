@@ -80,7 +80,7 @@ def resolve_photo_url(u: str, manifest: dict[str, str]) -> str:
 def fetch_immobili(key: str) -> list[dict]:
     url = (
         f"{SUPABASE_URL}/rest/v1/immobili"
-        "?select=*&attivo=eq.true&venduto=eq.false&order=created_at.desc"
+        "?select=id,codice,titolo,slug,tipo_operazione,categoria,tipologia,comune,indirizzo,lat,lng,prezzo,superficie,locali,bagni,piano,anno_costruzione,stato,classe_energetica,garage,giardino,terrazzo,cantina,ascensore,piscina,arredato,foto,youtube_id,virtual_tour,attivo,in_evidenza,venduto,affittato,created_at,updated_at,ipe_kwh,arredo,caldaia_condensazione,camino,riscaldamento_pavimento,termopompa,pannelli_fotovoltaici,pannelli_solari,impianto_geotermico,allarme,domotica,porta_blindata,tapparelle_motorizzate,zanzariere,accesso_disabili,area_fitness,portineria,cassaforte,riscaldamento_semi_autonomo,raffreddamento_pavimento,grezzo,connettivita,distanza_mare,totale_piani,tipo_contratto,stato_manutenzione,virtual_tour_scenes,planimetrie,animali_ammessi,ingresso_indipendente,canna_fumaria,porticato,soppalco,lavanderia,mansarda,taverna,soffitta,giardino_condominiale,esposizione,camere,bagni_totali,terrazzi_num,ripostigli,garage_num,garage_doppio,posto_auto,consegna,aria_condizionata,panorama,spese_condominio,mq_giardino,mq_lotto,impianto_elettrico,indirizzo_mappa,foto_urls,soggiorno,soggiorno_angolo_cottura,cucina,riscaldamento_autonomo,riscaldamento_centralizzato,descrizione&attivo=eq.true&venduto=eq.false&order=created_at.desc"
     )
     req = urllib.request.Request(
         url,
