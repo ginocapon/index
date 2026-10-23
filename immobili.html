@@ -156,6 +156,9 @@
       box-sizing:border-box;
     }
     .sb-field.sb-zona{flex:1.15;min-width:200px}
+    .sb-field.sb-cerca{flex:1 1 150px;min-width:150px}
+    .sb-field.sb-cerca label{white-space:nowrap}
+    @media(max-width:600px){.sb-field.sb-cerca{flex:1 1 100%;width:100%;grid-column:1/-1}}
     .sb-field label{
       font-size:.66rem;
       letter-spacing:.12em;
@@ -727,7 +730,7 @@
         </select></div>
       </div>
       <div class="sb-sep"></div>
-      <div class="sb-field">
+      <div class="sb-field sb-cerca">
         <label for="f-cerca">Codice o parola</label>
         <input type="search" id="f-cerca" placeholder="Es. LF0180 o 0180" autocomplete="off" oninput="filterCards()" style="width:100%;padding:.55rem .6rem;border:1px solid rgba(255,255,255,.35);border-radius:6px;font:inherit;background:#fff;color:#17324d;min-width:0">
       </div>
