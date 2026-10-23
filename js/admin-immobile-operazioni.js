@@ -18,7 +18,7 @@ function overlay(html){close();const o=document.createElement('div');o.className
 function close(){const o=document.getElementById('rio-ov');if(o)o.remove();}
 function money(n){return n==null||n===''?'non indicato':Number(n).toLocaleString('it-IT')+' EUR';}
 function riepilogo(i){const L=[];const add=(k,v)=>{if(v!=null&&v!==''&&v!==false)L.push(k+': '+v)};
-add('Codice',i.codice);add('Titolo',i.titolo);add('Operazione',i.tipo_operazione);add('Tipologia',i.tipologia||i.categoria);add('Comune',i.comune);add('Indirizzo',i.indirizzo);
+add('Codice',i.codice);add('Titolo',i.titolo);add('Operazione',String(i.tipo_operazione||'').replace(/_/g,' '));add('Tipologia',i.tipologia||i.categoria);add('Comune',i.comune);add('Indirizzo',i.indirizzo);
 add('Prezzo',i.prezzo!=null?money(i.prezzo):'');add('Superficie',i.superficie?i.superficie+' mq':'');add('Locali',i.locali);add('Bagni',i.bagni);add('Piano',i.piano);add('Classe energetica',i.classe_energetica);add('Stato',i.stato);add('Anno costruzione',i.anno_costruzione);add('Esposizione',Array.isArray(i.esposizione)?i.esposizione.join(', '):i.esposizione);
 L.push('Link annuncio: '+url(i));return L.join('\n');}
 async function copy(t,msg){try{await navigator.clipboard.writeText(t);if(window.toast)toast(msg||'Copiato','success');return true;}catch(e){window.prompt('Copia da qui:',t);return false;}}
