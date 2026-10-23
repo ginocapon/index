@@ -1,0 +1,314 @@
+{
+  "cycle": "2026W43",
+  "date": "2026-10-23",
+  "data_source": "gsc_csv",
+  "stale": false,
+  "limitations": [
+    "Export manuale: query non collegate alle pagine (brand/non-brand solo a livello sito).",
+    "GSC limita l'export a 1000 righe per tabella; query rare anonimizzate.",
+    "Export senza «Confronta» (filtro data: Ultimi 3 mesi): metriche per pagina aggregate su 92 gg, niente cali per pagina; il confronto 28 vs 28 gg è solo a livello sito (da Grafico)."
+  ],
+  "candidates_total": 89,
+  "selected": [
+    {
+      "url": "/landing/email-offerta-luce",
+      "file": "email-offerta-luce.html",
+      "tier": "contenuto",
+      "score": 12.0,
+      "score_parts": {
+        "sitemap": 12.0,
+        "tier_mult": 1.0
+      },
+      "reasons": [
+        "sitemap incoerente: sitemap_noindex (Google riceve segnali contraddittori)"
+      ],
+      "gsc": {
+        "current": {
+          "clicks": 0.0,
+          "impressions": 2.0,
+          "ctr": 0.0,
+          "position": 2.5
+        }
+      },
+      "cooldown": false,
+      "last_modified": "2026-10-23",
+      "inbound": 0,
+      "title": "Blocca il prezzo della luce",
+      "meta": "Righetto Immobiliare — agenzia a Limena (PD), dal 2000. Vendita, affitto e valutazioni su Padova e provincia.",
+      "issues": [
+        "sitemap_noindex"
+      ],
+      "intervention_id": "SEO-2026W43-landing/email-offerta-luce"
+    },
+    {
+      "url": "/landing/offerta-enel-gas",
+      "file": "offerta-enel-gas.html",
+      "tier": "contenuto",
+      "score": 10.0,
+      "score_parts": {
+        "striking": 10.0,
+        "tier_mult": 1.0
+      },
+      "reasons": [
+        "posizione media 7.4: margine verso top 3"
+      ],
+      "gsc": {
+        "current": {
+          "clicks": 1.0,
+          "impressions": 44.0,
+          "ctr": 0.0227,
+          "position": 7.43
+        }
+      },
+      "cooldown": false,
+      "last_modified": "2026-10-23",
+      "inbound": 0,
+      "title": "ENEL Fix Star Gas 0,37 €/SMC — Offerta | Righetto Immobiliare",
+      "meta": "Offerta ENEL Fix Star Gas: 0,37 €/SMC + 12 €/mese. Prezzo bloccato, zero vincoli, zero costi aggiuntivi. Valida fino al 31/03/2026.",
+      "issues": [],
+      "intervention_id": "SEO-2026W43-landing/offerta-enel-gas"
+    }
+  ],
+  "excluded_cooldown": [
+    {
+      "url": "/blog-rendimento-affitto-padova",
+      "score": 91.0,
+      "reasons": [
+        "CTR 0.5% vs atteso ~4% a pos. 6.4 (benchmark stima) su 1943 impr.: ~69 clic mancati",
+        "posizione media 6.4: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/blog-contratto-affitto-padova",
+      "score": 83.7,
+      "reasons": [
+        "CTR 1.7% vs atteso ~3% a pos. 7.3 (benchmark stima) su 4188 impr.: ~54 clic mancati",
+        "posizione media 7.3: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/servizio-vendita",
+      "score": 80.8,
+      "reasons": [
+        "CTR 0.6% vs atteso ~10% a pos. 3.2 (benchmark stima) su 535 impr.: ~51 clic mancati",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/blog-affitto-studenti-padova",
+      "score": 48.1,
+      "reasons": [
+        "CTR 1.9% vs atteso ~3% a pos. 7.0 (benchmark stima) su 3909 impr.: ~43 clic mancati",
+        "posizione media 7.0: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/immobile",
+      "score": 42.6,
+      "reasons": [
+        "CTR 0.0% vs atteso ~5% a pos. 4.8 (benchmark stima) su 412 impr.: ~21 clic mancati",
+        "posizione media 4.8: margine verso top 3",
+        "sitemap incoerente: sitemap_template_senza_contenuto (Google riceve segnali contraddittori)",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/agenzia-immobiliare-padova",
+      "score": 37.8,
+      "reasons": [
+        "CTR 1.0% vs atteso ~3% a pos. 7.3 (benchmark stima) su 936 impr.: ~19 clic mancati",
+        "posizione media 7.3: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/landing-vendita",
+      "score": 37.6,
+      "reasons": [
+        "posizione media 5.6: margine verso top 3",
+        "solo 1 pagine interne linkano questa URL (soglia 10)",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/blog-prezzi-case-padova-zona-2026",
+      "score": 28.4,
+      "reasons": [
+        "CTR 0.4% vs atteso ~4% a pos. 6.0 (benchmark stima) su 511 impr.: ~18 clic mancati",
+        "posizione media 6.0: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/blog-righetto-storia-territorio-acquisizioni-2026",
+      "score": 25.4,
+      "reasons": [
+        "CTR 0.3% vs atteso ~7% a pos. 3.7 (benchmark stima) su 377 impr.: ~25 clic mancati",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/servizi",
+      "score": 21.4,
+      "reasons": [
+        "CTR 0.0% vs atteso ~5% a pos. 4.9 (benchmark stima) su 129 impr.: ~6 clic mancati",
+        "posizione media 4.9: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/blog-affitti-padova-canoni-2026",
+      "score": 17.4,
+      "reasons": [
+        "CTR 1.9% vs atteso ~4% a pos. 6.1 (benchmark stima) su 160 impr.: ~3 clic mancati",
+        "posizione media 6.1: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/proprietario-immobile",
+      "score": 16.0,
+      "reasons": [
+        "posizione media 5.7: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/blog-stanza-universitaria-padova-canoni-2026",
+      "score": 15.0,
+      "reasons": [
+        "posizione media 6.5: margine verso top 3",
+        "on-page: title_troncato",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/blog-vicenza-residenze-universitarie-calmierate-2026",
+      "score": 15.0,
+      "reasons": [
+        "posizione media 7.3: margine verso top 3",
+        "on-page: title_troncato",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/blog-mercato-immobiliare-limena-2026",
+      "score": 14.9,
+      "reasons": [
+        "CTR 0.0% vs atteso ~4% a pos. 6.4 (benchmark stima) su 122 impr.: ~5 clic mancati",
+        "posizione media 6.4: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/blog-documenti-compravendita-rogito-padova-2026",
+      "score": 14.4,
+      "reasons": [
+        "CTR 0.0% vs atteso ~1% a pos. 14.3 (benchmark stima) su 110 impr.: ~1 clic mancati",
+        "posizione media 14.3: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/blog-student-rentals-padova-guide-2026",
+      "score": 13.9,
+      "reasons": [
+        "CTR 0.0% vs atteso ~2% a pos. 8.9 (benchmark stima) su 197 impr.: ~4 clic mancati",
+        "posizione media 8.9: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/blog-condono-edilizio-proposte-2026",
+      "score": 13.8,
+      "reasons": [
+        "CTR 0.9% vs atteso ~2% a pos. 8.6 (benchmark stima) su 338 impr.: ~4 clic mancati",
+        "posizione media 8.6: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/faq",
+      "score": 13.5,
+      "reasons": [
+        "CTR 0.9% vs atteso ~4% a pos. 6.1 (benchmark stima) su 112 impr.: ~3 clic mancati",
+        "posizione media 6.1: margine verso top 3",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    },
+    {
+      "url": "/blog-limena-vicino-padova-comprare-2026",
+      "score": 13.5,
+      "reasons": [
+        "posizione media 4.6: margine verso top 3",
+        "on-page: title_troncato",
+        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+      ]
+    }
+  ],
+  "below_threshold": [
+    {
+      "url": "/blog-planimetria-catastale-compravendita-padova-2026",
+      "score": 6.5
+    },
+    {
+      "url": "/blog-costi-proprieta-acquisto-possesso-vendita-padova-2026",
+      "score": 6.5
+    },
+    {
+      "url": "/blog-mutui-tasso-fisso-bancaitalia-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-mercato-immobiliare-piazzola-sul-brenta-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-permuta-immobiliare-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-gestione-spese-casa-risparmio-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-scegliere-immobile-giusto-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-quattro-imposte-rogitio-prima-casa-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-checklist-verifiche-prima-compromesso-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-costi-costruzione-istat-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-barometro-mutui-crif-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-dazi-usa-ue-mercato-padova-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-eurocamera-accordo-dazi-usa-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-patrimonio-casa-resilienza-mercati-globali-2026",
+      "score": 5.0
+    },
+    {
+      "url": "/blog-mutui-selettivi-banche-padova-2026",
+      "score": 5.0
+    }
+  ]
+}
