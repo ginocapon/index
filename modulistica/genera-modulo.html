@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Genera modulo - bozza</title>
+<style>
+body{font-family:Arial,sans-serif;max-width:900px;margin:16px auto;padding:0 12px;color:#222}
+fieldset{margin:12px 0;border:1px solid #bbb;border-radius:6px}legend{font-weight:bold}
+label{display:block;font-size:13px;margin:4px 0}input,select{width:100%;box-sizing:border-box;padding:6px;font-size:14px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px}
+.box{border:1px dashed #999;padding:8px;margin:8px 0;border-radius:6px}
+button{padding:10px 14px;font-size:15px;margin:4px 4px 4px 0}
+.avviso{background:#fff3cd;border:1px solid #e0b000;padding:8px;border-radius:6px;font-size:13px}
+#stato{margin-top:8px;font-size:14px}
+</style></head><body>
+<h2>Genera modulo (bozza)</h2>
+<p class="avviso">Crea un file Word modificabile dal modello. Non salva, non invia, non è un documento pronto alla firma: i dati vanno controllati. I campi vuoti restano righe da compilare.</p>
+<label>Modulo
+<select id="mod"><option value="4020">Contratto di locazione 4+4</option><option value="21007">Proposta di acquisto</option><option value="31341">Incarico di mediazione in esclusiva (venditore)</option></select></label>
+<fieldset id="gest" style="display:none"><legend>Dati dal gestionale (sola lettura)</legend><div class="row"><label>Cerca cliente<input id="qcli" placeholder="nome, telefono o email"></label><label>Codice immobile<input id="qimm" placeholder="es. LP0285-V"></label></div><button type="button" id="bcli">Cerca cliente</button> <button type="button" id="bimm">Carica immobile e proprietari</button><div id="ris"></div></fieldset>
+<div id="ruoli"></div>
+<fieldset><legend>Immobile</legend><div class="row" id="immobile"></div>
+<div id="unita"></div><button type="button" id="addUnita">+ unità catastale</button></fieldset>
+<fieldset><legend>Condizioni (a mano)</legend><div class="row" id="termini"></div></fieldset>
+<button type="button" id="scarica">Scarica Word</button>
+<button type="button" id="demo">Carica dati DIMOSTRATIVI</button>
+<input type="file" id="fileModello" accept=".docxtpl,.docx" style="display:none">
+<div id="stato"></div>
+<script src="lib/pizzip.min.js"></script><script src="lib/docxtemplater.min.js"></script><script src="modulistica-core.js"></script><script src="modulistica-dati.js"></script>
+<script>
+var SBC=window.sb||(window.parent&&window.parent!==window?window.parent.sb:null);
+var NOMI={'4020':'Modello-contratto-locazione-4piu4','21007':'Modello-proposta-di-acquisto','31341':'Modello-incarico-mediazione-esclusiva-venditore'};
+var RUOLI_LBL={locatori:'Locatori',conduttori:'Conduttori',venditori:'Venditori / proprietari',proponenti:'Proponenti (acquirenti)'};
+var PF=[['nome','Nome e cognome'],['codice_fiscale','Codice fiscale'],['nato_a','Nato a'],['nato_il','Nato il'],['residenza','Residenza'],['telefono','Telefono'],['email','Email'],['doc_tipo','Documento'],['doc_numero','N. documento'],['doc_ente','Rilasciato da'],['doc_rilascio','Rilasciato il'],['doc_scadenza','Scadenza']];
+var IF=[['indirizzo','Indirizzo'],['civico','Civico'],['comune','Comune'],['provincia','Provincia'],['tipologia','Tipologia']];
+var UF=[['categoria','Categoria'],['comune_catastale','Comune catastale'],['sezione','Sezione'],['foglio','Foglio'],['mappale','Mappale'],['subalterno','Subalterno'],['classe','Classe'],['rendita','Rendita'],['valore_prima','Valore catastale']];
+var TL={dal:'Dal',al:'Al',canone_annuo:'Canone annuo',rata_mensile:'Rata mensile',banca:'Banca',iban:'IBAN',deposito:'Deposito cauzionale',ape_classe:'APE classe',ape_kwh:'APE kWh',ape_data:'APE data',ape_perito:'APE perito',ape_albo:'APE albo',ape_scadenza:'APE scadenza',importo_mensile:'Importo mensile',canone_mensile:'Canone mensile',spese_mensili:'Spese mensili',prezzo:'Prezzo',caparra:'Caparra',importo_2:'Secondo importo',data_2:'Data secondo importo',saldo:'Saldo',data_rogito:'Data rogito',data_irrevocabile:'Irrevocabile fino a',spese_registrazione:'Spese registrazione a carico di',destinazione:"Destinazione d'uso",prezzo_richiesto:'Prezzo richiesto'};
+var $=function(i){return document.getElementById(i)};
+function campo(cls,k,lbl,val){return '<label>'+lbl+'<input data-k="'+k+'" class="'+cls+'" value="'+(val||'').replace(/"/g,'&quot;')+'"></label>';}
+function personaHtml(r,p){return '<div class="box" data-ruolo="'+r+'"><div class="row">'+PF.map(function(f){return campo('p',f[0],f[1],p&&p[f[0]]);}).join('')+'</div><button type="button" onclick="this.parentNode.remove()">Rimuovi</button></div>';}
+function unitaHtml(u){return '<div class="box unita"><div class="row">'+UF.map(function(f){return campo('u',f[0],f[1],u&&u[f[0]]);}).join('')+'</div><button type="button" onclick="this.parentNode.remove()">Rimuovi</button></div>';}
+function disegna(dati){
+  dati=dati||{}; var m=$('mod').value, ruoli=Modulistica.ROLES[m], r=dati.ruoli||{}, i=dati.immobile||{}, t=dati.termini||{};
+  $('ruoli').innerHTML=ruoli.map(function(k){var l=(r[k]&&r[k].length)?r[k]:[{}];return '<fieldset id="r_'+k+'"><legend>'+RUOLI_LBL[k]+'</legend><div class="persone">'+l.map(function(p){return personaHtml(k,p);}).join('')+'</div><button type="button" onclick="aggiungi(\''+k+'\')">+ persona</button></fieldset>';}).join('');
+  $('immobile').innerHTML=IF.map(function(f){return campo('i',f[0],f[1],i[f[0]]);}).join('');
+  $('unita').innerHTML=(i.unita_catastali||[]).map(unitaHtml).join('');
+  $('termini').innerHTML=Object.keys(Modulistica.TDEF[m]).concat(m==='31341'?['prezzo_richiesto']:[]).map(function(k){return campo('t',k,TL[k]||k,t[k]);}).join('');
+}
+function aggiungi(k){$('r_'+k).querySelector('.persone').insertAdjacentHTML('beforeend',personaHtml(k,{}));}
+function leggi(){
+  var m=$('mod').value,d={ruoli:{},immobile:{},termini:{}};
+  Modulistica.ROLES[m].forEach(function(k){d.ruoli[k]=[].map.call($('r_'+k).querySelectorAll('.box'),function(b){var o={};[].forEach.call(b.querySelectorAll('input'),function(x){o[x.dataset.k]=x.value;});return o;});});
+  [].forEach.call($('immobile').querySelectorAll('input'),function(x){d.immobile[x.dataset.k]=x.value;});
+  d.immobile.unita_catastali=[].map.call($('unita').querySelectorAll('.unita'),function(b){var o={};[].forEach.call(b.querySelectorAll('input'),function(x){o[x.dataset.k]=x.value;});return o;});
+  [].forEach.call($('termini').querySelectorAll('input'),function(x){d.termini[x.dataset.k]=x.value;});
+  return d;
+}
+function modello(m){
+  var nome=NOMI[m]+'.docxtpl';
+  var manuale=function(){return new Promise(function(res,rej){var f=$('fileModello');f.onchange=function(){f.files[0].arrayBuffer().then(res,rej);};$('stato').textContent='Modello privato non trovato nell\'archivio: seleziona il file '+nome+' dal tuo computer.';f.click();});};
+  if(!SBC) return manuale();
+  return SBC.storage.from('modelli-moduli').download(nome).then(function(r){if(r.error||!r.data)throw new Error('assente');return r.data.arrayBuffer();}).catch(manuale);
+}
+function genera(m,dati){return modello(m).then(function(buf){return Modulistica.compila(m,dati,buf);});}
+function scarica(){
+  var m=$('mod').value;
+  genera(m,leggi()).then(function(out){var b=new Blob([out],{type:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=NOMI[m]+'-bozza.docx';document.body.appendChild(a);a.click();a.remove();$('stato').textContent='File creato: '+a.download+'. Bozza da controllare prima di ogni uso.';}).catch(function(e){$('stato').textContent='Errore: '+e.message;});
+}
+/* Collegamento ai dati reali (non attivo): sostituire con lettura di clienti/immobili dal gestionale quando approvato. */
+var DEMO={ruoli:{locatori:[{nome:'Rossi (DEMO) Mario',codice_fiscale:'[CF ESEMPIO 1]'}],conduttori:[{nome:'Bianchi (DEMO) Anna',codice_fiscale:'[CF ESEMPIO 2]'},{nome:'Verdi (DEMO) Luca',codice_fiscale:'[CF ESEMPIO 3]'}],venditori:[{nome:'Rossi (DEMO) Mario',codice_fiscale:'[CF ESEMPIO 1]'}],proponenti:[{nome:'Bianchi (DEMO) Anna'},{nome:'Verdi (DEMO) Luca'}]},immobile:{indirizzo:'Via Esempio',civico:'10',comune:'Padova',tipologia:'appartamento',unita_catastali:[{categoria:'A/2',foglio:'10',mappale:'100',subalterno:'5'},{categoria:'C/6',foglio:'10',mappale:'100',subalterno:'9'}]},termini:{}};
+$('mod').onchange=function(){disegna();$('stato').textContent='';};
+$('addUnita').onclick=function(){$('unita').insertAdjacentHTML('beforeend',unitaHtml({}));};
+$('scarica').onclick=scarica; $('demo').onclick=function(){disegna(DEMO);$('stato').textContent='Dati dimostrativi caricati: NON sono dati reali.';};
+
+/* Collegamento in sola lettura: usa window.sb (client autenticato dell'admin). Fuori dall'admin resta nascosto e i campi sono manuali. */
+var NOTA_COLONNE=null;
+function ruoloDefault(){return Modulistica.ROLES[$('mod').value][0];}
+function mettiPersona(ruolo,p){
+  var box=$('r_'+ruolo).querySelector('.persone'), vuote=[].filter.call(box.querySelectorAll('.box'),function(b){return ![].some.call(b.querySelectorAll('input'),function(x){return x.value;});});
+  if(vuote.length) vuote[0].remove();
+  box.insertAdjacentHTML('beforeend',personaHtml(ruolo,p));
+}
+if(SBC&&window.ModulistDati){
+  $('gest').style.display='';
+  $('bcli').onclick=function(){ModulistDati.cercaClienti(SBC,$('qcli').value).then(function(l){
+    $('ris').innerHTML=l.length?l.map(function(c){return '<div>'+Modulistica.ROLES[$('mod').value].map(function(k){return '<button type="button" data-id="'+c.id+'" data-ruolo="'+k+'">Aggiungi come '+RUOLI_LBL[k]+'</button> ';}).join('')+(c.nome||c.ragione_sociale||'')+' '+(c.telefono||'')+'</div>';}).join(''):'Nessun risultato';
+    [].forEach.call($('ris').querySelectorAll('button'),function(b){b.onclick=function(){ModulistDati.caricaCliente(SBC,b.dataset.id).then(function(r){mettiPersona(b.dataset.ruolo,r.persona);$('stato').textContent='Cliente caricato. Restano a mano: nato a/il, documento (non presenti nel gestionale in forma leggibile).';}).catch(function(e){$('stato').textContent='Lettura cliente non riuscita: '+e.message;});};});
+  }).catch(function(e){$('stato').textContent='Ricerca non riuscita: '+e.message;});};
+  $('bimm').onclick=function(){ModulistDati.caricaImmobile(SBC,$('qimm').value).then(function(r){
+    var i=r.immobile; $('immobile').querySelectorAll('input').forEach(function(x){if(i[x.dataset.k]!==undefined&&i[x.dataset.k]!=='')x.value=i[x.dataset.k];});
+    $('unita').innerHTML=(i.unita_catastali||[]).map(unitaHtml).join('');
+    [].forEach.call($('termini').querySelectorAll('input'),function(x){if(r.termini[x.dataset.k])x.value=r.termini[x.dataset.k];});
+    var ruolo=Modulistica.ROLES[$('mod').value].filter(function(k){return k==='venditori'||k==='locatori';})[0];
+    if(ruolo) r.proprietari.forEach(function(p){mettiPersona(ruolo,p);});
+    $('stato').textContent='Immobile caricato'+(r.proprietari.length?' con '+r.proprietari.length+' proprietari':'')+(r.nota?' ('+r.nota+')':'')+'. Controlla i campi prima di scaricare.';
+  }).catch(function(e){$('stato').textContent='Lettura immobile non riuscita: '+e.message;});};
+}
+disegna();
+if(location.search.indexOf('autotest')>=0){var res=[];(function next(l){if(!l.length){document.title='AUTOTEST '+res.join(',');return;}var m=l[0];$('mod').value=m;disegna(DEMO);genera(m,leggi()).then(function(o){res.push(m+':'+o.length);var pre=document.createElement('pre');pre.id='o'+m;pre.textContent=btoa(String.fromCharCode.apply(null,o.subarray?Array.from(o):o));document.body.appendChild(pre);next(l.slice(1));}).catch(function(e){res.push(m+':ERR '+e.message);next(l.slice(1));});})(['4020','21007','31341']);}
+</script></body></html>

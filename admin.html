@@ -5027,6 +5027,12 @@ META_IG_USER_ID=...</pre>
 
       <!-- ═══ SEZIONE DOCUMENTI GENERALI ═══ -->
       <div class="section" id="sec-documentigenerali">
+        <details id="moduliGenBox" style="margin:0 0 14px;background:#fff;border:1px solid #d9e2e7;border-radius:10px;padding:10px 14px">
+          <summary style="cursor:pointer;font-weight:700;font-size:1rem">Genera modulo Word (bozza)</summary>
+          <p style="font-size:.85rem;margin:8px 0">Compila un contratto dal modello con i dati del gestionale (sola lettura). Non salva nulla e non invia nulla: scarica un Word da controllare.</p>
+          <iframe id="moduliGenFrame" title="Genera modulo" style="width:100%;height:78vh;border:1px solid #ccc;border-radius:8px;background:#fff" data-src="modulistica/genera-modulo.html"></iframe>
+        </details>
+        <script>document.getElementById('moduliGenBox').addEventListener('toggle',function(){var f=document.getElementById('moduliGenFrame');if(this.open&&!f.src)f.src=f.dataset.src;});</script>
         <div class="stats-grid">
           <div class="stat-card" style="border-left-color:var(--oro)"><div class="stat-num" id="statDocGenRif">0</div><div class="stat-label">Riferimenti in alto</div></div>
           <div class="stat-card blue"><div class="stat-num" id="statDocGenArg">0</div><div class="stat-label">Argomenti / contratti</div></div>
