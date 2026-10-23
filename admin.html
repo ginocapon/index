@@ -9197,28 +9197,27 @@ function updateClientiStats() {
   }
 }
 
+let _clientiSearchTimer = null;
 function filterClientiTable() {
-  const q = document.getElementById('searchClienti').value.toLowerCase().trim();
-  if (!q) {
-    // Mostra tutti
+  const q = document.getElementById('searchClienti').value.trim();
+  clearTimeout(_clientiSearchTimer);
+  if (!q) { loadClienti(); return; }
+  if (q.length < 2) return;
+  // Ricerca sul database (non solo sui primi 1000 caricati)
+  _clientiSearchTimer = setTimeout(async () => {
+    const safe = q.replace(/[%,()*]/g, ' ').trim();
+    if (!safe) return;
+    const cols = ['nome','email','telefono','ragione_sociale','partita_iva','codice_fiscale','indirizzo_cliente','note'];
+    let query = sb.from('clienti').select('*').or(cols.map(c => c + '.ilike.%' + safe + '%').join(',')).order('created_at', { ascending: false }).limit(200);
+    const fonte = document.getElementById('filtroFonteCliente').value;
+    if (fonte) query = query.eq('fonte', fonte);
+    const { data, error } = await query;
+    if (document.getElementById('searchClienti').value.trim() !== q) return;
+    if (error) { toast('Ricerca non riuscita: ' + error.message, 'error'); return; }
+    allClienti = data || [];
     renderClientiTable();
-    return;
-  }
-  const tbody = document.getElementById('clientiBody');
-  const rows = tbody.querySelectorAll('tr');
-  rows.forEach(row => {
-    // Cerca in tutti i data-attributes + testo visibile
-    const searchable = [
-      row.dataset.nome || '',
-      row.dataset.email || '',
-      row.dataset.telefono || '',
-      row.dataset.ragione || '',
-      row.dataset.piva || '',
-      row.dataset.indirizzo || '',
-      row.textContent
-    ].join(' ').toLowerCase();
-    row.style.display = searchable.includes(q) ? '' : 'none';
-  });
+    toast(allClienti.length + ' clienti trovati' + (allClienti.length === 200 ? ' (mostrati i primi 200: restringi la ricerca)' : ''), 'info');
+  }, 400);
 }
 
 let currentClienteDocumenti = [];
@@ -17951,7 +17950,7 @@ window.showSection('home');
 </script>
 <script src="js/agenda-event-types.js?v=1"></script>
 <script src="js/admin-agenda.js?v=7"></script>
-<script src="js/admin-cliente-scheda.js?v=2"></script>
+<script src="js/admin-cliente-scheda.js?v=3"></script>
 <script>RighettoAgenda.init(document.getElementById("righetto-operational-agenda"));</script>
 <script src="js/admin-attivita.js?v=2"></script>
 <script>(function(){var el=document.getElementById('righetto-attivita');if(!el)return;var done=false,busy=false;function msg(t){el.innerHTML='<div class="at-banner">'+t+'</div>';}

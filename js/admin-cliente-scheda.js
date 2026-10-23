@@ -15,7 +15,7 @@ function css(){if(document.getElementById('rcs-css'))return;const s=document.cre
 '.rcs-ops{position:relative;display:flex;gap:8px}.rcs-menu{position:absolute;right:0;top:44px;z-index:5;background:#fff;border:1px solid #00508f;min-width:290px;box-shadow:0 8px 24px #0003}'+
 '.rcs-menu button{display:block;width:100%;text-align:left;border:0;border-radius:0;background:#fff;min-height:36px}.rcs-menu button:hover:not(:disabled){background:#eaf2f8}.rcs-menu hr{margin:2px 0;border:0;border-top:1px solid #d9e2e7}.rcs-menu small{color:#8a5a00;font-size:11px;margin-left:6px}'+
 '.rcs-ev{border-left:6px solid #99cc00;background:#f7f9fa;padding:8px 12px;margin:8px 0;border-radius:6px}.rcs-note{color:#566773;font-size:13px}'+
-'@media(max-width:760px){.rcs-grid{grid-template-columns:1fr}.rcs-d{padding:14px}.rcs-menu{position:fixed;left:12px;right:12px;top:auto;bottom:12px;max-height:70vh;overflow:auto}}';
+'@media(max-width:760px){.rcs-menu{max-height:60vh}.rcs-grid{grid-template-columns:1fr}.rcs-d{padding:14px}.rcs-menu{position:fixed;left:12px;right:12px;top:auto;bottom:12px;max-height:70vh;overflow:auto}}';
 document.head.appendChild(s);}
 const fmtD=d=>d?new Date(d).toLocaleDateString('it-IT',{timeZone:'Europe/Rome'}):'';
 const fmtDT=d=>d?new Date(d).toLocaleString('it-IT',{timeZone:'Europe/Rome',day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'';
@@ -31,17 +31,19 @@ async function open(id){
  const budget=(c.budget_min||c.budget_max)?('€ '+(c.budget_min||'0')+' - '+(c.budget_max||'qualsiasi')):'';
  box.innerHTML=`<div class="rcs-d"><div class="rcs-top"><div><h2>${esc(c.nome||c.ragione_sociale||'Cliente')}</h2><div class="rcs-sub">${c.telefono?`<a href="tel:${esc(c.telefono)}">${esc(c.telefono)}</a>`:''}${c.telefono&&c.email?' · ':''}${c.email?`<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>`:''}</div><div class="rcs-sub">Inserito il ${esc(fmtD(c.created_at))}${c.fonte?' · fonte: '+esc(c.fonte):''}</div></div>
  <div class="rcs-ops"><button data-ops aria-haspopup="true">🔧 Operazioni</button><button data-x>Chiudi</button><div class="rcs-menu" hidden></div></div></div>
- <div class="rcs-tabs" role="tablist"><button data-t="scheda" aria-selected="true">Scheda</button><button data-t="cron" aria-selected="false">Cronistoria</button><button data-t="all" aria-selected="false">Allegati</button></div>
+ <div class="rcs-tabs" role="tablist"><button data-t="scheda" aria-selected="true">Scheda</button><button data-t="cron" aria-selected="false">Appuntamenti</button><button data-t="all" aria-selected="false">Allegati</button></div>
  <section data-p="scheda"><h3>Informazioni</h3><div class="rcs-grid">${row('Tipo cliente',c.tipo_cliente)}${row('Ragione sociale',c.ragione_sociale)}${row('Codice fiscale',c.codice_fiscale)}${row('Partita IVA',c.partita_iva)}${row('Indirizzo',c.indirizzo_cliente)}${row('PEC',c.pec)}${row('Codice SDI',c.sdi)}${row('Ruolo in rubrica',c.ruolo_rubrica)}</div>
  ${cerca?`<h3>Cosa cerca</h3><div class="rcs-grid">${cerca}</div>`:''}${(c.interesse||c.note)?`<h3>Note</h3>${c.interesse?`<p>${esc(c.interesse)}</p>`:''}${c.note?`<p>${esc(c.note)}</p>`:''}`:''}</section>
- <section data-p="cron" hidden><p class="rcs-note">Appuntamenti registrati nell'agenda per questo cliente. Solo lettura.</p><div data-cron>Caricamento…</div></section>
+ <section data-p="cron" hidden><p class="rcs-note">Solo appuntamenti dell'agenda collegati a questo cliente. Telefonate, email e SMS del vecchio gestionale non sono importati.</p><div data-cron>Caricamento…</div></section>
  <section data-p="all" hidden></section></div>`;
  document.body.appendChild(box);
  const docs=Array.isArray(c.documenti_cliente)?c.documenti_cliente:[];
  box.querySelector('[data-p=all]').innerHTML=docs.length?docs.map(d=>`<div class="rcs-ev"><a href="${esc(d.url)}" target="_blank" rel="noopener">📄 ${esc(d.nome||'documento')}</a> <span class="rcs-note">${esc(d.tipo||'')}</span></div>`).join(''):'<p class="rcs-note">Nessun allegato collegato a questa scheda. I file dei clienti sono nell\'archivio privato GitHub clienti-docs, non collegati qui.</p>';
  const menu=box.querySelector('.rcs-menu');
- const todo=['Invio informativa privacy','Richiesta firma consenso','Invia follow up richiesta','Inserisci notizia','Crea fattura','Mostra fatture','Scheda catastale','Adeguata verifica','Verifica cliente','Stampe e modelli','Firma documento','Metti nello storico'];
- menu.innerHTML=`<button data-op="edit">Modifica scheda</button><button data-op="match">Trova immobili compatibili</button><hr><button data-op="ev">Aggiungi evento / nuovo appuntamento</button><button data-op="mail" ${c.email?'':'disabled'}>Contatta via email (apre il tuo programma di posta)</button><hr>${todo.map(t=>`<button disabled>${esc(t)}<small>non ancora attivo</small></button>`).join('')}`;
+ menu.innerHTML=`<button data-op="edit">Modifica scheda</button><button data-op="match">Trova immobili compatibili</button><button data-op="ev">Aggiungi evento / nuovo appuntamento</button><button data-op="mail" ${c.email?'':'disabled'}>Contatta via email (apre il tuo programma di posta)</button>`;
+ const todoBox=document.createElement('details');todoBox.style.cssText='margin-top:18px;border:1px dashed #b9c7d1;border-radius:8px;padding:8px 12px';
+ todoBox.innerHTML='<summary style="cursor:pointer;font-weight:700">Da completare (non ancora disponibili qui)</summary><p class="rcs-note">Presenti nel vecchio gestionale, non ancora costruiti in questa scheda: invio informativa privacy, richiesta firma consenso, follow up richiesta, inserisci notizia, crea e mostra fatture, scheda catastale, adeguata verifica, verifica cliente, stampe e modelli, firma documento, metti nello storico, cronistoria completa (telefonate, email, SMS).</p>';
+ box.querySelector('.rcs-d').appendChild(todoBox);
  box.addEventListener('click',ev=>{
   if(ev.target===box){close();return;}
   const b=ev.target.closest('button');if(!b)return;
