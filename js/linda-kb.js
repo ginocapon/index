@@ -101,6 +101,7 @@
 
   // ---------- risposta live da scheda annuncio ----------
   var RE_CODICE = /\b([A-Za-z]{1,4}\d{3,5}(?:-[A-Za-z]|[a-z])?)(?![A-Za-z0-9])/;
+  var RE_FRAMMENTO = /\b(?:codice|cod\.?|rif\.?|riferimento)\s*:?\s*([A-Za-z0-9][A-Za-z0-9 .\-]{1,11}[A-Za-z0-9])/i;
   var CAMPI = [
     { re: /prezzo|costa|quanto (costa|chiede)|canone|affitto mensile/, f: 'prezzo' },
     { re: /\bmq\b|metri|superficie|grande|quanti metri/, f: 'superficie' },
@@ -152,14 +153,44 @@
   }
   async function rispondiImmobile(engine, domanda) {
     var m = domanda.match(RE_CODICE);
-    if (!m || !engine.supabase) return null;
-    var codice = m[1].toUpperCase();
-    var res;
-    try {
-      res = await withTimeout(engine.supabase.from('immobili').select(COLONNE_PUBBLICHE).ilike('codice', codice).limit(1));
-    } catch (e) { return null; }
-    if (!res || res.error) return null;
-    var r = res.data && res.data[0];
+    var mf = domanda.match(RE_FRAMMENTO);
+    if ((!m && !mf) || !engine.supabase) return null;
+    var codice = m ? m[1].toUpperCase() : '';
+    var r;
+    if (m) {
+      var res;
+      try {
+        res = await withTimeout(engine.supabase.from('immobili').select(COLONNE_PUBBLICHE).ilike('codice', codice).limit(1));
+      } catch (e) { return null; }
+      if (!res || res.error) return null;
+      r = res.data && res.data[0];
+    }
+    if (!r && mf) {
+      // Codice scritto solo in parte (es. "rif 0180"): cerca i codici che lo contengono e fa scegliere se sono piu' di uno.
+      var frag = mf[1].replace(/[^A-Za-z0-9 .\-]/g, '').trim();
+      var parti = frag.split(/[\s.\-]+/).filter(Boolean);
+      if (parti.some(function (t) { return !/\d/.test(t) && t.length > 3; })) frag = ''; // es. "codice civile": non e' un codice annuncio
+      var compatto = frag.replace(/[\s.\-]+/g, '');
+      if (compatto.length < 3 || !/\d/.test(compatto)) frag = null;
+      if (!frag && !m) return null;
+      if (frag) {
+      var filtri = ['codice.ilike.%' + frag + '%', 'codice.ilike.%' + compatto + '%'];
+      if (compatto.length >= 6) filtri.push('codice.ilike.%' + compatto.split('').join('%') + '%');
+      var rf;
+      try {
+        rf = await withTimeout(engine.supabase.from('immobili').select(COLONNE_PUBBLICHE).or(filtri.join(',')).limit(6));
+      } catch (e) { return null; }
+      if (!rf || rf.error) return null;
+      var righe = (rf.data || []).filter(function (x) { return x.attivo !== false && x.venduto !== true && x.affittato !== true; });
+      if (!righe.length) return 'Non trovo un annuncio disponibile con un codice che contiene **' + esc(frag) + '**. Controlla il codice oppure [guarda gli immobili disponibili](immobili.html), o chiama **' + TEL + '**.';
+      if (righe.length > 1) {
+        return 'Ho trovato più immobili con un codice che contiene **' + esc(frag) + '**. Scrivi il codice completo per vedere la scheda:\n' +
+          righe.map(function (x) { return '- **' + esc(x.codice) + '**' + (x.titolo ? ' — ' + esc(x.titolo) : '') + (x.slug ? ' ([scheda](immobile.html?s=' + encodeURIComponent(x.slug) + '))' : ''); }).join('\n');
+      }
+      r = righe[0];
+      codice = String(r.codice || '').toUpperCase();
+      }
+    }
     if (!r && !/immobil|annunci|codice|rif\b|rif\.|scheda|appartament|casa/i.test(domanda)) return null; // es. "IMU2025": non è un codice annuncio
     if (!r) return 'Non trovo un annuncio con codice **' + esc(codice) + '** nel catalogo. Controlla il codice oppure [guarda gli immobili disponibili](immobili.html), o chiama **' + TEL + '**.';
     var link = r.slug ? '[Apri la scheda](immobile.html?s=' + encodeURIComponent(r.slug) + ')' : '';
