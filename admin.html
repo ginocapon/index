@@ -8168,8 +8168,9 @@ async function handleFiles(files, bucket) {
         toast('✅ ' + file.name + ' caricato!', 'success');
         toast('Le foto saranno sul sito entro ~6 h (sync automatico GitHub).', 'info');
       } else if (bucket === 'planimetrie') {
-        currentPlanimetrie.push({ url: publicUrl, nome: file.name });
-        renderPlanimetrie();
+        // Planimetrie = documenti privati dell'immobile (mai pubbliche sul sito)
+        currentDocumenti.push({ url: publicUrl, nome: file.name, tipo: 'Planimetria' });
+        renderDocumenti();
       } else if (bucket === 'catasto') {
         currentCatastoPdf.push({ url: publicUrl, nome: file.name });
         renderCatastoPdf();
@@ -8298,11 +8299,28 @@ function renderDocumenti() {
         <div class="doc-meta">${d.tipo || ''}</div>
       </div>
       <div class="doc-actions">
-        <a href="${d.url}" target="_blank">👁️ Vedi</a>
+        <a href="${d.url}" onclick="return openDocumento(${i}, event)">👁️ Vedi</a>
         <button class="doc-del" onclick="removeDocumento(${i})">🗑️</button>
       </div>
     </div>
   `).join('');
+}
+
+// Apre un documento privato con link firmato (bucket privati: il link pubblico non si apre)
+async function openDocumento(i, ev) {
+  if (ev) ev.preventDefault();
+  const d = currentDocumenti[i]; if (!d || !d.url) return false;
+  const m = String(d.url).match(/\/storage\/v1\/object\/(?:public|sign|authenticated)\/([^/]+)\/([^?]+)/);
+  const w = window.open('', '_blank');
+  if (!m) { if (w) w.location = d.url; return false; }
+  const { data, error } = await sb.storage.from(m[1]).createSignedUrl(decodeURIComponent(m[2]), 300);
+  if (error || !data || !data.signedUrl) {
+    if (w) w.close();
+    toast('Impossibile aprire il documento: ' + (error ? error.message : 'link non disponibile'), 'error');
+    return false;
+  }
+  if (w) w.location = data.signedUrl; else window.location = data.signedUrl;
+  return false;
 }
 
 function removeDocumento(i) {
