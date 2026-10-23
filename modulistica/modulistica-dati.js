@@ -8,15 +8,11 @@
     if(!p.nome&&row.ragione_sociale) p.nome=s(row.ragione_sociale);
     return p; // nato_a, nato_il, doc_*: nessuna colonna verificata, restano manuali
   }
-  /* Riferimento interno NON accertato: serve solo a segnalare una possibile incoerenza. Non e' una verifica. */
-  var CODICI_RIFERIMENTO={padova:'G224'};
+  /* Nessun confronto con valori attesi: finche' non c'e' una fonte ufficiale verificata il codice letto e' sempre "non verificato". */
   function verificaCodice(comune,codice){
-    var c=s(comune).trim().toLowerCase(), k=s(codice).trim().toUpperCase();
+    var k=s(codice).trim().toUpperCase();
     if(!k) return {stato:'nessun codice',msg:'Codice catastale non indicato: resta la riga da compilare.'};
-    var r=CODICI_RIFERIMENTO[c];
-    if(!r) return {stato:'non verificato',msg:'Codice '+k+' per '+(s(comune)||'comune non indicato')+': NON verificato. Controllare su visura o planimetria.'};
-    if(r===k) return {stato:'da controllare',msg:'Codice '+k+' coincide con il riferimento interno per '+s(comune)+', ma NON e\' verificato: controllare su visura o planimetria.'};
-    return {stato:'incoerente',msg:'ATTENZIONE: per '+s(comune)+' il riferimento interno indica '+r+', il dato letto e\' '+k+'. Dato NON verificato e non corretto in automatico: controllare su visura o planimetria.'};
+    return {stato:'non verificato',msg:'Codice catastale '+k+' non verificato: controllare su visura o planimetria.'};
   }
   function unitaNorm(u){var o={};Object.keys(u||{}).forEach(function(k){o[k]=s(u[k]);});
     if(/^[A-Za-z]\d{3}$/.test(o.comune_catastale||'')&&!o.codice_catastale){o.codice_catastale=o.comune_catastale.toUpperCase();o.comune_catastale='';}
