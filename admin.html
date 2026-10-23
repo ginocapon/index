@@ -13844,14 +13844,14 @@ function closeLinkPropertyModal() {
 }
 
 function filterLinkProperties() {
-  const q = document.getElementById('linkPropertySearch').value.toLowerCase().trim();
+  const q = document.getElementById('linkPropertySearch').value.trim();
   if (!q) { renderLinkPropertyResults(allImmobili); return; }
-  const filtered = allImmobili.filter(i =>
-    (i.codice || '').toLowerCase().includes(q) ||
-    (i.titolo || '').toLowerCase().includes(q) ||
-    (i.comune || '').toLowerCase().includes(q) ||
-    (i.tipologia || '').toLowerCase().includes(q)
-  );
+  const norm = v => String(v == null ? '' : v).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const words = norm(q).split(/[\s,;]+/).filter(Boolean);
+  const filtered = allImmobili.filter(i => {
+    const hay = norm([i.codice, String(i.codice || '').replace(/[\s.\-_\/]+/g, ''), i.titolo, i.comune, i.indirizzo, i.tipologia].join(' '));
+    return words.every(w => hay.includes(w) || hay.includes(w.replace(/[\s.\-_\/]+/g, '')));
+  });
   renderLinkPropertyResults(filtered);
 }
 
@@ -16456,7 +16456,7 @@ showSection = function(name) {
       const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
       const thumb = foto ? '<img src="' + foto + '" style="width:50px;height:38px;object-fit:cover;border-radius:4px">' : '<div style="width:50px;height:38px;background:#ddd;border-radius:4px"></div>';
       const prezzo = i.prezzo ? '€ ' + Number(i.prezzo).toLocaleString('it-IT') : '';
-      return '<label style="display:flex;gap:10px;align-items:center;padding:8px;border-bottom:1px solid #f0f0f0;cursor:pointer;transition:background 0.2s" onmouseover="this.style.background=\'#f8f6f0\'" onmouseout="this.style.background=\'transparent\'" data-search="' + escHtml((i.titolo||'')+(i.codice||'')+(i.comune||'')).toLowerCase() + '">' +
+      return '<label style="display:flex;gap:10px;align-items:center;padding:8px;border-bottom:1px solid #f0f0f0;cursor:pointer;transition:background 0.2s" onmouseover="this.style.background=\'#f8f6f0\'" onmouseout="this.style.background=\'transparent\'" data-search="' + escHtml(((i.codice||'')+' '+String(i.codice||'').replace(/[\s.\-_\/]+/g,'')+' '+(i.titolo||'')+' '+(i.comune||'')+' '+(i.indirizzo||'')).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')) + '">' +
         '<input type="checkbox" class="em-prop-check" value="' + i.id + '">' +
         thumb +
         '<div style="flex:1;min-width:0">' +
@@ -16484,7 +16484,8 @@ showSection = function(name) {
     const q = (document.getElementById('emPropSearchInput')?.value || '').toLowerCase();
     document.querySelectorAll('#emPropPickerList label').forEach(lbl => {
       const search = lbl.dataset.search || '';
-      lbl.style.display = !q || search.includes(q) ? 'flex' : 'none';
+      const ws = q.normalize('NFD').replace(/[\u0300-\u036f]/g,'').split(/[\s,;]+/).filter(Boolean);
+      lbl.style.display = !ws.length || ws.every(w => search.includes(w) || search.includes(w.replace(/[\s.\-_\/]+/g,''))) ? 'flex' : 'none';
     });
   };
 
