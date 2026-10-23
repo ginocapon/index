@@ -1,0 +1,30 @@
+/* Sezione Attivita: pratiche espandibili. Anteprima, nessun dato reale nel codice. */
+.at{max-width:none;margin:18px auto 0;background:#fff;border:1px solid #d9e2e7;border-radius:14px;color:#17324d;font:600 15px/1.45 Arial,sans-serif;overflow:hidden}
+.at-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;background:#0b4f8a;color:#fff;padding:10px 16px}
+.at-head h2{margin:0;font-size:17px;letter-spacing:.04em;text-transform:uppercase}
+.at-head select,.at-head button{font:inherit;font-size:14px;padding:7px 10px;border-radius:6px;border:1px solid #fff6;background:#fff;color:#17324d}
+.at-banner{background:#fff7d6;color:#6b5600;font-size:13px;font-weight:600;padding:8px 16px;border-bottom:1px solid #eadf9b}
+.at-list{padding:10px 12px}
+.at-pr{border:1px solid #d9e2e7;border-radius:10px;margin:0 0 10px;background:#fff}
+.at-pr>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:90px 1.4fr 1fr 1fr 110px 28px;gap:10px;align-items:center;padding:12px 14px}
+.at-pr>summary::-webkit-details-marker{display:none}
+.at-pr>summary::after{content:"▾";justify-self:end;color:#556}
+.at-pr[open]>summary::after{content:"▴"}
+.at-pr[open]>summary{border-bottom:1px solid #d9e2e7;background:#f4f8fb}
+.at-id{color:#0b4f8a}.at-bar{height:10px;background:#e3e8ec;border-radius:6px;overflow:hidden}.at-bar i{display:block;height:100%;background:#4a9a3a}
+.at-sub{font-size:12px;font-weight:400;color:#556}
+.at-body{padding:12px 14px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:18px}
+.at-body h4{margin:0 0 8px;font-size:14px}
+.at-task{display:flex;gap:10px;align-items:flex-start;padding:9px 10px;border-radius:8px;margin:0 0 6px;border:1px solid transparent}
+.at-task input{width:22px;height:22px;flex:0 0 22px;margin:1px 0 0}
+.at-task.done{background:#d7f0d2;border-color:#9fd194}
+.at-task.done .at-t{text-decoration:line-through;text-decoration-color:#0006}
+.at-task .at-sub{display:block}
+.at-add{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.at-add input,.at-add select{font:inherit;font-weight:400;padding:8px;border:1px solid #c5d0d6;border-radius:6px;min-width:0;flex:1 1 140px}
+.at-add button,.at-files button{font:inherit;padding:8px 12px;border:0;border-radius:6px;background:#0b4f8a;color:#fff;cursor:pointer}
+.at-file{display:flex;justify-content:space-between;gap:8px;padding:7px 9px;background:#f4f8fb;border-radius:6px;margin:0 0 6px;font-weight:400;font-size:14px;word-break:break-word}
+.at-empty{font-weight:400;color:#556;font-size:14px;padding:6px 0}
+@media(max-width:760px){.at-pr>summary{grid-template-columns:1fr 28px;gap:4px}.at-pr>summary>:nth-child(n+3):not(:last-child){grid-column:1}.at-pr>summary::after{grid-row:1;grid-column:2}.at-body{grid-template-columns:1fr}.at-task input{width:28px;height:28px;flex-basis:28px}.at-add button{width:100%;padding:12px}}
+.at-newp{display:flex;gap:8px;flex-wrap:wrap;padding:10px 12px;background:#f4f8fb;border-bottom:1px solid #d9e2e7}.at-newp input{font:inherit;font-weight:400;padding:8px;border:1px solid #c5d0d6;border-radius:6px;flex:1 1 180px;min-width:0}.at-newp button,.at-addf button,.at-file button,.at-files>button{font:inherit;font-size:13px;padding:7px 11px;border:0;border-radius:6px;background:#0b4f8a;color:#fff;cursor:pointer}
+.at-tx{flex:1;min-width:0}.at-ok{color:#1d6b25;font-size:12px}.at-no{color:#b3261e;font-size:12px}.at-addf{display:flex;gap:6px;margin-top:6px}.at-addf input{font:inherit;font-weight:400;font-size:13px;padding:6px;border:1px solid #c5d0d6;border-radius:6px;flex:1;min-width:0}.at-sel{font-size:12px;font-weight:400;white-space:nowrap}.at-sel input{width:auto}.at-file{align-items:center;flex-wrap:wrap;margin:6px 0 0}.at-draft{margin-top:8px;padding:8px;border:1px dashed #0b4f8a;border-radius:6px;font-weight:400;font-size:13px}
