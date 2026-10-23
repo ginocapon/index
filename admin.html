@@ -17951,7 +17951,7 @@ window.showSection('home');
 <script src="js/agenda-event-types.js?v=1"></script>
 <script src="js/admin-agenda.js?v=6"></script>
 <script>RighettoAgenda.init(document.getElementById("righetto-operational-agenda"));</script>
-<script src="js/admin-attivita.js?v=4"></script>
+<script src="js/admin-attivita.js?v=5"></script>
 <script>(function(){var el=document.getElementById('righetto-attivita');if(!el)return;var done=false,busy=false;function msg(t){el.innerHTML='<div class="at-banner">'+t+'</div>';}
 async function go(){if(done||busy)return;busy=true;try{if(typeof sb==='undefined')throw 0;var u=await sb.auth.getUser();if(!u.data.user)throw 0;done=true;RighettoAttivita.init(el,{store:RighettoAttivita.dbStore(sb)});}catch(e){msg('Attivit\u00e0: accedi per vedere le pratiche.');}busy=false;}
 msg('Attivit\u00e0: caricamento...');go();setInterval(go,3000);})();</script>

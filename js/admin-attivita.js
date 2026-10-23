@@ -50,7 +50,7 @@ async addFile(pid,tid,fd){const f=fd.get('file');if(!f||!f.size)throw new Error(
 const safe=f.name.replace(/[^A-Za-z0-9._-]+/g,'_');const path=pid+'/'+tid+'/'+Date.now()+'-'+safe;
 const u=await sb.storage.from('attivita-pratiche').upload(path,f,{contentType:f.type||undefined,upsert:false});if(u.error)throw u.error;
 const r=await sb.from('allegati_attivita').insert({attivita_id:tid,nome:f.name,percorso:path,dimensione:f.size,stato:'recuperato'}).select('id').single();
-if(r.error){await sb.storage.from('attivita-pratiche').remove([path]);throw r.error;}return {id:r.data.id,name:f.name,path};},
+if(r.error){const c=await sb.storage.from('attivita-pratiche').remove([path]);throw new Error(r.error.message+(c.error?' (file rimasto nello storage: '+path+', verra\' rimosso con l\'eliminazione definitiva)':''));}return {id:r.data.id,name:f.name,path};},
 async delFile(f){const r=await sb.from('allegati_attivita').update({eliminata_il:new Date().toISOString()}).eq('id',f.id);if(r.error)throw r.error;},
 async delTask(t){const r=await sb.from('attivita').update({eliminata_il:new Date().toISOString()}).eq('id',t.id);if(r.error)throw r.error;},
 async delPratica(p){const r=await sb.from('pratiche').update({eliminata_il:new Date().toISOString()}).eq('id',p.id);if(r.error)throw r.error;},
