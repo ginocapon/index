@@ -28,3 +28,11 @@
 @media(max-width:760px){.at-pr>summary{grid-template-columns:1fr 28px;gap:4px}.at-pr>summary>:nth-child(n+3):not(:last-child){grid-column:1}.at-pr>summary::after{grid-row:1;grid-column:2}.at-body{grid-template-columns:1fr}.at-task input{width:28px;height:28px;flex-basis:28px}.at-add button{width:100%;padding:12px}}
 .at-newp{display:flex;gap:8px;flex-wrap:wrap;padding:10px 12px;background:#f4f8fb;border-bottom:1px solid #d9e2e7}.at-newp input{font:inherit;font-weight:400;padding:8px;border:1px solid #c5d0d6;border-radius:6px;flex:1 1 180px;min-width:0}.at-newp button,.at-addf button,.at-file button,.at-files>button{font:inherit;font-size:13px;padding:7px 11px;border:0;border-radius:6px;background:#0b4f8a;color:#fff;cursor:pointer}
 .at-tx{flex:1;min-width:0}.at-ok{color:#1d6b25;font-size:12px}.at-no{color:#b3261e;font-size:12px}.at-addf{display:flex;gap:6px;margin-top:6px}.at-addf input{font:inherit;font-weight:400;font-size:13px;padding:6px;border:1px solid #c5d0d6;border-radius:6px;flex:1;min-width:0}.at-sel{font-size:12px;font-weight:400;white-space:nowrap}.at-sel input{width:auto}.at-file{align-items:center;flex-wrap:wrap;margin:6px 0 0}.at-draft{margin-top:8px;padding:8px;border:1px dashed #0b4f8a;border-radius:6px;font-weight:400;font-size:13px}
+/* Riga chiusa: solo nome, poco profonda (richiesta Gino 8:56) */
+.at-pr{margin:0 0 4px;border-radius:8px}
+.at-pr:not([open])>summary{grid-template-columns:1fr auto 24px;padding:6px 12px;min-height:0}
+.at-pr:not([open])>summary>.at-id,.at-pr:not([open])>summary>:nth-child(3),.at-pr:not([open])>summary>:nth-child(5),.at-pr:not([open])>summary .at-bar,.at-pr:not([open])>summary>:nth-child(2) .at-sub{display:none}
+.at-pr:not([open])>summary>:nth-child(4){grid-column:2;grid-row:1}
+.at-pr:not([open])>summary>:nth-child(2){grid-column:1;grid-row:1}
+.at-pr:not([open])>summary::after{grid-column:3;grid-row:1}
+.at-list{padding:6px 10px}
