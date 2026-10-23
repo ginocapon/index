@@ -39,3 +39,5 @@
 .at-pr:not([open])>summary>:nth-child(4){display:none}
 .at-pr:not([open])>summary{grid-template-columns:1fr 24px}
 .at-pr:not([open])>summary::after{grid-column:2}
+.at-meta{grid-column:1/-1;display:flex;gap:14px;align-items:center;flex-wrap:wrap}.at-meta input[type=color]{width:44px;height:30px;padding:0;border:1px solid #c5d0d6;border-radius:6px;vertical-align:middle}
+.at-head select+select{margin-left:6px}
