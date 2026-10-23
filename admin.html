@@ -9122,9 +9122,10 @@ async function loadClienti() {
     if (myReq !== _clientiReqId) return; // risposta vecchia: una ricerca piu recente e in corso
 
     allClienti = data || [];
-    setClientiNote(count && allClienti.length < count ? 'Mostrati i primi ' + allClienti.length + ' clienti su ' + count + '. Per trovare gli altri usa la ricerca: cerca su tutto l\'archivio.' : '');
+    setClientiNote(count && allClienti.length < count ? 'Mostrati i primi ' + allClienti.length + ' clienti su ' + count + '. Per trovare gli altri usa la ricerca: cerca su tutto l\'archivio. I contatori per fonte (con *) contano solo i clienti caricati.' : '');
     renderClientiTable();
     updateClientiStats();
+    refreshClientiTotale();
     maybePromptProprietariClientiSync();
   } catch(err) {
     console.error('Error loading clienti:', err);
@@ -9199,16 +9200,28 @@ function renderClientiTable() {
   }).join('');
 }
 
+let _clientiTotaleReale = null;
+async function refreshClientiTotale() {
+  try {
+    const { count } = await sb.from('clienti').select('id', { count: 'exact', head: true });
+    if (typeof count === 'number') { _clientiTotaleReale = count; updateClientiStats(); }
+  } catch (e) { /* resta il conteggio delle righe caricate */ }
+}
 function updateClientiStats() {
-  document.getElementById('statClientiTot').textContent = allClienti.length;
-  document.getElementById('statClientiNewsletter').textContent = allClienti.filter(c => c.fonte === 'newsletter').length;
-  document.getElementById('statClientiRichieste').textContent = allClienti.filter(c => c.fonte === 'richiesta').length;
-  document.getElementById('statClientiManuali').textContent = allClienti.filter(c => c.fonte === 'manuale').length;
+  const tot = _clientiTotaleReale != null ? _clientiTotaleReale : allClienti.length;
+  const parziale = _clientiTotaleReale != null && allClienti.length < _clientiTotaleReale;
+  const star = parziale ? '*' : '';
+  const tip = parziale ? 'Conta solo i primi ' + allClienti.length + ' clienti caricati su ' + tot : '';
+  document.getElementById('statClientiTot').textContent = tot;
+  ['statClientiNewsletter','statClientiRichieste','statClientiManuali'].forEach(id => { document.getElementById(id).title = tip; });
+  document.getElementById('statClientiNewsletter').textContent = allClienti.filter(c => c.fonte === 'newsletter').length + star;
+  document.getElementById('statClientiRichieste').textContent = allClienti.filter(c => c.fonte === 'richiesta').length + star;
+  document.getElementById('statClientiManuali').textContent = allClienti.filter(c => c.fonte === 'manuale').length + star;
 
   const badge = document.getElementById('badgeClienti');
-  if (allClienti.length > 0) {
+  if (tot > 0) {
     badge.style.display = 'inline';
-    badge.textContent = allClienti.length;
+    badge.textContent = tot;
   } else {
     badge.style.display = 'none';
   }
