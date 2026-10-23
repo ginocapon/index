@@ -18,7 +18,7 @@ return `<details class="at-pr" style="border-left:8px solid ${col};background:${
 const trashN=()=>trash?trash.pratiche.length+trash.tasks.length+trash.files.length:0;
 const fdt=d=>d?new Date(d).toLocaleDateString('it-IT'):'';
 function trashHtml(){if(!trash)return '<div class="at-trash"><h3>Cestino</h3><div class="at-sub">Caricamento...</div></div>';
-const row=(k,id,lab,sub)=>`<div class="at-trrow"><span><b>${esc(lab)}</b> <span class="at-sub">${esc(sub)}</span></span><span><button type="button" data-restore="${k}|${esc(id)}">Ripristina</button> <button type="button" class="at-danger" data-purge="${k}|${esc(id)}">Elimina definitivamente</button></span></div>`;
+const row=(k,id,lab,sub)=>`<div class="at-trrow"><span><b>${esc(lab)}</b> <span class="at-sub">${esc(sub)}</span></span><span><button type="button" class="at-trbtn" data-restore="${k}|${esc(id)}">Ripristina</button> <button type="button" class="at-danger" data-purge="${k}|${esc(id)}">Elimina definitivamente</button></span></div>`;
 const r=[].concat(trash.pratiche.map(x=>row('p',x.id,'Pratica: '+x.titolo,x.nt+' voci, '+x.nf+' file - tolta il '+fdt(x.when))),trash.tasks.map(x=>row('t',x.id,'Voce: '+x.text,'della pratica '+x.pratica+(x.nf?' - '+x.nf+' file':'')+' - tolta il '+fdt(x.when))),trash.files.map(x=>row('f',x.id,'File: '+x.name,'della voce '+x.task+' - tolto il '+fdt(x.when))));
 return '<div class="at-trash"><h3>Cestino</h3><div class="at-sub">Le voci tolte restano qui, con i loro file, finche\' non le elimini definitivamente.</div>'+(r.join('')||'<div class="at-empty">Il cestino e\' vuoto.</div>')+'</div>';}
 function draw(){const list=items.filter(p=>p.agente===agent).filter(p=>filter==='tutte'||(filter==='aperte'?p.tasks.some(x=>!x.done):p.tasks.length&&p.tasks.every(x=>x.done)));
