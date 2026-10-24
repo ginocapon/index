@@ -54,7 +54,7 @@ const ops={
   o.querySelector('[data-a=ok]').onclick=()=>apply(true);const un=o.querySelector('[data-a=un]');if(un)un.onclick=()=>apply(false);}
 };
 const ITEMS=[['clienti','Trova clienti compatibili'],['email','Bozza email con i dati'],['link','Copia link dell\'annuncio'],['dati','Esporta dati immobile'],['catasto','Scheda catastale (lettura)'],['duplica','Duplica come bozza'],['venduto','Segna venduto / affittato']];
-const DACOMPLETARE='<details><summary>Da completare (non ancora disponibili qui)</summary><ul style="margin:6px 0 0 16px;padding:0"><li>Esportazione sui portali</li></ul></details>';
+const DACOMPLETARE='<details><summary>Da completare (non ancora disponibili qui)</summary><ul style="margin:6px 0 0 16px;padding:0"><li>Esportazione sui portali</li><li>Nuovo appuntamento da qui (per ora si inserisce nel vecchio gestionale)</li></ul></details>';
 function openMenu(i){css();const o=overlay('<h3>Operazioni - '+esc(i.codice||'')+'</h3><div id="rio-list" class="rio-list">'+ITEMS.map(x=>'<button type="button" data-op="'+x[0]+'" style="display:block;width:100%;text-align:left;margin:4px 0">'+x[1]+'</button>').join('')+'</div>'+DACOMPLETARE+'<button data-a="x" style="margin-top:10px">Chiudi</button>');
  o.querySelector('[data-a=x]').onclick=close;o.querySelector('#rio-list').onclick=e=>{const b=e.target.closest('[data-op]');if(!b)return;close();ops[b.dataset.op](i);};}
 function addMenu(){css();const bar=document.querySelector('#formTitle');if(!bar)return;const hdr=bar.parentNode.querySelector('.modal-header-actions');if(!hdr||hdr.querySelector('.rio-wrap'))return;
