@@ -66,7 +66,12 @@ function ensureBox(secId,boxId,ph,newLabel,newFn){
   box.innerHTML='<input type="search" class="rm-search" placeholder="'+ph+'"><div class="rm-count"></div><div class="rm-cards"></div><div class="rm-bar"><button type="button" class="rm-bar1">+ '+newLabel+'</button></div>';
   sec.insertBefore(box,sec.firstChild);
   $('.rm-search',box).addEventListener('input',function(){if(boxId==='rm-imm')cardsImm();else cardsCli();});
-  $('.rm-bar1',box).onclick=newFn;}
+  $('.rm-bar1',box).onclick=newFn;
+  var isI=boxId==='rm-imm',key=isI?'__rCestino':'__rStorico',lab=document.createElement('label');
+  lab.className='rm-tg';lab.style.cssText='display:flex;align-items:center;gap:8px;margin:6px 2px;font:600 .85rem Montserrat,Arial,sans-serif';
+  lab.innerHTML='<input type="checkbox"> '+(isI?'Mostra cestino':'Mostra storico');
+  lab.querySelector('input').addEventListener('change',function(e){window[key]=e.target.checked;remote=null;remoteQ='';var f=isI?window.loadImmobili:window.loadClienti;Promise.resolve(f&&f()).then(function(){if(isI)cardsImm();else cardsCli();});});
+  box.insertBefore(lab,$('.rm-count',box));}
  return box;}
 function cardsImm(){
  if(!phone())return;
@@ -89,9 +94,9 @@ function openImm(id){
  '<div class="rm-pane" data-p="d">'+(ph[0]?'<img class="rm-hero" src="'+esc(ph[0])+'" alt="">':'')+dati+(dot.length?'<div class="rm-tags">'+dot.map(function(d){return '<span>'+esc(d)+'</span>';}).join('')+'</div>':'')+'</div>'+
  '<div class="rm-pane" data-p="f" hidden>'+(ph.length?ph.map(function(f){return '<img class="rm-hero" loading="lazy" src="'+esc(f)+'" alt="">';}).join(''):'<p class="rm-empty">Nessuna foto.</p>')+'</div>'+
  '<div class="rm-pane" data-p="p" hidden>'+(prop||'<p class="rm-empty">Nessun dato.</p>')+'</div>'+
- '<div class="rm-bar"><button type="button" data-a="edit">Modifica</button><button type="button" data-a="ops">Operazioni</button>'+(i.proprietario_tel?'<a href="tel:'+esc(String(i.proprietario_tel).replace(/\s+/g,''))+'">Chiama</a>':'')+(i.slug?'<a href="/immobile/'+esc(i.slug)+'" target="_blank" rel="noopener">Sito</a>':'')+'</div>';
+ '<div class="rm-bar"><button type="button" data-a="edit">Modifica</button><button type="button" data-a="ops">Operazioni</button><button type="button" data-a="trash">'+(i.cestino?'Ripristina':'Cestino')+'</button>'+(i.proprietario_tel?'<a href="tel:'+esc(String(i.proprietario_tel).replace(/\s+/g,''))+'">Chiama</a>':'')+(i.slug?'<a href="/immobile/'+esc(i.slug)+'" target="_blank" rel="noopener">Sito</a>':'')+'</div>';
  if(i.proprietario_id&&typeof sb!=='undefined')sb.from('clienti').select('id,nome,telefono,email,ragione_sociale').eq('id',i.proprietario_id).limit(1).then(function(r){var o=r.data&&r.data[0],box=document.getElementById('rm-own');if(!o||!box)return;var ph=phones(o.telefono);box.innerHTML=field('Proprietario',o.nome)+(o.ragione_sociale?field('Azienda',o.ragione_sociale):'')+field('Telefono',o.telefono)+field('Email',o.email)+((ph.length||o.email)?'<div class="rm-acts">'+ph.slice(0,2).map(function(n){return '<a href="tel:'+esc(n)+'">Chiama '+esc(n)+'</a>';}).join('')+(o.email?'<a href="mailto:'+esc(o.email)+'">eMail</a>':'')+'<button type="button" data-own="'+esc(o.id)+'">Scheda cliente</button></div>':'<p class="rm-warn">Il proprietario non ha telefono né email nei dati importati.</p>');}).catch(function(){});
- showScheda(function(a){if(a==='ops'){if(window.RighettoImmobileOperazioni&&RighettoImmobileOperazioni.openMenu)RighettoImmobileOperazioni.openMenu(i);return;}if(a==='edit'){closeScheda();cur='nuovo';render();window.__rmOrig('nuovo');editImmobile(i.id);}});
+ showScheda(function(a){if(a==='trash'){var fn=i.cestino?window.restoreImmobile:window.deleteImmobile;if(fn)Promise.resolve(fn(i.id,i.titolo||'')).then(function(){closeScheda();cardsImm();});return;}if(a==='ops'){if(window.RighettoImmobileOperazioni&&RighettoImmobileOperazioni.openMenu)RighettoImmobileOperazioni.openMenu(i);return;}if(a==='edit'){closeScheda();cur='nuovo';render();window.__rmOrig('nuovo');editImmobile(i.id);}});
 }
 function showScheda(onAct){
  scheda.hidden=false;scheda.scrollTop=0;document.body.classList.add('rm-scheda-open');
@@ -108,7 +113,7 @@ function remoteSearch(q){
  if(typeof sb==='undefined'||q.length<2||q.replace(/[,()%*]/g,'').length<2)return;
  var t=q.replace(/[,()%*\\]/g,' ').trim();
  var f=['nome','email','telefono','ragione_sociale','partita_iva'].map(function(k){return k+'.ilike.%'+t+'%';}).join(',');
- sb.from('clienti').select('*').or(f).order('nome').limit(150).then(function(r){
+ sb.from('clienti').select('*').or(f).eq('storico',!!window.__rStorico).order('nome').limit(150).then(function(r){
   if(r.error||!r.data)return;remote=r.data;remoteQ=q;cardsCli(true);});
 }
 function cardsCli(fromRemote){
@@ -121,7 +126,7 @@ function cardsCli(fromRemote){
  var tot=(q.length>=2&&remote&&remoteQ===q)?' trovati su tutto l\'archivio':' (primi '+allClienti.length+' dell\'elenco, scrivi per cercare in tutti)';
  $('.rm-count',box).textContent=list.length+' clienti'+(q.length>=2?(remote&&remoteQ===q?' trovati su tutto l\'archivio':''):' · scrivi per cercare in tutto l\'archivio');
  $('.rm-cards',box).innerHTML=list.slice(0,150).map(function(c){var cerca=[pretty(c.tipo_operazione_cercata),c.tipologia_cercata,c.zona_cercata].filter(Boolean).join(' · ');
-  return '<button type="button" class="rm-card rm-cc" data-id="'+esc(c.id)+'"><div class="rm-inf"><div class="rm-r1"><b>'+esc(c.nome||'(senza nome)')+'</b><em class="rm-chip n">'+esc(c.ruolo_rubrica||'')+'</em></div><div class="rm-s">'+esc([c.telefono,c.email].filter(Boolean).join(' · ')||'nessun recapito')+'</div>'+(cerca?'<div class="rm-s">'+esc(cerca)+'</div>':'')+'</div></button>';}).join('')+(list.length>150?'<div class="rm-more">Altri '+(list.length-150)+': affina la ricerca.</div>':'');
+  return '<button type="button" class="rm-card rm-cc" data-id="'+esc(c.id)+'"><div class="rm-inf"><div class="rm-r1"><b>'+esc(c.nome||'(senza nome)')+'</b><em class="rm-chip n">'+esc(c.storico?'Storico':(c.ruolo_rubrica||''))+'</em></div><div class="rm-s">'+esc([c.telefono,c.email].filter(Boolean).join(' · ')||'nessun recapito')+'</div>'+(cerca?'<div class="rm-s">'+esc(cerca)+'</div>':'')+'</div></button>';}).join('')+(list.length>150?'<div class="rm-more">Altri '+(list.length-150)+': affina la ricerca.</div>':'');
 }
 function linked(c){
  var l=(typeof allImmobili!=='undefined'?allImmobili:[]).filter(function(i){return String(i.proprietario_id)===String(c.id);});
@@ -136,8 +141,8 @@ function openCli(id){
  var cerca=field('Operazione',c.tipo_operazione_cercata)+field('Tipologia',c.tipologia_cercata)+field('Zona',c.zona_cercata)+field('Budget min',c.budget_min?money(c.budget_min):'')+field('Budget max',c.budget_max?money(c.budget_max):'')+field('Superficie min',c.superficie_min)+field('Camere min',c.camere_min)+field('Interesse',c.interesse);
  scheda.innerHTML='<div class="rm-banner"><b>'+esc(c.nome||'')+'</b><em class="rm-chip n">'+esc(c.ruolo_rubrica||'')+'</em></div><div class="rm-tabs"><button type="button" class="on" data-t="d">Dettagli</button><button type="button" data-t="r">Cerca</button><button type="button" data-t="n">Note</button><button type="button" data-t="i">Immobili</button></div>'+
  '<div class="rm-pane" data-p="d">'+((c.telefono||c.email)?'':'<p class="rm-warn">Nessun telefono né email nei dati importati.</p>')+(dati||'<p class="rm-empty">Nessun dato.</p>')+'</div><div class="rm-pane" data-p="r" hidden>'+(cerca||'<p class="rm-empty">Nessuna richiesta.</p>')+'</div><div class="rm-pane" data-p="i" hidden>'+linked(c)+'</div><div class="rm-pane" data-p="n" hidden>'+(c.note?'<div class="rm-f"><div>'+esc(c.note)+'</div></div>':'<p class="rm-empty">Nessuna nota.</p>')+'</div>'+
- '<div class="rm-bar"><button type="button" data-a="edit">Modifica</button>'+(tel?'<a href="tel:'+esc(tel)+'">Chiama</a>':'')+(tel?'<a href="https://wa.me/'+esc(tel.replace(/^\+/,'').replace(/^00/,'').replace(/^(?!39)/,'39'))+'" target="_blank" rel="noopener">WhatsApp</a>':'')+(c.email?'<a href="mailto:'+esc(c.email)+'">eMail</a>':'')+'</div>';
- showScheda(function(a){if(a==='edit'){closeScheda();if(window.editCliente)window.editCliente(c.id);}});
+ '<div class="rm-bar"><button type="button" data-a="edit">Modifica</button><button type="button" data-a="sto">'+(c.storico?'Riporta attivo':'Storico')+'</button>'+(tel?'<a href="tel:'+esc(tel)+'">Chiama</a>':'')+(tel?'<a href="https://wa.me/'+esc(tel.replace(/^\+/,'').replace(/^00/,'').replace(/^(?!39)/,'39'))+'" target="_blank" rel="noopener">WhatsApp</a>':'')+(c.email?'<a href="mailto:'+esc(c.email)+'">eMail</a>':'')+'</div>';
+ showScheda(function(a){if(a==='sto'){var to=!c.storico;if(!confirm(to?'Mettere questo cliente nello storico?\n\nNon viene cancellato: esce dall\'elenco normale e resta in "Mostra storico".':'Riportare questo cliente tra gli attivi?'))return;sb.from('clienti').update({storico:to,storico_il:to?new Date().toISOString():null}).eq('id',c.id).then(function(r){if(r&&r.error){alert('Operazione non riuscita: '+r.error.message);return;}remote=null;remoteQ='';closeScheda();Promise.resolve(window.loadClienti&&window.loadClienti()).then(function(){cardsCli();});});return;}if(a==='edit'){closeScheda();if(window.editCliente)window.editCliente(c.id);}});
 }
 /* Accesso su telefono: vale 12 ore da quando si inserisce la password. */
 var SESSION_HOURS=12,STAMP='rig_login_at',logging=false;
