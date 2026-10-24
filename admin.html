@@ -2867,6 +2867,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   ⚠️ Tutti i dati catastali e i relativi PDF sono <strong>riservati</strong> — non visibili agli utenti pubblici
                 </div>
 
+                <style>@media(max-width:400px){#catastoSetupPanel{box-sizing:border-box;max-width:calc(100vw - 32px);min-width:0}#catastoSetupPanel button{max-width:100%;height:auto;text-align:left}}</style>
+                <!-- CATASTO SETUP OFF: riepilogo locale, nessun accesso esterno -->
+                <div id="catastoSetupPanel" style="grid-column:1/-1;background:var(--sfondo,#faf8f5);border:1px solid var(--caffe3);border-radius:8px;padding:16px;margin-bottom:16px;font-size:0.82rem;line-height:1.6;overflow-wrap:anywhere"></div>
+
                 <!-- Totali -->
                 <div class="form-grid" style="margin-bottom:16px">
                   <div class="form-group">
@@ -6596,6 +6600,7 @@ function resetForm() {
   currentFotos = []; currentPlanimetrie = []; currentDocumenti = []; currentVtScenes = [];
   renderFotos(); renderPlanimetrie(); renderDocumenti(); renderVtScenes();
   toggleContrattoAffittoRes();
+  renderCatastoSetupPanel();
   showSection('nuovo');
 }
 
@@ -6801,6 +6806,7 @@ function editImmobile(id) {
   renderVtScenes();
   renderUnitaCatastali();
   renderCatastoPdf();
+  renderCatastoSetupPanel();
 
   // Switch to form section
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -7067,7 +7073,7 @@ async function saveImmobile(e) {
     document.getElementById('f_attivo').checked = true;
     clearProprietarioSelection();
     currentFotos = []; currentPlanimetrie = []; currentDocumenti = []; currentVtScenes = []; currentUnitaCatastali = []; currentCatastoPdf = [];
-    renderFotos(); renderPlanimetrie(); renderDocumenti(); renderVtScenes(); renderUnitaCatastali(); renderCatastoPdf();
+    renderFotos(); renderPlanimetrie(); renderDocumenti(); renderVtScenes(); renderUnitaCatastali(); renderCatastoPdf(); renderCatastoSetupPanel();
     toggleContrattoAffittoRes();
     await loadImmobili();
     showSectionById('immobili');
@@ -8489,6 +8495,35 @@ function addUnitaCatastale() {
 function removeUnitaCatastale(i) {
   currentUnitaCatastali.splice(i, 1);
   renderUnitaCatastali();
+}
+
+// Catasto OFF: local summary only. No network, storage, document URLs or save changes.
+function catastoSetupSummary(imm) {
+  const x=imm||{}, units=Array.isArray(x.unita_catastali)?x.unita_catastali:[];
+  const required=['comune_catastale','foglio','mappale','subalterno','categoria'];
+  const missing=units.length?units.map((u,i)=>({unit:i+1,fields:required.filter(k=>!String(u[k]??'').trim())})): [{unit:null,fields:required}];
+  return {code:String(x.codice||'Nuova scheda'),units:units.length,documents:Array.isArray(x.documenti)?x.documenti.length:0,pdfs:Array.isArray(x.catasto_pdf)?x.catasto_pdf.length:0,missing,hasRendita:x.rendita_catastale!==null&&x.rendita_catastale!==undefined&&x.rendita_catastale!=='',status:'OFF - Non collegato'};
+}
+function renderCatastoSetupPanel() {
+  const el=document.getElementById('catastoSetupPanel');if(!el)return;
+  const id=document.getElementById('editId')?.value;
+  const imm=id&&typeof allImmobili!=='undefined'?allImmobili.find(x=>String(x.id)===String(id)):null;
+  const x=catastoSetupSummary(imm);
+  el.innerHTML='<strong>Collegamento catastale: OFF - Non collegato</strong>'+
+   '<p>Riepilogo dei dati già salvati per '+escHtml(x.code)+'. Nessuna interrogazione AdE o richiesta a fornitori. Nessun costo.</p>'+
+   '<div style="display:flex;gap:10px;flex-wrap:wrap;margin:12px 0"><span>Unità registrate: <b>'+x.units+'</b></span><span>Allegati in scheda: <b>'+x.documents+'</b></span><span>PDF in Catasto: <b>'+x.pdfs+'</b></span></div>'+
+   '<p>I documenti già presenti si gestiscono nelle sezioni riservate esistenti. Questo pannello non copia né apre file, link o dati proprietario.</p>'+
+   '<button type="button" class="btn btn-secondary btn-sm" style="min-height:44px;white-space:normal" onclick="checkCatastoSetupLocal()">Controlla completezza dei dati salvati</button>'+
+   '<div id="catastoSetupResult" role="status" style="margin-top:12px;overflow-wrap:anywhere"></div>'+
+   '<details style="margin-top:14px"><summary style="min-height:44px;cursor:pointer;padding:10px 0">Documenti e verifiche: cosa resta da attivare</summary><p>Visura e planimetria: fornitore non selezionato, delega non verificata, prezzo non quotato. Non è possibile ordinare documenti da qui.</p><p>Ispezioni ipotecarie e gravami seguono un controllo separato. Una visura o una planimetria non certificano la conformità urbanistica-edilizia. Nessun esito tecnico è attribuito all’immobile.</p><p>Gli identificativi esistenti restano da verificare sull’originale. Nessun abbinamento o correzione automatica. I campi modificati nel modulo ma non salvati non entrano in questo controllo.</p></details>';
+}
+function checkCatastoSetupLocal() {
+  const id=document.getElementById('editId')?.value;
+  const imm=id&&typeof allImmobili!=='undefined'?allImmobili.find(x=>String(x.id)===String(id)):null;
+  const x=catastoSetupSummary(imm), names={comune_catastale:'Comune catastale',foglio:'Foglio',mappale:'Particella/mappale',subalterno:'Subalterno',categoria:'Categoria'};
+  const missing=x.missing.filter(u=>u.fields.length).map(u=>(u.unit?'Unità '+u.unit+': ':'')+u.fields.map(k=>names[k]).join(', '));
+  if(!x.hasRendita)missing.push('Rendita catastale totale non presente');
+  const el=document.getElementById('catastoSetupResult');if(el)el.textContent='Controllo locale, nessuna interrogazione. '+(missing.length?'Da completare o verificare: '+missing.join('; ')+'.':'Campi principali presenti, validità non verificata.')+' Collegamento OFF. Nessun dato salvato o corretto.';
 }
 
 function renderUnitaCatastali() {
