@@ -6730,10 +6730,29 @@ function editImmobile(id) {
     'anno_costruzione','stato','classe_energetica','youtube_id','virtual_tour',
     'id_idealista','descrizione','note_interne',
     'camere','bagni_totali','terrazzi_num','ripostigli','garage_num','garage_doppio',
-    'posto_auto','mq_giardino','mq_lotto','esposizione',
+    'posto_auto','mq_giardino','mq_lotto','esposizione','unita_abitative','totale_piani',
     'impianto_elettrico','panorama','consegna','spese_condominio',
     'rendita_catastale','valore_catastale','prezzo_reale','ipe_kwh','ipe_kwh'];
 
+  // Conserva consegne esistenti non presenti nell'elenco standard.
+  const consegnaSelect = document.getElementById('f_consegna');
+  if (consegnaSelect) {
+    consegnaSelect.querySelectorAll('option[data-existing-value]').forEach(o => o.remove());
+    const existingConsegna = imm.consegna == null ? '' : String(imm.consegna);
+    if (existingConsegna && !Array.from(consegnaSelect.options).some(o => o.value === existingConsegna)) {
+      const option = new Option(existingConsegna + ' (valore esistente)', existingConsegna);
+      option.dataset.existingValue = 'true';
+      consegnaSelect.add(option);
+    }
+  }
+  // Lo zero storico rimane visibile e salvabile, non diventa un piano inventato.
+  ['unita_abitative', 'totale_piani'].forEach(f => {
+    const el = document.getElementById('f_' + f);
+    if (el) {
+      el.min = imm[f] === 0 ? '0' : '1';
+      el.title = imm[f] === 0 ? 'Valore storico 0: dato da verificare, conservato senza modifiche.' : '';
+    }
+  });
   fields.forEach(f => {
     const el = document.getElementById('f_' + f);
     if (el) el.value = imm[f] !== null && imm[f] !== undefined ? imm[f] : '';
@@ -6921,6 +6940,8 @@ async function saveImmobile(e) {
     mq_giardino: parseFloat(document.getElementById('f_mq_giardino').value)||null,
     mq_lotto: parseFloat(document.getElementById('f_mq_lotto').value)||null,
     esposizione: document.getElementById('f_esposizione').value||null,
+    unita_abitative: document.getElementById('f_unita_abitative').value === '' ? null : Number(document.getElementById('f_unita_abitative').value),
+    totale_piani: document.getElementById('f_totale_piani').value === '' ? null : Number(document.getElementById('f_totale_piani').value),
     // Livelli
     piano_interrato: document.getElementById('f_piano_interrato').checked,
     piano_terra: document.getElementById('f_piano_terra').checked,
