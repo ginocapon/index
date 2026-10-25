@@ -196,7 +196,7 @@ const FAQ_DATA = [
   // ── INFO AGENZIA ──
   {
     k: ['domanda', 'informazione', 'curiosità', 'chiedere', 'costa chiedere'],
-    r: '💬 **Una domanda non costa nulla**\n\nChiedere un\'informazione è **gratuito e senza impegno**: puoi telefonare, scrivere su WhatsApp o passare in ufficio anche solo per un dubbio. Si parla di incarico solo se un giorno lo decidi tu.\n\n📞 **049.8843484** · WhatsApp **349 736 5930** · Via Roma 96, Limena',
+    r: '💬 **Una domanda non costa nulla**\n\nChiedere un\'informazione è **gratuito**: puoi telefonare, scrivere su WhatsApp o passare in ufficio anche solo per un dubbio. Si parla di incarico solo se un giorno lo decidi tu.\n\n📞 **049.8843484** · WhatsApp **349 736 5930** · Via Roma 96, Limena',
     blog: 'blog-una-domanda-non-costa-nulla',
     blogTitle: 'Una domanda non costa nulla'
   },
@@ -206,7 +206,7 @@ const FAQ_DATA = [
   },
   {
     k: ['dove', 'sede', 'indirizzo', 'ufficio', 'trovare'],
-    r: '📍 **Righetto Immobiliare**\nVia Roma, 96 — 35010 Limena (PD)\n\nSiamo a Limena, alle porte di Padova, con copertura su tutti i 101 comuni della provincia.'
+    r: '📍 **Righetto Immobiliare**\nVia Roma, 96 — 35010 Limena (PD)\n\nSiamo a Limena, alle porte di Padova, con copertura su Padova e provincia.'
   },
   {
     k: ['commissione', 'provvigione', 'costo agenzia', 'quanto costa', 'spesa agenzia', 'percentuale'],
@@ -223,11 +223,11 @@ const FAQ_DATA = [
   // ── VENDITA ──
   {
     k: ['vendere', 'vendita', 'mettere in vendita', 'affidare'],
-    r: '🏷️ **Vuoi vendere il tuo immobile?**\n\nEcco i nostri passi:\n1. **Valutazione gratuita** — veniamo da te senza impegno\n2. **Foto + Virtual Tour 360°** — valorizzazione massima\n3. **Pubblicazione** — Idealista, Immobiliare.it, sito nostro\n4. **Gestione visite** — noi organizziamo tutto\n5. **Trattativa + Rogito** — ti assistiamo fino alla firma\n\n👉 Vuoi un appuntamento gratuito?'
+    r: '🏷️ **Vuoi vendere il tuo immobile?**\n\nEcco i nostri passi:\n1. **Valutazione gratuita** — veniamo da t\n2. **Foto + Virtual Tour 360°** — valorizzazione massima\n3. **Pubblicazione** — Idealista, Immobiliare.it, sito nostro\n4. **Gestione visite** — noi organizziamo tutto\n5. **Trattativa + Rogito** — ti assistiamo fino alla firma\n\n👉 Vuoi un appuntamento gratuito?'
   },
   {
     k: ['tempo vendita', 'quanto tempo', 'tempistica vendita', 'velocità'],
-    r: '⏱️ **Tempi medi di vendita a Padova**\n\nCon la nostra strategia digitale (virtual tour 360°, pubblicazione multi-portale, social media marketing):\n• Centro storico: **45-75 giorni**\n• Prima cintura: **60-90 giorni**\n• Provincia: **90-120 giorni**\n\nUn immobile ben valorizzato si vende più velocemente!'
+    r: '⏱️ **Tempi medi di vendita a Padova**\n\nCon una strategia digitale (virtual tour 360°, pubblicazione multi-portale, social media marketing). I tempi dipendono da zona, prezzo e stato dell\'immobile: in agenzia ti diamo un\'indicazione per il tuo caso.'
   },
   {
     k: ['proposta', 'offerta', 'proposta acquisto'],
@@ -506,7 +506,7 @@ const FAQ_DATA = [
   // ── BLOG RECENTI E GAP SKIMM (lug 2026) ──
   {
     k: ['domande agenzia', 'cosa chiedere agenzia', 'appuntamento agenzia', 'incontro agenzia domande', 'domande primo appuntamento'],
-    r: '🏢 **Primo appuntamento in agenzia**\n\nValuta se l\'agente è puntuale, chiaro su mandato e marketing, e se sa spiegare verifiche su catasto, condominio e consegna documenti. Un professionista risponde con dati, non con frasi vaghe.\n\nPossiamo fissare un incontro **senza impegno** in Via Roma 96, Limena.',
+    r: '🏢 **Primo appuntamento in agenzia**\n\nValuta se l\'agente è puntuale, chiaro su mandato e marketing, e se sa spiegare verifiche su catasto, condominio e consegna documenti. Un professionista risponde con dati, non con frasi vaghe.\n\nPossiamo fissare un incontro **** in Via Roma 96, Limena.',
     blog: 'blog-5-domande-appuntamento-agenzia-padova-2026',
     blogTitle: '5 domande da fare in agenzia a Padova'
   },
@@ -518,7 +518,7 @@ const FAQ_DATA = [
   },
   {
     k: ['venditore da solo', 'so tutto io venditore', 'vendere senza agenzia', 'faccio da me vendita', 'staging documenti ape'],
-    r: '🏠 **Vendere «da soli» ha un costo nascosto**\n\nHome staging, documenti in ordine, APE credibile e prezzo allineato al mercato non sono optional: sono ciò che separa mesi di attesa da una vendita fluida.\n\nLa **valutazione in sede** è gratuita e senza impegno: confrontiamo dati reali, non sensazioni.',
+    r: '🏠 **Vendere «da soli» ha un costo nascosto**\n\nHome staging, documenti in ordine, APE credibile e prezzo allineato al mercato non sono optional: sono ciò che separa mesi di attesa da una vendita fluida.\n\nLa **valutazione in sede** è gratuita: confrontiamo dati reali, non sensazioni.',
     blog: 'blog-so-tutto-io-venditore-presuntuoso-padova-2026',
     blogTitle: 'Staging, documenti e APE per chi vende'
   },
@@ -602,7 +602,7 @@ const FAQ_DATA = [
   },
   {
     k: ['permuta immobiliare', 'permuta casa', 'scambio immobile', 'vendo e compro permuta'],
-    r: '🔄 **Permuta immobiliare**\n\nPuò semplificare il passaggio da una casa all\'altra, ma richiede valutazioni allineate, tempi coordinati e chiarezza su delta prezzo e mutui.\n\nValutiamo insieme fattibilità e strategia — **senza impegno**.',
+    r: '🔄 **Permuta immobiliare**\n\nPuò semplificare il passaggio da una casa all\'altra, ma richiede valutazioni allineate, tempi coordinati e chiarezza su delta prezzo e mutui.\n\nValutiamo insieme fattibilità e strategia — ****.',
     blog: 'blog-permuta-immobiliare-padova-2026',
     blogTitle: 'Permuta nel Padovano'
   },
@@ -638,7 +638,7 @@ const FAQ_DATA = [
   },
   {
     k: ['affitti fimaa', 'canoni fimaa padova', 'affitti q1 2026', 'canoni mercato padova'],
-    r: '📈 **Canoni affitto nel Padovano**\n\nFIMAA e osservatori locali aiutano a inquadrare canoni e domanda — utili sia per chi affitta sia per chi mette a reddito.\n\nProprietario? Valutiamo **canone** e **inquilino** senza impegno.',
+    r: '📈 **Canoni affitto nel Padovano**\n\nFIMAA e osservatori locali aiutano a inquadrare canoni e domanda — utili sia per chi affitta sia per chi mette a reddito.\n\nProprietario? Valutiamo **canone** e **inquilino**.',
     blog: 'blog-affitti-canoni-fimaa-q1-2026-padova',
     blogTitle: 'Affitti Q1 2026: canoni FIMAA'
   },
@@ -843,7 +843,7 @@ const FAQ_DATA = [
   // ── MUTUO E FINANZIAMENTI ──
   {
     k: ['mutuo', 'finanziamento', 'banca', 'prestito', 'rate'],
-    r: '🏦 **Consulenza Mutuo**\n\nOffriamo consulenza gratuita per il mutuo:\n• Analisi della tua situazione finanziaria\n• Confronto offerte da 10+ banche\n• Supporto pratiche notarili\n\nContattaci per un appuntamento!',
+    r: '🏦 **Consulenza Mutuo**\n\nTi aiutiamo con il mutuo:\n• Analisi della tua situazione finanziaria\n• Confronto delle offerte delle banche\n• Supporto pratiche notarili\n\nContattaci per un appuntamento!',
     blog: 'blog-mutui-casa-padova-2026',
     blogTitle: 'Mutui casa a Padova: guida'
   },
@@ -871,7 +871,7 @@ const FAQ_DATA = [
   },
   {
     k: ['quanto mutuo', 'importo mutuo', 'quanto posso mutuare', 'massimo finanziabile'],
-    r: '📊 **Quanto mutuo posso ottenere?**\n\nLe banche finanziano in genere fino all\'**80%** del valore di perizia, con anticipo minimo del 20%. Reddito stabile e assenza di segnalazioni CRIF sono fondamentali.\n\nPer una simulazione personalizzata: consulenza **gratuita** in agenzia.',
+    r: '📊 **Quanto mutuo posso ottenere?**\n\nLe banche finanziano in genere fino all\'**80%** del valore di perizia, con anticipo minimo del 20%. Reddito stabile e assenza di segnalazioni CRIF sono fondamentali.\n\nPer una simulazione personalizzata: consulenza in agenzia.',
     blog: 'blog-mutuo-prima-casa-padova',
     blogTitle: 'Mutuo prima casa Padova'
   },
@@ -930,7 +930,7 @@ const FAQ_DATA = [
   },
   {
     k: ['contratto affitto', 'tipo contratto', '4+4', '3+2', 'transitorio', 'cedolare'],
-    r: '📄 **Tipologie di contratto di locazione**\n\n• **4+4 (libero):** canone concordato liberamente, durata 4 anni rinnovabili\n• **3+2 (concordato):** canone calmierato, vantaggi fiscali per entrambi\n• **Transitorio:** da 1 a 18 mesi, per esigenze temporanee documentate\n• **Studenti:** da 6 a 36 mesi, per universitari\n\n**Cedolare secca:** tassazione sostitutiva al 21% (10% per concordati) — niente IRPEF né imposta di registro.'
+    r: '📄 **Tipologie di contratto di locazione**\n\n• **4+4 (libero):** canone concordato liberamente, durata 4 anni rinnovabili\n• **3+2 (concordato):** canone calmierato, vantaggi fiscali per entrambi\n• **Transitorio:** da 1 a 18 mesi, per esigenze temporanee documentate\n• **Studenti:** da 6 a 36 mesi, per universitari\n\n**Cedolare secca:** tassazione sostitutiva al 21% (aliquota ridotta per i canoni concordati: verifica quella in vigore) — niente IRPEF né imposta di registro.'
   },
   {
     k: ['sfratto', 'morosità', 'inquilino moroso', 'non paga'],
@@ -953,7 +953,7 @@ const FAQ_DATA = [
   },
   {
     k: ['spese detraibili', 'detrazioni', 'detrazione fiscale', '730'],
-    r: '📊 **Detrazioni fiscali legate alla casa**\n\n• **Interessi mutuo prima casa:** detrazione 19% fino a €4.000/anno\n• **Spese notarili mutuo:** detraibili al 19%\n• **Canone affitto:** detrazione per inquilini a basso reddito\n• **Ristrutturazione:** detrazione 50% fino a €96.000\n• **Efficientamento energetico:** detrazione 50-65%\n• **Bonus mobili:** detrazione 50% fino a €5.000'
+    r: '📊 **Detrazioni fiscali legate alla casa**\n\n• **Interessi mutuo prima casa:** detrazione del 19% entro i limiti di legge\n• **Spese notarili mutuo:** detraibili al 19%\n• **Canone affitto:** detrazione per inquilini a basso reddito\n• **Ristrutturazione ed efficientamento energetico:** detrazioni con aliquote e limiti che cambiano ogni anno (verifica sul sito dell\'Agenzia delle Entrate)\n• **Bonus mobili:** detrazione 50% fino a €5.000'
   },
   // ── DOCUMENTI ──
   {
@@ -977,7 +977,7 @@ const FAQ_DATA = [
   },
   {
     k: ['ecobonus', 'risparmio energetico', 'cappotto', 'caldaia', 'pompa di calore'],
-    r: '🌱 **Ecobonus — Risparmio energetico**\n\n• **Detrazione 50-65%** per interventi di efficientamento:\n  - Cappotto termico\n  - Sostituzione caldaia con condensazione\n  - Pompa di calore\n  - Infissi e serramenti\n  - Pannelli solari termici\n\nGli interventi aumentano la classe energetica e il valore dell\'immobile!'
+    r: '🌱 **Ecobonus — Risparmio energetico**\n\n• **Detrazione fiscale** (aliquote e limiti variano ogni anno: verifica sul sito dell\'Agenzia delle Entrate) per interventi di efficientamento:\n  - Cappotto termico\n  - Sostituzione caldaia con condensazione\n  - Pompa di calore\n  - Infissi e serramenti\n  - Pannelli solari termici\n\nGli interventi aumentano la classe energetica e il valore dell\'immobile!'
   },
   {
     k: ['arredamento', 'elettrodomestici classe a', 'detrazione arredamento'],
@@ -995,7 +995,7 @@ const FAQ_DATA = [
   // ── INVESTIMENTI IMMOBILIARI ──
   {
     k: ['investimento', 'investire', 'rendimento', 'rendita', 'reddito'],
-    r: '📈 **Investire in immobili a Padova**\n\nI rendimenti medi lordi a Padova:\n• **Appartamenti centro:** 4-5% annuo\n• **Bilocali zona università:** 6-7% annuo\n• **Locali commerciali:** 6-8% annuo\n• **Box/garage:** 5-7% annuo\n\nPadova è una piazza universitaria molto dinamica con forte domanda di affitti. Contattateci per un\'analisi personalizzata.',
+    r: '📈 **Investire in immobili a Padova**\n\nSul rendimento degli immobili a Padova: Non pubblichiamo percentuali di rendimento: dipendono da zona, tipologia, canone e costi. Padova è una piazza universitaria molto dinamica con forte domanda di affitti. Contattateci per un\'analisi personalizzata.',
     blog: 'blog-investire-immobiliare-padova',
     blogTitle: 'Investire nel mercato immobiliare Padova'
   },
@@ -1045,7 +1045,7 @@ const FAQ_DATA = [
   },
   {
     k: ['nuda proprietà', 'usufrutto', 'diritto abitazione'],
-    r: '👴 **Nuda proprietà e usufrutto**\n\nLa nuda proprietà è la proprietà senza il diritto di godimento (che resta all\'usufruttuario). Vantaggi per chi compra:\n• Prezzo ridotto del **25-50%** rispetto al valore pieno\n• Investimento a lungo termine\n• IMU a carico dell\'usufruttuario\n\nÈ una formula molto usata per investimento.'
+    r: '👴 **Nuda proprietà e usufrutto**\n\nLa nuda proprietà è la proprietà senza il diritto di godimento (che resta all\'usufruttuario). Vantaggi per chi compra:\n• Prezzo di solito inferiore al valore pieno, in base all\'età dell\'usufruttuario\n• Investimento a lungo termine\n• IMU a carico dell\'usufruttuario\n\nÈ una formula molto usata per investimento.'
   },
   {
     k: ['garage', 'box', 'posto auto', 'parcheggio'],
@@ -1062,19 +1062,19 @@ const FAQ_DATA = [
   },
   {
     k: ['linda', 'chi sei', 'assistente', 'bot', 'intelligenza artificiale'],
-    r: '👋 Ciao! Sono **Linda**, l\'assistente virtuale di Righetto Immobiliare. Sono disponibile **24/7** per rispondere alle tue domande su immobili, prezzi, servizi e procedure. Posso anche fornirti **stime di mercato** per tutti i 101 comuni della provincia di Padova!\n\nSe hai bisogno di parlare con un agente, scrivi *"contattami"* e ti richiamiamo noi.'
+    r: '👋 Ciao! Sono **Linda**, l\'assistente virtuale di Righetto Immobiliare. Posso risponderti qui in chat alle tue domande su immobili, prezzi, servizi e procedure. Posso anche fornirti **stime di mercato** per tutti i 101 comuni della provincia di Padova!\n\nSe hai bisogno di parlare con un agente, scrivi *"contattami"* e ti richiamiamo noi.'
   },
 
   // ═══════════════════════════════════════════════
   // VENDITA — FAQ APPROFONDITE
   // ═══════════════════════════════════════════════
   {
-    k: ['valutazione gratuita', 'senza impegno', 'valutazione gratis'],
-    r: '✅ **La valutazione gratuita è davvero senza impegno.** Analizziamo il tuo immobile con comparabili reali di mercato e ti forniamo un report dettagliato per decidere se procedere con noi. Nessun vincolo, nessun costo.\n\n📞 Chiama il **049.8843484** o scrivi *"contattami"* per prenotare.'
+    k: ['valutazione gratuita', '', 'valutazione gratis'],
+    r: '✅ **La valutazione è gratuita.** Analizziamo il tuo immobile con dati di mercato e comparabili di zona.\n\n📞 Chiama il **049.8843484** o scrivi *"contattami"* per prenotare.'
   },
   {
     k: ['vendere veloce', 'tempi vendita agenzia', 'vendita rapida padova', '45 giorni vendita'],
-    r: '⏱️ **In media 45-60 giorni** con la nostra strategia multicanale. Riduciamo i tempi grazie a:\n\n• Promozione su portali leader (Immobiliare.it, Idealista, Casa.it)\n• Social geolocalizzati\n• Acquirenti già pre-qualificati nella nostra banca dati\n\nIl 98% dei nostri clienti vende entro i tempi previsti.'
+    r: '⏱️ **I tempi dipendono da zona, prezzo e stato dell\'immobile.** La strategia multicanale punta a ridurli grazie a:\n\n• Promozione su portali leader (Immobiliare.it, Idealista, Casa.it)\n• Social geolocalizzati\n• Contatti di acquirenti già in agenzia'
   },
   {
     k: ['foto professionali', 'drone', 'video 4k', 'virtual tour', 'foto immobile'],
@@ -1114,7 +1114,7 @@ const FAQ_DATA = [
   },
   {
     k: ['home staging', 'staging', 'allestimento'],
-    r: '🎨 **Sì, offriamo home staging:**\n\n• **Staging virtuale gratuito** nelle foto (rendering digitale)\n• **Staging fisico opzionale** per immobili vuoti\n\nL\'home staging aumenta la velocità di vendita del **+20%** e il prezzo finale fino al **+5%**.',
+    r: '🎨 **Sì, offriamo home staging:**\n\n• **Staging virtuale** nelle foto (rendering digitale)\n• **Staging fisico opzionale** per immobili vuoti\n\nCondizioni da concordare in agenzia.',
     blog: 'blog-home-staging-padova',
     blogTitle: 'Home staging a Padova'
   },
@@ -1164,7 +1164,7 @@ const FAQ_DATA = [
   },
   {
     k: ['registrazione contratto', 'agenzia entrate', 'registrazione locazione'],
-    r: '📄 **Ci occupiamo gratuitamente della registrazione telematica** del contratto all\'Agenzia delle Entrate. Zero burocrazia per te.'
+    r: '📄 **Ci occupiamo della registrazione telematica** del contratto all\'Agenzia delle Entrate. Condizioni da concordare in agenzia.'
   },
   {
     k: ['gestione airbnb', 'locazione breve gestita', 'affitto turistico gestione'],
@@ -1188,7 +1188,7 @@ const FAQ_DATA = [
   },
   {
     k: ['tempo trovare inquilino', 'quanto tempo affittare'],
-    r: '⏱️ **Media 18 giorni** per trovare inquilino grazie al doppio canale:\n\n• **Privati** — portali + social\n• **Aziende** — relocation multinazionali\n\nRaggiungiamo il target giusto rapidamente.'
+    r: '⏱️ **I tempi dipendono da zona e canone.** Lavoriamo con un doppio canale:\n\n• **Privati** — portali + social\n• **Aziende** — relocation multinazionali'
   },
   {
     k: ['contratti expat', 'relocation', 'aziende affitto', 'multinazionali'],
@@ -1268,11 +1268,11 @@ const FAQ_DATA = [
   },
   {
     k: ['app proprietari', 'dashboard', 'portale proprietario'],
-    r: '📱 **Dashboard online per proprietari:**\n\n• Incassi in tempo reale\n• Stato manutenzioni\n• Documenti scaricabili **24/7**\n• Storico pagamenti\n\nControlla il tuo patrimonio ovunque ti trovi.'
+    r: '📱 **Dashboard online per proprietari:**\n\n• Incassi in tempo reale\n• Stato manutenzioni\n• Documenti scaricabili\n• Storico pagamenti\n\nControlla il tuo patrimonio ovunque ti trovi.'
   },
   {
     k: ['artigiani', 'rete artigiani', 'manutenzione urgente'],
-    r: '🔧 **Rete di 40+ artigiani qualificati** con SLA (tempi di intervento garantiti):\n\n• Idraulici, elettricisti, fabbri\n• Imbianchini, muratori\n• Caldaisti, climatizzatori\n• Pronto intervento h24\n\nInterventi rapidi e prezzi concordati.'
+    r: '🔧 **Possiamo metterti in contatto con artigiani di fiducia:**\n\n• Idraulici, elettricisti, fabbri\n• Imbianchini, muratori\n• Caldaisti, climatizzatori\n\nDisponibilità e prezzi da concordare caso per caso.'
   },
   {
     k: ['redditività portafoglio', 'rendimento immobili', 'analisi rendita'],
@@ -1284,7 +1284,7 @@ const FAQ_DATA = [
   },
   {
     k: ['manutenzione predittiva', 'check stagionale', 'prevenzione guasti'],
-    r: '🔧 **Piani di manutenzione predittiva:**\n\n• Check stagionali programmati\n• Analisi costi/benefici interventi\n• Prevenzione guasti costosi\n\nMeglio prevenire che riparare: risparmi fino al **30%** sui costi di manutenzione.'
+    r: '🔧 **Piani di manutenzione predittiva:**\n\n• Check stagionali programmati\n• Analisi costi/benefici interventi\n• Prevenzione guasti costosi\n\nMeglio prevenire che riparare.'
   },
   {
     k: ['patrimoni ereditari', 'immobili eredità gestione', 'divisione quote'],
@@ -1312,7 +1312,7 @@ const FAQ_DATA = [
   },
   {
     k: ['tempo perizia', 'quanto tempo valutazione', 'tempi report'],
-    r: '⏱️ **Tempi di consegna:**\n\n• **Valutazione gratuita:** 24-48 ore\n• **Perizia completa certificata:** 5 giorni lavorativi\n• **Perizia giurata CTU:** 7-10 giorni\n\nRapidità senza compromessi sulla qualità.'
+    r: '⏱️ **Tempi di consegna:**\n\nI tempi dipendono dal tipo di valutazione o perizia: contattaci e ti diciamo quanto serve per il tuo caso.'
   },
   {
     k: ['valutazione asta', 'immobile asta valore', 'stima asta'],
@@ -1360,15 +1360,15 @@ const FAQ_DATA = [
   // ═══════════════════════════════════════════════
   {
     k: ['volture luce gas', 'chi paga volture', 'costo volture'],
-    r: '💡 **Le volture luce e gas le gestiamo gratis.** Nessun costo aggiuntivo per te. Ci occupiamo di tutto: documentazione, contatti con i fornitori, attivazione.'
+    r: '💡 **Ti aiutiamo con le volture luce e gas:** documentazione, contatti con i fornitori, attivazione. Condizioni da concordare in agenzia.'
   },
   {
     k: ['tempo attivazione', 'quanto tempo utenze', 'attivazione rapida'],
-    r: '⏱️ **48 ore dalla consegna chiavi** per l\'attivazione di tutte le utenze. Tempistiche garantite grazie ai nostri rapporti diretti con i fornitori.'
+    r: '⏱️ **I tempi di attivazione delle utenze dipendono dai fornitori.** Ti seguiamo nella pratica dopo la consegna chiavi.'
   },
   {
     k: ['fornitore conveniente', 'miglior offerta luce', 'confronto fornitori', 'mercato libero'],
-    r: '💰 **Confrontiamo 15+ operatori** del mercato libero per trovarti l\'offerta più conveniente:\n\n• Luce e gas\n• Tutti gli operatori nazionali\n• Analisi consumi personalizzata\n\nRisparmi reali sulla bolletta fin dal primo mese.'
+    r: '💰 **Ti aiutiamo a confrontare le offerte** del mercato libero:\n\n• Luce e gas\n• Tutti gli operatori nazionali\n• Analisi consumi personalizzata'
   },
   {
     k: ['acqua fogna', 'utenze acqua', 'multi utility'],
@@ -1396,7 +1396,7 @@ const FAQ_DATA = [
   },
   {
     k: ['guasti 24', 'pronto intervento', 'emergenza utenze'],
-    r: '🚨 **Assistenza guasti 24/7:**\n\n• Helpdesk dedicato\n• Pronto intervento\n• Coordinamento con tecnici\n\nUn numero diretto per ogni emergenza, giorno e notte.'
+    r: '🚨 **Assistenza guasti:**\n\n• Helpdesk dedicato\n• Pronto intervento\n• Coordinamento con tecnici\n\nContattaci per le modalità e gli orari del servizio.'
   },
   {
     k: ['utenze condominio', 'millesimi', 'contatori singoli'],
@@ -1442,7 +1442,7 @@ const FAQ_DATA = [
   },
   {
     k: ['gruppo immobiliare righetto', 'righetto limena sede', 'agenzia limena via roma', 'chi è righetto limena'],
-    r: '🏢 **Righetto Immobiliare a Limena**\n\n• **Sede:** Via Roma 96, 35010 Limena (PD)\n• **Dal 2000** su Padova e provincia — **101 comuni**\n• **127 recensioni** Google, media **4,9/5**\n• **350+** immobili gestiti nel tempo\n\nIl compenso di mediazione **non è pubblicato online**: si concorda in sede nel mandato, con chiarezza su servizi inclusi.\n\nVuoi fissare un appuntamento **senza impegno**?',
+    r: '🏢 **Righetto Immobiliare a Limena**\n\n• **Sede:** Via Roma 96, 35010 Limena (PD)\n• **Dal 2000** su Padova e provincia — **101 comuni**\n• **127 recensioni** Google, media **4,9/5**\n• **350+** immobili gestiti nel tempo\n\nIl compenso di mediazione **non è pubblicato online**: si concorda in sede nel mandato, con chiarezza su servizi inclusi.\n\nVuoi fissare un appuntamento ****?',
     blog: 'blog-gruppo-immobiliare-righetto-limena-2026',
     blogTitle: 'Gruppo Immobiliare Righetto Limena'
   },
@@ -1488,7 +1488,7 @@ const FAQ_DATA = [
   },
   {
     k: ['durata mandato vendita', 'quanto dura mandato', 'revocare mandato', 'recesso mandato esclusivo'],
-    r: '⏱️ **Durata e recesso del mandato**\n\nIn provincia di Padova il mandato dura in media **3–6 mesi** — tempo sufficiente per marketing, visite e trattativa.\n\nPrima di firmare chiedi:\n• Durata e condizioni di **rinnovo**\n• **Recesso anticipato** e penali eventuali\n• Piano marketing e **report visite**\n• Compenso, IVA e chi paga\n\nTutto deve essere chiaro nel contratto di mediazione. Per un confronto senza impegno: **049.8843484**.',
+    r: '⏱️ **Durata e recesso del mandato**\n\nIn provincia di Padova il mandato dura in media **3–6 mesi** — tempo sufficiente per marketing, visite e trattativa.\n\nPrima di firmare chiedi:\n• Durata e condizioni di **rinnovo**\n• **Recesso anticipato** e penali eventuali\n• Piano marketing e **report visite**\n• Compenso, IVA e chi paga\n\nTutto deve essere chiaro nel contratto di mediazione. Per un confronto: **049.8843484**.',
     blog: 'blog-mandato-esclusivo-padova-perche-conviene-2026',
     blogTitle: 'Durata mandato esclusivo'
   },
@@ -1824,7 +1824,10 @@ class RighettoChat {
       return '💬 **Come possiamo aiutarti?** (puoi anche scrivere "skip"):';
     }
     if (this.state === 'contatto_note') {
-      this.contattoPending.note = msg === 'skip' ? '' : msg;
+      // Mantiene il contesto già raccolto (es. zona/tipologia/mq del venditore): "skip" non lo cancella, le note libere vi si aggiungono
+      const _ctx = (this.contattoPending.note || '').trim();
+      const _extra = (msg.trim().toLowerCase() === 'skip') ? '' : msg.trim();
+      this.contattoPending.note = _ctx && _extra ? _ctx + ' | Note: ' + _extra : (_ctx || _extra);
       this.state = 'idle';
       return await this.inviaRichiesta();
     }
@@ -1878,13 +1881,8 @@ class RighettoChat {
 
     if (this.state === 'venditore_padova_stato') {
       this.stimaData.stato = msg.trim();
-      const stima = this.stimaPrezzo('Padova', this.stimaData.tipo, this.stimaData.mq, this.stimaData.stato);
       this.state = 'venditore_padova_contatto';
-      return `📊 Prima fascia di valore per **${this.stimaData.zona || 'Padova'}**:\n\n` +
-        `• Min: **${this.formatPrice(stima.min)}**\n` +
-        `• Medio: **${this.formatPrice(stima.medio)}**\n` +
-        `• Max: **${this.formatPrice(stima.max)}**\n\n` +
-        `Vuoi una valutazione ufficiale gratuita con sopralluogo? Scrivi **si** oppure **no**.`;
+      return `📋 Ho i dati dell'immobile (${this.stimaData.tipo}, ${this.stimaData.mq} mq, ${this.stimaData.stato}).\n\nUna cifra affidabile richiede un sopralluogo e dati di mercato verificati, quindi da qui non do numeri.\n\nVuoi che un agente ti ricontatti? Scrivi **si** oppure **no**.`;
     }
 
     if (this.state === 'venditore_padova_contatto') {
@@ -2010,23 +2008,15 @@ class RighettoChat {
   // ────── COMPLETA STIMA ──────
   async completaStima() {
     const { comune, tipo, mq, stato } = this.stimaData;
-    const stima = this.stimaPrezzo(comune, tipo, mq, stato);
     const trovato = this.fuzzyMatchComune(comune);
 
-    let msg = `📊 **STIMA DI MERCATO** *(dati 2025–2026)*\n\n`;
+    let msg = `📋 **RICHIESTA DI VALUTAZIONE**\n\n`;
     msg += `📍 ${comune.charAt(0).toUpperCase() + comune.slice(1)}\n`;
     msg += `🏠 ${tipo} — ${mq} mq${stato ? ` — ${stato}` : ''}\n\n`;
-    msg += `┌─────────────────────────────────┐\n`;
-    msg += `│  **Valore stimato**              │\n`;
-    msg += `│  Min: **${this.formatPrice(stima.min)}**        │\n`;
-    msg += `│  ➡️  **${this.formatPrice(stima.medio)}** *(medio)*  │\n`;
-    msg += `│  Max: **${this.formatPrice(stima.max)}**        │\n`;
-    msg += `│  Prezzo/mq: ~${this.formatPrice(stima.euromq)}/mq     │\n`;
-    msg += `└─────────────────────────────────┘\n\n`;
-    msg += `⚠️ *Stima indicativa basata sui prezzi medi di mercato. Per una valutazione ufficiale gratuita a casa tua, contatta un nostro agente.*\n\n`;
+    msg += `Una cifra affidabile richiede un sopralluogo e dati di mercato verificati, quindi da qui non do numeri. Un nostro agente può ricontattarti.\n\n`;
 
     if (!trovato) {
-      msg += `📌 *Non ho dati specifici per "${comune}" — ho usato la media provinciale.*\n\n`;
+      msg += ``;
     }
 
     // Cerca immobili correlati
@@ -2143,7 +2133,7 @@ class RighettoChat {
   async inviaRichiesta() {
     const ok = await this.salvaRichiesta(this.contattoPending);
     if (ok) {
-      return '✅ **Richiesta inviata!**\n\nUn nostro agente ti contatterà entro **24 ore lavorative**.\n\n📞 Urgente? Chiamaci al **049.8843484**\n\nGrazie per aver scelto Righetto Immobiliare! 🏠';
+      return '✅ **Richiesta inviata!**\n\nUn nostro agente ti contatterà **appena possibile**.\n\n📞 Urgente? Chiamaci al **049.8843484**\n\nGrazie per aver scelto Righetto Immobiliare! 🏠';
     } else {
       return '⚠️ Non riesco a salvare la richiesta al momento.\n\n📞 Chiama direttamente: **049.8843484**\n📧 Email: **info@righettoimmobiliare.it**';
     }

@@ -19,7 +19,7 @@ var defined_tests = {
     selector: '.hero-btns .btn-g:first-child',
     variants: [
       { text: 'Quanto vale la tua casa?', id: 'A_quanto_vale' },
-      { text: 'Valutazione gratuita in 24h', id: 'B_valutazione_24h' },
+      { text: 'Richiedi una valutazione gratuita', id: 'B_valutazione_24h' },
       { text: 'Scopri il valore reale', id: 'C_valore_reale' }
     ]
   },
@@ -431,7 +431,7 @@ function showExitPopup() {
     ? 'Stai pensando di vendere casa?'
     : 'Non hai trovato quello che cerchi?';
   var subtitle = isVenditore
-    ? 'Richiedi una valutazione gratuita — scopri il valore reale del tuo immobile in 24 ore.'
+    ? 'Richiedi una valutazione gratuita — con sopralluogo.'
     : 'Parlaci delle tue esigenze: ti aiutiamo a trovare la casa perfetta a Padova e provincia.';
   var ctaText = isVenditore ? 'Valutazione Gratuita' : 'Parla con un Agente';
   var onLandingVendere = location.pathname.indexOf('landing-vendere-casa-padova') !== -1;
