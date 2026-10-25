@@ -388,6 +388,8 @@ function hideProof() {
 }
 
 function startSocialProof() {
+  // Disattivato: notifiche non basate su dati reali verificati (riattivabile togliendo questa riga)
+  return;
   // Non mostrare su mobile (troppo invasivo)
   if (window.innerWidth < 768) return;
   // Prima notifica dopo 25 secondi
