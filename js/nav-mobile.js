@@ -5,14 +5,30 @@ document.addEventListener('DOMContentLoaded', function(){
   var btn = document.getElementById('burgerBtn');
   var panel = document.getElementById('navMobile');
   if(btn && panel){
+    btn.setAttribute('aria-expanded','false');
+    panel.inert = true;
+    btn.setAttribute('aria-controls','navMobile');
     btn.addEventListener('click', function(){
       this.classList.toggle('open');
       panel.classList.toggle('open');
+      this.setAttribute('aria-expanded', panel.classList.contains('open') ? 'true' : 'false');
+      panel.inert = !panel.classList.contains('open');
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && panel.classList.contains('open')){
+        btn.classList.remove('open');
+        panel.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+        panel.inert = true;
+        btn.focus();
+      }
     });
     panel.querySelectorAll('a').forEach(function(a){
       a.addEventListener('click', function(){
         btn.classList.remove('open');
         panel.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+        panel.inert = true;
       });
     });
   }

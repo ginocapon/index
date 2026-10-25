@@ -1,0 +1,34 @@
+/* PROPOSTA locale (non pubblicata): 3 riduzioni di contenuto (servizi a elenco, pulsanti secondari a link, blog 3 articoli) + fix hero 390px, focus campi ricerca, Mutuo a capo. Nessun colore cambiato. */
+
+/* focus visibile nei campi ricerca */
+.r-field:focus-within{outline:3px solid #fff;outline-offset:2px;border-radius:12px}
+/* fix hero 390px */
+@media(max-width:767px){.hero-shell>*,.hero-content{min-width:0;max-width:100%}.hero-p,.hero-promo{overflow-wrap:anywhere}body #hero .hero-btns a.btn-g{white-space:normal!important;text-align:center;line-height:1.3;padding-left:18px;padding-right:18px}}
+
+/* PROPOSTA locale, non pubblicata. Nessuna modifica di colore ai pulsanti che restano. */
+body main #servizi .srv-card{background:transparent!important;box-shadow:none!important;border:0!important;border-top:1px solid rgba(21,36,53,.14)!important;border-radius:0!important;padding:16px 4px!important;display:grid!important;grid-template-columns:1fr!important;gap:2px!important;transform:none!important;min-height:0!important}
+body main #servizi .srv-card .srv-ico{display:none!important}
+body main #servizi .srv-card .srv-t{font-size:1.05rem!important}
+/* pulsanti secondari -> link (testo e sottolineatura nei colori gia usati) */
+body main .cs-cta,body main a.btn-territorio,body main #drone-hp .btn-outline-light{background:transparent!important;box-shadow:none!important;border:0!important;border-bottom:2px solid currentColor!important;border-radius:0!important;padding:4px 0!important;min-height:44px;text-shadow:none!important;transform:none!important;width:auto!important;display:inline-flex!important}
+body main .cs-cta{color:#152435!important;border-bottom-color:#FF6B35!important}
+body main a.btn-territorio{color:#fff!important}
+body main #drone-hp .btn-outline-light{color:#fff!important}
+body main #mutuo-hp a.btn-g{white-space:normal!important;text-align:center!important;max-width:100%!important;justify-content:center}
+body main #drone-hp .btn-outline-light:focus-visible,body main .cs-cta:focus-visible,body main a.btn-territorio:focus-visible{outline-offset:4px}
+body main #drone-hp .btn-outline-light:focus-visible{outline:3px solid #fff!important}
+/* blog compatto: 3 articoli */
+body main #blogGridHome>*:nth-child(n+4){display:none!important}
+/* Blocco "Il nostro metodo": statico e leggibile (niente scorrimento da recensioni) */
+#testimonial .rec-marquee-wrap{overflow:visible;mask-image:none;-webkit-mask-image:none;height:auto;min-height:0;max-height:none;background:transparent;border:0}
+#testimonial .rec-marquee-track{animation:none!important;transform:none!important;padding:0;gap:12px}
+#testimonial .rec-item[aria-hidden="true"]{display:none}
+#testimonial .rec-item{background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.32)}
+#testimonial .rec-quote{font-style:normal;font-size:0.95rem;line-height:1.55;color:#fff;margin:0 0 6px}
+#testimonial .rec-author{font-size:0.78rem;color:rgba(255,255,255,0.78);font-weight:600}
+#testimonial .rec-video-caption .rec-quote{font-size:0.9rem;margin:0}
+@media(max-width:768px){#testimonial .rec-marquee-wrap{max-height:none;min-height:0}}
+/* Metodo senza video: tre card in riga su desktop, una colonna su telefono */
+#testimonial .rec-layout{grid-template-columns:1fr}
+#testimonial .rec-marquee-track{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:768px){#testimonial .rec-marquee-track{grid-template-columns:1fr}}
