@@ -2197,10 +2197,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 .rh-icon svg{width:22px;height:22px}.topbar-actions .admin-home-back{margin-right:0;font-size:.78rem}
 
 </style>
-<link rel="stylesheet" href="css/admin-agenda.css?v=5">
+<link rel="stylesheet" href="css/admin-agenda.css?v=6">
 <link rel="stylesheet" href="css/admin-attivita.css?v=4">
 <link rel="stylesheet" href="css/admin-mobile.css?v=3">
-<link rel="stylesheet" href="layout-clienti.css?v=20261026a"></head>
+<link rel="stylesheet" href="layout-clienti.css?v=20261026b"></head>
 <body>
 
 <!-- LOGIN -->
@@ -9172,6 +9172,7 @@ async function loadClienti(page=0) {
  const myReq=++_clientiReqId;
  const loading=document.getElementById('clientiLoading'),empty=document.getElementById('clientiEmpty'),table=document.getElementById('clientiTable');
  loading.style.display='flex';empty.style.display='none';
+ window.dispatchEvent(new CustomEvent('righetto:clienti-load',{detail:{state:'loading'}}));
  try{
   const fonte=document.getElementById('filtroFonteCliente').value;
   const agent=document.getElementById('clientiAgent').value;
@@ -9186,8 +9187,8 @@ async function loadClienti(page=0) {
   const {data,error,count}=await query;if(error)throw error;if(myReq!==_clientiReqId)return;
   clientiTotal=count||0;const last=Math.max(0,Math.ceil(clientiTotal/clientiPageSize)-1);if(page>last)return loadClienti(last);
   clientiPage=page;allClienti=data||[];setClientiNote('');renderClientiTable();renderClientiPages();updateClientiStats();loadClientiFonteValues();
- }catch(err){if(myReq!==_clientiReqId)return;table.style.display='none';empty.style.display='block';empty.querySelector('h3').textContent='Clienti non leggibili';empty.querySelector('p').textContent=err.message||'Riprovare la ricerca';}
- finally{if(myReq===_clientiReqId)loading.style.display='none';}
+ }catch(err){if(myReq!==_clientiReqId)return;window.dispatchEvent(new CustomEvent('righetto:clienti-load',{detail:{state:'error',message:err.message||'Riprovare la ricerca'}}));table.style.display='none';empty.style.display='block';empty.querySelector('h3').textContent='Clienti non leggibili';empty.querySelector('p').textContent=err.message||'Riprovare la ricerca';}
+ finally{if(myReq===_clientiReqId){loading.style.display='none';window.dispatchEvent(new CustomEvent('righetto:clienti-load',{detail:{state:'settled'}}));}}
 }
 function renderClientiPages(){const box=document.getElementById('clientiPages');if(!box)return;const pages=Math.max(1,Math.ceil(clientiTotal/clientiPageSize));box.innerHTML='<button type="button" data-page="'+(clientiPage-1)+'" '+(clientiPage===0?'disabled':'')+'>‹</button><span>Pagina '+(clientiPage+1)+' di '+pages+'</span><button type="button" data-page="'+(clientiPage+1)+'" '+(clientiPage>=pages-1?'disabled':'')+'>›</button>';box.onclick=e=>{const b=e.target.closest('[data-page]');if(b&&!b.disabled)loadClienti(Number(b.dataset.page));};}
 
@@ -17971,13 +17972,33 @@ var icon='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="cu
 home.innerHTML='<section id="righetto-operational-agenda" style="margin-bottom:25px"></section><section id="righetto-attivita" style="margin-bottom:25px"></section>';
 var wrap=document.createElement('div');wrap.className='rh-groups';home.appendChild(wrap);groups.forEach(function(g){var box=document.createElement('div');box.className='rh-grp';var title=document.createElement('h2');title.className='rh-group-title '+g[1];title.textContent=g[0];box.appendChild(title);var grid=document.createElement('div');grid.className='rh-grid';g[2].forEach(function(item){var b=document.createElement('button');b.type='button';b.className='rh-tile '+g[1];b.dataset.section=item[0];var existingNav=Array.from(document.querySelectorAll('#sidebar .nav-item')).find(function(n){return (n.getAttribute('onclick')||'').indexOf("'"+item[0]+"'")>=0;});var ownIcon=existingNav&&existingNav.querySelector('svg');b.innerHTML='<span class="rh-icon">'+(ownIcon?ownIcon.outerHTML:icon)+'</span><span>'+item[1]+'</span><span class="rh-sub">'+item[2]+'</span>';b.onclick=function(){window.showSection(item[0]);};grid.appendChild(b);});box.appendChild(grid);wrap.appendChild(box);});
 document.querySelector('.content').prepend(home);
+// Navigazione raccolta sopra l'area di lavoro, con tutte le voci esistenti.
+wrap.classList.add('rh-top-navigation');wrap.setAttribute('aria-label','Navigazione gestionale');
+var nav=document.createElement('nav');nav.className='rh-menu-top';
+function closeNavMenus(except){nav.querySelectorAll('details').forEach(function(d){if(d!==except)d.open=false;});}
+function navCommand(kind){closeNavMenus();if(kind==='new-event'){window.showSection('agenda');if(window.RighettoAgenda)window.RighettoAgenda.newEvent();}else if(kind==='new-client'){window.showSection('clienti');if(window.openClienteModal)window.openClienteModal();}else if(kind==='new-property'){window.showSection('nuovo');}}
+function positionNavMenus(){if(innerWidth<=760){var bottom=nav.getBoundingClientRect().bottom;nav.querySelectorAll('.rh-grid').forEach(function(list){list.style.top=(bottom+4)+'px';});}else{nav.querySelectorAll('.rh-grid').forEach(function(list){list.style.top='';});}}
+window.addEventListener('resize',positionNavMenus);window.addEventListener('scroll',positionNavMenus,{passive:true});
+function navGroup(label,items){var d=document.createElement('details'),sum=document.createElement('summary'),list=document.createElement('div');sum.textContent=label;sum.setAttribute('aria-label',label+' - apri menu');list.className='rh-grid';items.forEach(function(item){var b=document.createElement('button');b.type='button';b.className='rh-tile';b.textContent=item[1];if(item[0].indexOf('new-')===0){b.dataset.navCommand=item[0];b.onclick=function(){navCommand(item[0]);};}else{b.dataset.section=item[0];b.onclick=function(){closeNavMenus();window.showSection(item[0]);};}list.appendChild(b);});d.append(sum,list);d.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse'){closeNavMenus(d);d.open=true;}});d.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse'&&!d.contains(document.activeElement))d.open=false;});d.addEventListener('toggle',function(){sum.setAttribute('aria-expanded',String(d.open));if(d.open){closeNavMenus(d);positionNavMenus();}});d.addEventListener('keydown',function(e){if(e.key==='Escape'){d.open=false;sum.focus();}if(e.key==='ArrowDown'&&e.target===sum){e.preventDefault();closeNavMenus(d);d.open=true;list.querySelector('button').focus();}});nav.appendChild(d);return d;}
+navGroup('Menu',[['home','Home gestionale'],['attivita','Attività']]);
+navGroup('Agenda',[['agenda','Apri agenda'],['new-event','Nuovo appuntamento']]);
+navGroup('Immobili',[['immobili','Elenco immobili'],['new-property','Nuovo immobile'],['perizie','Perizie'],['documentigenerali','Documenti']]);
+navGroup('Clienti',[['clienti','Elenco clienti / proprietari'],['new-client','Nuovo cliente'],['richieste','Richieste']]);
+navGroup('Aste',[['aste','Aste Veneto']]);
+navGroup('Marketing',[['blog','Blog'],['emailmarketing','Email marketing'],['landing','Landing pages']]);
+navGroup('Controllo',[['analytics','Search Console'],['impostazioni','Impostazioni']]);
+wrap.remove();
+document.addEventListener('pointerdown',function(e){if(!nav.contains(e.target))closeNavMenus();});
+document.querySelector('.content').insertBefore(nav,home);
+
 var searchConsole=document.createElement('div');searchConsole.id='sec-searchconsole';searchConsole.className='section';searchConsole.innerHTML='<div class="rh-soon"><h2>Google Search Console</h2><span class="rh-chip">In arrivo</span><p style="margin-top:16px">Il collegamento automatico a Google Search Console non è ancora attivo. Qui appariranno clic, impressioni, CTR e posizione media, con filtro per date.</p><div class="rh-metric-list"><div style="--accent:#4285f4">Clic totali<strong>—</strong>Dati non collegati</div><div style="--accent:#673ab7">Impressioni totali<strong>—</strong>Dati non collegati</div><div style="--accent:#00897b">CTR media<strong>—</strong>Dati non collegati</div><div style="--accent:#e8710a">Posizione media<strong>—</strong>Dati non collegati</div></div><p>Nessun grafico o numero inventato. Il collegamento sarà completato dopo il lavoro sulla sicurezza.</p></div>';
 document.querySelector('.content').appendChild(searchConsole);
 var back=document.createElement('button');back.type='button';back.className='admin-home-back';back.textContent='← Home admin';back.onclick=function(){window.showSection('home');};document.querySelector('.topbar').prepend(back);
 var logout=document.createElement('button');logout.type='button';logout.className='admin-home-back';logout.textContent='Esci';logout.onclick=function(){window.doLogout();};document.querySelector('.topbar-actions').appendChild(logout);
 window.showSection=function(name){
  if(disabled.indexOf(name)>=0)name='home';
- if(name==='home'||name==='analytics'||name==='agenda'){
+ document.body.dataset.adminArea=name;
+ if(name==='home'||name==='analytics'||name==='agenda'||name==='attivita'){
  document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
  document.getElementById(name==='analytics'?'sec-searchconsole':'sec-home').classList.add('active');
  document.getElementById('topbarTitle').textContent=name==='analytics'?'Google Search Console':'Home admin';
@@ -17992,8 +18013,8 @@ window.showSection('home');
 </script>
 <script src="js/agenda-event-types.js?v=1"></script>
 <script>window.RIGHETTO_SYNC_ATTIVA=true;</script>
-<script src="js/admin-agenda.js?v=9"></script>
-<script src="js/admin-cliente-scheda.js?v=4"></script>
+<script src="js/admin-agenda.js?v=10"></script>
+<script src="js/admin-cliente-scheda.js?v=5"></script>
 <script src="js/admin-immobile-operazioni.js?v=1"></script>
 <script src="js/admin-blocco2.js?v=1"></script>
 <script>RighettoAgenda.init(document.getElementById("righetto-operational-agenda"));</script>
@@ -18002,7 +18023,7 @@ window.showSection('home');
 <script>(function(){var el=document.getElementById('righetto-attivita');if(!el)return;var done=false,busy=false;function msg(t){el.innerHTML='<div class="at-banner">'+t+'</div>';}
 async function go(){if(done||busy)return;busy=true;try{if(typeof sb==='undefined')throw 0;var u=await sb.auth.getUser();if(!u.data.user)throw 0;done=true;RighettoAttivita.init(el,{store:RighettoAttivita.dbStore(sb)});}catch(e){msg('Attivit\u00e0: accedi per vedere le pratiche.');}busy=false;}
 msg('Attivit\u00e0: caricamento...');go();setInterval(go,3000);})();</script>
-<script src="js/admin-mobile.js?v=7"></script>
+<script src="js/admin-mobile.js?v=8"></script>
 <script src="js/admin-cliente-layout.js?v=20261026a"></script>
 </body>
 </html>
