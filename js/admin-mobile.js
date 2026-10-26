@@ -4,7 +4,7 @@
 'use strict';
 var mq=window.matchMedia('(max-width:760px)');
 function phone(){return mq.matches;}
-var cur='menu',remote=null,remoteQ='',tmr=null;
+var cur='menu',remote=null,remoteQ='',tmr=null,remoteSeq=0,remoteState='',remoteError='',baseState='idle',baseError='';
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function money(n){return n?'€ '+Number(n).toLocaleString('it-IT'):'—';}
 function $(s,r){return (r||document).querySelector(s);}
@@ -111,22 +111,31 @@ function listCli(q){
 }
 function remoteSearch(q){
  if(typeof sb==='undefined'||q.length<2||q.replace(/[,()%*]/g,'').length<2)return;
- var t=q.replace(/[,()%*\\]/g,' ').trim();
- var f=['nome','email','telefono','ragione_sociale','partita_iva'].map(function(k){return k+'.ilike.%'+t+'%';}).join(',');
+ var seq=++remoteSeq, t=q.replace(/[,()%*\\]/g,' ').trim();
+ var f=['nome','email','telefono','ragione_sociale','partita_iva','codice_fiscale','indirizzo_cliente','nome_proprio','cognome','comune','cellulare'].map(function(k){return k+'.ilike.%'+t+'%';}).join(',');
+ remoteState='loading';remoteError='';remote=null;remoteQ=q;cardsCli(true);
  sb.from('clienti').select('*').or(f).eq('storico',!!window.__rStorico).order('nome').limit(150).then(function(r){
-  if(r.error||!r.data)return;remote=r.data;remoteQ=q;cardsCli(true);});
+  if(seq!==remoteSeq)return;
+  if(r.error){remoteState='error';remoteError=r.error.message||'Riprovare la ricerca';remote=null;}
+  else{remoteState='ready';remote=r.data||[];}cardsCli(true);
+ }).catch(function(e){if(seq!==remoteSeq)return;remoteState='error';remoteError=e.message||'Riprovare la ricerca';cardsCli(true);});
 }
 function cardsCli(fromRemote){
  if(!phone())return;
  var box=ensureBox('sec-clienti','rm-cli','Cerca nome, telefono, email…','Nuovo cliente',function(){if(window.openClienteModal)window.openClienteModal();});
  if(!box||typeof allClienti==='undefined')return;
  var q=$('.rm-search',box).value.trim().toLowerCase();
- if(!fromRemote){clearTimeout(tmr);if(q.length>=2)tmr=setTimeout(function(){remoteSearch(q);},350);}
+ if(!fromRemote){clearTimeout(tmr);remoteSeq++;remote=null;remoteQ='';remoteState='';remoteError='';if(q.length>=2){remoteState='loading';tmr=setTimeout(function(){remoteSearch(q);},350);}}
+ var waiting=q.length>=2?remoteState==='loading':baseState==='loading';
+ var error=q.length>=2?remoteError:baseError;
+ if(waiting||error){$('.rm-count',box).setAttribute('role','status');$('.rm-count',box).textContent=error?'Clienti non leggibili: '+error:'Caricamento clienti…';$('.rm-cards',box).replaceChildren();return;}
+ if(q.length<2&&baseState==='idle'&&!allClienti.length){$('.rm-count',box).textContent='Caricamento clienti…';$('.rm-cards',box).replaceChildren();return;}
  var list=listCli(q);
  var tot=(q.length>=2&&remote&&remoteQ===q)?' trovati su tutto l\'archivio':' (primi '+allClienti.length+' dell\'elenco, scrivi per cercare in tutti)';
- $('.rm-count',box).textContent=list.length+' clienti'+(q.length>=2?(remote&&remoteQ===q?' trovati su tutto l\'archivio':''):' · scrivi per cercare in tutto l\'archivio');
+ $('.rm-count',box).textContent=(q.length<2&&typeof clientiTotal!=='undefined'?'Archivio: '+clientiTotal+' clienti · '+list.length+' in questa pagina':list.length+' clienti')+(q.length>=2?(remote&&remoteQ===q?' trovati su tutto l\'archivio':''):' · scrivi per cercare in tutto l\'archivio');
  $('.rm-cards',box).innerHTML=list.slice(0,150).map(function(c){var cerca=[pretty(c.tipo_operazione_cercata),c.tipologia_cercata,c.zona_cercata].filter(Boolean).join(' · ');
   return '<button type="button" class="rm-card rm-cc" data-id="'+esc(c.id)+'"><div class="rm-inf"><div class="rm-r1"><b>'+esc(c.nome||'(senza nome)')+'</b><em class="rm-chip n">'+esc(c.storico?'Storico':(c.ruolo_rubrica||''))+'</em></div><div class="rm-s">'+esc([c.telefono,c.email].filter(Boolean).join(' · ')||'nessun recapito')+'</div>'+(cerca?'<div class="rm-s">'+esc(cerca)+'</div>':'')+'</div></button>';}).join('')+(list.length>150?'<div class="rm-more">Altri '+(list.length-150)+': affina la ricerca.</div>':'');
+ if(q.length<2&&typeof clientiPage!=='undefined'&&typeof clientiTotal!=='undefined'){var pages=Math.max(1,Math.ceil(clientiTotal/clientiPageSize));$('.rm-cards',box).insertAdjacentHTML('beforeend','<nav class="rm-pages" aria-label="Pagine clienti"><button type="button" data-client-page="'+(clientiPage-1)+'" '+(clientiPage===0?'disabled':'')+'>Precedente</button><span>Pagina '+(clientiPage+1)+' di '+pages+'</span><button type="button" data-client-page="'+(clientiPage+1)+'" '+(clientiPage>=pages-1?'disabled':'')+'>Successiva</button></nav>');}
 }
 function linked(c){
  var l=(typeof allImmobili!=='undefined'?allImmobili:[]).filter(function(i){return String(i.proprietario_id)===String(c.id);});
@@ -135,6 +144,7 @@ function linked(c){
 }
 function phones(t){return (String(t||'').match(/\+?\d[\d ]{6,}\d/g)||[]).map(function(x){return x.replace(/\s+/g,'');});}
 function openCli(id){
+ if(window.RighettoCliente&&typeof window.RighettoCliente.open==='function'){closeScheda();window.RighettoCliente.open(id);return;}
  var c=(listCli(($('#rm-cli .rm-search')||{value:''}).value.trim().toLowerCase())||[]).find(function(x){return String(x.id)===String(id);})||allClienti.find(function(x){return String(x.id)===String(id);});if(!c)return;
  var tel=String(c.telefono||'').replace(/\s+/g,'');
  var dati=field('Tipo',c.tipo_cliente)+field('Telefono',c.telefono)+field('Email',c.email)+field('PEC',c.pec)+field('Indirizzo',c.indirizzo_cliente)+field('Ragione sociale',c.ragione_sociale)+field('P.IVA',c.partita_iva)+field('Codice fiscale',c.codice_fiscale)+field('SDI',c.sdi)+field('Fonte',c.fonte);
@@ -169,6 +179,8 @@ function initSession(){
 }
 function init(){
  build();initSession();
+ window.addEventListener('righetto:mobile-immobile',function(e){if(phone()&&e.detail&&e.detail.id){cur='immobili';render();openImm(e.detail.id);}});
+ window.addEventListener('righetto:clienti-load',function(e){var d=e.detail||{};if(d.state==='loading'){baseState='loading';baseError='';}else if(d.state==='error'){baseState='error';baseError=d.message;}else if(baseState!=='error'){baseState='ready';}if(cur==='clienti')cardsCli(true);});
  var oldShow=window.showSection;window.__rmOrig=oldShow;
  window.showSection=function(name){
   if(!phone()){oldShow(name);render();return;}
@@ -179,6 +191,7 @@ function init(){
   if(name==='clienti')setTimeout(cardsCli,400);
  };
  document.addEventListener('click',function(e){
+  var page=e.target.closest('#rm-cli [data-client-page]');if(page){if(!page.disabled)window.loadClienti(Number(page.dataset.clientPage));return;}
   var c=e.target.closest('#rm-imm .rm-card');if(c){openImm(c.dataset.id);return;}
   c=e.target.closest('#rm-cli .rm-card');if(c){openCli(c.dataset.id);}
   c=e.target.closest('#rm-scheda [data-imm]');if(c){openImm(c.dataset.imm);return;}

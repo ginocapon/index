@@ -44,3 +44,27 @@
 #sec-clienti th{font-size:11px;padding:4px 5px}#sec-clienti td{font-size:12px;padding:6px 5px!important}#sec-clienti .phone-tools{margin-left:14px;word-spacing:5px;color:#6a747b}#sec-clienti input[type=checkbox]{min-height:0;width:12px;height:12px}#sec-clienti td:nth-child(2){min-width:230px}#sec-clienti td:nth-child(2)>a{font-weight:bold;color:#111}#sec-clienti td .client-ops button:disabled{opacity:.3;cursor:not-allowed}.legacy-client-pages{white-space:nowrap}
 
 @media(max-width:760px){#sec-clienti .legacy-client-search .table-head-toolbar{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}#sec-clienti .legacy-client-search .table-head-toolbar>input,#sec-clienti .legacy-client-search .table-head-toolbar>select{grid-column:span 2;width:100%!important;min-width:0!important}#sec-clienti .legacy-client-search .table-head-toolbar>button{width:100%!important;min-width:0!important}#sec-clienti .legacy-client-extra{flex-wrap:wrap;gap:8px}#sec-clienti .legacy-client-extra>span:last-child{margin-left:0!important}}
+
+/* Scheda unica consultabile anche su telefono. Note interne distinte dagli eventi. */
+@media(max-width:760px){.rcs{inset:0!important;overflow:auto!important}.rcs-d{box-sizing:border-box;width:100%;margin:0!important;padding:12px!important}.rcs-grid span,.rcs-sub,.rcs-ev{overflow-wrap:anywhere}.rcs-top{gap:8px}.rcs-top h2{font-size:18px!important}.rcs-tabs{position:sticky;top:-12px;z-index:2;background:#fafafa;display:flex;flex-wrap:wrap;padding:8px 0!important;gap:4px!important}.rcs-tabs button{min-height:40px!important;flex:1 0 auto}.rcs-menu{top:auto!important;bottom:12px!important;max-height:65vh!important}.rcs-information .rcs-grid>div,.rcs-grid div{grid-template-columns:minmax(90px,35%) minmax(0,1fr)!important}.rcs section{min-width:0}.rcs textarea{max-width:100%}.rcs .rcs-top .rcs-ops{margin-left:auto}.rcs-information aside p{overflow-wrap:anywhere}}
+
+.rm-pages{display:flex;gap:8px;align-items:center;justify-content:space-between;margin:12px 0}.rm-pages button{min-height:40px!important}.rm-pages span{font-size:12px}
+
+.rh-menu-top{display:flex;gap:0;align-items:stretch;background:#005b87;color:#fff;margin:0 0 12px;position:relative;z-index:460;font:13px Arial,sans-serif;flex-wrap:wrap}.rh-menu-top>button,.rh-menu-top summary{font:13px Arial,sans-serif!important;background:none!important;border:0;border-right:1px solid #ffffff33;border-radius:0!important;color:white!important;padding:10px 14px!important;min-height:36px;cursor:pointer}.rh-menu-top details{position:relative}.rh-menu-top .rh-grid{display:block;position:absolute;left:0;top:100%;width:230px;background:#fff;border:1px solid #005b87;box-shadow:0 3px 8px #0002}.rh-menu-top details:not([open]) .rh-grid{display:none}.rh-menu-top .rh-tile{display:block;width:100%;min-height:36px;border:0;border-bottom:1px solid #ddd;border-radius:0;padding:8px 12px;font:13px Arial,sans-serif;background:white;color:#005b87}.rh-menu-top .rh-icon,.rh-menu-top .rh-sub{display:none}.rh-menu-top .rh-tile:hover{background:#e2f2ff}
+@media(max-width:760px){.rh-menu-top{display:none}.rcs{top:52px!important}.rcs-d{min-height:calc(100vh - 52px)} }
+
+body[data-admin-area=agenda] #righetto-attivita,body[data-admin-area=attivita] #righetto-operational-agenda{display:none!important}
+@media(max-width:760px){body.rm-on .rh-menu-top{display:flex;position:sticky;top:52px;flex-wrap:nowrap;overflow:visible;margin:0 0 8px;gap:0}body.rm-on .rh-menu-top>button,body.rm-on .rh-menu-top summary{padding:8px 9px!important;white-space:nowrap;min-height:36px}.rh-menu-top details{flex-shrink:0}.rh-menu-top .rh-grid{position:fixed;left:10px;right:10px;top:140px;width:auto;max-height:65vh;overflow:auto}body.rm-on.rm-menu-open .rh-menu-top{display:none}}
+
+@media(max-width:760px){body.rm-on .rh-menu-top{overflow-x:auto;overflow-y:visible}.rh-menu-top .rh-grid{z-index:470}}
+
+@media(min-width:761px){.rh-menu-top{position:sticky;top:0;z-index:13000}.rcs{top:44px!important}.ra-modal:has(.ra-legacy-event){top:44px!important}}
+
+.rh-menu-top summary:focus-visible,.rh-menu-top button:focus-visible{outline:2px solid #ffdf00!important;outline-offset:-3px}.rh-menu-top details[open]>summary{background:#034b70!important}.rh-menu-top details{flex:0 0 auto}.rh-menu-top{align-items:flex-start}.rh-menu-top summary{min-height:36px;box-sizing:border-box;list-style:disclosure-closed}.rh-menu-top details[open]>summary{list-style:disclosure-open}@media(max-width:760px){body.rm-on .rh-menu-top{flex-wrap:wrap;overflow:visible}.rh-menu-top .rh-grid{top:155px}.rh-menu-top summary{font-size:12px!important}}
+/* Separate label and disclosure marker, with a touch-sized summary. */
+.rh-menu-top summary{display:flex;align-items:center;gap:8px;list-style:none!important;min-height:44px!important}.rh-menu-top summary::-webkit-details-marker{display:none}.rh-menu-top summary::after{content:'▾';display:inline-block;flex:0 0 9px;width:9px;text-align:center;font-size:11px;line-height:1}.rh-menu-top details[open]>summary::after{content:'▴'}
+
+@media(max-width:760px){body.rm-on.rm-agenda .rh-menu-top details[open] .rh-grid{display:block!important}.rh-menu-top .rh-tile{min-height:44px!important}}
+/* Detail dialogs sit above navigation; reserve the phone header without hiding close. */
+.rcs,.ra-modal:has(.ra-legacy-event){z-index:14000!important}
+@media(max-width:760px){.ra-modal:has(.ra-legacy-event){top:52px!important}}
