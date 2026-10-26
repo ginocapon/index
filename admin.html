@@ -2200,7 +2200,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 <link rel="stylesheet" href="css/admin-agenda.css?v=5">
 <link rel="stylesheet" href="css/admin-attivita.css?v=4">
 <link rel="stylesheet" href="css/admin-mobile.css?v=3">
-</head>
+<link rel="stylesheet" href="layout-clienti.css?v=20261026a"></head>
 <body>
 
 <!-- LOGIN -->
@@ -3528,44 +3528,20 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         </div>
 
         <div class="table-wrap">
-          <div class="table-head">
-            <div style="font-weight:600;font-size:0.9rem;">Rubrica Clienti</div>
-            <div class="table-head-toolbar" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-              <select id="filtroFonteCliente" onchange="loadClienti()" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.8rem;">
-                <option value="">Tutte le fonti</option>
-                <option value="newsletter">Newsletter</option>
-                <option value="richiesta">Richieste</option>
-                <option value="manuale">Manuali</option>
-                <option value="proprietario_immobile">Proprietari immobile</option>
-              </select>
-              <input class="table-search" type="text" placeholder="🔍 Cerca nome, azienda, P.IVA, tel, email, indirizzo..." id="searchClienti" oninput="filterClientiTable()" style="min-width:300px">
-              <button class="btn btn-secondary btn-sm" onclick="syncAllProprietariFromImmobili(true)" title="Importa/collega tutti i proprietari già inseriti negli immobili">↻ Da immobili</button>
-              <button class="btn btn-secondary btn-sm" onclick="openCsvImportModal()">Importa CSV</button>
-              <button class="btn btn-primary btn-sm" onclick="openClienteModal()">+ Nuovo Cliente</button>
-            </div>
-          </div>
+          <div class="legacy-client-search"><div class="legacy-client-title"><b>RICERCA CLIENTI:</b><span>nella mia agenzia</span></div><div class="table-head"><div class="table-head-toolbar">
+<input class="table-search" type="text" placeholder="Testo" id="searchClienti" oninput="filterClientiTable()" aria-label="Ricerca clienti">
+<select id="clientiAgent" onchange="loadClienti()"><option value="">tutti gli agenti</option><option>Gino</option><option>Linda</option><option>UFFICIO</option></select>
+<input id="filtroFonteCliente" list="clientiFonteValues" placeholder="qualsiasi provenienza" onchange="loadClienti()" aria-label="Provenienza"><datalist id="clientiFonteValues"></datalist>
+<button id="clientiStoricoBtn" aria-pressed="false" onclick="window.__rStorico=!window.__rStorico;this.setAttribute('aria-pressed',String(window.__rStorico));loadClienti()">storico</button>
+<button disabled title="Etichette non ancora collegate">◆</button><button disabled title="Operazioni multiple non ancora collegate">⚒ ⇩</button><button class="legacy-search-btn" onclick="loadClienti()" title="Cerca">⌕</button>
+</div></div><div class="legacy-client-extra"><span id="clientiCountVisible">Risultati: -</span><span class="legacy-client-pages" id="clientiPages"></span><span style="margin-left:auto">ordina per: <select id="clientiSort" onchange="loadClienti()"><option value="created_at">data inserimento</option><option value="nome">cognome / nome</option><option value="comune">comune</option></select><button id="clientiSortDir" data-asc="false" onclick="this.dataset.asc=String(this.dataset.asc!=='true');this.textContent=this.dataset.asc==='true'?'⌃':'⌄';loadClienti()">⌄</button></span></div><div class="legacy-client-lower"><button disabled title="Invio multiplo non ancora disponibile">0 ✉</button><button onclick="openClienteModal()" title="Nuovo cliente">✚</button><span style="margin-left:auto"><button onclick="openCsvImportModal()">Importa CSV</button></span></div></div>
           <div id="clientiLoading" class="loading" style="display:none"><div class="spinner"></div> Caricamento...</div>
           <div id="clientiEmpty" class="empty-state" style="display:none">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
             <h3>Nessun cliente</h3>
             <p style="font-size:0.82rem;color:var(--caffe2)">Aggiungi il primo cliente o aspetta iscrizioni alla newsletter</p>
           </div>
-          <table id="clientiTable" style="display:none">
-            <thead>
-              <tr>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Telefono</th>
-                <th>Tipo</th>
-                <th>Azienda / P.IVA</th>
-                <th>Fonte</th>
-                <th>Cerca</th>
-                <th>Budget</th>
-                <th>Data</th>
-                <th>Azioni</th>
-              </tr>
-            </thead>
-            <tbody id="clientiBody"></tbody>
+          <table id="clientiTable" style="display:none"><thead><tr><th></th><th>Cognome / Nome / Contatti</th><th>Ragione sociale</th><th>N.Eventi</th><th>Nazione</th><th>Comune/Prov.</th><th>Zona</th><th>Indirizzo</th><th>Data ultima mod.</th><th>Data ins.</th><th>Ultimo cont.</th><th>Etichette</th><th>Operazioni</th></tr></thead><tbody id="clientiBody"></tbody>
           </table>
         </div>
 
@@ -9189,43 +9165,31 @@ function setClientiNote(msg) {
   n.style.display = msg ? 'block' : 'none';
 }
 
-async function loadClienti() {
-  const myReq = ++_clientiReqId;
-  const loading = document.getElementById('clientiLoading');
-  const empty = document.getElementById('clientiEmpty');
-  const table = document.getElementById('clientiTable');
-  const tbody = document.getElementById('clientiBody');
-
-  loading.style.display = 'flex';
-  empty.style.display = 'none';
-  table.style.display = 'none';
-
-  try {
-    const fonte = document.getElementById('filtroFonteCliente').value;
-    let query = sb.from('clienti').select('*', { count: 'exact' }).order('created_at', { ascending: false });
-    if (fonte) query = query.eq('fonte', fonte);
-    query = window.__rStorico ? query.eq('storico', true) : query.eq('storico', false);
-
-    const { data, error, count } = await query;
-    if (error) throw error;
-    if (myReq !== _clientiReqId) return; // risposta vecchia: una ricerca piu recente e in corso
-
-    allClienti = data || [];
-    setClientiNote(count && allClienti.length < count ? 'Mostrati i primi ' + allClienti.length + ' clienti su ' + count + '. Per trovare gli altri usa la ricerca: cerca su tutto l\'archivio. I contatori per fonte (con *) contano solo i clienti caricati.' : '');
-    renderClientiTable();
-    updateClientiStats();
-    refreshClientiTotale();
-    maybePromptProprietariClientiSync();
-  } catch(err) {
-    console.error('Error loading clienti:', err);
-    // If table doesn't exist, show empty state with hint
-    empty.style.display = 'block';
-    empty.querySelector('h3').textContent = 'Tabella clienti non trovata';
-    empty.querySelector('p').textContent = 'Crea la tabella "clienti" in Supabase (vedi guida nelle Impostazioni)';
-  } finally {
-    loading.style.display = 'none';
-  }
+let clientiPage=0,clientiTotal=0;const clientiPageSize=50;
+let clientiFonteLoaded=false;
+async function loadClientiFonteValues(){if(clientiFonteLoaded)return;const values=new Set();try{for(let offset=0;;offset+=1000){const r=await sb.from('clienti').select('fonte').order('id',{ascending:true}).range(offset,offset+999);if(r.error)throw r.error;for(const row of r.data||[])if(row.fonte!==null&&row.fonte!=='')values.add(row.fonte);if((r.data||[]).length<1000)break;}const list=document.getElementById('clientiFonteValues');if(list)list.innerHTML=[...values].sort((a,b)=>a.localeCompare(b,'it')).map(v=>'<option value="'+escHtml(v)+'"></option>').join('');clientiFonteLoaded=true;}catch(e){setClientiNote('Elenco provenienze non completo: resta possibile cercare il valore esatto.');}}
+async function loadClienti(page=0) {
+ const myReq=++_clientiReqId;
+ const loading=document.getElementById('clientiLoading'),empty=document.getElementById('clientiEmpty'),table=document.getElementById('clientiTable');
+ loading.style.display='flex';empty.style.display='none';
+ try{
+  const fonte=document.getElementById('filtroFonteCliente').value;
+  const agent=document.getElementById('clientiAgent').value;
+  const sort=document.getElementById('clientiSort').value;
+  const asc=document.getElementById('clientiSortDir').dataset.asc==='true';
+  const q=document.getElementById('searchClienti').value.trim().replace(/[%,()*]/g,' ').trim();
+  let query=sb.from('clienti').select('*',{count:'exact'}).eq('storico',Boolean(window.__rStorico));
+  if(fonte)query=query.eq('fonte',fonte);
+  if(agent)query=query.eq('agente_assegnato',agent);
+  if(q){const cols=['nome','email','telefono','ragione_sociale','partita_iva','codice_fiscale','indirizzo_cliente','note','nome_proprio','cognome','comune','cellulare'];query=query.or(cols.map(c=>c+'.ilike.%'+q+'%').join(','));}
+  query=query.order(sort,{ascending:asc,nullsFirst:false}).order('id',{ascending:true}).range(page*clientiPageSize,(page+1)*clientiPageSize-1);
+  const {data,error,count}=await query;if(error)throw error;if(myReq!==_clientiReqId)return;
+  clientiTotal=count||0;const last=Math.max(0,Math.ceil(clientiTotal/clientiPageSize)-1);if(page>last)return loadClienti(last);
+  clientiPage=page;allClienti=data||[];setClientiNote('');renderClientiTable();renderClientiPages();updateClientiStats();loadClientiFonteValues();
+ }catch(err){if(myReq!==_clientiReqId)return;table.style.display='none';empty.style.display='block';empty.querySelector('h3').textContent='Clienti non leggibili';empty.querySelector('p').textContent=err.message||'Riprovare la ricerca';}
+ finally{if(myReq===_clientiReqId)loading.style.display='none';}
 }
+function renderClientiPages(){const box=document.getElementById('clientiPages');if(!box)return;const pages=Math.max(1,Math.ceil(clientiTotal/clientiPageSize));box.innerHTML='<button type="button" data-page="'+(clientiPage-1)+'" '+(clientiPage===0?'disabled':'')+'>‹</button><span>Pagina '+(clientiPage+1)+' di '+pages+'</span><button type="button" data-page="'+(clientiPage+1)+'" '+(clientiPage>=pages-1?'disabled':'')+'>›</button>';box.onclick=e=>{const b=e.target.closest('[data-page]');if(b&&!b.disabled)loadClienti(Number(b.dataset.page));};}
 
 function renderClientiTable() {
   const empty = document.getElementById('clientiEmpty');
@@ -9233,6 +9197,8 @@ function renderClientiTable() {
   const tbody = document.getElementById('clientiBody');
 
   if (allClienti.length === 0) {
+    const count=document.getElementById('clientiCountVisible');if(count)count.textContent='Risultati: 0';
+    empty.querySelector('h3').textContent='Nessun cliente';empty.querySelector('p').textContent='Nessun risultato per i filtri scelti.';
     empty.style.display = 'block';
     table.style.display = 'none';
     return;
@@ -9250,7 +9216,9 @@ function renderClientiTable() {
     proprietario_immobile: 'badge-oro'
   };
 
-  tbody.innerHTML = allClienti.map(c => {
+  const shown=allClienti;
+  const count=document.getElementById('clientiCountVisible');if(count)count.textContent='Risultati: '+clientiTotal+' | '+shown.length+' in questa pagina';
+  tbody.innerHTML = shown.map(c => {
     const badgeClass = fonteColors[c.fonte] || 'badge-grigio';
     const dateStr = c.created_at ? new Date(c.created_at).toLocaleDateString('it-IT') : '';
     const cercaInfo = [c.tipo_operazione_cercata, c.tipologia_cercata, c.zona_cercata].filter(Boolean).join(' · ') || c.interesse || '—';
@@ -9261,31 +9229,9 @@ function renderClientiTable() {
     const azInfo = c.tipo_cliente === 'azienda' ? [c.ragione_sociale, c.partita_iva ? 'P.IVA: ' + c.partita_iva : ''].filter(Boolean).join('<br>') : '—';
     const docsCount = Array.isArray(c.documenti_cliente) ? c.documenti_cliente.length : 0;
     return `<tr data-nome="${escHtml(c.nome||'')}" data-email="${escHtml(c.email||'')}" data-telefono="${escHtml(c.telefono||'')}" data-ragione="${escHtml(c.ragione_sociale||'')}" data-piva="${escHtml(c.partita_iva||'')}" data-indirizzo="${escHtml(c.indirizzo_cliente||'')}">
-      <td style="font-weight:600"><a href="#" onclick="RighettoCliente.open('${c.id}');return false;" title="Apri scheda cliente" style="color:inherit;text-decoration:underline dotted">${escHtml(c.nome || '')}</a>${docsCount ? ' <span title="' + docsCount + ' documenti" style="color:var(--oro);font-size:0.7rem">📎' + docsCount + '</span>' : ''}</td>
-      <td><a href="mailto:${escHtml(c.email || '')}" style="color:var(--nero)">${escHtml(c.email || '')}</a></td>
-      <td>${escHtml(c.telefono || '—')}</td>
-      <td>${tipoCliente}</td>
-      <td style="font-size:0.74rem;max-width:160px">${azInfo}</td>
-      <td><span class="badge ${badgeClass}">${escHtml(c.fonte || '')}</span></td>
-      <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(cercaInfo)}">${escHtml(cercaInfo)}</td>
-      <td style="font-size:0.72rem;white-space:nowrap">${budgetInfo}</td>
-      <td style="white-space:nowrap">${dateStr}</td>
-      <td>
-        <div style="display:flex;gap:4px;flex-wrap:wrap">
-          <button class="btn-icon" onclick="RighettoCliente.open('${c.id}')" title="Apri scheda">👁️</button>
-          <button class="btn-icon" onclick="editCliente('${c.id}')" title="Modifica">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-          </button>
-          <button class="btn-icon" onclick="showMatchingImmobili('${c.id}')" title="Trova immobili compatibili" style="color:#1565c0">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </button>
-          ${waLink ? '<a href="' + waLink + '" target="_blank" class="btn-icon" title="WhatsApp" style="color:#25d366;text-decoration:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.37c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.49-.89-.8-1.49-1.78-1.67-2.08-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35zm-5.44 7.43h-.02a9.75 9.75 0 0 1-4.97-1.36l-.36-.21-3.71.97.99-3.63-.23-.37a9.75 9.75 0 0 1-1.5-5.19C2.24 6.54 6.69 2.1 12.06 2.1a9.72 9.72 0 0 1 6.9 2.86 9.72 9.72 0 0 1 2.86 6.9c0 5.37-4.37 9.74-9.79 9.74zm8.33-18.06A11.62 11.62 0 0 0 12.05.1C5.56.1.21 5.44.21 11.92a11.8 11.8 0 0 0 1.58 5.9L0 24l6.34-1.66a11.82 11.82 0 0 0 5.66 1.44h.01c6.49 0 11.84-5.34 11.84-11.82a11.74 11.74 0 0 0-3.49-8.22z"/></svg></a>' : ''}
-          <button class="btn-icon" onclick="deleteClienteById('${c.id}')" title="Elimina" style="color:var(--rosso)">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-          </button>
-        </div>
-      </td>
-    </tr>`;
+<td><input type="checkbox" disabled title="Selezione multipla non ancora collegata"></td><td><a href="#" onclick="RighettoCliente.open('${c.id}');return false;">${escHtml(c.nome||'')}</a><div class="client-contacts">${c.telefono?'▯ '+escHtml(c.telefono)+' <span class="phone-tools"><span title="QR non disponibile">▦</span> <span title="SMS non disponibile">●</span> '+''+'</span><br>':''}${c.email?'<a href="mailto:'+escHtml(c.email)+'">✉ '+escHtml(c.email)+'</a>':''}</div></td>
+<td>${escHtml(c.ragione_sociale||'')}</td><td title="Eventi collegati caricati, non storico completo">n.d.</td><td>${escHtml(c.nazione||'')}</td><td>${escHtml([c.comune,c.provincia].filter(Boolean).join(' '))}</td><td>${escHtml(c.zona_residenza||'')}</td><td>${escHtml(c.indirizzo_cliente||'')}</td><td title="Data modifica non disponibile"></td><td>${dateStr}</td><td title="Ultimo contatto non disponibile"></td><td title="Etichette non collegate"></td>
+<td><div class="client-ops"><button onclick="RighettoCliente.open('${c.id}')" title="Scheda cliente">⌕</button><button onclick="RighettoCliente.open('${c.id}','cron')" title="Cronistoria">◷</button><button disabled title="Stampa non ancora disponibile">▧</button><button onclick="showMatchingImmobili('${c.id}')" title="Immobili compatibili">⌂</button><button disabled title="Nuova attività: usare vecchio gestionale">⊕</button><button disabled title="Nuovo appuntamento: usare vecchio gestionale">▣</button><button disabled title="SMS non disponibile">▯</button><button onclick="editCliente('${c.id}')" title="Modifica cliente">✎</button><button onclick="RighettoCliente.open('${c.id}')" title="Archivio dal menuOperazioni">♜</button></div></td></tr>`;
   }).join('');
 }
 
@@ -9317,29 +9263,7 @@ function updateClientiStats() {
 }
 
 let _clientiSearchTimer = null;
-function filterClientiTable() {
-  const q = document.getElementById('searchClienti').value.trim();
-  clearTimeout(_clientiSearchTimer);
-  if (!q) { _clientiReqId++; loadClienti(); return; }
-  if (q.length < 2) return;
-  // Ricerca sul database (non solo sui primi 1000 caricati)
-  _clientiSearchTimer = setTimeout(async () => {
-    const safe = q.replace(/[%,()*]/g, ' ').trim();
-    if (!safe) return;
-    const cols = ['nome','email','telefono','ragione_sociale','partita_iva','codice_fiscale','indirizzo_cliente','note'];
-    const myReq = ++_clientiReqId;
-    let query = sb.from('clienti').select('*').or(cols.map(c => c + '.ilike.%' + safe + '%').join(',')).order('created_at', { ascending: false }).limit(200);
-    const fonte = document.getElementById('filtroFonteCliente').value;
-    if (fonte) query = query.eq('fonte', fonte);
-    const { data, error } = await query;
-    if (myReq !== _clientiReqId || document.getElementById('searchClienti').value.trim() !== q) return;
-    if (error) { toast('Ricerca non riuscita: ' + error.message, 'error'); return; }
-    allClienti = data || [];
-    renderClientiTable();
-    setClientiNote(allClienti.length === 200 ? 'Mostrati i primi 200 risultati: restringi la ricerca per vedere gli altri.' : '');
-    toast(allClienti.length + ' clienti trovati' + (allClienti.length === 200 ? ' (mostrati i primi 200: restringi la ricerca)' : ''), 'info');
-  }, 400);
-}
+function filterClientiTable(){clearTimeout(_clientiSearchTimer);++_clientiReqId;_clientiSearchTimer=setTimeout(()=>loadClienti(),250);}
 
 let currentClienteDocumenti = [];
 
@@ -9349,17 +9273,7 @@ function toggleCampiAzienda() {
 }
 
 async function uploadClienteDocumenti(files) {
-  for (const file of files) {
-    if (file.size > 5 * 1024 * 1024) { toast('File troppo grande (max 5MB): ' + file.name, 'error'); continue; }
-    const ext = file.name.split('.').pop().toLowerCase();
-    const path = 'clienti-docs/' + Date.now() + '-' + Math.random().toString(36).substr(2,6) + '.' + ext;
-    const { data, error } = await sb.storage.from('documenti').upload(path, file, { cacheControl: '3600', upsert: false });
-    if (error) { toast('Errore upload: ' + error.message, 'error'); continue; }
-    const { data: urlData } = sb.storage.from('documenti').getPublicUrl(path);
-    currentClienteDocumenti.push({ nome: file.name, url: urlData.publicUrl, tipo: ext });
-    toast('Caricato: ' + file.name, 'success');
-  }
-  renderClienteDocumenti();
+  toast('Upload documenti cliente sospeso: serve collegamento all’archivio privato, nessun file viene caricato pubblicamente.', 'error');
 }
 
 function renderClienteDocumenti() {
@@ -9441,6 +9355,7 @@ function openClienteModal(id) {
   toggleCampiAzienda();
   setClienteRuoloRubricaUI('cerca');
   document.getElementById('btnDeleteCliente').style.display = 'none';
+  if(window.righettoExtraFill)righettoExtraFill(null);
   document.getElementById('clienteModal').classList.add('open');
 }
 
@@ -9452,7 +9367,7 @@ function editCliente(id) {
   document.getElementById('clienteNome').value = c.nome || '';
   document.getElementById('clienteEmail').value = c.email || '';
   document.getElementById('clienteTelefono').value = c.telefono || '';
-  document.getElementById('clienteFonte').value = c.fonte || 'manuale';
+  const fonteValue=c.fonte??'';const fonteSelect=document.getElementById('clienteFonte');if(![...fonteSelect.options].some(o=>o.value===fonteValue)){const o=document.createElement('option');o.value=fonteValue;o.textContent=fonteValue||'(vuota)';fonteSelect.append(o);}fonteSelect.value=fonteValue;
   document.getElementById('clienteTipoOp').value = c.tipo_operazione_cercata || '';
   document.getElementById('clienteTipologia').value = c.tipologia_cercata || '';
   document.getElementById('clienteZona').value = c.zona_cercata || '';
@@ -9475,6 +9390,7 @@ function editCliente(id) {
   toggleCampiAzienda();
   setClienteRuoloRubricaUI(getClienteRuoloRubricaFromRecord(c));
   document.getElementById('btnDeleteCliente').style.display = 'inline-flex';
+  if(window.righettoExtraFill)righettoExtraFill(c);
   document.getElementById('clienteModal').classList.add('open');
 }
 
@@ -9482,7 +9398,7 @@ function closeClienteModal() {
   document.getElementById('clienteModal').classList.remove('open');
 }
 
-async function saveCliente() {
+async function saveCliente(openAfterSave = false) {
   const id = document.getElementById('clienteEditId').value;
   const ruoloRubrica = document.getElementById('clienteRuoloProprietario').checked ? 'proprietario' : 'cerca';
   const isProprietario = ruoloRubrica === 'proprietario';
@@ -9509,9 +9425,12 @@ async function saveCliente() {
     partita_iva: document.getElementById('clientePartitaIva').value.trim() || null,
     pec: document.getElementById('clientePec').value.trim() || null,
     sdi: document.getElementById('clienteSdi').value.trim().toUpperCase() || null,
-    documenti_cliente: currentClienteDocumenti
+    documenti_cliente: currentClienteDocumenti,
+    ...(window.righettoExtraRead ? righettoExtraRead() : {})
   };
 
+  const invalidExtra=[...document.querySelectorAll('[data-client-extra]')].find(el=>!el.checkValidity());
+  if(invalidExtra){invalidExtra.reportValidity();return;}
   if (!data.nome && !data.email) {
     toast('Inserisci almeno nome o email', 'error');
     return;
@@ -9536,7 +9455,7 @@ async function saveCliente() {
     ownerRefreshCliente({ ...data, id: savedId });
     if (document.getElementById('ownerModal')) await loadImmobili();
     const propIdField = document.getElementById('f_proprietario_id');
-    if (savedId && String(propIdField.value) === String(savedId)) {
+    if (savedId && propIdField && String(propIdField.value) === String(savedId)) {
       document.getElementById('f_proprietario_nome').value=data.nome || data.ragione_sociale || '';
       document.getElementById('f_proprietario_tel').value=data.telefono || '';
       document.getElementById('f_proprietario_email').value=data.email || '';
@@ -9551,9 +9470,11 @@ async function saveCliente() {
           || allClienti.find(c => (data.email && c.email === data.email) || (data.nome && c.nome === data.nome));
         if (match) { _proprietarioCache = [match]; selectProprietario(match.id); }
         toast('Cliente salvato — selezionato come proprietario.', 'success');
-        return;
+        return savedId;
       }
     } catch (e) {}
+    if (openAfterSave && savedId && window.RighettoCliente) await RighettoCliente.open(savedId);
+    return savedId;
   } catch(err) {
     console.error('Save cliente error:', err);
     toast('Errore: ' + (err.message || 'Errore salvataggio'), 'error');
@@ -18071,8 +17992,8 @@ window.showSection('home');
 </script>
 <script src="js/agenda-event-types.js?v=1"></script>
 <script>window.RIGHETTO_SYNC_ATTIVA=true;</script>
-<script src="js/admin-agenda.js?v=8"></script>
-<script src="js/admin-cliente-scheda.js?v=3"></script>
+<script src="js/admin-agenda.js?v=9"></script>
+<script src="js/admin-cliente-scheda.js?v=4"></script>
 <script src="js/admin-immobile-operazioni.js?v=1"></script>
 <script src="js/admin-blocco2.js?v=1"></script>
 <script>RighettoAgenda.init(document.getElementById("righetto-operational-agenda"));</script>
@@ -18082,6 +18003,7 @@ window.showSection('home');
 async function go(){if(done||busy)return;busy=true;try{if(typeof sb==='undefined')throw 0;var u=await sb.auth.getUser();if(!u.data.user)throw 0;done=true;RighettoAttivita.init(el,{store:RighettoAttivita.dbStore(sb)});}catch(e){msg('Attivit\u00e0: accedi per vedere le pratiche.');}busy=false;}
 msg('Attivit\u00e0: caricamento...');go();setInterval(go,3000);})();</script>
 <script src="js/admin-mobile.js?v=7"></script>
+<script src="js/admin-cliente-layout.js?v=20261026a"></script>
 </body>
 </html>
 
