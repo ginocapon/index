@@ -4,8 +4,7 @@
 Genera perizia immobiliare PDF Righetto — template JSON riutilizzabile.
 
 Uso:
-  python scripts/genera_perizia.py scripts/perizia_config_cliente2.json
-  python scripts/genera_perizia.py   # default turato se presente
+  python scripts/genera_perizia.py <config.json>   (es. scripts/perizia_config_cliente.json)
 
 Dipendenze: pymupdf, reportlab, pillow
 """
@@ -787,7 +786,10 @@ def prepare_attachments(cfg: dict, tmp: Path) -> dict[str, Path | list[Path]]:
 
 
 def main() -> int:
-    cfg_path = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "scripts" / "perizia_config_cliente.json"
+    if len(sys.argv) < 2:
+        print("Uso: python scripts/genera_perizia.py <config.json>")
+        return 2
+    cfg_path = Path(sys.argv[1])
     if not cfg_path.is_file():
         print(f"Config non trovato: {cfg_path}")
         return 2
