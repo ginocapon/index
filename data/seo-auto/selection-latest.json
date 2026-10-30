@@ -1,6 +1,6 @@
 {
-  "cycle": "2026W43",
-  "date": "2026-10-23",
+  "cycle": "2026W44",
+  "date": "2026-10-30",
   "data_source": "gsc_csv",
   "stale": false,
   "limitations": [
@@ -31,14 +31,14 @@
         }
       },
       "cooldown": false,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "inbound": 0,
       "title": "Blocca il prezzo della luce",
       "meta": "Righetto Immobiliare — agenzia a Limena (PD), dal 2000. Vendita, affitto e valutazioni su Padova e provincia.",
       "issues": [
         "sitemap_noindex"
       ],
-      "intervention_id": "SEO-2026W43-landing/email-offerta-luce"
+      "intervention_id": "SEO-2026W44-landing/email-offerta-luce"
     },
     {
       "url": "/landing/offerta-enel-gas",
@@ -61,12 +61,12 @@
         }
       },
       "cooldown": false,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "inbound": 0,
       "title": "ENEL Fix Star Gas 0,37 €/SMC — Offerta | Righetto Immobiliare",
       "meta": "Offerta ENEL Fix Star Gas: 0,37 €/SMC + 12 €/mese. Prezzo bloccato, zero vincoli, zero costi aggiuntivi. Valida fino al 31/03/2026.",
       "issues": [],
-      "intervention_id": "SEO-2026W43-landing/offerta-enel-gas"
+      "intervention_id": "SEO-2026W44-landing/offerta-enel-gas"
     }
   ],
   "excluded_cooldown": [
@@ -76,7 +76,7 @@
       "reasons": [
         "CTR 0.5% vs atteso ~4% a pos. 6.4 (benchmark stima) su 1943 impr.: ~69 clic mancati",
         "posizione media 6.4: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -85,7 +85,7 @@
       "reasons": [
         "CTR 1.7% vs atteso ~3% a pos. 7.3 (benchmark stima) su 4188 impr.: ~54 clic mancati",
         "posizione media 7.3: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -93,7 +93,7 @@
       "score": 80.8,
       "reasons": [
         "CTR 0.6% vs atteso ~10% a pos. 3.2 (benchmark stima) su 535 impr.: ~51 clic mancati",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -102,7 +102,7 @@
       "reasons": [
         "CTR 1.9% vs atteso ~3% a pos. 7.0 (benchmark stima) su 3909 impr.: ~43 clic mancati",
         "posizione media 7.0: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -112,7 +112,7 @@
         "CTR 0.0% vs atteso ~5% a pos. 4.8 (benchmark stima) su 412 impr.: ~21 clic mancati",
         "posizione media 4.8: margine verso top 3",
         "sitemap incoerente: sitemap_template_senza_contenuto (Google riceve segnali contraddittori)",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -121,7 +121,7 @@
       "reasons": [
         "CTR 1.0% vs atteso ~3% a pos. 7.3 (benchmark stima) su 936 impr.: ~19 clic mancati",
         "posizione media 7.3: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -130,7 +130,7 @@
       "reasons": [
         "posizione media 5.6: margine verso top 3",
         "solo 1 pagine interne linkano questa URL (soglia 10)",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -139,7 +139,7 @@
       "reasons": [
         "CTR 0.4% vs atteso ~4% a pos. 6.0 (benchmark stima) su 511 impr.: ~18 clic mancati",
         "posizione media 6.0: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -147,7 +147,7 @@
       "score": 25.4,
       "reasons": [
         "CTR 0.3% vs atteso ~7% a pos. 3.7 (benchmark stima) su 377 impr.: ~25 clic mancati",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -156,7 +156,7 @@
       "reasons": [
         "CTR 0.0% vs atteso ~5% a pos. 4.9 (benchmark stima) su 129 impr.: ~6 clic mancati",
         "posizione media 4.9: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -165,7 +165,7 @@
       "reasons": [
         "CTR 1.9% vs atteso ~4% a pos. 6.1 (benchmark stima) su 160 impr.: ~3 clic mancati",
         "posizione media 6.1: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -173,7 +173,7 @@
       "score": 16.0,
       "reasons": [
         "posizione media 5.7: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -182,7 +182,7 @@
       "reasons": [
         "posizione media 6.5: margine verso top 3",
         "on-page: title_troncato",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -191,7 +191,7 @@
       "reasons": [
         "posizione media 7.3: margine verso top 3",
         "on-page: title_troncato",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -200,7 +200,7 @@
       "reasons": [
         "CTR 0.0% vs atteso ~4% a pos. 6.4 (benchmark stima) su 122 impr.: ~5 clic mancati",
         "posizione media 6.4: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -209,7 +209,7 @@
       "reasons": [
         "CTR 0.0% vs atteso ~1% a pos. 14.3 (benchmark stima) su 110 impr.: ~1 clic mancati",
         "posizione media 14.3: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -218,7 +218,7 @@
       "reasons": [
         "CTR 0.0% vs atteso ~2% a pos. 8.9 (benchmark stima) su 197 impr.: ~4 clic mancati",
         "posizione media 8.9: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -227,7 +227,7 @@
       "reasons": [
         "CTR 0.9% vs atteso ~2% a pos. 8.6 (benchmark stima) su 338 impr.: ~4 clic mancati",
         "posizione media 8.6: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -236,7 +236,7 @@
       "reasons": [
         "CTR 0.9% vs atteso ~4% a pos. 6.1 (benchmark stima) su 112 impr.: ~3 clic mancati",
         "posizione media 6.1: margine verso top 3",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     },
     {
@@ -245,7 +245,7 @@
       "reasons": [
         "posizione media 4.6: margine verso top 3",
         "on-page: title_troncato",
-        "cooldown: ultimo refresh 2026-10-23 senza 28 gg di dati GSC successivi"
+        "cooldown: ultimo refresh 2026-10-30 senza 28 gg di dati GSC successivi"
       ]
     }
   ],

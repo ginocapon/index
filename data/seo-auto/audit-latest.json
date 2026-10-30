@@ -1,21 +1,21 @@
 {
-  "date": "2026-10-23",
-  "pages_in_sitemap": 230,
+  "date": "2026-10-30",
+  "pages_in_sitemap": 231,
   "pages": {
     "/": {
       "title": "Immobiliare Padova: Vendi, Affitta o Cerca Casa | Righetto",
-      "meta": "Chi vende trova un alleato a Limena e in provincia: valutazione gratuita, vendita e affitto. Cerchi casa? Annunci in 101 comuni. Dal 2000.",
+      "meta": "Chi vende trova un alleato a Limena e in provincia: valutazione gratuita, vendita e affitto. Cerchi casa? Annunci a Padova e provincia. Dal 2000.",
       "canonical": "https://righettoimmobiliare.it/",
       "noindex": false,
       "h1": 1,
       "h2": 15,
-      "words": 2157,
+      "words": 1555,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 1,
       "tier": "pillar",
-      "inbound": 207,
-      "last_modified": "2026-10-23",
+      "inbound": 208,
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -31,8 +31,8 @@
       "forms": 0,
       "jsonld": 2,
       "tier": "acquirente",
-      "inbound": 186,
-      "last_modified": "2026-10-23",
+      "inbound": 187,
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -48,8 +48,8 @@
       "forms": 0,
       "jsonld": 2,
       "tier": "pillar",
-      "inbound": 150,
-      "last_modified": "2026-10-23",
+      "inbound": 151,
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -66,7 +66,7 @@
       "jsonld": 1,
       "tier": "owner_conversione",
       "inbound": 17,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -83,7 +83,7 @@
       "jsonld": 1,
       "tier": "owner_conversione",
       "inbound": 11,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -100,7 +100,7 @@
       "jsonld": 3,
       "tier": "owner_conversione",
       "inbound": 75,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -117,7 +117,7 @@
       "jsonld": 1,
       "tier": "owner_conversione",
       "inbound": 84,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -134,7 +134,7 @@
       "jsonld": 3,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -151,7 +151,7 @@
       "jsonld": 3,
       "tier": "contenuto",
       "inbound": 44,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -168,7 +168,7 @@
       "jsonld": 1,
       "tier": "owner_conversione",
       "inbound": 121,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -185,7 +185,7 @@
       "jsonld": 1,
       "tier": "owner_conversione",
       "inbound": 48,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -202,7 +202,7 @@
       "jsonld": 3,
       "tier": "contenuto",
       "inbound": 26,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -219,11 +219,9 @@
       "jsonld": 3,
       "tier": "pillar",
       "inbound": 64,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
-      "notes": [
-        "non_indicizzata_recente_2026-10-23"
-      ]
+      "notes": []
     },
     "/gino-capon": {
       "title": "Gino Capon — Agente Immobiliare Padova | Righetto Immobiliare",
@@ -237,8 +235,8 @@
       "forms": 0,
       "jsonld": 3,
       "tier": "contenuto",
-      "inbound": 145,
-      "last_modified": "2026-10-23",
+      "inbound": 146,
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_61"
@@ -257,7 +255,7 @@
       "jsonld": 3,
       "tier": "contenuto",
       "inbound": 7,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_63"
@@ -275,12 +273,10 @@
       "forms": 1,
       "jsonld": 1,
       "tier": "contenuto",
-      "inbound": 185,
-      "last_modified": "2026-10-23",
+      "inbound": 186,
+      "last_modified": "2026-10-30",
       "issues": [],
-      "notes": [
-        "non_indicizzata_recente_2026-10-23"
-      ]
+      "notes": []
     },
     "/contatti": {
       "title": "Contatti — Righetto Immobiliare Padova",
@@ -294,12 +290,10 @@
       "forms": 1,
       "jsonld": 2,
       "tier": "pillar",
-      "inbound": 206,
-      "last_modified": "2026-10-23",
+      "inbound": 207,
+      "last_modified": "2026-10-30",
       "issues": [],
-      "notes": [
-        "non_indicizzata_recente_2026-10-23"
-      ]
+      "notes": []
     },
     "/blog": {
       "title": "Blog Immobiliare Padova — Righetto Immobiliare",
@@ -313,8 +307,8 @@
       "forms": 0,
       "jsonld": 2,
       "tier": "contenuto",
-      "inbound": 193,
-      "last_modified": "2026-10-23",
+      "inbound": 194,
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -331,7 +325,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 11,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -348,11 +342,9 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 29,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
-      "notes": [
-        "non_indicizzata_recente_2026-10-23"
-      ]
+      "notes": []
     },
     "/blog-comprare-affittare-padova": {
       "title": "Comprare o Affittare Casa nel Padovano? Analisi Dati Reali su 20 Anni",
@@ -367,7 +359,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 21,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_69"
@@ -386,7 +378,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -403,7 +395,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 10,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -420,7 +412,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 8,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -437,7 +429,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 67,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -454,7 +446,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 79,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -471,7 +463,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 75,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_66"
@@ -490,7 +482,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 71,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -507,7 +499,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 69,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -524,7 +516,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 69,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_65"
@@ -543,7 +535,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 67,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_69"
@@ -562,7 +554,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 67,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -579,7 +571,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 83,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -590,17 +582,15 @@
       "noindex": false,
       "h1": 1,
       "h2": 19,
-      "words": 2717,
+      "words": 2725,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
-      "notes": [
-        "non_indicizzata_recente_2026-10-23"
-      ]
+      "notes": []
     },
     "/blog-affitti-studenti-settembre-padova-proprietario-2026": {
       "title": "Affitti studenti Padova settembre 2026",
@@ -609,13 +599,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 15,
-      "words": 2555,
+      "words": 2549,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -626,13 +616,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 20,
-      "words": 2819,
+      "words": 2813,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -643,13 +633,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 15,
-      "words": 2745,
+      "words": 2721,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -660,13 +650,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 18,
-      "words": 2764,
+      "words": 2758,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -677,13 +667,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 21,
-      "words": 2776,
+      "words": 2770,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -694,13 +684,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 17,
-      "words": 2710,
+      "words": 2704,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -711,13 +701,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 17,
-      "words": 2560,
+      "words": 2554,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "owner_contenuto",
-      "inbound": 7,
-      "last_modified": "2026-10-23",
+      "inbound": 8,
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -728,13 +718,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 16,
-      "words": 1612,
+      "words": 1594,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "owner_contenuto",
-      "inbound": 5,
-      "last_modified": "2026-10-23",
+      "inbound": 6,
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -745,13 +735,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 16,
-      "words": 1702,
+      "words": 1696,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -762,13 +752,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 16,
-      "words": 1481,
+      "words": 1475,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -779,13 +769,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 16,
-      "words": 1522,
+      "words": 1516,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -796,13 +786,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 11,
-      "words": 1116,
+      "words": 1110,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "owner_contenuto",
-      "inbound": 4,
-      "last_modified": "2026-10-23",
+      "inbound": 5,
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -813,13 +803,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 11,
-      "words": 930,
+      "words": 924,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -830,13 +820,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 10,
-      "words": 934,
+      "words": 928,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -847,13 +837,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 10,
-      "words": 849,
+      "words": 843,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "contenuto",
-      "inbound": 5,
-      "last_modified": "2026-10-23",
+      "inbound": 6,
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -864,13 +854,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 11,
-      "words": 866,
+      "words": 860,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 4,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -887,7 +877,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -904,7 +894,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -921,7 +911,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -938,7 +928,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 9,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -955,7 +945,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 4,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -972,7 +962,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -989,7 +979,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1006,7 +996,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1023,7 +1013,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1040,7 +1030,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_64"
@@ -1059,7 +1049,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1076,7 +1066,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1093,7 +1083,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1110,7 +1100,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1127,7 +1117,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1144,7 +1134,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 33,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1161,7 +1151,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 24,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1178,7 +1168,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 38,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1195,7 +1185,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 26,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_70"
@@ -1214,7 +1204,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 25,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1231,7 +1221,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 6,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1248,7 +1238,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 25,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1265,7 +1255,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 8,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1282,7 +1272,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 22,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1299,7 +1289,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1316,7 +1306,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1333,7 +1323,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 21,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1350,7 +1340,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1367,11 +1357,9 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 16,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
-      "notes": [
-        "non_indicizzata_recente_2026-10-23"
-      ]
+      "notes": []
     },
     "/zona-abano-terme": {
       "title": "Case in Vendita e Affitto a Abano Terme | Righetto Immobiliare",
@@ -1386,7 +1374,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 5,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_62"
@@ -1405,11 +1393,10 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 12,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
-        "title_61_70_68",
-        "non_indicizzata_recente_2026-10-23"
+        "title_61_70_68"
       ]
     },
     "/blog-tempi-vendita-casa-padova": {
@@ -1425,11 +1412,9 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 7,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
-      "notes": [
-        "non_indicizzata_recente_2026-10-23"
-      ]
+      "notes": []
     },
     "/articolo-riqualificazione": {
       "title": "Riqualificazione Ca' Marcello Mestre: 70 Milioni — Righetto",
@@ -1444,7 +1429,7 @@
       "jsonld": 2,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1461,7 +1446,7 @@
       "jsonld": 1,
       "tier": "owner_conversione",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1478,7 +1463,7 @@
       "jsonld": 1,
       "tier": "acquirente",
       "inbound": 22,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_62"
@@ -1497,7 +1482,7 @@
       "jsonld": 1,
       "tier": "acquirente",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_63"
@@ -1505,18 +1490,18 @@
     },
     "/landing-valutazione": {
       "title": "Valutazione Casa Padova Gratuita | Righetto",
-      "meta": "Quanto vale la tua casa a Padova? Valutazione gratuita in 24h con dati OMI e comparabili di zona. Righetto Immobiliare, dal 2000 al tuo fianco.",
+      "meta": "Quanto vale la tua casa a Padova? Richiedi una valutazione gratuita del tuo immobile. Righetto Immobiliare, dal 2000 al tuo fianco.",
       "canonical": "https://righettoimmobiliare.it/landing-valutazione",
       "noindex": false,
       "h1": 1,
       "h2": 5,
-      "words": 656,
+      "words": 572,
       "faq_schema": false,
       "forms": 1,
       "jsonld": 1,
       "tier": "owner_conversione",
-      "inbound": 60,
-      "last_modified": "2026-10-23",
+      "inbound": 61,
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1532,8 +1517,8 @@
       "forms": 1,
       "jsonld": 1,
       "tier": "owner_conversione",
-      "inbound": 149,
-      "last_modified": "2026-10-23",
+      "inbound": 150,
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_61"
@@ -1552,7 +1537,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1569,7 +1554,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1586,7 +1571,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 9,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1603,7 +1588,7 @@
       "jsonld": 1,
       "tier": "owner_contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_66"
@@ -1622,7 +1607,7 @@
       "jsonld": 1,
       "tier": "owner_contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1639,7 +1624,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1656,7 +1641,7 @@
       "jsonld": 1,
       "tier": "acquirente",
       "inbound": 8,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_68"
@@ -1675,7 +1660,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1692,7 +1677,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_61"
@@ -1711,7 +1696,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_65"
@@ -1730,7 +1715,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_67"
@@ -1749,7 +1734,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1766,7 +1751,7 @@
       "jsonld": 2,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "sitemap_noindex"
       ],
@@ -1785,7 +1770,7 @@
       "jsonld": 2,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1802,7 +1787,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1819,7 +1804,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1836,7 +1821,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1853,11 +1838,9 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 7,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
-      "notes": [
-        "non_indicizzata_recente_2026-10-23"
-      ]
+      "notes": []
     },
     "/blog-mandato-esclusivo-padova-perche-conviene-2026": {
       "title": "Mandato esclusivo Padova 2026: Perché conviene davvero",
@@ -1872,7 +1855,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 8,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1889,7 +1872,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 4,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1906,7 +1889,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 8,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1923,7 +1906,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1940,7 +1923,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 8,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1957,7 +1940,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 19,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1974,7 +1957,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -1991,7 +1974,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -2008,7 +1991,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -2025,7 +2008,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_65"
@@ -2044,7 +2027,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_61"
@@ -2063,7 +2046,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 8,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -2080,7 +2063,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 12,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_63"
@@ -2099,7 +2082,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 11,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_70"
@@ -2118,11 +2101,9 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 12,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
-      "notes": [
-        "non_indicizzata_recente_2026-10-23"
-      ]
+      "notes": []
     },
     "/zona-ponte-san-nicolo": {
       "title": "Affitti e Case a Ponte San Nicolo' (PD) | Righetto",
@@ -2137,11 +2118,9 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 5,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
-      "notes": [
-        "non_indicizzata_recente_2026-10-23"
-      ]
+      "notes": []
     },
     "/servizio-virtual-tour": {
       "title": "Tour Virtuali 360° Immobili Padova | Righetto Immobiliare",
@@ -2156,7 +2135,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 22,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -2173,7 +2152,7 @@
       "jsonld": 3,
       "tier": "contenuto",
       "inbound": 4,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -2190,7 +2169,7 @@
       "jsonld": 5,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -2207,7 +2186,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 8,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -2224,7 +2203,7 @@
       "jsonld": 4,
       "tier": "pillar",
       "inbound": 17,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -2241,7 +2220,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 17,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_63"
@@ -2260,7 +2239,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 16,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -2277,11 +2256,9 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
-      "notes": [
-        "non_indicizzata_recente_2026-10-23"
-      ]
+      "notes": []
     },
     "/blog-affitto-transitorio-padova-durata-2026": {
       "title": "Affitto Transitorio Padova 2026: Durata, Requisiti e Guida Completa",
@@ -2296,7 +2273,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_67"
@@ -2315,7 +2292,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_65"
@@ -2334,7 +2311,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_62"
@@ -2353,7 +2330,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_65"
@@ -2372,7 +2349,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 18,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_67"
@@ -2391,7 +2368,7 @@
       "jsonld": 3,
       "tier": "contenuto",
       "inbound": 97,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -2408,7 +2385,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 7,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -2425,7 +2402,7 @@
       "jsonld": 5,
       "tier": "acquirente",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -2446,7 +2423,7 @@
       "jsonld": 5,
       "tier": "acquirente",
       "inbound": 9,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -2465,7 +2442,7 @@
       "jsonld": 6,
       "tier": "acquirente",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -2486,11 +2463,10 @@
       "jsonld": 3,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
-        "title_61_70_67",
-        "non_indicizzata_recente_2026-10-23"
+        "title_61_70_67"
       ]
     },
     "/blog-mutui-tasso-fisso-bancaitalia-padova-2026": {
@@ -2506,7 +2482,7 @@
       "jsonld": 5,
       "tier": "contenuto",
       "inbound": 9,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -2525,7 +2501,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 14,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_62"
@@ -2544,7 +2520,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_69"
@@ -2563,7 +2539,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 4,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_65"
@@ -2581,8 +2557,8 @@
       "forms": 1,
       "jsonld": 4,
       "tier": "owner_contenuto",
-      "inbound": 7,
-      "last_modified": "2026-10-23",
+      "inbound": 8,
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_63"
@@ -2601,11 +2577,9 @@
       "jsonld": 3,
       "tier": "acquirente",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
-      "notes": [
-        "non_indicizzata_recente_2026-10-23"
-      ]
+      "notes": []
     },
     "/blog-registrazione-locazione-fumetto-proprietari-padova-2026": {
       "title": "Registrazione locazione Padova: storia a fumetto",
@@ -2620,11 +2594,9 @@
       "jsonld": 3,
       "tier": "owner_contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
-      "notes": [
-        "non_indicizzata_recente_2026-10-23"
-      ]
+      "notes": []
     },
     "/blog-immobiliare-geopolitica-energia-tassi-2026": {
       "title": "Geopolitica, energia e tassi: effetti sul mercato immobiliare 2026",
@@ -2639,7 +2611,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 6,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_66"
@@ -2658,7 +2630,7 @@
       "jsonld": 5,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -2679,11 +2651,9 @@
       "jsonld": 5,
       "tier": "acquirente",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
-      "notes": [
-        "non_indicizzata_recente_2026-10-23"
-      ]
+      "notes": []
     },
     "/blog-planimetria-catastale-compravendita-padova-2026": {
       "title": "Planimetria catastale e compravendita nel Padovano: controlli…",
@@ -2698,7 +2668,7 @@
       "jsonld": 5,
       "tier": "owner_contenuto",
       "inbound": 7,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -2719,7 +2689,7 @@
       "jsonld": 5,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -2740,7 +2710,7 @@
       "jsonld": 5,
       "tier": "acquirente",
       "inbound": 7,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -2761,7 +2731,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 12,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -2772,13 +2742,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 10,
-      "words": 1946,
+      "words": 1935,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 6,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -2795,7 +2765,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -2816,7 +2786,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -2835,13 +2805,11 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
-      "notes": [
-        "non_indicizzata_recente_2026-10-23"
-      ]
+      "notes": []
     },
     "/blog-costi-proprieta-acquisto-possesso-vendita-padova-2026": {
       "title": "Costi proprietà immobiliare Padova 2026: acquisto, possesso…",
@@ -2856,7 +2824,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -2875,7 +2843,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 6,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_67"
@@ -2894,7 +2862,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 13,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -2913,11 +2881,9 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
-      "notes": [
-        "non_indicizzata_recente_2026-10-23"
-      ]
+      "notes": []
     },
     "/blog-costi-costruzione-istat-padova-2026": {
       "title": "Costi costruzione ISTAT marzo 2026: +0,8% mensile, indice 117,2 |…",
@@ -2932,7 +2898,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -2953,7 +2919,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -2972,13 +2938,12 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
       "notes": [
-        "title_61_70_66",
-        "non_indicizzata_recente_2026-10-23"
+        "title_61_70_66"
       ]
     },
     "/blog-eurocamera-accordo-dazi-usa-2026": {
@@ -2994,7 +2959,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -3015,7 +2980,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 6,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_63"
@@ -3034,7 +2999,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -3051,7 +3016,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -3068,11 +3033,10 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
-        "title_61_70_67",
-        "non_indicizzata_recente_2026-10-23"
+        "title_61_70_67"
       ]
     },
     "/blog-patrimonio-casa-resilienza-mercati-globali-2026": {
@@ -3088,7 +3052,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -3109,7 +3073,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 7,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -3130,7 +3094,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -3151,7 +3115,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -3172,7 +3136,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -3193,7 +3157,7 @@
       "jsonld": 5,
       "tier": "contenuto",
       "inbound": 4,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -3214,13 +3178,12 @@
       "jsonld": 5,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
       "notes": [
-        "title_61_70_65",
-        "non_indicizzata_recente_2026-10-23"
+        "title_61_70_65"
       ]
     },
     "/blog-bonus-mobili-2026-massimizzare-ristrutturazioni": {
@@ -3236,13 +3199,12 @@
       "jsonld": 5,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
       "notes": [
-        "title_61_70_61",
-        "non_indicizzata_recente_2026-10-23"
+        "title_61_70_61"
       ]
     },
     "/blog-geopolitica-ucraina-prezzi-mutui-italia-veneto-2026": {
@@ -3258,7 +3220,7 @@
       "jsonld": 5,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -3277,7 +3239,7 @@
       "jsonld": 5,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -3296,7 +3258,7 @@
       "jsonld": 3,
       "tier": "owner_contenuto",
       "inbound": 4,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_61"
@@ -3315,7 +3277,7 @@
       "jsonld": 3,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_70"
@@ -3334,7 +3296,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 7,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -3351,7 +3313,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -3368,7 +3330,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 4,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -3385,7 +3347,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -3402,7 +3364,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -3413,13 +3375,13 @@
       "noindex": false,
       "h1": 1,
       "h2": 20,
-      "words": 2810,
+      "words": 2804,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_62"
@@ -3432,17 +3394,15 @@
       "noindex": false,
       "h1": 1,
       "h2": 21,
-      "words": 2340,
+      "words": 2335,
       "faq_schema": true,
       "forms": 1,
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
-      "notes": [
-        "non_indicizzata_recente_2026-10-23"
-      ]
+      "notes": []
     },
     "/blog-bonus-edilizi-2026-incentivi-casa-padova": {
       "title": "Bonus edilizi 2026 Padova: detrazioni 50% e ecobonus | Righetto",
@@ -3457,7 +3417,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_63"
@@ -3476,7 +3436,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_62"
@@ -3495,7 +3455,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_64"
@@ -3514,7 +3474,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -3531,7 +3491,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -3548,7 +3508,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -3565,7 +3525,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -3586,7 +3546,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 7,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -3607,7 +3567,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_63"
@@ -3626,7 +3586,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "title_troncato"
       ],
@@ -3647,7 +3607,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_67"
@@ -3666,7 +3626,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": [
         "title_61_70_64"
@@ -3685,7 +3645,24 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
+      "issues": [],
+      "notes": []
+    },
+    "/blog-cedolare-5-concordati-proposta-2027-padova": {
+      "title": "Cedolare 5% concordati: la proposta 2027 per gli affitti",
+      "meta": "Proposta Manovra 2027: cedolare sui concordati dal 10% al 5%. Cosa cambierebbe a Padova; oggi resta il 10% con i requisiti.",
+      "canonical": "https://righettoimmobiliare.it/blog-cedolare-5-concordati-proposta-2027-padova",
+      "noindex": false,
+      "h1": 1,
+      "h2": 9,
+      "words": 1094,
+      "faq_schema": true,
+      "forms": 1,
+      "jsonld": 4,
+      "tier": "contenuto",
+      "inbound": 0,
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -3702,7 +3679,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 4,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -3719,7 +3696,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -3736,7 +3713,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
       "notes": []
     },
@@ -3753,7 +3730,7 @@
       "jsonld": 3,
       "tier": "contenuto",
       "inbound": 7,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [
         "meta_corta_49",
         "sitemap_template_senza_contenuto"
@@ -3773,14 +3750,12 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-23",
+      "last_modified": "2026-10-30",
       "issues": [],
-      "notes": [
-        "non_indicizzata_recente_2026-10-23"
-      ]
+      "notes": []
     }
   },
-  "indexing_source": "export_copertura",
-  "indexing_data_end": "2026-10-04",
-  "sitemap_indexed": 206
+  "indexing_source": null,
+  "indexing_data_end": null,
+  "sitemap_indexed": null
 }
