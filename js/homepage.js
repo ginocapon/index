@@ -799,6 +799,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    'imu seconda casa a padova 2026: aliquota, calcolo e scadenze': { img: 'img/blog/blog-imu-seconda-casa-padova-2026-hero.webp', url: 'blog-imu-seconda-casa-padova-2026' },
     'una domanda non costa nulla: perché contattarci può cambiarti la vita': { img: 'img/blog/blog-una-domanda-non-costa-nulla-card.webp', url: 'blog-una-domanda-non-costa-nulla' },
     'cedolare 5% concordati: la proposta 2027 per gli affitti': { img: 'img/blog/blog-cedolare-5-concordati-proposta-2027-padova-hero.webp', url: 'blog-cedolare-5-concordati-proposta-2027-padova' },
     'casa non si vende padova strategia 2026': { img: 'img/blog/blog-casa-non-si-vende-padova-strategia-2026-hero.webp', url: 'blog-casa-non-si-vende-padova-strategia-2026' },
@@ -961,6 +962,13 @@ function generateSlug(titolo) {
   // Articoli statici (sempre presenti)
   const articoliStatici = [
     { titolo: "Una domanda non costa nulla: perché contattarci può cambiarti la vita", categoria: "Vita d'agenzia", data: '2026-10-19', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-una-domanda-non-costa-nulla-card.webp', url_statico: 'blog-una-domanda-non-costa-nulla' },
+    {
+      "titolo": "IMU seconda casa a Padova 2026: aliquota, calcolo e scadenze",
+      "categoria": "Fisco e proprietari",
+      "data": "2026-10-31",
+      "immagine_copertina": "img/blog/blog-imu-seconda-casa-padova-2026-hero.webp",
+      "url_statico": "blog-imu-seconda-casa-padova-2026"
+    },
     {
       "titolo": "Cedolare 5% concordati: la proposta 2027 per gli affitti",
       "categoria": "Fisco e affitti",
