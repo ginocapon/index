@@ -138,6 +138,7 @@ async function loadImmobili(){
         }
       }
     }
+    risultati.forEach(applicaMqPubblici);
     if(!risultati.length){ showPropsEmpty(); return; }
     renderProps(risultati);
   }catch(e){ console.error('Errore caricamento immobili homepage:', e); showPropsLoadError(); }
@@ -410,6 +411,7 @@ async function loadVisiteVirtualiHome() {
         .order('created_at', { ascending: false })
         .limit(60);
       if (!error && data && data.length) {
+        data.forEach(applicaMqPubblici);
         activeData = data;
         tours = toursFromSupabaseActive(data, catalog);
         if (tours.length < VT_PREVIEW && !catalog) {
