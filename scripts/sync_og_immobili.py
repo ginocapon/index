@@ -141,6 +141,8 @@ def build_share_html(entry: dict) -> str:
     share_url = entry["share_url"]
     app_url = entry["app_url"]
     image = escape(entry["image"])
+    img_w = escape(str(entry.get("image_width", "1200")))
+    img_h = escape(str(entry.get("image_height", "630")))
     return f"""<!DOCTYPE html>
 <html lang="it">
 <head>
@@ -157,8 +159,8 @@ def build_share_html(entry: dict) -> str:
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{escape(share_url)}">
 <meta property="og:image" content="{image}">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="{img_w}">
+<meta property="og:image:height" content="{img_h}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{title}">
 <meta name="twitter:description" content="{desc}">
@@ -193,13 +195,23 @@ def main() -> int:
         if not seo:
             continue
         titolo = (row.get("titolo") or "").strip()
+        codice = (row.get("codice") or "").strip()
+        og_cover = ROOT / "img" / "immobili" / codice / "og-cover.jpg" if codice else None
+        if og_cover is not None and og_cover.is_file():
+            image = f"{SITE}/img/immobili/{codice}/og-cover.jpg"
+            img_w, img_h = "1200", "630"
+        else:
+            image = first_photo(row, manifest)
+            img_w, img_h = "1200", "630"
         entry = {
             "codice": row.get("codice"),
             "titolo": titolo,
             "seo_slug": seo,
             "title": seo_title(row),
             "description": seo_description(row),
-            "image": first_photo(row, manifest),
+            "image": image,
+            "image_width": img_w,
+            "image_height": img_h,
             "share_url": share_immobile_url(seo),
             "app_url": immobile_app_url(seo),
             "share_file": share_immobile_path(seo),
