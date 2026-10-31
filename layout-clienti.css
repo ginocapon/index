@@ -82,3 +82,21 @@ body[data-admin-area=agenda] #righetto-attivita,body[data-admin-area=attivita] #
 .rch-table td.rch-actions{display:table-cell;border-bottom:2px solid white}.rch-flags{display:flex;gap:5px;margin-bottom:5px}.rch-flags span{width:28px;height:28px;border:0;background:transparent;font-size:19px}.rch-buttons{display:flex;gap:5px}.rch-actions small{display:block;font:11px Arial;margin-top:4px;color:inherit}
 .rch-flags span{background:#fff;border:1px solid #526977;border-radius:2px;color:#17324d}
 @media(max-width:760px){body.rm-on .rcs,body.rm-on .ra-modal:has(.ra-legacy-event){top:88px!important}.rcs-d{min-height:calc(100vh - 88px)}body.rm-on .rh-menu-top{display:none!important}}
+
+/* Client cards stay above navigation, including editors nested inside .main. */
+body:has(#clienteModal.open) .rh-menu-top,
+body:has(.rcs) .rh-menu-top{z-index:0!important;pointer-events:none!important}
+#clienteModal.modal-overlay{z-index:15000!important}
+
+body:has(#csvImportModal.open) .rh-menu-top{z-index:0!important;pointer-events:none!important}
+#csvImportModal.modal-overlay{z-index:15000!important}
+@media print{body:has(.rcs) #appWrapper{display:none!important}.rcs{position:static!important;padding:0!important;background:#fff!important}.rcs-d{box-shadow:none!important}.rcs button,.rcs-menu{display:none!important}}
+
+/* Open client cards cover navigation rather than reserving an interactive strip. */
+body .rcs,body.rm-on .rcs{top:0!important}
+
+.rcs .rcs-grid>div:not(.rcs-empty) b{color:#455767!important}.rcs .rcs-grid>div:not(.rcs-empty) span{color:#111!important}
+
+body:has(#matchModal.open) .rh-menu-top{z-index:0!important;pointer-events:none!important}#matchModal.modal-overlay{z-index:15000!important}.client-match-card{border-bottom:1px solid #ccd5dd;padding:14px 0}.client-match-card p{margin:6px 0}.client-match-card button{min-height:40px;margin:4px 8px 4px 0}
+
+body:has(#clientiBulkModal.open) .rh-menu-top{z-index:0!important;pointer-events:none!important}#clientiBulkModal{z-index:15000!important}#clientiBulkModal button{min-height:40px;margin:8px}

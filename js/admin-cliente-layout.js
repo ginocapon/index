@@ -44,7 +44,7 @@ window.righettoExtraRead=function(){let values={};document.querySelectorAll('[da
 function section(title,left,right){const h=document.createElement('h3');h.textContent=title;wrap.append(h);const grid=document.createElement('div');grid.className='legacy-edit-grid';[left,right].forEach(items=>{const col=document.createElement('div');items.forEach(([id,label])=>col.append(id?field(id,label):missing(label)));grid.append(col)});wrap.append(grid);}
 const editId=document.getElementById('clienteEditId');wrap.append(editId);
 section('Anagrafica', [[null,'Nome'],[null,'Cognome'],['clienteNome','Nome completo / visualizzato'],[null,'Data di nascita'],[null,'Luogo di nascita']], [['clienteTipoCliente','Privato / Azienda'],['clienteRagioneSociale','Ragione sociale'],['clientePartitaIva','Partita I.V.A.'],['clienteCodiceFiscale','Codice fiscale']]);
-const note=document.createElement('p');note.className='legacy-edit-gap';note.textContent='Nome e cognome sono facoltativi: i dati esistenti non sono stati separati automaticamente. Nome completo resta il valore visualizzato e usato nei collegamenti.';wrap.append(note);
+const note=document.createElement('p');note.className='legacy-edit-gap';note.textContent='Nome e cognome sono facoltativi. Se il nome completo è vuoto, il riepilogo usa Cognome e Nome, senza ricavarli dall’email. I dati esistenti non vengono separati automaticamente.';wrap.append(note);
 section('Dati per la fattura elettronica',[['clienteSdi','Codice SDI']],[[null,'Codice EORI']]);
 section('Recapiti e contatti',[[null,'Nazione'],[null,'Provincia'],[null,'Comune'],[null,'Zona'],[null,'Via'],[null,'Numero civico'],[null,'CAP'],['clienteIndirizzo','Indirizzo completo esistente'],[null,'Instagram'],[null,'Facebook'],[null,'Linkedin']],[['clienteTelefono','Telefono / recapito esistente'],[null,'Telefono (2)'],[null,'Cellulare'],[null,'Fax'],['clienteEmail','Email'],[null,'Email (2)'],['clientePec','Email PEC']]);
 section('Documento di identità',[[null,'Tipo di documento'],[null,'Rilasciato il'],[null,'Scadenza']],[[null,'Numero'],[null,'Rilasciato da']]);
@@ -58,6 +58,6 @@ const upload=document.getElementById('clienteDocumentiInput');if(upload){upload.
 const azienda=document.getElementById('campiAzienda');if(azienda){azienda.hidden=true;extra.append(azienda);}
 wrap.append(extra);
 original.replaceChildren(wrap);
-const footer=m.querySelector('.modal-footer');footer.querySelector('[onclick="saveCliente()"]').textContent='Salva';
-const next=document.createElement('button');next.className='btn';next.textContent='Salva e vai alla scheda cliente';next.addEventListener('click',()=>saveCliente(true));next.title='Salva e apre la scheda solo dopo esito riuscito';footer.append(next);
+document.getElementById('btnDeleteCliente').textContent='Sposta nello storico';const footer=m.querySelector('.modal-footer');footer.querySelector('[onclick="saveCliente()"]').textContent='Salva';
+const next=document.createElement('button');next.className='btn';next.textContent='Salva e vai alla scheda cliente';next.addEventListener('click',()=>saveCliente(true));next.title='Salva e apre la scheda solo dopo esito riuscito';footer.append(next);const reconcile=document.createElement('button');reconcile.className='btn';reconcile.textContent='Verifica salvataggio sospeso';reconcile.type='button';reconcile.onclick=()=>reconcileClienteSave();footer.append(reconcile);
 })();
