@@ -2200,7 +2200,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 <link rel="stylesheet" href="css/admin-agenda.css?v=6">
 <link rel="stylesheet" href="css/admin-attivita.css?v=4">
 <link rel="stylesheet" href="css/admin-mobile.css?v=3">
-<link rel="stylesheet" href="layout-clienti.css?v=20261026b"></head>
+<link rel="stylesheet" href="layout-clienti.css?v=20261031-clienti"></head>
 <body>
 
 <!-- LOGIN -->
@@ -3533,7 +3533,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 <select id="clientiAgent" onchange="loadClienti()"><option value="">tutti gli agenti</option><option>Gino</option><option>Linda</option><option>UFFICIO</option></select>
 <input id="filtroFonteCliente" list="clientiFonteValues" placeholder="qualsiasi provenienza" onchange="loadClienti()" aria-label="Provenienza"><datalist id="clientiFonteValues"></datalist>
 <button id="clientiStoricoBtn" aria-pressed="false" onclick="window.__rStorico=!window.__rStorico;this.setAttribute('aria-pressed',String(window.__rStorico));loadClienti()">storico</button>
-<button disabled title="Etichette non ancora collegate">◆</button><button disabled title="Operazioni multiple non ancora collegate">⚒ ⇩</button><button class="legacy-search-btn" onclick="loadClienti()" title="Cerca">⌕</button>
+<button disabled title="Etichette non ancora collegate">◆</button><button onclick="openClientiBulk()" title="Operazioni sui clienti selezionati">⚒ ⇩</button><button class="legacy-search-btn" onclick="loadClienti()" title="Cerca">⌕</button>
 </div></div><div class="legacy-client-extra"><span id="clientiCountVisible">Risultati: -</span><span class="legacy-client-pages" id="clientiPages"></span><span style="margin-left:auto">ordina per: <select id="clientiSort" onchange="loadClienti()"><option value="created_at">data inserimento</option><option value="nome">cognome / nome</option><option value="comune">comune</option></select><button id="clientiSortDir" data-asc="false" onclick="this.dataset.asc=String(this.dataset.asc!=='true');this.textContent=this.dataset.asc==='true'?'⌃':'⌄';loadClienti()">⌄</button></span></div><div class="legacy-client-lower"><button disabled title="Invio multiplo non ancora disponibile">0 ✉</button><button onclick="openClienteModal()" title="Nuovo cliente">✚</button><span style="margin-left:auto"><button onclick="openCsvImportModal()">Importa CSV</button></span></div></div>
           <div id="clientiLoading" class="loading" style="display:none"><div class="spinner"></div> Caricamento...</div>
           <div id="clientiEmpty" class="empty-state" style="display:none">
@@ -3541,7 +3541,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <h3>Nessun cliente</h3>
             <p style="font-size:0.82rem;color:var(--caffe2)">Aggiungi il primo cliente o aspetta iscrizioni alla newsletter</p>
           </div>
-          <table id="clientiTable" style="display:none"><thead><tr><th></th><th>Cognome / Nome / Contatti</th><th>Ragione sociale</th><th>N.Eventi</th><th>Nazione</th><th>Comune/Prov.</th><th>Zona</th><th>Indirizzo</th><th>Data ultima mod.</th><th>Data ins.</th><th>Ultimo cont.</th><th>Etichette</th><th>Operazioni</th></tr></thead><tbody id="clientiBody"></tbody>
+          <table id="clientiTable" style="display:none"><thead><tr><th><input type="checkbox" id="clientiSelectPage" aria-label="Seleziona i clienti di questa pagina" onchange="selectClientiPage(this.checked)"></th><th>Cognome / Nome / Contatti</th><th>Ragione sociale</th><th>N.Eventi</th><th>Nazione</th><th>Comune/Prov.</th><th>Zona</th><th>Indirizzo</th><th>Data ultima mod.</th><th>Data ins.</th><th>Ultimo cont.</th><th>Etichette</th><th>Operazioni</th></tr></thead><tbody id="clientiBody"></tbody>
           </table>
         </div>
 
@@ -9186,12 +9186,36 @@ async function loadClienti(page=0) {
   query=query.order(sort,{ascending:asc,nullsFirst:false}).order('id',{ascending:true}).range(page*clientiPageSize,(page+1)*clientiPageSize-1);
   const {data,error,count}=await query;if(error)throw error;if(myReq!==_clientiReqId)return;
   clientiTotal=count||0;const last=Math.max(0,Math.ceil(clientiTotal/clientiPageSize)-1);if(page>last)return loadClienti(last);
-  clientiPage=page;allClienti=data||[];setClientiNote('');renderClientiTable();renderClientiPages();updateClientiStats();loadClientiFonteValues();
+  clientiPage=page;allClienti=data||[];setClientiNote('');renderClientiTable();renderClientiPages();updateClientiStats();loadClientiFonteValues();loadClientiEventCounts(myReq,allClienti.map(c=>c.id));
  }catch(err){if(myReq!==_clientiReqId)return;window.dispatchEvent(new CustomEvent('righetto:clienti-load',{detail:{state:'error',message:err.message||'Riprovare la ricerca'}}));table.style.display='none';empty.style.display='block';empty.querySelector('h3').textContent='Clienti non leggibili';empty.querySelector('p').textContent=err.message||'Riprovare la ricerca';}
  finally{if(myReq===_clientiReqId){loading.style.display='none';window.dispatchEvent(new CustomEvent('righetto:clienti-load',{detail:{state:'settled'}}));}}
 }
+async function loadClientiEventCounts(epoch,ids){
+ let index=0;await Promise.all(Array.from({length:Math.min(5,ids.length)},async()=>{while(index<ids.length){const id=ids[index++];let text='n.d.';try{const r=await sb.from('agenda_events').select('id',{count:'exact',head:true}).eq('client_id',id).is('deleted_at',null);if(!r.error&&typeof r.count==='number')text=String(r.count);}catch(e){}if(epoch!==_clientiReqId)return;const cell=document.querySelector('[data-client-event-count="'+id+'"]');if(cell)cell.textContent=text;}}));
+}
 function renderClientiPages(){const box=document.getElementById('clientiPages');if(!box)return;const pages=Math.max(1,Math.ceil(clientiTotal/clientiPageSize));box.innerHTML='<button type="button" data-page="'+(clientiPage-1)+'" '+(clientiPage===0?'disabled':'')+'>‹</button><span>Pagina '+(clientiPage+1)+' di '+pages+'</span><button type="button" data-page="'+(clientiPage+1)+'" '+(clientiPage>=pages-1?'disabled':'')+'>›</button>';box.onclick=e=>{const b=e.target.closest('[data-page]');if(b&&!b.disabled)loadClienti(Number(b.dataset.page));};}
 
+let clientiAuthEpoch=0;
+const selectedClienti=new Set();
+if(sb.auth?.onAuthStateChange)sb.auth.onAuthStateChange(event=>{if(event==='SIGNED_OUT'){clientiAuthEpoch++;selectedClienti.clear();updateClientiSelection();_clientiReqId++;allClienti=[];document.getElementById('clientiBody').replaceChildren();document.getElementById('clienteModal').classList.remove('open');document.querySelectorAll('#clienteModal input,#clienteModal textarea').forEach(e=>{if(e.type!=='radio'&&e.type!=='checkbox')e.value='';});document.getElementById('csvImportModal').classList.remove('open');csvParsedData=[];document.getElementById('clientiBulkModal')?.remove();}});
+function toggleClientiSelection(id,on){on?selectedClienti.add(id):selectedClienti.delete(id);updateClientiSelection();}
+function selectClientiPage(on){allClienti.forEach(c=>on?selectedClienti.add(c.id):selectedClienti.delete(c.id));document.querySelectorAll('[data-client-select]').forEach(e=>e.checked=on);updateClientiSelection();}
+function updateClientiSelection(){const all=document.getElementById('clientiSelectPage');if(all){const n=allClienti.filter(c=>selectedClienti.has(c.id)).length;all.checked=n>0&&n===allClienti.length;all.indeterminate=n>0&&n<allClienti.length;}const counter=document.getElementById('clientiSelectionCount');if(counter)counter.textContent=selectedClienti.size+' selezionati';}
+function openClientiBulk(){
+ let modal=document.getElementById('clientiBulkModal');if(modal)modal.remove();modal=document.createElement('div');modal.id='clientiBulkModal';modal.className='modal-overlay open';modal.innerHTML='<div class="modal"><div class="modal-header"><h2>Operazioni clienti selezionati</h2><button class="modal-close" data-close>×</button></div><div class="modal-body"><p id="clientiSelectionCount">'+selectedClienti.size+' selezionati</p><p>La selezione include solo le righe scelte, anche se cambi pagina. Non seleziona automaticamente tutti i risultati della ricerca.</p><button data-export>Esporta CSV privato</button><button data-clear>Azzera selezione</button><p>Etichette: assegnazione manuale, da attivare quando lavorerete a regime nel nuovo. Nessuna etichetta automatica e nessun invio.</p><p data-status role="status"></p></div></div>';document.body.append(modal);modal.querySelector('[data-close]').onclick=()=>modal.remove();modal.querySelector('[data-clear]').onclick=()=>{selectedClienti.clear();document.querySelectorAll('[data-client-select]').forEach(e=>e.checked=false);updateClientiSelection();};modal.querySelector('[data-export]').onclick=()=>exportSelectedClienti(modal);
+}
+async function exportSelectedClienti(modal){const status=modal.querySelector('[data-status]');if(!selectedClienti.size){status.textContent='Seleziona almeno un cliente.';return;}const ids=[...selectedClienti];if(ids.length>500){status.textContent='Massimo500 schede per esportazione privata.';return;}status.textContent='Preparazione…';try{const r=await sb.from('clienti').select('id,nome,nome_proprio,cognome,email,telefono,cellulare,ragione_sociale,comune,provincia,fonte').in('id',ids).order('id');if(r.error)throw r.error;if(r.data.length!==ids.length)throw Error('Alcune schede non sono più leggibili. Nessun file creato.');const csvCell=v=>'"'+String(v??'').replace(/^[=+@-]/,"'$&").replace(/"/g,'""')+'"';const cols=['Nome completo','Nome','Cognome','Email','Telefono','Cellulare','Ragione sociale','Comune','Provincia','Provenienza'];const csv=[cols,...r.data.map(c=>[clienteDisplayName(c),c.nome_proprio,c.cognome,c.email,c.telefono,c.cellulare,c.ragione_sociale,c.comune,c.provincia,c.fonte])].map(row=>row.map(csvCell).join(';')).join('\r\n');const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='clienti-selezionati-riservato.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);status.textContent=r.data.length+' schede esportate nel file privato. Nessun invio.';}catch(e){status.textContent='Esportazione non riuscita: '+e.message;}}
+
+async function printCliente(id){
+ const popup=window.open('','_blank');if(!popup){toast('Consenti la finestra di stampa per questa scheda.','error');return;}
+ popup.document.write('<!doctype html><title>Caricamento scheda cliente privata</title><p>Caricamento…</p>');
+ try{const r=await sb.from('clienti').select('*').eq('id',id).maybeSingle();if(r.error||!r.data)throw Error('Scheda non leggibile.');const c=r.data;
+ const safe=v=>String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+ const fields=[['Nome completo',clienteDisplayName(c)],['Nome',c.nome_proprio],['Cognome',c.cognome],['Ragione sociale',c.ragione_sociale],['Email',c.email],['Telefono',c.telefono],['Cellulare',c.cellulare],['Comune / provincia',[c.comune,c.provincia].filter(Boolean).join(' ')],['Indirizzo cliente',c.indirizzo_cliente||[c.indirizzo_via,c.numero_civico].filter(Boolean).join(' ')],['Codice fiscale',c.codice_fiscale],['Partita IVA',c.partita_iva],['Provenienza',c.fonte],['Agente',c.agente_assegnato],['Note cliente',String(c.note||'').split('[Metadati importazione]')[0].trim()]];
+ popup.document.open();popup.document.write('<!doctype html><html lang="it"><meta charset="utf-8"><title>Scheda cliente privata</title><style>body{font:14px/1.45 Arial;color:#17324d;margin:32px}h1{font-size:24px;border-bottom:3px solid #005691;padding-bottom:8px}p{margin:8px 0}dt{font-weight:bold}dd{margin:0 0 10px;white-space:pre-wrap;overflow-wrap:anywhere}.notice{background:#eef4f7;padding:10px}@media print{button{display:none}body{margin:15mm}}</style><h1>'+safe(clienteDisplayName(c)||'Cliente')+'</h1><p class="notice">Scheda cliente privata, solo uso interno. Non include le schede degli immobili. Archivio attuale, non certifica completezza dello storico.</p><dl>'+fields.filter(([k,v])=>v).map(([k,v])=>'<dt>'+safe(k)+'</dt><dd>'+safe(v)+'</dd>').join('')+'</dl><button onclick="window.print()">Stampa / salva PDF</button></html>');popup.document.close();
+ }catch(e){popup.document.body.textContent=e.message;}
+}
+function clienteDisplayName(c){const explicit=String(c.nome||'').trim();if(explicit)return explicit;const parts=[c.cognome,c.nome_proprio].map(v=>String(v||'').trim()).filter(Boolean).join(' ');return parts||String(c.ragione_sociale||'').trim();}
 function renderClientiTable() {
   const empty = document.getElementById('clientiEmpty');
   const table = document.getElementById('clientiTable');
@@ -9218,6 +9242,7 @@ function renderClientiTable() {
   };
 
   const shown=allClienti;
+  updateClientiSelection();
   const count=document.getElementById('clientiCountVisible');if(count)count.textContent='Risultati: '+clientiTotal+' | '+shown.length+' in questa pagina';
   tbody.innerHTML = shown.map(c => {
     const badgeClass = fonteColors[c.fonte] || 'badge-grigio';
@@ -9229,10 +9254,10 @@ function renderClientiTable() {
     const tipoCliente = c.tipo_cliente === 'azienda' ? '<span class="badge badge-blu">Azienda</span>' : '<span class="badge badge-grigio">Privato</span>';
     const azInfo = c.tipo_cliente === 'azienda' ? [c.ragione_sociale, c.partita_iva ? 'P.IVA: ' + c.partita_iva : ''].filter(Boolean).join('<br>') : '—';
     const docsCount = Array.isArray(c.documenti_cliente) ? c.documenti_cliente.length : 0;
-    return `<tr data-nome="${escHtml(c.nome||'')}" data-email="${escHtml(c.email||'')}" data-telefono="${escHtml(c.telefono||'')}" data-ragione="${escHtml(c.ragione_sociale||'')}" data-piva="${escHtml(c.partita_iva||'')}" data-indirizzo="${escHtml(c.indirizzo_cliente||'')}">
-<td><input type="checkbox" disabled title="Selezione multipla non ancora collegata"></td><td><a href="#" onclick="RighettoCliente.open('${c.id}');return false;">${escHtml(c.nome||'')}</a><div class="client-contacts">${c.telefono?'▯ '+escHtml(c.telefono)+' <span class="phone-tools"><span title="QR non disponibile">▦</span> <span title="SMS non disponibile">●</span> '+''+'</span><br>':''}${c.email?'<a href="mailto:'+escHtml(c.email)+'">✉ '+escHtml(c.email)+'</a>':''}</div></td>
-<td>${escHtml(c.ragione_sociale||'')}</td><td title="Eventi collegati caricati, non storico completo">n.d.</td><td>${escHtml(c.nazione||'')}</td><td>${escHtml([c.comune,c.provincia].filter(Boolean).join(' '))}</td><td>${escHtml(c.zona_residenza||'')}</td><td>${escHtml(c.indirizzo_cliente||'')}</td><td title="Data modifica non disponibile"></td><td>${dateStr}</td><td title="Ultimo contatto non disponibile"></td><td title="Etichette non collegate"></td>
-<td><div class="client-ops"><button onclick="RighettoCliente.open('${c.id}')" title="Scheda cliente">⌕</button><button onclick="RighettoCliente.open('${c.id}','cron')" title="Cronistoria">◷</button><button disabled title="Stampa non ancora disponibile">▧</button><button onclick="showMatchingImmobili('${c.id}')" title="Immobili compatibili">⌂</button><button disabled title="Nuova attività: usare vecchio gestionale">⊕</button><button disabled title="Nuovo appuntamento: usare vecchio gestionale">▣</button><button disabled title="SMS non disponibile">▯</button><button onclick="editCliente('${c.id}')" title="Modifica cliente">✎</button><button onclick="RighettoCliente.open('${c.id}')" title="Archivio dal menuOperazioni">♜</button></div></td></tr>`;
+    return `<tr data-nome="${escHtml(clienteDisplayName(c))}" data-email="${escHtml(c.email||'')}" data-telefono="${escHtml(c.telefono||'')}" data-ragione="${escHtml(c.ragione_sociale||'')}" data-piva="${escHtml(c.partita_iva||'')}" data-indirizzo="${escHtml(c.indirizzo_cliente||[c.indirizzo_via,c.numero_civico].filter(Boolean).join(' '))}">
+<td><input type="checkbox" aria-label="Seleziona ${escHtml(clienteDisplayName(c)||'cliente')}" data-client-select="${c.id}" ${selectedClienti.has(c.id)?'checked':''} onchange="toggleClientiSelection(this.dataset.clientSelect,this.checked)"></td><td><a href="#" onclick="RighettoCliente.open('${c.id}');return false;">${escHtml(clienteDisplayName(c)||'Nome non indicato')}</a><div class="client-contacts">${c.telefono?'▯ '+escHtml(c.telefono)+' <span class="phone-tools"><span title="QR non disponibile">▦</span> <span title="SMS non disponibile">●</span> '+''+'</span><br>':''}${c.email?'<a href="mailto:'+escHtml(c.email)+'">✉ '+escHtml(c.email)+'</a>':''}</div></td>
+<td>${escHtml(c.ragione_sociale||'')}</td><td data-client-event-count="${c.id}" title="Solo eventi collegati al cliente nel nuovo archivio">…</td><td>${escHtml(c.nazione||'')}</td><td>${escHtml([c.comune,c.provincia].filter(Boolean).join(' '))}</td><td>${escHtml(c.zona_residenza||'')}</td><td>${escHtml(c.indirizzo_cliente||[c.indirizzo_via,c.numero_civico].filter(Boolean).join(' '))}</td><td title="Data modifica non registrata nel nuovo">n.d.</td><td>${dateStr}</td><td title="Ultimo contatto non registrato nel nuovo">n.d.</td><td title="Etichette non collegate"></td>
+<td><div class="client-ops"><button onclick="RighettoCliente.open('${c.id}')" title="Scheda cliente">⌕</button><button onclick="RighettoCliente.open('${c.id}','cron')" title="Cronistoria">◷</button><button onclick="printCliente('${c.id}')" title="Stampa scheda cliente privata">▧</button><button onclick="showMatchingImmobili('${c.id}')" title="Immobili compatibili">⌂</button><button disabled title="Nuova attività: usare vecchio gestionale">⊕</button><button disabled title="Nuovo appuntamento: usare vecchio gestionale">▣</button><button disabled title="SMS non disponibile">▯</button><button onclick="editCliente('${c.id}')" title="Modifica cliente">✎</button><button onclick="RighettoCliente.open('${c.id}')" title="Archivio dal menuOperazioni">♜</button></div></td></tr>`;
   }).join('');
 }
 
@@ -9327,7 +9352,9 @@ function toggleClienteRuoloRubrica() {
   }
 }
 
+let clienteEditBaseline=null;
 function openClienteModal(id) {
+  clienteEditBaseline=null;
   document.getElementById('clienteEditId').value = '';
   document.getElementById('clienteModalTitle').textContent = 'Nuovo Cliente';
   document.getElementById('clienteNome').value = '';
@@ -9363,6 +9390,7 @@ function openClienteModal(id) {
 function editCliente(id) {
   const c = allClienti.find(x => x.id == id);
   if (!c) return;
+  clienteEditBaseline=structuredClone(c);
   document.getElementById('clienteEditId').value = c.id;
   document.getElementById('clienteModalTitle').textContent = 'Modifica Cliente';
   document.getElementById('clienteNome').value = c.nome || '';
@@ -9399,7 +9427,23 @@ function closeClienteModal() {
   document.getElementById('clienteModal').classList.remove('open');
 }
 
-async function saveCliente(openAfterSave = false) {
+async function clientPayloadHash(data,keys){const ordered=Object.fromEntries([...keys].sort().map(k=>[k,data[k]??null]));const buffer=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify(ordered)));return [...new Uint8Array(buffer)].map(b=>b.toString(16).padStart(2,'0')).join('');}
+async function reconcileClienteSave(){
+ try{const auth=await sb.auth.getUser();if(!auth.data?.user?.id)throw Error('Accedi di nuovo.');const key='righetto-client-save-pending:'+auth.data.user.id;const raw=localStorage.getItem(key);if(!raw){toast('Nessun salvataggio sospeso.','info');return;}const pending=JSON.parse(raw);
+ const r=await sb.from('clienti').select('*').eq('id',pending.id).maybeSingle();if(r.error)throw r.error;
+ if(r.data&&pending.hash&&await clientPayloadHash(r.data,pending.keys)===pending.hash){localStorage.removeItem(key);toast('Salvataggio precedente verificato. Nessun nuovo tentativo.','success');document.querySelectorAll('#clienteModal .modal-footer button').forEach(b=>{if(b.textContent.includes('Salva'))b.disabled=false});await loadClienti();}
+ else toast('Esito non confermato. Nessun nuovo salvataggio: controllare la scheda esatta prima di procedere.','error');
+ }catch(e){toast('Verifica non riuscita: '+e.message,'error');}
+}
+let savingCliente=false;
+async function saveCliente(openAfterSave=false){
+ if(!navigator.locks){toast('Protezione tra schede non disponibile. Usa un browser aggiornato.','error');return;}
+ return navigator.locks.request('righetto-client-write',{mode:'exclusive',ifAvailable:true},async lock=>{if(!lock){toast('Un salvataggio clienti è in corso in un’altra scheda.','error');return;}return saveClienteLocked(openAfterSave);});
+}
+async function saveClienteLocked(openAfterSave = false) {
+  if(savingCliente)return;
+
+  const authEpoch=clientiAuthEpoch;
   const id = document.getElementById('clienteEditId').value;
   const ruoloRubrica = document.getElementById('clienteRuoloProprietario').checked ? 'proprietario' : 'cerca';
   const isProprietario = ruoloRubrica === 'proprietario';
@@ -9430,27 +9474,41 @@ async function saveCliente(openAfterSave = false) {
     ...(window.righettoExtraRead ? righettoExtraRead() : {})
   };
 
-  const invalidExtra=[...document.querySelectorAll('[data-client-extra]')].find(el=>!el.checkValidity());
+  const invalidExtra=[...document.querySelectorAll('#clienteModal input,#clienteModal select,#clienteModal textarea')].find(el=>!el.disabled&&!el.checkValidity());
   if(invalidExtra){invalidExtra.reportValidity();return;}
+  if(!data.nome)data.nome=clienteDisplayName(data);
   if (!data.nome && !data.email) {
     toast('Inserisci almeno nome o email', 'error');
     return;
   }
 
+  savingCliente=true;
+  const saveButtons=[...document.querySelectorAll('#clienteModal .modal-footer button')].filter(b=>/saveCliente/.test(b.getAttribute('onclick')||'')||b.textContent.includes('Salva'));
+  const priorDisabled=saveButtons.map(b=>b.disabled);saveButtons.forEach(b=>b.disabled=true);
+  let attempted=false,definiteFailure=false,pendingKey=null;
   try {
-    let savedId = id || null;
+    const auth=await sb.auth.getUser();if(auth.error||!auth.data?.user?.id)throw Error('Accedi di nuovo prima di salvare.');
+    pendingKey='righetto-client-save-pending:'+auth.data.user.id;
+    const prior=localStorage.getItem(pendingKey);if(prior)throw Error('Salvataggio precedente da verificare. Nessun nuovo tentativo. Riferimento: '+JSON.parse(prior).id);
+    if(id&&(!clienteEditBaseline||String(clienteEditBaseline.id)!==String(id)))throw Error('Riapri questa scheda prima di salvare.');
+    let savedId = id || crypto.randomUUID();
     let payload = { ...data };
+    localStorage.setItem(pendingKey,JSON.stringify({id:savedId,operation:id?'update':'create',keys:Object.keys(payload),hash:await clientPayloadHash(payload,Object.keys(payload)),at:new Date().toISOString()}));
     const trySave = async (pl) => {
-      if (id) return sb.from('clienti').update(pl).eq('id', id);
-      return sb.from('clienti').insert([pl]).select('id').maybeSingle();
+      attempted=true;
+      if(id){let update=sb.from('clienti').update(pl).eq('id',id);for(const field of Object.keys(pl)){const old=clienteEditBaseline[field];if(old===null||old===undefined)update=update.is(field,null);else update=update.eq(field,typeof old==='object'?JSON.stringify(old):old);}return update.select('id').maybeSingle();}
+      return sb.from('clienti').insert([{...pl,id:savedId}]).select('id').maybeSingle();
     };
     let res = await trySave(payload);
-    if (res.error && /ruolo_rubrica/.test(res.error.message || '')) {
-      delete payload.ruolo_rubrica;
-      res = await trySave(payload);
-    }
-    if (res.error) throw res.error;
-    if (!id && res.data) savedId = res.data.id || null;
+    if(authEpoch!==clientiAuthEpoch)throw Error('Sessione cambiata durante il salvataggio. Esito da verificare, nessun nuovo tentativo.');
+    if(res.error){definiteFailure=!!res.error.code&&/^(22|23|42|PGRST)/.test(res.error.code);throw res.error;}
+    if(id&&!res.data?.id){definiteFailure=true;throw Error('Dati modificati altrove. Riapri la scheda: nessuna modifica sovrascritta.');}
+    if(res.data?.id)savedId=res.data.id;
+    if(!savedId)throw Error('Esito non verificabile. Non riprovare prima di controllare la scheda.');
+    const verify=await sb.from('clienti').select('*').eq('id',savedId).maybeSingle();
+    if(verify.error||!verify.data||Object.keys(payload).some(k=>JSON.stringify(verify.data[k]??null)!==JSON.stringify(payload[k]??null)))throw Error('Salvataggio da verificare. Non riprovare: ricarica la scheda e confronta i dati.');
+    if(authEpoch!==clientiAuthEpoch)throw Error('Sessione cambiata: verifica salvataggio al prossimo accesso.');
+    localStorage.removeItem(pendingKey);
     toast(id ? 'Cliente aggiornato!' : 'Cliente aggiunto!', 'success');
     closeClienteModal();
     ownerRefreshCliente({ ...data, id: savedId });
@@ -9467,38 +9525,32 @@ async function saveCliente(openAfterSave = false) {
     try {
       if (sessionStorage.getItem('righetto_return_after_cliente') === 'nuovo') {
         sessionStorage.removeItem('righetto_return_after_cliente');
-        const match = allClienti.find(c => savedId && String(c.id) === String(savedId))
-          || allClienti.find(c => (data.email && c.email === data.email) || (data.nome && c.nome === data.nome));
+        const match = verify.data;
         if (match) { _proprietarioCache = [match]; selectProprietario(match.id); }
-        toast('Cliente salvato — selezionato come proprietario.', 'success');
+        toast('Cliente salvato e selezionato come proprietario.', 'success');
         return savedId;
       }
     } catch (e) {}
     if (openAfterSave && savedId && window.RighettoCliente) await RighettoCliente.open(savedId);
     return savedId;
   } catch(err) {
+    if(definiteFailure&&pendingKey)localStorage.removeItem(pendingKey);
     console.error('Save cliente error:', err);
     toast('Errore: ' + (err.message || 'Errore salvataggio'), 'error');
+  } finally {
+    savingCliente=false;
+    if(!attempted||definiteFailure||!document.getElementById('clienteModal').classList.contains('open'))saveButtons.forEach((b,i)=>b.disabled=priorDisabled[i]);
   }
 }
 
-async function deleteCliente() {
-  const id = document.getElementById('clienteEditId').value;
-  if (!id) return;
-  await deleteClienteById(id);
-  closeClienteModal();
+async function deleteCliente(){
+ const id=document.getElementById('clienteEditId').value;if(!id)return;
+ if(await deleteClienteById(id))closeClienteModal();
 }
-
-async function deleteClienteById(id) {
-  if (!confirm('Eliminare questo cliente?')) return;
-  try {
-    const { error } = await sb.from('clienti').delete().eq('id', id);
-    if (error) throw error;
-    toast('Cliente eliminato', 'success');
-    loadClienti();
-  } catch(err) {
-    toast('Errore eliminazione: ' + (err.message || 'Errore'), 'error');
-  }
+async function deleteClienteById(id){
+ if(!confirm('Spostare questa scheda nello storico? Non verrà cancellata e potrai recuperarla con Mostra storico.'))return false;
+ try{const r=await sb.from('clienti').update({storico:true,storico_il:new Date().toISOString()}).eq('id',id).select('id,storico').maybeSingle();if(r.error||!r.data?.storico)throw Error(r.error?.message||'Archiviazione non confermata.');toast('Cliente spostato nello storico.','success');await loadClienti();return true;}
+ catch(e){toast('Esito archiviazione da verificare: '+e.message,'error');return false;}
 }
 
 // ══════════════════════════════════════
@@ -9566,54 +9618,17 @@ function matchScore(client, property) {
   return Math.round((score / maxScore) * 100);
 }
 
-function showMatchingImmobili(clientId) {
-  const client = allClienti.find(c => c.id == clientId);
-  if (!client) return;
-
-  const matches = allImmobili
-    .filter(i => i.attivo && !i.venduto && !i.affittato)
-    .map(i => ({ ...i, _score: matchScore(client, i) }))
-    .filter(i => i._score >= 30)
-    .sort((a, b) => b._score - a._score);
-
-  document.getElementById('matchModalTitle').textContent = 'Immobili per ' + (client.nome || client.email);
-
-  if (matches.length === 0) {
-    document.getElementById('matchModalBody').innerHTML = '<div style="text-align:center;padding:40px;color:var(--caffe2)"><p style="font-size:1.1rem;margin-bottom:8px">Nessun immobile compatibile</p><p style="font-size:0.82rem">Prova ad aggiornare i criteri di ricerca del cliente</p></div>';
-  } else {
-    let tel = (client.telefono || '').replace(/\s+/g, '').replace(/^(\+39|0039)/, '');
-    document.getElementById('matchModalBody').innerHTML = matches.map(i => {
-      const foto = i.foto_principale || (i.foto_urls && i.foto_urls[0]) || '';
-      const thumb = foto ? '<img src="' + foto + '" style="width:175px;height:130px;object-fit:cover;border-radius:8px" onerror="this.style.display=\'none\'">' : '<div style="width:175px;height:130px;background:var(--caffe3);border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:0.85rem">No foto</div>';
-      const prezzo = i.prezzo ? '€ ' + Number(i.prezzo).toLocaleString('it-IT') : '';
-      const waMsg = encodeURIComponent('Buongiorno ' + (client.nome || '') + ', le proponiamo questo immobile:\n\n' + (i.codice || '') + ' - ' + (i.titolo || '') + '\n' + (i.comune || '') + '\n' + prezzo + (i.superficie ? ' | ' + i.superficie + ' mq' : '') + (i.camere ? ' | ' + i.camere + ' camere' : '') + '\n\nPer info: Righetto Immobiliare');
-      const waUrl = tel ? 'https://wa.me/39' + tel + '?text=' + waMsg : '';
-      return '<div style="display:flex;gap:14px;align-items:center;padding:12px;border-bottom:1px solid rgba(0,0,0,0.06)">' +
-        thumb +
-        '<div style="flex:1;min-width:0">' +
-          '<div style="font-weight:600;font-size:0.88rem;color:var(--nero)">' + escHtml(i.codice || '') + ' — ' + escHtml(i.titolo || '') + '</div>' +
-          '<div style="font-size:0.78rem;color:var(--caffe2)">' + escHtml(i.comune || '') + ' | ' + prezzo + (i.superficie ? ' | ' + i.superficie + ' mq' : '') + (i.camere ? ' | ' + i.camere + ' cam' : '') + '</div>' +
-        '</div>' +
-        '<div style="display:flex;flex-direction:column;gap:4px;align-items:center">' +
-          '<span style="background:' + (i._score >= 70 ? 'var(--verde)' : i._score >= 50 ? '#e67e22' : 'var(--caffe2)') + ';color:white;padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:700">' + i._score + '%</span>' +
-          (waUrl ? '<a href="' + waUrl + '" target="_blank" style="background:#25d366;color:white;padding:4px 10px;border-radius:6px;font-size:0.72rem;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:4px">WhatsApp</a>' : '') +
-          '<button class="btn btn-sm" style="font-size:0.68rem;padding:2px 8px;background:#667eea;color:#fff;border:none" onclick="emSendPropertyToClient(\'' + client.id + '\',\'' + i.id + '\')">Email</button>' +
-          '<button class="btn btn-sm" style="font-size:0.68rem;padding:2px 8px" onclick="printPropertyPdf(\'' + i.id + '\');closeMatchModal()">PDF</button>' +
-        '</div>' +
-      '</div>';
-    }).join('');
-
-    // Bottoni azioni massive
-    tel = (client.telefono || '').replace(/\s+/g, '').replace(/^(\+39|0039)/, '');
-    const bulkActions = '<div style="padding:14px;background:linear-gradient(135deg,#f8f6f0,#efe8dc);border-bottom:2px solid var(--oro);display:flex;gap:8px;flex-wrap:wrap;align-items:center">' +
-      '<span style="font-size:0.82rem;font-weight:600;color:var(--caffe)">Invio rapido (' + matches.length + ' immobili):</span>' +
-      '<button class="btn btn-sm" onclick="emSendAllMatchingToClient(\'' + client.id + '\')" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;font-size:0.78rem;padding:6px 14px">Email tutti gli immobili</button>' +
-      (tel ? '<button class="btn btn-sm" onclick="emWhatsAppAllMatchingToClient(\'' + client.id + '\')" style="background:#25d366;color:#fff;border:none;font-size:0.78rem;padding:6px 14px">WhatsApp tutti</button>' : '') +
-    '</div>';
-    document.getElementById('matchModalBody').innerHTML = bulkActions + document.getElementById('matchModalBody').innerHTML;
-  }
-
-  document.getElementById('matchModal').classList.add('open');
+async function showMatchingImmobili(clientId){
+ const modal=document.getElementById('matchModal'),body=document.getElementById('matchModalBody');modal.classList.add('open');body.textContent='Ricerca immobili compatibili…';
+ try{const cr=await sb.from('clienti').select('*').eq('id',clientId).maybeSingle();if(cr.error||!cr.data)throw Error('Cliente non leggibile.');const client=cr.data;document.getElementById('matchModalTitle').textContent='Immobili per '+(clienteDisplayName(client)||'Cliente');
+ let properties=[];for(let offset=0;;offset+=500){const q=await sb.from('immobili').select('id,codice,titolo,comune,tipologia,tipo_operazione,prezzo,camere,superficie,attivo,venduto,affittato,cestino').eq('attivo',true).eq('cestino',false).order('id').range(offset,offset+499);if(q.error)throw q.error;properties.push(...q.data);if(q.data.length<500)break;}
+ const matches=properties.filter(i=>!i.venduto&&!i.affittato).map(i=>({...i,_score:matchScore(client,i)})).filter(i=>i._score>=30).sort((a,b)=>b._score-a._score);
+ body.innerHTML='<p>Confronto indicativo sui criteri salvati, non conferma disponibilità. Nessun invio automatico.</p>'+ (matches.length?matches.map(i=>'<div class="client-match-card"><b>'+escHtml(i.codice||'')+' - '+escHtml(i.titolo||'')+'</b><p>'+escHtml(i.comune||'')+(i.prezzo?' | € '+Number(i.prezzo).toLocaleString('it-IT'):'')+(i.superficie?' | '+Number(i.superficie)+' mq':'')+'</p><p>Corrispondenza ai criteri: '+i._score+'%</p><button type="button" data-client-match="'+escHtml(i.id)+'">Apri immobile interno</button><button type="button" data-client-proposal="'+escHtml(i.id)+'">Prepara testo proposta</button></div>').join(''):'<p>Nessun immobile compatibile con i criteri salvati. Controlla o completa la ricerca del cliente.</p>');
+ body.querySelectorAll('[data-client-proposal]').forEach(b=>b.onclick=()=>{
+ const item=matches.find(i=>i.id===b.dataset.clientProposal);if(!item)return;let draft=body.querySelector('[data-proposal-editor]');if(draft)draft.remove();draft=document.createElement('section');draft.dataset.proposalEditor='';const label=document.createElement('h3');label.textContent='Bozza proposta, nessun invio';const area=document.createElement('textarea');area.rows=9;area.style.cssText='width:100%;font:15px Arial;padding:10px;box-sizing:border-box';area.setAttribute('aria-label','Testo proposta da rivedere');area.value='Buongiorno, le segnalo un immobile che potrebbe interessarle.\n\nRiferimento '+(item.codice||'')+'\n'+(item.comune||'')+(item.prezzo?'\nPrezzo: € '+Number(item.prezzo).toLocaleString('it-IT'):'')+(item.superficie?'\nSuperficie: '+item.superficie+' mq':'')+'\n\nSe desidera maggiori informazioni o concordare una visita, può contattarmi.\nGino';const note=document.createElement('p');note.textContent='Rivedi il testo e verifica prezzo e disponibilità prima di usarlo. Nessun indirizzo reale dell’immobile, destinatario o allegato viene aggiunto. Il testo resta solo in questa finestra.';const copy=document.createElement('button');copy.type='button';copy.textContent='Copia testo';const status=document.createElement('p');status.setAttribute('role','status');copy.onclick=async()=>{try{await navigator.clipboard.writeText(area.value);status.textContent='Testo copiato. Nessun invio.';}catch(e){area.focus();area.select();status.textContent='Seleziona e copia il testo. Nessun invio.';}};draft.append(label,area,note,copy,status);body.append(draft);draft.scrollIntoView({block:'nearest'});
+ });
+ body.querySelectorAll('[data-client-match]').forEach(b=>b.onclick=()=>{closeMatchModal();showSection('immobili');editImmobile(b.dataset.clientMatch)});
+ }catch(e){body.textContent='Ricerca non completata: '+e.message;}
 }
 
 function showMatchingClienti(propertyId) {
@@ -12191,7 +12206,9 @@ initAgendaWeek();
 let csvParsedData = [];
 let csvHeaders = [];
 const csvFieldMap = {
-  nome: ['nome', 'name', 'nome e cognome', 'nome cognome', 'nominativo', 'cliente', 'full name', 'fullname'],
+  nome_proprio: ['nome proprio', 'nome', 'first name'],
+  cognome: ['cognome', 'surname', 'last name'],
+  nome: ['nome completo', 'name', 'nome e cognome', 'nome cognome', 'nominativo', 'cliente', 'full name', 'fullname'],
   email: ['email', 'e-mail', 'mail', 'posta', 'email address'],
   telefono: ['telefono', 'tel', 'phone', 'cellulare', 'cell', 'mobile', 'numero'],
   fonte: ['fonte', 'source', 'origine', 'provenienza', 'canale'],
@@ -12199,7 +12216,20 @@ const csvFieldMap = {
   note: ['note', 'notes', 'commenti', 'osservazioni', 'appunti', 'descrizione']
 };
 
-function openCsvImportModal() {
+async function clientCsvPendingKey(){const a=await sb.auth.getUser();if(a.error||!a.data?.user?.id)throw Error('Accedi prima di importare.');return 'righetto-client-csv-pending:'+a.data.user.id;}
+async function reconcileCsvImport(){
+ const key=await clientCsvPendingKey();let pending;try{pending=JSON.parse(localStorage.getItem(key));}catch(e){toast('Registro importazione non leggibile. Nessun nuovo tentativo.','error');return;}
+ if(!pending?.ids?.length)return;
+ try{const r=await sb.from('clienti').select('id').in('id',pending.ids);if(r.error)throw r.error;
+ if(r.data?.length===pending.ids.length){localStorage.removeItem(key);toast('Importazione precedente verificata: '+r.data.length+' schede presenti. Nessun reinvio.','success');await loadClienti();}
+ else toast('Importazione da verificare: '+(r.data?.length||0)+' di '+pending.ids.length+' ID presenti. Non verrà ripetuta.','error');
+ }catch(e){toast('Verifica importazione non riuscita. Nessun nuovo tentativo.','error');}
+}
+async function openCsvImportModal() {
+  let key;try{key=await clientCsvPendingKey();}catch(e){toast(e.message,'error');return;}
+  const pending=localStorage.getItem(key);
+  if(pending){reconcileCsvImport();return;}
+  document.getElementById('btnCsvImport').disabled=false;
   csvParsedData = [];
   csvHeaders = [];
   document.getElementById('csvFileInput').value = '';
@@ -12241,65 +12271,27 @@ function handleCsvFile(file) {
   reader.readAsText(file, 'UTF-8');
 }
 
-function parseCsvContent(text) {
-  // Detect separator: semicolon, comma, or tab
-  const firstLine = text.split('\n')[0];
-  let separator = ',';
-  if (firstLine.split(';').length > firstLine.split(',').length) separator = ';';
-  if (firstLine.split('\t').length > firstLine.split(separator).length) separator = '\t';
-
-  const lines = text.split('\n').map(l => l.trim()).filter(l => l);
-  if (lines.length < 2) {
-    showCsvError('Il file deve contenere almeno un\'intestazione e una riga di dati');
-    return;
-  }
-
-  csvHeaders = parseCsvLine(lines[0], separator);
-  csvParsedData = [];
-
-  for (let i = 1; i < lines.length; i++) {
-    const values = parseCsvLine(lines[i], separator);
-    if (values.length > 0 && values.some(v => v.trim())) {
-      const row = {};
-      csvHeaders.forEach((h, idx) => { row[h] = (values[idx] || '').trim(); });
-      csvParsedData.push(row);
-    }
-  }
-
-  if (csvParsedData.length === 0) {
-    showCsvError('Nessuna riga di dati trovata nel file');
-    return;
-  }
-
-  document.getElementById('csvError').style.display = 'none';
-  renderCsvMapping();
-  renderCsvPreview();
-  document.getElementById('btnCsvImport').style.display = 'inline-flex';
+function parseClientCsv(text,sep){
+ const rows=[];let row=[],cell='',quoted=false;
+ for(let i=0;i<text.length;i++){const ch=text[i];if(ch==='"'){if(quoted&&text[i+1]==='"'){cell+='"';i++;}else quoted=!quoted;}
+ else if(ch===sep&&!quoted){row.push(cell);cell='';}
+ else if((ch==='\n'||ch==='\r')&&!quoted){if(ch==='\r'&&text[i+1]==='\n')i++;row.push(cell);if(row.some(x=>x.trim()))rows.push(row);row=[];cell='';}
+ else cell+=ch;}
+ if(quoted)throw Error('Virgolette CSV non chiuse.');row.push(cell);if(row.some(x=>x.trim()))rows.push(row);return rows;
 }
-
-function parseCsvLine(line, sep) {
-  const result = [];
-  let current = '';
-  let inQuotes = false;
-  for (let i = 0; i < line.length; i++) {
-    const ch = line[i];
-    if (ch === '"') {
-      if (inQuotes && line[i + 1] === '"') { current += '"'; i++; }
-      else { inQuotes = !inQuotes; }
-    } else if (ch === sep && !inQuotes) {
-      result.push(current); current = '';
-    } else {
-      current += ch;
-    }
-  }
-  result.push(current);
-  return result;
+function parseCsvContent(text){
+ try{const first=text.replace(/^\uFEFF/,'').split(/\r?\n/)[0];const separator=[',',';','\t'].sort((a,b)=>parseClientCsv(first,b)[0].length-parseClientCsv(first,a)[0].length)[0];const rows=parseClientCsv(text.replace(/^\uFEFF/,''),separator);
+ if(rows.length<2)throw Error('Servono intestazione e almeno una riga.');csvHeaders=rows[0].map(x=>x.trim());if(new Set(csvHeaders).size!==csvHeaders.length||csvHeaders.some(x=>!x))throw Error('Intestazioni vuote o duplicate.');
+ csvParsedData=rows.slice(1).map(values=>{if(values.length!==csvHeaders.length)throw Error('Numero di colonne diverso dall’intestazione.');return Object.fromEntries(csvHeaders.map((h,i)=>[h,values[i].trim()]));});
+ document.getElementById('csvError').style.display='none';renderCsvMapping();renderCsvPreview();document.getElementById('btnCsvImport').style.display='inline-flex';
+ }catch(e){showCsvError(e.message);csvParsedData=[];document.getElementById('btnCsvImport').style.display='none';}
 }
+function parseCsvLine(line,sep){return parseClientCsv(line,sep)[0]||[];}
 
 function renderCsvMapping() {
   const grid = document.getElementById('csvMappingGrid');
-  const dbFields = ['nome', 'email', 'telefono', 'fonte', 'interesse', 'note'];
-  const labels = { nome: 'Nome', email: 'Email', telefono: 'Telefono', fonte: 'Fonte', interesse: 'Interesse', note: 'Note' };
+  const dbFields = ['nome', 'nome_proprio', 'cognome', 'email', 'telefono', 'fonte', 'interesse', 'note'];
+  const labels = { nome: 'Nome completo', nome_proprio:'Nome',cognome:'Cognome', email: 'Email', telefono: 'Telefono', fonte: 'Fonte', interesse: 'Interesse', note: 'Note' };
 
   grid.innerHTML = dbFields.map(field => {
     // Auto-detect best match
@@ -12308,7 +12300,7 @@ function renderCsvMapping() {
     for (const h of csvHeaders) {
       if (aliases.some(a => h.toLowerCase().trim() === a)) { bestMatch = h; break; }
     }
-    if (!bestMatch) {
+    if (!bestMatch && !['nome','nome_proprio','cognome'].includes(field)) {
       for (const h of csvHeaders) {
         if (aliases.some(a => h.toLowerCase().trim().includes(a))) { bestMatch = h; break; }
       }
@@ -12343,14 +12335,18 @@ function renderCsvPreview() {
   document.getElementById('csvPreviewArea').style.display = 'block';
 }
 
-async function doCsvImport() {
+async function doCsvImport(){
+ if(!navigator.locks){showCsvError('Protezione tra schede non disponibile. Usa un browser aggiornato.');return;}
+ return navigator.locks.request('righetto-client-write',{mode:'exclusive',ifAvailable:true},async lock=>{if(!lock){showCsvError('Un salvataggio clienti è in corso in un’altra scheda.');return;}return doCsvImportLocked();});
+}
+async function doCsvImportLocked() {
   const mapping = {};
-  ['nome', 'email', 'telefono', 'fonte', 'interesse', 'note'].forEach(field => {
+  ['nome', 'nome_proprio', 'cognome', 'email', 'telefono', 'fonte', 'interesse', 'note'].forEach(field => {
     const sel = document.getElementById('csvMap_' + field);
     if (sel && sel.value) mapping[field] = sel.value;
   });
 
-  if (!mapping.nome && !mapping.email) {
+  if (!mapping.nome && !mapping.nome_proprio && !mapping.cognome && !mapping.email) {
     showCsvError('Devi mappare almeno il campo Nome o Email');
     return;
   }
@@ -12360,6 +12356,7 @@ async function doCsvImport() {
     Object.entries(mapping).forEach(([dbField, csvCol]) => {
       rec[dbField] = row[csvCol] || '';
     });
+    if(!rec.nome)rec.nome=clienteDisplayName(rec);
     if (!rec.fonte) rec.fonte = 'csv_import';
     return rec;
   }).filter(r => r.nome || r.email);
@@ -12369,30 +12366,24 @@ async function doCsvImport() {
     return;
   }
 
-  document.getElementById('btnCsvImport').disabled = true;
-  document.getElementById('btnCsvImport').textContent = 'Importazione in corso...';
+  if(records.length>500){showCsvError('Massimo 500 clienti per singola importazione. Dividi il file prima di iniziare.');return;}
+  const authEpoch=clientiAuthEpoch;const key=await clientCsvPendingKey();const btn=document.getElementById('btnCsvImport');
+  if(btn.disabled)return;if(localStorage.getItem(key)){showCsvError('Importazione precedente da verificare. Nessun nuovo tentativo per evitare duplicati.');return;}
+  const prepared=records.map(r=>({...r,id:crypto.randomUUID()}));
+  if(!confirm('Importare '+prepared.length+' nuove schede? Non vengono fuse con schede esistenti e non parte alcun messaggio.'))return;
+  btn.disabled=true;btn.textContent='Importazione in corso...';let definitive=false;
+  try{
+    localStorage.setItem(key,JSON.stringify({ids:prepared.map(r=>r.id),at:new Date().toISOString()}));
+    const result=await sb.from('clienti').insert(prepared).select('id');
+    if(authEpoch!==clientiAuthEpoch)throw Error('Sessione cambiata: esito da verificare.');
+    if(result.error){definitive=!!result.error.code&&/^(22|23|42|PGRST)/.test(result.error.code);throw result.error;}
+    const check=await sb.from('clienti').select('id').in('id',prepared.map(r=>r.id));
+    if(check.error||check.data?.length!==prepared.length)throw Error('Conteggio di conferma non riuscito.');
+    if(authEpoch!==clientiAuthEpoch)throw Error('Sessione cambiata: verifica al prossimo accesso.');
+    localStorage.removeItem(key);toast(prepared.length+' clienti importati e verificati.','success');closeCsvImportModal();await loadClienti();definitive=true;
+  }catch(err){if(definitive)localStorage.removeItem(key);showCsvError((definitive?'Importazione non eseguita: ':'Esito da verificare, non riprovare: ')+(err.message||'Errore di rete'));}
+  finally{btn.disabled=!definitive;btn.textContent=definitive?'Importa Clienti':'Da verificare, non riprovare';}
 
-  try {
-    // Insert in batches of 50
-    const batchSize = 50;
-    let imported = 0;
-    for (let i = 0; i < records.length; i += batchSize) {
-      const batch = records.slice(i, i + batchSize);
-      const { error } = await sb.from('clienti').insert(batch);
-      if (error) throw error;
-      imported += batch.length;
-    }
-
-    toast(imported + ' clienti importati con successo!', 'success');
-    closeCsvImportModal();
-    loadClienti();
-  } catch(err) {
-    console.error('CSV import error:', err);
-    showCsvError('Errore importazione: ' + (err.message || 'Errore sconosciuto'));
-  } finally {
-    document.getElementById('btnCsvImport').disabled = false;
-    document.getElementById('btnCsvImport').textContent = 'Importa Clienti';
-  }
 }
 
 function showCsvError(msg) {
@@ -18014,7 +18005,7 @@ window.showSection('home');
 <script src="js/agenda-event-types.js?v=1"></script>
 <script>window.RIGHETTO_SYNC_ATTIVA=true;</script>
 <script src="js/admin-agenda.js?v=10"></script>
-<script src="js/admin-cliente-scheda.js?v=5"></script>
+<script src="js/admin-cliente-scheda.js?v=20261031-clienti"></script>
 <script src="js/admin-immobile-operazioni.js?v=1"></script>
 <script src="js/admin-blocco2.js?v=1"></script>
 <script>RighettoAgenda.init(document.getElementById("righetto-operational-agenda"));</script>
@@ -18023,8 +18014,8 @@ window.showSection('home');
 <script>(function(){var el=document.getElementById('righetto-attivita');if(!el)return;var done=false,busy=false;function msg(t){el.innerHTML='<div class="at-banner">'+t+'</div>';}
 async function go(){if(done||busy)return;busy=true;try{if(typeof sb==='undefined')throw 0;var u=await sb.auth.getUser();if(!u.data.user)throw 0;done=true;RighettoAttivita.init(el,{store:RighettoAttivita.dbStore(sb)});}catch(e){msg('Attivit\u00e0: accedi per vedere le pratiche.');}busy=false;}
 msg('Attivit\u00e0: caricamento...');go();setInterval(go,3000);})();</script>
-<script src="js/admin-mobile.js?v=8"></script>
-<script src="js/admin-cliente-layout.js?v=20261026a"></script>
+<script src="js/admin-mobile.js?v=20261031-clienti"></script>
+<script src="js/admin-cliente-layout.js?v=20261031-clienti"></script>
 </body>
 </html>
 
