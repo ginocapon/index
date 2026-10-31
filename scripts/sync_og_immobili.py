@@ -116,7 +116,7 @@ def seo_title(row: dict) -> str:
     return f"{tip} {op_label} a {comune} — Righetto Immobiliare Padova".replace("  ", " ").strip()
 
 
-LOCALI_NON_VERIFICATI = {"LA0326"}  # codici con locali non certificati: mai presentare camere come locali
+LOCALI_NON_VERIFICATI = {"LA0326", "LA0327"}  # codici con locali non certificati: mai presentare camere come locali
 
 # Overlay mq PUBBLICI (allineato a js/mq-pubblici.js, mai persistito in DB):
 # la descrizione share deve mostrare lo stesso valore pubblico della scheda dinamica.

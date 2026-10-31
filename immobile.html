@@ -910,7 +910,7 @@ function render(d) {
   const operazione = d.tipo_operazione === 'vendita' ? 'in vendita' : (d.tipo_operazione || '').startsWith('affitto') ? 'in affitto' : '';
   const comuneLabel = d.comune || '';
   const mqLabel = d.superficie ? d.superficie + ' m²' : '';
-  const LOCALI_NON_VERIFICATI = ['LA0326'];
+  const LOCALI_NON_VERIFICATI = ['LA0326','LA0327'];
   const localiVal = d.locali || (LOCALI_NON_VERIFICATI.indexOf((d.codice || '').trim()) !== -1 ? null : d.camere);
   const localiLabel = localiVal ? localiVal + ' locali' : '';
   const titleRef = d.codice || String(d.id || '').slice(0, 8);
@@ -1989,7 +1989,7 @@ async function initPropertyMap(d) {
   // Mappa: default storico = indirizzo_mappa (zoom strada) o Comune (zoom paese).
   // Eccezione privacy esplicita per codice: geocoding SOLO Comune, zoom paese;
   // indirizzo_mappa resta solo etichetta testuale in scheda.
-  const MAPPA_SOLO_COMUNE = ['LA0326'];
+  const MAPPA_SOLO_COMUNE = ['LA0326','LA0327'];
   const soloComune = MAPPA_SOLO_COMUNE.indexOf((d.codice || '').trim()) !== -1;
   const addr = soloComune
     ? ((d.comune || 'Padova').trim() + ', Italia')
