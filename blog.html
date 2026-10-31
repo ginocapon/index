@@ -323,6 +323,7 @@ async function initBlog() {
       "data": "2026-10-31",
       "stato": "pubblicato",
       "immagine_copertina": "img/blog/blog-imu-seconda-casa-padova-2026-hero.webp",
+      "ai_generated": false,
       "url_statico": "blog-imu-seconda-casa-padova-2026",
       "tempo": 7,
       "autore": "Gino Capon",
@@ -2457,7 +2458,7 @@ function renderBlog() {
       const cardImg = mainCardPreview(a.immagine_copertina || extractFirstImage(a.contenuto));
       return `
       <a class="acard" href="${artUrl(a)}">
-        <div class="acard-img">${cardImg ? '<img src="'+cardImg+'" alt="'+esc(a.titolo)+'" width="400" height="160" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.outerHTML=\'<div class=acard-img-ph>'+(a.emoji||'&#128221;')+'</div>\'">' : '<div class="acard-img-ph">'+(a.emoji || '&#128221;')+'</div>'}</div>
+        <div class="acard-img">${cardImg ? '<img src="'+cardImg+'"'+(a.ai_generated===false?' data-ai-generated="false"':'')+' alt="'+esc(a.titolo)+'" width="400" height="160" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.outerHTML=\'<div class=acard-img-ph>'+(a.emoji||'&#128221;')+'</div>\'">' : '<div class="acard-img-ph">'+(a.emoji || '&#128221;')+'</div>'}</div>
         <div class="acard-body">
           <span class="acard-cat">${esc(a.categoria)}</span>
           <div class="acard-title">${esc(a.titolo)}</div>
@@ -2479,7 +2480,7 @@ function renderBlog() {
         const riImg = mainCardPreview(a.immagine_copertina || extractFirstImage(a.contenuto));
         return `
         <a href="${artUrl(a)}" style="text-decoration:none;color:inherit">
-          <div class="recent-item"><div class="ri-img">${riImg ? '<img src="'+riImg+'" data-rig-photo-caption="skip" alt="'+esc(a.titolo)+'" width="52" height="40" style="width:100%;height:100%;object-fit:cover;border-radius:2px" loading="lazy">' : (a.emoji || '&#128221;')}</div><div><div class="ri-title">${esc(a.titolo)}</div><div class="ri-date">${fmtDateShort(a.data)}</div></div></div>
+          <div class="recent-item"><div class="ri-img">${riImg ? '<img src="'+riImg+'"'+(a.ai_generated===false?' data-ai-generated="false"':'')+' data-rig-photo-caption="skip" alt="'+esc(a.titolo)+'" width="52" height="40" style="width:100%;height:100%;object-fit:cover;border-radius:2px" loading="lazy">' : (a.emoji || '&#128221;')}</div><div><div class="ri-title">${esc(a.titolo)}</div><div class="ri-date">${fmtDateShort(a.data)}</div></div></div>
         </a>
       `}).join('')
     : '<p style="font-size:.8rem;color:var(--grigio)">Nessun articolo recente</p>';
