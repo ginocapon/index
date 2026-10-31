@@ -100,3 +100,11 @@ body .rcs,body.rm-on .rcs{top:0!important}
 body:has(#matchModal.open) .rh-menu-top{z-index:0!important;pointer-events:none!important}#matchModal.modal-overlay{z-index:15000!important}.client-match-card{border-bottom:1px solid #ccd5dd;padding:14px 0}.client-match-card p{margin:6px 0}.client-match-card button{min-height:40px;margin:4px 8px 4px 0}
 
 body:has(#clientiBulkModal.open) .rh-menu-top{z-index:0!important;pointer-events:none!important}#clientiBulkModal{z-index:15000!important}#clientiBulkModal button{min-height:40px;margin:8px}
+
+/* Client dialogs must cover the separate phone header as well as desktop navigation. */
+@media(max-width:760px){body.rm-on:has(#clienteModal.open) #rm-head,body.rm-on:has(#csvImportModal.open) #rm-head,body.rm-on:has(#matchModal.open) #rm-head,body.rm-on:has(#clientiBulkModal.open) #rm-head,body.rm-on:has(.rcs) #rm-head{display:none!important;pointer-events:none!important}}
+
+/* Same compact nine-command order as the reference; clear icon strokes and focus. */
+#sec-clienti .client-ops button{font:16px/1 Arial,sans-serif;flex:0 0 18px;width:18px;min-width:18px;outline-offset:2px}#sec-clienti .client-ops button:focus-visible{outline:2px solid #005691}#sec-clienti .client-ops button:disabled{opacity:.45!important}
+
+#sec-clienti .client-ops svg{display:block;width:16px;height:16px;flex:0 0 16px}#sec-clienti .client-ops button:last-child{color:#c32222!important}

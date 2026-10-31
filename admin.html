@@ -2200,7 +2200,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 <link rel="stylesheet" href="css/admin-agenda.css?v=6">
 <link rel="stylesheet" href="css/admin-attivita.css?v=4">
 <link rel="stylesheet" href="css/admin-mobile.css?v=3">
-<link rel="stylesheet" href="layout-clienti.css?v=20261031-clienti"></head>
+<link rel="stylesheet" href="layout-clienti.css?v=20261031-clienti-mobile2"></head>
 <body>
 
 <!-- LOGIN -->
@@ -9216,6 +9216,7 @@ async function printCliente(id){
  }catch(e){popup.document.body.textContent=e.message;}
 }
 function clienteDisplayName(c){const explicit=String(c.nome||'').trim();if(explicit)return explicit;const parts=[c.cognome,c.nome_proprio].map(v=>String(v||'').trim()).filter(Boolean).join(' ');return parts||String(c.ragione_sociale||'').trim();}
+function clientRowIcon(kind){const paths={detail:'<circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/>',history:'<circle cx="12" cy="12" r="9"/><path d="M12 6v6h5"/>',document:'<path d="M5 2h9l5 5v15H5z M14 2v6h5 M8 13h8 M8 17h6"/>',property:'<path d="m2 11 10-9 10 9 M5 9v13h14V9 M9 22v-8h6v8"/>',event:'<circle cx="12" cy="12" r="9"/><path d="M12 7v10 M7 12h10"/>',appointment:'<rect x="3" y="5" width="18" height="17" rx="1"/><path d="M7 2v6 M17 2v6 M3 10h18 M12 13v6 M9 16h6"/>',sms:'<rect x="7" y="2" width="10" height="20" rx="1"/><path d="M10 5h4 M11 19h2"/>',edit:'<path d="m3 17 13-13 4 4L7 21H3z M13 7l4 4"/>',archive:'<path d="M4 6h16 M8 6V3h8v3 M6 6l1 16h10l1-16 M10 10v8 M14 10v8"/>'};return '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+paths[kind]+'</svg>';}
 function renderClientiTable() {
   const empty = document.getElementById('clientiEmpty');
   const table = document.getElementById('clientiTable');
@@ -9257,8 +9258,9 @@ function renderClientiTable() {
     return `<tr data-nome="${escHtml(clienteDisplayName(c))}" data-email="${escHtml(c.email||'')}" data-telefono="${escHtml(c.telefono||'')}" data-ragione="${escHtml(c.ragione_sociale||'')}" data-piva="${escHtml(c.partita_iva||'')}" data-indirizzo="${escHtml(c.indirizzo_cliente||[c.indirizzo_via,c.numero_civico].filter(Boolean).join(' '))}">
 <td><input type="checkbox" aria-label="Seleziona ${escHtml(clienteDisplayName(c)||'cliente')}" data-client-select="${c.id}" ${selectedClienti.has(c.id)?'checked':''} onchange="toggleClientiSelection(this.dataset.clientSelect,this.checked)"></td><td><a href="#" onclick="RighettoCliente.open('${c.id}');return false;">${escHtml(clienteDisplayName(c)||'Nome non indicato')}</a><div class="client-contacts">${c.telefono?'▯ '+escHtml(c.telefono)+' <span class="phone-tools"><span title="QR non disponibile">▦</span> <span title="SMS non disponibile">●</span> '+''+'</span><br>':''}${c.email?'<a href="mailto:'+escHtml(c.email)+'">✉ '+escHtml(c.email)+'</a>':''}</div></td>
 <td>${escHtml(c.ragione_sociale||'')}</td><td data-client-event-count="${c.id}" title="Solo eventi collegati al cliente nel nuovo archivio">…</td><td>${escHtml(c.nazione||'')}</td><td>${escHtml([c.comune,c.provincia].filter(Boolean).join(' '))}</td><td>${escHtml(c.zona_residenza||'')}</td><td>${escHtml(c.indirizzo_cliente||[c.indirizzo_via,c.numero_civico].filter(Boolean).join(' '))}</td><td title="Data modifica non registrata nel nuovo">n.d.</td><td>${dateStr}</td><td title="Ultimo contatto non registrato nel nuovo">n.d.</td><td title="Etichette non collegate"></td>
-<td><div class="client-ops"><button onclick="RighettoCliente.open('${c.id}')" title="Scheda cliente">⌕</button><button onclick="RighettoCliente.open('${c.id}','cron')" title="Cronistoria">◷</button><button onclick="printCliente('${c.id}')" title="Stampa scheda cliente privata">▧</button><button onclick="showMatchingImmobili('${c.id}')" title="Immobili compatibili">⌂</button><button disabled title="Nuova attività: usare vecchio gestionale">⊕</button><button disabled title="Nuovo appuntamento: usare vecchio gestionale">▣</button><button disabled title="SMS non disponibile">▯</button><button onclick="editCliente('${c.id}')" title="Modifica cliente">✎</button><button onclick="RighettoCliente.open('${c.id}')" title="Archivio dal menuOperazioni">♜</button></div></td></tr>`;
+<td><div class="client-ops"><button onclick="RighettoCliente.open('${c.id}')" title="Scheda cliente">${clientRowIcon('detail')}</button><button onclick="RighettoCliente.open('${c.id}','cron')" title="Cronistoria">${clientRowIcon('history')}</button><button disabled data-client-route="document" data-client-id="${c.id}" title="Documenti / foglio visita: modello originale disponibile, identità cliente da verificare">${clientRowIcon('document')}</button><button onclick="RighettoCliente.open('${c.id}','imm')" title="Immobili collegati come proprietario o inquilino nel nuovo">${clientRowIcon('property')}</button><button disabled data-client-route="event" data-client-id="${c.id}" title="Aggiungi evento: collegamento al vecchio gestionale da verificare">${clientRowIcon('event')}</button><button disabled data-client-route="appointment" data-client-id="${c.id}" title="Nuovo appuntamento: collegamento al vecchio gestionale da verificare">${clientRowIcon('appointment')}</button><button disabled title="SMS non disponibile">${clientRowIcon('sms')}</button><button onclick="editCliente('${c.id}')" title="Modifica cliente">${clientRowIcon('edit')}</button><button onclick="RighettoCliente.open('${c.id}')" title="Archivio dal menuOperazioni">${clientRowIcon('archive')}</button></div></td></tr>`;
   }).join('');
+  if(window.RighettoClientLinks)window.RighettoClientLinks.hydrate(document.getElementById('clientiTable'));
 }
 
 let _clientiTotaleReale = null;
@@ -18005,7 +18007,7 @@ window.showSection('home');
 <script src="js/agenda-event-types.js?v=1"></script>
 <script>window.RIGHETTO_SYNC_ATTIVA=true;</script>
 <script src="js/admin-agenda.js?v=10"></script>
-<script src="js/admin-cliente-scheda.js?v=20261031-clienti"></script>
+<script src="js/admin-cliente-scheda.js?v=20261031-clienti-links3"></script>
 <script src="js/admin-immobile-operazioni.js?v=1"></script>
 <script src="js/admin-blocco2.js?v=1"></script>
 <script>RighettoAgenda.init(document.getElementById("righetto-operational-agenda"));</script>
