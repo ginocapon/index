@@ -116,10 +116,29 @@ def seo_title(row: dict) -> str:
     return f"{tip} {op_label} a {comune} — Righetto Immobiliare Padova".replace("  ", " ").strip()
 
 
+LOCALI_NON_VERIFICATI = {"LA0326"}  # codici con locali non certificati: mai presentare camere come locali
+
+# Overlay mq PUBBLICI (allineato a js/mq-pubblici.js, mai persistito in DB):
+# la descrizione share deve mostrare lo stesso valore pubblico della scheda dinamica.
+MQ_PUBBLICI = {
+    "2dfc63f5-b771-4732-89af-4e8aa96eb9d4": {"codice": "LA0326", "superficie": 80},
+}
+
+
+def applica_mq_pubblici(row: dict) -> dict:
+    o = MQ_PUBBLICI.get(str(row.get("id") or ""))
+    if o and (row.get("codice") or "").strip() == o["codice"]:
+        row = dict(row)
+        row["superficie"] = o["superficie"]
+    return row
+
+
 def seo_description(row: dict) -> str:
     tip = cap(row.get("tipologia") or "Immobile")
     mq = row.get("superficie")
-    loc = row.get("locali") or row.get("camere")
+    loc = row.get("locali")
+    if not loc and (row.get("codice") or "").strip() not in LOCALI_NON_VERIFICATI:
+        loc = row.get("camere")
     prezzo = row.get("prezzo")
     cod = row.get("codice") or ""
     parts = [tip]
@@ -191,6 +210,7 @@ def main() -> int:
     entries_by_file: dict[str, dict] = {}
 
     for row in rows:
+        row = applica_mq_pubblici(row)
         seo = generate_property_slug(row)
         if not seo:
             continue

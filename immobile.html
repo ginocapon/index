@@ -910,7 +910,9 @@ function render(d) {
   const operazione = d.tipo_operazione === 'vendita' ? 'in vendita' : (d.tipo_operazione || '').startsWith('affitto') ? 'in affitto' : '';
   const comuneLabel = d.comune || '';
   const mqLabel = d.superficie ? d.superficie + ' m²' : '';
-  const localiLabel = (d.locali || d.camere) ? (d.locali || d.camere) + ' locali' : '';
+  const LOCALI_NON_VERIFICATI = ['LA0326'];
+  const localiVal = d.locali || (LOCALI_NON_VERIFICATI.indexOf((d.codice || '').trim()) !== -1 ? null : d.camere);
+  const localiLabel = localiVal ? localiVal + ' locali' : '';
   const titleRef = d.codice || String(d.id || '').slice(0, 8);
   const seoTitle = [tipologia, operazione, comuneLabel, titleRef].filter(Boolean).join(' ') + ' | Righetto';
   const seoDesc = [tipologia, 'di', mqLabel, localiLabel ? '· ' + localiLabel : '', operazione, 'a', comuneLabel, d.codice ? '· Rif. ' + d.codice : '', '— Righetto Immobiliare'].filter(Boolean).join(' ');
@@ -955,7 +957,7 @@ function render(d) {
   };
   if (Array.isArray(d.foto) && d.foto[0]) jsonLd.image = resolveImageUrl(d.foto[0]);
   if (d.superficie) jsonLd.floorSize = { '@type': 'QuantitativeValue', value: d.superficie, unitCode: 'MTK' };
-  if (d.locali || d.camere) jsonLd.numberOfRooms = d.locali || d.camere;
+  if (localiVal) jsonLd.numberOfRooms = localiVal;
   let ldScript = document.getElementById('jsonld-immobile');
   if (!ldScript) { ldScript = document.createElement('script'); ldScript.type = 'application/ld+json'; ldScript.id = 'jsonld-immobile'; document.head.appendChild(ldScript); }
   ldScript.textContent = JSON.stringify(jsonLd);
