@@ -967,6 +967,7 @@ function generateSlug(titolo) {
       "categoria": "Fisco e proprietari",
       "data": "2026-10-31",
       "immagine_copertina": "img/blog/blog-imu-seconda-casa-padova-2026-hero.webp",
+      "ai_generated": false,
       "url_statico": "blog-imu-seconda-casa-padova-2026"
     },
     {
@@ -1687,7 +1688,7 @@ function generateSlug(titolo) {
     const href = a.url_statico || ('blog-articolo?s=' + encodeURIComponent(slug));
     return '<div class="blog-card rv d'+(i+1)+'" data-card-href="'+escAttr(href)+'" role="link" tabindex="0">'
       + '<div class="blog-cover"'+(img?' style="font-size:0;overflow:hidden"':'')+'>'
-      + (img ? '<img src="'+escAttr(img)+'" alt="" width="400" height="165" loading="lazy" decoding="async" data-rig-photo-caption="skip" style="width:100%;height:100%;object-fit:cover;display:block">' : (a.emoji||'📝'))
+      + (img ? '<img src="'+escAttr(img)+'" alt="" width="400" height="165" loading="lazy" decoding="async"'+(a.ai_generated===false?' data-ai-generated="false"':'')+' data-rig-photo-caption="skip" style="width:100%;height:100%;object-fit:cover;display:block">' : (a.emoji||'📝'))
       + '</div>'
       + '<div class="blog-body"><div class="blog-cat">'+((a.categoria||'Blog').replace(/</g,'&lt;'))+'</div>'
       + '<h3 class="blog-title">'+((a.titolo||'').replace(/</g,'&lt;'))+'</h3>'
