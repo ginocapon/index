@@ -1,0 +1,12 @@
+{
+  "base_url_env": "GESTIONALE_BASE_URL",
+  "cliente": {
+    "details_url": "/cliente_details.html?cliente_id={legacy_id}&flag_menu=allegati",
+    "media_api": "https://media.gestionaleimmobiliare.it/dyna_media.php?action=get_allegati_array",
+    "cloud_api": "/dyna_allegati_cloud.html?action=get&module=clienti&parent_id={legacy_id}"
+  },
+  "immobile": {
+    "details_url": "/immobile_details.html?immobile_id={legacy_imm_id}&flag_menu=allegati",
+    "cloud_api": "/dyna_allegati_cloud.html?action=get&module=immobili&parent_id={legacy_imm_id}"
+  }
+}
