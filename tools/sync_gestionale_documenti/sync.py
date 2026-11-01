@@ -46,7 +46,11 @@ def log(event: dict) -> None:
 
 def download(context, url: str) -> tuple[bytes, str] | None:
     try:
-        resp = context.request.get(url, timeout=120_000)
+        resp = context.request.get(
+            url,
+            timeout=120_000,
+            headers={"Referer": "https://pannello.gestionaleimmobiliare.it/"},
+        )
         if not resp.ok:
             return None
         body = resp.body()
@@ -112,15 +116,20 @@ def open_session():
 
 
 def cmd_check() -> None:
-    print("SUPABASE_URL", supabase_url() if __import__("os").environ.get("SUPABASE_URL") else "MISSING")
-    print("DRY_RUN", dry_run())
-    try:
-        from supabase_sync import sb
+    import os
 
-        sb().table("clienti").select("id").limit(1).execute()
-        print("Supabase OK (service_role)")
-    except Exception as e:
-        print("Supabase SKIP", e)
+    print("SUPABASE_URL", "OK" if os.environ.get("SUPABASE_URL") else "MISSING")
+    print("DRY_RUN", dry_run())
+    if os.environ.get("SUPABASE_URL") and os.environ.get("SUPABASE_SERVICE_ROLE_KEY"):
+        try:
+            from supabase_sync import sb
+
+            sb().table("clienti").select("id").limit(1).execute()
+            print("Supabase OK (service_role)")
+        except Exception as e:
+            print("Supabase FAIL", e)
+    else:
+        print("Supabase SKIP (secret mancanti)")
     path = storage_state_path()
     if not path:
         raise SystemExit("Manca sessione gestionale (storageState.json o GESTIONALE_STORAGE_STATE)")
