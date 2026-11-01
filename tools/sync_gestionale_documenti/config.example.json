@@ -1,0 +1,13 @@
+{
+  "base_url_env": "GESTIONALE_BASE_URL",
+  "cliente": {
+    "documents_url": "/cliente_allegati.html?id_cliente={legacy_id}",
+    "link_selector": "a[href*='download'], a[href*='allegat'], a[href$='.pdf'], a[href*='documento']",
+    "section_planimetrie_keywords": ["planimetr"]
+  },
+  "immobile": {
+    "documents_url": "/immobile_allegati.html?id={legacy_codice}",
+    "link_selector": "a[href*='download'], a[href*='allegat'], a[href$='.pdf']",
+    "planimetrie_selector": "a[href*='planimetr'], .planimetria a[href]"
+  }
+}

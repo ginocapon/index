@@ -30,6 +30,11 @@ seo-auto-email.html
 seo-auto-subject.txt
 data/seo-auto/.tmp.html
 
+# Migrazione gestionale (secret / sessioni)
+tools/sync_gestionale_documenti/storageState.json
+tools/sync_gestionale_documenti/config.local.json
+tools/sync_gestionale_documenti/.sync-log.jsonl
+
 # Chiave del relay email (creata a mano su cPanel)
 api/relay-secret.php
 relay-secret.php
