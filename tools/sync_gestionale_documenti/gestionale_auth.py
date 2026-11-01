@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 import pyotp
 from playwright.sync_api import sync_playwright
 
-from env_config import gestionale_base_url, has_password_login, load_config, storage_state
+from env_config import gestionale_base_url, has_password_login, load_config, storage_state, storage_state_path
 
 if TYPE_CHECKING:
     from playwright.sync_api import BrowserContext, Page
@@ -22,6 +22,10 @@ class _GestionaleSession:
     def __enter__(self):
         self._pw = sync_playwright().start()
         self._browser = self._pw.chromium.launch(headless=True)
+        sp = storage_state_path()
+        if sp:
+            self._context = self._browser.new_context(storage_state=sp)
+            return self._pw, self._browser, self._context
         state = storage_state()
         if state:
             self._context = self._browser.new_context(storage_state=state)

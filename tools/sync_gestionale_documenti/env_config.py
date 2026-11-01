@@ -46,12 +46,22 @@ def dry_run() -> bool:
     return os.environ.get("SYNC_DRY_RUN", "1").strip().lower() in ("1", "true", "yes")
 
 
+def storage_state_path() -> str | None:
+    path = os.environ.get("GESTIONALE_STORAGE_STATE_PATH", "").strip()
+    if path and Path(path).is_file():
+        return path
+    local = ROOT / "storageState.json"
+    if local.is_file():
+        return str(local)
+    return None
+
+
 def storage_state() -> dict | None:
     raw = os.environ.get("GESTIONALE_STORAGE_STATE", "").strip()
     if not raw:
-        path = os.environ.get("GESTIONALE_STORAGE_STATE_PATH", "").strip()
-        if path and Path(path).is_file():
-            raw = Path(path).read_text(encoding="utf-8")
+        sp = storage_state_path()
+        if sp:
+            raw = Path(sp).read_text(encoding="utf-8")
     if not raw:
         return None
     try:
