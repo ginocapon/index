@@ -6699,6 +6699,7 @@ async function generaViaCasuale() {
 }
 
 function editImmobile(id) {
+  if(window.RighettoNavigation&&!RighettoNavigation.replaying)return RighettoNavigation.open({section:'nuovo',view:'property-edit',id:String(id)},()=>editImmobile(id));
   const imm = allImmobili.find(x => String(x.id) === String(id));
   if (!imm) { toast('Immobile non trovato', 'error'); return; }
   document.getElementById('editId').value = imm.id;
@@ -9357,6 +9358,7 @@ function toggleClienteRuoloRubrica() {
 
 let clienteEditBaseline=null;
 function openClienteModal(id) {
+  if(window.RighettoNavigation&&!RighettoNavigation.replaying)return RighettoNavigation.open({section:'clienti',view:'client-new'},()=>openClienteModal(id));
   clienteEditBaseline=null;
   document.getElementById('clienteEditId').value = '';
   document.getElementById('clienteModalTitle').textContent = 'Nuovo Cliente';
@@ -9391,6 +9393,7 @@ function openClienteModal(id) {
 }
 
 function editCliente(id) {
+  if(window.RighettoNavigation&&!RighettoNavigation.replaying)return RighettoNavigation.open({section:'clienti',view:'client-edit',id:String(id)},()=>editCliente(id));
   const c = allClienti.find(x => x.id == id);
   if (!c) return;
   clienteEditBaseline=structuredClone(c);
@@ -9427,6 +9430,7 @@ function editCliente(id) {
 }
 
 function closeClienteModal() {
+ if(window.RighettoNavigation&&!RighettoNavigation.replaying)return RighettoNavigation.open({section:'clienti'});
   document.getElementById('clienteModal').classList.remove('open');
 }
 
@@ -9511,6 +9515,7 @@ async function saveClienteLocked(openAfterSave = false) {
     const verify=await sb.from('clienti').select('*').eq('id',savedId).maybeSingle();
     if(verify.error||!verify.data||Object.keys(payload).some(k=>JSON.stringify(verify.data[k]??null)!==JSON.stringify(payload[k]??null)))throw Error('Salvataggio da verificare. Non riprovare: ricarica la scheda e confronta i dati.');
     if(authEpoch!==clientiAuthEpoch)throw Error('Sessione cambiata: verifica salvataggio al prossimo accesso.');
+    window.RighettoNavigation?.saved(document.getElementById('clienteModal'));
     localStorage.removeItem(pendingKey);
     toast(id ? 'Cliente aggiornato!' : 'Cliente aggiunto!', 'success');
     closeClienteModal();
@@ -18007,8 +18012,8 @@ window.showSection('home');
 </script>
 <script src="js/agenda-event-types.js?v=1"></script>
 <script>window.RIGHETTO_SYNC_ATTIVA=true;</script>
-<script src="js/admin-agenda.js?v=10"></script>
-<script src="js/admin-cliente-scheda.js?v=20261102-allegati-cavinato-coeli"></script>
+<script src="js/admin-agenda.js?v=20261102-back"></script>
+<script src="js/admin-cliente-scheda.js?v=20261102-back"></script>
 <script src="js/admin-immobile-operazioni.js?v=1"></script>
 <script src="js/admin-blocco2.js?v=1"></script>
 <script>RighettoAgenda.init(document.getElementById("righetto-operational-agenda"));</script>
@@ -18017,8 +18022,13 @@ window.showSection('home');
 <script>(function(){var el=document.getElementById('righetto-attivita');if(!el)return;var done=false,busy=false;function msg(t){el.innerHTML='<div class="at-banner">'+t+'</div>';}
 async function go(){if(done||busy)return;busy=true;try{if(typeof sb==='undefined')throw 0;var u=await sb.auth.getUser();if(!u.data.user)throw 0;done=true;RighettoAttivita.init(el,{store:RighettoAttivita.dbStore(sb)});}catch(e){msg('Attivit\u00e0: accedi per vedere le pratiche.');}busy=false;}
 msg('Attivit\u00e0: caricamento...');go();setInterval(go,3000);})();</script>
-<script src="js/admin-mobile.js?v=20261031-clienti"></script>
+<script src="js/admin-mobile.js?v=20261102-back"></script>
 <script src="js/admin-cliente-layout.js?v=20261031-clienti"></script>
+<script>window.RighettoNavigationAttachments=()=>({property:typeof currentFotos==='undefined'?null:[currentFotos,currentPlanimetrie,currentDocumenti,currentVtScenes,currentUnitaCatastali,currentCatastoPdf],client:typeof currentClienteDocumenti==='undefined'?null:currentClienteDocumenti});</script>
+<script type="module">
+import {bindAuthenticatedNavigation} from './js/auth-bootstrap.mjs';
+if(typeof sb!=='undefined')bindAuthenticatedNavigation(sb).catch(()=>{if(document.getElementById('navigation-startup-warning'))return;const n=document.createElement('p');n.id='navigation-startup-warning';n.setAttribute('role','status');n.textContent='Navigazione Indietro non disponibile in questa sessione. Usa il menu interno; i dati non sono stati modificati.';n.style.cssText='margin:12px;padding:12px;background:#fff3cc;color:#17324d';document.querySelector('.content')?.prepend(n);});
+</script>
 </body>
 </html>
 

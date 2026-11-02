@@ -31,7 +31,7 @@ function build(){
  menu.addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(!b)return;var g=b.dataset.go;if(g==='__logout'){if(window.doLogout)window.doLogout();return;}go(g);});
  head.querySelector('.rm-mobile-brand').onclick=function(){go('menu');};head.querySelector('.rm-mobile-brand').onkeydown=function(e){if(e.key==='Enter')go('menu');};head.addEventListener('click',function(e){var b=e.target.closest('[data-quick]');if(b)go(b.dataset.quick);});$('#rm-back').onclick=back;$('#rm-prev').onclick=function(){step(-1);};$('#rm-next').onclick=function(){step(1);};
 }
-function go(name){
+function go(name){if(window.RighettoNavigation&&!RighettoNavigation.replaying)return RighettoNavigation.open({section:name==='menu'?'home':name},()=>go(name));
  closeScheda();document.querySelectorAll('.ra-modal').forEach(function(x){x.remove();});
  if(name==='menu'||name==='home'){cur='menu';render();return;}
  cur=name;render();
@@ -84,7 +84,7 @@ function cardsImm(){
   return '<button type="button" class="rm-card" data-id="'+esc(i.id)+'"><div class="rm-ph">'+(p?'<img loading="lazy" src="'+esc(p)+'" alt="" onerror="this.remove()">':'<span>📷</span>')+'</div><div class="rm-inf"><div class="rm-r1"><b>'+esc(i.codice||'—')+'</b><em class="rm-chip '+s[1]+'">'+s[0]+'</em></div><div class="rm-t">'+esc(i.titolo||(i.tipologia||'')+' '+(i.comune||''))+'</div><div class="rm-s">'+esc([i.comune,i.indirizzo].filter(Boolean).join(' · '))+'</div><div class="rm-r2"><strong>'+money(i.prezzo)+'</strong><span>'+(i.superficie?esc(i.superficie)+' mq':'')+'</span><span>'+esc(tipoLabel(i.tipo_operazione))+'</span></div></div></button>';}).join('')+(list.length>150?'<div class="rm-more">Altri '+(list.length-150)+': usa la ricerca.</div>':'');
 }
 function field(l,v){return v===null||v===undefined||v===''||v===false?'':'<div class="rm-f"><label>'+l+'</label><div>'+esc(v===true?'Sì':v)+'</div></div>';}
-function openImm(id){
+function openImm(id){if(window.RighettoNavigation&&!RighettoNavigation.replaying)return RighettoNavigation.open({section:'immobili',view:'mobile-property',id:String(id)},()=>openImm(id));
  var i=(typeof allImmobili!=='undefined'?allImmobili:[]).find(function(x){return String(x.id)===String(id);});if(!i)return;
  var ph=photos(i),s=stato(i);
  var dati=field('Codice',i.codice)+field('Tipo',tipoLabel(i.tipo_operazione))+field('Tipologia',i.tipologia)+field('Prezzo',i.prezzo?money(i.prezzo):'')+field('Superficie',i.superficie?i.superficie+' mq':'')+field('Locali',i.locali)+field('Camere',i.camere)+field('Bagni',i.bagni)+field('Piano',i.piano)+field('Comune',i.comune)+field('Indirizzo',i.indirizzo)+field('Classe energetica',i.classe_energetica)+field('Spese condominio',i.spese_condominio)+field('Descrizione',i.descrizione);
@@ -102,7 +102,7 @@ function showScheda(onAct){
  scheda.hidden=false;scheda.scrollTop=0;document.body.classList.add('rm-scheda-open');
  scheda.onclick=function(e){var t=e.target.closest('[data-t]');if(t){scheda.querySelectorAll('[data-t]').forEach(function(x){x.classList.toggle('on',x===t);});scheda.querySelectorAll('[data-p]').forEach(function(p){p.hidden=p.dataset.p!==t.dataset.t;});return;}var a=e.target.closest('[data-a]');if(a)onAct(a.dataset.a);};
 }
-function closeScheda(){if(!scheda)return;scheda.hidden=true;document.body.classList.remove('rm-scheda-open');}
+function closeScheda(){if(window.RighettoNavigation&&!RighettoNavigation.replaying&&!RighettoNavigation.allowClose())return;if(!scheda)return;scheda.hidden=true;document.body.classList.remove('rm-scheda-open');}
 /* ---------- Clienti ---------- */
 function listCli(q){
  if(!q||q.length<2)return allClienti;
@@ -200,6 +200,9 @@ function init(){
  [['immobiliTableWrap',cardsImm],['clientiTable',cardsCli]].forEach(function(p){var el=document.getElementById(p[0]);if(el)new MutationObserver(function(){setTimeout(p[1],30);}).observe(el,{childList:true,subtree:true});});
  mq.addEventListener?mq.addEventListener('change',function(){cur='menu';render();}):0;
  cur='menu';render();
+ window.RighettoMobileNavigationReady=true;window.dispatchEvent(new Event('righetto:navigation-ready'));
 }
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(init,0);});else setTimeout(init,0);
+window.RighettoMobileNavigation={openImm,closeScheda};
+function safeInit(){try{init();}catch(error){window.RighettoMobileNavigationFailed=true;window.dispatchEvent(new Event('righetto:navigation-failed'));console.error('Navigazione mobile non inizializzata',error);}}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(safeInit,0);});else setTimeout(safeInit,0);
 })();
