@@ -14,13 +14,13 @@ export function installAppHistory(win=window,{scope='local-fixture'}={}){
  const key=r=>JSON.stringify(r),valid=r=>r&&sections.has(r.section)&&(!r.view||['client','client-edit','client-new','property-edit','agenda-detail','agenda-edit','agenda-new','mobile-property'].includes(r.view))&&(!r.id||/^[a-zA-Z0-9-]{1,80}$/.test(r.id))&&(!r.tab||['scheda','cron','all','imm','crn'].includes(r.tab));
  function close(){win.RighettoMobileNavigation?.closeScheda?.();win.RighettoCliente?.close();d.querySelectorAll('.ra-modal').forEach(x=>x.remove());d.querySelector('#clienteModal')?.classList.remove('open');}
  async function render(r){
-  const now=++epoch;const action=resolve(r)||views.get(key(r));replaying=true;close();
+  const now=++epoch;const action=resolve(r,()=>!disposed&&now===epoch)||views.get(key(r));replaying=true;close();
   try{
    baseShow(r.section);
    if(action)await action();
   }catch(error){const p=d.createElement('p');p.setAttribute('role','alert');p.dataset.navigationError='';p.textContent='La schermata richiesta non è disponibile. Nessuna modifica salvata. Usa il menu per riaprire la scheda.';d.querySelector('.content,main')?.prepend(p);throw error;}finally{replaying=false;if(!disposed&&now===epoch)clean();}
  }
- function resolve(r){
+ function resolve(r,isCurrent){
   if(!r.view)return null;
   if(r.view==='client')return()=>win.RighettoCliente.open(r.id,r.tab);
   if(r.view==='client-edit')return()=>win.editCliente(r.id);
@@ -28,10 +28,10 @@ export function installAppHistory(win=window,{scope='local-fixture'}={}){
   if(r.view==='property-edit')return()=>win.editImmobile(r.id);
   if(r.view==='mobile-property')return()=>win.RighettoMobileNavigation.openImm(r.id);
   // Agenda routes require the exact current event from its private event collection.
-  if(r.view.startsWith('agenda-')&&win.RighettoAgenda?.restoreRoute)return()=>win.RighettoAgenda.restoreRoute(r);
+  if(r.view.startsWith('agenda-')&&win.RighettoAgenda?.restoreRoute)return()=>win.RighettoAgenda.restoreRoute(r,isCurrent);
   throw Error('Vista non ripristinabile in questa versione');
  }
- const api={saved(container){if(!container)return;container.querySelectorAll('input,textarea,select').forEach(x=>baseline.set(x,JSON.stringify(value(x))));const state=attachments();if(state&&attachmentBase){const old=JSON.parse(attachmentBase),now=JSON.parse(state);if(container.id==='clienteModal')old.client=now.client;if(container.id==='immobileForm')old.property=now.property;attachmentBase=JSON.stringify(old);}},allowClose(){return replaying||!dirty()||win.confirm('Ci sono modifiche non salvate. Chiudere senza salvarle?');},get replaying(){return replaying;},clean,open(route,action){if(disposed)return false;if(replaying)return action?.();if(action&&!route.id)views.set(key(route),action);return router.navigate(route);},dispose(){disposed=true;epoch++;replaying=true;close();replaying=false;router.dispose();listeners.splice(0).forEach(fn=>fn());views.clear();baseline.clear();win.showSection=baseShow;if(baseShowById)win.showSectionById=baseShowById;delete win.RighettoNavigation;}};
+ const api={saved(container){if(!container)return;container.querySelectorAll('input,textarea,select').forEach(x=>baseline.set(x,JSON.stringify(value(x))));const state=attachments();if(state&&attachmentBase){const old=JSON.parse(attachmentBase),now=JSON.parse(state);if(container.id==='clienteModal')old.client=now.client;if(container.id==='immobileForm')old.property=now.property;attachmentBase=JSON.stringify(old);}},allowClose(){return replaying||!dirty()||win.confirm('Ci sono modifiche non salvate. Chiudere senza salvarle?');},get replaying(){return replaying;},clean,open(route,action){if(disposed)return false;if(replaying&&action)return action();if(action&&!route.id)views.set(key(route),action);return router.navigate(route);},dispose(){disposed=true;epoch++;replaying=true;close();replaying=false;router.dispose();listeners.splice(0).forEach(fn=>fn());views.clear();baseline.clear();win.showSection=baseShow;if(baseShowById)win.showSectionById=baseShowById;delete win.RighettoNavigation;}};
  const section=()=>d.body.dataset.adminArea||d.querySelector('.section.active')?.id.slice(4)||'home';
  let initialHash='';try{initialHash=decodeURIComponent(win.location.hash.slice(1));}catch{}if(sections.has(initialHash))baseShow(initialHash);
  const previous=win.history.state?.righettoNav===1&&win.history.state.scope===scope&&valid(win.history.state.route)?win.history.state.route:null;
