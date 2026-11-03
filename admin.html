@@ -5355,6 +5355,7 @@ let currentPlanimetrie = [];
 let currentDocumenti = [];
 let currentVtScenes = [];
 let allImmobili = [];
+let rigCataloguePrincipal=null,rigCatalogueKey=null,rigCatalogueRows=[],rigCataloguePending=null,rigCatalogueEpoch=0,rigCatalogueReady=false;
 
 // ══════════════════════════════════════
 // LOGIN + 2FA (TOTP)
@@ -6357,28 +6358,45 @@ async function _fotoZip(list, codice, btn) {
   } finally { btn.textContent = lbl; btn.disabled = false; }
 }
 
+window.RighettoCatalogueView=()=>({rows:rigCataloguePrincipal&&rigCataloguePrincipal===window.RighettoGatedPrincipal?rigCatalogueRows:[],ready:rigCataloguePrincipal===window.RighettoGatedPrincipal&&rigCatalogueReady,status:document.getElementById('rigCatalogueStatus')?.textContent||'',retry:!!document.getElementById('rigCatalogueStatus')?.querySelector('button')});
 async function loadImmobili() {
-  const wrap = document.getElementById('immobiliTableWrap');
-  wrap.innerHTML = '<div class="loading"><div class="spinner"></div> Caricamento...</div>';
-
-  const tipo = document.getElementById('filtroTipo').value;
-  let query = sb.from('immobili').select('*').order('created_at', { ascending: false });
-  query = window.__rCestino ? query.eq('cestino', true) : query.eq('cestino', false);
-  if (tipo === 'affitto_residenziale') {
-    query = query.in('tipo_operazione', ['affitto_residenziale', 'affitto']);
-  } else if (tipo) {
-    query = query.eq('tipo_operazione', tipo);
+  const principal=window.RighettoGatedPrincipal;
+  const tipo=document.getElementById('filtroTipo').value;
+  const trash=!!window.__rCestino,key=JSON.stringify([tipo,trash]);
+  const wrap=document.getElementById('immobiliTableWrap');
+  let status=document.getElementById('rigCatalogueStatus');
+  if(!status){status=document.createElement('div');status.id='rigCatalogueStatus';status.setAttribute('role','status');status.style.cssText='padding:12px 0;font-size:13px';wrap.before(status);}
+  if(!principal||rigCataloguePrincipal!==principal){
+    ++rigCatalogueEpoch;rigCataloguePending?.controller.abort();rigCataloguePending=null;allImmobili=[];rigCatalogueRows=[];rigCatalogueKey=null;rigCataloguePrincipal=principal;rigCatalogueReady=false;
+    ['statTot','statVendita','statAffitto','statVenduti'].forEach(id=>document.getElementById(id).textContent='—');
+    wrap.replaceChildren();
   }
-
-  const { data, error } = await query;
-  if (error) {
-    wrap.innerHTML = `<div class="empty-state"><h3>Errore caricamento</h3><p style="margin-top:8px;font-size:0.8rem;color:var(--rosso)">${error.message}</p></div>`;
-    return;
-  }
-
-  allImmobili = data || [];
-  updateStats(allImmobili);
-  filterTable();
+  if(!principal){status.textContent='Accesso non verificato. Rientra nel gestionale.';return;}
+  if(rigCataloguePending?.key===key)return rigCataloguePending.promise;
+  ++rigCatalogueEpoch;rigCataloguePending?.controller.abort();
+  const ticket=rigCatalogueEpoch,controller=new AbortController();rigCatalogueReady=false;allImmobili=[];
+  const retained=rigCatalogueKey===key&&rigCatalogueRows.length>0;
+  if(retained){filterTable();status.textContent='Aggiornamento in corso. Elenco precedente visibile; azioni bloccate finché i dati non sono verificati.';}
+  else {rigCatalogueRows=[];allImmobili=[];rigCatalogueKey=key;wrap.innerHTML='<div class="loading"><div class="spinner"></div> Caricamento...</div>';status.textContent='Caricamento completo dal database. Il primo caricamento può richiedere tempo.';['statTot','statVendita','statAffitto','statVenduti'].forEach(id=>document.getElementById(id).textContent='—');}
+  const current=()=>ticket===rigCatalogueEpoch&&window.RighettoGatedPrincipal===principal&&rigCataloguePrincipal===principal;
+  let timer;let job;
+  job=(async()=>{
+    try{
+      let query=sb.from('immobili').select('*').order('created_at',{ascending:false}).eq('cestino',trash);
+      if(tipo==='affitto_residenziale')query=query.in('tipo_operazione',['affitto_residenziale','affitto']);else if(tipo)query=query.eq('tipo_operazione',tipo);
+      query=query.abortSignal(controller.signal);
+      const result=await Promise.race([query,new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(Error('timeout'));},45000);})]);
+      if(!current())return;
+      if(result.error||!Array.isArray(result.data))throw Error('read');
+      allImmobili=result.data;rigCatalogueRows=allImmobili;rigCatalogueKey=key;rigCatalogueReady=true;updateStats(allImmobili);filterTable();status.textContent='Elenco aggiornato dal database.';
+    }catch(error){
+      if(!current())return;rigCatalogueReady=false;
+      if(rigCatalogueRows.length)filterTable();else wrap.innerHTML='<div class="empty-state"><h3>Elenco non caricato</h3></div>';
+      status.replaceChildren(document.createTextNode('Aggiornamento non completato. Le azioni restano bloccate. '));
+      const retry=document.createElement('button');retry.type='button';retry.className='btn btn-secondary';retry.textContent='Riprova';retry.onclick=()=>loadImmobili();status.append(retry);
+    }finally{clearTimeout(timer);if(rigCataloguePending?.promise===job)rigCataloguePending=null;if(current())window.dispatchEvent(new Event('righetto:catalogue-state'));}
+  })();
+  rigCataloguePending={key,promise:job,controller};window.dispatchEvent(new Event('righetto:catalogue-state'));return job;
 }
 
 function updateStats(data) {
@@ -6437,10 +6455,10 @@ function renderTable(data) {
       <td style="font-weight:600">${prezzo}</td>
       <td>${mq}</td>
       <td>${i.locali || '—'}</td>
-      <td style="font-size:0.78rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(propNome)}"><button type="button" class="btn btn-secondary btn-sm" onclick="openProprietariImmobile('${i.id}')" style="white-space:normal;text-align:left" title="Apri dati e gestisci proprietari">${escHtml(propNome === '—' ? '+ Proprietari' : propNome)} ↗</button></td>
+      <td style="font-size:0.78rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(propNome)}"><button type="button" class="btn btn-secondary btn-sm" ${rigCatalogueReady ? '' : 'disabled'} onclick="openProprietariImmobile('${i.id}')" style="white-space:normal;text-align:left" title="Apri dati e gestisci proprietari">${escHtml(propNome === '—' ? '+ Proprietari' : propNome)} ↗</button></td>
       <td>${stato}</td>
       <td>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <fieldset ${rigCatalogueReady ? '' : 'disabled'} style="border:0;padding:0;margin:0;display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn btn-action btn-secondary" onclick="editImmobile('${i.id}')" title="Modifica">✏️</button>
           <button class="btn btn-action" onclick="duplicateImmobile('${i.id}')" title="Duplica annuncio (nuovo codice, stesse foto e testi)" style="background:#f3e5f5;color:#6a1b9a">📋</button>
           <button class="btn btn-action" onclick="showMatchingClienti('${i.id}')" title="Trova clienti compatibili" style="background:#e3f2fd;color:#1565c0">🤝</button>
@@ -6452,7 +6470,7 @@ function renderTable(data) {
           <button class="btn btn-action" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="${i.in_evidenza ? 'Rimuovi da evidenza' : 'Metti in evidenza'}" style="background:${i.in_evidenza ? '#e74c3c' : 'var(--sfondo)'};border:${i.in_evidenza ? '2px solid #c0392b' : '1px solid #ddd'};${i.in_evidenza ? 'color:#fff' : ''}">${i.in_evidenza ? '⭐' : '☆'}</button>
           <button class="btn btn-action" onclick="toggleAttivo('${i.id}',${!isAttivo})" title="Toggle attivo" style="background:var(--sfondo)">${isAttivo ? '👁️' : '🚫'}</button>
           <button class="btn btn-action" onclick="previewImmobile('${i.id}')" title="Anteprima rapida" style="background:#e8f5e9;color:#27ae60">🔍</button>
-        </div>
+        </fieldset>
       </td>
     </tr>`;
   }).join('');
@@ -6497,7 +6515,7 @@ function filterTable() {
   const q = document.getElementById('searchInput').value.toLowerCase().trim();
   const statoFilter = document.getElementById('filtroStato').value;
 
-  let filtered = allImmobili;
+  let filtered = rigCatalogueRows;
 
   // Filtro stato
   if (statoFilter === 'attivi') {
@@ -9302,7 +9320,7 @@ function renderClientiPages(){const box=document.getElementById('clientiPages');
 
 let clientiAuthEpoch=0;
 const selectedClienti=new Set();
-if(sb.auth?.onAuthStateChange)sb.auth.onAuthStateChange((event,session)=>{if(window.RighettoGatedPrincipal&&session?.user?.id!==window.RighettoGatedPrincipal){window.RighettoGatedPrincipal=null;document.getElementById('appWrapper').style.display='none';document.getElementById('loginOverlay').style.display='flex';location.reload();return;}if(event==='SIGNED_OUT'){clientiAuthEpoch++;selectedClienti.clear();updateClientiSelection();_clientiReqId++;allClienti=[];document.getElementById('clientiBody').replaceChildren();document.getElementById('clienteModal').classList.remove('open');document.querySelectorAll('#clienteModal input,#clienteModal textarea').forEach(e=>{if(e.type!=='radio'&&e.type!=='checkbox')e.value='';});document.getElementById('csvImportModal').classList.remove('open');csvParsedData=[];document.getElementById('clientiBulkModal')?.remove();}});
+if(sb.auth?.onAuthStateChange)sb.auth.onAuthStateChange((event,session)=>{if(rigCataloguePrincipal&&session?.user?.id!==rigCataloguePrincipal){++rigCatalogueEpoch;rigCataloguePending?.controller.abort();rigCataloguePending=null;rigCataloguePrincipal=null;rigCatalogueKey=null;rigCatalogueRows=[];allImmobili=[];rigCatalogueReady=false;document.getElementById('immobiliTableWrap')?.replaceChildren();document.getElementById('rigCatalogueStatus')?.replaceChildren();window.dispatchEvent(new Event('righetto:catalogue-state'));}if(window.RighettoGatedPrincipal&&session?.user?.id!==window.RighettoGatedPrincipal){window.RighettoGatedPrincipal=null;document.getElementById('appWrapper').style.display='none';document.getElementById('loginOverlay').style.display='flex';location.reload();return;}if(event==='SIGNED_OUT'){clientiAuthEpoch++;selectedClienti.clear();updateClientiSelection();_clientiReqId++;allClienti=[];document.getElementById('clientiBody').replaceChildren();document.getElementById('clienteModal').classList.remove('open');document.querySelectorAll('#clienteModal input,#clienteModal textarea').forEach(e=>{if(e.type!=='radio'&&e.type!=='checkbox')e.value='';});document.getElementById('csvImportModal').classList.remove('open');csvParsedData=[];document.getElementById('clientiBulkModal')?.remove();}});
 function toggleClientiSelection(id,on){on?selectedClienti.add(id):selectedClienti.delete(id);updateClientiSelection();}
 function selectClientiPage(on){allClienti.forEach(c=>on?selectedClienti.add(c.id):selectedClienti.delete(c.id));document.querySelectorAll('[data-client-select]').forEach(e=>e.checked=on);updateClientiSelection();}
 function updateClientiSelection(){const all=document.getElementById('clientiSelectPage');if(all){const n=allClienti.filter(c=>selectedClienti.has(c.id)).length;all.checked=n>0&&n===allClienti.length;all.indeterminate=n>0&&n<allClienti.length;}const counter=document.getElementById('clientiSelectionCount');if(counter)counter.textContent=selectedClienti.size+' selezionati';}
@@ -18140,7 +18158,7 @@ window.showSection('home');
 <script>(function(){var el=document.getElementById('righetto-attivita');if(!el)return;var done=false,busy=false;function msg(t){el.innerHTML='<div class="at-banner">'+t+'</div>';}
 async function go(){if(done||busy)return;busy=true;const principal=window.RighettoGatedPrincipal;try{if(typeof sb==='undefined'||!principal)throw 0;var u=await sb.auth.getUser();if(!u.data.user?.id||u.data.user.id!==principal||window.RighettoGatedPrincipal!==principal||document.body.dataset.adminArea!=='attivita')throw 0;var authority=await sb.rpc('righetto_is_admin_request');if(authority.error||authority.data!==true||window.RighettoGatedPrincipal!==principal||document.body.dataset.adminArea!=='attivita')throw 0;done=true;RighettoAttivita.init(el,{store:RighettoAttivita.dbStore(sb)});}catch(e){msg('Attivit\u00e0: accedi per vedere le pratiche.');}busy=false;}
 msg('Attivit\u00e0: apri Attivit\u00e0 per caricare le pratiche.');window.rigSectionReady(['attivita'],go);})();</script>
-<script src="js/admin-mobile.js?v=20261102-back"></script>
+<script src="js/admin-mobile.js?v=0370-local"></script>
 <script src="js/admin-cliente-layout.js?v=20261031-clienti"></script>
 <script>window.RighettoNavigationAttachments=()=>({property:typeof currentFotos==='undefined'?null:[currentFotos,currentPlanimetrie,currentDocumenti,currentVtScenes,currentUnitaCatastali,currentCatastoPdf],client:typeof currentClienteDocumenti==='undefined'?null:currentClienteDocumenti});</script>
 <script type="module">

@@ -78,13 +78,16 @@ function cardsImm(){
  var box=ensureBox('sec-immobili','rm-imm','Cerca codice, comune, indirizzo…','Nuovo immobile',function(){window.__rmOrig('nuovo');cur='nuovo';render();});
  if(!box||typeof allImmobili==='undefined')return;
  var q=$('.rm-search',box).value.trim().toLowerCase();
- var list=allImmobili.filter(function(i){if(!q)return true;var nz=function(v){return String(v==null?'':v).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');};var hay=nz([i.codice,String(i.codice||'').replace(/[\s.\-_\/]+/g,''),i.titolo,i.comune,i.indirizzo,i.proprietario_nome,i.prezzo].join(' '));return nz(q).split(/[\s,;]+/).filter(Boolean).every(function(w){return hay.indexOf(w)>=0||hay.indexOf(w.replace(/[\s.\-_\/]+/g,''))>=0;});});
+ var snapshot=window.RighettoCatalogueView?window.RighettoCatalogueView():null;
+ var source=snapshot?snapshot.rows:allImmobili;
+ var status=$('.rm-catalogue-status',box);if(!status){status=document.createElement('div');status.className='rm-catalogue-status';status.setAttribute('role','status');status.style.cssText='padding:10px 2px;font-size:13px;line-height:1.5';box.insertBefore(status,$('.rm-cards',box));}status.textContent=snapshot?snapshot.status:'';if(snapshot&&snapshot.retry){var retry=document.createElement('button');retry.type='button';retry.textContent='Riprova';retry.onclick=function(){loadImmobili();};status.appendChild(retry);}
+ var list=source.filter(function(i){if(!q)return true;var nz=function(v){return String(v==null?'':v).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');};var hay=nz([i.codice,String(i.codice||'').replace(/[\s.\-_\/]+/g,''),i.titolo,i.comune,i.indirizzo,i.proprietario_nome,i.prezzo].join(' '));return nz(q).split(/[\s,;]+/).filter(Boolean).every(function(w){return hay.indexOf(w)>=0||hay.indexOf(w.replace(/[\s.\-_\/]+/g,''))>=0;});});
  $('.rm-count',box).textContent=list.length+' immobili';
  $('.rm-cards',box).innerHTML=list.slice(0,150).map(function(i){var s=stato(i),p=photo(i);
-  return '<button type="button" class="rm-card" data-id="'+esc(i.id)+'"><div class="rm-ph">'+(p?'<img loading="lazy" src="'+esc(p)+'" alt="" onerror="this.remove()">':'<span>📷</span>')+'</div><div class="rm-inf"><div class="rm-r1"><b>'+esc(i.codice||'—')+'</b><em class="rm-chip '+s[1]+'">'+s[0]+'</em></div><div class="rm-t">'+esc(i.titolo||(i.tipologia||'')+' '+(i.comune||''))+'</div><div class="rm-s">'+esc([i.comune,i.indirizzo].filter(Boolean).join(' · '))+'</div><div class="rm-r2"><strong>'+money(i.prezzo)+'</strong><span>'+(i.superficie?esc(i.superficie)+' mq':'')+'</span><span>'+esc(tipoLabel(i.tipo_operazione))+'</span></div></div></button>';}).join('')+(list.length>150?'<div class="rm-more">Altri '+(list.length-150)+': usa la ricerca.</div>':'');
+  return '<button type="button" '+(snapshot&&!snapshot.ready?'disabled aria-disabled="true" style="opacity:.65" ':'')+'class="rm-card" data-id="'+esc(i.id)+'"><div class="rm-ph">'+(p?'<img loading="lazy" src="'+esc(p)+'" alt="" onerror="this.remove()">':'<span>📷</span>')+'</div><div class="rm-inf"><div class="rm-r1"><b>'+esc(i.codice||'—')+'</b><em class="rm-chip '+s[1]+'">'+s[0]+'</em></div><div class="rm-t">'+esc(i.titolo||(i.tipologia||'')+' '+(i.comune||''))+'</div><div class="rm-s">'+esc([i.comune,i.indirizzo].filter(Boolean).join(' · '))+'</div><div class="rm-r2"><strong>'+money(i.prezzo)+'</strong><span>'+(i.superficie?esc(i.superficie)+' mq':'')+'</span><span>'+esc(tipoLabel(i.tipo_operazione))+'</span></div></div></button>';}).join('')+(list.length>150?'<div class="rm-more">Altri '+(list.length-150)+': usa la ricerca.</div>':'');
 }
 function field(l,v){return v===null||v===undefined||v===''||v===false?'':'<div class="rm-f"><label>'+l+'</label><div>'+esc(v===true?'Sì':v)+'</div></div>';}
-function openImm(id){if(window.RighettoNavigation&&!RighettoNavigation.replaying)return RighettoNavigation.open({section:'immobili',view:'mobile-property',id:String(id)},()=>openImm(id));
+function openImm(id){if(window.RighettoCatalogueView&&!window.RighettoCatalogueView().ready)return;if(window.RighettoNavigation&&!RighettoNavigation.replaying)return RighettoNavigation.open({section:'immobili',view:'mobile-property',id:String(id)},()=>openImm(id));
  var i=(typeof allImmobili!=='undefined'?allImmobili:[]).find(function(x){return String(x.id)===String(id);});if(!i)return;
  var ph=photos(i),s=stato(i);
  var dati=field('Codice',i.codice)+field('Tipo',tipoLabel(i.tipo_operazione))+field('Tipologia',i.tipologia)+field('Prezzo',i.prezzo?money(i.prezzo):'')+field('Superficie',i.superficie?i.superficie+' mq':'')+field('Locali',i.locali)+field('Camere',i.camere)+field('Bagni',i.bagni)+field('Piano',i.piano)+field('Comune',i.comune)+field('Indirizzo',i.indirizzo)+field('Classe energetica',i.classe_energetica)+field('Spese condominio',i.spese_condominio)+field('Descrizione',i.descrizione);
@@ -179,6 +182,7 @@ function initSession(){
 }
 function init(){
  build();initSession();
+ window.addEventListener('righetto:catalogue-state',function(){cardsImm();if(window.RighettoCatalogueView&&!window.RighettoCatalogueView().ready)closeScheda();});
  window.addEventListener('righetto:mobile-immobile',function(e){if(phone()&&e.detail&&e.detail.id){cur='immobili';render();openImm(e.detail.id);}});
  window.addEventListener('righetto:clienti-load',function(e){var d=e.detail||{};if(d.state==='loading'){baseState='loading';baseError='';}else if(d.state==='error'){baseState='error';baseError=d.message;}else if(baseState!=='error'){baseState='ready';}if(cur==='clienti')cardsCli(true);});
  var oldShow=window.showSection;window.__rmOrig=oldShow;
@@ -192,7 +196,7 @@ function init(){
  };
  document.addEventListener('click',function(e){
   var page=e.target.closest('#rm-cli [data-client-page]');if(page){if(!page.disabled)window.loadClienti(Number(page.dataset.clientPage));return;}
-  var c=e.target.closest('#rm-imm .rm-card');if(c){openImm(c.dataset.id);return;}
+  var c=e.target.closest('#rm-imm .rm-card');if(c){if(!c.disabled)openImm(c.dataset.id);return;}
   c=e.target.closest('#rm-cli .rm-card');if(c){openCli(c.dataset.id);}
   c=e.target.closest('#rm-scheda [data-imm]');if(c){openImm(c.dataset.imm);return;}
   c=e.target.closest('#rm-scheda [data-own]');if(c){var oid=c.dataset.own;if(allClienti.find(function(x){return String(x.id)===String(oid);})){openCli(oid);}else if(typeof sb!=='undefined'){sb.from('clienti').select('*').eq('id',oid).limit(1).then(function(r){if(r.data&&r.data[0]){allClienti.push(r.data[0]);openCli(oid);}});}}
