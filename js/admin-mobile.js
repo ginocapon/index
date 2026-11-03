@@ -35,7 +35,7 @@ function go(name){if(window.RighettoNavigation&&!RighettoNavigation.replaying)re
  closeScheda();document.querySelectorAll('.ra-modal').forEach(function(x){x.remove();});
  if(name==='menu'||name==='home'){cur='menu';render();return;}
  cur=name;render();
- window.__rmOrig((name==='agenda'||name==='attivita')?'agenda':name);
+ window.__rmOrig(name);
  render();
  if(name==='immobili')setTimeout(cardsImm,60);
  if(name==='clienti')setTimeout(cardsCli,400);

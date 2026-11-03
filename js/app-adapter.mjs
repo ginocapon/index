@@ -3,7 +3,7 @@ import {createHistoryRouter} from './history-core.mjs';
 export function installAppHistory(win=window,{scope='local-fixture'}={}){
  if(win.RighettoNavigation)return win.RighettoNavigation;
  const listeners=[],listen=(target,type,fn,capture=false)=>{target.addEventListener(type,fn,capture);listeners.push(()=>target.removeEventListener(type,fn,capture));};
- const d=win.document,baseShow=win.showSection,baseShowById=win.showSectionById,views=new Map(),sections=new Set([...d.querySelectorAll('.section[id]')].map(x=>x.id.slice(4)));sections.add('analytics');
+ const d=win.document,baseShow=win.showSection,baseShowById=win.showSectionById,views=new Map(),sections=new Set([...d.querySelectorAll('.section[id]')].map(x=>x.id.slice(4)));sections.add('analytics');sections.add('attivita');
  let replaying=false,router,epoch=0,baseline=new Map(),attachmentBase=null,disposed=false;
  const containers=()=>[...d.querySelectorAll('form,#clienteModal.open,.rcs,.ra-modal')].filter(x=>x.getClientRects().length);
  const value=x=>x.type==='checkbox'||x.type==='radio'?x.checked:x.type==='file'?Array.from(x.files||[],f=>f.name+'|'+f.size+'|'+f.lastModified):x.value;
@@ -25,7 +25,7 @@ export function installAppHistory(win=window,{scope='local-fixture'}={}){
   if(r.view==='client')return()=>win.RighettoCliente.open(r.id,r.tab);
   if(r.view==='client-edit')return()=>win.editCliente(r.id);
   if(r.view==='client-new')return()=>win.openClienteModal();
-  if(r.view==='property-edit')return()=>win.editImmobile(r.id);
+  if(r.view==='property-edit')return()=>{Promise.resolve(win.editImmobile(r.id,isCurrent)).then(()=>{if(isCurrent())clean();}).catch(error=>{if(isCurrent())console.error('Immobile non caricato',error);});};
   if(r.view==='mobile-property')return()=>win.RighettoMobileNavigation.openImm(r.id);
   // Agenda routes require the exact current event from its private event collection.
   if(r.view.startsWith('agenda-')&&win.RighettoAgenda?.restoreRoute)return()=>win.RighettoAgenda.restoreRoute(r,isCurrent);

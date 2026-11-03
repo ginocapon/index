@@ -5379,6 +5379,12 @@ window.rigOwnerReady=function(fn){
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
  }else window.addEventListener('righetto:owner-ready',run,{once:true});
 };
+// Section readers are demand-driven, never started for a hidden workspace.
+window.rigSectionReady=function(names,fn){
+ let pending=null;
+ const run=()=>{const principal=window.RighettoGatedPrincipal;if(!principal)return;const area=document.body.dataset.adminArea||'home';if(!names.includes(area)||pending)return;pending=Promise.resolve().then(()=>{if(window.RighettoGatedPrincipal===principal&&names.includes(document.body.dataset.adminArea||'home'))return fn();}).catch(error=>console.error('Lettura sezione non completata',error)).finally(()=>{pending=null;});};
+ window.addEventListener('righetto:section-ready',run);window.rigOwnerReady(run);
+};
 async function grantAccess() {
   const {decideAccess,watchAdminAccess}=await import('./js/access-gate.mjs');
   const access=await decideAccess(sb);
@@ -5606,7 +5612,7 @@ function handleHashNavigation() {
   const hash = window.location.hash.replace('#', '');
   const validSections = ['immobili', 'nuovo', 'documentigenerali', 'perizie', 'richieste', 'posta', 'blog', 'clienti', 'social', 'landing', 'newsletter', 'agenda', 'emailmarketing', 'analytics', 'trend', 'audit', 'impostazioni'];
   if (hash && validSections.includes(hash)) {
-    setTimeout(() => showSection(hash), 300);
+    setTimeout(() => {const route=window.RighettoNavigation?.router?.current;if(route?.section===hash&&route.view)return;showSection(hash);}, 300);
   }
 }
 
@@ -5655,7 +5661,7 @@ document.querySelectorAll('.sidebar .nav-item').forEach(function(item) {
 // INIT
 // ══════════════════════════════════════
 async function init() {
-  await Promise.all([loadImmobili(), loadRichiesteCount()]);
+  // Lists load when their workspace is opened, not during Agenda startup.
 }
 
 // ══════════════════════════════════════
@@ -5693,7 +5699,8 @@ function showSection(name) {
   };
   document.getElementById('topbarTitle').textContent = titles[name] || name;
 
-  if (name === 'richieste') loadRichieste();
+  if (name === 'immobili') loadImmobili();
+  if (name === 'richieste') { loadRichieste(); loadRichiesteCount(); }
   if (name === 'posta') initEmailSection();
   if (name === 'blog') loadBlogList();
   if (name === 'social') loadSocialSection();
@@ -6746,10 +6753,19 @@ return {capturePropertyForm,changedPropertyPayload,readControls};})();
 let rigPropertySnapshot=null;let rigPropertySaving=false;
 function rigPropertyMedia(){return {foto:currentFotos,planimetrie:currentPlanimetrie,documenti:currentDocumenti,virtual_tour_scenes:currentVtScenes,unita_catastali:currentUnitaCatastali,catasto_pdf:currentCatastoPdf};}
 
-function editImmobile(id) {if(rigPropertySaving){toast('Salvataggio in corso: attendi prima di cambiare scheda.','error');return;}
+let rigPropertyReadEpoch=0;
+async function editImmobile(id,isCurrent=()=>true) {if(rigPropertySaving){toast('Salvataggio in corso: attendi prima di cambiare scheda.','error');return;}
   if(window.RighettoNavigation&&!RighettoNavigation.replaying)return RighettoNavigation.open({section:'nuovo',view:'property-edit',id:String(id)},()=>editImmobile(id));
-  const imm = allImmobili.find(x => String(x.id) === String(id));
-  if (!imm) { toast('Immobile non trovato', 'error'); return; }
+  const ticket=++rigPropertyReadEpoch,principal=window.RighettoGatedPrincipal;
+  const route=()=>window.RighettoNavigation?.router?.current;
+  const current=()=>ticket===rigPropertyReadEpoch&&principal&&window.RighettoGatedPrincipal===principal&&isCurrent()&&document.body.dataset.adminArea==='nuovo';
+  let imm = allImmobili.find(x => String(x.id) === String(id));
+  if(!imm){
+   rigPropertySnapshot=null;document.getElementById('btnSalva').disabled=true;document.getElementById('editId').value='';document.getElementById('formTitle').textContent='Caricamento immobile...';
+   try{const r=await sb.from('immobili').select('*').eq('id',id).maybeSingle();if(!current())return;if(r.error)throw r.error;if(!r.data)throw Error('Immobile non disponibile');imm=r.data;}catch(error){if(current()){document.getElementById('formTitle').textContent='Immobile non caricato';toast(error.message,'error');}return;}
+  }
+  if(!current())return;
+  document.getElementById('btnSalva').disabled=false;
   rigPropertySnapshot=null;
   document.getElementById('editId').value = imm.id;
   document.getElementById('formTitle').textContent = 'Modifica: ' + imm.titolo;
@@ -14715,13 +14731,21 @@ showSection = function(name) {
   }
 
   // ── Carica blacklist all'avvio ──
+  let emBlacklistPending=null;
   async function loadBlacklist() {
-    try {
-      const {data} = await sb.from('email_blacklist').select('email');
-      if (data) emBlacklist = new Set(data.map(d => d.email.toLowerCase()));
-    } catch(e) { /* tabella potrebbe non esistere ancora */ }
+    if(emBlacklistPending)return emBlacklistPending;
+    const principal=window.RighettoGatedPrincipal;
+    emBlacklistPending=(async()=>{
+      if(!principal)throw Error('Sessione non verificata');
+      const {data,error}=await sb.from('email_blacklist').select('email');
+      if(error)throw error;if(!Array.isArray(data))throw Error('Elenco disiscritti non verificato');
+      if(window.RighettoGatedPrincipal!==principal)throw Error('Sessione cambiata');
+      emBlacklist=new Set(data.map(d=>String(d.email||'').trim().toLowerCase()));
+    })().finally(()=>{emBlacklistPending=null;});
+    return emBlacklistPending;
   }
-  window.rigOwnerReady(loadBlacklist);
+  async function emCheckBlacklist(){try{await loadBlacklist();return true;}catch(error){toast('Elenco disiscritti non verificato. Nessun invio: '+error.message,'error');return false;}}
+  window.rigSectionReady(['emailmarketing'],loadBlacklist);
 
   // ── Tutti i contatti (per filtraggio gruppi) ──
   let emTuttiContatti = [];
@@ -14740,7 +14764,7 @@ showSection = function(name) {
       });
     }
     // Popola le 3 tendine contenuto (blog, immobili, landing)
-    window.rigOwnerReady(emPopulateContentPickers);
+    window.rigSectionReady(['emailmarketing'],emPopulateContentPickers);
     toggleContrattoAffittoRes();
   });
 
@@ -15307,6 +15331,7 @@ showSection = function(name) {
 
   // ═══ GRUPPI DI INTENTO ═══
   window.emFiltraGruppo = async function() {
+    if(!await emCheckBlacklist())return;
     const checks = document.querySelectorAll('.em-gruppo-check:checked');
     const selected = Array.from(checks).map(c => c.value);
 
@@ -15327,7 +15352,7 @@ showSection = function(name) {
 
     // Se "tutti" è selezionato, mostra tutti
     if (selected.includes('tutti') || selected.length === 0) {
-      emContatti = [...emTuttiContatti];
+      emContatti = emTuttiContatti.filter(c=>!emBlacklist.has(String(c.email||'').trim().toLowerCase()));
     } else {
       // Separa gruppi predefiniti da gruppi custom
       const predefiniti = selected.filter(s => !s.startsWith('custom_'));
@@ -15495,7 +15520,7 @@ showSection = function(name) {
   };
 
   // Init: carica gruppi all'avvio della pagina
-  window.rigOwnerReady(()=>setTimeout(emLoadGruppi, 1000));
+  window.rigSectionReady(['clienti','emailmarketing'],emLoadGruppi);
 
   // ═══ MULTI-PROGRAMMAZIONE ═══
   window.emAddScheduledSend = function() {
@@ -15547,6 +15572,7 @@ showSection = function(name) {
 
   // ═══ PROGRAMMA INVII MULTIPLI ═══
   window.emProgrammaInvii = async function() {
+    if(!await emCheckBlacklist())return;
     if (!emScheduledSends.length) return toast('Aggiungi almeno un invio programmato','error');
     const corpo = document.getElementById('emCorpo').value;
     const oggetto = document.getElementById('emOggetto').value;
@@ -15912,8 +15938,9 @@ showSection = function(name) {
     emFiltraCercaClienti();
   };
 
-  window.emConfermaSelezionati = function() {
-    const selezionati = emTuttiClientiDB.filter(c => c._selected);
+  window.emConfermaSelezionati = async function() {
+    if(!await emCheckBlacklist())return;
+    const selezionati = emTuttiClientiDB.filter(c => c._selected&&!emBlacklist.has(String(c.email||'').trim().toLowerCase()));
     if (!selezionati.length) return toast('Nessun cliente selezionato','error');
     emContatti = selezionati.map(c => ({nome: c.nome, email: c.email, tipo_cliente: c.tipo_cliente, gruppo: c.tipo_cliente}));
     emTuttiContatti = [...emContatti];
@@ -16183,8 +16210,10 @@ showSection = function(name) {
 
   // ═══ INVIO EMAIL DI TEST ═══
   window.emSendTest = async function() {
+    if(!await emCheckBlacklist())return;
     const testEmail = prompt('Inserisci email per il test:', 'info@righettoimmobiliare.it');
     if (!testEmail || !testEmail.includes('@')) return;
+    if(emBlacklist.has(testEmail.trim().toLowerCase()))return toast('Destinatario disiscritto: nessun invio','error');
 
     const oggetto = document.getElementById('emOggetto').value;
     let corpo = document.getElementById('emCorpo').value;
@@ -16243,6 +16272,7 @@ showSection = function(name) {
 
   // ═══ INVIO CAMPAGNA MASSIVA ═══
   window.emInvia = async function() {
+    if(!await emCheckBlacklist())return;
     if (!emContatti.length) return toast('Carica destinatari prima','error');
     const oggetto = document.getElementById('emOggetto').value;
     let corpo = document.getElementById('emCorpo').value;
@@ -18093,6 +18123,7 @@ window.showSection=function(name){
  document.getElementById('topbarTitle').textContent=name==='analytics'?'Google Search Console':'Home admin';
  }else{oldShowSection(name);}
  back.style.display=name==='home'?'none':'inline-flex';
+ window.dispatchEvent(new Event('righetto:section-ready'));
  window.scrollTo(0,0);
 };
 // La home non modifica il controllo accessi né richiama servizi esterni.
@@ -18110,8 +18141,8 @@ window.showSection('home');
 <script>window.RIGHETTO_BOZZA_ATTIVA=true;</script>
 <script src="js/admin-attivita.js?v=6"></script>
 <script>(function(){var el=document.getElementById('righetto-attivita');if(!el)return;var done=false,busy=false;function msg(t){el.innerHTML='<div class="at-banner">'+t+'</div>';}
-async function go(){if(done||busy)return;busy=true;try{if(typeof sb==='undefined')throw 0;var u=await sb.auth.getUser();if(!u.data.user?.id||u.data.user.id!==window.RighettoGatedPrincipal)throw 0;var authority=await sb.rpc('righetto_is_admin_request');if(authority.error||authority.data!==true)throw 0;done=true;RighettoAttivita.init(el,{store:RighettoAttivita.dbStore(sb)});}catch(e){msg('Attivit\u00e0: accedi per vedere le pratiche.');}busy=false;}
-msg('Attivit\u00e0: caricamento...');go();setInterval(go,3000);})();</script>
+async function go(){if(done||busy)return;busy=true;const principal=window.RighettoGatedPrincipal;try{if(typeof sb==='undefined'||!principal)throw 0;var u=await sb.auth.getUser();if(!u.data.user?.id||u.data.user.id!==principal||window.RighettoGatedPrincipal!==principal||document.body.dataset.adminArea!=='attivita')throw 0;var authority=await sb.rpc('righetto_is_admin_request');if(authority.error||authority.data!==true||window.RighettoGatedPrincipal!==principal||document.body.dataset.adminArea!=='attivita')throw 0;done=true;RighettoAttivita.init(el,{store:RighettoAttivita.dbStore(sb)});}catch(e){msg('Attivit\u00e0: accedi per vedere le pratiche.');}busy=false;}
+msg('Attivit\u00e0: apri Attivit\u00e0 per caricare le pratiche.');window.rigSectionReady(['attivita'],go);})();</script>
 <script src="js/admin-mobile.js?v=20261102-back"></script>
 <script src="js/admin-cliente-layout.js?v=20261031-clienti"></script>
 <script>window.RighettoNavigationAttachments=()=>({property:typeof currentFotos==='undefined'?null:[currentFotos,currentPlanimetrie,currentDocumenti,currentVtScenes,currentUnitaCatastali,currentCatastoPdf],client:typeof currentClienteDocumenti==='undefined'?null:currentClienteDocumenti});</script>
