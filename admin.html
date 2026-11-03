@@ -6582,6 +6582,8 @@ function contrattoAffittoResShortLabel(val) {
 }
 
 function resetForm() {
+  if(rigPropertySaving){toast('Salvataggio in corso: attendi prima di azzerare la scheda.','error');return;}
+  rigPropertySnapshot=null;
   document.getElementById('immobileForm').reset();
   document.getElementById('editId').value = '';
   document.getElementById('formTitle').textContent = 'Nuovo Immobile';
@@ -6712,10 +6714,43 @@ async function generaViaCasuale() {
   }
 }
 
-function editImmobile(id) {
+
+function rigNumberOrNull(v){return Number.isFinite(v)?v:null;}
+const RighettoPropertySafety=(()=>{// Local candidate safety for existing edit form. No network or mutation here.
+const clone=x=>JSON.parse(JSON.stringify(x));
+const equal=(a,b)=>JSON.stringify(a??null)===JSON.stringify(b??null);
+const mediaKeys={foto:'foto',foto_urls:'foto',foto_principale:'foto',planimetrie:'planimetrie',documenti:'documenti',virtual_tour_scenes:'virtual_tour_scenes',unita_catastali:'unita_catastali',catasto_pdf:'catasto_pdf'};
+const ownerKeys=['proprietario_id','proprietario_nome','proprietario_tel','proprietario_email'];
+function capturePropertyForm(record,controls,media){
+ if(!record?.id||!record.updated_at)throw Error('Versione immobile mancante: ricarica la scheda.');
+ return{record:clone(record),controls:clone(controls),media:clone(media)};
+}
+function changedPropertyPayload(snapshot,payload,controls,media){
+ if(!snapshot?.record?.id||!snapshot.record.updated_at)throw Error('Scheda non verificata: ricarica.');
+ const changedControls=new Set(Object.keys(controls).filter(k=>!equal(controls[k],snapshot.controls[k])));
+ const ownerChanged=changedControls.has('f_proprietario_id');
+ const patch={};for(const[k,v]of Object.entries(payload)){
+  let changed=false;
+  if(mediaKeys[k])changed=!equal(media[mediaKeys[k]],snapshot.media[mediaKeys[k]]);
+  else if(ownerKeys.includes(k))changed=ownerChanged;
+  else if(k==='slug')changed=false; // Existing public URL never changes in edit.
+  else if(k==='contratto_affitto_res')changed=changedControls.has('f_tipo_operazione')||[...changedControls].some(id=>id.startsWith('name:contratto_affitto_res:'));
+  else changed=changedControls.has('f_'+k);
+  if(changed&&!equal(snapshot.record[k],v))patch[k]=clone(v);
+ }
+ return patch;
+}
+function readControls(form){const values=Object.fromEntries([...form.querySelectorAll('[id]')].filter(x=>/^f_/.test(x.id)&&('value'in x||'checked'in x)).map(x=>[x.id,x.type==='checkbox'||x.type==='radio'?x.checked:x.value]));for(const x of form.querySelectorAll('[name=contratto_affitto_res]'))values['name:contratto_affitto_res:'+x.value]=x.checked;return values;}
+
+return {capturePropertyForm,changedPropertyPayload,readControls};})();
+let rigPropertySnapshot=null;let rigPropertySaving=false;
+function rigPropertyMedia(){return {foto:currentFotos,planimetrie:currentPlanimetrie,documenti:currentDocumenti,virtual_tour_scenes:currentVtScenes,unita_catastali:currentUnitaCatastali,catasto_pdf:currentCatastoPdf};}
+
+function editImmobile(id) {if(rigPropertySaving){toast('Salvataggio in corso: attendi prima di cambiare scheda.','error');return;}
   if(window.RighettoNavigation&&!RighettoNavigation.replaying)return RighettoNavigation.open({section:'nuovo',view:'property-edit',id:String(id)},()=>editImmobile(id));
   const imm = allImmobili.find(x => String(x.id) === String(id));
   if (!imm) { toast('Immobile non trovato', 'error'); return; }
+  rigPropertySnapshot=null;
   document.getElementById('editId').value = imm.id;
   document.getElementById('formTitle').textContent = 'Modifica: ' + imm.titolo;
 
@@ -6728,7 +6763,7 @@ function editImmobile(id) {
     'camere','bagni_totali','terrazzi_num','ripostigli','garage_num','garage_doppio',
     'posto_auto','mq_giardino','mq_lotto','esposizione','unita_abitative','totale_piani',
     'impianto_elettrico','panorama','consegna','spese_condominio',
-    'rendita_catastale','valore_catastale','prezzo_reale','ipe_kwh','ipe_kwh'];
+    'rendita_catastale','valore_catastale','prezzo_reale','ipe_kwh','num_accessi_carrai','num_portoni','numero_chiavi','connettivita'];
 
   // Conserva consegne esistenti non presenti nell'elenco standard.
   const consegnaSelect = document.getElementById('f_consegna');
@@ -6749,6 +6784,15 @@ function editImmobile(id) {
       el.title = imm[f] === 0 ? 'Valore storico 0: dato da verificare, conservato senza modifiche.' : '';
     }
   });
+  // Keep existing non-standard connectivity visible without changing its stored value.
+  const connectivity=document.getElementById('f_connettivita');
+  if(connectivity){
+    connectivity.querySelectorAll('option[data-existing-value]').forEach(o=>o.remove());
+    const existing=imm.connettivita==null?'':String(imm.connettivita);
+    if(existing&&![...connectivity.options].some(o=>o.value===existing)){
+      const option=new Option(existing+' (valore esistente)',existing);option.dataset.existingValue='true';connectivity.add(option);
+    }
+  }
   fields.forEach(f => {
     const el = document.getElementById('f_' + f);
     if (el) el.value = imm[f] !== null && imm[f] !== undefined ? imm[f] : '';
@@ -6759,6 +6803,7 @@ function editImmobile(id) {
     if (imm.proprietario_id) {
       sb.from('clienti').select('id,nome,ragione_sociale,tipo_cliente,telefono,email').eq('id', imm.proprietario_id).maybeSingle()
         .then(({ data: c }) => {
+          if(String(document.getElementById('editId').value)!==String(imm.id)||String(document.getElementById('f_proprietario_id').value)!==String(imm.proprietario_id))return;
           if (c) {
             propSearch.value = proprietarioDisplayLabel(c);
             document.getElementById('f_proprietario_nome').value = c.nome || c.ragione_sociale || '';
@@ -6779,7 +6824,7 @@ function editImmobile(id) {
     'giardino_condominiale','piano_interrato','piano_terra','primo_piano','ultimo_piano',
     'ingresso_indipendente','canna_fumaria','animali_ammessi','annuncio_prestigio',
     'chiavi_agenzia','immobile_garantito','riscaldamento_autonomo',
-    'riscaldamento_centralizzato','aria_condizionata','conta_calorie'];
+    'riscaldamento_centralizzato','aria_condizionata','conta_calorie','portineria','posto_spiaggia','accesso_disabili','area_fitness','caldaia_condensazione','camino','riscaldamento_pavimento','termopompa','pannelli_fotovoltaici','pannelli_solari','impianto_geotermico','allarme','domotica','porta_blindata','tapparelle_motorizzate','zanzariere','cassaforte'];
   bools.forEach(f => {
     const el = document.getElementById('f_' + f);
     if (el) el.checked = !!imm[f];
@@ -6805,16 +6850,27 @@ function editImmobile(id) {
   document.getElementById('sec-nuovo').classList.add('active');
   document.getElementById('topbarTitle').textContent = 'Modifica Immobile';
   window.scrollTo(0, 0);
+  try{rigPropertySnapshot=RighettoPropertySafety.capturePropertyForm(imm,RighettoPropertySafety.readControls(document.getElementById('immobileForm')),rigPropertyMedia());}catch(error){toast(error.message,'error');}
 }
 
 async function saveImmobile(e) {
   e.preventDefault();
   const btn = document.getElementById('btnSalva');
+  if(btn.disabled||rigPropertySaving)return;
+  let lockedControls=[];
+  try {
   const codiceInput = document.getElementById('f_codice');
   btn.disabled = true;
   btn.innerHTML = '<div class="spinner" style="width:16px;height:16px;border-width:2px"></div> Salvataggio...';
 
   const id = document.getElementById('editId').value;
+  if(id){rigPropertySaving=true;lockedControls=[...document.getElementById('immobileForm').querySelectorAll('input,select,textarea,button')].map(el=>({el,disabled:el.disabled}));for(const x of lockedControls)x.el.disabled=true;}
+  if(id&&(!rigPropertySnapshot||String(rigPropertySnapshot.record.id)!==String(id)))throw Error('Scheda non verificata: riaprila prima di salvare.');
+  const saveSnapshot=rigPropertySnapshot;
+  const saveControls=JSON.stringify(RighettoPropertySafety.readControls(document.getElementById('immobileForm')));
+  const saveMedia=JSON.stringify(rigPropertyMedia());
+  function assertSameForm(){if(document.getElementById('editId').value!==id||id&&rigPropertySnapshot!==saveSnapshot||JSON.stringify(RighettoPropertySafety.readControls(document.getElementById('immobileForm')))!==saveControls||JSON.stringify(rigPropertyMedia())!==saveMedia)throw Error('Scheda cambiata durante controllo: verifica i dati e salva di nuovo.');}
+  const owner=await sb.auth.getUser();if(owner.error||!owner.data?.user?.id||owner.data.user.id!==window.RighettoGatedPrincipal)throw Error('Sessione amministratore non verificata.');const authBefore=owner.data.user.id;const access=await sb.rpc('righetto_is_admin_request');if(access.error||access.data!==true)throw Error('Accesso amministratore non abilitato.');const confirmed=await sb.auth.getUser();if(confirmed.error||confirmed.data?.user?.id!==authBefore||window.RighettoGatedPrincipal!==authBefore)throw Error('Sessione cambiata durante controllo.');
   const titolo = document.getElementById('f_titolo').value.trim();
   const slug = titolo.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
   const codiceVal = (codiceInput.value || '').trim();
@@ -6848,6 +6904,7 @@ async function saveImmobile(e) {
   let propClienteId = document.getElementById('f_proprietario_id').value || null;
 
   if (!propClienteId) {
+    if(id)throw Error('Proprietario non verificato: annulla e seleziona una scheda cliente esistente. Nessuna creazione automatica durante modifica.');
     if (propNome || propTel || propEmail) {
       try {
         const synced = await ensureClienteFromProprietarioImmobile({
@@ -6882,7 +6939,7 @@ async function saveImmobile(e) {
     tipo_operazione: document.getElementById('f_tipo_operazione').value,
     contratto_affitto_res: getContrattoAffittoResValue(),
     tipologia: document.getElementById('f_tipologia').value,
-    prezzo: parseFloat(document.getElementById('f_prezzo').value) || null,
+    prezzo: rigNumberOrNull(parseFloat(document.getElementById('f_prezzo').value)),
     proprietario_id: propClienteId || null,
     proprietario_nome: propNome || null,
     proprietario_tel: propTel || null,
@@ -6890,17 +6947,17 @@ async function saveImmobile(e) {
     comune: document.getElementById('f_comune').value || 'Padova',
     indirizzo: document.getElementById('f_indirizzo').value || null,
     indirizzo_mappa: document.getElementById('f_indirizzo_mappa').value || null,
-    superficie: parseInt(document.getElementById('f_superficie').value) || null,
-    locali: parseInt(document.getElementById('f_locali').value) || null,
-    bagni: parseInt(document.getElementById('f_bagni').value) || null,
+    superficie: rigNumberOrNull(parseInt(document.getElementById('f_superficie').value)),
+    locali: rigNumberOrNull(parseInt(document.getElementById('f_locali').value)),
+    bagni: rigNumberOrNull(parseInt(document.getElementById('f_bagni').value)),
     piano: document.getElementById('f_piano').value || null,
     piano_numero: document.getElementById('f_piano_numero')?.value ? parseInt(document.getElementById('f_piano_numero').value) : null,
     tipo_contratto: document.getElementById('f_tipo_contratto')?.value || null,
-    anno_costruzione: parseInt(document.getElementById('f_anno_costruzione').value) || null,
+    anno_costruzione: rigNumberOrNull(parseInt(document.getElementById('f_anno_costruzione').value)),
     stato: document.getElementById('f_stato').value || null,
     classe_energetica: document.getElementById('f_classe_energetica').value || null,
-    ipe_kwh: parseFloat(document.getElementById('f_ipe_kwh')?.value)||null,
-    ipe_kwh: parseFloat(document.getElementById('f_ipe_kwh')?.value)||null,
+    ipe_kwh: rigNumberOrNull(parseFloat(document.getElementById('f_ipe_kwh')?.value)),
+    ipe_kwh: rigNumberOrNull(parseFloat(document.getElementById('f_ipe_kwh')?.value)),
     garage: document.getElementById('f_garage').checked,
     giardino: document.getElementById('f_giardino').checked,
     terrazzo: document.getElementById('f_terrazzo').checked,
@@ -6920,8 +6977,8 @@ async function saveImmobile(e) {
     soggiorno: document.getElementById('f_soggiorno').checked,
     soggiorno_angolo_cottura: document.getElementById('f_soggiorno_angolo_cottura')?.checked||false,
     cucina: document.getElementById('f_cucina').checked,
-    camere: parseInt(document.getElementById('f_camere').value)||null,
-    bagni_totali: parseInt(document.getElementById('f_bagni_totali').value)||null,
+    camere: rigNumberOrNull(parseInt(document.getElementById('f_camere').value)),
+    bagni_totali: rigNumberOrNull(parseInt(document.getElementById('f_bagni_totali').value)),
     mansarda: document.getElementById('f_mansarda').checked,
     taverna: document.getElementById('f_taverna').checked,
     soffitta: document.getElementById('f_soffitta').checked,
@@ -6929,13 +6986,13 @@ async function saveImmobile(e) {
     porticato: document.getElementById('f_porticato').checked,
     soppalco: document.getElementById('f_soppalco').checked,
     giardino_condominiale: document.getElementById('f_giardino_condominiale').checked,
-    terrazzi_num: parseInt(document.getElementById('f_terrazzi_num').value)||null,
-    ripostigli: parseInt(document.getElementById('f_ripostigli').value)||null,
-    garage_num: parseInt(document.getElementById('f_garage_num').value)||null,
-    garage_doppio: parseInt(document.getElementById('f_garage_doppio').value)||null,
-    posto_auto: parseInt(document.getElementById('f_posto_auto').value)||null,
-    mq_giardino: parseFloat(document.getElementById('f_mq_giardino').value)||null,
-    mq_lotto: parseFloat(document.getElementById('f_mq_lotto').value)||null,
+    terrazzi_num: rigNumberOrNull(parseInt(document.getElementById('f_terrazzi_num').value)),
+    ripostigli: rigNumberOrNull(parseInt(document.getElementById('f_ripostigli').value)),
+    garage_num: rigNumberOrNull(parseInt(document.getElementById('f_garage_num').value)),
+    garage_doppio: rigNumberOrNull(parseInt(document.getElementById('f_garage_doppio').value)),
+    posto_auto: rigNumberOrNull(parseInt(document.getElementById('f_posto_auto').value)),
+    mq_giardino: rigNumberOrNull(parseFloat(document.getElementById('f_mq_giardino').value)),
+    mq_lotto: rigNumberOrNull(parseFloat(document.getElementById('f_mq_lotto').value)),
     esposizione: document.getElementById('f_esposizione').value||null,
     unita_abitative: document.getElementById('f_unita_abitative').value === '' ? null : Number(document.getElementById('f_unita_abitative').value),
     totale_piani: document.getElementById('f_totale_piani').value === '' ? null : Number(document.getElementById('f_totale_piani').value),
@@ -6958,12 +7015,12 @@ async function saveImmobile(e) {
     annuncio_prestigio: document.getElementById('f_annuncio_prestigio').checked,
     chiavi_agenzia: document.getElementById('f_chiavi_agenzia').checked,
     immobile_garantito: document.getElementById('f_immobile_garantito').checked,
-    num_accessi_carrai: parseInt(document.getElementById('f_num_accessi_carrai').value)||null,
-    num_portoni: parseInt(document.getElementById('f_num_portoni').value)||null,
+    num_accessi_carrai: rigNumberOrNull(parseInt(document.getElementById('f_num_accessi_carrai').value)),
+    num_portoni: rigNumberOrNull(parseInt(document.getElementById('f_num_portoni').value)),
     impianto_elettrico: document.getElementById('f_impianto_elettrico').value||null,
     panorama: document.getElementById('f_panorama').value||null,
     consegna: document.getElementById('f_consegna').value||null,
-    spese_condominio: parseFloat(document.getElementById('f_spese_condominio').value)||null,
+    spese_condominio: rigNumberOrNull(parseFloat(document.getElementById('f_spese_condominio').value)),
     // Arredamento
     arredo: document.getElementById('f_arredo')?.checked||false,
     cucina_arredata: document.getElementById('f_cucina_arredata')?.checked||false,
@@ -6997,13 +7054,13 @@ async function saveImmobile(e) {
     cassaforte: document.getElementById('f_cassaforte')?.checked||false,
     posto_spiaggia: document.getElementById('f_posto_spiaggia')?.checked||false,
     connettivita: document.getElementById('f_connettivita')?.value||null,
-    numero_chiavi: parseInt(document.getElementById('f_numero_chiavi')?.value)||null,
+    numero_chiavi: rigNumberOrNull(parseInt(document.getElementById('f_numero_chiavi')?.value)),
     // Catasto
     unita_catastali: currentUnitaCatastali,
     catasto_pdf: currentCatastoPdf,
-    rendita_catastale: parseFloat(document.getElementById('f_rendita_catastale').value)||null,
-    valore_catastale: parseFloat(document.getElementById('f_valore_catastale').value)||null,
-    prezzo_reale: parseFloat(document.getElementById('f_prezzo_reale').value)||null,
+    rendita_catastale: rigNumberOrNull(parseFloat(document.getElementById('f_rendita_catastale').value)),
+    valore_catastale: rigNumberOrNull(parseFloat(document.getElementById('f_valore_catastale').value)),
+    prezzo_reale: rigNumberOrNull(parseFloat(document.getElementById('f_prezzo_reale').value)),
     // Pubblicazione
     attivo: document.getElementById('f_attivo').checked,
     in_evidenza: document.getElementById('f_in_evidenza').checked,
@@ -7014,36 +7071,31 @@ async function saveImmobile(e) {
     note_interne: document.getElementById('f_note_interne').value || null,
   };
 
-  // Salva con retry: se colonna mancante la rimuove e riprova
-  let error;
-  let attempts = 0;
-  let currentPayload = {...payload};
-  const removedCols = [];
-  while (attempts < 30) {
-    let res;
-    if (id) {
-      res = await sb.from('immobili').update(currentPayload).eq('id', id);
-    } else {
-      res = await sb.from('immobili').insert(currentPayload);
-    }
-    error = res.error;
-    if (!error) break;
-    // Se errore è "column not found" rimuovi quella colonna e riprova
-    const match = error.message.match(/Could not find the '([^']+)' column/);
-    if (match) {
-      const badCol = match[1];
-      console.warn('Colonna non trovata, rimuovo:', badCol);
-      removedCols.push(badCol);
-      delete currentPayload[badCol];
-      attempts++;
-    } else {
-      break; // altro tipo di errore, esci
-    }
+  // Revalidate admin identity after asynchronous form/code checks, before the write.
+  const lastUser=await sb.auth.getUser();if(lastUser.error||lastUser.data?.user?.id!==authBefore||window.RighettoGatedPrincipal!==authBefore)throw Error('Sessione cambiata prima del salvataggio.');
+  const lastAccess=await sb.rpc('righetto_is_admin_request');if(lastAccess.error||lastAccess.data!==true||window.RighettoGatedPrincipal!==authBefore)throw Error('Accesso amministratore revocato: nessun salvataggio.');
+  // Existing edit sends only explicit changes and enforces row-version CAS.
+  // No column-stripping retries; an unknown schema stops the operation.
+  let error=null;
+  let savedRow=null;
+  if(id){
+    assertSameForm();
+    const patch=RighettoPropertySafety.changedPropertyPayload(rigPropertySnapshot,payload,RighettoPropertySafety.readControls(document.getElementById('immobileForm')),rigPropertyMedia());
+    if(!Object.keys(patch).length){toast('Nessuna modifica da salvare.','success');return;}
+    const res=await sb.from('immobili').update(patch).eq('id',id).eq('updated_at',rigPropertySnapshot.record.updated_at).select('id,updated_at');
+    if(res.error)throw Error(res.error.message);
+    if(res.data?.length!==1)throw Error('Salvataggio non eseguito: scheda modificata o permessi cambiati. Ricarica prima di riprovare.');
+    savedRow=res.data[0];
+  }else{
+    const res=await sb.from('immobili').insert(payload).select('id,updated_at');
+    if(res.error)throw Error(res.error.message);
+    if(res.data?.length!==1)throw Error('Esito creazione da verificare: non ripetere.');
+    savedRow=res.data[0];
   }
-  if (removedCols.length > 0) {
-    console.warn('Colonne rimosse dal payload perché non presenti in Supabase:', removedCols.join(', '));
-  }
-
+  const verified=await sb.from('immobili').select('id,updated_at').eq('id',savedRow.id).single();
+  if(verified.error||verified.data?.updated_at!==savedRow.updated_at)throw Error('Salvataggio effettuato, verifica successiva non conclusa: non ripetere, rileggi la scheda.');
+  if(id){try{assertSameForm();}catch(error){throw Error('Salvataggio eseguito sulla scheda precedente. La scheda aperta ora non è stata toccata: ricarica elenco per verificare.');}}
+  rigPropertySnapshot=null;
   btn.disabled = false;
   btn.innerHTML = '💾 Salva Immobile';
 
@@ -7076,6 +7128,8 @@ async function saveImmobile(e) {
       if (saved) emCheckAutoNotify(saved);
     }
   }
+  }catch(error){toast(error.message||'Salvataggio non concluso.','error');}finally{for(const x of lockedControls)x.el.disabled=x.disabled;rigPropertySaving=false;btn.disabled=false;btn.innerHTML='💾 Salva Immobile';}
+
 }
 
 // ══════════════════════════════════════
