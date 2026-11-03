@@ -14,11 +14,11 @@ export function installAppHistory(win=window,{scope='local-fixture'}={}){
  const key=r=>JSON.stringify(r),valid=r=>r&&sections.has(r.section)&&(!r.view||['client','client-edit','client-new','property-edit','agenda-detail','agenda-edit','agenda-new','mobile-property'].includes(r.view))&&(!r.id||/^[a-zA-Z0-9-]{1,80}$/.test(r.id))&&(!r.tab||['scheda','cron','all','imm','crn'].includes(r.tab));
  function close(){win.RighettoMobileNavigation?.closeScheda?.();win.RighettoCliente?.close();d.querySelectorAll('.ra-modal').forEach(x=>x.remove());d.querySelector('#clienteModal')?.classList.remove('open');}
  async function render(r){
-  const now=++epoch;const action=resolve(r,()=>!disposed&&now===epoch)||views.get(key(r));replaying=true;close();
+  const now=++epoch;const current=()=>!disposed&&now===epoch;const action=(!r.id&&r.view?.startsWith('agenda-')?views.get(key(r)):null)||resolve(r,current)||views.get(key(r));replaying=true;close();
   try{
    baseShow(r.section);
-   if(action)await action();
-  }catch(error){const p=d.createElement('p');p.setAttribute('role','alert');p.dataset.navigationError='';p.textContent='La schermata richiesta non è disponibile. Nessuna modifica salvata. Usa il menu per riaprire la scheda.';d.querySelector('.content,main')?.prepend(p);throw error;}finally{replaying=false;if(!disposed&&now===epoch)clean();}
+   if(action)await action(current);
+  }catch(error){const p=d.createElement('p');p.setAttribute('role','alert');p.dataset.navigationError='';p.textContent=!r.id&&r.view?.startsWith('agenda-')?'Bozza non ripristinabile dopo aggiornamento pagina. Nessun evento salvato: usa Nuovo evento, Duplica o la fascia desiderata.':'La schermata richiesta non è disponibile. Nessuna modifica salvata. Usa il menu per riaprire la scheda.';d.querySelector('.content,main')?.prepend(p);throw error;}finally{replaying=false;if(!disposed&&now===epoch)clean();}
  }
  function resolve(r,isCurrent){
   if(!r.view)return null;

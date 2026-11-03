@@ -198,7 +198,11 @@ function init(){
   c=e.target.closest('#rm-scheda [data-own]');if(c){var oid=c.dataset.own;if(allClienti.find(function(x){return String(x.id)===String(oid);})){openCli(oid);}else if(typeof sb!=='undefined'){sb.from('clienti').select('*').eq('id',oid).limit(1).then(function(r){if(r.data&&r.data[0]){allClienti.push(r.data[0]);openCli(oid);}});}}
  });
  [['immobiliTableWrap',cardsImm],['clientiTable',cardsCli]].forEach(function(p){var el=document.getElementById(p[0]);if(el)new MutationObserver(function(){setTimeout(p[1],30);}).observe(el,{childList:true,subtree:true});});
- mq.addEventListener?mq.addEventListener('change',function(){cur='menu';render();}):0;
+ mq.addEventListener?mq.addEventListener('change',function(){
+  const route=window.RighettoNavigation?.router?.current;
+  cur=route?.section&&route.section!=='home'?route.section:'menu';render();
+  if(phone()&&cur!=='menu'){oldShow(cur);render();if(cur==='immobili')cardsImm();if(cur==='clienti')cardsCli(true);}
+ }):0;
  cur='menu';render();
  window.RighettoMobileNavigationReady=true;window.dispatchEvent(new Event('righetto:navigation-ready'));
 }
