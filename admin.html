@@ -18095,7 +18095,7 @@ function closeNavMenus(except){nav.querySelectorAll('details').forEach(function(
 function navCommand(kind){closeNavMenus();if(kind==='new-event'){window.showSection('agenda');if(window.RighettoAgenda)window.RighettoAgenda.newEvent();}else if(kind==='new-client'){window.showSection('clienti');if(window.openClienteModal)window.openClienteModal();}else if(kind==='new-property'){window.showSection('nuovo');}}
 function positionNavMenus(){if(innerWidth<=760){var bottom=nav.getBoundingClientRect().bottom;nav.querySelectorAll('.rh-grid').forEach(function(list){list.style.top=(bottom+4)+'px';});}else{nav.querySelectorAll('.rh-grid').forEach(function(list){list.style.top='';});}}
 window.addEventListener('resize',positionNavMenus);window.addEventListener('scroll',positionNavMenus,{passive:true});
-function navGroup(label,items){var d=document.createElement('details'),sum=document.createElement('summary'),list=document.createElement('div');sum.textContent=label;sum.setAttribute('aria-label',label+' - apri menu');list.className='rh-grid';items.forEach(function(item){var b=document.createElement('button');b.type='button';b.className='rh-tile';b.textContent=item[1];if(item[0].indexOf('new-')===0){b.dataset.navCommand=item[0];b.onclick=function(){navCommand(item[0]);};}else{b.dataset.section=item[0];b.onclick=function(){closeNavMenus();window.showSection(item[0]);};}list.appendChild(b);});d.append(sum,list);d.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse'){closeNavMenus(d);d.open=true;}});d.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse'&&!d.contains(document.activeElement))d.open=false;});d.addEventListener('toggle',function(){sum.setAttribute('aria-expanded',String(d.open));if(d.open){closeNavMenus(d);positionNavMenus();}});d.addEventListener('keydown',function(e){if(e.key==='Escape'){d.open=false;sum.focus();}if(e.key==='ArrowDown'&&e.target===sum){e.preventDefault();closeNavMenus(d);d.open=true;list.querySelector('button').focus();}});nav.appendChild(d);return d;}
+function navGroup(label,items){var d=document.createElement('details'),sum=document.createElement('summary'),list=document.createElement('div');sum.textContent=label;sum.setAttribute('aria-label',label+' - apri menu');list.className='rh-grid';items.forEach(function(item){var b=document.createElement('button');b.type='button';b.className='rh-tile';b.textContent=item[1];if(item[0].indexOf('new-')===0){b.dataset.navCommand=item[0];b.onclick=function(){navCommand(item[0]);};}else{b.dataset.section=item[0];b.onclick=function(){closeNavMenus();window.showSection(item[0]);};}list.appendChild(b);});d.append(sum,list);var openedByHover=false;sum.addEventListener('click',function(e){if(e.detail>0&&openedByHover&&d.open){e.preventDefault();}openedByHover=false;});d.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse'){openedByHover=!d.open;closeNavMenus(d);d.open=true;}});d.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse'){openedByHover=false;if(!d.contains(document.activeElement))d.open=false;}});d.addEventListener('toggle',function(){sum.setAttribute('aria-expanded',String(d.open));if(d.open){closeNavMenus(d);positionNavMenus();}});d.addEventListener('keydown',function(e){if(e.key==='Escape'){d.open=false;sum.focus();}if(e.key==='ArrowDown'&&e.target===sum){e.preventDefault();closeNavMenus(d);d.open=true;list.querySelector('button').focus();}});nav.appendChild(d);return d;}
 navGroup('Menu',[['home','Home gestionale'],['attivita','Attività']]);
 navGroup('Agenda',[['agenda','Apri agenda'],['new-event','Nuovo appuntamento']]);
 navGroup('Immobili',[['immobili','Elenco immobili'],['new-property','Nuovo immobile'],['perizie','Perizie'],['documentigenerali','Documenti']]);
@@ -18132,7 +18132,7 @@ window.showSection('home');
 <script>window.RIGHETTO_SYNC_ATTIVA=true;</script>
 <script src="js/admin-agenda.js?v=20261102-back"></script>
 <script src="js/admin-cliente-scheda.js?v=20261102-back"></script>
-<script src="js/admin-immobile-operazioni.js?v=1"></script>
+<script src="js/admin-immobile-operazioni.js?v=0369-20261103"></script>
 <script src="js/admin-blocco2.js?v=1"></script>
 <script>window.rigOwnerReady(()=>RighettoAgenda.init(document.getElementById("righetto-operational-agenda")));</script>
 <script>window.RIGHETTO_BOZZA_ATTIVA=true;</script>
@@ -18147,6 +18147,7 @@ msg('Attivit\u00e0: apri Attivit\u00e0 per caricare le pratiche.');window.rigSec
 import {bindAuthenticatedNavigation} from './js/auth-bootstrap.mjs';
 window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation(sb).catch(()=>{if(document.getElementById('navigation-startup-warning'))return;const n=document.createElement('p');n.id='navigation-startup-warning';n.setAttribute('role','status');n.textContent='Navigazione Indietro non disponibile in questa sessione. Usa il menu interno; i dati non sono stati modificati.';n.style.cssText='margin:12px;padding:12px;background:#fff3cc;color:#17324d';document.querySelector('.content')?.prepend(n);});});
 </script>
+<script src="js/admin-share-preview.js?v=20261103"></script>
 </body>
 </html>
 

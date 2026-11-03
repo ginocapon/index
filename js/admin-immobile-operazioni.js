@@ -25,7 +25,16 @@ async function copy(t,msg){try{await navigator.clipboard.writeText(t);if(window.
 const ops={
  clienti(i){if(typeof showMatchingClienti==='function')showMatchingClienti(i.id);},
  appuntamento(i){if(typeof showSection==='function')showSection('agenda');if(window.RighettoAgenda&&RighettoAgenda.newEvent)RighettoAgenda.newEvent({property_id:i.id,property:i.codice,address:i.indirizzo||''});},
- link(i){copy(url(i),'Link dell\'annuncio copiato');},
+ async link(i){
+  const result=await righettoShareForProperty(i);
+  const o=overlay('<h3>Link con anteprima foto</h3><p></p><pre></pre><button data-a="copy">Copia link</button><button data-a="x">Chiudi</button>');
+  o.querySelector('p').textContent=result.ok?'Link con copertina pronto. Nessun messaggio inviato.':result.reason;
+  o.querySelector('pre').textContent=result.ok?result.url:'';
+  const button=o.querySelector('[data-a=copy]');button.disabled=!result.ok;if(!result.ok){button.textContent='Copia non disponibile';button.style.cssText='color:#6b675f;background:#eeece8;border:1px solid #ccc;cursor:not-allowed';}
+  button.onclick=async()=>{button.disabled=true;const fresh=await righettoShareForProperty(i);if(!o.isConnected)return;if(!fresh.ok){o.querySelector('p').textContent=fresh.reason;o.querySelector('pre').textContent='';button.textContent='Copia non disponibile';button.style.cssText='color:#6b675f;background:#eeece8;border:1px solid #ccc;cursor:not-allowed';return;}o.querySelector('pre').textContent=fresh.url;await copy(fresh.url,'Link con anteprima copiato');button.disabled=false;};
+  o.querySelector('[data-a=x]').onclick=close;
+ },
+ seolink(i){copy(url(i),'Link pagina sito copiato');},
  dati(i){const t=riepilogo(i);const o=overlay('<h3>Riepilogo dati immobile</h3><pre>'+esc(t)+'</pre><button class="pri" data-a="c">Copia</button><button data-a="t">Scarica .txt</button><button data-a="x">Chiudi</button>');
   o.querySelector('[data-a=c]').onclick=()=>copy(t,'Riepilogo copiato');o.querySelector('[data-a=t]').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/plain;charset=utf-8'}));a.download=(i.codice||'immobile')+'.txt';a.click();};o.querySelector('[data-a=x]').onclick=close;},
  email(i){const sub='Immobile '+(i.codice||'')+' - '+(i.titolo||'');const body='Buongiorno,\n\nle segnalo questo immobile:\n\n'+riepilogo(i)+'\n\nCordiali saluti\nGino Capon - Righetto Immobiliare';
@@ -53,13 +62,13 @@ const ops={
    if(window.toast)toast(val?'Segnato come '+lab:'Ripristinato','success');close();if(typeof loadImmobili==='function')await loadImmobili();};
   o.querySelector('[data-a=ok]').onclick=()=>apply(true);const un=o.querySelector('[data-a=un]');if(un)un.onclick=()=>apply(false);}
 };
-const ITEMS=[['clienti','Trova clienti compatibili'],['email','Bozza email con i dati'],['link','Copia link dell\'annuncio'],['dati','Esporta dati immobile'],['catasto','Scheda catastale (lettura)'],['duplica','Duplica come bozza'],['venduto','Segna venduto / affittato']];
+const ITEMS=[['clienti','Trova clienti compatibili'],['email','Bozza email con i dati'],['link','Copia link con anteprima foto'],['seolink','Copia link pagina sito (SEO)'],['dati','Esporta dati immobile'],['catasto','Scheda catastale (lettura)'],['duplica','Duplica come bozza'],['venduto','Segna venduto / affittato']];
 const DACOMPLETARE='<details><summary>Da completare (non ancora disponibili qui)</summary><ul style="margin:6px 0 0 16px;padding:0"><li>Esportazione sui portali</li><li>Nuovo appuntamento da qui (per ora si inserisce nel vecchio gestionale)</li></ul></details>';
 function openMenu(i){css();const o=overlay('<h3>Operazioni - '+esc(i.codice||'')+'</h3><div id="rio-list" class="rio-list">'+ITEMS.map(x=>'<button type="button" data-op="'+x[0]+'" style="display:block;width:100%;text-align:left;margin:4px 0">'+x[1]+'</button>').join('')+'</div>'+DACOMPLETARE+'<button data-a="x" style="margin-top:10px">Chiudi</button>');
  o.querySelector('[data-a=x]').onclick=close;o.querySelector('#rio-list').onclick=e=>{const b=e.target.closest('[data-op]');if(!b)return;close();ops[b.dataset.op](i);};}
 function addMenu(){css();const bar=document.querySelector('#formTitle');if(!bar)return;const hdr=bar.parentNode.querySelector('.modal-header-actions');if(!hdr||hdr.querySelector('.rio-wrap'))return;
  const w=document.createElement('span');w.className='rio-wrap';w.innerHTML='<button type="button" class="btn btn-primary btn-sm" id="rio-btn" style="background:#00508f;color:#fff">🔧 Operazioni</button><div class="rio-menu" id="rio-menu" hidden></div>';hdr.insertBefore(w,hdr.firstChild);
- const m=w.querySelector('#rio-menu');const items=[['clienti','Trova clienti compatibili'],['email','Bozza email con i dati'],['link','Copia link dell\'annuncio'],['dati','Esporta dati immobile'],['catasto','Scheda catastale (lettura)'],['duplica','Duplica come bozza'],['venduto','Segna venduto / affittato']];
+ const m=w.querySelector('#rio-menu');const items=[['clienti','Trova clienti compatibili'],['email','Bozza email con i dati'],['link','Copia link con anteprima foto'],['seolink','Copia link pagina sito (SEO)'],['dati','Esporta dati immobile'],['catasto','Scheda catastale (lettura)'],['duplica','Duplica come bozza'],['venduto','Segna venduto / affittato']];
  m.innerHTML=items.map(x=>'<button type="button" data-op="'+x[0]+'">'+x[1]+'</button>').join('')+'<details><summary>Da completare (non ancora disponibili qui)</summary><ul style="margin:6px 0 0 16px;padding:0"><li>Esportazione sui portali (per ora nel vecchio gestionale)</li><li>Nuovo appuntamento da qui (per ora si inserisce nel vecchio gestionale)</li></ul></details>';
  w.querySelector('#rio-btn').onclick=e=>{e.stopPropagation();m.hidden=!m.hidden;};
  m.addEventListener('click',e=>{const b=e.target.closest('[data-op]');if(!b)return;const i=cur();if(!i){if(window.toast)toast('Salva prima l\'immobile','error');return;}m.hidden=true;ops[b.dataset.op](i);});
