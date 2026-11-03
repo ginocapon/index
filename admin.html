@@ -6763,7 +6763,7 @@ function editImmobile(id) {if(rigPropertySaving){toast('Salvataggio in corso: at
     'camere','bagni_totali','terrazzi_num','ripostigli','garage_num','garage_doppio',
     'posto_auto','mq_giardino','mq_lotto','esposizione','unita_abitative','totale_piani',
     'impianto_elettrico','panorama','consegna','spese_condominio',
-    'rendita_catastale','valore_catastale','prezzo_reale','ipe_kwh','num_accessi_carrai','num_portoni','numero_chiavi','connettivita'];
+    'rendita_catastale','valore_catastale','prezzo_reale','ipe_kwh','num_accessi_carrai','num_portoni','numero_chiavi','connettivita','distanza_mare','stato_rogito','stato_manutenzione'];
 
   // Conserva consegne esistenti non presenti nell'elenco standard.
   const consegnaSelect = document.getElementById('f_consegna');
@@ -6793,6 +6793,15 @@ function editImmobile(id) {if(rigPropertySaving){toast('Salvataggio in corso: at
       const option=new Option(existing+' (valore esistente)',existing);option.dataset.existingValue='true';connectivity.add(option);
     }
   }
+  // Preserve existing non-standard text values instead of displaying a blank select.
+  ['stato_rogito','stato_manutenzione'].forEach(name=>{
+    const el=document.getElementById('f_'+name);if(!el)return;
+    el.querySelectorAll('option[data-existing-value]').forEach(o=>o.remove());
+    const value=imm[name]==null?'':String(imm[name]);
+    if(value&&![...el.options].some(o=>o.value===value)){
+      const option=new Option(value+' (valore esistente)',value);option.dataset.existingValue='true';el.add(option);
+    }
+  });
   fields.forEach(f => {
     const el = document.getElementById('f_' + f);
     if (el) el.value = imm[f] !== null && imm[f] !== undefined ? imm[f] : '';
@@ -6824,7 +6833,7 @@ function editImmobile(id) {if(rigPropertySaving){toast('Salvataggio in corso: at
     'giardino_condominiale','piano_interrato','piano_terra','primo_piano','ultimo_piano',
     'ingresso_indipendente','canna_fumaria','animali_ammessi','annuncio_prestigio',
     'chiavi_agenzia','immobile_garantito','riscaldamento_autonomo',
-    'riscaldamento_centralizzato','aria_condizionata','conta_calorie','portineria','posto_spiaggia','accesso_disabili','area_fitness','caldaia_condensazione','camino','riscaldamento_pavimento','termopompa','pannelli_fotovoltaici','pannelli_solari','impianto_geotermico','allarme','domotica','porta_blindata','tapparelle_motorizzate','zanzariere','cassaforte'];
+    'riscaldamento_centralizzato','aria_condizionata','conta_calorie','portineria','posto_spiaggia','accesso_disabili','area_fitness','caldaia_condensazione','camino','riscaldamento_pavimento','termopompa','pannelli_fotovoltaici','pannelli_solari','impianto_geotermico','allarme','domotica','porta_blindata','tapparelle_motorizzate','zanzariere','cassaforte','annuncio_autonomo','riscaldamento_semi_autonomo','raffreddamento_pavimento','predisposizione_aria','predisposizione_allarme','tende_sole','nuovo_costruzione','grezzo','cartello','riservato_residenti'];
   bools.forEach(f => {
     const el = document.getElementById('f_' + f);
     if (el) el.checked = !!imm[f];
@@ -7061,6 +7070,19 @@ async function saveImmobile(e) {
     rendita_catastale: rigNumberOrNull(parseFloat(document.getElementById('f_rendita_catastale').value)),
     valore_catastale: rigNumberOrNull(parseFloat(document.getElementById('f_valore_catastale').value)),
     prezzo_reale: rigNumberOrNull(parseFloat(document.getElementById('f_prezzo_reale').value)),
+    annuncio_autonomo: document.getElementById('f_annuncio_autonomo').checked,
+    riscaldamento_semi_autonomo: document.getElementById('f_riscaldamento_semi_autonomo').checked,
+    raffreddamento_pavimento: document.getElementById('f_raffreddamento_pavimento').checked,
+    predisposizione_aria: document.getElementById('f_predisposizione_aria').checked,
+    predisposizione_allarme: document.getElementById('f_predisposizione_allarme').checked,
+    tende_sole: document.getElementById('f_tende_sole').checked,
+    nuovo_costruzione: document.getElementById('f_nuovo_costruzione').checked,
+    grezzo: document.getElementById('f_grezzo').checked,
+    cartello: document.getElementById('f_cartello').checked,
+    riservato_residenti: document.getElementById('f_riservato_residenti').checked,
+    distanza_mare: rigNumberOrNull(parseInt(document.getElementById('f_distanza_mare').value)),
+    stato_rogito: document.getElementById('f_stato_rogito').value||null,
+    stato_manutenzione: document.getElementById('f_stato_manutenzione').value||null,
     // Pubblicazione
     attivo: document.getElementById('f_attivo').checked,
     in_evidenza: document.getElementById('f_in_evidenza').checked,
