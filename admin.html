@@ -6740,6 +6740,7 @@ function changedPropertyPayload(snapshot,payload,controls,media){
   let changed=false;
   if(mediaKeys[k])changed=!equal(media[mediaKeys[k]],snapshot.media[mediaKeys[k]]);
   else if(ownerKeys.includes(k))changed=ownerChanged;
+  else if(k==='contacolori')changed=changedControls.has('f_conta_calorie');
   else if(k==='slug')changed=false; // Existing public URL never changes in edit.
   else if(k==='contratto_affitto_res')changed=changedControls.has('f_tipo_operazione')||[...changedControls].some(id=>id.startsWith('name:contratto_affitto_res:'));
   else changed=changedControls.has('f_'+k);
@@ -6852,7 +6853,7 @@ async function editImmobile(id,isCurrent=()=>true) {if(rigPropertySaving){toast(
     'riscaldamento_centralizzato','aria_condizionata','conta_calorie','portineria','posto_spiaggia','accesso_disabili','area_fitness','caldaia_condensazione','camino','riscaldamento_pavimento','termopompa','pannelli_fotovoltaici','pannelli_solari','impianto_geotermico','allarme','domotica','porta_blindata','tapparelle_motorizzate','zanzariere','cassaforte','annuncio_autonomo','riscaldamento_semi_autonomo','raffreddamento_pavimento','predisposizione_aria','predisposizione_allarme','tende_sole','nuovo_costruzione','grezzo','cartello','riservato_residenti'];
   bools.forEach(f => {
     const el = document.getElementById('f_' + f);
-    if (el) el.checked = !!imm[f];
+    if (el) el.checked = f==='conta_calorie'?Boolean(imm.contacolori??imm.conta_calorie):!!imm[f];
   });
 
   currentFotos = Array.isArray(imm.foto) ? [...imm.foto] : [];
@@ -6991,7 +6992,6 @@ async function saveImmobile(e) {
     piscina: document.getElementById('f_piscina').checked,
     arredato: document.getElementById('f_arredato').checked,
     foto: currentFotos,
-    foto_principale: currentFotos[0] || null,
     foto_urls: currentFotos,
     planimetrie: currentPlanimetrie,
     documenti: currentDocumenti,
@@ -7066,7 +7066,7 @@ async function saveImmobile(e) {
     pannelli_fotovoltaici: document.getElementById('f_pannelli_fotovoltaici')?.checked||false,
     pannelli_solari: document.getElementById('f_pannelli_solari')?.checked||false,
     impianto_geotermico: document.getElementById('f_impianto_geotermico')?.checked||false,
-    conta_calorie: document.getElementById('f_conta_calorie')?.checked||false,
+    contacolori: document.getElementById('f_conta_calorie')?.checked||false,
     // Altri comfort
     allarme: document.getElementById('f_allarme')?.checked||false,
     domotica: document.getElementById('f_domotica')?.checked||false,
@@ -7307,9 +7307,6 @@ async function duplicateImmobile(id) {
   ['foto', 'foto_urls', 'virtual_tour_scenes', 'unita_catastali', 'catasto_pdf'].forEach(k => {
     if (payload[k] != null) payload[k] = JSON.parse(JSON.stringify(payload[k]));
   });
-  if (Array.isArray(payload.foto) && payload.foto.length) {
-    payload.foto_principale = payload.foto[0];
-  }
 
   const { data: created, error } = await _insertImmobilePayload(payload);
   if (error) {
@@ -9890,7 +9887,7 @@ function printPropertyPdf(id) {
   if (i.pannelli_fotovoltaici) clima.push('Fotovoltaico');
   if (i.pannelli_solari) clima.push('Solare termico');
   if (i.impianto_geotermico) clima.push('Geotermico');
-  if (i.conta_calorie) clima.push('Conta calorie');
+  if (i.contacolori??i.conta_calorie) clima.push('Conta calorie');
 
   // Comfort
   const comfort = [];
