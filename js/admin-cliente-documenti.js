@@ -1,0 +1,24 @@
+/* Internal prototype previews only. No archive, send, signature or consent acquisition. */
+(function(){
+'use strict';
+async function open({db,clientId,host,isCurrent}){
+ let active=true;const alive=()=>active&&isCurrent();
+ const text=(tag,value)=>{const e=document.createElement(tag);e.textContent=value;return e;};
+ const warning=text('p','ANTEPRIME INTERNE NON FIRMABILI. Nessun documento archiviato o inviato. Dati catastali e civico/provincia immobile incompleti. Modello privacy: P.IVA discordanti 05182390285 / 04264850282 e consensi prespuntati nativi ancora da decidere, non attestano scelte del cliente. Stampa e uso per firma disabilitati.');warning.setAttribute('role','note');host.replaceChildren(warning);
+ const status=text('p','Lettura eventi collegati per ID…');status.setAttribute('role','status');host.append(status);
+ try{
+  const auth=db.auth.onAuthStateChange?.(event=>{if(event==='SIGNED_OUT'||event==='SIGNED_IN'){active=false;host.replaceChildren(text('p','Sessione cambiata. Riapri la scheda per vedere i documenti.'));}});
+ const u=await db.auth.getUser(),uid=u.data?.user?.id;if(u.error||!uid||uid!==window.RighettoGatedPrincipal)throw Error('Accesso amministratore richiesto');
+  const authority=await db.rpc('righetto_is_admin_request');if(authority.error||authority.data!==true)throw Error('Accesso amministratore richiesto');
+  const rows=[],seen=new Set();let total=null;
+  for(let lo=0;;lo+=500){const q=await db.from('agenda_events').select('id,client_id,property_id,version,starts_at,timezone,deleted_at,title',{count:'exact'}).eq('client_id',clientId).is('deleted_at',null).order('id').range(lo,lo+499);if(!alive())return;if(q.error)throw Error(q.error.message);if(!Array.isArray(q.data)||!Number.isInteger(q.count)||q.count<0||total!==null&&total!==q.count)throw Error('Completezza eventi non verificata');total=q.count;for(const e of q.data){if(e.client_id!==clientId||!e.id||seen.has(e.id)||e.deleted_at)throw Error('Collegamento evento non verificato');seen.add(e.id);rows.push(e);}if(q.data.length<500){if(rows.length!==total)throw Error('Eventi incompleti');break;}if(lo>100000)throw Error('Troppi eventi');}
+  const after=await db.auth.getUser();if(!alive())return;if(after.error||after.data?.user?.id!==uid||window.RighettoGatedPrincipal!==uid)throw Error('Accesso cambiato');
+  status.textContent=rows.length?'Scegli un evento collegato al cliente. Nessun abbinamento per nome.':'Nessun evento collegato disponibile. Crea prima un appuntamento in Agenda: non vengono inventate date o associazioni.';if(!rows.length)return;
+  const label=text('label','Evento collegato: '),select=document.createElement('select');select.style.cssText='max-width:100%;box-sizing:border-box';select.append(new Option('Scegli evento',''));for(const e of rows.sort((a,b)=>String(b.starts_at).localeCompare(String(a.starts_at))))select.append(new Option((e.starts_at?new Intl.DateTimeFormat('it-IT',{timeZone:e.timezone||'Europe/Rome',dateStyle:'short',timeStyle:'short'}).format(new Date(e.starts_at)):'Data assente')+' - '+(e.title||'Evento')+' - ID '+e.id,e.id));label.append(select);host.append(label);
+  const controls=document.createElement('div'),preview=document.createElement('div');host.append(controls,preview);let generation=0;
+  for(const kind of ['1671','1673']){const b=text('button',kind==='1671'?'Anteprima foglio visita 1671':'Anteprima privacy 1673 - limiti aperti');b.type='button';b.disabled=true;controls.append(b);b.onclick=async()=>{const e=rows.find(r=>r.id===select.value);if(!e)return;const gen=++generation;controls.querySelectorAll('button').forEach(x=>x.disabled=true);preview.textContent='Caricamento anteprima interna…';const current=()=>alive()&&generation===gen&&select.value===e.id&&window.RighettoGatedPrincipal===uid;try{const module=await import('./js/agenda-doc'+kind+'.mjs');if(!current())return;await module['open'+kind]({db,event:e,host:preview,isCurrent:current});if(!current())return;preview.querySelectorAll('button').forEach(x=>{x.disabled=true;x.onclick=null;x.textContent='Stampa disabilitata: prototipo non firmabile';});const banner=text('p','Solo revisione interna. Firma, data firma e consensi non acquisiti. Nessun Genera / Archivia / Invia.');preview.prepend(banner);}catch(error){if(current())preview.textContent='Anteprima non disponibile: '+error.message;}finally{if(current())controls.querySelectorAll('button').forEach(x=>x.disabled=false);}};}
+  select.onchange=()=>{generation++;preview.replaceChildren();const e=rows.find(r=>r.id===select.value);controls.querySelectorAll('button').forEach(b=>b.disabled=!e||(b.textContent.includes('1671')&&!e.property_id));};
+ }catch(error){if(alive())status.textContent='Anteprime non disponibili: '+error.message;}
+}
+window.RighettoClienteDocumenti=Object.freeze({open});
+})();

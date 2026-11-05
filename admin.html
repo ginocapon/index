@@ -9747,70 +9747,9 @@ function matchScore(client, property) {
   return Math.round((score / maxScore) * 100);
 }
 
-async function showMatchingImmobili(clientId){
- const modal=document.getElementById('matchModal'),body=document.getElementById('matchModalBody');modal.classList.add('open');body.textContent='Ricerca immobili compatibili…';
- try{const cr=await sb.from('clienti').select('*').eq('id',clientId).maybeSingle();if(cr.error||!cr.data)throw Error('Cliente non leggibile.');const client=cr.data;document.getElementById('matchModalTitle').textContent='Immobili per '+(clienteDisplayName(client)||'Cliente');
- let properties=[];for(let offset=0;;offset+=500){const q=await sb.from('immobili').select('id,codice,titolo,comune,tipologia,tipo_operazione,prezzo,camere,superficie,attivo,venduto,affittato,cestino').eq('attivo',true).eq('cestino',false).order('id').range(offset,offset+499);if(q.error)throw q.error;properties.push(...q.data);if(q.data.length<500)break;}
- const matches=properties.filter(i=>!i.venduto&&!i.affittato).map(i=>({...i,_score:matchScore(client,i)})).filter(i=>i._score>=30).sort((a,b)=>b._score-a._score);
- body.innerHTML='<p>Confronto indicativo sui criteri salvati, non conferma disponibilità. Nessun invio automatico.</p>'+ (matches.length?matches.map(i=>'<div class="client-match-card"><b>'+escHtml(i.codice||'')+' - '+escHtml(i.titolo||'')+'</b><p>'+escHtml(i.comune||'')+(i.prezzo?' | € '+Number(i.prezzo).toLocaleString('it-IT'):'')+(i.superficie?' | '+Number(i.superficie)+' mq':'')+'</p><p>Corrispondenza ai criteri: '+i._score+'%</p><button type="button" data-client-match="'+escHtml(i.id)+'">Apri immobile interno</button><button type="button" data-client-proposal="'+escHtml(i.id)+'">Prepara testo proposta</button></div>').join(''):'<p>Nessun immobile compatibile con i criteri salvati. Controlla o completa la ricerca del cliente.</p>');
- body.querySelectorAll('[data-client-proposal]').forEach(b=>b.onclick=()=>{
- const item=matches.find(i=>i.id===b.dataset.clientProposal);if(!item)return;let draft=body.querySelector('[data-proposal-editor]');if(draft)draft.remove();draft=document.createElement('section');draft.dataset.proposalEditor='';const label=document.createElement('h3');label.textContent='Bozza proposta, nessun invio';const area=document.createElement('textarea');area.rows=9;area.style.cssText='width:100%;font:15px Arial;padding:10px;box-sizing:border-box';area.setAttribute('aria-label','Testo proposta da rivedere');area.value='Buongiorno, le segnalo un immobile che potrebbe interessarle.\n\nRiferimento '+(item.codice||'')+'\n'+(item.comune||'')+(item.prezzo?'\nPrezzo: € '+Number(item.prezzo).toLocaleString('it-IT'):'')+(item.superficie?'\nSuperficie: '+item.superficie+' mq':'')+'\n\nSe desidera maggiori informazioni o concordare una visita, può contattarmi.\nGino';const note=document.createElement('p');note.textContent='Rivedi il testo e verifica prezzo e disponibilità prima di usarlo. Nessun indirizzo reale dell’immobile, destinatario o allegato viene aggiunto. Il testo resta solo in questa finestra.';const copy=document.createElement('button');copy.type='button';copy.textContent='Copia testo';const status=document.createElement('p');status.setAttribute('role','status');copy.onclick=async()=>{try{await navigator.clipboard.writeText(area.value);status.textContent='Testo copiato. Nessun invio.';}catch(e){area.focus();area.select();status.textContent='Seleziona e copia il testo. Nessun invio.';}};draft.append(label,area,note,copy,status);body.append(draft);draft.scrollIntoView({block:'nearest'});
- });
- body.querySelectorAll('[data-client-match]').forEach(b=>b.onclick=()=>{closeMatchModal();showSection('immobili');editImmobile(b.dataset.clientMatch)});
- }catch(e){body.textContent='Ricerca non completata: '+e.message;}
-}
-
-function showMatchingClienti(propertyId) {
-  const property = allImmobili.find(i => i.id == propertyId);
-  if (!property) return;
-
-  const matches = allClienti
-    .map(c => ({ ...c, _score: matchScore(c, property) }))
-    .filter(c => c._score >= 30)
-    .sort((a, b) => b._score - a._score);
-
-  document.getElementById('matchModalTitle').textContent = 'Clienti per ' + (property.codice || '') + ' — ' + (property.titolo || '');
-
-  if (matches.length === 0) {
-    document.getElementById('matchModalBody').innerHTML = '<div style="text-align:center;padding:40px;color:var(--caffe2)"><p style="font-size:1.1rem;margin-bottom:8px">Nessun cliente compatibile</p><p style="font-size:0.82rem">Inserisci clienti con criteri di ricerca per trovare corrispondenze</p></div>';
-  } else {
-    const prezzo = property.prezzo ? '€ ' + Number(property.prezzo).toLocaleString('it-IT') : '';
-    const propInfo = (property.codice || '') + ' - ' + (property.titolo || '') + '\n' + (property.comune || '') + '\n' + prezzo + (property.superficie ? ' | ' + property.superficie + ' mq' : '') + (property.camere ? ' | ' + property.camere + ' camere' : '');
-
-    document.getElementById('matchModalBody').innerHTML = matches.map(c => {
-      const tel = (c.telefono || '').replace(/\s+/g, '').replace(/^(\+39|0039)/, '');
-      const waMsg = encodeURIComponent('Buongiorno ' + (c.nome || '') + ', le proponiamo questo immobile:\n\n' + propInfo + '\n\nPer info: Righetto Immobiliare');
-      const waUrl = tel ? 'https://wa.me/39' + tel + '?text=' + waMsg : '';
-      const cercaInfo = [c.tipo_operazione_cercata, c.tipologia_cercata, c.zona_cercata].filter(Boolean).join(' · ');
-      const budgetInfo = (c.budget_min || c.budget_max) ? (c.budget_min ? '€' + Number(c.budget_min).toLocaleString('it-IT') : '0') + '-' + (c.budget_max ? '€' + Number(c.budget_max).toLocaleString('it-IT') : '∞') : '';
-      return '<div style="display:flex;gap:14px;align-items:center;padding:12px;border-bottom:1px solid rgba(0,0,0,0.06)">' +
-        '<div style="width:40px;height:40px;border-radius:50%;background:var(--caffe3);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.85rem;flex-shrink:0">' + ((c.nome || '?')[0] || '?').toUpperCase() + '</div>' +
-        '<div style="flex:1;min-width:0">' +
-          '<div style="font-weight:600;font-size:0.88rem;color:var(--nero)">' + escHtml(c.nome || c.email || '') + '</div>' +
-          '<div style="font-size:0.78rem;color:var(--caffe2)">' + escHtml(c.telefono || '') + (cercaInfo ? ' · ' + escHtml(cercaInfo) : '') + (budgetInfo ? ' · ' + budgetInfo : '') + '</div>' +
-        '</div>' +
-        '<div style="display:flex;flex-direction:column;gap:4px;align-items:center">' +
-          '<span style="background:' + (c._score >= 70 ? 'var(--verde)' : c._score >= 50 ? '#e67e22' : 'var(--caffe2)') + ';color:white;padding:2px 8px;border-radius:10px;font-size:0.72rem;font-weight:700">' + c._score + '%</span>' +
-          (waUrl ? '<a href="' + waUrl + '" target="_blank" style="background:#25d366;color:white;padding:4px 10px;border-radius:6px;font-size:0.72rem;font-weight:600;text-decoration:none">WhatsApp</a>' : '') +
-          '<button class="btn btn-sm" onclick="emSendPropertyToClient(\'' + c.id + '\',\'' + property.id + '\')" style="font-size:0.68rem;padding:2px 8px;background:#667eea;color:#fff;border:none">Email</button>' +
-        '</div>' +
-      '</div>';
-    }).join('');
-
-    // Aggiungi bottoni azioni massive in cima
-    const bulkActions = '<div style="padding:14px;background:linear-gradient(135deg,#f8f6f0,#efe8dc);border-bottom:2px solid var(--oro);display:flex;gap:8px;flex-wrap:wrap;align-items:center">' +
-      '<span style="font-size:0.82rem;font-weight:600;color:var(--caffe)">Azioni massive (' + matches.length + ' clienti):</span>' +
-      '<button class="btn btn-sm" onclick="emBulkEmailFromMatch(\'' + property.id + '\')" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;font-size:0.78rem;padding:6px 14px">Email a tutti</button>' +
-      '<button class="btn btn-sm" onclick="emBulkWhatsAppFromMatch(\'' + property.id + '\')" style="background:#25d366;color:#fff;border:none;font-size:0.78rem;padding:6px 14px">WhatsApp a tutti</button>' +
-      '<button class="btn btn-sm" onclick="emSendPropertyNewsletter(\'' + property.id + '\')" style="background:var(--oro);color:var(--nero);border:none;font-size:0.78rem;padding:6px 14px">Newsletter immobile</button>' +
-    '</div>';
-    document.getElementById('matchModalBody').innerHTML = bulkActions + document.getElementById('matchModalBody').innerHTML;
-  }
-
-  document.getElementById('matchModal').classList.add('open');
-}
 
 function closeMatchModal() {
+ if(typeof strictMatchEpoch!=='undefined'){strictMatchEpoch++;strictMatchAbort?.abort();}
   document.getElementById('matchModal').classList.remove('open');
 }
 
@@ -18152,6 +18091,8 @@ window.showSection('home');
 <script src="js/admin-cliente-scheda.js?v=20261102-back"></script>
 <script src="js/admin-private-photos.js?v=LP0290-private-1"></script>
 <script src="js/admin-immobile-operazioni.js?v=LP0290-private-1"></script>
+<script src="js/admin-immobile-stampe.js?v=LP0291-stampe-2"></script>
+<script src="js/admin-immobile-inquilini.js?v=LP0292-inquilini-1"></script>
 <script src="js/admin-blocco2.js?v=1"></script>
 <script>window.rigOwnerReady(()=>RighettoAgenda.init(document.getElementById("righetto-operational-agenda")));</script>
 <script>window.RIGHETTO_BOZZA_ATTIVA=true;</script>
@@ -18167,6 +18108,9 @@ import {bindAuthenticatedNavigation} from './js/auth-bootstrap.mjs';
 window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation(sb).catch(()=>{if(document.getElementById('navigation-startup-warning'))return;const n=document.createElement('p');n.id='navigation-startup-warning';n.setAttribute('role','status');n.textContent='Navigazione Indietro non disponibile in questa sessione. Usa il menu interno; i dati non sono stati modificati.';n.style.cssText='margin:12px;padding:12px;background:#fff3cc;color:#17324d';document.querySelector('.content')?.prepend(n);});});
 </script>
 <script src="js/admin-share-preview.js?v=20261103"></script>
+<script src="js/admin-cliente-comunicazioni.js?v=20261105"></script>
+<script src="js/admin-cliente-documenti.js?v=20261105"></script>
+<script src="js/admin-client-matching.js"></script>
 </body>
 </html>
 
