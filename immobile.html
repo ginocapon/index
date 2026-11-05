@@ -767,6 +767,7 @@ function waitSBThen(fn) {
 }
 
 let immobile = null;
+let shareAddressCatalogue = [];
 let lbFotos = [];
 let lbIdx = 0;
 let galleryIdx = 0;
@@ -818,6 +819,7 @@ async function init() {
   if (slug) {
     const { data: all } = await sb.from('immobili').select('id,codice,titolo,slug,tipo_operazione,categoria,tipologia,comune,prezzo,superficie,locali,bagni,piano,anno_costruzione,stato,classe_energetica,garage,giardino,terrazzo,cantina,ascensore,piscina,arredato,foto,youtube_id,virtual_tour,attivo,in_evidenza,venduto,affittato,created_at,updated_at,ipe_kwh,arredo,caldaia_condensazione,camino,riscaldamento_pavimento,termopompa,pannelli_fotovoltaici,pannelli_solari,impianto_geotermico,allarme,domotica,porta_blindata,tapparelle_motorizzate,zanzariere,accesso_disabili,area_fitness,portineria,cassaforte,riscaldamento_semi_autonomo,raffreddamento_pavimento,grezzo,connettivita,distanza_mare,totale_piani,tipo_contratto,stato_manutenzione,virtual_tour_scenes,planimetrie,animali_ammessi,ingresso_indipendente,canna_fumaria,porticato,soppalco,lavanderia,mansarda,taverna,soffitta,giardino_condominiale,esposizione,camere,bagni_totali,terrazzi_num,ripostigli,garage_num,garage_doppio,posto_auto,consegna,aria_condizionata,panorama,spese_condominio,mq_giardino,mq_lotto,impianto_elettrico,indirizzo_mappa,foto_urls,soggiorno,soggiorno_angolo_cottura,cucina,riscaldamento_autonomo,riscaldamento_centralizzato,descrizione').eq('attivo', true);
     if (all) {
+      shareAddressCatalogue = all;
       art = all.find(a => generatePropertySlug(a) === slug);
       // Fallback: slug legacy salvato in Supabase (caption social / portali)
       if (!art) {
@@ -847,7 +849,7 @@ async function init() {
   if (!art) { showError(); return; }
   art = applicaMqPubblici(art); // overlay mq pubblici (mai persistito)
 
-  // Clean URL: redirect to SEO slug if accessed via old UUID/codice link
+  // Keep the working query URL until its static preview has been verified.
   const correctSlug = generatePropertySlug(art);
   if (correctSlug) {
     const cleanUrl = 'immobile?s=' + encodeURIComponent(correctSlug);
@@ -859,6 +861,7 @@ async function init() {
   immobile = art;
   render(art);
   hideLoading();
+  useVerifiedShareAddress(art); // non-blocking; failed checks keep the working URL
 
   // Chatbot dopo 3.5s
   setTimeout(() => initChatbot(art), 3500);
@@ -1357,8 +1360,7 @@ function visitaLiveGuidata() {
   const cod = d.codice || '';
   const tit = d.titolo || 'Immobile';
   const comune = d.comune || 'Padova';
-  const slug = new URLSearchParams(location.search).get('s') || '';
-  const url = 'https://righettoimmobiliare.it/immobile?s=' + slug;
+  const url = shareImmobileUrl(d);
   const testo = 'Ciao Righetto, vorrei una VISITA GUIDATA LIVE (video) per:\n'
     + '• Rif. ' + cod + ' — ' + tit + '\n'
     + '• Zona: ' + comune + '\n'
@@ -1435,6 +1437,37 @@ function toggleFav() {
   btn.classList.toggle('on');
   showToast(btn.classList.contains('on') ? '❤️ Aggiunto ai preferiti!' : 'Rimosso dai preferiti');
 }
+// Update only the address bar, never send or open a message.
+// Old query URLs already shared still need a server-side solution for crawlers.
+async function useVerifiedShareAddress(d) {
+  const origin = 'https://righettoimmobiliare.it';
+  const before = location.href;
+  if (location.origin !== origin || !d || d.attivo !== true ||
+      d.venduto === true || d.affittato === true || d.cestino === true) return false;
+  const slug = generatePropertySlug(d);
+  const code = String(d.codice || '').trim().toUpperCase();
+  if (!/^[a-z0-9-]+$/.test(slug)) return false;
+  if (!code) {
+    const matches = shareAddressCatalogue.filter(p => generatePropertySlug(p) === slug);
+    if (matches.length !== 1 || matches[0].id !== d.id) return false;
+  }
+  try {
+    const response = await fetch(origin + '/data/og-immobili.json', {cache:'no-store', credentials:'omit'});
+    if (!response.ok) return false;
+    const catalog = await response.json();
+    const entry = catalog.bySlug && catalog.bySlug[slug];
+    const file = 'share-immobile-' + slug + '.html';
+    if (!entry || entry.seo_slug !== slug || entry.share_file !== file ||
+        String(entry.codice || '').trim().toUpperCase() !== code) return false;
+    const url = origin + '/' + file;
+    const check = await fetch(url, {method:'HEAD', cache:'no-store', credentials:'omit', redirect:'error'});
+    if (!check.ok || !(check.headers.get('content-type') || '').includes('text/html')) return false;
+    if (location.href !== before || !immobile || immobile.id !== d.id) return false;
+    history.replaceState(history.state, '', url + location.hash);
+    return true;
+  } catch (_) { return false; }
+}
+
 function shareImmobileUrl(d) {
   const slug = generatePropertySlug(d || immobile);
   return 'https://righettoimmobiliare.it/share-immobile-' + slug;
