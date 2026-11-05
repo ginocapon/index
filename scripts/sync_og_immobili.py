@@ -80,7 +80,7 @@ def resolve_photo_url(u: str, manifest: dict[str, str]) -> str:
 def fetch_immobili(key: str) -> list[dict]:
     url = (
         f"{SUPABASE_URL}/rest/v1/immobili"
-        "?select=id,codice,titolo,slug,tipo_operazione,categoria,tipologia,comune,indirizzo,lat,lng,prezzo,superficie,locali,bagni,piano,anno_costruzione,stato,classe_energetica,garage,giardino,terrazzo,cantina,ascensore,piscina,arredato,foto,youtube_id,virtual_tour,attivo,in_evidenza,venduto,affittato,created_at,updated_at,ipe_kwh,arredo,caldaia_condensazione,camino,riscaldamento_pavimento,termopompa,pannelli_fotovoltaici,pannelli_solari,impianto_geotermico,allarme,domotica,porta_blindata,tapparelle_motorizzate,zanzariere,accesso_disabili,area_fitness,portineria,cassaforte,riscaldamento_semi_autonomo,raffreddamento_pavimento,grezzo,connettivita,distanza_mare,totale_piani,tipo_contratto,stato_manutenzione,virtual_tour_scenes,planimetrie,animali_ammessi,ingresso_indipendente,canna_fumaria,porticato,soppalco,lavanderia,mansarda,taverna,soffitta,giardino_condominiale,esposizione,camere,bagni_totali,terrazzi_num,ripostigli,garage_num,garage_doppio,posto_auto,consegna,aria_condizionata,panorama,spese_condominio,mq_giardino,mq_lotto,impianto_elettrico,indirizzo_mappa,foto_urls,soggiorno,soggiorno_angolo_cottura,cucina,riscaldamento_autonomo,riscaldamento_centralizzato,descrizione&attivo=eq.true&venduto=eq.false&order=created_at.desc"
+        "?select=id,codice,titolo,slug,tipo_operazione,categoria,tipologia,comune,indirizzo,lat,lng,prezzo,superficie,locali,bagni,piano,anno_costruzione,stato,classe_energetica,garage,giardino,terrazzo,cantina,ascensore,piscina,arredato,foto,youtube_id,virtual_tour,attivo,in_evidenza,venduto,affittato,created_at,updated_at,ipe_kwh,arredo,caldaia_condensazione,camino,riscaldamento_pavimento,termopompa,pannelli_fotovoltaici,pannelli_solari,impianto_geotermico,allarme,domotica,porta_blindata,tapparelle_motorizzate,zanzariere,accesso_disabili,area_fitness,portineria,cassaforte,riscaldamento_semi_autonomo,raffreddamento_pavimento,grezzo,connettivita,distanza_mare,totale_piani,tipo_contratto,stato_manutenzione,virtual_tour_scenes,planimetrie,animali_ammessi,ingresso_indipendente,canna_fumaria,porticato,soppalco,lavanderia,mansarda,taverna,soffitta,giardino_condominiale,esposizione,camere,bagni_totali,terrazzi_num,ripostigli,garage_num,garage_doppio,posto_auto,consegna,aria_condizionata,panorama,spese_condominio,mq_giardino,mq_lotto,impianto_elettrico,indirizzo_mappa,foto_urls,soggiorno,soggiorno_angolo_cottura,cucina,riscaldamento_autonomo,riscaldamento_centralizzato,descrizione&attivo=eq.true&venduto=eq.false&affittato=eq.false&cestino=eq.false&order=created_at.desc"
     )
     req = urllib.request.Request(
         url,
@@ -160,6 +160,8 @@ def build_share_html(entry: dict) -> str:
     share_url = entry["share_url"]
     app_url = entry["app_url"]
     image = escape(entry["image"])
+    image_type = "image/jpeg" if entry["image"].lower().endswith((".jpg", ".jpeg")) else "image/webp" if entry["image"].lower().endswith(".webp") else "image/png" if entry["image"].lower().endswith(".png") else ""
+    image_type_meta = f'<meta property="og:image:type" content="{image_type}">' if image_type else ""
     img_w = escape(str(entry.get("image_width", "1200")))
     img_h = escape(str(entry.get("image_height", "630")))
     return f"""<!DOCTYPE html>
@@ -178,13 +180,13 @@ def build_share_html(entry: dict) -> str:
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{escape(share_url)}">
 <meta property="og:image" content="{image}">
+{image_type_meta}
 <meta property="og:image:width" content="{img_w}">
 <meta property="og:image:height" content="{img_h}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{title}">
 <meta name="twitter:description" content="{desc}">
 <meta name="twitter:image" content="{image}">
-<meta http-equiv="refresh" content="0;url={escape(app_url)}">
 <script>location.replace({json.dumps(app_url)});</script>
 </head>
 <body style="font-family:system-ui,sans-serif;padding:2rem;text-align:center">
@@ -216,8 +218,12 @@ def main() -> int:
             continue
         titolo = (row.get("titolo") or "").strip()
         codice = (row.get("codice") or "").strip()
+        share_cover = ROOT / "img" / "og-immobili" / (seo + ".jpg")
         og_cover = ROOT / "img" / "immobili" / codice / "og-cover.jpg" if codice else None
-        if og_cover is not None and og_cover.is_file():
+        if share_cover.is_file():
+            image = f"{SITE}/img/og-immobili/{seo}.jpg"
+            img_w, img_h = "1200", "630"
+        elif og_cover is not None and og_cover.is_file():
             image = f"{SITE}/img/immobili/{codice}/og-cover.jpg"
             img_w, img_h = "1200", "630"
         else:
