@@ -2174,6 +2174,9 @@ tr:hover td { background: rgba(206,224,143,0.06); }
   #clienteModal .form-group textarea { font-size: 16px; min-height: 44px; }
 }
 #emPropPickerList .rig-photo-caption{display:none!important}#emPropPickerList img{flex:0 0 50px;width:50px!important;height:38px!important}
+
+/* Mobile property form: prevent grid min-content clipping. */
+@media(max-width:768px){#immobileForm .form-grid{grid-template-columns:minmax(0,1fr)}#immobileForm .form-grid>*{min-width:0;max-width:100%;box-sizing:border-box}#immobileForm input,#immobileForm select,#immobileForm textarea{min-width:0;max-width:100%;box-sizing:border-box}#immobileForm .proprietario-search-field{min-width:0!important}#immobileForm .proprietario-info{overflow-wrap:anywhere}}
 </style>
 <style id="rh-admin-home-v1">
 /* Nuova home admin. Dati agenda e Search Console non ancora collegati. */
