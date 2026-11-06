@@ -2177,6 +2177,26 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
 /* Mobile property form: prevent grid min-content clipping. */
 @media(max-width:768px){#immobileForm .form-grid{grid-template-columns:minmax(0,1fr)}#immobileForm .form-grid>*{min-width:0;max-width:100%;box-sizing:border-box}#immobileForm input,#immobileForm select,#immobileForm textarea{min-width:0;max-width:100%;box-sizing:border-box}#immobileForm .proprietario-search-field{min-width:0!important}#immobileForm .proprietario-info{overflow-wrap:anywhere}}
+
+/* Local6nov: elenco immobili con layout del vecchio gestionale. Solo presentazione: callback e dati invariati. */
+#immobiliTableWrap table{font-size:.78rem}
+#immobiliTableWrap th,#immobiliTableWrap td{padding:5px 5px;vertical-align:top}
+#immobiliTableWrap th:last-child,#immobiliTableWrap td:last-child{min-width:0}
+#immobiliTableWrap .imm-nd{color:var(--caffe3);font-size:.72rem;font-style:italic}
+#immobiliTableWrap .ce-badge{display:inline-block;min-width:24px;text-align:center;padding:2px 4px;border-radius:3px;font-size:.68rem;font-weight:700;color:#fff;background:#6b7a86}
+#immobiliTableWrap .ce-a4,#immobiliTableWrap .ce-a3,#immobiliTableWrap .ce-a2,#immobiliTableWrap .ce-a1{background:#1b7a3d}
+#immobiliTableWrap .ce-b{background:#43a047}
+#immobiliTableWrap .ce-c{background:#7cb342}
+#immobiliTableWrap .ce-d{background:#c0ca33;color:#333}
+#immobiliTableWrap .ce-e{background:#f9a825;color:#333}
+#immobiliTableWrap .ce-f{background:#ef6c00}
+#immobiliTableWrap .ce-g{background:#d32f2f}
+#immobiliTableWrap .ce-nd{background:#37474f}
+#immobiliTableWrap .ce-alt{background:#6b7a86}
+#immobiliTableWrap .property-row-actions{display:flex;gap:2px;flex-wrap:nowrap;align-items:center;width:max-content}
+#immobiliTableWrap .property-row-actions .btn-action{padding:4px;min-width:29px;min-height:29px;font-size:.8rem;border-radius:5px;flex:0 0 auto;line-height:1.15}
+#immobiliTableWrap .property-row-actions button[onclick^="toggleEvidenza"]{font-size:.66rem;min-width:40px}
+@media(max-width:767px){#immobiliTableWrap .property-row-actions{gap:6px}#immobiliTableWrap .property-row-actions .btn-action{min-width:40px;min-height:40px;font-size:1rem}#immobiliTableWrap .property-row-actions button[onclick^="toggleEvidenza"]{font-size:.75rem;min-width:50px}}
 </style>
 <style id="rh-admin-home-v1">
 /* Nuova home admin. Dati agenda e Search Console non ancora collegati. */
@@ -2400,7 +2420,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
         <div class="table-wrap">
           <div class="table-head">
-            <div style="font-weight:600;font-size:0.9rem;">Lista Immobili</div>
+            <div style="font-weight:600;font-size:0.9rem;">Lista Immobili</div><span id="immobiliCountVisible" style="margin-left:10px;font-size:0.78rem;color:var(--caffe2)"></span>
             <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
               <select id="filtroTipo" onchange="loadImmobili()" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.8rem;">
                 <option value="">Tutti i tipi</option>
@@ -6411,6 +6431,8 @@ function updateStats(data) {
 
 function renderTable(data) {
   const wrap = document.getElementById('immobiliTableWrap');
+  const cnt = document.getElementById('immobiliCountVisible');
+  if (cnt) cnt.textContent = 'Risultati: ' + data.length;
   if (!data.length) {
     wrap.innerHTML = `<div class="empty-state">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
@@ -6421,11 +6443,7 @@ function renderTable(data) {
   }
 
   const rows = data.map(i => {
-    const foto = Array.isArray(i.foto) && i.foto.length > 0 ? i.foto[0] : null;
-    const thumb = foto
-      ? `<img src="${foto}" class="prop-thumb" onerror="this.style.display='none'">`
-      : `<div class="prop-thumb-placeholder">📷</div>`;
-
+    const nFoto = Array.isArray(i.foto) ? i.foto.length : 0;
     const isAttivo = i.attivo === true || i.attivo === 'true' || i.attivo === 1;
     const stato = i.venduto ? `<span class="badge badge-rosso">Venduto</span>`
       : i.affittato ? `<span class="badge badge-rosso">Affittato</span>`
@@ -6441,27 +6459,37 @@ function renderTable(data) {
       ? ` <span class="badge badge-grigio" title="${escHtml(CONTRATTO_AFFITTO_RES_LABELS[i.contratto_affitto_res] || i.contratto_affitto_res)}">${escHtml(contrattoAffittoResShortLabel(i.contratto_affitto_res))}</span>`
       : '';
 
-    const evidenza = i.in_evidenza ? '⭐' : '';
-    const prezzo = i.prezzo ? '€ ' + Number(i.prezzo).toLocaleString('it-IT') : '—';
-    const mq = i.superficie ? i.superficie + ' mq' : '—';
+    const prezzo = i.prezzo ? Number(i.prezzo).toLocaleString('it-IT') : '—';
+    const mq = i.superficie ? Number(i.superficie).toLocaleString('it-IT') : '—';
     const propNome = i.proprietario_nome || '—';
+    const dIns = i.created_at ? new Date(i.created_at) : null;
+    const dataIns = dIns && !isNaN(dIns) ? String(dIns.getDate()).padStart(2,'0') + '-' + String(dIns.getMonth()+1).padStart(2,'0') + '-' + dIns.getFullYear() : '—';
+    const ipeNum = (i.ipe_kwh || i.ipe_kwh === 0) && isFinite(Number(i.ipe_kwh)) ? Number(i.ipe_kwh) : null;
+    const ipe = ipeNum !== null ? ipeNum.toLocaleString('it-IT',{minimumFractionDigits:2,maximumFractionDigits:2}) : '<span class="imm-nd" title="IPE in fase di definizione">—</span>';
+    const ceRaw = String(i.classe_energetica || '').trim().toUpperCase();
+    const ceKnown = /^A[1-4]$/.test(ceRaw) || /^[B-G]$/.test(ceRaw);
+    const ce = ceKnown ? `<span class="ce-badge ce-${ceRaw.toLowerCase()}">${ceRaw}</span>`
+      : ceRaw && ceRaw !== 'ND' ? `<span class="ce-badge ce-alt">${escHtml(ceRaw)}</span>`
+      : '<span class="ce-badge ce-nd">ND</span>';
 
     return `<tr>
-      <td>${thumb}</td>
-      <td><span class="codice-cell">${i.codice || '—'}</span></td>
       <td>
-        <div style="font-weight:600;font-size:0.85rem">${evidenza} ${i.titolo || '—'}</div>
-        <div style="color:var(--caffe2);font-size:0.75rem">${i.indirizzo || ''}</div><div data-property-label-host="${escHtml(i.id)}"></div>
+        <div style="font-weight:600;font-size:0.82rem">${escHtml(i.tipologia || '—')}</div>
+        <div style="margin-top:3px">${tipo}${contrBadge} ${stato}</div>
       </td>
-      <td style="white-space:nowrap">${i.comune || '—'}</td>
-      <td>${tipo}${contrBadge}</td>
-      <td style="font-weight:600">${prezzo}</td>
-      <td>${mq}</td>
-      <td>${i.locali || '—'}</td>
-      <td style="font-size:0.78rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(propNome)}"><button type="button" class="btn btn-secondary btn-sm" ${rigCatalogueReady ? '' : 'disabled'} onclick="openProprietariImmobile('${i.id}')" style="white-space:normal;text-align:left" title="Apri dati e gestisci proprietari">${escHtml(propNome === '—' ? '+ Proprietari' : propNome)} ↗</button></td>
-      <td>${stato}</td>
+      <td><span class="codice-cell">${i.codice || '—'}</span></td>
+      <td style="white-space:nowrap;max-width:100px;overflow:hidden;text-overflow:ellipsis" title="${escHtml(i.comune || '')}">${escHtml(i.comune || '—')}</td>
+      <td style="font-weight:600;text-align:right;white-space:nowrap">${prezzo}</td>
+      <td style="text-align:right;white-space:nowrap">${mq}</td>
+      <td style="white-space:nowrap" title="${nFoto} foto nella scheda, nessuna anteprima in elenco">${nFoto ? '🖼️ ' + nFoto : '—'}</td>
+      <td style="font-size:0.78rem;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(propNome)}"><button type="button" class="btn btn-secondary btn-sm" ${rigCatalogueReady ? '' : 'disabled'} onclick="openProprietariImmobile('${i.id}')" style="white-space:normal;text-align:left" title="Apri dati e gestisci proprietari">${escHtml(propNome === '—' ? '+ Proprietari' : propNome)} ↗</button></td>
+      <td style="white-space:nowrap">${dataIns}</td>
+      <td><div data-property-label-host="${escHtml(i.id)}"></div></td>
+      <td style="font-size:0.75rem;white-space:nowrap;max-width:120px;overflow:hidden;text-overflow:ellipsis" title="${escHtml(i.indirizzo || '')}">${escHtml(i.indirizzo || '—')}</td>
+      <td style="text-align:right;white-space:nowrap">${ipe}</td>
+      <td>${ce}</td>
       <td>
-        <fieldset ${rigCatalogueReady ? '' : 'disabled'} style="border:0;padding:0;margin:0;display:flex;gap:8px;flex-wrap:wrap">
+        <fieldset class="property-row-actions" ${rigCatalogueReady ? '' : 'disabled'} style="border:0;padding:0;margin:0">
           <button class="btn btn-action btn-secondary" onclick="editImmobile('${i.id}')" title="Modifica">✏️</button>
           <button class="btn btn-action" onclick="duplicateImmobile('${i.id}')" title="Duplica annuncio (nuovo codice, stesse foto e testi)" style="background:#f3e5f5;color:#6a1b9a">📋</button>
           <button class="btn btn-action" onclick="showMatchingClienti('${i.id}')" title="Trova clienti compatibili" style="background:#e3f2fd;color:#1565c0">🤝</button>
@@ -6470,7 +6498,7 @@ function renderTable(data) {
           <button class="btn btn-action" onclick="printPropertyPdf('${i.id}')" title="Stampa PDF" style="background:#fff3e0;color:#e65100">📄</button>
           <button class="btn btn-action" onclick="quickPublishSocial('${i.id}')" title="Pubblica sui Social" style="background:#e8f5e9;color:#1877F2">📢</button>
           ${i.cestino ? `<button class="btn btn-action" onclick="restoreImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')" title="Ripristina dal cestino" style="background:#e8f5e9;color:#27ae60">↩️</button>` : `<button class="btn btn-action btn-danger" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')" title="Sposta nel cestino">🗑️</button>`}
-          <button class="btn btn-action" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="${i.in_evidenza ? 'Rimuovi da evidenza' : 'Metti in evidenza'}" style="background:${i.in_evidenza ? '#e74c3c' : 'var(--sfondo)'};border:${i.in_evidenza ? '2px solid #c0392b' : '1px solid #ddd'};${i.in_evidenza ? 'color:#fff' : ''}">${i.in_evidenza ? '⭐' : '☆'}</button>
+          <button class="btn btn-action" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="${i.in_evidenza ? 'Rimuovi da evidenza' : 'Metti in evidenza'}" style="background:${i.in_evidenza ? '#e74c3c' : 'var(--sfondo)'};border:${i.in_evidenza ? '2px solid #c0392b' : '1px solid #ddd'};${i.in_evidenza ? 'color:#fff' : ''}">${i.in_evidenza ? 'Evid. ✓' : 'Evid.'}</button>
           <button class="btn btn-action" onclick="toggleAttivo('${i.id}',${!isAttivo})" title="Toggle attivo" style="background:var(--sfondo)">${isAttivo ? '👁️' : '🚫'}</button>
           <button class="btn btn-action" onclick="previewImmobile('${i.id}')" title="Anteprima rapida" style="background:#e8f5e9;color:#27ae60">🔍</button>
         </fieldset>
@@ -6485,23 +6513,24 @@ function renderTable(data) {
   };
   wrap.innerHTML = `<table>
     <thead><tr>
-      <th>Foto</th>
-      ${sortTh('codice', 'Codice')}
-      <th>Immobile</th>
-      ${sortTh('comune', 'Comune')}
-      <th>Tipo</th>
-      ${sortTh('prezzo', 'Prezzo')}
-      ${sortTh('superficie', 'Superficie')}
-      <th>Locali</th>
+      <th>Tipologia</th>
+      ${sortTh('codice', 'Rif.')}
+      ${sortTh('comune', 'Comune/Prov.')}
+      ${sortTh('prezzo', 'Pr. Portali')}
+      ${sortTh('superficie', 'Mq portali')}
+      <th title="Numero foto in scheda">📷</th>
       <th>Proprietario</th>
-      <th>Stato</th>
-      <th>Azioni</th>
+      <th>Data ins.</th>
+      <th>Etichette</th>
+      <th title="Indirizzo reale, visibile solo agli operatori">Ind. reale</th>
+      <th>IPE</th>
+      <th>CE</th>
+      <th>Operazioni</th>
     </tr></thead>
     <tbody>${rows}</tbody>
   </table>`;
   window.RighettoPropertyLabelView?.render();
 }
-
 // Ordinamento lista immobili: click su Codice, Comune, Prezzo, Superficie
 let immSortKey = null;   // null = ordine dal database (piu' recenti prima)
 let immSortDir = 1;
