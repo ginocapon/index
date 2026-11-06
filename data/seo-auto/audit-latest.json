@@ -1,6 +1,6 @@
 {
-  "date": "2026-10-30",
-  "pages_in_sitemap": 231,
+  "date": "2026-11-06",
+  "pages_in_sitemap": 232,
   "pages": {
     "/": {
       "title": "Immobiliare Padova: Vendi, Affitta o Cerca Casa | Righetto",
@@ -14,8 +14,8 @@
       "forms": 1,
       "jsonld": 1,
       "tier": "pillar",
-      "inbound": 208,
-      "last_modified": "2026-10-30",
+      "inbound": 209,
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -31,8 +31,8 @@
       "forms": 0,
       "jsonld": 2,
       "tier": "acquirente",
-      "inbound": 187,
-      "last_modified": "2026-10-30",
+      "inbound": 188,
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -48,8 +48,8 @@
       "forms": 0,
       "jsonld": 2,
       "tier": "pillar",
-      "inbound": 151,
-      "last_modified": "2026-10-30",
+      "inbound": 152,
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -66,7 +66,7 @@
       "jsonld": 1,
       "tier": "owner_conversione",
       "inbound": 17,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -83,7 +83,7 @@
       "jsonld": 1,
       "tier": "owner_conversione",
       "inbound": 11,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -100,7 +100,7 @@
       "jsonld": 3,
       "tier": "owner_conversione",
       "inbound": 75,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -117,7 +117,7 @@
       "jsonld": 1,
       "tier": "owner_conversione",
       "inbound": 84,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -134,7 +134,7 @@
       "jsonld": 3,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -151,7 +151,7 @@
       "jsonld": 3,
       "tier": "contenuto",
       "inbound": 44,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -168,7 +168,7 @@
       "jsonld": 1,
       "tier": "owner_conversione",
       "inbound": 121,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -185,7 +185,7 @@
       "jsonld": 1,
       "tier": "owner_conversione",
       "inbound": 48,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -202,7 +202,7 @@
       "jsonld": 3,
       "tier": "contenuto",
       "inbound": 26,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -219,7 +219,7 @@
       "jsonld": 3,
       "tier": "pillar",
       "inbound": 64,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -235,8 +235,8 @@
       "forms": 0,
       "jsonld": 3,
       "tier": "contenuto",
-      "inbound": 146,
-      "last_modified": "2026-10-30",
+      "inbound": 147,
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_61"
@@ -255,7 +255,7 @@
       "jsonld": 3,
       "tier": "contenuto",
       "inbound": 7,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_63"
@@ -273,8 +273,8 @@
       "forms": 1,
       "jsonld": 1,
       "tier": "contenuto",
-      "inbound": 186,
-      "last_modified": "2026-10-30",
+      "inbound": 187,
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -290,8 +290,8 @@
       "forms": 1,
       "jsonld": 2,
       "tier": "pillar",
-      "inbound": 207,
-      "last_modified": "2026-10-30",
+      "inbound": 208,
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -307,8 +307,8 @@
       "forms": 0,
       "jsonld": 2,
       "tier": "contenuto",
-      "inbound": 194,
-      "last_modified": "2026-10-30",
+      "inbound": 195,
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -325,7 +325,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 11,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -342,7 +342,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 29,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -359,7 +359,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 21,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_69"
@@ -378,7 +378,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -395,7 +395,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 10,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -412,7 +412,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 8,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -429,7 +429,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 67,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -446,7 +446,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 79,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -463,7 +463,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 75,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_66"
@@ -482,7 +482,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 71,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -499,7 +499,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 69,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -516,7 +516,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 69,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_65"
@@ -535,7 +535,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 67,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_69"
@@ -554,7 +554,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 67,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -571,7 +571,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 83,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -588,7 +588,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -605,7 +605,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -622,7 +622,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -639,7 +639,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -656,7 +656,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -673,7 +673,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -690,7 +690,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -706,8 +706,8 @@
       "forms": 1,
       "jsonld": 4,
       "tier": "owner_contenuto",
-      "inbound": 8,
-      "last_modified": "2026-10-30",
+      "inbound": 9,
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -723,8 +723,8 @@
       "forms": 1,
       "jsonld": 4,
       "tier": "owner_contenuto",
-      "inbound": 6,
-      "last_modified": "2026-10-30",
+      "inbound": 7,
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -741,7 +741,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -758,7 +758,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -775,7 +775,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -792,7 +792,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -809,7 +809,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -826,7 +826,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -843,7 +843,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 6,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -860,7 +860,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 4,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -877,7 +877,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -894,7 +894,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -911,7 +911,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -928,7 +928,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 9,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -945,7 +945,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 4,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -962,7 +962,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -979,7 +979,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -996,7 +996,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1013,7 +1013,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1030,7 +1030,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_64"
@@ -1049,7 +1049,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1066,7 +1066,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1083,7 +1083,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1100,7 +1100,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1117,7 +1117,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1134,7 +1134,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 33,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1151,7 +1151,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 24,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1168,7 +1168,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 38,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1185,7 +1185,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 26,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_70"
@@ -1204,7 +1204,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 25,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1221,7 +1221,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 6,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1238,7 +1238,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 25,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1255,7 +1255,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 8,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1272,7 +1272,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 22,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1289,7 +1289,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1306,7 +1306,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1323,7 +1323,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 21,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1339,8 +1339,8 @@
       "forms": 1,
       "jsonld": 4,
       "tier": "owner_contenuto",
-      "inbound": 5,
-      "last_modified": "2026-10-30",
+      "inbound": 6,
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1357,7 +1357,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 16,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1374,7 +1374,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 5,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_62"
@@ -1393,7 +1393,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 12,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_68"
@@ -1412,7 +1412,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 7,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1429,7 +1429,7 @@
       "jsonld": 2,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1446,7 +1446,7 @@
       "jsonld": 1,
       "tier": "owner_conversione",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1463,7 +1463,7 @@
       "jsonld": 1,
       "tier": "acquirente",
       "inbound": 22,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_62"
@@ -1482,7 +1482,7 @@
       "jsonld": 1,
       "tier": "acquirente",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_63"
@@ -1500,8 +1500,8 @@
       "forms": 1,
       "jsonld": 1,
       "tier": "owner_conversione",
-      "inbound": 61,
-      "last_modified": "2026-10-30",
+      "inbound": 62,
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1517,8 +1517,8 @@
       "forms": 1,
       "jsonld": 1,
       "tier": "owner_conversione",
-      "inbound": 150,
-      "last_modified": "2026-10-30",
+      "inbound": 151,
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_61"
@@ -1537,7 +1537,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1554,7 +1554,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1571,7 +1571,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 9,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1588,7 +1588,7 @@
       "jsonld": 1,
       "tier": "owner_contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_66"
@@ -1607,7 +1607,7 @@
       "jsonld": 1,
       "tier": "owner_contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1624,7 +1624,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1641,7 +1641,7 @@
       "jsonld": 1,
       "tier": "acquirente",
       "inbound": 8,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_68"
@@ -1660,7 +1660,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1677,7 +1677,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_61"
@@ -1696,7 +1696,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_65"
@@ -1715,7 +1715,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_67"
@@ -1734,7 +1734,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1751,7 +1751,7 @@
       "jsonld": 2,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "sitemap_noindex"
       ],
@@ -1770,7 +1770,7 @@
       "jsonld": 2,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1787,7 +1787,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1804,7 +1804,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1821,7 +1821,7 @@
       "jsonld": 1,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1838,7 +1838,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 7,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1855,7 +1855,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 8,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1872,7 +1872,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 4,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1889,7 +1889,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 8,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1906,7 +1906,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1923,7 +1923,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 8,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1940,7 +1940,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 19,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1957,7 +1957,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1974,7 +1974,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -1991,7 +1991,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2008,7 +2008,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_65"
@@ -2027,7 +2027,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_61"
@@ -2046,7 +2046,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 8,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2063,7 +2063,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 12,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_63"
@@ -2082,7 +2082,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 11,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_70"
@@ -2101,7 +2101,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 12,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2118,7 +2118,7 @@
       "jsonld": 4,
       "tier": "zona",
       "inbound": 5,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2135,7 +2135,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 22,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2152,7 +2152,7 @@
       "jsonld": 3,
       "tier": "contenuto",
       "inbound": 4,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2169,7 +2169,7 @@
       "jsonld": 5,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2186,7 +2186,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 8,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2203,7 +2203,7 @@
       "jsonld": 4,
       "tier": "pillar",
       "inbound": 17,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2220,7 +2220,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 17,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_63"
@@ -2239,7 +2239,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 16,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2256,7 +2256,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2272,8 +2272,8 @@
       "forms": 1,
       "jsonld": 4,
       "tier": "contenuto",
-      "inbound": 2,
-      "last_modified": "2026-10-30",
+      "inbound": 3,
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_67"
@@ -2292,7 +2292,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_65"
@@ -2311,7 +2311,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_62"
@@ -2330,7 +2330,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_65"
@@ -2349,7 +2349,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 18,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_67"
@@ -2368,7 +2368,7 @@
       "jsonld": 3,
       "tier": "contenuto",
       "inbound": 97,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2385,7 +2385,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 7,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2402,7 +2402,7 @@
       "jsonld": 5,
       "tier": "acquirente",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -2423,7 +2423,7 @@
       "jsonld": 5,
       "tier": "acquirente",
       "inbound": 9,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -2442,7 +2442,7 @@
       "jsonld": 6,
       "tier": "acquirente",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -2463,7 +2463,7 @@
       "jsonld": 3,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_67"
@@ -2482,7 +2482,7 @@
       "jsonld": 5,
       "tier": "contenuto",
       "inbound": 9,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -2501,7 +2501,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 14,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_62"
@@ -2520,7 +2520,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_69"
@@ -2539,7 +2539,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 4,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_65"
@@ -2558,7 +2558,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 8,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_63"
@@ -2577,7 +2577,7 @@
       "jsonld": 3,
       "tier": "acquirente",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2594,7 +2594,7 @@
       "jsonld": 3,
       "tier": "owner_contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2611,7 +2611,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 6,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_66"
@@ -2630,7 +2630,7 @@
       "jsonld": 5,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -2651,7 +2651,7 @@
       "jsonld": 5,
       "tier": "acquirente",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2668,7 +2668,7 @@
       "jsonld": 5,
       "tier": "owner_contenuto",
       "inbound": 7,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -2689,7 +2689,7 @@
       "jsonld": 5,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -2710,7 +2710,7 @@
       "jsonld": 5,
       "tier": "acquirente",
       "inbound": 7,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -2731,7 +2731,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 12,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2748,7 +2748,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 6,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2765,7 +2765,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -2786,7 +2786,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -2805,7 +2805,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -2824,7 +2824,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -2843,7 +2843,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 6,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_67"
@@ -2862,7 +2862,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 13,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -2881,7 +2881,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -2898,7 +2898,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -2919,7 +2919,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -2938,7 +2938,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -2959,7 +2959,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -2980,7 +2980,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 6,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_63"
@@ -2999,7 +2999,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -3016,7 +3016,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -3033,7 +3033,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_67"
@@ -3052,7 +3052,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -3073,7 +3073,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 7,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -3094,7 +3094,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -3115,7 +3115,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -3136,7 +3136,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -3157,7 +3157,7 @@
       "jsonld": 5,
       "tier": "contenuto",
       "inbound": 4,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -3178,7 +3178,7 @@
       "jsonld": 5,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -3199,7 +3199,7 @@
       "jsonld": 5,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -3220,7 +3220,7 @@
       "jsonld": 5,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -3239,7 +3239,7 @@
       "jsonld": 5,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -3258,7 +3258,7 @@
       "jsonld": 3,
       "tier": "owner_contenuto",
       "inbound": 4,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_61"
@@ -3277,7 +3277,7 @@
       "jsonld": 3,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_70"
@@ -3296,7 +3296,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 7,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -3313,7 +3313,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -3330,7 +3330,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 4,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -3347,7 +3347,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -3364,7 +3364,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -3381,7 +3381,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_62"
@@ -3400,7 +3400,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -3417,7 +3417,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_63"
@@ -3436,7 +3436,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_62"
@@ -3455,7 +3455,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_64"
@@ -3474,7 +3474,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -3491,7 +3491,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -3508,7 +3508,7 @@
       "jsonld": 4,
       "tier": "owner_contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -3525,7 +3525,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 5,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -3546,7 +3546,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 7,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -3567,7 +3567,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_63"
@@ -3586,7 +3586,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "title_troncato"
       ],
@@ -3607,7 +3607,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 3,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_67"
@@ -3626,7 +3626,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": [
         "title_61_70_64"
@@ -3645,7 +3645,7 @@
       "jsonld": 4,
       "tier": "acquirente",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -3661,8 +3661,25 @@
       "forms": 1,
       "jsonld": 4,
       "tier": "contenuto",
+      "inbound": 1,
+      "last_modified": "2026-11-06",
+      "issues": [],
+      "notes": []
+    },
+    "/blog-imu-seconda-casa-padova-2026": {
+      "title": "IMU seconda casa Padova 2026: aliquota, calcolo, scadenze",
+      "meta": "IMU seconda casa a Padova 2026: aliquota 1,06% confermata, calcolo con esempio, scadenze 16 giugno e 16 dicembre, riduzioni per concordato e comodato.",
+      "canonical": "https://righettoimmobiliare.it/blog-imu-seconda-casa-padova-2026",
+      "noindex": false,
+      "h1": 1,
+      "h2": 11,
+      "words": 1788,
+      "faq_schema": true,
+      "forms": 1,
+      "jsonld": 4,
+      "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -3679,7 +3696,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 4,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -3696,7 +3713,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 2,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -3713,7 +3730,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 1,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     },
@@ -3730,7 +3747,7 @@
       "jsonld": 3,
       "tier": "contenuto",
       "inbound": 7,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [
         "meta_corta_49",
         "sitemap_template_senza_contenuto"
@@ -3750,7 +3767,7 @@
       "jsonld": 4,
       "tier": "contenuto",
       "inbound": 0,
-      "last_modified": "2026-10-30",
+      "last_modified": "2026-11-06",
       "issues": [],
       "notes": []
     }
