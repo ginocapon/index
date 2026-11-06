@@ -25,7 +25,22 @@ async function copy(t,msg){try{await navigator.clipboard.writeText(t);if(window.
 const ops={
  privatephotos(i){if(!window.RighettoPrivatePhotos){toast("Lettore foto private non disponibile","error");return;}return window.RighettoPrivatePhotos.open({db:sb,property:i,isCurrent:id=>String(cur()?.id)===String(id)&&document.body.dataset.adminArea==='nuovo'&&!!document.getElementById('formTitle')?.offsetParent});},
  clienti(i){if(typeof showMatchingClienti==='function')showMatchingClienti(i.id);},
- appuntamento(i){if(typeof showSection==='function')showSection('agenda');if(window.RighettoAgenda&&RighettoAgenda.newEvent)RighettoAgenda.newEvent({property_id:i.id,property:i.codice,address:i.indirizzo||''});},
+ async appuntamento(i){
+  const principal=window.RighettoGatedPrincipal,id=String(i.id);
+  try{
+   if(!principal||String(cur()?.id)!==id)throw Error('Scheda immobile cambiata. Riapri la scheda.');
+   if(!window.RighettoAgenda?.newEvent||typeof showSection!=='function')throw Error('Agenda interna non disponibile.');
+   const u=await sb.auth.getUser();if(u.error||u.data?.user?.id!==principal||principal!==window.RighettoGatedPrincipal||String(cur()?.id)!==id)throw Error('Sessione o scheda cambiata.');
+   const r=await sb.from('immobili').select('id,codice,indirizzo').eq('id',id).maybeSingle();
+   if(r.error||!r.data||String(r.data.id)!==id||principal!==window.RighettoGatedPrincipal||String(cur()?.id)!==id)throw Error('Immobile non verificato.');
+   if(document.querySelector('#ra-form')&&!confirm('Aprire una nuova bozza in Agenda? La bozza evento aperta verrà sostituita. Nessun evento salvato automaticamente.'))return;
+   showSection('agenda');await RighettoAgenda.newEvent({property_id:id,property:r.data.codice||'Immobile collegato',address:r.data.indirizzo||''});
+   const form=document.querySelector('#ra-form'),field=form?.querySelector('[name=property_search]');
+   if(principal!==window.RighettoGatedPrincipal){form?.closest('.ra-modal')?.remove();throw Error('Sessione cambiata.');}
+   if(!field||field.dataset.selectedId!==id||field.value!==field.dataset.selectedLabel)throw Error('Agenda non pronta o immobile non collegato. Riprova da Agenda.');
+   const note=document.createElement('p');note.className='ra-note';note.textContent='Bozza dalla scheda immobile: controlla giorno, ora, agente e cliente prima di salvare. Nessun evento creato automaticamente.';form.before(note);
+  }catch(error){alert(error.message+' Nessun evento salvato automaticamente.');}
+ },
  async link(i){
   const result=await righettoShareForProperty(i);
   const o=overlay('<h3>Link con anteprima foto</h3><p></p><pre></pre><button data-a="copy">Copia link</button><button data-a="x">Chiudi</button>');
@@ -63,14 +78,14 @@ const ops={
    if(window.toast)toast(val?'Segnato come '+lab:'Ripristinato','success');close();if(typeof loadImmobili==='function')await loadImmobili();};
   o.querySelector('[data-a=ok]').onclick=()=>apply(true);const un=o.querySelector('[data-a=un]');if(un)un.onclick=()=>apply(false);}
 };
-const ITEMS=[['privatephotos','Foto private'],['clienti','Trova clienti compatibili'],['email','Bozza email con i dati'],['link','Copia link con anteprima foto'],['seolink','Copia link pagina sito (SEO)'],['dati','Esporta dati immobile'],['catasto','Scheda catastale (lettura)'],['duplica','Duplica come bozza'],['venduto','Segna venduto / affittato']];
-const DACOMPLETARE='<details><summary>Da completare (non ancora disponibili qui)</summary><ul style="margin:6px 0 0 16px;padding:0"><li>Esportazione sui portali</li><li>Nuovo appuntamento da qui (per ora si inserisce nel vecchio gestionale)</li></ul></details>';
+const ITEMS=[['privatephotos','Foto private'],['clienti','Trova clienti compatibili'],['appuntamento','Nuovo appuntamento'],['email','Bozza email con i dati'],['link','Copia link con anteprima foto'],['seolink','Copia link pagina sito (SEO)'],['dati','Esporta dati immobile'],['catasto','Scheda catastale (lettura)'],['duplica','Duplica come bozza'],['venduto','Segna venduto / affittato']];
+const DACOMPLETARE='<details><summary>Da completare (non ancora disponibili qui)</summary><ul style="margin:6px 0 0 16px;padding:0"><li>Esportazione sui portali</li></ul></details>';
 function openMenu(i){css();const o=overlay('<h3>Operazioni - '+esc(i.codice||'')+'</h3><div id="rio-list" class="rio-list">'+ITEMS.map(x=>'<button type="button" data-op="'+x[0]+'" style="display:block;width:100%;text-align:left;margin:4px 0">'+x[1]+'</button>').join('')+'</div>'+DACOMPLETARE+'<button data-a="x" style="margin-top:10px">Chiudi</button>');
  o.querySelector('[data-a=x]').onclick=close;o.querySelector('#rio-list').onclick=e=>{const b=e.target.closest('[data-op]');if(!b)return;close();ops[b.dataset.op](i);};}
 function addMenu(){css();const bar=document.querySelector('#formTitle');if(!bar)return;const hdr=bar.parentNode.querySelector('.modal-header-actions');if(!hdr||hdr.querySelector('.rio-wrap'))return;
  const w=document.createElement('span');w.className='rio-wrap';w.innerHTML='<button type="button" class="btn btn-primary btn-sm" id="rio-btn" style="background:#00508f;color:#fff">🔧 Operazioni</button><div class="rio-menu" id="rio-menu" hidden></div>';hdr.insertBefore(w,hdr.firstChild);
- const m=w.querySelector('#rio-menu');const items=[['privatephotos','Foto private'],['clienti','Trova clienti compatibili'],['email','Bozza email con i dati'],['link','Copia link con anteprima foto'],['seolink','Copia link pagina sito (SEO)'],['dati','Esporta dati immobile'],['catasto','Scheda catastale (lettura)'],['duplica','Duplica come bozza'],['venduto','Segna venduto / affittato']];
- m.innerHTML=items.map(x=>'<button type="button" data-op="'+x[0]+'">'+x[1]+'</button>').join('')+'<details><summary>Da completare (non ancora disponibili qui)</summary><ul style="margin:6px 0 0 16px;padding:0"><li>Esportazione sui portali (per ora nel vecchio gestionale)</li><li>Nuovo appuntamento da qui (per ora si inserisce nel vecchio gestionale)</li></ul></details>';
+ const m=w.querySelector('#rio-menu');const items=[['privatephotos','Foto private'],['clienti','Trova clienti compatibili'],['appuntamento','Nuovo appuntamento'],['email','Bozza email con i dati'],['link','Copia link con anteprima foto'],['seolink','Copia link pagina sito (SEO)'],['dati','Esporta dati immobile'],['catasto','Scheda catastale (lettura)'],['duplica','Duplica come bozza'],['venduto','Segna venduto / affittato']];
+ m.innerHTML=items.map(x=>'<button type="button" data-op="'+x[0]+'">'+x[1]+'</button>').join('')+'<details><summary>Da completare (non ancora disponibili qui)</summary><ul style="margin:6px 0 0 16px;padding:0"><li>Esportazione sui portali (per ora nel vecchio gestionale)</li></ul></details>';
  w.querySelector('#rio-btn').onclick=e=>{e.stopPropagation();m.hidden=!m.hidden;};
  m.addEventListener('click',e=>{const b=e.target.closest('[data-op]');if(!b)return;const i=cur();if(!i){if(window.toast)toast('Salva prima l\'immobile','error');return;}m.hidden=true;ops[b.dataset.op](i);});
  document.addEventListener('click',e=>{if(!w.contains(e.target))m.hidden=true;});}

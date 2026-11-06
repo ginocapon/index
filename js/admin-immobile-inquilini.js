@@ -7,13 +7,14 @@ const FIELDS='id,immobile_id,cliente_id,fonte_relazione_id,fonte_immobile_id,fon
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 async function safeRead(q){try{return await q;}catch(e){return {data:null,error:{message:(e&&e.message)||'Connessione non disponibile'}};};}
 function writePending(){return window.rigPropertySaving===true;}
-const date=v=>v===null||v===undefined||v===''||/^\d{4}-\d{2}-\d{2}$/.test(v);
+const date=v=>{if(v===null||v==='')return true;if(typeof v!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(v))return false;const d=new Date(v+'T12:00:00Z');return Number.isFinite(d.getTime())&&d.toISOString().slice(0,10)===v;};
 const tri=v=>v===null||v===true||v===false;
 const uuid=v=>typeof v==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v),numstr=v=>typeof v==='string'&&/^\d+$/.test(v);
 function valid(r){return r&&uuid(r.id)&&typeof r.immobile_id==='string'&&r.immobile_id===immobileId&&uuid(r.cliente_id)&&['fonte_relazione_id','fonte_immobile_id','fonte_cliente_id'].every(k=>numstr(r[k]))&&Number.isSafeInteger(r.versione)&&r.versione>0&&date(r.inizio)&&date(r.fine)&&(!r.inizio||!r.fine||r.fine>=r.inizio)&&tri(r.scadenza_intermedia);}
 function sameSaved(a,b){for(const k of ['inizio','fine','scadenza_intermedia','versione'])if(a[k]!==b[k])return false;return true;}
 
-let panel=null,rows=[],draft=new Map(),names=new Map(),busy=false,uncertain=false,immobileId=null,epoch=0;
+let panel=null,rows=[],draft=new Map(),names=new Map(),busy=false,uncertain=false,immobileId=null,epoch=0,principalId=null;
+async function principal(){const r=await sb.auth.getUser();const uid=r.data?.user?.id;if(r.error||!uid||uid!==window.RighettoGatedPrincipal||uid!==principalId){rows=[];draft.clear();names.clear();uncertain=true;if(panel)render();throw Error('Sessione cambiata. Dati rimossi, riapri la scheda.');}return uid;}
 
 function currentImmobile(){const el=document.getElementById('editId');return el&&el.value?String(el.value):null;}
 
@@ -47,17 +48,19 @@ function render(){
    const d=structuredClone(draft.get(r.id));if(!d||!date(d.inizio)||!date(d.fine)||(d.inizio&&d.fine&&d.fine<d.inizio)||!tri(d.scadenza_intermedia))return;
    busy=true;panel.querySelector('[data-inq-load]').disabled=true;render();
    try{
+    await principal();if(token!==epoch||currentImmobile()!==immobileId)return;
     const patch={...d,versione:r.versione+1,aggiornato_il:new Date().toISOString()};
     let q=sb.from('immobile_inquilini').update(patch);
     for(const k of ['id','immobile_id','cliente_id','fonte_relazione_id','fonte_immobile_id','fonte_cliente_id','versione','creato_il','aggiornato_il','inizio','fine','scadenza_intermedia'])q=r[k]===null?q.is(k,null):q.eq(k,r[k]);
     const result=await q.select(FIELDS);
+    await principal();
     if(token!==epoch||currentImmobile()!==immobileId)return;
     if(result.error)throw Error(result.error.message);
     const saved=result.data&&result.data[0];
     if(!result.data||result.data.length!==1||!valid(saved)||!sameSaved({...saved,aggiornato_il:null},{...r,...patch,aggiornato_il:null})||Date.parse(saved.aggiornato_il)!==Date.parse(patch.aggiornato_il))throw Error('Relazione cambiata o salvataggio non confermato');
     Object.assign(r,saved);draft.delete(r.id);
     panel.querySelector('[data-inq-status]').textContent='Salvate solo date e S.I. Identità e altri dati invariati. Nessun avviso o invio creato.';
-   }catch(e){if(token!==epoch||currentImmobile()!==immobileId)return;uncertain=true;panel.querySelector('[data-inq-status]').textContent='Esito da verificare: '+e.message+'. Riapri la scheda prima di riprovare; bozza conservata.';}
+   }catch(e){if(token!==epoch||currentImmobile()!==immobileId)return;uncertain=true;panel.querySelector('[data-inq-status]').textContent='Esito da verificare: '+e.message+(draft.size?'. Riapri la scheda prima di riprovare; bozza conservata.':'. Riapri la scheda prima di riprovare.');}
    finally{if(token===epoch&&panel){busy=false;panel.querySelector('[data-inq-load]').disabled=uncertain;render();}}
   };
   card.append(note,save,err);list.append(card);update();
@@ -71,6 +74,7 @@ async function load(){
  busy=true;panel.querySelector('[data-inq-load]').disabled=true;
  const status=panel.querySelector('[data-inq-status]');const id=immobileId;
  try{
+  await principal();if(token!==epoch||id!==currentImmobile())return;
   const data=[];
   for(let offset=0;;offset+=100){
    const page=await sb.from('immobile_inquilini').select(FIELDS).eq('immobile_id',id).order('id').range(offset,offset+99);
@@ -87,6 +91,7 @@ async function load(){
    if(r.error){namesError=true;break;}
    for(const c of r.data||[])if(ids.includes(c.id)&&typeof c.nome==='string')names.set(c.id,c.nome);
   }
+  await principal();if(token!==epoch||id!==currentImmobile())return;
   rows=structuredClone(data);draft.clear();
   status.textContent=rows.length?('Relazioni inquilini verificate: '+rows.length+(namesError?'. Nomi clienti non leggibili, collegamenti conservati per ID.':'')):'Nessun inquilino collegato in questo archivio. Non prova che manchi nel vecchio.';
  }catch(e){if(token!==epoch||id!==currentImmobile())return;rows=[];status.textContent='Lettura inquilini non verificata: '+e.message+'. Non equivale a nessun inquilino.';}
@@ -96,8 +101,8 @@ async function load(){
 function mount(){
  const id=currentImmobile();
  if(panel&&panel.isConnected&&id===immobileId)return;
- epoch++;panel?.remove();panel=null;rows=[];draft.clear();names.clear();busy=false;uncertain=false;immobileId=null;
- if(!id)return;
+ epoch++;panel?.remove();panel=null;rows=[];draft.clear();names.clear();busy=false;uncertain=false;immobileId=null;principalId=window.RighettoGatedPrincipal||null;
+ if(!id||!principalId)return;
  const dividers=[...document.querySelectorAll('.section-divider')];
  const loc=dividers.find(d=>/^Localizzazione/.test(d.textContent.trim()));if(!loc)return;
  panel=document.createElement('div');panel.id='inqPanel';
@@ -110,6 +115,7 @@ function mount(){
  immobileId=currentImmobile();
  panel.querySelector('[data-inq-load]').onclick=load;
 }
+sb.auth.onAuthStateChange?.(event=>{if(event==='SIGNED_OUT'||event==='SIGNED_IN'){epoch++;panel?.remove();panel=null;rows=[];draft.clear();names.clear();busy=false;uncertain=false;immobileId=null;principalId=null;}});
 const mo=new MutationObserver(()=>{const t=document.getElementById('formTitle');if(t&&t.offsetParent)mount();});
 mo.observe(document.documentElement,{childList:true,subtree:true});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
