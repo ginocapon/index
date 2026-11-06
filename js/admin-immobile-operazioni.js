@@ -56,11 +56,10 @@ const ops={
  email(i){const sub='Immobile '+(i.codice||'')+' - '+(i.titolo||'');const body='Buongiorno,\n\nle segnalo questo immobile:\n\n'+riepilogo(i)+'\n\nCordiali saluti\nGino Capon - Righetto Immobiliare';
   const o=overlay('<h3>Bozza email</h3><p>Si apre il tuo programma di posta con la bozza. Il destinatario lo scegli tu. Da qui non parte nessuna email.</p><pre>'+esc('Oggetto: '+sub+'\n\n'+body)+'</pre><button class="pri" data-a="m">Apri nel programma di posta</button><button data-a="x">Chiudi</button>');
   o.querySelector('[data-a=m]').onclick=()=>{location.href='mailto:?subject='+encodeURIComponent(sub)+'&body='+encodeURIComponent(body);};o.querySelector('[data-a=x]').onclick=close;},
- catasto(i){const r=[];const add=(k,v)=>r.push('<div><b style="font-size:11px;text-transform:uppercase;color:#607184">'+k+'</b><br>'+(v||'<i>non compilato</i>')+'</div>');
-  const un=i.unita_catastali;const unTxt=Array.isArray(un)&&un.length?'<pre>'+esc(JSON.stringify(un,null,1))+'</pre>':'';
-  add('Rendita catastale',i.rendita_catastale!=null?money(i.rendita_catastale):'');add('Valore catastale',i.valore_catastale!=null?money(i.valore_catastale):'');add('Note catastali',esc(i.note_catastali||''));add('Unita catastali',unTxt);
-  const cp=i.catasto_pdf;const has=cp&&((Array.isArray(cp)&&cp.length)||(typeof cp==='string'&&cp.trim()&&cp!=='[]'));add('Documento catastale',has?'presente nei documenti dell\'immobile':'');
-  overlay('<h3>Scheda catastale - '+esc(i.codice||'')+'</h3><p style="color:#566773;font-size:13px">Sola lettura: mostra solo i dati gia presenti. Non scarica visure.</p>'+r.join('<hr style="border:0;border-top:1px solid #eef2f5">')+'<button data-a="x">Chiudi</button>').querySelector('[data-a=x]').onclick=close;},
+ async catasto(i){
+  try{const module=await import('./admin-catasto-report.mjs?v=20261106-catasto');await module.openCadastralReport({db:sb,id:String(i.id),principal:window.RighettoGatedPrincipal,isCurrent:id=>String(cur()?.id)===id&&!!document.getElementById('formTitle')?.offsetParent,overlay});}
+  catch(e){alert(e.message);}
+ },
  duplica(i){close();if(typeof duplicateImmobile==='function')duplicateImmobile(i.id);},
  venduto(i){const aff=i.tipo_operazione==='affitto';const campo=aff?'affittato':'venduto';const lab=aff?'affittato':'venduto';
   const o=overlay('<h3>Segna come '+lab+' - '+esc(i.codice||'')+'</h3><p>Cosa cambia sul sito:<br>- L\'elenco pubblico mostra gli immobili attivi con l\'etichetta "'+(aff?'Affittato':'Venduto')+'".<br>- La home e la chat escludono gli immobili '+lab+'.<br>- Per toglierlo anche dall\'elenco serve disattivarlo.</p>'+
