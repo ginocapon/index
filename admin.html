@@ -6654,8 +6654,8 @@ function resetForm() {
   document.getElementById('formTitle').textContent = 'Nuovo Immobile';
   document.getElementById('f_attivo').checked = true;
   clearProprietarioSelection();
-  currentFotos = []; currentPlanimetrie = []; currentDocumenti = []; currentVtScenes = [];
-  renderFotos(); renderPlanimetrie(); renderDocumenti(); renderVtScenes();
+  currentFotos = []; currentPlanimetrie = []; currentDocumenti = []; currentVtScenes = []; currentUnitaCatastali = []; currentCatastoPdf = [];
+  renderFotos(); renderPlanimetrie(); renderDocumenti(); renderVtScenes(); renderUnitaCatastali(); renderCatastoPdf();
   toggleContrattoAffittoRes();
   renderCatastoSetupPanel();
   window.RighettoNavigation?.saved(document.getElementById('immobileForm'));
@@ -6919,7 +6919,7 @@ async function editImmobile(id,isCurrent=()=>true) {if(rigPropertySaving){toast(
   });
 
   currentFotos = Array.isArray(imm.foto) ? [...imm.foto] : [];
-  currentUnitaCatastali = Array.isArray(imm.unita_catastali) ? [...imm.unita_catastali] : [];
+  currentUnitaCatastali = Array.isArray(imm.unita_catastali) ? JSON.parse(JSON.stringify(imm.unita_catastali)) : [];
   currentCatastoPdf = Array.isArray(imm.catasto_pdf) ? [...imm.catasto_pdf] : [];
   currentPlanimetrie = Array.isArray(imm.planimetrie) ? [...imm.planimetrie] : [];
   currentDocumenti = Array.isArray(imm.documenti) ? [...imm.documenti] : [];
@@ -8676,6 +8676,7 @@ function checkCatastoSetupLocal() {
 }
 
 function renderUnitaCatastali() {
+  const attr=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const el = document.getElementById('unitaCatastaliList');
   if (!currentUnitaCatastali.length) {
     el.innerHTML = '<div style="font-size:0.78rem;color:var(--caffe2);padding:8px;text-align:center">Nessuna unità — clicca + Aggiungi Unità</div>';
@@ -8689,19 +8690,19 @@ function renderUnitaCatastali() {
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px">
         <div><label style="font-size:0.7rem;color:var(--caffe2)">Categoria</label>
-          <input type="text" value="${u.categoria}" placeholder="es. A7" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].categoria=this.value"></div>
+          <input type="text" value="${attr(u.categoria)}" placeholder="es. A7" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].categoria=this.value"></div>
         <div><label style="font-size:0.7rem;color:var(--caffe2)">Comune Catastale</label>
-          <input type="text" value="${u.comune_catastale}" placeholder="es. D226" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].comune_catastale=this.value"></div>
+          <input type="text" value="${attr(u.comune_catastale)}" placeholder="es. D226" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].comune_catastale=this.value"></div>
         <div><label style="font-size:0.7rem;color:var(--caffe2)">Sezione</label>
-          <input type="text" value="${u.sezione}" placeholder="es. /" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].sezione=this.value"></div>
+          <input type="text" value="${attr(u.sezione)}" placeholder="es. /" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].sezione=this.value"></div>
         <div><label style="font-size:0.7rem;color:var(--caffe2)">Foglio</label>
-          <input type="text" value="${u.foglio}" placeholder="es. 11" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].foglio=this.value"></div>
+          <input type="text" value="${attr(u.foglio)}" placeholder="es. 11" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].foglio=this.value"></div>
         <div><label style="font-size:0.7rem;color:var(--caffe2)">Mappale</label>
-          <input type="text" value="${u.mappale}" placeholder="es. 538" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].mappale=this.value"></div>
+          <input type="text" value="${attr(u.mappale)}" placeholder="es. 538" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].mappale=this.value"></div>
         <div><label style="font-size:0.7rem;color:var(--caffe2)">Subalterno</label>
-          <input type="text" value="${u.subalterno}" placeholder="es. 2" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].subalterno=this.value"></div>
+          <input type="text" value="${attr(u.subalterno)}" placeholder="es. 2" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].subalterno=this.value"></div>
         <div><label style="font-size:0.7rem;color:var(--caffe2)">Classe</label>
-          <input type="text" value="${u.classe}" placeholder="es. 1" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].classe=this.value"></div>
+          <input type="text" value="${attr(u.classe)}" placeholder="es. 1" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].classe=this.value"></div>
         <div><label style="font-size:0.7rem;color:var(--caffe2)">Rendita (€)</label>
           <input type="number" value="${u.rendita||''}" placeholder="es. 1568.74" step="0.01" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].rendita=parseFloat(this.value)||null"></div>
         <div><label style="font-size:0.7rem;color:var(--caffe2)">Val. Catastale Prima Casa (€)</label>
@@ -8709,7 +8710,7 @@ function renderUnitaCatastali() {
         <div><label style="font-size:0.7rem;color:var(--caffe2)">Val. Catastale Seconda Casa (€)</label>
           <input type="number" value="${u.valore_seconda||''}" step="0.01" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].valore_seconda=parseFloat(this.value)||null"></div>
         <div style="grid-column:1/-1"><label style="font-size:0.7rem;color:var(--caffe2)">Descrizione (es. VILLA SINGOLA 13,50 VANI MQ 260)</label>
-          <input type="text" value="${u.descrizione}" placeholder="descrizione libera" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].descrizione=this.value"></div>
+          <input type="text" value="${attr(u.descrizione)}" placeholder="descrizione libera" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].descrizione=this.value"></div>
       </div>
     </div>
   `).join('');
