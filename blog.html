@@ -317,6 +317,7 @@ let _staticSlugs = new Set();
 async function initBlog() {
   // Articoli statici (pagine HTML dedicate) — mostrati subito, senza attendere Supabase
   const articoliStatici = [
+    {"titolo": "Vendere casa abitata a Padova: visite e privacy", "categoria": "Vendita e proprietari", "data": "2026-11-06", "stato": "pubblicato", "immagine_copertina": "img/blog/blog-vendere-casa-abitata-padova-visite-privacy-card.webp", "ai_generated": false, "url_statico": "blog-vendere-casa-abitata-padova-visite-privacy", "tempo": 8, "autore": "Gino Capon", "contenuto": "Foto, visite, occupanti e documenti: una checklist pratica per vendere una casa ancora abitata senza esporre la vita privata.", "evidenza": true, "data_pubblicazione": "2026-11-06"},
     {
       "titolo": "IMU seconda casa a Padova 2026: aliquota, calcolo e scadenze",
       "categoria": "Fisco e proprietari",
@@ -2458,7 +2459,7 @@ function renderBlog() {
       const cardImg = mainCardPreview(a.immagine_copertina || extractFirstImage(a.contenuto));
       return `
       <a class="acard" href="${artUrl(a)}">
-        <div class="acard-img">${cardImg ? '<img src="'+cardImg+'"'+(a.ai_generated===false?' data-ai-generated="false"':'')+' alt="'+esc(a.titolo)+'" width="400" height="160" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.outerHTML=\'<div class=acard-img-ph>'+(a.emoji||'&#128221;')+'</div>\'">' : '<div class="acard-img-ph">'+(a.emoji || '&#128221;')+'</div>'}</div>
+        <div class="acard-img">${cardImg ? '<img src="'+cardImg+'"'+(a.ai_generated===false?' data-ai-generated="false"':'')+(a.url_statico==='blog-vendere-casa-abitata-padova-visite-privacy'?' data-rig-photo-caption="skip"':'')+' alt="'+esc(a.titolo)+'" width="400" height="160" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.outerHTML=\'<div class=acard-img-ph>'+(a.emoji||'&#128221;')+'</div>\'">' : '<div class="acard-img-ph">'+(a.emoji || '&#128221;')+'</div>'}</div>
         <div class="acard-body">
           <span class="acard-cat">${esc(a.categoria)}</span>
           <div class="acard-title">${esc(a.titolo)}</div>

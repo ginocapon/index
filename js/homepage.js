@@ -801,6 +801,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    "vendere casa abitata a padova: visite e privacy": {"img": "img/blog/blog-vendere-casa-abitata-padova-visite-privacy-card.webp", "url": "blog-vendere-casa-abitata-padova-visite-privacy"},
     'imu seconda casa a padova 2026: aliquota, calcolo e scadenze': { img: 'img/blog/blog-imu-seconda-casa-padova-2026-hero.webp', url: 'blog-imu-seconda-casa-padova-2026' },
     'una domanda non costa nulla: perché contattarci può cambiarti la vita': { img: 'img/blog/blog-una-domanda-non-costa-nulla-card.webp', url: 'blog-una-domanda-non-costa-nulla' },
     'cedolare 5% concordati: la proposta 2027 per gli affitti': { img: 'img/blog/blog-cedolare-5-concordati-proposta-2027-padova-hero.webp', url: 'blog-cedolare-5-concordati-proposta-2027-padova' },
@@ -964,7 +965,8 @@ function generateSlug(titolo) {
   // Articoli statici (sempre presenti)
   const articoliStatici = [
     { titolo: "Una domanda non costa nulla: perché contattarci può cambiarti la vita", categoria: "Vita d'agenzia", data: '2026-10-19', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-una-domanda-non-costa-nulla-card.webp', url_statico: 'blog-una-domanda-non-costa-nulla' },
-    {
+
+    {"titolo": "Vendere casa abitata a Padova: visite e privacy", "categoria": "Vendita e proprietari", "data": "2026-11-06", "stato": "pubblicato", "immagine_copertina": "img/blog/blog-vendere-casa-abitata-padova-visite-privacy-card.webp", "ai_generated": false, "url_statico": "blog-vendere-casa-abitata-padova-visite-privacy", "tempo": 8, "autore": "Gino Capon", "contenuto": "Foto, visite, occupanti e documenti: una checklist pratica per vendere una casa ancora abitata senza esporre la vita privata.", "evidenza": true, "data_pubblicazione": "2026-11-06"},    {
       "titolo": "IMU seconda casa a Padova 2026: aliquota, calcolo e scadenze",
       "categoria": "Fisco e proprietari",
       "data": "2026-10-31",
