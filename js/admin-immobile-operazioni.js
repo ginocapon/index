@@ -34,7 +34,7 @@ const ops={
    const r=await sb.from('immobili').select('id,codice,indirizzo').eq('id',id).maybeSingle();
    if(r.error||!r.data||String(r.data.id)!==id||principal!==window.RighettoGatedPrincipal||String(cur()?.id)!==id)throw Error('Immobile non verificato.');
    if(document.querySelector('#ra-form')&&!confirm('Aprire una nuova bozza in Agenda? La bozza evento aperta verrà sostituita. Nessun evento salvato automaticamente.'))return;
-   showSection('agenda');await RighettoAgenda.newEvent({property_id:id,property:r.data.codice||'Immobile collegato',address:r.data.indirizzo||''});
+   await showSection('agenda');await RighettoAgenda.newEvent({property_id:id,property:r.data.codice||'Immobile collegato',address:r.data.indirizzo||''});
    const form=document.querySelector('#ra-form'),field=form?.querySelector('[name=property_search]');
    if(principal!==window.RighettoGatedPrincipal){form?.closest('.ra-modal')?.remove();throw Error('Sessione cambiata.');}
    if(!field||field.dataset.selectedId!==id||field.value!==field.dataset.selectedLabel)throw Error('Agenda non pronta o immobile non collegato. Riprova da Agenda.');
