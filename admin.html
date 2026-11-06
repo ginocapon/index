@@ -2225,7 +2225,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 </style>
 <link rel="stylesheet" href="css/admin-agenda.css?v=20261106-width">
 <link rel="stylesheet" href="css/admin-attivita.css?v=4">
-<link rel="stylesheet" href="css/admin-mobile.css?v=3">
+<link rel="stylesheet" href="css/admin-mobile.css?v=20261106-1854">
 <link rel="stylesheet" href="css/admin-immobili-responsive.css?v=20261106-fisarmonica">
 <link rel="stylesheet" href="layout-clienti.css?v=20261031-clienti-mobile2"><link rel="stylesheet" href="css/admin-immobile-layout.css?v=20261106-scheda">
 <link rel="stylesheet" href="css/admin-verde.css?v=20261106-verde1">
@@ -18174,7 +18174,7 @@ window.showSection('home');
 <script>(function(){var el=document.getElementById('righetto-attivita');if(!el)return;var done=false,busy=false;function msg(t){el.innerHTML='<div class="at-banner">'+t+'</div>';}
 async function go(){if(done||busy)return;busy=true;const principal=window.RighettoGatedPrincipal;try{if(typeof sb==='undefined'||!principal)throw 0;var u=await sb.auth.getUser();if(!u.data.user?.id||u.data.user.id!==principal||window.RighettoGatedPrincipal!==principal||document.body.dataset.adminArea!=='attivita')throw 0;var authority=await sb.rpc('righetto_is_admin_request');if(authority.error||authority.data!==true||window.RighettoGatedPrincipal!==principal||document.body.dataset.adminArea!=='attivita')throw 0;done=true;RighettoAttivita.init(el,{store:RighettoAttivita.dbStore(sb)});}catch(e){msg('Attivit\u00e0: accedi per vedere le pratiche.');}busy=false;}
 msg('Attivit\u00e0: apri Attivit\u00e0 per caricare le pratiche.');window.rigSectionReady(['attivita'],go);})();</script>
-<script src="js/admin-mobile.js?v=20261106-attivi"></script>
+<script src="js/admin-mobile.js?v=20261106-1854"></script>
 <script src="js/admin-cliente-layout.js?v=20261031-clienti"></script>
 <script>window.RighettoNavigationAttachments=()=>({property:typeof currentFotos==='undefined'?null:[currentFotos,currentPlanimetrie,currentDocumenti,currentVtScenes,currentUnitaCatastali,currentCatastoPdf],client:typeof currentClienteDocumenti==='undefined'?null:currentClienteDocumenti});</script>
 <script type="module">
