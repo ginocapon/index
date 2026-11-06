@@ -6923,7 +6923,7 @@ async function editImmobile(id,isCurrent=()=>true) {if(rigPropertySaving){toast(
   currentCatastoPdf = Array.isArray(imm.catasto_pdf) ? [...imm.catasto_pdf] : [];
   currentPlanimetrie = Array.isArray(imm.planimetrie) ? [...imm.planimetrie] : [];
   currentDocumenti = Array.isArray(imm.documenti) ? [...imm.documenti] : [];
-  currentVtScenes = Array.isArray(imm.virtual_tour_scenes) ? [...imm.virtual_tour_scenes] : [];
+  currentVtScenes = Array.isArray(imm.virtual_tour_scenes) ? JSON.parse(JSON.stringify(imm.virtual_tour_scenes)) : [];
   renderFotos();
   renderPlanimetrie();
   renderDocumenti();
@@ -8520,23 +8520,24 @@ function addVtScene() {
 }
 
 function renderVtScenes() {
+  const attr=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const el = document.getElementById('vtScenesList');
   if (!currentVtScenes.length) { el.innerHTML = '<div style="font-size:0.78rem;color:var(--caffe2);padding:8px">Nessuna stanza aggiunta</div>'; return; }
   el.innerHTML = currentVtScenes.map((s, i) => `
     <div class="vt-scene-card">
       <div class="vt-scene-header">
         <div class="vt-scene-num">${i+1}</div>
-        <input class="vt-scene-name" type="text" value="${s.nome}" placeholder="Nome stanza (es. Soggiorno)" onchange="currentVtScenes[${i}].nome=this.value">
+        <input class="vt-scene-name" type="text" value="${attr(s.nome||'')}" placeholder="Nome stanza (es. Soggiorno)" onchange="currentVtScenes[${i}].nome=this.value">
         <button type="button" class="btn btn-secondary btn-sm" onclick="removeVtScene(${i})" style="background:var(--rosso);color:white;border-color:var(--rosso)">✕</button>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
-        <input type="url" placeholder="URL foto 360° equirettangolare" value="${s.url}"
+        <input type="url" placeholder="URL foto 360° equirettangolare" value="${attr(s.url||'')}"
           style="flex:1;padding:8px 10px;border:1.5px solid var(--caffe3);border-radius:6px;font-family:Montserrat,sans-serif;font-size:0.78rem"
           onchange="currentVtScenes[${i}].url=this.value;updateVtPreview(${i},this.value)">
         <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('inputVt${i}').click()">📤 Carica</button>
         <input type="file" id="inputVt${i}" accept="image/*" style="display:none" onchange="uploadVtScene(this.files[0],${i})">
       </div>
-      ${s.url ? `<img src="${s.url}" class="vt-scene-preview" id="vtPrev${i}" onerror="this.style.display='none'" style="display:block">` : `<div id="vtPrev${i}"></div>`}
+      ${s.url ? `<img src="${attr(s.url)}" class="vt-scene-preview" id="vtPrev${i}" onerror="this.style.display='none'" style="display:block">` : `<div id="vtPrev${i}"></div>`}
     </div>
   `).join('');
 }
@@ -8544,7 +8545,11 @@ function renderVtScenes() {
 function updateVtPreview(i, url) {
   const el = document.getElementById('vtPrev' + i);
   if (!el) return;
-  if (url) { el.outerHTML = `<img src="${url}" class="vt-scene-preview" id="vtPrev${i}" style="display:block">`; }
+  if (url) {
+    const image=document.createElement('img');image.src=url;image.className='vt-scene-preview';image.id='vtPrev'+i;image.style.display='block';el.replaceWith(image);
+  } else {
+    const empty=document.createElement('div');empty.id='vtPrev'+i;el.replaceWith(empty);
+  }
 }
 
 async function uploadVtScene(file, idx) {
