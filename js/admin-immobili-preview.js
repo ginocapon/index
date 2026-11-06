@@ -1,7 +1,7 @@
 /* Desktop property table: first-photo hover and existing read-only preview. */
 (function(){'use strict';
  let popup=null,active=null;
- function sizeRows(){if(innerWidth<761)return;document.querySelectorAll('#immobiliTableWrap tr[data-property-preview]:not([data-doubled-row])').forEach(row=>{const height=row.getBoundingClientRect().height;if(height>0){row.dataset.doubledRow='1';row.style.height=(height*2)+'px';}});}
+ function sizeRows(){if(innerWidth<761)return;const rows=[...document.querySelectorAll('#immobiliTableWrap tr[data-property-preview]:not([data-doubled-row])')];if(!rows.length)return;if(!rows.some(row=>row.getBoundingClientRect().height>0))return;document.body.classList.remove('rig-colonne-compatto');rows.forEach(row=>{const height=row.getBoundingClientRect().height;if(height>0){row.dataset.doubledRow='1';row.style.height=(height*2)+'px';}});document.body.classList.add('rig-colonne-compatto');}
  sizeRows();
  const hover=()=>matchMedia('(hover:hover) and (pointer:fine)').matches;
  const current=id=>(typeof allImmobili!=='undefined'?allImmobili:[]).find(i=>String(i.id)===id);

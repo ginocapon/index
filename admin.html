@@ -2180,6 +2180,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
 /* Local6nov: elenco immobili con layout del vecchio gestionale. Solo presentazione: callback e dati invariati. */
 #immobiliTableWrap table{font-size:.78rem}
+@media(min-width:761px){body.rig-colonne-compatto #immobiliTableWrap table{width:max-content;min-width:0;max-width:none}body.rig-colonne-compatto #immobiliTableWrap table th,body.rig-colonne-compatto #immobiliTableWrap table td{padding-left:6px;padding-right:6px}body.rig-colonne-compatto #immobiliTableWrap table th{white-space:nowrap}body.rig-colonne-compatto #immobiliTableWrap table td:nth-child(2){max-width:110px;white-space:normal}body.rig-colonne-compatto #immobiliTableWrap table td:nth-child(2) .codice-cell{max-width:98px;white-space:normal;overflow-wrap:anywhere}body.rig-colonne-compatto #immobiliTableWrap table td:nth-child(7){min-width:165px;max-width:165px!important;overflow:visible!important}body.rig-colonne-compatto #immobiliTableWrap table td:nth-child(7) button{max-width:153px;overflow-wrap:anywhere}}
 @media(min-width:761px){#immobiliTableWrap tbody tr[data-property-preview]{cursor:pointer}#immobiliTableWrap tbody tr[data-property-preview] td{vertical-align:middle}#immobiliTableWrap tbody tr[data-property-preview]:hover{background:#e4f1d5;box-shadow:inset 4px 0 #6c943c}#immobiliTableWrap tbody tr[data-property-preview]:focus{outline:2px solid #14547f;outline-offset:-2px}#immobiliTableWrap [data-first-photo]{cursor:zoom-in}}
 @media(max-width:760px){#immobiliTableWrap tbody tr[data-property-preview]{height:auto!important}}
 #immobiliTableWrap th,#immobiliTableWrap td{padding:5px 5px;vertical-align:top}
@@ -18150,7 +18151,7 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script src="js/admin-cliente-comunicazioni.js?v=20261105"></script>
 <script src="js/admin-cliente-documenti.js?v=20261106-1038"></script>
 <script src="js/admin-client-matching.js"></script>
-<script src="js/admin-immobili-preview.js?v=20261106-hover"></script>
+<script src="js/admin-immobili-preview.js?v=20261106-colonne"></script>
 </body>
 </html>
 
