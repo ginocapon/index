@@ -1,0 +1,24 @@
+/* Elenco fluido, senza zoom o campi rimossi. */
+#immobiliTableWrap .ce-badge{width:auto;height:auto;min-width:24px;padding:2px 4px;line-height:1.3;box-sizing:border-box}
+@media(min-width:761px){
+ body.rig-colonne-compatto #immobiliTableWrap table{width:100%;min-width:0;table-layout:fixed}
+ body.rig-colonne-compatto #immobiliTableWrap th,body.rig-colonne-compatto #immobiliTableWrap td{min-width:0!important;max-width:none!important;white-space:normal!important;overflow:visible!important;overflow-wrap:anywhere}
+ body.rig-colonne-compatto #immobiliTableWrap th{line-height:1.4;overflow-wrap:normal;word-break:normal}
+ body.rig-colonne-compatto #immobiliTableWrap td:nth-child(2) .codice-cell{max-width:100%}
+ body.rig-colonne-compatto #immobiliTableWrap td:nth-child(7) button{max-width:100%;width:auto}
+ body.rig-colonne-compatto #immobiliTableWrap th:nth-child(1){width:10%}body.rig-colonne-compatto #immobiliTableWrap th:nth-child(2){width:7%}body.rig-colonne-compatto #immobiliTableWrap th:nth-child(3){width:10%}body.rig-colonne-compatto #immobiliTableWrap th:nth-child(4){width:7%}body.rig-colonne-compatto #immobiliTableWrap th:nth-child(5){width:6%}body.rig-colonne-compatto #immobiliTableWrap th:nth-child(6){width:4%}body.rig-colonne-compatto #immobiliTableWrap th:nth-child(7){width:11%}body.rig-colonne-compatto #immobiliTableWrap th:nth-child(8){width:6%}body.rig-colonne-compatto #immobiliTableWrap th:nth-child(9){width:7%}body.rig-colonne-compatto #immobiliTableWrap th:nth-child(10){width:8%}body.rig-colonne-compatto #immobiliTableWrap th:nth-child(11){width:4%}body.rig-colonne-compatto #immobiliTableWrap th:nth-child(12){width:3%}body.rig-colonne-compatto #immobiliTableWrap th:nth-child(13){width:17%}
+ body.rig-colonne-compatto #immobiliTableWrap .property-row-actions{display:grid;grid-template-columns:repeat(5,minmax(29px,1fr));gap:4px;width:100%;min-width:0}
+ body.rig-colonne-compatto #immobiliTableWrap .property-row-actions .btn-action{width:100%;min-width:0!important}
+}
+@media(min-width:1800px){body.rig-colonne-compatto #immobiliTableWrap th:nth-child(1){width:10%}body.rig-colonne-compatto #immobiliTableWrap th:nth-child(7){width:10%}body.rig-colonne-compatto #immobiliTableWrap th:nth-child(10){width:7%}body.rig-colonne-compatto #immobiliTableWrap th:nth-child(13){width:20%}body.rig-colonne-compatto #immobiliTableWrap .property-row-actions{grid-template-columns:repeat(8,minmax(28px,1fr)) minmax(40px,1.3fr) minmax(28px,1fr);gap:2px}}
+@media(min-width:761px) and (max-width:1200px){
+ body.rig-colonne-compatto #immobiliTableWrap table,body.rig-colonne-compatto #immobiliTableWrap tbody{display:block;width:100%}
+ body.rig-colonne-compatto #immobiliTableWrap thead{display:block;background:#edf2f6;border-radius:8px;margin-bottom:10px;padding:5px}body.rig-colonne-compatto #immobiliTableWrap thead tr{display:flex;flex-wrap:wrap;gap:4px}body.rig-colonne-compatto #immobiliTableWrap thead th{display:none}body.rig-colonne-compatto #immobiliTableWrap thead th.th-sort{display:block;width:auto;padding:8px!important;background:#fff;border:1px solid #cbd9e3;border-radius:5px}
+ body.rig-colonne-compatto #immobiliTableWrap tbody tr[data-property-preview]{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));height:auto!important;min-height:106px;border:1px solid #dce3e8;border-radius:8px;margin:0 0 12px;padding:8px;background:#fff}
+ body.rig-colonne-compatto #immobiliTableWrap td{display:block;text-align:left!important;border:0;padding:8px!important}
+ body.rig-colonne-compatto #immobiliTableWrap td::before{content:attr(data-column-label);display:block;color:#56718a;font-size:.68rem;font-weight:700;letter-spacing:.03em;margin-bottom:5px;line-height:1.4}
+ body.rig-colonne-compatto #immobiliTableWrap td:nth-child(13){grid-column:span 2}
+ body.rig-colonne-compatto #immobiliTableWrap .property-row-actions{grid-template-columns:repeat(5,minmax(29px,1fr));max-width:360px}
+ body.rig-colonne-compatto #immobiliTableWrap tbody tr[data-property-preview]:hover{background:#e4f1d5}
+}
+@media(min-width:761px){#rm-imm{display:none!important}}
