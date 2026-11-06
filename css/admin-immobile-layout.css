@@ -1,0 +1,47 @@
+/* Scheda compatta: nessuna regola per l'elenco immobili. */
+#sec-nuovo.ril-shell{max-width:1120px;margin:0 auto;color:#17324d;font:13px/1.4 Arial,sans-serif}
+#sec-nuovo.ril-shell>.table-wrap{border:1px solid #b9c7ce;border-radius:0}
+#sec-nuovo.ril-shell .modal-header{background:#f8fafb;color:#17324d;padding:12px 14px;border-bottom:1px solid #b9c7ce;align-items:center}
+#sec-nuovo.ril-shell #formTitle{font:700 17px/1.3 Arial,sans-serif;color:#17324d;max-width:90%}
+#sec-nuovo.ril-shell .modal-body{padding:10px}
+.ril-tabs{display:flex;gap:3px;flex-wrap:wrap;border-bottom:3px solid #00608a;padding:5px 0 0;margin-bottom:8px}
+.ril-tabs button{padding:9px 12px;background:#f5f8fa;color:#14516b;border:1px solid #bccdd5;border-bottom:0;border-radius:0;font:700 13px Arial,sans-serif;cursor:pointer;min-height:38px}
+.ril-tabs button.active{border:2px solid #00608a;border-bottom:0;background:#d9edf5;color:#003d57}
+#immobileForm .ril-panels{display:block!important}
+.ril-panel[hidden]{display:none!important}
+.ril-panel:not([hidden]){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px}
+.ril-panel>.form-group{min-width:0;margin:0}
+.ril-panel>.form-full,.ril-panel>.form-grid,.ril-panel>.section-divider,.ril-panel>.checks-grid,.ril-panel>#inqPanel,.ril-panel>#catastoSetupPanel,.ril-panel>div:not([class]){grid-column:1/-1}
+#sec-nuovo.ril-shell .section-divider,.ril-box h3{background:#00608a;color:white;margin:8px 0 0;padding:5px 8px;border:0;border-radius:0;font:700 13px/1.4 Arial,sans-serif}
+#sec-nuovo.ril-shell label:not(.check-item):not(.contratto-chip){font:600 12px/1.4 Arial,sans-serif;letter-spacing:0;text-transform:none;color:#17324d;margin:0 0 3px}
+#sec-nuovo.ril-shell input:not([type=checkbox]):not([type=radio]):not([type=file]),#sec-nuovo.ril-shell select,#sec-nuovo.ril-shell textarea{font:13px/1.4 Arial,sans-serif;border:1px solid #afc0c8;border-radius:2px;background:white;padding:6px 7px;min-height:31px;color:#17324d}
+#sec-nuovo.ril-shell small{font:11px/1.4 Arial,sans-serif;color:#536975}
+#sec-nuovo.ril-shell .checks-grid{display:flex;flex-wrap:wrap;gap:5px 12px;padding:5px 0}
+#sec-nuovo.ril-shell .check-item{font:12px/1.4 Arial,sans-serif;padding:4px;min-height:28px;display:flex;gap:4px;align-items:center}
+#sec-nuovo.ril-shell .ril-panel .form-grid{gap:7px 14px;margin:0;grid-template-columns:repeat(2,minmax(0,1fr))}
+#sec-nuovo.ril-shell .ril-panel .form-grid .form-group{margin:0}
+.ril-description-field{order:50}.ril-notes-field{order:51}
+#sec-nuovo.ril-shell #f_descrizione{min-height:150px!important}#sec-nuovo.ril-shell #f_note_interne{min-height:95px}
+.ril-command{position:relative;margin-left:auto}.ril-command>summary{list-style:none;cursor:pointer;font-size:24px;border:1px solid #00608a;background:#e9f3f8;padding:2px 12px;color:#005475;min-width:44px;text-align:center}
+#sec-nuovo.ril-shell .ril-command:not([open])>.modal-header-actions{display:none!important}
+#sec-nuovo.ril-shell .ril-command[open]>.modal-header-actions{position:absolute;right:0;top:100%;z-index:1000;background:#fff;border:1px solid #a9bfcc;padding:10px;box-shadow:0 6px 18px #0002;min-width:250px;display:flex!important;flex-direction:column;align-items:stretch!important}
+#sec-nuovo.ril-shell .btn{font:700 13px/1.4 Arial,sans-serif;min-height:36px;border-radius:3px}
+#ril-panel-scheda{display:block}.ril-summary-top,.ril-summary-columns{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}.ril-box{min-width:0;margin-bottom:7px}.ril-box>p{padding:7px 8px;margin:0}.ril-description{white-space:pre-line;max-height:260px;overflow:auto}.ril-notes{white-space:pre-line;max-height:170px;overflow:auto}.ril-facts{margin:0;padding:5px 8px}.ril-facts>div{display:grid;grid-template-columns:48% 52%;border-bottom:1px solid #e6edf0;padding:4px 0;gap:4px}.ril-facts dt{color:#526672}.ril-facts dd{margin:0;overflow-wrap:anywhere}.ril-checks{display:flex;flex-wrap:wrap;gap:5px;padding:8px}.ril-checks span{padding:3px 6px;background:#e0f1d3;border:1px solid #b4d294}.ril-checks .off{background:#f3f5f6;color:#667782;border-color:#d9e1e6}.ril-thumbs{display:flex;gap:8px;overflow:auto;padding:8px}.ril-thumbs img{width:155px;height:118px;object-fit:cover;flex:0 0 155px;border:3px solid #d2e4eb}.ril-documents{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:8px}.ril-documents span{background:#eef1f3;padding:7px;overflow-wrap:anywhere}.ril-note,.ril-empty{color:#526672}.ril-box>button{margin:0 8px 6px;padding:7px 10px;border:1px solid #b2c6d0;background:#e9f3f8;color:#005475;cursor:pointer}
+@media(max-width:760px){#sec-nuovo.ril-shell{width:100%;max-width:100%}#sec-nuovo.ril-shell .modal-header{padding:10px}#sec-nuovo.ril-shell #formTitle{font-size:15px;max-width:82%}.ril-tabs{gap:4px}.ril-tabs button{flex:1 1 auto;padding:9px 11px;min-height:42px}.ril-panel:not([hidden]),.ril-summary-top,.ril-summary-columns{grid-template-columns:1fr}#sec-nuovo.ril-shell .ril-panel .form-grid{grid-template-columns:1fr}.ril-panel>*{min-width:0;max-width:100%}.ril-documents{grid-template-columns:1fr}.ril-facts>div{grid-template-columns:45% 55%}.ril-command[open]>.modal-header-actions{max-width:calc(100vw - 48px)}#sec-nuovo.ril-shell .check-item{min-height:40px}.ril-description{max-height:230px}}
+@media(min-width:761px){
+#ril-panel-info{grid-template-columns:repeat(2,minmax(0,1fr))}
+#ril-panel-info>.form-group:not(.form-full){display:grid;grid-template-columns:150px minmax(0,1fr);align-items:start;column-gap:8px}
+#ril-panel-info>.form-group:not(.form-full)>label{padding-top:6px}
+#ril-panel-info>.form-group:not(.form-full)>small{grid-column:2}
+#ril-panel-info>.form-group:has(#f_indirizzo),#ril-panel-info>.form-group:has(#f_indirizzo_mappa){grid-column:auto}
+#ril-panel-info>.form-group:has(#f_proprietario_search){grid-column:1/-1}
+#sec-nuovo.ril-shell .form-row-prezzo-contratto{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+#sec-nuovo.ril-shell .form-row-prezzo-contratto__prezzo{display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px;align-items:center}
+}
+@media(max-width:760px){#sec-nuovo.ril-shell .modal-header{display:flex!important;flex-wrap:nowrap!important;gap:6px}#sec-nuovo.ril-shell #formTitle{flex:1;min-width:0}.ril-command{flex:0 0 auto;margin:0}}
+#sec-nuovo.ril-shell .ril-panel .form-grid>.form-group{display:grid;grid-template-columns:145px minmax(0,1fr);column-gap:8px;align-items:start}
+#sec-nuovo.ril-shell .ril-panel .form-grid>.form-group>label{padding-top:6px}
+#sec-nuovo.ril-shell .ril-panel .form-grid>.form-group>small{grid-column:2}
+@media(max-width:760px){#sec-nuovo.ril-shell .ril-panel .form-grid>.form-group{display:block}}
+.ril-summary-commands{display:flex;gap:8px;padding:8px}.ril-summary-commands button{background:#e9f3f8;border:1px solid #8eaebb;color:#005475;padding:8px 14px;font:700 13px Arial,sans-serif;cursor:pointer;min-height:38px}.ril-relations{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}.ril-relations #inqPanel{grid-column:auto;min-width:0}.ril-owner{min-width:0}.ril-relations .proprietario-search-field{min-width:0!important}.ril-relations .proprietario-search-row{gap:6px!important}.ril-relations .btn-proprietario-nuovo{font-size:12px;min-width:0}.ril-relations .proprietario-info{overflow-wrap:anywhere}@media(max-width:760px){.ril-relations{grid-template-columns:1fr}}
+.ril-energy{padding:8px;margin:8px;background:#f3f8ec;border:1px solid #cbd9b8}.ril-energy h4{margin:0 0 8px;font-size:12px}.ril-energy-scale{display:flex;gap:3px}.ril-energy-scale span{background:var(--energy);color:#17324d;padding:4px 3px;flex:1;text-align:center;font-weight:700;opacity:.45;border:2px solid transparent}.ril-energy-scale span.selected{opacity:1;border-color:#17324d;transform:scale(1.1);box-shadow:0 0 0 2px white}.ril-energy p{font-size:11px;margin:8px 0 0}
