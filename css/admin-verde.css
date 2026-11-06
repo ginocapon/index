@@ -1,0 +1,33 @@
+/* Solo cornici e navigazione del gestionale. Stati, foto, dati e stampa invariati. */
+@media screen {
+body{--admin-frame:#174d3b;--admin-frame-soft:#e7f0eb;--admin-edge:#709b86;--nero:#174d3b;--nero2:#245d49;--caffe:#376e57;--caffe2:#4f765f;--caffe3:#b2ccbb}
+body .topbar{border-bottom:3px solid var(--admin-frame)}
+body .topbar-title,body .rh-group-title:not(.green):not(.red){color:var(--admin-frame)!important}
+body .rl-menu,body .rl-nav,body .rh-menu,body .admin-menubar,body .section-divider,body .ril-box h3{background:var(--admin-frame)!important;color:white!important}
+body .table-wrap,body .modal,body .rcs-d,body .ra-dialog,body .rh-agenda,body .rh-grp,body .rh-soon,body .rm-card,body .ipa-panel,body .ipr-panel{border:1px solid var(--admin-edge)!important}
+body .modal-header,body .rcs-top,body .ra-col h3,body .table-header{background:var(--admin-frame-soft)!important;border-bottom-color:var(--admin-edge)!important}
+body .ril-tabs{border-bottom-color:var(--admin-frame)!important}
+body .ril-tabs button{border-color:var(--admin-edge)!important;color:var(--admin-frame)!important;background:#f3f8f4!important}
+body .ril-tabs button.active,body .rcs button[aria-selected=true],body .rm-tabs .on{border-color:var(--admin-frame)!important;background:var(--admin-frame)!important;color:white!important}
+body .ril-command>summary,body .ril-summary-commands button{color:var(--admin-frame)!important;background:var(--admin-frame-soft)!important;border-color:var(--admin-edge)!important}
+body .rh-tile:not(.red):not(.green){border-left-color:var(--admin-frame)!important}
+body .rh-tile:not(.red):not(.green) .rh-icon{background:var(--admin-frame-soft)!important;color:var(--admin-frame)!important}
+body .ra{--line:#a6c2b2;--ink:#17352a;border-color:var(--admin-edge)!important}
+body .ra-col,body .rcs-tabs,body .drop-zone,body .upload-zone{border-color:var(--admin-edge)!important}
+body #rm-head,body .rm-banner,body .rm-bar,body .rm-menu-exit{background:var(--admin-frame)!important;color:white!important;border-color:var(--admin-frame)!important}
+body #rm-head button,body .rm-mobile-brand,body #rm-title{color:white!important}
+body #rm-menu .rm-big{border-color:var(--admin-edge)!important;color:var(--admin-frame)!important}
+body .rm-search,body .rm-link{border-color:var(--admin-edge)!important}
+}
+@media screen{body .rh-menu-top{background:var(--admin-frame)!important;color:white!important}body .rh-menu-top details[open]>summary{background:#103b2c!important}body .rh-menu-top .rh-grid{border-color:var(--admin-edge)!important}body .rh-menu-top .rh-tile{color:var(--admin-frame)!important}body .legacy-client-editor{border-color:var(--admin-edge)!important}body .legacy-edit-sections>h3{background:var(--admin-frame)!important;color:white!important}}
+@media screen{
+body .legacy-client-search,body .legacy-client-head,body .legacy-client-toolbar{background:var(--admin-frame-soft)!important;border-color:var(--admin-edge)!important}
+body .rm-other summary{color:var(--admin-frame)!important}
+}
+@media screen{
+body #sec-clienti .table-head,body #sec-clienti .legacy-client-title span{background:var(--admin-frame-soft)!important;color:var(--admin-frame)!important}
+body #sec-clienti th,body #sec-clienti .legacy-search-btn,body #sec-clienti #clientiStoricoBtn[aria-pressed=true],body .rcs h3,body #clienteModal.legacy-client-editor h3{background:var(--admin-frame)!important;color:white!important}
+body .rcs-tabs{border-bottom-color:var(--admin-frame)!important}
+body #clienteModal.legacy-client-editor .modal-header{background:var(--admin-frame-soft)!important;border-bottom:1px solid var(--admin-edge)!important}
+body #clienteModal.legacy-client-editor .modal-footer button:not(:disabled){background:var(--admin-frame)!important}
+}
