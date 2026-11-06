@@ -2180,6 +2180,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
 /* Local6nov: elenco immobili con layout del vecchio gestionale. Solo presentazione: callback e dati invariati. */
 #immobiliTableWrap table{font-size:.78rem}
+@media(min-width:761px){#immobiliTableWrap tbody tr[data-property-preview]{cursor:pointer}#immobiliTableWrap tbody tr[data-property-preview] td{vertical-align:middle}#immobiliTableWrap tbody tr[data-property-preview]:hover{background:#e4f1d5;box-shadow:inset 4px 0 #6c943c}#immobiliTableWrap tbody tr[data-property-preview]:focus{outline:2px solid #14547f;outline-offset:-2px}#immobiliTableWrap [data-first-photo]{cursor:zoom-in}}
+@media(max-width:760px){#immobiliTableWrap tbody tr[data-property-preview]{height:auto!important}}
 #immobiliTableWrap th,#immobiliTableWrap td{padding:5px 5px;vertical-align:top}
 #immobiliTableWrap th:last-child,#immobiliTableWrap td:last-child{min-width:0}
 #immobiliTableWrap .imm-nd{color:var(--caffe3);font-size:.72rem;font-style:italic}
@@ -6472,7 +6474,7 @@ function renderTable(data) {
       : ceRaw && ceRaw !== 'ND' ? `<span class="ce-badge ce-alt">${escHtml(ceRaw)}</span>`
       : '<span class="ce-badge ce-nd">ND</span>';
 
-    return `<tr>
+    return `<tr data-property-preview="${escHtml(i.id)}" tabindex="0" aria-label="Apri anteprima ${escHtml(i.codice||i.titolo||'immobile')}">
       <td>
         <div style="font-weight:600;font-size:0.82rem">${escHtml(i.tipologia || '—')}</div>
         <div style="margin-top:3px">${tipo}${contrBadge} ${stato}</div>
@@ -6481,7 +6483,7 @@ function renderTable(data) {
       <td style="white-space:nowrap;max-width:100px;overflow:hidden;text-overflow:ellipsis" title="${escHtml(i.comune || '')}">${escHtml(i.comune || '—')}</td>
       <td style="font-weight:600;text-align:right;white-space:nowrap">${prezzo}</td>
       <td style="text-align:right;white-space:nowrap">${mq}</td>
-      <td style="white-space:nowrap" title="${nFoto} foto nella scheda, nessuna anteprima in elenco">${nFoto ? '🖼️ ' + nFoto : '—'}</td>
+      <td data-first-photo tabindex="0" style="white-space:nowrap" title="${nFoto} foto: passa il mouse per vedere la prima">${nFoto ? '🖼️ ' + nFoto : '—'}</td>
       <td style="font-size:0.78rem;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(propNome)}"><button type="button" class="btn btn-secondary btn-sm" ${rigCatalogueReady ? '' : 'disabled'} onclick="openProprietariImmobile('${i.id}')" style="white-space:normal;text-align:left" title="Apri dati e gestisci proprietari">${escHtml(propNome === '—' ? '+ Proprietari' : propNome)} ↗</button></td>
       <td style="white-space:nowrap">${dataIns}</td>
       <td><div data-property-label-host="${escHtml(i.id)}"></div></td>
@@ -6500,7 +6502,6 @@ function renderTable(data) {
           ${i.cestino ? `<button class="btn btn-action" onclick="restoreImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')" title="Ripristina dal cestino" style="background:#e8f5e9;color:#27ae60">↩️</button>` : `<button class="btn btn-action btn-danger" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')" title="Sposta nel cestino">🗑️</button>`}
           <button class="btn btn-action" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="${i.in_evidenza ? 'Rimuovi da evidenza' : 'Metti in evidenza'}" style="background:${i.in_evidenza ? '#e74c3c' : 'var(--sfondo)'};border:${i.in_evidenza ? '2px solid #c0392b' : '1px solid #ddd'};${i.in_evidenza ? 'color:#fff' : ''}">${i.in_evidenza ? 'Evid. ✓' : 'Evid.'}</button>
           <button class="btn btn-action" onclick="toggleAttivo('${i.id}',${!isAttivo})" title="Toggle attivo" style="background:var(--sfondo)">${isAttivo ? '👁️' : '🚫'}</button>
-          <button class="btn btn-action" onclick="previewImmobile('${i.id}')" title="Anteprima rapida" style="background:#e8f5e9;color:#27ae60">🔍</button>
         </fieldset>
       </td>
     </tr>`;
@@ -18149,6 +18150,7 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script src="js/admin-cliente-comunicazioni.js?v=20261105"></script>
 <script src="js/admin-cliente-documenti.js?v=20261106-1038"></script>
 <script src="js/admin-client-matching.js"></script>
+<script src="js/admin-immobili-preview.js?v=20261106-hover"></script>
 </body>
 </html>
 
