@@ -173,7 +173,24 @@ async function loadLinkedProperties(clientId,current){
   el.innerHTML=(errors.length?'<p class="rcs-note" role="status">Lettura incompleta: '+errors.map(esc).join(' · ')+'</p>':'')+(rows.length?rows.map(i=>'<button type="button" data-mobile-imm="'+esc(i.id)+'" class="rcs-ev"><b>'+esc(i.codice)+'</b> '+esc(i.titolo||'')+' <small>('+esc([...i.roles].join(', '))+')</small></button>').join(''):'<p class="rcs-note">'+(errors.length?'Nessun risultato verificabile.':'Nessun immobile collegato nel nuovo come proprietario o inquilino. Questo non certifica l’assenza di collegamenti nel vecchio gestionale.')+'</p>');
  }catch(e){if(box===current)el.textContent='Immobili non leggibili: '+e.message;}
 }
-async function loadCrn(id){const current=box;const el=current&&current.querySelector('[data-crn]');if(!el)return;const r=await sb.from('cliente_cronistoria').select('creato_il,tipo,testo,autore').eq('cliente_id',id).order('creato_il',{ascending:false}).limit(200);if(box!==current)return;if(r.error){el.textContent='Cronistoria non leggibile: '+r.error.message;return;}el.innerHTML=r.data.length?r.data.map(x=>`<div class="rcs-ev"><b>${esc(fmtDT(x.creato_il))}</b>${x.autore?' · '+esc(x.autore):''}<div>${esc(x.testo)}</div></div>`).join(''):'<p class="rcs-note">Nessuna nota interna inserita. Gli appuntamenti sono nella scheda Cronistoria.</p>';}
+async function loadCrn(id){
+ const current=box,el=current&&current.querySelector('[data-crn]'),principal=window.RighettoGatedPrincipal;if(!el)return;
+ const token={};el._noteLoad=token;let offset=0,total=null,loading=false;const notes=[],seen=new Set();
+ const alive=()=>box===current&&current.isConnected&&el._noteLoad===token&&principal&&window.RighettoGatedPrincipal===principal;
+ const read=async()=>{if(loading||!alive())return;loading=true;let errorBox=el.querySelector('[data-note-error]');if(errorBox)errorBox.remove();try{
+ const u=await sb.auth.getUser();if(!alive())return;if(u.error||u.data?.user?.id!==principal)throw Error('Sessione cambiata. Riapri la scheda.');
+ const r=await sb.from('cliente_cronistoria').select('id,cliente_id,creato_il,tipo,testo,autore',{count:'exact'}).eq('cliente_id',id).order('creato_il',{ascending:false}).order('id',{ascending:false}).range(offset,offset+99);
+ if(!alive())return;const after=await sb.auth.getUser();if(!alive())return;if(after.error||after.data?.user?.id!==principal)throw Error('Sessione cambiata.');
+ if(r.error)throw Error(r.error.message);if(!Array.isArray(r.data)||!Number.isInteger(r.count)||r.count<0||total!==null&&total!==r.count)throw Error('Note cambiate durante la lettura. Riapri la scheda.');
+ const local=new Set();for(const n of r.data){if(!n.id||n.cliente_id!==id||seen.has(n.id)||local.has(n.id))throw Error('Identità o pagina note non verificata. Riapri la scheda.');local.add(n.id);}
+ if(offset+r.data.length>r.count||r.data.length<100&&offset+r.data.length!==r.count)throw Error('Pagina note incompleta. Riapri la scheda.');
+ total=r.count;for(const n of r.data){seen.add(n.id);notes.push(n);}offset=notes.length;
+ el.innerHTML=notes.length?notes.map(x=>`<div class="rcs-ev"><b>${esc(fmtDT(x.creato_il))}</b>${x.autore?' · '+esc(x.autore):''}<div>${esc(x.testo)}</div></div>`).join(''):'<p class="rcs-note">Nessuna nota interna inserita. Gli appuntamenti sono nella scheda Cronistoria.</p>';
+ const status=document.createElement('p');status.className='rcs-note';status.setAttribute('role','status');status.textContent=notes.length+' di '+total+' note interne caricate'+(notes.length===total?'. Fine note presenti nel nuovo archivio.':'. Possono esserci note precedenti.');el.append(status);
+ if(notes.length<total){const more=document.createElement('button');more.type='button';more.textContent='Carica 100 note precedenti';more.onclick=()=>{more.disabled=true;read().finally(()=>{if(more.isConnected)more.disabled=false;});};el.append(more);}
+ }catch(e){if(alive()){if(!notes.length)el.replaceChildren();const p=document.createElement('p');p.dataset.noteError='';p.setAttribute('role','alert');p.textContent='Note non completate: '+e.message+' Non certifica l’assenza di altre note.';el.append(p);}}finally{loading=false;}};
+ await read();
+}
 async function toggleStorico(c){const to=!c.storico;if(!confirm(to?'Mettere questo cliente nello storico?\n\nNon viene cancellato: esce dall\'elenco normale e resta in "Mostra storico".':'Riportare questo cliente tra gli attivi?'))return;const r=await sb.from('clienti').update({storico:to,storico_il:to?new Date().toISOString():null}).eq('id',c.id);if(r.error){alert('Operazione non riuscita: '+r.error.message);return;}close();if(typeof loadClienti==='function')loadClienti();open(c.id);}
 if(sb.auth?.onAuthStateChange)sb.auth.onAuthStateChange((event)=>{if(event==='SIGNED_OUT')close();});
 const attachmentObject="clienti-collegamenti/client-attachments-v1-0366d1e6e1ac64c3.json",attachmentHash="0366d1e6e1ac64c3da7ade89811efc9f90fe251158d00c5fb7ad111f361dbb3e";let attachmentCache=null;
