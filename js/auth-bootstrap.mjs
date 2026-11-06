@@ -1,5 +1,5 @@
 import {decideAccess} from './access-gate.mjs';
-import{installAppHistory}from'./app-adapter.mjs';
+import{installAppHistory}from'./app-adapter.mjs?v=20261106-owner-hydration';
 // Explicit source integration only: call once after all application navigation wrappers.
 // The history stores no account secrets; instance is disposed on principal change.
 export async function bindAuthenticatedNavigation(sb,win=window){

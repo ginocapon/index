@@ -2991,7 +2991,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 </div>
                 <div class="form-group form-full">
                   <div class="upload-zone" id="dropZoneDoc" onclick="document.getElementById('inputDoc').click()" ondragover="onDragOver(event)" ondragleave="onDragLeave(event,'dropZoneDoc')" ondrop="onDrop(event,'documenti')">
-                    <div class="upload-icon">📄</div>
+                    <div class="upload-icon" aria-hidden="true"><svg width="36" height="42" viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 1h11l5 5v21H4zM15 1v6h5M8 12h8M8 17h8M8 22h6"/></svg></div>
                     <div class="upload-label">Clicca o trascina i documenti</div>
                     <div class="upload-hint">PDF · DOC · DOCX · DXF · XLS — max 20MB per file</div>
                     <input type="file" id="inputDoc" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.dxf,.dwg,.zip,.ppt,.pptx" style="display:none" onchange="handleFiles(this.files,'documenti')">
@@ -3012,7 +3012,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                     <small style="color:var(--caffe2);font-size:0.72rem">ID 11 caratteri dopo <code>watch?v=</code> oppure incolla l’URL: in salvataggio viene estratto solo l’ID. Se il video non si vede, su YouTube Studio verifica che sia <strong>Pubblico</strong> e che incorporamento non sia disattivato.</small>
                   </div>
                   <div class="form-group form-full">
-                    <label>🌐 Virtual Tour URL (Idealista, Kuula, Matterport...)</label>
+                    <label>Virtual Tour URL (Idealista, Kuula, Matterport...)</label>
                     <input type="url" id="f_virtual_tour" placeholder="es. https://www.idealista.it/immobile/33318540/virtual-tour/1/">
                     <small style="color:var(--caffe2);font-size:0.72rem">
                       Incolla l'URL del virtual tour da Idealista → verrà mostrato nella scheda immobile in iframe a tutto schermo.<br>
@@ -5710,7 +5710,7 @@ function showSection(name) {if(name!=='nuovo'&&window.RighettoLabels&&!RighettoL
 
   const titles = {
     immobili: 'Gestione Immobili',
-    nuovo: 'Nuovo Immobile',
+    nuovo: document.getElementById('editId')?.value ? 'Modifica Immobile' : 'Nuovo Immobile',
     richieste: 'Richieste Clienti',
     posta: 'Posta',
     blog: 'Gestione Blog',
@@ -6645,6 +6645,7 @@ function contrattoAffittoResShortLabel(val) {
 }
 
 function resetForm() {
+ if(window.RighettoNavigation&&!RighettoNavigation.allowClose())return;
  if(window.RighettoLabels&&!RighettoLabels.dispose())return;
   if(rigPropertySaving){toast('Salvataggio in corso: attendi prima di azzerare la scheda.','error');return;}
   rigPropertySnapshot=null;
@@ -6657,6 +6658,7 @@ function resetForm() {
   renderFotos(); renderPlanimetrie(); renderDocumenti(); renderVtScenes();
   toggleContrattoAffittoRes();
   renderCatastoSetupPanel();
+  window.RighettoNavigation?.saved(document.getElementById('immobileForm'));
   showSection('nuovo');
 }
 
@@ -6827,6 +6829,7 @@ async function editImmobile(id,isCurrent=()=>true) {if(rigPropertySaving){toast(
   rigPropertySnapshot=null;
   document.getElementById('editId').value = imm.id;
   document.getElementById('formTitle').textContent = 'Modifica: ' + imm.titolo;
+  document.getElementById('topbarTitle').textContent = 'Modifica Immobile';
 
   const fields = ['codice','titolo','tipo_operazione','tipologia','prezzo',
     'proprietario_id','proprietario_nome','proprietario_tel','proprietario_email',
@@ -6884,14 +6887,16 @@ async function editImmobile(id,isCurrent=()=>true) {if(rigPropertySaving){toast(
   if (propSearch) {
     propSearch.value = imm.proprietario_nome || (imm.proprietario_id ? 'Cliente collegato' : '');
     if (imm.proprietario_id) {
+      const ownerLoadValues=new Map(['f_proprietario_search','f_proprietario_nome','f_proprietario_tel','f_proprietario_email'].map(id=>{const el=document.getElementById(id);return[el,el.value];}));
+      const hydrateOwner=(el,value)=>{const before=ownerLoadValues.get(el);if(el.value!==before)return;el.value=value;window.RighettoNavigation?.hydratedControl?.(el,before);};
       sb.from('clienti').select('id,nome,ragione_sociale,tipo_cliente,telefono,email').eq('id', imm.proprietario_id).maybeSingle()
         .then(({ data: c }) => {
-          if(String(document.getElementById('editId').value)!==String(imm.id)||String(document.getElementById('f_proprietario_id').value)!==String(imm.proprietario_id))return;
+          if(!current()||String(document.getElementById('editId').value)!==String(imm.id)||String(document.getElementById('f_proprietario_id').value)!==String(imm.proprietario_id))return;
           if (c) {
-            propSearch.value = proprietarioDisplayLabel(c);
-            document.getElementById('f_proprietario_nome').value = c.nome || c.ragione_sociale || '';
-            document.getElementById('f_proprietario_tel').value = c.telefono || imm.proprietario_tel || '';
-            document.getElementById('f_proprietario_email').value = c.email || imm.proprietario_email || '';
+            hydrateOwner(propSearch,proprietarioDisplayLabel(c));
+            hydrateOwner(document.getElementById('f_proprietario_nome'),c.nome || c.ragione_sociale || '');
+            hydrateOwner(document.getElementById('f_proprietario_tel'),c.telefono || imm.proprietario_tel || '');
+            hydrateOwner(document.getElementById('f_proprietario_email'),c.email || imm.proprietario_email || '');
           }
           renderProprietarioCard();
         });
@@ -6939,6 +6944,7 @@ async function editImmobile(id,isCurrent=()=>true) {if(rigPropertySaving){toast(
 
 async function saveImmobile(e) {
   e.preventDefault();
+  if(window.RighettoPropertyExtra?.pending()||window.RighettoPropertyReferences?.pending()||window.RighettoPropertyExtra?.dirty()||window.RighettoPropertyReferences?.dirty()){toast('Prima salva o scarta le modifiche nei campi aggiuntivi e nei riferimenti riservati. La bozza resta aperta.','error');return;}
   const btn = document.getElementById('btnSalva');
   if(btn.disabled||rigPropertySaving||window.RighettoLabels?.pending())return;
   let lockedControls=[];
@@ -7215,15 +7221,13 @@ async function saveImmobile(e) {
     currentFotos = []; currentPlanimetrie = []; currentDocumenti = []; currentVtScenes = []; currentUnitaCatastali = []; currentCatastoPdf = [];
     renderFotos(); renderPlanimetrie(); renderDocumenti(); renderVtScenes(); renderUnitaCatastali(); renderCatastoPdf(); renderCatastoSetupPanel();
     toggleContrattoAffittoRes();
+    window.RighettoNavigation?.saved(document.getElementById('immobileForm'));
     await loadImmobili();
     showSectionById('immobili');
 
-    // Auto-notify: controlla se ci sono clienti compatibili
-    if (!id && typeof emCheckAutoNotify === 'function') {
-      // Nuovo immobile — cerca matching automatico
-      const saved = allImmobili.find(x => x.titolo === payload.titolo && x.prezzo === payload.prezzo);
-      if (saved) emCheckAutoNotify(saved);
-    }
+    // Il salvataggio non prepara né propone comunicazioni ai clienti.
+    // Gli incroci interni restano disponibili con un'azione esplicita.
+
   }
   }catch(error){toast(error.message||'Salvataggio non concluso.','error');}finally{for(const x of lockedControls)x.el.disabled=x.disabled;rigPropertySaving=false;btn.disabled=false;btn.innerHTML='💾 Salva Immobile';}
 
@@ -18147,7 +18151,7 @@ msg('Attivit\u00e0: apri Attivit\u00e0 per caricare le pratiche.');window.rigSec
 <script src="js/admin-cliente-layout.js?v=20261031-clienti"></script>
 <script>window.RighettoNavigationAttachments=()=>({property:typeof currentFotos==='undefined'?null:[currentFotos,currentPlanimetrie,currentDocumenti,currentVtScenes,currentUnitaCatastali,currentCatastoPdf],client:typeof currentClienteDocumenti==='undefined'?null:currentClienteDocumenti});</script>
 <script type="module">
-import {bindAuthenticatedNavigation} from './js/auth-bootstrap.mjs';
+import {bindAuthenticatedNavigation} from './js/auth-bootstrap.mjs?v=20261106-owner-hydration';
 window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation(sb).catch(()=>{if(document.getElementById('navigation-startup-warning'))return;const n=document.createElement('p');n.id='navigation-startup-warning';n.setAttribute('role','status');n.textContent='Navigazione Indietro non disponibile in questa sessione. Usa il menu interno; i dati non sono stati modificati.';n.style.cssText='margin:12px;padding:12px;background:#fff3cc;color:#17324d';document.querySelector('.content')?.prepend(n);});});
 </script>
 <script src="js/admin-share-preview.js?v=20261103"></script>
@@ -18156,6 +18160,9 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script src="js/admin-client-matching.js"></script>
 <script src="js/admin-immobili-preview.js?v=20261106-fisarmonica"></script>
 <script src="js/admin-immobile-layout.js?v=20261106-scheda"></script>
+<script src="js/admin-immobile-cronistoria.js?v=20261106-cronistoria"></script>
+<script src="js/admin-immobile-dati-aggiuntivi.js?v=20261106-campi"></script>
+<script src="js/admin-immobile-riferimenti.js?v=20261106-riferimenti"></script>
 </body>
 </html>
 
