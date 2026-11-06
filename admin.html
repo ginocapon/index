@@ -5671,7 +5671,7 @@ async function init() {
 // ══════════════════════════════════════
 // NAVIGATION
 // ══════════════════════════════════════
-function showSection(name) {
+function showSection(name) {if(name!=='nuovo'&&window.RighettoLabels&&!RighettoLabels.dispose(!!window.RighettoNavigation?.replaying))return;
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   const sec = document.getElementById('sec-' + name);
@@ -6451,7 +6451,7 @@ function renderTable(data) {
       <td><span class="codice-cell">${i.codice || '—'}</span></td>
       <td>
         <div style="font-weight:600;font-size:0.85rem">${evidenza} ${i.titolo || '—'}</div>
-        <div style="color:var(--caffe2);font-size:0.75rem">${i.indirizzo || ''}</div>
+        <div style="color:var(--caffe2);font-size:0.75rem">${i.indirizzo || ''}</div><div data-property-label-host="${escHtml(i.id)}"></div>
       </td>
       <td style="white-space:nowrap">${i.comune || '—'}</td>
       <td>${tipo}${contrBadge}</td>
@@ -6499,6 +6499,7 @@ function renderTable(data) {
     </tr></thead>
     <tbody>${rows}</tbody>
   </table>`;
+  window.RighettoPropertyLabelView?.render();
 }
 
 // Ordinamento lista immobili: click su Codice, Comune, Prezzo, Superficie
@@ -6610,6 +6611,7 @@ function contrattoAffittoResShortLabel(val) {
 }
 
 function resetForm() {
+ if(window.RighettoLabels&&!RighettoLabels.dispose())return;
   if(rigPropertySaving){toast('Salvataggio in corso: attendi prima di azzerare la scheda.','error');return;}
   rigPropertySnapshot=null;
   document.getElementById('immobileForm').reset();
@@ -6898,12 +6900,13 @@ async function editImmobile(id,isCurrent=()=>true) {if(rigPropertySaving){toast(
   document.getElementById('topbarTitle').textContent = 'Modifica Immobile';
   window.scrollTo(0, 0);
   try{rigPropertySnapshot=RighettoPropertySafety.capturePropertyForm(imm,RighettoPropertySafety.readControls(document.getElementById('immobileForm')),rigPropertyMedia());}catch(error){toast(error.message,'error');}
+ window.RighettoLabels?.mount(imm);
 }
 
 async function saveImmobile(e) {
   e.preventDefault();
   const btn = document.getElementById('btnSalva');
-  if(btn.disabled||rigPropertySaving)return;
+  if(btn.disabled||rigPropertySaving||window.RighettoLabels?.pending())return;
   let lockedControls=[];
   try {
   const codiceInput = document.getElementById('f_codice');
@@ -7169,6 +7172,7 @@ async function saveImmobile(e) {
     }
   } else {
     toast(id ? 'Immobile aggiornato!' : 'Immobile creato!', 'success');
+ window.RighettoLabels?.dispose(true);
     document.getElementById('editId').value = '';
     document.getElementById('formTitle').textContent = 'Nuovo Immobile';
     document.getElementById('immobileForm').reset();
@@ -7323,9 +7327,10 @@ async function duplicateImmobile(id) {
   payload.attivo = false; // la copia nasce in bozza: non visibile sul sito finche non la attivi tu
   payload.documenti = []; // i documenti privati (planimetrie incluse) non si copiano: restano solo sull'originale
   payload.planimetrie = [];
+  payload.catasto_pdf = []; // I PDF catastali sono documenti privati: non ereditare i riferimenti.
   payload.note_interne = [full.note_interne, noteExtra].filter(Boolean).join('\n');
 
-  ['foto', 'foto_urls', 'virtual_tour_scenes', 'unita_catastali', 'catasto_pdf'].forEach(k => {
+  ['foto', 'foto_urls', 'virtual_tour_scenes', 'unita_catastali'].forEach(k => {
     if (payload[k] != null) payload[k] = JSON.parse(JSON.stringify(payload[k]));
   });
 
@@ -9323,7 +9328,7 @@ function renderClientiPages(){const box=document.getElementById('clientiPages');
 
 let clientiAuthEpoch=0;
 const selectedClienti=new Set();
-if(sb.auth?.onAuthStateChange)sb.auth.onAuthStateChange((event,session)=>{if(rigCataloguePrincipal&&session?.user?.id!==rigCataloguePrincipal){++rigCatalogueEpoch;rigCataloguePending?.controller.abort();rigCataloguePending=null;rigCataloguePrincipal=null;rigCatalogueKey=null;rigCatalogueRows=[];allImmobili=[];rigCatalogueReady=false;document.getElementById('immobiliTableWrap')?.replaceChildren();document.getElementById('rigCatalogueStatus')?.replaceChildren();window.dispatchEvent(new Event('righetto:catalogue-state'));}if(window.RighettoGatedPrincipal&&session?.user?.id!==window.RighettoGatedPrincipal){window.RighettoGatedPrincipal=null;document.getElementById('appWrapper').style.display='none';document.getElementById('loginOverlay').style.display='flex';location.reload();return;}if(event==='SIGNED_OUT'){clientiAuthEpoch++;selectedClienti.clear();updateClientiSelection();_clientiReqId++;allClienti=[];document.getElementById('clientiBody').replaceChildren();document.getElementById('clienteModal').classList.remove('open');document.querySelectorAll('#clienteModal input,#clienteModal textarea').forEach(e=>{if(e.type!=='radio'&&e.type!=='checkbox')e.value='';});document.getElementById('csvImportModal').classList.remove('open');csvParsedData=[];document.getElementById('clientiBulkModal')?.remove();}});
+if(sb.auth?.onAuthStateChange)sb.auth.onAuthStateChange((event,session)=>{if(session?.user?.id!==window.RighettoGatedPrincipal)window.RighettoLabels?.principalChanged();if(rigCataloguePrincipal&&session?.user?.id!==rigCataloguePrincipal){++rigCatalogueEpoch;rigCataloguePending?.controller.abort();rigCataloguePending=null;rigCataloguePrincipal=null;rigCatalogueKey=null;rigCatalogueRows=[];allImmobili=[];rigCatalogueReady=false;document.getElementById('immobiliTableWrap')?.replaceChildren();document.getElementById('rigCatalogueStatus')?.replaceChildren();window.dispatchEvent(new Event('righetto:catalogue-state'));}if(window.RighettoGatedPrincipal&&session?.user?.id!==window.RighettoGatedPrincipal){window.RighettoGatedPrincipal=null;document.getElementById('appWrapper').style.display='none';document.getElementById('loginOverlay').style.display='flex';location.reload();return;}if(event==='SIGNED_OUT'){window.RighettoLabels?.principalChanged();clientiAuthEpoch++;selectedClienti.clear();updateClientiSelection();_clientiReqId++;allClienti=[];document.getElementById('clientiBody').replaceChildren();document.getElementById('clienteModal').classList.remove('open');document.querySelectorAll('#clienteModal input,#clienteModal textarea').forEach(e=>{if(e.type!=='radio'&&e.type!=='checkbox')e.value='';});document.getElementById('csvImportModal').classList.remove('open');csvParsedData=[];document.getElementById('clientiBulkModal')?.remove();}});
 function toggleClientiSelection(id,on){on?selectedClienti.add(id):selectedClienti.delete(id);updateClientiSelection();}
 function selectClientiPage(on){allClienti.forEach(c=>on?selectedClienti.add(c.id):selectedClienti.delete(c.id));document.querySelectorAll('[data-client-select]').forEach(e=>e.checked=on);updateClientiSelection();}
 function updateClientiSelection(){const all=document.getElementById('clientiSelectPage');if(all){const n=allClienti.filter(c=>selectedClienti.has(c.id)).length;all.checked=n>0&&n===allClienti.length;all.indeterminate=n>0&&n<allClienti.length;}const counter=document.getElementById('clientiSelectionCount');if(counter)counter.textContent=selectedClienti.size+' selezionati';}
@@ -18093,6 +18098,7 @@ window.showSection('home');
 <script src="js/admin-agenda.js?v=20261102-back"></script>
 <script src="js/admin-cliente-scheda.js?v=20261102-back"></script>
 <script src="js/admin-private-photos.js?v=LP0290-private-1"></script>
+<script src="js/admin-immobile-etichette.js?v=20261106-local"></script>
 <script src="js/admin-immobile-operazioni.js?v=LP0290-private-1"></script>
 <script src="js/admin-immobile-stampe.js?v=LP0291-stampe-2"></script>
 <script src="js/admin-immobile-inquilini.js?v=LP0292-inquilini-1"></script>
