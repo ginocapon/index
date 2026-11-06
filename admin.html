@@ -9501,15 +9501,18 @@ async function uploadClienteDocumenti(files) {
 }
 
 function renderClienteDocumenti() {
-  const wrap = document.getElementById('clienteDocumentiList');
-  if (!currentClienteDocumenti.length) { wrap.innerHTML = ''; return; }
-  wrap.innerHTML = currentClienteDocumenti.map((d, i) => {
-    const icon = ['jpg','jpeg','png','webp'].includes(d.tipo) ? '🖼️' : '📄';
-    return `<div style="display:flex;align-items:center;gap:6px;background:var(--sfondo);padding:4px 10px;border-radius:6px;font-size:0.76rem">
-      ${icon} <a href="${d.url}" target="_blank" style="color:var(--nero);text-decoration:underline">${escHtml(d.nome)}</a>
-      <button type="button" onclick="removeClienteDoc(${i})" style="background:none;border:none;color:var(--rosso);cursor:pointer;font-size:0.8rem">&times;</button>
-    </div>`;
-  }).join('');
+  const wrap = document.getElementById('clienteDocumentiList');wrap.replaceChildren();
+  const docs=Array.isArray(currentClienteDocumenti)?currentClienteDocumenti:[];
+  docs.forEach((raw,i)=>{
+    const d=raw&&typeof raw==='object'?raw:{};
+    const row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:6px;background:var(--sfondo);padding:4px 10px;border-radius:6px;font-size:0.76rem;max-width:100%;overflow-wrap:anywhere';
+    const icon=document.createElement('span');icon.textContent=['jpg','jpeg','png','webp'].includes(d.tipo)?'🖼️':'📄';row.append(icon);
+    let url=null;try{if(typeof d.url!=='string'||!d.url.trim())throw 0;const u=new URL(d.url,location.href);if(!['https:','http:'].includes(u.protocol)||u.username||u.password)throw 0;url=u.href;}catch(e){}
+    const name=document.createElement(url?'a':'span');name.textContent=typeof d.nome==='string'&&d.nome?d.nome:'Documento';
+    if(url){name.href=url;name.target='_blank';name.rel='noopener noreferrer';name.style.cssText='color:var(--nero);text-decoration:underline';}row.append(name);
+    if(!url){const note=document.createElement('span');note.textContent='Collegamento non valido';note.setAttribute('role','status');row.append(note);}
+    const remove=document.createElement('button');remove.type='button';remove.textContent='×';remove.setAttribute('aria-label','Rimuovi allegato '+name.textContent);remove.style.cssText='background:none;border:none;color:var(--rosso);cursor:pointer;font-size:0.8rem';remove.addEventListener('click',()=>removeClienteDoc(i));row.append(remove);wrap.append(row);
+  });
 }
 
 function removeClienteDoc(idx) {
@@ -18161,7 +18164,7 @@ window.showSection('home');
 <script src="js/agenda-event-types.js?v=1"></script>
 <script>window.RIGHETTO_SYNC_ATTIVA=true;</script>
 <script src="js/admin-agenda.js?v=20261102-back"></script>
-<script src="js/admin-cliente-scheda.js?v=20261106-1954"></script>
+<script src="js/admin-cliente-scheda.js?v=20261106-2005"></script>
 <script src="js/admin-private-photos.js?v=LP0290-private-1"></script>
 <script src="js/admin-immobile-etichette.js?v=20261106-local"></script>
 <script src="js/admin-immobile-operazioni.js?v=20261106-catasto"></script>
