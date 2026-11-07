@@ -109,12 +109,47 @@ body:has(#clientiBulkModal.open) .rh-menu-top{z-index:0!important;pointer-events
 
 #sec-clienti .client-ops svg{display:block;width:16px;height:16px;flex:0 0 16px}#sec-clienti .client-ops button:last-child{color:#c32222!important}
 
-/* 7 novembre: lista clienti al 150%, senza modificare schede o dati. */
-#sec-clienti #clientiTable{zoom:1.5;width:66.6666667%}
-
-#sec-clienti #clientiTable .client-ops{display:grid;grid-template-columns:repeat(5,32px);gap:4px;width:max-content}
-#sec-clienti #clientiTable .client-ops button{box-sizing:border-box;width:32px;min-width:32px;height:28px;min-height:28px!important;padding:0!important;border:1px solid #cad7d0!important;border-radius:4px!important;background:#edf4f8!important;color:#005691!important}
+/* Riduzione del 25% rispetto alla tabella 150% e larghezza fluida. */
+#sec-clienti>.table-wrap{container-type:inline-size}
+#sec-clienti #clientiTable{zoom:1;width:100%;min-width:0;table-layout:fixed}
+#sec-clienti #clientiTable th{font-size:12.375px;line-height:1.4;white-space:normal;overflow-wrap:normal}
+#sec-clienti #clientiTable td{font-size:13.5px;line-height:20.25px!important;min-width:0!important;max-width:none!important;overflow-wrap:anywhere;white-space:normal}
+#sec-clienti #clientiTable .client-contacts{font-size:13.5px;margin-left:9px}
+#sec-clienti #clientiTable input[type=checkbox]{width:13.5px;height:13.5px}
+#sec-clienti #clientiTable .phone-tools{margin-left:8px;word-spacing:3px}
+#sec-clienti #clientiTable th:nth-child(1){width:2%}
+#sec-clienti #clientiTable th:nth-child(2){width:22%}
+#sec-clienti #clientiTable th:nth-child(3){width:8%}
+#sec-clienti #clientiTable th:nth-child(4){width:4%}
+#sec-clienti #clientiTable th:nth-child(5){width:5%}
+#sec-clienti #clientiTable th:nth-child(6){width:7%}
+#sec-clienti #clientiTable th:nth-child(7){width:4%}
+#sec-clienti #clientiTable th:nth-child(8){width:6%}
+#sec-clienti #clientiTable th:nth-child(9),#sec-clienti #clientiTable th:nth-child(10),#sec-clienti #clientiTable th:nth-child(11){width:6%}
+#sec-clienti #clientiTable th:nth-child(12){width:4%}
+#sec-clienti #clientiTable th:nth-child(13){width:20%}
+#sec-clienti #clientiTable .client-ops{display:grid;grid-template-columns:repeat(5,minmax(27px,1fr));gap:4px;width:100%}
+#sec-clienti #clientiTable .client-ops button{box-sizing:border-box;min-width:0;width:100%;height:31.5px;min-height:31.5px!important;padding:0!important;border:1px solid #cad7d0!important;border-radius:4px!important;background:#edf4f8!important;color:#005691!important}
+#sec-clienti #clientiTable .client-ops svg{width:18px;height:18px;flex:0 0 18px}
 #sec-clienti #clientiTable .client-ops button:nth-child(1),#sec-clienti #clientiTable .client-ops button:nth-child(4){background:#e8f1e1!important}
 #sec-clienti #clientiTable .client-ops button:nth-child(8){background:#cde4d6!important;color:#d4663f!important}
 #sec-clienti #clientiTable .client-ops button:last-child{background:#f8dddd!important;color:#c32222!important}
 #sec-clienti #clientiTable .client-ops button:disabled{opacity:.45!important;cursor:not-allowed}
+@container(max-width:1200px){
+ #sec-clienti #clientiTable,#sec-clienti #clientiTable tbody{display:block;width:100%}
+ #sec-clienti #clientiTable thead{display:block;background:#e7f0eb;padding:6px;margin-bottom:10px}
+ #sec-clienti #clientiTable thead tr{display:flex}
+ #sec-clienti #clientiTable thead th{display:none;width:auto!important}
+ #sec-clienti #clientiTable thead th:first-child{display:block}
+ #sec-clienti #clientiTable tbody tr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid #cbd8d0;border-radius:6px;margin-bottom:12px;padding:8px;gap:4px}
+ #sec-clienti #clientiTable td{display:block;padding:6px!important}
+ #sec-clienti #clientiTable td:first-child{grid-column:1/-1;padding:0 6px!important}
+ #sec-clienti #clientiTable td:nth-child(2){grid-column:span 2}
+ #sec-clienti #clientiTable td:nth-child(13){grid-column:span 2}
+ #sec-clienti #clientiTable .client-ops{max-width:280px}
+ #sec-clienti #clientiTable td:not(:first-child)::before{content:attr(data-client-column);display:block;font-size:11px;font-weight:600;color:#4f765f;margin-bottom:4px;line-height:1.4}
+}
+@container(max-width:600px){
+ #sec-clienti #clientiTable tbody tr{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #sec-clienti #clientiTable td:nth-child(2),#sec-clienti #clientiTable td:nth-child(13){grid-column:1/-1}
+}
