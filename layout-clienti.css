@@ -108,3 +108,13 @@ body:has(#clientiBulkModal.open) .rh-menu-top{z-index:0!important;pointer-events
 #sec-clienti .client-ops button{font:16px/1 Arial,sans-serif;flex:0 0 18px;width:18px;min-width:18px;outline-offset:2px}#sec-clienti .client-ops button:focus-visible{outline:2px solid #005691}#sec-clienti .client-ops button:disabled{opacity:.45!important}
 
 #sec-clienti .client-ops svg{display:block;width:16px;height:16px;flex:0 0 16px}#sec-clienti .client-ops button:last-child{color:#c32222!important}
+
+/* 7 novembre: lista clienti al 150%, senza modificare schede o dati. */
+#sec-clienti #clientiTable{zoom:1.5;width:66.6666667%}
+
+#sec-clienti #clientiTable .client-ops{display:grid;grid-template-columns:repeat(5,32px);gap:4px;width:max-content}
+#sec-clienti #clientiTable .client-ops button{box-sizing:border-box;width:32px;min-width:32px;height:28px;min-height:28px!important;padding:0!important;border:1px solid #cad7d0!important;border-radius:4px!important;background:#edf4f8!important;color:#005691!important}
+#sec-clienti #clientiTable .client-ops button:nth-child(1),#sec-clienti #clientiTable .client-ops button:nth-child(4){background:#e8f1e1!important}
+#sec-clienti #clientiTable .client-ops button:nth-child(8){background:#cde4d6!important;color:#d4663f!important}
+#sec-clienti #clientiTable .client-ops button:last-child{background:#f8dddd!important;color:#c32222!important}
+#sec-clienti #clientiTable .client-ops button:disabled{opacity:.45!important;cursor:not-allowed}
