@@ -172,7 +172,7 @@ async function open(id,tab){
 
  let events=[];let page=0;let loading=false;let pendingHistory=null;
  const el=thisBox.querySelector('[data-cron]');
- const pending=document.createElement('section');el.before(pending);const pendingPrincipal=window.RighettoGatedPrincipal;import('./whatsapp-pending-ui.mjs?v=20261107-simple-v2').then(m=>m.mountPending({host:pending,db:sb,principal:pendingPrincipal,visibleEventIds:()=>events.map(e=>e.id),scope:{clientId:c.id},alive:()=>box===thisBox&&thisBox.isConnected&&window.RighettoGatedPrincipal===pendingPrincipal})).then(handle=>{if(box===thisBox)pendingHistory=handle;}).catch(()=>{if(pending.isConnected)pending.textContent='Richieste WhatsApp pendenti non leggibili. Non equivale a nessuna richiesta.';});
+ const pending=document.createElement('section');el.before(pending);const pendingPrincipal=window.RighettoGatedPrincipal;import('./whatsapp-pending-ui.mjs?v=20261107-simple-v3').then(m=>m.mountPending({host:pending,db:sb,principal:pendingPrincipal,visibleEventIds:()=>events.map(e=>e.id),scope:{clientId:c.id},alive:()=>box===thisBox&&thisBox.isConnected&&window.RighettoGatedPrincipal===pendingPrincipal})).then(handle=>{if(box===thisBox)pendingHistory=handle;}).catch(()=>{if(pending.isConnected)pending.textContent='Richieste WhatsApp pendenti non leggibili. Non equivale a nessuna richiesta.';});
  const loadPage=async()=>{
  if(loading||epoch!==openEpoch||box!==thisBox)return;loading=true;
  const status=thisBox.querySelector('[data-history-status]');if(status)status.textContent='Caricamento eventi…';
