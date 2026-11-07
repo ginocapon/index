@@ -18189,14 +18189,15 @@ import {bindAuthenticatedNavigation} from './js/auth-bootstrap.mjs?v=20261107-cl
 window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation(sb).catch(()=>{if(document.getElementById('navigation-startup-warning'))return;const n=document.createElement('p');n.id='navigation-startup-warning';n.setAttribute('role','status');n.textContent='Navigazione Indietro non disponibile in questa sessione. Usa il menu interno; i dati non sono stati modificati.';n.style.cssText='margin:12px;padding:12px;background:#fff3cc;color:#17324d';document.querySelector('.content')?.prepend(n);});});
 </script>
 <script src="js/admin-share-preview.js?v=20261103"></script>
-<script src="js/admin-client-whatsapp.js?v=20261107-export"></script>
+<script src="js/vendor/libphonenumber-max.js?v=20261107-personale-v1"></script>
+<script src="js/admin-client-whatsapp.js?v=20261107-personale-v1"></script>
 <script src="js/admin-wa-property-selection.js?v=20261107-export"></script>
 <script src="js/admin-cliente-comunicazioni.js?v=20261107-whatsapp"></script>
 <script src="js/admin-cliente-documenti.js?v=20261106-1038"></script>
 <script src="js/admin-client-matching.js"></script>
 <script src="js/admin-immobili-preview.js?v=20261106-fisarmonica"></script>
 <script src="js/admin-immobile-layout.js?v=20261106-scheda"></script>
-<script src="js/admin-immobile-cronistoria.js?v=20261106-cronistoria"></script>
+<script src="js/admin-immobile-cronistoria.js?v=20261107-personale-v1"></script>
 <script src="js/admin-immobile-dati-aggiuntivi.js?v=20261106-campi"></script>
 <script src="js/admin-immobile-riferimenti.js?v=20261106-riferimenti"></script>
 </body>

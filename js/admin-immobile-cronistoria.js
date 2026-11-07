@@ -1,4 +1,4 @@
-/* Cronistoria immobile: sola lettura degli eventi collegati tramite property_id. */
+/* CANDIDATE: current native property_id history. Existing authenticated read, no new relation RPC. */
 (function(){
 'use strict';
 const fields='id,source_id,starts_at,ends_at,type_id,agents,title,notes_internal,client_id,property_id,done,personal,highlight';
@@ -35,7 +35,7 @@ async function load(reset=false){
   await verify(ticket);const n=reset?0:page;
   const result=await sb.from('agenda_events').select(fields).eq('property_id',property).is('deleted_at',null).order('starts_at',{ascending:false}).order('id',{ascending:true}).range(n*100,n*100+99);
   await verify(ticket);if(result.error||!Array.isArray(result.data))throw Error(result.error?.message||'Risposta non verificata');
-  if(result.data.some(r=>r.property_id!==property||!r.id||!r.starts_at))throw Error('Collegamento evento non verificato');
+  if(result.data.some(r=>!r.id||!r.starts_at||r.property_id!==property))throw Error('Collegamento evento non verificato');
   if(reset)rows=[];const known=new Set(rows.map(r=>r.id));for(const r of result.data)if(!known.has(r.id)){rows.push(r);known.add(r.id);}
   page=n+1;more=result.data.length===100;status.textContent='Sono mostrate le attività presenti nel nuovo gestionale.';draw();
  }catch(e){if(ticket===epoch){if(reset){rows=[];panel.querySelector('[data-ich-list]').replaceChildren();panel.querySelector('[data-ich-count]').textContent='';panel.querySelector('[data-ich-more]').hidden=true;}status.textContent='Lettura non verificata: '+e.message+'. Non equivale a nessun evento.';}}
