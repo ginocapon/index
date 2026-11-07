@@ -153,3 +153,14 @@ body:has(#clientiBulkModal.open) .rh-menu-top{z-index:0!important;pointer-events
  #sec-clienti #clientiTable tbody tr{grid-template-columns:repeat(2,minmax(0,1fr))}
  #sec-clienti #clientiTable td:nth-child(2),#sec-clienti #clientiTable td:nth-child(13){grid-column:1/-1}
 }
+
+/* Evidenza e apertura scheda in visualizzazione dalla riga cliente. */
+#sec-clienti #clientiTable tbody tr[data-client-view]{cursor:pointer}
+#sec-clienti #clientiTable tbody tr[data-client-view]:hover,#sec-clienti #clientiTable tbody tr[data-client-view]:focus-visible{background:#cde6b8!important}
+#sec-clienti #clientiTable tbody tr[data-client-view]:focus-visible{outline:2px solid #174d3b;outline-offset:-2px}
+
+#sec-clienti #clientiTable .client-ops{grid-template-columns:repeat(4,minmax(27px,1fr))}
+#sec-clienti #clientiTable .client-ops button:nth-child(n){background:#edf4f8!important;color:#005691!important}
+#sec-clienti #clientiTable .client-ops button[title^="Immobili collegati"]{background:#e8f1e1!important}
+#sec-clienti #clientiTable .client-ops button[title="Modifica cliente"]{background:#cde4d6!important;color:#d4663f!important}
+#sec-clienti #clientiTable .client-ops button:last-child{background:#f8dddd!important;color:#c32222!important}
