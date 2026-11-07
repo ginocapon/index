@@ -1,0 +1,2 @@
+export function draftNote(r){const d=new Date(r.created_at);if(!Number.isFinite(d.getTime()))throw Error('Invalid saved timestamp');return 'WhatsApp DA INVIARE\nTesto salvato il '+d.toISOString()+' (UTC)\n'+r.message;}
+export function savedLabel(r){const at=r.source_payload?.draft_saved_at;if(!r.source_payload?.draft_workflow||!Number.isFinite(Date.parse(at)))return '';return 'Testo salvato il '+new Date(at).toLocaleString('it-IT',{timeZone:'Europe/Rome',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'});}

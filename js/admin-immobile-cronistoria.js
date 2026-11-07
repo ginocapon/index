@@ -1,6 +1,7 @@
 /* CANDIDATE: current native property_id history. Existing authenticated read, no new relation RPC. */
 (function(){
 'use strict';
+let pendingHandle=null;
 const fields='id,source_id,starts_at,ends_at,type_id,agents,title,notes_internal,client_id,property_id,done,personal,highlight';
 let panel,id=null,principal=null,epoch=0,rows=[],busy=false,page=0,more=true,filter='',query='';
 const el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
@@ -37,7 +38,7 @@ async function load(reset=false){
   await verify(ticket);if(result.error||!Array.isArray(result.data))throw Error(result.error?.message||'Risposta non verificata');
   if(result.data.some(r=>!r.id||!r.starts_at||r.property_id!==property))throw Error('Collegamento evento non verificato');
   if(reset)rows=[];const known=new Set(rows.map(r=>r.id));for(const r of result.data)if(!known.has(r.id)){rows.push(r);known.add(r.id);}
-  page=n+1;more=result.data.length===100;status.textContent='Sono mostrate le attività presenti nel nuovo gestionale.';draw();
+  page=n+1;more=result.data.length===100;status.textContent='Sono mostrate le attività presenti nel nuovo gestionale.';draw();pendingHandle?.refresh();
  }catch(e){if(ticket===epoch){if(reset){rows=[];panel.querySelector('[data-ich-list]').replaceChildren();panel.querySelector('[data-ich-count]').textContent='';panel.querySelector('[data-ich-more]').hidden=true;}status.textContent='Lettura non verificata: '+e.message+'. Non equivale a nessun evento.';}}
  finally{if(ticket===epoch){busy=false;panel.querySelector('[data-ich-reload]').disabled=false;panel.querySelector('[data-ich-more]').disabled=false;}}
 }
@@ -52,7 +53,7 @@ function mount(){
  const search=el('input');search.type='search';search.placeholder='Cerca nei testi caricati';search.setAttribute('aria-label','Cerca negli eventi caricati');search.oninput=()=>{query=search.value.trim().toLocaleLowerCase('it');draw();};bar.append(reload,type,search);panel.append(bar);
  const status=el('p','Premi Leggi eventi collegati per consultare le attività presenti nel nuovo gestionale.');status.dataset.ichStatus='';status.setAttribute('role','status');
  const count=el('p');count.dataset.ichCount='';const list=el('div');list.dataset.ichList='';
- const nextButton=el('button','Carica 100 eventi precedenti');nextButton.type='button';nextButton.dataset.ichMore='';nextButton.hidden=true;nextButton.onclick=()=>load();panel.append(status,count,list,nextButton);
+ const nextButton=el('button','Carica 100 eventi precedenti');nextButton.type='button';nextButton.dataset.ichMore='';nextButton.hidden=true;nextButton.onclick=()=>load();panel.append(status,count,list,nextButton);const pending=document.createElement('section');panel.append(pending);const ticket=epoch,property=id,pendingUid=principal;import('./whatsapp-pending-ui.mjs?v=20261107-simple-v2').then(m=>m.mountPending({host:pending,db:sb,principal:pendingUid,visibleEventIds:()=>rows.map(e=>e.id),scope:{propertyId:property},alive:()=>ticket===epoch&&pending.isConnected&&id===property&&principal===pendingUid})).then(handle=>{if(ticket===epoch)pendingHandle=handle;}).catch(()=>{if(ticket===epoch&&pending.isConnected)pending.textContent='Richieste WhatsApp pendenti non leggibili. Non equivale a nessuna richiesta.';});
 }
 const style=el('style');style.textContent='#ril-panel-cronistoria:not([hidden]){display:block}.ich-bar{display:flex;flex-wrap:wrap;gap:8px}.ich-bar input,.ich-bar select{max-width:100%;min-height:42px;padding:8px;border:1px solid #abc2cf}.ich-event{border:1px solid #cbdce5;border-left:6px solid #005b80;padding:12px;margin:12px 0;background:#fff}.ich-event h4{margin:0 0 8px}.ich-event p{margin:6px 0;overflow-wrap:anywhere}.ich-note{white-space:pre-wrap}.ril-panel button{cursor:pointer}.ich-bar button,.ich-event button,[data-ich-more]{min-height:42px;padding:8px 12px;color:#17324d;border:1px solid #91b5c8;background:#edf6fa}';document.head.append(style);
 const observer=new MutationObserver(mount);observer.observe(document.body,{childList:true,subtree:true});mount();
