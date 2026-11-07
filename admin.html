@@ -6234,63 +6234,60 @@ async function maybePromptProprietariClientiSync() {
 }
 
 
-// ═══ DOCUMENTI IMMOBILE (PDF in archivio privato, via funzione docs-immobili, solo admin) ═══
-async function _docsCall(payload) {
-  const { data: sess } = await sb.auth.getSession();
-  const tk = sess && sess.session ? sess.session.access_token : '';
-  return fetch(SUPABASE_URL + '/functions/v1/docs-immobili', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + tk, 'apikey': SUPABASE_KEY },
-    body: JSON.stringify(payload)
-  });
-}
+// Documenti immobili: lettura privata, stato separato per scheda e selezione.
+let rigDocsContext = null;
 function closeDocsImmobile() {
-  const m = document.getElementById('docsImmModal'); if (m) m.remove();
-  if (window._docsBlobUrl) { URL.revokeObjectURL(window._docsBlobUrl); window._docsBlobUrl = null; }
+  const c=rigDocsContext;rigDocsContext=null;
+  if(c){c.generation++;c.pdfTask?.destroy();if(c.url)URL.revokeObjectURL(c.url);c.observer?.disconnect();c.authSubscription?.unsubscribe();c.modal.remove();}
+  window._docsFiles=[];window._docsCur=null;window._docsBlobUrl=null;
 }
-async function openDocsImmobile(codice) {
-  if (!codice) { alert('Questo immobile non ha un codice.'); return; }
+function rigDocsCurrent(c) {
+  return rigDocsContext===c&&c.modal.isConnected&&window.RighettoGatedPrincipal===c.principal&&
+    (allImmobili||[]).some(i=>String(i.id)===c.id&&i.codice===c.code);
+}
+async function _docsCall(payload,c) {
+  const auth=await sb.auth.getSession();
+  if(!rigDocsCurrent(c)||auth.error||auth.data?.session?.user?.id!==c.principal)throw Error('Scheda o account cambiato.');
+  return fetch(SUPABASE_URL+'/functions/v1/docs-immobili',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+auth.data.session.access_token,apikey:SUPABASE_KEY},body:JSON.stringify(payload)});
+}
+async function openDocsImmobile(codice,immobileId) {
   closeDocsImmobile();
-  const m = document.createElement('div');
-  m.id = 'docsImmModal';
-  m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:12px';
-  m.innerHTML = '<div style="background:#fff;border-radius:12px;width:min(980px,100%);height:min(90vh,900px);display:flex;flex-direction:column;overflow:hidden">'
-    + '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #eee"><strong>Documenti ' + escHtml(codice) + '</strong>'
-    + '<div style="display:flex;gap:8px"><button id="docsImmDl" class="btn btn-primary btn-sm" style="background:#2d7a3a;color:#fff;font-weight:700;padding:10px 16px;min-height:44px" onclick="downloadDocImmobile()" disabled>⬇ Scarica</button>'
-    + '<button class="btn btn-secondary btn-sm" style="min-height:44px" onclick="closeDocsImmobile()">Chiudi</button></div></div>'
-    + '<div style="display:flex;flex:1;min-height:0;flex-direction:' + (window.innerWidth < 700 ? 'column' : 'row') + '"><div id="docsImmList" style="' + (window.innerWidth < 700 ? 'max-height:30%;border-bottom:1px solid #eee' : 'width:280px;border-right:1px solid #eee') + ';overflow:auto;padding:10px;font-size:.85rem;flex:none">Carico...</div>'
-    + '<div style="flex:1;min-width:0;min-height:0"><iframe id="docsImmFrame" style="width:100%;height:100%;border:0" title="Anteprima PDF"></iframe></div></div></div>';
-  document.body.appendChild(m);
-  const list = document.getElementById('docsImmList');
-  try {
-    const r = await _docsCall({ codice });
-    const d = await r.json();
-    if (!r.ok) { list.textContent = d.error || 'Errore'; return; }
-    if (!d.files.length) { list.textContent = 'Nessun documento per questo immobile.'; return; }
-    window._docsFiles = d.files;
-    list.innerHTML = d.files.map((f, n) => '<button class="btn btn-secondary btn-sm" style="display:block;width:100%;text-align:left;margin-bottom:6px;white-space:normal" onclick="viewDocImmobile(\'' + codice.replace(/'/g, '') + '\',' + n + ')">📄 ' + escHtml(f.name) + ' <small>(' + Math.round(f.size / 1024) + ' KB)</small></button>').join('');
-    viewDocImmobile(codice, 0);
-  } catch (e) { list.textContent = 'Errore di connessione'; }
+  const matches=(allImmobili||[]).filter(i=>i.codice===codice&&(!immobileId||String(i.id)===String(immobileId)));
+  if(!codice||matches.length!==1||!window.RighettoGatedPrincipal){alert('Identità immobile non verificata. Riapri la scheda dall’elenco aggiornato.');return;}
+  if((allImmobili||[]).filter(i=>i.codice===codice).length!==1){alert('Codice presente su più immobili: documenti non aperti per evitare associazioni errate.');return;}
+  const m=document.createElement('div');m.id='docsImmModal';m.style.cssText='position:fixed;inset:0;background:#183149a0;z-index:15000;padding:12px;display:flex;align-items:center;justify-content:center';
+  m.innerHTML='<div style="background:white;border-radius:12px;width:min(100%,1080px);height:92vh;display:flex;flex-direction:column;overflow:hidden"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:12px;border-bottom:1px solid #ddd"><strong style="flex:1;overflow-wrap:anywhere">Documenti '+escHtml(codice)+'</strong><button id="docsImmDl" disabled>Scarica</button><button id="docsImmClose">Chiudi</button></div><div id="docsImmLayout" style="display:flex;flex:1;min-height:0"><div id="docsImmList" style="width:260px;overflow:auto;padding:10px;flex:none;box-sizing:border-box">Caricamento elenco privato…</div><div style="display:flex;flex:1;min-width:0;min-height:0;flex-direction:column;padding:10px"><p id="docsImmStatus" role="status" style="margin:0 0 10px;overflow-wrap:anywhere">Seleziona un documento.</p><div id="docsImmControls" style="display:flex;flex-wrap:wrap;gap:6px"></div><div id="docsImmView" style="flex:1;min-height:0;overflow:auto"></div></div></div></div>';
+  document.body.append(m);m.querySelectorAll('button').forEach(b=>{b.type='button';b.style.cssText='padding:9px 12px;min-height:40px;border:1px solid #b7c8d8;background:#f4f7fa;border-radius:7px;cursor:pointer';});
+  if(innerWidth<700){m.querySelector('#docsImmLayout').style.flexDirection='column';const l=m.querySelector('#docsImmList');l.style.width='100%';l.style.maxHeight='26%';}
+  const c={modal:m,id:String(matches[0].id),code:codice,principal:window.RighettoGatedPrincipal,generation:0,files:[],url:null,current:null,pdfTask:null};rigDocsContext=c;
+  m.querySelector('#docsImmClose').onclick=closeDocsImmobile;m.querySelector('#docsImmDl').onclick=downloadDocImmobile;
+  c.observer=new MutationObserver(()=>{if(rigDocsContext===c&&!rigDocsCurrent(c))closeDocsImmobile();});c.observer.observe(document.body,{subtree:true,childList:true});
+  c.authSubscription=sb.auth.onAuthStateChange?.((_event,session)=>{if(rigDocsContext===c&&session?.user?.id!==c.principal)closeDocsImmobile();})?.data?.subscription;
+  try{const r=await _docsCall({codice},c),d=await r.json();if(!rigDocsCurrent(c))return;if(!r.ok||!Array.isArray(d.files))throw Error(d.error||'Elenco non verificato.');c.files=d.files;const l=m.querySelector('#docsImmList');l.replaceChildren();if(!c.files.length){l.textContent='Nessun documento presente in questo archivio.';return;}
+    c.files.forEach((f,n)=>{const b=document.createElement('button');b.type='button';b.textContent=f.name+' · '+Math.ceil(f.size/1024)+' KB';b.style.cssText='display:block;width:100%;margin-bottom:7px;padding:10px;text-align:left;overflow-wrap:anywhere;white-space:normal;border:1px solid #bccbd5;border-radius:7px;background:#f4f7fa';b.onclick=()=>viewDocImmobile(codice,n);l.append(b);});await viewDocImmobile(codice,0);
+  }catch(e){if(rigDocsCurrent(c))m.querySelector('#docsImmList').textContent=e.message;}
 }
-function downloadDocImmobile() {
-  const c = window._docsCur; if (!c) return;
-  const a = document.createElement('a');
-  a.href = c.url; a.download = c.name;
-  document.body.appendChild(a); a.click(); a.remove();
+async function downloadDocImmobile() {
+  const c=rigDocsContext;if(!c||!c.current||!rigDocsCurrent(c))return;const selection=c.generation,button=c.modal.querySelector('#docsImmDl');button.disabled=true;
+  try{const u=await sb.auth.getUser();if(!rigDocsCurrent(c)||selection!==c.generation||u.error||u.data?.user?.id!==c.principal)throw Error('Sessione cambiata: riapri il documento.');const a=document.createElement('a');a.href=c.current.url;a.download=c.current.name;document.body.append(a);a.click();a.remove();}
+  catch(e){if(rigDocsCurrent(c))c.modal.querySelector('#docsImmStatus').textContent=e.message;}
+  finally{if(rigDocsCurrent(c)&&selection===c.generation)button.disabled=!c.current;}
 }
-async function viewDocImmobile(codice, n) {
-  const f = (window._docsFiles || [])[n]; if (!f) return;
-  const fr = document.getElementById('docsImmFrame');
-  try {
-    const r = await _docsCall({ codice, file: f.name });
-    if (!r.ok) { alert('Impossibile aprire il documento'); return; }
-    const blob = await r.blob();
-    if (window._docsBlobUrl) URL.revokeObjectURL(window._docsBlobUrl);
-    window._docsBlobUrl = URL.createObjectURL(blob);
-    fr.src = window._docsBlobUrl;
-    window._docsCur = { url: window._docsBlobUrl, name: f.name.replace(/^\d{1,4}[-_ ]+/, '') };
-    const dl = document.getElementById('docsImmDl'); if (dl) dl.disabled = false;
-  } catch (e) { alert('Errore di connessione'); }
+async function viewDocImmobile(codice,n) {
+  const c=rigDocsContext;if(!c||!rigDocsCurrent(c)||c.code!==codice||!c.files[n])return;
+  const f=c.files[n],generation=++c.generation,current=()=>rigDocsCurrent(c)&&c.generation===generation;
+  c.pdfTask?.destroy();c.pdfTask=null;if(c.url)URL.revokeObjectURL(c.url);c.url=null;c.current=null;
+  const dl=c.modal.querySelector('#docsImmDl'),msg=c.modal.querySelector('#docsImmStatus'),view=c.modal.querySelector('#docsImmView'),controls=c.modal.querySelector('#docsImmControls');dl.disabled=true;view.replaceChildren();controls.replaceChildren();msg.textContent='Apertura '+f.name+'…';
+  try{const r=await _docsCall({codice,file:f.name},c);if(!current())return;if(!r.ok)throw Error('Documento non leggibile.');const blob=await r.blob();if(!current())return;if(!blob.size)throw Error('Documento vuoto.');if(Number(f.size)>0&&blob.size!==Number(f.size))throw Error('Dimensione documento cambiata. Riapri l’elenco.');const bytes=new Uint8Array(await blob.arrayBuffer());if(!current())return;
+    c.url=URL.createObjectURL(blob);c.current={url:c.url,name:f.name.replace(/^\d{1,4}[-_ ]+/,'')};dl.disabled=false;
+    if(blob.type.includes('pdf')||new TextDecoder().decode(bytes.slice(0,5))==='%PDF-'){
+      const pdfjs=await import(new URL('js/vendor/pdfjs/pdf.mjs',location.href).href);if(!current())return;pdfjs.GlobalWorkerOptions.workerSrc=new URL('js/vendor/pdfjs/pdf.worker.mjs',location.href).href;const task=pdfjs.getDocument({data:bytes,isEvalSupported:false});c.pdfTask=task;const pdf=await task.promise;if(!current()){pdf.destroy();return;}
+      let pageNumber=1,zoom=1,rendering=false;const canvas=document.createElement('canvas');canvas.style.cssText='display:block;margin:auto;height:auto';view.append(canvas);
+      const counter=document.createElement('span');const make=(name,fn)=>{const b=document.createElement('button');b.type='button';b.textContent=name;b.onclick=()=>{if(!rendering)fn();};b.style.cssText='padding:8px;border:1px solid #bccbd5;border-radius:7px;background:#f4f7fa';controls.append(b);return b;};
+      const prev=make('Pagina precedente',()=>{pageNumber--;render();});controls.append(counter);const next=make('Pagina successiva',()=>{pageNumber++;render();});make('Riduci -',()=>{zoom=Math.max(1,zoom-.5);render();});make('Ingrandisci +',()=>{zoom=Math.min(3,zoom+.5);render();});
+      async function render(){if(!current()||rendering)return;rendering=true;prev.disabled=next.disabled=true;try{const page=await pdf.getPage(pageNumber);if(!current())return;const v=page.getViewport({scale:1}),scale=Math.max(.3,Math.min(2,(view.clientWidth-8)/v.width))*zoom,vp=page.getViewport({scale});canvas.width=Math.floor(vp.width);canvas.height=Math.floor(vp.height);canvas.style.width=canvas.width+'px';await page.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;if(current()){counter.textContent=pageNumber+' / '+pdf.numPages;msg.textContent=f.name+' · PDF privato pronto.';}}catch(e){if(current())msg.textContent='Anteprima non disponibile. Puoi scaricare il documento.';}finally{rendering=false;if(current()){prev.disabled=pageNumber<=1;next.disabled=pageNumber>=pdf.numPages;}}}await render();
+    }else if(['image/png','image/jpeg','image/webp'].includes(blob.type)){const img=document.createElement('img');img.src=c.url;img.alt=f.name;img.style.maxWidth='100%';view.append(img);msg.textContent=f.name+' · Immagine privata pronta.';}else msg.textContent='Anteprima non disponibile per questo formato. Premi Scarica.';
+  }catch(e){if(current())msg.textContent=e.message+(c.current?' Puoi scaricare il documento.':' Nessun documento pronto.');}
 }
 
 // ═══ FOTO IMMOBILE (galleria + download singolo / zip) ═══
@@ -6499,7 +6496,7 @@ function renderTable(data) {
           <button class="btn btn-action btn-secondary" onclick="editImmobile('${i.id}')" title="Modifica">✏️</button>
           <button class="btn btn-action" onclick="duplicateImmobile('${i.id}')" title="Duplica annuncio (nuovo codice, stesse foto e testi)" style="background:#f3e5f5;color:#6a1b9a">📋</button>
           <button class="btn btn-action" onclick="showMatchingClienti('${i.id}')" title="Trova clienti compatibili" style="background:#e3f2fd;color:#1565c0">🤝</button>
-          <button class="btn btn-action" onclick="openDocsImmobile('${i.codice || ''}')" title="Documenti (PDF)" style="background:#e8eaf6;color:#283593">📎</button>
+          <button class="btn btn-action" onclick="openDocsImmobile('${i.codice || ''}','${i.id}')" title="Documenti (PDF)" style="background:#e8eaf6;color:#283593">📎</button>
           <button class="btn btn-action" onclick="openFotoImmobile('${i.id}')" title="Foto (vedi e scarica)" style="background:#e0f2f1;color:#00695c">🖼️</button>
           <button class="btn btn-action" onclick="printPropertyPdf('${i.id}')" title="Stampa PDF" style="background:#fff3e0;color:#e65100">📄</button>
           <button class="btn btn-action" onclick="quickPublishSocial('${i.id}')" title="Pubblica sui Social" style="background:#e8f5e9;color:#1877F2">📢</button>
