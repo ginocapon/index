@@ -10063,8 +10063,7 @@ function printPropertyPdf(id) {
   .footer { background: #3A5578; color: #B0C8E0; padding: 8px 20px; text-align: center; font-size: 8px; margin-top: 16px; }
   .footer strong { color: #CEE08F; }
   @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } .plan-section { page-break-before: auto; } }
-</style><style id="client-search-mobile-20261107">@media(max-width:760px){#rm-cli .rm-search{min-height:56px!important;height:56px!important;padding:14px 12px!important;font-size:17px!important;line-height:24px!important;border:2px solid #1b5847!important;background:#fff!important;box-sizing:border-box!important;box-shadow:0 0 0 1px #1b584714!important;}#rm-cli .rm-search:focus{outline:2px solid #1b5847!important;outline-offset:2px!important;}}</style>
-</head><body>
+</style></head><body>
 <div class="header">
   <div class="logo"><span>Righetto</span> Immobiliare<small>Agenzia Immobiliare</small></div>
   <div><span class="badge-tipo">${tipo}</span><div class="rif">Rif. ${escHtml(i.codice || 'N/D')}</div></div>
@@ -14363,8 +14362,7 @@ function exportAnalyticsPdfReport() {
     'h1{font-size:20px;margin:0 0 4px 0}h2{font-size:14px;margin:24px 0 8px 0;border-bottom:2px solid #667eea;padding-bottom:4px}' +
     '.meta{color:#666;margin-bottom:20px;font-size:11px}table{width:100%;border-collapse:collapse;margin-bottom:8px}' +
     'th,td{border:1px solid #ccc;padding:6px 8px}th{background:#f0f0f0;text-align:left;font-size:11px}' +
-    'th.num,td.num{text-align:right}@media print{body{padding:12px}}</style><style id="client-search-mobile-20261107">@media(max-width:760px){#rm-cli .rm-search{min-height:56px!important;height:56px!important;padding:14px 12px!important;font-size:17px!important;line-height:24px!important;border:2px solid #1b5847!important;background:#fff!important;box-sizing:border-box!important;box-shadow:0 0 0 1px #1b584714!important;}#rm-cli .rm-search:focus{outline:2px solid #1b5847!important;outline-offset:2px!important;}}</style>
-</head><body>' +
+    'th.num,td.num{text-align:right}@media print{body{padding:12px}}</style></head><body>' +
     '<h1>Righetto Immobiliare — Analytics &amp; Performance</h1>' +
     '<div class="meta">Generato il ' + _analyticsEscapeHtml(new Date().toLocaleString('it-IT')) + ' · Ultimo aggiornamento dashboard: ' + _analyticsEscapeHtml(lastTxt) + '</div>' +
     '<h2>Riepilogo ultimo periodo</h2><table><tbody>' + summaryRows + '</tbody></table>' +
@@ -15149,8 +15147,7 @@ showSection = function(name) {
       .replace(/\n/g, '<br>')
       .replace(/•\s*/g, '&bull; ');
 
-    let html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="client-search-mobile-20261107">@media(max-width:760px){#rm-cli .rm-search{min-height:56px!important;height:56px!important;padding:14px 12px!important;font-size:17px!important;line-height:24px!important;border:2px solid #1b5847!important;background:#fff!important;box-sizing:border-box!important;box-shadow:0 0 0 1px #1b584714!important;}#rm-cli .rm-search:focus{outline:2px solid #1b5847!important;outline-offset:2px!important;}}</style>
-</head>
+    let html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <!-- Header -->
@@ -15325,8 +15322,7 @@ showSection = function(name) {
     const pageUrl = 'https://www.righettoimmobiliare.it/' + page.file.replace(/\.html$/, '');
     const icon = page.cat === 'blog' ? '📝 Articolo' : page.cat === 'landing' ? '🚀 Offerta' : page.cat === 'zona' ? '📍 Quartiere' : '🔧 Servizio';
 
-    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="client-search-mobile-20261107">@media(max-width:760px){#rm-cli .rm-search{min-height:56px!important;height:56px!important;padding:14px 12px!important;font-size:17px!important;line-height:24px!important;border:2px solid #1b5847!important;background:#fff!important;box-sizing:border-box!important;box-shadow:0 0 0 1px #1b584714!important;}#rm-cli .rm-search:focus{outline:2px solid #1b5847!important;outline-offset:2px!important;}}</style>
-</head>
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:30px;text-align:center">
@@ -16003,8 +15999,7 @@ showSection = function(name) {
     },
     'newsletter-normativa': {
       oggetto: '{{nome}}, novità normative immobiliari — cosa cambia per te',
-      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="client-search-mobile-20261107">@media(max-width:760px){#rm-cli .rm-search{min-height:56px!important;height:56px!important;padding:14px 12px!important;font-size:17px!important;line-height:24px!important;border:2px solid #1b5847!important;background:#fff!important;box-sizing:border-box!important;box-shadow:0 0 0 1px #1b584714!important;}#rm-cli .rm-search:focus{outline:2px solid #1b5847!important;outline-offset:2px!important;}}</style>
-</head>
+      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <!-- Header -->
@@ -16053,8 +16048,7 @@ showSection = function(name) {
     },
     'nuovi-immobili': {
       oggetto: '{{nome}}, nuove opportunità immobiliari a Padova',
-      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="client-search-mobile-20261107">@media(max-width:760px){#rm-cli .rm-search{min-height:56px!important;height:56px!important;padding:14px 12px!important;font-size:17px!important;line-height:24px!important;border:2px solid #1b5847!important;background:#fff!important;box-sizing:border-box!important;box-shadow:0 0 0 1px #1b584714!important;}#rm-cli .rm-search:focus{outline:2px solid #1b5847!important;outline-offset:2px!important;}}</style>
-</head>
+      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:30px;text-align:center">
@@ -16095,8 +16089,7 @@ showSection = function(name) {
     },
     'auguri': {
       oggetto: 'Auguri da Righetto Immobiliare, {{nome}}!',
-      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="client-search-mobile-20261107">@media(max-width:760px){#rm-cli .rm-search{min-height:56px!important;height:56px!important;padding:14px 12px!important;font-size:17px!important;line-height:24px!important;border:2px solid #1b5847!important;background:#fff!important;box-sizing:border-box!important;box-shadow:0 0 0 1px #1b584714!important;}#rm-cli .rm-search:focus{outline:2px solid #1b5847!important;outline-offset:2px!important;}}</style>
-</head>
+      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:40px;text-align:center">
@@ -16733,8 +16726,7 @@ showSection = function(name) {
     const nome = client.nome || 'Cliente';
     const cardHtml = buildPropertyCardHtml(property);
 
-    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="client-search-mobile-20261107">@media(max-width:760px){#rm-cli .rm-search{min-height:56px!important;height:56px!important;padding:14px 12px!important;font-size:17px!important;line-height:24px!important;border:2px solid #1b5847!important;background:#fff!important;box-sizing:border-box!important;box-shadow:0 0 0 1px #1b584714!important;}#rm-cli .rm-search:focus{outline:2px solid #1b5847!important;outline-offset:2px!important;}}</style>
-</head>
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:28px;text-align:center">
@@ -16781,8 +16773,7 @@ showSection = function(name) {
 
     const cardHtml = buildPropertyCardHtml(property);
 
-    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="client-search-mobile-20261107">@media(max-width:760px){#rm-cli .rm-search{min-height:56px!important;height:56px!important;padding:14px 12px!important;font-size:17px!important;line-height:24px!important;border:2px solid #1b5847!important;background:#fff!important;box-sizing:border-box!important;box-shadow:0 0 0 1px #1b584714!important;}#rm-cli .rm-search:focus{outline:2px solid #1b5847!important;outline-offset:2px!important;}}</style>
-</head>
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:28px;text-align:center">
@@ -16863,8 +16854,7 @@ showSection = function(name) {
 
     let cardsHtml = matches.map(i => buildPropertyCardHtml(i)).join('');
 
-    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="client-search-mobile-20261107">@media(max-width:760px){#rm-cli .rm-search{min-height:56px!important;height:56px!important;padding:14px 12px!important;font-size:17px!important;line-height:24px!important;border:2px solid #1b5847!important;background:#fff!important;box-sizing:border-box!important;box-shadow:0 0 0 1px #1b584714!important;}#rm-cli .rm-search:focus{outline:2px solid #1b5847!important;outline-offset:2px!important;}}</style>
-</head>
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:28px;text-align:center">
