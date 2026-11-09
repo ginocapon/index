@@ -5376,7 +5376,15 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const _rigSbLib = window.rigSupabaseLib && window.rigSupabaseLib();
 if (!_rigSbLib) throw new Error('Supabase non caricato — ricarica la pagina admin.');
 const sb = _rigSbLib.createClient(SUPABASE_URL, SUPABASE_KEY, {
-  auth: { persistSession: true, autoRefreshToken: true }
+  auth: { persistSession: true, autoRefreshToken: true },
+  global: {fetch: (input,init)=>{
+    if(window.RighettoAccessPaused){
+      const url=new URL(typeof input==='string'?input:input.url||String(input),location.href);
+      const authority=url.origin===SUPABASE_URL&&['/auth/v1/user','/auth/v1/token','/rest/v1/rpc/righetto_is_admin_request'].includes(url.pathname);
+      if(!authority)return Promise.reject(new Error('Connessione da verificare: operazione sospesa.'));
+    }
+    return fetch(input,init);
+  }}
 });
 window.sb = sb;
 
@@ -5417,12 +5425,19 @@ window.rigSectionReady=function(names,fn){
  window.addEventListener('righetto:section-ready',run);window.rigOwnerReady(run);
 };
 async function grantAccess() {
-  const {decideAccess,watchAdminAccess}=await import('./js/access-gate.mjs');
+  const {decideAccess,watchAdminAccess}=await import('./js/access-gate.mjs?v=20261107-reconnect-v2');
   const access=await decideAccess(sb);
-  if(access.kind!=='admin'){document.getElementById('loginError').textContent='Accesso non abilitato per questo account.';document.getElementById('loginError').style.display='block';return;}
+  if(access.kind!=='admin'){document.getElementById('loginError').textContent=access.kind==='unavailable'?'Connessione da verificare. Non è stato possibile controllare l’accesso: riprova senza cambiare password.':'Accesso non abilitato per questo account.';document.getElementById('loginError').style.display='block';return;}
   window.RighettoGatedPrincipal=access.id;
   window.RighettoAccessWatchStop?.();
-  window.RighettoAccessWatchStop=watchAdminAccess(sb,{onDenied(){window.RighettoGatedPrincipal=null;document.getElementById('appWrapper').style.display='none';document.getElementById('loginOverlay').style.display='flex';location.reload();}});
+  window.RighettoAccessWatchStop=watchAdminAccess(sb,{principalId:access.id,onUnavailable(){
+   window.RighettoAccessPaused=true;window.RighettoGatedPrincipal=null;
+   const app=document.getElementById('appWrapper');app.inert=true;app.style.display='none';
+   document.body.classList.add('rig-access-paused');
+   if(!document.getElementById('rigAccessPauseMask')){const mask=document.createElement('style');mask.id='rigAccessPauseMask';mask.textContent='body.rig-access-paused > :not(#rigAccessReconnect):not(script):not(style):not(link){display:none!important}';document.head.append(mask);}
+   document.getElementById('loginOverlay').style.display='none';
+   let status=document.getElementById('rigAccessReconnect');if(!status){status=document.createElement('section');status.id='rigAccessReconnect';status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.style.cssText='position:fixed;inset:0;z-index:2147483647;display:grid;place-content:center;background:#f5f7f7;color:#173e4a;padding:28px;font:18px/1.5 sans-serif;text-align:center';const title=document.createElement('h1');title.textContent='Connessione da verificare';const text=document.createElement('p');text.textContent='Il gestionale è in pausa: dati privati nascosti e comandi bloccati. Non serve reinserire la password. Controllo di nuovo la connessione automaticamente.';status.append(title,text);document.body.append(status);}
+  },onRecovered(){location.reload();},onDenied(){window.RighettoGatedPrincipal=null;document.getElementById('appWrapper').inert=true;document.getElementById('appWrapper').style.display='none';document.getElementById('rigAccessReconnect')?.remove();document.getElementById('loginOverlay').style.display='flex';location.reload();}});
   const notifyOwner=()=>window.dispatchEvent(new Event('righetto:owner-ready'));
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',notifyOwner,{once:true});else notifyOwner();
   document.getElementById('loginOverlay').style.display = 'none';
@@ -18169,7 +18184,7 @@ window.showSection('home');
 <script>window.RIGHETTO_SYNC_ATTIVA=true;</script>
 <script src="js/admin-agenda.js?v=20261107-simple-v3"></script>
 <script src="js/admin-clienti-upload.js?v=20261106-2151"></script>
-<script src="js/admin-cliente-scheda.js?v=20261107-city-search-v1"></script>
+<script src="js/admin-cliente-scheda.js?v=20261109-auth-resume-v2"></script>
 <script src="js/admin-private-photos.js?v=LP0290-private-1"></script>
 <script src="js/admin-immobile-etichette.js?v=20261106-local"></script>
 <script src="js/admin-immobile-operazioni.js?v=20261106-catasto"></script>
