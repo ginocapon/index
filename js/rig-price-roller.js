@@ -55,6 +55,12 @@ window.RigPriceRoller = (function () {
       '.rroll-fade.top{top:0;background:linear-gradient(#fff 20%,rgba(255,255,255,0))}',
       '.rroll-fade.bot{bottom:0;background:linear-gradient(rgba(255,255,255,0),#fff 80%)}',
       '.rroll-step-hint{margin-top:.3rem;font-size:.66rem;letter-spacing:.05em;text-transform:uppercase;color:var(--grigio,#6b6257)}',
+      '.rroll-toggle{display:flex;align-items:center;justify-content:space-between;gap:.4rem;width:100%;box-sizing:border-box;white-space:nowrap;padding:.55rem .7rem;border:1px solid var(--gc,#d8cfc0);border-radius:8px;background:#fff;font-family:Montserrat,sans-serif;font-size:.85rem;color:var(--blu,#17324d);cursor:pointer;text-align:left}',
+      '.rroll-toggle:after{content:"\\25BE";font-size:.75rem;color:var(--grigio,#6b6257)}',
+      '.rroll-pop{position:fixed;z-index:1200;display:none;filter:drop-shadow(0 10px 24px rgba(10,20,35,.22))}',
+      '.rroll-pop.open{display:block}',
+      '.rroll-pop .rroll{position:static}',
+      '.rroll-pop .rroll-step-hint{background:#fff;margin-top:0;padding:.2rem .6rem .45rem;border:1px solid var(--gc,#d8cfc0);border-top:0;border-radius:0 0 8px 8px}',
       '@media(max-width:600px){.rroll-item{font-size:.9rem}.rroll-item.sel{font-size:1.02rem}}'
     ].join('\n');
     document.head.appendChild(st);
@@ -98,9 +104,49 @@ window.RigPriceRoller = (function () {
     this.hint = document.createElement('div');
     this.hint.className = 'rroll-step-hint';
 
-    this.select.parentNode.insertBefore(root, this.select.nextSibling);
-    this.select.parentNode.insertBefore(this.hint, root.nextSibling);
+    // Compatto di default: il rullo si apre come menu a tendina dal toggle,
+    // cosi' la barra filtri resta su una riga (segnalazione Gino 9 nov 2026).
+    this.toggle = document.createElement('button');
+    this.toggle.type = 'button';
+    this.toggle.className = 'rroll-toggle';
+    this.toggle.setAttribute('aria-haspopup', 'listbox');
+    this.toggle.setAttribute('aria-expanded', 'false');
+
+    this.pop = document.createElement('div');
+    this.pop.className = 'rroll-pop';
+    this.pop.appendChild(root);
+    this.pop.appendChild(this.hint);
+
+    this.select.parentNode.insertBefore(this.toggle, this.select.nextSibling);
+    document.body.appendChild(this.pop);
     this.root = root;
+  };
+
+  Roller.prototype.openPop = function () {
+    var r = this.toggle.getBoundingClientRect();
+    this.pop.style.left = r.left + 'px';
+    this.pop.style.width = r.width + 'px';
+    this.pop.classList.add('open');
+    var h = this.pop.offsetHeight;
+    var up = r.bottom + 6 + h > window.innerHeight && r.top - 6 - h > 0;
+    this.pop.style.top = (up ? r.top - 6 - h : r.bottom + 6) + 'px';
+    this.toggle.setAttribute('aria-expanded', 'true');
+    this.applyIndex(this.indexOfValue(this.select.value), { silent: true, instant: true });
+    this.root.focus();
+  };
+
+  Roller.prototype.closePop = function () {
+    this.pop.classList.remove('open');
+    this.toggle.setAttribute('aria-expanded', 'false');
+    // Annulla lo snap da scroll: con il menu chiuso scrollTop torna 0 e
+    // il timer riporterebbe la selezione a "Qualsiasi" (bug visto in test).
+    if (this.scrollTimer) { clearTimeout(this.scrollTimer); this.scrollTimer = null; }
+  };
+
+  Roller.prototype.updateToggle = function () {
+    var v = this.select.value;
+    var n = parseInt(v, 10);
+    this.toggle.textContent = (v && isFinite(n)) ? fmt(n) : this.anyLabel();
   };
 
   Roller.prototype.setMode = function (orig) {
@@ -108,8 +154,8 @@ window.RigPriceRoller = (function () {
     this.select.classList.toggle('rroll-src', !orig);
     this.select.setAttribute('aria-hidden', orig ? 'false' : 'true');
     this.select.tabIndex = orig ? 0 : -1;
-    this.root.style.display = orig ? 'none' : '';
-    this.hint.style.display = orig ? 'none' : '';
+    this.toggle.style.display = orig ? 'none' : '';
+    if (orig) this.closePop();
   };
 
   Roller.prototype.currentScale = function () {
@@ -283,16 +329,19 @@ window.RigPriceRoller = (function () {
         this.select.dispatchEvent(new Event('change', { bubbles: true }));
       }
     }
+    this.updateToggle();
   };
 
   Roller.prototype.bind = function () {
     var self = this;
-    var scrollTimer = null;
+    this.scrollTimer = null;
 
     this.list.addEventListener('scroll', function () {
       self.maybeGrow();
-      if (scrollTimer) clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(function () {
+      if (self.scrollTimer) clearTimeout(self.scrollTimer);
+      self.scrollTimer = setTimeout(function () {
+        self.scrollTimer = null;
+        if (!self.pop.classList.contains('open')) return;
         var idx = Math.round(self.list.scrollTop / ITEM_H);
         self.applyIndex(idx, { silent: false });
         self.list.scrollTo({ top: idx * ITEM_H, behavior: 'smooth' });
@@ -303,8 +352,32 @@ window.RigPriceRoller = (function () {
       var item = e.target.closest('.rroll-item');
       if (!item) return;
       var idx = Array.prototype.indexOf.call(self.list.querySelectorAll('.rroll-item'), item);
-      self.applyIndex(idx, {});
+      self.applyIndex(idx, { instant: true });
+      self.closePop();
+      self.toggle.focus();
     });
+
+    this.toggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (self.pop.classList.contains('open')) self.closePop(); else self.openPop();
+    });
+    document.addEventListener('click', function (e) {
+      if (!self.pop.classList.contains('open')) return;
+      if (e.target.closest && (e.target.closest('.rroll-pop') || e.target.closest('.rroll-toggle'))) return;
+      self.closePop();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && self.pop.classList.contains('open')) {
+        self.closePop();
+        self.toggle.focus();
+      }
+    });
+    window.addEventListener('scroll', function (e) {
+      if (e.target && e.target.closest && e.target.closest('.rroll-pop')) return;
+      self.closePop();
+    }, { passive: true, capture: true });
+    window.addEventListener('resize', function () { self.closePop(); });
 
     this.root.addEventListener('keydown', function (e) {
       if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
