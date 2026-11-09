@@ -153,9 +153,10 @@ async function importData(){if(!ready)return;const file=root.querySelector('#ra-
 
 function newEvent(o){if(!ready||preview)return;return editor({day:dayKey(new Date()),time:'09:00',agents:['Gino'],duration:45,...(o||{})});}
 // Cronistoria e Agenda condividono gli stessi handler, nessun secondo archivio.
-window.RighettoHistoryActions={open:async({action,eventId,clientId,isCurrent=()=>true})=>{
- if(!['copy','edit','delete'].includes(action)||!eventId||!clientId||!isCurrent())throw Error('Evento o schermata non verificati.');
+window.RighettoHistoryActions={open:async({action,eventId,clientId,propertyId,isCurrent=()=>true})=>{
+ if(!['copy','edit','delete'].includes(action)||!eventId||(!clientId&&!propertyId)||(clientId&&propertyId)||!isCurrent())throw Error('Evento o schermata non verificati.');
  if(!window.RighettoNavigation)throw Error('Navigazione Agenda non disponibile.');
+ const relation=propertyId?'property_id':'client_id',scopeId=String(propertyId||clientId);
  const principal=window.RighettoGatedPrincipal;
  const connection=typeof sb!=='undefined'?sb:db;
  if(!connection)throw Error('Connessione Agenda non disponibile.');
@@ -163,13 +164,13 @@ window.RighettoHistoryActions={open:async({action,eventId,clientId,isCurrent=()=
  if(!isCurrent()||user.error||!principal||user.data?.user?.id!==principal)throw Error('Sessione cambiata. Riapri la cronistoria.');
  const admin=await connection.rpc('righetto_is_admin_request');
  if(!isCurrent()||admin.error||admin.data!==true||window.RighettoGatedPrincipal!==principal)throw Error('Accesso amministratore non verificato.');
- const before=await connection.from('agenda_events').select('*').eq('id',eventId).eq('client_id',clientId).is('deleted_at',null).maybeSingle();
- if(!isCurrent()||before.error||!before.data||String(before.data.id)!==eventId||String(before.data.client_id)!==clientId||window.RighettoGatedPrincipal!==principal)throw Error('Evento non più disponibile per questo cliente.');
+ const before=await connection.from('agenda_events').select('*').eq('id',eventId).eq(relation,scopeId).is('deleted_at',null).maybeSingle();
+ if(!isCurrent()||before.error||!before.data||String(before.data.id)!==eventId||String(before.data[relation])!==scopeId||window.RighettoGatedPrincipal!==principal)throw Error('Evento non più disponibile per questa scheda.');
  const ok=await RighettoNavigation.open({section:'agenda',view:'agenda-detail',id:eventId});
  if(ok===false||window.RighettoGatedPrincipal!==principal)return;
  const currentUser=await connection.auth.getUser();
- const after=await connection.from('agenda_events').select('*').eq('id',eventId).eq('client_id',clientId).is('deleted_at',null).maybeSingle();
- if(currentUser.error||currentUser.data?.user?.id!==principal||window.RighettoGatedPrincipal!==principal||after.error||!after.data||String(after.data.id)!==eventId||String(after.data.client_id)!==clientId||after.data.version!==before.data.version)throw Error('Evento o sessione cambiati. Riapri prima di modificarlo.');
+ const after=await connection.from('agenda_events').select('*').eq('id',eventId).eq(relation,scopeId).is('deleted_at',null).maybeSingle();
+ if(currentUser.error||currentUser.data?.user?.id!==principal||window.RighettoGatedPrincipal!==principal||after.error||!after.data||String(after.data.id)!==eventId||String(after.data[relation])!==scopeId||after.data.version!==before.data.version)throw Error('Evento o sessione cambiati. Riapri prima di modificarlo.');
  const route=RighettoNavigation.router?.current;
  if(route&&(route.section!=='agenda'||route.view!=='agenda-detail'||route.id!==eventId))throw Error('Schermata Agenda cambiata.');
  if(!ready||!root?.querySelector('.ra-modal'))throw Error('Dettaglio Agenda non pronto.');
