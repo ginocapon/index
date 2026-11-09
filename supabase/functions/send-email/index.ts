@@ -325,11 +325,13 @@ async function sendTestEmail(supabase: any, body: any, req: Request) {
   const fromName = sender_name || config.mittente_nome;
   const replyToEmail = (reply_to && isValidEmail(reply_to)) ? reply_to.trim() : fromEmail;
 
-  console.log("sendTestEmail: from=" + fromEmail + ", to=" + to_email);
+  console.log("sendTestEmail: from=" + fromEmail + ", to=" + to_email + ", admin=" + admin);
 
   try {
     await sendViaRelay({
-      action: "send_test",
+      // Form pubblici (non admin): email reali del sito, niente prefisso [TEST].
+      // Solo i test dall'area admin mantengono il prefisso [TEST].
+      action: admin ? "send_test" : "send",
       to_email: to_email.trim(),
       sender_email: fromEmail,
       sender_name: fromName,
