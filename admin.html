@@ -9430,7 +9430,7 @@ function rigClientRowView(event,id){
  if(event.target.closest('a,button,input,select,textarea,label,summary,details,[role="button"],[contenteditable="true"]'))return;
  if(event.type==='keydown'){if(event.target!==event.currentTarget||!['Enter',' '].includes(event.key))return;event.preventDefault();}
  if(!window.RighettoGatedPrincipal||(allClienti||[]).filter(c=>String(c.id)===String(id)).length!==1)return;
- RighettoCliente.open(id,'readonly');
+ RighettoCliente.open(id,'scheda');
 }
 function renderClientiTable() {
   const empty = document.getElementById('clientiEmpty');
@@ -9471,7 +9471,7 @@ function renderClientiTable() {
     const azInfo = c.tipo_cliente === 'azienda' ? [c.ragione_sociale, c.partita_iva ? 'P.IVA: ' + c.partita_iva : ''].filter(Boolean).join('<br>') : '—';
     const docsCount = Array.isArray(c.documenti_cliente) ? c.documenti_cliente.length : 0;
     return `<tr data-client-view="${c.id}" tabindex="0" aria-label="Apri scheda cliente in visualizzazione" onclick="rigClientRowView(event,this.dataset.clientView)" onkeydown="rigClientRowView(event,this.dataset.clientView)" data-nome="${escHtml(clienteDisplayName(c))}" data-email="${escHtml(c.email||'')}" data-telefono="${escHtml(c.telefono||'')}" data-ragione="${escHtml(c.ragione_sociale||'')}" data-piva="${escHtml(c.partita_iva||'')}" data-indirizzo="${escHtml(c.indirizzo_cliente||[c.indirizzo_via,c.numero_civico].filter(Boolean).join(' '))}">
-<td data-client-column=""><input type="checkbox" aria-label="Seleziona ${escHtml(clienteDisplayName(c)||'cliente')}" data-client-select="${c.id}" ${selectedClienti.has(c.id)?'checked':''} onchange="toggleClientiSelection(this.dataset.clientSelect,this.checked)"></td><td data-client-column="Cognome / Nome / Contatti"><a href="#" onclick="RighettoCliente.open('${c.id}','readonly');return false;">${escHtml(clienteDisplayName(c)||'Nome non indicato')}</a><div class="client-contacts">${c.telefono?'▯ '+escHtml(c.telefono)+' <span class="phone-tools"><span title="QR non disponibile">▦</span>  '+''+'</span><br>':''}${c.email?'<a href="mailto:'+escHtml(c.email)+'">✉ '+escHtml(c.email)+'</a>':''}</div></td>
+<td data-client-column=""><input type="checkbox" aria-label="Seleziona ${escHtml(clienteDisplayName(c)||'cliente')}" data-client-select="${c.id}" ${selectedClienti.has(c.id)?'checked':''} onchange="toggleClientiSelection(this.dataset.clientSelect,this.checked)"></td><td data-client-column="Cognome / Nome / Contatti"><a href="#" onclick="RighettoCliente.open('${c.id}','scheda');return false;">${escHtml(clienteDisplayName(c)||'Nome non indicato')}</a><div class="client-contacts">${c.telefono?'▯ '+escHtml(c.telefono)+' <span class="phone-tools"><span title="QR non disponibile">▦</span>  '+''+'</span><br>':''}${c.email?'<a href="mailto:'+escHtml(c.email)+'">✉ '+escHtml(c.email)+'</a>':''}</div></td>
 <td data-client-column="Ragione sociale">${escHtml(c.ragione_sociale||'')}</td><td data-client-column="N. eventi" data-client-event-count="${c.id}" title="Solo eventi collegati al cliente nel nuovo archivio">…</td><td data-client-column="Nazione">${escHtml(c.nazione||'')}</td><td data-client-column="Comune / Prov.">${escHtml([c.comune,c.provincia].filter(Boolean).join(' '))}</td><td data-client-column="Zona">${escHtml(c.zona_residenza||'')}</td><td data-client-column="Indirizzo">${escHtml(c.indirizzo_cliente||[c.indirizzo_via,c.numero_civico].filter(Boolean).join(' '))}</td><td data-client-column="Data ultima modifica" title="Data modifica non registrata nel nuovo">n.d.</td><td data-client-column="Data inserimento">${dateStr}</td><td data-client-column="Ultimo contatto" title="Ultimo contatto non registrato nel nuovo">n.d.</td><td data-client-column="Etichette" title="Etichette non collegate"></td>
 <td data-client-column="Operazioni"><div class="client-ops"><button onclick="RighettoCliente.open('${c.id}','cron')" title="Cronistoria">${clientRowIcon('history')}</button><button disabled data-client-route="document" data-client-id="${c.id}" title="Documenti / foglio visita: modello originale disponibile, identità cliente da verificare">${clientRowIcon('document')}</button><button onclick="RighettoCliente.open('${c.id}','imm')" title="Immobili collegati come proprietario o inquilino nel nuovo">${clientRowIcon('property')}</button><button disabled data-client-route="event" data-client-id="${c.id}" title="Aggiungi evento: collegamento al vecchio gestionale da verificare">${clientRowIcon('event')}</button><button disabled data-client-route="appointment" data-client-id="${c.id}" title="Nuovo appuntamento: collegamento al vecchio gestionale da verificare">${clientRowIcon('appointment')}</button><button onclick="editCliente('${c.id}')" title="Modifica cliente">${clientRowIcon('edit')}</button><button onclick="RighettoCliente.open('${c.id}')" title="Archivio dal menuOperazioni">${clientRowIcon('archive')}</button></div></td></tr>`;
   }).join('');
@@ -18201,7 +18201,7 @@ window.showSection('home');
 <script>window.RIGHETTO_SYNC_ATTIVA=true;</script>
 <script src="js/admin-agenda.js?v=20261107-simple-v3"></script>
 <script src="js/admin-clienti-upload.js?v=20261106-2151"></script>
-<script src="js/admin-cliente-scheda.js?v=20261109-green-date"></script>
+<script src="js/admin-cliente-scheda.js?v=20261109-identico-diretto"></script>
 <script src="js/admin-private-photos.js?v=LP0290-private-1"></script>
 <script src="js/admin-immobile-etichette.js?v=20261106-local"></script>
 <script src="js/admin-immobile-operazioni.js?v=20261106-catasto"></script>
@@ -18215,7 +18215,7 @@ window.showSection('home');
 async function go(){if(done||busy)return;busy=true;const principal=window.RighettoGatedPrincipal;try{if(typeof sb==='undefined'||!principal)throw 0;var u=await sb.auth.getUser();if(!u.data.user?.id||u.data.user.id!==principal||window.RighettoGatedPrincipal!==principal||document.body.dataset.adminArea!=='attivita')throw 0;var authority=await sb.rpc('righetto_is_admin_request');if(authority.error||authority.data!==true||window.RighettoGatedPrincipal!==principal||document.body.dataset.adminArea!=='attivita')throw 0;done=true;RighettoAttivita.init(el,{store:RighettoAttivita.dbStore(sb)});}catch(e){msg('Attivit\u00e0: accedi per vedere le pratiche.');}busy=false;}
 msg('Attivit\u00e0: apri Attivit\u00e0 per caricare le pratiche.');window.rigSectionReady(['attivita'],go);})();</script>
 <script src="js/admin-mobile.js?v=20261107-wa-20261106-1854"></script>
-<script src="js/admin-cliente-layout.js?v=20261109-client-edit-green"></script>
+<script src="js/admin-cliente-layout.js?v=20261109-identico-diretto"></script>
 <script>window.RighettoNavigationAttachments=()=>({property:typeof currentFotos==='undefined'?null:[currentFotos,currentPlanimetrie,currentDocumenti,currentVtScenes,currentUnitaCatastali,currentCatastoPdf],client:typeof currentClienteDocumenti==='undefined'?null:currentClienteDocumenti});</script>
 <script type="module">
 import {bindAuthenticatedNavigation} from './js/auth-bootstrap.mjs?v=20261107-client-readonly';
@@ -18233,7 +18233,7 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script src="js/admin-immobile-cronistoria.js?v=20261107-simple-v3"></script>
 <script src="js/admin-immobile-dati-aggiuntivi.js?v=20261106-campi"></script>
 <script src="js/admin-immobile-riferimenti.js?v=20261106-riferimenti"></script>
-<link rel="stylesheet" href="js/client-edit-green.css?v=20261109-client-edit-green">
+<link rel="stylesheet" href="js/client-edit-green.css?v=20261109-identico-diretto">
 <script type="module">import{installClientGeo}from'./js/client-geo-verde.mjs';installClientGeo({root:document.getElementById('clienteModal')}).catch(e=>{console.error('Località cliente non disponibili',e);});</script>
 </body>
 </html>

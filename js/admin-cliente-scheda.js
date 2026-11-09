@@ -68,6 +68,18 @@ async function open(id,tab){
  if(window.RighettoNavigation&&!RighettoNavigation.replaying)return RighettoNavigation.open({section:'clienti',view:'client',id:String(id),...(tab?{tab}: {})},()=>open(id,tab));
  const readOnly=tab==='readonly';
  css();close();const epoch=openEpoch;
+ // Il percorso operativo non riduce le protezioni della vista read-only.
+ if(!readOnly){
+  const principal=window.RighettoGatedPrincipal;
+  const user=await sb.auth.getUser();
+  if(epoch!==openEpoch)return;
+  if(user.error||!principal||user.data?.user?.id!==principal)throw Error('Sessione amministratore non verificata.');
+  const admin=await sb.rpc('righetto_is_admin_request');
+  const currentUser=await sb.auth.getUser();
+  if(epoch!==openEpoch)return;
+  if(admin.error||admin.data!==true||currentUser.error||currentUser.data?.user?.id!==principal||principal!==window.RighettoGatedPrincipal)throw Error('Accesso amministratore non verificato.');
+ }
+
  const r=await sb.from('clienti').select('*').eq('id',id).maybeSingle();
  if(epoch!==openEpoch)return;
  if(r.error||!r.data){if(window.RighettoNavigation)throw Error('Cliente non trovato nel database.');alert('Cliente non trovato nel database.');return;}
