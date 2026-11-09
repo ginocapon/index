@@ -196,6 +196,11 @@ window.RigPriceRoller = (function () {
         if (this.select.options[i].value === keep) { this.setSelectRaw(keep); break; }
       }
     }
+    // Se il cambio contesto ha azzerato un valore non piu' valido, notificalo:
+    // filtri e criteri alert si aggiornano subito (bug criteri alert, 9 nov 2026).
+    if (keep && this.select.value !== keep) {
+      this.select.dispatchEvent(new Event('change', { bubbles: true }));
+    }
     this.syncFromSelect(true);
   };
 
@@ -211,6 +216,10 @@ window.RigPriceRoller = (function () {
     });
     var ok = this.origOptions.some(function (o) { return o.v === keep; });
     this.setSelectRaw(ok ? keep : '');
+    // Come sopra: valore perso nel passaggio ad Aste -> notifica il cambio.
+    if (keep && !ok) {
+      this.select.dispatchEvent(new Event('change', { bubbles: true }));
+    }
   };
 
   // Rigenera this.values da scala + extra, ridisegna select e lista
