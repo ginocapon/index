@@ -9572,9 +9572,42 @@ function toggleClienteRuoloRubrica() {
   }
 }
 
+function readClienteFormPayload(){
+  const ruoloRubrica = document.getElementById('clienteRuoloProprietario').checked ? 'proprietario' : 'cerca';
+  const isProprietario = ruoloRubrica === 'proprietario';
+  const data = {
+    nome: document.getElementById('clienteNome').value.trim(),
+    email: document.getElementById('clienteEmail').value.trim(),
+    telefono: document.getElementById('clienteTelefono').value.trim(),
+    fonte: document.getElementById('clienteFonte').value,
+    ruolo_rubrica: ruoloRubrica,
+    tipo_operazione_cercata: isProprietario ? null : (document.getElementById('clienteTipoOp').value || null),
+    tipologia_cercata: isProprietario ? null : (document.getElementById('clienteTipologia').value || null),
+    zona_cercata: isProprietario ? null : (document.getElementById('clienteZona').value.trim() || null),
+    budget_min: isProprietario ? null : (parseFloat(document.getElementById('clienteBudgetMin').value) || null),
+    budget_max: isProprietario ? null : (parseFloat(document.getElementById('clienteBudgetMax').value) || null),
+    camere_min: isProprietario ? null : (parseInt(document.getElementById('clienteCamereMin').value) || null),
+    superficie_min: isProprietario ? null : (parseInt(document.getElementById('clienteSupMin').value) || null),
+    interesse: isProprietario ? 'Proprietario / incarico' : document.getElementById('clienteInteresse').value.trim(),
+    note: document.getElementById('clienteNote').value.trim(),
+    // Nuovi campi azienda/documenti
+    tipo_cliente: document.getElementById('clienteTipoCliente').value || 'privato',
+    codice_fiscale: document.getElementById('clienteCodiceFiscale').value.trim().toUpperCase() || null,
+    indirizzo_cliente: document.getElementById('clienteIndirizzo').value.trim() || null,
+    ragione_sociale: document.getElementById('clienteRagioneSociale').value.trim() || null,
+    partita_iva: document.getElementById('clientePartitaIva').value.trim() || null,
+    pec: document.getElementById('clientePec').value.trim() || null,
+    sdi: document.getElementById('clienteSdi').value.trim().toUpperCase() || null,
+    documenti_cliente: currentClienteDocumenti,
+    ...(window.righettoExtraRead ? righettoExtraRead() : {})
+  };
+ return data;
+}
+let clientEditLoadedProjection=null;
 let clienteEditBaseline=null;
 function openClienteModal(id) {
   if(window.RighettoNavigation&&!RighettoNavigation.replaying)return RighettoNavigation.open({section:'clienti',view:'client-new'},()=>openClienteModal(id));
+  if(document.getElementById('clienteModal').dataset.geoReady!=='true'){toast('Località in caricamento. Attendi e riapri la scheda.','info');return;}
   clienteEditBaseline=null;
   document.getElementById('clienteEditId').value = '';
   document.getElementById('clienteModalTitle').textContent = 'Nuovo Cliente';
@@ -9605,11 +9638,13 @@ function openClienteModal(id) {
   setClienteRuoloRubricaUI('cerca');
   document.getElementById('btnDeleteCliente').style.display = 'none';
   if(window.righettoExtraFill)righettoExtraFill(null);
+  window.righettoClientPendingButton?.();
   document.getElementById('clienteModal').classList.add('open');
 }
 
 function editCliente(id) {
   if(window.RighettoNavigation&&!RighettoNavigation.replaying)return RighettoNavigation.open({section:'clienti',view:'client-edit',id:String(id)},()=>editCliente(id));
+  if(document.getElementById('clienteModal').dataset.geoReady!=='true'){toast('Località in caricamento. Attendi e riapri la scheda.','info');return;}
   const c = allClienti.find(x => x.id == id);
   if (!c) return;
   clienteEditBaseline=structuredClone(c);
@@ -9642,6 +9677,8 @@ function editCliente(id) {
   setClienteRuoloRubricaUI(getClienteRuoloRubricaFromRecord(c));
   document.getElementById('btnDeleteCliente').style.display = 'inline-flex';
   if(window.righettoExtraFill)righettoExtraFill(c);
+  clientEditLoadedProjection=structuredClone(readClienteFormPayload());
+  window.righettoClientPendingButton?.();
   document.getElementById('clienteModal').classList.add('open');
 }
 
@@ -9654,7 +9691,7 @@ async function clientPayloadHash(data,keys){const ordered=Object.fromEntries([..
 async function reconcileClienteSave(){
  try{const auth=await sb.auth.getUser();if(!auth.data?.user?.id)throw Error('Accedi di nuovo.');const key='righetto-client-save-pending:'+auth.data.user.id;const raw=localStorage.getItem(key);if(!raw){toast('Nessun salvataggio sospeso.','info');return;}const pending=JSON.parse(raw);
  const r=await sb.from('clienti').select('*').eq('id',pending.id).maybeSingle();if(r.error)throw r.error;
- if(r.data&&pending.hash&&await clientPayloadHash(r.data,pending.keys)===pending.hash){localStorage.removeItem(key);toast('Salvataggio precedente verificato. Nessun nuovo tentativo.','success');document.querySelectorAll('#clienteModal .modal-footer button').forEach(b=>{if(b.textContent.includes('Salva'))b.disabled=false});await loadClienti();}
+ if(r.data&&pending.hash&&await clientPayloadHash(r.data,pending.keys)===pending.hash){localStorage.removeItem(key);toast('Salvataggio precedente verificato. Nessun nuovo tentativo.','success');document.querySelectorAll('#clienteModal .modal-footer button').forEach(b=>{if(b.textContent.includes('Salva'))b.disabled=false});await loadClienti();window.righettoClientPendingButton?.();}
  else toast('Esito non confermato. Nessun nuovo salvataggio: controllare la scheda esatta prima di procedere.','error');
  }catch(e){toast('Verifica non riuscita: '+e.message,'error');}
 }
@@ -9665,41 +9702,15 @@ async function saveCliente(openAfterSave=false){
 }
 async function saveClienteLocked(openAfterSave = false) {
   if(savingCliente)return;
+  if(document.getElementById('clienteModal').dataset.geoReady!=='true'){toast('Località non pronte: salvataggio fermato.','error');return;}
 
   const authEpoch=clientiAuthEpoch;
   const id = document.getElementById('clienteEditId').value;
-  const ruoloRubrica = document.getElementById('clienteRuoloProprietario').checked ? 'proprietario' : 'cerca';
-  const isProprietario = ruoloRubrica === 'proprietario';
-  const data = {
-    nome: document.getElementById('clienteNome').value.trim(),
-    email: document.getElementById('clienteEmail').value.trim(),
-    telefono: document.getElementById('clienteTelefono').value.trim(),
-    fonte: document.getElementById('clienteFonte').value,
-    ruolo_rubrica: ruoloRubrica,
-    tipo_operazione_cercata: isProprietario ? null : (document.getElementById('clienteTipoOp').value || null),
-    tipologia_cercata: isProprietario ? null : (document.getElementById('clienteTipologia').value || null),
-    zona_cercata: isProprietario ? null : (document.getElementById('clienteZona').value.trim() || null),
-    budget_min: isProprietario ? null : (parseFloat(document.getElementById('clienteBudgetMin').value) || null),
-    budget_max: isProprietario ? null : (parseFloat(document.getElementById('clienteBudgetMax').value) || null),
-    camere_min: isProprietario ? null : (parseInt(document.getElementById('clienteCamereMin').value) || null),
-    superficie_min: isProprietario ? null : (parseInt(document.getElementById('clienteSupMin').value) || null),
-    interesse: isProprietario ? 'Proprietario / incarico' : document.getElementById('clienteInteresse').value.trim(),
-    note: document.getElementById('clienteNote').value.trim(),
-    // Nuovi campi azienda/documenti
-    tipo_cliente: document.getElementById('clienteTipoCliente').value || 'privato',
-    codice_fiscale: document.getElementById('clienteCodiceFiscale').value.trim().toUpperCase() || null,
-    indirizzo_cliente: document.getElementById('clienteIndirizzo').value.trim() || null,
-    ragione_sociale: document.getElementById('clienteRagioneSociale').value.trim() || null,
-    partita_iva: document.getElementById('clientePartitaIva').value.trim() || null,
-    pec: document.getElementById('clientePec').value.trim() || null,
-    sdi: document.getElementById('clienteSdi').value.trim().toUpperCase() || null,
-    documenti_cliente: currentClienteDocumenti,
-    ...(window.righettoExtraRead ? righettoExtraRead() : {})
-  };
+  const data=readClienteFormPayload();
 
   const invalidExtra=[...document.querySelectorAll('#clienteModal input,#clienteModal select,#clienteModal textarea')].find(el=>!el.disabled&&!el.checkValidity());
   if(invalidExtra){invalidExtra.reportValidity();return;}
-  if(!data.nome)data.nome=clienteDisplayName(data);
+  if(!data.nome&&(!id||['nome','nome_proprio','cognome'].some(k=>JSON.stringify(data[k])!==JSON.stringify(clientEditLoadedProjection?.[k]))))data.nome=clienteDisplayName(data);
   if (!data.nome && !data.email) {
     toast('Inserisci almeno nome o email', 'error');
     return;
@@ -9711,11 +9722,17 @@ async function saveClienteLocked(openAfterSave = false) {
   let attempted=false,definiteFailure=false,pendingKey=null;
   try {
     const auth=await sb.auth.getUser();if(auth.error||!auth.data?.user?.id)throw Error('Accedi di nuovo prima di salvare.');
-    pendingKey='righetto-client-save-pending:'+auth.data.user.id;
+    pendingKey='righetto-client-save-pending:'+auth.data.user.id;window.righettoClientPendingPrincipal=auth.data.user.id;
     const prior=localStorage.getItem(pendingKey);if(prior)throw Error('Salvataggio precedente da verificare. Nessun nuovo tentativo. Riferimento: '+JSON.parse(prior).id);
     if(id&&(!clienteEditBaseline||String(clienteEditBaseline.id)!==String(id)))throw Error('Riapri questa scheda prima di salvare.');
     let savedId = id || crypto.randomUUID();
     let payload = { ...data };
+    if(id){
+      if(!clientEditLoadedProjection)throw Error('Riapri la scheda per confrontare i campi originali.');
+      payload=Object.fromEntries(Object.entries(data).filter(([k,v])=>JSON.stringify(v)!==JSON.stringify(clientEditLoadedProjection[k])));
+      if(!Object.keys(payload).length){closeClienteModal();toast('Nessuna modifica da salvare.','info');if(openAfterSave&&window.RighettoCliente)await RighettoCliente.open(id);return id;}
+    }
+
     localStorage.setItem(pendingKey,JSON.stringify({id:savedId,operation:id?'update':'create',keys:Object.keys(payload),hash:await clientPayloadHash(payload,Object.keys(payload)),at:new Date().toISOString()}));
     const trySave = async (pl) => {
       attempted=true;
@@ -9762,7 +9779,7 @@ async function saveClienteLocked(openAfterSave = false) {
     console.error('Save cliente error:', err);
     toast('Errore: ' + (err.message || 'Errore salvataggio'), 'error');
   } finally {
-    savingCliente=false;
+    savingCliente=false;window.righettoClientPendingButton?.();
     if(!attempted||definiteFailure||!document.getElementById('clienteModal').classList.contains('open'))saveButtons.forEach((b,i)=>b.disabled=priorDisabled[i]);
   }
 }
@@ -18198,7 +18215,7 @@ window.showSection('home');
 async function go(){if(done||busy)return;busy=true;const principal=window.RighettoGatedPrincipal;try{if(typeof sb==='undefined'||!principal)throw 0;var u=await sb.auth.getUser();if(!u.data.user?.id||u.data.user.id!==principal||window.RighettoGatedPrincipal!==principal||document.body.dataset.adminArea!=='attivita')throw 0;var authority=await sb.rpc('righetto_is_admin_request');if(authority.error||authority.data!==true||window.RighettoGatedPrincipal!==principal||document.body.dataset.adminArea!=='attivita')throw 0;done=true;RighettoAttivita.init(el,{store:RighettoAttivita.dbStore(sb)});}catch(e){msg('Attivit\u00e0: accedi per vedere le pratiche.');}busy=false;}
 msg('Attivit\u00e0: apri Attivit\u00e0 per caricare le pratiche.');window.rigSectionReady(['attivita'],go);})();</script>
 <script src="js/admin-mobile.js?v=20261107-wa-20261106-1854"></script>
-<script src="js/admin-cliente-layout.js?v=20261031-clienti"></script>
+<script src="js/admin-cliente-layout.js?v=20261109-client-edit-green"></script>
 <script>window.RighettoNavigationAttachments=()=>({property:typeof currentFotos==='undefined'?null:[currentFotos,currentPlanimetrie,currentDocumenti,currentVtScenes,currentUnitaCatastali,currentCatastoPdf],client:typeof currentClienteDocumenti==='undefined'?null:currentClienteDocumenti});</script>
 <script type="module">
 import {bindAuthenticatedNavigation} from './js/auth-bootstrap.mjs?v=20261107-client-readonly';
@@ -18216,6 +18233,8 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script src="js/admin-immobile-cronistoria.js?v=20261107-simple-v3"></script>
 <script src="js/admin-immobile-dati-aggiuntivi.js?v=20261106-campi"></script>
 <script src="js/admin-immobile-riferimenti.js?v=20261106-riferimenti"></script>
+<link rel="stylesheet" href="js/client-edit-green.css?v=20261109-client-edit-green">
+<script type="module">import{installClientGeo}from'./js/client-geo-verde.mjs';installClientGeo({root:document.getElementById('clienteModal')}).catch(e=>{console.error('Località cliente non disponibili',e);});</script>
 </body>
 </html>
 
