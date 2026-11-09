@@ -152,6 +152,33 @@ async function deleteEvent(e){if(!ready||!confirm('Spostare questo appuntamento 
 async function importData(){if(!ready)return;const file=root.querySelector('#ra-import-file').files[0];if(!file)return;const status=root.querySelector('#ra-import-result'),btn=root.querySelector('[data-action=import]');btn.disabled=true;try{const pack=JSON.parse(await file.text());if(pack.version!==1||!Array.isArray(pack.events)||!Array.isArray(pack.types))throw Error('Formato import non riconosciuto.');if(!confirm('Importare '+pack.events.length+' appuntamenti reali dal file privato? Gli ID già presenti saranno saltati, senza sovrascrivere modifiche. Nessun invio a Google o clienti.')){btn.disabled=false;return;}const t=await db.from('agenda_event_types').upsert(pack.types,{onConflict:'id',ignoreDuplicates:true});if(t.error)throw t.error;let saved=0;for(let n=0;n<pack.events.length;n+=50){const chunk=pack.events.slice(n,n+50);if(chunk.some(e=>!e.source_id?.startsWith('gestionale:')))throw Error('Origine o riservatezza non valida.');const r=await db.from('agenda_events').upsert(chunk,{onConflict:'source_id',ignoreDuplicates:true}).select('source_id');if(r.error)throw r.error;saved+=r.data.length;status.textContent='Letti '+Math.min(n+50,pack.events.length)+'/'+pack.events.length+'; nuovi '+saved;}let verified=0;for(let n=0;n<pack.events.length;n+=100){const q=await db.from('agenda_events').select('source_id').in('source_id',pack.events.slice(n,n+100).map(e=>e.source_id));if(q.error)throw q.error;verified+=q.data.length;}if(verified!==pack.events.length)throw Error('Conteggio verifica non corrispondente: '+verified);status.textContent='Verificati '+verified+' eventi, '+saved+' nuovi. Importazione completata.';const finalMessage=status.textContent;alert(finalMessage);await connect();const result=root.querySelector('#ra-import-result');if(result)result.textContent=finalMessage;}catch(e){status.textContent='Importazione interrotta: '+e.message+'. Puoi riprendere: gli ID già presenti non si duplicano.';btn.disabled=false;}}
 
 function newEvent(o){if(!ready||preview)return;return editor({day:dayKey(new Date()),time:'09:00',agents:['Gino'],duration:45,...(o||{})});}
+// Cronistoria e Agenda condividono gli stessi handler, nessun secondo archivio.
+window.RighettoHistoryActions={open:async({action,eventId,clientId,isCurrent=()=>true})=>{
+ if(!['copy','edit','delete'].includes(action)||!eventId||!clientId||!isCurrent())throw Error('Evento o schermata non verificati.');
+ if(!window.RighettoNavigation)throw Error('Navigazione Agenda non disponibile.');
+ const principal=window.RighettoGatedPrincipal;
+ const connection=typeof sb!=='undefined'?sb:db;
+ if(!connection)throw Error('Connessione Agenda non disponibile.');
+ const user=await connection.auth.getUser();
+ if(!isCurrent()||user.error||!principal||user.data?.user?.id!==principal)throw Error('Sessione cambiata. Riapri la cronistoria.');
+ const admin=await connection.rpc('righetto_is_admin_request');
+ if(!isCurrent()||admin.error||admin.data!==true||window.RighettoGatedPrincipal!==principal)throw Error('Accesso amministratore non verificato.');
+ const before=await connection.from('agenda_events').select('*').eq('id',eventId).eq('client_id',clientId).is('deleted_at',null).maybeSingle();
+ if(!isCurrent()||before.error||!before.data||String(before.data.id)!==eventId||String(before.data.client_id)!==clientId||window.RighettoGatedPrincipal!==principal)throw Error('Evento non più disponibile per questo cliente.');
+ const ok=await RighettoNavigation.open({section:'agenda',view:'agenda-detail',id:eventId});
+ if(ok===false||window.RighettoGatedPrincipal!==principal)return;
+ const currentUser=await connection.auth.getUser();
+ const after=await connection.from('agenda_events').select('*').eq('id',eventId).eq('client_id',clientId).is('deleted_at',null).maybeSingle();
+ if(currentUser.error||currentUser.data?.user?.id!==principal||window.RighettoGatedPrincipal!==principal||after.error||!after.data||String(after.data.id)!==eventId||String(after.data.client_id)!==clientId||after.data.version!==before.data.version)throw Error('Evento o sessione cambiati. Riapri prima di modificarlo.');
+ const route=RighettoNavigation.router?.current;
+ if(route&&(route.section!=='agenda'||route.view!=='agenda-detail'||route.id!==eventId))throw Error('Schermata Agenda cambiata.');
+ if(!ready||!root?.querySelector('.ra-modal'))throw Error('Dettaglio Agenda non pronto.');
+ const e=fromRow(after.data);
+ if(action==='edit')return editor(e);
+ if(action==='copy')return editor({...e,id:null,source_id:null});
+ // Stessa conferma e stesso cestino dell'Agenda, mai eliminazione al semplice caricamento.
+ return deleteEvent(e);
+}};
 window.RighettoAgenda={init,newEvent,previewDetail:detail,previewEditor:editor,restoreRoute:async(r,isCurrent=()=>true)=>{
  const principal=window.RighettoGatedPrincipal,ticket=readEpoch;
  if(!principal)throw Error('Sessione amministratore non verificata.');
