@@ -18210,7 +18210,7 @@ window.showSection('home');
 <script>window.RIGHETTO_SYNC_ATTIVA=true;</script>
 <script src="js/admin-agenda.js?v=20261109-property-history"></script>
 <script src="js/admin-clienti-upload.js?v=20261106-2151"></script>
-<script src="js/admin-cliente-scheda.js?v=20261109-cron-first-row"></script>
+<script src="js/admin-cliente-scheda.js?v=20261111-client-cancel"></script>
 <script src="js/admin-private-photos.js?v=LP0290-private-1"></script>
 <script src="js/admin-immobile-etichette.js?v=20261106-local"></script>
 <script src="js/admin-immobile-operazioni.js?v=20261106-catasto"></script>
@@ -18228,7 +18228,7 @@ msg('Attivit\u00e0: apri Attivit\u00e0 per caricare le pratiche.');window.rigSec
 <script src="js/admin-cliente-drag.js?v=20261111-0937"></script>
 <script>window.RighettoNavigationAttachments=()=>({property:typeof currentFotos==='undefined'?null:[currentFotos,currentPlanimetrie,currentDocumenti,currentVtScenes,currentUnitaCatastali,currentCatastoPdf],client:typeof currentClienteDocumenti==='undefined'?null:currentClienteDocumenti});</script>
 <script type="module">
-import {bindAuthenticatedNavigation} from './js/auth-bootstrap.mjs?v=20261107-client-readonly';
+import {bindAuthenticatedNavigation} from './js/auth-bootstrap.mjs?v=20261111-client-cancel';
 window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation(sb).catch(()=>{if(document.getElementById('navigation-startup-warning'))return;const n=document.createElement('p');n.id='navigation-startup-warning';n.setAttribute('role','status');n.textContent='Navigazione Indietro non disponibile in questa sessione. Usa il menu interno; i dati non sono stati modificati.';n.style.cssText='margin:12px;padding:12px;background:#fff3cc;color:#17324d';document.querySelector('.content')?.prepend(n);});});
 </script>
 <script src="js/admin-share-preview.js?v=20261103"></script>
