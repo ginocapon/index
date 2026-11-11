@@ -2491,8 +2491,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <input type="text" id="f_titolo" placeholder="es. Appartamento luminoso centro" required>
                 </div>
                 <div class="form-group">
-                  <label>Tipologia</label>
-                  <select id="f_tipologia" onchange="suggerisciCodice()">
+                  <label>Tipologia principale</label>
+                  <select id="f_tipologia" aria-label="Tipologia principale" onchange="suggerisciCodice()">
                     <option value="appartamento">Appartamento</option>
                     <option value="villa">Villa</option>
                     <option value="villetta">Villetta</option>
@@ -2509,6 +2509,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                     <option value="garage">Garage / Box</option>
                   </select>
                 </div>
+                <div class="form-group" style="grid-column:1/-1"><div id="propertyTypesHost"></div></div>
                 <div class="form-group">
                   <label>Tipo Operazione *</label>
                   <select id="f_tipo_operazione" required onchange="toggleContrattoAffittoRes()">
@@ -3728,7 +3729,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               </div>
               <div class="form-group">
                 <label>Tipologia</label>
-                <select id="clienteTipologia">
+                <select id="clienteTipologia" aria-describedby="clientTypeRequestHint">
                   <option value="">Qualsiasi</option>
                   <option value="appartamento">Appartamento</option>
                   <option value="villa">Villa</option>
@@ -3746,6 +3747,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <option value="terreno">Terreno / Rurale</option>
                   <option value="garage">Garage / Box</option>
                 </select>
+                <small id="clientTypeRequestHint">Campo sintetico storico. Per scegliere più tipologie usa Richieste nella scheda cliente: aggiungi o modifica una richiesta separata. Le richieste originali non vengono unite.</small>
               </div>
               <div class="form-group">
                 <label>Zona / Comune</label>
@@ -6701,6 +6703,7 @@ function resetForm() {
   document.getElementById('immobileForm').reset();
   document.getElementById('editId').value = '';
   document.getElementById('formTitle').textContent = 'Nuovo Immobile';
+  window.RighettoPropertyTypes?.reset();
   document.getElementById('f_attivo').checked = true;
   clearProprietarioSelection();
   currentFotos = []; currentPlanimetrie = []; currentDocumenti = []; currentVtScenes = []; currentUnitaCatastali = []; currentCatastoPdf = [];
@@ -6987,6 +6990,7 @@ async function editImmobile(id,isCurrent=()=>true,reloadSaved=null) {if(rigPrope
   document.getElementById('sec-nuovo').classList.add('active');
   document.getElementById('topbarTitle').textContent = 'Modifica Immobile';
   window.scrollTo(0, 0);
+  try{const types=await window.rigPropertyTypesReady;if(!current())return;types.mount(imm);}catch(error){if(current()){rigPropertySnapshot=null;document.getElementById('btnSalva').disabled=true;toast(error.message,'error');}return;}
   try{rigPropertySnapshot=RighettoPropertySafety.capturePropertyForm(imm,RighettoPropertySafety.readControls(document.getElementById('immobileForm')),rigPropertyMedia());}catch(error){toast(error.message,'error');}
  window.RighettoLabels?.mount(imm);
 }
@@ -7012,6 +7016,8 @@ async function saveImmobile(e) {
   const owner=await sb.auth.getUser();if(owner.error||!owner.data?.user?.id||owner.data.user.id!==window.RighettoGatedPrincipal)throw Error('Sessione amministratore non verificata.');const authBefore=owner.data.user.id;const access=await sb.rpc('righetto_is_admin_request');if(access.error||access.data!==true)throw Error('Accesso amministratore non abilitato.');const confirmed=await sb.auth.getUser();if(confirmed.error||confirmed.data?.user?.id!==authBefore||window.RighettoGatedPrincipal!==authBefore)throw Error('Sessione cambiata durante controllo.');
   const titolo = document.getElementById('f_titolo').value.trim();
   const slug = titolo.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  if(!window.RighettoPropertyTypes)throw Error('Tipologie non pronte: attendi e riprova.');
+  const rigTypesPayload=window.RighettoPropertyTypes.read(id);
   const codiceVal = (codiceInput.value || '').trim();
   const codiceForDb = codiceVal || null;
 
@@ -7078,6 +7084,7 @@ async function saveImmobile(e) {
     tipo_operazione: document.getElementById('f_tipo_operazione').value,
     contratto_affitto_res: getContrattoAffittoResValue(),
     tipologia: document.getElementById('f_tipologia').value,
+    tipologie_ricerca: rigTypesPayload,
     prezzo: rigNumberOrNull(parseFloat(document.getElementById('f_prezzo').value)),
     proprietario_id: propClienteId || null,
     proprietario_nome: propNome || null,
@@ -7233,18 +7240,19 @@ async function saveImmobile(e) {
     assertSameForm();
     const patch=RighettoPropertySafety.changedPropertyPayload(rigPropertySnapshot,payload,RighettoPropertySafety.readControls(document.getElementById('immobileForm')),rigPropertyMedia());
     if(!Object.keys(patch).length){toast('Nessuna modifica da salvare.','success');return;}
-    const res=await sb.from('immobili').update(patch).eq('id',id).eq('updated_at',rigPropertySnapshot.record.updated_at).select('id,updated_at');
+    const res=await sb.from('immobili').update(patch).eq('id',id).eq('updated_at',rigPropertySnapshot.record.updated_at).select('id,updated_at,tipologie_ricerca');
     if(res.error)throw Error(res.error.message);
     if(res.data?.length!==1)throw Error('Salvataggio non eseguito: scheda modificata o permessi cambiati. Ricarica prima di riprovare.');
     savedRow=res.data[0];
   }else{
-    const res=await sb.from('immobili').insert(payload).select('id,updated_at');
+    const res=await sb.from('immobili').insert(payload).select('id,updated_at,tipologie_ricerca');
     if(res.error)throw Error(res.error.message);
     if(res.data?.length!==1)throw Error('Esito creazione da verificare: non ripetere.');
     savedRow=res.data[0];
   }
-  const verified=await sb.from('immobili').select('id,updated_at').eq('id',savedRow.id).single();
+  const verified=await sb.from('immobili').select('id,updated_at,tipologie_ricerca').eq('id',savedRow.id).single();
   if(verified.error||verified.data?.updated_at!==savedRow.updated_at)throw Error('Salvataggio effettuato, verifica successiva non conclusa: non ripetere, rileggi la scheda.');
+  if(JSON.stringify(window.RighettoPropertyTypes.normalize(verified.data?.tipologie_ricerca??null))!==JSON.stringify(window.RighettoPropertyTypes.normalize(savedRow.tipologie_ricerca??null))||JSON.stringify(window.RighettoPropertyTypes.normalize(savedRow.tipologie_ricerca??null))!==JSON.stringify(window.RighettoPropertyTypes.normalize(payload.tipologie_ricerca)))throw Error('Salvataggio eseguito, tipologie da verificare: non ripetere.');
   if(id){try{assertSameForm();}catch(error){throw Error('Salvataggio eseguito sulla scheda precedente. La scheda aperta ora non è stata toccata: ricarica elenco per verificare.');}}
   rigPropertySnapshot=null;
   btn.disabled = false;
@@ -7264,6 +7272,7 @@ async function saveImmobile(e) {
  window.RighettoLabels?.dispose(true);
     document.getElementById('editId').value = '';
     document.getElementById('formTitle').textContent = 'Nuovo Immobile';
+  window.RighettoPropertyTypes?.reset();
     document.getElementById('immobileForm').reset();
     document.getElementById('f_attivo').checked = true;
     clearProprietarioSelection();
@@ -7884,12 +7893,11 @@ async function loadNewsletterList() {
   try {
     const interesse = document.getElementById('filtroNewsInteresse').value;
     const tipo = document.getElementById('filtroNewsTipo').value;
-    let query = sb.from('newsletter_subscribers').select('*').order('created_at', { ascending: false });
+    let query = sb.from('newsletter_subscribers').select('*',{count:'exact'}).order('created_at', { ascending: false }).order('email');
     if (interesse) query = query.eq('interesse', interesse);
-    if (tipo) query = query.eq('tipo_immobile', tipo);
-    const { data, error } = await query;
-    if (error) throw error;
-    allNewsSubscribers = data || [];
+    await window.rigPropertyTypesReady;
+    let data=[],seen=new Set(),total=null;for(let offset=0;;offset+=500){const page=await query.range(offset,offset+499);if(page.error)throw page.error;if(!Array.isArray(page.data)||!Number.isInteger(page.count))throw Error('Completezza iscritti non verificabile');if(total===null)total=page.count;else if(total!==page.count)throw Error('Elenco iscritti cambiato durante lettura');for(const row of page.data){const identity=row.id||row.email;if(!identity||seen.has(identity))throw Error('Identità iscritti duplicate');seen.add(identity);data.push(row);}if(page.data.length<500){if(data.length!==total)throw Error('Elenco iscritti incompleto');break;}if(data.length>100000)throw Error('Elenco troppo grande');}
+    allNewsSubscribers = (data || []).filter(row=>!tipo||window.RighettoPropertyTypes.alertMatches(row,tipo));
     renderNewsTable();
     updateNewsStats();
   } catch(e) {
@@ -7914,7 +7922,7 @@ function renderNewsTable() {
         <td><a href="mailto:${esc(s.email)}" style="color:var(--nero)">${esc(s.email)}</a></td>
         <td>${esc(s.telefono || '—')}</td>
         <td><span class="badge ${badge}">${esc(s.interesse || 'generico')}</span></td>
-        <td>${esc(s.tipo_immobile || '—')}</td>
+        <td>${esc(window.RighettoPropertyTypes.alertLabels(s)||'—')}</td>
         <td>${esc(s.zona || '—')}</td>
         <td style="font-size:0.72rem">${esc(s.provenienza || s.fonte || '—')}</td>
         <td style="font-size:0.72rem">${dt}</td>
@@ -7945,7 +7953,7 @@ function copyNewsEmails() {
   const tipo = document.getElementById('filtroNewsTipo').value;
   let filtered = allNewsSubscribers.filter(s => s.attivo && s.email);
   if (interesse) filtered = filtered.filter(s => s.interesse === interesse);
-  if (tipo) filtered = filtered.filter(s => s.tipo_immobile === tipo);
+  if (tipo) filtered = filtered.filter(s => window.RighettoPropertyTypes.alertMatches(s,tipo));
   const emails = filtered.map(s => s.email).join(', ');
   if (!emails) { toast('Nessuna email da copiare', 'error'); return; }
   navigator.clipboard.writeText(emails).then(() => {
@@ -18237,7 +18245,7 @@ window.showSection('home');
 <script>window.RIGHETTO_SYNC_ATTIVA=true;</script>
 <script src="js/admin-agenda.js?v=20261109-property-history"></script>
 <script src="js/admin-clienti-upload.js?v=20261106-2151"></script>
-<script src="js/admin-cliente-scheda.js?v=20261111-client-cancel"></script>
+<script src="js/admin-cliente-scheda.js?v=20261111-types-private-v1"></script>
 <script src="js/admin-private-photos.js?v=LP0290-private-1"></script>
 <script src="js/admin-immobile-etichette.js?v=20261106-local"></script>
 <script src="js/admin-immobile-operazioni.js?v=20261106-catasto"></script>
@@ -18264,7 +18272,8 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script src="js/admin-wa-property-selection.js?v=20261107-export"></script>
 <script src="js/admin-cliente-comunicazioni.js?v=20261107-whatsapp"></script>
 <script src="js/admin-cliente-documenti.js?v=20261106-1038"></script>
-<script src="js/admin-client-matching.js?v=20261107-incrocio-wa-v2"></script>
+<script>window.rigPropertyTypesReady=import('./js/property-types-ui.mjs?v=20261111-types-private-v1').then(m=>m.initPropertyTypeControl({host:document.getElementById('propertyTypesHost'),primary:document.getElementById('f_tipologia')})).then(x=>(window.RighettoPropertyTypes=x));window.rigPropertyTypesReady.catch(()=>{});</script>
+<script src="js/admin-client-matching.js?v=20261111-types-private-v1"></script>
 <script src="js/admin-immobili-preview.js?v=20261106-fisarmonica"></script>
 <script src="js/admin-immobile-layout.js?v=20261106-scheda"></script>
 <script src="js/admin-immobile-cronistoria.js?v=20261109-history-table"></script>

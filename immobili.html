@@ -1106,7 +1106,7 @@ function mainCardPreview(src) { return MAIN_CARD_PREVIEWS[String(src || "").repl
   async function loadImmobili() {
     const grid = document.getElementById('imm-grid');
     try {
-      const { data, error } = await sb.from('immobili').select('id,codice,titolo,slug,tipo_operazione,categoria,tipologia,comune,prezzo,superficie,locali,bagni,piano,anno_costruzione,stato,classe_energetica,garage,giardino,terrazzo,cantina,ascensore,piscina,arredato,foto,youtube_id,virtual_tour,attivo,in_evidenza,venduto,affittato,created_at,updated_at,ipe_kwh,arredo,caldaia_condensazione,camino,riscaldamento_pavimento,termopompa,pannelli_fotovoltaici,pannelli_solari,impianto_geotermico,allarme,domotica,porta_blindata,tapparelle_motorizzate,zanzariere,accesso_disabili,area_fitness,portineria,cassaforte,riscaldamento_semi_autonomo,raffreddamento_pavimento,grezzo,connettivita,distanza_mare,totale_piani,tipo_contratto,stato_manutenzione,virtual_tour_scenes,planimetrie,animali_ammessi,ingresso_indipendente,canna_fumaria,porticato,soppalco,lavanderia,mansarda,taverna,soffitta,giardino_condominiale,esposizione,camere,bagni_totali,terrazzi_num,ripostigli,garage_num,garage_doppio,posto_auto,consegna,aria_condizionata,panorama,spese_condominio,mq_giardino,mq_lotto,impianto_elettrico,indirizzo_mappa,foto_urls,soggiorno,soggiorno_angolo_cottura,cucina,riscaldamento_autonomo,riscaldamento_centralizzato,descrizione').eq('attivo', true).order('in_evidenza', { ascending: false }).order('created_at', { ascending: false });
+      const { data, error } = await sb.from('immobili').select('id,codice,titolo,slug,tipo_operazione,categoria,tipologia,tipologie_ricerca,comune,prezzo,superficie,locali,bagni,piano,anno_costruzione,stato,classe_energetica,garage,giardino,terrazzo,cantina,ascensore,piscina,arredato,foto,youtube_id,virtual_tour,attivo,in_evidenza,venduto,affittato,created_at,updated_at,ipe_kwh,arredo,caldaia_condensazione,camino,riscaldamento_pavimento,termopompa,pannelli_fotovoltaici,pannelli_solari,impianto_geotermico,allarme,domotica,porta_blindata,tapparelle_motorizzate,zanzariere,accesso_disabili,area_fitness,portineria,cassaforte,riscaldamento_semi_autonomo,raffreddamento_pavimento,grezzo,connettivita,distanza_mare,totale_piani,tipo_contratto,stato_manutenzione,virtual_tour_scenes,planimetrie,animali_ammessi,ingresso_indipendente,canna_fumaria,porticato,soppalco,lavanderia,mansarda,taverna,soffitta,giardino_condominiale,esposizione,camere,bagni_totali,terrazzi_num,ripostigli,garage_num,garage_doppio,posto_auto,consegna,aria_condizionata,panorama,spese_condominio,mq_giardino,mq_lotto,impianto_elettrico,indirizzo_mappa,foto_urls,soggiorno,soggiorno_angolo_cottura,cucina,riscaldamento_autonomo,riscaldamento_centralizzato,descrizione').eq('attivo', true).order('in_evidenza', { ascending: false }).order('created_at', { ascending: false });
       if (error) throw error;
       (data || []).forEach(applicaMqPubblici);
       immobili = (data || []).map(i => ({
@@ -1123,6 +1123,7 @@ function mainCardPreview(src) { return MAIN_CARD_PREVIEWS[String(src || "").repl
         ceTx: (CE_COLORS[i.classe_energetica] || {tx:'#fff'}).tx,
         op: i.tipo_operazione || 'vendita',
         tipo: i.tipologia || '',
+        tipologie_ricerca: i.tipologie_ricerca,
         giardino: !!(i.giardino || i.mq_giardino),
         garage: !!(i.garage || i.garage_num),
         vt: !!i.virtual_tour,
@@ -1181,7 +1182,7 @@ function mainCardPreview(src) { return MAIN_CARD_PREVIEWS[String(src || "").repl
       const ceColor = CE_COLORS[i.ce] || {bg:'#999',tx:'#fff'};
       const ceHtml = i.ce ? '<span class="cf-ce" style="background:'+ceColor.bg+';color:'+ceColor.tx+'">'+i.ce+'</span>' : '';
       const cardSlug = generatePropertySlug(i);
-      return '<a class="card" href="immobile?s='+encodeURIComponent(cardSlug)+'" data-slug="'+cardSlug+'" data-tipo="'+i.tipo+'" data-prezzo="'+i.prezzo+'" data-mq="'+i.mq+'" data-camere="'+i.camere+'" data-bagni="'+i.bagni+'" data-comune="'+(i.comune||'').toLowerCase()+'" data-cerca="'+String([i.rif,String(i.rif||'').replace(/[\s.\-_\/]+/g,''),i.desc,i.comune].join(' ')).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/"/g,'')+'" data-vt="'+(i.vt?'1':'')+'" data-yt="'+(i.yt?'1':'')+'" data-giardino="'+(i.giardino?'1':'')+'" data-garage="'+(i.garage?'1':'')+'" data-evidenza="'+(i.evidenza?'1':'0')+'" data-op="'+i.op+'" data-anno="'+i.anno+'" data-stato="'+(i.stato||'').toLowerCase()+'" data-piscina="'+(i.piscina?'1':'')+'" data-mansarda="'+(i.mansarda?'1':'')+'" data-taverna="'+(i.taverna?'1':'')+'" data-vista="'+(i.vistaAperta?'1':'')+'" onclick="openCard(event,this)">'
+      return '<a class="card" href="immobile?s='+encodeURIComponent(cardSlug)+'" data-slug="'+cardSlug+'" data-tipo="'+i.tipo+'" data-tipologie="'+encodeURIComponent(JSON.stringify(i.tipologie_ricerca))+'" data-prezzo="'+i.prezzo+'" data-mq="'+i.mq+'" data-camere="'+i.camere+'" data-bagni="'+i.bagni+'" data-comune="'+(i.comune||'').toLowerCase()+'" data-cerca="'+String([i.rif,String(i.rif||'').replace(/[\s.\-_\/]+/g,''),i.desc,i.comune].join(' ')).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/"/g,'')+'" data-vt="'+(i.vt?'1':'')+'" data-yt="'+(i.yt?'1':'')+'" data-giardino="'+(i.giardino?'1':'')+'" data-garage="'+(i.garage?'1':'')+'" data-evidenza="'+(i.evidenza?'1':'0')+'" data-op="'+i.op+'" data-anno="'+i.anno+'" data-stato="'+(i.stato||'').toLowerCase()+'" data-piscina="'+(i.piscina?'1':'')+'" data-mansarda="'+(i.mansarda?'1':'')+'" data-taverna="'+(i.taverna?'1':'')+'" data-vista="'+(i.vistaAperta?'1':'')+'" onclick="openCard(event,this)">'
         + '<div class="card-img">'
         + imgHtml
         + '<div class="card-badges">'+badges+'</div>'
@@ -1483,7 +1484,8 @@ function mainCardPreview(src) { return MAIN_CARD_PREVIEWS[String(src || "").repl
       return {
         op: currentOp || 'vendita',
         zona: val('zona-input'),
-        tipo: val('f-tipo'),
+        tipo: rigSelectedPublicTypes().length===1&&!/^[sd]-/.test(rigSelectedPublicTypes()[0])?rigSelectedPublicTypes()[0]:'',
+        tipi: rigSelectedPublicTypes(),
         prezzoMax: val('f-prezzo'),
         camereMin: val('f-camere'),
         mqMin: val('f-mq'),
@@ -1500,7 +1502,8 @@ function mainCardPreview(src) { return MAIN_CARD_PREVIEWS[String(src || "").repl
     function criteriaLabels(c){
       var parts = [OP_LABELS[c.op] || c.op];
       if (c.zona) parts.push(selText('zona-input') || c.zona);
-      if (c.tipo) parts.push(TIPO_LABELS[c.tipo] || c.tipo);
+      if (c.tipi?.length) parts.push(window.RighettoPublicTypes?RighettoPublicTypes.label(c.tipi):c.tipi.map(x=>TIPO_LABELS[x]||x).join(' + '));
+      else if(c.tipo) parts.push(TIPO_LABELS[c.tipo]||c.tipo);
       if (c.prezzoMax) parts.push('max ' + selText('f-prezzo'));
       if (c.camereMin) parts.push(c.camereMin + '+ camere');
       if (c.mqMin) parts.push(c.mqMin + '+ mq');
@@ -1523,7 +1526,8 @@ function mainCardPreview(src) { return MAIN_CARD_PREVIEWS[String(src || "").repl
     function criteriaToInteresse(c, canali){
       var s = 'alert-immobili|op:' + c.op;
       if (c.zona) s += '|zona:' + c.zona;
-      if (c.tipo) s += '|tipo:' + c.tipo;
+      if(c.tipi?.length)s+='|typesVersion:1|tipi:'+c.tipi.join(',');
+      else if(c.tipo)s+='|tipo:'+c.tipo;
       if (c.prezzoMax) s += '|prezzoMax:' + c.prezzoMax;
       if (c.camereMin) s += '|camereMin:' + c.camereMin;
       if (c.mqMin) s += '|mqMin:' + c.mqMin;
@@ -1647,6 +1651,7 @@ function mainCardPreview(src) { return MAIN_CARD_PREVIEWS[String(src || "").repl
     return { syncFromFilters: syncFromFilters, subscribe: subscribe, renderSummary: renderSummary, init: init, collectCriteria: collectCriteria };
   })();
 
+  function rigSelectedPublicTypes(){return [...document.getElementById('f-tipo').selectedOptions].map(x=>x.value).filter(Boolean);}
   // ── FILTER ──
   /** Allinea tipologia DB (slug) e varianti testuali; Villa vs Villetta vs Bi-familiare. */
   function tipologiaMatch(tipoRaw, titoloLower, filter) {
@@ -1677,7 +1682,7 @@ function mainCardPreview(src) { return MAIN_CARD_PREVIEWS[String(src || "").repl
     const zona = (document.getElementById('zona-input').value || '').toLowerCase();
     const cercaRaw = ((document.getElementById('f-cerca')||{}).value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
     const cercaW = cercaRaw.split(/[\s,;]+/).filter(Boolean);
-    const tipo = document.getElementById('f-tipo').value;
+    const tipi = rigSelectedPublicTypes();
     const prezzoMax = parseInt(document.getElementById('f-prezzo').value) || Infinity;
     const camereMin = parseInt(document.getElementById('f-camere').value) || 0;
     const mqMin = parseInt(document.getElementById('f-mq').value) || 0;
@@ -1718,7 +1723,7 @@ function mainCardPreview(src) { return MAIN_CARD_PREVIEWS[String(src || "").repl
         if (cOp !== currentOp) show = false;
       }
       // Tipologia (slug + varianti; titolo usato solo per Bi-familiare se il campo DB non è aggiornato)
-      if (tipo && !tipologiaMatch(c.dataset.tipo || '', cTitle, tipo)) show = false;
+      if(tipi.length){try{const args={primary:c.dataset.tipo||'',title:cTitle,extra:JSON.parse(decodeURIComponent(c.dataset.tipologie)),selected:tipi};if(!window.RighettoPublicTypes||!RighettoPublicTypes.matches(args,tipologiaMatch))show=false;}catch(e){show=false;console.warn('Tipologie immobile non verificabili');}}
       // Prezzo max
       if (cPrezzo > prezzoMax) show = false;
       // Camere min
@@ -1778,7 +1783,8 @@ function mainCardPreview(src) { return MAIN_CARD_PREVIEWS[String(src || "").repl
   // ── RESET ──
   function resetFilters() {
     document.getElementById('zona-input').value = '';
-    document.getElementById('f-tipo').value = '';
+    for(const o of document.getElementById('f-tipo').options)o.selected=false;
+    window.RighettoPublicTypes?.sync();
     document.getElementById('f-prezzo').value = '';
     document.getElementById('f-camere').value = '';
     document.getElementById('f-mq').value = '';
@@ -1970,5 +1976,6 @@ setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach
 <script src="js/cookie-consent-main.js?v=1" defer></script>
 <script src="js/scroll-reveal.js?v=3" defer></script>
 <script src="js/welcome-popup.js?v=3" defer></script>
+<script>window.rigPublicTypesReady=import('./js/public-types.mjs?v=20261111-types-private-v1').then(m=>m.initPublicTypeControl(document.getElementById('f-tipo'),filterCards)).then(x=>{window.RighettoPublicTypes=x;const qs=new URLSearchParams(location.search).getAll('tipo').flatMap(v=>v.split(',')).filter(Boolean);if(qs.length)x.set(qs);else filterCards();return x;}).catch(e=>{document.getElementById('f-tipo').disabled=true;console.warn('Filtro tipologie non disponibile',e.message);});</script>
 </body>
 </html>
