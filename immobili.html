@@ -926,19 +926,6 @@
   </div>
 </div>
 
-<!-- MODAL DETTAGLIO -->
-<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
-  <div class="modal" id="modal-box">
-    <div class="modal-head">
-      <div id="modal-hero" class="modal-hero-wrap" style="width:100%;height:260px;background:var(--gc);position:relative;overflow:hidden"></div>
-      <button class="modal-close" onclick="closeModal()" aria-label="Chiudi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-    </div>
-    <div class="modal-body" id="modal-body">
-      <!-- dinamico -->
-    </div>
-  </div>
-</div>
-
 <!-- BARRA CONFRONTO IMMOBILI -->
 <div class="cmp-bar" id="cmp-bar" aria-live="polite">
   <div class="cmp-bar-inner">
@@ -1801,78 +1788,10 @@ function mainCardPreview(src) { return MAIN_CARD_PREVIEWS[String(src || "").repl
     filterCards();
   }
 
-  // ── MODAL: hero immagine (stesso URL delle card) ──
-  function setModalHero(d) {
-    const hero = document.getElementById('modal-hero');
-    if (!hero) return;
-    hero.innerHTML = '';
-    let fotos = Array.isArray(d.foto) ? d.foto.filter(Boolean) : [];
-    if (!fotos.length && d._raw) {
-      const r = d._raw;
-      const rawList = Array.isArray(r.foto) ? r.foto : [];
-      fotos = rawList.map(function(u){ return resolveImageUrl(String(u), { width: 900, quality: 80 }); }).filter(Boolean);
-      if (!fotos.length) {
-        const p = r.foto_principale || (Array.isArray(r.foto_urls) && r.foto_urls[0]);
-        if (p) fotos = [resolveImageUrl(String(p), { width: 900, quality: 80 })];
-      }
-    }
-    if (!fotos.length && d.fotoPrincipale) fotos = [d.fotoPrincipale];
-    if (!fotos.length) {
-      hero.innerHTML = '<div class="card-img-ph" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center">' + SVG_PLACEHOLDER + '</div>';
-      return;
-    }
-    RigPhotoCarousel.mount(hero, { urls: fotos, alt: d.titolo || 'Immobile' });
-  }
-
-  // ── MODAL ──
+  // Public property cards follow their full-sheet links directly.
   function openCard(e, el) {
-    e.preventDefault();
-    if (e.target.closest('.rig-carousel-nav')) return;
-    if (e.target.closest('.cf-live')) return;
-    if (typeof RigPhotoCarousel !== 'undefined' && RigPhotoCarousel.wasDragging(el)) return;
-    const rif = el.querySelector('.cf-ref') ? el.querySelector('.cf-ref').textContent.replace('Rif. ','') : '';
-    const urlSlug = new URL(el.href, location.origin).searchParams.get('s') || '';
-    const d = immobili.find(i => generatePropertySlug(i) === urlSlug || i.rif === rif);
-    if (!d) { window.location.href = el.href; return; }
-
-    setModalHero(d);
-
-    const mediaIcons = [];
-    if (d.yt) mediaIcons.push('<span style="background:var(--rosso);color:#fff;font-size:.6rem;padding:.15rem .4rem;border-radius:1px;font-weight:600;">&#9654; VIDEO</span>');
-    if (d.vt) mediaIcons.push('<span style="background:var(--blu);color:#fff;font-size:.6rem;padding:.15rem .4rem;border-radius:1px;font-weight:600;">&#9679; 360&deg;</span>');
-    const ceHtml = d.ce ? '<span style="font-size:.6rem;font-weight:700;padding:.15rem .38rem;border-radius:1px;background:'+d.ceBg+';color:'+d.ceTx+';">'+d.ce+'</span>' : '';
-    const prezzoMq = d.mq > 0 ? Math.round(d.prezzo/d.mq).toLocaleString('it-IT') : '—';
-
-    document.getElementById('modal-body').innerHTML = `
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:.4rem;">
-        <div>
-          <div class="modal-price">&euro; ${d.prezzo.toLocaleString('it-IT')}${d.op==='affitto'?'<span style="font-size:.9rem;color:var(--grigio);font-family:\'DM Sans\',sans-serif;"> /mese</span>':''}</div>
-          <div class="modal-title">${d.titolo}</div>
-        </div>
-        <div style="display:flex;gap:.3rem;align-items:center;">${mediaIcons.join('')}${ceHtml}</div>
-      </div>
-      <div class="modal-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>${d.comune}, Padova${d.rif ? ' — Rif. <strong>'+d.rif+'</strong>' : ''}</div>
-      <div class="modal-specs">
-        <div class="ms-item"><div class="ms-val">${d.mq}</div><div class="ms-lbl">mq</div></div>
-        <div class="ms-item"><div class="ms-val">${d.camere}</div><div class="ms-lbl">Camere</div></div>
-        <div class="ms-item"><div class="ms-val">${d.bagni}</div><div class="ms-lbl">Bagni</div></div>
-        <div class="ms-item"><div class="ms-val">${prezzoMq}</div><div class="ms-lbl">&euro;/mq</div></div>
-      </div>
-      <div class="modal-actions">
-        <a href="immobile?s=${encodeURIComponent(generatePropertySlug(d))}" class="btn btn-dark" style="flex:1;justify-content:center;text-decoration:none;display:flex;align-items:center;gap:.4rem;padding:.6rem 1rem;background:var(--nero);color:#fff;border-radius:2px;font-family:'DM Sans',sans-serif;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-          Scheda completa
-        </a>
-        <button onclick="closeModal()" style="padding:.6rem 1.1rem;border:1px solid var(--gc);background:#fff;border-radius:2px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;">Chiudi</button>
-      </div>`;
-
-    document.getElementById('modal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    document.getElementById('modal').classList.remove('open');
-    document.body.style.overflow = '';
+    if (e.target.closest('.rig-carousel-nav, .cf-live')) { e.preventDefault(); return; }
+    if (typeof RigPhotoCarousel !== 'undefined' && RigPhotoCarousel.wasDragging(el)) e.preventDefault();
   }
 
   // ── APPLICA PARAMETRI URL (dalla ricerca homepage) ──
