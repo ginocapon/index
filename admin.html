@@ -2200,7 +2200,10 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 #immobiliTableWrap .property-row-actions .btn-action{padding:4px;min-width:29px;min-height:29px;font-size:.8rem;border-radius:5px;flex:0 0 auto;line-height:1.15}
 #immobiliTableWrap .property-row-actions button[onclick^="toggleEvidenza"]{font-size:.66rem;min-width:40px}
 @media(max-width:767px){#immobiliTableWrap .property-row-actions{gap:6px}#immobiliTableWrap .property-row-actions .btn-action{min-width:40px;min-height:40px;font-size:1rem}#immobiliTableWrap .property-row-actions button[onclick^="toggleEvidenza"]{font-size:.75rem;min-width:50px}}
-</style>
+
+/* Direct access to existing Activities, no data workflow changes. */
+.rh-menu-top>.rh-nav-direct{background:transparent;color:inherit;border:0;border-radius:0;font:inherit;padding:12px 14px;min-height:44px;cursor:pointer;white-space:nowrap}.rh-menu-top>.rh-nav-direct:hover,.rh-menu-top>.rh-nav-direct:focus-visible{background:#103b2c;color:#fff;outline:2px solid #dbe8d2;outline-offset:-2px}
+@media(max-width:760px){body.rm-on #rm-head .rm-quick{visibility:visible!important;gap:0}body.rm-on #rm-head .rm-quick .rm-activity-direct{width:49px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}body.rm-on #rm-head .rm-quick .rm-activity-direct .rm-ic{width:23px;height:23px}body.rm-on #rm-head .rm-quick .rm-activity-direct span{font:700 10px Arial,sans-serif;line-height:13px}body.rm-on #rm-head .rm-quick button{min-width:36px}body.rm-on #rm-head .rm-mobile-brand{flex:0 0 auto}}</style>
 <style id="rh-admin-home-v1">
 /* Nuova home admin. Dati agenda e Search Console non ancora collegati. */
 #sidebar{display:none!important}.main{margin-left:0!important;width:100%}.topbar-burger{display:none!important}
@@ -2224,7 +2227,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
 </style>
 <link rel="stylesheet" href="css/admin-agenda.css?v=20261106-width">
-<link rel="stylesheet" href="css/admin-attivita.css?v=4">
+<link rel="stylesheet" href="css/admin-attivita.css?v=20261111-people-columns">
 <link rel="stylesheet" href="css/admin-mobile.css?v=20261106-1854">
 <link rel="stylesheet" href="css/admin-immobili-responsive.css?v=20261106-fisarmonica">
 <link rel="stylesheet" href="layout-clienti.css?v=20261107-clienti-hover"><link rel="stylesheet" href="css/admin-immobile-layout.css?v=20261106-scheda">
@@ -18214,10 +18217,11 @@ function navCommand(kind){closeNavMenus();if(kind==='new-event'){window.showSect
 function positionNavMenus(){if(innerWidth<=760){var bottom=nav.getBoundingClientRect().bottom;nav.querySelectorAll('.rh-grid').forEach(function(list){list.style.top=(bottom+4)+'px';});}else{nav.querySelectorAll('.rh-grid').forEach(function(list){list.style.top='';});}}
 window.addEventListener('resize',positionNavMenus);window.addEventListener('scroll',positionNavMenus,{passive:true});
 function navGroup(label,items){var d=document.createElement('details'),sum=document.createElement('summary'),list=document.createElement('div');sum.textContent=label;sum.setAttribute('aria-label',label+' - apri menu');list.className='rh-grid';items.forEach(function(item){var b=document.createElement('button');b.type='button';b.className='rh-tile';b.textContent=item[1];if(item[0].indexOf('new-')===0){b.dataset.navCommand=item[0];b.onclick=function(){navCommand(item[0]);};}else{b.dataset.section=item[0];b.onclick=function(){closeNavMenus();window.showSection(item[0]);};}list.appendChild(b);});d.append(sum,list);var openedByHover=false;sum.addEventListener('click',function(e){if(e.detail>0&&openedByHover&&d.open){e.preventDefault();}openedByHover=false;});d.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse'){openedByHover=!d.open;closeNavMenus(d);d.open=true;}});d.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse'){openedByHover=false;if(!d.contains(document.activeElement))d.open=false;}});d.addEventListener('toggle',function(){sum.setAttribute('aria-expanded',String(d.open));if(d.open){closeNavMenus(d);positionNavMenus();}});d.addEventListener('keydown',function(e){if(e.key==='Escape'){d.open=false;sum.focus();}if(e.key==='ArrowDown'&&e.target===sum){e.preventDefault();closeNavMenus(d);d.open=true;list.querySelector('button').focus();}});nav.appendChild(d);return d;}
-navGroup('Menu',[['home','Home gestionale'],['attivita','Attività']]);
+navGroup('Menu',[['home','Home gestionale']]);
 navGroup('Agenda',[['agenda','Apri agenda'],['new-event','Nuovo appuntamento']]);
 navGroup('Immobili',[['immobili','Elenco immobili'],['new-property','Nuovo immobile'],['perizie','Perizie'],['documentigenerali','Documenti']]);
 navGroup('Clienti',[['clienti','Elenco clienti / proprietari'],['new-client','Nuovo cliente'],['richieste','Richieste']]);
+var activities=document.createElement('button');activities.type='button';activities.className='rh-nav-direct';activities.dataset.section='attivita';activities.textContent='Attività';activities.onclick=function(){closeNavMenus();window.showSection('attivita');};nav.appendChild(activities);
 navGroup('Aste',[['aste','Aste Veneto']]);
 navGroup('Marketing',[['blog','Blog'],['emailmarketing','Email marketing'],['landing','Landing pages']]);
 navGroup('Controllo',[['analytics','Search Console'],['impostazioni','Impostazioni']]);
@@ -18259,11 +18263,11 @@ window.showSection('home');
 <script src="js/admin-blocco2.js?v=1"></script>
 <script>window.rigOwnerReady(()=>RighettoAgenda.init(document.getElementById("righetto-operational-agenda")));</script>
 <script>window.RIGHETTO_BOZZA_ATTIVA=true;</script>
-<script src="js/admin-attivita.js?v=6"></script>
+<script src="js/admin-attivita.js?v=20261111-people-columns"></script>
 <script>(function(){var el=document.getElementById('righetto-attivita');if(!el)return;var done=false,busy=false;function msg(t){el.innerHTML='<div class="at-banner">'+t+'</div>';}
 async function go(){if(done||busy)return;busy=true;const principal=window.RighettoGatedPrincipal;try{if(typeof sb==='undefined'||!principal)throw 0;var u=await sb.auth.getUser();if(!u.data.user?.id||u.data.user.id!==principal||window.RighettoGatedPrincipal!==principal||document.body.dataset.adminArea!=='attivita')throw 0;var authority=await sb.rpc('righetto_is_admin_request');if(authority.error||authority.data!==true||window.RighettoGatedPrincipal!==principal||document.body.dataset.adminArea!=='attivita')throw 0;done=true;RighettoAttivita.init(el,{store:RighettoAttivita.dbStore(sb)});}catch(e){msg('Attivit\u00e0: accedi per vedere le pratiche.');}busy=false;}
 msg('Attivit\u00e0: apri Attivit\u00e0 per caricare le pratiche.');window.rigSectionReady(['attivita'],go);})();</script>
-<script src="js/admin-mobile.js?v=20261107-wa-20261106-1854"></script>
+<script src="js/admin-mobile.js?v=20261111-activities-direct"></script>
 <script src="js/admin-cliente-layout.js?v=20261111-client-editor-docs"></script>
 <script src="js/admin-cliente-drag.js?v=20261111-0937"></script>
 <script>window.RighettoNavigationAttachments=()=>({property:typeof currentFotos==='undefined'?null:[currentFotos,currentPlanimetrie,currentDocumenti,currentVtScenes,currentUnitaCatastali,currentCatastoPdf],client:typeof currentClienteDocumenti==='undefined'?null:currentClienteDocumenti});</script>
