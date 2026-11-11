@@ -1,0 +1,18 @@
+/* Private compact filter candidate. No behavior or selection changes. */
+@media(min-width:761px){
+ .search-box{gap:12px!important;align-items:stretch!important;padding:10px 0!important}
+ .search-box .sb-field{padding:5px 10px!important;gap:0!important;justify-content:center!important;min-height:58px!important}
+ .search-box .sb-field>label{font-size:10px!important;line-height:13px!important;letter-spacing:.08em!important}
+ .search-box .sb-field select,.search-box .sb-field input{font-size:13px!important;line-height:20px!important;min-height:30px!important;padding-top:3px!important;padding-bottom:3px!important}
+ .search-box .rig-public-type-control{padding:0 4px!important;background:transparent!important}
+ .search-box .rig-public-type-control>summary{min-height:30px!important;padding:4px 0!important;font-size:13px!important;line-height:20px!important;max-height:46px;overflow:auto;overflow-wrap:normal!important}
+ .search-box .sb-search-btn{min-height:58px!important;padding:8px 16px!important;font-size:13px!important}
+ .r-filtri{gap:12px!important;align-items:stretch!important}
+ .r-filtri .r-field{padding:5px 10px!important;min-height:54px!important;gap:0!important;justify-content:center!important}
+ .r-filtri .r-field label{font-size:10px!important;line-height:13px!important;letter-spacing:.08em!important}
+ .r-filtri .r-field select,.r-filtri .r-field input{font-size:13px!important;line-height:20px!important;min-height:28px!important;padding-top:2px!important;padding-bottom:2px!important}
+ .r-filtri .r-btn-cerca{min-height:54px!important;padding:8px 16px!important;font-size:13px!important}
+}
+@media(max-width:760px){.search-box .sb-field,.r-filtri .r-field{padding:5px 10px!important;gap:0!important;min-height:64px!important}.search-box .rig-public-type-control{padding:0 4px!important}.search-box .rig-public-type-control>summary{min-height:36px!important;padding:4px 0!important;font-size:14px!important;line-height:21px!important}.search-box .sb-search-btn,.r-filtri .r-btn-cerca{min-height:46px!important}}
+
+@media(min-width:761px){.r-filtri .r-field label{margin-bottom:0!important}.r-filtri .rroll-toggle,.search-box .rroll-toggle{min-height:30px!important;height:30px!important;padding:4px 9px!important;font-size:13px!important}.r-filtri .r-field select,.r-filtri .r-field input{min-height:26px!important}.r-filtri .r-field{min-height:52px!important}.r-filtri .r-btn-cerca{min-height:52px!important}}
