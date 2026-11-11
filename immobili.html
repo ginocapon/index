@@ -1976,6 +1976,6 @@ setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach
 <script src="js/cookie-consent-main.js?v=1" defer></script>
 <script src="js/scroll-reveal.js?v=3" defer></script>
 <script src="js/welcome-popup.js?v=3" defer></script>
-<script>window.rigPublicTypesReady=import('./js/public-types.mjs?v=20261111-types-live-v3').then(m=>m.initPublicTypeControl(document.getElementById('f-tipo'),filterCards)).then(x=>{window.RighettoPublicTypes=x;const qs=new URLSearchParams(location.search).getAll('tipo').flatMap(v=>v.split(',')).filter(Boolean);if(qs.length)x.set(qs);else filterCards();return x;}).catch(e=>{document.getElementById('f-tipo').disabled=true;console.warn('Filtro tipologie non disponibile',e.message);});</script>
+<script>window.rigPublicTypesReady=import('./js/public-types.mjs?v=20261111-types-live-v4').then(m=>m.initPublicTypeControl(document.getElementById('f-tipo'),filterCards)).then(x=>{window.RighettoPublicTypes=x;const qs=new URLSearchParams(location.search).getAll('tipo').flatMap(v=>v.split(',')).filter(Boolean);if(qs.length)x.set(qs);else filterCards();return x;}).catch(e=>{document.getElementById('f-tipo').disabled=true;console.warn('Filtro tipologie non disponibile',e.message);});</script>
 </body>
 </html>
