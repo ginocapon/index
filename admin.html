@@ -3065,7 +3065,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               </div><!-- /form-grid -->
 
               <div class="immobile-form-actions" style="display:flex;gap:12px;margin-top:24px;justify-content:flex-end;">
-                <button type="button" class="btn btn-secondary" onclick="resetForm()">Annulla</button>
+                <button type="button" class="btn btn-secondary" onclick="cancelImmobileEdit()">Annulla</button>
                 <button type="submit" class="btn btn-primary" id="btnSalva">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
                   Salva Immobile
@@ -6666,6 +6666,33 @@ function contrattoAffittoResShortLabel(val) {
   return map[val] || val;
 }
 
+let rigPropertyCancelBusy=false;
+async function cancelImmobileEdit(){
+ const id=document.getElementById('editId').value;
+ if(!id)return resetForm();
+ if(rigPropertyCancelBusy||rigPropertySaving||window.RighettoPropertyExtra?.pending()||window.RighettoPropertyReferences?.pending()||window.RighettoLabels?.pending()){toast('Operazione sulla scheda in corso: attendi il risultato.','error');return;}
+ if(window.RighettoPropertyExtra?.dirty()||window.RighettoPropertyReferences?.dirty()){toast('Prima salva o scarta le modifiche nei campi aggiuntivi e nei riferimenti riservati. La bozza resta aperta.','error');return;}
+ if(window.RighettoNavigation&&!RighettoNavigation.allowClose())return;
+ const principal=window.RighettoGatedPrincipal,tab=document.querySelector('[data-ril-tab][aria-selected=true]')?.dataset.rilTab||'scheda';
+ const current=()=>principal&&window.RighettoGatedPrincipal===principal&&document.body.dataset.adminArea==='nuovo'&&String(window.RighettoNavigation?.router.current.id||'')===String(id);
+ const fingerprint=()=>JSON.stringify([RighettoPropertySafety.readControls(document.getElementById('immobileForm')),rigPropertyMedia()]);
+ const before=fingerprint(),beforeSnapshot=rigPropertySnapshot;rigPropertyCancelBusy=true;
+ try{
+  const user=await sb.auth.getUser();if(!current()||user.error||user.data?.user?.id!==principal)throw Error('Sessione o immobile cambiato. Riapri la scheda.');
+  const admin=await sb.rpc('righetto_is_admin_request');if(!current()||admin.error||admin.data!==true)throw Error('Accesso amministratore non verificato.');
+  const r=await sb.from('immobili').select('*').eq('id',id).maybeSingle();
+  const after=await sb.auth.getUser();if(!current()||after.error||after.data?.user?.id!==principal)return;
+  if(r.error||!r.data||String(r.data.id)!==String(id)||!r.data.updated_at)throw Error(r.error?.message||'Immobile salvato non verificabile.');
+  if(rigPropertySaving||rigPropertySnapshot!==beforeSnapshot||before!==fingerprint()||window.RighettoPropertyExtra?.pending()||window.RighettoPropertyReferences?.pending()||window.RighettoLabels?.pending()||window.RighettoPropertyExtra?.dirty()||window.RighettoPropertyReferences?.dirty())throw Error('La bozza è cambiata durante la lettura. Non è stata scartata: riprova Annulla.');
+  if(window.RighettoLabels&&!RighettoLabels.dispose())return;
+  await editImmobile(id,current,r.data);
+  await new Promise(resolve=>queueMicrotask(resolve));
+  if(!current()||document.getElementById('editId').value!==id||!rigPropertySnapshot)return;
+  window.RighettoImmobileLayout?.select(tab);window.RighettoNavigation?.clean();
+ }catch(error){if(current())toast('Annullamento non completato: '+error.message+' Nessuna modifica salvata.','error');}
+ finally{rigPropertyCancelBusy=false;}
+}
+
 function resetForm() {
  if(window.RighettoNavigation&&!RighettoNavigation.allowClose())return;
  if(window.RighettoLabels&&!RighettoLabels.dispose())return;
@@ -6836,12 +6863,12 @@ let rigPropertySnapshot=null;let rigPropertySaving=false;
 function rigPropertyMedia(){return {foto:currentFotos,planimetrie:currentPlanimetrie,documenti:currentDocumenti,virtual_tour_scenes:currentVtScenes,unita_catastali:currentUnitaCatastali,catasto_pdf:currentCatastoPdf};}
 
 let rigPropertyReadEpoch=0;
-async function editImmobile(id,isCurrent=()=>true) {if(rigPropertySaving){toast('Salvataggio in corso: attendi prima di cambiare scheda.','error');return;}
-  if(window.RighettoNavigation&&!RighettoNavigation.replaying)return RighettoNavigation.open({section:'nuovo',view:'property-edit',id:String(id)},()=>editImmobile(id));
+async function editImmobile(id,isCurrent=()=>true,reloadSaved=null) {if(rigPropertySaving){toast('Salvataggio in corso: attendi prima di cambiare scheda.','error');return;}
+  if(window.RighettoNavigation&&!RighettoNavigation.replaying&&!reloadSaved)return RighettoNavigation.open({section:'nuovo',view:'property-edit',id:String(id)},()=>editImmobile(id));
   const ticket=++rigPropertyReadEpoch,principal=window.RighettoGatedPrincipal;
   const route=()=>window.RighettoNavigation?.router?.current;
   const current=()=>ticket===rigPropertyReadEpoch&&principal&&window.RighettoGatedPrincipal===principal&&isCurrent()&&document.body.dataset.adminArea==='nuovo';
-  let imm = allImmobili.find(x => String(x.id) === String(id));
+  let imm = reloadSaved||allImmobili.find(x => String(x.id) === String(id));
   if(!imm){
    rigPropertySnapshot=null;document.getElementById('btnSalva').disabled=true;document.getElementById('editId').value='';document.getElementById('formTitle').textContent='Caricamento immobile...';
    try{const r=await sb.from('immobili').select('*').eq('id',id).maybeSingle();if(!current())return;if(r.error)throw r.error;if(!r.data)throw Error('Immobile non disponibile');imm=r.data;}catch(error){if(current()){document.getElementById('formTitle').textContent='Immobile non caricato';toast(error.message,'error');}return;}
