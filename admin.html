@@ -2230,6 +2230,15 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 <link rel="stylesheet" href="layout-clienti.css?v=20261107-clienti-hover"><link rel="stylesheet" href="css/admin-immobile-layout.css?v=20261106-scheda">
 <link rel="stylesheet" href="css/admin-verde.css?v=20261106-verde1">
 <style id="client-search-mobile-20261107">@media(max-width:760px){#rm-cli .rm-search{min-height:56px!important;height:56px!important;padding:14px 12px!important;font-size:17px!important;line-height:24px!important;border:2px solid #1b5847!important;background:#fff!important;box-sizing:border-box!important;box-shadow:0 0 0 1px #1b584714!important;}#rm-cli .rm-search:focus{outline:2px solid #1b5847!important;outline-offset:2px!important;}}</style>
+<style>
+@media(min-width:761px){
+ #immobiliTableWrap [data-first-photo]{position:relative;width:44.5px;min-width:44.5px}
+ #immobiliTableWrap .imm-photo-target{position:absolute;left:5px;top:50%;transform:translateY(-50%);display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:34px;min-height:48px;padding:3px 2px;border:1px solid #b7cbd8;border-radius:6px;background:#eef5fa;font-size:13px;line-height:1.25;white-space:nowrap}
+ #immobiliTableWrap .imm-photo-icon{font-size:20px;line-height:1.1}
+ #immobiliTableWrap .imm-photo-count{font-size:12px;line-height:1.1}
+ #immobiliTableWrap [data-first-photo]:hover .imm-photo-target,#immobiliTableWrap [data-first-photo]:focus .imm-photo-target{background:#dcecf5;border-color:#48789b;outline:2px solid #48789b;outline-offset:2px}
+}
+</style>
 </head>
 <body>
 
@@ -6500,7 +6509,7 @@ function renderTable(data) {
       <td style="white-space:nowrap;max-width:100px;overflow:hidden;text-overflow:ellipsis" title="${escHtml(i.comune || '')}">${escHtml(i.comune || '—')}</td>
       <td style="font-weight:600;text-align:right;white-space:nowrap">${prezzo}</td>
       <td style="text-align:right;white-space:nowrap">${mq}</td>
-      <td data-first-photo tabindex="0" style="white-space:nowrap" title="${nFoto} foto: passa il mouse per vedere la prima">${nFoto ? '🖼️ ' + nFoto : '—'}</td>
+      <td data-first-photo tabindex="0" style="white-space:nowrap" title="${nFoto} foto: passa il mouse per vedere la prima"><span class="imm-photo-target">${nFoto ? '<span class="imm-photo-icon">🖼️</span> <span class="imm-photo-count">' + nFoto + '</span>' : '—'}</span></td>
       <td style="font-size:0.78rem;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(propNome)}"><button type="button" class="btn btn-secondary btn-sm" ${rigCatalogueReady ? '' : 'disabled'} onclick="openProprietariImmobile('${i.id}')" style="white-space:normal;text-align:left" title="Apri dati e gestisci proprietari">${escHtml(propNome === '—' ? '+ Proprietari' : propNome)} ↗</button></td>
       <td style="white-space:nowrap">${dataIns}</td>
       <td><div data-property-label-host="${escHtml(i.id)}"></div></td>
@@ -18216,6 +18225,7 @@ async function go(){if(done||busy)return;busy=true;const principal=window.Righet
 msg('Attivit\u00e0: apri Attivit\u00e0 per caricare le pratiche.');window.rigSectionReady(['attivita'],go);})();</script>
 <script src="js/admin-mobile.js?v=20261107-wa-20261106-1854"></script>
 <script src="js/admin-cliente-layout.js?v=20261109-identico-diretto"></script>
+<script src="js/admin-cliente-drag.js?v=20261111-0937"></script>
 <script>window.RighettoNavigationAttachments=()=>({property:typeof currentFotos==='undefined'?null:[currentFotos,currentPlanimetrie,currentDocumenti,currentVtScenes,currentUnitaCatastali,currentCatastoPdf],client:typeof currentClienteDocumenti==='undefined'?null:currentClienteDocumenti});</script>
 <script type="module">
 import {bindAuthenticatedNavigation} from './js/auth-bootstrap.mjs?v=20261107-client-readonly';
