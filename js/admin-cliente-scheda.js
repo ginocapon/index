@@ -289,5 +289,21 @@ async function openLegacy(id,kind){const popup=window.open('about:blank','_blank
 document.addEventListener('click',ev=>{const b=ev.target.closest('[data-client-route]');if(b&&!b.disabled){ev.preventDefault();openLegacy(b.dataset.clientId,b.dataset.clientRoute);}});
 if(sb.auth?.onAuthStateChange)sb.auth.onAuthStateChange(event=>{if(event==='SIGNED_OUT'){close();routingEpoch++;routingCache=null;attachmentCache=null;document.querySelectorAll('[data-client-route]').forEach(b=>{b.disabled=true;b.title='Accesso amministratore richiesto';});}});
 window.RighettoClientLinks={hydrate:hydrateRoutes,open:openLegacy};
-window.RighettoCliente={open,close};
+async function mountVerifiedClientArchive({clientId,panel,isCurrent}){
+ const principal=window.RighettoGatedPrincipal;
+ const alive=()=>isCurrent()&&panel.isConnected&&!!principal&&window.RighettoGatedPrincipal===principal;
+ if(!alive())return false;
+ const status=document.createElement('p');status.setAttribute('role','status');status.textContent='Verifica collegamento archivio privato…';panel.replaceChildren(status);
+ try{
+  const result=await checkedArchive(clientId);
+  if(!alive())return false;
+  if(!result){status.textContent='Archivio privato non collegato a questa scheda. Nessun caricamento disponibile: serve prima verificare identità e cartella.';return false;}
+  if(!window.RighettoClientArchive)throw Error('Lettore e caricatore privato non disponibili.');
+  const auth=await sb.auth.getUser();
+  if(!alive()||auth.error||auth.data?.user?.id!==principal)throw Error('Sessione cambiata.');
+  status.textContent='File gestiti separatamente dall’anagrafica. Le modifiche nei campi restano nella bozza; un caricamento confermato archivia subito il file privato.';
+  window.RighettoClientArchive.mount({panel,clientId,sb,isCurrent:alive,principal});return true;
+ }catch(error){if(alive())status.textContent='Archivio non disponibile: '+error.message;return false;}
+}
+window.RighettoCliente={open,close,mountVerifiedArchive:mountVerifiedClientArchive};
 })();

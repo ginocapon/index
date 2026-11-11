@@ -53,6 +53,22 @@ const extra=document.createElement('details');extra.className='legacy-existing-f
 // Preserve all remaining live fields and their event handlers, rather than deleting hidden dependencies.
 const role=original.querySelector('.cliente-ruolo-row');if(role)extra.append(role);
 const search=document.getElementById('clienteCampiRicerca');if(search)extra.append(search);
+
+const archiveEditor=document.createElement('section');archiveEditor.className='client-edit-private-documents';archiveEditor.style.cssText='border:1px solid #b9c7d1;padding:12px;margin-top:14px;max-width:100%;overflow-wrap:anywhere';
+const archiveTitle=document.createElement('h3');archiveTitle.textContent='Documenti privati del cliente';
+const archiveOpen=document.createElement('button');archiveOpen.type='button';archiveOpen.textContent='Apri documenti privati';archiveOpen.className='btn';
+const archiveHelp=document.createElement('p');archiveHelp.textContent='Consulta o carica un file senza chiudere questa modifica. L’anagrafica non viene salvata automaticamente.';
+const archiveHost=document.createElement('div');archiveEditor.append(archiveTitle,archiveHelp,archiveOpen,archiveHost);wrap.append(archiveEditor);
+let archiveEditorGeneration=0;
+const archiveFill=window.righettoExtraFill;window.righettoExtraFill=function(c){archiveFill(c);archiveEditorGeneration++;archiveHost.replaceChildren();archiveOpen.disabled=!c?.id;archiveOpen.style.display='';archiveHelp.textContent=c?.id?'Consulta o carica un file senza chiudere questa modifica. L’anagrafica non viene salvata automaticamente.':'Salva prima il nuovo cliente. Il caricamento richiede una scheda e una cartella privata verificate.';};
+archiveOpen.onclick=async()=>{
+ const id=document.getElementById('clienteEditId').value,gen=archiveEditorGeneration,principal=window.RighettoGatedPrincipal;
+ const alive=()=>gen===archiveEditorGeneration&&m.classList.contains('open')&&document.getElementById('clienteEditId').value===id&&!!principal&&window.RighettoGatedPrincipal===principal;
+ if(!id||!alive())return;archiveOpen.disabled=true;
+ try{if(!window.RighettoCliente?.mountVerifiedArchive)throw Error('Gestione documenti non disponibile. Ricarica il gestionale.');const ready=await window.RighettoCliente.mountVerifiedArchive({clientId:id,panel:archiveHost,isCurrent:alive});if(alive())archiveOpen.style.display=ready?'none':'';}
+ catch(error){if(alive())archiveHost.textContent=error.message;}
+ finally{if(alive())archiveOpen.disabled=false;}
+};
 const docs=document.getElementById('clienteDocumentiList');if(docs)extra.append(docs);
 const upload=document.getElementById('clienteDocumentiInput');if(upload){upload.disabled=true;upload.title='Archivio privato da collegare; nessun upload pubblico';extra.append(upload);}
 const azienda=document.getElementById('campiAzienda');if(azienda){azienda.hidden=true;extra.append(azienda);}
