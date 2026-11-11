@@ -2977,7 +2977,8 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                 </div>
 
                 <!-- ═══ PLANIMETRIE ═══ -->
-                <div class="section-divider">📐 Planimetrie</div>
+                <div class="section-divider">📐 Planimetrie <span style="background:#e74c3c;color:white;font-size:0.65rem;padding:2px 8px;border-radius:4px;margin-left:8px">🔒 RISERVATO AGENZIA</span></div>
+                <p style="font-size:.78rem;margin:4px 0 12px">I caricamenti restano riservati. Per aprirli usa Vedi. Non vengono pubblicati sul sito.</p>
                 <div class="form-group form-full">
                   <div class="upload-zone" id="dropZonePlan" onclick="document.getElementById('inputPlan').click()" ondragover="onDragOver(event)" ondragleave="onDragLeave(event,'dropZonePlan')" ondrop="onDrop(event,'planimetrie')">
                     <div class="upload-icon">📐</div>
@@ -8527,7 +8528,9 @@ function removeFoto(i) {
 
 function renderPlanimetrie() {
   const el = document.getElementById('planimetrieList');
-  if (!currentPlanimetrie.length) { el.innerHTML = '<div style="font-size:0.78rem;color:var(--caffe2);padding:8px">Nessuna planimetria ancora</div>'; return; }
+  const privatePlans=currentDocumenti.map((d,i)=>({d,i})).filter(({d})=>rigIsPrivatePlan(d));
+  if (!currentPlanimetrie.length) el.replaceChildren();
+  else {
   el.innerHTML = '<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:12px;width:100%">' + currentPlanimetrie.map((p, i) => {
     const isImg = /\.(jpg|jpeg|png|webp|gif)$/i.test(p.url||'');
     const bg = isImg ? `background:url('${p.url}') center/cover no-repeat #ccc` : 'background:#e8e8e8';
@@ -8537,6 +8540,11 @@ function renderPlanimetrie() {
       <span style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,0.6);color:#fff;font-size:9px;padding:1px 4px;border-radius:3px">${i+1}</span>
     </div>`;
   }).join('') + '</div>';
+  }
+  if(privatePlans.length){
+    const count=document.createElement('p');count.textContent=privatePlans.length===1?'1 planimetria riservata disponibile':privatePlans.length+' planimetrie riservate disponibili';count.style.cssText='font-size:.78rem;margin:12px 0 8px';el.append(count);
+    privatePlans.forEach(({d,i})=>el.append(rigPrivateDocRow(d,i)));
+  } else if(!currentPlanimetrie.length) el.innerHTML='<div style="font-size:0.78rem;color:var(--caffe2);padding:8px">Nessuna planimetria caricata</div>';
 }
 
 function removePlanimetria(i) {
@@ -8544,22 +8552,19 @@ function removePlanimetria(i) {
   renderPlanimetrie();
 }
 
+function rigIsPrivatePlan(d){return String(d?.tipo||'').trim().toLowerCase()==='planimetria';}
+function rigPrivateDocRow(d,i){
+ const row=document.createElement('div');row.className='doc-item';row.dataset.documentIndex=String(i);
+ const icon=document.createElement('span');icon.className='doc-icon';icon.textContent=getFileIcon(String(d.nome||''));
+ const info=document.createElement('div');info.className='doc-info';const name=document.createElement('div');name.className='doc-name';name.textContent=d.nome||'Documento';const type=document.createElement('div');type.className='doc-meta';type.textContent=d.tipo||'';info.append(name,type);
+ const actions=document.createElement('div');actions.className='doc-actions';const view=document.createElement('a');view.href=d.url||'#';view.textContent='👁️ Vedi';view.onclick=e=>openDocumento(i,e);const remove=document.createElement('button');remove.type='button';remove.className='doc-del';remove.textContent='🗑️';remove.onclick=()=>removeDocumento(i);actions.append(view,remove);row.append(icon,info,actions);return row;
+}
 function renderDocumenti() {
-  const el = document.getElementById('documentiList');
-  if (!currentDocumenti.length) { el.innerHTML = '<div style="font-size:0.78rem;color:var(--caffe2);padding:8px">Nessun documento ancora</div>'; return; }
-  el.innerHTML = currentDocumenti.map((d, i) => `
-    <div class="doc-item">
-      <span class="doc-icon">${getFileIcon(d.nome)}</span>
-      <div class="doc-info">
-        <div class="doc-name">${d.nome}</div>
-        <div class="doc-meta">${d.tipo || ''}</div>
-      </div>
-      <div class="doc-actions">
-        <a href="${d.url}" onclick="return openDocumento(${i}, event)">👁️ Vedi</a>
-        <button class="doc-del" onclick="removeDocumento(${i})">🗑️</button>
-      </div>
-    </div>
-  `).join('');
+  renderPlanimetrie();
+  const el=document.getElementById('documentiList');el.replaceChildren();
+  const docs=currentDocumenti.map((d,i)=>({d,i})).filter(({d})=>!rigIsPrivatePlan(d));
+  if(!docs.length){el.innerHTML='<div style="font-size:0.78rem;color:var(--caffe2);padding:8px">Nessun altro documento caricato</div>';return;}
+  docs.forEach(({d,i})=>el.append(rigPrivateDocRow(d,i)));
 }
 
 // Apre un documento privato con link firmato (bucket privati: il link pubblico non si apre)
