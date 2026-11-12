@@ -1,0 +1,129 @@
+/* Tema admin verde intenso. Solo schermo: nessun effetto su stampe o contenuti incorporati. */
+@media screen {
+html body{
+ --gi-forest:#075b3b;--gi-deep:#043e2b;--gi-bright:#168451;--gi-edge:#388663;--gi-soft:#e3f2e8;--gi-paper:#f6fbf7;--gi-ink:#153e2b;--gi-muted:#466b57;
+ --admin-frame:var(--gi-forest);--admin-frame-soft:var(--gi-soft);--admin-edge:var(--gi-edge);
+ --nero:var(--gi-forest);--nero2:#096c45;--caffe:#23734e;--caffe2:var(--gi-muted);--caffe3:#8fbaa0;--oro:#c6e5cd;--oro2:#e0f1e3;--sfondo:#edf5ef;--bianco:#fff;--testo:var(--gi-ink);
+ background:var(--sfondo);color:var(--gi-ink)
+}
+html body .sidebar,html body .rh-menu-top,html body #rm-head,html body .rm-banner,html body .rm-bar,html body .admin-menubar,html body .section-divider{background:var(--gi-deep)!important;color:white!important;border-color:var(--gi-edge)!important}
+html body .sidebar-logo h1,html body .sidebar-logo span,html body .sidebar .nav-item{color:#e2f3e6}
+html body .sidebar .nav-item:hover,html body .sidebar .nav-item.active{background:#136344;border-left-color:#bce4c9;color:white}
+html body .topbar{background:#fff;border-bottom-color:var(--gi-forest)}
+html body .topbar-title,html body .section-title,html body .rh-agenda h2,html body .rh-soon h2,html body .rh-group-title:not(.red),html body .rh-metric-list strong{color:var(--gi-forest)!important}
+html body .rh-menu-top details[open]>summary,html body .rh-menu-top>.rh-nav-direct:hover{background:#0d6844!important;color:white!important}
+html body .rh-grp,html body .rh-agenda,html body .rh-soon,html body .table-wrap,html body .stat-card,html body .modal,html body .rcs-d,html body .ra-dialog,html body .ra,html body .at,html body .rm-card,html body .ipa-panel,html body .ipr-panel,html body .ril-box{background:#fff;border-color:var(--gi-edge)!important}
+html body .rh-tile:not(.red){color:var(--gi-ink)!important;background:var(--gi-paper)!important;border-color:#a7c8b3!important;border-left-color:var(--gi-forest)!important}
+html body .rh-tile:not(.red) .rh-icon{background:var(--gi-forest)!important;color:white!important}
+html body .rh-sub,html body .rh-chip{color:var(--gi-muted)!important}
+html body .rh-chip,html body .rh-metric-list div{background:var(--gi-soft)!important}
+html body .stat-card:not(.red){border-left-color:var(--gi-forest)!important}
+html body .stat-num{color:var(--gi-forest)!important}
+html body .table-head,html body .table-header,html body .modal-header,html body .rcs-top,html body .legacy-client-search,html body .legacy-client-head,html body .legacy-client-toolbar,html body .ra-col h3,html body .at-head,html body .ril-box h3,html body .legacy-edit-sections>h3,html body .email-folders-header,html body .email-compose-header,html body .email-preview-header{
+ background:var(--gi-forest)!important;color:#fff!important;border-color:var(--gi-edge)!important
+}
+html body .table-head label,html body .table-head>span,html body .table-head [id$="CountVisible"],html body .modal-header h2,html body .modal-header h3,html body .modal-header .modal-close,html body .rcs-top h2,html body .rcs-top .rcs-sub,html body .legacy-client-title,html body .legacy-client-title span{color:#fff!important}
+html body table,html body table thead,html body table tbody,html body table tfoot,html body table tr,html body table th,html body table td,html body .rcs table[data-wa-draft-history] tbody tr{border-color:var(--gi-edge)!important;outline-color:var(--gi-bright)!important}
+html body table th,html body #immobiliTableWrap th,html body #sec-clienti th{background:var(--gi-forest)!important;color:#fff!important}
+html body table th a{color:inherit}
+html body table th button:not(.btn-danger){color:var(--gi-forest)!important;background:var(--gi-soft)!important;border-color:#a7c8b3}
+html body #immobiliTableWrap tbody tr,html body #clientiTable tbody tr{background:#fff}
+html body #immobiliTableWrap tbody tr:nth-child(even),html body #clientiTable tbody tr:nth-child(even){background:#f0f7f2}
+html body #immobiliTableWrap tbody tr:hover,html body #clientiTable tbody tr:hover,html body .rcs .rch-table tr[data-history-id]:hover,html body #ril-panel-cronistoria .rch-table tr[data-history-id]:hover{background-color:#d8eddf!important}
+html body #immobiliTableWrap td{color:var(--gi-ink)}
+html body #immobiliTableWrap .pv-contract{color:#ac1f2d}
+html body #immobiliTableWrap .pv-state{color:#6f3040}
+html body #immobiliTableWrap .pv-icon,html body #immobiliTableWrap .codice-cell,html body #pv-selection-bar button:not([data-pv-bulk=email]):not([data-pv-bulk=whatsapp]){color:var(--gi-forest)!important;border-color:#83b49a!important;background:#fff}
+html body .btn-primary,html body .btn-login,html body .legacy-search-btn,html body #clientiStoricoBtn[aria-pressed=true],html body .ra button.primary,html body .ra button[aria-pressed=true]{background:var(--gi-forest)!important;border-color:var(--gi-deep)!important;color:#fff!important}
+html body .btn-primary:hover,html body .btn-login:hover{background:var(--gi-deep)!important}
+html body .btn-secondary,html body .admin-home-back,html body .rcs-tabs button,html body .ril-tabs button,html body .ril-command>summary,html body .ril-summary-commands button{background:var(--gi-soft)!important;border-color:var(--gi-edge)!important;color:var(--gi-forest)!important}
+html body .rcs-tabs button[aria-selected=true],html body .ril-tabs button.active,html body .rm-tabs .on,html body .email-folder.active{background:var(--gi-forest)!important;border-color:var(--gi-forest)!important;color:white!important}
+html body .rcs-tabs,html body .ril-tabs,html body .rcs-information,html body .drop-zone,html body .upload-zone,html body .email-folders,html body .email-list,html body .email-preview{border-color:var(--gi-edge)!important}
+html body .form-group input:not([type=checkbox]):not([type=radio]):not([type=color]),html body .form-group select,html body .form-group textarea,html body .table-search,html body .ra input,html body .ra select,html body .ra textarea,html body .rcs input:not([type=checkbox]):not([type=radio]),html body .rcs select,html body .rcs textarea{background:#fff!important;border-color:#79a98d!important;color:var(--gi-ink)!important}
+html body input:focus-visible,html body select:focus-visible,html body textarea:focus-visible,html body button:focus-visible,html body a:focus-visible,html body summary:focus-visible{outline:2px solid var(--gi-bright);outline-offset:2px}
+html body input[type=checkbox],html body input[type=radio]{accent-color:var(--gi-forest)}
+html body .ra{--ink:var(--gi-ink);--line:#8fbaa0;--green:var(--gi-forest);background:var(--gi-paper)!important}
+html body .ra small,html body .ra-sub,html body .at-sub{color:var(--gi-muted)}
+html body .ra-col,html body .at-pr,html body .at-pr[open]>summary{border-color:#9bbea8;background:var(--gi-paper)}
+html body .at-id,html body .at-body h4{color:var(--gi-forest)}
+html body .rcs h3{background:var(--gi-forest)!important;color:white!important}
+html body .rcs,html body #ril-panel-cronistoria{color:var(--gi-ink)!important}
+html body #rm-menu .rm-big{color:var(--gi-forest)!important;border-color:var(--gi-edge)!important;background:var(--gi-paper)!important}
+html body .rm-search,html body .rm-link{border-color:var(--gi-edge)!important;color:var(--gi-ink)!important}
+
+html body .rh-group-title,html body .rh-tile.red{color:var(--gi-forest)!important}
+html body .rh-tile.red{background:var(--gi-paper)!important;border-color:#a7c8b3!important;border-left-color:var(--gi-forest)!important}
+html body .rh-tile.red .rh-icon{background:var(--gi-forest)!important;color:#fff!important}
+html body .ra .ra-grid-scroll{background:var(--gi-soft)!important}
+html body .ra-mini-head,html body .ra .ra-mini button,html body .ra-time-day>h4,html body .ra-grid-head,html body .ra a,html body .ra .ra-edit-notes .ra-tabs button,html body .ra .ra-legacy-actions button,html body .ra .ra-mobile-close,html body .ra-mobile-detail a{color:var(--gi-forest)!important}
+html body .ra .ra-mini button.chosen,html body .ra-m-day h4,html body .ra-m-bar,html body .ra .ra-mobile-nav button,html body .ra-mobile-options,html body .ra #ra-search button{background:var(--gi-forest)!important;color:white!important}
+html body .ra .ra-mobile-nav [aria-pressed=true]{background:var(--gi-deep)!important;color:#fff!important}
+html body .ra-grid-head,html body .ra-time-row,html body .ra-time-row>span,html body .ra-agent-label,html body .ra-month-day,html body .ra-week>div,html body .ra-legacy-head,html body .ra-legacy-flag{border-color:#93baa3!important}
+html body .ra-grid-head,html body .ra-agent-week>h3,html body .ra-list h4,html body .ra .ra-state-button:has(input:checked),html body .ra .ra-gest-form [data-tab-panel=repeat],html body .ra-import{background:var(--gi-soft)!important}
+html body .ra-time-row>span,html body .ra .checks label{background:var(--gi-paper)!important}
+html body .at-head button,html body .at-head select{color:var(--gi-forest)!important;border-color:#a7c8b3}
+
+html body :is(h2,h3,h4)[style*="color:var(--oro)"]{color:var(--gi-forest)!important}
+html body .section [style*="background:#f8f6f3"],html body .section [style*="background:#f0ebe4"],html body .section [style*="background:#f5f8fc"]{background:var(--gi-paper)!important;border-color:#9bbea8!important}
+html body .section [style*="border:2px solid #667eea"],html body .section [style*="border:1px solid #e0d6c8"],html body .section [style*="border:1.5px solid #e8e3db"]{border-color:var(--gi-edge)!important}
+html body .section [style*="color:#667eea"],html body .section [style*="color:#1565c0"],html body .section [style*="color:#0d47a1"],html body .section [style*="color:#4facfe"]{color:var(--gi-forest)!important}
+html body .section [style*="background:#e3f2fd"]:not(label){background:var(--gi-soft)!important;border-color:#9bbea8!important;color:var(--gi-ink)!important}
+html body .section [style*="background:linear-gradient(135deg,#667eea"],html body .section [style*="background:linear-gradient(135deg,#6C63FF"],html body .section [style*="background:linear-gradient(135deg,#4facfe"],html body .section [style*="background:linear-gradient(135deg,#43e97b"],html body .section [style*="background:linear-gradient(135deg,#f093fb"],html body .section button[style*="background:#667eea"],html body #emProgressBar{background:var(--gi-forest)!important;color:#fff!important}
+html body #sec-clienti .legacy-client-toolbar button:not(:disabled),html body #sec-clienti .legacy-client-search button:not(:disabled){color:var(--gi-forest)!important;border-color:#79a98d}
+html body #sec-clienti .legacy-client-search .legacy-search-btn{background:var(--gi-forest)!important;color:#fff!important}
+
+html body .ril-shell,html body .ril-panel,html body .ril-description,html body .ril-notes,html body .ril-documents,html body .ril-facts dd{color:var(--gi-ink)!important}
+html body .ril-facts dt,html body .ril-note,html body .ril-empty,html body .ra-note,html body .ra-scale-note,html body .ra-no-event{color:var(--gi-muted)!important}
+html body .ril-facts>div,html body .rcs-grid>div{border-color:#9bbea8!important}
+html body .ril-energy{border-color:#9bbea8!important;background:var(--gi-paper)!important;color:var(--gi-ink)!important}
+html body .section a:not(.btn):not([class*=badge]){color:var(--gi-forest)}
+html body .section [style*="background:#1e1e2e"],html body .section [style*="background:#2d2d44"],html body .section [style*="background:#3a3a5c"],html body #emCorpo{background:var(--gi-deep)!important;color:#eef8f1!important}
+html body .section [style*="color:#8888aa"]{color:#c6e5cd!important}
+html body #sec-posta button[style*="background:#e0eeff"]{background:var(--gi-soft)!important;color:var(--gi-forest)!important}
+
+html body .at{color:var(--gi-ink)!important}
+html body .rcs button:not(.btn-danger):not(.danger){color:var(--gi-forest)!important;background:var(--gi-soft)!important;border-color:#83b49a!important}
+html body .rcs-tabs button[aria-selected=true],html body .rcs button[aria-selected=true]{background:var(--gi-forest)!important;color:#fff!important;border-color:var(--gi-forest)!important}
+html body .rcs-grid b,html body .rcs-origin-tools{color:var(--gi-ink)!important}
+html body .rcs-note,html body .rcs-sub{color:var(--gi-muted)!important}
+html body .rcs-top .rcs-sub,html body .rcs-top .rcs-sub a{color:#e1f2e7!important}
+html body .rcs-top h2:before,html body .rcs-top h2:after{background:#e1f2e7!important}
+html body .rcs-menu{border-color:var(--gi-edge)!important}
+html body .rcs-menu button:hover:not(:disabled){background:#cce7d5!important}
+
+html body .rcs-top .rcs-origin-tools,html body .rcs-top .rcs-origin-tools>span{color:#e1f2e7!important}
+html body .rcs-information aside,html body .rcs h3,html body .rcs-ev,html body .rcs-menu hr{border-color:#8fbaa0!important}
+html body .rcs-information summary{color:var(--gi-forest)!important}
+
+
+html body .rio-ov,html body .rpp-overlay,html body .rio-box,html body .ipa-panel,html body .ipr-panel{color:var(--gi-ink)!important}
+html body .rio-box,html body .rio-menu,html body .rpp-panel,html body .rst-menu,html body .rc-date-panel{border-color:var(--gi-edge)!important}
+html body .rio-menu button,html body .rio-box button,html body .rpp-overlay button,html body .rst-menu button,html body .ich-bar button,html body .ich-event button,html body [data-ich-more],html body .rc-date-panel button,html body .rc-date-open{color:var(--gi-forest)!important;background:var(--gi-soft)!important;border-color:#83b49a!important}
+html body .rio-box button.pri,html body .rc-date-days button[aria-current=date],html body .aste-m-date{background:var(--gi-forest)!important;color:white!important;border-color:var(--gi-forest)!important}
+html body .rio-box h3,html body .rpp-overlay h3{color:var(--gi-forest)!important}
+html body .rio-menu details,html body #ril-panel-cronistoria .rcs-note{color:var(--gi-muted)!important}
+html body .ipa-panel input,html body .ipa-panel select,html body .ipa-panel textarea,html body .ipr-panel input,html body .ipr-panel select,html body .ipr-panel textarea{color:var(--gi-ink)!important;border-color:#83b49a!important}
+html body .ich-event{border-color:#8fbaa0!important;border-left-color:var(--gi-forest)!important}
+
+html body .rpp-overlay article,html body .rio-box pre,html body .rio-box input[type=text],html body .rio-box input[type=number]{border-color:#8fbaa0!important}
+html body .rio-box pre,html body .rio-unavailable{background:var(--gi-paper)!important;color:var(--gi-muted)!important}
+html body .btn-secondary:hover,html body .rcs button:not(:disabled):not([aria-selected=true]):hover,html body .rio-menu button:hover,html body .rio-box button:not(.pri):hover,html body .rpp-overlay button:hover,html body .ril-tabs button:not(.active):hover{background:#cce7d5!important;color:var(--gi-forest)!important}
+
+html body #rm-scheda,html body .rm-card,html body .rm-brand,html body .rm-r2 strong,html body .rm-link span{color:var(--gi-ink)!important}
+html body .rm-brand span,html body .rm-count,html body .rm-s,html body .rm-more,html body .rm-empty,html body .rm-sess,html body .rm-f label,html body #rm-imm .rm-search-fields label{color:var(--gi-muted)!important}
+html body .rm-logo,html body .rm-acts a,html body .rm-acts button{background:var(--gi-forest)!important;color:white!important}
+html body .rm-ph,html body .rm-chip:not(.g):not(.r),html body .rm-tags span{background:var(--gi-soft)!important;color:var(--gi-forest)!important}
+html body .rm-tabs button{color:var(--gi-forest)!important}
+html body .rm-tabs button.on{background:var(--gi-forest)!important;color:white!important;border-bottom-color:var(--gi-deep)!important}
+html body #clienteModal#clienteModal.legacy-client-editor{color:var(--gi-ink)!important}
+html body #clienteModal#clienteModal.legacy-client-editor .modal{border-color:var(--gi-edge)!important}
+html body #clienteModal#clienteModal.legacy-client-editor .legacy-edit-sections h3{background:var(--gi-forest)!important;color:white!important}
+html body #clienteModal#clienteModal.legacy-client-editor .legacy-field>span,html body #clienteModal#clienteModal.legacy-client-editor .client-edit-head b,html body #clienteModal#clienteModal.legacy-client-editor .client-edit-head p{color:var(--gi-ink)!important}
+html body #clienteModal#clienteModal.legacy-client-editor button:not(.btn-danger){background:var(--gi-soft)!important;color:var(--gi-forest)!important;border-color:#83b49a!important}
+html body #clienteModal#clienteModal.legacy-client-editor .client-edit-tabs{border-bottom-color:var(--gi-forest)!important}
+html body #clienteModal#clienteModal.legacy-client-editor .client-edit-tabs .active,html body #clienteModal#clienteModal.legacy-client-editor .modal-footer button:not(.btn-danger):not(.client-edit-cancel),html body #clienteModal#clienteModal.legacy-client-editor .rc-date-days button[aria-current=date]{background:var(--gi-forest)!important;color:#fff!important;border-color:var(--gi-forest)!important}
+html body #clienteModal#clienteModal.legacy-client-editor input:not([type=checkbox]):not([type=radio]),html body #clienteModal#clienteModal.legacy-client-editor select,html body #clienteModal#clienteModal.legacy-client-editor textarea{border-color:#79a98d!important;color:var(--gi-ink)!important}
+html body #clienteModal#clienteModal.legacy-client-editor input[aria-invalid=true],html body #clienteModal#clienteModal.legacy-client-editor select[aria-invalid=true]{border-color:#b3261e!important;outline-color:#b3261e!important}
+html body input[aria-invalid=true],html body select[aria-invalid=true],html body textarea[aria-invalid=true],html body .ra input[aria-invalid=true],html body .rcs input[aria-invalid=true]{border-color:#b3261e!important;outline-color:#b3261e!important}
+/* Semantic reds, warning/success badges, progress and energy classes retain their own palette. */
+}
