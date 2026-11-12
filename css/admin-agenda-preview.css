@@ -15,3 +15,12 @@ body[data-admin-area="home"] #righetto-attivita-preview,body[data-admin-area="ag
 @media(max-width:760px){.ap-people{grid-template-columns:1fr}.ap-person+.ap-person{border-left:0;border-top:1px solid #d6e4df}.ap-practice{flex-wrap:wrap;gap:3px}.ap-head{padding:8px 10px}.ap-person{padding:7px 10px}}
 
 .ap-link{display:block;color:inherit;text-decoration:none;cursor:pointer}.ap-link:hover{text-decoration:none}.ap-link:focus-visible{outline:3px solid #db9a19;outline-offset:-3px}
+
+/* Riepilogo accostato ai filtri, con le colonne del calendario. */
+@media(min-width:761px){.ra .ra-gi-layout{height:calc((100vh - 280px)*.9);min-height:440px}
+ #righetto-attivita-preview{margin:8px 0 0!important;flex:0 0 auto;border-radius:3px}
+ .ap-head{padding:4px 8px}.ap-head h2{font-size:13px}.ap-open{font-size:12px}
+ .ap-people{grid-template-columns:57px 1fr 1fr}.ap-people:before{content:'';background:#f8fbfc;border-right:1px solid #d6e4df}
+ .ap-person{padding:5px 6px}.ap-person:first-child{grid-column:3;grid-row:1}.ap-person:nth-child(2){grid-column:2;grid-row:1}
+ .ap-practice{padding:4px 5px;font-size:12px;margin-top:3px}.ap-count,.ap-empty,.ap-practice small{font-size:10px}.ap-empty{margin-top:4px}
+}
