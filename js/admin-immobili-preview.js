@@ -1,7 +1,7 @@
 /* Desktop property table: first-photo hover and existing read-only preview. */
 (function(){'use strict';
  let popup=null,active=null;
- function sizeRows(){document.querySelectorAll('#immobiliTableWrap table').forEach(table=>{const labels=[...table.querySelectorAll('thead th')].map(th=>th.textContent.replace(/[⇅▲▼]/g,'').trim());table.querySelectorAll('tbody tr').forEach(row=>[...row.cells].forEach((cell,n)=>{if(cell.dataset.columnLabel!==labels[n])cell.dataset.columnLabel=labels[n]||'';}));});if(innerWidth<761)return;const rows=[...document.querySelectorAll('#immobiliTableWrap tr[data-property-preview]:not([data-doubled-row])')];if(!rows.length)return;if(!rows.some(row=>row.getBoundingClientRect().height>0))return;document.body.classList.remove('rig-colonne-compatto');rows.forEach(row=>{const height=row.getBoundingClientRect().height;if(height>0){row.dataset.doubledRow='1';row.style.height=(height*2)+'px';}});document.body.classList.add('rig-colonne-compatto');}
+ function sizeRows(){document.querySelectorAll('#immobiliTableWrap table').forEach(table=>{const labels=[...table.querySelectorAll('thead th')].map(th=>th.textContent.replace(/[⇅▲▼]/g,'').trim());table.querySelectorAll('tbody tr').forEach(row=>{if(row.style.height)row.style.removeProperty('height');if(row.hasAttribute('data-doubled-row'))row.removeAttribute('data-doubled-row');[...row.cells].forEach((cell,n)=>{if(cell.dataset.columnLabel!==labels[n])cell.dataset.columnLabel=labels[n]||'';});});});document.body.classList.remove('rig-colonne-compatto');}
  sizeRows();
  const hover=()=>matchMedia('(hover:hover) and (pointer:fine)').matches;
  const current=id=>(typeof allImmobili!=='undefined'?allImmobili:[]).find(i=>String(i.id)===id);
@@ -14,12 +14,13 @@
   document.body.append(popup);active=cell;place(cell);
  }
  function place(cell){if(!popup)return;const r=cell.getBoundingClientRect(),b=popup.getBoundingClientRect();popup.style.left=Math.max(12,Math.min(r.right+10,innerWidth-b.width-12))+'px';popup.style.top=Math.max(12,Math.min(r.top,innerHeight-b.height-12))+'px';}
- function rowAction(e){const row=e.target.closest('#immobiliTableWrap [data-property-preview]');if(!row||e.target.closest('button,a,input,select,textarea,summary,label,[role=button],[contenteditable=true]')||getSelection()?.toString())return;if(!window.RighettoGatedPrincipal||!current(row.dataset.propertyPreview))return;hide();if(typeof previewImmobile==='function')previewImmobile(row.dataset.propertyPreview);}
+ function rowAction(e){const row=e.target.closest('#immobiliTableWrap [data-property-preview]');if(!row||e.target.closest('button,a,input,select,textarea,summary,label,[role=button],[contenteditable=true]')||getSelection()?.toString())return;if(!window.RighettoGatedPrincipal||window.RighettoCatalogueView&&!RighettoCatalogueView().ready||!current(row.dataset.propertyPreview))return;hide();if(typeof editImmobile==='function')editImmobile(row.dataset.propertyPreview);}
+ document.addEventListener('click',e=>{const b=e.target.closest('[data-pv-ops]');if(!b)return;const id=b.dataset.pvPreview||b.dataset.pvInfo||b.dataset.pvOps,i=current(id);if(!window.RighettoGatedPrincipal||window.RighettoCatalogueView&&!RighettoCatalogueView().ready||!i)return;hide();if(b.dataset.pvPreview&&typeof previewImmobile==='function')previewImmobile(id);else if(b.dataset.pvInfo&&typeof editImmobile==='function')editImmobile(id);else window.RighettoImmobileOperazioni?.openMenu(i,b);});
  document.addEventListener('click',rowAction);
  document.addEventListener('keydown',e=>{if(e.key==='Escape')hide();if(e.key==='Enter'&&e.target.matches('#immobiliTableWrap [data-property-preview]')){e.preventDefault();rowAction(e);}});
- document.addEventListener('pointerover',e=>{const cell=e.target.closest('#immobiliTableWrap [data-first-photo]');if(cell&&cell!==active)show(cell,e.pointerType==='mouse');});
- document.addEventListener('pointerout',e=>{if(active&&e.target.closest('[data-first-photo]')===active&&!active.contains(e.relatedTarget))hide();});
- document.addEventListener('focusin',e=>{const cell=e.target.closest('#immobiliTableWrap [data-first-photo]');if(cell)show(cell);});document.addEventListener('focusout',e=>{if(e.target.closest('[data-first-photo]'))hide();});
+ document.addEventListener('pointerover',e=>{const cell=e.target.closest('#immobiliTableWrap tr[data-property-preview]');if(cell&&cell!==active)show(cell,e.pointerType==='mouse');});
+ document.addEventListener('pointerout',e=>{if(active&&e.target.closest('[data-property-preview]')===active&&!active.contains(e.relatedTarget))hide();});
+ document.addEventListener('focusin',e=>{const cell=e.target.closest('#immobiliTableWrap tr[data-property-preview]');if(cell)show(cell);});document.addEventListener('focusout',e=>{if(e.target.closest('[data-property-preview]'))hide();});
  addEventListener('scroll',hide,true);addEventListener('resize',()=>{hide();sizeRows();});addEventListener('blur',hide);document.addEventListener('visibilitychange',()=>{if(document.hidden)hide();});
  if(typeof sb!=='undefined')sb.auth.onAuthStateChange?.(event=>{if(event==='SIGNED_OUT'||event==='SIGNED_IN')hide();});
  new MutationObserver(()=>{if(active&&!active.isConnected)hide();sizeRows();}).observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['class','style','hidden']});

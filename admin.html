@@ -6477,67 +6477,19 @@ function renderTable(data) {
     return;
   }
 
-  const rows = data.map(i => {
-    const nFoto = Array.isArray(i.foto) ? i.foto.length : 0;
-    const isAttivo = i.attivo === true || i.attivo === 'true' || i.attivo === 1;
-    const stato = i.venduto ? `<span class="badge badge-rosso">Venduto</span>`
-      : i.affittato ? `<span class="badge badge-rosso">Affittato</span>`
-      : isAttivo ? `<span class="badge badge-verde">Attivo</span>`
-      : `<span class="badge badge-grigio">Disattivo</span>`;
-
-    const tipo = i.tipo_operazione === 'vendita' ? `<span class="badge badge-blu">Vendita</span>`
-      : (i.tipo_operazione === 'affitto_residenziale' || i.tipo_operazione === 'affitto') ? `<span class="badge badge-verde">Affitto Res.</span>`
-      : i.tipo_operazione === 'affitto_commerciale' ? `<span class="badge badge-arancio">Affitto Comm.</span>`
-      : i.tipo_operazione === 'asta_giudiziaria' ? `<span class="badge badge-grigio">Asta</span>`
-      : `<span class="badge badge-grigio">${escHtml(i.tipo_operazione || '—')}</span>`;
-    const contrBadge = (i.tipo_operazione === 'affitto_residenziale' || i.tipo_operazione === 'affitto') && i.contratto_affitto_res
-      ? ` <span class="badge badge-grigio" title="${escHtml(CONTRATTO_AFFITTO_RES_LABELS[i.contratto_affitto_res] || i.contratto_affitto_res)}">${escHtml(contrattoAffittoResShortLabel(i.contratto_affitto_res))}</span>`
-      : '';
-
-    const prezzo = i.prezzo ? Number(i.prezzo).toLocaleString('it-IT') : '—';
-    const mq = i.superficie ? Number(i.superficie).toLocaleString('it-IT') : '—';
-    const propNome = i.proprietario_nome || '—';
-    const dIns = i.created_at ? new Date(i.created_at) : null;
-    const dataIns = dIns && !isNaN(dIns) ? String(dIns.getDate()).padStart(2,'0') + '-' + String(dIns.getMonth()+1).padStart(2,'0') + '-' + dIns.getFullYear() : '—';
-    const ipeNum = (i.ipe_kwh || i.ipe_kwh === 0) && isFinite(Number(i.ipe_kwh)) ? Number(i.ipe_kwh) : null;
-    const ipe = ipeNum !== null ? ipeNum.toLocaleString('it-IT',{minimumFractionDigits:2,maximumFractionDigits:2}) : '<span class="imm-nd" title="IPE in fase di definizione">—</span>';
-    const ceRaw = String(i.classe_energetica || '').trim().toUpperCase();
-    const ceKnown = /^A[1-4]$/.test(ceRaw) || /^[B-G]$/.test(ceRaw);
-    const ce = ceKnown ? `<span class="ce-badge ce-${ceRaw.toLowerCase()}">${ceRaw}</span>`
-      : ceRaw && ceRaw !== 'ND' ? `<span class="ce-badge ce-alt">${escHtml(ceRaw)}</span>`
-      : '<span class="ce-badge ce-nd">ND</span>';
-
-    return `<tr data-property-preview="${escHtml(i.id)}" tabindex="0" aria-label="Apri anteprima ${escHtml(i.codice||i.titolo||'immobile')}">
-      <td>
-        <div style="font-weight:600;font-size:0.82rem">${escHtml(i.tipologia || '—')}</div>
-        <div style="margin-top:3px">${tipo}${contrBadge} ${stato}</div>
-      </td>
-      <td><span class="codice-cell">${i.codice || '—'}</span></td>
-      <td style="white-space:nowrap;max-width:100px;overflow:hidden;text-overflow:ellipsis" title="${escHtml(i.comune || '')}">${escHtml(i.comune || '—')}</td>
-      <td style="font-weight:600;text-align:right;white-space:nowrap">${prezzo}</td>
-      <td style="text-align:right;white-space:nowrap">${mq}</td>
-      <td data-first-photo tabindex="0" style="white-space:nowrap" title="${nFoto} foto: passa il mouse per vedere la prima"><span class="imm-photo-target">${nFoto ? '<span class="imm-photo-icon">🖼️</span> <span class="imm-photo-count">' + nFoto + '</span>' : '—'}</span></td>
-      <td style="font-size:0.78rem;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(propNome)}"><button type="button" class="btn btn-secondary btn-sm" ${rigCatalogueReady ? '' : 'disabled'} onclick="openProprietariImmobile('${i.id}')" style="white-space:normal;text-align:left" title="Apri dati e gestisci proprietari">${escHtml(propNome === '—' ? '+ Proprietari' : propNome)} ↗</button></td>
-      <td style="white-space:nowrap">${dataIns}</td>
-      <td><div data-property-label-host="${escHtml(i.id)}"></div></td>
-      <td style="font-size:0.75rem;white-space:nowrap;max-width:120px;overflow:hidden;text-overflow:ellipsis" title="${escHtml(i.indirizzo || '')}">${escHtml(i.indirizzo || '—')}</td>
-      <td style="text-align:right;white-space:nowrap">${ipe}</td>
-      <td>${ce}</td>
-      <td>
-        <fieldset class="property-row-actions" ${rigCatalogueReady ? '' : 'disabled'} style="border:0;padding:0;margin:0">
-          <button class="btn btn-action btn-secondary" onclick="editImmobile('${i.id}')" title="Modifica">✏️</button>
-          <button class="btn btn-action" onclick="duplicateImmobile('${i.id}')" title="Duplica annuncio (nuovo codice, stesse foto e testi)" style="background:#f3e5f5;color:#6a1b9a">📋</button>
-          <button class="btn btn-action" onclick="showMatchingClienti('${i.id}')" title="Trova clienti compatibili" style="background:#e3f2fd;color:#1565c0">🤝</button>
-          <button class="btn btn-action" onclick="openDocsImmobile('${i.codice || ''}','${i.id}')" title="Documenti (PDF)" style="background:#e8eaf6;color:#283593">📎</button>
-          <button class="btn btn-action" onclick="openFotoImmobile('${i.id}')" title="Foto (vedi e scarica)" style="background:#e0f2f1;color:#00695c">🖼️</button>
-          <button class="btn btn-action" onclick="printPropertyPdf('${i.id}')" title="Stampa PDF" style="background:#fff3e0;color:#e65100">📄</button>
-          <button type="button" class="btn btn-action" onclick="previewImmobile('${i.id}')" title="Anteprima annuncio" aria-label="Anteprima annuncio" style="background:#e8f5e9;color:#1877F2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="7"></circle><path d="m15 15 6 6"></path></svg></button>
-          ${i.cestino ? `<button class="btn btn-action" onclick="restoreImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')" title="Ripristina dal cestino" style="background:#e8f5e9;color:#27ae60">↩️</button>` : `<button class="btn btn-action btn-danger" onclick="deleteImmobile('${i.id}','${(i.titolo||'').replace(/'/g,"\\'")}')" title="Sposta nel cestino">🗑️</button>`}
-          <button class="btn btn-action" onclick="toggleEvidenza('${i.id}',${!i.in_evidenza})" title="${i.in_evidenza ? 'Rimuovi da evidenza' : 'Metti in evidenza'}" style="background:${i.in_evidenza ? '#e74c3c' : 'var(--sfondo)'};border:${i.in_evidenza ? '2px solid #c0392b' : '1px solid #ddd'};${i.in_evidenza ? 'color:#fff' : ''}">${i.in_evidenza ? 'Evid. ✓' : 'Evid.'}</button>
-          <button class="btn btn-action" onclick="toggleAttivo('${i.id}',${!isAttivo})" title="Toggle attivo" style="background:var(--sfondo)">${isAttivo ? '👁️' : '🚫'}</button>
-        </fieldset>
-      </td>
-    </tr>`;
+  const val=v=>v===null||v===undefined||v===''?'—':escHtml(v);
+  const num=v=>v===null||v===undefined||v===''?'—':isFinite(Number(v))?Number(v).toLocaleString('it-IT'):val(v);
+  const rows=data.map(i=>{const aff=String(i.tipo_operazione||'').startsWith('affitto'),op=i.tipo_operazione==='vendita'?'V':aff?'A':i.tipo_operazione==='asta_giudiziaria'?'Asta':'—';
+   const date=i.created_at?new Date(i.created_at):null,d=date&&!isNaN(date)?date.toLocaleDateString('it-IT').replaceAll('/','-'):'—';
+   const ceRaw=String(i.classe_energetica||'').trim().toUpperCase(),ce=/^A[1-4]$|^[B-G]$/.test(ceRaw)?'<span class="ce-badge ce-'+ceRaw.toLowerCase()+'">'+ceRaw+'</span>':'<span class="ce-badge ce-nd">ND</span>';
+   const status=i.cestino?'Nel cestino':i.venduto?'Venduto':i.affittato?'Affittato':i.attivo?'Attivo sul sito':'Non attivo sul sito';
+   return `<tr data-property-preview="${escHtml(i.id)}" tabindex="0" aria-label="Apri scheda ${escHtml(i.codice||i.titolo||'immobile')}">
+   <td class="pv-select"><input type="checkbox" data-pv-select="${escHtml(i.id)}" aria-label="Seleziona ${escHtml(i.codice||'immobile')}" ${rigCatalogueReady?'':'disabled'}></td><td class="pv-na" data-pv-related="score" title="Punteggio fonte in verifica">—</td><td class="pv-na" data-pv-related="count" title="Conteggio eventi collegati in verifica">—</td>
+   <td>${val(i.tipologia||i.categoria)}</td><td><span class="codice-cell">${val(i.codice)}</span></td><td class="pv-na" data-pv-related="nazione" title="Nazione collegata in verifica">—</td><td>${val(i.comune)}</td><td class="pv-na" data-pv-related="zona_locale" title="Zona collegata in verifica">—</td>
+   <td class="pv-contract" title="${escHtml(i.tipo_operazione||'Non indicato')} · ${status}">${op}${i.venduto||i.affittato?'<span class="pv-state">'+(i.venduto?'Venduto':'Affittato')+'</span>':''}${i.attivo===false?'<span class="pv-state">Non attivo</span>':''}</td>
+   <td class="pv-number">${num(i.prezzo_portali??i.prezzo)}</td><td class="pv-number">${num(i.superficie_portali??i.superficie)}</td><td class="pv-number">${val(i.camere)}</td><td class="pv-number">${val(i.bagni_totali??i.bagni)}</td>
+   <td>${val(i.proprietario_nome)}</td><td class="pv-date">${d}</td><td><div data-property-label-host="${escHtml(i.id)}"></div></td><td class="pv-number" title="Piano">${val(i.piano??i.piano_numero)}</td><td>${val(i.indirizzo)}</td><td class="pv-number">${num(i.ipe_kwh)}</td><td>${ce}</td>
+   <td class="pv-controls"><fieldset class="property-row-actions" ${rigCatalogueReady?'':'disabled'}><button type="button" class="pv-icon" data-pv-ops="${escHtml(i.id)}" aria-label="Operazioni ${escHtml(i.codice||'')}" title="Operazioni">⋮</button></fieldset></td></tr>`;
   }).join('');
 
   const sortTh = (key, label) => {
@@ -6547,23 +6499,11 @@ function renderTable(data) {
   };
   wrap.innerHTML = `<table>
     <thead><tr>
-      <th>Tipologia</th>
-      ${sortTh('codice', 'Rif.')}
-      ${sortTh('comune', 'Comune/Prov.')}
-      ${sortTh('prezzo', 'Pr. Portali')}
-      ${sortTh('superficie', 'Mq portali')}
-      <th title="Numero foto in scheda">📷</th>
-      <th>Proprietario</th>
-      <th>Data ins.</th>
-      <th>Etichette</th>
-      <th title="Indirizzo reale, visibile solo agli operatori">Ind. reale</th>
-      <th>IPE</th>
-      <th>CE</th>
-      <th>Operazioni</th>
+      <th><input type="checkbox" data-pv-select-all aria-label="Seleziona tutte le righe visualizzate" ${rigCatalogueReady?'':'disabled'}></th><th title="Punteggio immobile del vecchio gestionale">Punti</th><th title="Eventi già collegati nel nuovo gestionale">Eventi</th><th>Tipologia</th>${sortTh('codice','Rif.')}<th>Nazione</th>${sortTh('comune','Comune/Prov.')}<th>Zona</th><th title="Contratto">V/A</th>${sortTh('prezzo','Pr. Portali')}${sortTh('superficie','Mq portali')}<th title="Camere">Cam.</th><th title="Bagni">Bagni</th><th>Proprietario</th><th>Data ins.</th><th>Etichette</th><th title="Piano">P.</th><th>Ind. reale</th><th>IPE</th><th>CE</th><th aria-label="Comandi">⚙</th>
     </tr></thead>
     <tbody>${rows}</tbody>
   </table>`;
-  window.RighettoPropertyLabelView?.render();
+  window.RighettoPropertyLabelView?.render();window.RighettoPropertyTableData?.render();window.RighettoPropertySelection?.render();
 }
 // Ordinamento lista immobili: click su Codice, Comune, Prezzo, Superficie
 let immSortKey = null;   // null = ordine dal database (piu' recenti prima)
@@ -18258,8 +18198,8 @@ window.showSection('home');
 <script src="js/admin-cliente-scheda.js?v=20261111-direct-client-docs"></script>
 <script src="js/admin-private-photos.js?v=LP0290-private-1"></script>
 <script src="js/admin-immobile-etichette.js?v=20261106-local"></script>
-<script src="js/admin-immobile-operazioni.js?v=20261106-catasto"></script>
-<script src="js/admin-immobile-stampe.js?v=LP0291-stampe-2"></script>
+<script src="js/admin-immobile-operazioni.js?v=20261112-operations-menu"></script>
+<script src="js/admin-immobile-stampe.js?v=20261112-operations-private"></script>
 <script src="js/admin-immobile-inquilini.js?v=20261106-1038"></script>
 <script src="js/admin-blocco2.js?v=1"></script>
 <script>window.rigOwnerReady(()=>RighettoAgenda.init(document.getElementById("righetto-operational-agenda")));</script>
@@ -18284,8 +18224,13 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script src="js/admin-cliente-documenti.js?v=20261106-1038"></script>
 <script>window.rigPropertyTypesReady=import('./js/property-types-ui.mjs?v=20261111-types-private-v1').then(m=>m.initPropertyTypeControl({host:document.getElementById('propertyTypesHost'),primary:document.getElementById('f_tipologia')})).then(x=>(window.RighettoPropertyTypes=x));window.rigPropertyTypesReady.catch(()=>{});</script>
 <script src="js/admin-client-matching.js?v=20261111-types-private-v1"></script>
-<script src="js/admin-immobili-preview.js?v=20261106-fisarmonica"></script>
-<script src="js/admin-immobile-layout.js?v=20261111-internal-types-v1"></script>
+<link rel="stylesheet" href="css/admin-property-list.css?v=20261112-compact-row">
+<script src="js/admin-property-table-data.js?v=20261112-lista"></script>
+<script src="js/admin-property-private-editor.js?v=20261112-private"></script>
+<script src="js/admin-property-history.js?v=20261112-lista"></script>
+<script src="js/admin-property-selection.js?v=20261112-lista"></script>
+<script src="js/admin-immobili-preview.js?v=20261112-compact-row"></script>
+<script src="js/admin-immobile-layout.js?v=20261112-ops-location"></script>
 <script src="js/admin-immobile-cronistoria.js?v=20261109-history-table"></script>
 <script src="js/admin-immobile-dati-aggiuntivi.js?v=20261106-campi"></script>
 <script src="js/admin-immobile-riferimenti.js?v=20261106-riferimenti"></script>

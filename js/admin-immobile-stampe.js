@@ -202,9 +202,9 @@ function rstOpen(kind){
 function rstAddMenu(){
  rstCss();
  const bar=document.getElementById('formTitle');if(!bar||!bar.offsetParent)return;
- const hdr=bar.parentNode&&bar.parentNode.querySelector('.modal-header-actions');if(!hdr||hdr.querySelector('.rst-wrap'))return;
+ const hdr=bar.parentNode&&bar.parentNode.querySelector('.modal-header-actions');if(!hdr||document.querySelector('.rst-wrap'))return;
  const w=document.createElement('span');w.className='rst-wrap';
- w.innerHTML='<button type="button" class="btn btn-primary btn-sm" style="background:#5b3a8c;color:#fff">🖨️ Stampe</button><div class="rst-menu" hidden></div>';
+ w.innerHTML='<button type="button" class="btn btn-primary btn-sm" style="background:#5b3a8c;color:#fff">Stampe</button><div class="rst-menu" hidden></div>';
  hdr.insertBefore(w,hdr.firstChild);
  const menu=w.querySelector('.rst-menu');
  menu.innerHTML=RST_ITEMS.map(x=>'<button type="button" data-rst="'+x[1]+'">'+esc(x[0])+'</button>').join('');

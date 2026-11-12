@@ -6,7 +6,7 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;'
 function css(){if(document.getElementById('rio-css'))return;const s=document.createElement('style');s.id='rio-css';s.textContent=
 '.rio-wrap{position:relative;display:inline-block}.rio-menu{position:absolute;right:0;top:38px;z-index:9000;background:#fff;border:1px solid #00508f;border-radius:8px;min-width:250px;max-width:92vw;box-shadow:0 8px 30px #0003;max-height:70vh;overflow:auto}'+
 '.rio-menu button{display:block;width:100%;text-align:left;border:0;background:#fff;padding:11px 14px;font:600 14px Arial,sans-serif;color:#17324d;cursor:pointer;border-bottom:1px solid #eef2f5}.rio-menu button:hover{background:#eef4fa}'+
-'.rio-menu details{padding:8px 14px;font:13px Arial,sans-serif;color:#566773}.rio-menu details summary{cursor:pointer;font-weight:700}'+
+'.rio-unavailable{padding:10px 14px;font:12px Arial;color:#697b86;background:#f2f4f6}.rio-menu details{padding:8px 14px;font:13px Arial,sans-serif;color:#566773}.rio-menu details summary{cursor:pointer;font-weight:700}'+
 '.rio-ov{position:fixed;inset:0;z-index:13000;background:#18314980;overflow:auto;padding:14px;font:15px/1.45 Arial,sans-serif;color:#17324d}.rio-box{max-width:620px;margin:6vh auto;background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 12px 50px #0004}'+
 '.rio-box h3{margin:0 0 10px}.rio-box button{font:600 14px Arial,sans-serif;min-height:40px;border:1px solid #b9c7d1;border-radius:8px;background:#f3f6f8;color:#17324d;padding:8px 14px;cursor:pointer;margin:4px 6px 0 0}.rio-box button.pri{background:#00508f;color:#fff;border-color:#00508f}'+
 '.rio-box pre{white-space:pre-wrap;background:#f6f8fa;border:1px solid #dde5ec;border-radius:8px;padding:10px;font:13px/1.45 Arial,sans-serif;max-height:45vh;overflow:auto}.rio-box label{display:block;margin:8px 0}.rio-box input[type=text],.rio-box input[type=number]{width:100%;padding:8px;border:1px solid #b9c7d1;border-radius:6px;font-size:15px}'+
@@ -25,7 +25,7 @@ async function copy(t,msg){try{await navigator.clipboard.writeText(t);if(window.
 const ops={
  privatephotos(i){if(!window.RighettoPrivatePhotos){toast("Lettore foto private non disponibile","error");return;}return window.RighettoPrivatePhotos.open({db:sb,property:i,isCurrent:id=>String(cur()?.id)===String(id)&&document.body.dataset.adminArea==='nuovo'&&!!document.getElementById('formTitle')?.offsetParent});},
  clienti(i){if(typeof showMatchingClienti==='function')showMatchingClienti(i.id);},
- async appuntamento(i){
+ async appuntamento(i,seed={}){
   const principal=window.RighettoGatedPrincipal,id=String(i.id);
   try{
    if(!principal||String(cur()?.id)!==id)throw Error('Scheda immobile cambiata. Riapri la scheda.');
@@ -34,7 +34,7 @@ const ops={
    const r=await sb.from('immobili').select('id,codice,indirizzo').eq('id',id).maybeSingle();
    if(r.error||!r.data||String(r.data.id)!==id||principal!==window.RighettoGatedPrincipal||String(cur()?.id)!==id)throw Error('Immobile non verificato.');
    if(document.querySelector('#ra-form')&&!confirm('Aprire una nuova bozza in Agenda? La bozza evento aperta verrà sostituita. Nessun evento salvato automaticamente.'))return;
-   await showSection('agenda');await RighettoAgenda.newEvent({property_id:id,property:r.data.codice||'Immobile collegato',address:r.data.indirizzo||''});
+   await showSection('agenda');await RighettoAgenda.newEvent({property_id:id,property:r.data.codice||'Immobile collegato',address:r.data.indirizzo||'',...seed});
    const form=document.querySelector('#ra-form'),field=form?.querySelector('[name=property_search]');
    if(principal!==window.RighettoGatedPrincipal){form?.closest('.ra-modal')?.remove();throw Error('Sessione cambiata.');}
    if(!field||field.dataset.selectedId!==id||field.value!==field.dataset.selectedLabel)throw Error('Agenda non pronta o immobile non collegato. Riprova da Agenda.');
@@ -77,16 +77,33 @@ const ops={
    if(window.toast)toast(val?'Segnato come '+lab:'Ripristinato','success');close();if(typeof loadImmobili==='function')await loadImmobili();};
   o.querySelector('[data-a=ok]').onclick=()=>apply(true);const un=o.querySelector('[data-a=un]');if(un)un.onclick=()=>apply(false);}
 };
-const ITEMS=[['privatephotos','Foto private'],['clienti','Trova clienti compatibili'],['appuntamento','Nuovo appuntamento'],['email','Bozza email con i dati'],['link','Copia link con anteprima foto'],['seolink','Copia link pagina sito (SEO)'],['dati','Esporta dati immobile'],['catasto','Scheda catastale (lettura)'],['duplica','Duplica come bozza'],['venduto','Segna venduto / affittato']];
-const DACOMPLETARE='<details><summary>Da completare (non ancora disponibili qui)</summary><ul style="margin:6px 0 0 16px;padding:0"><li>Esportazione sui portali</li></ul></details>';
-function openMenu(i){css();const o=overlay('<h3>Operazioni - '+esc(i.codice||'')+'</h3><div id="rio-list" class="rio-list">'+ITEMS.map(x=>'<button type="button" data-op="'+x[0]+'" style="display:block;width:100%;text-align:left;margin:4px 0">'+x[1]+'</button>').join('')+'</div>'+DACOMPLETARE+'<button data-a="x" style="margin-top:10px">Chiudi</button>');
- o.querySelector('[data-a=x]').onclick=close;o.querySelector('#rio-list').onclick=e=>{const b=e.target.closest('[data-op]');if(!b)return;close();ops[b.dataset.op](i);};}
-function addMenu(){css();const bar=document.querySelector('#formTitle');if(!bar)return;const hdr=bar.parentNode.querySelector('.modal-header-actions');if(!hdr||hdr.querySelector('.rio-wrap'))return;
- const w=document.createElement('span');w.className='rio-wrap';w.innerHTML='<button type="button" class="btn btn-primary btn-sm" id="rio-btn" style="background:#00508f;color:#fff">🔧 Operazioni</button><div class="rio-menu" id="rio-menu" hidden></div>';hdr.insertBefore(w,hdr.firstChild);
- const m=w.querySelector('#rio-menu');const items=[['privatephotos','Foto private'],['clienti','Trova clienti compatibili'],['appuntamento','Nuovo appuntamento'],['email','Bozza email con i dati'],['link','Copia link con anteprima foto'],['seolink','Copia link pagina sito (SEO)'],['dati','Esporta dati immobile'],['catasto','Scheda catastale (lettura)'],['duplica','Duplica come bozza'],['venduto','Segna venduto / affittato']];
- m.innerHTML=items.map(x=>'<button type="button" data-op="'+x[0]+'">'+x[1]+'</button>').join('')+'<details><summary>Da completare (non ancora disponibili qui)</summary><ul style="margin:6px 0 0 16px;padding:0"><li>Esportazione sui portali (per ora nel vecchio gestionale)</li></ul></details>';
- w.querySelector('#rio-btn').onclick=e=>{e.stopPropagation();m.hidden=!m.hidden;};
- m.addEventListener('click',e=>{const b=e.target.closest('[data-op]');if(!b)return;const i=cur();if(!i){if(window.toast)toast('Salva prima l\'immobile','error');return;}m.hidden=true;ops[b.dataset.op](i);});
+Object.assign(ops,{
+ salva(i){if(String(cur()?.id)!==String(i.id))throw Error('Apri prima la scheda corretta per salvare');document.getElementById('immobileForm')?.requestSubmit();},
+ importa(){if(typeof openImportModal==='function')openImportModal();},
+ async cronistoria(i){await editImmobile(i.id);window.RighettoImmobileLayout?.select('cronistoria');},
+ evento(i){return window.RighettoPropertyPrivateEditor?.comment(i);},
+ modifica(i){if(typeof editImmobile==='function'){Promise.resolve(editImmobile(i.id)).then(()=>window.RighettoImmobileLayout?.select('info'));}},
+ proprietari(i){if(typeof openProprietariImmobile==='function')openProprietariImmobile(i.id);},
+ documenti(i){if(typeof openDocsImmobile==='function')openDocsImmobile(i.codice||'',i.id);},
+ foto(i){if(typeof openFotoImmobile==='function')openFotoImmobile(i.id);},
+ stampa(i){if(window.RighettoImmobileStampe?.open)return RighettoImmobileStampe.open('cliente');throw Error('Modulo PDF cliente non disponibile');},
+ cestino(i){if(i.cestino){if(typeof restoreImmobile==='function')restoreImmobile(i.id,i.titolo||'');}else if(typeof deleteImmobile==='function')deleteImmobile(i.id,i.titolo||'');},
+ evidenza(i){if(typeof toggleEvidenza==='function')toggleEvidenza(i.id,!i.in_evidenza);},
+ attivo(i){if(typeof toggleAttivo==='function')toggleAttivo(i.id,!i.attivo);}
+});
+const ITEMS=[['salva','Salva modifiche'],['evento','Aggiungi commento alla cronistoria'],['importa','Importa dati da Idealista'],['modifica','Modifica dati immobile'],['clienti','Trova clienti compatibili'],['appuntamento','Nuovo appuntamento'],['email','Bozza email con i dati'],['cestino','Sposta nel cestino / Ripristina'],['duplica','Duplica come bozza'],['link','Copia link con anteprima foto'],['seolink','Copia link pagina sito (SEO)'],['dati','Esporta dati immobile'],['venduto','Segna venduto / affittato'],['attivo','Attiva / disattiva sul sito'],['evidenza','Metti / togli evidenza'],['proprietari','Gestisci proprietari'],['documenti','Documenti (PDF)'],['foto','Foto pubbliche'],['privatephotos','Foto private'],['stampa','Stampa PDF'],['catasto','Scheda catastale (lettura)']];
+const ROW_ITEMS=[['cronistoria','Cronistoria immobile'],['clienti','Trova clienti'],['evento','Aggiungi evento'],['appuntamento','Nuovo appuntamento'],['stampa','Crea PDF cliente'],['modifica','Modifica immobile'],['cestino','Cancella immobile']];
+const rowMenuHtml=i=>ROW_ITEMS.map(([key,label])=>'<button type="button" data-op="'+key+'"'+(key==='cestino'?' style="color:#b1202b"':'')+'>'+esc(key==='cestino'&&i?.cestino?'Ripristina immobile':label)+'</button>').join('');
+const DACOMPLETARE='<div class="rio-unavailable">Esportazione sui portali: da completare, non disponibile qui.</div>';
+const menuHtml=i=>ITEMS.map(([key,label])=>'<button type="button" data-op="'+key+'">'+esc(key==='cestino'?(i?.cestino?'Ripristina dal cestino':'Sposta nel cestino'):key==='attivo'?(i?.attivo?'Disattiva sul sito':'Attiva sul sito'):key==='evidenza'?(i?.in_evidenza?'Togli evidenza':'Metti in evidenza'):label)+'</button>').join('')+DACOMPLETARE;
+async function dispatchOp(key,i){const principal=window.RighettoGatedPrincipal;try{if(!principal||typeof sb==='undefined')throw Error('Sessione non disponibile');const u=await sb.auth.getUser();if(u.error||u.data.user?.id!==principal||window.RighettoGatedPrincipal!==principal)throw Error('Sessione cambiata');const r=await sb.from('immobili').select('*').eq('id',i.id).single();if(r.error||r.data?.id!==i.id||window.RighettoGatedPrincipal!==principal)throw Error('Immobile non verificato');i=r.data;if(['privatephotos','appuntamento','catasto','stampa'].includes(key)&&String(cur()?.id)!==String(i.id)){if(typeof editImmobile!=='function')throw Error('Scheda non disponibile');await editImmobile(i.id);if(String(cur()?.id)!==String(i.id)||window.RighettoGatedPrincipal!==principal)throw Error('Scheda immobile non confermata');}return await ops[key](i);}catch(e){if(window.toast)toast('Operazione non eseguita: '+(e.message||e),'error');else alert('Operazione non eseguita: '+(e.message||e));}}
+function openMenu(i,anchor){css();document.getElementById('rio-row-menu')?.remove();if(!anchor){const o=overlay('<h3>Operazioni - '+esc(i.codice||'')+'</h3><div id="rio-list" class="rio-list">'+menuHtml(i)+'</div><button data-a="x">Chiudi</button>');o.querySelector('[data-a=x]').onclick=close;o.querySelector('#rio-list').onclick=e=>{const b=e.target.closest('[data-op]');if(!b)return;close();dispatchOp(b.dataset.op,i);};return;}
+ const menu=document.createElement('div');menu.id='rio-row-menu';menu.className='rio-menu';menu.setAttribute('aria-label','Operazioni '+(i.codice||''));menu.innerHTML=rowMenuHtml(i);document.body.append(menu);const r=anchor.getBoundingClientRect();menu.style.cssText='position:fixed;right:auto;top:'+Math.min(r.bottom+3,innerHeight-310)+'px;left:'+Math.max(8,Math.min(r.right-270,innerWidth-280))+'px;max-height:min(68vh,520px);width:270px';menu.onclick=e=>{const b=e.target.closest('[data-op]');if(!b)return;menu.remove();dispatchOp(b.dataset.op,i);};const dismiss=e=>{if(e.type==='keydown'&&e.key!=='Escape')return;if(e.type==='click'&&(menu.contains(e.target)||anchor.contains(e.target)))return;menu.remove();document.removeEventListener('click',dismiss);document.removeEventListener('keydown',dismiss);};document.addEventListener('click',dismiss);document.addEventListener('keydown',dismiss);window.addEventListener('scroll',()=>menu.remove(),{once:true,capture:true});}
+function addMenu(){css();const bar=document.querySelector('#formTitle');if(!bar)return;const hdr=bar.parentNode.querySelector('.modal-header-actions');if(!hdr||document.querySelector('.rio-wrap'))return;
+ const w=document.createElement('span');w.className='rio-wrap';w.innerHTML='<button type="button" class="btn btn-primary btn-sm" id="rio-btn" style="background:#00508f;color:#fff">Operazioni</button><div class="rio-menu" id="rio-menu" hidden></div>';hdr.insertBefore(w,hdr.firstChild);
+ const m=w.querySelector('#rio-menu');m.innerHTML=menuHtml(cur());
+ w.querySelector('#rio-btn').onclick=e=>{e.stopPropagation();m.innerHTML=menuHtml(cur());m.hidden=!m.hidden;};
+ m.addEventListener('click',e=>{const b=e.target.closest('[data-op]');if(!b)return;if(['salva','importa'].includes(b.dataset.op)){if(!window.RighettoGatedPrincipal)return;m.hidden=true;if(b.dataset.op==='salva')document.getElementById('immobileForm')?.requestSubmit();else if(typeof openImportModal==='function')openImportModal();return;}const i=cur();if(!i){if(window.toast)toast('Salva prima l\'immobile','error');return;}m.hidden=true;dispatchOp(b.dataset.op,i);});
  document.addEventListener('click',e=>{if(!w.contains(e.target))m.hidden=true;});}
 const mo=new MutationObserver(()=>{if(document.getElementById('formTitle')&&document.getElementById('formTitle').offsetParent)addMenu();});
 function boot(){mo.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class','style']});addMenu();}
