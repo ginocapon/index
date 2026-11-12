@@ -2227,7 +2227,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 
 </style>
 <link rel="stylesheet" href="css/admin-agenda.css?v=20261106-width">
-<link rel="stylesheet" href="css/admin-attivita.css?v=20261111-simple-notes">
+<link rel="stylesheet" href="css/admin-attivita.css?v=20261112-property-link">
 <link rel="stylesheet" href="css/admin-agenda-preview.css?v=20261112-types-retire">
 <link rel="stylesheet" href="css/admin-mobile.css?v=20261106-1854">
 <link rel="stylesheet" href="css/admin-immobili-responsive.css?v=20261106-fisarmonica">
@@ -18204,10 +18204,8 @@ window.showSection('home');
 <script src="js/admin-blocco2.js?v=1"></script>
 <script>window.rigOwnerReady(()=>RighettoAgenda.init(document.getElementById("righetto-operational-agenda")));</script>
 <script>window.RIGHETTO_BOZZA_ATTIVA=true;</script>
-<script src="js/admin-attivita.js?v=20261111-upload-safety"></script>
-<script>(function(){var el=document.getElementById('righetto-attivita');if(!el)return;var done=false,busy=false;function msg(t){el.innerHTML='<div class="at-banner">'+t+'</div>';}
-async function go(){if(done||busy)return;busy=true;const principal=window.RighettoGatedPrincipal;try{if(typeof sb==='undefined'||!principal)throw 0;var u=await sb.auth.getUser();if(!u.data.user?.id||u.data.user.id!==principal||window.RighettoGatedPrincipal!==principal||document.body.dataset.adminArea!=='attivita')throw 0;var authority=await sb.rpc('righetto_is_admin_request');if(authority.error||authority.data!==true||window.RighettoGatedPrincipal!==principal||document.body.dataset.adminArea!=='attivita')throw 0;done=true;RighettoAttivita.init(el,{store:RighettoAttivita.dbStore(sb)});}catch(e){msg('Attivit\u00e0: accedi per vedere le pratiche.');}busy=false;}
-msg('Attivit\u00e0: apri Attivit\u00e0 per caricare le pratiche.');window.rigSectionReady(['attivita'],go);})();</script>
+<script src="js/admin-attivita.js?v=20261112-property-link"></script>
+<script>(function(){var el=document.getElementById('righetto-attivita'),ctl=null,busy=false,pending=null,owner=null;if(!el)return;window.RighettoOpenPractice=function(id){pending=id;window.showSection('attivita');go();};async function go(){if(busy)return;busy=true;const p=window.RighettoGatedPrincipal;try{if(typeof sb==='undefined'||!p||document.body.dataset.adminArea!=='attivita')return;const u=await sb.auth.getUser(),a=await sb.rpc('righetto_is_admin_request');if(u.error||u.data.user?.id!==p||a.error||a.data!==true||window.RighettoGatedPrincipal!==p||document.body.dataset.adminArea!=='attivita')throw Error('Accesso non confermato');if(ctl&&owner===p){await ctl.refresh();if(pending){ctl.focus(pending);pending=null;}return;}const st=RighettoAttivita.dbStore(sb);const properties=await st.properties();if(window.RighettoGatedPrincipal!==p||document.body.dataset.adminArea!=='attivita')return;ctl=await RighettoAttivita.init(el,{store:st,properties,principal:p,isActive:()=>document.body.dataset.adminArea==='attivita'&&window.RighettoGatedPrincipal===p,openProperty:id=>{if(typeof editImmobile==='function')editImmobile(id);}});owner=p;if(pending){ctl.focus(pending);pending=null;}}catch(e){el.textContent='Attività non disponibili: '+(e.message||e);}finally{busy=false;}}window.rigSectionReady(['attivita'],go);window.addEventListener('righetto:section-ready',()=>{if(owner&&owner!==window.RighettoGatedPrincipal){ctl=null;el.replaceChildren();}});})();</script>
 <script src="js/admin-mobile.js?v=20261111-activities-direct"></script>
 <script src="js/admin-cliente-layout.js?v=20261111-client-editor-docs"></script>
 <script src="js/admin-cliente-drag.js?v=20261111-0937"></script>
@@ -18230,13 +18228,14 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script src="js/admin-property-history.js?v=20261112-lista"></script>
 <script src="js/admin-property-selection.js?v=20261112-unified"></script>
 <script src="js/admin-immobili-preview.js?v=20261112-compact-row"></script>
-<script src="js/admin-immobile-layout.js?v=20261112-ops-location"></script>
+<script src="js/admin-property-activities.js?v=20261112-property-link"></script>
+<script src="js/admin-immobile-layout.js?v=20261112-property-activities"></script>
 <script src="js/admin-immobile-cronistoria.js?v=20261109-history-table"></script>
 <script src="js/admin-immobile-dati-aggiuntivi.js?v=20261106-campi"></script>
 <script src="js/admin-immobile-riferimenti.js?v=20261106-riferimenti"></script>
 <link rel="stylesheet" href="js/client-edit-green.css?v=20261109-identico-diretto">
 <script type="module">import{installClientGeo}from'./js/client-geo-verde.mjs';installClientGeo({root:document.getElementById('clienteModal')}).catch(e=>{console.error('Località cliente non disponibili',e);});</script>
-<script src="js/admin-attivita-preview.js?v=20261112-compact-preview"></script>
+<script src="js/admin-attivita-preview.js?v=20261112-property-link"></script>
 <script>(function(){var ctl=null,principal=null;function setup(){const p=window.RighettoGatedPrincipal;if(!p)return;if(principal!==p){if(ctl)ctl.clear();principal=p;ctl=RighettoAttivitaPreview.init(document.getElementById('righetto-attivita-preview'),{db:sb,principal:p});}ctl.refresh();}window.rigSectionReady(['home','agenda'],setup);window.addEventListener('righetto:section-ready',function(){if(ctl&&!['home','agenda'].includes(document.body.dataset.adminArea))ctl.clear();});})();</script>
 </body>
 </html>
