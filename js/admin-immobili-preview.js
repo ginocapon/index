@@ -1,7 +1,7 @@
 /* Desktop property table: first-photo hover and existing read-only preview. */
 (function(){'use strict';
  let popup=null,active=null;
- function sizeRows(){document.querySelectorAll('#immobiliTableWrap table').forEach(table=>{const labels=[...table.querySelectorAll('thead th')].map(th=>th.textContent.replace(/[⇅▲▼]/g,'').trim());table.querySelectorAll('tbody tr').forEach(row=>{if(row.style.height)row.style.removeProperty('height');if(row.hasAttribute('data-doubled-row'))row.removeAttribute('data-doubled-row');[...row.cells].forEach((cell,n)=>{if(cell.dataset.columnLabel!==labels[n])cell.dataset.columnLabel=labels[n]||'';});});});document.body.classList.remove('rig-colonne-compatto');}
+ function sizeRows(){document.querySelectorAll('#immobiliTableWrap table').forEach(table=>{const labels=[...table.querySelectorAll('thead th')].map(th=>th.textContent.replace(/[⇅▲▼]/g,'').trim());table.querySelectorAll('tbody tr').forEach(row=>{if(row.style.height)row.style.removeProperty('height');if(row.hasAttribute('data-doubled-row'))row.removeAttribute('data-doubled-row');[...row.cells].forEach((cell,n)=>{if(cell.dataset.columnLabel!==labels[n])cell.dataset.columnLabel=labels[n]||'';});});});if(document.body.classList.contains('rig-colonne-compatto'))document.body.classList.remove('rig-colonne-compatto');}
  sizeRows();
  const hover=()=>matchMedia('(hover:hover) and (pointer:fine)').matches;
  const current=id=>(typeof allImmobili!=='undefined'?allImmobili:[]).find(i=>String(i.id)===id);
@@ -23,5 +23,8 @@
  document.addEventListener('focusin',e=>{const cell=e.target.closest('#immobiliTableWrap tr[data-property-preview]');if(cell)show(cell);});document.addEventListener('focusout',e=>{if(e.target.closest('[data-property-preview]'))hide();});
  addEventListener('scroll',hide,true);addEventListener('resize',()=>{hide();sizeRows();});addEventListener('blur',hide);document.addEventListener('visibilitychange',()=>{if(document.hidden)hide();});
  if(typeof sb!=='undefined')sb.auth.onAuthStateChange?.(event=>{if(event==='SIGNED_OUT'||event==='SIGNED_IN')hide();});
- new MutationObserver(()=>{if(active&&!active.isConnected)hide();sizeRows();}).observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['class','style','hidden']});
+ let rowSizingQueued=false;
+ function queueRowSizing(){if(rowSizingQueued)return;rowSizingQueued=true;requestAnimationFrame(()=>{rowSizingQueued=false;sizeRows();});}
+ function touchesTable(record){if(record.target.nodeType===1&&record.target.closest('#immobiliTableWrap'))return true;return [...record.addedNodes].some(n=>n.nodeType===1&&(n.id==='immobiliTableWrap'||n.querySelector('#immobiliTableWrap')));}
+ new MutationObserver(records=>{if(active&&!active.isConnected)hide();if(records.some(touchesTable))queueRowSizing();}).observe(document.documentElement,{childList:true,subtree:true});
 })();
