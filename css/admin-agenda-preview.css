@@ -24,3 +24,20 @@ body[data-admin-area="home"] #righetto-attivita-preview,body[data-admin-area="ag
  .ap-person{padding:5px 6px}.ap-person:first-child{grid-column:3;grid-row:1}.ap-person:nth-child(2){grid-column:2;grid-row:1}
  .ap-practice{padding:4px 5px;font-size:12px;margin-top:3px}.ap-count,.ap-empty,.ap-practice small{font-size:10px}.ap-empty{margin-top:4px}
 }
+
+/* Chiusura evidente della finestra Tipi evento, anche su telefono. */
+.ra .ra-types-modal .ra-top{position:sticky;top:0;background:#fff;z-index:2;padding-bottom:8px;align-items:center}
+.ra .ra-types-modal .ra-types-close{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:auto;min-height:44px;padding:4px 10px 4px 4px;border:1px solid #9db7aa;border-radius:28px;background:#fff;color:#164737;font-size:14px;flex:0 0 auto}
+.ra .ra-types-modal .ra-types-x{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:#164737;color:#fff;font-size:22px;font-weight:700;line-height:1}
+.ra .ra-types-modal .ra-types-close:focus-visible{outline:3px solid #db9a19;outline-offset:3px}
+
+.ra .ra-type-item{padding:3px 5px 3px 10px;gap:7px;min-width:0;min-height:38px}
+.ra .ra-type-name{flex:1;min-width:0;overflow-wrap:anywhere}
+.ra .ra-type-delete{width:34px;height:34px;min-height:34px;padding:7px;border:1px solid #b9c8c5;border-radius:50%;box-shadow:none;color:#9c2931;background:#fff;flex:0 0 auto}
+.ra .ra-type-delete svg{width:18px;height:18px}
+.ra .ra-type-kept{font-size:10px;color:#64746d;flex:0 0 auto;padding:5px}
+.ra .ra-type-confirm{padding:12px 0;line-height:1.5;font-weight:400}.ra .ra-type-confirm h4{font-size:19px;margin:0 0 14px}.ra .ra-type-confirm p{margin:12px 0}
+.ra .ra-type-buttons{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:20px}
+.ra .ra-type-result{padding:8px 0;color:#164737}
+@media(max-width:760px){.ra .ra-type-item{min-height:48px}.ra .ra-type-delete{width:44px;height:44px;min-height:44px;padding:12px}.ra .ra-type-kept{max-width:90px;text-align:right}}
+.ra .ra-types-modal [hidden]{display:none!important}

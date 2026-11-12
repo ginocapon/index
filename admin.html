@@ -2228,7 +2228,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 </style>
 <link rel="stylesheet" href="css/admin-agenda.css?v=20261106-width">
 <link rel="stylesheet" href="css/admin-attivita.css?v=20261111-simple-notes">
-<link rel="stylesheet" href="css/admin-agenda-preview.css?v=20261112-aligned-preview">
+<link rel="stylesheet" href="css/admin-agenda-preview.css?v=20261112-types-retire">
 <link rel="stylesheet" href="css/admin-mobile.css?v=20261106-1854">
 <link rel="stylesheet" href="css/admin-immobili-responsive.css?v=20261106-fisarmonica">
 <link rel="stylesheet" href="layout-clienti.css?v=20261107-clienti-hover"><link rel="stylesheet" href="css/admin-immobile-layout.css?v=20261106-scheda">
@@ -18253,7 +18253,7 @@ window.showSection('home');
 </script>
 <script src="js/agenda-event-types.js?v=1"></script>
 <script>window.RIGHETTO_SYNC_ATTIVA=true;</script>
-<script src="js/admin-agenda.js?v=20261112-aligned-preview"></script>
+<script src="js/admin-agenda.js?v=20261112-types-retire"></script>
 <script src="js/admin-clienti-upload.js?v=20261111-direct-client-docs"></script>
 <script src="js/admin-cliente-scheda.js?v=20261111-direct-client-docs"></script>
 <script src="js/admin-private-photos.js?v=LP0290-private-1"></script>
@@ -18273,7 +18273,7 @@ msg('Attivit\u00e0: apri Attivit\u00e0 per caricare le pratiche.');window.rigSec
 <script src="js/admin-cliente-drag.js?v=20261111-0937"></script>
 <script>window.RighettoNavigationAttachments=()=>({property:typeof currentFotos==='undefined'?null:[currentFotos,currentPlanimetrie,currentDocumenti,currentVtScenes,currentUnitaCatastali,currentCatastoPdf],client:typeof currentClienteDocumenti==='undefined'?null:currentClienteDocumenti});</script>
 <script type="module">
-import {bindAuthenticatedNavigation} from './js/auth-bootstrap.mjs?v=20261111-client-cancel';
+import {bindAuthenticatedNavigation} from './js/auth-bootstrap.mjs?v=20261112-types-retire';
 window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation(sb).catch(()=>{if(document.getElementById('navigation-startup-warning'))return;const n=document.createElement('p');n.id='navigation-startup-warning';n.setAttribute('role','status');n.textContent='Navigazione Indietro non disponibile in questa sessione. Usa il menu interno; i dati non sono stati modificati.';n.style.cssText='margin:12px;padding:12px;background:#fff3cc;color:#17324d';document.querySelector('.content')?.prepend(n);});});
 </script>
 <script src="js/admin-share-preview.js?v=20261103"></script>
