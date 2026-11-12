@@ -127,3 +127,11 @@ html body #clienteModal#clienteModal.legacy-client-editor input[aria-invalid=tru
 html body input[aria-invalid=true],html body select[aria-invalid=true],html body textarea[aria-invalid=true],html body .ra input[aria-invalid=true],html body .rcs input[aria-invalid=true]{border-color:#b3261e!important;outline-color:#b3261e!important}
 /* Semantic reds, warning/success badges, progress and energy classes retain their own palette. */
 }
+
+/* Anteprima Attivita nell'agenda: testata e comandi strutturali. */
+@media screen {
+ html body #righetto-attivita-preview{border-color:var(--gi-edge)!important;color:var(--gi-ink)!important}
+ html body #righetto-attivita-preview .ap-head{background:var(--gi-forest)!important;color:#fff!important}
+ html body #righetto-attivita-preview .ap-head h2,html body #righetto-attivita-preview .ap-open{color:#fff!important}
+ html body #righetto-attivita-preview .ap-more{color:var(--gi-forest)!important}
+}
