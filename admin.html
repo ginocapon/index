@@ -2228,6 +2228,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 </style>
 <link rel="stylesheet" href="css/admin-agenda.css?v=20261106-width">
 <link rel="stylesheet" href="css/admin-attivita.css?v=20261111-simple-notes">
+<link rel="stylesheet" href="css/admin-agenda-preview.css?v=20261112-compact-preview">
 <link rel="stylesheet" href="css/admin-mobile.css?v=20261106-1854">
 <link rel="stylesheet" href="css/admin-immobili-responsive.css?v=20261106-fisarmonica">
 <link rel="stylesheet" href="layout-clienti.css?v=20261107-clienti-hover"><link rel="stylesheet" href="css/admin-immobile-layout.css?v=20261106-scheda">
@@ -18206,7 +18207,7 @@ var groups=[
  ['Controllo','blue',[['analytics','Search Console','Rendimento su Google'],['impostazioni','Impostazioni','Configurazione']]]
 ];
 var icon='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M12 8v8"/></svg>';
-home.innerHTML='<section id="righetto-operational-agenda" style="margin-bottom:25px"></section><section id="righetto-attivita" style="margin-bottom:25px"></section>';
+home.innerHTML='<section id="righetto-operational-agenda" style="margin-bottom:25px"></section><section id="righetto-attivita-preview" aria-label="Anteprima Attività"></section><section id="righetto-attivita" style="margin-bottom:25px"></section>';
 var wrap=document.createElement('div');wrap.className='rh-groups';home.appendChild(wrap);groups.forEach(function(g){var box=document.createElement('div');box.className='rh-grp';var title=document.createElement('h2');title.className='rh-group-title '+g[1];title.textContent=g[0];box.appendChild(title);var grid=document.createElement('div');grid.className='rh-grid';g[2].forEach(function(item){var b=document.createElement('button');b.type='button';b.className='rh-tile '+g[1];b.dataset.section=item[0];var existingNav=Array.from(document.querySelectorAll('#sidebar .nav-item')).find(function(n){return (n.getAttribute('onclick')||'').indexOf("'"+item[0]+"'")>=0;});var ownIcon=existingNav&&existingNav.querySelector('svg');b.innerHTML='<span class="rh-icon">'+(ownIcon?ownIcon.outerHTML:icon)+'</span><span>'+item[1]+'</span><span class="rh-sub">'+item[2]+'</span>';b.onclick=function(){window.showSection(item[0]);};grid.appendChild(b);});box.appendChild(grid);wrap.appendChild(box);});
 document.querySelector('.content').prepend(home);
 // Navigazione raccolta sopra l'area di lavoro, con tutte le voci esistenti.
@@ -18290,6 +18291,8 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script src="js/admin-immobile-riferimenti.js?v=20261106-riferimenti"></script>
 <link rel="stylesheet" href="js/client-edit-green.css?v=20261109-identico-diretto">
 <script type="module">import{installClientGeo}from'./js/client-geo-verde.mjs';installClientGeo({root:document.getElementById('clienteModal')}).catch(e=>{console.error('Località cliente non disponibili',e);});</script>
+<script src="js/admin-attivita-preview.js?v=20261112-compact-preview"></script>
+<script>(function(){var ctl=null,principal=null;function setup(){const p=window.RighettoGatedPrincipal;if(!p)return;if(principal!==p){if(ctl)ctl.clear();principal=p;ctl=RighettoAttivitaPreview.init(document.getElementById('righetto-attivita-preview'),{db:sb,principal:p});}ctl.refresh();}window.rigSectionReady(['home','agenda'],setup);window.addEventListener('righetto:section-ready',function(){if(ctl&&!['home','agenda'].includes(document.body.dataset.adminArea))ctl.clear();});})();</script>
 </body>
 </html>
 
