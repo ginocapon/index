@@ -7,6 +7,6 @@ function add(afterId,key,label,reload){
  l.innerHTML='<input type="checkbox"> '+label;
  l.querySelector('input').addEventListener('change',e=>{window[key]=e.target.checked;if(typeof window[reload]==='function')window[reload]();});
  sel.insertAdjacentElement('afterend',l);}
-function boot(){add('filtroTipo','__rCestino','Mostra cestino','loadImmobili');add('filtroFonteCliente','__rStorico','Mostra storico','loadClienti');}
+function boot(){add('filtroTipo','__rCestino','Mostra storico','loadImmobili');add('filtroFonteCliente','__rStorico','Mostra storico','loadClienti');}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
