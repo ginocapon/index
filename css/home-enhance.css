@@ -184,3 +184,6 @@
     font-size: clamp(2rem, 4vw, 3.2rem);
   }
 }
+
+/* Frase hero: solo dimensione mobile approvata il 12/11/2026. */
+@media(max-width:760px){body.homepage .hero-subtitle{font-size:24px!important}}
