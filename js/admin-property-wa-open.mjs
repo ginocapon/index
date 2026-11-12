@@ -7,7 +7,7 @@ export function mountSelfWhatsAppOpen({db,principal,button,mode,body,verifySelec
  function sync(){button.disabled=!active||busy||locked||!alive()||principal!==OWNER||!selectionReady()||!body.value.trim();}
  async function auth(){const u=await db.auth.getUser();if(!alive()||u.error||u.data?.user?.id!==principal||principal!==OWNER)throw Error('Sessione Gino non verificata. Nessuna apertura.');}
  async function recipient(){const s=await verifySelected();if(s.length!==1||s[0].id!==SELF||normalize(s[0].address)!==PHONE)throw Error('Questa prova apre soltanto la chat di Gino. Scegli la sua scheda e il suo numero.');}
- async function run(){if(button.disabled||busy||locked||!alive())return;busy=true;sync();let tab=null;
+ async function run(){if(button.disabled||busy||locked||!alive())return;busy=true;button.textContent='Controllo...';button.classList.add('wa-pressed');button.setAttribute('aria-busy','true');sync();let tab=null;
   try{
    const delivery=mode.value,text=body.value;if(!['app','web'].includes(delivery))throw Error('Scegli Web o app.');
    if(delivery==='web'){tab=popup();if(!tab)throw Error('Consenti la nuova finestra. Nessuna apertura.');tab.opener=null;}
@@ -15,10 +15,10 @@ export function mountSelfWhatsAppOpen({db,principal,button,mode,body,verifySelec
    if(!alive()||body.value!==text||mode.value!==delivery)throw Error('Testo, destinatario o modalità cambiati: ricontrolla prima di aprire.');
    const url=new URL(delivery==='app'?'whatsapp://send':'https://web.whatsapp.com/send');url.searchParams.set('phone',PHONE.slice(1));url.searchParams.set('text',text);
    if(!text.trim()||text.length>8000||url.href.length>16000)throw Error('Testo vuoto o troppo lungo. Nessuna apertura.');
-   locked=true;onLock();notice.textContent='Apertura richiesta solo verso Gino. Controlla numero e testo in WhatsApp. Nessun invio né registrazione automatica dal gestionale; questa prova non certifica il salvataggio.';
+   locked=true;onLock();button.textContent='Apertura richiesta';notice.textContent='Apertura richiesta solo verso Gino. Controlla numero e testo in WhatsApp. Nessun invio né registrazione automatica dal gestionale; questa prova non certifica il salvataggio.';
    if(delivery==='app')launchApp(url.href);else{tab.location.href=url.href;tab=null;}
   }catch(e){if(tab)tab.close();if(alive())notice.textContent=e.message;}
-  finally{busy=false;sync();}
+  finally{busy=false;button.setAttribute('aria-busy','false');if(!locked){button.textContent='Invia con WhatsApp';button.classList.remove('wa-pressed');}sync();}
  }
  button.title='Prova apertura solo verso Gino; non invia e non registra';button.setAttribute?.('aria-label','Prova apertura WhatsApp solo verso Gino');button.onclick=run;body.addEventListener('input',sync);mode.addEventListener('change',sync);sync();
  return {sync,dispose(){disposed=true;button.onclick=null;body.removeEventListener('input',sync);mode.removeEventListener('change',sync);button.disabled=true;}};
