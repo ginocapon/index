@@ -360,3 +360,10 @@ Dopo ogni batch blog:
 3. `python scripts/check_doppioni_sito.py`
 4. Commit `skimm.md` + `skimm.json` insieme agli HTML.
 
+
+
+## Aggiornamento13novembre2026
+
+| Slug | KW primaria | Angolo editoriale |
+|---|---|---|
+| `blog-nuda-proprieta-padova-scelta` | `nuda-proprieta-padova-usufrutto-scelta` | Confronto diritti riservati, spese e alternative prima di firmare; non percentuali fiscali |

@@ -317,6 +317,7 @@ let _staticSlugs = new Set();
 async function initBlog() {
   // Articoli statici (pagine HTML dedicate) — mostrati subito, senza attendere Supabase
   const articoliStatici = [
+    {"titolo": "Nuda proprietà a Padova: vendere senza lasciare casa", "categoria": "Vendita e proprietari", "data": "2026-11-13", "stato": "pubblicato", "immagine_copertina": "img/blog/blog-nuda-proprieta-padova-scelta-card.webp", "ai_generated": true, "url_statico": "blog-nuda-proprieta-padova-scelta", "tempo": 9, "autore": "Gino Capon", "contenuto": "Diritti, tutela del coniuge, spese e alternative: cosa chiarire prima di vendere la nuda proprietà mantenendo l’usufrutto.", "evidenza": false, "data_pubblicazione": "2026-11-13"},
     {"titolo": "Vendere casa abitata a Padova: visite e privacy", "categoria": "Vendita e proprietari", "data": "2026-11-06", "stato": "pubblicato", "immagine_copertina": "img/blog/blog-vendere-casa-abitata-padova-visite-privacy-card.webp", "ai_generated": false, "url_statico": "blog-vendere-casa-abitata-padova-visite-privacy", "tempo": 8, "autore": "Gino Capon", "contenuto": "Foto, visite, occupanti e documenti: una checklist pratica per vendere una casa ancora abitata senza esporre la vita privata.", "evidenza": true, "data_pubblicazione": "2026-11-06"},
     {
       "titolo": "IMU seconda casa a Padova 2026: aliquota, calcolo e scadenze",

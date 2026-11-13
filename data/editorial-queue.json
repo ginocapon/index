@@ -566,6 +566,50 @@
       "owner_path": "F",
       "acquisition_priority": true,
       "acquisition_contribution": "direct"
+    },
+    {
+      "id": "eq-nov13-nuda",
+      "status": "published",
+      "priority": 0,
+      "target_week": "2026-11-13",
+      "slug": "blog-nuda-proprieta-padova-scelta",
+      "kw_primaria": "nuda proprietà padova",
+      "title": "Nuda proprietà a Padova: vendere senza lasciare casa",
+      "research_refs": [
+        "https://www.notariato.it/it/famiglia/terza-eta/",
+        "Codice civile artt. 979,981,1004,1005 Gazzetta Ufficiale"
+      ],
+      "hype_sources_read": [
+        "https://www.officinanotarile.it/la-compravendita-della-nuda-proprieta-aspetti-vantaggi-e-modalita-di-calcolo/",
+        "https://notaiobonomo.com/nuda-proprieta-cosa-come-funziona-perche-conviene/",
+        "https://realmaps.it/2026/09/22/vendita-nuda-proprieta-documenti-valutazione-e-incarico-in-agenzia/",
+        "https://propert.it/vendere-una-casa-con-usufrutto-tutto-quello-che-ce-da-sapere-2",
+        "https://www.alessandronunnari.com/blog/valore-nuda-proprieta/"
+      ],
+      "gap_analysis": "Fonti web concentrate su prezzo e coefficienti; distinguere necessità della persona e diritto da conservare, senza tabelle fiscali discordanti.",
+      "value_add": "Confronto decisionale per il proprietario locale con spese e tutela del coniuge; nessuna promessa di prezzo o statistiche Padova inventate.",
+      "editorial_type": "evergreen",
+      "monitoring_area": "mercato,normativa,politica",
+      "substantive_area": "VENDITA_PROCESSO",
+      "main_question": "Come valutare se vendere nuda proprietà mantenendo usufrutto?",
+      "reader_novelty": "Diritti patrimoniali e alternative non affrontati nell’articolo su foto e visite della casa abitata.",
+      "structure_type": "CONFRONTO",
+      "geo_focus": "Padova e provincia, Limena",
+      "owner_relevance": true,
+      "faq_candidates": [
+        "Devo lasciare casa?",
+        "Chi paga le spese?",
+        "Come tutelo il coniuge?"
+      ],
+      "primary_audience": "proprietario_vendita",
+      "acquisition_contribution": "direct",
+      "traffic_type": "strategic",
+      "owner_problem": "Ottenere liquidità conservando una tutela abitativa senza confondere diritti.",
+      "concrete_value": "Confronto tra diritti, spese e percorso di verifica prima di firmare.",
+      "gsc_signal": "File repo storico non attuale; nessun volume query nuda proprietà verificato",
+      "notes": "Ricerca tre aree: mercato Veneto e proposta IMU Padova, proposte Bilancio2027 non scelte perché sovrapposte a articoli recenti. Trends non verificato. No attualità normativa rivendicata. Ok13nov15:58:19; pacchetto pronto per pubblicazione limitata all’articolo.",
+      "publication_note": "Ok specifico Gino13nov15:58:19, articolo anteprimaPDF13nov15:57. Nessun social/email.",
+      "published_date": "2026-11-13"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-06",
+  "updated": "2026-11-13",
   "policy": "Marchio FOTO AI automatico (site-ai-disclosure.js) su pathPrefixes. Esclusi img/immobili/, img/team/, img/brand/, img/og-. Dopo nuove hero blog: node scripts/build-ai-image-manifest.mjs; audit: node scripts/audit-foto-ai.mjs",
   "pathPrefixes": [
     "img/blog/",
@@ -117,6 +117,12 @@
     "img/blog/blog-mutuo-under-36-tassi-fisso-variabile-2027-hero.webp",
     "img/blog/blog-mutuo-under-36-tassi-fisso-variabile-2027-percorso.webp",
     "img/blog/blog-mutuo-under-36-tassi-fisso-variabile-2027-tassi.webp",
+    "img/blog/blog-nuda-proprieta-padova-scelta-card.webp",
+    "img/blog/blog-nuda-proprieta-padova-scelta-condominio.webp",
+    "img/blog/blog-nuda-proprieta-padova-scelta-documenti.webp",
+    "img/blog/blog-nuda-proprieta-padova-scelta-hero-mobile.webp",
+    "img/blog/blog-nuda-proprieta-padova-scelta-hero.webp",
+    "img/blog/blog-nuda-proprieta-padova-scelta-scelta.webp",
     "img/blog/blog-nuove-costruzioni-mercato-veneto-2026-padova.webp",
     "img/blog/blog-offerta-stock-vendita-italia-2026.webp",
     "img/blog/blog-omi-professionisti-ufficio.webp",
