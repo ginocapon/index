@@ -77,7 +77,30 @@ original.replaceChildren(wrap);
 const preserved=document.createElement('details');preserved.className='legacy-preserved';const preservedTitle=document.createElement('summary');preservedTitle.textContent='Dati completi esistenti, conservati';preserved.append(preservedTitle);for(const id of ['clienteNome','clienteIndirizzo']){const el=document.getElementById(id);const cell=el?.closest('.legacy-field');if(cell)preserved.append(cell);}wrap.append(preserved);
 const birth=document.getElementById('clienteExtra_nascita_data');if(birth){const flag=document.createElement('span');flag.className='birthday-line';const check=document.createElement('input');check.type='checkbox';check.disabled=true;check.title='Invio automatico auguri non attivo';flag.append('Invia email auguri ',check);birth.closest('.legacy-field').classList.add('legacy-birth');birth.closest('.legacy-field').append(flag);}
 for(const key of ['documento_tipo','agente_assegnato']){const old=document.getElementById('clienteExtra_'+key);if(old){const select=document.createElement('select');select.id=old.id;select.dataset.clientExtra=key;select.append(new Option('scegli',''));old.replaceWith(select);}}
-const existingFill=window.righettoExtraFill;window.righettoExtraFill=function(c){for(const key of ['documento_tipo','agente_assegnato']){const el=document.getElementById('clienteExtra_'+key);const value=c?.[key];if(value&&![...el.options].some(x=>x.value===value))el.append(new Option(value,value));}existingFill(c);};
+// Reuse the canonical values already offered by the client-agent filter.
+// Never infer an assignment from the logged-in user or another client.
+function refreshClientAgentOptions(currentValue){
+ const select=document.getElementById('clienteExtra_agente_assegnato');
+ if(!select)return;
+ const chosen=currentValue==null?'':String(currentValue);
+ const allowed=new Map();
+ const source=document.getElementById('clientiAgent');
+ for(const option of source?.options||[]){
+  if(option.value&&!option.disabled&&!allowed.has(option.value))allowed.set(option.value,option.textContent);
+ }
+ select.replaceChildren(new Option('scegli',''));
+ for(const [value,label] of allowed)select.append(new Option(label,value));
+ // Keep an older stored value intact, but only for this exact client.
+ if(chosen&&!allowed.has(chosen))select.append(new Option(chosen,chosen));
+ select.value=chosen;
+}
+const existingFill=window.righettoExtraFill;window.righettoExtraFill=function(c){
+ const doc=document.getElementById('clienteExtra_documento_tipo');const value=c?.documento_tipo;
+ if(value&&![...doc.options].some(x=>x.value===value))doc.append(new Option(value,value));
+ refreshClientAgentOptions(c?.agente_assegnato);
+ existingFill(c);
+};
+refreshClientAgentOptions(null);
 
 for(const id of ['clienteRagioneSociale','clientePartitaIva','clienteSdi','clientePec'])document.getElementById(id)?.removeAttribute('placeholder');
 const civic=document.getElementById('clienteExtra_numero_civico').closest('.legacy-field'),cap=document.getElementById('clienteExtra_cap').closest('.legacy-field');civic.classList.add('legacy-civic');civic.append(...cap.childNodes);cap.remove();
