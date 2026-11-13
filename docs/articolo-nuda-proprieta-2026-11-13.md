@@ -21,3 +21,5 @@ Basegit:2b1759fc47acb7ccb7ccd22636eea21c1e121ed6. Archivio prima modifica conser
 
 ## Esito
 Ok specifico di Gino ricevuto15:58 e confermaGitHub16:01. Accountginocapon e permesso push alrepo verificati. Pubblicazione di questo pacchetto autorizzata; verifica live successiva al deploy, senza dichiararla eseguita in anticipo.
+
+Verifica live16:05: deploy riuscito,pagina eFAQaperte,articolo presenteelencoblog. Correzione locale al solo layoutcheckboxGDPR della nuova pagina,per evitare separazione del testo;nessun cambiamento ai consensi o invio di prova.
