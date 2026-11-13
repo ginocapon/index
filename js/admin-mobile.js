@@ -62,7 +62,7 @@ function render(){
 function filterButton(label,input){
  label.style.cssText='display:flex;align-items:center;gap:10px;min-height:48px;box-sizing:border-box;padding:10px 14px;margin:8px 2px;border:2px solid #8a9e92;border-radius:10px;font:700 1rem Montserrat,Arial,sans-serif;cursor:pointer';
  input.style.cssText='width:22px;height:22px;flex:0 0 22px;margin:0;accent-color:#14532d';
- var paint=function(){label.style.background=input.checked?'#166534':'#f1f5f2';label.style.color=input.checked?'#ffffff':'#234334';label.style.borderColor=input.checked?'#14532d':'#8a9e92';};
+ var paint=function(){label.style.background=input.checked?'#166534':'#f1f5f2';label.style.setProperty('color',input.checked?'#ffffff':'#234334',input.checked?'important':'');label.style.borderColor=input.checked?'#14532d':'#8a9e92';};
  input.addEventListener('change',paint);paint();return paint;
 }
 function ensureBox(secId,boxId,ph,newLabel,newFn){
