@@ -62,21 +62,57 @@ const ops={
   catch(e){alert(e.message);}
  },
  duplica(i){close();if(typeof duplicateImmobile==='function')duplicateImmobile(i.id);},
- venduto(i){const aff=i.tipo_operazione==='affitto';const campo=aff?'affittato':'venduto';const lab=aff?'affittato':'venduto';
-  const o=overlay('<h3>Segna come '+lab+' - '+esc(i.codice||'')+'</h3><p>Cosa cambia sul sito:<br>- L\'elenco pubblico mostra gli immobili attivi con l\'etichetta "'+(aff?'Affittato':'Venduto')+'".<br>- La home e la chat escludono gli immobili '+lab+'.<br>- Per toglierlo anche dall\'elenco serve disattivarlo.</p>'+
-  '<label>Prezzo reale (facoltativo)<input type="number" id="rio-pr" value="'+(i.prezzo_reale!=null?esc(i.prezzo_reale):'')+'"></label>'+
-  '<label><input type="checkbox" id="rio-dis"> Disattiva anche dal sito (non compare piu nell\'elenco)</label>'+
-  '<p style="font-size:13px;color:#566773">Stato attuale: '+(i[campo]?lab:'non '+lab)+' | sul sito: '+(i.attivo===false?'non attivo':'attivo')+'. Puoi annullare riaprendo questa finestra.</p>'+
-  '<button class="pri" data-a="ok">Conferma</button>'+(i[campo]?'<button data-a="un">Rimetti come non '+lab+'</button>':'')+'<button data-a="x">Annulla</button>');
+ async venduto(i){
+  const principal=window.RighettoGatedPrincipal,id=String(i.id),fields='id,codice,tipo_operazione,attivo,venduto,affittato,prezzo_reale,updated_at';
+  const o=overlay('<h3>Stato immobile - '+esc(i.codice||'')+'</h3><p role="status">Verifica dello stato attuale in corso...</p><button data-a="x">Annulla</button>');
   o.querySelector('[data-a=x]').onclick=close;
-  const apply=async(val)=>{const patch={};patch[campo]=val;const pr=document.getElementById('rio-pr').value;if(val&&pr!=='')patch.prezzo_reale=Number(pr);
-   const dis=document.getElementById('rio-dis').checked;
-   if(!confirm((val?'Segnare come '+lab:'Rimettere come non '+lab)+' l\'immobile '+(i.codice||'')+'?'+(dis&&val?'\nVerra anche disattivato dal sito.':'')))return;
-   const {error}=await sb.from('immobili').update(patch).eq('id',i.id);
-   if(error){if(window.toast)toast('Errore: '+error.message,'error');return;}
-   if(dis&&val&&typeof _immobilePatchBool==='function')await _immobilePatchBool(i.id,{attivo:false},'Disattivato dal sito');
-   if(window.toast)toast(val?'Segnato come '+lab:'Ripristinato','success');close();if(typeof loadImmobili==='function')await loadImmobili();};
-  o.querySelector('[data-a=ok]').onclick=()=>apply(true);const un=o.querySelector('[data-a=un]');if(un)un.onclick=()=>apply(false);}
+  let row,attempted=false,locked=false;const key='righetto-property-status-v1:'+principal+':'+id;
+  const alive=()=>o.isConnected&&principal&&window.RighettoGatedPrincipal===principal;
+  const check=async()=>{if(!alive())throw Error('Sessione o finestra cambiata. Riapri la scheda.');const r=await sb.auth.getUser();if(r.error||r.data?.user?.id!==principal||!alive())throw Error('Sessione cambiata. Riapri la scheda.');};
+  const read=async()=>{await check();const r=await sb.from('immobili').select(fields).eq('id',id).maybeSingle();await check();if(r.error||!r.data||String(r.data.id)!==id)throw Error(r.error?.message||'Immobile non leggibile.');return r.data;};
+  const matches=(r,patch)=>Object.entries(patch).every(([k,v])=>r[k]===v);
+  try{
+   row=await read();
+   const rental=['affitto_residenziale','affitto_commerciale','affitto'].includes(row.tipo_operazione);
+   if(!rental&&row.tipo_operazione!=='vendita')throw Error('Tipo operazione non riconosciuto: nessuna modifica consentita.');
+   const campo=rental?'affittato':'venduto',lab=rental?'affittato':'venduto';
+   let pending=null;try{const raw=localStorage.getItem(key);pending=raw?JSON.parse(raw):null;localStorage.setItem(key,JSON.stringify({probe:true}));if(pending)localStorage.setItem(key,JSON.stringify(pending));else localStorage.removeItem(key);}catch(e){throw Error('Memoria di recupero non disponibile. Nessuna modifica consentita.');}
+   if(pending){
+    if(pending.probe||pending.id!==id||pending.principal!==principal||!pending.patch||!matches(row,pending.patch))locked=true;
+    else localStorage.removeItem(key);
+   }
+   o.querySelector('.rio-box').innerHTML='<h3>Segna come '+lab+' - '+esc(row.codice||'')+'</h3><p>'+(rental?'Immobile in affitto: il comando modifica solo lo stato Affittato.':'Immobile in vendita: il comando modifica solo lo stato Venduto.')+'</p><p>Stato attuale: <b>'+(row[campo]?lab:'non '+lab)+'</b> | sul sito: <b>'+(row.attivo===false?'non attivo':'attivo')+'</b>.</p><p>Lo stato '+lab+' esclude l\'immobile da home e chat. Finché resta attivo, può comparire nell\'elenco pubblico con questa etichetta. Per toglierlo anche dall\'elenco seleziona Disattiva dal sito.</p><label>Prezzo reale (facoltativo)<input type="number" min="0" step="any" data-price value="'+(row.prezzo_reale!=null?esc(row.prezzo_reale):'')+'"></label><label><input type="checkbox" data-disable> Disattiva anche dal sito</label><p data-status role="status" aria-live="polite">'+(locked?'Tentativo precedente non confermato e stato diverso da quello richiesto. Non ripetere il salvataggio: occorre verificare il tentativo.':pending?'Il tentativo precedente è stato verificato nello stato attuale. Nessun nuovo invio.':'Nessuna modifica eseguita.')+'</p><button class="pri" data-a="ok">Conferma '+lab+'</button>'+(row[campo]?'<button data-a="un">Rimetti come non '+lab+'</button>':'')+'<button data-a="x">Chiudi</button>';
+   o.querySelector('[data-a=x]').onclick=close;
+   const status=o.querySelector('[data-status]'),buttons=[...o.querySelectorAll('[data-a=ok],[data-a=un]')];
+   const disable=on=>{buttons.forEach(b=>b.disabled=on);o.querySelector('[data-price]').disabled=on;o.querySelector('[data-disable]').disabled=on;};disable(locked);
+   const apply=async val=>{
+    if(locked||attempted||!alive())return;
+    const patch={[campo]:val},price=o.querySelector('[data-price]').value,dis=val&&o.querySelector('[data-disable]').checked;
+    if(val&&price!==''){const n=Number(price);if(!Number.isFinite(n)||n<0){status.textContent='Inserisci un prezzo reale valido, maggiore o uguale a zero.';return;}patch.prezzo_reale=n;}
+    if(dis)patch.attivo=false;
+    if(!confirm((val?'Segnare come '+lab:'Rimettere come non '+lab)+' l\'immobile '+(row.codice||'')+'?'+(dis?'\nVerrà anche disattivato dal sito.':'\nLa visibilità sul sito non viene cambiata.')))return;
+    disable(true);status.textContent='Salvataggio e verifica in corso...';
+    try{
+     await check();const fresh=await read();
+     if(['tipo_operazione','attivo','venduto','affittato','prezzo_reale','updated_at'].some(k=>fresh[k]!==row[k]))throw Error('Stato cambiato da un altro accesso. Chiudi e riapri prima di decidere.');
+     localStorage.setItem(key,JSON.stringify({id,principal,patch}));
+     let q=sb.from('immobili').update(patch).eq('id',id);
+     for(const k of ['tipo_operazione','attivo','venduto','affittato','prezzo_reale','updated_at'])q=row[k]==null?q.is(k,null):q.eq(k,row[k]);
+     attempted=true;const r=await q.select(fields);await check();
+     if(r.error)throw Error(r.error.message);
+     if(r.data?.length!==1||!matches(r.data[0],patch))throw Error('Salvataggio non confermato o stato cambiato altrove.');
+     const verified=await read();if(!matches(verified,patch))throw Error('Rilettura dello stato non corrispondente.');
+     localStorage.removeItem(key);status.textContent='Stato '+(val?lab:'non '+lab)+' salvato e riletto.'+(dis?' Immobile disattivato dal sito.':' Visibilità sul sito invariata.');locked=true;
+     Object.assign(i,verified);if(typeof allImmobili!=='undefined'){const cached=allImmobili.find(x=>String(x.id)===id);if(cached)Object.assign(cached,verified);}if(window.toast)toast('Stato immobile salvato e verificato','success');
+    }catch(error){
+     if(!alive())return;
+     status.textContent=attempted?'Esito non confermato. Non ripetere: chiudi e riapri per la sola verifica dello stato. '+error.message:'Nessuna modifica inviata. '+error.message;
+     locked=true;disable(true);
+    }
+   };
+   o.querySelector('[data-a=ok]').onclick=()=>apply(true);const un=o.querySelector('[data-a=un]');if(un)un.onclick=()=>apply(false);
+  }catch(error){if(alive()){o.querySelector('[role=status]').textContent=error.message+' Nessuna modifica eseguita.';}}
+ }
 };
 Object.assign(ops,{
  salva(i){if(String(cur()?.id)!==String(i.id))throw Error('Apri prima la scheda corretta per salvare');document.getElementById('immobileForm')?.requestSubmit();},
