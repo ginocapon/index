@@ -1,0 +1,5 @@
+/* Solo gestionale admin. Gli sfondi decorativi del sito pubblico restano invariati. */
+html,html body{--sfondo:#fff!important;--bianco:#fff!important;background:#fff!important;background-image:none!important}
+html body .main,html body .content,html body .section,html body .topbar,html body .ra{background-color:#fff!important;background-image:none!important}
+html body.rig-sugar-paper::before,html body.rig-sugar-paper::after{content:none!important;display:none!important;background:none!important}
+html body .rig-brand-watermark{display:none!important}
