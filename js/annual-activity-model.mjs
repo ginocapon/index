@@ -1,5 +1,5 @@
 /* Date-only annual projections. Does not write or create calendar events. */
-import {validDay,plusDays,romeDay} from './activity-deadlines.mjs?v=20261115-annual-labels-v1';
+import {validDay,plusDays,romeDay} from './activity-deadlines.mjs?v=20261115-practice-row-v1';
 export function anniversary(anchor,year,leapPolicy=null){
  if(!validDay(anchor)||!Number.isInteger(year)||year<Number(anchor.slice(0,4))||year>9998)throw Error('Annualità non valida');
  const value=String(year).padStart(4,'0')+anchor.slice(4);
