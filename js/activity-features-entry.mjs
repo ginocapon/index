@@ -1,9 +1,9 @@
-import {plusElevenMonths,practiceReminderRows,changePracticeReminder,reminderHint}from './practice-reminders.mjs?v=20261115-columns-colors-v2';
+import {plusElevenMonths,practiceReminderRows,changePracticeReminder,reminderHint}from './practice-reminders.mjs?v=20261115-layoutA-final-v2';
 /* Candidate activation. Requires the qualified private migration before publication. */
-import {createActivityFeaturesStore} from './activity-features-store.mjs?v=20261115-columns-colors-v2';
-import {openEntityLabels,openLabelIndex,openAnnualActivity} from './activity-features-ui.mjs?v=20261115-columns-colors-v2';
-import {annualOccurrences} from './annual-activity-model.mjs?v=20261115-columns-colors-v2';
-import {deadlineRows} from './activity-deadlines.mjs?v=20261115-columns-colors-v2';
+import {createActivityFeaturesStore} from './activity-features-store.mjs?v=20261115-layoutA-final-v2';
+import {openEntityLabels,openLabelIndex,openAnnualActivity} from './activity-features-ui.mjs?v=20261115-layoutA-final-v2';
+import {annualOccurrences} from './annual-activity-model.mjs?v=20261115-layoutA-final-v2';
+import {deadlineRows} from './activity-deadlines.mjs?v=20261115-layoutA-final-v2';
 window.RIGHETTO_ACTIVITY_FEATURES_READY=true;
 let owner=null,cached=null;
 function store(){const p=window.RighettoGatedPrincipal;if(!p||typeof sb==='undefined')throw Error('Accesso amministratore richiesto');if(owner!==p){owner=p;cached=createActivityFeaturesStore({db:sb,principal:p});}return cached;}
