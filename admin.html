@@ -10089,12 +10089,7 @@ function printPropertyPdf(id) {
   .footer { background: #3A5578; color: #B0C8E0; padding: 8px 20px; text-align: center; font-size: 8px; margin-top: 16px; }
   .footer strong { color: #CEE08F; }
   @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } .plan-section { page-break-before: auto; } }
-</style><style id="righetto-native-menu-links">
-.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
-.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
-.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
-</style>
-</head><body>
+</style></head><body>
 <div class="header">
   <div class="logo"><span>Righetto</span> Immobiliare<small>Agenzia Immobiliare</small></div>
   <div><span class="badge-tipo">${tipo}</span><div class="rif">Rif. ${escHtml(i.codice || 'N/D')}</div></div>
@@ -14393,12 +14388,7 @@ function exportAnalyticsPdfReport() {
     'h1{font-size:20px;margin:0 0 4px 0}h2{font-size:14px;margin:24px 0 8px 0;border-bottom:2px solid #667eea;padding-bottom:4px}' +
     '.meta{color:#666;margin-bottom:20px;font-size:11px}table{width:100%;border-collapse:collapse;margin-bottom:8px}' +
     'th,td{border:1px solid #ccc;padding:6px 8px}th{background:#f0f0f0;text-align:left;font-size:11px}' +
-    'th.num,td.num{text-align:right}@media print{body{padding:12px}}</style><style id="righetto-native-menu-links">
-.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
-.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
-.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
-</style>
-</head><body>' +
+    'th.num,td.num{text-align:right}@media print{body{padding:12px}}</style></head><body>' +
     '<h1>Righetto Immobiliare — Analytics &amp; Performance</h1>' +
     '<div class="meta">Generato il ' + _analyticsEscapeHtml(new Date().toLocaleString('it-IT')) + ' · Ultimo aggiornamento dashboard: ' + _analyticsEscapeHtml(lastTxt) + '</div>' +
     '<h2>Riepilogo ultimo periodo</h2><table><tbody>' + summaryRows + '</tbody></table>' +
@@ -15183,12 +15173,7 @@ showSection = function(name) {
       .replace(/\n/g, '<br>')
       .replace(/•\s*/g, '&bull; ');
 
-    let html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="righetto-native-menu-links">
-.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
-.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
-.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
-</style>
-</head>
+    let html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <!-- Header -->
@@ -15363,12 +15348,7 @@ showSection = function(name) {
     const pageUrl = 'https://www.righettoimmobiliare.it/' + page.file.replace(/\.html$/, '');
     const icon = page.cat === 'blog' ? '📝 Articolo' : page.cat === 'landing' ? '🚀 Offerta' : page.cat === 'zona' ? '📍 Quartiere' : '🔧 Servizio';
 
-    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="righetto-native-menu-links">
-.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
-.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
-.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
-</style>
-</head>
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:30px;text-align:center">
@@ -16045,12 +16025,7 @@ showSection = function(name) {
     },
     'newsletter-normativa': {
       oggetto: '{{nome}}, novità normative immobiliari — cosa cambia per te',
-      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="righetto-native-menu-links">
-.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
-.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
-.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
-</style>
-</head>
+      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <!-- Header -->
@@ -16099,12 +16074,7 @@ showSection = function(name) {
     },
     'nuovi-immobili': {
       oggetto: '{{nome}}, nuove opportunità immobiliari a Padova',
-      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="righetto-native-menu-links">
-.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
-.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
-.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
-</style>
-</head>
+      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:30px;text-align:center">
@@ -16145,12 +16115,7 @@ showSection = function(name) {
     },
     'auguri': {
       oggetto: 'Auguri da Righetto Immobiliare, {{nome}}!',
-      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="righetto-native-menu-links">
-.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
-.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
-.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
-</style>
-</head>
+      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:40px;text-align:center">
@@ -16787,12 +16752,7 @@ showSection = function(name) {
     const nome = client.nome || 'Cliente';
     const cardHtml = buildPropertyCardHtml(property);
 
-    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="righetto-native-menu-links">
-.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
-.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
-.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
-</style>
-</head>
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:28px;text-align:center">
@@ -16839,12 +16799,7 @@ showSection = function(name) {
 
     const cardHtml = buildPropertyCardHtml(property);
 
-    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="righetto-native-menu-links">
-.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
-.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
-.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
-</style>
-</head>
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:28px;text-align:center">
@@ -16925,12 +16880,7 @@ showSection = function(name) {
 
     let cardsHtml = matches.map(i => buildPropertyCardHtml(i)).join('');
 
-    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="righetto-native-menu-links">
-.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
-.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
-.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
-</style>
-</head>
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:28px;text-align:center">
