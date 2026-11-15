@@ -2248,6 +2248,11 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 <link rel="stylesheet" href="css/admin-compact.css?v=20261115-unified-edb50c54b4e8">
 <link rel="stylesheet" href="css/admin-clean.css?v=20261115-unified-09519c840d93">
 <link rel="stylesheet" href="css/activity-deadlines.css?v=20261115-label-reminders-v1">
+<style id="righetto-native-menu-links">
+.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
+.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
+.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
+</style>
 </head>
 <body>
 
@@ -10084,7 +10089,12 @@ function printPropertyPdf(id) {
   .footer { background: #3A5578; color: #B0C8E0; padding: 8px 20px; text-align: center; font-size: 8px; margin-top: 16px; }
   .footer strong { color: #CEE08F; }
   @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } .plan-section { page-break-before: auto; } }
-</style></head><body>
+</style><style id="righetto-native-menu-links">
+.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
+.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
+.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
+</style>
+</head><body>
 <div class="header">
   <div class="logo"><span>Righetto</span> Immobiliare<small>Agenzia Immobiliare</small></div>
   <div><span class="badge-tipo">${tipo}</span><div class="rif">Rif. ${escHtml(i.codice || 'N/D')}</div></div>
@@ -14383,7 +14393,12 @@ function exportAnalyticsPdfReport() {
     'h1{font-size:20px;margin:0 0 4px 0}h2{font-size:14px;margin:24px 0 8px 0;border-bottom:2px solid #667eea;padding-bottom:4px}' +
     '.meta{color:#666;margin-bottom:20px;font-size:11px}table{width:100%;border-collapse:collapse;margin-bottom:8px}' +
     'th,td{border:1px solid #ccc;padding:6px 8px}th{background:#f0f0f0;text-align:left;font-size:11px}' +
-    'th.num,td.num{text-align:right}@media print{body{padding:12px}}</style></head><body>' +
+    'th.num,td.num{text-align:right}@media print{body{padding:12px}}</style><style id="righetto-native-menu-links">
+.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
+.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
+.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
+</style>
+</head><body>' +
     '<h1>Righetto Immobiliare — Analytics &amp; Performance</h1>' +
     '<div class="meta">Generato il ' + _analyticsEscapeHtml(new Date().toLocaleString('it-IT')) + ' · Ultimo aggiornamento dashboard: ' + _analyticsEscapeHtml(lastTxt) + '</div>' +
     '<h2>Riepilogo ultimo periodo</h2><table><tbody>' + summaryRows + '</tbody></table>' +
@@ -15168,7 +15183,12 @@ showSection = function(name) {
       .replace(/\n/g, '<br>')
       .replace(/•\s*/g, '&bull; ');
 
-    let html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+    let html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="righetto-native-menu-links">
+.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
+.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
+.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
+</style>
+</head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <!-- Header -->
@@ -15343,7 +15363,12 @@ showSection = function(name) {
     const pageUrl = 'https://www.righettoimmobiliare.it/' + page.file.replace(/\.html$/, '');
     const icon = page.cat === 'blog' ? '📝 Articolo' : page.cat === 'landing' ? '🚀 Offerta' : page.cat === 'zona' ? '📍 Quartiere' : '🔧 Servizio';
 
-    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="righetto-native-menu-links">
+.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
+.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
+.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
+</style>
+</head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:30px;text-align:center">
@@ -16020,7 +16045,12 @@ showSection = function(name) {
     },
     'newsletter-normativa': {
       oggetto: '{{nome}}, novità normative immobiliari — cosa cambia per te',
-      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="righetto-native-menu-links">
+.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
+.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
+.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
+</style>
+</head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <!-- Header -->
@@ -16069,7 +16099,12 @@ showSection = function(name) {
     },
     'nuovi-immobili': {
       oggetto: '{{nome}}, nuove opportunità immobiliari a Padova',
-      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="righetto-native-menu-links">
+.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
+.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
+.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
+</style>
+</head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:30px;text-align:center">
@@ -16110,7 +16145,12 @@ showSection = function(name) {
     },
     'auguri': {
       oggetto: 'Auguri da Righetto Immobiliare, {{nome}}!',
-      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+      corpo: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="righetto-native-menu-links">
+.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
+.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
+.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
+</style>
+</head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:40px;text-align:center">
@@ -16747,7 +16787,12 @@ showSection = function(name) {
     const nome = client.nome || 'Cliente';
     const cardHtml = buildPropertyCardHtml(property);
 
-    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="righetto-native-menu-links">
+.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
+.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
+.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
+</style>
+</head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:28px;text-align:center">
@@ -16794,7 +16839,12 @@ showSection = function(name) {
 
     const cardHtml = buildPropertyCardHtml(property);
 
-    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="righetto-native-menu-links">
+.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
+.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
+.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
+</style>
+</head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:28px;text-align:center">
@@ -16875,7 +16925,12 @@ showSection = function(name) {
 
     let cardsHtml = matches.map(i => buildPropertyCardHtml(i)).join('');
 
-    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style id="righetto-native-menu-links">
+.rh-menu-top .fx-activity-menu>div>a{display:block;box-sizing:border-box;width:100%;font:14px Arial;text-align:left;padding:12px;background:#f6faf7;color:#174b36;border:0;text-decoration:none}
+.rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
+.rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
+</style>
+</head>
 <body style="margin:0;padding:0;background:#f5f3ef;font-family:Georgia,'Times New Roman',serif">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
   <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:28px;text-align:center">
@@ -18153,12 +18208,13 @@ function closeNavMenus(except){nav.querySelectorAll('details').forEach(function(
 function navCommand(kind){closeNavMenus();if(kind==='new-event'){window.showSection('agenda');if(window.RighettoAgenda)window.RighettoAgenda.newEvent();}else if(kind==='new-client'){window.showSection('clienti');if(window.openClienteModal)window.openClienteModal();}else if(kind==='new-property'){window.showSection('nuovo');}}
 function positionNavMenus(){if(innerWidth<=760){var bottom=nav.getBoundingClientRect().bottom;nav.querySelectorAll('.rh-grid').forEach(function(list){list.style.top=(bottom+4)+'px';});}else{nav.querySelectorAll('.rh-grid').forEach(function(list){list.style.top='';});}}
 window.addEventListener('resize',positionNavMenus);window.addEventListener('scroll',positionNavMenus,{passive:true});
-function navGroup(label,items){var d=document.createElement('details'),sum=document.createElement('summary'),list=document.createElement('div');sum.textContent=label;sum.setAttribute('aria-label',label+' - apri menu');list.className='rh-grid';items.forEach(function(item){var b=document.createElement('button');b.type='button';b.className='rh-tile';b.textContent=item[1];if(item[0].indexOf('new-')===0){b.dataset.navCommand=item[0];b.onclick=function(){navCommand(item[0]);};}else{b.dataset.section=item[0];b.onclick=function(){closeNavMenus();window.showSection(item[0]);};}list.appendChild(b);});d.append(sum,list);var openedByHover=false;sum.addEventListener('click',function(e){if(e.detail>0&&openedByHover&&d.open){e.preventDefault();}openedByHover=false;});d.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse'){openedByHover=!d.open;closeNavMenus(d);d.open=true;}});d.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse'){openedByHover=false;if(!d.contains(document.activeElement))d.open=false;}});d.addEventListener('toggle',function(){sum.setAttribute('aria-expanded',String(d.open));if(d.open){closeNavMenus(d);positionNavMenus();}});d.addEventListener('keydown',function(e){if(e.key==='Escape'){d.open=false;sum.focus();}if(e.key==='ArrowDown'&&e.target===sum){e.preventDefault();closeNavMenus(d);d.open=true;list.querySelector('button').focus();}});nav.appendChild(d);return d;}
+function navUrl(section){var u=new URL(location.pathname,location.origin);if(section==='new-property')u.hash='nuovo';else if(section==='new-client'){u.hash='clienti';u.searchParams.set('azione','nuovo-cliente');}else if(section==='new-event'){u.hash='agenda';u.searchParams.set('azione','nuovo-appuntamento');}else u.hash=section;return u.href;}
+function navGroup(label,items){var d=document.createElement('details'),sum=document.createElement('summary'),list=document.createElement('div');sum.textContent=label;sum.setAttribute('aria-label',label+' - apri menu');list.className='rh-grid';items.forEach(function(item){var b=document.createElement('a');b.href=navUrl(item[0]);b.style.textDecoration='none';b.className='rh-tile';b.textContent=item[1];if(item[0].indexOf('new-')===0){b.dataset.navCommand=item[0];b.onclick=function(e){if(e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();navCommand(item[0]);};}else{b.dataset.section=item[0];b.onclick=function(e){if(e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();closeNavMenus();window.showSection(item[0]);};}list.appendChild(b);});d.append(sum,list);var openedByHover=false;sum.addEventListener('click',function(e){if(e.detail>0&&openedByHover&&d.open){e.preventDefault();}openedByHover=false;});d.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse'){openedByHover=!d.open;closeNavMenus(d);d.open=true;}});d.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse'){openedByHover=false;if(!d.contains(document.activeElement))d.open=false;}});d.addEventListener('toggle',function(){sum.setAttribute('aria-expanded',String(d.open));if(d.open){closeNavMenus(d);positionNavMenus();}});d.addEventListener('keydown',function(e){if(e.key==='Escape'){d.open=false;sum.focus();}if(e.key==='ArrowDown'&&e.target===sum){e.preventDefault();closeNavMenus(d);d.open=true;list.querySelector('a,button').focus();}});nav.appendChild(d);return d;}
 navGroup('Menu',[['home','Home gestionale']]);
 navGroup('Agenda',[['agenda','Apri agenda'],['new-event','Nuovo appuntamento']]);
 navGroup('Immobili',[['immobili','Elenco immobili'],['new-property','Nuovo immobile'],['perizie','Perizie'],['documentigenerali','Documenti']]);
 navGroup('Clienti',[['clienti','Elenco clienti / proprietari'],['new-client','Nuovo cliente'],['richieste','Richieste']]);
-var activities=document.createElement('button');activities.type='button';activities.className='rh-nav-direct';activities.dataset.section='attivita';activities.textContent='Attività';activities.onclick=function(){closeNavMenus();window.showSection('attivita');};nav.appendChild(activities);
+var activities=document.createElement('a');activities.href=navUrl('attivita');activities.style.textDecoration='none';activities.className='rh-nav-direct';activities.dataset.section='attivita';activities.textContent='Attività';activities.onclick=function(e){if(e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();closeNavMenus();window.showSection('attivita');};nav.appendChild(activities);
 navGroup('Aste',[['aste','Aste Veneto']]);
 navGroup('Marketing',[['blog','Blog'],['emailmarketing','Email marketing'],['landing','Landing pages']]);
 navGroup('Controllo',[['analytics','Search Console'],['impostazioni','Impostazioni']]);
@@ -18209,7 +18265,7 @@ window.showSection('home');
 <script src="js/admin-cliente-drag.js?v=20261111-0937"></script>
 <script>window.RighettoNavigationAttachments=()=>({property:typeof currentFotos==='undefined'?null:[currentFotos,currentPlanimetrie,currentDocumenti,currentVtScenes,currentUnitaCatastali,currentCatastoPdf],client:typeof currentClienteDocumenti==='undefined'?null:currentClienteDocumenti});</script>
 <script type="module">
-import {bindAuthenticatedNavigation} from './js/auth-bootstrap.mjs?v=20261112-types-retire';
+import {bindAuthenticatedNavigation} from './js/auth-bootstrap.mjs?v=20261115-multifinestra-v1';
 window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation(sb).catch(()=>{if(document.getElementById('navigation-startup-warning'))return;const n=document.createElement('p');n.id='navigation-startup-warning';n.setAttribute('role','status');n.textContent='Navigazione Indietro non disponibile in questa sessione. Usa il menu interno; i dati non sono stati modificati.';n.style.cssText='margin:12px;padding:12px;background:#fff3cc;color:#17324d';document.querySelector('.content')?.prepend(n);});});
 </script>
 <script src="js/admin-share-preview.js?v=20261103"></script>
@@ -18238,7 +18294,7 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script>(function(){var ctl=null,principal=null;function setup(){const p=window.RighettoGatedPrincipal;if(!p)return;if(principal!==p){if(ctl)ctl.clear();principal=p;ctl=RighettoAttivitaPreview.init(document.getElementById('righetto-attivita-preview'),{db:sb,principal:p});}ctl.refresh();}window.rigSectionReady(['home','agenda'],setup);window.addEventListener('righetto:section-ready',function(){if(ctl&&!['home','agenda'].includes(document.body.dataset.adminArea))ctl.clear();});})();</script>
 <script type="module" src="js/entity-label-reminders-entry.mjs?v=20261115-label-detail-v3"></script>
 <script type="module" src="js/activity-deadlines-entry.mjs?v=20261115-label-reminders-v1"></script>
-<link rel="stylesheet" href="css/admin-ampliamento.css?v=20261115-uniform-activities-v1"><script type="module" src="js/activity-features-entry.mjs?v=20261115-label-detail-v3"></script>
+<link rel="stylesheet" href="css/admin-ampliamento.css?v=20261115-uniform-activities-v1"><script type="module" src="js/activity-features-entry.mjs?v=20261115-multifinestra-v1"></script>
 </body>
 </html>
 
