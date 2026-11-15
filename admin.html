@@ -2247,7 +2247,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 <link rel="stylesheet" href="css/admin-practice-enhancements.css?v=20261115-practices">
 <link rel="stylesheet" href="css/admin-compact.css?v=20261115-unified-edb50c54b4e8">
 <link rel="stylesheet" href="css/admin-clean.css?v=20261115-unified-09519c840d93">
-<link rel="stylesheet" href="css/activity-deadlines.css?v=20261115-unified-2d72244aac08">
+<link rel="stylesheet" href="css/activity-deadlines.css?v=20261115-label-reminders-v1">
 </head>
 <body>
 
@@ -18189,11 +18189,11 @@ window.showSection('home');
 </script>
 <script src="js/agenda-event-types.js?v=1"></script>
 <script>window.RIGHETTO_SYNC_ATTIVA=true;</script>
-<script src="js/admin-agenda.js?v=20261115-unified-e6867c7ff844"></script>
+<script src="js/admin-agenda.js?v=20261115-label-reminders-v1"></script>
 <script src="js/admin-clienti-upload.js?v=20261111-direct-client-docs"></script>
 <script src="js/admin-cliente-scheda.js?v=20261115-layoutA-final-v2"></script>
 <script src="js/admin-private-photos.js?v=LP0290-private-1"></script>
-<script src="js/admin-immobile-etichette.js?v=20261115-layoutA-final-v2"></script>
+<script src="js/admin-immobile-etichette.js?v=20261115-label-reminders-v1"></script>
 <script src="js/admin-immobile-operazioni.js?v=20261113-status-guard"></script>
 <script src="js/admin-immobile-stampe.js?v=20261112-operations-private"></script>
 <script src="js/admin-immobile-inquilini.js?v=20261106-1038"></script>
@@ -18236,8 +18236,9 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script type="module">import{installClientGeo}from'./js/client-geo-verde.mjs';installClientGeo({root:document.getElementById('clienteModal')}).catch(e=>{console.error('Località cliente non disponibili',e);});</script>
 <script src="js/admin-attivita-preview.js?v=20261115-uniform-activities-v1"></script>
 <script>(function(){var ctl=null,principal=null;function setup(){const p=window.RighettoGatedPrincipal;if(!p)return;if(principal!==p){if(ctl)ctl.clear();principal=p;ctl=RighettoAttivitaPreview.init(document.getElementById('righetto-attivita-preview'),{db:sb,principal:p});}ctl.refresh();}window.rigSectionReady(['home','agenda'],setup);window.addEventListener('righetto:section-ready',function(){if(ctl&&!['home','agenda'].includes(document.body.dataset.adminArea))ctl.clear();});})();</script>
-<script type="module" src="js/activity-deadlines-entry.mjs?v=20261115-layoutA-final-v2"></script>
-<link rel="stylesheet" href="css/admin-ampliamento.css?v=20261115-uniform-activities-v1"><script type="module" src="js/activity-features-entry.mjs?v=20261115-layoutA-final-v2"></script>
+<script type="module" src="js/entity-label-reminders-entry.mjs?v=20261115-label-reminders-v1"></script>
+<script type="module" src="js/activity-deadlines-entry.mjs?v=20261115-label-reminders-v1"></script>
+<link rel="stylesheet" href="css/admin-ampliamento.css?v=20261115-uniform-activities-v1"><script type="module" src="js/activity-features-entry.mjs?v=20261115-label-reminders-v1"></script>
 </body>
 </html>
 

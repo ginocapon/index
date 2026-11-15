@@ -4,3 +4,5 @@
 .at-task-head>.at-deadline{flex-basis:100%;order:2;justify-content:flex-end}.at-task-head>.at-existing-file{order:1}.at-deadline label{min-width:155px}.at-deadline input{box-sizing:border-box;width:155px;min-width:155px}.at-deadline button{align-self:flex-end}.at-deadline label input{margin-top:3px}@media(max-width:760px){.at-task-head>.at-deadline{justify-content:flex-start}.at-deadline button{font-size:12px}}
 
 @media(max-width:760px){.ad-reminders{display:none!important}}
+
+.lr-demo{background:#fff1bd;padding:8px;font-size:12px;font-weight:bold}.lr-check{display:flex!important;flex-direction:row!important;align-items:center;gap:10px;padding:12px 0}.lr-check input{width:22px!important;height:22px!important;flex:none}.lr-next{padding:12px;background:#e7f3ec;border-left:4px solid #176147;font-weight:bold}.lr-agenda-item{background:color-mix(in srgb,var(--ad-color) 23%,white)!important;border-left:6px solid var(--ad-color)!important}.lr-selector-manage{font-size:12px;padding:6px}[data-ra-label-day][hidden]{display:none}
