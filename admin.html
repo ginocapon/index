@@ -18236,9 +18236,9 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script type="module">import{installClientGeo}from'./js/client-geo-verde.mjs';installClientGeo({root:document.getElementById('clienteModal')}).catch(e=>{console.error('Località cliente non disponibili',e);});</script>
 <script src="js/admin-attivita-preview.js?v=20261115-uniform-activities-v1"></script>
 <script>(function(){var ctl=null,principal=null;function setup(){const p=window.RighettoGatedPrincipal;if(!p)return;if(principal!==p){if(ctl)ctl.clear();principal=p;ctl=RighettoAttivitaPreview.init(document.getElementById('righetto-attivita-preview'),{db:sb,principal:p});}ctl.refresh();}window.rigSectionReady(['home','agenda'],setup);window.addEventListener('righetto:section-ready',function(){if(ctl&&!['home','agenda'].includes(document.body.dataset.adminArea))ctl.clear();});})();</script>
-<script type="module" src="js/entity-label-reminders-entry.mjs?v=20261115-label-annual-v2"></script>
+<script type="module" src="js/entity-label-reminders-entry.mjs?v=20261115-label-detail-v3"></script>
 <script type="module" src="js/activity-deadlines-entry.mjs?v=20261115-label-reminders-v1"></script>
-<link rel="stylesheet" href="css/admin-ampliamento.css?v=20261115-uniform-activities-v1"><script type="module" src="js/activity-features-entry.mjs?v=20261115-label-reminders-v1"></script>
+<link rel="stylesheet" href="css/admin-ampliamento.css?v=20261115-uniform-activities-v1"><script type="module" src="js/activity-features-entry.mjs?v=20261115-label-detail-v3"></script>
 </body>
 </html>
 
