@@ -2244,6 +2244,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 }
 </style>
 <link rel="stylesheet" href="css/admin-theme-intense.css?v=20261112-verde-intenso-v2">
+<link rel="stylesheet" href="css/admin-practice-enhancements.css?v=20261115-practices">
 </head>
 <body>
 
@@ -18187,7 +18188,7 @@ window.showSection('home');
 <script>window.RIGHETTO_SYNC_ATTIVA=true;</script>
 <script src="js/admin-agenda.js?v=20261114-identity-d36433a558a2"></script>
 <script src="js/admin-clienti-upload.js?v=20261111-direct-client-docs"></script>
-<script src="js/admin-cliente-scheda.js?v=20261113-cliente-agenda-nav"></script>
+<script src="js/admin-cliente-scheda.js?v=20261115-practices"></script>
 <script src="js/admin-private-photos.js?v=LP0290-private-1"></script>
 <script src="js/admin-immobile-etichette.js?v=20261106-local"></script>
 <script src="js/admin-immobile-operazioni.js?v=20261113-status-guard"></script>
@@ -18196,7 +18197,9 @@ window.showSection('home');
 <script src="js/admin-blocco2.js?v=20261112-storico-view"></script>
 <script>window.rigOwnerReady(()=>RighettoAgenda.init(document.getElementById("righetto-operational-agenda")));</script>
 <script>window.RIGHETTO_BOZZA_ATTIVA=true;</script>
-<script src="js/admin-attivita.js?v=20261112-property-link"></script>
+<script src="js/admin-practice-links.js?v=20261115-practices"></script>
+<script src="js/admin-attivita.js?v=20261115-practices"></script>
+<script src="js/admin-client-activities.js?v=20261115-practices"></script>
 <script>(function(){var el=document.getElementById('righetto-attivita'),ctl=null,busy=false,pending=null,owner=null;if(!el)return;window.RighettoOpenPractice=function(id){pending=id;window.showSection('attivita');go();};async function go(){if(busy)return;busy=true;const p=window.RighettoGatedPrincipal;try{if(typeof sb==='undefined'||!p||document.body.dataset.adminArea!=='attivita')return;const u=await sb.auth.getUser(),a=await sb.rpc('righetto_is_admin_request');if(u.error||u.data.user?.id!==p||a.error||a.data!==true||window.RighettoGatedPrincipal!==p||document.body.dataset.adminArea!=='attivita')throw Error('Accesso non confermato');if(ctl&&owner===p){await ctl.refresh();if(pending){ctl.focus(pending);pending=null;}return;}const st=RighettoAttivita.dbStore(sb);const properties=await st.properties();if(window.RighettoGatedPrincipal!==p||document.body.dataset.adminArea!=='attivita')return;ctl=await RighettoAttivita.init(el,{store:st,properties,principal:p,isActive:()=>document.body.dataset.adminArea==='attivita'&&window.RighettoGatedPrincipal===p,openProperty:id=>{if(typeof editImmobile==='function')editImmobile(id);}});owner=p;if(pending){ctl.focus(pending);pending=null;}}catch(e){el.textContent='Attività non disponibili: '+(e.message||e);}finally{busy=false;}}window.rigSectionReady(['attivita'],go);window.addEventListener('righetto:section-ready',()=>{if(owner&&owner!==window.RighettoGatedPrincipal){ctl=null;el.replaceChildren();}});})();</script>
 <script src="js/admin-mobile.js?v=20261113-storico-contrast"></script>
 <script src="js/admin-cliente-layout.js?v=20261113-client-agent-options"></script>
@@ -18228,7 +18231,7 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script src="js/admin-immobile-riferimenti.js?v=20261106-riferimenti"></script>
 <link rel="stylesheet" href="js/client-edit-green.css?v=20261109-identico-diretto">
 <script type="module">import{installClientGeo}from'./js/client-geo-verde.mjs';installClientGeo({root:document.getElementById('clienteModal')}).catch(e=>{console.error('Località cliente non disponibili',e);});</script>
-<script src="js/admin-attivita-preview.js?v=20261112-property-link"></script>
+<script src="js/admin-attivita-preview.js?v=20261115-practices"></script>
 <script>(function(){var ctl=null,principal=null;function setup(){const p=window.RighettoGatedPrincipal;if(!p)return;if(principal!==p){if(ctl)ctl.clear();principal=p;ctl=RighettoAttivitaPreview.init(document.getElementById('righetto-attivita-preview'),{db:sb,principal:p});}ctl.refresh();}window.rigSectionReady(['home','agenda'],setup);window.addEventListener('righetto:section-ready',function(){if(ctl&&!['home','agenda'].includes(document.body.dataset.adminArea))ctl.clear();});})();</script>
 </body>
 </html>
