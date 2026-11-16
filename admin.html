@@ -6823,7 +6823,7 @@ async function editImmobile(id,isCurrent=()=>true,reloadSaved=null) {if(rigPrope
    try{const r=await sb.from('immobili').select('*').eq('id',id).maybeSingle();if(!current())return;if(r.error)throw r.error;if(!r.data)throw Error('Immobile non disponibile');imm=r.data;}catch(error){if(current()){document.getElementById('formTitle').textContent='Immobile non caricato';toast(error.message,'error');}return;}
   }
   if(!current())return;
-  try{if(!window.RighettoPropertyPublication)throw Error('Stato interno non disponibile');imm=(await RighettoPropertyPublication.attach([imm]))[0];if(!current())return;}catch(error){if(current()){rigPropertySnapshot=null;document.getElementById('btnSalva').disabled=true;toast(error.message,'error');}return;}
+  try{if(!window.RighettoPropertyPublication)throw Error('Stato interno non disponibile');if(!Object.hasOwn(imm,'storico_gestionale'))imm=(await RighettoPropertyPublication.attach([imm]))[0];if(!current())return;}catch(error){if(current()){rigPropertySnapshot=null;document.getElementById('btnSalva').disabled=true;toast(error.message,'error');}return;}
   document.getElementById('btnSalva').disabled=false;
   rigPropertySnapshot=null;
   document.getElementById('editId').value = imm.id;
