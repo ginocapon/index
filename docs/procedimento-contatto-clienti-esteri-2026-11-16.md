@@ -48,7 +48,7 @@ Il cliente estero si fida più di un professionista del suo Paese che di un annu
 
 | Canale | Fatti verificati | Azione |
 |---|---|---|
-| **NAR, l'associazione degli agenti USA** | La NAR collega agenti di tutto il mondo per scambiarsi clienti. **FIAIP è partner della NAR in Italia**: i suoi associati possono diventare *International REALTOR® Member*, con profilo nell'elenco consultato da agenti e clienti USA e un modulo di accordo per segnalazioni ⁷ ⁸ ⁹. Quota annuale indicata: 75 USD ¹⁰ | Se l'agenzia è associata FIAIP: iscriversi (circa 6 €/mese) |
+| **NAR, l'associazione degli agenti USA** | La NAR collega agenti di tutto il mondo per scambiarsi clienti. **FIAIP è partner della NAR in Italia**: i suoi associati possono diventare *International REALTOR® Member*, con profilo nell'elenco consultato da agenti e clienti USA e un modulo di accordo per segnalazioni ⁷ ⁸ ⁹. Quota annuale indicata: 75 USD ¹⁰ | Righetto non è associata FIAIP: chiedere a **OID**, l'altro partner NAR in Italia, quota e requisiti per diventare REALTOR®. In alternativa c'è l'iscrizione diretta come *subscriber*, con profilo ma senza marchio REALTOR® ⁹ ³⁰ ³¹ |
 | **Certificazione CIPS** | Titolo della NAR per le compravendite internazionali: rete di oltre 4.000 professionisti in 50 Paesi, 5 corsi più esperienza documentata. FIAIP ha già organizzato il corso in inglese ¹¹ ¹² | Obiettivo del secondo anno, non del pilota |
 | **Agenti tedeschi, austriaci e olandesi** | Le fiere di settore pubblicano gli elenchi degli espositori, quindi sono liste di contatti gratuite (vedi Fase 6) | Email personali a 20 agenti al mese: noi vi mandiamo clienti italiani che comprano da voi, voi ci mandate i vostri che cercano in Veneto. Compenso di segnalazione scritto |
 | **Mediatori del credito per stranieri** | Esempio: *Buy Italy Mortgages*, relatore a A Place in the Sun Live 2026 ¹³ | Chiedere un accordo di segnalazione reciproca |
@@ -104,7 +104,7 @@ Il cliente estero si fida più di un professionista del suo Paese che di un annu
 | Voce | Costo indicativo | Note |
 |---|---|---|
 | Porta A (base USA, Università di Padova, InterNations, Facebook) | 0 € | Solo tempo |
-| Iscrizione NAR come membro internazionale | circa 6 €/mese (75 USD/anno) | Solo se associati FIAIP |
+| Iscrizione NAR come membro internazionale | Da definire: quota OID più quota NAR (circa 100 USD/anno secondo OID) | Righetto non è associata FIAIP: decidere dopo il preventivo OID |
 | Gate-away | preventivo da chiedere | Attivare solo se rientra nel residuo |
 | Contenuti in inglese, podcast, email agli agenti esteri | 0 € | Solo tempo |
 | Fiere | escluse dal pilota | Solo biglietto da visitatore, eventualmente |
@@ -152,3 +152,6 @@ Il cliente estero si fida più di un professionista del suo Paese che di un annu
 27. Schiavo Real Estate, alloggi USAG Vicenza: https://www.schiavorealestate.com/housing-usag-vicenza/
 28. Von Poll Vicenza, affitti a militari USA: https://www.vicenzaresidenze.it/affittare-casa-vicenza/locazione-ederle/
 29. Frimm e ListGlobally: https://news.frimm.com/2015/12/01/frimm-e-mls-replat-con-listglobally-i-vostri-annunci-immobiliari-in-50-paesi/
+30. NAR, requisiti e domanda di iscrizione (anche *subscriber*): https://payment.apps.realtor/irm
+31. OID, domande frequenti (iscrizione NAR tramite OID, quota NAR circa 100 USD): https://www.osservatorioimmobiliaredigitale.it/faq.php
+32. USAG Italy, pagina per proprietari e agenzie: https://home.army.mil/italy/about/Garrison/directorate-public-works-1/housing/landlords-and-agencies

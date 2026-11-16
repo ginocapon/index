@@ -86,7 +86,7 @@ Lo straniero ci trova in tre punti, e il percorso li attiva in quest'ordine:
 
 | Canale | Perché | Fonte |
 |---|---|---|
-| **Elenco NAR «Find a REALTOR® Worldwide»** | Agenti e clienti USA cercano lì un agente all'estero. FIAIP è partner della NAR: con l'iscrizione come membro internazionale (circa 75 $/anno) l'agenzia compare nell'elenco | ¹⁶ ¹⁷ |
+| **Elenco NAR «Find a REALTOR® Worldwide»** | Agenti e clienti USA cercano lì un agente all'estero. Righetto **non è associata FIAIP**. Le strade sono due: associarsi a **OID** (Osservatorio Immobiliare Digitale, l'altro partner NAR in Italia) per diventare REALTOR® con il profilo nell'elenco, oppure iscriversi direttamente come *subscriber*, senza marchio REALTOR®. Quote da chiedere | ¹⁶ ¹⁷ ¹⁹ ²⁰ |
 | **Guide «agenti in Italia» dei portali** | Idealista pubblica articoli in inglese con elenchi di agenzie per regione | ¹⁸ |
 | **InterNations e gruppi expat di Padova** | Profilo e presenza agli eventi | Documento procedimento |
 | **Ufficio alloggi USAG Vicenza e Cerco Alloggio dell'Università di Padova** | Stranieri già sul posto | Documento procedimento |
@@ -95,7 +95,7 @@ Lo straniero ci trova in tre punti, e il percorso li attiva in quest'ordine:
 
 | Settimane | Azione | Costo |
 |---|---|---|
-| 1 | Descrizioni EN/DE su Idealista per 5–10 immobili adatti. Etichetta «English spoken». Iscrizione NAR, se associati FIAIP | ~6 €/mese |
+| 1 | Descrizioni EN/DE su Idealista per 5–10 immobili adatti. Etichetta «English spoken». Richiesta quote a OID e a NAR (subscriber) | 0 € |
 | 1 | Richiesta preventivo Gate-away. Registrazione Green-Acres con prova di 30 giorni | 0 € |
 | 2–3 | Bozze delle pagine `/en`, `/buy-property-padua-veneto` e `/de`, poi prima/dopo (telefono e desktop) a Gino | 0 € |
 | 3–4 | Dopo l'ok di Gino: pubblicazione, `sitemap.xml`, `llms.txt`, campo «Paese» nel modulo | 0 € |
@@ -127,3 +127,5 @@ Lo straniero ci trova in tre punti, e il percorso li attiva in quest'ordine:
 16. NAR, membri internazionali: https://www.nar.realtor/global/international-realtor-membership
 17. FIAIP, mercati esteri: https://www.fiaip.it/estero/
 18. Idealista, come trovare un agente in Italia (EN): https://www.idealista.it/en/news/property-sale-italy/2022/12/20/2157-5-tips-and-tricks-finding-best-estate-agent-italy
+19. NAR, requisiti e domanda di iscrizione (anche *subscriber*): https://payment.apps.realtor/irm
+20. OID, domande frequenti (iscrizione NAR tramite OID): https://www.osservatorioimmobiliaredigitale.it/faq.php
