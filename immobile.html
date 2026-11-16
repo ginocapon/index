@@ -2051,7 +2051,8 @@ async function initPropertyMap(d) {
   // Mappa: default storico = indirizzo_mappa (zoom strada) o Comune (zoom paese).
   // Eccezione privacy esplicita per codice: geocoding SOLO Comune, zoom paese;
   // indirizzo_mappa resta solo etichetta testuale in scheda.
-  const MAPPA_SOLO_COMUNE = ['LA0326','LA0327'];
+  const MAPPA_SOLO_COMUNE = ['LA0326','LA0327','LA0317'];
+  const comuneLA0317 = (d.codice || '').trim() === 'LA0317';
   const soloComune = MAPPA_SOLO_COMUNE.indexOf((d.codice || '').trim()) !== -1;
   const addr = soloComune
     ? ((d.comune || 'Padova').trim() + ', Italia')
@@ -2073,7 +2074,10 @@ async function initPropertyMap(d) {
 
   try {
     const q = encodeURIComponent(addr + (addr.includes('Italia') ? '' : ', Italia'));
-    const resp = await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + q);
+    const endpoint = comuneLA0317
+      ? 'https://nominatim.openstreetmap.org/search?format=json&limit=1&city=' + encodeURIComponent((d.comune || 'Padova').trim()) + '&country=Italia'
+      : 'https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + q;
+    const resp = await fetch(endpoint);
     const results = await resp.json();
 
     if (results && results.length > 0) {
@@ -2101,12 +2105,12 @@ async function initPropertyMap(d) {
       setTimeout(() => map.invalidateSize(), 300);
     } else {
       // Fallback: Google Maps embed
-      const mapQuery = encodeURIComponent(addr);
+      const mapQuery = encodeURIComponent(comuneLA0317 ? ((d.comune || 'Padova').trim() + ', centro città, Italia') : addr);
       document.getElementById('mapEmbed').innerHTML = '<iframe src="https://maps.google.com/maps?q=' + mapQuery + '&z=' + zoom + '&output=embed" loading="lazy" allowfullscreen style="width:100%;height:100%;border:none"></iframe>';
     }
   } catch(e) {
     console.warn('Geocoding fallito, fallback Google Maps:', e);
-    const mapQuery = encodeURIComponent(addr);
+    const mapQuery = encodeURIComponent(comuneLA0317 ? ((d.comune || 'Padova').trim() + ', centro città, Italia') : addr);
     document.getElementById('mapEmbed').innerHTML = '<iframe src="https://maps.google.com/maps?q=' + mapQuery + '&z=' + zoom + '&output=embed" loading="lazy" allowfullscreen style="width:100%;height:100%;border:none"></iframe>';
   }
 }
@@ -2124,4 +2128,4 @@ waitSBThen(function() {
 <script src="js/scroll-reveal.js?v=3" defer></script>
 <script src="js/welcome-popup.js?v=3" defer></script>
 </body>
-</html>
+    </html>
