@@ -13,6 +13,9 @@ Uso: python3 scripts/sync_aste.py [--dry-run] [--limit N]
 """
 from __future__ import annotations
 
+import datetime
+from zoneinfo import ZoneInfo
+
 import hashlib
 import html
 import json
@@ -62,6 +65,37 @@ def load_key() -> str:
     raise SystemExit("SUPABASE_KEY mancante (.env root o righetto_social/.env)")
 
 
+class PvpLocalTimeError(ValueError):
+    pass
+
+
+def pvp_local_iso(value):
+    """PVP naive timestamps are Europe/Rome wall time; explicit offsets stay intact.
+
+    Reject ambiguous/nonexistent DST wall times rather than choose a wrong instant.
+    Date-only values retain their existing date-only meaning.
+    """
+    if value is None or not str(value).strip():
+        return None
+    text = str(value).strip()
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", text):
+        datetime.date.fromisoformat(text)
+        return text
+    dt = datetime.datetime.fromisoformat(text.replace("Z", "+00:00"))
+    if dt.tzinfo is not None:
+        return dt.isoformat()
+    rome = ZoneInfo("Europe/Rome")
+    candidates = {}
+    for fold in (0, 1):
+        local = dt.replace(tzinfo=rome, fold=fold)
+        utc = local.astimezone(datetime.timezone.utc)
+        if utc.astimezone(rome).replace(tzinfo=None) == dt:
+            candidates[utc] = local
+    if len(candidates) != 1:
+        raise PvpLocalTimeError("PVP local timestamp ambiguous or nonexistent: " + text)
+    return next(iter(candidates.values())).isoformat()
+
+
 def to_iso_dt(date_str, time_str=None):
     """Normalizza 'yyyy-mm-dd' o 'dd/mm/yyyy' + opz. 'HH:MM' in ISO 'yyyy-mm-ddTHH:MM'."""
     if not date_str:
@@ -73,7 +107,7 @@ def to_iso_dt(date_str, time_str=None):
     if not re.match(r"^\d{4}-\d{2}-\d{2}$", d):
         return None
     t = (str(time_str).strip()[:5] if time_str else "") or ""
-    return d + ("T" + t if re.match(r"^\d{2}:\d{2}$", t) else "")
+    return pvp_local_iso(d + ("T" + t if re.match(r"^\d{2}:\d{2}$", t) else ""))
 
 
 # ---------------------------------------------------------------- PVP endpoints
@@ -294,6 +328,8 @@ def main():
             continue
         try:
             det = pvp_detail(ep["vendite"], ep["buckets"], aid)
+        except PvpLocalTimeError:
+            raise
         except Exception as e:
             print(f"  dettaglio {aid} fallito: {e}")
             det = {"documenti": [], "modalita_vendita": "", "termine_offerte": None,
@@ -307,7 +343,7 @@ def main():
             "prezzo_base": x.get("prezzoBaseAsta"),
             "offerta_minima": x.get("offertaMinima"),
             "rialzo_minimo": x.get("rialzoMinimo"),
-            "data_asta": dt,
+            "data_asta": pvp_local_iso(dt),
             "termine_offerte": det.get("termine_offerte"),
             "data_pubblicazione": x.get("dataPubblicazione"),
             "comune": ind.get("citta") or "",
