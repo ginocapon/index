@@ -13,7 +13,12 @@ function css(){if(document.getElementById('rio-css'))return;const s=document.cre
 '.rio-box pre{white-space:pre-wrap;background:#f6f8fa;border:1px solid #dde5ec;border-radius:8px;padding:10px;font:13px/1.45 Arial,sans-serif;max-height:45vh;overflow:auto}.rio-box label{display:block;margin:8px 0}.rio-box input[type=text],.rio-box input[type=number]{width:100%;padding:8px;border:1px solid #b9c7d1;border-radius:6px;font-size:15px}'+
 '@media(max-width:700px){.rio-menu{position:fixed;left:10px;right:10px;top:auto;bottom:10px;max-height:62vh}}';
 document.head.appendChild(s);}
-function cur(){const id=(document.getElementById('editId')||{}).value;if(!id)return null;return (typeof allImmobili!=='undefined'?allImmobili:[]).find(x=>String(x.id)===String(id))||null;}
+function cur(){
+ const id=(document.getElementById('editId')||{}).value;if(!id)return null;
+ const saved=typeof rigPropertySnapshot!=='undefined'?rigPropertySnapshot?.record:null;
+ if(saved&&String(saved.id)===String(id))return saved;
+ return (typeof allImmobili!=='undefined'?allImmobili:[]).find(x=>String(x.id)===String(id))||null;
+}
 function url(i){try{return immobileAppUrl(i);}catch(e){return 'https://righettoimmobiliare.it/immobile?s='+encodeURIComponent(i.slug||i.codice||'');}}
 function overlay(html){close();const o=document.createElement('div');o.className='rio-ov';o.id='rio-ov';o.innerHTML='<div class="rio-box">'+html+'</div>';o.addEventListener('click',e=>{if(e.target===o)close();});document.body.appendChild(o);return o;}
 function close(){const o=document.getElementById('rio-ov');if(o)o.remove();}
