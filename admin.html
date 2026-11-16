@@ -2253,6 +2253,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
 .rh-menu-top .rh-grid>a.rh-tile:hover,.rh-menu-top .rh-grid>a.rh-tile:focus-visible,.rh-menu-top .fx-activity-menu>div>a:hover,.rh-menu-top .fx-activity-menu>div>a:focus-visible{background:#d8e8de!important;color:#103f2d!important;box-shadow:inset 3px 0 #39785b;outline:none}
 .rh-menu-top>details>summary:hover,.rh-menu-top>details>summary:focus-visible{background:#164e3a!important;color:#fff!important}
 </style>
+<style id="rig-site-state-v1">#sec-immobili #immobiliTableWrap .rig-site-control{display:flex;align-items:center;gap:5px;white-space:nowrap}#sec-immobili #immobiliTableWrap .rig-site-control input{width:17px;height:17px;accent-color:#176442;cursor:pointer}#sec-immobili #immobiliTableWrap .rig-site-badge{display:inline-block;padding:4px 7px;border-radius:4px;font-size:11px;white-space:nowrap}#sec-immobili #immobiliTableWrap .rig-site-badge.on{background:#176442;color:#fff;font-weight:bold}#sec-immobili #immobiliTableWrap .rig-site-badge.off{background:#edf0ed;color:#59665d;border:1px solid #d4dad4}#sec-immobili #immobiliTableWrap tr.rig-site-on{background:#e0eedf}#sec-immobili #immobiliTableWrap tr.rig-site-on .codice-cell{font-weight:700;color:#135333}#sec-immobili #immobiliTableWrap tr.rig-site-off{background:#f9faf8}@media(max-width:760px){#sec-immobili #immobiliTableWrap .rig-site-control{min-height:40px}#sec-immobili #immobiliTableWrap .rig-site-control input{width:22px;height:22px}}#sec-immobili #immobiliTableWrap td:nth-child(6){min-width:32px;max-width:42px}#sec-immobili #immobiliTableWrap td:nth-child(7){min-width:108px;max-width:118px}#sec-immobili #immobiliTableWrap td:nth-child(8){min-width:85px;max-width:115px}#sec-immobili #immobiliTableWrap td:nth-child(14){min-width:28px;max-width:none;text-align:center}#sec-immobili #immobiliTableWrap td:nth-child(15){min-width:110px;max-width:150px}#sec-immobili #immobiliTableWrap td:nth-child(18){min-width:0;max-width:none}#sec-immobili #immobiliTableWrap td:nth-child(19){min-width:110px;max-width:150px}</style>
 </head>
 <body>
 
@@ -6425,7 +6426,7 @@ async function _fotoZip(list, codice, btn) {
 }
 
 window.RighettoCatalogueView=()=>({rows:rigCataloguePrincipal&&rigCataloguePrincipal===window.RighettoGatedPrincipal?rigCatalogueRows:[],ready:rigCataloguePrincipal===window.RighettoGatedPrincipal&&rigCatalogueReady,status:document.getElementById('rigCatalogueStatus')?.textContent||'',retry:!!document.getElementById('rigCatalogueStatus')?.querySelector('button')});
-function rigPropertyIsHistorical(i){return !!i.cestino||!i.attivo||!!i.venduto||!!i.affittato;}
+function rigPropertyIsHistorical(i){return !!i.cestino||(typeof i.storico_gestionale==='boolean'?i.storico_gestionale:(!i.attivo||!!i.venduto||!!i.affittato));}
 async function loadImmobili() {
   document.querySelectorAll('#rb2-__rCestino input,#rm-imm [data-rm-toggles] input[type=checkbox]').forEach(x=>{x.checked=!!window.__rCestino;});
   const principal=window.RighettoGatedPrincipal;
@@ -6456,7 +6457,7 @@ async function loadImmobili() {
       const result=await Promise.race([query,new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(Error('timeout'));},45000);})]);
       if(!current())return;
       if(result.error||!Array.isArray(result.data))throw Error('read');
-      allImmobili=result.data.filter(i=>trash?rigPropertyIsHistorical(i):!rigPropertyIsHistorical(i));rigCatalogueRows=allImmobili;rigCatalogueKey=key;rigCatalogueReady=true;updateStats(allImmobili);filterTable();status.textContent='Elenco aggiornato dal database.';
+      if(!window.RighettoPropertyPublication)throw Error('Stato interno non disponibile');const withState=await RighettoPropertyPublication.attach(result.data);if(!current())return;allImmobili=withState.filter(i=>trash?rigPropertyIsHistorical(i):!rigPropertyIsHistorical(i));rigCatalogueRows=allImmobili;rigCatalogueKey=key;rigCatalogueReady=true;updateStats(allImmobili);filterTable();status.textContent='Elenco aggiornato dal database.';
     }catch(error){
       if(!current())return;rigCatalogueReady=false;
       if(rigCatalogueRows.length)filterTable();else wrap.innerHTML='<div class="empty-state"><h3>Elenco non caricato</h3></div>';
@@ -6492,11 +6493,11 @@ function renderTable(data) {
   const rows=data.map(i=>{const aff=String(i.tipo_operazione||'').startsWith('affitto'),op=i.tipo_operazione==='vendita'?'V':aff?'A':i.tipo_operazione==='asta_giudiziaria'?'Asta':'—';
    const date=i.created_at?new Date(i.created_at):null,d=date&&!isNaN(date)?date.toLocaleDateString('it-IT').replaceAll('/','-'):'—';
    const ceRaw=String(i.classe_energetica||'').trim().toUpperCase(),ce=/^A[1-4]$|^[B-G]$/.test(ceRaw)?'<span class="ce-badge ce-'+ceRaw.toLowerCase()+'">'+ceRaw+'</span>':'<span class="ce-badge ce-nd">ND</span>';
-   const status=i.cestino?'Storico: da recuperare':i.venduto?'Venduto':i.affittato?'Affittato':i.attivo?'Attivo sul sito':'Storico: offline';
-   return `<tr data-property-preview="${escHtml(i.id)}" tabindex="0" aria-label="Apri scheda ${escHtml(i.codice||i.titolo||'immobile')}">
+   const status=(rigPropertyIsHistorical(i)?'Storico gestionale':'Lista di lavoro')+' · '+(i.attivo?'Attivo sul sito':'Non attivo sul sito');
+   return `<tr class="${i.attivo===true?'rig-site-on':'rig-site-off'}" data-property-preview="${escHtml(i.id)}" tabindex="0" aria-label="Apri scheda ${escHtml(i.codice||i.titolo||'immobile')}">
    <td class="pv-select"><input type="checkbox" data-pv-select="${escHtml(i.id)}" aria-label="Seleziona ${escHtml(i.codice||'immobile')}" ${rigCatalogueReady?'':'disabled'}></td><td class="pv-na" data-pv-related="score" title="Punteggio fonte in verifica">—</td><td class="pv-na" data-pv-related="count" title="Conteggio eventi collegati in verifica">—</td>
-   <td>${val(i.tipologia||i.categoria)}</td><td><span class="codice-cell">${val(i.codice)}</span></td><td class="pv-na" data-pv-related="nazione" title="Nazione collegata in verifica">—</td><td>${val(i.comune)}</td><td class="pv-na" data-pv-related="zona_locale" title="Zona collegata in verifica">—</td>
-   <td class="pv-contract" title="${escHtml(i.tipo_operazione||'Non indicato')} · ${status}">${op}${i.venduto||i.affittato?'<span class="pv-state">'+(i.venduto?'Venduto':'Affittato')+'</span>':''}${i.attivo===false?'<span class="pv-state">Storico</span>':''}</td>
+   <td>${val(i.tipologia||i.categoria)}</td><td><span class="codice-cell">${val(i.codice)}</span></td><td class="pv-na" data-pv-related="nazione" title="Nazione collegata in verifica">—</td><td>${window.RighettoPropertyPublication?.siteCell(i,rigCatalogueReady)||'Non disponibile'}</td><td>${val(i.comune)}</td><td class="pv-na" data-pv-related="zona_locale" title="Zona collegata in verifica">—</td>
+   <td class="pv-contract" title="${escHtml(i.tipo_operazione||'Non indicato')} · ${status}">${op}${i.venduto||i.affittato?'<span class="pv-state">'+(i.venduto?'Venduto':'Affittato')+'</span>':''}${rigPropertyIsHistorical(i)?'<span class="pv-state">Storico</span>':''}</td>
    <td class="pv-number">${num(i.prezzo_portali??i.prezzo)}</td><td class="pv-number">${num(i.superficie_portali??i.superficie)}</td><td class="pv-number">${val(i.camere)}</td><td class="pv-number">${val(i.bagni_totali??i.bagni)}</td>
    <td>${val(i.proprietario_nome)}</td><td class="pv-date">${d}</td><td><div data-property-label-host="${escHtml(i.id)}"></div></td><td class="pv-number" title="Piano">${val(i.piano??i.piano_numero)}</td><td>${val(i.indirizzo)}</td><td class="pv-number">${num(i.ipe_kwh)}</td><td>${ce}</td>
    <td class="pv-controls"><fieldset class="property-row-actions" ${rigCatalogueReady?'':'disabled'}><button type="button" class="pv-icon" data-pv-ops="${escHtml(i.id)}" aria-label="Operazioni ${escHtml(i.codice||'')}" title="Operazioni">⋮</button></fieldset></td></tr>`;
@@ -6509,7 +6510,7 @@ function renderTable(data) {
   };
   wrap.innerHTML = `<table>
     <thead><tr>
-      <th><input type="checkbox" data-pv-select-all aria-label="Seleziona tutte le righe visualizzate" ${rigCatalogueReady?'':'disabled'}></th><th title="Punteggio immobile del vecchio gestionale">Punti</th><th title="Eventi già collegati nel nuovo gestionale">Eventi</th><th>Tipologia</th>${sortTh('codice','Rif.')}<th>Nazione</th>${sortTh('comune','Comune/Prov.')}<th>Zona</th><th title="Contratto">V/A</th>${sortTh('prezzo','Pr. Portali')}${sortTh('superficie','Mq portali')}<th title="Camere">Cam.</th><th title="Bagni">Bagni</th><th>Proprietario</th><th>Data ins.</th><th>Etichette</th><th title="Piano">P.</th><th>Ind. reale</th><th>IPE</th><th>CE</th><th aria-label="Comandi">⚙</th>
+      <th><input type="checkbox" data-pv-select-all aria-label="Seleziona tutte le righe visualizzate" ${rigCatalogueReady?'':'disabled'}></th><th title="Punteggio immobile del vecchio gestionale">Punti</th><th title="Eventi già collegati nel nuovo gestionale">Eventi</th><th>Tipologia</th>${sortTh('codice','Rif.')}<th>Naz.</th><th>Stato sito</th>${sortTh('comune','Comune/Prov.')}<th>Zona</th><th title="Contratto">V/A</th>${sortTh('prezzo','Pr. Portali')}${sortTh('superficie','Mq portali')}<th title="Camere">Cam.</th><th title="Bagni">Bagni</th><th>Proprietario</th><th>Data ins.</th><th>Etichette</th><th title="Piano">P.</th><th>Ind. reale</th><th>IPE</th><th>CE</th><th aria-label="Comandi">⚙</th>
     </tr></thead>
     <tbody>${rows}</tbody>
   </table>`;
@@ -6822,6 +6823,7 @@ async function editImmobile(id,isCurrent=()=>true,reloadSaved=null) {if(rigPrope
    try{const r=await sb.from('immobili').select('*').eq('id',id).maybeSingle();if(!current())return;if(r.error)throw r.error;if(!r.data)throw Error('Immobile non disponibile');imm=r.data;}catch(error){if(current()){document.getElementById('formTitle').textContent='Immobile non caricato';toast(error.message,'error');}return;}
   }
   if(!current())return;
+  try{if(!window.RighettoPropertyPublication)throw Error('Stato interno non disponibile');imm=(await RighettoPropertyPublication.attach([imm]))[0];if(!current())return;}catch(error){if(current()){rigPropertySnapshot=null;document.getElementById('btnSalva').disabled=true;toast(error.message,'error');}return;}
   document.getElementById('btnSalva').disabled=false;
   rigPropertySnapshot=null;
   document.getElementById('editId').value = imm.id;
@@ -7240,20 +7242,12 @@ async function saveImmobile(e) {
 // CRUD HELPERS
 // ══════════════════════════════════════
 async function deleteImmobile(id, titolo) {
-  if (!confirm(`Spostare "${titolo}" nello storico?\n\nNon sarà più visibile sul sito né nell'elenco. Resta recuperabile da "Mostra storico" e non viene eliminato.`)) return;
-  const r1 = await sb.rpc('rig_admin_set_attivo', { p_id: id, p_attivo: false });
-  if (r1.error && !(r1.error.message || '').includes('Could not find the function')) { toast('Errore: ' + r1.error.message, 'error'); return; }
-  const { error } = await sb.from('immobili').update({ cestino: true, cestino_il: new Date().toISOString(), attivo: false }).eq('id', id);
-  if (error) { toast('Errore: ' + error.message, 'error'); return; }
-  toast('Immobile spostato nello storico', 'success');
-  await loadImmobili();
+  if(!window.RighettoPropertyPublication){toast('Funzione stato non disponibile','error');return;}
+  return RighettoPropertyPublication.change(id,'archive');
 }
 async function restoreImmobile(id, titolo) {
-  if (!confirm(`Recuperare "${titolo}" dallo storico?\n\nLa scheda viene recuperata ma resta nello storico, NON pubblicata sul sito: lo riattivi tu dopo il controllo di foto, prezzo e APE.`)) return;
-  const { error } = await sb.from('immobili').update({ cestino: false, cestino_il: null }).eq('id', id);
-  if (error) { toast('Errore: ' + error.message, 'error'); return; }
-  toast('Scheda recuperata, ancora offline nello storico', 'success');
-  await loadImmobili();
+  if(!window.RighettoPropertyPublication){toast('Funzione stato non disponibile','error');return;}
+  return RighettoPropertyPublication.change(id,'restore');
 }
 /** Codice univoco per duplicato: suffisso (-AFF, -V, -2…) o progressivo per prefisso tipologia. */
 async function generateUniqueCodiceForDuplicate(sourceImm) {
@@ -7441,7 +7435,8 @@ async function toggleEvidenza(id, val) {
 }
 
 async function toggleAttivo(id, val) {
-  await _immobilePatchBool(id, { attivo: !!val }, val ? '✅ Immobile attivato' : '🚫 Immobile disattivato');
+  if(!window.RighettoPropertyPublication){toast('Funzione stato non disponibile','error');return;}
+  return RighettoPropertyPublication.change(id,val?'site_on':'site_off');
 }
 
 // ══════════════════════════════════════
@@ -18200,6 +18195,7 @@ window.showSection('home');
 <script src="js/admin-cliente-scheda.js?v=20261116-header-yellow-v1"></script>
 <script src="js/admin-private-photos.js?v=LP0290-private-1"></script>
 <script src="js/admin-immobile-etichette.js?v=20261115-label-reminders-v1"></script>
+<script src="js/admin-property-publication.js?v=internal-history-v1"></script>
 <script src="js/admin-immobile-operazioni.js?v=20261113-status-guard"></script>
 <script src="js/admin-immobile-stampe.js?v=20261112-operations-private"></script>
 <script src="js/admin-immobile-inquilini.js?v=20261106-1038"></script>
