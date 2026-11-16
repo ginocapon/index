@@ -550,3 +550,9 @@ body.rig-sugar-paper :is(
     display: none !important;
   }
 }
+
+/* Schede immobili: foto e anteprime senza la grana sovrapposta.
+   Mantiene i monogrammi RI, la velatura e le etichette delle foto. */
+body.rig-sugar-paper:has(#galleryWrap)::after {
+  display: none;
+}
