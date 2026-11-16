@@ -10,7 +10,7 @@
 Fonte: Gate-away.com, portale per acquirenti esteri ([comunicato 2025](https://it.gate-away.com/press-area/comunicato.php?id=1505) · [primo semestre 2026](https://www.gate-away.com/blog/foreign-buyers-a-snapshot-of-the-italian-property-market-in-the-first-half-of-2026/)).
 
 - **USA:** primo Paese per richieste (25% nel 2025), ma in calo del 21,6% sul 2024.
-- **Regno Unito:** secondo mercato, in **crescita del 23,23%**. È il target più caldo.
+- **Regno Unito:** secondo mercato in Italia, in **crescita del 23,23%**. In Veneto però pesa solo il 7,53% e ha un budget basso: per il Veneto è priorità 2 (vedi `ricerca-paesi-settori-esteri-2026-11-16.md`).
 - **Germania:** in calo del 13,6%. **Svezia e Paesi Bassi** sono in aumento nel 2026.
 - **Veneto:** richieste in aumento del 5,8% nel 2025. Il Nord-Est viene percepito come alternativa meno cara della Toscana, che è in calo.
 - **Richieste di stranieri che si trovano già in Italia:** +18,58%. Il turista diventa compratore.

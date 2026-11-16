@@ -51,7 +51,7 @@ Scheda di una pagina, firmata dal capo, con:
 
 **Schede «cliente tipo» (3–4 personas):** per esempio la coppia britannica che compra una seconda casa, il professionista americano che si trasferisce, la famiglia svedese o olandese che compra per le vacanze e affitta, l'investitore che compra per affittare. Per ciascuna: età, budget indicativo (da fonte), motivazione, paure, canali, domanda d'acquisto tipica.
 
-**Consegna:** rapporto di massimo 5 pagine e griglia compilata. **Decisione:** il capo sceglie **2 Paesi principali** (proposta: Regno Unito e Paesi Bassi/Svezia) e **1 secondario** (USA).
+**Consegna:** rapporto di massimo 5 pagine e griglia compilata. **Decisione:** scegliere i Paesi principali. Esito della ricerca per il Veneto: **USA e Germania** come priorità 1, **Austria, Regno Unito e Paesi Bassi** come priorità 2 (vedi `ricerca-paesi-settori-esteri-2026-11-16.md`).
 
 ## Step 2 — Analisi interna
 
