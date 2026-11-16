@@ -94,3 +94,11 @@
 
 /* Allineamento compatto: spazio ai contenuti, non a margini ripetuti. */
 .at-body{gap:8px!important;padding:10px!important}.at-info{gap:5px!important;margin:0!important}.at-meta{margin:4px 0!important;padding:0!important;gap:6px!important;align-items:center!important}.at-meta button[data-save-color]{font:inherit;font-size:12px;padding:5px 8px;border:1px solid #a5b9ae;border-radius:4px;background:#f5faf6;color:#214f3b;min-height:30px;cursor:pointer}.at-meta input[type=color]{min-height:28px!important;height:28px!important;width:42px!important;padding:1px!important}.at-property{margin:5px 0!important;padding:7px;gap:5px}.at-property-label{font-size:11px}.at-saved{margin:5px 0 9px;padding:8px}.at-saved>h4{margin-bottom:5px}.at-saved .at-task{margin:5px 0;padding:6px}.at-task-head{min-height:22px}.at-task-title{padding-top:2px}.at-task-head>.at-existing-file>summary{padding:3px 5px}.at-created{margin-top:1px!important}.at-entry-inline{padding:8px;gap:5px;margin:0}.at-entry-inline>h4{margin-bottom:4px}.at-files h4{margin-top:6px!important;margin-bottom:4px!important}.at-delbar{margin-top:8px!important;padding-top:7px!important}.at-task .at-file{margin-top:5px}.at-property button{padding:5px 8px}.at-info .at-bar{max-width:80px}.at-sub{line-height:1.3}@media(max-width:760px){.at-body{padding:7px!important;gap:7px!important}.at-saved,.at-entry-inline{padding:6px}.at-task-head>.at-existing-file>summary{font-size:10px}.at-meta button[data-save-color]{min-height:34px}.at-entry-main>button{min-height:38px}}
+
+/* Creazione pratica compatta: il campo compare soltanto dopo il +. */
+.at .at-newp[hidden]{display:none!important}
+.at .at-person>h3 .at-person-actions{display:inline-flex;align-items:center;gap:12px;flex:none}
+.at .at-person>h3 .at-create-toggle,body .rcs .at .at-person>h3 .at-create-toggle{display:inline-flex;align-items:center;justify-content:center;flex:none;width:30px;height:28px;min-height:28px!important;margin:0;padding:0!important;font:700 25px/1 Arial!important;color:#fff!important;background:transparent!important;border:1px solid #ffffff80;border-radius:4px;cursor:pointer}
+.at .at-person>h3 .at-create-toggle:hover{background:#ffffff20!important}
+.at .at-person>h3 .at-create-toggle:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.at .at-newp [data-cancel-practice]{background:#e6edf0;color:#25473b}

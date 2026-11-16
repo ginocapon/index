@@ -73,3 +73,23 @@ body .rcs .at .at-newp button{background:#07568a!important;border-color:#07568a!
 /* The same saved practice colour in every host; labels keep their own colour. */
 html body .at details.at-pr,html body .at details.at-pr>summary,html body .rcs .at details.at-pr,html body .rcs .at details.at-pr>summary{background:var(--practice-tint,#fff)!important;border-left-color:var(--practice-color,#c4d5cb)!important}
 .at input[data-practice-day]:not(:disabled){cursor:pointer}
+
+/* Anteprima compatta: i controlli della pratica sullo stesso asse. */
+@container(min-width:481px){
+html body .at .at-pr>summary,html body .at .at-pr:not([open])>summary{grid-template-columns:22px minmax(42px,.65fr) minmax(55px,1fr) 120px 48px 82px 24px!important;grid-template-rows:minmax(40px,auto)!important;gap:3px!important;padding:5px!important;align-items:center!important}
+html body .at .at-pr>summary>.at-pr-completion{grid-column:1!important;grid-row:1!important}
+html body .at .at-pr>summary>.at-name{grid-column:2!important;grid-row:1!important;font-size:11px!important;line-height:1.15!important}
+html body .at .at-pr>summary>.at-inline-ref,html body .at .at-pr:not([open])>summary>.at-inline-ref{grid-column:3!important;grid-row:1!important;align-self:center!important}
+html body .at .at-pr>summary>.at-practice-date{grid-column:4!important;grid-row:1!important;align-self:center!important}
+html body .at .at-pr>summary>.at-practice-label-action{grid-column:5!important;grid-row:1!important;width:48px!important;font-size:10px!important}
+html body .at .at-pr>summary>.at-practice-repeat{grid-column:6!important;grid-row:1!important;align-self:center!important}
+html body .at .at-pr>summary>.at-summary-arrow{grid-column:7!important;grid-row:1!important;width:24px!important;align-self:center!important}
+html body .at .at-practice-repeat label{white-space:normal!important;font-size:9px!important;line-height:1.1!important}
+html body .at .at-practice-repeat small{font-size:8px!important;margin-left:0!important}
+html body .at .at-selected-reference button{font-size:10px!important}
+}
+@container(min-width:481px){
+html body .at .at-practice-date input{font-size:11px!important;padding-left:2px!important;padding-right:31px!important}
+html body .at .at-open-calendar,html body .rcs .at .at-open-calendar{width:30px!important;font-size:22px!important}
+html body .at .at-practice-date input::-webkit-calendar-picker-indicator{width:18px!important;margin:0!important;padding:0!important}
+}
