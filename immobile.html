@@ -1279,33 +1279,41 @@ function rigSetupMediaTabs() {
  window.rigSelectPublicMedia=select;select('foto');
 }
 
+function rigSimiliGruppo(row) {
+  const operation = String(row.tipo_operazione || '').trim().toLowerCase();
+  const category = String(row.categoria || '').trim().toLowerCase();
+  const type = String(row.tipologia || '').trim().toLowerCase();
+  const residential = new Set(['appartamento','attico','mansarda','villa','villetta','bifamiliare','trifamiliare','quadrifamiliare','schiera','casa singola','rustico']);
+  const commercial = new Set(['ufficio','negozio','capannone','magazzino','laboratorio','locale commerciale']);
+  const rentCategory = operation === 'affitto_commerciale' ? 'commerciale' : operation === 'affitto_residenziale' ? 'residenziale' : '';
+  const typeCategory = residential.has(type) ? 'residenziale' : commercial.has(type) ? 'commerciale' : '';
+  if (category && rentCategory && category !== rentCategory) return null;
+  if (category && typeCategory && category !== typeCategory) return null;
+  if (rentCategory && typeCategory && rentCategory !== typeCategory) return null;
+  const group = category || rentCategory || typeCategory;
+  if (!['commerciale','residenziale','terreno'].includes(group)) return null;
+  const transaction = operation === 'vendita' ? 'vendita' : ['affitto','affitto_commerciale','affitto_residenziale'].includes(operation) ? 'affitto' : '';
+  return transaction ? {transaction, category:group} : null;
+}
 async function loadSimili(d) {
-  let q = sb.from('immobili').select('id,titolo,tipologia,comune,prezzo,superficie,camere,locali,foto,codice')
-    .eq('attivo', true)
-    .eq('tipo_operazione', d.tipo_operazione || 'vendita')
-    .neq('id', d.id)
-    .limit(3);
-  if (d.comune) q = q.eq('comune', d.comune);
-  let { data } = await q;
-  if (!data || !data.length) {
-    const { data: d2 } = await sb.from('immobili').select('id,titolo,tipologia,comune,prezzo,superficie,camere,locali,foto,codice').eq('attivo', true).neq('id', d.id).limit(3);
-    data = d2;
-  }
-  if (!data || !data.length) { document.getElementById('similiGrid').innerHTML = '<p style="color:var(--grigio);font-size:.84rem">Nessun immobile simile trovato.</p>'; return; }
-
-  data.forEach(applicaMqPubblici);
-  document.getElementById('similiGrid').innerHTML = data.map(i => {
+  const grid = document.getElementById('similiGrid');
+  const empty = '<p style="color:var(--grigio);font-size:.84rem">Nessun immobile simile trovato.</p>';
+  const group = rigSimiliGruppo(d);
+  if (!group) { grid.innerHTML = empty; return; }
+  const fields = 'id,titolo,slug,tipo_operazione,categoria,tipologia,comune,prezzo,superficie,camere,locali,foto,codice,venduto,affittato';
+  let query = sb.from('immobili').select(fields).eq('attivo', true).neq('id', d.id);
+  query = group.transaction === 'vendita' ? query.eq('tipo_operazione','vendita') : query.in('tipo_operazione',['affitto','affitto_commerciale','affitto_residenziale']);
+  const {data,error} = await query;
+  if (error) { grid.innerHTML = '<p style="color:var(--grigio);font-size:.84rem">Immobili simili non disponibili al momento.</p>'; return; }
+  const matching = (data || []).filter(i => { const other=rigSimiliGruppo(i);return other && other.transaction===group.transaction && other.category===group.category && !i.venduto && !i.affittato; });
+  matching.sort((a,b) => Number(b.comune===d.comune)-Number(a.comune===d.comune) || String(a.codice||'').localeCompare(String(b.codice||'')));
+  const chosen = matching.slice(0,3);
+  if (!chosen.length) { grid.innerHTML=empty;return; }
+  chosen.forEach(applicaMqPubblici);
+  grid.innerHTML = chosen.map(i => {
     const thumbUrl = Array.isArray(i.foto) && i.foto[0] ? resolveImageUrl(i.foto[0]) : '';
     const thumb = thumbUrl ? `<img src="${thumbUrl}" alt="${i.titolo}" style="width:100%;height:100%;object-fit:cover">` : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="24" height="24" style="opacity:.18"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>`;
-    return `<a class="sim-card" href="immobile?s=${encodeURIComponent(generatePropertySlug(i))}">
-      <div class="sim-img">${thumb}</div>
-      <div class="sim-body">
-        <div class="sim-price">${fmt(i.prezzo)}</div>
-        <div class="sim-title">${i.titolo || '—'}</div>
-        <div class="sim-loc">${i.comune || 'Padova'}</div>
-        <div class="sim-specs"><span>${i.superficie ? i.superficie + ' mq' : '—'}</span><span>·</span><span>${i.camere || i.locali ? (i.camere || i.locali) + ' cam.' : '—'}</span><span>·</span><span>${i.codice || ''}</span></div>
-      </div>
-    </a>`;
+    return `<a class="sim-card" href="immobile?s=${encodeURIComponent(generatePropertySlug(i))}"><div class="sim-img">${thumb}</div><div class="sim-body"><div class="sim-price">${fmt(i.prezzo)}</div><div class="sim-title">${i.titolo || '—'}</div><div class="sim-loc">${i.comune || 'Padova'}</div><div class="sim-specs"><span>${i.superficie ? i.superficie + ' mq' : '—'}</span><span>·</span><span>${i.camere || i.locali ? (i.camere || i.locali) + ' cam.' : '—'}</span><span>·</span><span>${i.codice || ''}</span></div></div></a>`;
   }).join('');
 }
 
