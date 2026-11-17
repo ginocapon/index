@@ -2454,12 +2454,13 @@ tr:hover td { background: rgba(206,224,143,0.06); }
             <div style="font-weight:600;font-size:0.9rem;">Lista Immobili</div><span id="immobiliCountVisible" style="margin-left:10px;font-size:0.78rem;color:var(--caffe2)"></span>
             <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
               <select id="filtroTipo" onchange="loadImmobili()" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px;font-family:'Montserrat',sans-serif;font-size:0.8rem;">
-                <option value="">Tutti i tipi</option>
+                <option value="">Tutti i contratti</option>
                 <option value="vendita">🏷️ In Vendita</option>
                 <option value="affitto_residenziale">🏠 Affitto Residenziale</option>
                 <option value="affitto_commerciale">🏢 Affitto Commerciale</option>
                 <option value="asta_giudiziaria">⚖️ Asta Giudiziaria</option>
               </select>
+              <label style="font-size:.75rem">Tipologia <select id="filtroTipologia" aria-label="Tipologia immobile" onchange="filterTable()" style="padding:8px 12px;border:1.5px solid var(--caffe3);border-radius:8px"><option value="">Tutte le tipologie</option></select></label>
               <input class="table-search" type="text" placeholder="🔍 Cerca codice, titolo, comune, indirizzo, proprietario, prezzo..." id="searchInput" oninput="filterTable()" style="min-width:280px">
             </div>
           </div>
@@ -6510,7 +6511,7 @@ function renderTable(data) {
   };
   wrap.innerHTML = `<table>
     <thead><tr>
-      <th><input type="checkbox" data-pv-select-all aria-label="Seleziona tutte le righe visualizzate" ${rigCatalogueReady?'':'disabled'}></th><th title="Punteggio immobile del vecchio gestionale">Punti</th><th title="Eventi già collegati nel nuovo gestionale">Eventi</th><th>Tipologia</th>${sortTh('codice','Rif.')}<th>Naz.</th><th>Stato sito</th>${sortTh('comune','Comune/Prov.')}<th>Zona</th><th title="Contratto">V/A</th>${sortTh('prezzo','Pr. Portali')}${sortTh('superficie','Mq portali')}<th title="Camere">Cam.</th><th title="Bagni">Bagni</th><th>Proprietario</th><th>Data ins.</th><th>Etichette</th><th title="Piano">P.</th><th>Ind. reale</th><th>IPE</th><th>CE</th><th aria-label="Comandi">⚙</th>
+      <th><input type="checkbox" data-pv-select-all aria-label="Seleziona tutte le righe visualizzate" ${rigCatalogueReady?'':'disabled'}></th><th title="Punteggio immobile del vecchio gestionale">Punti</th><th title="Eventi già collegati nel nuovo gestionale">Eventi</th><th>Tipologia</th>${sortTh('codice','Rif.')}<th>Naz.</th><th>Stato sito</th>${sortTh('comune','Comune/Prov.')}<th>Zona</th><th title="Contratto">V/A</th>${sortTh('prezzo','Pr. Portali')}${sortTh('superficie','Mq portali')}<th title="Camere">Cam.</th><th title="Bagni">Bagni</th>${sortTh('proprietario_nome','Proprietario')}${sortTh('created_at','Data ins.')}<th>Etichette</th><th title="Piano">P.</th><th>Ind. reale</th><th>IPE</th><th>CE</th><th aria-label="Comandi">⚙</th>
     </tr></thead>
     <tbody>${rows}</tbody>
   </table>`;
@@ -6524,15 +6525,20 @@ function setImmSort(key) {
     immSortDir = -immSortDir;
   } else {
     immSortKey = key;
-    immSortDir = 1;
+    immSortDir = key==='created_at'?-1:1;
   }
   filterTable();
 }
 
+function rigTipoKey(i){return String(i.tipologia||i.categoria||'').trim().toLocaleLowerCase('it-IT');}
+function rigUpdateTipologie(rows){const select=document.getElementById('filtroTipologia');if(!select)return;const selected=select.value;const types=[...new Set(rows.map(rigTipoKey).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'it',{sensitivity:'base',numeric:true}));const key=JSON.stringify(types);if(select.dataset.optionsKey===key)return;select.dataset.optionsKey=key;select.replaceChildren(new Option('Tutte le tipologie',''));types.forEach(t=>select.add(new Option(t,t)));if(selected&&!types.includes(selected))select.add(new Option(selected+' (nessuno in questo elenco)',selected));select.value=selected;}
 function filterTable() {
   const q = document.getElementById('searchInput').value.toLowerCase().trim();
 
   let filtered = rigCatalogueRows;
+  rigUpdateTipologie(rigCatalogueRows);
+  const typology=document.getElementById('filtroTipologia')?.value||'';
+  if(typology)filtered=filtered.filter(i=>rigTipoKey(i)===typology);
 
   // Ricerca testo multi-parola: ogni parola deve comparire (anche parziale) in uno dei campi, in qualsiasi ordine, senza maiuscole/accenti
   if (q) {
@@ -6551,7 +6557,9 @@ function filterTable() {
       codice: i => (i.codice || '').toLowerCase(),
       comune: i => (i.comune || '').toLowerCase(),
       prezzo: i => (i.prezzo == null ? null : Number(i.prezzo)),
-      superficie: i => (i.superficie == null ? null : Number(i.superficie))
+      superficie: i => (i.superficie == null ? null : Number(i.superficie)),
+      proprietario_nome: i => String(i.proprietario_nome||'').trim()||null,
+      created_at: i => {const n=Date.parse(i.created_at||'');return Number.isFinite(n)?n:null;}
     };
     const keyFn = keyFns[immSortKey];
     if (keyFn) {
@@ -6560,6 +6568,7 @@ function filterTable() {
         if (va === null && vb === null) return 0;
         if (va === null || va === '') return 1;
         if (vb === null || vb === '') return -1;
+        if(immSortKey==='proprietario_nome'){const n=va.localeCompare(vb,'it',{sensitivity:'base',numeric:true});return n*dir;}
         if (va < vb) return -dir;
         if (va > vb) return dir;
         return 0;
