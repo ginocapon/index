@@ -1,112 +1,134 @@
 # Esempi concreti per i soggetti target del commerciale
 
-**Data:** 17 novembre 2026 (revisione: esempi verificati e divisi in due gruppi) · **Collegato a:** `ramo-commerciale-clienti-esteri-veneto-2026-11-16.md` §5
+**Data:** 17 novembre 2026 (revisione: esempi verificati e ordinati per soggetto target) · **Collegato a:** `ramo-commerciale-clienti-esteri-veneto-2026-11-16.md` §5
 **Uso:** esempi da mostrare come casi reali. Sono aziende e operazioni **pubbliche**, con fonte. **Non** sono clienti Righetto.
 **Legenda:** ✅ fonte ufficiale o comunicato aziendale · 📰 stampa affidabile
 
-**Come è diviso:**
-- **Gruppo A — In linea con Righetto: uffici e negozi.** Sono le operazioni su cui un'agenzia locale può lavorare davvero.
-- **Gruppo B — Non in linea: capannoni, stabilimenti, logistica e fondi.** Servono solo come contesto. Queste operazioni le seguono grandi società come CBRE, JLL e Cushman & Wakefield.
+**Come è diviso:** stessi sei soggetti target del documento sul ramo commerciale, più i fondi da escludere. Dentro ogni soggetto gli esempi sono separati in due parti:
+- **🟢 Uffici e negozi — in linea con Righetto.** Operazioni su cui un'agenzia locale può lavorare.
+- **⚪ Capannoni e stabilimenti — non in linea.** Solo come contesto: queste operazioni le seguono grandi società come CBRE, JLL e Cushman & Wakefield.
 
 **Verifica del 17/11/2026:** ho riaperto le fonti principali. Rispetto alla prima versione:
 - Tolta la frase su Infineon «nata nel 2001 con una decina di ingegneri», perché nessuna fonte la conferma.
 - Precisato che il ristorante Bronzetti è passato **in gestione**: l'immobile non è stato comprato.
-- Spostato MBT Climate nel gruppo B. Ha uffici e laboratori, ma è un'operazione industriale da 12 milioni in un ex capannone.
+- MBT Climate è tra i capannoni: ha uffici e laboratori, ma è un'operazione industriale da 12 milioni in un ex capannone.
 
 ---
 
-# GRUPPO A — In linea con Righetto: uffici e negozi
+## 1. Aziende estere che aprono una sede in Veneto
 
-## A1. Aziende estere che aprono o spostano i loro uffici
+**🟢 Uffici e negozi**
+- **Kave Home (Spagna), Padova, via Emanuele Filiberto, primavera 2026**
+  - La catena di arredamento di Girona apre un grande negozio **in affitto** nei locali dell'**ex banca Carige**, comprati poco prima dal fondo Basad Properties (sede a Roma).
+  - Fonte: Il Mattino di Padova 📰 ⁷
+- **Soeur (Francia), Padova, via Emanuele Filiberto di Savoia 5, marzo 2026**
+  - Il marchio di moda parigino apre la sua boutique a Padova il 27 marzo 2026. Ha oltre cinquanta negozi in Europa.
+  - Fonti: Soeur ✅ ⁸ · HUB Style 📰 ⁹
+- **Nike (USA), Padova, via VIII Febbraio 24, giugno 2025**
+  - Negozio di **oltre 500 m²** in centro, con 15 addetti, gestito dal gruppo italiano Percassi, partner di Nike.
+  - Fonte: PadovaOggi 📰 ¹⁰
 
+**⚪ Capannoni e stabilimenti**
+- **MBT Climate (gruppo Midea, Cina), Padova Est, zona industriale, luglio 2025:** primo centro di ricerca, con laboratori e uffici in un **ex capannone riqualificato**. Investimento di 12 milioni di € ✅ ¹⁹ 📰 ²⁰ ²¹.
+- **Progroup (Germania), Cessalto (Treviso):** nuovo stabilimento di cartone ondulato, circa 60 posti di lavoro ✅ ²².
+
+**Messaggio per i clienti:** i marchi esteri scelgono il centro di Padova e cercano **negozi grandi in buone vie**, spesso ex banche.
+
+## 2. Aziende estere già in Veneto che si allargano o si spostano
+
+**🟢 Uffici e negozi**
 - **Endress+Hauser (gruppo svizzero), Peraga di Vigonza (Padova), maggio 2026**
-  - Ha inaugurato la **nuova sede dell'ufficio regionale**, che **sostituisce quella di Santa Maria di Sala**. Ha scelto Padova per stare più vicina ai clienti e dare alle persone un ambiente di lavoro migliore.
+  - Nuova sede dell'ufficio regionale, che **sostituisce quella di Santa Maria di Sala**. Ha scelto Padova per stare più vicina ai clienti e dare alle persone un ambiente di lavoro migliore.
   - È il caso più vicino a Righetto: Vigonza è a pochi chilometri da Limena.
   - Fonti: ICP Magazine 📰 ¹ · scheda del gruppo Endress+Hauser (sede a Reinach, Svizzera) ✅ ²
 - **Infineon Technologies (Germania), Padova, vicino alla stazione**
-  - Centro di ricerca sull'elettronica per auto che lavora **in uffici dentro un palazzo direzionale**, «tra la sede di alcuni grandi enti regionali e gli uffici di piccole e grandi società».
-  - Era a circa 210 addetti nel 2021. Nel 2025 ne conta **circa 340**, per lo più ingegneri.
+  - Centro di ricerca in **uffici dentro un palazzo direzionale**. Da circa 210 addetti nel 2021 è passato a **circa 340** nel 2025, per lo più ingegneri.
   - Fonti: Infineon ✅ ³ · il Nord Est 📰 ⁴ · Elettronica AV 📰 ⁵
 - **Aon (multinazionale dei servizi assicurativi), Vicenza, giugno 2025**
-  - Ha inaugurato la **nuova sede di Vicenza** con **oltre 30 esperti**, all'interno del rinnovo delle sue sedi in Italia.
+  - Nuova sede di Vicenza con **oltre 30 esperti**, all'interno del rinnovo delle sue sedi in Italia.
   - Fonte: Aon Italia ✅ ⁶
 
-**Messaggio per i clienti:** le aziende estere che crescono in Veneto cercano **uffici moderni, comodi da raggiungere e vicini ai clienti**, e spesso lasciano la sede vecchia.
+**⚪ Capannoni e stabilimenti**
+- **Ebara Corporation (Giappone), Gambellara (Vicenza):** nuovo capannone di 8.000 m², 6 milioni di €, annunciato dalla Regione a Expo Osaka 2025 ✅ ²³.
+- **Applied Materials (USA), Olmi di San Biagio di Callalta (Treviso):** ampliamento da 70 milioni di € per i semiconduttori 📰 ²⁴.
+- **DHL Express (gruppo tedesco DHL), Casier (Treviso), novembre 2025:** polo di oltre 30.000 m², 41 milioni di €, più di 500 addetti. Riunisce attività prima divise tra Treviso e Gaggio di Marcon ✅ ²⁵.
 
-## A2. Marchi esteri che prendono in affitto negozi
+**Messaggio per i clienti:** chi è già qui cresce e cerca **uffici più moderni e comodi**, lasciando la sede vecchia.
 
-Sono **inquilini**: il proprietario del negozio resta un privato o una società, che affitta a un marchio estero.
+## 3. Proprietari di capannoni vuoti o da vendere
 
-- **Kave Home (Spagna), Padova, via Emanuele Filiberto, primavera 2026**
-  - La catena di arredamento di Girona apre un grande negozio **in affitto** nei locali dell'**ex banca Carige**.
-  - I locali erano stati comprati poco prima da un fondo, Basad Properties, con sede a Roma.
-  - Fonte: Il Mattino di Padova 📰 ⁷
-- **Soeur (Francia), Padova, via Emanuele Filiberto di Savoia 5, marzo 2026**
-  - Il marchio di moda parigino ha aperto la sua boutique a Padova il 27 marzo 2026. Ha oltre cinquanta negozi in Europa.
-  - Fonti: Soeur (annuncio ufficiale) ✅ ⁸ · HUB Style 📰 ⁹
-- **Nike (USA), Padova, via VIII Febbraio 24, giugno 2025**
-  - Negozio di **oltre 500 m²** in centro, con 15 addetti. Lo gestisce il gruppo italiano Percassi, partner di Nike.
-  - Fonte: PadovaOggi 📰 ¹⁰
-- **DM Drogerie (Germania), Vicenza, corso Palladio 41**
-  - La catena tedesca affitta un negozio di **981 m²** su due piani in centro storico. Nel gennaio 2026 l'immobile è stato venduto a un fondo (vedi gruppo B).
-  - Fonte: JLL ✅ ¹¹
+**🟢 Uffici e negozi** (lo stesso problema, ma su locali commerciali vuoti)
+- **Ex banca Carige, Padova, via Emanuele Filiberto:** locale vuoto comprato da un fondo e affittato a Kave Home (vedi punto 1) 📰 ⁷.
+- **Ex banca Antonveneta, Padova, piazzale Stazione:** locale vuoto comprato da un privato straniero e già affittato (vedi punto 6) 📰 ¹².
 
-**Messaggio per i clienti:** chi ha un negozio o una ex banca vuota in una buona via può trovare **un marchio estero come inquilino**, e questo dà valore all'immobile anche se lo si vuole vendere.
+**⚪ Capannoni e stabilimenti**
+- **Molex Zetronic, Padova:** la multinazionale americana Molex aveva annunciato l'uscita nel 2024. Lo stabilimento è stato ceduto al gruppo Innovatek–iVision Tech, con 120 posti di lavoro salvati e la mediazione della Regione. Cessione chiusa a novembre 2025 ✅ ²⁶ 📰 ²⁷.
+- **Ex capannone di via Svizzera, Padova Est:** riqualificato, ora ospita MBT Climate (vedi punto 1) ✅ ¹⁹ 📰 ²⁰.
+- **Dato di contesto:** a Padova le vendite di capannoni sono scese del 14,4% nel 2025 (dato OMI, nel documento sul ramo commerciale).
 
-## A3. Investitori privati stranieri che comprano negozi
+**Messaggio per i clienti:** un negozio o un'ex banca vuota in una buona posizione **trova compratori e inquilini**, anche stranieri.
 
+## 4. Dirigenti e tecnici esteri trasferiti
+
+Non esistono elenchi pubblici di singoli dirigenti trasferiti, per privacy. Si possono indicare le **aziende** che portano personale qualificato. Non ho trovato una fonte che dica quanti siano gli stranieri: è un **potenziale**, non un dato.
+
+**🟢 Aziende con uffici**
+- **Infineon Padova:** circa 340 addetti in un centro di ricerca di un gruppo tedesco ³ ⁵.
+- **Endress+Hauser Vigonza** ¹ e **Aon Vicenza** ⁶: uffici di gruppi esteri.
+
+**⚪ Aziende con capannoni e stabilimenti**
+- **MBT Climate Padova** ¹⁹ ²⁰, **DHL Casier** (oltre 500 addetti) ²⁵, **Applied Materials Olmi** ²⁴.
+
+**In comune:** lo **Sportello Invest in Italy** del Ministero delle Imprese aiuta le aziende estere anche con **visti e permessi di lavoro** del personale extra-UE ✅ ¹⁵.
+
+**Messaggio per i clienti:** ogni azienda che arriva porta tecnici e dirigenti che cercano casa. È il servizio *loft aziende* di Righetto.
+
+## 5. Imprenditori extra-UE con visto per investitori
+
+Non esistono nomi pubblici di singoli investitori, per privacy. Qui non c'è la divisione tra uffici e capannoni: il visto si ottiene investendo in **aziende o startup**, non in immobili. Chi lo ottiene può però aver bisogno di **un ufficio** e di una casa.
+
+- **Dati ufficiali del Ministero delle Imprese (fino a dicembre 2021)** ✅ ¹⁶
+  - 64 candidature da 20 Paesi. I primi sono **USA (14)**, **Russia (14)**, **Regno Unito (7)** e Canada (5).
+  - Le città indicate sono soprattutto Milano (21) e Roma (13). **Venezia è stata scelta da 2 candidati**.
+- **Dati più recenti**, rilasciati dal Ministero su richiesta di accesso civico e riportati dalla stampa di settore 📰 ¹⁷ ¹⁸
+  - 229 domande nel 2025, contro 125 nel 2024.
+  - Nel 2026, fino a ottobre, il **57% delle domande** viene da americani.
+  - Il Ministero non ha pubblicato questi dati sul suo sito: vanno presentati come «riportati dalla stampa di settore».
+
+**Messaggio per i clienti:** il visto per investitori cresce in fretta e la maggior parte delle domande viene dagli **americani**, che sono anche il nostro primo Paese target.
+
+## 6. Investitori privati esteri in negozi e uffici
+
+**🟢 Uffici e negozi** (tutto questo punto è in linea con Righetto)
 - **Ex banca Antonveneta, piazzale Stazione, Padova (maggio 2026)**
   - Un **imprenditore immobiliare di origine cinese** ha comprato i locali della banca dismessa e li ha **già affittati** a un gruppo nigeriano, che ne farà un market.
-  - È l'esempio più adatto a Righetto: un privato straniero compra un negozio per affittarlo.
+  - È l'esempio più vicino al lavoro di Righetto: un privato straniero compra un negozio per affittarlo.
   - Fonte: Il Mattino di Padova 📰 ¹²
 - **Annunci di attività in vendita rivolti a compratori cinesi, centro di Padova (marzo 2025)**
-  - Bar, ristoranti e negozi del centro storico messi in vendita su siti cinesi, anche con prezzi in yuan. La venditrice di un chiosco al Santo spiega che la comunità cinese «è spesso interessata a investire in città».
+  - Bar, ristoranti e negozi del centro storico messi in vendita su siti cinesi, anche con prezzi in yuan, perché la comunità «è spesso interessata a investire in città».
   - Attenzione: si parla soprattutto di **attività** (la gestione), non sempre dei muri.
   - Fonte: Il Mattino di Padova 📰 ¹³
 - **Ristorante Bronzetti, Padova (dicembre 2025)**
-  - Una nuova società con **capitali cinesi** ha preso **in gestione** il ristorante (400 posti). L'articolo nel titolo dice «acquistato», ma nel testo spiega che si tratta della gestione. È un esempio di **inquilino o gestore** estero, non di acquirente dell'immobile.
+  - Una nuova società con **capitali cinesi** ha preso **in gestione** il ristorante (400 posti). Il titolo dell'articolo dice «acquistato», ma il testo chiarisce che si tratta della gestione. È un esempio di **gestore** estero, non di acquirente dell'immobile.
   - Fonte: Il Mattino di Padova 📰 ¹⁴
 
 **Messaggio per i clienti:** a Padova ci sono investitori privati stranieri che comprano negozi per affittarli. È un mercato reale, non teorico.
 
-## A4. Persone che arrivano con le aziende (utili per uffici e casa)
+## Da escludere: fondi e grandi investitori (esempi per confronto)
 
-- **Dirigenti e tecnici trasferiti:** non esistono elenchi pubblici, per privacy. Le aziende del punto A1 (Infineon, Endress+Hauser, Aon) portano personale qualificato che cerca casa e, a volte, piccoli uffici. Non ho trovato una fonte che dica quanti siano gli stranieri: è un **potenziale**, non un dato.
-- **Sportello Invest in Italy:** il Ministero delle Imprese aiuta le aziende estere anche con **visti e permessi di lavoro** del personale extra-UE ✅ ¹⁵.
-- **Visto per investitori extra-UE:**
-  - Dati ufficiali del Ministero fino a dicembre 2021: 64 candidature, prime USA (14), Russia (14) e Regno Unito (7). **Venezia scelta da 2 candidati** ✅ ¹⁶.
-  - Dati più recenti, riportati dalla stampa di settore: 229 domande nel 2025 e, nel 2026 fino a ottobre, il **57% dagli americani** 📰 ¹⁷ ¹⁸. Il Ministero non li ha pubblicati sul suo sito.
-  - Chi ottiene questo visto investe in aziende o startup, non in immobili. Può però aver bisogno di **un ufficio** e di una casa.
+Servono a mostrare che il capitale estero arriva, ma su una scala diversa da quella di Righetto.
 
----
+**Negozi** (sono negozi, ma li comprano fondi tramite le grandi società)
+- **Swiss Life Asset Managers France, Vicenza, corso Palladio 41, gennaio 2026:** un suo fondo ha comprato un negozio di 981 m² affittato alla catena tedesca **DM**. Operazione seguita da **JLL** ✅ ¹¹.
+- **Investitore internazionale, Venezia, Palazzo della Borsa, ottobre 2025:** 36 milioni di € per lo spazio di 560 m² affittato a Brunello Cucinelli, con la consulenza di **Cushman & Wakefield** 📰 ³².
+- **Warburg-HIH Invest (Germania), centro di Padova, 2015:** due immobili affittati a H&M e Zara, 39 milioni di € 📰 ³³. Il dato è vecchio.
 
-# GRUPPO B — Non in linea con Righetto: capannoni, stabilimenti, logistica e fondi
-
-Servono a mostrare che il capitale estero arriva in Veneto, ma su una scala e con canali diversi da quelli di Righetto.
-
-## B1. Nuovi stabilimenti e capannoni di aziende estere
-
-- **MBT Climate (gruppo Midea, Cina), Padova Est, zona industriale, luglio 2025:** centro di ricerca con laboratori e uffici in un **ex capannone riqualificato**. Investimento di 12 milioni di € ✅ ¹⁹ 📰 ²⁰ ²¹.
-- **Progroup (Germania), Cessalto (Treviso):** nuovo stabilimento di cartone ondulato, circa 60 posti di lavoro ✅ ²².
-- **Ebara Corporation (Giappone), Gambellara (Vicenza):** nuovo capannone di 8.000 m², investimento di 6 milioni di €, annunciato dalla Regione a Expo Osaka 2025 ✅ ²³.
-- **Applied Materials (USA), Olmi di San Biagio di Callalta (Treviso):** ampliamento da 70 milioni di € per i semiconduttori 📰 ²⁴.
-- **DHL Express (gruppo tedesco DHL), Casier (Treviso), novembre 2025:** polo logistico di oltre 30.000 m², 41 milioni di €, più di 500 addetti. Riunisce attività prima divise tra Treviso e Gaggio di Marcon ✅ ²⁵.
-
-## B2. Capannoni lasciati da multinazionali
-
-- **Molex Zetronic, Padova:** la multinazionale americana Molex aveva annunciato l'uscita nel 2024. Lo stabilimento è stato ceduto al gruppo Innovatek–iVision Tech, con il salvataggio di 120 posti di lavoro e la mediazione della Regione. Cessione chiusa a novembre 2025 ✅ ²⁶ 📰 ²⁷.
-- **Dato di contesto:** a Padova le vendite di capannoni sono scese del 14,4% nel 2025 (dato OMI, nel documento sul ramo commerciale).
-
-## B3. Fondi e grandi investitori
-
+**Capannoni e magazzini**
 - **M&G Real Estate (Regno Unito), Padova, 2020:** magazzino da 36.000 m² comprato da Prologis per 24 milioni di €, affittato per 15 anni a Geodis ✅ ²⁸.
 - **P3 Logistic Parks, Cittadella (Padova), 2025:** magazzino da 74.582 m² in costruzione, già tutto affittato ✅ ²⁹.
 - **BNP Paribas REIM (Francia), Vigasio (Verona), 2025:** due magazzini per 92.000 m², circa 50 milioni di € 📰 ³⁰ ³¹.
-- **Swiss Life Asset Managers France, Vicenza, corso Palladio 41, gennaio 2026:** un suo fondo ha comprato il negozio di 981 m² affittato a DM. L'operazione è stata seguita da **JLL** ✅ ¹¹.
-- **Investitore internazionale, Venezia, Palazzo della Borsa, ottobre 2025:** ha comprato per 36 milioni di € lo spazio di 560 m² affittato a Brunello Cucinelli, con la consulenza di **Cushman & Wakefield** 📰 ³².
-- **Warburg-HIH Invest (Germania), centro di Padova, 2015:** due immobili commerciali affittati a H&M e Zara, 39 milioni di € 📰 ³³. Il dato è vecchio.
 
-**Perché questi negozi sono nel gruppo B:** anche se sono negozi, i compratori sono fondi e le trattative passano da JLL o Cushman & Wakefield. Per Righetto conta il lato dell'**inquilino** (gruppo A2): sapere che un marchio estero cerca spazi in centro.
+**Per Righetto conta il lato dell'inquilino:** sapere che marchi come DM, Kave Home o Soeur cercano negozi in centro.
 
 ---
 
