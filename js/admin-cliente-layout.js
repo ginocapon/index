@@ -76,7 +76,7 @@ wrap.append(extra);
 original.replaceChildren(wrap);
 const preserved=document.createElement('details');preserved.className='legacy-preserved';const preservedTitle=document.createElement('summary');preservedTitle.textContent='Dati completi esistenti, conservati';preserved.append(preservedTitle);for(const id of ['clienteNome','clienteIndirizzo']){const el=document.getElementById(id);const cell=el?.closest('.legacy-field');if(cell)preserved.append(cell);}wrap.append(preserved);
 const birth=document.getElementById('clienteExtra_nascita_data');if(birth){const flag=document.createElement('span');flag.className='birthday-line';const check=document.createElement('input');check.type='checkbox';check.disabled=true;check.title='Invio automatico auguri non attivo';flag.append('Invia email auguri ',check);birth.closest('.legacy-field').classList.add('legacy-birth');birth.closest('.legacy-field').append(flag);}
-for(const key of ['documento_tipo','agente_assegnato']){const old=document.getElementById('clienteExtra_'+key);if(old){const select=document.createElement('select');select.id=old.id;select.dataset.clientExtra=key;select.append(new Option('scegli',''));old.replaceWith(select);}}
+for(const key of ['documento_tipo','agente_assegnato']){const old=document.getElementById('clienteExtra_'+key);if(old){const select=document.createElement('select');select.id=old.id;select.dataset.clientExtra=key;select.append(new Option('scegli',''));if(key==='documento_tipo')select.append(new Option("Carta d'identità","Carta d'identità"));old.replaceWith(select);}}
 // Reuse the canonical values already offered by the client-agent filter.
 // Never infer an assignment from the logged-in user or another client.
 function refreshClientAgentOptions(currentValue){
