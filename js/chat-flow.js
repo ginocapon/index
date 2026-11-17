@@ -6,7 +6,7 @@
 (function() {
 'use strict';
 
-const SUPABASE_URL = 'https://qwkwkemuabfwvwdqrxlu.supabase.co';
+const SUPABASE_URL = 'https://qwkwkemuabfwvwuqrxlu.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3a3drZW11YWJmd3Z3dXFyeGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTk5NjEsImV4cCI6MjA4NzE3NTk2MX0.JxEYiWVPEOiwjZtbWAZRlMUdKXcupjw7filvrERCiqc';
 
 // ══════════════════════════════════════════════
