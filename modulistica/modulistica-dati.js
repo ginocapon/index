@@ -36,13 +36,13 @@
   }
   function caricaImmobile(sb,codice){
     codice=pulisci(codice);
-    return sb.from('immobili').select('*').eq('codice',codice).limit(1).then(function(r){
-      if(r.error)throw new Error(r.error.message); var row=(r.data||[])[0]; if(!row)throw new Error('immobile non trovato: '+codice);
+    return sb.from('immobili').select('*').eq('codice',codice).limit(2).then(function(r){
+      if(r.error)throw new Error(r.error.message); if((r.data||[]).length>1)throw new Error('Codice presente su più schede: compilare manualmente dopo aver scelto ID e indirizzo esatti nel gestionale'); var row=(r.data||[])[0]; if(!row)throw new Error('immobile non trovato: '+codice);
       return sb.from('immobile_proprietari').select('cliente_id,ordine').eq('immobile_id',row.id).order('ordine').then(function(q){
-        var ids=(q.error?[]:(q.data||[])).map(function(x){return x.cliente_id;});
+        if(q.error)throw new Error(q.error.message);var ids=(q.data||[]).map(function(x){return x.cliente_id;});
         if(!ids.length) return {immobile:immobile(row),termini:termini(row),proprietari:[],nota:q.error?('proprietari non letti: '+q.error.message):'nessun proprietario collegato'};
         return sb.from('clienti').select('*').in('id',ids).then(function(c){
-          var by={}; (c.data||[]).forEach(function(x){by[x.id]=x;});
+          if(c.error)throw new Error(c.error.message);if((c.data||[]).length!==new Set(ids).size)throw new Error('Elenco proprietari incompleto');var by={}; (c.data||[]).forEach(function(x){by[x.id]=x;});
           return {immobile:immobile(row),termini:termini(row),proprietari:ids.filter(function(id){return by[id];}).map(function(id){return persona(by[id]);})};});
       });
     });
