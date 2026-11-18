@@ -1,10 +1,9 @@
 /**
- * REVIEW INVITE — Righetto Immobiliare (v3, foto Linda, attesa banner consensi)
+ * REVIEW INVITE — Righetto Immobiliare (v4, timer cumulativo fra pagine, aspetto invariato)
  * Invito non bloccante a lasciare una recensione su Google.
  * - Visibile a tutti i visitatori, nessuna selezione (niente gating, niente incentivi).
  * - Card piccola in basso a sinistra con la foto di Linda; non copre i contenuti.
- * - Compare UNA SOLA VOLTA per visita, dopo 60 secondi sulla pagina (scelta di Gino,
- *   9 nov 2026). Nessun trigger su apertura chat, scroll o uscita.
+ * - Compare UNA SOLA VOLTA per visita, dopo 60 secondi complessivi di visita nelle pagine coperte. Nessun trigger su apertura chat, scroll o uscita.
  * - X / "Non ora" / click sul bottone: non riappare per 30 giorni (localStorage, solo
  *   preferenza di chiusura: nessun tracking, nessun dato inviato).
  * - Testo EN automatico sulle pagine con <html lang="en">.
@@ -15,11 +14,15 @@
 (function () {
   'use strict';
 
+  if (window.__rigReviewInviteLoaded) return;
+  window.__rigReviewInviteLoaded = true;
+
   var REVIEW_URL = 'https://g.page/r/Cen8QVNvgrKKEAE/review';
   var PHOTO_URL = 'img/team/real-state-linda-righetto.webp?v=20260606';
   var KEY = 'rig_review_invite_hide';
   var SESSION_KEY = 'rig_review_invite_shown';
   var DAYS_HIDDEN = 30;
+  var ELAPSED_KEY = 'rig_review_invite_elapsed';
 
   var en = /^en/i.test(document.documentElement.lang || '');
   var T = en ? {
@@ -59,6 +62,9 @@
 
   function show() {
     if (document.getElementById('rig-review-invite')) return;
+    if (!demo) {
+      try { if (sessionStorage.getItem(SESSION_KEY)) return; } catch (e) {}
+    }
 
     var css = document.createElement('style');
     css.textContent =
@@ -94,6 +100,9 @@
       '<a class="rri-btn" href="' + REVIEW_URL + '" target="_blank" rel="noopener noreferrer">' + T.btn + '</a>' +
       '<button type="button" class="rri-later">' + T.later + '</button>';
     document.body.appendChild(card);
+    if (!demo) {
+      try { sessionStorage.setItem(SESSION_KEY, '1'); } catch (e) {}
+    }
 
     card.querySelector('.rri-close').addEventListener('click', function () { hide(true); });
     card.querySelector('.rri-later').addEventListener('click', function () { hide(true); });
@@ -126,18 +135,37 @@
     return;
   }
 
-  var shown = false;
+  var elapsed = 0;
   try {
-    if (window.sessionStorage && sessionStorage.getItem(SESSION_KEY)) shown = true;
+    if (sessionStorage.getItem(SESSION_KEY)) return;
+    elapsed = Number(sessionStorage.getItem(ELAPSED_KEY)) || 0;
   } catch (e) {}
+  elapsed = Math.max(0, Math.min(60000, elapsed));
+  var started = performance.now(), timer = null, pending = false, saved = false;
   function triggerShow() {
-    if (shown) return;
-    shown = true;
-    try { sessionStorage.setItem(SESSION_KEY, '1'); } catch (e) {}
+    if (pending) return;
+    pending = true;
     showWhenClear();
   }
-
-  /* Unico trigger: 60 secondi sulla pagina (steering Gino 9 nov 11:13).
-     Nessun trigger su apertura chat, scroll o uscita: non interrompere chi naviga. */
-  setTimeout(triggerShow, 60000);
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(triggerShow, Math.max(0, 60000 - elapsed));
+  }
+  function saveElapsed() {
+    if (saved) return;
+    saved = true;
+    clearTimeout(timer);
+    elapsed = Math.min(60000, elapsed + Math.max(0, performance.now() - started));
+    try { sessionStorage.setItem(ELAPSED_KEY, String(elapsed)); } catch (e) {}
+  }
+  // Preferenza e durata solo nella sessione del browser, nessun evento o dato inviato.
+  window.addEventListener('pagehide', saveElapsed);
+  window.addEventListener('pageshow', function (event) {
+    if (!event.persisted) return;
+    saved = false;
+    started = performance.now();
+    try { if (sessionStorage.getItem(SESSION_KEY)) return; } catch (e) {}
+    schedule();
+  });
+  schedule();
 })();
