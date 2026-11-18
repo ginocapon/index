@@ -32,7 +32,8 @@
     "righetto-zona": { "command": "/zona", "path": ".cursor/skills/righetto-zona/SKILL.md" },
     "righetto-acquisizione-proprietari": { "command": "/proprietari", "path": ".cursor/skills/righetto-acquisizione-proprietari/SKILL.md" },
     "righetto-advisor": { "command": "/advisor", "path": ".cursor/skills/righetto-advisor/SKILL.md" },
-    "righetto-premortem": { "command": "/premortem", "path": ".cursor/skills/righetto-premortem/SKILL.md" }
+    "righetto-premortem": { "command": "/premortem", "path": ".cursor/skills/righetto-premortem/SKILL.md" },
+    "righetto-jarvis": { "command": "/jarvis", "path": ".cursor/skills/righetto-jarvis/SKILL.md" }
   },
 
   "cursor_rules": {
@@ -125,6 +126,21 @@
       "cursor_rules": ["righetto-blog-publish.mdc"],
       "token_stimati": "~2.400",
       "note": "Report settimanale SKIMM + pillar + keyword libere — §8.1d SKILL-2.0, skimm.md §1.7–1.9"
+    },
+    "jarvis_silente": {
+      "trigger": "JARVIS | /jarvis | JARVIS ON",
+      "skills": [
+        "skill-jarvis-silente.md",
+        "skill-essentials.md",
+        "skill-memoria-progressi.md",
+        "skill-premortem-righetto.md",
+        "skill-efficienza-sito.md",
+        "skill-acquisizione-proprietari.md"
+      ],
+      "cursor_skills": ["righetto-jarvis"],
+      "data": ["docs/PROMPT-JARVIS-RIGHETTO.md"],
+      "token_stimati": "~2.200",
+      "note": "Sistema silente autonomo: osserva/prepara/report; default L2; mai publish senza ok Gino"
     },
     "trigger_skill_venerdi": {
       "trigger": "\"SKILL\"",
