@@ -1,5 +1,5 @@
 import {createSpeedReader}from './speed-private-reader.mjs';
-import {createSpeedUI}from './speed-ui.mjs';
+import {createSpeedUI}from './speed-ui.mjs?v=20261118-growth-v1';
 const OWNER='5f55e259-0d0b-46d9-8d77-17ab33db0fdf';
 let active=null,epoch=0;
 function stop(){epoch++;active?.reader?.stop();active?.ui?.destroy();active?.pageHost?.remove();active?.stripHost?.remove();active=null;}
@@ -9,7 +9,7 @@ async function sync(){syncMobile();document.querySelectorAll('nav [data-section=
  const pageHost=document.createElement('section'),stripHost=document.createElement('aside');section.replaceChildren(pageHost);home.prepend(stripHost);
  // Scope styles within shadow roots, no old admin CSS overwritten.
  const state={reader:null,ui:null,pageHost,stripHost};active=state;
- try{const response=await fetch(new URL('./speed.css',import.meta.url));if(!response.ok)throw Error('Stile non disponibile');const css=await response.text();if(active!==state||ticket!==epoch)return;const ui=createSpeedUI({pageHost,stripHost,css,openSpeed:()=>window.showSection('analytics')});state.ui=ui;ui.loading();state.reader=createSpeedReader({sb,onClear:()=>ui.clear()});const result=await state.reader.read();if(active!==state||ticket!==epoch)return;if(result.state==='empty')ui.clear('Archivio Speed vuoto. Nessun dato da mostrare.');else ui.setRows(result.rows);
+ try{const response=await fetch(new URL('./speed.css?v=20261118-growth-v1',import.meta.url));if(!response.ok)throw Error('Stile non disponibile');const css=await response.text();if(active!==state||ticket!==epoch)return;const ui=createSpeedUI({pageHost,stripHost,css,openSpeed:()=>window.showSection('analytics')});state.ui=ui;ui.loading();state.reader=createSpeedReader({sb,onClear:()=>ui.clear()});const result=await state.reader.read();if(active!==state||ticket!==epoch)return;if(result.state==='empty')ui.clear('Archivio Speed vuoto. Nessun dato da mostrare.');else ui.setRows(result.rows);
  }catch(error){if(active===state){if(state.ui)state.ui.clear('Dati Speed non verificati. Nessun valore confermato.');else pageHost.textContent='Speed non disponibile. Nessun valore confermato.';}}
 }
 window.addEventListener('righetto:section-ready',sync);
