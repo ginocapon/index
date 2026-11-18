@@ -6,6 +6,9 @@ description: >-
   testo post Instagram/Facebook, agenda righetto_social, rotazione catalogo immobili,
   reel, token Meta, o mirror GBP.
 ---
+> REVISIONE APPROVATA 18/11/2026: applicare prima `TEST-SKILL/skill-pubblico-qualificato.md`. Le parti sotto su volumi, link Meta, orari e pubblicazione automatica sono storiche se discordanti con questa procedura e con l'ok specifico di Gino. Nessuna nuova uscita o spesa è autorizzata dal presente documento.
+
+
 
 # Social Righetto
 

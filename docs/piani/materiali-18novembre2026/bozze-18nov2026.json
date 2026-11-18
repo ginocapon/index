@@ -1,0 +1,77 @@
+{
+  "uso": "preparazione non eseguibile dal pubblicatore",
+  "items": [
+    {
+      "id": "valore-ig-01",
+      "canale": "instagram",
+      "persona": "proprietario che valuta la vendita a Padova",
+      "problema": "decidere da quale prezzo partire",
+      "apertura": "Il prezzo del vicino basta per valutare casa tua?",
+      "corpo": "Zona, condizioni e confronti pertinenti: il valore non si decide copiando un annuncio.",
+      "cta": "Parliamone: 049 8843484",
+      "destinazione": "contatto_telefono",
+      "fonti": [
+        "https://righettoimmobiliare.it/servizio-valutazioni"
+      ],
+      "stato": "bozza_da_approvare",
+      "media": "da_selezionare",
+      "approvazione": null,
+      "pubblicazione_abilitata": false,
+      "metrica": "richieste_pertinenti",
+      "hashtag": [
+        "#RighettoImmobiliare",
+        "#Padova",
+        "#VendereCasa",
+        "#ValutazioneImmobiliare"
+      ]
+    },
+    {
+      "id": "valore-fb-01",
+      "canale": "facebook",
+      "persona": "proprietario che valuta la vendita a Padova",
+      "problema": "decidere da quale prezzo partire",
+      "apertura": "Il prezzo del vicino non basta per decidere il tuo.",
+      "corpo": "Zona, condizioni e confronti pertinenti vanno letti insieme.",
+      "cta": "Righetto Immobiliare: 049 8843484",
+      "destinazione": "contatto_telefono",
+      "fonti": [
+        "https://righettoimmobiliare.it/servizio-valutazioni"
+      ],
+      "stato": "bozza_da_approvare",
+      "media": "da_selezionare",
+      "approvazione": null,
+      "pubblicazione_abilitata": false,
+      "metrica": "richieste_pertinenti",
+      "hashtag": [
+        "#RighettoImmobiliare",
+        "#Padova",
+        "#VendereCasa",
+        "#ValutazioneImmobiliare"
+      ]
+    },
+    {
+      "id": "valore-gbp-01",
+      "canale": "google_business",
+      "persona": "proprietario che valuta la vendita a Padova",
+      "problema": "decidere da quale prezzo partire",
+      "apertura": "Stai pensando di vendere a Padova?",
+      "corpo": "Una stima parte dal tuo immobile e dai confronti della zona, non soltanto dal prezzo degli annunci.",
+      "cta": "Scopri come lavoriamo",
+      "destinazione": "https://righettoimmobiliare.it/servizio-valutazioni",
+      "fonti": [
+        "https://righettoimmobiliare.it/servizio-valutazioni"
+      ],
+      "stato": "bozza_da_approvare",
+      "media": "da_selezionare",
+      "approvazione": null,
+      "pubblicazione_abilitata": false,
+      "metrica": "richieste_pertinenti",
+      "hashtag": [
+        "#RighettoImmobiliare",
+        "#Padova",
+        "#VendereCasa",
+        "#ValutazioneImmobiliare"
+      ]
+    }
+  ]
+}

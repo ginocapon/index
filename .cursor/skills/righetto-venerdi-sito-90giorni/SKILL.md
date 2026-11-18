@@ -7,6 +7,9 @@ description: >-
   or Righetto marketing rhythm. When the user writes **"SKILL"** (in quotes) on Friday,
   program the day's improvement work — read skill-competitor-roadmap-q3-2026.md §8.
 ---
+> REVISIONE APPROVATA 18/11/2026: applicare prima `TEST-SKILL/skill-pubblico-qualificato.md`. Le parti sotto su volumi, link Meta, orari e pubblicazione automatica sono storiche se discordanti con questa procedura e con l'ok specifico di Gino. Nessuna nuova uscita o spesa è autorizzata dal presente documento.
+
+
 
 # Righetto: venerdì operativo + ciclo 12 settimane
 

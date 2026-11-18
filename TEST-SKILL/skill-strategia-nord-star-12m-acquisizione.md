@@ -1,3 +1,6 @@
+
+> REVISIONE APPROVATA 18/11/2026: applicare prima `TEST-SKILL/skill-pubblico-qualificato.md`. Le parti sotto su volumi, link Meta, orari e pubblicazione automatica sono storiche se discordanti con questa procedura e con l'ok specifico di Gino. Nessuna nuova uscita o spesa è autorizzata dal presente documento.
+
 # Strategia Nord Star — acquisizione 12 mesi
 
 > **Aggiornato:** 9 ottobre 2026  

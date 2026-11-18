@@ -1,3 +1,6 @@
+
+> REVISIONE APPROVATA 18/11/2026: applicare prima `TEST-SKILL/skill-pubblico-qualificato.md`. Le parti sotto su volumi, link Meta, orari e pubblicazione automatica sono storiche se discordanti con questa procedura e con l'ok specifico di Gino. Nessuna nuova uscita o spesa è autorizzata dal presente documento.
+
 # Skill — Automazione social Meta + Google Business (`righetto_social/`)
 
 **Versione:** 26 giugno 2026 — §2b link social `share-immobile-*` (OG) vs URL sito `immobile?s=` (SEO); §2b.1 invariato.  
