@@ -6,3 +6,6 @@
 @media(max-width:760px){.ad-reminders{display:none!important}}
 
 .lr-demo{background:#fff1bd;padding:8px;font-size:12px;font-weight:bold}.lr-check{display:flex!important;flex-direction:row!important;align-items:center;gap:10px;padding:12px 0}.lr-check input{width:22px!important;height:22px!important;flex:none}.lr-next{padding:12px;background:#e7f3ec;border-left:4px solid #176147;font-weight:bold}.lr-agenda-item{background:color-mix(in srgb,var(--ad-color) 23%,white)!important;border-left:6px solid var(--ad-color)!important}.lr-selector-manage{font-size:12px;padding:6px}[data-ra-label-day][hidden]{display:none}
+
+/* Keep the existing appointment above the activity in the shared 09:00 cell. */
+.ra .ra-slot:has(>[data-ra-activity-day]:not([hidden])) .ra-slot-card .ra-event{height:auto}
