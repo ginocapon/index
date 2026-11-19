@@ -231,10 +231,10 @@ async function generaValutazionePDF(dati) {
   doc.setTextColor(...purple);
   doc.text('049.8843484', ctaX, y + 41);
   doc.setTextColor(...fire);
-  doc.text('WhatsApp: 349 736 5930', ctaX, y + 49);
+  doc.text('WhatsApp: 348 862 1888', ctaX, y + 49);
 
   // QR Code WhatsApp
-  const waUrl = 'https://wa.me/393497365930?text=' + encodeURIComponent('Ciao! Ho appena fatto una valutazione online del mio immobile a ' + (dati.comune || 'Padova') + '. Vorrei saperne di piu\'!');
+  const waUrl = 'https://wa.me/393488621888?text=' + encodeURIComponent('Ciao! Ho appena fatto una valutazione online del mio immobile a ' + (dati.comune || 'Padova') + '. Vorrei saperne di piu\'!');
   try {
     const qrCanvas = generateQRSvg(waUrl, 150);
     if (qrCanvas) {

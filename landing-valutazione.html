@@ -413,7 +413,7 @@ img{max-width:100%;height:auto;display:block}
           </div>
           <div class="val-sopralluogo-cta">
             <a class="val-cta-primary" href="servizio-valutazioni#richiedi">Prenota il sopralluogo</a>
-            <p class="val-cta-secondary">Preferisci parlare subito? <a href="tel:+390498843484">049.8843484</a> · <a href="https://wa.me/393497365930?text=Ho%20fatto%20la%20stima%20online%20su%20righettoimmobiliare.it%20—%20vorrei%20fissare%20un%20sopralluogo%20gratuito." target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+            <p class="val-cta-secondary">Preferisci parlare subito? <a href="tel:+390498843484">049.8843484</a> · <a href="https://wa.me/393488621888?text=Ho%20fatto%20la%20stima%20online%20su%20righettoimmobiliare.it%20—%20vorrei%20fissare%20un%20sopralluogo%20gratuito." target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
           </div>
           <button class="val-pdf-btn" id="valPdfBtn" style="display:none" onclick="scaricaPDF()">📄 Scarica scheda PDF</button>
           <div class="val-pdf-notice" id="valPdfNotice" style="display:none">
@@ -504,7 +504,7 @@ img{max-width:100%;height:auto;display:block}
   <a href="#form" class="cta-btn">📊 Scopri il valore della tua casa</a>
   <div class="cta-channels">
     <div class="cta-ch">📞 <a href="tel:+390498843484">049.8843484</a></div>
-    <div class="cta-ch">💬 <a href="https://wa.me/393497365930" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
+    <div class="cta-ch">💬 <a href="https://wa.me/393488621888" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
   </div>
 </section>
 
@@ -527,8 +527,8 @@ img{max-width:100%;height:auto;display:block}
 </footer>
 
 <script src="js/vendor/supabase.min.js" defer></script>
-<script src="js/config.js?v=4"></script>
-<script src="js/valutazione-pdf.js?v=3" defer></script>
+<script src="js/config.js?v=contact17"></script>
+<script src="js/valutazione-pdf.js?v=contact17" defer></script>
 <script>
 var _pdfDeps = null;
 function caricaLibPDF() {
@@ -636,7 +636,7 @@ function mostraRisultatoValutazione(dati) {
   // QR Code WhatsApp
   try {
     const qrDiv = document.getElementById('valQr');
-    const waUrl = 'https://wa.me/393497365930?text=' + encodeURIComponent('Ciao! Ho appena fatto una valutazione online del mio immobile a ' + (dati.comune || 'Padova') + '. Vorrei saperne di piu\'!');
+    const waUrl = 'https://wa.me/393488621888?text=' + encodeURIComponent('Ciao! Ho appena fatto una valutazione online del mio immobile a ' + (dati.comune || 'Padova') + '. Vorrei saperne di piu\'!');
     if (typeof QRCode !== 'undefined') {
       new QRCode(qrDiv, { text: waUrl, width: 120, height: 120, correctLevel: QRCode.CorrectLevel.M });
       qrDiv.innerHTML += '<p>Inquadra per scriverci su WhatsApp</p>';
@@ -655,7 +655,7 @@ function mostraRisultatoValutazione(dati) {
 }
 </script>
 <script>/* Chatbot lazy: carica dopo 3s o al primo scroll/touch */
-(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=18';document.body.appendChild(s);}
+(function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='js/chatbot.js?v=contact17';document.body.appendChild(s);}
 setTimeout(l,3000);['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,l,{once:true,passive:true});});
 })();</script>
 <script src="js/lead-conversion.js?v=5" defer></script>

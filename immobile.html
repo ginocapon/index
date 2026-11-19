@@ -756,7 +756,7 @@
 <script src="js/supabase-bridge.js?v=1"></script>
 <script src="js/media-url.js?v=1"></script>
 <script src="js/mq-pubblici.js?v=1"></script>
-<script src="js/config.js?v=4"></script>
+<script src="js/config.js?v=contact17"></script>
 <script src="js/prop-photo-carousel.js?v=3"></script>
 <script>
 // ══ CONFIG ══
@@ -1033,7 +1033,7 @@ function render(d) {
     ['Esposizione', d.esposizione || '—'],
     ['Panorama', cap(d.panorama || '—')],
     ['Riferimento', d.codice || '—'],
-    ['Agente', 'Capon Gino'],
+    ['Agente', RighettoContacts.resolve(d) ? RighettoContacts.resolve(d).name : 'Scegli il referente'],
   ].filter(r => r[1] && r[1] !== '—');
 
   document.getElementById('charLeft').innerHTML = left.map(r =>
@@ -1101,9 +1101,25 @@ function render(d) {
   }
   document.getElementById('priceRows').innerHTML = priceRows;
 
+  if (window.RighettoContacts) {
+    RighettoContacts.setContext(d);
+    const p = RighettoContacts.resolve(d);
+    document.querySelector('.agent-name').textContent = p ? p.name : 'Scegli il referente';
+    document.querySelector('.agent-av').textContent = p ? p.name.charAt(0) : 'R';
+    document.querySelector('.agent-title').textContent = p && p.name === 'Linda Righetto' ? 'Affitti residenziali e studenti' : 'Vendite, affitti commerciali e altri servizi';
+    const contacts = document.querySelector('.agent-contacts');
+    const links = contacts.querySelectorAll('a');
+    if (p) {
+      links[0].href = 'tel:+' + p.phone; links[0].dataset.rigOwner = RighettoContacts.classify(d); links[0].lastChild.textContent = ' ' + p.display + ' (cell.)';
+      links[2].href = 'mailto:' + p.email; links[2].lastChild.textContent = ' ' + p.email;
+    } else {
+      links[0].href = '/contatti?tipo=affitto'; links[0].lastChild.textContent = ' Scegli il referente';
+      const choice = document.createElement('div'); choice.innerHTML = RighettoContacts.html('choose'); contacts.appendChild(choice);
+    }
+  }
   // WhatsApp link
   const waMsg = encodeURIComponent('Ciao, mi interessa l\'immobile ' + (d.codice || d.titolo || '') + ' — ' + (d.comune || 'Padova'));
-  document.getElementById('waLink').href = `https://wa.me/393488621888?text=${waMsg}`;
+  document.getElementById('waLink').href = (RighettoContacts.resolve(d) ? 'https://wa.me/' + RighettoContacts.resolve(d).phone + '?text=' + waMsg : '/contatti?tipo=affitto');
 
   // Form subtitle
   document.getElementById('formSubtitle').textContent = 'Ti risponderemo entro 24 ore — Rif. ' + (d.codice || '');
@@ -1407,7 +1423,7 @@ function visitaLiveGuidata() {
   if (typeof gtag === 'function') {
     gtag('event', 'visita_live_click', { event_category: 'immobile', event_label: cod || tit });
   }
-  window.open('https://wa.me/393488621888?text=' + encodeURIComponent(testo), '_blank', 'noopener,noreferrer');
+  window.open((RighettoContacts.resolve(d) ? 'https://wa.me/' + RighettoContacts.resolve(d).phone + '?text=' + encodeURIComponent(testo) : '/contatti?tipo=affitto'), '_blank', 'noopener,noreferrer');
 }
 async function sendForm() {
   const nome = document.getElementById('f-nome').value.trim();

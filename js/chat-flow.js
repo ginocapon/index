@@ -345,6 +345,7 @@ ChatFlow.prototype.saveToSupabase = function(isFinal) {
 ChatFlow.prototype.playStep = function() {
   var self = this;
   if (this.currentStep >= this.steps.length) {
+    if (window.RighettoContacts) this.addBubble(window.RighettoContacts.html('gino'), 'bot', 0);
     this.onComplete(this.data);
     return;
   }

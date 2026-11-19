@@ -1568,6 +1568,7 @@ window.RIGHETTO_FAQ_DATA = FAQ_DATA;
 // ══════════════════════════════════════════════
 class RighettoChat {
   constructor() {
+    this.contactRoute = null;
     this.messages = [];
     this.state = 'idle'; // idle | stima_* | venditore_padova_* | contatto_* | ricerca_tipo_op | ricerca_zona
     this.stimaData = {};
@@ -1777,8 +1778,39 @@ class RighettoChat {
 
   // ────── ELABORA MESSAGGIO ──────
   async process(userMsg) {
+    const collecting = /^(contatto_|stima_|venditore_)/.test(this.state);
+    const answer = await this.processCore(userMsg);
+    const cr = window.RighettoContacts;
+    if (!collecting && cr && /affitt|locaz|student|stanza|camera|vendit|acquist/.test(userMsg.toLowerCase()) && !answer.includes(cr.people.linda.email) && !answer.includes(cr.people.gino.email)) return answer + '\n\n' + cr.plain(this.contactRoute || 'gino');
+    return answer;
+  }
+
+  async processCore(userMsg) {
     const msg = userMsg.trim();
     const low = msg.toLowerCase();
+    const cr = window.RighettoContacts;
+    const contactQuestion = /recapit|telefon|numero|mail|whatsapp|parlare con|chi.*contatt/.test(low);
+    if (cr && contactQuestion && /\b(?:gino|linda)\b/.test(low)) {
+      const gino = /\bgino\b/.test(low), linda = /\blinda\b/.test(low);
+      this.contactRoute = gino && linda ? 'choose' : linda ? 'linda' : 'gino';
+      if (this.state === 'contatto_referente') this.state = 'idle';
+      return cr.plain(this.contactRoute);
+    }
+    if (cr && this.state === 'contatto_referente') {
+      const newOperation = /affitt|locaz|rent|vendit|vendere|acquist|comprar|mutuo|valutaz|stima/.test(low);
+      const qualified = /residenzial|student|casa|appartament|stanza|commercial|uffici|negozi|capannon|altro/.test(low);
+      this.contactRoute = newOperation ? cr.fromText(msg) : qualified ? cr.classify({op:'affitto',tipo:msg}) : 'choose';
+      if (low.trim() === 'altro') this.contactRoute = 'gino';
+      if (this.contactRoute === 'choose') return 'Si tratta di un affitto residenziale/studenti o commerciale?';
+      this.state = 'idle';
+      return cr.plain(this.contactRoute);
+    }
+    if (cr && !/^contatto_/.test(this.state) && /affitt|locaz|student|stanza|camera|vendit|acquist|comprar|mutuo|valutaz/.test(low)) this.contactRoute = cr.fromText(msg);
+    if (cr && this.state === 'idle' && /recapit|telefono|numero|mail|whatsapp|parlare con|chi.*contatt/.test(low)) {
+      if (this.contactRoute === 'choose') { this.state = 'contatto_referente'; return 'Si tratta di un affitto residenziale/studenti o commerciale?'; }
+      return cr.plain(this.contactRoute || 'gino');
+    }
+
 
     // ── STATO: raccolta dati stima ──
     if (this.state === 'stima_comune') {
@@ -1937,7 +1969,7 @@ class RighettoChat {
     if ((!domandaInfo || /contattat|richiam|appuntament|essere chiamat|farmi chiamare/.test(low)) && /contatt|chiamat|appuntam|richiama|visita|veder|incontr|form/.test(low)) {
       this.state = 'contatto_nome';
       this.contattoPending = { provenienza: 'chatbot' };
-      return '👋 Ottimo! Ti ricontatteremo al più presto.\n\n**Come ti chiami?** (Nome e Cognome)';
+      return (cr ? cr.plain(this.contactRoute || 'gino') + '\n\n' : '') + '👋 Ottimo! Ti ricontatteremo al più presto.\n\n**Come ti chiami?** (Nome e Cognome)';
     }
 
     // Ricerca immobili — avvia flusso conversazionale
@@ -1972,7 +2004,8 @@ class RighettoChat {
     // FAQ (con fuzzy matching per errori di battitura)
     for (const faq of FAQ_DATA) {
       if (this.fuzzyMatchKeyword(low, faq.k)) {
-        return righettoFaqReply(faq);
+        const reply = righettoFaqReply(faq);
+        return cr && /affitt|locaz|contatt|telefon|numero|mail|whatsapp/.test(low) ? reply.replace(/349 736 5930/g, this.contactRoute === 'linda' ? cr.people.linda.display : cr.people.gino.display) + '\n\n' + cr.plain(this.contactRoute || 'gino') : reply;
       }
     }
 
@@ -2132,10 +2165,11 @@ class RighettoChat {
   // ────── INVIA RICHIESTA ──────
   async inviaRichiesta() {
     const ok = await this.salvaRichiesta(this.contattoPending);
+    const contact = window.RighettoContacts ? window.RighettoContacts.plain(this.contactRoute || 'gino') : ''; 
     if (ok) {
-      return '✅ **Richiesta inviata!**\n\nUn nostro agente ti contatterà **appena possibile**.\n\n📞 Urgente? Chiamaci al **049.8843484**\n\nGrazie per aver scelto Righetto Immobiliare! 🏠';
+      return contact + '\n\n' + '✅ **Richiesta inviata!**\n\nUn nostro agente ti contatterà **appena possibile**.\n\n📞 Urgente? Chiamaci al **049.8843484**\n\nGrazie per aver scelto Righetto Immobiliare! 🏠';
     } else {
-      return '⚠️ Non riesco a salvare la richiesta al momento.\n\n📞 Chiama direttamente: **049.8843484**\n📧 Email: **info@righettoimmobiliare.it**';
+      return contact + '\n\n' + '⚠️ Non riesco a salvare la richiesta al momento.\n\n📞 Chiama direttamente: **049.8843484**\n📧 Email: **info@righettoimmobiliare.it**';
     }
   }
 }
