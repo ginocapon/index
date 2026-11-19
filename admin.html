@@ -18149,7 +18149,7 @@ var groups=[
  ['Clienti e contatti','blue',[['clienti','Clienti','Rubrica e incroci'],['richieste','Richieste','Contatti dal sito']]],
  ['Aste','red',[['aste','Aste Veneto','Elenco e guida']]],
  ['Marketing','blue',[['blog','Blog','Articoli del sito'],['emailmarketing','Email marketing','Campagne'],['landing','Landing pages','Pagine campagna']]],
- ['Controllo','blue',[['analytics','Search Console','Rendimento su Google'],['impostazioni','Impostazioni','Configurazione']]]
+ ['Controllo','blue',[['analytics','Speed',"Il cruscotto dell’agenzia"],['impostazioni','Impostazioni','Configurazione']]]
 ];
 var icon='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M12 8v8"/></svg>';
 home.innerHTML='<section id="righetto-operational-agenda" style="margin-bottom:25px"></section><section id="righetto-attivita-preview" aria-label="Anteprima Attività"></section><section id="righetto-attivita" style="margin-bottom:25px"></section>';
@@ -18171,12 +18171,12 @@ navGroup('Clienti',[['clienti','Elenco clienti / proprietari'],['new-client','Nu
 var activities=document.createElement('a');activities.href=navUrl('attivita');activities.style.textDecoration='none';activities.className='rh-nav-direct';activities.dataset.section='attivita';activities.textContent='Attività';activities.onclick=function(e){if(e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();closeNavMenus();window.showSection('attivita');};nav.appendChild(activities);
 navGroup('Aste',[['aste','Aste Veneto']]);
 navGroup('Marketing',[['blog','Blog'],['emailmarketing','Email marketing'],['landing','Landing pages']]);
-navGroup('Controllo',[['analytics','Search Console'],['impostazioni','Impostazioni']]);
+navGroup('Controllo',[['analytics','Speed'],['impostazioni','Impostazioni']]);
 wrap.remove();
 document.addEventListener('pointerdown',function(e){if(!nav.contains(e.target))closeNavMenus();});
 document.querySelector('.content').insertBefore(nav,home);
 
-var searchConsole=document.createElement('div');searchConsole.id='sec-searchconsole';searchConsole.className='section';searchConsole.innerHTML='<div class="rh-soon"><h2>Google Search Console</h2><span class="rh-chip">In arrivo</span><p style="margin-top:16px">Il collegamento automatico a Google Search Console non è ancora attivo. Qui appariranno clic, impressioni, CTR e posizione media, con filtro per date.</p><div class="rh-metric-list"><div style="--accent:#4285f4">Clic totali<strong>—</strong>Dati non collegati</div><div style="--accent:#673ab7">Impressioni totali<strong>—</strong>Dati non collegati</div><div style="--accent:#00897b">CTR media<strong>—</strong>Dati non collegati</div><div style="--accent:#e8710a">Posizione media<strong>—</strong>Dati non collegati</div></div><p>Nessun grafico o numero inventato. Il collegamento sarà completato dopo il lavoro sulla sicurezza.</p></div>';
+var searchConsole=document.createElement('div');searchConsole.id='sec-searchconsole';searchConsole.className='section';searchConsole.innerHTML='<div class="rh-soon"><h2>Speed</h2><p>Caricamento del cruscotto riservato. I dati vengono mostrati solo dopo la verifica dell’accesso.</p><p>Letture archiviate, non un collegamento automatico a Google. Un dato assente non vale zero.</p></div>';
 document.querySelector('.content').appendChild(searchConsole);
 var back=document.createElement('button');back.type='button';back.className='admin-home-back';back.textContent='← Home admin';back.onclick=function(){window.showSection('home');};document.querySelector('.topbar').prepend(back);
 var logout=document.createElement('button');logout.type='button';logout.className='admin-home-back';logout.textContent='Esci';logout.onclick=function(){window.doLogout();};document.querySelector('.topbar-actions').appendChild(logout);
@@ -18186,7 +18186,7 @@ window.showSection=function(name){
  if(name==='home'||name==='analytics'||name==='agenda'||name==='attivita'){
  document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
  document.getElementById(name==='analytics'?'sec-searchconsole':'sec-home').classList.add('active');
- document.getElementById('topbarTitle').textContent=name==='analytics'?'Google Search Console':'Home admin';
+ document.getElementById('topbarTitle').textContent=name==='analytics'?'Speed':'Home admin';
  }else{oldShowSection(name);}
  back.style.display=name==='home'?'none':'inline-flex';
  window.dispatchEvent(new Event('righetto:section-ready'));
@@ -18250,7 +18250,7 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script type="module" src="js/entity-label-reminders-entry.mjs?v=20261115-label-close-v1"></script>
 <script type="module" src="js/activity-deadlines-entry.mjs?v=20261118-activity0900-v1"></script>
 <link rel="stylesheet" href="css/admin-ampliamento.css?v=20261115-uniform-activities-v1"><script type="module" src="js/activity-features-entry.mjs?v=20261115-label-close-v1"></script>
-<script type="module" src="js/speed-entry.mjs?v=20261118-relations-v1"></script>
+<script type="module" src="js/speed-entry.mjs?v=20261119-access-v1"></script>
 </body>
 </html>
 
