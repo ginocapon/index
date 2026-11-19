@@ -2334,7 +2334,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         Immobili
       </div>
-      <div class="nav-item" onclick="showSection('nuovo')">
+      <div class="nav-item" onclick="resetForm()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
         Nuovo Immobile
       </div>
@@ -2432,7 +2432,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           Vedi sito
         </a>
-        <button class="btn btn-primary btn-sm" onclick="showSection('nuovo')">
+        <button class="btn btn-primary btn-sm" onclick="resetForm()">
           + Nuovo
         </button>
       </div>
@@ -6654,10 +6654,13 @@ function resetForm() {
  if(window.RighettoNavigation&&!RighettoNavigation.allowClose())return;
  if(window.RighettoLabels&&!RighettoLabels.dispose())return;
   if(rigPropertySaving){toast('Salvataggio in corso: attendi prima di azzerare la scheda.','error');return;}
+  ++rigPropertyReadEpoch;
   rigPropertySnapshot=null;
+  document.getElementById('btnSalva').disabled=false;
   document.getElementById('immobileForm').reset();
   document.getElementById('editId').value = '';
   document.getElementById('formTitle').textContent = 'Nuovo Immobile';
+  document.getElementById('topbarTitle').textContent = 'Nuovo Immobile';
   window.RighettoPropertyTypes?.reset();
   document.getElementById('f_attivo').checked = true;
   clearProprietarioSelection();
@@ -7228,6 +7231,7 @@ async function saveImmobile(e) {
  window.RighettoLabels?.dispose(true);
     document.getElementById('editId').value = '';
     document.getElementById('formTitle').textContent = 'Nuovo Immobile';
+  document.getElementById('topbarTitle').textContent = 'Nuovo Immobile';
   window.RighettoPropertyTypes?.reset();
     document.getElementById('immobileForm').reset();
     document.getElementById('f_attivo').checked = true;
@@ -18159,7 +18163,7 @@ document.querySelector('.content').prepend(home);
 wrap.classList.add('rh-top-navigation');wrap.setAttribute('aria-label','Navigazione gestionale');
 var nav=document.createElement('nav');nav.className='rh-menu-top';
 function closeNavMenus(except){nav.querySelectorAll('details').forEach(function(d){if(d!==except)d.open=false;});}
-function navCommand(kind){closeNavMenus();if(kind==='new-event'){window.showSection('agenda');if(window.RighettoAgenda)window.RighettoAgenda.newEvent();}else if(kind==='new-client'){window.showSection('clienti');if(window.openClienteModal)window.openClienteModal();}else if(kind==='new-property'){window.showSection('nuovo');}}
+function navCommand(kind){closeNavMenus();if(kind==='new-event'){window.showSection('agenda');if(window.RighettoAgenda)window.RighettoAgenda.newEvent();}else if(kind==='new-client'){window.showSection('clienti');if(window.openClienteModal)window.openClienteModal();}else if(kind==='new-property'){window.resetForm();}}
 function positionNavMenus(){if(innerWidth<=760){var bottom=nav.getBoundingClientRect().bottom;nav.querySelectorAll('.rh-grid').forEach(function(list){list.style.top=(bottom+4)+'px';});}else{nav.querySelectorAll('.rh-grid').forEach(function(list){list.style.top='';});}}
 window.addEventListener('resize',positionNavMenus);window.addEventListener('scroll',positionNavMenus,{passive:true});
 function navUrl(section){var u=new URL(location.pathname,location.origin);if(section==='new-property')u.hash='nuovo';else if(section==='new-client'){u.hash='clienti';u.searchParams.set('azione','nuovo-cliente');}else if(section==='new-event'){u.hash='agenda';u.searchParams.set('azione','nuovo-appuntamento');}else u.hash=section;return u.href;}
