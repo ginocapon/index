@@ -1,4 +1,4 @@
-import{countKeys,countLabels,countChoices,normalizeCounts}from'./request-counts.mjs?v=20261109-counts-v1';
+import{countKeys,countLabels,countChoices,normalizeCounts}from'./request-counts.mjs?v=20261119-requests-full-v1';
 export function countSummary(raw){if(!raw)return[];try{const c=normalizeCounts(raw);return countKeys.filter(k=>c[k]!=='unset').map(k=>countLabels[k]+': '+(c[k]==='gt3'?'più di 3':c[k]));}catch{return['Conteggi non supportati, originali conservati'];}}
 export function mountCountRollers(host,raw,{readOnly=false}={}){
  const counts=normalizeCounts(raw)||Object.fromEntries(countKeys.map(k=>[k,'unset']));

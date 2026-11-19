@@ -1,6 +1,7 @@
+import{compareFeatures}from'./request-features.mjs?v=20261119-requests-full-v1';
 import{additionalChains,compareTypeChains}from'./property-types.mjs';
-import{compareCounts}from'./request-counts.mjs?v=20261109-counts-v1';
-import{normalizeRequest}from'./requests-core.mjs?v=20261109-counts-v1';
+import{compareCounts}from'./request-counts.mjs?v=20261119-requests-full-v1';
+import{normalizeRequest}from'./requests-core.mjs?v=20261119-requests-full-v1';
 import{validateRequestIds}from'./request-dictionaries.mjs';
 const norm=v=>String(v??'').trim().toLocaleLowerCase('it-IT');
 export function dictionaryLookup(d){const kinds={};for(const kind of ['municipalities','specific','detailed']){kinds[kind]=new Map();for(const[id,row]of Object.entries(d[kind])){const key=norm(row.label);if(!kinds[kind].has(key))kinds[kind].set(key,[]);kinds[kind].get(key).push(id);}}return kinds;}
@@ -23,6 +24,7 @@ export function matchEditableRequest(request,property,d,sourceGeographies=[],loo
  const contracts={vendita:'acquisto',affitto_residenziale:'affitto',affitto_commerciale:'affitto'};const contract=contracts[property.tipo_operazione];if(!contract)unknown.push('Contratto immobile non riconosciuto');else if(!c.contracts.includes(contract))failed.push('Contratto diverso');else checked.push('Contratto');
  if(property.tipo_operazione==='affitto_residenziale'&&typeSector==='commerciale'||property.tipo_operazione==='affitto_commerciale'&&typeSector==='residenziale')unknown.push('Contratto e tipologia correnti in conflitto');
  for(const[key,field,label]of [['budget','prezzo','Prezzo'],['area','superficie','Superficie']]){const range=c[key];if(range.min==null&&range.max==null)continue;const value=property[field];if(typeof value!=='number'||!Number.isFinite(value)||value<=0)unknown.push(label+' non verificato');else if(range.min!=null&&value<range.min||range.max!=null&&value>range.max)failed.push(label+' fuori intervallo');else checked.push(label);}
+ const features=compareFeatures(c.features,property);failed.push(...features.failed);unknown.push(...features.unknown);checked.push(...features.checked);
  const counts=compareCounts(c.counts,property);failed.push(...counts.failed);unknown.push(...counts.unknown);checked.push(...counts.checked);
  return{...finish(),canonical,matched_type_chain:typeComparison.matched_chain??null};
 }

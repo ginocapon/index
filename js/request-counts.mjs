@@ -1,6 +1,6 @@
 export const countKeys=['camere','bagni','posto_auto','locali'];
 export const countLabels={camere:'Camere',bagni:'Bagni',posto_auto:'Posto auto',locali:'Numero locali'};
-export const countChoices=[['unset','Non definito'],['0','0'],['1','1'],['2','2'],['3','3'],['gt3','più di 3']];
+export const countChoices=[['unset','Non definito'],['0','0'],['1','1'],['2','2'],['3','3'],['gt3','più di 3'],...Array.from({length:27},(_,i)=>[String(i+4),String(i+4)])];
 export function normalizeCounts(raw){if(raw===undefined)return undefined;if(!raw||typeof raw!=='object'||Array.isArray(raw)||Object.keys(raw).length!==4||countKeys.some(k=>!countChoices.some(([v])=>v===raw[k])))throw Error('Conteggi non supportati: riaprire senza modificare i valori originali');return Object.fromEntries(countKeys.map(k=>[k,raw[k]]));}
 const count=v=>typeof v==='number'&&Number.isSafeInteger(v)&&v>=0?v:null;
 export function propertyCount(property,key){
