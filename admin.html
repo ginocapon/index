@@ -6476,6 +6476,19 @@ function updateStats(data) {
   document.getElementById('statVenduti').textContent = data.filter(i => i.venduto || i.affittato).length;
 }
 
+// Ordinamento locale dei gruppi. Dati asincroni verificati, mai nuove letture o scritture.
+function rigGroupSortValue(i,key){
+ if(key==='tipologia')return String(i.tipologia||i.categoria||'').trim()||null;
+ if(key==='event_count')return window.RighettoPropertyTableData?.sortValue(i.id)??null;
+ if(key==='indicator_group')return window.RighettoPropertyIndicators?.sortValue(i.id)??null;
+ return null;
+}
+function rigCompareGroup(a,b,key,dir){const x=rigGroupSortValue(a,key),y=rigGroupSortValue(b,key);if(x===null&&y===null)return 0;if(x===null)return 1;if(y===null)return -1;return(typeof x==='string'?x.localeCompare(y,'it',{sensitivity:'base',numeric:true}):x-y)*dir;}
+window.RighettoPropertyGroupSort={value:rigGroupSortValue,compare:rigCompareGroup,apply(){
+ const key=immSortKey;if(['indicator_group','event_count','tipologia'].includes(key)){
+ const body=document.querySelector('#immobiliTableWrap tbody');if(body){const byId=new Map(rigCatalogueRows.map(i=>[String(i.id),i])),rows=[...body.querySelectorAll('tr[data-property-preview]')],sorted=rows.slice().sort((a,b)=>rigCompareGroup(byId.get(a.dataset.propertyPreview)||{},byId.get(b.dataset.propertyPreview)||{},key,immSortDir));if(rows.some((r,n)=>r!==sorted[n]))body.append(...sorted);}}
+ window.dispatchEvent(new Event('righetto:group-sort-data'));
+}};
 function renderTable(data) {
   const wrap = document.getElementById('immobiliTableWrap');
   const cnt = document.getElementById('immobiliCountVisible');
@@ -6511,7 +6524,7 @@ function renderTable(data) {
   };
   wrap.innerHTML = `<table>
     <thead><tr>
-      <th><input type="checkbox" data-pv-select-all aria-label="Seleziona tutte le righe visualizzate" ${rigCatalogueReady?'':'disabled'}></th><th title="Attività in corso e appuntamenti aperti">Stato</th><th title="Eventi già collegati nel nuovo gestionale">Eventi</th><th>Tipologia</th>${sortTh('codice','Rif.')}<th>Naz.</th><th>Stato sito</th>${sortTh('comune','Comune/Prov.')}<th>Zona</th><th title="Contratto">V/A</th>${sortTh('prezzo','Pr. Portali')}${sortTh('superficie','Mq portali')}<th title="Camere">Cam.</th><th title="Bagni">Bagni</th>${sortTh('proprietario_nome','Proprietario')}${sortTh('created_at','Data ins.')}<th>Etichette</th><th title="Piano">P.</th><th>Ind. reale</th><th>IPE</th><th>CE</th><th aria-label="Comandi">⚙</th>
+      <th><input type="checkbox" data-pv-select-all aria-label="Seleziona tutte le righe visualizzate" ${rigCatalogueReady?'':'disabled'}></th>${sortTh('indicator_group','Stato')}${sortTh('event_count','Eventi')}${sortTh('tipologia','Tipologia')}${sortTh('codice','Rif.')}<th>Naz.</th><th>Stato sito</th>${sortTh('comune','Comune/Prov.')}<th>Zona</th><th title="Contratto">V/A</th>${sortTh('prezzo','Pr. Portali')}${sortTh('superficie','Mq portali')}<th title="Camere">Cam.</th><th title="Bagni">Bagni</th>${sortTh('proprietario_nome','Proprietario')}${sortTh('created_at','Data ins.')}<th>Etichette</th><th title="Piano">P.</th><th>Ind. reale</th><th>IPE</th><th>CE</th><th aria-label="Comandi">⚙</th>
     </tr></thead>
     <tbody>${rows}</tbody>
   </table>`;
@@ -6554,6 +6567,9 @@ function filterTable() {
   if (immSortKey) {
     const dir = immSortDir;
     const keyFns = {
+      indicator_group:i=>rigGroupSortValue(i,'indicator_group'),
+      event_count:i=>rigGroupSortValue(i,'event_count'),
+      tipologia:i=>rigGroupSortValue(i,'tipologia'),
       codice: i => (i.codice || '').toLowerCase(),
       comune: i => (i.comune || '').toLowerCase(),
       prezzo: i => (i.prezzo == null ? null : Number(i.prezzo)),
@@ -6568,7 +6584,7 @@ function filterTable() {
         if (va === null && vb === null) return 0;
         if (va === null || va === '') return 1;
         if (vb === null || vb === '') return -1;
-        if(immSortKey==='proprietario_nome'){const n=va.localeCompare(vb,'it',{sensitivity:'base',numeric:true});return n*dir;}
+        if(['proprietario_nome','tipologia'].includes(immSortKey)){const n=va.localeCompare(vb,'it',{sensitivity:'base',numeric:true});return n*dir;}
         if (va < vb) return -dir;
         if (va > vb) return dir;
         return 0;
@@ -18203,7 +18219,7 @@ window.showSection('home');
 <script src="js/admin-attivita.js?v=20261115-colour-auto-only-v2"></script>
 <script src="js/admin-client-activities.js?v=20261115-uniform-activities-v1"></script>
 <script>(function(){var el=document.getElementById('righetto-attivita'),ctl=null,busy=false,pending=null,owner=null;if(!el)return;window.RighettoOpenPractice=function(id){pending=id;window.showSection('attivita');go();};async function go(){if(busy)return;busy=true;const p=window.RighettoGatedPrincipal;try{if(typeof sb==='undefined'||!p||document.body.dataset.adminArea!=='attivita')return;const u=await sb.auth.getUser(),a=await sb.rpc('righetto_is_admin_request');if(u.error||u.data.user?.id!==p||a.error||a.data!==true||window.RighettoGatedPrincipal!==p||document.body.dataset.adminArea!=='attivita')throw Error('Accesso non confermato');if(ctl&&owner===p){await ctl.refresh();if(pending){ctl.focus(pending);pending=null;}return;}const st=RighettoAttivita.dbStore(sb);const properties=await st.properties();if(window.RighettoGatedPrincipal!==p||document.body.dataset.adminArea!=='attivita')return;ctl=await RighettoAttivita.init(el,{store:st,properties,principal:p,isActive:()=>document.body.dataset.adminArea==='attivita'&&window.RighettoGatedPrincipal===p,openProperty:id=>{if(typeof editImmobile==='function')editImmobile(id);}});owner=p;if(pending){ctl.focus(pending);pending=null;}}catch(e){el.textContent='Attività non disponibili: '+(e.message||e);}finally{busy=false;}}window.rigSectionReady(['attivita'],go);window.addEventListener('righetto:section-ready',()=>{if(owner&&owner!==window.RighettoGatedPrincipal){ctl=null;el.replaceChildren();}});})();</script>
-<script src="js/admin-mobile.js?v=20261116-site-state-v1"></script>
+<script src="js/admin-mobile.js?v=20261119-group-sort"></script>
 <script src="js/admin-cliente-layout.js?v=20261117-documento-identita"></script>
 <script src="js/admin-cliente-drag.js?v=20261111-0937"></script>
 <script>window.RighettoNavigationAttachments=()=>({property:typeof currentFotos==='undefined'?null:[currentFotos,currentPlanimetrie,currentDocumenti,currentVtScenes,currentUnitaCatastali,currentCatastoPdf],client:typeof currentClienteDocumenti==='undefined'?null:currentClienteDocumenti});</script>
@@ -18220,7 +18236,7 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script>window.rigPropertyTypesReady=import('./js/property-types-ui.mjs?v=20261111-types-private-v1').then(m=>m.initPropertyTypeControl({host:document.getElementById('propertyTypesHost'),primary:document.getElementById('f_tipologia')})).then(x=>(window.RighettoPropertyTypes=x));window.rigPropertyTypesReady.catch(()=>{});</script>
 <script src="js/admin-client-matching.js?v=20261111-types-private-v1"></script>
 <link rel="stylesheet" href="css/admin-property-list.css?v=20261112-compact-row">
-<script src="js/admin-property-table-data.js?v=20261112-lista"></script>
+<script src="js/admin-property-table-data.js?v=20261119-group-sort"></script>
 <script src="js/admin-property-private-editor.js?v=20261114-guard-d8c41d4f9f6d"></script>
 <script>window.RighettoHistoryConsultationOnly=true;</script>
 <script src="js/admin-property-history.js?v=20261114-consult0741"></script>
@@ -18240,9 +18256,9 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <link rel="stylesheet" href="css/admin-ampliamento.css?v=20261115-uniform-activities-v1"><script type="module" src="js/activity-features-entry.mjs?v=20261115-label-close-v1"></script>
 <script type="module" src="js/speed-entry.mjs?v=20261119-agenda-strip-v1"></script>
 <script type="module">
-import {renderIndicators,invalidateIndicators} from './js/indicator-ui.mjs';
+import {renderIndicators,invalidateIndicators,indicatorSortValue} from './js/indicator-ui.mjs?v=20261119-group-sort';
 // Past appointments remain in the event count but do not produce a dot.
-window.RighettoPropertyIndicators={render:()=>renderIndicators({db:sb,principal:window.RighettoGatedPrincipal,principalNow:()=>window.RighettoGatedPrincipal,temporalPolicy:'not-past'})};
+window.RighettoPropertyIndicators={sortValue:id=>indicatorSortValue(id,window.RighettoGatedPrincipal),render:()=>renderIndicators({db:sb,principal:window.RighettoGatedPrincipal,principalNow:()=>window.RighettoGatedPrincipal,temporalPolicy:'not-past'})};
 if(window.RighettoGatedPrincipal&&document.querySelector('#immobiliTableWrap tr[data-property-preview]'))window.RighettoPropertyIndicators.render();
 sb.auth.onAuthStateChange?.((event,session)=>{if(event==='SIGNED_OUT'||session?.user?.id!==window.RighettoGatedPrincipal){invalidateIndicators();document.querySelectorAll('[data-property-indicators]').forEach(c=>{c.textContent='?';c.title='Sessione cambiata. Rileggi la lista.';});}});
 </script></body>
