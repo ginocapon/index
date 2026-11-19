@@ -118,8 +118,8 @@ function openImm(id){if(window.RighettoCatalogueView&&!window.RighettoCatalogueV
  showScheda(function(a){if(a==='trash'){var fn=window.RighettoPropertyPublication?.historical(i)?window.restoreImmobile:window.deleteImmobile;if(fn)Promise.resolve(fn(i.id,i.titolo||'')).then(function(){closeScheda();cardsImm();});return;}if(a==='ops'){if(window.RighettoImmobileOperazioni&&RighettoImmobileOperazioni.openMenu)RighettoImmobileOperazioni.openMenu(i);return;}if(a==='edit'){closeScheda();cur='nuovo';render();window.__rmOrig('nuovo');editImmobile(i.id);}});
 }
 function showScheda(onAct){
- scheda.hidden=false;scheda.scrollTop=0;document.body.classList.add('rm-scheda-open');
- scheda.onclick=function(e){var t=e.target.closest('[data-t]');if(t){scheda.querySelectorAll('[data-t]').forEach(function(x){x.classList.toggle('on',x===t);});scheda.querySelectorAll('[data-p]').forEach(function(p){p.hidden=p.dataset.p!==t.dataset.t;});return;}var a=e.target.closest('[data-a]');if(a)onAct(a.dataset.a);};
+ const closeButton=document.createElement('button');closeButton.type='button';closeButton.className='rig-close-circle rm-card-close';closeButton.dataset.rmClose='';closeButton.textContent='×';closeButton.setAttribute('aria-label','Chiudi scheda immobile');scheda.prepend(closeButton);scheda.hidden=false;scheda.scrollTop=0;document.body.classList.add('rm-scheda-open');
+ scheda.onclick=function(e){if(e.target.closest('[data-rm-close]')){if(window.RighettoNavigation)RighettoNavigation.open({section:document.body.dataset.adminArea||'immobili'});else closeScheda();return;}var t=e.target.closest('[data-t]');if(t){scheda.querySelectorAll('[data-t]').forEach(function(x){x.classList.toggle('on',x===t);});scheda.querySelectorAll('[data-p]').forEach(function(p){p.hidden=p.dataset.p!==t.dataset.t;});return;}var a=e.target.closest('[data-a]');if(a)onAct(a.dataset.a);};
 }
 function closeScheda(){if(window.RighettoNavigation&&!RighettoNavigation.replaying&&!RighettoNavigation.allowClose())return;if(!scheda)return;scheda.hidden=true;document.body.classList.remove('rm-scheda-open');}
 /* ---------- Clienti ---------- */
