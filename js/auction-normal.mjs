@@ -1,4 +1,4 @@
-import{auctionStore,romeWall,romeInstant}from'./auction-editor.mjs?v=20261120-stati-1847';
+import{auctionStore,romeWall,romeInstant}from'./auction-editor.mjs?v=20261120-aste-1907';
 let active=null,epoch=0,busy=false;const labels={offerta_minima:'Offerta minima',rialzo_minimo:'Rialzo minimo',data_asta:'Data asta, ora italiana',termine_offerte:'Termine offerte, ora italiana',provincia:'Provincia',tribunale:'Tribunale',procedura:'Procedura',modalita_vendita:'Modalita vendita',disponibilita:'Disponibilita'};
 const n=(tag,text)=>{const e=document.createElement(tag);if(text!=null)e.textContent=text;return e;};
 function current(id){return active?.propertyId===String(id)&&active.principal===window.RighettoGatedPrincipal;}
