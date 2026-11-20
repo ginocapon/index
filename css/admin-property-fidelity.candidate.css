@@ -1,0 +1,32 @@
+/* Candidate only. Shared controls and private document callbacks remain untouched. */
+#sec-nuovo.ril-shell{max-width:none;font:12px/1.4 Arial,sans-serif!important}
+#sec-nuovo.ril-shell .ril-info-descriptions:not([hidden]){display:grid!important}
+#sec-nuovo.ril-shell .ril-info-descriptions>.form-group{margin:10px 0!important;display:grid!important;grid-template-columns:170px minmax(0,1fr)!important;gap:8px!important}
+#sec-nuovo.ril-shell .ril-info-descriptions>.form-group small{grid-column:2}
+#sec-nuovo.ril-shell .ril-info-descriptions textarea{min-height:170px!important;width:100%!important}
+#sec-nuovo.ril-shell .ril-info-descriptions #f_note_interne{min-height:100px!important}
+#sec-nuovo.ril-shell .ril-property-data>.form-group{display:grid;grid-template-columns:170px minmax(0,1fr);gap:8px;align-items:start}
+#sec-nuovo.ril-shell .ril-property-data>.form-group small{grid-column:2}
+#sec-nuovo.ril-shell .ril-property-data{column-gap:25px}
+
+#sec-nuovo.ril-shell .ril-panel[hidden]{display:none!important}
+#sec-nuovo.ril-shell .ril-info-descriptions #f_titolo{width:100%!important;box-sizing:border-box}
+#sec-nuovo.ril-shell .ril-original-insertion{grid-column:1/-1;min-width:0}
+#sec-nuovo.ril-shell .ril-insertion-columns{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;margin:8px 0}
+#sec-nuovo.ril-shell .ril-insertion-location>.form-group,#sec-nuovo.ril-shell .ril-insertion-energy>.form-group,#sec-nuovo.ril-shell .ril-original-info-facts>.form-group{display:grid;grid-template-columns:170px minmax(0,1fr);gap:8px;margin:7px 0!important;min-width:0}
+#sec-nuovo.ril-shell .ril-insertion-location small,#sec-nuovo.ril-shell .ril-insertion-energy small,#sec-nuovo.ril-shell .ril-original-info-facts small{grid-column:2}
+#sec-nuovo.ril-shell .ril-insertion-energy{padding:8px;background:#edf6e9;border:1px solid #bfd3b6}
+#sec-nuovo.ril-shell .ril-insertion-energy h4{margin:0 0 8px}
+#sec-nuovo.ril-shell .ril-original-info-facts{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
+#sec-nuovo.ril-shell .ril-original-info-facts .form-row-prezzo-contratto{display:block;grid-column:1/-1}
+#sec-nuovo.ril-shell .ril-info-extra{grid-column:1/-1}
+#sec-nuovo.ril-shell .ril-info-extra>.form-group{max-width:700px}
+#sec-nuovo.ril-shell .ril-info-extra>.form-grid{margin:10px 0}
+@media(max-width:760px){#sec-nuovo.ril-shell .ril-insertion-columns,#sec-nuovo.ril-shell .ril-original-info-facts{grid-template-columns:1fr}#sec-nuovo.ril-shell .ril-insertion-location>.form-group,#sec-nuovo.ril-shell .ril-insertion-energy>.form-group,#sec-nuovo.ril-shell .ril-original-info-facts>.form-group{display:block}#sec-nuovo.ril-shell .ril-insertion-location small,#sec-nuovo.ril-shell .ril-insertion-energy small,#sec-nuovo.ril-shell .ril-original-info-facts small{display:block}}
+#sec-nuovo.ril-shell .ril-info-extra{order:60}
+#sec-nuovo.ril-shell .ril-original-info-facts .form-row-prezzo-contratto{max-width:50%;padding-right:10px;box-sizing:border-box}
+#sec-nuovo.ril-shell .ril-insertion-location input:not([type=checkbox]):not([type=radio]),#sec-nuovo.ril-shell .ril-insertion-location select,#sec-nuovo.ril-shell .ril-insertion-energy input,#sec-nuovo.ril-shell .ril-insertion-energy select,#sec-nuovo.ril-shell .ril-original-info-facts input{width:100%;box-sizing:border-box}
+@media(max-width:760px){#sec-nuovo.ril-shell .ril-original-info-facts .form-row-prezzo-contratto{max-width:100%;padding:0}#sec-nuovo.ril-shell .ril-info-descriptions>.form-group input,#sec-nuovo.ril-shell .ril-info-descriptions>.form-group select{width:100%;box-sizing:border-box}}
+
+#sec-nuovo.ril-shell .ril-private-position button{padding:8px 12px;min-height:36px;background:#edf5f0;color:#075b3b;border:1px solid #88ab98;cursor:pointer}#sec-nuovo.ril-shell #f_descrizione_ridotta{min-height:90px!important}@media(max-width:760px){#sec-nuovo.ril-shell .ril-private-position button{min-height:44px}}
+@media(max-width:760px){#sec-nuovo.ril-shell .ril-info-descriptions>.form-group,#sec-nuovo.ril-shell .ril-property-data>.form-group{grid-template-columns:minmax(0,1fr)!important;gap:5px!important}#sec-nuovo.ril-shell .ril-info-descriptions>.form-group small,#sec-nuovo.ril-shell .ril-property-data>.form-group small{grid-column:1}#sec-nuovo.ril-shell .ril-info-descriptions>.form-group label{width:auto!important}#sec-nuovo.ril-shell .ril-private-position>div:last-of-type{grid-template-columns:minmax(0,1fr)!important}}

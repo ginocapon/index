@@ -47,6 +47,34 @@ function boot(){const fileStyle=document.createElement('style');fileStyle.textCo
  // Put owner relations first, as in the supplied old Info screen.
  const ownerDivider=[...panels.info.children].find(n=>n.classList.contains('section-divider')&&/^Proprietario/.test(n.textContent));
  if(ownerDivider){const ownerGroup=ownerDivider.nextElementSibling;const relations=document.createElement('div');relations.className='ril-relations';const owner=document.createElement('section');owner.className='ril-owner';owner.append(ownerDivider,ownerGroup);relations.append(owner);panels.info.prepend(relations);}
+ // Match the original Info grouping while retaining every existing control once.
+ const group=id=>document.getElementById(id)?.closest('.form-group');
+ const insertion=document.createElement('section');insertion.className='ril-original-insertion';
+ const insertTitle=document.createElement('h3');insertTitle.className='section-divider';insertTitle.textContent='Inserimento';insertion.append(insertTitle);
+ const cols=document.createElement('div');cols.className='ril-insertion-columns';
+ const locationCol=document.createElement('div');locationCol.className='ril-insertion-location';
+ const energyCol=document.createElement('div');energyCol.className='ril-insertion-energy';
+ const contract=document.getElementById('f_prezzo')?.closest('.form-row-prezzo-contratto');
+ const contractControls=contract?.querySelector('#contrattoAffittoResWrap');
+ 
+ for(const id of ['f_tipo_incarico','f_tipo_operazione','f_vacanza','f_a_reddito','f_stato_rogito','f_destinazione_uso','f_tipologia','f_comune','f_indirizzo','f_indirizzo_mappa']){const n=group(id);if(n)locationCol.append(n);if(id==='f_tipo_operazione'&&contractControls)locationCol.append(contractControls);}
+ const energyHead=document.createElement('h4');energyHead.textContent='Classe energetica';energyCol.append(energyHead);
+ for(const id of ['f_classificazione_energetica','f_classe_energetica','f_ipe_kwh','f_epgl_nren_m2','f_epgl_ren','f_prestazione_inverno','f_prestazione_estate','f_energia_quasi_zero','f_visibilita_immobiliare']){const n=group(id);if(n)energyCol.append(n);}
+ cols.append(locationCol,energyCol);insertion.append(cols);
+ const facts=document.createElement('div');facts.className='ril-original-info-facts';
+ for(const id of ['f_codice','f_anno_costruzione','f_incarico_inizio','f_incarico_scadenza']){const n=group(id);if(n)facts.append(n);}
+ if(contract)facts.append(contract);
+ for(const id of ['f_prezzo_portali','f_superficie','f_superficie_portali','f_spese_condominio','f_consegna','f_unita_abitative','f_esposizione','f_imposta','f_durata_contratto_originale']){const n=group(id);if(n)facts.append(n);}
+ insertion.append(facts);
+ const originalRows=[...panels.info.children];const extra=document.createElement('div');extra.className='ril-info-extra';
+ const locationHeading=[...panels.info.children].find(n=>n.classList.contains('section-divider')&&n.textContent.trim()==='Localizzazione');if(locationHeading){locationHeading.hidden=true;locationCol.prepend(locationHeading);}
+ const headings=new Set(['Informazioni Base','Caratteristiche']);
+ for(const n of originalRows){if(n===locationHeading||n.classList.contains('ril-relations'))continue;if(n.classList.contains('section-divider')&&headings.has(n.textContent.trim())){n.remove();continue;}if(n.querySelector('#f_titolo,#f_descrizione,#f_note_interne'))continue;extra.append(n);}
+ panels.info.append(extra);
+ for(const id of ['f_locali','f_bagni','f_piano','f_stato']){const n=group(id);if(n)panels.dettagli.prepend(n);}
+ panels.info.append(insertion);
+ for(const [index,id]of ['f_titolo','f_descrizione','f_descrizione_ridotta','f_note_interne'].entries()){const n=group(id);if(n){n.style.gridColumn='1/-1';n.style.order=String(40+index);panels.info.append(n);}}
+ if(typeHome)extra.prepend(typeHome);panels.info.append(extra);panels.info.classList.add('ril-info-descriptions');panels.dettagli.classList.add('ril-property-data');
  // Preserve the exact controls and callbacks. Only move their containing elements.
  const actions=shell.querySelector('.modal-header-actions');actions.querySelectorAll(':scope > button').forEach(b=>{b.hidden=true;b.style.display='none';});
  const identityBox=document.createElement('div');identityBox.className='ril-property-identity';identityBox.setAttribute('aria-label','Dati principali immobile');const header=shell.querySelector('.section-header,.modal-header');if(header){header.classList.add('ril-source-header');header.prepend(identityBox);Object.assign(document.getElementById('formTitle').style,{position:'absolute',width:'1px',height:'1px',padding:'0',margin:'-1px',overflow:'hidden',clip:'rect(0,0,0,0)',whiteSpace:'nowrap',border:'0'});}else shell.prepend(identityBox);
