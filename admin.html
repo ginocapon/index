@@ -2403,10 +2403,6 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         Impostazioni
       </div>
-      <div class="nav-item" onclick="showSection('aste')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        Aste Veneto
-      </div>
     </nav>
     <div class="sidebar-footer">
       <button class="btn-logout" onclick="doLogout()">
@@ -18156,7 +18152,6 @@ var home=document.createElement('div');home.id='sec-home';home.className='sectio
 var groups=[
  ['Immobili','green',[['immobili','Immobili','Elenco e ricerca'],['nuovo','Nuovo immobile','Crea una scheda'],['perizie','Perizie','Valutazioni e sopralluoghi'],['documentigenerali','Documenti','Documenti generali']]],
  ['Clienti e contatti','blue',[['clienti','Clienti','Rubrica e incroci'],['richieste','Richieste','Contatti dal sito']]],
- ['Aste','red',[['aste','Aste Veneto','Elenco e guida']]],
  ['Marketing','blue',[['blog','Blog','Articoli del sito'],['emailmarketing','Email marketing','Campagne'],['landing','Landing pages','Pagine campagna']]],
  ['Controllo','blue',[['analytics','Speed',"Il cruscotto dell’agenzia"],['impostazioni','Impostazioni','Configurazione']]]
 ];
@@ -18178,7 +18173,6 @@ navGroup('Agenda',[['agenda','Apri agenda'],['new-event','Nuovo appuntamento']])
 navGroup('Immobili',[['immobili','Elenco immobili'],['new-property','Nuovo immobile'],['perizie','Perizie']]);
 navGroup('Clienti',[['clienti','Elenco clienti / proprietari'],['new-client','Nuovo cliente'],['richieste','Richieste']]);
 var activities=document.createElement('a');activities.href=navUrl('attivita');activities.style.textDecoration='none';activities.className='rh-nav-direct';activities.dataset.section='attivita';activities.textContent='Attività';activities.onclick=function(e){if(e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();closeNavMenus();window.showSection('attivita');};nav.appendChild(activities);
-navGroup('Aste',[['aste','Aste Veneto']]);
 navGroup('Marketing',[['blog','Blog'],['emailmarketing','Email marketing'],['landing','Landing pages']]);
 navGroup('Controllo',[['analytics','Speed'],['impostazioni','Impostazioni']]);
 wrap.remove();
@@ -18224,7 +18218,7 @@ window.showSection('home');
 <script src="js/admin-attivita.js?v=20261115-colour-auto-only-v2"></script>
 <script src="js/admin-client-activities.js?v=20261115-uniform-activities-v1"></script>
 <script>(function(){var el=document.getElementById('righetto-attivita'),ctl=null,busy=false,pending=null,owner=null;if(!el)return;window.RighettoOpenPractice=function(id){pending=id;window.showSection('attivita');go();};async function go(){if(busy)return;busy=true;const p=window.RighettoGatedPrincipal;try{if(typeof sb==='undefined'||!p||document.body.dataset.adminArea!=='attivita')return;const u=await sb.auth.getUser(),a=await sb.rpc('righetto_is_admin_request');if(u.error||u.data.user?.id!==p||a.error||a.data!==true||window.RighettoGatedPrincipal!==p||document.body.dataset.adminArea!=='attivita')throw Error('Accesso non confermato');if(ctl&&owner===p){await ctl.refresh();if(pending){ctl.focus(pending);pending=null;}return;}const st=RighettoAttivita.dbStore(sb);const properties=await st.properties();if(window.RighettoGatedPrincipal!==p||document.body.dataset.adminArea!=='attivita')return;ctl=await RighettoAttivita.init(el,{store:st,properties,principal:p,isActive:()=>document.body.dataset.adminArea==='attivita'&&window.RighettoGatedPrincipal===p,openProperty:id=>{if(typeof editImmobile==='function')editImmobile(id);}});owner=p;if(pending){ctl.focus(pending);pending=null;}}catch(e){el.textContent='Attività non disponibili: '+(e.message||e);}finally{busy=false;}}window.rigSectionReady(['attivita'],go);window.addEventListener('righetto:section-ready',()=>{if(owner&&owner!==window.RighettoGatedPrincipal){ctl=null;el.replaceChildren();}});})();</script>
-<script src="js/admin-mobile.js?v=20261120-pages-private-v1"></script>
+<script src="js/admin-mobile.js?v=20261120-aste-menu-retire"></script>
 <script src="js/admin-cliente-layout.js?v=20261117-documento-identita"></script>
 <script src="js/admin-cliente-drag.js?v=20261111-0937"></script>
 <script>window.RighettoNavigationAttachments=()=>({property:typeof currentFotos==='undefined'?null:[currentFotos,currentPlanimetrie,currentDocumenti,currentVtScenes,currentUnitaCatastali,currentCatastoPdf],client:typeof currentClienteDocumenti==='undefined'?null:currentClienteDocumenti});</script>
