@@ -6807,6 +6807,7 @@ async function editImmobile(id,isCurrent=()=>true,reloadSaved=null) {if(rigPrope
   }
   if(!current())return;
   try{if(!window.RighettoPropertyPublication)throw Error('Stato interno non disponibile');if(!Object.hasOwn(imm,'storico_gestionale'))imm=(await RighettoPropertyPublication.attach([imm]))[0];if(!current())return;}catch(error){if(current()){rigPropertySnapshot=null;document.getElementById('btnSalva').disabled=true;toast(error.message,'error');}return;}
+  if(imm.asta_origine_id){if(!window.RighettoAuctionNormal)throw Error('Modulo asta non pronto: riapri la scheda.');await RighettoAuctionNormal.prepare(imm);if(!current())return;}else window.RighettoAuctionNormal?.clear();
   document.getElementById('btnSalva').disabled=false;
   rigPropertySnapshot=null;
   document.getElementById('editId').value = imm.id;
@@ -6927,7 +6928,7 @@ async function editImmobile(id,isCurrent=()=>true,reloadSaved=null) {if(rigPrope
 
 async function saveImmobile(e) {
   e.preventDefault();
-  if(window.RighettoMixedAttachments?.pending()){toast('Caricamento allegati in corso: attendi la verifica prima di salvare.','error');return;}
+  if(window.RighettoMixedAttachments?.pending()||window.RighettoAuctionNormal?.pending){toast('Caricamento allegati in corso: attendi la verifica prima di salvare.','error');return;}
   if(window.RighettoPropertyExtra?.pending()||window.RighettoPropertyReferences?.pending()||window.RighettoPropertyExtra?.dirty()||window.RighettoPropertyReferences?.dirty()){toast('Prima salva o scarta le modifiche nei campi aggiuntivi e nei riferimenti riservati. La bozza resta aperta.','error');return;}
   const btn = document.getElementById('btnSalva');
   if(btn.disabled||rigPropertySaving||window.RighettoLabels?.pending())return;
@@ -6979,7 +6980,7 @@ async function saveImmobile(e) {
   const propEmail = document.getElementById('f_proprietario_email').value.trim();
   let propClienteId = document.getElementById('f_proprietario_id').value || null;
 
-  if (!propClienteId) {
+  if (!propClienteId && !saveSnapshot?.record?.asta_origine_id) {
     if(id)throw Error('Proprietario non verificato: annulla e seleziona una scheda cliente esistente. Nessuna creazione automatica durante modifica.');
     if (propNome || propTel || propEmail) {
       try {
@@ -8303,6 +8304,7 @@ function rigMediaDraftGuard(){
 }
 
 async function handleFiles(files, bucket) {
+  if(window.RighettoAuctionNormal?.isPrivate())return RighettoMixedAttachments.ingest(files);
   const arr = Array.from(files);
   if (!arr.length) return;
   const current=rigMediaDraftGuard();
@@ -8522,6 +8524,7 @@ function addVtScene() {
 }
 
 function renderVtScenes() {
+  if(window.RighettoAuctionNormal?.isPrivate())queueMicrotask(()=>RighettoAuctionNormal.signVirtual().catch(e=>toast(e.message,'error')));
   const attr=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const el = document.getElementById('vtScenesList');
   if (!currentVtScenes.length) { el.innerHTML = '<div style="font-size:0.78rem;color:var(--caffe2);padding:8px">Nessuna stanza aggiunta</div>'; return; }
@@ -8555,6 +8558,7 @@ function updateVtPreview(i, url) {
 }
 
 async function uploadVtScene(file, idx) {
+  if(window.RighettoAuctionNormal?.isPrivate())return RighettoAuctionNormal.uploadVirtual(file,idx);
   if (!file) return;
   const current=rigMediaDraftGuard(),scene=currentVtScenes[idx];
   if(!scene)return;
@@ -9283,6 +9287,7 @@ function closeBlogPreviewModal() {
 
 // Anteprima rapida immobile (popup)
 function previewImmobile(id) {
+  if(window.RighettoAuctionNormal?.isPrivate(id)){toast('Anteprima pubblica non abilitata per questa asta interna. Usa Scheda o Stampe.','error');return;}
   var i = allImmobili.find(function(x) { return x.id === id; });
   if (!i) return;
   var imgEl = document.getElementById('immPreviewImg');
@@ -18182,8 +18187,8 @@ window.showSection('home');
 <script src="js/admin-cliente-scheda.js?v=20261120-pages-private-v1"></script>
 <script src="js/admin-private-photos.js?v=LP0290-private-1"></script>
 <script src="js/admin-immobile-etichette.js?v=20261115-label-reminders-v1"></script>
-<script src="js/admin-property-publication.js?v=internal-history-v1"></script>
-<script src="js/admin-immobile-operazioni.js?v=20261120-pages-private-v1"></script>
+<script src="js/admin-property-publication.js?v=ast20-internal-history-v1"></script>
+<script src="js/admin-immobile-operazioni.js?v=ast20-20261120-pages-private-v1"></script>
 <script src="js/admin-immobile-stampe.js?v=20261112-operations-private"></script>
 <script src="js/admin-immobile-inquilini.js?v=20261106-1038"></script>
 <script src="js/admin-blocco2.js?v=20261112-storico-view"></script>
@@ -18237,6 +18242,6 @@ window.RighettoMobilePropertyIndicators={render:({read=true}={})=>renderMobileIn
 if(window.RighettoGatedPrincipal&&document.querySelector('#rm-imm [data-mobile-property-indicators]'))window.RighettoMobilePropertyIndicators.render();
 if(window.RighettoGatedPrincipal&&document.querySelector('#immobiliTableWrap tr[data-property-preview]'))window.RighettoPropertyIndicators.render();
 sb.auth.onAuthStateChange?.((event,session)=>{if(event==='SIGNED_OUT'||session?.user?.id!==window.RighettoGatedPrincipal){invalidateIndicators();document.querySelectorAll('[data-property-indicators],[data-mobile-property-indicators]').forEach(c=>{c.textContent='?';c.title='Sessione cambiata. Rileggi la lista.';});}});
-</script><script src="js/admin-property-list.js?v=20261120-pages-private-v1"></script><script src="js/admin-mixed-classifier.js?v=20261119-mixed-v1"></script><script src="js/admin-mixed-attachments.js?v=20261120-file-fix-v1"></script><link rel="stylesheet" href="css/admin-property-options.css?v=20261120-options-v1"><script src="js/admin-property-options.js?v=20261120-options-v1"></script></body>
+</script><script src="js/admin-property-list.js?v=20261120-pages-private-v1"></script><script src="js/admin-mixed-classifier.js?v=20261119-mixed-v1"></script><script src="js/admin-mixed-attachments.js?v=20261120-ast-private-v1"></script><link rel="stylesheet" href="css/admin-property-options.css?v=20261120-options-v1"><script src="js/admin-property-options.js?v=20261120-options-v1"></script><link rel="stylesheet" href="js/auction-editor.css"><script type="module" src="js/auction-entry.mjs"></script><script type="module" src="js/auction-normal.mjs?v=20261120-normal-ast-v1"></script></body>
 </html>
 

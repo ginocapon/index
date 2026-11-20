@@ -3,7 +3,7 @@ export function storageReference(db,value){
  if(typeof value!=='string'||!value)throw Error('Riferimento del file mancante.');
  let expected,url;try{expected=new URL(db.storage.from('documenti').getPublicUrl('reference-check').data.publicUrl).origin;url=new URL(value);}catch{throw Error('Riferimento del file non valido.');}
  if(url.origin!==expected)throw Error('File esterno: verifica il riferimento prima di aprirlo.');
- const match=url.pathname.match(/^\/storage\/v1\/object\/(?:public|sign|authenticated)\/(documenti|planimetrie|foto-immobili)\/(.+)$/);
+ const match=url.pathname.match(/^\/storage\/v1\/object\/(?:public|sign|authenticated)\/(documenti|planimetrie|foto-immobili|aste-pratica)\/(.+)$/);
  if(!match)throw Error('Archivio del file non riconosciuto.');
  let path;try{path=decodeURIComponent(match[2]);}catch{throw Error('Percorso del file non valido.');}
  if(!path||path.startsWith('/')||path.split('/').includes('..'))throw Error('Percorso del file non valido.');
