@@ -6453,6 +6453,7 @@ async function loadImmobili() {
   job=(async()=>{
     try{
       let query=sb.from('immobili').select('*').order('created_at',{ascending:false});
+      if(tipo!=='asta_giudiziaria')query=query.is('asta_origine_id',null);
       if(tipo==='affitto_residenziale')query=query.in('tipo_operazione',['affitto_residenziale','affitto']);else if(tipo)query=query.eq('tipo_operazione',tipo);
       query=query.abortSignal(controller.signal);
       const result=await Promise.race([query,new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(Error('timeout'));},45000);})]);
