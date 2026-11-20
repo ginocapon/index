@@ -29,7 +29,7 @@ add('Prezzo',i.prezzo!=null?money(i.prezzo):'');add('Superficie',i.superficie?i.
 L.push('Link annuncio: '+url(i));return L.join('\n');}
 async function copy(t,msg){try{await navigator.clipboard.writeText(t);if(window.toast)toast(msg||'Copiato','success');return true;}catch(e){window.prompt('Copia da qui:',t);return false;}}
 const ops={
- async concordato(i){
+ async concordato(i,documentId=null){
   const principal=window.RighettoGatedPrincipal,id=String(i.id);
   if(!principal||String(cur()?.id)!==id)throw Error('Apri la scheda immobile corretta.');
   const o=overlay('<h3>Conteggi concordato</h3><p>Documento modificabile salvato nell’archivio privato dell’immobile. Calcoli e accordo territoriale da verificare.</p><button data-a="x">Chiudi</button><iframe title="Conteggi concordato" style="width:100%;height:78vh;border:0;margin-top:10px" src="conteggi-concordato.html"></iframe>');
@@ -40,10 +40,10 @@ const ops={
   let store;const alive=()=>o.isConnected&&window.RighettoGatedPrincipal===principal&&String(cur()?.id)===id;
   const ready=async e=>{if(e.origin!==location.origin||e.source!==frame.contentWindow)return;
    if(!alive()){o.remove();window.removeEventListener('message',ready);return;}
-   if(e.data?.type==='righetto-concordato-ready'){frame.contentWindow.postMessage({type:'righetto-concordato-context',property:{id,codice:i.codice||'',comune:i.comune||'',superficie:i.superficie,classe_energetica:i.classe_energetica,cantina:i.cantina,soffitta:i.soffitta,aria_condizionata:i.aria_condizionata,riscaldamento_autonomo:i.riscaldamento_autonomo,riscaldamento_centralizzato:i.riscaldamento_centralizzato,porta_blindata:i.porta_blindata}},location.origin);return;}
+   if(e.data?.type==='righetto-concordato-ready'){frame.contentWindow.postMessage({type:'righetto-concordato-context',property:{id,codice:i.codice||'',comune:i.comune||'',superficie:i.superficie,classe_energetica:i.classe_energetica,cantina:i.cantina,soffitta:i.soffitta,aria_condizionata:i.aria_condizionata,riscaldamento_autonomo:i.riscaldamento_autonomo,riscaldamento_centralizzato:i.riscaldamento_centralizzato,porta_blindata:i.porta_blindata},documentId},location.origin);return;}
    if(e.data?.type!=='righetto-concordato-archive'||typeof e.data.requestId!=='string')return;
    let result,error;try{if(!store){const m=await import('./concordato-store.mjs');if(!alive())throw Error('Scheda cambiata');store=m.createConcordatoStore({db:sb,principal,propertyId:id,isCurrent:alive});}const {action,payload}=e.data;
-    if(action==='list')result=await store.list();else if(action==='get')result=await store.get(payload.id);else if(action==='save')result=await store.save(payload);else if(['emailPreview','emailSend','emailStatus'].includes(action)){const u=await sb.auth.getSession();if(!alive()||u.error||u.data?.session?.user?.id!==principal)throw Error('Sessione cambiata');if(payload.property_id!==id)throw Error('Immobile non verificato');const response=await fetch('https://api.righettoimmobiliare.it/concordato-email.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...payload,action:{emailPreview:'preview',emailSend:'send',emailStatus:'status'}[action],access_token:u.data.session.access_token})});result=await response.json();if(!response.ok||result.error)throw Error(result.error||'Esito email non confermato');}else throw Error('Operazione non disponibile');
+    if(action==='list')result=await store.list();else if(action==='get')result=await store.get(payload.id);else if(action==='save'){result=await store.save(payload);document.dispatchEvent(new CustomEvent('righetto-concordato-saved'));}else if(['emailPreview','emailSend','emailStatus'].includes(action)){const u=await sb.auth.getSession();if(!alive()||u.error||u.data?.session?.user?.id!==principal)throw Error('Sessione cambiata');if(payload.property_id!==id)throw Error('Immobile non verificato');const response=await fetch('https://api.righettoimmobiliare.it/concordato-email.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...payload,action:{emailPreview:'preview',emailSend:'send',emailStatus:'status'}[action],access_token:u.data.session.access_token})});result=await response.json();if(!response.ok||result.error)throw Error(result.error||'Esito email non confermato');}else throw Error('Operazione non disponibile');
    }catch(err){error=err.message||'Operazione non confermata';}if(alive())frame.contentWindow.postMessage({type:'righetto-concordato-result',requestId:e.data.requestId,result,error},location.origin);
   };window.addEventListener('message',ready);
   const authWatch=sb.auth.onAuthStateChange?.((_event,session)=>{if(session?.user?.id!==principal)o.remove();})?.data?.subscription;
@@ -170,5 +170,6 @@ function addMenu(){css();const bar=document.querySelector('#formTitle');if(!bar)
 const mo=new MutationObserver(()=>{if(document.getElementById('formTitle')&&document.getElementById('formTitle').offsetParent)addMenu();});
 function boot(){mo.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class','style']});addMenu();}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+import('./concordato-documents.mjs?v=20261119-documents-v2').then(m=>m.initConcordatoDocuments({db:sb,current:()=>{const property=cur();return document.body.dataset.adminArea==='nuovo'&&typeof rigPropertySnapshot!=='undefined'&&rigPropertySnapshot?.record?.id===property?.id?{principal:window.RighettoGatedPrincipal,property}:null;},open:(property,id)=>ops.concordato(property,id)})).catch(e=>console.error('Elenco concordati non disponibile',e));
 window.RighettoImmobileOperazioni=ops;window.RighettoImmobileOperazioni.openMenu=openMenu;
 })();

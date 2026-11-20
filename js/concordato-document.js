@@ -20,5 +20,6 @@ $('openMail').onclick=()=>{const lines=$('mailText').value.split(/\r?\n/),subjec
 $('downloadEML').onclick=()=>{try{blobDownload(new Blob([eml()],{type:'message/rfc822'}),'Bozza-concordato-CON-ALLEGATO.eml');$('mailStatus').textContent='Bozza scaricata con PDF incorporato. Nessun invio, nessun destinatario o mittente scelto. Verifica nel tuo programma di posta.';}catch(e){$('mailStatus').textContent=e.message;}};
 const oldMail=$('mail').onclick;$('mail').onclick=()=>{oldMail();$('mailText').setSelectionRange(0,0);$('mailText').scrollTop=0;};
 window.ConcordatoMailBridge={call,metadata(){if(blocked||busy||!version||!savedPdf||savedState!==JSON.stringify(D.snapshot()))throw Error('Salva prima i valori e la modalità attualmente visibili, poi controlla l’email.');return{id,version,propertyId:D.getProperty()?.id,pdf:savedPdf};}};
+window.addEventListener('message',async e=>{if(e.origin!==location.origin||e.source!==parent||e.data?.type!=='righetto-concordato-context'||!e.data.documentId)return;lock(true);try{await refresh();$('savedDocuments').value=e.data.documentId;if($('savedDocuments').value!==e.data.documentId)throw Error('Documento non presente in questo immobile');}catch(err){status(err.message);return;}finally{lock(false);}await $('openDocument').onclick();});
 lock(false);window.ConcordatoDocumentTest={eml,refresh};
 })();
