@@ -2,7 +2,7 @@ import {createRelationsReader}from './speed-relations.mjs?v=20261118-relations-v
 import {completedRomeWindow}from './speed-window.mjs?v=20261118-relations-v1';
 import {createRequestReader}from './speed-requests.mjs';
 import {createSpeedReader}from './speed-private-reader.mjs';
-import {createSpeedUI}from './speed-ui.mjs?v=20261118-relations-v1';
+import {createSpeedUI}from './speed-ui.mjs?v=20261120-order-goals-v1';
 const OWNER='5f55e259-0d0b-46d9-8d77-17ab33db0fdf';
 let active=null,epoch=0;
 function stop(){epoch++;active?.reader?.stop();active?.requests?.stop();active?.relations?.stop();active?.ui?.destroy();active?.pageHost?.remove();active?.stripHost?.remove();active=null;}
@@ -12,7 +12,7 @@ async function sync(){syncMobile();document.querySelectorAll('nav [data-section=
  const pageHost=document.createElement('section'),stripHost=document.createElement('aside');section.replaceChildren(pageHost);home.prepend(stripHost);
  // Scope styles within shadow roots, no old admin CSS overwritten.
  const state={reader:null,ui:null,pageHost,stripHost};active=state;
- try{const response=await fetch(new URL('./speed.css?v=20261118-relations-v1',import.meta.url));if(!response.ok)throw Error('Stile non disponibile');const css=await response.text();if(active!==state||ticket!==epoch)return;const ui=createSpeedUI({pageHost,stripHost,css,openSpeed:()=>window.showSection('analytics')});state.ui=ui;ui.loading();state.reader=createSpeedReader({sb,onClear:()=>ui.clear()});const result=await state.reader.read();if(active!==state||ticket!==epoch)return;if(result.state==='empty')ui.clear('Archivio Speed vuoto. Nessun dato da mostrare.');else ui.setRows(result.rows);state.requests=createRequestReader({sb,onClear:()=>ui.setRequests(null)});try{const report=await state.requests.read();if(active===state&&ticket===epoch)ui.setRequests(report);}catch{if(active===state)ui.setRequests(null);}state.relations=createRelationsReader({sb,onClear:()=>ui.setRelations(null)});try{const report=await state.relations.read(completedRomeWindow());if(active===state&&ticket===epoch)ui.setRelations(report);}catch{if(active===state)ui.setRelations(null);}
+ try{const response=await fetch(new URL('./speed.css?v=20261120-order-goals-v1',import.meta.url));if(!response.ok)throw Error('Stile non disponibile');const css=await response.text();if(active!==state||ticket!==epoch)return;const ui=createSpeedUI({pageHost,stripHost,css,openSpeed:()=>window.showSection('analytics')});state.ui=ui;ui.loading();state.reader=createSpeedReader({sb,onClear:()=>ui.clear()});const result=await state.reader.read();if(active!==state||ticket!==epoch)return;if(result.state==='empty')ui.clear('Archivio Speed vuoto. Nessun dato da mostrare.');else ui.setRows(result.rows);state.requests=createRequestReader({sb,onClear:()=>ui.setRequests(null)});try{const report=await state.requests.read();if(active===state&&ticket===epoch)ui.setRequests(report);}catch{if(active===state)ui.setRequests(null);}state.relations=createRelationsReader({sb,onClear:()=>ui.setRelations(null)});try{const report=await state.relations.read(completedRomeWindow());if(active===state&&ticket===epoch)ui.setRelations(report);}catch{if(active===state)ui.setRelations(null);}
  }catch(error){if(active===state){if(state.ui)state.ui.clear('Dati Speed non verificati. Nessun valore confermato.');else pageHost.textContent='Speed non disponibile. Nessun valore confermato.';}}
 }
 window.addEventListener('righetto:section-ready',sync);
