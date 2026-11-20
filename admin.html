@@ -18216,7 +18216,7 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script src="js/admin-property-selection.js?v=20261119-faithful-v1-20261112-manual-number-v1"></script>
 <script src="js/admin-immobili-preview.js?v=20261112-hover-controls"></script>
 <script src="js/admin-property-activities.js?v=20261115-uniform-activities-v1"></script>
-<script src="js/admin-immobile-layout.js?v=20261119-concordato"></script>
+<script src="js/admin-immobile-layout.js?v=20261120-file-fix-v1"></script>
 <script src="js/admin-immobile-cronistoria.js?v=20261114-consult0741"></script>
 <script src="js/admin-immobile-dati-aggiuntivi.js?v=20261106-campi"></script>
 <script src="js/admin-immobile-riferimenti.js?v=20261106-riferimenti"></script>
@@ -18236,6 +18236,6 @@ window.RighettoMobilePropertyIndicators={render:({read=true}={})=>renderMobileIn
 if(window.RighettoGatedPrincipal&&document.querySelector('#rm-imm [data-mobile-property-indicators]'))window.RighettoMobilePropertyIndicators.render();
 if(window.RighettoGatedPrincipal&&document.querySelector('#immobiliTableWrap tr[data-property-preview]'))window.RighettoPropertyIndicators.render();
 sb.auth.onAuthStateChange?.((event,session)=>{if(event==='SIGNED_OUT'||session?.user?.id!==window.RighettoGatedPrincipal){invalidateIndicators();document.querySelectorAll('[data-property-indicators],[data-mobile-property-indicators]').forEach(c=>{c.textContent='?';c.title='Sessione cambiata. Rileggi la lista.';});}});
-</script><script src="js/admin-property-list.js?v=20261119-faithful-v1"></script><script src="js/admin-mixed-classifier.js?v=20261119-mixed-v1"></script><script src="js/admin-mixed-attachments.js?v=20261119-mixed-v1"></script></body>
+</script><script src="js/admin-property-list.js?v=20261119-faithful-v1"></script><script src="js/admin-mixed-classifier.js?v=20261119-mixed-v1"></script><script src="js/admin-mixed-attachments.js?v=20261120-file-fix-v1"></script></body>
 </html>
 
