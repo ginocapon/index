@@ -21,5 +21,5 @@ export function mountInterestingMap(host,rows,{onOpen,codes}){
  if(point)add(r,point,level);}
  try{localStorage.setItem('asteGeoCache',JSON.stringify(cache));}catch{}if(stopped)return;if(pins.getLayers().length)map.fitBounds(pins.getBounds().pad(.15),{maxZoom:15});label();geocode.textContent='Ricerca posizioni completata';};
  }catch(error){if(!stopped)info.textContent=error.message+'. Apri le schede con elenco.';}}
- run();return()=>{stopped=true;abort.abort();map?.remove();};
+ run();return()=>{if(stopped)return;stopped=true;abort.abort();const current=map;map=null;current?.remove();};
 }
