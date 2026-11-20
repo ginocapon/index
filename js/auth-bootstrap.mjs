@@ -1,5 +1,5 @@
 import {decideAccess} from './access-gate.mjs';
-import{installAppHistory}from'./app-adapter.mjs?v=20261119-mixed-v1';
+import{installAppHistory}from'./app-adapter.mjs?v=20261120-client-property-v1';
 // Explicit source integration only: call once after all application navigation wrappers.
 // The history stores no account secrets; instance is disposed on principal change.
 export async function bindAuthenticatedNavigation(sb,win=window){

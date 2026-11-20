@@ -27,7 +27,7 @@ export function installAppHistory(win=window,{scope='local-fixture'}={}){
   if(r.view==='client-edit')return()=>win.editCliente(r.id);
   if(r.view==='client-new')return()=>win.openClienteModal();
   if(r.view==='property-edit')return()=>{Promise.resolve(win.editImmobile(r.id,isCurrent)).then(()=>{if(isCurrent())clean();}).catch(error=>{if(isCurrent())console.error('Immobile non caricato',error);});};
-  if(r.view==='mobile-property')return()=>win.RighettoMobileNavigation.openImm(r.id);
+  if(r.view==='mobile-property')return async()=>{if(typeof win.loadImmobili==='function')await win.loadImmobili();if(isCurrent())await win.RighettoMobileNavigation.openImm(r.id);};
   // Agenda routes require the exact current event from its private event collection.
   if(r.view.startsWith('agenda-')&&win.RighettoAgenda?.restoreRoute)return()=>win.RighettoAgenda.restoreRoute(r,isCurrent);
   throw Error('Vista non ripristinabile in questa versione');
