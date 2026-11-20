@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-13",
+  "updated": "2026-11-20",
   "policy": "Marchio FOTO AI automatico (site-ai-disclosure.js) su pathPrefixes. Esclusi img/immobili/, img/team/, img/brand/, img/og-. Dopo nuove hero blog: node scripts/build-ai-image-manifest.mjs; audit: node scripts/audit-foto-ai.mjs",
   "pathPrefixes": [
     "img/blog/",
@@ -97,6 +97,12 @@
     "img/blog/blog-gestione-locazione-delegata-padova-2026-servizi.webp",
     "img/blog/blog-gestione-spese-casa-padova-2026.webp",
     "img/blog/blog-gruppo-immobiliare-righetto-limena-2026.webp",
+    "img/blog/blog-imu-concordato-padova-proposta-2027-calcolo.webp",
+    "img/blog/blog-imu-concordato-padova-proposta-2027-card.webp",
+    "img/blog/blog-imu-concordato-padova-proposta-2027-casa.webp",
+    "img/blog/blog-imu-concordato-padova-proposta-2027-documenti.webp",
+    "img/blog/blog-imu-concordato-padova-proposta-2027-hero-mobile.webp",
+    "img/blog/blog-imu-concordato-padova-proposta-2027-hero.webp",
     "img/blog/blog-inline-green-vs-brown-padova-2026.webp",
     "img/blog/blog-inline-posizione-padova-2026.webp",
     "img/blog/blog-inline-superfici-case-vendute-padova-2026.webp",
@@ -232,5 +238,5 @@
     "img/blog/trend-ricerca-casa-padova-2026.webp",
     "img/blog/ufficio-righetto-immobiliare.webp"
   ],
-  "fileCount": 206
+  "fileCount": 218
 }

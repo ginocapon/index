@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-09",
+  "updated": "2026-11-20",
   "policy": "Max 1 blog AGGIUNGERE/settimana. PRIORITÀ STRATEGICA: acquisizione proprietari (skill-acquisizione-proprietari.md). Comando editoriale: skill-editoriale-visivo.md + equilibrio 4 aree owner/acquirente. Gate: audit_editorial_acquisition + audit_editorial_research + audit_editorial_continuity + audit_blog_visuals + audit_editorial_visual_variety + audit_blog_publishability. Memorie: editorial-acquisition-balance.json + editorial-memory.json + editorial-visual-memory.json.",
   "workflow_skill": "TEST-SKILL/skill-editorial-queue.md",
   "editorial_command": "TEST-SKILL/skill-editoriale-visivo.md",
@@ -610,6 +610,63 @@
       "notes": "Ricerca tre aree: mercato Veneto e proposta IMU Padova, proposte Bilancio2027 non scelte perché sovrapposte a articoli recenti. Trends non verificato. No attualità normativa rivendicata. Ok13nov15:58:19; pacchetto pronto per pubblicazione limitata all’articolo.",
       "publication_note": "Ok specifico Gino13nov15:58:19, articolo anteprimaPDF13nov15:57. Nessun social/email.",
       "published_date": "2026-11-13"
+    },
+    {
+      "id": "eq-20261120-imu-concordato-private",
+      "status": "published",
+      "priority": 1,
+      "target_week": "2026-11-20",
+      "slug": "blog-imu-concordato-padova-proposta-2027",
+      "title": "IMU e affitti a Padova: la proposta per il 2027",
+      "kw_primaria": "imu canone concordato Padova 2027",
+      "intent": "informazione-proprietari",
+      "substantive_area": "NORMATIVA_FISCALE",
+      "secondary_areas": [
+        "AFFITTI_CANONI"
+      ],
+      "editorial_type": "trend",
+      "monitoring_area": "normativa",
+      "structure_type": "NOTIZIA_IMPATTO",
+      "geo_focus": [
+        "Padova",
+        "provincia di Padova"
+      ],
+      "owner_relevance": true,
+      "research_refs": [
+        "http://www.comune.padova.it/novita/comunicati/comunicato-stampa-il-comune-di-padova-riduce-limu-chi-affitta-canone-concordato",
+        "http://www.comune.padova.it/novita/comunicati/comunicato-stampa-riunione-della-ii-commissione-consiliare-8",
+        "https://www.finanze.gov.it/it/fiscalita/fiscalita-regionale-e-locale/Imposta-municipale-propria-IMU/disciplina-del-tributo/agevolazioni/"
+      ],
+      "hype_sources_read": [
+        "https://www.padovaoggi.it/attualita/padova-affitto-imu-agevolazioni-12-novembre-2026.html",
+        "https://www.mattinopadova.it/cronaca/padova-imu-ridotta-affitti-canone-concordato-aliquta-navhxlvl",
+        "https://tgpadova.telenuovo.it/cronaca/2026/11/13/video-il-comune-di-padova-riduce-laliquota-imu-per-gli-affitti-a-canone-concordato",
+        "https://estensione.org/affitti-a-canone-concordato-a-padova-l-imu-scende-allo-0-78-per-cento"
+      ],
+      "gap_analysis": "Separare proposta comunale e riduzione nazionale, verificare anno 2027 e applicabilita individuale.",
+      "value_add": "Esempio trasparente, limiti territoriali, checklist documenti e controllo degli atti successivi.",
+      "main_question": "Che cosa significa per un proprietario la proposta IMU sul concordato a Padova?",
+      "reader_novelty": "Novita comunale di novembre con proposta per le aliquote 2027, distinta dalla guida generale IMU2026.",
+      "update_reason": "Comunicato comunale del 12 novembre e convocazione commissione del20 novembre sulla proposta IMU2027.",
+      "different_from": "blog-imu-seconda-casa-padova-2026",
+      "faq_candidates": [
+        "Lo 0,78% e gia applicabile al mio immobile?",
+        "La riduzione riguarda anche un affitto per studenti?",
+        "Ridotta al 75% significa uno sconto del75%?"
+      ],
+      "chart_types": [
+        "confronto-importi",
+        "percorso-verifica"
+      ],
+      "gsc_signal": "Non verificato nel ciclo corrente, archivio disponibile obsoleto.",
+      "notes": "Pubblicato dopo approvazione specifica. Fonti comunali rilette il 20 novembre: proposta non definitiva. Quattro fonti secondarie lette oltre alle primarie; nessun quinto contenuto indipendente documentato. Trends e GSC correnti non verificati. Ricontrollare esito dopo il Consiglio annunciato per il 23 novembre.",
+      "primary_audience": "proprietario_locazione",
+      "acquisition_contribution": "direct",
+      "traffic_type": "strategic",
+      "owner_problem": "Capire se la proposta IMU locale cambia il progetto di locazione senza applicare benefici ancora da approvare.",
+      "concrete_value": "Separazione di aliquota locale e riduzione nazionale, esempio numerico verificabile e checklist documentale da portare al confronto.",
+      "published_date": "2026-11-20",
+      "publication_note": "Approvazione specifica Gino del 20 novembre 2026, chiarita per articolo IMU e Concordato. Nessun social o email incluso."
     }
   ]
 }

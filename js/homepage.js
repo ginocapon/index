@@ -801,6 +801,7 @@ function generateSlug(titolo) {
   if (!grid) return;
   // Mappa fallback per articoli statici (immagine + url dedicato)
   const staticMap = {
+    "imu e affitti a padova: la proposta per il 2027": {"img": "img/blog/blog-imu-concordato-padova-proposta-2027-card.webp", "url": "blog-imu-concordato-padova-proposta-2027"},
     "nuda proprietà a padova: vendere senza lasciare casa": {"img": "img/blog/blog-nuda-proprieta-padova-scelta-card.webp", "url": "blog-nuda-proprieta-padova-scelta"},
     "vendere casa abitata a padova: visite e privacy": {"img": "img/blog/blog-vendere-casa-abitata-padova-visite-privacy-card.webp", "url": "blog-vendere-casa-abitata-padova-visite-privacy"},
     'imu seconda casa a padova 2026: aliquota, calcolo e scadenze': { img: 'img/blog/blog-imu-seconda-casa-padova-2026-hero.webp', url: 'blog-imu-seconda-casa-padova-2026' },
@@ -965,6 +966,7 @@ function generateSlug(titolo) {
   };
   // Articoli statici (sempre presenti)
   const articoliStatici = [
+    {"titolo": "IMU e affitti a Padova: la proposta per il 2027", "categoria": "Fisco e affitti", "data": "2026-11-20", "stato": "bozza", "immagine_copertina": "img/blog/blog-imu-concordato-padova-proposta-2027-card.webp", "ai_generated": true, "url_statico": "blog-imu-concordato-padova-proposta-2027", "tempo": 9, "autore": "Redazione Righetto", "contenuto": "Proposta IMU 2027 a Padova: condizioni annunciate, esempio di calcolo e verifiche prima di applicare la misura.", "evidenza": false},
     {"titolo": "Nuda proprietà a Padova: vendere senza lasciare casa", "categoria": "Vendita e proprietari", "data": "2026-11-13", "stato": "pubblicato", "immagine_copertina": "img/blog/blog-nuda-proprieta-padova-scelta-card.webp", "ai_generated": true, "url_statico": "blog-nuda-proprieta-padova-scelta", "tempo": 9, "autore": "Gino Capon", "contenuto": "Diritti, tutela del coniuge, spese e alternative: cosa chiarire prima di vendere la nuda proprietà mantenendo l’usufrutto.", "evidenza": false, "data_pubblicazione": "2026-11-13"},
     { titolo: "Una domanda non costa nulla: perché contattarci può cambiarti la vita", categoria: "Vita d'agenzia", data: '2026-10-19', stato: 'pubblicato', immagine_copertina: 'img/blog/blog-una-domanda-non-costa-nulla-card.webp', url_statico: 'blog-una-domanda-non-costa-nulla' },
 
