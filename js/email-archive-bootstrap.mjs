@@ -1,0 +1,8 @@
+import{createEmailArchiveHttpAdapter}from'./email-archive-http-adapter.mjs?v=20261121-mail-v1';
+import{createPropertyFileEmailAdapter}from'./email-property-files-adapter.mjs?v=20261121-mail-v1';
+export function installEmailArchive({auth,host=window}){
+ const owner='5f55e259-0d0b-46d9-8d77-17ab33db0fdf';let epoch=0;
+ function clear(){epoch++;delete host.RighettoMailArchiveAdapter;delete host.RighettoPropertyFileEmailAdapter;}
+ async function activate(){const ticket=++epoch;delete host.RighettoMailArchiveAdapter;delete host.RighettoPropertyFileEmailAdapter;if(host.RighettoGatedPrincipal!==owner)return false;try{const u=await auth.getUser();if(ticket!==epoch||u.error||u.data?.user?.id!==owner||host.RighettoGatedPrincipal!==owner)return false;host.RighettoMailArchiveAdapter=createEmailArchiveHttpAdapter({endpoint:'https://api.righettoimmobiliare.it/email-archive-read.php',auth});host.RighettoPropertyFileEmailAdapter=createPropertyFileEmailAdapter({endpoint:'https://api.righettoimmobiliare.it/email-property-files.php',auth,sender:'gino@righettoimmobiliare.it'});return true;}catch{return false;}}
+ const callback=(event,session)=>{clear();if(session?.user?.id===owner)queueMicrotask(activate);};const h=auth.onAuthStateChange(callback);const section=()=>{if(!host.RighettoMailArchiveAdapter&&host.RighettoGatedPrincipal===owner)activate();};host.addEventListener?.('righetto:section-ready',section);host.addEventListener?.('pagehide',clear);host.rigOwnerReady?.(activate);activate();return{activate,clear,dispose(){clear();h.data?.subscription?.unsubscribe();host.removeEventListener?.('righetto:section-ready',section);host.removeEventListener?.('pagehide',clear);}};
+}

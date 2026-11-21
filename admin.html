@@ -4793,7 +4793,7 @@ META_IG_USER_ID=...</pre>
                   <div style="margin-bottom:6px">
                     <label style="margin:0">Corpo HTML</label>
                   </div>
-                  <textarea id="emCorpo" rows="16" style="font-family:monospace;font-size:0.85rem;background:#1a1a2e;color:#e0e0e0;border:none;border-radius:8px;padding:12px" placeholder="<html>&#10;<body>&#10;  <h1>Titolo</h1>&#10;  <p>Gentile {{nome}}, ...</p>&#10;</body>&#10;</html>"></textarea>
+                  <textarea id="emCorpo" rows="16" style="font-family:monospace;font-size:0.85rem;background:#1a1a2e;color:#e0e0e0;border:none;border-radius:8px;padding:12px" placeholder="<html>&#10;<body>&#10;  <h1>Titolo</h1>&#10;  <p>Gentile {{nome}}, ...</p>&#10;<script type="module">import{installEmailArchive}from'./js/email-archive-bootstrap.mjs?v=20261121-mail-v1';installEmailArchive({auth:sb.auth});</script></body>&#10;</html>"></textarea>
                 </div>
               </div>
             </div>
@@ -10129,7 +10129,7 @@ ${planHtml}
   <strong>Righetto Immobiliare</strong> \u2014 Via Roma 96, Limena (PD) \u2014 Tel: 049.8843484 \u2014 info@righettoimmobiliare.it \u2014 www.righettoimmobiliare.it<br>
   Documento generato il ${new Date().toLocaleDateString('it-IT')} \u2014 Le informazioni non costituiscono elemento contrattuale
 </div>
-</body></html>`);
+<script type="module">import{installEmailArchive}from'./js/email-archive-bootstrap.mjs?v=20261121-mail-v1';installEmailArchive({auth:sb.auth});</script></body></html>`);
   win.document.close();
   setTimeout(function() { win.print(); }, 1500);
 }
@@ -14408,7 +14408,7 @@ function exportAnalyticsPdfReport() {
     '<h2>Performance per pagina</h2><table><thead><tr><th>Pagina</th><th class="num">Clic</th><th class="num">Impr.</th><th class="num">CTR</th><th class="num">Pos.</th><th>Status</th></tr></thead><tbody>' +
     (pages.length ? pages.map(rowP).join('') : '<tr><td colspan="6">Nessuna pagina</td></tr>') + '</tbody></table>' +
     '<p style="margin-top:28px;font-size:10px;color:#888">Report interno — dati da dashboard admin (GSC/GA4 inseriti manualmente).</p>' +
-    '</body></html>';
+    '<script type="module">import{installEmailArchive}from'./js/email-archive-bootstrap.mjs?v=20261121-mail-v1';installEmailArchive({auth:sb.auth});</script></body></html>';
 
   var w = window.open('', '_blank');
   if (!w) {
@@ -15247,7 +15247,7 @@ showSection = function(name) {
     <p style="color:#666;font-size:11px;margin:0">{{unsubscribe_link}}</p>
   </div>
 </div>
-</body></html>`;
+<script type="module">import{installEmailArchive}from'./js/email-archive-bootstrap.mjs?v=20261121-mail-v1';installEmailArchive({auth:sb.auth});</script></body></html>`;
 
     document.getElementById('emCorpo').value = html;
     // Auto oggetto se vuoto
@@ -15388,7 +15388,7 @@ showSection = function(name) {
     <p style="color:#666;font-size:11px;margin:0">{{unsubscribe_link}}</p>
   </div>
 </div>
-</body></html>`;
+<script type="module">import{installEmailArchive}from'./js/email-archive-bootstrap.mjs?v=20261121-mail-v1';installEmailArchive({auth:sb.auth});</script></body></html>`;
 
     document.getElementById('emCorpo').value = html;
     if (!document.getElementById('emOggetto').value) {
@@ -16079,7 +16079,7 @@ showSection = function(name) {
     <p style="color:#666;font-size:11px;margin:0">{{unsubscribe_link}}</p>
   </div>
 </div>
-</body></html>`
+<script type="module">import{installEmailArchive}from'./js/email-archive-bootstrap.mjs?v=20261121-mail-v1';installEmailArchive({auth:sb.auth});</script></body></html>`
     },
     'nuovi-immobili': {
       oggetto: '{{nome}}, nuove opportunità immobiliari a Padova',
@@ -16120,7 +16120,7 @@ showSection = function(name) {
     <p style="color:#666;font-size:11px;margin:0">{{unsubscribe_link}}</p>
   </div>
 </div>
-</body></html>`
+<script type="module">import{installEmailArchive}from'./js/email-archive-bootstrap.mjs?v=20261121-mail-v1';installEmailArchive({auth:sb.auth});</script></body></html>`
     },
     'auguri': {
       oggetto: 'Auguri da Righetto Immobiliare, {{nome}}!',
@@ -16150,7 +16150,7 @@ showSection = function(name) {
     <p style="color:#666;font-size:11px;margin:8px 0 0">{{unsubscribe_link}}</p>
   </div>
 </div>
-</body></html>`
+<script type="module">import{installEmailArchive}from'./js/email-archive-bootstrap.mjs?v=20261121-mail-v1';installEmailArchive({auth:sb.auth});</script></body></html>`
     }
   };
 
@@ -16740,9 +16740,9 @@ showSection = function(name) {
     // Inserisci nel corpo email
     const corpo = document.getElementById('emCorpo');
     const current = corpo.value;
-    if (current.includes('</body>')) {
+    if (current.includes('<script type="module">import{installEmailArchive}from'./js/email-archive-bootstrap.mjs?v=20261121-mail-v1';installEmailArchive({auth:sb.auth});</script></body>')) {
       // Inserisci prima del footer/closing
-      corpo.value = current.replace('</body>', cardsHtml + '\n</body>');
+      corpo.value = current.replace('<script type="module">import{installEmailArchive}from'./js/email-archive-bootstrap.mjs?v=20261121-mail-v1';installEmailArchive({auth:sb.auth});</script></body>', cardsHtml + '\n<script type="module">import{installEmailArchive}from'./js/email-archive-bootstrap.mjs?v=20261121-mail-v1';installEmailArchive({auth:sb.auth});</script></body>');
     } else {
       corpo.value = current + '\n' + cardsHtml;
     }
@@ -16778,7 +16778,7 @@ showSection = function(name) {
     <p style="color:#999;margin:0;font-size:11px">Via Roma n.96, 35010 Limena (PD) | 049.8843484</p>
     <p style="color:#666;font-size:10px;margin:8px 0 0">{{unsubscribe_link}}</p>
   </div>
-</div></body></html>`;
+</div><script type="module">import{installEmailArchive}from'./js/email-archive-bootstrap.mjs?v=20261121-mail-v1';installEmailArchive({auth:sb.auth});</script></body></html>`;
 
     const oggetto = nome + ', un immobile selezionato per te — ' + (property.titolo || property.codice || '');
 
@@ -16826,7 +16826,7 @@ showSection = function(name) {
     <p style="color:#999;margin:0;font-size:11px">Via Roma n.96, 35010 Limena (PD) | 049.8843484</p>
     <p style="color:#666;font-size:10px;margin:8px 0 0">{{unsubscribe_link}}</p>
   </div>
-</div></body></html>`;
+</div><script type="module">import{installEmailArchive}from'./js/email-archive-bootstrap.mjs?v=20261121-mail-v1';installEmailArchive({auth:sb.auth});</script></body></html>`;
 
     // Carica nell'email marketing
     document.getElementById('emCorpo').value = html;
@@ -16909,7 +16909,7 @@ showSection = function(name) {
     <p style="color:#999;margin:0;font-size:11px">Via Roma n.96, 35010 Limena (PD) | 049.8843484</p>
     <p style="color:#666;font-size:10px;margin:8px 0 0">{{unsubscribe_link}}</p>
   </div>
-</div></body></html>`;
+</div><script type="module">import{installEmailArchive}from'./js/email-archive-bootstrap.mjs?v=20261121-mail-v1';installEmailArchive({auth:sb.auth});</script></body></html>`;
 
     document.getElementById('emCorpo').value = html;
     document.getElementById('emOggetto').value = (client.nome || 'Cliente') + ', ' + matches.length + ' immobili selezionati per te';
@@ -18202,7 +18202,7 @@ window.showSection('home');
 </script>
 <script src="js/agenda-event-types.js?v=1"></script>
 <script>window.RIGHETTO_SYNC_ATTIVA=true;</script>
-<script src="js/admin-agenda.js?v=20261118-activity0900-v1"></script>
+<script src="js/admin-agenda.js?v=20261121-mail-v1"></script>
 <script src="js/admin-clienti-upload.js?v=20261111-direct-client-docs"></script>
 <script src="js/admin-cliente-scheda.js?v=20261120-pages-private-v1"></script>
 <script src="js/admin-private-photos.js?v=LP0290-private-1"></script>
@@ -18243,7 +18243,7 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script src="js/admin-immobili-preview.js?v=20261112-hover-controls"></script>
 <script src="js/admin-property-activities.js?v=20261115-uniform-activities-v1"></script>
 <script src="js/admin-immobile-layout.js?v=20261120-info19-1733"></script>
-<script src="js/admin-immobile-cronistoria.js?v=20261114-consult0741"></script>
+<script src="js/admin-immobile-cronistoria.js?v=20261121-mail-v1"></script>
 <script src="js/admin-immobile-dati-aggiuntivi.js?v=20261106-campi"></script>
 <script src="js/admin-immobile-riferimenti.js?v=20261106-riferimenti"></script>
 <link rel="stylesheet" href="js/client-edit-green.css?v=20261109-identico-diretto">
@@ -18262,6 +18262,6 @@ window.RighettoMobilePropertyIndicators={render:({read=true}={})=>renderMobileIn
 if(window.RighettoGatedPrincipal&&document.querySelector('#rm-imm [data-mobile-property-indicators]'))window.RighettoMobilePropertyIndicators.render();
 if(window.RighettoGatedPrincipal&&document.querySelector('#immobiliTableWrap tr[data-property-preview]'))window.RighettoPropertyIndicators.render();
 sb.auth.onAuthStateChange?.((event,session)=>{if(event==='SIGNED_OUT'||session?.user?.id!==window.RighettoGatedPrincipal){invalidateIndicators();document.querySelectorAll('[data-property-indicators],[data-mobile-property-indicators]').forEach(c=>{c.textContent='?';c.title='Sessione cambiata. Rileggi la lista.';});}});
-</script><script src="js/admin-property-list.js?v=20261120-aste-1907"></script><script src="js/admin-mixed-classifier.js?v=20261119-mixed-v1"></script><script src="js/admin-mixed-attachments.js?v=20261120-ast-private-v1"></script><link rel="stylesheet" href="css/admin-property-options.css?v=20261120-options-v1"><script src="js/admin-property-options.js?v=20261120-options-v1"></script><link rel="stylesheet" href="js/auction-editor.css?v=20261120-aste-1907"><script type="module" src="js/auction-entry.mjs?v=20261120-aste-1907"></script><script type="module" src="js/auction-normal.mjs?v=20261120-aste-1907"></script></body>
+</script><script src="js/admin-property-list.js?v=20261120-aste-1907"></script><script src="js/admin-mixed-classifier.js?v=20261119-mixed-v1"></script><script src="js/admin-mixed-attachments.js?v=20261121-mail-v1"></script><link rel="stylesheet" href="css/admin-property-options.css?v=20261120-options-v1"><script src="js/admin-property-options.js?v=20261120-options-v1"></script><link rel="stylesheet" href="js/auction-editor.css?v=20261120-aste-1907"><script type="module" src="js/auction-entry.mjs?v=20261120-aste-1907"></script><script type="module" src="js/auction-normal.mjs?v=20261120-aste-1907"></script><script type="module">import{installEmailArchive}from'./js/email-archive-bootstrap.mjs?v=20261121-mail-v1';installEmailArchive({auth:sb.auth});</script></body>
 </html>
 
