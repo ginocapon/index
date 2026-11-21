@@ -1309,7 +1309,9 @@ function rigSimiliGruppo(row) {
   const group = category || rentCategory || typeCategory;
   if (!['commerciale','residenziale','terreno'].includes(group)) return null;
   const transaction = operation === 'vendita' ? 'vendita' : ['affitto','affitto_commerciale','affitto_residenziale'].includes(operation) ? 'affitto' : '';
-  return transaction ? {transaction, category:group} : null;
+  // Commercial properties match only the same explicit subtype. Unknown subtype stays empty.
+  if (group === 'commerciale' && !type) return null;
+  return transaction ? {transaction, category:group, subtype:group === 'commerciale' ? type : null} : null;
 }
 async function loadSimili(d) {
   const grid = document.getElementById('similiGrid');
@@ -1321,7 +1323,7 @@ async function loadSimili(d) {
   query = group.transaction === 'vendita' ? query.eq('tipo_operazione','vendita') : query.in('tipo_operazione',['affitto','affitto_commerciale','affitto_residenziale']);
   const {data,error} = await query;
   if (error) { grid.innerHTML = '<p style="color:var(--grigio);font-size:.84rem">Immobili simili non disponibili al momento.</p>'; return; }
-  const matching = (data || []).filter(i => { const other=rigSimiliGruppo(i);return other && other.transaction===group.transaction && other.category===group.category && !i.venduto && !i.affittato; });
+  const matching = (data || []).filter(i => { const other=rigSimiliGruppo(i);return other && other.transaction===group.transaction && other.category===group.category && other.subtype===group.subtype && !i.venduto && !i.affittato; });
   matching.sort((a,b) => Number(b.comune===d.comune)-Number(a.comune===d.comune) || String(a.codice||'').localeCompare(String(b.codice||'')));
   const chosen = matching.slice(0,3);
   if (!chosen.length) { grid.innerHTML=empty;return; }
