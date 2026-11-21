@@ -18306,7 +18306,7 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script src="js/admin-property-selection.js?v=20261119-faithful-v1-20261112-manual-number-v1"></script>
 <script src="js/admin-immobili-preview.js?v=20261112-hover-controls"></script>
 <script src="js/admin-property-activities.js?v=20261115-uniform-activities-v1"></script>
-<script src="js/admin-immobile-layout.js?v=20261120-info19-1733"></script>
+<script src="js/admin-immobile-layout.js?v=20261121-files-private-v1"></script>
 <script src="js/admin-immobile-cronistoria.js?v=20261121-mail-v1"></script>
 <script src="js/admin-immobile-dati-aggiuntivi.js?v=20261106-campi"></script>
 <script src="js/admin-immobile-riferimenti.js?v=20261106-riferimenti"></script>
@@ -18326,7 +18326,7 @@ window.RighettoMobilePropertyIndicators={render:({read=true}={})=>renderMobileIn
 if(window.RighettoGatedPrincipal&&document.querySelector('#rm-imm [data-mobile-property-indicators]'))window.RighettoMobilePropertyIndicators.render();
 if(window.RighettoGatedPrincipal&&document.querySelector('#immobiliTableWrap tr[data-property-preview]'))window.RighettoPropertyIndicators.render();
 sb.auth.onAuthStateChange?.((event,session)=>{if(event==='SIGNED_OUT'||session?.user?.id!==window.RighettoGatedPrincipal){invalidateIndicators();document.querySelectorAll('[data-property-indicators],[data-mobile-property-indicators]').forEach(c=>{c.textContent='?';c.title='Sessione cambiata. Rileggi la lista.';});}});
-</script><script src="js/admin-property-list.js?v=20261120-aste-1907"></script><script src="js/admin-mixed-classifier.js?v=20261119-mixed-v1"></script><script src="js/admin-mixed-attachments.js?v=20261121-mail-v1"></script><link rel="stylesheet" href="css/admin-property-options.css?v=20261120-options-v1"><script src="js/admin-property-options.js?v=20261120-options-v1"></script><link rel="stylesheet" href="js/auction-editor.css?v=20261120-aste-1907"><script type="module" src="js/auction-entry.mjs?v=20261120-aste-1907"></script><script type="module" src="js/auction-normal.mjs?v=20261120-aste-1907"></script><script type="module">import{installEmailArchive}from'./js/email-archive-bootstrap.mjs?v=20261121-mail-v1';installEmailArchive({auth:sb.auth});</script><script type="module" src="js/admin-property-agent.mjs?v=20261121-agent23-private-v1"></script>
+</script><script src="js/admin-property-list.js?v=20261120-aste-1907"></script><script src="js/admin-mixed-classifier.js?v=20261119-mixed-v1"></script><script src="js/admin-mixed-attachments.js?v=20261121-files-private-v1"></script><link rel="stylesheet" href="css/admin-property-options.css?v=20261120-options-v1"><script src="js/admin-property-options.js?v=20261120-options-v1"></script><link rel="stylesheet" href="js/auction-editor.css?v=20261120-aste-1907"><script type="module" src="js/auction-entry.mjs?v=20261120-aste-1907"></script><script type="module" src="js/auction-normal.mjs?v=20261120-aste-1907"></script><script type="module">import{installEmailArchive}from'./js/email-archive-bootstrap.mjs?v=20261121-mail-v1';installEmailArchive({auth:sb.auth});</script><script type="module" src="js/admin-property-agent.mjs?v=20261121-agent23-private-v1"></script>
 </body>
 </html>
 
