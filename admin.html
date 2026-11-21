@@ -5123,10 +5123,22 @@ META_IG_USER_ID=...</pre>
       <!-- ═══ SEZIONE DOCUMENTI GENERALI ═══ -->
       <div class="section" id="sec-documentigenerali">
         <div id="moduliGenBox" style="margin:0 0 14px;background:#fff;border:1px solid #d9e2e7;border-radius:10px;padding:10px 14px">
-          <iframe id="moduliGenFrame" title="Modulistica - modelli e documenti salvati" style="display:block;width:100%;height:82vh;min-height:560px;border:0;border-radius:8px;background:#fff" data-src="modulistica/genera-modulo.html?v=20261117-1353"></iframe>
+          <iframe id="moduliGenFrame" title="Modulistica - modelli e documenti salvati" style="display:block;width:100%;height:82vh;min-height:560px;border:0;border-radius:8px;background:#fff" data-src="modulistica/genera-modulo.html?v=20261119-context-v1"></iframe>
         </div>
-        <script>function openDocumentiModulistica(){var f=document.getElementById('moduliGenFrame');if(f&&!f.getAttribute('src')){window.RighettoModulisticaClient=sb;f.src=f.dataset.src;}}</script>
-        <details id="documentiArchivioPrecedente" style="margin-top:18px;border:1px solid #d9e2e7;border-radius:8px;padding:10px 14px"><summary style="cursor:pointer;font-weight:600">Archivio precedente e pagine di riferimento</summary>
+        <script>window.RighettoModulisticaContext=null;
+window.openModuliForEntity=async function(kind,id){
+ if(!['clienti','immobili'].includes(kind)||!/^[-a-zA-Z0-9]+$/.test(String(id||'')))throw Error('Identità scheda non valida');
+ var api=document.getElementById('moduliGenFrame')?.contentWindow?.ModulisticaV3;
+ if(api?.state?.dirty&&!confirm('Il foglio contiene modifiche non salvate. Aprire la scelta di un altro modulo?'))return false;
+ window.RighettoModulisticaContext={kind,id:String(id),principal:window.RighettoGatedPrincipal};
+ window.RighettoModulisticaLaunching=true;
+ try{const opened=await showSection('documentigenerali');if(opened===false||!document.getElementById('sec-documentigenerali')?.classList.contains('active')){window.RighettoModulisticaContext=null;return false;}}finally{window.RighettoModulisticaLaunching=false;}
+ var f=document.getElementById('moduliGenFrame');
+ f?.contentWindow?.ModulisticaV3?.refreshContext?.();
+ return true;
+};
+function openDocumentiModulistica(){if(!window.RighettoModulisticaLaunching){window.RighettoModulisticaContext=null;document.getElementById('moduliGenFrame')?.contentWindow?.ModulisticaV3?.refreshContext?.();}var f=document.getElementById('moduliGenFrame');if(f&&!f.getAttribute('src')){window.RighettoModulisticaClient=sb;f.src=f.dataset.src;}}</script>
+        <details id="documentiArchivioPrecedente" ontoggle="if(this.open && typeof loadDocumentiGenerali==='function')loadDocumentiGenerali()" style="margin-top:18px;border:1px solid #d9e2e7;border-radius:8px;padding:10px 14px"><summary style="cursor:pointer;font-weight:600">Archivio precedente e pagine di riferimento</summary>
         <div class="stats-grid">
           <div class="stat-card" style="border-left-color:var(--oro)"><div class="stat-num" id="statDocGenRif">0</div><div class="stat-label">Riferimenti in alto</div></div>
           <div class="stat-card blue"><div class="stat-num" id="statDocGenArg">0</div><div class="stat-label">Argomenti / contratti</div></div>
@@ -5843,7 +5855,7 @@ function showSection(name) {if(name!=='nuovo'&&window.RighettoLabels&&!RighettoL
   if (name === 'nuovo') populateProprietarioDropdown();
   if (name === 'trend') initTrendSection();
   if (name === 'audit') initAuditSection();
-  if (name === 'documentigenerali') { openDocumentiModulistica(); if (typeof loadDocumentiGenerali === 'function') loadDocumentiGenerali(); }
+  if (name === 'documentigenerali') { openDocumentiModulistica(); if (!window.RighettoModulisticaLaunching && document.getElementById('documentiArchivioPrecedente')?.open && typeof loadDocumentiGenerali === 'function') loadDocumentiGenerali(); }
   if (name === 'perizie' && typeof loadPerizie === 'function') loadPerizie();
   if (name === 'impostazioni') { testConn(); check2FAStatus(); }
   if (name === 'aste' && typeof asteLoad === 'function') asteLoad();
@@ -18268,11 +18280,11 @@ window.showSection('home');
 <script>window.RIGHETTO_SYNC_ATTIVA=true;</script>
 <script src="js/admin-agenda.js?v=20261121-recurrence-1239"></script>
 <script src="js/admin-clienti-upload.js?v=20261111-direct-client-docs"></script>
-<script src="js/admin-cliente-scheda.js?v=20261121-maint-zero-narrow-v1"></script>
+<script src="js/admin-cliente-scheda.js?20261121-moduli-context-private-v1"></script>
 <script src="js/admin-private-photos.js?v=LP0290-private-1"></script>
 <script src="js/admin-immobile-etichette.js?v=20261115-label-reminders-v1"></script>
 <script src="js/admin-property-publication.js?v=ast20-internal-history-v1"></script>
-<script src="js/admin-immobile-operazioni.js?v=ast20-20261120-pages-private-v1"></script>
+<script src="js/admin-immobile-operazioni.js?20261121-moduli-context-private-v1"></script>
 <script src="js/admin-immobile-stampe.js?v=20261112-operations-private"></script>
 <script src="js/admin-immobile-inquilini.js?v=20261106-1038"></script>
 <script src="js/admin-blocco2.js?v=20261112-storico-view"></script>

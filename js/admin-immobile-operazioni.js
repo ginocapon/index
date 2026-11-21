@@ -146,6 +146,7 @@ Object.assign(ops,{
  evento(i){return window.RighettoPropertyPrivateEditor?.comment(i);},
  modifica(i){if(typeof editImmobile==='function'){Promise.resolve(editImmobile(i.id)).then(()=>window.RighettoImmobileLayout?.select('info'));}},
  proprietari(i){if(typeof openProprietariImmobile==='function')openProprietariImmobile(i.id);},
+ async moduli(i){return await window.openModuliForEntity('immobili',i.id);},
  documenti(i){if(typeof openDocsImmobile==='function')openDocsImmobile(i.codice||'',i.id);},
  foto(i){if(typeof openFotoImmobile==='function')openFotoImmobile(i.id);},
  stampa(i){if(window.RighettoImmobileStampe?.open)return RighettoImmobileStampe.open('cliente');throw Error('Modulo PDF cliente non disponibile');},
@@ -153,7 +154,7 @@ Object.assign(ops,{
  evidenza(i){if(typeof toggleEvidenza==='function')toggleEvidenza(i.id,!i.in_evidenza);},
  attivo(i){if(typeof toggleAttivo==='function')toggleAttivo(i.id,!i.attivo);}
 });
-const ITEMS=[['concordato','Conteggi concordato'],['salva','Salva modifiche'],['evento','Aggiungi commento alla cronistoria'],['importa','Importa dati da Idealista'],['modifica','Modifica dati immobile'],['clienti','Trova clienti compatibili'],['appuntamento','Nuovo appuntamento'],['email','Bozza email con i dati'],['cestino','Sposta nel cestino / Ripristina'],['duplica','Duplica come bozza'],['link','Copia link con anteprima foto'],['seolink','Copia link pagina sito (SEO)'],['dati','Esporta dati immobile'],['venduto','Segna venduto / affittato'],['attivo','Attiva / disattiva sul sito'],['evidenza','Metti / togli evidenza'],['proprietari','Gestisci proprietari'],['documenti','Documenti (PDF)'],['foto','Foto pubbliche'],['privatephotos','Foto private'],['stampa','Stampa PDF'],['catasto','Scheda catastale (lettura)']];
+const ITEMS=[['concordato','Conteggi concordato'],['salva','Salva modifiche'],['evento','Aggiungi commento alla cronistoria'],['importa','Importa dati da Idealista'],['modifica','Modifica dati immobile'],['clienti','Trova clienti compatibili'],['appuntamento','Nuovo appuntamento'],['email','Bozza email con i dati'],['cestino','Sposta nel cestino / Ripristina'],['duplica','Duplica come bozza'],['link','Copia link con anteprima foto'],['seolink','Copia link pagina sito (SEO)'],['dati','Esporta dati immobile'],['venduto','Segna venduto / affittato'],['attivo','Attiva / disattiva sul sito'],['evidenza','Metti / togli evidenza'],['proprietari','Gestisci proprietari'],['moduli','Compila modulo'],['documenti','Documenti (PDF)'],['foto','Foto pubbliche'],['privatephotos','Foto private'],['stampa','Stampa PDF'],['catasto','Scheda catastale (lettura)']];
 const ROW_ITEMS=[['cronistoria','Cronistoria immobile'],['clienti','Trova clienti'],['evento','Aggiungi evento'],['appuntamento','Nuovo appuntamento'],['stampa','Crea PDF cliente'],['modifica','Modifica immobile'],['cestino','Sposta nello storico']];
 const rowMenuHtml=i=>ROW_ITEMS.map(([key,label])=>'<button type="button" data-op="'+key+'"'+(key==='cestino'?' style="color:'+((window.RighettoPropertyPublication?.historical(i))?'#176442':'#b1202b')+'"':'')+'>'+esc(key==='cestino'&&window.RighettoPropertyPublication?.historical(i)?'Ripristina':label)+'</button>').join('');
 const DACOMPLETARE='<div class="rio-unavailable">Esportazione sui portali: da completare, non disponibile qui.</div>';
