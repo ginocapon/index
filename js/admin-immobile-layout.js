@@ -80,7 +80,7 @@ function boot(){const fileStyle=document.createElement('style');fileStyle.textCo
  const facts=document.createElement('div');facts.className='ril-original-info-facts';
  for(const id of ['f_codice','f_anno_costruzione','f_incarico_inizio','f_incarico_scadenza']){const n=group(id);if(n)facts.append(n);}
  if(contract)facts.append(contract);
- for(const id of ['f_prezzo_portali','f_superficie','f_superficie_portali','f_spese_condominio','f_consegna','f_unita_abitative','f_esposizione','f_imposta','f_durata_contratto_originale']){const n=group(id);if(n)facts.append(n);}
+ for(const id of ['f_prezzo_portali','f_superficie','f_mq_garage','f_superficie_portali','f_spese_condominio','f_consegna','f_unita_abitative','f_esposizione','f_imposta','f_durata_contratto_originale']){const n=group(id);if(n)facts.append(n);}
  insertion.append(facts);
  const originalRows=[...panels.info.children];const extra=document.createElement('div');extra.className='ril-info-extra';
  const locationHeading=[...panels.info.children].find(n=>n.classList.contains('section-divider')&&n.textContent.trim()==='Localizzazione');if(locationHeading){locationHeading.hidden=true;locationCol.prepend(locationHeading);}

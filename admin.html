@@ -2621,6 +2621,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <label>Superficie (mq)</label>
                   <input type="number" id="f_superficie" placeholder="es. 85">
                 </div>
+                <div class="form-group"><label for="f_mq_garage">Mq garage</label><input type="number" id="f_mq_garage" min="0" step="0.01" placeholder="Non indicati"><small>Superficie del garage, non il numero di posti. Ripresa nei nuovi conteggi del concordato. Lascia vuoto se non conosciuta.</small></div>
                 <div class="form-group">
                   <label>Locali</label>
                   <input type="number" id="f_locali" placeholder="es. 3">
@@ -6901,7 +6902,7 @@ async function editImmobile(id,isCurrent=()=>true,reloadSaved=null) {if(rigPrope
     'camere','bagni_totali','terrazzi_num','ripostigli','garage_num','garage_doppio',
     'balconi','totale_piani_unita','posto_auto','mq_giardino','mq_lotto','esposizione','unita_abitative','totale_piani',
     'impianto_elettrico','panorama','consegna','spese_condominio',
-    'rendita_catastale','valore_catastale','prezzo_reale','ipe_kwh','num_accessi_carrai','num_portoni','numero_chiavi','connettivita','distanza_mare','stato_rogito','stato_manutenzione'];
+    'rendita_catastale','valore_catastale','prezzo_reale','mq_garage','ipe_kwh','num_accessi_carrai','num_portoni','numero_chiavi','connettivita','distanza_mare','stato_rogito','stato_manutenzione'];
 
   const balconySelect=document.getElementById('f_balconi');
   balconySelect.querySelectorAll('[data-existing-value]').forEach(e=>e.remove());
@@ -7094,8 +7095,11 @@ async function saveImmobile(e) {
     }
   }
 
+  const garageField=document.getElementById('f_mq_garage'),garageRaw=garageField.value.trim(),garageArea=garageRaw===''?null:Number(garageRaw);
+  if(garageField.validity.badInput||garageArea!==null&&(!Number.isFinite(garageArea)||garageArea<0||Math.abs(garageArea*100-Math.round(garageArea*100))>1e-7))throw Error('Mq garage: indica un numero non negativo con massimo due decimali oppure lascia vuoto.');
   const payload = {
     ...rigReadCommercial21(),
+    mq_garage: garageArea,
     codice: codiceForDb,
     titolo,
     slug,
@@ -7267,13 +7271,13 @@ async function saveImmobile(e) {
     assertSameForm();
     const patch=RighettoPropertySafety.changedPropertyPayload(rigPropertySnapshot,payload,RighettoPropertySafety.readControls(document.getElementById('immobileForm')),rigPropertyMedia());
     if(!Object.keys(patch).length){toast('Nessuna modifica da salvare.','success');return;}
-    writtenInfoFields=[...new Set([...window.RighettoExistingInfoFields.schema.map(x=>x.key),...rigCommercial21Schema.map(x=>x.key),...document.querySelectorAll('[data-details21]')].map(x=>typeof x==='string'?x:x.dataset.details21))].filter(key=>Object.hasOwn(patch,key));
+    writtenInfoFields=[...new Set(['mq_garage',...window.RighettoExistingInfoFields.schema.map(x=>x.key),...rigCommercial21Schema.map(x=>x.key),...document.querySelectorAll('[data-details21]')].map(x=>typeof x==='string'?x:x.dataset.details21))].filter(key=>Object.hasOwn(patch,key));
     const res=await sb.from('immobili').update(patch).eq('id',id).eq('updated_at',rigPropertySnapshot.record.updated_at).select('id,updated_at,tipologie_ricerca');
     if(res.error)throw Error(res.error.message);
     if(res.data?.length!==1)throw Error('Salvataggio non eseguito: scheda modificata o permessi cambiati. Ricarica prima di riprovare.');
     savedRow=res.data[0];
   }else{
-    writtenInfoFields=[...new Set([...window.RighettoExistingInfoFields.schema.map(x=>x.key),...rigCommercial21Schema.map(x=>x.key),...document.querySelectorAll('[data-details21]')].map(x=>typeof x==='string'?x:x.dataset.details21))].filter(key=>Object.hasOwn(payload,key));
+    writtenInfoFields=[...new Set(['mq_garage',...window.RighettoExistingInfoFields.schema.map(x=>x.key),...rigCommercial21Schema.map(x=>x.key),...document.querySelectorAll('[data-details21]')].map(x=>typeof x==='string'?x:x.dataset.details21))].filter(key=>Object.hasOwn(payload,key));
     const res=await sb.from('immobili').insert(payload).select('id,updated_at,tipologie_ricerca');
     if(res.error)throw Error(res.error.message);
     if(res.data?.length!==1)throw Error('Esito creazione da verificare: non ripetere.');
@@ -8866,7 +8870,7 @@ function doImport() {
   if (!raw) { errEl.textContent = '⚠️ Incolla il JSON!'; errEl.style.display = 'block'; return; }
   let data;
   try { data = JSON.parse(raw); } catch(e) { errEl.textContent = '❌ JSON non valido. Riprova.'; errEl.style.display = 'block'; return; }
-  const map = {codice:'f_codice',titolo:'f_titolo',tipo_operazione:'f_tipo_operazione',categoria:'f_categoria',tipologia:'f_tipologia',comune:'f_comune',indirizzo:'f_indirizzo',prezzo:'f_prezzo',superficie:'f_superficie',locali:'f_locali',camere:'f_camere',bagni_totali:'f_bagni_totali',piano:'f_piano',anno_costruzione:'f_anno_costruzione',stato_manutenzione:'f_stato_manutenzione',classe_energetica:'f_classe_energetica',ipe_kwh:'f_ipe_kwh',esposizione:'f_esposizione',spese_condominio:'f_spese_condominio',consegna:'f_consegna',impianto_elettrico:'f_impianto_elettrico',num_accessi_carrai:'f_num_accessi_carrai',num_portoni:'f_num_portoni',garage_num:'f_garage_num',youtube_id:'f_youtube_id',virtual_tour:'f_virtual_tour',id_idealista:'f_id_idealista',note_interne:'f_note_interne',lat:'f_lat',lng:'f_lng'};
+  const map = {codice:'f_codice',titolo:'f_titolo',tipo_operazione:'f_tipo_operazione',categoria:'f_categoria',tipologia:'f_tipologia',comune:'f_comune',indirizzo:'f_indirizzo',prezzo:'f_prezzo',mq_garage:'f_mq_garage',superficie:'f_superficie',locali:'f_locali',camere:'f_camere',bagni_totali:'f_bagni_totali',piano:'f_piano',anno_costruzione:'f_anno_costruzione',stato_manutenzione:'f_stato_manutenzione',classe_energetica:'f_classe_energetica',ipe_kwh:'f_ipe_kwh',esposizione:'f_esposizione',spese_condominio:'f_spese_condominio',consegna:'f_consegna',impianto_elettrico:'f_impianto_elettrico',num_accessi_carrai:'f_num_accessi_carrai',num_portoni:'f_num_portoni',garage_num:'f_garage_num',youtube_id:'f_youtube_id',virtual_tour:'f_virtual_tour',id_idealista:'f_id_idealista',note_interne:'f_note_interne',lat:'f_lat',lng:'f_lng'};
   Object.entries(map).forEach(([k,id])=>{const el=document.getElementById(id);if(el&&data[k]!==undefined&&data[k]!==null)el.value=data[k];});
   ['garage','giardino','terrazzo','cantina','ascensore','piscina','arredato','attivo','in_evidenza','venduto','affittato'].forEach(k=>{const el=document.getElementById('f_'+k);if(el&&data[k]!==undefined)el.checked=!!data[k];});
   // Le foto di Idealista NON vengono importate (copyright)
@@ -18284,7 +18288,7 @@ window.showSection('home');
 <script src="js/admin-private-photos.js?v=LP0290-private-1"></script>
 <script src="js/admin-immobile-etichette.js?v=20261115-label-reminders-v1"></script>
 <script src="js/admin-property-publication.js?v=ast20-internal-history-v1"></script>
-<script src="js/admin-immobile-operazioni.js?20261121-moduli-context-private-v1"></script>
+<script src="js/admin-immobile-operazioni.js?v=20261121-garage-first-private-v1"></script>
 <script src="js/admin-immobile-stampe.js?v=20261112-operations-private"></script>
 <script src="js/admin-immobile-inquilini.js?v=20261106-1038"></script>
 <script src="js/admin-blocco2.js?v=20261112-storico-view"></script>
@@ -18318,7 +18322,7 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script src="js/admin-property-selection.js?v=20261119-faithful-v1-20261112-manual-number-v1"></script>
 <script src="js/admin-immobili-preview.js?v=20261112-hover-controls"></script>
 <script src="js/admin-property-activities.js?v=20261115-uniform-activities-v1"></script>
-<script src="js/admin-immobile-layout.js?v=20261121-photo-summary-controls-v1"></script>
+<script src="js/admin-immobile-layout.js?v=20261121-garage-first-private-v1"></script>
 <script src="js/admin-immobile-cronistoria.js?v=20261121-green-alternating-v1"></script>
 <script src="js/admin-immobile-dati-aggiuntivi.js?v=20261106-campi"></script>
 <script src="js/admin-immobile-riferimenti.js?v=20261106-riferimenti"></script>
