@@ -2685,6 +2685,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <label class="check-item"><input type="checkbox" id="f_cantina"> 📦 Cantina</label>
                   <label class="check-item"><input type="checkbox" id="f_porticato"> ⛩️ Porticato</label>
                   <label class="check-item"><input type="checkbox" id="f_soppalco"> 📐 Soppalco</label>
+<label class="check-item" data-details21="sottotetto"><input type="checkbox" id="f_sottotetto"> Sottotetto</label>
                   <label class="check-item"><input type="checkbox" id="f_giardino_condominiale"> 🌳 Giardino condominiale</label>
                 </div>
                 <div class="form-grid" style="margin-top:12px">
@@ -2700,6 +2701,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                     <label>N° Terrazzi</label>
                     <input type="number" id="f_terrazzi_num" min="0" placeholder="es. 1">
                   </div>
+<div class="form-group" data-details21="balconi"><label for="f_balconi">Poggioli / balconi</label><select id="f_balconi"><option value="">Non indicato</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="-1">Più di 3</option></select></div>
                   <div class="form-group">
                     <label>N° Ripostigli</label>
                     <input type="number" id="f_ripostigli" min="0" placeholder="es. 1">
@@ -2747,6 +2749,9 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <label class="check-item"><input type="checkbox" id="f_piano_terra"> Piano Terra</label>
                   <label class="check-item"><input type="checkbox" id="f_primo_piano"> Primo Piano</label>
                   <label class="check-item"><input type="checkbox" id="f_ultimo_piano"> 🏢 Ultimo Piano</label>
+<label class="check-item" data-details21="piano_rialzato"><input type="checkbox" id="f_piano_rialzato"> Piano rialzato</label>
+<label class="check-item" data-details21="piano_seminterrato"><input type="checkbox" id="f_piano_seminterrato"> Piano seminterrato</label>
+<label class="check-item" data-details21="piano_intermedio"><input type="checkbox" id="f_piano_intermedio"> Piano intermedio</label>
                 </div>
 
                 <!-- ═══ COMFORT ═══ -->
@@ -2758,6 +2763,14 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <label class="check-item"><input type="checkbox" id="f_ascensore"> 🛗 Ascensore</label>
                   <label class="check-item"><input type="checkbox" id="f_piscina"> 🏊 Piscina</label>
                   <label class="check-item"><input type="checkbox" id="f_arredato"> 🛋️ Arredato</label>
+                  <label class="check-item" data-details21="cucina_arredata"><input type="checkbox" id="f_cucina_arredata"> Cucina arredata</label>
+                  <label class="check-item" data-details21="forno"><input type="checkbox" id="f_forno"> Forno</label>
+                  <label class="check-item" data-details21="frigorifero"><input type="checkbox" id="f_frigorifero"> Frigorifero</label>
+                  <label class="check-item" data-details21="lavastoviglie"><input type="checkbox" id="f_lavastoviglie"> Lavastoviglie</label>
+                  <label class="check-item" data-details21="lavatrice"><input type="checkbox" id="f_lavatrice"> Lavatrice</label>
+                  <label class="check-item" data-details21="televisione"><input type="checkbox" id="f_televisione"> Televisione</label>
+                  <label class="check-item" data-details21="vasca_idromassaggio"><input type="checkbox" id="f_vasca_idromassaggio"> Vasca idromassaggio</label>
+<label class="check-item" data-details21="vasca"><input type="checkbox" id="f_vasca"> Vasca</label>
                   <label class="check-item"><input type="checkbox" id="f_ingresso_indipendente"> 🚪 Ingresso Indipendente</label>
                   <label class="check-item"><input type="checkbox" id="f_canna_fumaria"> 🔥 Canna Fumaria</label>
                   <label class="check-item"><input type="checkbox" id="f_animali_ammessi"> 🐾 Animali Ammessi</label>
@@ -2837,6 +2850,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                     <label>Totale Piani Edificio</label>
                     <input type="number" id="f_totale_piani" min="1" placeholder="es. 3">
                   </div>
+<div class="form-group" data-details21="totale_piani_unita"><label for="f_totale_piani_unita">Totale piani unità</label><input type="number" id="f_totale_piani_unita" min="0" step="1"></div>
                   <div class="form-group">
                     <label>Piano Numero</label>
                     <select id="f_piano_numero">
@@ -2925,6 +2939,36 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   </div>
                 </div>
 
+<div class="section-divider">Stato Immobile - dettagli commerciali</div>
+<details id="commercial21" class="form-full" style="grid-column:1/-1;min-width:0;border:1px solid #adc7b5;border-radius:8px;padding:12px"><summary style="min-height:44px;cursor:pointer;font-weight:600">Dettagli commerciali e produttivi</summary><p style="font-size:0.8rem;line-height:1.5;margin:8px 0">Campi già presenti nella scheda dati. Compila solo quelli pertinenti. Nessuna tipologia o classificazione viene cambiata automaticamente.</p><div class="commercial21-grid">
+<div class="form-group" style="min-width:0"><label for="f_carro_ponte">carro ponte</label><select id="f_carro_ponte" data-commercial21="carro_ponte"><option value="">Non indicato</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="-1">più di 3</option></select></div>
+<div class="form-group" style="min-width:0"><label for="f_mq_aree_esterne">mq aree esterne</label><input id="f_mq_aree_esterne" data-commercial21="mq_aree_esterne" type="number" min="0" step="any"></div>
+<div class="form-group" style="min-width:0"><label for="f_numero_vetrine">numero vetrine</label><select id="f_numero_vetrine" data-commercial21="numero_vetrine"><option value="">Non indicato</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="-1">più di 3</option></select></div>
+<div class="form-group" style="min-width:0"><label for="f_altezza_piano">m altezza piano</label><input id="f_altezza_piano" data-commercial21="altezza_piano" type="number" min="0" step="any"></div>
+<div class="form-group" style="min-width:0"><label class="check-item" for="f_aree_esterne"><input type="checkbox" id="f_aree_esterne" data-commercial21="aree_esterne"> aree esterne</label></div>
+<div class="form-group" style="min-width:0"><label for="f_kw_cabina">kw cabina elettrica</label><input id="f_kw_cabina" data-commercial21="kw_cabina" type="number" min="0" step="any"></div>
+<div class="form-group" style="min-width:0"><label for="f_ribalte">ribalte</label><select id="f_ribalte" data-commercial21="ribalte"><option value="">Non indicato</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="-1">più di 3</option></select></div>
+<div class="form-group" style="min-width:0"><label for="f_mq_ufficio">mq ufficio</label><input id="f_mq_ufficio" data-commercial21="mq_ufficio" type="number" min="0" step="any"></div>
+<div class="form-group" style="min-width:0"><label for="f_posizione_commerciale">posizione</label><select id="f_posizione_commerciale" data-commercial21="posizione_commerciale"><option value="">Non indicato</option><option value="0">-- non indicata --</option><option value="1">area industriale/artigianale</option><option value="2">centro commerciale</option><option value="3">ad angolo</option><option value="4">centrale</option><option value="5">servita</option><option value="6">forte passaggio</option><option value="7">fronte lago</option><option value="8">fronte strada</option><option value="9">interna</option></select></div>
+<div class="form-group" style="min-width:0"><label for="f_superficie_commerciale">mq superficie commerciale</label><input id="f_superficie_commerciale" data-commercial21="superficie_commerciale" type="number" min="0" step="any"></div>
+<div class="form-group" style="min-width:0"><label class="check-item" for="f_cabina_elettrica"><input type="checkbox" id="f_cabina_elettrica" data-commercial21="cabina_elettrica"> cabina elettrica</label></div>
+<div class="form-group" style="min-width:0"><label for="f_superficie_utile">mq superficie utile</label><input id="f_superficie_utile" data-commercial21="superficie_utile" type="number" min="0" step="any"></div>
+<div class="form-group" style="min-width:0"><label class="check-item" for="f_antincendio"><input type="checkbox" id="f_antincendio" data-commercial21="antincendio"> impianto anti-incendio</label></div>
+<div class="form-group" style="min-width:0"><label for="f_dimensione_accesso_carraio">m dimensione accesso carraio</label><input id="f_dimensione_accesso_carraio" data-commercial21="dimensione_accesso_carraio" type="number" min="0" step="any"></div>
+<div class="form-group" style="min-width:0"><label for="f_montacarichi">montacarichi</label><select id="f_montacarichi" data-commercial21="montacarichi"><option value="">Non indicato</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="-1">più di 3</option></select></div>
+<div class="form-group" style="min-width:0"><label for="f_lunghezza">m lunghezza immobile</label><input id="f_lunghezza" data-commercial21="lunghezza" type="number" min="0" step="any"></div>
+<div class="form-group" style="min-width:0"><label for="f_banchine_carico">banchine di carico</label><select id="f_banchine_carico" data-commercial21="banchine_carico"><option value="">Non indicato</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="-1">più di 3</option></select></div>
+<div class="form-group" style="min-width:0"><label for="f_larghezza">m larghezza immobile</label><input id="f_larghezza" data-commercial21="larghezza" type="number" min="0" step="any"></div>
+<div class="form-group" style="min-width:0"><label for="f_saracinesche">saracinesche</label><select id="f_saracinesche" data-commercial21="saracinesche"><option value="">Non indicato</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="-1">più di 3</option></select></div>
+<div class="form-group" style="min-width:0"><label for="f_altezza">m altezza immobile</label><input id="f_altezza" data-commercial21="altezza" type="number" min="0" step="any"></div>
+<div class="form-group" style="min-width:0"><label class="check-item" for="f_fognatura"><input type="checkbox" id="f_fognatura" data-commercial21="fognatura"> allacciamento fognatura</label></div>
+<div class="form-group" style="min-width:0"><label for="f_kw_impianto">kw impianto elettrico</label><input id="f_kw_impianto" data-commercial21="kw_impianto" type="number" min="0" step="any"></div>
+<div class="form-group" style="min-width:0"><label class="check-item" for="f_illuminazione"><input type="checkbox" id="f_illuminazione" data-commercial21="illuminazione"> impianto illuminazione</label></div>
+<div class="form-group" style="min-width:0"><label for="f_deposito_cauzionale">deposito cauzionale</label><input id="f_deposito_cauzionale" data-commercial21="deposito_cauzionale" type="number" min="0" step="any"></div>
+<div class="form-group" style="min-width:0"><label for="f_fatturato">€ fatturato</label><input id="f_fatturato" data-commercial21="fatturato" type="number" min="0" step="any"></div>
+<div class="form-group" style="min-width:0"><label for="f_fideiussione">fideiussione</label><input id="f_fideiussione" data-commercial21="fideiussione" type="text"></div>
+<div class="form-group" style="min-width:0"><label for="f_fee_ingresso">€ fee d&#x27;ingresso</label><input id="f_fee_ingresso" data-commercial21="fee_ingresso" type="number" min="0" step="any"></div>
+</div></details><style>.commercial21-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.commercial21-grid label{overflow-wrap:anywhere}.commercial21-grid input,.commercial21-grid select{box-sizing:border-box;max-width:100%;min-width:0}@media(max-width:600px){.commercial21-grid{grid-template-columns:minmax(0,1fr)}}</style>
                 <!-- ═══ CATASTO ═══ -->
                 <div class="section-divider">
                   📋 Dati Catastali
@@ -6807,6 +6851,12 @@ function changedPropertyPayload(snapshot,payload,controls,media){
 function readControls(form){const values=Object.fromEntries([...form.querySelectorAll('[id]')].filter(x=>/^f_/.test(x.id)&&('value'in x||'checked'in x)).map(x=>[x.id,x.type==='checkbox'||x.type==='radio'?x.checked:x.value]));for(const x of form.querySelectorAll('[name=contratto_affitto_res]'))values['name:contratto_affitto_res:'+x.value]=x.checked;return values;}
 
 return {capturePropertyForm,changedPropertyPayload,readControls};})();
+const rigCommercial21Schema=[{"key": "carro_ponte", "kind": "select", "label": "carro ponte", "options": [{"value": "0", "label": "0"}, {"value": "1", "label": "1"}, {"value": "2", "label": "2"}, {"value": "3", "label": "3"}, {"value": "-1", "label": "più di 3"}]}, {"key": "mq_aree_esterne", "kind": "number", "label": "mq aree esterne", "options": null}, {"key": "numero_vetrine", "kind": "select", "label": "numero vetrine", "options": [{"value": "0", "label": "0"}, {"value": "1", "label": "1"}, {"value": "2", "label": "2"}, {"value": "3", "label": "3"}, {"value": "-1", "label": "più di 3"}]}, {"key": "altezza_piano", "kind": "number", "label": "m altezza piano", "options": null}, {"key": "aree_esterne", "kind": "boolean", "label": "aree esterne", "options": null}, {"key": "kw_cabina", "kind": "number", "label": "kw cabina elettrica", "options": null}, {"key": "ribalte", "kind": "select", "label": "ribalte", "options": [{"value": "0", "label": "0"}, {"value": "1", "label": "1"}, {"value": "2", "label": "2"}, {"value": "3", "label": "3"}, {"value": "-1", "label": "più di 3"}]}, {"key": "mq_ufficio", "kind": "number", "label": "mq ufficio", "options": null}, {"key": "posizione_commerciale", "kind": "select", "label": "posizione", "options": [{"label": "-- non indicata --", "value": "0"}, {"label": "area industriale/artigianale", "value": "1"}, {"label": "centro commerciale", "value": "2"}, {"label": "ad angolo", "value": "3"}, {"label": "centrale", "value": "4"}, {"label": "servita", "value": "5"}, {"label": "forte passaggio", "value": "6"}, {"label": "fronte lago", "value": "7"}, {"label": "fronte strada", "value": "8"}, {"label": "interna", "value": "9"}]}, {"key": "superficie_commerciale", "kind": "number", "label": "mq superficie commerciale", "options": null}, {"key": "cabina_elettrica", "kind": "boolean", "label": "cabina elettrica", "options": null}, {"key": "superficie_utile", "kind": "number", "label": "mq superficie utile", "options": null}, {"key": "antincendio", "kind": "boolean", "label": "impianto anti-incendio", "options": null}, {"key": "dimensione_accesso_carraio", "kind": "number", "label": "m dimensione accesso carraio", "options": null}, {"key": "montacarichi", "kind": "select", "label": "montacarichi", "options": [{"value": "0", "label": "0"}, {"value": "1", "label": "1"}, {"value": "2", "label": "2"}, {"value": "3", "label": "3"}, {"value": "-1", "label": "più di 3"}]}, {"key": "lunghezza", "kind": "number", "label": "m lunghezza immobile", "options": null}, {"key": "banchine_carico", "kind": "select", "label": "banchine di carico", "options": [{"value": "0", "label": "0"}, {"value": "1", "label": "1"}, {"value": "2", "label": "2"}, {"value": "3", "label": "3"}, {"value": "-1", "label": "più di 3"}]}, {"key": "larghezza", "kind": "number", "label": "m larghezza immobile", "options": null}, {"key": "saracinesche", "kind": "select", "label": "saracinesche", "options": [{"value": "0", "label": "0"}, {"value": "1", "label": "1"}, {"value": "2", "label": "2"}, {"value": "3", "label": "3"}, {"value": "-1", "label": "più di 3"}]}, {"key": "altezza", "kind": "number", "label": "m altezza immobile", "options": null}, {"key": "fognatura", "kind": "boolean", "label": "allacciamento fognatura", "options": null}, {"key": "kw_impianto", "kind": "number", "label": "kw impianto elettrico", "options": null}, {"key": "illuminazione", "kind": "boolean", "label": "impianto illuminazione", "options": null}, {"key": "deposito_cauzionale", "kind": "number", "label": "deposito cauzionale", "options": null}, {"key": "fatturato", "kind": "number", "label": "€ fatturato", "options": null}, {"key": "fideiussione", "kind": "text", "label": "fideiussione", "options": null}, {"key": "fee_ingresso", "kind": "number", "label": "€ fee d'ingresso", "options": null}];
+function rigFillCommercial21(record){for(const f of rigCommercial21Schema){const e=document.getElementById('f_'+f.key),value=record[f.key];if(f.kind==='boolean'){e.checked=value===true;continue;}if(f.kind==='select'){e.querySelectorAll('[data-existing-value]').forEach(o=>o.remove());if(value!=null&&value!==''&&![...e.options].some(o=>o.value===String(value))){const o=new Option(String(value)+' (valore esistente)',String(value));o.dataset.existingValue='true';e.add(o);}}e.value=value==null?'':String(value);}}
+function rigSavedDetail21Equal(key,actual,expected){if(actual==null||expected==null)return actual===expected;const f=rigCommercial21Schema.find(x=>x.key===key);if(f?.kind==='select'||key==='balconi')return String(actual)===String(expected);if(f?.kind==='number'||key==='totale_piani_unita')return Number.isFinite(Number(actual))&&Number(actual)===Number(expected);return JSON.stringify(actual)===JSON.stringify(expected);}
+function rigReadCommercial21(){return Object.fromEntries(rigCommercial21Schema.map(f=>{const e=document.getElementById('f_'+f.key);return[f.key,f.kind==='boolean'?e.checked:e.value===''?null:f.kind==='number'?Number(e.value):e.value];}));}
+function rigValidateCommercial21(){for(const f of rigCommercial21Schema){const e=document.getElementById('f_'+f.key),before=rigPropertySnapshot?.controls?.[e.id],value=f.kind==='boolean'?e.checked:e.value;if(value===before||value==='')continue;if(f.kind==='number'&&(!Number.isFinite(Number(value))||Number(value)<0))throw Error('Controlla '+f.label+': indica un numero da zero in poi.');if(f.kind==='select'&&!f.options.some(o=>o.value===value))throw Error('Controlla '+f.label+': scegli un valore previsto.');}}
+
 let rigPropertySnapshot=null;let rigPropertySaving=false;
 function rigPropertyMedia(){return {foto:currentFotos,planimetrie:currentPlanimetrie,documenti:currentDocumenti,virtual_tour_scenes:currentVtScenes,unita_catastali:currentUnitaCatastali,catasto_pdf:currentCatastoPdf};}
 
@@ -6837,10 +6887,13 @@ async function editImmobile(id,isCurrent=()=>true,reloadSaved=null) {if(rigPrope
     'anno_costruzione','stato','classe_energetica','youtube_id','virtual_tour',
     'id_idealista','descrizione','note_interne',
     'camere','bagni_totali','terrazzi_num','ripostigli','garage_num','garage_doppio',
-    'posto_auto','mq_giardino','mq_lotto','esposizione','unita_abitative','totale_piani',
+    'balconi','totale_piani_unita','posto_auto','mq_giardino','mq_lotto','esposizione','unita_abitative','totale_piani',
     'impianto_elettrico','panorama','consegna','spese_condominio',
     'rendita_catastale','valore_catastale','prezzo_reale','ipe_kwh','num_accessi_carrai','num_portoni','numero_chiavi','connettivita','distanza_mare','stato_rogito','stato_manutenzione'];
 
+  const balconySelect=document.getElementById('f_balconi');
+  balconySelect.querySelectorAll('[data-existing-value]').forEach(e=>e.remove());
+  if(imm.balconi!=null&&![...balconySelect.options].some(o=>o.value===String(imm.balconi))){const o=new Option(String(imm.balconi)+' (valore esistente)',String(imm.balconi));o.dataset.existingValue='true';balconySelect.add(o);}
   // Conserva consegne esistenti non presenti nell'elenco standard.
   const consegnaSelect = document.getElementById('f_consegna');
   if (consegnaSelect) {
@@ -6908,7 +6961,7 @@ async function editImmobile(id,isCurrent=()=>true,reloadSaved=null) {if(rigPrope
   const bools = ['garage','giardino','terrazzo','cantina','ascensore','piscina','arredato',
     'attivo','in_evidenza','venduto','affittato',
     'soggiorno','soggiorno_angolo_cottura','cucina','mansarda','taverna','soffitta','lavanderia','porticato','soppalco',
-    'giardino_condominiale','piano_interrato','piano_terra','primo_piano','ultimo_piano',
+    'cucina_arredata','forno','frigorifero','lavastoviglie','lavatrice','televisione','vasca_idromassaggio','sottotetto','piano_intermedio','piano_seminterrato','piano_rialzato','vasca','giardino_condominiale','piano_interrato','piano_terra','primo_piano','ultimo_piano',
     'ingresso_indipendente','canna_fumaria','animali_ammessi','annuncio_prestigio',
     'chiavi_agenzia','immobile_garantito','riscaldamento_autonomo',
     'riscaldamento_centralizzato','aria_condizionata','conta_calorie','portineria','posto_spiaggia','accesso_disabili','area_fitness','caldaia_condensazione','camino','riscaldamento_pavimento','termopompa','pannelli_fotovoltaici','pannelli_solari','impianto_geotermico','allarme','domotica','porta_blindata','tapparelle_motorizzate','zanzariere','cassaforte','annuncio_autonomo','riscaldamento_semi_autonomo','raffreddamento_pavimento','predisposizione_aria','predisposizione_allarme','tende_sole','nuovo_costruzione','grezzo','cartello','riservato_residenti'];
@@ -6939,6 +6992,7 @@ async function editImmobile(id,isCurrent=()=>true,reloadSaved=null) {if(rigPrope
   window.scrollTo(0, 0);
   try{const types=await window.rigPropertyTypesReady;if(!current())return;types.mount(imm);}catch(error){if(current()){rigPropertySnapshot=null;document.getElementById('btnSalva').disabled=true;toast(error.message,'error');}return;}
   window.RighettoExistingInfoFields.fill(imm);
+  rigFillCommercial21(imm);
   try{rigPropertySnapshot=RighettoPropertySafety.capturePropertyForm(imm,RighettoPropertySafety.readControls(document.getElementById('immobileForm')),rigPropertyMedia());}catch(error){toast(error.message,'error');}
  window.RighettoLabels?.mount(imm);
 }
@@ -6959,6 +7013,8 @@ async function saveImmobile(e) {
   if(id){rigPropertySaving=true;lockedControls=[...document.getElementById('immobileForm').querySelectorAll('input,select,textarea,button')].map(el=>({el,disabled:el.disabled}));for(const x of lockedControls)x.el.disabled=true;}
   if(id&&(!rigPropertySnapshot||String(rigPropertySnapshot.record.id)!==String(id)))throw Error('Scheda non verificata: riaprila prima di salvare.');
   const saveSnapshot=rigPropertySnapshot;
+  rigValidateCommercial21();
+  for(const [key,valid] of [['totale_piani_unita',v=>Number.isSafeInteger(Number(v))&&Number(v)>=0],['balconi',v=>['0','1','2','3','-1'].includes(v)]]){const value=document.getElementById('f_'+key).value;const prior=rigPropertySnapshot?.controls?.['f_'+key];if(value!==prior&&value!==''&&!valid(value))throw Error(key==='balconi'?'Controlla il numero di poggioli / balconi.':'Totale piani unità: indica un intero da zero in poi.');}
   const saveControls=JSON.stringify(RighettoPropertySafety.readControls(document.getElementById('immobileForm')));
   const saveMedia=JSON.stringify(rigPropertyMedia());
   function assertSameForm(){if(document.getElementById('editId').value!==id||id&&rigPropertySnapshot!==saveSnapshot||JSON.stringify(RighettoPropertySafety.readControls(document.getElementById('immobileForm')))!==saveControls||JSON.stringify(rigPropertyMedia())!==saveMedia)throw Error('Scheda cambiata durante controllo: verifica i dati e salva di nuovo.');}
@@ -7027,6 +7083,7 @@ async function saveImmobile(e) {
   }
 
   const payload = {
+    ...rigReadCommercial21(),
     codice: codiceForDb,
     titolo,
     slug,
@@ -7117,6 +7174,13 @@ async function saveImmobile(e) {
     consegna: document.getElementById('f_consegna').value||null,
     spese_condominio: rigNumberOrNull(parseFloat(document.getElementById('f_spese_condominio').value)),
     // Arredamento
+    balconi: document.getElementById('f_balconi').value||null,
+    totale_piani_unita: document.getElementById('f_totale_piani_unita').value===''?null:Number(document.getElementById('f_totale_piani_unita').value),
+    sottotetto: document.getElementById('f_sottotetto').checked,
+    piano_intermedio: document.getElementById('f_piano_intermedio').checked,
+    piano_seminterrato: document.getElementById('f_piano_seminterrato').checked,
+    piano_rialzato: document.getElementById('f_piano_rialzato').checked,
+    vasca: document.getElementById('f_vasca').checked,
     arredo: document.getElementById('f_arredo')?.checked||false,
     cucina_arredata: document.getElementById('f_cucina_arredata')?.checked||false,
     forno: document.getElementById('f_forno')?.checked||false,
@@ -7191,13 +7255,13 @@ async function saveImmobile(e) {
     assertSameForm();
     const patch=RighettoPropertySafety.changedPropertyPayload(rigPropertySnapshot,payload,RighettoPropertySafety.readControls(document.getElementById('immobileForm')),rigPropertyMedia());
     if(!Object.keys(patch).length){toast('Nessuna modifica da salvare.','success');return;}
-    writtenInfoFields=window.RighettoExistingInfoFields.schema.map(x=>x.key).filter(key=>Object.hasOwn(patch,key));
+    writtenInfoFields=[...new Set([...window.RighettoExistingInfoFields.schema.map(x=>x.key),...rigCommercial21Schema.map(x=>x.key),...document.querySelectorAll('[data-details21]')].map(x=>typeof x==='string'?x:x.dataset.details21))].filter(key=>Object.hasOwn(patch,key));
     const res=await sb.from('immobili').update(patch).eq('id',id).eq('updated_at',rigPropertySnapshot.record.updated_at).select('id,updated_at,tipologie_ricerca');
     if(res.error)throw Error(res.error.message);
     if(res.data?.length!==1)throw Error('Salvataggio non eseguito: scheda modificata o permessi cambiati. Ricarica prima di riprovare.');
     savedRow=res.data[0];
   }else{
-    writtenInfoFields=window.RighettoExistingInfoFields.schema.map(x=>x.key).filter(key=>Object.hasOwn(payload,key));
+    writtenInfoFields=[...new Set([...window.RighettoExistingInfoFields.schema.map(x=>x.key),...rigCommercial21Schema.map(x=>x.key),...document.querySelectorAll('[data-details21]')].map(x=>typeof x==='string'?x:x.dataset.details21))].filter(key=>Object.hasOwn(payload,key));
     const res=await sb.from('immobili').insert(payload).select('id,updated_at,tipologie_ricerca');
     if(res.error)throw Error(res.error.message);
     if(res.data?.length!==1)throw Error('Esito creazione da verificare: non ripetere.');
@@ -7205,7 +7269,7 @@ async function saveImmobile(e) {
   }
   const verified=await sb.from('immobili').select(['id','updated_at','tipologie_ricerca','documenti',...writtenInfoFields].join(',')).eq('id',savedRow.id).single();
   if(verified.error||verified.data?.updated_at!==savedRow.updated_at)throw Error('Salvataggio effettuato, verifica successiva non conclusa: non ripetere, rileggi la scheda.');
-  for(const key of writtenInfoFields){if(!Object.hasOwn(verified.data,key)||JSON.stringify(verified.data[key])!==JSON.stringify(payload[key]))throw Error('Salvataggio effettuato, dati Info non confermati: non ripetere, rileggi la scheda.');}
+  for(const key of writtenInfoFields){if(!Object.hasOwn(verified.data,key)||!rigSavedDetail21Equal(key,verified.data[key],payload[key]))throw Error('Salvataggio effettuato, dati della scheda non confermati: non ripetere, rileggi la scheda.');}
   if(JSON.stringify(verified.data?.documenti??[])!==JSON.stringify(payload.documenti??[]))throw Error('Salvataggio effettuato, allegati non ancora confermati: non ripetere, rileggi la scheda.');
   if(JSON.stringify(window.RighettoPropertyTypes.normalize(verified.data?.tipologie_ricerca??null))!==JSON.stringify(window.RighettoPropertyTypes.normalize(savedRow.tipologie_ricerca??null))||JSON.stringify(window.RighettoPropertyTypes.normalize(savedRow.tipologie_ricerca??null))!==JSON.stringify(window.RighettoPropertyTypes.normalize(payload.tipologie_ricerca)))throw Error('Salvataggio eseguito, tipologie da verificare: non ripetere.');
   if(id){try{assertSameForm();}catch(error){throw Error('Salvataggio eseguito sulla scheda precedente. La scheda aperta ora non è stata toccata: ricarica elenco per verificare.');}}
