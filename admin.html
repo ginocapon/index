@@ -8801,11 +8801,11 @@ function renderUnitaCatastali() {
         <div><label style="font-size:0.7rem;color:var(--caffe2)">Classe</label>
           <input type="text" value="${attr(u.classe)}" placeholder="es. 1" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].classe=this.value"></div>
         <div><label style="font-size:0.7rem;color:var(--caffe2)">Rendita (€)</label>
-          <input type="number" value="${u.rendita||''}" placeholder="es. 1568.74" step="0.01" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].rendita=parseFloat(this.value)||null"></div>
+          <input type="number" value="${u.rendita??''}" placeholder="es. 1568.74" step="0.01" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].rendita=this.value.trim()===''?null:Number(this.value)"></div>
         <div><label style="font-size:0.7rem;color:var(--caffe2)">Val. Catastale Prima Casa (€)</label>
-          <input type="number" value="${u.valore_prima||''}" step="0.01" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].valore_prima=parseFloat(this.value)||null"></div>
+          <input type="number" value="${u.valore_prima??''}" step="0.01" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].valore_prima=this.value.trim()===''?null:Number(this.value)"></div>
         <div><label style="font-size:0.7rem;color:var(--caffe2)">Val. Catastale Seconda Casa (€)</label>
-          <input type="number" value="${u.valore_seconda||''}" step="0.01" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].valore_seconda=parseFloat(this.value)||null"></div>
+          <input type="number" value="${u.valore_seconda??''}" step="0.01" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].valore_seconda=this.value.trim()===''?null:Number(this.value)"></div>
         <div style="grid-column:1/-1"><label style="font-size:0.7rem;color:var(--caffe2)">Descrizione (es. VILLA SINGOLA 13,50 VANI MQ 260)</label>
           <input type="text" value="${attr(u.descrizione)}" placeholder="descrizione libera" style="width:100%;padding:5px 8px;border:1.5px solid var(--caffe3);border-radius:5px;font-size:0.8rem" onchange="currentUnitaCatastali[${i}].descrizione=this.value"></div>
       </div>
@@ -18268,7 +18268,7 @@ window.showSection('home');
 <script>window.RIGHETTO_SYNC_ATTIVA=true;</script>
 <script src="js/admin-agenda.js?v=20261121-recurrence-1239"></script>
 <script src="js/admin-clienti-upload.js?v=20261111-direct-client-docs"></script>
-<script src="js/admin-cliente-scheda.js?v=20261120-pages-private-v1"></script>
+<script src="js/admin-cliente-scheda.js?v=20261121-maint-zero-narrow-v1"></script>
 <script src="js/admin-private-photos.js?v=LP0290-private-1"></script>
 <script src="js/admin-immobile-etichette.js?v=20261115-label-reminders-v1"></script>
 <script src="js/admin-property-publication.js?v=ast20-internal-history-v1"></script>

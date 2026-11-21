@@ -1,5 +1,5 @@
 import{requestFeatureSchema}from'./request-feature-schema.mjs?v=20261119-requests-full-v1';
-import{legacyRequestPicker,applyLegacyRequestEditor}from'./request-editor-legacy.mjs?v=20261120-new-request-title-v1';
+import{legacyRequestPicker,applyLegacyRequestEditor}from'./request-editor-legacy.mjs?v=20261121-maint-zero-narrow-v1';
 import{inputRequestDate,parseRequestDate,displayRequestDate}from'./request-date.mjs';
 import{mountCountRollers,readCountRollers,countSummary}from'./request-count-rolls.mjs?v=20261119-requests-full-v1';
 import './requests-match-ui.mjs?v=20261119-requests-full-v1';
