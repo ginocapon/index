@@ -9,8 +9,10 @@
 #ril-panel-allegati .mixed-image button[aria-label="Didascalia"],
 #ril-panel-allegati .mixed-image button[aria-label="Rinomina allegato"],
 #ril-panel-allegati .mixed-image button[aria-label="Rimuovi foto dalla scheda"],
-#ril-panel-allegati .mixed-image button[aria-label="Rimuovi collegamento allegato"]{display:inline-flex!important;align-items:center;justify-content:center;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;padding:4px!important;border:2px solid #14593d!important;border-radius:7px!important;background:#f2faf5!important;color:#10492f!important;font:700 29px/1 Arial!important;cursor:pointer}
+#ril-panel-allegati .mixed-image button[aria-label="Rimuovi collegamento allegato"]{display:inline-flex!important;align-items:center;justify-content:center;width:33px!important;height:33px!important;min-width:33px!important;min-height:33px!important;padding:4px!important;border:2px solid #14593d!important;border-radius:7px!important;background:#f2faf5!important;color:#10492f!important;font:700 21.75px/1 Arial!important;cursor:pointer}
 #ril-panel-allegati .mixed-image button[aria-label^="Rimuovi"]{border-color:#982b28!important;background:#fff2f1!important;color:#982b28!important;margin-left:6px}
 #ril-panel-allegati .mixed-image button[aria-label="Didascalia"]:focus-visible,
 #ril-panel-allegati .mixed-image button[aria-label="Rinomina allegato"]:focus-visible,
 #ril-panel-allegati .mixed-image button[aria-label^="Rimuovi"]:focus-visible{outline:3px solid #c78b00;outline-offset:3px}
+
+#ril-panel-allegati .mixed-image button[aria-label="Ruota di 90°"]{font-size:22.5px!important;line-height:1.2!important}
