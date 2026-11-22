@@ -1,0 +1,19 @@
+/* Preview: only alternating admin data rows. Semantic statuses and selected rows keep their colors. */
+@media screen{
+ html body{--rig-alternate-green:#edf5ef}
+ html body .section table>tbody>tr:nth-child(even):not([style*="background"]):not([aria-selected="true"]):not(:has(input[type="checkbox"]:checked)):not(.selected):not(.success):not(.danger):not(.warning),
+ html body .rcs table>tbody>tr:nth-child(even):not([style*="background"]):not([aria-selected="true"]):not(:has(input[type="checkbox"]:checked)):not(.selected):not(.success):not(.danger):not(.warning){background-color:var(--rig-alternate-green)!important}
+ html body #sec-immobili.pl-faithful #immobiliTableWrap table tbody tr:nth-child(even):not([style*="background"]):not(:has([data-pv-select]:checked)){background-color:var(--rig-alternate-green)!important}
+ html body #sec-clienti #clientiTable tbody tr:nth-child(even):not([style*="background"]):not([aria-selected="true"]):not(:has(input[type="checkbox"]:checked)){background-color:var(--rig-alternate-green)!important}
+ html body .aste-integrated .ai-list table tbody tr:nth-child(even):not([style*="background"]){background-color:#edf4ef!important}
+ html body .aste-integrated tr[data-asta-id]{cursor:pointer}
+ html body .aste-integrated tr[data-asta-id]:hover{background-image:linear-gradient(#075b3b0c,#075b3b0c)}
+ html body .aste-integrated tr[data-asta-id]:focus-visible{outline:3px solid #075b3b;outline-offset:-3px}
+ html body #ast-summary-references{margin:8px 0;padding:10px;border-top:1px solid #8fbaa0;font:13px/1.5 Arial;color:#153e2b;overflow-wrap:anywhere}
+ html body #ast-summary-references p{margin:3px 0;white-space:pre-wrap}
+ html body #ast-summary-references a,html body #ast-official-documents a{color:#075b3b;text-decoration:underline;overflow-wrap:anywhere}
+ html body #ast-official-documents{margin:12px 0;padding:12px;border:1px solid #8fbaa0;background:white;color:#153e2b;font:13px/1.5 Arial}
+ html body #ast-official-documents a{display:block;padding:5px 0}
+}
+
+@media screen{html body #ast-official-documents>a{display:flex!important;align-items:center!important;box-sizing:border-box!important;width:100%!important;max-width:var(--rig-private-card-width)!important;min-height:72px!important;margin:8px 0!important;padding:12px!important;background:#f5a623!important;color:#332109!important;border:1px solid #a45e04!important;border-radius:4px!important;font:700 13px/1.4 Arial!important;text-decoration:none!important;overflow-wrap:anywhere!important}html body #ast-official-documents>a:focus-visible{outline:3px solid #075b3b;outline-offset:2px}}

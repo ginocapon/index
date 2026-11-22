@@ -26,3 +26,23 @@ html body .rcs .rcs-d [data-doc-summary] .rcs-attachment-cards>button:hover{back
 html body #sec-nuovo .ril-summary-file:focus-visible,
 html body .rcs .rcs-d [data-doc-summary] .rcs-attachment-cards>button:focus-visible,
 html body .rcs .rcs-d [data-doc-summary]>.rcs-ev>a:focus-visible{outline:3px solid #075c42!important;outline-offset:3px!important}
+
+/* The orange file face keeps the approved dimensions. Management controls stay below it. */
+html body #sec-nuovo #ril-panel-allegati .mixed-document-grid{grid-template-columns:repeat(auto-fill,min(100%,var(--rig-private-card-width)))!important;gap:12px!important;align-items:start!important}
+html body #sec-nuovo #ril-panel-allegati .mixed-document-grid .doc-item,
+html body #sec-nuovo #ril-panel-allegati .mixed-signature .doc-item{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:0!important;box-sizing:border-box!important;min-width:0!important;width:100%!important;max-width:var(--rig-private-card-width)!important;margin:0!important;padding:0!important;background:white!important;border:0!important;border-radius:0!important}
+html body #sec-nuovo #ril-panel-allegati .doc-card-face{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:stretch!important;gap:6px!important;box-sizing:border-box!important;min-height:72px!important;padding:12px!important;background:#f5a623!important;border:1px solid #a45e04!important;border-radius:4px!important;color:#332109!important;min-width:0!important}
+html body #sec-nuovo #ril-panel-allegati .doc-card-face .doc-icon{display:none!important}
+html body #sec-nuovo #ril-panel-allegati .doc-card-face .doc-name{font:700 13px/1.4 Arial,sans-serif!important;color:#332109!important;overflow-wrap:anywhere!important;white-space:normal!important}
+html body #sec-nuovo #ril-panel-allegati .doc-card-face .doc-meta{font:400 11px/1.35 Arial,sans-serif!important;color:#4b310c!important;margin-top:6px!important}
+html body #sec-nuovo #ril-panel-allegati .doc-item>.doc-actions{display:flex!important;flex-wrap:wrap!important;justify-content:flex-start!important;gap:8px!important;margin:4px 0!important;padding:0!important}
+html body #sec-nuovo #ril-panel-allegati .doc-item>.doc-actions button,
+html body #sec-nuovo #ril-panel-allegati .doc-item>.doc-actions a{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:44px!important;min-width:44px!important;padding:6px!important;font:700 20px Arial,sans-serif!important;box-sizing:border-box!important}
+html body #sec-nuovo #ril-panel-allegati .doc-item>label{margin-top:0!important;margin-bottom:0!important}
+html body #sec-nuovo #ril-panel-allegati .doc-item>label>select{box-sizing:border-box!important;min-width:0!important;width:100%!important;max-width:100%!important}
+
+html body #sec-nuovo #ril-panel-allegati .doc-card-face{width:100%!important;max-width:100%!important;text-align:left!important;cursor:pointer!important;box-shadow:none!important;margin:0!important;appearance:none!important}
+html body #sec-nuovo #ril-panel-allegati .doc-card-face:focus-visible{outline:3px solid #075b3b;outline-offset:2px}
+
+html body #sec-nuovo #ril-panel-allegati .doc-item>.doc-actions>button{border:1px solid #075b3b!important;border-radius:4px!important;background:#e3f2e8!important;color:#075b3b!important}
+html body #sec-nuovo #ril-panel-allegati .doc-item>.doc-actions>button.doc-del{border-color:#a92f2f!important;background:#fff2ef!important;color:#a92f2f!important}
