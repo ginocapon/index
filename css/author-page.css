@@ -54,3 +54,14 @@ footer{background:var(--nero);padding:2rem 1.5rem 1.25rem;color:rgba(255,255,255
 .fi{max-width:1380px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
 .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--oro);color:var(--nero);padding:.6rem 1.2rem;z-index:9999;font-weight:600}
 .skip-link:focus{top:0}
+
+/* Personal profiles: keep the dynamically added photo disclosure out of the two-column copy flow. */
+.author-hero-inner{grid-template-areas:"photo copy" "notice notice";grid-template-columns:180px minmax(0,1fr)}
+.author-hero-inner>picture{grid-area:photo}
+.author-hero-inner>.author-copy{grid-area:copy;min-width:0}
+.author-hero-inner>.rig-photo-caption{grid-area:notice;width:100%;margin:0!important}
+.author-role{color:rgba(255,255,255,.82)}
+.author-lead{color:rgba(255,255,255,.9)}
+@media(max-width:640px){.author-hero-inner{grid-template-areas:"photo" "notice" "copy";grid-template-columns:minmax(0,1fr)}.author-copy{width:100%}}
+
+.author-photo--linda{object-position:50% 0%}
