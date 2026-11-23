@@ -191,7 +191,7 @@ function clientSearch(e){
  searchTimer=setTimeout(async()=>{
   const q=input.value.trim();if(q.length<2||input.dataset.selectedId||!input.isConnected)return;
   const principal=window.RighettoGatedPrincipal,safe=q.replace(/[%,()]/g,'');
-  const r=await db.from('clienti').select('id,nome,telefono,cellulare,email').or('nome.ilike.%'+safe+'%,telefono.ilike.%'+safe+'%,cellulare.ilike.%'+safe+'%').limit(25);
+  const r=await db.from('clienti').select('id,nome,telefono,cellulare,email').or('nome.ilike.%'+safe+'%,telefono.ilike.%'+safe+'%,cellulare.ilike.%'+safe+'%,email.ilike.%'+safe+'%').limit(25);
   if(epoch!==clientSearchEpoch||!input.isConnected||input.value.trim()!==q||principal!==window.RighettoGatedPrincipal)return;
   if(r.error||!Array.isArray(r.data)){box.innerHTML='<span class="ra-sug-none">Ricerca non riuscita. Nessun cliente selezionato.</span>';box.hidden=false;return;}
   for(const c of r.data)if(!clientRows.some(x=>x.id===c.id))clientRows.push(c);
