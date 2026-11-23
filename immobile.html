@@ -816,6 +816,26 @@ function generatePropertySlug(d) {
   ).filter(Boolean).join('-');
 }
 
+// Public metadata only. Preserve all-active catalogue for unique share-link checks.
+async function loadPublicPropertyIndex() {
+  const fields = 'id,codice,slug,tipo_operazione,categoria,tipologia,comune';
+  const rows = []; const ids = new Set(); let expected = null;
+  for (let offset = 0; offset <= 100000; offset += 500) {
+    const result = await sb.from('immobili').select(fields, {count:'exact'})
+      .eq('attivo', true).order('id').range(offset, offset + 499);
+    if (result.error || !Array.isArray(result.data) || !Number.isInteger(result.count)) return null;
+    if (expected === null) expected = result.count;
+    if (expected !== result.count) return null;
+    for (const row of result.data) {
+      if (!row.id || ids.has(row.id)) return null;
+      ids.add(row.id); rows.push(row);
+    }
+    if (rows.length > expected) return null;
+    if (result.data.length < 500) return rows.length === expected ? rows : null;
+  }
+  return null;
+}
+
 // ══ INIT ══
 async function init() {
   const params = new URLSearchParams(window.location.search);
@@ -828,7 +848,7 @@ async function init() {
   // Strategy: if slug present, load all active and match by slug
   // If id/codice present, do direct lookup (backward compatibility)
   if (slug) {
-    const { data: all } = await sb.from('immobili').select('id,codice,titolo,slug,tipo_operazione,categoria,tipologia,comune,prezzo,superficie,locali,bagni,piano,anno_costruzione,stato,classe_energetica,garage,giardino,terrazzo,cantina,ascensore,piscina,arredato,foto,youtube_id,virtual_tour,attivo,in_evidenza,venduto,affittato,created_at,updated_at,ipe_kwh,arredo,caldaia_condensazione,camino,riscaldamento_pavimento,termopompa,pannelli_fotovoltaici,pannelli_solari,impianto_geotermico,allarme,domotica,porta_blindata,tapparelle_motorizzate,zanzariere,accesso_disabili,area_fitness,portineria,cassaforte,riscaldamento_semi_autonomo,raffreddamento_pavimento,grezzo,connettivita,distanza_mare,totale_piani,tipo_contratto,stato_manutenzione,virtual_tour_scenes,planimetrie,animali_ammessi,ingresso_indipendente,canna_fumaria,porticato,soppalco,lavanderia,mansarda,taverna,soffitta,giardino_condominiale,esposizione,camere,bagni_totali,terrazzi_num,ripostigli,garage_num,garage_doppio,posto_auto,consegna,aria_condizionata,panorama,spese_condominio,mq_giardino,mq_lotto,impianto_elettrico,indirizzo_mappa,foto_urls,soggiorno,soggiorno_angolo_cottura,cucina,riscaldamento_autonomo,riscaldamento_centralizzato,descrizione').eq('attivo', true);
+    const all = await loadPublicPropertyIndex();
     if (all) {
       shareAddressCatalogue = all;
       art = all.find(a => generatePropertySlug(a) === slug);
@@ -842,6 +862,10 @@ async function init() {
         const slugParts = slug.split('-');
         const lastPart = slugParts[slugParts.length - 1].toUpperCase();
         art = all.find(a => a.codice && a.codice.trim().toUpperCase() === lastPart);
+      }
+      if (art) {
+        const detail = await sb.from('immobili').select('id,codice,titolo,slug,tipo_operazione,categoria,tipologia,comune,prezzo,superficie,locali,bagni,piano,anno_costruzione,stato,classe_energetica,garage,giardino,terrazzo,cantina,ascensore,piscina,arredato,foto,youtube_id,virtual_tour,attivo,in_evidenza,venduto,affittato,created_at,updated_at,ipe_kwh,arredo,caldaia_condensazione,camino,riscaldamento_pavimento,termopompa,pannelli_fotovoltaici,pannelli_solari,impianto_geotermico,allarme,domotica,porta_blindata,tapparelle_motorizzate,zanzariere,accesso_disabili,area_fitness,portineria,cassaforte,riscaldamento_semi_autonomo,raffreddamento_pavimento,grezzo,connettivita,distanza_mare,totale_piani,tipo_contratto,stato_manutenzione,virtual_tour_scenes,planimetrie,animali_ammessi,ingresso_indipendente,canna_fumaria,porticato,soppalco,lavanderia,mansarda,taverna,soffitta,giardino_condominiale,esposizione,camere,bagni_totali,terrazzi_num,ripostigli,garage_num,garage_doppio,posto_auto,consegna,aria_condizionata,panorama,spese_condominio,mq_giardino,mq_lotto,impianto_elettrico,indirizzo_mappa,foto_urls,soggiorno,soggiorno_angolo_cottura,cucina,riscaldamento_autonomo,riscaldamento_centralizzato,descrizione').eq('id', art.id).eq('attivo', true).single();
+        art = detail.error ? null : detail.data;
       }
     }
   }
