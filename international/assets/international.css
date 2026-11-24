@@ -18,3 +18,9 @@ html{background:#f5f3ed}body{margin:0;padding:24px;font-family:Arial,sans-serif}
 .rw-site .rw-pagecta .rw-eyebrow{color:#fff}
 
 .rw-site h1.rw-promoted-title{font-size:clamp(30px,4vw,46px);margin:10px 0 24px}
+
+.rw-copy{max-width:850px}.rw-copy h2,.rw-contactnotes h2{font-size:clamp(26px,3vw,36px);line-height:1.12}.rw-copy p,.rw-contactnotes{font-size:16px;line-height:1.7}.rw-contactnotes{margin:30px 0;max-width:800px}.rw-contactnotes li{margin:8px 0}.rw-layoutcard p{line-height:1.65}.rw-layoutcard{min-height:0!important}
+
+.rw-pagecta>.rw-button{flex:0 0 auto;min-width:160px;white-space:nowrap;box-sizing:border-box}@media(max-width:760px){.rw-pagecta>.rw-button{min-width:0;white-space:normal}}
+
+.rw-answer{margin:34px 0;padding:24px;background:#f1f5eb;border-left:3px solid #56794d}.rw-answer h2{font-size:clamp(22px,2.5vw,30px);line-height:1.2;margin:0 0 12px}.rw-answer p{font-size:16px;line-height:1.65;margin:8px 0}.rw-contextlinks{font-size:14px!important}
