@@ -1018,6 +1018,9 @@ footer{contain-intrinsic-size:auto 1670px}
 /* International preview entry only */
 #navbar .nav-logo{flex-shrink:0}#navbar .nav-links{gap:clamp(9px,1.3vw,20px)}#navbar .nav-links a{font-size:11px;letter-spacing:.08em}.rw-entry-mobile{display:none}.rw-entry-desktop{background:#fffdf8!important;color:#243e5b!important;border:1px solid #243e5b;border-radius:12px;padding:11px 14px!important;font-size:12px!important;font-weight:700!important;box-shadow:0 2px 6px #243e5b14}.rw-entry-desktop::after{display:none!important}@media(max-width:1000px){.rw-entry-mobile{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:79px;margin-left:auto;margin-right:42px;padding:0 8px;background:#fffdf8;border:1px solid #243e5b;border-radius:12px;box-shadow:0 2px 6px #243e5b14;text-decoration:none;color:#243e5b;font:700 12px Arial,sans-serif;box-sizing:border-box}#navbar .nav-links{display:none}}
 @media(max-width:360px){#navbar .nav-logo-name{font-size:14px}#navbar .nav-logo-tag{font-size:7px;letter-spacing:3px}#navbar .rw-entry-mobile{min-width:72px;padding:0 6px;margin-right:40px;font-size:11px}}
+/* Temporary visual concealment. Keep layout, links and keyboard access. */
+#navbar a[href="/international/languages/"],#navMobile a[href="/international/languages/"]{opacity:0}
+#navbar a[href="/international/languages/"]:focus-visible,#navMobile a[href="/international/languages/"]:focus-visible{opacity:1;outline:2px solid #243e5b;outline-offset:3px}
 </style>
 </head>
 <body class="homepage">
