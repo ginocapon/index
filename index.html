@@ -1014,6 +1014,11 @@ footer{contain-intrinsic-size:auto 1670px}
 <link rel="stylesheet" href="css/main-mobile-fixes.css?v=1">
 <link rel="stylesheet" href="css/home-proposta.css?v=1">
 <link rel="stylesheet" href="css/compact-search.css?v=20261111-approved-v1">
+<style>
+/* International preview entry only */
+#navbar .nav-logo{flex-shrink:0}#navbar .nav-links{gap:clamp(9px,1.3vw,20px)}#navbar .nav-links a{font-size:11px;letter-spacing:.08em}.rw-entry-mobile{display:none}.rw-entry-desktop{background:#fffdf8!important;color:#243e5b!important;border:1px solid #243e5b;border-radius:12px;padding:11px 14px!important;font-size:12px!important;font-weight:700!important;box-shadow:0 2px 6px #243e5b14}.rw-entry-desktop::after{display:none!important}@media(max-width:1000px){.rw-entry-mobile{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:79px;margin-left:auto;margin-right:42px;padding:0 8px;background:#fffdf8;border:1px solid #243e5b;border-radius:12px;box-shadow:0 2px 6px #243e5b14;text-decoration:none;color:#243e5b;font:700 12px Arial,sans-serif;box-sizing:border-box}#navbar .nav-links{display:none}}
+@media(max-width:360px){#navbar .nav-logo-name{font-size:14px}#navbar .nav-logo-tag{font-size:7px;letter-spacing:3px}#navbar .rw-entry-mobile{min-width:72px;padding:0 6px;margin-right:40px;font-size:11px}}
+</style>
 </head>
 <body class="homepage">
 <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
@@ -1032,8 +1037,11 @@ footer{contain-intrinsic-size:auto 1670px}
     <li><a href="blog">Blog</a></li>
     <li><a href="faq">FAQ</a></li>
     <li><a href="collaborazioni">Collaborazioni</a></li>
+    <li><a href="/international/languages/">INTERNATIONAL</a></li>
+    <li><a class="rw-entry-desktop" href="/international/languages/" aria-label="Scegli lingua">◎ IT / EN</a></li>
     <li><a href="contatti" class="nav-cta">Parla con noi</a></li>
   </ul>
+  <a class="rw-entry-mobile" href="/international/languages/" aria-label="Scegli lingua">◎ IT / EN</a>
   <button class="nav-burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="nav-mobile" id="navMobile">
@@ -1044,6 +1052,8 @@ footer{contain-intrinsic-size:auto 1670px}
   <a href="blog">Blog</a>
   <a href="faq">FAQ</a>
   <a href="collaborazioni">Collaborazioni</a>
+  <a href="/international/languages/">INTERNATIONAL</a>
+  <a href="/international/languages/" aria-label="Scegli lingua">◎ IT / EN</a>
   <a href="contatti" class="nav-mobile-cta">Parla con noi</a>
 </div>
 
