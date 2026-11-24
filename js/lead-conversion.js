@@ -303,7 +303,7 @@ var social_proofs = [
   { text: 'Luca ha prenotato un virtual tour a Selvazzano', time: '1 ora fa', icon: 'eye' },
   { text: '3 nuove richieste di valutazione oggi', time: 'oggi', icon: 'trending' },
   { text: 'Silvia ha trovato casa ad Albignasego', time: '4 giorni fa', icon: 'heart' },
-  { text: '127 recensioni Google — media 4.9/5 stelle', time: 'verificato', icon: 'star' },
+  { text: '20 recensioni Google — media 5.0/5 stelle', time: 'verificato', icon: 'star' },
   { text: '350+ immobili gestiti in 101 comuni dal 2000', time: 'dal 2000', icon: 'trending' },
   { text: 'Giulia ha chiesto info per un bilocale a Vigonza', time: '8 min fa', icon: 'home' },
   { text: 'Roberto ha venduto un appartamento in zona Arcella', time: '3 giorni fa', icon: 'check' },
@@ -459,7 +459,7 @@ function showExitPopup() {
         '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' +
         '<span style="font-size:0.72rem;color:#C0392B;font-weight:600">Disponibilita\' limitata — rispondiamo entro 30 minuti</span>' +
       '</div>' +
-      '<p style="font-size:0.72rem;color:#9AACBD;margin-top:0.6rem">127 recensioni — 4.9/5 su Google</p>' +
+      '<p style="font-size:0.72rem;color:#9AACBD;margin-top:0.6rem">20 recensioni — 5.0/5 su Google</p>' +
     '</div>';
 
   document.body.appendChild(overlay);

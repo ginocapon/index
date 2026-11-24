@@ -192,7 +192,7 @@ function righettoFaqReply(faq) {
 }
 
 const FAQ_DATA = [
-  {k: ['under 36'], r: "Le esenzioni fiscali prima casa under 36 non si applicano ai nuovi rogiti del 2026: riguardano gli atti dal 26 maggio 2021 al 31 dicembre 2023 e, nella proroga, i preliminari sottoscritti e registrati entro il 31 dicembre 2023 con rogito entro il 31 dicembre 2024. Il Fondo di Garanzia Consap e' una misura distinta: i giovani sotto i 36 anni rientrano nelle categorie ammesse; la garanzia ordinaria e' il 50% della quota capitale e puo' essere elevata, alle condizioni previste, per mutui oltre l'80% del prezzo comprensivo degli oneri accessori. La disciplina della garanzia elevata e' prorogata al 31 dicembre 2027. L'importo del mutuo non puo' superare 250.000 euro e la banca decide l'erogazione. Non e' un'esenzione dalle imposte ne' un diritto automatico al mutuo al 100%.\n\nFonti (verificate il 10 ottobre 2026): [Agenzia delle Entrate](https://www.agenziaentrate.gov.it/portale/le-agevolazioni-prima-casa-under-36), [Consap](https://www.consap.it/fondo-prima-casa/)."},
+  {k: ['under 36'], r: "Per i giovani sotto i trentasei anni esistono condizioni specifiche per accedere al Fondo Prima Casa Consap. Garanzia pubblica, agevolazioni sulle imposte di acquisto e offerta commerciale della banca sono misure diverse. Verifica requisiti e norme riferiti alla data della domanda e del rogito; non presumere che l’età dia diritto a esenzione fiscale o mutuo integrale.\n\n[Fonte di approfondimento](https://www.consap.it/fondo-prima-casa/), consultata il 24 novembre 2026."},
   // ── INFO AGENZIA ──
   {
     k: ['domanda', 'informazione', 'curiosità', 'chiedere', 'costa chiedere'],
@@ -202,19 +202,19 @@ const FAQ_DATA = [
   },
   {
     k: ['orari', 'apertura', 'chiuso', 'aperto', 'quando'],
-    r: '🕐 **Orari Righetto Immobiliare**\nLunedì–Venerdì: 9:00–13:00 / 15:00–19:00\nSabato: 9:00–12:30\nDomenica: Chiuso\n\n📞 Tel: 049.8843484 · Cell: 349 736 5930\n📧 info@righettoimmobiliare.it'
+    r: "Per conoscere gli orari aggiornati e fissare un appuntamento chiama il numero fisso 049 8843484. Gino segue vendite e locazioni commerciali al 348 8621888; Linda segue locazioni residenziali e studenti al 349 7365930. Un appuntamento concordato evita viaggi a vuoto."
   },
   {
     k: ['dove', 'sede', 'indirizzo', 'ufficio', 'trovare'],
-    r: '📍 **Righetto Immobiliare**\nVia Roma, 96 — 35010 Limena (PD)\n\nSiamo a Limena, alle porte di Padova, con copertura su Padova e provincia.'
+    r: "Gruppo Immobiliare Righetto è in Via Roma 96, 35010 Limena, provincia di Padova. Per indicazioni e appuntamenti chiama lo 049 8843484."
   },
   {
     k: ['commissione', 'provvigione', 'costo agenzia', 'quanto costa', 'spesa agenzia', 'percentuale'],
-    r: '💰 **Compenso di mediazione**\n\nL\'importo e le condizioni economiche **non sono pubblicati online**: vengono spiegati e concordati **in sede** al momento del mandato, in modo chiaro e senza sorprese.\n\nNel servizio sono inclusi, tra l\'altro: **valutazione**, **foto professionali**, **virtual tour 360°** e **gestione delle pratiche** fino al rogito o alla stipula.\n\n📞 Per un preventivo personalizzato: **049.8843484** o passa in Via Roma 96, Limena.'
+    r: "Il compenso e le condizioni si concordano con l’agenzia prima dell’incarico. Chiedi quali attività sono comprese, quando matura il diritto alla provvigione e quali eventuali spese restano escluse. Non pubblichiamo una tariffa unica valida per ogni pratica: fa fede l’accordo specifico."
   },
   {
     k: ['valutazione', 'valutare', 'stima', 'vale', 'valore', 'quanto vale'],
-    r: '🏠 **Stima del tuo immobile**\n\nPosso fornirti una **stima automatica** basata sui dati di mercato 2025-2026!\n\nDimmi:\n1. Il **comune** (es. Padova, Abano, Cittadella...)\n2. La **tipologia** (appartamento, villa, capannone...)\n3. I **metri quadri**\n4. Lo **stato** (nuovo, buono, da ristrutturare...)\n\nEsempio: *"Stima appartamento 80mq a Selvazzano in buono stato"*'
+    r: "Per iniziare servono Comune, tipologia, superficie, stato e documenti disponibili. Questi dati orientano un primo confronto, ma non bastano a certificare il valore: posizione precisa, caratteristiche, regolarità e comparabili richiedono verifica. Gino segue valutazioni e vendite; la stima non equivale a una perizia bancaria né a un prezzo di vendita garantito."
   },
   {
     k: ['foto', 'fotografie', 'fotografo', 'servizio fotografico'],
@@ -223,11 +223,11 @@ const FAQ_DATA = [
   // ── VENDITA ──
   {
     k: ['vendere', 'vendita', 'mettere in vendita', 'affidare'],
-    r: '🏷️ **Vuoi vendere il tuo immobile?**\n\nEcco i nostri passi:\n1. **Valutazione gratuita** — veniamo da t\n2. **Foto + Virtual Tour 360°** — valorizzazione massima\n3. **Pubblicazione** — Idealista, Immobiliare.it, sito nostro\n4. **Gestione visite** — noi organizziamo tutto\n5. **Trattativa + Rogito** — ti assistiamo fino alla firma\n\n👉 Vuoi un appuntamento gratuito?'
+    r: "Il percorso comprende la valutazione del caso, la preparazione della presentazione, il piano di promozione, l’organizzazione delle visite e il supporto nella trattativa. Foto, tour, portali e prestazioni comprese vanno definiti nell’incarico: non promettiamo lo stesso pacchetto per ogni immobile. Gino segue le vendite e le locazioni commerciali."
   },
   {
     k: ['tempo vendita', 'quanto tempo', 'tempistica vendita', 'velocità'],
-    r: '⏱️ **Tempi medi di vendita a Padova**\n\nCon una strategia digitale (virtual tour 360°, pubblicazione multi-portale, social media marketing). I tempi dipendono da zona, prezzo e stato dell\'immobile: in agenzia ti diamo un\'indicazione per il tuo caso.'
+    r: "Non esiste un tempo valido per tutte le case. Prezzo richiesto, documenti, stato dell’immobile, zona e domanda incidono sui tempi. Dopo una valutazione definiamo con te la strategia e ne controlliamo i risultati. Non promettiamo una vendita entro un numero fisso di giorni."
   },
   {
     k: ['proposta', 'offerta', 'proposta acquisto'],
@@ -235,26 +235,26 @@ const FAQ_DATA = [
   },
   {
     k: ['compromesso', 'preliminare', 'contratto preliminare'],
-    r: '📋 **Contratto preliminare (compromesso)**\n\nIl preliminare di vendita è un contratto che obbliga le parti al rogito definitivo. Prevede:\n• Caparra confirmatoria (10-20% del prezzo)\n• Termine per il rogito\n• Clausole sospensive (es. mutuo)\n• Registrazione obbligatoria entro 30 giorni\n\nNoi prepariamo e registriamo il preliminare per voi.'
+    r: "Il preliminare impegna le parti a concludere il contratto definitivo alle condizioni pattuite. Occorre definire immobile, prezzo, somme versate, tempi ed eventuali condizioni sospensive. La caparra non ha una percentuale obbligatoria uguale per tutti. Registrazione e trascrizione sono adempimenti diversi: concorda con il professionista forma, termini e tutele adatte al caso."
   },
   {
     k: ['rogito', 'atto', 'notaio', 'notarile'],
-    r: '🏛️ **Il rogito notarile**\n\nIl rogito è l\'atto definitivo di compravendita stipulato dal notaio. Il notaio è scelto generalmente dall\'acquirente. I costi notarili (onorario + imposte) variano dal 2% al 4% del prezzo di acquisto. Noi vi accompagniamo fino alla firma e al passaggio delle chiavi!'
+    r: "È l’atto definitivo di compravendita stipulato dal notaio. Prima della firma vanno coordinate verifiche, pagamento, eventuale mutuo e consegna. Il preventivo notarile dipende dall’operazione e distingue imposte, onorario e altre spese; non è una percentuale standard del prezzo. L’agenzia segue il percorso nell’ambito dell’incarico concordato.\n\n[Fonte di approfondimento](https://www.agenziaentrate.gov.it/portale/acquisto-di-una-casa-le-imposte), consultata il 24 novembre 2026."
   },
   // ── ACQUISTO ──
   {
     k: ['prima casa', 'agevolazioni', 'giovani'],
-    r: '🏡 **Agevolazioni prima casa**\n\n**Requisiti:**\n• Non possedere altri immobili nello stesso comune\n• Residenza nel comune entro 18 mesi\n• Non aver già usufruito del bonus\n\n**Vantaggi:**\n• Imposta di registro al 2% (anziché 9%)\n• Under 36: per i nuovi rogiti 2026 niente esenzione fiscale specifica; la garanzia Consap e\' una misura distinta, soggetta a requisiti e alla banca\n• Detrazioni interessi mutuo fino a €4.000/anno',
+    r: "Le agevolazioni dipendono dall’immobile e dai requisiti personali. La regola generale richiede la residenza nel Comune, o il trasferimento entro diciotto mesi, con casi alternativi previsti dalla legge. Aver già usato il beneficio non esclude sempre un nuovo acquisto: la casa preposseduta acquistata con l’agevolazione può dover essere venduta entro due anni. Prima di firmare, fai verificare al notaio tutti i requisiti e le imposte applicabili.\n\n[Fonte di approfondimento](https://www.agenziaentrate.gov.it/portale/schede/agevolazioni/scheda-acquisto-prima-casa/acquisto-prima-casa-a-chi-interessa), consultata il 24 novembre 2026.",
     blog: 'blog-agevolazioni-prima-casa-2026',
     blogTitle: 'Agevolazioni prima casa 2026'
   },
   {
     k: ['caparra', 'deposito', 'anticipo', 'acconto'],
-    r: '💶 **Caparra e acconti**\n\n**Caparra confirmatoria:** somma versata al compromesso (10-20%). Se l\'acquirente si ritira, la perde; se il venditore si ritira, deve restituire il doppio.\n\n**Caparra penitenziale:** permette il recesso pagando la caparra come penale.\n\n**Acconto:** semplice anticipo sul prezzo, va restituito se l\'affare non si conclude.'
+    r: "È una somma concordata dalle parti a garanzia degli impegni contrattuali: non esiste una percentuale legale fissa del prezzo. In caso di inadempimento, la parte non inadempiente può, alle condizioni previste, recedere trattenendo la caparra ricevuta o chiedendo il doppio di quella versata. Può scegliere rimedi alternativi, come esecuzione o risoluzione con risarcimento. Caparra, acconto e diritto di recesso non sono la stessa cosa: vanno definiti nel contratto con il professionista.\n\n[Fonte di approfondimento](https://www.brocardi.it/codice-civile/libro-quarto/titolo-ii/capo-v/sezione-ii/art1385.html), consultata il 24 novembre 2026."
   },
   {
     k: ['spese acquisto', 'costi acquisto', 'imposte acquisto'],
-    r: '🧾 **Costi per l\'acquisto di un immobile**\n\n**Da privato (prima casa):**\n• Imposta di registro: 2% del valore catastale\n• Imposta ipotecaria: €50\n• Imposta catastale: €50\n\n**Da costruttore (con IVA):**\n• IVA: 4% prima casa / 10% seconda casa\n• Imposta di registro: €200\n\n**Sempre:**\n• Notaio: €2.000-€4.000\n• Mediazione: da concordare con l\'agenzia (in sede)'
+    r: "Oltre al prezzo considera imposte, notaio, eventuale mediazione, costi del mutuo e verifiche tecniche. Le imposte cambiano secondo venditore, regime IVA e requisiti dell’acquirente; il prezzo-valore si applica solo alle condizioni previste e su richiesta. Non stimiamo il costo del notaio con una percentuale fissa: chiedi un preventivo separando onorario, imposte e spese.\n\n[Fonte di approfondimento](https://www.agenziaentrate.gov.it/portale/acquisto-di-una-casa-le-imposte), consultata il 24 novembre 2026."
   },
   // ── APPROFONDIMENTI BLOG (keyword lunghe/specifiche; ordine prima del mutuo generico) ──
   {
@@ -674,7 +674,7 @@ const FAQ_DATA = [
   },
   {
     k: ['agenzia top servizi', 'migliore agenzia padova', 'servizi agenzia immobiliare'],
-    r: '⭐ **Cosa distingue un\'agenzia seria**\n\nMarketing strutturato, verifiche documentali, assistenza al rogito e presenza territoriale — non solo l\'annuncio online.\n\nDal **2000** seguiamo vendita e locazione su **101 comuni** con **127 recensioni** a 4,9/5.',
+    r: "⭐ **Cosa distingue un'agenzia seria**\n\nMarketing strutturato, verifiche documentali, assistenza al rogito e presenza territoriale — non solo l'annuncio online.\n\nDal **2000** seguiamo vendita e locazione su **101 comuni** con **20 recensioni** a 5,0/5.",
     blog: 'blog-agenzia-immobiliare-top-servizi-padova-2026',
     blogTitle: 'Agenzia di alto livello a Padova'
   },
@@ -843,35 +843,35 @@ const FAQ_DATA = [
   // ── MUTUO E FINANZIAMENTI ──
   {
     k: ['mutuo', 'finanziamento', 'banca', 'prestito', 'rate'],
-    r: '🏦 **Consulenza Mutuo**\n\nTi aiutiamo con il mutuo:\n• Analisi della tua situazione finanziaria\n• Confronto delle offerte delle banche\n• Supporto pratiche notarili\n\nContattaci per un appuntamento!',
+    r: "Possiamo aiutarti a raccogliere le informazioni iniziali e a entrare in contatto con un consulente creditizio per una valutazione. Preventivi, costi del servizio, eventuale mediazione creditizia e decisione sul finanziamento dipendono dai soggetti competenti e dagli accordi specifici. Non promettiamo confronti con un numero fisso di banche o approvazioni del mutuo.",
     blog: 'blog-mutui-casa-padova-2026',
     blogTitle: 'Mutui casa a Padova: guida'
   },
   {
     k: ['tasso', 'fisso', 'variabile', 'spread', 'euribor'],
-    r: '📊 **Tasso fisso o variabile?**\n\n**Tasso fisso:** rata costante per tutta la durata del mutuo. Ideale per chi vuole sicurezza e stabilità. Attualmente intorno al 2,5-3,5%.\n\n**Tasso variabile:** segue l\'andamento dell\'Euribor. Rata iniziale più bassa ma può crescere. Adatto a chi ha margine di flessibilità.\n\nPossiamo metterti in contatto con i nostri consulenti creditizi.',
+    r: "Il fisso mantiene il tasso pattuito; il variabile segue il parametro indicato nel contratto. La scelta dipende dalla sostenibilità della rata e dal rischio che puoi sostenere. Confronta proposte attuali, TAEG e documenti informativi: un intervallo di tassi non datato non è un preventivo.\n\n[Fonte di approfondimento](https://economiapertutti.bancaditalia.it/aree-tematiche/prestiti/mutuo-ipotecario/), consultata il 24 novembre 2026.",
     blog: 'blog-mutuo-fisso-variabile-padova-2026',
     blogTitle: 'Mutuo tasso fisso o variabile 2026'
   },
   {
     k: ['requisiti mutuo', 'ottenere mutuo', 'quanto posso chiedere', 'rata massima'],
-    r: '📋 **Requisiti per ottenere un mutuo**\n\n• La rata non deve superare il **30-35% del reddito** netto mensile\n• Contratto di lavoro indeterminato (o almeno 2 anni di P.IVA)\n• Nessuna segnalazione CRIF/Centrale Rischi\n• Anticipo minimo: **20%** del valore immobile\n\nLe banche finanziano generalmente fino all\'80% del valore di perizia.'
+    r: "La banca valuta capacità di rimborso, redditi, altri impegni, garanzie e valore di perizia dell’immobile. Il finanziamento è di norma entro l’ottanta per cento del valore di perizia, ma possono esistere offerte diverse con condizioni e garanzie specifiche. Una rata entro un terzo del reddito disponibile è un criterio prudenziale, non un diritto al credito né una soglia uguale per ogni banca.\n\n[Fonte di approfondimento](https://economiapertutti.bancaditalia.it/aree-tematiche/prestiti/mutuo-ipotecario/), consultata il 24 novembre 2026."
   },
   {
     k: ['surroga', 'sostituzione mutuo', 'portabilità'],
-    r: '🔄 **Surroga del mutuo**\n\nLa surroga (o portabilità) permette di trasferire il mutuo a un\'altra banca con condizioni migliori, **senza costi** per il mutuatario. È un diritto previsto dalla Legge Bersani. Conviene quando i tassi di mercato sono più bassi rispetto a quelli del tuo mutuo attuale.',
+    r: "La surroga trasferisce il debito residuo a un’altra banca attraverso la portabilità del mutuo, senza costi o penalità per il cliente nei casi previsti. La nuova banca valuta la richiesta. Per capire se conviene confronta TAEG, rata, durata residua e condizioni: abbassare la rata allungando il mutuo non significa sempre spendere meno in totale.\n\n[Fonte di approfondimento](https://economiapertutti.bancaditalia.it/aree-tematiche/prestiti/mutuo-ipotecario/), consultata il 24 novembre 2026.",
     blog: 'blog-surroga-mutuo-padova-2026',
     blogTitle: 'Surroga mutuo 2026 a Padova'
   },
   {
     k: ['rata mutuo', 'calcolo rata', 'quanto costa rata', 'simulazione rata'],
-    r: '🧮 **Calcolo rata mutuo**\n\nLa rata dipende da importo, durata, tasso e spread. Regola pratica: non superare il **30–35%** del reddito netto mensile.\n\nProva il [simulatore rata](landing-mutuo.html) o scrivi *"contattami"* per consulenza gratuita.',
+    r: "La rata dipende da capitale finanziato, durata, tasso e piano di rimborso. La sostenibilità va valutata sul reddito disponibile e sugli altri impegni: l’indicazione prudenziale di circa un terzo del reddito non è una soglia di approvazione garantita. Un simulatore dà un esempio, non sostituisce il preventivo e i documenti informativi della banca.\n\n[Fonte di approfondimento](https://economiapertutti.bancaditalia.it/aree-tematiche/prestiti/mutuo-ipotecario/), consultata il 24 novembre 2026.",
     blog: 'blog-mutui-casa-padova-2026',
     blogTitle: 'Mutui casa a Padova'
   },
   {
     k: ['quanto mutuo', 'importo mutuo', 'quanto posso mutuare', 'massimo finanziabile'],
-    r: '📊 **Quanto mutuo posso ottenere?**\n\nLe banche finanziano in genere fino all\'**80%** del valore di perizia, con anticipo minimo del 20%. Reddito stabile e assenza di segnalazioni CRIF sono fondamentali.\n\nPer una simulazione personalizzata: consulenza in agenzia.',
+    r: "Dipende dal valore di perizia e dal merito creditizio valutato dalla banca. Di norma il finanziamento non supera l’ottanta per cento del valore di perizia; alcune offerte possono andare oltre con ulteriori condizioni e garanzie. Prima di fare un’offerta considera anche imposte, notaio e altri costi che il mutuo può non coprire.\n\n[Fonte di approfondimento](https://economiapertutti.bancaditalia.it/aree-tematiche/prestiti/mutuo-ipotecario/), consultata il 24 novembre 2026.",
     blog: 'blog-mutuo-prima-casa-padova',
     blogTitle: 'Mutuo prima casa Padova'
   },
@@ -883,43 +883,43 @@ const FAQ_DATA = [
   },
   {
     k: ['documenti mutuo', 'carta per mutuo', 'pratica mutuo documenti'],
-    r: '📋 **Documenti per il mutuo**\n\nReddito, identità, situazione debitoria e dati dell\'immobile vanno preparati in anticipo per non perdere tempo dopo il compromesso.\n\nGuida completa sul blog; in agenzia ti diciamo cosa serve **nel tuo caso**.',
+    r: "La banca richiede normalmente identità, situazione familiare e reddituale, altri debiti e documenti dell’immobile. L’elenco cambia secondo lavoro, provenienza dell’immobile e prodotto scelto. Chiedi la lista aggiornata alla banca o al consulente e prepara i documenti prima di concordare scadenze vincolanti.\n\n[Fonte di approfondimento](https://economiapertutti.bancaditalia.it/aree-tematiche/prestiti/mutuo-ipotecario/), consultata il 24 novembre 2026.",
     blog: 'blog-mutuo-documenti-tempi-prima-casa-padova-2026',
     blogTitle: 'Documenti e tempi mutuo prima casa'
   },
   {
     k: ['tasso cap', 'mutuo cap', 'tetto tasso variabile'],
-    r: '📈 **Mutuo variabile con CAP**\n\nIl CAP limita la salita del tasso variabile oltre una soglia pattuita: più tranquillità, ma spread e condizioni vanno confrontati con il fisso.\n\nConsulenza **gratuita** per capire cosa conviene oggi.',
+    r: "È un mutuo variabile con un limite massimo al tasso, secondo quanto stabilito dal contratto. Il limite non rende il prodotto uguale a un tasso fisso e può avere un costo nelle condizioni offerte. Confronta parametro, spread, CAP, eventuale soglia minima e TAEG nel prospetto informativo.\n\n[Fonte di approfondimento](https://economiapertutti.bancaditalia.it/aree-tematiche/prestiti/mutuo-ipotecario/), consultata il 24 novembre 2026.",
     blog: 'blog-mutuo-fisso-variabile-padova-2026',
     blogTitle: 'Fisso, variabile e CAP'
   },
   {
     k: ['consap', 'garanzia prima casa', 'fondo garanzia consap'],
-    r: '🛡️ **Fondo Garanzia Prima Casa (Consap)**\n\nConsente in alcuni casi di coprire la parte non finanziata dalla banca, agevolando mutui con anticipo ridotto per giovani e prima casa.\n\nVerifichiamo requisiti e fattibilità con i consulenti creditizi.',
+    r: "È una garanzia pubblica che agevola il rapporto con la banca per l’acquisto dell’abitazione principale, riservata alle categorie e ai requisiti previsti. Il finanziamento non può superare duecentocinquantamila euro. La domanda si presenta a una banca o intermediario aderente. Non è un contributo a fondo perduto: il mutuatario resta tenuto al rimborso e la banca decide se erogare.\n\n[Fonte di approfondimento](https://www.consap.it/fondo-prima-casa/), consultata il 24 novembre 2026.",
     blog: 'blog-agevolazioni-prima-casa-2026',
     blogTitle: 'Agevolazioni prima casa 2026'
   },
   {
     k: ['partita iva mutuo', 'autonomo mutuo', 'libero professionista mutuo'],
-    r: '💼 **Mutuo per P.IVA e autonomi**\n\nServono in genere almeno **2 anni** di attività documentata, dichiarazioni dei redditi e continuità dei ricavi. Ogni banca ha criteri propri.\n\nTi mettiamo in contatto con consulenti specializzati.',
+    r: "Anche un lavoratore autonomo può chiedere un mutuo. La banca valuta redditi documentati, continuità dell’attività, altri impegni e garanzie. Non esiste per tutte le banche un identico numero minimo di anni di attività: chiedi i requisiti e la documentazione riferiti al prodotto concreto.\n\n[Fonte di approfondimento](https://economiapertutti.bancaditalia.it/aree-tematiche/prestiti/mutuo-ipotecario/), consultata il 24 novembre 2026.",
     blog: 'blog-mutui-casa-padova-2026',
     blogTitle: 'Mutui casa Padova'
   },
   {
     k: ['estinzione anticipata', 'chiudere mutuo prima', 'estinguere mutuo'],
-    r: '✂️ **Estinzione anticipata**\n\nPuoi estinguere il mutuo prima della scadenza; le penali dipendono dal contratto e dal tipo di tasso. Conviene fare i conti con la banca.\n\nPer **surroga** o rinegoziazione chiedi pure.',
+    r: "L’estinzione anticipata permette di rimborsare in tutto o in parte il debito prima della scadenza. Per i mutui destinati all’acquisto o alla ristrutturazione di abitazioni, o allo svolgimento della propria attività economica o professionale, stipulati da persone fisiche dopo l’entrata in vigore delle norme di liberalizzazione del 2007, non sono dovute penali; per i contratti precedenti valgono le condizioni e i limiti applicabili. Chiedi alla banca il conteggio estintivo.\n\n[Fonte di approfondimento](https://economiapertutti.bancaditalia.it/aree-tematiche/prestiti/mutuo-ipotecario/), consultata il 24 novembre 2026.",
     blog: 'blog-surroga-mutuo-padova-2026',
     blogTitle: 'Surroga e rinegoziazione mutuo'
   },
   {
     k: ['tan', 'taeg', 'differenza tan taeg'],
-    r: '📐 **TAN e TAEG**\n\n**TAN:** tasso puro del prestito.\n**TAEG:** costo totale annuo (tasso + spese + assicurazioni).\n\nPer confrontare offerte guarda sempre il **TAEG**, non solo la rata iniziale.',
+    r: "Il TAN esprime il tasso di interesse. Il TAEG esprime il costo annuo complessivo del credito secondo le voci previste, includendo interessi e costi accessori rilevanti; non comprende ogni spesa, per esempio quelle notarili. Per un tasso variabile il TAEG è indicativo e può cambiare. Confronta offerte sulla stessa base e leggi il prospetto informativo.\n\n[Fonte di approfondimento](https://economiapertutti.bancaditalia.it/aree-tematiche/prestiti/mutuo-ipotecario/), consultata il 24 novembre 2026.",
     blog: 'blog-mutui-casa-padova-2026',
     blogTitle: 'Guida mutui casa Padova'
   },
   {
     k: ['tempo mutuo', 'quanto tempo mutuo', 'tempi erogazione mutuo', 'durata pratica mutuo'],
-    r: '⏱️ **Tempi per il mutuo**\n\nDalla pre-approvazione all\'erogazione passano in genere **4–8 settimane**, se documenti e perizia sono in ordine. Il compromesso va coordinato con la banca.\n\nTi assistiamo su sequenza mutuo–acquisto–rogito.',
+    r: "I tempi dipendono dalla banca, dalla completezza dei documenti, dalla perizia e dalle verifiche. Chiedi una tempistica scritta all’intermediario e coordina proposta, eventuale condizione sospensiva e rogito. Non fissiamo una durata standard uguale per tutte le pratiche.\n\n[Fonte di approfondimento](https://economiapertutti.bancaditalia.it/aree-tematiche/prestiti/mutuo-ipotecario/), consultata il 24 novembre 2026.",
     blog: 'blog-mutuo-documenti-tempi-prima-casa-padova-2026',
     blogTitle: 'Documenti e tempi mutuo'
   },
@@ -930,41 +930,41 @@ const FAQ_DATA = [
   },
   {
     k: ['contratto affitto', 'tipo contratto', '4+4', '3+2', 'transitorio', 'cedolare'],
-    r: '📄 **Tipologie di contratto di locazione**\n\n• **4+4 (libero):** canone concordato liberamente, durata 4 anni rinnovabili\n• **3+2 (concordato):** canone calmierato, vantaggi fiscali per entrambi\n• **Transitorio:** da 1 a 18 mesi, per esigenze temporanee documentate\n• **Studenti:** da 6 a 36 mesi, per universitari\n\n**Cedolare secca:** tassazione sostitutiva al 21% (aliquota ridotta per i canoni concordati: verifica quella in vigore) — niente IRPEF né imposta di registro.'
+    r: "Le locazioni abitative possono avere canone libero, canone concordato o rispondere a esigenze transitorie o di studenti. Durata, requisiti e documenti dipendono dal contratto e dagli accordi territoriali applicabili. La cedolare secca è un regime fiscale opzionale con requisiti e aliquote specifiche, non una regola di ogni affitto. Linda segue locazioni residenziali e studenti; Gino quelle commerciali.\n\n[Fonte di approfondimento](https://www.agenziaentrate.gov.it/portale/aree-tematiche/casa/affitto/cedolare-secca), consultata il 24 novembre 2026."
   },
   {
     k: ['sfratto', 'morosità', 'inquilino moroso', 'non paga'],
-    r: '⚠️ **Sfratto per morosità**\n\nSe l\'inquilino non paga, il procedimento prevede:\n1. Intimazione di sfratto tramite ufficiale giudiziario\n2. Udienza di convalida (il giudice può concedere termine di grazia di 90 giorni)\n3. Esecuzione forzata\n\nI tempi medi in Veneto sono di 6-12 mesi. Noi selezioniamo accuratamente gli inquilini per prevenire queste situazioni.'
+    r: "Prima del contratto è utile verificare, nel rispetto della privacy, sostenibilità del canone e garanzie concordate. Se il pagamento manca, occorre valutare contratto e situazione con un legale. Procedura, termini ed esecuzione non hanno una durata uguale per tutti: non promettiamo un recupero dell’immobile in sei o dodici mesi."
   },
   {
     k: ['cauzione', 'deposito cauzionale', 'deposito affitto'],
-    r: '💵 **Deposito cauzionale**\n\nIl deposito cauzionale (cauzione) è generalmente pari a **2-3 mensilità** di canone. Viene restituito alla fine del contratto, al netto di eventuali danni. Il proprietario è tenuto a corrispondere gli interessi legali maturati. Noi gestiamo tutta la documentazione.'
+    r: "È una somma a garanzia delle obbligazioni dell’inquilino, diversa dal canone anticipato. Importo, interessi, restituzione ed eventuali contestazioni vanno gestiti secondo legge e contratto. La restituzione non si valuta soltanto sui danni materiali: possono rilevare altre obbligazioni non adempiute. Prima della firma chiarisci inventario, verbale di consegna e modalità di chiusura."
   },
   // ── TASSE E IMPOSTE ──
   {
     k: ['imu', 'tasi', 'tassa casa', 'imposta casa'],
-    r: '🏛️ **IMU — Imposta Municipale Unica**\n\n• **Prima casa:** ESENTE (tranne categorie A1, A8, A9)\n• **Seconda casa:** aliquota base 0,86% (variabile per comune)\n• **Terreni:** soggetti a IMU salvo esenzioni agricoltura\n\nIl pagamento avviene in 2 rate: acconto (16 giugno) e saldo (16 dicembre). Possiamo aiutarti a calcolare l\'importo esatto.'
+    r: "L’IMU dipende dal tipo di immobile, dall’uso, dal periodo e dalle aliquote deliberate dal Comune. L’abitazione principale è in generale esclusa, salvo le categorie A/1, A/8 e A/9: non basta aver acquistato con l’agevolazione prima casa per ottenere l’esenzione IMU. Per importo, scadenze ed eventuali riduzioni servono situazione personale e delibera comunale vigente.\n\n[Fonte di approfondimento](https://www.finanze.gov.it/it/fiscalita/fiscalita-regionale-e-locale/Imposta-municipale-propria-IMU/disciplina-del-tributo/abitazione-principale/), consultata il 24 novembre 2026."
   },
   {
     k: ['plusvalenza', 'tassa vendita', 'guadagno vendita'],
-    r: '💰 **Plusvalenza sulla vendita**\n\nSe vendi un immobile **entro 5 anni** dall\'acquisto e realizzi un guadagno, devi pagare la tassa sulla plusvalenza. Puoi scegliere:\n• Tassazione IRPEF ordinaria\n• Imposta sostitutiva del **26%**\n\n**Esenzione:** se l\'immobile è stato adibito a prima casa per la maggior parte del periodo.',
+    r: "Non ogni vendita genera una plusvalenza imponibile. Il caso ordinario riguarda, con eccezioni, immobili acquistati o costruiti da non più di cinque anni. Esiste una disciplina distinta per cessioni dopo interventi Superbonus conclusi da non più di dieci anni, con proprie esclusioni. Prima del rogito chiedi al notaio di verificare provenienza, uso, lavori e costi documentati: la sola data di acquisto non basta.\n\n[Fonte di approfondimento](https://www.agenziaentrate.gov.it/portale/documents/20143/6193294/Circolare+plusvalenze+superbonus+n.+13+del+13+giugno+2024_.pdf/6aea10c1-d402-3204-eb3e-b8a64422a43d), consultata il 24 novembre 2026.",
     blog: 'blog-tasse-vendita-casa',
     blogTitle: 'Tasse sulla vendita casa'
   },
   {
     k: ['spese detraibili', 'detrazioni', 'detrazione fiscale', '730'],
-    r: '📊 **Detrazioni fiscali legate alla casa**\n\n• **Interessi mutuo prima casa:** detrazione del 19% entro i limiti di legge\n• **Spese notarili mutuo:** detraibili al 19%\n• **Canone affitto:** detrazione per inquilini a basso reddito\n• **Ristrutturazione ed efficientamento energetico:** detrazioni con aliquote e limiti che cambiano ogni anno (verifica sul sito dell\'Agenzia delle Entrate)\n• **Bonus mobili:** detrazione 50% fino a €5.000'
+    r: "Non esiste un’unica percentuale per tutte le spese. Intervento, anno del pagamento, titolo sull’immobile, uso dell’abitazione e posizione fiscale determinano requisiti e limiti. Per il 2026 il bonus mobili resta una misura distinta e collegata a lavori ammessi, con limite di spesa di cinquemila euro e condizioni specifiche. Prima di impegnare spese verifica le regole aggiornate con il professionista fiscale.\n\n[Fonte di approfondimento](https://www.agenziaentrate.gov.it/portale/aree-tematiche/casa/agevolazioni/bonus-mobili-ed-elettrodomestici), consultata il 24 novembre 2026.\n\n[Fonte di approfondimento](https://www.agenziaentrate.gov.it/portale/Aree+tematiche/Casa/Agevolazioni/Agevolazioni+per+le+ristrutturazioni+edilizie/), consultata il 24 novembre 2026."
   },
   // ── DOCUMENTI ──
   {
     k: ['documenti', 'ape', 'certificato', 'pratiche', 'catasto'],
-    r: '📋 **Documenti per la vendita**\n\nServiranno:\n• APE (Attestato Prestazione Energetica)\n• Planimetria catastale aggiornata\n• Atto di provenienza\n• Visura catastale\n• Certificato di abitabilità/agibilità\n• Conformità urbanistica\n• Conformità impianti\n\nNon preoccuparti — ti aiutiamo a raccogliere tutto!',
+    r: "In genere occorrono documenti di identità e titolarità, atto di provenienza, dati e planimetria catastale, documentazione urbanistica ed edilizia e APE quando richiesto. Successioni, ipoteche, condominio e lavori possono richiedere ulteriori verifiche. La sola conformità catastale non dimostra la regolarità urbanistica. Tecnico e notaio definiscono controlli e documenti del caso concreto.",
     blog: 'blog-documenti-vendita-casa',
     blogTitle: 'Documenti per vendere casa'
   },
   {
     k: ['classe energetica', 'energetica', 'attestato energetico', 'consumo'],
-    r: '⚡ **APE — Attestato di Prestazione Energetica**\n\nL\'APE è obbligatorio per vendere o affittare. Classifica l\'immobile da **A4** (migliore) a **G** (peggiore). Ha validità di **10 anni**.\n\nCosto medio: €150-€300. Deve essere redatto da un tecnico abilitato. Noi ci occupiamo di organizzare tutto.'
+    r: "L’APE descrive la prestazione energetica dell’immobile ed è redatto da un tecnico abilitato. Ha validità massima di dieci anni, ma può scadere prima: contano gli interventi che modificano la prestazione e il rispetto dei controlli di efficienza energetica previsti. Il tecnico verifica obblighi, esenzioni e scadenza nel caso concreto. Il costo si concorda con il professionista, non è una tariffa unica.\n\n[Fonte di approfondimento](https://www.regione.vda.it/energia/certificazioneenergetica/validita_ape_i.asp), consultata il 24 novembre 2026."
   },
   {
     k: ['visura', 'ipoteca', 'ipoteche', 'gravami'],
@@ -973,7 +973,7 @@ const FAQ_DATA = [
   // ── RISTRUTTURAZIONE E BONUS ──
   {
     k: ['ristrutturazione', 'ristrutturare', 'lavori', 'bonus ristrutturazione'],
-    r: '🔨 **Bonus ristrutturazione 2025-2026**\n\n• **Detrazione 50%** per prima casa (36% per altri immobili) su spese fino a €96.000\n• Ripartita in **10 rate annuali**\n• Include: manutenzione straordinaria, restauro, risanamento conservativo, ristrutturazione edilizia\n\nPossiamo consigliarti imprese edili di fiducia nella zona di Padova.'
+    r: "Per le spese del 2026 l’Agenzia delle Entrate indica una detrazione del trentasei per cento, elevata al cinquanta per cento per l’abitazione principale alle condizioni previste, su un massimo di novantaseimila euro per unità. Prima casa fiscale e abitazione principale non sono sinonimi. Lavori ammessi, soggetto che sostiene la spesa, pagamenti e documenti vanno verificati; non si applica automaticamente il beneficio a ogni intervento.\n\n[Fonte di approfondimento](https://www.agenziaentrate.gov.it/portale/Aree+tematiche/Casa/Agevolazioni/Agevolazioni+per+le+ristrutturazioni+edilizie/), consultata il 24 novembre 2026."
   },
   {
     k: ['ecobonus', 'risparmio energetico', 'cappotto', 'caldaia', 'pompa di calore'],
@@ -995,18 +995,18 @@ const FAQ_DATA = [
   // ── INVESTIMENTI IMMOBILIARI ──
   {
     k: ['investimento', 'investire', 'rendimento', 'rendita', 'reddito'],
-    r: '📈 **Investire in immobili a Padova**\n\nSul rendimento degli immobili a Padova: Non pubblichiamo percentuali di rendimento: dipendono da zona, tipologia, canone e costi. Padova è una piazza universitaria molto dinamica con forte domanda di affitti. Contattateci per un\'analisi personalizzata.',
+    r: "Non c’è un rendimento standard garantito per Padova. Il rendimento lordo rapporta il canone annuo al costo considerato; quello netto tiene conto di spese, imposte, periodi senza inquilino e manutenzione. Anche il prezzo di acquisto complessivo e il tipo di contratto incidono. Un’analisi deve dichiarare ipotesi, periodo e rischi, senza promettere percentuali.",
     blog: 'blog-investire-immobiliare-padova',
     blogTitle: 'Investire nel mercato immobiliare Padova'
   },
   {
     k: ['affitto breve', 'airbnb', 'turistico', 'b&b'],
-    r: '🏖️ **Affitti brevi e turistici**\n\nGli affitti brevi (< 30 giorni) sono soggetti a:\n• **Cedolare secca 21%** sui redditi\n• Obbligo di comunicazione alla Questura entro 24h\n• CIR (Codice Identificativo Regionale) obbligatorio\n• Eventuale imposta di soggiorno comunale\n\nAbano Terme e i Colli Euganei offrono ottimi rendimenti turistici.'
+    r: "La locazione breve fiscale riguarda contratti abitativi non superiori a trenta giorni, fuori dall’attività d’impresa, alle condizioni previste dalla legge. Se si sceglie la cedolare secca, il ventuno per cento riguarda un immobile scelto in dichiarazione; sul secondo si applica il ventisei per cento. Dal 2026 il regime è limitato a non più di due appartamenti, oltre i quali opera la presunzione di attività imprenditoriale. Il CIN è obbligatorio per gli immobili destinati a locazione breve o turistica; restano gli altri adempimenti nazionali, regionali e comunali. Verifica il caso con un professionista prima di pubblicare un annuncio.\n\n[Fonte di approfondimento](https://www.agenziaentrate.gov.it/portale/aree-tematiche/casa/affitto/cedolare-secca), consultata il 24 novembre 2026.\n\n[Fonte di approfondimento](https://bdsr.ministeroturismo.gov.it/faq), consultata il 24 novembre 2026."
   },
   // ── ASTE GIUDIZIARIE ──
   {
     k: ['asta', 'aste', 'giudiziaria', 'tribunale', 'aggiudicazione'],
-    r: '⚖️ **Aste giudiziarie immobiliari**\n\nOffriamo assistenza completa:\n• Analisi dell\'immobile e della perizia CTU\n• Verifica ipotecaria e situazione debitoria\n• Sopralluogo e valutazione\n• Preparazione offerta e partecipazione\n• Tutela legale fino al decreto di trasferimento\n\nSpesso è possibile acquistare al **20-40% sotto il valore** di mercato!'
+    r: "Per partecipare occorre leggere avviso di vendita e perizia, verificare stato e occupazione dell’immobile, oneri, cauzione, modalità di offerta e tempi di pagamento. Un prezzo base più basso non dimostra da solo un affare. Per assistenza tecnica o legale servono i professionisti competenti; modalità e perimetro dell’eventuale servizio dell’agenzia vanno concordati prima."
   },
   // ── TERRENI E RURALI ──
   {
@@ -1016,7 +1016,7 @@ const FAQ_DATA = [
   // ── VIRTUAL TOUR ──
   {
     k: ['virtual tour', '360', 'tour virtuale', 'visita virtuale'],
-    r: '🎥 **Virtual Tour 360°**\n\nRealizziamo tour virtuali interattivi con:\n• Fotocamere professionali 360°\n• Navigazione fluida stanza per stanza\n• Pubblicazione su sito, YouTube e portali\n• Compatibile smartphone, tablet, PC e visori VR\n\nGli immobili con virtual tour ricevono il **40% di contatti in più** e visite più qualificate!'
+    r: "Il tour permette di esplorare gli ambienti a distanza prima di valutare una visita. Disponibilità e modalità di realizzazione vanno concordate per il singolo immobile. Il tour non garantisce un aumento percentuale di contatti né sostituisce il sopralluogo e i controlli sui documenti."
   },
   // ── CERTIFICAZIONI E CONFORMITÀ ──
   {
@@ -1026,7 +1026,7 @@ const FAQ_DATA = [
   // ── SUCCESSIONE E DONAZIONE ──
   {
     k: ['successione', 'eredità', 'eredi', 'defunto', 'ereditare'],
-    r: '⚖️ **Successione immobiliare**\n\nIn caso di eredità:\n• Dichiarazione di successione entro **12 mesi** dal decesso\n• Imposta di successione: 4% (coniuge/figli, franchigia €1M), 6% (fratelli, franchigia €100K), 8% (altri)\n• Voltura catastale obbligatoria\n• Se più eredi: possibilità di vendita con accordo unanime o divisione giudiziale\n\nVi assistiamo anche nella vendita di immobili ereditati.',
+    r: "La pratica dipende da eredi, testamento, patrimonio e rapporti di parentela. Dichiarazione, imposte, volture e accettazione dell’eredità sono aspetti distinti; aliquote e franchigie non sono uguali per tutti i parenti. Per vendere un immobile ereditato occorre verificare titolarità e adempimenti con il notaio. Non riassumiamo ogni successione in un’unica tabella di imposte.\n\n[Fonte di approfondimento](https://www.agenziaentrate.gov.it/portale/schede/pagamenti/imposta-di-successione/aliquote-e-franchigie), consultata il 24 novembre 2026.",
     blog: 'blog-successione-immobiliare-padova',
     blogTitle: 'Casa ereditata: tasse e vendita'
   },
@@ -1058,7 +1058,7 @@ const FAQ_DATA = [
   },
   {
     k: ['mercato', 'andamento', 'prezzi', 'trend', 'crescita'],
-    r: '📊 **Mercato immobiliare Padova 2025-2026**\n\n• Prezzi medi in **leggera crescita** (+2-3% annuo)\n• Forte domanda zona universitaria e prima cintura\n• Cittadella: mercato molto dinamico (~3.200 €/mq)\n• Centro storico stabile sui 3.500 €/mq\n• Colli Euganei: crescita per il turismo\n\nUsa la nostra **stima online** per conoscere il valore nella tua zona!'
+    r: "Il mercato cambia per zona, tipologia, stato e periodo. Prezzi richiesti negli annunci, quotazioni OMI e prezzi effettivi di compravendita sono misure diverse. Per valutare una casa servono dati datati e comparabili pertinenti: non applichiamo una media cittadina a un immobile specifico."
   },
   {
     k: ['linda', 'chi sei', 'assistente', 'bot', 'intelligenza artificiale'],
@@ -1070,7 +1070,7 @@ const FAQ_DATA = [
   // ═══════════════════════════════════════════════
   {
     k: ['valutazione gratuita', '', 'valutazione gratis'],
-    r: '✅ **La valutazione è gratuita.** Analizziamo il tuo immobile con dati di mercato e comparabili di zona.\n\n📞 Chiama il **049.8843484** o scrivi *"contattami"* per prenotare.'
+    r: "La prima valutazione proposta dall’agenzia è gratuita e senza obbligo di affidare la vendita. Modalità, documenti necessari ed eventuali prestazioni ulteriori si chiariscono prima. Non coincide automaticamente con una perizia tecnica o bancaria. Per iniziare, contatta Gino per la vendita; Linda per la locazione residenziale o per studenti."
   },
   {
     k: ['vendere veloce', 'tempi vendita agenzia', 'vendita rapida padova', '45 giorni vendita'],
@@ -1102,7 +1102,7 @@ const FAQ_DATA = [
   },
   {
     k: ['solo padova', 'zona coperta', 'dove lavorate', 'area operativa'],
-    r: '📍 **Copriamo tutta la provincia di Padova e oltre:**\n\n• Padova città e prima cintura\n• Selvazzano, Abano, Montegrotto, Rubano, Limena\n• Monselice, Este, Cittadella, Camposampiero\n• Fino a Vicenza e comuni limitrofi\n\n**101 comuni** nel nostro database prezzi!'
+    r: "La sede è a Limena e il sito presenta servizi e immobili a Padova e in provincia. Per un incarico fuori zona chiedi prima una verifica di copertura: la presenza di dati sui prezzi di un Comune non implica automaticamente un servizio operativo in quel Comune."
   },
   {
     k: ['esempi venduti', 'portfolio', 'casi studio', 'immobili venduti'],
@@ -1348,7 +1348,7 @@ const FAQ_DATA = [
   },
   {
     k: ['mutuo 100', 'valutazione mutuo giovani', 'mutuo prima casa'],
-    r: '🏠 **Valutazioni ex-ante per mutuo 100%:**\n\n• Simulazione banca preventiva\n• Buffer di sicurezza\n• Verifica fattibilità prima dell\'offerta\n\nTi evitiamo brutte sorprese in fase di richiesta mutuo.'
+    r: "Alcune offerte possono finanziare oltre l’ottanta per cento del valore dell’immobile, ma dipendono da perizia, reddito, garanzie e criteri della banca. Un finanziamento integrale non copre necessariamente imposte e altre spese. La garanzia Consap non elimina il debito né obbliga la banca a concedere il mutuo. Verifica la fattibilità prima di assumere impegni di acquisto.\n\n[Fonte di approfondimento](https://www.consap.it/fondo-prima-casa/), consultata il 24 novembre 2026."
   },
   {
     k: ['passaggio generazionale', 'donazione immobile', 'cessione genitori'],
@@ -1442,7 +1442,7 @@ const FAQ_DATA = [
   },
   {
     k: ['gruppo immobiliare righetto', 'righetto limena sede', 'agenzia limena via roma', 'chi è righetto limena'],
-    r: '🏢 **Righetto Immobiliare a Limena**\n\n• **Sede:** Via Roma 96, 35010 Limena (PD)\n• **Dal 2000** su Padova e provincia — **101 comuni**\n• **127 recensioni** Google, media **4,9/5**\n• **350+** immobili gestiti nel tempo\n\nIl compenso di mediazione **non è pubblicato online**: si concorda in sede nel mandato, con chiarezza su servizi inclusi.\n\nVuoi fissare un appuntamento ****?',
+    r: "🏢 **Righetto Immobiliare a Limena**\n\n• **Sede:** Via Roma 96, 35010 Limena (PD)\n• **Dal 2000** su Padova e provincia — **101 comuni**\n• **20 recensioni** Google, media **5,0/5**\n• **350+** immobili gestiti nel tempo\n\nIl compenso di mediazione **non è pubblicato online**: si concorda in sede nel mandato, con chiarezza su servizi inclusi.\n\nVuoi fissare un appuntamento ****?",
     blog: 'blog-gruppo-immobiliare-righetto-limena-2026',
     blogTitle: 'Gruppo Immobiliare Righetto Limena'
   },
