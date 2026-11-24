@@ -10,3 +10,11 @@
 @media(min-width:700px){.rw-pagehero-partners .rw-visual-word{font-size:58px}}
 
 html{background:#f5f3ed}body{margin:0;padding:24px;font-family:Arial,sans-serif}.rw-live{max-width:1120px;margin:0 auto;padding:0 30px 28px}.rw-mainnav a,.rw-footmenu a{font:11px Arial,sans-serif;text-decoration:none;display:inline-flex;align-items:center;min-height:44px;color:#23483a}.rw-fullmenu a{display:block;background:#f5f8f1;padding:14px;text-decoration:none;min-height:44px;box-sizing:border-box}.rw-audiences a{border:1px solid #dce5d8;border-radius:12px;background:white;padding:22px;text-decoration:none;min-height:140px;color:#204738;display:flex;flex-direction:column;justify-content:space-between;gap:12px}.rw-audiences a>span{font-size:10px;color:#72905e}.rw-property{display:block;text-decoration:none}.rw-current{border-bottom:2px solid #37634c}[hidden]{display:none!important}@media(max-width:760px){body{padding:0 12px}.rw-live{padding:0 16px 24px}.rw-audiences a{padding:17px;min-height:155px}}
+/* Private technical refinement, no live release. */
+.rw-skip{position:absolute;top:8px;left:8px;z-index:1000;padding:12px 18px;background:#173f36;color:#fff;transform:translateY(-180%)}.rw-skip:focus{transform:none}
+.rw-site input,.rw-site select,.rw-site textarea{font-size:16px}.rw-site img{max-width:100%}.rw-brand img{height:auto}.rw-mini-photo img{height:100%}.rw-form input,.rw-form textarea{font-size:16px}.rw-site input:focus-visible,.rw-site select:focus-visible,.rw-site textarea:focus-visible,.rw-site summary:focus-visible{outline:3px solid #285b43;outline-offset:3px}.rw-site .rw-fine,.rw-site .rw-banner,.rw-site .rw-eyebrow,.rw-site .rw-draftpill,.rw-site .rw-layoutcard p,.rw-site .rw-sectionheading p{color:#465f50}.rw-site .rw-mainnav a,.rw-site .rw-footmenu a{font-size:12px}.rw-site .rw-fine{font-size:12px!important}.rw-site .rw-searchbar select{min-height:44px}.rw-site .rw-fullmenu summary{min-height:44px}
+@media(prefers-reduced-motion:reduce){.rw-site *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+.rw-site .rw-pagecta .rw-eyebrow{color:#fff}
+
+.rw-site h1.rw-promoted-title{font-size:clamp(30px,4vw,46px);margin:10px 0 24px}
