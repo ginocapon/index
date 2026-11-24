@@ -155,7 +155,12 @@ h1 {
 </style>
 </head>
 <body>
-<div class="card">
+<section data-internal-gate class="card" style="text-align:center">
+  <h1>Accesso riservato</h1>
+  <p class="sub" data-internal-gate-status>Verifica accesso in corso…</p>
+  <p class="sub"><a data-internal-login href="/admin" style="color:#3A5578;font-weight:700">Vai al login admin</a>, poi ricarica questa pagina.</p>
+</section>
+<div class="card" data-internal-content hidden>
   <h1>🔖 Installa Scraping Idealista</h1>
   <p class="sub">Per importare annunci Idealista nell'admin di Righetto Immobiliare</p>
 
@@ -209,6 +214,12 @@ h1 {
   </div>
 </div>
 
+<script src="js/vendor/supabase.min.js"></script>
+<script src="js/supabase-bridge.js?v=1"></script>
+<script type="module">
+import { gateInternalPage } from './js/internal-page-gate.mjs?v=20261124-p0';
+gateInternalPage();
+</script>
 <script>
 function copyCode() {
   const code = document.getElementById('codeBox').textContent;

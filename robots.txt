@@ -2,10 +2,16 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 Disallow: /admin
+Disallow: /admin-kb.html
+Disallow: /admin-kb
+Disallow: /admin-password.html
 Disallow: /api/
 Disallow: /scraping.html
+Disallow: /scraping
 Disallow: /bookmarklet-helper.html
+Disallow: /bookmarklet-helper
 Disallow: /js/admin-
+Disallow: /js/internal-page-gate
 Disallow: /data/seo-auto/
 
 # AI Bots — benvenuti, leggete llms.txt

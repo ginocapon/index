@@ -9,10 +9,11 @@
 <link rel="stylesheet" href="css/fonts-main.css?v=1">
 <script src="js/vendor/supabase.min.js"></script>
 <script src="js/supabase-bridge.js?v=1"></script>
-<script src="js/admin-lead-scoring.js?v=1"></script>
+<script src="js/admin-lead-scoring.js?v=20261124-p0"></script>
 <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
 <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
-<script async src="https://cdn.jsdelivr.net/npm/otpauth@9/dist/otpauth.umd.min.js"></script>
+<script src="js/vendor/otpauth.umd.min.js"></script>
+<script src="js/vendor/qrcode.min.js"></script>
 <style>
 :root {
   --nero:   #3A5578;
@@ -2288,10 +2289,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
         <button onclick="loginStep1Back()" style="background:none;border:none;color:var(--caffe2);font-size:0.78rem;cursor:pointer;font-family:'Montserrat',sans-serif">
           ← Torna al login
         </button>
-        <br>
-        <button onclick="emergencyDisable2FA()" style="background:none;border:none;color:var(--rosso);font-size:0.72rem;cursor:pointer;margin-top:8px;font-family:'Montserrat',sans-serif;text-decoration:underline">
-          Hai perso l'accesso? Disattiva 2FA
-        </button>
+        <p style="margin-top:12px;font-size:0.72rem;color:var(--caffe3);line-height:1.4">Se hai perso l’app Authenticator, disattiva il 2FA dalle Impostazioni dopo un accesso di recupero concordato in sede (non da questa schermata).</p>
       </div>
     </div>
 
@@ -4547,7 +4545,10 @@ META_IG_USER_ID=...</pre>
       <div class="section" id="sec-emailmarketing">
         <div class="table-wrap" style="padding:28px;max-width:900px">
           <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:6px;">Email Marketing Pro</h3>
-          <p style="font-size:0.8rem;color:var(--caffe2);margin-bottom:20px">Invio email tramite SMTP proprio — Deliverability professionale con DKIM/SPF/DMARC</p>
+          <p style="font-size:0.8rem;color:var(--caffe2);margin-bottom:12px">Invio email tramite SMTP proprio — Deliverability professionale con DKIM/SPF/DMARC</p>
+          <div role="status" style="margin-bottom:20px;padding:12px 14px;border:1px solid #c9a227;background:#fff8e6;border-radius:8px;font-size:0.82rem;color:var(--testo);line-height:1.5">
+            <strong>Stato database (nov 2026):</strong> le tabelle campagne (<code>campagne_email</code>, <code>coda_email</code>, …) non risultano create sul progetto Supabase live. Questa sezione resta in anteprima: non usarla per invii reali finché non si applica <code>sql/email-marketing-tables.sql</code> (con conferma di Gino). Le email singole di notifica lead continuano a passare da Edge <code>send-email</code>.
+          </div>
 
           <!-- DASHBOARD RAPIDA -->
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:24px">
@@ -5497,16 +5498,70 @@ let rigCataloguePrincipal=null,rigCatalogueKey=null,rigCatalogueRows=[],rigCatal
 // LOGIN + 2FA (TOTP)
 // ══════════════════════════════════════
 let pendingTotpSecret = null; // used during 2FA setup
+let pending2FAUserId = null; // user waiting for TOTP after password
 
 function isLiveAdminHost() {
   const host = (location.hostname || '').replace(/^www\./i, '');
   return host === 'righettoimmobiliare.it' || host.endsWith('.github.io');
 }
 
+function totpStorageKey(userId) {
+  return 'rig_2fa_secret:' + String(userId || '');
+}
+function totpSessionKey(userId) {
+  return 'rig_2fa_ok:' + String(userId || '');
+}
+function readTotpSecret(userId) {
+  if (!userId) return null;
+  try {
+    const scoped = localStorage.getItem(totpStorageKey(userId));
+    if (scoped) return scoped;
+    // Migrazione una tantum dal vecchio secret globale (solo se unico utente)
+    const legacy = localStorage.getItem('rig_2fa_secret');
+    if (legacy) {
+      localStorage.setItem(totpStorageKey(userId), legacy);
+      localStorage.removeItem('rig_2fa_secret');
+      return legacy;
+    }
+  } catch (e) { console.error('2FA storage', e); }
+  return null;
+}
+function writeTotpSecret(userId, secret) {
+  if (!userId || !secret) return;
+  localStorage.setItem(totpStorageKey(userId), secret);
+  localStorage.removeItem('rig_2fa_secret');
+}
+function clearTotpSecret(userId) {
+  if (userId) localStorage.removeItem(totpStorageKey(userId));
+  localStorage.removeItem('rig_2fa_secret');
+  try { sessionStorage.removeItem(totpSessionKey(userId)); } catch (e) {}
+}
+function markTotpVerified(userId) {
+  try { sessionStorage.setItem(totpSessionKey(userId), '1'); } catch (e) {}
+}
+function isTotpVerifiedThisSession(userId) {
+  try { return sessionStorage.getItem(totpSessionKey(userId)) === '1'; } catch (e) { return false; }
+}
+function showLoginStep(step) {
+  document.getElementById('loginStep1').style.display = step === 1 ? 'block' : 'none';
+  document.getElementById('loginStep2').style.display = step === 2 ? 'block' : 'none';
+  document.getElementById('loginSetup2FA').style.display = step === 'setup' ? 'block' : 'none';
+}
+
 async function checkAuth() {
   try {
     const { data } = await sb.auth.getSession();
-    if (data && data.session) { grantAccess(); return; }
+    if (!data || !data.session || !data.session.user) return;
+    const uid = data.session.user.id;
+    const secret = readTotpSecret(uid);
+    if (secret && !isTotpVerifiedThisSession(uid)) {
+      pending2FAUserId = uid;
+      document.getElementById('loginOverlay').style.display = 'flex';
+      document.getElementById('appWrapper').style.display = 'none';
+      showLoginStep(2);
+      return;
+    }
+    grantAccess();
   } catch (e) { console.error('getSession', e); }
 }
 
@@ -5559,7 +5614,7 @@ async function doLogin() {
     return;
   }
   const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
-  if (error || !data || !data.session) {
+  if (error || !data || !data.session || !data.user) {
     errEl.textContent = 'Email o password non corrette.';
     errEl.style.display = 'block';
     document.getElementById('loginPass').style.borderColor = 'var(--rosso)';
@@ -5567,15 +5622,25 @@ async function doLogin() {
   }
   document.getElementById('loginPass').value = '';
   document.getElementById('loginPass').style.borderColor = '';
+  const uid = data.user.id;
+  const secret = readTotpSecret(uid);
+  if (secret) {
+    pending2FAUserId = uid;
+    document.getElementById('loginTotp').value = '';
+    document.getElementById('totpError').style.display = 'none';
+    showLoginStep(2);
+    document.getElementById('loginTotp').focus();
+    return;
+  }
   grantAccess();
 }
 
 function verifyTotp() {
   const code = document.getElementById('loginTotp').value.trim();
-  const secret = localStorage.getItem('rig_2fa_secret');
-  if (!secret || !code) return;
+  const uid = pending2FAUserId;
+  const secret = readTotpSecret(uid);
+  if (!secret || !code || !uid) return;
 
-  // Check if OTPAuth library is loaded
   if (typeof OTPAuth === 'undefined') {
     document.getElementById('totpError').textContent = 'Errore: libreria 2FA non caricata. Ricarica la pagina.';
     document.getElementById('totpError').style.display = 'block';
@@ -5594,6 +5659,8 @@ function verifyTotp() {
 
     const delta = totp.validate({ token: code, window: 2 });
     if (delta !== null) {
+      markTotpVerified(uid);
+      pending2FAUserId = null;
       grantAccess();
     } else {
       document.getElementById('totpError').textContent = 'Codice non valido';
@@ -5609,26 +5676,25 @@ function verifyTotp() {
   }
 }
 
-function loginStep1Back() {
-  document.getElementById('loginStep1').style.display = 'block';
-  document.getElementById('loginStep2').style.display = 'none';
-  document.getElementById('loginSetup2FA').style.display = 'none';
+async function loginStep1Back() {
   document.getElementById('totpError').style.display = 'none';
   document.getElementById('loginPass').value = '';
+  pending2FAUserId = null;
+  pendingTotpSecret = null;
+  try { await sb.auth.signOut(); } catch (e) {}
+  showLoginStep(1);
 }
 
 // ── 2FA SETUP ──
 
-function show2FASetup() {
-  document.getElementById('loginStep1').style.display = 'none';
-  document.getElementById('loginSetup2FA').style.display = 'block';
+async function show2FASetup() {
+  showLoginStep('setup');
 
   if (typeof OTPAuth === 'undefined') {
-    document.getElementById('qrCodeContainer').innerHTML = '<p style="color:var(--rosso);font-size:0.82rem">Errore: libreria OTPAuth non caricata. Controlla la connessione internet e ricarica la pagina.</p>';
+    document.getElementById('qrCodeContainer').innerHTML = '<p style="color:var(--rosso);font-size:0.82rem">Errore: libreria OTPAuth non caricata. Ricarica la pagina.</p>';
     return;
   }
 
-  // Generate new TOTP secret
   const secret = new OTPAuth.Secret({ size: 20 });
   pendingTotpSecret = secret.base32;
 
@@ -5643,26 +5709,27 @@ function show2FASetup() {
 
   const uri = totp.toString();
   document.getElementById('totpSecretDisplay').textContent = secret.base32;
-
-  // Generate QR code using simple canvas approach
   generateQRCode(uri);
 }
 
 function generateQRCode(text) {
   const container = document.getElementById('qrCodeContainer');
-  // Use a QR code API for simplicity (no extra library needed)
-  const img = document.createElement('img');
-  img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(text);
-  img.alt = 'QR Code 2FA';
-  img.style.cssText = 'width:200px;height:200px;border-radius:8px;border:2px solid var(--caffe3)';
-  img.onerror = function() {
-    container.innerHTML = '<p style="font-size:0.82rem;color:var(--caffe2)">Impossibile generare QR. Copia il codice manualmente.</p>';
-  };
   container.innerHTML = '';
-  container.appendChild(img);
+  if (typeof QRCode === 'undefined') {
+    container.innerHTML = '<p style="font-size:0.82rem;color:var(--caffe2)">QR non disponibile in locale. Copia il codice manualmente.</p>';
+    return;
+  }
+  try {
+    const holder = document.createElement('div');
+    holder.style.cssText = 'display:inline-block;padding:8px;background:#fff;border-radius:8px;border:2px solid var(--caffe3)';
+    new QRCode(holder, { text: text, width: 200, height: 200, correctLevel: QRCode.CorrectLevel.M });
+    container.appendChild(holder);
+  } catch (e) {
+    container.innerHTML = '<p style="font-size:0.82rem;color:var(--caffe2)">Impossibile generare QR. Copia il codice manualmente.</p>';
+  }
 }
 
-function confirmTotpSetup() {
+async function confirmTotpSetup() {
   const code = document.getElementById('setupTotpCode').value.trim();
   if (!code || !pendingTotpSecret) {
     document.getElementById('setupError').textContent = 'Inserisci il codice a 6 cifre dall\'app Authenticator';
@@ -5688,9 +5755,17 @@ function confirmTotpSetup() {
 
     const delta = totp.validate({ token: code, window: 2 });
     if (delta !== null) {
-      // Code is correct — save secret and grant access
-      localStorage.setItem('rig_2fa_secret', pendingTotpSecret);
+      const { data } = await sb.auth.getUser();
+      const uid = data?.user?.id;
+      if (!uid) {
+        document.getElementById('setupError').textContent = 'Sessione non valida. Rifai il login.';
+        document.getElementById('setupError').style.display = 'block';
+        return;
+      }
+      writeTotpSecret(uid, pendingTotpSecret);
+      markTotpVerified(uid);
       pendingTotpSecret = null;
+      check2FAStatus();
       grantAccess();
     } else {
       document.getElementById('setupError').textContent = 'Codice non corretto. Riprova.';
@@ -5709,44 +5784,55 @@ function skipTotpSetup() {
   grantAccess();
 }
 
-function open2FASetup() {
-  // Can be called from Settings page
+async function open2FASetup() {
+  const { data } = await sb.auth.getUser();
+  if (!data?.user?.id || data.user.id !== window.RighettoGatedPrincipal) {
+    toast('Accedi di nuovo prima di configurare il 2FA', 'error');
+    return;
+  }
   document.getElementById('loginOverlay').style.display = 'flex';
   document.getElementById('appWrapper').style.display = 'none';
   show2FASetup();
 }
 
-function disable2FA() {
+async function disable2FA() {
   if (!confirm('Sei sicuro di voler disattivare l\'autenticazione a 2 fattori?')) return;
-  localStorage.removeItem('rig_2fa_secret');
+  const { data } = await sb.auth.getUser();
+  const uid = data?.user?.id;
+  if (!uid || uid !== window.RighettoGatedPrincipal) {
+    toast('Sessione non valida. Nessuna modifica al 2FA.', 'error');
+    return;
+  }
+  clearTotpSecret(uid);
   check2FAStatus();
   toast('2FA disattivato', 'success');
 }
 
-function emergencyDisable2FA() {
-  if (!confirm('Stai per DISATTIVARE il 2FA.\nHai gia\' inserito la password, quindi sei autorizzato.\n\nVuoi procedere?')) return;
-  localStorage.removeItem('rig_2fa_secret');
-  // Go back to step 1 and auto-login (password was already verified)
-  grantAccess();
-}
-
-function check2FAStatus() {
-  const has2FA = !!localStorage.getItem('rig_2fa_secret');
+async function check2FAStatus() {
+  let uid = window.RighettoGatedPrincipal;
+  if (!uid) {
+    try {
+      const { data } = await sb.auth.getUser();
+      uid = data?.user?.id || null;
+    } catch (e) {}
+  }
+  const has2FA = !!readTotpSecret(uid);
   const statusEl = document.getElementById('status2FA');
   const setupBtn = document.getElementById('btn2FASetup');
   const disableBtn = document.getElementById('btn2FADisable');
+  if (!statusEl) return;
   if (has2FA) {
-    statusEl.textContent = 'Attivo';
+    statusEl.textContent = 'Attivo (segreto sul dispositivo, legato all’utente)';
     statusEl.style.color = 'var(--verde)';
     statusEl.style.fontWeight = '600';
-    setupBtn.style.display = 'none';
-    disableBtn.style.display = 'inline-flex';
+    if (setupBtn) setupBtn.style.display = 'none';
+    if (disableBtn) disableBtn.style.display = 'inline-flex';
   } else {
     statusEl.textContent = 'Non attivo';
     statusEl.style.color = 'var(--rosso)';
     statusEl.style.fontWeight = '600';
-    setupBtn.style.display = 'inline-flex';
-    disableBtn.style.display = 'none';
+    if (setupBtn) setupBtn.style.display = 'inline-flex';
+    if (disableBtn) disableBtn.style.display = 'none';
   }
 }
 

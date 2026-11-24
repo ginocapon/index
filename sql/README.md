@@ -6,6 +6,15 @@ Gli script in questa cartella sono **versionati su GitHub** ma vanno **eseguiti 
 
 Non esiste (al momento) pipeline CI che applichi automaticamente le migration al database live.
 
+## P0 sicurezza 24/11/2026 (priorità)
+
+Dopo merge del PR P0, eseguire **una volta** sul progetto live:
+
+1. **`p0-security-2026-11-24.sql`** — RLS WhatsApp + REVOKE RPC admin da `anon`  
+2. Istruzioni italiane e test: **`docs/p0-security-2026-11-24.md`**
+
+> Non usare più `security-advisor-function-grants-2026.sql` così com’è: concedeva ancora `EXECUTE` a `anon` su RPC admin. Il file P0 lo sostituisce per quel pezzo.
+
 ## Ordine consigliato (nuovo progetto)
 
 1. `rls-security-hardening-safe.sql` — base RLS + tabelle agenda/cache se mancano  
@@ -14,7 +23,7 @@ Non esiste (al momento) pipeline CI che applichi automaticamente le migration al
 4. **`security-advisor-splinter-2026-public.sql`** — CLI o SQL Editor (search_path + RLS)  
 5. **`security-advisor-splinter-2026-storage.sql`** — policy bucket (**CLI** `supabase db query -f … --linked`, **non** SQL Editor → errore 42501)  
 6. **`security-advisor-splinter-2026-storage-buckets-only.sql`** — solo se serve: SQL Editor, rende privati `documenti` / `planimetrie`  
-7. **`security-advisor-function-grants-2026.sql`** — SQL Editor o CLI: fix warning SECURITY DEFINER (PUBLIC / authenticated)
+7. **`p0-security-2026-11-24.sql`** — RLS WhatsApp + revoke anon su RPC admin (sostituisce il vecchio grants-2026 per le RPC admin)
 
 ## Security Advisor (2026)
 

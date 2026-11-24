@@ -95,7 +95,7 @@
       .join('');
     return (
       `<details class="lead-scoring-guide" style="margin-bottom:16px">
-        <summary style="cursor:pointer;font-weight:600;font-size:0.9rem">Guida lead scoring (0–100) · webhook <code>score-lead-righetto</code></summary>
+        <summary style="cursor:pointer;font-weight:600;font-size:0.9rem">Guida lead scoring (0–100) · webhook <code>score-lead-righetto</code> (non ancora deployato sul live)</summary>
         <p style="font-size:0.82rem;margin:10px 0 8px">HOT ≥${th.hot?.min ?? HOT} · WARM ${th.warm?.min ?? WARM}–${(th.warm?.max ?? HOT - 1)} · COLD &lt;${WARM}. Compila anche <code>data/acquisition-kpi-template.json</code> ogni venerdì.</p>
         <table class="lead-scoring-table"><thead><tr><th>Segnale</th><th>Punti</th></tr></thead><tbody>${rows}</tbody></table>
       </details>`

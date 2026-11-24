@@ -1,8 +1,10 @@
 {
-  "updated": "2026-10-09",
+  "updated": "2026-11-24",
   "skill_ref": "TEST-SKILL/skill-lead-automation-righetto.md",
   "sql_ref": "sql/righetto-lead-automation-extension.sql",
   "edge_function": "score-lead-righetto",
+  "edge_function_status": "not_deployed_live",
+  "edge_function_note": "Sorgente in supabase/functions/score-lead-righetto; probe live 24/11/2026 → 404. Lo scoring in admin usa js/admin-lead-scoring.js + data/lead-scoring-rules.json in lettura client. Deploy Edge solo dopo ok di Gino.",
   "n8n_base_repo": "https://github.com/karl22puday-eng/real-estate-lead-automation",
   "architecture": "Livello A: Edge Function + Postgres (deterministico). Livello B: n8n async RAG+LLM.",
   "thresholds": {

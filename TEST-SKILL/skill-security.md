@@ -63,7 +63,7 @@ python tools/check_live_admin_secret.py   # opzionale: allineamento segreto admi
 ### D. Admin e accesso
 - [ ] `robots.txt` contiene `Disallow: /admin.html`
 - [ ] `admin.html` con `noindex` (meta robots)
-- [ ] 2FA TOTP attivo per sessioni admin (`rig_2fa_secret` in localStorage — consapevolezza XSS)
+- [ ] 2FA TOTP attivo per sessioni admin (`rig_2fa_secret:<userId>` in localStorage + verifica per sessione in `sessionStorage`; MFA server-side Supabase ancora consigliata)
 - [ ] Tentativi login falliti non rivelano se utente esiste
 
 ### E. Frontend / attacchi comuni
