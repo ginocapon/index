@@ -26,3 +26,11 @@ html{background:#f5f3ed}body{margin:0;padding:24px;font-family:Arial,sans-serif}
 .rw-answer{margin:34px 0;padding:24px;background:#f1f5eb;border-left:3px solid #56794d}.rw-answer h2{font-size:clamp(22px,2.5vw,30px);line-height:1.2;margin:0 0 12px}.rw-answer p{font-size:16px;line-height:1.65;margin:8px 0}.rw-contextlinks{font-size:14px!important}
 
 .rw-faq-item{border-bottom:1px solid #dce4d7;padding:18px 0}.rw-faq-item summary{font-family:Georgia,serif;font-size:23px;line-height:1.3;color:#234d43;cursor:pointer}.rw-faq-item p{padding-left:18px}
+
+.rw-article{max-width:780px}.rw-article h1{font-size:clamp(35px,4vw,55px);line-height:1.08}.rw-article h2{font-size:28px;margin:32px 0 12px}.rw-article p{font-size:17px;line-height:1.75}.rw-article-lead{font-size:21px!important}
+
+.rw-detail-photo{width:100%;height:auto;max-height:480px;object-fit:cover;border-radius:12px}.rw-article li{font-size:17px;line-height:1.8}.rw-langcard{flex-wrap:wrap}.rw-langcard small{display:block;width:100%}
+
+html[dir=rtl] .rw-article,html[dir=rtl] .rw-footer{text-align:right}html[dir=rtl] .rw-article{font-family:Tahoma,Arial,sans-serif}html[dir=rtl] .rw-article h1,html[dir=rtl] .rw-article h2{font-family:Tahoma,Arial,sans-serif;line-height:1.55}html[dir=rtl] .rw-top{direction:rtl}
+
+.rw-form{display:flex;flex-direction:column;gap:14px}.rw-form label:empty{display:none}.rw-form p{margin:0}
