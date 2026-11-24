@@ -1,0 +1,12 @@
+{
+  "schema": "righetto-idealista-work-1",
+  "note": "Placeholder: generare con scripts/generate-portal-feeds.mjs o Edge Function portal-feeds. Omologazione Idealista (ILC) obbligatoria prima della produzione.",
+  "generatedAt": null,
+  "agency": {
+    "name": "Righetto Immobiliare",
+    "email": "info@righettoimmobiliare.it",
+    "phone": "+390498843484",
+    "ilc": null
+  },
+  "properties": []
+}

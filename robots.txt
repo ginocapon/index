@@ -7,6 +7,7 @@ Disallow: /scraping.html
 Disallow: /bookmarklet-helper.html
 Disallow: /js/admin-
 Disallow: /data/seo-auto/
+Disallow: /feeds/
 
 # AI Bots — benvenuti, leggete llms.txt
 User-agent: GPTBot

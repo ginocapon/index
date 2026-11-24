@@ -3126,6 +3126,12 @@ tr:hover td { background: rgba(206,224,143,0.06); }
                   <label class="check-item"><input type="checkbox" id="f_venduto"> 🔴 Venduto</label>
                   <label class="check-item"><input type="checkbox" id="f_affittato"> 🔴 Affittato</label>
                 </div>
+                <div class="section-divider">🌐 Portali esterni</div>
+                <p style="font-size:0.75rem;color:var(--caffe2);margin:0 0 10px;line-height:1.45">Spunta solo gli annunci da esportare. Venduto/affittato o non attivo = esclusi dal feed. Guida: <code>docs/p1-portali-mandati-2026-11-24.md</code></p>
+                <div class="checks-grid">
+                  <label class="check-item"><input type="checkbox" id="f_pubblica_immobiliare_it"> Pubblica su Immobiliare.it</label>
+                  <label class="check-item"><input type="checkbox" id="f_pubblica_idealista"> Pubblica su Idealista</label>
+                </div>
 
                 <!-- ═══ NOTE INTERNE ═══ -->
                 <div class="section-divider">📝 Note Interne</div>
@@ -6977,7 +6983,7 @@ async function editImmobile(id,isCurrent=()=>true,reloadSaved=null) {if(rigPrope
   setContrattoAffittoResValue(imm.contratto_affitto_res || '');
 
   const bools = ['garage','giardino','terrazzo','cantina','ascensore','piscina','arredato',
-    'attivo','in_evidenza','venduto','affittato',
+    'attivo','in_evidenza','venduto','affittato','pubblica_immobiliare_it','pubblica_idealista',
     'soggiorno','soggiorno_angolo_cottura','cucina','mansarda','taverna','soffitta','lavanderia','porticato','soppalco',
     'cucina_arredata','forno','frigorifero','lavastoviglie','lavatrice','televisione','vasca_idromassaggio','sottotetto','piano_intermedio','piano_seminterrato','piano_rialzato','vasca','giardino_condominiale','piano_interrato','piano_terra','primo_piano','ultimo_piano',
     'ingresso_indipendente','canna_fumaria','animali_ammessi','annuncio_prestigio',
@@ -7259,10 +7265,21 @@ async function saveImmobile(e) {
     in_evidenza: document.getElementById('f_in_evidenza').checked,
     venduto: document.getElementById('f_venduto').checked,
     affittato: document.getElementById('f_affittato').checked,
+    pubblica_immobiliare_it: document.getElementById('f_pubblica_immobiliare_it').checked,
+    pubblica_idealista: document.getElementById('f_pubblica_idealista').checked,
     id_idealista: document.getElementById('f_id_idealista').value || null,
     descrizione: document.getElementById('f_descrizione').value || null,
     note_interne: document.getElementById('f_note_interne').value || null,
   };
+  // Venduto/affittato: fuori dai portali (e consigliato togliere «Attivo» a mano se non serve più sul sito)
+  if (payload.venduto || payload.affittato) {
+    payload.pubblica_immobiliare_it = false;
+    payload.pubblica_idealista = false;
+    const pi = document.getElementById('f_pubblica_immobiliare_it');
+    const pd = document.getElementById('f_pubblica_idealista');
+    if (pi) pi.checked = false;
+    if (pd) pd.checked = false;
+  }
 
   // Revalidate admin identity after asynchronous form/code checks, before the write.
   const lastUser=await sb.auth.getUser();if(lastUser.error||lastUser.data?.user?.id!==authBefore||window.RighettoGatedPrincipal!==authBefore)throw Error('Sessione cambiata prima del salvataggio.');
@@ -7451,6 +7468,8 @@ async function duplicateImmobile(id) {
   payload.slug = newSlug;
   payload.venduto = false;
   payload.affittato = false;
+  payload.pubblica_immobiliare_it = false;
+  payload.pubblica_idealista = false;
   payload.id_idealista = null;
   payload.in_evidenza = false;
   payload.attivo = false; // la copia nasce in bozza: non visibile sul sito finche non la attivi tu
@@ -8877,7 +8896,7 @@ function doImport() {
   try { data = JSON.parse(raw); } catch(e) { errEl.textContent = '❌ JSON non valido. Riprova.'; errEl.style.display = 'block'; return; }
   const map = {codice:'f_codice',titolo:'f_titolo',tipo_operazione:'f_tipo_operazione',categoria:'f_categoria',tipologia:'f_tipologia',comune:'f_comune',indirizzo:'f_indirizzo',prezzo:'f_prezzo',mq_garage:'f_mq_garage',superficie:'f_superficie',locali:'f_locali',camere:'f_camere',bagni_totali:'f_bagni_totali',piano:'f_piano',anno_costruzione:'f_anno_costruzione',stato_manutenzione:'f_stato_manutenzione',classe_energetica:'f_classe_energetica',ipe_kwh:'f_ipe_kwh',esposizione:'f_esposizione',spese_condominio:'f_spese_condominio',consegna:'f_consegna',impianto_elettrico:'f_impianto_elettrico',num_accessi_carrai:'f_num_accessi_carrai',num_portoni:'f_num_portoni',garage_num:'f_garage_num',youtube_id:'f_youtube_id',virtual_tour:'f_virtual_tour',id_idealista:'f_id_idealista',note_interne:'f_note_interne',lat:'f_lat',lng:'f_lng'};
   Object.entries(map).forEach(([k,id])=>{const el=document.getElementById(id);if(el&&data[k]!==undefined&&data[k]!==null)el.value=data[k];});
-  ['garage','giardino','terrazzo','cantina','ascensore','piscina','arredato','attivo','in_evidenza','venduto','affittato'].forEach(k=>{const el=document.getElementById('f_'+k);if(el&&data[k]!==undefined)el.checked=!!data[k];});
+  ['garage','giardino','terrazzo','cantina','ascensore','piscina','arredato','attivo','in_evidenza','venduto','affittato','pubblica_immobiliare_it','pubblica_idealista'].forEach(k=>{const el=document.getElementById('f_'+k);if(el&&data[k]!==undefined)el.checked=!!data[k];});
   // Le foto di Idealista NON vengono importate (copyright)
 currentFotos=[];
 renderFotos();
@@ -18320,6 +18339,8 @@ window.rigOwnerReady(()=>{if(typeof sb!=='undefined')bindAuthenticatedNavigation
 <script>window.rigPropertyTypesReady=import('./js/property-types-ui.mjs?v=20261111-types-private-v1').then(m=>m.initPropertyTypeControl({host:document.getElementById('propertyTypesHost'),primary:document.getElementById('f_tipologia')})).then(x=>(window.RighettoPropertyTypes=x));window.rigPropertyTypesReady.catch(()=>{});</script>
 <script src="js/admin-client-matching.js?v=20261111-types-private-v1"></script>
 <link rel="stylesheet" href="css/admin-property-list.css?v=20261112-compact-row">
+<link rel="stylesheet" href="css/admin-mandate-alerts.css?v=20261124-p1">
+<script src="js/admin-mandate-alerts.js?v=20261124-p1"></script>
 <script src="js/admin-property-table-data.js?v=20261119-faithful-v1"></script>
 <script src="js/admin-property-private-editor.js?v=20261114-guard-d8c41d4f9f6d"></script>
 <script>window.RighettoHistoryConsultationOnly=true;</script>

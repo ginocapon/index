@@ -882,6 +882,8 @@ async function init() {
   }
 
   if (!art) { showError(); return; }
+  // Venduto / affittato: non mostrare scheda pubblica (anche se ancora «attivo» in DB)
+  if (art.venduto === true || art.affittato === true) { showError(); return; }
   art = applicaMqPubblici(art); // overlay mq pubblici (mai persistito)
 
   // Keep the working query URL until its static preview has been verified.

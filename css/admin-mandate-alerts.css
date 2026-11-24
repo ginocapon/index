@@ -1,0 +1,73 @@
+/* Alert scadenze incarico — home admin Immobili */
+.mandate-alerts {
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--caffe3, #d4c4b0);
+  border-radius: 10px;
+  background: #fffaf3;
+}
+.mandate-alerts-ok {
+  font-size: 0.82rem;
+  color: var(--caffe2, #6b5a4a);
+}
+.mandate-alerts-head {
+  font-weight: 700;
+  font-size: 0.92rem;
+  margin-bottom: 10px;
+  color: var(--testo, #2a2218);
+}
+.mandate-alerts-block {
+  margin-top: 10px;
+}
+.mandate-alerts-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.mandate-expired .mandate-alerts-title {
+  color: #8b1e1e;
+}
+.mandate-expiring .mandate-alerts-title {
+  color: #8a5a00;
+}
+.mandate-alerts ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+.mandate-alert-link {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 0.78rem;
+  color: var(--testo, #2a2218);
+  cursor: pointer;
+}
+.mandate-alert-link:hover,
+.mandate-alert-link:focus-visible {
+  background: rgba(0, 0, 0, 0.05);
+  outline: 2px solid var(--oro, #c9a227);
+  outline-offset: 1px;
+}
+.mandate-expired {
+  background: #fdeceb;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+.mandate-expiring {
+  background: #fff6e0;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+@media (max-width: 640px) {
+  .mandate-alerts {
+    padding: 12px;
+  }
+}
