@@ -87,3 +87,12 @@ html[dir=rtl] .rw-site::before{left:auto;right:-140px}
 .rw-js .rw-mainnav a:last-child{border-bottom:0}
 .rw-js .rw-mainnav .rw-current{border-bottom:3px solid #a4451f}
 }
+
+/* nav: Contact come pulsante a destra con foto Ginevra */
+.rw-site .rw-mainnav{display:flex;flex-wrap:wrap;align-items:center}
+.rw-site .rw-mainnav a.rw-navcta{order:99;margin-left:auto!important;display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:6px 20px 6px 8px;background:#2f6a45;color:#fff;border-radius:999px;border:0;box-shadow:0 6px 16px rgba(32,80,52,.28);text-decoration:none}
+.rw-site .rw-mainnav a.rw-navcta img{width:36px;height:36px;border-radius:50%;object-fit:cover;object-position:50% 12%;border:2px solid #fff;background:#fff;flex:none}
+.rw-site .rw-mainnav a.rw-navcta span{color:#fff}
+.rw-site .rw-mainnav a.rw-navcta.rw-current{border-bottom:0;box-shadow:0 0 0 3px rgba(164,69,31,.55),0 6px 16px rgba(32,80,52,.28)}
+html[dir=rtl] .rw-site .rw-mainnav a.rw-navcta,[dir=rtl] .rw-site .rw-mainnav a.rw-navcta{margin-left:0!important;margin-right:auto!important;padding:6px 8px 6px 20px}
+@media(max-width:760px){.rw-js .rw-mainnav a.rw-navcta,[dir=rtl] .rw-js .rw-mainnav a.rw-navcta{width:100%;justify-content:center;margin:10px 0 4px!important;border-bottom:0;padding:6px 20px}}
