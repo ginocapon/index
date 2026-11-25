@@ -12,6 +12,11 @@ pt:{vn:'Vêneto',pre:'pt-br/',sale:'À venda',rent:'Para alugar',note:'As cidade
 };
 var D=T[L]||T.en,NS='/international/'+D.pre,NSV='http://www.w3.org/2000/svg';
 function tc(s){return String(s||'').trim().toLowerCase().replace(/(^|[\s'-])([a-zà-ú])/g,function(m,a,b){return a+b.toUpperCase()})}
+var STAGED={'LA0317':1};
+function isai(u){return /foto[-_ ]?ai/i.test(String(u||''))}
+function cover(c,fo){var f=fo[0]||'';if(f&&isai(f)&&!STAGED[c]){for(var k=1;k<fo.length;k++){if(!isai(fo[k]))return fo[k]}}return imgu(f)}
+function imgu(u){if(!u)return'';u=String(u).trim();if(!u)return'';if(/^img\//.test(u))return 'https://righettoimmobiliare.it/'+u;if(!/^https?:/.test(u))u=SB+'/storage/v1/object/public/'+u.replace(/^\/+/,'');return u}
+function thumb(u){return u.indexOf('/storage/v1/object/public/')>-1?u.replace('/object/public/','/render/image/public/')+'?width=360&quality=70':u}
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function hash(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
 function rng(seed){var a=seed;return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
@@ -20,13 +25,20 @@ function edge(p,x,y){var m=1e9;for(var i=0,j=p.length-1;i<p.length;j=i++){var a=
 function mk(tag,at,par){var e=document.createElementNS(NSV,tag);for(var k in at)e.setAttribute(k,at[k]);if(par)par.appendChild(e);return e}
 Promise.all([
  fetch('/international/assets/map-data.json?v=3').then(function(r){return r.json()}),
- fetch(SB+'/rest/v1/immobili?select=codice,tipo_operazione,tipologia,comune,prezzo,venduto,affittato&attivo=eq.true&limit=300',{headers:{apikey:KEY,Authorization:'Bearer '+KEY}}).then(function(r){if(!r.ok)throw 0;return r.json()})
+ fetch(SB+'/rest/v1/immobili?select=codice,tipo_operazione,tipologia,comune,prezzo,venduto,affittato,foto&attivo=eq.true&limit=300',{headers:{apikey:KEY,Authorization:'Bearer '+KEY}}).then(function(r){if(!r.ok)throw 0;return r.json()})
 ]).then(function(res){
- var M=res[0],rows=res[1].filter(function(r){return !r.venduto&&!r.affittato}).map(function(r){return{c:r.codice||'',op:(r.tipo_operazione||'vendita')==='vendita'?'sale':'rent',t:r.tipologia||'',com:tc(r.comune),pr:+r.prezzo||0}});
+ var M=res[0],rows=res[1].filter(function(r){return !r.venduto&&!r.affittato}).map(function(r){return{c:r.codice||'',op:(r.tipo_operazione||'vendita')==='vendita'?'sale':'rent',t:r.tipologia||'',com:tc(r.comune),pr:+r.prezzo||0,im:cover(r.codice||'',Array.isArray(r.foto)?r.foto:[])}});
  var by={};rows.forEach(function(r){(by[r.com]=by[r.com]||[]).push(r)});
  var nf=new Intl.NumberFormat(D.loc,{style:'currency',currency:'EUR',maximumFractionDigits:0});
  root.innerHTML='<div class="rw-pm-box"><svg role="img" aria-label="'+esc(D.aria)+'" focusable="false"></svg><div class="rw-pm-ctl"><button type="button" data-a="in" aria-label="'+esc(D.zin)+'">+</button><button type="button" data-a="out" aria-label="'+esc(D.zout)+'">−</button><button type="button" data-a="area" class="w">'+esc(D.area)+'</button><button type="button" data-a="it" class="w">'+esc(D.italy)+'</button></div></div><div class="rw-pm-leg"><span><i class="sale"></i>'+D.sale+'</span><span><i class="rent"></i>'+D.rent+'</span><b>'+rows.length+' '+(rows.length===1?D.one:D.many)+'</b></div><p class="rw-pm-note">'+D.note+' '+D.hint+'</p><p class="rw-pm-attr">'+D.attr+'</p>';
  var box=root.querySelector('.rw-pm-box'),svg=box.querySelector('svg');
+ var tip=document.createElement('div');tip.className='rw-pm-tip';tip.hidden=true;box.appendChild(tip);
+ function showTip(a,e){var im=a.getAttribute('data-im'),lab=a.getAttribute('data-lab')||'';tip.innerHTML=(im?'<img alt="" src="'+esc(thumb(im))+'" onerror="this.onerror=null;this.src=\''+esc(im)+'\'"/>':'')+'<span>'+esc(lab)+'</span>';tip.hidden=false;moveTip(e)}
+ function moveTip(e){var r=box.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,w=tip.offsetWidth,h=tip.offsetHeight;var l=Math.min(Math.max(4,x-w/2),r.width-w-4),t=y-h-14;if(t<4)t=y+18;tip.style.left=l+'px';tip.style.top=t+'px'}
+ svg.addEventListener('mouseover',function(e){var a=e.target.closest&&e.target.closest('.rw-pm-dot');if(a&&!a.classList.contains('off'))showTip(a,e)});
+ svg.addEventListener('mousemove',function(e){if(!tip.hidden)moveTip(e)});
+ svg.addEventListener('mouseout',function(e){var a=e.target.closest&&e.target.closest('.rw-pm-dot');if(a)tip.hidden=true});
+ svg.addEventListener('pointerdown',function(){tip.hidden=true},true);
  var gR=mk('g',{},svg),gO=mk('g',{},svg),gW=mk('g',{},svg),gV=mk('g',{},svg),gD=mk('g',{},svg),gC=mk('g',{},svg);
  var sized=[],vL=[],oL=[],dL=[],clD=null;
  function txt(par,x,y,s,px,cls,anchor){var t=mk('text',{x:x,y:y,'text-anchor':anchor||'start',class:cls},par);t.textContent=s;sized.push([t,px,'t']);return t}
@@ -52,7 +64,7 @@ Promise.all([
  });
  M.com.forEach(function(z){var n=(by[z.n]||[]).length,a=mk('a',{href:NS+'properties/?area='+encodeURIComponent(z.n),class:'rw-pm-lbl'+(n?'':' none'),'data-area':z.n},gD);var tt=txt(a,z.c[0],zb[z.n][1]-0.12,z.n+(n?' · '+n:''),13,'rw-pm-ct','middle');dL.push({a:a,t:tt,n:n,z:z,b:zb[z.n]})});
  dots.forEach(function(d){var r=d.r,ty=(D.types[r.t]||D.types['']),price=r.pr?nf.format(r.pr)+(r.op==='rent'?D.pm:''):D.poa,lab=ty+' · '+r.com+' · '+price+' · '+r.c;
-  var a=mk('a',{href:NS+'property/?ref='+encodeURIComponent(r.c),class:'rw-pm-dot '+r.op,'aria-label':lab,'data-op':r.op,'data-t':r.t,'data-com':r.com,'data-pr':r.pr},gD);dot(a,d.x,d.y,7,'');var t=mk('title',{},a);t.textContent=lab});
+  var a=mk('a',{href:NS+'property/?ref='+encodeURIComponent(r.c),class:'rw-pm-dot '+r.op,'aria-label':lab,'data-op':r.op,'data-t':r.t,'data-com':r.com,'data-pr':r.pr},gD);dot(a,d.x,d.y,7,'');if(r.im)a.setAttribute('data-im',r.im);a.setAttribute('data-lab',lab)});
  // cluster marker
  var ccx=(bx0+bx1)/2,ccy=(by0+by1)/2;
  var ca=mk('a',{href:'#','class':'rw-pm-cl','aria-label':D.area+' · '+rows.length},gC);clD={x:ccx,y:ccy};dot(ca,ccx,ccy,15,'');txt(ca,ccx,ccy,String(rows.length),12,'rw-pm-cn','middle');
