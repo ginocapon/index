@@ -100,3 +100,25 @@ html[dir=rtl] .rw-site .rw-mainnav a.rw-navcta,[dir=rtl] .rw-site .rw-mainnav a.
 /* evita scroll orizzontale su telefono: filigrana RI sporge a destra */
 .rw-site{overflow-x:clip}
 html,body{overflow-x:hidden}
+
+/* scheda immobile in lingua */
+.rw-pd-price{font:700 26px Georgia,serif;color:var(--ri-navy,#2e415f);margin:4px 0 18px}
+.rw-pd-gal{margin:0 0 24px}.rw-pd-main{margin:0;border-radius:16px;overflow:hidden;background:#e9e5dc;box-shadow:0 10px 30px rgba(21,36,53,.12)}
+.rw-pd-main img{display:block;width:100%;max-height:560px;object-fit:cover}
+.rw-pd-thumbs{display:flex;gap:8px;overflow-x:auto;padding:10px 2px}
+.rw-pd-thumbs button{flex:none;width:96px;height:68px;padding:0;border:2px solid transparent;border-radius:10px;overflow:hidden;background:#ddd;cursor:pointer}
+.rw-pd-thumbs button:hover,.rw-pd-thumbs button:focus{border-color:#2f6a45}
+.rw-pd-thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.rw-pd-cols{display:grid;grid-template-columns:1.6fr 1fr;gap:28px;align-items:start}
+.rw-pd-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:0 0 20px}
+.rw-pd-facts>div{background:linear-gradient(180deg,#fff,#fbfaf7);border:1px solid rgba(46,65,95,.08);border-radius:12px;padding:10px 14px}
+.rw-pd-facts dt{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#6b7686}.rw-pd-facts dd{margin:2px 0 0;font-weight:700;color:var(--ri-navy,#2e415f)}
+.rw-pd-feat{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0}.rw-pd-feat li{background:#e7efe9;color:#24533a;border-radius:999px;padding:6px 14px;font-weight:600}
+.rw-pd-ask{display:flex;flex-direction:column;gap:8px;align-items:flex-start;background:linear-gradient(180deg,#fff,#fbfaf7);border:1px solid rgba(46,65,95,.1);border-radius:16px;padding:20px;box-shadow:0 10px 30px rgba(21,36,53,.09)}
+.rw-pd-ask img{width:86px;height:86px;border-radius:50%;object-fit:cover;object-position:50% 12%;border:3px solid #fff;box-shadow:0 4px 12px rgba(21,36,53,.2)}
+.rw-pd-ask small{color:#5c6675;line-height:1.5}
+@media(max-width:760px){.rw-pd-cols{grid-template-columns:1fr}.rw-pd-price{font-size:22px}}
+
+.rw-pd-desc{margin-bottom:22px}.rw-pd-desc p{line-height:1.65;margin:0 0 8px}.rw-pd-desc small{color:#5c6b80;display:block}
+.rw-banner.rw-banner-note{background:transparent;color:#5c6b80;font-size:12.5px;padding:6px 4px;border-bottom:1px solid rgba(46,65,95,.15);border-radius:0;text-align:center}
+.rw-pd-descprice{font-size:1.15em;color:#2e415f}

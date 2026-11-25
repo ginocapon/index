@@ -26,6 +26,7 @@ Allow: /
 # Doc: https://developers.google.com/crawling/docs/crawlers-fetchers/google-user-triggered-fetchers
 
 Sitemap: https://righettoimmobiliare.it/sitemap.xml
+Sitemap: https://righettoimmobiliare.it/international/sitemap.xml
 
 # LLM / AI Bot guidance
 # See llms.txt for structured information about this site
