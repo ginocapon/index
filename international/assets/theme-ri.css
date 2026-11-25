@@ -144,3 +144,6 @@ html,body{overflow-x:hidden}
 .rw-intro{grid-template-columns:1fr!important}.rw-intro>div{max-width:760px}
 .rw-mapstrip{display:flex;align-items:center;justify-content:space-between;gap:20px;height:210px;overflow:hidden;background:#1b4f96;color:#fff!important;border-radius:18px;padding:0 44px;margin:8px 0 24px;text-decoration:none}.rw-mapstrip .rw-ms-t{display:flex;flex-direction:column;gap:6px}.rw-mapstrip b{font:400 34px Georgia,serif;letter-spacing:-.02em}.rw-mapstrip small{font-size:13px;opacity:.85}.rw-mapstrip img{height:186px;width:auto;display:block}.rw-mapstrip:hover{background:#17447f}
 @media(max-width:760px){.rw-mapstrip{height:170px;padding:0 24px}.rw-mapstrip img{height:150px}.rw-mapstrip b{font-size:28px}.rw-pm-box{height:min(70vh,520px)}}
+@media(min-width:641px){.rw-ltgrid .rw-lt:last-child:nth-child(3n+1){grid-column:2}}
+
+@media(max-width:640px){.rw-pm-ctl{flex-direction:row;flex-wrap:wrap;justify-content:flex-end;left:8px;right:8px;top:8px;gap:5px}.rw-pm-ctl button{min-height:32px;min-width:32px;font-size:16px;padding:0 10px;border-radius:7px}.rw-pm-ctl button.w{font-size:12px;padding:0 9px}}
