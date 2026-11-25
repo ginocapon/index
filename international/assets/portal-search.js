@@ -17,6 +17,9 @@ var HOMES=['appartamento','villa','villetta','bifamiliare','trifamiliare','quadr
 function grp(t){return HOMES.indexOf(t)>-1?'homes':COMM.indexOf(t)>-1?'com':t==='terreno'?'land':'homes'}
 function img(u){if(!u)return'';u=String(u).trim();if(!u)return'';if(/^img\//.test(u))return 'https://righettoimmobiliare.it/'+u;if(!/^https?:/.test(u))u=SB+'/storage/v1/object/public/'+u.replace(/^\/+/,'');return u}
 function thumb(u){return u.indexOf('/storage/v1/object/public/')>-1?u.replace('/object/public/','/render/image/public/')+'?width=600&quality=75':u}
+var STAGED={'LA0317':1};
+function isai(u){return /foto[-_ ]?ai/i.test(String(u||''))}
+function cover(c,fo){var f=fo[0]||'';if(f&&isai(f)&&!STAGED[c]){for(var k=1;k<fo.length;k++){if(!isai(fo[k]))return fo[k]}}return f}
 function tc(s){return String(s||'').toLowerCase().replace(/(^|[\s'-])([a-zà-ú])/g,function(m,a,b){return a+b.toUpperCase()})}
 function el(h){var d=document.createElement('div');d.innerHTML=h;return d.firstChild}
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -42,7 +45,7 @@ function render(){
   var facts=[];if(i.mq)facts.push(i.mq+' m²');if(i.locali)facts.push(D.rooms(i.locali));if(i.bagni)facts.push(D.baths(i.bagni));
   var tl=D.title(D.types[i.tipo]||D.types[''],i.comune);
   var mail='mailto:info@righettoimmobiliare.it?subject='+encodeURIComponent(D.subj+i.codice);
-  var a=el('<a class="rw-property rw-pcard" href="'+mail+'">'+(i.foto?'<img alt="'+esc(tl)+'" loading="lazy" decoding="async" src="'+esc(thumb(i.foto))+'" onerror="this.onerror=null;this.src=\''+esc(i.foto)+'\'"/>':'<div class="rw-pnophoto"></div>')+'<span class="rw-pbadge">'+(rent?D.lease:D.sale)+(i.ce?' · '+D.epc+' '+esc(i.ce):'')+'</span><b>'+esc(tl)+'</b><span class="rw-pprice">'+esc(price)+'</span><span>'+esc(facts.join(' · '))+'</span><span class="rw-pref">'+D.ref+' '+esc(i.codice)+'</span><small>'+D.ask+'</small></a>');
+  var a=el('<a class="rw-property rw-pcard" href="'+mail+'">'+(i.foto?'<img alt="'+esc(tl)+'" loading="lazy" decoding="async" src="'+esc(thumb(i.foto))+'" onerror="this.onerror=null;this.src=\''+esc(i.foto)+'\'"/>':'<div class="rw-pnophoto"></div>')+(i.foto&&STAGED[i.codice]&&isai(i.foto)?'<span class="rw-aibadge">Foto AI</span>':'')+'<span class="rw-pbadge">'+(rent?D.lease:D.sale)+(i.ce?' · '+D.epc+' '+esc(i.ce):'')+'</span><b>'+esc(tl)+'</b><span class="rw-pprice">'+esc(price)+'</span><span>'+esc(facts.join(' · '))+'</span><span class="rw-pref">'+D.ref+' '+esc(i.codice)+'</span><small>'+D.ask+'</small></a>');
   g.appendChild(a)})}
 function fill(){
  var areas={},prices=[2e5,3e5,5e5,1e6];
@@ -55,6 +58,6 @@ function fill(){
 }
 var url=SB+'/rest/v1/immobili?select=codice,tipo_operazione,tipologia,comune,prezzo,superficie,locali,camere,bagni_totali,classe_energetica,venduto,affittato,foto&attivo=eq.true&order=in_evidenza.desc,created_at.desc&limit=200';
 fetch(url,{headers:{apikey:KEY,Authorization:'Bearer '+KEY}}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(rows){
- data=rows.filter(function(r){return !r.venduto&&!r.affittato}).map(function(r){var fo=Array.isArray(r.foto)?r.foto:[];return{codice:r.codice||'',op:r.tipo_operazione||'vendita',tipo:r.tipologia||'',comune:tc(r.comune),prezzo:+r.prezzo||0,mq:+r.superficie||0,locali:+(r.locali||r.camere)||0,bagni:+r.bagni_totali||0,ce:r.classe_energetica||'',foto:img(fo[0])}});
+ data=rows.filter(function(r){return !r.venduto&&!r.affittato}).map(function(r){var fo=Array.isArray(r.foto)?r.foto:[];return{codice:r.codice||'',op:r.tipo_operazione||'vendita',tipo:r.tipologia||'',comune:tc(r.comune),prezzo:+r.prezzo||0,mq:+r.superficie||0,locali:+(r.locali||r.camere)||0,bagni:+r.bagni_totali||0,ce:r.classe_energetica||'',foto:img(cover(r.codice,fo))}});
  fill();pre();render()}).catch(function(){document.getElementById('rwp-count').textContent=D.err});
 })();
