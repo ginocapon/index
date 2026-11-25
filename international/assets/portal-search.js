@@ -20,13 +20,13 @@ function thumb(u){return u.indexOf('/storage/v1/object/public/')>-1?u.replace('/
 var STAGED={'LA0317':1};
 function isai(u){return /foto[-_ ]?ai/i.test(String(u||''))}
 function cover(c,fo){var f=fo[0]||'';if(f&&isai(f)&&!STAGED[c]){for(var k=1;k<fo.length;k++){if(!isai(fo[k]))return fo[k]}}return f}
-function tc(s){return String(s||'').toLowerCase().replace(/(^|[\s'-])([a-zà-ú])/g,function(m,a,b){return a+b.toUpperCase()})}
+function tc(s){return String(s||'').trim().toLowerCase().replace(/(^|[\s'-])([a-zà-ú])/g,function(m,a,b){return a+b.toUpperCase()})}
 function el(h){var d=document.createElement('div');d.innerHTML=h;return d.firstChild}
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 var data=[];
 var f={op:'',type:'',area:'',max:''};
 root.innerHTML='<form class="rw-psearch" onsubmit="return false"><label>'+D.op+'<select id="rwp-op"><option value="">'+D.all+'</option><option value="buy">'+D.buy+'</option><option value="rent">'+D.rent+'</option></select></label><label>'+D.type+'<select id="rwp-type"><option value="">'+D.any+'</option><option value="homes">'+D.homes+'</option><option value="com">'+D.com+'</option><option value="land">'+D.land+'</option></select></label><label>'+D.area+'<select id="rwp-area"><option value="">'+D.any+'</option></select></label><label>'+D.max+' (€)<select id="rwp-max"><option value="">'+D.any+'</option></select></label><button type="button" class="rw-button" id="rwp-reset">'+D.reset+'</button></form><p class="rw-pcount" id="rwp-count" role="status" aria-live="polite">'+D.loading+'</p><div class="rw-properties rw-pgrid" id="rwp-grid"></div>';
-function pre(){try{var q=new URLSearchParams(location.search);['op','type'].forEach(function(k){var v=q.get(k);if(v&&document.querySelector('#rwp-'+k+' option[value="'+v+'"]')){f[k]=v;document.getElementById('rwp-'+k).value=v}})}catch(e){}}
+function pre(){try{var q=new URLSearchParams(location.search);['op','type','area'].forEach(function(k){var v=q.get(k);if(v&&document.querySelector('#rwp-'+k+' option[value="'+v+'"]')){f[k]=v;document.getElementById('rwp-'+k).value=v}})}catch(e){}}
 function render(){
  var out=data.filter(function(i){
   if(f.op==='buy'&&i.op!=='vendita')return false;
@@ -46,7 +46,7 @@ function render(){
   var tl=D.title(D.types[i.tipo]||D.types[''],i.comune);
   var mail='/international/'+({ar:'ar/',tr:'tr/',pt:'pt-br/'}[L.slice(0,2)]||'')+'property/?ref='+encodeURIComponent(i.codice);
   var a=el('<a class="rw-property rw-pcard" href="'+mail+'">'+(i.foto?'<img alt="'+esc(tl)+'" loading="lazy" decoding="async" src="'+esc(thumb(i.foto))+'" onerror="this.onerror=null;this.src=\''+esc(i.foto)+'\'"/>':'<div class="rw-pnophoto"></div>')+(i.foto&&STAGED[i.codice]&&isai(i.foto)?'<span class="rw-aibadge">Foto AI</span>':'')+'<span class="rw-pbadge">'+(rent?D.lease:D.sale)+(i.ce?' · '+D.epc+' '+esc(i.ce):'')+'</span><b>'+esc(tl)+'</b><span class="rw-pprice">'+esc(price)+'</span><span>'+esc(facts.join(' · '))+'</span><span class="rw-pref">'+D.ref+' '+esc(i.codice)+'</span><small>'+D.ask+'</small></a>');
-  g.appendChild(a)})}
+  g.appendChild(a)});document.dispatchEvent(new Event('rwfilter'))}
 function fill(){
  var areas={},prices=[2e5,3e5,5e5,1e6];
  data.forEach(function(i){if(i.comune)areas[i.comune]=1});
