@@ -96,3 +96,7 @@ html[dir=rtl] .rw-site::before{left:auto;right:-140px}
 .rw-site .rw-mainnav a.rw-navcta.rw-current{border-bottom:0;box-shadow:0 0 0 3px rgba(164,69,31,.55),0 6px 16px rgba(32,80,52,.28)}
 html[dir=rtl] .rw-site .rw-mainnav a.rw-navcta,[dir=rtl] .rw-site .rw-mainnav a.rw-navcta{margin-left:0!important;margin-right:auto!important;padding:6px 8px 6px 20px}
 @media(max-width:760px){.rw-js .rw-mainnav a.rw-navcta,[dir=rtl] .rw-js .rw-mainnav a.rw-navcta{width:100%;justify-content:center;margin:10px 0 4px!important;border-bottom:0;padding:6px 20px}}
+
+/* evita scroll orizzontale su telefono: filigrana RI sporge a destra */
+.rw-site{overflow-x:clip}
+html,body{overflow-x:hidden}
