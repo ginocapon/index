@@ -29,7 +29,7 @@ function sm(u){return u.indexOf('/storage/v1/object/public/')>-1?u.replace('/obj
 function isai(u){return /foto[-_ ]?ai/i.test(String(u||''))}
 var STAGED={'LA0317':1};
 function tc(s){return String(s||'').toLowerCase().replace(/(^|[\s'-])([a-zà-ú])/g,function(m,a,b){return a+b.toUpperCase()})}
-var ref=(new URLSearchParams(location.search).get('ref')||'').replace(/[^A-Za-z0-9_-]/g,'').slice(0,20);
+var ref=(new URLSearchParams(location.search).get('ref')||'').replace(/[^A-Za-z0-9_ -]/g,'').trim().slice(0,20);
 var back='<p><a class="rw-link" href="'+D.cat+'">'+D.back+'</a></p>';
 root.innerHTML=back+'<p class="rw-pcount">'+D.loading+'</p>';
 if(!ref){root.innerHTML=back+'<p>'+D.gone+'</p>';return}
