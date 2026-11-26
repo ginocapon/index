@@ -46,7 +46,7 @@ function render(){
   var facts=[];if(i.mq)facts.push(i.mq+' m²');if(i.locali)facts.push(D.rooms(i.locali));if(i.bagni)facts.push(D.baths(i.bagni));
   var tl=D.title(D.types[i.tipo]||D.types[''],i.comune);
   var mail='/international/'+({ar:'ar/',tr:'tr/',pt:'pt-br/',es:'es/'}[L.slice(0,2)]||'')+'property/?ref='+encodeURIComponent(i.codice);
-  var a=el('<a class="rw-property rw-pcard" href="'+mail+'">'+(i.foto?'<img alt="'+esc(tl)+'" loading="lazy" decoding="async" src="'+esc(thumb(i.foto))+'" onerror="this.onerror=null;this.src=\''+esc(i.foto)+'\'"/>':'<div class="rw-pnophoto"></div>')+(i.foto&&STAGED[i.codice]&&isai(i.foto)?'<span class="rw-aibadge">Foto AI</span>':'')+'<span class="rw-pbadge">'+(rent?D.lease:D.sale)+(i.ce?' · '+D.epc+' '+esc(i.ce):'')+'</span><b>'+esc(tl)+'</b><span class="rw-pprice">'+esc(price)+'</span><span>'+esc(facts.join(' · '))+'</span><span class="rw-pref">'+D.ref+' '+esc(i.codice)+'</span><small>'+D.ask+'</small></a>');
+  var a=el('<a class="rw-property rw-pcard" data-operation="'+(rent?'rent':'sale')+'" href="'+mail+'">'+(i.foto?'<img alt="'+esc(tl)+'" loading="lazy" decoding="async" src="'+esc(thumb(i.foto))+'" onerror="this.onerror=null;this.src=\''+esc(i.foto)+'\'"/>':'<div class="rw-pnophoto"></div>')+(i.foto&&STAGED[i.codice]&&isai(i.foto)?'<span class="rw-aibadge">Foto AI</span>':'')+'<span class="rw-pbadge">'+(rent?D.lease:D.sale)+(i.ce?' · '+D.epc+' '+esc(i.ce):'')+'</span><b>'+esc(tl)+'</b><span class="rw-pprice">'+esc(price)+'</span><span>'+esc(facts.join(' · '))+'</span><span class="rw-pref">'+D.ref+' '+esc(i.codice)+'</span><small>'+D.ask+'</small></a>');
   g.appendChild(a)});document.dispatchEvent(new Event('rwfilter'))}
 function fill(){
  var areas={},prices=[2e5,3e5,5e5,1e6];
