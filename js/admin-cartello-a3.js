@@ -37,41 +37,29 @@ function facts(i){
  return a.slice(0,6);
 }
 function copy(i){
- const type=typeOf(i),parts=[];let lead=type.charAt(0).toUpperCase()+type.slice(1);
- if(i.comune)lead+=' a '+String(i.comune).trim();
- if(i.tipo_operazione==='vendita')lead+=' in vendita';else if(String(i.tipo_operazione||'').startsWith('affitto'))lead+=' in affitto';
- if(positive(i.superficie))lead+=' di '+i.superficie+' m²';
- parts.push(lead);
- const rooms=[];if(residential(i)&&positive(i.camere))rooms.push(i.camere+(Number(i.camere)===1?' camera':' camere'));
- if(positive(i.bagni))rooms.push(i.bagni+(Number(i.bagni)===1?' bagno':' bagni'));
- if(rooms.length)parts.push('con '+rooms.join(' e '));
- if(i.ingresso_indipendente===true)parts.push('ingresso indipendente');
- if(i.giardino===true)parts.push('giardino');if(i.taverna===true)parts.push('taverna');
- if(positive(i.garage_doppio))parts.push('garage doppio');else if(i.garage===true)parts.push('garage');
- const calls=[
- 'Contatta la nostra agenzia immobiliare Righetto Immobiliare per ricevere maggiori informazioni su questo immobile e concordare una visita.',
- 'Per informazioni su questo immobile, contatta Righetto Immobiliare.',
- 'Per maggiori informazioni su questo immobile, contatta Righetto Immobiliare.',
- 'Per maggiori informazioni e per concordare una visita, contatta Righetto Immobiliare.',
- 'Per ricevere maggiori informazioni e concordare una visita, contatta direttamente Righetto Immobiliare.',
- 'Per ricevere maggiori informazioni su questo immobile e concordare una visita, contatta Righetto Immobiliare.',
- 'Per ricevere maggiori informazioni su questo immobile e concordare una visita, contatta direttamente Righetto Immobiliare.',
- 'Per ricevere maggiori informazioni su questo immobile e concordare una visita, contatta la nostra agenzia Righetto Immobiliare.',
- 'Contatta Righetto Immobiliare per informazioni.',
- 'Contatta Righetto Immobiliare per maggiori informazioni.',
- 'Contatta Righetto Immobiliare per ricevere maggiori informazioni.',
- 'Contatta Righetto Immobiliare per ricevere informazioni su questo immobile.',
- 'Contatta Righetto Immobiliare per ricevere maggiori informazioni su questo immobile.',
- 'Contatta Righetto Immobiliare per ricevere maggiori informazioni e concordare una visita.',
- 'Contatta Righetto Immobiliare per ricevere maggiori informazioni su questo immobile e concordare una visita.',
- 'Per maggiori informazioni su questo immobile e per concordare una visita, contatta direttamente la nostra agenzia Righetto Immobiliare.',
- 'Per ricevere maggiori informazioni su questo immobile e per concordare una visita, contatta direttamente la nostra agenzia Righetto Immobiliare.',
- 'Per ricevere tutte le informazioni su questo immobile e per concordare una visita, puoi contattare direttamente la nostra agenzia Righetto Immobiliare.',
- 'Per ricevere tutte le informazioni su questo immobile e per concordare una visita, puoi contattare direttamente la nostra agenzia immobiliare Righetto Immobiliare.'
- ];
- // Only choose complete factual clauses and complete contact sentences, never truncate text.
- for(let n=parts.length;n>0;n--){const core=parts.slice(0,n).join(', ')+'.';for(const call of calls){const text=core+' '+call;if(words(text)===30)return text;}}
- throw Error('Testo standard di 30 parole non disponibile per questa scheda. Segnalare senza inventare dati.');
+ const op=String(i.tipo_operazione||'').startsWith('affitto')?'in affitto':'in vendita';
+ const clauses=[typeOf(i).charAt(0).toUpperCase()+typeOf(i).slice(1).toLowerCase()+' '+op+' a '+String(i.comune||'').trim()+'.'];
+ if(positive(i.superficie))clauses.push('La superficie è di '+i.superficie+' metri quadrati.');
+ if(positive(i.prezzo))clauses.push('Il prezzo richiesto è di '+new Intl.NumberFormat('it-IT',{maximumFractionDigits:0}).format(i.prezzo)+' euro'+(op==='in affitto'?' al mese.':'.'));
+ const extra=[];const f=precise(i),d=String(i.descrizione||'').toLowerCase();
+ if(residential(i)&&positive(i.camere))extra.push('La zona notte comprende '+i.camere+(Number(i.camere)===1?' camera da letto.':' camere da letto.'));
+ if(positive(i.bagni))extra.push('Sono presenti '+i.bagni+(Number(i.bagni)===1?' bagno.':' bagni.'));
+ if(i.ingresso_indipendente===true)extra.push('L’immobile dispone di un ingresso indipendente.');
+ if(i.giardino===true)extra.push('Completa la proprietà un giardino'+(f.privateGarden?' privato.':'.'));
+ if(i.cucina===true)extra.push(f.separateKitchen?'La cucina è separata dalla zona soggiorno.':'È presente una cucina.');
+ if(i.taverna===true)extra.push('È presente anche una taverna.');
+ if(i.terrazzo===true)extra.push('Gli spazi esterni comprendono un terrazzo.');
+ if(positive(i.garage_doppio))extra.push('La proprietà comprende un garage doppio.');else if(i.garage===true)extra.push('La proprietà comprende un garage.');
+ if(i.aria_condizionata===true)extra.push('L’immobile è dotato di aria condizionata.');
+ if(i.ascensore===true)extra.push('L’edificio è servito da ascensore.');
+ if(i.piano_terra===true)extra.push('L’immobile si trova al piano terra.');else if(i.primo_piano===true)extra.push('L’immobile si trova al primo piano.');
+ if(/grezzo/.test(d))extra.push('La descrizione indica uno stato al grezzo.');
+ if(/open space/.test(d))extra.push('La descrizione comprende una zona open space.');
+ if(/parcheggio/.test(d))extra.push('La descrizione segnala la presenza di parcheggio.');
+ if(String(i.consegna||'').toLowerCase()==='libera')extra.push('La consegna dell’immobile è indicata come libera.');
+ if(positive(i.anno_costruzione))extra.push('L’anno di costruzione registrato è il '+i.anno_costruzione+'.');
+ for(const e of extra){if(words(clauses.join(' '))>=45)break;if(words(clauses.join(' ')+' '+e)<=60)clauses.push(e);}
+ const text=clauses.join(' ');if(words(text)<30||words(text)>60)throw Error('Dati insufficienti per una descrizione di almeno 30 parole: completare la scheda senza inventare informazioni.');return text;
 }
 function initialEnergy(i){
  return {className:present(i.classe_energetica)?String(i.classe_energetica):'',nren:present(i.epgl_nren)?String(i.epgl_nren):'',ren:present(i.epgl_ren)?String(i.epgl_ren):''};
@@ -88,7 +76,7 @@ function validate(i,s){
  const allowed=new Set((Array.isArray(i.foto)&&i.foto.length?i.foto:i.foto_urls||[]).filter(x=>typeof x==='string').map(safeURL).filter(Boolean));
  if(s.photos?.some(x=>!allowed.has(x)))errors.push('Una foto non appartiene alla scheda aperta.');
  if(!String(s.title||'').trim())errors.push('Titolo mancante.');
- if(!String(s.description||'').trim()||words(s.description)>30)errors.push('La descrizione deve contenere da 1 a 30 parole.');
+ if(!String(s.description||'').trim()||(words(s.description)<30||words(s.description)>60))errors.push('La descrizione deve contenere da 30 a 60 parole.');
  if(addressError(s.title+' '+s.description,i))errors.push('Rimuovi indirizzo, contatti personali o dati riservati dal testo.');
  if(!positive(i.prezzo))errors.push('Prezzo salvato mancante o non valido. Chiedi a Gino.');
  if(!noApe(i)&&(!s.apeSrc||(!s.apeVerified&&!s.sourceAsIs)))errors.push('APE non completa per questo cartello: '+(s.energyMissing||'immagine e valori esatti non collegati')+'.');
@@ -107,14 +95,14 @@ function show(i,context){
  const propertyId=String(i.id||'');if(!propertyId)throw Error('Apri un immobile salvato.');
  document.getElementById('a3-composer')?.remove();
  const ov=document.createElement('div');ov.id='a3-composer';ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Cartello A3');
- ov.innerHTML='<style>#a3-composer{position:fixed;inset:0;z-index:15000;background:#1239;padding:18px;overflow:auto;font:15px/1.45 Arial;color:#12382a}#a3-composer *{box-sizing:border-box}#a3-composer .a3-panel{max-width:980px;background:#fff;margin:auto;padding:24px;border-radius:10px}#a3-composer h2{margin:0 0 8px}#a3-composer label{display:block;margin:10px 0}#a3-composer input:not([type=checkbox]),#a3-composer textarea{max-width:100%;width:100%;padding:10px;border:1px solid #8da99b;border-radius:5px;font:inherit}#a3-composer button{min-height:44px;padding:10px 15px;margin:4px;border:1px solid #0b6544;border-radius:5px;background:#fff;color:#064831;font-weight:bold;cursor:pointer}#a3-composer [data-open]{background:#075337;color:white}#a3-composer fieldset{margin:16px 0;border:1px solid #b1c7bb;border-radius:6px}#a3-composer .a3-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}#a3-composer .a3-photo{border:3px solid #ddd;padding:5px;position:relative}#a3-composer .a3-photo[aria-pressed=true]{border-color:#087145;background:#e5f3e9}#a3-composer .a3-photo img{width:100%;height:110px;object-fit:cover}#a3-composer .a3-energy{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}#a3-composer .a3-note{background:#f0f4f1;padding:10px;font-size:13px}#a3-composer [data-errors]{white-space:pre-line;color:#942313}#a3-composer .a3-actions{position:sticky;bottom:0;background:#fff;padding-top:12px;border-top:1px solid #dae4df}@media(max-width:540px){#a3-composer{padding:5px}#a3-composer .a3-panel{padding:14px}#a3-composer .a3-energy{grid-template-columns:1fr}#a3-composer .a3-grid{grid-template-columns:1fr 1fr}}</style><section class="a3-panel"><button type="button" data-close style="float:right">Chiudi</button><h2>Cartello A3 · '+esc(i.codice)+'</h2><p>Modello v4, due foto scelte da te. Nessun invio, salvataggio o stampa automatica.</p><label>Titolo standard<input data-title maxlength="180" readonly></label><label>Testo dell’annuncio, massimo 30 parole<textarea data-description rows="3"></textarea></label><p data-count></p><p class="a3-note">La proposta usa i dati salvati della scheda. Controlla il testo: non include indirizzo, proprietari o note interne. Prezzo salvato: <b>'+esc(positive(i.prezzo)?new Intl.NumberFormat('it-IT',{style:'currency',currency:'EUR'}).format(i.prezzo):'MANCANTE')+'</b>.</p><fieldset><legend>1. Scegli esattamente due foto, nell’ordine desiderato</legend><p data-selection>0 di 2 foto scelte</p><div class="a3-grid" data-gallery></div></fieldset><div class="a3-note" data-energy-note></div><p data-errors role="status" aria-live="polite"></p><div class="a3-actions"><button type="button" data-open>Genera anteprima A3</button><span>Da lì potrai scegliere Stampa / Salva PDF.</span></div></section>';
+ ov.innerHTML='<style>#a3-composer{position:fixed;inset:0;z-index:15000;background:#1239;padding:18px;overflow:auto;font:15px/1.45 Arial;color:#12382a}#a3-composer *{box-sizing:border-box}#a3-composer .a3-panel{max-width:980px;background:#fff;margin:auto;padding:24px;border-radius:10px}#a3-composer h2{margin:0 0 8px}#a3-composer label{display:block;margin:10px 0}#a3-composer input:not([type=checkbox]),#a3-composer textarea{max-width:100%;width:100%;padding:10px;border:1px solid #8da99b;border-radius:5px;font:inherit}#a3-composer button{min-height:44px;padding:10px 15px;margin:4px;border:1px solid #0b6544;border-radius:5px;background:#fff;color:#064831;font-weight:bold;cursor:pointer}#a3-composer [data-open]{background:#075337;color:white}#a3-composer fieldset{margin:16px 0;border:1px solid #b1c7bb;border-radius:6px}#a3-composer .a3-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}#a3-composer .a3-photo{border:3px solid #ddd;padding:5px;position:relative}#a3-composer .a3-photo[aria-pressed=true]{border-color:#087145;background:#e5f3e9}#a3-composer .a3-photo img{width:100%;height:110px;object-fit:cover}#a3-composer .a3-energy{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}#a3-composer .a3-note{background:#f0f4f1;padding:10px;font-size:13px}#a3-composer [data-errors]{white-space:pre-line;color:#942313}#a3-composer .a3-actions{position:sticky;bottom:0;background:#fff;padding-top:12px;border-top:1px solid #dae4df}@media(max-width:540px){#a3-composer{padding:5px}#a3-composer .a3-panel{padding:14px}#a3-composer .a3-energy{grid-template-columns:1fr}#a3-composer .a3-grid{grid-template-columns:1fr 1fr}}</style><section class="a3-panel"><button type="button" data-close style="float:right">Chiudi</button><h2>Cartello A3 · '+esc(i.codice)+'</h2><p>Modello v4, due foto scelte da te. Nessun invio, salvataggio o stampa automatica.</p><label>Titolo standard<input data-title maxlength="180" readonly></label><label>Descrizione immobile, da 30 a 60 parole<textarea data-description rows="3"></textarea></label><p data-count></p><p class="a3-note">La proposta usa i dati salvati della scheda. Controlla il testo: non include indirizzo, proprietari o note interne. Prezzo salvato: <b>'+esc(positive(i.prezzo)?new Intl.NumberFormat('it-IT',{style:'currency',currency:'EUR'}).format(i.prezzo):'MANCANTE')+'</b>.</p><fieldset><legend>1. Scegli esattamente due foto, nell’ordine desiderato</legend><p data-selection>0 di 2 foto scelte</p><div class="a3-grid" data-gallery></div></fieldset><div class="a3-note" data-energy-note></div><p data-errors role="status" aria-live="polite"></p><div class="a3-actions"><button type="button" data-open>Genera anteprima A3</button><span>Da lì potrai scegliere Stampa / Salva PDF.</span></div></section>';
  document.body.append(ov);let apeSrc='',disposed=false;const selected=[];const q=s=>ov.querySelector(s),energy=initialEnergy(i);
  q('[data-title]').value=title(i);
  q('[data-description]').value=copy(i);
  const fixedEnergy=context?.energy;
  apeSrc=fixedEnergy?.image||'';
  q('[data-energy-note]').textContent=noApe(i)?'Immobile al grezzo, APE non disponibile. Nessun grafico associato.':fixedEnergy?.verified?'Grafico APE del gestionale principale: classe '+fixedEnergy.className+', EPgl,nren '+fixedEnergy.nren+', EPgl,ren '+fixedEnergy.ren+'. Layout, prezzo, striscia e telefono sono standard.':fixedEnergy?.sourceFormat==='ape2014'?'Grafico APE2014 presente nel gestionale principale, senza gli indici EPgl,nren ed EPgl,ren richiesti. Mantenuto originale, senza conversione. Gino verifica i dati prima di stampare.':fixedEnergy?'Grafico presente nel gestionale principale, ma il valore energetico è in fase di definizione. Mantenuto originale. Gino verifica i dati prima di stampare, nessun numero viene inventato.':'Grafico APE non ancora collegato a questo esatto riferimento. Cartello bloccato: segnalare la scheda da verificare.';
- const count=()=>{const n=words(q('[data-description]').value);q('[data-count]').textContent=n+' / 30 parole'+(n<30?' · Attenzione: descrizione sotto le 30 parole.':'');};q('[data-description]').oninput=count;count();
+ const count=()=>{const n=words(q('[data-description]').value);q('[data-count]').textContent=n+' parole (30–60)' +(n<30?' · Attenzione: descrizione sotto le 30 parole.':'');};q('[data-description]').oninput=count;count();
  const refs=[...new Set((Array.isArray(i.foto)&&i.foto.length?i.foto:i.foto_urls||[]).filter(r=>typeof r==='string').map(safeURL).filter(Boolean))];
  for(const [n,url]of refs.entries()){
   const b=document.createElement('button');b.type='button';b.className='a3-photo';b.setAttribute('aria-pressed','false');b.setAttribute('aria-label','Scegli foto '+(n+1));b.innerHTML='<img loading="lazy" src="'+esc(url)+'" alt="Foto immobile '+(n+1)+'"><span>Foto '+(n+1)+'</span>';b.onclick=()=>{const at=selected.indexOf(url);if(at>=0)selected.splice(at,1);else if(selected.length<2)selected.push(url);else{q('[data-errors]').textContent='Hai già scelto due foto. Deselezionane una per cambiarla.';return;}q('[data-errors]').textContent='';for(const button of q('[data-gallery]').children){const index=selected.indexOf(button.dataset.url);button.setAttribute('aria-pressed',String(index>=0));button.querySelector('span').textContent=index>=0?'Scelta '+(index+1):'Foto '+button.dataset.number;}q('[data-selection]').textContent=selected.length+' di 2 foto scelte';};b.dataset.url=url;b.dataset.number=n+1;q('[data-gallery]').append(b);
