@@ -692,6 +692,7 @@ img{max-width:100%;height:auto;display:block}
 
 <script src="js/vendor/supabase.min.js" defer></script>
 <script src="js/config.js?v=contact17"></script>
+<script src="js/anti-bot.js?v=1"></script>
 <script>
 // ═══ CALCOLATORE RATA MUTUO ═══
 var durataSlider = document.getElementById('m-durata');
@@ -784,6 +785,7 @@ async function sendMutuoLead(e) {
 
   if (!nome || !tel) { alert('Inserisci nome e telefono'); return; }
   if (!gdpr) { alert('Accetta la privacy policy'); return; }
+  if (window.RigAntiBot && !RigAntiBot.gate(document.getElementById('mutuoForm'), { nome: nome, cognome: cognome })) return;
 
   var btn = document.querySelector('#mutuoForm .cc-btn');
   btn.disabled = true; btn.textContent = 'Invio in corso...';
