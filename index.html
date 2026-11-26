@@ -308,6 +308,30 @@ button{font-family:inherit;cursor:pointer}
     0 3px 0 #26492B,
     0 5px 14px rgba(0,0,0,0.22)!important;
 }
+.nav-intl{
+  background:linear-gradient(180deg,#FF8F5E 0%,#FF6B35 55%,#F4571F 100%);
+  color:#fff!important;
+  padding:10px 18px!important;border-radius:8px;
+  font-weight:800!important;letter-spacing:1.2px;
+  border:1px solid rgba(255,255,255,0.38);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.45) inset,
+    0 -1px 0 rgba(0,0,0,0.12) inset,
+    0 4px 0 #A63D16,
+    0 8px 18px rgba(0,0,0,0.25);
+  transition:transform 0.2s ease,box-shadow 0.2s ease;
+}
+.nav-intl::after{display:none!important}
+.nav-intl:hover{
+  background:linear-gradient(180deg,#FF9A6E 0%,#FF7440 55%,#FF6B35 100%)!important;
+  color:#fff!important;
+  transform:translateY(-1px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.5) inset,
+    0 -1px 0 rgba(0,0,0,0.1) inset,
+    0 5px 0 #A63D16,
+    0 12px 24px rgba(0,0,0,0.3)!important;
+}
 .nav-cta::after{display:none!important}
 .nav-burger{
   display:none;flex-direction:column;gap:5px;
@@ -1038,7 +1062,7 @@ footer{contain-intrinsic-size:auto 1670px}
     <li><a href="blog">Blog</a></li>
     <li><a href="faq">FAQ</a></li>
     <li><a href="collaborazioni">Collaborazioni</a></li>
-    <li><a href="/international/languages/">INTERNATIONAL</a></li>
+    <li><a class="nav-intl" href="/international/languages/">INTERNATIONAL</a></li>
     <li><a class="rw-entry-desktop" href="/international/languages/" aria-label="Scegli lingua">◎ IT / EN</a></li>
     <li><a href="contatti" class="nav-cta">Parla con noi</a></li>
   </ul>
@@ -1053,7 +1077,7 @@ footer{contain-intrinsic-size:auto 1670px}
   <a href="blog">Blog</a>
   <a href="faq">FAQ</a>
   <a href="collaborazioni">Collaborazioni</a>
-  <a href="/international/languages/">INTERNATIONAL</a>
+  <a class="nav-intl" href="/international/languages/">INTERNATIONAL</a>
   <a href="/international/languages/" aria-label="Scegli lingua">◎ IT / EN</a>
   <a href="contatti" class="nav-mobile-cta">Parla con noi</a>
 </div>
