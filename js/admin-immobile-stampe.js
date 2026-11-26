@@ -129,16 +129,7 @@ function showBrochurePrint(i,variant='brochure'){
 function showInternalPrint(i){const root=modal;root.querySelector('[data-internal-print]')?.remove();const box=document.createElement('section');box.dataset.internalPrint='';box.style.cssText='margin:16px;padding:16px;border:2px solid #005691;background:white';box.innerHTML='<h3>Stampa interna dai dati salvati</h3><p class="ris-note">Non è il PDF cliente, vetrina o brochure del vecchio. Contiene indirizzo reale e note interne: non inoltrare a clienti. Le bozze non salvate non sono incluse. Nessun documento viene inviato.</p><button type="button" data-print-preview>Apri anteprima di stampa interna</button><button type="button" data-print-close>Chiudi anteprima</button><div data-print-status role="status"></div>';root.querySelector('.ris-box').append(box);box.querySelector('[data-print-close]').onclick=()=>box.remove();box.scrollIntoView({block:'center'});box.querySelector('[data-print-preview]').onclick=()=>{if(propertyWritePending())return;const fields=[['Codice',i.codice],['Titolo',i.titolo],['Comune',i.comune],['Indirizzo reale interno',i.indirizzo],['Indirizzo per i portali',i.indirizzo_mappa],['Prezzo salvato',i.prezzo],['Superficie',i.superficie],['Descrizione',i.descrizione],['Note interne',i.note_interne]];const w=window.open('about:blank','_blank');if(!w){box.querySelector('[data-print-status]').textContent='Anteprima bloccata dal browser. Consenti la finestra per questo clic.';return;}w.opener=null;const d=w.document;d.open();d.write('<!doctype html><html lang="it"><meta charset="utf-8"><title>Stampa interna immobile</title><style>body{font:14px Arial;max-width:800px;margin:28px auto;padding:16px}p{white-space:pre-wrap;overflow-wrap:anywhere}h1{font-size:20px}@media print{button{display:none}}</style><h1>Righetto - scheda interna</h1><p>RISERVATO - indirizzo reale e note interne. Non è un PDF per clienti.</p>'+fields.map(([k,v])=>'<h2 style="font-size:14px">'+esc(k)+'</h2><p>'+esc(value(v))+'</p>').join('')+'<button type="button" id="print">Stampa</button></html>');d.close();d.getElementById('print').onclick=()=>w.print();box.querySelector('[data-print-status]').textContent='Anteprima interna aperta. Controlla il contenuto prima di stampare; nessun invio.';};}
 
 /* ---- Menu Stampe: stesse voci e ordine del vecchio gestionale ---- */
-const RST_ITEMS=[
- ['pdf per la vetrina','vetrina'],
- ['vetrina personalizzata','vetrina2'],
- ['pdf per il cliente','cliente'],
- ["pdf per l'agenzia(1pg)",'agenzia'],
- ["pdf per l'agenzia(2pg)",'agenzia2'],
- ['pdf brochure','brochure'],
- ['scarica QR code','qr'],
- ['stampa questa pagina','pagina']
-];
+const RST_ITEMS=[['Cartello A3','cartello-a3'],['scarica QR code','qr'],['stampa questa pagina','pagina']];
 
 function showVetrinaPrint(i,custom){
  const resolve=ref=>{try{const u=new URL(ref,'https://righettoimmobiliare.it/');return ['http:','https:'].includes(u.protocol)&&!u.username&&!u.password?u.href:null;}catch(e){return null;}};
@@ -192,6 +183,19 @@ function rstOpen(kind){
  sb=window.sb;
  const raw=rstCurrent();if(!raw){if(window.toast)toast('Apri una scheda immobile salvata per stampare.','error');return;}
  const i=normProperty(raw);
+ if(kind==='cartello-a3'){
+  if(!window.RighettoCartelloA3){rstInfo('Cartello A3 non caricato. Riapri la pagina.');return;}
+  const principal=window.RighettoGatedPrincipal,id=String(i.id),cachedVersion=raw.updated_at;
+  const same=key=>principal&&window.RighettoGatedPrincipal===principal&&String(rstCurrent()?.id)===key&&rstCurrent()?.updated_at===cachedVersion;
+  return (async()=>{try{
+   if(!same(id))throw Error('Scheda o sessione cambiata.');
+   const auth=await sb.auth.getUser();if(auth.error||auth.data?.user?.id!==principal||!same(id))throw Error('Sessione non verificata.');
+   const saved=await sb.from('immobili').select('*').eq('id',id).single();if(saved.error||!saved.data||!same(id))throw Error('Scheda salvata non verificata.');
+   const snapshot=normProperty(saved.data);
+   const verify=async()=>{if(!same(id))return false;const a=await sb.auth.getUser();if(a.error||a.data?.user?.id!==principal||!same(id))return false;const r=await sb.from('immobili').select('id,updated_at').eq('id',id).single();return !r.error&&same(id)&&r.data?.updated_at===snapshot.updated_at;};
+   return window.RighettoCartelloA3.show(snapshot,{same,verify,energy:window.RighettoCartelloEnergy?.[id]});
+  }catch(e){if(window.toast)toast(e.message||'Cartello A3 non disponibile.','error');}})();
+ }
  if(kind==='vetrina'){showVetrinaPrint(i,false);return;}
  if(kind==='vetrina2'){showVetrinaPrint(i,true);return;}
  host();
