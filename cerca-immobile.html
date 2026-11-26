@@ -6,7 +6,7 @@
 *{box-sizing:border-box}body{margin:0;background:#f5f6f2;color:#203c30;font:16px/1.5 Arial,sans-serif}header{background:#18583e;color:white;padding:21px 24px;letter-spacing:2px;font-weight:bold}main{max-width:860px;margin:28px auto;padding:0 18px}.preview{background:#fff2cb;color:#5d4715;padding:12px 16px;border:1px solid #ddce9b;font-size:14px}.box{background:white;border:1px solid #ccd8cf;padding:30px;margin-top:18px}h1{font:32px/1.2 Georgia,serif;margin:0 0 12px}h2{font-size:20px;margin:26px 0 12px}p{margin:8px 0 18px}label{display:block;font-weight:bold;margin:14px 0 5px}input,select,button{font:16px Arial;min-height:46px;width:100%;border:1px solid #9aaca1;padding:10px;background:white;color:#203c30;border-radius:3px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}.small{font-size:14px;color:#52655a}.check{display:flex;align-items:flex-start;gap:10px;font-weight:normal;margin:14px 0}.check input{width:20px;height:20px;min-height:20px;flex-shrink:0;margin:2px 0}.cta{background:#18583e;color:white;border:0;cursor:pointer;margin-top:18px;font-weight:bold}.note{padding:12px;background:#eef4ef;border-left:3px solid #42735a}.result{background:#fff2cb;padding:14px;color:#5d4715;margin-top:15px}a{color:#18583e}@media(max-width:600px){main{margin:16px auto}.box{padding:20px}h1{font-size:28px}.grid{grid-template-columns:1fr}header{padding:16px 18px}}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .ok{background:#eef4ef;color:#203c30;border-left:3px solid #42735a}
-</style></head><body>
+.home-return{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:22px;padding:12px 20px;min-height:46px;border:1px solid #18583e;border-radius:3px;color:#18583e;background:#fff;text-decoration:none;font-weight:bold}.home-return:hover{background:#eef4ef}.home-return:focus-visible{outline:3px solid #FF6B35;outline-offset:3px}</style></head><body>
 <header>RIGHETTO IMMOBILIARE</header><main><section class="box"><h1>Che immobile stai cercando?</h1>
 <p>Compila la tua richiesta. Indica tipologia e fascia di prezzo, poi scegli se richiedere gli avvisi via email.</p>
 <form id="form" novalidate>
@@ -23,7 +23,7 @@
 <label class="check"><input id="alerts" type="checkbox"><span>Desidero iscrivermi agli avvisi immobiliari via email per la ricerca indicata. Potrò disiscrivermi in qualsiasi momento.</span></label>
 <p class="small note">Conserviamo la tua richiesta di ricerca e, se li hai richiesti, la tua iscrizione agli avvisi per 6 mesi, poi li cancelliamo. Puoi disiscriverti in qualsiasi momento dal link in ogni email o scrivendo a info@righettoimmobiliare.it. Dettagli nell'informativa privacy.</p>
 <button class="cta" id="go" type="submit">Invia la richiesta</button>
-<div id="result" role="status" hidden class="result"></div></form></section></main>
+<div id="result" role="status" hidden class="result"></div></form><a class="home-return" href="https://righettoimmobiliare.it/"><span aria-hidden="true">←</span> Torna alla home</a></section></main>
 <script>
 (function(){
 var FN='https://qwkwkemuabfwvwuqrxlu.supabase.co/functions/v1/clever-service';

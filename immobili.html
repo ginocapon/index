@@ -524,6 +524,9 @@
       .card-title{font-size:.82rem}
     }
     .skip-link{position:absolute;top:-100%;left:50%;transform:translateX(-50%);background:var(--verde);color:#fff;padding:.6rem 1.2rem;border-radius:0 0 8px 8px;font-size:.82rem;font-weight:600;z-index:9999;transition:top .2s}.skip-link:focus{top:0}
+
+    .alert-immobili-actions .alert-email-cta{background:var(--oro);color:var(--nero);padding:.85rem 1.1rem;min-height:48px;font-size:.76rem;box-shadow:0 3px 10px rgba(21,36,53,.12)}
+    .alert-cta-arrow{color:var(--oro);font:46px/1 Arial,sans-serif;margin-right:.25rem}
   </style>
   <link rel="stylesheet" href="css/rig-type-scale.css?v=7">
 
@@ -875,13 +878,13 @@
     <div class="alert-immobili" id="alert-immobili">
       <div class="alert-immobili-inner">
         <div class="alert-immobili-text">
-          <strong>Salva ricerca: avvisi via email</strong>
-          <span>Ti avvisiamo via email quando pubblichiamo annunci che corrispondono alla tua ricerca. Gratis, revocabile in qualsiasi momento.</span>
+          <strong>Il tuo immobile ideale, al momento giusto.</strong>
+          <span>Vuoi ricevere un avviso via email quando arriva l'immobile che cerchi? Clicca qui, è gratis.</span>
         </div>
-        <div class="alert-criteria" id="alert-criteria"><em>Imposta i filtri sopra e clicca «Usa ricerca attuale» per vedere i criteri salvati.</em></div>
+        <div class="alert-criteria" id="alert-criteria"><em>Gli avvisi partono dai filtri che hai scelto. Potrai confermarli nella pagina successiva.</em></div>
         <div class="alert-immobili-actions">
-          <button type="button" class="alert-sync-btn" onclick="RigAlert.syncFromFilters()">Usa ricerca attuale</button>
-          <button type="button" onclick="RigAlert.subscribe()">Attiva avvisi via email</button>
+          <span class="alert-cta-arrow" aria-hidden="true">⟶</span>
+          <button type="button" class="alert-email-cta" onclick="RigAlert.subscribe()">Attiva avvisi via email</button>
         </div>
         <p id="alert-msg" class="alert-immobili-msg" hidden></p>
       </div>
