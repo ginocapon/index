@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><meta name="referrer" content="no-referrer">
+<title>Che immobile cerchi? | Righetto Immobiliare</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f6f2;color:#203c30;font:16px/1.5 Arial,sans-serif}header{background:#18583e;color:white;padding:21px 24px;letter-spacing:2px;font-weight:bold}main{max-width:860px;margin:28px auto;padding:0 18px}.preview{background:#fff2cb;color:#5d4715;padding:12px 16px;border:1px solid #ddce9b;font-size:14px}.box{background:white;border:1px solid #ccd8cf;padding:30px;margin-top:18px}h1{font:32px/1.2 Georgia,serif;margin:0 0 12px}h2{font-size:20px;margin:26px 0 12px}p{margin:8px 0 18px}label{display:block;font-weight:bold;margin:14px 0 5px}input,select,button{font:16px Arial;min-height:46px;width:100%;border:1px solid #9aaca1;padding:10px;background:white;color:#203c30;border-radius:3px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}.small{font-size:14px;color:#52655a}.check{display:flex;align-items:flex-start;gap:10px;font-weight:normal;margin:14px 0}.check input{width:20px;height:20px;min-height:20px;flex-shrink:0;margin:2px 0}.cta{background:#18583e;color:white;border:0;cursor:pointer;margin-top:18px;font-weight:bold}.note{padding:12px;background:#eef4ef;border-left:3px solid #42735a}.result{background:#fff2cb;padding:14px;color:#5d4715;margin-top:15px}a{color:#18583e}@media(max-width:600px){main{margin:16px auto}.box{padding:20px}h1{font-size:28px}.grid{grid-template-columns:1fr}header{padding:16px 18px}}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.ok{background:#eef4ef;color:#203c30;border-left:3px solid #42735a}
+</style></head><body>
+<header>RIGHETTO IMMOBILIARE</header><main><section class="box"><h1>Che immobile stai cercando?</h1>
+<p>Compila la tua richiesta. Indica tipologia e fascia di prezzo, poi scegli se richiedere gli avvisi via email.</p>
+<form id="form" novalidate>
+<div class="grid"><div><label for="operation">Cerco in</label><select id="operation" required><option value="">Scegli</option><option value="affitto">Affitto</option><option value="vendita">Acquisto</option><option value="aste">Asta</option></select></div>
+<div><label for="type">Tipologia immobile</label><select id="type" required><option value="">Scegli</option><option value="s-11">Appartamento</option><option value="s-18">Villa</option><option value="s-2">Bifamiliare</option><option value="s-4">Casa a schiera</option><option value="s-17">Ufficio</option><option value="s-14">Negozio</option><option value="s-16">Capannone</option><option value="s-19">Terreno</option><option value="s-8">Garage</option></select></div>
+<div><label for="min">Prezzo da (€), facoltativo</label><input id="min" type="number" min="0" step="1" inputmode="numeric" placeholder="Non indicato"></div>
+<div><label for="max">Prezzo fino a (€), facoltativo</label><input id="max" type="number" min="0" step="1" inputmode="numeric" placeholder="Non indicato"></div></div>
+<p class="small">La fascia di prezzo viene conservata nella tua richiesta. Gli avvisi comprendono gli immobili della tipologia e dell'operazione scelte, anche fuori fascia: sarai tu a valutarli.</p>
+<label for="name">Nome, facoltativo</label><input id="name" autocomplete="name" maxlength="200" placeholder="Il tuo nome">
+<label for="email">La tua email</label><input id="email" type="email" required maxlength="254" autocomplete="email" placeholder="nome@esempio.it">
+<div class="hp" aria-hidden="true"><label for="website">Non compilare</label><input id="website" tabindex="-1" autocomplete="off"></div>
+<h2>Avvisi solo se li richiedi</h2>
+<label class="check"><input id="privacy" type="checkbox" required><span>Ho letto l'<a href="privacy" target="_blank" rel="noopener">informativa privacy</a> per la gestione della mia richiesta.</span></label>
+<label class="check"><input id="alerts" type="checkbox"><span>Desidero iscrivermi agli avvisi immobiliari via email per la ricerca indicata. Potrò disiscrivermi in qualsiasi momento.</span></label>
+<p class="small note">Conserviamo la tua richiesta di ricerca e, se li hai richiesti, la tua iscrizione agli avvisi per 6 mesi, poi li cancelliamo. Puoi disiscriverti in qualsiasi momento dal link in ogni email o scrivendo a info@righettoimmobiliare.it. Dettagli nell'informativa privacy.</p>
+<button class="cta" id="go" type="submit">Invia la richiesta</button>
+<div id="result" role="status" hidden class="result"></div></form></section></main>
+<script>
+(function(){
+var FN='https://qwkwkemuabfwvwuqrxlu.supabase.co/functions/v1/clever-service';
+var f=document.getElementById('form'),res=document.getElementById('result'),go=document.getElementById('go'),t0=Date.now(),rid=null,done=false,busy=false;
+function g(i){return document.getElementById(i)}
+function show(t,ok){res.hidden=false;res.className='result'+(ok?' ok':'');res.textContent=t}
+function uuid(){return (crypto&&crypto.randomUUID)?crypto.randomUUID():'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return(c==='x'?r:(r&3|8)).toString(16)})}
+var OPS={affitto:'Affitto',vendita:'Acquisto',aste:'Asta'};
+f.addEventListener('submit',function(e){
+ e.preventDefault();if(done||busy)return;
+ if(!f.reportValidity())return;
+ var min=g('min').value,max=g('max').value;
+ if(min!==''&&max!==''&&Number(min)>Number(max)){show('Il prezzo minimo non può superare il massimo.');return}
+ if(Date.now()-t0<3000){show('Ancora un secondo e poi invia.');return}
+ var type=g('type'),typeLabel=type.options[type.selectedIndex].text,alerts=g('alerts').checked;
+ var msg='Ricerca dal sito: '+OPS[g('operation').value]+', '+typeLabel+(min?', da '+min+' €':'')+(max?', fino a '+max+' €':'')+'. '+(alerts?'Richiede gli avvisi email (da confermare).':'Senza iscrizione agli avvisi.');
+ var prefs={};if(min!=='')prefs.price_min=Number(min);if(max!=='')prefs.price_max=Number(max);
+ rid=rid||uuid();busy=true;go.disabled=true;show('Invio in corso...');
+ fetch(FN,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'submit',request_id:rid,email:g('email').value.trim(),name:g('name').value.trim(),message:msg,operation:g('operation').value,types:[type.value],preferences:prefs,consent_email:alerts,website:g('website').value})})
+ .then(function(r){return r.json().then(function(j){return{status:r.status,j:j}})})
+ .then(function(o){busy=false;
+  if(o.j&&o.j.ok){done=true;
+   if(!alerts)show('Richiesta ricevuta. Ti ricontatteremo. Nessuna iscrizione agli avvisi attivata.',true);
+   else if(o.j.mail==='sent')show('Richiesta ricevuta. Ti abbiamo scritto per confermare l\'iscrizione agli avvisi: apri l\'email e conferma. Senza conferma non invieremo avvisi. Se non la trovi, controlla lo spam.',true);
+   else show('Richiesta ricevuta. Se non ricevi entro qualche minuto l\'email di conferma, scrivici a info@righettoimmobiliare.it. Senza conferma non invieremo avvisi.',true);
+   go.textContent='Richiesta inviata';return}
+  go.disabled=false;show('Non siamo riusciti a registrare la richiesta. Controlla i dati e riprova, oppure scrivici a info@righettoimmobiliare.it.')})
+ .catch(function(){busy=false;go.disabled=false;show('Collegamento non riuscito. Puoi riprovare: la richiesta non verrà duplicata. Oppure scrivici a info@righettoimmobiliare.it.')});
+});
+})();
+</script></body></html>
