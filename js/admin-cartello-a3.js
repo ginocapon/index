@@ -38,15 +38,40 @@ function facts(i){
 }
 function copy(i){
  const type=typeOf(i),parts=[];let lead=type.charAt(0).toUpperCase()+type.slice(1);
+ if(i.comune)lead+=' a '+String(i.comune).trim();
+ if(i.tipo_operazione==='vendita')lead+=' in vendita';else if(String(i.tipo_operazione||'').startsWith('affitto'))lead+=' in affitto';
  if(positive(i.superficie))lead+=' di '+i.superficie+' m²';
+ parts.push(lead);
  const rooms=[];if(residential(i)&&positive(i.camere))rooms.push(i.camere+(Number(i.camere)===1?' camera':' camere'));
  if(positive(i.bagni))rooms.push(i.bagni+(Number(i.bagni)===1?' bagno':' bagni'));
- if(rooms.length)lead+=' con '+rooms.join(' e ');parts.push(lead);
+ if(rooms.length)parts.push('con '+rooms.join(' e '));
  if(i.ingresso_indipendente===true)parts.push('ingresso indipendente');
- if(i.giardino===true)parts.push('giardino');
- if(i.taverna===true)parts.push('taverna');
+ if(i.giardino===true)parts.push('giardino');if(i.taverna===true)parts.push('taverna');
  if(positive(i.garage_doppio))parts.push('garage doppio');else if(i.garage===true)parts.push('garage');
- let text=parts.join(', ')+'.';while(words(text)>30&&parts.length>1){parts.pop();text=parts.join(', ')+'.';}return text;
+ const calls=[
+ 'Contatta la nostra agenzia immobiliare Righetto Immobiliare per ricevere maggiori informazioni su questo immobile e concordare una visita.',
+ 'Per informazioni su questo immobile, contatta Righetto Immobiliare.',
+ 'Per maggiori informazioni su questo immobile, contatta Righetto Immobiliare.',
+ 'Per maggiori informazioni e per concordare una visita, contatta Righetto Immobiliare.',
+ 'Per ricevere maggiori informazioni e concordare una visita, contatta direttamente Righetto Immobiliare.',
+ 'Per ricevere maggiori informazioni su questo immobile e concordare una visita, contatta Righetto Immobiliare.',
+ 'Per ricevere maggiori informazioni su questo immobile e concordare una visita, contatta direttamente Righetto Immobiliare.',
+ 'Per ricevere maggiori informazioni su questo immobile e concordare una visita, contatta la nostra agenzia Righetto Immobiliare.',
+ 'Contatta Righetto Immobiliare per informazioni.',
+ 'Contatta Righetto Immobiliare per maggiori informazioni.',
+ 'Contatta Righetto Immobiliare per ricevere maggiori informazioni.',
+ 'Contatta Righetto Immobiliare per ricevere informazioni su questo immobile.',
+ 'Contatta Righetto Immobiliare per ricevere maggiori informazioni su questo immobile.',
+ 'Contatta Righetto Immobiliare per ricevere maggiori informazioni e concordare una visita.',
+ 'Contatta Righetto Immobiliare per ricevere maggiori informazioni su questo immobile e concordare una visita.',
+ 'Per maggiori informazioni su questo immobile e per concordare una visita, contatta direttamente la nostra agenzia Righetto Immobiliare.',
+ 'Per ricevere maggiori informazioni su questo immobile e per concordare una visita, contatta direttamente la nostra agenzia Righetto Immobiliare.',
+ 'Per ricevere tutte le informazioni su questo immobile e per concordare una visita, puoi contattare direttamente la nostra agenzia Righetto Immobiliare.',
+ 'Per ricevere tutte le informazioni su questo immobile e per concordare una visita, puoi contattare direttamente la nostra agenzia immobiliare Righetto Immobiliare.'
+ ];
+ // Only choose complete factual clauses and complete contact sentences, never truncate text.
+ for(let n=parts.length;n>0;n--){const core=parts.slice(0,n).join(', ')+'.';for(const call of calls){const text=core+' '+call;if(words(text)===30)return text;}}
+ throw Error('Testo standard di 30 parole non disponibile per questa scheda. Segnalare senza inventare dati.');
 }
 function initialEnergy(i){
  return {className:present(i.classe_energetica)?String(i.classe_energetica):'',nren:present(i.epgl_nren)?String(i.epgl_nren):'',ren:present(i.epgl_ren)?String(i.epgl_ren):''};
@@ -88,7 +113,7 @@ function show(i,context){
  const fixedEnergy=context?.energy;
  apeSrc=fixedEnergy?.image||'';
  q('[data-energy-note]').textContent=fixedEnergy?.verified?'Grafico APE del gestionale principale: classe '+fixedEnergy.className+', EPgl,nren '+fixedEnergy.nren+', EPgl,ren '+fixedEnergy.ren+'. Layout, prezzo, striscia e telefono sono standard.':fixedEnergy?.sourceFormat==='ape2014'?'Grafico APE2014 presente nel gestionale principale, senza gli indici EPgl,nren ed EPgl,ren richiesti. Mantenuto originale, senza conversione. Gino verifica i dati prima di stampare.':fixedEnergy?'Grafico presente nel gestionale principale, ma il valore energetico è in fase di definizione. Mantenuto originale. Gino verifica i dati prima di stampare, nessun numero viene inventato.':'Grafico APE non ancora collegato a questo esatto riferimento. Cartello bloccato: segnalare la scheda da verificare.';
- const count=()=>{q('[data-count]').textContent=words(q('[data-description]').value)+' / 30 parole';};q('[data-description]').oninput=count;count();
+ const count=()=>{const n=words(q('[data-description]').value);q('[data-count]').textContent=n+' / 30 parole'+(n<30?' · Attenzione: descrizione sotto le 30 parole.':'');};q('[data-description]').oninput=count;count();
  const refs=[...new Set((Array.isArray(i.foto)&&i.foto.length?i.foto:i.foto_urls||[]).filter(r=>typeof r==='string').map(safeURL).filter(Boolean))];
  for(const [n,url]of refs.entries()){
   const b=document.createElement('button');b.type='button';b.className='a3-photo';b.setAttribute('aria-pressed','false');b.setAttribute('aria-label','Scegli foto '+(n+1));b.innerHTML='<img loading="lazy" src="'+esc(url)+'" alt="Foto immobile '+(n+1)+'"><span>Foto '+(n+1)+'</span>';b.onclick=()=>{const at=selected.indexOf(url);if(at>=0)selected.splice(at,1);else if(selected.length<2)selected.push(url);else{q('[data-errors]').textContent='Hai già scelto due foto. Deselezionane una per cambiarla.';return;}q('[data-errors]').textContent='';for(const button of q('[data-gallery]').children){const index=selected.indexOf(button.dataset.url);button.setAttribute('aria-pressed',String(index>=0));button.querySelector('span').textContent=index>=0?'Scelta '+(index+1):'Foto '+button.dataset.number;}q('[data-selection]').textContent=selected.length+' di 2 foto scelte';};b.dataset.url=url;b.dataset.number=n+1;q('[data-gallery]').append(b);
