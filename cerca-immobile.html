@@ -32,6 +32,11 @@ function g(i){return document.getElementById(i)}
 function show(t,ok){res.hidden=false;res.className='result'+(ok?' ok':'');res.textContent=t}
 function uuid(){return (crypto&&crypto.randomUUID)?crypto.randomUUID():'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return(c==='x'?r:(r&3|8)).toString(16)})}
 var OPS={affitto:'Affitto',vendita:'Acquisto',aste:'Asta'};
+// Precompila dai filtri della pagina elenco (?op=&tipo=&max=): solo valori ammessi, altrimenti ignorati.
+(function(){try{var q=new URLSearchParams(location.search),m={appartamento:'s-11',villa:'s-18',bifamiliare:'s-2',villetta:'s-4',ufficio:'s-17',negozio:'s-14',capannone:'s-16',terreno:'s-19',garage:'s-8'};
+ var op=q.get('op');if(op&&OPS[op])g('operation').value=op;
+ var tp=q.get('tipo'),v=m[tp]||tp;if(v&&[].some.call(g('type').options,function(o){return o.value===v&&v!==''}))g('type').value=v;
+ var mx=q.get('max');if(mx&&/^[0-9]{1,9}$/.test(mx))g('max').value=mx;}catch(e){}})();
 f.addEventListener('submit',function(e){
  e.preventDefault();if(done||busy)return;
  if(!f.reportValidity())return;

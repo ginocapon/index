@@ -875,22 +875,13 @@
     <div class="alert-immobili" id="alert-immobili">
       <div class="alert-immobili-inner">
         <div class="alert-immobili-text">
-          <strong>Salva ricerca — Alert email e WhatsApp</strong>
-          <span>Ti avvisiamo quando pubblichiamo annunci che corrispondono ai filtri attivi. Gratis, revocabile in qualsiasi momento.</span>
+          <strong>Salva ricerca: avvisi via email</strong>
+          <span>Ti avvisiamo via email quando pubblichiamo annunci che corrispondono alla tua ricerca. Gratis, revocabile in qualsiasi momento.</span>
         </div>
         <div class="alert-criteria" id="alert-criteria"><em>Imposta i filtri sopra e clicca «Usa ricerca attuale» per vedere i criteri salvati.</em></div>
-        <div class="alert-immobili-form">
-          <input type="email" id="alert-email" placeholder="Email (opzionale)" autocomplete="email" aria-label="Email per alert immobili">
-          <input type="tel" id="alert-tel" placeholder="WhatsApp / telefono (opzionale)" autocomplete="tel" aria-label="Telefono per alert WhatsApp">
-        </div>
-        <div class="alert-channels" role="group" aria-label="Canali di notifica">
-          <label><input type="checkbox" id="alert-canale-email" checked> Email</label>
-          <label><input type="checkbox" id="alert-canale-wa" checked> WhatsApp</label>
-          <label><input type="checkbox" id="alert-gdpr" required> Ho letto l'<a href="privacy" target="_blank" rel="noopener">informativa privacy</a> *</label>
-        </div>
         <div class="alert-immobili-actions">
           <button type="button" class="alert-sync-btn" onclick="RigAlert.syncFromFilters()">Usa ricerca attuale</button>
-          <button type="button" onclick="RigAlert.subscribe()">Attiva alert</button>
+          <button type="button" onclick="RigAlert.subscribe()">Attiva avvisi via email</button>
         </div>
         <p id="alert-msg" class="alert-immobili-msg" hidden></p>
       </div>
@@ -902,7 +893,7 @@
     <!-- FILTRI RAPIDI -->
     <div class="quick-filters" id="quick-filters" role="group" aria-label="Filtri rapidi">
       <button type="button" class="qf-chip" id="qf-vt" onclick="toggleVtFilter(this)">Solo tour 360°</button>
-      <button type="button" class="qf-chip" onclick="RigAlert.syncFromFilters()">Salva alert ricerca</button>
+      <button type="button" class="qf-chip" onclick="RigAlert.syncFromFilters()">Salva ricerca (email)</button>
     </div>
 
     <!-- GRID IMMOBILI (caricato dinamicamente da Supabase) -->
@@ -1467,7 +1458,7 @@ function mainCardPreview(src) { return MAIN_CARD_PREVIEWS[String(src || "").repl
 
   async function iscriviAlertImmobili() { if (window.RigAlert) RigAlert.subscribe(); }
 
-  // ── ALERT RICERCA (email + WhatsApp, criteri filtri attivi) ──
+  // ── ALERT RICERCA (solo email, criteri dai filtri attivi: porta al modulo cerca-immobile) ──
   window.RigAlert = (function(){
     const LS_KEY = 'rig_alert_active';
     const OP_LABELS = { vendita:'Vendita', affitto:'Affitto', aste:'Aste' };
@@ -1478,11 +1469,6 @@ function mainCardPreview(src) { return MAIN_CARD_PREVIEWS[String(src || "").repl
       var el=document.getElementById(id); if(!el||!el.value) return '';
       var o=el.options[el.selectedIndex]; return o ? o.textContent.trim() : el.value;
     }
-    function normTel(t){
-      t=(t||'').replace(/\s+/g,'').replace(/^(\+39|0039)/,'');
-      return t.replace(/\D/g,'');
-    }
-
     function collectCriteria(){
       return {
         op: currentOp || 'vendita',
@@ -1567,88 +1553,18 @@ function mainCardPreview(src) { return MAIN_CARD_PREVIEWS[String(src || "").repl
       msgEl.textContent = text;
     }
 
-    async function subscribe(){
-      var email = val('alert-email');
-      var telRaw = val('alert-tel');
-      var tel = normTel(telRaw);
-      var wantEmail = document.getElementById('alert-canale-email') && document.getElementById('alert-canale-email').checked;
-      var wantWa = document.getElementById('alert-canale-wa') && document.getElementById('alert-canale-wa').checked;
-      var gdpr = document.getElementById('alert-gdpr') && document.getElementById('alert-gdpr').checked;
-      if (!gdpr) { showMsg('Accetta l\'informativa privacy per attivare l\'alert.', false); return; }
-      if (!email && !tel) { showMsg('Inserisci almeno email o numero WhatsApp/telefono.', false); return; }
-      if (email && !email.includes('@')) { showMsg('Inserisci un\'email valida.', false); return; }
-      if (tel && tel.length < 9) { showMsg('Inserisci un numero di telefono valido.', false); return; }
-      if (wantEmail && !email) { showMsg('Per le notifiche email inserisci un indirizzo.', false); return; }
-      if (wantWa && !tel) { showMsg('Per WhatsApp inserisci un numero di telefono.', false); return; }
-      if (!wantEmail && !wantWa) { showMsg('Seleziona almeno un canale (Email o WhatsApp).', false); return; }
-
+    function subscribe(){
       var c = collectCriteria();
-      renderSummary(c);
-      var canali = [];
-      if (wantEmail && email) canali.push('email');
-      if (wantWa && tel) canali.push('whatsapp');
-      var interesse = criteriaToInteresse(c, canali);
-      var labels = criteriaLabels(c).join(' · ');
-      var msgAdmin = '[ALERT RICERCA] ' + labels + ' | Canali: ' + canali.join(' + ');
-
-      try {
-        if (sb) {
-          await sb.from('richieste').insert([{
-            nome: email ? email.split('@')[0] : 'Alert WhatsApp',
-            email: email || null,
-            telefono: tel ? ('+39' + tel) : null,
-            messaggio: msgAdmin,
-            provenienza: 'immobili-alert-ricerca',
-            newsletter: wantEmail,
-            letto: false
-          }]);
-          if (email) {
-            await sb.from('newsletter_subscribers').upsert([{
-              email: email,
-              telefono: tel ? ('+39' + tel) : null,
-              tipo_immobile: c.tipo || null,
-              zona: c.zona || null,
-              budget: c.prezzoMax || null,
-              interesse: interesse,
-              fonte: 'immobili-catalogo',
-              provenienza: 'immobili-alert-ricerca',
-              attivo: true,
-              created_at: new Date().toISOString()
-            }], { onConflict: 'email' });
-          }
-        }
-        try {
-          localStorage.setItem(LS_KEY, JSON.stringify({ at: Date.now(), criteria: c, canali: canali, email: email||'', tel: tel||'' }));
-        } catch(e){}
-        var box = document.getElementById('alert-immobili');
-        if (box) box.classList.add('active');
-        showMsg('Alert attivato! Ti avviseremo su ' + canali.join(' e ') + ' quando usciranno annunci compatibili.', true);
-        document.getElementById('alert-email').value = '';
-        document.getElementById('alert-tel').value = '';
-        if (typeof gtag === 'function') {
-          gtag('event', 'alert_immobili', { event_category: 'immobili', event_label: (c.zona || 'provincia') + '|' + canali.join('+') });
-        }
-        if (wantWa && tel) {
-          var waText = 'Ciao Righetto, ho attivato un ALERT immobili con questi criteri:\n• ' + labels + '\n• Canali: ' + canali.join(' + ') + '\n\nConfermo il mio numero per WhatsApp: +39' + tel;
-          setTimeout(function(){
-            window.open((RighettoContacts.resolve(c) ? 'https://wa.me/' + RighettoContacts.resolve(c).phone + '?text=' + encodeURIComponent(waText) : '/contatti?tipo=affitto'), '_blank', 'noopener,noreferrer');
-          }, 600);
-        }
-      } catch (e) {
-        showMsg('Errore. Riprova più tardi o contattaci al 049.8843484.', false);
-      }
+      var p = new URLSearchParams();
+      p.set('op', c.op || 'vendita');
+      var t = (c.tipi && c.tipi.length === 1) ? c.tipi[0] : '';
+      if (t) p.set('tipo', t);
+      if (/^[0-9]{1,9}$/.test(c.prezzoMax || '')) p.set('max', c.prezzoMax);
+      location.href = 'cerca-immobile.html?' + p.toString();
     }
 
     function init(){
       syncFromFilters();
-      try {
-        var saved = JSON.parse(localStorage.getItem(LS_KEY) || 'null');
-        if (saved && saved.at) {
-          var box = document.getElementById('alert-immobili');
-          if (box) box.classList.add('active');
-          showMsg('Hai già un alert attivo su questa ricerca. Puoi aggiornarlo con nuovi criteri.', true);
-        }
-      } catch(e){}
     }
 
     return { syncFromFilters: syncFromFilters, subscribe: subscribe, renderSummary: renderSummary, init: init, collectCriteria: collectCriteria };
