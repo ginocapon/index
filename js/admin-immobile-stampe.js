@@ -181,14 +181,12 @@ function rstCurrent(){const id=(document.getElementById('editId')||{}).value;if(
 function rstInfo(html){host().querySelector('.ris-box').insertAdjacentHTML('beforeend','<h3>Stampe</h3><p class="rst-note">'+html+'</p><button type="button" onclick="document.getElementById(\'rst-ov\').remove()">Chiudi</button>');}
 function rstOpen(kind){
  sb=window.sb;
- const raw=rstCurrent();if(!raw){if(window.toast)toast('Apri una scheda immobile salvata per stampare.','error');return;}
- const i=normProperty(raw);
  if(kind==='cartello-a3'){
-  if(!window.RighettoCartelloA3){rstInfo('Cartello A3 non caricato. Riapri la pagina.');return;}
-  const principal=window.RighettoGatedPrincipal,id=String(i.id),cachedVersion=raw.updated_at;
-  const same=key=>principal&&window.RighettoGatedPrincipal===principal&&String(rstCurrent()?.id)===key&&rstCurrent()?.updated_at===cachedVersion;
+  const id=String(document.getElementById('editId')?.value||''),principal=window.RighettoGatedPrincipal;
+  if(!id){if(window.toast)toast('Apri una scheda immobile salvata per stampare.','error');return;}
+  if(!window.RighettoCartelloA3){if(window.toast)toast('Cartello A3 non caricato. Ricarica la pagina.','error');return;}
+  const same=key=>principal&&window.RighettoGatedPrincipal===principal&&String(document.getElementById('editId')?.value||'')===key;
   return (async()=>{try{
-   if(!same(id))throw Error('Scheda o sessione cambiata.');
    const auth=await sb.auth.getUser();if(auth.error||auth.data?.user?.id!==principal||!same(id))throw Error('Sessione non verificata.');
    const saved=await sb.from('immobili').select('*').eq('id',id).single();if(saved.error||!saved.data||!same(id))throw Error('Scheda salvata non verificata.');
    const snapshot=normProperty(saved.data);
@@ -196,6 +194,8 @@ function rstOpen(kind){
    return window.RighettoCartelloA3.show(snapshot,{same,verify,energy:window.RighettoCartelloEnergy?.[id]});
   }catch(e){if(window.toast)toast(e.message||'Cartello A3 non disponibile.','error');}})();
  }
+ const raw=rstCurrent();if(!raw){if(window.toast)toast('Apri una scheda immobile salvata per stampare.','error');return;}
+ const i=normProperty(raw);
  if(kind==='vetrina'){showVetrinaPrint(i,false);return;}
  if(kind==='vetrina2'){showVetrinaPrint(i,true);return;}
  host();
