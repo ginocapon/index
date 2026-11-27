@@ -189,6 +189,15 @@
     .yt-embed iframe,.vt-embed iframe{width:100%;height:100%;border:none}
     .yt-ph,.vt-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem;color:rgba(255,255,255,.25);cursor:pointer}
     .yt-ph svg,.vt-ph svg{width:48px;height:48px}
+    button.yt-ph{position:relative;border:0;padding:0;background:#102d25;color:#fff;overflow:hidden;font:inherit;text-align:center}
+    button.yt-ph:focus-visible{outline:4px solid #FF6B35;outline-offset:-4px}
+    .yt-preview-image{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+    .yt-preview-shade{position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(0,0,0,.66));pointer-events:none}
+    .yt-preview-copy{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;padding:16px}
+    .yt-preview-play{display:flex;align-items:center;justify-content:center;width:76px;height:54px;border-radius:14px;background:#FF6B35;box-shadow:0 3px 20px #0006}
+    .yt-preview-play svg{width:30px;height:30px;fill:#142c25;stroke:none}
+    .yt-preview-label{font-size:clamp(16px,2vw,21px);font-weight:700;color:#fff;text-shadow:0 1px 5px #000;background:#12392ce8;padding:9px 16px;border-radius:4px}
+    @media(max-width:600px){.yt-preview-play{width:62px;height:46px}.yt-preview-copy{gap:10px}}
     .yt-ph p,.vt-ph p{font-size:.78rem}
     .vt-ph{color:var(--grigio)}
     .vt-ph svg{opacity:.25}
@@ -509,10 +518,11 @@
       <div class="s-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 001.95-1.97A29 29 0 0023 12a29 29 0 00-.46-5.58z"/></svg><h2>Video dell'immobile</h2></div>
       <div class="s-body">
         <div class="yt-embed" id="ytBox">
-          <div class="yt-ph" onclick="loadYT()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 001.95-1.97A29 29 0 0023 12a29 29 0 00-.46-5.58z"/></svg>
-            <p>Clicca per vedere il video</p>
-          </div>
+          <button type="button" class="yt-ph" onclick="loadYT()" aria-label="Guarda il video dell'immobile">
+            <img id="ytPreviewImage" class="yt-preview-image" alt="Anteprima del video dell'immobile" loading="lazy" referrerpolicy="no-referrer">
+            <span class="yt-preview-shade" aria-hidden="true"></span>
+            <span class="yt-preview-copy"><span class="yt-preview-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 4v16l13-8z"/></svg></span><span class="yt-preview-label">Clicca qui per vedere il video</span></span>
+          </button>
         </div>
       </div>
     </div>
@@ -1077,6 +1087,15 @@ function render(d) {
   // YouTube
   if (ytNorm) {
     ytId = ytNorm;
+    const preview = document.getElementById('ytPreviewImage');
+    if (preview) {
+      let triedPhoto = false;
+      preview.onerror = function () {
+        if (!triedPhoto && lbFotos[0]) { triedPhoto = true; preview.alt = "Foto dell'immobile, clicca per vedere il video"; preview.src = lbFotos[0]; }
+        else preview.hidden = true;
+      };
+      preview.src = 'https://i.ytimg.com/vi/' + encodeURIComponent(ytNorm) + '/hqdefault.jpg';
+    }
     document.getElementById('s-video').style.display = 'block';
     document.getElementById('nav-video').style.display = 'inline-block';
   }
