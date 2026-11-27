@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-20",
+  "updated": "2026-11-27",
   "policy": "Marchio FOTO AI automatico (site-ai-disclosure.js) su pathPrefixes. Esclusi img/immobili/, img/team/, img/brand/, img/og-. Dopo nuove hero blog: node scripts/build-ai-image-manifest.mjs; audit: node scripts/audit-foto-ai.mjs",
   "pathPrefixes": [
     "img/blog/",
@@ -117,6 +117,12 @@
     "img/blog/blog-loft-stanza-bagno-privato-corpo.webp",
     "img/blog/blog-loft-vicenza-universita-corpo.webp",
     "img/blog/blog-mercato-italiano-tensioni-medio-oriente-2026.png",
+    "img/blog/blog-metri-quadri-casa-annuncio-visura-padova-balcone.webp",
+    "img/blog/blog-metri-quadri-casa-annuncio-visura-padova-card.webp",
+    "img/blog/blog-metri-quadri-casa-annuncio-visura-padova-fascicolo.webp",
+    "img/blog/blog-metri-quadri-casa-annuncio-visura-padova-hero-mobile.webp",
+    "img/blog/blog-metri-quadri-casa-annuncio-visura-padova-hero.webp",
+    "img/blog/blog-metri-quadri-casa-annuncio-visura-padova-plan.webp",
     "img/blog/blog-mutui-coppia-giovani-padova.webp",
     "img/blog/blog-mutui-selettivi-banche-padova-2026.png",
     "img/blog/blog-mutuo-under-36-tassi-fisso-variabile-2027-consap.webp",
@@ -238,5 +244,5 @@
     "img/blog/trend-ricerca-casa-padova-2026.webp",
     "img/blog/ufficio-righetto-immobiliare.webp"
   ],
-  "fileCount": 218
+  "fileCount": 224
 }

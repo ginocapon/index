@@ -204,3 +204,10 @@ Vedi **`TEST-SKILL/venerdi-riepilogo-blog-social.md`** — tabelle batch CTA, ar
 - `skill-competitor-roadmap-q3-2026.md` §8 `"SKILL"`
 - `context-map.json` → `venerdi_contenuti_skimm`
 - Repo legacy (solo struttura, non copy): vedi `legacy_external_repo` in pipeline JSON
+
+
+## Aggiornamento Gino, 27 novembre 2026: nuovo articolo anche International
+
+Il nuovo articolo settimanale, dopo anteprima e ok specifico, va pubblicato anche nelle nove lingue non italiane correnti: EN, AR, TR, PT-BR, ES, DE, FR, NL, SV. IT resta il principale. Traduzione fedele del testo approvato, non riassunto. Conservare fonti, cautele, ruoli e nota di traduzione editoriale non revisionata da madrelingua. Arabo RTL. Riutilizzare foto dedicate con didascalia Foto AI. Canonical per pagina, hreflang reciproci solo verso versioni esistenti, Article/FAQ/breadcrumb coerenti, hub/card locali e sitemap. Verificare HTML utile, link, immagini, desktop/mobile. Nessuna promessa di indicizzazione o citazione.
+
+Questo nuovo del venerdi e aggiuntivo al recupero International gia concordato di14articoli italiani/settimana dal30nov: non duplicare quella coda. Prima di scegliere controllare catalogo pubblicato, evitare doppioni e verificare norme/fonti dei contenuti recuperati; non trasferire errori fiscali o percentuali non documentate. Restano esclusi invii social/email, modifiche strutturali e upload Supabase. Nessuna autorizzazione di pubblicazione automatica futura: presentare il pacchetto e attendere ok articolo o lotto. Riferimento decisione: Gino, WhatsApp27nov14:55:48.
