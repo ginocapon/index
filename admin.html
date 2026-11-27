@@ -490,6 +490,12 @@ tr:hover td { background: rgba(206,224,143,0.06); }
   overflow-y: auto;
 }
 .modal-overlay.open { display: flex; }
+/* anteprima immobile: sopra la barra Salva fissa (z 10010) e griglia statistiche leggibile su telefono */
+#immPreviewModal.modal-overlay { z-index: 10020; }
+@media (max-width: 520px) {
+  .imm-preview-stats { grid-template-columns: repeat(2,1fr) !important; gap: 8px !important; }
+  .imm-preview-stats > div { padding: 10px 6px !important; }
+}
 .modal {
   background: white;
   border-radius: 16px;
@@ -3726,7 +3732,7 @@ tr:hover td { background: rgba(206,224,143,0.06); }
               </div>
               <h3 style="font-size:1.2rem;margin-bottom:8px;color:var(--nero)" id="immPreviewTitle"></h3>
               <div style="font-size:0.82rem;color:var(--caffe2);margin-bottom:16px" id="immPreviewLocation"></div>
-              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px">
+              <div class="imm-preview-stats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px">
                 <div style="text-align:center;padding:12px;background:var(--sfondo);border-radius:8px"><div style="font-size:1.2rem;font-weight:700;color:var(--nero)" id="immPreviewPrezzo"></div><div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--caffe2);margin-top:2px">Prezzo</div></div>
                 <div style="text-align:center;padding:12px;background:var(--sfondo);border-radius:8px"><div style="font-size:1.2rem;font-weight:700;color:var(--nero)" id="immPreviewMq"></div><div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--caffe2);margin-top:2px">Superficie</div></div>
                 <div style="text-align:center;padding:12px;background:var(--sfondo);border-radius:8px"><div style="font-size:1.2rem;font-weight:700;color:var(--nero)" id="immPreviewLocali"></div><div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--caffe2);margin-top:2px">Locali</div></div>
@@ -6690,7 +6696,7 @@ async function cancelImmobileEdit(){
  try{
   if(window.RighettoNavigation){const moved=await RighettoNavigation.open({section:'immobili'});if(moved===false)return;}
   else{if(!confirm('Chiudere la scheda senza salvare le modifiche?'))return;if(window.RighettoLabels&&!RighettoLabels.dispose())return;showSection('immobili');}
-  if(document.body.dataset.adminArea==='immobili'){++rigPropertyReadEpoch;rigPropertySnapshot=null;}
+  if(document.body.dataset.adminArea==='immobili'){++rigPropertyReadEpoch;rigPropertySnapshot=null;window.RighettoPresenza?.close();}
  }finally{rigPropertyCancelBusy=false;}
 }
 
@@ -6879,6 +6885,15 @@ window.RighettoPhotoFormVersion={
 function rigPropertyMedia(){return {foto:currentFotos,planimetrie:currentPlanimetrie,documenti:currentDocumenti,virtual_tour_scenes:currentVtScenes,unita_catastali:currentUnitaCatastali,catasto_pdf:currentCatastoPdf};}
 
 let rigPropertyReadEpoch=0;
+const RighettoPresenza=(()=>{
+ let currentId=null,timer=null,banner=null,lastOthers=[];
+ const names=e=>!e?'operatore':/linda/i.test(e)?'Linda':/gino|capon/i.test(e)?'Gino':String(e).split('@')[0];
+ function box(){if(banner&&banner.isConnected)return banner;const host=document.getElementById('sec-nuovo');if(!host)return null;banner=document.createElement('div');banner.id='rig-presenza-banner';banner.style.cssText='display:none;margin:10px 0;padding:12px;border:2px solid #b3541e;background:#fff4e8;color:#5a2d0c;font-weight:600;border-radius:6px';host.insertBefore(banner,host.firstChild);return banner;}
+ async function ping(){if(!currentId)return;try{const r=await sb.rpc('righetto_immobili_presenza_ping',{p_immobile:currentId});if(r.error)throw r.error;const others=Array.isArray(r.data)?r.data:[];lastOthers=others;const b=box();if(b){if(others.length){const o=others[0];const quando=new Date(o.visto_il).toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});b.style.display='block';b.textContent='Attenzione: questa scheda risulta in modifica anche da '+names(o.email)+' (segnale delle '+quando+'). Mettetevi d\u2019accordo prima di salvare: il salvataggio di uno blocca quello dell\u2019altro e nessuna modifica viene sovrascritta.';}else{b.style.display='none';b.textContent='';}}}catch(e){/* segnale di cortesia: mai bloccare il lavoro se il servizio non risponde */}}
+ async function open(imm){const id=String(imm&&imm.id||'');if(!id)return;if(currentId&&currentId!==id)await close();currentId=id;await ping();if(timer)clearInterval(timer);timer=setInterval(ping,60000);}
+ async function close(){const id=currentId;currentId=null;if(timer){clearInterval(timer);timer=null;}const b=box();if(b){b.style.display='none';b.textContent='';}if(id){try{await sb.rpc('righetto_immobili_presenza_chiudi',{p_immobile:id});}catch(e){}}}
+ return{open,close,others:()=>lastOthers};
+})();window.RighettoPresenza=RighettoPresenza;
 async function editImmobile(id,isCurrent=()=>true,reloadSaved=null) {if(rigPropertySaving||window.RighettoMixedAttachments?.pending()){toast('Caricamento o salvataggio in corso: attendi prima di cambiare scheda.','error');return;}
   if(window.RighettoNavigation&&!RighettoNavigation.replaying&&!reloadSaved)return RighettoNavigation.open({section:'nuovo',view:'property-edit',id:String(id)},()=>editImmobile(id));
   const ticket=++rigPropertyReadEpoch,principal=window.RighettoGatedPrincipal;
@@ -7013,6 +7028,7 @@ async function editImmobile(id,isCurrent=()=>true,reloadSaved=null) {if(rigPrope
   rigFillCommercial21(imm);
   try{rigPropertySnapshot=RighettoPropertySafety.capturePropertyForm(imm,RighettoPropertySafety.readControls(document.getElementById('immobileForm')),rigPropertyMedia());}catch(error){toast(error.message,'error');}
  window.RighettoLabels?.mount(imm);
+ window.RighettoPresenza?.open(imm);
 }
 
 async function saveImmobile(e) {
@@ -7279,7 +7295,7 @@ async function saveImmobile(e) {
     writtenInfoFields=[...new Set(['mq_garage',...window.RighettoExistingInfoFields.schema.map(x=>x.key),...rigCommercial21Schema.map(x=>x.key),...document.querySelectorAll('[data-details21]')].map(x=>typeof x==='string'?x:x.dataset.details21))].filter(key=>Object.hasOwn(patch,key));
     const res=await sb.from('immobili').update(patch).eq('id',id).eq('updated_at',rigPropertySnapshot.record.updated_at).select('id,updated_at,tipologie_ricerca');
     if(res.error)throw Error(res.error.message);
-    if(res.data?.length!==1)throw Error('Salvataggio non eseguito: scheda modificata o permessi cambiati. Ricarica prima di riprovare.');
+    if(res.data?.length!==1){const presenti=(window.RighettoPresenza?.others?.()||[]).map(o=>o&&o.email).filter(Boolean);throw Error('Salvataggio non eseguito: la scheda e\u2019 stata salvata da un altro accesso mentre la modificavi'+(presenti.length?' (in modifica anche da: '+presenti.join(', ')+')':'')+'. Nessuna sovrascrittura: ricarica la scheda, rileggi i dati e ripeti solo le modifiche che servono.');}
     savedRow=res.data[0];
   }else{
     writtenInfoFields=[...new Set(['mq_garage',...window.RighettoExistingInfoFields.schema.map(x=>x.key),...rigCommercial21Schema.map(x=>x.key),...document.querySelectorAll('[data-details21]')].map(x=>typeof x==='string'?x:x.dataset.details21))].filter(key=>Object.hasOwn(payload,key));
@@ -7295,6 +7311,7 @@ async function saveImmobile(e) {
   if(JSON.stringify(window.RighettoPropertyTypes.normalize(verified.data?.tipologie_ricerca??null))!==JSON.stringify(window.RighettoPropertyTypes.normalize(savedRow.tipologie_ricerca??null))||JSON.stringify(window.RighettoPropertyTypes.normalize(savedRow.tipologie_ricerca??null))!==JSON.stringify(window.RighettoPropertyTypes.normalize(payload.tipologie_ricerca)))throw Error('Salvataggio eseguito, tipologie da verificare: non ripetere.');
   if(id){try{assertSameForm();}catch(error){throw Error('Salvataggio eseguito sulla scheda precedente. La scheda aperta ora non è stata toccata: ricarica elenco per verificare.');}}
   rigPropertySnapshot=null;
+  window.RighettoPresenza?.close();
   btn.disabled = false;
   btn.innerHTML = '💾 Salva Immobile';
 
@@ -18297,7 +18314,7 @@ window.showSection('home');
 <script src="js/admin-immobile-operazioni.js?v=20261121-garage-first-private-v1"></script>
 <script src="js/admin-cartello-a3-energy.js?v=20261126-v1"></script>
 <script src="js/admin-cartello-a3-ai.js?v=20261126-a3-ai-v1"></script>
-<script src="js/admin-cartello-a3.js?v=20261126-a3-v9"></script>
+<script src="js/admin-cartello-a3.js?v=20261127-a3-v10"></script>
 <script src="js/admin-immobile-stampe.js?v=20261126-a3-v3"></script>
 <script src="js/admin-immobile-inquilini.js?v=20261106-1038"></script>
 <script src="js/admin-blocco2.js?v=20261112-storico-view"></script>
