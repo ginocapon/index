@@ -223,7 +223,7 @@
     },
     "villa-vendita-curtarolo-la0307": {
       "codice": "LA0307",
-      "titolo": "Casa indipendente in vendita in Via Saint Maurice",
+      "titolo": "Casa indipendente in vendita a Curtarolo",
       "seo_slug": "villa-vendita-curtarolo-la0307",
       "title": "Villa in vendita a Curtarolo — Righetto Immobiliare Padova",
       "description": "Villa · 350 m² · 8 locali · € 375.000 · Rif. LA0307 · Righetto Immobiliare Padova",
@@ -454,17 +454,6 @@
       "app_url": "https://righettoimmobiliare.it/immobile?s=residenziale-vendita-limena-la0312",
       "share_file": "share-immobile-residenziale-vendita-limena-la0312.html"
     },
-    "casa-indipendente-in-vendita-in-via-saint-maurice": {
-      "codice": "LA0307",
-      "titolo": "Casa indipendente in vendita in Via Saint Maurice",
-      "seo_slug": "villa-vendita-curtarolo-la0307",
-      "title": "Villa in vendita a Curtarolo — Righetto Immobiliare Padova",
-      "description": "Villa · 350 m² · 8 locali · € 375.000 · Rif. LA0307 · Righetto Immobiliare Padova",
-      "image": "https://righettoimmobiliare.it/img/immobili/LA0307/001-1772206804826-003-img-3022-wmk-0.webp",
-      "share_url": "https://righettoimmobiliare.it/share-immobile-villa-vendita-curtarolo-la0307",
-      "app_url": "https://righettoimmobiliare.it/immobile?s=villa-vendita-curtarolo-la0307",
-      "share_file": "share-immobile-villa-vendita-curtarolo-la0307.html"
-    },
     "ufficio-in-vendita-a-piazze": {
       "codice": "UFF2245",
       "titolo": "Ufficio in vendita a Piazze",
@@ -486,6 +475,17 @@
       "share_url": "https://righettoimmobiliare.it/share-immobile-capannone-affitto-commerciale-piazzola-sul-brenta-cap1678",
       "app_url": "https://righettoimmobiliare.it/immobile?s=capannone-affitto-commerciale-piazzola-sul-brenta-cap1678",
       "share_file": "share-immobile-capannone-affitto-commerciale-piazzola-sul-brenta-cap1678.html"
+    },
+    "casa-indipendente-in-vendita-a-curtarolo": {
+      "codice": "LA0307",
+      "titolo": "Casa indipendente in vendita a Curtarolo",
+      "seo_slug": "villa-vendita-curtarolo-la0307",
+      "title": "Villa in vendita a Curtarolo — Righetto Immobiliare Padova",
+      "description": "Villa · 350 m² · 8 locali · € 375.000 · Rif. LA0307 · Righetto Immobiliare Padova",
+      "image": "https://righettoimmobiliare.it/img/immobili/LA0307/001-1772206804826-003-img-3022-wmk-0.webp",
+      "share_url": "https://righettoimmobiliare.it/share-immobile-villa-vendita-curtarolo-la0307",
+      "app_url": "https://righettoimmobiliare.it/immobile?s=villa-vendita-curtarolo-la0307",
+      "share_file": "share-immobile-villa-vendita-curtarolo-la0307.html"
     }
   },
   "byCodice": {
@@ -700,7 +700,7 @@
     },
     "LA0307": {
       "codice": "LA0307",
-      "titolo": "Casa indipendente in vendita in Via Saint Maurice",
+      "titolo": "Casa indipendente in vendita a Curtarolo",
       "seo_slug": "villa-vendita-curtarolo-la0307",
       "title": "Villa in vendita a Curtarolo — Righetto Immobiliare Padova",
       "description": "Villa · 350 m² · 8 locali · € 375.000 · Rif. LA0307 · Righetto Immobiliare Padova",
